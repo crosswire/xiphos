@@ -1,5 +1,7 @@
 TODO:
 
+    * Why installed fonts aren't immediately usable?
+
     * remove files unnedded for generating the installer
 
     * Name for the installer binary: "GnomeSword-3.0-win32.exe"
