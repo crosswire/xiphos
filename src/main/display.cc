@@ -157,7 +157,7 @@ out:
 	pclose(result);
 	return retval;
 }
-#endif 
+#endif
 
 #ifndef HAVE_STRCASESTR
 /*
@@ -343,7 +343,7 @@ HtmlOutput(SWBuf& swbuf,
 	PangoFontDescription *desc = pango_context_get_font_description(pc);
 	pango_font_description_set_family(
 	    desc, ((mf->old_font) ? mf->old_font : "Serif"));
-	gtk_widget_modify_font(gtkText, desc);	
+	gtk_widget_modify_font(gtkText, desc);
 	GtkHTMLStream *stream = gtk_html_begin(html);
 	GtkHTMLStreamStatus status;
 	gboolean was_editable = gtk_html_get_editable(html);
@@ -526,9 +526,9 @@ block_render_secondary(const char *text,
 			// keep it bound with its </token> terminator,
 			// esp. because anchors contain <small></small>. *sigh*
 			// i believe we see only anchors + font switches here.
-			if ((((*(s+1) == 'a') || (*(s+1) == 'A')) && (*(s+2) == ' ')) || 
-			    (((*(s+1) == 'b') || (*(s+1) == 'B') || 
-			      (*(s+1) == 'i') || (*(s+1) == 'I') || 
+			if ((((*(s+1) == 'a') || (*(s+1) == 'A')) && (*(s+2) == ' ')) ||
+			    (((*(s+1) == 'b') || (*(s+1) == 'B') ||
+			      (*(s+1) == 'i') || (*(s+1) == 'I') ||
 			      (*(s+1) == 'u') || (*(s+1) == 'U')) && (*(s+2) == '>'))) {
 				if (word)
 					block_dump(rendered, &word, &strongs, &morph);
@@ -658,7 +658,7 @@ CacheHeader(ModuleCache::CacheVerse& cVerse,
 	gchar heading[8];
 	const gchar *preverse, *preverse2;
 	gchar *text;
- 
+
 	cVerse.SetHeader("");
 
 	sprintf(heading, "%d", x);
@@ -756,7 +756,6 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule, gint mod_type)
 				main_save_module_options(imodule.Name(),
 							 "Image Content", 1);
 			}
-			
 			cVerse.SetText(rework, cache_flags);
 		} else
 			rework = cVerse.GetText();
@@ -777,7 +776,8 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule, gint mod_type)
 
 	buf = g_strdup_printf("%d", curVerse);
 	HtmlOutput(swbuf, gtkText, mf, buf);
-	
+	g_free(buf);
+
 	free_font(mf);
 	mf = NULL;
 	g_free(ops);
@@ -799,7 +799,7 @@ GTKEntryDisp::Display(SWModule &imodule)
 	gint mod_type;
 	mf = get_font(imodule.Name());
 	swbuf = "";
-	
+
 	ops = main_new_globals(imodule.Name());
 
 	const char *rework;	// for image size analysis rework.
@@ -886,7 +886,6 @@ GTKEntryDisp::Display(SWModule &imodule)
 				main_save_module_options(imodule.Name(),
 							 "Image Content", 1);
 			}
-			
 			cVerse.SetText(rework, cache_flags);
 		} else
 			rework = cVerse.GetText();
@@ -922,7 +921,7 @@ GTKEntryDisp::Display(SWModule &imodule)
 	swbuf.append("</font></body></html>");
 
 	HtmlOutput(swbuf, gtkText, mf, NULL);
-	
+
 	free_font(mf);
 	mf = NULL;
 	g_free(ops);
@@ -1595,7 +1594,7 @@ GTKChapDisp::Display(SWModule &imodule)
 			g_string_free(text, TRUE);
 		} else
 			swbuf.append(cVerse.GetText());
-		
+
 		if (key->Verse() == curVerse) {
 			swbuf.append("</font>");
 			ReadAloud(curVerse, cVerse.GetText());
@@ -1629,7 +1628,7 @@ GTKChapDisp::Display(SWModule &imodule)
 		swbuf.append("</div></font></body></html>");
 	else
 		swbuf.append("</font></body></html>");
-	
+
 #ifdef USE_GTKMOZEMBED
 	if (strongs_and_morph)
 		buf = g_strdup_printf("%d", curVerse);
@@ -1846,7 +1845,6 @@ DialogEntryDisp::DisplayByChapter(SWModule &imodule, gint mod_type)
 				main_save_module_options(imodule.Name(),
 							 "Image Content", 1);
 			}
-			
 			cVerse.SetText(rework, cache_flags);
 		} else
 			rework = cVerse.GetText();
@@ -1867,7 +1865,8 @@ DialogEntryDisp::DisplayByChapter(SWModule &imodule, gint mod_type)
 
 	buf = g_strdup_printf("%d", curVerse);
 	HtmlOutput(swbuf, gtkText, mf, buf);
-	
+	g_free(buf);
+
 	free_font(mf);
 	mf = NULL;
 	g_free(ops);
@@ -1941,7 +1940,6 @@ DialogEntryDisp::Display(SWModule &imodule)
 				main_save_module_options(imodule.Name(),
 							 "Image Content", 1);
 			}
-			
 			cVerse.SetText(rework, cache_flags);
 		} else
 			rework = cVerse.GetText();
@@ -2000,7 +1998,7 @@ DialogChapDisp::Display(SWModule &imodule)
 	const gchar *paragraphMark = "&para;";
 	gchar *br = NULL;
 	gchar heading[32];
-	gboolean newparagraph = FALSE;	
+	gboolean newparagraph = FALSE;
 
 	gboolean strongs_and_morph, strongs_or_morph;
 	gint display_boundary;
@@ -2194,7 +2192,7 @@ DialogChapDisp::Display(SWModule &imodule)
 		swbuf.append("</div></font></body></html>");
 	else
 		swbuf.append("</font></body></html>");
-	
+
 #ifdef USE_GTKMOZEMBED
 	if (strongs_and_morph)
 		buf = g_strdup_printf("%d", curVerse);
@@ -2352,12 +2350,11 @@ GTKPrintEntryDisp::Display(SWModule &imodule)
 	gint mod_type;
 	MOD_FONT *mf = get_font(imodule.Name());
 	gint font_size;
-	
+
 	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(gtkText))) return 0;
 	GeckoHtml *html = GECKO_HTML(gtkText);
 	gecko_html_open_stream(html,"text/html");
-	
-	
+
 	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
 
 	const char *rework;	// for image size analysis rework.
@@ -2370,7 +2367,6 @@ GTKPrintEntryDisp::Display(SWModule &imodule)
 	if (mod_type == BOOK_TYPE)
 		keytext = strdup(backend->treekey_get_local_name(
 				settings.book_offset));
-	
 	else if (mod_type == DICTIONARY_TYPE)
 		keytext = g_strdup((char*)imodule.KeyText());
 	else
@@ -2399,7 +2395,6 @@ GTKPrintEntryDisp::Display(SWModule &imodule)
 	g_free(buf);
 
 	swbuf.append((const char *)imodule);
-	
 	swbuf.append("</font></body></html>");
 
 	if (swbuf.length())
@@ -2428,16 +2423,16 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 	gchar heading[32];
 	SWBuf swbuf;
 	char *num;
-	
+
 	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
 	gboolean is_rtol = main_is_mod_rtol(imodule.Name());
 	gboolean newparagraph = FALSE;
 	mf = get_font(imodule.Name());
-	
+
 	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(gtkText))) return 0;
 	GeckoHtml *html = GECKO_HTML(gtkText);
 	gecko_html_open_stream(html,"text/html");
-	
+
 	if (!strcmp(imodule.Name(), "KJV"))
 		paragraphMark = "&para;";
 	else
@@ -2462,14 +2457,14 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 
 	if (is_rtol)
 		swbuf.append("<div ALIGN=right>");
-	
+
 	gecko_html_write(html,swbuf.c_str(),swbuf.length());
-	
+
 	swbuf = "";
 	main_set_global_options(ops);
-	
+
 	gecko_html_write(html,swbuf.c_str(),swbuf.length());
-	
+
 	swbuf = "";
 
 	for (key->Verse(1);
@@ -2524,13 +2519,13 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 		}
 
 		g_free(buf);
-		
+
 		gecko_html_write(html,swbuf.c_str(),swbuf.length());
-		
+
 		swbuf = "";
 	}
 	swbuf = "";
-	
+
 	// Reset the Bible location before GTK gets access:
 	// Mouse activity destroys this key, so we must be finished with it.
 	key->Book(curBook);
@@ -2541,8 +2536,8 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 		swbuf.append("</div></font></body></html>");
 	else
 		swbuf.append("</font></body></html>");
-	
-	if (swbuf.length()) 
+
+	if (swbuf.length())
 		gecko_html_write(html,swbuf.c_str(),swbuf.length());
 	gecko_html_close(html);
 	if (curVerse > 2) {
@@ -2550,7 +2545,7 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 		gecko_html_jump_to_anchor (html,buf);
 		g_free(buf);
 	}
-	
+
 	free_font(mf);
 	g_free(ops);
 #endif
