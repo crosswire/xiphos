@@ -245,11 +245,11 @@ void gui_popup_menu_parallel(void)
 	gtk_object_set_data(GTK_OBJECT(menu), "pmInt", menu);
 
 	copy7 = gtk_menu_item_new_with_label(_("Copy"));
-	gtk_widget_show(copy7);
+	gtk_widget_hide(copy7);
 	gtk_container_add(GTK_CONTAINER(menu), copy7);
 
 	separator2 = gtk_menu_item_new();
-	gtk_widget_show(separator2);
+	gtk_widget_hide(separator2);
 	gtk_container_add(GTK_CONTAINER(menu), separator2);
 	gtk_widget_set_sensitive(separator2, FALSE);
 
