@@ -655,24 +655,24 @@ void backend_init_module_mgr_config(void)
 void
 backend_init_module_mgr_config_extras()
 {
+	// also the beta repo.
+	backend_module_mgr_add_source("FTPSource",
+				      "FTP",
+				      "Crosswire-beta",
+				      "www.crosswire.org",
+				      "/pub/sword/betaraw");
 	// new concept: we are our own first-class source.
 	backend_module_mgr_add_source("FTPSource",
 				      "FTP",
 				      "GnomeSword",
 				      "ftp.gnomesword.org",
-				      "/ftp/pub/sword");
+				      ".");
 	// NET @ bible.org.
 	backend_module_mgr_add_source("FTPSource",
 				      "FTP",
 				      "NET",
 				      "ftp.bible.org",
 				      "/sword");
-	// also the beta repo.
-	backend_module_mgr_add_source("FTPSource",
-				      "FTP",
-				      "CrossWire-beta",
-				      "www.crosswire.org",
-				      "/pub/sword/betaraw");
 }
 
 /******************************************************************************
