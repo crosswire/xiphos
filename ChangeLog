@@ -1,6 +1,7 @@
 2009-01-03  karl <charcoal@users.sf.net>
 
 	* fix a default font respect problem in parallel views.
+	* fix #2486769 parallel right-click->copy does nothing
 
 2008-12-31  karl <charcoal@users.sf.net>
 
