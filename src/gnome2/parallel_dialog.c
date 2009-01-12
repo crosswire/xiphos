@@ -69,6 +69,29 @@ NAVBAR_VERSEKEY navbar_parallel;
 static GtkWidget *create_parallel_dialog(void);
 static void sync_with_main(void);
 
+
+#ifdef USE_GTKMOZEMBED
+static void
+_popupmenu_requested_cb(GeckoHtml *html,
+			gchar *uri,
+			gpointer user_data)
+{
+	gui_popup_menu_parallel();
+}
+#else
+static gboolean
+_popupmenu_requested_cb(GtkHTML *html,
+			GdkEventButton * event,
+			gpointer date)
+{
+	if (event->button == 3) {
+		gui_popup_menu_parallel();
+		return 1;
+	}
+	return 0;
+}
+#endif
+
 /******************************************************************************
  * Name
  *   undock_parallel_page
@@ -646,6 +669,10 @@ GtkWidget *create_parallel_dialog(void)
 	gtk_widget_show(widgets.html_parallel_dialog);					   
 	gtk_container_add(GTK_CONTAINER(eventbox),
 			  widgets.html_parallel_dialog);
+	g_signal_connect((gpointer)widgets.html_parallel_dialog,
+			 "popupmenu_requested",
+			 G_CALLBACK (_popupmenu_requested_cb),
+			 NULL);
 #else
 	scrolled_window = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolled_window);	
@@ -661,6 +688,10 @@ GtkWidget *create_parallel_dialog(void)
 	gtk_html_load_empty(GTK_HTML(widgets.html_parallel_dialog));
 	gtk_container_add(GTK_CONTAINER(scrolled_window),
 			  widgets.html_parallel_dialog);
+	g_signal_connect(GTK_OBJECT(widgets.html_parallel_dialog),
+			 "button_release_event",
+			 G_CALLBACK (_popupmenu_requested_cb),
+			 NULL);
 #endif
 	dialog_action_area25 =
 	    GTK_DIALOG(dialog_parallel)->action_area;

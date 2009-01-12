@@ -92,6 +92,10 @@ static void set_global_option(char * option, gboolean choice)
 	SWMgr *mgr = backend_p->get_display_mgr();
 
 	mgr->setGlobalOption(option, on_off);
+	
+	g_strdelimit (option,"' ", '_');
+	GS_message((option));
+	xml_set_value("GnomeSword", "parallel", option,	choice ? "1" : "0");
 }
 
 
@@ -177,32 +181,60 @@ void main_set_parallel_module_global_options(GtkCheckMenuItem * menuitem,
 {
 	gchar *option = (gchar*) user_data;
 	gboolean choice = menuitem->active;
-	
+	GS_message(("option: %s", option));
 	
 	if (!strcmp(option, "Strong's Numbers")) {
-		settings.strongsint = choice;
+		settings.parallel_strongs = choice;		
 	}
 
 	if (!strcmp(option, "Footnotes")) {
-		settings.footnotesint = choice;
+		settings.parallel_footnotes = choice;
 	}
 
 	if (!strcmp(option, "Morphological Tags")) {
-		settings.morphsint = choice;
+		settings.parallel_morphs = choice;
 	}
 
 	if (!strcmp(option, "Hebrew Vowel Points")) {
-		settings.hebrewpointsint = choice;
+		settings.parallel_hebrewpoints = choice;
 	}
 
 	if (!strcmp(option, "Hebrew Cantillation")) {
-		settings.cantillationmarksint = choice;
+		settings.parallel_cantillationmarks = choice;
 	}
 
 	if (!strcmp(option, "Greek Accents")) {
-		settings.greekaccentsint = choice;
+		settings.parallel_greekaccents = choice;
 	}
 
+	if (!strcmp(option,"Cross-references")) {
+		settings.parallel_crossref = choice;
+	}
+	
+	if (!strcmp(option,"Transliteration")) {
+		settings.parallel_transliteration = choice;
+	}	
+	
+	if (!strcmp(option,"Words of Christ in Red")) {
+		settings.parallel_red_words = choice;
+	}	
+	
+	if (!strcmp(option,"Morpheme Segmentation")) {
+		settings.parallel_segmentation = choice;
+	}	
+	
+	if (!strcmp(option,"Headings")) {
+		settings.parallel_headings = choice;
+	}	
+	
+	if (!strcmp(option,"Lemmas")) {
+		settings.parallel_lemmas = choice;
+	}
+	
+	if (!strcmp(option,"Textual Variants")) {
+		settings.parallel_variants= choice;
+	}
+	
 	set_global_option(option, choice);
 
 	/* display change */
@@ -231,41 +263,18 @@ void main_set_parallel_module_global_options(GtkCheckMenuItem * menuitem,
 
 void main_set_parallel_options_at_start(void)
 {
-/*	if (settings.footnotesint)
-		set_parallel_global_option("Footnotes", "On");	
-	else
-		set_parallel_global_option("Footnotes", "Off");	
+	SWMgr *mgr = backend_p->get_display_mgr();
 
-	
-	if (settings.strongsint)
-		set_parallel_global_option("Strong's Numbers", "On");	
-	else
-		set_parallel_global_option("Strong's Numbers", "Off");	
-
-	
-	if (settings.morphsint)
-		set_parallel_global_option("Morphological Tags", "On");	
-	else
-		set_parallel_global_option("Morphological Tags", "Off");	
-
-	
-	if (settings.hebrewpointsint)
-		set_parallel_global_option("Hebrew Vowel Points", "On");	
-	else
-		set_parallel_global_option("Hebrew Vowel Points", "Off");	
-
-	
-	if (settings.cantillationmarksint)
-		set_parallel_global_option("Hebrew Cantillation", "On");	
-	else
-		set_parallel_global_option("Hebrew Cantillation", "Off");	
-
-	
-	if (settings.greekaccentsint)
-		set_parallel_global_option("Greek Accents", "On");	
-	else
-		set_parallel_global_option("Greek Accents", "Off");	
-*/
+	GList *tmp = backend->get_module_options();
+	while (tmp) {
+		char *option = g_strdup((char*)tmp->data);
+		g_strdelimit (option,"' ", '_');
+		GS_message(("\n\n%s\n%s\n", (char*)tmp->data, option));
+		int choice = atoi(xml_get_value("parallel", option));
+		mgr->setGlobalOption((char*)tmp->data, choice ? "On" : "Off");
+		g_free(option);
+		tmp = g_list_next(tmp); 
+	}
 }
 
 
@@ -286,7 +295,6 @@ void main_set_parallel_options_at_start(void)
  *   void
  */
 
-	  
 void main_load_g_ops_parallel(GtkWidget *menu)
 {
 	GList *tmp = NULL;	
@@ -294,6 +302,7 @@ void main_load_g_ops_parallel(GtkWidget *menu)
 
 	tmp = backend->get_module_options();
 	while(tmp) {
+		GS_message(((gchar *) tmp->data));
 		item =
 		       gtk_check_menu_item_new_with_label(
 					(gchar *) tmp->data);
@@ -303,50 +312,73 @@ void main_load_g_ops_parallel(GtkWidget *menu)
 		
 		if (!strcmp((gchar *) tmp->data, "Strong's Numbers")) {
 			GTK_CHECK_MENU_ITEM(item)->active =
-			    settings.strongsint;
+			    settings.parallel_strongs;
 		}
 
 		if (!strcmp((gchar *) tmp->data, "Footnotes")) {
 			GTK_CHECK_MENU_ITEM(item)->active =
-			    settings.footnotesint;
+			    settings.parallel_footnotes;
 		}
 
 		if (!strcmp((gchar *) tmp->data, "Morphological Tags")) {
 			GTK_CHECK_MENU_ITEM(item)->active =
-			    settings.morphsint;
+			    settings.parallel_morphs;
 		}
-
+		
 		if (!strcmp((gchar *) tmp->data, "Hebrew Vowel Points")) {
 			GTK_CHECK_MENU_ITEM(item)->active =
-			    settings.hebrewpointsint;
+			    settings.parallel_hebrewpoints;
 		}
 
 		if (!strcmp((gchar *) tmp->data, "Hebrew Cantillation")) {
 			GTK_CHECK_MENU_ITEM(item)->active =
-			    settings.cantillationmarksint;
+			    settings.parallel_cantillationmarks;
 		}
 
 		if (!strcmp((gchar *) tmp->data, "Greek Accents")) {
 			GTK_CHECK_MENU_ITEM(item)->active =
-			    settings.greekaccentsint;
+			    settings.parallel_greekaccents;
 		}
 
-		if (!strcmp((gchar *) tmp->data,
-		     "Scripture Cross-references")) {
+		if (!strcmp((gchar *) tmp->data, "Cross-references")) {
 			GTK_CHECK_MENU_ITEM(item)->active =
-			    settings.crossrefint;
+			    settings.parallel_crossref;
 		}
 
 		if (!strcmp((gchar *) tmp->data, "Lemmas")) {
 			GTK_CHECK_MENU_ITEM(item)->active =
-			    settings.lemmasint;
+			    settings.parallel_lemmas;
 		}
 
 		if (!strcmp((gchar *) tmp->data, "Headings")) {
 			GTK_CHECK_MENU_ITEM(item)->active =
-			    settings.headingsint;
+			    settings.parallel_headings;
+		}
+		
+		if (!strcmp((gchar *) tmp->data, "Morpheme Segmentation")) {
+			GTK_CHECK_MENU_ITEM(item)->active =
+			    settings.parallel_segmentation;
+		}		
+				
+		if (!strcmp((gchar *) tmp->data, "Words of Christ in Red")) {
+			GTK_CHECK_MENU_ITEM(item)->active =
+			    settings.parallel_red_words;
+		}		
+				
+		if (!strcmp((gchar *) tmp->data, "Transliteration")) {
+			GTK_CHECK_MENU_ITEM(item)->active =
+			    settings.parallel_transliteration;
+		}		
+				
+		if (!strcmp((gchar *) tmp->data, "Textual Variants")) {
+			GTK_CHECK_MENU_ITEM(item)->active =
+			    settings.parallel_variants;
 		}		
 		
+		
+		
+		
+			
 		g_signal_connect(GTK_OBJECT(item), "activate",
 		    G_CALLBACK(main_set_parallel_module_global_options),
 				   (gchar *) tmp->data);
@@ -1124,8 +1156,8 @@ static void int_display(GtkHTML *html, gchar * key)
 			}
 
 			if (mod_name[j]) {
-				utf8str =
-				    main_get_rendered_text
+				utf8str = backend_p->get_render_text
+				    //main_get_rendered_text
 				    (mod_name[j], tmpkey);
 				if (strlen(utf8str)) {
 #ifdef USE_GTKMOZEMBED
@@ -1382,7 +1414,7 @@ void main_init_paraellel_view(void)
 	backend_p = new BackEnd();
 	gui_create_parallel_page();
 	gtk_widget_realize(widgets.html_parallel);
-	
+	main_set_parallel_options_at_start();
 	//gui_create_parallel_popup();
 }
 

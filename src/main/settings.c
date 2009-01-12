@@ -523,7 +523,7 @@ void load_settings_structure(void)
 		settings.base_font_size = 1;
 #endif /* WIN32 */
 	}
-
+ 
 	settings.bible_text_color = xml_get_value("HTMLcolors", "text_fg");
 	settings.bible_bg_color =
 	    xml_get_value("HTMLcolors", "background");
@@ -546,32 +546,107 @@ void load_settings_structure(void)
 		xml_add_new_item_to_section("HTMLcolors", "highlight_bg", "#060680");
 		settings.highlight_bg = g_strdup("#060680");
 	}
+	
+	/*  parallel ops  */
+	
+	if(buf = xml_get_value("parallel", "Strong_s_Numbers"))
+		settings.parallel_strongs = atoi(buf);
+	else {
+		xml_add_new_item_to_section("parallel", "Strong_s_Numbers", "0");
+		settings.parallel_strongs = 0;
+	}
+	
+	if(buf = xml_get_value("parallel", "Morphological_Tags"))
+		settings.parallel_morphs = atoi(buf);
+	else {
+		xml_add_new_item_to_section("parallel", "Morphological_Tags", "0");
+		settings.parallel_morphs = 0;
+	}
+	
+	if(buf = xml_get_value("parallel", "Hebrew_Vowel_Points"))
+		settings.parallel_hebrewpoints = atoi(buf);
+	else {
+		xml_add_new_item_to_section("parallel", "Hebrew_Vowel_Points", "1");
+		settings.parallel_hebrewpoints = 1;
+	}
+	
+	if(buf = xml_get_value("parallel", "Hebrew_Cantillation"))
+		settings.parallel_cantillationmarks = atoi(buf);
+	else {
+		xml_add_new_item_to_section("parallel", "Hebrew_Cantillation", "0");
+		settings.parallel_cantillationmarks = 0;
+	}
+	
+	if(buf = xml_get_value("parallel", "Footnotes"))
+		settings.parallel_footnotes = atoi(buf);
+	else {
+		xml_add_new_item_to_section("parallel", "Footnotes", "0");
+		settings.parallel_footnotes = 0;
+	}	
 
-	buf = xml_get_value("parallel", "strongs");
-	if (buf)
-		settings.strongsint = atoi(buf);
+	if (buf = xml_get_value("parallel", "Cross-references"))
+		settings.parallel_crossref = atoi(buf);
+	else {
+		xml_add_new_item_to_section("parallel", "Cross-references", "1");
+		settings.parallel_crossref = 1;
+	}		
+
+	if (buf = xml_get_value("parallel", "Transliteration"))
+		settings.parallel_transliteration = atoi(buf);
+	else {
+		xml_add_new_item_to_section("parallel", "Transliteration", "0");
+		settings.parallel_transliteration = 0;
+	}
 	
-	buf = xml_get_value("parallel", "morphs");
-	if (buf)
-		settings.morphsint = atoi(buf);
+	if (buf = xml_get_value("parallel", "Words_of_Christ_in_Red"))
+		settings.parallel_red_words = atoi(buf);
+	else {
+		xml_add_new_item_to_section("parallel", "Words_of_Christ_in_Red", "0");
+		settings.parallel_red_words = 0;
+	}
 	
-	buf = xml_get_value("parallel", "points");
-	if (buf)
-		settings.hebrewpointsint = atoi(buf);
+	if (buf = xml_get_value("parallel", "Morpheme_Segmentation"))
+		settings.parallel_segmentation = atoi(buf);
+	else {
+		xml_add_new_item_to_section("parallel", "Morpheme_Segmentation", "0");
+		settings.parallel_segmentation = 0;
+	}
 	
-	buf = xml_get_value("parallel", "cantillation");
-	if (buf)
-		settings.cantillationmarksint = atoi(buf);
+	if (buf = xml_get_value("parallel", "Headings"))
+		settings.parallel_headings = atoi(buf);
+	else {
+		xml_add_new_item_to_section("parallel", "Headings", "0");
+		settings.parallel_headings = 0;
+	}
 	
-	buf = xml_get_value("parallel", "footnotes");
-	if (buf)
-		settings.footnotesint = atoi(buf);	
+	if (buf = xml_get_value("parallel", "Lemmas"))
+		settings.parallel_lemmas = atoi(buf);
+	else {
+		xml_add_new_item_to_section("parallel", "Lemmas", "0");
+		settings.parallel_lemmas = 0;
+	}
+	
+	if (buf = xml_get_value("parallel", "Textual_Variants"))
+		settings.parallel_variants = atoi(buf);
+	else {
+		xml_add_new_item_to_section("parallel", "Textual_Variants", "0");
+		settings.parallel_variants = 0;
+	}
+	
+	if (buf = xml_get_value("parallel", "Greek_Accents"))
+		settings.parallel_greekaccents = atoi(buf);
+	else {
+		xml_add_new_item_to_section("parallel", "Greek_Accents", "1");
+		settings.parallel_greekaccents = 1;
+	}
 	
 	buf = xml_get_value("parallel", "parallel");
 	if (buf)
 	settings.parallelpage = atoi(buf);
 
-
+	
+	/*  Misc stuff  */
+	
 	settings.showtexts = atoi(xml_get_value("misc", "showtexts"));
 	settings.showcomms = atoi(xml_get_value("misc", "showcomms"));
 	settings.showdicts = atoi(xml_get_value("misc", "showdicts"));
