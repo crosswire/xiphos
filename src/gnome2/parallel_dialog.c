@@ -205,12 +205,18 @@ static void on_dlgparallel_destroy(GtkObject * object,
 
 static void sync_with_main(void)
 {
-	gchar *url =
-	    g_strdup_printf("gnomesword.url?action=showParallel&"
-				"type=verse&value=%s",
-				main_url_encode(xml_get_value("keys", "verse")));
-	main_url_handler(url, TRUE);
-	g_free(url);
+	GS_message((xml_get_value("keys", "verse")));
+	gchar *buf;
+	
+	if(buf = xml_get_value("keys", "verse")) {
+		gchar *url =
+		    g_strdup_printf("gnomesword.url?action=showParallel&"
+					"type=verse&value=%s",
+					main_url_encode(buf));
+		
+		main_url_handler(url, TRUE);
+		g_free(url);
+	}
 }
 
 
@@ -645,7 +651,7 @@ GtkWidget *create_parallel_dialog(void)
 	gtk_widget_show(vboxInt);
 	gtk_box_pack_start(GTK_BOX(dialog_vbox25), vboxInt, TRUE, TRUE,
 			   0);
-	toolbar29 =create_nav_toolbar();
+	toolbar29 = create_nav_toolbar();
 	gtk_widget_show(toolbar29);
 	gtk_box_pack_start(GTK_BOX(vboxInt), toolbar29, FALSE, FALSE,
 			   0);

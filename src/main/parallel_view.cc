@@ -86,6 +86,24 @@ static const gchar *tf2of(int true_false)
 }
 
 
+/******************************************************************************
+ * Name
+ *   set_global_option
+ *
+ * Synopsis
+ *   #include "main/parallel_view.h"
+ *   
+ *   void set_global_option(char * option, gboolean choice)
+ *
+ * Description
+ *   sets a sword global option and saves it to settings.xml
+ *   
+ *   
+ *
+ * Return value
+ *   void
+ */
+
 static void set_global_option(char * option, gboolean choice)
 {
 	const char *on_off = tf2of(choice);;
@@ -94,7 +112,7 @@ static void set_global_option(char * option, gboolean choice)
 	mgr->setGlobalOption(option, on_off);
 	
 	g_strdelimit (option,"' ", '_');
-	GS_message((option));
+	//GS_message((option));
 	xml_set_value("GnomeSword", "parallel", option,	choice ? "1" : "0");
 }
 
@@ -164,13 +182,15 @@ gchar *main_parallel_change_verse(void)
  *   gui_set_parallel_module_global_options
  *
  * Synopsis
- *   #include "gui/parallel.h
+ *   #include "main/parallel_view.h
  *
  *   void gui_set_parallel_module_global_options(gchar *option,
  *						gboolean choice)
  *
  * Description
- *
+ *   user checked or unchecked parallel option menu item
+ *   set settings.parallel_<item> and call main_update_parallel_page()
+ *   to display change.
  *
  * Return value
  *   void
@@ -181,7 +201,6 @@ void main_set_parallel_module_global_options(GtkCheckMenuItem * menuitem,
 {
 	gchar *option = (gchar*) user_data;
 	gboolean choice = menuitem->active;
-	GS_message(("option: %s", option));
 	
 	if (!strcmp(option, "Strong's Numbers")) {
 		settings.parallel_strongs = choice;		
@@ -250,12 +269,12 @@ void main_set_parallel_module_global_options(GtkCheckMenuItem * menuitem,
  *   gui_set_parallel_options_at_start
  *
  * Synopsis
- *   #include "gui/parallel.h
+ *   #include "main/parallel_view.h
  *
  *   void gui_set_parallel_options_at_start(void)
  *
  * Description
- *
+ *   set sword global options on program start
  *
  * Return value
  *   void
@@ -269,7 +288,7 @@ void main_set_parallel_options_at_start(void)
 	while (tmp) {
 		char *option = g_strdup((char*)tmp->data);
 		g_strdelimit (option,"' ", '_');
-		GS_message(("\n\n%s\n%s\n", (char*)tmp->data, option));
+		//GS_message(("\n\n%s\n%s\n", (char*)tmp->data, option));
 		int choice = atoi(xml_get_value("parallel", option));
 		mgr->setGlobalOption((char*)tmp->data, choice ? "On" : "Off");
 		g_free(option);
@@ -281,15 +300,15 @@ void main_set_parallel_options_at_start(void)
 
 /******************************************************************************
  * Name
- *  
+ *   main_load_g_ops_parallel
  *
  * Synopsis
- *   #include "gui/mod_global_ops.h"
+ *   #include "main/parallel_view.h"
  *
- *   	
+ *   void main_load_g_ops_parallel(GtkWidget *menu)	
  *
  * Description
- *    
+ *    create global options menu and set check marks
  *
  * Return value
  *   void
@@ -373,10 +392,7 @@ void main_load_g_ops_parallel(GtkWidget *menu)
 		if (!strcmp((gchar *) tmp->data, "Textual Variants")) {
 			GTK_CHECK_MENU_ITEM(item)->active =
 			    settings.parallel_variants;
-		}		
-		
-		
-		
+		}
 		
 			
 		g_signal_connect(GTK_OBJECT(item), "activate",
@@ -393,7 +409,7 @@ void main_load_g_ops_parallel(GtkWidget *menu)
  *   gui_check_parallel_modules
  *
  * Synopsis
- *   #include "gui/parallel.h
+ *   #include "main/parallel_view.h
  *
  *   void gui_check_parallel_modules(void)
  *
@@ -446,7 +462,7 @@ void main_check_parallel_modules(void)
  *   gui_change_int1_mod
  *
  * Synopsis
- *   #include "gui/parallel.h
+ *   #include "main/parallel_view.h
  *
  *   void gui_changeint1_mod(gchar * mod_name)
  *
@@ -518,7 +534,7 @@ void main_change_parallel_module(GSParallel parallel, gchar * mod_name)
  *   gui_update_parallel_page
  *
  * Synopsis
- *   #include "gui/parallel.h
+ *   #include "main/parallel_view.h
  *
  *   void gui_update_parallel_page(void)
  *
@@ -743,7 +759,7 @@ void main_update_parallel_page(void)
  *   gui_update_parallel_page
  *
  * Synopsis
- *   #include "gui/parallel.h
+ *   #include "main/parallel_view.h
  *
  *   void gui_update_parallel_page(void)
  *
@@ -990,8 +1006,6 @@ void main_update_parallel_page(void)
 		gtk_html_end(GTK_HTML(html), htmlstream, status1);
 		gtk_html_set_editable(html, was_editable);
 	}
-/*	gtk_frame_set_label(GTK_FRAME(widgets.frame_parallel),
-			    settings.currentverse);*/
 }
 
 #endif
@@ -1001,7 +1015,7 @@ void main_update_parallel_page(void)
  *   int_display
  *
  * Synopsis
- *   #include "gui/parallel.h
+ *   #include "main/parallel_view.h
  *
  *   void int_display(gchar *key)
  *
@@ -1216,7 +1230,7 @@ static void int_display(GtkHTML *html, gchar * key)
  *   gui_update_parallel_page_detached
  *
  * Synopsis
- *   #include "gui/parallel.h
+ *   #include "main/parallel_view.h
  *
  *   void gui_update_parallel_page_detached(void)
  *
@@ -1322,7 +1336,7 @@ void main_update_parallel_page_detached(void)
  *   gui_swap_parallel_with_main
  *
  * Synopsis
- *   #include "gui/parallel.h
+ *   #include "main/parallel_view.h
  *
  *   void gui_swap_parallel_with_main(char * intmod)
  *
@@ -1362,7 +1376,7 @@ void main_swap_parallel_with_main(char *intmod)
  *   load_menu_formmod_list
  *
  * Synopsis
- *   #include "gui/parallel.h
+ *   #include "main/parallel_view.h
  *
  *   void load_menu_formmod_list(GtkWidget *pmInt, GList *mods,
  *			gchar *label, GCallback mycallback)
@@ -1409,14 +1423,48 @@ void main_load_menu_form_mod_list(GtkWidget * pmInt, gchar * label,
 }
 
 
+/******************************************************************************
+ * Name
+ *   main_init_paraellel_view
+ *
+ * Synopsis
+ *   #include "main/parallel_view.h
+ *
+ *   void main_init_paraellel_view(void)
+ *
+ * Description
+ *   create a new sword backend for parallel use
+ *   call gui_create_parallel_page to create a docked parallel pane
+ *   call main_set_parallel_options_at_start to sword global opts
+ *
+ * Return value
+ *   void
+ */
+
 void main_init_paraellel_view(void)
 {
 	backend_p = new BackEnd();
 	gui_create_parallel_page();
 	gtk_widget_realize(widgets.html_parallel);
 	main_set_parallel_options_at_start();
-	//gui_create_parallel_popup();
 }
+
+
+/******************************************************************************
+ * Name
+ *   main_delete_paraellel_view
+ *
+ * Synopsis
+ *   #include "main/parallel_view.h
+ *
+ *   void main_delete_paraellel_view(void)
+ *
+ * Description
+ *   delete the sword backend for the parallel view  
+ *
+ * Return value
+ *   void
+ */
 
 void main_delete_paraellel_view(void)
 {

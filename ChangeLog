@@ -1,6 +1,6 @@
 2009-01-12  terry <tbiggs@users.sourceforge.net>
 
-	* fix bug #2486766 Mozembed Parallel View doesn't respect cross-refernce
+	* fixed bug #2486766 Mozembed Parallel View doesn't respect cross-refernce
 	* Parallel opts now are stored and used on next start.
 	* added context menu to detached parallel view 
 
