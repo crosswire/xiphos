@@ -174,7 +174,7 @@ char *BackEnd::set_sword_locale(const char *sys_locale) {
 	if(sys_locale) {
 		if(!strncmp(sys_locale,"ru_RU",5)) {
 			sys_locale = "ru_RU-koi8-r";		
-		} else if(!strncmp(sys_locale,"ru_RU-koi8-r",10)){
+		} else if(!strncmp(sys_locale,"ru_RU-koi8-r",10)) {
 			if(strlen(sys_locale) >  12) {
 				for(i = 0; i < 12; i++) {
 					buf[i] = sys_locale[i];
@@ -183,7 +183,7 @@ char *BackEnd::set_sword_locale(const char *sys_locale) {
 				sys_locale = buf;
 			}
 			
-		} else if(!strncmp(sys_locale,"uk_UA-cp1251",10)){
+		} else if(!strncmp(sys_locale,"uk_UA-cp1251",10)) {
 			if(strlen(sys_locale) > 12 ) {
 				for(i = 0; i < 12; i++) {
 					buf[i] = sys_locale[i];
@@ -192,7 +192,7 @@ char *BackEnd::set_sword_locale(const char *sys_locale) {
 				sys_locale = buf;
 			}
 			
-		} else if(!strncmp(sys_locale,"uk_UA-koi8-u",10)){
+		} else if(!strncmp(sys_locale,"uk_UA-koi8-u",10)) {
 			if(strlen(sys_locale) > 12 ) {
 				for(i = 0; i < 12; i++) {
 					buf[i] = sys_locale[i];
@@ -201,7 +201,7 @@ char *BackEnd::set_sword_locale(const char *sys_locale) {
 				sys_locale = buf;
 			}
 			
-		} else if(!strncmp(sys_locale,"pt_BR",5)){
+		} else if(!strncmp(sys_locale,"pt_BR",5)) {
 			if(strlen(sys_locale) > 5 ) {
 				for(i = 0; i < 5; i++) {
 					buf[i] = sys_locale[i];
@@ -210,7 +210,7 @@ char *BackEnd::set_sword_locale(const char *sys_locale) {
 				sys_locale = buf;
 			}
 			
-		} else if(!strncmp(sys_locale,"en_GB",5)){
+		} else if(!strncmp(sys_locale,"en_GB",5)) {
 			if(strlen(sys_locale) > 5 ) {
 				for(i = 0; i < 5; i++) {
 					buf[i] = sys_locale[i];
@@ -218,6 +218,8 @@ char *BackEnd::set_sword_locale(const char *sys_locale) {
 				}
 				sys_locale = buf;
 			}
+		} else if(!strncmp(sys_locale,"fa",2)) {
+				sys_locale = "fa-utf8";
 		} else {
 			if(strlen(sys_locale) > 2 ) {
 				buf[0] = sys_locale[0];

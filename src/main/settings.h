@@ -95,15 +95,19 @@ struct _settings {
 	int   
 		usedefault, /* use default settings in gnomesword or those used for last session */
 		strongs,	//-- toogle button and check menu state
-		strongsint, //-- check menu state parallel mods
-		headingsint, //-- check menu state parallel mods	
-		crossrefint, //-- check menu state parallel mods	
-		lemmasint, //-- check menu state parallel mods		
-		morphsint, //-- check menu state parallel mods
-		hebrewpointsint, //-- check menu state parallel mods
-		cantillationmarksint, //-- check menu state parallel mods
-	        footnotesint, //-- check menu state parallel mods
-		greekaccentsint, //-- check menu state parallel mods
+		parallel_strongs, //-- check menu state parallel mods
+		parallel_headings, //-- check menu state parallel mods	
+		parallel_crossref, //-- check menu state parallel mods	
+		parallel_lemmas, //-- check menu state parallel mods		
+		parallel_morphs, //-- check menu state parallel mods		
+		parallel_segmentation, //-- check menu state parallel mods		
+		parallel_red_words, //-- check menu state parallel mods	
+		parallel_transliteration, //-- check menu state parallel mods
+		parallel_variants, //-- check menu state parallel mods
+		parallel_hebrewpoints, //-- check menu state parallel mods
+		parallel_cantillationmarks, //-- check menu state parallel mods
+	        parallel_footnotes, //-- check menu state parallel mods
+		parallel_greekaccents, //-- check menu state parallel mods
 	        versestyle, /* use verse style if true or paragraph style if not */
 	        linkedtabs, /* all tabs are linked together, moving in concert */
 	        showversenum, /* display verse numbers in text (default on) */
