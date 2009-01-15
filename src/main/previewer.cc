@@ -167,7 +167,10 @@ void main_information_viewer(const gchar * mod_name, const gchar * text, const g
 			settings.link_color);
 
 	str = g_string_new(tmp_str->str);
+	
+#ifdef USE_PARALLEL_TAB	
 	if(!settings.show_previewer_in_sidebar) {
+#endif /*  USE_PARALLEL_TAB  */	
 		if (type) {
 			if (!strcmp(type, "n")) {
 				g_string_printf(tmp_str,
@@ -194,7 +197,9 @@ void main_information_viewer(const gchar * mod_name, const gchar * text, const g
 				str = g_string_append(str, tmp_str->str);
 			}
 		}
+#ifdef USE_PARALLEL_TAB	
 	}
+#endif /*  USE_PARALLEL_TAB  */	
 
 	if (!strcmp(action, "showStrongsMorph")) {	//&& !strcmp(type,"Greek")
 		g_string_printf(tmp_str,
