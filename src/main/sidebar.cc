@@ -612,16 +612,17 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 		
 	}
 
-	if (!g_utf8_collate(cap, _("Standard View")))
+	if (!g_utf8_collate(cap, _("Standard View"))) {
+#ifdef USE_PARALLEL_TAB	
 		gtk_notebook_set_current_page (
 				GTK_NOTEBOOK(widgets.notebook_main), 
 				old_page);
-#ifdef USE_PARALLEL_TAB	
+#endif /*  USE_PARALLEL_TAB  */
 		gtk_notebook_set_current_page (GTK_NOTEBOOK
 					      (widgets.
 					       notebook_bible_parallel),
 					      0);
-#endif /*  USE_PARALLEL_TAB  */
+	}
 
 	if (!g_utf8_collate(cap, _("Commentaries"))) {
 		if (!settings.comm_showing) {
