@@ -535,7 +535,7 @@ on_parallel_tab_activate(GtkCheckMenuItem * menuitem,
 		
 	settings.showparatab = menuitem->active;
 	xml_set_value("GnomeSword", "misc", "showparatab",
-		      (settings.versehighlight ? "1" : "0"));
+		      (settings.showparatab ? "1" : "0"));
 	if(settings.showparatab)
 		gui_open_parallel_view_in_new_tab();
 	else 		

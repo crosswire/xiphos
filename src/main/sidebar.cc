@@ -584,25 +584,36 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 	gchar *offset = NULL;
 	gint mod_type;
 	GtkTreePath *path;
+	static int old_page = 0;
 
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &selected, 2, &cap, 3,
 			   &mod, 4, &key, -1);
 	if (!cap)
 		return;
 	if (!g_utf8_collate(cap, _("Parallel View"))) {
-		if(settings.dockedInt)
+		if(settings.dockedInt) {
 			gtk_notebook_set_current_page (GTK_NOTEBOOK
 					      (widgets.
 					       notebook_bible_parallel),
 					      1);
+		}
 		if(settings.showparatab)
+			old_page = gtk_notebook_get_current_page(
+					GTK_NOTEBOOK(widgets.notebook_main));
+		
 			gtk_notebook_set_current_page (
-				GTK_NOTEBOOK(widgets.notebook_main), 1);
+				GTK_NOTEBOOK(widgets.notebook_main), 
+				gtk_notebook_page_num (
+				GTK_NOTEBOOK (widgets.notebook_main),
+				widgets.parallel_tab));
 		
 	}
 
 	if (!g_utf8_collate(cap, _("Standard View")))
-		gtk_notebook_set_current_page(GTK_NOTEBOOK
+		gtk_notebook_set_current_page (
+				GTK_NOTEBOOK(widgets.notebook_main), 
+				old_page);
+		gtk_notebook_set_current_page (GTK_NOTEBOOK
 					      (widgets.
 					       notebook_bible_parallel),
 					      0);
