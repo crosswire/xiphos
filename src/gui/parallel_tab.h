@@ -25,7 +25,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
+	
+void gui_parallel_tab_sync(const gchar * key);
 GtkWidget *gui_create_parallel_tab(void);
 	
 #ifdef __cplusplus

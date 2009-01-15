@@ -48,6 +48,7 @@
 #include "main/navbar_versekey.h"
 #include "main/parallel_view.h"
 #include "main/settings.h"
+#include "main/url.hh"
 #include "main/xml.h"
 
 
@@ -72,7 +73,7 @@ static NAVBAR navbar;
 NAVBAR_VERSEKEY navbar_parallel;
 
 static GtkWidget *create_parallel_dialog(void);
-static void sync_with_main(void);
+static void sync_with_main(const gchar * key);
 
 
 #ifdef USE_GTKMOZEMBED
@@ -172,15 +173,25 @@ static void on_parallel_tab_destroy(GtkObject * object,
  *   void
  */
 
-static void sync_with_main(void)
+static void sync_with_main(const gchar * key)
 {	
-	gchar *url =
-	    g_strdup_printf("gnomesword.url?action=showParallel&"
-				"type=verse&value=%s",
-				main_url_encode(xml_get_value("keys", "verse")));
+	gchar *buf = NULL;
+	gchar *url = NULL;
 	
-	main_url_handler(url, TRUE);
-	g_free(url);
+	if(key)
+		buf = (gchar*)main_url_encode(key);
+	else
+		buf = (gchar*)main_url_encode(xml_get_value("keys", "verse"));
+	GS_message((buf));
+	if(buf && (strlen(buf) > 3)) {
+		url =
+		    g_strdup_printf("gnomesword.url?action=showParallel&"
+					"type=verse&value=%s",
+					buf);
+		
+		main_url_handler(url, TRUE);
+		g_free(url);
+	}
 }
 
 
@@ -206,7 +217,12 @@ void gui_keep_parallel_tab_in_sync(void)
 #else
 	if(GTK_TOGGLE_BUTTON(navbar_parallel.button_sync)->active)
 #endif
-		sync_with_main();
+		sync_with_main(NULL);
+}
+
+void gui_parallel_tab_sync(const gchar * key)
+{
+	sync_with_main(key);	
 }
 
 
@@ -252,7 +268,7 @@ void gui_set_parallel_navbar(const char * key)
 static void sync_toggled(GtkToggleButton * button, gpointer data)
 {
 	if (button->active)
-		sync_with_main();
+		sync_with_main(NULL);
 }
 
 /******************************************************************************

@@ -485,6 +485,7 @@ void gui_load_tabs(const gchar *filename)
 								gtk_box_pack_start(GTK_BOX(widgets.page), pt->paratab, TRUE, TRUE,
 									   0);
 								gtk_widget_hide(pt->paratab);
+								gui_parallel_tab_sync((gchar*)settings.currentverse);
 							}
 							else
 								pt->paratab = NULL;
@@ -1016,6 +1017,7 @@ void gui_open_parallel_view_in_new_tab(void)
 	set_current_tab(pt);
 	notebook_main_add_page(pt);
 	pt->paratab = gui_create_parallel_tab();
+	gui_parallel_tab_sync((gchar*)settings.currentverse);
 	/*gtk_box_pack_start(GTK_BOX(widgets.page), pt->paratab, TRUE, TRUE,
 			   0);*/
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_main),
