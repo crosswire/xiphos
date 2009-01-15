@@ -170,6 +170,7 @@ struct _preferences_check_buttons {
 	GtkWidget *show_in_viewer;
 	GtkWidget *show_in_dictionary;
 	GtkWidget *show_devotion;
+	GtkWidget *show_paratab;
 };
 
 
@@ -732,7 +733,6 @@ on_checkbutton5_toggled(GtkToggleButton * togglebutton,
 			       (widgets.versestyle_item),
 			       settings.versestyle);
 }
-
 /******************************************************************************
  * Name
  *   on_checkbutton10_toggled
@@ -761,6 +761,40 @@ on_checkbutton10_toggled(GtkToggleButton * togglebutton,
 			       (widgets.linkedtabs_item),
 			       settings.linkedtabs);
 }
+
+
+/******************************************************************************
+ * Name
+ *   on_checkbutton_showparatab_toggled
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_checkbutton_showparatab_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+ *
+ * Description
+ *
+ *
+ *
+ * Return value
+ *   void
+ */
+
+#ifdef USE_PARALLEL_TAB
+static void
+on_checkbutton_showparatab_toggled(GtkToggleButton * togglebutton,
+			 gpointer user_data)
+{
+	xml_set_value("GnomeSword", "misc", "showparatab",
+		      (togglebutton->active ? "1" : "0"));
+	if(togglebutton->active)
+		gui_open_parallel_view_in_new_tab();
+	else
+		gui_close_passage_tab(1);
+		
+	
+}	
+#endif /* USE_PARALLEL_TAB */
 
 
 /******************************************************************************
@@ -1913,6 +1947,13 @@ setup_check_buttons(void)
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.prayerlist),
 				     settings.prayerlist);
+
+#ifdef USE_PARALLEL_TAB
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+				     (check_button.show_paratab),
+				     settings.showparatab);	
+#endif /* USE_PARALLEL_TAB */
+	
 #if 0
 #ifdef USE_GTKMOZEMBED
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
@@ -1947,6 +1988,11 @@ setup_check_buttons(void)
 			 G_CALLBACK(on_checkbutton_versehighlight_toggled), NULL);
 	g_signal_connect(check_button.prayerlist, "toggled",
 			 G_CALLBACK(on_checkbutton_prayerlist_toggled), NULL);
+#ifdef USE_PARALLEL_TAB
+	g_signal_connect(check_button.show_paratab, "toggled",
+			 G_CALLBACK(on_checkbutton_showparatab_toggled), NULL);
+#endif /* USE_PARALLEL_TAB */
+	
 #if 0
 #ifdef USE_GTKMOZEMBED
 	g_signal_connect(check_button.doublespace, "toggled",
@@ -2243,6 +2289,13 @@ create_preferences_dialog(void)
 	check_button.versehighlight = glade_xml_get_widget(gxml, "checkbutton_versehighlight");
 	check_button.doublespace = glade_xml_get_widget(gxml, "checkbutton_doublespace");
 	check_button.prayerlist = glade_xml_get_widget(gxml, "checkbutton_prayerlist");
+
+	check_button.show_paratab = glade_xml_get_widget(gxml, "checkbutton_paratab");
+
+//#ifndef USE_PARALLEL_TAB	
+	gtk_widget_hide(check_button.show_paratab);
+//#endif /*  USE_PARALLEL_TAB  */	
+	
 	setup_check_buttons();
 
 	/* verse number size */

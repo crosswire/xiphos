@@ -1280,12 +1280,12 @@ static GtkWidget *create_menu(void)
 
 /******************************************************************************
  * Name
- *   on_epaned_button_release_event
+ *   paned_button_release_event
  *
  * Synopsis
  *   #include "gui/main_window.h"
  *
- *   gboolean on_epaned_button_release_event(GtkWidget * widget,
+ *   gboolean paned_button_release_event(GtkWidget * widget,
  *			GdkEventButton * event, gpointer user_data)
  *
  * Description
@@ -1305,13 +1305,32 @@ static gboolean paned_button_release_event(GtkWidget * widget,
 	panesize = gtk_paned_get_position(GTK_PANED(widget));
 
 	if (panesize > 15) {
-		GS_warning(("paned_viewer = %d",panesize));
+		GS_warning(("paned_sidebar = %d",panesize));
 		settings.sidebar_notebook_hight = panesize;
 		sprintf(layout, "%d", settings.sidebar_notebook_hight);
 		xml_set_value("GnomeSword", "layout",
 			      "sidebar_notebook_hight", layout);
 	}
 	return FALSE;
+}
+
+void gui_show_previewer_in_sidebar(gint choice)
+{
+	if(choice) {
+		gtk_widget_show(widgets.box_side_preview);
+		gtk_widget_reparent (widgets.previewer,
+                                     widgets.box_side_preview);
+		gtk_widget_show(widgets.box_side_preview);
+		gtk_widget_hide(widgets.vbox_previewer);
+		gtk_paned_set_position(GTK_PANED(widgets.paned_sidebar),
+				       settings.sidebar_notebook_hight);
+	} else {
+		gtk_widget_reparent (widgets.previewer,
+                                     widgets.vbox_previewer);
+		gtk_widget_show(widgets.vbox_previewer);
+		gtk_widget_hide(widgets.box_side_preview);
+	}
+	
 }
 
 
@@ -1361,10 +1380,25 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	GtkTreeViewColumn *column;
 
 	GtkWidget *table2;
-
+	
 	vbox1 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox1);
+
+#ifdef USE_PARALLEL_TAB	
+	widgets.paned_sidebar = gtk_vpaned_new();
+	gtk_paned_pack1(GTK_PANED(paned), widgets.paned_sidebar, FALSE, TRUE);	
+	gtk_widget_show(widgets.paned_sidebar);	
+	gtk_paned_pack1(GTK_PANED(widgets.paned_sidebar), vbox1, FALSE, TRUE);
+	widgets.box_side_preview = gtk_vbox_new(FALSE, 0);	
+	gtk_paned_pack2(GTK_PANED(widgets.paned_sidebar), widgets.box_side_preview, FALSE, TRUE);
+	g_signal_connect(GTK_OBJECT(widgets.paned_sidebar),
+			   "button_release_event",
+			   G_CALLBACK (paned_button_release_event),
+			   (gchar *) "paned_sidebar");
+#else
 	gtk_paned_pack1(GTK_PANED(paned), vbox1, FALSE, TRUE);
+
+#endif /*  USE_PARALLEL_TAB  */
 	widgets.shortcutbar = vbox1;
 
 	/* ---------------------------------------------------------------- */

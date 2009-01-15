@@ -102,6 +102,7 @@ void frontend_init(void)
 	gui_create_sidebar(widgets.epaned);
 	main_init_sidebar_search_backend();
 	main_search_sidebar_fill_bounds_combos();
+	
 	/*
 	 *  parallel stuff
 	 */	
@@ -190,6 +191,9 @@ void frontend_display(void)
 		g_free(url);
 	}
 	
+	if(settings.show_previewer_in_sidebar) 
+		gui_show_previewer_in_sidebar(1);
+		
 	if (settings.showdevotional) 
 		main_display_devotional();
 	else 

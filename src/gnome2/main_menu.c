@@ -507,6 +507,63 @@ on_versehighlight_activate(GtkCheckMenuItem * menuitem,
 	main_display_bible(NULL, settings.currentverse);
 }
 
+#ifdef USE_PARALLEL_TAB	
+/******************************************************************************
+ * Name
+ *  on_parallel_tab_activate
+ *
+ * Synopsis
+ *   #include "gui/main_menu.h"
+ *
+ *   void on_parallel_tab_activate(GtkMenuItem *menuitem, gpointer user_data)	
+ *
+ * Description
+ *   toggle special current verse highlight.
+ *
+ * Return value
+ *   void
+ */
+
+static void
+on_parallel_tab_activate(GtkCheckMenuItem * menuitem,
+			   gpointer user_data)
+{
+	settings.showparatab = menuitem->active;
+	xml_set_value("GnomeSword", "misc", "showparatab",
+		      (settings.versehighlight ? "1" : "0"));
+	if(settings.showparatab)
+		gui_open_parallel_view_in_new_tab();
+	else
+		gui_close_passage_tab(1);
+}
+
+/******************************************************************************
+ * Name
+ *  on_side_preview_activate
+ *
+ * Synopsis
+ *   #include "gui/main_menu.h"
+ *
+ *   void on_side_preview_activate(GtkMenuItem *menuitem, gpointer user_data)	
+ *
+ * Description
+ *   toggle special previewer in sidebar.
+ *
+ * Return value
+ *   void
+ */
+
+static void
+on_side_preview_activate(GtkCheckMenuItem * menuitem,
+			   gpointer user_data)
+{
+	settings.show_previewer_in_sidebar = menuitem->active;
+	xml_set_value("GnomeSword", "misc", "show_side_preview",
+		      (settings.show_previewer_in_sidebar ? "1" : "0"));
+	gui_show_previewer_in_sidebar(settings.show_previewer_in_sidebar);
+}
+#endif /*  USE_PARALLEL_TAB  */
+
 /******************************************************************************
  * Name
  *  on_doublespace_activate
@@ -1050,6 +1107,21 @@ static GnomeUIInfo view1_menu_uiinfo[] = {
 	 gui_sidebar_showhide, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
+	
+#ifdef USE_PARALLEL_TAB	
+	{ /* 16 */
+	 GNOME_APP_UI_TOGGLEITEM, N_("Show Parallel View in a tab"),
+	 NULL,
+	 NULL, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},	
+	{ /* 17 */
+	 GNOME_APP_UI_TOGGLEITEM, N_("Show Previewer in the Sidebar"),
+	 NULL,
+	 NULL, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+#endif /*  USE_PARALLEL_TAB  */	
 	GNOMEUIINFO_END
 };
 
@@ -1175,6 +1247,10 @@ gui_create_main_menu(GtkWidget * app)
 	widgets.readaloud_item = view1_menu_uiinfo[9].widget;
 	widgets.showversenum_item = view1_menu_uiinfo[10].widget;
 	widgets.versehighlight_item = view1_menu_uiinfo[11].widget;
+#ifdef USE_PARALLEL_TAB	
+	widgets.parallel_tab_item = view1_menu_uiinfo[16].widget;
+	widgets.side_preview_item = view1_menu_uiinfo[17].widget;
+#endif /*  USE_PARALLEL_TAB  */	
 	gtk_widget_hide(edit1_menu_uiinfo[0].widget);	/* disable Copy */
 	gtk_widget_hide(edit1_menu_uiinfo[1].widget);	/* disable Copy */
 #ifdef USE_GTKMOZEMBED
@@ -1197,7 +1273,15 @@ gui_create_main_menu(GtkWidget * app)
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.viewpreview_item),
 				       settings.showpreview);
-
+#ifdef USE_PARALLEL_TAB	
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+				       (widgets.parallel_tab_item),
+				       settings.showparatab);
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+				       (widgets.side_preview_item),
+				       settings.show_previewer_in_sidebar);
+#endif /*  USE_PARALLEL_TAB  */	
+	
 	/* update other status toys */
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.versestyle_item),
@@ -1240,6 +1324,18 @@ gui_create_main_menu(GtkWidget * app)
 			   "toggled",
 			   G_CALLBACK(on_versehighlight_activate),
 			   NULL);
+			   
+#ifdef USE_PARALLEL_TAB	
+	g_signal_connect(GTK_OBJECT(widgets.parallel_tab_item),
+			   "toggled",
+			   G_CALLBACK(on_parallel_tab_activate),
+			   NULL);
+	g_signal_connect(GTK_OBJECT(widgets.side_preview_item),
+			   "toggled",
+			   G_CALLBACK(on_side_preview_activate),
+			   NULL);
+#endif /*  USE_PARALLEL_TAB  */	
+			   
 #ifdef USE_GTKMOZEMBED
 	g_signal_connect(GTK_OBJECT(widgets.doublespace_item),
 			   "toggled",

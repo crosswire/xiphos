@@ -55,8 +55,9 @@ gnomesword_SOURCES =  \
     navbar_versekey_dialog.c \
     navbar_versekey_editor.c \
     navbar_versekey_parallel.c \
-    parallel_view.c \
     parallel_dialog.c \
+    parallel_tab.c \
+    parallel_view.c \
     preferences_cell_renderer.c \
     preferences_dialog.c \
     search_dialog.c \

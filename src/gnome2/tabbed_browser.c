@@ -40,6 +40,7 @@
 //#include "gui/html.h"
 #include "gui/main_menu.h"
 #include "gui/main_window.h"
+#include "gui/parallel_tab.h"
 #include "gui/shortcutbar_search.h"
 #include "gui/dialog.h"
 #include "gui/font_dialog.h"
@@ -208,7 +209,12 @@ GString *
 pick_tab_label(PASSAGE_TAB_INFO *pt)
 {
 	GString *str = g_string_new(NULL);
-
+	
+	if (pt->showparallel) { 
+		g_string_printf(str, "%s", _("Parallel View"));
+		return str;
+	}
+	
 	if (pt->showtexts || pt->comm_showing) {
 		g_string_printf(str, "%s: %s",
 				(pt->showtexts
@@ -256,9 +262,12 @@ void notebook_main_add_page(PASSAGE_TAB_INFO *tbinf)
 	gtk_widget_show(tbinf->page_widget);
 
 	tab_widget = tab_widget_new(tbinf, str->str);
-
-	gtk_notebook_append_page(GTK_NOTEBOOK(widgets.notebook_main),
-				 tbinf->page_widget, tab_widget);
+	gtk_notebook_insert_page(GTK_NOTEBOOK(widgets.notebook_main),
+				 tbinf->page_widget, 
+				 tab_widget,
+				 tbinf->showparallel ? 1 : -1);
+	/*gtk_notebook_append_page(GTK_NOTEBOOK(widgets.notebook_main),
+				 tbinf->page_widget, tab_widget);*/
 
 	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(widgets.notebook_main),
 					tbinf->page_widget, str->str);
@@ -356,6 +365,8 @@ void gui_save_tabs(const gchar *filename)
 				(const xmlChar *)true_false2yes_no(pt->showcomms));
 		xmlNewProp(cur_node, (const xmlChar *)"showdicts",
 				(const xmlChar *)true_false2yes_no(pt->showdicts));
+		xmlNewProp(cur_node, (const xmlChar *)"showparallel",
+				(const xmlChar *)true_false2yes_no(pt->showparallel));
 	}
 	xmlSaveFormatFile(file, xml_doc,1);
 	g_free(file);
@@ -465,7 +476,19 @@ void gui_load_tabs(const gchar *filename)
 							val = (gchar*)xmlGetProp(tmp_node, (const xmlChar *)"comm_showing");
 							pt->comm_showing = yes_no2true_false(val);
 							xmlFree(val);
-
+							val = (gchar*)xmlGetProp(tmp_node, (const xmlChar *)"showparallel");
+							pt->showparallel = yes_no2true_false(val);
+							xmlFree(val);
+#ifdef USE_PARALLEL_TAB
+							if(pt->showparallel) {
+								pt->paratab = gui_create_parallel_tab();
+								gtk_box_pack_start(GTK_BOX(widgets.page), pt->paratab, TRUE, TRUE,
+									   0);
+								gtk_widget_hide(pt->paratab);
+							}
+							else
+								pt->paratab = NULL;
+#endif /*  USE_PARALLEL_TAB  */
 							/*
 							 * load per-tab "show" state.
 							 * includes backward compatibility:
@@ -484,6 +507,7 @@ void gui_load_tabs(const gchar *filename)
 								val = (gchar*)xmlGetProp(tmp_node, (const xmlChar *)"showdicts");
 								pt->showdicts = yes_no2true_false(val);
 								xmlFree(val);
+								
 							} else {
 								pt->showtexts   = settings.showtexts;
 								pt->showpreview = settings.showpreview;
@@ -522,7 +546,9 @@ void gui_load_tabs(const gchar *filename)
 			pt->text_commentary_key = g_strdup(settings.currentverse);
 			pt->dictlex_key = g_strdup(settings.dictkey);
 			pt->book_offset = NULL; //settings.book_offset = atol(xml_get_value( "keys", "offset"));
-
+			
+			pt->paratab = NULL;
+			
 			pt->showtexts   = settings.showtexts;
 			pt->showpreview = settings.showpreview;
 			pt->showcomms   = settings.showcomms;
@@ -539,7 +565,8 @@ void gui_load_tabs(const gchar *filename)
 		{
 			// first passage is current/displayed.
 			pt = pt_first;
-
+			
+			pt->paratab = NULL;
 			// This is a hack to keep gs from loading the settings
 			// from the last session into the last tab loaded here.
 			gui_reassign_strdup(&settings.MainWindowModule, pt->text_mod);
@@ -614,6 +641,7 @@ static GtkWidget* tab_widget_new(PASSAGE_TAB_INFO *tbinf, const gchar *label_tex
 	GdkColor color;
 	
 	g_return_val_if_fail(label_text != NULL, NULL);
+	
 	tmp_toolbar_icon = gtk_image_new_from_stock(GTK_STOCK_CLOSE, 
 					GTK_ICON_SIZE_MENU); 
 	gtk_widget_show(tmp_toolbar_icon); 
@@ -697,10 +725,23 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
 	removed_page = 1;
 	/* point PASSAGE_TAB_INFO *cur_passage_tab to pt - cur_passage_tab is global to this file */
 
+	if(!pt->showparallel) {	
+		if(cur_passage_tab && cur_passage_tab->paratab)
+			gtk_widget_hide(cur_passage_tab->paratab);
+		gtk_widget_show(widgets.hpaned);
+	}
+	
 	set_current_tab (pt);
 
 	companion_activity = TRUE;
-	
+	if(pt->showparallel) {
+		gtk_widget_hide(widgets.hpaned);
+		if(pt->paratab)
+			gtk_widget_show(pt->paratab);		
+		companion_activity = FALSE;
+		page_change = FALSE;
+		return;
+	} 
 	//sets the book mod and key
 	main_display_book(pt->book_mod, pt->book_offset);
 	comm_showing = settings.comm_showing;
@@ -897,6 +938,7 @@ void gui_open_passage_in_new_tab(gchar *verse_key)
 	pt->commentary_mod = g_strdup(settings.CommWindowModule);
 	pt->dictlex_mod = g_strdup(settings.DictWindowModule);
 	pt->book_mod = g_strdup(settings.book_mod);
+	pt->paratab = NULL;
 
 	pt->text_commentary_key = g_strdup(verse_key);
 	pt->dictlex_key = g_strdup(settings.dictkey);
@@ -907,6 +949,7 @@ void gui_open_passage_in_new_tab(gchar *verse_key)
 	pt->showpreview = settings.showpreview;
 	pt->showcomms   = settings.showcomms;
 	pt->showdicts   = settings.showdicts;
+	pt->showparallel	= FALSE;
 
 	pt->history_items = 0;	
 	pt->current_history_item = 0;
@@ -921,6 +964,65 @@ void gui_open_passage_in_new_tab(gchar *verse_key)
 				gtk_notebook_page_num
 				(GTK_NOTEBOOK(widgets.notebook_main),
 				pt->page_widget));
+}
+
+
+/******************************************************************************
+ * Name
+ *  gui_open_parallel_view_in_new_tab
+ *
+ * Synopsis
+ *   #include "tabbed_browser.h"
+ *
+ *   void gui_open_parallel_view_in_new_tab(void)
+ *
+ * Description
+ *   opens the parallel view in a new tab
+ *
+ * Return value
+ *   void
+ */
+
+void gui_open_parallel_view_in_new_tab(void)
+{
+#ifdef USE_PARALLEL_TAB
+	PASSAGE_TAB_INFO *pt;
+	
+	if(!settings.browsing)
+		return;
+	
+	if ((pt = g_new0(PASSAGE_TAB_INFO, 1)) == NULL) {
+		gui_generic_warning("Could not allocate a new tab");
+		return;
+	}
+
+	pt->showtexts   	= FALSE;
+	pt->showpreview 	= TRUE;
+	pt->showcomms   	= FALSE;
+	pt->showdicts   	= FALSE;
+	pt->showparallel	= TRUE;
+	pt->text_mod = g_strdup(settings.MainWindowModule);
+	pt->commentary_mod = g_strdup(settings.CommWindowModule);
+	pt->dictlex_mod = g_strdup(settings.DictWindowModule);
+	pt->book_mod = g_strdup(settings.book_mod);
+	pt->showbookeditor = FALSE;
+	pt->comm_showing = FALSE;
+
+	pt->text_commentary_key = g_strdup(settings.currentverse);
+	pt->dictlex_key = g_strdup(settings.dictkey);	
+	pt->book_offset = g_strdup_printf("%d",settings.book_offset);
+	
+	passage_list = g_list_append(passage_list, (PASSAGE_TAB_INFO*)pt);
+	set_current_tab(pt);
+	notebook_main_add_page(pt);
+	pt->paratab = gui_create_parallel_tab();
+	/*gtk_box_pack_start(GTK_BOX(widgets.page), pt->paratab, TRUE, TRUE,
+			   0);*/
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_main),
+				gtk_notebook_page_num
+				(GTK_NOTEBOOK(widgets.notebook_main),
+				pt->page_widget));
+#endif /*  USE_PARALLEL_TAB  */
 }
 
 
@@ -958,6 +1060,8 @@ void gui_open_module_in_new_tab(gchar *module)
 	pt->showpreview = settings.showpreview;
 	pt->showcomms   = FALSE;
 	pt->showdicts   = FALSE;
+	pt->showparallel	= FALSE;
+	pt->paratab = NULL;
 
 	switch (module_type) {
 	case -1:
@@ -1001,6 +1105,7 @@ void gui_open_module_in_new_tab(gchar *module)
 		pt->showcomms = TRUE;
 		pt->comm_showing = 0;
 		break;
+
 	}
 
 	pt->text_commentary_key = g_strdup(settings.currentverse);
@@ -1118,6 +1223,12 @@ void gui_close_passage_tab(gint pagenum)
 	if(pt->text_commentary_key) g_free(pt->text_commentary_key);
 	if(pt->dictlex_key) g_free(pt->dictlex_key);
 	if(pt->book_offset) g_free(pt->book_offset);
+#ifdef USE_PARALLEL_TAB
+	if(pt->showparallel) {
+		gtk_widget_hide(pt->paratab);
+		gui_destroy_parallel_tab();
+	}
+#endif /*  USE_PARALLEL_TAB  */
 	g_free(pt);
 	cur_passage_tab = NULL;
 	removed_page = pagenum;

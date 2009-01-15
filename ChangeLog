@@ -1,3 +1,13 @@
+2009-01-14  terry <tbiggs@users.sourceforge.net>
+
+	* previewer can now be diaplayed on the sidebar
+	* started work on tabbed parallel view
+	* added gui/parallel_tab.h and gnome2/parallel_tab.c
+	* added <Show Parallel View in a tab> and 
+          <Show Previewer in the Sidebar> items to the <View> menu
+	* you need to configure with --enable-paratab to try both of
+          these changes.
+
 2009-01-12  terry <tbiggs@users.sourceforge.net>
 
 	* fixed bug #2486766 Mozembed Parallel View doesn't respect cross-refernce
