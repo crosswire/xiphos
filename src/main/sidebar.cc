@@ -589,11 +589,17 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 			   &mod, 4, &key, -1);
 	if (!cap)
 		return;
-	if (!g_utf8_collate(cap, _("Parallel View")))
-		gtk_notebook_set_current_page(GTK_NOTEBOOK
+	if (!g_utf8_collate(cap, _("Parallel View"))) {
+		if(settings.dockedInt)
+			gtk_notebook_set_current_page (GTK_NOTEBOOK
 					      (widgets.
 					       notebook_bible_parallel),
 					      1);
+		if(settings.showparatab)
+			gtk_notebook_set_current_page (
+				GTK_NOTEBOOK(widgets.notebook_main), 1);
+		
+	}
 
 	if (!g_utf8_collate(cap, _("Standard View")))
 		gtk_notebook_set_current_page(GTK_NOTEBOOK

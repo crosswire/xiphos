@@ -259,15 +259,17 @@ void notebook_main_add_page(PASSAGE_TAB_INFO *tbinf)
 	GString *str = pick_tab_label(tbinf);
 
 	tbinf->page_widget = gtk_vbox_new (FALSE, 0);
+	if(tbinf->showparallel)
+		widgets.parallel_tab = tbinf->page_widget;
 	gtk_widget_show(tbinf->page_widget);
 
 	tab_widget = tab_widget_new(tbinf, str->str);
-	gtk_notebook_insert_page(GTK_NOTEBOOK(widgets.notebook_main),
+	/*gtk_notebook_insert_page(GTK_NOTEBOOK(widgets.notebook_main),
 				 tbinf->page_widget, 
 				 tab_widget,
-				 tbinf->showparallel ? 1 : -1);
-	/*gtk_notebook_append_page(GTK_NOTEBOOK(widgets.notebook_main),
-				 tbinf->page_widget, tab_widget);*/
+				 tbinf->showparallel ? 1 : -1);*/
+	gtk_notebook_append_page(GTK_NOTEBOOK(widgets.notebook_main),
+				 tbinf->page_widget, tab_widget);
 
 	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(widgets.notebook_main),
 					tbinf->page_widget, str->str);
@@ -481,6 +483,7 @@ void gui_load_tabs(const gchar *filename)
 							xmlFree(val);
 #ifdef USE_PARALLEL_TAB
 							if(pt->showparallel) {
+								settings.showparatab = TRUE;
 								pt->paratab = gui_create_parallel_tab();
 								gtk_box_pack_start(GTK_BOX(widgets.page), pt->paratab, TRUE, TRUE,
 									   0);
@@ -1229,6 +1232,10 @@ void gui_close_passage_tab(gint pagenum)
 	if(pt->showparallel) {
 		gtk_widget_hide(pt->paratab);
 		gui_destroy_parallel_tab();
+		settings.showparatab = FALSE;
+		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+				       (widgets.parallel_tab_item),
+				       settings.showparatab);
 	}
 #endif /*  USE_PARALLEL_TAB  */
 	g_free(pt);
