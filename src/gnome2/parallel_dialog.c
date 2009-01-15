@@ -45,6 +45,7 @@
 #include "main/navbar_versekey.h"
 #include "main/parallel_view.h"
 #include "main/settings.h"
+#include "main/url.hh"
 #include "main/xml.h"
 
 
@@ -206,16 +207,18 @@ static void on_dlgparallel_destroy(GtkObject * object,
 static void sync_with_main(void)
 {
 	//GS_message((xml_get_value("keys", "verse")));
-	gchar *buf;
-	xml_get_value("keys", "verse"); /* FIXME: needed to keep sync_with_main from crashing */
-	if(buf = xml_get_value("keys", "verse")) {
+	gchar *buf = NULL;
+	gchar *url = NULL;
+	
+	buf = (gchar*)main_url_encode (settings.currentverse);
+	
+	if (buf && (strlen(buf) > 3)) {
 		gchar *url =
-		    g_strdup_printf("gnomesword.url?action=showParallel&"
+		    g_strdup_printf ("gnomesword.url?action=showParallel&"
 					"type=verse&value=%s",
-					main_url_encode(buf));
-		
-		main_url_handler(url, TRUE);
-		g_free(url);
+					buf);		
+		main_url_handler (url, TRUE);
+		g_free (url);
 	}
 }
 

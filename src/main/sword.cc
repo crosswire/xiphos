@@ -58,6 +58,7 @@ extern "C" {
 #include "gui/commentary.h"
 #include "gui/dialog.h"
 #include "gui/parallel_dialog.h"
+#include "gui/parallel_tab.h"
 #include "gui/parallel_view.h"
 #include "gui/tabbed_browser.h"
 #include "gui/gnomesword.h"
@@ -1358,8 +1359,12 @@ void main_display_bible(const char * mod_name, const char * key)
 	 */
 	if (settings.dockedInt) 
 		main_update_parallel_page();
-	else
-		gui_keep_parallel_dialog_in_sync();
+	else {
+		if(settings.showparatab)
+			gui_keep_parallel_tab_in_sync();
+		else
+			gui_keep_parallel_dialog_in_sync();
+	}
 #ifndef USE_GTKMOZEMBED
 	g_signal_handler_unblock(adjustment, scroll_adj_signal);
 #endif

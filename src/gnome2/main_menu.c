@@ -528,13 +528,20 @@ static void
 on_parallel_tab_activate(GtkCheckMenuItem * menuitem,
 			   gpointer user_data)
 {
+	if(!settings.showparatab && !menuitem->active) {
+		xml_set_value("GnomeSword", "misc", "showparatab", "0");
+		return;
+	}
+		
 	settings.showparatab = menuitem->active;
 	xml_set_value("GnomeSword", "misc", "showparatab",
 		      (settings.versehighlight ? "1" : "0"));
 	if(settings.showparatab)
 		gui_open_parallel_view_in_new_tab();
-	else
-		gui_close_passage_tab(1);
+	else 		
+		gui_close_passage_tab  (gtk_notebook_page_num (
+					GTK_NOTEBOOK (widgets.notebook_main),
+					widgets.parallel_tab));
 }
 
 /******************************************************************************

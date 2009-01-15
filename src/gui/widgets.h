@@ -57,6 +57,7 @@ struct  _app_widgets {
 		*box_dict,
 		*vbox_previewer,
 		*previewer,
+		*parallel_tab, /*  */
 	    
 	/* dock/undock stuff */
 		*dock_sb, /* dock for shortcut bar */
