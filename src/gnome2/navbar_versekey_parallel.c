@@ -352,14 +352,16 @@ gboolean on_button_verse_menu_book_scroll_event(GtkWidget * widget,
 	return FALSE;
 }
 
-static void sync_with_main(void)
+static void sync_with_main (GtkToggleButton * button, gpointer data)
 {
-	gchar *url =
-	    g_strdup_printf("gnomesword.url?action=showParallel&"
-				"type=verse&value=%s",
-				main_url_encode(xml_get_value("keys", "verse")));
-	main_url_handler(url, TRUE);
-	g_free(url);
+	if (button->active) {
+		gchar *url =
+		    g_strdup_printf("gnomesword.url?action=showParallel&"
+					"type=verse&value=%s",
+					main_url_encode(xml_get_value("keys", "verse")));
+		main_url_handler(url, TRUE);
+		g_free(url);
+	}
 }
 
 /******************************************************************************
@@ -700,7 +702,7 @@ void _connect_signals(NAVBAR_VERSEKEY navbar)
 			 
 			 
 	g_signal_connect((gpointer) navbar.button_sync,
-			 "clicked", G_CALLBACK(G_CALLBACK(sync_with_main)),
+			 "toggled", G_CALLBACK(G_CALLBACK(sync_with_main)),
 			 NULL);
 	g_signal_connect((gpointer) navbar.button_book_menu,
 			 "button_press_event",

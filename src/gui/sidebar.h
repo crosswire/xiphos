@@ -63,6 +63,7 @@ gboolean gui_verselist_button_release_event(GtkWidget * widget,
 gboolean vpaned_srch_rslt_button_release_event(GtkWidget * widget,
 					       GdkEventButton * event,
 					       gpointer user_data);
+void gui_show_previewer_in_sidebar(gint choice);
 
 #ifdef __cplusplus
 }

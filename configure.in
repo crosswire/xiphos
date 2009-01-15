@@ -141,6 +141,11 @@ dnl if test "x$exporter" = xyes; then
 dnl   AC_DEFINE(USE_EXPORTER, 1, [Define if wish to enable the Passage exporter])
 dnl fi
 
+AC_ARG_ENABLE(paratab,[  --enable-paratab    use paratab [default=no]],paratab=$enableval,paratab=no)
+if test "x$paratab" = xyes; then
+  AC_DEFINE(USE_PARALLEL_TAB, 1, [Define if wish to enable Parallel view in a tab])
+fi
+
 AC_ARG_ENABLE(old_navbar,[  --enable-old_navbar    use old_navbar [default=no]],old_navbar=$enableval,old_navbar=no)
 if test "x$old_navbar" = xyes; then
   AC_DEFINE(OLD_NAVBAR, 1, [Define if wish to use the old style navbar])

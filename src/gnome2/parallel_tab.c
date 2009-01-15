@@ -23,6 +23,9 @@
 #  include <config.h>
 #endif
 
+
+#ifdef USE_PARALLEL_TAB
+
 #include <gnome.h>
 #include <glade/glade-xml.h>
 #ifdef USE_GTKMOZEMBED
@@ -32,7 +35,7 @@
 #include "gui/html.h"
 #endif  /* USE_GTKMOZEMBED */
 
-#include "gui/parallel_dialog.h"
+#include "gui/parallel_tab.h"
 #include "gui/parallel_view.h"
 #include "gui/gnomesword.h"
 #include "gui/navbar_versekey_parallel.h"
@@ -50,6 +53,7 @@
 
 
 extern gboolean do_display;
+extern gboolean shift_key_presed;
 
 GtkWidget *entrycbIntBook;
 GtkWidget *sbIntChapter;
@@ -63,6 +67,7 @@ static GtkWidget *parallel_UnDock_Dialog;
 static GtkWidget *vboxInt;
 static gboolean ApplyChangeBook;
 static GtkWidget *sync_button;
+static GtkWidget *parallel_vbox;
 static NAVBAR navbar;
 NAVBAR_VERSEKEY navbar_parallel;
 
@@ -92,43 +97,6 @@ _popupmenu_requested_cb(GtkHTML *html,
 }
 #endif
 
-/******************************************************************************
- * Name
- *   undock_parallel_page
- *
- * Synopsis
- *   #include "parallel_dialog.h"
- *   
- *   void undock_parallel_page(void)
- *
- * Description
- *   
- *
- *
- *   
- *
- * Return value
- *   void
- */
-
-void gui_undock_parallel_page(void)
-{
-	ApplyChangeBook = FALSE;
-	parallel_UnDock_Dialog = create_parallel_dialog();
-	
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_bible_parallel),
-                                             FALSE);
-	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_bible_parallel), 
-					0);
-	
-	
-	gtk_widget_show(parallel_UnDock_Dialog);
-	//main_update_parallel_page_detached();
-	//g_free(settings.cvparallel);
-	settings.dockedInt = FALSE;
-	ApplyChangeBook = TRUE;
-	sync_with_main();
-}
 
 /******************************************************************************
  * Name
@@ -149,10 +117,11 @@ void gui_undock_parallel_page(void)
  *   void
  */
 
-void gui_btnDockInt_clicked(GtkButton * button, gpointer user_data)
+void gui_parallel_close_tab(GtkButton * button, gpointer user_data)
 {
-	gtk_widget_destroy(parallel_UnDock_Dialog);
+	//gtk_widget_destroy(parallel_UnDock_Dialog);
 }
+
 
 /******************************************************************************
  * Name
@@ -173,7 +142,7 @@ void gui_btnDockInt_clicked(GtkButton * button, gpointer user_data)
  *   void
  */
 
-static void on_dlgparallel_destroy(GtkObject * object,
+static void on_parallel_tab_destroy(GtkObject * object,
 				      gpointer user_data)
 {
 	
@@ -204,19 +173,14 @@ static void on_dlgparallel_destroy(GtkObject * object,
  */
 
 static void sync_with_main(void)
-{
-	//GS_message((xml_get_value("keys", "verse")));
-	gchar *buf;
-	xml_get_value("keys", "verse"); /* FIXME: needed to keep sync_with_main from crashing */
-	if(buf = xml_get_value("keys", "verse")) {
-		gchar *url =
-		    g_strdup_printf("gnomesword.url?action=showParallel&"
-					"type=verse&value=%s",
-					main_url_encode(buf));
-		
-		main_url_handler(url, TRUE);
-		g_free(url);
-	}
+{	
+	gchar *url =
+	    g_strdup_printf("gnomesword.url?action=showParallel&"
+				"type=verse&value=%s",
+				main_url_encode(xml_get_value("keys", "verse")));
+	
+	main_url_handler(url, TRUE);
+	g_free(url);
 }
 
 
@@ -235,7 +199,7 @@ static void sync_with_main(void)
  *   void
  */
 
-void gui_keep_parallel_dialog_in_sync(void)
+void gui_keep_parallel_tab_in_sync(void)
 {
 #ifdef OLD_NAVBAR
 	if(GTK_TOGGLE_BUTTON(sync_button)->active)
@@ -260,12 +224,12 @@ void gui_keep_parallel_dialog_in_sync(void)
  * Return value
  *   void
  */
-
+/*
 void gui_set_parallel_navbar(const char * key)
 {
 	main_navbar_set(navbar, key);
 }
-
+*/
 
 
 
@@ -593,14 +557,91 @@ static GtkWidget *create_nav_toolbar(void)
 }
 
 
+
 /******************************************************************************
  * Name
- *   create_parallel_dialog
+ *  on_text_button_press_event
+ *
+ * Synopsis
+ *   #include ".h"
+ *
+ *  gboolean on_text_button_press_event(GtkWidget * widget,
+			    GdkEventButton * event, DIALOG_DATA * t)
+ *
+ * Description
+ *   called when mouse button is clicked in html widget
+ *
+ * Return value
+ *   gboolean
+ */
+static gboolean on_text_button_press_event(GtkWidget * widget,
+					GdkEventButton * event,
+					gpointer data)
+{
+	switch (event->button) {
+	case 1:
+		break;
+	case 2:
+		shift_key_presed = TRUE;
+		break;
+	case 3:
+		//gui_popup_pm_text();
+		break;
+	}
+	return FALSE;
+}
+
+
+/******************************************************************************
+ * Name
+ *  on_button_release_event
+ *
+ * Synopsis
+ *   #include "_bibletext.h"
+ *
+ *  gboolean on_button_release_event(GtkWidget * widget,
+			    GdkEventButton * event, DIALOG_DATA * t)
+ *
+ * Description
+ *   called when mouse button is clicked in html widget
+ *
+ * Return value
+ *   gboolean
+ */
+
+static gboolean on_text_button_release_event(GtkWidget * widget,
+					GdkEventButton * event,
+					gpointer date)
+{
+	extern gboolean in_url;
+	gchar *key;
+	const gchar *url;
+	gchar *buf = NULL;
+
+
+	switch (event->button) {
+	case 1:
+		
+		break;
+	case 2:
+		if (shift_key_presed) {
+			shift_key_presed = FALSE;
+			break;
+		}
+		break;
+	case 3:
+		break;
+	}
+	return FALSE;
+}
+/******************************************************************************
+ * Name
+ *   create_parallel_tab
  *
  * Synopsis
  *   #include "parallel_dialog.h"
  *   
- *   GtkWidget *create_parallel_dialog(void)
+ *   GtkWidget *create_parallel_tab(void)
  *
  * Description
  *   
@@ -609,11 +650,9 @@ static GtkWidget *create_nav_toolbar(void)
  * Return value
  *   GtkWidget *
  */
-static
-GtkWidget *create_parallel_dialog(void)
+
+GtkWidget *_create_parallel_tab(void)
 {
-	GtkWidget *dialog_parallel;
-	GtkWidget *dialog_vbox25;
 	GtkWidget *toolbar29;
 	GtkWidget *tmp_toolbar_icon;
 	GtkWidget *buttonIntSync;
@@ -621,38 +660,25 @@ GtkWidget *create_parallel_dialog(void)
 	GtkObject *sbIntChapter_adj;
 	GtkObject *sbIntVerse_adj;
 	GtkWidget *btnIntGotoVerse;
-	GtkWidget *dialog_action_area25;
-	GtkWidget *hbuttonbox4;
-	GtkWidget *btnDockInt;
 	GtkWidget *eventbox;
 	GtkWidget *frame;
 	GtkWidget *scrolled_window;
-	gchar title[256];
 	
-	sprintf(title,"%s - %s", settings.program_title, _("Parallel"));
-
-	dialog_parallel = gtk_dialog_new();
-	gtk_object_set_data(GTK_OBJECT(dialog_parallel),
-			    "dialog_parallel", dialog_parallel);
-	gtk_window_set_title(GTK_WINDOW(dialog_parallel),
-			     title);
-	gtk_window_set_default_size(GTK_WINDOW(dialog_parallel), 657,
-				    361);
-	gtk_window_set_resizable(GTK_WINDOW(dialog_parallel), TRUE);
-
-	dialog_vbox25 = GTK_DIALOG(dialog_parallel)->vbox;
-	gtk_object_set_data(GTK_OBJECT(dialog_parallel),
-			    "dialog_vbox25", dialog_vbox25);
-	gtk_widget_show(dialog_vbox25);
-
-	vboxInt = gtk_vbox_new(FALSE, 0);
-	gtk_widget_show(vboxInt);
-	gtk_box_pack_start(GTK_BOX(dialog_vbox25), vboxInt, TRUE, TRUE,
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_bible_parallel),
+                                             FALSE);
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_bible_parallel), 
+					0);
+	parallel_vbox = gtk_vbox_new(FALSE, 0);
+	g_signal_connect(GTK_OBJECT(parallel_vbox), "destroy",
+			   G_CALLBACK(on_parallel_tab_destroy),
+			   NULL);
+	gtk_widget_show(parallel_vbox);
+	gtk_box_pack_start(GTK_BOX(widgets.page), parallel_vbox, TRUE, TRUE,
 			   0);
 	toolbar29 = create_nav_toolbar();
 	gtk_widget_show(toolbar29);
-	gtk_box_pack_start(GTK_BOX(vboxInt), toolbar29, FALSE, FALSE,
-			   0);
+	gtk_box_pack_start(GTK_BOX(parallel_vbox), toolbar29, FALSE, FALSE, 0);
+	
 #ifdef OLD_NAVBAR
 	navbar.key = g_strdup(settings.currentverse);
 	navbar.module_name = g_strdup(settings.parallel1Module);	   
@@ -663,7 +689,7 @@ GtkWidget *create_parallel_dialog(void)
 	frame = gtk_frame_new(NULL);
 	gtk_widget_show(frame);	
 	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);	
-	gtk_box_pack_start(GTK_BOX(vboxInt), frame, TRUE, TRUE,0);
+	gtk_box_pack_start(GTK_BOX(parallel_vbox), frame, TRUE, TRUE, 0);
 	
 	eventbox = gtk_event_box_new ();
 	gtk_widget_show (eventbox);
@@ -680,7 +706,7 @@ GtkWidget *create_parallel_dialog(void)
 #else
 	scrolled_window = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolled_window);	
-	gtk_box_pack_start(GTK_BOX(vboxInt), scrolled_window, TRUE, TRUE,0);
+	gtk_box_pack_start(GTK_BOX(parallel_vbox), scrolled_window, TRUE, TRUE,0);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_ALWAYS);
@@ -692,40 +718,45 @@ GtkWidget *create_parallel_dialog(void)
 	gtk_html_load_empty(GTK_HTML(widgets.html_parallel_dialog));
 	gtk_container_add(GTK_CONTAINER(scrolled_window),
 			  widgets.html_parallel_dialog);
+			  
+	g_signal_connect(GTK_OBJECT(widgets.html_parallel_dialog), "link_clicked",
+				G_CALLBACK(gui_link_clicked),
+				NULL);
+	g_signal_connect(GTK_OBJECT(widgets.html_parallel_dialog), "on_url",
+				G_CALLBACK(gui_url),
+				GINT_TO_POINTER(TEXT_TYPE));		    
+	g_signal_connect(GTK_OBJECT(widgets.html_parallel_dialog),"button_release_event",
+				G_CALLBACK(on_text_button_release_event),
+				NULL);
+	g_signal_connect(GTK_OBJECT(widgets.html_parallel_dialog), "button_press_event",
+				G_CALLBACK(on_text_button_press_event),
+				NULL);
+	
 	g_signal_connect(GTK_OBJECT(widgets.html_parallel_dialog),
 			 "button_release_event",
 			 G_CALLBACK (_popupmenu_requested_cb),
 			 NULL);
-#endif
-	dialog_action_area25 =
-	    GTK_DIALOG(dialog_parallel)->action_area;
-	gtk_object_set_data(GTK_OBJECT(dialog_parallel),
-			    "dialog_action_area25",
-			    dialog_action_area25);
-	gtk_widget_show(dialog_action_area25);
-	gtk_container_set_border_width(GTK_CONTAINER
-				       (dialog_action_area25), 10);
-
-	hbuttonbox4 = gtk_hbutton_box_new();
-	gtk_widget_show(hbuttonbox4);
-	gtk_box_pack_start(GTK_BOX(dialog_action_area25), hbuttonbox4,
-			   TRUE, TRUE, 0);
-	gtk_button_box_set_layout(GTK_BUTTON_BOX(hbuttonbox4),
-				  GTK_BUTTONBOX_END);
-
-	btnDockInt = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
-	gtk_widget_show(btnDockInt);
-	gtk_container_add(GTK_CONTAINER(hbuttonbox4), btnDockInt);
-	GTK_WIDGET_SET_FLAGS(btnDockInt, GTK_CAN_DEFAULT);
-
-
-	g_signal_connect(GTK_OBJECT(dialog_parallel), "destroy",
-			   G_CALLBACK(on_dlgparallel_destroy),
-			   NULL);
-	g_signal_connect(GTK_OBJECT(btnDockInt), "clicked",
-			   G_CALLBACK(gui_btnDockInt_clicked),
-			   NULL);
-	return dialog_parallel;
+#endif	
+	gtk_widget_hide(widgets.hpaned);
+	return parallel_vbox;
+	
 }
+
+
+GtkWidget *gui_create_parallel_tab(void)
+{
+	settings.dockedInt = FALSE;	
+	return _create_parallel_tab();
+}
+
+
+void gui_destroy_parallel_tab(void)
+{
+	settings.dockedInt = TRUE;
+	gtk_widget_destroy(parallel_vbox);
+	gtk_widget_show(widgets.hpaned);
+}
+
+#endif /*  USE_PARALLEL_TAB  */
 
 /******   end of file   ******/

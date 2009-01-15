@@ -36,6 +36,7 @@ struct _passage_tab_info {
 	GtkWidget *button_close;
 	GtkWidget *close_pixmap;
 	GtkWidget *editor;
+	GtkWidget *paratab;
 	gchar *text_mod;
 	gchar *commentary_mod;
 	gchar *dictlex_mod;
@@ -55,6 +56,7 @@ struct _passage_tab_info {
 	gboolean showcomms;
 	gboolean showdicts;
 	gboolean showbookeditor;
+	gboolean showparallel;
 };
 
 extern PASSAGE_TAB_INFO *cur_passage_tab; //need to update this every time one of the variables changes (i.e. new verse selected)
@@ -65,6 +67,7 @@ void gui_set_tab_label(const gchar *key, gboolean one_tab);
 void gui_set_named_tab_label(const gchar *key, PASSAGE_TAB_INFO *pt, gboolean update);
 void gui_open_module_in_new_tab(gchar *module);
 void gui_open_passage_in_new_tab(gchar *key);
+void gui_open_parallel_view_in_new_tab(void);
 void gui_close_passage_tab(gint pagenum);
 void gui_update_tab_struct(const gchar * text_mod, 
 			   const gchar * commentary_mod, 

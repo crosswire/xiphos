@@ -321,7 +321,7 @@ void main_load_g_ops_parallel(GtkWidget *menu)
 
 	tmp = backend->get_module_options();
 	while(tmp) {
-		GS_message(((gchar *) tmp->data));
+		//GS_message(((gchar *) tmp->data));
 		item =
 		       gtk_check_menu_item_new_with_label(
 					(gchar *) tmp->data);
@@ -1255,7 +1255,9 @@ void main_update_parallel_page_detached(void)
 	mod_name[4] = (parallel5 ? settings.parallel5Module : space);
 
 #ifdef USE_GTKMOZEMBED
+	GS_message(("USE_GTKMOZEMBED1"));
 	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.html_parallel_dialog))) return;
+	GS_message(("USE_GTKMOZEMBED2"));
 	GeckoHtml *html = GECKO_HTML(widgets.html_parallel_dialog);
 	gecko_html_open_stream(html,"text/html");
 #else

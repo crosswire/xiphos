@@ -33,6 +33,8 @@ struct  _app_widgets {
 		*vboxMain, /*  */
 		*page, /*  */
 		*epaned, /* sidebar bar and main panle */
+		*paned_sidebar, /*pane to show previewer in sidebar bar */
+		*box_side_preview, /* box for packing previewer in side bar */
 		*vpaned, /* bible/previewer paned */
 		*vpaned2, /* commentary/dictionary paned */
 		*hpaned, /* bible/commentary paned */
@@ -54,6 +56,7 @@ struct  _app_widgets {
 		*vbox_text,  /* vbox for  */
 		*box_dict,
 		*vbox_previewer,
+		*previewer,
 	    
 	/* dock/undock stuff */
 		*dock_sb, /* dock for shortcut bar */
@@ -104,7 +107,9 @@ struct  _app_widgets {
 		
 	/* popup menu item widgets */
                 *viewtexts_item, /* widget to access toggle menu - for showtexts */
-		*viewpreview_item, 
+		*viewpreview_item,
+		*parallel_tab_item, 
+		*side_preview_item,
                 *viewcomms_item, /* widget to access toggle menu - for showcommss */
                 *viewdicts_item, /* widget to access toggle menu - for showdicts */
 		*versestyle_item,	/* widget to access toggle menu - for versestyle */

@@ -79,6 +79,30 @@ void on_undockInt_activate(GtkMenuItem * menuitem)
 }
 
 
+
+/******************************************************************************
+ * Name
+ *   on_paratab_activate
+ *
+ * Synopsis
+ *   #include "gui/parallel_view.h
+ *
+ *   void on_paratab_activate(GtkMenuItem *menuitem)
+ *
+ * Description
+ *   open parallel view in a tab
+ *
+ * Return value
+ *   void
+ */
+
+void on_paratab_activate(GtkMenuItem * menuitem)
+{
+	gui_open_parallel_view_in_new_tab();
+}
+
+
+
 /******************************************************************************
  * Name
  *   on_changeint1mod_activate
@@ -235,6 +259,7 @@ void gui_popup_menu_parallel(void)
 	GtkAccelGroup *pmInt_accels;
 	GtkWidget *copy7;
 	GtkWidget *undockInt;
+	GtkWidget *paratab;
 	GtkWidget *module_options;
 	GtkWidget *separator2;
 	GtkTooltips *tooltips;	
@@ -256,6 +281,16 @@ void gui_popup_menu_parallel(void)
 	undockInt = gtk_menu_item_new_with_label(_("Detach/Attach"));
 	gtk_widget_show(undockInt);
 	gtk_container_add(GTK_CONTAINER(menu), undockInt);
+/*
+#ifdef USE_PARALLEL_TAB
+	paratab = gtk_menu_item_new_with_label(_("Open in tab"));
+	gtk_widget_show(paratab);
+	gtk_container_add(GTK_CONTAINER(menu), paratab);
+	
+	g_signal_connect(GTK_OBJECT(paratab), "activate",
+			   G_CALLBACK(on_paratab_activate),
+			   &settings);
+#endif *//*  USE_PARALLEL_TAB  */
 
 	module_options =
 	    gtk_menu_item_new_with_label(_("Module Options"));
@@ -287,15 +322,13 @@ void gui_popup_menu_parallel(void)
 /*	g_signal_connect(GTK_OBJECT(copy7), "activate",
 			   G_CALLBACK(gui_copyhtml_activate),
 			   NULL);*/
+	
 	g_signal_connect(GTK_OBJECT(undockInt), "activate",
 			   G_CALLBACK(on_undockInt_activate),
 			   &settings);
-
 	
 	gtk_menu_popup((GtkMenu*)menu, NULL, NULL, NULL, NULL, 0,
 		     			gtk_get_current_event_time());
-	//gtk_widget_destroy(menu1);
-//	g_free(ops);
 }
 
 
