@@ -358,7 +358,7 @@ static void sync_with_main (GtkToggleButton * button, gpointer data)
 		gchar *url =
 		    g_strdup_printf("gnomesword.url?action=showParallel&"
 					"type=verse&value=%s",
-					main_url_encode(xml_get_value("keys", "verse")));
+					main_url_encode(settings.currentverse)); // xml_get_value("keys", "verse")));
 		main_url_handler(url, TRUE);
 		g_free(url);
 	}
