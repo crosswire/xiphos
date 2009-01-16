@@ -64,11 +64,11 @@ void gui_attach_detach_sidebar(void)
 		widgets.dock_sb = create_sidebar_dialog();
 		gtk_widget_reparent(widgets.shortcutbar, vbox_dock);
 		settings.showshortcutbar = TRUE;
-		gtk_widget_show(widgets.shortcutbar);
+		gtk_widget_show_all(widgets.shortcutbar);
 		gtk_paned_set_position(GTK_PANED(widgets.epaned), 0);
 		gtk_paned_set_position(GTK_PANED(widgets.hpaned),
 				       biblepanesize);
-		gtk_widget_show(widgets.dock_sb);
+		gtk_widget_show_all(widgets.dock_sb);
 	} else {
 		settings.docked = TRUE;
 		biblepanesize =

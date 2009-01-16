@@ -619,9 +619,8 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 				old_page);
 #endif /*  USE_PARALLEL_TAB  */
 		gtk_notebook_set_current_page (GTK_NOTEBOOK
-					      (widgets.
-					       notebook_bible_parallel),
-					      0);
+				(widgets.notebook_bible_parallel),
+				0);
 	}
 
 	if (!g_utf8_collate(cap, _("Commentaries"))) {

@@ -1395,11 +1395,13 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 			   "button_release_event",
 			   G_CALLBACK (paned_button_release_event),
 			   (gchar *) "paned_sidebar");
+	widgets.shortcutbar = widgets.paned_sidebar;
+	
 #else
 	gtk_paned_pack1(GTK_PANED(paned), vbox1, FALSE, TRUE);
+	widgets.shortcutbar = vbox1;
 
 #endif /*  USE_PARALLEL_TAB  */
-	widgets.shortcutbar = vbox1;
 
 	/* ---------------------------------------------------------------- */
 	/* 2x2 button box set: modules/bookmarks/search/vlist */
