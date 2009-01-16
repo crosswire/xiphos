@@ -1255,8 +1255,13 @@ gui_create_main_menu(GtkWidget * app)
 	widgets.showversenum_item = view1_menu_uiinfo[10].widget;
 	widgets.versehighlight_item = view1_menu_uiinfo[11].widget;
 #ifdef USE_PARALLEL_TAB	
+#ifdef USE_GTKMOZEMBED
 	widgets.parallel_tab_item = view1_menu_uiinfo[16].widget;
 	widgets.side_preview_item = view1_menu_uiinfo[17].widget;
+#else /* USE_GTKMOZEMBED */
+	widgets.parallel_tab_item = view1_menu_uiinfo[15].widget;
+	widgets.side_preview_item = view1_menu_uiinfo[16].widget;
+#endif /* USE_GTKMOZEMBED */
 #endif /*  USE_PARALLEL_TAB  */	
 	gtk_widget_hide(edit1_menu_uiinfo[0].widget);	/* disable Copy */
 	gtk_widget_hide(edit1_menu_uiinfo[1].widget);	/* disable Copy */
