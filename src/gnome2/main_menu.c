@@ -528,6 +528,7 @@ static void
 on_parallel_tab_activate(GtkCheckMenuItem * menuitem,
 			   gpointer user_data)
 {
+	if(!settings.browsing) return;
 	if(!settings.showparatab && !menuitem->active) {
 		xml_set_value("GnomeSword", "misc", "showparatab", "0");
 		return;

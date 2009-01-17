@@ -876,6 +876,54 @@ static int show_module_and_key(const char * module, const char * key,
 }
 
 
+ /******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "main/url.hh"
+ *
+ *   gint (const gchar * type, const gchar * value, 
+			gboolean clicked)
+ *
+ * Description
+ *  
+ *
+ * Return value
+ *   gint
+ */ 
+ 
+static gint show_in_previewer(const gchar * url)
+{	
+	
+	gchar **work_buf = NULL;       
+	gchar *modbuf_viewer = NULL;
+	const gchar *modbuf = NULL;
+	gchar *mybuf = NULL;
+	guint delay;	
+	guint i;	
+
+	work_buf = g_strsplit (url,"/",4);
+	//GS_message(("work_buf :%s, %s",work_buf[MODULE],work_buf[KEY]));	
+	
+	mybuf = main_get_rendered_text(work_buf[MODULE], work_buf[KEY]);
+	
+	if (mybuf) {
+		main_information_viewer(  
+				(gchar*)work_buf[MODULE], 
+				mybuf, 
+				(gchar*)work_buf[KEY], 
+				NULL,
+				NULL,
+				NULL,
+				NULL);
+		g_free(mybuf);
+	}
+	g_strfreev(work_buf);
+	return 1;
+}
+
+
 /******************************************************************************
  * Name
  *   sword_uri
@@ -911,7 +959,10 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 	char *mykey;
 		
 	if(!clicked) {
-		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), url);
+		if(g_strstr_len(url, 24, "WebstersLinked"))
+			show_in_previewer(url);			
+		else
+			gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), url);
 		return 1;
 	}
 	
@@ -1163,6 +1214,16 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 gint main_url_handler_gecko(const gchar * url)
 {
 	gchar* url_work = g_strdup(url);;
+	int retval = 0;		// assume failure.
+	
+	if (strstr(url, "sword://")) {
+		GString *url_clean = hex_decode(url);
+		GS_message(("main_url_handler_gecko: url_clean = %s", url_clean->str));
+		
+		retval = sword_uri(url_clean->str, 0);
+		g_string_free(url_clean, TRUE);
+		return retval;
+	}
 	
 	if (strstr(url_work, "passagestudy.jsp") ||
 	    strstr(url_work, "gnomesword.url")) {

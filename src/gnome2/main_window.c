@@ -939,11 +939,12 @@ void create_mainwindow(void)
 	gtk_container_set_border_width (GTK_CONTAINER (widgets.vbox_previewer), 1);
 	gtk_paned_pack2(GTK_PANED(widgets.vpaned), widgets.vbox_previewer, TRUE, TRUE);
 	
-	widgets.previewer = gtk_vbox_new(FALSE, 0);
+	widgets.previewer = gtk_vbox_new(FALSE, 6);
 	gtk_widget_show(widgets.previewer);
 	gtk_box_pack_start(GTK_BOX(widgets.vbox_previewer), widgets.previewer, 
 				TRUE, TRUE,
 			   	0);
+	gtk_container_set_border_width(GTK_CONTAINER(widgets.previewer), 2);
 	
 #ifdef USE_GTKMOZEMBED 
 	frame = gtk_frame_new(NULL);

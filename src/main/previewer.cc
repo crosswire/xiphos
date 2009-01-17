@@ -168,40 +168,39 @@ void main_information_viewer(const gchar * mod_name, const gchar * text, const g
 
 	str = g_string_new(tmp_str->str);
 	
-#ifdef USE_PARALLEL_TAB	
-	if(!settings.show_previewer_in_sidebar) {
-#endif /*  USE_PARALLEL_TAB  */	
-		if (type) {
-			if (!strcmp(type, "n")) {
-				g_string_printf(tmp_str,
-						"<font color=\"grey\">%s<HR></font><br>",
-						_("Footnote"));
-				str = g_string_append(str, tmp_str->str);
-			}
-			if (!strcmp(type, "x")) {
-				g_string_printf(tmp_str,
-						"<font color=\"grey\">%s<HR></font><br>",
-						_("Cross Reference"));
-				str = g_string_append(str, tmp_str->str);
-			}
-			if (!strcmp(action, "showStrongs")) {	//&& !strcmp(type,"Greek")
-				g_string_printf(tmp_str,
-						"<font color=\"grey\">%s: %s<HR></font><br>",
-						_("Strongs"), key);
-				str = g_string_append(str, tmp_str->str);
-			}
-			if (!strcmp(action, "showMorph")) {	//&& !strcmp(type,"Greek")
-				g_string_printf(tmp_str,
-						"<font color=\"grey\">%s: %s<HR></font><br>",
-						_("Morphology"), key);
-				str = g_string_append(str, tmp_str->str);
-			}
+	if (type) {
+		if (!strcmp(type, "n")) {
+			g_string_printf(tmp_str,
+					"<font color=\"grey\">%s<HR></font><br>",
+					_("Footnote"));
+			str = g_string_append(str, tmp_str->str);
 		}
-#ifdef USE_PARALLEL_TAB	
+		if (!strcmp(type, "x")) {
+			g_string_printf(tmp_str,
+					"<font color=\"grey\">%s<HR></font><br>",
+					_("Cross Reference"));
+			str = g_string_append(str, tmp_str->str);
+		}
+		if (!strcmp(action, "showStrongs")) {	//&& !strcmp(type,"Greek")
+			g_string_printf(tmp_str,
+					"<font color=\"grey\">%s: %s<HR></font><br>",
+					_("Strongs"), key);
+			str = g_string_append(str, tmp_str->str);
+		}
+		if (!strcmp(action, "showMorph")) {	//&& !strcmp(type,"Greek")
+			g_string_printf(tmp_str,
+					"<font color=\"grey\">%s: %s<HR></font><br>",
+					_("Morphology"), key);
+			str = g_string_append(str, tmp_str->str);
+		}
+	} else {
+		g_string_printf(tmp_str,
+					"<font color=\"grey\">%s: %s<HR></font><br>",
+					mod_name, key);
+			str = g_string_append(str, tmp_str->str);
 	}
-#endif /*  USE_PARALLEL_TAB  */	
 
-	if (!strcmp(action, "showStrongsMorph")) {	//&& !strcmp(type,"Greek")
+	if (action && (!strcmp(action, "showStrongsMorph"))) {	//&& !strcmp(type,"Greek")
 		g_string_printf(tmp_str,
 				"<font color=\"grey\">%s: %s<HR></font>",
 				_("Strongs"), key);
