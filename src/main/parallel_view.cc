@@ -282,6 +282,7 @@ void main_set_parallel_module_global_options(GtkCheckMenuItem * menuitem,
 
 void main_set_parallel_options_at_start(void)
 {
+	char *value;
 	SWMgr *mgr = backend_p->get_display_mgr();
 
 	GList *tmp = backend->get_module_options();
@@ -289,7 +290,8 @@ void main_set_parallel_options_at_start(void)
 		char *option = g_strdup((char*)tmp->data);
 		g_strdelimit (option,"' ", '_');
 		//GS_message(("\n\n%s\n%s\n", (char*)tmp->data, option));
-		int choice = atoi(xml_get_value("parallel", option));
+		value = xml_get_value("parallel", option);
+		int choice = (value ? atoi(value) : 0);
 		mgr->setGlobalOption((char*)tmp->data, choice ? "On" : "Off");
 		g_free(option);
 		tmp = g_list_next(tmp); 
@@ -1062,9 +1064,13 @@ static void int_display(GtkHTML *html, gchar * key)
 	vkey.AutoNormalize(1);
 	vkey = key;
 
+#ifdef SWORD_MULTIVERSE
+	xverses = (vkey.getVerseMax());
+#else
 	xverses = (vkey.books[vkey.Testament()-1]
 				 [vkey.Book()-1].
 				 versemax[vkey.Chapter()-1]);
+#endif
 
 	// quick cache of modules and fonts.
 	mod_name[0] = (parallel1 ? settings.parallel1Module : NULL);
