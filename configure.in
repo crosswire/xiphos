@@ -46,6 +46,10 @@ dnl ***
 dnl Sword libs
 dnl ***
 PKG_CHECK_MODULES(SWORD, sword >= 1.5.11, , echo error: either no sword or sword not recent enough && exit 1)
+PKG_CHECK_MODULES(SWORD_MULTIVERSE, sword > 1.5.11, have_sword_multiverse=yes, have_sword_multiverse=no)
+if test "x$have_sword_multiverse" = xyes; then
+	export SWORD_CFLAGS="$SWORD_CFLAGS -DSWORD_MULTIVERSE"
+fi
 AC_SUBST(SWORD_LIBS)
 AC_SUBST(SWORD_CFLAGS)
 

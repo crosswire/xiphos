@@ -99,7 +99,11 @@ void main_navbar_set(NAVBAR navbar, const char * key)
 	char xbook = vkey.Book();
 	int xchapter = vkey.Chapter();
 	int xverse = vkey.Verse();
+#ifdef SWORD_MULTIVERSE
+	x = (vkey.getChapterMax());
+#else
 	x = (vkey.books[xtestament-1][xbook-1].chapmax);
+#endif
 	for(i=1; i <= x; i++) {
 		char *num = main_format_number(i);
 		gtk_list_store_append (GTK_LIST_STORE(chapter_store), &iter);
@@ -118,7 +122,11 @@ void main_navbar_set(NAVBAR navbar, const char * key)
 	xbook = vkey.Book();
 	xchapter = vkey.Chapter();
 	xverse = vkey.Verse();	
+#ifdef SWORD_MULTIVERSE
+	x = (vkey.getVerseMax());
+#else
 	x = (vkey.books[xtestament-1][xbook-1].versemax[xchapter-1]);
+#endif
 	for(i=1; i <= x; i++) {
 		char *num = main_format_number(i);
 		gtk_list_store_append (GTK_LIST_STORE(verse_store), &iter);
@@ -175,7 +183,13 @@ void main_navbar_fill_book_combo(NAVBAR navbar)
 				g_error_free (error);
 				continue;
 			}    */
+#ifdef SWORD_MULTIVERSE
+			key.Testament(1);
+			key.Book(i+1);
+			book = strdup((const char *) key.getBookName());
+#else
 			book = strdup((const char *) key.books[0][i].name);
+#endif
 			char *mykey = g_strdup_printf("%s 1:1",book);
 			if(!main_get_raw_text(navbar.module_name, mykey)){
 				GS_message(("book-out: %s",book));
@@ -210,7 +224,13 @@ void main_navbar_fill_book_combo(NAVBAR navbar)
 				g_error_free (error);
 				continue;
 			}    */
+#ifdef SWORD_MULTIVERSE
+			key.Testament(2);
+			key.Book(i+1);
+			book = strdup((const char *) key.getBookName());
+#else
 			book = strdup((const char *) key.books[1][i].name);
+#endif
 			char *mykey = g_strdup_printf("%s 1:1",book);
 			if(!main_get_raw_text(navbar.module_name, mykey)){
 				GS_message(("book-in: %s",book));

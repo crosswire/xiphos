@@ -318,7 +318,13 @@ void main_search_sidebar_fill_bounds_combos(void)
 				g_error_free (error);
 				continue;
 			}    */
+#ifdef SWORD_MULTIVERSE
+			key.Testament(1);
+			key.Book(i+1);
+			book = strdup((const char *) key.getBookName());
+#else
 			book = strdup((const char *) key.books[0][i].name);
+#endif
 			gtk_combo_box_append_text(GTK_COMBO_BOX(ss.entryUpper), book);
 			gtk_combo_box_append_text(GTK_COMBO_BOX(ss.entryLower), book);
 			++i;
@@ -341,7 +347,13 @@ void main_search_sidebar_fill_bounds_combos(void)
 				g_error_free (error);
 				continue;
 			}    */
+#ifdef SWORD_MULTIVERSE
+			key.Testament(2);
+			key.Book(i+1);
+			book = strdup((const char *) key.getBookName());
+#else
 			book = strdup((const char *) key.books[1][i].name);
+#endif
 			gtk_combo_box_append_text(GTK_COMBO_BOX(ss.entryUpper), book);
 			gtk_combo_box_append_text(GTK_COMBO_BOX(ss.entryLower), book);
 			++i;

@@ -502,7 +502,13 @@ static void add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
 				g_error_free(error);
 				continue;
 			}    */
+#ifdef SWORD_MULTIVERSE
+			key.Testament(1);
+			key.Book(j+1);
+			buf = strdup((gchar *) key.getBookName());
+#else
 			buf = strdup((gchar *) key.books[0][j].name);
+#endif
 			gchar *key = g_strdup_printf("book://%s/%s 1:1",
 						     mod_name, buf);
 			gtk_tree_store_append(GTK_TREE_STORE(model),
@@ -535,7 +541,13 @@ static void add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
 				g_error_free(error);
 				continue;
 			}    */
+#ifdef SWORD_MULTIVERSE
+			key.Testament(2);
+			key.Book(j+1);
+			buf = strdup((gchar *) key.getBookName());
+#else
 			buf = strdup((gchar *) key.books[1][j].name);
+#endif
 			gchar *key = g_strdup_printf("book://%s/%s 1:1",
 						     mod_name, buf);
 			gtk_tree_store_append(GTK_TREE_STORE(model),
