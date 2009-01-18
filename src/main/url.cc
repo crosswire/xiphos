@@ -958,8 +958,9 @@ static gint sword_uri(const gchar * url, gboolean clicked)
         GError **error;
 	char *mykey;
 		
-	if(!clicked) {
-		if(g_strstr_len(url, 24, "WebstersLinked"))
+	if (!clicked) {
+		if (g_strstr_len(url, 24, "WebstersLinked") ||
+		    g_strstr_len(url, 24, "NaveLinked"))
 			show_in_previewer(url);			
 		else
 			gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), url);
