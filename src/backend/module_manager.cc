@@ -510,7 +510,11 @@ GList *backend_module_mgr_list_remote_sources(void)
 	char *envhomedir = getenv(HOMEVAR);
 	SWBuf baseDir = (envhomedir) ? envhomedir : ".";
 	baseDir += "/.sword/InstallMgr";
-	InstallMgr *inst_mgr = new InstallMgr(baseDir);
+	InstallMgr *inst_mgr = new InstallMgr(baseDir,
+					      (StatusReporter *)0,
+					      (SWBuf)"ftp",
+					      (SWBuf)"gnomesword@gnomesword.org");
+	inst_mgr->setUserDisclaimerConfirmed(true);
 	
 	for (InstallSourceMap::iterator it =
 	     inst_mgr->sources.begin();
@@ -879,7 +883,11 @@ void backend_init_module_mgr(const char *dir,
 
 	GSStatusReporter *statusReporter = new GSStatusReporter();
 
-	installMgr = new InstallMgr(baseDir, statusReporter);
+	installMgr = new InstallMgr(baseDir,
+				    statusReporter,
+				    (SWBuf)"ftp",
+				    (SWBuf)"gnomesword@gnomesword.org");
+	installMgr->setUserDisclaimerConfirmed(true);
 }
 
 /******************************************************************************
