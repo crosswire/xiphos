@@ -32,6 +32,7 @@ typedef struct _settings SETTINGS;
 struct _settings {
 	char	
 		*gs_version,	 	/* GnomeSword version */
+		*path_to_mods,		/* one-time retrieval */
 		*MainWindowModule,	/* module to open at program startup  */
 		*CommWindowModule,	/* module to open at program startup  */
 		*DictWindowModule,	/* module to open at program startup  */

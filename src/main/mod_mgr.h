@@ -60,19 +60,27 @@ struct  _mms {
 };
 int main_module_mgr_index_mod(char * module_name);
 int main_module_mgr_delete_index_mod(char * module_name);
-void main_index_percent_update(char percent, void *userData);
+void main_index_percent_update(char percent,
+			       void *userData);
 char *main_module_mgr_set_sword_locale(const char *sys_locale);
-char *main_module_mgr_get_path_to_mods(void);
 void main_update_module_lists(void);
 MOD_MGR *mod_mgr_get_next_module(void);
-void update_install_status(long total, long done, const char *message);
+void update_install_status(long total,
+			   long done,
+			   const char *message);
 void update_install_progress(double fraction);
-GList *mod_mgr_list_local_modules(const char *dir, gboolean augment);
+GList *mod_mgr_list_local_modules(const char *dir,
+				  gboolean augment);
 GList *mod_mgr_list_remote_sources(void);
 GList *mod_mgr_list_local_sources(void);
-int mod_mgr_uninstall(const char *dir, const char *mod_name);
-int mod_mgr_remote_install(const char *dir, const char *source_name, const char *mod_name);
-int mod_mgr_local_install_module(const char *destdir, const char *srcdir, const char *mod_name);
+int mod_mgr_uninstall(const char *dir,
+		      const char *mod_name);
+int mod_mgr_remote_install(const char *dir,
+			   const char *source_name,
+			   const char *mod_name);
+int mod_mgr_local_install_module(const char *destdir,
+				 const char *srcdir,
+				 const char *mod_name);
 GList *mod_mgr_remote_list_modules(const char *source_name);
 int mod_mgr_refresh_remote_source(const char *source_name);
 void mod_mgr_init_config(void);
@@ -83,7 +91,9 @@ void mod_mgr_add_source(const char * vtype,
 			const char * caption, 
 			const char * source, 
 			const char * directory);
-void mod_mgr_init(const char *dir, gboolean augment);
+void mod_mgr_init(const char *dir,
+		  gboolean augment,
+		  gboolean regular);
 void mod_mgr_shut_down(void);
 void mod_mgr_terminate(void);
 

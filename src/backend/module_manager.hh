@@ -60,7 +60,6 @@ extern "C" {
 
 char *backend_mod_mgr_get_config_entry(char * module_name, char * entry);
 void backend_mod_mgr_init_language_map(void);
-char *backend_module_mgr_get_path_to_mods(void);
 MOD_MGR *backend_module_mgr_get_next_module(void);
 GList *backend_module_mgr_list_remote_sources(void);
 GList *backend_module_mgr_list_local_sources(void);
@@ -74,7 +73,9 @@ int backend_remote_install_module(const char *destdir,
 int backend_uninstall_module(const char *dir, const char *mod_name);
 void backend_module_mgr_remote_list_modules_init(const char *source_name);
 int backend_module_mgr_refresh_remote_source(const char *source_name);
-void backend_init_module_mgr(const char *dir, gboolean augment);
+void backend_init_module_mgr(const char *dir,
+			     gboolean augment,
+			     gboolean regular);
 void backend_shut_down_module_mgr(void);
 void backend_terminate_module_mgr(void);
 void backend_init_module_mgr_config(void);
