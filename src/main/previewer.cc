@@ -55,6 +55,8 @@ extern "C" {
 #define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><STYLE type=\"text/css\"><!-- A { text-decoration:none } %s --></STYLE></head>"
 #define DOUBLE_SPACE " * { line-height: 2em ! important; }"
 
+using namespace std;
+
 /******************************************************************************
  * Name
  *   main_clear_viewer
@@ -237,8 +239,17 @@ void main_information_viewer(const gchar * mod_name, const gchar * text, const g
 	}
 
 #ifdef USE_GTKMOZEMBED
-	if (str->len)
-		gecko_html_write(html, str->str, str->len);
+	if (str->len) {
+		// manage too-large text blobs (e.g. NaveLinked "GOD, CREATOR").
+		int len = str->len, offset = 0, write_size;
+
+		while (len > 0) {
+			write_size = min(10000, len);
+			gecko_html_write(html, str->str+offset, write_size);
+			offset += write_size;
+			len -= write_size;
+		}
+	}
 	gecko_html_close(html);
 #else
 	if (str->len)
