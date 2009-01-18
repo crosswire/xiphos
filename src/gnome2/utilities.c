@@ -544,8 +544,7 @@ void gui_load_module_tree(GtkWidget * tree)
 		gtk_tree_store_set(store, &prayerlist, 0, _("Prayer List/Journal"));
 	}
 
-
-	tmp = mod_mgr_list_local_modules(main_get_path_to_mods(), TRUE);
+	tmp = mod_mgr_list_local_modules(settings.path_to_mods, TRUE);
 
 	language_make_list(tmp, store,
 			   text, commentary, map, image,

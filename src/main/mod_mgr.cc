@@ -110,12 +110,6 @@ char *main_module_mgr_set_sword_locale(const char *sys_locale) {
 	return retval;
 }
 
-char *main_module_mgr_get_path_to_mods(void)
-{
-	return backend_module_mgr_get_path_to_mods();
-}
-
-
 int main_module_mgr_index_mod(char * module_name)
 {
 	return backend->do_module_index(module_name, 0);
@@ -348,15 +342,14 @@ int mod_mgr_local_install_module(const char *destdir,
  *   GList *
  */
 
-GList *mod_mgr_list_local_modules(const char *dir, gboolean augment)
+GList *mod_mgr_list_local_modules(const char *dir,
+				  gboolean augment)
 {
 	GList *list = NULL;	
 	MOD_MGR *mod_info;
 	
-//	backend_delete_main_mgr();
-//	backend_init_main_mgr();
-	backend_init_module_mgr(dir, augment);
-	
+	backend_init_module_mgr(dir, augment, augment);
+
 	backend_module_mgr_list_local_modules_init(!augment);
 	while((mod_info = backend_module_mgr_get_next_module()) != NULL) {
 		list = g_list_append(list, (MOD_MGR*) mod_info);
@@ -477,9 +470,11 @@ void mod_mgr_add_source(const char * vtype,
  *   void
  */
 
-void mod_mgr_init(const char *dir, gboolean augment)
+void mod_mgr_init(const char *dir,
+		  gboolean augment,
+		  gboolean regular)
 {
-	backend_init_module_mgr(dir, augment);
+	backend_init_module_mgr(dir, augment, regular);
 }
 
 /******************************************************************************

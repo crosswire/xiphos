@@ -625,7 +625,6 @@ void main_init_backend(void)
 {
 	char *sys_locale = NULL;
 	const char *lang = getenv("LANG");
-	SWMgr mgr;
 	
 	if (!lang) lang="C";
 
@@ -634,10 +633,11 @@ void main_init_backend(void)
 	backend = new BackEnd();
 	backend->init_SWORD(0);
 	sword_locale = backend->set_sword_locale(lang);
+	settings.path_to_mods = main_get_path_to_mods();
 	GS_print(("%s sword-%s\n", _("Starting"), backend->get_sword_version()));
 	GS_print(("%s\n", _("Initiating SWORD")));
-	GS_print(("%s: %s\n",_("path to sword"),mgr.prefixPath));
-	GS_print(("%s %s\n", _("System locale is"),lang));
+	GS_print(("%s: %s\n",_("path to sword"), settings.path_to_mods));
+	GS_print(("%s %s\n", _("System locale is"), lang));
 	GS_print(("%s %s\n", _("SWORD locale is"), sword_locale));
 	GS_print(("OLD_CODESET = %s\n\n", OLD_CODESET));
 	GS_print(("%s\n", _("Checking for SWORD Modules")));

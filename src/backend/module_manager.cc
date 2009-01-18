@@ -44,6 +44,7 @@
 #include "module_manager.hh"
 #include "backend/sword_main.hh"
 #include "main/mod_mgr.h"
+#include "main/settings.h"
 #include "main/sword.h"
 
 #ifdef DEBUG 
@@ -199,28 +200,6 @@ MOD_MGR *ModuleManager::getNextModule(void)
 
 */
 
-/******************************************************************************
- * Name
- *   backend_module_mgr_get_path_to_mods
- *
- * Synopsisg_message("module_manager.cc:515 Description=%s",mod_info->description);
- *   #include "backend/module_manager.hh"
- *
- *   char *backend_module_mgr_get_path_to_mods(void)
- *
- * Description
- *   
- *
- * Return value
- *   char*
- */
-
-char *backend_module_mgr_get_path_to_mods(void)
-{
-	char *path = mgr->prefixPath;
-	return g_strdup(path);
-}
-
 char *backend_mod_mgr_get_config_entry(char *module_name,
 				       const char *entry) {
 	SWModule *mod;
@@ -304,9 +283,9 @@ MOD_MGR *backend_module_mgr_get_next_module(void)
 			mod_info->is_images = (category && !strcmp(category, "Images"));
 
 			mod_info->old_version =
-			    backend_mod_mgr_get_config_entry(mod_info->name, "Version");
+			    backend_mod_mgr_get_config_entry(name, "Version");
 			mod_info->installed =
-			    backend_mod_mgr_is_module(mod_info->name);
+			    backend_mod_mgr_is_module(name);
 			mod_info->description = module->Description();
 			mod_info->locked = 
 			    ((module->getConfigEntry("CipherKey")) ? 1 : 0);
@@ -455,7 +434,7 @@ int backend_remote_install_module(const char *destdir,
 		return -1;
 	}
 
-	SWMgr dmgr((destdir ? destdir : main_get_path_to_mods()),
+	SWMgr dmgr((destdir ? destdir : settings.path_to_mods),
 		   true, 0, false, false);
 	return installMgr->installModule(&dmgr, 0, modName, is);
 }
@@ -481,7 +460,7 @@ int backend_local_install_module(const char *destdir,
 				 const char *srcdir,
 				 const char *mod_name)
 {
-        SWMgr lmgr((destdir ? destdir : main_get_path_to_mods()),
+        SWMgr lmgr((destdir ? destdir : settings.path_to_mods),
 		   true, 0, false, false);
 	return installMgr->installModule(&lmgr, srcdir, mod_name);
 }
@@ -510,15 +489,16 @@ GList *backend_module_mgr_list_remote_sources(void)
 	char *envhomedir = getenv(HOMEVAR);
 	SWBuf baseDir = (envhomedir) ? envhomedir : ".";
 	baseDir += "/.sword/InstallMgr";
-	InstallMgr *inst_mgr = new InstallMgr(baseDir
 #ifdef SWORD_MULTIVERSE
-					      ,
+	InstallMgr *inst_mgr = new InstallMgr(baseDir,
 					      (StatusReporter *)0,
 					      (SWBuf)"ftp",
 					      (SWBuf)"gnomesword@gnomesword.org"
-#endif
 					      );
 	inst_mgr->setUserDisclaimerConfirmed(true);
+#else
+	InstallMgr *inst_mgr = new InstallMgr(baseDir);
+#endif
 	
 	for (InstallSourceMap::iterator it =
 	     inst_mgr->sources.begin();
@@ -847,33 +827,26 @@ char *set_mod_mgr_locale(const char *sys_locale) {
  */
 
 void backend_init_module_mgr(const char *dir,
-			     gboolean augment)
+			     gboolean augment,
+			     gboolean regular)
 {
-	if (mgr)
-		delete mgr;
-	if (dir) {
-		if (augment) {
-			// normal case: this will include ~/.sword content.
-			mgr = new SWMgr(dir);
-		} else {
-			// local directory install special case.
-		        mgr = new SWMgr();
-			if (list_mgr)
-				delete list_mgr;
-		        list_mgr = new SWMgr(dir, true, 0, false, false);
-			// see template.  re-assert 3 of 4 defaults:
-			// autoload    -> true
-			// filtermgr   -> null
-			// multimod    -> false
-			// NON-DEFAULT:
-			// AUGMENTHOME -> FALSE
-			// because we do not want to include everything already
-			// installed as we prepare to do more installations.
-		}
+	// complicated overloading just to init a swmgr.
+	// beyond the directory, we send in 3 defaults plus "something."
+	// autoload    -> true
+	// filtermgr   -> null (0)
+	// multimod    -> false
+	// AUGMENTHOME -> are we setting the regular mgr?
+	//                then "as sent" ([a] total list or [b] per-area list)
+	//		  else "false for local install" (always per-area)
+
+	if (regular) {		// use main (regular) swmgr.
+		if (mgr)
+			delete mgr;
+	        mgr = new SWMgr(dir, true, 0, false, augment);
 	} else {
-		mgr = (augment
-		       ? new SWMgr()
-		       : new SWMgr(dir, true, 0, false, false));
+		if (list_mgr)
+			delete list_mgr;
+		list_mgr = new SWMgr(dir, true, 0, false, false);
 	}
 
 	const char *lang = getenv("LANG");	
@@ -887,15 +860,17 @@ void backend_init_module_mgr(const char *dir,
 
 	GSStatusReporter *statusReporter = new GSStatusReporter();
 
-	installMgr = new InstallMgr(baseDir,
-				    statusReporter
+	if (installMgr)
+		delete installMgr;
 #ifdef SWORD_MULTIVERSE
-				    ,
+	installMgr = new InstallMgr(baseDir,
+				    statusReporter,
 				    (SWBuf)"ftp",
-				    (SWBuf)"gnomesword@gnomesword.org"
-#endif
-				    );
+				    (SWBuf)"gnomesword@gnomesword.org");
 	installMgr->setUserDisclaimerConfirmed(true);
+#else
+	installMgr = new InstallMgr(baseDir, statusReporter);
+#endif
 }
 
 /******************************************************************************

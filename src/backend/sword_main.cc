@@ -1375,16 +1375,15 @@ void BackEnd::save_module_key(char *mod_name, char *key) {
 		g_free(confdir);
 
 		// second try: system location.
-		confdir = main_module_mgr_get_path_to_mods();
-		conffile = main_get_mod_config_file(mod_name, confdir);
+		conffile = main_get_mod_config_file(mod_name,
+						    settings.path_to_mods);
 
 		if (conffile) {
 			fullfilename = g_strdup_printf("%s/mods.d/%s",
-						       confdir, conffile);
-			g_free(confdir);
+						       settings.path_to_mods,
+						       conffile);
 			g_free(conffile);
 		} else {
-			g_free(confdir);
 			gui_generic_warning(_("Configuration not found"));
 			return;
 		}

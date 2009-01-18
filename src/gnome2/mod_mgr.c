@@ -121,7 +121,6 @@ static GtkWidget *button_remove_remote;
 
 static gboolean local;
 static const gchar *source;
-static gboolean dot_sword;
 static const gchar *destination;
 static gboolean have_configs;
 static gboolean have_changes;
@@ -392,7 +391,7 @@ remove_install_modules(GList * modules,
 			GS_print(("remove %s from %s\n", buf,
 				  (destination
 				   ? destination
-				   : main_get_path_to_mods())));
+				   : settings.path_to_mods)));
 			failed = mod_mgr_uninstall(destination, buf);
 			if (failed == -1) {
 				//mod_mgr_shut_down();
@@ -407,7 +406,7 @@ remove_install_modules(GList * modules,
 					  buf,
 					  (new_dest
 					   ? new_dest
-					   : main_get_path_to_mods())));
+					   : settings.path_to_mods)));
 				failed =
 				    mod_mgr_uninstall(new_dest, buf);
 			}
@@ -850,7 +849,9 @@ load_module_tree(GtkTreeView * treeview,
 	mod_mgr_shut_down();
 	while (gtk_events_pending())
 		gtk_main_iteration();
-	mod_mgr_init(destination, FALSE);
+	mod_mgr_init(destination, FALSE, TRUE);
+		// false => don't augment with ~/.sword.
+		// true => use the regular swmgr.
 
 	if (install) {
 		if (GTK_TOGGLE_BUTTON(radiobutton_source)->active) {
@@ -887,7 +888,8 @@ load_module_tree(GtkTreeView * treeview,
 			tmp = mod_mgr_remote_list_modules(source);
 		}
 	} else {
-		tmp = mod_mgr_list_local_modules(main_get_path_to_mods(), TRUE);
+		// we are doing maintenance on all modules.
+		tmp = mod_mgr_list_local_modules(settings.path_to_mods, TRUE);
 		// true -> we must have all modules available, incl. ~/.sword content.
 	}
 
@@ -898,7 +900,7 @@ load_module_tree(GtkTreeView * treeview,
 
 	if (install && !first_time_user) {
 		/* note the repository that is active */
-		if (remote_source == NULL)
+		if ((local == FALSE) && (remote_source == NULL))
 			remote_source = g_strdup(gtk_combo_box_get_active_text(
 						     GTK_COMBO_BOX(combo_entry2)));
 
@@ -1733,7 +1735,7 @@ on_notebook1_switch_page(GtkNotebook * notebook,
 		break;
 	case 1:
 		mod_mgr_shut_down();
-		mod_mgr_init(destination, FALSE);	
+		mod_mgr_init(destination, FALSE, TRUE);	
 		break;
 	case 2:
 		/* we already cleared progress bar */
@@ -1749,26 +1751,24 @@ on_notebook1_switch_page(GtkNotebook * notebook,
 		if (GTK_TOGGLE_BUTTON(radiobutton_dest)->active) {
 			destination =
 			    gtk_label_get_text(GTK_LABEL(label_home));
-			dot_sword = TRUE;
 		} else {
 			destination = NULL;
-			local = FALSE;
+			// local = FALSE;
 		}
 		mod_mgr_shut_down();
-		mod_mgr_init(destination, FALSE);
+		mod_mgr_init(destination, FALSE, TRUE);
 		load_module_tree(GTK_TREE_VIEW(treeview), TRUE);
 		break;
 	case 4:
 		if (GTK_TOGGLE_BUTTON(radiobutton_dest)->active) {
 			destination =
 			    gtk_label_get_text(GTK_LABEL(label_home));
-			dot_sword = TRUE;
 		} else {
 			destination = NULL;
-			local = FALSE;
+			// local = FALSE;
 		}
 		mod_mgr_shut_down();
-		mod_mgr_init(destination, FALSE);
+		mod_mgr_init(destination, FALSE, TRUE);
 		load_module_tree(GTK_TREE_VIEW(treeview2), FALSE);
 		break;
 	}
@@ -2403,7 +2403,7 @@ on_button7_clicked(GtkButton * button,
 		gtk_main_iteration();
 
 	mod_mgr_shut_down();
-	mod_mgr_init(destination, FALSE);
+	mod_mgr_init(destination, FALSE, TRUE);
 
 out:
 	working = FALSE;
@@ -2728,26 +2728,26 @@ set_controls_to_last_use(void)
 static void
 setup_ui_labels()
 {
-
-	GString *str = g_string_new(NULL);
-	gchar *path = NULL;
+	gchar *str;
 		
 	have_changes = FALSE;
-	g_string_printf(str, "%s/%s", settings.homedir,
-			".sword/InstallMgr/InstallMgr.conf");
-	if (!mod_mgr_check_for_file(str->str)) {
+	str = g_strdup_printf("%s/%s", settings.homedir,
+			      ".sword/InstallMgr/InstallMgr.conf");
+	if (!mod_mgr_check_for_file(str)) {
 		have_configs = FALSE;
 		mod_mgr_init_config();
 	}
-	have_configs = TRUE;
-	mod_mgr_init(NULL, TRUE);
-	g_string_printf(str, "%s/%s", settings.homedir, ".sword");
-	gtk_label_set_text(GTK_LABEL(label_home), str->str);
+	g_free(str);
 
-	path = main_module_mgr_get_path_to_mods();
-	gtk_label_set_text(GTK_LABEL(label_system), path);
-	if (access(path, W_OK) == -1) {
-		GS_print(("%s is write protected\n", path));
+	have_configs = TRUE;
+	mod_mgr_init(NULL, TRUE, TRUE);
+	str = g_strdup_printf("%s/%s", settings.homedir, ".sword");
+	gtk_label_set_text(GTK_LABEL(label_home), str);
+	g_free(str);
+
+	gtk_label_set_text(GTK_LABEL(label_system), settings.path_to_mods);
+	if (access(settings.path_to_mods, W_OK) == -1) {
+		GS_print(("%s is write protected\n", settings.path_to_mods));
 		gtk_widget_set_sensitive(label_system, FALSE);
 		gtk_widget_set_sensitive(radiobutton4, FALSE);
 	} else {
@@ -2756,8 +2756,6 @@ setup_ui_labels()
 	}
 	create_pixbufs();
 	load_source_treeviews();
-	g_string_free(str, TRUE);
-	g_free(path);
 }
 
 
@@ -2802,7 +2800,6 @@ create_module_manager_dialog(gboolean first_run)
 	GtkWidget *widget;
 	gint index = 0;
 	GString *str = g_string_new(NULL);
-	gchar *path = NULL;
 
 	glade_file = gui_general_user_file ("module-manager.glade", FALSE);
 	g_return_if_fail(glade_file != NULL);
@@ -2892,7 +2889,7 @@ create_module_manager_dialog(gboolean first_run)
 			 G_CALLBACK(on_button8_clicked), NULL);
 	
 	/* combo box entrys */
-	combo_entry1 = glade_xml_get_widget (gxml, "comboboxentry1"); /* local soruce */
+	combo_entry1 = glade_xml_get_widget (gxml, "comboboxentry1"); /* local source */
 	set_combobox(GTK_COMBO_BOX(combo_entry1));
 	combo_entry2 = glade_xml_get_widget (gxml, "comboboxentry2"); /* remote source */
 	set_combobox(GTK_COMBO_BOX(combo_entry2));

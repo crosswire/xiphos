@@ -1078,7 +1078,7 @@ void main_load_module_tree(GtkWidget * tree)
 				   COL_OFFSET, _("Prayer List/Journal"), -1);
 	}
 
-	tmp = mod_mgr_list_local_modules(main_get_path_to_mods(), TRUE);
+	tmp = mod_mgr_list_local_modules(settings.path_to_mods, TRUE);
 
 	language_make_list(tmp, store,
 			   text, commentary, map, image,
