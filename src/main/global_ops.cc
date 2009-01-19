@@ -395,6 +395,11 @@ GLOBAL_OPS *main_new_globals(gchar * mod_name)
 	    ? -1	// "unknown"; otherwise, it's like the others.
 	    : gui_of2tf(module_options[mod_name]["Image Content"].c_str());
 
+	ops->respect_font_faces =
+	    (*(module_options[mod_name]["Respect Font Faces"].c_str()) == '\0')
+	    ? -1	// "unknown"; otherwise, it's like the others.
+	    : gui_of2tf(module_options[mod_name]["Respect Font Faces"].c_str());
+
 	ops->commentary_by_chapter =
 	    gui_of2tf(module_options[mod_name]["Commentary by Chapter"].c_str());
 

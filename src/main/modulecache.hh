@@ -63,10 +63,11 @@ namespace ModuleCache {
 	static const int StrongsNumbers     = 0x0100;
 	static const int Xrefs              = 0x0200;
 	static const int Images             = 0x0400;
-	static const int VariantsAll        = 0x0800;
-	static const int VariantsPrimary    = 0x1000;
-	static const int VariantsSecondary  = 0x2000;
-	static const int CommentaryChapter  = 0x4000;
+	static const int RespectFontFaces   = 0x0800;
+	static const int VariantsAll        = 0x1000;
+	static const int VariantsPrimary    = 0x2000;
+	static const int VariantsSecondary  = 0x4000;
+	static const int CommentaryChapter  = 0x8000;
 
 	class CacheVerse {
 	public:

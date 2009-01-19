@@ -53,6 +53,7 @@ ConstructFlags(GLOBAL_OPS *ops)
 	flags |= (ops->strongs               ? StrongsNumbers : 0);
 	flags |= (ops->scripturerefs         ? Xrefs : 0);
 	flags |= (ops->image_content         ? Images : 0);
+	flags |= (ops->respect_font_faces    ? RespectFontFaces : 0);
 	flags |= (ops->variants_all          ? VariantsAll : 0);
 	flags |= (ops->variants_primary      ? VariantsPrimary : 0);
 	flags |= (ops->variants_secondary    ? VariantsSecondary : 0);
