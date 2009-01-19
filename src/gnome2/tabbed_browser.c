@@ -746,6 +746,7 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
 		page_change = FALSE;
 		return;
 	} 
+	
 	//sets the book mod and key
 	main_display_book(pt->book_mod, pt->book_offset);
 	comm_showing = settings.comm_showing;
@@ -961,7 +962,7 @@ void gui_open_passage_in_new_tab(gchar *verse_key)
 	main_add_tab_history_item((PASSAGE_TAB_INFO*)pt);
 	
 	passage_list = g_list_append(passage_list, (PASSAGE_TAB_INFO*)pt);	
-	set_current_tab(pt);
+	//set_current_tab(pt);
 	notebook_main_add_page(pt);
 	
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_main),
@@ -1118,7 +1119,7 @@ void gui_open_module_in_new_tab(gchar *module)
 	pt->book_offset = g_strdup_printf("%d",settings.book_offset);
 	
 	passage_list = g_list_append(passage_list, (PASSAGE_TAB_INFO*)pt);
-	set_current_tab(pt);
+	//set_current_tab(pt);
 	notebook_main_add_page(pt);
 	
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_main),
