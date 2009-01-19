@@ -950,11 +950,18 @@ void gui_open_passage_in_new_tab(gchar *verse_key)
 	pt->dictlex_key = g_strdup(settings.dictkey);
 	pt->book_offset = g_strdup_printf("%d",settings.book_offset);
 	pt->comm_showing = settings.comm_showing;
-
-	pt->showtexts   = settings.showtexts;
+	
+	if(cur_passage_tab && cur_passage_tab->showparallel) {
+		pt->showtexts   = 1;
+		pt->showcomms   = 1;
+		pt->showdicts   = 1;
+	} else {
+		pt->showtexts   = settings.showtexts;
+		pt->showcomms   = settings.showcomms;
+		pt->showdicts   = settings.showdicts;
+	}
+	
 	pt->showpreview = settings.showpreview;
-	pt->showcomms   = settings.showcomms;
-	pt->showdicts   = settings.showdicts;
 	pt->showparallel	= FALSE;
 
 	pt->history_items = 0;	
