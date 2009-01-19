@@ -1107,6 +1107,14 @@ static GnomeUIInfo module_options_menu_uiinfo[] = {
 	 NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
+	{ /* 14 */
+	 GNOME_APP_UI_TOGGLEITEM, N_("Respect Font Faces"),
+	 NULL,
+	 (gpointer) on_global_option,
+	 (gpointer) "Respect Font Faces",	/* not seen by user */
+	 NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_END
 };
 
@@ -1204,6 +1212,7 @@ void create_menu(void)
 	gtk_widget_hide(module_options_menu_uiinfo[11].widget);	// headings
 	gtk_widget_hide(module_options_menu_uiinfo[12].widget);	// variants
 	gtk_widget_hide(module_options_menu_uiinfo[13].widget);	// image content
+	gtk_widget_hide(module_options_menu_uiinfo[14].widget);	// respect font faces
 	gtk_widget_hide(menu1_uiinfo[7].widget);	// unlock_module
 #if defined(__CYGWIN__)
 	gtk_widget_hide(menu1_uiinfo[8].widget);	// read aloud
@@ -1335,6 +1344,11 @@ void create_menu(void)
 		gtk_widget_show(module_options_menu_uiinfo[13].widget);
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[13].
 				    widget)->active = ops->image_content;
+	}
+	if (ops->respect_font_faces != -1) {
+		gtk_widget_show(module_options_menu_uiinfo[14].widget);
+		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[14].
+				    widget)->active = ops->respect_font_faces;
 	}
 	if (main_has_cipher_tag(mod_name))
 		gtk_widget_show(menu1_uiinfo[7].widget);

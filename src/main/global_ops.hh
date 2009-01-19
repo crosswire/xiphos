@@ -44,9 +44,10 @@ struct  _global_ops {
 	gboolean variants_primary; 
 	gboolean variants_secondary;
 	gboolean variants_all; 
+	gboolean commentary_by_chapter;
 	gint module_type;
 	gint image_content;
-	gint commentary_by_chapter;
+	gint respect_font_faces;
 };
 
 int main_save_module_options(char * mod_name, const char * option, int choice);

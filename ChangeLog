@@ -2,11 +2,12 @@
 
 	* lots of ugly mod.mgr hacking, trying to rectify not handling
 	  showing what's installed in system area (/usr/share/sword).
+	* mod.opt, alter respect for internal font faces (bad Galaxie fonts).
 
 2009-01-17  karl <charcoal@users.sf.net>
 
 	* integrate Troy's patch for SWORD_MULTIVERSE (dv11n).
-	* small modifications to accommodate InstallMgr remote access requirements.
+	* small modifications to accommodate InstallMgr access requirements.
 
 2009-01-17  terry <tbiggs@users.sourceforge.net>
 
