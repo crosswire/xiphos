@@ -57,7 +57,8 @@ void on_load_tabs(GtkMenuItem * menuitem,
 		  gpointer user_data);
 void gui_create_main_menu(GtkWidget *app);
 void gui_install_menu_hints(GtkWidget *app);
-
+void gui_parallel_tab_activate(GtkCheckMenuItem * menuitem, gpointer user_data);
+	
 #ifdef __cplusplus
 }
 #endif

@@ -510,12 +510,12 @@ on_versehighlight_activate(GtkCheckMenuItem * menuitem,
 #ifdef USE_PARALLEL_TAB	
 /******************************************************************************
  * Name
- *  on_parallel_tab_activate
+ *  gui_parallel_tab_activate
  *
  * Synopsis
  *   #include "gui/main_menu.h"
  *
- *   void on_parallel_tab_activate(GtkMenuItem *menuitem, gpointer user_data)	
+ *   void gui_parallel_tab_activate(GtkMenuItem *menuitem, gpointer user_data)	
  *
  * Description
  *   toggle special current verse highlight.
@@ -524,8 +524,8 @@ on_versehighlight_activate(GtkCheckMenuItem * menuitem,
  *   void
  */
 
-static void
-on_parallel_tab_activate(GtkCheckMenuItem * menuitem,
+void
+gui_parallel_tab_activate(GtkCheckMenuItem * menuitem,
 			   gpointer user_data)
 {
 	if(!settings.browsing) return;
@@ -1338,11 +1338,13 @@ gui_create_main_menu(GtkWidget * app)
 			   G_CALLBACK(on_versehighlight_activate),
 			   NULL);
 			   
-#ifdef USE_PARALLEL_TAB	
+#ifdef USE_PARALLEL_TAB
+	/* signal connected later in gnome2/gnomesword.c 
 	g_signal_connect(GTK_OBJECT(widgets.parallel_tab_item),
 			   "toggled",
-			   G_CALLBACK(on_parallel_tab_activate),
+			   G_CALLBACK(gui_parallel_tab_activate),
 			   NULL);
+			   */
 	g_signal_connect(GTK_OBJECT(widgets.side_preview_item),
 			   "toggled",
 			   G_CALLBACK(on_side_preview_activate),

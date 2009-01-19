@@ -398,7 +398,7 @@ void gui_load_tabs(const gchar *filename)
 	gchar *tabs_dir, *file, *val;
 	gboolean error = FALSE;
 	gboolean back_compat_need_save = FALSE;
-
+	settings.showparatab = FALSE;
 	GList *tmp = NULL;
 	PASSAGE_TAB_INFO *pt = NULL, *pt_first = NULL;
 
@@ -489,6 +489,7 @@ void gui_load_tabs(const gchar *filename)
 									   0);
 								gtk_widget_hide(pt->paratab);
 								gui_parallel_tab_sync((gchar*)settings.currentverse);
+								settings.showparatab = TRUE;
 							}
 							else
 								pt->paratab = NULL;
