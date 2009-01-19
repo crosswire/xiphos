@@ -375,10 +375,12 @@ static gint show_separate_image(const gchar * filename, gboolean clicked)
 				modbuf = "Packard";
 		}
 	}
+	//GS_message(("modbuf = %s", modbuf));
 	if (clicked) {
 		main_display_dictionary(modbuf, (gchar*)svalue);		
 	} else {
 		mybuf = main_get_rendered_text(modbuf, (gchar*)svalue);
+		//GS_message(("mybuf = %s", mybuf));
 		if (mybuf) {
 			main_information_viewer(modbuf,
 					mybuf,
@@ -1263,10 +1265,12 @@ gint main_url_handler_gecko(const gchar * url)
 			show_strongs(stype, svalue, FALSE);
 		}
 		else if (strstr(action, "showMorph")) {
-			if (strstr(work_buf[1],"robinson")) 
+			/*if (strstr(work_buf[1],"robinson")) 
 				stype = "robinson";
 			else
-				stype = "packard";
+				stype = "packard";*/
+			stype = strchr(work_buf[1],'=');
+			++stype;
 			svalue = strchr(work_buf[2],'=');
 			++svalue;
 			GS_message(("type = %s", stype));
