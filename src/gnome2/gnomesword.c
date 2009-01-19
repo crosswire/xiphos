@@ -190,6 +190,14 @@ void frontend_display(void)
 		main_url_handler(url);
 		g_free(url);
 	}
+	/* must be set after tab stuff is done */
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+				       (widgets.parallel_tab_item),
+				       settings.showparatab);
+	g_signal_connect(GTK_OBJECT(widgets.parallel_tab_item),
+			   "toggled",
+			   G_CALLBACK(gui_parallel_tab_activate),
+			   NULL);
 	
 	if(settings.show_previewer_in_sidebar) 
 		gui_show_previewer_in_sidebar(1);
