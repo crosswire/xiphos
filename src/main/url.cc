@@ -961,7 +961,8 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 	char *mykey;
 		
 	if (!clicked) {
-		if (g_strstr_len(url, 24, "WebstersLinked") ||
+		if (g_strstr_len(url, 24, "Strongs") ||
+		    g_strstr_len(url, 24, "WebstersLinked") ||
 		    g_strstr_len(url, 24, "NaveLinked") ||
 		    g_strstr_len(url, 24, "Vines"))
 			show_in_previewer(url);			
