@@ -1752,7 +1752,7 @@ on_notebook1_switch_page(GtkNotebook * notebook,
 			destination =
 			    gtk_label_get_text(GTK_LABEL(label_home));
 		} else {
-			destination = NULL;
+			destination = settings.path_to_mods;
 			// local = FALSE;
 		}
 		mod_mgr_shut_down();
@@ -1764,7 +1764,7 @@ on_notebook1_switch_page(GtkNotebook * notebook,
 			destination =
 			    gtk_label_get_text(GTK_LABEL(label_home));
 		} else {
-			destination = NULL;
+			destination = settings.path_to_mods;
 			// local = FALSE;
 		}
 		mod_mgr_shut_down();
