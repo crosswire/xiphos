@@ -616,6 +616,9 @@ GtkWidget *gui_create_bible_pane(void)
 	g_signal_connect(GTK_OBJECT(widgets.html_text), "key_release_event",
 		    		G_CALLBACK (on_key_release_event),
 		    		NULL);				   
+	g_signal_connect(GTK_OBJECT(widgets.html_text),
+			 "url_requested",
+			 G_CALLBACK(url_requested), NULL);
 #endif
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
