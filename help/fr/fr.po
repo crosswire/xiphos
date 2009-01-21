@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: GnomeSword 2.4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-01-21 20:33+0100\n"
-"PO-Revision-Date: 2009-01-21 20:55+0100\n"
+"PO-Revision-Date: 2009-01-21 22:07+0100\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>>\n"
 "Language-Team: French <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -3811,7 +3811,7 @@ msgstr ""
 
 #: ../C/gnomesword.xml:18(title)
 msgid "The Personal Commentary Editor"
-msgstr "L\"éditeur de commentaires personnels"
+msgstr "L'éditeur de commentaires personnels"
 
 #: ../C/gnomesword.xml:37(para)
 msgid "Locationbar"
