@@ -1289,6 +1289,11 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 				   G_CALLBACK
 				   (on_text_button_press_event),
 				   (DIALOG_DATA *) vt);
+		g_signal_connect(GTK_OBJECT(vt->html),
+				   "url_requested",
+				   G_CALLBACK
+				   (url_requested),
+				   (DIALOG_DATA *) vt);
 	} else {
 		// * use gtktextview for right to left text * //
 		sprintf(file, "%s/fonts.conf", settings.gSwordDir);
@@ -1309,6 +1314,11 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 				   "button_release_event",
 				   G_CALLBACK
 				   (textview_button_release_event),
+				   (DIALOG_DATA *) vt);
+		g_signal_connect(GTK_OBJECT(vt->text),
+				   "url_requested",
+				   G_CALLBACK
+				   (url_requested),
 				   (DIALOG_DATA *) vt);
 	}
 
