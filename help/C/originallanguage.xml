@@ -11,12 +11,12 @@
     		<itemizedlist>
 			<listitem>
 				<para>
-        			StrongsHebrew Dictionary (or get StrongsRealHebrew from the Kleinpaste Repository)
+        			StrongsHebrew Dictionary (or get StrongsRealHebrew from the GnomeSword Repository)
 				</para>
 			</listitem>
 			<listitem>
 				<para>
-        			StrongsGreek Dictionary (or get StrongsRealGreek from the Kleinpaste Repository)
+        			StrongsGreek Dictionary (or get StrongsRealGreek from the GnomeSword Repository)
 				</para>
 			</listitem>
 			<listitem>
@@ -31,7 +31,7 @@
 			</listitem>
 		</itemizedlist>
 		<para>
-		From Kleinpaste Repository:
+		From GnomeSword Repository:
 		</para>
 		<itemizedlist>
 			<listitem>
@@ -89,7 +89,7 @@
 		<itemizedlist>
 			<listitem>
 				<para>   
-    				2TGreek (Kleinpaste Repository) : This module contains the entire Bible in Greek. It combines the LXX
+    				2TGreek (GnomeSword Repository) : This module contains the entire Bible in Greek. It combines the LXX
 				and Tischendorf8 NT into one easy-to-use module. In addition, it contains Strongs, Morphology,Greek Accents,
 				and primary/secondary readings. As with all modules that include Strongs, Gnomesword displays 2TGreek in 
 				beautiful interlinear form.
@@ -119,7 +119,7 @@
 			</listitem>
 			<listitem>
 				<para>
-				TischMorph (Kleinpaste Repository) : As described above, this has Strongs, Morphology, accents, and alternate readings.
+				TischMorph (GnomeSword Repository) : As described above, this has Strongs, Morphology, accents, and alternate readings.
 				</para>
 			</listitem>
 			<listitem>
