@@ -105,7 +105,7 @@ static void set_global_variant(int manager,
  *   int
  */
 
-int main_save_module_options(char *mod_name,
+int main_save_module_options(const char *mod_name,
 			     const char *option,
 			     int choice)
 {

@@ -672,13 +672,36 @@ block_render(const char *text)
 }
 
 //
+// in-place removal of inconvenient-to-the-user content.
+//
+void
+CleanupContent(const char *text,
+	       GLOBAL_OPS *ops,
+	       char *name)
+{
+	if (ops->image_content == 0)
+		ClearImages((gchar *)text);
+	else if ((ops->image_content == -1) &&	// "unknown"
+		 (strcasestr(text, "<img ") != NULL)) {
+		ops->image_content = 1;		// now known.
+		main_save_module_options(name, "Image Content", 1);
+	}
+	if (ops->respect_font_faces == 0)
+		ClearFontFaces((gchar *)text);
+	else if ((ops->respect_font_faces == -1) &&	// "unknown"
+		 (strcasestr(text, "<font face=\"Galax") != NULL)) {
+		ops->respect_font_faces = 1;		// now known.
+		main_save_module_options(name, "Respect Font Faces", 1);
+	}
+}
+
+//
 // utility function to fill headers from verses.
 //
 void
 CacheHeader(ModuleCache::CacheVerse& cVerse,
 	    SWModule& mod,
-	    gint& image_content,
-	    gint& respect_font_faces)
+	    GLOBAL_OPS *ops)
 {
 	int x = 0;
 	gchar heading[8];
@@ -693,23 +716,7 @@ CacheHeader(ModuleCache::CacheVerse& cVerse,
 		preverse2 = mod.RenderText(preverse);
 		text = g_strdup_printf("<br><b>%s</b><br><br>",
 				       preverse2);
-
-		if (image_content == 0)
-			ClearImages(text);
-		else if ((image_content == -1) &&	// "unknown"
-			 (strcasestr(text, "<img ") != NULL)) {
-			image_content = 1;		// now known.
-			main_save_module_options(mod.Name(),
-						 "Image Content", 1);
-		}
-		if (respect_font_faces == 0)
-			ClearFontFaces(text);
-		else if ((respect_font_faces == -1) &&	// "unknown"
-			 (strcasestr(text, "<font face=\"Galax") != NULL)) {
-			respect_font_faces = 1;		// now known.
-			main_save_module_options(mod.Name(),
-						 "Respect Font Faces", 1);
-		}
+		CleanupContent(text, ops, mod.Name());
 
 		cVerse.AppendHeader(text);
 		g_free((gchar *)text);
@@ -782,22 +789,7 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule, gint mod_type)
 			rework = (strongs_or_morph
 				  ? block_render(imodule.RenderText())
 				  : imodule.RenderText());
-			if (ops->image_content == 0)
-				ClearImages((gchar *)rework);
-			else if ((ops->image_content == -1) &&	// "unknown"
-				 (strcasestr(rework, "<img ") != NULL)) {
-				ops->image_content = 1;		// now known.
-				main_save_module_options(imodule.Name(),
-							 "Image Content", 1);
-			}
-			if (ops->respect_font_faces == 0)
-				ClearFontFaces((gchar *)rework);
-			else if ((ops->respect_font_faces == -1) &&	// "unknown"
-				 (strcasestr(rework, "<font face=\"Galax") != NULL)) {
-				ops->respect_font_faces = 1;		// now known.
-				main_save_module_options(imodule.Name(),
-							 "Respect Font Faces", 1);
-			}
+			CleanupContent(rework, ops, imodule.Name());
 			cVerse.SetText(rework, cache_flags);
 		} else
 			rework = cVerse.GetText();
@@ -919,23 +911,7 @@ GTKEntryDisp::Display(SWModule &imodule)
 			rework = (strongs_or_morph
 				  ? block_render(imodule.RenderText())
 				  : imodule.RenderText());
-
-			if (ops->image_content == 0)
-				ClearImages((gchar *)rework);
-			else if ((ops->image_content == -1) &&	// "unknown"
-				 (strcasestr(rework, "<img ") != NULL)) {
-				ops->image_content = 1;		// now known.
-				main_save_module_options(imodule.Name(),
-							 "Image Content", 1);
-			}
-			if (ops->respect_font_faces == 0)
-				ClearFontFaces((gchar *)rework);
-			else if ((ops->respect_font_faces == -1) &&	// "unknown"
-				 (strcasestr(rework, "<font face=\"Galax") != NULL)) {
-				ops->respect_font_faces = 1;		// now known.
-				main_save_module_options(imodule.Name(),
-							 "Respect Font Faces", 1);
-			}
+			CleanupContent(rework, ops, imodule.Name());
 			cVerse.SetText(rework, cache_flags);
 		} else
 			rework = cVerse.GetText();
@@ -951,23 +927,7 @@ GTKEntryDisp::Display(SWModule &imodule)
 			rework = (strongs_or_morph
 				  ? block_render(imodule.RenderText())
 				  : imodule.RenderText());
-
-		if (ops->image_content == 0)
-			ClearImages((gchar *)rework);
-		else if ((ops->image_content == -1) &&	// "unknown"
-			 (strcasestr(rework, "<img ") != NULL)) {
-			ops->image_content = 1;		// now known.
-			main_save_module_options(imodule.Name(),
-						 "Image Content", 1);
-		}
-		if (ops->respect_font_faces == 0)
-			ClearFontFaces((gchar *)rework);
-		else if ((ops->respect_font_faces == -1) &&	// "unknown"
-			 (strcasestr(rework, "<font face=\"Galax") != NULL)) {
-			ops->respect_font_faces = 1;		// now known.
-			main_save_module_options(imodule.Name(),
-						 "Respect Font Faces", 1);
-		}
+		CleanupContent(rework, ops, imodule.Name());
 	}
 
 	swbuf.append(settings.imageresize
@@ -1060,23 +1020,7 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 			const char *text = (strongs_or_morph
 					    ? block_render((const char *)mod)
 					    : (const char *)mod);
-
-			if (ops->image_content == 0)
-				ClearImages((gchar *)text);
-			else if ((ops->image_content == -1) &&	// "unknown"
-				 (strcasestr(text, "<img ") != NULL)) {
-				ops->image_content = 1;		// now known.
-				main_save_module_options(mod->Name(),
-							 "Image Content", 1);
-			}
-			if (ops->respect_font_faces == 0)
-				ClearFontFaces((gchar *)text);
-			else if ((ops->respect_font_faces == -1) &&	// "unknown"
-				 (strcasestr(text, "<font face=\"Galax") != NULL)) {
-				ops->respect_font_faces = 1;		// now known.
-				main_save_module_options(imodule.Name(),
-							 "Respect Font Faces", 1);
-			}
+			CleanupContent(text, ops, imodule.Name());
 			cVerse.SetText(text, cache_flags);
 		}
 #endif
@@ -1154,23 +1098,7 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 			const char *text = (strongs_or_morph
 					    ? block_render((const char *)mod)
 					    : (const char *)mod);
-
-			if (ops->image_content == 0)
-				ClearImages((gchar *)text);
-			else if ((ops->image_content == -1) &&	// "unknown"
-				 (strcasestr(text, "<img ") != NULL)) {
-				ops->image_content = 1;		// now known.
-				main_save_module_options(mod->Name(),
-							 "Image Content", 1);
-			}
-			if (ops->respect_font_faces == 0)
-				ClearFontFaces((gchar *)text);
-			else if ((ops->respect_font_faces == -1) &&	// "unknown"
-				 (strcasestr(text, "<font face=\"Galax") != NULL)) {
-				ops->respect_font_faces = 1;		// now known.
-				main_save_module_options(imodule.Name(),
-							 "Respect Font Faces", 1);
-			}
+			CleanupContent(text, ops, imodule.Name());
 			cVerse.SetText(text, cache_flags);
 		}
 #endif
@@ -1269,23 +1197,7 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 			const char *text = (strongs_or_morph
 					    ? block_render((const char *)mod)
 					    : (const char *)mod);
-
-			if (ops->image_content == 0)
-				ClearImages((gchar *)text);
-			else if ((ops->image_content == -1) &&	// "unknown"
-				 (strcasestr(text, "<img ") != NULL)) {
-				ops->image_content = 1;		// now known.
-				main_save_module_options(mod->Name(),
-							 "Image Content", 1);
-			}
-			if (ops->respect_font_faces == 0)
-				ClearFontFaces((gchar *)text);
-			else if ((ops->respect_font_faces == -1) &&	// "unknown"
-				 (strcasestr(text, "<font face=\"Galax") != NULL)) {
-				ops->respect_font_faces = 1;		// now known.
-				main_save_module_options(imodule.Name(),
-							 "Respect Font Faces", 1);
-			}
+			CleanupContent(text, ops, imodule.Name());
 			cVerse.SetText(text, cache_flags);
 		}
 #endif
@@ -1507,6 +1419,7 @@ GTKChapDisp::Display(SWModule &imodule)
 	char *num;
 	const gchar *paragraphMark = NULL;
 	gchar *br = NULL;
+	const char *rework;	// for image size analysis rework.
 
 	char *ModuleName = imodule.Name();
 	ops = main_new_globals(ModuleName);
@@ -1577,44 +1490,24 @@ GTKChapDisp::Display(SWModule &imodule)
 		    [key->Verse()];
 
 		// use the module cache rather than re-accessing Sword.
-#if 1
-		if (!cVerse.CacheIsValid(cache_flags))
-			cVerse.SetText((strongs_or_morph
-					? block_render((const char *)imodule)
-					: (const char *)imodule),
-				       cache_flags);
-#else
 		if (!cVerse.CacheIsValid(cache_flags)) {
-			const char *text = (strongs_or_morph
-					    ? block_render((const char *)imodule)
-					    : (const char *)imodule);
-
-			if (ops->image_content == 0)
-				ClearImages((gchar *)text);
-			else if ((ops->image_content == -1) &&	// "unknown"
-				 (strcasestr(text, "<img ") != NULL)) {
-				ops->image_content = 1;		// now known.
-				main_save_module_options(imodule.Name(),
-							 "Image Content", 1);
-			}
-			if (ops->respect_font_faces == 0)
-				ClearFontFaces((gchar *)text);
-			else if ((ops->respect_font_faces == -1) &&	// "unknown"
-				 (strcasestr(text, "<font face=\"Galax") != NULL)) {
-				ops->respect_font_faces = 1;		// now known.
-				main_save_module_options(imodule.Name(),
-							 "Respect Font Faces", 1);
-			}
-			cVerse.SetText(text, cache_flags);
-		}
-#endif
+			rework = (strongs_or_morph
+				  ? block_render(imodule.RenderText())
+				  : imodule.RenderText());
+			CleanupContent(rework, ops, imodule.Name());
+			cVerse.SetText(rework, cache_flags);
+		} else
+			rework = cVerse.GetText();
 
 		if (!cVerse.HeaderIsValid())
-			CacheHeader(cVerse, imodule,
-				    ops->image_content, ops->respect_font_faces);
+			CacheHeader(cVerse, imodule, ops);
 
 		if (cache_flags & ModuleCache::Headings)
-			swbuf.append(cVerse.GetHeader());
+			swbuf.append(settings.imageresize
+				     ? AnalyzeForImageSize(cVerse.GetHeader(),
+							   GDK_WINDOW(gtkText->window),
+							   TEXT_TYPE)
+				     : cVerse.GetHeader() /* left as-is */);
 		else
 			cVerse.InvalidateHeader();
 
@@ -1672,7 +1565,7 @@ GTKChapDisp::Display(SWModule &imodule)
 		    (key->Verse() == curVerse)) {
 			GString *text = g_string_new(NULL);
 
-			g_string_printf(text, "%s", cVerse.GetText());
+			g_string_printf(text, "%s", rework);
 			if (!strcmp(text->str + text->len - 6, "<br />")) {
 				text->len -= 6;
 				*(text->str + text->len) = '\0';
@@ -1681,18 +1574,26 @@ GTKChapDisp::Display(SWModule &imodule)
 				text->len -= 4;
 				*(text->str + text->len) = '\0';
 			}
-			swbuf.append(text->str);
+			swbuf.append(settings.imageresize
+				     ? AnalyzeForImageSize(text->str,
+							   GDK_WINDOW(gtkText->window),
+							   TEXT_TYPE)
+				     : text->str /* left as-is */);
 			g_string_free(text, TRUE);
 		} else
-			swbuf.append(cVerse.GetText());
+			swbuf.append(settings.imageresize
+				     ? AnalyzeForImageSize(rework,
+							   GDK_WINDOW(gtkText->window),
+							   TEXT_TYPE)
+				     : rework /* left as-is */);
 
 		if (key->Verse() == curVerse) {
 			swbuf.append("</font>");
-			ReadAloud(curVerse, cVerse.GetText());
+			ReadAloud(curVerse, rework);
 		}
 
 		if (settings.versestyle) {
-			if (strstr(cVerse.GetText(), "<!p>")) {
+			if (strstr(rework, "<!p>")) {
 				newparagraph = TRUE;
 			} else {
 				newparagraph = FALSE;
@@ -1928,22 +1829,7 @@ DialogEntryDisp::DisplayByChapter(SWModule &imodule, gint mod_type)
 			rework = (strongs_or_morph
 				  ? block_render(imodule.RenderText())
 				  : imodule.RenderText());
-			if (ops->image_content == 0)
-				ClearImages((gchar *)rework);
-			else if ((ops->image_content == -1) &&	// "unknown"
-				 (strcasestr(rework, "<img ") != NULL)) {
-				ops->image_content = 1;		// now known.
-				main_save_module_options(imodule.Name(),
-							 "Image Content", 1);
-			}
-			if (ops->respect_font_faces == 0)
-				ClearFontFaces((gchar *)rework);
-			else if ((ops->respect_font_faces == -1) &&	// "unknown"
-				 (strcasestr(rework, "<font face=\"Galax") != NULL)) {
-				ops->respect_font_faces = 1;		// now known.
-				main_save_module_options(imodule.Name(),
-							 "Respect Font Faces", 1);
-			}
+			CleanupContent(rework, ops, imodule.Name());
 			cVerse.SetText(rework, cache_flags);
 		} else
 			rework = cVerse.GetText();
@@ -2030,23 +1916,7 @@ DialogEntryDisp::Display(SWModule &imodule)
 		// use the module cache rather than re-accessing Sword.
 		if (!cVerse.CacheIsValid(cache_flags)) {
 			rework = (const char *)imodule;
-
-			if (ops->image_content == 0)
-				ClearImages((gchar *)rework);
-			else if ((ops->image_content == -1) &&	// "unknown"
-				 (strcasestr(rework, "<img ") != NULL)) {
-				ops->image_content = 1;		// now known.
-				main_save_module_options(imodule.Name(),
-							 "Image Content", 1);
-			}
-			if (ops->respect_font_faces == 0)
-				ClearFontFaces((gchar *)rework);
-			else if ((ops->respect_font_faces == -1) &&	// "unknown"
-				 (strcasestr(rework, "<font face=\"Galax") != NULL)) {
-				ops->respect_font_faces = 1;		// now known.
-				main_save_module_options(imodule.Name(),
-							 "Respect Font Faces", 1);
-			}
+			CleanupContent(rework, ops, imodule.Name());
 			cVerse.SetText(rework, cache_flags);
 		} else
 			rework = cVerse.GetText();
@@ -2058,23 +1928,7 @@ DialogEntryDisp::Display(SWModule &imodule)
 			rework = imodule.getRawEntry();
 		else
 			rework = (const char *)imodule;
-
-		if (ops->image_content == 0)
-			ClearImages((gchar *)rework);
-		else if ((ops->image_content == -1) &&	// "unknown"
-			 (strcasestr(rework, "<img ") != NULL)) {
-			ops->image_content = 1;		// now known.
-			main_save_module_options(imodule.Name(),
-						 "Image Content", 1);
-		}
-		if (ops->respect_font_faces == 0)
-			ClearFontFaces((gchar *)rework);
-		else if ((ops->respect_font_faces == -1) &&	// "unknown"
-			 (strcasestr(rework, "<font face=\"Galax") != NULL)) {
-			ops->respect_font_faces = 1;		// now known.
-			main_save_module_options(imodule.Name(),
-						 "Respect Font Faces", 1);
-		}
+		CleanupContent(rework, ops, imodule.Name());
 	}
 
 	swbuf.append(settings.imageresize
@@ -2190,30 +2044,13 @@ DialogChapDisp::Display(SWModule &imodule)
 			const char *text = (strongs_or_morph
 					    ? block_render((const char *)imodule)
 					    : (const char *)imodule);
-
-			if (ops->image_content == 0)
-				ClearImages((gchar *)text);
-			else if ((ops->image_content == -1) &&	// "unknown"
-				 (strcasestr(text, "<img ") != NULL)) {
-				ops->image_content = 1;		// now known.
-				main_save_module_options(imodule.Name(),
-							 "Image Content", 1);
-			}
-			if (ops->respect_font_faces == 0)
-				ClearFontFaces((gchar *)text);
-			else if ((ops->respect_font_faces == -1) &&	// "unknown"
-				 (strcasestr(text, "<font face=\"Galax") != NULL)) {
-				ops->respect_font_faces = 1;		// now known.
-				main_save_module_options(imodule.Name(),
-							 "Respect Font Faces", 1);
-			}
+			CleanupContent(text, ops, imodule.Name());
 			cVerse.SetText(text, cache_flags);
 		}
 #endif
 
 		if (!cVerse.HeaderIsValid())
-			CacheHeader(cVerse, imodule,
-				    ops->image_content, ops->respect_font_faces);
+			CacheHeader(cVerse, imodule, ops);
 
 		if (cache_flags & ModuleCache::Headings)
 			swbuf.append(cVerse.GetHeader());
