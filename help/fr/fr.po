@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GnomeSword 2.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-30 22:01+0100\n"
-"PO-Revision-Date: 2008-12-30 22:24+0100\n"
+"POT-Creation-Date: 2009-01-21 20:33+0100\n"
+"PO-Revision-Date: 2009-01-21 20:55+0100\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>>\n"
 "Language-Team: French <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -24,20 +24,20 @@ msgstr "Ce manuel a été écrit par :"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/gnomesword.xml:34(None)
-msgid "@@image: 'figures/sword3.png'; md5=76fe43433b45275efb33c0fbcd2df2aa"
+msgid "@@image: 'figures/sword3.png'; md5=c07bf21f1faa092c00ecf8207d976277"
 msgstr "sword3.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/gnomesword.xml:63(None) ../C/gnomesword.xml:87(None)
-msgid "@@image: 'figures/interface.png'; md5=8a25b1bdc20db3e81a6ba9e2cb5bdf57"
+msgid "@@image: 'figures/interface.png'; md5=2327e5373a90c31a20d7e0b0cc904aae"
 msgstr "interface.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/gnomesword.xml:53(None)
 msgid ""
-"@@image: 'figures/first_start.png'; md5=b1cf2fbf2ed7b5673413cb3a03b79cb8"
+"@@image: 'figures/first_start.png'; md5=5d0bdb9bb066a0e3aca29f10cd7d5982"
 msgstr "first_start.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
@@ -45,7 +45,7 @@ msgstr "first_start.png"
 #: ../C/gnomesword.xml:18(None) ../C/interface.xml:18(None)
 msgid ""
 "@@image: 'figures/interface_menubar.png'; "
-"md5=26443985cb382f1440fa3c57812c7bbb"
+"md5=e565033e6a203b845ee4875c1d647057"
 msgstr "interface_menubar.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
@@ -53,23 +53,25 @@ msgstr "interface_menubar.png"
 #: ../C/gnomesword.xml:49(None)
 msgid ""
 "@@image: 'figures/interface_toolbar.png'; "
-"md5=a610ed8238edc5d246b4ed032f340e6a"
-msgstr "interface_toolbar.png"
+"md5=af22d3813ded59e152cac9f7d35635d9"
+msgstr "interface_toolbar.png "
+""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/gnomesword.xml:148(None)
 msgid ""
 "@@image: 'figures/interface_sidepane.png'; "
-"md5=1a9e0a7b0b1a74e35e49c56004988b37"
+"md5=d1783275662a57144b38d80c10688739"
 msgstr "interface_sidepane.png"
+""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/gnomesword.xml:174(None)
 msgid ""
 "@@image: 'figures/interface_shortcut.png'; "
-"md5=c4367cc81346aeb3d4e9a765094f987d"
+"md5=1be0299ec3584f5262a3a4950fee745f"
 msgstr "interface_shortcut.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
@@ -77,7 +79,7 @@ msgstr "interface_shortcut.png"
 #: ../C/gnomesword.xml:197(None)
 msgid ""
 "@@image: 'figures/interface_biblepane.png'; "
-"md5=45cfd86b8e00192bd27c55267767a23f"
+"md5=092f45c81f0cf6682ec36a451da243ce"
 msgstr "interface_biblepane.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
@@ -85,7 +87,7 @@ msgstr "interface_biblepane.png"
 #: ../C/gnomesword.xml:255(None)
 msgid ""
 "@@image: 'figures/interface_parallel.png'; "
-"md5=bb02332df19489715e71db724714a8d7"
+"md5=dbe32bdff5271afb087248f913363cce"
 msgstr "interface_parallel.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
@@ -93,7 +95,7 @@ msgstr "interface_parallel.png"
 #: ../C/gnomesword.xml:279(None)
 msgid ""
 "@@image: 'figures/interface_parallel-separate.png'; "
-"md5=dc7e04f323a3e2320d6162437898a56f"
+"md5=505d77a42b8598340c2ffaed6fc34a41"
 msgstr "interface_parallel-separate.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
@@ -101,7 +103,7 @@ msgstr "interface_parallel-separate.png"
 #: ../C/gnomesword.xml:398(None)
 msgid ""
 "@@image: 'figures/interface_biblepane-options.png'; "
-"md5=7469f6bfb046f10092f8cc55154a1e8e"
+"md5=16023367059854aed6c53b3fd0c34f33"
 msgstr "interface_biblepane-options.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
@@ -109,14 +111,14 @@ msgstr "interface_biblepane-options.png"
 #: ../C/gnomesword.xml:424(None)
 msgid ""
 "@@image: 'figures/interface_menubar-view.png'; "
-"md5=a814a8081455c2cab68198a78cb038b4"
-msgstr "interface_menubar.png"
+"md5=c7f5d6102b17e9df7d5f6063c2428bfe"
+msgstr "interface_menubar-view.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/gnomesword.xml:522(None)
 msgid ""
-"@@image: 'figures/interface_viewer.png'; md5=d0254ed1561f75acaa8beff53ff551b9"
+"@@image: 'figures/interface_viewer.png'; md5=e26c63cfa273aa2e1180d66fee1f1033"
 msgstr "interface_viewer.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
@@ -124,7 +126,7 @@ msgstr "interface_viewer.png"
 #: ../C/gnomesword.xml:562(None)
 msgid ""
 "@@image: 'figures/interface_commentarypane.png'; "
-"md5=6aefb41dbd52a44ba782f3128f0ab620"
+"md5=1142e8288deee464c1dcd51460bd2cce"
 msgstr "interface_commentarypane.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
@@ -132,7 +134,7 @@ msgstr "interface_commentarypane.png"
 #: ../C/gnomesword.xml:635(None)
 msgid ""
 "@@image: 'figures/interface_dictionary.png'; "
-"md5=759f9bff6efe6cfe280871abf83ecba2"
+"md5=d0d5561dae3d893d8287f22a1424ace4"
 msgstr "interface_dictionary.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
@@ -140,14 +142,14 @@ msgstr "interface_dictionary.png"
 #: ../C/gnomesword.xml:774(None)
 msgid ""
 "@@image: 'figures/gtkhtml3-vs-mozembed.png'; "
-"md5=8cb0c5fe67f45e009bd8f40f5609f573"
+"md5=deec924e49812ac32cfd027e53d2b193"
 msgstr "gtkhtml3-vs-mozembed.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/gnomesword.xml:12(None) ../C/preferences.xml:12(None)
 msgid ""
-"@@image: 'figures/preferences.png'; md5=c9a879ae421ec5346480c44ca27939b5"
+"@@image: 'figures/preferences.png'; md5=2e12d04c2d6bf4e857aeed16fb0213b5"
 msgstr "preferences.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
@@ -155,7 +157,7 @@ msgstr "preferences.png"
 #: ../C/gnomesword.xml:38(None)
 msgid ""
 "@@image: 'figures/preferences_fonts-color.png'; "
-"md5=dc41aa5fe0d76ca54af89cdb540b3607"
+"md5=48d21eae6efe78b745d063ca0d3094a8"
 msgstr "preferences_fonts-color.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
@@ -163,7 +165,7 @@ msgstr "preferences_fonts-color.png"
 #: ../C/gnomesword.xml:62(None)
 msgid ""
 "@@image: 'figures/preferences_fonts-misc.png'; "
-"md5=f5bef4700e6fb5395f4f5bd5ce4ef56a"
+"md5=44017ad5ee9d666eb8a6c85a27ad44ca"
 msgstr "preferences_fonts-misc.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
@@ -171,7 +173,7 @@ msgstr "preferences_fonts-misc.png"
 #: ../C/gnomesword.xml:100(None)
 msgid ""
 "@@image: 'figures/preferences_general-tabs.png'; "
-"md5=6de6361fa8d5b6cebc3b8509adc8039a"
+"md5=d6d30137f2bb1b26ace8fac0edf48203"
 msgstr "preferences_general-tabs.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
@@ -179,7 +181,7 @@ msgstr "preferences_general-tabs.png"
 #: ../C/gnomesword.xml:124(None)
 msgid ""
 "@@image: 'figures/preferences_general-misc.png'; "
-"md5=2a5ab4a22931b84829b1404e731fe3e7"
+"md5=a100cbdac54da698c5fee8b386f82b78"
 msgstr "preferences_general-misc.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
@@ -187,7 +189,7 @@ msgstr "preferences_general-misc.png"
 #: ../C/gnomesword.xml:176(None)
 msgid ""
 "@@image: 'figures/preferences_modules-main.png'; "
-"md5=4b62e4a3aa5f7ac0c57bc986ffaeb226"
+"md5=8100495250f0a100812a5907006a88ad"
 msgstr "preferences_modules-misc.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
@@ -195,7 +197,7 @@ msgstr "preferences_modules-misc.png"
 #: ../C/gnomesword.xml:196(None)
 msgid ""
 "@@image: 'figures/preferences_modules-parallel.png'; "
-"md5=560f20f49760a8a3528282c0ca0cc22b"
+"md5=f880f02801dbc9e1673a2c50aad58ae1"
 msgstr "preferences_modules-parallel.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
@@ -203,41 +205,41 @@ msgstr "preferences_modules-parallel.png"
 #: ../C/gnomesword.xml:216(None)
 msgid ""
 "@@image: 'figures/preferences_modules-misc.png'; "
-"md5=debecf07d1cec94e2c50de2fe046d0dd"
+"md5=cf421f044c87d47185f3a85128d1786e"
 msgstr "preferences_modules-misc.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/gnomesword.xml:23(None) ../C/modules.xml:23(None)
-msgid "@@image: 'figures/module.png'; md5=dd737967d33b2dadb6b9a05bdb8fe46e"
+msgid "@@image: 'figures/module.png'; md5=c27ec45463d4c3d3765f35770c31414a"
 msgstr "module.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/gnomesword.xml:49(None)
 msgid ""
-"@@image: 'figures/sword_sources.png'; md5=79f7b71d48b8f79c4b9606438c1c9650"
+"@@image: 'figures/sword_sources.png'; md5=a1182919f9c770abd01edee116fc0f48"
 msgstr "sword_sources.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/gnomesword.xml:77(None)
 msgid ""
-"@@image: 'figures/sword_config.png'; md5=5941742eecb4d1cba508e5f9b1e28565"
+"@@image: 'figures/sword_config.png'; md5=4811d390ad124e63b4d7145fb3cba0ab"
 msgstr "sword_config.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/gnomesword.xml:146(None)
 msgid ""
-"@@image: 'figures/sword_install.png'; md5=40cd943805d7fa0f9124ad3c419356a7"
+"@@image: 'figures/sword_install.png'; md5=ac72af69d94af20a2f38c3be663ca51c"
 msgstr "sword_install.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/gnomesword.xml:189(None)
 msgid ""
-"@@image: 'figures/sword_remove.png'; md5=25db01bba9d1c29adf2a0d7b93e6890b"
+"@@image: 'figures/sword_remove.png'; md5=a6ef5b13d854ff3ebf348523e729b2d2"
 msgstr "sword_remove.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
@@ -245,33 +247,33 @@ msgstr "sword_remove.png"
 #: ../C/gnomesword.xml:15(None) ../C/search.xml:15(None)
 msgid ""
 "@@image: 'figures/interface_searchpane.png'; "
-"md5=0cddddec73f71ce0bd08c1d26aa454d1"
+"md5=9b02269f6a1a4aa3a2a627aaca52d66c"
 msgstr "interface_searchpane.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/gnomesword.xml:214(None)
 msgid ""
-"@@image: 'figures/search_search.png'; md5=2af1d1e94530569d1e55c287ae3cba70"
+"@@image: 'figures/search_search.png'; md5=8c46acb73426be8ca481336b25d83659"
 msgstr "search_search.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/gnomesword.xml:16(None) ../C/studypad.xml:16(None)
-msgid "@@image: 'figures/studypad.png'; md5=bd71a923c05a07cb81eff6a59b8356c2"
+msgid "@@image: 'figures/studypad.png'; md5=447c0ff6d244070dfefb4cdf9bebcd2b"
 msgstr "studypad.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/gnomesword.xml:22(None)
-msgid "@@image: 'figures/personal.png'; md5=eefdc65d9c7e18c91c355b41dbf8b46f"
+msgid "@@image: 'figures/personal.png'; md5=540ea58ba392455d42860ee20e84b56e"
 msgstr "personal.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/gnomesword.xml:36(None)
-msgid "@@image: 'figures/journal.png'; md5=f8c92ad38d6419352d993331f8f19a6a"
-msgstr "journall.png"
+msgid "@@image: 'figures/journal.png'; md5=2fe75c9ce423fa7975c901ce97d43065"
+msgstr "journal.png"
 
 #: ../C/gnomesword.xml:56(title)
 msgid "<application>Gnomesword</application> Manual"
@@ -2526,10 +2528,11 @@ msgid ""
 "Vista works much the same as XP, except for the locations. The private "
 "location is \"C:\\Users\\YOUR NAME\\AppData\\Roaming\\.sword\". The shared "
 "location is \"C:\\ProgramData\\.sword\"."
-msgstr "Windows Vista fonctionne à peu près de la même façon que Windows XP, les "
-"dossiers sont cependant différents. L'espace personnel se trouve dans "
-"«&nbsp;C:\\Users\\YOUR·NAME\\AppData\\Roaming\\.sword&nbsp;» et l'espace partagé dans "
-"«&nbsp;C:\\ProgramData\\.sword&nbsp;»"
+msgstr ""
+"Windows Vista fonctionne à peu près de la même façon que Windows XP, les "
+"dossiers sont cependant différents. L'espace personnel se trouve dans «&nbsp;"
+"C:\\Users\\YOUR·NAME\\AppData\\Roaming\\.sword&nbsp;» et l'espace partagé "
+"dans «&nbsp;C:\\ProgramData\\.sword&nbsp;»"
 
 #: ../C/gnomesword.xml:138(title) ../C/gnomesword.xml:140(title)
 msgid "Installing, Updating, and Maintaining Modules"
@@ -3132,12 +3135,12 @@ msgstr ""
 "Par défaut, deux plages de versets sont définies, correspondant à l'Ancien "
 "Testament et au Nouveau Testament. D'autres limites peuvent être définies à "
 "volonté par l'utilisateur comme par exemple les «­­&nbsp;Évangiles&nbsp;» ou "
-"les «­­&nbsp;Épîtres de Paul&nbsp;». Une liste des modules contenant seulement "
-"le premier module de texte biblique installé est définie par défaut. Si besoin, de "
-"nouvelles requêtes peuvent être réalisés sur la plage des versets obtenu par "
-"la requête précédente. Des listes de modules peuvent être crées en incluant "
-"tout module, ce qui permet d'exécuter des requêtes sur les livres ou les dictionnaires, "
-"dans n'importe quelle combinaison."
+"les «­­&nbsp;Épîtres de Paul&nbsp;». Une liste des modules contenant "
+"seulement le premier module de texte biblique installé est définie par "
+"défaut. Si besoin, de nouvelles requêtes peuvent être réalisés sur la plage "
+"des versets obtenu par la requête précédente. Des listes de modules peuvent "
+"être crées en incluant tout module, ce qui permet d'exécuter des requêtes "
+"sur les livres ou les dictionnaires, dans n'importe quelle combinaison."
 
 #: ../C/gnomesword.xml:275(para)
 msgid ""
@@ -4097,8 +4100,8 @@ msgstr ""
 "<ulink url=\"https://lists.sourceforge.net/lists/listinfo/gnomesword-users/"
 "\"> ce lien</ulink>. Une fois inscrit, un simple e-mail envoyé sur la liste "
 "décrivant les problèmes rencontrés amènera une réponse des autres "
-"utilisateurs ou des développeurs généralement dans la journée."
-"<para>[NDT : La liste de diffusion est en langue anglaise]</para>"
+"utilisateurs ou des développeurs généralement dans la journée.<para>[NDT : "
+"La liste de diffusion est en langue anglaise]</para>"
 
 #: ../C/gnomesword.xml:13(title)
 msgid "Live Chat"
@@ -4116,16 +4119,17 @@ msgid ""
 "someone will answer your question immediately, sometimes you may have to "
 "wait a few minutes or longer."
 msgstr ""
-"Une autre façon d'obtenir de l'aide est d'utiliser le chat en ligne. &appname; a un "
-"canal IRC ouvert sur freenode, #gnomesword;. Un moyen simple de se connecter "
-"est de sélectionner <ulink url=\"http://embed.mibbit.com/?server=irc."
-"freenode.net&amp;channel=%23gnomesword\">ce lien</ulink>. (Ceci ouvre la "
-"fenêtre du navigateur Internet). Ensuite, saisir un pseudo ou accepter celui "
-"par defaut, et sélectionner «&nbsp;Click to join chatroom&nbsp;». Ceci ouvre "
-"l'accès au salon où les développeurs et d'autres utilisateurs sont prêts à "
-"discuter des problèmes rencontrés. Généralement, les réponses aux questions "
-"sont immédiates, mais parfois cela peut prendre quelques minutes voire plus "
-"longtemps.<para>[NDT : Le chat en ligne est en langue anglaise]</para>"
+"Une autre façon d'obtenir de l'aide est d'utiliser le chat en ligne. "
+"&appname; a un canal IRC ouvert sur freenode, #gnomesword;. Un moyen simple "
+"de se connecter est de sélectionner <ulink url=\"http://embed.mibbit.com/?"
+"server=irc.freenode.net&amp;channel=%23gnomesword\">ce lien</ulink>. (Ceci "
+"ouvre la fenêtre du navigateur Internet). Ensuite, saisir un pseudo ou "
+"accepter celui par defaut, et sélectionner «&nbsp;Click to join "
+"chatroom&nbsp;». Ceci ouvre l'accès au salon où les développeurs et d'autres "
+"utilisateurs sont prêts à discuter des problèmes rencontrés. Généralement, "
+"les réponses aux questions sont immédiates, mais parfois cela peut prendre "
+"quelques minutes voire plus longtemps.<para>[NDT : Le chat en ligne est en "
+"langue anglaise]</para>"
 
 #: ../C/gnomesword.xml:437(title)
 msgid "Original Language Research"
@@ -4149,18 +4153,18 @@ msgstr "Dépot Crosswire"
 
 #: ../C/gnomesword.xml:13(para) ../C/originallanguage.xml:13(para)
 msgid ""
-"StrongsHebrew Dictionary (or get StrongsRealHebrew from the Kleinpaste "
+"StrongsHebrew Dictionary (or get StrongsRealHebrew from the GnomeSword "
 "Repository)"
 msgstr ""
-"Dictionnaire StrongsHebrew (ou le StrongsRealHebrew du dépot Kleinpaste)"
+"Dictionnaire StrongsHebrew (ou le StrongsRealHebrew du dépot &appname;)"
 "<para>[NDT : dictionnaires en langue anglaise]</para>"
 
 #: ../C/gnomesword.xml:18(para) ../C/originallanguage.xml:18(para)
 msgid ""
-"StrongsGreek Dictionary (or get StrongsRealGreek from the Kleinpaste "
+"StrongsGreek Dictionary (or get StrongsRealGreek from the GnomeSword "
 "Repository)"
 msgstr ""
-"Dictionnaire StrongsGreek (ou le StrongsRealGreek du dépot Kleinpaste)<para>"
+"Dictionnaire StrongsGreek (ou le StrongsRealGreek du dépot &appname;)<para>"
 "[NDT : dictionnaires en langue anglaise]</para>"
 
 #: ../C/gnomesword.xml:23(para) ../C/originallanguage.xml:23(para)
@@ -4174,8 +4178,8 @@ msgid "KJV Bible"
 msgstr "Bible Louis Segond 1910 avec codes Strong et étiquettes morphologiques"
 
 #: ../C/gnomesword.xml:33(para) ../C/originallanguage.xml:33(para)
-msgid "From Kleinpaste Repository:"
-msgstr "Dépot Kleinpaste"
+msgid "From GnomeSword Repository:"
+msgstr "Dépot &appname;"
 
 #: ../C/gnomesword.xml:38(para) ../C/originallanguage.xml:38(para)
 msgid ""
@@ -4295,13 +4299,13 @@ msgstr ""
 
 #: ../C/gnomesword.xml:91(para)
 msgid ""
-"2TGreek (Kleinpaste Repository) : This module contains the entire Bible in "
+"2TGreek (GnomeSword Repository) : This module contains the entire Bible in "
 "Greek. It combines the LXX and Tischendorf8 NT into one easy-to-use module. "
 "In addition, it contains Strongs, Morphology,Greek Accents, and primary/"
 "secondary readings. As with all modules that include Strongs, Gnomesword "
 "displays 2TGreek in beautiful interlinear form."
 msgstr ""
-"2TGreek (Dépot Kleinpaste) : Ce module contient la Bible entière en langue "
+"2TGreek (Dépot &appname;) : Ce module contient la Bible entière en langue "
 "grecque. Il combine les modules LXX et Tischendorf8·NT en un seul module "
 "avec nombres de Strong, étiquettes morphologiques et accents grecs"
 
@@ -4343,10 +4347,10 @@ msgstr ""
 
 #: ../C/gnomesword.xml:121(para)
 msgid ""
-"TischMorph (Kleinpaste Repository) : As described above, this has Strongs, "
+"TischMorph (GnomeSword Repository) : As described above, this has Strongs, "
 "Morphology, accents, and alternate readings."
 msgstr ""
-"TischMorph (Dépot Kleinpaste) : Ce module contient les étiquettes "
+"TischMorph (Dépot &appname;) : Ce module contient les étiquettes "
 "morphologiques, les accents grecs et les variantes du texte"
 
 #: ../C/gnomesword.xml:126(para)
@@ -4502,6 +4506,27 @@ msgid "translator-credits"
 msgstr "Accréditions aux traducteurs"
 
 #~ msgid ""
+#~ "@@image: 'figures/interface_menubar.png'; "
+#~ "md5=26443985cb382f1440fa3c57812c7bbb"
+#~ msgstr "interface_menubar.png"
+
+#~ msgid ""
+#~ "@@image: 'figures/interface_viewer.png'; "
+#~ "md5=d0254ed1561f75acaa8beff53ff551b9"
+#~ msgstr "interface_viewer.png"
+
+#~ msgid ""
+#~ "@@image: 'figures/preferences_modules-misc.png'; "
+#~ "md5=debecf07d1cec94e2c50de2fe046d0dd"
+#~ msgstr "preferences_modules-misc.png"
+
+#~ msgid "@@image: 'figures/module.png'; md5=dd737967d33b2dadb6b9a05bdb8fe46e"
+#~ msgstr "module.png"
+
+#~ msgid "From Kleinpaste Repository:"
+#~ msgstr "Dépot Kleinpaste"
+
+#~ msgid ""
 #~ "Currently, you will only be able to install to your profile. This folder "
 #~ "is \"C:\\Users\\matthew\\AppData\\Roaming\\.sword\". Support for shared "
 #~ "folders is being worked on."
@@ -4528,11 +4553,6 @@ msgstr "Accréditions aux traducteurs"
 #~ "système accessible seulement en lecture par tous les utilisateurs. Si "
 #~ "&appname; n'a pas les droits d'accès en écriture sur cet emplacement "
 #~ "système, cette option sera grisée et inaccessible."
-
-#~ msgid ""
-#~ "@@image: 'figures/interface_menubar-view.png'; "
-#~ "md5=5e992f05345ee519d756cf7eefd6816c"
-#~ msgstr "interface_menubar-view.png"
 
 #~ msgid "April 2008"
 #~ msgstr "Avril 2008"
@@ -4580,11 +4600,6 @@ msgstr "Accréditions aux traducteurs"
 #~ msgstr "Manuel de &appname;"
 
 #~ msgid ""
-#~ "@@image: 'figures/interface_viewer.png'; "
-#~ "md5=53a0903b08f0d65f10a8d325e6f8a2ac"
-#~ msgstr "interface_viewer.png"
-
-#~ msgid ""
 #~ "@@image: 'figures/preferences_modules-main.png'; "
 #~ "md5=1d9b1d3922efc792637606d16840830e"
 #~ msgstr "preferences_modules-main.png"
@@ -4594,9 +4609,6 @@ msgstr "Accréditions aux traducteurs"
 
 #~ msgid "Removing Modules"
 #~ msgstr "Suppression de modules"
-
-#~ msgid "@@image: 'figures/module.png'; md5=e8875805cdd04d5db4677faafc6d18ac"
-#~ msgstr "@@image: 'figures/module.png'; md5=e8875805cdd04d5db4677faafc6d18ac"
 
 #~ msgid "2006"
 #~ msgstr "2006"
