@@ -45,8 +45,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GnomeSword 2.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-21 15:46+0100\n"
-"PO-Revision-Date: 2009-01-21 20:42+0100\n"
+"POT-Creation-Date: 2009-01-21 21:38+0100\n"
+"PO-Revision-Date: 2009-01-21 21:40+0100\n"
 "Last-Translator: Martin Zibricky <matysek03@users.sourceforge.net>\n"
 "Language-Team: GnomeSword Translation Team\n"
 "MIME-Version: 1.0\n"
@@ -451,7 +451,7 @@ msgstr "Obsah obrazu"
 #: ../src/gnome2/commentary_dialog.c:1634
 #: ../src/gnome2/commentary.c:974
 msgid "Respect Font Faces"
-msgstr ""
+msgstr "Respektovat písma"
 
 #: ../src/gnome2/bibletext.c:1126
 #: ../src/gnome2/bibletext.c:1253
@@ -1656,11 +1656,11 @@ msgid "Displaying GnomeSword"
 msgstr "Zobrazuji GnomeSword"
 
 #. main_prayer_list_new("2008");
-#: ../src/gnome2/gnomesword.c:212
+#: ../src/gnome2/gnomesword.c:215
 msgid "done"
 msgstr "hotovo"
 
-#: ../src/gnome2/gnomesword.c:290
+#: ../src/gnome2/gnomesword.c:293
 msgid "GnomeSword is shutdown"
 msgstr "GnomeSword je zastaven"
 
