@@ -9,12 +9,12 @@ Default topic=index.html
 Display compile progress=Yes
 Full-text search=Yes
 Index file=index.hhk
-Language=0x0409 English (UNITED STATES)
-Title=Gnomesword Manual
+Language=0x040c French (FRANCE)
+Title=Manuel de GnomeSword :
 Enhanced decompilation=No
 
 [WINDOWS]
-Main="Gnomesword Manual","toc.hhc","index.hhk","index.html","index.html",,,,,0x2520,,0x603006,,,,,,,,0
+Main="Manuel de GnomeSword :","toc.hhc","index.hhk","index.html","index.html",,,,,0x2520,,0x603006,,,,,,,,0
 
 
 [FILES]

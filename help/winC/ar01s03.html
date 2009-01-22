@@ -1,6 +1,6 @@
 <html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-   <title>Interface</title><meta name="generator" content="DocBook XSL Stylesheets V1.73.2"><meta name="keywords" content="gnome, gnomesword, gnomesword2, sword, crosswire, help dialog"><link rel="start" href="index.html" title="Gnomesword2 Manual"><link rel="up" href="index.html" title="Gnomesword2 Manual"><link rel="prev" href="ar01s02.html" title="Getting Started with GnomeSword"><link rel="next" href="ar01s04.html" title="Preferences"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="interface"></a>Interface</h2></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="menubar"></a>Menubar</h3></div></div></div><p>
+   <title>Interface</title><meta name="generator" content="DocBook XSL Stylesheets V1.73.2"><meta name="keywords" content="gnome, gnomesword, sword, crosswire, help dialog"><link rel="start" href="index.html" title="Gnomesword Manual"><link rel="up" href="index.html" title="Gnomesword Manual"><link rel="prev" href="ar01s02.html" title="Getting Started with GnomeSword"><link rel="next" href="ar01s04.html" title="Preferences"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="interface"></a>Interface</h2></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="menubar"></a>Menubar</h3></div></div></div><p>
    		At the top of the <span class="application">GnomeSword</span> main window is the menubar. 
    		Almost all of the functions are available by activating the appropriate 
    		menu item. The functions have been grouped according to their type. For 
@@ -23,7 +23,7 @@
 				Bible Verse Selector
 				</p></li><li><p>
 				Bible Passage Summary
-				</p></li></ul></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="d0e727"></a>History Forward/Backward Selector</h4></div></div></div><p>
+				</p></li></ul></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="d0e744"></a>History Forward/Backward Selector</h4></div></div></div><p>
 			Switches between current and previous passage selections.
 			</p></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="gnomesword-toolbar-book"></a>Bible Book Selector</h4></div></div></div><p>		
 			Selects the Biblical book to be displayed in the <span class="interface">Bible Text Pane</span> and 
@@ -125,7 +125,8 @@
 					</p></li><li><p>
 					Read Aloud - If you enable this, then GnomeSword will funnel all selected verses through the
 					<span class="application">festival</span> text-to-speech system.  <span class="application">Festival</span> is a
-					widely-available TTS, often installed by default in Linux distributions.
+					widely-available TTS, often installed by default in Linux distributions. Reading aloud is not currently
+					supported on Windows.
 					</p><p>
 					Also, mouse-selected text may be read aloud from Bibles, commentaries, and general books, using the
 					right-click menu, regardless of whether Read Aloud is selected.
@@ -152,7 +153,8 @@
 		Footnote content is normally transient in the Previewer: It is displayed while your mouse hovers over the footnote
 		indicator <span class="guibutton">*n</span> in the Bible text, and then disappears when your mouse moves off.  But some
 		translations' footnotes (e.g. NET Bible's) can be very large, so that not all the text is visible.  To anchor the text so
-		that you can scroll it in the Previewer, middle-click the indicator and move to the Previewer.
+		that you can scroll it in the Previewer, middle-click the indicator (or hold down the <span class="guibutton">Shift key</span>)
+		and move to the Previewer.
 		</p><p>
 		Cross-reference indicators <span class="guibutton">*x</span> also display transiently in the Previewer.  Left-clicking the
 		indicator will send the set of references to the <span class="guibutton">Verse List</span> in the
@@ -185,7 +187,11 @@
 		The Dictionary Pane's content is driven by its up/down selectors, typing in its navbar text, or double-clicks in the Bible, Commentary, or Book Panes.
 		</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="gnomesword-shortcut"></a>Keyboard Shortcuts</h3></div></div></div><p>
 		Several keyboard shortcuts exist in <span class="application">GnomeSword</span>:
-		</p><div class="itemizedlist"><ul type="disc"><li><span class="guibutton">Ctrl-L</span> focuses and selects the main verse navbar text.  You can then immediately type
+		</p><div class="itemizedlist"><ul type="disc"><li><span class="guibutton">F1</span>: opens this manual.
+			</li><li><span class="guibutton">F2</span>: opens the <span class="guibutton">Preferences</span> dialog.
+			</li><li><span class="guibutton">F3</span>: opens <span class="guibutton">Advanced Search</span>.
+			</li><li><span class="guibutton">F4</span>: opens the <span class="guibutton">Module Manager</span>.
+			</li><li><span class="guibutton">Ctrl-L</span> focuses and selects the main verse navbar text.  You can then immediately type
 				in new verse selection text.  Be aware that, as is the case with most Sword applications,
 				<span class="application">GnomeSword</span> understands many abbreviations: "G" is adequate to specify Genesis,
 				for example, and any book name by itself implies 1:1.
