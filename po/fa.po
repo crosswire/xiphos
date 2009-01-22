@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # <>, 2008.
 # , fuzzy
+#  <>, 2009.
 # 
 # 
 msgid ""
@@ -10,12 +11,32 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-01-21 20:42+0100\n"
-"PO-Revision-Date: 2009-01-22 09:22+0000\n"
-"Last-Translator:  <>\n"
-"Language-Team:  <farsi@lists.sharif.edu>\n"
+"PO-Revision-Date: 2009-01-22 22:28+0000\n"
+"Last-Translator: Glasgow Iranian Church <contact@gichurch.org>\n"
+"Language-Team: Project-Id-Version: gtranslator"
+"Report-Msgid-Bugs-To: "
+"POT-Creation-Date: 2004-08-01 16:18+0100"
+"PO-Revision-Date: 2004-07-31 13:05+0100"
+"Last-Translator: David Lodge <dave@cirt.net>"
+"Language-Team: English/GB <en@li.org>"
+"MIME-Version: 1.0"
+"Content-Type: text/plain; charset=UTF-8"
+"Content-Transfer-Encoding: 8bit"
+"Plural-Forms: nplurals=2; plural=(n != 1);"
+" <farsi@lists.sharif.edu>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: "
+"Content-Transfer-Encoding: Project-Id-Version: gtranslator"
+"Report-Msgid-Bugs-To: "
+"POT-Creation-Date: 2004-08-01 16:18+0100"
+"PO-Revision-Date: 2004-07-31 13:05+0100"
+"Last-Translator: David Lodge <dave@cirt.net>"
+"Language-Team: English/GB <en@li.org>"
+"MIME-Version: 1.0"
+"Content-Type: text/plain; charset=UTF-8"
+"Content-Transfer-Encoding: 8bit"
+"Plural-Forms: nplurals=2; plural=(n != 1);"
+""
 
 #: ../gnomesword.desktop.in.in.h:1
 msgid "GnomeSword Bible Guide"
@@ -32,7 +53,8 @@ msgstr "ترکیب پیدا نشد"
 #: ../src/editor/html-editor.c:263 ../src/gnome2/html.c:818
 #, c-format
 msgid "Page %d of %d"
-msgstr ""
+msgstr "صفحه %d از %d"
+""
 
 #: ../src/editor/html-editor.c:391 ../src/editor/html-editor.c:438
 msgid "Save As"
@@ -1498,9 +1520,8 @@ msgid "Restore saved folder"
 msgstr "قفسه پرونده ضبط شده را به حالت اول برگردان"
 
 #: ../src/gnome2/bookmarks_menu.c:1107
-#, fuzzy
 msgid "Open this bookmark in a new tab"
-msgstr "این علامت را در دیالوگ باز کن"
+msgstr "این علامت را در دیالوگ تازه باز کن"
 
 #. 1
 #: ../src/gnome2/bookmarks_menu.c:1112
@@ -1766,9 +1787,9 @@ msgstr "کتب فرهنگ را آشکار و یا مخفی کن"
 #. 6
 #. 7
 #: ../src/gnome2/main_menu.c:1068
-#, fuzzy
 msgid "_Verse Per Line"
 msgstr "لیست آیات"
+""
 
 #. 8
 #: ../src/gnome2/main_menu.c:1074
@@ -1992,12 +2013,15 @@ msgid "Are you sure you want to remove the selected module?"
 msgstr "آیا به یقین می‌خواهید مدول انتخاب شده را حذف کنید؟"
 
 #: ../src/main/search_dialog.cc:1441
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s:\n"
 "No such module is installed.\n"
 "%s"
-msgstr "چنین مدولی نصب شده است %s\n"
+msgstr "%s:\n"
+"چنین مدولی نصب شده است \n"
+"%s"
+""
 
 #: ../src/main/search_dialog.cc:1443
 msgid "Please adjust the module list."
@@ -2984,9 +3008,9 @@ msgid "<b>Show</b>"
 msgstr "نشان بده"
 
 #: ../ui/prefs.glade.h:15
-#, fuzzy
 msgid "<b>Special Purpose Modules</b>"
-msgstr "مدولهای مختلف"
+msgstr "<b>مدولهای مختلف</b>"
+""
 
 #: ../ui/prefs.glade.h:16
 msgid "<b>StudyPad default directory</b>"
