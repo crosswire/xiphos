@@ -3,40 +3,21 @@
 # This file is distributed under the same license as the PACKAGE package.
 # <>, 2008.
 # , fuzzy
-#  <>, 2009.
+# <>, 2009.
 # 
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-21 20:42+0100\n"
-"PO-Revision-Date: 2009-01-22 22:28+0000\n"
-"Last-Translator: Glasgow Iranian Church <contact@gichurch.org>\n"
-"Language-Team: Project-Id-Version: gtranslator"
-"Report-Msgid-Bugs-To: "
-"POT-Creation-Date: 2004-08-01 16:18+0100"
-"PO-Revision-Date: 2004-07-31 13:05+0100"
-"Last-Translator: David Lodge <dave@cirt.net>"
-"Language-Team: English/GB <en@li.org>"
-"MIME-Version: 1.0"
-"Content-Type: text/plain; charset=UTF-8"
-"Content-Transfer-Encoding: 8bit"
-"Plural-Forms: nplurals=2; plural=(n != 1);"
-" <farsi@lists.sharif.edu>\n"
+"POT-Creation-Date: 2004-08-01 16:18+0100\n"
+"PO-Revision-Date: 2009-01-22 23:02+0000\n"
+"Last-Translator: David Lodge <dave@cirt.net>\n"
+"Language-Team: English/GB <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: Project-Id-Version: gtranslator"
-"Report-Msgid-Bugs-To: "
-"POT-Creation-Date: 2004-08-01 16:18+0100"
-"PO-Revision-Date: 2004-07-31 13:05+0100"
-"Last-Translator: David Lodge <dave@cirt.net>"
-"Language-Team: English/GB <en@li.org>"
-"MIME-Version: 1.0"
-"Content-Type: text/plain; charset=UTF-8"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);"
-""
 
 #: ../gnomesword.desktop.in.in.h:1
 msgid "GnomeSword Bible Guide"
@@ -1165,7 +1146,7 @@ msgstr "مدول انتخاب شده را در بخشی جدید باز کن"
 #. 1
 #: ../src/gnome2/sidebar.c:770
 msgid "Open in a separate window"
-msgstr ""
+msgstr "باز کن در پنچره تازه"
 
 #: ../src/gnome2/sidebar.c:771
 msgid "Open selected module in a separate ['dialog'] window"
@@ -1794,7 +1775,7 @@ msgstr "لیست آیات"
 #. 8
 #: ../src/gnome2/main_menu.c:1074
 msgid "L_ink Tabs"
-msgstr ""
+msgstr "پحوندگاه برگها "
 
 #. 9
 #: ../src/gnome2/main_menu.c:1080
@@ -1858,7 +1839,7 @@ msgstr ""
 
 #: ../src/gnome2/main_menu.c:1150
 msgid "_Live Chat"
-msgstr ""
+msgstr "گپ الکترونیکی"
 
 #: ../src/gnome2/main_menu.c:1151
 msgid "Chat with other users and developers"
