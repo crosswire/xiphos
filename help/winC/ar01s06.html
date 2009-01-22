@@ -1,9 +1,9 @@
 <html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-   <title>The Search Function</title><meta name="generator" content="DocBook XSL Stylesheets V1.73.2"><meta name="keywords" content="gnome, gnomesword, gnomesword2, sword, crosswire, help dialog"><link rel="start" href="index.html" title="Gnomesword2 Manual"><link rel="up" href="index.html" title="Gnomesword2 Manual"><link rel="prev" href="ar01s05.html" title="Module Manager"><link rel="next" href="ar01s07.html" title="The Studypad"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="search"></a>The Search Function</h2></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="gnomesword-searchpane"></a>Simple Searches</h3></div></div></div><p>
+   <title>The Search Function</title><meta name="generator" content="DocBook XSL Stylesheets V1.73.2"><meta name="keywords" content="gnome, gnomesword, sword, crosswire, help dialog"><link rel="start" href="index.html" title="Gnomesword Manual"><link rel="up" href="index.html" title="Gnomesword Manual"><link rel="prev" href="ar01s05.html" title="Module Manager"><link rel="next" href="ar01s07.html" title="The Studypad"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="search"></a>The Search Function</h2></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="gnomesword-searchpane"></a>Simple Searches</h3></div></div></div><p>
 		To conduct a quick search within the current Bible or commentary module, the Search Bar in the Sidebar should usually be adequate. Click either
 		in the menu bar <span class="guimenuitem">Edit-&gt;Search</span> or in the Sidebar <span class="guimenuitem">Modules-&gt;Search</span> to access it.
-		</p><div class="figure"><a name="d0e1711"></a><p class="title"><b>Figure&nbsp;31.&nbsp;The Search Bar</b></p><div class="figure-contents"><div class="screenshot"><div class="mediaobject"><img src="figures/interface_searchpane.png" alt="The Search Bar"></div></div></div></div><br class="figure-break"><p>
+		</p><div class="figure"><a name="d0e1763"></a><p class="title"><b>Figure&nbsp;31.&nbsp;The Search Bar</b></p><div class="figure-contents"><div class="screenshot"><div class="mediaobject"><img src="figures/interface_searchpane.png" alt="The Search Bar"></div></div></div></div><br class="figure-break"><p>
 		The <span class="interface">Search Dialog</span> consists of the following parts:
 		</p><div class="itemizedlist"><ul type="disc"><li><p>
 					Search Key Entry box
@@ -15,6 +15,8 @@
 					Search Options Checkbox
 					</p></li><li><p>
 					Search Scope Selector
+					</p></li><li><p>
+					Search Results View
 					</p></li></ul></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="gnomesword-search-key"></a>Search Key Entry Box</h4></div></div></div><p>Allows entry of the key for which you would like to search. The 
 			search key can be a word, part of a word, several words, a phrase, or 
 			a regular expression depending on the type of search selected. When 
@@ -23,8 +25,8 @@
 			the search.
 			</p><p>
 			This search uses the optimized search method (see next section) if
-			the module has previously been indexed, so bear in mind the additional
-			syntax required to do multi-word searches (e.g. +FirstWord +SecondWord).
+			the module has previously been indexed, and will use AND semantics by default 
+			(verses must contain all words you entered).
 			</p></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="gnomesword-search-modselect"></a>Search Module Selector</h4></div></div></div><p>Allows selection of which modules	you would like to search. 
 			Select <span class="guibutton">Bible</span> to search Bible versions or 
 			<span class="guibutton">Commentary</span> to search commentaries. Only 
@@ -63,22 +65,45 @@
 					search. </p></dd><dt><span class="term"><span class="guibutton">Last search</span></span></dt><dd><p>Select this button to do a new 
 					search including only the verses returned as a 
 					result of the last search. Use this with a new 
-					search key to narrow the search further.</p></dd></dl></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="gnomesword-advanced-search"></a>Advanced Searches</h3></div></div></div><p>
+					search key to narrow the search further.</p></dd></dl></div></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="gnomesword-search-results"></a>Search Results View</h4></div></div></div><p>This shows a list of the current search results for previewing, navigation, or saving.</p><div class="variablelist"><dl><dt><span class="term">Preview</span></dt><dd><p>To preview the search result, simply click on an individual result.
+					The entry will show in the preview pane.
+					</p></dd><dt><span class="term">Navigation</span></dt><dd><p>Navigation to the search result can be done in two ways. To open the result
+					in a new tab, middle-click the mouse. To open the result in the current tab, double-click the result.
+					</p></dd><dt><span class="term">Save Results</span></dt><dd><p>You may save your results as a list of bookmarks. To do this, right-click and select
+					<span class="guilabel">Save List</span>. You will be prompted to enter a name for the folder that your results
+					will be saved to. After you have saved the results, you may view them by going to your bookmarks and
+					finding the folder you just named.
+					</p></dd></dl></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="gnomesword-advanced-search"></a>Advanced Searches</h3></div></div></div><p>
 		More complicated searches might require the use of the advanced search functions, found under <span class="guimenuitem">Edit-&gt;Advanced
 		Search</span>.
-	   </p><div class="figure"><a name="d0e1875"></a><p class="title"><b>Figure&nbsp;32.&nbsp;The Advanced Search Dialogue</b></p><div class="figure-contents"><div class="screenshot"><div class="mediaobject"><img src="figures/search_search.png" alt="The Advanced Search Dialog"></div></div></div></div><br class="figure-break"><p>
+	   </p><div class="figure"><a name="d0e1957"></a><p class="title"><b>Figure&nbsp;32.&nbsp;The Advanced Search Dialogue</b></p><div class="figure-contents"><div class="screenshot"><div class="mediaobject"><img src="figures/search_search.png" alt="The Advanced Search Dialog"></div></div></div></div><br class="figure-break"><p>
 		In <span class="guimenuitem">Advanced Search</span>, much more complex queries can be constructed, involving custom search ranges,
 		custom lists of modules over which to search, regular expression matching (see next section), and attribute-based searches
 		such as are found in footnotes or Strong's Hebrew and Greek dictionary references.
 	   </p><p>
 		The default search is multi-word, a somewhat slow and blunt search through module text.  Also available is an optimized
-		search based on the Lucene indexing and search library.  A web search will provide several references to the syntax needed
-		to put to use the power of an optimized Lucene search.  In order to use the optimized search, the index must be constructed
-		beforehand: Please see the preceding section on the Module Manager regarding the Maintenance functions, including indexing.
+		search based on the Lucene indexing and search library. In order to use the optimized search, the index must be constructed
+		beforehand: Please see the preceding section on the Module Manager regarding the Maintenance functions, including indexing. A
+		web search will provide several references to the syntax needed to put to use the power of optimized Lucene search. A few
+		examples follow:
 	   </p><p>
+		Simple Searches: just type in the words you want to search for. To return only verses that include all of the words,
+		prefix the word with "+". So, in the KJV, you could find Psalm 23 by searching for "+Lord +shepherd +want". To search for
+		an entire phrase, surround the entire phrase with quotes, like "maketh me to lie down" (note that quotes are unnecessary
+		in all of the other examples).
+	   </p><p>
+		Single Letter Wildcard: to search for "veil" or "vail", use this syntax "v?il". The "?" represents a single character
+		that could be anything. A more complex example returns both spellings for Isaiah used in the KJV. "?saia?" will return
+		results for "Isaiah" and "Esaias".
+	   </p><p>
+		Multiple Letter Wildcard: to search for "prophet" or "prophesy" or "prophecy" or "prophesied", use this syntax "prophe*".
+	   </p><p>
+		AND syntax: in the advanced search to return results for all of the search terms, you must put "AND" in between the terms.
+		To continue our example, if we wish to search for any occurrence of Isaiah or Esaias that also mention either prophet, or
+		prophecy, or prophesy, we can do a search like this: "?saia? AND prophe*". 
+	  </p><p>
 		By default, two standard search ranges are defined, for Old and New Testament; you may wish to define others for
-		e.g. "Gospels" or "Paul's Epistles".  One (fake) custom module list is present, as a placeholder to make obvious what is
-		required: Since it cannot be known what modules a user will install, no real content for such a module list can be assumed.
+		e.g. "Gospels" or "Paul's Epistles". One custom module list containing only the first Bible found will be present.
 		If desired, new searches can be performed across only the current results of the previous search.  Any modules may be
 		searched, including general books and even dictionaries, in any combination.
 	   </p><p>
@@ -88,7 +113,18 @@
 		right end of the tab set.  Strong's references are identified with a leading "H" or "G" and the numeric Strong's identifier.
 		Thus, a search of KJV for Strong's Greek #140, using "G140", will return the single result of Matthew 12:18.
 	   </p><p>
+		If you have indexed your modules, there is a much faster way to search for Strong's references. Enter your search preceded by 
+		"lemma:", so to search for Strong's Greek #140, enter "lemma:G140". You must have selected <span class="guibutton">Optimized ("Lucene")</span>
+		for this to work.
+	  </p><p>
 		The "Find" button also stops an in-progress search, as its tooltip indicates.
+	   </p><p>
+		Results will show in the <span class="guibutton">Results</span> tab. If you wish to show Strongs, Morphology, or Footnote tags,
+		make those selections on the <span class="guibutton">Attributes Search</span> tab. Clicking once on the result will show the result
+		in the <span class="guibutton">Advanced Search</span> previewer. Hovering over Strongs, Morphology, Footnote, or Cross-reference
+		tags will show the results in the main previewer. Double-clicking a result will cause the current tab to navigate to that
+		result. This applies to search results in general books and commentaries as well, but note that the respective tab must
+		be visible.
 	   </p><div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Warning</h3><p>
 		 Changes to some of the settings (e.g. scope of search, searched modules, etc.) in Advanced Search will 	affect the simple search via the side pane but not vice versa.
 		</p></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="hdbk-op-search-dialog-text-regexp"></a>Search Syntax using Regular Expression</h3></div></div></div><p>

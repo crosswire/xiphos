@@ -8,154 +8,154 @@
 </OBJECT>
 <UL>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Gnomesword Manual">
+<param name="Name" value="Manuel de GnomeSword :">
 <param name="Local" value="index.html"></OBJECT></LI>
 <UL>
 <LI><OBJECT type="text/sitemap">
 <param name="Name" value="Introduction">
 <param name="Local" value="index.html#gnomesword-introduction"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Getting Started with GnomeSword">
+<param name="Name" value="Premiers pas">
 <param name="Local" value="ar01s02.html"></OBJECT></LI>
 <UL>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Starting GnomeSword">
+<param name="Name" value="D&eacute;marrer GnomeSword">
 <param name="Local" value="ar01s02.html#gnomesword-getting-started"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Starting GnomeSword For The First Time">
+<param name="Name" value="D&eacute;marrer GnomeSword la premi&egrave;re fois">
 <param name="Local" value="ar01s02.html#gnomesword-first-start"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Launching GnomeSword">
+<param name="Name" value="D&eacute;marrer GnomeSword">
 <param name="Local" value="ar01s02.html#gnomesword-when-you-start"></OBJECT></LI>
 </UL><LI><OBJECT type="text/sitemap">
 <param name="Name" value="Interface">
 <param name="Local" value="ar01s03.html"></OBJECT></LI>
 <UL>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Menubar">
+<param name="Name" value="Barre de menu">
 <param name="Local" value="ar01s03.html#menubar"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Toolbars">
+<param name="Name" value="Barres d'outils">
 <param name="Local" value="ar01s03.html#toolbars"></OBJECT></LI>
 <UL>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="History Forward/Backward Selector">
-<param name="Local" value="ar01s03.html#d0e744"></OBJECT></LI>
+<param name="Name" value="Boutons de d&eacute;placement avant/arri&egrave;re dans l'historique.">
+<param name="Local" value="ar01s03.html#d0e764"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Bible Book Selector">
+<param name="Name" value="S&eacute;lecteur de livre de la Bible">
 <param name="Local" value="ar01s03.html#gnomesword-toolbar-book"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Bible Chapter Selector">
+<param name="Name" value="S&eacute;lecteur de chapitre de la Bible">
 <param name="Local" value="ar01s03.html#gnomesword-toolbar-chapter"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Bible Verse Selector">
+<param name="Name" value="S&eacute;lecteur de verset de la Bible">
 <param name="Local" value="ar01s03.html#gnomesword-toolbar-verse"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Bible Passage Summary">
+<param name="Name" value="Zone de saisie d'une r&eacute;f&eacute;rence biblique">
 <param name="Local" value="ar01s03.html#gnomesword-toolbar-summary"></OBJECT></LI>
 </UL><LI><OBJECT type="text/sitemap">
-<param name="Name" value="The Sidebar">
+<param name="Name" value="La barre d'outils">
 <param name="Local" value="ar01s03.html#gnomesword-sidebar"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="The Bible Text Pane">
+<param name="Name" value="Le volet des textes bibliques">
 <param name="Local" value="ar01s03.html#gnomesword-bible"></OBJECT></LI>
 <UL>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Opening A Specific Bible Translation">
+<param name="Name" value="Ouvrir une version diff&eacute;rente de la Bible">
 <param name="Local" value="ar01s03.html#gnomesword-bible-open"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Using the Parallel View Mode">
+<param name="Name" value="Utilisation du mode Vue parall&egrave;le">
 <param name="Local" value="ar01s03.html#gnomesword-bible-parallel"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Opening A Separate Bible Translation">
+<param name="Name" value="Ouvrir le texte&middot;biblique dans une fen&ecirc;tre distincte">
 <param name="Local" value="ar01s03.html#gnomesword-bible-open-separate"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Finding Out About The Current Translation">
+<param name="Name" value="Rechercher les informations &agrave; propos de la version courante.">
 <param name="Local" value="ar01s03.html#gnomesword-bible-about"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Module Options">
+<param name="Name" value="Options des modules">
 <param name="Local" value="ar01s03.html#gnomesword-bible-options"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="View Options">
+<param name="Name" value="Options d'affichage">
 <param name="Local" value="ar01s03.html#gnomesword-view-options"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Specific Word Meanings">
+<param name="Name" value="D&eacute;finition d'un mot particulier">
 <param name="Local" value="ar01s03.html#gnomesword-bible-dictionary"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Finding A Specific Word">
+<param name="Name" value="Rechercher un mot sp&eacute;cifique">
 <param name="Local" value="ar01s03.html#gnomesword-bible-find"></OBJECT></LI>
 </UL><LI><OBJECT type="text/sitemap">
-<param name="Name" value="Previewer">
+<param name="Name" value="Aper&ccedil;u">
 <param name="Local" value="ar01s03.html#gnomesword-viewer"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="The Commentary Pane">
+<param name="Name" value="Le volet des commentaires">
 <param name="Local" value="ar01s03.html#gnomesword-commentaries"></OBJECT></LI>
 <UL>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Finding Out About The Commentary Module">
+<param name="Name" value="Rechercher les informations &agrave; propos du module de commentaires">
 <param name="Local" value="ar01s03.html#gnomesword-commentary-about"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Commentary Headings.">
+<param name="Name" value="Ent&ecirc;tes des commentaires">
 <param name="Local" value="ar01s03.html#gnomesword-commentary-headings"></OBJECT></LI>
 </UL><LI><OBJECT type="text/sitemap">
-<param name="Name" value="Dictionary Pane">
+<param name="Name" value="Volet dictionnaire">
 <param name="Local" value="ar01s03.html#gnomesword-dictionary"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Keyboard Shortcuts">
+<param name="Name" value="Raccourcis clavier">
 <param name="Local" value="ar01s03.html#gnomesword-shortcut"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Version Differences in GnomeSword's Display">
+<param name="Name" value="Diff&eacute;rences d'affichage dans GnomeSword :">
 <param name="Local" value="ar01s03.html#gnomesword-differences"></OBJECT></LI>
 </UL><LI><OBJECT type="text/sitemap">
-<param name="Name" value="Preferences">
+<param name="Name" value="Pr&eacute;f&eacute;rences">
 <param name="Local" value="ar01s04.html"></OBJECT></LI>
 <UL>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Introduction To Preferences">
+<param name="Name" value="Introduction aux pr&eacute;f&eacute;rences">
 <param name="Local" value="ar01s04.html#preferences-introduction"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Fonts And Colors">
+<param name="Name" value="Polices et couleurs">
 <param name="Local" value="ar01s04.html#fonts-and-colors"></OBJECT></LI>
 <UL>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Setting Font Colors">
+<param name="Name" value="Configurer la couleur des polices">
 <param name="Local" value="ar01s04.html#font-color"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Miscellaneous Font Settings">
+<param name="Name" value="Configuration diverses des polices">
 <param name="Local" value="ar01s04.html#font-misc"></OBJECT></LI>
 </UL><LI><OBJECT type="text/sitemap">
-<param name="Name" value="General Settings">
+<param name="Name" value="Pr&eacute;f&eacute;rences g&eacute;n&eacute;rales">
 <param name="Local" value="ar01s04.html#general-settings"></OBJECT></LI>
 <UL>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Tabs and Pane Settings">
+<param name="Name" value="Configuration des volets et onglets">
 <param name="Local" value="ar01s04.html#tab-pane1"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="General Preferences and StudyPad directory">
+<param name="Name" value="Pr&eacute;f&eacute;rences g&eacute;n&eacute;rales et r&eacute;pertoire du bloc-notes.">
 <param name="Local" value="ar01s04.html#tab-pane2"></OBJECT></LI>
 </UL><LI><OBJECT type="text/sitemap">
-<param name="Name" value="Module Settings">
+<param name="Name" value="Configuration des modules">
 <param name="Local" value="ar01s04.html#module-settings"></OBJECT></LI>
 <UL>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Main Module Settings">
+<param name="Name" value="Configuration du module principal">
 <param name="Local" value="ar01s04.html#main-modules"></OBJECT></LI>
 </UL></UL><LI><OBJECT type="text/sitemap">
-<param name="Name" value="Module Manager">
+<param name="Name" value="G&eacute;rer les modules">
 <param name="Local" value="ar01s05.html"></OBJECT></LI>
 <UL>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Introduction To The Module Manager">
+<param name="Name" value="Introduction &agrave; la gestion des modules">
 <param name="Local" value="ar01s05.html#module-introduction"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Sword Module Configurations">
+<param name="Name" value="Configuration des modules de Sword">
 <param name="Local" value="ar01s05.html#sword-config"></OBJECT></LI>
 <UL>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Sword Sources Settings">
+<param name="Name" value="Configurer les d&eacute;pots Sword">
 <param name="Local" value="ar01s05.html#sword-sources"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Sword Module Installations">
+<param name="Name" value="Destination des modules Sword">
 <param name="Local" value="ar01s05.html#installation"></OBJECT></LI>
 <UL>
 <LI><OBJECT type="text/sitemap">
@@ -168,135 +168,135 @@
 <param name="Name" value="Windows Vista">
 <param name="Local" value="ar01s05.html#destination-vista"></OBJECT></LI>
 </UL></UL><LI><OBJECT type="text/sitemap">
-<param name="Name" value="Installing, Updating, and Maintaining Modules">
+<param name="Name" value="Installer, mettre &agrave; jour et maintenir les modules">
 <param name="Local" value="ar01s05.html#module-management"></OBJECT></LI>
 <UL>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Installing, Updating, and Maintaining Modules">
+<param name="Name" value="Installer, mettre &agrave; jour et maintenir les modules">
 <param name="Local" value="ar01s05.html#add-module"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Module Maintenance">
+<param name="Name" value="Maintenance des modules">
 <param name="Local" value="ar01s05.html#remove-module"></OBJECT></LI>
 </UL><LI><OBJECT type="text/sitemap">
-<param name="Name" value="Installing Non-Standard Modules">
+<param name="Name" value="Installer des modules manuellement">
 <param name="Local" value="ar01s05.html#non-standard-modules"></OBJECT></LI>
 </UL><LI><OBJECT type="text/sitemap">
-<param name="Name" value="The Search Function">
+<param name="Name" value="Fonctions de recherche">
 <param name="Local" value="ar01s06.html"></OBJECT></LI>
 <UL>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Simple Searches">
+<param name="Name" value="Recherche simple">
 <param name="Local" value="ar01s06.html#gnomesword-searchpane"></OBJECT></LI>
 <UL>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Search Key Entry Box">
+<param name="Name" value="Boite de saisie de l'expression &agrave; rechercher">
 <param name="Local" value="ar01s06.html#gnomesword-search-key"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Search Module Selector">
+<param name="Name" value="S&eacute;lecteur du module objet de la requ&ecirc;te">
 <param name="Local" value="ar01s06.html#gnomesword-search-modselect"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Search Type Selector">
+<param name="Name" value="S&eacute;lecteur du type de requ&ecirc;te">
 <param name="Local" value="ar01s06.html#gnomesword-search-typeselect"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Search Options Checkbox">
+<param name="Name" value="Case &agrave; cocher des options de la requ&ecirc;te">
 <param name="Local" value="ar01s06.html#gnomesword-search-options"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Search Scope Selector">
+<param name="Name" value="S&eacute;lecteur de la plage de versets">
 <param name="Local" value="ar01s06.html#gnomesword-search-scopeselect"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Search Results View">
+<param name="Name" value="Affichage des r&eacute;sultats">
 <param name="Local" value="ar01s06.html#gnomesword-search-results"></OBJECT></LI>
 </UL><LI><OBJECT type="text/sitemap">
-<param name="Name" value="Advanced Searches">
+<param name="Name" value="Recherche avanc&eacute;e">
 <param name="Local" value="ar01s06.html#gnomesword-advanced-search"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Search Syntax using Regular Expression">
+<param name="Name" value="Syntaxe des expressions rationnelles utilis&eacute;es en cl&eacute; de recherche">
 <param name="Local" value="ar01s06.html#hdbk-op-search-dialog-text-regexp"></OBJECT></LI>
 <UL>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Rules for Regular Expression Search Requests">
+<param name="Name" value="R&egrave;gles des requ&ecirc;tes de recherche &agrave; l'aide des expressions rationnelles">
 <param name="Local" value="ar01s06.html#hdbk-op-search-dialog-text-regexp-rules"></OBJECT></LI>
 <UL>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="The Period">
+<param name="Name" value="Le point">
 <param name="Local" value="ar01s06.html#period"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="The Asterisk">
+<param name="Name" value="L'ast&eacute;risque">
 <param name="Local" value="ar01s06.html#asterisk"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="The Plus Sign">
+<param name="Name" value="Le signe plus">
 <param name="Local" value="ar01s06.html#plus"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="The Question Mark">
+<param name="Name" value="Le point d'interrogation.">
 <param name="Local" value="ar01s06.html#question"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="The Square Brackets">
+<param name="Name" value="Les crochets">
 <param name="Local" value="ar01s06.html#bracket"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="The Caret first in Square Brackets">
+<param name="Name" value="La puissance en premier caract&egrave;re entre des crochets">
 <param name="Local" value="ar01s06.html#caret"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="The Caret as Start of Line Anchor">
+<param name="Name" value="La puissance correspond au d&eacute;but d'une ligne">
 <param name="Local" value="ar01s06.html#caret-s"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="The Dollar Sign as End of Line Anchor">
+<param name="Name" value="Le signe dollar recherche en fin de ligne">
 <param name="Local" value="ar01s06.html#dollar"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="The Vertical Bar">
+<param name="Name" value="La barre verticale">
 <param name="Local" value="ar01s06.html#bar"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="The Parentheses">
+<param name="Name" value="Les parenth&egrave;ses">
 <param name="Local" value="ar01s06.html#parenth"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="The Backslash Prior to a Special Character">
+<param name="Name" value="L'antislash pr&eacute;c&eacute;dant un caract&egrave;re sp&eacute;cial">
 <param name="Local" value="ar01s06.html#backslash"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="The Backslash Prior to an Ordinary Character">
+<param name="Name" value="L'antislash pr&eacute;c&eacute;dant un caract&egrave;re ordinaire">
 <param name="Local" value="ar01s06.html#backslash-o"></OBJECT></LI>
 </UL></UL></UL><LI><OBJECT type="text/sitemap">
-<param name="Name" value="The Studypad">
+<param name="Name" value="Bloc-notes">
 <param name="Local" value="ar01s07.html"></OBJECT></LI>
 <UL>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Using The Studypad">
+<param name="Name" value="Usage du bloc-notes :">
 <param name="Local" value="ar01s07.html#gnomesword-studypad"></OBJECT></LI>
 </UL><LI><OBJECT type="text/sitemap">
-<param name="Name" value="The Personal Commentary">
+<param name="Name" value="Commentaires personnels">
 <param name="Local" value="ar01s08.html"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Journals and Prayer Lists">
+<param name="Name" value="Listes de pri&egrave;res et notes">
 <param name="Local" value="ar01s09.html"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Getting Help Online">
+<param name="Name" value="Obtenir de l'aide en ligne">
 <param name="Local" value="ar01s10.html"></OBJECT></LI>
 <UL>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Users Mailing List">
+<param name="Name" value="Liste de diffusion des utilisateurs">
 <param name="Local" value="ar01s10.html#gnomesword-mailing-list"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Live Chat">
+<param name="Name" value="Discussion en ligne">
 <param name="Local" value="ar01s10.html#gnomesword-live-chat"></OBJECT></LI>
 </UL><LI><OBJECT type="text/sitemap">
-<param name="Name" value="Original Language Research">
+<param name="Name" value="&Eacute;tude des textes originaux">
 <param name="Local" value="ar01s11.html"></OBJECT></LI>
 <UL>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Installing Needed Modules">
+<param name="Name" value="Installer les modules n&eacute;cessaires">
 <param name="Local" value="ar01s11.html#orig-lang-install-modules"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Setting Up">
+<param name="Name" value="Configurer">
 <param name="Local" value="ar01s11.html#orig-lang-setup"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Searching for Strongs Numbers">
+<param name="Name" value="Rechercher des Nombres de Strong">
 <param name="Local" value="ar01s11.html#orig-lang-search"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Additional Modules">
+<param name="Name" value="Modules additionnels">
 <param name="Local" value="ar01s11.html#orig-lang-additional"></OBJECT></LI>
 </UL><LI><OBJECT type="text/sitemap">
-<param name="Name" value="Authors">
+<param name="Name" value="Auteurs">
 <param name="Local" value="ar01s12.html"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="License">
+<param name="Name" value="Licence">
 <param name="Local" value="ar01s13.html"></OBJECT></LI>
 </UL></UL>
 </BODY></HTML>
