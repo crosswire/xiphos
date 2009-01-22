@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-21 20:42+0100\n"
+"POT-Creation-Date: 2009-01-22 10:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1417,11 +1417,11 @@ msgid "Displaying GnomeSword"
 msgstr ""
 
 #. main_prayer_list_new("2008");
-#: ../src/gnome2/gnomesword.c:212
+#: ../src/gnome2/gnomesword.c:215
 msgid "done"
 msgstr ""
 
-#: ../src/gnome2/gnomesword.c:290
+#: ../src/gnome2/gnomesword.c:293
 msgid "GnomeSword is shutdown"
 msgstr ""
 
