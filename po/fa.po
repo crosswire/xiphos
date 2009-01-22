@@ -3,19 +3,19 @@
 # This file is distributed under the same license as the PACKAGE package.
 # <>, 2008.
 # , fuzzy
-#
-#
+# 
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-01-21 20:42+0100\n"
-"PO-Revision-Date: 2009-01-01 23:16+0000\n"
+"PO-Revision-Date: 2009-01-22 09:22+0000\n"
 "Last-Translator:  <>\n"
 "Language-Team:  <farsi@lists.sharif.edu>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
+"Content-Transfer-Encoding: "
 
 #: ../gnomesword.desktop.in.in.h:1
 msgid "GnomeSword Bible Guide"
@@ -1707,7 +1707,7 @@ msgstr "از مدیر مدولها به جهت نصب و یا حذف مدوله�
 
 #: ../src/gnome2/main_menu.c:1025
 msgid "C_lear"
-msgstr ""
+msgstr "پاک"
 
 #: ../src/gnome2/main_menu.c:1026
 msgid "Clear history list"
@@ -1827,7 +1827,9 @@ msgstr "دستورالعمل گنوم سورد را باز کن"
 
 #: ../src/gnome2/main_menu.c:1144
 msgid "_Mailing List"
-msgstr ""
+msgstr "لیست  پست الکترونيک"
+""
+""
 
 #: ../src/gnome2/main_menu.c:1145
 msgid "Sign up for the users' mailing list"
@@ -2947,7 +2949,15 @@ msgid ""
 "+3\n"
 "+4\n"
 "+5"
-msgstr ""
+msgstr "-۲\n"
+"-۱\n"
+"+۰\n"
+"+۱\n"
+"+۲\n"
+"+۳\n"
+"+۴\n"
+"+۵"
+""
 
 #: ../ui/prefs.glade.h:9
 msgid "<b>Font Colors</b>"
