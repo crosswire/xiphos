@@ -277,10 +277,12 @@ void gui_popup_menu_parallel(void)
 	gtk_widget_hide(separator2);
 	gtk_container_add(GTK_CONTAINER(menu), separator2);
 	gtk_widget_set_sensitive(separator2, FALSE);
-
-	undockInt = gtk_menu_item_new_with_label(_("Detach/Attach"));
-	gtk_widget_show(undockInt);
-	gtk_container_add(GTK_CONTAINER(menu), undockInt);
+	
+	if(!settings.showparatab) {
+		undockInt = gtk_menu_item_new_with_label(_("Detach/Attach"));
+		gtk_widget_show(undockInt);
+		gtk_container_add(GTK_CONTAINER(menu), undockInt);
+	}
 /*
 #ifdef USE_PARALLEL_TAB
 	paratab = gtk_menu_item_new_with_label(_("Open in tab"));
@@ -323,7 +325,8 @@ void gui_popup_menu_parallel(void)
 			   G_CALLBACK(gui_copyhtml_activate),
 			   NULL);*/
 	
-	g_signal_connect(GTK_OBJECT(undockInt), "activate",
+	if(!settings.showparatab) 
+		g_signal_connect(GTK_OBJECT(undockInt), "activate",
 			   G_CALLBACK(on_undockInt_activate),
 			   &settings);
 	

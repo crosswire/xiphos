@@ -30,6 +30,7 @@
 #include "main/navbar_book.h"
 #include "main/settings.h"
 #include "main/sword.h"
+#include "main/url.hh"
 
 NAVBAR_BOOK navbar_book;
 
@@ -103,6 +104,8 @@ static gboolean lookup_entry_press_callback(GtkWidget * widget,
 {
 	if(!settings.havebook)
 		return FALSE;	
+	/* this does not work on my system - hope I'm not messing things up
+	   for others - 104 is the enter key on the number pad
 	switch(event->hardware_keycode) {
 	case 98:
 		gtk_button_clicked(GTK_BUTTON(navbar_book.button_up));
@@ -120,12 +123,14 @@ static gboolean lookup_entry_press_callback(GtkWidget * widget,
 		gtk_button_clicked(GTK_BUTTON(navbar_book.button_right));
 		return TRUE;
 		break;
-	}
+	} 
+	*/
 	GS_message(("lookup_entry_press_callback\nkeycode: %d",event->hardware_keycode));
 	return FALSE;
 	
 
 }
+
 /******************************************************************************
  * Name
  *   select_button_press_callback
@@ -268,6 +273,33 @@ void on_button_next_clicked(GtkButton * button, gpointer user_data)
 }
 
 
+
+/******************************************************************************
+ * Name
+ *    on_entry_activate
+ *    
+ * Synopsis
+ *   #include "gui/navbar_book.h"
+ *
+ *  void on_entry_activate (GtkEntry *entry, gpointer  user_data)
+ *
+ * Description
+ *    get entry text and call main_navbar_book_entry_activate(); 
+ *    in main/navbar_book.cc
+ *
+ * Return value
+ *   void
+ */
+
+void  on_entry_activate (GtkEntry *entry, gpointer  user_data) 
+{
+	const gchar* entry_buf = NULL;
+	
+	entry_buf = gtk_entry_get_text (entry);
+	main_navbar_book_entry_activate (entry_buf);
+}
+
+
 /******************************************************************************
  * Name
  *  gui_navbar_book_new
@@ -383,6 +415,9 @@ GtkWidget *gui_navbar_book_new(void)
 	gtk_widget_show(image1);
 	gtk_container_add(GTK_CONTAINER(navbar_book.button_right), image1);
 
+	g_signal_connect((gpointer) navbar_book.lookup_entry,
+			 "activate",
+			 G_CALLBACK(on_entry_activate), NULL);
 	g_signal_connect((gpointer) navbar_book.button_up, "clicked",
 			 G_CALLBACK(on_button_prev_clicked), NULL);
 	g_signal_connect((gpointer) navbar_book.button_down, "clicked",
