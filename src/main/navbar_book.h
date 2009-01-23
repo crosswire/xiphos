@@ -47,7 +47,7 @@ void main_navbar_book_first_child(void);
 void main_navbar_book_prev(void);
 void main_navbar_book_next(void);
 void main_setup_navbar_book(char * book_name, unsigned long offset);
-
+void main_navbar_book_entry_activate (const gchar* entry_text);
 
 #ifdef __cplusplus
 }

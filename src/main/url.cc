@@ -973,7 +973,7 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 	
 	work_buf = g_strsplit (url,"/",4);
 	//if(work_buf[KEY][0] == '/' ) ++work_buf[KEY];
-	GS_message(("work_buf :%s, %s",work_buf[MODULE],work_buf[KEY]));
+	GS_message(("work_buf: %s, %s",work_buf[MODULE],work_buf[KEY]));
 	if(!work_buf[MODULE] && !work_buf[KEY]) {
 		alert_url_not_found(url);
 		g_strfreev(work_buf);

@@ -280,6 +280,28 @@ void main_navbar_book_next(void)
 
 /******************************************************************************
  * Name
+ *   main_navbar_book_entry_activate
+ *
+ * Synopsis
+ *   #include "main/navbar_book.h"
+ *   
+ *   void  main_navbar_book_entry_activate (const gchar* entry_text) 
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void  main_navbar_book_entry_activate (const gchar* entry_text) 
+{
+	main_display_book(settings.book_mod, entry_text);	
+}
+
+
+/******************************************************************************
+ * Name
  *  on_menu_select(
  *
  * Synopsis
