@@ -65,6 +65,59 @@ extern gboolean isrunningSD;	/* is the view dictionary dialog runing */
  */
 
 
+/******************************************************************************
+ * Name
+ *   gui_get_clipboard_text_for_lookup
+ *
+ * Synopsis
+ *   #include "gui/dictlex.h"
+ *
+ *   void gui_get_clipboard_text_for_lookup (GtkClipboard *clipboard, 
+ *					     const gchar *text, 
+ *					     gpointer data)
+ *
+ * Description
+ *    an ugly hack to get the selection from gecko on a dbl click
+ *    and display text in dictionary pane using default dictionary if set or
+ *    current dictionary - this called by gecko/Yelper.cpp 
+ *    Yelper::ProcessMouseDblClickEvent (void* aEvent)
+ *
+ * Return value
+ *   void
+ */
+
+void gui_get_clipboard_text_for_lookup (GtkClipboard *clipboard, 
+					const gchar *text, 
+					gpointer data)
+{
+	char *key = NULL;
+	gchar *dict = NULL;
+	int len = 0;
+	
+	if(text == NULL) return;
+	GS_message(("src/gnome2/dictlex.c: text =>%s<",text));
+	
+	key = g_strdelimit((char*)text, "&.,\"<>;:?", ' ');
+	key = g_strstrip((char*)key);
+	len = strlen(key);
+	
+	if (key[len - 1] == 's' || key[len - 1] == 'd')
+		key[len - 1] = '\0';
+	if (key[len - 1] == 'h' && key[len - 2] == 't'
+	    && key[len - 3] == 'e')
+		key[len - 3] = '\0';
+	
+	if (settings.useDefaultDict)
+		dict = g_strdup(settings.DefaultDict);
+	else
+		dict = g_strdup(settings.DictWindowModule);
+	
+	main_display_dictionary(dict, key);
+	
+	if (dict)
+		g_free(dict);
+}
+
 
 static void set_label(gchar * mod_name)
 {

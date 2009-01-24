@@ -75,6 +75,7 @@
 #include "gecko/Yelper.h"
 
 #include "gui/widgets.h"
+#include "gui/dictlex.h"
 
 #include "main/module_dialogs.h"
 #include "main/previewer.h"
@@ -421,6 +422,37 @@ Yelper::ProcessMouseOver (void* aEvent, int pane,
 	}*/
 	return FALSE;	
 }
+/*
+void get_clipboard_text (GtkClipboard *clipboard, const gchar *text, gpointer data)
+{
+	char *key = NULL;
+	gchar *dict = NULL;
+	int len = 0;
+	//GS_message(("\nget_clipboard_text:\ntext = %s",text));
+	GS_message(("src/gecko/Yelper.cpp: text =>%s<",text));
+	if(text == NULL) return;
+	key = g_strdelimit((char*)text, "&.,\"<>;:?", ' ');
+	key = g_strstrip((char*)key);
+	len = strlen(key);
+	
+	if (key[len - 1] == 's' || key[len - 1] == 'd')
+		key[len - 1] = '\0';
+	if (key[len - 1] == 'h' && key[len - 2] == 't'
+	    && key[len - 3] == 'e')
+		key[len - 3] = '\0';
+	
+	if ((gchar*)settings.useDefaultDict)
+		dict = g_strdup(settings.DefaultDict);
+	else
+		dict = g_strdup(settings.DictWindowModule);
+	
+	main_display_dictionary(dict, key);
+	
+	
+	if (dict)
+		g_free(dict);
+}
+*/
 
 gint Yelper::ProcessMouseDblClickEvent (void* aEvent)
 {
@@ -432,7 +464,13 @@ gint Yelper::ProcessMouseDblClickEvent (void* aEvent)
 	nsIDOMEvent *domEvent = static_cast<nsIDOMEvent*>(aEvent);
 	nsCOMPtr<nsIDOMMouseEvent> event (do_QueryInterface (domEvent));
 	if (!event) return 0;
-		
+	
+  /**
+     * Returns the whole selection into a plain text string.
+     */
+  /* wstring toString (); */
+ // NS_SCRIPTABLE NS_IMETHOD ToString(PRUnichar **_retval) = 0;
+	
 #ifdef DEBUG
 #ifndef HAVE_GECKO_1_9
 	domEvent->GetType(aType);
@@ -444,13 +482,20 @@ gint Yelper::ProcessMouseDblClickEvent (void* aEvent)
 	gtk_editable_delete_text((GtkEditable *)widgets.entry_dict,0,-1);
 	
 	DoCommand("cmd_copy");
-	//gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
-	//gtk_editable_delete_selection((GtkEditable *)widgets.entry_dict);
-	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
-	gtk_widget_activate(widgets.entry_dict);
-/*	rv = mDOMWindow->GetSelection(getter_AddRefs(oSelection));
-	rv = oSelection->ToString(selText);
-	g_message("selText: %s", rv);*/
+	
+	GtkClipboard *clipboard = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
+	
+	gtk_clipboard_request_text (clipboard,
+				    gui_get_clipboard_text_for_lookup, 
+				    NULL);
+	
+	
+	//gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
+	//gtk_widget_activate(widgets.entry_dict);
+	
+	//rv = mDOMWindow->GetSelection(getter_AddRefs(oSelection));
+	//rv = oSelection->ToString(selText);
+	//g_message("\nselText: %s\nlength: %d", (char*)selText,strlen((char*)selText));
 	return 1;
 }
 
