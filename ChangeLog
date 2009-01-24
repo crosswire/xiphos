@@ -1,4 +1,8 @@
-2009-01-17  terry <tbiggs@users.sourceforge.net>
+2009-01-24  terry <tbiggs@users.sourceforge.net>
+
+	* fixed bug #2532349 mozembed doesn't respect default dictionary
+
+2009-01-23  terry <tbiggs@users.sourceforge.net>
 
 	* fixed bug #2474005 Genbooks do not allow navigation from address bar
 
