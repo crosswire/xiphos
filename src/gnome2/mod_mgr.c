@@ -1896,13 +1896,12 @@ save_sources(void)
 
 /******************************************************************************
  * Name
- *   on_fileselection_local_source_response
+ *   create_fileselection_local_source
  *
  * Synopsis
  *   #include "gui/mod_mgr.h"
  *
- *   void on_fileselection_local_source_response (GtkDialog * dialog,
- *                                gint response_id, GtkFileSelection * filesel)
+ *   void create_fileselection_local_source (void)
  *
  * Description
  *   
@@ -1911,94 +1910,36 @@ save_sources(void)
  *   void
  */
 
-void
-on_fileselection_local_source_response(GtkDialog * dialog,
-				       gint response_id,
-				       GtkFileSelection * filesel)
+static void
+create_fileselection_local_source(void)
 {
+	GtkWidget *dialog;
+    	gchar *filename;
 	GtkTreeIter iter;
 	GtkTreeModel *model =
 	    gtk_tree_view_get_model(GTK_TREE_VIEW(treeview_local));
 
-	switch (response_id) {
-	case GTK_RESPONSE_OK:
+	dialog = 
+		gtk_file_chooser_dialog_new ("Open File",
+				      NULL,
+				      GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
+				      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+				      GTK_STOCK_OK, GTK_RESPONSE_ACCEPT,
+				      NULL);
+	if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT) {
+		filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
+		GS_message((filename));
 		gtk_list_store_append(GTK_LIST_STORE(model), &iter);
 		gtk_list_store_set(GTK_LIST_STORE(model), &iter,
 				   COLUMN_TYPE, "DIR",
-				   COLUMN_CAPTION,
-				   gtk_file_selection_get_filename
-				   (filesel), COLUMN_SOURCE, "[local]",
-				   COLUMN_DIRECTORY,
-				   gtk_file_selection_get_filename
-				   (filesel), -1);
+				   COLUMN_CAPTION, filename, 
+				   COLUMN_SOURCE, "[local]",
+				   COLUMN_DIRECTORY,filename, 
+				   -1);
 		save_sources();
-		GS_warning((gtk_file_selection_get_filename(filesel)));
-		break;
-
-	case GTK_RESPONSE_CANCEL:
-		break;
-
+		g_free (filename);
 	}
-	gtk_widget_destroy(GTK_WIDGET(dialog));
-}
-
-
-/******************************************************************************
- * Name
- *   create_fileselection_local_source
- *
- * Synopsis
- *   #include "gui/mod_mgr.h"
- *
- *   GtkWidget* create_fileselection_local_source (void)
- *
- * Description
- *   
- *
- * Return value
- *   GtkWidget*
- */
-
-GtkWidget *
-create_fileselection_local_source(void)
-{
-	GtkWidget *fileselection_local_source;
-	GtkWidget *ok_;
-	GtkWidget *cancel_;
-
-	fileselection_local_source =
-	    gtk_file_selection_new(_("Select Local Source"));
-	gtk_container_set_border_width(GTK_CONTAINER
-				       (fileselection_local_source),
-				       10);
-	gtk_file_selection_hide_fileop_buttons(GTK_FILE_SELECTION
-					       (fileselection_local_source));
-
-	gtk_widget_set_sensitive(GTK_FILE_SELECTION
-				 (fileselection_local_source)->
-				 file_list, FALSE);
-	gtk_widget_hide(GTK_FILE_SELECTION(fileselection_local_source)->
-			selection_entry);
-
-	ok_ =
-	    GTK_FILE_SELECTION(fileselection_local_source)->ok_button;
-	gtk_widget_show(ok_);
-	GTK_WIDGET_SET_FLAGS(ok_, GTK_CAN_DEFAULT);
-
-	cancel_ =
-	    GTK_FILE_SELECTION(fileselection_local_source)->
-	    cancel_button;
-	gtk_widget_show(cancel_);
-	GTK_WIDGET_SET_FLAGS(cancel_, GTK_CAN_DEFAULT);
-
-	g_signal_connect((gpointer) fileselection_local_source,
-			 "response",
-			 G_CALLBACK
-			 (on_fileselection_local_source_response),
-			 (GtkFileSelection *)
-			 fileselection_local_source);
-
-	return fileselection_local_source;
+	gtk_widget_destroy (dialog);
 }
 
 
@@ -2206,9 +2147,7 @@ on_button5_clicked(GtkButton * button,
 	if (!working)
 	{
 		working = TRUE;
-		GtkWidget *dlg = create_fileselection_local_source();
-		gtk_widget_show(dlg);
-		gtk_dialog_run(GTK_DIALOG(dlg));
+		create_fileselection_local_source();
 		working = FALSE;
 	}
 }
