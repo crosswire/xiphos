@@ -154,9 +154,9 @@ static void html_link_message(GtkMozEmbed * embed)
 				return;
 			}
 		} else {
-			if (main_url_handler_gecko((strncmp(url, "http", 4)
+			if (main_url_handler ((strncmp(url, "http", 4)
 						    ? url_clean->str
-						    : url))) {
+						    : url),FALSE)) {
 				g_string_free(url_clean, TRUE);
 				return;
 			}

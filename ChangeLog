@@ -1,5 +1,6 @@
 2009-01-24  terry <tbiggs@users.sourceforge.net>
 
+	* fisrt run at removing main_url_handler_gecko
 	* fixed bug #2532349 mozembed doesn't respect default dictionary
 
 2009-01-23  terry <tbiggs@users.sourceforge.net>
