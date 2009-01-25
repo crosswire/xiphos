@@ -1122,7 +1122,14 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 		strongs = g_strdup((gchar*)m_url->getParameterValue("lemma"));
 		stype = g_strdup((gchar*)m_url->getParameterValue("type"));
 		svalue = g_strdup((gchar*)m_url->getParameterValue("value"));
-
+		
+		// XXX gross hack-fix
+		// AraSVD is named "Smith & Van Dyke", using a literal '&'.
+		// this is technically a Sword bug: Sword should encode it.
+		// we work around it here: replace '&' with '+'.  *sigh*
+		//if (svalue = strstr(, " & "))
+		//	*(svalue+1) = '-';
+			 
 		GS_message(("action = %s", action));
 		GS_message(("type = %s", stype));
 		GS_message(("value = %s", svalue));
@@ -1130,14 +1137,14 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 		GS_message(("morph = %s", morph));
 
 		if (!strcmp(action, "showStrongs")) {
-			stype = g_strdup((gchar*)m_url->getParameterValue("type"));
-			svalue = g_strdup((gchar*)m_url->getParameterValue("value"));
+			//stype = g_strdup((gchar*)m_url->getParameterValue("type"));
+			//svalue = g_strdup((gchar*)m_url->getParameterValue("value"));
 			show_strongs(stype, svalue, clicked);
 		}
 
 		else if (!strcmp(action, "showMorph")) {
-			stype = g_strdup((gchar*)m_url->getParameterValue("type"));
-			svalue = g_strdup((gchar*)m_url->getParameterValue("value"));
+			//stype = g_strdup((gchar*)m_url->getParameterValue("type"));
+			//svalue = g_strdup((gchar*)m_url->getParameterValue("value"));
 			show_morph(stype, svalue, clicked);
 		}
 
@@ -1167,7 +1174,7 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 		}
 
 		else if (!strcmp(action, "showModInfo")) {
-			svalue = g_strdup((gchar*)m_url->getParameterValue("value"));
+			//svalue = g_strdup((gchar*)m_url->getParameterValue("value"));
 			module = g_strdup(m_url->getParameterValue("module"));
 			show_mod_info(module, svalue, clicked);
 			if (module) g_free(module);
@@ -1215,7 +1222,7 @@ gint main_url_handler(const gchar * url, gboolean clicked)
  * Return value
  *	gint
  */
-
+/*
 gint main_url_handler_gecko(const gchar * url)
 {
 	gchar* url_work = g_strdup(url);;
@@ -1266,10 +1273,6 @@ gint main_url_handler_gecko(const gchar * url)
 			show_strongs(stype, svalue, FALSE);
 		}
 		else if (strstr(action, "showMorph")) {
-			/*if (strstr(work_buf[1],"robinson")) 
-				stype = "robinson";
-			else
-				stype = "packard";*/
 			stype = strchr(work_buf[1],'=');
 			++stype;
 			svalue = strchr(work_buf[2],'=');
@@ -1344,7 +1347,7 @@ gint main_url_handler_gecko(const gchar * url)
 		g_free(url_work);
 	}
 }
-
+*/
 
 /******************************************************************************
  * Name
