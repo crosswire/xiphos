@@ -1041,9 +1041,6 @@ msgstr ""
 "module de textes bibliques dans la langue souhaitée."
 
 #: ../C/xiphos.xml:49(title)
-msgid "Xiphos Download Question"
-msgstr "Demande de permission de téléchargement par &appname;"
-
 #: ../C/xiphos.xml:62(phrase)
 msgid "Xiphos Download Question"
 msgstr "Demande de permission de téléchargement par &appname;"
