@@ -1,6 +1,0 @@
-?package(gnomesword):needs="X11" section="Applications/Science/Social"\
-  title="Gnomesword"\
-  longtitle="Bible study program"\
-  command="/usr/bin/gnomesword2"\
-  hints="Gnome,Bible"\
-  icon="/usr/share/pixmaps/gnomesword/gs2.xpm"
