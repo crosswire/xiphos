@@ -1,0 +1,10 @@
+TODO:
+	* Re-work advanced search (req #1615402):
+	  - Specify search range on the fly, without having to name it.
+	  - Search Hebrew/Greek using native charsets.
+
+For more information on feature requests:
+http://sourceforge.net/tracker/?group_id=5528&atid=355528
+
+For more bug information:
+http://sourceforge.net/tracker/?atid=105528&group_id=5528&func=browse

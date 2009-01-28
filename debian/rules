@@ -1,0 +1,14 @@
+#!/usr/bin/make -f
+
+DEB_DH_INSTALL_SOURCEDIR := debian
+include /usr/share/cdbs/1/rules/debhelper.mk
+include /usr/share/cdbs/1/class/gnome.mk
+
+DEB_CONFIGURE_EXTRA_FLAGS := --enable-pspell
+
+binary-install/xiphos::
+	chmod 644 debian/xiphos/usr/share/gnome/help/xiphos/C/*.xml
+	chmod 644 debian/xiphos/usr/share/gnome/help/xiphos/fr/*.xml
+	rm debian/xiphos/usr/share/doc/xiphos/COPYING*
+	rm debian/xiphos/usr/share/doc/xiphos/INSTALL*
+	mv debian/xiphos/usr/share/doc/xiphos/ChangeLog debian/xiphos/usr/share/doc/xiphos/changelog
