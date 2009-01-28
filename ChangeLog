@@ -1,3 +1,8 @@
+2009-01-29  karl <charcoal@users.sf.net>
+
+	* replace previous trunk content with that of branches/2.4.x.
+	* change name to xiphos.
+
 2009-01-24  terry <tbiggs@users.sourceforge.net>
 
 	* replace add local source dialog w/new gtk style - gnome2/mod_mgr.c
