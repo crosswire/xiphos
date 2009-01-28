@@ -1,0 +1,8 @@
+README
+
+all the files in this directory were taken form Yelp-2.16.2
+We changed the names of all but Yelper.cpp and Yelper.h
+most of the code in these files is Yelp code. If it's broken
+or breaks your system that would be our code :)
+
+We thank the Yelp folks for code that is so easy to follow.

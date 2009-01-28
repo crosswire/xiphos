@@ -1,0 +1,6 @@
+?package(xiphos):needs="X11" section="Applications/Science/Social"\
+  title="Xiphos"\
+  longtitle="Bible study program"\
+  command="/usr/bin/xiphos"\
+  hints="Gnome,Bible"\
+  icon="/usr/share/pixmaps/xiphos/gs2.xpm"

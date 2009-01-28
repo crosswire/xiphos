@@ -1,0 +1,302 @@
+<HTML>
+<HEAD>
+      <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   </HEAD>
+<BODY>
+<OBJECT type="text/site properties">
+<param name="ImageType" value="Folder">
+</OBJECT>
+<UL>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Manuel de Xiphos :">
+<param name="Local" value="index.html"></OBJECT></LI>
+<UL>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Introduction">
+<param name="Local" value="index.html#xiphos-introduction"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Premiers pas">
+<param name="Local" value="ar01s02.html"></OBJECT></LI>
+<UL>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="D&eacute;marrer Xiphos">
+<param name="Local" value="ar01s02.html#xiphos-getting-started"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="D&eacute;marrer Xiphos la premi&egrave;re fois">
+<param name="Local" value="ar01s02.html#xiphos-first-start"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="D&eacute;marrer Xiphos">
+<param name="Local" value="ar01s02.html#xiphos-when-you-start"></OBJECT></LI>
+</UL><LI><OBJECT type="text/sitemap">
+<param name="Name" value="Interface">
+<param name="Local" value="ar01s03.html"></OBJECT></LI>
+<UL>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Barre de menu">
+<param name="Local" value="ar01s03.html#menubar"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Barres d'outils">
+<param name="Local" value="ar01s03.html#toolbars"></OBJECT></LI>
+<UL>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Boutons de d&eacute;placement avant/arri&egrave;re dans l'historique.">
+<param name="Local" value="ar01s03.html#d0e764"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="S&eacute;lecteur de livre de la Bible">
+<param name="Local" value="ar01s03.html#xiphos-toolbar-book"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="S&eacute;lecteur de chapitre de la Bible">
+<param name="Local" value="ar01s03.html#xiphos-toolbar-chapter"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="S&eacute;lecteur de verset de la Bible">
+<param name="Local" value="ar01s03.html#xiphos-toolbar-verse"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Zone de saisie d'une r&eacute;f&eacute;rence biblique">
+<param name="Local" value="ar01s03.html#xiphos-toolbar-summary"></OBJECT></LI>
+</UL><LI><OBJECT type="text/sitemap">
+<param name="Name" value="La barre d'outils">
+<param name="Local" value="ar01s03.html#xiphos-sidebar"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Le volet des textes bibliques">
+<param name="Local" value="ar01s03.html#xiphos-bible"></OBJECT></LI>
+<UL>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Ouvrir une version diff&eacute;rente de la Bible">
+<param name="Local" value="ar01s03.html#xiphos-bible-open"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Utilisation du mode Vue parall&egrave;le">
+<param name="Local" value="ar01s03.html#xiphos-bible-parallel"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Ouvrir le texte&middot;biblique dans une fen&ecirc;tre distincte">
+<param name="Local" value="ar01s03.html#xiphos-bible-open-separate"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Rechercher les informations &agrave; propos de la version courante.">
+<param name="Local" value="ar01s03.html#xiphos-bible-about"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Options des modules">
+<param name="Local" value="ar01s03.html#xiphos-bible-options"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Options d'affichage">
+<param name="Local" value="ar01s03.html#xiphos-view-options"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="D&eacute;finition d'un mot particulier">
+<param name="Local" value="ar01s03.html#xiphos-bible-dictionary"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Rechercher un mot sp&eacute;cifique">
+<param name="Local" value="ar01s03.html#xiphos-bible-find"></OBJECT></LI>
+</UL><LI><OBJECT type="text/sitemap">
+<param name="Name" value="Aper&ccedil;u">
+<param name="Local" value="ar01s03.html#xiphos-viewer"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Le volet des commentaires">
+<param name="Local" value="ar01s03.html#xiphos-commentaries"></OBJECT></LI>
+<UL>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Rechercher les informations &agrave; propos du module de commentaires">
+<param name="Local" value="ar01s03.html#xiphos-commentary-about"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Ent&ecirc;tes des commentaires">
+<param name="Local" value="ar01s03.html#xiphos-commentary-headings"></OBJECT></LI>
+</UL><LI><OBJECT type="text/sitemap">
+<param name="Name" value="Volet dictionnaire">
+<param name="Local" value="ar01s03.html#xiphos-dictionary"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Raccourcis clavier">
+<param name="Local" value="ar01s03.html#xiphos-shortcut"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Diff&eacute;rences d'affichage dans Xiphos :">
+<param name="Local" value="ar01s03.html#xiphos-differences"></OBJECT></LI>
+</UL><LI><OBJECT type="text/sitemap">
+<param name="Name" value="Pr&eacute;f&eacute;rences">
+<param name="Local" value="ar01s04.html"></OBJECT></LI>
+<UL>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Introduction aux pr&eacute;f&eacute;rences">
+<param name="Local" value="ar01s04.html#preferences-introduction"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Polices et couleurs">
+<param name="Local" value="ar01s04.html#fonts-and-colors"></OBJECT></LI>
+<UL>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Configurer la couleur des polices">
+<param name="Local" value="ar01s04.html#font-color"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Configuration diverses des polices">
+<param name="Local" value="ar01s04.html#font-misc"></OBJECT></LI>
+</UL><LI><OBJECT type="text/sitemap">
+<param name="Name" value="Pr&eacute;f&eacute;rences g&eacute;n&eacute;rales">
+<param name="Local" value="ar01s04.html#general-settings"></OBJECT></LI>
+<UL>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Configuration des volets et onglets">
+<param name="Local" value="ar01s04.html#tab-pane1"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Pr&eacute;f&eacute;rences g&eacute;n&eacute;rales et r&eacute;pertoire du bloc-notes.">
+<param name="Local" value="ar01s04.html#tab-pane2"></OBJECT></LI>
+</UL><LI><OBJECT type="text/sitemap">
+<param name="Name" value="Configuration des modules">
+<param name="Local" value="ar01s04.html#module-settings"></OBJECT></LI>
+<UL>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Configuration du module principal">
+<param name="Local" value="ar01s04.html#main-modules"></OBJECT></LI>
+</UL></UL><LI><OBJECT type="text/sitemap">
+<param name="Name" value="G&eacute;rer les modules">
+<param name="Local" value="ar01s05.html"></OBJECT></LI>
+<UL>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Introduction &agrave; la gestion des modules">
+<param name="Local" value="ar01s05.html#module-introduction"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Configuration des modules de Sword">
+<param name="Local" value="ar01s05.html#sword-config"></OBJECT></LI>
+<UL>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Configurer les d&eacute;pots Sword">
+<param name="Local" value="ar01s05.html#sword-sources"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Destination des modules Sword">
+<param name="Local" value="ar01s05.html#installation"></OBJECT></LI>
+<UL>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Linux">
+<param name="Local" value="ar01s05.html#destination-linux"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Windows XP">
+<param name="Local" value="ar01s05.html#destination-xp"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Windows Vista">
+<param name="Local" value="ar01s05.html#destination-vista"></OBJECT></LI>
+</UL></UL><LI><OBJECT type="text/sitemap">
+<param name="Name" value="Installer, mettre &agrave; jour et maintenir les modules">
+<param name="Local" value="ar01s05.html#module-management"></OBJECT></LI>
+<UL>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Installer, mettre &agrave; jour et maintenir les modules">
+<param name="Local" value="ar01s05.html#add-module"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Maintenance des modules">
+<param name="Local" value="ar01s05.html#remove-module"></OBJECT></LI>
+</UL><LI><OBJECT type="text/sitemap">
+<param name="Name" value="Installer des modules manuellement">
+<param name="Local" value="ar01s05.html#non-standard-modules"></OBJECT></LI>
+</UL><LI><OBJECT type="text/sitemap">
+<param name="Name" value="Fonctions de recherche">
+<param name="Local" value="ar01s06.html"></OBJECT></LI>
+<UL>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Recherche simple">
+<param name="Local" value="ar01s06.html#xiphos-searchpane"></OBJECT></LI>
+<UL>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Boite de saisie de l'expression &agrave; rechercher">
+<param name="Local" value="ar01s06.html#xiphos-search-key"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="S&eacute;lecteur du module objet de la requ&ecirc;te">
+<param name="Local" value="ar01s06.html#xiphos-search-modselect"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="S&eacute;lecteur du type de requ&ecirc;te">
+<param name="Local" value="ar01s06.html#xiphos-search-typeselect"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Case &agrave; cocher des options de la requ&ecirc;te">
+<param name="Local" value="ar01s06.html#xiphos-search-options"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="S&eacute;lecteur de la plage de versets">
+<param name="Local" value="ar01s06.html#xiphos-search-scopeselect"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Affichage des r&eacute;sultats">
+<param name="Local" value="ar01s06.html#xiphos-search-results"></OBJECT></LI>
+</UL><LI><OBJECT type="text/sitemap">
+<param name="Name" value="Recherche avanc&eacute;e">
+<param name="Local" value="ar01s06.html#xiphos-advanced-search"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Syntaxe des expressions rationnelles utilis&eacute;es en cl&eacute; de recherche">
+<param name="Local" value="ar01s06.html#hdbk-op-search-dialog-text-regexp"></OBJECT></LI>
+<UL>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="R&egrave;gles des requ&ecirc;tes de recherche &agrave; l'aide des expressions rationnelles">
+<param name="Local" value="ar01s06.html#hdbk-op-search-dialog-text-regexp-rules"></OBJECT></LI>
+<UL>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Le point">
+<param name="Local" value="ar01s06.html#period"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="L'ast&eacute;risque">
+<param name="Local" value="ar01s06.html#asterisk"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Le signe plus">
+<param name="Local" value="ar01s06.html#plus"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Le point d'interrogation.">
+<param name="Local" value="ar01s06.html#question"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Les crochets">
+<param name="Local" value="ar01s06.html#bracket"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="La puissance en premier caract&egrave;re entre des crochets">
+<param name="Local" value="ar01s06.html#caret"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="La puissance correspond au d&eacute;but d'une ligne">
+<param name="Local" value="ar01s06.html#caret-s"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Le signe dollar recherche en fin de ligne">
+<param name="Local" value="ar01s06.html#dollar"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="La barre verticale">
+<param name="Local" value="ar01s06.html#bar"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Les parenth&egrave;ses">
+<param name="Local" value="ar01s06.html#parenth"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="L'antislash pr&eacute;c&eacute;dant un caract&egrave;re sp&eacute;cial">
+<param name="Local" value="ar01s06.html#backslash"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="L'antislash pr&eacute;c&eacute;dant un caract&egrave;re ordinaire">
+<param name="Local" value="ar01s06.html#backslash-o"></OBJECT></LI>
+</UL></UL></UL><LI><OBJECT type="text/sitemap">
+<param name="Name" value="Bloc-notes">
+<param name="Local" value="ar01s07.html"></OBJECT></LI>
+<UL>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Usage du bloc-notes :">
+<param name="Local" value="ar01s07.html#xiphos-studypad"></OBJECT></LI>
+</UL><LI><OBJECT type="text/sitemap">
+<param name="Name" value="Commentaires personnels">
+<param name="Local" value="ar01s08.html"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Listes de pri&egrave;res et notes">
+<param name="Local" value="ar01s09.html"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Obtenir de l'aide en ligne">
+<param name="Local" value="ar01s10.html"></OBJECT></LI>
+<UL>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Liste de diffusion des utilisateurs">
+<param name="Local" value="ar01s10.html#xiphos-mailing-list"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Discussion en ligne">
+<param name="Local" value="ar01s10.html#xiphos-live-chat"></OBJECT></LI>
+</UL><LI><OBJECT type="text/sitemap">
+<param name="Name" value="&Eacute;tude des textes originaux">
+<param name="Local" value="ar01s11.html"></OBJECT></LI>
+<UL>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Installer les modules n&eacute;cessaires">
+<param name="Local" value="ar01s11.html#orig-lang-install-modules"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Configurer">
+<param name="Local" value="ar01s11.html#orig-lang-setup"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Rechercher des Nombres de Strong">
+<param name="Local" value="ar01s11.html#orig-lang-search"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Modules additionnels">
+<param name="Local" value="ar01s11.html#orig-lang-additional"></OBJECT></LI>
+</UL><LI><OBJECT type="text/sitemap">
+<param name="Name" value="Auteurs">
+<param name="Local" value="ar01s12.html"></OBJECT></LI>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="Licence">
+<param name="Local" value="ar01s13.html"></OBJECT></LI>
+</UL></UL>
+</BODY></HTML>

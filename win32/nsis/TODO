@@ -1,0 +1,21 @@
+TODO:
+
+    * Why installed fonts aren't immediately usable?
+
+    * remove files unnedded for generating the installer
+
+    * Name for the installer binary: "Xiphos-3.0-win32.exe"
+
+    * Try to simplify i18n declaration
+        - inspiration at other OSS projects using NSIS
+
+    * remove 'sword://' handler only, when it was set by GS
+
+    * Shortcuts - ask user whether install them for all users or only
+      for current users
+
+    * Write tutor how to generate NSIS installer
+
+    * What default folder to use for finding binaries?
+
+    * Write tutor how to translate installer strings
