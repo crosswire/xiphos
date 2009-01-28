@@ -1,0 +1,25 @@
+Source: xiphos
+Build-Depends: autotools-dev, patchutils, cdbs, debhelper, quilt, libsword-dev (>=1.5.11), gnome-spell, scrollkeeper, gtkhtml3.8 | gtkhtml3.14 | gtkhtml-editor-dev , libgtkhtml3.8-dev | libgtkhtml3.14-dev, gnome-doc-utils, intltool, libatspi-dev, libgnome2-dev, libmagick++9-dev, libxul-dev | xulrunner-1.9-dev | xulrunner-dev
+Build-Conflicts: 
+Section: gnome
+Priority: optional
+Maintainer: Xiphos Developer Team <xiphos-developers@lists.sourceforge.net>
+Standards-Version: 3.8.0.0
+
+Package: xiphos
+Architecture: any
+Section: gnome
+Provides: sword-frontend
+Depends: ${shlibs:Depends}
+Description: Bible study with GNOME
+ A bible study program for GNOME using the SWORD library.
+ Features:
+  Search Bible and Commentary
+  Search Personal notes
+  Add personal notes to verses
+  Bookmarks
+  Parallel Page - Display up to five versions
+  StudyPad and Personal Commentary for keeping notes
+  Spellcheck for StudyPad and Personal notes
+  Uses modules from the SWORD Project
+  Support for Sword Bible, Commentary, Lexicon and General Book modules
