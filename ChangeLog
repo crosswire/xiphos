@@ -2,6 +2,7 @@
 
 	* replace previous trunk content with that of branches/2.4.x.
 	* change name to xiphos.
+	* intermediate version stamp change, to 2.4.99, until 3.0 release.
 
 2009-01-24  terry <tbiggs@users.sourceforge.net>
 
