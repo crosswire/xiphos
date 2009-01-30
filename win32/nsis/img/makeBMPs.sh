@@ -31,8 +31,8 @@ function makeBMP { convert $1 PPM:- | convert PPM:- $2; }
 
 makeBMP header.svg header.bmp
 makeBMP header-r.svg header-r.bmp
-ln -sf header.bmp header-uninstall.bmp
-ln -sf header-r.bmp header-uninstall-r.bmp
+cp header.bmp header-uninstall.bmp
+cp header-r.bmp header-uninstall-r.bmp
 makeBMP wizard.png wizard.bmp
-ln -sf wizard.bmp wizard-uninstall.bmp
+cp wizard.bmp wizard-uninstall.bmp
 
