@@ -1150,13 +1150,13 @@ static GnomeUIInfo help1_menu_uiinfo[] = {
 	GNOME_APP_UI_ITEM, N_("_Live Chat"),
 	N_("Chat with other users and developers"),
 	on_live_chat_activate, NULL, NULL,
-	GNOME_APP_PIXMAP_STOCK, GTK_STOCK_ABOUT,
+	GNOME_APP_PIXMAP_STOCK, GTK_STOCK_DIALOG_QUESTION, //or GNOME_APP_PIXMAP_FILENAME, "what/is/this/path/relative/to.png?",
 	0, 0, NULL},
 	{
 	 GNOME_APP_UI_ITEM, N_("_Report Bug"),
 	 N_("Report bug to SourceForge"),
 	 on_report_bug_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_ABOUT,
+	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_DIALOG_ERROR,
 	 0, 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
 	{
