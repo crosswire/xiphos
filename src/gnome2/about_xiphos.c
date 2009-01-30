@@ -127,7 +127,7 @@ gui_create_about_xiphos(void)
 	    (GTK_ABOUT_DIALOG (about1),
 	     _("(formerly known as GnomeSword)\nWe would like to thank Troy Griffitts and all the other folks who have given us The SWORD Project."));
 	gtk_about_dialog_set_website
-	    (GTK_ABOUT_DIALOG (about1), "http://gnomesword.sourceforge.net/");
+	    (GTK_ABOUT_DIALOG (about1), "http://xiphos.sourceforge.net/");
 	gtk_about_dialog_set_authors
 	    (GTK_ABOUT_DIALOG (about1), authors);
 	gtk_about_dialog_set_documenters
