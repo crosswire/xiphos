@@ -23,11 +23,16 @@
 #FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 #OTHER DEALINGS IN THE SOFTWARE.
 
-for i in header header-r header-uninstall header-uninstall-r wizard wizard-uninstall
-do
-	convert $i.svg PPM:- | convert PPM:- $i.bmp
-done
+function makeBMP { convert $1 PPM:- | convert PPM:- $2; }
 
 #converted via PPM format to remove gAMA and cHRM chunks so resulting 
 #BMP is an older BMP3 instead of BMP4, as seems to be required by NSIS.
 #-- from http://www.cit.gu.edu.au/~anthony/info/graphics/imagemagick.hints
+
+makeBMP header.svg header.bmp
+makeBMP header-r.svg header-r.bmp
+ln -sf header.bmp header-uninstall.bmp
+ln -sf header-r.bmp header-uninstall-r.bmp
+makeBMP wizard.png wizard.bmp
+ln -sf wizard.bmp wizard-uninstall.bmp
+
