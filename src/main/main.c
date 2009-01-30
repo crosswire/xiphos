@@ -77,7 +77,7 @@ int main(int argc, char *argv[])
 
 	/* make allowance for pre-existing modules area. */
 	if (!getenv("SWORD_PATH"))
-		putenv(g_strdup_printf("SWORD_PATH=%s/Application Data/.sword",
+		putenv(g_strdup_printf("SWORD_PATH=%s/Application Data/Sword",
 				       getenv("ALLUSERSPROFILE")));
 	mkdir(getenv("SWORD_PATH"));
 
