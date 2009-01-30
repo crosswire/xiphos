@@ -17,15 +17,22 @@
    version="1.0"
    sodipodi:docname="header.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
-   inkscape:export-filename="/home/simon/Desktop/GnomeSwordInstaller/install_top_green2.png"
+   inkscape:export-filename="/home/simon/Desktop/header_xiphos.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
      id="defs4">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 28.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="150 : 28.5 : 1"
+       inkscape:persp3d-origin="75 : 19 : 1"
+       id="perspective87" />
     <linearGradient
        id="linearGradient2617">
       <stop
-         style="stop-color:#0c006e;stop-opacity:1;"
+         style="stop-color:#114477;stop-opacity:1;"
          offset="0"
          id="stop2619" />
       <stop
@@ -199,6 +206,13 @@
          stdDeviation="1.5350889"
          id="feGaussianBlur3802" />
     </filter>
+    <inkscape:perspective
+       id="perspective10"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -210,13 +224,13 @@
      objecttolerance="10"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="3.8702311"
-     inkscape:cx="22.359044"
-     inkscape:cy="33.804807"
+     inkscape:zoom="6.0066668"
+     inkscape:cx="135.06383"
+     inkscape:cy="28.5"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer11"
      showgrid="false"
-     borderlayer="false"
+     borderlayer="true"
      showguides="true"
      inkscape:guide-bbox="true"
      inkscape:window-width="1280"
@@ -256,11 +270,12 @@
   <g
      inkscape:groupmode="layer"
      id="layer10"
-     inkscape:label="Shadows">
+     inkscape:label="Shadows"
+     style="display:inline">
     <g
        id="g3655"
        style="fill:#000000;fill-opacity:1;filter:url(#filter3711)"
-       transform="matrix(1.077553,0,0,1.077553,6.576387,-81.159447)">
+       transform="matrix(1.077553,0,0,1.077553,-18.615763,-81.159447)">
       <g
          transform="matrix(8.4467166e-2,0,0,8.4467166e-2,5.8734114,73.070095)"
          id="g3574"
@@ -313,10 +328,16 @@
            sodipodi:nodetypes="ccccccc" />
       </g>
     </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer12"
+     inkscape:label="Circle_Shadow"
+     style="display:none">
     <g
        id="g3720"
        style="opacity:1;fill:#000000;fill-opacity:1;display:inline;filter:url(#filter3800)"
-       transform="matrix(1.341726,0,0,1.341726,-64.924408,-42.815025)">
+       transform="matrix(1.341726,0,0,1.341726,-72.458509,-42.815025)">
       <path
          transform="matrix(0.2631581,0,0,0.2631581,49.215798,33.945879)"
          d="M 77.142857,35.42857 A 45,45 0 1 1 -12.857143,35.42857 A 45,45 0 1 1 77.142857,35.42857 z"
@@ -348,10 +369,10 @@
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="Red"
-     style="opacity:1;display:inline">
+     style="opacity:1;display:none">
     <g
        id="g3715"
-       transform="matrix(1.341726,0,0,1.341726,-65.440834,-44.924851)">
+       transform="matrix(1.341726,0,0,1.341726,-72.974935,-44.924851)">
       <path
          sodipodi:type="arc"
          style="fill:#cc0000;fill-opacity:1;stroke:#000000;stroke-width:5;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
@@ -383,11 +404,11 @@
      inkscape:groupmode="layer"
      id="layer6"
      inkscape:label="Green"
-     style="display:inline">
+     style="display:none">
     <g
        style="display:inline"
        id="g3472"
-       transform="matrix(0.165938,0,0,0.1718493,-7.3618616,-5.3876655)">
+       transform="matrix(0.165938,0,0,0.1718493,-14.895963,-5.3876655)">
       <path
          transform="matrix(2.1278195,0,0,2.1278195,48.034372,35.757252)"
          d="M 77.142857,35.42857 A 45,45 0 1 1 -12.857143,35.42857 A 45,45 0 1 1 77.142857,35.42857 z"
@@ -423,7 +444,7 @@
     <g
        style="display:inline"
        id="g2592"
-       transform="matrix(9.1017846e-2,0,0,9.1017846e-2,10.54282,-4.1839077)">
+       transform="matrix(9.1017846e-2,0,0,9.1017846e-2,-14.649331,-4.1839077)">
       <g
          style="display:inline"
          inkscape:label="BibleFill"
@@ -527,6 +548,137 @@
            id="path3248"
            d="M 201.69217,250.55729 L 814.65301,250.55729 L 574.86159,607.06825 L 441.48359,607.06825 L 201.69217,250.55729 z"
            style="opacity:1;fill:url(#linearGradient3250);fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1" />
+      </g>
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer11"
+     inkscape:label="Xiphos"
+     style="display:inline">
+    <g
+       style="display:inline"
+       id="g2642"
+       transform="matrix(0.2235108,0,0,0.2235108,24.401719,1.4535913)">
+      <g
+         transform="translate(-59.783996,-283.49824)"
+         style="display:none"
+         id="g2644"
+         inkscape:label="Text">
+        <text
+           sodipodi:linespacing="125%"
+           id="text2383"
+           y="454.0686"
+           x="99.532104"
+           style="font-size:155.41809082px;font-style:normal;font-weight:normal;line-height:125%;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+           xml:space="preserve"><tspan
+             style="font-size:155.41809082px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Airstrip Four;-inkscape-font-specification:Airstrip Four"
+             y="454.0686"
+             x="99.532104"
+             id="tspan2385"
+             sodipodi:role="line">xiphos</tspan></text>
+      </g>
+      <g
+         transform="translate(-59.783996,-283.49824)"
+         style="display:none"
+         inkscape:label="Main"
+         id="g2648">
+        <path
+           sodipodi:nodetypes="ccccccc"
+           id="text3214"
+           d="M 96.428368,383.02792 L 163.51824,450.16454 C 169.16806,455.19163 174.55981,454.89929 179.69345,449.28754 C 184.59581,443.44885 184.19092,437.96876 178.47881,432.84723 L 111.58496,366.06918 C 105.76623,360.90967 100.29614,361.18595 95.174641,366.89805 C 90.241987,372.4857 90.659895,377.86232 96.428368,383.02792"
+           style="font-size:155.41809082px;font-style:normal;font-weight:normal;line-height:125%;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans" />
+        <rect
+           y="354.70856"
+           x="82.593994"
+           height="119.49567"
+           width="104.258"
+           id="rect3233"
+           style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+        <path
+           style="font-size:155.41809082px;font-style:normal;font-weight:normal;line-height:125%;fill:#fe0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+           d="M 95.366223,375.54229 L 230.93225,511.15506 C 236.58208,516.18216 241.97383,515.88982 247.10747,510.27806 C 252.00983,504.43937 251.60493,498.95929 245.89283,493.83776 L 110.52282,358.58355 C 104.70409,353.42404 99.233998,353.70032 94.112495,359.41242 C 89.179845,365.00007 89.597752,370.37669 95.366223,375.54229"
+           id="path3227"
+           sodipodi:nodetypes="ccccccc" />
+        <path
+           sodipodi:nodetypes="ccccccc"
+           id="path3229"
+           d="M 111.41503,449.06049 L 186.23147,374.29079 C 191.25856,368.64097 190.96622,363.24922 185.35447,358.11558 C 179.51578,353.21322 174.03569,353.61811 168.91416,359.33022 L 94.456287,433.90389 C 89.296777,439.72262 89.573057,445.19271 95.285157,450.31421 C 100.87281,455.24687 106.24943,454.82896 111.41503,449.06049"
+           style="font-size:155.41809082px;font-style:normal;font-weight:normal;line-height:125%;fill:#fe0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans" />
+      </g>
+      <g
+         transform="translate(-59.783996,-283.49824)"
+         style="display:none"
+         inkscape:label="iphos"
+         id="g2654">
+        <text
+           sodipodi:linespacing="125%"
+           id="text3242"
+           y="454.0686"
+           x="198.14662"
+           style="font-size:155.41809082px;font-style:normal;font-weight:normal;line-height:125%;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline;font-family:Bitstream Vera Sans"
+           xml:space="preserve"><tspan
+             dx="0 -1.4568865 -2.0791128 -1.1216904 -3.0365355"
+             style="font-size:155.41809082px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Airstrip Four;-inkscape-font-specification:Airstrip Four"
+             y="454.0686"
+             x="198.14662"
+             id="tspan3244"
+             sodipodi:role="line">iphos</tspan></text>
+      </g>
+      <g
+         style="display:inline"
+         inkscape:label="Strokeiphos"
+         id="g2658">
+        <text
+           sodipodi:linespacing="125%"
+           id="text3279"
+           y="170.57036"
+           x="140.36263"
+           style="font-size:155.41809082px;font-style:normal;font-weight:normal;line-height:125%;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;display:inline;font-family:Bitstream Vera Sans"
+           xml:space="preserve"><tspan
+             dx="0 -1.4568865 -2.0791128 -1.1216904 -3.0365355"
+             style="font-size:155.41809082px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;font-family:Airstrip Four;-inkscape-font-specification:Airstrip Four"
+             y="170.57036"
+             x="140.36263"
+             id="tspan3281"
+             sodipodi:role="line">iphos</tspan></text>
+      </g>
+      <g
+         style="display:none"
+         inkscape:label="RedX"
+         id="g2662">
+        <g
+           id="g3248"
+           style="display:inline"
+           transform="translate(-59.783996,-283.49824)">
+          <path
+             sodipodi:nodetypes="ccccccc"
+             id="path3238"
+             d="M 95.366223,375.54229 L 230.93225,511.15506 C 236.58208,516.18216 241.97383,515.88982 247.10747,510.27806 C 252.00983,504.43937 251.60493,498.95929 245.89283,493.83776 L 110.52282,358.58355 C 104.70409,353.42404 99.233998,353.70032 94.112495,359.41242 C 89.179845,365.00007 89.597752,370.37669 95.366223,375.54229"
+             style="font-size:155.41809082px;font-style:normal;font-weight:normal;line-height:125%;fill:#fe0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline;font-family:Bitstream Vera Sans" />
+          <path
+             style="font-size:155.41809082px;font-style:normal;font-weight:normal;line-height:125%;fill:#fe0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline;font-family:Bitstream Vera Sans"
+             d="M 111.41503,449.06049 L 186.23147,374.29079 C 191.25856,368.64097 190.96622,363.24922 185.35447,358.11558 C 179.51578,353.21322 174.03569,353.61811 168.91416,359.33022 L 94.456287,433.90389 C 89.296777,439.72262 89.573057,445.19271 95.285157,450.31421 C 100.87281,455.24687 106.24943,454.82896 111.41503,449.06049"
+             id="path2666"
+             sodipodi:nodetypes="ccccccc" />
+        </g>
+      </g>
+      <g
+         style="display:none"
+         inkscape:label="StrokeX"
+         id="g2668">
+        <path
+           id="path3271"
+           d="M 114.125,71.21875 C 111.01723,71.073331 108.00586,72.630688 105.125,75.84375 L 76.34375,104.65625 L 46.75,75.09375 C 40.931271,69.934238 35.465253,70.19415 30.34375,75.90625 C 25.4111,81.493903 25.825279,86.86565 31.59375,92.03125 L 60.28125,120.75 L 30.6875,150.40625 C 25.52799,156.22498 25.7879,161.691 31.5,166.8125 C 37.087654,171.74517 42.4594,171.33097 47.625,165.5625 L 76.375,136.84375 L 167.15625,227.65625 C 172.80608,232.68336 178.17886,232.39301 183.3125,226.78125 C 188.21486,220.94256 187.80585,215.46528 182.09375,210.34375 L 92.4375,120.75 L 122.4375,90.78125 C 127.46459,85.131431 127.17425,79.75864 121.5625,74.625 C 119.00807,72.480217 116.54215,71.331853 114.125,71.21875 z"
+           style="font-size:155.41809082px;font-style:normal;font-weight:normal;line-height:125%;fill:none;fill-opacity:1;stroke:#000000;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;display:inline;font-family:Bitstream Vera Sans" />
+      </g>
+      <g
+         inkscape:label="BlackX"
+         id="g2671">
+        <path
+           id="path3284"
+           d="M 114.125,71.21875 C 111.01723,71.073331 108.00586,72.630688 105.125,75.84375 L 76.34375,104.65625 L 46.75,75.09375 C 40.931271,69.934238 35.465253,70.19415 30.34375,75.90625 C 25.4111,81.493903 25.825279,86.86565 31.59375,92.03125 L 60.28125,120.75 L 30.6875,150.40625 C 25.52799,156.22498 25.7879,161.691 31.5,166.8125 C 37.087654,171.74517 42.4594,171.33097 47.625,165.5625 L 76.375,136.84375 L 167.15625,227.65625 C 172.80608,232.68336 178.17886,232.39301 183.3125,226.78125 C 188.21486,220.94256 187.80585,215.46528 182.09375,210.34375 L 92.4375,120.75 L 122.4375,90.78125 C 127.46459,85.131431 127.17425,79.75864 121.5625,74.625 C 119.00807,72.480217 116.54215,71.331853 114.125,71.21875 z"
+           style="font-size:155.41809082px;font-style:normal;font-weight:normal;line-height:125%;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;display:inline;font-family:Bitstream Vera Sans" />
       </g>
     </g>
   </g>
