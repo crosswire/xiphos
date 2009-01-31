@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 2.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-21 20:33+0100\n"
-"PO-Revision-Date: 2009-01-21 22:07+0100\n"
+"POT-Creation-Date: 2009-01-31 21:53+0100\n"
+"PO-Revision-Date: 2009-01-31 22:41+0100\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>>\n"
 "Language-Team: French <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -20,6 +20,822 @@ msgstr ""
 #: ../C/authors.xml:3(para) ../C/xiphos.xml:3(para)
 msgid "This manual was written by:"
 msgstr "Ce manuel a été écrit par :"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: ../C/interface.xml:18(None) ../C/xiphos.xml:18(None)
+msgid ""
+"@@image: 'figures/interface_menubar.png'; "
+"md5=e565033e6a203b845ee4875c1d647057"
+msgstr "interface_menubar.png"
+
+#: ../C/interface.xml:5(title) ../C/interface.xml:14(title)
+#: ../C/xiphos.xml:108(term) ../C/xiphos.xml:5(title)
+#: ../C/xiphos.xml:14(title)
+msgid "Menubar"
+msgstr "Barre de menu"
+
+#: ../C/interface.xml:6(para) ../C/xiphos.xml:6(para)
+msgid ""
+"At the top of the <application>Xiphos</application> main window is the "
+"menubar. Almost all of the functions are available by activating the "
+"appropriate menu item. The functions have been grouped according to their "
+"type. For example, the file operations have been grouped into the "
+"<guisubmenu>File</guisubmenu> menu."
+msgstr ""
+"La <interface>Barre de menu</interface> se situe en haut de la fenêtre de "
+"l'application <application>&appname;</application>.  Pratiquement toutes les "
+"fonctions sont disponibles en utilisant les éléments de menu appropriés. Les "
+"différentes fonctions sont regroupées par type. Par exemple, les opérations "
+"sur les fichiers sont regroupées dans le menu  <guisubmenu>Fichier</"
+"guisubmenu>."
+
+#: ../C/interface.xml:27(phrase)
+msgid "menubar"
+msgstr "Barre de menu"
+
+#. Use the Introduction section to give a brief overview of what
+#.      the application is and what it does.
+#: ../C/introduction.xml:5(para)
+msgid ""
+"is a Bible study and research tool based upon the \"SWORD Project\" "
+"libraries and the GNOME Desktop libraries. You can use to do the following:"
+msgstr ""
+"est un outil de recherche et d'étude biblique s'appuyant sur les composants "
+"de l'architecture logicielle du Projet SWORD et l'environnement de bureau "
+"GNOME. <application>&appname;</application> offre les fonctionnalités suivantes :"
+
+#. Journals and Prayer Lists
+#: ../C/journals.xml:3(para) ../C/xiphos.xml:3(para)
+msgid ""
+"<application>Xiphos</application> supports user-created and -editable "
+"modules to contain general content. Initially conceived as simple prayer "
+"lists, they have expanded to include daily journals and topic-outline "
+"content. The user can maintain prayer lists, or prepare sermons, or write "
+"any structured content desired."
+msgstr ""
+"<application>Xiphos</application> accepte la création et l'édition par "
+"l'utilisateur de modules contenant du texte. Originellement conçus pour "
+"l'édition de simples listes de prières, ces modules incluent désormais des "
+"journaux quotidiens et des notes structurées. Il est ainsi possible de tenir "
+"à jour des listes de prières, de préparer des sermons, ou d'écrire "
+"n'importe quel contenu structuré."
+
+#: ../C/legal.xml:2(para) ../C/xiphos.xml:2(para)
+msgid ""
+"Permission is granted to copy, distribute and/or modify this document under "
+"the terms of the GNU Free Documentation License (GFDL), Version 1.1 or any "
+"later version published by the Free Software Foundation with no Invariant "
+"Sections, no Front-Cover Texts, and no Back-Cover Texts. You can find a copy "
+"of the GFDL at this <ulink type=\"help\" url=\"ghelp:fdl\">link</ulink> or "
+"in the file COPYING-DOCS distributed with this manual."
+msgstr ""
+"L'autorisation de copier, distribuer et/ou modifier le présent document est "
+"soumise aux conditions de la licence relative à la documentation gratuite "
+"GNU, version 1.1 ou toute version publiée ultérieurement par la Free "
+"Software Foundation sans sections identiques et sans aucun texte indiqué sur "
+"la première de couverture ni sur la quatrième de couverture.  Vous pouvez "
+"trouver une copie de cette licence à l'adresse suivante : <ulink type=\"help"
+"\" url=\"ghelp:fdl\">lien</ulink> ou dans le fichier COPYING-DOCS distribué "
+"avec le présent manuel."
+
+#: ../C/legal.xml:12(para) ../C/xiphos.xml:12(para)
+msgid ""
+"This manual is part of a collection of GNOME manuals distributed under the "
+"GFDL. If you want to distribute this manual separately from the collection, "
+"you can do so by adding a copy of the license to the manual, as described in "
+"section 6 of the license."
+msgstr ""
+"Le présent manuel appartient à une collection de manuels GNOME distribués "
+"conformément à cette licence.  Si vous souhaitez distribuer le présent  "
+"manuel séparément de la collection, cela est possible moyennant l'ajout "
+"d'une copie de la licence au manuel, tel que décrit dans la section 6 de la "
+"licence."
+
+#: ../C/legal.xml:19(para) ../C/xiphos.xml:19(para)
+msgid ""
+"Many of the names used by companies to distinguish their products and "
+"services are claimed as trademarks. Where those names appear in any GNOME "
+"documentation, and the members of the GNOME Documentation Project are made "
+"aware of those trademarks, then the names are in capital letters or initial "
+"capital letters."
+msgstr ""
+"De nombreux noms utilisés par les sociétés pour désigner leurs produits et "
+"services sont protégés en tant que marques commerciales. Lorsque ces noms "
+"apparaissent dans la documentation GNOME et lorsque les membres du projet de "
+"documentation GNOME connaissent l'existence d'une telle protection, ces "
+"noms sont imprimés en lettres majuscules ou portent une lettre majuscule à "
+"l'initiale."
+
+#: ../C/legal.xml:33(para) ../C/xiphos.xml:33(para)
+msgid ""
+"DOCUMENT IS PROVIDED ON AN \"AS IS\" BASIS, WITHOUT WARRANTY OF ANY KIND, "
+"EITHER EXPRESSED OR IMPLIED, INCLUDING, WITHOUT LIMITATION, WARRANTIES THAT "
+"THE DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT IS FREE OF DEFECTS "
+"MERCHANTABLE, FIT FOR A PARTICULAR PURPOSE OR NON-INFRINGING. THE ENTIRE "
+"RISK AS TO THE QUALITY, ACCURACY, AND PERFORMANCE OF THE DOCUMENT OR "
+"MODIFIED VERSION OF THE DOCUMENT IS WITH YOU. SHOULD ANY DOCUMENT OR "
+"MODIFIED VERSION PROVE DEFECTIVE IN ANY RESPECT, YOU (NOT THE INITIAL "
+"WRITER, AUTHOR OR ANY CONTRIBUTOR) ASSUME THE COST OF ANY NECESSARY "
+"SERVICING, REPAIR OR CORRECTION. THIS DISCLAIMER OF WARRANTY CONSTITUTES AN "
+"ESSENTIAL PART OF THIS LICENSE. NO USE OF ANY DOCUMENT OR MODIFIED VERSION "
+"OF THE DOCUMENT IS AUTHORIZED HEREUNDER EXCEPT UNDER THIS DISCLAIMER; AND"
+msgstr ""
+"CE DOCUMENT EST FOURNI \"TEL QUEL\", SANS AUCUNE GARANTIE, EXPLICITE OU "
+"IMPLICITE, Y COMPRIS, SANS LIMITATION, TOUTE GARANTIE ASSURANT QUE LE "
+"DOCUMENT OU LA VERSION MODIFIÉE DE CELUI-CI EST EXEMPT DE DÉFAUTS, "
+"COMMERCIALISABLE, ADAPTÉ À UN USAGE DONNÉ ET N'EST CONTRAIRE À AUCUNE "
+"LÉGISLATION. VOUS ASSUMEZ L'ENSEMBLE DES RISQUES ASSOCIÉS À LA QUALITÉ, A "
+"L'EXACTITUDE ET A LA PERFORMANCE DU PRÉSENT DOCUMENT OU D'UNE VERSION "
+"MODIFIÉE DE CELUI-CI. SI LE DOCUMENT OU UNE VERSION MODIFIÉE DE CELUI-CI "
+"DEVAIT S'AVÉRER DÉFECTUEUX A QUELQUE ÉGARD, VOUS (ET NON LE RÉDACTEUR "
+"INITIAL, L'AUTEUR OU TOUT AUTRE CONTRIBUTEUR) ASSUMEZ LES COÛTS DE TOUTE "
+"MAINTENANCE, RÉPARATION OU CORRECTION NÉCESSAIRE. LA PRÉSENTE CLAUSE DE NON-"
+"RESPONSABILITÉ EN MATIÈRE DE GARANTIE CONSTITUE UNE PARTIE ESSENTIELLE DE LA "
+"PRÉSENTE LICENCE. AUCUNE UTILISATION DU PRÉSENT DOCUMENT OU D'UNE VERSION "
+"MODIFIÉE DE CELUI-CI N'EST AUTORISÉE AU TITRE DE LA PRÉSENTE LICENCE SANS "
+"APPLICATION DE LA CLAUSE DE NON-RESPONSABILITÉ."
+
+#: ../C/legal.xml:54(para) ../C/xiphos.xml:54(para)
+msgid ""
+"UNDER NO CIRCUMSTANCES AND UNDER NO LEGAL THEORY, WHETHER IN TORT (INCLUDING "
+"NEGLIGENCE), CONTRACT, OR OTHERWISE, SHALL THE AUTHOR, INITIAL WRITER, ANY "
+"CONTRIBUTOR, OR ANY DISTRIBUTOR OF THE DOCUMENT OR MODIFIED VERSION OF THE "
+"DOCUMENT, OR ANY SUPPLIER OF ANY OF SUCH PARTIES, BE LIABLE TO ANY PERSON "
+"FOR ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES OF "
+"ANY CHARACTER INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF GOODWILL, "
+"WORK STOPPAGE, COMPUTER FAILURE OR MALFUNCTION, OR ANY AND ALL OTHER DAMAGES "
+"OR LOSSES ARISING OUT OF OR RELATING TO USE OF THE DOCUMENT AND MODIFIED "
+"VERSIONS OF THE DOCUMENT, EVEN IF SUCH PARTY SHALL HAVE BEEN INFORMED OF THE "
+"POSSIBILITY OF SUCH DAMAGES."
+msgstr ""
+"PAR AILLEURS, EN AUCUN CAS ET AU TITRE D'AUCUNE THÉORIE JURIDIQUE, QUE CE "
+"SOIT EN VERTU D'UN PRÉJUDICE (EN CE COMPRISE LA NÉGLIGENCE), D'UN CONTRAT OU "
+"D'UNE QUELCONQUE AUTRE RAISON, L'AUTEUR, LE RÉDACTEUR INITIAL, TOUT AUTRE "
+"CONTRIBUTEUR OU DISTRIBUTEUR DU PRÉSENT DOCUMENT OU D'UNE VERSION MODIFIÉE "
+"DE CELUI-CI, OU TOUT FOURNISSEUR D'UNE TELLE PARTIE, NE POURRA ÊTRE TENU "
+"POUR RESPONSABLE PAR UN TIERS DE TOUT DOMMAGE DIRECT, INDIRECT, SPÉCIAL, "
+"ACCIDENTEL OU CONSÉCUTIF QUEL QU'EN SOIT LE CARACTÈRE, Y COMPRIS, SANS "
+"LIMITATION, LES DOMMAGES CAUSÉS PAR UNE PERTE DE CLIENTÈLE, D'ARRÊT DE "
+"TRAVAIL, DE PANNE OU DE DYSFONCTIONNEMENT INFORMATIQUE OU POUR TOUT AUTRE "
+"DOMMAGE OU PERTE DÉCOULANT DE OU ASSOCIÉ À L'UTILISATION DU PRÉSENT DOCUMENT "
+"OU DE VERSIONS MODIFIÉES DE CELUI-CI, ET CE, MÊME SI LADITE PARTIE A ÉTÉ "
+"INFORMÉE DE LA POSSIBILITÉ DE TELS DOMMAGES."
+
+#: ../C/legal.xml:27(para) ../C/xiphos.xml:27(para)
+msgid ""
+"DOCUMENT AND MODIFIED VERSIONS OF THE DOCUMENT ARE PROVIDED UNDER THE TERMS "
+"OF THE GNU FREE DOCUMENTATION LICENSE WITH THE FURTHER UNDERSTANDING THAT: "
+"<placeholder-1/>"
+msgstr ""
+"LA DISTRIBUTION DU PRÉSENT DOCUMENT ET DES VERSIONS MODIFIÉES DE CELUI-CI "
+"EST RÉGIE  PAR LA LICENCE RELATIVE À LA DOCUMENTATION GRATUITE GNU, CE QUI "
+"IMPLIQUE QUE :<placeholder-1/>"
+
+#: ../C/license.xml:2(para) ../C/xiphos.xml:2(para)
+msgid ""
+"This program is free software; you can redistribute it and/or modify it "
+"under the terms of the <ulink type=\"ghelp\" url=\"gnome-help:gpl\">GNU "
+"General Public License</ulink> version 2 as published by the Free Software "
+"Foundation."
+msgstr ""
+"Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon "
+"les termes de la <ulink type=\"ghelp\" url=\"gnome-help:gpl\">Licence "
+"Publique Générale GNU</ulink> publiée par la Free Software Foundation "
+"(version 2)."
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: ../C/modules.xml:23(None) ../C/xiphos.xml:23(None)
+msgid "@@image: 'figures/module.png'; md5=c27ec45463d4c3d3765f35770c31414a"
+msgstr "module.png"
+
+#: ../C/modules.xml:5(title) ../C/xiphos.xml:5(title)
+msgid "Introduction To The Module Manager"
+msgstr "Introduction à la gestion des modules"
+
+#: ../C/modules.xml:6(para) ../C/xiphos.xml:6(para)
+msgid ""
+"The \"module\" is the unit of content in <application>Xiphos</application>, "
+"and Sword generally; a Sword module is a resource available for viewing in "
+"Sword applications. There are several varieties: Most importantly, Bible "
+"texts, as well as dictionaries and lexicons, commentaries, and general "
+"books, any of which may include image content (e.g. atlases). They are "
+"installed either from a local directory structure (typically on removable "
+"media, such as a CDROM distribution) or remotely via ftp from a repository "
+"such as Crosswire, which is the home of Sword, and from which all officially "
+"Sword-sanctioned modules are available. Also, many other modules are "
+"available from non-Crosswire repositories."
+msgstr ""
+"Le «­­&nbsp;module&nbsp;» est un bloc de contenu dans <application>"
+"&appname;</application> et plus "
+"généralement dans toute application basée sur Sword. Un module de Sword est "
+"une ressource destinée à être affichée dans une application Sword. Les "
+"modules sont de plusieurs types dont, en premier, les textes bibliques, puis "
+"les commentaires, les dictionnaires et lexiques, les livres ordinaires, ceux "
+"offrant un contenu graphique (Atlas). Ils sont à installer depuis un dépot "
+"local (distribution par CDROM) ou par téléchargement ftp depuis un dépot "
+"distant comme celui de Crosswire, site de Sword, où tous les modules "
+"certiifiés par Crosswire sont disponibles. Des modules sont également "
+"disponibles auprès d'autres sources."
+
+#: ../C/modules.xml:14(para) ../C/xiphos.xml:14(para)
+msgid ""
+"If you have other Sword applications installed, they will all share the same "
+"set of Sword modules that you install through the Module Manager."
+msgstr ""
+"Si d'autres applications basées sur Sword sont installées, elles ont accès "
+"aux modules installés par le gestionnaire de modules."
+
+#: ../C/modules.xml:19(title) ../C/modules.xml:32(phrase)
+#: ../C/xiphos.xml:19(title) ../C/xiphos.xml:32(phrase)
+msgid "The Module Manager Dialog"
+msgstr "La fenêtre de gestion des modules"
+
+#: ../C/onlinehelp.xml:4(title) ../C/xiphos.xml:4(title)
+msgid "Users Mailing List"
+msgstr "Liste de diffusion des utilisateurs"
+
+#: ../C/onlinehelp.xml:5(para) ../C/xiphos.xml:5(para)
+msgid ""
+"One way you can get help with Xiphos is using our low-traffic users' mailing "
+"list. You can sign up by clicking <ulink url=\"https://lists.sourceforge.net/"
+"lists/listinfo/xiphos-users/\"> this link</ulink>. Once you are signed up, "
+"you can email the list with any problems you are having and other users or "
+"the developers will respond, typically within a day."
+msgstr ""
+"Une façon d'obtenir de l'aide au sujet de <application>&appname;"
+"</application> est d'utiliser nos "
+"listes de diffusion à faible trafic. il suffit de s'abonner en sélectionnant "
+"<ulink url=\"https://lists.sourceforge.net/lists/listinfo/xiphos-users/\"> "
+"ce lien</ulink>. Une fois inscrit, un simple e-mail envoyé sur la liste "
+"décrivant les problèmes rencontrés amènera une réponse des autres "
+"utilisateurs ou des développeurs généralement dans la journée.<para>[NDT : "
+"La liste de diffusion est en langue anglaise]</para>"
+
+#: ../C/originallanguage.xml:4(title) ../C/xiphos.xml:4(title)
+msgid "Installing Needed Modules"
+msgstr "Installer les modules nécessaires"
+
+#: ../C/originallanguage.xml:5(para) ../C/xiphos.xml:5(para)
+msgid ""
+"Xiphos is ideally suited for studying the original Greek and Hebrew texts. "
+"To get started, you will want the following modules:"
+msgstr ""
+"Xiphos convient parfaitement à l'étude des textes originaux en grec ou "
+"hébreu. Pour démarrer, il est recommandé d'installer les modules suivants :"
+
+#: ../C/originallanguage.xml:8(para) ../C/xiphos.xml:8(para)
+msgid "From Crosswire Repository:"
+msgstr "Dépot Crosswire"
+
+#: ../C/originallanguage.xml:13(para) ../C/xiphos.xml:13(para)
+msgid ""
+"StrongsHebrew Dictionary (or get StrongsRealHebrew from the Xiphos "
+"Repository)"
+msgstr ""
+"Dictionnaire StrongsHebrew (ou le StrongsRealHebrew du dépot &appname;)<para>"
+"[NDT : dictionnaires en langue anglaise]</para>"
+
+#: ../C/originallanguage.xml:18(para) ../C/xiphos.xml:18(para)
+msgid ""
+"StrongsGreek Dictionary (or get StrongsRealGreek from the Xiphos Repository)"
+msgstr ""
+"Dictionnaire StrongsGreek (ou le StrongsRealGreek du dépot &appname;)<para>"
+"[NDT : dictionnaires en langue anglaise]</para>"
+
+#: ../C/originallanguage.xml:23(para) ../C/xiphos.xml:23(para)
+msgid "Robinson Dictionary"
+msgstr ""
+"Dictionnaire Robinson (codes morphologiques)<para>[NDT : dictionnaire en "
+"langue anglaise]</para>"
+
+#: ../C/originallanguage.xml:28(para) ../C/xiphos.xml:28(para)
+msgid "KJV Bible"
+msgstr "Bible Louis Segond 1910 avec codes Strong et étiquettes morphologiques"
+
+#: ../C/originallanguage.xml:33(para) ../C/xiphos.xml:33(para)
+msgid "From Xiphos Repository:"
+msgstr "Dépot &appname;"
+
+#: ../C/originallanguage.xml:38(para) ../C/xiphos.xml:38(para)
+msgid ""
+"StrongsRealGreek Dictionary (same as StrongsGreek, but with Greek "
+"characters, B-Greek transliteration, and self-referencing links)"
+msgstr ""
+"Dictionnaire StrongsRealGreek (identique au StrongsGreek, mais avec "
+"caractères grecs, transliteration B-Greek, et liens de renvois)<para>[NDT : "
+"dictionnaire en langue anglaise]</para>"
+
+#: ../C/originallanguage.xml:43(para) ../C/xiphos.xml:43(para)
+msgid ""
+"StrongsRealHebrew Dictionary (same as StrongsHebrew, but with Hebrew "
+"characters and self-referencing links)"
+msgstr ""
+"Dictionnaire StrongsRealHebrew (identique au StrongsHebrew, mais avec "
+"caractères hébreu et liens de renvois)<para>[NDT : dictionnaire en langue "
+"anglaise]</para>"
+
+#: ../C/originallanguage.xml:48(para) ../C/xiphos.xml:48(para)
+msgid ""
+"InvertedStrongsRealGreek (key in or copy actual Greek word, rather than "
+"number)"
+msgstr ""
+"Dictionnaire InvertedStrongsRealGreek définitions des mots grecs<para>NDT : "
+"dictionnaire en langue anglaise]</para>"
+
+#. Personal Commentary
+#: ../C/personal.xml:3(para) ../C/xiphos.xml:3(para)
+msgid ""
+"To build up a personal commentary you will need to install the editable "
+"'Personal' sword module from the English Commentaries section. Right click "
+"it and choose <guimenuitem>Edit-&gt;Note-&gt;Personal</guimenuitem> in the "
+"menu."
+msgstr ""
+"Écrire son propre commentaire personnel nécessite l'utilisation du module "
+"Sword «­­&nbsp;Personal&nbsp;». Pour utiliser ce module, sélectionner le "
+"bouton <guibutton>Modules</guibutton> du volet latéral, puis choisir ensuite "
+"<menuchoice><guimenuitem>Commentaires</guimenuitem><guimenuitem>English</"
+"guimenuitem><guimenuitem>+*Personal*+</guimenuitem></menuchoice>. Pour "
+"modifier ses commentaires, faire un clic du bouton droit à l'aide de la "
+"souris sur la fenêtre des commentaires, puis sélectionner "
+"<menuchoice><guimenuitem>Éditer</guimenuitem><guimenuitem>Note</"
+"guimenuitem><guimenuitem>+*Personal*+</guimenuitem></menuchoice>."
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: ../C/preferences.xml:12(None) ../C/xiphos.xml:12(None)
+msgid ""
+"@@image: 'figures/preferences.png'; md5=2e12d04c2d6bf4e857aeed16fb0213b5"
+msgstr "preferences.png"
+
+#: ../C/preferences.xml:6(title) ../C/xiphos.xml:6(title)
+msgid "Introduction To Preferences"
+msgstr "Introduction aux préférences"
+
+#: ../C/preferences.xml:8(title) ../C/xiphos.xml:8(title)
+msgid "The Preference Dialog"
+msgstr "La fenêtre des préférences"
+
+#: ../C/preferences.xml:21(phrase) ../C/xiphos.xml:21(phrase)
+msgid "The Preferences Dialog"
+msgstr "La fenêtre des préférences"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: ../C/search.xml:15(None) ../C/xiphos.xml:15(None)
+msgid ""
+"@@image: 'figures/interface_searchpane.png'; "
+"md5=9b02269f6a1a4aa3a2a627aaca52d66c"
+msgstr "interface_searchpane.png"
+
+#: ../C/search.xml:4(title) ../C/xiphos.xml:4(title)
+msgid "Simple Searches"
+msgstr "Recherche simple"
+
+#: ../C/search.xml:5(para) ../C/xiphos.xml:5(para)
+msgid ""
+"To conduct a quick search within the current Bible or commentary module, the "
+"Search Bar in the Sidebar should usually be adequate. Click either in the "
+"menu bar <guimenuitem>Edit-&gt;Search</guimenuitem> or in the Sidebar "
+"<guimenuitem>Modules-&gt;Search</guimenuitem> to access it."
+msgstr ""
+"Pour rechercher rapidement un mot ou une expression dans un module en cours "
+"d'utilisation, le plus simple est d'utiliser la fonction recherche du volet "
+"latéral. Cette fonction de recherche rapide est activée en sélectionnant  le "
+"menu <menuchoice><guimenuitem>Éditer</guimenuitem><guimenuitem>Rechercher</"
+"guimenuitem></menuchoice> ou le bouton <guibutton>Rechercher</guibutton> du "
+"volet latéral."
+
+#: ../C/search.xml:11(title) ../C/search.xml:24(phrase)
+#: ../C/xiphos.xml:11(title) ../C/xiphos.xml:24(phrase)
+msgid "The Search Bar"
+msgstr "La barre de recherche"
+
+#: ../C/search.xml:31(para) ../C/xiphos.xml:31(para)
+msgid ""
+"The <interface>Search Dialog</interface> consists of the following parts:"
+msgstr ""
+"Le formulaire <interface>Rechercher</interface> est constitué des éléments "
+"suivants :"
+
+#: ../C/search.xml:36(para) ../C/xiphos.xml:36(para)
+msgid "Search Key Entry box"
+msgstr "Boite de saisie de l'expression à rechercher"
+
+#: ../C/search.xml:41(para) ../C/search.xml:83(title) ../C/xiphos.xml:41(para)
+#: ../C/xiphos.xml:83(title)
+msgid "Search Module Selector"
+msgstr "Sélecteur du module objet de la requête"
+
+#: ../C/search.xml:46(para) ../C/search.xml:91(title) ../C/xiphos.xml:46(para)
+#: ../C/xiphos.xml:91(title)
+msgid "Search Type Selector"
+msgstr "Sélecteur du type de requête"
+
+#: ../C/search.xml:51(para) ../C/search.xml:129(title)
+#: ../C/xiphos.xml:51(para) ../C/xiphos.xml:129(title)
+msgid "Search Options Checkbox"
+msgstr "Case à cocher des options de la requête"
+
+#: ../C/search.xml:56(para) ../C/search.xml:136(title)
+#: ../C/xiphos.xml:56(para) ../C/xiphos.xml:136(title)
+msgid "Search Scope Selector"
+msgstr "Sélecteur de la plage de versets"
+
+#: ../C/search.xml:61(para) ../C/search.xml:173(title)
+#: ../C/xiphos.xml:61(para) ../C/xiphos.xml:173(title)
+msgid "Search Results View"
+msgstr "Affichage des résultats"
+
+#: ../C/search.xml:67(title) ../C/xiphos.xml:67(title)
+msgid "Search Key Entry Box"
+msgstr "Boite de saisie de l'expression à rechercher"
+
+#: ../C/search.xml:68(para) ../C/xiphos.xml:68(para)
+msgid ""
+"Allows entry of the key for which you would like to search. The search key "
+"can be a word, part of a word, several words, a phrase, or a regular "
+"expression depending on the type of search selected. When the search key is "
+"entered and all other selections in the search dialog are complete, click "
+"the <guibutton>Find</guibutton> button to begin the search."
+msgstr ""
+"La boite d'entrée permet de saisir l'expression à rechercher. Cette "
+"expression peut être un mot, une partie de mot, plusieurs mots, une phrase, "
+"ou une expression rationnelle suivant le type de requête sélectionné. Une "
+"fois l'expression à rechercher saisie, et les options définies, un clic sur "
+"le bouton <guimenuitem>Rechercher</guimenuitem> démarre la séquence de "
+"recherche."
+
+#: ../C/search.xml:75(para) ../C/xiphos.xml:75(para)
+msgid ""
+"This search uses the optimized search method (see next section) if the "
+"module has previously been indexed, and will use AND semantics by default "
+"(verses must contain all words you entered)."
+msgstr ""
+"Cette requête employe la méthode de recherche optimisée (Voir la section "
+"suivante) à la condition que le module concerné ait été précédemment indexé, "
+"et utilisera le ET logique par défaut (les versets doivent contenir tous les "
+"mots saisis)"
+
+#: ../C/search.xml:84(para) ../C/xiphos.xml:84(para)
+msgid ""
+"Allows selection of which modules you would like to search. Select "
+"<guibutton>Bible</guibutton> to search Bible versions or "
+"<guibutton>Commentary</guibutton> to search commentaries. Only the currently "
+"active module will be searched."
+msgstr ""
+"Permet la sélection du module dans lequel la requête sera exécutée. "
+"Sélectionner <guimenuitem>Texte biblique</guimenuitem> pour exécuter une "
+"requête dans le texte biblique ou <guimenuitem>Commentaire</guimenuitem>  "
+"pour le module de commentaires. La requête ne s'exécute que dans les modules "
+"en cours de consultation."
+
+#: ../C/search.xml:92(para) ../C/xiphos.xml:92(para)
+msgid ""
+"Allows selection of the type of search. There are three search types "
+"available:"
+msgstr ""
+"Permet se sélectionner le type de requête. Trois types de requête sont "
+"possibles :"
+
+#: ../C/search.xml:97(guibutton) ../C/xiphos.xml:97(guibutton)
+msgid "Multi word"
+msgstr "Mots multiples"
+
+#: ../C/search.xml:98(para) ../C/xiphos.xml:98(para)
+msgid ""
+"This type will match any verse that has all the words in the search key, "
+"regardless of where they appear in the verse."
+msgstr ""
+"La requête  recherche n'importe quel verset contenant tous les mots de "
+"l'expression  à rechercher, quelque soit l'ordre dans lequel ils "
+"apparaissent dans le verset."
+
+#: ../C/search.xml:103(guibutton) ../C/xiphos.xml:103(guibutton)
+msgid "Regular expression"
+msgstr "Expression rationnelle"
+
+#: ../C/search.xml:104(para) ../C/xiphos.xml:104(para)
+msgid ""
+"This search uses a regular expression as a search key. A regular expression "
+"is a pattern used to match a string of text. A regular expression can be "
+"used to find verses with words that match a particular pattern. For example "
+"the regular expression <userinput>\\ A[a-z]*iah </userinput> will match "
+"verses that contain the words Aiah, Ahaziah, Athaliah and Amariah."
+msgstr ""
+"L'expression à rechercher est une expression rationnelle. Une expression "
+"rationnelle est basée sur un langage et une syntaxe spécifiques permettant "
+"de retrouver un mot, une phrase à l'aide de combinaisons complexes. Par "
+"exemple l'expression rationnelle <userinput>\\ A[a-z]*iah </userinput> "
+"permet de retrouver les passages qui contiennent les mots Aiah, Ahaziah, "
+"Athaliah et Amariah."
+
+#: ../C/search.xml:111(para) ../C/xiphos.xml:111(para)
+msgid ""
+"A complete discussion of regular expressions is beyond the scope of this "
+"manual, but more information can be found in the grep man page."
+msgstr ""
+"Un exposé complet de l'emploi des expressions rationnelles dépasse le cadre "
+"de ce manuel, mais cependant plus d'informations à ce sujet peuvent être "
+"obtenues en parcourant le manuel de <command>grep</command>."
+
+#: ../C/search.xml:116(guibutton) ../C/xiphos.xml:116(guibutton)
+msgid "Exact phrase"
+msgstr "Phrase exacte"
+
+#: ../C/search.xml:117(para) ../C/xiphos.xml:117(para)
+msgid ""
+"This type will match the search key exatly as entered. If the search key is "
+"<userinput>\n"
+"\t\t\t\t\tit is good</userinput>, this search would match a verse which "
+"contains \"<emphasis>it is good</emphasis>,\" but would not match a verse "
+"which contains \"<emphasis> good</emphasis>, and doeth <emphasis>it</"
+"emphasis> not, to him it <emphasis>is</emphasis> sin.\""
+msgstr ""
+"La requête recherche la phrase exacte contenue dans l'expression à "
+"rechercher. Si la phrase à rechercher est <userinput>en vérité</userinput>, "
+"les passages obtenus contiendront «­­&nbsp;<emphasis>en vérité</"
+"emphasis>&nbsp;», mais pas «­­&nbsp;<emphasis>en</emphasis> toute  "
+"<emphasis>vérité</emphasis>&nbsp;»."
+
+#: ../C/search.xml:130(para) ../C/xiphos.xml:130(para)
+msgid ""
+"Allows selecting of search options. The only available option is "
+"<guibutton>Match case</guibutton>. Check this box to make the search case "
+"sensitive."
+msgstr ""
+"Permet de définir les options de recherche. L'option disponible est "
+"<guimenuitem>Respecter la casse</guimenuitem>. Cocher cette boite rend la "
+"recherche sensible à la casse des caractères."
+
+#: ../C/search.xml:137(para) ../C/xiphos.xml:137(para)
+msgid ""
+"Allows defining the range within the specificed module that will be "
+"searched. There are three search scopes available:"
+msgstr ""
+"Permet de définir la plage de versets à parcourir dans le module spécifié. "
+"Trois plages de recherche sont possibles :"
+
+#: ../C/search.xml:141(guibutton) ../C/xiphos.xml:141(guibutton)
+msgid "No scope"
+msgstr "Sans limites"
+
+#: ../C/search.xml:142(para) ../C/xiphos.xml:142(para)
+msgid "This button causes the search to to include the entire module."
+msgstr ""
+"Sélectionner ce bouton implique que la requête s'exécute sur l'ensemble des "
+"versets."
+
+#: ../C/search.xml:147(guibutton) ../C/xiphos.xml:147(guibutton)
+msgid "Use bounds"
+msgstr "Limites définies"
+
+#: ../C/search.xml:148(para) ../C/xiphos.xml:148(para)
+msgid ""
+"Selecting this button produces two dropdown selector boxes marked "
+"<guilabel>Lower</guilabel> and <guilabel>Upper</guilabel>. Select the first "
+"book to search in the <guilabel>Lower</guilabel> box and the last book to "
+"search in the <guilabel>Upper</guilabel> box. The search will begin with the "
+"<guilabel>Lower </guilabel> book and end with the <guilabel>Upper </"
+"guilabel> book and include all books in between."
+msgstr ""
+"Sélectionner ce bouton provoque l'ouverture de deux zones supplémentaires "
+"permettant la saisie des limites de la recherche. La première référence, "
+"début de la recherche, est à saisir dans la limite <guilabel>Basse</"
+"guilabel> et la deuxième référence, fin de la recherche, dans la limite "
+"<guilabel>Haute</guilabel>. La requête commencera au verset indiqué dans la "
+"limite <guilabel>Basse</guilabel> et se terminera au verset indiqué dans la "
+"limite <guilabel>Haute</guilabel> en incluant tous les versets situés entre "
+"les deux limites."
+
+#: ../C/search.xml:157(para) ../C/xiphos.xml:157(para)
+msgid ""
+"Chapter and verse numbers can be entered into the search bound boxes as well "
+"to further narrow the search."
+msgstr ""
+"Des numéros de chapitres ou de versets peuvent aussi être saisis dans les "
+"deux zones basse et haute  afin de mieux cibler la recherche."
+
+#: ../C/search.xml:163(guibutton) ../C/xiphos.xml:163(guibutton)
+msgid "Last search"
+msgstr "Dernière requête"
+
+#: ../C/search.xml:164(para) ../C/xiphos.xml:164(para)
+msgid ""
+"Select this button to do a new search including only the verses returned as "
+"a result of the last search. Use this with a new search key to narrow the "
+"search further."
+msgstr ""
+"Sélectionner ce bouton pour relancer une recherche uniquement sur les  "
+"versets retournés en résultat de la requête précédente. Utilisée avec une "
+"nouvelle expression, cette méthode permet de réduire la liste des versets "
+"restitués."
+
+#: ../C/search.xml:174(para) ../C/xiphos.xml:174(para)
+msgid ""
+"This shows a list of the current search results for previewing, navigation, "
+"or saving."
+msgstr ""
+"La liste des résultats est affichée permettant d'obtenir un aperçu du verset "
+"retourné, la navigation vers le chapître concerné ou l'enregistrement sous "
+"forme de signets."
+
+#: ../C/search.xml:177(term) ../C/xiphos.xml:177(term)
+msgid "Preview"
+msgstr "Aperçu"
+
+#: ../C/search.xml:178(para) ../C/xiphos.xml:178(para)
+msgid ""
+"To preview the search result, simply click on an individual result. The "
+"entry will show in the preview pane."
+msgstr ""
+"Pour visualiser le résultat, un simple clic sur un élément affiche le "
+"contenu dans le volet <interface>Aperçu</interface>"
+
+#: ../C/search.xml:184(term) ../C/xiphos.xml:184(term)
+msgid "Navigation"
+msgstr "Navigation"
+
+#: ../C/search.xml:185(para) ../C/xiphos.xml:185(para)
+msgid ""
+"Navigation to the search result can be done in two ways. To open the result "
+"in a new tab, middle-click the mouse. To open the result in the current tab, "
+"double-click the result."
+msgstr ""
+"La navigation vers le chapître concerné pour retrouver le contexte "
+"s'effectue de deux manières. Un clic du bouton milieu de la souris ouvre le "
+"verset dans un nouvel onglet, un double-clic l'ouvre dans l'onget courant."
+
+#: ../C/search.xml:191(term) ../C/xiphos.xml:191(term)
+msgid "Save Results"
+msgstr "Enregistrer les résultats"
+
+#: ../C/search.xml:192(para) ../C/xiphos.xml:192(para)
+msgid ""
+"You may save your results as a list of bookmarks. To do this, right-click "
+"and select <guilabel>Save List</guilabel>. You will be prompted to enter a "
+"name for the folder that your results will be saved to. After you have saved "
+"the results, you may view them by going to your bookmarks and finding the "
+"folder you just named."
+msgstr ""
+"Les résultats de la requête peuvent être enregistrés sous forme de signets. "
+"Dans le menu contextuel obtenu à l'aide du bouton droit de la souris, "
+"sélectionner <guilabel>Convertir en signets</guilabel>, il sera alors "
+"demandé le nom du dossier sous lequel la liste sera enregistrée. Ensuite, "
+"une fois la liste sauvegardée, il devient possible de retrouver les "
+"résultats de la requête en affichant les signets puis en choisissant le "
+"dossier précédemment nommé."
+
+#: ../C/start.xml:4(title) ../C/xiphos.xml:4(title)
+msgid "Starting Xiphos"
+msgstr "Démarrer Xiphos"
+
+#: ../C/start.xml:5(para) ../C/xiphos.xml:5(para)
+msgid "You can start <application>Xiphos</application> in the following ways:"
+msgstr ""
+"Vous pouvez démarrer <application>Xiphos</application> en utilisant l'une "
+"des méthodes suivantes :"
+
+#: ../C/start.xml:10(term) ../C/xiphos.xml:10(term)
+msgid "Applications menu"
+msgstr "Menu applications"
+
+#: ../C/start.xml:12(para) ../C/xiphos.xml:12(para)
+msgid ""
+"Choose <menuchoice><guisubmenu>Accessories</guisubmenu><guimenuitem>Xiphos "
+"Bible Guide</guimenuitem></menuchoice>."
+msgstr ""
+"Sélectionnez <menuchoice><guisubmenu>Accessoires</"
+"guisubmenu><guimenuitem>Xiphos</guimenuitem></menuchoice>."
+
+#: ../C/start.xml:20(term) ../C/xiphos.xml:20(term)
+msgid "Command line"
+msgstr "Ligne de commande"
+
+#: ../C/start.xml:22(para) ../C/xiphos.xml:22(para)
+msgid "Type <command>xiphos</command>, then press <keycap>Return</keycap>."
+msgstr ""
+"Entrez <command>xiphos</command>, puis appuyez sur <keycap>Entrée</keycap>."
+
+#: ../C/start.xml:28(term) ../C/xiphos.xml:28(term)
+msgid "Windows"
+msgstr "Windows"
+
+#: ../C/start.xml:30(para) ../C/xiphos.xml:30(para)
+msgid ""
+"Go to <menuchoice><guisubmenu>All Programs</guisubmenu><guisubmenu>Xiphos </"
+"guisubmenu><guimenuitem>Xiphos</guimenuitem></menuchoice>."
+msgstr ""
+"Sélectionnez <menuchoice><guisubmenu>Tous les programmes</"
+"guisubmenu><guisubmenu>Xiphos·</guisubmenu><guimenuitem>Xiphos</"
+"guimenuitem></menuchoice>."
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: ../C/studypad.xml:16(None) ../C/xiphos.xml:16(None)
+msgid "@@image: 'figures/studypad.png'; md5=447c0ff6d244070dfefb4cdf9bebcd2b"
+msgstr "studypad.png"
+
+#: ../C/studypad.xml:4(title) ../C/xiphos.xml:4(title)
+msgid "Using The Studypad"
+msgstr "Usage du bloc-notes :"
+
+#: ../C/studypad.xml:5(para) ../C/xiphos.xml:5(para)
+msgid ""
+"The Studypad can be opened by choosing <guibutton>File-&gt;Open Studypad</"
+"guibutton>"
+msgstr ""
+"Le bloc-notes s'obtient à l'aide du menu <menuchoice><guimenuitem>Fichier</"
+"guimenuitem><guimenuitem>Bloc-notes..</guimenuitem></menuchoice>"
+
+#: ../C/studypad.xml:8(para) ../C/xiphos.xml:8(para)
+msgid "This is what the Studypad typically looks like:"
+msgstr "Présentation du bloc-notes :"
+
+#: ../C/studypad.xml:12(title) ../C/studypad.xml:25(phrase)
+#: ../C/xiphos.xml:413(title) ../C/xiphos.xml:12(title)
+#: ../C/xiphos.xml:25(phrase)
+msgid "The Studypad"
+msgstr "Bloc-notes"
+
+#: ../C/studypad.xml:33(para) ../C/xiphos.xml:33(para)
+msgid ""
+"The Studypad will save into your working directory, making it useful for "
+"collecting and exporting information and Bible study material from Xiphos "
+"into other programmes."
+msgstr ""
+"Le bloc-notes enregistre les données dans votre répertoire de travail, ce "
+"qui est pratique pour échanger des informations avec d'autres applications. "
+
+#: ../C/studypad.xml:34(para) ../C/xiphos.xml:34(para)
+#: ../C/xiphos.xml:57(para)
+msgid "Toolbar 1"
+msgstr "Barre d'outils 1"
+
+#: ../C/studypad.xml:36(para) ../C/xiphos.xml:36(para)
+#: ../C/xiphos.xml:59(para)
+msgid "Font Size and Environment"
+msgstr "Taille de police"
+
+#: ../C/studypad.xml:37(para) ../C/xiphos.xml:37(para)
+#: ../C/xiphos.xml:60(para)
+msgid "Font Type"
+msgstr "Type de plice"
+
+#: ../C/studypad.xml:38(para) ../C/xiphos.xml:38(para)
+#: ../C/xiphos.xml:61(para)
+msgid "Bold, Italics, Underscored, Crossed Out"
+msgstr "Gras, italique, souligné, barré"
+
+#: ../C/studypad.xml:39(para) ../C/xiphos.xml:39(para)
+#: ../C/xiphos.xml:62(para)
+msgid "Left, Centre and Right Bound"
+msgstr "Aligné à gauche, au centre et àdroite"
+
+#: ../C/studypad.xml:40(para) ../C/xiphos.xml:40(para)
+#: ../C/xiphos.xml:63(para)
+msgid "Shift Paragraph Right or Left"
+msgstr "Décalage d'un paragraphe à droite ou à gauche"
+
+#: ../C/studypad.xml:41(para) ../C/xiphos.xml:41(para)
+#: ../C/xiphos.xml:64(para)
+msgid "Colour Selector"
+msgstr "Choix des couleurs"
+
+#: ../C/studypad.xml:43(para) ../C/xiphos.xml:43(para)
+#: ../C/xiphos.xml:66(para)
+msgid "Toolbar 2"
+msgstr "Barre d'outils 2"
+
+#: ../C/studypad.xml:45(para) ../C/xiphos.xml:45(para)
+msgid "New, Save, Delete and Print"
+msgstr "Nouveau, enregistrer, supprimer et imprimer"
+
+#: ../C/studypad.xml:46(para) ../C/xiphos.xml:46(para)
+#: ../C/xiphos.xml:69(para)
+msgid "Cut, Copy, Paste and Undo"
+msgstr "Couper, copier, coller et défaire"
+
+#: ../C/studypad.xml:47(para) ../C/xiphos.xml:47(para)
+#: ../C/xiphos.xml:70(para)
+msgid "Find and 'Find and Replace'"
+msgstr "Chercher et remplacer"
+
+#: ../C/studypad.xml:48(para) ../C/xiphos.xml:48(para)
+#: ../C/xiphos.xml:71(para)
+msgid "Spellcheck"
+msgstr "Vérification de l'orthographe"
+
+#: ../C/studypad.xml:51(para) ../C/xiphos.xml:51(para)
+#: ../C/xiphos.xml:74(para)
+msgid ""
+"In order for spellcheck to be available, one of the languages under "
+"<guimenuitem>Edit-&gt;Current Languages</guimenuitem> must be set."
+msgstr ""
+"Pour activer la vérification orthographique, un des langages du menu "
+"<menuchoice><guisubmenu>Éditer</guisubmenu><guimenuitem>Langues actuelles</"
+"guimenuitem></menuchoice> doit être sélectionné."
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
@@ -42,20 +858,11 @@ msgstr "first_start.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/xiphos.xml:18(None) ../C/interface.xml:18(None)
-msgid ""
-"@@image: 'figures/interface_menubar.png'; "
-"md5=e565033e6a203b845ee4875c1d647057"
-msgstr "interface_menubar.png"
-
-#. When image changes, this message will be marked fuzzy or untranslated for you.
-#. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:49(None)
 msgid ""
 "@@image: 'figures/interface_toolbar.png'; "
 "md5=af22d3813ded59e152cac9f7d35635d9"
 msgstr "interface_toolbar.png "
-""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
@@ -64,7 +871,6 @@ msgid ""
 "@@image: 'figures/interface_sidepane.png'; "
 "md5=d1783275662a57144b38d80c10688739"
 msgstr "interface_sidepane.png"
-""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
@@ -147,13 +953,6 @@ msgstr "gtkhtml3-vs-mozembed.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/xiphos.xml:12(None) ../C/preferences.xml:12(None)
-msgid ""
-"@@image: 'figures/preferences.png'; md5=2e12d04c2d6bf4e857aeed16fb0213b5"
-msgstr "preferences.png"
-
-#. When image changes, this message will be marked fuzzy or untranslated for you.
-#. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:38(None)
 msgid ""
 "@@image: 'figures/preferences_fonts-color.png'; "
@@ -210,12 +1009,6 @@ msgstr "preferences_modules-misc.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/xiphos.xml:23(None) ../C/modules.xml:23(None)
-msgid "@@image: 'figures/module.png'; md5=c27ec45463d4c3d3765f35770c31414a"
-msgstr "module.png"
-
-#. When image changes, this message will be marked fuzzy or untranslated for you.
-#. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:49(None)
 msgid ""
 "@@image: 'figures/sword_sources.png'; md5=a1182919f9c770abd01edee116fc0f48"
@@ -244,24 +1037,10 @@ msgstr "sword_remove.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/xiphos.xml:15(None) ../C/search.xml:15(None)
-msgid ""
-"@@image: 'figures/interface_searchpane.png'; "
-"md5=9b02269f6a1a4aa3a2a627aaca52d66c"
-msgstr "interface_searchpane.png"
-
-#. When image changes, this message will be marked fuzzy or untranslated for you.
-#. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:214(None)
 msgid ""
 "@@image: 'figures/search_search.png'; md5=8c46acb73426be8ca481336b25d83659"
 msgstr "search_search.png"
-
-#. When image changes, this message will be marked fuzzy or untranslated for you.
-#. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/xiphos.xml:16(None) ../C/studypad.xml:16(None)
-msgid "@@image: 'figures/studypad.png'; md5=447c0ff6d244070dfefb4cdf9bebcd2b"
-msgstr "studypad.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
@@ -281,7 +1060,7 @@ msgstr "Manuel de <application>&appname;</application> :"
 
 #: ../C/xiphos.xml:58(para)
 msgid "Xiphos is an application to aid in study of the Bible."
-msgstr "&appname; est un logiciel d'aide à l'étude biblique."
+msgstr "<application>&appname;</application> est un logiciel d'aide à l'étude biblique."
 
 #: ../C/xiphos.xml:61(year)
 msgid "2003"
@@ -294,117 +1073,6 @@ msgstr "2008"
 #: ../C/xiphos.xml:63(holder) ../C/xiphos.xml:78(publishername)
 msgid "The Xiphos Team"
 msgstr "L'équipe de développement Xiphos"
-
-#: ../C/xiphos.xml:2(para) ../C/legal.xml:2(para)
-msgid ""
-"Permission is granted to copy, distribute and/or modify this document under "
-"the terms of the GNU Free Documentation License (GFDL), Version 1.1 or any "
-"later version published by the Free Software Foundation with no Invariant "
-"Sections, no Front-Cover Texts, and no Back-Cover Texts. You can find a copy "
-"of the GFDL at this <ulink type=\"help\" url=\"ghelp:fdl\">link</ulink> or "
-"in the file COPYING-DOCS distributed with this manual."
-msgstr ""
-"L'autorisation de copier, distribuer et/ou modifier le présent document est "
-"soumise aux conditions de la licence relative à la documentation gratuite "
-"GNU, version 1.1 ou toute version publiée ultérieurement par la Free "
-"Software Foundation sans sections identiques et sans aucun texte indiqué sur "
-"la première de couverture ni sur la quatrième de couverture.  Vous pouvez "
-"trouver une copie de cette licence à l'adresse suivante : <ulink type=\"help"
-"\" url=\"ghelp:fdl\">lien</ulink> ou dans le fichier COPYING-DOCS distribué "
-"avec le présent manuel."
-
-#: ../C/xiphos.xml:12(para) ../C/legal.xml:12(para)
-msgid ""
-"This manual is part of a collection of GNOME manuals distributed under the "
-"GFDL. If you want to distribute this manual separately from the collection, "
-"you can do so by adding a copy of the license to the manual, as described in "
-"section 6 of the license."
-msgstr ""
-"Le présent manuel appartient à une collection de manuels GNOME distribués "
-"conformément à cette licence.  Si vous souhaitez distribuer le présent  "
-"manuel séparément de la collection, cela est possible moyennant l'ajout "
-"d'une copie de la licence au manuel, tel que décrit dans la section 6 de la "
-"licence."
-
-#: ../C/xiphos.xml:19(para) ../C/legal.xml:19(para)
-msgid ""
-"Many of the names used by companies to distinguish their products and "
-"services are claimed as trademarks. Where those names appear in any GNOME "
-"documentation, and the members of the GNOME Documentation Project are made "
-"aware of those trademarks, then the names are in capital letters or initial "
-"capital letters."
-msgstr ""
-"De nombreux noms utilisés par les sociétés pour désigner leurs produits et "
-"services sont protégés en tant que marques commerciales. Lorsque ces  noms "
-"apparaissent dans la documentation GNOME et lorsque les membres du projet de "
-"documentation GNOME connaissent l'existence d'une telle  protection, ces "
-"noms sont imprimés en lettres majuscules ou portent une lettre majuscule à "
-"l'initiale."
-
-#: ../C/xiphos.xml:33(para) ../C/legal.xml:33(para)
-msgid ""
-"DOCUMENT IS PROVIDED ON AN \"AS IS\" BASIS, WITHOUT WARRANTY OF ANY KIND, "
-"EITHER EXPRESSED OR IMPLIED, INCLUDING, WITHOUT LIMITATION, WARRANTIES THAT "
-"THE DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT IS FREE OF DEFECTS "
-"MERCHANTABLE, FIT FOR A PARTICULAR PURPOSE OR NON-INFRINGING. THE ENTIRE "
-"RISK AS TO THE QUALITY, ACCURACY, AND PERFORMANCE OF THE DOCUMENT OR "
-"MODIFIED VERSION OF THE DOCUMENT IS WITH YOU. SHOULD ANY DOCUMENT OR "
-"MODIFIED VERSION PROVE DEFECTIVE IN ANY RESPECT, YOU (NOT THE INITIAL "
-"WRITER, AUTHOR OR ANY CONTRIBUTOR) ASSUME THE COST OF ANY NECESSARY "
-"SERVICING, REPAIR OR CORRECTION. THIS DISCLAIMER OF WARRANTY CONSTITUTES AN "
-"ESSENTIAL PART OF THIS LICENSE. NO USE OF ANY DOCUMENT OR MODIFIED VERSION "
-"OF THE DOCUMENT IS AUTHORIZED HEREUNDER EXCEPT UNDER THIS DISCLAIMER; AND"
-msgstr ""
-"CE DOCUMENT EST FOURNI \"TEL QUEL\", SANS AUCUNE GARANTIE, EXPLICITE OU "
-"IMPLICITE, Y COMPRIS, SANS LIMITATION, TOUTE GARANTIE ASSURANT QUE LE "
-"DOCUMENT OU LA VERSION MODIFIÉE DE CELUI-CI EST EXEMPT DE DÉFAUTS, "
-"COMMERCIALISABLE, ADAPTÉ À UN USAGE DONNÉ ET N'EST CONTRAIRE À AUCUNE "
-"LÉGISLATION. VOUS ASSUMEZ L'ENSEMBLE DES RISQUES ASSOCIÉS À LA QUALITÉ, A "
-"L'EXACTITUDE ET A LA PERFORMANCE DU PRÉSENT DOCUMENT OU D'UNE VERSION "
-"MODIFIÉE DE CELUI-CI. SI LE DOCUMENT OU UNE VERSION MODIFIÉE DE CELUI-CI "
-"DEVAIT S'AVÉRER DÉFECTUEUX A QUELQUE ÉGARD, VOUS (ET NON LE RÉDACTEUR "
-"INITIAL, L'AUTEUR OU TOUT AUTRE CONTRIBUTEUR) ASSUMEZ LES COÛTS DE TOUTE "
-"MAINTENANCE, RÉPARATION OU CORRECTION NÉCESSAIRE. LA PRÉSENTE CLAUSE DE NON-"
-"RESPONSABILITÉ EN MATIÈRE DE GARANTIE CONSTITUE UNE PARTIE ESSENTIELLE DE LA "
-"PRÉSENTE LICENCE. AUCUNE UTILISATION DU PRÉSENT DOCUMENT OU D'UNE VERSION "
-"MODIFIÉE DE CELUI-CI N'EST AUTORISÉE AU TITRE DE LA PRÉSENTE LICENCE SANS "
-"APPLICATION DE LA CLAUSE DE NON-RESPONSABILITÉ."
-
-#: ../C/xiphos.xml:54(para) ../C/legal.xml:54(para)
-msgid ""
-"UNDER NO CIRCUMSTANCES AND UNDER NO LEGAL THEORY, WHETHER IN TORT (INCLUDING "
-"NEGLIGENCE), CONTRACT, OR OTHERWISE, SHALL THE AUTHOR, INITIAL WRITER, ANY "
-"CONTRIBUTOR, OR ANY DISTRIBUTOR OF THE DOCUMENT OR MODIFIED VERSION OF THE "
-"DOCUMENT, OR ANY SUPPLIER OF ANY OF SUCH PARTIES, BE LIABLE TO ANY PERSON "
-"FOR ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES OF "
-"ANY CHARACTER INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF GOODWILL, "
-"WORK STOPPAGE, COMPUTER FAILURE OR MALFUNCTION, OR ANY AND ALL OTHER DAMAGES "
-"OR LOSSES ARISING OUT OF OR RELATING TO USE OF THE DOCUMENT AND MODIFIED "
-"VERSIONS OF THE DOCUMENT, EVEN IF SUCH PARTY SHALL HAVE BEEN INFORMED OF THE "
-"POSSIBILITY OF SUCH DAMAGES."
-msgstr ""
-"PAR AILLEURS, EN AUCUN CAS ET AU TITRE D'AUCUNE THÉORIE JURIDIQUE, QUE CE "
-"SOIT EN VERTU D'UN PRÉJUDICE (EN CE COMPRISE LA NÉGLIGENCE), D'UN CONTRAT OU "
-"D'UNE QUELCONQUE AUTRE RAISON, L'AUTEUR, LE RÉDACTEUR INITIAL, TOUT AUTRE "
-"CONTRIBUTEUR OU DISTRIBUTEUR DU PRÉSENT DOCUMENT OU D'UNE VERSION MODIFIÉE "
-"DE CELUI-CI, OU TOUT FOURNISSEUR D'UNE TELLE PARTIE, NE POURRA ÊTRE TENU "
-"POUR RESPONSABLE PAR UN TIERS DE TOUT DOMMAGE DIRECT, INDIRECT, SPÉCIAL, "
-"ACCIDENTEL OU CONSÉCUTIF QUEL QU'EN SOIT LE CARACTÈRE, Y COMPRIS, SANS "
-"LIMITATION, LES DOMMAGES CAUSÉS PAR UNE PERTE DE CLIENTÈLE, D'ARRÊT DE "
-"TRAVAIL, DE PANNE OU DE DYSFONCTIONNEMENT INFORMATIQUE OU POUR TOUT AUTRE "
-"DOMMAGE OU PERTE DÉCOULANT DE OU ASSOCIÉ À L'UTILISATION DU PRÉSENT DOCUMENT "
-"OU DE VERSIONS MODIFIÉES DE CELUI-CI, ET CE, MÊME SI LADITE PARTIE A ÉTÉ "
-"INFORMÉE DE LA POSSIBILITÉ DE TELS DOMMAGES."
-
-#: ../C/xiphos.xml:27(para) ../C/legal.xml:27(para)
-msgid ""
-"DOCUMENT AND MODIFIED VERSIONS OF THE DOCUMENT ARE PROVIDED UNDER THE TERMS "
-"OF THE GNU FREE DOCUMENTATION LICENSE WITH THE FURTHER UNDERSTANDING THAT: "
-"<placeholder-1/>"
-msgstr ""
-"LA DISTRIBUTION DU PRÉSENT DOCUMENT ET DES VERSIONS MODIFIÉES DE CELUI-CI "
-"EST RÉGIE  PAR LA LICENCE RELATIVE À LA DOCUMENTATION GRATUITE GNU, CE QUI "
-"IMPLIQUE QUE :<placeholder-1/>"
 
 #: ../C/xiphos.xml:88(firstname)
 msgid "Andy"
@@ -832,7 +1500,7 @@ msgstr "2000-05-08"
 
 #: ../C/xiphos.xml:333(releaseinfo)
 msgid "This manual describes version 2.4.0 of Xiphos."
-msgstr "Ce manuel documente la version &manrevision; de &appname;"
+msgstr "Ce manuel documente la version &manrevision; de <application>&appname;</application>"
 
 #: ../C/xiphos.xml:336(title)
 msgid "Feedback"
@@ -844,10 +1512,10 @@ msgid ""
 "this manual, Use the <ulink url=\"http://sourceforge.net/tracker/?"
 "group_id=5528\"> Tracker on SourceForge</ulink> or the mailing lists."
 msgstr ""
-"Les rapports de bogue ou les suggestions à propos de Xiphos ou de ce "
-"manuel d'aide sont à envoyer au <ulink type=\"http\" url=\"http://"
-"sourceforge.net/tracker/?group_id=5528\">Tracker de SourceForge</ulink>  ou "
-"aux listes de diffusion."
+"Les rapports de bogue ou les suggestions à propos de Xiphos ou de ce manuel "
+"d'aide sont à envoyer au <ulink type=\"http\" url=\"http://sourceforge.net/"
+"tracker/?group_id=5528\">Tracker de SourceForge</ulink>  ou aux listes de "
+"diffusion."
 
 #: ../C/xiphos.xml:345(keyword)
 msgid "gnome"
@@ -881,12 +1549,12 @@ msgstr "Introduction"
 #.      the application is and what it does.
 #: ../C/xiphos.xml:5(para)
 msgid ""
-"<application>Xiphos</application> is a Bible study and research tool "
-"based upon the \"SWORD Project\" libraries and the GNOME Desktop libraries. "
-"You can use <application>Xiphos</application> to do the following:"
+"<application>Xiphos</application> is a Bible study and research tool based "
+"upon the \"SWORD Project\" libraries and the GNOME Desktop libraries. You "
+"can use <application>Xiphos</application> to do the following:"
 msgstr ""
-"<application>&appname;</application> est un logiciel d'étude biblique basé "
-"sur les bibliothèques du «­­&nbsp;SWORD Project&nbsp;» et de l'environnement "
+"<application>&appname;</application> est un logiciel d'étude biblique utilisant "
+"l'architecture logicielle du Projet&nbsp;SWORD et l'environnement "
 "de bureau «­­&nbsp;GNOME&nbsp;». <application>&appname;</application> permet "
 "d'effectuer les tâches suivantes :"
 
@@ -917,17 +1585,17 @@ msgstr "Étudier dans les langues originelles, grec ou hébreu"
 
 #: ../C/xiphos.xml:25(para)
 msgid ""
-"<application>Xiphos</application> aims to provide a simple and clean "
-"user interface while providing a powerful tool allowing a personalized Bible "
+"<application>Xiphos</application> aims to provide a simple and clean user "
+"interface while providing a powerful tool allowing a personalized Bible "
 "study environment."
 msgstr ""
-"<application>&appname;</application> a pour but d'afficher une interface "
-"utilisateur simple, épurée et de fournir à la fois un outil riche permettant "
+"<application>&appname;</application> a pour but de présenter une interface "
+"utilisateur simple, épurée et de fournir à la fois un outil riche, permettant "
 "d'offrir un environnement d'étude biblique personnalisé."
 
 #: ../C/xiphos.xml:30(title) ../C/xiphos.xml:43(phrase)
 msgid "The SWORD Project logo"
-msgstr "Le logo du «­­&nbsp;SWORD Project&nbsp;»"
+msgstr "Le logo du Projet SWORD"
 
 #: ../C/xiphos.xml:49(para)
 msgid ""
@@ -939,9 +1607,9 @@ msgid ""
 "<application>BibleDesktop</application>, a Java application, and "
 "<application>BibleTime</application>, another Linux program."
 msgstr ""
-"Le «­­&nbsp;SWORD Project&nbsp;» est hébergé à <ulink type=\"http\" url="
+"Le Projet­­&nbsp;SWORD est hébergé à <ulink type=\"http\" url="
 "\"http://www.crosswire.org\"> http://www.crosswire.org</ulink>. D'autres "
-"applications basées sur le «­­&nbsp;SWORD Project&nbsp;» sont&nbsp;: "
+"applications utilisant l'architecture logicielle du Projet­­&nbsp;SWORD sont&nbsp;: "
 "<application>The SWORD Project for Windows</application> "
 "(<application>BibleCS</application> ou <application>WinSword</application>), "
 "<application>MacSword</application> pour Macintosh, "
@@ -950,75 +1618,28 @@ msgstr ""
 
 #: ../C/xiphos.xml:59(title) ../C/xiphos.xml:72(phrase)
 msgid "Xiphos in action"
-msgstr "&appname; en action"
+msgstr "<application>&appname;</application> en action"
 
 #: ../C/xiphos.xml:81(para)
 msgid ""
 "<application>Xiphos</application> is currently in development, so this "
 "manual may not reflect the program as you see it. If it does not, please "
 "file a bug at the <ulink type=\"http\" url=\"http://sourceforge.net/projects/"
-"xiphos\"> project website</ulink>, or email <email>xiphos-"
-"developers@lists.sourceforge.net</email>. All help is appreciated, as it "
-"will improve the software."
+"xiphos\"> project website</ulink>, or email <email>xiphos-developers@lists."
+"sourceforge.net</email>. All help is appreciated, as it will improve the "
+"software."
 msgstr ""
 "<application>&appname;</application> est en cours de développement, il se "
 "peut donc que des différences apparaissent entre le logiciel et le contenu "
 "de ce manuel. Si cela est le cas, envoyez un rapport de bogue au <ulink type="
-"\"http\" url=\"http://sourceforge.net/projects/xiphos\"> site web du "
-"projet</ulink>, ou un email à\t<email>xiphos-developers@lists."
-"sourceforge.net</email> Toute aide est appréciée et permet d'améliorer "
-"&appname;."
+"\"http\" url=\"http://sourceforge.net/projects/xiphos\"> site web du projet</"
+"ulink>, ou un email à\t<email>xiphos-developers@lists.sourceforge.net</"
+"email> Toute aide est appréciée et permet d'améliorer <application>"
+"&appname;</application>."
 
 #: ../C/xiphos.xml:383(title)
 msgid "Getting Started with Xiphos"
 msgstr "Premiers pas"
-
-#: ../C/xiphos.xml:4(title) ../C/start.xml:4(title)
-msgid "Starting Xiphos"
-msgstr "Démarrer Xiphos"
-
-#: ../C/xiphos.xml:5(para) ../C/start.xml:5(para)
-msgid ""
-"You can start <application>Xiphos</application> in the following ways:"
-msgstr ""
-"Vous pouvez démarrer <application>Xiphos</application> en utilisant "
-"l'une des méthodes suivantes :"
-
-#: ../C/xiphos.xml:10(term) ../C/start.xml:10(term)
-msgid "Applications menu"
-msgstr "Menu applications"
-
-#: ../C/xiphos.xml:12(para) ../C/start.xml:12(para)
-msgid ""
-"Choose <menuchoice><guisubmenu>Accessories</"
-"guisubmenu><guimenuitem>Xiphos Bible Guide</guimenuitem></menuchoice>."
-msgstr ""
-"Sélectionnez <menuchoice><guisubmenu>Accessoires</"
-"guisubmenu><guimenuitem>Xiphos</guimenuitem></menuchoice>."
-
-#: ../C/xiphos.xml:20(term) ../C/start.xml:20(term)
-msgid "Command line"
-msgstr "Ligne de commande"
-
-#: ../C/xiphos.xml:22(para) ../C/start.xml:22(para)
-msgid "Type <command>xiphos</command>, then press <keycap>Return</keycap>."
-msgstr ""
-"Entrez <command>xiphos</command>, puis appuyez sur <keycap>Entrée</"
-"keycap>."
-
-#: ../C/xiphos.xml:28(term) ../C/start.xml:28(term)
-msgid "Windows"
-msgstr "Windows"
-
-#: ../C/xiphos.xml:30(para) ../C/start.xml:30(para)
-msgid ""
-"Go to <menuchoice><guisubmenu>All Programs</"
-"guisubmenu><guisubmenu>Xiphos </guisubmenu><guimenuitem>Xiphos</"
-"guimenuitem></menuchoice>."
-msgstr ""
-"Sélectionnez <menuchoice><guisubmenu>Tous les programmes</"
-"guisubmenu><guisubmenu>Xiphos·</guisubmenu><guimenuitem>Xiphos</"
-"guimenuitem></menuchoice>."
 
 #: ../C/xiphos.xml:41(title)
 msgid "Starting Xiphos For The First Time"
@@ -1027,23 +1648,22 @@ msgstr "Démarrer Xiphos la première fois"
 #: ../C/xiphos.xml:42(para)
 msgid ""
 "When you start <application>Xiphos</application> for the first time, "
-"<application>Xiphos</application> creates a default selection of options "
-"for display. Also, if no other Sword application has ever been run, and thus "
-"there are no Bible modules installed, then <application>Xiphos</"
-"application> asks permission to start the Module Manager so that you can "
-"select and install a Bible module in your language preference."
+"<application>Xiphos</application> creates a default selection of options for "
+"display. Also, if no other Sword application has ever been run, and thus "
+"there are no Bible modules installed, then <application>Xiphos</application> "
+"asks permission to start the Module Manager so that you can select and "
+"install a Bible module in your language preference."
 msgstr ""
 "Au premier démarrage de <application>&appname;</application>, les options "
 "sont initialisées à leurs valeurs par défaut. Par ailleurs, si aucune autre "
 "application Sword n'a jamais été utilisée auparavant, et donc qu'aucun "
-"module Sword n'a été installé, <application>Xiphos</application> demande "
-"la permission de démarrer le gestionnaire de modules afin d'installer un "
-"module de textes bibliques dans la langue souhaitée."
+"module Sword n'a été installé, <application>Xiphos</application> demande la "
+"permission de démarrer le gestionnaire de modules afin d'installer un module "
+"de textes bibliques dans la langue souhaitée."
 
-#: ../C/xiphos.xml:49(title)
-#: ../C/xiphos.xml:62(phrase)
+#: ../C/xiphos.xml:49(title) ../C/xiphos.xml:62(phrase)
 msgid "Xiphos Download Question"
-msgstr "Demande de permission de téléchargement par &appname;"
+msgstr "Demande de permission de téléchargement par <application>&appname;</application>"
 
 #: ../C/xiphos.xml:69(para)
 msgid ""
@@ -1065,11 +1685,11 @@ msgstr "Démarrer Xiphos"
 
 #: ../C/xiphos.xml:79(para)
 msgid ""
-"When you start <application>Xiphos</application>, the following "
-"interface is displayed:"
+"When you start <application>Xiphos</application>, the following interface is "
+"displayed:"
 msgstr ""
-"Au démarrage de <application>Xiphos</application>, la fenêtre  suivante "
-"est affichée :"
+"Au démarrage de <application>Xiphos</application>, la fenêtre  suivante est "
+"affichée :"
 
 #: ../C/xiphos.xml:83(title)
 msgid "Xiphos interface"
@@ -1087,17 +1707,11 @@ msgstr ""
 "La fenêtre de <application>Xiphos</application> contient les éléments "
 "suivants :"
 
-#: ../C/xiphos.xml:108(term) ../C/xiphos.xml:5(title)
-#: ../C/xiphos.xml:14(title) ../C/interface.xml:5(title)
-#: ../C/interface.xml:14(title)
-msgid "Menubar"
-msgstr "Barre de menu"
-
 #: ../C/xiphos.xml:110(para)
 msgid ""
 "The menus on the menubar contain several commands which extend the use of "
-"<application>Xiphos </application>. These include the StudyPad and "
-"advanced search functions. The menus also help you to customize your use of "
+"<application>Xiphos </application>. These include the StudyPad and advanced "
+"search functions. The menus also help you to customize your use of "
 "<application>Xiphos</application>."
 msgstr ""
 "La <interface>Barre de menu</interface> permet d'accéder aux fonctions "
@@ -1183,7 +1797,7 @@ msgid ""
 "View tab just below the Commentary Pane."
 msgstr ""
 "Le volet <interface>Livre</interface> affiche le texte de livres disponibles "
-"auprès du Sword Project. Ces modules comprennent des textes comme \"Calvin's "
+"auprès du Projet SWORD. Ces modules comprennent des textes comme \"Calvin's "
 "Institutes\", \"Josephus: The Complete Works\" etc. Ce volet est accessible "
 "via l'onglet Livre, en dessous du volet Commentaire."
 
@@ -1215,21 +1829,6 @@ msgstr ""
 #: ../C/xiphos.xml:389(title)
 msgid "Interface"
 msgstr "Interface"
-
-#: ../C/xiphos.xml:6(para) ../C/interface.xml:6(para)
-msgid ""
-"At the top of the <application>Xiphos</application> main window is the "
-"menubar. Almost all of the functions are available by activating the "
-"appropriate menu item. The functions have been grouped according to their "
-"type. For example, the file operations have been grouped into the "
-"<guisubmenu>File</guisubmenu> menu."
-msgstr ""
-"La <interface>Barre de menu</interface> se situe en haut de la fenêtre de "
-"l'application <application>&appname;</application>.  Pratiquement toutes les "
-"fonctions sont disponibles en utilisant les éléments de menu appropriés. Les "
-"différentes fonctions sont regroupées par type. Par exemple, les opérations "
-"sur les fichiers sont regroupées dans le menu  <guisubmenu>Fichier</"
-"guisubmenu>."
 
 #: ../C/xiphos.xml:27(phrase)
 msgid "Xiphos menubar"
@@ -1389,8 +1988,8 @@ msgstr "Le volet des textes bibliques"
 msgid ""
 "Positioned to the right of the Shortcut bar is the Bible text pane. All your "
 "different translations will be displayed for full viewing. When starting "
-"<application>Xiphos</application> either your default Bible translation "
-"or the translation last used will be displayed."
+"<application>Xiphos</application> either your default Bible translation or "
+"the translation last used will be displayed."
 msgstr ""
 "Le volet des<interface> textes bibliques</interface> se trouve à droite du "
 "volet latéral. Les différentes versions de la Bible sont affichées dans "
@@ -1439,14 +2038,14 @@ msgstr "Utilisation du mode Vue parallèle"
 
 #: ../C/xiphos.xml:243(para)
 msgid ""
-"A nice function in <application>Xiphos</application> is the ability to "
-"view your specified bible text in five parallel translations of your choice. "
-"The Parallel View mode can be accessed by selecting <guimenuitem>Parallel "
-"View</guimenuitem> just below the <interface>Bible Text Pane</interface>, "
-"next to the <guimenuitem>Standard View</guimenuitem> tab. Please note that "
-"you can only view one verse at a time. You can change the verse by selecting "
-"another verse, chapter, or book at the toolbar. Also note that modules that "
-"are Old Testament or New Testament only (eg Westminster Leningrad Codex and "
+"A nice function in <application>Xiphos</application> is the ability to view "
+"your specified bible text in five parallel translations of your choice. The "
+"Parallel View mode can be accessed by selecting <guimenuitem>Parallel View</"
+"guimenuitem> just below the <interface>Bible Text Pane</interface>, next to "
+"the <guimenuitem>Standard View</guimenuitem> tab. Please note that you can "
+"only view one verse at a time. You can change the verse by selecting another "
+"verse, chapter, or book at the toolbar. Also note that modules that are Old "
+"Testament or New Testament only (eg Westminster Leningrad Codex and "
 "Byzantine Majority Text ) will not be able to display books, chapters, or "
 "verses that they don't have."
 msgstr ""
@@ -1490,8 +2089,8 @@ msgstr "Ouvrir le texte·biblique dans une fenêtre distincte"
 
 #: ../C/xiphos.xml:298(para)
 msgid ""
-"In order to view a Bible translation separate from the "
-"<application>Xiphos</application> interface:"
+"In order to view a Bible translation separate from the <application>Xiphos</"
+"application> interface:"
 msgstr ""
 "Pour ouvrir le texte biblique dans une fenêtre séparée de la fenêtre "
 "principale de <application>&appname;</application> :"
@@ -1660,9 +2259,9 @@ msgstr ""
 
 #: ../C/xiphos.xml:463(para)
 msgid ""
-"Read Aloud - If you enable this, then Xiphos will funnel all selected "
-"verses through the <application>festival</application> text-to-speech "
-"system. <application>Festival</application> is a widely-available TTS, often "
+"Read Aloud - If you enable this, then Xiphos will funnel all selected verses "
+"through the <application>festival</application> text-to-speech system. "
+"<application>Festival</application> is a widely-available TTS, often "
 "installed by default in Linux distributions. Reading aloud is not currently "
 "supported on Windows."
 msgstr ""
@@ -1910,11 +2509,10 @@ msgid "Keyboard Shortcuts"
 msgstr "Raccourcis clavier"
 
 #: ../C/xiphos.xml:658(para)
-msgid ""
-"Several keyboard shortcuts exist in <application>Xiphos</application>:"
+msgid "Several keyboard shortcuts exist in <application>Xiphos</application>:"
 msgstr ""
-"<application>Xiphos</application>  présente un certain nombre de "
-"raccourcis clavier :"
+"<application>Xiphos</application>  présente un certain nombre de raccourcis "
+"clavier :"
 
 #: ../C/xiphos.xml:663(guibutton)
 msgid "F1"
@@ -2099,12 +2697,12 @@ msgstr "Différences d'affichage dans <application>&appname;</application> :"
 
 #: ../C/xiphos.xml:725(para)
 msgid ""
-"The <application>Xiphos</application> interface has evolved over time, "
-"and there are two display libraries with which <application>Xiphos</"
-"application> can be built. The older, less featureful version is called "
-"\"gtkhtml3\", and the newer, more capable version is called \"MozEmbed\". "
-"Both of these display libraries render text in a browser-like fashion, using "
-"HTML constructs to control display."
+"The <application>Xiphos</application> interface has evolved over time, and "
+"there are two display libraries with which <application>Xiphos</application> "
+"can be built. The older, less featureful version is called \"gtkhtml3\", and "
+"the newer, more capable version is called \"MozEmbed\". Both of these "
+"display libraries render text in a browser-like fashion, using HTML "
+"constructs to control display."
 msgstr ""
 "L'application <application>&appname;</application> a évolué au niveau des "
 "possibilités d'affichage. <application>&appname;</application> peut être "
@@ -2119,10 +2717,10 @@ msgid ""
 "MozEmbed features, it is possible that the version running on your computer "
 "needed to be built with gtkhtml3 instead, either because the version of "
 "MozEmbed available for your system is not recent enough to support the needs "
-"of <application>Xiphos</application>, or it simply doesn't exist for "
-"your system. (Notably, Cygwin has no MozEmbed at all.) The following "
-"differences will be apparent, depending on whether gtkhtml3 or MozEmbed is "
-"the underlying display engine:"
+"of <application>Xiphos</application>, or it simply doesn't exist for your "
+"system. (Notably, Cygwin has no MozEmbed at all.) The following differences "
+"will be apparent, depending on whether gtkhtml3 or MozEmbed is the "
+"underlying display engine:"
 msgstr ""
 "Un certain nombre de nouveautés de <application>&appname;</application> ne "
 "sont pas supportées par «&nbsp;gtkhtml3&nbsp;». Bien que "
@@ -2203,25 +2801,13 @@ msgid ""
 "<application>Xiphos</application> was built."
 msgstr ""
 "À l'aide du menu <menuchoice><guimenuitem>Aide</guimenuitem><guimenuitem>À "
-"propos de Xiphos</guimenuitem></menuchoice>, il est possible de "
-"connaître la bibliothèque avec laquelle <application>&appname;</application> "
-"a été construit."
+"propos de Xiphos</guimenuitem></menuchoice>, il est possible de connaître la "
+"bibliothèque avec laquelle <application>&appname;</application> a été "
+"construit."
 
 #: ../C/xiphos.xml:770(title) ../C/xiphos.xml:777(phrase)
 msgid "Comparison, gtkhtml3 -vs- mozembed"
 msgstr "Comparaison d'affichage entre gtkhtml3 et mozembed"
-
-#: ../C/xiphos.xml:6(title) ../C/preferences.xml:6(title)
-msgid "Introduction To Preferences"
-msgstr "Introduction aux préférences"
-
-#: ../C/xiphos.xml:8(title) ../C/preferences.xml:8(title)
-msgid "The Preference Dialog"
-msgstr "La fenêtre des préférences"
-
-#: ../C/xiphos.xml:21(phrase) ../C/preferences.xml:21(phrase)
-msgid "The Preferences Dialog"
-msgstr "La fenêtre des préférences"
 
 #: ../C/xiphos.xml:30(title)
 msgid "Fonts And Colors"
@@ -2254,13 +2840,13 @@ msgstr ""
 #: ../C/xiphos.xml:83(para)
 msgid ""
 "The base font size is the size initially chosen for all modules displayed by "
-"<application>Xiphos</application>. The verse number and individual "
-"modules' font size choices are relative to the base font size."
+"<application>Xiphos</application>. The verse number and individual modules' "
+"font size choices are relative to the base font size."
 msgstr ""
 "La taille de police standard est la taille par défaut de tous les modules "
-"affichés par &appname;. Note: la taille des n° de verset ainsi que la taille "
-"de la police sélectionnée individuellement par module sont relatives à cette "
-"taille standard."
+"affichés par <application>&appname;</application>. Note: la taille "
+"des n° de verset ainsi que la taille de la police sélectionnée individuellement "
+"par module sont relatives à cette taille standard."
 
 #: ../C/xiphos.xml:92(title)
 msgid "General Settings"
@@ -2284,14 +2870,15 @@ msgid ""
 "Certain dictionary-style modules are <guilabel>Daily Devotionals</guilabel> "
 "whose keys are numerically in the form \"Month.Day\". If you have such a "
 "module installed and it has been selected as your preferred devotional, then "
-"you can ask that <application>Xiphos</application> display today's "
-"selection during startup."
+"you can ask that <application>Xiphos</application> display today's selection "
+"during startup."
 msgstr ""
 "Les <guilabel>Calendriers bibliques</guilabel> sont des modules "
 "dictionnaires spécifiques dont les entrées sont de la forme numérique \"Mois:"
 "Jour\" (ex&nbsp;: 12:25). Si un module de ce type a été installé puis "
 "déclaré comme Calendrier biblique dans les préférences diverses des modules, "
-"&appname; peut présenter le texte du jour lors du démarrage."
+"<application>&appname;</application> peut présenter le texte du jour lors "
+"du démarrage."
 
 #: ../C/xiphos.xml:145(para)
 msgid ""
@@ -2310,8 +2897,8 @@ msgstr ""
 msgid ""
 "With <guilabel>Scroll to Previous/Next Chapter</guilabel> enabled, using the "
 "mouse to scroll to the beginning or end of a chapter will cause "
-"<application>Xiphos</application> to move automatically to the "
-"appropriate chapter."
+"<application>Xiphos</application> to move automatically to the appropriate "
+"chapter."
 msgstr ""
 "Si l'option <guilabel>Défilement des chapitres</guilabel> est activée, le "
 "défilement au début ou à la fin d'un chapitre à l'aide de la souris  permet "
@@ -2366,47 +2953,6 @@ msgstr "Préférences diverses des modules"
 msgid "Various Preferences Modules"
 msgstr "Préférences diverses des modules"
 
-#: ../C/xiphos.xml:5(title) ../C/modules.xml:5(title)
-msgid "Introduction To The Module Manager"
-msgstr "Introduction à la gestion des modules"
-
-#: ../C/xiphos.xml:6(para) ../C/modules.xml:6(para)
-msgid ""
-"The \"module\" is the unit of content in <application>Xiphos</"
-"application>, and Sword generally; a Sword module is a resource available "
-"for viewing in Sword applications. There are several varieties: Most "
-"importantly, Bible texts, as well as dictionaries and lexicons, "
-"commentaries, and general books, any of which may include image content (e."
-"g. atlases). They are installed either from a local directory structure "
-"(typically on removable media, such as a CDROM distribution) or remotely via "
-"ftp from a repository such as Crosswire, which is the home of Sword, and "
-"from which all officially Sword-sanctioned modules are available. Also, many "
-"other modules are available from non-Crosswire repositories."
-msgstr ""
-"Le «­­&nbsp;module&nbsp;» est un bloc de contenu dans &appname; et plus "
-"généralement dans toute application basée sur Sword. Un module de Sword est "
-"une ressource destinée à être affichée dans une application Sword. Les "
-"modules sont de plusieurs types dont, en premier, les textes bibliques, puis "
-"les commentaires, les dictionnaires et lexiques, les livres ordinaires, ceux "
-"offrant un contenu graphique (Atlas). Ils sont à installer depuis un dépot "
-"local (distribution par CDROM) ou par téléchargement ftp depuis un dépot "
-"distant comme celui de Crosswire, site de Sword, où tous les modules "
-"certiifiés par Crosswire sont disponibles. Des modules sont également "
-"disponibles auprès d'autres sources."
-
-#: ../C/xiphos.xml:14(para) ../C/modules.xml:14(para)
-msgid ""
-"If you have other Sword applications installed, they will all share the same "
-"set of Sword modules that you install through the Module Manager."
-msgstr ""
-"Si d'autres applications basées sur Sword sont installées, elles ont accès "
-"aux modules installés par le gestionnaire de modules de &appname;."
-
-#: ../C/xiphos.xml:19(title) ../C/xiphos.xml:32(phrase)
-#: ../C/modules.xml:19(title) ../C/modules.xml:32(phrase)
-msgid "The Module Manager Dialog"
-msgstr "La fenêtre de gestion des modules"
-
 #: ../C/xiphos.xml:41(title)
 msgid "Sword Module Configurations"
 msgstr "Configuration des modules de Sword"
@@ -2442,8 +2988,8 @@ msgstr "Destination des modules Sword"
 #: ../C/xiphos.xml:91(para)
 msgid ""
 "After you have selected your Install Source, click the <guimenuitem>Refresh</"
-"guimenuitem> button to cause <application>Xiphos</application> to find "
-"the module summary available from that source before moving on."
+"guimenuitem> button to cause <application>Xiphos</application> to find the "
+"module summary available from that source before moving on."
 msgstr ""
 "Après avoir choisi un dépot, sélectionner le bouton <guimenuitem>Rafraîchir</"
 "guimenuitem>, ce qui conduit <application>&appname;</application> à "
@@ -2469,8 +3015,8 @@ msgid ""
 "your personal area, under ~/.sword. If you run as root, or change "
 "permissions on the shared directory, you will also be able to install "
 "modules for all users, typically in /usr/share/sword. There have been some "
-"requests for Xiphos to provide a means by which an ordinary (non-root) "
-"user could start the program, gain temporary write access to the system area "
+"requests for Xiphos to provide a means by which an ordinary (non-root) user "
+"could start the program, gain temporary write access to the system area "
 "while installing modules, and then revoke that access after installation is "
 "complete. Attempting to devise a scheme to do this has proven quite "
 "difficult, given the different superuser management schemes employed by "
@@ -2483,7 +3029,8 @@ msgstr ""
 "répertoire ~/.sword.En étant superutilisateur, ou en modifiant les "
 "permissions de l'espace système (généralement : /usr/share/sword), il est "
 "possible d'installer des modules accessibles par tous les utilisateurs.Il a "
-"été fait un certain nombre de demandes pour que soit incorporé à &appname; "
+"été fait un certain nombre de demandes pour que soit incorporé à "
+"<application>&appname;</application> "
 "un moyen permettant à un utilisateur ordinaire (non-root) d'obtenir "
 "temporairement les droits d'accès à l'espace système pendant l'installation "
 "des modules, puis d'annuler ces droits une fois l'installation terminée. "
@@ -2492,7 +3039,7 @@ msgstr ""
 "d'établir un moyen de satisfaire cette demande. En ce moment, il n'y a aucun "
 "projet en cours essayant de résoudre ce problème, il est donc conseillé aux "
 "utilisateurs de gérer les droits d'accès en écriture à l'emplacement système "
-"en dehors de &appname;."
+"en dehors de <application>&appname;</application>."
 
 #: ../C/xiphos.xml:116(title)
 msgid "Windows XP"
@@ -2509,8 +3056,8 @@ msgid ""
 "\\YOUR NAME\\Application Data\\.sword\"."
 msgstr ""
 "Les modules peuvent être installés dans un dossier partagé de façon à "
-"permettre à tous les utilisateurs d'accéder aux modules. Si le logiciel « "
-"The·Sword Project for Windows » a été utilisé précédemment, ce répertoire "
+"permettre à tous les utilisateurs d'accéder aux modules. Si le logiciel «&nbsp;"
+"The·Sword Project for Windows&nbsp;» a été utilisé précédemment, ce répertoire "
 "est « C:\\\"Program Files\\Crosswire\\The Sword Project\\Sword », sinon c'est "
 "« C:\\\"Documents and Settings\\All Users\\Application Data\\.sword ». Les "
 "modules peuvent être également installés dans un dossier personnel, ce "
@@ -2667,7 +3214,7 @@ msgid ""
 "other than Crosswire and not from a module manager-ready repository. "
 "Necessarily, installing such a module is a manual task."
 msgstr ""
-"Des modules au format Sword Project sont disponibles auprès d'autres sources "
+"Des modules au format du Projet SWORD sont disponibles auprès d'autres sources "
 "que Crosswire mais pas sous la forme d'un dépot à configurer avec le "
 "gestionnaire de modules. Il est donc nécessaire de les installer "
 "manuellement."
@@ -2698,9 +3245,8 @@ msgstr ""
 
 #: ../C/xiphos.xml:239(para)
 msgid ""
-"Restart <application>Xiphos</application> after installing such a "
-"module, so that a fresh instance of the program can notice the new module in "
-"place."
+"Restart <application>Xiphos</application> after installing such a module, so "
+"that a fresh instance of the program can notice the new module in place."
 msgstr ""
 "Il est nécessaire de redémarrer <application>&appname;</application> après "
 "avoir installé un module non-standard de façon à ce que le logiciel détecte "
@@ -2709,304 +3255,6 @@ msgstr ""
 #: ../C/xiphos.xml:407(title)
 msgid "The Search Function"
 msgstr "Fonctions de recherche"
-
-#: ../C/xiphos.xml:4(title) ../C/search.xml:4(title)
-msgid "Simple Searches"
-msgstr "Recherche simple"
-
-#: ../C/xiphos.xml:5(para) ../C/search.xml:5(para)
-msgid ""
-"To conduct a quick search within the current Bible or commentary module, the "
-"Search Bar in the Sidebar should usually be adequate. Click either in the "
-"menu bar <guimenuitem>Edit-&gt;Search</guimenuitem> or in the Sidebar "
-"<guimenuitem>Modules-&gt;Search</guimenuitem> to access it."
-msgstr ""
-"Pour rechercher rapidement un mot ou une expression dans un module en cours "
-"d'utilisation, le plus simple est d'utiliser la fonction recherche du volet "
-"latéral. Cette fonction de recherche rapide est activée en sélectionnant  le "
-"menu <menuchoice><guimenuitem>Éditer</guimenuitem><guimenuitem>Rechercher</"
-"guimenuitem></menuchoice> ou le bouton <guibutton>Rechercher</guibutton> du "
-"volet latéral."
-
-#: ../C/xiphos.xml:11(title) ../C/xiphos.xml:24(phrase)
-#: ../C/search.xml:11(title) ../C/search.xml:24(phrase)
-msgid "The Search Bar"
-msgstr "La barre de recherche"
-
-#: ../C/xiphos.xml:31(para) ../C/search.xml:31(para)
-msgid ""
-"The <interface>Search Dialog</interface> consists of the following parts:"
-msgstr ""
-"Le formulaire <interface>Rechercher</interface> est constitué des éléments "
-"suivants :"
-
-#: ../C/xiphos.xml:36(para) ../C/search.xml:36(para)
-msgid "Search Key Entry box"
-msgstr "Boite de saisie de l'expression à rechercher"
-
-#: ../C/xiphos.xml:41(para) ../C/xiphos.xml:83(title)
-#: ../C/search.xml:41(para) ../C/search.xml:83(title)
-msgid "Search Module Selector"
-msgstr "Sélecteur du module objet de la requête"
-
-#: ../C/xiphos.xml:46(para) ../C/xiphos.xml:91(title)
-#: ../C/search.xml:46(para) ../C/search.xml:91(title)
-msgid "Search Type Selector"
-msgstr "Sélecteur du type de requête"
-
-#: ../C/xiphos.xml:51(para) ../C/xiphos.xml:129(title)
-#: ../C/search.xml:51(para) ../C/search.xml:129(title)
-msgid "Search Options Checkbox"
-msgstr "Case à cocher des options de la requête"
-
-#: ../C/xiphos.xml:56(para) ../C/xiphos.xml:136(title)
-#: ../C/search.xml:56(para) ../C/search.xml:136(title)
-msgid "Search Scope Selector"
-msgstr "Sélecteur de la plage de versets"
-
-#: ../C/xiphos.xml:61(para) ../C/xiphos.xml:173(title)
-#: ../C/search.xml:61(para) ../C/search.xml:173(title)
-msgid "Search Results View"
-msgstr "Affichage des résultats"
-
-#: ../C/xiphos.xml:67(title) ../C/search.xml:67(title)
-msgid "Search Key Entry Box"
-msgstr "Boite de saisie de l'expression à rechercher"
-
-#: ../C/xiphos.xml:68(para) ../C/search.xml:68(para)
-msgid ""
-"Allows entry of the key for which you would like to search. The search key "
-"can be a word, part of a word, several words, a phrase, or a regular "
-"expression depending on the type of search selected. When the search key is "
-"entered and all other selections in the search dialog are complete, click "
-"the <guibutton>Find</guibutton> button to begin the search."
-msgstr ""
-"La boite d'entrée permet de saisir l'expression à rechercher. Cette "
-"expression peut être un mot, une partie de mot, plusieurs mots, une phrase, "
-"ou une expression rationnelle suivant le type de requête sélectionné. Une "
-"fois l'expression à rechercher saisie, et les options définies, un clic sur "
-"le bouton <guimenuitem>Rechercher</guimenuitem> démarre la séquence de "
-"recherche."
-
-#: ../C/xiphos.xml:75(para) ../C/search.xml:75(para)
-msgid ""
-"This search uses the optimized search method (see next section) if the "
-"module has previously been indexed, and will use AND semantics by default "
-"(verses must contain all words you entered)."
-msgstr ""
-"Cette requête employe la méthode de recherche optimisée (Voir la section "
-"suivante) à la condition que le module concerné ait été précédemment indexé, "
-"et utilisera le ET logique par défaut (les versets doivent contenir tous les "
-"mots saisis)"
-
-#: ../C/xiphos.xml:84(para) ../C/search.xml:84(para)
-msgid ""
-"Allows selection of which modules you would like to search. Select "
-"<guibutton>Bible</guibutton> to search Bible versions or "
-"<guibutton>Commentary</guibutton> to search commentaries. Only the currently "
-"active module will be searched."
-msgstr ""
-"Permet la sélection du module dans lequel la requête sera exécutée. "
-"Sélectionner <guimenuitem>Texte biblique</guimenuitem> pour exécuter une "
-"requête dans le texte biblique ou <guimenuitem>Commentaire</guimenuitem>  "
-"pour le module de commentaires. La requête ne s'exécute que dans les modules "
-"en cours de consultation."
-
-#: ../C/xiphos.xml:92(para) ../C/search.xml:92(para)
-msgid ""
-"Allows selection of the type of search. There are three search types "
-"available:"
-msgstr ""
-"Permet se sélectionner le type de requête. Trois types de requête sont "
-"possibles :"
-
-#: ../C/xiphos.xml:97(guibutton) ../C/search.xml:97(guibutton)
-msgid "Multi word"
-msgstr "Mots multiples"
-
-#: ../C/xiphos.xml:98(para) ../C/search.xml:98(para)
-msgid ""
-"This type will match any verse that has all the words in the search key, "
-"regardless of where they appear in the verse."
-msgstr ""
-"La requête  recherche n'importe quel verset contenant tous les mots de "
-"l'expression  à rechercher, quelque soit l'ordre dans lequel ils "
-"apparaissent dans le verset."
-
-#: ../C/xiphos.xml:103(guibutton) ../C/search.xml:103(guibutton)
-msgid "Regular expression"
-msgstr "Expression rationnelle"
-
-#: ../C/xiphos.xml:104(para) ../C/search.xml:104(para)
-msgid ""
-"This search uses a regular expression as a search key. A regular expression "
-"is a pattern used to match a string of text. A regular expression can be "
-"used to find verses with words that match a particular pattern. For example "
-"the regular expression <userinput>\\ A[a-z]*iah </userinput> will match "
-"verses that contain the words Aiah, Ahaziah, Athaliah and Amariah."
-msgstr ""
-"L'expression à rechercher est une expression rationnelle. Une expression "
-"rationnelle est basée sur un langage et une syntaxe spécifiques permettant "
-"de retrouver un mot, une phrase à l'aide de combinaisons complexes. Par "
-"exemple l'expression rationnelle <userinput>\\ A[a-z]*iah </userinput> "
-"permet de retrouver les passages qui contiennent les mots Aiah, Ahaziah, "
-"Athaliah et Amariah."
-
-#: ../C/xiphos.xml:111(para) ../C/search.xml:111(para)
-msgid ""
-"A complete discussion of regular expressions is beyond the scope of this "
-"manual, but more information can be found in the grep man page."
-msgstr ""
-"Un exposé complet de l'emploi des expressions rationnelles dépasse le cadre "
-"de ce manuel, mais cependant plus d'informations à ce sujet peuvent être "
-"obtenues en parcourant le manuel de <command>grep</command>."
-
-#: ../C/xiphos.xml:116(guibutton) ../C/search.xml:116(guibutton)
-msgid "Exact phrase"
-msgstr "Phrase exacte"
-
-#: ../C/xiphos.xml:117(para) ../C/search.xml:117(para)
-msgid ""
-"This type will match the search key exatly as entered. If the search key is "
-"<userinput>\n"
-"\t\t\t\t\tit is good</userinput>, this search would match a verse which "
-"contains \"<emphasis>it is good</emphasis>,\" but would not match a verse "
-"which contains \"<emphasis> good</emphasis>, and doeth <emphasis>it</"
-"emphasis> not, to him it <emphasis>is</emphasis> sin.\""
-msgstr ""
-"La requête recherche la phrase exacte contenue dans l'expression à "
-"rechercher. Si la phrase à rechercher est <userinput>en vérité</userinput>, "
-"les passages obtenus contiendront «­­&nbsp;<emphasis>en vérité</"
-"emphasis>&nbsp;», mais pas «­­&nbsp;<emphasis>en</emphasis> toute  "
-"<emphasis>vérité</emphasis>&nbsp;»."
-
-#: ../C/xiphos.xml:130(para) ../C/search.xml:130(para)
-msgid ""
-"Allows selecting of search options. The only available option is "
-"<guibutton>Match case</guibutton>. Check this box to make the search case "
-"sensitive."
-msgstr ""
-"Permet de définir les options de recherche. L'option disponible est "
-"<guimenuitem>Respecter la casse</guimenuitem>. Cocher cette boite rend la "
-"recherche sensible à la casse des caractères."
-
-#: ../C/xiphos.xml:137(para) ../C/search.xml:137(para)
-msgid ""
-"Allows defining the range within the specificed module that will be "
-"searched. There are three search scopes available:"
-msgstr ""
-"Permet de définir la plage de versets à parcourir dans le module spécifié. "
-"Trois plages de recherche sont possibles :"
-
-#: ../C/xiphos.xml:141(guibutton) ../C/search.xml:141(guibutton)
-msgid "No scope"
-msgstr "Sans limites"
-
-#: ../C/xiphos.xml:142(para) ../C/search.xml:142(para)
-msgid "This button causes the search to to include the entire module."
-msgstr ""
-"Sélectionner ce bouton implique que la requête s'exécute sur l'ensemble des "
-"versets."
-
-#: ../C/xiphos.xml:147(guibutton) ../C/search.xml:147(guibutton)
-msgid "Use bounds"
-msgstr "Limites définies"
-
-#: ../C/xiphos.xml:148(para) ../C/search.xml:148(para)
-msgid ""
-"Selecting this button produces two dropdown selector boxes marked "
-"<guilabel>Lower</guilabel> and <guilabel>Upper</guilabel>. Select the first "
-"book to search in the <guilabel>Lower</guilabel> box and the last book to "
-"search in the <guilabel>Upper</guilabel> box. The search will begin with the "
-"<guilabel>Lower </guilabel> book and end with the <guilabel>Upper </"
-"guilabel> book and include all books in between."
-msgstr ""
-"Sélectionner ce bouton provoque l'ouverture de deux zones supplémentaires "
-"permettant la saisie des limites de la recherche. La première référence, "
-"début de la recherche, est à saisir dans la limite <guilabel>Basse</"
-"guilabel> et la deuxième référence, fin de la recherche, dans la limite "
-"<guilabel>Haute</guilabel>. La requête commencera au verset indiqué dans la "
-"limite <guilabel>Basse</guilabel> et se terminera au verset indiqué dans la "
-"limite <guilabel>Haute</guilabel> en incluant tous les versets situés entre "
-"les deux limites."
-
-#: ../C/xiphos.xml:157(para) ../C/search.xml:157(para)
-msgid ""
-"Chapter and verse numbers can be entered into the search bound boxes as well "
-"to further narrow the search."
-msgstr ""
-"Des numéros de chapitres ou de versets peuvent aussi être saisis dans les "
-"deux zones basse et haute  afin de mieux cibler la recherche."
-
-#: ../C/xiphos.xml:163(guibutton) ../C/search.xml:163(guibutton)
-msgid "Last search"
-msgstr "Dernière requête"
-
-#: ../C/xiphos.xml:164(para) ../C/search.xml:164(para)
-msgid ""
-"Select this button to do a new search including only the verses returned as "
-"a result of the last search. Use this with a new search key to narrow the "
-"search further."
-msgstr ""
-"Sélectionner ce bouton pour relancer une recherche uniquement sur les  "
-"versets retournés en résultat de la requête précédente. Utilisée avec une "
-"nouvelle expression, cette méthode permet de réduire la liste des versets "
-"restitués."
-
-#: ../C/xiphos.xml:174(para) ../C/search.xml:174(para)
-msgid ""
-"This shows a list of the current search results for previewing, navigation, "
-"or saving."
-msgstr ""
-"La liste des résultats est affichée permettant d'obtenir un aperçu du verset "
-"retourné, la navigation vers le chapître concerné ou l'enregistrement sous "
-"forme de signets."
-
-#: ../C/xiphos.xml:177(term) ../C/search.xml:177(term)
-msgid "Preview"
-msgstr "Aperçu"
-
-#: ../C/xiphos.xml:178(para) ../C/search.xml:178(para)
-msgid ""
-"To preview the search result, simply click on an individual result. The "
-"entry will show in the preview pane."
-msgstr ""
-"Pour visualiser le résultat, un simple clic sur un élément affiche le "
-"contenu dans le volet <interface>Aperçu</interface>"
-
-#: ../C/xiphos.xml:184(term) ../C/search.xml:184(term)
-msgid "Navigation"
-msgstr "Navigation"
-
-#: ../C/xiphos.xml:185(para) ../C/search.xml:185(para)
-msgid ""
-"Navigation to the search result can be done in two ways. To open the result "
-"in a new tab, middle-click the mouse. To open the result in the current tab, "
-"double-click the result."
-msgstr ""
-"La navigation vers le chapître concerné pour retrouver le contexte "
-"s'effectue de deux manières. Un clic du bouton milieu de la souris ouvre le "
-"verset dans un nouvel onglet, un double-clic l'ouvre dans l'onget courant."
-
-#: ../C/xiphos.xml:191(term) ../C/search.xml:191(term)
-msgid "Save Results"
-msgstr "Enregistrer les résultats"
-
-#: ../C/xiphos.xml:192(para) ../C/search.xml:192(para)
-msgid ""
-"You may save your results as a list of bookmarks. To do this, right-click "
-"and select <guilabel>Save List</guilabel>. You will be prompted to enter a "
-"name for the folder that your results will be saved to. After you have saved "
-"the results, you may view them by going to your bookmarks and finding the "
-"folder you just named."
-msgstr ""
-"Les résultats de la requête peuvent être enregistrés sous forme de signets. "
-"Dans le menu contextuel obtenu à l'aide du bouton droit de la souris, "
-"sélectionner <guilabel>Convertir en signets</guilabel>, il sera alors "
-"demandé le nom du dossier sous lequel la liste sera enregistrée. Ensuite, "
-"une fois la liste sauvegardée, il devient possible de retrouver les "
-"résultats de la requête en affichant les signets puis en choisissant le "
-"dossier précédemment nommé."
 
 #: ../C/xiphos.xml:203(title)
 msgid "Advanced Searches"
@@ -3365,7 +3613,7 @@ msgid ""
 "emphasis>"
 msgstr ""
 "«­­&nbsp;()&nbsp;» Les parenthèses servent à regrouper des expressions. "
-"<emphasis>Non supporté dans &appname;</emphasis>"
+"<emphasis>Non supporté dans <application>&appname;</application></emphasis>"
 
 #: ../C/xiphos.xml:347(para)
 msgid ""
@@ -3674,127 +3922,9 @@ msgstr "\\w signifie alphanumérique, identique à [a-zA-Z0-9_]."
 msgid "\\W means not alphanumeric; same as [^a-zA-Z0-9_]."
 msgstr "\\W signifie non alphanumérique, identique à [^a-zA-Z0-9_]."
 
-#: ../C/xiphos.xml:413(title) ../C/xiphos.xml:12(title)
-#: ../C/xiphos.xml:25(phrase) ../C/studypad.xml:12(title)
-#: ../C/studypad.xml:25(phrase)
-msgid "The Studypad"
-msgstr "Bloc-notes"
-
-#: ../C/xiphos.xml:4(title) ../C/studypad.xml:4(title)
-msgid "Using The Studypad"
-msgstr "Usage du bloc-notes :"
-
-#: ../C/xiphos.xml:5(para) ../C/studypad.xml:5(para)
-msgid ""
-"The Studypad can be opened by choosing <guibutton>File-&gt;Open Studypad</"
-"guibutton>"
-msgstr ""
-"Le bloc-notes s'obtient à l'aide du menu <menuchoice><guimenuitem>Fichier</"
-"guimenuitem><guimenuitem>Bloc-notes..</guimenuitem></menuchoice>"
-
-#: ../C/xiphos.xml:8(para) ../C/studypad.xml:8(para)
-msgid "This is what the Studypad typically looks like:"
-msgstr "Présentation du bloc-notes :"
-
-#: ../C/xiphos.xml:33(para) ../C/studypad.xml:33(para)
-msgid ""
-"The Studypad will save into your working directory, making it useful for "
-"collecting and exporting information and Bible study material from "
-"Xiphos into other programmes."
-msgstr ""
-"Le bloc-notes enregistre les données dans votre répertoire de travail, ce "
-"qui est pratique pour échanger des informations avec d'autres applications. "
-
-#: ../C/xiphos.xml:34(para) ../C/xiphos.xml:57(para)
-#: ../C/studypad.xml:34(para)
-msgid "Toolbar 1"
-msgstr "Barre d'outils 1"
-
-#: ../C/xiphos.xml:36(para) ../C/xiphos.xml:59(para)
-#: ../C/studypad.xml:36(para)
-msgid "Font Size and Environment"
-msgstr "Taille de police"
-
-#: ../C/xiphos.xml:37(para) ../C/xiphos.xml:60(para)
-#: ../C/studypad.xml:37(para)
-msgid "Font Type"
-msgstr "Type de plice"
-
-#: ../C/xiphos.xml:38(para) ../C/xiphos.xml:61(para)
-#: ../C/studypad.xml:38(para)
-msgid "Bold, Italics, Underscored, Crossed Out"
-msgstr "Gras, italique, souligné, barré"
-
-#: ../C/xiphos.xml:39(para) ../C/xiphos.xml:62(para)
-#: ../C/studypad.xml:39(para)
-msgid "Left, Centre and Right Bound"
-msgstr "Aligné à gauche, au centre et àdroite"
-
-#: ../C/xiphos.xml:40(para) ../C/xiphos.xml:63(para)
-#: ../C/studypad.xml:40(para)
-msgid "Shift Paragraph Right or Left"
-msgstr "Décalage d'un paragraphe à droite ou à gauche"
-
-#: ../C/xiphos.xml:41(para) ../C/xiphos.xml:64(para)
-#: ../C/studypad.xml:41(para)
-msgid "Colour Selector"
-msgstr "Choix des couleurs"
-
-#: ../C/xiphos.xml:43(para) ../C/xiphos.xml:66(para)
-#: ../C/studypad.xml:43(para)
-msgid "Toolbar 2"
-msgstr "Barre d'outils 2"
-
-#: ../C/xiphos.xml:45(para) ../C/studypad.xml:45(para)
-msgid "New, Save, Delete and Print"
-msgstr "Nouveau, enregistrer, supprimer et imprimer"
-
-#: ../C/xiphos.xml:46(para) ../C/xiphos.xml:69(para)
-#: ../C/studypad.xml:46(para)
-msgid "Cut, Copy, Paste and Undo"
-msgstr "Couper, copier, coller et défaire"
-
-#: ../C/xiphos.xml:47(para) ../C/xiphos.xml:70(para)
-#: ../C/studypad.xml:47(para)
-msgid "Find and 'Find and Replace'"
-msgstr "Chercher et remplacer"
-
-#: ../C/xiphos.xml:48(para) ../C/xiphos.xml:71(para)
-#: ../C/studypad.xml:48(para)
-msgid "Spellcheck"
-msgstr "Vérification de l'orthographe"
-
-#: ../C/xiphos.xml:51(para) ../C/xiphos.xml:74(para)
-#: ../C/studypad.xml:51(para)
-msgid ""
-"In order for spellcheck to be available, one of the languages under "
-"<guimenuitem>Edit-&gt;Current Languages</guimenuitem> must be set."
-msgstr ""
-"Pour activer la vérification orthographique, un des langages du menu "
-"<menuchoice><guisubmenu>Éditer</guisubmenu><guimenuitem>Langues actuelles</"
-"guimenuitem></menuchoice> doit être sélectionné."
-
 #: ../C/xiphos.xml:419(title) ../C/xiphos.xml:31(phrase)
 msgid "The Personal Commentary"
 msgstr "Commentaires personnels"
-
-#. Personal Commentary
-#: ../C/xiphos.xml:3(para) ../C/personal.xml:3(para)
-msgid ""
-"To build up a personal commentary you will need to install the editable "
-"'Personal' sword module from the English Commentaries section. Right click "
-"it and choose <guimenuitem>Edit-&gt;Note-&gt;Personal</guimenuitem> in the "
-"menu."
-msgstr ""
-"Écrire son propre commentaire personnel nécessite l'utilisation du module "
-"Sword «­­&nbsp;Personal&nbsp;». Pour utiliser ce module, sélectionner le "
-"bouton <guibutton>Modules</guibutton> du volet latéral, puis choisir ensuite "
-"<menuchoice><guimenuitem>Commentaires</guimenuitem><guimenuitem>English</"
-"guimenuitem><guimenuitem>+*Personal*+</guimenuitem></menuchoice>. Pour "
-"modifier ses commentaires, faire un clic du bouton droit à l'aide de la "
-"souris sur la fenêtre des commentaires, puis sélectionner "
-"<menuchoice><guimenuitem>Éditer</guimenuitem><guimenuitem>Note</"
-"guimenuitem><guimenuitem>+*Personal*+</guimenuitem></menuchoice>."
 
 #: ../C/xiphos.xml:11(para)
 msgid ""
@@ -3909,8 +4039,8 @@ msgstr ""
 #: ../C/xiphos.xml:115(para)
 msgid ""
 "The created commentary page will be attached to an individual verse only. To "
-"write commentary pages from within Xiphos, attached to longer stretches "
-"of text use the <guimenuitem>Link..</guimenuitem> function to link several "
+"write commentary pages from within Xiphos, attached to longer stretches of "
+"text use the <guimenuitem>Link..</guimenuitem> function to link several "
 "pages together"
 msgstr ""
 "Le commentaire crée sera associé à un verset seulement. Pour écrire des "
@@ -3920,23 +4050,7 @@ msgstr ""
 
 #: ../C/xiphos.xml:425(title)
 msgid "Journals and Prayer Lists"
-msgstr "Listes de prières et notes"
-
-#. Journals and Prayer Lists
-#: ../C/xiphos.xml:3(para) ../C/journals.xml:3(para)
-msgid ""
-"<application>Xiphos</application> supports user-created and -editable "
-"modules to contain general content. Initially conceived as simple prayer "
-"lists, they have expanded to include daily journals and topic-outline "
-"content. The user can maintain prayer lists, or prepare sermons, or write "
-"any structured content desired."
-msgstr ""
-"<application>Xiphos</application> accepte la création et l'édition par "
-"l'utilisateur de modules contenant du texte. Originellement conçus pour "
-"l'édition de simples listes de prières, ces modules incluent désormais des "
-"notes calendaires et structurées. Il est ainsi possible de tenir à jour des "
-"listes de prières, de préparer des sermons, ou d'écrire n'importe quel "
-"contenu structuré."
+msgstr "Listes de prières et Journaux"
 
 #: ../C/xiphos.xml:13(para)
 msgid ""
@@ -3946,13 +4060,13 @@ msgid ""
 "will see a new item appear at the bottom of the sidebar's module list for "
 "\"Prayer Lists/Journals\"."
 msgstr ""
-"Pour activer le support des notes et listes de prières, ouvrir la boite de "
+"Pour activer le support des journaux et listes de prières, ouvrir la boite de "
 "dialogue des <interface>Préférences</interface>. Dans le menu "
 "<menuchoice><guimenuitem>Général</guimenuitem><guimenuitem>Divers</"
 "guimenuitem></menuchoice>, sélectionner l'élément indiquant "
 "<guimenuitem>Activer les listes de prières</guimenuitem>. Une nouvelle "
-"entrée <guimenuitem>Liste de prières / Notes</guimenuitem> apparaît dès cet "
-"instant dans la liste de modules du <interface>volet latéral</interface>."
+"entrée <guimenuitem>Liste de prières&nbsp;/&nbsp;Journal</guimenuitem> "
+"apparaît dès cet instant dans la liste de modules du <interface>volet latéral</interface>."
 
 #: ../C/xiphos.xml:23(para)
 msgid ""
@@ -3990,11 +4104,11 @@ msgstr ""
 "quelques d'idées au niveau des différentes façons d'organiser les contenus. "
 "<guimenuitem>Liste simple</guimenuitem> peut être considérée comme une note "
 "basique. <guimenuitem>Liste ordonnée par sujet</guimenuitem> est une version "
-"plus structurée de la précédente. <guimenuitem>Suivi mensuel</guimenuitem> "
+"plus structurée de la précédente. <guimenuitem>Journal mensuel</guimenuitem> "
 "présente une structure dans laquelle il est possible de faire un suivi "
-"mensuel. <guimenuitem>Suivi quotidien</guimenuitem> est un calendrier annuel "
+"mensuel. <guimenuitem>Journal quotidien</guimenuitem> est un calendrier annuel "
 "dans lequel enregistrer un journal ou des prières en cours. Et finalement, "
-"<guimenuitem>Note structurée</guimenuitem> est une arborescence conçue pour "
+"<guimenuitem>Note structurée</guimenuitem> présente une arborescence conçue pour "
 "inclure des sujets, des sous-sujets, etc.."
 
 #: ../C/xiphos.xml:61(para)
@@ -4003,9 +4117,9 @@ msgid ""
 "selected for display from the module list, they will appear in the usual "
 "subwindow for general books."
 msgstr ""
-"Les notes et listes de prières ont le format de module d'un livre. "
-"Lorsqu'elles sont sélectionnées dans la liste de modules, elles sont donc "
-"affichées dans le volet <interface>Livre</interface>."
+"Les journaux et listes de prières ont la structure d'un module de type livre. "
+"Lorsqu'ils sont sélectionnés depuis la liste de modules, ils se trouvent donc "
+"affichés dans le volet <interface>Livre</interface>."
 
 #: ../C/xiphos.xml:68(para)
 msgid ""
@@ -4016,7 +4130,7 @@ msgid ""
 "menu on right-click of section keys provides for adding, deleting, and "
 "editing the names of sections and subsections."
 msgstr ""
-"Éditer une note ou une liste de prières se fait à l'aide de la souris en "
+"Éditer un journal ou une liste de prières se fait à l'aide de la souris en "
 "cliquant du bouton droit sur le module choisi pour faire apparaître le menu "
 "contextuel, puis en sélectionnant le menu <guimenuitem>Ouvrir dans "
 "l'éditeur</guimenuitem>. Les sections et sous-sections sont affichées dans "
@@ -4031,9 +4145,9 @@ msgid ""
 "list being edited, it will synchronize with new content when "
 "<guimenuitem>Save</guimenuitem> is used."
 msgstr ""
-"Si le volet <interface>Livre</interface> affiche une liste de prières ou une "
-"note en cours d'édition, le contenu sera mis à jour quand le bouton "
-"<guibutton>Enregistrer</guibutton> sera activé."
+"Si le volet <interface>Livre</interface> affiche une liste de prières ou un "
+"journal en cours d'édition, le contenu est mis à jour dès que le bouton "
+"<guibutton>Enregistrer</guibutton> est activé."
 
 #: ../C/xiphos.xml:87(para)
 msgid ""
@@ -4049,14 +4163,14 @@ msgid ""
 msgstr ""
 "Comme précédemment mentionné, les modules créés et édités par l'utilisateur "
 "sont en fait des des modules de type Livre. Ces modules sont donc "
-"utilisables immédiatement dans n'importe quelle application basée sur le "
-"Sword Project, comme par exemple <application>BibleTime</application>. Il "
-"est possible également à l'aide de l'onglet <guimenuitem>Gérer</guimenuitem> "
+"utilisables immédiatement dans n'importe quelle application utilisant l'architecture "
+"logicielle du Projet SWORD, comme par exemple <application>BibleTime</application>. "
+"Il est possible également à l'aide de l'onglet <guimenuitem>Gérer</guimenuitem> "
 "du gestionnaire de modules de réaliser un archivage au format zip, puis de "
 "copier le fichier ainsi obtenu sur un sytème Windows puis d'installer le "
-"module pour une application Windows basée sur le Sword Project. Peu d'autres "
-"applications basées sur le Sword Project offrent les outils d'édition de "
-"tels modules, ceci implique qu'ils apparaitront comme de simples livres."
+"module pour une application Windows utilisant le Projet SWORD. Peu d'autres "
+"applications utilisant l'architecture logicielle du Projet SWORD offrent des outils d'édition de "
+"tels modules, ceci implique qu'ils apparaitront simplement comme des livres ordinaires."
 
 #: ../C/xiphos.xml:103(para)
 msgid ""
@@ -4073,32 +4187,12 @@ msgstr ""
 "rendus disponible à une large audience. L'actuelle fonction d'installation "
 "de modules sera enrichie pour autoriser ce partage. Les utilisateurs "
 "pourront alors partager leurs sermons, études bibliques, ou tout autre "
-"contenu composé personellement avec d'autres utilisateurs d'applications "
-"basées sur le Sword Project."
+"contenu composé personnellement, avec d'autres utilisateurs d'applications "
+"utilisant l'architecture logicielle du Projet SWORD."
 
 #: ../C/xiphos.xml:431(title)
 msgid "Getting Help Online"
 msgstr "Obtenir de l'aide en ligne"
-
-#: ../C/xiphos.xml:4(title) ../C/onlinehelp.xml:4(title)
-msgid "Users Mailing List"
-msgstr "Liste de diffusion des utilisateurs"
-
-#: ../C/xiphos.xml:5(para) ../C/onlinehelp.xml:5(para)
-msgid ""
-"One way you can get help with Xiphos is using our low-traffic users' "
-"mailing list. You can sign up by clicking <ulink url=\"https://lists."
-"sourceforge.net/lists/listinfo/xiphos-users/\"> this link</ulink>. Once "
-"you are signed up, you can email the list with any problems you are having "
-"and other users or the developers will respond, typically within a day."
-msgstr ""
-"Une façon d'obtenir de l'aide au sujet de &appname; est d'utiliser nos "
-"listes de diffusion à faible trafic. il suffit de s'abonner en sélectionnant "
-"<ulink url=\"https://lists.sourceforge.net/lists/listinfo/xiphos-users/"
-"\"> ce lien</ulink>. Une fois inscrit, un simple e-mail envoyé sur la liste "
-"décrivant les problèmes rencontrés amènera une réponse des autres "
-"utilisateurs ou des développeurs généralement dans la journée.<para>[NDT : "
-"La liste de diffusion est en langue anglaise]</para>"
 
 #: ../C/xiphos.xml:13(title)
 msgid "Live Chat"
@@ -4106,103 +4200,32 @@ msgstr "Discussion en ligne"
 
 #: ../C/xiphos.xml:14(para)
 msgid ""
-"Another way to get help is with online chat. Xiphos has an IRC channel "
-"on freenode, #xiphos. If you don't know what that means, it's ok. Just "
-"click <ulink url=\"http://embed.mibbit.com/?server=irc.freenode.net&amp;"
-"channel=%23xiphos\">this link</ulink> (it will open your web browser), "
-"type a nickname or accept the default, and click \"Click to join chatroom\". "
-"This will take you to a chatroom where the developers and other users are "
+"Another way to get help is with online chat. Xiphos has an IRC channel on "
+"freenode, #xiphos. If you don't know what that means, it's ok. Just click "
+"<ulink url=\"http://embed.mibbit.com/?server=irc.freenode.net&amp;channel=%"
+"23xiphos\">this link</ulink> (it will open your web browser), type a "
+"nickname or accept the default, and click \"Click to join chatroom\". This "
+"will take you to a chatroom where the developers and other users are "
 "available to help you with issues you may be having. Although many times "
 "someone will answer your question immediately, sometimes you may have to "
 "wait a few minutes or longer."
 msgstr ""
 "Une autre façon d'obtenir de l'aide est d'utiliser le chat en ligne. "
-"&appname; a un canal IRC ouvert sur freenode, #xiphos;. Un moyen simple "
-"de se connecter est de sélectionner <ulink url=\"http://embed.mibbit.com/?"
-"server=irc.freenode.net&amp;channel=%23xiphos\">ce lien</ulink>. (Ceci "
-"ouvre la fenêtre du navigateur Internet). Ensuite, saisir un pseudo ou "
-"accepter celui par defaut, et sélectionner «&nbsp;Click to join "
-"chatroom&nbsp;». Ceci ouvre l'accès au salon où les développeurs et d'autres "
-"utilisateurs sont prêts à discuter des problèmes rencontrés. Généralement, "
-"les réponses aux questions sont immédiates, mais parfois cela peut prendre "
-"quelques minutes voire plus longtemps.<para>[NDT : Le chat en ligne est en "
-"langue anglaise]</para>"
+"<application>&appname;</application> a un canal IRC ouvert "
+"sur freenode, #xiphos;. Un moyen simple de "
+"se connecter est de sélectionner <ulink url=\"http://embed.mibbit.com/?"
+"server=irc.freenode.net&amp;channel=%23xiphos\">ce lien</ulink>. (Ceci ouvre "
+"la fenêtre du navigateur Internet). Ensuite, saisir un pseudo ou accepter "
+"celui par defaut, et sélectionner «&nbsp;Click to join chatroom&nbsp;». Ceci "
+"ouvre l'accès au salon où les développeurs et d'autres utilisateurs sont "
+"prêts à discuter des problèmes rencontrés. Généralement, les réponses aux "
+"questions sont immédiates, mais parfois cela peut prendre quelques minutes "
+"voire plus longtemps.<para>[NDT : Le chat en ligne est en langue anglaise]</"
+"para>"
 
 #: ../C/xiphos.xml:437(title)
 msgid "Original Language Research"
 msgstr "Étude des textes originaux"
-
-#: ../C/xiphos.xml:4(title) ../C/originallanguage.xml:4(title)
-msgid "Installing Needed Modules"
-msgstr "Installer les modules nécessaires"
-
-#: ../C/xiphos.xml:5(para) ../C/originallanguage.xml:5(para)
-msgid ""
-"Xiphos is ideally suited for studying the original Greek and Hebrew "
-"texts. To get started, you will want the following modules:"
-msgstr ""
-"Xiphos convient parfaitement à l'étude des textes originaux en grec ou "
-"hébreu. Pour démarrer, il est recommandé d'installer les modules suivants :"
-
-#: ../C/xiphos.xml:8(para) ../C/originallanguage.xml:8(para)
-msgid "From Crosswire Repository:"
-msgstr "Dépot Crosswire"
-
-#: ../C/xiphos.xml:13(para) ../C/originallanguage.xml:13(para)
-msgid ""
-"StrongsHebrew Dictionary (or get StrongsRealHebrew from the Xiphos "
-"Repository)"
-msgstr ""
-"Dictionnaire StrongsHebrew (ou le StrongsRealHebrew du dépot &appname;)"
-"<para>[NDT : dictionnaires en langue anglaise]</para>"
-
-#: ../C/xiphos.xml:18(para) ../C/originallanguage.xml:18(para)
-msgid ""
-"StrongsGreek Dictionary (or get StrongsRealGreek from the Xiphos "
-"Repository)"
-msgstr ""
-"Dictionnaire StrongsGreek (ou le StrongsRealGreek du dépot &appname;)<para>"
-"[NDT : dictionnaires en langue anglaise]</para>"
-
-#: ../C/xiphos.xml:23(para) ../C/originallanguage.xml:23(para)
-msgid "Robinson Dictionary"
-msgstr ""
-"Dictionnaire Robinson (codes morphologiques)<para>[NDT : dictionnaire en "
-"langue anglaise]</para>"
-
-#: ../C/xiphos.xml:28(para) ../C/originallanguage.xml:28(para)
-msgid "KJV Bible"
-msgstr "Bible Louis Segond 1910 avec codes Strong et étiquettes morphologiques"
-
-#: ../C/xiphos.xml:33(para) ../C/originallanguage.xml:33(para)
-msgid "From Xiphos Repository:"
-msgstr "Dépot &appname;"
-
-#: ../C/xiphos.xml:38(para) ../C/originallanguage.xml:38(para)
-msgid ""
-"StrongsRealGreek Dictionary (same as StrongsGreek, but with Greek "
-"characters, B-Greek transliteration, and self-referencing links)"
-msgstr ""
-"Dictionnaire StrongsRealGreek (identique au StrongsGreek, mais avec "
-"caractères grecs, transliteration B-Greek, et liens de renvois)<para>[NDT : "
-"dictionnaire en langue anglaise]</para>"
-
-#: ../C/xiphos.xml:43(para) ../C/originallanguage.xml:43(para)
-msgid ""
-"StrongsRealHebrew Dictionary (same as StrongsHebrew, but with Hebrew "
-"characters and self-referencing links)"
-msgstr ""
-"Dictionnaire StrongsRealHebrew (identique au StrongsHebrew, mais avec "
-"caractères hébreu et liens de renvois)<para>[NDT : dictionnaire en langue "
-"anglaise]</para>"
-
-#: ../C/xiphos.xml:48(para) ../C/originallanguage.xml:48(para)
-msgid ""
-"InvertedStrongsRealGreek (key in or copy actual Greek word, rather than "
-"number)"
-msgstr ""
-"Dictionnaire InvertedStrongsRealGreek définitions des mots grecs<para>NDT : "
-"dictionnaire en langue anglaise]</para>"
 
 #: ../C/xiphos.xml:56(title)
 msgid "Setting Up"
@@ -4414,42 +4437,31 @@ msgid ""
 "Development list <email>xiphos-developers@lists.sourceforge.net</email>. "
 "Comments may also be submitted via the project trackers at SourceForge."
 msgstr ""
-"Vos commentaires et suggestions à propos du manuel de &appname; sont à "
+"Vos commentaires et suggestions à propos du manuel de "
+"<application>&appname;</application> sont à "
 "envoyer à la liste de développement de &appname; <email>xiphos-"
 "developers@lists.sourceforge.net</email>. Les commentaires  peuvent aussi "
 "être envoyés via le tracker du projet à SourceForge."
 
 #: ../C/xiphos.xml:43(para)
 msgid ""
-"For more information on <application>Xiphos</application>, please visit "
-"the project website at <ulink type=\"http\" url=\"http://xiphos.sf.net/"
-"\">http://xiphos.sf.net</ulink>. Bug reports should be made using the "
-"Bug Tracker at the project development site <ulink type=\"http\" url="
-"\"http://www.sourceforge.net/projects/xiphos\"> http://www.sourceforge."
-"net/projects/xiphos</ulink>"
+"For more information on <application>Xiphos</application>, please visit the "
+"project website at <ulink type=\"http\" url=\"http://xiphos.sf.net/\">http://"
+"xiphos.sf.net</ulink>. Bug reports should be made using the Bug Tracker at "
+"the project development site <ulink type=\"http\" url=\"http://www."
+"sourceforge.net/projects/xiphos\"> http://www.sourceforge.net/projects/"
+"xiphos</ulink>"
 msgstr ""
 "Pour obtenir plus d'informations sur <application>&appname;</application>, "
-"visitez le site web du projet à <ulink type=\"http\" url=\"http://xiphos."
-"sf.net\">http://xiphos.sf.net</ulink>. Les rapports de bogue doivent "
-"être soumis à l'aide de Bug Tracker sur le site de développement du projet à "
+"visitez le site web du projet à <ulink type=\"http\" url=\"http://xiphos.sf."
+"net\">http://xiphos.sf.net</ulink>. Les rapports de bogue doivent être "
+"soumis à l'aide de Bug Tracker sur le site de développement du projet à "
 "<ulink type=\"http\" url=\"http://www.sourceforge.net/projects/xiphos"
 "\">http://www.sourceforge.net/projects/xiphos</ulink>"
 
 #: ../C/xiphos.xml:449(title)
 msgid "License"
 msgstr "Licence"
-
-#: ../C/xiphos.xml:2(para) ../C/license.xml:2(para)
-msgid ""
-"This program is free software; you can redistribute it and/or modify it "
-"under the terms of the <ulink type=\"ghelp\" url=\"gnome-help:gpl\">GNU "
-"General Public License</ulink> version 2 as published by the Free Software "
-"Foundation."
-msgstr ""
-"Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon "
-"les termes de la <ulink type=\"ghelp\" url=\"gnome-help:gpl\">Licence "
-"Publique Générale GNU</ulink> publiée par la Free Software Foundation "
-"(version 2)."
 
 #: ../C/xiphos.xml:7(para)
 msgid ""
@@ -4470,35 +4482,20 @@ msgid ""
 "obtain a copy of the <citetitle>GNU General Public License</citetitle> from "
 "the Free Software Foundation by visiting <ulink type=\"http\" url=\"http://"
 "www.fsf.org\"> their Web site</ulink> or by writing to <address> Free "
-"Software Foundation, Inc. <street>59 Temple Place</street> - Suite 330 "
-"<city>Boston</city>, <state>MA</state><postcode>02111-1307</"
+"Software Foundation, Inc. <street>51 Franklin St</street>, Fifth Floor, "
+"<city>Boston</city>, <state>MA</state><postcode>02110-1301</"
 "postcode><country>USA</country></address>"
 msgstr ""
 "Le texte complet de la <citetitle>Licence Publique Générale GNU</citetitle>  "
 "peut être consulté en annexe du <citetitle>GNOME Users Guide</citetitle> ou "
 "sur le site Internet de la <ulink type=\"http\" url=\"http://www.fsf.org"
 "\">Free  Software Foundation</ulink>, ou encore en écrivant à : "
-"<address>Free Software Foundation, Inc.<street> 59 Temple Place</street> - "
-"Suite 330 <city>Boston</city>, <state>MA</state><postcode>02111-1307</"
+"<address>Free Software Foundation, Inc.<street> 51 Franklin St</street> - "
+"Fifth Floor <city>Boston</city>, <state>MA</state><postcode>02110-1301</"
 "postcode> <country>USA</country></address>"
 
-#: ../C/interface.xml:27(phrase)
-msgid "menubar"
-msgstr "Barre de menu"
-
-#. Use the Introduction section to give a brief overview of what
-#.      the application is and what it does.
-#: ../C/introduction.xml:5(para)
-msgid ""
-"is a Bible study and research tool based upon the \"SWORD Project\" "
-"libraries and the GNOME Desktop libraries. You can use to do the following:"
-msgstr ""
-"est un outil de recherche et d'étude biblique s'appuyant sur le 'SWORD "
-"Project' etll'environnement de bureau GNOME.&appname; vous offre les "
-"fonctionnalités suivantes :"
-
 #. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2.
-#: ../C/studypad.xml:0(None)
+#: ../C/xiphos.xml:0(None)
 msgid "translator-credits"
 msgstr "Accréditions aux traducteurs"
 
