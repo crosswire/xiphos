@@ -807,7 +807,7 @@ void create_mainwindow(void)
 /**widgets.epaned********/
 	widgets.epaned = gtk_hpaned_new();
 	gtk_widget_show(widgets.epaned);
-	gtk_container_set_border_width (GTK_CONTAINER (widgets.epaned), 6);
+	gtk_container_set_border_width (GTK_CONTAINER (widgets.epaned), 4);
 	gtk_box_pack_start(GTK_BOX(hbox25), widgets.epaned, TRUE, TRUE, 0);
 
 	widgets.vboxMain = gtk_vbox_new(FALSE, 0);
