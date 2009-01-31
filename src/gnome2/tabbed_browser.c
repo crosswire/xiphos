@@ -1278,7 +1278,7 @@ void gui_notebook_main_setup(void)
 	removed_page = 1;
 	cur_passage_tab = NULL;
 	passage_list = NULL;
-
+	
 	gui_load_tabs(default_tab_filename);
 
 	g_signal_connect(GTK_OBJECT(widgets.notebook_main),
