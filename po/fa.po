@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-08-01 16:18+0100\n"
-"PO-Revision-Date: 2009-01-22 23:02+0000\n"
+"POT-Creation-Date: 2009-01-22 10:08+0000\n"
+"PO-Revision-Date: 2009-01-31 15:32+0000\n"
 "Last-Translator: David Lodge <dave@cirt.net>\n"
 "Language-Team: English/GB <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: ../xiphos.desktop.in.in.h:1
 msgid "Xiphos Bible Guide"
-msgstr ""
+msgstr "زیفوس-نرم·افزار·مطالعه·کتابمقدس"
 
 #: ../xiphos.desktop.in.in.h:2
 msgid "Study the Bible"
@@ -35,7 +35,6 @@ msgstr "ترکیب پیدا نشد"
 #, c-format
 msgid "Page %d of %d"
 msgstr "صفحه %d از %d"
-""
 
 #: ../src/editor/html-editor.c:391 ../src/editor/html-editor.c:438
 msgid "Save As"
@@ -574,7 +573,7 @@ msgstr "بستن بدون ضبط"
 
 #: ../src/gnome2/dialog.c:758
 msgid "Xiphos:"
-msgstr "گنوم سورد"
+msgstr "سیفوس:"
 
 #: ../src/gnome2/dialog.c:859
 msgid "Close _without Saving"
@@ -642,7 +641,7 @@ msgid ""
 "such as the contents of this commentary.\n"
 "Therefore, personal commentary renaming is\n"
 "not available in the Windows environment."
-msgstr "نوع سیستم پرونده در ویندوز امکانات گنوم سورد را محدود می‌کند"
+msgstr "نوع سیستم پرونده در ویندوز امکانات زیفوس را محدود می‌کند"
 
 #: ../src/gnome2/commentary.c:475
 msgid "Rename Commentary"
@@ -788,7 +787,7 @@ msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:366
 msgid "Xiphos could not execute archiver"
-msgstr "گنوم سورد نتوانست آرشیوگر را راه اندازی کند"
+msgstr "زیفوس نتوانست آرشیوگر را راه اندازی کند"
 
 #: ../src/gnome2/mod_mgr.c:371
 msgid ""
@@ -1084,11 +1083,11 @@ msgstr "شروع"
 
 #: ../src/gnome2/main_window.c:779
 msgid "Building Xiphos interface"
-msgstr "ساختن واسط گنوم سورد"
+msgstr "ساختن واسط زیفوس"
 
 #: ../src/gnome2/main_window.c:785
 msgid "Xiphos - Bible Study Software"
-msgstr "گنوم سورد-نرم افزار مطالعه کتابمقدس"
+msgstr "زیفوس-نرم افزار مطالعه کتابمقدس"
 
 #: ../src/gnome2/main_window.c:837
 msgid "Open a new tab"
@@ -1429,20 +1428,20 @@ msgstr "بارگذاری نشده است"
 
 #: ../src/gnome2/xiphos.c:87
 msgid "Initiating Xiphos"
-msgstr "بکارگیری گنوم سورد"
+msgstr "بکارگیری زیفوس"
 
 #: ../src/gnome2/xiphos.c:144 ../src/gnome2/splash.c:633
 msgid "Displaying Xiphos"
-msgstr "نمایش گنوم سورد"
+msgstr "نمایش زیفوس"
 
 #. main_prayer_list_new("2008");
-#: ../src/gnome2/xiphos.c:212
+#: ../src/gnome2/xiphos.c:215
 msgid "done"
 msgstr "انجام شد"
 
-#: ../src/gnome2/xiphos.c:290
+#: ../src/gnome2/xiphos.c:293
 msgid "Xiphos is shutdown"
-msgstr "گنوم سورد خاموش است"
+msgstr "زیفوس خاموش است"
 
 #: ../src/gnome2/bookmarks_menu.c:473
 msgid "Folder name: "
@@ -1770,7 +1769,6 @@ msgstr "کتب فرهنگ را آشکار و یا مخفی کن"
 #: ../src/gnome2/main_menu.c:1068
 msgid "_Verse Per Line"
 msgstr "لیست آیات"
-""
 
 #. 8
 #: ../src/gnome2/main_menu.c:1074
@@ -1825,13 +1823,11 @@ msgstr "محتویات"
 
 #: ../src/gnome2/main_menu.c:1139
 msgid "Open the Xiphos manual"
-msgstr "دستورالعمل گنوم سورد را باز کن"
+msgstr "دستورالعمل زیفوس را باز کن"
 
 #: ../src/gnome2/main_menu.c:1144
 msgid "_Mailing List"
 msgstr "لیست  پست الکترونيک"
-""
-""
 
 #: ../src/gnome2/main_menu.c:1145
 msgid "Sign up for the users' mailing list"
@@ -1855,11 +1851,11 @@ msgstr ""
 
 #: ../src/gnome2/main_menu.c:1163
 msgid "About _Translation"
-msgstr "درباره ترجمه گنوم سورد"
+msgstr "درباره ترجمه زیفوس"
 
 #: ../src/gnome2/main_menu.c:1164
 msgid "Translating Xiphos to other languages"
-msgstr "در حال ترجمه گنوم سورد به دیگر زبانها"
+msgstr "در حال ترجمه زیفوس به دیگر زبانها"
 
 #: ../src/gnome2/main_menu.c:1170
 msgid "_About the SWORD Project"
@@ -1871,7 +1867,7 @@ msgstr "اطلاعات بیشتر در مورد پروژه سورد؟"
 
 #: ../src/gnome2/main_menu.c:1176
 msgid "About _Xiphos"
-msgstr "درباره گنوم سورد"
+msgstr "درباره زیفوس"
 
 #: ../src/gnome2/main_menu.c:1177
 msgid "About this application"
@@ -1899,17 +1895,17 @@ msgid ""
 "Do you like using Xiphos to study the Bible? Would you like to see its "
 "display using your native language? You could translate Xiphos! \n"
 "\n"
-"We are always looking for contributions of new translations of Xiphos "
-"into other languages. If you are able to translate for us, please see the "
-"link below, contact us, and get involved with our efforts."
+"We are always looking for contributions of new translations of Xiphos into "
+"other languages. If you are able to translate for us, please see the link "
+"below, contact us, and get involved with our efforts."
 msgstr ""
-"ما همیشه علاقمند هستیم که گنوم سورد را به زبانهای دیگر ترجمه کنیم. لذا اگر "
+"ما همیشه علاقمند هستیم که زیفوس را به زبانهای دیگر ترجمه کنیم. لذا اگر "
 "از توان ترجمه برخوردارید، خواهش می‌کنیم با لینک زیر با ما تماس بگیرید و در "
 "این امر با ما همگام شوید."
 
 #: ../src/gnome2/about_trans.c:98
 msgid "About Xiphos Translation"
-msgstr "درباره ترجمه گنوم سورد"
+msgstr "درباره ترجمه زیفوس"
 
 #: ../src/gnome2/about_trans.c:139
 msgid "See TRANSLATION-HOWTO in Xiphos source"
@@ -1917,7 +1913,7 @@ msgstr "لطفا به بخش ترجمه رجوع کنید"
 
 #: ../src/gnome2/about_trans.c:146
 msgid "Xiphos development"
-msgstr "بسط و گسترش گنوم سورد"
+msgstr "بسط و گسترش زیفوس"
 
 #: ../src/main/sword.cc:539
 msgid ""
@@ -1941,7 +1937,7 @@ msgstr "به جهت اطلاعات مربوط به زبان"
 msgid ""
 "Xiphos cannot read the\n"
 "language abbreviation file."
-msgstr "گنوم سورد قادر به شناخت اطلاعات پرونده نیست"
+msgstr "زیفوس قادر به شناخت اطلاعات پرونده نیست"
 
 #: ../src/main/sword.cc:638
 msgid "Initiating SWORD"
@@ -1965,7 +1961,7 @@ msgstr "جستجو به دنبال مدولهای سورد"
 
 #: ../src/main/sword.cc:676
 msgid "SWORD is shutdown"
-msgstr "گنوم سورد خاموش است"
+msgstr "زیفوس خاموش است"
 
 #: ../src/main/sword.cc:1412
 msgid "Daily devotional was requested, but there are none installed."
@@ -1999,10 +1995,10 @@ msgid ""
 "%s:\n"
 "No such module is installed.\n"
 "%s"
-msgstr "%s:\n"
+msgstr ""
+"%s:\n"
 "چنین مدولی نصب شده است \n"
 "%s"
-""
 
 #: ../src/main/search_dialog.cc:1443
 msgid "Please adjust the module list."
@@ -2014,7 +2010,7 @@ msgstr "جستجو تمام شد"
 
 #: ../src/main/main.c:92
 msgid "Xiphos does not understand more than one argument."
-msgstr "گنوم سورد در آن واحد بیش از یک بحث را درک نمی‌کند"
+msgstr "زیفوس در آن واحد بیش از یک بحث را درک نمی‌کند"
 
 #: ../src/main/prayerlists.cc:70
 msgid "January"
@@ -2165,14 +2161,14 @@ msgstr "لیست دعا"
 
 #: ../src/main/prayerlists.cc:268
 msgid "Xiphos finds that prayer list already."
-msgstr "در حال حاضر گنوم سورد به دنبال آن لیست دعا می‌گردد"
+msgstr "در حال حاضر زیفوس به دنبال آن لیست دعا می‌گردد"
 
 #: ../src/main/prayerlists.cc:281
 #, c-format
 msgid ""
 "Xiphos cannot create module's path:\n"
 "%s"
-msgstr " %sگنوم سورد طریق مدول را نمی‌تواند به وجود آورد"
+msgstr " %sزیفوس طریق مدول را نمی‌تواند به وجود آورد"
 
 #: ../src/main/prayerlists.cc:321
 msgid "A basic prayer list. \\par\\par Module created by Xiphos."
@@ -2213,8 +2209,7 @@ msgid "A daily journal. \\par\\par Module created by Xiphos."
 msgstr "ژورنال روزانه"
 
 #: ../src/main/prayerlists.cc:522
-msgid ""
-"An outlined topic (e.g. sermon). \\par\\par Module created by Xiphos."
+msgid "An outlined topic (e.g. sermon). \\par\\par Module created by Xiphos."
 msgstr "اصلی/ لیستهای دعا"
 
 #: ../src/main/prayerlists.cc:536
@@ -2335,7 +2330,7 @@ msgstr "لیست دعا در حال حاضر موجود است \n"
 
 #: ../src/main/sword_treekey.cc:419
 msgid "\\par\\par My prayer list \\par\\par Module created in Xiphos"
-msgstr "لیست دعای من/ مدول در گنوم سورد ایجاد شد"
+msgstr "لیست دعای من/ مدول در زیفوس ایجاد شد"
 
 #: ../src/main/display.cc:281
 msgid ""
@@ -2425,7 +2420,7 @@ msgstr "پیدا نشد"
 #: ../src/main/url.cc:239
 #, c-format
 msgid "Xiphos could not execute %s"
-msgstr "گنوم سورد نتوانست آرشیوگر را راه اندازی کند"
+msgstr "زیفوس نتوانست آرشیوگر را راه اندازی کند"
 
 #: ../src/main/url.cc:247
 msgid "Viewer error:\n"
@@ -2462,11 +2457,11 @@ msgstr "فصل"
 msgid ""
 "Welcome to Xiphos.\n"
 "\n"
-"There are no Bible modules installed. In order to initialize, Xiphos "
-"needs you to install at least one Bible.\n"
+"There are no Bible modules installed. In order to initialize, Xiphos needs "
+"you to install at least one Bible.\n"
 "\n"
-"With your permission, Xiphos will invoke the Module Manager so that you "
-"may install from Crosswire:\n"
+"With your permission, Xiphos will invoke the Module Manager so that you may "
+"install from Crosswire:\n"
 "1. Configure remote install.\n"
 "2. Connect.\n"
 "3. Select a Bible text of your language preference.\n"
@@ -2484,7 +2479,7 @@ msgstr "خانه هنوز تعیین نشده است"
 
 #: ../src/main/settings.c:122
 msgid "Xiphos has renamed .xiphos-2.0 to .xiphos"
-msgstr "گنوم سورد اسم را تغییر داده است"
+msgstr "زیفوس اسم را تغییر داده است"
 
 #: ../src/main/settings.c:125
 #, c-format
@@ -2496,7 +2491,7 @@ msgid ""
 msgstr ""
 "%\n"
 "\n"
-"گنوم سورد قادر به ادامه نیست"
+"زیفوس قادر به ادامه نیست"
 
 #: ../src/main/settings.c:133
 #, c-format
@@ -2505,7 +2500,7 @@ msgid ""
 "%s\n"
 "\n"
 "Xiphos cannot continue."
-msgstr "گنوم سورد قادر به ادامه نیست"
+msgstr "زیفوس قادر به ادامه نیست"
 
 #: ../src/main/settings.c:153
 msgid "can not create  .sword"
@@ -2538,7 +2533,7 @@ msgid ""
 "and will now exit."
 msgstr ""
 "هیچ کتابمقدسی در حال حاضر نصب نشده است. در مقابل پیشنهاد نصب جواب منفی "
-"داده‌اید. بدون نمایش مدول کتابمقدس گنوم سورد قادر به ادامه نیست و برنامه خود "
+"داده‌اید. بدون نمایش مدول کتابمقدس زیفوس قادر به ادامه نیست و برنامه خود "
 "را خواهد بست \n"
 "."
 
@@ -2552,7 +2547,7 @@ msgid ""
 "Xiphos cannot proceed,\n"
 "and will now exit."
 msgstr ""
-" بدون نمایش مدول کتابمقدس گنوم سورد قادر به ادامه نیست و برنامه خود را خواهد "
+" بدون نمایش مدول کتابمقدس زیفوس قادر به ادامه نیست و برنامه خود را خواهد "
 "بست."
 
 #. *****************************************************************************
@@ -2598,7 +2593,7 @@ msgstr ""
 msgid ""
 "Xiphos failed to complete handler init for key #%d:\n"
 "%s"
-msgstr "گنوم سورد قادر به انجام نیست"
+msgstr "زیفوس قادر به انجام نیست"
 
 #: ../ui/bookmarks.glade.h:1
 msgid "Add Bookmark"
@@ -2954,7 +2949,8 @@ msgid ""
 "+3\n"
 "+4\n"
 "+5"
-msgstr "-۲\n"
+msgstr ""
+"-۲\n"
 "-۱\n"
 "+۰\n"
 "+۱\n"
@@ -2962,7 +2958,6 @@ msgstr "-۲\n"
 "+۳\n"
 "+۴\n"
 "+۵"
-""
 
 #: ../ui/prefs.glade.h:9
 msgid "<b>Font Colors</b>"
@@ -2991,7 +2986,6 @@ msgstr "نشان بده"
 #: ../ui/prefs.glade.h:15
 msgid "<b>Special Purpose Modules</b>"
 msgstr "<b>مدولهای مختلف</b>"
-""
 
 #: ../ui/prefs.glade.h:16
 msgid "<b>StudyPad default directory</b>"
