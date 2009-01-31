@@ -1,11 +1,15 @@
+2009-01-31  karl <charcoal@users.sf.net>
+
+	* generalize sword_uri's use of show_in_previewer to any lexdict.
+	
 2009-01-30  karl <charcoal@users.sf.net>
 
 	* replace URLs gnomesword.sf.net -> xiphos.sf.net.
 	
 2009-01-29  terry <tbiggs@users.sourceforge.net>
 
-	* remove files ui/editor_note_WIN32.xml and  ui/editor_studypad_WIN32.xml
-	* which are not used
+	* remove files ui/editor_note_WIN32.xml & ui/editor_studypad_WIN32.xml
+	  which are not used
 	
 2009-01-29  karl <charcoal@users.sf.net>
 

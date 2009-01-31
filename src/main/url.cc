@@ -961,20 +961,31 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 	char *mykey;
 		
 	if (!clicked) {
-		if (g_strstr_len(url, 24, "Strongs") ||
-		    g_strstr_len(url, 24, "WebstersLinked") ||
-		    g_strstr_len(url, 24, "NaveLinked") ||
-		    g_strstr_len(url, 24, "Vines"))
-			show_in_previewer(url);			
-		else
+		gchar *name = g_strstr_len(url, 10, "://");
+		if (!name)
 			gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), url);
+		else {
+			name += 3;		// at name beginning.
+			gchar *slash = g_strstr_len(name, 20, "/");
+			if (slash)
+				*slash = '\0';	// limit to name end.
+			int mod_type = backend->module_type(name);
+			if (slash)
+				*slash = '/';
+			
+			if (mod_type == DICTIONARY_TYPE)
+				show_in_previewer(url);			
+			else
+				gnome_appbar_set_status
+				    (GNOME_APPBAR(widgets.appbar), url);
+		}
 		return 1;
 	}
 	
 	work_buf = g_strsplit (url,"/",4);
 	//if(work_buf[KEY][0] == '/' ) ++work_buf[KEY];
 	GS_message(("work_buf: %s, %s",work_buf[MODULE],work_buf[KEY]));
-	if(!work_buf[MODULE] && !work_buf[KEY]) {
+	if (!work_buf[MODULE] && !work_buf[KEY]) {
 		alert_url_not_found(url);
 		g_strfreev(work_buf);
 		return 0;
