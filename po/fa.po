@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-01-22 10:08+0000\n"
-"PO-Revision-Date: 2009-01-31 15:32+0000\n"
+"PO-Revision-Date: 2009-01-31 15:58+0000\n"
 "Last-Translator: David Lodge <dave@cirt.net>\n"
 "Language-Team: English/GB <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -2752,7 +2752,7 @@ msgstr ": "
 
 #: ../ui/export-dialog.glade.h:2
 msgid "<b>Export</b>"
-msgstr ""
+msgstr "<b>صادرات</b>"
 
 #: ../ui/export-dialog.glade.h:3
 msgid "<b>Format</b>"
@@ -2965,7 +2965,7 @@ msgstr "رنگ قلم"
 
 #: ../ui/prefs.glade.h:10
 msgid "<b>Font Sizes</b>"
-msgstr ""
+msgstr "<b>اندازه فونت</b>"
 
 #: ../ui/prefs.glade.h:11
 msgid "<b>General</b>"
