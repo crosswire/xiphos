@@ -680,10 +680,12 @@ GtkWidget *_create_parallel_tab(void)
 	GtkWidget *frame;
 	GtkWidget *scrolled_window;
 	
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_bible_parallel),
+	gtk_notebook_set_show_tabs (GTK_NOTEBOOK(widgets.notebook_bible_parallel),
                                              FALSE);
-	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_bible_parallel), 
+	gtk_notebook_set_current_page (GTK_NOTEBOOK(widgets.notebook_bible_parallel), 
 					0);
+	gtk_notebook_set_show_border (GTK_NOTEBOOK(widgets.notebook_bible_parallel),
+                                        TRUE);
 	parallel_vbox = gtk_vbox_new(FALSE, 0);
 	g_signal_connect(GTK_OBJECT(parallel_vbox), "destroy",
 			   G_CALLBACK(on_parallel_tab_destroy),
