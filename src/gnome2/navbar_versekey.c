@@ -205,7 +205,11 @@ static gboolean select_book_button_press_callback(GtkWidget * widget,
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), TRUE);
 		gtk_menu_popup(GTK_MENU(menu), NULL, NULL,
 			       menu_position_under, widget, event->button,
+#ifdef WIN32
 			       event->time + time_add);
+#else
+		               event->time);
+#endif
 		return TRUE;
 	}
 	return FALSE;
