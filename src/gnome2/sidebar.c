@@ -1320,14 +1320,23 @@ void gui_show_previewer_in_sidebar(gint choice)
 		gtk_widget_show(widgets.box_side_preview);
 		gtk_widget_reparent (widgets.previewer,
                                      widgets.box_side_preview);
-		gtk_widget_show(widgets.box_side_preview);
+
+#ifdef USE_GTKMOZEMBED
+		gtk_widget_show (widgets.box_side_preview);
+#else
+		gtk_widget_show_all (widgets.box_side_preview);
+#endif
 		gtk_widget_hide(widgets.vbox_previewer);
 		gtk_paned_set_position(GTK_PANED(widgets.paned_sidebar),
 				       settings.sidebar_notebook_hight);
 	} else {
 		gtk_widget_reparent (widgets.previewer,
                                      widgets.vbox_previewer);
-		gtk_widget_show(widgets.vbox_previewer);
+#ifdef USE_GTKMOZEMBED
+		gtk_widget_show (widgets.vbox_previewer);
+#else
+		gtk_widget_show_all (widgets.vbox_previewer);
+#endif
 		gtk_widget_hide(widgets.box_side_preview);
 	}
 	
