@@ -150,6 +150,11 @@ if test "x$paratab" = xyes; then
   AC_DEFINE(USE_PARALLEL_TAB, 1, [Define if wish to enable Parallel view in a tab])
 fi
 
+AC_ARG_ENABLE(autoclear,[  --enable-autoclear    use previewer autoclear [default=no]],autoclear=$enableval,autoclear=no)
+if test "x$autoclear" = xyes; then
+  AC_DEFINE(USE_PREVIEWER_AUTOCLEAR, 1, [Define if wish to enable previewer autoclear])
+fi
+
 AC_ARG_ENABLE(old_navbar,[  --enable-old_navbar    use old_navbar [default=no]],old_navbar=$enableval,old_navbar=no)
 if test "x$old_navbar" = xyes; then
   AC_DEFINE(OLD_NAVBAR, 1, [Define if wish to use the old style navbar])
