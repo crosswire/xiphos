@@ -1,6 +1,7 @@
 2009-01-31  karl <charcoal@users.sf.net>
 
 	* generalize sword_uri's use of show_in_previewer to any lexdict.
+	* add --enable-autoclear to choose previewer content transient-ness.
 	
 2009-01-30  karl <charcoal@users.sf.net>
 
