@@ -75,6 +75,7 @@ using namespace std;
 
 void main_clear_viewer(void)
 {
+#ifdef USE_PREVIEWER_AUTOCLEAR
 	GString *tmp_str = g_string_new(NULL);
 	GString *str;
 	gboolean was_editable = FALSE;
@@ -120,6 +121,7 @@ void main_clear_viewer(void)
 #endif
 	g_string_free(str, TRUE);
 	g_string_free(tmp_str, TRUE);
+#endif /* USE_PREVIEWER_AUTOCLEAR */
 }
 
 
