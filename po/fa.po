@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-01-22 10:08+0000\n"
-"PO-Revision-Date: 2009-01-31 15:58+0000\n"
+"PO-Revision-Date: 2009-02-03 18:10+0000\n"
 "Last-Translator: David Lodge <dave@cirt.net>\n"
 "Language-Team: English/GB <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1371,7 +1371,7 @@ msgstr "عمومی"
 
 #: ../src/gnome2/preferences_dialog.c:1781 ../ui/prefs.glade.h:85
 msgid "Tabs and Panes"
-msgstr ""
+msgstr "برگها و پنجره‌ها"
 
 #: ../src/gnome2/preferences_dialog.c:1788
 #, fuzzy
@@ -1388,7 +1388,7 @@ msgstr "توازی"
 
 #: ../src/gnome2/preferences_dialog.c:1801
 msgid "Special"
-msgstr ""
+msgstr "مخصوص"
 
 #: ../src/gnome2/preferences_cell_renderer.c:398
 msgid "Text"
@@ -1899,9 +1899,9 @@ msgid ""
 "other languages. If you are able to translate for us, please see the link "
 "below, contact us, and get involved with our efforts."
 msgstr ""
-"ما همیشه علاقمند هستیم که زیفوس را به زبانهای دیگر ترجمه کنیم. لذا اگر "
-"از توان ترجمه برخوردارید، خواهش می‌کنیم با لینک زیر با ما تماس بگیرید و در "
-"این امر با ما همگام شوید."
+"ما همیشه علاقمند هستیم که زیفوس را به زبانهای دیگر ترجمه کنیم. لذا اگر از "
+"توان ترجمه برخوردارید، خواهش می‌کنیم با لینک زیر با ما تماس بگیرید و در این "
+"امر با ما همگام شوید."
 
 #: ../src/gnome2/about_trans.c:98
 msgid "About Xiphos Translation"
@@ -2533,8 +2533,8 @@ msgid ""
 "and will now exit."
 msgstr ""
 "هیچ کتابمقدسی در حال حاضر نصب نشده است. در مقابل پیشنهاد نصب جواب منفی "
-"داده‌اید. بدون نمایش مدول کتابمقدس زیفوس قادر به ادامه نیست و برنامه خود "
-"را خواهد بست \n"
+"داده‌اید. بدون نمایش مدول کتابمقدس زیفوس قادر به ادامه نیست و برنامه خود را "
+"خواهد بست \n"
 "."
 
 #: ../src/main/settings.c:205
@@ -2547,8 +2547,7 @@ msgid ""
 "Xiphos cannot proceed,\n"
 "and will now exit."
 msgstr ""
-" بدون نمایش مدول کتابمقدس زیفوس قادر به ادامه نیست و برنامه خود را خواهد "
-"بست."
+" بدون نمایش مدول کتابمقدس زیفوس قادر به ادامه نیست و برنامه خود را خواهد بست."
 
 #. *****************************************************************************
 #. * Name
@@ -3557,7 +3556,7 @@ msgstr "مدول انتخاب شده را از لیست حذف کن"
 
 #: ../ui/search-dialog.glade.h:77
 msgid "Result Summary Table"
-msgstr ""
+msgstr "لیست نتیجه‌ها"
 
 #: ../ui/search-dialog.glade.h:78
 msgid "Result Summary Window"
