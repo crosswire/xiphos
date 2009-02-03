@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-01-22 10:08+0000\n"
-"PO-Revision-Date: 2009-02-03 18:10+0000\n"
+"PO-Revision-Date: 2009-02-03 20:41+0000\n"
 "Last-Translator: David Lodge <dave@cirt.net>\n"
 "Language-Team: English/GB <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -3106,9 +3106,8 @@ msgid "Font Misc"
 msgstr "گوناگونی قلم"
 
 #: ../ui/prefs.glade.h:48
-#, fuzzy
 msgid "Foreground"
-msgstr "رو زمینه را مشخص کن"
+msgstr "پیشن نما"
 
 #: ../ui/prefs.glade.h:49
 msgid "General Misc"
@@ -3516,7 +3515,7 @@ msgstr "کلمات متعدد"
 
 #: ../ui/search-dialog.glade.h:66
 msgid "New Custom Module List Button"
-msgstr ""
+msgstr "دکمه·لیست شخصی ·نو مدول"
 
 #: ../ui/search-dialog.glade.h:67
 msgid "New Range Button"
