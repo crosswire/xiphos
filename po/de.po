@@ -5,19 +5,19 @@
 # Johannes Tanzler <johannes.tanzler@aon.at> 2004
 # Christoph Brill <egore911@egore911.de> 2007
 # , fuzzy
-#
-#
+# 
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 2 2.3.6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-01-22 10:08+0000\n"
-"PO-Revision-Date: 2008-09-17 21:35+0100\n"
+"PO-Revision-Date: 2009-02-03 23:53+0000\n"
 "Last-Translator: Eicke Godehardt <sf at godehardt.org>\n"
-"Language-Team: Xiphos Translation Team\n"
+"Language-Team: Xiphos Translation Team <farsi@lists.sharif.edu>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: ../xiphos.desktop.in.in.h:1
 msgid "Xiphos Bible Guide"
@@ -554,9 +554,8 @@ msgstr "Synchronisiert bleiben"
 
 #. 15
 #: ../src/gnome2/commentary_dialog.c:1642 ../src/gnome2/commentary.c:982
-#, fuzzy
 msgid "Commentary by Chapter"
-msgstr "Kommentaransicht"
+msgstr "Kommentarkapitelansicht"
 
 #. 7
 #: ../src/gnome2/commentary_dialog.c:1702 ../src/gnome2/commentary.c:1043
@@ -633,7 +632,6 @@ msgid "Use the default font for this module"
 msgstr "Standardschriftart für dieses Modul verwenden"
 
 #: ../src/gnome2/commentary.c:456
-#, fuzzy
 msgid ""
 "Renaming is not available in Windows.\n"
 "\n"
@@ -644,13 +642,13 @@ msgid ""
 "Therefore, personal commentary renaming is\n"
 "not available in the Windows environment."
 msgstr ""
-"Umbenennen wird in Cygwin nicht unterstützt.\n"
+"Umbenennen wird in Windows nicht unterstützt.\n"
 "\n"
 "Xiphos ist beschränkt durch das Windows Dateisystem,\n"
 "welches das Umbenennen von Dateien die zur Zeit geöffnet sind,\n"
 "wie diesen Kommentar, nicht erlaubt.\n"
-"Dadurch steht das Umbenennen des persönlichen Kommentars\n"
-"unter Windows nicht zur Verfügung."
+"Darum ist es unmöglich den persönlichen Kommentar\n"
+"in Windows umzubennnen."
 
 #: ../src/gnome2/commentary.c:475
 msgid "Rename Commentary"
@@ -1078,9 +1076,8 @@ msgid "A source by that name already exists."
 msgstr "Quelle mit diesem Namen existiert bereits"
 
 #: ../src/gnome2/mod_mgr.c:2465
-#, fuzzy
 msgid "Delete a remote source"
-msgstr "Geben sie eine ferne Quelle an"
+msgstr "Geben sie eine Quelle im Internet an"
 
 #: ../src/gnome2/sidebar_dialog.c:135
 msgid "Sidebar"
@@ -1384,9 +1381,8 @@ msgid "Color"
 msgstr "Farben"
 
 #: ../src/gnome2/preferences_dialog.c:1774
-#, fuzzy
 msgid "Sizes"
-msgstr "Größe"
+msgstr "Größen"
 
 #: ../src/gnome2/preferences_dialog.c:1778
 msgid "General"
@@ -1397,9 +1393,8 @@ msgid "Tabs and Panes"
 msgstr "Reiter und Bereiche"
 
 #: ../src/gnome2/preferences_dialog.c:1788
-#, fuzzy
 msgid "Options"
-msgstr "Überschrift"
+msgstr "Einstellungen"
 
 #: ../src/gnome2/preferences_dialog.c:1795
 msgid "Main"
@@ -1431,7 +1426,6 @@ msgid "The pixbuf to render."
 msgstr "Pixbuf, das dargestellt werden soll"
 
 #: ../src/gnome2/about_xiphos.c:125
-#, fuzzy
 msgid "Copyright 2000-2009 The Xiphos Development Team"
 msgstr "Copyright 2000-2008 Das Xiphos Entwickler-Team"
 
@@ -1717,7 +1711,6 @@ msgid "Advanced search using the search dialog"
 msgstr "Erweiterte Suche mit dem Suchdialog"
 
 #: ../src/gnome2/main_menu.c:1009
-#, fuzzy
 msgid "_Preferences"
 msgstr "Einstellungen"
 
@@ -1793,9 +1786,8 @@ msgstr ""
 #. 6
 #. 7
 #: ../src/gnome2/main_menu.c:1068
-#, fuzzy
 msgid "_Verse Per Line"
-msgstr "_Versliste"
+msgstr "_Vers pro Zeile"
 
 #. 8
 #: ../src/gnome2/main_menu.c:1074
@@ -1835,9 +1827,8 @@ msgstr "Seitenleiste _anzeigen/verbergen"
 
 #. 16
 #: ../src/gnome2/main_menu.c:1121
-#, fuzzy
 msgid "Show Parallel View in a tab"
-msgstr "Parallelansicht"
+msgstr "Parallelansicht im Tab"
 
 #. 17
 #: ../src/gnome2/main_menu.c:1127
@@ -1863,7 +1854,7 @@ msgstr ""
 
 #: ../src/gnome2/main_menu.c:1150
 msgid "_Live Chat"
-msgstr ""
+msgstr "_Live Chat"
 
 #: ../src/gnome2/main_menu.c:1151
 msgid "Chat with other users and developers"
@@ -1871,23 +1862,21 @@ msgstr ""
 
 #: ../src/gnome2/main_menu.c:1156
 msgid "_Report Bug"
-msgstr ""
+msgstr "Programmfehler melden"
 
 #: ../src/gnome2/main_menu.c:1157
 msgid "Report bug to SourceForge"
-msgstr ""
+msgstr "Programmfehler an Sourceforge melden"
 
 #: ../src/gnome2/main_menu.c:1163
-#, fuzzy
 msgid "About _Translation"
-msgstr "Info zum _Übersetzen ..."
+msgstr "Info zur _Übersetzung"
 
 #: ../src/gnome2/main_menu.c:1164
 msgid "Translating Xiphos to other languages"
 msgstr "Übersetze Xiphos in andere Sprachen"
 
 #: ../src/gnome2/main_menu.c:1170
-#, fuzzy
 msgid "_About the SWORD Project"
 msgstr "Über das SWORD-Projekt"
 
@@ -1896,9 +1885,8 @@ msgid "More information about the SWORD Project"
 msgstr "Mehr Informationen zum SWORD-Projekt anzeigen"
 
 #: ../src/gnome2/main_menu.c:1176
-#, fuzzy
 msgid "About _Xiphos"
-msgstr "Info zu _Xiphos ..."
+msgstr "Info zu _Xiphos"
 
 #: ../src/gnome2/main_menu.c:1177
 msgid "About this application"
@@ -1974,13 +1962,12 @@ msgstr ""
 "Sprachabkürzungen nicht abbilden."
 
 #: ../src/main/sword.cc:564
-#, fuzzy
 msgid ""
 "Xiphos cannot read the\n"
 "language abbreviation file."
 msgstr ""
 "Xiphos konnte die Datei für\n"
-"Sprachabkürzungen nicht abbilden."
+"Sprachabkürzungen nicht lesen."
 
 #: ../src/main/sword.cc:638
 msgid "Initiating SWORD"
@@ -2207,7 +2194,7 @@ msgid "Xiphos finds that prayer list already."
 msgstr "Xiphos hat diese Gebetsliste bereits gefunden."
 
 #: ../src/main/prayerlists.cc:281
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Xiphos cannot create module's path:\n"
 "%s"
@@ -2685,9 +2672,8 @@ msgid "Add Bookmark"
 msgstr "Lesezeichen hinzufügen"
 
 #: ../ui/bookmarks.glade.h:2
-#, fuzzy
 msgid "Bookmark Dialog"
-msgstr "Lesezeichen"
+msgstr "Lesezeichendialog"
 
 #: ../ui/bookmarks.glade.h:3
 #, fuzzy
@@ -2695,9 +2681,8 @@ msgid "Bookmark Folder Treeview"
 msgstr "Lesezeichen wiederherstellen"
 
 #: ../ui/bookmarks.glade.h:4
-#, fuzzy
 msgid "Cancel Bookmark"
-msgstr "Lesezeichen einfügen"
+msgstr "Lesezeichen löschen"
 
 #: ../ui/bookmarks.glade.h:5
 msgid "Create new folder"
@@ -2713,9 +2698,8 @@ msgid "Label:"
 msgstr "Beschriftung:"
 
 #: ../ui/bookmarks.glade.h:8
-#, fuzzy
 msgid "Module Entry"
-msgstr "Modul: "
+msgstr "Modul Eintrag"
 
 #: ../ui/bookmarks.glade.h:9
 msgid "Module:"
@@ -2862,9 +2846,8 @@ msgid "Chapter Radio Button"
 msgstr ""
 
 #: ../ui/export-dialog.glade.h:9
-#, fuzzy
 msgid "Export Passage Cancel"
-msgstr "Textstelle exportieren"
+msgstr "Abbruch Textstelle exportieren "
 
 #: ../ui/export-dialog.glade.h:10
 #, fuzzy
@@ -3061,9 +3044,8 @@ msgid "<b>Font Colors</b>"
 msgstr "<b>Schriftfarben</b>"
 
 #: ../ui/prefs.glade.h:10
-#, fuzzy
 msgid "<b>Font Sizes</b>"
-msgstr "<b>Schriftfarben</b>"
+msgstr "<b>Schriftsatzgröße</b>"
 
 #: ../ui/prefs.glade.h:11
 msgid "<b>General</b>"
@@ -3794,9 +3776,8 @@ msgid "Show Strong's Numbers"
 msgstr "Zeige Strongs Nummern"
 
 #: ../ui/search-dialog.glade.h:96
-#, fuzzy
 msgid "Show Strong's Numbers checkbox"
-msgstr "Zeige Strongs Nummern"
+msgstr "Zeige Strongs Nummern Tickbox"
 
 #: ../ui/search-dialog.glade.h:97
 msgid "Show in main window"
@@ -3807,9 +3788,8 @@ msgid "Single module"
 msgstr "Einzelnes Modul"
 
 #: ../ui/search-dialog.glade.h:99
-#, fuzzy
 msgid "Single module radiobutton"
-msgstr "Einzelnes Modul"
+msgstr "Einzelnes Modul-Radioknopf"
 
 #: ../ui/search-dialog.glade.h:100
 msgid "Start/stop searching"
