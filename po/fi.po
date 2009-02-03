@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 0.9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-02-06 22:02+0100\n"
+"POT-Creation-Date: 2009-01-22 10:08+0000\n"
 "PO-Revision-Date: 2007-02-25 00:33+0200\n"
 "Last-Translator: Eerik Saarikalle <eerik.suuri@gmail.com>\n"
 "Language-Team: Xiphos Translation Team\n"
@@ -17,776 +17,456 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../xiphos.desktop.in.h:1
+#: ../xiphos.desktop.in.in.h:1
 msgid "Xiphos Bible Guide"
 msgstr "Xiphos Raamattuopas"
 
-#: ../xiphos.desktop.in.h:2
+#: ../xiphos.desktop.in.in.h:2
 msgid "Study the Bible"
 msgstr "Opiskele raamattua"
 
-#: ../src/main/display.cc:374
-#: ../src/main/display.cc:410
-#: ../src/main/display.cc:445
-#: ../src/main/display.cc:449
-msgid "Chapter"
-msgstr "Kappale"
-
-#: ../src/main/lists.cc:141
-msgid "Number of Text modules"
-msgstr "Tekstimodulien lukumäärä"
-
-#: ../src/main/lists.cc:142
-msgid "Number of Commentary modules"
-msgstr "Kommentaarimodulien lukumäärä"
-
-#: ../src/main/lists.cc:143
-msgid "Number of Dict/lex modules"
-msgstr "Sanakirjamodulien lukumäärä"
-
-#: ../src/main/lists.cc:144
-msgid "Number of Book modules"
-msgstr "Kirjamodulien lukumäärä"
-
-#: ../src/main/lists.cc:145
-msgid "Number of Percomm modules"
-msgstr "Kommentaarimodulien lukumäärä"
-
-#: ../src/main/lists.cc:146
-msgid "Number of Devotion modules"
-msgstr "Hartausmodulien lukumäärä"
-
-#: ../src/main/module_dialogs.cc:227
-#: ../src/main/previewer.cc:107
-#: ../ui/prefs.glade.h:52
-msgid "Previewer"
-msgstr "Esikatselija"
-
-#: ../src/main/module_dialogs.cc:294
-#: ../src/main/module_dialogs.cc:423
-#: ../src/main/previewer.cc:173
+#: ../src/backend/sword_main.cc:1387
 #, fuzzy
-msgid "Footnote"
-msgstr "Alaviite"
+msgid "Configuration not found"
+msgstr "yhteyttä ei saatu"
 
-#: ../src/main/module_dialogs.cc:300
-#: ../src/main/module_dialogs.cc:428
-#: ../src/main/previewer.cc:179
-msgid "Cross Reference"
-msgstr "Ristiinviittaus"
+#: ../src/editor/html-editor.c:263 ../src/gnome2/html.c:818
+#, c-format
+msgid "Page %d of %d"
+msgstr "Sivu %d / %d"
 
-#: ../src/main/module_dialogs.cc:306
-#: ../src/main/module_dialogs.cc:320
-#: ../src/main/module_dialogs.cc:433
-#: ../src/main/module_dialogs.cc:445
-#: ../src/main/previewer.cc:185
-#: ../src/main/previewer.cc:199
-msgid "Strongs"
-msgstr "Vahvennokset"
+#: ../src/editor/html-editor.c:391 ../src/editor/html-editor.c:438
+#, fuzzy
+msgid "Save As"
+msgstr "Tallenna lista"
 
-#: ../src/main/module_dialogs.cc:312
-#: ../src/main/module_dialogs.cc:331
-#: ../src/main/module_dialogs.cc:438
-#: ../src/main/module_dialogs.cc:455
-#: ../src/main/previewer.cc:191
-#: ../src/main/previewer.cc:210
-msgid "Morphology"
-msgstr "Morfologia"
+#: ../src/editor/html-editor.c:409 ../src/editor/html-editor.c:456
+#, fuzzy
+msgid "Untitled document"
+msgstr "Tulosta tämä tiedosto"
 
-#: ../src/main/module_dialogs.cc:1265
-msgid "Back to "
-msgstr "Takaisin"
+#: ../src/editor/html-editor.c:621
+msgid "HTML Output"
+msgstr ""
 
-#: ../src/main/search_dialog.cc:53
-#: ../src/main/search_sidebar.cc:55
-#: ../src/gnome2/search_dialog.c:55
-msgid "Searching the "
-msgstr "Haetaan"
+#: ../src/editor/html-editor.c:628
+#, fuzzy
+msgid "HTML Source"
+msgstr "Lähde"
 
-#: ../src/main/search_dialog.cc:54
-#: ../src/main/search_sidebar.cc:56
-#: ../src/gnome2/search_dialog.c:56
-msgid " Module"
-msgstr "Moduli"
+#: ../src/editor/html-editor.c:635
+#, fuzzy
+msgid "Plain Source"
+msgstr "Lähde"
 
-#: ../src/main/search_dialog.cc:55
-msgid "found in"
-msgstr "löydetty"
+#: ../src/editor/html-editor.c:642 ../ui/editor_note.xml.h:15
+#: ../ui/editor_studypad.xml.h:21
+msgid "_Print..."
+msgstr "_Tulosta..."
 
-#: ../src/main/search_dialog.cc:344
-msgid "Delete Range?"
-msgstr "Poista alue?"
+#: ../src/editor/html-editor.c:649 ../ui/editor_note.xml.h:9
+#: ../ui/editor_studypad.xml.h:14
+msgid "Print Pre_view"
+msgstr "Tulostuksen esi_katselu"
 
-#: ../src/main/search_dialog.cc:345
-msgid "Are you sure you want to delete this range?"
-msgstr "Oletko varma, että haluat poistaa tämän alueen?"
+#: ../src/editor/html-editor.c:656
+#, fuzzy
+msgid "_Quit"
+msgstr "_Muokkaa"
 
-#: ../src/main/search_dialog.cc:571
-#: ../src/main/search_dialog.cc:1060
-#: ../src/main/search_dialog.cc:1081
-#: ../src/main/search_sidebar.cc:215
-#: ../src/gnome2/sidebar.c:1501
-msgid "Search"
-msgstr "Haku"
+#: ../src/editor/html-editor.c:663
+msgid "_Open"
+msgstr ""
 
-#: ../src/main/search_dialog.cc:625
-msgid "Remove Module?"
-msgstr "Poista moduli?"
+#: ../src/editor/html-editor.c:670
+#, fuzzy
+msgid "_Save"
+msgstr "Tallenna"
 
-#: ../src/main/search_dialog.cc:626
-msgid "Are you sure you want to remove the selected module?"
-msgstr "Oletko varma, että haluat poistaa valitun modulin?"
+#: ../src/editor/html-editor.c:677
+#, fuzzy
+msgid "Save _As..."
+msgstr "Tallenna tiedosto nimellä..."
 
-#: ../src/main/search_dialog.cc:1502
-msgid "Search finished"
-msgstr "Haku päättynyt"
+#: ../src/editor/html-editor.c:684 ../src/gnome2/main_menu.c:1186
+#: ../ui/editor_note.xml.h:14 ../ui/editor_studypad.xml.h:20
+#: ../ui/editor.xml.h:13
+msgid "_File"
+msgstr "_Tiedosto"
 
-#: ../src/main/search_sidebar.cc:57
-#: ../src/gnome2/search_dialog.c:57
-msgid "found in "
-msgstr "löydetty "
+#: ../src/editor/html-editor.c:694
+msgid "HTML _Output"
+msgstr ""
 
-#: ../src/main/search_sidebar.cc:140
-msgid "matches"
-msgstr "osumat"
+#: ../src/editor/html-editor.c:701
+#, fuzzy
+msgid "_HTML Source"
+msgstr "Lähde"
 
-#: ../src/main/sidebar.cc:367
-msgid "verse"
-msgstr "jae"
+#: ../src/editor/html-editor.c:708
+#, fuzzy
+msgid "_Plain Source"
+msgstr "Lähde"
 
-#: ../src/main/sidebar.cc:427
-msgid "chapter"
-msgstr "kappale"
+#: ../src/editor/html-editor.c:715 ../src/gnome2/main_menu.c:1198
+msgid "_View"
+msgstr "_Näytä"
 
-#: ../src/main/sidebar.cc:577
-#: ../src/main/sidebar.cc:861
-#: ../src/main/sidebar.cc:862
-#: ../src/main/sidebar.cc:863
-#: ../src/gnome2/parallel_view.c:534
-#: ../src/gnome2/sidebar.c:653
-#: ../src/gnome2/sidebar.c:662
-#: ../src/gnome2/utilities.c:445
-msgid "Parallel View"
-msgstr "Rinnakkaisnäkymä"
-
-#: ../src/main/sidebar.cc:583
-#: ../src/main/sidebar.cc:869
-#: ../src/main/sidebar.cc:870
-#: ../src/main/sidebar.cc:871
-#: ../src/gnome2/main_window.c:712
-msgid "Standard View"
-msgstr "Standardinäkymä"
-
-#: ../src/main/sidebar.cc:589
-#: ../src/main/sidebar.cc:898
-#: ../src/main/sidebar.cc:900
-#: ../src/gnome2/mod_mgr.c:697
-#: ../src/gnome2/utilities.c:467
-#: ../ui/prefs.glade.h:25
-msgid "Commentaries"
-msgstr "Kommentaarit"
-
-#: ../src/main/sidebar.cc:602
-#: ../src/main/sidebar.cc:955
-#: ../src/main/sidebar.cc:957
-#: ../src/gnome2/mod_mgr.c:707
-#: ../src/gnome2/utilities.c:510
-msgid "General Books"
-msgstr "Yleiset kirjat"
-
-#: ../src/main/sidebar.cc:737
-#: ../src/main/sidebar.cc:789
-#: ../src/gnome2/mod_mgr.c:481
-#: ../src/gnome2/mod_mgr.c:572
-#: ../src/gnome2/utilities.c:311
-#: ../src/gnome2/utilities.c:387
-msgid "Unknown"
-msgstr "Tuntematon"
-
-#: ../src/main/sidebar.cc:853
-#: ../src/main/sidebar.cc:855
-#: ../src/gnome2/mod_mgr.c:693
-#: ../src/gnome2/utilities.c:439
-msgid "Biblical Texts"
-msgstr "Raamatulliset tekstit"
-
-#: ../src/main/sidebar.cc:926
-#: ../src/main/sidebar.cc:928
-#: ../src/gnome2/mod_mgr.c:702
-#: ../src/gnome2/utilities.c:488
-msgid "Dictionaries"
-msgstr "Sanakirjat"
-
-#. g_print("date: %s\n", getenv("DATE"));
-#: ../src/main/sword.cc:537
-#: ../src/gnome2/main_window.c:580
-msgid "Starting"
-msgstr "Aloitetaan"
-
-#: ../src/main/sword.cc:538
-msgid "Initiating SWORD"
-msgstr "käynnistetään SWORD"
-
-#: ../src/main/sword.cc:539
-msgid "path to sword"
-msgstr "polku swordiin"
-
-#: ../src/main/sword.cc:540
-msgid "System locale is"
-msgstr "Järjestelmän kieli on"
-
-#: ../src/main/sword.cc:541
-msgid "SWORD locale is"
-msgstr "SWORDin kieli on"
-
-#: ../src/main/sword.cc:543
-msgid "Checking for SWORD Modules"
-msgstr "Etsitään SWORD moduleja"
-
-#: ../src/main/sword.cc:577
-msgid "SWORD is shutdown"
-msgstr "SWORD on sammutettu"
-
-#: ../src/main/sword.cc:620
-#: ../src/main/sword.cc:629
-msgid "The"
-msgstr "Moduuli"
-
-#: ../src/main/sword.cc:622
-msgid "module is locked."
-msgstr "on lukittu."
-
-#: ../src/main/sword.cc:632
-msgid "module has been unlocked."
-msgstr "moduuli on avattu."
-
-#: ../src/main/sword.cc:643
-msgid "If you have the cipher key you can"
-msgstr "Jos sinulla on cipher avain voit"
-
-#: ../src/main/sword.cc:647
-msgid "click here"
-msgstr "napsauttaa tästä"
-
-#: ../src/main/sword.cc:648
-msgid "to unlock the module"
-msgstr "avataksesi moduulin"
-
-#: ../src/main/sword.cc:658
-msgid "You will need to restart Xiphos after you unlock it."
-msgstr "Xiphos tulee käynnistää uudelleen avattuasi sen"
-
-#: ../src/main/sword.cc:667
-msgid "You need to restart Xiphos to view it"
-msgstr "Xiphos pitää käynnistää uudelleen nähdäksesi sen"
-
-#: ../src/main/tab_history.c:65
-#: ../src/main/tab_history.c:101
-#: ../src/main/tab_history.c:116
-msgid "H_istory/<Separator>"
-msgstr "H_istoria/<Separator>"
-
-#. tab->history_items + 1);
-#: ../src/main/tab_history.c:67
-#: ../src/main/tab_history.c:103
-msgid "H_istory/C_lear"
-msgstr "H_istoria/P_uhdista"
-
-#: ../src/editor/html-editor.c:153
+#: ../src/editor/html-editor.c:838
 msgid "Are you sure you want to delete the note for"
 msgstr "Haluatko poistaa merkinnän"
 
-#: ../src/editor/html-editor.c:155
-msgid "It will be lost permanently!"
-msgstr "Se poistetaan pysyvästi!"
-
-#: ../src/editor/html-editor.c:393
-msgid "Open file..."
-msgstr "Avaa tiedosto..."
-
-#: ../src/editor/html-editor.c:404
-msgid "Save file as..."
-msgstr "Tallenna tiedosto nimellä..."
-
-#: ../src/editor/html-editor.c:534
-#: ../src/gnome2/bibletext.c:1071
-#: ../src/gnome2/bibletext_dialog.c:2122
-#: ../src/gnome2/commentary.c:792
-#: ../src/gnome2/commentary_dialog.c:1834
-#: ../src/gnome2/dictlex.c:1008
-#: ../src/gnome2/gbs.c:819
-#: ../src/gnome2/studypad.c:103
+#. 2
+#. 3
+#. 1
+#. 2
+#. 2
+#. 3
+#. 1
+#. 2
+#: ../src/editor/html-editor.c:1783 ../src/gnome2/bibletext.c:1150
+#: ../src/gnome2/gbs.c:918 ../src/gnome2/bibletext_dialog.c:2136
+#: ../src/gnome2/dictlex.c:1033 ../src/gnome2/commentary_dialog.c:1672
+#: ../src/gnome2/commentary.c:1019 ../src/gnome2/studypad.c:98
 msgid "File"
 msgstr "Tiedosto"
 
-#: ../src/editor/html-editor.c:535
+#: ../src/editor/html-editor.c:1784
 msgid "Save the changes to document"
 msgstr "Tallenna muutokset tiedostoon"
 
-#: ../src/editor/html-editor.c:536
+#: ../src/editor/html-editor.c:1785
 msgid "before closing?"
 msgstr "ennen sulkemista?"
 
-#: ../src/editor/html-editor.c:544
+#: ../src/editor/html-editor.c:1792
 msgid "If you don't save, changes will be permanently lost."
 msgstr "Jos et tallenna, muutokset katoavat pysyvästi."
 
-#: ../src/editor/html-editor.c:1269
-msgid "Note Editor"
-msgstr "Muistiinpanojen muokkain"
-
-#: ../src/editor/html-editor.c:1277
-#: ../src/gnome2/studypad.c:422
+#: ../src/editor/html-editor.c:2206 ../src/editor/html-editor.c:2209
+#: ../src/gnome2/studypad.c:411
 msgid "StudyPad"
 msgstr "Opiskelumuistio"
 
-#: ../src/gnome2/about_xiphos.c:116
-msgid "Copyright 2000-2006 The Xiphos Development Team"
-msgstr "Copyright 2000-2006 Xiphosin kehitystiimi"
+#: ../src/editor/html-editor.c:2224 ../src/editor/html-editor.c:2228
+msgid "Note Editor"
+msgstr "Muistiinpanojen muokkain"
 
-#: ../src/gnome2/about_xiphos.c:119
-msgid "We would like to thank Troy Griffitts and all the other folks who have given us The SWORD Project."
-msgstr "Tahdomme kiittää Troy Griffittiä sekä muita The SWORD projektin tekijöitä"
+#: ../src/editor/html-editor.c:2238 ../src/editor/html-editor.c:2242
+msgid "Prayer List/Journal Editor"
+msgstr ""
 
-#: ../src/gnome2/about_modules.c:227
-msgid "About Sword Module"
-msgstr "Tietoa Sword Modulista"
+#: ../src/gecko/gecko-html.cpp:169 ../src/gnome2/html.c:161
+msgid "Unlock "
+msgstr "Ota käyttöön "
 
-#: ../src/gnome2/about_sword.c:94
-msgid "The SWORD Project is an effort to create an ever-expanding software package for research and study of God and His Word. The SWORD Bible Framework allows easy manipulation of Bible texts, commentaries, lexicons, dictionaries, and other books. Many frontends are built using this framework. An installed module set may be shared between any frontend using the framework."
-msgstr "SWORD Projekti yrittää luoda helposti laajennettavan ohjelmiston tutkimustyöhön ja Jumalan Sanan opiskeluun. SWORD Raamattuympäristö mahdollistaa helpon Raamatun tekstien, kommentaarien, sanastojen, sanakirjojen ja muiden kirjojen muokkaamisen. Tälle perustalle on rakennettu monia graafisia käyttöliittymiä. Yhteisiä moduleita voidaan käyttää eri käyttöliittymissä."
+#: ../src/gecko/gecko-print.c:171
+#, fuzzy
+msgid "Preparing to print"
+msgstr "Valmistellaan asennusta"
 
-#: ../src/gnome2/about_sword.c:112
-msgid "About the SWORD Project"
-msgstr "Tietoa SWORD-projektista"
+#: ../src/gecko/gecko-print.c:265
+msgid "Printing is not supported on this printer"
+msgstr ""
 
-#: ../src/gnome2/about_sword.c:130
-msgid "Sword Version"
-msgstr "Swordin versio"
+#: ../src/gecko/gecko-print.c:268
+#, c-format
+msgid "Printer %s does not support PostScript printing."
+msgstr ""
 
-#: ../src/gnome2/about_sword.c:161
-msgid "Modules can be downloaded from the SWORD Project"
-msgstr "Moduleita voidaan ladata SWORD-projektista"
+#: ../src/gecko/gecko-print.c:341 ../src/gecko/gecko-print.c:369
+#, fuzzy
+msgid "Printing"
+msgstr "Tulosta"
 
-#: ../src/gnome2/about_sword.c:167
-msgid "The SWORD Project"
-msgstr "SWORD projekti"
+#: ../src/gecko/gecko-print.c:371
+#, fuzzy
+msgid "Waiting to print"
+msgstr "Valmistellaan asennusta"
 
-#: ../src/gnome2/bibletext.c:871
-#: ../src/gnome2/bibletext_dialog.c:1915
-#: ../src/gnome2/commentary.c:592
-#: ../src/gnome2/commentary_dialog.c:1627
-#: ../src/gnome2/dictlex.c:823
-#: ../src/gnome2/gbs.c:619
+#: ../src/gecko/gecko-print.c:583
+msgid "An error occurred while printing"
+msgstr ""
+
+#: ../src/gecko/gecko-print.c:587
+#, fuzzy, c-format
+msgid "It was not possible to print your document: %s"
+msgstr "Epäonnistuttiin tulostamaan tiedostoa"
+
+#: ../src/gnome2/fileselection.c:216
+msgid "Open StudyPad File"
+msgstr "Avaa Opiskelumuistio"
+
+#: ../src/gnome2/fileselection.c:266
+msgid "Save StudyPad File"
+msgstr "Tallenna Opiskelumuistio tiedosto"
+
+#: ../src/gnome2/bibletext.c:925 ../src/gnome2/gbs.c:706
+#: ../src/gnome2/bibletext_dialog.c:1909 ../src/gnome2/dictlex.c:837
+#: ../src/gnome2/commentary_dialog.c:1437 ../src/gnome2/commentary.c:793
 msgid "item1"
 msgstr "erä1"
 
-#: ../src/gnome2/bibletext.c:881
-#: ../src/gnome2/bibletext_dialog.c:1925
-#: ../src/gnome2/commentary.c:602
-#: ../src/gnome2/commentary_dialog.c:1637
-#: ../src/gnome2/dictlex.c:833
-#: ../src/gnome2/gbs.c:629
+#. 0
+#: ../src/gnome2/bibletext.c:935 ../src/gnome2/gbs.c:716
+#: ../src/gnome2/bibletext_dialog.c:1919 ../src/gnome2/dictlex.c:847
+#: ../src/gnome2/commentary_dialog.c:1447 ../src/gnome2/commentary.c:803
 msgid "Open Module"
 msgstr "Avaa moduli"
 
-#: ../src/gnome2/bibletext.c:893
-#: ../src/gnome2/bibletext_dialog.c:1951
-#: ../src/gnome2/commentary.c:614
-#: ../src/gnome2/commentary_dialog.c:1663
-#: ../src/gnome2/gbs.c:641
+#. 1
+#: ../src/gnome2/bibletext.c:942 ../ui/export-dialog.glade.h:8
+msgid "Export Passage"
+msgstr ""
+
+#: ../src/gnome2/bibletext.c:953 ../src/gnome2/bibletext_dialog.c:1945
+#: ../src/gnome2/commentary_dialog.c:1473 ../src/gnome2/commentary.c:815
 msgid "item2"
 msgstr "erä2"
 
-#: ../src/gnome2/bibletext.c:905
-#: ../src/gnome2/bibletext_dialog.c:1963
-#: ../src/gnome2/commentary.c:626
-#: ../src/gnome2/commentary_dialog.c:1675
-#: ../src/gnome2/gbs.c:653
+#: ../src/gnome2/bibletext.c:965 ../src/gnome2/bibletext_dialog.c:1957
+#: ../src/gnome2/commentary_dialog.c:1485 ../src/gnome2/commentary.c:827
 msgid "Note"
 msgstr "Muistiinpano"
 
-#: ../src/gnome2/bibletext.c:915
-#: ../src/gnome2/bibletext_dialog.c:1973
-#: ../src/gnome2/commentary.c:636
-#: ../src/gnome2/commentary_dialog.c:1685
-#: ../src/gnome2/dictlex.c:852
-#: ../src/gnome2/gbs.c:663
-msgid "All Readings"
-msgstr "Kaikki luettava"
-
-#: ../src/gnome2/bibletext.c:921
-#: ../src/gnome2/bibletext_dialog.c:1979
-#: ../src/gnome2/commentary.c:642
-#: ../src/gnome2/commentary_dialog.c:1691
-#: ../src/gnome2/dictlex.c:858
-#: ../src/gnome2/gbs.c:669
+#: ../src/gnome2/bibletext.c:975 ../src/gnome2/gbs.c:757
+#: ../src/gnome2/bibletext_dialog.c:1967 ../src/gnome2/dictlex.c:872
+#: ../src/gnome2/commentary_dialog.c:1495 ../src/gnome2/commentary.c:837
 msgid "Primary Reading"
 msgstr "Ykkösluettava"
 
-#: ../src/gnome2/bibletext.c:927
-#: ../src/gnome2/bibletext_dialog.c:1985
-#: ../src/gnome2/commentary.c:648
-#: ../src/gnome2/commentary_dialog.c:1697
-#: ../src/gnome2/dictlex.c:864
-#: ../src/gnome2/gbs.c:675
+#: ../src/gnome2/bibletext.c:983 ../src/gnome2/gbs.c:763
+#: ../src/gnome2/bibletext_dialog.c:1975 ../src/gnome2/dictlex.c:878
+#: ../src/gnome2/commentary_dialog.c:1503 ../src/gnome2/commentary.c:845
 msgid "Secondary Reading"
 msgstr "Kakkosluettava"
 
-#: ../src/gnome2/bibletext.c:945
-#: ../src/gnome2/bibletext_dialog.c:2003
-#: ../src/gnome2/commentary.c:666
-#: ../src/gnome2/commentary_dialog.c:1715
-#: ../src/gnome2/dictlex.c:882
-#: ../src/gnome2/font_dialog.c:292
-#: ../src/gnome2/gbs.c:693
+#: ../src/gnome2/bibletext.c:991 ../src/gnome2/gbs.c:751
+#: ../src/gnome2/bibletext_dialog.c:1983 ../src/gnome2/dictlex.c:866
+#: ../src/gnome2/commentary_dialog.c:1511 ../src/gnome2/commentary.c:853
+msgid "All Readings"
+msgstr "Kaikki luettava"
+
+#. 0
+#: ../src/gnome2/bibletext.c:1011 ../src/gnome2/gbs.c:781
+#: ../src/gnome2/bibletext_dialog.c:2003 ../src/gnome2/dictlex.c:896
+#: ../src/gnome2/commentary_dialog.c:1531 ../src/gnome2/font_dialog.c:292
+#: ../src/gnome2/commentary.c:873
 msgid "Set Module Font"
 msgstr "Aseta Modulin fontti"
 
-#: ../src/gnome2/bibletext.c:952
-#: ../src/gnome2/bibletext_dialog.c:2010
-#: ../src/gnome2/commentary.c:673
-#: ../src/gnome2/commentary_dialog.c:1722
-#: ../src/gnome2/dictlex.c:889
-#: ../src/gnome2/gbs.c:700
+#. 1
+#. 2
+#: ../src/gnome2/bibletext.c:1020 ../src/gnome2/gbs.c:788
+#: ../src/gnome2/bibletext_dialog.c:2012 ../src/gnome2/dictlex.c:903
+#: ../src/gnome2/commentary_dialog.c:1540 ../src/gnome2/commentary.c:880
 msgid "Words of Christ in Red"
 msgstr "Jeesuksen sanat punaisella"
 
-#: ../src/gnome2/bibletext.c:961
-#: ../src/gnome2/bibletext_dialog.c:2019
-#: ../src/gnome2/commentary.c:682
-#: ../src/gnome2/commentary_dialog.c:1731
-#: ../src/gnome2/dictlex.c:898
-#: ../src/gnome2/gbs.c:709
+#. 3
+#: ../src/gnome2/bibletext.c:1028 ../src/gnome2/gbs.c:796
+#: ../src/gnome2/bibletext_dialog.c:2020 ../src/gnome2/dictlex.c:911
+#: ../src/gnome2/commentary_dialog.c:1548 ../src/gnome2/commentary.c:888
 msgid "Strong's Numbers"
 msgstr "Strongin numerot"
 
-#: ../src/gnome2/bibletext.c:972
-#: ../src/gnome2/bibletext_dialog.c:2030
-#: ../src/gnome2/commentary.c:693
-#: ../src/gnome2/commentary_dialog.c:1742
-#: ../src/gnome2/dictlex.c:909
-#: ../src/gnome2/gbs.c:720
+#. 4
+#: ../src/gnome2/bibletext.c:1036 ../src/gnome2/gbs.c:804
+#: ../src/gnome2/bibletext_dialog.c:2028 ../src/gnome2/dictlex.c:919
+#: ../src/gnome2/commentary_dialog.c:1556 ../src/gnome2/commentary.c:896
+#: ../ui/search-dialog.glade.h:62
 msgid "Morphological Tags"
 msgstr "Morfologiset tunnisteet"
 
-#: ../src/gnome2/bibletext.c:980
-#: ../src/gnome2/bibletext_dialog.c:2038
-#: ../src/gnome2/commentary.c:701
-#: ../src/gnome2/commentary_dialog.c:1750
-#: ../src/gnome2/dictlex.c:917
-#: ../src/gnome2/gbs.c:728
+#. 5
+#: ../src/gnome2/bibletext.c:1044 ../src/gnome2/gbs.c:812
+#: ../src/gnome2/bibletext_dialog.c:2036 ../src/gnome2/dictlex.c:927
+#: ../src/gnome2/commentary_dialog.c:1564 ../src/gnome2/commentary.c:904
+#: ../ui/search-dialog.glade.h:50
 msgid "Footnotes"
 msgstr "Alaviitteet"
 
-#: ../src/gnome2/bibletext.c:988
-#: ../src/gnome2/bibletext_dialog.c:2046
-#: ../src/gnome2/commentary.c:709
-#: ../src/gnome2/commentary_dialog.c:1758
-#: ../src/gnome2/dictlex.c:925
-#: ../src/gnome2/gbs.c:736
+#. 6
+#: ../src/gnome2/bibletext.c:1052 ../src/gnome2/gbs.c:820
+#: ../src/gnome2/bibletext_dialog.c:2044 ../src/gnome2/dictlex.c:935
+#: ../src/gnome2/commentary_dialog.c:1572 ../src/gnome2/commentary.c:912
 msgid "Greek Accents"
 msgstr "Kreikkalainen ääntäminen"
 
-#: ../src/gnome2/bibletext.c:996
-#: ../src/gnome2/bibletext_dialog.c:2054
-#: ../src/gnome2/commentary.c:717
-#: ../src/gnome2/commentary_dialog.c:1766
-#: ../src/gnome2/dictlex.c:933
-#: ../src/gnome2/gbs.c:744
+#. 7
+#: ../src/gnome2/bibletext.c:1060 ../src/gnome2/gbs.c:828
+#: ../src/gnome2/bibletext_dialog.c:2052 ../src/gnome2/dictlex.c:943
+#: ../src/gnome2/commentary_dialog.c:1580 ../src/gnome2/commentary.c:920
 msgid "Lemmas"
 msgstr "Lemmat"
 
-#: ../src/gnome2/bibletext.c:1004
-#: ../src/gnome2/bibletext_dialog.c:2062
-#: ../src/gnome2/commentary.c:725
-#: ../src/gnome2/commentary_dialog.c:1774
-#: ../src/gnome2/dictlex.c:941
-#: ../src/gnome2/gbs.c:752
+#. 8
+#: ../src/gnome2/bibletext.c:1068 ../src/gnome2/gbs.c:836
+#: ../src/gnome2/bibletext_dialog.c:2060 ../src/gnome2/dictlex.c:951
+#: ../src/gnome2/commentary_dialog.c:1588 ../src/gnome2/commentary.c:928
 msgid "Scripture Cross-references"
 msgstr "Kirjoitusten ristiviittaukset"
 
-#: ../src/gnome2/bibletext.c:1012
-#: ../src/gnome2/bibletext_dialog.c:2070
-#: ../src/gnome2/commentary.c:733
-#: ../src/gnome2/commentary_dialog.c:1782
-#: ../src/gnome2/dictlex.c:949
-#: ../src/gnome2/gbs.c:760
+#. 9
+#: ../src/gnome2/bibletext.c:1076 ../src/gnome2/gbs.c:844
+#: ../src/gnome2/bibletext_dialog.c:2068 ../src/gnome2/dictlex.c:959
+#: ../src/gnome2/commentary_dialog.c:1596 ../src/gnome2/commentary.c:936
 msgid "Hebrew Vowel Points"
 msgstr "Heprean vokaalipisteet"
 
-#: ../src/gnome2/bibletext.c:1020
-#: ../src/gnome2/bibletext_dialog.c:2078
-#: ../src/gnome2/commentary.c:741
-#: ../src/gnome2/commentary_dialog.c:1790
-#: ../src/gnome2/dictlex.c:957
-#: ../src/gnome2/gbs.c:768
+#. 10
+#: ../src/gnome2/bibletext.c:1084 ../src/gnome2/gbs.c:852
+#: ../src/gnome2/bibletext_dialog.c:2076 ../src/gnome2/dictlex.c:967
+#: ../src/gnome2/commentary_dialog.c:1604 ../src/gnome2/commentary.c:944
 msgid "Hebrew Cantillation"
 msgstr "Heprean kantillaatio"
 
-#: ../src/gnome2/bibletext.c:1028
-#: ../src/gnome2/bibletext_dialog.c:2086
-#: ../src/gnome2/commentary.c:749
-#: ../src/gnome2/commentary_dialog.c:1798
-#: ../src/gnome2/dictlex.c:965
-#: ../src/gnome2/gbs.c:776
+#. 11
+#: ../src/gnome2/bibletext.c:1092 ../src/gnome2/gbs.c:860
+#: ../src/gnome2/bibletext_dialog.c:2084 ../src/gnome2/dictlex.c:975
+#: ../src/gnome2/commentary_dialog.c:1612 ../src/gnome2/commentary.c:952
 msgid "Headings"
 msgstr "Otsikot"
 
-#: ../src/gnome2/bibletext.c:1036
-#: ../src/gnome2/bibletext_dialog.c:2094
-#: ../src/gnome2/commentary.c:757
-#: ../src/gnome2/commentary_dialog.c:1806
-#: ../src/gnome2/dictlex.c:973
-#: ../src/gnome2/gbs.c:784
+#. 12
+#: ../src/gnome2/bibletext.c:1100 ../src/gnome2/gbs.c:868
+#: ../src/gnome2/bibletext_dialog.c:2092 ../src/gnome2/dictlex.c:983
+#: ../src/gnome2/commentary_dialog.c:1620 ../src/gnome2/commentary.c:960
 msgid "Variants"
 msgstr "Variantit"
 
-#: ../src/gnome2/bibletext.c:1046
-#: ../src/gnome2/bibletext.c:1161
-#: ../src/gnome2/bibletext_dialog.c:2104
-#: ../src/gnome2/bibletext_dialog.c:2213
-#: ../src/gnome2/commentary.c:767
-#: ../src/gnome2/commentary.c:893
-#: ../src/gnome2/commentary_dialog.c:1816
-#: ../src/gnome2/commentary_dialog.c:1934
-#: ../src/gnome2/dictlex.c:983
-#: ../src/gnome2/dictlex.c:1094
-#: ../src/gnome2/gbs.c:794
-#: ../src/gnome2/gbs.c:908
+#. 13
+#: ../src/gnome2/bibletext.c:1106 ../src/gnome2/gbs.c:874
+#: ../src/gnome2/bibletext_dialog.c:2098 ../src/gnome2/dictlex.c:989
+#: ../src/gnome2/commentary_dialog.c:1626 ../src/gnome2/commentary.c:966
+#, fuzzy
+msgid "Image Content"
+msgstr "_Sisältö"
+
+#. 14
+#: ../src/gnome2/bibletext.c:1114 ../src/gnome2/gbs.c:882
+#: ../src/gnome2/bibletext_dialog.c:2106 ../src/gnome2/dictlex.c:997
+#: ../src/gnome2/commentary_dialog.c:1634 ../src/gnome2/commentary.c:974
+msgid "Respect Font Faces"
+msgstr ""
+
+#: ../src/gnome2/bibletext.c:1126 ../src/gnome2/bibletext.c:1253
+#: ../src/gnome2/gbs.c:894 ../src/gnome2/gbs.c:1022
+#: ../src/gnome2/bibletext_dialog.c:2118 ../src/gnome2/bibletext_dialog.c:2220
+#: ../src/gnome2/dictlex.c:1009 ../src/gnome2/dictlex.c:1113
+#: ../src/gnome2/commentary_dialog.c:1654
+#: ../src/gnome2/commentary_dialog.c:1784 ../src/gnome2/commentary.c:994
+#: ../src/gnome2/commentary.c:1146
 msgid "Use Current Dictionary"
 msgstr "Käytä nykyistä sanakirjaa"
 
-#: ../src/gnome2/bibletext.c:1057
-#: ../src/gnome2/bibletext_dialog.c:2115
-#: ../src/gnome2/commentary.c:778
-#: ../src/gnome2/commentary_dialog.c:1827
-#: ../src/gnome2/dictlex.c:994
-#: ../src/gnome2/gbs.c:805
-#: ../src/gnome2/sidebar.c:986
+#. 0
+#. 2
+#: ../src/gnome2/bibletext.c:1137 ../src/gnome2/gbs.c:905
+#: ../src/gnome2/bibletext_dialog.c:2129 ../src/gnome2/dictlex.c:1020
+#: ../src/gnome2/commentary_dialog.c:1665 ../src/gnome2/commentary.c:1005
+#: ../src/gnome2/sidebar.c:776 ../src/gnome2/sidebar.c:937
 msgid "About"
 msgstr "Tietoa"
 
+#. 1
 #. info->stock_icon = GTK_STOCK_OPEN;
-#: ../src/gnome2/bibletext.c:1064
-#: ../src/gnome2/bookmarks_menu.c:470
-#: ../src/gnome2/bookmarks_menu.c:736
-#: ../src/gnome2/bookmarks_menu.c:910
-#: ../src/gnome2/bookmarks_menu.c:1008
-#: ../src/gnome2/bookmarks_treeview.c:102
-#: ../src/gnome2/commentary.c:785
-#: ../src/gnome2/dictlex.c:1001
-#: ../src/gnome2/gbs.c:812
-#: ../src/gnome2/mod_mgr.c:1827
-#: ../src/gnome2/mod_mgr.c:1978
-#: ../ui/editor_studypad.xml.h:2
+#: ../src/gnome2/bibletext.c:1143 ../src/gnome2/gbs.c:911
+#: ../src/gnome2/dictlex.c:1026 ../src/gnome2/commentary.c:1012
+#: ../src/gnome2/bookmark_dialog.c:145 ../src/gnome2/bookmarks_menu.c:470
+#: ../src/gnome2/bookmarks_menu.c:896 ../src/gnome2/bookmarks_menu.c:994
+#: ../src/gnome2/bookmarks_treeview.c:102 ../ui/editor_studypad.xml.h:2
 msgid "Bookmark"
 msgstr "Kirjanmerkki"
 
-#: ../src/gnome2/bibletext.c:1077
-#: ../src/gnome2/bibletext_dialog.c:2128
-#: ../src/gnome2/bookmarks_menu.c:456
-#: ../src/gnome2/commentary.c:798
-#: ../src/gnome2/commentary_dialog.c:1840
-#: ../src/gnome2/dictlex.c:1014
-#: ../src/gnome2/gbs.c:825
+#. 4
+#. 3
+#. 4
+#. 3
+#: ../src/gnome2/bibletext.c:1156 ../src/gnome2/gbs.c:924
+#: ../src/gnome2/bibletext_dialog.c:2142 ../src/gnome2/dictlex.c:1039
+#: ../src/gnome2/commentary_dialog.c:1678 ../src/gnome2/commentary.c:1025
+#: ../src/gnome2/bookmarks_menu.c:456 ../src/gnome2/treekey-editor.c:317
 msgid "Edit"
 msgstr "Editoi"
 
-#: ../src/gnome2/bibletext.c:1083
-#: ../src/gnome2/bibletext_dialog.c:2134
-#: ../src/gnome2/commentary.c:804
-#: ../src/gnome2/commentary_dialog.c:1846
-#: ../src/gnome2/dictlex.c:1020
-#: ../src/gnome2/gbs.c:831
+#. 5
+#. 4
+#. 5
+#. 4
+#: ../src/gnome2/bibletext.c:1162 ../src/gnome2/gbs.c:930
+#: ../src/gnome2/bibletext_dialog.c:2148 ../src/gnome2/dictlex.c:1045
+#: ../src/gnome2/commentary_dialog.c:1684 ../src/gnome2/commentary.c:1031
 msgid "_Module Options"
 msgstr "_Moduliasetukset"
 
-#: ../src/gnome2/bibletext.c:1089
-#: ../src/gnome2/bibletext_dialog.c:2140
-#: ../src/gnome2/commentary.c:810
-#: ../src/gnome2/commentary_dialog.c:1852
-#: ../src/gnome2/dictlex.c:1026
-#: ../src/gnome2/gbs.c:837
+#. 6
+#. 5
+#. 6
+#. 5
+#: ../src/gnome2/bibletext.c:1168 ../src/gnome2/gbs.c:936
+#: ../src/gnome2/bibletext_dialog.c:2154 ../src/gnome2/dictlex.c:1051
+#: ../src/gnome2/commentary_dialog.c:1690 ../src/gnome2/commentary.c:1037
 msgid "Lookup Selection"
 msgstr "Etsintä valinta"
 
-#: ../src/gnome2/bibletext.c:1095
-#: ../src/gnome2/bibletext_dialog.c:2146
-#: ../src/gnome2/commentary.c:828
-#: ../src/gnome2/commentary_dialog.c:1858
-#: ../src/gnome2/dictlex.c:1039
-#: ../src/gnome2/gbs.c:850
+#. 7
+#. 6
+#. 7
+#. 6
+#: ../src/gnome2/bibletext.c:1174 ../src/gnome2/gbs.c:942
+#: ../src/gnome2/bibletext_dialog.c:2160 ../src/gnome2/dictlex.c:1057
+#: ../src/gnome2/commentary_dialog.c:1696 ../src/gnome2/commentary.c:1055
 msgid "Unlock This Module"
 msgstr "Ota käyttöön moduli"
 
-#: ../src/gnome2/bibletext_dialog.c:575
-msgid "Go to "
-msgstr "Mene"
+#. 8
+#. 7
+#. 9
+#: ../src/gnome2/bibletext.c:1180 ../src/gnome2/gbs.c:948
+#: ../src/gnome2/bibletext_dialog.c:2166
+#: ../src/gnome2/commentary_dialog.c:1714 ../src/gnome2/commentary.c:1073
+#, fuzzy
+msgid "Read Selection Aloud"
+msgstr "L_ue ääneen"
 
-#: ../src/gnome2/bibletext_dialog.c:1931
-#: ../src/gnome2/commentary_dialog.c:1643
-msgid "Sync with main"
-msgstr "Yhdistä "
+#: ../src/gnome2/about_sword.c:88
+#, fuzzy
+msgid ""
+"The SWORD Project is an effort to create an ever-expanding software package "
+"for research and study of God and His Word. The SWORD Project framework "
+"allows easy use and study of Bible texts, commentaries, lexicons, "
+"dictionaries, and other books. Many frontends are built using this "
+"framework. An installed set of books may be shared among all frontends using "
+"the framework."
+msgstr ""
+"SWORD Projekti yrittää luoda helposti laajennettavan ohjelmiston "
+"tutkimustyöhön ja Jumalan Sanan opiskeluun. SWORD Raamattuympäristö "
+"mahdollistaa helpon Raamatun tekstien, kommentaarien, sanastojen, "
+"sanakirjojen ja muiden kirjojen muokkaamisen. Tälle perustalle on rakennettu "
+"monia graafisia käyttöliittymiä. Yhteisiä moduleita voidaan käyttää eri "
+"käyttöliittymissä."
 
-#: ../src/gnome2/bibletext_dialog.c:1937
-#: ../src/gnome2/commentary_dialog.c:1649
-msgid "Stay in sync"
-msgstr "Pysy yhdistettynä"
+#: ../src/gnome2/about_sword.c:106
+msgid "About the SWORD Project"
+msgstr "Tietoa SWORD-projektista"
 
-#: ../src/gnome2/bookmarks_menu.c:473
-msgid "Folder name: "
-msgstr "Kansion nimi: "
+#: ../src/gnome2/about_sword.c:123
+msgid "Sword Version"
+msgstr "Swordin versio"
 
-#: ../src/gnome2/bookmarks_menu.c:476
-msgid "Bookmark name: "
-msgstr "Kirjanmerkin nimi"
+#: ../src/gnome2/about_sword.c:154
+#, fuzzy
+msgid "Books can be downloaded from the SWORD Project"
+msgstr "Moduleita voidaan ladata SWORD-projektista"
 
-#: ../src/gnome2/bookmarks_menu.c:479
-#: ../src/gnome2/bookmarks_menu.c:918
-msgid "Verse: "
-msgstr "Jae"
+#: ../src/gnome2/about_sword.c:160
+msgid "The SWORD Project"
+msgstr "SWORD projekti"
 
-#: ../src/gnome2/bookmarks_menu.c:480
-#: ../src/gnome2/bookmarks_menu.c:919
-msgid "Module: "
-msgstr "Moduli"
-
-#: ../src/gnome2/bookmarks_menu.c:664
-msgid "Restore Bookmark Folder"
-msgstr "Palauta kirjanmerkkikansio"
-
-#: ../src/gnome2/bookmarks_menu.c:740
-msgid "Remove the selected folder"
-msgstr "Poista valittu kansio"
-
-#: ../src/gnome2/bookmarks_menu.c:742
-msgid "(and all its contents)?"
-msgstr "(ja kaikki sen sisältö)?"
-
-#: ../src/gnome2/bookmarks_menu.c:747
-msgid "Remove the selected bookmark"
-msgstr "Poista valitut kirjanmerkit"
-
-#: ../src/gnome2/bookmarks_menu.c:911
-msgid "Add"
-msgstr "Lisää"
-
-#: ../src/gnome2/bookmarks_menu.c:917
-msgid "Label: "
-msgstr "Etiketti"
-
-#: ../src/gnome2/bookmarks_menu.c:1010
-#: ../src/gnome2/bookmarks_treeview.c:103
-msgid "Enter Folder Name"
-msgstr "Kirjoita kansion nimi"
-
-#: ../src/gnome2/bookmarks_menu.c:1012
-msgid "Folder Name"
-msgstr "Kansion nimi"
-
-#: ../src/gnome2/bookmarks_menu.c:1013
-#: ../src/gnome2/bookmarks_treeview.c:105
-msgid "Folder: "
-msgstr "Kansio: "
-
-#: ../src/gnome2/bookmarks_menu.c:1103
-msgid "Remove Folder"
-msgstr "Poista kansio"
-
-#: ../src/gnome2/bookmarks_menu.c:1104
-msgid "Remove folder and save it"
-msgstr "Poista kansio ja tallenna se"
-
-#: ../src/gnome2/bookmarks_menu.c:1110
-msgid "Restore Folder"
-msgstr "Palauta kansio"
-
-#: ../src/gnome2/bookmarks_menu.c:1111
-msgid "Restore saved folder"
-msgstr "Palaute tallennettu kansio"
-
-#: ../src/gnome2/bookmarks_menu.c:1120
-#: ../src/gnome2/sidebar.c:973
-msgid "Open in a new tab"
-msgstr "Avaa uudessa välilehdessä"
-
-#: ../src/gnome2/bookmarks_menu.c:1121
-#: ../src/gnome2/bookmarks_menu.c:1127
-msgid "Open this bookmark in a dialog"
-msgstr "Avaa tämä kirjanmerkki dialogissa"
-
-#: ../src/gnome2/bookmarks_menu.c:1126
-msgid "Open in a dialog"
-msgstr "Avaa dialogissa"
-
-#: ../src/gnome2/bookmarks_menu.c:1132
-msgid "New Folder"
-msgstr "Uusi kansio"
-
-#: ../src/gnome2/bookmarks_menu.c:1133
-msgid "Add new folder to selected folder"
-msgstr "Lisää uusi kansio valittuun kansioon"
-
-#: ../src/gnome2/bookmarks_menu.c:1138
-msgid "Insert Bookmark"
-msgstr "Lisää kirjanmerkki"
-
-#: ../src/gnome2/bookmarks_menu.c:1139
-msgid "Insert new bookmark here"
-msgstr "Lisää uusi kirjanmerkki tähän"
-
-#: ../src/gnome2/bookmarks_menu.c:1144
-msgid "_Edit Item"
-msgstr "_Muokkaa jaksoa"
-
-#: ../src/gnome2/bookmarks_menu.c:1145
-msgid "Edit bookmark item"
-msgstr "Muokkaa kirjanmerkkijaksoa"
-
-#: ../src/gnome2/bookmarks_menu.c:1150
-msgid "Delete Item"
-msgstr "Poista Jakso"
-
-#: ../src/gnome2/bookmarks_menu.c:1151
-msgid "Delete item"
-msgstr "Poista jakso"
-
-#: ../src/gnome2/bookmarks_menu.c:1157
-msgid "Expand All"
-msgstr "Laajenna kaikki"
-
-#: ../src/gnome2/bookmarks_menu.c:1158
-msgid "Expand all Bookmarks groups"
-msgstr "Laajenna kaikki kirjanmerkkiryhmät"
-
-#: ../src/gnome2/bookmarks_menu.c:1163
-msgid "Collapse All"
-msgstr "Kutista kaikki"
-
-#: ../src/gnome2/bookmarks_menu.c:1164
-msgid "Collapse all Bookmarks groups"
-msgstr "Kutista kaikki kirjanmerkkiryhmät"
-
-#: ../src/gnome2/bookmarks_menu.c:1170
-msgid "Allow Reordering"
-msgstr "Salli uudelleenjärjestys"
-
-#: ../src/gnome2/bookmarks_menu.c:1172
-msgid "Allow items to be moved from one folder to another"
-msgstr "Salli jaksojen siirtäminen kansiosta toiseen"
-
-#: ../src/gnome2/bookmarks_menu.c:1178
-msgid "Import Bibletime Bookmarks"
-msgstr "Tuo Bibletime kirjanmerkit"
-
-#: ../src/gnome2/bookmarks_menu.c:1179
-msgid "Load Bookmarks from Bibletime"
-msgstr "Lataa kirjanmerkit Bibletime:stä"
-
-#: ../src/gnome2/bookmarks_menu.c:1184
-msgid "Remove - Restore"
-msgstr "Poista - Palauta"
+#: ../src/gnome2/about_modules.c:249
+msgid "About Sword Module"
+msgstr "Tietoa Sword Modulista"
 
 #: ../src/gnome2/cipher_key_dialog.c:60
 msgid "Cipher Key?"
@@ -800,43 +480,53 @@ msgstr ":"
 msgid "Enter Cipher Key: "
 msgstr "Anna Cipher avain"
 
-#: ../src/gnome2/commentary.c:816
-#: ../src/gnome2/commentary_dialog.c:1864
-msgid "Display Book Heading"
-msgstr "Näytä kirjan otsikko"
+#. 1
+#: ../src/gnome2/gbs.c:740 ../src/gnome2/sidebar.c:931
+#, fuzzy
+msgid "Open in editor"
+msgstr "Avaa dialogissa"
 
-#: ../src/gnome2/commentary.c:822
-#: ../src/gnome2/commentary_dialog.c:1870
-msgid "Display Chapter Heading"
-msgstr "Näytä kappaleen otsikko"
+#: ../src/gnome2/parallel_view.c:272
+msgid "Copy"
+msgstr "Kopioi"
 
-#: ../src/gnome2/dialog.c:211
-msgid "Close without Saving"
-msgstr "Sulje tallentamatta"
+#: ../src/gnome2/parallel_view.c:281
+msgid "Detach/Attach"
+msgstr "Liitä/Irrota"
 
-#: ../src/gnome2/dialog.c:755
-msgid "Xiphos:"
-msgstr "Xiphos:"
+#: ../src/gnome2/parallel_view.c:296
+msgid "Module Options"
+msgstr "Moduli asetukset"
 
-#: ../src/gnome2/dialog.c:856
-msgid "Close _without Saving"
-msgstr "Sulje _tallentamatta"
+#. build change parallel modules submenu
+#: ../src/gnome2/parallel_view.c:311
+msgid "Change parallel 1"
+msgstr "Muuta rinnakkaisnäkymä 1"
 
-#: ../src/gnome2/dictlex.c:1032
-#: ../src/gnome2/gbs.c:843
-msgid "Show Tabs"
-msgstr "Näytä välilehdet"
+#: ../src/gnome2/parallel_view.c:313
+msgid "Change parallel 2"
+msgstr "Muuta rinnakkaisnäkymä 2"
 
-#: ../src/gnome2/fileselection.c:216
-msgid "Open StudyPad File"
-msgstr "Avaa Opiskelumuistio"
+#: ../src/gnome2/parallel_view.c:315
+msgid "Change parallel 3"
+msgstr "Muuta rinnakkaisnäkymä 3"
 
-#: ../src/gnome2/fileselection.c:266
-msgid "Save StudyPad File"
-msgstr "Tallenna Opiskelumuistio tiedosto"
+#: ../src/gnome2/parallel_view.c:317
+msgid "Change parallel 4"
+msgstr "Muuta rinnakkaisnäkymä 4"
 
-#: ../src/gnome2/find_dialog.c:197
-#: ../src/gnome2/find_dialog.c:362
+#: ../src/gnome2/parallel_view.c:319
+msgid "Change parallel 5"
+msgstr "Muuta rinnakkaisnäkymä 5"
+
+#: ../src/gnome2/parallel_view.c:468 ../src/gnome2/sidebar.c:405
+#: ../src/gnome2/sidebar.c:411 ../src/gnome2/tabbed_browser.c:214
+#: ../src/main/sidebar.cc:605 ../src/main/sidebar.cc:1004
+#: ../src/main/sidebar.cc:1005 ../src/main/sidebar.cc:1006
+msgid "Parallel View"
+msgstr "Rinnakkaisnäkymä"
+
+#: ../src/gnome2/find_dialog.c:197 ../src/gnome2/find_dialog.c:366
 msgid "Find"
 msgstr "Etsi"
 
@@ -844,25 +534,67 @@ msgstr "Etsi"
 msgid "Enter Word or Phrase"
 msgstr "Kirjoita sana tai fraasi"
 
-#: ../src/gnome2/find_dialog.c:230
-#: ../src/gnome2/search_sidebar.c:290
-#: ../ui/search-dialog.glade.h:34
+#: ../src/gnome2/find_dialog.c:231 ../src/gnome2/search_sidebar.c:306
+#: ../ui/search-dialog.glade.h:57
 msgid "Match case"
 msgstr "Tarkat osumat"
 
-#: ../src/gnome2/find_dialog.c:236
+#: ../src/gnome2/find_dialog.c:238
 msgid "Search backwards"
 msgstr "Hae taaksepäin"
 
-#: ../src/gnome2/find_dialog.c:244
-#: ../src/gnome2/search_sidebar.c:255
-#: ../ui/search-dialog.glade.h:39
+#: ../src/gnome2/find_dialog.c:247 ../src/gnome2/search_sidebar.c:271
+#: ../ui/search-dialog.glade.h:74
 msgid "Regular expression"
 msgstr "Säännöllinen ilmaus"
 
-#: ../src/gnome2/find_dialog.c:284
+#: ../src/gnome2/find_dialog.c:288
 msgid "Find Next"
 msgstr "Etsi seuraava"
+
+#: ../src/gnome2/bibletext_dialog.c:527
+msgid "Go to "
+msgstr "Mene"
+
+#. 1
+#: ../src/gnome2/bibletext_dialog.c:1925
+#: ../src/gnome2/commentary_dialog.c:1453
+msgid "Sync with main"
+msgstr "Yhdistä "
+
+#. 2
+#: ../src/gnome2/bibletext_dialog.c:1931
+#: ../src/gnome2/commentary_dialog.c:1459
+msgid "Stay in sync"
+msgstr "Pysy yhdistettynä"
+
+#. 15
+#: ../src/gnome2/commentary_dialog.c:1642 ../src/gnome2/commentary.c:982
+#, fuzzy
+msgid "Commentary by Chapter"
+msgstr "Kommentaarinäkymä"
+
+#. 7
+#: ../src/gnome2/commentary_dialog.c:1702 ../src/gnome2/commentary.c:1043
+msgid "Display Book Heading"
+msgstr "Näytä kirjan otsikko"
+
+#. 8
+#: ../src/gnome2/commentary_dialog.c:1708 ../src/gnome2/commentary.c:1049
+msgid "Display Chapter Heading"
+msgstr "Näytä kappaleen otsikko"
+
+#: ../src/gnome2/dialog.c:241
+msgid "Close without Saving"
+msgstr "Sulje tallentamatta"
+
+#: ../src/gnome2/dialog.c:758
+msgid "Xiphos:"
+msgstr "Xiphos:"
+
+#: ../src/gnome2/dialog.c:859
+msgid "Close _without Saving"
+msgstr "Sulje _tallentamatta"
 
 #: ../src/gnome2/font_dialog.c:322
 msgid "Change font for"
@@ -896,8 +628,7 @@ msgstr "+2"
 msgid "+1"
 msgstr "+1"
 
-#: ../src/gnome2/font_dialog.c:369
-#: ../src/gnome2/font_dialog.c:382
+#: ../src/gnome2/font_dialog.c:369 ../src/gnome2/font_dialog.c:382
 msgid "+0"
 msgstr "+0"
 
@@ -917,935 +648,2257 @@ msgstr "-3"
 msgid "Use the default font for this module"
 msgstr "Käytä oletusfonttia tälle modulille"
 
-#: ../src/gnome2/gbs_dialog.c:130
-#, c-format
-msgid "Show %s in main window"
-msgstr "Näytä %s pääikkunassa"
+#: ../src/gnome2/commentary.c:456
+msgid ""
+"Renaming is not available in Windows.\n"
+"\n"
+"Xiphos is limited by Windows' filesystem,\n"
+"because it disallows the renaming of filename\n"
+"components of currently-open files,\n"
+"such as the contents of this commentary.\n"
+"Therefore, personal commentary renaming is\n"
+"not available in the Windows environment."
+msgstr ""
 
-#: ../src/gnome2/gbs_dialog.c:148
-#, c-format
-msgid "Go to %s"
-msgstr "Mene %s"
+#: ../src/gnome2/commentary.c:475
+#, fuzzy
+msgid "Rename Commentary"
+msgstr "Kommentaari"
 
-#: ../src/gnome2/xiphos.c:87
-msgid "Initiating Xiphos"
-msgstr "Käynnistetään Xiphos"
-
-#: ../src/gnome2/xiphos.c:143
-#: ../src/gnome2/splash.c:590
-msgid "Displaying Xiphos"
-msgstr "Näytetään Xiphos"
-
-#: ../src/gnome2/xiphos.c:171
-msgid "The Setup Druid was cancelled."
-msgstr "Asetusvelho peruutettiin"
-
-#: ../src/gnome2/xiphos.c:172
-msgid "Do you wish to set preferences now?"
-msgstr "Haluatko säätää asetuksia nyt?"
-
-#: ../src/gnome2/xiphos.c:217
-msgid "done"
-msgstr "valmis"
-
-#: ../src/gnome2/xiphos.c:295
-msgid "Xiphos is shutdown"
-msgstr "Xiphos on suljettu"
-
-#: ../src/gnome2/html.c:154
-msgid "Unlock "
-msgstr "Ota käyttöön "
-
-#: ../src/gnome2/html.c:637
-#, c-format
-msgid "Page %d of %d"
-msgstr "Sivu %d / %d"
-
-#: ../src/gnome2/html.c:736
-msgid "Print"
-msgstr "Tulosta"
-
-#: ../src/gnome2/html.c:786
-msgid "Print Preview"
-msgstr "Tulostuksen esikatselu"
-
-#: ../src/gnome2/html.c:792
-msgid "Failed to print the document"
-msgstr "Epäonnistuttiin tulostamaan tiedostoa"
-
-#: ../src/gnome2/main_menu.c:729
-msgid "Open Study_Pad"
-msgstr "Avaa Opiskelumuistio"
-
-#: ../src/gnome2/main_menu.c:730
-msgid "Open the StudyPad editor"
-msgstr "Avaa Opiskelumuistio muokkain"
-
-#: ../src/gnome2/main_menu.c:735
-msgid "_Open Session"
-msgstr "_Avaa istunto"
-
-#: ../src/gnome2/main_menu.c:736
-msgid "Open a saved session"
-msgstr "Avaa tallennettu istunto"
-
-#: ../src/gnome2/main_menu.c:740
-msgid "_Save Session"
-msgstr "_Tallenna istunto"
-
-#: ../src/gnome2/main_menu.c:741
-msgid "Save the current session to a file"
-msgstr "Tallenna nykyinen istunto tiedostoon"
-
-#: ../src/gnome2/main_menu.c:752
-msgid "_Copy"
-msgstr "_Kopio"
-
-#: ../src/gnome2/main_menu.c:753
-msgid "Copy highlighted text from main window"
-msgstr "Kopio korostettu teksti pääikkunasta"
-
-#: ../src/gnome2/main_menu.c:759
-#: ../src/gnome2/sidebar.c:1333
-msgid "_Search"
-msgstr "_Etsi"
-
-#: ../src/gnome2/main_menu.c:760
-msgid "Search using the shortcut bar"
-msgstr "Etsi käyttäen pikakuvakepalkkia"
-
-#: ../src/gnome2/main_menu.c:765
-msgid "_Advanced Search"
-msgstr "_Edistynyt haku"
-
-#: ../src/gnome2/main_menu.c:766
-msgid "Advanced search using the search dialog"
-msgstr "Edistynyt haku käyttäen hakudialogia"
-
-#: ../src/gnome2/main_menu.c:774
-msgid "_Module Manager"
-msgstr "_Modulimanageri"
-
-#: ../src/gnome2/main_menu.c:775
-msgid "Use module manager to install and remove Sword modules"
-msgstr "Käytä modulimanageria Sword modulien asennukseen tai poistoon"
-
-#: ../src/gnome2/main_menu.c:784
-msgid "C_lear"
-msgstr "T_yhjennä"
-
-#: ../src/gnome2/main_menu.c:785
-msgid "Clear history list"
-msgstr "Tyhjennä historialista"
-
-#: ../src/gnome2/main_menu.c:795
-msgid "_Daily Devotion"
-msgstr "_Päivittäinen hartaus"
-
-#: ../src/gnome2/main_menu.c:796
-msgid "Show the Daily Devotion for today"
-msgstr "Näytä päivittäinen hartaus täksi päiväksi"
-
-#: ../src/gnome2/main_menu.c:811
-msgid "_Bible Texts"
-msgstr "_Raamatun tekstit"
-
-#: ../src/gnome2/main_menu.c:812
-msgid "Show or hide Bible texts window"
-msgstr "Näytä tai piilota Raamatuntekstien ikkuna"
-
-#: ../src/gnome2/main_menu.c:817
-msgid "P_review"
-msgstr "E_sikatselu"
-
-#: ../src/gnome2/main_menu.c:818
-msgid "Show or hide Preview window"
-msgstr "Näytä tai piilota esikatseluikkuna"
-
-#: ../src/gnome2/main_menu.c:823
-msgid "_Commentary"
-msgstr "_Kommentaari"
-
-#: ../src/gnome2/main_menu.c:824
-msgid "Show or hide commentaries"
-msgstr "Näytä tai piilota kommentaarit"
-
-#: ../src/gnome2/main_menu.c:829
-msgid "Dictionary/_Lexicon"
-msgstr "Sanakirja/_Sanasto"
-
-#: ../src/gnome2/main_menu.c:831
-msgid "Show or hide - dictionaries and lexicons"
-msgstr "Näytä tai piilota - sanakirjat ja sanastot"
-
-#: ../src/gnome2/main_menu.c:837
-msgid "_Verse Style"
-msgstr "_Jakeen tyyli"
-
-#: ../src/gnome2/main_menu.c:843
-msgid "_Pin Tabs"
-msgstr "_Kiinnitä välilehdet"
-
-#: ../src/gnome2/main_menu.c:849
-msgid "R_ead Aloud"
-msgstr "L_ue ääneen"
-
-#: ../src/gnome2/main_menu.c:855
-msgid "Show Verse _Numbers"
-msgstr "Näytä jakeen _Numerot"
-
-#: ../src/gnome2/main_menu.c:861
-msgid "_Highlight Current Verse"
-msgstr "_Korosta nykyinen jae"
-
-#: ../src/gnome2/main_menu.c:868
-msgid "D_ouble-Space Text"
-msgstr "T_uplavälin teksti"
-
-#: ../src/gnome2/main_menu.c:876
-msgid "_Attach/Detach Sidebar"
-msgstr "_Liitä/Irrota sivupalkki"
-
-#: ../src/gnome2/main_menu.c:882
-msgid "_Show/Hide Sidebar"
-msgstr "_Näytä/Piilota sivupalkki"
-
-#: ../src/gnome2/main_menu.c:892
-msgid "_Contents"
-msgstr "_Sisältö"
-
-#: ../src/gnome2/main_menu.c:893
-msgid "Open the Xiphos manual"
-msgstr "Avaa Xiphos manuaali"
-
-#: ../src/gnome2/main_menu.c:906
-msgid "_About the SWORD Project ..."
-msgstr "_Tietoa SWORD-projektista ..."
-
-#: ../src/gnome2/main_menu.c:907
-msgid "More information about the SWORD Project"
-msgstr "Enemmän tietoa SWORD-projektista"
-
-#: ../src/gnome2/main_menu.c:912
-msgid "About _Xiphos ..."
-msgstr "Tietoa _Xiphosistä ..."
-
-#: ../src/gnome2/main_menu.c:913
-msgid "About this application"
-msgstr "Tietoa tästä ohjelmasta"
-
-#: ../src/gnome2/main_menu.c:922
-#: ../ui/editor_note.xml.h:14
-#: ../ui/editor_studypad.xml.h:19
-msgid "_File"
-msgstr "_Tiedosto"
-
-#: ../src/gnome2/main_menu.c:928
-msgid "_Edit"
-msgstr "_Muokkaa"
-
-#: ../src/gnome2/main_menu.c:934
-msgid "_View"
-msgstr "_Näytä"
-
-#: ../src/gnome2/main_menu.c:940
-msgid "Hi_story"
-msgstr "Hi_storia"
-
-#: ../src/gnome2/main_menu.c:946
-msgid "_Help"
-msgstr "_Apu"
-
-#: ../src/gnome2/main_window.c:581
-msgid "Building Xiphos interface"
-msgstr "Kasataan Xiphos näkymää"
-
-#: ../src/gnome2/main_window.c:588
-msgid "Xiphos - Bible Study Software"
-msgstr "Xiphos - Raamatunopiskeluohjelma"
-
-#: ../src/gnome2/main_window.c:642
-msgid "Open a new tab"
-msgstr "Avaa uusi välilehti"
-
-#: ../src/gnome2/main_window.c:788
-msgid "Commentary View"
+#: ../src/gnome2/commentary.c:478
+#, fuzzy
+msgid "Choose Commentary Name"
 msgstr "Kommentaarinäkymä"
 
-#: ../src/gnome2/main_window.c:805
-msgid "Book View"
-msgstr "Kirjanäkymä"
+#: ../src/gnome2/commentary.c:480
+#, fuzzy
+msgid "New Name"
+msgstr "Kansion nimi"
 
-#: ../src/gnome2/mod_mgr.c:219
-msgid "Install the following modules:"
+#: ../src/gnome2/commentary.c:481 ../src/gnome2/treekey-editor.c:127
+#: ../src/gnome2/treekey-editor.c:186 ../src/gnome2/treekey-editor.c:272
+#: ../src/main/prayerlists.cc:238 ../src/main/sword_treekey.cc:375
+#, fuzzy
+msgid "Name: "
+msgstr "Etiketti"
+
+#: ../src/gnome2/commentary.c:491 ../src/main/prayerlists.cc:252
+msgid "Module names must contain [A-Za-z0-9_] only."
+msgstr ""
+
+#: ../src/gnome2/commentary.c:498 ../src/main/prayerlists.cc:259
+msgid "Xiphos already knows a module by that name."
+msgstr ""
+
+#: ../src/gnome2/commentary.c:541
+#, c-format
+msgid ""
+"Failed to create new configuration:\n"
+"%s"
+msgstr ""
+
+#: ../src/gnome2/commentary.c:550
+msgid ""
+"Configuration build error:\n"
+"\n"
+msgstr ""
+
+#: ../src/gnome2/commentary.c:1061
+msgid "Rename Pers.Comm."
+msgstr ""
+
+#: ../src/gnome2/commentary.c:1067
+msgid "Dump Pers.Comm."
+msgstr ""
+
+#: ../src/gnome2/toolbar_nav.c:523
+msgid "Move backwards through history"
+msgstr "Liiku taaksepäin historiassa"
+
+#: ../src/gnome2/toolbar_nav.c:544
+msgid "Move foward through history"
+msgstr "Liiku eteenpäin historiassa"
+
+#: ../src/gnome2/toolbar_nav.c:565
+msgid "Select a Book of the Bible"
+msgstr "Valitse Raamatun kirja"
+
+#: ../src/gnome2/toolbar_nav.c:630
+msgid "Change Chapter"
+msgstr "Vaihda Kappaletta"
+
+#: ../src/gnome2/toolbar_nav.c:700
+msgid "Change Verse"
+msgstr "Vaihda jaetta"
+
+#: ../src/gnome2/toolbar_nav.c:768
+msgid "Enter a Verse reference in Book 1:1 format and press Return"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:251
+#, fuzzy
+msgid "Install these modules:"
 msgstr "Asenna seuraavat modulit:"
 
-#: ../src/gnome2/mod_mgr.c:224
-msgid "Remove the following modules:"
+#: ../src/gnome2/mod_mgr.c:253
+#, fuzzy
+msgid "Remove these modules:"
 msgstr "Poista seuraavat modulit:"
 
-#: ../src/gnome2/mod_mgr.c:246
+#: ../src/gnome2/mod_mgr.c:255
+#, fuzzy
+msgid "Archive these modules:"
+msgstr "Tallenna modulilista"
+
+#: ../src/gnome2/mod_mgr.c:257
+msgid ""
+"Build fast-search index for these\n"
+"modules (may take minutes/module):"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:259
+#, fuzzy
+msgid "Delete fast-search index for these modules:"
+msgstr "Käytä oletusfonttia tälle modulille"
+
+#: ../src/gnome2/mod_mgr.c:279
 msgid "Preparing to install"
 msgstr "Valmistellaan asennusta"
 
-#: ../src/gnome2/mod_mgr.c:249
+#: ../src/gnome2/mod_mgr.c:281
 msgid "Preparing to remove"
 msgstr "Valmistellaan poistoa"
 
-#: ../src/gnome2/mod_mgr.c:272
-msgid "Installing: "
+#: ../src/gnome2/mod_mgr.c:283
+#, fuzzy
+msgid "Preparing to archive"
+msgstr "Valmistellaan poistoa"
+
+#: ../src/gnome2/mod_mgr.c:285
+#, fuzzy
+msgid "Preparing to index"
+msgstr "Valmistellaan asennusta"
+
+#: ../src/gnome2/mod_mgr.c:287
+#, fuzzy
+msgid "Preparing to delete index"
+msgstr "Valmistellaan poistoa"
+
+#: ../src/gnome2/mod_mgr.c:312
+#, fuzzy
+msgid "Installing"
 msgstr "Asennetaan"
 
-#: ../src/gnome2/mod_mgr.c:277
-msgid "Removing: "
+#: ../src/gnome2/mod_mgr.c:314
+#, fuzzy
+msgid "Removing"
 msgstr "Poistetaan: "
 
-#: ../src/gnome2/mod_mgr.c:321
-msgid "Install failed"
-msgstr "Asennus epäonnistui"
+#: ../src/gnome2/mod_mgr.c:316
+msgid "Archiving"
+msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:323
-msgid "Remove failed"
-msgstr "Poisto epäonnistui"
+#: ../src/gnome2/mod_mgr.c:318
+msgid "Indexing"
+msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:325
-#: ../src/gnome2/mod_mgr.c:806
-msgid "Finished"
-msgstr "Valmis"
+#: ../src/gnome2/mod_mgr.c:320
+#, fuzzy
+msgid "Deleting index"
+msgstr "Poista jakso"
 
-#: ../src/gnome2/mod_mgr.c:786
-msgid "Refreshing remote"
-msgstr "Yhdistetään"
+#: ../src/gnome2/mod_mgr.c:340
+#, c-format
+msgid ""
+"`mkdir %s' failed:\n"
+"%s."
+msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:801
-msgid "Remote not found"
-msgstr "yhteyttä ei saatu"
+#: ../src/gnome2/mod_mgr.c:366
+msgid "Xiphos could not execute archiver"
+msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:913
-msgid "Module Name"
-msgstr "Modulin nimi"
+#: ../src/gnome2/mod_mgr.c:371
+msgid ""
+" archival result:\n"
+"\n"
+msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:990
-msgid "Old"
-msgstr "Vanha"
+#: ../src/gnome2/mod_mgr.c:375
+msgid ""
+"\n"
+"Archive in "
+msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1017
-msgid "New"
-msgstr "Uusi"
+#: ../src/gnome2/mod_mgr.c:432
+msgid "Journals and prayer lists cannot be indexed."
+msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1028
-msgid "Description"
-msgstr "Kuvaus"
-
-#: ../src/gnome2/mod_mgr.c:1063
-#: ../src/gnome2/mod_mgr.c:1144
-msgid "Configure"
-msgstr "Aseta"
-
-#: ../src/gnome2/mod_mgr.c:1097
-msgid "Type"
-msgstr "Tyyppi"
-
-#: ../src/gnome2/mod_mgr.c:1105
-msgid "Caption"
-msgstr "Seloste"
-
-#: ../src/gnome2/mod_mgr.c:1114
-msgid "Source"
-msgstr "Lähde"
-
-#: ../src/gnome2/mod_mgr.c:1123
-msgid "Directory"
-msgstr "Kansio"
-
-#: ../src/gnome2/mod_mgr.c:1147
-msgid "Sources"
-msgstr "Lähteet"
-
-#: ../src/gnome2/mod_mgr.c:1151
-#: ../src/gnome2/preferences_dialog.c:1608
-#: ../src/gnome2/sidebar.c:1522
-msgid "Modules"
-msgstr "Modulit"
-
-#: ../src/gnome2/mod_mgr.c:1153
-#: ../src/gnome2/mod_mgr.c:2186
-#: ../ui/module-manager.glade.h:13
+#: ../src/gnome2/mod_mgr.c:453 ../src/gnome2/mod_mgr.c:2679
+#: ../ui/module-manager.glade.h:18
 msgid "Install"
 msgstr "Asenna"
 
-#: ../src/gnome2/mod_mgr.c:1155
+#: ../src/gnome2/mod_mgr.c:455 ../src/gnome2/treekey-editor.c:311
 msgid "Remove"
 msgstr "Poista"
 
-#: ../src/gnome2/mod_mgr.c:1375
+#: ../src/gnome2/mod_mgr.c:457 ../ui/module-manager.glade.h:11
+msgid "Archive"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:459 ../ui/module-manager.glade.h:17
+msgid "Index"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:461
+#, fuzzy
+msgid "Deletion"
+msgstr "Poista jakso"
+
+#: ../src/gnome2/mod_mgr.c:463
+#, fuzzy, c-format
+msgid "%s failed"
+msgstr "Asennus epäonnistui"
+
+#: ../src/gnome2/mod_mgr.c:465 ../src/gnome2/mod_mgr.c:1148
+msgid "Finished"
+msgstr "Valmis"
+
+#: ../src/gnome2/mod_mgr.c:631 ../src/gnome2/mod_mgr.c:633
+#: ../src/gnome2/mod_mgr.c:733 ../src/gnome2/mod_mgr.c:771
+#: ../src/gnome2/mod_mgr.c:773 ../src/gnome2/utilities.c:323
+#: ../src/gnome2/utilities.c:390 ../src/gnome2/utilities.c:392
+#: ../src/gnome2/utilities.c:452 ../src/gnome2/utilities.c:454
+#: ../src/gnome2/utilities.c:1082 ../src/main/sidebar.cc:786
+#: ../src/main/sidebar.cc:788 ../src/main/sidebar.cc:847
+#: ../src/main/sidebar.cc:920 ../src/main/sidebar.cc:922
+msgid "Unknown"
+msgstr "Tuntematon"
+
+#: ../src/gnome2/mod_mgr.c:908
+#, c-format
+msgid ""
+"Repository:\n"
+"%s"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:920
+msgid ""
+"Categorized by\n"
+"Module Type"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:925 ../src/gnome2/utilities.c:515
+#: ../src/main/sidebar.cc:996 ../src/main/sidebar.cc:998
+msgid "Biblical Texts"
+msgstr "Raamatulliset tekstit"
+
+#: ../src/gnome2/mod_mgr.c:929 ../src/gnome2/utilities.c:519
+#: ../src/main/sidebar.cc:638 ../src/main/sidebar.cc:1021
+#: ../src/main/sidebar.cc:1023 ../ui/prefs.glade.h:33
+msgid "Commentaries"
+msgstr "Kommentaarit"
+
+#: ../src/gnome2/mod_mgr.c:933 ../src/gnome2/utilities.c:523
+#: ../src/main/sidebar.cc:1030 ../src/main/sidebar.cc:1032
+msgid "Dictionaries"
+msgstr "Sanakirjat"
+
+#: ../src/gnome2/mod_mgr.c:937 ../src/gnome2/utilities.c:527
+#: ../src/main/sidebar.cc:1039 ../src/main/sidebar.cc:1041
+#, fuzzy
+msgid "Daily Devotionals"
+msgstr "Päivittäinen hartaus"
+
+#: ../src/gnome2/mod_mgr.c:941 ../src/gnome2/utilities.c:531
+#: ../src/main/sidebar.cc:651 ../src/main/sidebar.cc:1048
+#: ../src/main/sidebar.cc:1050
+msgid "General Books"
+msgstr "Yleiset kirjat"
+
+#: ../src/gnome2/mod_mgr.c:945 ../src/gnome2/utilities.c:535
+#: ../src/main/sidebar.cc:1057 ../src/main/sidebar.cc:1059
+msgid "Maps"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:949 ../src/gnome2/utilities.c:539
+#: ../src/main/sidebar.cc:1066 ../src/main/sidebar.cc:1068
+#, fuzzy
+msgid "Images"
+msgstr "osumat"
+
+#: ../src/gnome2/mod_mgr.c:957
+msgid ""
+"Categorized by\n"
+"Availability"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:962
+msgid "Updates"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:966
+#, fuzzy
+msgid "Uninstalled"
+msgstr "Asenna"
+
+#: ../src/gnome2/mod_mgr.c:970 ../src/gnome2/sidebar.c:421
+#: ../src/gnome2/utilities.c:544 ../src/main/prayerlists.cc:236
+#: ../src/main/sword_treekey.cc:373 ../src/main/sword_treekey.cc:417
+#: ../src/main/sidebar.cc:1076 ../src/main/sidebar.cc:1078
+msgid "Prayer List/Journal"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:1132
+msgid "Refreshing remote"
+msgstr "Yhdistetään"
+
+#: ../src/gnome2/mod_mgr.c:1143
+msgid "Remote not found"
+msgstr "yhteyttä ei saatu"
+
+#: ../src/gnome2/mod_mgr.c:1274
+msgid "Module Name"
+msgstr "Modulin nimi"
+
+#: ../src/gnome2/mod_mgr.c:1293
+msgid "A checkmark means this module is already installed"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:1315
+#, fuzzy
+msgid "Click the box to work on this module"
+msgstr "Käytä oletusfonttia tälle modulille"
+
+#: ../src/gnome2/mod_mgr.c:1316
+msgid "Click the box to select this module for install/update"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:1335
+#, fuzzy
+msgid "Installed"
+msgstr "Asenna"
+
+#: ../src/gnome2/mod_mgr.c:1345
+msgid ""
+"The index icon means you have built an optimized ('lucene') index for this "
+"module for fast searching (see the Maintenance pane for this function)"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:1363
+msgid ""
+"The lock icon means this module is encrypted, and requires that you purchase "
+"an unlock key from the content owner"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:1385
+msgid ""
+"The refresh icon means the Installed module is older than the newer "
+"Available module: You should update the module"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:1397
+msgid "Available"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:1406
+msgid "Size"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:1415
+msgid "Description"
+msgstr "Kuvaus"
+
+#: ../src/gnome2/mod_mgr.c:1449 ../src/gnome2/mod_mgr.c:1529
+msgid "Configure"
+msgstr "Aseta"
+
+#: ../src/gnome2/mod_mgr.c:1483
+msgid "Type"
+msgstr "Tyyppi"
+
+#: ../src/gnome2/mod_mgr.c:1490
+msgid "Caption"
+msgstr "Seloste"
+
+#: ../src/gnome2/mod_mgr.c:1498
+msgid "Source"
+msgstr "Lähde"
+
+#: ../src/gnome2/mod_mgr.c:1506
+msgid "Directory"
+msgstr "Kansio"
+
+#: ../src/gnome2/mod_mgr.c:1527
+msgid "Sources"
+msgstr "Lähteet"
+
+#: ../src/gnome2/mod_mgr.c:1533 ../src/gnome2/sidebar.c:1440
+#: ../src/gnome2/preferences_dialog.c:1792
+msgid "Modules"
+msgstr "Modulit"
+
+#: ../src/gnome2/mod_mgr.c:1535
+#, fuzzy
+msgid "Install/Update"
+msgstr "Asenna"
+
+#: ../src/gnome2/mod_mgr.c:1537
+msgid "Maintenance"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:1746
 msgid "Please Refresh"
 msgstr "Lataa uudestaan"
 
-#: ../src/gnome2/mod_mgr.c:1377
+#: ../src/gnome2/mod_mgr.c:1747
 msgid "Your module list is not up to date!"
 msgstr "Modulilistauksesi ei ole ajan tasalla!"
 
-#: ../src/gnome2/mod_mgr.c:1591
+#: ../src/gnome2/mod_mgr.c:1970
 msgid "Select Local Source"
 msgstr "Valitse paikallinen lähde"
 
-#: ../src/gnome2/mod_mgr.c:1830
-#: ../src/gnome2/mod_mgr.c:1981
+#: ../src/gnome2/mod_mgr.c:2264 ../src/gnome2/mod_mgr.c:2468
 msgid "Remove the selected source"
 msgstr "Poista valittu lähde"
 
-#: ../src/gnome2/mod_mgr.c:1881
+#: ../src/gnome2/mod_mgr.c:2321
 msgid "Enter a remote source"
 msgstr "Lisää etälähde"
 
-#: ../src/gnome2/mod_mgr.c:1885
+#: ../src/gnome2/mod_mgr.c:2325
 msgid "Caption:"
 msgstr "Seloste"
 
-#: ../src/gnome2/mod_mgr.c:1886
+#: ../src/gnome2/mod_mgr.c:2326
 msgid "Type:"
 msgstr "Tyyppi"
 
-#: ../src/gnome2/mod_mgr.c:1887
-msgid "URL:"
-msgstr "URL:"
+#: ../src/gnome2/mod_mgr.c:2327
+msgid "Host:"
+msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1888
+#: ../src/gnome2/mod_mgr.c:2328
 msgid "Directory:"
 msgstr "Kansio:"
 
-#: ../src/gnome2/navbar_book.c:314
-msgid "Go to parent"
-msgstr "Mene taso ylemmäksi"
-
-#: ../src/gnome2/navbar_book.c:331
-msgid "Go to previous item"
-msgstr "Mene edelliseen jaksoon"
-
-#: ../src/gnome2/navbar_book.c:347
-msgid "Go to next item"
-msgstr "Mene seuraavaan jaksoon"
-
-#: ../src/gnome2/navbar_book.c:364
-msgid "Go to first child"
-msgstr "Mene ensimmäiseen jaksoon"
-
-#: ../src/gnome2/parallel_dialog.c:599
-#: ../src/gnome2/preferences_dialog.c:1614
-msgid "Parallel"
-msgstr "Rinnan"
-
-#: ../src/gnome2/parallel_view.c:261
-#: ../src/gnome2/parallel_view.c:333
-msgid "Copy"
-msgstr "Kopioi"
-
-#: ../src/gnome2/parallel_view.c:270
-#: ../src/gnome2/parallel_view.c:342
-msgid "Detach/Attach"
-msgstr "Liitä/Irrota"
-
-#: ../src/gnome2/parallel_view.c:275
-#: ../src/gnome2/parallel_view.c:347
-msgid "Module Options"
-msgstr "Moduli asetukset"
-
-#. build change parallel modules submenu
-#: ../src/gnome2/parallel_view.c:290
-#: ../src/gnome2/parallel_view.c:362
-msgid "Change parallel 1"
-msgstr "Muuta rinnakkaisnäkymä 1"
-
-#: ../src/gnome2/parallel_view.c:293
-#: ../src/gnome2/parallel_view.c:365
-msgid "Change parallel 2"
-msgstr "Muuta rinnakkaisnäkymä 2"
-
-#: ../src/gnome2/parallel_view.c:296
-#: ../src/gnome2/parallel_view.c:368
-msgid "Change parallel 3"
-msgstr "Muuta rinnakkaisnäkymä 3"
-
-#: ../src/gnome2/parallel_view.c:299
-#: ../src/gnome2/parallel_view.c:371
-msgid "Change parallel 4"
-msgstr "Muuta rinnakkaisnäkymä 4"
-
-#: ../src/gnome2/parallel_view.c:302
-#: ../src/gnome2/parallel_view.c:374
-msgid "Change parallel 5"
-msgstr "Muuta rinnakkaisnäkymä 5"
-
-#: ../src/gnome2/preferences_cell_renderer.c:399
-msgid "Text"
-msgstr "Teksti"
-
-#: ../src/gnome2/preferences_cell_renderer.c:401
-msgid "Text to render"
-msgstr "Käsiteltävä teksti"
-
-#: ../src/gnome2/preferences_cell_renderer.c:407
-msgid "Pixbuf Object"
+#. this can happen at most once
+#: ../src/gnome2/mod_mgr.c:2353
+msgid "A source by that name already exists."
 msgstr ""
 
-#: ../src/gnome2/preferences_cell_renderer.c:409
-msgid "The pixbuf to render."
-msgstr ""
-
-#: ../src/gnome2/preferences_dialog.c:1504
-#: ../ui/prefs.glade.h:51
-msgid "Preferences"
-msgstr "Asetukset"
-
-#: ../src/gnome2/preferences_dialog.c:1584
+#: ../src/gnome2/mod_mgr.c:2465
 #, fuzzy
-msgid "Fonts"
-msgstr "Kirjasinlajit"
-
-#: ../src/gnome2/preferences_dialog.c:1587
-#, fuzzy
-msgid "Color"
-msgstr "Väri"
-
-#: ../src/gnome2/preferences_dialog.c:1590
-#: ../src/gnome2/preferences_dialog.c:1604
-#: ../src/gnome2/preferences_dialog.c:1617
-msgid "Misc"
-msgstr "Sekalaiset"
-
-#: ../src/gnome2/preferences_dialog.c:1594
-msgid "General"
-msgstr "Yleinen"
-
-#: ../src/gnome2/preferences_dialog.c:1597
-#: ../ui/prefs.glade.h:58
-msgid "Tabs and Panes"
-msgstr "Välilehdet ja paneelit"
-
-#: ../src/gnome2/preferences_dialog.c:1611
-msgid "Main"
-msgstr "Yleinen"
-
-#: ../src/gnome2/search_dialog.c:678
-msgid "Clear List?"
-msgstr "Tyhjennä lista?"
-
-#: ../src/gnome2/search_dialog.c:680
-msgid "Are you sure you want to clear the module list?"
-msgstr "Haluatko varmasti tyhjentää modulilistan?"
-
-#: ../src/gnome2/search_dialog.c:892
-msgid "Delete list?"
-msgstr "Poista lista?"
-
-#: ../src/gnome2/search_dialog.c:893
-msgid "Are you sure you want to delete:"
-msgstr "Haluatko varmasti poistaa:"
-
-#: ../src/gnome2/search_sidebar.c:177
-#: ../ui/search-dialog.glade.h:52
-msgid "Start searching"
-msgstr "Aloita haku"
-
-#: ../src/gnome2/search_sidebar.c:193
-msgid "Search Module"
-msgstr "Hae modulia"
-
-#: ../src/gnome2/search_sidebar.c:207
-msgid "Bible"
-msgstr "Raamattu"
-
-#: ../src/gnome2/search_sidebar.c:216
-#: ../ui/prefs.glade.h:26
-msgid "Commentary"
-msgstr "Kommentaari"
-
-#: ../src/gnome2/search_sidebar.c:230
-msgid "Search Type"
-msgstr "Hakutapa"
-
-#: ../src/gnome2/search_sidebar.c:244
-#: ../ui/search-dialog.glade.h:37
-msgid "Multi word"
-msgstr "Monta sanaa"
-
-#: ../src/gnome2/search_sidebar.c:263
-#: ../ui/search-dialog.glade.h:30
-msgid "Exact phrase"
-msgstr "Tarkka fraasi"
-
-#: ../src/gnome2/search_sidebar.c:277
-msgid "Search Options"
-msgstr "Hakuasetukset"
-
-#: ../src/gnome2/search_sidebar.c:305
-msgid "Search Scope"
-msgstr "Haun laajuus"
-
-#: ../src/gnome2/search_sidebar.c:318
-msgid "No scope"
-msgstr "Ei laajuutta"
-
-#: ../src/gnome2/search_sidebar.c:328
-msgid "Use bounds"
-msgstr "Käytä rajoja"
-
-#: ../src/gnome2/search_sidebar.c:337
-msgid "Last search"
-msgstr "Viimeinen haku"
-
-#: ../src/gnome2/search_sidebar.c:352
-msgid "Bounds"
-msgstr "Rajat"
-
-#: ../src/gnome2/search_sidebar.c:366
-msgid "Lower"
-msgstr "Alempi"
-
-#: ../src/gnome2/search_sidebar.c:373
-msgid "Upper"
-msgstr "Ylempi"
+msgid "Delete a remote source"
+msgstr "Lisää etälähde"
 
 #: ../src/gnome2/sidebar_dialog.c:135
 msgid "Sidebar"
 msgstr "Sivupalkki"
 
-#: ../src/gnome2/sidebar.c:934
+#: ../src/gnome2/html.c:922
+msgid "Print"
+msgstr "Tulosta"
+
+#: ../src/gnome2/html.c:979
+msgid "Print Preview"
+msgstr "Tulostuksen esikatselu"
+
+#: ../src/gnome2/html.c:985
+msgid "Failed to print the document"
+msgstr "Epäonnistuttiin tulostamaan tiedostoa"
+
+#: ../src/gnome2/main_window.c:778 ../src/main/sword.cc:637
+msgid "Starting"
+msgstr "Aloitetaan"
+
+#: ../src/gnome2/main_window.c:779
+msgid "Building Xiphos interface"
+msgstr "Kasataan Xiphos näkymää"
+
+#: ../src/gnome2/main_window.c:785
+msgid "Xiphos - Bible Study Software"
+msgstr "Xiphos - Raamatunopiskeluohjelma"
+
+#: ../src/gnome2/main_window.c:837
+msgid "Open a new tab"
+msgstr "Avaa uusi välilehti"
+
+#: ../src/gnome2/main_window.c:925 ../src/gnome2/sidebar.c:406
+#: ../src/gnome2/sidebar.c:412 ../src/main/sidebar.cc:627
+#: ../src/main/sidebar.cc:1012 ../src/main/sidebar.cc:1013
+#: ../src/main/sidebar.cc:1014
+msgid "Standard View"
+msgstr "Standardinäkymä"
+
+#: ../src/gnome2/main_window.c:1008
+msgid "Commentary View"
+msgstr "Kommentaarinäkymä"
+
+#: ../src/gnome2/main_window.c:1025
+msgid "Book View"
+msgstr "Kirjanäkymä"
+
+#: ../src/gnome2/navbar_book.c:327 ../src/gnome2/navbar_book_dialog.c:299
+msgid "Go outward, to the section containing this one"
+msgstr ""
+
+#: ../src/gnome2/navbar_book.c:343 ../src/gnome2/navbar_book_dialog.c:315
+msgid "Go to previous item"
+msgstr "Mene edelliseen jaksoon"
+
+#: ../src/gnome2/navbar_book.c:358 ../src/gnome2/navbar_book_dialog.c:330
+msgid "Go to next item"
+msgstr "Mene seuraavaan jaksoon"
+
+#: ../src/gnome2/navbar_book.c:374 ../src/gnome2/navbar_book_dialog.c:346
+msgid "Go inward, to the first subsection"
+msgstr ""
+
+#: ../src/gnome2/sidebar.c:725
 msgid "Save List"
 msgstr "Tallenna lista"
 
-#: ../src/gnome2/sidebar.c:935
+#: ../src/gnome2/sidebar.c:726
 msgid "Save the search results as bookmarks"
 msgstr "Tallenna hakutulokset kirjanmerkkeinä"
 
-#: ../src/gnome2/sidebar.c:974
+#. 0
+#: ../src/gnome2/sidebar.c:764 ../src/gnome2/sidebar.c:925
+#: ../src/gnome2/bookmarks_menu.c:1106
+msgid "Open in a new tab"
+msgstr "Avaa uudessa välilehdessä"
+
+#: ../src/gnome2/sidebar.c:765 ../src/gnome2/sidebar.c:926
 msgid "Open selected module in a new tab"
 msgstr "Avaa valitut modulit uudessa välilehdessä"
 
-#: ../src/gnome2/sidebar.c:980
-msgid "Open in dialog"
-msgstr "Avaa dialogissa"
+#. 1
+#: ../src/gnome2/sidebar.c:770
+msgid "Open in a separate window"
+msgstr ""
 
-#: ../src/gnome2/sidebar.c:981
-msgid "Open selected module in a dialog"
+#: ../src/gnome2/sidebar.c:771
+#, fuzzy
+msgid "Open selected module in a separate ['dialog'] window"
 msgstr "Avaa valitut modulit dialogissa"
 
-#: ../src/gnome2/sidebar.c:987
+#: ../src/gnome2/sidebar.c:777 ../src/gnome2/sidebar.c:938
 msgid "View information about the selected dialog"
 msgstr "Katsele tietoa valitusta dialogista"
 
-#: ../src/gnome2/sidebar.c:1317
+#: ../src/gnome2/sidebar.c:861
+#, fuzzy
+msgid "Simple"
+msgstr "Tiedosto"
+
+#: ../src/gnome2/sidebar.c:862
+#, fuzzy
+msgid "Create a new simple prayer list"
+msgstr "Luo uusi modulilista"
+
+#: ../src/gnome2/sidebar.c:868
+msgid "Subject"
+msgstr ""
+
+#: ../src/gnome2/sidebar.c:875
+msgid "Monthly"
+msgstr ""
+
+#: ../src/gnome2/sidebar.c:876 ../src/gnome2/sidebar.c:883
+#: ../src/gnome2/sidebar.c:890
+#, fuzzy
+msgid "Create a new prayer list"
+msgstr "Luo uusi modulilista"
+
+#: ../src/gnome2/sidebar.c:882
+#, fuzzy
+msgid "Daily Journal"
+msgstr "Päivittäinen hartaus"
+
+#: ../src/gnome2/sidebar.c:889
+msgid "Outlined Topic"
+msgstr ""
+
+#: ../src/gnome2/sidebar.c:932
+msgid "Open selected module in a dialog"
+msgstr "Avaa valitut modulit dialogissa"
+
+#: ../src/gnome2/sidebar.c:1208
 msgid "_Modules"
 msgstr "_Modulit"
 
-#: ../src/gnome2/sidebar.c:1325
+#: ../src/gnome2/sidebar.c:1216
 msgid "_Bookmarks"
 msgstr "_Kirjanmerkit"
 
-#: ../src/gnome2/sidebar.c:1342
+#: ../src/gnome2/sidebar.c:1224 ../src/gnome2/main_menu.c:996
+msgid "_Search"
+msgstr "_Etsi"
+
+#: ../src/gnome2/sidebar.c:1233
 msgid "Verse _List"
 msgstr "Jae _Lista"
 
-#: ../src/gnome2/sidebar.c:1490
+#: ../src/gnome2/sidebar.c:1416 ../src/gnome2/bookmarks_treeview.c:906
 msgid "Bookmarks"
 msgstr "Kirjanmerkit"
 
-#: ../src/gnome2/sidebar.c:1511
+#: ../src/gnome2/sidebar.c:1424
+msgid "Search"
+msgstr "Haku"
+
+#: ../src/gnome2/sidebar.c:1432
 msgid "Verse List"
 msgstr "Jaelista"
 
-#: ../src/gnome2/splash.c:361
-msgid "Powered by the SWORD Project"
-msgstr "SWORD-projektin mahdollistama"
+#: ../src/gnome2/search_dialog.c:60 ../src/main/search_dialog.cc:58
+#: ../src/main/search_sidebar.cc:53
+msgid "Searching the "
+msgstr "Haetaan"
 
-#: ../src/gnome2/splash.c:538
-msgid "Loading settings"
-msgstr "Ladataan asetuksia"
+#: ../src/gnome2/search_dialog.c:61 ../src/main/search_dialog.cc:59
+#: ../src/main/search_sidebar.cc:54
+msgid " Module"
+msgstr "Moduli"
 
-#: ../src/gnome2/splash.c:556
-msgid "Building Interface"
-msgstr "Kasataan näkymää"
+#: ../src/gnome2/search_dialog.c:62 ../src/main/search_dialog.cc:60
+#: ../src/main/search_sidebar.cc:55
+msgid "found in "
+msgstr "löydetty "
 
-#: ../src/gnome2/splash.c:573
-msgid "Starting Sword"
-msgstr "Käynnistetään Sword"
+#: ../src/gnome2/search_dialog.c:715
+msgid "Clear List?"
+msgstr "Tyhjennä lista?"
 
-#: ../src/gnome2/studypad.c:107
-msgid "has been modified. Do you wish to save it?"
-msgstr "on muokattu. Haluatko tallentaa sen?"
+#: ../src/gnome2/search_dialog.c:716
+msgid "Are you sure you want to clear the module list?"
+msgstr "Haluatko varmasti tyhjentää modulilistan?"
 
-#: ../src/gnome2/studypad.c:184
-msgid "not loaded"
-msgstr "ei ole ladattu"
-
-#: ../src/gnome2/toolbar_nav.c:537
-msgid "Move backwards through history"
-msgstr "Liiku taaksepäin historiassa"
-
-#: ../src/gnome2/toolbar_nav.c:558
-msgid "Move foward through history"
-msgstr "Liiku eteenpäin historiassa"
-
-#: ../src/gnome2/toolbar_nav.c:579
-msgid "Select a Book of the Bible"
-msgstr "Valitse Raamatun kirja"
-
-#: ../src/gnome2/toolbar_nav.c:644
-msgid "Change Chapter"
-msgstr "Vaihda Kappaletta"
-
-#: ../src/gnome2/toolbar_nav.c:714
-msgid "Change Verse"
-msgstr "Vaihda jaetta"
-
-#: ../src/gnome2/toolbar_nav.c:782
-msgid "Enter a Verse reference in Book 1:1 format and press Return"
+#: ../src/gnome2/search_dialog.c:899
+msgid "The last module list may not be deleted"
 msgstr ""
 
-#: ../src/gnome2/utilities.c:273
+#: ../src/gnome2/search_dialog.c:916
+msgid "Delete list?"
+msgstr "Poista lista?"
+
+#: ../src/gnome2/search_dialog.c:917
+msgid "Are you sure you want to delete:"
+msgstr "Haluatko varmasti poistaa:"
+
+#: ../src/gnome2/search_sidebar.c:192
+msgid ""
+"This is an inclusive (\"AND\") search:\n"
+"Find matches showing all words."
+msgstr ""
+
+#: ../src/gnome2/search_sidebar.c:209
+msgid "Search Module"
+msgstr "Hae modulia"
+
+#: ../src/gnome2/search_sidebar.c:223
+msgid "Bible"
+msgstr "Raamattu"
+
+#: ../src/gnome2/search_sidebar.c:232 ../ui/prefs.glade.h:35
+msgid "Commentary"
+msgstr "Kommentaari"
+
+#: ../src/gnome2/search_sidebar.c:246
+msgid "Search Type"
+msgstr "Hakutapa"
+
+#: ../src/gnome2/search_sidebar.c:260 ../ui/search-dialog.glade.h:64
+msgid "Multi word"
+msgstr "Monta sanaa"
+
+#: ../src/gnome2/search_sidebar.c:279 ../ui/search-dialog.glade.h:44
+msgid "Exact phrase"
+msgstr "Tarkka fraasi"
+
+#: ../src/gnome2/search_sidebar.c:293
+msgid "Search Options"
+msgstr "Hakuasetukset"
+
+#: ../src/gnome2/search_sidebar.c:321
+msgid "Search Scope"
+msgstr "Haun laajuus"
+
+#: ../src/gnome2/search_sidebar.c:334
+msgid "No scope"
+msgstr "Ei laajuutta"
+
+#: ../src/gnome2/search_sidebar.c:344
+msgid "Use bounds"
+msgstr "Käytä rajoja"
+
+#: ../src/gnome2/search_sidebar.c:353
+msgid "Last search"
+msgstr "Viimeinen haku"
+
+#: ../src/gnome2/search_sidebar.c:368
+msgid "Bounds"
+msgstr "Rajat"
+
+#: ../src/gnome2/search_sidebar.c:382
+msgid "Lower"
+msgstr "Alempi"
+
+#: ../src/gnome2/search_sidebar.c:389
+msgid "Upper"
+msgstr "Ylempi"
+
+#: ../src/gnome2/utilities.c:280
 #, c-format
 msgid "%s not found"
 msgstr "%s ei löydetty"
 
-#. *****   end of file   *****
+#: ../src/gnome2/bookmark_dialog.c:147 ../src/gnome2/bookmarks_menu.c:996
+#: ../src/gnome2/bookmarks_treeview.c:103
+msgid "Enter Folder Name"
+msgstr "Kirjoita kansion nimi"
+
+#: ../src/gnome2/bookmark_dialog.c:149 ../src/gnome2/bookmarks_menu.c:998
+msgid "Folder Name"
+msgstr "Kansion nimi"
+
+#: ../src/gnome2/bookmark_dialog.c:150 ../src/gnome2/bookmarks_menu.c:999
+#: ../src/gnome2/bookmarks_treeview.c:105
+msgid "Folder: "
+msgstr "Kansio: "
+
+#: ../src/gnome2/preferences_dialog.c:1228
+#: ../src/gnome2/preferences_dialog.c:1266
+#: ../src/gnome2/preferences_dialog.c:1304
+#: ../src/gnome2/preferences_dialog.c:1340
+#: ../src/gnome2/preferences_dialog.c:1375
+#: ../src/gnome2/preferences_dialog.c:1409
+#: ../src/gnome2/preferences_dialog.c:1442
+#: ../src/gnome2/preferences_dialog.c:1476
+#: ../src/gnome2/preferences_dialog.c:1509
+#: ../src/gnome2/preferences_dialog.c:1544
+#: ../src/gnome2/preferences_dialog.c:1580
+#: ../src/gnome2/preferences_dialog.c:1616
+#: ../src/gnome2/preferences_dialog.c:1652
+#: ../src/gnome2/preferences_dialog.c:2057
+msgid "-- Select --"
+msgstr ""
+
+#: ../src/gnome2/preferences_dialog.c:1685 ../ui/prefs.glade.h:74
+msgid "Preferences"
+msgstr "Asetukset"
+
+#: ../src/gnome2/preferences_dialog.c:1768
+#, fuzzy
+msgid "Fonts"
+msgstr "Kirjasinlajit"
+
+#: ../src/gnome2/preferences_dialog.c:1771
+#, fuzzy
+msgid "Color"
+msgstr "Väri"
+
+#: ../src/gnome2/preferences_dialog.c:1774
+msgid "Sizes"
+msgstr ""
+
+#: ../src/gnome2/preferences_dialog.c:1778
+msgid "General"
+msgstr "Yleinen"
+
+#: ../src/gnome2/preferences_dialog.c:1781 ../ui/prefs.glade.h:85
+msgid "Tabs and Panes"
+msgstr "Välilehdet ja paneelit"
+
+#: ../src/gnome2/preferences_dialog.c:1788
+#, fuzzy
+msgid "Options"
+msgstr "Seloste"
+
+#: ../src/gnome2/preferences_dialog.c:1795
+msgid "Main"
+msgstr "Yleinen"
+
+#: ../src/gnome2/preferences_dialog.c:1798 ../src/gnome2/parallel_dialog.c:635
+msgid "Parallel"
+msgstr "Rinnan"
+
+#: ../src/gnome2/preferences_dialog.c:1801
+msgid "Special"
+msgstr ""
+
+#: ../src/gnome2/preferences_cell_renderer.c:398
+msgid "Text"
+msgstr "Teksti"
+
+#: ../src/gnome2/preferences_cell_renderer.c:400
+msgid "Text to render"
+msgstr "Käsiteltävä teksti"
+
+#: ../src/gnome2/preferences_cell_renderer.c:406
+msgid "Pixbuf Object"
+msgstr ""
+
+#: ../src/gnome2/preferences_cell_renderer.c:408
+msgid "The pixbuf to render."
+msgstr ""
+
+#: ../src/gnome2/about_xiphos.c:125
+#, fuzzy
+msgid "Copyright 2000-2009 The Xiphos Development Team"
+msgstr "Copyright 2000-2006 Xiphosin kehitystiimi"
+
+#: ../src/gnome2/about_xiphos.c:128
+msgid ""
+"We would like to thank Troy Griffitts and all the other folks who have given "
+"us The SWORD Project."
+msgstr ""
+"Tahdomme kiittää Troy Griffittiä sekä muita The SWORD projektin tekijöitä"
+
+#: ../src/gnome2/studypad.c:101
+msgid "has been modified. Do you wish to save it?"
+msgstr "on muokattu. Haluatko tallentaa sen?"
+
+#: ../src/gnome2/studypad.c:173
+msgid "not loaded"
+msgstr "ei ole ladattu"
+
+#: ../src/gnome2/xiphos.c:87
+msgid "Initiating Xiphos"
+msgstr "Käynnistetään Xiphos"
+
+#: ../src/gnome2/xiphos.c:144 ../src/gnome2/splash.c:633
+msgid "Displaying Xiphos"
+msgstr "Näytetään Xiphos"
+
+#. main_prayer_list_new("2008");
+#: ../src/gnome2/xiphos.c:215
+msgid "done"
+msgstr "valmis"
+
+#: ../src/gnome2/xiphos.c:293
+msgid "Xiphos is shutdown"
+msgstr "Xiphos on suljettu"
+
+#: ../src/gnome2/bookmarks_menu.c:473
+msgid "Folder name: "
+msgstr "Kansion nimi: "
+
+#: ../src/gnome2/bookmarks_menu.c:476
+msgid "Bookmark name: "
+msgstr "Kirjanmerkin nimi"
+
+#: ../src/gnome2/bookmarks_menu.c:479 ../src/gnome2/bookmarks_menu.c:904
+msgid "Verse: "
+msgstr "Jae"
+
+#: ../src/gnome2/bookmarks_menu.c:480 ../src/gnome2/bookmarks_menu.c:905
+msgid "Module: "
+msgstr "Moduli"
+
+#: ../src/gnome2/bookmarks_menu.c:664
+msgid "Restore Bookmark Folder"
+msgstr "Palauta kirjanmerkkikansio"
+
+#: ../src/gnome2/bookmarks_menu.c:733
+msgid "Remove the selected folder"
+msgstr "Poista valittu kansio"
+
+#: ../src/gnome2/bookmarks_menu.c:735
+msgid "(and all its contents)?"
+msgstr "(ja kaikki sen sisältö)?"
+
+#: ../src/gnome2/bookmarks_menu.c:738
+msgid "Remove the selected bookmark"
+msgstr "Poista valitut kirjanmerkit"
+
+#: ../src/gnome2/bookmarks_menu.c:897
+msgid "Add"
+msgstr "Lisää"
+
+#: ../src/gnome2/bookmarks_menu.c:903
+msgid "Label: "
+msgstr "Etiketti"
+
+#: ../src/gnome2/bookmarks_menu.c:1089
+msgid "Remove Folder"
+msgstr "Poista kansio"
+
+#: ../src/gnome2/bookmarks_menu.c:1090
+msgid "Remove folder and save it"
+msgstr "Poista kansio ja tallenna se"
+
+#: ../src/gnome2/bookmarks_menu.c:1096
+msgid "Restore Folder"
+msgstr "Palauta kansio"
+
+#: ../src/gnome2/bookmarks_menu.c:1097
+msgid "Restore saved folder"
+msgstr "Palaute tallennettu kansio"
+
+#: ../src/gnome2/bookmarks_menu.c:1107
+#, fuzzy
+msgid "Open this bookmark in a new tab"
+msgstr "Avaa tämä kirjanmerkki dialogissa"
+
+#. 1
+#: ../src/gnome2/bookmarks_menu.c:1112
+msgid "Open in a dialog"
+msgstr "Avaa dialogissa"
+
+#: ../src/gnome2/bookmarks_menu.c:1113
+msgid "Open this bookmark in a dialog"
+msgstr "Avaa tämä kirjanmerkki dialogissa"
+
+#. 2
+#: ../src/gnome2/bookmarks_menu.c:1118 ../ui/bookmarks.glade.h:11
+msgid "New Folder"
+msgstr "Uusi kansio"
+
+#: ../src/gnome2/bookmarks_menu.c:1119
+msgid "Add new folder to selected folder"
+msgstr "Lisää uusi kansio valittuun kansioon"
+
+#. 3
+#: ../src/gnome2/bookmarks_menu.c:1124
+msgid "Insert Bookmark"
+msgstr "Lisää kirjanmerkki"
+
+#: ../src/gnome2/bookmarks_menu.c:1125
+msgid "Insert new bookmark here"
+msgstr "Lisää uusi kirjanmerkki tähän"
+
+#. 4
+#: ../src/gnome2/bookmarks_menu.c:1130
+msgid "_Edit Item"
+msgstr "_Muokkaa jaksoa"
+
+#: ../src/gnome2/bookmarks_menu.c:1131
+msgid "Edit bookmark item"
+msgstr "Muokkaa kirjanmerkkijaksoa"
+
+#. 5
+#: ../src/gnome2/bookmarks_menu.c:1136
+msgid "Delete Item"
+msgstr "Poista Jakso"
+
+#: ../src/gnome2/bookmarks_menu.c:1137
+msgid "Delete item"
+msgstr "Poista jakso"
+
+#. 6
+#. 7
+#: ../src/gnome2/bookmarks_menu.c:1143
+msgid "Expand All"
+msgstr "Laajenna kaikki"
+
+#: ../src/gnome2/bookmarks_menu.c:1144
+msgid "Expand all Bookmarks groups"
+msgstr "Laajenna kaikki kirjanmerkkiryhmät"
+
+#. 8
+#: ../src/gnome2/bookmarks_menu.c:1149
+msgid "Collapse All"
+msgstr "Kutista kaikki"
+
+#: ../src/gnome2/bookmarks_menu.c:1150
+msgid "Collapse all Bookmarks groups"
+msgstr "Kutista kaikki kirjanmerkkiryhmät"
+
+#. 9
+#. 10
+#: ../src/gnome2/bookmarks_menu.c:1156
+msgid "Allow Reordering"
+msgstr "Salli uudelleenjärjestys"
+
+#: ../src/gnome2/bookmarks_menu.c:1158
+msgid "Allow items to be moved from one folder to another"
+msgstr "Salli jaksojen siirtäminen kansiosta toiseen"
+
+#. 11
+#. 12
+#: ../src/gnome2/bookmarks_menu.c:1164
+msgid "Import Bibletime Bookmarks"
+msgstr "Tuo Bibletime kirjanmerkit"
+
+#: ../src/gnome2/bookmarks_menu.c:1165
+msgid "Load Bookmarks from Bibletime"
+msgstr "Lataa kirjanmerkit Bibletime:stä"
+
+#. 13
+#: ../src/gnome2/bookmarks_menu.c:1170
+msgid "Remove - Restore"
+msgstr "Poista - Palauta"
+
+#: ../src/gnome2/treekey-editor.c:125 ../src/gnome2/treekey-editor.c:184
+#: ../src/gnome2/treekey-editor.c:270
+msgid "Prayer List/Journal Item"
+msgstr ""
+
+#: ../src/gnome2/treekey-editor.c:126 ../src/gnome2/treekey-editor.c:185
+#: ../src/gnome2/treekey-editor.c:271
+#, fuzzy
+msgid "New name"
+msgstr "Uusi tiedosto"
+
+#: ../src/gnome2/treekey-editor.c:241
+#, fuzzy
+msgid "Remove the selected item"
+msgstr "Poista valittu kansio"
+
+#: ../src/gnome2/treekey-editor.c:299
+msgid "Add Child"
+msgstr ""
+
+#: ../src/gnome2/treekey-editor.c:300 ../src/gnome2/treekey-editor.c:306
+msgid "Add an item"
+msgstr ""
+
+#: ../src/gnome2/treekey-editor.c:305
+msgid "Add Sibling"
+msgstr ""
+
+#: ../src/gnome2/treekey-editor.c:312
+#, fuzzy
+msgid "Remove this item"
+msgstr "Poista - Palauta"
+
+#: ../src/gnome2/treekey-editor.c:318
+#, fuzzy
+msgid "Edit this item"
+msgstr "Tulosta tämä muistiinpano"
+
+#: ../src/gnome2/splash.c:363
+msgid "Powered by the SWORD Project"
+msgstr "SWORD-projektin mahdollistama"
+
+#: ../src/gnome2/splash.c:564
+#, fuzzy
+msgid "Initiating Gecko"
+msgstr "Käynnistetään Xiphos"
+
+#: ../src/gnome2/splash.c:581
+msgid "Loading settings"
+msgstr "Ladataan asetuksia"
+
+#: ../src/gnome2/splash.c:599
+msgid "Building Interface"
+msgstr "Kasataan näkymää"
+
+#: ../src/gnome2/splash.c:616
+msgid "Starting Sword"
+msgstr "Käynnistetään Sword"
+
+#: ../src/gnome2/main_menu.c:966
+msgid "Open Study_Pad"
+msgstr "Avaa Opiskelumuistio"
+
+#: ../src/gnome2/main_menu.c:967
+msgid "Open the StudyPad editor"
+msgstr "Avaa Opiskelumuistio muokkain"
+
+#: ../src/gnome2/main_menu.c:972
+msgid "_Open Session"
+msgstr "_Avaa istunto"
+
+#: ../src/gnome2/main_menu.c:973
+msgid "Open a saved session"
+msgstr "Avaa tallennettu istunto"
+
+#: ../src/gnome2/main_menu.c:977
+msgid "_Save Session"
+msgstr "_Tallenna istunto"
+
+#: ../src/gnome2/main_menu.c:978
+msgid "Save the current session to a file"
+msgstr "Tallenna nykyinen istunto tiedostoon"
+
+#: ../src/gnome2/main_menu.c:989
+msgid "_Copy"
+msgstr "_Kopio"
+
+#: ../src/gnome2/main_menu.c:990
+msgid "Copy highlighted text from main window"
+msgstr "Kopio korostettu teksti pääikkunasta"
+
+#: ../src/gnome2/main_menu.c:997
+msgid "Search using the shortcut bar"
+msgstr "Etsi käyttäen pikakuvakepalkkia"
+
+#: ../src/gnome2/main_menu.c:1002
+msgid "_Advanced Search"
+msgstr "_Edistynyt haku"
+
+#: ../src/gnome2/main_menu.c:1003
+msgid "Advanced search using the search dialog"
+msgstr "Edistynyt haku käyttäen hakudialogia"
+
+#: ../src/gnome2/main_menu.c:1009
+#, fuzzy
+msgid "_Preferences"
+msgstr "Asetukset"
+
+#: ../src/gnome2/main_menu.c:1010
+#, fuzzy
+msgid "Set user preferences"
+msgstr "Kirjoitusten ristiviittaukset"
+
+#: ../src/gnome2/main_menu.c:1015
+msgid "_Module Manager"
+msgstr "_Modulimanageri"
+
+#: ../src/gnome2/main_menu.c:1016
+msgid "Use module manager to install and remove Sword modules"
+msgstr "Käytä modulimanageria Sword modulien asennukseen tai poistoon"
+
+#: ../src/gnome2/main_menu.c:1025
+msgid "C_lear"
+msgstr "T_yhjennä"
+
+#: ../src/gnome2/main_menu.c:1026
+msgid "Clear history list"
+msgstr "Tyhjennä historialista"
+
+#. 0
+#: ../src/gnome2/main_menu.c:1036
+msgid "_Daily Devotion"
+msgstr "_Päivittäinen hartaus"
+
+#: ../src/gnome2/main_menu.c:1037
+msgid "Show the Daily Devotion for today"
+msgstr "Näytä päivittäinen hartaus täksi päiväksi"
+
+#. 1
+#. 2
+#: ../src/gnome2/main_menu.c:1043
+msgid "_Bible Texts"
+msgstr "_Raamatun tekstit"
+
+#: ../src/gnome2/main_menu.c:1044
+msgid "Show or hide Bible texts window"
+msgstr "Näytä tai piilota Raamatuntekstien ikkuna"
+
+#. 3
+#: ../src/gnome2/main_menu.c:1049
+#, fuzzy
+msgid "_Preview"
+msgstr "E_sikatselu"
+
+#: ../src/gnome2/main_menu.c:1050
+msgid "Show or hide Preview window"
+msgstr "Näytä tai piilota esikatseluikkuna"
+
+#. 4
+#: ../src/gnome2/main_menu.c:1055
+msgid "_Commentary"
+msgstr "_Kommentaari"
+
+#: ../src/gnome2/main_menu.c:1056
+msgid "Show or hide commentaries"
+msgstr "Näytä tai piilota kommentaarit"
+
+#. 5
+#: ../src/gnome2/main_menu.c:1061
+msgid "Dictionary/_Lexicon"
+msgstr "Sanakirja/_Sanasto"
+
+#: ../src/gnome2/main_menu.c:1062
+msgid "Show or hide - dictionaries and lexicons"
+msgstr "Näytä tai piilota - sanakirjat ja sanastot"
+
+#. 6
+#. 7
+#: ../src/gnome2/main_menu.c:1068
+#, fuzzy
+msgid "_Verse Per Line"
+msgstr "Jaelista"
+
+#. 8
+#: ../src/gnome2/main_menu.c:1074
+#, fuzzy
+msgid "L_ink Tabs"
+msgstr "_Kiinnitä välilehdet"
+
+#. 9
+#: ../src/gnome2/main_menu.c:1080
+#, fuzzy
+msgid "_Read Aloud"
+msgstr "L_ue ääneen"
+
+#. 10
+#: ../src/gnome2/main_menu.c:1086
+msgid "Show Verse _Numbers"
+msgstr "Näytä jakeen _Numerot"
+
+#. 11
+#: ../src/gnome2/main_menu.c:1092
+msgid "_Highlight Current Verse"
+msgstr "_Korosta nykyinen jae"
+
+#. 12
+#: ../src/gnome2/main_menu.c:1099
+msgid "D_ouble-Space Text"
+msgstr "T_uplavälin teksti"
+
+#. 13
+#. 14
+#: ../src/gnome2/main_menu.c:1107
+msgid "_Attach/Detach Sidebar"
+msgstr "_Liitä/Irrota sivupalkki"
+
+#. 15
+#: ../src/gnome2/main_menu.c:1113
+msgid "_Show/Hide Sidebar"
+msgstr "_Näytä/Piilota sivupalkki"
+
+#. 16
+#: ../src/gnome2/main_menu.c:1121
+#, fuzzy
+msgid "Show Parallel View in a tab"
+msgstr "Rinnakkaisnäkymä"
+
+#. 17
+#: ../src/gnome2/main_menu.c:1127
+msgid "Show Previewer in the Sidebar"
+msgstr ""
+
+#: ../src/gnome2/main_menu.c:1138
+msgid "_Contents"
+msgstr "_Sisältö"
+
+#: ../src/gnome2/main_menu.c:1139
+msgid "Open the Xiphos manual"
+msgstr "Avaa Xiphos manuaali"
+
+#: ../src/gnome2/main_menu.c:1144
+msgid "_Mailing List"
+msgstr ""
+
+#: ../src/gnome2/main_menu.c:1145
+msgid "Sign up for the users' mailing list"
+msgstr ""
+
+#: ../src/gnome2/main_menu.c:1150
+msgid "_Live Chat"
+msgstr ""
+
+#: ../src/gnome2/main_menu.c:1151
+msgid "Chat with other users and developers"
+msgstr ""
+
+#: ../src/gnome2/main_menu.c:1156
+msgid "_Report Bug"
+msgstr ""
+
+#: ../src/gnome2/main_menu.c:1157
+msgid "Report bug to SourceForge"
+msgstr ""
+
+#: ../src/gnome2/main_menu.c:1163
+#, fuzzy
+msgid "About _Translation"
+msgstr "Tietoa tästä ohjelmasta"
+
+#: ../src/gnome2/main_menu.c:1164
+msgid "Translating Xiphos to other languages"
+msgstr ""
+
+#: ../src/gnome2/main_menu.c:1170
+#, fuzzy
+msgid "_About the SWORD Project"
+msgstr "Tietoa SWORD-projektista"
+
+#: ../src/gnome2/main_menu.c:1171
+msgid "More information about the SWORD Project"
+msgstr "Enemmän tietoa SWORD-projektista"
+
+#: ../src/gnome2/main_menu.c:1176
+#, fuzzy
+msgid "About _Xiphos"
+msgstr "Tietoa _Xiphosistä ..."
+
+#: ../src/gnome2/main_menu.c:1177
+msgid "About this application"
+msgstr "Tietoa tästä ohjelmasta"
+
+#: ../src/gnome2/main_menu.c:1192
+msgid "_Edit"
+msgstr "_Muokkaa"
+
+#: ../src/gnome2/main_menu.c:1204
+msgid "Hi_story"
+msgstr "Hi_storia"
+
+#: ../src/gnome2/main_menu.c:1210
+msgid "_Help"
+msgstr "_Apu"
+
+#: ../src/gnome2/export_dialog.c:228 ../ui/export-dialog.glade.h:19
+msgid "Please check copyright before exporting!"
+msgstr ""
+
+#: ../src/gnome2/about_trans.c:84
+msgid ""
+"Do you like using Xiphos to study the Bible? Would you like to see its "
+"display using your native language? You could translate Xiphos! \n"
+"\n"
+"We are always looking for contributions of new translations of Xiphos into "
+"other languages. If you are able to translate for us, please see the link "
+"below, contact us, and get involved with our efforts."
+msgstr ""
+
+#: ../src/gnome2/about_trans.c:98
+#, fuzzy
+msgid "About Xiphos Translation"
+msgstr "Tietoa tästä ohjelmasta"
+
+#: ../src/gnome2/about_trans.c:139
+msgid "See TRANSLATION-HOWTO in Xiphos source"
+msgstr ""
+
+#: ../src/gnome2/about_trans.c:146
+msgid "Xiphos development"
+msgstr ""
+
+#: ../src/main/sword.cc:539
+msgid ""
+"Xiphos's file for language\n"
+"abbreviations is missing."
+msgstr ""
+
+#: ../src/main/sword.cc:546
+msgid ""
+"Xiphos's language abbreviation\n"
+"file cannot be opened."
+msgstr ""
+
+#: ../src/main/sword.cc:557
+msgid ""
+"Xiphos cannot allocate space\n"
+"for language abbreviations."
+msgstr ""
+
+#: ../src/main/sword.cc:564
+msgid ""
+"Xiphos cannot read the\n"
+"language abbreviation file."
+msgstr ""
+
+#: ../src/main/sword.cc:638
+msgid "Initiating SWORD"
+msgstr "käynnistetään SWORD"
+
+#: ../src/main/sword.cc:639
+msgid "path to sword"
+msgstr "polku swordiin"
+
+#: ../src/main/sword.cc:640
+msgid "System locale is"
+msgstr "Järjestelmän kieli on"
+
+#: ../src/main/sword.cc:641
+msgid "SWORD locale is"
+msgstr "SWORDin kieli on"
+
+#: ../src/main/sword.cc:643
+msgid "Checking for SWORD Modules"
+msgstr "Etsitään SWORD moduleja"
+
+#: ../src/main/sword.cc:676
+msgid "SWORD is shutdown"
+msgstr "SWORD on sammutettu"
+
+#: ../src/main/sword.cc:1412
+msgid "Daily devotional was requested, but there are none installed."
+msgstr ""
+
+#: ../src/main/search_dialog.cc:308
+msgid "Delete Range?"
+msgstr "Poista alue?"
+
+#: ../src/main/search_dialog.cc:309
+msgid "Are you sure you want to delete this range?"
+msgstr "Oletko varma, että haluat poistaa tämän alueen?"
+
+#: ../src/main/search_dialog.cc:525 ../src/main/search_dialog.cc:999
+#: ../src/main/search_dialog.cc:1002 ../src/main/search_dialog.cc:1024
+#: ../src/main/search_dialog.cc:1027
+#, fuzzy
+msgid "Search: "
+msgstr "Haku"
+
+#: ../src/main/search_dialog.cc:570
+msgid "Remove Module?"
+msgstr "Poista moduli?"
+
+#: ../src/main/search_dialog.cc:571
+msgid "Are you sure you want to remove the selected module?"
+msgstr "Oletko varma, että haluat poistaa valitun modulin?"
+
+#: ../src/main/search_dialog.cc:1441
+#, c-format
+msgid ""
+"%s:\n"
+"No such module is installed.\n"
+"%s"
+msgstr ""
+
+#: ../src/main/search_dialog.cc:1443
+#, fuzzy
+msgid "Please adjust the module list."
+msgstr "Tallenna modulilista"
+
+#: ../src/main/search_dialog.cc:1505
+msgid "Search finished"
+msgstr "Haku päättynyt"
+
+#: ../src/main/main.c:92
+msgid "Xiphos does not understand more than one argument."
+msgstr ""
+
+#: ../src/main/prayerlists.cc:70
+msgid "January"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:71
+msgid "February"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:72
+#, fuzzy
+msgid "March"
+msgstr "Haku"
+
+#: ../src/main/prayerlists.cc:73
+msgid "April"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:74
+msgid "May"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:75
+msgid "June"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:76
+msgid "July"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:77
+msgid "August"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:78
+msgid "September"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:79
+msgid "October"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:80
+#, fuzzy
+msgid "November"
+msgstr "Kansi"
+
+#: ../src/main/prayerlists.cc:81
+msgid "December"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:120 ../src/main/sword_treekey.cc:334
+msgid "Growth"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:121 ../src/main/sword_treekey.cc:335
+msgid "<b>For Growth</b><br>"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:122 ../src/main/prayerlists.cc:376
+#: ../src/main/sword_treekey.cc:336
+#, fuzzy
+msgid "Salvation"
+msgstr "Seloste"
+
+#: ../src/main/prayerlists.cc:123 ../src/main/sword_treekey.cc:337
+msgid "<b>For Salvation</b><br>"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:124 ../src/main/prayerlists.cc:380
+#: ../src/main/sword_treekey.cc:338
+msgid "Health"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:125 ../src/main/sword_treekey.cc:339
+msgid "<b>For Health</b><br>"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:126
+msgid "Misc"
+msgstr "Sekalaiset"
+
+#: ../src/main/prayerlists.cc:127 ../src/main/sword_treekey.cc:341
+#, fuzzy
+msgid "<b>Miscellaneous</b><br>"
+msgstr "<b>Sekalaisia fontteja</b>"
+
+#: ../src/main/prayerlists.cc:135
+#, fuzzy
+msgid "Point x"
+msgstr "Tulosta"
+
+#: ../src/main/prayerlists.cc:136
+msgid "<b>(x)</b><br>"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:137
+#, fuzzy
+msgid "Point y"
+msgstr "Tulosta"
+
+#: ../src/main/prayerlists.cc:138
+msgid "<b>(y)</b><br>"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:139
+#, fuzzy
+msgid "Point z"
+msgstr "Tulosta"
+
+#: ../src/main/prayerlists.cc:140
+msgid "<b>(z)</b><br>"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:148
+msgid "Minor Topic 1"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:149
+#, fuzzy
+msgid "<b>Subtopic 1</b><br>"
+msgstr "<b>Laajuus</b>"
+
+#: ../src/main/prayerlists.cc:151
+msgid "Minor Topic 2"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:152
+#, fuzzy
+msgid "<b>Subtopic 2</b><br>"
+msgstr "<b>Laajuus</b>"
+
+#: ../src/main/prayerlists.cc:154
+msgid "Minor Topic 3"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:155
+#, fuzzy
+msgid "<b>Subtopic 3</b><br>"
+msgstr "<b>Laajuus</b>"
+
+#: ../src/main/prayerlists.cc:157
+msgid "Minor Topic 4"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:158
+#, fuzzy
+msgid "<b>Subtopic 4</b><br>"
+msgstr "<b>Laajuus</b>"
+
+#: ../src/main/prayerlists.cc:237
+msgid "Name for new prayer list or journal"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:239 ../src/main/prayerlists.cc:335
+#: ../src/main/sword_treekey.cc:376
+msgid "MyPrayerList"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:268
+msgid "Xiphos finds that prayer list already."
+msgstr ""
+
+#: ../src/main/prayerlists.cc:281
+#, c-format
+msgid ""
+"Xiphos cannot create module's path:\n"
+"%s"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:321
+msgid "A basic prayer list. \\par\\par Module created by Xiphos."
+msgstr ""
+
+#: ../src/main/prayerlists.cc:336
+msgid ""
+"<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</"
+"b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:362
+msgid "A subject-based prayer list. \\par\\par Module created by Xiphos."
+msgstr ""
+
+#: ../src/main/prayerlists.cc:377
+msgid "Bob<br>Sam<br>Sue<br>John<br>"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:378
+msgid "Spiritual Growth"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:379
+msgid "Mike<br>Steve<br>"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:381
+msgid "Sue<br>John<br>"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:407
+msgid "A monthly prayer list. \\par\\par Module created by Xiphos."
+msgstr ""
+
+#: ../src/main/prayerlists.cc:458
+msgid "A daily journal. \\par\\par Module created by Xiphos."
+msgstr ""
+
+#: ../src/main/prayerlists.cc:522
+msgid "An outlined topic (e.g. sermon). \\par\\par Module created by Xiphos."
+msgstr ""
+
+#: ../src/main/prayerlists.cc:536
+msgid "Major Topic A"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:537
+msgid "<b>Major Topic A</b><br>"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:539
+msgid "Major Topic B"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:540
+msgid "<b>Major Topic B</b><br>"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:542
+msgid "Major Topic C"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:543
+msgid "<b>Major Topic C</b><br>"
+msgstr ""
+
+#: ../src/main/xml.c:80 ../src/main/xml.c:465
+#, c-format
+msgid "Document not created successfully. \n"
+msgstr ""
+
+#: ../src/main/xml.c:89
+#, fuzzy
+msgid "Personal"
+msgstr "Henkilökohtaiset muistiinpanot"
+
+#: ../src/main/xml.c:90
+msgid "What must I do to be saved?"
+msgstr ""
+
+#: ../src/main/xml.c:92 ../src/main/xml.c:93
+msgid "Acts 16:31"
+msgstr ""
+
+#: ../src/main/xml.c:97 ../src/main/xml.c:98
+msgid "Eph 2:8"
+msgstr ""
+
+#: ../src/main/xml.c:102 ../src/main/xml.c:103
+msgid "Romans 1:16"
+msgstr ""
+
+#: ../src/main/xml.c:106
+msgid "What is the Gospel?"
+msgstr ""
+
+#: ../src/main/xml.c:108
+msgid "1 Cor 15:1-4"
+msgstr ""
+
+#: ../src/main/xml.c:109
+msgid "1 Cor 15:1"
+msgstr ""
+
+#: ../src/main/xml.c:413 ../src/main/xml.c:1078
+#, c-format
+msgid "Document not parsed successfully. \n"
+msgstr ""
+
+#: ../src/main/xml.c:419 ../src/main/xml.c:681 ../src/main/xml.c:959
+#: ../src/main/xml.c:1138
+#, fuzzy, c-format
+msgid "empty document \n"
+msgstr "Uusi tiedosto"
+
+#: ../src/main/xml.c:425
+#, c-format
+msgid "wrong type, root node != SwordBookmarks\n"
+msgstr ""
+
+#: ../src/main/xml.c:479
+msgid "Old Testament"
+msgstr ""
+
+#: ../src/main/xml.c:481
+#, fuzzy
+msgid "Gen - Mal"
+msgstr "Yleinen"
+
+#: ../src/main/xml.c:487
+#, fuzzy
+msgid "New Testament"
+msgstr "Uusi tiedosto"
+
+#: ../src/main/xml.c:489
+msgid "Mat - Rev"
+msgstr ""
+
+#: ../src/main/xml.c:497
+#, fuzzy
+msgid "Sample Module List"
+msgstr "Modulilista"
+
+#: ../src/main/xml.c:687 ../src/main/xml.c:965
+#, c-format
+msgid "wrong type, root node != %s\n"
+msgstr ""
+
+#: ../src/main/sword_treekey.cc:374
+msgid "Name for new prayer list"
+msgstr ""
+
+#: ../src/main/sword_treekey.cc:395
+#, c-format
+msgid "can not create path\n"
+msgstr ""
+
+#: ../src/main/sword_treekey.cc:398
+#, c-format
+msgid "Prayer list already exist\n"
+msgstr ""
+
+#: ../src/main/sword_treekey.cc:419
+msgid "\\par\\par My prayer list \\par\\par Module created in Xiphos"
+msgstr ""
+
+#: ../src/main/display.cc:281
+msgid ""
+"An image file's size could not be determined.\n"
+"Is ImageMagick's 'identify' not installed?\n"
+"(Or possibly the image is of type other than bmp/gif/jpg/png.)\n"
+"Xiphos cannot resize images to fit window."
+msgstr ""
+
+#: ../src/main/display.cc:993 ../src/main/display.cc:1055
+#: ../src/main/display.cc:1144 ../src/main/display.cc:1152
+#: ../ui/export-dialog.glade.h:6
+msgid "Chapter"
+msgstr "Kappale"
+
+#: ../src/main/previewer.cc:103 ../src/main/module_dialogs.cc:232
+#: ../ui/prefs.glade.h:75
+msgid "Previewer"
+msgstr "Esikatselija"
+
+#: ../src/main/previewer.cc:177 ../src/main/module_dialogs.cc:299
+#: ../src/main/module_dialogs.cc:426
+#, fuzzy
+msgid "Footnote"
+msgstr "Alaviite"
+
+#: ../src/main/previewer.cc:183 ../src/main/module_dialogs.cc:305
+#: ../src/main/module_dialogs.cc:431
+msgid "Cross Reference"
+msgstr "Ristiinviittaus"
+
+#: ../src/main/previewer.cc:189 ../src/main/previewer.cc:208
+#: ../src/main/module_dialogs.cc:311 ../src/main/module_dialogs.cc:325
+#: ../src/main/module_dialogs.cc:436 ../src/main/module_dialogs.cc:448
+msgid "Strongs"
+msgstr "Vahvennokset"
+
+#: ../src/main/previewer.cc:195 ../src/main/previewer.cc:221
+#: ../src/main/module_dialogs.cc:317 ../src/main/module_dialogs.cc:336
+#: ../src/main/module_dialogs.cc:441 ../src/main/module_dialogs.cc:458
+msgid "Morphology"
+msgstr "Morfologia"
+
+#: ../src/main/module_dialogs.cc:1268 ../src/main/url.cc:723
+msgid "Back to "
+msgstr "Takaisin"
+
+#: ../src/main/search_sidebar.cc:101
+msgid "matches"
+msgstr "osumat"
+
+#: ../src/main/lists.cc:156
+msgid "Number of Text modules"
+msgstr "Tekstimodulien lukumäärä"
+
+#: ../src/main/lists.cc:157
+msgid "Number of Commentary modules"
+msgstr "Kommentaarimodulien lukumäärä"
+
+#: ../src/main/lists.cc:158
+msgid "Number of Dict/lex modules"
+msgstr "Sanakirjamodulien lukumäärä"
+
+#: ../src/main/lists.cc:159
+msgid "Number of Book modules"
+msgstr "Kirjamodulien lukumäärä"
+
+#: ../src/main/lists.cc:160
+msgid "Number of Percomm modules"
+msgstr "Kommentaarimodulien lukumäärä"
+
+#: ../src/main/lists.cc:161
+msgid "Number of Devotion modules"
+msgstr "Hartausmodulien lukumäärä"
+
+#: ../src/main/lists.cc:163
+#, fuzzy
+msgid "Number of Prayer modules"
+msgstr "Kommentaarimodulien lukumäärä"
+
+#: ../src/main/parallel_view.cc:731 ../src/main/parallel_view.cc:983
+#, fuzzy
+msgid "view context"
+msgstr "Raamatun teksti"
+
+#: ../src/main/url.cc:100
+#, fuzzy
+msgid "URL not found:"
+msgstr "%s ei löydetty"
+
+#: ../src/main/url.cc:239
+#, c-format
+msgid "Xiphos could not execute %s"
+msgstr ""
+
+#: ../src/main/url.cc:247
+msgid "Viewer error:\n"
+msgstr ""
+
+#: ../src/main/url.cc:322
+#, c-format
+msgid "Show %s in main window"
+msgstr "Näytä %s pääikkunassa"
+
+#: ../src/main/tab_history.c:66 ../src/main/tab_history.c:110
+#: ../src/main/tab_history.c:125
+msgid "H_istory/<Separator>"
+msgstr "H_istoria/<Separator>"
+
+#. tab->history_items + 1);
+#: ../src/main/tab_history.c:68 ../src/main/tab_history.c:112
+msgid "H_istory/C_lear"
+msgstr "H_istoria/P_uhdista"
+
+#: ../src/main/tab_history.c:239
+#, fuzzy
+msgid "Clear History"
+msgstr "Tyhjennä historialista"
+
+#: ../src/main/sidebar.cc:377
+msgid "verse"
+msgstr "jae"
+
+#: ../src/main/sidebar.cc:439
+msgid "chapter"
+msgstr "kappale"
+
+#: ../src/main/settings.c:51
+msgid ""
+"Welcome to Xiphos.\n"
+"\n"
+"There are no Bible modules installed. In order to initialize, Xiphos needs "
+"you to install at least one Bible.\n"
+"\n"
+"With your permission, Xiphos will invoke the Module Manager so that you may "
+"install from Crosswire:\n"
+"1. Configure remote install.\n"
+"2. Connect.\n"
+"3. Select a Bible text of your language preference.\n"
+"4. Click `install'.\n"
+"Close the Module Manager when you are done.\n"
+"\n"
+"Warning: If you live in a persecuted country, use with care.\n"
+"\n"
+"May Xiphos invoke the Module Manager so that you may install a Bible?"
+msgstr ""
+
+#: ../src/main/settings.c:107
+msgid "$HOME is not set!"
+msgstr ""
+
+#: ../src/main/settings.c:122
+msgid "Xiphos has renamed .xiphos-2.0 to .xiphos"
+msgstr ""
+
+#: ../src/main/settings.c:125
+#, c-format
+msgid ""
+"Xiphos can not rename  .xiphos-2.0 to .xiphos:\n"
+"%s\n"
+"\n"
+"Xiphos cannot continue."
+msgstr ""
+
+#: ../src/main/settings.c:133
+#, c-format
+msgid ""
+"Xiphos can not create  .xiphos:\n"
+"%s\n"
+"\n"
+"Xiphos cannot continue."
+msgstr ""
+
+#: ../src/main/settings.c:153
+msgid "can not create  .sword"
+msgstr ""
+
+#: ../src/main/settings.c:161
+msgid "can not create  .sword/mods.d"
+msgstr ""
+
+#: ../src/main/settings.c:169
+msgid "can not create  .sword/modules"
+msgstr ""
+
+#. must be first run
+#: ../src/main/settings.c:190
+msgid ""
+"\n"
+"First Run: need to create settings!\n"
+msgstr ""
+
+#: ../src/main/settings.c:201
+msgid ""
+"There are still no Bibles installed.\n"
+"Evidently, you declined to install any.\n"
+"\n"
+"Without any Bible modules to display,\n"
+"Xiphos cannot proceed,\n"
+"and will now exit."
+msgstr ""
+
+#: ../src/main/settings.c:205
+msgid "Bible module installation complete."
+msgstr ""
+
+#: ../src/main/settings.c:208
+msgid ""
+"Without any Bible modules to display,\n"
+"Xiphos cannot proceed,\n"
+"and will now exit."
+msgstr ""
+
+#. *****************************************************************************
+#. * Name
+#. *    gconf_setup
+#. *
+#. * Synopsis
+#. *   #include "main/settings.h"
+#. *
+#. *   void gconf_setup()
+#. *
+#. * Description
+#. *   verifies and initializes the GConf subsystem, so that "sword://" and
+#. *   similar can be handled by url-comprehending programs such as browsers.
+#. *   dialogs for permission/success/failure => conditional on debug build.
+#. *
+#. * Return value
+#. *   void
+#.
+#: ../src/main/settings.c:825
+msgid ""
+"URL references using \"sword://\" (similar to web page\n"
+"references) can be used by programs to look up\n"
+"scripture references. Your system currently has no\n"
+"program set to handle these references.\n"
+"\n"
+"Would you like Xiphos to set itself as the\n"
+"program to handle these references?"
+msgstr ""
+
+#: ../src/main/settings.c:827
+msgid ""
+"Xiphos has successfully set itself\n"
+"as the handler of sword:// and bible:// URLs.\n"
+"\n"
+"You may wish to run the program \"gconf-editor\"\n"
+"to examine keys under /desktop/gnome/url-handlers,\n"
+"if you need to change these."
+msgstr ""
+
+#: ../src/main/settings.c:880
+#, c-format
+msgid ""
+"Xiphos failed to complete handler init for key #%d:\n"
+"%s"
+msgstr ""
+
 #: ../ui/bookmarks.glade.h:1
 msgid "Add Bookmark"
 msgstr "Lisää kirjanmerkki"
 
 #: ../ui/bookmarks.glade.h:2
+#, fuzzy
+msgid "Bookmark Dialog"
+msgstr "Kirjanmerkki"
+
+#: ../ui/bookmarks.glade.h:3
+#, fuzzy
+msgid "Bookmark Folder Treeview"
+msgstr "Palauta kirjanmerkkikansio"
+
+#: ../ui/bookmarks.glade.h:4
+#, fuzzy
+msgid "Cancel Bookmark"
+msgstr "Lisää kirjanmerkki"
+
+#: ../ui/bookmarks.glade.h:5
 msgid "Create new folder"
 msgstr "Luo hakemisto"
 
-#: ../ui/bookmarks.glade.h:3
+#: ../ui/bookmarks.glade.h:6
+#, fuzzy
+msgid "Label Entry"
+msgstr "Etiketti"
+
+#: ../ui/bookmarks.glade.h:7
 msgid "Label:"
 msgstr "Etiketti"
 
-#: ../ui/bookmarks.glade.h:4
+#: ../ui/bookmarks.glade.h:8
+#, fuzzy
+msgid "Module Entry"
+msgstr "Moduli"
+
+#: ../ui/bookmarks.glade.h:9
 msgid "Module:"
 msgstr "Moduli"
 
-#: ../ui/bookmarks.glade.h:5
+#: ../ui/bookmarks.glade.h:10
 msgid "New ..."
 msgstr "Uusi ..."
 
-#: ../ui/bookmarks.glade.h:6
+#: ../ui/bookmarks.glade.h:12
+#, fuzzy
+msgid "Verse Entry"
+msgstr "_Jakeen tyyli"
+
+#: ../ui/bookmarks.glade.h:13
 msgid "Verse:"
 msgstr "Jae:"
 
-#: ../ui/prefs.glade.h:1
-msgid ""
-"-2\n"
-"-1\n"
-"+0\n"
-"+1\n"
-"+2\n"
-"+3\n"
-"+4\n"
-"+5"
+#: ../ui/editor_note.xml.h:1
+msgid "Delete the current note"
+msgstr "Poista nykyinen muistiinpano"
+
+#: ../ui/editor_note.xml.h:2 ../ui/editor_studypad.xml.h:4
+#: ../ui/editor.xml.h:2
+msgid "E_xit"
+msgstr "P_oistu"
+
+#: ../ui/editor_note.xml.h:3 ../ui/editor_studypad.xml.h:5
+#: ../ui/editor.xml.h:3
+msgid "Exit"
+msgstr "Poistu"
+
+#: ../ui/editor_note.xml.h:4 ../ui/editor_studypad.xml.h:6
+#: ../ui/editor.xml.h:4
+msgid "Exit the program"
+msgstr "Sulje ohjelma"
+
+#: ../ui/editor_note.xml.h:5 ../ui/editor_studypad.xml.h:7
+#: ../ui/editor.xml.h:5
+msgid "For_mat"
+msgstr "Muo_toilu"
+
+#: ../ui/editor_note.xml.h:6 ../ui/editor_studypad.xml.h:8
+#: ../ui/editor.xml.h:6
+msgid "HTML Format switch"
+msgstr "HTML Muotoiluvipu"
+
+#: ../ui/editor_note.xml.h:7 ../ui/editor_studypad.xml.h:9
+#: ../ui/editor.xml.h:7
+msgid "HTML mode"
+msgstr "HTML tila"
+
+#: ../ui/editor_note.xml.h:8
+msgid "Preview the note to be printed"
+msgstr "Esikatsele tulostettavaa muistiinpanoa"
+
+#: ../ui/editor_note.xml.h:10
+msgid "Print this note"
+msgstr "Tulosta tämä muistiinpano"
+
+#: ../ui/editor_note.xml.h:11 ../ui/editor_studypad.xml.h:16
+#: ../ui/editor.xml.h:11
+msgid "Save"
+msgstr "Tallenna"
+
+#: ../ui/editor_note.xml.h:12
+#, fuzzy
+msgid "Save the current note"
+msgstr "Poista nykyinen muistiinpano"
+
+#: ../ui/editor_note.xml.h:13
+msgid "_Delete Personal Comment"
+msgstr "_Poista henkilökohtainen kommentti"
+
+#: ../ui/editor_note.xml.h:16
+msgid "_Save (Personal Comment)"
+msgstr "_Tallenna (henkilökohtainen kommentti)"
+
+#: ../ui/editor_studypad.xml.h:1
+msgid "Add this file to your bookmarks"
+msgstr "Lisää tämä tiedosto kirjanmerkkeihisi"
+
+#: ../ui/editor_studypad.xml.h:3 ../ui/editor.xml.h:1
+msgid "Create a new document"
+msgstr "Luo uusi tiedosto"
+
+#: ../ui/editor_studypad.xml.h:10 ../ui/editor.xml.h:8
+msgid "New Document"
+msgstr "Uusi tiedosto"
+
+#: ../ui/editor_studypad.xml.h:11 ../ui/editor.xml.h:9
+msgid "Open"
 msgstr ""
 
-#: ../ui/prefs.glade.h:9
+#: ../ui/editor_studypad.xml.h:12
 #, fuzzy
-msgid "<b>Font Colors</b>"
-msgstr "<b>Kirjasinten värit</b>"
+msgid "Open a file in Studypad"
+msgstr "Avaa Opiskelumuistio"
 
-#: ../ui/prefs.glade.h:10
-msgid "<b>Font Miscellaneous</b>"
-msgstr "<b>Sekalaisia fontteja</b>"
+#: ../ui/editor_studypad.xml.h:13
+msgid "Preview the document to be printed"
+msgstr "Esikatsele tulostettavaa tiedostoa"
 
-#: ../ui/prefs.glade.h:11
-msgid "<b>General</b>"
-msgstr "<b>Yleistä</b>"
+#: ../ui/editor_studypad.xml.h:15
+msgid "Print this document"
+msgstr "Tulosta tämä tiedosto"
 
-#: ../ui/prefs.glade.h:12
-msgid "<b>Main Window Modules</b>"
-msgstr "<b>Pääikkunan modulit</b>"
+#: ../ui/editor_studypad.xml.h:17
+#, fuzzy
+msgid "Save AS"
+msgstr "Tallenna"
 
-#: ../ui/prefs.glade.h:13
-msgid "<b>Miscellaneous Modules</b>"
-msgstr "<b>Sekalaiset modulit</b>"
+#: ../ui/editor_studypad.xml.h:18 ../ui/editor.xml.h:12
+#, fuzzy
+msgid "Save the current file"
+msgstr "Tallenna nykyinen istunto tiedostoon"
 
-#: ../ui/prefs.glade.h:14
-msgid "<b>Parallel View</b>"
-msgstr "<b>Rinnakkaisnäkymä</b>"
+#: ../ui/editor_studypad.xml.h:19
+#, fuzzy
+msgid "Save the current file as"
+msgstr "Tallenna nykyinen istunto tiedostoon"
 
-#: ../ui/prefs.glade.h:15
-msgid "<b>Show</b>"
-msgstr "<b>Näytä</b>"
+#: ../ui/editor.xml.h:10
+#, fuzzy
+msgid "Open the file in Studypad"
+msgstr "Avaa Opiskelumuistio muokkain"
 
-#: ../ui/prefs.glade.h:16
-msgid "<b>StudyPad default directory</b>"
-msgstr "<b>Opiskelumuistion oletushakemisto</b>"
+#: ../ui/export-dialog.glade.h:1
+msgid ": "
+msgstr ""
 
-#: ../ui/prefs.glade.h:17
-msgid "<b>Tabs</b>"
-msgstr "<b>Välilehdet</b>"
+#: ../ui/export-dialog.glade.h:2
+#, fuzzy
+msgid "<b>Export</b>"
+msgstr "<b>Sword</b>"
 
-#: ../ui/prefs.glade.h:18
-msgid "Apply high-contrast highlight to current verse"
-msgstr "Korosta nykyinen jae vahvalla kontrastilla"
+#: ../ui/export-dialog.glade.h:3
+#, fuzzy
+msgid "<b>Format</b>"
+msgstr "<b>Sword</b>"
 
-#: ../ui/prefs.glade.h:19
-msgid "Automatically resize commentary, book, and dictionary image content to fit subwindow"
-msgstr "Muuta automaattisesti kommentaarin, kirjan ja sanakirjan kuvat ikkunaan sopiviksi"
-
-#: ../ui/prefs.glade.h:20
-msgid "Background"
-msgstr "Tausta"
-
-#: ../ui/prefs.glade.h:21
-msgid "Bible Texts"
-msgstr "Raamatun tekstit"
-
-#: ../ui/prefs.glade.h:22
-msgid "Bible text"
-msgstr "Raamatun teksti"
-
-#: ../ui/prefs.glade.h:23
-msgid "Biblical Text"
-msgstr "Raamatullinen teksti"
-
-#: ../ui/prefs.glade.h:24
+#: ../ui/export-dialog.glade.h:4 ../ui/prefs.glade.h:25
 msgid "Book"
 msgstr "Kirja"
 
-#: ../ui/prefs.glade.h:27
-msgid "Cover"
-msgstr "Kansi"
+#: ../ui/export-dialog.glade.h:5
+msgid "Book Radio Button"
+msgstr ""
 
-#: ../ui/prefs.glade.h:28
-msgid "Current Verse text"
-msgstr "Nykyisen jakeen teksti"
+#: ../ui/export-dialog.glade.h:7
+msgid "Chapter Radio Button"
+msgstr ""
 
-#: ../ui/prefs.glade.h:29
-msgid "Daily Devotional"
-msgstr "Päivittäinen hartaus"
+#: ../ui/export-dialog.glade.h:9
+msgid "Export Passage Cancel"
+msgstr ""
 
-#: ../ui/prefs.glade.h:30
-msgid "Default Dictionary"
-msgstr "Oletussanakirja"
+#: ../ui/export-dialog.glade.h:10
+msgid "Export Passage OK"
+msgstr ""
 
-#: ../ui/prefs.glade.h:31
-msgid "Dictionary"
-msgstr "Sanakirja"
+#: ../ui/export-dialog.glade.h:11
+msgid "Export complete book"
+msgstr ""
 
-#: ../ui/prefs.glade.h:32
-msgid "Dictionary/Lexicon"
-msgstr "Sanakirja/Sanasto"
+#: ../ui/export-dialog.glade.h:12
+msgid "Export complete chapter"
+msgstr ""
 
-#: ../ui/prefs.glade.h:33
-msgid "Font Colors"
-msgstr "Fonttien värit"
+#: ../ui/export-dialog.glade.h:13
+msgid "Export single verse"
+msgstr ""
 
-#: ../ui/prefs.glade.h:34
+#: ../ui/export-dialog.glade.h:14
 #, fuzzy
-msgid "Font Misc"
-msgstr "Sekalaiset fontit"
+msgid "HTML"
+msgstr "HTML tila"
 
-#: ../ui/prefs.glade.h:35
-msgid "General Misc"
-msgstr "Sekalaista"
+#: ../ui/export-dialog.glade.h:15
+msgid "HTML Radio Button"
+msgstr ""
 
-#: ../ui/prefs.glade.h:36
-msgid "Greek Lexicon"
-msgstr "Kreikan sanasto"
+#: ../ui/export-dialog.glade.h:16
+msgid "Key"
+msgstr ""
 
-#: ../ui/prefs.glade.h:37
-msgid "Hebrew Lexicon"
-msgstr "Heprean sanasto"
+#: ../ui/export-dialog.glade.h:17
+#, fuzzy
+msgid "Plain Text"
+msgstr "Etsi seuraava"
 
-#: ../ui/prefs.glade.h:38
-msgid "Highlight Background"
-msgstr "Korosta taustaa"
+#: ../ui/export-dialog.glade.h:18
+msgid "Plain Text Radio Button"
+msgstr ""
 
-#: ../ui/prefs.glade.h:39
-msgid "Highlight Foreground"
-msgstr "Korosta edustaa"
+#: ../ui/export-dialog.glade.h:20
+msgid "Save Export As"
+msgstr ""
 
-#: ../ui/prefs.glade.h:40
-msgid "Highlight current verse"
-msgstr "Korosta nykyinen jae"
+#: ../ui/export-dialog.glade.h:21
+#, fuzzy
+msgid "Verse"
+msgstr "Jae:"
 
-#: ../ui/prefs.glade.h:41
-msgid "Links"
-msgstr "Linkit"
+#: ../ui/export-dialog.glade.h:22
+msgid "Verse Radio Button"
+msgstr ""
 
-#: ../ui/prefs.glade.h:42
-msgid "Modules Main"
-msgstr "Päämodulit"
-
-#: ../ui/prefs.glade.h:43
-msgid "Modules Misc"
-msgstr "Sekalaiset modulit"
-
-#: ../ui/prefs.glade.h:44
-msgid "Modules Parallel"
-msgstr "Rinnakkaismodulit"
-
-#: ../ui/prefs.glade.h:45
-msgid "Parallel 1"
-msgstr "Rinnakkaisnäkymä 1"
-
-#: ../ui/prefs.glade.h:46
-msgid "Parallel 2"
-msgstr "Rinnakkaisnäkymä 2"
-
-#: ../ui/prefs.glade.h:47
-msgid "Parallel 3"
-msgstr "Rinnakkaisnäkymä 3"
-
-#: ../ui/prefs.glade.h:48
-msgid "Parallel 4"
-msgstr "Rinnakkaisnäkymä 4"
-
-#: ../ui/prefs.glade.h:49
-msgid "Parallel 5"
-msgstr "Rinnakkaisnäkymä 5"
-
-#: ../ui/prefs.glade.h:50
-msgid "Personal Notes"
-msgstr "Henkilökohtaiset muistiinpanot"
-
-#: ../ui/prefs.glade.h:53
-msgid "Resize images"
-msgstr "Muuta kuvan kokoa"
-
-#: ../ui/prefs.glade.h:54
-msgid "Scroll to Previous/Next Chapter"
-msgstr "Vieritä edelliseen/seuraavaan kappaleeseen"
-
-#: ../ui/prefs.glade.h:55
-msgid "Select A Directory"
-msgstr "Valitse hakemisto"
-
-#: ../ui/prefs.glade.h:56
-msgid "Show Daily Devotion at start up"
-msgstr "Näytä päivittäinen hartaus alussa"
-
-#: ../ui/prefs.glade.h:57
-msgid "Show splash screen at start up"
-msgstr "Näytä käynnistyskuva alussa"
-
-#: ../ui/prefs.glade.h:59
-msgid "Use Bible Text scroll bar to scroll to previous or next chapter"
-msgstr "Käytä Raamatun tekstin vierityspalkkia kappaleiden selaamiseen"
-
-#: ../ui/prefs.glade.h:60
-msgid "Use Verse style"
-msgstr "Näytä jakeen tyyli"
-
-#: ../ui/prefs.glade.h:61
-msgid "Use default Dictionary"
-msgstr "Käytä oletushakemistoa"
-
-#: ../ui/prefs.glade.h:62
-msgid "Use tabbed browsing"
-msgstr "Käytä välilehtiä"
-
-#: ../ui/prefs.glade.h:63
-msgid "Verse number font size"
-msgstr "Jaenumeron fontin koko"
+#: ../ui/export-dialog.glade.h:23
+#, fuzzy
+msgid "Version"
+msgstr "Swordin versio"
 
 #: ../ui/module-manager.glade.h:1
 msgid "<b>Add and Remove Sources</b>"
@@ -1873,374 +2926,999 @@ msgid "<b>WARNING:</b> If you live in a persecuted country use with care."
 msgstr "<b>VAROITUS:</b> Jos maassasi vainotaan uskovia, käytä varoen."
 
 #: ../ui/module-manager.glade.h:8
-msgid "<b>Warning:</b> If you live in a persecuted country and do not wish to risk detection you should NOT use  the remote installation feature! "
-msgstr "<b>Varoitus:</b> Jos maassasi vainotaan uskovia etkä halua paljastumisen riskiä, älä käytä etäasennusominaisuutta!"
+msgid ""
+"<b>Warning:</b> If you live in a persecuted country and do not wish to risk "
+"detection you should NOT use  the remote installation feature! "
+msgstr ""
+"<b>Varoitus:</b> Jos maassasi vainotaan uskovia etkä halua paljastumisen "
+"riskiä, älä käytä etäasennusominaisuutta!"
 
 #: ../ui/module-manager.glade.h:9
+msgid "<i>Personal area, for your use only:</i>"
+msgstr ""
+
+#: ../ui/module-manager.glade.h:10
+msgid "<i>System area, for all users:</i>"
+msgstr ""
+
+#: ../ui/module-manager.glade.h:12
 msgid "Continue"
 msgstr "Jatka"
 
-#: ../ui/module-manager.glade.h:10
+#: ../ui/module-manager.glade.h:13
 msgid "Current Remote Sources"
 msgstr "Nykyiset etälähteet"
 
-#: ../ui/module-manager.glade.h:11
+#: ../ui/module-manager.glade.h:14
 msgid "Current local sources"
 msgstr "Nykyiset paikalliset lähteet"
 
-#: ../ui/module-manager.glade.h:12
+#: ../ui/module-manager.glade.h:15
+#, fuzzy
+msgid "Delete Index"
+msgstr "Poista Jakso"
+
+#: ../ui/module-manager.glade.h:16
 msgid "Home dir"
 msgstr "Kotihakemisto"
 
-#: ../ui/module-manager.glade.h:14
+#: ../ui/module-manager.glade.h:19
 msgid "Local"
 msgstr "Paikallinen"
 
-#: ../ui/module-manager.glade.h:15
+#: ../ui/module-manager.glade.h:20
 msgid "Local Install Folder"
 msgstr "Paikallinen asennushakemisto"
 
-#: ../ui/module-manager.glade.h:16
+#: ../ui/module-manager.glade.h:21
 msgid "Module Manager"
 msgstr "Modulien hallinta"
 
-#: ../ui/module-manager.glade.h:17
+#: ../ui/module-manager.glade.h:22
 msgid "Remote"
 msgstr "Etä"
 
-#: ../ui/module-manager.glade.h:18
+#: ../ui/module-manager.glade.h:23
 msgid "Sword sys dir"
 msgstr "Swordin järjestelmähakemisto"
 
+#: ../ui/navbar_versekey.glade.h:1
+#, fuzzy
+msgid "1"
+msgstr "+1"
+
+#: ../ui/navbar_versekey.glade.h:2
+msgid "<b>Revelation of John</b>"
+msgstr ""
+
+#: ../ui/navbar_versekey.glade.h:3
+#, fuzzy
+msgid "Book Selector Button"
+msgstr "Etsintä valinta"
+
+#: ../ui/navbar_versekey.glade.h:4
+msgid "Choose book to display"
+msgstr ""
+
+#: ../ui/navbar_versekey.glade.h:5
+#, fuzzy
+msgid "Drop down history list"
+msgstr "Tyhjennä historialista"
+
+#: ../ui/navbar_versekey.glade.h:6
+#, fuzzy
+msgid "Reference Entry"
+msgstr "Asetukset"
+
+#: ../ui/navbar_versekey.glade.h:7
+msgid "Toggle Chapter Button"
+msgstr ""
+
+#: ../ui/navbar_versekey.glade.h:8
+msgid "Toggle Verse Button"
+msgstr ""
+
+#: ../ui/prefs.glade.h:1
+msgid ""
+"-2\n"
+"-1\n"
+"+0\n"
+"+1\n"
+"+2\n"
+"+3\n"
+"+4\n"
+"+5"
+msgstr ""
+
+#: ../ui/prefs.glade.h:9
+#, fuzzy
+msgid "<b>Font Colors</b>"
+msgstr "<b>Kirjasinten värit</b>"
+
+#: ../ui/prefs.glade.h:10
+#, fuzzy
+msgid "<b>Font Sizes</b>"
+msgstr "<b>Kirjasinten värit</b>"
+
+#: ../ui/prefs.glade.h:11
+msgid "<b>General</b>"
+msgstr "<b>Yleistä</b>"
+
+#: ../ui/prefs.glade.h:12
+msgid "<b>Main Window Modules</b>"
+msgstr "<b>Pääikkunan modulit</b>"
+
+#: ../ui/prefs.glade.h:13
+msgid "<b>Parallel View</b>"
+msgstr "<b>Rinnakkaisnäkymä</b>"
+
+#: ../ui/prefs.glade.h:14
+msgid "<b>Show</b>"
+msgstr "<b>Näytä</b>"
+
+#: ../ui/prefs.glade.h:15
+#, fuzzy
+msgid "<b>Special Purpose Modules</b>"
+msgstr "<b>Sekalaiset modulit</b>"
+
+#: ../ui/prefs.glade.h:16
+msgid "<b>StudyPad default directory</b>"
+msgstr "<b>Opiskelumuistion oletushakemisto</b>"
+
+#: ../ui/prefs.glade.h:17
+msgid "<b>Tabs</b>"
+msgstr "<b>Välilehdet</b>"
+
+#: ../ui/prefs.glade.h:18
+msgid "Apply high-contrast highlight to current verse"
+msgstr "Korosta nykyinen jae vahvalla kontrastilla"
+
+#: ../ui/prefs.glade.h:19
+msgid ""
+"Automatically resize commentary, book, and dictionary image content to fit "
+"subwindow"
+msgstr ""
+"Muuta automaattisesti kommentaarin, kirjan ja sanakirjan kuvat ikkunaan "
+"sopiviksi"
+
+#: ../ui/prefs.glade.h:20
+msgid "Background"
+msgstr "Tausta"
+
+#: ../ui/prefs.glade.h:21
+msgid "Base text size"
+msgstr ""
+
+#: ../ui/prefs.glade.h:22
+msgid "Bible Texts"
+msgstr "Raamatun tekstit"
+
+#: ../ui/prefs.glade.h:23
+#, fuzzy
+msgid "Bible Texts Checkbox"
+msgstr "Raamatun tekstit"
+
+#: ../ui/prefs.glade.h:24
+msgid "Biblical Text"
+msgstr "Raamatullinen teksti"
+
+#: ../ui/prefs.glade.h:26
+#, fuzzy
+msgid "Change Biblical Text Combo"
+msgstr "Raamatullinen teksti"
+
+#: ../ui/prefs.glade.h:27
+#, fuzzy
+msgid "Change Book Combo"
+msgstr "Vaihda fontti"
+
+#: ../ui/prefs.glade.h:28
+#, fuzzy
+msgid "Change Commentary Combo"
+msgstr "Vaihda fontti"
+
+#: ../ui/prefs.glade.h:29
+#, fuzzy
+msgid "Change Default Dictionary Combo"
+msgstr "Oletussanakirja"
+
+#: ../ui/prefs.glade.h:30
+#, fuzzy
+msgid "Change Dictionary Combo"
+msgstr "Sanakirja"
+
+#: ../ui/prefs.glade.h:31
+#, fuzzy
+msgid "Change Personal Notes Combo"
+msgstr "Henkilökohtaiset muistiinpanot"
+
+#: ../ui/prefs.glade.h:32
+msgid "Choose to enable Prayer lists "
+msgstr ""
+
+#: ../ui/prefs.glade.h:34
+#, fuzzy
+msgid "Commentaries Checkbox"
+msgstr "Kommentaarit"
+
+#: ../ui/prefs.glade.h:36
+msgid "Cover"
+msgstr "Kansi"
+
+#: ../ui/prefs.glade.h:37
+#, fuzzy
+msgid "Current Verse"
+msgstr "Nykyisen jakeen teksti"
+
+#: ../ui/prefs.glade.h:38
+msgid "Daily Devotional"
+msgstr "Päivittäinen hartaus"
+
+#: ../ui/prefs.glade.h:39
+#, fuzzy
+msgid "Daily Devotional Combo"
+msgstr "Päivittäinen hartaus"
+
+#: ../ui/prefs.glade.h:40
+msgid "Default Dictionary"
+msgstr "Oletussanakirja"
+
+#: ../ui/prefs.glade.h:41
+msgid "Dictionary"
+msgstr "Sanakirja"
+
+#: ../ui/prefs.glade.h:42
+msgid "Dictionary/Lexicon"
+msgstr "Sanakirja/Sanasto"
+
+#: ../ui/prefs.glade.h:43
+#, fuzzy
+msgid "Dictionary/Lexicon Checkbox"
+msgstr "Sanakirja/Sanasto"
+
+#: ../ui/prefs.glade.h:44
+#, fuzzy
+msgid "Enable Prayer Lists"
+msgstr "Tyhjennä lista?"
+
+#: ../ui/prefs.glade.h:45
+msgid "Enable Prayer Lists Checkbox"
+msgstr ""
+
+#: ../ui/prefs.glade.h:46
+msgid "Font Colors"
+msgstr "Fonttien värit"
+
+#: ../ui/prefs.glade.h:47
+#, fuzzy
+msgid "Font Misc"
+msgstr "Sekalaiset fontit"
+
+#: ../ui/prefs.glade.h:48
+#, fuzzy
+msgid "Foreground"
+msgstr "Korosta edustaa"
+
+#: ../ui/prefs.glade.h:49
+msgid "General Misc"
+msgstr "Sekalaista"
+
+#: ../ui/prefs.glade.h:50
+msgid "Greek Lexicon"
+msgstr "Kreikan sanasto"
+
+#: ../ui/prefs.glade.h:51
+#, fuzzy
+msgid "Greek Lexicon Combo"
+msgstr "Kreikan sanasto"
+
+#: ../ui/prefs.glade.h:52
+msgid "Hebrew Lexicon"
+msgstr "Heprean sanasto"
+
+#: ../ui/prefs.glade.h:53
+#, fuzzy
+msgid "Hebrew Lexicon Combo"
+msgstr "Heprean sanasto"
+
+#: ../ui/prefs.glade.h:54
+msgid "Highlight Background"
+msgstr "Korosta taustaa"
+
+#: ../ui/prefs.glade.h:55
+msgid "Highlight Foreground"
+msgstr "Korosta edustaa"
+
+#: ../ui/prefs.glade.h:56
+msgid "Highlight current verse"
+msgstr "Korosta nykyinen jae"
+
+#: ../ui/prefs.glade.h:57
+#, fuzzy
+msgid "Highlight current verse check box"
+msgstr "Korosta nykyinen jae"
+
+#: ../ui/prefs.glade.h:58
+msgid "Links"
+msgstr "Linkit"
+
+#: ../ui/prefs.glade.h:59
+msgid "Modules Main"
+msgstr "Päämodulit"
+
+#: ../ui/prefs.glade.h:60
+msgid "Modules Misc"
+msgstr "Sekalaiset modulit"
+
+#: ../ui/prefs.glade.h:61
+msgid "Modules Parallel"
+msgstr "Rinnakkaismodulit"
+
+#: ../ui/prefs.glade.h:62
+msgid "Parallel 1"
+msgstr "Rinnakkaisnäkymä 1"
+
+#: ../ui/prefs.glade.h:63
+#, fuzzy
+msgid "Parallel 1 Combo"
+msgstr "Rinnakkaisnäkymä 1"
+
+#: ../ui/prefs.glade.h:64
+msgid "Parallel 2"
+msgstr "Rinnakkaisnäkymä 2"
+
+#: ../ui/prefs.glade.h:65
+#, fuzzy
+msgid "Parallel 2 Combo"
+msgstr "Rinnakkaisnäkymä 2"
+
+#: ../ui/prefs.glade.h:66
+msgid "Parallel 3"
+msgstr "Rinnakkaisnäkymä 3"
+
+#: ../ui/prefs.glade.h:67
+#, fuzzy
+msgid "Parallel 3 Combo"
+msgstr "Rinnakkaisnäkymä 3"
+
+#: ../ui/prefs.glade.h:68
+msgid "Parallel 4"
+msgstr "Rinnakkaisnäkymä 4"
+
+#: ../ui/prefs.glade.h:69
+#, fuzzy
+msgid "Parallel 4 Combo"
+msgstr "Rinnakkaisnäkymä 4"
+
+#: ../ui/prefs.glade.h:70
+msgid "Parallel 5"
+msgstr "Rinnakkaisnäkymä 5"
+
+#: ../ui/prefs.glade.h:71
+#, fuzzy
+msgid "Parallel 5 Combo"
+msgstr "Rinnakkaisnäkymä 5"
+
+#: ../ui/prefs.glade.h:72
+#, fuzzy
+msgid "Parallel View in a tab"
+msgstr "Rinnakkaisnäkymä"
+
+#: ../ui/prefs.glade.h:73
+msgid "Personal Notes"
+msgstr "Henkilökohtaiset muistiinpanot"
+
+#: ../ui/prefs.glade.h:76
+#, fuzzy
+msgid "Previewer Checkbox"
+msgstr "Esikatselija"
+
+#: ../ui/prefs.glade.h:77
+msgid "Resize images"
+msgstr "Muuta kuvan kokoa"
+
+#: ../ui/prefs.glade.h:78
+#, fuzzy
+msgid "Resize images checkbox"
+msgstr "Muuta kuvan kokoa"
+
+#: ../ui/prefs.glade.h:79
+msgid "Scroll to Previous/Next Chapter"
+msgstr "Vieritä edelliseen/seuraavaan kappaleeseen"
+
+#: ../ui/prefs.glade.h:80
+#, fuzzy
+msgid "Scroll to Previous/Next Chapter Checkbox"
+msgstr "Vieritä edelliseen/seuraavaan kappaleeseen"
+
+#: ../ui/prefs.glade.h:81
+msgid "Select A Directory"
+msgstr "Valitse hakemisto"
+
+#: ../ui/prefs.glade.h:82
+msgid "Show Daily Devotion at start up"
+msgstr "Näytä päivittäinen hartaus alussa"
+
+#: ../ui/prefs.glade.h:83
+msgid "Show splash screen at start up"
+msgstr "Näytä käynnistyskuva alussa"
+
+#: ../ui/prefs.glade.h:84
+#, fuzzy
+msgid "StudyPad default directory combo"
+msgstr "<b>Opiskelumuistion oletushakemisto</b>"
+
+#: ../ui/prefs.glade.h:86
+msgid "Use Bible Text scroll bar to scroll to previous or next chapter"
+msgstr "Käytä Raamatun tekstin vierityspalkkia kappaleiden selaamiseen"
+
+#: ../ui/prefs.glade.h:87
+#, fuzzy
+msgid "Use Verse Per Line"
+msgstr "Näytä jakeen tyyli"
+
+#: ../ui/prefs.glade.h:88
+msgid "Use Verse Per Line Checkbox"
+msgstr ""
+
+#: ../ui/prefs.glade.h:89
+msgid "Use default Dictionary"
+msgstr "Käytä oletushakemistoa"
+
+#: ../ui/prefs.glade.h:90
+#, fuzzy
+msgid "Use default Dictionary Checkbox"
+msgstr "Käytä oletushakemistoa"
+
+#: ../ui/prefs.glade.h:91
+msgid "Use tabbed browsing"
+msgstr "Käytä välilehtiä"
+
+#: ../ui/prefs.glade.h:92
+#, fuzzy
+msgid "Use tabbed browsing Checkbox"
+msgstr "Käytä välilehtiä"
+
+#: ../ui/prefs.glade.h:93
+#, fuzzy
+msgid "Verse number size"
+msgstr "Jaenumeron fontin koko"
+
 #: ../ui/search-dialog.glade.h:1
+#, fuzzy
+msgid "<b>Attribute</b>"
+msgstr "Attribuutit"
+
+#: ../ui/search-dialog.glade.h:2
 msgid "<b>Found</b>"
 msgstr "<b>Löydettiin</b>"
 
-#: ../ui/search-dialog.glade.h:2
+#: ../ui/search-dialog.glade.h:3
 msgid "<b>List Name</b>"
 msgstr "<b>Listaa nimi</b>"
 
-#: ../ui/search-dialog.glade.h:3
+#: ../ui/search-dialog.glade.h:4
 msgid "<b>Module Lists</b>"
 msgstr "<b>Modulilistat</b>"
 
-#: ../ui/search-dialog.glade.h:4
+#: ../ui/search-dialog.glade.h:5
 msgid "<b>Modules</b>"
 msgstr "<b>Modulit</b>"
 
-#: ../ui/search-dialog.glade.h:5
+#: ../ui/search-dialog.glade.h:6
 msgid "<b>Options</b>"
 msgstr "<b>Valinnat</b>"
 
-#: ../ui/search-dialog.glade.h:6
+#: ../ui/search-dialog.glade.h:7
 msgid "<b>Preview</b>"
 msgstr "<b>Esikatselu</b>"
 
-#: ../ui/search-dialog.glade.h:7
-msgid "<b>Range Name</b>"
-msgstr "<b>Alueen nimi</b>"
-
 #: ../ui/search-dialog.glade.h:8
-msgid "<b>Range Text</b>"
+#, fuzzy
+msgid "<b>Range Definition</b>"
 msgstr "<b>Alueteksti"
 
 #: ../ui/search-dialog.glade.h:9
+msgid "<b>Range Name</b>"
+msgstr "<b>Alueen nimi</b>"
+
+#: ../ui/search-dialog.glade.h:10
 msgid "<b>Ranges</b>"
 msgstr "<b>Alueet</b>"
 
-#: ../ui/search-dialog.glade.h:10
+#: ../ui/search-dialog.glade.h:11
 msgid "<b>Results Display Options</b>"
 msgstr "<b>Tulokset näyttävät valinnat</b>"
 
-#: ../ui/search-dialog.glade.h:11
+#: ../ui/search-dialog.glade.h:12
 msgid "<b>Scope</b>"
 msgstr "<b>Laajuus</b>"
 
-#: ../ui/search-dialog.glade.h:12
+#: ../ui/search-dialog.glade.h:13
 msgid "<b>Search Results</b>"
 msgstr "<b>Haun tulokset</b>"
 
-#: ../ui/search-dialog.glade.h:13
+#: ../ui/search-dialog.glade.h:14
 msgid "<b>Search Type</b>"
 msgstr "<b>Hakutyyppi</b>"
 
-#: ../ui/search-dialog.glade.h:14
+#: ../ui/search-dialog.glade.h:15
 msgid "Add Modules"
 msgstr "Lisää moduleja"
 
-#: ../ui/search-dialog.glade.h:15
+#: ../ui/search-dialog.glade.h:16
 msgid "Advanced Search"
 msgstr "Edistynyt haku"
 
-#: ../ui/search-dialog.glade.h:16
+#: ../ui/search-dialog.glade.h:17
 msgid "Attribute Search"
 msgstr "Attribuuttihaku"
 
-#: ../ui/search-dialog.glade.h:17
+#: ../ui/search-dialog.glade.h:18
 msgid "Attributes"
 msgstr "Attribuutit"
 
-#: ../ui/search-dialog.glade.h:18
+#: ../ui/search-dialog.glade.h:19
+#, fuzzy
+msgid "Attributes radiobutton"
+msgstr "Attribuutit"
+
+#: ../ui/search-dialog.glade.h:20
+msgid "Clear Custom Module List Button"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:21
+#, fuzzy
+msgid "Clear Modules from List Button"
+msgstr "Poista kaikki modulit listasta"
+
+#: ../ui/search-dialog.glade.h:22
 msgid "Clear all modules from the list"
 msgstr "Poista kaikki modulit listasta"
 
-#: ../ui/search-dialog.glade.h:19
+#: ../ui/search-dialog.glade.h:23
 msgid "Clear lists for new search"
 msgstr "Poista listat uuden haun vuoksi"
 
-#: ../ui/search-dialog.glade.h:20
+#: ../ui/search-dialog.glade.h:24
 msgid "Create a new module list"
 msgstr "Luo uusi modulilista"
 
-#: ../ui/search-dialog.glade.h:21
+#: ../ui/search-dialog.glade.h:25
 msgid "Create new custom range"
 msgstr "Luo uusi oma alue"
 
-#: ../ui/search-dialog.glade.h:22
+#: ../ui/search-dialog.glade.h:26
 msgid "Current results"
 msgstr "Nykyiset tulokset"
 
-#: ../ui/search-dialog.glade.h:23
-msgid "Custom Lists"
-msgstr "Omat listat"
+#: ../ui/search-dialog.glade.h:27
+#, fuzzy
+msgid "Current results radiobutton"
+msgstr "Nykyiset tulokset"
 
-#: ../ui/search-dialog.glade.h:24
-msgid "Custom Ranges"
-msgstr "Omat alueet"
-
-#: ../ui/search-dialog.glade.h:25
-msgid "Custom list"
+#: ../ui/search-dialog.glade.h:28
+#, fuzzy
+msgid "Custom Module List Combo"
 msgstr "Oma lista"
 
-#: ../ui/search-dialog.glade.h:26
-msgid "Custom range"
+#: ../ui/search-dialog.glade.h:29
+msgid "Custom Module List Name Entry"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:30
+#, fuzzy
+msgid "Custom Module Lists"
+msgstr "Omat listat"
+
+#: ../ui/search-dialog.glade.h:31
+#, fuzzy
+msgid "Custom Range Preview"
+msgstr "Omat alueet"
+
+#: ../ui/search-dialog.glade.h:32
+#, fuzzy
+msgid "Custom Range Selector Combo"
+msgstr "Omat alueet"
+
+#: ../ui/search-dialog.glade.h:33
+#, fuzzy
+msgid "Custom Verse Ranges"
+msgstr "Omat alueet"
+
+#: ../ui/search-dialog.glade.h:34
+#, fuzzy
+msgid "Custom module list"
+msgstr "Oma lista"
+
+#: ../ui/search-dialog.glade.h:35
+msgid "Custom module list radiobutton"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:36
+#, fuzzy
+msgid "Custom verse range"
 msgstr "Oma alue"
 
-#: ../ui/search-dialog.glade.h:27
+#: ../ui/search-dialog.glade.h:37
+msgid "Custom verse range radiobutton"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:38
+#, fuzzy
+msgid "Delete Range Button"
+msgstr "Poista alue?"
+
+#: ../ui/search-dialog.glade.h:39
+#, fuzzy
+msgid "Delete Selected Module From List Button"
+msgstr "Poista valittu moduli listasta"
+
+#: ../ui/search-dialog.glade.h:40
 msgid "Delete selected range"
 msgstr "Poista valittu alue"
 
-#: ../ui/search-dialog.glade.h:28
+#: ../ui/search-dialog.glade.h:41
 msgid "Delete the selected list"
 msgstr "Poista valittu lista"
 
-#: ../ui/search-dialog.glade.h:29
+#: ../ui/search-dialog.glade.h:42
 msgid "Entire module"
 msgstr "Koko moduli"
 
-#: ../ui/search-dialog.glade.h:31
+#: ../ui/search-dialog.glade.h:43
+#, fuzzy
+msgid "Entire module radiobutton"
+msgstr "Koko moduli"
+
+#: ../ui/search-dialog.glade.h:45
+#, fuzzy
+msgid "Exact phrase radiobutton"
+msgstr "Tarkka fraasi"
+
+#: ../ui/search-dialog.glade.h:46
+msgid ""
+"Fast, featureful, index-based search\n"
+"Indexes must have been built beforehand:\n"
+"See Module Manager's maintenance functions"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:49
+#, fuzzy
+msgid "Find Button"
+msgstr "Etsi seuraava"
+
+#: ../ui/search-dialog.glade.h:51
+#, fuzzy
+msgid "Footnotes radiobutton"
+msgstr "Alaviitteet"
+
+#: ../ui/search-dialog.glade.h:52
 msgid "In modules that have Footnotes"
 msgstr "Moduleissa, joissa on alaviitteet"
 
-#: ../ui/search-dialog.glade.h:32
+#: ../ui/search-dialog.glade.h:53
 msgid "In modules that have Morphological Tags"
 msgstr "Moduleissa, joissa on morfologiset tunnisteet"
 
-#: ../ui/search-dialog.glade.h:33
+#: ../ui/search-dialog.glade.h:54
 msgid "In modules that have Strong's Numbers"
 msgstr "Moduleissa, joissa on Strongin numeroita"
 
-#: ../ui/search-dialog.glade.h:35
+#: ../ui/search-dialog.glade.h:55
+msgid "Main Search Entry"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:56
+msgid "Make selections on the Attribute Search tab"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:58
+#, fuzzy
+msgid "Match case checkbox"
+msgstr "Tarkat osumat"
+
+#: ../ui/search-dialog.glade.h:59
 msgid "Module Selection"
 msgstr "Modulivalinta"
 
-#: ../ui/search-dialog.glade.h:36
+#: ../ui/search-dialog.glade.h:60
 msgid "Module list"
 msgstr "Modulilista"
 
-#: ../ui/search-dialog.glade.h:38
+#: ../ui/search-dialog.glade.h:61
+#, fuzzy
+msgid "Module list radiobutton"
+msgstr "Modulilista"
+
+#: ../ui/search-dialog.glade.h:63
+#, fuzzy
+msgid "Morphological Tags radiobutton"
+msgstr "Morfologiset tunnisteet"
+
+#: ../ui/search-dialog.glade.h:65
+#, fuzzy
+msgid "Multi word radiobutton"
+msgstr "Monta sanaa"
+
+#: ../ui/search-dialog.glade.h:66
+msgid "New Custom Module List Button"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:67
+msgid "New Range Button"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:68
+#, fuzzy
+msgid "Open Selection Dialog Button"
+msgstr "Avaa dialogissa"
+
+#: ../ui/search-dialog.glade.h:69
 msgid "Open a dialog to select modules to add to the list"
 msgstr "Avaa dialogi valitaksesi modulit, jotka lisätään listaan"
 
-#: ../ui/search-dialog.glade.h:40
+#: ../ui/search-dialog.glade.h:70
+msgid "Optimized (\"Lucene\")"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:71
+msgid "Optimized (\"Lucene\") radiobutton"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:72
+msgid "Range Definition Entry"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:73
+#, fuzzy
+msgid "Range Name Entry"
+msgstr "<b>Alueen nimi</b>"
+
+#: ../ui/search-dialog.glade.h:75
+#, fuzzy
+msgid "Regular expression radiobutton"
+msgstr "Säännöllinen ilmaus"
+
+#: ../ui/search-dialog.glade.h:76
 msgid "Remove the selected module from the list"
 msgstr "Poista valittu moduli listasta"
 
-#: ../ui/search-dialog.glade.h:41
+#: ../ui/search-dialog.glade.h:77
+msgid "Result Summary Table"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:78
+msgid "Result Summary Window"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:79
 msgid "Results"
 msgstr "Tulokset"
 
-#: ../ui/search-dialog.glade.h:42
+#: ../ui/search-dialog.glade.h:80
+#, fuzzy
+msgid "Save Custom Module List Button"
+msgstr "Tallenna modulilista"
+
+#: ../ui/search-dialog.glade.h:81
+msgid "Save Range Button"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:82
 msgid "Save custom range"
 msgstr "Tallenna oma alue"
 
-#: ../ui/search-dialog.glade.h:43
+#: ../ui/search-dialog.glade.h:83
 msgid "Save search results as bookmarks"
 msgstr "Tallenna hakutulokset kirjanmerkkeinä"
 
-#: ../ui/search-dialog.glade.h:44
+#: ../ui/search-dialog.glade.h:84
 msgid "Save the module list"
 msgstr "Tallenna modulilista"
 
-#: ../ui/search-dialog.glade.h:45
+#: ../ui/search-dialog.glade.h:85
 msgid "Search  Criteria"
 msgstr "Haku kriteerit"
 
-#: ../ui/search-dialog.glade.h:46
+#: ../ui/search-dialog.glade.h:86
+#, fuzzy
+msgid "Search Criteria Treeview"
+msgstr "Haku kriteerit"
+
+#: ../ui/search-dialog.glade.h:87
 msgid "Search entire module"
 msgstr "Hae koko modulista"
 
-#: ../ui/search-dialog.glade.h:47
+#: ../ui/search-dialog.glade.h:88
+#, fuzzy
+msgid "Search for Morphological tags"
+msgstr "Näytä morfologiset tunnisteet"
+
+#: ../ui/search-dialog.glade.h:89
+msgid "Search for Strongs Numbers like G4442 or H1121"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:90
+#, fuzzy
+msgid "Search in footnotes"
+msgstr "Haetaan"
+
+#: ../ui/search-dialog.glade.h:91
 msgid "Show Footnotes"
 msgstr "Näytä alaviitteet"
 
-#: ../ui/search-dialog.glade.h:48
+#: ../ui/search-dialog.glade.h:92
+#, fuzzy
+msgid "Show Footnotes checkbox"
+msgstr "Näytä alaviitteet"
+
+#: ../ui/search-dialog.glade.h:93
 msgid "Show Morphological Tags"
 msgstr "Näytä morfologiset tunnisteet"
 
-#: ../ui/search-dialog.glade.h:49
+#: ../ui/search-dialog.glade.h:94
+#, fuzzy
+msgid "Show Morphological Tags checkbox"
+msgstr "Näytä morfologiset tunnisteet"
+
+#: ../ui/search-dialog.glade.h:95
 msgid "Show Strong's Numbers"
 msgstr "Näytä Strongin numerot"
 
-#: ../ui/search-dialog.glade.h:50
+#: ../ui/search-dialog.glade.h:96
+#, fuzzy
+msgid "Show Strong's Numbers checkbox"
+msgstr "Näytä Strongin numerot"
+
+#: ../ui/search-dialog.glade.h:97
 msgid "Show in main window"
 msgstr "Näytä pääikkunassa"
 
-#: ../ui/search-dialog.glade.h:51
+#: ../ui/search-dialog.glade.h:98
 msgid "Single module"
 msgstr "Yksittäinen moduli"
 
-#: ../ui/search-dialog.glade.h:53
+#: ../ui/search-dialog.glade.h:99
+#, fuzzy
+msgid "Single module radiobutton"
+msgstr "Yksittäinen moduli"
+
+#: ../ui/search-dialog.glade.h:100
+#, fuzzy
+msgid "Start/stop searching"
+msgstr "Aloita haku"
+
+#: ../ui/search-dialog.glade.h:101
+#, fuzzy
+msgid "Strongs Numbers"
+msgstr "Strongin numerot"
+
+#: ../ui/search-dialog.glade.h:102
+#, fuzzy
+msgid "Strongs Numbers radiobutton"
+msgstr "Strongin numerot"
+
+#: ../ui/search-dialog.glade.h:103
 msgid "Use a custom module list for the search"
 msgstr "Käytä omaa modulilistaa hakuun"
 
-#: ../ui/search-dialog.glade.h:54
+#: ../ui/search-dialog.glade.h:104
 msgid "Use a custom range for the scope of the search"
 msgstr "Käytä omaa aluetta haun laajuutena"
 
-#: ../ui/search-dialog.glade.h:55
+#: ../ui/search-dialog.glade.h:105
 msgid "Use a single module for the search"
 msgstr "Käytä yksittäistä moduli haulle"
 
-#: ../ui/search-dialog.glade.h:56
+#: ../ui/search-dialog.glade.h:106
 msgid "Use the current module list for the search"
 msgstr "Käytä nykyistä modulilistaa haulle"
 
-#: ../ui/search-dialog.glade.h:57
+#: ../ui/search-dialog.glade.h:107
 msgid "Use the results of the last search as the scope of the search"
 msgstr "Käytä viimeisen haun tuloksia haun laajuutena"
 
-#: ../ui/search-dialog.glade.h:58
+#: ../ui/search-dialog.glade.h:108
 msgid "e.g. Matt-John;Rev4"
 msgstr "esim. Matt-John;Rev4"
 
-#: ../ui/search-dialog.glade.h:59
+#: ../ui/search-dialog.glade.h:109
 msgid "for "
 msgstr ""
 
-#: ../ui/editor_note.xml.h:1
-msgid "Delete the current note"
-msgstr "Poista nykyinen muistiinpano"
+#~ msgid "found in"
+#~ msgstr "löydetty"
 
-#: ../ui/editor_note.xml.h:2
-#: ../ui/editor_studypad.xml.h:4
-msgid "E_xit"
-msgstr "P_oistu"
+#~ msgid "The"
+#~ msgstr "Moduuli"
 
-#: ../ui/editor_note.xml.h:3
-#: ../ui/editor_studypad.xml.h:5
-msgid "Exit"
-msgstr "Poistu"
+#~ msgid "module is locked."
+#~ msgstr "on lukittu."
 
-#: ../ui/editor_note.xml.h:4
-#: ../ui/editor_studypad.xml.h:6
-msgid "Exit the program"
-msgstr "Sulje ohjelma"
+#~ msgid "module has been unlocked."
+#~ msgstr "moduuli on avattu."
 
-#: ../ui/editor_note.xml.h:5
-#: ../ui/editor_studypad.xml.h:7
-msgid "For_mat"
-msgstr "Muo_toilu"
+#~ msgid "If you have the cipher key you can"
+#~ msgstr "Jos sinulla on cipher avain voit"
 
-#: ../ui/editor_note.xml.h:6
-#: ../ui/editor_studypad.xml.h:8
-msgid "HTML Format switch"
-msgstr "HTML Muotoiluvipu"
+#~ msgid "click here"
+#~ msgstr "napsauttaa tästä"
 
-#: ../ui/editor_note.xml.h:7
-#: ../ui/editor_studypad.xml.h:9
-msgid "HTML mode"
-msgstr "HTML tila"
+#~ msgid "to unlock the module"
+#~ msgstr "avataksesi moduulin"
 
-#: ../ui/editor_note.xml.h:8
-msgid "Preview the note to be printed"
-msgstr "Esikatsele tulostettavaa muistiinpanoa"
+#~ msgid "You will need to restart Xiphos after you unlock it."
+#~ msgstr "Xiphos tulee käynnistää uudelleen avattuasi sen"
 
-#: ../ui/editor_note.xml.h:9
-#: ../ui/editor_studypad.xml.h:14
-msgid "Print Pre_view"
-msgstr "Tulostuksen esi_katselu"
+#~ msgid "You need to restart Xiphos to view it"
+#~ msgstr "Xiphos pitää käynnistää uudelleen nähdäksesi sen"
 
-#: ../ui/editor_note.xml.h:10
-msgid "Print this note"
-msgstr "Tulosta tämä muistiinpano"
+#~ msgid "It will be lost permanently!"
+#~ msgstr "Se poistetaan pysyvästi!"
 
-#: ../ui/editor_note.xml.h:11
-#: ../ui/editor_studypad.xml.h:16
-msgid "Save"
-msgstr "Tallenna"
+#~ msgid "Open file..."
+#~ msgstr "Avaa tiedosto..."
 
-#: ../ui/editor_note.xml.h:12
-msgid "Save using the PersistStream interface"
-msgstr "Tallenna käyttäen PersistStream interface:a"
+#~ msgid "Show Tabs"
+#~ msgstr "Näytä välilehdet"
 
-#: ../ui/editor_note.xml.h:13
-msgid "_Delete Personal Comment"
-msgstr "_Poista henkilökohtainen kommentti"
+#~ msgid "Go to %s"
+#~ msgstr "Mene %s"
 
-#: ../ui/editor_note.xml.h:15
-#: ../ui/editor_studypad.xml.h:20
-msgid "_Print..."
-msgstr "_Tulosta..."
+#~ msgid "The Setup Druid was cancelled."
+#~ msgstr "Asetusvelho peruutettiin"
 
-#: ../ui/editor_note.xml.h:16
-msgid "_Save (Personal Comment)"
-msgstr "_Tallenna (henkilökohtainen kommentti)"
+#~ msgid "Do you wish to set preferences now?"
+#~ msgstr "Haluatko säätää asetuksia nyt?"
 
-#: ../ui/editor_studypad.xml.h:1
-msgid "Add this file to your bookmarks"
-msgstr "Lisää tämä tiedosto kirjanmerkkeihisi"
+#~ msgid "_About the SWORD Project ..."
+#~ msgstr "_Tietoa SWORD-projektista ..."
 
-#: ../ui/editor_studypad.xml.h:3
-msgid "Create a new document"
-msgstr "Luo uusi tiedosto"
+#~ msgid "Remove failed"
+#~ msgstr "Poisto epäonnistui"
 
-#: ../ui/editor_studypad.xml.h:10
-msgid "New Document"
-msgstr "Uusi tiedosto"
+#~ msgid "Old"
+#~ msgstr "Vanha"
 
-#: ../ui/editor_studypad.xml.h:11
-msgid "Open (PersistFile)"
-msgstr "Avaa (PersistFile)"
+#~ msgid "New"
+#~ msgstr "Uusi"
 
-#: ../ui/editor_studypad.xml.h:12
-msgid "Open using the PersistFile interface"
-msgstr "Avaa käyttäen PersistFile interface:a"
+#~ msgid "URL:"
+#~ msgstr "URL:"
 
-#: ../ui/editor_studypad.xml.h:13
-msgid "Preview the document to be printed"
-msgstr "Esikatsele tulostettavaa tiedostoa"
+#~ msgid "Go to parent"
+#~ msgstr "Mene taso ylemmäksi"
 
-#: ../ui/editor_studypad.xml.h:15
-msgid "Print this document"
-msgstr "Tulosta tämä tiedosto"
+#~ msgid "Go to first child"
+#~ msgstr "Mene ensimmäiseen jaksoon"
 
-#: ../ui/editor_studypad.xml.h:17
-msgid "Save (PersistFile)"
-msgstr "Tallenna (PersistFile)"
+#~ msgid "Save using the PersistStream interface"
+#~ msgstr "Tallenna käyttäen PersistStream interface:a"
 
-#: ../ui/editor_studypad.xml.h:18
-msgid "Save using the PersistFile interface"
-msgstr "Tallenna käyttäen PersistFile interface:a"
+#~ msgid "Open (PersistFile)"
+#~ msgstr "Avaa (PersistFile)"
+
+#~ msgid "Open using the PersistFile interface"
+#~ msgstr "Avaa käyttäen PersistFile interface:a"
+
+#~ msgid "Save (PersistFile)"
+#~ msgstr "Tallenna (PersistFile)"
+
+#~ msgid "Save using the PersistFile interface"
+#~ msgstr "Tallenna käyttäen PersistFile interface:a"
 
 #~ msgid "Pick the background color"
 #~ msgstr "Poimi taustaväri"
+
 #~ msgid "Pick the Bible text color"
 #~ msgstr "Poimi Raamatun tekstin väri"
+
 #~ msgid "Pick the current Verse color"
 #~ msgstr "Poimi nykyisen jakeen väri"
+
 #~ msgid "Pick the current Verse background color"
 #~ msgstr "Poimi nykyisen jakeen taustaväri"
+
 #~ msgid "<span weight=\"bold\">Font Colors</span>"
 #~ msgstr "<span weight=\"bold\">Kirjasinlajien värit</span>"
-
