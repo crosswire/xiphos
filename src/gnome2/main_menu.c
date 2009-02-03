@@ -99,8 +99,7 @@ on_help_contents_activate(GtkMenuItem * menuitem,
 	gui_generic_warning("Cygwin does not have the\n"
 			    "documentation viewer needed to\n"
 			    "view the Xiphos manual.\n"
-			    "Install and reference the\n"
-			    "Xiphos manual module instead.");
+			    "See http://xiphos.org/manual/.");
 #else
 	GError *error = NULL;
 # ifdef WIN32
