@@ -4,20 +4,20 @@
 # <>, 2008.
 # , fuzzy
 # <>, 2009.
-# 
-# 
+#
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-01-22 10:08+0000\n"
-"PO-Revision-Date: 2009-02-03 20:41+0000\n"
+"PO-Revision-Date: 2009-02-03 23:23+0000\n"
 "Last-Translator: David Lodge <dave@cirt.net>\n"
 "Language-Team: English/GB <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../xiphos.desktop.in.in.h:1
 msgid "Xiphos Bible Guide"
@@ -553,9 +553,8 @@ msgstr "در ارتباط بمان"
 
 #. 15
 #: ../src/gnome2/commentary_dialog.c:1642 ../src/gnome2/commentary.c:982
-#, fuzzy
 msgid "Commentary by Chapter"
-msgstr "نگرش به تفسیر"
+msgstr "تفسیر فصل به إصل"
 
 #. 7
 #: ../src/gnome2/commentary_dialog.c:1702 ../src/gnome2/commentary.c:1043
@@ -1374,9 +1373,8 @@ msgid "Tabs and Panes"
 msgstr "برگها و پنجره‌ها"
 
 #: ../src/gnome2/preferences_dialog.c:1788
-#, fuzzy
 msgid "Options"
-msgstr "سرلوحه"
+msgstr "گزینه"
 
 #: ../src/gnome2/preferences_dialog.c:1795
 msgid "Main"
@@ -1808,9 +1806,8 @@ msgstr "آشکار/مخفی کردن قفسه جانبی"
 
 #. 16
 #: ../src/gnome2/main_menu.c:1121
-#, fuzzy
 msgid "Show Parallel View in a tab"
-msgstr "نگرش به شکل توازی"
+msgstr "نگرش به شکل موازی"
 
 #. 17
 #: ../src/gnome2/main_menu.c:1127
@@ -2100,7 +2097,7 @@ msgstr "نقطه ایکس"
 
 #: ../src/main/prayerlists.cc:136
 msgid "<b>(x)</b><br>"
-msgstr ""
+msgstr "<b>)ا(</b><br>"
 
 #: ../src/main/prayerlists.cc:137
 msgid "Point y"
@@ -2108,7 +2105,7 @@ msgstr "نقطه وای"
 
 #: ../src/main/prayerlists.cc:138
 msgid "<b>(y)</b><br>"
-msgstr ""
+msgstr "<b>)ب(</b><br>"
 
 #: ../src/main/prayerlists.cc:139
 msgid "Point z"
@@ -2116,7 +2113,7 @@ msgstr "نقطه زد"
 
 #: ../src/main/prayerlists.cc:140
 msgid "<b>(z)</b><br>"
-msgstr ""
+msgstr "<b>)پ(</b><br>"
 
 #: ../src/main/prayerlists.cc:148
 msgid "Minor Topic 1"
@@ -2186,7 +2183,7 @@ msgstr "لیست دعای موضوعی"
 
 #: ../src/main/prayerlists.cc:377
 msgid "Bob<br>Sam<br>Sue<br>John<br>"
-msgstr ""
+msgstr "علی <br> محمود <br> شیرین <br> نازی"
 
 #: ../src/main/prayerlists.cc:378
 msgid "Spiritual Growth"
@@ -2194,11 +2191,11 @@ msgstr "رشد روحانی"
 
 #: ../src/main/prayerlists.cc:379
 msgid "Mike<br>Steve<br>"
-msgstr ""
+msgstr "شهره، <br> شبنم.<br>"
 
 #: ../src/main/prayerlists.cc:381
 msgid "Sue<br>John<br>"
-msgstr ""
+msgstr "نوشین <br> زهره <br>"
 
 #: ../src/main/prayerlists.cc:407
 msgid "A monthly prayer list. \\par\\par Module created by Xiphos."
@@ -3202,9 +3199,8 @@ msgid "Parallel 5 Combo"
 msgstr "توازی ترکیبی ۵"
 
 #: ../ui/prefs.glade.h:72
-#, fuzzy
 msgid "Parallel View in a tab"
-msgstr "نگرش به شکل توازی"
+msgstr "نگرش به شکل موازی در برگ"
 
 #: ../ui/prefs.glade.h:73
 msgid "Personal Notes"
