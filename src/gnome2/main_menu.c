@@ -1143,13 +1143,13 @@ static GnomeUIInfo help1_menu_uiinfo[] = {
 	GNOME_APP_UI_ITEM, N_("_Mailing List"),
 	N_("Sign up for the users' mailing list"),
 	on_mailing_list_activate, NULL, NULL,
-	GNOME_APP_PIXMAP_STOCK, GTK_STOCK_ABOUT,
+	GNOME_APP_PIXMAP_FILENAME, NULL /* init'd in menu creation */,
 	0, 0, NULL},
 	{
 	GNOME_APP_UI_ITEM, N_("_Live Chat"),
 	N_("Chat with other users and developers"),
 	on_live_chat_activate, NULL, NULL,
-	GNOME_APP_PIXMAP_STOCK, GTK_STOCK_DIALOG_QUESTION, //or GNOME_APP_PIXMAP_FILENAME, "what/is/this/path/relative/to.png?",
+	GNOME_APP_PIXMAP_FILENAME, NULL /* init'd in menu creation */,
 	0, 0, NULL},
 	{
 	 GNOME_APP_UI_ITEM, N_("_Report Bug"),
@@ -1162,20 +1162,20 @@ static GnomeUIInfo help1_menu_uiinfo[] = {
 	 GNOME_APP_UI_ITEM, N_("About _Translation"),
 	 N_("Translating Xiphos to other languages"),
 	 on_about_translation_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_ABOUT,
+	 GNOME_APP_PIXMAP_FILENAME, NULL /* init'd in menu creation */,
 	 0, 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
 	{
 	 GNOME_APP_UI_ITEM, N_("_About the SWORD Project"),
 	 N_("More information about the SWORD Project"),
 	 on_about_the_sword_project1_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_ABOUT,
+	 GNOME_APP_PIXMAP_FILENAME, NULL /* init'd in menu creation */,
 	 0, 0, NULL},
 	{
 	 GNOME_APP_UI_ITEM, N_("About _Xiphos"),
 	 N_("About this application"),
 	 on_about_xiphos1_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_ABOUT,
+	 GNOME_APP_PIXMAP_FILENAME, NULL /* init'd in menu creation */,
 	 0, 0, NULL},
 	GNOMEUIINFO_END
 };
@@ -1232,15 +1232,25 @@ static GnomeUIInfo menubar1_uiinfo[] = {
  */
 
 void
+set_custom_pixmap(GnomeUIInfo menu[], int index, const char* filename){
+	if (!menu[index].pixmap_info)
+		menu[index].pixmap_info =
+		    image_locator(filename);
+} 
+
+void
 gui_create_main_menu(GtkWidget * app)
 {
 	/*
 	 * this is total magic.  set up menu before using it.
 	 * indices are direct from GnomeUIInfo above.
 	 */
-	if (!file1_menu_uiinfo[0].pixmap_info)
-		file1_menu_uiinfo[0].pixmap_info =
-		    image_locator("silk-edit-bookmarks.png");
+	set_custom_pixmap(file1_menu_uiinfo, 0, "silk-edit-bookmarks.png");
+	set_custom_pixmap(help1_menu_uiinfo, 1, "mailing_list_icon-16.png");
+	set_custom_pixmap(help1_menu_uiinfo, 2, "chat_icon-16.png");
+	set_custom_pixmap(help1_menu_uiinfo, 5, "translation_icon-16.png");
+	set_custom_pixmap(help1_menu_uiinfo, 7, "sword_icon-16.png");
+	set_custom_pixmap(help1_menu_uiinfo, 8, "xiphos-x-16.png");
 	/* end magic */
 
 	gnome_app_create_menus(GNOME_APP(app), menubar1_uiinfo);
