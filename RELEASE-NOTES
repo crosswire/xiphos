@@ -24,54 +24,59 @@ This release represents a huge new chapter in our program's life.
     designers having done a facelift of our graphics, both in the
     program and on the website.
 
- 3. Standard module repository setup for first-time users.
+ 3. Configure with --enable-paratab to obtain the detached parallel
+    window as another tab and to put the previewer into the sidebar.
+    See the View menu.
 
- 4. Image resize enabled by default.
+ 4. Standard module repository setup for first-time users.
 
- 5. Commentary-by-chapter display, as a commentary module option,
+ 5. Image resize enabled by default.
+
+ 6. Commentary-by-chapter display, as a commentary module option,
     rather than just per-verse commentary.
 
- 6. Consistent dialog usages: Y/N questions and file browsers.
+ 7. Consistent dialog usages: Y/N questions and file browsers.
 
- 7. Module manager: Remembers previous settings.  New remote source is
+ 8. Module manager: Remembers previous settings.  New remote source is
     set as current.  Tooltips over icons in module manager lists.
     Visual improvements by showing repository in use and separating
-    full module lists from limited update/uninstalled lists.
+    full module lists from limited update/uninstalled lists.  Now
+    functions correctly with both shared and personal storage areas.
 
- 8. Compatibility with forthcoming Sword engine updates for dynamic
+ 9. Compatibility with forthcoming Sword engine updates for dynamic
     versification ("dv11n").  Future modules will support e.g.
     deuterocanonical books in Catholic Bibles.
 
- 9. More uniform module option support in parallel window.
+10. More uniform module option support in parallel window.
 
-10. Dictionary links auto-display in the previewer, after the
+11. Dictionary links auto-display in the previewer, after the
     fashion of Strong's and morphology references.
-
-11. Better search term highlighting in both sidebar and dialog search.
 
 12. Better Help menu selections: Online chat support, bug reporting,
     mailing list pointers.
 
-13. Double-click navigation of search results entries.
+13. Better search term highlighting in both sidebar and dialog search.
 
-14. Improved/fixed search abort.  Assume "AND" semantic for sidebar
+14. Double-click navigation of search results entries.
+
+15. Improved/fixed search abort.  Assume "AND" semantic for sidebar
     multiple word search.
 
-15. Countless internal cleanups, efficiency improvements, and
+16. Countless internal cleanups, efficiency improvements, and
     bugfixes, the need for many of which was exposed by the Windows
     port effort.
 
-16. Additions to the manual, especially for instruction on original
+17. Additions to the manual, especially for instruction on original
     language research and how to get help.
 
-17. Better integration of image support with ImageMagick libraries.
+18. Better integration of image support with ImageMagick libraries.
 
-18. Respect for configuration-specified font choices (Font= and
+19. Respect for configuration-specified font choices (Font= and
     Fontsize= in module configuration files).
 
-19. Improvements to build-time configuration support.
+20. Improvements to build-time configuration support.
 
-20. Fixed fast search ("lucene") index creation.
+21. Fixed fast search ("lucene") index creation.
     NOTE: The implication of this bugfix is that any existing
     index is in error.  You should re-create all module indexes.
 
