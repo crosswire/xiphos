@@ -64,7 +64,7 @@
 		<para>
 		There are other repositories available besides Crosswire's own, though the modules available from other repositories do not
 		represent content officially sanctioned by Crosswire.  On the web, see this page for list of those repositories known:
-		<ulink type="http" url="http://www.crosswire.org/wiki/index.php/Module_Repositories">http://www.crosswire.org/wiki/index.php/Module_Repositories</ulink>		
+		<ulink type="http" url="http://www.crosswire.org/wiki/Module_Repositories">http://www.crosswire.org/wiki/Module_Repositories</ulink>		
 		</para>
 		</sect3>
 		<sect3 id="installation">
@@ -117,7 +117,7 @@
 				<para>
 				You may install modules to a shared folder so the modules are available to all users. If you have previously used
 				"The Sword Project for Windows", this folder will be "C:\Program Files\Crosswire\The Sword Project\Sword". Otherwise
-				it will be "C:\Documents and Settings\All Users\Application Data\.sword". You may also install modules to a location
+				it will be "C:\Documents and Settings\All Users\Application Data\Sword". You may also install modules to a location
 				that can only be seen by you. This location is "C:\Documents and Settings\YOUR NAME\Application Data\.sword".
 				</para>
 			</sect4>
@@ -126,7 +126,7 @@
 				<title>Windows Vista</title>
 				<para>
 				Vista works much the same as XP, except for the locations. The private location is 
-				"C:\Users\YOUR NAME\AppData\Roaming\.sword". The shared location is "C:\ProgramData\.sword".
+				"C:\Users\YOUR NAME\AppData\Roaming\.sword". The shared location is "C:\ProgramData\Sword".
 				</para>
 			</sect4>
 			
@@ -164,7 +164,7 @@
 		time.  Modules which are either not yet installed or updated beyond what is currently installed will appear in both lists.
 		</para>
 		<para>
-		Modules that are already installed will show a checkmark beside them.  If a fast search ("lucene") index is available, an open book will be
+		Modules that are already installed will show a checkmark beside them.  If a fast search ("lucene") index is available, a magnifying glass will be
 		displayed, otherwise an "X" will be shown; creation of the index is available on the Maintenance pane.  Locked modules, which require that you
 		purchase an unlock key from the module's copyright holder, will show a lock symbol.  If there are modules installed for which a more recent
 		version is available, a refresh icon will appear between the differing old and new version stamps.  There may be an approximate size displayed,
