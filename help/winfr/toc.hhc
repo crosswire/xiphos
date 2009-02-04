@@ -40,7 +40,7 @@
 <UL>
 <LI><OBJECT type="text/sitemap">
 <param name="Name" value="Boutons de d&eacute;placement avant/arri&egrave;re dans l'historique.">
-<param name="Local" value="ar01s03.html#d0e764"></OBJECT></LI>
+<param name="Local" value="ar01s03.html#d0e779"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
 <param name="Name" value="S&eacute;lecteur de livre de la Bible">
 <param name="Local" value="ar01s03.html#xiphos-toolbar-book"></OBJECT></LI>
@@ -264,7 +264,7 @@
 <param name="Name" value="Commentaires personnels">
 <param name="Local" value="ar01s08.html"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
-<param name="Name" value="Listes de pri&egrave;res et notes">
+<param name="Name" value="Listes de pri&egrave;res et Journaux">
 <param name="Local" value="ar01s09.html"></OBJECT></LI>
 <LI><OBJECT type="text/sitemap">
 <param name="Name" value="Obtenir de l'aide en ligne">
