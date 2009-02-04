@@ -855,7 +855,7 @@ void gconf_setup()
 	 */
 	if ((((str = gconf_client_get_string(client, gconf_keys[0][0],
 					    NULL)) == NULL) ||
-	     (strncmp(str, "xiphos2", 11) == 0))
+	     (strncmp(str, "gnomesword", 10) == 0))
 #ifdef DEBUG
 	    && gui_yes_no_dialog(GS_GCONF_PERMISSION, NULL)
 #endif /* DEBUG */
