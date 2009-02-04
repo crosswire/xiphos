@@ -1,6 +1,7 @@
 2009-02-03  karl <charcoal@users.sf.net>
 
 	* fix gconf key replacement logic for "xiphos".
+	* add trivial gnomesword2 script to re-direct users.
 
 2009-01-31  karl <charcoal@users.sf.net>
 
