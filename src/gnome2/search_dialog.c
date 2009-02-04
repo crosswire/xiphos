@@ -1528,13 +1528,11 @@ void _setup_listviews2(GtkWidget * listview, GCallback callback)
 	_add_two_text_columns(GTK_TREE_VIEW(listview));
 	if (!callback)
 		return;
-	//selection =
-	//    G_OBJECT(gtk_tree_view_get_selection
-	//	     (GTK_TREE_VIEW(listview)));
-	//g_signal_connect(selection, "changed", G_CALLBACK(callback),
-	//		 NULL);
 	g_signal_connect((gpointer) listview,
-				"button_press_event",
+			 "button_press_event",
+			 G_CALLBACK(callback), NULL);
+	g_signal_connect((gpointer) listview,
+				"button_release_event",
 				G_CALLBACK(callback), NULL);
 
 }
