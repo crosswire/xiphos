@@ -539,14 +539,14 @@
 		<interface>Bible Text Pane</interface> provides.
 		</para>
 		<para>
-		Footnote content is normally transient in the Previewer: It is displayed while your mouse hovers over the footnote
-		indicator <guibutton>*n</guibutton> in the Bible text, and then disappears when your mouse moves off.  But some
-		translations' footnotes (e.g. NET Bible's) can be very large, so that not all the text is visible.  To anchor the text so
+		Footnote content is displayed in the Previewer when you hover over the indicator <guibutton>*n</guibutton> in the Bible text;
+		It remains visible until your mouse moves over another indicator, Strong's number, etc. Sometimes you may want the text to
+		remain anchored until you can move the mouse to the previewer to click on a link or to read large footnotes. To anchor the text so
 		that you can scroll it in the Previewer, middle-click the indicator (or hold down the <guibutton>Shift key</guibutton>)
 		and move to the Previewer.
 		</para>
 		<para>
-		Cross-reference indicators <guibutton>*x</guibutton> also display transiently in the Previewer.  Left-clicking the
+		Cross-reference indicators <guibutton>*x</guibutton> work much the same way.  Clicking the
 		indicator will send the set of references to the <guibutton>Verse List</guibutton> in the
 		<interface>Sidebar</interface>, where you can click them individually for reading in the Previewer.
 		</para>
@@ -733,9 +733,9 @@
 		Several desirable capabilities are unsupportable in gtkhtml3, and although recent <application>Xiphos</application> is
 		written to take advantage of MozEmbed features, it is possible that the version running on your computer needed to be
 		built with gtkhtml3 instead, either because the version of MozEmbed available for your system is not recent enough to
-		support the needs of <application>Xiphos</application>, or it simply doesn't exist for your system.  (Notably, Cygwin
-		has no MozEmbed at all.)  The following differences will be apparent, depending on whether gtkhtml3 or MozEmbed is the
-		underlying display engine:
+		support the needs of <application>Xiphos</application>, or it simply doesn't exist for your system.  (Mozembed is not
+		supported under Windows at this time.)  The following differences will be apparent, depending on whether gtkhtml3 or 
+		MozEmbed is the underlying display engine:
 		</para>
 
 		<itemizedlist>
