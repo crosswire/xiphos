@@ -150,13 +150,13 @@
 		The Previewer is where the user sees Strong's numbers, morphological tags, footnotes, and cross-references that the
 		<span class="interface">Bible Text Pane</span> provides.
 		</p><p>
-		Footnote content is normally transient in the Previewer: It is displayed while your mouse hovers over the footnote
-		indicator <span class="guibutton">*n</span> in the Bible text, and then disappears when your mouse moves off.  But some
-		translations' footnotes (e.g. NET Bible's) can be very large, so that not all the text is visible.  To anchor the text so
+		Footnote content is displayed in the Previewer when you hover over the indicator <span class="guibutton">*n</span> in the Bible text;
+		It remains visible until your mouse moves over another indicator, Strong's number, etc. Sometimes you may want the text to
+		remain anchored until you can move the mouse to the previewer to click on a link or to read large footnotes. To anchor the text so
 		that you can scroll it in the Previewer, middle-click the indicator (or hold down the <span class="guibutton">Shift key</span>)
 		and move to the Previewer.
 		</p><p>
-		Cross-reference indicators <span class="guibutton">*x</span> also display transiently in the Previewer.  Left-clicking the
+		Cross-reference indicators <span class="guibutton">*x</span> work much the same way.  Clicking the
 		indicator will send the set of references to the <span class="guibutton">Verse List</span> in the
 		<span class="interface">Sidebar</span>, where you can click them individually for reading in the Previewer.
 		</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="xiphos-commentaries"></a>The Commentary Pane</h3></div></div></div><div class="figure"><a name="commentary_figure"></a><p class="title"><b>Figure&nbsp;15.&nbsp;The Commentary Pane</b></p><div class="figure-contents"><div class="screenshot"><div class="mediaobject"><img src="figures/interface_commentarypane.png" alt="Commentary Pane"></div></div></div></div><br class="figure-break"><p>
@@ -219,9 +219,9 @@
 		Several desirable capabilities are unsupportable in gtkhtml3, and although recent <span class="application">Xiphos</span> is
 		written to take advantage of MozEmbed features, it is possible that the version running on your computer needed to be
 		built with gtkhtml3 instead, either because the version of MozEmbed available for your system is not recent enough to
-		support the needs of <span class="application">Xiphos</span>, or it simply doesn't exist for your system.  (Notably, Cygwin
-		has no MozEmbed at all.)  The following differences will be apparent, depending on whether gtkhtml3 or MozEmbed is the
-		underlying display engine:
+		support the needs of <span class="application">Xiphos</span>, or it simply doesn't exist for your system.  (Mozembed is not
+		supported under Windows at this time.)  The following differences will be apparent, depending on whether gtkhtml3 or 
+		MozEmbed is the underlying display engine:
 		</p><div class="itemizedlist"><ul type="disc"><li>
 				Morphology and Strong's references, enabled via the right-click menu in some modules, are displayed inline
 				with gtkhtml3; with MozEmbed, a blocked display is used, where these references are aligned beneath the word
