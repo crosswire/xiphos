@@ -17,7 +17,9 @@ INCLUDES =  \
     -DSHARE_DIR=\"$(pkgdatadir)\"  \
     $(UPRINT_CFLAGS)
 
-bin_PROGRAMS = xiphos
+bin_PROGRAMS = xiphos gnomesword2
+
+gnomesword2_SOURCES = ''
 
 xiphos_SOURCES =  \
     about_modules.c \
