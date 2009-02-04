@@ -4,13 +4,108 @@ XIPHOS RELEASE NOTES
 ____________________
 
 Release 3.0
-xx Feb 2009
+06 Feb 2009
+
+Xiphos begins life, as the former GnomeSword.
+
+We have changed our name to Xiphos because GnomeSword was deemed too
+obscure, especially considering our anticipated new user base.
+
+This release represents a huge new chapter in our program's life.
+
+ 1. Windows port.  It is very nearly complete; only a couple features
+    are missing.  Most notably, they are the MozEmbed display engine
+    and the "read aloud" facility using Festival text-to-speech.  We
+    anticipate both of these features becoming available in a later
+    3.x release but there was simply not enough time to get everything
+    done for this release.
+
+ 2. A fabulous new look, with the support of professional graphics
+    designers having done a facelift of our graphics, both in the
+    program and on the website.
+
+ 3. Standard module repository setup for first-time users.
+
+ 4. Image resize enabled by default.
+
+ 5. Commentary-by-chapter display, as a commentary module option,
+    rather than just per-verse commentary.
+
+ 6. Consistent dialog usages: Y/N questions and file browsers.
+
+ 7. Module manager: Remembers previous settings.  New remote source is
+    set as current.  Tooltips over icons in module manager lists.
+    Visual improvements by showing repository in use and separating
+    full module lists from limited update/uninstalled lists.
+
+ 8. Compatibility with forthcoming Sword engine updates for dynamic
+    versification ("dv11n").  Future modules will support e.g.
+    deuterocanonical books in Catholic Bibles.
+
+ 9. More uniform module option support in parallel window.
+
+10. Dictionary links auto-display in the previewer, after the
+    fashion of Strong's and morphology references.
+
+11. Better search term highlighting in both sidebar and dialog search.
+
+12. Better Help menu selections: Online chat support, bug reporting,
+    mailing list pointers.
+
+13. Double-click navigation of search results entries.
+
+14. Improved/fixed search abort.  Assume "AND" semantic for sidebar
+    multiple word search.
+
+15. Countless internal cleanups, efficiency improvements, and
+    bugfixes, the need for many of which was exposed by the Windows
+    port effort.
+
+16. Additions to the manual, especially for instruction on original
+    language research and how to get help.
+
+17. Better integration of image support with ImageMagick libraries.
+
+18. Respect for configuration-specified font choices (Font= and
+    Fontsize= in module configuration files).
+
+19. Improvements to build-time configuration support.
+
+20. Fixed fast search ("lucene") index creation.
+    NOTE: The implication of this bugfix is that any existing
+    index is in error.  You should re-create all module indexes.
 
 Bug reports addressed since 2.4.1:
+2264199  Long custom Module lists make search gui too wide
+2264209  Scrolling to next/previous chapter no longer works
+2264276  Words with preceding punctuation dict lookup fails
+2267026  Attribute search fails if preceding '0' is in search
+2309713  Building with gecko fails on Debian
+2334366  Building fails with xulrunner-1.9
+2384287  Uninstalling current Bible module causes crashes.
+2385811  Gnomesword crashes on attempted studypad sync
+2390811  Search fails when Gnomesword builds indexes
+2412580  Indexing Gnomesword-created modules fails
+2413029  Printing User Created Modules ignores markup
+2416023  Local Source Reports Incorrect Installation Status
+2423941  Printing, then navigating genbook causes crash
+2423950  Module Manager doesn't refresh after local installation
+2430285  gtkhtml parallel view issues
+2471807  gtkhtml previewer font
+2471811  Bookmarks do not work for user-created modules
+2471830  First Run, First Tab Navigation issue
+2474005  Genbooks do not allow navigation from address bar
+2486766  Mozembed Parallel View doesn't respect cross-reference
+2486769  Parallel view right-click->copy does nothing
+2532349  mozembed doesn't respect default dictionary
+2539788  [PATCH] Update FSF address
 
 New feature requests pending:
+2533238  Copy verse functionality (like e-sword)
 
 Feature requests closed:
+2409256  Ability to scroll to the next chapter
+2407301  Double Click Search Results to Display Verse
 ________________________
 
 Release 2.4.1
