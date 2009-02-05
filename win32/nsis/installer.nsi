@@ -99,6 +99,9 @@
     ; Macro for registering fonts
     !include "${INCL_DIR}\utf16_fontreg.nsh"
 
+    ; Macro for page with release notes
+    !include "${INCL_DIR}\utf16_releasenotes.nsh"
+
     !include "nsDialogs.nsh"
     !include "LogicLib.nsh"
     !include "TextFunc.nsh"
@@ -182,7 +185,8 @@
 
     !insertmacro MUI_PAGE_STARTMENU Application $StartMenuDir
 
-    #Page custom basicInfo ; Basic instructions for OpenSong
+    ; page with release notes
+    !insertmacro MUI_PAGE_README "utf16_RELEASE-NOTES"
 
     !insertmacro MUI_PAGE_FINISH
 
@@ -197,6 +201,28 @@
     !define UNINSTALLOG_LOCALIZE 
 
     !insertmacro LINGUAS_USE
+
+    ; Text for page with release notes - not translated English for
+    ; all languages
+    !macro RELEASENOTES_STRINGS LNG
+        !insertmacro ReadmeLangStrings "" "${LNG}" \
+            "Release Notes" \
+            "Please review the following important information." \
+            "About $(^name):" \
+            "$\n  Click on scrollbar arrows or press Page Down to review the entire text."
+    !macroend
+
+    !insertmacro RELEASENOTES_STRINGS ${LANG_ENGLISH}
+    !insertmacro RELEASENOTES_STRINGS ${LANG_CZECH}
+    !insertmacro RELEASENOTES_STRINGS ${LANG_GERMAN}
+    !insertmacro RELEASENOTES_STRINGS ${LANG_FARSI}
+    !insertmacro RELEASENOTES_STRINGS ${LANG_FINNISH}
+    !insertmacro RELEASENOTES_STRINGS ${LANG_FRENCH}
+    !insertmacro RELEASENOTES_STRINGS ${LANG_HEBREW}
+    !insertmacro RELEASENOTES_STRINGS ${LANG_DUTCH}
+    !insertmacro RELEASENOTES_STRINGS ${LANG_PORTUGUESE}
+    !insertmacro RELEASENOTES_STRINGS ${LANG_SWEDISH}
+
 
     ; Include localizations
     !insertmacro LINGUAS_INCLUDE
@@ -214,6 +240,8 @@
     ReserveFile "${NSISDIR}\Plugins\nsDialogs.dll"
     ReserveFile "${INCL_DIR}\utf16_advuninstlog.nsh"
     ReserveFile "${INCL_DIR}\utf16_fontreg.nsh"
+    ReserveFile "${INCL_DIR}\utf16_releasenotes.nsh"
+    ReserveFile "utf16_RELEASE-NOTES"
 
     !insertmacro LINGUAS_RESERVEFILE
 
