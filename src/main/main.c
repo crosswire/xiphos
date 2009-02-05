@@ -80,6 +80,10 @@ int main(int argc, char *argv[])
 		putenv(g_strdup_printf("SWORD_PATH=%s/Application Data/Sword",
 				       getenv("ALLUSERSPROFILE")));
 	mkdir(getenv("SWORD_PATH"));
+	
+	if (!getenv("LANG"))
+	        putenv(g_strdup_printf("LANG=%s",
+				       g_win32_getlocale()));
 
 	/* we need an idea of $HOME that's convenient. */
 	/* this gives us linux-equivalent semantics. */
