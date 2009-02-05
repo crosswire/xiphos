@@ -142,7 +142,7 @@ gui_create_about_trans(void)
 	gtk_widget_set_usize(label, -2, 24);
 
 	href =
-	    gnome_href_new("http://xiphos.org/development/hacking-xiphos",
+	    gnome_href_new("http://xiphos.org/development/",
 			   _("Xiphos development"));
 	gtk_widget_show(href);
 	gtk_box_pack_start(GTK_BOX(vbox), href, FALSE, FALSE, 0);
