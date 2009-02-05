@@ -1,3 +1,7 @@
+2009-02-05  karl <charcoal@users.sf.net>
+
+	* fix logic to add extra mod.mgr remote sources.
+
 2009-02-03  karl <charcoal@users.sf.net>
 
 	* fix gconf key replacement logic for "xiphos".
