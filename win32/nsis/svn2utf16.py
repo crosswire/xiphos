@@ -55,6 +55,8 @@ def b_join(name):
 fprefix = "utf16_" # prefix for new text files in UTF-16LE
 folders = map(b_join, ["i18n", "include"])
 nsis_script = b_join("installer.nsi")
+release_notes = b_join("../../RELEASE-NOTES")
+release_notes_utf16 = b_join("utf16_RELEASE-NOTES")
 
 
 # add prefix 'utf16_' to file name
@@ -64,9 +66,13 @@ def add_fpref(name):
 
 
 # UTF-8 to UTF-16
-def to_utf16(file):
+def to_utf16(file, fileout=None):
     file_in = open(file, 'r')
-    file_out = open(add_fpref(file), 'w')
+
+    if fileout == None:
+        file_out = open(add_fpref(file), 'w')
+    else:
+        file_out = open(fileout, 'w')
     
     # conversion
     content = file_in.read()
@@ -84,6 +90,9 @@ def convert():
     print "converting..."
     print nsis_script
     to_utf16(nsis_script)
+    
+    print release_notes
+    to_utf16(release_notes, release_notes_utf16)
 
     for fold in folders:
         print "dir:", fold
@@ -106,6 +115,10 @@ def clean():
     if os.path.exists(script):
         print script
         os.remove(script)
+
+    if os.path.exists(release_notes_utf16):
+        print release_notes_utf16
+        os.remove(release_notes_utf16)
 
     for fold in folders:
         files = os.listdir(fold)

@@ -24,6 +24,7 @@ LangString UNLOG_EMPTY_DIR ${LANG_ENGLISH} \
 LangString UNLOG_ERROR_LOG ${LANG_ENGLISH} "Error in log ${UNINSTALL_LOG}."
 LangString UNLOG_ERROR_CREATE ${LANG_ENGLISH} "Error creating ${UNINSTALL_LOG}."
 
+
 ;--------------------------------
 ; Other Strings
 

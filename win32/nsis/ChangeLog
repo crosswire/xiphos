@@ -9,6 +9,8 @@
 	  FreeSans.ttf (v. 20090104)
 	  FreeSerif.ttf (v. 20090104)
 	* added installation of Sword files to ALLUSERSAPPS/Application Data/Sword
+	* added page with release notes
+	* disabled installer translations for languages bg, ru, nb_NO, es, sk, uk
 	
 2009-01-04  matysek <matysek03@users.sf.net>
 
