@@ -322,8 +322,24 @@ gboolean select_book_button_press_callback(GtkWidget * widget,
 					     DIALOG_DATA * dialog)
 {
 	GtkWidget *menu;
+
+	GTimeVal start_time;
+	GTimeVal end_time;
+	glong time_diff;
+	guint32 time_add;
+
+	g_get_current_time( &start_time );
+	GS_message(("Start time is: %d sec %d mil", start_time.tv_sec, start_time.tv_usec));
 	
 	menu = main_versekey_drop_down_book_menu(dialog->navbar, NB_DIALOG, dialog, NULL);
+
+	g_get_current_time( &end_time );
+	GS_message(("End time is: %d sec %d mil", end_time.tv_sec, end_time.tv_usec));
+	time_diff = ((end_time.tv_sec - start_time.tv_sec) * 1000000) + (end_time.tv_usec - start_time.tv_usec);
+	time_add = 0;
+	if (time_diff > 10000)
+	  time_add = (guint32)(time_diff / 1000);
+
 	if(!menu)
 		return 0;		
 	g_signal_connect(menu, "deactivate",
@@ -333,7 +349,11 @@ gboolean select_book_button_press_callback(GtkWidget * widget,
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), TRUE);
 		gtk_menu_popup(GTK_MENU(menu), NULL, NULL,
 			       menu_position_under, widget, event->button,
-			       event->time);
+#ifdef WIN32
+			       event->time + time_add);
+#else
+		               event->time);
+#endif
 		return TRUE;
 	}
 	return FALSE;

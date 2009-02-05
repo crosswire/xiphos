@@ -185,7 +185,7 @@ static gboolean select_book_button_press_callback(GtkWidget * widget,
 
 	g_get_current_time( &start_time );
 	GS_message(("Start time is: %d sec %d mil", start_time.tv_sec, start_time.tv_usec));
-	
+
 	menu = main_versekey_drop_down_book_menu(navbar_versekey, NB_MAIN,
 						NULL,NULL);
 
@@ -193,8 +193,8 @@ static gboolean select_book_button_press_callback(GtkWidget * widget,
 	GS_message(("End time is: %d sec %d mil", end_time.tv_sec, end_time.tv_usec));
 	time_diff = ((end_time.tv_sec - start_time.tv_sec) * 1000000) + (end_time.tv_usec - start_time.tv_usec);
 	time_add = 0;
-	if (time_diff > 200000)
-	  time_add = (guint32)(time_diff / 1000);
+	//if (time_diff > 10000)
+	time_add = (guint32)(time_diff / 1000);
 
 	if(!menu)
 		return 0;		
