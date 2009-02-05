@@ -1,0 +1,51 @@
+# Copyright (C) 2008 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+
+Translating Xiphos
+
+Like all other Gnome programmes Xiphos is translated by creating a "po" file
+for it in the relevant language.
+
+1.) po files structure
+2.) creating a po file from scratch
+3.) updating a po file
+4.) Translators IDE
+
+Po files are essentially text files with an entry for each string which
+requires translation. 
+
+Each entry consists of three or four parts:
+
+#: ../xiphos.desktop.in.in.h:1
+msgid "Xiphos Bible Guide"
+msgstr "زیفوس-نرم·افزار·مطالعه·کتابمقدس"
+
+A comment line pointing towards the exact origin of the particular string
+within the source code
+A msgid line which quotes the original string 
+A msgstr line which contains the relevant translation.
+
+A tranlation which is doubtful can carry a second comment line, declaring it
+as "fuzzy":
+
+#: ../ui/prefs.glade.h:21
+#, fuzzy
+msgid "Base text size"
+msgstr "سایز قلم بنیادی"  
+
+2.) To create a new translation simply copy the file xiphos.pot and rename
+your working copy to xx.po where xx stands for the
+relevant iso code for your target language - e.g. fa.po for Farsi, de.po for
+German etc.
+
+3.) If you need to update your file to the newest strings you can use the
+command msgmerge:
+
+msgmerge xx.po xiphos.pot > xx.po.new
+
+4.) Suitable programmes to make translation easy are 
+
+gtranslator, 
+poedit   (both on Linux)
+
+ 
