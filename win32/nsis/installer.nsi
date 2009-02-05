@@ -42,17 +42,22 @@
 
     !define APP_NAME "Xiphos"
     !define APP_BINARY_NAME "xiphos.exe"
-    !define APP_VERS "3.0"
-    !define APP_EDITION "win32-test06"
-    !define APP_URL "http://xiphos.sf.net"
+    !define APP_VERS "3.0beta"
+    !define APP_EDITION "win32"
+    !define APP_URL "http://xiphos.org"
 
     ; Paths with application files for installer
-    !define PATH_CORE "..\gs_bin"
-    !define PATH_IMG "img"
+    !define PATH_CORE "..\binaries\Xiphos"
+    !define PATH_SWORD "..\binaries\Sword" 
+    !define PATH_IMG "pixmaps"
     !define PATH_FONT "..\fonts"
+
+    ; Folder in ALLUSERSAPPS/Application Data/ for Sword files
+    !define INSTPATH_SWORD "Sword"
 
     ; Files
     !define CORE_F "${PATH_CORE}\*.*"
+    !define SWORD_F "${PATH_SWORD}\*.*"
 
     ; Following two definitions required by Uninstall log.
     !define INSTDIR_REG_ROOT "HKLM" # HKEY_LOCAL_MACHINE
@@ -219,6 +224,7 @@
 Section $(CORE_SEC_TITLE) SecCore
 
     ; shortcuts will be installed for all users - Desktop/Startmenu
+    ; and Sword data files will be also installed for all users
     SetShellVarContext all
 
 
@@ -227,26 +233,14 @@ Section $(CORE_SEC_TITLE) SecCore
     StrCpy $FONT_DIR $FONTS
 
     ; Libertine fonts
-    !insertmacro InstallOTFFont "${PATH_FONT}\LinLibertine_Re.otf" \
-        "Linux Libertine O (OpenType)"
-    !insertmacro InstallOTFFont "${PATH_FONT}\LinLibertine_Bd.otf" \
-        "Linux Libertine O Bold (OpenType)"
-    !insertmacro InstallOTFFont "${PATH_FONT}\LinLibertine_It.otf" \
-        "Linux Libertine O Italic (OpenType)"
+    !insertmacro InstallTTFFont "${PATH_FONT}\LinLibertine_Re.ttf" \
+        "Linux Libertine (TrueType)"
 
     ; Free fonts
-    !insertmacro InstallOTFFont "${PATH_FONT}\FreeSans.otf" \
-        "Free Sans (OpenType)"
-    !insertmacro InstallOTFFont "${PATH_FONT}\FreeSansBold.otf" \
-        "Free Sans Bold (OpenType)"
-    !insertmacro InstallOTFFont "${PATH_FONT}\FreeSansOblique.otf" \
-        "Free Sans Oblique (OpenType)"
-    !insertmacro InstallOTFFont "${PATH_FONT}\FreeSerif.otf" \
-        "Free Serif (OpenType)"
-    !insertmacro InstallOTFFont "${PATH_FONT}\FreeSerifBold.otf" \
-        "Free Serif Bold (OpenType)"
-    !insertmacro InstallOTFFont "${PATH_FONT}\FreeSerifItalic.otf" \
-        "Free Serif Italic (OpenType)"
+    !insertmacro InstallTTFFont "${PATH_FONT}\FreeSans.ttf" \
+        "Free Sans (TrueType)"
+    !insertmacro InstallTTFFont "${PATH_FONT}\FreeSerif.ttf" \
+        "Free Serif (TrueType)"
 
     #SendMessage ${HWND_BROADCAST} ${WM_FONTCHANGE} 0 0 /TIMEOUT=5000
     SendMessage ${HWND_BROADCAST} ${WM_FONTCHANGE} 0 0 /TIMEOUT=50000
@@ -254,12 +248,15 @@ Section $(CORE_SEC_TITLE) SecCore
     ; Install Application files
 
     SetOutPath '$INSTDIR'
-
-    ; Log installed files
-
     !insertmacro UNINSTALL.LOG_OPEN_INSTALL
         File /r "${CORE_F}"
     !insertmacro UNINSTALL.LOG_CLOSE_INSTALL
+
+    ; Install Sword files
+    SetOutPath '$APPDATA\${INSTPATH_SWORD}'
+    File /r "${SWORD_F}"
+
+    ; startmenu/shortcuts
 
     !define STM_DIR "$SMPROGRAMS\$StartMenuDir"
 

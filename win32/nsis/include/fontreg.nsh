@@ -6,9 +6,8 @@
 # http://nsis.sourceforge.net/Register_Fonts
 
 # Changes to original code:
-# - removed macro 'InstallTTFFont' because it doesn't work with
-#   OTF fonts and it needed additional plugin
-# - macro 'InstallFONFont' renamed to 'InstallFONFont'
+# - removed macro 'InstallTTFFont' because it required a binary file
+# - macro 'InstallFONFont' renamed to 'InstallTTFFont'
 
 var FONT_DIR
  
@@ -61,7 +60,7 @@ var FONT_DIR
 ### End Code From ###
  
  
-!macro InstallOTFFont FontFile FontName
+!macro InstallTTFFont FontFile FontName
   Push $0  
   Push $R0
   Push $R1
