@@ -15,7 +15,8 @@ xiphosdoc_DATA = \
 	ChangeLog \
 	INSTALL \
 	NEWS \
-	TODO
+	TODO \
+	Xiphos.ogg
 
 ACLOCAL_AMFLAGS = -I m4
 
