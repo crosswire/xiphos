@@ -1984,6 +1984,14 @@ on_dialog_destroy(GtkObject * object, gpointer user_data)
 		main_load_module_tree(sidebar.module_list);
 	}
 
+	/*
+	 * if InstallMgr.conf has just been init'd, then we
+	 * want to add the rest of the standard repositories.
+	 */
+	if (g_list_length(tmp = mod_mgr_list_remote_sources()) <= 1)
+		mod_mgr_init_config_extras();
+	g_list_free(tmp);
+
 	working = FALSE;
 
 	if (first_time_user) return;	/* no deeper analysis, first time around. */
@@ -2905,7 +2913,6 @@ void gui_open_mod_mgr_initial_run(void)
 	gtk_dialog_run((GtkDialog *) dlg);
 	gtk_widget_destroy(dlg);
 	first_time_user = FALSE;
-	mod_mgr_init_config_extras();
 }
 
 /******************************************************************************
