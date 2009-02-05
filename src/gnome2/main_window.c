@@ -131,7 +131,11 @@ void gui_show_hide_preview(gboolean choice)
 		if (main_window_created)
 #ifdef USE_PARALLEL_TAB	
 			if(settings.show_previewer_in_sidebar) 
+#ifdef USE_GTKMOZEMBED
 				gtk_widget_show(widgets.box_side_preview);
+#else
+		                gtk_widget_show_all(widgets.box_side_preview);
+#endif /* USE_GTKMOZEMBED */
 			else 
 #endif /*  USE_PARALLEL_TAB  */
 				gtk_widget_show(widgets.vbox_previewer);
@@ -935,7 +939,11 @@ void create_mainwindow(void)
 	 * previewer
 	 */
 	widgets.vbox_previewer = gtk_vbox_new(FALSE, 0);
-	gtk_widget_show(widgets.vbox_previewer);
+#ifdef USE_GTKMOZEMBED
+	gtk_widget_show_all (widgets.vbox_previewer);
+#else
+	gtk_widget_show_all (widgets.vbox_previewer);
+#endif
 	gtk_container_set_border_width (GTK_CONTAINER (widgets.vbox_previewer), 1);
 	gtk_paned_pack2(GTK_PANED(widgets.vpaned), widgets.vbox_previewer, TRUE, TRUE);
 	
