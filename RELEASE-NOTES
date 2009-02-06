@@ -9,9 +9,34 @@ Release 3.0
 Xiphos begins life, as the former GnomeSword.
 
 We have changed our name to Xiphos because GnomeSword was deemed too
-obscure, especially considering our anticipated new user base.
+obscure, especially considering our anticipated new user base.  Xiphos
+("ξίφος") is one of several Greek words for "sword".  Pronunciation of
+the name Xiphos can be learned from a sample audio file you will find
+in share/doc/xiphos; approximately, "ksee-fos."
 
 This release represents a huge new chapter in our program's life.
+
+Problems known for this release.
+
+ 1. Linux: None known.
+
+ 2. Windows:
+    a. Xiphos runs under Windows 2000, XP, Vista, and 7-beta.
+    b. A few additional fonts are included with the installer (FreeSerif
+       and LinuxLibertine) and they are correctly installed, but they may
+       not immediately become available on installation completion.  We
+       do not yet understand why.  At worst, a reboot is needed.
+    c. The module list "treeview" sometimes becomes unnavigable by mouse
+       clicks.  This seems to be a Windows-specific flaw in the port of
+       the GTK library which drives the treeview.  If it occurs, it will
+       be evident as soon as Xiphos starts; simply restart it.
+    d. The font used in the previewer should reflect the intended font of
+       the module whose content is being previewed there.  If Xiphos
+       starts up with the previewer embedded in the sidebar, then such
+       font choices are not properly respected.
+ These should be fixed in a future 3.x release.
+
+Major new features, operational improvements, and bugfixes:
 
  1. Windows port.  It is very nearly complete; only a couple features
     are missing.  Most notably, they are the MozEmbed display engine
