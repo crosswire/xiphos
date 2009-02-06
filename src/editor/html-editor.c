@@ -81,7 +81,10 @@ static
 void _load_file(EDITOR * e, const gchar * filename);
 
 static 
-void _save_note(EDITOR * e);
+void _save_note (EDITOR * e);
+
+static 
+void _save_book (EDITOR * e);
 
 static
 gint ask_about_saving(EDITOR * e);
@@ -358,6 +361,9 @@ static const gchar *note_file_ui =
 "<ui>\n"
 "  <menubar name='main-menu'>\n"
 "    <menu action='file-menu'>\n"
+"     <menuitem action='save'/>\n"
+"     <menuitem action='save-as'/>\n"
+"     <separator/>\n"
 "     <menuitem action='print-preview'/>\n"
 "     <menuitem action='print'/>\n"
 "     <separator/>\n"
@@ -601,16 +607,25 @@ action_save_cb (GtkAction *action,
 	const gchar *filename;
 	gboolean as_html;
 	GError *error = NULL;
+	switch(e->type) {
+		case STUDYPAD_EDITOR:
+			if (gtkhtml_editor_get_filename (GTKHTML_EDITOR(e->window)) == NULL)
+				if (save_dialog (GTKHTML_EDITOR(e->window)) == GTK_RESPONSE_CANCEL)
+					return;
 
-	if (gtkhtml_editor_get_filename (GTKHTML_EDITOR(e->window)) == NULL)
-		if (save_dialog (GTKHTML_EDITOR(e->window)) == GTK_RESPONSE_CANCEL)
-			return;
+			filename = gtkhtml_editor_get_filename (GTKHTML_EDITOR(e->window));
+			as_html = gtkhtml_editor_get_html_mode (GTKHTML_EDITOR(e->window));
 
-	filename = gtkhtml_editor_get_filename (GTKHTML_EDITOR(e->window));
-	as_html = gtkhtml_editor_get_html_mode (GTKHTML_EDITOR(e->window));
-
-	gtkhtml_editor_save (GTKHTML_EDITOR(e->window), filename, as_html, &error);
-	handle_error (&error);
+			gtkhtml_editor_save (GTKHTML_EDITOR(e->window), filename, as_html, &error);
+			handle_error (&error);
+		break;
+		case NOTE_EDITOR:
+			_save_note (e);
+		break;
+		case BOOK_EDITOR:
+			_save_book (e);
+		break;
+	}
 }
 
 static void
@@ -703,7 +718,52 @@ static GtkActionEntry file_entries[] = {
 	  NULL,
 	  NULL }
 };
+/*
+static GtkActionEntry note_file_entries[] = {
 
+	{ "print",
+	  GTK_STOCK_PRINT,
+	  N_("_Print..."),
+	  NULL,
+	  NULL,
+	  G_CALLBACK (action_print_cb) },
+
+	{ "print-preview",
+	  GTK_STOCK_PRINT_PREVIEW,
+	  N_("Print Pre_view"),
+	  NULL,
+	  NULL,
+	  G_CALLBACK (action_print_preview_cb) },
+
+	{ "quit",
+	  GTK_STOCK_QUIT,
+	  N_("_Quit"),
+	  NULL,
+	  NULL,
+	  G_CALLBACK (action_quit_cb) },
+
+	{ "save",
+	  GTK_STOCK_SAVE,
+	  N_("_Save"),
+	  NULL,
+	  NULL,
+	  G_CALLBACK (action_save_cb) },
+
+	{ "save-as",
+	  GTK_STOCK_SAVE_AS,
+	  N_("Save _As..."),
+	  NULL,
+	  NULL,
+	  G_CALLBACK (action_save_as_cb) },
+
+	{ "file-menu",
+	  NULL,
+	  N_("_File"),
+	  NULL,
+	  NULL,
+	  NULL }
+};
+*/
 static GtkActionEntry view_entries[] = {
 
 	{ "view-html-output",
