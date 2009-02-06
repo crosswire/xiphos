@@ -745,8 +745,11 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
 			gtk_widget_show(pt->paratab);		
 		companion_activity = FALSE;
 		page_change = FALSE;
+		settings.paratab_showing = TRUE;
 		return;
-	} 
+	} else
+		settings.paratab_showing = FALSE;
+		
 	
 	//sets the book mod and key
 	main_display_book(pt->book_mod, pt->book_offset);

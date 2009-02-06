@@ -248,6 +248,9 @@ struct _settings {
 								 else sword directory  */
 	/* if true use prayerlist */
 	int prayerlist;
+
+	/* if true parallel tab is showing */
+	int paratab_showing;
 	
 };
 
