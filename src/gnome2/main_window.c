@@ -324,17 +324,17 @@ void gui_change_window_title(gchar * module_name)
  * Return value
  *   void
  */
-
+/*
 static void on_mainwindow_destroy(GtkObject * object,
 				  gpointer user_data)
 {
 	shutdown_frontend();
-	/* shutdown the sword stuff */
+	// * shutdown the sword stuff *
 	main_shutdown_backend();
 	gtk_main_quit();
 	gtk_exit(0);
 }
-
+*/
 
 static gboolean  delete_event (GtkWidget *widget,
                                             GdkEvent *event,

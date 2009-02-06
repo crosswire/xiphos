@@ -111,6 +111,8 @@ void frontend_init(void)
 		main_init_paraellel_view();
 	}
 	
+	settings.paratab_showing = FALSE;
+	
 	main_dialogs_setup();
 
 	gui_set_sidebar_porgram_start();

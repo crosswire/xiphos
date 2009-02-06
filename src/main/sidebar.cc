@@ -634,7 +634,10 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 				(widgets.notebook_bible_parallel),
 				0);
 	}
-
+	/* let's not do anything else if the parallel tab is showing */
+	if(settings.paratab_showing)
+		return;
+	
 	if (!g_utf8_collate(cap, _("Commentaries"))) {
 		if (!settings.comm_showing) {
 			settings.comm_showing = TRUE;

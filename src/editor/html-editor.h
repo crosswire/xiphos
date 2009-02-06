@@ -58,7 +58,7 @@ struct _editor {
 #endif
 	
 #ifdef USE_GTKHTML3_14_23
-	
+	//GtkhtmlEditor *editor;
 #else
 	BonoboWidget *control;
 	GNOME_GtkHTML_Editor_Engine engine;
