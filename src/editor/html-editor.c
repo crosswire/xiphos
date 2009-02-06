@@ -1345,14 +1345,31 @@ _save_note(EDITOR * e)
 			(GtkHTMLSaveReceiverFn) _save_note_receiver, 
 			string);
 	
-	//GS_message(("\n\n\n_save_note:\n%s\n\n\n", string->str));
-	
 	main_save_note (e->module, e->key, string->str);
 	
 	g_string_free(string,TRUE);
 }
 
+
+static void
+_save_book(EDITOR * e)
+{
+	GString *string;
 	
+	string = g_string_sized_new (4096);
+	
+	gtk_html_export (gtkhtml_editor_get_html (e->window),
+			"text/html", 
+			(GtkHTMLSaveReceiverFn) _save_note_receiver, 
+			string);
+	
+	GS_message(("\n\n\n_save_note:\n%s\n\n\n", string->str));
+	
+	main_treekey_save_book_text(e->module, e->key, string->str);
+	g_string_free(string,TRUE);
+}	
+
+
 static void
 _load_file(EDITOR * e, const gchar * filename)
 {
@@ -1432,7 +1449,10 @@ gboolean editor_is_dirty(EDITOR * e)
 void editor_save_book(EDITOR * e)
 {
 #ifdef USE_GTKHTML3_14_23
-	
+	if (editor_is_dirty(e)) {
+		GS_message(("editor_is_dirty"));
+		_save_book(e);
+	}
 #else
 	if (editor_is_dirty(e)) {
 		GS_message(("editor_is_dirty"));
@@ -1441,16 +1461,14 @@ void editor_save_book(EDITOR * e)
 #endif
 }
 
+/* save if needed is done in treeky-editor.c before calling editor_load_book() */
 void editor_load_book(EDITOR * e)
 {
 	gchar *title = NULL;
 	gchar *text = NULL;	
 
-#ifdef USE_GTKHTML3_14_23
-	
-#else	
-		
 	if(!g_ascii_isdigit(e->key[0])) return; /* make sure is a number (offset) */
+	
 	
 	title = g_strdup_printf("%s", e->module);
 	GS_message (("book: %s\noffset :%s", e->module, e->key));
@@ -1460,10 +1478,29 @@ void editor_load_book(EDITOR * e)
 	else
 		text = g_strdup(e->module);
 	
-	if(strlen(text)) 
+	if(strlen(text)) {
+#ifdef USE_GTKHTML3_14_23
+		gtkhtml_editor_set_text_html (GTKHTML_EDITOR(e->window),
+					      text,
+					      strlen(text));
+		gtkhtml_editor_drop_undo (GTKHTML_EDITOR(e->window));
+		gtkhtml_editor_set_changed (GTKHTML_EDITOR(e->window), FALSE);
+	
+#else	
 		load_through_persist_stream(text, e);
-	else
+#endif
+	} else {
+#ifdef USE_GTKHTML3_14_23
+		gtkhtml_editor_set_text_html (GTKHTML_EDITOR(e->window),
+					      "",
+					      strlen(""));
+		gtkhtml_editor_drop_undo (GTKHTML_EDITOR(e->window));
+		gtkhtml_editor_set_changed (GTKHTML_EDITOR(e->window), FALSE);
+	
+#else	
 		load_through_persist_stream("", e); /* clear editor if no text */
+#endif
+	}
 	
 	change_window_title(e->window, title);
 	
@@ -1471,7 +1508,6 @@ void editor_load_book(EDITOR * e)
 		g_free(text);
 	if (title)
 		g_free(title);
-#endif
 }
 
 /******************************************************************************
@@ -2282,12 +2318,40 @@ gint _create_new(const gchar * filename, const gchar * key, gint editor_type)
 			editor->key = g_strdup(key);
 #ifdef USE_GTKHTML3_14_23
 			editor_new(_("Prayer List/Journal Editor"), editor);
-	
-	
+			
+			GtkWidget *box = gtk_vbox_new (FALSE, 0);
+			gtk_widget_show (box);
+			GtkWidget *hpaned1 = gtk_hpaned_new ();
+			gtk_widget_show (hpaned1);
+			gtk_paned_pack2 (GTK_PANED (hpaned1), box, TRUE, TRUE);
+			
+			GtkWidget *scrollbar = gtk_scrolled_window_new(NULL, NULL);
+			gtk_widget_show(scrollbar);
+			gtk_paned_pack1(GTK_PANED(hpaned1), GTK_WIDGET(scrollbar),
+						TRUE, TRUE);
+			gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrollbar),
+						       GTK_POLICY_AUTOMATIC,
+						       GTK_POLICY_AUTOMATIC);
+			gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
+							    scrollbar,
+					    settings.shadow_type);	     
+	    
+	    		editor->treeview = gui_create_editor_tree(editor); 
+			gtk_widget_show(editor->treeview);
+			gtk_container_add(GTK_CONTAINER(scrollbar),
+					 editor->treeview);
+			gtk_paned_set_position(GTK_PANED(hpaned1),
+				       125);
+			gtk_tree_view_expand_all((GtkTreeView *)editor->treeview);
+			vbox = GTKHTML_EDITOR(editor->window)->vbox;
+			
+			gtk_widget_reparent (vbox,box);
+			
+			gtk_container_add (GTK_CONTAINER (editor->window), hpaned1);	
 #else
 			container_create(_("Prayer List/Journal Editor"), editor);
-			editor_load_book(editor);
 #endif
+			editor_load_book(editor);
 			
 		break;
 	
