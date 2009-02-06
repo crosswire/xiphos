@@ -1406,6 +1406,7 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 			   (gchar *) "paned_sidebar");
 	widgets.shortcutbar = widgets.paned_sidebar;
 	
+	
 #else
 	gtk_paned_pack1(GTK_PANED(paned), vbox1, FALSE, TRUE);
 	widgets.shortcutbar = vbox1;

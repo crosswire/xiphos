@@ -1,3 +1,9 @@
+2009-02-05  terry <tbiggs@users.sourceforge.net>
+
+	* fixed double navbar
+	* added note editor stuff to gtkhtml editor still need to add
+	  prayerlist/journal stuff.
+
 2009-02-05  karl <charcoal@users.sf.net>
 
 	* fix logic to add extra mod.mgr remote sources.
