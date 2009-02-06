@@ -14,8 +14,7 @@ Preparation
 Make sure you have the GNU gettext package installed.
 Grab the latest versions of the source files of Xiphos in 
 Subversion :
-$ svn co https://xiphos.svn.sourceforge.net/svnroot/xiphos/branches/2.4.x/ xiphos
-
+$ svn co https://gnomesword.svn.sourceforge.net/svnroot/gnomesword/trunk xiphos
 
 Translating Xiphos Application
 ---------------------------------- 
