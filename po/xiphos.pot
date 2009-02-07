@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-05 00:14+0100\n"
+"POT-Creation-Date: 2009-02-07 13:42+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,80 +28,80 @@ msgstr ""
 msgid "Configuration not found"
 msgstr ""
 
-#: ../src/editor/html-editor.c:263 ../src/gnome2/html.c:818
+#: ../src/editor/html-editor.c:272 ../src/gnome2/html.c:818
 #, c-format
 msgid "Page %d of %d"
 msgstr ""
 
-#: ../src/editor/html-editor.c:391 ../src/editor/html-editor.c:438
+#: ../src/editor/html-editor.c:415 ../src/editor/html-editor.c:462
 msgid "Save As"
 msgstr ""
 
-#: ../src/editor/html-editor.c:409 ../src/editor/html-editor.c:456
+#: ../src/editor/html-editor.c:433 ../src/editor/html-editor.c:480
 msgid "Untitled document"
 msgstr ""
 
-#: ../src/editor/html-editor.c:621
+#: ../src/editor/html-editor.c:653
 msgid "HTML Output"
 msgstr ""
 
-#: ../src/editor/html-editor.c:628
+#: ../src/editor/html-editor.c:660
 msgid "HTML Source"
 msgstr ""
 
-#: ../src/editor/html-editor.c:635
+#: ../src/editor/html-editor.c:667
 msgid "Plain Source"
 msgstr ""
 
-#: ../src/editor/html-editor.c:642 ../ui/editor_note.xml.h:15
+#: ../src/editor/html-editor.c:674 ../ui/editor_note.xml.h:15
 #: ../ui/editor_studypad.xml.h:21
 msgid "_Print..."
 msgstr ""
 
-#: ../src/editor/html-editor.c:649 ../ui/editor_note.xml.h:9
+#: ../src/editor/html-editor.c:681 ../ui/editor_note.xml.h:9
 #: ../ui/editor_studypad.xml.h:14
 msgid "Print Pre_view"
 msgstr ""
 
-#: ../src/editor/html-editor.c:656
+#: ../src/editor/html-editor.c:688
 msgid "_Quit"
 msgstr ""
 
-#: ../src/editor/html-editor.c:663
+#: ../src/editor/html-editor.c:695
 msgid "_Open"
 msgstr ""
 
-#: ../src/editor/html-editor.c:670
+#: ../src/editor/html-editor.c:702
 msgid "_Save"
 msgstr ""
 
-#: ../src/editor/html-editor.c:677
+#: ../src/editor/html-editor.c:709
 msgid "Save _As..."
 msgstr ""
 
-#: ../src/editor/html-editor.c:684 ../src/gnome2/main_menu.c:1185
+#: ../src/editor/html-editor.c:716 ../src/gnome2/main_menu.c:1185
 #: ../ui/editor_note.xml.h:14 ../ui/editor_studypad.xml.h:20
 #: ../ui/editor.xml.h:13
 msgid "_File"
 msgstr ""
 
-#: ../src/editor/html-editor.c:694
+#: ../src/editor/html-editor.c:771
 msgid "HTML _Output"
 msgstr ""
 
-#: ../src/editor/html-editor.c:701
+#: ../src/editor/html-editor.c:778
 msgid "_HTML Source"
 msgstr ""
 
-#: ../src/editor/html-editor.c:708
+#: ../src/editor/html-editor.c:785
 msgid "_Plain Source"
 msgstr ""
 
-#: ../src/editor/html-editor.c:715 ../src/gnome2/main_menu.c:1197
+#: ../src/editor/html-editor.c:792 ../src/gnome2/main_menu.c:1197
 msgid "_View"
 msgstr ""
 
-#: ../src/editor/html-editor.c:838
+#: ../src/editor/html-editor.c:909
 msgid "Are you sure you want to delete the note for"
 msgstr ""
 
@@ -113,35 +113,35 @@ msgstr ""
 #. 3
 #. 1
 #. 2
-#: ../src/editor/html-editor.c:1781 ../src/gnome2/bibletext.c:1150
+#: ../src/editor/html-editor.c:1950 ../src/gnome2/bibletext.c:1150
 #: ../src/gnome2/gbs.c:918 ../src/gnome2/bibletext_dialog.c:2136
 #: ../src/gnome2/dictlex.c:1086 ../src/gnome2/commentary_dialog.c:1672
 #: ../src/gnome2/commentary.c:1019 ../src/gnome2/studypad.c:98
 msgid "File"
 msgstr ""
 
-#: ../src/editor/html-editor.c:1782
+#: ../src/editor/html-editor.c:1951
 msgid "Save the changes to document"
 msgstr ""
 
-#: ../src/editor/html-editor.c:1783
+#: ../src/editor/html-editor.c:1952
 msgid "before closing?"
 msgstr ""
 
-#: ../src/editor/html-editor.c:1790
+#: ../src/editor/html-editor.c:1959
 msgid "If you don't save, changes will be permanently lost."
 msgstr ""
 
-#: ../src/editor/html-editor.c:2186 ../src/editor/html-editor.c:2189
+#: ../src/editor/html-editor.c:2351 ../src/editor/html-editor.c:2354
 #: ../src/gnome2/studypad.c:411
 msgid "StudyPad"
 msgstr ""
 
-#: ../src/editor/html-editor.c:2204 ../src/editor/html-editor.c:2208
+#: ../src/editor/html-editor.c:2369 ../src/editor/html-editor.c:2376
 msgid "Note Editor"
 msgstr ""
 
-#: ../src/editor/html-editor.c:2218 ../src/editor/html-editor.c:2222
+#: ../src/editor/html-editor.c:2386 ../src/editor/html-editor.c:2418
 msgid "Prayer List/Journal Editor"
 msgstr ""
 
@@ -496,8 +496,8 @@ msgstr ""
 
 #: ../src/gnome2/parallel_view.c:471 ../src/gnome2/sidebar.c:405
 #: ../src/gnome2/sidebar.c:411 ../src/gnome2/tabbed_browser.c:214
-#: ../src/main/sidebar.cc:605 ../src/main/sidebar.cc:1004
-#: ../src/main/sidebar.cc:1005 ../src/main/sidebar.cc:1006
+#: ../src/main/sidebar.cc:605 ../src/main/sidebar.cc:1007
+#: ../src/main/sidebar.cc:1008 ../src/main/sidebar.cc:1009
 msgid "Parallel View"
 msgstr ""
 
@@ -794,7 +794,7 @@ msgstr ""
 msgid "Journals and prayer lists cannot be indexed."
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:453 ../src/gnome2/mod_mgr.c:2618
+#: ../src/gnome2/mod_mgr.c:453 ../src/gnome2/mod_mgr.c:2626
 #: ../ui/module-manager.glade.h:18
 msgid "Install"
 msgstr ""
@@ -829,9 +829,9 @@ msgstr ""
 #: ../src/gnome2/mod_mgr.c:773 ../src/gnome2/utilities.c:323
 #: ../src/gnome2/utilities.c:390 ../src/gnome2/utilities.c:392
 #: ../src/gnome2/utilities.c:452 ../src/gnome2/utilities.c:454
-#: ../src/gnome2/utilities.c:1082 ../src/main/sidebar.cc:786
-#: ../src/main/sidebar.cc:788 ../src/main/sidebar.cc:847
-#: ../src/main/sidebar.cc:920 ../src/main/sidebar.cc:922
+#: ../src/gnome2/utilities.c:1082 ../src/main/sidebar.cc:789
+#: ../src/main/sidebar.cc:791 ../src/main/sidebar.cc:850
+#: ../src/main/sidebar.cc:923 ../src/main/sidebar.cc:925
 msgid "Unknown"
 msgstr ""
 
@@ -849,39 +849,39 @@ msgid ""
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:925 ../src/gnome2/utilities.c:515
-#: ../src/main/sidebar.cc:996 ../src/main/sidebar.cc:998
+#: ../src/main/sidebar.cc:999 ../src/main/sidebar.cc:1001
 msgid "Biblical Texts"
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:929 ../src/gnome2/utilities.c:519
-#: ../src/main/sidebar.cc:638 ../src/main/sidebar.cc:1021
-#: ../src/main/sidebar.cc:1023 ../ui/prefs.glade.h:33
+#: ../src/main/sidebar.cc:641 ../src/main/sidebar.cc:1024
+#: ../src/main/sidebar.cc:1026 ../ui/prefs.glade.h:33
 msgid "Commentaries"
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:933 ../src/gnome2/utilities.c:523
-#: ../src/main/sidebar.cc:1030 ../src/main/sidebar.cc:1032
+#: ../src/main/sidebar.cc:1033 ../src/main/sidebar.cc:1035
 msgid "Dictionaries"
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:937 ../src/gnome2/utilities.c:527
-#: ../src/main/sidebar.cc:1039 ../src/main/sidebar.cc:1041
+#: ../src/main/sidebar.cc:1042 ../src/main/sidebar.cc:1044
 msgid "Daily Devotionals"
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:941 ../src/gnome2/utilities.c:531
-#: ../src/main/sidebar.cc:651 ../src/main/sidebar.cc:1048
-#: ../src/main/sidebar.cc:1050
+#: ../src/main/sidebar.cc:654 ../src/main/sidebar.cc:1051
+#: ../src/main/sidebar.cc:1053
 msgid "General Books"
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:945 ../src/gnome2/utilities.c:535
-#: ../src/main/sidebar.cc:1057 ../src/main/sidebar.cc:1059
+#: ../src/main/sidebar.cc:1060 ../src/main/sidebar.cc:1062
 msgid "Maps"
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:949 ../src/gnome2/utilities.c:539
-#: ../src/main/sidebar.cc:1066 ../src/main/sidebar.cc:1068
+#: ../src/main/sidebar.cc:1069 ../src/main/sidebar.cc:1071
 msgid "Images"
 msgstr ""
 
@@ -902,7 +902,7 @@ msgstr ""
 #: ../src/gnome2/mod_mgr.c:970 ../src/gnome2/sidebar.c:421
 #: ../src/gnome2/utilities.c:544 ../src/main/prayerlists.cc:236
 #: ../src/main/sword_treekey.cc:373 ../src/main/sword_treekey.cc:417
-#: ../src/main/sidebar.cc:1076 ../src/main/sidebar.cc:1078
+#: ../src/main/sidebar.cc:1079 ../src/main/sidebar.cc:1081
 msgid "Prayer List/Journal"
 msgstr ""
 
@@ -988,7 +988,7 @@ msgstr ""
 msgid "Sources"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1533 ../src/gnome2/sidebar.c:1449
+#: ../src/gnome2/mod_mgr.c:1533 ../src/gnome2/sidebar.c:1450
 #: ../src/gnome2/preferences_dialog.c:1792
 msgid "Modules"
 msgstr ""
@@ -1009,36 +1009,36 @@ msgstr ""
 msgid "Your module list is not up to date!"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2203 ../src/gnome2/mod_mgr.c:2407
+#: ../src/gnome2/mod_mgr.c:2211 ../src/gnome2/mod_mgr.c:2415
 msgid "Remove the selected source"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2260
+#: ../src/gnome2/mod_mgr.c:2268
 msgid "Enter a remote source"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2264
+#: ../src/gnome2/mod_mgr.c:2272
 msgid "Caption:"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2265
+#: ../src/gnome2/mod_mgr.c:2273
 msgid "Type:"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2266
+#: ../src/gnome2/mod_mgr.c:2274
 msgid "Host:"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2267
+#: ../src/gnome2/mod_mgr.c:2275
 msgid "Directory:"
 msgstr ""
 
 #. this can happen at most once
-#: ../src/gnome2/mod_mgr.c:2292
+#: ../src/gnome2/mod_mgr.c:2300
 msgid "A source by that name already exists."
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2404
+#: ../src/gnome2/mod_mgr.c:2412
 msgid "Delete a remote source"
 msgstr ""
 
@@ -1076,8 +1076,8 @@ msgstr ""
 
 #: ../src/gnome2/main_window.c:925 ../src/gnome2/sidebar.c:406
 #: ../src/gnome2/sidebar.c:412 ../src/main/sidebar.cc:627
-#: ../src/main/sidebar.cc:1012 ../src/main/sidebar.cc:1013
-#: ../src/main/sidebar.cc:1014
+#: ../src/main/sidebar.cc:1015 ../src/main/sidebar.cc:1016
+#: ../src/main/sidebar.cc:1017
 msgid "Standard View"
 msgstr ""
 
@@ -1185,15 +1185,15 @@ msgstr ""
 msgid "Verse _List"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:1425 ../src/gnome2/bookmarks_treeview.c:906
+#: ../src/gnome2/sidebar.c:1426 ../src/gnome2/bookmarks_treeview.c:906
 msgid "Bookmarks"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:1433
+#: ../src/gnome2/sidebar.c:1434
 msgid "Search"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:1441
+#: ../src/gnome2/sidebar.c:1442
 msgid "Verse List"
 msgstr ""
 
@@ -1411,16 +1411,16 @@ msgstr ""
 msgid "Initiating Xiphos"
 msgstr ""
 
-#: ../src/gnome2/xiphos.c:144 ../src/gnome2/splash.c:633
+#: ../src/gnome2/xiphos.c:146 ../src/gnome2/splash.c:633
 msgid "Displaying Xiphos"
 msgstr ""
 
 #. main_prayer_list_new("2008");
-#: ../src/gnome2/xiphos.c:215
+#: ../src/gnome2/xiphos.c:217
 msgid "done"
 msgstr ""
 
-#: ../src/gnome2/xiphos.c:293
+#: ../src/gnome2/xiphos.c:295
 msgid "Xiphos is shutdown"
 msgstr ""
 
@@ -1977,7 +1977,7 @@ msgstr ""
 msgid "Search finished"
 msgstr ""
 
-#: ../src/main/main.c:92
+#: ../src/main/main.c:96
 msgid "Xiphos does not understand more than one argument."
 msgstr ""
 
