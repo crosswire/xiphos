@@ -699,6 +699,18 @@ void BackEnd::save_entry(const char * entry) {
 	display_mod->setEntry((const char *) entry);
 }
 
+
+void BackEnd::save_note_entry(const char * module, const char * key, const char * entry) {
+	display_mod = display_mgr->Modules[module];
+	
+	if (display_mod) {		
+		display_mod->setKey(key);
+		display_mod->KeyText(); /* snap to entry */
+		display_mod->setEntry((const char *) entry);
+	}
+}
+
+
 void BackEnd::delete_entry(void) {
 	display_mod->deleteEntry();
 }

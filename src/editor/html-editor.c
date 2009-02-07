@@ -1915,9 +1915,7 @@ static void on_entry_activate(GtkEntry * entry, EDITOR * e)
 static
 gint ask_about_saving(EDITOR * e)
 {
-#ifdef USE_GTKHTML3_14_23
-	
-#else
+#ifndef USE_GTKHTML3_14_23
 	CORBA_Object interface;
 	CORBA_Environment ev;
 #endif
@@ -1927,27 +1925,56 @@ gint ask_about_saving(EDITOR * e)
 	gchar *buf1 = NULL;
 	gchar *buf2 = NULL;
 	gchar *buf3 = NULL;
-	gint retval = FALSE;
+	gint retval = FALSE;	
 
 	switch(e->type) {
 		case BOOK_EDITOR:
-#ifdef USE_GTKHTML3_14_23
-			/* save notes and prayer lists */
-			_save_book(e);
-#else
-			save_through_persist_stream_cb(NULL, e);
-#endif
-			retval = GS_YES;
-		break;
-			
 		case NOTE_EDITOR:
+			info = gui_new_dialog();
+			info->stock_icon = GTK_STOCK_DIALOG_WARNING;
+			
+			buf = g_strdup_printf("%s: %s",e->module, e->key);
+			buf1 = _("Save the changes to document");
+			buf2 = _("before closing?");
+			buf3 =
+			    g_strdup_printf
+			    ("<span weight=\"bold\" size=\"larger\">%s %s %s</span>",
+			     buf1, buf, buf2);
+			info->label_top = buf3;
+			info->label2 =
+			    _("If you don't save, changes will be permanently lost.");
+			info->save = TRUE;
+			info->cancel = TRUE;
+			info->no_save = TRUE;
+
+			test = gui_alert_dialog(info);
+			retval = test;
+			
+			if (test == GS_YES) {
+				if (e->type == NOTE_EDITOR) {
 #ifdef USE_GTKHTML3_14_23
-			/* save notes and prayer lists */
-			_save_note(e);
+					/* save notes and prayer lists */
+					_save_note(e);
 #else
-			save_through_persist_stream_cb(NULL, e);
+					save_through_persist_stream_cb(NULL, e);
 #endif
-			retval = GS_YES;
+				} else {
+#ifdef USE_GTKHTML3_14_23
+					/* save notes and prayer lists */
+					_save_book(e);
+#else
+					save_through_persist_stream_cb(NULL, e);
+#endif
+				}
+				/*while (gtk_events_pending()) {
+					gtk_main_iteration();
+				}
+				while (gtk_events_pending()) {
+					gtk_main_iteration();
+				}*/
+			}
+			g_free(info);
+			g_free(buf3);
 		break;
 		
 		case STUDYPAD_EDITOR:
