@@ -4,20 +4,20 @@
 # <>, 2008.
 # , fuzzy
 # <>, 2009.
-#
-#
+# 
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-01-22 10:08+0000\n"
-"PO-Revision-Date: 2009-02-03 23:23+0000\n"
+"PO-Revision-Date: 2009-02-07 01:08+0000\n"
 "Last-Translator: David Lodge <dave@cirt.net>\n"
 "Language-Team: English/GB <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);"
 
 #: ../xiphos.desktop.in.in.h:1
 msgid "Xiphos Bible Guide"
@@ -952,19 +952,21 @@ msgstr "نصب شد"
 msgid ""
 "The index icon means you have built an optimized ('lucene') index for this "
 "module for fast searching (see the Maintenance pane for this function)"
-msgstr ""
+msgstr "نشانه اندکس به اين معني است که شما براي اين مدول قبلا اندکسي درست کرده‌ايد که کار جستجوي سريع را انجام دهد"
+""
 
 #: ../src/gnome2/mod_mgr.c:1363
 msgid ""
 "The lock icon means this module is encrypted, and requires that you purchase "
 "an unlock key from the content owner"
-msgstr ""
+msgstr "نشانه قفل يعني مدول قفل است و جهت استفاده بايد کليد اين قفل خريداري شود"
 
 #: ../src/gnome2/mod_mgr.c:1385
 msgid ""
 "The refresh icon means the Installed module is older than the newer "
 "Available module: You should update the module"
-msgstr ""
+msgstr "نشانه تجديد به اين معني است که مدول نصب شده از مدولهاي موجود قديمي‌تر است؛ لازم است که مدولهاي تازه‌تر را نصب فرماييد"
+""
 
 #: ../src/gnome2/mod_mgr.c:1397
 msgid "Available"
@@ -1254,7 +1256,7 @@ msgstr "آیا به یقین می‌خواهید که لیست را حذف کن�
 msgid ""
 "This is an inclusive (\"AND\") search:\n"
 "Find matches showing all words."
-msgstr ""
+msgstr "اين نوع جستجو، فراگير است (\"و\") جستجو:/ن تمامي کلمات مربوط به آن را پيدا مي‌کند"
 
 #: ../src/gnome2/search_sidebar.c:209
 msgid "Search Module"
@@ -2468,7 +2470,36 @@ msgid ""
 "Warning: If you live in a persecuted country, use with care.\n"
 "\n"
 "May Xiphos invoke the Module Manager so that you may install a Bible?"
-msgstr ""
+msgstr "به خيفوس خوش آمديد "
+"\n"
+"\n"
+"هيچ مدولي از کتابمقدس نصب نشده است. براي راه اندازي خيفوس لازم است حداقل يک مدول از کتابمقدس نصب شده باشد"
+"\n"
+"\n"
+"به اجازه شما خيفوس مدول مدير نرم افزار را فعال خواهد ساخت تا شما بتوانيد از کراس‌واير نصب کنيد"
+"\n"
+"\n"
+"پيکربندي، دوردست، نصب"
+"\n"
+"\n"
+"اتصال"
+"\n"
+"\n"
+"انتخاب متن کتابمقدس به زباني که ترجيح مي‌دهيد"
+"\n"
+"\n"
+"دگمه نصب را کليک کنيد"
+"\n"
+"\n"
+"بعد از اتمام مدير مدول را ببنديد"
+"\n"
+"\n"
+"هشدار: اگر در کشور تحت جفا زندگي مي‌کنيد، در بکار گيري اين نرم افزار احتياط کنيد"
+"\n"
+"\n"
+"آيا اجازه مي‌دهيد که خيفوس مدير مدول را جهت نصب کتابمقدس فعال کند؟"
+""
+""
 
 #: ../src/main/settings.c:107
 msgid "$HOME is not set!"
@@ -2572,7 +2603,8 @@ msgid ""
 "\n"
 "Would you like Xiphos to set itself as the\n"
 "program to handle these references?"
-msgstr ""
+msgstr "آيا اجازه مي‌دهيد که خيفوس خود را به عنوان برنامه‌اي که با اين ارجاعات بايد کار کند، قلمداد نمايد؟"
+""
 
 #: ../src/main/settings.c:827
 msgid ""
@@ -2582,7 +2614,9 @@ msgid ""
 "You may wish to run the program \"gconf-editor\"\n"
 "to examine keys under /desktop/gnome/url-handlers,\n"
 "if you need to change these."
-msgstr ""
+msgstr "خيفوس خود را با موفقيت براي اين کار ترتيب داد"
+""
+""
 
 #: ../src/main/settings.c:880
 #, c-format
@@ -3455,7 +3489,11 @@ msgid ""
 "Fast, featureful, index-based search\n"
 "Indexes must have been built beforehand:\n"
 "See Module Manager's maintenance functions"
-msgstr ""
+msgstr "براي بهبود کار، مدولها نياز به اندکس شدن دارند. اين امر فقط يکبار صورت مي‌گيرد."
+"\n"
+"سريع، پر از موارد جوانب گوناگون، جستجوي بر اساس اندکس"
+"اندسکسها بايد قبلا آماده گردند."
+"به عملکردهاي خودبقاي مدير مدول رجوع کنيد"
 
 #: ../ui/search-dialog.glade.h:49
 msgid "Find Button"
