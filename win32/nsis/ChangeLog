@@ -1,3 +1,12 @@
+2009-02-07  matysek <matysek03@users.sf.net>
+
+	* fixed issue with displaying wrong license translation.
+	  The resources for unmaintained translation were excluded.
+	* moved installer files from utf16 to utf8
+	  NSIS Unicode supports utf8 as of v2.42.3
+	* prepared files for thranslation of installer text at
+	  release-notes page
+
 2009-02-05  matysek <matysek03@users.sf.net>
 
 	* renamed folder 'img' to 'pixmaps'

@@ -1,7 +1,7 @@
 ;;
 ;;  cs.nsh
 ;;
-;;  Czech language strings for the example of NSIS script.
+;;  Czech language strings for the Xiphos installer.
 ;;
 ;;  Version 1
 ;;
@@ -24,5 +24,11 @@ LangString UNLOG_ERROR_LOG ${LANG_CZECH} "Chyba v souboru ${UNINSTALL_LOG}."
 LangString UNLOG_ERROR_CREATE ${LANG_CZECH} "Chyba při vytváření ${UNINSTALL_LOG}."
 
 ;--------------------------------
-; Other Strings
+; Text for page with release notes
+
+!insertmacro ReadmeLangStrings "" "${LANG_CZECH}" \
+    "Poznámky k vydání" \
+    "Prosím, věnujte pozornost následujícím důležitým informacím." \
+    "O aplikaci $(^name):" \
+    "$\n  Klepnutím na posuvnou lištu nebo stisknutím klávesy Page Down posunete text poznámek k vydání."
 
