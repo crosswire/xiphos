@@ -42,7 +42,7 @@
 
     !define APP_NAME "Xiphos"
     !define APP_BINARY_NAME "xiphos.exe"
-    !define APP_VERS "3.0beta"
+    !define APP_VERS "3.0"
     !define APP_EDITION "win32"
     !define APP_URL "http://xiphos.org"
 
@@ -74,6 +74,9 @@
 
     !define INCL_DIR "include"
 
+    ; Folder with translation files for NSIS
+    !define LANG_DIR "i18n"
+
     ; REG keys to handle url  sword://  by Xiphos
     !define SWURL_REG_ROOT "HKCR" # HKEY_CLASSES_ROOT
     !define SWURL_REG_KEY "sword"
@@ -94,13 +97,13 @@
     !include "MUI2.nsh"
 
     ; Uninstaller Log
-    !include "${INCL_DIR}\utf16_advuninstlog.nsh"
+    !include "${INCL_DIR}\advuninstlog.nsh"
 
     ; Macro for registering fonts
-    !include "${INCL_DIR}\utf16_fontreg.nsh"
+    !include "${INCL_DIR}\fontreg.nsh"
 
     ; Macro for page with release notes
-    !include "${INCL_DIR}\utf16_releasenotes.nsh"
+    !include "${INCL_DIR}\releasenotes.nsh"
 
     !include "nsDialogs.nsh"
     !include "LogicLib.nsh"
@@ -112,7 +115,7 @@
     ; Language definition
     ; contain macros LINGUAS_DEFS, LINGUAS_RESERVE, LINGUAS_USE,
     ; LINGUAS_LIC_FILE
-    !include "i18n\utf16_LINGUAS.nsh" ; contain some macros
+    !include "${LANG_DIR}\LINGUAS.nsh" ; contain some macros
 
 ;--------------------------------
 ; Global Variables
@@ -186,7 +189,7 @@
     !insertmacro MUI_PAGE_STARTMENU Application $StartMenuDir
 
     ; page with release notes
-    !insertmacro MUI_PAGE_README "utf16_RELEASE-NOTES"
+    !insertmacro MUI_PAGE_README "..\..\RELEASE-NOTES"
 
     !insertmacro MUI_PAGE_FINISH
 
@@ -202,28 +205,6 @@
 
     !insertmacro LINGUAS_USE
 
-    ; Text for page with release notes - not translated English for
-    ; all languages
-    !macro RELEASENOTES_STRINGS LNG
-        !insertmacro ReadmeLangStrings "" "${LNG}" \
-            "Release Notes" \
-            "Please review the following important information." \
-            "About $(^name):" \
-            "$\n  Click on scrollbar arrows or press Page Down to review the entire text."
-    !macroend
-
-    !insertmacro RELEASENOTES_STRINGS ${LANG_ENGLISH}
-    !insertmacro RELEASENOTES_STRINGS ${LANG_CZECH}
-    !insertmacro RELEASENOTES_STRINGS ${LANG_GERMAN}
-    !insertmacro RELEASENOTES_STRINGS ${LANG_FARSI}
-    !insertmacro RELEASENOTES_STRINGS ${LANG_FINNISH}
-    !insertmacro RELEASENOTES_STRINGS ${LANG_FRENCH}
-    !insertmacro RELEASENOTES_STRINGS ${LANG_HEBREW}
-    !insertmacro RELEASENOTES_STRINGS ${LANG_DUTCH}
-    !insertmacro RELEASENOTES_STRINGS ${LANG_PORTUGUESE}
-    !insertmacro RELEASENOTES_STRINGS ${LANG_SWEDISH}
-
-
     ; Include localizations
     !insertmacro LINGUAS_INCLUDE
     !insertmacro LINGUAS_LIC_FILE
@@ -236,12 +217,19 @@
     ; because this will make your installer start faster.
 
     !insertmacro MUI_RESERVEFILE_LANGDLL
+
     ReserveFile "${NSISDIR}\Plugins\System.dll"
     ReserveFile "${NSISDIR}\Plugins\nsDialogs.dll"
-    ReserveFile "${INCL_DIR}\utf16_advuninstlog.nsh"
-    ReserveFile "${INCL_DIR}\utf16_fontreg.nsh"
-    ReserveFile "${INCL_DIR}\utf16_releasenotes.nsh"
-    ReserveFile "utf16_RELEASE-NOTES"
+
+    ReserveFile "${INCL_DIR}\advuninstlog.nsh"
+    ReserveFile "${INCL_DIR}\fontreg.nsh"
+    ReserveFile "${INCL_DIR}\releasenotes.nsh"
+    ReserveFile "..\..\RELEASE-NOTES"
+
+    ReserveFile "${NSISDIR}\Include\nsDialogs.nsh"
+    ReserveFile "${NSISDIR}\Include\LogicLib.nsh"
+    ReserveFile "${NSISDIR}\Include\TextFunc.nsh"
+    ReserveFile "${NSISDIR}\Include\WinMessages.nsh"
 
     !insertmacro LINGUAS_RESERVEFILE
 

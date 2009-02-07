@@ -3,7 +3,7 @@
 ;;
 ;;  Default language strings for the Xiphos NSIS installer.
 ;;
-;;  Version 1
+;;  Version 2
 ;;
 
 ;--------------------------------
@@ -26,5 +26,11 @@ LangString UNLOG_ERROR_CREATE ${LANG_ENGLISH} "Error creating ${UNINSTALL_LOG}."
 
 
 ;--------------------------------
-; Other Strings
+; Text for page with release notes
+
+!insertmacro ReadmeLangStrings "" "${LANG_ENGLISH}" \
+    "Release Notes" \
+    "Please review the following important information." \
+    "About $(^name):" \
+    "$\n  Click on scrollbar arrows or press Page Down to review the entire text."
 
