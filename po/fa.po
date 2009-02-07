@@ -4,8 +4,8 @@
 # <>, 2008.
 # , fuzzy
 # <>, 2009.
-# 
-# 
+#
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
@@ -17,7 +17,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../xiphos.desktop.in.in.h:1
 msgid "Study the Bible"
@@ -1421,7 +1421,6 @@ msgid ""
 msgstr ""
 "پروژه سوردبدینوسیله از تروی گریفیتس و بقیه دوستان که پروژه سورد را در اختیار "
 "ما گذاشتند، تشکر می‌کنیم. "
-""
 
 #: ../src/gnome2/studypad.c:101
 msgid "has been modified. Do you wish to save it?"
