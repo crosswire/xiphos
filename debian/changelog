@@ -1,3 +1,10 @@
+gnomesword (2.4.99-1) unstable; urgency=low
+
+  * Non-maintainer upload for developpers only
+  * 2.4.99 new upstream release (2009-02-11)
+
+ -- The Gnomesword Developer Team <gnomesword-developers@lists.sourceforge.net>  Wed, 11 Feb 2009 12:00:00 +0100
+	
 gnomesword (2.4.1-1) unstable; urgency=low
 
   * Non-maintainer upload.
