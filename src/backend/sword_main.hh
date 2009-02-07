@@ -91,6 +91,7 @@ public:
 	
 	char *get_module_key(void);
 	void save_entry(const char * entry);
+	void save_note_entry(const char * module, const char * key, const char * entry);
 	void delete_entry(void);
 	int set_module_key(const char *module_name, const char *key);
 	int set_key(const char *key);

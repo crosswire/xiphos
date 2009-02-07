@@ -191,12 +191,13 @@ void main_save_note(	const gchar * module_name,
 	}
 
 #ifdef USE_GTKHTML38
-	backend->set_module_key(module_name, key_str);
+	//backend->set_module_key(module_name, key_str);
 	GS_message(("note module %s\nnote key %s\nnote text%s",
 		    module_name,
 		    key_str,
 		    note_str));
-	backend->save_entry(note_str);
+	//backend->save_entry(note_str);
+	backend->save_note_entry(module_name, key_str, note_str);
 #endif
 	if ((!strcmp(settings.CommWindowModule, module_name)) &&  
 	    (!strcmp(settings.currentverse, key_str)))
