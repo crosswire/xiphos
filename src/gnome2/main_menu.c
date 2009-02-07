@@ -95,6 +95,8 @@ void
 on_help_contents_activate(GtkMenuItem * menuitem,
 			  gpointer user_data)
 {	
+	const char *lang = getenv("LANG");
+
 #ifdef __CYGWIN__
 	gui_generic_warning("Cygwin does not have the\n"
 			    "documentation viewer needed to\n"
@@ -105,7 +107,10 @@ on_help_contents_activate(GtkMenuItem * menuitem,
 # ifdef WIN32
 	gchar *help_file = g_win32_get_package_installation_directory_of_module(NULL);
 	help_file = g_strconcat(help_file, "\0", NULL);
-	help_file = g_build_filename(help_file, "share", "help", "C", "xiphos.chm", NULL);
+	if (strncmp(lang,"fr",2)==0)
+		help_file = g_build_filename(help_file, "share", "help", "fr", "xiphos_fr.chm", NULL);
+	else
+		help_file = g_build_filename(help_file, "share", "help", "C", "xiphos.chm", NULL);
 	if (gnome_url_show(g_strconcat("file:///", help_file, NULL),
 			   &error) == FALSE) {
 		GS_warning((error->message));
