@@ -1396,7 +1396,7 @@ _save_note_receiver (HTMLEngine *engine,
 static void
 _save_note(EDITOR * e)
 {
-#ifndef USE_GTKHTML3_14_23
+#ifdef USE_GTKHTML3_14_23
 	GString *string;
 	
 	string = g_string_sized_new (4096);
@@ -1417,7 +1417,7 @@ _save_note(EDITOR * e)
 static void
 _save_book(EDITOR * e)
 {
-#ifndef USE_GTKHTML3_14_23
+#ifdef USE_GTKHTML3_14_23
 	GString *string;
 	
 	string = g_string_sized_new (4096);
