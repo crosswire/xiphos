@@ -1,10 +1,6 @@
 TODO:
 
-    * Why installed fonts aren't immediately usable?
-
-    * remove files unnedded for generating the installer
-
-    * Name for the installer binary: "Xiphos-3.0-win32.exe"
+    * WHY installed fonts aren't immediately AVAILABLE?
 
     * simplify i18n declaration
         - inspiration at other OSS projects using NSIS
@@ -18,4 +14,4 @@ TODO:
 
     * tutor how to translate installer strings
 
-    * translate for page with RELEASE-NOTES
+    * translations for page with RELEASE-NOTES
