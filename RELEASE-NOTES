@@ -16,7 +16,7 @@ in share/doc/xiphos; approximately, "ksee-fos."
 
 This release represents a huge new chapter in our program's life.
 
-Problems known for this release.
+Per-platform notes for this release.
 
  1. Linux:
     a. In the most recent Fedora and Ubuntu releases, the invocation of
@@ -37,6 +37,7 @@ Problems known for this release.
        the module whose content is being previewed there.  If Xiphos
        starts up with the previewer embedded in the sidebar, then such
        font choices are not properly respected.
+    e. Print preview does not work, though printing does.
 
 Major new features, operational improvements, and bugfixes:
 
