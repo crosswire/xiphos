@@ -1400,7 +1400,8 @@ _save_note(EDITOR * e)
 	
 	string = g_string_sized_new (4096);
 	
-	gtk_html_export (gtkhtml_editor_get_html (e->window),
+	gtk_html_export (gtkhtml_editor_get_html
+			 ((GtkhtmlEditor *)e->window),
 			"text/html", 
 			(GtkHTMLSaveReceiverFn) _save_note_receiver, 
 			string);
@@ -1418,7 +1419,8 @@ _save_book(EDITOR * e)
 	
 	string = g_string_sized_new (4096);
 	
-	gtk_html_export (gtkhtml_editor_get_html (e->window),
+	gtk_html_export (gtkhtml_editor_get_html
+			 ((GtkhtmlEditor *)e->window),
 			"text/html", 
 			(GtkHTMLSaveReceiverFn) _save_note_receiver, 
 			string);
