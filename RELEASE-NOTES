@@ -18,7 +18,10 @@ This release represents a huge new chapter in our program's life.
 
 Problems known for this release.
 
- 1. Linux: None known.
+ 1. Linux:
+    a. In the most recent Fedora and Ubuntu releases, the invocation of
+       the editor (personal commentary, prayer list/journal) will induce
+       several harmless warning messages to occur.
 
  2. Windows:
     a. Xiphos runs under Windows 2000, XP, Vista, and 7-beta.
@@ -34,7 +37,6 @@ Problems known for this release.
        the module whose content is being previewed there.  If Xiphos
        starts up with the previewer embedded in the sidebar, then such
        font choices are not properly respected.
- These should be fixed in a future 3.x release.
 
 Major new features, operational improvements, and bugfixes:
 
