@@ -1406,7 +1406,6 @@ _save_note(EDITOR * e)
 			"text/html", 
 			(GtkHTMLSaveReceiverFn) _save_note_receiver, 
 			string);
-	
 	main_save_note (e->module, e->key, string->str);
 	
 	g_string_free(string,TRUE);
@@ -1427,8 +1426,6 @@ _save_book(EDITOR * e)
 			"text/html", 
 			(GtkHTMLSaveReceiverFn) _save_note_receiver, 
 			string);
-	
-	GS_message(("\n\n\n_save_note:\n%s\n\n\n", string->str));
 	
 	main_treekey_save_book_text(e->module, e->key, string->str);
 	g_string_free(string,TRUE);
@@ -1932,62 +1929,75 @@ gint ask_about_saving(EDITOR * e)
 	gchar *buf3 = NULL;
 	gint retval = FALSE;
 
-	if (!e->studypad) {
+	switch(e->type) {
+		case BOOK_EDITOR:
 #ifdef USE_GTKHTML3_14_23
-		/* save notes and prayer lists */
-		if (gtkhtml_editor_get_changed (GTKHTML_EDITOR(e->window)))
+			/* save notes and prayer lists */
+			_save_book(e);
+#else
+			save_through_persist_stream_cb(NULL, e);
+#endif
+			retval = GS_YES;
+		break;
+			
+		case NOTE_EDITOR:
+#ifdef USE_GTKHTML3_14_23
+			/* save notes and prayer lists */
 			_save_note(e);
 #else
-		save_through_persist_stream_cb(NULL, e);
+			save_through_persist_stream_cb(NULL, e);
 #endif
-		retval = GS_YES;
-	} else {
-		info = gui_new_dialog();
-		info->stock_icon = GTK_STOCK_DIALOG_WARNING;
-		if (settings.studypadfilename)
-			buf = settings.studypadfilename;
-		else
-			buf = N_("File");
-		buf1 = _("Save the changes to document");
-		buf2 = _("before closing?");
-		buf3 =
-		    g_strdup_printf
-		    ("<span weight=\"bold\" size=\"larger\">%s %s %s</span>",
-		     buf1, buf, buf2);
-		info->label_top = buf3;
-		info->label2 =
-		    _("If you don't save, changes will be permanently lost.");
-		info->save = TRUE;
-		info->cancel = TRUE;
-		info->no_save = TRUE;
+			retval = GS_YES;
+		break;
+		
+		case STUDYPAD_EDITOR:
+			info = gui_new_dialog();
+			info->stock_icon = GTK_STOCK_DIALOG_WARNING;
+			if (settings.studypadfilename)
+				buf = settings.studypadfilename;
+			else
+				buf = N_("File");
+			buf1 = _("Save the changes to document");
+			buf2 = _("before closing?");
+			buf3 =
+			    g_strdup_printf
+			    ("<span weight=\"bold\" size=\"larger\">%s %s %s</span>",
+			     buf1, buf, buf2);
+			info->label_top = buf3;
+			info->label2 =
+			    _("If you don't save, changes will be permanently lost.");
+			info->save = TRUE;
+			info->cancel = TRUE;
+			info->no_save = TRUE;
 
-		test = gui_alert_dialog(info);
-		retval = test;
-		if (test == GS_YES) {
-			if (e->filename) {
+			test = gui_alert_dialog(info);
+			retval = test;
+			if (test == GS_YES) {
+				if (e->filename) {
 #ifdef USE_GTKHTML3_14_23
-				gtkhtml_editor_save (GTKHTML_EDITOR(e->window),
-						 e->filename,
-						 TRUE,
-						 NULL);
+					gtkhtml_editor_save (GTKHTML_EDITOR(e->window),
+							 e->filename,
+							 TRUE,
+							 NULL);
 #else
-				save_through_persist_file(e,
-						g_strdup(e->filename));
+					save_through_persist_file(e,
+							g_strdup(e->filename));
 #endif
-			} else {
+				} else {
 #ifdef USE_GTKHTML3_14_23
 	
 #else
-				open_or_save_as_dialog(e,
-					     OP_SAVE_THROUGH_PERSIST_FILE);
+					open_or_save_as_dialog(e,
+						     OP_SAVE_THROUGH_PERSIST_FILE);
 #endif
+				}
 			}
-		}
-		g_free(info);
-		g_free(buf3);
-		while (gtk_events_pending()) {
-			gtk_main_iteration();
-		}
+			g_free(info);
+			g_free(buf3);
+			break;
+	}
+	while (gtk_events_pending()) {
+		gtk_main_iteration();
 	}
 	return retval;
 }
