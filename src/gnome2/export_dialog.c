@@ -204,7 +204,7 @@ gint _check_for_distribution_license(gchar * mod_name)
 	gchar *distributionlicense;
 	gchar *conf_file;
 	
-	conf_file = g_strdup_printf("%s/.sword/mods.d/%s.conf",
+	conf_file = g_strdup_printf("%s/" DOTSWORD "/mods.d/%s.conf",
 				    settings.homedir,
 				    g_utf8_strdown(mod_name,
                                     -1));
