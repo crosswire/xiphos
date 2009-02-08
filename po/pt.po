@@ -2567,7 +2567,7 @@ msgstr ""
 #: ../src/main/settings.c:153 ../src/main/settings.c:161
 #: ../src/main/settings.c:169
 msgid "can not create "
-msgstr "não pode criar \n"
+msgstr "não pode criar "
 
 #. must be first run
 #: ../src/main/settings.c:190
