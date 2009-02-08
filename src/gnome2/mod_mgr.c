@@ -216,7 +216,7 @@ static gboolean mod_mgr_check_for_file(const gchar * filename)
  *   void
  */
 
-#define ZIP_DIR	".sword/zip"
+#define ZIP_DIR	DOTSWORD "/zip"
 
 static void
 remove_install_modules(GList * modules,
@@ -2679,7 +2679,7 @@ setup_ui_labels()
 		
 	have_changes = FALSE;
 	str = g_strdup_printf("%s/%s", settings.homedir,
-			      ".sword/InstallMgr/InstallMgr.conf");
+			      DOTSWORD "/InstallMgr/InstallMgr.conf");
 	if (!mod_mgr_check_for_file(str)) {
 		have_configs = FALSE;
 		mod_mgr_init_config();
@@ -2688,7 +2688,7 @@ setup_ui_labels()
 
 	have_configs = TRUE;
 	mod_mgr_init(NULL, TRUE, TRUE);
-	str = g_strdup_printf("%s/%s", settings.homedir, ".sword");
+	str = g_strdup_printf("%s/%s", settings.homedir, DOTSWORD);
 	gtk_label_set_text(GTK_LABEL(label_home), str);
 	g_free(str);
 

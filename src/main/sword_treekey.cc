@@ -388,7 +388,7 @@ gint main_prayer_list_new (gchar * list_name)
 		return 0;
 	}
 
-	path = g_strdup_printf ("%s/.sword/modules/genbook/rawgenbook/%s",
+	path = g_strdup_printf ("%s/" DOTSWORD "/modules/genbook/rawgenbook/%s",
 				settings.homedir, list_name);
 	if (access (path, F_OK) == -1) {
 		if ((Mkdir(path, S_IRWXU)) != 0) {
@@ -402,7 +402,7 @@ gint main_prayer_list_new (gchar * list_name)
 	g_free (path);
 	path = g_strdup_printf ("./modules/genbook/rawgenbook/%s/%s",
 				list_name, list_name);
-	gchar *conf_path = g_strdup_printf ("%s/.sword/mods.d/%s.conf",
+	gchar *conf_path = g_strdup_printf ("%s/" DOTSWORD "/mods.d/%s.conf",
 					    settings.homedir,
 					    list_name);
 	SWConfig config (conf_path);
@@ -421,7 +421,7 @@ gint main_prayer_list_new (gchar * list_name)
 
 	g_free (path);
 	g_free (conf_path);
-	path = g_strdup_printf ("%s/.sword/modules/genbook/rawgenbook/%s/%s",
+	path = g_strdup_printf ("%s/" DOTSWORD "/modules/genbook/rawgenbook/%s/%s",
 				settings.homedir, list_name, list_name);
 
 	RawGenBook::createModule (path);

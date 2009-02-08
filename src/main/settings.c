@@ -147,26 +147,26 @@ int settings_init(int new_configs, int new_bookmarks)
 */
 
 	/* if .sword does not exist create it */
-	sword_dir = g_strdup_printf("%s/%s", settings.homedir, ".sword");
+	sword_dir = g_strdup_printf("%s/%s", settings.homedir, DOTSWORD);
 	if (access(sword_dir, F_OK) == -1) {
 		if ((Mkdir(sword_dir, S_IRWXU)) != 0) {
-			gui_generic_warning(_("can not create  .sword"));
+			gui_generic_warning(_("can not create " DOTSWORD));
 		} 
 	}
 	g_free(sword_dir);
 	/* if .sword/mods.d does not exist create it */
-	sword_dir = g_strdup_printf("%s/%s", settings.homedir, ".sword/mods.d");
+	sword_dir = g_strdup_printf("%s/%s", settings.homedir, DOTSWORD "/mods.d");
 	if (access(sword_dir, F_OK) == -1) {
 		if ((Mkdir(sword_dir, S_IRWXU)) != 0) {
-			gui_generic_warning(_("can not create  .sword/mods.d"));
+			gui_generic_warning(_("can not create " DOTSWORD "/mods.d"));
 		} 
 	}	
 	g_free(sword_dir);
 	/* if .sword/modules does not exist create it */
-	sword_dir = g_strdup_printf("%s/%s", settings.homedir,".sword/modules");
+	sword_dir = g_strdup_printf("%s/%s", settings.homedir, DOTSWORD "/modules");
 	if (access(sword_dir, F_OK) == -1) {
 		if ((Mkdir(sword_dir, S_IRWXU)) != 0) {
-			gui_generic_warning(_("can not create  .sword/modules"));
+			gui_generic_warning(_("can not create " DOTSWORD "/modules"));
 		} 
 	}
 	g_free(sword_dir);
