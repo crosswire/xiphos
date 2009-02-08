@@ -1,4 +1,4 @@
-AC_INIT(xiphos, 2.4.99, http://sourceforge.net/tracker/?group_id=5528&atid=105528)
+AC_INIT(xiphos, 3.0.0, http://sourceforge.net/tracker/?group_id=5528&atid=105528)
 AC_CONFIG_SRCDIR(src/gnome2/xiphos.c)
 AC_CONFIG_MACRO_DIR([m4])
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
@@ -56,7 +56,7 @@ AC_SUBST(SWORD_CFLAGS)
 dnl ***
 dnl ImageMagick for image dimensions/resize
 dnl ***
-PKG_CHECK_MODULES(ImageMagick, ImageMagick++ >= 6.0.0, , echo error: either no ImageMagick or ImageMagick not recent enough && exit 1)
+PKG_CHECK_MODULES(ImageMagick, ImageMagick++ >= 6.0.0, , echo error: either no ImageMagick++ or ImageMagick++ not recent enough && exit 1)
 AC_SUBST(ImageMagick_LIBS)
 AC_SUBST(ImageMagick_CFLAGS)
 
