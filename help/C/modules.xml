@@ -118,7 +118,7 @@
 				You may install modules to a shared folder so the modules are available to all users. If you have previously used
 				"The Sword Project for Windows", this folder will be "C:\Program Files\Crosswire\The Sword Project\Sword". Otherwise
 				it will be "C:\Documents and Settings\All Users\Application Data\Sword". You may also install modules to a location
-				that can only be seen by you. This location is "C:\Documents and Settings\YOUR NAME\Application Data\.sword".
+				that can only be seen by you. This location is "C:\Documents and Settings\YOUR NAME\Application Data\Sword".
 				</para>
 			</sect4>
 			
@@ -126,7 +126,7 @@
 				<title>Windows Vista</title>
 				<para>
 				Vista works much the same as XP, except for the locations. The private location is 
-				"C:\Users\YOUR NAME\AppData\Roaming\.sword". The shared location is "C:\ProgramData\Sword".
+				"C:\Users\YOUR NAME\AppData\Roaming\Sword". The shared location is "C:\ProgramData\Sword".
 				</para>
 			</sect4>
 			
