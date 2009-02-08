@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-07 12:56+0000\n"
+"POT-Creation-Date: 2009-02-08 20:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,7 +24,7 @@ msgstr ""
 msgid "Xiphos Bible Guide"
 msgstr ""
 
-#: ../src/backend/sword_main.cc:1387
+#: ../src/backend/sword_main.cc:1399
 msgid "Configuration not found"
 msgstr ""
 
@@ -79,7 +79,7 @@ msgstr ""
 msgid "Save _As..."
 msgstr ""
 
-#: ../src/editor/html-editor.c:716 ../src/gnome2/main_menu.c:1185
+#: ../src/editor/html-editor.c:716 ../src/gnome2/main_menu.c:1190
 #: ../ui/editor_note.xml.h:14 ../ui/editor_studypad.xml.h:20
 #: ../ui/editor.xml.h:13
 msgid "_File"
@@ -97,7 +97,7 @@ msgstr ""
 msgid "_Plain Source"
 msgstr ""
 
-#: ../src/editor/html-editor.c:792 ../src/gnome2/main_menu.c:1197
+#: ../src/editor/html-editor.c:792 ../src/gnome2/main_menu.c:1202
 msgid "_View"
 msgstr ""
 
@@ -105,6 +105,18 @@ msgstr ""
 msgid "Are you sure you want to delete the note for"
 msgstr ""
 
+#: ../src/editor/html-editor.c:1937 ../src/editor/html-editor.c:1987
+msgid "Save the changes to document"
+msgstr ""
+
+#: ../src/editor/html-editor.c:1938 ../src/editor/html-editor.c:1988
+msgid "before closing?"
+msgstr ""
+
+#: ../src/editor/html-editor.c:1945 ../src/editor/html-editor.c:1995
+msgid "If you don't save, changes will be permanently lost."
+msgstr ""
+
 #. 2
 #. 3
 #. 1
@@ -113,35 +125,23 @@ msgstr ""
 #. 3
 #. 1
 #. 2
-#: ../src/editor/html-editor.c:1950 ../src/gnome2/bibletext.c:1150
+#: ../src/editor/html-editor.c:1986 ../src/gnome2/bibletext.c:1150
 #: ../src/gnome2/gbs.c:918 ../src/gnome2/bibletext_dialog.c:2136
 #: ../src/gnome2/dictlex.c:1086 ../src/gnome2/commentary_dialog.c:1672
 #: ../src/gnome2/commentary.c:1019 ../src/gnome2/studypad.c:98
 msgid "File"
 msgstr ""
 
-#: ../src/editor/html-editor.c:1951
-msgid "Save the changes to document"
-msgstr ""
-
-#: ../src/editor/html-editor.c:1952
-msgid "before closing?"
-msgstr ""
-
-#: ../src/editor/html-editor.c:1959
-msgid "If you don't save, changes will be permanently lost."
-msgstr ""
-
-#: ../src/editor/html-editor.c:2351 ../src/editor/html-editor.c:2354
+#: ../src/editor/html-editor.c:2388 ../src/editor/html-editor.c:2391
 #: ../src/gnome2/studypad.c:411
 msgid "StudyPad"
 msgstr ""
 
-#: ../src/editor/html-editor.c:2369 ../src/editor/html-editor.c:2376
+#: ../src/editor/html-editor.c:2406 ../src/editor/html-editor.c:2413
 msgid "Note Editor"
 msgstr ""
 
-#: ../src/editor/html-editor.c:2386 ../src/editor/html-editor.c:2418
+#: ../src/editor/html-editor.c:2423 ../src/editor/html-editor.c:2455
 msgid "Prayer List/Journal Editor"
 msgstr ""
 
@@ -1058,7 +1058,7 @@ msgstr ""
 msgid "Failed to print the document"
 msgstr ""
 
-#: ../src/gnome2/main_window.c:778 ../src/main/sword.cc:637
+#: ../src/gnome2/main_window.c:778 ../src/main/sword.cc:638
 msgid "Starting"
 msgstr ""
 
@@ -1177,7 +1177,7 @@ msgstr ""
 msgid "_Bookmarks"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:1224 ../src/gnome2/main_menu.c:995
+#: ../src/gnome2/sidebar.c:1224 ../src/gnome2/main_menu.c:1000
 msgid "_Search"
 msgstr ""
 
@@ -1627,237 +1627,237 @@ msgstr ""
 msgid "Starting Sword"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:965
+#: ../src/gnome2/main_menu.c:970
 msgid "Open Study_Pad"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:966
+#: ../src/gnome2/main_menu.c:971
 msgid "Open the StudyPad editor"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:971
+#: ../src/gnome2/main_menu.c:976
 msgid "_Open Session"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:972
+#: ../src/gnome2/main_menu.c:977
 msgid "Open a saved session"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:976
+#: ../src/gnome2/main_menu.c:981
 msgid "_Save Session"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:977
+#: ../src/gnome2/main_menu.c:982
 msgid "Save the current session to a file"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:988
+#: ../src/gnome2/main_menu.c:993
 msgid "_Copy"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:989
+#: ../src/gnome2/main_menu.c:994
 msgid "Copy highlighted text from main window"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:996
+#: ../src/gnome2/main_menu.c:1001
 msgid "Search using the shortcut bar"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:1001
+#: ../src/gnome2/main_menu.c:1006
 msgid "_Advanced Search"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:1002
+#: ../src/gnome2/main_menu.c:1007
 msgid "Advanced search using the search dialog"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:1008
+#: ../src/gnome2/main_menu.c:1013
 msgid "_Preferences"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:1009
+#: ../src/gnome2/main_menu.c:1014
 msgid "Set user preferences"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:1014
+#: ../src/gnome2/main_menu.c:1019
 msgid "_Module Manager"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:1015
+#: ../src/gnome2/main_menu.c:1020
 msgid "Use module manager to install and remove Sword modules"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:1024
+#: ../src/gnome2/main_menu.c:1029
 msgid "C_lear"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:1025
+#: ../src/gnome2/main_menu.c:1030
 msgid "Clear history list"
 msgstr ""
 
 #. 0
-#: ../src/gnome2/main_menu.c:1035
+#: ../src/gnome2/main_menu.c:1040
 msgid "_Daily Devotion"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:1036
+#: ../src/gnome2/main_menu.c:1041
 msgid "Show the Daily Devotion for today"
 msgstr ""
 
 #. 1
 #. 2
-#: ../src/gnome2/main_menu.c:1042
+#: ../src/gnome2/main_menu.c:1047
 msgid "_Bible Texts"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:1043
+#: ../src/gnome2/main_menu.c:1048
 msgid "Show or hide Bible texts window"
 msgstr ""
 
 #. 3
-#: ../src/gnome2/main_menu.c:1048
+#: ../src/gnome2/main_menu.c:1053
 msgid "_Preview"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:1049
+#: ../src/gnome2/main_menu.c:1054
 msgid "Show or hide Preview window"
 msgstr ""
 
 #. 4
-#: ../src/gnome2/main_menu.c:1054
+#: ../src/gnome2/main_menu.c:1059
 msgid "_Commentary"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:1055
+#: ../src/gnome2/main_menu.c:1060
 msgid "Show or hide commentaries"
 msgstr ""
 
 #. 5
-#: ../src/gnome2/main_menu.c:1060
+#: ../src/gnome2/main_menu.c:1065
 msgid "Dictionary/_Lexicon"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:1061
+#: ../src/gnome2/main_menu.c:1066
 msgid "Show or hide - dictionaries and lexicons"
 msgstr ""
 
 #. 6
 #. 7
-#: ../src/gnome2/main_menu.c:1067
+#: ../src/gnome2/main_menu.c:1072
 msgid "_Verse Per Line"
 msgstr ""
 
 #. 8
-#: ../src/gnome2/main_menu.c:1073
+#: ../src/gnome2/main_menu.c:1078
 msgid "L_ink Tabs"
 msgstr ""
 
 #. 9
-#: ../src/gnome2/main_menu.c:1079
+#: ../src/gnome2/main_menu.c:1084
 msgid "_Read Aloud"
 msgstr ""
 
 #. 10
-#: ../src/gnome2/main_menu.c:1085
+#: ../src/gnome2/main_menu.c:1090
 msgid "Show Verse _Numbers"
 msgstr ""
 
 #. 11
-#: ../src/gnome2/main_menu.c:1091
+#: ../src/gnome2/main_menu.c:1096
 msgid "_Highlight Current Verse"
 msgstr ""
 
 #. 12
-#: ../src/gnome2/main_menu.c:1098
+#: ../src/gnome2/main_menu.c:1103
 msgid "D_ouble-Space Text"
 msgstr ""
 
 #. 13
 #. 14
-#: ../src/gnome2/main_menu.c:1106
+#: ../src/gnome2/main_menu.c:1111
 msgid "_Attach/Detach Sidebar"
 msgstr ""
 
 #. 15
-#: ../src/gnome2/main_menu.c:1112
+#: ../src/gnome2/main_menu.c:1117
 msgid "_Show/Hide Sidebar"
 msgstr ""
 
 #. 16
-#: ../src/gnome2/main_menu.c:1120
+#: ../src/gnome2/main_menu.c:1125
 msgid "Show Parallel View in a tab"
 msgstr ""
 
 #. 17
-#: ../src/gnome2/main_menu.c:1126
+#: ../src/gnome2/main_menu.c:1131
 msgid "Show Previewer in the Sidebar"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:1137
+#: ../src/gnome2/main_menu.c:1142
 msgid "_Contents"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:1138
+#: ../src/gnome2/main_menu.c:1143
 msgid "Open the Xiphos manual"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:1143
+#: ../src/gnome2/main_menu.c:1148
 msgid "_Mailing List"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:1144
+#: ../src/gnome2/main_menu.c:1149
 msgid "Sign up for the users' mailing list"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:1149
+#: ../src/gnome2/main_menu.c:1154
 msgid "_Live Chat"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:1150
+#: ../src/gnome2/main_menu.c:1155
 msgid "Chat with other users and developers"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:1155
+#: ../src/gnome2/main_menu.c:1160
 msgid "_Report Bug"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:1156
+#: ../src/gnome2/main_menu.c:1161
 msgid "Report bug to SourceForge"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:1162
+#: ../src/gnome2/main_menu.c:1167
 msgid "About _Translation"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:1163
+#: ../src/gnome2/main_menu.c:1168
 msgid "Translating Xiphos to other languages"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:1169
+#: ../src/gnome2/main_menu.c:1174
 msgid "_About the SWORD Project"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:1170
+#: ../src/gnome2/main_menu.c:1175
 msgid "More information about the SWORD Project"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:1175
+#: ../src/gnome2/main_menu.c:1180
 msgid "About _Xiphos"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:1176
+#: ../src/gnome2/main_menu.c:1181
 msgid "About this application"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:1191
+#: ../src/gnome2/main_menu.c:1196
 msgid "_Edit"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:1203
+#: ../src/gnome2/main_menu.c:1208
 msgid "Hi_story"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:1209
+#: ../src/gnome2/main_menu.c:1214
 msgid "_Help"
 msgstr ""
 
@@ -1887,55 +1887,55 @@ msgstr ""
 msgid "Xiphos development"
 msgstr ""
 
-#: ../src/main/sword.cc:539
+#: ../src/main/sword.cc:540
 msgid ""
 "Xiphos's file for language\n"
 "abbreviations is missing."
 msgstr ""
 
-#: ../src/main/sword.cc:546
+#: ../src/main/sword.cc:547
 msgid ""
 "Xiphos's language abbreviation\n"
 "file cannot be opened."
 msgstr ""
 
-#: ../src/main/sword.cc:557
+#: ../src/main/sword.cc:558
 msgid ""
 "Xiphos cannot allocate space\n"
 "for language abbreviations."
 msgstr ""
 
-#: ../src/main/sword.cc:564
+#: ../src/main/sword.cc:565
 msgid ""
 "Xiphos cannot read the\n"
 "language abbreviation file."
 msgstr ""
 
-#: ../src/main/sword.cc:638
+#: ../src/main/sword.cc:639
 msgid "Initiating SWORD"
 msgstr ""
 
-#: ../src/main/sword.cc:639
+#: ../src/main/sword.cc:640
 msgid "path to sword"
 msgstr ""
 
-#: ../src/main/sword.cc:640
+#: ../src/main/sword.cc:641
 msgid "System locale is"
 msgstr ""
 
-#: ../src/main/sword.cc:641
+#: ../src/main/sword.cc:642
 msgid "SWORD locale is"
 msgstr ""
 
-#: ../src/main/sword.cc:643
+#: ../src/main/sword.cc:644
 msgid "Checking for SWORD Modules"
 msgstr ""
 
-#: ../src/main/sword.cc:676
+#: ../src/main/sword.cc:677
 msgid "SWORD is shutdown"
 msgstr ""
 
-#: ../src/main/sword.cc:1412
+#: ../src/main/sword.cc:1413
 msgid "Daily devotional was requested, but there are none installed."
 msgstr ""
 
@@ -2468,16 +2468,9 @@ msgid ""
 "Xiphos cannot continue."
 msgstr ""
 
-#: ../src/main/settings.c:153
-msgid "can not create  .sword"
-msgstr ""
-
-#: ../src/main/settings.c:161
-msgid "can not create  .sword/mods.d"
-msgstr ""
-
+#: ../src/main/settings.c:153 ../src/main/settings.c:161
 #: ../src/main/settings.c:169
-msgid "can not create  .sword/modules"
+msgid "can not create "
 msgstr ""
 
 #. must be first run
