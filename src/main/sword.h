@@ -144,8 +144,10 @@ void main_init_language_map(void);
 
 #ifdef WIN32
 #define	Mkdir(d,m)	mkdir(d)
+#define	DOTSWORD	"Sword"
 #else
 #define	Mkdir(d,m)	mkdir(d,m)
+#define	DOTSWORD	".sword"
 #endif /* WIN32 */
 
 /* we can now use "HOME" everywhere again,

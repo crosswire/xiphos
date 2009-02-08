@@ -115,7 +115,7 @@ void GSStatusReporter::statusUpdate(double dltotal,
 ModuleManager::ModuleManager() {	
 	char *envhomedir = getenv(HOMEVAR);
 	baseDir = (envhomedir) ? envhomedir : ".";
-	baseDir += "/.sword/InstallMgr";
+	baseDir += "/" DOTSWORD "/InstallMgr";
 	statusReporter = new GSStatusReporter();
 }
  
@@ -488,7 +488,7 @@ GList *backend_module_mgr_list_remote_sources(void)
 	GList *retval = NULL;
 	char *envhomedir = getenv(HOMEVAR);
 	SWBuf baseDir = (envhomedir) ? envhomedir : ".";
-	baseDir += "/.sword/InstallMgr";
+	baseDir += "/" DOTSWORD "/InstallMgr";
 #ifdef SWORD_MULTIVERSE
 	InstallMgr *inst_mgr = new InstallMgr(baseDir,
 					      (StatusReporter *)0,
@@ -537,7 +537,7 @@ GList *backend_module_mgr_list_local_sources(void)
 	GList *retval = NULL;	
 	char *envhomedir = getenv(HOMEVAR);
 	SWBuf confPath = (envhomedir) ? envhomedir : ".";
-	confPath += "/.sword/InstallMgr/InstallMgr.conf";
+	confPath += "/" DOTSWORD "/InstallMgr/InstallMgr.conf";
 	SWConfig *installConf= new SWConfig(confPath.c_str());
 	
 	SectionMap::iterator sourcesSection;
@@ -617,7 +617,7 @@ void backend_init_module_mgr_config(void)
 	
 	char *envhomedir = getenv(HOMEVAR);
 	SWBuf confPath = (envhomedir) ? envhomedir : ".";
-	confPath += "/.sword/InstallMgr/InstallMgr.conf";
+	confPath += "/" DOTSWORD "/InstallMgr/InstallMgr.conf";
 	FileMgr::createParent(confPath.c_str());
 	remove(confPath.c_str());
 
@@ -683,7 +683,7 @@ void backend_module_mgr_clear_config(void)
 {
 	char *envhomedir = getenv(HOMEVAR);
 	SWBuf confPath = (envhomedir) ? envhomedir : ".";
-	confPath += "/.sword/InstallMgr/InstallMgr.conf";
+	confPath += "/" DOTSWORD "/InstallMgr/InstallMgr.conf";
 	FileMgr::createParent(confPath.c_str());
 	remove(confPath.c_str());
 	
@@ -722,7 +722,7 @@ void backend_module_mgr_add_source(const char * vtype,
 {
 	char *envhomedir = getenv(HOMEVAR);
 	SWBuf confPath = (envhomedir) ? envhomedir : ".";
-	confPath += "/.sword/InstallMgr/InstallMgr.conf";
+	confPath += "/" DOTSWORD "/InstallMgr/InstallMgr.conf";
 	FileMgr::createParent(confPath.c_str());
 	
 	SWConfig config(confPath.c_str());
@@ -856,7 +856,7 @@ void backend_init_module_mgr(const char *dir,
 
 	char *envhomedir = getenv(HOMEVAR);
 	SWBuf baseDir = (envhomedir) ? envhomedir : ".";
-	baseDir += "/.sword/InstallMgr";
+	baseDir += "/" DOTSWORD "/InstallMgr";
 
 	GSStatusReporter *statusReporter = new GSStatusReporter();
 

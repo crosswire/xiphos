@@ -500,7 +500,7 @@ on_rename_perscomm_activate(GtkMenuItem * menuitem, gpointer user_data)
 	}
 
 	sworddir = g_new(char, strlen(settings.homedir) + 8);
-	sprintf(sworddir, "%s/.sword", settings.homedir);
+	sprintf(sworddir, "%s/" DOTSWORD, settings.homedir);
 	modsdir  = g_new(char, strlen(sworddir) + 8);
 	sprintf(modsdir,  "%s/mods.d", sworddir);
 

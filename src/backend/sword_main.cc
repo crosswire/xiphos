@@ -1375,7 +1375,7 @@ void BackEnd::save_module_key(char *mod_name, char *key) {
 
 	// first try: $HOME.
 	char *confdir = g_strdup_printf("%s/%s",
-					settings.homedir, ".sword");
+					settings.homedir, DOTSWORD);
 	char *conffile = main_get_mod_config_file(mod_name, confdir);
 
 	if (conffile) {

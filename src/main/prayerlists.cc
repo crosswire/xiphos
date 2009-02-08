@@ -178,7 +178,7 @@ void
 prayerlist_construct(gchar *listname, gchar *summary)
 {
 	// configuration file generation.
-	gchar *path = g_strdup_printf("%s/.sword/mods.d/%s.conf",
+	gchar *path = g_strdup_printf("%s/" DOTSWORD "/mods.d/%s.conf",
 				      settings.homedir, listname);
 	SWConfig config (path);
 	g_free(path);
@@ -261,14 +261,14 @@ prayerlist_fundamentals(gchar *summary)
 	}
 
 	// path creation based on name selection.
-	g_string_printf(path, "%s/.sword/modules/genbook/rawgenbook/%s",
+	g_string_printf(path, "%s/" DOTSWORD "/modules/genbook/rawgenbook/%s",
 			settings.homedir, info->text1);
 	if (access(path->str, F_OK) == 0) {
 		gui_generic_warning
 		    (_("Xiphos finds that prayer list already."));
 		goto out;
 	} else {
-		g_string_printf(path, "%s/.sword/modules/genbook",
+		g_string_printf(path, "%s/" DOTSWORD "/modules/genbook",
 				settings.homedir);
 		Mkdir(path->str, S_IRWXU);	// ignore return value -- harmless
 		g_string_append(path, "/rawgenbook");
@@ -323,7 +323,7 @@ main_prayerlist_basic_create(void)
 		return FALSE;
 
 	gchar *path = g_strdup_printf
-	    ("%s/.sword/modules/genbook/rawgenbook/%s/%s",
+	    ("%s/" DOTSWORD "/modules/genbook/rawgenbook/%s/%s",
 	     settings.homedir, listname, listname);
 	g_free(listname);
 	RawGenBook::createModule (path);
@@ -364,7 +364,7 @@ main_prayerlist_subject_create(void)
 		return FALSE;
 
 	gchar *path = g_strdup_printf
-	    ("%s/.sword/modules/genbook/rawgenbook/%s/%s",
+	    ("%s/" DOTSWORD "/modules/genbook/rawgenbook/%s/%s",
 	     settings.homedir, listname, listname);
 	g_free(listname);
 	RawGenBook::createModule (path);
@@ -409,7 +409,7 @@ main_prayerlist_monthly_create(void)
 		return FALSE;
 
 	gchar *path = g_strdup_printf
-	    ("%s/.sword/modules/genbook/rawgenbook/%s/%s",
+	    ("%s/" DOTSWORD "/modules/genbook/rawgenbook/%s/%s",
 	     settings.homedir, listname, listname);
 	g_free(listname);
 	RawGenBook::createModule(path);
@@ -460,7 +460,7 @@ main_prayerlist_journal_create(void)
 		return FALSE;
 
 	gchar *path = g_strdup_printf
-	    ("%s/.sword/modules/genbook/rawgenbook/%s/%s",
+	    ("%s/" DOTSWORD "/modules/genbook/rawgenbook/%s/%s",
 	     settings.homedir, listname, listname);
 	g_free(listname);
 	RawGenBook::createModule(path);
@@ -524,7 +524,7 @@ main_prayerlist_outlined_topic_create(void)
 		return FALSE;
 
 	gchar *path = g_strdup_printf
-	    ("%s/.sword/modules/genbook/rawgenbook/%s/%s",
+	    ("%s/" DOTSWORD "/modules/genbook/rawgenbook/%s/%s",
 	     settings.homedir, listname, listname);
 	g_free(listname);
 	RawGenBook::createModule(path);
