@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: Xiphos 2 2.3.6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-02-05 00:14+0100\n"
-"PO-Revision-Date: 2009-02-07 01:24+0000\n"
+"PO-Revision-Date: 2009-02-08 00:01+0000\n"
 "Last-Translator: Eicke Godehardt <sf at godehardt.org>\n"
 "Language-Team: Xiphos Translation Team <farsi@lists.sharif.edu>\n"
 "MIME-Version: 1.0\n"
@@ -955,9 +955,8 @@ msgid "A checkmark means this module is already installed"
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:1315
-#, fuzzy
 msgid "Click the box to work on this module"
-msgstr "Schriftart für diesen Modul wählen"
+msgstr "Box ticken um dieses Modul auszuwählen"
 
 #: ../src/gnome2/mod_mgr.c:1316
 msgid "Click the box to select this module for install/update"
@@ -1162,7 +1161,6 @@ msgid "Open in a separate window"
 msgstr ""
 
 #: ../src/gnome2/sidebar.c:771
-#, fuzzy
 msgid "Open selected module in a separate ['dialog'] window"
 msgstr "Ausgewähltes Modul in einem Dialog öffnen"
 
@@ -1401,9 +1399,8 @@ msgid "Parallel"
 msgstr "Parallel"
 
 #: ../src/gnome2/preferences_dialog.c:1801
-#, fuzzy
 msgid "Special"
-msgstr "Rechtschreibung"
+msgstr "Spezial"
 
 #: ../src/gnome2/preferences_cell_renderer.c:398
 msgid "Text"
@@ -1520,7 +1517,6 @@ msgid "Restore saved folder"
 msgstr "Gespeicherte Ordner wiederherstellen"
 
 #: ../src/gnome2/bookmarks_menu.c:1107
-#, fuzzy
 msgid "Open this bookmark in a new tab"
 msgstr "Dieses Lesezeichen in einem Dialogfenster öffnen"
 
@@ -1845,9 +1841,8 @@ msgid "Open the Xiphos manual"
 msgstr "Xiphos-Handbuch öffnen"
 
 #: ../src/gnome2/main_menu.c:1143
-#, fuzzy
 msgid "_Mailing List"
-msgstr "Liste mit römischen Zahlen"
+msgstr "Email Liste"
 
 #: ../src/gnome2/main_menu.c:1144
 msgid "Sign up for the users' mailing list"
@@ -2711,9 +2706,9 @@ msgid "New ..."
 msgstr "Neu ..."
 
 #: ../ui/bookmarks.glade.h:12
-#, fuzzy
 msgid "Verse Entry"
-msgstr "_Versstil"
+msgstr "Verseintrag"
+""
 
 #: ../ui/bookmarks.glade.h:13
 msgid "Verse:"
@@ -3092,7 +3087,6 @@ msgid "Background"
 msgstr "Hintergrund"
 
 #: ../ui/prefs.glade.h:21
-#, fuzzy
 msgid "Base text size"
 msgstr "Basis-Schriftgröße"
 
@@ -3144,16 +3138,14 @@ msgid "Choose to enable Prayer lists "
 msgstr "Gebetsliste aktivieren"
 
 #: ../ui/prefs.glade.h:34
-#, fuzzy
 msgid "Commentaries Checkbox"
-msgstr "Kommentare"
+msgstr "Kommentartickbox"
 
 #: ../ui/prefs.glade.h:36
 msgid "Cover"
 msgstr "Einband"
 
 #: ../ui/prefs.glade.h:37
-#, fuzzy
 msgid "Current Verse"
 msgstr "Aktueller Vers"
 
@@ -3162,9 +3154,8 @@ msgid "Daily Devotional"
 msgstr "Tageslosung"
 
 #: ../ui/prefs.glade.h:39
-#, fuzzy
 msgid "Daily Devotional Combo"
-msgstr "Tageslosung"
+msgstr "Tageslosungtickbox"
 
 #: ../ui/prefs.glade.h:40
 msgid "Default Dictionary"
@@ -3201,9 +3192,8 @@ msgid "Font Misc"
 msgstr "Schriften"
 
 #: ../ui/prefs.glade.h:48
-#, fuzzy
 msgid "Foreground"
-msgstr "Vordergrund hervorheben"
+msgstr "Vordergrund"
 
 #: ../ui/prefs.glade.h:49
 msgid "General Misc"
@@ -3240,9 +3230,8 @@ msgid "Highlight current verse"
 msgstr "aktuellen Vers hervorheben"
 
 #: ../ui/prefs.glade.h:57
-#, fuzzy
 msgid "Highlight current verse check box"
-msgstr "aktuellen Vers hervorheben"
+msgstr "Tickbox um aktuellen Vers hervorzuheben "
 
 #: ../ui/prefs.glade.h:58
 msgid "Links"
@@ -3306,9 +3295,8 @@ msgid "Parallel 5 Combo"
 msgstr "Parallel 5"
 
 #: ../ui/prefs.glade.h:72
-#, fuzzy
 msgid "Parallel View in a tab"
-msgstr "Parallelansicht"
+msgstr "Parallelansicht in einem Tab"
 
 #: ../ui/prefs.glade.h:73
 msgid "Personal Notes"
@@ -3361,7 +3349,6 @@ msgstr ""
 "Kapitel zu springen"
 
 #: ../ui/prefs.glade.h:87
-#, fuzzy
 msgid "Use Verse Per Line"
 msgstr "Versstil verwenden"
 
