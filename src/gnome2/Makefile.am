@@ -107,4 +107,5 @@ xiphos_LDADD = \
     $(UPRINT_LIBS)
 
 EXTRA_DIST = \
-    $(top_builddir)/src/gui/*.h
+    $(top_builddir)/src/gui/*.h \
+    gnomesword2
