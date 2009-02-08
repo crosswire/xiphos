@@ -10,8 +10,8 @@
 ; Text for page with release notes
 
 !insertmacro ReadmeLangStrings "" "${LANG_PORTUGUESE}" \
-    "Release Notes" \
-    "Please review the following important information." \
-    "About $(^name):" \
-    "$\n  Click on scrollbar arrows or press Page Down to review the entire text."
+    "Notas de lançamento" \
+    "Por favor reveja a seguinte informação importante." \
+    "Sobre $(^name):" \
+    "$\n  CLique nas setas de deslocamento ou pressione Page Down para rever o texto completo."
 
