@@ -30,7 +30,8 @@ EXTRA_DIST = \
 	intltool-update.in \
 	COPYING-DOCS \
 	TRANSLATION-HOWTO \
-	RELEASE-NOTES
+	RELEASE-NOTES \
+	Xiphos.ogg
 
 DISTCLEANFILES = gnome-doc-utils.make
 
