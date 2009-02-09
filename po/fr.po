@@ -6,7 +6,7 @@
 # ---------------------------------------
 # SWORD Project           -> SWORD Project
 # Bookmark                -> Signet
-# Interlinear             -> parallèle
+# Interlinear             -> Parallèle
 # Morphological Tags      -> Étiquettes morphologiques
 # Cantillation            -> Vocalisation
 # Books                   -> Livres
@@ -70,12 +70,12 @@ msgstr "Source texte"
 #: ../src/editor/html-editor.c:674 ../ui/editor_note.xml.h:15
 #: ../ui/editor_studypad.xml.h:21
 msgid "_Print..."
-msgstr "Imprimer..."
+msgstr "_Imprimer..."
 
 #: ../src/editor/html-editor.c:681 ../ui/editor_note.xml.h:9
 #: ../ui/editor_studypad.xml.h:14
 msgid "Print Pre_view"
-msgstr "Aperçu avant impression"
+msgstr "A_perçu avant impression"
 
 #: ../src/editor/html-editor.c:688
 msgid "_Quit"
@@ -109,7 +109,7 @@ msgstr "Source _HTML"
 
 #: ../src/editor/html-editor.c:785
 msgid "_Plain Source"
-msgstr "Support _Texte"
+msgstr "Source _texte"
 
 #: ../src/editor/html-editor.c:792 ../src/gnome2/main_menu.c:1202
 msgid "_View"
@@ -117,7 +117,7 @@ msgstr "_Affichage"
 
 #: ../src/editor/html-editor.c:909
 msgid "Are you sure you want to delete the note for"
-msgstr "Êtes-vous certain de supprimer le commentaire de"
+msgstr "Êtes-vous certain de vouloir supprimer le commentaire de"
 
 #: ../src/editor/html-editor.c:1937 ../src/editor/html-editor.c:1987
 msgid "Save the changes to document"
@@ -129,8 +129,7 @@ msgstr "avant de fermer?"
 
 #: ../src/editor/html-editor.c:1945 ../src/editor/html-editor.c:1995
 msgid "If you don't save, changes will be permanently lost."
-msgstr ""
-"Si vous n'enregistrez pas, les modifications seront définitivement perdues"
+msgstr "Si vous n'enregistrez pas, les modifications seront définitivement perdues."
 
 #. 2
 #. 3
@@ -200,13 +199,13 @@ msgstr "Ouvrir"
 
 #: ../src/gnome2/fileselection.c:266
 msgid "Save StudyPad File"
-msgstr "Enregistre le fichier du bloc-Notes"
+msgstr "Enregistre le fichier du bloc-notes"
 
 #: ../src/gnome2/bibletext.c:925 ../src/gnome2/gbs.c:706
 #: ../src/gnome2/bibletext_dialog.c:1909 ../src/gnome2/dictlex.c:890
 #: ../src/gnome2/commentary_dialog.c:1437 ../src/gnome2/commentary.c:793
 msgid "item1"
-msgstr "item1"
+msgstr "Élément1"
 
 #. 0
 #: ../src/gnome2/bibletext.c:935 ../src/gnome2/gbs.c:716
@@ -218,12 +217,12 @@ msgstr "Ouvrir le module"
 #. 1
 #: ../src/gnome2/bibletext.c:942 ../ui/export-dialog.glade.h:8
 msgid "Export Passage"
-msgstr "Exporter passage"
+msgstr "Exporter le passage"
 
 #: ../src/gnome2/bibletext.c:953 ../src/gnome2/bibletext_dialog.c:1945
 #: ../src/gnome2/commentary_dialog.c:1473 ../src/gnome2/commentary.c:815
 msgid "item2"
-msgstr "item2"
+msgstr "Élement2"
 
 #: ../src/gnome2/bibletext.c:965 ../src/gnome2/bibletext_dialog.c:1957
 #: ../src/gnome2/commentary_dialog.c:1485 ../src/gnome2/commentary.c:827
@@ -389,7 +388,7 @@ msgstr "Signet"
 #: ../src/gnome2/commentary_dialog.c:1678 ../src/gnome2/commentary.c:1025
 #: ../src/gnome2/bookmarks_menu.c:456 ../src/gnome2/treekey-editor.c:317
 msgid "Edit"
-msgstr "Éditer"
+msgstr "Édition"
 
 #. 5
 #. 4
@@ -459,7 +458,7 @@ msgstr "Version de Sword"
 #: ../src/gnome2/about_sword.c:154
 msgid "Books can be downloaded from the SWORD Project"
 msgstr ""
-"Plus d'informations en ligne sur le site du Projet SWORD (En anglais) :"
+"Plus d'informations en ligne sur le site du Projet SWORD (en anglais) :"
 
 #: ../src/gnome2/about_sword.c:160
 msgid "The SWORD Project"
@@ -571,7 +570,7 @@ msgstr "Synchronisé"
 #. 15
 #: ../src/gnome2/commentary_dialog.c:1642 ../src/gnome2/commentary.c:982
 msgid "Commentary by Chapter"
-msgstr "Commentaire par chapître"
+msgstr "Commentaire par chapitre"
 
 #. 7
 #: ../src/gnome2/commentary_dialog.c:1702 ../src/gnome2/commentary.c:1043
@@ -834,11 +833,11 @@ msgid ""
 "Archive in "
 msgstr ""
 "\n"
-" Archive·in·"
+" Archive dans "
 
 #: ../src/gnome2/mod_mgr.c:432
 msgid "Journals and prayer lists cannot be indexed."
-msgstr "Listes de prières et journaux ne peuvent pas être indexés."
+msgstr "Les listes de prières et journaux ne peuvent pas être indexés."
 
 #: ../src/gnome2/mod_mgr.c:453 ../src/gnome2/mod_mgr.c:2626
 #: ../ui/module-manager.glade.h:18
@@ -887,7 +886,7 @@ msgid ""
 "Repository:\n"
 "%s"
 msgstr ""
-"Dépot : \n"
+"Dépôt :\n"
 "%s"
 
 #: ../src/gnome2/mod_mgr.c:920
@@ -981,7 +980,7 @@ msgstr "Cocher la case pour travailler avec ce module"
 #: ../src/gnome2/mod_mgr.c:1316
 msgid "Click the box to select this module for install/update"
 msgstr ""
-"Cocher la case pour sélectionner ce module à installer ou mettre à jour"
+"Cocher la case pour sélectionner ce module à installer ou à mettre à jour"
 
 #: ../src/gnome2/mod_mgr.c:1335
 msgid "Installed"
@@ -1000,7 +999,7 @@ msgid ""
 "The lock icon means this module is encrypted, and requires that you purchase "
 "an unlock key from the content owner"
 msgstr ""
-"l'icône protection indique un module encrypté et nécessite l'achat d'une clé "
+"L'icône protection indique un module encrypté et nécessite l'achat d'une clé "
 "de déverrouillage auprès de l'éditeur du document"
 
 #: ../src/gnome2/mod_mgr.c:1385
@@ -1046,7 +1045,7 @@ msgstr "Répertoire"
 
 #: ../src/gnome2/mod_mgr.c:1527
 msgid "Sources"
-msgstr "Dépots"
+msgstr "Dépôts"
 
 #: ../src/gnome2/mod_mgr.c:1533 ../src/gnome2/sidebar.c:1450
 #: ../src/gnome2/preferences_dialog.c:1792
@@ -1071,11 +1070,11 @@ msgstr "La liste des modules n'est pas à jour!"
 
 #: ../src/gnome2/mod_mgr.c:2211 ../src/gnome2/mod_mgr.c:2415
 msgid "Remove the selected source"
-msgstr "Supprime le dépot sélectionné"
+msgstr "Supprime le dépôt sélectionné"
 
 #: ../src/gnome2/mod_mgr.c:2268
 msgid "Enter a remote source"
-msgstr "Ajouter un dépot distant"
+msgstr "Ajouter un dépôt distant"
 
 #: ../src/gnome2/mod_mgr.c:2272
 msgid "Caption:"
@@ -1097,11 +1096,11 @@ msgstr "Répertoire :"
 #. this can happen at most once
 #: ../src/gnome2/mod_mgr.c:2300
 msgid "A source by that name already exists."
-msgstr "Un dépot du même nom existe déjà"
+msgstr "Un dépôt du même nom existe déjà"
 
 #: ../src/gnome2/mod_mgr.c:2412
 msgid "Delete a remote source"
-msgstr "Supprimer un dépot distant"
+msgstr "Supprimer un dépôt distant"
 
 #: ../src/gnome2/sidebar_dialog.c:135
 msgid "Sidebar"
@@ -1195,7 +1194,7 @@ msgstr "Ouvrir le module sélectionné dans une nouvelle fenêtre"
 
 #: ../src/gnome2/sidebar.c:777 ../src/gnome2/sidebar.c:938
 msgid "View information about the selected dialog"
-msgstr "Information à propos des modules installés"
+msgstr "Information à propos du module sélectionné"
 
 #: ../src/gnome2/sidebar.c:861
 msgid "Simple"
@@ -1291,7 +1290,7 @@ msgstr "Supprimer la liste?"
 
 #: ../src/gnome2/search_dialog.c:917
 msgid "Are you sure you want to delete:"
-msgstr "Êtes-vous certain de supprimer :"
+msgstr "Êtes-vous certain de vouloir supprimer :"
 
 #: ../src/gnome2/search_sidebar.c:192
 msgid ""
@@ -1351,7 +1350,7 @@ msgstr "Limites de la plage"
 
 #: ../src/gnome2/search_sidebar.c:382
 msgid "Lower"
-msgstr "Basse:"
+msgstr "Basse"
 
 #: ../src/gnome2/search_sidebar.c:389
 msgid "Upper"
@@ -1443,7 +1442,7 @@ msgstr "Texte à reproduire"
 
 #: ../src/gnome2/preferences_cell_renderer.c:406
 msgid "Pixbuf Object"
-msgstr "Objet Pixbuf"
+msgstr "Objet pixbuf"
 
 #: ../src/gnome2/preferences_cell_renderer.c:408
 msgid "The pixbuf to render."
@@ -1465,11 +1464,11 @@ msgstr ""
 "\n"
 "Xiphos utilise l'architecture logicielle du Projet SWORD.    \n"
 "Tous nos remerciements vont avec plaisir à Troy Griffitts et "
-"autres membres du Projet SWORD"
+"autres membres du Projet SWORD."
 
 #: ../src/gnome2/studypad.c:101
 msgid "has been modified. Do you wish to save it?"
-msgstr "a été modifié.  Voulez-vous l'enregistrer?"
+msgstr "a été modifié. Voulez-vous l'enregistrer?"
 
 #: ../src/gnome2/studypad.c:173
 msgid "not loaded"
@@ -1494,19 +1493,19 @@ msgstr "Arrêt de Xiphos"
 
 #: ../src/gnome2/bookmarks_menu.c:473
 msgid "Folder name: "
-msgstr "Nom du dossier :"
+msgstr "Nom du dossier : "
 
 #: ../src/gnome2/bookmarks_menu.c:476
 msgid "Bookmark name: "
-msgstr "Nom du signet"
+msgstr "Nom du signet : "
 
 #: ../src/gnome2/bookmarks_menu.c:479 ../src/gnome2/bookmarks_menu.c:904
 msgid "Verse: "
-msgstr "Verset:"
+msgstr "Verset : "
 
 #: ../src/gnome2/bookmarks_menu.c:480 ../src/gnome2/bookmarks_menu.c:905
 msgid "Module: "
-msgstr "Module:"
+msgstr "Module : "
 
 #: ../src/gnome2/bookmarks_menu.c:664
 msgid "Restore Bookmark Folder"
@@ -1919,7 +1918,7 @@ msgstr "Ã propos de cette application"
 
 #: ../src/gnome2/main_menu.c:1196
 msgid "_Edit"
-msgstr "_Éditer"
+msgstr "_Édition"
 
 #: ../src/gnome2/main_menu.c:1208
 msgid "Hi_story"
@@ -1946,9 +1945,9 @@ msgstr ""
 "votre langue maternelle ? Sachez que vous pouvez participer à sa "
 "traduction. !\n"
 "\n"
-"Toute nouvelle contribution à la traduction de Xiphos  est la bienvenue. Si "
+"Toute nouvelle contribution à la traduction de Xiphos est la bienvenue. Si "
 "vous souhaitez apporter votre aide, suivez le lien ci-dessous. N'hésitez pas "
-"à nous contacter-et nous rejoindre."
+"à nous contacter et nous rejoindre."
 
 #: ../src/gnome2/about_trans.c:98
 msgid "About Xiphos Translation"
@@ -2044,7 +2043,7 @@ msgstr "Enlever les modules?"
 
 #: ../src/main/search_dialog.cc:571
 msgid "Are you sure you want to remove the selected module?"
-msgstr "Êtes-vous certain de supprimer le module sélectionné?"
+msgstr "Êtes-vous certain de vouloir supprimer le module sélectionné?"
 
 #: ../src/main/search_dialog.cc:1441
 #, c-format
@@ -2067,7 +2066,7 @@ msgstr "Recherche terminée "
 
 #: ../src/main/main.c:96
 msgid "Xiphos does not understand more than one argument."
-msgstr "Xiphos n'accepte pas plus d'un argument"
+msgstr "Xiphos n'accepte pas plus d'un argument."
 
 #: ../src/main/prayerlists.cc:70
 msgid "January"
@@ -2123,7 +2122,7 @@ msgstr "Croissance spirituelle"
 
 #: ../src/main/prayerlists.cc:121 ../src/main/sword_treekey.cc:335
 msgid "<b>For Growth</b><br>"
-msgstr "<b>Pour la croissance spirituelle</b>"
+msgstr "<b>Pour la croissance spirituelle</b><br>"
 
 #: ../src/main/prayerlists.cc:122 ../src/main/prayerlists.cc:376
 #: ../src/main/sword_treekey.cc:336
@@ -2132,7 +2131,7 @@ msgstr "Salut"
 
 #: ../src/main/prayerlists.cc:123 ../src/main/sword_treekey.cc:337
 msgid "<b>For Salvation</b><br>"
-msgstr "<b>Pour le salut</b>"
+msgstr "<b>Pour le salut</b><br>"
 
 #: ../src/main/prayerlists.cc:124 ../src/main/prayerlists.cc:380
 #: ../src/main/sword_treekey.cc:338
@@ -2141,7 +2140,7 @@ msgstr "Guérison"
 
 #: ../src/main/prayerlists.cc:125 ../src/main/sword_treekey.cc:339
 msgid "<b>For Health</b><br>"
-msgstr "<b>Pour la guérison</b>"
+msgstr "<b>Pour la guérison</b><br>"
 
 #: ../src/main/prayerlists.cc:126
 msgid "Misc"
@@ -2149,7 +2148,7 @@ msgstr "Divers"
 
 #: ../src/main/prayerlists.cc:127 ../src/main/sword_treekey.cc:341
 msgid "<b>Miscellaneous</b><br>"
-msgstr "<b>Divers</b>"
+msgstr "<b>Divers</b><br>"
 
 #: ../src/main/prayerlists.cc:135
 msgid "Point x"
@@ -2181,7 +2180,7 @@ msgstr "Section 1"
 
 #: ../src/main/prayerlists.cc:149
 msgid "<b>Subtopic 1</b><br>"
-msgstr "<b>Section 1</b>"
+msgstr "<b>Section 1</b><br>"
 
 #: ../src/main/prayerlists.cc:151
 msgid "Minor Topic 2"
@@ -2189,7 +2188,7 @@ msgstr "Section 2"
 
 #: ../src/main/prayerlists.cc:152
 msgid "<b>Subtopic 2</b><br>"
-msgstr "<b>Section 2</b>"
+msgstr "<b>Section 2</b><br>"
 
 #: ../src/main/prayerlists.cc:154
 msgid "Minor Topic 3"
@@ -2197,7 +2196,7 @@ msgstr "Section 3"
 
 #: ../src/main/prayerlists.cc:155
 msgid "<b>Subtopic 3</b><br>"
-msgstr "<b>Section 3</b>"
+msgstr "<b>Section 3</b><br>"
 
 #: ../src/main/prayerlists.cc:157
 msgid "Minor Topic 4"
@@ -2205,7 +2204,7 @@ msgstr "Section 4"
 
 #: ../src/main/prayerlists.cc:158
 msgid "<b>Subtopic 4</b><br>"
-msgstr "<b>Section 4</b>"
+msgstr "<b>Section 4</b><br>"
 
 #: ../src/main/prayerlists.cc:237
 msgid "Name for new prayer list or journal"
@@ -2218,7 +2217,7 @@ msgstr "MaListe"
 
 #: ../src/main/prayerlists.cc:268
 msgid "Xiphos finds that prayer list already."
-msgstr "Cette liste de prières ou note existe déjà"
+msgstr "Cette liste de prières ou note existe déjà."
 
 #: ../src/main/prayerlists.cc:281
 #, c-format
@@ -2281,7 +2280,7 @@ msgstr "Sujet majeur A"
 
 #: ../src/main/prayerlists.cc:537
 msgid "<b>Major Topic A</b><br>"
-msgstr "<b>Sujet majeur A</b>"
+msgstr "<b>Sujet majeur A</b><br>"
 
 #: ../src/main/prayerlists.cc:539
 msgid "Major Topic B"
@@ -2289,7 +2288,7 @@ msgstr "Sujet majeur B"
 
 #: ../src/main/prayerlists.cc:540
 msgid "<b>Major Topic B</b><br>"
-msgstr "<b>Sujet majeur B</b>"
+msgstr "<b>Sujet majeur B</b><br>"
 
 #: ../src/main/prayerlists.cc:542
 msgid "Major Topic C"
@@ -2297,12 +2296,12 @@ msgstr "Sujet majeur C"
 
 #: ../src/main/prayerlists.cc:543
 msgid "<b>Major Topic C</b><br>"
-msgstr "<b>Sujet majeur C</b>"
+msgstr "<b>Sujet majeur C</b><br>"
 
 #: ../src/main/xml.c:80 ../src/main/xml.c:465
 #, c-format
 msgid "Document not created successfully. \n"
-msgstr "Erreur de création du document \n"
+msgstr "Erreur de création du document. \n"
 
 #: ../src/main/xml.c:89
 msgid "Personal"
@@ -2322,7 +2321,7 @@ msgstr "Éph 2:8"
 
 #: ../src/main/xml.c:102 ../src/main/xml.c:103
 msgid "Romans 1:16"
-msgstr "Romains 8:28"
+msgstr "Romains 1:16"
 
 #: ../src/main/xml.c:106
 msgid "What is the Gospel?"
@@ -2339,7 +2338,7 @@ msgstr "1 Cor 15:1"
 #: ../src/main/xml.c:413 ../src/main/xml.c:1078
 #, c-format
 msgid "Document not parsed successfully. \n"
-msgstr "Erreur de lecture du document \n"
+msgstr "Erreur de lecture du document. \n"
 
 #: ../src/main/xml.c:419 ../src/main/xml.c:681 ../src/main/xml.c:959
 #: ../src/main/xml.c:1138
@@ -2350,7 +2349,7 @@ msgstr "Document vide \n"
 #: ../src/main/xml.c:425
 #, c-format
 msgid "wrong type, root node != SwordBookmarks\n"
-msgstr "Erreur de type,·root·node·!=·SwordBookmarks\n"
+msgstr "Erreur de type, root node != SwordBookmarks\n"
 
 #: ../src/main/xml.c:479
 msgid "Old Testament"
@@ -2375,7 +2374,7 @@ msgstr "Exemple de liste de modules"
 #: ../src/main/xml.c:687 ../src/main/xml.c:965
 #, c-format
 msgid "wrong type, root node != %s\n"
-msgstr "Erreur de type,·root·node·!=·%s\n"
+msgstr "Erreur de type, root node != %s\n"
 
 #: ../src/main/sword_treekey.cc:374
 msgid "Name for new prayer list"
@@ -2482,7 +2481,7 @@ msgstr "Voir le contexte"
 
 #: ../src/main/url.cc:100
 msgid "URL not found:"
-msgstr "URL non trouvée : "
+msgstr "URL non trouvée :"
 
 #: ../src/main/url.cc:239
 #, c-format
@@ -2546,8 +2545,8 @@ msgstr ""
 "\n"
 "Avec votre permission, Xiphos va lancer le gestionnaire de modules pour "
 "télécharger des modules depuis le site de Crosswire, les opérations à "
-"effectuer sont : \n"
-"1. Configuration du dépot distant\n"
+"effectuer sont :\n"
+"1. Configuration du dépôt distant\n"
 "2. Connexion\n"
 "3. Choix d'un texte biblique dans la langue désirée\n"
 "4. Validation par le bouton \"Installer'\n"
@@ -2576,7 +2575,7 @@ msgstr ""
 "Xiphos n'a pas pu renommer ~/.xiphos-2.0 en ~/.xiphos\n"
 "%s\n"
 "\n"
-"Xiphos·ne peut s'exécuter normalement."
+"Xiphos ne peut s'exécuter normalement."
 
 #: ../src/main/settings.c:133
 #, c-format
@@ -2586,10 +2585,10 @@ msgid ""
 "\n"
 "Xiphos cannot continue."
 msgstr ""
-"Xiphos·n'a pas pu créer ~/.xiphos:\n"
+"Xiphos n'a pas pu créer ~/.xiphos:\n"
 "%s\n"
 "\n"
-"Xiphos·ne peut s\"exécuter normalement."
+"Xiphos ne peut s\"exécuter normalement."
 
 #: ../src/main/settings.c:153 ../src/main/settings.c:161
 #: ../src/main/settings.c:169
@@ -2680,9 +2679,9 @@ msgid ""
 "if you need to change these."
 msgstr ""
 "Xiphos a été déclaré comme gestionnaire \n"
-"par défaut des URL de type sword://·et bible://\n"
+"par défaut des URL de type sword:// et bible://\n"
 "\n"
-"Le programme \"gconf-editor\"·permet de modifier \n"
+"Le programme \"gconf-editor\" permet de modifier \n"
 "les clés sous : /desktop/gnome/url-handlers,\n"
 "si vous éprouvez le besoin de les changer."
 
@@ -2912,7 +2911,7 @@ msgstr "Bouton radio Texte simple"
 
 #: ../ui/export-dialog.glade.h:20
 msgid "Save Export As"
-msgstr "Enregistrer Exporter sous"
+msgstr "Enregistrer / Exporter sous"
 
 #: ../ui/export-dialog.glade.h:21
 msgid "Verse"
@@ -2928,7 +2927,7 @@ msgstr "Version"
 
 #: ../ui/module-manager.glade.h:1
 msgid "<b>Add and Remove Sources</b>"
-msgstr "<b>Gestion des dépots de modules </b>"
+msgstr "<b>Gestion des dépôts de modules </b>"
 
 #: ../ui/module-manager.glade.h:2
 msgid "<b>Install Destination</b>"
@@ -2936,7 +2935,7 @@ msgstr "<b>Dossier d'installation</b>"
 
 #: ../ui/module-manager.glade.h:3
 msgid "<b>Install Source</b>"
-msgstr "<b>Dépot des modules</b>"
+msgstr "<b>Dépôt des modules</b>"
 
 #: ../ui/module-manager.glade.h:4
 msgid "<b>Module Manager</b>"
@@ -2956,7 +2955,7 @@ msgid ""
 "<b>Warning:</b> If you live in a persecuted country and do not wish to risk "
 "detection you should NOT use  the remote installation feature! "
 msgstr ""
-"<b>Attention :</b> Ne pas utiliser les dépots distants depuis les pays où il "
+"<b>Attention :</b> Ne pas utiliser les dépôts distants depuis les pays où il "
 "est dangereux d'être repéré!"
 
 #: ../ui/module-manager.glade.h:9
@@ -2973,11 +2972,11 @@ msgstr "Continuer"
 
 #: ../ui/module-manager.glade.h:13
 msgid "Current Remote Sources"
-msgstr "Dépots distants"
+msgstr "Dépôts distants"
 
 #: ../ui/module-manager.glade.h:14
 msgid "Current local sources"
-msgstr "Dépots locaux"
+msgstr "Dépôts locaux"
 
 #: ../ui/module-manager.glade.h:15
 msgid "Delete Index"
@@ -2989,7 +2988,7 @@ msgstr "Dossier personnel"
 
 #: ../ui/module-manager.glade.h:19
 msgid "Local"
-msgstr "Dépot local"
+msgstr "Dépôt local"
 
 #: ../ui/module-manager.glade.h:20
 msgid "Local Install Folder"
@@ -3001,7 +3000,7 @@ msgstr "Gérer les modules"
 
 #: ../ui/module-manager.glade.h:22
 msgid "Remote"
-msgstr "Dépot distant"
+msgstr "Dépôt distant"
 
 #: ../ui/module-manager.glade.h:23
 msgid "Sword sys dir"
@@ -3441,7 +3440,7 @@ msgstr "<b>Détail</b>"
 
 #: ../ui/search-dialog.glade.h:14
 msgid "<b>Search Type</b>"
-msgstr "<b>Type de requête </b>"
+msgstr "<b>Type de requête</b>"
 
 #: ../ui/search-dialog.glade.h:15
 msgid "Add Modules"
@@ -3717,7 +3716,7 @@ msgstr "Recherche d'étiquettes morphologiques"
 
 #: ../ui/search-dialog.glade.h:89
 msgid "Search for Strongs Numbers like G4442 or H1121"
-msgstr "Recherche de nombres de Strong de type G4442·ou·H1121"
+msgstr "Recherche de nombres de Strong de type G4442 ou H1121"
 
 #: ../ui/search-dialog.glade.h:90
 msgid "Search in footnotes"
@@ -3795,7 +3794,7 @@ msgstr ""
 
 #: ../ui/search-dialog.glade.h:108
 msgid "e.g. Matt-John;Rev4"
-msgstr "ex Mat-Jean, Ap4"
+msgstr "ex Mat-Jean; Ap4"
 
 #: ../ui/search-dialog.glade.h:109
 msgid "for "
@@ -3811,7 +3810,7 @@ msgstr "Expression"
 #~ msgstr "impossible de créer ~/.sword/modules"
 
 #~ msgid "Select Local Source"
-#~ msgstr "Dépot local"
+#~ msgstr "Dépôt local"
 
 #~ msgid "Open file..."
 #~ msgstr "Ouvrir un fichier..."
@@ -3820,7 +3819,7 @@ msgstr "Expression"
 #~ msgstr "Enregistrer sous..."
 
 #~ msgid "_About the SWORD Project ..."
-#~ msgstr "À propos du SWORD Project·..."
+#~ msgstr "À propos du SWORD Project ..."
 
 #~ msgid "Select the modules you want"
 #~ msgstr "Ajouter des modules ici"
@@ -3854,7 +3853,7 @@ msgstr "Expression"
 #~ "as the program to handle these URLs?"
 #~ msgstr ""
 #~ "Aucun programme n'est actuellement déclaré \n"
-#~ "pour gérer les URL de type \"sword://\" ou similaire Désirez-vous que "
+#~ "pour gérer les URL de type \"sword://\" ou similaire. Désirez-vous que "
 #~ "Xiphos soit défini comme\n"
 #~ "le gestionnaire par défaut de ce type d'URL?"
 
@@ -3919,7 +3918,7 @@ msgstr "Expression"
 #~ msgstr "አማርኛ"
 
 #~ msgid "English, Old (ca.450-1100)"
-#~ msgstr "English,·Old·(ca.450-1100)"
+#~ msgstr "English, Old (ca.450-1100)"
 
 #~ msgid "Arabic"
 #~ msgstr "العربية"
@@ -3994,7 +3993,7 @@ msgstr "Expression"
 #~ msgstr "རྫོང་ཁ"
 
 #~ msgid "Greek, Modern (1453-)"
-#~ msgstr "Ελληνικά ·(1453-)"
+#~ msgstr "Ελληνικά  (1453-)"
 
 #~ msgid "English"
 #~ msgstr "English"
@@ -4402,7 +4401,7 @@ msgstr "Expression"
 #~ msgstr "Tok Pisin"
 
 #~ msgid "Romani, Vlax"
-#~ msgstr "Romani,·Vlax"
+#~ msgstr "Romani, Vlax"
 
 #~ msgid "Sranan"
 #~ msgstr "nengre"
@@ -4420,28 +4419,28 @@ msgstr "Expression"
 #~ msgstr "isiZulu"
 
 #~ msgid "<b>January</b><br>"
-#~ msgstr "<b>Janvier</b>"
+#~ msgstr "<b>Janvier</b><br>"
 
 #~ msgid "<b>Febuary</b><br>"
-#~ msgstr "<b>Février</b>"
+#~ msgstr "<b>Février</b><br>"
 
 #~ msgid "<b>June</b><br>"
-#~ msgstr "<b>Juin</b>"
+#~ msgstr "<b>Juin</b><br>"
 
 #~ msgid "<b>July</b><br>"
-#~ msgstr "<b>Juillet</b>"
+#~ msgstr "<b>Juillet</b><br>"
 
 #~ msgid "<b>August</b><br>"
-#~ msgstr "<b>Août</b>"
+#~ msgstr "<b>Août</b><br>"
 
 #~ msgid "<b>October</b><br>"
-#~ msgstr "<b>Octobre</b>"
+#~ msgstr "<b>Octobre</b><br>"
 
 #~ msgid "<b>November</b><br>"
-#~ msgstr "<b>Novembre</b>"
+#~ msgstr "<b>Novembre</b><br>"
 
 #~ msgid "<b>December</b><br>"
-#~ msgstr "<b>Décembre</b>"
+#~ msgstr "<b>Décembre</b><br>"
 
 #~ msgid "Go to parent"
 #~ msgstr "Niveau supérieur"
@@ -4450,7 +4449,7 @@ msgstr "Expression"
 #~ msgstr "Niveau inférieur"
 
 #~ msgid "Save using the PersistStream interface"
-#~ msgstr "Enregistre à l'aide de l'interface  PersistStream"
+#~ msgstr "Enregistre à l'aide de l'interface PersistStream"
 
 #~ msgid "Open (PersistFile)"
 #~ msgstr "Ouvrir (PersistFile)"
@@ -4462,13 +4461,13 @@ msgstr "Expression"
 #~ msgstr "Enregistrer (PersistFile)"
 
 #~ msgid "Save using the PersistFile interface"
-#~ msgstr "Enregistre à l'aide de l'interface  PersistFile"
+#~ msgstr "Enregistre à l'aide de l'interface PersistFile"
 
 #~ msgid "Show Tabs"
 #~ msgstr "Onglets"
 
 #~ msgid "Old"
-#~ msgstr "Installé"
+#~ msgstr "Ancien"
 
 #~ msgid "New"
 #~ msgstr "Nouveau"
@@ -4483,7 +4482,7 @@ msgstr "Expression"
 #~ msgstr "module a été déverrouillé"
 
 #~ msgid "If you have the cipher key you can"
-#~ msgstr "si vous avez la clé de décodage vous pouvez"
+#~ msgstr "Si vous avez la clé de décodage vous pouvez"
 
 #~ msgid "click here"
 #~ msgstr "cliquer ici"
@@ -4501,7 +4500,7 @@ msgstr "Expression"
 #~ "Unlink of old configuration failed:\n"
 #~ "%s"
 #~ msgstr ""
-#~ "Impossible de supprimer le lien vers l'ancienne configuration\n"
+#~ "Impossible de supprimer le lien vers l'ancienne configuration:\n"
 #~ "%s"
 
 #~ msgid "Go to %s"
@@ -4511,7 +4510,7 @@ msgstr "Expression"
 #~ " indexer result:\n"
 #~ "\n"
 #~ msgstr ""
-#~ " résultat de l'indexation\n"
+#~ " résultat de l'indexation:\n"
 #~ "\n"
 
 #~ msgid "URL:"
@@ -4570,13 +4569,13 @@ msgstr "Expression"
 #~ msgstr "Le répertoire de Sword :"
 
 #~ msgid "Number of Bible text modules:"
-#~ msgstr "Nombre de modules de textes bibliques"
+#~ msgstr "Nombre de modules de textes bibliques :"
 
 #~ msgid "Number of Commentary modules:"
-#~ msgstr "Nombre de modules de commentaires"
+#~ msgstr "Nombre de modules de commentaires :"
 
 #~ msgid "Number of Dictionary/Lexicon modules:"
-#~ msgstr "Nombre de modules de dictionnaires et lexiques"
+#~ msgstr "Nombre de modules de dictionnaires et lexiques :"
 
 #~ msgid "Xiphos Configuration - Page 3 of 5"
 #~ msgstr "Configuration de Xiphos - Page 3/5"
@@ -4588,7 +4587,7 @@ msgstr "Expression"
 #~ msgstr "Lie les onglets entre eux"
 
 #~ msgid "Read Aloud (`festival --server')"
-#~ msgstr "Synthèse vocale ·(`festival·--server')"
+#~ msgstr "Synthèse vocale  (`festival --server')"
 
 #~ msgid "Show Verse Numbers"
 #~ msgstr "Affiche les numéros de verset"
@@ -4618,7 +4617,7 @@ msgstr "Expression"
 #~ msgstr "Configuration de Xiphos - Page 4/5"
 
 #~ msgid "Choose default SWORD modules"
-#~ msgstr "Choix des modules de Sword par défaut"
+#~ msgstr "Choix des modules Sword par défaut"
 
 #~ msgid "Text Module       "
 #~ msgstr "Bible principale     "
@@ -4662,7 +4661,7 @@ msgstr "Expression"
 #~ msgstr "Ajouter un lien de référence"
 
 #~ msgid "Link text: "
-#~ msgstr "Texte du lien:"
+#~ msgstr "Texte du lien :"
 
 #~ msgid "Export"
 #~ msgstr "Exporter"
@@ -4683,7 +4682,7 @@ msgstr "Expression"
 #~ msgstr "Remplacer.."
 
 #~ msgid "Link..."
-#~ msgstr "Lien.."
+#~ msgstr "Lien..."
 
 #~ msgid "Link"
 #~ msgstr "Lien"
@@ -4716,25 +4715,25 @@ msgstr "Expression"
 #~ msgstr "Style du texte..."
 
 #~ msgid "Paragraph Style..."
-#~ msgstr "Style de paragraphe"
+#~ msgstr "Style de paragraphe..."
 
 #~ msgid "Link Style..."
-#~ msgstr "Format du Lien.."
+#~ msgstr "Format du Lien..."
 
 #~ msgid "Rule Style..."
-#~ msgstr "Style de ligne horizontale"
+#~ msgstr "Style de ligne horizontale..."
 
 #~ msgid "Image Style..."
-#~ msgstr "Style de l'image"
+#~ msgstr "Style de l'image..."
 
 #~ msgid "Cell Style..."
-#~ msgstr "Style de cellule.."
+#~ msgstr "Style de cellule..."
 
 #~ msgid "Table Style..."
-#~ msgstr "Style de tableau.."
+#~ msgstr "Style de tableau..."
 
 #~ msgid "Page Style..."
-#~ msgstr "Style de page.."
+#~ msgstr "Style de page..."
 
 #~ msgid "Table insert"
 #~ msgstr "Insère un tableau"
@@ -4752,7 +4751,7 @@ msgstr "Expression"
 #~ msgstr "Colonne après"
 
 #~ msgid "Table delete"
-#~ msgstr "Supprimer la table"
+#~ msgstr "Supprimer le tableau"
 
 #~ msgid "Row"
 #~ msgstr "Ligne"
@@ -4764,7 +4763,7 @@ msgstr "Expression"
 #~ msgstr "Contenu de cellule"
 
 #~ msgid "Check Word Spelling..."
-#~ msgstr "Vérifier l\"orthographe"
+#~ msgstr "Vérifier l'orthographe"
 
 #~ msgid "Add Word to"
 #~ msgstr "Ajouter un mot à"
@@ -4858,7 +4857,7 @@ msgstr "Expression"
 #~ msgstr "Insérer une ligne horizontale"
 
 #~ msgid "Insert table"
-#~ msgstr "Insère une table"
+#~ msgstr "Insère un tableau"
 
 #~ msgid "Insert table at cursor"
 #~ msgstr "Insérer un tableau"
@@ -4867,34 +4866,34 @@ msgstr "Expression"
 #~ msgstr "Vérifier l'orthographe"
 
 #~ msgid "Preformat"
-#~ msgstr "Préformat"
+#~ msgstr "Préformaté"
 
 #~ msgid "Bulleted List"
 #~ msgstr "Liste à puces"
 
 #~ msgid "Numbered List"
-#~ msgstr "Lliste numérotée"
+#~ msgstr "Liste numérotée"
 
 #~ msgid "Alphabetical List"
-#~ msgstr "Liste Alphabétique"
+#~ msgstr "Liste alphabétique"
 
 #~ msgid "Header 1"
-#~ msgstr "Entête 1"
+#~ msgstr "En-tête 1"
 
 #~ msgid "Header 2"
-#~ msgstr "Entête 2"
+#~ msgstr "En-tête 2"
 
 #~ msgid "Header 3"
-#~ msgstr "Entête 3"
+#~ msgstr "En-tête 3"
 
 #~ msgid "Header 4"
-#~ msgstr "Entête 4"
+#~ msgstr "En-tête 4"
 
 #~ msgid "Header 5"
-#~ msgstr "Entête 5"
+#~ msgstr "En-tête 5"
 
 #~ msgid "Header 6"
-#~ msgstr "Entête 6"
+#~ msgstr "En-tête 6"
 
 #~ msgid "Address"
 #~ msgstr "Adresse"
@@ -5010,7 +5009,7 @@ msgstr "Expression"
 
 #~ msgid "Zero is the base font size. Increase or decrease the size."
 #~ msgstr ""
-#~ "Zéro est la taille de base de la police.  Incrémentez ou décrémentez-là."
+#~ "Zéro est la taille de base de la police. Incrémentez ou décrémentez-là."
 
 #~ msgid "Use Defaults When Starting Xiphos"
 #~ msgstr "Utiliser les options par défaut au démarrage de Xiphos"
@@ -5041,7 +5040,7 @@ msgstr "Expression"
 
 # src/gs_preferences_dlg.c
 #~ msgid "In Sidebar viewer"
-#~ msgstr "Dans Information Viewer"
+#~ msgstr "Dans l'aperçu de la barre latérale"
 
 # src/gs_preferences_dlg.c
 #~ msgid "In Dictionary/Lexicon window"
@@ -5121,7 +5120,7 @@ msgstr "Expression"
 #~ msgstr "Mot trouvé"
 
 #~ msgid "Replace with"
-#~ msgstr "Remplacer par "
+#~ msgstr "Remplacer par"
 
 #~ msgid "Replace misspelled word with suggested word"
 #~ msgstr "Remplacer le mot mal orthographié par le mot suggéré"
