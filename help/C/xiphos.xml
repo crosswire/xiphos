@@ -16,9 +16,9 @@
   <!ENTITY onlinehelp SYSTEM "onlinehelp.xml">
   <!ENTITY originallanguage SYSTEM "originallanguage.xml">
 
-  <!ENTITY appversion "2.4.0">
-  <!ENTITY manrevision "2.4.0">
-  <!ENTITY date "Sat, 20 Sep 2008">
+  <!ENTITY appversion "3.0.0">
+  <!ENTITY manrevision "3.0.0">
+  <!ENTITY date "2009-02-09">
   <!ENTITY app "<application>Xiphos</application>">
   <!ENTITY appname "Xiphos">
   <!ENTITY xiphos "the Xiphos Team">
@@ -59,7 +59,7 @@ Template last modified Apr 11, 2002
     </abstract>
     <copyright>
       <year>2003</year>
-      <year>2008</year>
+      <year>2009</year>
       <holder>The Xiphos Team</holder>
     </copyright>
 
@@ -136,10 +136,13 @@ Template last modified Apr 11, 2002
     <!-- to V3.0, and so on. -->
     <revhistory>
       <revision>
-        <revnumber>&appname; Manual &manrevision;</revnumber>
+        <revnumber>&appname; &manrevision;</revnumber>
         <date>&date;</date>
       </revision>
-
+      <revision>
+	<revnumber>Xiphos 2.4.0</revnumber>
+	<date>2008-09-20</date>
+      </revision>
       <revision>
 	<revnumber>Xiphos 2.3.6</revnumber>
 	<date>2008-08-02</date>
