@@ -13,5 +13,5 @@
     "Notas de lançamento" \
     "Por favor reveja a seguinte informação importante." \
     "Sobre $(^name):" \
-    "$\n  CLique nas setas de deslocamento ou pressione Page Down para rever o texto completo."
+    "$\n  Clique nas setas de deslocamento ou pressione Page Down para rever o texto completo."
 
