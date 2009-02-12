@@ -1,7 +1,5 @@
 TODO:
 
-    * WHY installed fonts aren't immediately AVAILABLE?
-
     * simplify i18n declaration
         - inspiration at other OSS projects using NSIS
 
@@ -13,5 +11,3 @@ TODO:
     * tutor how to generate NSIS installer
 
     * tutor how to translate installer strings
-
-    * translations for page with RELEASE-NOTES
