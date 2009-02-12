@@ -124,7 +124,7 @@ void main_init_lists(void)
 	if(backend) {
 		mods.options = backend->get_module_options();
 	} else {
-		const char* lang = getenv("LANG");
+		const char* lang = g_getenv("LANG");
 		start_backend = TRUE;
 		backend = new BackEnd();
 		sword_locale = backend->set_sword_locale(lang);
