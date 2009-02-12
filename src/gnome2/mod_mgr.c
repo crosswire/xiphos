@@ -1142,6 +1142,7 @@ response_refresh(void)
 		gtk_progress_bar_set_text(
 			GTK_PROGRESS_BAR(progressbar_refresh), _("Remote not found"));
 		gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar_refresh), 0);
+		working = FALSE;
 		return;
 	}
 	load_module_tree(GTK_TREE_VIEW(treeview), TRUE);
@@ -2198,8 +2199,10 @@ on_button6_clicked(GtkButton * button,
 	selection =
 	    gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview_local));
 	if (!gtk_tree_selection_get_selected
-	    (selection, &model, &selected))
-		return;
+		(selection, &model, &selected)){
+			working = FALSE;
+			return;
+	}
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &selected,
 			   COLUMN_TYPE, &type,
 			   COLUMN_CAPTION, &caption,
@@ -2353,6 +2356,7 @@ on_button7_clicked(GtkButton * button,
 	mod_mgr_init(destination, FALSE, TRUE);
 
 out:
+	gtk_widget_show(button1);
 	working = FALSE;
 }
 
@@ -2398,8 +2402,10 @@ on_button8_clicked(GtkButton * button,
 	selection =
 	    gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview_remote));
 	if (!gtk_tree_selection_get_selected
-	    (selection, &model, &selected))
+	    (selection, &model, &selected)){
+	    	working = FALSE;
 		return;
+	}
 	gtk_tree_model_get(model, &selected,
 			   COLUMN_TYPE, &type,
 			   COLUMN_CAPTION, &caption,
