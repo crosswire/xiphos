@@ -113,7 +113,7 @@ void GSStatusReporter::statusUpdate(double dltotal,
 
 
 ModuleManager::ModuleManager() {	
-	char *envhomedir = getenv(HOMEVAR);
+	const gchar *envhomedir = g_getenv(HOMEVAR);
 	baseDir = (envhomedir) ? envhomedir : ".";
 	baseDir += "/" DOTSWORD "/InstallMgr";
 	statusReporter = new GSStatusReporter();
@@ -486,7 +486,7 @@ GList *backend_module_mgr_list_remote_sources(void)
 {
 	MOD_MGR_SOURCE *mms;
 	GList *retval = NULL;
-	char *envhomedir = getenv(HOMEVAR);
+	const gchar *envhomedir = g_getenv(HOMEVAR);
 	SWBuf baseDir = (envhomedir) ? envhomedir : ".";
 	baseDir += "/" DOTSWORD "/InstallMgr";
 #ifdef SWORD_MULTIVERSE
@@ -535,7 +535,7 @@ GList *backend_module_mgr_list_local_sources(void)
 {
 	MOD_MGR_SOURCE *mms;
 	GList *retval = NULL;	
-	char *envhomedir = getenv(HOMEVAR);
+	const gchar *envhomedir = g_getenv(HOMEVAR);
 	SWBuf confPath = (envhomedir) ? envhomedir : ".";
 	confPath += "/" DOTSWORD "/InstallMgr/InstallMgr.conf";
 	SWConfig *installConf= new SWConfig(confPath.c_str());
@@ -615,7 +615,7 @@ int backend_module_mgr_refresh_remote_source(const char *sourceName)
 void backend_init_module_mgr_config(void)
 {
 	
-	char *envhomedir = getenv(HOMEVAR);
+	const gchar *envhomedir = g_getenv(HOMEVAR);
 	SWBuf confPath = (envhomedir) ? envhomedir : ".";
 	confPath += "/" DOTSWORD "/InstallMgr/InstallMgr.conf";
 	FileMgr::createParent(confPath.c_str());
@@ -681,7 +681,7 @@ backend_init_module_mgr_config_extras()
 
 void backend_module_mgr_clear_config(void)
 {
-	char *envhomedir = getenv(HOMEVAR);
+	const gchar *envhomedir = g_getenv(HOMEVAR);
 	SWBuf confPath = (envhomedir) ? envhomedir : ".";
 	confPath += "/" DOTSWORD "/InstallMgr/InstallMgr.conf";
 	FileMgr::createParent(confPath.c_str());
@@ -720,7 +720,7 @@ void backend_module_mgr_add_source(const char * vtype,
 				   const char * source,
 				   const char * directory)
 {
-	char *envhomedir = getenv(HOMEVAR);
+	const gchar *envhomedir = g_getenv(HOMEVAR);
 	SWBuf confPath = (envhomedir) ? envhomedir : ".";
 	confPath += "/" DOTSWORD "/InstallMgr/InstallMgr.conf";
 	FileMgr::createParent(confPath.c_str());
@@ -849,12 +849,12 @@ void backend_init_module_mgr(const char *dir,
 		list_mgr = new SWMgr(dir, true, 0, false, false);
 	}
 
-	const char *lang = getenv("LANG");	
+	const char *lang = g_getenv("LANG");	
 	if (!lang)
 		lang="C";
 	set_mod_mgr_locale(lang);
 
-	char *envhomedir = getenv(HOMEVAR);
+	const gchar *envhomedir = g_getenv(HOMEVAR);
 	SWBuf baseDir = (envhomedir) ? envhomedir : ".";
 	baseDir += "/" DOTSWORD "/InstallMgr";
 
