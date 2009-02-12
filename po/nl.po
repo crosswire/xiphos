@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-06 20:04+0100\n"
-"PO-Revision-Date: 2009-02-12 15:41+0100\n"
+"POT-Creation-Date: 2009-02-12 16:01+0100\n"
+"PO-Revision-Date: 2009-02-12 16:02+0100\n"
 "Last-Translator: Gertjan Francke <gwfrancke@gmail.com>\n"
 "Language-Team: Xiphos-developers <xiphos-developers@lists>\n"
 "MIME-Version: 1.0\n"
@@ -24,7 +24,7 @@ msgstr "Onderzoek de Bijbel"
 msgid "Xiphos Bible Guide"
 msgstr "Xiphos Bijbelgids"
 
-#: ../src/backend/sword_main.cc:1387
+#: ../src/backend/sword_main.cc:1399
 msgid "Configuration not found"
 msgstr "Configuratie niet gevonden"
 
@@ -79,7 +79,7 @@ msgstr "Op_slaan"
 msgid "Save _As..."
 msgstr "Bestand opslaan _als..."
 
-#: ../src/editor/html-editor.c:716 ../src/gnome2/main_menu.c:1185
+#: ../src/editor/html-editor.c:716 ../src/gnome2/main_menu.c:1190
 #: ../ui/editor_note.xml.h:14 ../ui/editor_studypad.xml.h:20
 #: ../ui/editor.xml.h:13
 msgid "_File"
@@ -97,7 +97,7 @@ msgstr "_HTML broncode"
 msgid "_Plain Source"
 msgstr "_Platte tekst"
 
-#: ../src/editor/html-editor.c:792 ../src/gnome2/main_menu.c:1197
+#: ../src/editor/html-editor.c:792 ../src/gnome2/main_menu.c:1202
 msgid "_View"
 msgstr "Beel_d"
 
@@ -105,6 +105,18 @@ msgstr "Beel_d"
 msgid "Are you sure you want to delete the note for"
 msgstr "Weet u zeker dat u de notitie wilt verwijderen voor"
 
+#: ../src/editor/html-editor.c:1937 ../src/editor/html-editor.c:1987
+msgid "Save the changes to document"
+msgstr "Wijzigingen opslaan"
+
+#: ../src/editor/html-editor.c:1938 ../src/editor/html-editor.c:1988
+msgid "before closing?"
+msgstr "voor afsluiten?"
+
+#: ../src/editor/html-editor.c:1945 ../src/editor/html-editor.c:1995
+msgid "If you don't save, changes will be permanently lost."
+msgstr "Wijzigingen gaan verloren als u niet opslaat."
+
 #. 2
 #. 3
 #. 1
@@ -113,35 +125,23 @@ msgstr "Weet u zeker dat u de notitie wilt verwijderen voor"
 #. 3
 #. 1
 #. 2
-#: ../src/editor/html-editor.c:1944 ../src/gnome2/bibletext.c:1150
+#: ../src/editor/html-editor.c:1986 ../src/gnome2/bibletext.c:1150
 #: ../src/gnome2/gbs.c:918 ../src/gnome2/bibletext_dialog.c:2136
 #: ../src/gnome2/dictlex.c:1086 ../src/gnome2/commentary_dialog.c:1672
 #: ../src/gnome2/commentary.c:1019 ../src/gnome2/studypad.c:98
 msgid "File"
 msgstr "Bestand"
 
-#: ../src/editor/html-editor.c:1945
-msgid "Save the changes to document"
-msgstr "Wijzigingen opslaan"
-
-#: ../src/editor/html-editor.c:1946
-msgid "before closing?"
-msgstr "voor afsluiten?"
-
-#: ../src/editor/html-editor.c:1953
-msgid "If you don't save, changes will be permanently lost."
-msgstr "Wijzigingen gaan verloren als u niet opslaat."
-
-#: ../src/editor/html-editor.c:2345 ../src/editor/html-editor.c:2348
+#: ../src/editor/html-editor.c:2388 ../src/editor/html-editor.c:2391
 #: ../src/gnome2/studypad.c:411
 msgid "StudyPad"
 msgstr "Notitieblok"
 
-#: ../src/editor/html-editor.c:2363 ../src/editor/html-editor.c:2370
+#: ../src/editor/html-editor.c:2406 ../src/editor/html-editor.c:2413
 msgid "Note Editor"
 msgstr "Notitieblok"
 
-#: ../src/editor/html-editor.c:2380 ../src/editor/html-editor.c:2412
+#: ../src/editor/html-editor.c:2423 ../src/editor/html-editor.c:2455
 msgid "Prayer List/Journal Editor"
 msgstr "Gebedslijst/Berichten-editor"
 
@@ -643,9 +643,9 @@ msgstr ""
 "Hernoemen is niet mogelijk in Windows.\n"
 "\n"
 "Xiphos wordt beperkt door Windows'\n"
-"bestandssysteem. Daardoor het niet mogelijk\n"
-"is om geopende bestanden te hernoemen,\n"
-"zoals de inhoud van dit commentaar.\n"
+"bestandssysteem. Daardoor is het niet mogelijk\n"
+"om geopende bestanden te hernoemen,\n"
+"zoals de inhoud van dit commentaar."
 
 #: ../src/gnome2/commentary.c:475
 msgid "Rename Commentary"
@@ -661,15 +661,15 @@ msgstr "Nieuwe naam"
 
 #: ../src/gnome2/commentary.c:481 ../src/gnome2/treekey-editor.c:127
 #: ../src/gnome2/treekey-editor.c:186 ../src/gnome2/treekey-editor.c:272
-#: ../src/main/prayerlists.cc:238 ../src/main/sword_treekey.cc:375
+#: ../src/main/prayerlists.cc:239 ../src/main/sword_treekey.cc:376
 msgid "Name: "
 msgstr "Naam: "
 
-#: ../src/gnome2/commentary.c:491 ../src/main/prayerlists.cc:252
+#: ../src/gnome2/commentary.c:491 ../src/main/prayerlists.cc:253
 msgid "Module names must contain [A-Za-z0-9_] only."
 msgstr "Modulenamen kunnen alleen letters en getallen.bevatten."
 
-#: ../src/gnome2/commentary.c:498 ../src/main/prayerlists.cc:259
+#: ../src/gnome2/commentary.c:498 ../src/main/prayerlists.cc:260
 msgid "Xiphos already knows a module by that name."
 msgstr "Xiphos kent al een module met die naam."
 
@@ -819,7 +819,7 @@ msgstr ""
 msgid "Journals and prayer lists cannot be indexed."
 msgstr "Berichten en gebedslijsten kunnen niet geïndexeerd worden."
 
-#: ../src/gnome2/mod_mgr.c:453 ../src/gnome2/mod_mgr.c:2626
+#: ../src/gnome2/mod_mgr.c:453 ../src/gnome2/mod_mgr.c:2632
 #: ../ui/module-manager.glade.h:18
 msgid "Install"
 msgstr "Installeer"
@@ -845,7 +845,7 @@ msgstr "Verwijderen"
 msgid "%s failed"
 msgstr "%s is mislukt"
 
-#: ../src/gnome2/mod_mgr.c:465 ../src/gnome2/mod_mgr.c:1148
+#: ../src/gnome2/mod_mgr.c:465 ../src/gnome2/mod_mgr.c:1149
 msgid "Finished"
 msgstr "Voltooid"
 
@@ -865,7 +865,8 @@ msgstr "Onbekend"
 msgid ""
 "Repository:\n"
 "%s"
-msgstr "Bron:\n"
+msgstr ""
+"Bron:\n"
 "%s"
 
 #: ../src/gnome2/mod_mgr.c:920
@@ -930,8 +931,8 @@ msgid "Uninstalled"
 msgstr "Niet geïnstalleerd"
 
 #: ../src/gnome2/mod_mgr.c:970 ../src/gnome2/sidebar.c:421
-#: ../src/gnome2/utilities.c:544 ../src/main/prayerlists.cc:236
-#: ../src/main/sword_treekey.cc:373 ../src/main/sword_treekey.cc:417
+#: ../src/gnome2/utilities.c:544 ../src/main/prayerlists.cc:237
+#: ../src/main/sword_treekey.cc:374 ../src/main/sword_treekey.cc:418
 #: ../src/main/sidebar.cc:1079 ../src/main/sidebar.cc:1081
 msgid "Prayer List/Journal"
 msgstr "Gebedslijst/Bericht"
@@ -944,131 +945,131 @@ msgstr "Bezig met zoeken naar updates"
 msgid "Remote not found"
 msgstr "Externe bron niet gevonden"
 
-#: ../src/gnome2/mod_mgr.c:1274
+#: ../src/gnome2/mod_mgr.c:1275
 msgid "Module Name"
 msgstr "Modulenaam"
 
-#: ../src/gnome2/mod_mgr.c:1293
+#: ../src/gnome2/mod_mgr.c:1294
 msgid "A checkmark means this module is already installed"
 msgstr "Het markeringssymbool betekent dat deze module al geïnstalleerd is."
 
-#: ../src/gnome2/mod_mgr.c:1315
+#: ../src/gnome2/mod_mgr.c:1316
 msgid "Click the box to work on this module"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1316
+#: ../src/gnome2/mod_mgr.c:1317
 msgid "Click the box to select this module for install/update"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1335
+#: ../src/gnome2/mod_mgr.c:1336
 msgid "Installed"
 msgstr "Geïnstalleerd"
 
-#: ../src/gnome2/mod_mgr.c:1345
+#: ../src/gnome2/mod_mgr.c:1346
 msgid ""
 "The index icon means you have built an optimized ('lucene') index for this "
 "module for fast searching (see the Maintenance pane for this function)"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1363
+#: ../src/gnome2/mod_mgr.c:1364
 msgid ""
 "The lock icon means this module is encrypted, and requires that you purchase "
 "an unlock key from the content owner"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1385
+#: ../src/gnome2/mod_mgr.c:1386
 msgid ""
 "The refresh icon means the Installed module is older than the newer "
 "Available module: You should update the module"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1397
+#: ../src/gnome2/mod_mgr.c:1398
 msgid "Available"
 msgstr "Beschikbaar"
 
-#: ../src/gnome2/mod_mgr.c:1406
+#: ../src/gnome2/mod_mgr.c:1407
 msgid "Size"
 msgstr "Grootte"
 
-#: ../src/gnome2/mod_mgr.c:1415
+#: ../src/gnome2/mod_mgr.c:1416
 msgid "Description"
 msgstr "Beschrijving"
 
-#: ../src/gnome2/mod_mgr.c:1449 ../src/gnome2/mod_mgr.c:1529
+#: ../src/gnome2/mod_mgr.c:1450 ../src/gnome2/mod_mgr.c:1530
 msgid "Configure"
 msgstr "Configureren"
 
-#: ../src/gnome2/mod_mgr.c:1483
+#: ../src/gnome2/mod_mgr.c:1484
 msgid "Type"
 msgstr "Type"
 
-#: ../src/gnome2/mod_mgr.c:1490
+#: ../src/gnome2/mod_mgr.c:1491
 msgid "Caption"
 msgstr "Titel"
 
-#: ../src/gnome2/mod_mgr.c:1498
+#: ../src/gnome2/mod_mgr.c:1499
 msgid "Source"
 msgstr "Bron"
 
-#: ../src/gnome2/mod_mgr.c:1506
+#: ../src/gnome2/mod_mgr.c:1507
 msgid "Directory"
 msgstr "Map"
 
-#: ../src/gnome2/mod_mgr.c:1527
+#: ../src/gnome2/mod_mgr.c:1528
 msgid "Sources"
 msgstr "Bronnen"
 
-#: ../src/gnome2/mod_mgr.c:1533 ../src/gnome2/sidebar.c:1450
+#: ../src/gnome2/mod_mgr.c:1534 ../src/gnome2/sidebar.c:1450
 #: ../src/gnome2/preferences_dialog.c:1792
 msgid "Modules"
 msgstr "Modules"
 
-#: ../src/gnome2/mod_mgr.c:1535
+#: ../src/gnome2/mod_mgr.c:1536
 msgid "Install/Update"
 msgstr "Installeren/Bijwerken"
 
-#: ../src/gnome2/mod_mgr.c:1537
+#: ../src/gnome2/mod_mgr.c:1538
 msgid "Maintenance"
 msgstr "Onderhoud"
 
-#: ../src/gnome2/mod_mgr.c:1746
+#: ../src/gnome2/mod_mgr.c:1747
 msgid "Please Refresh"
 msgstr "Verversen alstublieft"
 
-#: ../src/gnome2/mod_mgr.c:1747
+#: ../src/gnome2/mod_mgr.c:1748
 msgid "Your module list is not up to date!"
 msgstr "Uw modelelijst is niet actueel!"
 
-#: ../src/gnome2/mod_mgr.c:2211 ../src/gnome2/mod_mgr.c:2415
+#: ../src/gnome2/mod_mgr.c:2214 ../src/gnome2/mod_mgr.c:2421
 msgid "Remove the selected source"
 msgstr "Geselecteerde bron verwijderen"
 
-#: ../src/gnome2/mod_mgr.c:2268
+#: ../src/gnome2/mod_mgr.c:2271
 msgid "Enter a remote source"
 msgstr "Externe bron invoeren"
 
-#: ../src/gnome2/mod_mgr.c:2272
+#: ../src/gnome2/mod_mgr.c:2275
 msgid "Caption:"
 msgstr "Titel:"
 
-#: ../src/gnome2/mod_mgr.c:2273
+#: ../src/gnome2/mod_mgr.c:2276
 msgid "Type:"
 msgstr "Type:"
 
-#: ../src/gnome2/mod_mgr.c:2274
+#: ../src/gnome2/mod_mgr.c:2277
 msgid "Host:"
 msgstr "Host:"
 
-#: ../src/gnome2/mod_mgr.c:2275
+#: ../src/gnome2/mod_mgr.c:2278
 msgid "Directory:"
 msgstr "Map:"
 
 #. this can happen at most once
-#: ../src/gnome2/mod_mgr.c:2300
+#: ../src/gnome2/mod_mgr.c:2303
 msgid "A source by that name already exists."
 msgstr "Een bron met die naam bestaat al."
 
-#: ../src/gnome2/mod_mgr.c:2412
+#: ../src/gnome2/mod_mgr.c:2418
 msgid "Delete a remote source"
 msgstr "Verwijder een externe bron"
 
@@ -1088,7 +1089,7 @@ msgstr "Afdrukvoorbeeld"
 msgid "Failed to print the document"
 msgstr "Afdrukken is mislukt"
 
-#: ../src/gnome2/main_window.c:778 ../src/main/sword.cc:637
+#: ../src/gnome2/main_window.c:778 ../src/main/sword.cc:638
 msgid "Starting"
 msgstr "Bezig met starten"
 
@@ -1207,7 +1208,7 @@ msgstr "_Modules"
 msgid "_Bookmarks"
 msgstr "_Bladwijzers"
 
-#: ../src/gnome2/sidebar.c:1224 ../src/gnome2/main_menu.c:995
+#: ../src/gnome2/sidebar.c:1224 ../src/gnome2/main_menu.c:1000
 msgid "_Search"
 msgstr "_Zoeken"
 
@@ -1266,7 +1267,8 @@ msgstr "Weet u zeker dat u het volgende wilt verwijderen:"
 msgid ""
 "This is an inclusive (\"AND\") search:\n"
 "Find matches showing all words."
-msgstr "Inclusief (\"AND\") zoeken:\n"
+msgstr ""
+"Inclusief (\"AND\") zoeken:\n"
 "Een resultaat bevat alle woorden."
 
 #: ../src/gnome2/search_sidebar.c:209
@@ -1431,7 +1433,8 @@ msgid ""
 msgstr ""
 "(voorheen bekend als GnomeSword)\n"
 "Mogelijk gemaakt voor het SWORD-project.\n"
-"We willen Troy Griffitts en vele anderen bedanken voor hun bijdrage aan SWORD."
+"We willen Troy Griffitts en vele anderen bedanken voor hun bijdrage aan "
+"SWORD."
 
 #: ../src/gnome2/studypad.c:101
 msgid "has been modified. Do you wish to save it?"
@@ -1661,238 +1664,238 @@ msgstr "Interface wordt opgebouwd"
 msgid "Starting Sword"
 msgstr "Sword wordt gestart"
 
-#: ../src/gnome2/main_menu.c:965
+#: ../src/gnome2/main_menu.c:970
 msgid "Open Study_Pad"
 msgstr "O_pen het notitieblok"
 
-#: ../src/gnome2/main_menu.c:966
+#: ../src/gnome2/main_menu.c:971
 msgid "Open the StudyPad editor"
 msgstr "Notitieblok-editor openen"
 
-#: ../src/gnome2/main_menu.c:971
+#: ../src/gnome2/main_menu.c:976
 msgid "_Open Session"
 msgstr "Sessie _openen"
 
-#: ../src/gnome2/main_menu.c:972
+#: ../src/gnome2/main_menu.c:977
 msgid "Open a saved session"
 msgstr "Open een opgeslagen sessie"
 
-#: ../src/gnome2/main_menu.c:976
+#: ../src/gnome2/main_menu.c:981
 msgid "_Save Session"
 msgstr "Sessie op_slaan"
 
-#: ../src/gnome2/main_menu.c:977
+#: ../src/gnome2/main_menu.c:982
 msgid "Save the current session to a file"
 msgstr "Huidige sessie als bestand opslaan"
 
-#: ../src/gnome2/main_menu.c:988
+#: ../src/gnome2/main_menu.c:993
 msgid "_Copy"
 msgstr "Kopiëren"
 
-#: ../src/gnome2/main_menu.c:989
+#: ../src/gnome2/main_menu.c:994
 msgid "Copy highlighted text from main window"
 msgstr "Geselecteerde tekst van hoofdscherm kopiëren"
 
-#: ../src/gnome2/main_menu.c:996
+#: ../src/gnome2/main_menu.c:1001
 msgid "Search using the shortcut bar"
 msgstr "Zoek met behulp van de snelkoppelingen balk"
 
-#: ../src/gnome2/main_menu.c:1001
+#: ../src/gnome2/main_menu.c:1006
 msgid "_Advanced Search"
 msgstr "_Geavanceerd zoeken"
 
-#: ../src/gnome2/main_menu.c:1002
+#: ../src/gnome2/main_menu.c:1007
 msgid "Advanced search using the search dialog"
 msgstr "Geavanceerd zoeken met het zoekvenster"
 
-#: ../src/gnome2/main_menu.c:1008
+#: ../src/gnome2/main_menu.c:1013
 msgid "_Preferences"
 msgstr "Voorkeuren"
 
-#: ../src/gnome2/main_menu.c:1009
+#: ../src/gnome2/main_menu.c:1014
 msgid "Set user preferences"
 msgstr "Gebruikersinstellingen"
 
-#: ../src/gnome2/main_menu.c:1014
+#: ../src/gnome2/main_menu.c:1019
 msgid "_Module Manager"
 msgstr "Modulebeheer"
 
-#: ../src/gnome2/main_menu.c:1015
+#: ../src/gnome2/main_menu.c:1020
 msgid "Use module manager to install and remove Sword modules"
 msgstr ""
 "Gebruik het Modulebeheer om SWORD-modules te installeren of te verwijderen"
 
-#: ../src/gnome2/main_menu.c:1024
+#: ../src/gnome2/main_menu.c:1029
 msgid "C_lear"
 msgstr "_Wissen"
 
-#: ../src/gnome2/main_menu.c:1025
+#: ../src/gnome2/main_menu.c:1030
 msgid "Clear history list"
 msgstr "Geschiedenis wissen"
 
 #. 0
-#: ../src/gnome2/main_menu.c:1035
+#: ../src/gnome2/main_menu.c:1040
 msgid "_Daily Devotion"
 msgstr "_Dagboek"
 
-#: ../src/gnome2/main_menu.c:1036
+#: ../src/gnome2/main_menu.c:1041
 msgid "Show the Daily Devotion for today"
 msgstr "Dagboek van vandaag tonen"
 
 #. 1
 #. 2
-#: ../src/gnome2/main_menu.c:1042
+#: ../src/gnome2/main_menu.c:1047
 msgid "_Bible Texts"
 msgstr "_Bijbelteksten"
 
-#: ../src/gnome2/main_menu.c:1043
+#: ../src/gnome2/main_menu.c:1048
 msgid "Show or hide Bible texts window"
 msgstr "Bijbeltekstenscherm tonen of verbergen"
 
 #. 3
-#: ../src/gnome2/main_menu.c:1048
+#: ../src/gnome2/main_menu.c:1053
 msgid "_Preview"
 msgstr "Afdrukvoorbeeld"
 
-#: ../src/gnome2/main_menu.c:1049
+#: ../src/gnome2/main_menu.c:1054
 msgid "Show or hide Preview window"
 msgstr "Toon of verberg Voorbeeldscherm"
 
 #. 4
-#: ../src/gnome2/main_menu.c:1054
+#: ../src/gnome2/main_menu.c:1059
 msgid "_Commentary"
 msgstr "_Commentaar"
 
-#: ../src/gnome2/main_menu.c:1055
+#: ../src/gnome2/main_menu.c:1060
 msgid "Show or hide commentaries"
 msgstr "Toon of verberg commentaren"
 
 #. 5
-#: ../src/gnome2/main_menu.c:1060
+#: ../src/gnome2/main_menu.c:1065
 msgid "Dictionary/_Lexicon"
 msgstr "Woordenboek/_Lexicon"
 
-#: ../src/gnome2/main_menu.c:1061
+#: ../src/gnome2/main_menu.c:1066
 msgid "Show or hide - dictionaries and lexicons"
 msgstr "Toon of verberg - woordenboeken en lexicons"
 
 #. 6
 #. 7
-#: ../src/gnome2/main_menu.c:1067
+#: ../src/gnome2/main_menu.c:1072
 msgid "_Verse Per Line"
 msgstr "Eén vers per regel"
 
 #. 8
-#: ../src/gnome2/main_menu.c:1073
+#: ../src/gnome2/main_menu.c:1078
 msgid "L_ink Tabs"
 msgstr "Tabs synchron_iseren"
 
 #. 9
-#: ../src/gnome2/main_menu.c:1079
+#: ../src/gnome2/main_menu.c:1084
 msgid "_Read Aloud"
 msgstr "Ha_rdop voorlezen"
 
 #. 10
-#: ../src/gnome2/main_menu.c:1085
+#: ../src/gnome2/main_menu.c:1090
 msgid "Show Verse _Numbers"
 msgstr "Versnummers tonen"
 
 #. 11
-#: ../src/gnome2/main_menu.c:1091
+#: ../src/gnome2/main_menu.c:1096
 msgid "_Highlight Current Verse"
 msgstr "Geselecteerde vers benadrukken"
 
 #. 12
-#: ../src/gnome2/main_menu.c:1098
+#: ../src/gnome2/main_menu.c:1103
 msgid "D_ouble-Space Text"
 msgstr "Dubbele spatiëring"
 
 #. 13
 #. 14
-#: ../src/gnome2/main_menu.c:1106
+#: ../src/gnome2/main_menu.c:1111
 msgid "_Attach/Detach Sidebar"
 msgstr "Zijbalk koppelen/ontkoppelen"
 
 #. 15
-#: ../src/gnome2/main_menu.c:1112
+#: ../src/gnome2/main_menu.c:1117
 msgid "_Show/Hide Sidebar"
 msgstr "Zijbalk tonen/verbergen"
 
 #. 16
-#: ../src/gnome2/main_menu.c:1120
+#: ../src/gnome2/main_menu.c:1125
 msgid "Show Parallel View in a tab"
 msgstr ""
 
 #. 17
-#: ../src/gnome2/main_menu.c:1126
+#: ../src/gnome2/main_menu.c:1131
 msgid "Show Previewer in the Sidebar"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:1137
+#: ../src/gnome2/main_menu.c:1142
 msgid "_Contents"
 msgstr "Inhoud"
 
-#: ../src/gnome2/main_menu.c:1138
+#: ../src/gnome2/main_menu.c:1143
 msgid "Open the Xiphos manual"
 msgstr "Xiphos's gebruikershandleiding openen"
 
-#: ../src/gnome2/main_menu.c:1143
+#: ../src/gnome2/main_menu.c:1148
 msgid "_Mailing List"
 msgstr "E-maillijst"
 
-#: ../src/gnome2/main_menu.c:1144
+#: ../src/gnome2/main_menu.c:1149
 msgid "Sign up for the users' mailing list"
 msgstr "Meld je aan voor de gebruikers e-maillijst"
 
-#: ../src/gnome2/main_menu.c:1149
+#: ../src/gnome2/main_menu.c:1154
 msgid "_Live Chat"
 msgstr "_Live chat"
 
-#: ../src/gnome2/main_menu.c:1150
+#: ../src/gnome2/main_menu.c:1155
 msgid "Chat with other users and developers"
 msgstr "Chat met andere gebruikers en ontwikkelaars"
 
-#: ../src/gnome2/main_menu.c:1155
+#: ../src/gnome2/main_menu.c:1160
 msgid "_Report Bug"
 msgstr "Fout rapporteren"
 
-#: ../src/gnome2/main_menu.c:1156
+#: ../src/gnome2/main_menu.c:1161
 msgid "Report bug to SourceForge"
 msgstr "Meld een fout bij SourceForge"
 
-#: ../src/gnome2/main_menu.c:1162
+#: ../src/gnome2/main_menu.c:1167
 msgid "About _Translation"
 msgstr "Vertaling"
 
-#: ../src/gnome2/main_menu.c:1163
+#: ../src/gnome2/main_menu.c:1168
 msgid "Translating Xiphos to other languages"
 msgstr "Xiphos vertalen"
 
-#: ../src/gnome2/main_menu.c:1169
+#: ../src/gnome2/main_menu.c:1174
 msgid "_About the SWORD Project"
 msgstr "Over het SWORD-project"
 
-#: ../src/gnome2/main_menu.c:1170
+#: ../src/gnome2/main_menu.c:1175
 msgid "More information about the SWORD Project"
 msgstr "Meer informatie over het SWORD-project"
 
-#: ../src/gnome2/main_menu.c:1175
+#: ../src/gnome2/main_menu.c:1180
 msgid "About _Xiphos"
 msgstr "Over _Xiphos"
 
-#: ../src/gnome2/main_menu.c:1176
+#: ../src/gnome2/main_menu.c:1181
 msgid "About this application"
 msgstr "Over deze toepassing"
 
-#: ../src/gnome2/main_menu.c:1191
+#: ../src/gnome2/main_menu.c:1196
 msgid "_Edit"
 msgstr "B_ewerken"
 
-#: ../src/gnome2/main_menu.c:1203
+#: ../src/gnome2/main_menu.c:1208
 msgid "Hi_story"
 msgstr "_Geschiedenis"
 
-#: ../src/gnome2/main_menu.c:1209
+#: ../src/gnome2/main_menu.c:1214
 msgid "_Help"
 msgstr "_Hulp"
 
@@ -1926,7 +1929,7 @@ msgstr "Lees de TRANSLATION HOWTO in de broncode van Xiphos"
 msgid "Xiphos development"
 msgstr "Xiphos ontwikkeling"
 
-#: ../src/main/sword.cc:539
+#: ../src/main/sword.cc:540
 msgid ""
 "Xiphos's file for language\n"
 "abbreviations is missing."
@@ -1934,7 +1937,7 @@ msgstr ""
 "Xiphos's bestand voor taal\n"
 "afkortingen is niet gevonden."
 
-#: ../src/main/sword.cc:546
+#: ../src/main/sword.cc:547
 msgid ""
 "Xiphos's language abbreviation\n"
 "file cannot be opened."
@@ -1942,43 +1945,43 @@ msgstr ""
 "Xiphos's taalafkortingen bestand\n"
 "kan niet worden geopend."
 
-#: ../src/main/sword.cc:557
+#: ../src/main/sword.cc:558
 msgid ""
 "Xiphos cannot allocate space\n"
 "for language abbreviations."
 msgstr ""
 
-#: ../src/main/sword.cc:564
+#: ../src/main/sword.cc:565
 msgid ""
 "Xiphos cannot read the\n"
 "language abbreviation file."
 msgstr ""
 
-#: ../src/main/sword.cc:638
+#: ../src/main/sword.cc:639
 msgid "Initiating SWORD"
 msgstr "Bezig met initialiseren van Xiphos"
 
-#: ../src/main/sword.cc:639
+#: ../src/main/sword.cc:640
 msgid "path to sword"
 msgstr "pad naar sword"
 
-#: ../src/main/sword.cc:640
+#: ../src/main/sword.cc:641
 msgid "System locale is"
 msgstr "Systeem lokalisatie is"
 
-#: ../src/main/sword.cc:641
+#: ../src/main/sword.cc:642
 msgid "SWORD locale is"
 msgstr "SWORD lokalisatie is"
 
-#: ../src/main/sword.cc:643
+#: ../src/main/sword.cc:644
 msgid "Checking for SWORD Modules"
 msgstr "Bezig met zoeken naar SWORD-modules"
 
-#: ../src/main/sword.cc:676
+#: ../src/main/sword.cc:677
 msgid "SWORD is shutdown"
 msgstr "SWORD wordt afgesloten"
 
-#: ../src/main/sword.cc:1412
+#: ../src/main/sword.cc:1413
 msgid "Daily devotional was requested, but there are none installed."
 msgstr "Dagboeken werd opgevraagd, maar zijn niet geïnstalleerd."
 
@@ -2023,174 +2026,174 @@ msgstr "Pas de modulelijst aan."
 msgid "Search finished"
 msgstr "Zoeken voltooid"
 
-#: ../src/main/main.c:96
+#: ../src/main/main.c:95
 msgid "Xiphos does not understand more than one argument."
 msgstr "Xiphos ondersteund niet meer dan één argument."
 
-#: ../src/main/prayerlists.cc:70
+#: ../src/main/prayerlists.cc:71
 msgid "January"
 msgstr "Januari"
 
-#: ../src/main/prayerlists.cc:71
+#: ../src/main/prayerlists.cc:72
 msgid "February"
 msgstr "Februari"
 
-#: ../src/main/prayerlists.cc:72
+#: ../src/main/prayerlists.cc:73
 msgid "March"
 msgstr "Maart"
 
-#: ../src/main/prayerlists.cc:73
+#: ../src/main/prayerlists.cc:74
 msgid "April"
 msgstr "April"
 
-#: ../src/main/prayerlists.cc:74
+#: ../src/main/prayerlists.cc:75
 msgid "May"
 msgstr "Mei"
 
-#: ../src/main/prayerlists.cc:75
+#: ../src/main/prayerlists.cc:76
 msgid "June"
 msgstr "Juni"
 
-#: ../src/main/prayerlists.cc:76
+#: ../src/main/prayerlists.cc:77
 msgid "July"
 msgstr "Juli"
 
-#: ../src/main/prayerlists.cc:77
+#: ../src/main/prayerlists.cc:78
 msgid "August"
 msgstr "Augustus"
 
-#: ../src/main/prayerlists.cc:78
+#: ../src/main/prayerlists.cc:79
 msgid "September"
 msgstr "September"
 
-#: ../src/main/prayerlists.cc:79
+#: ../src/main/prayerlists.cc:80
 msgid "October"
 msgstr "October"
 
-#: ../src/main/prayerlists.cc:80
+#: ../src/main/prayerlists.cc:81
 msgid "November"
 msgstr "November"
 
-#: ../src/main/prayerlists.cc:81
+#: ../src/main/prayerlists.cc:82
 msgid "December"
 msgstr "December"
 
-#: ../src/main/prayerlists.cc:120 ../src/main/sword_treekey.cc:334
+#: ../src/main/prayerlists.cc:121 ../src/main/sword_treekey.cc:335
 msgid "Growth"
 msgstr "Groei"
 
-#: ../src/main/prayerlists.cc:121 ../src/main/sword_treekey.cc:335
+#: ../src/main/prayerlists.cc:122 ../src/main/sword_treekey.cc:336
 msgid "<b>For Growth</b><br>"
 msgstr "<b>Voor groei</b><br>"
 
-#: ../src/main/prayerlists.cc:122 ../src/main/prayerlists.cc:376
-#: ../src/main/sword_treekey.cc:336
+#: ../src/main/prayerlists.cc:123 ../src/main/prayerlists.cc:377
+#: ../src/main/sword_treekey.cc:337
 msgid "Salvation"
 msgstr "Verlossing"
 
-#: ../src/main/prayerlists.cc:123 ../src/main/sword_treekey.cc:337
+#: ../src/main/prayerlists.cc:124 ../src/main/sword_treekey.cc:338
 msgid "<b>For Salvation</b><br>"
 msgstr "<b>Voor verlossing</b><br>"
 
-#: ../src/main/prayerlists.cc:124 ../src/main/prayerlists.cc:380
-#: ../src/main/sword_treekey.cc:338
+#: ../src/main/prayerlists.cc:125 ../src/main/prayerlists.cc:381
+#: ../src/main/sword_treekey.cc:339
 msgid "Health"
 msgstr "Gezondheid"
 
-#: ../src/main/prayerlists.cc:125 ../src/main/sword_treekey.cc:339
+#: ../src/main/prayerlists.cc:126 ../src/main/sword_treekey.cc:340
 msgid "<b>For Health</b><br>"
 msgstr "<b>Voor gezondheid</b><br>"
 
-#: ../src/main/prayerlists.cc:126
+#: ../src/main/prayerlists.cc:127
 msgid "Misc"
 msgstr "Overig"
 
-#: ../src/main/prayerlists.cc:127 ../src/main/sword_treekey.cc:341
+#: ../src/main/prayerlists.cc:128 ../src/main/sword_treekey.cc:342
 msgid "<b>Miscellaneous</b><br>"
 msgstr "<b>Overig</b><br>"
 
-#: ../src/main/prayerlists.cc:135
+#: ../src/main/prayerlists.cc:136
 msgid "Point x"
 msgstr "Punt x"
 
-#: ../src/main/prayerlists.cc:136
+#: ../src/main/prayerlists.cc:137
 msgid "<b>(x)</b><br>"
 msgstr "<b>(x)</b><br>"
 
-#: ../src/main/prayerlists.cc:137
+#: ../src/main/prayerlists.cc:138
 msgid "Point y"
 msgstr "Punt y"
 
-#: ../src/main/prayerlists.cc:138
+#: ../src/main/prayerlists.cc:139
 msgid "<b>(y)</b><br>"
 msgstr "<b>(y)</b><br>"
 
-#: ../src/main/prayerlists.cc:139
+#: ../src/main/prayerlists.cc:140
 msgid "Point z"
 msgstr "Punt z"
 
-#: ../src/main/prayerlists.cc:140
+#: ../src/main/prayerlists.cc:141
 msgid "<b>(z)</b><br>"
 msgstr "<b>(z)</b><br>"
 
-#: ../src/main/prayerlists.cc:148
+#: ../src/main/prayerlists.cc:149
 msgid "Minor Topic 1"
 msgstr "Deelonderwerp 1"
 
-#: ../src/main/prayerlists.cc:149
+#: ../src/main/prayerlists.cc:150
 msgid "<b>Subtopic 1</b><br>"
 msgstr "<b>Deelonderwerp 1</b><br>"
 
-#: ../src/main/prayerlists.cc:151
+#: ../src/main/prayerlists.cc:152
 msgid "Minor Topic 2"
 msgstr "Deelonderwerp 2"
 
-#: ../src/main/prayerlists.cc:152
+#: ../src/main/prayerlists.cc:153
 msgid "<b>Subtopic 2</b><br>"
 msgstr "<b>Deelonderwerp 2</b><br>"
 
-#: ../src/main/prayerlists.cc:154
+#: ../src/main/prayerlists.cc:155
 msgid "Minor Topic 3"
 msgstr "Deelonderwerp 3"
 
-#: ../src/main/prayerlists.cc:155
+#: ../src/main/prayerlists.cc:156
 msgid "<b>Subtopic 3</b><br>"
 msgstr "<b>Deelonderwerp 3</b><br>"
 
-#: ../src/main/prayerlists.cc:157
+#: ../src/main/prayerlists.cc:158
 msgid "Minor Topic 4"
 msgstr "Deelonderwerp 4"
 
-#: ../src/main/prayerlists.cc:158
+#: ../src/main/prayerlists.cc:159
 msgid "<b>Subtopic 4</b><br>"
 msgstr "<b>Deelonderwerp 4</b><br>"
 
-#: ../src/main/prayerlists.cc:237
+#: ../src/main/prayerlists.cc:238
 msgid "Name for new prayer list or journal"
 msgstr "Naam voor gebedslijst of bericht"
 
-#: ../src/main/prayerlists.cc:239 ../src/main/prayerlists.cc:335
-#: ../src/main/sword_treekey.cc:376
+#: ../src/main/prayerlists.cc:240 ../src/main/prayerlists.cc:336
+#: ../src/main/sword_treekey.cc:377
 msgid "MyPrayerList"
 msgstr "MijnGebedslijst"
 
-#: ../src/main/prayerlists.cc:268
+#: ../src/main/prayerlists.cc:269
 msgid "Xiphos finds that prayer list already."
 msgstr "Xiphos heeft al zo'n gebedslijst."
 
-#: ../src/main/prayerlists.cc:281
+#: ../src/main/prayerlists.cc:282
 #, c-format
 msgid ""
 "Xiphos cannot create module's path:\n"
 "%s"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:321
+#: ../src/main/prayerlists.cc:322
 msgid "A basic prayer list. \\par\\par Module created by Xiphos."
 msgstr ""
 "Een standaard gebedslijst. \\par\\par Module is aangemaakt door Xiphos."
 
-#: ../src/main/prayerlists.cc:336
+#: ../src/main/prayerlists.cc:337
 msgid ""
 "<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</"
 "b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"
@@ -2198,62 +2201,62 @@ msgstr ""
 "<b>Personen:</b><br>Bob<br>Sam<br>Sue<br><br><b>Kerk:</"
 "b><br>Veiligheid<br>Eenheid<br>Bijbels voor zendelingen<br><br><br>"
 
-#: ../src/main/prayerlists.cc:362
+#: ../src/main/prayerlists.cc:363
 msgid "A subject-based prayer list. \\par\\par Module created by Xiphos."
 msgstr "Een gebedslijst op onderwerp. \\par\\par Module aangemaakt met Xiphos."
 
-#: ../src/main/prayerlists.cc:377
+#: ../src/main/prayerlists.cc:378
 msgid "Bob<br>Sam<br>Sue<br>John<br>"
 msgstr "Bob<br>Sam<br>Sue<br>John<br>"
 
-#: ../src/main/prayerlists.cc:378
+#: ../src/main/prayerlists.cc:379
 msgid "Spiritual Growth"
 msgstr "Geestelijke groei"
 
-#: ../src/main/prayerlists.cc:379
+#: ../src/main/prayerlists.cc:380
 msgid "Mike<br>Steve<br>"
 msgstr "Mike<br>Steve<br>"
 
-#: ../src/main/prayerlists.cc:381
+#: ../src/main/prayerlists.cc:382
 msgid "Sue<br>John<br>"
 msgstr "Sue<br>John<br>"
 
-#: ../src/main/prayerlists.cc:407
+#: ../src/main/prayerlists.cc:408
 msgid "A monthly prayer list. \\par\\par Module created by Xiphos."
 msgstr ""
 "Een maandelijkse gebedslijst. \\par\\par Module is aangemaakt bij Xiphos."
 
-#: ../src/main/prayerlists.cc:458
+#: ../src/main/prayerlists.cc:459
 msgid "A daily journal. \\par\\par Module created by Xiphos."
 msgstr "Een dagelijks bericht. \\par\\par Module is aangemaakt door Xiphos."
 
-#: ../src/main/prayerlists.cc:522
+#: ../src/main/prayerlists.cc:523
 msgid "An outlined topic (e.g. sermon). \\par\\par Module created by Xiphos."
 msgstr ""
 "Een uitgelijnd onderwerp(e.g. preek). \\par\\par Module aangemaakt met "
 "Xiphos."
 
-#: ../src/main/prayerlists.cc:536
+#: ../src/main/prayerlists.cc:537
 msgid "Major Topic A"
 msgstr "Hoofdonderwerp A"
 
-#: ../src/main/prayerlists.cc:537
+#: ../src/main/prayerlists.cc:538
 msgid "<b>Major Topic A</b><br>"
 msgstr "<b>Hoofdondewerp A</b><br>"
 
-#: ../src/main/prayerlists.cc:539
+#: ../src/main/prayerlists.cc:540
 msgid "Major Topic B"
 msgstr "Hoofdonderwerp B"
 
-#: ../src/main/prayerlists.cc:540
+#: ../src/main/prayerlists.cc:541
 msgid "<b>Major Topic B</b><br>"
 msgstr "<b>Hoofdondewerp B</b><br>"
 
-#: ../src/main/prayerlists.cc:542
+#: ../src/main/prayerlists.cc:543
 msgid "Major Topic C"
 msgstr "Hoofdonderwerp C"
 
-#: ../src/main/prayerlists.cc:543
+#: ../src/main/prayerlists.cc:544
 msgid "<b>Major Topic C</b><br>"
 msgstr "<b>Hoofdondewerp C</b><br>"
 
@@ -2335,21 +2338,21 @@ msgstr "Voorbeeld modulelijst"
 msgid "wrong type, root node != %s\n"
 msgstr "verkeerd type, sleutelnode != %s\n"
 
-#: ../src/main/sword_treekey.cc:374
+#: ../src/main/sword_treekey.cc:375
 msgid "Name for new prayer list"
 msgstr "Gebedslijst naam"
 
-#: ../src/main/sword_treekey.cc:395
+#: ../src/main/sword_treekey.cc:396
 #, c-format
 msgid "can not create path\n"
 msgstr "Aanmaken pad mislukt\n"
 
-#: ../src/main/sword_treekey.cc:398
+#: ../src/main/sword_treekey.cc:399
 #, c-format
 msgid "Prayer list already exist\n"
 msgstr "Gebedslijst bestaat altijd\n"
 
-#: ../src/main/sword_treekey.cc:419
+#: ../src/main/sword_treekey.cc:420
 msgid "\\par\\par My prayer list \\par\\par Module created in Xiphos"
 msgstr "\\par\\par Mijn gebedslijst \\par\\par Module aangemaakt met Xiphos"
 
@@ -2548,17 +2551,10 @@ msgstr ""
 "\n"
 "Xiphos zal worden afgesloten."
 
-#: ../src/main/settings.c:153
-msgid "can not create  .sword"
-msgstr "Kan .sword niet aanmaken"
-
-#: ../src/main/settings.c:161
-msgid "can not create  .sword/mods.d"
-msgstr "Kan .sword/mods.d niet aanmaken"
-
+#: ../src/main/settings.c:153 ../src/main/settings.c:161
 #: ../src/main/settings.c:169
-msgid "can not create  .sword/modules"
-msgstr "Kan .sword/modules niet aanmaken"
+msgid "can not create "
+msgstr "aanmaken niet gelukt van"
 
 #. must be first run
 #: ../src/main/settings.c:190
@@ -2623,13 +2619,12 @@ msgid ""
 "\n"
 "Would you like Xiphos to set itself as the\n"
 "program to handle these references?"
-msgstr "URL-verwijzingen als \"sword://\"(net zoals http) kunnen"
-"worden gebruikt door programma's om bijbelverwijzingen"
-"te openen. Wilt u dat Xiphos als standaard programma op "
-"uw systeem wordt ingesteld?\n"
+msgstr ""
+"URL-verwijzingen als \"sword://\"(net zoals http) kunnenworden gebruikt door "
+"programma's om bijbelverwijzingente openen. Wilt u dat Xiphos als standaard "
+"programma op uw systeem wordt ingesteld?\n"
 "\n"
-"Momenteel is er geen programma gekoppeld aan dit type"
-"verwijzing."
+"Momenteel is er geen programma gekoppeld aan dit typeverwijzing."
 
 #: ../src/main/settings.c:827
 msgid ""
@@ -3749,6 +3744,15 @@ msgstr "bijv. Matt-John;Rev4"
 #: ../ui/search-dialog.glade.h:109
 msgid "for "
 msgstr "Tekst bevat "
+
+#~ msgid "can not create  .sword"
+#~ msgstr "Kan .sword niet aanmaken"
+
+#~ msgid "can not create  .sword/mods.d"
+#~ msgstr "Kan .sword/mods.d niet aanmaken"
+
+#~ msgid "can not create  .sword/modules"
+#~ msgstr "Kan .sword/modules niet aanmaken"
 
 #~ msgid "Select Local Source"
 #~ msgstr "Selecteer een lokale bron"
