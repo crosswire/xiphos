@@ -92,7 +92,7 @@ ${Index}:
   ClearErrors
   ReadRegStr $R0 HKLM "$R1" "${FontName}"
   IfErrors 0 "${Index}-End"
-    System::Call "GDI32::AddFontResourceA(t) i ('${FontFileName}') .s"
+    System::Call "GDI32::AddFontResourceW(t) i ('${FontFileName}') .s"
     WriteRegStr HKLM "$R1" "${FontName}" "${FontFileName}"
     goto "${Index}-End"
  
@@ -137,7 +137,7 @@ ${Index}:
   goto "${Index}-GO"
  
 "${Index}-GO:"
-  System::Call "GDI32::RemoveFontResourceA(t) i ('${FontFileName}') .s"
+  System::Call "GDI32::RemoveFontResourceW(t) i ('${FontFileName}') .s"
   DeleteRegValue HKLM "$R1" "${FontName}"
   delete /REBOOTOK "$FONT_DIR\${FontFileName}"
   goto "${Index}-End"

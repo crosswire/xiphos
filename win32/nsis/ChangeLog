@@ -1,3 +1,12 @@
+2009-02-12  matysek <matysek03@users.sf.net>
+
+	* fixed fonts are available immediately after instalation
+	  in module fontreg.nsh was replaced fuction AddFontResourceA with
+	  AddFontResourceW
+	* fixed folder Crosswire is deleted during uninstall when it's empty
+	* fixed xiphos folders 'data' and 'dict' are uninstalled faster
+	* included bold and italics variants of installed fonts
+
 2009-02-07  matysek <matysek03@users.sf.net>
 
 	* fixed issue with displaying wrong license translation.
