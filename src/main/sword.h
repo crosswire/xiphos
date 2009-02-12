@@ -143,7 +143,7 @@ void main_init_language_map(void);
 #endif
 
 #ifdef WIN32
-#define	Mkdir(d,m)	mkdir(d)
+#define	Mkdir(d,m)	g_mkdir(d,m)
 #define	DOTSWORD	"Sword"
 #else
 #define	Mkdir(d,m)	mkdir(d,m)

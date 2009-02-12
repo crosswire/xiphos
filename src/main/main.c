@@ -72,22 +72,21 @@ int main(int argc, char *argv[])
 	g_chdir (install_dir);
 	
 	/* add this directory to $PATH for other stuff, e.g. zip */
-	putenv(g_strdup_printf("PATH=%s;%s", install_dir,
-			       getenv("PATH")));
+	g_setenv("PATH", g_strdup_printf("%s;%s", install_dir,
+					        g_getenv("PATH")),
+		                                TRUE);
 
 	/* make allowance for pre-existing modules area. */
-	if (!getenv("SWORD_PATH"))
-		putenv(g_strdup_printf("SWORD_PATH=%s/Application Data/Sword",
-				       getenv("ALLUSERSPROFILE")));
-	mkdir(getenv("SWORD_PATH"));
+	g_setenv("SWORD_PATH", g_strdup_printf("%s/Application Data/Sword",
+					       g_getenv("ALLUSERSPROFILE")),
+		                               FALSE);
+	g_mkdir(g_getenv("SWORD_PATH"));
 	
-	if (!getenv("LANG"))
-	        putenv(g_strdup_printf("LANG=%s",
-				       g_win32_getlocale()));
+	g_setenv("LANG", g_win32_getlocale(), FALSE);
 
 	/* we need an idea of $HOME that's convenient. */
 	/* this gives us linux-equivalent semantics. */
-	putenv(g_strdup_printf("HOME=%s", getenv("APPDATA")));
+	g_setenv("HOME", g_getenv("APPDATA"), TRUE);
 #endif /* WIN32 */
 
 	gui_init(argc, argv);

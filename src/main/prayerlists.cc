@@ -25,6 +25,7 @@
 #endif
 
 #include <gnome.h>
+#include <glib/gstdio.h>
 #include <swmodule.h>
 #include <swmgr.h>
 #include <treekeyidx.h>
