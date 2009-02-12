@@ -41,8 +41,9 @@
 ; Script definitions
 
     !define APP_NAME "Xiphos"
+    !define INSTALLER_NAME "xiphos"
     !define APP_BINARY_NAME "xiphos.exe"
-    !define APP_VERS "3.0"
+    !define APP_VERS "3.0.1rc1"
     !define APP_EDITION "win32"
     !define APP_URL "http://xiphos.org"
 
@@ -126,7 +127,7 @@
 ; General
 
     Name "${APP_NAME}"
-    OutFile "${APP_NAME}-${APP_VERS}-${APP_EDITION}.exe"
+    OutFile "${INSTALLER_NAME}-${APP_VERS}-${APP_EDITION}.exe"
     ShowInstDetails hide
     ShowUninstDetails hide
     InstallDir "$PROGRAMFILES\CrossWire\${APP_NAME}"
@@ -248,18 +249,32 @@ Section $(CORE_SEC_TITLE) SecCore
 
     StrCpy $FONT_DIR $FONTS
 
-    ; Libertine fonts
+    ; Libertine font
     !insertmacro InstallTTFFont "${PATH_FONT}\LinLibertine_Re.ttf" \
         "Linux Libertine (TrueType)"
+    !insertmacro InstallTTFFont "${PATH_FONT}\LinLibertine_Bd.ttf" \
+        "Linux Libertine Bold (TrueType)"
+    !insertmacro InstallTTFFont "${PATH_FONT}\LinLibertine_It.ttf" \
+        "Linux Libertine Italic (TrueType)"
 
-    ; Free fonts
+    ; FreeSans font
     !insertmacro InstallTTFFont "${PATH_FONT}\FreeSans.ttf" \
         "Free Sans (TrueType)"
+    !insertmacro InstallTTFFont "${PATH_FONT}\FreeSansBold.ttf" \
+        "Free Sans Bold (TrueType)"
+    !insertmacro InstallTTFFont "${PATH_FONT}\FreeSansOblique.ttf" \
+        "Free Sans Oblique (TrueType)"
+
+    ; FreeSerif font
     !insertmacro InstallTTFFont "${PATH_FONT}\FreeSerif.ttf" \
         "Free Serif (TrueType)"
+    !insertmacro InstallTTFFont "${PATH_FONT}\FreeSerifBold.ttf" \
+        "Free Serif Bold (TrueType)"
+    !insertmacro InstallTTFFont "${PATH_FONT}\FreeSerifItalic.ttf" \
+        "Free Serif Italic (TrueType)"
 
-    #SendMessage ${HWND_BROADCAST} ${WM_FONTCHANGE} 0 0 /TIMEOUT=5000
-    SendMessage ${HWND_BROADCAST} ${WM_FONTCHANGE} 0 0 /TIMEOUT=50000
+    ; Notify Windows applications about new fonts
+    SendMessage ${HWND_BROADCAST} ${WM_FONTCHANGE} 0 0 /TIMEOUT=5000
     
     ; Install Application files
 
@@ -346,6 +361,8 @@ Section Uninstall
 
     ; Hack to speed up uninstaller
     RMDir /r "$INSTDIR\bin\*.*"
+    RMDir /r "$INSTDIR\data\*.*"
+    RMDir /r "$INSTDIR\dict\*.*"
     RMDir /r "$INSTDIR\etc\*.*"
     RMDir /r "$INSTDIR\lib\*.*"
     RMDir /r "$INSTDIR\libexec\*.*"
@@ -357,6 +374,9 @@ Section Uninstall
 
     ;end uninstall, after uninstall from all logged paths has been performed
     !insertmacro UNINSTALL.LOG_END_UNINSTALL
+
+    ; remove Crosswire folder if exists and is empty
+    RMDir "$PROGRAMFILES\CrossWire"
 
     !insertmacro MUI_STARTMENU_GETFOLDER Application $StartMenuDir
     !define ST_MENU "$SMPROGRAMS\$StartMenuDir"
