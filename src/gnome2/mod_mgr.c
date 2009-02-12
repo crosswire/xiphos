@@ -2694,7 +2694,10 @@ setup_ui_labels()
 
 	gtk_label_set_text(GTK_LABEL(label_system), settings.path_to_mods);
 	if (access(settings.path_to_mods, W_OK) == -1) {
-		GS_print(("%s is write protected\n", settings.path_to_mods));
+		GS_print(("%s is write protected\n",
+			  (settings.path_to_mods
+			   ? settings.path_to_mods
+			   : "<null>")));
 		gtk_widget_set_sensitive(label_system, FALSE);
 		gtk_widget_set_sensitive(radiobutton4, FALSE);
 	} else {
