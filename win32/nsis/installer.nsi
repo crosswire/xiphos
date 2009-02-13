@@ -256,6 +256,8 @@ Section $(CORE_SEC_TITLE) SecCore
         "Linux Libertine Bold (TrueType)"
     !insertmacro InstallTTFFont "${PATH_FONT}\LinLibertine_It.ttf" \
         "Linux Libertine Italic (TrueType)"
+    !insertmacro InstallTTFFont "${PATH_FONT}\LinLibertine_BI.ttf" \
+        "Linux Libertine Bold Italic (TrueType)"
 
     ; FreeSans font
     !insertmacro InstallTTFFont "${PATH_FONT}\FreeSans.ttf" \
@@ -264,6 +266,8 @@ Section $(CORE_SEC_TITLE) SecCore
         "Free Sans Bold (TrueType)"
     !insertmacro InstallTTFFont "${PATH_FONT}\FreeSansOblique.ttf" \
         "Free Sans Oblique (TrueType)"
+    !insertmacro InstallTTFFont "${PATH_FONT}\FreeSansBoldOblique.ttf" \
+        "Free Sans Bold Oblique (TrueType)"
 
     ; FreeSerif font
     !insertmacro InstallTTFFont "${PATH_FONT}\FreeSerif.ttf" \
@@ -272,6 +276,8 @@ Section $(CORE_SEC_TITLE) SecCore
         "Free Serif Bold (TrueType)"
     !insertmacro InstallTTFFont "${PATH_FONT}\FreeSerifItalic.ttf" \
         "Free Serif Italic (TrueType)"
+    !insertmacro InstallTTFFont "${PATH_FONT}\FreeSerifBoldItalic.ttf" \
+        "Free Serif Bold Italic (TrueType)"
 
     ; Notify Windows applications about new fonts
     SendMessage ${HWND_BROADCAST} ${WM_FONTCHANGE} 0 0 /TIMEOUT=5000
