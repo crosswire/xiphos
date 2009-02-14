@@ -187,7 +187,7 @@ int settings_init(int new_configs, int new_bookmarks)
 	/* if settings.xml does not exist create it */
 	if ((access(settings.fnconfigure, F_OK) == -1) || new_configs) {
 		/* must be first run */
-		GS_print((_("\nFirst Run: need to create settings!\n")));
+		GS_print(("\nFirst Run: need to create settings!\n"));
 		settings.first_run = TRUE;
 
 		main_init_lists();
