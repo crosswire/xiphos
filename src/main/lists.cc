@@ -153,14 +153,14 @@ void main_init_lists(void)
 		settings.devotionalmod = xml_get_value("modules", "devotional");
 	}
 
-	GS_print(("%s = %d\n", _("Number of Text modules"), settings.havebible));
-	GS_print(("%s = %d\n", _("Number of Commentary modules"), settings.havecomm));
-	GS_print(("%s = %d\n", _("Number of Dict/lex modules"), settings.havedict));
-	GS_print(("%s = %d\n", _("Number of Book modules"), settings.havebook));
-	GS_print(("%s = %d\n", _("Number of Percomm modules"), settings.havepercomm));
-	GS_print(("%s = %d\n", _("Number of Devotion modules"),
+	GS_print(("%s = %d\n", "Number of Text modules", settings.havebible));
+	GS_print(("%s = %d\n", "Number of Commentary modules", settings.havecomm));
+	GS_print(("%s = %d\n", "Number of Dict/lex modules", settings.havedict));
+	GS_print(("%s = %d\n", "Number of Book modules", settings.havebook));
+	GS_print(("%s = %d\n", "Number of Percomm modules", settings.havepercomm));
+	GS_print(("%s = %d\n", "Number of Devotion modules",
 		  g_list_length(mods.devotionmods)));
-	GS_print(("%s = %d\n\n", _("Number of Prayer modules"),
+	GS_print(("%s = %d\n\n", "Number of Prayer modules",
 		  settings.haveprayerlist));
 }
 
