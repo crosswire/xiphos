@@ -84,7 +84,7 @@
 void frontend_init(void)
 {
 	guint number_of_pages = 0;
-	GS_print(("%s\n", _("Initiating Xiphos")));
+	GS_print(("%s\n", "Initiating Xiphos"));
 	settings.comm_showing = TRUE;
 	settings.displaySearchResults = FALSE;
 	settings.havethayer = main_is_module("Thayer");
@@ -143,7 +143,7 @@ void frontend_display(void)
 	GString *str;
 	gchar *url;
 	extern GList *passage_list;
-	GS_print(("%s\n", _("Displaying Xiphos")));
+	GS_print(("%s\n", "Displaying Xiphos"));
 	gui_show_main_window();
 	
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
@@ -214,7 +214,7 @@ void frontend_display(void)
 	gtk_widget_grab_focus (sidebar.module_list);
 	//main_prayer_list_new("2008");
 	
-	GS_print(("%s\n\n", _("done")));
+	GS_print(("%s\n\n", "done"));
 } 
 
 
@@ -292,5 +292,5 @@ void shutdown_frontend(void)
 	g_string_free(navbar_versekey.key,TRUE);
 #endif
 	
-	GS_print(("\n%s\n", _("Xiphos is shutdown")));
+	GS_print(("\n%s\n", "Xiphos is shutdown"));
 }
