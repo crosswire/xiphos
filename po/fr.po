@@ -1,10 +1,10 @@
 # French translation for Xiphos
-# Copyright (C) 2002, 2008 Free Software Foundation, Inc.
+# Copyright (C) 2002, 2009 Free Software Foundation, Inc.
 # Dominique Corbex <domcox@users.sourceforge.net>, 2002, 2008
 # Contributions are welcome.
 # Translation Notes (Any comment welcome)
 # ---------------------------------------
-# SWORD Project           -> SWORD Project
+# SWORD Project           -> Projet SWORD
 # Bookmark                -> Signet
 # Interlinear             -> Parallèle
 # Morphological Tags      -> Étiquettes morphologiques
@@ -14,15 +14,14 @@
 # Biblical Text           -> Textes bibliques
 # Lemma                   -> Lemme
 # Daily Devotion          -> Calendrier biblique
-#
-#
-#
+# 
+# 
 msgid ""
 msgstr ""
-"Project-Id-Version: Xiphos 2.4.0\n"
+"Project-Id-Version: Xiphos 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-08 22:09+0100\n"
-"PO-Revision-Date: 2009-02-08 23:22+0100\n"
+"POT-Creation-Date: 2009-02-14 20:09+0100\n"
+"PO-Revision-Date: 2009-02-14 20:10+0100\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: Project-Id-Version: gtranslator 1.0.1 <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -129,7 +128,8 @@ msgstr "avant de fermer?"
 
 #: ../src/editor/html-editor.c:1945 ../src/editor/html-editor.c:1995
 msgid "If you don't save, changes will be permanently lost."
-msgstr "Si vous n'enregistrez pas, les modifications seront définitivement perdues."
+msgstr ""
+"Si vous n'enregistrez pas, les modifications seront définitivement perdues."
 
 #. 2
 #. 3
@@ -678,16 +678,16 @@ msgstr "Nouveau nom :"
 
 #: ../src/gnome2/commentary.c:481 ../src/gnome2/treekey-editor.c:127
 #: ../src/gnome2/treekey-editor.c:186 ../src/gnome2/treekey-editor.c:272
-#: ../src/main/prayerlists.cc:238 ../src/main/sword_treekey.cc:375
+#: ../src/main/prayerlists.cc:239 ../src/main/sword_treekey.cc:376
 msgid "Name: "
 msgstr "Nom :"
 
-#: ../src/gnome2/commentary.c:491 ../src/main/prayerlists.cc:252
+#: ../src/gnome2/commentary.c:491 ../src/main/prayerlists.cc:253
 msgid "Module names must contain [A-Za-z0-9_] only."
 msgstr ""
 "Les noms de modules ne peuvent contenir que des lettres et des chiffres."
 
-#: ../src/gnome2/commentary.c:498 ../src/main/prayerlists.cc:259
+#: ../src/gnome2/commentary.c:498 ../src/main/prayerlists.cc:260
 msgid "Xiphos already knows a module by that name."
 msgstr "Il existe déjà un module de ce nom."
 
@@ -839,7 +839,7 @@ msgstr ""
 msgid "Journals and prayer lists cannot be indexed."
 msgstr "Les listes de prières et journaux ne peuvent pas être indexés."
 
-#: ../src/gnome2/mod_mgr.c:453 ../src/gnome2/mod_mgr.c:2626
+#: ../src/gnome2/mod_mgr.c:453 ../src/gnome2/mod_mgr.c:2632
 #: ../ui/module-manager.glade.h:18
 msgid "Install"
 msgstr "Installer"
@@ -865,7 +865,7 @@ msgstr "Suppression"
 msgid "%s failed"
 msgstr "%s a échoué"
 
-#: ../src/gnome2/mod_mgr.c:465 ../src/gnome2/mod_mgr.c:1148
+#: ../src/gnome2/mod_mgr.c:465 ../src/gnome2/mod_mgr.c:1149
 msgid "Finished"
 msgstr "Terminé"
 
@@ -951,8 +951,8 @@ msgid "Uninstalled"
 msgstr "Non installé"
 
 #: ../src/gnome2/mod_mgr.c:970 ../src/gnome2/sidebar.c:421
-#: ../src/gnome2/utilities.c:544 ../src/main/prayerlists.cc:236
-#: ../src/main/sword_treekey.cc:373 ../src/main/sword_treekey.cc:417
+#: ../src/gnome2/utilities.c:544 ../src/main/prayerlists.cc:237
+#: ../src/main/sword_treekey.cc:374 ../src/main/sword_treekey.cc:418
 #: ../src/main/sidebar.cc:1079 ../src/main/sidebar.cc:1081
 msgid "Prayer List/Journal"
 msgstr "Liste de prières / Journal"
@@ -965,28 +965,28 @@ msgstr "Rafraîchissement en cours"
 msgid "Remote not found"
 msgstr "Serveur non trouvé"
 
-#: ../src/gnome2/mod_mgr.c:1274
+#: ../src/gnome2/mod_mgr.c:1275
 msgid "Module Name"
 msgstr "Nom du module"
 
-#: ../src/gnome2/mod_mgr.c:1293
+#: ../src/gnome2/mod_mgr.c:1294
 msgid "A checkmark means this module is already installed"
 msgstr "Une coche indique un module déjà installé"
 
-#: ../src/gnome2/mod_mgr.c:1315
+#: ../src/gnome2/mod_mgr.c:1316
 msgid "Click the box to work on this module"
 msgstr "Cocher la case pour travailler avec ce module"
 
-#: ../src/gnome2/mod_mgr.c:1316
+#: ../src/gnome2/mod_mgr.c:1317
 msgid "Click the box to select this module for install/update"
 msgstr ""
 "Cocher la case pour sélectionner ce module à installer ou à mettre à jour"
 
-#: ../src/gnome2/mod_mgr.c:1335
+#: ../src/gnome2/mod_mgr.c:1336
 msgid "Installed"
 msgstr "Installé"
 
-#: ../src/gnome2/mod_mgr.c:1345
+#: ../src/gnome2/mod_mgr.c:1346
 msgid ""
 "The index icon means you have built an optimized ('lucene') index for this "
 "module for fast searching (see the Maintenance pane for this function)"
@@ -994,7 +994,7 @@ msgstr ""
 "L'icône index indique qu'un index optimisé pour des requêtes rapides "
 "(lucène) a été construit à l'aide du bouton indexer."
 
-#: ../src/gnome2/mod_mgr.c:1363
+#: ../src/gnome2/mod_mgr.c:1364
 msgid ""
 "The lock icon means this module is encrypted, and requires that you purchase "
 "an unlock key from the content owner"
@@ -1002,7 +1002,7 @@ msgstr ""
 "L'icône protection indique un module encrypté et nécessite l'achat d'une clé "
 "de déverrouillage auprès de l'éditeur du document"
 
-#: ../src/gnome2/mod_mgr.c:1385
+#: ../src/gnome2/mod_mgr.c:1386
 msgid ""
 "The refresh icon means the Installed module is older than the newer "
 "Available module: You should update the module"
@@ -1010,95 +1010,95 @@ msgstr ""
 "L'icône Rafraichir indique un module installé plus vieux que le nouveau "
 "disponible. Le module est à mettre à jour."
 
-#: ../src/gnome2/mod_mgr.c:1397
+#: ../src/gnome2/mod_mgr.c:1398
 msgid "Available"
 msgstr "Dispo"
 
-#: ../src/gnome2/mod_mgr.c:1406
+#: ../src/gnome2/mod_mgr.c:1407
 msgid "Size"
 msgstr "Taille"
 
-#: ../src/gnome2/mod_mgr.c:1415
+#: ../src/gnome2/mod_mgr.c:1416
 msgid "Description"
 msgstr "Description"
 
-#: ../src/gnome2/mod_mgr.c:1449 ../src/gnome2/mod_mgr.c:1529
+#: ../src/gnome2/mod_mgr.c:1450 ../src/gnome2/mod_mgr.c:1530
 msgid "Configure"
 msgstr "Configurer"
 
-#: ../src/gnome2/mod_mgr.c:1483
+#: ../src/gnome2/mod_mgr.c:1484
 msgid "Type"
 msgstr "Type"
 
-#: ../src/gnome2/mod_mgr.c:1490
+#: ../src/gnome2/mod_mgr.c:1491
 msgid "Caption"
 msgstr "Libellé"
 
-#: ../src/gnome2/mod_mgr.c:1498
+#: ../src/gnome2/mod_mgr.c:1499
 msgid "Source"
 msgstr "Source"
 
 # src/gs_preferences_dlg.c
-#: ../src/gnome2/mod_mgr.c:1506
+#: ../src/gnome2/mod_mgr.c:1507
 msgid "Directory"
 msgstr "Répertoire"
 
-#: ../src/gnome2/mod_mgr.c:1527
+#: ../src/gnome2/mod_mgr.c:1528
 msgid "Sources"
 msgstr "Dépôts"
 
-#: ../src/gnome2/mod_mgr.c:1533 ../src/gnome2/sidebar.c:1450
+#: ../src/gnome2/mod_mgr.c:1534 ../src/gnome2/sidebar.c:1450
 #: ../src/gnome2/preferences_dialog.c:1792
 msgid "Modules"
 msgstr "Modules"
 
-#: ../src/gnome2/mod_mgr.c:1535
+#: ../src/gnome2/mod_mgr.c:1536
 msgid "Install/Update"
 msgstr "Installer"
 
-#: ../src/gnome2/mod_mgr.c:1537
+#: ../src/gnome2/mod_mgr.c:1538
 msgid "Maintenance"
 msgstr "Maintenance"
 
-#: ../src/gnome2/mod_mgr.c:1746
+#: ../src/gnome2/mod_mgr.c:1747
 msgid "Please Refresh"
 msgstr "Rafraîchir"
 
-#: ../src/gnome2/mod_mgr.c:1747
+#: ../src/gnome2/mod_mgr.c:1748
 msgid "Your module list is not up to date!"
 msgstr "La liste des modules n'est pas à jour!"
 
-#: ../src/gnome2/mod_mgr.c:2211 ../src/gnome2/mod_mgr.c:2415
+#: ../src/gnome2/mod_mgr.c:2214 ../src/gnome2/mod_mgr.c:2421
 msgid "Remove the selected source"
 msgstr "Supprime le dépôt sélectionné"
 
-#: ../src/gnome2/mod_mgr.c:2268
+#: ../src/gnome2/mod_mgr.c:2271
 msgid "Enter a remote source"
 msgstr "Ajouter un dépôt distant"
 
-#: ../src/gnome2/mod_mgr.c:2272
+#: ../src/gnome2/mod_mgr.c:2275
 msgid "Caption:"
 msgstr "Libellé :"
 
-#: ../src/gnome2/mod_mgr.c:2273
+#: ../src/gnome2/mod_mgr.c:2276
 msgid "Type:"
 msgstr "Type :"
 
-#: ../src/gnome2/mod_mgr.c:2274
+#: ../src/gnome2/mod_mgr.c:2277
 msgid "Host:"
 msgstr "Serveur :"
 
 # src/gs_preferences_dlg.c
-#: ../src/gnome2/mod_mgr.c:2275
+#: ../src/gnome2/mod_mgr.c:2278
 msgid "Directory:"
 msgstr "Répertoire :"
 
 #. this can happen at most once
-#: ../src/gnome2/mod_mgr.c:2300
+#: ../src/gnome2/mod_mgr.c:2303
 msgid "A source by that name already exists."
 msgstr "Un dépôt du même nom existe déjà"
 
-#: ../src/gnome2/mod_mgr.c:2412
+#: ../src/gnome2/mod_mgr.c:2418
 msgid "Delete a remote source"
 msgstr "Supprimer un dépôt distant"
 
@@ -1117,14 +1117,6 @@ msgstr "Aperçu avant impression"
 #: ../src/gnome2/html.c:985
 msgid "Failed to print the document"
 msgstr "Le document n'a pas pu être imprimé"
-
-#: ../src/gnome2/main_window.c:778 ../src/main/sword.cc:638
-msgid "Starting"
-msgstr "Démarrage de"
-
-#: ../src/gnome2/main_window.c:779
-msgid "Building Xiphos interface"
-msgstr "Construction de l'interface de Xiphos"
 
 #: ../src/gnome2/main_window.c:785
 msgid "Xiphos - Bible Study Software"
@@ -1463,8 +1455,8 @@ msgstr ""
 "(Anciennement Gnomesword)\n"
 "\n"
 "Xiphos utilise l'architecture logicielle du Projet SWORD.    \n"
-"Tous nos remerciements vont avec plaisir à Troy Griffitts et "
-"autres membres du Projet SWORD."
+"Tous nos remerciements vont avec plaisir à Troy Griffitts et autres membres "
+"du Projet SWORD."
 
 #: ../src/gnome2/studypad.c:101
 msgid "has been modified. Do you wish to save it?"
@@ -1473,23 +1465,6 @@ msgstr "a été modifié. Voulez-vous l'enregistrer?"
 #: ../src/gnome2/studypad.c:173
 msgid "not loaded"
 msgstr "non chargé"
-
-#: ../src/gnome2/xiphos.c:87
-msgid "Initiating Xiphos"
-msgstr "Initialisation de Xiphos"
-
-#: ../src/gnome2/xiphos.c:146 ../src/gnome2/splash.c:633
-msgid "Displaying Xiphos"
-msgstr "Affichage de Xiphos"
-
-#. main_prayer_list_new("2008");
-#: ../src/gnome2/xiphos.c:217
-msgid "done"
-msgstr "fait"
-
-#: ../src/gnome2/xiphos.c:295
-msgid "Xiphos is shutdown"
-msgstr "Arrêt de Xiphos"
 
 #: ../src/gnome2/bookmarks_menu.c:473
 msgid "Folder name: "
@@ -1693,6 +1668,10 @@ msgstr "Construction de l'interface"
 #: ../src/gnome2/splash.c:616
 msgid "Starting Sword"
 msgstr "Démarrage de Sword"
+
+#: ../src/gnome2/splash.c:633
+msgid "Displaying Xiphos"
+msgstr "Affichage de Xiphos"
 
 #: ../src/gnome2/main_menu.c:970
 msgid "Open Study_Pad"
@@ -1993,30 +1972,6 @@ msgstr ""
 "Erreur de lecture du fichier des\n"
 "définitions de langages."
 
-#: ../src/main/sword.cc:639
-msgid "Initiating SWORD"
-msgstr "Initialisation de Sword"
-
-#: ../src/main/sword.cc:640
-msgid "path to sword"
-msgstr "Chemin d'accès à sword"
-
-#: ../src/main/sword.cc:641
-msgid "System locale is"
-msgstr "La locale du système est"
-
-#: ../src/main/sword.cc:642
-msgid "SWORD locale is"
-msgstr "La locale de SWORD est"
-
-#: ../src/main/sword.cc:644
-msgid "Checking for SWORD Modules"
-msgstr "Détection des modules SWORD"
-
-#: ../src/main/sword.cc:677
-msgid "SWORD is shutdown"
-msgstr "Arrêt de SWORD"
-
 #: ../src/main/sword.cc:1413
 msgid "Daily devotional was requested, but there are none installed."
 msgstr ""
@@ -2064,162 +2019,162 @@ msgstr "La liste de modules est à régénérer"
 msgid "Search finished"
 msgstr "Recherche terminée "
 
-#: ../src/main/main.c:96
+#: ../src/main/main.c:95
 msgid "Xiphos does not understand more than one argument."
 msgstr "Xiphos n'accepte pas plus d'un argument."
 
-#: ../src/main/prayerlists.cc:70
+#: ../src/main/prayerlists.cc:71
 msgid "January"
 msgstr "Janvier"
 
-#: ../src/main/prayerlists.cc:71
+#: ../src/main/prayerlists.cc:72
 msgid "February"
 msgstr "Février"
 
-#: ../src/main/prayerlists.cc:72
+#: ../src/main/prayerlists.cc:73
 msgid "March"
 msgstr "Mars"
 
-#: ../src/main/prayerlists.cc:73
+#: ../src/main/prayerlists.cc:74
 msgid "April"
 msgstr "Avril"
 
-#: ../src/main/prayerlists.cc:74
+#: ../src/main/prayerlists.cc:75
 msgid "May"
 msgstr "Mai"
 
-#: ../src/main/prayerlists.cc:75
+#: ../src/main/prayerlists.cc:76
 msgid "June"
 msgstr "Juin"
 
-#: ../src/main/prayerlists.cc:76
+#: ../src/main/prayerlists.cc:77
 msgid "July"
 msgstr "Juillet"
 
-#: ../src/main/prayerlists.cc:77
+#: ../src/main/prayerlists.cc:78
 msgid "August"
 msgstr "Août"
 
-#: ../src/main/prayerlists.cc:78
+#: ../src/main/prayerlists.cc:79
 msgid "September"
 msgstr "Septembre"
 
-#: ../src/main/prayerlists.cc:79
+#: ../src/main/prayerlists.cc:80
 msgid "October"
 msgstr "Octobre"
 
-#: ../src/main/prayerlists.cc:80
+#: ../src/main/prayerlists.cc:81
 msgid "November"
 msgstr "Novembre"
 
-#: ../src/main/prayerlists.cc:81
+#: ../src/main/prayerlists.cc:82
 msgid "December"
 msgstr "Décembre"
 
-#: ../src/main/prayerlists.cc:120 ../src/main/sword_treekey.cc:334
+#: ../src/main/prayerlists.cc:121 ../src/main/sword_treekey.cc:335
 msgid "Growth"
 msgstr "Croissance spirituelle"
 
-#: ../src/main/prayerlists.cc:121 ../src/main/sword_treekey.cc:335
+#: ../src/main/prayerlists.cc:122 ../src/main/sword_treekey.cc:336
 msgid "<b>For Growth</b><br>"
 msgstr "<b>Pour la croissance spirituelle</b><br>"
 
-#: ../src/main/prayerlists.cc:122 ../src/main/prayerlists.cc:376
-#: ../src/main/sword_treekey.cc:336
+#: ../src/main/prayerlists.cc:123 ../src/main/prayerlists.cc:377
+#: ../src/main/sword_treekey.cc:337
 msgid "Salvation"
 msgstr "Salut"
 
-#: ../src/main/prayerlists.cc:123 ../src/main/sword_treekey.cc:337
+#: ../src/main/prayerlists.cc:124 ../src/main/sword_treekey.cc:338
 msgid "<b>For Salvation</b><br>"
 msgstr "<b>Pour le salut</b><br>"
 
-#: ../src/main/prayerlists.cc:124 ../src/main/prayerlists.cc:380
-#: ../src/main/sword_treekey.cc:338
+#: ../src/main/prayerlists.cc:125 ../src/main/prayerlists.cc:381
+#: ../src/main/sword_treekey.cc:339
 msgid "Health"
 msgstr "Guérison"
 
-#: ../src/main/prayerlists.cc:125 ../src/main/sword_treekey.cc:339
+#: ../src/main/prayerlists.cc:126 ../src/main/sword_treekey.cc:340
 msgid "<b>For Health</b><br>"
 msgstr "<b>Pour la guérison</b><br>"
 
-#: ../src/main/prayerlists.cc:126
+#: ../src/main/prayerlists.cc:127
 msgid "Misc"
 msgstr "Divers"
 
-#: ../src/main/prayerlists.cc:127 ../src/main/sword_treekey.cc:341
+#: ../src/main/prayerlists.cc:128 ../src/main/sword_treekey.cc:342
 msgid "<b>Miscellaneous</b><br>"
 msgstr "<b>Divers</b><br>"
 
-#: ../src/main/prayerlists.cc:135
+#: ../src/main/prayerlists.cc:136
 msgid "Point x"
 msgstr "Point x"
 
-#: ../src/main/prayerlists.cc:136
+#: ../src/main/prayerlists.cc:137
 msgid "<b>(x)</b><br>"
 msgstr "<b>(x)</b><br>"
 
-#: ../src/main/prayerlists.cc:137
+#: ../src/main/prayerlists.cc:138
 msgid "Point y"
 msgstr "Point y"
 
-#: ../src/main/prayerlists.cc:138
+#: ../src/main/prayerlists.cc:139
 msgid "<b>(y)</b><br>"
 msgstr "<b>(y)</b><br>"
 
-#: ../src/main/prayerlists.cc:139
+#: ../src/main/prayerlists.cc:140
 msgid "Point z"
 msgstr "Point z"
 
-#: ../src/main/prayerlists.cc:140
+#: ../src/main/prayerlists.cc:141
 msgid "<b>(z)</b><br>"
 msgstr "<b>(z)</b><br>"
 
-#: ../src/main/prayerlists.cc:148
+#: ../src/main/prayerlists.cc:149
 msgid "Minor Topic 1"
 msgstr "Section 1"
 
-#: ../src/main/prayerlists.cc:149
+#: ../src/main/prayerlists.cc:150
 msgid "<b>Subtopic 1</b><br>"
 msgstr "<b>Section 1</b><br>"
 
-#: ../src/main/prayerlists.cc:151
+#: ../src/main/prayerlists.cc:152
 msgid "Minor Topic 2"
 msgstr "Section 2"
 
-#: ../src/main/prayerlists.cc:152
+#: ../src/main/prayerlists.cc:153
 msgid "<b>Subtopic 2</b><br>"
 msgstr "<b>Section 2</b><br>"
 
-#: ../src/main/prayerlists.cc:154
+#: ../src/main/prayerlists.cc:155
 msgid "Minor Topic 3"
 msgstr "Section 3"
 
-#: ../src/main/prayerlists.cc:155
+#: ../src/main/prayerlists.cc:156
 msgid "<b>Subtopic 3</b><br>"
 msgstr "<b>Section 3</b><br>"
 
-#: ../src/main/prayerlists.cc:157
+#: ../src/main/prayerlists.cc:158
 msgid "Minor Topic 4"
 msgstr "Section 4"
 
-#: ../src/main/prayerlists.cc:158
+#: ../src/main/prayerlists.cc:159
 msgid "<b>Subtopic 4</b><br>"
 msgstr "<b>Section 4</b><br>"
 
-#: ../src/main/prayerlists.cc:237
+#: ../src/main/prayerlists.cc:238
 msgid "Name for new prayer list or journal"
 msgstr "Nom de la nouvelle liste de prières ou du journal"
 
-#: ../src/main/prayerlists.cc:239 ../src/main/prayerlists.cc:335
-#: ../src/main/sword_treekey.cc:376
+#: ../src/main/prayerlists.cc:240 ../src/main/prayerlists.cc:336
+#: ../src/main/sword_treekey.cc:377
 msgid "MyPrayerList"
 msgstr "MaListe"
 
-#: ../src/main/prayerlists.cc:268
+#: ../src/main/prayerlists.cc:269
 msgid "Xiphos finds that prayer list already."
 msgstr "Cette liste de prières ou note existe déjà."
 
-#: ../src/main/prayerlists.cc:281
+#: ../src/main/prayerlists.cc:282
 #, c-format
 msgid ""
 "Xiphos cannot create module's path:\n"
@@ -2228,11 +2183,11 @@ msgstr ""
 "Impossible de créer le chemin d'accès au module:\n"
 "%s"
 
-#: ../src/main/prayerlists.cc:321
+#: ../src/main/prayerlists.cc:322
 msgid "A basic prayer list. \\par\\par Module created by Xiphos."
 msgstr "\\par\\par Liste simple\\par\\par Module crée par Xiphos"
 
-#: ../src/main/prayerlists.cc:336
+#: ../src/main/prayerlists.cc:337
 msgid ""
 "<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</"
 "b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"
@@ -2241,60 +2196,60 @@ msgstr ""
 "3<br><br><b>Assemblées:</"
 "b><br>Participants<br>Fonctionnement<br>Missions<br><br><br>"
 
-#: ../src/main/prayerlists.cc:362
+#: ../src/main/prayerlists.cc:363
 msgid "A subject-based prayer list. \\par\\par Module created by Xiphos."
 msgstr "\\par\\par Liste ordonnée par sujets\\par\\par Module crée par Xiphos"
 
-#: ../src/main/prayerlists.cc:377
+#: ../src/main/prayerlists.cc:378
 msgid "Bob<br>Sam<br>Sue<br>John<br>"
 msgstr "Personne 1<br>Personne 2<br>Personne 3<br>"
 
-#: ../src/main/prayerlists.cc:378
+#: ../src/main/prayerlists.cc:379
 msgid "Spiritual Growth"
 msgstr "Croissance spirituelle"
 
-#: ../src/main/prayerlists.cc:379
+#: ../src/main/prayerlists.cc:380
 msgid "Mike<br>Steve<br>"
 msgstr "Personne 1<br>Personne 2<br>Personne 3<br>"
 
-#: ../src/main/prayerlists.cc:381
+#: ../src/main/prayerlists.cc:382
 msgid "Sue<br>John<br>"
 msgstr "Personne 1<br>Personne 2<br>Personne 3<br>"
 
-#: ../src/main/prayerlists.cc:407
+#: ../src/main/prayerlists.cc:408
 msgid "A monthly prayer list. \\par\\par Module created by Xiphos."
 msgstr "\\par\\par Suivi mensuel\\par\\par Module crée par Xiphos"
 
-#: ../src/main/prayerlists.cc:458
+#: ../src/main/prayerlists.cc:459
 msgid "A daily journal. \\par\\par Module created by Xiphos."
 msgstr "\\par\\par Journal quotidien\\par\\par Module crée par Xiphos"
 
-#: ../src/main/prayerlists.cc:522
+#: ../src/main/prayerlists.cc:523
 msgid "An outlined topic (e.g. sermon). \\par\\par Module created by Xiphos."
 msgstr ""
 "\\par\\par Note structurée (ex sermon)\\par\\par Module crée par Xiphos"
 
-#: ../src/main/prayerlists.cc:536
+#: ../src/main/prayerlists.cc:537
 msgid "Major Topic A"
 msgstr "Sujet majeur A"
 
-#: ../src/main/prayerlists.cc:537
+#: ../src/main/prayerlists.cc:538
 msgid "<b>Major Topic A</b><br>"
 msgstr "<b>Sujet majeur A</b><br>"
 
-#: ../src/main/prayerlists.cc:539
+#: ../src/main/prayerlists.cc:540
 msgid "Major Topic B"
 msgstr "Sujet majeur B"
 
-#: ../src/main/prayerlists.cc:540
+#: ../src/main/prayerlists.cc:541
 msgid "<b>Major Topic B</b><br>"
 msgstr "<b>Sujet majeur B</b><br>"
 
-#: ../src/main/prayerlists.cc:542
+#: ../src/main/prayerlists.cc:543
 msgid "Major Topic C"
 msgstr "Sujet majeur C"
 
-#: ../src/main/prayerlists.cc:543
+#: ../src/main/prayerlists.cc:544
 msgid "<b>Major Topic C</b><br>"
 msgstr "<b>Sujet majeur C</b><br>"
 
@@ -2376,21 +2331,21 @@ msgstr "Exemple de liste de modules"
 msgid "wrong type, root node != %s\n"
 msgstr "Erreur de type, root node != %s\n"
 
-#: ../src/main/sword_treekey.cc:374
+#: ../src/main/sword_treekey.cc:375
 msgid "Name for new prayer list"
 msgstr "Nom de la nouvelle liste de prières"
 
-#: ../src/main/sword_treekey.cc:395
+#: ../src/main/sword_treekey.cc:396
 #, c-format
 msgid "can not create path\n"
 msgstr "impossible de créer path\n"
 
-#: ../src/main/sword_treekey.cc:398
+#: ../src/main/sword_treekey.cc:399
 #, c-format
 msgid "Prayer list already exist\n"
 msgstr "La liste de prières existe déjà\n"
 
-#: ../src/main/sword_treekey.cc:419
+#: ../src/main/sword_treekey.cc:420
 msgid "\\par\\par My prayer list \\par\\par Module created in Xiphos"
 msgstr "\\par\\par Liste simple\\par\\par Module crée par Xiphos"
 
@@ -2446,34 +2401,6 @@ msgstr "Revenir à "
 #: ../src/main/search_sidebar.cc:101
 msgid "matches"
 msgstr "réponses"
-
-#: ../src/main/lists.cc:156
-msgid "Number of Text modules"
-msgstr "Nombre de modules de textes bibliques"
-
-#: ../src/main/lists.cc:157
-msgid "Number of Commentary modules"
-msgstr "Nombre de modules de commentaires"
-
-#: ../src/main/lists.cc:158
-msgid "Number of Dict/lex modules"
-msgstr "Nombre de modules de dictionnaires"
-
-#: ../src/main/lists.cc:159
-msgid "Number of Book modules"
-msgstr "Nombre de modules de livres"
-
-#: ../src/main/lists.cc:160
-msgid "Number of Percomm modules"
-msgstr "Nombre de modules de commentaires personnels"
-
-#: ../src/main/lists.cc:161
-msgid "Number of Devotion modules"
-msgstr "Nombre de modules de calendrier biblique"
-
-#: ../src/main/lists.cc:163
-msgid "Number of Prayer modules"
-msgstr "Nombre de modules de prières"
 
 #: ../src/main/parallel_view.cc:731 ../src/main/parallel_view.cc:983
 msgid "view context"
@@ -2594,15 +2521,6 @@ msgstr ""
 #: ../src/main/settings.c:169
 msgid "can not create "
 msgstr "impossible de créer "
-
-#. must be first run
-#: ../src/main/settings.c:190
-msgid ""
-"\n"
-"First Run: need to create settings!\n"
-msgstr ""
-"\n"
-"Première exécution : les paramètres sont à définir!\n"
 
 #: ../src/main/settings.c:201
 msgid ""
@@ -3800,1353 +3718,3 @@ msgstr "ex Mat-Jean; Ap4"
 msgid "for "
 msgstr "Expression"
 
-#~ msgid "can not create  .sword"
-#~ msgstr "impossible de créer .sword"
-
-#~ msgid "can not create  .sword/mods.d"
-#~ msgstr "impossible de créer ~/.sword/mods.d"
-
-#~ msgid "can not create  .sword/modules"
-#~ msgstr "impossible de créer ~/.sword/modules"
-
-#~ msgid "Select Local Source"
-#~ msgstr "Dépôt local"
-
-#~ msgid "Open file..."
-#~ msgstr "Ouvrir un fichier..."
-
-#~ msgid "Save file as..."
-#~ msgstr "Enregistrer sous..."
-
-#~ msgid "_About the SWORD Project ..."
-#~ msgstr "À propos du SWORD Project ..."
-
-#~ msgid "Select the modules you want"
-#~ msgstr "Ajouter des modules ici"
-
-#~ msgid "<b>Font Miscellaneous</b>"
-#~ msgstr "<b>Divers polices</b>"
-
-#~ msgid "Bible text"
-#~ msgstr "Texte biblique"
-
-#~ msgid "Open in dialog"
-#~ msgstr "Ouvrir dans une fenêtre"
-
-#~ msgid ""
-#~ "For multi-word search, use\n"
-#~ "+FirstWord +SecondWord"
-#~ msgstr ""
-#~ "Pour une requête combinée multi-mots,\n"
-#~ "saisir : +Mot1 +Mot2"
-
-#~ msgid "_Verse Style"
-#~ msgstr "Style verset"
-
-#~ msgid "It will be lost permanently!"
-#~ msgstr "Il sera définitivement perdu!"
-
-#~ msgid ""
-#~ "There is currently no program set as your\n"
-#~ "handler for \"sword://\" and similar URLs.\n"
-#~ "Would you like Xiphos to install itself\n"
-#~ "as the program to handle these URLs?"
-#~ msgstr ""
-#~ "Aucun programme n'est actuellement déclaré \n"
-#~ "pour gérer les URL de type \"sword://\" ou similaire. Désirez-vous que "
-#~ "Xiphos soit défini comme\n"
-#~ "le gestionnaire par défaut de ce type d'URL?"
-
-#~ msgid "Html"
-#~ msgstr "Html"
-
-#~ msgid "Avestan"
-#~ msgstr "Avestan"
-
-#~ msgid "Afrikaans"
-#~ msgstr "Afrikaans"
-
-#~ msgid "Bislama"
-#~ msgstr "Bislama"
-
-#~ msgid "Coptic"
-#~ msgstr "ⲙⲛⲧⲣⲙⲛⲕⲏⲙⲉ"
-
-#~ msgid "Gothic"
-#~ msgstr "𐌲𐌿𐍄𐌹𐍃𐌺𐌰 𐍂𐌰𐌶𐌳𐌰"
-
-#~ msgid "Interlingua"
-#~ msgstr "Interlingua"
-
-#~ msgid "Interlingue"
-#~ msgstr "Interlingue"
-
-#~ msgid "Kalaallisut"
-#~ msgstr "Kalaallisut"
-
-#~ msgid "Burmese"
-#~ msgstr "မြန်မာစာ"
-
-#~ msgid "Uma"
-#~ msgstr "Uma"
-
-#~ msgid "Kinyarwanda"
-#~ msgstr "Kinyarwanda"
-
-#~ msgid "Twi"
-#~ msgstr "Twi"
-
-#~ msgid "Alemannisch"
-#~ msgstr "Alemannisch"
-
-#~ msgid "Shuar"
-#~ msgstr "Shuar"
-
-#~ msgid "Subject (not so simple)"
-#~ msgstr "Sujet précis"
-
-#~ msgid "Yearly List"
-#~ msgstr "Liste annuelle"
-
-#~ msgid "Afar"
-#~ msgstr "Qafár af"
-
-#~ msgid "Abkhazian"
-#~ msgstr "Аҧсуа"
-
-#~ msgid "Amharic"
-#~ msgstr "አማርኛ"
-
-#~ msgid "English, Old (ca.450-1100)"
-#~ msgstr "English, Old (ca.450-1100)"
-
-#~ msgid "Arabic"
-#~ msgstr "العربية"
-
-#~ msgid "Assamese"
-#~ msgstr "অসমীয়া"
-
-#~ msgid "Aymara"
-#~ msgstr "Aymar aru"
-
-#~ msgid "Azerbaijani"
-#~ msgstr "Azərbaycan"
-
-#~ msgid "Bashkir"
-#~ msgstr "Башҡорт"
-
-#~ msgid "Belarusian"
-#~ msgstr "Беларуская"
-
-#~ msgid "Bulgarian"
-#~ msgstr "Български"
-
-#~ msgid "Bihari"
-#~ msgstr "अङ्गिका"
-
-#~ msgid "Bengali"
-#~ msgstr "বাংলা"
-
-#~ msgid "Tibetan"
-#~ msgstr "བོད་ཡིག"
-
-#~ msgid "Breton"
-#~ msgstr "Brezhoneg"
-
-#~ msgid "Bosnian"
-#~ msgstr "Bosanski"
-
-#~ msgid "Catalan"
-#~ msgstr "Català"
-
-#~ msgid "Chechen"
-#~ msgstr "Нохчийн мотт"
-
-#~ msgid "Cebuano"
-#~ msgstr "Cebuano"
-
-#~ msgid "Chamorro"
-#~ msgstr "Chamoru"
-
-#~ msgid "Corsican"
-#~ msgstr "Lingua corsa"
-
-#~ msgid "Czech"
-#~ msgstr "Česky"
-
-#~ msgid "Church Slavic"
-#~ msgstr "Ѩзыкъ словѣньскъ"
-
-#~ msgid "Chuvash"
-#~ msgstr "Чăвашла"
-
-#~ msgid "Welsh"
-#~ msgstr "Cymraeg"
-
-#~ msgid "Danish"
-#~ msgstr "Dansk"
-
-#~ msgid "German"
-#~ msgstr "Deutsch"
-
-#~ msgid "Dzongkha"
-#~ msgstr "རྫོང་ཁ"
-
-#~ msgid "Greek, Modern (1453-)"
-#~ msgstr "Ελληνικά  (1453-)"
-
-#~ msgid "English"
-#~ msgstr "English"
-
-#~ msgid "American English"
-#~ msgstr "American English"
-
-#~ msgid "English, Middle (1100-1500)"
-#~ msgstr "English, Middle (1100-1500)"
-
-#~ msgid "Esperanto"
-#~ msgstr "Esperanto"
-
-#~ msgid "Spanish"
-#~ msgstr "Español"
-
-#~ msgid "Estonian"
-#~ msgstr "Eesti"
-
-#~ msgid "Basque"
-#~ msgstr "Euskara"
-
-#~ msgid "Farsi (Persian)"
-#~ msgstr "فارسی"
-
-#~ msgid "Finnish"
-#~ msgstr "Suomi"
-
-#~ msgid "Fijian"
-#~ msgstr "Na vosa vaka-Viti"
-
-#~ msgid "Faroese"
-#~ msgstr "Føroyskt"
-
-#~ msgid "French"
-#~ msgstr "Français"
-
-#~ msgid "Frisian"
-#~ msgstr "Frysk"
-
-#~ msgid "Irish"
-#~ msgstr "Gaeilge"
-
-#~ msgid "Gaelic (Scots)"
-#~ msgstr "Gàidhlig"
-
-#~ msgid "Gallegan"
-#~ msgstr "galego"
-
-#~ msgid "Guarani"
-#~ msgstr "avañe'ẽ"
-
-#~ msgid "Gujarati"
-#~ msgstr "ગુજરાતી"
-
-#~ msgid "Manx"
-#~ msgstr "Gaelg"
-
-#~ msgid "Greek, Ancient (to 1453)"
-#~ msgstr "Κοινὴ Ἑλληνική"
-
-#~ msgid "Hebrew"
-#~ msgstr "עברית"
-
-#~ msgid "Hawaiian"
-#~ msgstr "Hawai`i"
-
-#~ msgid "Hindi"
-#~ msgstr "हिन्दी"
-
-#~ msgid "Hiri Motu"
-#~ msgstr "Hiri Motu"
-
-#~ msgid "Croatian"
-#~ msgstr "Hrvatski"
-
-#~ msgid "French, Haitian Creole"
-#~ msgstr "Krèyol ayisyen"
-
-#~ msgid "Hungarian"
-#~ msgstr "Magyar"
-
-#~ msgid "Armenian"
-#~ msgstr "Հայերեն"
-
-#~ msgid "Herero"
-#~ msgstr "Otjiherero"
-
-#~ msgid "Indonesian"
-#~ msgstr "Bahasa Indonesia"
-
-#~ msgid "Inupiaq"
-#~ msgstr "Iñupiak"
-
-#~ msgid "Icelandic"
-#~ msgstr "Íslenska"
-
-#~ msgid "Italian"
-#~ msgstr "Italiano"
-
-#~ msgid "Inuktitut"
-#~ msgstr "ᐃᓄᒃᑎᑐᑦ"
-
-#~ msgid "Japanese"
-#~ msgstr "日本語"
-
-#~ msgid "Georgian"
-#~ msgstr "ქართული"
-
-#~ msgid "Kekchi"
-#~ msgstr "Q'eqchi'"
-
-#~ msgid "Kikuyu"
-#~ msgstr "Gĩkũyũ"
-
-#~ msgid "Kuanyama"
-#~ msgstr "Oshikwanyama"
-
-#~ msgid "Kazakh"
-#~ msgstr "Қазақша"
-
-#~ msgid "Khmer"
-#~ msgstr "ភាសាខ្មែរ"
-
-#~ msgid "Kannada"
-#~ msgstr "ಕನ್ನಡ"
-
-#~ msgid "Korean"
-#~ msgstr "한국어"
-
-#~ msgid "Kashmiri"
-#~ msgstr "कश्मीरी - (كشميري)"
-
-#~ msgid "Kurdish"
-#~ msgstr "Kurdî / كوردي"
-
-#~ msgid "Komi"
-#~ msgstr "Коми"
-
-#~ msgid "Cornish"
-#~ msgstr "Kernewek"
-
-#~ msgid "Kirghiz"
-#~ msgstr "Հայերեն"
-
-#~ msgid "Latin"
-#~ msgstr "Latina"
-
-#~ msgid "Letzeburgesch"
-#~ msgstr "Lëtzebuergesch"
-
-#~ msgid "Lingala"
-#~ msgstr "Lingála"
-
-#~ msgid "Lao"
-#~ msgstr "ລາວ"
-
-#~ msgid "Lithuanian"
-#~ msgstr "Lietuvių"
-
-#~ msgid "Latvian"
-#~ msgstr "Latviešu"
-
-#~ msgid "Malagasy"
-#~ msgstr "Malagasy"
-
-#~ msgid "Marshall"
-#~ msgstr "Kajin M̧ajeļ"
-
-#~ msgid "Maori"
-#~ msgstr "Māori"
-
-#~ msgid "Macedonian"
-#~ msgstr "Македонски"
-
-#~ msgid "Malayalam"
-#~ msgstr "മലയാളം"
-
-#~ msgid "Mongolian"
-#~ msgstr "Монгол"
-
-#~ msgid "Moldavian"
-#~ msgstr "лимба молдовеняскэ"
-
-#~ msgid "Marathi"
-#~ msgstr "मराठी"
-
-#~ msgid "Maltese"
-#~ msgstr "Malti"
-
-#~ msgid "Nauru"
-#~ msgstr "Ekakairũ Naoero"
-
-#~ msgid "Norwegian Bokml"
-#~ msgstr "Bokmål"
-
-#~ msgid "Ndebele, North"
-#~ msgstr "Sindebele"
-
-#~ msgid "Low German; Low Saxon"
-#~ msgstr "Plattdüütsch"
-
-#~ msgid "Nepali"
-#~ msgstr "नेपाली"
-
-#~ msgid "Ndonga"
-#~ msgstr "Oshiwambo"
-
-#~ msgid "Dutch"
-#~ msgstr "Nederlands"
-
-#~ msgid "Norwegian Nynorsk"
-#~ msgstr "Nynorsk"
-
-#~ msgid "Norwegian"
-#~ msgstr "Norsk (bokmål)"
-
-#~ msgid "Ndebele, South"
-#~ msgstr "Nrebele"
-
-#~ msgid "Navajo"
-#~ msgstr "Diné bizaad"
-
-#~ msgid "Chichewa; Nyanja"
-#~ msgstr "Chicheŵa"
-
-#~ msgid "Occitan (post 1500); Proven"
-#~ msgstr "Occitan"
-
-#~ msgid "Oromo"
-#~ msgstr "Oromoo"
-
-#~ msgid "Oriya"
-#~ msgstr "ଓଡ଼ିଆ"
-
-#~ msgid "Ossetian; Ossetic"
-#~ msgstr "Иронау"
-
-#~ msgid "Panjabi"
-#~ msgstr "ਪੰਜਾਬੀ پنجابی"
-
-#~ msgid "Papiamento"
-#~ msgstr "Papiamentu"
-
-#~ msgid "Pali"
-#~ msgstr "Pāḷi"
-
-#~ msgid "Polish"
-#~ msgstr "Polski"
-
-#~ msgid "Potawatomi"
-#~ msgstr "Potawatomi"
-
-#~ msgid "Pushto"
-#~ msgstr "پښتو"
-
-#~ msgid "Portuguese"
-#~ msgstr "Português"
-
-#~ msgid "Quechua"
-#~ msgstr "Quechua"
-
-#~ msgid "Raeto-Romance"
-#~ msgstr "rumantsch"
-
-#~ msgid "Rundi"
-#~ msgstr "Kirundi"
-
-#~ msgid "Romanian"
-#~ msgstr "Română"
-
-#~ msgid "Russian"
-#~ msgstr "Русский"
-
-#~ msgid "Sanskrit"
-#~ msgstr "संस्कृत"
-
-#~ msgid "Sardinian"
-#~ msgstr "Sardu"
-
-#~ msgid "Scots"
-#~ msgstr "Scots"
-
-#~ msgid "Sindhi"
-#~ msgstr "سنڌي"
-
-#~ msgid "Northern Sami"
-#~ msgstr "Sámegiella"
-
-#~ msgid "Sango"
-#~ msgstr "Sängö"
-
-#~ msgid "Sinhalese"
-#~ msgstr "සිංහල"
-
-#~ msgid "Slovak"
-#~ msgstr "Slovenčina"
-
-#~ msgid "Slovenian"
-#~ msgstr "Slovenščina"
-
-#~ msgid "Samoan"
-#~ msgstr "Gagana Samoa"
-
-#~ msgid "Shona"
-#~ msgstr "chiShona"
-
-#~ msgid "Somali"
-#~ msgstr "Soomaaliga"
-
-#~ msgid "Albanian"
-#~ msgstr "Shqip"
-
-#~ msgid "Serbian"
-#~ msgstr "srpski jezik"
-
-#~ msgid "Swati"
-#~ msgstr "siSwati"
-
-#~ msgid "Sotho, Southern"
-#~ msgstr "Sesotho"
-
-#~ msgid "Sundanese"
-#~ msgstr "Basa Sunda"
-
-#~ msgid "Swedish"
-#~ msgstr "Svenska"
-
-#~ msgid "Swahili"
-#~ msgstr "Kiswahili"
-
-#~ msgid "Syriac"
-#~ msgstr "ܣܘܪܝܝܐ"
-
-#~ msgid "Tamil"
-#~ msgstr "தமிழ்"
-
-#~ msgid "Telugu"
-#~ msgstr "తెలుగు"
-
-#~ msgid "Tajik"
-#~ msgstr "تاجیکی"
-
-#~ msgid "Thai"
-#~ msgstr "ไทย"
-
-#~ msgid "Turkmen"
-#~ msgstr "Türkmen"
-
-#~ msgid "Tagalog"
-#~ msgstr "Tagalog"
-
-#~ msgid "Klingon"
-#~ msgstr "tlhIngan Hol"
-
-#~ msgid "Tswana"
-#~ msgstr "Setswana"
-
-#~ msgid "Turkish"
-#~ msgstr "Türkçe"
-
-#~ msgid "Tsonga"
-#~ msgstr "Xitsonga"
-
-#~ msgid "Tatar"
-#~ msgstr "Татарча"
-
-#~ msgid "Tahitian"
-#~ msgstr "Reo Mā`ohi"
-
-#~ msgid "Uighur"
-#~ msgstr "ئۇيغۇرچە"
-
-#~ msgid "Ukrainian"
-#~ msgstr "Українська"
-
-#~ msgid "Urdu"
-#~ msgstr "اُردو"
-
-#~ msgid "Uzbek"
-#~ msgstr "O'zbek"
-
-#~ msgid "Vietnamese"
-#~ msgstr "Tiếng Việt"
-
-#~ msgid "Volapk"
-#~ msgstr "Volapük"
-
-#~ msgid "Wolof"
-#~ msgstr "Wolof"
-
-#~ msgid "Xhosa"
-#~ msgstr "isiXhosa"
-
-#~ msgid "Bavarian"
-#~ msgstr "Boarisch"
-
-#~ msgid "Itz"
-#~ msgstr "Itza'"
-
-#~ msgid "Lombard"
-#~ msgstr "Lumbaart"
-
-#~ msgid "Tok Pisin"
-#~ msgstr "Tok Pisin"
-
-#~ msgid "Romani, Vlax"
-#~ msgstr "Romani, Vlax"
-
-#~ msgid "Sranan"
-#~ msgstr "nengre"
-
-#~ msgid "Yiddish"
-#~ msgstr "ייִדיש"
-
-#~ msgid "Zhuang"
-#~ msgstr "Saw cuengh"
-
-#~ msgid "Chinese"
-#~ msgstr "中文"
-
-#~ msgid "Zulu"
-#~ msgstr "isiZulu"
-
-#~ msgid "<b>January</b><br>"
-#~ msgstr "<b>Janvier</b><br>"
-
-#~ msgid "<b>Febuary</b><br>"
-#~ msgstr "<b>Février</b><br>"
-
-#~ msgid "<b>June</b><br>"
-#~ msgstr "<b>Juin</b><br>"
-
-#~ msgid "<b>July</b><br>"
-#~ msgstr "<b>Juillet</b><br>"
-
-#~ msgid "<b>August</b><br>"
-#~ msgstr "<b>Août</b><br>"
-
-#~ msgid "<b>October</b><br>"
-#~ msgstr "<b>Octobre</b><br>"
-
-#~ msgid "<b>November</b><br>"
-#~ msgstr "<b>Novembre</b><br>"
-
-#~ msgid "<b>December</b><br>"
-#~ msgstr "<b>Décembre</b><br>"
-
-#~ msgid "Go to parent"
-#~ msgstr "Niveau supérieur"
-
-#~ msgid "Go to first child"
-#~ msgstr "Niveau inférieur"
-
-#~ msgid "Save using the PersistStream interface"
-#~ msgstr "Enregistre à l'aide de l'interface PersistStream"
-
-#~ msgid "Open (PersistFile)"
-#~ msgstr "Ouvrir (PersistFile)"
-
-#~ msgid "Open using the PersistFile interface"
-#~ msgstr "Ouvre à l'aide de l'interface PersistFile"
-
-#~ msgid "Save (PersistFile)"
-#~ msgstr "Enregistrer (PersistFile)"
-
-#~ msgid "Save using the PersistFile interface"
-#~ msgstr "Enregistre à l'aide de l'interface PersistFile"
-
-#~ msgid "Show Tabs"
-#~ msgstr "Onglets"
-
-#~ msgid "Old"
-#~ msgstr "Ancien"
-
-#~ msgid "New"
-#~ msgstr "Nouveau"
-
-#~ msgid "The"
-#~ msgstr "Le"
-
-#~ msgid "module is locked."
-#~ msgstr "Ce module est verrouillé"
-
-#~ msgid "module has been unlocked."
-#~ msgstr "module a été déverrouillé"
-
-#~ msgid "If you have the cipher key you can"
-#~ msgstr "Si vous avez la clé de décodage vous pouvez"
-
-#~ msgid "click here"
-#~ msgstr "cliquer ici"
-
-#~ msgid "to unlock the module"
-#~ msgstr "pour déverrouiller ce module"
-
-#~ msgid "You will need to restart Xiphos after you unlock it."
-#~ msgstr "Il est nécessaire de redémarrer Xiphos après l'avoir déverrouillé"
-
-#~ msgid "You need to restart Xiphos to view it"
-#~ msgstr "Il est nécessaire de redémarrer Xiphos pour le lire"
-
-#~ msgid ""
-#~ "Unlink of old configuration failed:\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Impossible de supprimer le lien vers l'ancienne configuration:\n"
-#~ "%s"
-
-#~ msgid "Go to %s"
-#~ msgstr "Aller à %s"
-
-#~ msgid ""
-#~ " indexer result:\n"
-#~ "\n"
-#~ msgstr ""
-#~ " résultat de l'indexation:\n"
-#~ "\n"
-
-#~ msgid "URL:"
-#~ msgstr "URL :"
-
-#~ msgid "The Setup Druid was cancelled."
-#~ msgstr "Arrêt de l'assistant d'installation"
-
-#~ msgid "Do you wish to set preferences now?"
-#~ msgstr "Souhaitez-vous initialiser les préférences maintenant?"
-
-#~ msgid "Remove/Archive"
-#~ msgstr "Supprimer"
-
-#~ msgid "Remove failed"
-#~ msgstr "La suppression a échoué"
-
-#~ msgid "Welcome To Xiphos"
-#~ msgstr "Bienvenue dans Xiphos"
-
-#~ msgid "Setup"
-#~ msgstr "Installation"
-
-#~ msgid "Xiphos Configuration - Page 1 of 5"
-#~ msgstr "Configuration de Xiphos - Page 1/5"
-
-#~ msgid ""
-#~ "Since this is the first time you have run Xiphos, this assistant will "
-#~ "guide you through the initial setup by asking a few simple questions.\n"
-#~ "\n"
-#~ "Once you have completed these steps, you can always change the settings "
-#~ "later by using the Preferences dialog."
-#~ msgstr ""
-#~ "Vous utilisez Xiphos pour la première fois. Cet assistant va vous aider à "
-#~ "initialiser votre configuration selon vos préférences.\n"
-#~ "\n"
-#~ "Vous pourrez ultérieurement modifier cette configuration à votre gré en "
-#~ "utilisant le menu Préférences de Xiphos."
-
-#~ msgid "Xiphos Configuration - Page 2 of 5"
-#~ msgstr "Configuration de Xiphos - Page 2/5"
-
-#~ msgid "These values have been detected automatically"
-#~ msgstr "L'assistant a détecté les données suivantes :"
-
-#~ msgid "Your home directory:"
-#~ msgstr "Votre répertoire personnel :"
-
-#~ msgid "Sword"
-#~ msgstr "Sword"
-
-#~ msgid "SWORD version"
-#~ msgstr "La version de Sword :"
-
-#~ msgid "SWORD Directory:"
-#~ msgstr "Le répertoire de Sword :"
-
-#~ msgid "Number of Bible text modules:"
-#~ msgstr "Nombre de modules de textes bibliques :"
-
-#~ msgid "Number of Commentary modules:"
-#~ msgstr "Nombre de modules de commentaires :"
-
-#~ msgid "Number of Dictionary/Lexicon modules:"
-#~ msgstr "Nombre de modules de dictionnaires et lexiques :"
-
-#~ msgid "Xiphos Configuration - Page 3 of 5"
-#~ msgstr "Configuration de Xiphos - Page 3/5"
-
-#~ msgid "Settings to use when Xiphos starts"
-#~ msgstr "Options à utiliser au démarrage de Xiphos"
-
-#~ msgid "Use Pinned Tabs"
-#~ msgstr "Lie les onglets entre eux"
-
-#~ msgid "Read Aloud (`festival --server')"
-#~ msgstr "Synthèse vocale  (`festival --server')"
-
-#~ msgid "Show Verse Numbers"
-#~ msgstr "Affiche les numéros de verset"
-
-#~ msgid "Highlight Current Verse"
-#~ msgstr "Colore le verset en cours"
-
-#~ msgid "Show Bible tabs"
-#~ msgstr "Onglets des textes bibliques"
-
-#~ msgid "Show Bible window"
-#~ msgstr "Afficher les textes bibliques"
-
-#~ msgid "Show upper workbook"
-#~ msgstr "Afficher les commentaires"
-
-#~ msgid "Show Dictionary/Lexicon tabs"
-#~ msgstr "Onglets des dictionnaires et lexiques"
-
-#~ msgid "Show lower workbook"
-#~ msgstr "Afficher les dictionnaires et lexiques"
-
-#~ msgid "Show book tabs"
-#~ msgstr "Onglets des livres"
-
-#~ msgid "Xiphos Configuration - Page 4 of 5"
-#~ msgstr "Configuration de Xiphos - Page 4/5"
-
-#~ msgid "Choose default SWORD modules"
-#~ msgstr "Choix des modules Sword par défaut"
-
-#~ msgid "Text Module       "
-#~ msgstr "Bible principale     "
-
-#~ msgid "Generic book"
-#~ msgstr "Livres"
-
-# src/gs_preferences_dlg.c
-#~ msgid ""
-#~ "Which Greek Lexicon to display in Dictionary/Lexicon Window when a link "
-#~ "or word is clicked"
-#~ msgstr ""
-#~ "Lexique grec à afficher dans la fenêtre dictionnaire quand un lien ou un "
-#~ "mot est sélectionné"
-
-# src/gs_preferences_dlg.c
-#~ msgid ""
-#~ "Which Hebrew Lexicon to display in Dictionary/Lexicon Window when a link "
-#~ "or word is clicked"
-#~ msgstr ""
-#~ "Lexique hébreu à afficher dans la fenêtre dictionnaire quand un lien ou "
-#~ "un mot est sélectionné"
-
-#~ msgid "Xiphos Configuration - Page 5 of 5"
-#~ msgstr "Configuration de Xiphos - Page 5/5"
-
-#~ msgid ""
-#~ "Thank you for using Xiphos.\n"
-#~ "\n"
-#~ "Click Apply to close this dialog and run Xiphos."
-#~ msgstr ""
-#~ "Merci d'utiliser Xiphos.\n"
-#~ "\n"
-#~ "Cliquez sur Appliquer pour fermer cette boîte de dialogue\n"
-#~ "et exécuter Xiphos."
-
-#~ msgid "-untitled-"
-#~ msgstr "-sans titre-"
-
-#~ msgid "Add reference Link"
-#~ msgstr "Ajouter un lien de référence"
-
-#~ msgid "Link text: "
-#~ msgstr "Texte du lien :"
-
-#~ msgid "Export"
-#~ msgstr "Exporter"
-
-#~ msgid "Cut"
-#~ msgstr "Couper"
-
-#~ msgid "Paste"
-#~ msgstr "Coller"
-
-#~ msgid "Spell Check"
-#~ msgstr "Vérifier l'orthographe..."
-
-#~ msgid "Undo"
-#~ msgstr "Annuler"
-
-#~ msgid "Replace"
-#~ msgstr "Remplacer.."
-
-#~ msgid "Link..."
-#~ msgstr "Lien..."
-
-#~ msgid "Link"
-#~ msgstr "Lien"
-
-#~ msgid "Paragraph"
-#~ msgstr "Paragraphe"
-
-#~ msgid "Page"
-#~ msgstr "Page"
-
-#~ msgid "Rule"
-#~ msgstr "Règle"
-
-#~ msgid "Cell"
-#~ msgstr "Cellule"
-
-#~ msgid "Paste Quotation"
-#~ msgstr "Coller comme citation"
-
-#~ msgid "Insert Link"
-#~ msgstr "Insérer un lien"
-
-#~ msgid "Remove Link"
-#~ msgstr "Supprimer le lien"
-
-#~ msgid "Style"
-#~ msgstr "Style"
-
-#~ msgid "Text Style..."
-#~ msgstr "Style du texte..."
-
-#~ msgid "Paragraph Style..."
-#~ msgstr "Style de paragraphe..."
-
-#~ msgid "Link Style..."
-#~ msgstr "Format du Lien..."
-
-#~ msgid "Rule Style..."
-#~ msgstr "Style de ligne horizontale..."
-
-#~ msgid "Image Style..."
-#~ msgstr "Style de l'image..."
-
-#~ msgid "Cell Style..."
-#~ msgstr "Style de cellule..."
-
-#~ msgid "Table Style..."
-#~ msgstr "Style de tableau..."
-
-#~ msgid "Page Style..."
-#~ msgstr "Style de page..."
-
-#~ msgid "Table insert"
-#~ msgstr "Insère un tableau"
-
-#~ msgid "Row above"
-#~ msgstr "Ligne en-dessus"
-
-#~ msgid "Row below"
-#~ msgstr "Ligne en-dessous"
-
-#~ msgid "Column before"
-#~ msgstr "Colonne avant"
-
-#~ msgid "Column after"
-#~ msgstr "Colonne après"
-
-#~ msgid "Table delete"
-#~ msgstr "Supprimer le tableau"
-
-#~ msgid "Row"
-#~ msgstr "Ligne"
-
-#~ msgid "Column"
-#~ msgstr "Colonne"
-
-#~ msgid "Cell contents"
-#~ msgstr "Contenu de cellule"
-
-#~ msgid "Check Word Spelling..."
-#~ msgstr "Vérifier l'orthographe"
-
-#~ msgid "Add Word to"
-#~ msgstr "Ajouter un mot à"
-
-# src/gs_preferences_dlg.c
-#~ msgid "Add Word to Dictionary"
-#~ msgstr "Ajouter au dictionnaire"
-
-#~ msgid "Ignore Misspelled Word"
-#~ msgstr "Ignorer les mots mal orthographiés"
-
-#~ msgid "Input Methods"
-#~ msgstr "_Méthodes de saisie"
-
-#~ msgid "Replace confirmation"
-#~ msgstr "Confirmer le remplacement"
-
-#~ msgid "Replace _All"
-#~ msgstr "Remplacer tout"
-
-#~ msgid "_Next"
-#~ msgstr "_Suivant"
-
-#~ msgid "_Replace"
-#~ msgstr "_Remplacer"
-
-#~ msgid "Search _backward"
-#~ msgstr "Rechercher en arrière"
-
-#~ msgid "Case _sensitive"
-#~ msgstr "Respecter la casse"
-
-#~ msgid "Replace:"
-#~ msgstr "Remplace :"
-
-#~ msgid "With:"
-#~ msgstr "Avec :"
-
-#~ msgid "_Backward"
-#~ msgstr "_Arrière"
-
-#~ msgid "_Regular Expression"
-#~ msgstr "Expression _rationnelle"
-
-#~ msgid "No misspelled word found"
-#~ msgstr "Orthographe correcte"
-
-#~ msgid "Spell checker"
-#~ msgstr "Vérifier l'orthographe"
-
-#~ msgid "Current _Languages"
-#~ msgstr "_Langages disponibles"
-
-#~ msgid "Insert image"
-#~ msgstr "Insère une image"
-
-#~ msgid "Insert"
-#~ msgstr "Insère"
-
-#~ msgid "Delete Note?"
-#~ msgstr "Supprimer la note?"
-
-#~ msgid "Create a new file"
-#~ msgstr "Créer un document"
-
-#~ msgid "Delete note"
-#~ msgstr "Supprimer la note"
-
-#~ msgid "Print window contents"
-#~ msgstr "Imprimer la note"
-
-#~ msgid "Find in this note"
-#~ msgstr "Rechercher"
-
-#~ msgid "Find and Replace"
-#~ msgstr "Rechercher et remplacer"
-
-#~ msgid "Insert image at cursor"
-#~ msgstr "Insérer une image"
-
-#~ msgid "Insert link"
-#~ msgstr "Insère un lien"
-
-#~ msgid "Insert link at cursor"
-#~ msgstr "Insérer un lien"
-
-#~ msgid "Insert rule"
-#~ msgstr "Insérer une règle"
-
-#~ msgid "Insert rule at cursor"
-#~ msgstr "Insérer une ligne horizontale"
-
-#~ msgid "Insert table"
-#~ msgstr "Insère un tableau"
-
-#~ msgid "Insert table at cursor"
-#~ msgstr "Insérer un tableau"
-
-#~ msgid "Check spelling in this note"
-#~ msgstr "Vérifier l'orthographe"
-
-#~ msgid "Preformat"
-#~ msgstr "Préformaté"
-
-#~ msgid "Bulleted List"
-#~ msgstr "Liste à puces"
-
-#~ msgid "Numbered List"
-#~ msgstr "Liste numérotée"
-
-#~ msgid "Alphabetical List"
-#~ msgstr "Liste alphabétique"
-
-#~ msgid "Header 1"
-#~ msgstr "En-tête 1"
-
-#~ msgid "Header 2"
-#~ msgstr "En-tête 2"
-
-#~ msgid "Header 3"
-#~ msgstr "En-tête 3"
-
-#~ msgid "Header 4"
-#~ msgstr "En-tête 4"
-
-#~ msgid "Header 5"
-#~ msgstr "En-tête 5"
-
-#~ msgid "Header 6"
-#~ msgstr "En-tête 6"
-
-#~ msgid "Address"
-#~ msgstr "Adresse"
-
-#~ msgid "Left align"
-#~ msgstr "Aligner à gauche"
-
-#~ msgid "Left justifies the paragraphs"
-#~ msgstr "Aligne le paragraphe sur la gauche"
-
-#~ msgid "Center"
-#~ msgstr "Centré"
-
-#~ msgid "Center justifies the paragraphs"
-#~ msgstr "Aligner au centre"
-
-#~ msgid "Right align"
-#~ msgstr "Aligné à droite"
-
-#~ msgid "Right justifies the paragraphs"
-#~ msgstr "Aligne le paragraphe sur la droite"
-
-#~ msgid "Typewriter"
-#~ msgstr "Courrier"
-
-#~ msgid "Toggle typewriter font style"
-#~ msgstr "Police à chasse fixe"
-
-#~ msgid "Bold"
-#~ msgstr "Gras"
-
-#~ msgid "Makes the text bold"
-#~ msgstr "Gras"
-
-#~ msgid "Makes the text italic"
-#~ msgstr "Italique"
-
-#~ msgid "Underlines the text"
-#~ msgstr "Souligne le texte"
-
-#~ msgid "Strikeout"
-#~ msgstr "Barré"
-
-#~ msgid "Strikes out the text"
-#~ msgstr "Barre le texte"
-
-#~ msgid "Unindent"
-#~ msgstr "Annuler l'indentation"
-
-#~ msgid "Indents the paragraphs less"
-#~ msgstr "Réduire l'indentation"
-
-#~ msgid "Indents the paragraphs more"
-#~ msgstr "Augmenter l'indentation"
-
-#~ msgid "Save Note"
-#~ msgstr "Enregistrer note"
-
-#~ msgid "Delete Note"
-#~ msgstr "Supprimer note"
-
-#~ msgid "Genesis"
-#~ msgstr "Genèse"
-
-#~ msgid "Verse numbers"
-#~ msgstr "Numéro de verset"
-
-#, fuzzy
-#~ msgid "Greed Lexicon"
-#~ msgstr "Lexique grec"
-
-#~ msgid "Include Footnotes"
-#~ msgstr "Afficher les notes de bas de page"
-
-#~ msgid "Include Morphological Tags"
-#~ msgstr "Afficher les étiquettes morphologiques"
-
-#~ msgid "Include Strong's Numbers"
-#~ msgstr "Afficher les nombres de Strong"
-
-#~ msgid "The modules are out of sync!"
-#~ msgstr "La synchronisation des modules est perdue!"
-
-#~ msgid "SWORD"
-#~ msgstr "SWORD"
-
-#~ msgid "WARNING:"
-#~ msgstr "ATTENTION :"
-
-#~ msgid "Refresh remote sources"
-#~ msgstr "Mise à jour de la liste des modules disponibles"
-
-#~ msgid "Upgrade or install selected modules"
-#~ msgstr "Installation ou mise à jour des modules sélectionnés"
-
-#~ msgid "Remove selected module(s)"
-#~ msgstr "Suppression des modules sélectionnés"
-
-#~ msgid "Pick the background color"
-#~ msgstr "Récupère la couleur du fond"
-
-#~ msgid "Pick the Bible text color"
-#~ msgstr "Choisissez la couleur du texte biblique"
-
-#~ msgid "Pick the current Verse color"
-#~ msgstr "Récupère la couleur du verset courant"
-
-#~ msgid "Strong's Numbers & Morphological Tags"
-#~ msgstr "Nombres de Strong et étiquettes morphologiques"
-
-#~ msgid "Bible Text Window"
-#~ msgstr "Volet d'affichage du texte biblique"
-
-#~ msgid "Zero is the base font size. Increase or decrease the size."
-#~ msgstr ""
-#~ "Zéro est la taille de base de la police. Incrémentez ou décrémentez-là."
-
-#~ msgid "Use Defaults When Starting Xiphos"
-#~ msgstr "Utiliser les options par défaut au démarrage de Xiphos"
-
-#~ msgid "Yes, use defaults"
-#~ msgstr "Oui, utiliser les options par défaut"
-
-# src/gs_preferences_dlg.c
-#~ msgid "No, use settings saved the last time I used Xiphos"
-#~ msgstr "Non, utiliser les options de la session précédente de Xiphos"
-
-#~ msgid "Bible texts"
-#~ msgstr "Textes bibliques"
-
-#~ msgid "Display Bible text window"
-#~ msgstr "Volet d'affichage du texte biblique"
-
-#~ msgid "Show Daily Devotion if you have a Devotion module"
-#~ msgstr ""
-#~ "Affiche la lecture du jour si un module de lectures quotidiennes est "
-#~ "installé"
-
-#~ msgid "Show the splash screen when Xiphos starts"
-#~ msgstr "Affiche l'écran de bienvenue au démarrage de Xiphos"
-
-#~ msgid "Show Dictionary / Lexicon"
-#~ msgstr "Affichage des Dictionnaires/Lexiques"
-
-# src/gs_preferences_dlg.c
-#~ msgid "In Sidebar viewer"
-#~ msgstr "Dans l'aperçu de la barre latérale"
-
-# src/gs_preferences_dlg.c
-#~ msgid "In Dictionary/Lexicon window"
-#~ msgstr "Dans le volet dictionnaires et lexiques"
-
-# src/gs_preferences_dlg.c
-#~ msgid ""
-#~ "Which Greek Lexicon to display in Dictionary/Lexicon window when a link "
-#~ "or word is clicked"
-#~ msgstr ""
-#~ "Lexique grec à afficher dans la fenêtre dictionnaire ou lexique quand un "
-#~ "lien ou un mot est cliqué"
-
-# src/gs_preferences_dlg.c
-#~ msgid "Hebrew Lexicon Viewer"
-#~ msgstr "Affichage du lexique hébreu"
-
-# src/gs_preferences_dlg.c
-#~ msgid ""
-#~ "Which Hebrew Lexicon to display in viewer when a link or word is clicked"
-#~ msgstr ""
-#~ "Lexique hébreu à afficher dans le visualiseur quand un lien ou un mot est "
-#~ "cliqué"
-
-# src/gs_preferences_dlg.c
-#~ msgid "Greek Lexicon Viewer"
-#~ msgstr "Affichage du lexique grec"
-
-# src/gs_preferences_dlg.c
-#~ msgid ""
-#~ "Which Greek Lexicon to display in viewer when a link or word is clicked"
-#~ msgstr ""
-#~ "Lexique grec à afficher dans le visualiseur quand un lien ou un mot est "
-#~ "cliqué"
-
-#~ msgid "Scope"
-#~ msgstr "Profondeur"
-
-#~ msgid "examples"
-#~ msgstr "Exemples"
-
-#~ msgid "Clear"
-#~ msgstr "Effacer"
-
-#~ msgid "Found"
-#~ msgstr "Résultat"
-
-#~ msgid "Goto verse"
-#~ msgstr "Aller au verset..."
-
-#~ msgid "Go to verse in free form lookup and add verse to history"
-#~ msgstr "Aller au verset saisi et ajouter le verset à l'historique"
-
-#~ msgid "Lower Workbook"
-#~ msgstr "Dictionnaires et lexiques"
-
-#~ msgid "Commentaries, Personal Comments and StudyPad"
-#~ msgstr ""
-#~ "Volet d'affichage des commentaires, notes personnelles et livres d'étude"
-
-#~ msgid "Lower workbook"
-#~ msgstr "Dictionnaires / Lexiques"
-
-#~ msgid "Dictionary/Lexicon and generic books"
-#~ msgstr "Volet d'affichage des dictionnaires"
-
-#~ msgid "Toggle sync with main window"
-#~ msgstr "Synchroniser avec la fenêtre principale"
-
-#~ msgid "Load current key"
-#~ msgstr "Charge la clé indiquée"
-
-#~ msgid "Match Case"
-#~ msgstr "Respecter la casse"
-
-#~ msgid "Word found"
-#~ msgstr "Mot trouvé"
-
-#~ msgid "Replace with"
-#~ msgstr "Remplacer par"
-
-#~ msgid "Replace misspelled word with suggested word"
-#~ msgstr "Remplacer le mot mal orthographié par le mot suggéré"
-
-#~ msgid "Replace word"
-#~ msgstr "Remplacer le mot"
-
-#~ msgid "Leave word as is"
-#~ msgstr "Laisser le mot tel quel"
-
-#~ msgid "Skip Word"
-#~ msgstr "Ignorer ce mot"
-
-#~ msgid "Accept word for this session but do not add to dictionary"
-#~ msgstr ""
-#~ "Accepter le mot dans cette session mais ne pas l'ajouter au dictionnaire"
-
-#~ msgid "Accept word"
-#~ msgstr "Accepter le mot"
-
-# src/gs_preferences_dlg.c
-#~ msgid "Insert word into Personal Dictionary"
-#~ msgstr "Insérer le mot dans le dictionnaire personnel"
-
-#~ msgid "Information Viewer"
-#~ msgstr "Information"
-
-#~ msgid "_Viewer"
-#~ msgstr "_Visualiseur"
