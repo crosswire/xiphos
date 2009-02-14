@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-08 20:39+0000\n"
+"POT-Creation-Date: 2009-02-14 20:09+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -648,15 +648,15 @@ msgstr ""
 
 #: ../src/gnome2/commentary.c:481 ../src/gnome2/treekey-editor.c:127
 #: ../src/gnome2/treekey-editor.c:186 ../src/gnome2/treekey-editor.c:272
-#: ../src/main/prayerlists.cc:238 ../src/main/sword_treekey.cc:375
+#: ../src/main/prayerlists.cc:239 ../src/main/sword_treekey.cc:376
 msgid "Name: "
 msgstr ""
 
-#: ../src/gnome2/commentary.c:491 ../src/main/prayerlists.cc:252
+#: ../src/gnome2/commentary.c:491 ../src/main/prayerlists.cc:253
 msgid "Module names must contain [A-Za-z0-9_] only."
 msgstr ""
 
-#: ../src/gnome2/commentary.c:498 ../src/main/prayerlists.cc:259
+#: ../src/gnome2/commentary.c:498 ../src/main/prayerlists.cc:260
 msgid "Xiphos already knows a module by that name."
 msgstr ""
 
@@ -794,7 +794,7 @@ msgstr ""
 msgid "Journals and prayer lists cannot be indexed."
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:453 ../src/gnome2/mod_mgr.c:2626
+#: ../src/gnome2/mod_mgr.c:453 ../src/gnome2/mod_mgr.c:2632
 #: ../ui/module-manager.glade.h:18
 msgid "Install"
 msgstr ""
@@ -820,7 +820,7 @@ msgstr ""
 msgid "%s failed"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:465 ../src/gnome2/mod_mgr.c:1148
+#: ../src/gnome2/mod_mgr.c:465 ../src/gnome2/mod_mgr.c:1149
 msgid "Finished"
 msgstr ""
 
@@ -900,8 +900,8 @@ msgid "Uninstalled"
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:970 ../src/gnome2/sidebar.c:421
-#: ../src/gnome2/utilities.c:544 ../src/main/prayerlists.cc:236
-#: ../src/main/sword_treekey.cc:373 ../src/main/sword_treekey.cc:417
+#: ../src/gnome2/utilities.c:544 ../src/main/prayerlists.cc:237
+#: ../src/main/sword_treekey.cc:374 ../src/main/sword_treekey.cc:418
 #: ../src/main/sidebar.cc:1079 ../src/main/sidebar.cc:1081
 msgid "Prayer List/Journal"
 msgstr ""
@@ -914,131 +914,131 @@ msgstr ""
 msgid "Remote not found"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1274
+#: ../src/gnome2/mod_mgr.c:1275
 msgid "Module Name"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1293
+#: ../src/gnome2/mod_mgr.c:1294
 msgid "A checkmark means this module is already installed"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1315
+#: ../src/gnome2/mod_mgr.c:1316
 msgid "Click the box to work on this module"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1316
+#: ../src/gnome2/mod_mgr.c:1317
 msgid "Click the box to select this module for install/update"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1335
+#: ../src/gnome2/mod_mgr.c:1336
 msgid "Installed"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1345
+#: ../src/gnome2/mod_mgr.c:1346
 msgid ""
 "The index icon means you have built an optimized ('lucene') index for this "
 "module for fast searching (see the Maintenance pane for this function)"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1363
+#: ../src/gnome2/mod_mgr.c:1364
 msgid ""
 "The lock icon means this module is encrypted, and requires that you purchase "
 "an unlock key from the content owner"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1385
+#: ../src/gnome2/mod_mgr.c:1386
 msgid ""
 "The refresh icon means the Installed module is older than the newer "
 "Available module: You should update the module"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1397
+#: ../src/gnome2/mod_mgr.c:1398
 msgid "Available"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1406
+#: ../src/gnome2/mod_mgr.c:1407
 msgid "Size"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1415
+#: ../src/gnome2/mod_mgr.c:1416
 msgid "Description"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1449 ../src/gnome2/mod_mgr.c:1529
+#: ../src/gnome2/mod_mgr.c:1450 ../src/gnome2/mod_mgr.c:1530
 msgid "Configure"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1483
+#: ../src/gnome2/mod_mgr.c:1484
 msgid "Type"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1490
+#: ../src/gnome2/mod_mgr.c:1491
 msgid "Caption"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1498
+#: ../src/gnome2/mod_mgr.c:1499
 msgid "Source"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1506
+#: ../src/gnome2/mod_mgr.c:1507
 msgid "Directory"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1527
+#: ../src/gnome2/mod_mgr.c:1528
 msgid "Sources"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1533 ../src/gnome2/sidebar.c:1450
+#: ../src/gnome2/mod_mgr.c:1534 ../src/gnome2/sidebar.c:1450
 #: ../src/gnome2/preferences_dialog.c:1792
 msgid "Modules"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1535
+#: ../src/gnome2/mod_mgr.c:1536
 msgid "Install/Update"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1537
+#: ../src/gnome2/mod_mgr.c:1538
 msgid "Maintenance"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1746
+#: ../src/gnome2/mod_mgr.c:1747
 msgid "Please Refresh"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1747
+#: ../src/gnome2/mod_mgr.c:1748
 msgid "Your module list is not up to date!"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2211 ../src/gnome2/mod_mgr.c:2415
+#: ../src/gnome2/mod_mgr.c:2214 ../src/gnome2/mod_mgr.c:2421
 msgid "Remove the selected source"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2268
+#: ../src/gnome2/mod_mgr.c:2271
 msgid "Enter a remote source"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2272
+#: ../src/gnome2/mod_mgr.c:2275
 msgid "Caption:"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2273
+#: ../src/gnome2/mod_mgr.c:2276
 msgid "Type:"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2274
+#: ../src/gnome2/mod_mgr.c:2277
 msgid "Host:"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2275
+#: ../src/gnome2/mod_mgr.c:2278
 msgid "Directory:"
 msgstr ""
 
 #. this can happen at most once
-#: ../src/gnome2/mod_mgr.c:2300
+#: ../src/gnome2/mod_mgr.c:2303
 msgid "A source by that name already exists."
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2412
+#: ../src/gnome2/mod_mgr.c:2418
 msgid "Delete a remote source"
 msgstr ""
 
@@ -1056,14 +1056,6 @@ msgstr ""
 
 #: ../src/gnome2/html.c:985
 msgid "Failed to print the document"
-msgstr ""
-
-#: ../src/gnome2/main_window.c:778 ../src/main/sword.cc:638
-msgid "Starting"
-msgstr ""
-
-#: ../src/gnome2/main_window.c:779
-msgid "Building Xiphos interface"
 msgstr ""
 
 #: ../src/gnome2/main_window.c:785
@@ -1407,23 +1399,6 @@ msgstr ""
 msgid "not loaded"
 msgstr ""
 
-#: ../src/gnome2/xiphos.c:87
-msgid "Initiating Xiphos"
-msgstr ""
-
-#: ../src/gnome2/xiphos.c:146 ../src/gnome2/splash.c:633
-msgid "Displaying Xiphos"
-msgstr ""
-
-#. main_prayer_list_new("2008");
-#: ../src/gnome2/xiphos.c:217
-msgid "done"
-msgstr ""
-
-#: ../src/gnome2/xiphos.c:295
-msgid "Xiphos is shutdown"
-msgstr ""
-
 #: ../src/gnome2/bookmarks_menu.c:473
 msgid "Folder name: "
 msgstr ""
@@ -1625,6 +1600,10 @@ msgstr ""
 
 #: ../src/gnome2/splash.c:616
 msgid "Starting Sword"
+msgstr ""
+
+#: ../src/gnome2/splash.c:633
+msgid "Displaying Xiphos"
 msgstr ""
 
 #: ../src/gnome2/main_menu.c:970
@@ -1911,30 +1890,6 @@ msgid ""
 "language abbreviation file."
 msgstr ""
 
-#: ../src/main/sword.cc:639
-msgid "Initiating SWORD"
-msgstr ""
-
-#: ../src/main/sword.cc:640
-msgid "path to sword"
-msgstr ""
-
-#: ../src/main/sword.cc:641
-msgid "System locale is"
-msgstr ""
-
-#: ../src/main/sword.cc:642
-msgid "SWORD locale is"
-msgstr ""
-
-#: ../src/main/sword.cc:644
-msgid "Checking for SWORD Modules"
-msgstr ""
-
-#: ../src/main/sword.cc:677
-msgid "SWORD is shutdown"
-msgstr ""
-
 #: ../src/main/sword.cc:1413
 msgid "Daily devotional was requested, but there are none installed."
 msgstr ""
@@ -1977,231 +1932,231 @@ msgstr ""
 msgid "Search finished"
 msgstr ""
 
-#: ../src/main/main.c:96
+#: ../src/main/main.c:95
 msgid "Xiphos does not understand more than one argument."
 msgstr ""
 
-#: ../src/main/prayerlists.cc:70
+#: ../src/main/prayerlists.cc:71
 msgid "January"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:71
+#: ../src/main/prayerlists.cc:72
 msgid "February"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:72
+#: ../src/main/prayerlists.cc:73
 msgid "March"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:73
+#: ../src/main/prayerlists.cc:74
 msgid "April"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:74
+#: ../src/main/prayerlists.cc:75
 msgid "May"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:75
+#: ../src/main/prayerlists.cc:76
 msgid "June"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:76
+#: ../src/main/prayerlists.cc:77
 msgid "July"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:77
+#: ../src/main/prayerlists.cc:78
 msgid "August"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:78
+#: ../src/main/prayerlists.cc:79
 msgid "September"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:79
+#: ../src/main/prayerlists.cc:80
 msgid "October"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:80
+#: ../src/main/prayerlists.cc:81
 msgid "November"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:81
+#: ../src/main/prayerlists.cc:82
 msgid "December"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:120 ../src/main/sword_treekey.cc:334
+#: ../src/main/prayerlists.cc:121 ../src/main/sword_treekey.cc:335
 msgid "Growth"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:121 ../src/main/sword_treekey.cc:335
+#: ../src/main/prayerlists.cc:122 ../src/main/sword_treekey.cc:336
 msgid "<b>For Growth</b><br>"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:122 ../src/main/prayerlists.cc:376
-#: ../src/main/sword_treekey.cc:336
+#: ../src/main/prayerlists.cc:123 ../src/main/prayerlists.cc:377
+#: ../src/main/sword_treekey.cc:337
 msgid "Salvation"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:123 ../src/main/sword_treekey.cc:337
+#: ../src/main/prayerlists.cc:124 ../src/main/sword_treekey.cc:338
 msgid "<b>For Salvation</b><br>"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:124 ../src/main/prayerlists.cc:380
-#: ../src/main/sword_treekey.cc:338
+#: ../src/main/prayerlists.cc:125 ../src/main/prayerlists.cc:381
+#: ../src/main/sword_treekey.cc:339
 msgid "Health"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:125 ../src/main/sword_treekey.cc:339
+#: ../src/main/prayerlists.cc:126 ../src/main/sword_treekey.cc:340
 msgid "<b>For Health</b><br>"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:126
+#: ../src/main/prayerlists.cc:127
 msgid "Misc"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:127 ../src/main/sword_treekey.cc:341
+#: ../src/main/prayerlists.cc:128 ../src/main/sword_treekey.cc:342
 msgid "<b>Miscellaneous</b><br>"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:135
+#: ../src/main/prayerlists.cc:136
 msgid "Point x"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:136
+#: ../src/main/prayerlists.cc:137
 msgid "<b>(x)</b><br>"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:137
+#: ../src/main/prayerlists.cc:138
 msgid "Point y"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:138
+#: ../src/main/prayerlists.cc:139
 msgid "<b>(y)</b><br>"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:139
+#: ../src/main/prayerlists.cc:140
 msgid "Point z"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:140
+#: ../src/main/prayerlists.cc:141
 msgid "<b>(z)</b><br>"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:148
+#: ../src/main/prayerlists.cc:149
 msgid "Minor Topic 1"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:149
+#: ../src/main/prayerlists.cc:150
 msgid "<b>Subtopic 1</b><br>"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:151
+#: ../src/main/prayerlists.cc:152
 msgid "Minor Topic 2"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:152
+#: ../src/main/prayerlists.cc:153
 msgid "<b>Subtopic 2</b><br>"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:154
+#: ../src/main/prayerlists.cc:155
 msgid "Minor Topic 3"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:155
+#: ../src/main/prayerlists.cc:156
 msgid "<b>Subtopic 3</b><br>"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:157
+#: ../src/main/prayerlists.cc:158
 msgid "Minor Topic 4"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:158
+#: ../src/main/prayerlists.cc:159
 msgid "<b>Subtopic 4</b><br>"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:237
+#: ../src/main/prayerlists.cc:238
 msgid "Name for new prayer list or journal"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:239 ../src/main/prayerlists.cc:335
-#: ../src/main/sword_treekey.cc:376
+#: ../src/main/prayerlists.cc:240 ../src/main/prayerlists.cc:336
+#: ../src/main/sword_treekey.cc:377
 msgid "MyPrayerList"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:268
+#: ../src/main/prayerlists.cc:269
 msgid "Xiphos finds that prayer list already."
 msgstr ""
 
-#: ../src/main/prayerlists.cc:281
+#: ../src/main/prayerlists.cc:282
 #, c-format
 msgid ""
 "Xiphos cannot create module's path:\n"
 "%s"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:321
+#: ../src/main/prayerlists.cc:322
 msgid "A basic prayer list. \\par\\par Module created by Xiphos."
 msgstr ""
 
-#: ../src/main/prayerlists.cc:336
+#: ../src/main/prayerlists.cc:337
 msgid ""
 "<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</"
 "b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:362
+#: ../src/main/prayerlists.cc:363
 msgid "A subject-based prayer list. \\par\\par Module created by Xiphos."
 msgstr ""
 
-#: ../src/main/prayerlists.cc:377
+#: ../src/main/prayerlists.cc:378
 msgid "Bob<br>Sam<br>Sue<br>John<br>"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:378
+#: ../src/main/prayerlists.cc:379
 msgid "Spiritual Growth"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:379
+#: ../src/main/prayerlists.cc:380
 msgid "Mike<br>Steve<br>"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:381
+#: ../src/main/prayerlists.cc:382
 msgid "Sue<br>John<br>"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:407
+#: ../src/main/prayerlists.cc:408
 msgid "A monthly prayer list. \\par\\par Module created by Xiphos."
 msgstr ""
 
-#: ../src/main/prayerlists.cc:458
+#: ../src/main/prayerlists.cc:459
 msgid "A daily journal. \\par\\par Module created by Xiphos."
 msgstr ""
 
-#: ../src/main/prayerlists.cc:522
+#: ../src/main/prayerlists.cc:523
 msgid "An outlined topic (e.g. sermon). \\par\\par Module created by Xiphos."
 msgstr ""
 
-#: ../src/main/prayerlists.cc:536
+#: ../src/main/prayerlists.cc:537
 msgid "Major Topic A"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:537
+#: ../src/main/prayerlists.cc:538
 msgid "<b>Major Topic A</b><br>"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:539
+#: ../src/main/prayerlists.cc:540
 msgid "Major Topic B"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:540
+#: ../src/main/prayerlists.cc:541
 msgid "<b>Major Topic B</b><br>"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:542
+#: ../src/main/prayerlists.cc:543
 msgid "Major Topic C"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:543
+#: ../src/main/prayerlists.cc:544
 msgid "<b>Major Topic C</b><br>"
 msgstr ""
 
@@ -2283,21 +2238,21 @@ msgstr ""
 msgid "wrong type, root node != %s\n"
 msgstr ""
 
-#: ../src/main/sword_treekey.cc:374
+#: ../src/main/sword_treekey.cc:375
 msgid "Name for new prayer list"
 msgstr ""
 
-#: ../src/main/sword_treekey.cc:395
+#: ../src/main/sword_treekey.cc:396
 #, c-format
 msgid "can not create path\n"
 msgstr ""
 
-#: ../src/main/sword_treekey.cc:398
+#: ../src/main/sword_treekey.cc:399
 #, c-format
 msgid "Prayer list already exist\n"
 msgstr ""
 
-#: ../src/main/sword_treekey.cc:419
+#: ../src/main/sword_treekey.cc:420
 msgid "\\par\\par My prayer list \\par\\par Module created in Xiphos"
 msgstr ""
 
@@ -2348,34 +2303,6 @@ msgstr ""
 
 #: ../src/main/search_sidebar.cc:101
 msgid "matches"
-msgstr ""
-
-#: ../src/main/lists.cc:156
-msgid "Number of Text modules"
-msgstr ""
-
-#: ../src/main/lists.cc:157
-msgid "Number of Commentary modules"
-msgstr ""
-
-#: ../src/main/lists.cc:158
-msgid "Number of Dict/lex modules"
-msgstr ""
-
-#: ../src/main/lists.cc:159
-msgid "Number of Book modules"
-msgstr ""
-
-#: ../src/main/lists.cc:160
-msgid "Number of Percomm modules"
-msgstr ""
-
-#: ../src/main/lists.cc:161
-msgid "Number of Devotion modules"
-msgstr ""
-
-#: ../src/main/lists.cc:163
-msgid "Number of Prayer modules"
 msgstr ""
 
 #: ../src/main/parallel_view.cc:731 ../src/main/parallel_view.cc:983
@@ -2471,13 +2398,6 @@ msgstr ""
 #: ../src/main/settings.c:153 ../src/main/settings.c:161
 #: ../src/main/settings.c:169
 msgid "can not create "
-msgstr ""
-
-#. must be first run
-#: ../src/main/settings.c:190
-msgid ""
-"\n"
-"First Run: need to create settings!\n"
 msgstr ""
 
 #: ../src/main/settings.c:201
