@@ -845,6 +845,10 @@ void _connect_signals(NAVBAR_VERSEKEY navbar, EDITOR * editor)
  *   GtkWidget *
  */
 
+#if !defined(HAVE_LIBGTK_X11_2_0) && !defined(HAVE_LIBGTK_WIN32_2_0)
+#define	gtk_widget_set_tooltip_text(x,y)	/* too old for this tooltip support */
+#endif /* !HAVE_LIBGTK_X11_2_0 && !HAVE_LIBGTK_WIN32_2_0 */
+
 GtkWidget *gui_navbar_versekey_editor_new(EDITOR * editor)
 {
 	gchar *glade_file;
@@ -868,7 +872,8 @@ GtkWidget *gui_navbar_versekey_editor_new(EDITOR * editor)
 		
 	editor->navbar.button_sync = glade_xml_get_widget(gxml, "togglebutton_sync");
 	gtk_widget_show(editor->navbar.button_sync); 
-	
+	gtk_widget_set_tooltip_text(editor->navbar.button_sync,
+				    _("Synchronize this window from main window"));
 	
 	editor->navbar.button_book_up = glade_xml_get_widget(gxml, "eventbox9");
 	editor->navbar.button_book_down = glade_xml_get_widget(gxml, "eventbox6");

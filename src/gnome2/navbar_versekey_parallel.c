@@ -770,6 +770,10 @@ void _connect_signals(NAVBAR_VERSEKEY navbar)
  *   GtkWidget *
  */
 
+#if !defined(HAVE_LIBGTK_X11_2_0) && !defined(HAVE_LIBGTK_WIN32_2_0)
+#define	gtk_widget_set_tooltip_text(x,y)	/* too old for this tooltip support */
+#endif /* !HAVE_LIBGTK_X11_2_0 && !HAVE_LIBGTK_WIN32_2_0 */
+
 GtkWidget *gui_navbar_versekey_parallel_new(void)
 {
 	gchar *glade_file;
@@ -793,6 +797,8 @@ GtkWidget *gui_navbar_versekey_parallel_new(void)
 		
 	navbar_parallel.button_sync = glade_xml_get_widget(gxml, "togglebutton_sync");
 	gtk_widget_show(navbar_parallel.button_sync); 
+	gtk_widget_set_tooltip_text(navbar_parallel.button_sync,
+				    _("Synchronize this window from main window"));
 	gtk_widget_hide(navbar_parallel.button_history_back); 
 	gtk_widget_hide(navbar_parallel.button_history_next); 
 	gtk_widget_hide(navbar_parallel.button_history_menu); 	
