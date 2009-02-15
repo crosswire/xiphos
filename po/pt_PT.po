@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-08 20:39+0000\n"
-"PO-Revision-Date: 2009-02-08 20:39+0000\n"
+"POT-Creation-Date: 2009-02-15 15:54+0000\n"
+"PO-Revision-Date: 2009-02-15 15:22+0000\n"
 "Last-Translator: Ari Constâncio <ari.constancio@gmail.com>\n"
 "Language-Team: Xiphos Project\n"
 "MIME-Version: 1.0\n"
@@ -125,8 +125,8 @@ msgstr "Se não guardar, as alterações serão definitivamente perdidas."
 #. 1
 #. 2
 #: ../src/editor/html-editor.c:1986 ../src/gnome2/bibletext.c:1150
-#: ../src/gnome2/gbs.c:918 ../src/gnome2/bibletext_dialog.c:2136
-#: ../src/gnome2/dictlex.c:1086 ../src/gnome2/commentary_dialog.c:1672
+#: ../src/gnome2/gbs.c:918 ../src/gnome2/bibletext_dialog.c:2142
+#: ../src/gnome2/dictlex.c:1086 ../src/gnome2/commentary_dialog.c:1689
 #: ../src/gnome2/commentary.c:1019 ../src/gnome2/studypad.c:98
 msgid "File"
 msgstr "Ficheiro"
@@ -187,15 +187,15 @@ msgid "Save StudyPad File"
 msgstr "Guardar Ficheiro StudyPad"
 
 #: ../src/gnome2/bibletext.c:925 ../src/gnome2/gbs.c:706
-#: ../src/gnome2/bibletext_dialog.c:1909 ../src/gnome2/dictlex.c:890
-#: ../src/gnome2/commentary_dialog.c:1437 ../src/gnome2/commentary.c:793
+#: ../src/gnome2/bibletext_dialog.c:1915 ../src/gnome2/dictlex.c:890
+#: ../src/gnome2/commentary_dialog.c:1454 ../src/gnome2/commentary.c:793
 msgid "item1"
 msgstr "item1"
 
 #. 0
 #: ../src/gnome2/bibletext.c:935 ../src/gnome2/gbs.c:716
-#: ../src/gnome2/bibletext_dialog.c:1919 ../src/gnome2/dictlex.c:900
-#: ../src/gnome2/commentary_dialog.c:1447 ../src/gnome2/commentary.c:803
+#: ../src/gnome2/bibletext_dialog.c:1925 ../src/gnome2/dictlex.c:900
+#: ../src/gnome2/commentary_dialog.c:1464 ../src/gnome2/commentary.c:803
 msgid "Open Module"
 msgstr "Abrir Módulo"
 
@@ -204,38 +204,38 @@ msgstr "Abrir Módulo"
 msgid "Export Passage"
 msgstr "Exportar Passagem"
 
-#: ../src/gnome2/bibletext.c:953 ../src/gnome2/bibletext_dialog.c:1945
-#: ../src/gnome2/commentary_dialog.c:1473 ../src/gnome2/commentary.c:815
+#: ../src/gnome2/bibletext.c:953 ../src/gnome2/bibletext_dialog.c:1951
+#: ../src/gnome2/commentary_dialog.c:1490 ../src/gnome2/commentary.c:815
 msgid "item2"
 msgstr "item2"
 
-#: ../src/gnome2/bibletext.c:965 ../src/gnome2/bibletext_dialog.c:1957
-#: ../src/gnome2/commentary_dialog.c:1485 ../src/gnome2/commentary.c:827
+#: ../src/gnome2/bibletext.c:965 ../src/gnome2/bibletext_dialog.c:1963
+#: ../src/gnome2/commentary_dialog.c:1502 ../src/gnome2/commentary.c:827
 msgid "Note"
 msgstr "Nota"
 
 #: ../src/gnome2/bibletext.c:975 ../src/gnome2/gbs.c:757
-#: ../src/gnome2/bibletext_dialog.c:1967 ../src/gnome2/dictlex.c:925
-#: ../src/gnome2/commentary_dialog.c:1495 ../src/gnome2/commentary.c:837
+#: ../src/gnome2/bibletext_dialog.c:1973 ../src/gnome2/dictlex.c:925
+#: ../src/gnome2/commentary_dialog.c:1512 ../src/gnome2/commentary.c:837
 msgid "Primary Reading"
 msgstr "Leitura Principal"
 
 #: ../src/gnome2/bibletext.c:983 ../src/gnome2/gbs.c:763
-#: ../src/gnome2/bibletext_dialog.c:1975 ../src/gnome2/dictlex.c:931
-#: ../src/gnome2/commentary_dialog.c:1503 ../src/gnome2/commentary.c:845
+#: ../src/gnome2/bibletext_dialog.c:1981 ../src/gnome2/dictlex.c:931
+#: ../src/gnome2/commentary_dialog.c:1520 ../src/gnome2/commentary.c:845
 msgid "Secondary Reading"
 msgstr "Leitura Secundária"
 
 #: ../src/gnome2/bibletext.c:991 ../src/gnome2/gbs.c:751
-#: ../src/gnome2/bibletext_dialog.c:1983 ../src/gnome2/dictlex.c:919
-#: ../src/gnome2/commentary_dialog.c:1511 ../src/gnome2/commentary.c:853
+#: ../src/gnome2/bibletext_dialog.c:1989 ../src/gnome2/dictlex.c:919
+#: ../src/gnome2/commentary_dialog.c:1528 ../src/gnome2/commentary.c:853
 msgid "All Readings"
 msgstr "Todas as Leituras"
 
 #. 0
 #: ../src/gnome2/bibletext.c:1011 ../src/gnome2/gbs.c:781
-#: ../src/gnome2/bibletext_dialog.c:2003 ../src/gnome2/dictlex.c:949
-#: ../src/gnome2/commentary_dialog.c:1531 ../src/gnome2/font_dialog.c:292
+#: ../src/gnome2/bibletext_dialog.c:2009 ../src/gnome2/dictlex.c:949
+#: ../src/gnome2/commentary_dialog.c:1548 ../src/gnome2/font_dialog.c:292
 #: ../src/gnome2/commentary.c:873
 msgid "Set Module Font"
 msgstr "Definir Fonte do Módulo"
@@ -243,103 +243,103 @@ msgstr "Definir Fonte do Módulo"
 #. 1
 #. 2
 #: ../src/gnome2/bibletext.c:1020 ../src/gnome2/gbs.c:788
-#: ../src/gnome2/bibletext_dialog.c:2012 ../src/gnome2/dictlex.c:956
-#: ../src/gnome2/commentary_dialog.c:1540 ../src/gnome2/commentary.c:880
+#: ../src/gnome2/bibletext_dialog.c:2018 ../src/gnome2/dictlex.c:956
+#: ../src/gnome2/commentary_dialog.c:1557 ../src/gnome2/commentary.c:880
 msgid "Words of Christ in Red"
 msgstr "Palavras de Cristo a vermelho"
 
 #. 3
 #: ../src/gnome2/bibletext.c:1028 ../src/gnome2/gbs.c:796
-#: ../src/gnome2/bibletext_dialog.c:2020 ../src/gnome2/dictlex.c:964
-#: ../src/gnome2/commentary_dialog.c:1548 ../src/gnome2/commentary.c:888
+#: ../src/gnome2/bibletext_dialog.c:2026 ../src/gnome2/dictlex.c:964
+#: ../src/gnome2/commentary_dialog.c:1565 ../src/gnome2/commentary.c:888
 msgid "Strong's Numbers"
 msgstr "Números Strong"
 
 #. 4
 #: ../src/gnome2/bibletext.c:1036 ../src/gnome2/gbs.c:804
-#: ../src/gnome2/bibletext_dialog.c:2028 ../src/gnome2/dictlex.c:972
-#: ../src/gnome2/commentary_dialog.c:1556 ../src/gnome2/commentary.c:896
+#: ../src/gnome2/bibletext_dialog.c:2034 ../src/gnome2/dictlex.c:972
+#: ../src/gnome2/commentary_dialog.c:1573 ../src/gnome2/commentary.c:896
 #: ../ui/search-dialog.glade.h:62
 msgid "Morphological Tags"
 msgstr "Etiquetas morfológicas"
 
 #. 5
 #: ../src/gnome2/bibletext.c:1044 ../src/gnome2/gbs.c:812
-#: ../src/gnome2/bibletext_dialog.c:2036 ../src/gnome2/dictlex.c:980
-#: ../src/gnome2/commentary_dialog.c:1564 ../src/gnome2/commentary.c:904
+#: ../src/gnome2/bibletext_dialog.c:2042 ../src/gnome2/dictlex.c:980
+#: ../src/gnome2/commentary_dialog.c:1581 ../src/gnome2/commentary.c:904
 #: ../ui/search-dialog.glade.h:50
 msgid "Footnotes"
 msgstr "Notas de rodapé"
 
 #. 6
 #: ../src/gnome2/bibletext.c:1052 ../src/gnome2/gbs.c:820
-#: ../src/gnome2/bibletext_dialog.c:2044 ../src/gnome2/dictlex.c:988
-#: ../src/gnome2/commentary_dialog.c:1572 ../src/gnome2/commentary.c:912
+#: ../src/gnome2/bibletext_dialog.c:2050 ../src/gnome2/dictlex.c:988
+#: ../src/gnome2/commentary_dialog.c:1589 ../src/gnome2/commentary.c:912
 msgid "Greek Accents"
 msgstr "Acentos Gregos"
 
 #. 7
 #: ../src/gnome2/bibletext.c:1060 ../src/gnome2/gbs.c:828
-#: ../src/gnome2/bibletext_dialog.c:2052 ../src/gnome2/dictlex.c:996
-#: ../src/gnome2/commentary_dialog.c:1580 ../src/gnome2/commentary.c:920
+#: ../src/gnome2/bibletext_dialog.c:2058 ../src/gnome2/dictlex.c:996
+#: ../src/gnome2/commentary_dialog.c:1597 ../src/gnome2/commentary.c:920
 msgid "Lemmas"
 msgstr "Lemas"
 
 #. 8
 #: ../src/gnome2/bibletext.c:1068 ../src/gnome2/gbs.c:836
-#: ../src/gnome2/bibletext_dialog.c:2060 ../src/gnome2/dictlex.c:1004
-#: ../src/gnome2/commentary_dialog.c:1588 ../src/gnome2/commentary.c:928
+#: ../src/gnome2/bibletext_dialog.c:2066 ../src/gnome2/dictlex.c:1004
+#: ../src/gnome2/commentary_dialog.c:1605 ../src/gnome2/commentary.c:928
 msgid "Scripture Cross-references"
 msgstr "Referências Cruzadas da Escritura"
 
 #. 9
 #: ../src/gnome2/bibletext.c:1076 ../src/gnome2/gbs.c:844
-#: ../src/gnome2/bibletext_dialog.c:2068 ../src/gnome2/dictlex.c:1012
-#: ../src/gnome2/commentary_dialog.c:1596 ../src/gnome2/commentary.c:936
+#: ../src/gnome2/bibletext_dialog.c:2074 ../src/gnome2/dictlex.c:1012
+#: ../src/gnome2/commentary_dialog.c:1613 ../src/gnome2/commentary.c:936
 msgid "Hebrew Vowel Points"
 msgstr "Pontos Vogais do Hebraico"
 
 #. 10
 #: ../src/gnome2/bibletext.c:1084 ../src/gnome2/gbs.c:852
-#: ../src/gnome2/bibletext_dialog.c:2076 ../src/gnome2/dictlex.c:1020
-#: ../src/gnome2/commentary_dialog.c:1604 ../src/gnome2/commentary.c:944
+#: ../src/gnome2/bibletext_dialog.c:2082 ../src/gnome2/dictlex.c:1020
+#: ../src/gnome2/commentary_dialog.c:1621 ../src/gnome2/commentary.c:944
 msgid "Hebrew Cantillation"
 msgstr "Cantilação do Hebraico"
 
 #. 11
 #: ../src/gnome2/bibletext.c:1092 ../src/gnome2/gbs.c:860
-#: ../src/gnome2/bibletext_dialog.c:2084 ../src/gnome2/dictlex.c:1028
-#: ../src/gnome2/commentary_dialog.c:1612 ../src/gnome2/commentary.c:952
+#: ../src/gnome2/bibletext_dialog.c:2090 ../src/gnome2/dictlex.c:1028
+#: ../src/gnome2/commentary_dialog.c:1629 ../src/gnome2/commentary.c:952
 msgid "Headings"
 msgstr "Cabeçalhos"
 
 #. 12
 #: ../src/gnome2/bibletext.c:1100 ../src/gnome2/gbs.c:868
-#: ../src/gnome2/bibletext_dialog.c:2092 ../src/gnome2/dictlex.c:1036
-#: ../src/gnome2/commentary_dialog.c:1620 ../src/gnome2/commentary.c:960
+#: ../src/gnome2/bibletext_dialog.c:2098 ../src/gnome2/dictlex.c:1036
+#: ../src/gnome2/commentary_dialog.c:1637 ../src/gnome2/commentary.c:960
 msgid "Variants"
 msgstr "Variantes"
 
 #. 13
 #: ../src/gnome2/bibletext.c:1106 ../src/gnome2/gbs.c:874
-#: ../src/gnome2/bibletext_dialog.c:2098 ../src/gnome2/dictlex.c:1042
-#: ../src/gnome2/commentary_dialog.c:1626 ../src/gnome2/commentary.c:966
+#: ../src/gnome2/bibletext_dialog.c:2104 ../src/gnome2/dictlex.c:1042
+#: ../src/gnome2/commentary_dialog.c:1643 ../src/gnome2/commentary.c:966
 msgid "Image Content"
 msgstr "Conteúdo da Imagem"
 
 #. 14
 #: ../src/gnome2/bibletext.c:1114 ../src/gnome2/gbs.c:882
-#: ../src/gnome2/bibletext_dialog.c:2106 ../src/gnome2/dictlex.c:1050
-#: ../src/gnome2/commentary_dialog.c:1634 ../src/gnome2/commentary.c:974
+#: ../src/gnome2/bibletext_dialog.c:2112 ../src/gnome2/dictlex.c:1050
+#: ../src/gnome2/commentary_dialog.c:1651 ../src/gnome2/commentary.c:974
 msgid "Respect Font Faces"
 msgstr "Respeitar fontes"
 
 #: ../src/gnome2/bibletext.c:1126 ../src/gnome2/bibletext.c:1253
 #: ../src/gnome2/gbs.c:894 ../src/gnome2/gbs.c:1022
-#: ../src/gnome2/bibletext_dialog.c:2118 ../src/gnome2/bibletext_dialog.c:2220
+#: ../src/gnome2/bibletext_dialog.c:2124 ../src/gnome2/bibletext_dialog.c:2233
 #: ../src/gnome2/dictlex.c:1062 ../src/gnome2/dictlex.c:1166
-#: ../src/gnome2/commentary_dialog.c:1654
-#: ../src/gnome2/commentary_dialog.c:1784 ../src/gnome2/commentary.c:994
+#: ../src/gnome2/commentary_dialog.c:1671
+#: ../src/gnome2/commentary_dialog.c:1809 ../src/gnome2/commentary.c:994
 #: ../src/gnome2/commentary.c:1146
 msgid "Use Current Dictionary"
 msgstr "Usar Dicionário corrente"
@@ -347,8 +347,8 @@ msgstr "Usar Dicionário corrente"
 #. 0
 #. 2
 #: ../src/gnome2/bibletext.c:1137 ../src/gnome2/gbs.c:905
-#: ../src/gnome2/bibletext_dialog.c:2129 ../src/gnome2/dictlex.c:1073
-#: ../src/gnome2/commentary_dialog.c:1665 ../src/gnome2/commentary.c:1005
+#: ../src/gnome2/bibletext_dialog.c:2135 ../src/gnome2/dictlex.c:1073
+#: ../src/gnome2/commentary_dialog.c:1682 ../src/gnome2/commentary.c:1005
 #: ../src/gnome2/sidebar.c:776 ../src/gnome2/sidebar.c:937
 msgid "About"
 msgstr "Sobre"
@@ -368,8 +368,8 @@ msgstr "Marca"
 #. 4
 #. 3
 #: ../src/gnome2/bibletext.c:1156 ../src/gnome2/gbs.c:924
-#: ../src/gnome2/bibletext_dialog.c:2142 ../src/gnome2/dictlex.c:1092
-#: ../src/gnome2/commentary_dialog.c:1678 ../src/gnome2/commentary.c:1025
+#: ../src/gnome2/bibletext_dialog.c:2148 ../src/gnome2/dictlex.c:1092
+#: ../src/gnome2/commentary_dialog.c:1695 ../src/gnome2/commentary.c:1025
 #: ../src/gnome2/bookmarks_menu.c:456 ../src/gnome2/treekey-editor.c:317
 msgid "Edit"
 msgstr "Editar"
@@ -379,8 +379,8 @@ msgstr "Editar"
 #. 5
 #. 4
 #: ../src/gnome2/bibletext.c:1162 ../src/gnome2/gbs.c:930
-#: ../src/gnome2/bibletext_dialog.c:2148 ../src/gnome2/dictlex.c:1098
-#: ../src/gnome2/commentary_dialog.c:1684 ../src/gnome2/commentary.c:1031
+#: ../src/gnome2/bibletext_dialog.c:2154 ../src/gnome2/dictlex.c:1098
+#: ../src/gnome2/commentary_dialog.c:1701 ../src/gnome2/commentary.c:1031
 msgid "_Module Options"
 msgstr "Opções de _Módulo"
 
@@ -389,8 +389,8 @@ msgstr "Opções de _Módulo"
 #. 6
 #. 5
 #: ../src/gnome2/bibletext.c:1168 ../src/gnome2/gbs.c:936
-#: ../src/gnome2/bibletext_dialog.c:2154 ../src/gnome2/dictlex.c:1104
-#: ../src/gnome2/commentary_dialog.c:1690 ../src/gnome2/commentary.c:1037
+#: ../src/gnome2/bibletext_dialog.c:2160 ../src/gnome2/dictlex.c:1104
+#: ../src/gnome2/commentary_dialog.c:1707 ../src/gnome2/commentary.c:1037
 msgid "Lookup Selection"
 msgstr "Selecção de Procura"
 
@@ -399,8 +399,8 @@ msgstr "Selecção de Procura"
 #. 7
 #. 6
 #: ../src/gnome2/bibletext.c:1174 ../src/gnome2/gbs.c:942
-#: ../src/gnome2/bibletext_dialog.c:2160 ../src/gnome2/dictlex.c:1110
-#: ../src/gnome2/commentary_dialog.c:1696 ../src/gnome2/commentary.c:1055
+#: ../src/gnome2/bibletext_dialog.c:2166 ../src/gnome2/dictlex.c:1110
+#: ../src/gnome2/commentary_dialog.c:1713 ../src/gnome2/commentary.c:1055
 msgid "Unlock This Module"
 msgstr "Desbloquear este Módulo"
 
@@ -408,8 +408,8 @@ msgstr "Desbloquear este Módulo"
 #. 7
 #. 9
 #: ../src/gnome2/bibletext.c:1180 ../src/gnome2/gbs.c:948
-#: ../src/gnome2/bibletext_dialog.c:2166
-#: ../src/gnome2/commentary_dialog.c:1714 ../src/gnome2/commentary.c:1073
+#: ../src/gnome2/bibletext_dialog.c:2172
+#: ../src/gnome2/commentary_dialog.c:1731 ../src/gnome2/commentary.c:1073
 msgid "Read Selection Aloud"
 msgstr "Ler Selecção em voz alta"
 
@@ -444,6 +444,12 @@ msgstr "Livros podem ser descarregados do Projecto SWORD"
 #: ../src/gnome2/about_sword.c:160
 msgid "The SWORD Project"
 msgstr "O Projecto SWORD"
+
+#: ../src/gnome2/navbar_versekey_editor.c:876
+#: ../src/gnome2/navbar_versekey_dialog.c:934
+#: ../src/gnome2/navbar_versekey_parallel.c:801
+msgid "Synchronize this window from main window"
+msgstr "Sincronizar esta janela com a janela principal"
 
 #: ../src/gnome2/about_modules.c:249
 msgid "About Sword Module"
@@ -537,29 +543,29 @@ msgid "Go to "
 msgstr "Ir para "
 
 #. 1
-#: ../src/gnome2/bibletext_dialog.c:1925
-#: ../src/gnome2/commentary_dialog.c:1453
+#: ../src/gnome2/bibletext_dialog.c:1931
+#: ../src/gnome2/commentary_dialog.c:1470
 msgid "Sync with main"
 msgstr "Sincronizar com principal"
 
 #. 2
-#: ../src/gnome2/bibletext_dialog.c:1931
-#: ../src/gnome2/commentary_dialog.c:1459
+#: ../src/gnome2/bibletext_dialog.c:1937
+#: ../src/gnome2/commentary_dialog.c:1476
 msgid "Stay in sync"
 msgstr "Manter sincronizado"
 
 #. 15
-#: ../src/gnome2/commentary_dialog.c:1642 ../src/gnome2/commentary.c:982
+#: ../src/gnome2/commentary_dialog.c:1659 ../src/gnome2/commentary.c:982
 msgid "Commentary by Chapter"
 msgstr "Comentário por capítulo"
 
 #. 7
-#: ../src/gnome2/commentary_dialog.c:1702 ../src/gnome2/commentary.c:1043
+#: ../src/gnome2/commentary_dialog.c:1719 ../src/gnome2/commentary.c:1043
 msgid "Display Book Heading"
 msgstr "Mostrar Cabeçalho de Livro"
 
 #. 8
-#: ../src/gnome2/commentary_dialog.c:1708 ../src/gnome2/commentary.c:1049
+#: ../src/gnome2/commentary_dialog.c:1725 ../src/gnome2/commentary.c:1049
 msgid "Display Chapter Heading"
 msgstr "Mostrar Caebeçalho de Capítulo"
 
@@ -587,43 +593,11 @@ msgstr "Módulo"
 msgid "Current font: "
 msgstr "Fonte corrente: "
 
-#: ../src/gnome2/font_dialog.c:359
-msgid "+5"
-msgstr "+5"
-
-#: ../src/gnome2/font_dialog.c:361
-msgid "+4"
-msgstr "+4"
-
-#: ../src/gnome2/font_dialog.c:363
-msgid "+3"
-msgstr "+3"
-
-#: ../src/gnome2/font_dialog.c:365
-msgid "+2"
-msgstr "+2"
-
-#: ../src/gnome2/font_dialog.c:367
-msgid "+1"
-msgstr "+1"
-
-#: ../src/gnome2/font_dialog.c:369 ../src/gnome2/font_dialog.c:382
+#: ../src/gnome2/font_dialog.c:373
 msgid "+0"
 msgstr "+0"
 
-#: ../src/gnome2/font_dialog.c:371
-msgid "-1"
-msgstr "-1"
-
-#: ../src/gnome2/font_dialog.c:373
-msgid "-2"
-msgstr "-2"
-
-#: ../src/gnome2/font_dialog.c:375
-msgid "-3"
-msgstr "-3"
-
-#: ../src/gnome2/font_dialog.c:386
+#: ../src/gnome2/font_dialog.c:377
 msgid "Use the default font for this module"
 msgstr "Usar a fonte por omissão para este módulo"
 
@@ -660,15 +634,15 @@ msgstr "Novo Nome"
 
 #: ../src/gnome2/commentary.c:481 ../src/gnome2/treekey-editor.c:127
 #: ../src/gnome2/treekey-editor.c:186 ../src/gnome2/treekey-editor.c:272
-#: ../src/main/prayerlists.cc:238 ../src/main/sword_treekey.cc:375
+#: ../src/main/prayerlists.cc:239 ../src/main/sword_treekey.cc:376
 msgid "Name: "
 msgstr "Nome: "
 
-#: ../src/gnome2/commentary.c:491 ../src/main/prayerlists.cc:252
+#: ../src/gnome2/commentary.c:491 ../src/main/prayerlists.cc:253
 msgid "Module names must contain [A-Za-z0-9_] only."
 msgstr "Os nomes de módulos devem conter apenas [A-Za-z0-9_]."
 
-#: ../src/gnome2/commentary.c:498 ../src/main/prayerlists.cc:259
+#: ../src/gnome2/commentary.c:498 ../src/main/prayerlists.cc:260
 msgid "Xiphos already knows a module by that name."
 msgstr "Xiphos já conhece um módulo por esse nome."
 
@@ -819,7 +793,7 @@ msgstr ""
 msgid "Journals and prayer lists cannot be indexed."
 msgstr "Diários e listas de oração não podem ser indexados."
 
-#: ../src/gnome2/mod_mgr.c:453 ../src/gnome2/mod_mgr.c:2626
+#: ../src/gnome2/mod_mgr.c:453 ../src/gnome2/mod_mgr.c:2632
 #: ../ui/module-manager.glade.h:18
 msgid "Install"
 msgstr "Instalar"
@@ -845,7 +819,7 @@ msgstr "Remoção"
 msgid "%s failed"
 msgstr "%s falhou"
 
-#: ../src/gnome2/mod_mgr.c:465 ../src/gnome2/mod_mgr.c:1148
+#: ../src/gnome2/mod_mgr.c:465 ../src/gnome2/mod_mgr.c:1149
 msgid "Finished"
 msgstr "Terminado"
 
@@ -931,8 +905,8 @@ msgid "Uninstalled"
 msgstr "Desinstalado"
 
 #: ../src/gnome2/mod_mgr.c:970 ../src/gnome2/sidebar.c:421
-#: ../src/gnome2/utilities.c:544 ../src/main/prayerlists.cc:236
-#: ../src/main/sword_treekey.cc:373 ../src/main/sword_treekey.cc:417
+#: ../src/gnome2/utilities.c:544 ../src/main/prayerlists.cc:237
+#: ../src/main/sword_treekey.cc:374 ../src/main/sword_treekey.cc:418
 #: ../src/main/sidebar.cc:1079 ../src/main/sidebar.cc:1081
 msgid "Prayer List/Journal"
 msgstr "Lista de Oração/Diário"
@@ -945,27 +919,27 @@ msgstr "Actualizando remoto"
 msgid "Remote not found"
 msgstr "Remoto não encontrado"
 
-#: ../src/gnome2/mod_mgr.c:1274
+#: ../src/gnome2/mod_mgr.c:1275
 msgid "Module Name"
 msgstr "Nome de Módulo"
 
-#: ../src/gnome2/mod_mgr.c:1293
+#: ../src/gnome2/mod_mgr.c:1294
 msgid "A checkmark means this module is already installed"
 msgstr "Uma marca significa que o módulo já está instalado"
 
-#: ../src/gnome2/mod_mgr.c:1315
+#: ../src/gnome2/mod_mgr.c:1316
 msgid "Click the box to work on this module"
 msgstr "Clique na caixa para trabalhar neste módulo"
 
-#: ../src/gnome2/mod_mgr.c:1316
+#: ../src/gnome2/mod_mgr.c:1317
 msgid "Click the box to select this module for install/update"
 msgstr "Clique na caixa para seleccionar este módulo para instalar/actualizar"
 
-#: ../src/gnome2/mod_mgr.c:1335
+#: ../src/gnome2/mod_mgr.c:1336
 msgid "Installed"
 msgstr "Instalado"
 
-#: ../src/gnome2/mod_mgr.c:1345
+#: ../src/gnome2/mod_mgr.c:1346
 msgid ""
 "The index icon means you have built an optimized ('lucene') index for this "
 "module for fast searching (see the Maintenance pane for this function)"
@@ -974,7 +948,7 @@ msgstr ""
 "este módulo para pesquisa rápida (veja no painel de Manutenção sobre esta "
 "função)"
 
-#: ../src/gnome2/mod_mgr.c:1363
+#: ../src/gnome2/mod_mgr.c:1364
 msgid ""
 "The lock icon means this module is encrypted, and requires that you purchase "
 "an unlock key from the content owner"
@@ -982,7 +956,7 @@ msgstr ""
 "O ícone de fechadura significa que este módulo está encriptado e requer a "
 "compra de uma chave de abertura ao proprietário do conteúdo"
 
-#: ../src/gnome2/mod_mgr.c:1385
+#: ../src/gnome2/mod_mgr.c:1386
 msgid ""
 "The refresh icon means the Installed module is older than the newer "
 "Available module: You should update the module"
@@ -990,93 +964,93 @@ msgstr ""
 "O ícone de refrescar significa que o módulo instalado é mais antigo do que o "
 "módulo disponível: deve actualizar o módulo"
 
-#: ../src/gnome2/mod_mgr.c:1397
+#: ../src/gnome2/mod_mgr.c:1398
 msgid "Available"
 msgstr "Disponível"
 
-#: ../src/gnome2/mod_mgr.c:1406
+#: ../src/gnome2/mod_mgr.c:1407
 msgid "Size"
 msgstr "Tamanho"
 
-#: ../src/gnome2/mod_mgr.c:1415
+#: ../src/gnome2/mod_mgr.c:1416
 msgid "Description"
 msgstr "Descrição"
 
-#: ../src/gnome2/mod_mgr.c:1449 ../src/gnome2/mod_mgr.c:1529
+#: ../src/gnome2/mod_mgr.c:1450 ../src/gnome2/mod_mgr.c:1530
 msgid "Configure"
 msgstr "Configurar"
 
-#: ../src/gnome2/mod_mgr.c:1483
+#: ../src/gnome2/mod_mgr.c:1484
 msgid "Type"
 msgstr "Tipo"
 
-#: ../src/gnome2/mod_mgr.c:1490
+#: ../src/gnome2/mod_mgr.c:1491
 msgid "Caption"
 msgstr "Nome"
 
-#: ../src/gnome2/mod_mgr.c:1498
+#: ../src/gnome2/mod_mgr.c:1499
 msgid "Source"
 msgstr "Fonte"
 
-#: ../src/gnome2/mod_mgr.c:1506
+#: ../src/gnome2/mod_mgr.c:1507
 msgid "Directory"
 msgstr "Directório"
 
-#: ../src/gnome2/mod_mgr.c:1527
+#: ../src/gnome2/mod_mgr.c:1528
 msgid "Sources"
 msgstr "Fontes"
 
-#: ../src/gnome2/mod_mgr.c:1533 ../src/gnome2/sidebar.c:1450
+#: ../src/gnome2/mod_mgr.c:1534 ../src/gnome2/sidebar.c:1450
 #: ../src/gnome2/preferences_dialog.c:1792
 msgid "Modules"
 msgstr "Módulos"
 
-#: ../src/gnome2/mod_mgr.c:1535
+#: ../src/gnome2/mod_mgr.c:1536
 msgid "Install/Update"
 msgstr "Instalar/Actualizar"
 
-#: ../src/gnome2/mod_mgr.c:1537
+#: ../src/gnome2/mod_mgr.c:1538
 msgid "Maintenance"
 msgstr "Manutenção"
 
-#: ../src/gnome2/mod_mgr.c:1746
+#: ../src/gnome2/mod_mgr.c:1747
 msgid "Please Refresh"
 msgstr "Por favor actualize"
 
-#: ../src/gnome2/mod_mgr.c:1747
+#: ../src/gnome2/mod_mgr.c:1748
 msgid "Your module list is not up to date!"
 msgstr "A sua lista de módulos não está actual!"
 
-#: ../src/gnome2/mod_mgr.c:2211 ../src/gnome2/mod_mgr.c:2415
+#: ../src/gnome2/mod_mgr.c:2214 ../src/gnome2/mod_mgr.c:2421
 msgid "Remove the selected source"
 msgstr "Remover a fonte seleccionada"
 
-#: ../src/gnome2/mod_mgr.c:2268
+#: ../src/gnome2/mod_mgr.c:2271
 msgid "Enter a remote source"
 msgstr "Introduzir uma fonte remota"
 
-#: ../src/gnome2/mod_mgr.c:2272
+#: ../src/gnome2/mod_mgr.c:2275
 msgid "Caption:"
 msgstr "Nome:"
 
-#: ../src/gnome2/mod_mgr.c:2273
+#: ../src/gnome2/mod_mgr.c:2276
 msgid "Type:"
 msgstr "Tipo:"
 
-#: ../src/gnome2/mod_mgr.c:2274
+#: ../src/gnome2/mod_mgr.c:2277
 msgid "Host:"
 msgstr "Máquina:"
 
-#: ../src/gnome2/mod_mgr.c:2275
+#: ../src/gnome2/mod_mgr.c:2278
 msgid "Directory:"
 msgstr "Directório:"
 
 #. this can happen at most once
-#: ../src/gnome2/mod_mgr.c:2300
+#: ../src/gnome2/mod_mgr.c:2303
 msgid "A source by that name already exists."
 msgstr "Já existe uma fonte com esse nome."
 
-#: ../src/gnome2/mod_mgr.c:2412
+#: ../src/gnome2/mod_mgr.c:2418
 msgid "Delete a remote source"
 msgstr "Apagar uma fonte remota"
 
@@ -1095,14 +1069,6 @@ msgstr "Prever Impressão"
 #: ../src/gnome2/html.c:985
 msgid "Failed to print the document"
 msgstr "Falhou a impressão do documento"
-
-#: ../src/gnome2/main_window.c:778 ../src/main/sword.cc:638
-msgid "Starting"
-msgstr "Começando"
-
-#: ../src/gnome2/main_window.c:779
-msgid "Building Xiphos interface"
-msgstr "Construindo a interface Xiphos"
 
 #: ../src/gnome2/main_window.c:785
 msgid "Xiphos - Bible Study Software"
@@ -1452,23 +1418,6 @@ msgstr "foi modificado. Pretende guardar a alteração?"
 msgid "not loaded"
 msgstr "não carregado"
 
-#: ../src/gnome2/xiphos.c:87
-msgid "Initiating Xiphos"
-msgstr "Iniciando Xiphos"
-
-#: ../src/gnome2/xiphos.c:146 ../src/gnome2/splash.c:633
-msgid "Displaying Xiphos"
-msgstr "Mostrando Xiphos"
-
-#. main_prayer_list_new("2008");
-#: ../src/gnome2/xiphos.c:217
-msgid "done"
-msgstr "feito"
-
-#: ../src/gnome2/xiphos.c:295
-msgid "Xiphos is shutdown"
-msgstr "Xiphos está fechado"
-
 #: ../src/gnome2/bookmarks_menu.c:473
 msgid "Folder name: "
 msgstr "Nome de pasta: "
@@ -1671,6 +1620,10 @@ msgstr "Construindo Interface"
 #: ../src/gnome2/splash.c:616
 msgid "Starting Sword"
 msgstr "Iniciando Sword"
+
+#: ../src/gnome2/splash.c:633
+msgid "Displaying Xiphos"
+msgstr "Mostrando Xiphos"
 
 #: ../src/gnome2/main_menu.c:970
 msgid "Open Study_Pad"
@@ -1970,30 +1923,6 @@ msgstr ""
 "Xiphos não pode ler o ficheiro \n"
 "de abreviaturas de linguagens."
 
-#: ../src/main/sword.cc:639
-msgid "Initiating SWORD"
-msgstr "Iniciando SWORD"
-
-#: ../src/main/sword.cc:640
-msgid "path to sword"
-msgstr "caminho para sword"
-
-#: ../src/main/sword.cc:641
-msgid "System locale is"
-msgstr "O locale do sistema é"
-
-#: ../src/main/sword.cc:642
-msgid "SWORD locale is"
-msgstr "O locale SWORD é"
-
-#: ../src/main/sword.cc:644
-msgid "Checking for SWORD Modules"
-msgstr "Procurando Módulos SWORD"
-
-#: ../src/main/sword.cc:677
-msgid "SWORD is shutdown"
-msgstr "SWORD está fechado"
-
 #: ../src/main/sword.cc:1413
 msgid "Daily devotional was requested, but there are none installed."
 msgstr "Foi pedido um Devocional Diário, mas não há nenhum instalado."
@@ -2039,162 +1968,162 @@ msgstr "Por favor, ajuste a lista de módulos."
 msgid "Search finished"
 msgstr "Pesquisa concluída"
 
-#: ../src/main/main.c:96
+#: ../src/main/main.c:95
 msgid "Xiphos does not understand more than one argument."
 msgstr "Xiphos não aceita mais do que um argumento."
 
-#: ../src/main/prayerlists.cc:70
+#: ../src/main/prayerlists.cc:71
 msgid "January"
 msgstr "Janeiro"
 
-#: ../src/main/prayerlists.cc:71
+#: ../src/main/prayerlists.cc:72
 msgid "February"
 msgstr "Fevereiro"
 
-#: ../src/main/prayerlists.cc:72
+#: ../src/main/prayerlists.cc:73
 msgid "March"
 msgstr "Março"
 
-#: ../src/main/prayerlists.cc:73
+#: ../src/main/prayerlists.cc:74
 msgid "April"
 msgstr "Abril"
 
-#: ../src/main/prayerlists.cc:74
+#: ../src/main/prayerlists.cc:75
 msgid "May"
 msgstr "Maio"
 
-#: ../src/main/prayerlists.cc:75
+#: ../src/main/prayerlists.cc:76
 msgid "June"
 msgstr "Junho"
 
-#: ../src/main/prayerlists.cc:76
+#: ../src/main/prayerlists.cc:77
 msgid "July"
 msgstr "Julho"
 
-#: ../src/main/prayerlists.cc:77
+#: ../src/main/prayerlists.cc:78
 msgid "August"
 msgstr "Agosto"
 
-#: ../src/main/prayerlists.cc:78
+#: ../src/main/prayerlists.cc:79
 msgid "September"
 msgstr "Setembro"
 
-#: ../src/main/prayerlists.cc:79
+#: ../src/main/prayerlists.cc:80
 msgid "October"
 msgstr "Outubro"
 
-#: ../src/main/prayerlists.cc:80
+#: ../src/main/prayerlists.cc:81
 msgid "November"
 msgstr "Novembro"
 
-#: ../src/main/prayerlists.cc:81
+#: ../src/main/prayerlists.cc:82
 msgid "December"
 msgstr "Dezembro"
 
-#: ../src/main/prayerlists.cc:120 ../src/main/sword_treekey.cc:334
+#: ../src/main/prayerlists.cc:121 ../src/main/sword_treekey.cc:335
 msgid "Growth"
 msgstr "Crescimento"
 
-#: ../src/main/prayerlists.cc:121 ../src/main/sword_treekey.cc:335
+#: ../src/main/prayerlists.cc:122 ../src/main/sword_treekey.cc:336
 msgid "<b>For Growth</b><br>"
 msgstr "<b>Para Crescimento</b><br>"
 
-#: ../src/main/prayerlists.cc:122 ../src/main/prayerlists.cc:376
-#: ../src/main/sword_treekey.cc:336
+#: ../src/main/prayerlists.cc:123 ../src/main/prayerlists.cc:377
+#: ../src/main/sword_treekey.cc:337
 msgid "Salvation"
 msgstr "Salvação"
 
-#: ../src/main/prayerlists.cc:123 ../src/main/sword_treekey.cc:337
+#: ../src/main/prayerlists.cc:124 ../src/main/sword_treekey.cc:338
 msgid "<b>For Salvation</b><br>"
 msgstr "<b>Para Salvação</b><br>"
 
-#: ../src/main/prayerlists.cc:124 ../src/main/prayerlists.cc:380
-#: ../src/main/sword_treekey.cc:338
+#: ../src/main/prayerlists.cc:125 ../src/main/prayerlists.cc:381
+#: ../src/main/sword_treekey.cc:339
 msgid "Health"
 msgstr "Saúde"
 
-#: ../src/main/prayerlists.cc:125 ../src/main/sword_treekey.cc:339
+#: ../src/main/prayerlists.cc:126 ../src/main/sword_treekey.cc:340
 msgid "<b>For Health</b><br>"
 msgstr "<b>Para Saúde</b><br>"
 
-#: ../src/main/prayerlists.cc:126
+#: ../src/main/prayerlists.cc:127
 msgid "Misc"
 msgstr "Variado"
 
-#: ../src/main/prayerlists.cc:127 ../src/main/sword_treekey.cc:341
+#: ../src/main/prayerlists.cc:128 ../src/main/sword_treekey.cc:342
 msgid "<b>Miscellaneous</b><br>"
 msgstr "<b>Miscelâneo</b><br>"
 
-#: ../src/main/prayerlists.cc:135
+#: ../src/main/prayerlists.cc:136
 msgid "Point x"
 msgstr "Ponto x"
 
-#: ../src/main/prayerlists.cc:136
+#: ../src/main/prayerlists.cc:137
 msgid "<b>(x)</b><br>"
 msgstr "<b>(x)</b><br>"
 
-#: ../src/main/prayerlists.cc:137
+#: ../src/main/prayerlists.cc:138
 msgid "Point y"
 msgstr "Ponto y"
 
-#: ../src/main/prayerlists.cc:138
+#: ../src/main/prayerlists.cc:139
 msgid "<b>(y)</b><br>"
 msgstr "<b>(y)</b><br>"
 
-#: ../src/main/prayerlists.cc:139
+#: ../src/main/prayerlists.cc:140
 msgid "Point z"
 msgstr "Ponto z"
 
-#: ../src/main/prayerlists.cc:140
+#: ../src/main/prayerlists.cc:141
 msgid "<b>(z)</b><br>"
 msgstr "<b>(z)</b><br>"
 
-#: ../src/main/prayerlists.cc:148
+#: ../src/main/prayerlists.cc:149
 msgid "Minor Topic 1"
 msgstr "Tópico Menor 1"
 
-#: ../src/main/prayerlists.cc:149
+#: ../src/main/prayerlists.cc:150
 msgid "<b>Subtopic 1</b><br>"
 msgstr "<b>Subtópico 1</b><br>"
 
-#: ../src/main/prayerlists.cc:151
+#: ../src/main/prayerlists.cc:152
 msgid "Minor Topic 2"
 msgstr "Tópico Menor 2"
 
-#: ../src/main/prayerlists.cc:152
+#: ../src/main/prayerlists.cc:153
 msgid "<b>Subtopic 2</b><br>"
 msgstr "<b>Subtópico 2</b><br>"
 
-#: ../src/main/prayerlists.cc:154
+#: ../src/main/prayerlists.cc:155
 msgid "Minor Topic 3"
 msgstr "Tópico Menor 3"
 
-#: ../src/main/prayerlists.cc:155
+#: ../src/main/prayerlists.cc:156
 msgid "<b>Subtopic 3</b><br>"
 msgstr "<b>Subtópico 3</b><br>"
 
-#: ../src/main/prayerlists.cc:157
+#: ../src/main/prayerlists.cc:158
 msgid "Minor Topic 4"
 msgstr "Tópico Menor 4"
 
-#: ../src/main/prayerlists.cc:158
+#: ../src/main/prayerlists.cc:159
 msgid "<b>Subtopic 4</b><br>"
 msgstr "<b>Subtópico 4</b><br>"
 
-#: ../src/main/prayerlists.cc:237
+#: ../src/main/prayerlists.cc:238
 msgid "Name for new prayer list or journal"
 msgstr "Nome da nova lista de oração ou diário"
 
-#: ../src/main/prayerlists.cc:239 ../src/main/prayerlists.cc:335
-#: ../src/main/sword_treekey.cc:376
+#: ../src/main/prayerlists.cc:240 ../src/main/prayerlists.cc:336
+#: ../src/main/sword_treekey.cc:377
 msgid "MyPrayerList"
 msgstr "Minha Lista de oração"
 
-#: ../src/main/prayerlists.cc:268
+#: ../src/main/prayerlists.cc:269
 msgid "Xiphos finds that prayer list already."
 msgstr "Xiphos já encontra essa lista de oração."
 
-#: ../src/main/prayerlists.cc:281
+#: ../src/main/prayerlists.cc:282
 #, c-format
 msgid ""
 "Xiphos cannot create module's path:\n"
@@ -2203,11 +2132,11 @@ msgstr ""
 "Xiphos não pode criar o caminho do módulo:\n"
 "%s"
 
-#: ../src/main/prayerlists.cc:321
+#: ../src/main/prayerlists.cc:322
 msgid "A basic prayer list. \\par\\par Module created by Xiphos."
 msgstr "Uma lista de oração básica. \\par\\par Módulo criado por Xiphos."
 
-#: ../src/main/prayerlists.cc:336
+#: ../src/main/prayerlists.cc:337
 msgid ""
 "<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</"
 "b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"
@@ -2215,61 +2144,61 @@ msgstr ""
 "<b>Pessoas:</b><br>Bob<br>Sam<br>Sue<br><br><b>Igreja:</"
 "b><br>bancos<br>congregação<br>Bíblias para missionários<br><br><br>"
 
-#: ../src/main/prayerlists.cc:362
+#: ../src/main/prayerlists.cc:363
 msgid "A subject-based prayer list. \\par\\par Module created by Xiphos."
 msgstr ""
 "Uma lista de oração baseada em assunto. \\par\\par Módulo criado por Xiphos."
 
-#: ../src/main/prayerlists.cc:377
+#: ../src/main/prayerlists.cc:378
 msgid "Bob<br>Sam<br>Sue<br>John<br>"
 msgstr "Bob<br>Sam<br>Sue<br>John<br>"
 
-#: ../src/main/prayerlists.cc:378
+#: ../src/main/prayerlists.cc:379
 msgid "Spiritual Growth"
 msgstr "Crescimento Espiritual"
 
-#: ../src/main/prayerlists.cc:379
+#: ../src/main/prayerlists.cc:380
 msgid "Mike<br>Steve<br>"
 msgstr "Mike<br>Steve<br>"
 
-#: ../src/main/prayerlists.cc:381
+#: ../src/main/prayerlists.cc:382
 msgid "Sue<br>John<br>"
 msgstr "Sue<br>John<br>"
 
-#: ../src/main/prayerlists.cc:407
+#: ../src/main/prayerlists.cc:408
 msgid "A monthly prayer list. \\par\\par Module created by Xiphos."
 msgstr "Uma lista de oração mensal. \\par\\par Módulo criado por Xiphos."
 
-#: ../src/main/prayerlists.cc:458
+#: ../src/main/prayerlists.cc:459
 msgid "A daily journal. \\par\\par Module created by Xiphos."
 msgstr "Um diário. \\par\\par Módulo criado por Xiphos."
 
-#: ../src/main/prayerlists.cc:522
+#: ../src/main/prayerlists.cc:523
 msgid "An outlined topic (e.g. sermon). \\par\\par Module created by Xiphos."
 msgstr ""
 "Um tópico assinalado (ex. sermão). \\par\\par Módulo criado por Xiphos."
 
-#: ../src/main/prayerlists.cc:536
+#: ../src/main/prayerlists.cc:537
 msgid "Major Topic A"
 msgstr "Tópico Maior A"
 
-#: ../src/main/prayerlists.cc:537
+#: ../src/main/prayerlists.cc:538
 msgid "<b>Major Topic A</b><br>"
 msgstr "<b>Tópico Maior A</b><br>"
 
-#: ../src/main/prayerlists.cc:539
+#: ../src/main/prayerlists.cc:540
 msgid "Major Topic B"
 msgstr "Tópico Maior B"
 
-#: ../src/main/prayerlists.cc:540
+#: ../src/main/prayerlists.cc:541
 msgid "<b>Major Topic B</b><br>"
 msgstr "<b>Tópico Maior B</b><br>"
 
-#: ../src/main/prayerlists.cc:542
+#: ../src/main/prayerlists.cc:543
 msgid "Major Topic C"
 msgstr "Tópico Maior C"
 
-#: ../src/main/prayerlists.cc:543
+#: ../src/main/prayerlists.cc:544
 msgid "<b>Major Topic C</b><br>"
 msgstr "<b>Tópico Maior C</b><br>"
 
@@ -2351,21 +2280,21 @@ msgstr "Amostra de Lista de Módulos"
 msgid "wrong type, root node != %s\n"
 msgstr "tipo errado, root node != %s\n"
 
-#: ../src/main/sword_treekey.cc:374
+#: ../src/main/sword_treekey.cc:375
 msgid "Name for new prayer list"
 msgstr "Nome para a nova lista de oração"
 
-#: ../src/main/sword_treekey.cc:395
+#: ../src/main/sword_treekey.cc:396
 #, c-format
 msgid "can not create path\n"
 msgstr "não pode criar caminho\n"
 
-#: ../src/main/sword_treekey.cc:398
+#: ../src/main/sword_treekey.cc:399
 #, c-format
 msgid "Prayer list already exist\n"
 msgstr "A lista de oração já existe\n"
 
-#: ../src/main/sword_treekey.cc:419
+#: ../src/main/sword_treekey.cc:420
 msgid "\\par\\par My prayer list \\par\\par Module created in Xiphos"
 msgstr "\\par\\par Minha lista de oração \\par\\par Módulo criado por Xiphos."
 
@@ -2421,34 +2350,6 @@ msgstr "Voltar a "
 #: ../src/main/search_sidebar.cc:101
 msgid "matches"
 msgstr "combina com"
-
-#: ../src/main/lists.cc:156
-msgid "Number of Text modules"
-msgstr "Número de módulos de Texto"
-
-#: ../src/main/lists.cc:157
-msgid "Number of Commentary modules"
-msgstr "Número de módulos de Comentário"
-
-#: ../src/main/lists.cc:158
-msgid "Number of Dict/lex modules"
-msgstr "Número de módulos Dicionário/Léxico"
-
-#: ../src/main/lists.cc:159
-msgid "Number of Book modules"
-msgstr "Número de módulos Livro"
-
-#: ../src/main/lists.cc:160
-msgid "Number of Percomm modules"
-msgstr "Números de módulos Percomm"
-
-#: ../src/main/lists.cc:161
-msgid "Number of Devotion modules"
-msgstr "Número de módulos Devocional"
-
-#: ../src/main/lists.cc:163
-msgid "Number of Prayer modules"
-msgstr "Número de módulos Oração"
 
 #: ../src/main/parallel_view.cc:731 ../src/main/parallel_view.cc:983
 msgid "view context"
@@ -2568,15 +2469,6 @@ msgstr ""
 #: ../src/main/settings.c:169
 msgid "can not create "
 msgstr "não pode criar "
-
-#. must be first run
-#: ../src/main/settings.c:190
-msgid ""
-"\n"
-"First Run: need to create settings!\n"
-msgstr ""
-"\n"
-"Primeira vez: é necessário criar definições!\n"
 
 #: ../src/main/settings.c:201
 msgid ""
@@ -3763,6 +3655,91 @@ msgstr "ex. Mt-Jo;Ap4"
 #: ../ui/search-dialog.glade.h:109
 msgid "for "
 msgstr "para "
+
+#~ msgid "+5"
+#~ msgstr "+5"
+
+#~ msgid "+4"
+#~ msgstr "+4"
+
+#~ msgid "+3"
+#~ msgstr "+3"
+
+#~ msgid "+2"
+#~ msgstr "+2"
+
+#~ msgid "+1"
+#~ msgstr "+1"
+
+#~ msgid "-1"
+#~ msgstr "-1"
+
+#~ msgid "-2"
+#~ msgstr "-2"
+
+#~ msgid "-3"
+#~ msgstr "-3"
+
+#~ msgid "Starting"
+#~ msgstr "Começando"
+
+#~ msgid "Building Xiphos interface"
+#~ msgstr "Construindo a interface Xiphos"
+
+#~ msgid "Initiating Xiphos"
+#~ msgstr "Iniciando Xiphos"
+
+#~ msgid "done"
+#~ msgstr "feito"
+
+#~ msgid "Xiphos is shutdown"
+#~ msgstr "Xiphos está fechado"
+
+#~ msgid "Initiating SWORD"
+#~ msgstr "Iniciando SWORD"
+
+#~ msgid "path to sword"
+#~ msgstr "caminho para sword"
+
+#~ msgid "System locale is"
+#~ msgstr "O locale do sistema é"
+
+#~ msgid "SWORD locale is"
+#~ msgstr "O locale SWORD é"
+
+#~ msgid "Checking for SWORD Modules"
+#~ msgstr "Procurando Módulos SWORD"
+
+#~ msgid "SWORD is shutdown"
+#~ msgstr "SWORD está fechado"
+
+#~ msgid "Number of Text modules"
+#~ msgstr "Número de módulos de Texto"
+
+#~ msgid "Number of Commentary modules"
+#~ msgstr "Número de módulos de Comentário"
+
+#~ msgid "Number of Dict/lex modules"
+#~ msgstr "Número de módulos Dicionário/Léxico"
+
+#~ msgid "Number of Book modules"
+#~ msgstr "Número de módulos Livro"
+
+#~ msgid "Number of Percomm modules"
+#~ msgstr "Números de módulos Percomm"
+
+#~ msgid "Number of Devotion modules"
+#~ msgstr "Número de módulos Devocional"
+
+#~ msgid "Number of Prayer modules"
+#~ msgstr "Número de módulos Oração"
+
+#~ msgid ""
+#~ "\n"
+#~ "First Run: need to create settings!\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Primeira vez: é necessário criar definições!\n"
 
 #~ msgid "can not create  .sword"
 #~ msgstr "não pode criar .sword"
