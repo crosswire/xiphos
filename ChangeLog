@@ -1,3 +1,7 @@
+2009-02-14  karl <charcoal@users.sf.net>
+
+	* fix #2593915 - crash on menuitem in detached bible window
+	
 2009-02-08  karl <charcoal@users.sf.net>
 
 	* 3.0.0 release.

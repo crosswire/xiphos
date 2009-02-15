@@ -28,6 +28,7 @@ extern "C" {
 
 #include "main/module_dialogs.h"
 	
+void gui_commentary_dialog_sync_toggled(GtkToggleButton * button, DIALOG_DATA * c);
 void gui_create_commentary_dialog(DIALOG_DATA * d, gboolean do_edit);
 void gui_commentary_dialog_create_menu(DIALOG_DATA * d);
 	

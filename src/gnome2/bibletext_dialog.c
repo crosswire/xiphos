@@ -577,11 +577,17 @@ static void sync_with_main(DIALOG_DATA *c)
 void gui_bible_dialog_sync_toggled(GtkToggleButton *button,
 				   DIALOG_DATA *c)
 {
-	if (button->active) {
-		sync_with_main(c);
-		c->sync = TRUE;
-	} else
-		c->sync = FALSE;
+	if (c && (c->mod_type == COMMENTARY_TYPE)) {
+		gui_commentary_dialog_sync_toggled(button, c);
+	} else {
+		if (c == NULL)
+			c = cur_vt;
+		if (button->active) {
+			sync_with_main(c);
+			c->sync = TRUE;
+		} else
+			c->sync = FALSE;
+	}
 }
 
 #ifdef OLD_NAVBAR
@@ -2209,9 +2215,16 @@ static void create_menu(DIALOG_DATA *t,
 	gtk_widget_hide(file3_menu_uiinfo[0].widget);
 	gtk_widget_hide(edit3_menu_uiinfo[2].widget);
 
+#if 0
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (file3_menu_uiinfo[2].widget),
 				       t->sync);
+#else
+	/* turning off these widgets because they just cause grief. */
+	gtk_widget_hide(file3_menu_uiinfo[1].widget);
+	gtk_widget_hide(file3_menu_uiinfo[2].widget);
+	gtk_widget_hide(file3_menu_uiinfo[3].widget);
+#endif
 
 	lookup_selection_menu = gtk_menu_new();
 	gtk_menu_item_set_submenu(GTK_MENU_ITEM(menu1_uiinfo[5].widget),
