@@ -660,62 +660,93 @@
 		</para>
 		<itemizedlist>
 		       <listitem>
-				<guibutton>F1</guibutton>: opens this manual.
+				<para>
+					<guibutton>F1</guibutton>: opens this manual.
+				</para>
 			</listitem>
 			<listitem>
-				<guibutton>F2</guibutton>: opens the <guibutton>Preferences</guibutton> dialog.
+				<para>
+					<guibutton>F2</guibutton>: opens the <guibutton>Preferences</guibutton> dialog.
+				</para>
 			</listitem>
 			<listitem>
-				<guibutton>F3</guibutton>: opens <guibutton>Advanced Search</guibutton>.
+				<para>
+					<guibutton>F3</guibutton>: opens <guibutton>Advanced Search</guibutton>.
+				</para>
 			</listitem>
 			<listitem>
-				<guibutton>F4</guibutton>: opens the <guibutton>Module Manager</guibutton>.
+				<para>
+					<guibutton>F4</guibutton>: opens the <guibutton>Module Manager</guibutton>.
+				</para>
 			</listitem>
 			<listitem>
-				<guibutton>Ctrl-L</guibutton> focuses and selects the main verse navbar text.  You can then immediately type
-				in new verse selection text.  Be aware that, as is the case with most Sword applications,
-				<application>Xiphos</application> understands many abbreviations: "G" is adequate to specify Genesis,
-				for example, and any book name by itself implies 1:1.
+				<para>
+					<guibutton>Ctrl-L</guibutton> focuses and selects the main verse navbar text.  You can then immediately type
+					in new verse selection text.  Be aware that, as is the case with most Sword applications,
+					<application>Xiphos</application> understands many abbreviations: "G" is adequate to specify Genesis,
+					for example, and any book name by itself implies 1:1.
+				</para>
 			</listitem>
 			<listitem>
-				<guibutton>Ctrl-F</guibutton> opens the "Find" dialog.  The subwindow to which it applies depends on which
-				of them are visible: The Bible is first preference, then the commentary or general book, then the
-				dictionary.  So a tab can be dedicated to just a genbook, and Ctrl-F will perform "Find" within that pane.
+				<para>
+					<guibutton>Ctrl-F</guibutton> opens the "Find" dialog.  The subwindow to which it applies depends on which
+					of them are visible: The Bible is first preference, then the commentary or general book, then the
+					dictionary.  So a tab can be dedicated to just a genbook, and Ctrl-F will perform "Find" within that pane.
+				</para>
 			</listitem>
 			<listitem>
-				<guibutton>Alt-C</guibutton> brings the Commentary View forward when previously obscured by the Book View.
+				<para>
+					<guibutton>Alt-C</guibutton> brings the Commentary View forward when previously obscured by the Book View.
+				</para>
 			</listitem>
 			<listitem>
-				<guibutton>Alt-G</guibutton> is the opposite of Alt-C, focusing on the general book.
+				<para>
+					<guibutton>Alt-G</guibutton> is the opposite of Alt-C, focusing on the general book.
+				</para>
 			</listitem>
 			<listitem>
-				<guibutton>Alt-B</guibutton> opens a bookmark dialog on the current verse.
+				<para>
+					<guibutton>Alt-B</guibutton> opens a bookmark dialog on the current verse.
+				</para>
 			</listitem>
 			<listitem>
-				<guibutton>Alt-D</guibutton> focuses on the dictionary navbar text.
+				<para>
+					<guibutton>Alt-D</guibutton> focuses on the dictionary navbar text.
+				</para>
 			</listitem>
 			<listitem>
-				<guibutton>Alt-P</guibutton> detaches/re-attaches the parallel view dialog.
+				<para>
+					<guibutton>Alt-P</guibutton> detaches/re-attaches the parallel view dialog.
+				</para>
 			</listitem>
 			<listitem>
-				<guibutton>Alt-Z</guibutton> opens the personal commentary editor.
+				<para>
+					<guibutton>Alt-Z</guibutton> opens the personal commentary editor.
+				</para>
 			</listitem>
 			<listitem>
-				<guibutton>Ctrl-Plus/Ctrl-Minus</guibutton> increases/decreases the base font size.
+				<para>
+					<guibutton>Ctrl-Plus/Ctrl-Minus</guibutton> increases/decreases the base font size.
+				</para>
 			</listitem>
 			<listitem>
+				<para>
 				Location bar navigation:
 				<itemizedlist>
 					<listitem>
-						<guibutton>Ctrl-p/Ctrl-n</guibutton>: Verse previous/next.
+						<para><guibutton>Ctrl-p/Ctrl-n</guibutton>: Verse
+					previous/next.</para>
 					</listitem>
 					<listitem>
-						<guibutton>p/n</guibutton>: Chapter previous/next.
+						<para><guibutton>p/n</guibutton>: Chapter
+					previous/next.</para>
 					</listitem>
 					<listitem>
-						<guibutton>P/N</guibutton>: Book previous/next.
+						<para><guibutton>P/N</guibutton>: Book
+					previous/next.</para>
 					</listitem>
 				</itemizedlist>
+				</para>
 			</listitem>
 		</itemizedlist>
 	</sect2>
@@ -740,25 +771,35 @@
 
 		<itemizedlist>
 			<listitem>
+				<para>
 				Morphology and Strong's references, enabled via the right-click menu in some modules, are displayed inline
 				with gtkhtml3; with MozEmbed, a blocked display is used, where these references are aligned beneath the word
 				to which they refer, for a much more readable, less cluttered display.
+				</para>
 			</listitem>
 			<listitem>
+				<para>
 				Footnote and cross-reference markers (<guibutton>*n</guibutton>, <guibutton>*x</guibutton>) are displayed as
 				proper superscripts in MozEmbed, but not in gtkhtml3.
+				</para>
 			</listitem>
 			<listitem>
+				<para>
 				Links in gtkhtml3 are necessarily both colored and underlined; in MozEmbed, no underlines are needed.
+				</para>
 			</listitem>
 			<listitem>
+				<para>
 				Under MozEmbed, double-space display is available using the <guimenuitem>View</guimenuitem> menu, but not
 				under gtkhtml3.
+				</para>
 			</listitem>
 			<listitem>
+				<para>
 				It is not possible for gtkhtml3 to interpret multiple font face directives in a single window, so the
 				gtkhtml3 detached parallel view window cannot provide per-module font selections.  Also, modules' internal
 				font requests are ignored in any gtkhtml3 window.
+				</para>	
 			</listitem>
 		</itemizedlist>
 
