@@ -903,6 +903,10 @@ void _connect_signals(NAVBAR_VERSEKEY navbar, DIALOG_DATA * dialog)
  *   GtkWidget *
  */
 
+#if !defined(HAVE_LIBGTK_X11_2_0) && !defined(HAVE_LIBGTK_WIN32_2_0)
+#define	gtk_widget_set_tooltip_text(x,y)	/* too old for this tooltip support */
+#endif /* !HAVE_LIBGTK_X11_2_0 && !HAVE_LIBGTK_WIN32_2_0 */
+
 GtkWidget *gui_navbar_versekey_dialog_new(DIALOG_DATA * dialog)
 {
 	gchar *glade_file;
@@ -925,7 +929,9 @@ GtkWidget *gui_navbar_versekey_dialog_new(DIALOG_DATA * dialog)
 	dialog->navbar.button_history_menu = glade_xml_get_widget(gxml, "togglebutton_history_list");
 		
 	dialog->navbar.button_sync = glade_xml_get_widget(gxml, "togglebutton_sync");
-	gtk_widget_show(dialog->navbar.button_sync); 
+	gtk_widget_show(dialog->navbar.button_sync);
+	gtk_widget_set_tooltip_text(dialog->navbar.button_sync,
+				    _("Synchronize this window from main window"));
 	gtk_widget_hide(dialog->navbar.button_history_back); 
 	gtk_widget_hide(dialog->navbar.button_history_next); 
 	gtk_widget_hide(dialog->navbar.button_history_menu); 

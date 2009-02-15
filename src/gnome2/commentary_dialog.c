@@ -1400,6 +1400,18 @@ static void on_book_heading_activate(GtkMenuItem *menuitem,
 }
 
 
+void gui_commentary_dialog_sync_toggled(GtkToggleButton * button,
+					DIALOG_DATA * d)
+{
+	if (d == NULL)
+		d = cur_d;
+	if (button->active) {
+		sync_with_main(d);
+		d->sync = TRUE;
+	} else
+		d->sync = FALSE;
+}
+
 /******************************************************************************
  * Name
  *  
@@ -1427,8 +1439,13 @@ static void on_chapter_heading_activate(GtkMenuItem *menuitem,
 static void stay_in_sync_activate(GtkCheckMenuItem *menuitem,
 				  gpointer data)
 {
+#ifdef OLD_NAVBAR
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(sync_button),
 				     menuitem->active);
+#else
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cur_d->navbar.button_sync),
+				     menuitem->active);
+#endif
 }
 
 
@@ -1756,11 +1773,19 @@ static void create_menu(DIALOG_DATA *d,
 	gtk_widget_hide(menu1_uiinfo[9].widget);	// read aloud
 	gtk_widget_hide(file3_menu_uiinfo[4].widget);		// print
 #endif /* __CYGWIN__ */
+	gtk_widget_hide(file3_menu_uiinfo[0].widget);
 	gtk_widget_hide(edit3_menu_uiinfo[2].widget);
 
+#if 0
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (file3_menu_uiinfo[2].widget),
 				       d->sync);
+#else
+	/* turning off these widgets because they just cause grief. */
+	gtk_widget_hide(file3_menu_uiinfo[1].widget);
+	gtk_widget_hide(file3_menu_uiinfo[2].widget);
+	gtk_widget_hide(file3_menu_uiinfo[3].widget);
+#endif
 
 	view_menu = gtk_menu_new();
 	gtk_menu_item_set_submenu(GTK_MENU_ITEM
