@@ -355,24 +355,15 @@ static GtkWidget *create_dialog_mod_font(MOD_FONT * mf)
 	gtk_widget_show(combo_size);
 	gtk_box_pack_start(GTK_BOX(hbox_picker), combo_size, TRUE, TRUE,
 			   0);
-	combo_size_items =
-	    g_list_append(combo_size_items, (gpointer) _("+5"));
-	combo_size_items =
-	    g_list_append(combo_size_items, (gpointer) _("+4"));
-	combo_size_items =
-	    g_list_append(combo_size_items, (gpointer) _("+3"));
-	combo_size_items =
-	    g_list_append(combo_size_items, (gpointer) _("+2"));
-	combo_size_items =
-	    g_list_append(combo_size_items, (gpointer) _("+1"));
-	combo_size_items =
-	    g_list_append(combo_size_items, (gpointer) _("+0"));
-	combo_size_items =
-	    g_list_append(combo_size_items, (gpointer) _("-1"));
-	combo_size_items =
-	    g_list_append(combo_size_items, (gpointer) _("-2"));
-	combo_size_items =
-	    g_list_append(combo_size_items, (gpointer) _("-3"));
+	combo_size_items = g_list_append(combo_size_items, (gpointer) "+5");
+	combo_size_items = g_list_append(combo_size_items, (gpointer) "+4");
+	combo_size_items = g_list_append(combo_size_items, (gpointer) "+3");
+	combo_size_items = g_list_append(combo_size_items, (gpointer) "+2");
+	combo_size_items = g_list_append(combo_size_items, (gpointer) "+1");
+	combo_size_items = g_list_append(combo_size_items, (gpointer) "+0");
+	combo_size_items = g_list_append(combo_size_items, (gpointer) "-1");
+	combo_size_items = g_list_append(combo_size_items, (gpointer) "-2");
+	combo_size_items = g_list_append(combo_size_items, (gpointer) "-3");
 	gtk_combo_set_popdown_strings(GTK_COMBO(combo_size),
 				      combo_size_items);
 	g_list_free(combo_size_items);
@@ -454,7 +445,7 @@ void gui_set_module_font(gchar * mod_name)
 {
 	gchar buf[256];
 	MOD_FONT *mf;
-	GString *str = g_string_new(NULL);
+	gchar *str;
 
 	mf = get_font(mod_name);
 
@@ -467,10 +458,11 @@ void gui_set_module_font(gchar * mod_name)
 	gtk_label_set_text(GTK_LABEL(label_mod), mf->mod_name);
 	gtk_label_set_text(GTK_LABEL(label_current_font), mf->old_font);
 	if (mf->old_font) {		
-		g_string_printf(str,"%s, 12",mf->old_font);
+		str = g_strdup_printf("%s, 12", mf->old_font);
 		gnome_font_picker_set_font_name((GnomeFontPicker *)
 						fontpicker,
-						str->str);
+						str);
+		g_free(str);
 	}
 	if (mf->old_font_size) {
 		gtk_entry_set_text(GTK_ENTRY(combo_entry_size),
@@ -481,6 +473,4 @@ void gui_set_module_font(gchar * mod_name)
 	   so it can display the module with the new font - if there is a
 	   better way please fix it :) */
 	gtk_main();
-	g_string_free(str, TRUE);
-
 }
