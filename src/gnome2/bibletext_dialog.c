@@ -1863,6 +1863,33 @@ static void global_option_headings(GtkCheckMenuItem *menuitem,
 
 /******************************************************************************
  * Name
+ *  global_option_transliteration
+ *
+ * Synopsis
+ *   #include "gui/.h"
+ *
+ *   void global_option_transliteration(GtkMenuItem * menuitem,
+				        GBS_DATA * g)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   void
+ */
+
+static void global_option_transliteration(GtkCheckMenuItem *menuitem,
+					  DIALOG_DATA *t)
+{
+	gchar *url = g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
+	t->ops->transliteration = menuitem->active;
+	main_dialogs_url_handler(t, url, TRUE);
+	g_free(url);
+}
+
+
+/******************************************************************************
+ * Name
  *
  *
  * Synopsis
@@ -2095,12 +2122,20 @@ static GnomeUIInfo module_options_menu_uiinfo[] = {
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
 	{ /* 12 */
+	 GNOME_APP_UI_TOGGLEITEM, N_("Transliteration"),
+	 NULL,
+	 NULL, //(gpointer) on_global_option,
+	 (gpointer) "Transliteration",	/* not seen by user */
+	 NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	{ /* 13 */
 	 GNOME_APP_UI_SUBTREE, N_("Variants"),
 	 NULL,
 	 variants_menu_uiinfo, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
-	{ /* 13 */
+	{ /* 14 */
 	 GNOME_APP_UI_TOGGLEITEM, N_("Image Content"),
 	 NULL,
 	 NULL, //(gpointer) on_global_option,
@@ -2108,7 +2143,7 @@ static GnomeUIInfo module_options_menu_uiinfo[] = {
 	 NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
-	{ /* 14 */
+	{ /* 15 */
 	 GNOME_APP_UI_TOGGLEITEM, N_("Respect Font Faces"),
 	 NULL,
 	 NULL, //(gpointer) on_global_option,
@@ -2204,9 +2239,10 @@ static void create_menu(DIALOG_DATA *t,
 	gtk_widget_hide(module_options_menu_uiinfo[9].widget);	// hebrew_vowel_points
 	gtk_widget_hide(module_options_menu_uiinfo[10].widget);	// hebrew_cantillation
 	gtk_widget_hide(module_options_menu_uiinfo[11].widget);	// headings
-	gtk_widget_hide(module_options_menu_uiinfo[12].widget);	// variants
-	gtk_widget_hide(module_options_menu_uiinfo[13].widget);	// image content
-	gtk_widget_hide(module_options_menu_uiinfo[14].widget);	// respect font faces
+	gtk_widget_hide(module_options_menu_uiinfo[12].widget);	// transliteration
+	gtk_widget_hide(module_options_menu_uiinfo[13].widget);	// variants
+	gtk_widget_hide(module_options_menu_uiinfo[14].widget);	// image content
+	gtk_widget_hide(module_options_menu_uiinfo[15].widget);	// respect font faces
 	gtk_widget_hide(menu1_uiinfo[6].widget);	// unlock_module
 #if defined(__CYGWIN__) || defined(WIN32)
 	gtk_widget_hide(menu1_uiinfo[7].widget);	// read aloud
@@ -2350,7 +2386,7 @@ static void create_menu(DIALOG_DATA *t,
 	if (main_check_for_global_option(mod_name, "ThMLHeadings") ||
 	    main_check_for_global_option(mod_name, "OSISHeadings")) {
 		gtk_widget_show(module_options_menu_uiinfo[11].widget);
-		 GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[11].
+		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[11].
 				    widget)->active = t->ops->headings;
 
 		g_signal_connect(GTK_OBJECT(module_options_menu_uiinfo[11].widget),
@@ -2358,8 +2394,18 @@ static void create_menu(DIALOG_DATA *t,
 				G_CALLBACK(global_option_headings),
 				(DIALOG_DATA *)t);
 	}
+
+	gtk_widget_show(module_options_menu_uiinfo[12].widget);
+	GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[12].
+			    widget)->active = t->ops->transliteration;
+
+	g_signal_connect(GTK_OBJECT(module_options_menu_uiinfo[11].widget),
+			 "activate",
+			 G_CALLBACK(global_option_transliteration),
+			 (DIALOG_DATA *)t);
+
 	if (main_check_for_global_option(mod_name, "ThMLVariants")) {
-		gtk_widget_show(module_options_menu_uiinfo[12].widget);
+		gtk_widget_show(module_options_menu_uiinfo[13].widget);
 
 		gtk_widget_show(all_readings_uiinfo[0].widget);	// primary
 		gtk_widget_show(all_readings_uiinfo[1].widget);	// secondary
@@ -2373,13 +2419,13 @@ static void create_menu(DIALOG_DATA *t,
 				    widget)->active = t->ops->variants_all;
 	}
 	if (t->ops->image_content != -1) {
-		gtk_widget_show(module_options_menu_uiinfo[13].widget);
-		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[13].
+		gtk_widget_show(module_options_menu_uiinfo[14].widget);
+		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[14].
 				    widget)->active = t->ops->image_content;
 	}
 	if (t->ops->respect_font_faces != -1) {
-		gtk_widget_show(module_options_menu_uiinfo[14].widget);
-		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[14].
+		gtk_widget_show(module_options_menu_uiinfo[15].widget);
+		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[15].
 				    widget)->active = t->ops->respect_font_faces;
 	}
 	if (t->is_locked)
