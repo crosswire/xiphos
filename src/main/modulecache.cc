@@ -38,7 +38,7 @@ ModuleCache::BookCacheMap BookModuleMap; // (we may destroy modules within.)
 // Needed here: Just the namespace-less functions.
 
 // utility function to get a simple bitset.
-uint32_t
+int
 ConstructFlags(GLOBAL_OPS *ops)
 {
 	int flags = 0;

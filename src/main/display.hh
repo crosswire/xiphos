@@ -65,7 +65,7 @@ protected:
 	gboolean   is_rtol;
 	gboolean   strongs_or_morph;
 	gboolean   strongs_and_morph;
-	uint32_t   cache_flags;
+	int	   cache_flags;
 };
 
 class GTKChapDisp : public GTKEntryDisp {
@@ -124,7 +124,7 @@ protected:
 	gboolean    is_rtol;
 	gboolean   strongs_or_morph;
 	gboolean   strongs_and_morph;
-	uint32_t   cache_flags;
+	int	   cache_flags;
 };
 
 class DialogChapDisp : public  DialogEntryDisp {
