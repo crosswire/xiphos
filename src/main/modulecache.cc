@@ -57,7 +57,7 @@ ConstructFlags(GLOBAL_OPS *ops)
 	flags |= (ops->variants_all          ? VariantsAll : 0);
 	flags |= (ops->variants_primary      ? VariantsPrimary : 0);
 	flags |= (ops->variants_secondary    ? VariantsSecondary : 0);
-	flags |= (ops->transliteration       ? VariantsSecondary : 0);
+	flags |= (ops->transliteration       ? Transliteration : 0);
 	flags |= (ops->commentary_by_chapter ? CommentaryChapter : 0);
 	return flags;
 }
