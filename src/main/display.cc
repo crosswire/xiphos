@@ -896,7 +896,7 @@ GTKEntryDisp::Display(SWModule &imodule)
 
 	if (backend->module_type(imodule.Name()) == COMMENTARY_TYPE) {
 		VerseKey *key = (VerseKey *)(SWKey *)imodule;
-		uint16_t cache_flags = ConstructFlags(ops);
+		cache_flags = ConstructFlags(ops);
 		const char *ModuleName = imodule.Name();
 
 		ModuleCache::CacheVerse& cVerse = ModuleMap
@@ -1903,7 +1903,7 @@ DialogEntryDisp::Display(SWModule &imodule)
 
 	if (be->module_type(imodule.Name()) == COMMENTARY_TYPE) {
 		VerseKey *key = (VerseKey *)(SWKey *)imodule;
-		uint16_t cache_flags = ConstructFlags(ops);
+		cache_flags = ConstructFlags(ops);
 		const char *ModuleName = imodule.Name();
 
 		ModuleCache::CacheVerse& cVerse = ModuleMap
@@ -1985,7 +1985,7 @@ DialogChapDisp::Display(SWModule &imodule)
 	g_free(file);
 
 	main_dialog_set_global_options((BackEnd*)be, ops);
-	uint16_t cache_flags = ConstructFlags(ops);
+	cache_flags = ConstructFlags(ops);
 	strongs_and_morph = ((ops->strongs || ops->lemmas) &&
 			     ops->morphs);
 	strongs_or_morph  = ((ops->strongs || ops->lemmas) ||
