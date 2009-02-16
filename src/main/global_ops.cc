@@ -52,7 +52,7 @@ static void set_dialog_global_option(BackEnd *be,
 }
 
 
-static void set_dialog_global_variant(BackEnd *be,
+static void set_dialog_global_textual(BackEnd *be,
 				      const char *option,
 				      const char *choice)
 {
@@ -76,7 +76,7 @@ static void set_global_option(int manager,
 }
 
 
-static void set_global_variant(int manager,
+static void set_global_textual(int manager,
 			       const char *option,
 			       const char *choice)
 {
@@ -162,14 +162,19 @@ void main_dialog_set_global_options(gpointer backend,
 				 ops->headings);
 	set_dialog_global_option(b, "Words of Christ in Red",
 				 ops->words_in_red);
+
+	set_dialog_global_textual(b, "Transliteration",
+				  (ops->transliteration
+				   ? "Latin" : "Off"));
+
 	if (ops->variants_primary)
-		set_dialog_global_variant(b, "Textual Variants", 
+		set_dialog_global_textual(b, "Textual Variants", 
 					  "Primary Reading");
 	else if (ops->variants_secondary)
-		set_dialog_global_variant(b, "Textual Variants",
+		set_dialog_global_textual(b, "Textual Variants",
 					  "Secondary Reading");
 	else if (ops->variants_all)
-		set_dialog_global_variant(b, "Textual Variants",
+		set_dialog_global_textual(b, "Textual Variants",
 					  "All Readings");
 }
 
@@ -212,14 +217,19 @@ void main_set_global_options(GLOBAL_OPS * ops)
 			  ops->headings);
 	set_global_option(ops->module_type, "Words of Christ in Red",
 			  ops->words_in_red);
+
+	set_global_textual(ops->module_type, "Transliteration",
+			   (ops->transliteration
+			    ? "Latin" : "Off"));
+
 	if (ops->variants_primary)
-		set_global_variant(ops->module_type, "Textual Variants", 
+		set_global_textual(ops->module_type, "Textual Variants", 
 				   "Primary Reading");
 	else if (ops->variants_secondary)
-		set_global_variant(ops->module_type, "Textual Variants",
+		set_global_textual(ops->module_type, "Textual Variants",
 				   "Secondary Reading");
 	else if (ops->variants_all)
-		set_global_variant(ops->module_type, "Textual Variants",
+		set_global_textual(ops->module_type, "Textual Variants",
 				   "All Readings");
 }
 
@@ -376,6 +386,8 @@ GLOBAL_OPS *main_new_globals(gchar * mod_name)
 	    gui_of2tf(module_options[mod_name]["Hebrew Cantillation"].c_str());
 	ops->headings =
 	    gui_of2tf(module_options[mod_name]["Headings"].c_str());
+	ops->transliteration =
+	    gui_of2tf(module_options[mod_name]["Transliteration"].c_str());
 
 	ops->variants_all =
 	    gui_of2tf(module_options[mod_name]["All Readings"].c_str());

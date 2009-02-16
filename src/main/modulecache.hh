@@ -40,7 +40,7 @@
 #include <assert.h>
 #include "main/global_ops.hh"
 
-typedef unsigned short int uint16_t;
+typedef unsigned int uint32_t;
 
 #ifdef __cplusplus
 
@@ -67,28 +67,29 @@ namespace ModuleCache {
 	static const int VariantsAll        = 0x1000;
 	static const int VariantsPrimary    = 0x2000;
 	static const int VariantsSecondary  = 0x4000;
-	static const int CommentaryChapter  = 0x8000;
+	static const int Transliteration    = 0x8000;
+	static const int CommentaryChapter  =0x10000;
 
 	class CacheVerse {
 	public:
 		CacheVerse();
-		CacheVerse(uint16_t flags,
+		CacheVerse(uint32_t flags,
 			   const char *text,
 			   const char *header = NULL);
 		~CacheVerse();
 
 		bool		TextIsValid();
 		bool		HeaderIsValid();
-		bool		CacheIsValid(uint16_t flags);
+		bool		CacheIsValid(uint32_t flags);
 
-		uint16_t	GetFlags();
-		void		SetFlags(uint16_t flags = 0);
-		void		AddFlag(uint16_t flag);
-		void		DelFlag(uint16_t flag);
+		uint32_t	GetFlags();
+		void		SetFlags(uint32_t flags = 0);
+		void		AddFlag(uint32_t flag);
+		void		DelFlag(uint32_t flag);
 
 		const char *	GetText();
-		void		SetText(const char *text, uint16_t flags);
-		void		AppendText(const char *text, uint16_t flags);
+		void		SetText(const char *text, uint32_t flags);
+		void		AppendText(const char *text, uint32_t flags);
 
 		const char *	GetHeader();
 		void		SetHeader(const char *text);
@@ -100,7 +101,7 @@ namespace ModuleCache {
 	private:
 		char *		_text;
 		char *		_header;
-		uint16_t	_flags;		// bitmask
+		uint32_t	_flags;		// bitmask
 	};
 
 	// In precision order.
@@ -135,7 +136,7 @@ CacheVerse()
 
 inline
 ModuleCache::CacheVerse::
-CacheVerse(uint16_t flags, const char *text, const char *header)
+CacheVerse(uint32_t flags, const char *text, const char *header)
     : _text(text     ? g_strdup(text)   : NULL),
       _header(header ? g_strdup(header) : NULL),
       _flags(flags)
@@ -171,13 +172,13 @@ HeaderIsValid()
 
 inline
 bool ModuleCache::CacheVerse::
-CacheIsValid(uint16_t flags)
+CacheIsValid(uint32_t flags)
 {
 	return TextIsValid() && (flags == GetFlags());
 }
 
 inline
-uint16_t ModuleCache::CacheVerse::
+uint32_t ModuleCache::CacheVerse::
 GetFlags()
 {
 	return _flags;
@@ -185,21 +186,21 @@ GetFlags()
 
 inline
 void ModuleCache::CacheVerse::
-SetFlags(uint16_t flags)
+SetFlags(uint32_t flags)
 {
 	_flags = flags;
 }
 
 inline
 void ModuleCache::CacheVerse::
-AddFlag(uint16_t flag)
+AddFlag(uint32_t flag)
 {
 	_flags |= flag;
 }
 
 inline
 void ModuleCache::CacheVerse::
-DelFlag(uint16_t flag)
+DelFlag(uint32_t flag)
 {
 	_flags &= ~flag;
 }
@@ -214,7 +215,7 @@ GetText()
 
 inline
 void ModuleCache::CacheVerse::
-SetText(const char *text, uint16_t flags)
+SetText(const char *text, uint32_t flags)
 {
 	if (_text)
 		g_free(_text);
@@ -229,7 +230,7 @@ SetText(const char *text, uint16_t flags)
 
 inline
 void ModuleCache::CacheVerse::
-AppendText(const char *text, uint16_t flags)
+AppendText(const char *text, uint32_t flags)
 {
 	if (_text) {
 		char *new_text = g_strconcat(_text, text, NULL);
@@ -300,7 +301,7 @@ InvalidateHeader()
 // namespace-free routines.
 
 // utility function to give our bitset.
-uint16_t ConstructFlags(GLOBAL_OPS * ops);
+uint32_t ConstructFlags(GLOBAL_OPS * ops);
 
 // access from plain C to eliminate a module's entire cache (mod_mgr.c).
 void ModuleCacheErase(const char *modname);
