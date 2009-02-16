@@ -768,7 +768,7 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule, gint mod_type)
 	if (strongs_and_morph)
 		set_morph_order(imodule);
 
-	if (is_rtol)
+	if (is_rtol && !ops->transliteration)
 		swbuf.append("<div align=right>");
 
 	for (key->Verse(1);
@@ -804,7 +804,7 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule, gint mod_type)
 			     : rework /* left as-is */);
 	}
 
-	if (is_rtol)
+	if (is_rtol && !ops->transliteration)
 		swbuf.append("</div>");
 	swbuf.append("</font></body></html>");
 
@@ -1027,7 +1027,7 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 
 		utf8_key = strdup((char*)key->getText());
 
-		if (is_rtol)
+		if (is_rtol && !ops->transliteration)
 			swbuf.append("<div align=right>");
 
 		num = main_format_number(key->Verse());
@@ -1057,7 +1057,7 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 		swbuf.append(buf);
 		g_free(buf);
 
-		if (is_rtol)
+		if (is_rtol && !ops->transliteration)
 			swbuf.append("</div>");
 
 		(*mod)++;
@@ -1157,7 +1157,7 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 
 		utf8_key = strdup((char*)key->getText());
 
-		if (is_rtol)
+		if (is_rtol && !ops->transliteration)
 			swbuf.append("<div align=right>");
 
 		num = main_format_number(key->Verse());
@@ -1203,7 +1203,7 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 #endif
 
 		swbuf.append(cVerse.GetText());
-		if (is_rtol)
+		if (is_rtol && !ops->transliteration)
 			swbuf.append("</div>");
 	}
 }
@@ -1470,7 +1470,7 @@ GTKChapDisp::Display(SWModule &imodule)
 	swbuf.append(buf);
 	g_free(buf);
 
-	if (is_rtol)
+	if (is_rtol && !ops->transliteration)
 		swbuf.append("<div align=right>");
 
 	main_set_global_options(ops);
@@ -1616,7 +1616,7 @@ GTKChapDisp::Display(SWModule &imodule)
 	key->Chapter(curChapter);
 	key->Verse(curVerse);
 
-	if (is_rtol)
+	if (is_rtol && !ops->transliteration)
 		swbuf.append("</div></font></body></html>");
 	else
 		swbuf.append("</font></body></html>");
@@ -1808,7 +1808,7 @@ DialogEntryDisp::DisplayByChapter(SWModule &imodule, gint mod_type)
 	if (strongs_and_morph)
 		set_morph_order(imodule);
 
-	if (is_rtol)
+	if (is_rtol && !ops->transliteration)
 		swbuf.append("<div align=right>");
 
 	for (key->Verse(1);
@@ -1844,7 +1844,7 @@ DialogEntryDisp::DisplayByChapter(SWModule &imodule, gint mod_type)
 			     : rework /* left as-is */);
 	}
 
-	if (is_rtol)
+	if (is_rtol && !ops->transliteration)
 		swbuf.append("</div>");
 	swbuf.append("</font></body></html>");
 
@@ -2016,7 +2016,7 @@ DialogChapDisp::Display(SWModule &imodule)
 	swbuf += buf;
 	g_free(buf);
 
-	if (is_rtol)
+	if (is_rtol && !ops->transliteration)
 		swbuf.append("<div align=right>");
 
 	for (key->Verse(1);
@@ -2149,7 +2149,7 @@ DialogChapDisp::Display(SWModule &imodule)
 	key->Chapter(curChapter);
 	key->Verse(curVerse);
 
-	if (is_rtol)
+	if (is_rtol && !ops->transliteration)
 		swbuf.append("</div></font></body></html>");
 	else
 		swbuf.append("</font></body></html>");
@@ -2416,7 +2416,7 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 	swbuf.append(buf);
 	g_free(buf);
 
-	if (is_rtol)
+	if (is_rtol && !ops->transliteration)
 		swbuf.append("<div ALIGN=right>");
 
 	gecko_html_write(html,swbuf.c_str(),swbuf.length());
@@ -2493,7 +2493,7 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 	key->Chapter(curChapter);
 	key->Verse(curVerse);
 
-	if (is_rtol)
+	if (is_rtol && !ops->transliteration)
 		swbuf.append("</div></font></body></html>");
 	else
 		swbuf.append("</font></body></html>");
