@@ -1,3 +1,7 @@
+2009-02-15  karl <charcoal@users.sf.net>
+
+	* add transliteration.
+	
 2009-02-14  karl <charcoal@users.sf.net>
 
 	* fix #2593915 - crash on menuitem in detached bible window

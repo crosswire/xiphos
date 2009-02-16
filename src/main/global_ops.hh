@@ -38,12 +38,13 @@ struct  _global_ops {
 	gboolean greekaccents;
 	gboolean lemmas;
 	gboolean scripturerefs;
-	gboolean hebrewpoints; 
-	gboolean hebrewcant; 
-	gboolean headings; 
-	gboolean variants_primary; 
+	gboolean hebrewpoints;
+	gboolean hebrewcant;
+	gboolean headings;
+	gboolean variants_primary;
 	gboolean variants_secondary;
-	gboolean variants_all; 
+	gboolean variants_all;
+	gboolean transliteration;
 	gboolean commentary_by_chapter;
 	gint module_type;
 	gint image_content;

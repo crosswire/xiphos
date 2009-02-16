@@ -957,12 +957,20 @@ static GnomeUIInfo module_options_menu_uiinfo[] = {
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
 	{ /* 12 */
+	 GNOME_APP_UI_TOGGLEITEM, N_("Transliteration"),
+	 NULL,
+	 (gpointer) on_global_option,
+	 (gpointer) "Transliteration",	/* not seen by user */
+	 NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	{ /* 13 */
 	 GNOME_APP_UI_SUBTREE, N_("Variants"),
 	 NULL,
 	 variants_menu_uiinfo, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
-	{ /* 13 */
+	{ /* 14 */
 	 GNOME_APP_UI_TOGGLEITEM, N_("Image Content"),
 	 NULL,
 	 (gpointer) on_global_option,
@@ -970,7 +978,7 @@ static GnomeUIInfo module_options_menu_uiinfo[] = {
 	 NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
-	{ /* 14 */
+	{ /* 15 */
 	 GNOME_APP_UI_TOGGLEITEM, N_("Respect Font Faces"),
 	 NULL,
 	 (gpointer) on_global_option,
@@ -978,7 +986,7 @@ static GnomeUIInfo module_options_menu_uiinfo[] = {
 	 NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
-	{ /* 15 */
+	{ /* 16 */
 	 GNOME_APP_UI_TOGGLEITEM, N_("Commentary by Chapter"),
 	 NULL,
 	 (gpointer) on_global_option,
@@ -1104,10 +1112,11 @@ void gui_create_pm_commentary(void)
 	gtk_widget_hide(module_options_menu_uiinfo[9].widget);	// hebrew_vowel_points
 	gtk_widget_hide(module_options_menu_uiinfo[10].widget);	// hebrew_cantillation
 	gtk_widget_hide(module_options_menu_uiinfo[11].widget);	// headings
-	gtk_widget_hide(module_options_menu_uiinfo[12].widget);	// variants
-	gtk_widget_hide(module_options_menu_uiinfo[13].widget);	// image content
-	gtk_widget_hide(module_options_menu_uiinfo[14].widget);	// respect font faces
-	gtk_widget_hide(module_options_menu_uiinfo[15].widget);	// commentary by chapter
+	gtk_widget_hide(module_options_menu_uiinfo[12].widget);	// transliteration
+	gtk_widget_hide(module_options_menu_uiinfo[13].widget);	// variants
+	gtk_widget_hide(module_options_menu_uiinfo[14].widget);	// image content
+	gtk_widget_hide(module_options_menu_uiinfo[15].widget);	// respect font faces
+	gtk_widget_hide(module_options_menu_uiinfo[16].widget);	// commentary by chapter
 
 	gtk_widget_hide(menu1_uiinfo[9].widget);	// unlock
 	gtk_widget_hide(menu1_uiinfo[11].widget);	// dump pers.comm
@@ -1220,11 +1229,16 @@ void gui_create_pm_commentary(void)
 	if (main_check_for_global_option(mod_name, "ThMLHeadings") ||
 	    main_check_for_global_option(mod_name, "OSISHeadings")) {
 		gtk_widget_show(module_options_menu_uiinfo[11].widget);
-		 GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[11].
+		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[11].
 				    widget)->active = ops->headings;   
 	}
+
+	gtk_widget_show(module_options_menu_uiinfo[12].widget);
+	GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[12].
+			    widget)->active = ops->transliteration;   
+
 	if (main_check_for_global_option(mod_name, "ThMLVariants")) {
-		gtk_widget_show(module_options_menu_uiinfo[12].widget);
+		gtk_widget_show(module_options_menu_uiinfo[13].widget);
 
 		gtk_widget_show(all_readings_uiinfo[0].widget);	// primary
 		gtk_widget_show(all_readings_uiinfo[1].widget);	// secondary
@@ -1238,18 +1252,18 @@ void gui_create_pm_commentary(void)
 				    widget)->active = ops->variants_all;
 	}
 	if (ops->image_content != -1) {
-		gtk_widget_show(module_options_menu_uiinfo[13].widget);
-		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[13].
+		gtk_widget_show(module_options_menu_uiinfo[14].widget);
+		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[14].
 				    widget)->active = ops->image_content;
 	}
 	if (ops->respect_font_faces != -1) {
-		gtk_widget_show(module_options_menu_uiinfo[14].widget);
-		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[14].
+		gtk_widget_show(module_options_menu_uiinfo[15].widget);
+		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[15].
 				    widget)->active = ops->respect_font_faces;
 	}
 
-	gtk_widget_show(module_options_menu_uiinfo[15].widget);
-	GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[15].
+	gtk_widget_show(module_options_menu_uiinfo[16].widget);
+	GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[16].
 			    widget)->active = ops->commentary_by_chapter;   
 
 	if (main_has_cipher_tag(mod_name))
@@ -1260,37 +1274,9 @@ void gui_create_pm_commentary(void)
 		gtk_widget_show(menu1_uiinfo[11].widget);	// dump
 	}
 	
-	/* 
-	 * menu1_uiinfo[0].widget, "about");
-	 * menu1_uiinfo[1].widget, "separator4");
-	 * menu1_uiinfo[2].widget, "file3");
-	 * file3_menu_uiinfo[0].widget, "view_text");
-	 * view_text_menu_uiinfo[0].widget, "item1");
-	 * file3_menu_uiinfo[1].widget, "separator8");
-	 * file3_menu_uiinfo[2].widget, "print1");
-	 * menu1_uiinfo[3].widget, "edit3");
-	 * edit3_menu_uiinfo[0].widget, "copy2");
-	 * edit3_menu_uiinfo[1].widget, "find1");
-	 * edit3_menu_uiinfo[2].widget, "note");
-	 * note_menu_uiinfo[0].widget, "item2");
-	 * menu1_uiinfo[4].widget, "module_options");
-	 * module_options_menu_uiinfo[0].widget, "set_module_font");
-	 * module_options_menu_uiinfo[1].widget, "separator5");
-	 * menu1_uiinfo[5].widget, "lookup_selection");
-	 * lookup_selection_menu_uiinfo[0].widget, "use_current_dictionary");
-	 * lookup_selection_menu_uiinfo[1].widget, "separator6");
-	 * menu1_uiinfo[7].widget, "separator7");
-	 * menu1_uiinfo[8].widget, "show_tabs");
-	 */
 	gtk_menu_popup((GtkMenu*)menu1, NULL, NULL, NULL, NULL, 2,
 		     			gtk_get_current_event_time());
-	/*gnome_popup_menu_do_popup_modal(menu1, NULL,
-					NULL, event, NULL,
-					widgets.html_text);*/
-	//gtk_widget_destroy(menu1);
 	g_free(ops);
 }
-
-
 
 //******  end of file  ******/
