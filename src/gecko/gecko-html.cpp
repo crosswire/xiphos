@@ -222,7 +222,7 @@ static gint html_open_uri(GtkMozEmbed * embed, const gchar * uri)
 
 	// for some reason, `/' is not properly encoded for us as "%2F"
 	// so we have to do it ourselves.  /mutter/ *ick*
-	if (place = strchr(uri, '?')) {		// url's beginning, as-is.
+	if (place = strchr((char*)uri, '?')) {		// url's beginning, as-is.
 		strncpy(tmpbuf, uri, (++place)-uri);
 		tmpbuf[place-uri] = '\0';
 		tmpstr = g_string_append(tmpstr, tmpbuf);
@@ -246,7 +246,7 @@ static gint html_open_uri(GtkMozEmbed * embed, const gchar * uri)
 		strcpy(book, priv->dialog->key);
 		*(strrchr(book, ' ')) = '\0';
 		
-		if (buf = strstr(uri, "&value=")) {
+		if (buf = strstr((char*)uri, "&value=")) {
 			buf += 7;
 			place = buf;
 	

@@ -1109,7 +1109,7 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 		gchar tmpbuf[1023];
 		GString *tmpstr = g_string_new(NULL);
 
-		place = strchr(url, '?');		// url's beginning, as-is.
+		place = (char*)strchr(url, '?');		// url's beginning, as-is.
 		strncpy(tmpbuf, url, (++place)-url);
 		tmpbuf[place-url] = '\0';
 		tmpstr = g_string_append(tmpstr, tmpbuf);

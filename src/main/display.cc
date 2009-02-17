@@ -216,7 +216,7 @@ AnalyzeForImageSize(const char *origtext,
 	resized = "";
 	trail = text;
 
-	for (path = strcasestr(text, "<img src=\"");
+	for (path = (char*)strcasestr(text, "<img src=\"");
 	     path;
 	     path = strcasestr(path, "<img src=\"")) {
 
@@ -446,9 +446,9 @@ block_dump(SWBuf& rendered,
 	if (*strongs) {
 		s = g_strrstr(*strongs, "</a>");
 		*s = '\0';
-		t = strrchr(*strongs, '>') + 1;
+		t = (char*)strrchr(*strongs, '>') + 1;
 		// correct weird NASB lexicon references.
-		if (s0 = strchr(*strongs, '!')) {
+		if (s0 = (char*)strchr(*strongs, '!')) {
 			do {
 				*s0 = *(s0+1);
 				++s0;
@@ -458,7 +458,7 @@ block_dump(SWBuf& rendered,
 		*s = '<';
 		slen = s - t;
 #ifdef USE_GTKMOZEMBED
-		s = strstr(*strongs, "&lt;");
+		s = (char*)strstr(*strongs, "&lt;");
 		*s = *(s+1) = *(s+2) = *(s+3) = ' ';
 		s = strstr(s, "&gt;");
 		*s = *(s+1) = *(s+2) = *(s+3) = ' ';
@@ -466,7 +466,7 @@ block_dump(SWBuf& rendered,
 	} else
 		slen = 0;
 	if (*morph) {
-		s = s0 = strstr(*morph, "\">") + 2;
+		s = s0 = (char*)strstr(*morph, "\">") + 2;
 		t = strchr(s, '<');
 		for (/* */; s < t; ++s)
 			if (isupper(*s))
@@ -475,11 +475,11 @@ block_dump(SWBuf& rendered,
 			*s = '-';
 		s = g_strrstr(*morph, "</a>");
 		*s = '\0';
-		t = strrchr(*morph, '>') + 1;
+		t = (char*)strrchr(*morph, '>') + 1;
 		*s = '<';
 		mlen = s - t;
 #ifdef USE_GTKMOZEMBED
-		s = strchr(*morph, '(');
+		s = (char*)strchr(*morph, '(');
 		*s = ' ';
 		s = strrchr(s, ')');
 		*s = ' ';
