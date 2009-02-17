@@ -183,7 +183,7 @@ void main_save_note(	const gchar * module_name,
 	// This is a sick. unreliable hack that should be removed
 	// after the underlying problem is fixed in Sword.
 	gchar *rework;
-	for (rework = strstr(note_str, "%20");
+	for (rework = (char*)strstr(note_str, "%20");
 	     rework;
 	     rework = strstr(rework+1, "%20")) {
 		*rework = ' ';
