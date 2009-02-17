@@ -61,7 +61,11 @@
 void main_clear_tab_history(void)
 {
 	gint i;
-	PASSAGE_TAB_INFO *tab = (PASSAGE_TAB_INFO*) cur_passage_tab;
+	PASSAGE_TAB_INFO *tab = NULL;
+    
+    	if(!settings.browsing) return;
+	
+    	tab = (PASSAGE_TAB_INFO*) cur_passage_tab;
 
 	gui_remove_menu_items(_("H_istory/<Separator>"),
 			      tab->history_items + 1);
@@ -233,8 +237,11 @@ GtkWidget *main_versekey_drop_down_new(gpointer data)
 	GtkWidget *menu;
 	GtkWidget *item;
 	unsigned long offset;
+	PASSAGE_TAB_INFO *tab = NULL;
+    
+    	if(!settings.browsing) return NULL;
 	
-	PASSAGE_TAB_INFO *tab = (PASSAGE_TAB_INFO*) data;
+	tab = (PASSAGE_TAB_INFO*) data;
 	menu = gtk_menu_new();
 	item = gtk_menu_item_new_with_label(_("Clear History"));
 	gtk_widget_show(item);
@@ -276,8 +283,12 @@ GtkWidget *main_versekey_drop_down_new(gpointer data)
 
 void main_change_verse_tab_history(gint historynum)
 {
-	gchar *url;	
-	PASSAGE_TAB_INFO *tab = (PASSAGE_TAB_INFO*) cur_passage_tab;
+	gchar *url;
+	PASSAGE_TAB_INFO *tab = NULL;
+    
+    	if(!settings.browsing) return;
+	
+	tab = (PASSAGE_TAB_INFO*) cur_passage_tab;
 	
 	tab->current_history_item = historynum;
 	if (tab->first_back_click) {
@@ -319,7 +330,11 @@ void main_change_verse_tab_history(gint historynum)
 
 void main_navigate_tab_history(gint direction)
 {
-	PASSAGE_TAB_INFO *tab = (PASSAGE_TAB_INFO*) cur_passage_tab;
+	PASSAGE_TAB_INFO *tab = NULL;
+    
+    	if(!settings.browsing) return;
+    
+	tab = (PASSAGE_TAB_INFO*) cur_passage_tab;
 	settings.addhistoryitem = FALSE;
 	if (direction) {
 		if (tab->current_history_item < tab->history_items - 1) {
