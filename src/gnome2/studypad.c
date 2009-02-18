@@ -244,7 +244,7 @@ gint save_file_program_end(GtkWidget * htmlwidget, gchar * filename)
 	int retval = -1;
 	int fd;
 	if (filename) {
-		fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0600);
+		fd = g_open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0600);
 
 		if (fd == -1)
 			return -1;
@@ -292,7 +292,7 @@ gint save_file(gchar * filename, GSHTMLEditorControlData * ecd)
 			strcpy(ecd->filename, settings.studypadfilename);
 		}
 			
-		fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0600);
+		fd = g_open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0600);
 
 		if (fd == -1)
 			return -1;
@@ -338,7 +338,7 @@ gint save_file_plain_text(gchar * filename, GSHTMLEditorControlData * ecd)
 
 	if (filename) {
 					
-		fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0600);
+		fd = g_open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0600);
 
 		if (fd == -1)
 			return -1;
