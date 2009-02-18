@@ -395,6 +395,17 @@ static gboolean on_modules_list_button_release(GtkWidget *widget,
 		return FALSE;
 
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &selected, 2, &caption, 3, &mod, -1);
+	
+	//uncomment the following two lines if you want to see how it looks without
+	//triangls or plus symbols
+	//gtk_tree_view_set_show_expanders(sidebar.module_list, FALSE);
+	//gtk_tree_view_set_level_indentation(sidebar.module_list, 12);
+	GtkTreePath *path = gtk_tree_model_get_path(model, &selected);
+	if (gtk_tree_view_row_expanded (sidebar.module_list, path))
+	       gtk_tree_view_collapse_row ( sidebar.module_list, path );
+        else
+	       gtk_tree_view_expand_row ( sidebar.module_list, path, FALSE );
+	gtk_tree_path_free ( path );
 
 	switch (event->button) {
 	case 1:
