@@ -62,8 +62,8 @@ int main(int argc, char *argv[])
 #ifdef WIN32
 	/*
 	 * WIN32 perversity: We very much want to be *in* the
-	 * the directory where Xiphos exists, to keep *.dll
-	 * things happy.  Glib provides this nice function for us
+	 * the directory where Xiphos exists, to keep gconf and
+	 * gspawn happy.  Glib provides this nice function for us
 	 * to determine where we are (we can't depend on argv).
 	 */
 	gchar *install_dir = g_win32_get_package_installation_directory_of_module(NULL);
@@ -76,12 +76,19 @@ int main(int argc, char *argv[])
 					        g_getenv("PATH")),
 		                                TRUE);
 
-	/* make allowance for pre-existing modules area. */
-	g_setenv("SWORD_PATH", g_strdup_printf("%s/Application Data/Sword",
-					       g_getenv("ALLUSERSPROFILE")),
+	/* This will not overwrite SWORD_PATH in case it has
+	   been set by some other program or set manually. In the case that
+	   it hasn't been set, it is set to the localized equivalent of 
+	   C:/Documents and Settings/All Users/Application Data/Sword */
+	const gchar * const * strings;
+	strings = g_get_system_data_dirs();
+	g_setenv("SWORD_PATH", g_strdup_printf("%s\\Sword",
+					       //g_getenv("ALLUSERSPROFILE"),
+					       strings[0]),
 		                               FALSE);
-	g_mkdir(g_getenv("SWORD_PATH"));
-	
+
+	/*it is necessary to explicitly set LANG, because we depend on that
+	  variable to set the SWORD locale */
 	g_setenv("LANG", g_win32_getlocale(), FALSE);
 
 	/* we need an idea of $HOME that's convenient. */
