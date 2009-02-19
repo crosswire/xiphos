@@ -1,10 +1,11 @@
 2009-02-18  karl <charcoal@users.sf.net>
 
-	* disable transliteration for WIN32 pending ICU integration.
-	
+	* 3.0.1 release.
+
 2009-02-15  karl <charcoal@users.sf.net>
 
 	* add transliteration.
+	* disable transliteration for WIN32 pending ICU integration.
 	
 2009-02-14  karl <charcoal@users.sf.net>
 
