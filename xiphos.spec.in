@@ -59,6 +59,7 @@ if which scrollkeeper-update>/dev/null 2>&1; then scrollkeeper-update -q; fi
 %files
 %defattr(-,root,root)
 %{prefix}/bin/xiphos
+%{prefix}/bin/gnomesword2
 %{prefix}/share/gnome/help/*
 %{prefix}/share/xiphos/*
 %{prefix}/share/locale/*
