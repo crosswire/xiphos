@@ -14,20 +14,20 @@
 # Biblical Text           -> Textes bibliques
 # Lemma                   -> Lemme
 # Daily Devotion          -> Calendrier biblique
-# 
-# 
+#
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-14 20:09+0100\n"
+"POT-Creation-Date: 2009-02-17 12:09+0000\n"
 "PO-Revision-Date: 2009-02-14 20:10+0100\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: Project-Id-Version: gtranslator 1.0.1 <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n>1;"
+"Plural-Forms: nplurals=2; plural=n>1;\n"
 
 #: ../xiphos.desktop.in.in.h:1
 msgid "Study the Bible"
@@ -139,10 +139,10 @@ msgstr ""
 #. 3
 #. 1
 #. 2
-#: ../src/editor/html-editor.c:1986 ../src/gnome2/bibletext.c:1150
-#: ../src/gnome2/gbs.c:918 ../src/gnome2/bibletext_dialog.c:2136
-#: ../src/gnome2/dictlex.c:1086 ../src/gnome2/commentary_dialog.c:1672
-#: ../src/gnome2/commentary.c:1019 ../src/gnome2/studypad.c:98
+#: ../src/editor/html-editor.c:1986 ../src/gnome2/bibletext.c:1158
+#: ../src/gnome2/gbs.c:926 ../src/gnome2/bibletext_dialog.c:2177
+#: ../src/gnome2/dictlex.c:1094 ../src/gnome2/commentary_dialog.c:1725
+#: ../src/gnome2/commentary.c:1027 ../src/gnome2/studypad.c:98
 msgid "File"
 msgstr "Fichier"
 
@@ -202,15 +202,15 @@ msgid "Save StudyPad File"
 msgstr "Enregistre le fichier du bloc-notes"
 
 #: ../src/gnome2/bibletext.c:925 ../src/gnome2/gbs.c:706
-#: ../src/gnome2/bibletext_dialog.c:1909 ../src/gnome2/dictlex.c:890
-#: ../src/gnome2/commentary_dialog.c:1437 ../src/gnome2/commentary.c:793
+#: ../src/gnome2/bibletext_dialog.c:1942 ../src/gnome2/dictlex.c:890
+#: ../src/gnome2/commentary_dialog.c:1482 ../src/gnome2/commentary.c:793
 msgid "item1"
 msgstr "Élément1"
 
 #. 0
 #: ../src/gnome2/bibletext.c:935 ../src/gnome2/gbs.c:716
-#: ../src/gnome2/bibletext_dialog.c:1919 ../src/gnome2/dictlex.c:900
-#: ../src/gnome2/commentary_dialog.c:1447 ../src/gnome2/commentary.c:803
+#: ../src/gnome2/bibletext_dialog.c:1952 ../src/gnome2/dictlex.c:900
+#: ../src/gnome2/commentary_dialog.c:1492 ../src/gnome2/commentary.c:803
 msgid "Open Module"
 msgstr "Ouvrir le module"
 
@@ -219,38 +219,38 @@ msgstr "Ouvrir le module"
 msgid "Export Passage"
 msgstr "Exporter le passage"
 
-#: ../src/gnome2/bibletext.c:953 ../src/gnome2/bibletext_dialog.c:1945
-#: ../src/gnome2/commentary_dialog.c:1473 ../src/gnome2/commentary.c:815
+#: ../src/gnome2/bibletext.c:953 ../src/gnome2/bibletext_dialog.c:1978
+#: ../src/gnome2/commentary_dialog.c:1518 ../src/gnome2/commentary.c:815
 msgid "item2"
 msgstr "Élement2"
 
-#: ../src/gnome2/bibletext.c:965 ../src/gnome2/bibletext_dialog.c:1957
-#: ../src/gnome2/commentary_dialog.c:1485 ../src/gnome2/commentary.c:827
+#: ../src/gnome2/bibletext.c:965 ../src/gnome2/bibletext_dialog.c:1990
+#: ../src/gnome2/commentary_dialog.c:1530 ../src/gnome2/commentary.c:827
 msgid "Note"
 msgstr "Note"
 
 #: ../src/gnome2/bibletext.c:975 ../src/gnome2/gbs.c:757
-#: ../src/gnome2/bibletext_dialog.c:1967 ../src/gnome2/dictlex.c:925
-#: ../src/gnome2/commentary_dialog.c:1495 ../src/gnome2/commentary.c:837
+#: ../src/gnome2/bibletext_dialog.c:2000 ../src/gnome2/dictlex.c:925
+#: ../src/gnome2/commentary_dialog.c:1540 ../src/gnome2/commentary.c:837
 msgid "Primary Reading"
 msgstr "Lectures principales"
 
 #: ../src/gnome2/bibletext.c:983 ../src/gnome2/gbs.c:763
-#: ../src/gnome2/bibletext_dialog.c:1975 ../src/gnome2/dictlex.c:931
-#: ../src/gnome2/commentary_dialog.c:1503 ../src/gnome2/commentary.c:845
+#: ../src/gnome2/bibletext_dialog.c:2008 ../src/gnome2/dictlex.c:931
+#: ../src/gnome2/commentary_dialog.c:1548 ../src/gnome2/commentary.c:845
 msgid "Secondary Reading"
 msgstr "Lectures secondaires"
 
 #: ../src/gnome2/bibletext.c:991 ../src/gnome2/gbs.c:751
-#: ../src/gnome2/bibletext_dialog.c:1983 ../src/gnome2/dictlex.c:919
-#: ../src/gnome2/commentary_dialog.c:1511 ../src/gnome2/commentary.c:853
+#: ../src/gnome2/bibletext_dialog.c:2016 ../src/gnome2/dictlex.c:919
+#: ../src/gnome2/commentary_dialog.c:1556 ../src/gnome2/commentary.c:853
 msgid "All Readings"
 msgstr "Toutes les lectures"
 
 #. 0
 #: ../src/gnome2/bibletext.c:1011 ../src/gnome2/gbs.c:781
-#: ../src/gnome2/bibletext_dialog.c:2003 ../src/gnome2/dictlex.c:949
-#: ../src/gnome2/commentary_dialog.c:1531 ../src/gnome2/font_dialog.c:292
+#: ../src/gnome2/bibletext_dialog.c:2036 ../src/gnome2/dictlex.c:949
+#: ../src/gnome2/commentary_dialog.c:1576 ../src/gnome2/font_dialog.c:292
 #: ../src/gnome2/commentary.c:873
 msgid "Set Module Font"
 msgstr "Changer de police"
@@ -258,121 +258,129 @@ msgstr "Changer de police"
 #. 1
 #. 2
 #: ../src/gnome2/bibletext.c:1020 ../src/gnome2/gbs.c:788
-#: ../src/gnome2/bibletext_dialog.c:2012 ../src/gnome2/dictlex.c:956
-#: ../src/gnome2/commentary_dialog.c:1540 ../src/gnome2/commentary.c:880
+#: ../src/gnome2/bibletext_dialog.c:2045 ../src/gnome2/dictlex.c:956
+#: ../src/gnome2/commentary_dialog.c:1585 ../src/gnome2/commentary.c:880
 msgid "Words of Christ in Red"
 msgstr "Paroles de Christ en rouge"
 
 #. 3
 #: ../src/gnome2/bibletext.c:1028 ../src/gnome2/gbs.c:796
-#: ../src/gnome2/bibletext_dialog.c:2020 ../src/gnome2/dictlex.c:964
-#: ../src/gnome2/commentary_dialog.c:1548 ../src/gnome2/commentary.c:888
+#: ../src/gnome2/bibletext_dialog.c:2053 ../src/gnome2/dictlex.c:964
+#: ../src/gnome2/commentary_dialog.c:1593 ../src/gnome2/commentary.c:888
 msgid "Strong's Numbers"
 msgstr "Nombres de Strong"
 
 #. 4
 #: ../src/gnome2/bibletext.c:1036 ../src/gnome2/gbs.c:804
-#: ../src/gnome2/bibletext_dialog.c:2028 ../src/gnome2/dictlex.c:972
-#: ../src/gnome2/commentary_dialog.c:1556 ../src/gnome2/commentary.c:896
+#: ../src/gnome2/bibletext_dialog.c:2061 ../src/gnome2/dictlex.c:972
+#: ../src/gnome2/commentary_dialog.c:1601 ../src/gnome2/commentary.c:896
 #: ../ui/search-dialog.glade.h:62
 msgid "Morphological Tags"
 msgstr "Étiquettes morphologiques"
 
 #. 5
 #: ../src/gnome2/bibletext.c:1044 ../src/gnome2/gbs.c:812
-#: ../src/gnome2/bibletext_dialog.c:2036 ../src/gnome2/dictlex.c:980
-#: ../src/gnome2/commentary_dialog.c:1564 ../src/gnome2/commentary.c:904
+#: ../src/gnome2/bibletext_dialog.c:2069 ../src/gnome2/dictlex.c:980
+#: ../src/gnome2/commentary_dialog.c:1609 ../src/gnome2/commentary.c:904
 #: ../ui/search-dialog.glade.h:50
 msgid "Footnotes"
 msgstr "Notes de bas de page"
 
 #. 6
 #: ../src/gnome2/bibletext.c:1052 ../src/gnome2/gbs.c:820
-#: ../src/gnome2/bibletext_dialog.c:2044 ../src/gnome2/dictlex.c:988
-#: ../src/gnome2/commentary_dialog.c:1572 ../src/gnome2/commentary.c:912
+#: ../src/gnome2/bibletext_dialog.c:2077 ../src/gnome2/dictlex.c:988
+#: ../src/gnome2/commentary_dialog.c:1617 ../src/gnome2/commentary.c:912
 msgid "Greek Accents"
 msgstr "Accents grecs"
 
 #. 7
 #: ../src/gnome2/bibletext.c:1060 ../src/gnome2/gbs.c:828
-#: ../src/gnome2/bibletext_dialog.c:2052 ../src/gnome2/dictlex.c:996
-#: ../src/gnome2/commentary_dialog.c:1580 ../src/gnome2/commentary.c:920
+#: ../src/gnome2/bibletext_dialog.c:2085 ../src/gnome2/dictlex.c:996
+#: ../src/gnome2/commentary_dialog.c:1625 ../src/gnome2/commentary.c:920
 msgid "Lemmas"
 msgstr "Lemmes"
 
 #. 8
 #: ../src/gnome2/bibletext.c:1068 ../src/gnome2/gbs.c:836
-#: ../src/gnome2/bibletext_dialog.c:2060 ../src/gnome2/dictlex.c:1004
-#: ../src/gnome2/commentary_dialog.c:1588 ../src/gnome2/commentary.c:928
+#: ../src/gnome2/bibletext_dialog.c:2093 ../src/gnome2/dictlex.c:1004
+#: ../src/gnome2/commentary_dialog.c:1633 ../src/gnome2/commentary.c:928
 msgid "Scripture Cross-references"
 msgstr "Références croisées de l'Écriture"
 
 #. 9
 #: ../src/gnome2/bibletext.c:1076 ../src/gnome2/gbs.c:844
-#: ../src/gnome2/bibletext_dialog.c:2068 ../src/gnome2/dictlex.c:1012
-#: ../src/gnome2/commentary_dialog.c:1596 ../src/gnome2/commentary.c:936
+#: ../src/gnome2/bibletext_dialog.c:2101 ../src/gnome2/dictlex.c:1012
+#: ../src/gnome2/commentary_dialog.c:1641 ../src/gnome2/commentary.c:936
 msgid "Hebrew Vowel Points"
 msgstr "Ponctuation des voyelles en hébreu"
 
 #. 10
 #: ../src/gnome2/bibletext.c:1084 ../src/gnome2/gbs.c:852
-#: ../src/gnome2/bibletext_dialog.c:2076 ../src/gnome2/dictlex.c:1020
-#: ../src/gnome2/commentary_dialog.c:1604 ../src/gnome2/commentary.c:944
+#: ../src/gnome2/bibletext_dialog.c:2109 ../src/gnome2/dictlex.c:1020
+#: ../src/gnome2/commentary_dialog.c:1649 ../src/gnome2/commentary.c:944
 msgid "Hebrew Cantillation"
 msgstr "Vocalisations en hébreu"
 
 #. 11
 #: ../src/gnome2/bibletext.c:1092 ../src/gnome2/gbs.c:860
-#: ../src/gnome2/bibletext_dialog.c:2084 ../src/gnome2/dictlex.c:1028
-#: ../src/gnome2/commentary_dialog.c:1612 ../src/gnome2/commentary.c:952
+#: ../src/gnome2/bibletext_dialog.c:2117 ../src/gnome2/dictlex.c:1028
+#: ../src/gnome2/commentary_dialog.c:1657 ../src/gnome2/commentary.c:952
 msgid "Headings"
 msgstr "En-têtes"
 
 #. 12
 #: ../src/gnome2/bibletext.c:1100 ../src/gnome2/gbs.c:868
-#: ../src/gnome2/bibletext_dialog.c:2092 ../src/gnome2/dictlex.c:1036
-#: ../src/gnome2/commentary_dialog.c:1620 ../src/gnome2/commentary.c:960
+#: ../src/gnome2/bibletext_dialog.c:2125 ../src/gnome2/dictlex.c:1036
+#: ../src/gnome2/commentary_dialog.c:1665 ../src/gnome2/commentary.c:960
+#, fuzzy
+msgid "Transliteration"
+msgstr "À propos de la _traduction"
+
+#. 13
+#: ../src/gnome2/bibletext.c:1108 ../src/gnome2/gbs.c:876
+#: ../src/gnome2/bibletext_dialog.c:2133 ../src/gnome2/dictlex.c:1044
+#: ../src/gnome2/commentary_dialog.c:1673 ../src/gnome2/commentary.c:968
 msgid "Variants"
 msgstr "Variantes"
 
-#. 13
-#: ../src/gnome2/bibletext.c:1106 ../src/gnome2/gbs.c:874
-#: ../src/gnome2/bibletext_dialog.c:2098 ../src/gnome2/dictlex.c:1042
-#: ../src/gnome2/commentary_dialog.c:1626 ../src/gnome2/commentary.c:966
+#. 14
+#: ../src/gnome2/bibletext.c:1114 ../src/gnome2/gbs.c:882
+#: ../src/gnome2/bibletext_dialog.c:2139 ../src/gnome2/dictlex.c:1050
+#: ../src/gnome2/commentary_dialog.c:1679 ../src/gnome2/commentary.c:974
 msgid "Image Content"
 msgstr "Afficher les images"
 
-#. 14
-#: ../src/gnome2/bibletext.c:1114 ../src/gnome2/gbs.c:882
-#: ../src/gnome2/bibletext_dialog.c:2106 ../src/gnome2/dictlex.c:1050
-#: ../src/gnome2/commentary_dialog.c:1634 ../src/gnome2/commentary.c:974
+#. 15
+#: ../src/gnome2/bibletext.c:1122 ../src/gnome2/gbs.c:890
+#: ../src/gnome2/bibletext_dialog.c:2147 ../src/gnome2/dictlex.c:1058
+#: ../src/gnome2/commentary_dialog.c:1687 ../src/gnome2/commentary.c:982
 msgid "Respect Font Faces"
 msgstr "Respect des polices"
 
 # src/gs_preferences_dlg.c
-#: ../src/gnome2/bibletext.c:1126 ../src/gnome2/bibletext.c:1253
-#: ../src/gnome2/gbs.c:894 ../src/gnome2/gbs.c:1022
-#: ../src/gnome2/bibletext_dialog.c:2118 ../src/gnome2/bibletext_dialog.c:2220
-#: ../src/gnome2/dictlex.c:1062 ../src/gnome2/dictlex.c:1166
-#: ../src/gnome2/commentary_dialog.c:1654
-#: ../src/gnome2/commentary_dialog.c:1784 ../src/gnome2/commentary.c:994
-#: ../src/gnome2/commentary.c:1146
+#: ../src/gnome2/bibletext.c:1134 ../src/gnome2/bibletext.c:1262
+#: ../src/gnome2/gbs.c:902 ../src/gnome2/gbs.c:1031
+#: ../src/gnome2/bibletext_dialog.c:2159 ../src/gnome2/bibletext_dialog.c:2269
+#: ../src/gnome2/dictlex.c:1070 ../src/gnome2/dictlex.c:1175
+#: ../src/gnome2/commentary_dialog.c:1707
+#: ../src/gnome2/commentary_dialog.c:1846 ../src/gnome2/commentary.c:1002
+#: ../src/gnome2/commentary.c:1155
 msgid "Use Current Dictionary"
 msgstr "Utiliser le dictionnaire en cours"
 
 #. 0
 #. 2
-#: ../src/gnome2/bibletext.c:1137 ../src/gnome2/gbs.c:905
-#: ../src/gnome2/bibletext_dialog.c:2129 ../src/gnome2/dictlex.c:1073
-#: ../src/gnome2/commentary_dialog.c:1665 ../src/gnome2/commentary.c:1005
+#: ../src/gnome2/bibletext.c:1145 ../src/gnome2/gbs.c:913
+#: ../src/gnome2/bibletext_dialog.c:2170 ../src/gnome2/dictlex.c:1081
+#: ../src/gnome2/commentary_dialog.c:1718 ../src/gnome2/commentary.c:1013
 #: ../src/gnome2/sidebar.c:776 ../src/gnome2/sidebar.c:937
 msgid "About"
 msgstr "À propos"
 
 #. 1
 #. info->stock_icon = GTK_STOCK_OPEN;
-#: ../src/gnome2/bibletext.c:1143 ../src/gnome2/gbs.c:911
-#: ../src/gnome2/dictlex.c:1079 ../src/gnome2/commentary.c:1012
+#: ../src/gnome2/bibletext.c:1151 ../src/gnome2/gbs.c:919
+#: ../src/gnome2/dictlex.c:1087 ../src/gnome2/commentary.c:1020
 #: ../src/gnome2/bookmark_dialog.c:145 ../src/gnome2/bookmarks_menu.c:470
 #: ../src/gnome2/bookmarks_menu.c:896 ../src/gnome2/bookmarks_menu.c:994
 #: ../src/gnome2/bookmarks_treeview.c:102 ../ui/editor_studypad.xml.h:2
@@ -383,9 +391,9 @@ msgstr "Signet"
 #. 3
 #. 4
 #. 3
-#: ../src/gnome2/bibletext.c:1156 ../src/gnome2/gbs.c:924
-#: ../src/gnome2/bibletext_dialog.c:2142 ../src/gnome2/dictlex.c:1092
-#: ../src/gnome2/commentary_dialog.c:1678 ../src/gnome2/commentary.c:1025
+#: ../src/gnome2/bibletext.c:1164 ../src/gnome2/gbs.c:932
+#: ../src/gnome2/bibletext_dialog.c:2183 ../src/gnome2/dictlex.c:1100
+#: ../src/gnome2/commentary_dialog.c:1731 ../src/gnome2/commentary.c:1033
 #: ../src/gnome2/bookmarks_menu.c:456 ../src/gnome2/treekey-editor.c:317
 msgid "Edit"
 msgstr "Édition"
@@ -394,9 +402,9 @@ msgstr "Édition"
 #. 4
 #. 5
 #. 4
-#: ../src/gnome2/bibletext.c:1162 ../src/gnome2/gbs.c:930
-#: ../src/gnome2/bibletext_dialog.c:2148 ../src/gnome2/dictlex.c:1098
-#: ../src/gnome2/commentary_dialog.c:1684 ../src/gnome2/commentary.c:1031
+#: ../src/gnome2/bibletext.c:1170 ../src/gnome2/gbs.c:938
+#: ../src/gnome2/bibletext_dialog.c:2189 ../src/gnome2/dictlex.c:1106
+#: ../src/gnome2/commentary_dialog.c:1737 ../src/gnome2/commentary.c:1039
 msgid "_Module Options"
 msgstr "Options du module"
 
@@ -404,9 +412,9 @@ msgstr "Options du module"
 #. 5
 #. 6
 #. 5
-#: ../src/gnome2/bibletext.c:1168 ../src/gnome2/gbs.c:936
-#: ../src/gnome2/bibletext_dialog.c:2154 ../src/gnome2/dictlex.c:1104
-#: ../src/gnome2/commentary_dialog.c:1690 ../src/gnome2/commentary.c:1037
+#: ../src/gnome2/bibletext.c:1176 ../src/gnome2/gbs.c:944
+#: ../src/gnome2/bibletext_dialog.c:2195 ../src/gnome2/dictlex.c:1112
+#: ../src/gnome2/commentary_dialog.c:1743 ../src/gnome2/commentary.c:1045
 msgid "Lookup Selection"
 msgstr "Définition du mot sélectionné"
 
@@ -414,18 +422,18 @@ msgstr "Définition du mot sélectionné"
 #. 6
 #. 7
 #. 6
-#: ../src/gnome2/bibletext.c:1174 ../src/gnome2/gbs.c:942
-#: ../src/gnome2/bibletext_dialog.c:2160 ../src/gnome2/dictlex.c:1110
-#: ../src/gnome2/commentary_dialog.c:1696 ../src/gnome2/commentary.c:1055
+#: ../src/gnome2/bibletext.c:1182 ../src/gnome2/gbs.c:950
+#: ../src/gnome2/bibletext_dialog.c:2201 ../src/gnome2/dictlex.c:1118
+#: ../src/gnome2/commentary_dialog.c:1749 ../src/gnome2/commentary.c:1063
 msgid "Unlock This Module"
 msgstr "Déverrouiller ce module"
 
 #. 8
 #. 7
 #. 9
-#: ../src/gnome2/bibletext.c:1180 ../src/gnome2/gbs.c:948
-#: ../src/gnome2/bibletext_dialog.c:2166
-#: ../src/gnome2/commentary_dialog.c:1714 ../src/gnome2/commentary.c:1073
+#: ../src/gnome2/bibletext.c:1188 ../src/gnome2/gbs.c:956
+#: ../src/gnome2/bibletext_dialog.c:2207
+#: ../src/gnome2/commentary_dialog.c:1767 ../src/gnome2/commentary.c:1081
 msgid "Read Selection Aloud"
 msgstr "Synthèse vocale du texte sélectionné"
 
@@ -463,6 +471,13 @@ msgstr ""
 #: ../src/gnome2/about_sword.c:160
 msgid "The SWORD Project"
 msgstr "The SWORD Project"
+
+#: ../src/gnome2/navbar_versekey_editor.c:876
+#: ../src/gnome2/navbar_versekey_dialog.c:934
+#: ../src/gnome2/navbar_versekey_parallel.c:801
+#, fuzzy
+msgid "Synchronize this window from main window"
+msgstr "Affiche %s dans la fenêtre principale"
 
 #: ../src/gnome2/about_modules.c:249
 msgid "About Sword Module"
@@ -556,29 +571,29 @@ msgid "Go to "
 msgstr "Aller à"
 
 #. 1
-#: ../src/gnome2/bibletext_dialog.c:1925
-#: ../src/gnome2/commentary_dialog.c:1453
+#: ../src/gnome2/bibletext_dialog.c:1958
+#: ../src/gnome2/commentary_dialog.c:1498
 msgid "Sync with main"
 msgstr "Synchroniser avec la fenêtre principale"
 
 #. 2
-#: ../src/gnome2/bibletext_dialog.c:1931
-#: ../src/gnome2/commentary_dialog.c:1459
+#: ../src/gnome2/bibletext_dialog.c:1964
+#: ../src/gnome2/commentary_dialog.c:1504
 msgid "Stay in sync"
 msgstr "Synchronisé"
 
-#. 15
-#: ../src/gnome2/commentary_dialog.c:1642 ../src/gnome2/commentary.c:982
+#. 16
+#: ../src/gnome2/commentary_dialog.c:1695 ../src/gnome2/commentary.c:990
 msgid "Commentary by Chapter"
 msgstr "Commentaire par chapitre"
 
 #. 7
-#: ../src/gnome2/commentary_dialog.c:1702 ../src/gnome2/commentary.c:1043
+#: ../src/gnome2/commentary_dialog.c:1755 ../src/gnome2/commentary.c:1051
 msgid "Display Book Heading"
 msgstr "Affiche l'entête du livre"
 
 #. 8
-#: ../src/gnome2/commentary_dialog.c:1708 ../src/gnome2/commentary.c:1049
+#: ../src/gnome2/commentary_dialog.c:1761 ../src/gnome2/commentary.c:1057
 msgid "Display Chapter Heading"
 msgstr "Affiche l'entête du chapitre"
 
@@ -606,43 +621,11 @@ msgstr "Module"
 msgid "Current font: "
 msgstr "Police utilisée : "
 
-#: ../src/gnome2/font_dialog.c:359
-msgid "+5"
-msgstr "+5"
-
-#: ../src/gnome2/font_dialog.c:361
-msgid "+4"
-msgstr "+4"
-
-#: ../src/gnome2/font_dialog.c:363
-msgid "+3"
-msgstr "+3"
-
-#: ../src/gnome2/font_dialog.c:365
-msgid "+2"
-msgstr "+2"
-
-#: ../src/gnome2/font_dialog.c:367
-msgid "+1"
-msgstr "+1"
-
-#: ../src/gnome2/font_dialog.c:369 ../src/gnome2/font_dialog.c:382
+#: ../src/gnome2/font_dialog.c:373
 msgid "+0"
 msgstr "+0"
 
-#: ../src/gnome2/font_dialog.c:371
-msgid "-1"
-msgstr "-1"
-
-#: ../src/gnome2/font_dialog.c:373
-msgid "-2"
-msgstr "-2"
-
-#: ../src/gnome2/font_dialog.c:375
-msgid "-3"
-msgstr "-3"
-
-#: ../src/gnome2/font_dialog.c:386
+#: ../src/gnome2/font_dialog.c:377
 msgid "Use the default font for this module"
 msgstr "Police par défaut dans ce module"
 
@@ -708,11 +691,11 @@ msgstr ""
 "Erreur de configuration\n"
 "\n"
 
-#: ../src/gnome2/commentary.c:1061
+#: ../src/gnome2/commentary.c:1069
 msgid "Rename Pers.Comm."
 msgstr "Renommer ce commentaire"
 
-#: ../src/gnome2/commentary.c:1067
+#: ../src/gnome2/commentary.c:1075
 msgid "Dump Pers.Comm."
 msgstr "Liste des versets commentés"
 
@@ -3718,3 +3701,26 @@ msgstr "ex Mat-Jean; Ap4"
 msgid "for "
 msgstr "Expression"
 
+#~ msgid "+5"
+#~ msgstr "+5"
+
+#~ msgid "+4"
+#~ msgstr "+4"
+
+#~ msgid "+3"
+#~ msgstr "+3"
+
+#~ msgid "+2"
+#~ msgstr "+2"
+
+#~ msgid "+1"
+#~ msgstr "+1"
+
+#~ msgid "-1"
+#~ msgstr "-1"
+
+#~ msgid "-2"
+#~ msgstr "-2"
+
+#~ msgid "-3"
+#~ msgstr "-3"
