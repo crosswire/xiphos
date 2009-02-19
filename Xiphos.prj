@@ -28,7 +28,7 @@ anjuta.compatibility.level=1
 project.name=Xiphos
 project.type=GNOME 2.0
 project.target.type=EXECUTABLE
-project.version=3.0.0
+project.version=3.0.1
 project.author=The Xiphos Development Team
 project.source.target=src/gnome2/xiphos
 project.has.gettext=0
@@ -41,9 +41,9 @@ project.config.extra.modules.after=
 project.config.blocked=1
 project.config.disable.overwriting=1 1 1 1 1 1 1 1 1 
 
-project.menu.entry=Xiphos Version 3.0.0
+project.menu.entry=Xiphos Version 3.0.1
 project.menu.group=Application
-project.menu.comment=Xiphos Version 3.0.0
+project.menu.comment=Xiphos Version 3.0.1
 project.menu.icon=/home/tbiggs/devel/xiphos/pixmaps/gs2-48x48.png
 project.menu.need.terminal=0
 
