@@ -2394,11 +2394,11 @@ static void create_menu(DIALOG_DATA *t,
 				G_CALLBACK(global_option_headings),
 				(DIALOG_DATA *)t);
 	}
-
+#ifndef WIN32
 	gtk_widget_show(module_options_menu_uiinfo[12].widget);
 	GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[12].
 			    widget)->active = t->ops->transliteration;
-
+#endif
 	g_signal_connect(GTK_OBJECT(module_options_menu_uiinfo[11].widget),
 			 "activate",
 			 G_CALLBACK(global_option_transliteration),

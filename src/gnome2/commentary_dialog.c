@@ -1990,11 +1990,11 @@ static void create_menu(DIALOG_DATA *d,
 				 G_CALLBACK(global_option_headings),
 				 (DIALOG_DATA *) d);
 	}
-
+#ifndef WIN32
 	gtk_widget_show(module_options_menu_uiinfo[12].widget);
 	GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[12].
 			    widget)->active = d->ops->transliteration;
-
+#endif
 	g_signal_connect(GTK_OBJECT
 			 (module_options_menu_uiinfo[12].
 			  widget), "activate",
