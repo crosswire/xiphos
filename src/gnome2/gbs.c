@@ -1108,11 +1108,11 @@ static void create_menu(GdkEventButton * event)
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[11].
 				    widget)->active = ops->headings;   
 	}
-
+#ifndef WIN32
 	gtk_widget_show(module_options_menu_uiinfo[12].widget);
 	GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[12].
 			    widget)->active = ops->transliteration;   
-
+#endif
 	if (main_check_for_global_option(mod_name, "ThMLVariants")) {
 		gtk_widget_show(module_options_menu_uiinfo[13].widget);
 		gtk_widget_show(all_readings_uiinfo[0].widget);	// all_readings
