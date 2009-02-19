@@ -57,7 +57,7 @@ static const gchar *documenters[] = {
     NULL
 };
 
-static gchar *translators = "Jan Paul Schmidt\nJorge Chacon\nDominique Corbex\nZdenko Podobn\nPavlo Bohmat\nMartin Zibricky\nAri Constancio\nGertjan Francke\nEicke Godehardt";
+static gchar *translators = "Jan Paul Schmidt\nJorge Chacon\nDominique Corbex\nZdenko Podobn\nPavlo Bohmat\nMartin Zibricky\nAri Constancio\nGertjan Francke\nEicke Godehardt\nAndy Piper\nThomas Abthorpe\nEeli Kaikkonen";
 
 /******************************************************************************
  * Name
