@@ -3,6 +3,54 @@ ____________________
 XIPHOS RELEASE NOTES
 ____________________
 
+Release 3.0.1
+19 Feb 2009
+
+A necessary bugfix release.
+
+Immediately upon release of 3.0.0, a serious incompatibility with
+Windows (NTFS) filesystem was found: Users whose names include
+characters beyond the lower 128 characters of ASCII caused trouble
+in pathnames due to not having accommodated a particular encoding
+required by the filesystem.  This encoding is now handled.
+
+Beyond this, a number of other matters were addressed:
+
+ 1. Added transliteration support from non-Latin character sets.
+    This is not enabled in the Windows build due to incomplete ICU
+    support.
+
+ 2. Fixed a crash-inducing bug in detached ("free-floating") Bible
+    and commentary windows, from context menu synchronization.  This
+    was redundant with the sync button in upper left, so the menu
+    item was removed, and a glitch in the sync button's use was fixed.
+
+ 3. Sidebar module list entries can be expanded by clicking anywhere
+    on the row.
+
+ 4. Only when not using tabbed browsing, a crash on history usage was
+    stopped, though a full fix for tab-less history access is pending.
+
+ 5. Minor changes to accommodate forthcoming Fedora 11.
+
+ 6. A PDF version of the manual is included.
+
+ 7. Windows installer will set new fonts correctly; bold & italic
+    fonts are included; uninstaller runs much faster.
+
+ 8. Fixed a disappearing-button problem in the module manager, as well
+    as several instances of faulty mutex usage.
+
+Bug reports addressed since 3.0.0:
+2593915  Crash on menuitem in detached bible window
+2545562  Not all Strong occurences found
+
+New feature requests pending:
+2582195  Launch a specific session in a terminal
+
+Feature requests closed:
+________________________________________________________________
+
 Release 3.0
 08 Feb 2009
 

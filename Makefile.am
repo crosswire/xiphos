@@ -16,7 +16,8 @@ xiphosdoc_DATA = \
 	INSTALL \
 	NEWS \
 	TODO \
-	Xiphos.ogg
+	Xiphos.ogg \
+	help/xiphos.pdf
 
 ACLOCAL_AMFLAGS = -I m4
 
@@ -31,7 +32,8 @@ EXTRA_DIST = \
 	COPYING-DOCS \
 	TRANSLATION-HOWTO \
 	RELEASE-NOTES \
-	Xiphos.ogg
+	Xiphos.ogg \
+	help/xiphos.pdf
 
 DISTCLEANFILES = gnome-doc-utils.make
 
