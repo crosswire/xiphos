@@ -1468,8 +1468,6 @@ void _tabs_on(void)
 static
 void _tabs_off(void)
 {
-	PASSAGE_TAB_INFO *pt;
-    
 	int page = _is_paratab_showing();
 	xml_set_value ("Xiphos", "tabs", "browsing", "0");
 	gui_save_tabs (default_tab_filename);
