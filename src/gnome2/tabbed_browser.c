@@ -417,6 +417,11 @@ void gui_load_tabs(const gchar *filename)
 		}	
 		file = g_strdup_printf("%s%s",tabs_dir,filename);
 		g_free(tabs_dir);
+		
+	    	/* we need this for first time non tabbed browsing */
+	    	if (!settings.browsing && access(file, F_OK) == -1) {
+			gui_save_tabs (filename);
+		}
 
 		//xml_filename = (const xmlChar *) file;
 		xml_doc = xmlParseFile(file);
@@ -1383,11 +1388,11 @@ void _tabs_off(void)
 		settings.showparatab = FALSE;
 	}
 	gui_close_all_tabs ();
+	settings.browsing = FALSE;
 	gui_load_tabs (no_tab_filename);
 	gtk_widget_hide (widgets.hboxtb);
 	gtk_notebook_set_current_page (GTK_NOTEBOOK(widgets.notebook_bible_parallel),
                                       page);
-	settings.browsing = FALSE;
 }
 
 void gui_tabs_on_off(int on)
