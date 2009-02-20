@@ -564,7 +564,8 @@ void
 on_checkbutton1_toggled(GtkToggleButton * togglebutton,
 			gpointer user_data)
 {
-	if (togglebutton->active) {
+	gui_tabs_on_off (togglebutton->active);
+/*	if (togglebutton->active) {
 		xml_set_value("Xiphos", "tabs", "browsing", "1");
 		settings.browsing = TRUE;
 		gui_open_tabs();
@@ -576,6 +577,7 @@ on_checkbutton1_toggled(GtkToggleButton * togglebutton,
 		gui_close_all_tabs();
 	}
 	settings.browsing = atoi(xml_get_value("tabs", "browsing"));
+	*/
 }
 
 /******************************************************************************

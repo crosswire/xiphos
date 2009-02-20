@@ -73,6 +73,8 @@ GList *list_of_verses;
 extern gboolean shift_key_presed;
 
 
+static void create_menu_modules(void);
+
 /******************************************************************************
  * Name
  *   on_notebook_switch_page
@@ -423,9 +425,10 @@ static gboolean on_modules_list_button_release(GtkWidget *widget,
 		    	&& (g_utf8_collate(mod, _("Standard View")))//) {
 		    	&& (main_get_mod_type(mod) != PRAYERLIST_TYPE)) {
 			buf_module = mod;
-			gtk_menu_popup(GTK_MENU(sidebar.menu_modules),
+			create_menu_modules ();
+			/*gtk_menu_popup(GTK_MENU(sidebar.menu_modules),
 				       NULL, NULL, NULL, NULL,
-				       0, gtk_get_current_event_time());
+				       0, gtk_get_current_event_time());*/
 			g_free(caption);
 			return FALSE;
 		}
@@ -799,16 +802,17 @@ static GnomeUIInfo menu_modules_uiinfo[] = {
  * Synopsis
  *   #include "gui/sidebar.h"
  *
- *    GtkWidget* create_menu_modules (void)
+ *    void create_menu_modules (void)
  *
  * Description
  *
  *
  * Return value
- *   GtkWidget*
+ *   void
  */
 
-GtkWidget *create_menu_modules(void)
+static
+void create_menu_modules(void)
 {
 	GtkWidget *menu_modules;
 
@@ -827,7 +831,13 @@ GtkWidget *create_menu_modules(void)
 	menu_modules = gtk_menu_new();
 	gnome_app_fill_menu(GTK_MENU_SHELL(menu_modules),
 			    menu_modules_uiinfo, NULL, FALSE, 0);
-	return menu_modules;
+	if (!settings.browsing)  
+		gtk_widget_hide (menu_modules_uiinfo[0].widget);
+	
+	gtk_menu_popup ((GtkMenu*)menu_modules, NULL, NULL, NULL, NULL, 2,
+		     			gtk_get_current_event_time());
+	// return menu_modules;
+    
 }
 
 
@@ -1523,7 +1533,7 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 			       G_CALLBACK
 			       (on_modules_list_button_release), NULL);
 
-	sidebar.menu_modules = create_menu_modules();
+	// sidebar.menu_modules = create_menu_modules();
 	sidebar.menu_prayerlist = create_menu_prayerlist();
 	sidebar.menu_prayerlist_mod = create_menu_prayerlist_mod();
 

@@ -1,3 +1,8 @@
+2009-02-19  terry <tbiggs@users.sourceforge.net>
+
+	* fixed bug #2585744 In 2.4, back and forward buttons segfault.
+	* History buttons work with tabbed browsing turned off.
+
 2009-02-18  karl <charcoal@users.sf.net>
 
 	* 3.0.1 release.

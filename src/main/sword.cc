@@ -1058,7 +1058,7 @@ void main_display_book(const char * mod_name, const char * key)     //, unsigned
 	
 	backend->display_mod->Display();
 	main_setup_navbar_book(settings.book_mod, settings.book_offset);
-	if (settings.browsing)
+	//if (settings.browsing)
 		gui_update_tab_struct(NULL,
 				      NULL,
 				      NULL,
@@ -1115,7 +1115,7 @@ void main_display_commentary(const char * mod_name, const char * key)
 	backend->set_module_key(mod_name, key);
 	backend->display_mod->Display();
 	
-	if (settings.browsing)
+	//if (settings.browsing)
 		gui_update_tab_struct(NULL,
 				      mod_name,
 				      NULL,
@@ -1184,7 +1184,7 @@ void main_display_dictionary(const char * mod_name, const char * key)
 		gtk_widget_activate(widgets.entry_dict);
 	}
 	
-	if (settings.browsing)
+	//if (settings.browsing)
 		gui_update_tab_struct(NULL,
 				      NULL,
 				      mod_name,
@@ -1340,7 +1340,7 @@ void main_display_bible(const char * mod_name, const char * key)
 	}
 	
 	GS_message(("mod_name = %s",mod_name));	
-	if (settings.browsing) {
+	//if (settings.browsing) {
 		gui_update_tab_struct(mod_name,
 				      NULL,
 				      NULL,
@@ -1353,7 +1353,7 @@ void main_display_bible(const char * mod_name, const char * key)
 				      settings.showcomms,
 				      settings.showdicts);
 		gui_set_tab_label(settings.currentverse, FALSE);
-	}
+	//}
 
 	/*
 	 * change parallel verses
