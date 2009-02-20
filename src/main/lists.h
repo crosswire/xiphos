@@ -29,13 +29,7 @@ extern "C"
 
 
 #include <gnome.h>
-/*
-#ifdef SUSE_10_2
-#include <glib.h>
-#else
-#include <glib-2.0/glib.h>
-#endif
-*/
+
 typedef struct _module_lists MOD_LISTS;
 struct _module_lists {
 	GList

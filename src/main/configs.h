@@ -25,7 +25,6 @@
 #ifdef __cplusplus
 extern "C" {
 #endif	
-//#include <glib-2.0/glib.h>
 	
 typedef struct _mod_font MOD_FONT;
 struct  _mod_font {
