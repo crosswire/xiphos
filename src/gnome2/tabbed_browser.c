@@ -379,6 +379,96 @@ void gui_save_tabs(const gchar *filename)
 
 /******************************************************************************
  * Name
+ *   
+ *
+ * Synopsis
+ *   #include "tabbed_browser.h"
+ *
+ *   void _save_off_tabs(const gchar *filename)
+ *
+ * Description
+ *   Saves the information for the current set of tabs.
+ *
+ * Return value
+ *   
+ */
+
+static
+void _save_off_tab (const gchar * filename)
+{
+	xmlDocPtr xml_doc;
+	xmlNodePtr root_node;
+	xmlNodePtr cur_node;
+	xmlNodePtr section_node;
+	xmlAttrPtr xml_attr;
+	gchar *tabs_dir;
+	gchar *file;
+    
+	if (NULL == filename)
+		filename = no_tab_filename;
+	
+	tabs_dir = g_strdup_printf("%s/tabs/",settings.gSwordDir);
+	
+	if (access(tabs_dir, F_OK) == -1) {
+		if ((Mkdir(tabs_dir, S_IRWXU)) == -1) {
+			gui_generic_warning("Can't create tabs dir.");
+			return;
+		}
+	}
+	file = g_strdup_printf("%s%s",tabs_dir,filename);
+	g_free(tabs_dir);
+	
+	xml_doc = xmlNewDoc((const xmlChar *) "1.0");
+
+	if (xml_doc == NULL) {
+		gui_generic_warning("Tabs document not created successfully.");
+		return;
+	}
+
+	root_node = xmlNewNode(NULL, (const xmlChar *) "Xiphos_Tabs");
+	xml_attr = xmlNewProp(root_node, (const xmlChar *)"Version", (const xmlChar *) VERSION);
+	xmlDocSetRootElement(xml_doc, root_node);
+	
+	section_node = xmlNewChild(root_node, NULL,
+				   (const xmlChar *) "tabs", NULL);
+		
+	cur_node = xmlNewChild(section_node,
+			NULL, (const xmlChar *) "tab", NULL);
+	xmlNewProp(cur_node,(const xmlChar *)"text_mod",
+			(const xmlChar *)settings.MainWindowModule);
+	xmlNewProp(cur_node, (const xmlChar *)"commentary_mod",
+			(const xmlChar *)settings.CommWindowModule);
+	xmlNewProp(cur_node, (const xmlChar *)"dictlex_mod",
+			(const xmlChar *)settings.DictWindowModule);
+	xmlNewProp(cur_node, (const xmlChar *)"book_mod",
+			(const xmlChar *)settings.book_mod);
+	xmlNewProp(cur_node, (const xmlChar *)"text_commentary_key",
+			(const xmlChar *)settings.currentverse);
+	xmlNewProp(cur_node, (const xmlChar *)"dictlex_key",
+			(const xmlChar *)settings.dictkey);
+	xmlNewProp(cur_node, (const xmlChar *)"book_offset",
+			(const xmlChar *)settings.book_key);
+	xmlNewProp(cur_node, (const xmlChar *)"comm_showing",
+			(const xmlChar *)true_false2yes_no(settings.comm_showing));
+	xmlNewProp(cur_node, (const xmlChar *)"showtexts",
+			(const xmlChar *)true_false2yes_no(settings.showtexts));
+	xmlNewProp(cur_node, (const xmlChar *)"showpreview",
+			(const xmlChar *)true_false2yes_no(settings.showpreview));
+	xmlNewProp(cur_node, (const xmlChar *)"showcomms",
+			(const xmlChar *)true_false2yes_no(settings.showcomms));
+	xmlNewProp(cur_node, (const xmlChar *)"showdicts",
+			(const xmlChar *)true_false2yes_no(settings.showdicts));
+	xmlNewProp(cur_node, (const xmlChar *)"showparallel",
+			(const xmlChar *)"no");
+
+	xmlSaveFormatFile(file, xml_doc,1);
+	g_free(file);
+	xmlFreeDoc(xml_doc);
+}
+
+
+/******************************************************************************
+ * Name
  *   gui_load_tabs
  *
  * Synopsis
@@ -420,7 +510,7 @@ void gui_load_tabs(const gchar *filename)
 		
 	    	/* we need this for first time non tabbed browsing */
 	    	if (!settings.browsing && access(file, F_OK) == -1) {
-			gui_save_tabs (filename);
+			_save_off_tab (filename);
 		}
 
 		//xml_filename = (const xmlChar *) file;
@@ -1378,6 +1468,8 @@ void _tabs_on(void)
 static
 void _tabs_off(void)
 {
+	PASSAGE_TAB_INFO *pt;
+    
 	int page = _is_paratab_showing();
 	xml_set_value ("Xiphos", "tabs", "browsing", "0");
 	gui_save_tabs (default_tab_filename);
