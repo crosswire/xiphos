@@ -239,7 +239,7 @@ GtkWidget *main_versekey_drop_down_new(gpointer data)
 	unsigned long offset;
 	PASSAGE_TAB_INFO *tab = NULL;
     
-    	if(!settings.browsing) return NULL;
+    //	if(!settings.browsing) return NULL;
 	
 	tab = (PASSAGE_TAB_INFO*) data;
 	menu = gtk_menu_new();
@@ -286,7 +286,7 @@ void main_change_verse_tab_history(gint historynum)
 	gchar *url;
 	PASSAGE_TAB_INFO *tab = NULL;
     
-    	if(!settings.browsing) return;
+    	//if(!settings.browsing) return;
 	
 	tab = (PASSAGE_TAB_INFO*) cur_passage_tab;
 	
@@ -332,7 +332,7 @@ void main_navigate_tab_history(gint direction)
 {
 	PASSAGE_TAB_INFO *tab = NULL;
     
-    	if(!settings.browsing) return;
+ //   	if(!settings.browsing) return;
     
 	tab = (PASSAGE_TAB_INFO*) cur_passage_tab;
 	settings.addhistoryitem = FALSE;

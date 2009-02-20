@@ -804,6 +804,10 @@ static gboolean button_release_event(GtkWidget * widget,
 		gtk_menu_popup(GTK_MENU(menu.menu),
 			       NULL, NULL, NULL, NULL,
 			       event->button, event->time);
+		
+		if(!settings.browsing)  
+			gtk_widget_hide(menu.in_tab);
+		
 		if (GTK_CHECK_MENU_ITEM(menu.reorder)->active) {
 			gtk_widget_set_sensitive(menu.in_tab, FALSE);
 			gtk_widget_set_sensitive(menu.in_dialog, FALSE);

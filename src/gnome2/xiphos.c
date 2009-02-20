@@ -172,9 +172,9 @@ void frontend_display(void)
 	}
 #endif
 	// setup passage notebook
-	if(settings.browsing) {
-		gui_notebook_main_setup();;
-	} else {	
+//	if(settings.browsing) {
+	gui_notebook_main_setup (settings.browsing);
+/*	} else {	
 		url = g_strdup_printf("sword://%s/%s",settings.DictWindowModule,
 						      settings.dictkey);
 		main_url_handler(url);
@@ -191,7 +191,7 @@ void frontend_display(void)
 						      settings.currentverse);
 		main_url_handler(url);
 		g_free(url);
-	}
+	} */
 	/* must be set after tab stuff is done */
 
 #ifdef USE_PARALLEL_TAB
@@ -212,7 +212,6 @@ void frontend_display(void)
 	else 
 		main_clear_viewer();
 	gtk_widget_grab_focus (sidebar.module_list);
-	//main_prayer_list_new("2008");
 	
 	GS_print(("%s\n\n", "done"));
 } 
@@ -275,8 +274,8 @@ void shutdown_frontend(void)
 #ifdef USE_GTKMOZEMBED	
 	gecko_html_shutdown();
 #endif
-	if(settings.browsing)
-		gui_notebook_main_shutdown();
+//	if(settings.browsing)
+	gui_notebook_main_shutdown (settings.browsing);
 
 	/* free dir and file stuff */
 	g_free(settings.gSwordDir);
