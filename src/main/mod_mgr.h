@@ -30,11 +30,8 @@ extern "C" {
 #include <config.h>
 #endif
 
-#ifdef SUSE_10_2
 #include <glib.h>
-#else
-#include <glib-2.0/glib.h>
-#endif
+
 typedef struct _mm MOD_MGR;
 struct  _mm {
 	char *name;
