@@ -260,7 +260,7 @@ gchar * gui_general_user_file (const char *fname, gboolean critical)
 		if (!g_path_is_absolute (file))
 		{
 			gchar * cwd, *file1;
-			GS_message( ("Using %s (usually OK)", file));
+			GS_message(("Using %s (usually OK)", file));
 
 			/* Make it absolute */
 			cwd = g_get_current_dir();
@@ -277,7 +277,7 @@ gchar * gui_general_user_file (const char *fname, gboolean critical)
 	/* if nothing then theres an error */
 	else if (critical)
 	{
-		GS_error((_("%s not found"), fname));
+		GS_error(("%s not found", fname));
 	}
 
 	/* return result */
