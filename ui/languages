@@ -881,7 +881,11 @@ ayx	Ayi (China)
 ayy	Tayabas Ayta
 ayz	Mai Brat
 aza	Azha
-azb	South Azerbaijani
+#
+# via refdoc
+#azb	South Azerbaijani
+azb	آذربايجان ديلی
+#
 aze	Azerbaijani
 azg	San Pedro Amuzgos Amuzgo
 azj	North Azerbaijani
@@ -5694,7 +5698,11 @@ pro	Old Provençal (to 1500)
 prp	Parsi
 prq	Ashéninka Perené
 prr	Puri
-prs	Dari
+#
+# native Dari, via refdoc
+#prs	Dari
+prs	داری
+#
 prt	Phai
 pru	Puragi
 prw	Parawen
