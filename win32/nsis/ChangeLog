@@ -1,3 +1,7 @@
+2009-02-18  matysek <matysek03@users.sf.net>
+
+	* added comment about win32 Application data folder
+
 2009-02-13  matysek <matysek03@users.sf.net>
 
 	* included BoldItalics variants of installed fonts
