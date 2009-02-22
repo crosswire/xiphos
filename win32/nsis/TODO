@@ -1,5 +1,10 @@
 TODO:
 
+    * xiphos icon in quicklaunch toolbar
+
+    * check for previous installation of Xiphos before installation
+      and notify user with a request to remove previous version
+
     * simplify i18n declaration
         - inspiration at other OSS projects using NSIS
 

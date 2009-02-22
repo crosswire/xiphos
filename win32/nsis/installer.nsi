@@ -43,7 +43,7 @@
     !define APP_NAME "Xiphos"
     !define INSTALLER_NAME "xiphos"
     !define APP_BINARY_NAME "xiphos.exe"
-    !define APP_VERS "3.0.1rc1"
+    !define APP_VERS "3.0.1"
     !define APP_EDITION "win32"
     !define APP_URL "http://xiphos.org"
 
@@ -54,6 +54,9 @@
     !define PATH_FONT "..\fonts"
 
     ; Folder in ALLUSERSAPPS/Application Data/ for Sword files
+    ; the string 'Application Data' maybe also localized in
+    ; different Win32 versions.
+    ; e.g. in Czech Windows it is 'Data aplikací'
     !define INSTPATH_SWORD "Sword"
 
     ; Files
