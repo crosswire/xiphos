@@ -11,13 +11,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 2 2.3.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-17 12:09+0000\n"
-"PO-Revision-Date: 2009-02-19 23:33+0000\n"
-"Last-Translator: Peter von Kaehne <refdoc@crosswire.org>\n"
+"POT-Creation-Date: 2009-02-22 20:46+0100\n"
+"PO-Revision-Date: 2009-02-22 22:00+0100\n"
+"Last-Translator: Eicke Godehardt <sf at godehardt.org>\n"
 "Language-Team: Xiphos Translation Team <farsi@lists.sharif.edu>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
 
 #: ../xiphos.desktop.in.in.h:1
 msgid "Study the Bible"
@@ -428,7 +428,7 @@ msgstr "Bildinhalt"
 #: ../src/gnome2/commentary_dialog.c:1687
 #: ../src/gnome2/commentary.c:982
 msgid "Respect Font Faces"
-msgstr ""
+msgstr "Respektiere Schriftarten"
 
 #: ../src/gnome2/bibletext.c:1134
 #: ../src/gnome2/bibletext.c:1262
@@ -453,8 +453,8 @@ msgstr "Aktuelles Wörterbuch benutzen"
 #: ../src/gnome2/dictlex.c:1081
 #: ../src/gnome2/commentary_dialog.c:1718
 #: ../src/gnome2/commentary.c:1013
-#: ../src/gnome2/sidebar.c:776
-#: ../src/gnome2/sidebar.c:937
+#: ../src/gnome2/sidebar.c:790
+#: ../src/gnome2/sidebar.c:958
 msgid "About"
 msgstr "Über"
 
@@ -561,9 +561,8 @@ msgstr "Das SWORD-Projekt"
 #: ../src/gnome2/navbar_versekey_editor.c:876
 #: ../src/gnome2/navbar_versekey_dialog.c:934
 #: ../src/gnome2/navbar_versekey_parallel.c:801
-#, fuzzy
 msgid "Synchronize this window from main window"
-msgstr "%s in Hauptfenster anzeigen"
+msgstr "Synchronisiert dieses Fenster vom Hauptfenster"
 
 #: ../src/gnome2/about_modules.c:249
 msgid "About Sword Module"
@@ -583,7 +582,7 @@ msgstr "Chiffrierschlüssel eingeben: "
 
 #. 1
 #: ../src/gnome2/gbs.c:740
-#: ../src/gnome2/sidebar.c:931
+#: ../src/gnome2/sidebar.c:952
 msgid "Open in editor"
 msgstr "Im Editor öffnen"
 
@@ -621,9 +620,9 @@ msgid "Change parallel 5"
 msgstr "Parallelansicht 5 ändern"
 
 #: ../src/gnome2/parallel_view.c:471
-#: ../src/gnome2/sidebar.c:405
-#: ../src/gnome2/sidebar.c:411
-#: ../src/gnome2/tabbed_browser.c:214
+#: ../src/gnome2/sidebar.c:418
+#: ../src/gnome2/sidebar.c:424
+#: ../src/gnome2/tabbed_browser.c:215
 #: ../src/main/sidebar.cc:605
 #: ../src/main/sidebar.cc:1007
 #: ../src/main/sidebar.cc:1008
@@ -708,7 +707,7 @@ msgstr "Schließen _ohne zu Speichern"
 
 #: ../src/gnome2/font_dialog.c:322
 msgid "Change font for"
-msgstr "Schriftart für Modul"
+msgstr "Ändere Schriftart für"
 
 #: ../src/gnome2/font_dialog.c:326
 msgid "Module"
@@ -918,7 +917,7 @@ msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:432
 msgid "Journals and prayer lists cannot be indexed."
-msgstr ""
+msgstr "Tagebücher und Gebetslisten können nicht indexiert werden."
 
 #: ../src/gnome2/mod_mgr.c:453
 #: ../src/gnome2/mod_mgr.c:2632
@@ -980,6 +979,8 @@ msgid ""
 "Repository:\n"
 "%s"
 msgstr ""
+"Quelle:\n"
+"%s"
 
 #: ../src/gnome2/mod_mgr.c:920
 msgid ""
@@ -1058,7 +1059,7 @@ msgid "Uninstalled"
 msgstr "Deinstalliert"
 
 #: ../src/gnome2/mod_mgr.c:970
-#: ../src/gnome2/sidebar.c:421
+#: ../src/gnome2/sidebar.c:435
 #: ../src/gnome2/utilities.c:544
 #: ../src/main/prayerlists.cc:237
 #: ../src/main/sword_treekey.cc:374
@@ -1082,7 +1083,7 @@ msgstr "Modulname"
 
 #: ../src/gnome2/mod_mgr.c:1294
 msgid "A checkmark means this module is already installed"
-msgstr ""
+msgstr "Ein Häkchen bedeutet, dass dieses Module bereits installiert ist"
 
 #: ../src/gnome2/mod_mgr.c:1316
 msgid "Click the box to work on this module"
@@ -1090,7 +1091,7 @@ msgstr "Box ticken um dieses Modul auszuwählen"
 
 #: ../src/gnome2/mod_mgr.c:1317
 msgid "Click the box to select this module for install/update"
-msgstr ""
+msgstr "Klicke die Box, um dieses Modul zu installieren/aktualisieren"
 
 #: ../src/gnome2/mod_mgr.c:1336
 msgid "Installed"
@@ -1146,8 +1147,8 @@ msgid "Sources"
 msgstr "Quellen"
 
 #: ../src/gnome2/mod_mgr.c:1534
-#: ../src/gnome2/sidebar.c:1450
-#: ../src/gnome2/preferences_dialog.c:1792
+#: ../src/gnome2/sidebar.c:1471
+#: ../src/gnome2/preferences_dialog.c:1794
 msgid "Modules"
 msgstr "Module"
 
@@ -1203,7 +1204,7 @@ msgstr "Geben sie eine Quelle im Internet an"
 
 #: ../src/gnome2/sidebar_dialog.c:135
 msgid "Sidebar"
-msgstr "Verknüpfungsleiste"
+msgstr "Seitenleiste"
 
 #: ../src/gnome2/html.c:922
 msgid "Print"
@@ -1226,8 +1227,8 @@ msgid "Open a new tab"
 msgstr "Neuen Reiter öffnen"
 
 #: ../src/gnome2/main_window.c:925
-#: ../src/gnome2/sidebar.c:406
-#: ../src/gnome2/sidebar.c:412
+#: ../src/gnome2/sidebar.c:419
+#: ../src/gnome2/sidebar.c:425
 #: ../src/main/sidebar.cc:627
 #: ../src/main/sidebar.cc:1015
 #: ../src/main/sidebar.cc:1016
@@ -1263,101 +1264,101 @@ msgstr "Gehe zu nächstem Eintrag"
 msgid "Go inward, to the first subsection"
 msgstr "Nach innen, zum ersten Unterabschnitt"
 
-#: ../src/gnome2/sidebar.c:725
+#: ../src/gnome2/sidebar.c:739
 msgid "Save List"
 msgstr "Liste speichern"
 
-#: ../src/gnome2/sidebar.c:726
+#: ../src/gnome2/sidebar.c:740
 msgid "Save the search results as bookmarks"
 msgstr "Suchergebnisse als Lesezeichen speichern"
 
 #. 0
-#: ../src/gnome2/sidebar.c:764
-#: ../src/gnome2/sidebar.c:925
+#: ../src/gnome2/sidebar.c:778
+#: ../src/gnome2/sidebar.c:946
 #: ../src/gnome2/bookmarks_menu.c:1106
 msgid "Open in a new tab"
 msgstr "In neuem Reiter öffnen"
 
-#: ../src/gnome2/sidebar.c:765
-#: ../src/gnome2/sidebar.c:926
+#: ../src/gnome2/sidebar.c:779
+#: ../src/gnome2/sidebar.c:947
 msgid "Open selected module in a new tab"
 msgstr "Ausgewähltes Modul in neuem Reiter öffnen"
 
 #. 1
-#: ../src/gnome2/sidebar.c:770
+#: ../src/gnome2/sidebar.c:784
 msgid "Open in a separate window"
-msgstr ""
+msgstr "Öffne in separatem Fenster"
 
-#: ../src/gnome2/sidebar.c:771
+#: ../src/gnome2/sidebar.c:785
 msgid "Open selected module in a separate ['dialog'] window"
 msgstr "Ausgewähltes Modul in einem Dialog öffnen"
 
-#: ../src/gnome2/sidebar.c:777
-#: ../src/gnome2/sidebar.c:938
+#: ../src/gnome2/sidebar.c:791
+#: ../src/gnome2/sidebar.c:959
 msgid "View information about the selected dialog"
 msgstr "Informationen über das ausgewählte Modul anzeigen"
 
-#: ../src/gnome2/sidebar.c:861
+#: ../src/gnome2/sidebar.c:882
 msgid "Simple"
 msgstr "Einfach"
 
-#: ../src/gnome2/sidebar.c:862
+#: ../src/gnome2/sidebar.c:883
 msgid "Create a new simple prayer list"
 msgstr "Erstelle eine neue einfache Gebetsliste"
 
-#: ../src/gnome2/sidebar.c:868
+#: ../src/gnome2/sidebar.c:889
 msgid "Subject"
 msgstr "Gegenstand"
 
-#: ../src/gnome2/sidebar.c:875
+#: ../src/gnome2/sidebar.c:896
 msgid "Monthly"
 msgstr "Monatlich"
 
-#: ../src/gnome2/sidebar.c:876
-#: ../src/gnome2/sidebar.c:883
-#: ../src/gnome2/sidebar.c:890
+#: ../src/gnome2/sidebar.c:897
+#: ../src/gnome2/sidebar.c:904
+#: ../src/gnome2/sidebar.c:911
 msgid "Create a new prayer list"
 msgstr "Erstelle eine neue Gebetsliste"
 
-#: ../src/gnome2/sidebar.c:882
+#: ../src/gnome2/sidebar.c:903
 msgid "Daily Journal"
 msgstr "Tagebuch"
 
-#: ../src/gnome2/sidebar.c:889
+#: ../src/gnome2/sidebar.c:910
 msgid "Outlined Topic"
 msgstr "Gliederungspunkte"
 
-#: ../src/gnome2/sidebar.c:932
+#: ../src/gnome2/sidebar.c:953
 msgid "Open selected module in a dialog"
 msgstr "Ausgewähltes Modul in einem Dialog öffnen"
 
-#: ../src/gnome2/sidebar.c:1208
+#: ../src/gnome2/sidebar.c:1229
 msgid "_Modules"
 msgstr "_Module"
 
-#: ../src/gnome2/sidebar.c:1216
+#: ../src/gnome2/sidebar.c:1237
 msgid "_Bookmarks"
 msgstr "_Lesezeichen"
 
-#: ../src/gnome2/sidebar.c:1224
+#: ../src/gnome2/sidebar.c:1245
 #: ../src/gnome2/main_menu.c:1000
 msgid "_Search"
 msgstr "_Suche"
 
-#: ../src/gnome2/sidebar.c:1233
+#: ../src/gnome2/sidebar.c:1254
 msgid "Verse _List"
 msgstr "_Versliste"
 
-#: ../src/gnome2/sidebar.c:1426
-#: ../src/gnome2/bookmarks_treeview.c:906
+#: ../src/gnome2/sidebar.c:1447
+#: ../src/gnome2/bookmarks_treeview.c:910
 msgid "Bookmarks"
 msgstr "Lesezeichen"
 
-#: ../src/gnome2/sidebar.c:1434
+#: ../src/gnome2/sidebar.c:1455
 msgid "Search"
 msgstr "_Suchen"
 
-#: ../src/gnome2/sidebar.c:1442
+#: ../src/gnome2/sidebar.c:1463
 msgid "Verse List"
 msgstr "_Versliste"
 
@@ -1389,7 +1390,7 @@ msgstr "Möchten Sie die Modulliste wirklich leeren?"
 
 #: ../src/gnome2/search_dialog.c:899
 msgid "The last module list may not be deleted"
-msgstr ""
+msgstr "Die letzte Modulliste wird eventuell nicht gelöscht"
 
 #: ../src/gnome2/search_dialog.c:916
 msgid "Delete list?"
@@ -1404,6 +1405,8 @@ msgid ""
 "This is an inclusive (\"AND\") search:\n"
 "Find matches showing all words."
 msgstr ""
+"Die ist eine inklusive (\"UND\") Suche:\n"
+"Findet Treffer, die alle Worte enthalten."
 
 #: ../src/gnome2/search_sidebar.c:209
 msgid "Search Module"
@@ -1464,11 +1467,6 @@ msgstr "Untere"
 msgid "Upper"
 msgstr "Obere"
 
-#: ../src/gnome2/utilities.c:280
-#, c-format
-msgid "%s not found"
-msgstr "%s nicht gefunden"
-
 #: ../src/gnome2/bookmark_dialog.c:147
 #: ../src/gnome2/bookmarks_menu.c:996
 #: ../src/gnome2/bookmarks_treeview.c:103
@@ -1486,63 +1484,63 @@ msgstr "Ordner-Name"
 msgid "Folder: "
 msgstr "Ordner: "
 
-#: ../src/gnome2/preferences_dialog.c:1228
-#: ../src/gnome2/preferences_dialog.c:1266
-#: ../src/gnome2/preferences_dialog.c:1304
-#: ../src/gnome2/preferences_dialog.c:1340
-#: ../src/gnome2/preferences_dialog.c:1375
-#: ../src/gnome2/preferences_dialog.c:1409
-#: ../src/gnome2/preferences_dialog.c:1442
-#: ../src/gnome2/preferences_dialog.c:1476
-#: ../src/gnome2/preferences_dialog.c:1509
-#: ../src/gnome2/preferences_dialog.c:1544
-#: ../src/gnome2/preferences_dialog.c:1580
-#: ../src/gnome2/preferences_dialog.c:1616
-#: ../src/gnome2/preferences_dialog.c:1652
-#: ../src/gnome2/preferences_dialog.c:2057
+#: ../src/gnome2/preferences_dialog.c:1230
+#: ../src/gnome2/preferences_dialog.c:1268
+#: ../src/gnome2/preferences_dialog.c:1306
+#: ../src/gnome2/preferences_dialog.c:1342
+#: ../src/gnome2/preferences_dialog.c:1377
+#: ../src/gnome2/preferences_dialog.c:1411
+#: ../src/gnome2/preferences_dialog.c:1444
+#: ../src/gnome2/preferences_dialog.c:1478
+#: ../src/gnome2/preferences_dialog.c:1511
+#: ../src/gnome2/preferences_dialog.c:1546
+#: ../src/gnome2/preferences_dialog.c:1582
+#: ../src/gnome2/preferences_dialog.c:1618
+#: ../src/gnome2/preferences_dialog.c:1654
+#: ../src/gnome2/preferences_dialog.c:2059
 msgid "-- Select --"
 msgstr "-- Auswahl --"
 
-#: ../src/gnome2/preferences_dialog.c:1685
+#: ../src/gnome2/preferences_dialog.c:1687
 #: ../ui/prefs.glade.h:74
 msgid "Preferences"
 msgstr "Einstellungen"
 
-#: ../src/gnome2/preferences_dialog.c:1768
+#: ../src/gnome2/preferences_dialog.c:1770
 msgid "Fonts"
 msgstr "Schriften"
 
-#: ../src/gnome2/preferences_dialog.c:1771
+#: ../src/gnome2/preferences_dialog.c:1773
 msgid "Color"
 msgstr "Farben"
 
-#: ../src/gnome2/preferences_dialog.c:1774
+#: ../src/gnome2/preferences_dialog.c:1776
 msgid "Sizes"
 msgstr "Größen"
 
-#: ../src/gnome2/preferences_dialog.c:1778
+#: ../src/gnome2/preferences_dialog.c:1780
 msgid "General"
 msgstr "Allgemein"
 
-#: ../src/gnome2/preferences_dialog.c:1781
+#: ../src/gnome2/preferences_dialog.c:1783
 #: ../ui/prefs.glade.h:85
 msgid "Tabs and Panes"
 msgstr "Reiter und Bereiche"
 
-#: ../src/gnome2/preferences_dialog.c:1788
+#: ../src/gnome2/preferences_dialog.c:1790
 msgid "Options"
 msgstr "Einstellungen"
 
-#: ../src/gnome2/preferences_dialog.c:1795
+#: ../src/gnome2/preferences_dialog.c:1797
 msgid "Main"
 msgstr "Hauptfenster"
 
-#: ../src/gnome2/preferences_dialog.c:1798
+#: ../src/gnome2/preferences_dialog.c:1800
 #: ../src/gnome2/parallel_dialog.c:635
 msgid "Parallel"
 msgstr "Parallel"
 
-#: ../src/gnome2/preferences_dialog.c:1801
+#: ../src/gnome2/preferences_dialog.c:1803
 msgid "Special"
 msgstr "Spezial"
 
@@ -1961,7 +1959,7 @@ msgstr "Parallelansicht im Tab"
 #. 17
 #: ../src/gnome2/main_menu.c:1131
 msgid "Show Previewer in the Sidebar"
-msgstr ""
+msgstr "Zeige Vorschau in der Seitenleiste"
 
 #: ../src/gnome2/main_menu.c:1142
 msgid "_Contents"
@@ -1977,7 +1975,7 @@ msgstr "Email Liste"
 
 #: ../src/gnome2/main_menu.c:1149
 msgid "Sign up for the users' mailing list"
-msgstr ""
+msgstr "anmelden für die Benutzer Mailing-Liste"
 
 #: ../src/gnome2/main_menu.c:1154
 msgid "_Live Chat"
@@ -1985,7 +1983,7 @@ msgstr "_Live Chat"
 
 #: ../src/gnome2/main_menu.c:1155
 msgid "Chat with other users and developers"
-msgstr ""
+msgstr "Unterhalte dich mit anderen Benutzern und Entwicklern"
 
 #: ../src/gnome2/main_menu.c:1160
 msgid "_Report Bug"
@@ -2075,13 +2073,12 @@ msgstr ""
 "konnte nicht geöffnet werden."
 
 #: ../src/main/sword.cc:558
-#, fuzzy
 msgid ""
 "Xiphos cannot allocate space\n"
 "for language abbreviations."
 msgstr ""
-"Xiphos konnte die Datei für\n"
-"Sprachabkürzungen nicht abbilden."
+"Xiphos konnte keinen Speicher für\n"
+"Sprachabkürzungen anlegen."
 
 #: ../src/main/sword.cc:565
 msgid ""
@@ -2138,7 +2135,7 @@ msgstr "Bitte die Modulliste anpassen."
 msgid "Search finished"
 msgstr "Suche beendet"
 
-#: ../src/main/main.c:95
+#: ../src/main/main.c:102
 msgid "Xiphos does not understand more than one argument."
 msgstr "Xiphos versteht nicht mehr als ein Argument."
 
@@ -2306,7 +2303,9 @@ msgstr "Xiphos hat diese Gebetsliste bereits gefunden."
 msgid ""
 "Xiphos cannot create module's path:\n"
 "%s"
-msgstr "Xiphos konnte den Modulpfad nicht erzeugen."
+msgstr ""
+"Xiphos konnte den Modulpfad nicht erzeugen:\n"
+"%s"
 
 #: ../src/main/prayerlists.cc:322
 msgid "A basic prayer list. \\par\\par Module created by Xiphos."
@@ -2566,19 +2565,19 @@ msgstr "Betrachter-Fehler:\n"
 msgid "Show %s in main window"
 msgstr "%s in Hauptfenster anzeigen"
 
-#: ../src/main/tab_history.c:66
-#: ../src/main/tab_history.c:110
-#: ../src/main/tab_history.c:125
+#: ../src/main/tab_history.c:70
+#: ../src/main/tab_history.c:114
+#: ../src/main/tab_history.c:129
 msgid "H_istory/<Separator>"
 msgstr "Chron_ik/<Separator>"
 
 #. tab->history_items + 1);
-#: ../src/main/tab_history.c:68
-#: ../src/main/tab_history.c:112
+#: ../src/main/tab_history.c:72
+#: ../src/main/tab_history.c:116
 msgid "H_istory/C_lear"
 msgstr "_Verlauf/_Leeren"
 
-#: ../src/main/tab_history.c:239
+#: ../src/main/tab_history.c:246
 msgid "Clear History"
 msgstr "Verlauf leeren"
 
@@ -2764,9 +2763,8 @@ msgid "Create new folder"
 msgstr "Neuen Ordner erstellen"
 
 #: ../ui/bookmarks.glade.h:6
-#, fuzzy
 msgid "Label Entry"
-msgstr "Eintrag speichern"
+msgstr "Beschriftung Eingabe"
 
 #: ../ui/bookmarks.glade.h:7
 msgid "Label:"
@@ -2925,20 +2923,19 @@ msgstr "Buch"
 
 #: ../ui/export-dialog.glade.h:5
 msgid "Book Radio Button"
-msgstr ""
+msgstr "Buch Optionsfeld"
 
 #: ../ui/export-dialog.glade.h:7
 msgid "Chapter Radio Button"
-msgstr ""
+msgstr "Kapitel Optionsfeld"
 
 #: ../ui/export-dialog.glade.h:9
 msgid "Export Passage Cancel"
 msgstr "Abbruch Textstelle exportieren "
 
 #: ../ui/export-dialog.glade.h:10
-#, fuzzy
 msgid "Export Passage OK"
-msgstr "Textstelle exportieren"
+msgstr "Textstelle exportieren OK"
 
 #: ../ui/export-dialog.glade.h:11
 msgid "Export complete book"
@@ -2958,7 +2955,7 @@ msgstr "HTML"
 
 #: ../ui/export-dialog.glade.h:15
 msgid "HTML Radio Button"
-msgstr ""
+msgstr "HTML Optionsfeld"
 
 #: ../ui/export-dialog.glade.h:16
 msgid "Key"
@@ -2969,9 +2966,8 @@ msgid "Plain Text"
 msgstr "Einfacher Text"
 
 #: ../ui/export-dialog.glade.h:18
-#, fuzzy
 msgid "Plain Text Radio Button"
-msgstr "Einfacher Text"
+msgstr "Einfacher Text Optionsfeld"
 
 #: ../ui/export-dialog.glade.h:20
 msgid "Save Export As"
@@ -2983,7 +2979,7 @@ msgstr "Vers"
 
 #: ../ui/export-dialog.glade.h:22
 msgid "Verse Radio Button"
-msgstr ""
+msgstr "Vers Optionsfeld"
 
 #: ../ui/export-dialog.glade.h:23
 msgid "Version"
@@ -3020,11 +3016,11 @@ msgstr "<b>Warnung:</b> Wenn sie in ihrem Land wegen ihrer Religion verfolgt wer
 
 #: ../ui/module-manager.glade.h:9
 msgid "<i>Personal area, for your use only:</i>"
-msgstr ""
+msgstr "<i>Persönlicher Bereich, nur für eigenen Gebrauch:</i>"
 
 #: ../ui/module-manager.glade.h:10
 msgid "<i>System area, for all users:</i>"
-msgstr ""
+msgstr "<i>Systembereich, für alle Benutzer:</i>"
 
 #: ../ui/module-manager.glade.h:12
 msgid "Continue"
@@ -3075,30 +3071,28 @@ msgid "<b>Revelation of John</b>"
 msgstr "<b>Offenbarung des Johannes</b>"
 
 #: ../ui/navbar_versekey.glade.h:3
-#, fuzzy
 msgid "Book Selector Button"
-msgstr "Auswahl nachschlagen"
+msgstr "Buchauswahl Knopf"
 
 #: ../ui/navbar_versekey.glade.h:4
 msgid "Choose book to display"
-msgstr ""
+msgstr "Wähle Buch für die Anzeige"
 
 #: ../ui/navbar_versekey.glade.h:5
 msgid "Drop down history list"
 msgstr "Ausklapp-Verlaufsliste"
 
 #: ../ui/navbar_versekey.glade.h:6
-#, fuzzy
 msgid "Reference Entry"
-msgstr "Eintrag löschen"
+msgstr "Referenz Eingabe"
 
 #: ../ui/navbar_versekey.glade.h:7
 msgid "Toggle Chapter Button"
-msgstr ""
+msgstr "Kapitel umschalten Knopf"
 
 #: ../ui/navbar_versekey.glade.h:8
 msgid "Toggle Verse Button"
-msgstr ""
+msgstr "Vers umschalten Knopf"
 
 #: ../ui/prefs.glade.h:1
 msgid ""
@@ -3145,9 +3139,8 @@ msgid "<b>Show</b>"
 msgstr "<b>Anzeigen</b>"
 
 #: ../ui/prefs.glade.h:15
-#, fuzzy
 msgid "<b>Special Purpose Modules</b>"
-msgstr "<b>Verschiedene Module</b>"
+msgstr "<b>Spezialmodule</b>"
 
 #: ../ui/prefs.glade.h:16
 msgid "<b>StudyPad default directory</b>"
@@ -3178,43 +3171,36 @@ msgid "Bible Texts"
 msgstr "_Bibeltexte"
 
 #: ../ui/prefs.glade.h:23
-#, fuzzy
 msgid "Bible Texts Checkbox"
-msgstr "_Bibeltexte"
+msgstr "Bibeltexte Kontrollkästchen"
 
 #: ../ui/prefs.glade.h:24
 msgid "Biblical Text"
 msgstr "Biblischer Text"
 
 #: ../ui/prefs.glade.h:26
-#, fuzzy
 msgid "Change Biblical Text Combo"
-msgstr "Biblischer Text"
+msgstr "Ändere Biblischer Text Kombinationsfeld"
 
 #: ../ui/prefs.glade.h:27
-#, fuzzy
 msgid "Change Book Combo"
-msgstr "Schriftart für Modul"
+msgstr "Ändere Buch Kombinationsfeld"
 
 #: ../ui/prefs.glade.h:28
-#, fuzzy
 msgid "Change Commentary Combo"
-msgstr "Kommentarname wählen"
+msgstr "Ändere Kommentar Kombinationsfeld"
 
 #: ../ui/prefs.glade.h:29
-#, fuzzy
 msgid "Change Default Dictionary Combo"
-msgstr "Vorgabewörterbuch"
+msgstr "Ändere Vorgabewörterbuch Kombinationsfeld"
 
 #: ../ui/prefs.glade.h:30
-#, fuzzy
 msgid "Change Dictionary Combo"
-msgstr "Wörterbuch/Buch"
+msgstr "Ändere Wörterbuch Kombinationsfeld"
 
 #: ../ui/prefs.glade.h:31
-#, fuzzy
 msgid "Change Personal Notes Combo"
-msgstr "Persönliche Notizen"
+msgstr "Ändere Persönliche Notizen Kombinationsfeld"
 
 #: ../ui/prefs.glade.h:32
 msgid "Choose to enable Prayer lists "
@@ -3253,18 +3239,16 @@ msgid "Dictionary/Lexicon"
 msgstr "Wörterbuch/Lexikon"
 
 #: ../ui/prefs.glade.h:43
-#, fuzzy
 msgid "Dictionary/Lexicon Checkbox"
-msgstr "Wörterbuch/Lexikon"
+msgstr "Wörterbuch/Lexikon Kontrollkästchen"
 
 #: ../ui/prefs.glade.h:44
 msgid "Enable Prayer Lists"
 msgstr "Gebetsliste aktivieren"
 
 #: ../ui/prefs.glade.h:45
-#, fuzzy
 msgid "Enable Prayer Lists Checkbox"
-msgstr "Gebetsliste aktivieren"
+msgstr "Gebetslisten aktivieren Kontrollkästchen"
 
 #: ../ui/prefs.glade.h:46
 msgid "Font Colors"
@@ -3287,18 +3271,16 @@ msgid "Greek Lexicon"
 msgstr "Griechischlexikon"
 
 #: ../ui/prefs.glade.h:51
-#, fuzzy
 msgid "Greek Lexicon Combo"
-msgstr "Griechischlexikon"
+msgstr "Griechischlexikon Kombinationsfeld"
 
 #: ../ui/prefs.glade.h:52
 msgid "Hebrew Lexicon"
 msgstr "Hebräischlexikon"
 
 #: ../ui/prefs.glade.h:53
-#, fuzzy
 msgid "Hebrew Lexicon Combo"
-msgstr "Hebräischlexikon"
+msgstr "Hebräischlexikon Kombinationsfeld"
 
 #: ../ui/prefs.glade.h:54
 msgid "Highlight Background"
@@ -3337,45 +3319,40 @@ msgid "Parallel 1"
 msgstr "Parallel 1"
 
 #: ../ui/prefs.glade.h:63
-#, fuzzy
 msgid "Parallel 1 Combo"
-msgstr "Parallel 1"
+msgstr "Parallel 1 Kombinationsfeld"
 
 #: ../ui/prefs.glade.h:64
 msgid "Parallel 2"
 msgstr "Parallel 2"
 
 #: ../ui/prefs.glade.h:65
-#, fuzzy
 msgid "Parallel 2 Combo"
-msgstr "Parallel 2"
+msgstr "Parallel 2 Kombinationsfeld"
 
 #: ../ui/prefs.glade.h:66
 msgid "Parallel 3"
 msgstr "Parallel 3"
 
 #: ../ui/prefs.glade.h:67
-#, fuzzy
 msgid "Parallel 3 Combo"
-msgstr "Parallel 3"
+msgstr "Parallel 3 Kombinationsfeld"
 
 #: ../ui/prefs.glade.h:68
 msgid "Parallel 4"
 msgstr "Parallel 4"
 
 #: ../ui/prefs.glade.h:69
-#, fuzzy
 msgid "Parallel 4 Combo"
-msgstr "Parallel 4"
+msgstr "Parallel 4 Kombinationsfeld"
 
 #: ../ui/prefs.glade.h:70
 msgid "Parallel 5"
 msgstr "Parallel 5"
 
 #: ../ui/prefs.glade.h:71
-#, fuzzy
 msgid "Parallel 5 Combo"
-msgstr "Parallel 5"
+msgstr "Parallel 5 Kombinationsfeld"
 
 #: ../ui/prefs.glade.h:72
 msgid "Parallel View in a tab"
@@ -3386,27 +3363,24 @@ msgid "Personal Notes"
 msgstr "Persönliche Notizen"
 
 #: ../ui/prefs.glade.h:76
-#, fuzzy
 msgid "Previewer Checkbox"
-msgstr "Vorschau"
+msgstr "Vorschau Kontrollkästchen"
 
 #: ../ui/prefs.glade.h:77
 msgid "Resize images"
 msgstr "Bildgröße ändern"
 
 #: ../ui/prefs.glade.h:78
-#, fuzzy
 msgid "Resize images checkbox"
-msgstr "Bildgröße ändern"
+msgstr "Bildgröße ändern Kontrollkästchen"
 
 #: ../ui/prefs.glade.h:79
 msgid "Scroll to Previous/Next Chapter"
 msgstr "Zum vorigen/nächsten Kapitel springen"
 
 #: ../ui/prefs.glade.h:80
-#, fuzzy
 msgid "Scroll to Previous/Next Chapter Checkbox"
-msgstr "Zum vorigen/nächsten Kapitel springen"
+msgstr "Zum vorigen/nächsten Kapitel springen Kontrollkästchen"
 
 #: ../ui/prefs.glade.h:81
 msgid "Select A Directory"
@@ -3421,9 +3395,8 @@ msgid "Show splash screen at start up"
 msgstr "Startbildschirm anzeigen"
 
 #: ../ui/prefs.glade.h:84
-#, fuzzy
 msgid "StudyPad default directory combo"
-msgstr "<b>Vorgabeverzeichnis für das Notizbuch</b>"
+msgstr "Vorgabeverzeichnis für das Notizbuch Kombinationsfeld"
 
 #: ../ui/prefs.glade.h:86
 msgid "Use Bible Text scroll bar to scroll to previous or next chapter"
@@ -3431,34 +3404,31 @@ msgstr "Bildlaufleiste des Bibeltextes verwenden, um zum vorigen oder nächsten 
 
 #: ../ui/prefs.glade.h:87
 msgid "Use Verse Per Line"
-msgstr "Versstil verwenden"
+msgstr "Verwende Vers pro Zeile"
 
 #: ../ui/prefs.glade.h:88
 msgid "Use Verse Per Line Checkbox"
-msgstr ""
+msgstr "Verwende Vers pro Zeile Kontrollkästchen"
 
 #: ../ui/prefs.glade.h:89
 msgid "Use default Dictionary"
 msgstr "Vorgabewörterbuch verwenden"
 
 #: ../ui/prefs.glade.h:90
-#, fuzzy
 msgid "Use default Dictionary Checkbox"
-msgstr "Vorgabewörterbuch verwenden"
+msgstr "Vorgabewörterbuch verwenden Kontrollkästchen"
 
 #: ../ui/prefs.glade.h:91
 msgid "Use tabbed browsing"
 msgstr "Benutze Reiter zur Anzeige"
 
 #: ../ui/prefs.glade.h:92
-#, fuzzy
 msgid "Use tabbed browsing Checkbox"
-msgstr "Benutze Reiter zur Anzeige"
+msgstr "Benutze Reiter zur Anzeige Kontrollkästchen"
 
 #: ../ui/prefs.glade.h:93
-#, fuzzy
 msgid "Verse number size"
-msgstr "Schriftgröße für Versnummern"
+msgstr "Größe der Versnummern"
 
 #: ../ui/search-dialog.glade.h:1
 msgid "<b>Attribute</b>"
@@ -3533,19 +3503,16 @@ msgid "Attributes"
 msgstr "Attribute"
 
 #: ../ui/search-dialog.glade.h:19
-#, fuzzy
 msgid "Attributes radiobutton"
-msgstr "Attribute"
+msgstr "Attribute Optionsfeld"
 
 #: ../ui/search-dialog.glade.h:20
-#, fuzzy
 msgid "Clear Custom Module List Button"
-msgstr "Eigene Modullisten"
+msgstr "Leere eigene Modulliste Knopf"
 
 #: ../ui/search-dialog.glade.h:21
-#, fuzzy
 msgid "Clear Modules from List Button"
-msgstr "Alle Module aus der Liste löschen"
+msgstr "Alle Module aus der Liste löschen Knopf"
 
 #: ../ui/search-dialog.glade.h:22
 msgid "Clear all modules from the list"
@@ -3568,32 +3535,28 @@ msgid "Current results"
 msgstr "Aktuelle Ergebnisse"
 
 #: ../ui/search-dialog.glade.h:27
-#, fuzzy
 msgid "Current results radiobutton"
-msgstr "Aktuelle Ergebnisse"
+msgstr "Aktuelle Ergebnisse Optionsfeld"
 
 #: ../ui/search-dialog.glade.h:28
-#, fuzzy
 msgid "Custom Module List Combo"
-msgstr "Eigene Modullisten"
+msgstr "Eigene Modullisten Kombinationsfeld"
 
 #: ../ui/search-dialog.glade.h:29
-#, fuzzy
 msgid "Custom Module List Name Entry"
-msgstr "Eigene Modullisten"
+msgstr "Eigene Modullisten Eingabe"
 
 #: ../ui/search-dialog.glade.h:30
 msgid "Custom Module Lists"
 msgstr "Eigene Modullisten"
 
 #: ../ui/search-dialog.glade.h:31
-#, fuzzy
 msgid "Custom Range Preview"
-msgstr "Eigene Vers-Bereiche"
+msgstr "Eigene Vers-Bereiche Vorschau"
 
 #: ../ui/search-dialog.glade.h:32
 msgid "Custom Range Selector Combo"
-msgstr ""
+msgstr "Eigene Bereichsauswahl Kombinationsfeld"
 
 #: ../ui/search-dialog.glade.h:33
 msgid "Custom Verse Ranges"
@@ -3604,28 +3567,24 @@ msgid "Custom module list"
 msgstr "Eigene Modulliste"
 
 #: ../ui/search-dialog.glade.h:35
-#, fuzzy
 msgid "Custom module list radiobutton"
-msgstr "Eigene Modulliste"
+msgstr "Eigene Modulliste Optionsfeld"
 
 #: ../ui/search-dialog.glade.h:36
 msgid "Custom verse range"
 msgstr "Eigener Vers-Bereich"
 
 #: ../ui/search-dialog.glade.h:37
-#, fuzzy
 msgid "Custom verse range radiobutton"
-msgstr "Eigener Vers-Bereich"
+msgstr "Eigener Vers-Bereich Optionsfeld"
 
 #: ../ui/search-dialog.glade.h:38
-#, fuzzy
 msgid "Delete Range Button"
-msgstr "Bereich löschen?"
+msgstr "Bereich löschen Knopf"
 
 #: ../ui/search-dialog.glade.h:39
-#, fuzzy
 msgid "Delete Selected Module From List Button"
-msgstr "Ausgewähltes Modul aus der Liste entfernen"
+msgstr "Ausgewähltes Modul aus der Liste entfernen Knopf"
 
 #: ../ui/search-dialog.glade.h:40
 msgid "Delete selected range"
@@ -3640,14 +3599,12 @@ msgid "Entire module"
 msgstr "Ganzes Modul"
 
 #: ../ui/search-dialog.glade.h:43
-#, fuzzy
 msgid "Entire module radiobutton"
-msgstr "Ganzes Modul"
+msgstr "Ganzes Modul Optionsfeld"
 
 #: ../ui/search-dialog.glade.h:45
-#, fuzzy
 msgid "Exact phrase radiobutton"
-msgstr "Genaue Phrase"
+msgstr "Genaue Phrase Optionsfeld"
 
 #: ../ui/search-dialog.glade.h:46
 msgid ""
@@ -3660,9 +3617,8 @@ msgstr ""
 "Siehe Modul Manager's maintenance functions"
 
 #: ../ui/search-dialog.glade.h:49
-#, fuzzy
 msgid "Find Button"
-msgstr "Weitersuchen"
+msgstr "Suchen Knopf"
 
 #: ../ui/search-dialog.glade.h:51
 msgid "Footnotes radiobutton"
@@ -3682,16 +3638,15 @@ msgstr "In Modulen mit Strongs Nummern"
 
 #: ../ui/search-dialog.glade.h:55
 msgid "Main Search Entry"
-msgstr ""
+msgstr "Hauptsuche Eingabe"
 
 #: ../ui/search-dialog.glade.h:56
 msgid "Make selections on the Attribute Search tab"
 msgstr "Treffe Auswahl im Reiter Attribut-Suche"
 
 #: ../ui/search-dialog.glade.h:58
-#, fuzzy
 msgid "Match case checkbox"
-msgstr "Groß-/Kleinschreibung"
+msgstr "Groß-/Kleinschreibung Kontrollkästchen"
 
 #: ../ui/search-dialog.glade.h:59
 msgid "Module Selection"
@@ -3702,33 +3657,28 @@ msgid "Module list"
 msgstr "Modulliste"
 
 #: ../ui/search-dialog.glade.h:61
-#, fuzzy
 msgid "Module list radiobutton"
-msgstr "Modulliste"
+msgstr "Modulliste Optionsfeld"
 
 #: ../ui/search-dialog.glade.h:63
-#, fuzzy
 msgid "Morphological Tags radiobutton"
-msgstr "Morphologische Markierungen"
+msgstr "Morphologische Markierungen Optionsfeld"
 
 #: ../ui/search-dialog.glade.h:65
-#, fuzzy
 msgid "Multi word radiobutton"
-msgstr "Mehrere Worte"
+msgstr "Mehrere Worte Optionsfeld"
 
 #: ../ui/search-dialog.glade.h:66
-#, fuzzy
 msgid "New Custom Module List Button"
-msgstr "Eigene Modullisten"
+msgstr "Neue eigene Modulliste Knopf"
 
 #: ../ui/search-dialog.glade.h:67
 msgid "New Range Button"
-msgstr ""
+msgstr "Neuer Bereich Knopf"
 
 #: ../ui/search-dialog.glade.h:68
-#, fuzzy
 msgid "Open Selection Dialog Button"
-msgstr "Auswahl laut vorlesen"
+msgstr "Öffne Auswahldialog Knopf"
 
 #: ../ui/search-dialog.glade.h:69
 msgid "Open a dialog to select modules to add to the list"
@@ -3739,24 +3689,20 @@ msgid "Optimized (\"Lucene\")"
 msgstr "Optimiere (\"Lucene\")"
 
 #: ../ui/search-dialog.glade.h:71
-#, fuzzy
 msgid "Optimized (\"Lucene\") radiobutton"
-msgstr "Optimiere (\"Lucene\")"
+msgstr "Optimiere (\"Lucene\") Optionsfeld"
 
 #: ../ui/search-dialog.glade.h:72
-#, fuzzy
 msgid "Range Definition Entry"
-msgstr "<b>Bereichsdefinition</b>"
+msgstr "Bereichsdefinition Eintrag"
 
 #: ../ui/search-dialog.glade.h:73
-#, fuzzy
 msgid "Range Name Entry"
-msgstr "Eintrag speichern"
+msgstr "Bereichsname Eintrag"
 
 #: ../ui/search-dialog.glade.h:75
-#, fuzzy
 msgid "Regular expression radiobutton"
-msgstr "Regulärer Ausdruck"
+msgstr "Regulärer Ausdruck Optionsfeld"
 
 #: ../ui/search-dialog.glade.h:76
 msgid "Remove the selected module from the list"
@@ -3764,25 +3710,23 @@ msgstr "Ausgewähltes Modul aus der Liste entfernen"
 
 #: ../ui/search-dialog.glade.h:77
 msgid "Result Summary Table"
-msgstr ""
+msgstr "Ergebniszusammenfassung Tabelle"
 
 #: ../ui/search-dialog.glade.h:78
-#, fuzzy
 msgid "Result Summary Window"
-msgstr "Bibeltext-Fenster anzeigen"
+msgstr "Ergebniszusammenfassung Fenster"
 
 #: ../ui/search-dialog.glade.h:79
 msgid "Results"
 msgstr "Ergebnisse"
 
 #: ../ui/search-dialog.glade.h:80
-#, fuzzy
 msgid "Save Custom Module List Button"
-msgstr "Eigene Modullisten"
+msgstr "Eigene Modullisten speichern Knopf"
 
 #: ../ui/search-dialog.glade.h:81
 msgid "Save Range Button"
-msgstr ""
+msgstr "Speichere Bereich Knopf"
 
 #: ../ui/search-dialog.glade.h:82
 msgid "Save custom range"
@@ -3801,9 +3745,8 @@ msgid "Search  Criteria"
 msgstr "Suchkriterien"
 
 #: ../ui/search-dialog.glade.h:86
-#, fuzzy
 msgid "Search Criteria Treeview"
-msgstr "Suchkriterien"
+msgstr "Suchkriterien Baumansicht"
 
 #: ../ui/search-dialog.glade.h:87
 msgid "Search entire module"
@@ -3826,18 +3769,16 @@ msgid "Show Footnotes"
 msgstr "Fußnoten anzeigen"
 
 #: ../ui/search-dialog.glade.h:92
-#, fuzzy
 msgid "Show Footnotes checkbox"
-msgstr "Fußnoten anzeigen"
+msgstr "Fußnoten anzeigen Kontrollkästchen"
 
 #: ../ui/search-dialog.glade.h:93
 msgid "Show Morphological Tags"
 msgstr "Morphologische Markierungen anzeigen"
 
 #: ../ui/search-dialog.glade.h:94
-#, fuzzy
 msgid "Show Morphological Tags checkbox"
-msgstr "Morphologische Markierungen anzeigen"
+msgstr "Morphologische Markierungen anzeigen Kontrollkästchen"
 
 #: ../ui/search-dialog.glade.h:95
 msgid "Show Strong's Numbers"
@@ -3899,6 +3840,8 @@ msgstr "z. B. Mt-Joh;Offb4"
 msgid "for "
 msgstr "für "
 
+#~ msgid "%s not found"
+#~ msgstr "%s nicht gefunden"
 #~ msgid "+5"
 #~ msgstr "+5"
 #~ msgid "+4"
@@ -4680,3 +4623,4 @@ msgstr "für "
 #~ "Wort angeklickt wird"
 #~ msgid "Toggle Dictionary View"
 #~ msgstr "Wörterbuchansicht ein/aus"
+
