@@ -27,6 +27,8 @@ extern "C"
 {
 #endif
 
+void main_set_previewer_widget(int in_sidebar);
+GtkWidget *main_get_previewer_widget(void);
 void main_clear_viewer(void);
 void main_information_viewer(const char * mod_name, const char * text, const char * key,
 		             const char * action, const char * type, const char * morph_text,

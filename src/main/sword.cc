@@ -1433,7 +1433,9 @@ void main_display_devotional(void)
 	text = backend->get_render_text(settings.devotionalmod, buf);
 //	g_message("modname: %s\nloctime: %s\ntext: %s",settings.devotionalmod, buf, text);
 	if (text) {
-		main_entry_display(sidebar.html_viewer_widget,
+		main_entry_display(settings.show_previewer_in_sidebar 
+				     ? sidebar.html_viewer_widget
+				     : widgets.html_previewer_text,
 			      settings.devotionalmod, text, buf, TRUE);
 		free(text);
 	}
