@@ -39,6 +39,7 @@
 #include "gui/utilities.h"
 #include "gui/about_modules.h"
 #include "gui/main_window.h"
+#include "gui/html.h"
 #include "gui/xiphos.h"
 #include "gui/bibletext_dialog.h"
 #include "gui/commentary_dialog.h"
@@ -520,7 +521,9 @@ gboolean gui_verselist_button_release_event(GtkWidget * widget,
 
 	if (text) {
 		settings.displaySearchResults = TRUE;
-		main_entry_display(sidebar.html_viewer_widget, //sidebar.html_widget,
+		main_entry_display(settings.show_previewer_in_sidebar 
+				     ? sidebar.html_viewer_widget
+				     : widgets.html_previewer_text, //sidebar.html_widget,
 			      settings.sb_search_mod, text, key, TRUE);
 		settings.displaySearchResults = FALSE;
 		g_free(text);
@@ -1337,11 +1340,8 @@ static gboolean paned_button_release_event(GtkWidget * widget,
 
 void gui_show_previewer_in_sidebar(gint choice)
 {
-	if(choice) {
+	if(choice) {	   
 		gtk_widget_show(widgets.box_side_preview);
-		gtk_widget_reparent (widgets.previewer,
-                                     widgets.box_side_preview);
-
 #ifdef USE_GTKMOZEMBED
 		gtk_widget_show (widgets.box_side_preview);
 #else
@@ -1351,16 +1351,16 @@ void gui_show_previewer_in_sidebar(gint choice)
 		gtk_paned_set_position(GTK_PANED(widgets.paned_sidebar),
 				       settings.sidebar_notebook_hight);
 	} else {
-		gtk_widget_reparent (widgets.previewer,
-                                     widgets.vbox_previewer);
 #ifdef USE_GTKMOZEMBED
 		gtk_widget_show (widgets.vbox_previewer);
 #else
 		gtk_widget_show_all (widgets.vbox_previewer);
 #endif
 		gtk_widget_hide(widgets.box_side_preview);
+		gtk_paned_set_position(GTK_PANED(widgets.vpaned),
+				       settings.biblepane_hight);
 	}
-	
+	main_set_previewer_widget(choice);
 }
 
 
@@ -1406,6 +1406,7 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	GtkWidget *close_button;
 	GtkWidget *image;
 	GtkWidget *shortcut_box;
+	GtkWidget *scrolledwindow;
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
 
@@ -1414,25 +1415,59 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	vbox1 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox1);
 
-#ifdef USE_PARALLEL_TAB	
+//#ifdef USE_PARALLEL_TAB	
 	widgets.paned_sidebar = gtk_vpaned_new();
-	gtk_paned_pack1(GTK_PANED(paned), widgets.paned_sidebar, FALSE, TRUE);	
-	gtk_widget_show(widgets.paned_sidebar);	
-	gtk_paned_pack1(GTK_PANED(widgets.paned_sidebar), vbox1, FALSE, TRUE);
+	gtk_paned_pack1 (GTK_PANED (paned), widgets.paned_sidebar, FALSE, TRUE);	
+	gtk_widget_show (widgets.paned_sidebar);	
+	gtk_paned_pack1 (GTK_PANED (widgets.paned_sidebar), vbox1, FALSE, TRUE);
 	widgets.box_side_preview = gtk_vbox_new(FALSE, 0);	
-	gtk_paned_pack2(GTK_PANED(widgets.paned_sidebar), widgets.box_side_preview, FALSE, TRUE);
-	g_signal_connect(GTK_OBJECT(widgets.paned_sidebar),
-			   "button_release_event",
-			   G_CALLBACK (paned_button_release_event),
-			   (gchar *) "paned_sidebar");
+	gtk_paned_pack2 (GTK_PANED (widgets.paned_sidebar), 
+			widgets.box_side_preview, FALSE, TRUE);
+	g_signal_connect (GTK_OBJECT (widgets.paned_sidebar),
+			"button_release_event",
+			G_CALLBACK (paned_button_release_event),
+			(gchar *) "paned_sidebar");
 	widgets.shortcutbar = widgets.paned_sidebar;
 	
+#ifdef USE_GTKMOZEMBED 
+	frame = gtk_frame_new(NULL);
+	gtk_widget_show(frame);
+	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
+	gtk_box_pack_start(GTK_BOX(widgets.box_side_preview), frame, 
+				TRUE, TRUE,
+			   	0);
+	//widgets.html_previewer
+	sidebar.html_viewer_widget = GTK_WIDGET(gecko_html_new(NULL, FALSE, VIEWER_TYPE));//embed_new(VIEWER_TYPE);
+	gtk_container_add(GTK_CONTAINER(frame), sidebar.html_viewer_widget);
+#else
+	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_show(scrolledwindow);
+	gtk_box_pack_start(GTK_BOX(widgets.box_side_preview), scrolledwindow, TRUE, TRUE,
+			   0);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
+				       (scrolledwindow),
+				       GTK_POLICY_NEVER,
+				       GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
+					    scrolledwindow,
+					    settings.shadow_type);
+	sidebar.html_viewer_widget = gtk_html_new();
+	gtk_container_add(GTK_CONTAINER(scrolledwindow),
+			  sidebar.html_viewer_widget);
+	g_signal_connect(GTK_OBJECT(sidebar.html_viewer_widget),
+			 "link_clicked", G_CALLBACK(gui_link_clicked),
+			 NULL);
+#endif /* USE_GTKMOZEMBED*/
+	gtk_widget_show(sidebar.html_viewer_widget);
+
 	
+	
+/*	
 #else
 	gtk_paned_pack1(GTK_PANED(paned), vbox1, FALSE, TRUE);
 	widgets.shortcutbar = vbox1;
 
-#endif /*  USE_PARALLEL_TAB  */
+#endif */ /*  USE_PARALLEL_TAB  */
 
 	/* ---------------------------------------------------------------- */
 	/* 2x2 button box set: modules/bookmarks/search/vlist */

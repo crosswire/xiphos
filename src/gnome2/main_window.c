@@ -122,18 +122,18 @@ void gui_show_hide_preview(gboolean choice)
 	gui_tab_set_showpreview(choice);
 	if (choice == FALSE) {
 		if (main_window_created)
-#ifdef USE_PARALLEL_TAB	
+//#ifdef USE_PARALLEL_TAB	
 			gtk_widget_hide(widgets.box_side_preview);
-#endif /*  USE_PARALLEL_TAB  */
+//#endif /*  USE_PARALLEL_TAB  */
 			gtk_widget_hide(widgets.vbox_previewer);
 		xml_set_value("Xiphos", "misc", "showpreview", "0");
 	} else {
 		if (main_window_created)
-#ifdef USE_PARALLEL_TAB	
+//#ifdef USE_PARALLEL_TAB	
 			if(settings.show_previewer_in_sidebar) 
 				gtk_widget_show(widgets.box_side_preview);
 			else 
-#endif /*  USE_PARALLEL_TAB  */
+//#endif /*  USE_PARALLEL_TAB  */
 				gtk_widget_show(widgets.vbox_previewer);
 			
 		xml_set_value("Xiphos", "misc", "showpreview", "1");
@@ -938,27 +938,29 @@ void create_mainwindow(void)
 	gtk_widget_show(widgets.vbox_previewer);
 	gtk_container_set_border_width (GTK_CONTAINER (widgets.vbox_previewer), 1);
 	gtk_paned_pack2(GTK_PANED(widgets.vpaned), widgets.vbox_previewer, TRUE, TRUE);
-	
+	/*
 	widgets.previewer = gtk_vbox_new(FALSE, 6);
 	gtk_widget_show(widgets.previewer);
 	gtk_box_pack_start(GTK_BOX(widgets.vbox_previewer), widgets.previewer, 
 				TRUE, TRUE,
-			   	0);
-	gtk_container_set_border_width(GTK_CONTAINER(widgets.previewer), 2);
+			   	0);*/
+	gtk_container_set_border_width(GTK_CONTAINER(widgets.vbox_previewer), 2);
 	
 #ifdef USE_GTKMOZEMBED 
 	frame = gtk_frame_new(NULL);
 	gtk_widget_show(frame);
 	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
-	gtk_box_pack_start(GTK_BOX(widgets.previewer), frame, 
+	gtk_box_pack_start(GTK_BOX(widgets.vbox_previewer), frame, 
 				TRUE, TRUE,
 			   	0);
-	sidebar.html_viewer_widget = GTK_WIDGET(gecko_html_new(NULL, FALSE, VIEWER_TYPE));//embed_new(VIEWER_TYPE);
-	gtk_container_add(GTK_CONTAINER(frame), sidebar.html_viewer_widget);
+    
+	widgets.html_previewer_text 
+			= GTK_WIDGET ( gecko_html_new( NULL, FALSE, VIEWER_TYPE));
+	gtk_container_add(GTK_CONTAINER(frame), widgets.html_previewer_text);
 #else
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
-	gtk_box_pack_start(GTK_BOX(widgets.previewer), scrolledwindow, TRUE, TRUE,
+	gtk_box_pack_start(GTK_BOX(widgets.vbox_previewer), scrolledwindow, TRUE, TRUE,
 			   0);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow),
@@ -967,15 +969,15 @@ void create_mainwindow(void)
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
 					    scrolledwindow,
 					    settings.shadow_type);
-	sidebar.html_viewer_widget = gtk_html_new();
+	widgets.html_previewer_text = gtk_html_new();
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
-			  sidebar.html_viewer_widget);
-	g_signal_connect(GTK_OBJECT(sidebar.html_viewer_widget),
+			  widgets.html_previewer_text);
+	g_signal_connect(GTK_OBJECT(widgets.html_previewer_text),
 			 "link_clicked", G_CALLBACK(gui_link_clicked),
 			 NULL);
 #endif
 
-	gtk_widget_show(sidebar.html_viewer_widget);
+	gtk_widget_show(widgets.html_previewer_text);
 			  
 	/*
 	 * commentary/book notebook

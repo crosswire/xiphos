@@ -56,7 +56,7 @@ struct  _app_widgets {
 		*vbox_text,  /* vbox for  */
 		*box_dict,
 		*vbox_previewer,
-		*previewer,
+		//*previewer,
 		*parallel_tab, /*  */
 	    
 	/* dock/undock stuff */
@@ -84,8 +84,10 @@ struct  _app_widgets {
 		*html_dict, /* html dictionary widget */
 		*html_book, /* gbs html widget */
 		*html_studypad, /* studypad html widget */
-		*bible_info_win, /* to display information (ie strongs) at  
+		*html_previewer, /* to display information (ie strongs) at  
                                      bottom of text pane */
+		*html_previewer_text,
+		*html_previewer_sidebar,
 				     
 	/* book of the Bible combo */
 		*cb_books,

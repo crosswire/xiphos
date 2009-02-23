@@ -57,6 +57,24 @@ extern "C" {
 
 using namespace std;
 
+static GtkWidget *previewer_html_widget;
+
+void main_set_previewer_widget(int in_sidebar)
+{
+    if(in_sidebar)
+    	previewer_html_widget = sidebar.html_viewer_widget;
+    else
+	previewer_html_widget = widgets.html_previewer_text;
+}
+
+GtkWidget *main_get_previewer_widget(void)
+{
+	return 	settings.show_previewer_in_sidebar 
+		? sidebar.html_viewer_widget
+		: widgets.html_previewer_text;
+}
+
+
 /******************************************************************************
  * Name
  *   main_clear_viewer
@@ -82,13 +100,13 @@ void main_clear_viewer(void)
 	gchar *buf;
 
 #ifdef USE_GTKMOZEMBED
-	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(sidebar.html_viewer_widget)))
+	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(previewer_html_widget)))
 		return;
-	GeckoHtml *html = GECKO_HTML(sidebar.html_viewer_widget);
+	GeckoHtml *html = GECKO_HTML(previewer_html_widget);
 	gecko_html_open_stream(html, "text/html");
 #else
 	/* setup gtkhtml widget */
-	GtkHTML *html = GTK_HTML(sidebar.html_viewer_widget);
+	GtkHTML *html = GTK_HTML(previewer_html_widget);
 	was_editable = gtk_html_get_editable(html);
 	if (was_editable)
 		gtk_html_set_editable(html, FALSE);
@@ -150,17 +168,17 @@ void main_information_viewer(const gchar * mod_name, const gchar * text, const g
 	GString *str;
 	MOD_FONT *mf = get_font((gchar*)mod_name);
 #ifdef USE_GTKMOZEMBED
-	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(sidebar.html_viewer_widget)))
+	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(previewer_html_widget)))
 		return;
-	GeckoHtml *html = GECKO_HTML(sidebar.html_viewer_widget);
+	GeckoHtml *html = GECKO_HTML(previewer_html_widget);
 	gecko_html_open_stream(html, "text/html");
 #else
-	GtkHTML *html = GTK_HTML(sidebar.html_viewer_widget);
-	PangoContext* pc = gtk_widget_create_pango_context(sidebar.html_viewer_widget);
+	GtkHTML *html = GTK_HTML(previewer_html_widget);
+	PangoContext* pc = gtk_widget_create_pango_context(GTK_WIDGET(html));
 	PangoFontDescription *desc = pango_context_get_font_description(pc);
 	pango_font_description_set_family(
 	    desc, ((mf->old_font) ? mf->old_font : "Serif"));
-	gtk_widget_modify_font(sidebar.html_viewer_widget, desc);
+	gtk_widget_modify_font(GTK_WIDGET(html), desc);
 #endif
 
 	g_string_printf(tmp_str,
