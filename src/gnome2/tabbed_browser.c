@@ -740,7 +740,7 @@ static GtkWidget* tab_widget_new(PASSAGE_TAB_INFO *tbinf, const gchar *label_tex
 	tbinf->button_close = gtk_button_new();
 	gtk_container_add(GTK_CONTAINER(tbinf->button_close), tmp_toolbar_icon);
 	gtk_button_set_relief(GTK_BUTTON(tbinf->button_close), GTK_RELIEF_NONE);
-	gtk_widget_set_usize (tbinf->button_close, 16, 16);
+	gtk_widget_set_usize (tbinf->button_close, 24, 22);
 	
 	tbinf->close_pixmap = gtk_image_new_from_stock(GTK_STOCK_CLOSE, 
 					GTK_ICON_SIZE_MENU);
