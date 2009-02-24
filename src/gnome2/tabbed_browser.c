@@ -46,7 +46,7 @@
 #include "gui/font_dialog.h"
 #include "gui/dictlex.h"
 #include "gui/widgets.h"
-
+#include "gui/utilities.h"
 
 #include "main/lists.h"
 #include "main/navbar_versekey.h"
@@ -730,50 +730,48 @@ static GtkWidget* tab_widget_new(PASSAGE_TAB_INFO *tbinf, const gchar *label_tex
 	GtkWidget *box;
 	GtkRequisition r;
 	GdkColor color;
-	
+
 	g_return_val_if_fail(label_text != NULL, NULL);
-	
-	tmp_toolbar_icon = gtk_image_new_from_stock(GTK_STOCK_CLOSE, 
-					GTK_ICON_SIZE_MENU); 
-	gtk_widget_show(tmp_toolbar_icon); 
-	
+
+	tmp_toolbar_icon = pixmap_finder("window-close.png");
+	gtk_widget_show(tmp_toolbar_icon);
+
 	tbinf->button_close = gtk_button_new();
 	gtk_container_add(GTK_CONTAINER(tbinf->button_close), tmp_toolbar_icon);
 	gtk_button_set_relief(GTK_BUTTON(tbinf->button_close), GTK_RELIEF_NONE);
-	gtk_widget_set_usize (tbinf->button_close, 24, 22);
-	
-	tbinf->close_pixmap = gtk_image_new_from_stock(GTK_STOCK_CLOSE, 
-					GTK_ICON_SIZE_MENU);
+	gtk_widget_set_usize (tbinf->button_close, 18, 16);
+
+	tbinf->close_pixmap = pixmap_finder("window-close.png");
 	gtk_widget_size_request (tbinf->button_close, &r);
 	gtk_widget_set_usize (tbinf->close_pixmap, r.width, r.height);
 	gtk_widget_set_sensitive(tbinf->close_pixmap, FALSE);
 	gtk_widget_show(tbinf->close_pixmap);
-	
+
 	tbinf->tab_label = GTK_LABEL(gtk_label_new (label_text));
 	gtk_widget_show (GTK_WIDGET(tbinf->tab_label));
-	
+
 	color.red = 0;
-	color.green = 0; 
+	color.green = 0;
 	color.blue = 0;
-	
+
 	gtk_widget_modify_fg (tbinf->button_close, GTK_STATE_NORMAL, &color);
 	gtk_widget_modify_fg (tbinf->button_close, GTK_STATE_INSENSITIVE, &color);
 	gtk_widget_modify_fg (tbinf->button_close, GTK_STATE_ACTIVE, &color);
 	gtk_widget_modify_fg (tbinf->button_close, GTK_STATE_PRELIGHT, &color);
 	gtk_widget_modify_fg (tbinf->button_close, GTK_STATE_SELECTED, &color);
-	
+
 	box = gtk_hbox_new(FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(box), GTK_WIDGET(tbinf->tab_label), TRUE, 
-					TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(box), GTK_WIDGET(tbinf->tab_label),
+			   TRUE, TRUE, 0);
 	gtk_box_pack_start(GTK_BOX(box), tbinf->button_close, FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(box), tbinf->close_pixmap, FALSE, FALSE, 0);
-	
+
 	gtk_widget_show(box);
-	
+
 	g_signal_connect (GTK_OBJECT (tbinf->button_close), "clicked",
 				G_CALLBACK(on_notebook_main_close_page),
 				tbinf);
-	
+
 	return box;
 }
 
@@ -922,7 +920,7 @@ void gui_set_named_tab_label(const gchar * key, PASSAGE_TAB_INFO *pt, gboolean u
 {
 	GString *str;
 	
-	gui_reassign_strdup(&pt->text_commentary_key, key);
+	gui_reassign_strdup(&pt->text_commentary_key, (char *)key);
 	str = pick_tab_label(pt);
 		
 	gtk_label_set_text(pt->tab_label, str->str);
@@ -976,31 +974,24 @@ void gui_update_tab_struct(const gchar * text_mod,
 	cur_passage_tab->showdicts   = showdicts;
 
 	if(text_mod) {
-		gui_reassign_strdup(&cur_passage_tab->text_mod, text_mod);
+		gui_reassign_strdup(&cur_passage_tab->text_mod, (char *)text_mod);
 	}
-	//g_message("commentary_mod = %s",commentary_mod);
 	if(commentary_mod) {
 		cur_passage_tab->comm_showing = comm_showing;
-		gui_reassign_strdup(&cur_passage_tab->commentary_mod, commentary_mod);		
+		gui_reassign_strdup(&cur_passage_tab->commentary_mod, (char *)commentary_mod);
 	} 
-	//g_message("cur_passage_tab->commentary_mod = %s",cur_passage_tab->commentary_mod);
 	if(dictlex_mod) {
-		gui_reassign_strdup(&cur_passage_tab->dictlex_mod, dictlex_mod);		
+		gui_reassign_strdup(&cur_passage_tab->dictlex_mod, (char *)dictlex_mod);
 	} 
 	if(book_mod) {
 		cur_passage_tab->comm_showing = comm_showing;
-		gui_reassign_strdup(&cur_passage_tab->book_mod, book_mod);		
+		gui_reassign_strdup(&cur_passage_tab->book_mod, (char *)book_mod);
 	}
 	if(book_offset) {
-		gui_reassign_strdup(&cur_passage_tab->book_offset, book_offset);		
+		gui_reassign_strdup(&cur_passage_tab->book_offset, (char *)book_offset);
 	}
-	/*if(text_commentary_key) {
-		if(cur_passage_tab->text_commentary_key)
-			g_free(cur_passage_tab->text_commentary_key);
-		cur_passage_tab->text_commentary_key = g_strdup(text_commentary_key);		
-	}*/
 	if(dictlex_key) {
-		gui_reassign_strdup(&cur_passage_tab->dictlex_key, dictlex_key);		
+		gui_reassign_strdup(&cur_passage_tab->dictlex_key, (char *)dictlex_key);
 	}
 }
 
