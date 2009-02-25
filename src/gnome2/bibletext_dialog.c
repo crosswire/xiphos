@@ -1383,13 +1383,23 @@ static void on_item1_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 static void on_print1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	//gui_html_print(cur_vt->html, FALSE);
+#ifdef USE_GTKMOZEMBED
+	gecko_html_print_document (GTK_WINDOW(widgets.app), 
+				   cur_vt->mod_name, 
+				   GECKO_HTML(cur_vt->html));
+#else
+	gui_html_print(cur_vt->html, FALSE,cur_vt->mod_name);
+#endif
 }
 
 
 static void on_copy2_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	//gui_copy_html(cur_vt->html);
+#ifdef USE_GTKMOZEMBED
+	gecko_html_copy_selection(GECKO_HTML(cur_vt->html));
+#else
+	gui_copy_html(cur_vt->html);
+#endif
 }
 
 

@@ -861,8 +861,9 @@ static void on_print1_activate(GtkMenuItem *menuitem,
 			       gpointer user_data)
 {
 #ifdef USE_GTKMOZEMBED
-//	embed_print(TRUE, GTK_MOZ_EMBED(cur_d->html));
-	
+	gecko_html_print_document (GTK_WINDOW(widgets.app), 
+				   cur_d->mod_name, 
+				   GECKO_HTML(cur_d->html));
 #else
 	 gui_html_print(cur_d->html, FALSE, cur_d->mod_name);
 #endif
