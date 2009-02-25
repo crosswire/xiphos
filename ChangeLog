@@ -1,3 +1,8 @@
+2009-02-25  terry <tbiggs@users.sourceforge.net>
+
+	* work on bug #2599921 Copy fails in detached windows 
+	  fixed for Bible and Commentary dialogs
+
 2009-02-19  terry <tbiggs@users.sourceforge.net>
 
 	* fixed bug #2585744 In 2.4, back and forward buttons segfault.
