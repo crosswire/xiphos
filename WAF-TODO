@@ -1,0 +1,32 @@
+TODO:
+        * cygwin (could be support for cygwin dropped?)
+
+        * installation folder detection
+
+        * gtkhtml
+
+        * bonobo generated editor (idl)
+
+        * detecting gecko/mozembed (rewrite file gecko.m4?)
+        
+        * translations
+
+        * xiphos help
+
+        * release/debug CFLAGS
+
+        * checking for CFLAGS/CXXFLAGS
+
+        * compilation for different OS, lin/win/bsd
+          platform specific stuff
+
+        * SWORD multiverse
+
+        * gtk tooltip function
+
+        * better structure of build script files
+
+        * installation
+
+        * tarball creation ('./waf dist')
+
