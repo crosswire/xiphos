@@ -1,5 +1,9 @@
 TODO:
 
+    * during installation replace/overwrite files in older:
+      $ALLUSERPROFILE/Application Data/
+      with a new version
+
     * xiphos icon in quicklaunch toolbar
 
     * check for previous installation of Xiphos before installation
