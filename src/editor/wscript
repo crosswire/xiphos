@@ -3,29 +3,30 @@
 
 import os, os.path
 
-def build(bld):
+
+def configure(conf):
 
     import Utils
-    env = bld.env
+    env = conf.env
     sub = Utils.subst_vars
         
-    # generade src files from IDL - must be run before compilation
-    src_dir =os.getcwd()
-    editor_dir = os.path.join(src_dir, 'src', 'editor')
-        
-    cmd = sub('${ORBIT_IDL} --output-dir=%s -I%s ${BONOBO_IDL_INCLUDES} -I${GTKHTML_DATA}/gtkhtml ${GTKHTML_DATA}/Editor.idl'
-            % (editor_dir, src_dir), env)
+    if not env['HAVE_GTKHTML3_23']:
+        # generade src files from IDL - must be run before compilation
+        src_dir =os.getcwd()
+        editor_dir = os.path.join(src_dir, 'src', 'editor')
+            
+        cmd = sub('${ORBIT_IDL} --output-dir=%s -I%s ${BONOBO_IDL_INCLUDES} -I${GTKHTML_DATA}/gtkhtml ${GTKHTML_DATA}/Editor.idl' % (editor_dir, src_dir), env)
+        # generate
+        os.system(cmd)
 
-    idl = bld.new_task_gen(rule=cmd)
-    idl.before = 'cc cxx' # generate before compilation C/C++
-
+def build(bld):
 
     lib = bld.new_task_gen(
-        features='cc', # use C compiler - less restrictive than C++
+        features='cc cxx', # use C compiler - less restrictive than C++
         includes='. ../../ ../../src ../../src/editor %s' % bld.env['GECKO_INCLUDE'], # ../../ for config.h
         target='editor',
-        uselib='GTK GLIB GNOMEUI SWORD GTKMOZEMBED GTKHTML',
-        #uselib_local='backend gecko',
+        uselib='GTK GLIB GNOMEUI SWORD GTKMOZEMBED GTKMOZEMBED_UNSTABLE GTKHTML',
+        before='%s/src/editor/Editor.h' % os.getcwd(), # let first generate C sources for Editor
     )
 
     lib.find_sources_in_dirs('.')

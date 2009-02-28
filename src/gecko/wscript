@@ -7,7 +7,7 @@ def build(bld):
         features='cxx cc', # C++ with g++ and C with gcc
         includes='. ../.. ../../src %s' % bld.env['GECKO_INCLUDE'], # ../../ for config.h
         target='gecko',
-        uselib='GTK GLIB GNOMEUI SWORD GTKMOZEMBED UPRINT',
+        uselib='GTK GLIB GNOMEUI SWORD GTKMOZEMBED GTKMOZEMBED_UNSTABLE UPRINT',
         #uselib_local='backend', # needs libbackend.a
     )
 
