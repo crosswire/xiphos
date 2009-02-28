@@ -3,18 +3,12 @@
 
 def build(bld):
 
-    import Utils
-    sub = Utils.subst_vars
-
-    #dfns = sub('-DGECKO_HOME=\""${GECKO_HOME}"\" -DPREFIX=\""${PREFIX}"\" -DSYSCONFIGDIR=\""${SYSCONFIGDIR}"\" -DDATADIR=\""${DATADIR}"\" -DLIBDIR=\""${LIBDIR}"\" -DSHARE_DIR=\""${SHARE_DIR}"\"', bld.env)
-    #print 'defines %s' % dfns
-
     lib = bld.new_task_gen(
         features='cxx cc cprogram',
         includes='. ../.. ../../src ../../src/editor %s' % bld.env['GECKO_INCLUDE'], # ../../ for config.h
         target='xiphos',
         #uselib='GLIB GTK GNOMEUI SWORD GTKMOZEMBED GECKONSS GECKONSPR GTKHTML UPRINT MAGICK',)
-        uselib='GNOMEUI GNOMEPRINT GECKONSPR MAGICK GNOMEPRINTUI GECKONSS GLIB GTK GTKHTML GTKMOZEMBED UPRINT SWORD',
+        uselib='GNOMEUI GNOMEPRINT GECKONSPR MAGICK GNOMEPRINTUI GECKONSS GLIB GTK GTKHTML GTKMOZEMBED GTKMOZEMBED_UNSTABLE UPRINT SWORD',
         add_objects='backend gecko editor main', # used instead of libbackend.a, libgecko.a, libeditor.a, libmain.a
         #uselib_local='backend gecko editor main', # on linux files: libbackend.a, libgecko.a, libeditor.a, libmain.a
     )
