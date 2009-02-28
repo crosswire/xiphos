@@ -10,6 +10,9 @@ import intltool, gnome
 
 from os.path import join, dirname, abspath
 
+from waffles.gecko import Gecko
+from waffles.misc import okmsg
+
 # the following two variables are used by the target "waf dist"
 VERSION='3.0.1'
 APPNAME='xiphos'
@@ -20,30 +23,6 @@ srcdir = '.'
 blddir = 'build'
 
 gtkhtml_api = '3.14'
-gecko_name = 'xulrunner'
-gecko_home = '/usr/lib/xulrunner'
-gecko_subdirs = '''
-        commandhandler
-	content
-	docshell
-	browser
-	dom
-	fastfind
-	find
-	gtkembedmoz
-	gfx
-	layout
-	necko
-	nspr
-	pref
-	string
-	uriloader
-	webbrwsr
-	webshell
-	widget
-	xpcom
-    '''.split()
-
 
 def set_options(opt):
 
@@ -159,13 +138,7 @@ def configure(conf):
 
 
     # TODO: more precise detection
-    # GTKHTML API 3.8
-    if conf.check_cfg(package='libgtkhtml-3.8', uselib_store='GTKHTML',
-            atleast_version='3.8.0', args='--cflags --libs'):
-        # Define if you want to use GtkHtml-3.8 */
-        dfn('USE_GTKHTML38', 1)
-
-    # GTKHTML API 3.14
+    # GTKHTML API 3.14 - check newer version first
     if conf.check_cfg(package='libgtkhtml-3.14', uselib_store='GTKHTML',
             atleast_version='3.14.0', args='--cflags --libs'):
         # Define if you want to use GtkHtml-3.8 */
@@ -173,12 +146,26 @@ def configure(conf):
         # Define if you want to use GtkHtml-3.14 */
         dfn('USE_GTKHTML3_14', 1)
 
+        # gtkhtml >=3.23 don't need generating sources form Editor.idl
+        if conf.check_cfg(package='libgtkhtml-3.14', atleast_version='3.23',
+                args='--modversion'):
+            env['HAVE_GTKHTML3_23'] = True
+            dfn('USE_GTKHTML3_14_23', 1)
+        else:
+            env['HAVE_GTKHTML3_23'] = False
 
-    def okmsg(kw):
-        # some customization for displaying pkg-config values on the line with ok msg
-        # to be able use this function there is need for file ./wafadmin/Tools/config_c.py
-        # from svn in r5753
-        return 'ok %s' % kw['success'].strip()
+
+    # GTKHTML API 3.8
+    elif conf.check_cfg(package='libgtkhtml-3.8', uselib_store='GTKHTML',
+            atleast_version='3.8.0', args='--cflags --libs'):
+        # Define if you want to use GtkHtml-3.8 */
+        dfn('USE_GTKHTML38', 1)
+
+        # TODO
+        # gtkhtml >=3.23 don't need generating sources form Editor.idl
+        #if conf.check_cfg(package='libgtkhtml-3.14', atleast_version='3.13',
+                #args='--modversion'):
+            #dfn('USE_GTKHTML38_3_13', 1)
 
 
     # GTKHML api version
@@ -193,17 +180,7 @@ def configure(conf):
     dfn('GTKHTML_DATA_DIR', env['GTKHTML_DATA'])
 
 
-    # TODO
-    # Define if you want to use GtkHtml-3.8-3.13 */
-    #dfn('USE_GTKHTML38_3_13', 1)
-
-    # TODO
-    # Define if you want to use GtkHtml-3.14 */
-    #dfn('USE_GTKHTML3_14_23', 1)
-
-
     ### IDL for editor
-
 
 
     # ORBIT_IDL
@@ -238,46 +215,24 @@ def configure(conf):
             atleast_version='1.5.11', mandatory=True, args='--cflags --libs',
             errmsg='error: either no sword or sword not recent enough')
 
+     
+
+    ######################
+    # gecko (xulrunner) for html rendering
+    # gtkhtml only for editor
+    if Gecko(conf).detect():
+        dfn('USE_GTKMOZEMBED', 1)
+        env.append_value('CCFLAGS', env['GECKO_CCFLAGS'])
+        env.append_value('CXXFLAGS', env['GECKO_CCFLAGS'])
+    # gtkhtml for html rendering and editor
+    else:
+        print "Using 'GTKHTML instead of Gecko' isn't yet implemented"
+        exit(1)
+
+    ######################
+
+
     # TODO: implement GTKHTML
-    # TODO: implement gecko detecting (rewrite gecko.m4 in python)
-
-    ## Gecko
-
-    if conf.check_cfg(package='%s-gtkmozembed' % gecko_name, uselib_store='GTKMOZEMBED',
-            atleast_version='1.7', args='--cflags --libs'):
-        dfn('HAVE_GECKO_1_7', 1)
-
-    if conf.check_cfg(package='%s-gtkmozembed' % gecko_name, atleast_version='1.8'):
-        dfn('HAVE_GECKO_1_8', 1)
-    if conf.check_cfg(package='%s-gtkmozembed' % gecko_name, atleast_version='1.8.1'):
-        dfn('HAVE_GECKO_1_8_1', 1)
-    if conf.check_cfg(package='%s-gtkmozembed' % gecko_name, atleast_version='1.9'):
-        dfn('HAVE_GECKO_1_9', 1)
-
-    # other parts of gecko
-    conf.check_cfg(package='%s-nss' % gecko_name, uselib_store='GECKONSS',
-            args='--cflags --libs')
-    conf.check_cfg(package='%s-nspr' % gecko_name, uselib_store='GECKONSPR',
-            args='--cflags --libs')
-
-    # define is needed
-    dfn('GECKO_HOME', gecko_home)
-    
-    # put gecko subdirs in string with absolute paths
-    gecko_include = ''
-    for i in gecko_subdirs:
-        gecko_include += join(gecko_home, 'include', i) + ' '
-    conf.env['GECKO_INCLUDE'] = gecko_include
-
-
-
-    #print 'GECKO headers begin'
-    #conf.check(header_name='mozilla-config.h')
-    #print 'GECKO headers end'
-
-
-
-
 
 
     # TODO: maybe the following checks should be in a more generic module.
@@ -377,21 +332,13 @@ def configure(conf):
     dfn('PACKAGE_SOURCE_DIR', abspath('.')) # foder where was wscript executed
 
     # some folders for final executable
-    dfn('GECKO_HOME', gecko_home)
     dfn('PREFIX', sub('${PREFIX}', env))
     dfn('SYSCONFDIR', sub('${PREFIX}/etc', env))
     dfn('DATADIR', sub('${PREFIX}/share', env))
     dfn('LIBDIR', sub('${PREFIX}/lib', env))
     dfn('SHARE_DIR', sub('${PREFIX}/share/xiphos', env))
 
-    # other HARDCODED
-    # Define if mozilla is of the toolkit flavour */
-    #dfn('HAVE_MOZILLA_TOOLKIT', 1)
-
-    # Define if you want to use gtkmozembed */
-    dfn('USE_GTKMOZEMBED', 1)
-
-    # TODO: how to detect these values? is it possible to detect them?
+        # TODO: how to detect these values? is it possible to detect them?
 
     # TODO: not necessary SELECT* defines?
     # Define to the type of arg 1 for `select'. */
@@ -405,16 +352,17 @@ def configure(conf):
     #dfn('__cplusplus', 1)
 
     # let compiler know that we have 'config.h'
-    #conf.env.append_value('CFLAGS', '-DHAVE_CONFIG_H')
     conf.env.append_value('CCFLAGS', '-DHAVE_CONFIG_H')
     conf.env.append_value('CXXFLAGS', '-DHAVE_CONFIG_H')
-    #conf.env.append_value('CFLAGS', '-DHAVE_CONFIG_H')
-    #conf.env.append_value('CCFLAGS', '-D__cplusplus')
 
     conf.write_config_header('config.h')
 
+    # process configure for subfolders
+    conf.sub_config('src/editor') # generate Editor source from idl
+
 
 def build(bld):
+
     # process subfolders from here
     bld.add_subdirs('''
         src/backend
