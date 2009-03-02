@@ -1240,7 +1240,7 @@ void
 set_custom_pixmap(GnomeUIInfo menu[], int index, const char* filename){
 	if (!menu[index].pixmap_info)
 		menu[index].pixmap_info =
-		    image_locator(filename);
+		    image_locator((char*)filename);
 } 
 
 void
