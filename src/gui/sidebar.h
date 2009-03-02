@@ -37,8 +37,8 @@ struct _sidebar {
 		*tbtn_view_main,
 		*btn_save,
 		*htmlshow,
-		*html_widget,
-		*html_viewer_widget;
+		*html_widget;
+	GtkWidget *html_viewer_widget;
 	GtkWidget *optionmenu1;
 	GtkWidget *menu_item_save_search;
 	gchar   mod_name[80];

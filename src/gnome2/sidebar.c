@@ -47,6 +47,8 @@
 #include "gui/gbs_dialog.h"
 #include "gui/widgets.h"
 
+#include "gecko/gecko-html.h"
+
 #include "main/sword.h"
 #include "main/settings.h"
 #include "main/lists.h"
@@ -404,10 +406,10 @@ static gboolean on_modules_list_button_release(GtkWidget *widget,
 	//gtk_tree_view_set_show_expanders(sidebar.module_list, FALSE);
 	//gtk_tree_view_set_level_indentation(sidebar.module_list, 12);
 	GtkTreePath *path = gtk_tree_model_get_path(model, &selected);
-	if (gtk_tree_view_row_expanded (sidebar.module_list, path))
-	       gtk_tree_view_collapse_row ( sidebar.module_list, path );
+	if (gtk_tree_view_row_expanded (GTK_TREE_VIEW(sidebar.module_list), path))
+	       gtk_tree_view_collapse_row ( GTK_TREE_VIEW(sidebar.module_list), path );
         else
-	       gtk_tree_view_expand_row ( sidebar.module_list, path, FALSE );
+	       gtk_tree_view_expand_row ( GTK_TREE_VIEW(sidebar.module_list), path, FALSE );
 	gtk_tree_path_free ( path );
 
 	switch (event->button) {
@@ -1437,7 +1439,7 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 				TRUE, TRUE,
 			   	0);
 	//widgets.html_previewer
-	sidebar.html_viewer_widget = GTK_WIDGET(gecko_html_new(NULL, FALSE, VIEWER_TYPE));//embed_new(VIEWER_TYPE);
+	sidebar.html_viewer_widget = GTK_WIDGET(gecko_html_new(NULL, FALSE, SB_VIEWER_TYPE));//embed_new(VIEWER_TYPE);
 	gtk_container_add(GTK_CONTAINER(frame), sidebar.html_viewer_widget);
 #else
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);

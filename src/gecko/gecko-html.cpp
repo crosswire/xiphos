@@ -650,7 +650,7 @@ void gecko_html_shutdown(void)
 
 void
 gecko_html_print_document(GtkWindow * window, gchar * mod_name,
-			  gpointer print_html)
+			  DIALOG_DATA * dialog)
 {
 #ifdef USE_GTKUPRINT	
 	GtkWidget *gtk_win;
@@ -658,12 +658,19 @@ gecko_html_print_document(GtkWindow * window, gchar * mod_name,
 	GtkWidget *vbox = gtk_vbox_new(FALSE, FALSE);
     	SWDisplay *old_display = 0;
 	SWDisplay *swdisplay = 0;
-	SWMgr *mgr = backend->get_display_mgr();
+	SWMgr *mgr;
+	if(dialog) {
+		BackEnd *be = (BackEnd *)dialog->backend;
+		mgr = be->get_display_mgr();
+	}
+	else 
+		mgr = backend->get_display_mgr();
+	
 	SWModule *mod = mgr->Modules[mod_name];
 	
 	if (!mod)
 		return;
-
+    
 	gtk_win = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	html = gecko_html_new(NULL,FALSE,8);
 	gtk_container_add(GTK_CONTAINER(gtk_win), GTK_WIDGET(vbox));

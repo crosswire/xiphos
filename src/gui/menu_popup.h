@@ -1,8 +1,8 @@
 /*
  * Xiphos Bible Study Tool
- * commentary_dialog.h - dialog for a commentary module
+ * menu_popup.h - creation of (and call backs) for xiphos popup menus
  *
- * Copyright (C) 2000-2008 Xiphos Developer Team
+ * Copyright (C) 2000-2009 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,20 +19,18 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-#ifndef __COMMENTARY_DIALOG_H_
-#define __COMMENTARY_DIALOG_H_
+#ifndef __MENU_POPUP__H_
+#define __MENU_POPUP__H_
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include "main/module_dialogs.h"
-	
-void gui_commentary_dialog_sync_toggled(GtkToggleButton * button, DIALOG_DATA * c);
-void gui_create_commentary_dialog(DIALOG_DATA * d, gboolean do_edit);
-	
+void gui_menu_popup (const gchar * mod_name,
+			DIALOG_DATA * d);
+
+
 #ifdef __cplusplus
 }
 #endif
-
-#endif
+#endif /* __MENU_POPUP__H_ */

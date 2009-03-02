@@ -119,7 +119,9 @@ void            gecko_html_preview_navigate (GeckoHtml *html,
 gboolean        gecko_html_initialize     (void);
 void            gecko_html_shutdown       (void); 
 
-void            gecko_html_print_document (GtkWindow * window, gchar * mod_name, gpointer print_html);
+void            gecko_html_print_document (GtkWindow * window, 
+					   gchar * mod_name, 
+					   DIALOG_DATA * dialog);
 G_END_DECLS
 
 #endif /* __GECKO_HTML_H__ */

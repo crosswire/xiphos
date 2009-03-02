@@ -324,13 +324,13 @@ _popupmenu_requested_cb (GeckoHtml *html,
 			     gchar *uri,
 			     DIALOG_DATA * d)
 {
-	//(d);
+	gui_menu_popup (d->mod_name, d);
 }
 #else
 static void dialog_url(GtkHTML * html, const gchar * url,
 		       DIALOG_DATA * dlg)
 {
-	
+	gui_menu_popup (d->mod_name, d);
 }
 #endif
 

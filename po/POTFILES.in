@@ -95,6 +95,7 @@ ui/editor_note.xml
 ui/editor_studypad.xml
 ui/editor.xml
 ui/export-dialog.glade
+ui/popups.glade
 ui/module-manager.glade
 ui/navbar_versekey.glade
 ui/prefs.glade
