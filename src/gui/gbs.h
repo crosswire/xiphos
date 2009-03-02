@@ -23,7 +23,6 @@
 #define ___GBS_H_
 
 GtkWidget *gui_create_book_pane(void);
-void gui_popup_menu_gbs(void);
 void gui_update_gbs_global_ops(gchar * option, gboolean choice);
 void gui_set_book_page_and_key(gchar * mod_name, gchar * key);
 

@@ -41,6 +41,7 @@ extern "C" {
 	
 #define PARALLEL_TYPE 5
 #define VIEWER_TYPE 6
+#define SB_VIEWER_TYPE 13
 	
 #define DIALOG_TEXT_TYPE 7
 #define DIALOG_COMMENTARY_TYPE 8 

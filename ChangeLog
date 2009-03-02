@@ -1,3 +1,10 @@
+2009-03-01  terry <tbiggs@users.sourceforge.net>
+
+	* replaced gnome popup menus with gtk menus for bibletext, commentary
+	  dict/lex and gbs in the main window and in dialogs
+	* added files ui/popups.glade, gui/menu_popup.h and gnome2/menu_popup.c
+	* fixed bug #2599921 Copy fails in detached windows
+
 2009-02-25  terry <tbiggs@users.sourceforge.net>
 
 	* work on bug #2599921 Copy fails in detached windows 

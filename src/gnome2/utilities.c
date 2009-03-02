@@ -905,6 +905,8 @@ void gui_add_mods_2_gtk_menu(gint mod_type, GtkWidget * menu,
 	GList 	*tmp = NULL;
 	GtkWidget * item;
 	
+    	if (mod_type == -1) return;
+    
 	tmp = get_list(mod_type);
 	while (tmp != NULL) {	
 		item =

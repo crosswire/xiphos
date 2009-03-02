@@ -35,6 +35,7 @@
 #include "gui/gbs_dialog.h"
 #include "gui/navbar_book_dialog.h"
 #include "gui/widgets.h"
+#include "gui/menu_popup.h"
 
 
 #include "main/module_dialogs.h"
@@ -199,6 +200,8 @@ static gboolean button_press(GtkWidget *widget,
 			     DIALOG_DATA *g)
 {
 	cur_dlg = g;
+	if(event->button == 2)
+		gui_menu_popup (NULL, g); 
 	return FALSE;
 }
 
@@ -294,7 +297,7 @@ _popupmenu_requested_cb (GeckoHtml *html,
 			 gchar *uri,
 			 DIALOG_DATA *d)
 {	
-	//(d); 
+	gui_menu_popup (NULL, d); 
 }
 #endif
 
