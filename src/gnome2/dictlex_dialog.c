@@ -328,7 +328,7 @@ _popupmenu_requested_cb (GeckoHtml *html,
 }
 #else
 static void dialog_url(GtkHTML * html, const gchar * url,
-		       DIALOG_DATA * dlg)
+		       DIALOG_DATA * d)
 {
 	gui_menu_popup (d->mod_name, d);
 }
