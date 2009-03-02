@@ -94,6 +94,7 @@ gchar * _get_key (gchar * mod_name)
 			key = g_strdup (settings.dictkey);
 		break;	
 		case BOOK_TYPE:
+		case PRAYERLIST_TYPE:
 			key = g_strdup (settings.book_key);
 		break;		
 	}
@@ -110,13 +111,15 @@ GtkWidget * _get_html (void)
 		case TEXT_TYPE:	
 			return widgets.html_text;
 		break;
-		case COMMENTARY_TYPE:	
+		case COMMENTARY_TYPE:
+		case PERCOM_TYPE:	
 			return widgets.html_comm;			
 		break;
 		case DICTIONARY_TYPE:	
 			return widgets.html_dict;
 		break;	
 		case BOOK_TYPE:	
+		case PRAYERLIST_TYPE:
 			return widgets.html_book;
 		break;		
 		}
@@ -292,7 +295,7 @@ void on_popup_print_activate           (GtkMenuItem     *menuitem,
 void on_close_activate           (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
-    
+	/* FIXME */    
 }
 
 
