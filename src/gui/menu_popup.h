@@ -26,6 +26,7 @@
 extern "C" {
 #endif
 
+#include "main/module_dialogs.h"
 void gui_menu_popup (const gchar * mod_name,
 			DIALOG_DATA * d);
 
