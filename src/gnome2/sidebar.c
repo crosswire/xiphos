@@ -47,7 +47,10 @@
 #include "gui/gbs_dialog.h"
 #include "gui/widgets.h"
 
+
+#ifdef USE_GTKMOZEMBED
 #include "gecko/gecko-html.h"
+#endif
 
 #include "main/sword.h"
 #include "main/settings.h"

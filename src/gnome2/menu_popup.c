@@ -844,9 +844,9 @@ void on_read_selection_aloud_activate (GtkMenuItem * menuitem, gpointer user_dat
 {
 	gchar *dict_key;
 	int len;
-	GtkWidget *html = _get_html ();
+	GtkWidget *html_widget = _get_html ();
 #ifdef USE_GTKMOZEMBED
-	gecko_html_copy_selection(GECKO_HTML(html));
+	gecko_html_copy_selection(GECKO_HTML(html_widget));
 	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
 	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
 	dict_key =
@@ -854,7 +854,7 @@ void on_read_selection_aloud_activate (GtkMenuItem * menuitem, gpointer user_dat
 			(GtkEditable *)widgets.entry_dict,0,-1));
 	len = (dict_key ? strlen(dict_key) : 0);
 #else
-	GtkHTML *html = GTK_HTML(html);
+	GtkHTML *html = GTK_HTML(html_widget);
 	dict_key = gtk_html_get_selection_html(html, &len);
 #endif /* !USE_GTKMOZEMBED */
 
