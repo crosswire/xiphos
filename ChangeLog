@@ -1,3 +1,8 @@
+2009-03-03  terry <tbiggs@users.sourceforge.net>
+
+	* added gmodule-export-2.0 PKG_CHECK_MODULES(GNOME,.....) in 
+	  configure.in so Ubuntu will work with new popups.
+
 2009-03-01  terry <tbiggs@users.sourceforge.net>
 
 	* replaced gnome popup menus with gtk menus for bibletext, commentary
