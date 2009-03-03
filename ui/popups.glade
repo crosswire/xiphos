@@ -22,7 +22,7 @@
       <signal name="activate" handler="on_popup_bookmark_activate" last_modification_time="Thu, 26 Feb 2009 19:17:07 GMT"/>
 
       <child internal-child="image">
-	<widget class="GtkImage" id="image592">
+	<widget class="GtkImage" id="image605">
 	  <property name="visible">True</property>
 	  <property name="stock">gtk-add</property>
 	  <property name="icon_size">1</property>
@@ -48,7 +48,7 @@
       <property name="use_underline">True</property>
 
       <child internal-child="image">
-	<widget class="GtkImage" id="image593">
+	<widget class="GtkImage" id="image606">
 	  <property name="visible">True</property>
 	  <property name="stock">gtk-open</property>
 	  <property name="icon_size">1</property>
@@ -69,7 +69,7 @@
 	      <property name="use_underline">True</property>
 
 	      <child internal-child="image">
-		<widget class="GtkImage" id="image594">
+		<widget class="GtkImage" id="image607">
 		  <property name="visible">True</property>
 		  <property name="stock">gtk-open</property>
 		  <property name="icon_size">1</property>
@@ -126,7 +126,7 @@
       <property name="use_underline">True</property>
 
       <child internal-child="image">
-	<widget class="GtkImage" id="image595">
+	<widget class="GtkImage" id="image608">
 	  <property name="visible">True</property>
 	  <property name="stock">gtk-edit</property>
 	  <property name="icon_size">1</property>
@@ -165,7 +165,7 @@
 	      <property name="use_underline">True</property>
 
 	      <child internal-child="image">
-		<widget class="GtkImage" id="image596">
+		<widget class="GtkImage" id="image609">
 		  <property name="visible">True</property>
 		  <property name="stock">gtk-edit</property>
 		  <property name="icon_size">1</property>
@@ -185,7 +185,7 @@
 	      <property name="use_underline">True</property>
 
 	      <child internal-child="image">
-		<widget class="GtkImage" id="image597">
+		<widget class="GtkImage" id="image610">
 		  <property name="visible">True</property>
 		  <property name="stock">gtk-edit</property>
 		  <property name="icon_size">1</property>
@@ -209,7 +209,7 @@
       <property name="use_underline">True</property>
 
       <child internal-child="image">
-	<widget class="GtkImage" id="image598">
+	<widget class="GtkImage" id="image611">
 	  <property name="visible">True</property>
 	  <property name="stock">gtk-ok</property>
 	  <property name="icon_size">1</property>
@@ -432,7 +432,7 @@
       <property name="use_underline">True</property>
 
       <child internal-child="image">
-	<widget class="GtkImage" id="image599">
+	<widget class="GtkImage" id="image612">
 	  <property name="visible">True</property>
 	  <property name="stock">gtk-find</property>
 	  <property name="icon_size">1</property>
@@ -473,7 +473,7 @@
       <signal name="activate" handler="on_unlock_this_module_activate" last_modification_time="Thu, 26 Feb 2009 19:23:37 GMT"/>
 
       <child internal-child="image">
-	<widget class="GtkImage" id="image600">
+	<widget class="GtkImage" id="image613">
 	  <property name="visible">True</property>
 	  <property name="stock">gtk-dialog-authentication</property>
 	  <property name="icon_size">1</property>
@@ -494,7 +494,7 @@
       <signal name="activate" handler="on_display_book_heading_activate"/>
 
       <child internal-child="image">
-	<widget class="GtkImage" id="image601">
+	<widget class="GtkImage" id="image614">
 	  <property name="visible">True</property>
 	  <property name="stock">gtk-open</property>
 	  <property name="icon_size">1</property>
@@ -515,7 +515,7 @@
       <signal name="activate" handler="on_display_chapter_heading_activate" last_modification_time="Thu, 26 Feb 2009 19:23:37 GMT"/>
 
       <child internal-child="image">
-	<widget class="GtkImage" id="image602">
+	<widget class="GtkImage" id="image615">
 	  <property name="visible">True</property>
 	  <property name="stock">gtk-open</property>
 	  <property name="icon_size">1</property>
@@ -536,7 +536,7 @@
       <signal name="activate" handler="on_rename_perscomm_activate"/>
 
       <child internal-child="image">
-	<widget class="GtkImage" id="image603">
+	<widget class="GtkImage" id="image616">
 	  <property name="visible">True</property>
 	  <property name="stock">gtk-convert</property>
 	  <property name="icon_size">1</property>
@@ -557,7 +557,7 @@
       <signal name="activate" handler="on_dump_perscomm_activate" last_modification_time="Sun, 01 Mar 2009 02:23:22 GMT"/>
 
       <child internal-child="image">
-	<widget class="GtkImage" id="image604">
+	<widget class="GtkImage" id="image617">
 	  <property name="visible">True</property>
 	  <property name="stock">gtk-paste</property>
 	  <property name="icon_size">1</property>
@@ -578,7 +578,7 @@
       <signal name="activate" handler="on_read_selection_aloud_activate"/>
 
       <child internal-child="image">
-	<widget class="GtkImage" id="image605">
+	<widget class="GtkImage" id="image618">
 	  <property name="visible">True</property>
 	  <property name="stock">gtk-media-play</property>
 	  <property name="icon_size">1</property>

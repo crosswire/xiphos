@@ -30,7 +30,6 @@ extern "C" {
 void gui_menu_popup (const gchar * mod_name,
 			DIALOG_DATA * d);
 
-
 #ifdef __cplusplus
 }
 #endif
