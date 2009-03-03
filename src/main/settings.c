@@ -96,14 +96,14 @@ int settings_init(int new_configs, int new_bookmarks)
 
 	/* find out what kind of peculiar language environment we have */
 	re_encode_digits = FALSE;
-	if (((env = g_getenv("LC_ALL")) != NULL) &&
+	if (((env = (char*) g_getenv("LC_ALL")) != NULL) &&
 	    // for now, farsi-sensitive only
 	    (strncmp (env, "fa", 2) == 0)) {
 		re_encode_digits = TRUE;
 	}
 
 	/* Get home dir */
-	if ((settings.homedir = g_getenv(HOMEVAR)) == NULL) {
+	if ((settings.homedir = (char*) g_getenv(HOMEVAR)) == NULL) {
 		gui_generic_warning(_("$HOME is not set!"));
 		/* if not found in env exit */
 		exit(0);

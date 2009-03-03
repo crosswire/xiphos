@@ -12,7 +12,7 @@ DIRS="backend gecko editor main gnome2"
 AC_SUBST(DIRS)
 xiphos_exec="xiphos"
 AC_SUBST(xiphos_exec)	
-PKG_CHECK_MODULES(GNOME, glib-2.0 gtk+-2.0 libgnomeprintui-2.2 libgnomeui-2.0 libxml-2.0 libglade-2.0,,echo error: some devel libs are missing: check for glib2 gtk2 libgnomeprintui22 libgnomeui libxml2 libglade2 && exit 1)
+PKG_CHECK_MODULES(GNOME, glib-2.0 gtk+-2.0 libgnomeprintui-2.2 libgnomeui-2.0 libxml-2.0 libglade-2.0 gmodule-export-2.0,,echo error: some devel libs are missing: check for glib2 gtk2 libgnomeprintui22 libgnomeui libxml2 libglade2 && exit 1)
 AC_SUBST(GNOME_LIBS)
 AC_SUBST(GNOME_CFLAGS)
 dnl AC_ENABLE_STATIC(yes)
