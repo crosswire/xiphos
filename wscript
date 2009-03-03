@@ -151,6 +151,8 @@ def configure(conf):
                 args='--modversion'):
             env['HAVE_GTKHTML3_23'] = True
             dfn('USE_GTKHTML3_14_23', 1)
+            conf.check_cfg(package='gtkhtml-editor', uselib_store='GTKHTML_EDITOR',
+                    mandatory=True, args='--cflags --libs')
         else:
             env['HAVE_GTKHTML3_23'] = False
 
