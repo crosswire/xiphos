@@ -60,6 +60,8 @@ GtkWidget *entrycbIntBook;
 GtkWidget *sbIntChapter;
 GtkWidget *sbIntVerse;
 GtkWidget *entryIntLookup;
+    
+PARA_LABELS plabels;
 
 /******************************************************************************
  * static
@@ -670,6 +672,7 @@ static gboolean on_text_button_release_event(GtkWidget * widget,
 GtkWidget *_create_parallel_tab(void)
 {
 	GtkWidget *toolbar29;
+  	GtkWidget *box_parallel_labels;
 	GtkWidget *tmp_toolbar_icon;
 	GtkWidget *buttonIntSync;
 	GtkWidget *cbIntBook;
@@ -679,13 +682,15 @@ GtkWidget *_create_parallel_tab(void)
 	GtkWidget *eventbox;
 	GtkWidget *frame;
 	GtkWidget *scrolled_window;
-	
+    
+    	//plabels = g_new0(PARA_LABELS,1);
 	gtk_notebook_set_show_tabs (GTK_NOTEBOOK(widgets.notebook_bible_parallel),
                                              FALSE);
 	gtk_notebook_set_current_page (GTK_NOTEBOOK(widgets.notebook_bible_parallel), 
 					0);
 	gtk_notebook_set_show_border (GTK_NOTEBOOK(widgets.notebook_bible_parallel),
                                         TRUE);
+    
 	parallel_vbox = gtk_vbox_new(FALSE, 0);
 	g_signal_connect(GTK_OBJECT(parallel_vbox), "destroy",
 			   G_CALLBACK(on_parallel_tab_destroy),
@@ -696,6 +701,39 @@ GtkWidget *_create_parallel_tab(void)
 	toolbar29 = create_nav_toolbar();
 	gtk_widget_show(toolbar29);
 	gtk_box_pack_start(GTK_BOX(parallel_vbox), toolbar29, FALSE, FALSE, 0);
+    	
+	box_parallel_labels = gtk_hbox_new (TRUE, 2);
+	gtk_widget_show (box_parallel_labels);
+	gtk_box_pack_start (GTK_BOX (parallel_vbox), box_parallel_labels, FALSE, TRUE, 0);
+	gtk_container_set_border_width (GTK_CONTAINER (box_parallel_labels), 2);
+
+	plabels.label_1 = gtk_label_new (" ");
+	gtk_widget_show (plabels.label_1);
+	gtk_box_pack_start (GTK_BOX (box_parallel_labels), plabels.label_1, FALSE, FALSE, 0);
+	gtk_label_set_use_markup (GTK_LABEL (plabels.label_1), TRUE);
+
+	plabels.label_2 = gtk_label_new (" ");
+	gtk_widget_show (plabels.label_2);
+	gtk_box_pack_start (GTK_BOX (box_parallel_labels), plabels.label_2, FALSE, FALSE, 0);
+	gtk_label_set_use_markup (GTK_LABEL (plabels.label_2), TRUE);
+
+	plabels.label_3 = gtk_label_new (" ");
+	gtk_widget_show (plabels.label_3);
+	gtk_box_pack_start (GTK_BOX (box_parallel_labels), plabels.label_3, FALSE, FALSE, 0);
+	gtk_label_set_use_markup (GTK_LABEL (plabels.label_3), TRUE);
+
+	plabels.label_4 = gtk_label_new (" ");
+	gtk_widget_show (plabels.label_4);
+	gtk_box_pack_start (GTK_BOX (box_parallel_labels), plabels.label_4, FALSE, FALSE, 0);
+	gtk_label_set_use_markup (GTK_LABEL (plabels.label_4), TRUE);
+
+	plabels.label_5 = gtk_label_new (" ");
+	gtk_widget_show (plabels.label_5);
+	gtk_box_pack_start (GTK_BOX (box_parallel_labels), plabels.label_5, FALSE, FALSE, 0);
+	gtk_label_set_use_markup (GTK_LABEL (plabels.label_5), TRUE);
+
+
+    
 	
 #ifdef OLD_NAVBAR
 	navbar.key = g_strdup(settings.currentverse);

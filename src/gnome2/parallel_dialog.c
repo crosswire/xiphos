@@ -616,6 +616,7 @@ static
 GtkWidget *create_parallel_dialog(void)
 {
 	GtkWidget *dialog_parallel;
+  	GtkWidget *box_parallel_labels;
 	GtkWidget *dialog_vbox25;
 	GtkWidget *toolbar29;
 	GtkWidget *tmp_toolbar_icon;
@@ -647,6 +648,8 @@ GtkWidget *create_parallel_dialog(void)
 	gtk_object_set_data(GTK_OBJECT(dialog_parallel),
 			    "dialog_vbox25", dialog_vbox25);
 	gtk_widget_show(dialog_vbox25);
+    
+    	
 
 	vboxInt = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vboxInt);
@@ -656,6 +659,39 @@ GtkWidget *create_parallel_dialog(void)
 	gtk_widget_show(toolbar29);
 	gtk_box_pack_start(GTK_BOX(vboxInt), toolbar29, FALSE, FALSE,
 			   0);
+       	
+	box_parallel_labels = gtk_hbox_new (TRUE, 2);
+	gtk_widget_show (box_parallel_labels);
+	gtk_box_pack_start (GTK_BOX (vboxInt), box_parallel_labels, FALSE, TRUE, 0);
+	gtk_container_set_border_width (GTK_CONTAINER (box_parallel_labels), 2);
+
+	plabels.label_1 = gtk_label_new (" ");
+	gtk_widget_show (plabels.label_1);
+	gtk_box_pack_start (GTK_BOX (box_parallel_labels), plabels.label_1, FALSE, FALSE, 0);
+	gtk_label_set_use_markup (GTK_LABEL (plabels.label_1), TRUE);
+
+	plabels.label_2 = gtk_label_new (" ");
+	gtk_widget_show (plabels.label_2);
+	gtk_box_pack_start (GTK_BOX (box_parallel_labels), plabels.label_2, FALSE, FALSE, 0);
+	gtk_label_set_use_markup (GTK_LABEL (plabels.label_2), TRUE);
+
+	plabels.label_3 = gtk_label_new (" ");
+	gtk_widget_show (plabels.label_3);
+	gtk_box_pack_start (GTK_BOX (box_parallel_labels), plabels.label_3, FALSE, FALSE, 0);
+	gtk_label_set_use_markup (GTK_LABEL (plabels.label_3), TRUE);
+
+	plabels.label_4 = gtk_label_new (" ");
+	gtk_widget_show (plabels.label_4);
+	gtk_box_pack_start (GTK_BOX (box_parallel_labels), plabels.label_4, FALSE, FALSE, 0);
+	gtk_label_set_use_markup (GTK_LABEL (plabels.label_4), TRUE);
+
+	plabels.label_5 = gtk_label_new (" ");
+	gtk_widget_show (plabels.label_5);
+	gtk_box_pack_start (GTK_BOX (box_parallel_labels), plabels.label_5, FALSE, FALSE, 0);
+	gtk_label_set_use_markup (GTK_LABEL (plabels.label_5), TRUE);
+
+
+    
 #ifdef OLD_NAVBAR
 	navbar.key = g_strdup(settings.currentverse);
 	navbar.module_name = g_strdup(settings.parallel1Module);	   
