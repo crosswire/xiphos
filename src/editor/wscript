@@ -25,7 +25,7 @@ def build(bld):
         features='cc cxx', # use C compiler - less restrictive than C++
         includes='. ../../ ../../src ../../src/editor %s' % bld.env['GECKO_INCLUDE'], # ../../ for config.h
         target='editor',
-        uselib='GTK GLIB GNOMEUI SWORD GTKMOZEMBED GTKMOZEMBED_UNSTABLE GTKHTML',
+        uselib='GTK GLIB GNOMEUI SWORD GTKMOZEMBED GTKMOZEMBED_UNSTABLE GTKHTML GTKHTML_EDITOR',
         before='%s/src/editor/Editor.h' % os.getcwd(), # let first generate C sources for Editor
     )
 
