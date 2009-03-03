@@ -40,6 +40,7 @@ extern "C" {
 
 #include "gui/parallel_view.h"
 #include "gui/parallel_dialog.h"
+#include "gui/parallel_tab.h"
 #include "gui/widgets.h"
 
 #include "main/parallel_view.h"
@@ -1250,6 +1251,7 @@ static void int_display(GtkHTML *html, gchar * key)
 void main_update_parallel_page_detached(void)
 {
 	gchar buf[500], *mod_name[5];
+    	gchar *buf_tmp = NULL;
 	gint utf8len, j;
 	gchar space[2];  //there is surely a better way?
 	space[0] = ' ';
@@ -1259,7 +1261,32 @@ void main_update_parallel_page_detached(void)
 	mod_name[2] = (parallel3 ? settings.parallel3Module : space);
 	mod_name[3] = (parallel4 ? settings.parallel4Module : space);
 	mod_name[4] = (parallel5 ? settings.parallel5Module : space);
-
+    
+    	buf_tmp = g_strdup_printf("<span color='blue' weight='bold'>%s</span>",
+				      mod_name[0]);
+    	gtk_label_set_markup(GTK_LABEL(plabels.label_1),buf_tmp);
+    	g_free(buf_tmp);
+    
+    	buf_tmp = g_strdup_printf("<span color='blue' weight='bold'>%s</span>",
+				      mod_name[1]);
+    	gtk_label_set_markup(GTK_LABEL(plabels.label_2),buf_tmp);
+    	g_free(buf_tmp);
+    
+    	buf_tmp = g_strdup_printf("<span color='blue' weight='bold'>%s</span>",
+				      mod_name[2]);
+    	gtk_label_set_markup(GTK_LABEL(plabels.label_3),buf_tmp);
+    	g_free(buf_tmp);
+    	
+    	buf_tmp = g_strdup_printf("<span color='blue' weight='bold'>%s</span>",
+				      mod_name[3]);
+    	gtk_label_set_markup(GTK_LABEL(plabels.label_4),buf_tmp);
+    	g_free(buf_tmp);
+    
+    	buf_tmp = g_strdup_printf("<span color='blue' weight='bold'>%s</span>",
+				      mod_name[4]);
+    	gtk_label_set_markup(GTK_LABEL(plabels.label_5),buf_tmp);
+    	g_free(buf_tmp);
+    
 #ifdef USE_GTKMOZEMBED
 	GS_message(("USE_GTKMOZEMBED1"));
 	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.html_parallel_dialog))) return;

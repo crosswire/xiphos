@@ -36,6 +36,18 @@ typedef enum
 	
 }GSParallel;
 
+
+typedef struct _para_labels PARA_LABELS;
+struct _para_labels {
+	GtkWidget *label_1;
+	GtkWidget *label_2;
+	GtkWidget *label_3;
+	GtkWidget *label_4;
+	GtkWidget *label_5;
+};
+extern PARA_LABELS plabels;
+
+
 gchar *main_parallel_change_verse(void);
 void main_load_g_ops_parallel(GtkWidget *menu);
 void main_set_parallel_options_at_start(void);
