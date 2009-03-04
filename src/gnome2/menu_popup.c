@@ -541,13 +541,14 @@ void on_primary_reading_activate (GtkCheckMenuItem * menuitem, gpointer user_dat
 {
 	gchar *key = NULL;
     
-	if (is_dialog)
+	if (is_dialog) {
+		//dialog->ops->variants_primary = menuitem->active;
 		reading_selector(dialog->mod_name,
 				 dialog->key,
 				 dialog,
 				 (GtkMenuItem*)menuitem,
 				 GINT_TO_POINTER(0));
-	else {
+	} else {
 		key = _get_key(menu_mod_name);
 		if (key) {
 			reading_selector(menu_mod_name,
@@ -565,13 +566,14 @@ void on_secondary_reading_activate (GtkCheckMenuItem * menuitem, gpointer user_d
 {	
     	gchar *key = NULL;
     
-	if (is_dialog)
+	if (is_dialog) {
+		//dialog->ops->variants_secondary = menuitem->active;
 		reading_selector(dialog->mod_name,
 				 dialog->key,
 				 dialog,
 				 (GtkMenuItem*)menuitem,
 				 GINT_TO_POINTER(1));
-	else {
+	} else {
 		key = _get_key(menu_mod_name);
 		if (key) {
 			reading_selector(menu_mod_name,
@@ -589,13 +591,14 @@ void on_all_readings_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {	
     	gchar *key = NULL;
     
-	if (is_dialog)
+	if (is_dialog) {
+		//dialog->ops->variants_all = menuitem->active;
 		reading_selector(dialog->mod_name,
 				 dialog->key,
 				 dialog,
 				 (GtkMenuItem*)menuitem,
 				 GINT_TO_POINTER(2));
-	else {
+	} else {
 		key = _get_key(menu_mod_name);
 		if (key) {
 			reading_selector(menu_mod_name,
@@ -1247,7 +1250,7 @@ static GtkWidget * _create_popup_menu ( const gchar * mod_name,
 
 	/* = glade_xml_get_widget (gxml, ""); */
 	_add_and_check_global_opts (gxml,
-				    mod_name, 
+				    (char*)(is_dialog ? d->mod_name : mod_name), 
 				    mod_opt_sub, 
 				    d);
     	/* connect signals and data */

@@ -1023,15 +1023,21 @@ void reading_selector(char *modname,
 		break;
 	}
 
-	main_save_module_options(modname, "Primary Reading", primary);
-	main_save_module_options(modname, "Secondary Reading", secondary);
-	main_save_module_options(modname, "All Readings", all);
 
 	url = g_strdup_printf("sword://%s/%s", modname, key);
-	if (dialog)
+	if (dialog) {
+		dialog->ops->variants_primary = primary;
+		dialog->ops->variants_secondary = secondary;
+		dialog->ops->variants_all = all;
 		main_dialogs_url_handler(dialog, url, TRUE);
-	else
+			     
+	} else {
+		main_save_module_options(modname, "Primary Reading", primary);
+		main_save_module_options(modname, "Secondary Reading", secondary);
+		main_save_module_options(modname, "All Readings", all);
+	    
 		main_url_handler(url, TRUE);
+	}
 	g_free(url);
 //	this_time = FALSE;	// next time, ignore.
 }
