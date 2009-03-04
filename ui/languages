@@ -215,9 +215,9 @@ my	Burmese
 # Nauruan
 na	Dorerin Naoero
 # correct: Norwegian Bokmål
-#nb	Bokmål
+#nb	Norsk Bokmål
 # a hack while g_utf8_validate() dislikes 'å': Norwegian Bokmaal
-nb	Bokmaal
+nb	Norsk Bokmaal
 # Ndebele, North
 nd	Sindebele
 # Low German; Low Saxon
