@@ -997,15 +997,15 @@ void reading_selector(char *modname,
 		      GtkMenuItem *menuitem,
 		      gpointer user_data)
 {
-	static gboolean this_time = FALSE;
+//	static gboolean this_time = FALSE;
 	gchar *url;
 	gboolean primary = 0, secondary = 0, all = 0;
-
+/*
 	if (!this_time) {
 		this_time = TRUE;	// next time, we'll do it.
 		return;
 	}
-
+*/
 	switch ((int) GPOINTER_TO_INT(user_data))
 	{
 	case 0:
@@ -1033,7 +1033,7 @@ void reading_selector(char *modname,
 	else
 		main_url_handler(url, TRUE);
 	g_free(url);
-	this_time = FALSE;	// next time, ignore.
+//	this_time = FALSE;	// next time, ignore.
 }
 
 /* **************************************************************** */
