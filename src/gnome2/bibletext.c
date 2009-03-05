@@ -68,35 +68,6 @@ GtkAdjustment* adjustment;
 
 static GtkTextBuffer *text_buffer;
 
-/******************************************************************************
- * Name
- *  global_option_red_words
- *
- * Synopsis
- *   #include "gui/.h"
- *
- *   void on_global_option(GtkMenuItem * menuitem,
-			   GBS_DATA * g)
- *
- * Description
- *
- *
- * Return value
- *   void
- */
-
-static void on_global_option(GtkMenuItem * menuitem, gpointer data)
-{
-	gchar *url = g_strdup_printf("sword://%s/%s",
-				     settings.MainWindowModule,
-				     settings.currentverse);
-	main_save_module_options(settings.MainWindowModule, (gchar *) data,
-				 GTK_CHECK_MENU_ITEM(menuitem)->active);
-	/* show the change */
-	main_url_handler(url, TRUE);		
-	g_free(url);
-}
-
 
 /******************************************************************************
  * Name

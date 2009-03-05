@@ -684,14 +684,14 @@ CleanupContent(const char *text,
 	else if ((ops->image_content == -1) &&	// "unknown"
 		 (strcasestr(text, "<img ") != NULL)) {
 		ops->image_content = 1;		// now known.
-		main_save_module_options(name, "Image Content", 1);
+		main_save_module_options(name, "Image Content", 1, ops->dialog);
 	}
 	if (ops->respect_font_faces == 0)
 		ClearFontFaces((gchar *)text);
 	else if ((ops->respect_font_faces == -1) &&	// "unknown"
 		 (strcasestr(text, "<font face=\"Galax") != NULL)) {
-		ops->respect_font_faces = 1;		// now known.
-		main_save_module_options(name, "Respect Font Faces", 1);
+		ops->respect_font_faces = 1;	// now known.
+		main_save_module_options(name, "Respect Font Faces", 1, ops->dialog);
 	}
 }
 
@@ -834,7 +834,7 @@ GTKEntryDisp::Display(SWModule &imodule)
 	mf = get_font(imodule.Name());
 	swbuf = "";
 
-	ops = main_new_globals(imodule.Name());
+	ops = main_new_globals(imodule.Name(),0);
 
 	const char *rework;	// for image size analysis rework.
 
@@ -1422,7 +1422,7 @@ GTKChapDisp::Display(SWModule &imodule)
 	const char *rework;	// for image size analysis rework.
 
 	char *ModuleName = imodule.Name();
-	ops = main_new_globals(ModuleName);
+	ops = main_new_globals(ModuleName, 0);
 	cache_flags = ConstructFlags(ops);
 
 	is_rtol = main_is_mod_rtol(ModuleName);
@@ -1673,7 +1673,7 @@ GTKTextviewChapDisp::Display(SWModule &imodule)
 	static GtkTextTag *font_tag = NULL;
 	MOD_FONT *mf = get_font(imodule.Name());
 	GtkTextView *textview = GTK_TEXT_VIEW(gtkText);
-	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
+	GLOBAL_OPS * ops = main_new_globals(imodule.Name(), 0);
 	GtkTextBuffer *buffer = gtk_text_view_get_buffer(textview);
 	GString *str = g_string_new(NULL);
 	const gchar *mark_name = "CurrentVerse";
@@ -1866,11 +1866,12 @@ DialogEntryDisp::Display(SWModule &imodule)
 	char *buf;
 	gint mod_type;
 	mf = get_font(imodule.Name());
-	ops = main_new_globals(imodule.Name());
+	ops = main_new_globals(imodule.Name(),1);
+	main_dialog_set_global_options((BackEnd*)be, ops);
 	const char *rework;	// for image size analysis rework.
 
 	(const char *)imodule;	// snap to entry
-	main_set_global_options(ops);
+	//main_set_global_options(ops);
 	mod_type = backend->module_type(imodule.Name());
 
 	buf = g_strdup_printf(HTML_START
@@ -1975,6 +1976,8 @@ DialogChapDisp::Display(SWModule &imodule)
 	gint versestyle;
 	gchar *file = NULL, *style = NULL;
 
+	ops = main_new_globals(imodule.Name(),1);
+    
 	file = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
 	style = get_conf_file_item(file, imodule.Name(), "style");
 	if ((style) && strcmp(style, "verse"))
@@ -2168,6 +2171,8 @@ DialogChapDisp::Display(SWModule &imodule)
 		g_free(buf);
 
 	free_font(mf);
+	g_free(ops);
+    	ops = NULL;
 }
 
 
@@ -2186,7 +2191,7 @@ DialogTextviewChapDisp::Display(SWModule &imodule)
 	static GtkTextTag *font_tag = NULL;
 	MOD_FONT *mf = get_font(imodule.Name());
 	GtkTextView *textview = GTK_TEXT_VIEW(gtkText);
-	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
+	ops = main_new_globals(imodule.Name(),1);
 	GtkTextBuffer *buffer = gtk_text_view_get_buffer(textview);
 	GString *str = g_string_new(NULL);
 	const gchar *mark_name = "CurrentVerse";
@@ -2214,7 +2219,8 @@ DialogTextviewChapDisp::Display(SWModule &imodule)
 	gtk_text_buffer_get_end_iter(buffer, &enditer);
 	gtk_text_buffer_delete(buffer, &startiter, &enditer);
 
-	main_set_global_options(ops);
+	main_dialog_set_global_options((BackEnd*)be, ops);
+	//main_set_global_options(ops);
 	for (key->Verse(1); (key->Book() == curBook && key->Chapter()
 				== curChapter && !imodule.Error()); imodule++) {
 
@@ -2298,6 +2304,7 @@ DialogTextviewChapDisp::Display(SWModule &imodule)
 	key->Verse(curVerse);
 	free_font(mf);
 	g_free(ops);
+    	ops = NULL;
 }
 #endif
 
@@ -2316,7 +2323,7 @@ GTKPrintEntryDisp::Display(SWModule &imodule)
 	GeckoHtml *html = GECKO_HTML(gtkText);
 	gecko_html_open_stream(html,"text/html");
 
-	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
+	GLOBAL_OPS * ops = main_new_globals(imodule.Name(),0);
 
 	const char *rework;	// for image size analysis rework.
 
@@ -2385,7 +2392,7 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 	SWBuf swbuf;
 	char *num;
 
-	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
+	GLOBAL_OPS * ops = main_new_globals(imodule.Name(),0);
 	gboolean is_rtol = main_is_mod_rtol(imodule.Name());
 	gboolean newparagraph = FALSE;
 	mf = get_font(imodule.Name());

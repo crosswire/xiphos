@@ -107,9 +107,14 @@ static void set_global_textual(int manager,
 
 int main_save_module_options(const char *mod_name,
 			     const char *option,
-			     int choice)
+			     int choice,
+			     int dialog)
 {
-	gchar *buf = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
+	gchar *buf = NULL;
+    	if (dialog)	
+		buf = g_strdup_printf("%s/modops-dialog.conf", settings.gSwordDir);
+	else
+		buf = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
 	SWConfig module_options(buf);
 	
 	module_options.Load();
@@ -120,6 +125,7 @@ int main_save_module_options(const char *mod_name,
 	module_options.Save();
 	return true;
 }
+
 
 /******************************************************************************
  * Name
@@ -354,11 +360,16 @@ void main_set_dialog_strongs_morphs(gpointer backend,
  *   GLOBAL_OPS *
  */
 
-GLOBAL_OPS *main_new_globals(gchar * mod_name)
+GLOBAL_OPS *main_new_globals(gchar * mod_name, int dialog)
 {
 	GLOBAL_OPS *ops;
+	gchar *buf = NULL;
 	bool retval = false;
-	gchar *buf = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
+    	
+	if (dialog)
+		buf = g_strdup_printf("%s/modops-dialog.conf", settings.gSwordDir);
+    	else
+		buf = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
 	SWConfig module_options(buf);
 	
 	module_options.Load();
@@ -366,6 +377,7 @@ GLOBAL_OPS *main_new_globals(gchar * mod_name)
 
 	ops = g_new0(GLOBAL_OPS, 1);
 	ops->module_type = 0;
+	ops->dialog = dialog;
 	ops->words_in_red =
 	    gui_of2tf(module_options[mod_name]["Words of Christ in Red"].c_str());
 	ops->strongs =

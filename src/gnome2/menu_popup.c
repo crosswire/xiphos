@@ -52,31 +52,25 @@ static DIALOG_DATA * dialog = NULL;
 static int is_dialog = 0;
 
 
-gint  _is_checked (option)
-{
-	//if (is_dialog)
-		
-	//GLOBAL_OPS *ops = main_new_globals(settings.MainWindowModule);	
-}
 
 gint  _get_type_mod_list (void)
 {
     	switch (main_get_mod_type(menu_mod_name)) {
 		case TEXT_TYPE:	
 			return TEXT_DESC_LIST;
-		break;
+			break;
 		case COMMENTARY_TYPE:	
 			return COMM_DESC_LIST;			
-		break;
+			break;
 		case DICTIONARY_TYPE:	
 			return DICT_DESC_LIST;
-		break;	
+			break;	
 		case BOOK_TYPE:	
 			return GBS_DESC_LIST;
-		break;	
+			break;	
 		default:
-		    return -1;
-		break;
+		    	return -1;
+			break;
 	}
 }
 
@@ -84,19 +78,22 @@ gint  _get_type_mod_list (void)
 gchar * _get_key (gchar * mod_name) 
 {
     	gchar *key = NULL;
+    
+    	if (is_dialog) return g_strdup (dialog->key);
+    
 	switch (main_get_mod_type(mod_name)) {
 		case TEXT_TYPE:
 		case COMMENTARY_TYPE:
 		case PERCOM_TYPE:
 			key = g_strdup (settings.currentverse);			
-		break;
+			break;
 		case DICTIONARY_TYPE:
 			key = g_strdup (settings.dictkey);
-		break;	
+			break;	
 		case BOOK_TYPE:
 		case PRAYERLIST_TYPE:
 			key = g_strdup (settings.book_key);
-		break;		
+			break;		
 	}
     	return key;
 }
@@ -110,21 +107,20 @@ GtkWidget * _get_html (void)
 		switch (main_get_mod_type(menu_mod_name)) {
 		case TEXT_TYPE:	
 			return widgets.html_text;
-		break;
+			break;
 		case COMMENTARY_TYPE:
 		case PERCOM_TYPE:	
 			return widgets.html_comm;			
-		break;
+			break;
 		case DICTIONARY_TYPE:	
 			return widgets.html_dict;
-		break;	
+			break;	
 		case BOOK_TYPE:	
 		case PRAYERLIST_TYPE:
 			return widgets.html_book;
-		break;		
+			break;		
 		}
     	return NULL;
-    
 }
 
 
@@ -146,51 +142,29 @@ GtkWidget * _get_html (void)
  */
 
 static 
-void _global_option_main_pane(GtkMenuItem * menuitem, gpointer data)
+void _global_option_main_pane(GtkMenuItem * menuitem, const gchar * option)
 {
-	gchar *key = NULL;
-	GS_message (("dialog mod name: %s",menu_mod_name));
-    
-	key = _get_key (menu_mod_name);
+	gchar *key = _get_key (menu_mod_name);
+	gchar *mod = (gchar*) (is_dialog ? dialog->mod_name : menu_mod_name);
+    	
     	if (key) {
 		gchar *url = g_strdup_printf ("sword://%s/%s",
-					     menu_mod_name,
+					     mod,
 					     key);
-		main_save_module_options (menu_mod_name, (gchar*) data,
-					 GTK_CHECK_MENU_ITEM (menuitem)->active);
-		// * show the change *
-		main_url_handler (url, TRUE);
+		main_save_module_options (mod, (gchar*) option,
+					 GTK_CHECK_MENU_ITEM (menuitem)->active, 
+					 is_dialog);
+		if (is_dialog) {
+			/* show the change */
+			main_dialogs_url_handler(dialog, url, TRUE);
+		} else {
+			/* show the change */
+			main_url_handler (url, TRUE);
+		}
+		
 		g_free (url);
 		g_free (key);
 	}
-}
-
-/******************************************************************************
- * Name
- *  global_option_red_words
- *
- * Synopsis
- *   #include "gui/menu_popup.h"
- *
- *   void on_global_option(GtkMenuItem * menuitem,
-				      DIALOG_DATA * d)
- *
- * Description
- *
- *
- * Return value
- *   void
- */
-
-static void global_option_red_words(GtkCheckMenuItem *menuitem,
-				    DIALOG_DATA *d)
-{
-//	GS_message (("dialog mod name: %s",menu_mod_name));
-    
-    	gchar *url = g_strdup_printf("sword://%s/%s", d->mod_name, d->key);
-	d->ops->words_in_red = menuitem->active;
-	main_dialogs_url_handler(d, url, TRUE);
-	g_free(url);
 }
 
 
@@ -356,184 +330,76 @@ void on_popup_font_activate (GtkMenuItem * menuitem, gpointer user_data)
 
 void on_words_of_chist_in_red_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
-   	if (is_dialog) {
-		gchar *url = g_strdup_printf("sword://%s/%s", 
-					     dialog->mod_name, 
-					     dialog->key);
-		dialog->ops->words_in_red = menuitem->active;
-		main_dialogs_url_handler(dialog, url, TRUE);
-		g_free(url);
-	} else 
-		_global_option_main_pane((GtkMenuItem*)menuitem, 
+   	_global_option_main_pane((GtkMenuItem*)menuitem, 
 					 "Words of Christ in Red"); /* string not seen by user */
 }
 
 
 void on_strong_s_numbers_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
-	if (is_dialog) {
-		gchar *url = g_strdup_printf("sword://%s/%s", 
-					     dialog->mod_name, 
-					     dialog->key);
-		dialog->ops->strongs = menuitem->active;
-		main_dialogs_url_handler(dialog, url, TRUE);
-		g_free(url);
-	} else
-		_global_option_main_pane((GtkMenuItem*)menuitem, 
-					 "Strong's Numbers"); /* string not seen by user */
+	_global_option_main_pane((GtkMenuItem*)menuitem, "Strong's Numbers"); /* string not seen by user */
 }
 
 
 void on_morphological_tags_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
-	if (is_dialog) {
-		gchar *url = g_strdup_printf("sword://%s/%s", 
-					     dialog->mod_name, 
-					     dialog->key);
-		dialog->ops->morphs = menuitem->active;
-		main_dialogs_url_handler(dialog, url, TRUE);
-		g_free(url);
-	} else 
-		_global_option_main_pane((GtkMenuItem*)menuitem, 
-					 "Morphological Tags"); /* string not seen by user */
+	_global_option_main_pane((GtkMenuItem*)menuitem, "Morphological Tags"); /* string not seen by user */
 }
 
 
 void on_footnotes_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
-	if (is_dialog) {
-		gchar *url = g_strdup_printf("sword://%s/%s", 
-					     dialog->mod_name, 
-					     dialog->key);
-		dialog->ops->footnotes = menuitem->active;
-		main_dialogs_url_handler(dialog, url, TRUE);
-		g_free(url);
-	} else 
-		_global_option_main_pane((GtkMenuItem*)menuitem, 
-					 "Footnotes"); /* string not seen by user */
+	_global_option_main_pane((GtkMenuItem*)menuitem, "Footnotes"); /* string not seen by user */
 }
 
 
 void on_greek_accents_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
-	if (is_dialog) {
-		gchar *url = g_strdup_printf("sword://%s/%s", 
-					     dialog->mod_name, 
-					     dialog->key);
-		dialog->ops->greekaccents = menuitem->active;
-		main_dialogs_url_handler(dialog, url, TRUE);
-		g_free(url);
-	} else
-		_global_option_main_pane((GtkMenuItem*)menuitem, 
-					 "Greek Accents"); /* string not seen by user */
-		
+	_global_option_main_pane((GtkMenuItem*)menuitem, "Greek Accents"); /* string not seen by user */
 }
 
 
 void on_lemmas_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
-	if (is_dialog) {
-		gchar *url = g_strdup_printf("sword://%s/%s", 
-					     dialog->mod_name, 
-					     dialog->key);
-		dialog->ops->lemmas = menuitem->active;
-		main_dialogs_url_handler(dialog, url, TRUE);
-		g_free(url);
-	} else
-		_global_option_main_pane((GtkMenuItem*)menuitem, 
-					 "Lemmas"); /* string not seen by user */
+	_global_option_main_pane((GtkMenuItem*)menuitem, "Lemmas"); /* string not seen by user */
 }
 
 
 void on_scripture_cross_references_activate (GtkCheckMenuItem * menuitem,
                                         	gpointer user_data)
 {
-	if (is_dialog) {
-		gchar *url = g_strdup_printf("sword://%s/%s", 
-					     dialog->mod_name, 
-					     dialog->key);
-		dialog->ops->scripturerefs = menuitem->active;
-		main_dialogs_url_handler(dialog, url, TRUE);
-		g_free(url);
-	} else
-		_global_option_main_pane((GtkMenuItem*)menuitem, 
-					 "Scripture Cross-references"); /* string not seen by user */
+	_global_option_main_pane((GtkMenuItem*)menuitem, "Scripture Cross-references"); /* string not seen by user */
 }
 
 
 void on_hebrew_vowel_points_activate (GtkCheckMenuItem * menuitem,
                                         gpointer user_data)
 {
-	if (is_dialog) {
-		gchar *url = g_strdup_printf("sword://%s/%s", 
-					     dialog->mod_name, 
-					     dialog->key);
-		dialog->ops->hebrewpoints = menuitem->active;
-		main_dialogs_url_handler(dialog, url, TRUE);
-		g_free(url);
-	} else
-		_global_option_main_pane((GtkMenuItem*)menuitem, 
-					 "Hebrew Vowel Points"); /* string not seen by user */
+	_global_option_main_pane((GtkMenuItem*)menuitem, "Hebrew Vowel Points"); /* string not seen by user */
 }
 
 
 void on_hebrew_cantillation_activate (GtkCheckMenuItem * menuitem,
                                         gpointer user_data)
 {
-	if (is_dialog) {
-		gchar *url = g_strdup_printf("sword://%s/%s", 
-					     dialog->mod_name, 
-					     dialog->key);
-		dialog->ops->hebrewcant = menuitem->active;
-		main_dialogs_url_handler(dialog, url, TRUE);
-		g_free(url);
-	} else
-		_global_option_main_pane((GtkMenuItem*)menuitem, 
-					 "Hebrew Cantillation"); /* string not seen by user */
+	_global_option_main_pane((GtkMenuItem*)menuitem, "Hebrew Cantillation"); /* string not seen by user */
 }
 
 
 void on_headings_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
-	if (is_dialog) {
-		gchar *url = g_strdup_printf("sword://%s/%s", 
-					     dialog->mod_name, 
-					     dialog->key);
-		dialog->ops->headings = menuitem->active;
-		main_dialogs_url_handler(dialog, url, TRUE);
-		g_free(url);
-	} else
-		_global_option_main_pane((GtkMenuItem*)menuitem, 
-					 "Headings"); /* string not seen by user */
+	_global_option_main_pane((GtkMenuItem*)menuitem, "Headings"); /* string not seen by user */
 }
 
 
 void on_transliteration_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
-	if (is_dialog) {
-		gchar *url = g_strdup_printf("sword://%s/%s", 
-					     dialog->mod_name, 
-					     dialog->key);
-		dialog->ops->transliteration = menuitem->active;
-		main_dialogs_url_handler(dialog, url, TRUE);
-		g_free(url);
-	} else
-		_global_option_main_pane((GtkMenuItem*)menuitem, 
-					 "Transliteration"); /* string not seen by user */
+	_global_option_main_pane((GtkMenuItem*)menuitem, "Transliteration"); /* string not seen by user */
 }
 
 void on_commentary_by_chapter_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
-   	if (is_dialog) {
-		gchar *url = g_strdup_printf("sword://%s/%s", 
-					     dialog->mod_name, 
-					     dialog->key);
-		dialog->ops->commentary_by_chapter = menuitem->active;
-		main_dialogs_url_handler(dialog, url, TRUE);
-		g_free(url);
-	} else 
-		_global_option_main_pane((GtkMenuItem*)menuitem, 
-					 "Commentary by Chapter"); /* string not seen by user */
+   	_global_option_main_pane((GtkMenuItem*)menuitem, "Commentary by Chapter"); /* string not seen by user */
 }
 
 
@@ -542,7 +408,6 @@ void on_primary_reading_activate (GtkCheckMenuItem * menuitem, gpointer user_dat
 	gchar *key = NULL;
     
 	if (is_dialog) {
-		//dialog->ops->variants_primary = menuitem->active;
 		reading_selector(dialog->mod_name,
 				 dialog->key,
 				 dialog,
@@ -567,7 +432,6 @@ void on_secondary_reading_activate (GtkCheckMenuItem * menuitem, gpointer user_d
     	gchar *key = NULL;
     
 	if (is_dialog) {
-		//dialog->ops->variants_secondary = menuitem->active;
 		reading_selector(dialog->mod_name,
 				 dialog->key,
 				 dialog,
@@ -592,7 +456,6 @@ void on_all_readings_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
     	gchar *key = NULL;
     
 	if (is_dialog) {
-		//dialog->ops->variants_all = menuitem->active;
 		reading_selector(dialog->mod_name,
 				 dialog->key,
 				 dialog,
@@ -615,31 +478,13 @@ void on_all_readings_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 
 void on_image_content_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
-	if (is_dialog) {
-		gchar *url = g_strdup_printf("sword://%s/%s", 
-					     dialog->mod_name, 
-					     dialog->key);
-		dialog->ops->image_content = menuitem->active;
-		main_dialogs_url_handler(dialog, url, TRUE);
-		g_free(url);
-	} else
-		_global_option_main_pane((GtkMenuItem*)menuitem, 
-					 "Image Content"); /* string not seen by user */
+	_global_option_main_pane((GtkMenuItem*)menuitem, "Image Content"); /* string not seen by user */
 }
 
 
 void on_respect_font_faces_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
-	if (is_dialog) {
-		gchar *url = g_strdup_printf("sword://%s/%s", 
-					     dialog->mod_name, 
-					     dialog->key);
-		dialog->ops->respect_font_faces = menuitem->active;
-		main_dialogs_url_handler(dialog, url, TRUE);
-		g_free(url);
-	} else
-		_global_option_main_pane((GtkMenuItem*)menuitem, 
-					 "Respect Font Faces"); /* string not seen by user */
+	_global_option_main_pane((GtkMenuItem*)menuitem, "Respect Font Faces"); /* string not seen by user */
 }
 
 
@@ -894,9 +739,9 @@ GtkWidget * _add_and_check_global_opts (GladeXML *gxml,
 	GLOBAL_OPS *ops = NULL;
     
 	if (is_dialog) 
-		ops = (GLOBAL_OPS *)d->ops;
+		ops = main_new_globals((gchar*) mod_name, 1);
 	else
-		ops = main_new_globals((gchar*) mod_name);
+		ops = main_new_globals((gchar*) mod_name, 0);
     
     
     	item = glade_xml_get_widget (gxml, "words_of_chist_in_red");
@@ -1032,8 +877,7 @@ GtkWidget * _add_and_check_global_opts (GladeXML *gxml,
    		GTK_CHECK_MENU_ITEM (item)->active = ops->commentary_by_chapter;  
 	}
     
-	if (!is_dialog && ops)
-		g_free(ops);
+	g_free(ops);
     
 }
 
@@ -1047,7 +891,7 @@ GtkWidget * _add_and_check_global_opts (GladeXML *gxml,
  *   void on_view_mod_activate(GtkMenuItem * menuitem, gpointer user_data)
  *
  * Description
- *   show a different text module
+ *   show a different module
  *
  * Return value
  *   void
@@ -1202,12 +1046,11 @@ static GtkWidget * _create_popup_menu ( const gchar * mod_name,
 		gtk_menu_item_set_submenu (GTK_MENU_ITEM(note), note_sub);		    
 		gui_add_mods_2_gtk_menu (PERCOMM_LIST, note_sub,
 				(GCallback) on_edit_percomm_activate);
-		
-	break;
+		break;
 	case COMMENTARY_TYPE:	
 		gtk_widget_show (book_heading);
 		gtk_widget_show (chapter_heading);			
-	break;
+		break;
 	case PERCOM_TYPE:
    		gtk_widget_show (open_edit);
 		g_signal_connect (GTK_OBJECT(open_edit),
@@ -1217,13 +1060,13 @@ static GtkWidget * _create_popup_menu ( const gchar * mod_name,
 		
 		gtk_widget_show (rename_percomm); 
 		gtk_widget_show (dump_percomm);   
-	break;
+		break;
 	case DICTIONARY_TYPE:	
 		
-	break;	
+		break;	
 	case BOOK_TYPE:	
 		
-	break;	
+		break;	
 	case PRAYERLIST_TYPE:
    		gtk_widget_show (open_edit);
 		g_signal_connect (GTK_OBJECT(open_edit),
@@ -1231,10 +1074,7 @@ static GtkWidget * _create_popup_menu ( const gchar * mod_name,
 			 	G_CALLBACK (on_edit_prayerlist_activate),
 			 	(gchar*) (is_dialog ? d->mod_name : mod_name));	
 		
-	break;	
-	default:
-	    
-	break;
+		break;
 	}	
 	
 #if defined(__CYGWIN__) || defined(WIN32)

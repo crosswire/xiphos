@@ -88,31 +88,6 @@ void access_to_edit_percomm()
 }
 
 
-/******************************************************************************
- * Name
- *  global_option_red_words
- *
- * Synopsis
- *   #include "gui/.h"
- *
- *   void on_global_option(GtkMenuItem * menuitem,
-				      GBS_DATA * g)
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-
-static void on_global_option(GtkMenuItem * menuitem, gpointer data)
-{
-	
-	main_save_module_options(settings.CommWindowModule, (gchar *) data,
-			    GTK_CHECK_MENU_ITEM(menuitem)->active);
-	main_display_commentary(settings.CommWindowModule,settings.currentverse);
-}
-
 
 /******************************************************************************
  * Name
