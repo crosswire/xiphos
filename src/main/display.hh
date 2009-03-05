@@ -98,12 +98,11 @@ class DialogEntryDisp : public SWDisplay {
 public:
 	DialogEntryDisp(GtkWidget   *_gtkText,
 			DIALOG_DATA *_d,
-			BackEnd     *_be,
-			GLOBAL_OPS  *_ops)
+			BackEnd     *_be)
 	    : gtkText(_gtkText),
 	      d(_d),
 	      be(_be),
-	      ops(_ops),
+	      ops(NULL),
 	      swbuf(""),
 	      is_rtol(FALSE),
 	      strongs_or_morph(FALSE),
@@ -131,9 +130,8 @@ class DialogChapDisp : public  DialogEntryDisp {
 public:
 	DialogChapDisp(GtkWidget   *_gtkText,
 		       DIALOG_DATA *_d,
-		       BackEnd     *_be,
-		       GLOBAL_OPS  *_ops)
-	    : DialogEntryDisp(_gtkText, _d, _be, _ops)
+		       BackEnd     *_be)
+	    : DialogEntryDisp(_gtkText, _d, _be)
 	{
 	}
 	virtual char Display(SWModule &imodule);
@@ -144,9 +142,8 @@ class DialogTextviewChapDisp : public  DialogEntryDisp {
 public:
 	DialogTextviewChapDisp(GtkWidget   *_gtkText,
 			       DIALOG_DATA *_d,
-			       BackEnd     *_be,
-			       GLOBAL_OPS  *_ops)
-	    : DialogEntryDisp(_gtkText, _d, _be, _ops)
+			       BackEnd     *_be)
+	    : DialogEntryDisp(_gtkText, _d, _be)
 	{
 	}
 	virtual char Display(SWModule &imodule);
