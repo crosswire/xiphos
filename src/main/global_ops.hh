@@ -49,13 +49,17 @@ struct  _global_ops {
 	gint module_type;
 	gint image_content;
 	gint respect_font_faces;
+    
+	gboolean dialog;
 };
-
-int main_save_module_options(const char * mod_name, const char * option, int choice);
+/* main window */
+int main_save_module_options(const char * mod_name, const char * option, int choice, int dialog);
 void main_set_global_options(GLOBAL_OPS * ops);
 void main_set_strongs_morphs_off(GLOBAL_OPS * ops);
 void main_set_strongs_morphs(GLOBAL_OPS * ops);
-GLOBAL_OPS *main_new_globals(gchar * mod_name);
+GLOBAL_OPS *main_new_globals(gchar * mod_name, int dialog);
+/* dialog */
+//int main_save_module_options_dialog(const char *mod_name, const char *option, int choice);
 void main_dialog_set_global_options(gpointer backend, GLOBAL_OPS * ops);
 void main_set_dialog_strongs_morphs_off(gpointer backend, GLOBAL_OPS * ops);
 void main_set_dialog_strongs_morphs(gpointer backend, GLOBAL_OPS * ops);

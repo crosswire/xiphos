@@ -985,11 +985,6 @@ ncr_to_utf8(gchar * text)
 
 //
 // for choosing variants, primary/secondary/all.
-// perversely, this routine is called twice.
-// it seems to be so that (first) old state can
-// be undone, then (second) with new state.
-// unfortunately, there is no argument provided which tells us so.
-// since we have nothing to undo, we simply ignore it.
 //
 void reading_selector(char *modname,
 		      char *key,
@@ -997,15 +992,10 @@ void reading_selector(char *modname,
 		      GtkMenuItem *menuitem,
 		      gpointer user_data)
 {
-//	static gboolean this_time = FALSE;
 	gchar *url;
 	gboolean primary = 0, secondary = 0, all = 0;
-/*
-	if (!this_time) {
-		this_time = TRUE;	// next time, we'll do it.
-		return;
-	}
-*/
+    	gboolean is_dialog = (dialog ? 1 : 0);
+    
 	switch ((int) GPOINTER_TO_INT(user_data))
 	{
 	case 0:
@@ -1025,21 +1015,15 @@ void reading_selector(char *modname,
 
 
 	url = g_strdup_printf("sword://%s/%s", modname, key);
-	if (dialog) {
-		dialog->ops->variants_primary = primary;
-		dialog->ops->variants_secondary = secondary;
-		dialog->ops->variants_all = all;
+	main_save_module_options(modname, "Primary Reading", primary, is_dialog);
+	main_save_module_options(modname, "Secondary Reading", secondary, is_dialog);
+	main_save_module_options(modname, "All Readings", all, is_dialog);
+	if (is_dialog)
 		main_dialogs_url_handler(dialog, url, TRUE);
-			     
-	} else {
-		main_save_module_options(modname, "Primary Reading", primary);
-		main_save_module_options(modname, "Secondary Reading", secondary);
-		main_save_module_options(modname, "All Readings", all);
-	    
+	else 	    
 		main_url_handler(url, TRUE);
-	}
+			      
 	g_free(url);
-//	this_time = FALSE;	// next time, ignore.
 }
 
 /* **************************************************************** */

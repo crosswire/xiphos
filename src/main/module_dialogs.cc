@@ -911,7 +911,7 @@ void main_dialog_delete_note(gpointer data)
 void main_free_on_destroy(DIALOG_DATA * d)
 {
 	list_dialogs = g_list_remove(list_dialogs, (DIALOG_DATA*) d);
-	g_free(d->ops); 
+//	g_free(d->ops); 
 	g_free(d->key);
 	g_free(d->mod_name);
 	
@@ -1103,56 +1103,11 @@ void main_dialogs_shutdown(void)
 		g_string_free(t->navbar.key,TRUE);
 #endif
 		g_free(t->mod_name);
-		g_free(t->ops);
 		g_free(t->key);
 		g_free(t);
 		tmp = g_list_next(tmp);
 	}
 	g_list_free(list_dialogs);
-}
-
-/*
-static void set_global_option(BackEnd * b, char * option, gboolean choice)
-{
-	SWMgr *mgr = b->get_display_mgr();
-	SWMgr *main_mgr = b->get_main_mgr();
-	char *on_off;
-
-	on_off = gui_tf2of(choice);
-	mgr->setGlobalOption(option, on_off);
-	main_mgr->setGlobalOption(option, on_off);
-
-}
-*/
-
-/******************************************************************************
- * Name
- *   main_dialog_set_global_opt
- *
- * Synopsis
- *   #include ".h"
- *
- *   main_dialog_set_global_opt(gboolean choice)	
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-
-void main_dialog_set_global_opt(gpointer backend, gboolean choice)
-{	
-/*	char *on_off;
-	BackEnd *b = (BackEnd*)backend;
-	
-	if (choice)
-		on_off = "On";
-	else
-		on_off = "Off";
-*/	
-	GS_warning(("main_dialog_set_global_opt"));
-	
 }
 
  
@@ -1472,7 +1427,6 @@ static gint sword_uri(DIALOG_DATA * t, const gchar * url, gboolean clicked)
 	t->mod_name = g_strdup(module);
 	
 	be->set_module_key(t->mod_name, t->key);
-//	main_dialog_set_global_options(t);
 	be->display_mod->Display();
 	if(t->navbar.module_name) {
 #ifdef OLD_NAVBAR
@@ -1670,20 +1624,6 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 	t->backend = (BackEnd*) new BackEnd();
 	be = (BackEnd*)t->backend;
 	
-	t->ops = main_new_globals((gchar*)mod_name);
-	t->ops->words_in_red = FALSE;
-	t->ops->strongs = FALSE;
-	t->ops->morphs = FALSE;
-	t->ops->footnotes = FALSE;
-	t->ops->greekaccents = FALSE;
-	t->ops->lemmas = FALSE;
-	t->ops->scripturerefs = FALSE;
-	t->ops->hebrewpoints = FALSE;
-	t->ops->hebrewcant = FALSE;
-	t->ops->headings = FALSE;
-	t->ops->variants_all = FALSE;
-	t->ops->variants_primary = FALSE;
-	t->ops->variants_secondary = FALSE;
 	t->navbar.module_name = NULL;
 	t->editor = NULL;
 	t->search_string = NULL;
@@ -1704,14 +1644,14 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 		t->mod_type = TEXT_TYPE;
 		gui_create_bibletext_dialog(t);
 #ifdef USE_GTKMOZEMBED
-		be->chapDisplay = new DialogChapDisp(t->html, t, be, t->ops);
+		be->chapDisplay = new DialogChapDisp(t->html, t, be);
 #else
 		if(t->is_rtol)
 			be->dialogRTOLDisplay 
-			    = new DialogTextviewChapDisp(t->text,  t, be, t->ops);
+			    = new DialogTextviewChapDisp(t->text,  t, be);
 		else	
 			be->chapDisplay 
-			    = new DialogChapDisp(t->html,  t, be, t->ops); 
+			    = new DialogChapDisp(t->html,  t, be); 
 #endif
 		be->init_SWORD(1);
 		if(key)
@@ -1734,7 +1674,7 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 	case COMMENTARY_TYPE:
 		t->mod_type = COMMENTARY_TYPE;
 		gui_create_commentary_dialog(t, FALSE);
-		be->entryDisplay = new DialogEntryDisp(t->html,  t, be, t->ops); 
+		be->entryDisplay = new DialogEntryDisp(t->html,  t, be); 
 		be->init_SWORD(1);
 		if(key)
 			t->key = g_strdup(key);
@@ -1755,7 +1695,7 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 	case DICTIONARY_TYPE:
 		t->mod_type = DICTIONARY_TYPE;
 		gui_create_dictlex_dialog(t);
-		be->entryDisplay = new DialogEntryDisp(t->html,  t, be, t->ops); 
+		be->entryDisplay = new DialogEntryDisp(t->html,  t, be); 
 		be->init_SWORD(1);
 
 		if (key)
@@ -1791,7 +1731,7 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 	case BOOK_TYPE:
 		t->mod_type = BOOK_TYPE;
 		gui_create_gbs_dialog(t);
-		be->entryDisplay = new DialogEntryDisp(t->html,  t, be, t->ops); 
+		be->entryDisplay = new DialogEntryDisp(t->html,  t, be); 
 		be->init_SWORD(1);
 		t->key = NULL; 
 		if(key)
