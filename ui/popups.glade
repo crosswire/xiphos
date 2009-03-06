@@ -8,9 +8,20 @@
   <child>
     <widget class="GtkImageMenuItem" id="about">
       <property name="visible">True</property>
-      <property name="label">gtk-about</property>
-      <property name="use_stock">True</property>
-      <signal name="activate" handler="on_popup_about_activate" last_modification_time="Thu, 26 Feb 2009 19:17:07 GMT"/>
+      <property name="label" translatable="yes">About</property>
+      <property name="use_underline">True</property>
+      <signal name="activate" handler="on_popup_about_activate" last_modification_time="Fri, 06 Mar 2009 14:37:21 GMT"/>
+
+      <child internal-child="image">
+	<widget class="GtkImage" id="image674">
+	  <property name="visible">True</property>
+	  <property name="pixbuf">sword_icon-16.png</property>
+	  <property name="xalign">0.5</property>
+	  <property name="yalign">0.5</property>
+	  <property name="xpad">0</property>
+	  <property name="ypad">0</property>
+	</widget>
+      </child>
     </widget>
   </child>
 
@@ -22,10 +33,9 @@
       <signal name="activate" handler="on_popup_bookmark_activate" last_modification_time="Thu, 26 Feb 2009 19:17:07 GMT"/>
 
       <child internal-child="image">
-	<widget class="GtkImage" id="image605">
+	<widget class="GtkImage" id="image675">
 	  <property name="visible">True</property>
-	  <property name="stock">gtk-add</property>
-	  <property name="icon_size">1</property>
+	  <property name="pixbuf">epiphany-bookmarks.png</property>
 	  <property name="xalign">0.5</property>
 	  <property name="yalign">0.5</property>
 	  <property name="xpad">0</property>
@@ -48,7 +58,7 @@
       <property name="use_underline">True</property>
 
       <child internal-child="image">
-	<widget class="GtkImage" id="image606">
+	<widget class="GtkImage" id="image676">
 	  <property name="visible">True</property>
 	  <property name="stock">gtk-open</property>
 	  <property name="icon_size">1</property>
@@ -69,7 +79,7 @@
 	      <property name="use_underline">True</property>
 
 	      <child internal-child="image">
-		<widget class="GtkImage" id="image607">
+		<widget class="GtkImage" id="image677">
 		  <property name="visible">True</property>
 		  <property name="stock">gtk-open</property>
 		  <property name="icon_size">1</property>
@@ -126,7 +136,7 @@
       <property name="use_underline">True</property>
 
       <child internal-child="image">
-	<widget class="GtkImage" id="image608">
+	<widget class="GtkImage" id="image678">
 	  <property name="visible">True</property>
 	  <property name="stock">gtk-edit</property>
 	  <property name="icon_size">1</property>
@@ -165,7 +175,7 @@
 	      <property name="use_underline">True</property>
 
 	      <child internal-child="image">
-		<widget class="GtkImage" id="image609">
+		<widget class="GtkImage" id="image679">
 		  <property name="visible">True</property>
 		  <property name="stock">gtk-edit</property>
 		  <property name="icon_size">1</property>
@@ -185,7 +195,7 @@
 	      <property name="use_underline">True</property>
 
 	      <child internal-child="image">
-		<widget class="GtkImage" id="image610">
+		<widget class="GtkImage" id="image680">
 		  <property name="visible">True</property>
 		  <property name="stock">gtk-edit</property>
 		  <property name="icon_size">1</property>
@@ -209,7 +219,7 @@
       <property name="use_underline">True</property>
 
       <child internal-child="image">
-	<widget class="GtkImage" id="image611">
+	<widget class="GtkImage" id="image681">
 	  <property name="visible">True</property>
 	  <property name="stock">gtk-ok</property>
 	  <property name="icon_size">1</property>
@@ -432,7 +442,7 @@
       <property name="use_underline">True</property>
 
       <child internal-child="image">
-	<widget class="GtkImage" id="image612">
+	<widget class="GtkImage" id="image682">
 	  <property name="visible">True</property>
 	  <property name="stock">gtk-find</property>
 	  <property name="icon_size">1</property>
@@ -473,7 +483,7 @@
       <signal name="activate" handler="on_unlock_this_module_activate" last_modification_time="Thu, 26 Feb 2009 19:23:37 GMT"/>
 
       <child internal-child="image">
-	<widget class="GtkImage" id="image613">
+	<widget class="GtkImage" id="image683">
 	  <property name="visible">True</property>
 	  <property name="stock">gtk-dialog-authentication</property>
 	  <property name="icon_size">1</property>
@@ -494,7 +504,7 @@
       <signal name="activate" handler="on_display_book_heading_activate"/>
 
       <child internal-child="image">
-	<widget class="GtkImage" id="image614">
+	<widget class="GtkImage" id="image684">
 	  <property name="visible">True</property>
 	  <property name="stock">gtk-open</property>
 	  <property name="icon_size">1</property>
@@ -515,7 +525,7 @@
       <signal name="activate" handler="on_display_chapter_heading_activate" last_modification_time="Thu, 26 Feb 2009 19:23:37 GMT"/>
 
       <child internal-child="image">
-	<widget class="GtkImage" id="image615">
+	<widget class="GtkImage" id="image685">
 	  <property name="visible">True</property>
 	  <property name="stock">gtk-open</property>
 	  <property name="icon_size">1</property>
@@ -536,7 +546,7 @@
       <signal name="activate" handler="on_rename_perscomm_activate"/>
 
       <child internal-child="image">
-	<widget class="GtkImage" id="image616">
+	<widget class="GtkImage" id="image686">
 	  <property name="visible">True</property>
 	  <property name="stock">gtk-convert</property>
 	  <property name="icon_size">1</property>
@@ -557,7 +567,7 @@
       <signal name="activate" handler="on_dump_perscomm_activate" last_modification_time="Sun, 01 Mar 2009 02:23:22 GMT"/>
 
       <child internal-child="image">
-	<widget class="GtkImage" id="image617">
+	<widget class="GtkImage" id="image687">
 	  <property name="visible">True</property>
 	  <property name="stock">gtk-paste</property>
 	  <property name="icon_size">1</property>
@@ -578,10 +588,9 @@
       <signal name="activate" handler="on_read_selection_aloud_activate"/>
 
       <child internal-child="image">
-	<widget class="GtkImage" id="image618">
+	<widget class="GtkImage" id="image688">
 	  <property name="visible">True</property>
-	  <property name="stock">gtk-media-play</property>
-	  <property name="icon_size">1</property>
+	  <property name="pixbuf">gnome-sound-properties.png</property>
 	  <property name="xalign">0.5</property>
 	  <property name="yalign">0.5</property>
 	  <property name="xpad">0</property>

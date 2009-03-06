@@ -12,7 +12,10 @@ ui_DATA = \
 	arrow_up_box.png \
 	languages \
 	logo.png \
+	gnome-sound-properties.png \
 	sword3.png \
+	sword_icon-16.png \
+	epiphany-bookmarks.png \
 	editor_studypad.xml \
 	editor_note.xml 
 
