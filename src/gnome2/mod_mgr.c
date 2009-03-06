@@ -137,6 +137,7 @@ static gchar *current_mod;
 static gchar *remote_source;
 static gboolean first_time_user = FALSE;
 static gboolean working = FALSE;
+static gboolean is_running = FALSE;
 
 GladeXML *gxml;
 
@@ -1194,6 +1195,7 @@ response_close(void)
 		}
 		g_string_free(str,TRUE);
 	}
+	is_running = FALSE;
 }
 
 
@@ -2892,8 +2894,12 @@ create_module_manager_dialog(gboolean first_run)
 
 void gui_open_mod_mgr(void)
 {
-	need_update = TRUE;
-	create_module_manager_dialog(FALSE);
+	if (!is_running) {
+		need_update = TRUE;
+		create_module_manager_dialog(FALSE);
+		is_running = TRUE;
+	} else
+		gdk_window_raise(GTK_WIDGET(dialog)->window);
 }
 
 
