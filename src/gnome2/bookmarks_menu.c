@@ -1244,7 +1244,7 @@ void gui_create_bookmark_menu(void)
 	gtk_widget_hide(pmBookmarkTree_uiinfo[13].widget);
 	/* don't know what this is -- turn it off for now */
 	
-	gnome_app_install_menu_hints(GNOME_APP(widgets.app),
-				     pmBookmarkTree_uiinfo);
+	/*gnome_app_install_menu_hints(GNOME_APP(widgets.app),
+				     pmBookmarkTree_uiinfo);*/
 				    
 }

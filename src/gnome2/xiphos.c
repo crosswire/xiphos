@@ -23,7 +23,7 @@
 #include <config.h>
 #endif
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 #include <libxml/parser.h>
 #include <ctype.h>
 #include <time.h>

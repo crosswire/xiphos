@@ -145,7 +145,8 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 		return;
 	
 	if (url == NULL) { /* moved out of url - clear appbar - info viewer*/
-		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), "");
+		gui_set_statusbar ("");
+		//gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), "");
 		in_url = FALSE;
 		if (GPOINTER_TO_INT(data) == TEXT_TYPE)
 			main_clear_viewer();
@@ -161,9 +162,9 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 			sprintf(buf, "%s %s", _("Unlock "), url);
 		} else /* any other link */
 			sprintf(buf, "%s", "");
-			
-		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
-					buf);
+		
+		gui_set_statusbar (buf);			
+		//gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),buf);
 	}
 }
 
