@@ -110,6 +110,7 @@ void gui_show_main_window(void);
 #define	GS_KEY_L	46
 #define	GS_KEY_N	57
 #define	GS_KEY_P	33
+#define	GS_KEY_Q	24
 #define	GS_KEY_Z	52
 
 #define	GS_KEY_PLUS	21
