@@ -318,6 +318,7 @@ static gboolean  delete_event (GtkWidget *widget,
 	main_shutdown_backend();
 	gtk_main_quit();
 	gtk_exit(0);
+	gtk_widget_destroy(widgets.app);
 	return TRUE;	
 }
 
@@ -611,6 +612,10 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 			on_undockInt_activate(NULL);
 		break;
 
+	case GS_KEY_Q: // quit
+		if (state == GDK_CONTROL_MASK)		// Ctrl-Q quit
+			delete_event (NULL, NULL, NULL);
+		break;
 	case GS_KEY_N: // N    "next"
 		if (state == GDK_CONTROL_MASK)		// Ctrl-N verse
 			access_on_down_eventbox_button_release_event
