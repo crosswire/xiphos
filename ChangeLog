@@ -1,7 +1,7 @@
 2009-03-07  terry <tbiggs@users.sourceforge.net>
 
 	* replaced main menu (gnome) with gtk menu.
-	* replaced ui/popups.glade with ui/xi-menus.glage which contains
+	* replaced ui/popups.glade with ui/xi-menus.glade which contains
 	  the main menu and the module popups.
 	* main window is now a gtk window.
 	* there is one gnome function left in main_menu.c
