@@ -1,3 +1,12 @@
+2009-03-07  terry <tbiggs@users.sourceforge.net>
+
+	* replaced main menu (gnome) with gtk menu.
+	* replaced ui/popups.glade with ui/xi-menus.glage which contains
+	  the main menu and the module popups.
+	* main window is now a gtk window.
+	* there is one gnome function left in main_menu.c
+	  gnome_help_display() in on_help_contents_activate() line 119.
+
 2009-03-06  karl <charcoal@users.sf.net>
 
 	* turn off "modal" property for mod.mgr: normal work can continue

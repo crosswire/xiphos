@@ -52,17 +52,14 @@ struct  _global_ops {
     
 	gboolean dialog;
 };
-/* main window */
-int main_save_module_options(const char * mod_name, const char * option, int choice, int dialog);
-void main_set_global_options(GLOBAL_OPS * ops);
-void main_set_strongs_morphs_off(GLOBAL_OPS * ops);
-void main_set_strongs_morphs(GLOBAL_OPS * ops);
+
 GLOBAL_OPS *main_new_globals(gchar * mod_name, int dialog);
+int main_save_module_options(const char * mod_name, const char * option, int choice, int dialog);
+
+/* main window */
+void main_set_global_options(GLOBAL_OPS * ops);
 /* dialog */
-//int main_save_module_options_dialog(const char *mod_name, const char *option, int choice);
 void main_dialog_set_global_options(gpointer backend, GLOBAL_OPS * ops);
-void main_set_dialog_strongs_morphs_off(gpointer backend, GLOBAL_OPS * ops);
-void main_set_dialog_strongs_morphs(gpointer backend, GLOBAL_OPS * ops);
 
 #ifdef __cplusplus
 }

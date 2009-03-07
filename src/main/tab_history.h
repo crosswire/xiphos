@@ -40,7 +40,7 @@ GtkWidget *main_versekey_drop_down_new(gpointer data);
 void main_clear_tab_history(void);
 void main_add_tab_history_item(gpointer data);
 void main_navigate_tab_history(gint direction);
-void main_update_tab_history_menu(gpointer data);		
+//void main_update_tab_history_menu(gpointer data);		
 void main_change_verse_tab_history(gint historynum);
 
 #ifdef __cplusplus

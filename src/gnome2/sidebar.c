@@ -1111,7 +1111,7 @@ static void create_search_results_page(GtkWidget * notebook)
 	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(sidebar.results_list));
 
 	gnome_popup_menu_attach(menu, sidebar.results_list, NULL);
-	gnome_app_install_menu_hints(GNOME_APP(widgets.app), results_menu_uiinfo);
+	//gnome_app_install_menu_hints(GNOME_APP(widgets.app), results_menu_uiinfo);
 		
 	g_signal_connect((gpointer) sidebar.results_list,
 			 "key_press_event",

@@ -69,7 +69,7 @@ struct  _tab_page {
 	NAVBAR_VERSEKEY nav_bar;
 #endif
 };
-
+/*
 typedef struct _main_window MAIN_WINDOW;
 struct  _main_window {
 	GtkWidget *main_window;
@@ -79,7 +79,7 @@ struct  _main_window {
 	
 	TAB_PAGE current_page;
 };
-
+*/
 #include "main/settings.h"
 
 void gui_show_hide_texts(int choice);
@@ -88,7 +88,6 @@ void gui_show_hide_comms(int choice);
 void gui_show_hide_dicts(int choice);
 void gui_set_bible_comm_layout(void);	
 void gui_change_window_title(char * module_name);
-void gui_search_appbar_update(char percent, void *userData);
 void create_mainwindow(void);
 void gui_show_main_window(void);
 

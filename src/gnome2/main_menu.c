@@ -23,7 +23,8 @@
 #include <config.h>
 #endif
 
-#include <gnome.h>
+#include <gtk/gtk.h>
+#include <glade/glade-xml.h>
 
 #ifdef USE_GTKHTML38
 #include "editor/html-editor.h"
@@ -66,9 +67,7 @@
  *   void
  */
 
-void
-gui_about_activate(GtkMenuItem * menuitem,
-		   gpointer user_data)
+void gui_about_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	gui_display_about_module_dialog((char *) user_data, FALSE);
 }
@@ -91,9 +90,7 @@ gui_about_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-void
-on_help_contents_activate(GtkMenuItem * menuitem,
-			  gpointer user_data)
+void on_help_contents_activate(GtkMenuItem * menuitem, gpointer user_data)
 {	
 	const char *lang = getenv("LANG");
 
@@ -145,9 +142,7 @@ on_help_contents_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-void
-on_mailing_list_activate(GtkMenuItem * menuitem,
-			gpointer user_data)
+void on_mailing_list_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GError *error = NULL;
 	if (gnome_url_show("https://lists.sourceforge.net/lists/listinfo/gnomesword-users/",
@@ -175,9 +170,7 @@ on_mailing_list_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-void
-on_live_chat_activate(GtkMenuItem * menuitem,
-			gpointer user_data)
+void on_live_chat_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GError *error = NULL;
 	if (gnome_url_show("http://embed.mibbit.com/?server=irc.freenode.net&channel=%23xiphos",
@@ -204,9 +197,7 @@ on_live_chat_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-void
-on_report_bug_activate(GtkMenuItem * menuitem,
-			gpointer user_data)
+void on_report_bug_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GError *error = NULL;
 	if (gnome_url_show(PACKAGE_BUGREPORT,
@@ -216,33 +207,10 @@ on_report_bug_activate(GtkMenuItem * menuitem,
 	}
 }
 
-/******************************************************************************
- * Name
- *  on_menuHistoryitem1_activate
- *
- * Synopsis
- *   #include "gui/main_menu.h"
- *
- *   void on_menuHistoryitem1_activate(GtkMenuItem * menuitem, 
- *						gpointer user_data)	
- *
- * Description
- *   change text module to chosen histor item
- *
- * Return value
- *   void
- */
-
-void
-on_menuHistoryitem1_activate(GtkMenuItem * menuitem,
-			     gpointer user_data)
-{
-	main_change_verse_tab_history(GPOINTER_TO_INT(user_data));
-}
 
 /******************************************************************************
  * Name
- *  on_about_the_sword_project1_activate
+ *  on_about_the_sword_project_activate
  *
  * Synopsis
  *   #include "gui/main_menu.h"
@@ -257,9 +225,7 @@ on_menuHistoryitem1_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-void
-on_about_the_sword_project1_activate(GtkMenuItem * menuitem,
-				     gpointer user_data)
+void on_about_the_sword_project_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GtkWidget *dlg;
 
@@ -284,9 +250,7 @@ on_about_the_sword_project1_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-void
-on_about_translation_activate(GtkMenuItem * menuitem,
-			      gpointer user_data)
+void on_about_translation_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GtkWidget *dlg;
 
@@ -296,12 +260,12 @@ on_about_translation_activate(GtkMenuItem * menuitem,
 
 /******************************************************************************
  * Name
- *  on_daily_devotion1_activate
+ *  on_daily_devotion_activate
  *
  * Synopsis
  *   #include "gui/main_menu.h"
  *
- *   void on_daily_devotion1_activate(GtkMenuItem *menuitem, 
+ *   void on_daily_devotion_activate(GtkMenuItem *menuitem, 
  *						gpointer user_data)	
  *
  * Description
@@ -311,8 +275,7 @@ on_about_translation_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-void
-on_daily_devotion1_activate(GtkMenuItem * menuitem,
+void on_daily_devotion_activate(GtkMenuItem * menuitem,
 			    gpointer user_data)
 {
 	main_display_devotional();
@@ -320,12 +283,12 @@ on_daily_devotion1_activate(GtkMenuItem * menuitem,
 
 /******************************************************************************
  * Name
- *  on_preferences1_activate
+ *  on_preferences_activate
  *
  * Synopsis
  *   #include "gui/main_menu.h"
  *
- *   void on_preferences1_activate(GtkMenuItem *menuitem, gpointer user_data)	
+ *   void on_preferences_activate(GtkMenuItem *menuitem, gpointer user_data)	
  *
  * Description
  *   open preferences dialog
@@ -334,8 +297,7 @@ on_daily_devotion1_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-void
-on_preferences1_activate(GtkMenuItem * menuitem,
+void on_preferences_activate(GtkMenuItem * menuitem,
 			 gpointer user_data)
 {
 	gui_setup_preferences_dialog();
@@ -357,9 +319,7 @@ on_preferences1_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-void
-on_search_activate(GtkMenuItem * menuitem,
-		   gpointer user_data)
+void on_search_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	if (!settings.showshortcutbar) 
 		gui_sidebar_showhide();
@@ -368,12 +328,12 @@ on_search_activate(GtkMenuItem * menuitem,
 
 /******************************************************************************
  * Name
- *  on_verse_style1_activate
+ *  on_verse_style_activate
  *
  * Synopsis
  *   #include "gui/main_menu.h"
  *
- *   void on_verse_style1_activate(GtkMenuItem *menuitem, gpointer user_data)	
+ *   void on_verse_style_activate(GtkMenuItem *menuitem, gpointer user_data)	
  *
  * Description
  *   toggle between verse and paragraph style
@@ -382,9 +342,7 @@ on_search_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-static void
-on_verse_style1_activate(GtkCheckMenuItem * menuitem,
-			 gpointer user_data)
+void on_verse_style_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 {
 	extern gboolean style_display;
 	if(style_display) {
@@ -423,9 +381,7 @@ on_verse_style1_activate(GtkCheckMenuItem * menuitem,
  *   void
  */
 
-static void
-on_linked_tabs_activate(GtkCheckMenuItem * menuitem,
-			gpointer user_data)
+void on_linked_tabs_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 {
 	settings.linkedtabs = menuitem->active;
 	xml_set_value("Xiphos", "misc", "pinnedtabs",
@@ -448,9 +404,7 @@ on_linked_tabs_activate(GtkCheckMenuItem * menuitem,
  *   void
  */
 
-static void
-on_read_aloud_activate(GtkCheckMenuItem * menuitem,
-		       gpointer user_data)
+void on_read_aloud_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 {
 	settings.readaloud = menuitem->active;
 	xml_set_value("Xiphos", "misc", "readaloud",
@@ -475,9 +429,7 @@ on_read_aloud_activate(GtkCheckMenuItem * menuitem,
  *   void
  */
 
-static void
-on_show_verse_numbers_activate(GtkCheckMenuItem * menuitem,
-			       gpointer user_data)
+void on_show_verse_numbers_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 {
 	settings.showversenum = menuitem->active;
 	xml_set_value("Xiphos", "misc", "showversenum",
@@ -501,9 +453,7 @@ on_show_verse_numbers_activate(GtkCheckMenuItem * menuitem,
  *   void
  */
 
-static void
-on_versehighlight_activate(GtkCheckMenuItem * menuitem,
-			   gpointer user_data)
+void on_versehighlight_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 {
 	settings.versehighlight = menuitem->active;
 	xml_set_value("Xiphos", "misc", "versehighlight",
@@ -528,9 +478,7 @@ on_versehighlight_activate(GtkCheckMenuItem * menuitem,
  *   void
  */
 
-void
-gui_parallel_tab_activate(GtkCheckMenuItem * menuitem,
-			   gpointer user_data)
+void gui_parallel_tab_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 {
 	if(!settings.browsing) return;
 	if(!settings.showparatab && !menuitem->active) {
@@ -565,9 +513,7 @@ gui_parallel_tab_activate(GtkCheckMenuItem * menuitem,
  *   void
  */
 
-static void
-on_side_preview_activate(GtkCheckMenuItem * menuitem,
-			   gpointer user_data)
+void on_side_preview_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 {
 	settings.show_previewer_in_sidebar = menuitem->active;
 	xml_set_value("Xiphos", "misc", "show_side_preview",
@@ -578,12 +524,12 @@ on_side_preview_activate(GtkCheckMenuItem * menuitem,
 
 /******************************************************************************
  * Name
- *  on_doublespace_activate
+ *   on_double_space_text_activate
  *
  * Synopsis
  *   #include "gui/main_menu.h"
  *
- *   void on_doublespace_activate(GtkMenuItem *menuitem, gpointer user_data)	
+ *   void on_double_space_text_activate(GtkMenuItem *menuitem, gpointer user_data)	
  *
  * Description
  *   toggle double-spacing of text.
@@ -592,9 +538,7 @@ on_side_preview_activate(GtkCheckMenuItem * menuitem,
  *   void
  */
 
-static void
-on_doublespace_activate(GtkCheckMenuItem * menuitem,
-			gpointer user_data)
+void on_double_space_text_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 {
 	settings.doublespace = menuitem->active;
 	xml_set_value("Xiphos", "misc", "doublespace",
@@ -605,12 +549,12 @@ on_doublespace_activate(GtkCheckMenuItem * menuitem,
 
 /******************************************************************************
  * Name
- *  on_exit_activate
+ *  on_quit_activate
  *
  * Synopsis
  *   #include "gui/main_menu.h"
  *
- *   void on_exit_activate(GtkMenuItem * menuitem, gpointer user_data)	
+ *   void on_quit_activate(GtkMenuItem * menuitem, gpointer user_data)	
  *
  * Description
  *   do a nice orderly shut down and exit xiphos
@@ -621,9 +565,7 @@ on_doublespace_activate(GtkCheckMenuItem * menuitem,
  *   void
  */
 
-void
-on_exit_activate(GtkMenuItem * menuitem,
-		 gpointer user_data)
+void on_quit_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	shutdown_frontend();
 	/* shutdown the sword stuff */
@@ -633,39 +575,15 @@ on_exit_activate(GtkMenuItem * menuitem,
 	gtk_widget_destroy(widgets.app);
 }
 
+
 /******************************************************************************
  * Name
- *  on_clear1_activate
+ *  on_about_xiphos_activate
  *
  * Synopsis
  *   #include "gui/main_menu.h"
  *
- *   void on_clear1_activate(GtkMenuItem * menuitem,
- *			     gpointer user_data)	
- *
- * Description
- *   remove all items from history list by calling
- *   gui_clear_history();
- *
- * Return value
- *   void
- */
-
-void
-on_clear1_activate(GtkMenuItem * menuitem,
-		   gpointer user_data)
-{
-	main_clear_tab_history();
-}
-
-/******************************************************************************
- * Name
- *  on_about_xiphos1_activate
- *
- * Synopsis
- *   #include "gui/main_menu.h"
- *
- *   void on_about_xiphos1_activate(GtkMenuItem * menuitem, 
+ *   void on_about_xiphos_activate(GtkMenuItem * menuitem, 
  *					gpointer user_data)	
  *
  * Description
@@ -676,7 +594,7 @@ on_clear1_activate(GtkMenuItem * menuitem,
  */
 
 void
-on_about_xiphos1_activate(GtkMenuItem * menuitem,
+on_about_xiphos_activate(GtkMenuItem * menuitem,
 			      gpointer user_data)
 {
 	GtkWidget *AboutBox;
@@ -688,12 +606,12 @@ on_about_xiphos1_activate(GtkMenuItem * menuitem,
 
 /******************************************************************************
  * Name
- *  on_save_tabs
+ *  on_save_session_activate
  *
  * Synopsis
  *   #include "gui/main_menu.h"
  *
- *   void on_save_tabs(GtkMenuItem * menuitem, gpointer user_data)	
+ *   void on_save_session_activate(GtkMenuItem * menuitem, gpointer user_data)	
  *
  * Description
  *   ask for a file name (with file-chooser) and save the current tabs to that file
@@ -701,9 +619,8 @@ on_about_xiphos1_activate(GtkMenuItem * menuitem,
  * Return value
  *   void
  */
-void
-on_save_tabs(GtkMenuItem * menuitem,
-	     gpointer user_data)
+
+void on_save_session_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GtkWidget *dialog;
 	gchar *tabs_dir;
@@ -740,12 +657,12 @@ on_save_tabs(GtkMenuItem * menuitem,
 
 /******************************************************************************
  * Name
- *  on_load_tabs
+ *  on_open_session_activate
  *
  * Synopsis
  *   #include "gui/main_menu.h"
  *
- *   void on_load_tabs(GtkMenuItem * menuitem, gpointer user_data)	
+ *   void on_open_session_activate(GtkMenuItem * menuitem, gpointer user_data)	
  *
  * Description
  *   ask for file name (with file-chooser) and load tabs from that file
@@ -753,9 +670,8 @@ on_save_tabs(GtkMenuItem * menuitem,
  * Return value
  *   void
  */
-void
-on_load_tabs(GtkMenuItem * menuitem,
-	     gpointer user_data)
+
+void on_open_session_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GtkWidget *dialog;
 	gchar *tabs_dir;
@@ -837,15 +753,15 @@ view_hints(GtkMenuItem * menuitem,
  *   void
  */
 
-static void
-view_bible_texts(GtkMenuItem * menuitem,
+ 
+void on_show_bible_text_activate(GtkMenuItem * menuitem,
 		 gpointer user_data)
 {
 	gui_show_hide_texts(GTK_CHECK_MENU_ITEM(menuitem)->active);
 }
 
-static void
-view_previewer(GtkMenuItem * menuitem,
+ 
+void on_preview_activate(GtkMenuItem * menuitem,
 	       gpointer user_data)
 {
 	gui_show_hide_preview(GTK_CHECK_MENU_ITEM(menuitem)->active);
@@ -869,8 +785,8 @@ view_previewer(GtkMenuItem * menuitem,
  *   void
  */
 
-static void
-view_upper_workbook(GtkMenuItem * menuitem,
+ 
+void on_show_commentary_activate(GtkMenuItem * menuitem,
 		    gpointer user_data)
 {
 	gui_show_hide_comms(GTK_CHECK_MENU_ITEM(menuitem)->active);
@@ -893,8 +809,8 @@ view_upper_workbook(GtkMenuItem * menuitem,
  *   void
  */
 
-static void
-view_lower_workbook(GtkMenuItem * menuitem,
+ 
+void on_show_dictionary_lexicon_activate(GtkMenuItem * menuitem,
 		    gpointer user_data)
 {
 	gui_show_hide_dicts(GTK_CHECK_MENU_ITEM(menuitem)->active);
@@ -903,12 +819,12 @@ view_lower_workbook(GtkMenuItem * menuitem,
 
 /******************************************************************************
  * Name
- *   on_mod_mgr
+ *   on_module_manager_activate
  *
  * Synopsis
  *   #include "gui/main_menu.h"
  *
- *   void on_mod_mgr(GtkMenuItem * menuitem, gpointer user_data)	
+ *   void on_module_manager_activate(GtkMenuItem * menuitem, gpointer user_data)	
  *
  * Description
  *    
@@ -917,21 +833,20 @@ view_lower_workbook(GtkMenuItem * menuitem,
  *   void
  */
 
-void
-on_mod_mgr(GtkMenuItem * menuitem,
-	   gpointer user_data)
+void on_module_manager_activate(GtkMenuItem * menuitem,
+	   			gpointer user_data)
 {
 	gui_open_mod_mgr();
 }
 
 /******************************************************************************
  * Name
- *   open_studypad
+ *   on_open_studypad_activate
  *
  * Synopsis
  *   #include "gui/main_menu.h"
  *
- *   void open_studypad(GtkMenuItem * menuitem, gpointer user_data)	
+ *   void on_open_studypad_activate(GtkMenuItem * menuitem, gpointer user_data)	
  *
  * Description
  *    open studypad editor - if studypad dialog exist bring it to the
@@ -941,9 +856,8 @@ on_mod_mgr(GtkMenuItem * menuitem,
  *   void
  */
 
-static void
-open_studypad(GtkMenuItem * menuitem,
-	      gpointer user_data)
+ 
+void on_open_studypad_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 
 #ifdef USE_GTKHTML38
@@ -961,332 +875,65 @@ open_studypad(GtkMenuItem * menuitem,
 }
 
 
-/******************************************************************************
- * gnome menu structures
- */
-
-static GnomeUIInfo file1_menu_uiinfo[] = {
-	{
-	 GNOME_APP_UI_ITEM, N_("Open Study_Pad"),
-	 N_("Open the StudyPad editor"),
-	 open_studypad, NULL, NULL,
-	 GNOME_APP_PIXMAP_FILENAME, NULL /* init'd in menu creation */,
-	 0, 0, NULL},
-	GNOMEUIINFO_SEPARATOR,
-	{ GNOME_APP_UI_ITEM, N_("_Open Session"),
-	  N_("Open a saved session"),
-	  on_load_tabs, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GTK_STOCK_OPEN,
-	  0, 0, NULL},
-  	{ GNOME_APP_UI_ITEM, N_("_Save Session"),
-	  N_("Save the current session to a file"),
-	  on_save_tabs, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GTK_STOCK_SAVE,
-	  0, 0, NULL},
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_MENU_EXIT_ITEM(on_exit_activate, NULL),
-	GNOMEUIINFO_END
-};
-
-static GnomeUIInfo edit1_menu_uiinfo[] = {
-	{
-	 GNOME_APP_UI_ITEM, N_("_Copy"),
-	 N_("Copy highlighted text from main window"),
-	 NULL/*gui_copyhtml_activate*/, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_COPY,
-	 0, 0, NULL},
-	GNOMEUIINFO_SEPARATOR,
-	{
-	 GNOME_APP_UI_ITEM, N_("_Search"),
-	 N_("Search using the shortcut bar"),
-	 on_search_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_FIND,
-	 0, 0, NULL},
-	{
-	 GNOME_APP_UI_ITEM, N_("_Advanced Search"),
-	 N_("Advanced search using the search dialog"),
-	 main_open_search_dialog, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_BOOK_OPEN,
-	 GDK_F3, (GdkModifierType) 0, NULL},
-	GNOMEUIINFO_SEPARATOR,
-	{
-	GNOME_APP_UI_ITEM, N_("_Preferences"),
-	N_("Set user preferences"),
-	on_preferences1_activate, NULL, NULL,
-	GNOME_APP_PIXMAP_STOCK, "gtk-preferences",
-	GDK_F2, 0, NULL},
-	{
-	 GNOME_APP_UI_ITEM, N_("_Module Manager"),
-	 N_("Use module manager to install and remove Sword modules"),
-	 on_mod_mgr, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, "gtk-preferences",
-	 GDK_F4, (GdkModifierType) 0, NULL},
-	GNOMEUIINFO_END
-};
-
-static GnomeUIInfo history1_menu_uiinfo[] = {
-	{
-	 GNOME_APP_UI_ITEM, N_("C_lear"),
-	 N_("Clear history list"),
-	 on_clear1_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_CLEAR,
-	 0, 0, NULL},
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_END
-};
-
-static GnomeUIInfo view1_menu_uiinfo[] = {
-	{ /* 0 */
-	 GNOME_APP_UI_ITEM, N_("_Daily Devotion"),
-	 N_("Show the Daily Devotion for today"),
-	 (gpointer) on_daily_devotion1_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_BOOK_OPEN,
-	 0, (GdkModifierType) 0, NULL},
-	GNOMEUIINFO_SEPARATOR,  /* 1 */
-	{ /* 2 */
-	 GNOME_APP_UI_TOGGLEITEM, N_("_Bible Texts"),
-	 N_("Show or hide Bible texts window"),
-	 (gpointer) view_bible_texts, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, (GdkModifierType) 0, NULL},
- 	{ /* 3 */
-	 GNOME_APP_UI_TOGGLEITEM, N_("_Preview"),
-	 N_("Show or hide Preview window"),
-	 (gpointer) view_previewer, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, (GdkModifierType) 0, NULL},
-	{ /* 4 */
-	 GNOME_APP_UI_TOGGLEITEM, N_("_Commentary"),
-	 N_("Show or hide commentaries"),
-	 (gpointer) view_upper_workbook, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, (GdkModifierType) 0, NULL},
-	{ /* 5 */
-	 GNOME_APP_UI_TOGGLEITEM, N_("Dictionary/_Lexicon"),
-	 N_("Show or hide - dictionaries and lexicons"),
-	 (gpointer) view_lower_workbook, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, (GdkModifierType) 0, NULL},
-	GNOMEUIINFO_SEPARATOR, /* 6 */
-	{ /* 7 */
-	 GNOME_APP_UI_TOGGLEITEM, N_("_Verse Per Line"),
-	 NULL,
-	 NULL, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, (GdkModifierType) 0, NULL},
-	{ /* 8 */
-	 GNOME_APP_UI_TOGGLEITEM, N_("L_ink Tabs"),
-	 NULL,
-	 NULL, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, (GdkModifierType) 0, NULL},
-	{ /* 9 */
-	 GNOME_APP_UI_TOGGLEITEM, N_("_Read Aloud"),
-	 NULL,
-	 NULL, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, (GdkModifierType) 0, NULL},
-	{ /* 10 */
-	 GNOME_APP_UI_TOGGLEITEM, N_("Show Verse _Numbers"),
-	 NULL,
-	 NULL, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, (GdkModifierType) 0, NULL},
-	{ /* 11 */
-	 GNOME_APP_UI_TOGGLEITEM, N_("_Highlight Current Verse"),
-	 NULL,
-	 NULL, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, (GdkModifierType) 0, NULL},
-#ifdef USE_GTKMOZEMBED
-	{ /* 12 */
-	 GNOME_APP_UI_TOGGLEITEM, N_("D_ouble-Space Text"),
-	 NULL,
-	 NULL, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, (GdkModifierType) 0, NULL},
-#endif /* USE_GTKMOZEMBED */
-	GNOMEUIINFO_SEPARATOR, /* 13 */
-	{ /* 14 */
-	 GNOME_APP_UI_ITEM, N_("_Attach/Detach Sidebar"),
-	 NULL,
-	 gui_attach_detach_sidebar, NULL, NULL, 
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, (GdkModifierType) 0, NULL},
-	{ /* 15 */
-	 GNOME_APP_UI_ITEM, N_("_Show/Hide Sidebar"),
-	 NULL,
-	 gui_sidebar_showhide, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, (GdkModifierType) 0, NULL},
-	
-#ifdef USE_PARALLEL_TAB	
-	{ /* 16 */
-	 GNOME_APP_UI_TOGGLEITEM, N_("Show Parallel View in a tab"),
-	 NULL,
-	 NULL, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, (GdkModifierType) 0, NULL},	
-	{ /* 17 */
-	 GNOME_APP_UI_TOGGLEITEM, N_("Show Previewer in the Sidebar"),
-	 NULL,
-	 NULL, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, (GdkModifierType) 0, NULL},
-#endif /*  USE_PARALLEL_TAB  */	
-	GNOMEUIINFO_END
-};
-
-static GnomeUIInfo help1_menu_uiinfo[] = {
-	{
-	 GNOME_APP_UI_ITEM, N_("_Contents"),
-	 N_("Open the Xiphos manual"),
-	 on_help_contents_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_HELP,
-	 GDK_F1, 0, NULL},
-	{
-	GNOME_APP_UI_ITEM, N_("_Mailing List"),
-	N_("Sign up for the users' mailing list"),
-	on_mailing_list_activate, NULL, NULL,
-	GNOME_APP_PIXMAP_FILENAME, NULL /* init'd in menu creation */,
-	0, 0, NULL},
-	{
-	GNOME_APP_UI_ITEM, N_("_Live Chat"),
-	N_("Chat with other users and developers"),
-	on_live_chat_activate, NULL, NULL,
-	GNOME_APP_PIXMAP_FILENAME, NULL /* init'd in menu creation */,
-	0, 0, NULL},
-	{
-	 GNOME_APP_UI_ITEM, N_("_Report Bug"),
-	 N_("Report bug to SourceForge"),
-	 on_report_bug_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_DIALOG_ERROR,
-	 0, 0, NULL},
-	GNOMEUIINFO_SEPARATOR,
-	{
-	 GNOME_APP_UI_ITEM, N_("About _Translation"),
-	 N_("Translating Xiphos to other languages"),
-	 on_about_translation_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_FILENAME, NULL /* init'd in menu creation */,
-	 0, 0, NULL},
-	GNOMEUIINFO_SEPARATOR,
-	{
-	 GNOME_APP_UI_ITEM, N_("_About the SWORD Project"),
-	 N_("More information about the SWORD Project"),
-	 on_about_the_sword_project1_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_FILENAME, NULL /* init'd in menu creation */,
-	 0, 0, NULL},
-	{
-	 GNOME_APP_UI_ITEM, N_("About _Xiphos"),
-	 N_("About this application"),
-	 on_about_xiphos1_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_FILENAME, NULL /* init'd in menu creation */,
-	 0, 0, NULL},
-	GNOMEUIINFO_END
-};
-
-static GnomeUIInfo menubar1_uiinfo[] = {
-	{
-	 GNOME_APP_UI_SUBTREE, N_("_File"),
-	 NULL,
-	 file1_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, (GdkModifierType) 0, NULL},
-	{
-	 GNOME_APP_UI_SUBTREE, N_("_Edit"),
-	 NULL,
-	 edit1_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, (GdkModifierType) 0, NULL},
-	{
-	 GNOME_APP_UI_SUBTREE, N_("_View"),
-	 NULL,
-	 view1_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, (GdkModifierType) 0, NULL},
-	{
-	 GNOME_APP_UI_SUBTREE, N_("Hi_story"),
-	 NULL,
-	 history1_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, 0, NULL},
-	{
-	 GNOME_APP_UI_SUBTREE, N_("_Help"),
-	 NULL,
-	 help1_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, (GdkModifierType) 0, NULL},
-	GNOMEUIINFO_END
-};
-
-
-/******************************************************************************
- * Name
- *   gui_create_main_menu
- *
- * Synopsis
- *   #include "gui/main_menu.h"
- *
- *   void gui_create_main_menu(GtkWidget *app)	
- *
- * Description
- *   create the main menu for xiphos
- *
- * Return value
- *   void
- */
-
-void
-set_custom_pixmap(GnomeUIInfo menu[], int index, const char* filename){
-	if (!menu[index].pixmap_info)
-		menu[index].pixmap_info =
-		    image_locator((char*)filename);
-} 
-
-void
-gui_create_main_menu(GtkWidget * app)
+void on_advanced_search_activate (GtkMenuItem * menuitem, gpointer user_data)
 {
-	/*
-	 * this is total magic.  set up menu before using it.
-	 * indices are direct from GnomeUIInfo above.
-	 */
-	set_custom_pixmap(file1_menu_uiinfo, 0, "silk-edit-bookmarks.png");
-	set_custom_pixmap(help1_menu_uiinfo, 1, "mailing_list_icon-16.png");
-	set_custom_pixmap(help1_menu_uiinfo, 2, "chat_icon-16.png");
-	set_custom_pixmap(help1_menu_uiinfo, 5, "translation_icon-16.png");
-	set_custom_pixmap(help1_menu_uiinfo, 7, "sword_icon-16.png");
-	set_custom_pixmap(help1_menu_uiinfo, 8, "xiphos-x-16.png");
-	/* end magic */
+	main_open_search_dialog ();
+}
 
-	gnome_app_create_menus(GNOME_APP(app), menubar1_uiinfo);
+
+void
+on_attach_detach_sidebar_activate      (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+	gui_attach_detach_sidebar ();
+}
+
+
+void
+on_sidebar_showhide_activate           (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+	gui_sidebar_showhide ();
+}
+
+
+GtkWidget *gui_create_main_menu(void)
+{
+	gchar *glade_file;
+	GladeXML *gxml;
+    	const gchar *mname = NULL;
 	
-	widgets.viewtexts_item = view1_menu_uiinfo[2].widget;
-	widgets.viewpreview_item = view1_menu_uiinfo[3].widget; 
-	widgets.viewcomms_item = view1_menu_uiinfo[4].widget;
-	widgets.viewdicts_item = view1_menu_uiinfo[5].widget;
-	widgets.versestyle_item = view1_menu_uiinfo[7].widget;
-	widgets.linkedtabs_item = view1_menu_uiinfo[8].widget;
-	widgets.readaloud_item = view1_menu_uiinfo[9].widget;
-	widgets.showversenum_item = view1_menu_uiinfo[10].widget;
-	widgets.versehighlight_item = view1_menu_uiinfo[11].widget;
+	glade_file = gui_general_user_file ("xi-menus.glade", FALSE);
+	g_return_if_fail (glade_file != NULL);
+	
+	gxml = glade_xml_new (glade_file, "menu_main", NULL);
+		
+	g_free (glade_file);
+	g_return_if_fail (gxml != NULL);
+	
+	GtkWidget *menu 	= glade_xml_get_widget (gxml, "menu_main");
+	
+	widgets.viewtexts_item = glade_xml_get_widget (gxml, "show_bible_text");
+	widgets.viewpreview_item = glade_xml_get_widget (gxml, "preview");
+	widgets.viewcomms_item = glade_xml_get_widget (gxml, "commentary");
+	widgets.viewdicts_item = glade_xml_get_widget (gxml, "show_dictionary_lexicon");
+	widgets.versestyle_item = glade_xml_get_widget (gxml, "verse_per_line");
+	widgets.linkedtabs_item = glade_xml_get_widget (gxml, "link_tabs");
+	widgets.readaloud_item = glade_xml_get_widget (gxml, "read_aloud");
+	widgets.showversenum_item = glade_xml_get_widget (gxml, "show_verse_numbers");
+	widgets.versehighlight_item = glade_xml_get_widget (gxml, "highlight_current_verse");
 #ifdef USE_PARALLEL_TAB	
-#ifdef USE_GTKMOZEMBED
-	widgets.parallel_tab_item = view1_menu_uiinfo[16].widget;
-	widgets.side_preview_item = view1_menu_uiinfo[17].widget;
-#else /* USE_GTKMOZEMBED */
-	widgets.parallel_tab_item = view1_menu_uiinfo[15].widget;
-	widgets.side_preview_item = view1_menu_uiinfo[16].widget;
-#endif /* USE_GTKMOZEMBED */
+	widgets.parallel_tab_item = glade_xml_get_widget (gxml, "show_parallel_view_in_a_tab");
+	widgets.side_preview_item = glade_xml_get_widget (gxml, "show_previewer_in_sidebar");
 #endif /*  USE_PARALLEL_TAB  */	
-	gtk_widget_hide(edit1_menu_uiinfo[0].widget);	/* disable Copy */
-	gtk_widget_hide(edit1_menu_uiinfo[1].widget);	/* disable Copy */
+	
 #ifdef USE_GTKMOZEMBED
-	widgets.doublespace_item = view1_menu_uiinfo[12].widget;
+	widgets.doublespace_item = glade_xml_get_widget (gxml, "double_space_text");
 #endif /* USE_GTKMOZEMBED */
 #if defined(__CYGWIN__) || defined(WIN32)
-	gtk_widget_hide(view1_menu_uiinfo[9].widget);
+	gtk_widget_hide(widgets.readaloud_item);
 #endif /* __CYGWIN */
-
+	
 	/* map tab's show state into view menu. */
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.viewtexts_item),
@@ -1308,7 +955,7 @@ gui_create_main_menu(GtkWidget * app)
 				       (widgets.side_preview_item),
 				       settings.show_previewer_in_sidebar);
 #endif /*  USE_PARALLEL_TAB  */	
-	
+		
 	/* update other status toys */
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.versestyle_item),
@@ -1331,66 +978,9 @@ gui_create_main_menu(GtkWidget * app)
 				       settings.doublespace);
 #endif /* USE_GTKMOZEMBED */
 	
-	g_signal_connect(GTK_OBJECT(widgets.versestyle_item),
-			   "toggled",
-			   G_CALLBACK(on_verse_style1_activate),
-			   NULL);
-	g_signal_connect(GTK_OBJECT(widgets.linkedtabs_item),
-			   "toggled",
-			   G_CALLBACK(on_linked_tabs_activate),
-			   NULL);
-	g_signal_connect(GTK_OBJECT(widgets.readaloud_item),
-			   "toggled",
-			   G_CALLBACK(on_read_aloud_activate),
-			   NULL);
-	g_signal_connect(GTK_OBJECT(widgets.showversenum_item),
-			   "toggled",
-			   G_CALLBACK(on_show_verse_numbers_activate),
-			   NULL);
-	g_signal_connect(GTK_OBJECT(widgets.versehighlight_item),
-			   "toggled",
-			   G_CALLBACK(on_versehighlight_activate),
-			   NULL);
-			   
-#ifdef USE_PARALLEL_TAB
-	/* signal connected later in gnome2/xiphos.c 
-	g_signal_connect(GTK_OBJECT(widgets.parallel_tab_item),
-			   "toggled",
-			   G_CALLBACK(gui_parallel_tab_activate),
-			   NULL);
-			   */
-	g_signal_connect(GTK_OBJECT(widgets.side_preview_item),
-			   "toggled",
-			   G_CALLBACK(on_side_preview_activate),
-			   NULL);
-#endif /*  USE_PARALLEL_TAB  */	
-			   
-#ifdef USE_GTKMOZEMBED
-	g_signal_connect(GTK_OBJECT(widgets.doublespace_item),
-			   "toggled",
-			   G_CALLBACK(on_doublespace_activate),
-			   NULL);
-#endif /* USE_GTKMOZEMBED */
-}
-
-/******************************************************************************
- * Name
- *  gui_install_menu_hints
- *
- * Synopsis
- *   #include "gui/main_menu.h"
- *
- *   void gui_install_menu_hints(GtkWidget *app)	
- *
- * Description
- *   install hints - display menu hints in status bar
- *
- * Return value
- *   void
- */
-
-void
-gui_install_menu_hints(GtkWidget * app)
-{
-	gnome_app_install_menu_hints(GNOME_APP(app), menubar1_uiinfo);
+    	/* connect signals and data */
+	glade_xml_signal_autoconnect_full
+		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);
+	
+	return menu;
 }

@@ -253,8 +253,8 @@ static gint show_separate_image(const gchar * filename, gboolean clicked)
 		g_string_free(cmd, TRUE);
 #endif
 	} else {
-		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
-					filename);
+		gui_set_statusbar (filename);
+		//gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),filename);
 	}
 	return 1;
 }
@@ -287,8 +287,9 @@ static gint show_separate_image(const gchar * filename, gboolean clicked)
 		/* some mod descriptions contain fun(ny) characters */
 		GString *desc_clean = hex_decode(description);
 		GS_print(("description = %s\n", desc_clean->str));
-		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
-					desc_clean->str);
+		gui_set_statusbar (desc_clean->str);
+		/*gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
+					desc_clean->str);*/
 		g_string_free(desc_clean, TRUE);
 	}
 	return 1;
@@ -320,8 +321,8 @@ static gint show_separate_image(const gchar * filename, gboolean clicked)
 		} else {
 			gchar *buf = g_strdup_printf( 
 				_("Show %s in main window"), svalue);
-			gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
-						buf);
+			gui_set_statusbar (buf);
+			//gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), buf);
 			g_free(buf);
 		}
 	}
@@ -963,7 +964,8 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 	if (!clicked) {
 		gchar *name = g_strstr_len(url, 10, "://");
 		if (!name)
-			gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), url);
+			gui_set_statusbar (url);
+			//gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), url);
 		else {
 			name += 3;		// at name beginning.
 			gchar *slash = g_strstr_len(name, 20, "/");
@@ -976,8 +978,8 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 			if (mod_type == DICTIONARY_TYPE)
 				show_in_previewer(url);			
 			else
-				gnome_appbar_set_status
-				    (GNOME_APPBAR(widgets.appbar), url);
+				gui_set_statusbar (url);
+				//gnome_appbar_set_status (GNOME_APPBAR(widgets.appbar), url);
 		}
 		return 1;
 	}
