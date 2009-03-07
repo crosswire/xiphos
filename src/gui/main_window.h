@@ -131,6 +131,7 @@ void gui_show_main_window(void);
 #define	GS_KEY_L	76
 #define	GS_KEY_N	78
 #define	GS_KEY_P	80
+#define	GS_KEY_Q	81
 #define	GS_KEY_Z	90
 
 #define	GS_KEY_PLUS	187
