@@ -44,6 +44,30 @@
 
 /******************************************************************************
  * Name
+ *  on_menu_historyitem_activate
+ *
+ * Synopsis
+ *   #include "main/tab_history.h"
+ *
+ *   void on_menu_historyitem_activate(GtkMenuItem * menuitem, 
+ *						gpointer user_data)	
+ *
+ * Description
+ *   change text module to chosen histor item
+ *
+ * Return value
+ *   void
+ */
+
+void
+on_menu_historyitem_activate(GtkMenuItem * menuitem,
+			     gpointer user_data)
+{
+	main_change_verse_tab_history(GPOINTER_TO_INT(user_data));
+}
+
+/******************************************************************************
+ * Name
  *   main_clear_tab_history
  *
  * Synopsis
@@ -63,7 +87,7 @@ void main_clear_tab_history(void)
 	gint i;
 	PASSAGE_TAB_INFO *tab = NULL;
     
-    	if(!settings.browsing) return;
+    	//if(!settings.browsing) return;
 	
     	tab = (PASSAGE_TAB_INFO*) cur_passage_tab;
 
@@ -106,30 +130,8 @@ void main_clear_tab_history(void)
 
 void main_update_tab_history_menu(gpointer data)
 {
-	gint i;
-	gchar buf[80];
-	GnomeUIInfo *menuitem;
 	PASSAGE_TAB_INFO *tab = (PASSAGE_TAB_INFO*) data;
-	
-	gui_remove_menu_items(_("H_istory/<Separator>"),
-			      25); //tab->history_items + 1);
-	gui_add_separator2menu(widgets.app, _("H_istory/C_lear"));
-	
-	for (i = 0; i < tab->history_items; i++) {
-		menuitem = g_new(GnomeUIInfo, 2);
-		menuitem->type = GNOME_APP_UI_ITEM;
-		menuitem->moreinfo = (gpointer) on_menuHistoryitem1_activate;
-		menuitem->user_data = GINT_TO_POINTER(tab->history_list[i].itemnum);
-		menuitem->label = tab->history_list[i].verseref;
-		menuitem->pixmap_type = GNOME_APP_PIXMAP_STOCK;
-		menuitem->pixmap_info = GNOME_STOCK_BOOK_OPEN;
-		menuitem->accelerator_key = 0;
-		menuitem[1].type = GNOME_APP_UI_ENDOFINFO;
-		gnome_app_insert_menus_with_data(GNOME_APP(widgets.app), 
-						_("H_istory/<Separator>"),
-						menuitem, NULL);
-	}
-	/* set sensitivity of history buttons */
+	// * set sensitivity of history buttons * 
 	if (tab->current_history_item > 1)
 #ifdef OLD_NAVBAR
 		gtk_widget_set_sensitive(nav_bar.button_back, TRUE);
@@ -147,6 +149,7 @@ void main_update_tab_history_menu(gpointer data)
 
 	
 }
+
 
 /******************************************************************************
  * Name
@@ -176,7 +179,7 @@ void main_add_tab_history_item(gpointer data)
 	}
 	/* add item to history menu */
 	if (tab->history_items >= 24) {
-		for (i = 0; i < 24; i++) {
+		for (i = 0; i < 24; i++) { 
 			tab->history_list[i] = tab->history_list[i + 1];
 		}
 		tab->history_items = 23;
@@ -238,9 +241,7 @@ GtkWidget *main_versekey_drop_down_new(gpointer data)
 	GtkWidget *item;
 	unsigned long offset;
 	PASSAGE_TAB_INFO *tab = NULL;
-    
-    //	if(!settings.browsing) return NULL;
-	
+    	
 	tab = (PASSAGE_TAB_INFO*) data;
 	menu = gtk_menu_new();
 	item = gtk_menu_item_new_with_label(_("Clear History"));
@@ -256,7 +257,7 @@ GtkWidget *main_versekey_drop_down_new(gpointer data)
 		gtk_container_add(GTK_CONTAINER(menu), item);
 		g_signal_connect(GTK_OBJECT(item), "activate",
 				   G_CALLBACK
-				   (on_menuHistoryitem1_activate),
+				   (on_menu_historyitem_activate),
 				   GINT_TO_POINTER(tab->history_list[i].itemnum));	
 		if (!strcmp(tab->history_list[i].verseref, tab->text_commentary_key))
 			gtk_widget_set_sensitive(item,FALSE);
@@ -285,8 +286,6 @@ void main_change_verse_tab_history(gint historynum)
 {
 	gchar *url;
 	PASSAGE_TAB_INFO *tab = NULL;
-    
-    	//if(!settings.browsing) return;
 	
 	tab = (PASSAGE_TAB_INFO*) cur_passage_tab;
 	
@@ -331,8 +330,6 @@ void main_change_verse_tab_history(gint historynum)
 void main_navigate_tab_history(gint direction)
 {
 	PASSAGE_TAB_INFO *tab = NULL;
-    
- //   	if(!settings.browsing) return;
     
 	tab = (PASSAGE_TAB_INFO*) cur_passage_tab;
 	settings.addhistoryitem = FALSE;

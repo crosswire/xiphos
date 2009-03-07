@@ -52,6 +52,21 @@ static DIALOG_DATA * dialog = NULL;
 static int is_dialog = 0;
 
 
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *   
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   
+ */
 
 gint  _get_type_mod_list (void)
 {
@@ -74,6 +89,22 @@ gint  _get_type_mod_list (void)
 	}
 }
 
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *   
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   
+ */
 
 gchar * _get_key (gchar * mod_name) 
 {
@@ -98,6 +129,22 @@ gchar * _get_key (gchar * mod_name)
     	return key;
 }
 
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *   
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   
+ */
 
 GtkWidget * _get_html (void)
 {
@@ -168,6 +215,22 @@ void _global_option_main_pane(GtkMenuItem * menuitem, const gchar * option)
 }
 
 
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *   
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   
+ */
+
 static void on_edit_percomm_activate (GtkMenuItem * menuitem, gpointer user_data)
 {
 	gchar *key = NULL;
@@ -187,6 +250,22 @@ static void on_edit_percomm_activate (GtkMenuItem * menuitem, gpointer user_data
 }
 
 
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *   
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   
+ */
+
 static void on_edit_prayerlist_activate (GtkMenuItem * menuitem, gpointer user_data)
 {
     	GS_message(("settings.book_key: %s",(char*)(is_dialog ?
@@ -201,6 +280,22 @@ static void on_edit_prayerlist_activate (GtkMenuItem * menuitem, gpointer user_d
 }
 
 
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *   
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   
+ */
+
 void on_popup_about_activate (GtkMenuItem * menuitem, gpointer user_data)
 {
 	gui_display_about_module_dialog((is_dialog ?
@@ -209,6 +304,22 @@ void on_popup_about_activate (GtkMenuItem * menuitem, gpointer user_data)
 					FALSE);
 }
 
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *   
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   
+ */
 
 void on_popup_bookmark_activate        (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
@@ -232,6 +343,22 @@ void on_popup_bookmark_activate        (GtkMenuItem     *menuitem,
 }
 
 
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *   
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   
+ */
+
 void on_popup_export_passage_activate  (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {	
@@ -240,6 +367,22 @@ void on_popup_export_passage_activate  (GtkMenuItem     *menuitem,
 	gui_export_dialog();
 }
 
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *   
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   
+ */
 
 void on_popup_print_activate           (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
@@ -266,12 +409,44 @@ void on_popup_print_activate           (GtkMenuItem     *menuitem,
 }
 
 
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *   
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   
+ */
+
 void on_close_activate           (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
 	/* FIXME */    
 }
 
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *   
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   
+ */
 
 void on_popup_copy_activate            (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
@@ -292,6 +467,22 @@ void on_popup_copy_activate            (GtkMenuItem     *menuitem,
 }
 
 
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *   
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   
+ */
+
 void on_popup_find_activate            (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
@@ -301,6 +492,22 @@ void on_popup_find_activate            (GtkMenuItem     *menuitem,
 		gui_find_dlg (_get_html (), menu_mod_name, FALSE, NULL);    
 }
 
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *   
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   
+ */
 
 void on_popup_font_activate (GtkMenuItem * menuitem, gpointer user_data)
 {
@@ -328,6 +535,22 @@ void on_popup_font_activate (GtkMenuItem * menuitem, gpointer user_data)
 }
 
 
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *   
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   
+ */
+
 void on_words_of_chist_in_red_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
    	_global_option_main_pane((GtkMenuItem*)menuitem, 
@@ -335,11 +558,43 @@ void on_words_of_chist_in_red_activate (GtkCheckMenuItem * menuitem, gpointer us
 }
 
 
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *   
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   
+ */
+
 void on_strong_s_numbers_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
 	_global_option_main_pane((GtkMenuItem*)menuitem, "Strong's Numbers"); /* string not seen by user */
 }
 
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *   
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   
+ */
 
 void on_morphological_tags_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
@@ -347,11 +602,43 @@ void on_morphological_tags_activate (GtkCheckMenuItem * menuitem, gpointer user_
 }
 
 
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *   
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   
+ */
+
 void on_footnotes_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
 	_global_option_main_pane((GtkMenuItem*)menuitem, "Footnotes"); /* string not seen by user */
 }
 
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *   
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   
+ */
 
 void on_greek_accents_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
@@ -359,11 +646,43 @@ void on_greek_accents_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 }
 
 
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *   
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   
+ */
+
 void on_lemmas_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
 	_global_option_main_pane((GtkMenuItem*)menuitem, "Lemmas"); /* string not seen by user */
 }
 
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *   
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   
+ */
 
 void on_scripture_cross_references_activate (GtkCheckMenuItem * menuitem,
                                         	gpointer user_data)
@@ -372,12 +691,44 @@ void on_scripture_cross_references_activate (GtkCheckMenuItem * menuitem,
 }
 
 
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *   
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   
+ */
+
 void on_hebrew_vowel_points_activate (GtkCheckMenuItem * menuitem,
                                         gpointer user_data)
 {
 	_global_option_main_pane((GtkMenuItem*)menuitem, "Hebrew Vowel Points"); /* string not seen by user */
 }
 
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *   
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   
+ */
 
 void on_hebrew_cantillation_activate (GtkCheckMenuItem * menuitem,
                                         gpointer user_data)
@@ -386,22 +737,86 @@ void on_hebrew_cantillation_activate (GtkCheckMenuItem * menuitem,
 }
 
 
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *   
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   
+ */
+
 void on_headings_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
 	_global_option_main_pane((GtkMenuItem*)menuitem, "Headings"); /* string not seen by user */
 }
 
 
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *   
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   
+ */
+
 void on_transliteration_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
 	_global_option_main_pane((GtkMenuItem*)menuitem, "Transliteration"); /* string not seen by user */
 }
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *   
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   
+ */
 
 void on_commentary_by_chapter_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
    	_global_option_main_pane((GtkMenuItem*)menuitem, "Commentary by Chapter"); /* string not seen by user */
 }
 
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *   
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   
+ */
 
 void on_primary_reading_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
@@ -427,6 +842,22 @@ void on_primary_reading_activate (GtkCheckMenuItem * menuitem, gpointer user_dat
 }
 
 
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *   
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   
+ */
+
 void on_secondary_reading_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {	
     	gchar *key = NULL;
@@ -450,6 +881,22 @@ void on_secondary_reading_activate (GtkCheckMenuItem * menuitem, gpointer user_d
 	}
 }
 
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *   
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   
+ */
 
 void on_all_readings_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {	
@@ -476,17 +923,65 @@ void on_all_readings_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 }
 
 
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *   
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   
+ */
+
 void on_image_content_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
 	_global_option_main_pane((GtkMenuItem*)menuitem, "Image Content"); /* string not seen by user */
 }
 
 
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *   
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   
+ */
+
 void on_respect_font_faces_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
 	_global_option_main_pane((GtkMenuItem*)menuitem, "Respect Font Faces"); /* string not seen by user */
 }
 
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *   
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   
+ */
 
 void on_unlock_this_module_activate (GtkMenuItem * menuitem, gpointer user_data)
 {
@@ -511,6 +1006,22 @@ void on_unlock_this_module_activate (GtkMenuItem * menuitem, gpointer user_data)
 }
 
 
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *   
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   
+ */
+
 void on_display_book_heading_activate (GtkMenuItem * menuitem, gpointer user_data)
 {
 	if (is_dialog)
@@ -520,6 +1031,22 @@ void on_display_book_heading_activate (GtkMenuItem * menuitem, gpointer user_dat
 }
 
 
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *   
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   
+ */
+
 void on_display_chapter_heading_activate (GtkMenuItem * menuitem, gpointer user_data)
 {
 	if (is_dialog)
@@ -528,6 +1055,22 @@ void on_display_chapter_heading_activate (GtkMenuItem * menuitem, gpointer user_
 		main_chapter_heading (menu_mod_name);
 }
 
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *   
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   
+ */
 
 void on_use_current_dictionary_activate (GtkMenuItem * menuitem, gpointer user_data)
 {			
@@ -546,6 +1089,22 @@ void on_use_current_dictionary_activate (GtkMenuItem * menuitem, gpointer user_d
 #endif
 }
 
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *   
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   
+ */
 
 void on_rename_perscomm_activate (GtkMenuItem * menuitem, gpointer user_data)
 {
@@ -682,11 +1241,43 @@ out1:
 }
 
 
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *   
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   
+ */
+
 void on_dump_perscomm_activate (GtkMenuItem * menuitem, gpointer user_data)
 {
 	main_sidebar_perscomm_dump ();
 }
 
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *   
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   
+ */
 
 void on_read_selection_aloud_activate (GtkMenuItem * menuitem, gpointer user_data)
 {
@@ -966,14 +1557,30 @@ static void _lookup_selection(GtkMenuItem *menuitem,
 }
 
 
-static GtkWidget * _create_popup_menu ( const gchar * mod_name,
-					DIALOG_DATA * d)
+/******************************************************************************
+ * Name
+ *   _create_popup_menu
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *   GtkWidget * _create_popup_menu ( const gchar * mod_name, DIALOG_DATA * d)
+ *
+ * Description
+ *   creates the needed popup and returns it to gui_menu_popup ()
+ *
+ * Return value
+ *   GtkWidget*
+ */
+
+static 
+GtkWidget * _create_popup_menu ( const gchar * mod_name, DIALOG_DATA * d)
 {
 	gchar *glade_file;
 	GladeXML *gxml;
     	const gchar *mname = NULL;
 	
-	glade_file = gui_general_user_file ("popups.glade", FALSE);
+	glade_file = gui_general_user_file ("xi-menus.glade", FALSE);
 	g_return_if_fail (glade_file != NULL);
 	
 	gxml = glade_xml_new (glade_file, "menu_popup", NULL);
@@ -984,6 +1591,8 @@ static GtkWidget * _create_popup_menu ( const gchar * mod_name,
 	GtkWidget *menu 	= glade_xml_get_widget (gxml, "menu_popup");
     
 	GtkWidget *about 	= glade_xml_get_widget (gxml, "about");
+	//GtkWidget *image = 
+	//gtk_image_menu_item_set_image ((GtkImageMenuItem *)about, image);
 	GtkWidget *bookmark	= glade_xml_get_widget (gxml, "bookmark");
 	GtkWidget *open 	= glade_xml_get_widget (gxml, "open_module2"); /*  */
 	GtkWidget *export_	= glade_xml_get_widget (gxml, "export_passage");
@@ -1025,7 +1634,7 @@ static GtkWidget * _create_popup_menu ( const gchar * mod_name,
 		mname = dialog->mod_name;
 	    	gtk_widget_hide (open);
 	    	gtk_widget_hide (bookmark);
-	    	gtk_widget_hide (export_);		
+	    	gtk_widget_hide (export_);
 	} else {
 		mname = mod_name;
 	    	gtk_widget_hide (close);	    
@@ -1100,8 +1709,25 @@ static GtkWidget * _create_popup_menu ( const gchar * mod_name,
 	return menu;
 }
 
-void gui_menu_popup (const gchar * mod_name,
-			DIALOG_DATA * d)
+/******************************************************************************
+ * Name
+ *   gui_menu_popup
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *   void gui_menu_popup (const gchar * mod_name, DIALOG_DATA * d)
+ *
+ * Description
+ *   determens if a main window or dialog popup is needed
+ *   and calls _create_popup_menu() to create the menu and
+ *   then pops the menu up
+ *
+ * Return value
+ *   void
+ */
+
+void gui_menu_popup (const gchar * mod_name, DIALOG_DATA * d)
 {
 	GtkWidget *menu;
     

@@ -70,6 +70,21 @@ void gui_set_progressbar_text(GtkWidget * pb, gchar * text)
 	}  
 }
 
+void gui_set_statusbar (const gchar * message)
+{
+	static guint context_id = 0;
+	gtk_statusbar_pop (GTK_STATUSBAR(widgets.appbar), context_id);
+	context_id =
+		gtk_statusbar_get_context_id (GTK_STATUSBAR (widgets.appbar),
+                                       		message);
+	
+	context_id =
+		gtk_statusbar_push (GTK_STATUSBAR(widgets.appbar),
+                                    context_id,
+                                    message);
+	GS_message (("context_id: %d\nmessage: %s",context_id,message));
+	
+}
 
 void gui_set_progressbar_fraction(GtkWidget * pb, gdouble fraction)
 {

@@ -26,37 +26,8 @@
 extern "C" {
 #endif
 
-void gui_about_activate(GtkMenuItem * menuitem, gpointer user_data);
-void on_daily_devotion1_activate(GtkMenuItem *menuitem, 
-				 gpointer user_data);	
-void on_help_contents_activate(GtkMenuItem * menuitem,
-			       gpointer user_data);
-void on_menuHistoryitem1_activate(GtkMenuItem * menuitem,
-				  gpointer user_data);
-/*void on_verse_style1_activate(GtkCheckMenuItem * menuitem,
-				gpointer user_data);*/
-void on_exit1_activate(GtkMenuItem * menuitem, 
-		       gpointer user_data);
-void on_clear1_activate(GtkMenuItem * menuitem,
-			gpointer user_data);
-void on_about_xiphos1_activate(GtkMenuItem * menuitem,
-				   gpointer user_data);
-void on_preferences1_activate(GtkMenuItem * menuitem,
-			      gpointer user_data);
-void on_about_the_sword_project1_activate(GtkMenuItem * menuitem,
-					  gpointer user_data);
-void on_about_translation_activate(GtkMenuItem * menuitem,
-				   gpointer user_data);
-void on_auto_save_notes1_activate(GtkMenuItem * menuitem,
-				  gpointer user_data);
-void on_search_activate(GtkMenuItem * menuitem,
-			gpointer user_data);
-void on_save_tabs(GtkMenuItem * menuitem,
-		  gpointer user_data);
-void on_load_tabs(GtkMenuItem * menuitem,
-		  gpointer user_data);
-void gui_create_main_menu(GtkWidget *app);
-void gui_install_menu_hints(GtkWidget *app);
+
+GtkWidget * gui_create_main_menu(void);
 void gui_parallel_tab_activate(GtkCheckMenuItem * menuitem, gpointer user_data);
 	
 #ifdef __cplusplus

@@ -1,6 +1,7 @@
 /*
  * Xiphos Bible Study Tool
- * mod_global_ops.c - setup for SWORD global options in the gui
+ * mod_global_ops.c - setup for SWORD global options and 
+ *                    a few of our own in the gui
  *
  * Copyright (C) 2000-2008 Xiphos Developer Team
  *
@@ -37,10 +38,10 @@
 #include "main/settings.h"
 #include "main/parallel_view.h"
 
-//#include "backend/sword.h"
 #include "backend/sword_main.hh"
 
-static void set_dialog_global_option(BackEnd *be,
+
+static void _set_dialog_global_option(BackEnd *be,
 				     const char *option,
 				     gboolean choice)
 {
@@ -52,7 +53,7 @@ static void set_dialog_global_option(BackEnd *be,
 }
 
 
-static void set_dialog_global_textual(BackEnd *be,
+static void _set_dialog_global_textual(BackEnd *be,
 				      const char *option,
 				      const char *choice)
 {
@@ -62,7 +63,7 @@ static void set_dialog_global_textual(BackEnd *be,
 }
 
 
-static void set_global_option(int manager,
+static void _set_global_option(int manager,
 			      const char *option,
 			      gboolean choice)
 {
@@ -76,7 +77,7 @@ static void set_global_option(int manager,
 }
 
 
-static void set_global_textual(int manager,
+static void _set_global_textual(int manager,
 			       const char *option,
 			       const char *choice)
 {
@@ -148,39 +149,39 @@ void main_dialog_set_global_options(gpointer backend,
 {
 	BackEnd* b = (BackEnd*)backend;
 	
-	set_dialog_global_option(b, "Strong's Numbers",
+	_set_dialog_global_option(b, "Strong's Numbers",
 				 ops->strongs);
-	set_dialog_global_option(b, "Morphological Tags",
+	_set_dialog_global_option(b, "Morphological Tags",
 				 ops->morphs);
-	set_dialog_global_option(b, "Footnotes",
+	_set_dialog_global_option(b, "Footnotes",
 				 ops->footnotes);
-	set_dialog_global_option(b, "Greek Accents",
+	_set_dialog_global_option(b, "Greek Accents",
 				 ops->greekaccents);
-	set_dialog_global_option(b, "Lemmas",
+	_set_dialog_global_option(b, "Lemmas",
 				 ops->lemmas);
-	set_dialog_global_option(b, "Cross-references",
+	_set_dialog_global_option(b, "Cross-references",
 				 ops->scripturerefs);
-	set_dialog_global_option(b, "Hebrew Vowel Points",
+	_set_dialog_global_option(b, "Hebrew Vowel Points",
 				 ops->hebrewpoints);
-	set_dialog_global_option(b, "Hebrew Cantillation",
+	_set_dialog_global_option(b, "Hebrew Cantillation",
 				 ops->hebrewcant);
-	set_dialog_global_option(b, "Headings",
+	_set_dialog_global_option(b, "Headings",
 				 ops->headings);
-	set_dialog_global_option(b, "Words of Christ in Red",
+	_set_dialog_global_option(b, "Words of Christ in Red",
 				 ops->words_in_red);
-
-	set_dialog_global_textual(b, "Transliteration",
+	
+	_set_dialog_global_textual(b, "Transliteration",
 				  (ops->transliteration
 				   ? "Latin" : "Off"));
 
 	if (ops->variants_primary)
-		set_dialog_global_textual(b, "Textual Variants", 
+		_set_dialog_global_textual(b, "Textual Variants", 
 					  "Primary Reading");
 	else if (ops->variants_secondary)
-		set_dialog_global_textual(b, "Textual Variants",
+		_set_dialog_global_textual(b, "Textual Variants",
 					  "Secondary Reading");
 	else if (ops->variants_all)
-		set_dialog_global_textual(b, "Textual Variants",
+		_set_dialog_global_textual(b, "Textual Variants",
 					  "All Readings");
 }
 
@@ -203,144 +204,40 @@ void main_dialog_set_global_options(gpointer backend,
 
 void main_set_global_options(GLOBAL_OPS * ops)
 {
-	set_global_option(ops->module_type, "Strong's Numbers",
+	_set_global_option(ops->module_type, "Strong's Numbers",
 			  ops->strongs);
-	set_global_option(ops->module_type, "Morphological Tags",
+	_set_global_option(ops->module_type, "Morphological Tags",
 			  ops->morphs);
-	set_global_option(ops->module_type, "Footnotes",
+	_set_global_option(ops->module_type, "Footnotes",
 			  ops->footnotes);
-	set_global_option(ops->module_type, "Greek Accents",
+	_set_global_option(ops->module_type, "Greek Accents",
 			  ops->greekaccents);
-	set_global_option(ops->module_type, "Lemmas",
+	_set_global_option(ops->module_type, "Lemmas",
 			  ops->lemmas);
-	set_global_option(ops->module_type, "Cross-references",
+	_set_global_option(ops->module_type, "Cross-references",
 			  ops->scripturerefs);
-	set_global_option(ops->module_type, "Hebrew Vowel Points",
+	_set_global_option(ops->module_type, "Hebrew Vowel Points",
 			  ops->hebrewpoints);
-	set_global_option(ops->module_type, "Hebrew Cantillation",
+	_set_global_option(ops->module_type, "Hebrew Cantillation",
 			  ops->hebrewcant);
-	set_global_option(ops->module_type, "Headings",
+	_set_global_option(ops->module_type, "Headings",
 			  ops->headings);
-	set_global_option(ops->module_type, "Words of Christ in Red",
+	_set_global_option(ops->module_type, "Words of Christ in Red",
 			  ops->words_in_red);
 
-	set_global_textual(ops->module_type, "Transliteration",
+	_set_global_textual(ops->module_type, "Transliteration",
 			   (ops->transliteration
 			    ? "Latin" : "Off"));
 
 	if (ops->variants_primary)
-		set_global_textual(ops->module_type, "Textual Variants", 
+		_set_global_textual(ops->module_type, "Textual Variants", 
 				   "Primary Reading");
 	else if (ops->variants_secondary)
-		set_global_textual(ops->module_type, "Textual Variants",
+		_set_global_textual(ops->module_type, "Textual Variants",
 				   "Secondary Reading");
 	else if (ops->variants_all)
-		set_global_textual(ops->module_type, "Textual Variants",
+		_set_global_textual(ops->module_type, "Textual Variants",
 				   "All Readings");
-}
-
-
-/******************************************************************************
- * Name
- *   main_set_strongs_morphs_off
- *
- * Synopsis
- *   #include "gui/mod_global_ops.h"
- *
- *   void main_set_strongs_morphs_off(GLOBAL_OPS * ops)	
- *
- * Description
- *   set module global options
- *
- * Return value
- *   void
- */
-
-void main_set_strongs_morphs_off(GLOBAL_OPS * ops)
-{
-	set_global_option(ops->module_type, "Strong's Numbers",
-			  FALSE);
-	set_global_option(ops->module_type, "Morphological Tags",
-			  FALSE);
-
-}
-
-
-/******************************************************************************
- * Name
- *   main_set_strongs_morphs
- *
- * Synopsis
- *   #include "gui/mod_global_ops.h"
- *
- *   void main_set_strongs_morphs(GLOBAL_OPS * ops)	
- *
- * Description
- *   set module global options
- *
- * Return value
- *   void
- */
-
-void main_set_strongs_morphs(GLOBAL_OPS * ops)
-{
-	set_global_option(ops->module_type, "Strong's Numbers",
-			  TRUE); //ops->strongs);
-	set_global_option(ops->module_type, "Morphological Tags",
-			  TRUE); //ops->morphs);
-
-}
-
-
-/******************************************************************************
- * Name
- *   main_set_dialog_strongs_morphs_off
- *
- * Synopsis
- *   #include "gui/mod_global_ops.h"
- *
- *   void main_set_dialog_strongs_morphs_off(GLOBAL_OPS * ops)	
- *
- * Description
- *   set module global options
- *
- * Return value
- *   void
- */
-
-void main_set_dialog_strongs_morphs_off(gpointer backend,
-					GLOBAL_OPS * ops)
-{
-	BackEnd* be = (BackEnd*)backend;
-	
-	set_dialog_global_option(be, "Strong's Numbers", FALSE);
-	set_dialog_global_option(be, "Morphological Tags", FALSE);
-}
-
-
-/******************************************************************************
- * Name
- *   main_set_dialog_strongs_morphs
- *
- * Synopsis
- *   #include "gui/mod_global_ops.h"
- *
- *   void main_set_dialog_strongs_morphs(GLOBAL_OPS * ops)	
- *
- * Description
- *   set module global options
- *
- * Return value
- *   void
- */
-
-void main_set_dialog_strongs_morphs(gpointer backend,
-				    GLOBAL_OPS * ops)
-{
-	BackEnd* be = (BackEnd*)backend;
-	
-	set_dialog_global_option(be, "Strong's Numbers", TRUE);
-	set_dialog_global_option(be, "Morphological Tags", TRUE);
 }
 
 
@@ -411,7 +308,6 @@ GLOBAL_OPS *main_new_globals(gchar * mod_name, int dialog)
 	    (ops->variants_primary == FALSE) &&
 	    (ops->variants_secondary == FALSE)) {
 		ops->variants_primary = TRUE;
-		//main_save_module_options(mod_name, "Primary Reading", 1);
 	}
 
 	ops->image_content =

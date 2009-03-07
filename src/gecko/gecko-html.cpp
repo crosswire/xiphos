@@ -39,6 +39,7 @@
 #include "main/url.hh"
 
 #include "gui/widgets.h"
+#include "gui/utilities.h"
 
 #include "gecko/gecko-html.h"
 #include "gecko/gecko-services.h"
@@ -124,7 +125,8 @@ static void html_link_message(GtkMozEmbed * embed)
 		return;
 	
 	if (!strlen(url)) { //* moved out of url - clear appbar - info viewer*
-		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), "");
+		gui_set_statusbar ("");
+		//gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), "");
 		in_url = FALSE;
 		//*if(GPOINTER_TO_INT(data) == TEXT_TYPE)
 		//	main_clear_viewer();*
@@ -169,7 +171,8 @@ static void html_link_message(GtkMozEmbed * embed)
 			sprintf(buf, "%s %s", _("Unlock "), url);
 		} else //* any other link *
 			sprintf(buf, "%s", "");
-		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), buf);
+		gui_set_statusbar (buf);
+		//gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), buf);
 	}
 }
 

@@ -47,6 +47,7 @@ extern "C" {
 #include "gui/sidebar.h"
 #include "gui/widgets.h"
 #include "gui/dialog.h"
+#include "gui/utilities.h"
 
 #include "backend/sword_main.hh"
 
@@ -138,7 +139,8 @@ static void fill_search_results_list(int finds)
 	num = main_format_number(finds);
 	sprintf(buf, "%s %s", num, buf1);
 	g_free(num);
-	gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), buf);
+	gui_set_statusbar (buf);
+	//gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), buf);
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_sidebar),3);
 	/* cleanup progress bar */
 	gtk_progress_bar_update(GTK_PROGRESS_BAR(ss.progressbar_search),

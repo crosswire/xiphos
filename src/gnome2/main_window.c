@@ -23,7 +23,7 @@
 #include <config.h>
 #endif
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 
 #ifdef USE_GTKMOZEMBED
 #include "gecko/gecko-html.h"
@@ -309,33 +309,6 @@ void gui_change_window_title(gchar * module_name)
 }
 
 
-/******************************************************************************
- * Name
- *   on_mainwindow_destroy
- *
- * Synopsis
- *   #include "gui/main_window.h"
- *
- *   void on_mainwindow_destroy(GtkObject * object, gpointer user_data)
- *
- * Description
- *    shutdown xiphos
- *
- * Return value
- *   void
- */
-/*
-static void on_mainwindow_destroy(GtkObject * object,
-				  gpointer user_data)
-{
-	shutdown_frontend();
-	// * shutdown the sword stuff *
-	main_shutdown_backend();
-	gtk_main_quit();
-	gtk_exit(0);
-}
-*/
-
 static gboolean  delete_event (GtkWidget *widget,
                                             GdkEvent *event,
                                             gpointer user_data)
@@ -401,44 +374,6 @@ static gboolean epaned_button_release_event(GtkWidget * widget,
 		}
 		return FALSE;
 	}
-}
-
-
-/******************************************************************************
- * Name
- *
- *
- * Synopsis
- *   #include "gui/main_window.h"
- *
- *
- *
- * Description
- *
- *
- * Return value
- *   void
- */
-
-void gui_search_appbar_update(char percent, void *userData)
-{
-	char maxHashes = *((char *) userData);
-	float num;
-	char buf[80];
-	static char printed = 0;
-
-	while (gtk_events_pending())
-		gtk_main_iteration();
-	while ((((float) percent) / 100) * maxHashes > printed) {
-		sprintf(buf, "%f", (((float) percent) / 100));
-		num = (float) percent / 100;
-/*		gnome_appbar_set_progress((GnomeAppBar *) widgets.
-					  appbar, num);*/
-		printed++;
-	}
-	while (gtk_events_pending())
-		gtk_main_iteration();
-	printed = 0;
 }
 
 
@@ -703,7 +638,7 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 		break;
 	case GS_KEY_F2: // F2 preferences
 		if (state == 0)
-			on_preferences1_activate(NULL, NULL);
+			on_preferences_activate(NULL, NULL);
 		break;
 	case GS_KEY_F3: // F3 search
 		if (state == 0)
@@ -711,7 +646,7 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 		break;
 	case GS_KEY_F4: // F4 module manager
 		if (state == 0)
-			on_mod_mgr(NULL, NULL);
+			on_module_manager_activate (NULL, NULL);
 		break;
 	}
 	GS_message(("on_vbox1_key_press_event\nkeycode: %d, state: %d",
@@ -751,9 +686,8 @@ gboolean on_vbox1_key_release_event(GtkWidget * widget,
 
 void create_mainwindow(void)
 {
-	GtkWidget *dock1;
 	GtkWidget *vbox_gs;
-	//GtkWidget *vboxMain;
+	GtkWidget *menu;
 	GtkWidget *hbox2;
 	GtkWidget *swInt;
 	GtkWidget *hbox25;
@@ -765,6 +699,8 @@ void create_mainwindow(void)
 	GtkWidget *scrolledwindow;
 	GtkWidget *box_book;
 	GtkWidget *frame;
+	GtkWidget *image;
+	GdkPixbuf* pixbuf;
 	/*
 	GTK_SHADOW_NONE
   	GTK_SHADOW_IN
@@ -780,25 +716,26 @@ void create_mainwindow(void)
 
 	widgets.studypad_dialog = NULL;
 
-	widgets.app =
-	    gnome_app_new("xiphos",
-			  _("Xiphos - Bible Study Software"));
+	widgets.app = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+	gtk_window_set_title (GTK_WINDOW (widgets.app), _("Xiphos - Bible Study Software"));
+	
 	gtk_object_set_data(GTK_OBJECT(widgets.app),
 			    "widgets.app", widgets.app);
 	gtk_widget_set_size_request(widgets.app, 680, 425);
 	GTK_WIDGET_SET_FLAGS(widgets.app, GTK_CAN_FOCUS);
 	gtk_window_set_resizable(GTK_WINDOW(widgets.app), TRUE);
-	gnome_window_icon_set_default_from_file
-	    (image_locator("gs2-48x48.png"));
-
-	dock1 = GNOME_APP(widgets.app)->dock;
-	gtk_widget_show(dock1);
-
-	gui_create_main_menu(widgets.app);
+	
+	image = gtk_image_new_from_file (image_locator("gs2-48x48.png"));
+	pixbuf = gtk_image_get_pixbuf (GTK_IMAGE(image));
+	gtk_window_set_icon (GTK_WINDOW(widgets.app), pixbuf);
 
 	vbox_gs = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox_gs);
-	gnome_app_set_contents(GNOME_APP(widgets.app), vbox_gs);
+	gtk_container_add (GTK_CONTAINER (widgets.app), vbox_gs);
+	
+	menu = gui_create_main_menu ();
+
+	gtk_box_pack_start(GTK_BOX(vbox_gs), menu, FALSE, TRUE, 0);
 
 	hbox25 = gtk_hbox_new(FALSE, 0);
 	gtk_widget_show(hbox25);
@@ -938,12 +875,7 @@ void create_mainwindow(void)
 	gtk_widget_show(widgets.vbox_previewer);
 	gtk_container_set_border_width (GTK_CONTAINER (widgets.vbox_previewer), 1);
 	gtk_paned_pack2(GTK_PANED(widgets.vpaned), widgets.vbox_previewer, TRUE, TRUE);
-	/*
-	widgets.previewer = gtk_vbox_new(FALSE, 6);
-	gtk_widget_show(widgets.previewer);
-	gtk_box_pack_start(GTK_BOX(widgets.vbox_previewer), widgets.previewer, 
-				TRUE, TRUE,
-			   	0);*/
+	
 	gtk_container_set_border_width(GTK_CONTAINER(widgets.vbox_previewer), 2);
 	
 #ifdef USE_GTKMOZEMBED 
@@ -1042,22 +974,21 @@ void create_mainwindow(void)
 	/*
 	 * end  dict/lex
 	 */
-
-	widgets.appbar = gnome_appbar_new(FALSE, TRUE,
-					  GNOME_PREFERENCES_NEVER);
+	
+	widgets.appbar = gtk_statusbar_new ();
+	
 	gtk_widget_show(widgets.appbar);
-	gnome_app_set_statusbar(GNOME_APP(widgets.app), widgets.appbar);
-
-	gui_install_menu_hints(widgets.app);
-
-
-
-  g_signal_connect ((gpointer) vbox_gs, "key_press_event",
-                    G_CALLBACK (on_vbox1_key_press_event),
-                    NULL);
-  g_signal_connect ((gpointer) vbox_gs, "key_release_event",
-                    G_CALLBACK (on_vbox1_key_release_event),
-                    NULL);
+	gtk_statusbar_set_has_resize_grip (GTK_STATUSBAR(widgets.appbar),
+                                           TRUE);
+	gtk_box_pack_start(GTK_BOX(vbox_gs), widgets.appbar, FALSE, TRUE, 0);
+	gui_set_statusbar (_("Welcome to Xiphos"));
+	
+	g_signal_connect ((gpointer) vbox_gs, "key_press_event",
+		    G_CALLBACK (on_vbox1_key_press_event),
+		    NULL);
+	g_signal_connect ((gpointer) vbox_gs, "key_release_event",
+		    G_CALLBACK (on_vbox1_key_release_event),
+		    NULL);
 
 	g_signal_connect(GTK_OBJECT(widgets.notebook_comm_book),
 			   "switch_page",
@@ -1103,24 +1034,6 @@ void create_mainwindow(void)
                                              settings.gs_width,
                                              settings.gs_hight);
 	main_window_created = TRUE;
-}
-
-/*
-void new_main_window(void)
-{
-	gchar *glade_file;
-	GladeXML *gxml;
-	
-	glade_file =
-	    gui_general_user_file("main-window.glade", FALSE);
-	g_return_if_fail(glade_file != NULL);
-	g_message(glade_file);
-
-//	** build the widget **
-	gxml = glade_xml_new(glade_file, "main-window", NULL);
-
-	
-	
 }
 
 

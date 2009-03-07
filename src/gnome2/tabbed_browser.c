@@ -173,7 +173,7 @@ void set_current_tab (PASSAGE_TAB_INFO *pt)
 	}
 	cur_passage_tab = pt;
 	if (pt != NULL && pt->button_close != NULL) {
-		main_update_tab_history_menu((PASSAGE_TAB_INFO*)pt);
+		//main_update_tab_history_menu((PASSAGE_TAB_INFO*)pt);
 		//gtk_widget_set_sensitive(pt->button_close, TRUE);
 		gtk_widget_show (pt->button_close);
 		gtk_widget_hide (pt->close_pixmap);
