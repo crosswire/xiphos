@@ -16,6 +16,7 @@ def configure(conf):
         editor_dir = os.path.join(src_dir, 'src', 'editor')
             
         cmd = sub('${ORBIT_IDL} --output-dir=%s -I%s ${BONOBO_IDL_INCLUDES} -I${GTKHTML_DATA}/gtkhtml ${GTKHTML_DATA}/Editor.idl' % (editor_dir, src_dir), env)
+        print cmd
         # generate
         os.system(cmd)
 
