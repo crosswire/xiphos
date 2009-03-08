@@ -1,6 +1,11 @@
 #! /usr/bin/env python
 # encoding: utf-8
 
+# defines not needed anymore
+
+#  SUSE_10_2
+#  USE_GTKHTML38_3_13 
+
 import sys
 if sys.version_info < (2,3):
     raise RuntimeError("Python 2.3 or newer is required")
@@ -11,6 +16,7 @@ import intltool, gnome
 from os.path import join, dirname, abspath
 
 from waffles.gecko import Gecko
+from waffles.gtkhtml import Gtkhtml
 from waffles.misc import okmsg
 
 # the following two variables are used by the target "waf dist"
@@ -22,7 +28,6 @@ APPNAME='xiphos'
 srcdir = '.'
 blddir = 'build'
 
-gtkhtml_api = '3.14'
 
 def set_options(opt):
 
@@ -41,9 +46,6 @@ def set_options(opt):
     opt.add_option('--enable-gtkhtml', action='store_true', default=False,
             dest='gtkhtml',
             help='Use gtkhtml instead of gtkmozembed [Default: False]')
-
-    opt.add_option('--enable-opensuse102', action='store_true', default=False,
-            dest='opensuse102', help='Use opensuse102 [Default: False]')
 
     opt.add_option('--enable-maintainer-mode', action='store_true',
             default=False, dest='maintainer_mode',
@@ -90,10 +92,6 @@ def configure(conf):
         dfn('USE_PREVIEWER_AUTOCLEAR', 1)
     if opt.old_navbar:
         dfn('OLD_NAVBAR ', 1)
-    if opt.gtkhtml:
-        dfn('GTKHTML', 1)
-    if opt.opensuse102:
-        dfn('SUSE_10_2', 1)
     if opt.maintainer_mode:
         dfn('MAINTAINER_MODE', 1)
 
@@ -128,62 +126,26 @@ def configure(conf):
             atleast_version='2.0.0', mandatory=True, args='--cflags --libs')
     conf.check_cfg(package='libgnomeprint-2.2', uselib_store='GNOMEPRINT',
             atleast_version='2.0.0', mandatory=True, args='--cflags --libs')
+
+
+
+    ### editor.py
     conf.check_cfg(package='ORBit-2.0', uselib_store='ORBIT',
             atleast_version='2.0.0', mandatory=True, args='--cflags --libs')
-
     conf.check_cfg(package='libbonobo-2.0', uselib_store='BONOBO',
             atleast_version='2.0.0', mandatory=True, args='--cflags --libs')
     conf.check_cfg(package='bonobo-activation-2.0', uselib_store='BONOBOACTIV',
             atleast_version='2.0.0', mandatory=True, args='--cflags --libs')
+    ### END editor.py
 
 
-    # TODO: more precise detection
-    # GTKHTML API 3.14 - check newer version first
-    if conf.check_cfg(package='libgtkhtml-3.14', uselib_store='GTKHTML',
-            atleast_version='3.14.0', args='--cflags --libs'):
-        # Define if you want to use GtkHtml-3.8 */
-        dfn('USE_GTKHTML38', 1)
-        # Define if you want to use GtkHtml-3.14 */
-        dfn('USE_GTKHTML3_14', 1)
 
-        # gtkhtml >=3.23 don't need generating sources form Editor.idl
-        if conf.check_cfg(package='libgtkhtml-3.14', atleast_version='3.23',
-                args='--modversion'):
-            env['HAVE_GTKHTML3_23'] = True
-            dfn('USE_GTKHTML3_14_23', 1)
-            conf.check_cfg(package='gtkhtml-editor', uselib_store='GTKHTML_EDITOR',
-                    mandatory=True, args='--cflags --libs')
-        else:
-            env['HAVE_GTKHTML3_23'] = False
+    # TODO: use gtkhtml.py
 
 
-    # GTKHTML API 3.8
-    elif conf.check_cfg(package='libgtkhtml-3.8', uselib_store='GTKHTML',
-            atleast_version='3.8.0', args='--cflags --libs'):
-        # Define if you want to use GtkHtml-3.8 */
-        dfn('USE_GTKHTML38', 1)
 
-        # TODO
-        # gtkhtml >=3.23 don't need generating sources form Editor.idl
-        #if conf.check_cfg(package='libgtkhtml-3.14', atleast_version='3.13',
-                #args='--modversion'):
-            #dfn('USE_GTKHTML38_3_13', 1)
-
-
-    # GTKHML api version
-    # values returned by pkg-config may contain '\n' at the end
-    env['GTKHTML_API'] = conf.check_cfg(package='libgtkhtml-%s' % gtkhtml_api, okmsg=okmsg,
-            msg='Checking for gtkhtml api version', args='--variable=gtkhtml_apiversion').strip()
-    dfn('GTKHTML_API_VERSION', env['GTKHTML_API'])
-
-    # GTKHTML data directory
-    env['GTKHTML_DATA'] = conf.check_cfg(package='libgtkhtml-%s' % gtkhtml_api, okmsg=okmsg,
-            msg='Checking for gtkhtml datadir', args='--variable=gtkhtml_datadir').strip()
-    dfn('GTKHTML_DATA_DIR', env['GTKHTML_DATA'])
-
-
-    ### IDL for editor
-
+    ### editor.py
+    # IDL for editor
 
     # ORBIT_IDL
     env['ORBIT_IDL'] = conf.check_cfg(package='ORBit-2.0', okmsg=okmsg,
@@ -198,6 +160,9 @@ def configure(conf):
             msg='Checking for bonobo-activation idl dir', args='--variable=idldir').strip()
 
     env['BONOBO_IDL_INCLUDES'] = '-I%s -I%s' % (idl1, idl2)
+    ### END editor.py
+
+
 
 
     # Other
@@ -217,24 +182,26 @@ def configure(conf):
             atleast_version='1.5.11', mandatory=True, args='--cflags --libs',
             errmsg='error: either no sword or sword not recent enough')
 
+    ### gtkhtml
+    if not Gtkhtml(conf).detect():
+        print 'Error: GTKHTML not found'
+        exit(1)
      
 
     ######################
-    # gecko (xulrunner) for html rendering
+    ### gecko (xulrunner) for html rendering
     # gtkhtml only for editor
-    if Gecko(conf).detect():
+    if not opt.gtkhtml and Gecko(conf).detect():
         dfn('USE_GTKMOZEMBED', 1)
         env.append_value('CCFLAGS', env['GECKO_CCFLAGS'])
         env.append_value('CXXFLAGS', env['GECKO_CCFLAGS'])
     # gtkhtml for html rendering and editor
     else:
         print "Using 'GTKHTML instead of Gecko' isn't yet implemented"
-        exit(1)
+        dfn('GTKHTML', 1)
 
     ######################
 
-
-    # TODO: implement GTKHTML
 
 
     # TODO: maybe the following checks should be in a more generic module.
@@ -399,6 +366,7 @@ def shutdown():
 
 def distclean():
 
+    ### editor.py
     lst = ('''
         src/editor/Editor-common.c
         src/editor/Editor.h
@@ -411,4 +379,5 @@ def distclean():
         if os.path.exists(i):
             print i
             os.remove(i)
+    ### END editor.py
 
