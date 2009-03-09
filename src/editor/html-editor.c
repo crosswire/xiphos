@@ -384,6 +384,18 @@ static const gchar *view_ui =
 "</ui>";
 
 
+static const gchar *main_ui =
+"<ui>\n"
+"  <toolbar name='main-toolbar'> \n"
+"    <placeholder name='pre-main-toolbar'> \n"
+"      <toolitem action='save'/> \n"
+"      <separator/> \n"
+"    </placeholder> \n"
+"  </toolbar> \n"
+"</ui>";
+
+
+
 static GtkPrintOperationResult
 print (GtkhtmlEditor *editor,
        GtkPrintOperationAction action)
@@ -608,22 +620,25 @@ action_save_cb (GtkAction *action,
 	gboolean as_html;
 	GError *error = NULL;
 	switch(e->type) {
-		case STUDYPAD_EDITOR:
-			if (gtkhtml_editor_get_filename (GTKHTML_EDITOR(e->window)) == NULL)
-				if (save_dialog (GTKHTML_EDITOR(e->window)) == GTK_RESPONSE_CANCEL)
-					return;
+	case STUDYPAD_EDITOR:		
+		if (gtkhtml_editor_get_filename (GTKHTML_EDITOR(e->window)) == NULL)
+			if (save_dialog (GTKHTML_EDITOR(e->window)) == GTK_RESPONSE_CANCEL)
+				return;
 
-			filename = gtkhtml_editor_get_filename (GTKHTML_EDITOR(e->window));
-			as_html = gtkhtml_editor_get_html_mode (GTKHTML_EDITOR(e->window));
+		filename = gtkhtml_editor_get_filename (GTKHTML_EDITOR(e->window));
+		as_html = gtkhtml_editor_get_html_mode (GTKHTML_EDITOR(e->window));
 
-			gtkhtml_editor_save (GTKHTML_EDITOR(e->window), filename, as_html, &error);
-			handle_error (&error);
+		gtkhtml_editor_save (GTKHTML_EDITOR(e->window), filename, as_html, &error);
+		handle_error (&error);
 		break;
-		case NOTE_EDITOR:
-			_save_note (e);
+	case NOTE_EDITOR:
+		_save_note (e);
 		break;
-		case BOOK_EDITOR:
-			_save_book (e);
+	case BOOK_EDITOR:
+		_save_book (e);
+		break;
+	default:
+		GS_message (("\naction_save_cb oops!\n"));
 		break;
 	}
 }
@@ -796,6 +811,17 @@ static GtkActionEntry view_entries[] = {
 };
 
 
+static GtkActionEntry main_entries[] = {
+
+	{ "save",
+	  "gtk-save",
+	  N_("Save"),
+	  NULL,
+	  NULL,
+	  G_CALLBACK (action_save_cb) }
+};
+
+
 GtkWidget * editor_new (const gchar * title, EDITOR *e)
 {
 	GtkActionGroup *action_group;
@@ -816,7 +842,11 @@ GtkWidget * editor_new (const gchar * title, EDITOR *e)
 		
 	handle_error (&error);
 
+	
 	gtk_ui_manager_add_ui_from_string (manager, view_ui, -1, &error);
+	handle_error (&error);
+	
+	gtk_ui_manager_add_ui_from_string (manager, main_ui, -1, &error);
 	handle_error (&error);
 
 	action_group = gtk_action_group_new ("file");
@@ -835,6 +865,14 @@ GtkWidget * editor_new (const gchar * title, EDITOR *e)
 		G_N_ELEMENTS (view_entries), editor);
 	gtk_ui_manager_insert_action_group (manager, action_group, 0);
 
+	action_group = gtk_action_group_new ("main");
+	gtk_action_group_set_translation_domain (
+		action_group, GETTEXT_PACKAGE);
+	gtk_action_group_add_actions (
+		action_group, main_entries,
+		G_N_ELEMENTS (main_entries), e);
+	gtk_ui_manager_insert_action_group (manager, action_group, 0);
+	
 	gtk_ui_manager_ensure_update (manager);
 	gtk_widget_show (editor);
 
