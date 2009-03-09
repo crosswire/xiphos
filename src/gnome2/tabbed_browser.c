@@ -116,7 +116,6 @@ void gui_recompute_shows(void)
 	gui_show_hide_dicts(settings.showdicts);
 	gui_show_hide_comms(settings.showcomms);
 	gui_set_bible_comm_layout();
-	
 
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.viewtexts_item),
@@ -130,7 +129,9 @@ void gui_recompute_shows(void)
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.viewpreview_item),
 				       settings.showpreview);
-	
+
+	while (gtk_events_pending())
+		gtk_main_iteration();
 }
 
 
