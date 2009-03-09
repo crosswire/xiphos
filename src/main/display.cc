@@ -93,13 +93,6 @@ using namespace sword;
 using namespace std;
 using namespace Magick;
 
-//T<font size=\"small\" >EST</font>  /* small caps */
-//static gchar *f_message = "main/display.cc line #%d \"%s\" = %s";
-
-int mod_use_counter[] = { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
-		// indexed by module type e.g. COMMENTARY_TYPE.
-		// used to avoid calling _get_size before these windows exist.
-
 #if 1
 // The easy ImageMagick API solution in Linux/UNIX environments.
 
@@ -226,21 +219,13 @@ AnalyzeForImageSize(const char *origtext,
 			if (mod_type == PERCOM_TYPE)
 				mod_type = COMMENTARY_TYPE; // equivalent
 
-			// we need this sort of "if" here rather badly...
-			// if (GTK_WIDGET_VISIBLE(window)) {
-			// ...because this hack counter is poor at best.
-			if (++mod_use_counter[mod_type] >= 1) {
-				// call _get_size only if the window exists by now.
-				gdk_drawable_get_size(window, &window_x, &window_y);
-				if ((window_x > 200) || (window_y > 200)) {
-					window_x -= 23;
-					window_y -= 23;
-				} else {
-					window_x = (window_x * 93)/100;
-					window_y = (window_y * 93)/100;
-				}
+			gdk_drawable_get_size(window, &window_x, &window_y);
+			if ((window_x > 200) || (window_y > 200)) {
+				window_x -= 23;
+				window_y -= 23;
 			} else {
-				window_x = window_y = 400; // degenerate: full resize.
+				window_x = (window_x * 93)/100;
+				window_y = (window_y * 93)/100;
 			}
 		}
 
