@@ -1,3 +1,8 @@
+2009-03-08  karl <charcoal@users.sf.net>
+
+	* add gtk event-clearing on recompute_shows so that tab changes
+	  get image sizes computed correctly.
+
 2009-03-07  terry <tbiggs@users.sourceforge.net>
 
 	* replaced main menu (gnome) with gtk menu.
