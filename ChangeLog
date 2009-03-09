@@ -2,6 +2,8 @@
 
 	* add gtk event-clearing on recompute_shows so that tab changes
 	  get image sizes computed correctly.
+	* also remove crufty display.cc:mod_use_counter[] hack -- seems
+	  no longer necessary, once we've done the event clear.
 
 2009-03-07  terry <tbiggs@users.sourceforge.net>
 
