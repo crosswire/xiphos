@@ -1,3 +1,7 @@
+2009-03-09  terry <tbiggs@users.sourceforge.net>
+
+	* added <save> button to editors main toolbar
+
 2009-03-08  karl <charcoal@users.sf.net>
 
 	* add gtk event-clearing on recompute_shows so that tab changes
