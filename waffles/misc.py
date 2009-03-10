@@ -2,7 +2,7 @@
 General useful functions
 """
 
-def okmsg(kw):
+def myokmsg(kw):
     """
     some customization for displaying pkg-config values on the line with ok msg
     to be able use this function there is need for file ./wafadmin/Tools/config_c.py
@@ -13,32 +13,47 @@ def okmsg(kw):
 
 # pkgconfig utils
 
+def check_package(conf, pkg, mandatory=False):
+    """
+    Check package existence
+    """
+    ret = False
+
+    if conf.check_cfg(package=pkg, args='--modversion', mandatory=mandatory):
+        ret = True
+
+    return ret
+
+def check_pkgver(conf, pkg, ver, mandatory=False,
+        msg='', okmsg='', errmsg=''):
+    """
+    Check package version
+    """
+    return conf.check_cfg(package=pkg, args='--modversion',
+            atleast_version=ver, mandatory=mandatory,
+            msg=msg, okmsg=okmsg, errmsg=errmsg)
+
 
 def get_pkgvar(conf, pkg, var):
     """
     Read a variable from package using pkg-config
     """
-    ret = conf.check_cfg(package=pkg, args='--variable=%s' % var, okmsg=okmsg,
+    ret = conf.check_cfg(package=pkg, args='--variable=%s' % var, okmsg=myokmsg,
             msg='Checking for var %s in %s' % (var, pkg)).strip()
     return ret
 
 
-def check_package(conf, pkg, lib, mandatory=False):
+def get_pkgcflags(conf, pkg, lib):
     """
-    Check existence of a package (pkg) in system and
-    store its cflags (lib)
+    Read cflags and libs of a package and store them
     """
+    msg = 'Checking for %s cflags/libs' % pkg
+    ret = False
+
     if conf.check_cfg(package=pkg, uselib_store=lib,
-            args='--cflags --libs', okmsg=okmsg, mandatory=mandatory):
-        return True
-    else:
-        return False
+            args='--cflags --libs', msg=msg, okmsg=myokmsg):
+        ret = True
 
+    return ret
 
-def check_pkgver(conf, pkg, ver):
-    """
-    Check package version
-    """
-    return conf.check_cfg(package=pkg, args='--modversion',
-            atleast_version=ver)
 
