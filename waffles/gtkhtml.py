@@ -33,7 +33,8 @@ class Gtkhtml(object):
         ret = False
         dfn = self.conf.define
 
-        if check_package(self.conf, 'libgtkhtml-3.14', 'GTKHTML'):
+        if check_package(self.conf, 'libgtkhtml-3.14'):
+            get_pkgcflags(self.conf, 'libgtkhtml-3.14', 'GTKHTML')
             dfn('USE_GTKHTML38', 1)
             dfn('USE_GTKHTML3_14', 1)
             self.set_vars('3.14')
@@ -46,7 +47,8 @@ class Gtkhtml(object):
  
         ret = False
 
-        if check_package(self.conf, 'libgtkhtml-3.8', 'GTKHTML'):
+        if check_package(self.conf, 'libgtkhtml-3.8'):
+            get_pkgcflags(self.conf, 'libgtkhtml-3.8', 'GTKHTML')
             self.conf.define('USE_GTKHTML38', 1)
             self.set_vars('3.8')
             ret = True
@@ -72,7 +74,8 @@ class Gtkhtml(object):
         gtkhtml >=3.23 don't need generating sources form Editor.idl
         """
         if check_pkgver(self.conf, 'libgtkhtml-3.14', '3.23'):
-            check_package(self.conf, 'gtkhtml-editor', 'GTKHTML_EDITOR', True)
+            check_package(self.conf, 'gtkhtml-editor', True)
+            get_pkgcflags(self.conf, 'gtkhtml-editor', 'GTKHTML_EDITOR')
             env['HAVE_GTKHTML3_23'] = True
             self.conf.define('USE_GTKHTML3_14_23', 1)
         else:
