@@ -17,7 +17,7 @@ from os.path import join, dirname, abspath
 
 from waffles.gecko import Gecko
 from waffles.gtkhtml import Gtkhtml
-from waffles.misc import okmsg
+from waffles.misc import *
 
 # the following two variables are used by the target "waf dist"
 VERSION='3.0.1'
@@ -143,10 +143,15 @@ def configure(conf):
             atleast_version='6.0.0', mandatory=True, args='--cflags --libs',
             errmsg='either no ImageMagick++ or ImageMagick++ not recent enough')
 
-    # Sword
+    ## Sword
     conf.check_cfg(package='sword', uselib_store='SWORD',
             atleast_version='1.5.11', mandatory=True, args='--cflags --libs',
             errmsg='error: either no sword or sword not recent enough')
+
+    # sword multiverse
+    if check_pkgver(conf, 'sword', '1.5.12',
+            msg='Checking for sword multiverse'):
+        dfn('SWORD_MULTIVERSE', 1)
 
 
 
@@ -171,15 +176,15 @@ def configure(conf):
         # IDL for editor
 
         # ORBIT_IDL
-        env['ORBIT_IDL'] = conf.check_cfg(package='ORBit-2.0', okmsg=okmsg,
+        env['ORBIT_IDL'] = conf.check_cfg(package='ORBit-2.0', okmsg=myokmsg,
                 msg='Checking for program ORBit idl', args='--variable=orbit_idl').strip()
 
 
         # BONOBO_IDL_INCLUDES
-        idl1 = conf.check_cfg(package='libbonobo-2.0', okmsg=okmsg,
+        idl1 = conf.check_cfg(package='libbonobo-2.0', okmsg=myokmsg,
                 msg='Checking for bonobo idl dir', args='--variable=idldir').strip()
 
-        idl2 = conf.check_cfg(package='bonobo-activation-2.0', okmsg=okmsg,
+        idl2 = conf.check_cfg(package='bonobo-activation-2.0', okmsg=myokmsg,
                 msg='Checking for bonobo-activation idl dir', args='--variable=idldir').strip()
 
         env['BONOBO_IDL_INCLUDES'] = '-I%s -I%s' % (idl1, idl2)

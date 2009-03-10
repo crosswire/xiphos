@@ -4,6 +4,8 @@ Stuff to detect GECKO
 
 from os.path import join
 
+from Configure import conf
+
 from waffles.misc import *
 
 # needed for gecko 1.8
@@ -44,8 +46,6 @@ gecko18_subdirs = '''
 
 """
 
-from waffles.misc import okmsg
-from Configure import conf
 
 #dfn = conf.define
 #env = conf.env
@@ -136,7 +136,10 @@ class Gecko(object):
         lib = 'GTKMOZEMBED'
         lib_unstable = 'GTKMOZEMBED_UNSTABLE'
 
-        if check_package(cfg, gecko, lib) and check_package(cfg, gecko_unstable, lib_unstable):
+        if check_package(cfg, gecko) and check_package(cfg, gecko_unstable):
+
+            get_pkgcflags(cfg, gecko, lib)
+            get_pkgcflags(cfg, gecko_unstable, lib_unstable)
 
             #incldir = self.get_pkgvar(gecko, 'includedir')
             self.check_version(gecko)
@@ -146,8 +149,8 @@ class Gecko(object):
 
             # NSS & NSPR
             # TODO: are NSS and NSPR really needed both?
-            check_package(cfg, 'nss', 'GECKONSS')
-            check_package(cfg, 'nspr', 'GECKONSPR')
+            get_pkgcflags(cfg, 'nss', 'GECKONSS')
+            get_pkgcflags(cfg, 'nspr', 'GECKONSPR')
 
             ret = True
 
@@ -163,8 +166,9 @@ class Gecko(object):
         gecko = 'xulrunner-gtkmozembed'
         lib = 'GTKMOZEMBED'
 
-        if check_package(self.conf, gecko, lib):
+        if check_package(self.conf, gecko):
 
+            get_pkgcflags(cfg, gecko, lib)
             self.check_version(gecko)
             incldir = get_pkgvar(self.conf, gecko, 'includedir')
             libdir = get_pkgvar(self.conf, gecko, 'libdir')
@@ -172,8 +176,8 @@ class Gecko(object):
             self.dfn('GECKO_HOME', libdir)
             self.env['GECKO_INCLUDE'] = gecko_include
 
-            check_package(self.conf, 'xulrunner-nss', 'GECKONSS')
-            check_package(self.conf, 'xulrunner-nspr', 'GECKONSPR')
+            get_pkgcflags(self.conf, 'xulrunner-nss', 'GECKONSS')
+            get_pkgcflags(self.conf, 'xulrunner-nspr', 'GECKONSPR')
 
             ret = True
 
