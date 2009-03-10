@@ -24,14 +24,29 @@ def check_package(conf, pkg, mandatory=False):
 
     return ret
 
-def check_pkgver(conf, pkg, ver, mandatory=False,
-        msg='', okmsg='', errmsg=''):
+def check_pkgver(conf, pkg, ver, mandatory=False):
     """
     Check package version
     """
     return conf.check_cfg(package=pkg, args='--modversion',
-            atleast_version=ver, mandatory=mandatory,
-            msg=msg, okmsg=okmsg, errmsg=errmsg)
+            atleast_version=ver, mandatory=mandatory)
+
+def check_pkgver_msg(conf, pkg, ver, msg, mandatory=False):
+    """
+    Check package version
+    """
+    return conf.check_cfg(package=pkg, args='--modversion',
+            atleast_version=ver, msg=msg, mandatory=mandatory)
+
+
+
+def check_pkgver_errmsg(conf, pkg, ver, errmsg, mandatory=False):
+    """
+    Check package version
+    """
+    return conf.check_cfg(package=pkg, args='--modversion',
+            atleast_version=ver, errmsg=errmsg, mandatory=mandatory)
+
 
 
 def get_pkgvar(conf, pkg, var):

@@ -109,47 +109,45 @@ def configure(conf):
     ## GTK+/Gnome libs
 
     # GTK+ x11 implementation
-    if conf.check_cfg(package='gtk+-x11-2.0', uselib_store='GTK',
-            atleast_version='2.0.0', args='--cflags --libs'):
+    if check_pkgver(conf, 'gtk+-x11-2.0', '2.0.0'):
+        get_pkgcflags(conf, 'gtk+-x11-2.0', 'GTK')
         dfn('HAVE_LIBGTK_X11_2_0', 1)
     # GTK+ win32 implementation
-    elif conf.check_cfg(package='gtk+-win32-2.0', uselib_store='GTK',
-            atleast_version='2.0.0', mandatory=True, args='--cflags --libs'):
+    elif check_pkgver(conf, 'gtk+-win32-2.0', '2.0.0', True):
+        get_pkgcflags(conf, 'gtk+-win32-2.0', 'GTK')
         dfn('HAVE_LIBGTK_WIN32_2_0', 1)
 
-    conf.check_cfg(package='glib-2.0', uselib_store='GLIB',
-            atleast_version='2.0.0', mandatory=True, args='--cflags --libs')
-    conf.check_cfg(package='libgnomeui-2.0', uselib_store='GNOMEUI',
-            atleast_version='2.0.0', mandatory=True, args='--cflags --libs')
+    check_pkgver(conf, 'glib-2.0', '2.0.0', True)
+    get_pkgcflags(conf, 'glib-2.0', 'GLIB')
+    check_pkgver(conf, 'libgnomeui-2.0', '2.0.0', True)
+    get_pkgcflags(conf, 'libgnomeui-2.0', 'GNOMEUI')
 
-    conf.check_cfg(package='libgnomeprintui-2.2', uselib_store='GNOMEPRINTUI',
-            atleast_version='2.0.0', mandatory=True, args='--cflags --libs')
-    conf.check_cfg(package='libgnomeprint-2.2', uselib_store='GNOMEPRINT',
-            atleast_version='2.0.0', mandatory=True, args='--cflags --libs')
-
-
+    check_pkgver(conf, 'libgnomeprintui-2.2', '2.2', True)
+    get_pkgcflags(conf, 'libgnomeprintui-2.2', 'GNOMEPRINTUI')
+    check_pkgver(conf, 'libgnomeprint-2.2', '2.2', True)
+    get_pkgcflags(conf, 'libgnomeprint-2.2', 'GNOMEPRINT')
 
 
 
     # Other
-    conf.check_cfg(package='libxml-2.0', uselib_store='XML',
-            atleast_version='2.0.0', mandatory=True, args='--cflags --libs')
+    check_pkgver(conf, 'libxml-2.0', '2.0.0', True)
+    get_pkgcflags(conf, 'libxml-2.0', 'XML')
 
-    if conf.check_cfg(package='gtk+-unix-print-2.0', uselib_store='UPRINT',
-            atleast_version='2.0.0', mandatory=False, args='--cflags --libs'):
+    if check_pkgver(conf, 'gtk+-unix-print-2.0', '2.0.0'):
+        get_pkgcflags(conf, 'gtk+-unix-print-2.0', 'UPRINT')
         dfn('USE_GTKUPRINT', 1)
 
-    conf.check_cfg(package='ImageMagick++', uselib_store='MAGICK',
-            atleast_version='6.0.0', mandatory=True, args='--cflags --libs',
-            errmsg='either no ImageMagick++ or ImageMagick++ not recent enough')
+    check_pkgver_errmsg(conf, 'ImageMagick++', '6.0.0',
+            'either no ImageMagick++ or ImageMagick++ not recent enough',
+            True)
+    get_pkgcflags(conf, 'ImageMagick++', 'MAGICK')
 
     ## Sword
-    conf.check_cfg(package='sword', uselib_store='SWORD',
-            atleast_version='1.5.11', mandatory=True, args='--cflags --libs',
-            errmsg='error: either no sword or sword not recent enough')
+    check_pkgver(conf, 'sword', '1.5.11')
+    get_pkgcflags(conf, 'sword', 'SWORD')
 
     # sword multiverse
-    if check_pkgver(conf, 'sword', '1.5.12',
+    if check_pkgver_msg(conf, 'sword', '1.5.12',
             msg='Checking for sword multiverse'):
         dfn('SWORD_MULTIVERSE', 1)
 
@@ -166,32 +164,21 @@ def configure(conf):
     if not env['HAVE_GTKHTML3_23']:
 
         ### editor.py
-        conf.check_cfg(package='ORBit-2.0',
-                atleast_version='2.0.0', mandatory=True)
-        conf.check_cfg(package='libbonobo-2.0',
-                atleast_version='2.0.0', mandatory=True)
-        conf.check_cfg(package='bonobo-activation-2.0',
-                atleast_version='2.0.0', mandatory=True)
-
-        # IDL for editor
+        check_package(conf, 'ORBit-2.0', True)
+        check_package(conf, 'libbonobo-2.0', True)
+        check_package(conf, 'bonobo-activation-2.0', True)
 
         # ORBIT_IDL
-        env['ORBIT_IDL'] = conf.check_cfg(package='ORBit-2.0', okmsg=myokmsg,
-                msg='Checking for program ORBit idl', args='--variable=orbit_idl').strip()
-
+        env['ORBIT_IDL'] = get_pkgvar(conf, 'ORBit-2.0', 'orbit_idl')
 
         # BONOBO_IDL_INCLUDES
-        idl1 = conf.check_cfg(package='libbonobo-2.0', okmsg=myokmsg,
-                msg='Checking for bonobo idl dir', args='--variable=idldir').strip()
-
-        idl2 = conf.check_cfg(package='bonobo-activation-2.0', okmsg=myokmsg,
-                msg='Checking for bonobo-activation idl dir', args='--variable=idldir').strip()
+        idl1 = get_pkgvar(conf, 'libbonobo-2.0', 'idldir')
+        idl2 = get_pkgvar(conf, 'bonobo-activation-2.0', 'idldir')
 
         env['BONOBO_IDL_INCLUDES'] = '-I%s -I%s' % (idl1, idl2)
         ### END editor.py
 
 
-    
 
     ######################
     ### gecko (xulrunner) for html rendering
