@@ -62,6 +62,9 @@ static
 int app_delete_cb(GtkWidget * widget, GdkEvent * event, gpointer data);
 
 
+static void
+_load_file (EDITOR * e, const gchar * filename);
+
 static
 gint ask_about_saving(EDITOR * e);
 
