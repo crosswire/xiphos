@@ -32,7 +32,6 @@
 #else
 #include <gtkhtml/gtkhtml.h>
 #include "gui/html.h"
-#include "editor/html-editor.h"
 #endif
 
 #include "gui/dialog.h"

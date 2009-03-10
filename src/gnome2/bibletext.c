@@ -29,7 +29,6 @@
 #include "gecko/gecko-html.h"
 #else
 #include <gtkhtml/gtkhtml.h>
-#include "editor/html-editor.h"
 #include "gui/html.h"
 #endif
 
