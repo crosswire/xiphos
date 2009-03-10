@@ -34,7 +34,11 @@
 #include "gui/html.h"
 #endif
 
-#include "editor/html-editor.h"
+#ifdef USE_GTKHTML3_14_23
+#include "editor/slib-editor.h"
+#else
+#include "editor/bonobo-editor.h"
+#endif
 
 #include "gui/bookmark_dialog.h"
 #include "gui/bookmarks_treeview.h"

@@ -53,15 +53,16 @@
 #include "main/module_dialogs.h"
 
 
-#ifdef USE_GTKHTML38
-#include "editor/html-editor.h"
+#ifdef USE_GTKHTML3_14_23
+#include "editor/slib-editor.h"
+#else
+#include "editor/bonobo-editor.h"
 #endif
 
 BOOKMARK_MENU menu;
 
 gboolean bookmarks_changed;
 
-//extern GtkTreeView *bookmark_tree;
 
 
 /******************************************************************************

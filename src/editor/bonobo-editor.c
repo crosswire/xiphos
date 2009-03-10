@@ -22,6 +22,8 @@
 #include <config.h>
 #include <libgnome/gnome-i18n.h>
 
+#ifndef USE_GTKHTML3_14_23
+
 #include <gnome.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -29,28 +31,13 @@
 
 #include <glib.h>
 
-#ifdef USE_GTKHTML3_14_23
-#include <libintl.h>
-#include <locale.h>
-#include <stdlib.h>
-#include <glib/gi18n.h>
-#include <gio/gio.h>
-#include <editor/gtkhtml-editor.h>
-#include <gtkhtml/gtkhtml-stream.h>	
-#else
-
 #include <gtkhtml/gtkhtml.h>
 #include <bonobo.h>
 #include <Editor.h>
 
-#endif
-#include "editor/html-editor.h"
+#include "editor/bonobo-editor.h"
 
-#ifdef OLD_NAVBAR
-#include "main/navbar.h"
-#else
 #include "gui/navbar_versekey_editor.h"
-#endif
 
 #include "main/settings.h"
 #include "main/sword.h"
@@ -64,11 +51,8 @@
 #include "gui/utilities.h"
 
 
-#ifdef USE_GTKHTML3_14_23
-	
-#else
 #define CONTROL_ID         "OAFIID:GNOME_GtkHTML_Editor:" GTKHTML_API_VERSION
-#endif
+
 extern gboolean do_display;
 
 static 
@@ -77,14 +61,6 @@ gboolean save_through_persist_file(EDITOR * e, const gchar * filename);
 static 
 int app_delete_cb(GtkWidget * widget, GdkEvent * event, gpointer data);
 
-static 
-void _load_file(EDITOR * e, const gchar * filename);
-
-static 
-void _save_note (EDITOR * e);
-
-static 
-void _save_book (EDITOR * e);
 
 static
 gint ask_about_saving(EDITOR * e);
@@ -93,7 +69,6 @@ gint ask_about_saving(EDITOR * e);
 static GList *editors_all = NULL;
 static gint formatHTML = 1;
 static GtkWidget *win;
-//static GtkHTML *html;
 
  
 static void
@@ -108,9 +83,6 @@ handle_error (GError **error)
 static
 void do_exit(EDITOR * e)
 {
-#ifdef USE_GTKHTML3_14_23
-	
-#else
 	CORBA_Environment ev;
 
 	CORBA_exception_init(&ev);
@@ -133,7 +105,7 @@ void do_exit(EDITOR * e)
 		e->persist_file_interface = CORBA_OBJECT_NIL;
 	}
 	CORBA_exception_free(&ev);
-#endif
+
 	GS_message(("do_exit"));
 	GS_message((e->filename ? e->filename : "no filename"));
 	GS_message((e->module ? e->module : "no module"));
@@ -338,581 +310,6 @@ _do_print (EDITOR * e,
 }
 #endif
 
-#ifdef USE_GTKHTML3_14_23
-
-
-static const gchar *file_ui =
-"<ui>\n"
-"  <menubar name='main-menu'>\n"
-"    <menu action='file-menu'>\n"
-"     <menuitem action='open'/>\n"
-"     <menuitem action='save'/>\n"
-"     <menuitem action='save-as'/>\n"
-"     <separator/>\n"
-"     <menuitem action='print-preview'/>\n"
-"     <menuitem action='print'/>\n"
-"     <separator/>\n"
-"     <menuitem action='quit'/>\n"
-"    </menu>\n"
-"  </menubar>\n"
-"</ui>";
-
-static const gchar *note_file_ui =
-"<ui>\n"
-"  <menubar name='main-menu'>\n"
-"    <menu action='file-menu'>\n"
-"     <menuitem action='save'/>\n"
-"     <menuitem action='save-as'/>\n"
-"     <separator/>\n"
-"     <menuitem action='print-preview'/>\n"
-"     <menuitem action='print'/>\n"
-"     <separator/>\n"
-"     <menuitem action='quit'/>\n"
-"    </menu>\n"
-"  </menubar>\n"
-"</ui>";
-
-static const gchar *view_ui =
-"<ui>\n"
-"  <menubar name='main-menu'>\n"
-"    <menu action='view-menu'>\n"
-"     <menuitem action='view-html-output'/>\n"
-"     <menuitem action='view-html-source'/>\n"
-"     <menuitem action='view-plain-source'/>\n"
-"    </menu>\n"
-"  </menubar>\n"
-"</ui>";
-
-
-static const gchar *main_ui =
-"<ui>\n"
-"  <toolbar name='main-toolbar'> \n"
-"    <placeholder name='pre-main-toolbar'> \n"
-"      <toolitem action='save'/> \n"
-"      <separator/> \n"
-"    </placeholder> \n"
-"  </toolbar> \n"
-"</ui>";
-
-
-
-static GtkPrintOperationResult
-print (GtkhtmlEditor *editor,
-       GtkPrintOperationAction action)
-{
-	GtkPrintOperation *operation;
-	GtkPrintOperationResult result;
-	GError *error = NULL;
-
-	operation = gtk_print_operation_new ();
-
-	result = gtk_html_print_operation_run (
-		gtkhtml_editor_get_html (editor), operation, action,
-		GTK_WINDOW (editor), NULL, NULL, NULL, NULL, NULL, &error);
-
-	g_object_unref (operation);
-	handle_error (&error);
-
-	return result;
-}
-
-static gint
-open_dialog (EDITOR * e)
-{
-	GtkWidget *dialog;
-	const gchar *filename;
-	gint response;
-
-	dialog = gtk_file_chooser_dialog_new (
-		_("Save As"), GTK_WINDOW (e->window),
-		GTK_FILE_CHOOSER_ACTION_OPEN,
-		GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-		GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
-		NULL);
-
-	/*gtk_file_chooser_set_do_overwrite_confirmation (
-		GTK_FILE_CHOOSER (dialog), TRUE);*/
-
-	filename = gtkhtml_editor_get_filename (GTKHTML_EDITOR(e->window));
-
-	if (filename != NULL)
-		gtk_file_chooser_set_filename (
-			GTK_FILE_CHOOSER (dialog), filename);
-	else {
-		gtk_file_chooser_set_current_folder (
-			GTK_FILE_CHOOSER (dialog), g_getenv(HOMEVAR));
-		gtk_file_chooser_set_current_name (
-			GTK_FILE_CHOOSER (dialog), _("Untitled document"));
-	}
-
-	response = gtk_dialog_run (GTK_DIALOG (dialog));
-
-	if (response == GTK_RESPONSE_ACCEPT) {
-		gchar *new_filename;
-
-		new_filename = gtk_file_chooser_get_filename (
-			GTK_FILE_CHOOSER (dialog));
-		//gtkhtml_editor_set_filename (e->window, new_filename);
-		_load_file(e, new_filename);
-		g_free (new_filename);
-	}
-
-	gtk_widget_destroy (dialog);
-
-	return response;
-}
-
-
-static gint
-save_dialog (GtkhtmlEditor *editor)
-{
-	GtkWidget *dialog;
-	const gchar *filename;
-	gint response;
-
-	dialog = gtk_file_chooser_dialog_new (
-		_("Save As"), GTK_WINDOW (editor),
-		GTK_FILE_CHOOSER_ACTION_SAVE,
-		GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-		GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT,
-		NULL);
-
-	gtk_file_chooser_set_do_overwrite_confirmation (
-		GTK_FILE_CHOOSER (dialog), TRUE);
-
-	filename = gtkhtml_editor_get_filename (editor);
-
-	if (filename != NULL)
-		gtk_file_chooser_set_filename (
-			GTK_FILE_CHOOSER (dialog), filename);
-	else {
-		gtk_file_chooser_set_current_folder (
-			GTK_FILE_CHOOSER (dialog), g_getenv(HOMEVAR));
-		gtk_file_chooser_set_current_name (
-			GTK_FILE_CHOOSER (dialog), _("Untitled document"));
-	}
-
-	response = gtk_dialog_run (GTK_DIALOG (dialog));
-
-	if (response == GTK_RESPONSE_ACCEPT) {
-		gchar *new_filename;
-
-		new_filename = gtk_file_chooser_get_filename (
-			GTK_FILE_CHOOSER (dialog));
-		gtkhtml_editor_set_filename (editor, new_filename);
-		g_free (new_filename);
-	}
-
-	gtk_widget_destroy (dialog);
-
-	return response;
-}
-
-/* Helper for view_source_dialog() */
-static gboolean
-view_source_dialog_receiver (HTMLEngine *engine,
-                             const gchar *data,
-                             guint length,
-                             GString *string)
-{
-	g_string_append_len (string, data, length);
-
-	return TRUE;
-}
-
-static void
-view_source_dialog (GtkhtmlEditor *editor,
-                    const gchar *title,
-                    const gchar *content_type,
-                    gboolean show_output)
-{
-	GtkWidget *dialog;
-	GtkWidget *content;
-	GtkWidget *scrolled_window;
-	GString *string;
-
-	dialog = gtk_dialog_new_with_buttons (
-		title, GTK_WINDOW (editor),
-		GTK_DIALOG_DESTROY_WITH_PARENT |
-		GTK_DIALOG_NO_SEPARATOR,
-		GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
-		NULL);
-
-	scrolled_window = gtk_scrolled_window_new (NULL, NULL);
-	gtk_scrolled_window_set_policy (
-		GTK_SCROLLED_WINDOW (scrolled_window),
-		GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-	gtk_scrolled_window_set_shadow_type (
-		GTK_SCROLLED_WINDOW (scrolled_window), GTK_SHADOW_IN);
-	gtk_box_pack_start (
-		GTK_BOX (GTK_DIALOG (dialog)->vbox),
-		scrolled_window, TRUE, TRUE, 0);
-
-	gtk_container_set_border_width (GTK_CONTAINER (dialog), 6);
-	gtk_container_set_border_width (GTK_CONTAINER (scrolled_window), 6);
-	gtk_window_set_default_size (GTK_WINDOW (dialog), 400, 300);
-
-	string = g_string_sized_new (4096);
-
-	gtk_html_export (
-		gtkhtml_editor_get_html (editor),
-		content_type, (GtkHTMLSaveReceiverFn)
-		view_source_dialog_receiver, string);
-
-	if (show_output) {
-		GtkHTMLStream *stream;
-
-		content = gtk_html_new ();
-		stream = gtk_html_begin (GTK_HTML (content));
-		gtk_html_stream_write (stream, string->str, string->len);
-		gtk_html_stream_close (stream, GTK_HTML_STREAM_OK);
-	} else {
-		GtkTextBuffer *buffer;
-
-		content = gtk_text_view_new ();
-		buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (content));
-		gtk_text_buffer_set_text (buffer, string->str, string->len);
-		gtk_text_view_set_editable (GTK_TEXT_VIEW (content), FALSE);
-	}
-
-	g_string_free (string, TRUE);
-
-	gtk_container_add (GTK_CONTAINER (scrolled_window), content);
-	gtk_widget_show_all (scrolled_window);
-
-	gtk_dialog_run (GTK_DIALOG (dialog));
-	gtk_widget_destroy (dialog);
-}
-
-static void
-action_print_cb (GtkAction *action,
-                 EDITOR *e)
-{
-	print (GTKHTML_EDITOR(e->window), GTK_PRINT_OPERATION_ACTION_PRINT_DIALOG);
-}
-
-static void
-action_print_preview_cb (GtkAction *action,
-                         EDITOR *e)
-{
-	print (GTKHTML_EDITOR(e->window), GTK_PRINT_OPERATION_ACTION_PREVIEW);
-}
-
-static void
-action_quit_cb (GtkAction *action,
-                EDITOR *e)
-{
-	app_delete_cb(NULL, NULL, e);
-}
-
-
-static void
-action_open_cb (GtkAction * action, EDITOR * e)
-{
-	open_dialog(e);
-}
-
-static void
-action_save_cb (GtkAction *action,
-                EDITOR *e)
-{
-	const gchar *filename;
-	gboolean as_html;
-	GError *error = NULL;
-	switch(e->type) {
-	case STUDYPAD_EDITOR:		
-		if (gtkhtml_editor_get_filename (GTKHTML_EDITOR(e->window)) == NULL)
-			if (save_dialog (GTKHTML_EDITOR(e->window)) == GTK_RESPONSE_CANCEL)
-				return;
-
-		filename = gtkhtml_editor_get_filename (GTKHTML_EDITOR(e->window));
-		as_html = gtkhtml_editor_get_html_mode (GTKHTML_EDITOR(e->window));
-
-		gtkhtml_editor_save (GTKHTML_EDITOR(e->window), filename, as_html, &error);
-		handle_error (&error);
-		break;
-	case NOTE_EDITOR:
-		_save_note (e);
-		break;
-	case BOOK_EDITOR:
-		_save_book (e);
-		break;
-	default:
-		GS_message (("\naction_save_cb oops!\n"));
-		break;
-	}
-}
-
-static void
-action_save_as_cb (GtkAction *action,
-                   EDITOR *e)
-{
-	const gchar *filename;
-	gboolean as_html;
-	GError *error = NULL;
-
-	if (save_dialog (GTKHTML_EDITOR(e->window)) == GTK_RESPONSE_CANCEL)
-		return;
-
-	filename = gtkhtml_editor_get_filename (GTKHTML_EDITOR(e->window));
-	as_html = gtkhtml_editor_get_html_mode (GTKHTML_EDITOR(e->window));
-
-	gtkhtml_editor_save (GTKHTML_EDITOR(e->window), filename, as_html, &error);
-	handle_error (&error);
-}
-
-static void
-action_view_html_output (GtkAction *action,
-                         GtkhtmlEditor *editor)
-{
-	view_source_dialog (editor, _("HTML Output"), "text/html", TRUE);
-}
-
-static void
-action_view_html_source (GtkAction *action,
-                         GtkhtmlEditor *editor)
-{
-	view_source_dialog (editor, _("HTML Source"), "text/html", FALSE);
-}
-
-static void
-action_view_plain_source (GtkAction *action,
-                          GtkhtmlEditor *editor)
-{
-	view_source_dialog (editor, _("Plain Source"), "text/plain", FALSE);
-}
-
-static GtkActionEntry file_entries[] = {
-
-	{ "print",
-	  GTK_STOCK_PRINT,
-	  N_("_Print..."),
-	  NULL,
-	  NULL,
-	  G_CALLBACK (action_print_cb) },
-
-	{ "print-preview",
-	  GTK_STOCK_PRINT_PREVIEW,
-	  N_("Print Pre_view"),
-	  NULL,
-	  NULL,
-	  G_CALLBACK (action_print_preview_cb) },
-
-	{ "quit",
-	  GTK_STOCK_QUIT,
-	  N_("_Quit"),
-	  NULL,
-	  NULL,
-	  G_CALLBACK (action_quit_cb) },
-
-	{ "open",
-	  GTK_STOCK_OPEN,
-	  N_("_Open"),
-	  NULL,
-	  NULL,
-	  G_CALLBACK (action_open_cb) },
-
-	{ "save",
-	  GTK_STOCK_SAVE,
-	  N_("_Save"),
-	  NULL,
-	  NULL,
-	  G_CALLBACK (action_save_cb) },
-
-	{ "save-as",
-	  GTK_STOCK_SAVE_AS,
-	  N_("Save _As..."),
-	  NULL,
-	  NULL,
-	  G_CALLBACK (action_save_as_cb) },
-
-	{ "file-menu",
-	  NULL,
-	  N_("_File"),
-	  NULL,
-	  NULL,
-	  NULL }
-};
-/*
-static GtkActionEntry note_file_entries[] = {
-
-	{ "print",
-	  GTK_STOCK_PRINT,
-	  N_("_Print..."),
-	  NULL,
-	  NULL,
-	  G_CALLBACK (action_print_cb) },
-
-	{ "print-preview",
-	  GTK_STOCK_PRINT_PREVIEW,
-	  N_("Print Pre_view"),
-	  NULL,
-	  NULL,
-	  G_CALLBACK (action_print_preview_cb) },
-
-	{ "quit",
-	  GTK_STOCK_QUIT,
-	  N_("_Quit"),
-	  NULL,
-	  NULL,
-	  G_CALLBACK (action_quit_cb) },
-
-	{ "save",
-	  GTK_STOCK_SAVE,
-	  N_("_Save"),
-	  NULL,
-	  NULL,
-	  G_CALLBACK (action_save_cb) },
-
-	{ "save-as",
-	  GTK_STOCK_SAVE_AS,
-	  N_("Save _As..."),
-	  NULL,
-	  NULL,
-	  G_CALLBACK (action_save_as_cb) },
-
-	{ "file-menu",
-	  NULL,
-	  N_("_File"),
-	  NULL,
-	  NULL,
-	  NULL }
-};
-*/
-static GtkActionEntry view_entries[] = {
-
-	{ "view-html-output",
-	  NULL,
-	  N_("HTML _Output"),
-	  NULL,
-	  NULL,
-	  G_CALLBACK (action_view_html_output) },
-
-	{ "view-html-source",
-	  NULL,
-	  N_("_HTML Source"),
-	  NULL,
-	  NULL,
-	  G_CALLBACK (action_view_html_source) },
-
-	{ "view-plain-source",
-	  NULL,
-	  N_("_Plain Source"),
-	  NULL,
-	  NULL,
-	  G_CALLBACK (action_view_plain_source) },
-
-	{ "view-menu",
-	  NULL,
-	  N_("_View"),
-	  NULL,
-	  NULL,
-	  NULL }
-};
-
-
-static GtkActionEntry main_entries[] = {
-
-	{ "save",
-	  "gtk-save",
-	  N_("Save"),
-	  NULL,
-	  NULL,
-	  G_CALLBACK (action_save_cb) }
-};
-
-
-GtkWidget * editor_new (const gchar * title, EDITOR *e)
-{
-	GtkActionGroup *action_group;
-	GtkUIManager *manager;
-	GtkWidget *editor;
-	GError *error = NULL;
-
-	editor = gtkhtml_editor_new ();
-	e->window = editor;
-	e->html_widget = GTK_WIDGET(gtkhtml_editor_get_html (GTKHTML_EDITOR (editor)));
-	gtk_window_set_title(GTK_WINDOW(editor),title);
-	
-	manager = gtkhtml_editor_get_ui_manager (GTKHTML_EDITOR (editor));
-	if (e->type == STUDYPAD_EDITOR) 	
-		gtk_ui_manager_add_ui_from_string (manager, file_ui, -1, &error);
-	else	
-		gtk_ui_manager_add_ui_from_string (manager, note_file_ui, -1, &error);
-		
-	handle_error (&error);
-
-	
-	gtk_ui_manager_add_ui_from_string (manager, view_ui, -1, &error);
-	handle_error (&error);
-	
-	gtk_ui_manager_add_ui_from_string (manager, main_ui, -1, &error);
-	handle_error (&error);
-
-	action_group = gtk_action_group_new ("file");
-	gtk_action_group_set_translation_domain (
-		action_group, GETTEXT_PACKAGE);
-	gtk_action_group_add_actions (
-		action_group, file_entries,
-		G_N_ELEMENTS (file_entries), e);
-	gtk_ui_manager_insert_action_group (manager, action_group, 0);
-
-	action_group = gtk_action_group_new ("view");
-	gtk_action_group_set_translation_domain (
-		action_group, GETTEXT_PACKAGE);
-	gtk_action_group_add_actions (
-		action_group, view_entries,
-		G_N_ELEMENTS (view_entries), editor);
-	gtk_ui_manager_insert_action_group (manager, action_group, 0);
-
-	action_group = gtk_action_group_new ("main");
-	gtk_action_group_set_translation_domain (
-		action_group, GETTEXT_PACKAGE);
-	gtk_action_group_add_actions (
-		action_group, main_entries,
-		G_N_ELEMENTS (main_entries), e);
-	gtk_ui_manager_insert_action_group (manager, action_group, 0);
-	
-	gtk_ui_manager_ensure_update (manager);
-	gtk_widget_show (editor);
-
-	gtkhtml_editor_drop_undo(GTKHTML_EDITOR(e->window));
-	gtkhtml_editor_set_changed (GTKHTML_EDITOR(e->window), FALSE);
-	
-	g_signal_connect(editor, "delete-event",
-			 G_CALLBACK(app_delete_cb), (EDITOR *) e);
-
-	return editor;
-
-}	
-#else
-/*GtkPageSetup*       gtk_print_run_page_setup_dialog     (GtkWindow *parent,
-                                                         GtkPageSetup *page_setup,
-                                                         GtkPrintSettings *settings);*/
-/*GtkPrintSettings*   gtk_print_operation_get_print_settings
-                                                        (GtkPrintOperation *op);*/
-/*
-GTK_UNIT_INCH,
-void                gtk_page_setup_set_top_margin       (GtkPageSetup *setup,
-                                                         gdouble margin,
-                                                         GtkUnit unit);
-
-GtkPageSetup*       gtk_print_operation_get_default_page_setup
-                                                        (GtkPrintOperation *op);
-
-typedef gint    (*GtkHTMLPrintCalcHeight) (GtkHTML *html,
-					   GtkPrintOperation *operation,
-                                           GtkPrintContext *context,
-                                           gpointer user_data);
-typedef void    (*GtkHTMLPrintDrawFunc)   (GtkHTML *html,
-					   GtkPrintOperation *operation,
-					   GtkPrintContext *context,
-					   gint page_nr,
-					   PangoRectangle *rec,
-					   gpointer user_data);
-
-*/ 
-
 
 static void load_through_persist_stream(const gchar * text, EDITOR * e)
 {
@@ -1051,7 +448,6 @@ save_through_persist_file(EDITOR * e, const gchar * filename)
 	CORBA_exception_free(&ev);
 	return TRUE;
 }
-
 
 /* Common file selection widget.  We make sure there is only one open at a
    given time.  */
@@ -1130,7 +526,7 @@ static void file_selection_ok_cb(GtkWidget * widget, gpointer data)
 		//save_through_plain_persist_stream (fname, interface);
 		break;
 	case OP_LOAD_THROUGH_PERSIST_FILE:
-		_load_file(e, g_strdup(fname));
+		_load_file (e, g_strdup(fname));
 		break;
 	case OP_SAVE_THROUGH_PERSIST_FILE:
 		save_through_persist_file(e, g_strdup(fname));
@@ -1173,81 +569,17 @@ open_or_save_as_dialog(EDITOR * e, FileSelectionOperation op)
 		char *filename;
 		
 		filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
-		//filename = g_path_get_basename(filename);
 		GS_message(("filename: %s",filename));
 		if(op == OP_SAVE_THROUGH_PERSIST_FILE) 
 			save_through_persist_file(e, filename);
 		else
-			_load_file(e, filename);
+			_load_file (e, filename);
 		
 		g_free (filename);
 	}
 	
 	//this actually causes a segfault; sorry! :FIXED 
-	gtk_widget_destroy (dialog);
-	
-	/*
-	
-	
-	GtkWidget *widget;
-	BonoboWidget *control;
-	gchar *directory = NULL;
-
-	control = e->control;
-	
-	if (file_selection_info.widget != NULL) {
-		gdk_window_show(GTK_WIDGET(file_selection_info.widget)->
-				window);
-		return;
-	}
-
-	if (op == OP_LOAD_THROUGH_PERSIST_FILE
-	    || op == OP_LOAD_THROUGH_PERSIST_STREAM) {
-		widget = gtk_file_selection_new(_("Open file..."));
-		if (settings.studypaddir) {
-			directory =
-			    g_strdup_printf("%s/",
-					    settings.studypaddir);
-			//gtk_file_selection_set_filename(
-			//			(GtkFileSelection *) widget, 
-			//			directory);
-			g_free(directory);
-		}
-	} else {
-		widget = gtk_file_selection_new(_("Save file as..."));
-		if (e->filename)
-			gtk_file_selection_set_filename(
-						(GtkFileSelection *) widget, 
-						e->filename);
-		else {
-			directory =
-			    g_strdup_printf("%s/",
-					    settings.studypaddir);
-			gtk_file_selection_set_filename(
-						(GtkFileSelection *) widget, 
-						directory);
-			g_free(directory);
-		}
-	}
-	gtk_window_set_transient_for(GTK_WINDOW(widget),
-				     GTK_WINDOW(e->window));
-
-	file_selection_info.widget = widget;
-	file_selection_info.control = control;
-	file_selection_info.operation = op;
-
-	g_signal_connect(GTK_FILE_SELECTION(widget)->cancel_button,
-			 "clicked",
-			 G_CALLBACK(file_selection_cancel_cb), widget);
-	g_signal_connect(GTK_FILE_SELECTION(widget)->ok_button,
-			 "clicked", G_CALLBACK(file_selection_ok_cb),
-			 (EDITOR *) e);
-	g_signal_connect(file_selection_info.widget, "destroy",
-			 G_CALLBACK(file_selection_destroy_cb), NULL);
-
-	gtk_dialog_run (GTK_DIALOG (file_selection_info.widget));
-	//gtk_widget_show(file_selection_info.widget);
-	*/
+	gtk_widget_destroy (dialog);	
 }
 
 /* "Open through persist stream" dialog.  */
@@ -1291,12 +623,7 @@ add_bookmark_cb(GtkWidget * widget, gpointer data)
 		label = g_strdup_printf("%s, %s",e->filename, "studypad");
 		gui_bookmark_dialog(label, "studypad", e->filename);
 		g_free(label);
-	} /* else {
-		label = g_strdup_printf("%s, %s",e->key, ->filename);
-		gui_bookmark_dialog(label, e->filename, e->key);
-		g_free(label);	
 	}
-*/
 }
 
 
@@ -1414,67 +741,11 @@ menu_format_html_cb(BonoboUIComponent * component,
 				   "HTMLTitle", TC_CORBA_string,
 				   "testing", NULL);
 }
-#endif
-
-
-
-/* Helper for _save_note() */
-static gboolean
-_save_note_receiver (HTMLEngine *engine,
-                             const gchar *data,
-                             guint length,
-                             GString *string)
-{
-	g_string_append_len (string, data, length);
-
-	return TRUE;
-}
 
 
 static void
-_save_note(EDITOR * e)
+_load_file (EDITOR * e, const gchar * filename)
 {
-#ifdef USE_GTKHTML3_14_23
-	GString *string;
-	
-	string = g_string_sized_new (4096);
-	
-	gtk_html_export (gtkhtml_editor_get_html
-			 ((void *)e->window),
-			"text/html", 
-			(GtkHTMLSaveReceiverFn) _save_note_receiver, 
-			string);
-	main_save_note (e->module, e->key, string->str);
-	
-	g_string_free(string,TRUE);
-#endif
-}
-
-
-static void
-_save_book(EDITOR * e)
-{
-#ifdef USE_GTKHTML3_14_23
-	GString *string;
-	
-	string = g_string_sized_new (4096);
-	
-	gtk_html_export (gtkhtml_editor_get_html
-			 ((void *)e->window),
-			"text/html", 
-			(GtkHTMLSaveReceiverFn) _save_note_receiver, 
-			string);
-	
-	main_treekey_save_book_text(e->module, e->key, string->str);
-	g_string_free(string,TRUE);
-#endif
-}	
-
-
-static void
-_load_file(EDITOR * e, const gchar * filename)
-{
-	//GtkWidget *choser;
 	if (e->filename)
 		g_free(e->filename);
 	e->filename = g_strdup(filename);
@@ -1487,26 +758,6 @@ _load_file(EDITOR * e, const gchar * filename)
 	    xml_get_value("studypad", "lastfile");
 	change_window_title(e->window, e->filename);
 	
-#ifdef USE_GTKHTML3_14_23
-	char *contents;
-	char *etag_out;
-	gsize length; 
-	GFile *file;
-	file = g_file_new_for_path(filename);
-	gtkhtml_editor_set_filename(GTKHTML_EDITOR(e->window),e->filename);
-	if(g_file_load_contents (file,
-                              NULL,
-                              &contents,
-                              &length,
-                              &etag_out,
-                              NULL))
-		gtkhtml_editor_set_text_html (GTKHTML_EDITOR(e->window),
-					      contents,
-					      length);
-	gtkhtml_editor_drop_undo(GTKHTML_EDITOR(e->window));
-	gtkhtml_editor_set_changed (GTKHTML_EDITOR(e->window), FALSE);
-	return;
-#else
 
 	CORBA_Environment ev;
 
@@ -1519,47 +770,29 @@ _load_file(EDITOR * e, const gchar * filename)
 		g_warning("Cannot load.");
 	GNOME_GtkHTML_Editor_Engine_dropUndo(e->engine, &ev);
 	CORBA_exception_free(&ev);
-	//g_free((gchar *) filename);
 	e->is_changed = FALSE;
-#endif
 }
 
 gboolean editor_is_dirty(EDITOR * e)
 {
-#ifdef USE_GTKHTML3_14_23
-	return gtkhtml_editor_get_changed(GTKHTML_EDITOR(e->window));
-#else
-
 	CORBA_Environment ev;
 	gboolean rv;
 
 	CORBA_exception_init(&ev);
-	/* rv = e->is_changed
-	    || (GNOME_GtkHTML_Editor_Engine_hasUndo(e->engine, &ev) &&
-		!GNOME_GtkHTML_Editor_Engine_runCommand(e->engine,
-							"is-saved",
-							&ev)); */
+	
 	rv = GNOME_GtkHTML_Editor_Engine_hasUndo(e->engine, &ev);
 	
 	CORBA_exception_free(&ev);
 	return rv;
-#endif
 }
 
 
 void editor_save_book(EDITOR * e)
 {
-#ifdef USE_GTKHTML3_14_23
-	if (editor_is_dirty(e)) {
-		GS_message(("editor_is_dirty"));
-		_save_book(e);
-	}
-#else
 	if (editor_is_dirty(e)) {
 		GS_message(("editor_is_dirty"));
 		save_through_persist_stream_cb(NULL, e);
 	}
-#endif
 }
 
 /* save if needed is done in treeky-editor.c before calling editor_load_book() */
@@ -1579,29 +812,10 @@ void editor_load_book(EDITOR * e)
 	else
 		text = g_strdup(e->module);
 	
-	if(strlen(text)) {
-#ifdef USE_GTKHTML3_14_23
-		gtkhtml_editor_set_text_html (GTKHTML_EDITOR(e->window),
-					      text,
-					      strlen(text));
-		gtkhtml_editor_drop_undo (GTKHTML_EDITOR(e->window));
-		gtkhtml_editor_set_changed (GTKHTML_EDITOR(e->window), FALSE);
-	
-#else	
+	if(strlen(text)) 
 		load_through_persist_stream(text, e);
-#endif
-	} else {
-#ifdef USE_GTKHTML3_14_23
-		gtkhtml_editor_set_text_html (GTKHTML_EDITOR(e->window),
-					      "",
-					      strlen(""));
-		gtkhtml_editor_drop_undo (GTKHTML_EDITOR(e->window));
-		gtkhtml_editor_set_changed (GTKHTML_EDITOR(e->window), FALSE);
-	
-#else	
+	else 
 		load_through_persist_stream("", e); /* clear editor if no text */
-#endif
-	}
 	
 	change_window_title(e->window, title);
 	
@@ -1629,9 +843,6 @@ void editor_load_book(EDITOR * e)
 
 void editor_sync_toggled(GtkToggleButton * button, EDITOR * e)
 {
-#ifdef USE_GTKHTML3_14_23
-	
-#else
 	if (button->active) {
 		if (editor_is_dirty(e))
 			save_through_persist_stream_cb(NULL, (EDITOR*)e);
@@ -1640,7 +851,6 @@ void editor_sync_toggled(GtkToggleButton * button, EDITOR * e)
 	}
 	else		
 		e->sync = FALSE;
-#endif
 }
 
 
@@ -1652,17 +862,12 @@ void editor_sync_with_main(void)
 	tmp = g_list_first(editors_all);
 	while (tmp != NULL) {
 		e = (EDITOR*)tmp->data;
-		//if (!e->studypad) {
 		switch(e->type) {
 			case STUDYPAD_EDITOR:
 			case BOOK_EDITOR:
 				break;			
 			case NOTE_EDITOR:
-#ifdef OLD_NAVBAR
-			editor_sync_toggled(GTK_TOGGLE_BUTTON(e->sync_button), e);
-#else
 			editor_sync_toggled(GTK_TOGGLE_BUTTON(e->navbar.button_sync), e);
-#endif
 			break;
 		}
 		tmp = g_list_next(tmp);
@@ -1678,11 +883,7 @@ editor_load_note(EDITOR * e, const gchar * module_name,
 
 	
 	if (editor_is_dirty(e))
-#ifdef USE_GTKHTML3_14_23
-		_save_note (e);
-#else 
 		save_through_persist_stream_cb(NULL, e);
-#endif
 	
 	if (module_name) {
 		if (e->module)
@@ -1693,48 +894,25 @@ editor_load_note(EDITOR * e, const gchar * module_name,
 		if (e->key) 
 			g_free(e->key);
 		e->key = g_strdup(key);
-	}
-		
+	}		
 	
 	title = g_strdup_printf("%s - %s", e->module, e->key);
 	text = main_get_raw_text((gchar *) e->module, (gchar *) e->key);
-	if(strlen(text)) {
-#ifdef USE_GTKHTML3_14_23
-		//GS_message(("\n\n\neditor_load_note:\n%s\n\n\n", text));
-		gtkhtml_editor_set_text_html (GTKHTML_EDITOR(e->window),
-					      text,
-					      strlen(text));
-		gtkhtml_editor_drop_undo (GTKHTML_EDITOR(e->window));
-		gtkhtml_editor_set_changed (GTKHTML_EDITOR(e->window), FALSE);
-#else 
+	
+	if(strlen(text)) 
 		load_through_persist_stream(text, e);
-#endif
-	} else {
-#ifdef USE_GTKHTML3_14_23
-		gtkhtml_editor_set_text_html (GTKHTML_EDITOR(e->window),
-					      "",
-					     strlen(""));
-		gtkhtml_editor_drop_undo (GTKHTML_EDITOR(e->window));
-		gtkhtml_editor_set_changed (GTKHTML_EDITOR(e->window), FALSE);
-#else 
-		load_through_persist_stream("", e); /* clear editor if no text */
-#endif
-	}
+	else 
+		load_through_persist_stream("", e); /* clear editor if no text */	
 	
 	change_window_title(e->window, title);
     	if(e->type == NOTE_EDITOR) {
-#ifdef OLD_NAVBAR
-		main_navbar_set(e->navbar, e->key);
-#else	
 		main_navbar_versekey_set(e->navbar, e->key);
-#endif
 	} 
 	
 	if (text)
 		g_free(text);
 	if (title)
 		g_free(title);
-//#endif
 }
 
 
@@ -1742,10 +920,6 @@ gboolean editor_close_all(void)
 {
 	GList *tmp = NULL;
 	EDITOR *e = NULL;
-
-#ifdef USE_GTKHTML3_14_23
-	
-#else	
 	tmp = g_list_first(editors_all);
 	GS_message(("number of editors = %d",g_list_length(tmp)));
 	while (tmp != NULL) {
@@ -1755,7 +929,6 @@ gboolean editor_close_all(void)
 		tmp = g_list_next(tmp);
 	}
 	g_list_free(editors_all);
-#endif
 }
 
 static int
@@ -1778,15 +951,8 @@ app_delete_cb(GtkWidget * widget, GdkEvent * event, gpointer data)
 	do_exit((EDITOR *) data);
 	return FALSE;
 }
-/*
-static void size_changed(GtkHTML * html, gpointer data)
-{
-	EDITOR *e = (EDITOR *) data;
-	GS_message(("size_changed"));
-	e->is_changed = TRUE;
-}
-*/
-#ifndef USE_GTKHTML3_14_23
+
+
 static gboolean on_key_release_event(GtkWidget * widget,
 				     GdkEventKey * event, gpointer data)
 {
@@ -1817,107 +983,6 @@ static gboolean on_key_release_event(GtkWidget * widget,
 }
 
 
-
-#ifdef OLD_NAVBAR
-static void on_comboboxentry4_changed(GtkComboBox * combobox, EDITOR * e)
-{
-	gchar *book = NULL;
-	gchar *buf = NULL;
-	GtkTreeIter iter;
-	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
-
-	if (!do_display)
-		return;
-	
-	gtk_combo_box_get_active_iter(combobox, &iter);
-	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &book, -1);
-
-	buf = g_strdup_printf("%s 1:1", book);
-	editor_load_note(e, NULL, buf);
-	
-	main_navbar_set(e->navbar, buf);
-	g_free(book);
-	g_free(buf);
-}
-
-
-static void on_comboboxentry5_changed(GtkComboBox * combobox, EDITOR * e)
-{
-	gchar *book = NULL;
-	gchar *chapter = NULL;
-	gchar *buf = NULL;
-	GtkTreeIter iter;
-	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
-	GtkTreeModel *book_model =
-	    gtk_combo_box_get_model(GTK_COMBO_BOX
-				    (e->navbar.comboboxentry_book));
-	if (!do_display)
-		return;
-	
-	gtk_combo_box_get_active_iter(GTK_COMBO_BOX
-				      (e->navbar.comboboxentry_book),
-				      &iter);
-	gtk_tree_model_get(GTK_TREE_MODEL(book_model), &iter, 0, &book,
-			   -1);
-
-	gtk_combo_box_get_active_iter(combobox, &iter);
-	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter,
-			   0, &chapter, -1);
-
-	buf = g_strdup_printf("%s %s:1", book, chapter);
-	editor_load_note(e, NULL, buf);
-	main_navbar_set(e->navbar, buf);
-
-	g_free(book);
-	g_free(chapter);
-	g_free(buf);
-}
-
-
-static void on_comboboxentry6_changed(GtkComboBox * combobox, EDITOR * e)
-{
-	gchar *book = NULL;
-	gchar *chapter = NULL;
-	gchar *verse = NULL;
-	gchar *buf = NULL;
-	GtkTreeIter iter;
-	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
-	GtkTreeModel *book_model =
-	    gtk_combo_box_get_model(GTK_COMBO_BOX
-				    (e->navbar.comboboxentry_book));
-	GtkTreeModel *chapter_model =
-	    gtk_combo_box_get_model(GTK_COMBO_BOX
-				    (e->navbar.comboboxentry_chapter));
-
-
-	if (!do_display)
-		return;
-	
-	gtk_combo_box_get_active_iter(GTK_COMBO_BOX
-				      (e->navbar.comboboxentry_book),
-				      &iter);
-	gtk_tree_model_get(GTK_TREE_MODEL(book_model), &iter, 0, &book,
-			   -1);
-
-	gtk_combo_box_get_active_iter(GTK_COMBO_BOX
-				      (e->navbar.comboboxentry_chapter),
-				      &iter);
-	gtk_tree_model_get(GTK_TREE_MODEL(chapter_model), &iter, 0,
-			   &chapter, -1);
-
-	gtk_combo_box_get_active_iter(combobox, &iter);
-	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &verse, -1);
-
-	buf = g_strdup_printf("%s %s:%s", book, chapter, verse);
-	editor_load_note(e, NULL, buf);
-	main_navbar_set(e->navbar, buf);
-
-	g_free(book);
-	g_free(chapter);
-	g_free(verse);
-	g_free(buf);
-}
-#endif
 /******************************************************************************
  * Name
  *   
@@ -1939,24 +1004,17 @@ static void on_entry_activate(GtkEntry * entry, EDITOR * e)
 	const gchar *buf = gtk_entry_get_text(entry);
 	if (e->navbar.key)
 		g_free(e->navbar.key);
-#ifdef OLD_NAVBAR
-	e->navbar.key = g_strdup(buf);
-#else
 	e->navbar.key = g_string_assign(e->navbar.key,buf);
-#endif
 	editor_load_note(e, NULL, buf);
 }
 
 
-#endif
-
 static
 gint ask_about_saving(EDITOR * e)
 {
-#ifndef USE_GTKHTML3_14_23
 	CORBA_Object interface;
 	CORBA_Environment ev;
-#endif
+	
 	gint test;
 	GS_DIALOG *info;
 	gchar *buf = NULL;
@@ -1989,27 +1047,10 @@ gint ask_about_saving(EDITOR * e)
 			retval = test;
 			
 			if (test == GS_YES) {
-				if (e->type == NOTE_EDITOR) {
-#ifdef USE_GTKHTML3_14_23
-					/* save notes and prayer lists */
-					_save_note(e);
-#else
+				if (e->type == NOTE_EDITOR)
 					save_through_persist_stream_cb(NULL, e);
-#endif
-				} else {
-#ifdef USE_GTKHTML3_14_23
-					/* save notes and prayer lists */
-					_save_book(e);
-#else
+				else 
 					save_through_persist_stream_cb(NULL, e);
-#endif
-				}
-				/*while (gtk_events_pending()) {
-					gtk_main_iteration();
-				}
-				while (gtk_events_pending()) {
-					gtk_main_iteration();
-				}*/
 			}
 			g_free(info);
 			g_free(buf3);
@@ -2038,24 +1079,12 @@ gint ask_about_saving(EDITOR * e)
 			test = gui_alert_dialog(info);
 			retval = test;
 			if (test == GS_YES) {
-				if (e->filename) {
-#ifdef USE_GTKHTML3_14_23
-					gtkhtml_editor_save (GTKHTML_EDITOR(e->window),
-							 e->filename,
-							 TRUE,
-							 NULL);
-#else
+				if (e->filename) 
 					save_through_persist_file(e,
 							g_strdup(e->filename));
-#endif
-				} else {
-#ifdef USE_GTKHTML3_14_23
-	
-#else
+				else 
 					open_or_save_as_dialog(e,
 						     OP_SAVE_THROUGH_PERSIST_FILE);
-#endif
-				}
 			}
 			g_free(info);
 			g_free(buf3);
@@ -2067,145 +1096,10 @@ gint ask_about_saving(EDITOR * e)
 	return retval;
 }
 
-static GtkWidget *navebar_create(EDITOR * editor)
-{
-#ifdef OLD_NAVBAR
-	GtkWidget *hbox3;
-	GtkWidget *image;
-	GtkWidget *separatortoolitem;
-	GtkListStore *store;
-	GtkCellRenderer *renderer;
-
-	hbox3 = gtk_hbox_new(FALSE, 2);
-	gtk_widget_show(hbox3);
-	gtk_container_set_border_width(GTK_CONTAINER(hbox3), 3);
-
-	editor->sync_button = gtk_toggle_button_new();
-	gtk_widget_show(editor->sync_button);
-	gtk_box_pack_start(GTK_BOX(hbox3), editor->sync_button, FALSE, FALSE,
-			   0);
-	gtk_button_set_relief(GTK_BUTTON(editor->sync_button), GTK_RELIEF_NONE);
-
-	image =
-	    gtk_image_new_from_stock("gtk-refresh",
-				     GTK_ICON_SIZE_BUTTON);
-	gtk_widget_show(image);
-	gtk_container_add(GTK_CONTAINER(editor->sync_button), image);
-
-	separatortoolitem = (GtkWidget *) gtk_separator_tool_item_new();
-	gtk_widget_show(separatortoolitem);
-	gtk_box_pack_start(GTK_BOX(hbox3), separatortoolitem, FALSE,
-			   TRUE, 0);
-	gtk_widget_set_size_request(separatortoolitem, 6, -1);
-
-	store = gtk_list_store_new(1, G_TYPE_STRING);
-
-	editor->navbar.comboboxentry_book =
-	    gtk_combo_box_new_with_model(GTK_TREE_MODEL(store));
-	gtk_widget_show(editor->navbar.comboboxentry_book);
-	gtk_box_pack_start(GTK_BOX(hbox3), editor->navbar.comboboxentry_book,
-			   TRUE, TRUE, 0);
-	gtk_widget_set_size_request(editor->navbar.comboboxentry_book, -1,
-				    6);
-
-	renderer = gtk_cell_renderer_text_new();
-	gtk_cell_layout_pack_start(GTK_CELL_LAYOUT
-				   (editor->navbar.comboboxentry_book),
-				   renderer, TRUE);
-	gtk_cell_layout_set_attributes(GTK_CELL_LAYOUT
-				       (editor->navbar.comboboxentry_book),
-				       renderer, "text", 0, NULL);
-
-
-	separatortoolitem = (GtkWidget *) gtk_separator_tool_item_new();
-	gtk_widget_show(separatortoolitem);
-	gtk_box_pack_start(GTK_BOX(hbox3), separatortoolitem, FALSE,
-			   TRUE, 0);
-	gtk_widget_set_size_request(separatortoolitem, 6, -1);
-	gtk_separator_tool_item_set_draw(GTK_SEPARATOR_TOOL_ITEM
-					 (separatortoolitem), FALSE);
-
-	store = gtk_list_store_new(1, G_TYPE_STRING);
-
-	editor->navbar.comboboxentry_chapter = gtk_combo_box_new_with_model(GTK_TREE_MODEL(store));	//gtk_combo_box_entry_new();
-	gtk_widget_show(editor->navbar.comboboxentry_chapter);
-	gtk_box_pack_start(GTK_BOX(hbox3),
-			   editor->navbar.comboboxentry_chapter, FALSE, TRUE,
-			   0);
-	gtk_widget_set_size_request(editor->navbar.comboboxentry_chapter, 61,
-				    -1);
-
-	renderer = gtk_cell_renderer_text_new();
-	gtk_cell_layout_pack_start(GTK_CELL_LAYOUT
-				   (editor->navbar.comboboxentry_chapter),
-				   renderer, TRUE);
-	gtk_cell_layout_set_attributes(GTK_CELL_LAYOUT
-				       (editor->navbar.
-					comboboxentry_chapter),
-				       renderer, "text", 0, NULL);
-
-	separatortoolitem = (GtkWidget *) gtk_separator_tool_item_new();
-	gtk_widget_show(separatortoolitem);
-	gtk_box_pack_start(GTK_BOX(hbox3), separatortoolitem, FALSE,
-			   TRUE, 0);
-	gtk_widget_set_size_request(separatortoolitem, 6, -1);
-	gtk_separator_tool_item_set_draw(GTK_SEPARATOR_TOOL_ITEM
-					 (separatortoolitem), FALSE);
-
-	store = gtk_list_store_new(1, G_TYPE_STRING);
-	editor->navbar.comboboxentry_verse = gtk_combo_box_new_with_model(GTK_TREE_MODEL(store));	//gtk_combo_box_entry_new();
-	gtk_widget_show(editor->navbar.comboboxentry_verse);
-	gtk_box_pack_start(GTK_BOX(hbox3),
-			   editor->navbar.comboboxentry_verse, FALSE, TRUE,
-			   0);
-	gtk_widget_set_size_request(editor->navbar.comboboxentry_verse, 61,
-				    -1);
-
-
-	renderer = gtk_cell_renderer_text_new();
-	gtk_cell_layout_pack_start(GTK_CELL_LAYOUT
-				   (editor->navbar.comboboxentry_verse),
-				   renderer, TRUE);
-	gtk_cell_layout_set_attributes(GTK_CELL_LAYOUT
-				       (editor->navbar.comboboxentry_verse),
-				       renderer, "text", 0, NULL);
-
-
-	separatortoolitem = (GtkWidget *) gtk_separator_tool_item_new();
-	gtk_widget_show(separatortoolitem);
-	gtk_box_pack_start(GTK_BOX(hbox3), separatortoolitem, FALSE,
-			   TRUE, 0);
-
-	editor->navbar.lookup_entry = gtk_entry_new();
-	gtk_widget_show(editor->navbar.lookup_entry);
-	gtk_box_pack_start(GTK_BOX(hbox3), editor->navbar.lookup_entry, TRUE,
-			   TRUE, 0);
-	
-	g_signal_connect(GTK_OBJECT(editor->sync_button),
-			 "toggled", G_CALLBACK(editor_sync_toggled), editor);
-
-	g_signal_connect((gpointer) editor->navbar.comboboxentry_book,
-			 "changed",
-			 G_CALLBACK(on_comboboxentry4_changed),editor);
-	g_signal_connect((gpointer) editor->navbar.comboboxentry_chapter,
-			 "changed",
-			 G_CALLBACK(on_comboboxentry5_changed),editor);
-	g_signal_connect((gpointer) editor->navbar.comboboxentry_verse,
-			 "changed",
-			 G_CALLBACK(on_comboboxentry6_changed),editor);
-	g_signal_connect((gpointer) editor->navbar.lookup_entry, "activate",
-			 G_CALLBACK(on_entry_activate), editor);
-	return hbox3;
-#endif	
-}
-
 
 static GtkWidget *container_create(const gchar * window_title,
 				   EDITOR * editor)
 {
-#ifdef USE_GTKHTML3_14_23
-	return NULL;
-#else
 	GtkWindow *window;
 	GtkWidget *vbox;
 	GtkWidget *paned;
@@ -2277,19 +1171,10 @@ static GtkWidget *container_create(const gchar * window_title,
 	/* add editor control to vbox */
 	switch(editor->type){
 		case NOTE_EDITOR:
-#ifdef OLD_NAVBAR
-			toolbar_nav = navebar_create(editor);
-			gtk_widget_show(toolbar_nav);
-			gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET(toolbar_nav), FALSE, TRUE, 0);
-			editor->navbar.module_name = editor->module;
-			if (editor->navbar.key == NULL)
-				editor->navbar.key = g_strdup(editor->key);
-			main_navbar_fill_book_combo(editor->navbar);
-#else
 			toolbar_nav = gui_navbar_versekey_editor_new(editor);
 			gtk_widget_show(toolbar_nav);
 			gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET(toolbar_nav), FALSE, TRUE, 0);
-#endif
+
 			gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET(editor->control), TRUE, TRUE, 0);
 		break;
 		case BOOK_EDITOR:
@@ -2346,20 +1231,7 @@ static GtkWidget *container_create(const gchar * window_title,
 	CORBA_exception_free(&ev);
 
 	gtk_widget_show_all(GTK_WIDGET(window));
-    
-#ifndef OLD_NAVBAR
-	if(editor->type == NOTE_EDITOR) {
-		gtk_widget_hide(editor->navbar.button_history_back);
-		gtk_widget_hide(editor->navbar.button_history_next);
-		gtk_widget_hide(editor->navbar.button_history_menu);
-		gtk_widget_hide(editor->navbar.arrow_book_up_box);
-		gtk_widget_hide(editor->navbar.arrow_book_down_box);
-		gtk_widget_hide(editor->navbar.arrow_chapter_up_box);
-		gtk_widget_hide(editor->navbar.arrow_chapter_down_box);
-		gtk_widget_hide(editor->navbar.arrow_verse_up_box);
-		gtk_widget_hide(editor->navbar.arrow_verse_down_box);
-	}
-#endif    /* OLD_NAVBAR */
+	
 	CORBA_exception_init(&ev);
 	editor->engine =
 	    (GNOME_GtkHTML_Editor_Engine)
@@ -2392,7 +1264,6 @@ static GtkWidget *container_create(const gchar * window_title,
 				   "InlineSpelling", TC_CORBA_boolean,
 				   TRUE, NULL);
 	return win;
-#endif
 }
 
 
@@ -2408,10 +1279,9 @@ gint _create_new(const gchar * filename, const gchar * key, gint editor_type)
 	editor = g_new(EDITOR, 1);
 	editor->html_widget = NULL;
 	
-#ifndef USE_GTKHTML3_14_23
 	editor->persist_file_interface = CORBA_OBJECT_NIL;
 	editor->persist_stream_interface = CORBA_OBJECT_NIL;
-#endif	
+	
 	editor->sync = FALSE;
 	editor->type = editor_type;
 	
@@ -2421,13 +1291,8 @@ gint _create_new(const gchar * filename, const gchar * key, gint editor_type)
 			editor->module = NULL;
 			editor->key = NULL;
 			editor->filename = NULL;
-#ifdef USE_GTKHTML3_14_23	
-			widgets.studypad_dialog = 
-				editor_new(_("StudyPad"), editor);
-#else
 			widgets.studypad_dialog =
 				container_create(_("StudyPad"), editor);
-#endif
 			if (filename) {
 				editor->filename = g_strdup(filename);
 				_load_file(editor, g_strdup(filename));
@@ -2440,16 +1305,8 @@ gint _create_new(const gchar * filename, const gchar * key, gint editor_type)
 			editor->module = g_strdup(filename);
 			editor->key = g_strdup(key);
 			editor->navbar.key = NULL;
-#ifdef USE_GTKHTML3_14_23
-			editor_new(_("Note Editor"), editor);
-			vbox = GTKHTML_EDITOR(editor->window)->vbox;			
-			toolbar_nav = gui_navbar_versekey_editor_new(editor);
-			gtk_widget_show(toolbar_nav);
-			gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET(toolbar_nav), FALSE, TRUE, 0);
-			gtk_box_reorder_child (GTK_BOX (vbox),GTK_WIDGET(toolbar_nav),1);
-#else
 			container_create(_("Note Editor"), editor);
-#endif
+			
 			editor_load_note(editor, NULL, NULL);
 		break;
 	case BOOK_EDITOR:
@@ -2457,59 +1314,18 @@ gint _create_new(const gchar * filename, const gchar * key, gint editor_type)
 			editor->filename = NULL;
 			editor->module = g_strdup(filename);
 			editor->key = g_strdup(key);
-#ifdef USE_GTKHTML3_14_23
-			editor_new(_("Prayer List/Journal Editor"), editor);
-			
-			GtkWidget *box = gtk_vbox_new (FALSE, 0);
-			gtk_widget_show (box);
-			GtkWidget *hpaned1 = gtk_hpaned_new ();
-			gtk_widget_show (hpaned1);
-			gtk_paned_pack2 (GTK_PANED (hpaned1), box, TRUE, TRUE);
-			
-			GtkWidget *scrollbar = gtk_scrolled_window_new(NULL, NULL);
-			gtk_widget_show(scrollbar);
-			gtk_paned_pack1(GTK_PANED(hpaned1), GTK_WIDGET(scrollbar),
-						TRUE, TRUE);
-			gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrollbar),
-						       GTK_POLICY_AUTOMATIC,
-						       GTK_POLICY_AUTOMATIC);
-			gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
-							    scrollbar,
-					    settings.shadow_type);	     
-	    
-	    		editor->treeview = gui_create_editor_tree(editor); 
-			gtk_widget_show(editor->treeview);
-			gtk_container_add(GTK_CONTAINER(scrollbar),
-					 editor->treeview);
-			gtk_paned_set_position(GTK_PANED(hpaned1),
-				       125);
-			gtk_tree_view_expand_all((GtkTreeView *)editor->treeview);
-			vbox = GTKHTML_EDITOR(editor->window)->vbox;
-			
-			gtk_widget_reparent (vbox,box);
-			
-			gtk_container_add (GTK_CONTAINER (editor->window), hpaned1);	
-#else
 			container_create(_("Prayer List/Journal Editor"), editor);
-#endif
+			
 			editor_load_book(editor);
 			
 		break;
 	
 	}
 	if (editor->html_widget) {
-#ifdef USE_GTKHTML3_14_23
-	
-	
-#else
 		g_signal_connect(editor->html_widget,
 				 "key_release_event",
 				 G_CALLBACK(on_key_release_event),
 				 (EDITOR *) editor);
-#endif
-	/*	g_signal_connect(editor->html_widget, "size-changed",
-				 G_CALLBACK(size_changed),
-				 (EDITOR *) editor);*/
 	}
 	editor->is_changed = FALSE;		
 	editors_all = g_list_append(editors_all,(EDITOR*) editor);
@@ -2546,34 +1362,24 @@ gint editor_create_new(const gchar * filename, const gchar * key, gint editor_ty
 			case STUDYPAD_EDITOR:
 				if (e->studypad) {
 					if (editor_is_dirty(e))
-#ifdef USE_GTKHTML3_14_23
-						
-#else
 						save_through_persist_file(e, 
 								g_strdup(e->filename));
-
-#endif
 					if (e->filename)
 						g_free(e->filename);
 					e->filename = g_strdup(filename);
 					gtk_widget_show(e->window);
 					gdk_window_raise(GTK_WIDGET(e->window)->window);
-#ifdef USE_GTKHTML3_14_23
-						
-#else
+					
 					_load_file(e, g_strdup(filename));
-#endif
 					return 1;
 				}
 			break;
 			case NOTE_EDITOR:
 			if (!e->studypad) {
 				if (editor_is_dirty(e))
-#ifdef USE_GTKHTML3_14_23	
-#else
 					save_through_persist_stream_cb(NULL, 
 							(EDITOR*)e);
-#endif
+				
 				if (e->module)
 					g_free(e->module);
 				e->module = g_strdup(filename);
@@ -2583,22 +1389,14 @@ gint editor_create_new(const gchar * filename, const gchar * key, gint editor_ty
 				gtk_widget_show(e->window);
 				gdk_window_raise(GTK_WIDGET(e->window)->window);
 				
-#ifdef USE_GTKHTML3_14_23
-						
-#else
 				editor_load_note(e, NULL, NULL);
-#endif
 				return 1;
 			}
 			case BOOK_EDITOR:
 				if (!e->studypad) {
 					if (editor_is_dirty(e))
-#ifdef USE_GTKHTML3_14_23
-						
-#else
 						save_through_persist_stream_cb(NULL, 
 								(EDITOR*)e);
-#endif
 					if (e->module)
 						g_free(e->module);
 					e->module = g_strdup(filename);
@@ -2608,11 +1406,8 @@ gint editor_create_new(const gchar * filename, const gchar * key, gint editor_ty
 					gtk_widget_show(e->window);
 					gdk_window_raise(GTK_WIDGET(e->window)->window);
 					
-#ifdef USE_GTKHTML3_14_23
-						
-#else
 					editor_load_book(e);
-#endif
+					
 					return 1;
 				}
 			break;
@@ -2622,3 +1417,5 @@ gint editor_create_new(const gchar * filename, const gchar * key, gint editor_ty
     	GS_message (("filename %s, key %s",filename, key));
 	return _create_new(filename, key, editor_type);
 }
+
+#endif /* USE_GTKHTML3_14_23 */

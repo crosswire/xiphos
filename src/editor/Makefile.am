@@ -27,10 +27,10 @@ noinst_LIBRARIES = libeditor.a
 
 # The Editor Control
 libeditor_a_SOURCES = $(HTML_EDITOR_GENERATED)		\
-	html-editor.c html-editor.h  
+	bonobo-editor.c bonobo-editor.h  
 # Extra stuff to distribute.
 
-EXTRA_DIST =
+EXTRA_DIST = 
 
 CLEANFILES = \
     $(HTML_EDITOR_GENERATED)
@@ -39,7 +39,9 @@ CLEANFILES = \
 else
 
 noinst_LIBRARIES = libeditor.a
-libeditor_a_SOURCES = html-editor.c html-editor.h
+libeditor_a_SOURCES = slib-editor.c slib-editor.h
+
+EXTRA_DIST = 
 
 endif
 
