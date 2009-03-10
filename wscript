@@ -147,10 +147,9 @@ def configure(conf):
     get_pkgcflags(conf, 'sword', 'SWORD')
 
     # sword multiverse
-    if check_pkgver_msg(conf, 'sword', '1.5.12',
+    if check_pkgver_msg(conf, 'sword', '1.5.11.99',
             msg='Checking for sword multiverse'):
         dfn('SWORD_MULTIVERSE', 1)
-
 
 
     ### gtkhtml - decide HAVE_GTKHTML3_23
