@@ -9,7 +9,8 @@ def configure(conf):
     import Utils
     env = conf.env
     sub = Utils.subst_vars
-        
+
+    # bonobo editor
     if not env['HAVE_GTKHTML3_23']:
         # generade src files from IDL - must be run before compilation
         src_dir =os.getcwd()
@@ -20,15 +21,25 @@ def configure(conf):
         # generate
         os.system(cmd)
 
+
 def build(bld):
 
-    lib = bld.new_task_gen(
-        features='cc cxx', # use C compiler - less restrictive than C++
-        includes='. ../../ ../../src ../../src/editor %s' % bld.env['GECKO_INCLUDE'], # ../../ for config.h
-        target='editor',
-        uselib='GTK GLIB GNOMEUI SWORD GTKMOZEMBED GTKMOZEMBED_UNSTABLE GTKHTML GTKHTML_EDITOR',
-        before='%s/src/editor/Editor.h' % os.getcwd(), # let first generate C sources for Editor
-    )
+    # slib editor
+    if bld.env['HAVE_GTKHTML3_23']:
+        lib = bld.new_task_gen(
+            features='cc cxx', # compile C with gcc, C++ with g++
+            includes='. ../../ ../../src ../../src/editor %s' % bld.env['GECKO_INCLUDE'], # ../../ for config.h
+            source='slib-editor.c',
+            target='editor',
+            uselib='GTK GLIB GNOMEUI SWORD GTKMOZEMBED GTKMOZEMBED_UNSTABLE GTKHTML GTKHTML_EDITOR',
+        )
 
-    lib.find_sources_in_dirs('.')
-
+    # bonobo editor
+    else:
+        lib = bld.new_task_gen(
+            features='cc cxx', # compile C with gcc, C++ with g++
+            includes='. ../../ ../../src ../../src/editor %s' % bld.env['GECKO_INCLUDE'], # ../../ for config.h
+            source='bonobo-editor.c Editor-common.c Editor-skels.c Editor-stubs.c',
+            target='editor',
+            uselib='GTKHTML',
+        )
