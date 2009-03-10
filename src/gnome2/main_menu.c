@@ -26,8 +26,10 @@
 #include <gtk/gtk.h>
 #include <glade/glade-xml.h>
 
-#ifdef USE_GTKHTML38
-#include "editor/html-editor.h"
+#ifdef USE_GTKHTML3_14_23
+#include "editor/slib-editor.h"
+#else
+#include "editor/bonobo-editor.h"
 #endif
 
 #include "gui/about_xiphos.h"

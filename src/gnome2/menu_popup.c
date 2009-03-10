@@ -44,7 +44,11 @@
 #include "main/settings.h"
 #include "main/lists.h"
 
-#include "editor/html-editor.h"
+#ifdef USE_GTKHTML3_14_23
+#include "editor/slib-editor.h"
+#else
+#include "editor/bonobo-editor.h"
+#endif
 
 
 static gchar *menu_mod_name = NULL;

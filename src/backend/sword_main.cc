@@ -707,6 +707,9 @@ void BackEnd::save_note_entry(const char * module, const char * key, const char 
 		display_mod->setKey(key);
 		display_mod->KeyText(); /* snap to entry */
 		display_mod->setEntry((const char *) entry);
+		GS_message (("\nsave_note_entry\nmod: %s\nkey: %s\nentry: %s",
+			     display_mod->Name(), display_mod->KeyText(),
+			     display_mod->RenderText()));
 	}
 }
 

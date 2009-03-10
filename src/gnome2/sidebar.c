@@ -26,11 +26,10 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 
-#ifdef USE_GTKHTML38
-#include "editor/html-editor.h"
+#ifdef USE_GTKHTML3_14_23
+#include "editor/slib-editor.h"
 #else
-#include <gtkhtml/htmlengine.h>
-#include "editor/editor.h"
+#include "editor/bonobo-editor.h"
 #endif
 
 
