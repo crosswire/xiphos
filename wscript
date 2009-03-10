@@ -129,40 +129,6 @@ def configure(conf):
 
 
 
-    ### editor.py
-    conf.check_cfg(package='ORBit-2.0', uselib_store='ORBIT',
-            atleast_version='2.0.0', mandatory=True, args='--cflags --libs')
-    conf.check_cfg(package='libbonobo-2.0', uselib_store='BONOBO',
-            atleast_version='2.0.0', mandatory=True, args='--cflags --libs')
-    conf.check_cfg(package='bonobo-activation-2.0', uselib_store='BONOBOACTIV',
-            atleast_version='2.0.0', mandatory=True, args='--cflags --libs')
-    ### END editor.py
-
-
-
-    # TODO: use gtkhtml.py
-
-
-
-    ### editor.py
-    # IDL for editor
-
-    # ORBIT_IDL
-    env['ORBIT_IDL'] = conf.check_cfg(package='ORBit-2.0', okmsg=okmsg,
-            msg='Checking for program ORBit idl', args='--variable=orbit_idl').strip()
-
-
-    # BONOBO_IDL_INCLUDES
-    idl1 = conf.check_cfg(package='libbonobo-2.0', okmsg=okmsg,
-            msg='Checking for bonobo idl dir', args='--variable=idldir').strip()
-
-    idl2 = conf.check_cfg(package='bonobo-activation-2.0', okmsg=okmsg,
-            msg='Checking for bonobo-activation idl dir', args='--variable=idldir').strip()
-
-    env['BONOBO_IDL_INCLUDES'] = '-I%s -I%s' % (idl1, idl2)
-    ### END editor.py
-
-
 
 
     # Other
@@ -182,11 +148,45 @@ def configure(conf):
             atleast_version='1.5.11', mandatory=True, args='--cflags --libs',
             errmsg='error: either no sword or sword not recent enough')
 
-    ### gtkhtml
+
+
+    ### gtkhtml - decide HAVE_GTKHTML3_23
     if not Gtkhtml(conf).detect():
         print 'Error: GTKHTML not found'
         exit(1)
-     
+
+
+
+    # bonobo editor variant, slib-editor otherwise
+    if not env['HAVE_GTKHTML3_23']:
+
+        ### editor.py
+        conf.check_cfg(package='ORBit-2.0',
+                atleast_version='2.0.0', mandatory=True)
+        conf.check_cfg(package='libbonobo-2.0',
+                atleast_version='2.0.0', mandatory=True)
+        conf.check_cfg(package='bonobo-activation-2.0',
+                atleast_version='2.0.0', mandatory=True)
+
+        # IDL for editor
+
+        # ORBIT_IDL
+        env['ORBIT_IDL'] = conf.check_cfg(package='ORBit-2.0', okmsg=okmsg,
+                msg='Checking for program ORBit idl', args='--variable=orbit_idl').strip()
+
+
+        # BONOBO_IDL_INCLUDES
+        idl1 = conf.check_cfg(package='libbonobo-2.0', okmsg=okmsg,
+                msg='Checking for bonobo idl dir', args='--variable=idldir').strip()
+
+        idl2 = conf.check_cfg(package='bonobo-activation-2.0', okmsg=okmsg,
+                msg='Checking for bonobo-activation idl dir', args='--variable=idldir').strip()
+
+        env['BONOBO_IDL_INCLUDES'] = '-I%s -I%s' % (idl1, idl2)
+        ### END editor.py
+
+
+    
 
     ######################
     ### gecko (xulrunner) for html rendering
@@ -201,6 +201,7 @@ def configure(conf):
         dfn('GTKHTML', 1)
 
     ######################
+
 
 
 
