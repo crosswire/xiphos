@@ -22,7 +22,14 @@
 #ifndef ___NAVBAR_VERSEKEY_EDITOR_H_
 #define ___NAVBAR_VERSEKEY_EDITOR_H_
 
-#include "editor/html-editor.h"
+#include <config.h>
+
+#ifdef USE_GTKHTML3_14_23
+#include "editor/slib-editor.h"
+#else
+#include "editor/bonobo-editor.h"
+#endif
+
 GtkWidget *gui_navbar_versekey_editor_new(EDITOR * editor);
 
 #endif

@@ -27,7 +27,11 @@
 #include <libxml/tree.h>
 #include <libxml/parser.h>
 
-#include "editor/html-editor.h"
+#ifdef USE_GTKHTML3_14_23
+#include "editor/slib-editor.h"
+#else
+#include "editor/bonobo-editor.h"
+#endif
 
 #include "gui/xiphos.h"
 #include "gui/tabbed_browser.h"

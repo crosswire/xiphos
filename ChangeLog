@@ -1,6 +1,11 @@
 2009-03-09  terry <tbiggs@users.sourceforge.net>
 
 	* added <save> button to editors main toolbar
+	* seperated bonobo editor (old) and slib editor (new) into two files
+	* removed editor/html-editor.c and editor/html-editor.h
+	* added editor/bonobo-editor.c and editor/bonobo-editor.h
+	* added editor/slib-editor.c and editor/slib-editor.h
+
 
 2009-03-08  karl <charcoal@users.sf.net>
 

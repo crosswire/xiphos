@@ -1,8 +1,8 @@
 /*
  * Xiphos Bible Study Tool
- * html-editor.h - the html editor
+ * slib-editor.h - the html editor using gtkhtml-editor (slib)
  *
- * Copyright (C) 2005-2008 Xiphos Developer Team
+ * Copyright (C) 2005-2009 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,28 +19,19 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  */
  
-#ifndef _HTML_EDITOR_H
-#define _HTML_EDITOR_H
+#ifndef _SLIB_EDITOR_H
+#define _SLIB_EDITOR_H
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif
 
+#include <config.h>	
+	
 #ifdef USE_GTKHTML3_14_23
 	
-#else
-#include <bonobo.h>
-#include "editor/Editor.h"
-	
-#endif	
-	
-#include <config.h>
-#ifdef OLD_NAVBAR
-#include "main/navbar.h"
-#else
 #include "main/navbar_versekey.h"
-#endif
 
 typedef struct _editor EDITOR;
 struct _editor {
@@ -51,20 +42,8 @@ struct _editor {
 	GtkWidget *html_widget;
 	GtkWidget *statusbar;
 
-#ifdef OLD_NAVBAR	
-	NAVBAR navbar;
-#else		
 	NAVBAR_VERSEKEY navbar;
-#endif
 	
-#ifdef USE_GTKHTML3_14_23
-	//GtkhtmlEditor *editor;
-#else
-	BonoboWidget *control;
-	GNOME_GtkHTML_Editor_Engine engine;
-	Bonobo_PersistFile persist_file_interface;
-	Bonobo_PersistStream persist_stream_interface;
-#endif	
 	gint type;
 
 	gboolean studypad;
@@ -87,12 +66,12 @@ void editor_sync_with_main(void);
 gboolean editor_close_all(void);
 void editor_load_note(EDITOR * e, const gchar * module_name, const gchar * key);
 void editor_load_book(EDITOR * e);
-gint editor_create_new(const gchar * filename, const gchar * key, gint note);	
-//gint editor_create_prayer_list_editor(const gchar * mod_name, const gchar * key, gint prayer_list);
-//gint load_file (EDITOR * e);
+gint editor_create_new(const gchar * filename, const gchar * key, gint note);
+
+#endif /* USE_GTKHTML3_14_23 */
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* _HTML_EDITOR_H */
+#endif /* _SLIB_EDITOR_H */
