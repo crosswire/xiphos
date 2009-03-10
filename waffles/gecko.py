@@ -162,22 +162,23 @@ class Gecko(object):
         Should work for:
             Gentoo with xulrunner-1.8
         """
+        cfg = self.conf
         ret = False
         gecko = 'xulrunner-gtkmozembed'
         lib = 'GTKMOZEMBED'
 
-        if check_package(self.conf, gecko):
+        if check_package(cfg, gecko):
 
             get_pkgcflags(cfg, gecko, lib)
             self.check_version(gecko)
-            incldir = get_pkgvar(self.conf, gecko, 'includedir')
-            libdir = get_pkgvar(self.conf, gecko, 'libdir')
+            incldir = get_pkgvar(cfg, gecko, 'includedir')
+            libdir = get_pkgvar(cfg, gecko, 'libdir')
             gecko_include = self.get_gecko_includes(incldir)
             self.dfn('GECKO_HOME', libdir)
             self.env['GECKO_INCLUDE'] = gecko_include
 
-            get_pkgcflags(self.conf, 'xulrunner-nss', 'GECKONSS')
-            get_pkgcflags(self.conf, 'xulrunner-nspr', 'GECKONSPR')
+            get_pkgcflags(cfg, 'xulrunner-nss', 'GECKONSS')
+            get_pkgcflags(cfg, 'xulrunner-nspr', 'GECKONSPR')
 
             ret = True
 
