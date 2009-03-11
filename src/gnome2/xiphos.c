@@ -110,14 +110,14 @@ void frontend_init(void)
 	 */	
 	if (settings.havebible) {
 		main_check_parallel_modules();
-		main_init_paraellel_view();
+		main_init_parallel_view();
 	}
 	
 	settings.paratab_showing = FALSE;
 	
 	main_dialogs_setup();
 
-	gui_set_sidebar_porgram_start();
+	gui_set_sidebar_program_start();
 }
 
 
@@ -287,7 +287,7 @@ void shutdown_frontend(void)
 	
 	main_dialogs_shutdown();
 	main_delete_sidebar_search_backend();
-	main_delete_paraellel_view();
+	main_delete_parallel_view();
 #ifndef OLD_NAVBAR	
 	g_string_free(navbar_versekey.module_name,TRUE);
 	g_string_free(navbar_versekey.key,TRUE);

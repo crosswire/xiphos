@@ -32,7 +32,6 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include <dirent.h>
 
 #include "gui/xiphos.h"
 #include "gui/bookmarks_menu.h"
