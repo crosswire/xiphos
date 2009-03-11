@@ -170,12 +170,12 @@ static void add_columns(GtkTreeView * treeview)
 
 /******************************************************************************
  * Name
- *   gui_set_sidebar_porgram_start
+ *   gui_set_sidebar_program_start
  *
  * Synopsis
  *   #include "gui/sidebar.h"
  *
- *   void gui_set_sidebar_porgram_start(void)
+ *   void gui_set_sidebar_program_start(void)
  *
  * Description
  *
@@ -184,7 +184,7 @@ static void add_columns(GtkTreeView * treeview)
  *   void
  */
 
-void gui_set_sidebar_porgram_start(void)
+void gui_set_sidebar_program_start(void)
 {
 	/*
 	 *  show hide shortcut bar - set to options setting

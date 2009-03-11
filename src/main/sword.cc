@@ -25,6 +25,9 @@
 
 
 #include <gnome.h>
+#include <glib.h>
+#include <glib/gstdio.h>
+
 #include <swmgr.h>
 #include <swmodule.h>
 #include <stringmgr.h>
@@ -50,7 +53,6 @@ extern "C" {
 
 #include <ctype.h>
 #include <time.h>
-#include <dirent.h>
 
 #include "gui/main_window.h"
 #include "gui/font_dialog.h"
@@ -1598,33 +1600,30 @@ char *main_get_mod_config_file(const char * module_name,
 #ifdef  SWORD_SHOULD_HAVE_A_WAY_TO_GET_A_CONF_FILENAME_FROM_A_MODNAME
 	return backend->get_config_file((char*)module_name, (char*)moddir);
 #else
-	DIR *dir;
-	struct dirent *ent;
+	GDir *dir;
+	const gchar *ent;
 	SWBuf name;
 
 	name =  moddir;
 	name += "/mods.d";
-	if (dir = opendir(name)) {
-		rewinddir(dir);
-		while (ent = readdir(dir)) {
-			if ((strcmp(ent->d_name, ".")) &&
-			    (strcmp(ent->d_name, ".."))) {
-				name =  moddir;
-				name += "/mods.d/";
-				name += ent->d_name;
-				SWConfig *config = new SWConfig(name.c_str());
-				if (config->Sections.find(module_name) !=
-				    config->Sections.end()) {
-					char *ret_name = g_strdup(ent->d_name);
-					closedir(dir);
-					delete config;
-					return ret_name;
-				}
-				else
-					delete config;
+	if (dir = g_dir_open(name, 0, NULL)) {
+	        g_dir_rewind(dir);
+		while (ent = g_dir_read_name(dir)) {
+		        name =  moddir;
+			name += "/mods.d/";
+			name += ent;
+			SWConfig *config = new SWConfig(name.c_str());
+			if (config->Sections.find(module_name) !=
+			        config->Sections.end()) {
+			        gchar *ret_name = g_strdup(ent);
+				g_dir_close(dir);
+				delete config;
+				return ret_name;
 			}
+			else
+			        delete config;
 		}
-		closedir(dir);
+		g_dir_close(dir);
 	}
 	return NULL;
 #endif

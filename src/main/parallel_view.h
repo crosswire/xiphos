@@ -60,8 +60,8 @@ void main_update_parallel_page(void);
 void main_update_parallel_page_detached(void);
 void main_swap_parallel_with_main(char *intmod);
 
-void main_init_paraellel_view(void);
-void main_delete_paraellel_view(void);
+void main_init_parallel_view(void);
+void main_delete_parallel_view(void);
 
 	
 #ifdef __cplusplus

@@ -37,7 +37,6 @@
 #include <string.h>
 #include <utf8html.h>
 #include <url.h>
-#include <dirent.h>
 
 #include "backend/sword_main.hh"
 
