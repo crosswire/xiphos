@@ -8,7 +8,7 @@ def build(bld):
         includes='. ../.. ../../src ../../src/editor %s' % bld.env['GECKO_INCLUDE'], # ../../ for config.h
         target='xiphos',
         #uselib='GLIB GTK GNOMEUI SWORD GTKMOZEMBED GECKONSS GECKONSPR GTKHTML UPRINT MAGICK',)
-        uselib='GNOMEUI GNOMEPRINT GECKONSPR MAGICK GNOMEPRINTUI GECKONSS GLIB GTK GTKHTML GTKHTML_EDITOR GTKMOZEMBED GTKMOZEMBED_UNSTABLE UPRINT SWORD',
+        uselib='GNOMEUI GNOMEPRINT GECKONSPR MAGICK GNOMEPRINTUI GECKONSS GLIB GTK GTKHTML GTKHTML_EDITOR GTKMOZEMBED GTKMOZEMBED_UNSTABLE UPRINT SWORD GMODULEEXP',
         #uselib='GNOMEUI GNOMEPRINT MAGICK GNOMEPRINTUI GLIB GTK GTKHTML GTKHTML_EDITOR GTKMOZEMBED GTKMOZEMBED_UNSTABLE UPRINT SWORD',
         add_objects='backend gecko editor main', # used instead of libbackend.a, libgecko.a, libeditor.a, libmain.a
         #uselib_local='backend gecko editor main', # on linux files: libbackend.a, libgecko.a, libeditor.a, libmain.a

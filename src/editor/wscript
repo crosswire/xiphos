@@ -11,7 +11,7 @@ def configure(conf):
     sub = Utils.subst_vars
 
     # bonobo editor
-    if not env['HAVE_GTKHTML3_23']:
+    if not env['HAVE_EDITOR_IDL']:
         # generade src files from IDL - must be run before compilation
         src_dir =os.getcwd()
         editor_dir = os.path.join(src_dir, 'src', 'editor')
@@ -25,7 +25,7 @@ def configure(conf):
 def build(bld):
 
     # slib editor
-    if bld.env['HAVE_GTKHTML3_23']:
+    if bld.env['HAVE_EDITOR_IDL']:
         lib = bld.new_task_gen(
             features='cc cxx', # compile C with gcc, C++ with g++
             includes='. ../../ ../../src ../../src/editor %s' % bld.env['GECKO_INCLUDE'], # ../../ for config.h
