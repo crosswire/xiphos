@@ -93,20 +93,13 @@ class Gecko(object):
         return success
 
 
-
     def check_version(self, name):
 
         cfg = self.conf
-        dfn = self.conf.define
-
-        if check_pkgver(cfg, name, '1.7'):
-            dfn('HAVE_GECKO_1_7', 1)
-        if check_pkgver(cfg, name, '1.8'):
-            dfn('HAVE_GECKO_1_8', 1)
-        if check_pkgver(cfg, name, '1.8.1'):
-            dfn('HAVE_GECKO_1_8_1', 1)
-        if check_pkgver(cfg, name, '1.9'):
-            dfn('HAVE_GECKO_1_9', 1)
+        check_pkg(cfg, name, '1.7', var='GECKO_1_7')
+        check_pkg(cfg, name, '1.8', var='GECKO_1_8')
+        check_pkg(cfg, name, '1.8.1', var='GECKO_1_8_1')
+        check_pkg(cfg, name, '1.9', var='GECKO_1_9')
 
     
     def get_gecko_includes(self, incldir):
@@ -136,11 +129,10 @@ class Gecko(object):
         lib = 'GTKMOZEMBED'
         lib_unstable = 'GTKMOZEMBED_UNSTABLE'
 
-        if check_package(cfg, gecko) and check_package(cfg, gecko_unstable):
+        check_pkg(cfg, gecko, var=lib)
+        check_pkg(cfg, gecko_unstable, var=lib_unstable)
 
-            get_pkgcflags(cfg, gecko, lib)
-            get_pkgcflags(cfg, gecko_unstable, lib_unstable)
-
+        if self.env['HAVE_GTKMOZEMBED'] and self.env['HAVE_GTKMOZEMBED_UNSTABLE']:
             #incldir = self.get_pkgvar(gecko, 'includedir')
             self.check_version(gecko)
             libdir = get_pkgvar(self.conf, gecko, 'sdkdir')
@@ -149,8 +141,8 @@ class Gecko(object):
 
             # NSS & NSPR
             # TODO: are NSS and NSPR really needed both?
-            get_pkgcflags(cfg, 'nss', 'GECKONSS')
-            get_pkgcflags(cfg, 'nspr', 'GECKONSPR')
+            check_pkg(cfg, 'nss', var='GECKONSS')
+            check_pkg(cfg, 'nspr', var='GECKONSPR')
 
             ret = True
 
@@ -167,9 +159,9 @@ class Gecko(object):
         gecko = 'xulrunner-gtkmozembed'
         lib = 'GTKMOZEMBED'
 
-        if check_package(cfg, gecko):
+        check_pkg(cfg, gecko, var=lib)
 
-            get_pkgcflags(cfg, gecko, lib)
+        if self.env['HAVE_GTKMOZEMBED']:
             self.check_version(gecko)
             incldir = get_pkgvar(cfg, gecko, 'includedir')
             libdir = get_pkgvar(cfg, gecko, 'libdir')
@@ -177,8 +169,8 @@ class Gecko(object):
             self.dfn('GECKO_HOME', libdir)
             self.env['GECKO_INCLUDE'] = gecko_include
 
-            get_pkgcflags(cfg, 'xulrunner-nss', 'GECKONSS')
-            get_pkgcflags(cfg, 'xulrunner-nspr', 'GECKONSPR')
+            check_pkg(cfg, 'xulrunner-nss', var='GECKONSS')
+            check_pkg(cfg, 'xulrunner-nspr', var='GECKONSPR')
 
             ret = True
 

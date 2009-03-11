@@ -123,53 +123,36 @@ def configure(conf):
     # pkg-config
     conf.check_cfg(atleast_pkgconfig_version='0.9.0')
 
-    ## GTK+/Gnome libs
 
-    # GTK+ x11 implementation
-    if check_pkgver(conf, 'gtk+-x11-2.0', '2.0.0'):
-        get_pkgcflags(conf, 'gtk+-x11-2.0', 'GTK')
-        dfn('HAVE_LIBGTK_X11_2_0', 1)
-    # GTK+ win32 implementation
-    elif check_pkgver(conf, 'gtk+-win32-2.0', '2.0.0', True):
-        get_pkgcflags(conf, 'gtk+-win32-2.0', 'GTK')
-        dfn('HAVE_LIBGTK_WIN32_2_0', 1)
+    # GTK+ implementation
+    check_pkg(conf, 'gtk+-x11-2.0', '2.0.0', var='LIBGTK_X11_2_0')
+    #if not env['HAVE_LIBGTK_X11_2_0']:
+    #    check_pkg(conf, 'gtk+-x11-2.0', '2.0.0', True, var='LIBGTK_WIN32_2_0')
 
     # gtk popup menu
-    check_pkgver(conf, 'gmodule-export-2.0', '2.0.0', True)
-    get_pkgcflags(conf, 'gmodule-export-2.0', 'GMODULEEXP')
+    check_pkg(conf, 'gmodule-export-2.0', '2.0.0', True, var='GMODULEEXP')
 
-    check_pkgver(conf, 'glib-2.0', '2.0.0', True)
-    get_pkgcflags(conf, 'glib-2.0', 'GLIB')
-    check_pkgver(conf, 'libgnomeui-2.0', '2.0.0', True)
-    get_pkgcflags(conf, 'libgnomeui-2.0', 'GNOMEUI')
+    ## Gnome libs
+    check_pkg(conf, 'glib-2.0', '2.0.0', True, 'GLIB')
+    check_pkg(conf, 'libgnomeui-2.0', '2.0.0', True, var='GNOMEUI')
 
-    check_pkgver(conf, 'libgnomeprintui-2.2', '2.2', True)
-    get_pkgcflags(conf, 'libgnomeprintui-2.2', 'GNOMEPRINTUI')
-    check_pkgver(conf, 'libgnomeprint-2.2', '2.2', True)
-    get_pkgcflags(conf, 'libgnomeprint-2.2', 'GNOMEPRINT')
+    check_pkg(conf, 'libgnomeprintui-2.2', '2.2', True, var='GNOMEPRINTUI')
+    check_pkg(conf, 'libgnomeprint-2.2', '2.2', True, var='GNOMEPRINT')
 
+    ## Other
+    check_pkg(conf, 'libxml-2.0', '2.0.0', True, var='XML')
+    check_pkg(conf, 'ImageMagick++', '6.0.0', True, var='MAGICK')
 
-
-    # Other
-    check_pkgver(conf, 'libxml-2.0', '2.0.0', True)
-    get_pkgcflags(conf, 'libxml-2.0', 'XML')
-
-    if check_pkgver(conf, 'gtk+-unix-print-2.0', '2.0.0'):
-        get_pkgcflags(conf, 'gtk+-unix-print-2.0', 'UPRINT')
+    check_pkg(conf, 'gtk+-unix-print-2.0', '2.0.0', var='UPRINT')
+    if env['HAVE_UPRINT']:
         dfn('USE_GTKUPRINT', 1)
 
-    check_pkgver_errmsg(conf, 'ImageMagick++', '6.0.0',
-            'either no ImageMagick++ or ImageMagick++ not recent enough',
-            True)
-    get_pkgcflags(conf, 'ImageMagick++', 'MAGICK')
-
     ## Sword
-    check_pkgver(conf, 'sword', '1.5.11')
-    get_pkgcflags(conf, 'sword', 'SWORD')
+    check_pkg(conf, 'sword', '1.5.11', True, var='SWORD')
 
-    # sword multiverse
-    if check_pkgver_msg(conf, 'sword', '1.5.11.99',
-            msg='Checking for sword multiverse'):
+    check_pkg_msg(conf, 'sword', '1.5.11.99', var='MULTIVERSE',
+            msg='Checking for sword multiverse')
+    if env['HAVE_MULTIVERSE']:
         dfn('SWORD_MULTIVERSE', 1)
 
 
@@ -179,14 +162,13 @@ def configure(conf):
         exit(1)
 
 
-
     # bonobo editor variant, slib-editor otherwise
     if not env['HAVE_EDITOR_IDL']:
 
         ### editor.py
-        check_package(conf, 'ORBit-2.0', True)
-        check_package(conf, 'libbonobo-2.0', True)
-        check_package(conf, 'bonobo-activation-2.0', True)
+        check_pkg(conf, 'ORBit-2.0', mandatory=True)
+        check_pkg(conf, 'libbonobo-2.0', mandatory=True)
+        check_pkg(conf, 'bonobo-activation-2.0', mandatory=True)
 
         # ORBIT_IDL
         env['ORBIT_IDL'] = get_pkgvar(conf, 'ORBit-2.0', 'orbit_idl')
