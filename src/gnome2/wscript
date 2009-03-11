@@ -3,15 +3,31 @@
 
 def build(bld):
 
+    env = bld.env
+    
+    # GTK
+    gtk = 'LIBGTK_X11_2_0'
+    if not env['HAVE_LIBGTK_X11_2_0']:
+        gtk = 'LIBGTK_WIN32_2_0'
+
+    gtk += ' %s' % 'GLIB GMODULEEXP'
+
+    # GTKHTML
+    gtkhtml = 'GTKHTML'
+    if env['HAVE_GTKHTML_EDITOR']:
+        gtkhtml += ' %s' % 'GTKHTML'
+
+    # GECKO
+    gecko = 'GTKMOZEMBED'
+    if env['HAVE_GTKMOZEMBED_UNSTABLE']:
+        gecko += ' %s' % 'GTKMOZEMBED_UNSTABLE'
+        
     lib = bld.new_task_gen(
         features='cxx cc cprogram',
         includes='. ../.. ../../src ../../src/editor %s' % bld.env['GECKO_INCLUDE'], # ../../ for config.h
         target='xiphos',
-        #uselib='GLIB GTK GNOMEUI SWORD GTKMOZEMBED GECKONSS GECKONSPR GTKHTML UPRINT MAGICK',)
-        uselib='GNOMEUI GNOMEPRINT GECKONSPR MAGICK GNOMEPRINTUI GECKONSS GLIB GTK GTKHTML GTKHTML_EDITOR GTKMOZEMBED GTKMOZEMBED_UNSTABLE UPRINT SWORD GMODULEEXP',
-        #uselib='GNOMEUI GNOMEPRINT MAGICK GNOMEPRINTUI GLIB GTK GTKHTML GTKHTML_EDITOR GTKMOZEMBED GTKMOZEMBED_UNSTABLE UPRINT SWORD',
+        uselib='GNOMEUI GNOMEPRINT GECKONSPR MAGICK GNOMEPRINTUI GECKONSS   UPRINT SWORD  %s %s %s' % (gtk, gtkhtml, gecko),
         add_objects='backend gecko editor main', # used instead of libbackend.a, libgecko.a, libeditor.a, libmain.a
-        #uselib_local='backend gecko editor main', # on linux files: libbackend.a, libgecko.a, libeditor.a, libmain.a
     )
 
     lib.find_sources_in_dirs('.')
