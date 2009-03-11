@@ -1460,12 +1460,12 @@ void main_load_menu_form_mod_list(GtkWidget * pmInt, gchar * label,
 
 /******************************************************************************
  * Name
- *   main_init_paraellel_view
+ *   main_init_parallel_view
  *
  * Synopsis
  *   #include "main/parallel_view.h
  *
- *   void main_init_paraellel_view(void)
+ *   void main_init_parallel_view(void)
  *
  * Description
  *   create a new sword backend for parallel use
@@ -1476,7 +1476,7 @@ void main_load_menu_form_mod_list(GtkWidget * pmInt, gchar * label,
  *   void
  */
 
-void main_init_paraellel_view(void)
+void main_init_parallel_view(void)
 {
 	backend_p = new BackEnd();
 	gui_create_parallel_page();
@@ -1487,12 +1487,12 @@ void main_init_paraellel_view(void)
 
 /******************************************************************************
  * Name
- *   main_delete_paraellel_view
+ *   main_delete_parallel_view
  *
  * Synopsis
  *   #include "main/parallel_view.h
  *
- *   void main_delete_paraellel_view(void)
+ *   void main_delete_parallel_view(void)
  *
  * Description
  *   delete the sword backend for the parallel view  
@@ -1501,7 +1501,7 @@ void main_init_paraellel_view(void)
  *   void
  */
 
-void main_delete_paraellel_view(void)
+void main_delete_parallel_view(void)
 {
 	delete backend_p;
 	
