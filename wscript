@@ -28,6 +28,23 @@ APPNAME='xiphos'
 srcdir = '.'
 blddir = 'build'
 
+headers = [
+    'dlfcn.h', # HAVE_DLFCN_H
+    'inttypes.h', # HAVE_INTTYPES_H
+    'locale.h', # HAVE_LOCALE_H
+    'memory.h', # HAVE_MEMORY_H
+    'stdint.h', # HAVE_STDINT_H
+    'stdlib.h', # HAVE_STDLIB_H
+    'strings.h', # HAVE_STRINGS_H
+    'string.h', # HAVE_STRING_H
+    'sys/stat.h', # HAVE_SYS_STAT_H
+    'sys/types.h', # HAVE_SYS_TYPES_H
+    'unistd.h', # HAVE_UNISTD_H
+    'sys/select.h', # HAVE_SYS_SELECT_H
+    'sys/socket.h', # HAVE_SYS_SOCKET_H
+]
+
+
 
 def set_options(opt):
 
@@ -117,6 +134,10 @@ def configure(conf):
         get_pkgcflags(conf, 'gtk+-win32-2.0', 'GTK')
         dfn('HAVE_LIBGTK_WIN32_2_0', 1)
 
+    # gtk popup menu
+    check_pkgver(conf, 'gmodule-export-2.0', '2.0.0', True)
+    get_pkgcflags(conf, 'gmodule-export-2.0', 'GMODULEEXP')
+
     check_pkgver(conf, 'glib-2.0', '2.0.0', True)
     get_pkgcflags(conf, 'glib-2.0', 'GLIB')
     check_pkgver(conf, 'libgnomeui-2.0', '2.0.0', True)
@@ -160,7 +181,7 @@ def configure(conf):
 
 
     # bonobo editor variant, slib-editor otherwise
-    if not env['HAVE_GTKHTML3_23']:
+    if not env['HAVE_EDITOR_IDL']:
 
         ### editor.py
         check_package(conf, 'ORBit-2.0', True)
@@ -205,59 +226,25 @@ def configure(conf):
     #Define to 1 if you have the `bind_textdomain_codeset' function.
     dfn('HAVE_BIND_TEXTDOMAIN_CODESET', 1)
 
-    # TODO
-    #Define to 1 if you have the `dcgettext' function.
-    dfn('HAVE_DCGETTEXT', 1)
-
-    #Define to 1 if you have the <dlfcn.h> header file.
-    conf.check(header_name='dlfcn.h', define_name='HAVE_DLFCN_H')
 
     # TODO
     #Define if the GNU gettext() function is already present or preinstalled.
     dfn('HAVE_GETTEXT', 1)
+    #Define to 1 if you have the `dcgettext' function.
+    dfn('HAVE_DCGETTEXT', 1)
 
-    #Define to 1 if you have the <inttypes.h> header file.
-    conf.check(header_name='inttypes.h', define_name='HAVE_INTTYPES_H')
 
-    # TODO FIXME
     #Define if your <locale.h> file defines LC_MESSAGES.
-    dfn('HAVE_LC_MESSAGES', 1)
+    #conf.check(header_name='locale.h', define_name='HAVE_LC_MESSAGES')
+    #dfn('HAVE_LC_MESSAGES', 1)
 
-    #Define to 1 if you have the <locale.h> header file.
-    # included in gnome checks
-    #conf.check(header_name='locale.h', define_name='HAVE_LOCALE_H')
-
-    #Define to 1 if you have the <memory.h> header file.
-    conf.check(header_name='memory.h', define_name='HAVE_MEMORY_H')
-
-    #Define to 1 if you have the <stdint.h> header file.
-    conf.check(header_name='stdint.h', define_name='HAVE_STDINT_H')
-
-    #Define to 1 if you have the <stdlib.h> header file.
-    conf.check(header_name='stdlib.h', define_name='HAVE_STDLIB_H')
-
-    #Define to 1 if you have the <strings.h> header file.
-    conf.check(header_name='strings.h', define_name='HAVE_STRINGS_H')
-
-    #Define to 1 if you have the <string.h> header file.
-    conf.check(header_name='string.h', define_name='HAVE_STRING_H')
-
-    #Define to 1 if you have the <sys/stat.h> header file.
-    conf.check(header_name='sys/stat.h', define_name='HAVE_SYS_STAT_H')
-
-    #Define to 1 if you have the <sys/types.h> header file.
-    conf.check(header_name='sys/types.h', define_name='HAVE_SYS_TYPES_H')
-
-    #Define to 1 if you have the <unistd.h> header file.
-    conf.check(header_name='unistd.h', define_name='HAVE_UNISTD_H')
+    # Check for header files
+    for h in headers:
+        conf.check(header_name=h)
 
     # TODO: check these defines
     # Define to 1 if you have the `strcasestr' function. */
     dfn('HAVE_STRCASESTR', 1)
-    # Define to 1 if you have the <sys/select.h> header file. */
-    dfn('HAVE_SYS_SELECT_H', 1)
-    # Define to 1 if you have the <sys/socket.h> header file. */
-    dfn('HAVE_SYS_SOCKET_H', 1)
 
     # TODO: What's the purpose of STDC? Is xiphos able compile without that?
     # Define to 1 if you have the ANSI C header files. */

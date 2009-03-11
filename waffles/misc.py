@@ -13,6 +13,18 @@ def myokmsg(kw):
 
 # pkgconfig utils
 
+def check_pkg (conf, name, version='', mandatory=False, var=None):
+    """
+    Check package and its version
+    """
+    if not var:
+        var = name.split ('-')[0].upper ()
+    conf.check_cfg (package=name, uselib_store=var, args='--cflags --libs',
+        atleast_version=version, mandatory=mandatory)
+
+
+
+# TODO: remove this function - unreliable
 def check_package(conf, pkg, mandatory=False):
     """
     Check package existence
