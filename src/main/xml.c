@@ -411,20 +411,20 @@ xmlNodePtr xml_load_bookmark_file(const xmlChar * bookmark_file)
 
 	if (bookmark_doc == NULL) {
 		fprintf(stderr, _("Document not parsed successfully. \n"));
-		return;
+		return NULL;
 	}
 
 	cur = xmlDocGetRootElement(bookmark_doc);
 	if (cur == NULL) {
 		fprintf(stderr, _("empty document \n"));
-		return;
+		return NULL;
 	}
 
 	if (xmlStrcmp(cur->name, (const xmlChar *) "SwordBookmarks")) {
 		fprintf(stderr,
 			_("wrong type, root node != SwordBookmarks\n"));
 		xmlFreeDoc(bookmark_doc);
-		return;
+		return NULL;
 	}
 
 	cur = cur->xmlChildrenNode;
@@ -1190,7 +1190,6 @@ void xml_remove_node(const char *section, const char *item, const char *label)
 {
 	xmlNodePtr cur = NULL;
 	xmlNodePtr cur_item = NULL;
-	xmlNodePtr new = NULL;
 	if ((cur =
 	     xml_find_section( "Xiphos", section)) != NULL) {
 		if ((cur_item = xml_find_item(cur, item, label)) != NULL) {			

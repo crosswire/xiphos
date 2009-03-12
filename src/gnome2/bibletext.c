@@ -533,7 +533,6 @@ GtkWidget *gui_create_bible_pane(void)
 {
 	GtkWidget *notebook_text;
 	GtkWidget *scrolledwindow;
-	GtkWidget *frame;
 	
 	notebook_text = gtk_notebook_new();
 	gtk_widget_show(notebook_text);

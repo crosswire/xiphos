@@ -84,7 +84,6 @@ on_menu_historyitem_activate(GtkMenuItem * menuitem,
 
 void main_clear_tab_history(void)
 {
-	gint i;
 	PASSAGE_TAB_INFO *tab = NULL;
     
     	//if(!settings.browsing) return;
@@ -108,7 +107,6 @@ void main_clear_tab_history(void)
 	tab->history_items = 0;
 	tab->current_history_item = 0;
 	tab->first_back_click = TRUE;
-	//main_add_tab_history_item(tab);
 }
 
 
@@ -236,10 +234,8 @@ void on_clear_activate(GtkMenuItem * menuitem, gpointer user_data)
 GtkWidget *main_versekey_drop_down_new(gpointer data)
 {	
 	gint i;
-	gchar *tmpbuf = NULL;
 	GtkWidget *menu;
 	GtkWidget *item;
-	unsigned long offset;
 	PASSAGE_TAB_INFO *tab = NULL;
     	
 	tab = (PASSAGE_TAB_INFO*) data;
