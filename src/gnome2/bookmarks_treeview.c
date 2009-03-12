@@ -63,7 +63,7 @@ gboolean button_two;
 gboolean use_dialog;
 GtkTreeSelection *current_selection;
 GtkTreeView *bookmark_tree;
-static gboolean save_reorderable;
+//static gboolean save_reorderable;
 
 
 BookMarksPixbufs *bm_pixbufs;
@@ -86,7 +86,7 @@ BookMarksPixbufs *bm_pixbufs;
 void gui_verselist_to_bookmarks(GList * verses)
 {
 	gint test;
-	const gchar *key_buf = NULL;
+//	const gchar *key_buf = NULL;
 	gchar *tmpbuf;
 	gchar *module_name;
 	GString *str;
@@ -230,7 +230,7 @@ static void get_xml_bookmark_data(xmlNodePtr cur, BOOKMARK_DATA * data)
 	xmlChar *mod_desc;
 	xmlChar *description;
 	gchar buf[500];
-	gchar *url = NULL;
+//	gchar *url = NULL;
 
 	data->opened = bm_pixbufs->pixbuf_helpdoc;
 	data->closed = NULL;
@@ -394,7 +394,7 @@ static void add_node(xmlNodePtr cur, GtkTreeIter * parent)
  *   void
  */
 
-void parse_bookmarks(GtkTreeView * tree, const xmlChar * file,
+void gui_parse_bookmarks(GtkTreeView * tree, const xmlChar * file,
 		     GtkTreeIter * parent)
 {
 	xmlNodePtr cur = NULL;
@@ -453,7 +453,7 @@ void gui_load_removed(const xmlChar * file)
 	GtkTreeIter iter;
 	GtkTreeIter parent;
 	GtkTreePath *path;
-	gchar *caption = NULL;
+//	gchar *caption = NULL;
 	GtkTreeSelection *selection;
 	GtkTreeIter selected;
 
@@ -515,7 +515,7 @@ static void load_xml_bookmarks(GtkTreeView * tree, GtkTreeIter * iter)
 	str = g_string_new(settings.swbmDir);
 	g_string_sprintf(str, "%s/bookmarks.xml", settings.swbmDir);
 	file = (const xmlChar *) str->str;
-	parse_bookmarks(tree, file, iter);
+	gui_parse_bookmarks(tree, file, iter);
 	g_string_free(str, TRUE);
 }
 
@@ -752,7 +752,7 @@ static gboolean button_release_event(GtkWidget * widget,
 	gchar *mod_desc = NULL;
 	gchar *description = NULL;
 	gchar *url = NULL;
-	gint which_tree = GPOINTER_TO_INT(data);
+//	gint which_tree = GPOINTER_TO_INT(data);
 	button_one = FALSE;
 	button_two = FALSE;
 
