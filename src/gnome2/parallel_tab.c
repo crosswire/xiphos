@@ -66,15 +66,13 @@ PARA_LABELS plabels;
 /******************************************************************************
  * static
  */
-static GtkWidget *parallel_UnDock_Dialog;
-static GtkWidget *vboxInt;
-static gboolean ApplyChangeBook;
-static GtkWidget *sync_button;
 static GtkWidget *parallel_vbox;
-static NAVBAR navbar;
 NAVBAR_VERSEKEY navbar_parallel;
+#ifdef OLD_NAVBAR
+static NAVBAR navbar;
+static GtkWidget *sync_button;
+#endif
 
-static GtkWidget *create_parallel_dialog(void);
 static void sync_with_main(const gchar * key);
 
 
@@ -250,7 +248,7 @@ void gui_set_parallel_navbar(const char * key)
 */
 
 
-
+#ifdef OLD_NAVBAR
 /******************************************************************************
  * Name
  *   sync_toggled
@@ -288,10 +286,8 @@ static void sync_toggled(GtkToggleButton * button, gpointer data)
  * Return value
  *   void
  */
-//#ifdef OLD_NAVBAR
 static void on_entry_activate(GtkEntry * entry, gpointer data)
 {
-	
 	const gchar *buf = gtk_entry_get_text(entry);
 	if (navbar.key)
 		g_free(navbar.key);
@@ -424,7 +420,7 @@ static void on_comboboxentry6_changed(GtkComboBox * combobox, gpointer data)
 	g_free(verse);
 	g_free(buf);
 }
-//#endif
+#endif /* OLD_NAVBAR */
 
 /******************************************************************************
  * Name
@@ -574,8 +570,7 @@ static GtkWidget *create_nav_toolbar(void)
 #endif
 }
 
-
-
+#ifndef USE_GTKMOZEMBED
 /******************************************************************************
  * Name
  *  on_text_button_press_event
@@ -612,13 +607,14 @@ static gboolean on_text_button_press_event(GtkWidget * widget,
 
 /******************************************************************************
  * Name
- *  on_button_release_event
+ *  on_text_button_release_event
  *
  * Synopsis
  *   #include "_bibletext.h"
  *
- *  gboolean on_button_release_event(GtkWidget * widget,
-			    GdkEventButton * event, DIALOG_DATA * t)
+ *  gboolean on_text_button_release_event(GtkWidget * widget,
+ *					  GdkEventButton * event,
+ *					  DIALOG_DATA * t)
  *
  * Description
  *   called when mouse button is clicked in html widget
@@ -628,15 +624,9 @@ static gboolean on_text_button_press_event(GtkWidget * widget,
  */
 
 static gboolean on_text_button_release_event(GtkWidget * widget,
-					GdkEventButton * event,
-					gpointer date)
+					     GdkEventButton * event,
+					     gpointer date)
 {
-	extern gboolean in_url;
-	gchar *key;
-	const gchar *url;
-	gchar *buf = NULL;
-
-
 	switch (event->button) {
 	case 1:
 		
@@ -652,6 +642,8 @@ static gboolean on_text_button_release_event(GtkWidget * widget,
 	}
 	return FALSE;
 }
+#endif /* !USE_GTKMOZEMBED */
+
 /******************************************************************************
  * Name
  *   create_parallel_tab
@@ -673,15 +665,11 @@ GtkWidget *_create_parallel_tab(void)
 {
 	GtkWidget *toolbar29;
   	GtkWidget *box_parallel_labels;
-	GtkWidget *tmp_toolbar_icon;
-	GtkWidget *buttonIntSync;
-	GtkWidget *cbIntBook;
-	GtkObject *sbIntChapter_adj;
-	GtkObject *sbIntVerse_adj;
-	GtkWidget *btnIntGotoVerse;
 	GtkWidget *eventbox;
 	GtkWidget *frame;
+#ifndef USE_GTKMOZEMBED
 	GtkWidget *scrolled_window;
+#endif
     
     	//plabels = g_new0(PARA_LABELS,1);
 	gtk_notebook_set_show_tabs (GTK_NOTEBOOK(widgets.notebook_bible_parallel),

@@ -25,6 +25,8 @@
 
 #include <gnome.h>
 #include <glade/glade-xml.h>
+#include <ctype.h>
+
 #ifdef USE_GTKMOZEMBED
 #include "gecko/gecko-html.h"
 #else
@@ -38,11 +40,20 @@
 #include "gui/dialog.h"
 #include "gui/utilities.h"
 #include "gui/widgets.h"
+#include "gui/bookmark_dialog.h"
+#include "gui/export_dialog.h"
+#include "gui/find_dialog.h"
+#include "gui/font_dialog.h"
+#include "gui/about_modules.h"
 
 #include "main/module_dialogs.h"
 #include "main/sword.h"
 #include "main/settings.h"
 #include "main/lists.h"
+#include "main/display.hh"
+#include "main/search_sidebar.h"
+#include "main/mod_mgr.h"
+#include "main/url.hh"
 
 #ifdef USE_GTKHTML3_14_23
 #include "editor/slib-editor.h"
@@ -1324,11 +1335,10 @@ void on_read_selection_aloud_activate (GtkMenuItem * menuitem, gpointer user_dat
  *   GtkWidget*
  */
 
-static
-GtkWidget * _add_and_check_global_opts (GladeXML *gxml,
-					const gchar * mod_name, 
-				        GtkWidget * submenu, 
-				        DIALOG_DATA * d)
+void _add_and_check_global_opts (GladeXML *gxml,
+				 const gchar * mod_name, 
+				 GtkWidget * submenu, 
+				 DIALOG_DATA * d)
 {
 	GtkWidget * item;    
 	GLOBAL_OPS *ops = NULL;
@@ -1585,32 +1595,24 @@ GtkWidget * _create_popup_menu ( const gchar * mod_name, DIALOG_DATA * d)
     	const gchar *mname = NULL;
 	
 	glade_file = gui_general_user_file ("xi-menus.glade", FALSE);
-	g_return_if_fail (glade_file != NULL);
+	g_return_val_if_fail ((glade_file != NULL), NULL);
 	
 	gxml = glade_xml_new (glade_file, "menu_popup", NULL);
 		
 	g_free (glade_file);
-	g_return_if_fail (gxml != NULL);
+	g_return_val_if_fail ((gxml != NULL), NULL);
 	
 	GtkWidget *menu 	= glade_xml_get_widget (gxml, "menu_popup");
     
-	GtkWidget *about 	= glade_xml_get_widget (gxml, "about");
-	//GtkWidget *image = 
-	//gtk_image_menu_item_set_image ((GtkImageMenuItem *)about, image);
 	GtkWidget *bookmark	= glade_xml_get_widget (gxml, "bookmark");
 	GtkWidget *open 	= glade_xml_get_widget (gxml, "open_module2"); /*  */
 	GtkWidget *export_	= glade_xml_get_widget (gxml, "export_passage");
-	GtkWidget *print 	= glade_xml_get_widget (gxml, "print");
 	GtkWidget *close 	= glade_xml_get_widget (gxml, "close");
-	GtkWidget *copy		= glade_xml_get_widget (gxml, "copy");
-	GtkWidget *find 	= glade_xml_get_widget (gxml, "find");
 	GtkWidget *note 	= glade_xml_get_widget (gxml, "note"); /*  */
 	GtkWidget *open_edit	= glade_xml_get_widget (gxml, "open_in_editor");
-	GtkWidget *mod_opt 	= glade_xml_get_widget (gxml, "module_options"); /*  */
 	
     	GtkWidget *mod_opt_sub 	= GTK_WIDGET (glade_xml_get_widget (gxml, "module_options1_menu")); /*  */
 	
-	GtkWidget *font 	= glade_xml_get_widget (gxml, "font");
 	GtkWidget *lookup 	= glade_xml_get_widget (gxml, "lookup_selection1"); /*  */
 	GtkWidget *lookup_sub 	= glade_xml_get_widget (gxml, "lookup_selection1_menu");
 	GtkWidget *unlock 	= glade_xml_get_widget (gxml, "unlock_this_module"); 
@@ -1619,7 +1621,10 @@ GtkWidget * _create_popup_menu ( const gchar * mod_name, DIALOG_DATA * d)
 	GtkWidget *rename_percomm = glade_xml_get_widget (gxml, "rename_perscomm");
     	GtkWidget *dump_percomm = glade_xml_get_widget (gxml, "dump_perscomm");
 	
+#if defined(__CYGWIN__) || defined(WIN32)
 	GtkWidget *read_aloud	= glade_xml_get_widget (gxml, "read_selection_aloud");
+	GtkWidget *print 	= glade_xml_get_widget (gxml, "print");
+#endif
     	
     	GtkWidget *open_sub 	= gtk_menu_new ();
 	GtkWidget *note_sub 	= gtk_menu_new ();
