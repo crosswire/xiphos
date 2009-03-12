@@ -29,6 +29,7 @@
 #include <glade/glade-xml.h>
 
 #include "gui/export_dialog.h"
+#include "gui/dialog.h"
 #include "gui/utilities.h"
 
 
@@ -157,8 +158,6 @@ void on_dialog_export_passage_response(GtkDialog * dialog,
 			 		gint response_id,
 			 		gpointer user_data)
 {
-	gchar *filename = NULL;
-	
 	switch (response_id) {
 	case GTK_RESPONSE_CANCEL:		
 		gtk_widget_destroy(GTK_WIDGET(dialog));	

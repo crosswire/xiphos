@@ -58,11 +58,11 @@ enum {
 /******************************************************************************
  * static - global to this file only
  */
-static GList *dialog_list;
-static DIALOG_DATA *cur_dlg;
+//static GList *dialog_list;
+//static DIALOG_DATA *cur_dlg;
 //static GtkCTreeNode *rootnode;
 static GtkTreeModel *model;
-static gint tree_level;	
+//static gint tree_level;	
 
 
 
@@ -171,12 +171,12 @@ static void dialog_url(GtkHTML * html, const gchar * url,
  * Return value
  *   void
  */
-
+/*
 static void link_clicked(GtkButton * button, gpointer user_data)
 {
 
 }
-
+*/
 
 /******************************************************************************
  * Name
@@ -195,15 +195,18 @@ static void link_clicked(GtkButton * button, gpointer user_data)
  *   void
  */
 
+#ifndef USE_GTKMOZEMBED
 static gboolean button_press(GtkWidget *widget,
 			     GdkEventButton *event,
 			     DIALOG_DATA *g)
 {
-	cur_dlg = g;
+	//cur_dlg = g;
 	if(event->button == 2)
 		gui_menu_popup (NULL, g); 
 	return FALSE;
 }
+#endif /* !USE_GTKMOZEMBED */
+
 
 /******************************************************************************
  * Name
@@ -248,7 +251,7 @@ static GtkTreeModel *create_model (void)
 static void add_columns(GtkTreeView *tree)
 {
 	GtkTreeViewColumn *column;
-	GtkTreeViewColumn *column2;
+//	GtkTreeViewColumn *column2;
 	GtkCellRenderer *renderer;
   
 	column = gtk_tree_view_column_new ();
@@ -321,13 +324,14 @@ void gui_create_gbs_dialog(DIALOG_DATA *dlg)
 {
 	GtkWidget *vbox_dialog;
 	GtkWidget *navbar;
-	GtkWidget *frame_gbs;
 	GtkWidget *hpaned;
 	GtkWidget *scrolledwindow_ctree;
-	GtkWidget *label241;
-	GtkWidget *label242;
-	GtkWidget *label243;
+//	GtkWidget *label241;
+//	GtkWidget *label242;
+//	GtkWidget *label243;
+#ifndef USE_GTKMOZEMBED  
 	GtkWidget *scrolledwindow_html;
+#endif /* !USE_GTKMOZEMBED */
 	GtkWidget *frame;
 	GObject *selection;
 
@@ -343,12 +347,7 @@ void gui_create_gbs_dialog(DIALOG_DATA *dlg)
 	vbox_dialog = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox_dialog);
 	gtk_container_add(GTK_CONTAINER(dlg->dialog), vbox_dialog);
-/*
-	frame_gbs = gtk_frame_new(NULL);
-	gtk_widget_show(frame_gbs);
-	gtk_box_pack_start(GTK_BOX(vbox_dialog), frame_gbs, TRUE, TRUE,
-			   0);
-*/
+	
 	navbar = gui_navbar_book_dialog_new(dlg);
 	gtk_box_pack_start(GTK_BOX(vbox_dialog), navbar, FALSE, FALSE, 0);
 	
