@@ -476,8 +476,8 @@ static void on_notebook_comm_book_switch_page(GtkNotebook * notebook,
 	if(settings.comm_showing)
 		main_display_commentary(settings.CommWindowModule, settings.currentverse);
 	else if (settings.book_mod) {
-		url = g_strdup_printf("sword://%s/%d", settings.book_mod,
-						       settings.book_offset);
+		url = g_strdup_printf("sword://%s/%ld", settings.book_mod,
+						        settings.book_offset);
 		main_url_handler(url);
 		g_free(url);
 	}
