@@ -149,7 +149,7 @@ static void save_iter_to_xml_removed(GtkTreeIter * iter)
 	//const xmlChar *xml_filename;
 	gchar *caption = NULL;
 	gchar filename[256];
-	GtkTreeIter child;
+//	GtkTreeIter child;
 	
 	if (!bookmarks_changed) 
 		return;
@@ -315,7 +315,7 @@ static void bibletime_bookmarks_activate(GtkMenuItem * menuitem,
 	GtkTreeIter parent;
 	GString *str;
 	const xmlChar *file;
-	gchar *text[3];
+	//gchar *text[3];
 
 	if(!gtk_tree_model_get_iter_first(GTK_TREE_MODEL(model),&parent))
 		return;
@@ -335,7 +335,7 @@ static void bibletime_bookmarks_activate(GtkMenuItem * menuitem,
 			   COL_KEY, NULL,
 			   COL_MODULE, NULL,
 			   -1);	
-	parse_bookmarks(bookmark_tree, file, &iter);
+	gui_parse_bookmarks(bookmark_tree, file, &iter);
 	g_string_free(str, TRUE);
 }
 
@@ -443,7 +443,7 @@ static void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 	gint test;
 	GtkTreeSelection* selection;
 	GtkTreeIter selected;
-	GtkTreeIter iter;
+//	GtkTreeIter iter;
 	gchar *caption = NULL;
 	gchar *key = NULL;
 	gchar *module = NULL;
@@ -559,7 +559,7 @@ static void on_remove_folder_activate(GtkMenuItem * menuitem,
 {
 	GtkTreeSelection* selection;
 	GtkTreeIter selected;
-	GtkTreeIter iter;
+//	GtkTreeIter iter;
 	gchar buf[256];
 	gchar *caption = NULL;
 	
@@ -601,7 +601,7 @@ static void on_remove_folder_activate(GtkMenuItem * menuitem,
 static void restore_ok(GtkButton * button, GtkWidget * filesel)
 {
 	const xmlChar *file;
-	gchar buf[256];
+	//gchar buf[256];
 	
 	file = (const xmlChar *)
 	    gtk_file_selection_get_filename(GTK_FILE_SELECTION
@@ -715,7 +715,7 @@ static void on_delete_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 	gchar *name_string;
 	GtkTreeSelection* selection;
 	GtkTreeIter selected;
-	GtkTreeIter iter;
+//	GtkTreeIter iter;
 	gchar *caption = NULL;
 	gchar *key = NULL;
 	gchar *module = NULL;
@@ -876,7 +876,7 @@ static void on_add_bookmark_activate(GtkMenuItem * menuitem,
 {	
 	GtkTreeIter selected;
 	GtkTreeIter iter;
-	gchar *caption = NULL;
+//	gchar *caption = NULL;
 	gchar *key = NULL;
 	gchar *mod_name = NULL;
 	gint test;
@@ -975,9 +975,9 @@ static void on_new_folder_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GtkTreeIter selected;
 	GtkTreeIter iter;
-	gchar *caption = NULL;
-	gchar *key = NULL;
-	gchar *module = NULL;
+//	gchar *caption = NULL;
+//	gchar *key = NULL;
+//	gchar *module = NULL;
 	char *t, *buf;
 	gint test;
 	GS_DIALOG *info;
@@ -1044,7 +1044,7 @@ void on_open_in_tab_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GtkTreeSelection* selection;
 	GtkTreeIter selected;
-	GtkTreeIter iter;
+//	GtkTreeIter iter;
 	gchar *key = NULL;
 	gchar *module = NULL;
 	gchar *url = NULL;
