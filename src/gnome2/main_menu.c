@@ -34,15 +34,18 @@
 
 #include "gui/about_xiphos.h"
 #include "gui/about_sword.h"
+#include "gui/about_modules.h"
 #include "gui/about_trans.h"
 #include "gui/xiphos.h"
 #include "gui/main_window.h"
 #include "gui/main_menu.h"
+#include "gui/mod_mgr.h"
 #include "gui/preferences_dialog.h"
 #include "gui/sidebar.h"
 #include "gui/sidebar_dialog.h"
 #include "gui/search_dialog.h"
 #include "gui/studypad.h"
+#include "gui/tabbed_browser.h"
 #include "gui/utilities.h"
 #include "gui/widgets.h"
 
@@ -50,6 +53,8 @@
 #include "main/sword.h"
 #include "main/search_dialog.h"
 #include "main/tab_history.h"
+#include "main/url.hh"
+#include "main/xml.h"
 
 
 
@@ -94,7 +99,9 @@ void gui_about_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 void on_help_contents_activate(GtkMenuItem * menuitem, gpointer user_data)
 {	
+# ifdef WIN32
 	const char *lang = getenv("LANG");
+#endif /* WIN32 */
 
 #ifdef __CYGWIN__
 	gui_generic_warning("Cygwin does not have the\n"
@@ -745,7 +752,7 @@ void on_open_session_activate(GtkMenuItem * menuitem, gpointer user_data)
  * Return value
  *   void
  */
-
+# if 0
 static void
 view_hints(GtkMenuItem * menuitem,
 	   gpointer user_data)
@@ -758,7 +765,7 @@ view_hints(GtkMenuItem * menuitem,
 	if(hint.use_hints)
 		gui_open_hint_viewer();*/
 }
-
+#endif /* 0 */
 
 /******************************************************************************
  * Name
@@ -924,15 +931,15 @@ GtkWidget *gui_create_main_menu(void)
 {
 	gchar *glade_file;
 	GladeXML *gxml;
-    	const gchar *mname = NULL;
+ //   	const gchar *mname = NULL;
 	
 	glade_file = gui_general_user_file ("xi-menus.glade", FALSE);
-	g_return_if_fail (glade_file != NULL);
+	g_return_val_if_fail (glade_file != NULL, NULL);
 	
 	gxml = glade_xml_new (glade_file, "menu_main", NULL);
 		
 	g_free (glade_file);
-	g_return_if_fail (gxml != NULL);
+	g_return_val_if_fail (gxml != NULL, NULL);
 	
 	GtkWidget *menu 	= glade_xml_get_widget (gxml, "menu_main");
 	
