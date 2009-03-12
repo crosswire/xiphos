@@ -55,8 +55,7 @@
  * static - global to this file only
  */
 static DIALOG_DATA *cur_vt;
-//static gboolean in_url;
-static GtkWidget *sync_button;
+
 GtkTextBuffer *text_buffer;
 /******************************************************************************
  * externs
@@ -83,7 +82,7 @@ extern gboolean do_display;
  * Return value
  *   void
  */
-
+/*
 static void close_text_dialog(DIALOG_DATA * t)
 {
 	if (t->dialog) {
@@ -91,8 +90,9 @@ static void close_text_dialog(DIALOG_DATA * t)
 		gtk_widget_destroy(t->dialog);
 	}
 }
+*/
 
-
+#ifndef USE_GTKMOZEMBED
 /******************************************************************************
  * Name
  *   show_in_statusbar
@@ -131,7 +131,7 @@ static void show_in_statusbar(GtkWidget *statusbar,
 	}
 	g_free(text);
 }
-
+#endif
 
 
 /******************************************************************************
@@ -176,11 +176,11 @@ static void link_clicked(GtkHTML *html,
  * Return value
  *   void
  */
-
+/*
 static void book_changed(GtkEditable *editable,
 			 DIALOG_DATA *vt)
 {
-	gchar buf[256];
+//	gchar buf[256];
 	gchar *url;
 	gchar *bookname = gtk_editable_get_chars(editable, 0, -1);
 	cur_vt = vt;
@@ -191,7 +191,7 @@ static void book_changed(GtkEditable *editable,
 	}
 }
 
-
+*/
 /******************************************************************************
  * Name
  *   chapter_button_release_event
@@ -208,15 +208,13 @@ static void book_changed(GtkEditable *editable,
  * Return value
  *   gboolean
  */
-
+/*
 static gboolean chapter_button_release_event(GtkWidget *widget,
 					     GdkEventButton *event,
 					     DIALOG_DATA *vt)
 {
 	G_CONST_RETURN gchar *bookname;
-	gchar *val_key;
 	gchar *url;
-	gchar buf[256];
 	gint chapter;
 	cur_vt = vt;
 
@@ -229,7 +227,7 @@ static gboolean chapter_button_release_event(GtkWidget *widget,
 	g_free(url);
 	return FALSE;
 }
-
+*/
 
 /******************************************************************************
  * Name
@@ -246,13 +244,13 @@ static gboolean chapter_button_release_event(GtkWidget *widget,
  * Return value
  *   gboolean
  */
-
+/*
 static gboolean verse_button_release_event(GtkWidget *widget,
 					   GdkEventButton *event,
 					   DIALOG_DATA *vt)
 {
 	const gchar *bookname;
-	gchar buf[256], *val_key;
+//	gchar buf[256], *val_key;
 	gint chapter, verse;
 	gchar *url;
 	cur_vt = vt;
@@ -270,7 +268,7 @@ static gboolean verse_button_release_event(GtkWidget *widget,
 	g_free(url);
 	return FALSE;
 }
-
+*/
 
 /******************************************************************************
  * Name
@@ -288,12 +286,12 @@ static gboolean verse_button_release_event(GtkWidget *widget,
  * Return value
  *   gboolean
  */
-
+/*
 static gboolean entry_key_press_event(GtkWidget * widget,
 				      GdkEventKey * event,
 				      DIALOG_DATA * vt)
 {
-	/* if <enter> key */
+	// if <enter> key 
 	cur_vt = vt;
 	if (event->keyval == 65293 || event->keyval == 65421) {
 		const gchar *buf = gtk_entry_get_text(GTK_ENTRY(widget));
@@ -303,7 +301,7 @@ static gboolean entry_key_press_event(GtkWidget * widget,
 	}
 	return FALSE;
 }
-
+*/
  
 /******************************************************************************
  * Name
@@ -577,9 +575,9 @@ static void sync_with_main(DIALOG_DATA *c)
 void gui_bible_dialog_sync_toggled(GtkToggleButton *button,
 				   DIALOG_DATA *c)
 {
-	if (c && (c->mod_type == COMMENTARY_TYPE)) {
+	/*if (c && (c->mod_type == COMMENTARY_TYPE)) {
 		gui_commentary_dialog_sync_toggled(button, c);
-	} else {
+	} else {*/
 		if (c == NULL)
 			c = cur_vt;
 		if (button->active) {
@@ -587,7 +585,7 @@ void gui_bible_dialog_sync_toggled(GtkToggleButton *button,
 			c->sync = TRUE;
 		} else
 			c->sync = FALSE;
-	}
+	//}
 }
 
 #ifdef OLD_NAVBAR
@@ -764,6 +762,7 @@ static GtkWidget *create_nav_toolbar(DIALOG_DATA *c)
 	GtkWidget *separatortoolitem;
 	GtkListStore *store;
 	GtkCellRenderer *renderer;
+	GtkWidget *sync_button;
 
 	hbox3 = gtk_hbox_new(FALSE, 2);
 	gtk_widget_show(hbox3);
@@ -1214,9 +1213,11 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 	GtkWidget *vbox33;
 	GtkWidget *paned;
 	GtkWidget *frame;
+#ifndef USE_GTKMOZEMBED
 	GtkWidget *swVText;
 	//gchar *gdk_font = NULL;
 	gchar file[250];
+#endif
 
 	vt->dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 

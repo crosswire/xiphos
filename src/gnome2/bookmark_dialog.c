@@ -341,8 +341,8 @@ static void create_bookmark_dialog(gchar * label,
 	GladeXML *gxml;
 	gchar *glade_file;
 	GtkWidget *dialog;
-	GtkWidget *chooser;
-	gint index = 0;
+//	GtkWidget *chooser;
+//	gint index = 0;
 
 	glade_file = gui_general_user_file ("bookmarks.glade", TRUE);
 	g_return_if_fail(glade_file != NULL);
