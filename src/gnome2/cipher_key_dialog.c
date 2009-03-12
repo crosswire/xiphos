@@ -27,9 +27,11 @@
 #include <gtkhtml/gtkhtml.h>
 
 #include "gui/cipher_key_dialog.h"
+#include "gui/dialog.h"
+
+#include "main/mod_mgr.h"
 #include "main/settings.h"
 #include "main/sword.h"
-#include "gui/dialog.h"
 
 
 

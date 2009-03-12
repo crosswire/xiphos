@@ -40,6 +40,7 @@
 #include "gui/shortcutbar_main.h"
 #include "gui/dictlex_dialog.h"
 #include "gui/main_window.h"
+#include "gui/menu_popup.h"
 #include "gui/shortcutbar_search.h"
 #include "gui/sidebar.h"
 #include "gui/find_dialog.h"
@@ -118,13 +119,13 @@ void gui_get_clipboard_text_for_lookup (GtkClipboard *clipboard,
 		g_free(dict);
 }
 
-
+#if 0
 static void set_label(gchar * mod_name)
 {
 	gtk_label_set_text(GTK_LABEL(widgets.label_dict), mod_name);
 
 }
-
+#endif
 
 /******************************************************************************
  * Name
@@ -224,6 +225,7 @@ void gui_set_dictlex_mod_and_key(gchar * mod_name, gchar * key)
  *   gint
  */
 
+#ifndef USE_GTKMOZEMBED
 static gint html_button_pressed(GtkWidget * html,
 				GdkEventButton * event, gpointer data)
 {
@@ -276,10 +278,11 @@ static gint html_button_pressed(GtkWidget * html,
 static gint html_button_released(GtkWidget * html,
 				GdkEventButton * event, gpointer data)
 {
+#ifdef GTKHTML
 	extern gboolean in_url;
 	gchar *key;
 	const gchar *url;
-	//gchar *buf = NULL;
+#endif
 	
 	settings.whichwindow = DICTIONARY_WINDOW;
 
@@ -310,6 +313,8 @@ static gint html_button_released(GtkWidget * html,
 	return FALSE;
 }
 
+#endif /* !USE_GTKMOZEMBED */
+
 /******************************************************************************
  * Name
  *  list_button_released
@@ -326,7 +331,7 @@ static gint html_button_released(GtkWidget * html,
  * Return value
  *   gint
  */
-
+#if 0
 static gint list_button_released(GtkWidget * treeview,
 			 GdkEventButton * event, gpointer data)
 {
@@ -340,7 +345,7 @@ static gint list_button_released(GtkWidget * treeview,
 
 	if (!gtk_tree_selection_get_selected
 	    (selection, &model, &selected))
-		return;
+		return 0;
 
 	switch (event->button) {
 	case 1:
@@ -366,7 +371,7 @@ static void add_columns(GtkTreeView * treeview)
 {
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
-	GtkTreeModel *model = gtk_tree_view_get_model(treeview);
+//	GtkTreeModel *model = gtk_tree_view_get_model(treeview);
 
 	/* column for fixed toggles */
 	renderer = gtk_cell_renderer_text_new();
@@ -385,7 +390,7 @@ static void add_columns(GtkTreeView * treeview)
 				   NULL,
 				   NULL, NULL, &settings.cell_height);
 }
-
+#endif /* 0 */
 
 static gboolean on_enter_notify_event(GtkWidget * widget,
 				      GdkEventCrossing * event,
@@ -420,11 +425,6 @@ void button_forward_clicked(GtkButton * button, gpointer user_data)
 	if (settings.havedict) main_dictionary_button_clicked(1);
 }
 
-static void on_entry_activate(GtkEntry * entry,
-				   gpointer user_data)
-{
-	GS_message(("on_entry_activate"));
-}
 
 
 /******************************************************************************
@@ -516,7 +516,7 @@ static gboolean select_button_press_callback (GtkWidget *widget,
 {
 	if (!settings.DictWindowModule ||
 	    (*settings.DictWindowModule == '\0'))
-		return;
+		return 0;
 
 	GtkWidget *menu = main_dictionary_drop_down_new(settings.DictWindowModule,
 						settings.dictkey);
@@ -550,25 +550,28 @@ _popupmenu_requested_cb (GeckoHtml *html,
 GtkWidget *gui_create_dictionary_pane(void)
 {
 	GtkWidget *box_dict;
-	GtkWidget *hpaned;
-	GtkWidget *vbox;
+//	GtkWidget *hpaned;
+//	GtkWidget *vbox;
 	GtkWidget *hbox2;
 	GtkWidget *button10;
 	GtkWidget *image1;
-	GtkWidget *comboboxentry1;
+//	GtkWidget *comboboxentry1;
 	GtkWidget *button11;
 	GtkWidget *image2;
 	GtkWidget *arrow1;
-	GtkWidget *frame_entry;
-	GtkWidget *toolbarDLKey;
+//	GtkWidget *frame_entry;
+//	GtkWidget *toolbarDLKey;
 	GtkWidget *dict_drop_down;
-	GtkWidget *tmp_toolbar_icon;
-	GtkWidget *label205;
+//	GtkWidget *tmp_toolbar_icon;
+//	GtkWidget *label205;
+#ifdef USE_GTKMOZEMBED
+	GtkWidget *frame;	
+#else
 	GtkWidget *scrolledwindow;
-	GtkWidget *frame;
-	GtkListStore *model;
+#endif
+//	GtkListStore *model;
 	GtkWidget *eventbox;
-	GtkListStore *store;
+//	GtkListStore *store;
 
 	box_dict = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(box_dict);
