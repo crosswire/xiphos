@@ -25,6 +25,10 @@
 
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
+#include <glib.h>
+#include <glib/gstdio.h>
+
+#include <ctype.h>
 
 #ifndef USE_GTKHTML38
 #include <gtkhtml/htmlengine-print.h>
@@ -50,6 +54,7 @@
 #include "gui/tabbed_browser.h"
 
 #include "main/parallel_view.h"
+#include "main/previewer.h"
 #include "main/sword.h"
 #include "main/settings.h"
 #include "main/url.hh"
@@ -226,7 +231,7 @@ void gui_prefixable_link_clicked(GtkHTML * html,
 	gchar *buf, *place;
 	gchar tmpbuf[1023];
 	
-	if (buf = strstr(url, "&value=")) {
+	if ((buf = strstr(url, "&value="))) {
 		buf += 7;
 		place = buf;
 
@@ -362,7 +367,7 @@ gchar *gui_get_word_or_selection(GtkWidget * html_widget, gboolean word)
 		gui_generic_warning("No selection provided\nSubstituting `Jesus'");
 		key = ">Jesus<";
 	}
-	if (buf = strchr(key, '>'))	/* it might not have >< delimiters? */
+	if ((buf = strchr(key, '>')))	/* it might not have >< delimiters? */
 		key = buf + 1;
 	keylen = strlen(key);
 	buf = g_new(gchar, keylen);
@@ -432,7 +437,7 @@ gchar *gui_button_press_lookup(GtkWidget * html_widget)
 						key);	
 		
 		GS_message(("src/gnome2/html.c: buf=>%s<",buf));
-		if(buf == NULL) return;
+		if(buf == NULL) return NULL;
 		key = g_strdelimit(buf, "&.,\"<>;:?", ' ');
 		key = g_strstrip(key);
 		len = strlen(key);
@@ -554,6 +559,9 @@ void gui_display_html(GtkWidget * html, const gchar * txt, gint lentxt)
 
 
 
+#ifndef USE_GTKHTML3_14
+#ifdef USE_GTKHTML38
+
 struct _info {
 	GnomeFont *local_font;
 	gint page_num, pages;
@@ -576,9 +584,7 @@ static void print_header(GtkHTML * html,
 			 gpointer user_data)
 {
 	struct _info *info = (struct  _info*) user_data;
-
-#ifndef USE_GTKHTML3_14
-#ifdef USE_GTKHTML38	
+	
 	if (info->local_font) {
 		gnome_print_line_stroked(print_context, x, y, width, y);
 		
@@ -595,8 +601,6 @@ static void print_header(GtkHTML * html,
 	
 		info->page_num++;
 	}
-#endif
-#endif
 }
 
 
@@ -685,9 +689,7 @@ static void info_free(struct _info *info)
 static 
 struct _info *info_new(GtkHTML * html, GnomePrintContext * pc, gdouble * line)
 {
-#ifndef USE_GTKHTML3_14
-#ifdef USE_GTKHTML38
-	struct _info *info;
+	struct _info *info = NULL;
 
 	info = g_new(struct _info, 1);
 	info->local_font = gnome_font_find_closest((const guchar *)"Sans Regular", 10.0);
@@ -706,9 +708,9 @@ struct _info *info_new(GtkHTML * html, GnomePrintContext * pc, gdouble * line)
 	info->footer_date = FALSE;
 	info->footer_page_num = TRUE;
 	return info;
-#endif
-#endif
 }
+#endif /* USE_GTKHTML38 */
+#endif /* !USE_GTKHTML3_14 */
 
 #ifdef USE_GTKHTML3_14
 static gint
@@ -770,7 +772,7 @@ _draw_header (GtkHTML *html, GtkPrintOperation *operation,
 	PangoFontDescription *desc;
 	PangoLayout *layout;
 	gdouble x, y;
-	gint n_pages;
+//	gint n_pages;
 	gchar *text;
 	cairo_t *cr;
 
@@ -866,7 +868,7 @@ void gui_html_print(GtkWidget * htmlwidget, gboolean preview, const gchar * mod_
 	GtkPrintOperation *operation;
 	GtkPrintSettings *psettings;
 	GtkPageSetup *setup;
-	GtkPaperSize *letter;
+//	GtkPaperSize *letter;
 	GtkPrintOperationResult result;
 	GError *error = NULL;
 	GtkPrintOperationAction action;
