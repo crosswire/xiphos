@@ -184,7 +184,7 @@ create_menu1(void)
  * Return value
  *   gboolean
  */
-#if 0
+#ifndef USE_GTKMOZEMBED
 static gboolean
 on_button_release_event(GtkWidget * widget,
 			GdkEventButton * event,
