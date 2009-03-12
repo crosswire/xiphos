@@ -24,6 +24,7 @@
 #endif
 
 #include <gnome.h>
+#include <ctype.h>
 
 #include "gui/font_dialog.h"
 #include "gui/utilities.h"
@@ -443,7 +444,7 @@ static GtkWidget *create_dialog_mod_font(MOD_FONT * mf)
 
 void gui_set_module_font(gchar * mod_name)
 {
-	gchar buf[256];
+//	gchar buf[256];
 	MOD_FONT *mf;
 	gchar *str;
 

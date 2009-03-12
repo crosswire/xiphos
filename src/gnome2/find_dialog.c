@@ -30,6 +30,7 @@
 #include "gui/find_dialog.h"
 #include "main/settings.h"
 #include "main/sword.h"
+#include "gecko/gecko-html.h"
 
 typedef struct _find_dialog FIND_DIALOG;
 
