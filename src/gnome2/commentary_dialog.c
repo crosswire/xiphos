@@ -48,7 +48,7 @@
 #include "main/navbar_versekey.h"
 #include "main/display.hh"
 
-static void create_menu(DIALOG_DATA * d, GdkEventButton * event);
+//static void create_menu(DIALOG_DATA * d, GdkEventButton * event);
 
 extern gboolean dialog_freed;
 extern gboolean do_display;
@@ -57,8 +57,10 @@ extern gboolean do_display;
  */
 
 DIALOG_DATA *cur_d;
-static gboolean apply_change;
+//static gboolean apply_change;
+#ifdef OLD_NAVBAR
 static GtkWidget *sync_button;
+#endif
 
 
 
@@ -189,7 +191,6 @@ static void dialog_url(GtkHTML *html,
 {
 	cur_d = d;
 }
-#endif
 
 /******************************************************************************
  * Name
@@ -234,6 +235,7 @@ static gboolean html_key_press_event(GtkWidget *widget,
 	return FALSE;
 }
 
+#endif
 
 
 /******************************************************************************
@@ -251,7 +253,7 @@ static gboolean html_key_press_event(GtkWidget *widget,
  * Return value
  *   void
  */
-
+/*
 static void book_changed(GtkEditable *editable,
 			 DIALOG_DATA *d)
 {
@@ -265,7 +267,7 @@ static void book_changed(GtkEditable *editable,
 		g_free(url);
 	}
 }
-
+*/
 
 /******************************************************************************
  * Name
@@ -283,14 +285,14 @@ static void book_changed(GtkEditable *editable,
  * Return value
  *   gboolean
  */
-
+/*
 static gboolean chapter_button_release_event(GtkWidget *widget,
 					     GdkEventButton *event,
 					     DIALOG_DATA *d)
 {
 	G_CONST_RETURN gchar *bookname;
 	gchar *url;
-	gchar *val_key;
+//	gchar *val_key;
 	gint chapter;
 	cur_d = d;
 	bookname = (gchar *) gtk_entry_get_text(GTK_ENTRY(d->cbe_book));
@@ -302,7 +304,7 @@ static gboolean chapter_button_release_event(GtkWidget *widget,
 
 	return FALSE;
 }
-
+*/
 
 /******************************************************************************
  * Name
@@ -320,14 +322,14 @@ static gboolean chapter_button_release_event(GtkWidget *widget,
  * Return value
  *   gboolean
  */
-
+/*
 static gboolean verse_button_release_event(GtkWidget *widget,
 					   GdkEventButton *event,
 					   DIALOG_DATA *d)
 {
 	G_CONST_RETURN gchar *bookname;
 	gchar *url;
-	gchar *val_key;
+//	gchar *val_key;
 	gint chapter, verse;
 	cur_d = d;
 	bookname = (gchar *) gtk_entry_get_text(GTK_ENTRY(d->cbe_book));
@@ -344,7 +346,7 @@ static gboolean verse_button_release_event(GtkWidget *widget,
 
 	return FALSE;
 }
-
+*/
 
 /******************************************************************************
  * Name
@@ -450,6 +452,7 @@ static void sync_with_main(DIALOG_DATA *d)
  *   void
  */
 
+#ifdef OLD_NAVBAR
 static void sync_toggled(GtkToggleButton *button,
 			 DIALOG_DATA *d)
 {
@@ -462,7 +465,6 @@ static void sync_toggled(GtkToggleButton *button,
 }
 
 
-#ifdef OLD_NAVBAR
 static void on_comboboxentry4_changed(GtkComboBox *combobox,
 				      DIALOG_DATA *d)
 {
@@ -767,7 +769,9 @@ void gui_create_commentary_dialog(DIALOG_DATA *d,
 	GtkWidget *vbox_toolbars;
 	GtkWidget *toolbar_nav;
 	GtkWidget *frame19;
+#ifndef USE_GTKMOZEMBED
 	GtkWidget *scrolledwindow38;
+#endif
 	
 	cur_d = d;
 	d->dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
