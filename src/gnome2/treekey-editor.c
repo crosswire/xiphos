@@ -139,7 +139,7 @@ on_add_sibling_activate (GtkMenuItem * menuitem, gpointer user_data)
 					    d->text1, 
 					    info->offset);
 		if(l_offset) {
-			buf = g_strdup_printf("%d",l_offset);
+			buf = g_strdup_printf("%ld",l_offset);
 			gtk_tree_store_insert_after(GTK_TREE_STORE(info->model), 
 						&sibling, 
 						NULL, 
@@ -203,7 +203,7 @@ on_add_child_activate (GtkMenuItem * menuitem, gpointer user_data)
 			    		COL_OPEN_PIXBUF, pixbufs->pixbuf_closed,
 			    		COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
 					-1);
-			buf = g_strdup_printf("%d",l_offset);
+			buf = g_strdup_printf("%ld",l_offset);
 			gtk_tree_store_append (GTK_TREE_STORE (info->model), 
 						&child, 
 						&info->iter);
