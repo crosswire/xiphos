@@ -45,12 +45,12 @@
 		  <child>
 		    <widget class="GtkImageMenuItem" id="open_studypad">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Open Studypad</property>
+		      <property name="label" translatable="yes">Open Study_pad</property>
 		      <property name="use_underline">True</property>
 		      <signal name="activate" handler="on_open_studypad_activate" last_modification_time="Fri, 06 Mar 2009 17:09:25 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1092">
+			<widget class="GtkImage" id="image1248">
 			  <property name="visible">True</property>
 			  <property name="pixbuf">silk-edit-bookmarks.png</property>
 			  <property name="xalign">0.5</property>
@@ -71,12 +71,12 @@
 		  <child>
 		    <widget class="GtkImageMenuItem" id="open_session">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Open Session</property>
+		      <property name="label" translatable="yes">_Open Session</property>
 		      <property name="use_underline">True</property>
 		      <signal name="activate" handler="on_open_session_activate" last_modification_time="Fri, 06 Mar 2009 17:09:25 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1093">
+			<widget class="GtkImage" id="image1249">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-open</property>
 			  <property name="icon_size">1</property>
@@ -92,12 +92,12 @@
 		  <child>
 		    <widget class="GtkImageMenuItem" id="save_session">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Save Session</property>
+		      <property name="label" translatable="yes">_Save Session</property>
 		      <property name="use_underline">True</property>
 		      <signal name="activate" handler="on_save_session_activate" last_modification_time="Fri, 06 Mar 2009 17:09:25 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1094">
+			<widget class="GtkImage" id="image1250">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-save</property>
 			  <property name="icon_size">1</property>
@@ -141,12 +141,12 @@
 		  <child>
 		    <widget class="GtkImageMenuItem" id="search">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Search</property>
+		      <property name="label" translatable="yes">_Search</property>
 		      <property name="use_underline">True</property>
 		      <signal name="activate" handler="on_search_activate" last_modification_time="Fri, 06 Mar 2009 19:07:48 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1095">
+			<widget class="GtkImage" id="image1251">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-find</property>
 			  <property name="icon_size">1</property>
@@ -162,13 +162,13 @@
 		  <child>
 		    <widget class="GtkImageMenuItem" id="advanced_search">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Advanced Search</property>
+		      <property name="label" translatable="yes">_Advanced Search</property>
 		      <property name="use_underline">True</property>
 		      <signal name="activate" handler="on_advanced_search_activate" last_modification_time="Fri, 06 Mar 2009 19:07:48 GMT"/>
 		      <accelerator key="F3" modifiers="0" signal="activate"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1096">
+			<widget class="GtkImage" id="image1252">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-find</property>
 			  <property name="icon_size">1</property>
@@ -190,13 +190,13 @@
 		  <child>
 		    <widget class="GtkImageMenuItem" id="preferences">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Preferences</property>
+		      <property name="label" translatable="yes">_Preferences</property>
 		      <property name="use_underline">True</property>
 		      <signal name="activate" handler="on_preferences_activate" last_modification_time="Fri, 06 Mar 2009 19:11:21 GMT"/>
 		      <accelerator key="F2" modifiers="0" signal="activate"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1097">
+			<widget class="GtkImage" id="image1253">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-preferences</property>
 			  <property name="icon_size">1</property>
@@ -213,13 +213,13 @@
 		    <widget class="GtkImageMenuItem" id="module_manager">
 		      <property name="visible">True</property>
 		      <property name="tooltip" translatable="yes">Use module manager to install and remove Sword modules</property>
-		      <property name="label" translatable="yes">Module Manager</property>
+		      <property name="label" translatable="yes">_Module Manager</property>
 		      <property name="use_underline">True</property>
 		      <signal name="activate" handler="on_module_manager_activate" last_modification_time="Fri, 06 Mar 2009 19:12:19 GMT"/>
 		      <accelerator key="F4" modifiers="0" signal="activate"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1098">
+			<widget class="GtkImage" id="image1254">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-preferences</property>
 			  <property name="icon_size">1</property>
@@ -263,7 +263,7 @@
 		  <child>
 		    <widget class="GtkCheckMenuItem" id="show_bible_text">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Bible Text</property>
+		      <property name="label" translatable="yes">_Bible Text</property>
 		      <property name="use_underline">True</property>
 		      <property name="active">False</property>
 		      <signal name="activate" handler="on_show_bible_text_activate" last_modification_time="Fri, 06 Mar 2009 18:27:19 GMT"/>
@@ -393,7 +393,7 @@
 		  <child>
 		    <widget class="GtkCheckMenuItem" id="show_parallel_view_in_a_tab">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Show Parallel View in a tab</property>
+		      <property name="label" translatable="yes">Show Parallel View in a _Tab</property>
 		      <property name="use_underline">True</property>
 		      <property name="active">False</property>
 		    </widget>
@@ -402,7 +402,7 @@
 		  <child>
 		    <widget class="GtkCheckMenuItem" id="show_previewer_in_sidebar">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Show Previewer in the Sidebar</property>
+		      <property name="label" translatable="yes">Show Previe_wer in the Sidebar</property>
 		      <property name="use_underline">True</property>
 		      <property name="active">False</property>
 		      <signal name="activate" handler="on_side_preview_activate" last_modification_time="Sat, 07 Mar 2009 00:32:40 GMT"/>
@@ -425,13 +425,13 @@
 		  <child>
 		    <widget class="GtkImageMenuItem" id="contents">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Contents</property>
+		      <property name="label" translatable="yes">_Contents</property>
 		      <property name="use_underline">True</property>
 		      <signal name="activate" handler="on_help_contents_activate" last_modification_time="Sat, 07 Mar 2009 00:31:04 GMT"/>
 		      <accelerator key="F1" modifiers="0" signal="activate"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1099">
+			<widget class="GtkImage" id="image1255">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-help</property>
 			  <property name="icon_size">1</property>
@@ -447,12 +447,12 @@
 		  <child>
 		    <widget class="GtkImageMenuItem" id="mailing_list">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Mailing List</property>
+		      <property name="label" translatable="yes">_Mailing List</property>
 		      <property name="use_underline">True</property>
 		      <signal name="activate" handler="on_mailing_list_activate" last_modification_time="Fri, 06 Mar 2009 19:25:51 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1100">
+			<widget class="GtkImage" id="image1256">
 			  <property name="visible">True</property>
 			  <property name="pixbuf">mailing_list_icon-16.png</property>
 			  <property name="xalign">0.5</property>
@@ -467,12 +467,12 @@
 		  <child>
 		    <widget class="GtkImageMenuItem" id="live_chat">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Live Chat</property>
+		      <property name="label" translatable="yes">_Live Chat</property>
 		      <property name="use_underline">True</property>
 		      <signal name="activate" handler="on_live_chat_activate" last_modification_time="Fri, 06 Mar 2009 19:26:24 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1101">
+			<widget class="GtkImage" id="image1257">
 			  <property name="visible">True</property>
 			  <property name="pixbuf">chat_icon-16.png</property>
 			  <property name="xalign">0.5</property>
@@ -487,12 +487,12 @@
 		  <child>
 		    <widget class="GtkImageMenuItem" id="report_bug">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Report Bug</property>
+		      <property name="label" translatable="yes">_Report Bug</property>
 		      <property name="use_underline">True</property>
 		      <signal name="activate" handler="on_report_bug_activate" last_modification_time="Fri, 06 Mar 2009 19:26:54 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1102">
+			<widget class="GtkImage" id="image1258">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-dialog-error</property>
 			  <property name="icon_size">1</property>
@@ -519,7 +519,7 @@
 		      <signal name="activate" handler="on_about_translation_activate" last_modification_time="Sat, 07 Mar 2009 00:29:29 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1103">
+			<widget class="GtkImage" id="image1259">
 			  <property name="visible">True</property>
 			  <property name="pixbuf">translation_icon-16.png</property>
 			  <property name="xalign">0.5</property>
@@ -545,7 +545,7 @@
 		      <signal name="activate" handler="on_about_the_sword_project_activate" last_modification_time="Fri, 06 Mar 2009 19:29:06 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1104">
+			<widget class="GtkImage" id="image1260">
 			  <property name="visible">True</property>
 			  <property name="pixbuf">sword_icon-16.png</property>
 			  <property name="xalign">0.5</property>
@@ -565,7 +565,7 @@
 		      <signal name="activate" handler="on_about_xiphos_activate" last_modification_time="Fri, 06 Mar 2009 21:58:19 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1105">
+			<widget class="GtkImage" id="image1261">
 			  <property name="visible">True</property>
 			  <property name="pixbuf">xiphos-x-16.png</property>
 			  <property name="xalign">0.5</property>
