@@ -184,6 +184,7 @@ create_menu1(void)
  * Return value
  *   gboolean
  */
+#if 0
 static gboolean
 on_button_release_event(GtkWidget * widget,
 			GdkEventButton * event,
@@ -201,6 +202,7 @@ on_button_release_event(GtkWidget * widget,
 	}
 	return FALSE;
 }
+#endif /* 0 */
 
 #ifdef USE_GTKMOZEMBED
 static void
@@ -237,7 +239,9 @@ gui_create_about_modules(void)
 	GtkWidget *hbox21;
 	GtkWidget *pixmap;
 	GtkWidget *frame73;
+#ifndef USE_GTKMOZEMBED
 	GtkWidget *scrolledwindow30;
+#endif
 	GtkWidget *dialog_action_area28;
 	GtkWidget *hbuttonbox7;
 	GtkWidget *button;

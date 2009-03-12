@@ -36,6 +36,9 @@
 #include <errno.h>
 
 #include "gui/bookmarks.h"
+#include "gui/dialog.h"
+#include "gui/mod_mgr.h"
+#include "gui/utilities.h"
 
 #include "main/lists.h"
 #include "main/settings.h"
@@ -82,11 +85,8 @@ static int init_bookmarks(int new_bookmarks);
 int settings_init(int new_configs, int new_bookmarks)
 {
 	int retval = 0;
-	int have_old = FALSE;
-	int need_old = FALSE;
 	char *sword_dir = NULL;
 	char *gs_old = NULL;
-	char *tabs = NULL;
 	char *tmp = NULL;
 	char *env;
 
@@ -138,13 +138,6 @@ int settings_init(int new_configs, int new_bookmarks)
 		}
 		g_free(gs_old);
 	}
-
-	/* check for tabs dir -- if directory does not exist create it */
-/*	tabs = g_strdup_printf("%s/tabs",settings.gSwordDir);
-	if (access(tabs, F_OK) == -1)
-		gui_save_tabs(NULL);
-	g_free(tabs);
-*/
 
 	/* if .sword does not exist create it */
 	sword_dir = g_strdup_printf("%s/%s", settings.homedir, DOTSWORD);
@@ -509,7 +502,7 @@ void load_settings_structure(void)
 	settings.verse_num_font_size_str = xml_get_value("fontsize", "versenum");
 	settings.verse_num_font_size = atoi(settings.verse_num_font_size_str);
 
-	if (buf = xml_get_value("fontsize", "basefontsize")) {
+	if ((buf = xml_get_value("fontsize", "basefontsize"))) {
 		settings.base_font_size_str = g_strdup(buf);
 		settings.base_font_size = atoi(settings.base_font_size_str);
 	} else {
@@ -534,13 +527,13 @@ void load_settings_structure(void)
 	    xml_get_value("HTMLcolors", "versenum");
 	settings.found_color = xml_get_value("HTMLcolors", "found");
 
-	if (buf = xml_get_value("HTMLcolors", "highlight_fg"))
+	if ((buf = xml_get_value("HTMLcolors", "highlight_fg")))
 		settings.highlight_fg = g_strdup(buf);
 	else {
 		xml_add_new_item_to_section("HTMLcolors", "highlight_fg", "#FFFF00");
 		settings.highlight_fg = g_strdup("#FFFF00");
 	}
-	if (buf = xml_get_value("HTMLcolors", "highlight_bg"))
+	if ((buf = xml_get_value("HTMLcolors", "highlight_bg")))
 		settings.highlight_bg = g_strdup(buf);
 	else {
 		xml_add_new_item_to_section("HTMLcolors", "highlight_bg", "#060680");
@@ -549,91 +542,91 @@ void load_settings_structure(void)
 	
 	/*  parallel ops  */
 	
-	if(buf = xml_get_value("parallel", "Strong_s_Numbers"))
+	if ((buf = xml_get_value("parallel", "Strong_s_Numbers")))
 		settings.parallel_strongs = atoi(buf);
 	else {
 		xml_add_new_item_to_section("parallel", "Strong_s_Numbers", "0");
 		settings.parallel_strongs = 0;
 	}
 	
-	if(buf = xml_get_value("parallel", "Morphological_Tags"))
+	if ((buf = xml_get_value("parallel", "Morphological_Tags")))
 		settings.parallel_morphs = atoi(buf);
 	else {
 		xml_add_new_item_to_section("parallel", "Morphological_Tags", "0");
 		settings.parallel_morphs = 0;
 	}
 	
-	if(buf = xml_get_value("parallel", "Hebrew_Vowel_Points"))
+	if ((buf = xml_get_value("parallel", "Hebrew_Vowel_Points")))
 		settings.parallel_hebrewpoints = atoi(buf);
 	else {
 		xml_add_new_item_to_section("parallel", "Hebrew_Vowel_Points", "1");
 		settings.parallel_hebrewpoints = 1;
 	}
 	
-	if(buf = xml_get_value("parallel", "Hebrew_Cantillation"))
+	if ((buf = xml_get_value("parallel", "Hebrew_Cantillation")))
 		settings.parallel_cantillationmarks = atoi(buf);
 	else {
 		xml_add_new_item_to_section("parallel", "Hebrew_Cantillation", "0");
 		settings.parallel_cantillationmarks = 0;
 	}
 	
-	if(buf = xml_get_value("parallel", "Footnotes"))
+	if ((buf = xml_get_value("parallel", "Footnotes")))
 		settings.parallel_footnotes = atoi(buf);
 	else {
 		xml_add_new_item_to_section("parallel", "Footnotes", "0");
 		settings.parallel_footnotes = 0;
 	}	
 
-	if (buf = xml_get_value("parallel", "Cross-references"))
+	if ((buf = xml_get_value("parallel", "Cross-references")))
 		settings.parallel_crossref = atoi(buf);
 	else {
 		xml_add_new_item_to_section("parallel", "Cross-references", "1");
 		settings.parallel_crossref = 1;
 	}		
 
-	if (buf = xml_get_value("parallel", "Transliteration"))
+	if ((buf = xml_get_value("parallel", "Transliteration")))
 		settings.parallel_transliteration = atoi(buf);
 	else {
 		xml_add_new_item_to_section("parallel", "Transliteration", "0");
 		settings.parallel_transliteration = 0;
 	}
 	
-	if (buf = xml_get_value("parallel", "Words_of_Christ_in_Red"))
+	if ((buf = xml_get_value("parallel", "Words_of_Christ_in_Red")))
 		settings.parallel_red_words = atoi(buf);
 	else {
 		xml_add_new_item_to_section("parallel", "Words_of_Christ_in_Red", "0");
 		settings.parallel_red_words = 0;
 	}
 	
-	if (buf = xml_get_value("parallel", "Morpheme_Segmentation"))
+	if ((buf = xml_get_value("parallel", "Morpheme_Segmentation")))
 		settings.parallel_segmentation = atoi(buf);
 	else {
 		xml_add_new_item_to_section("parallel", "Morpheme_Segmentation", "0");
 		settings.parallel_segmentation = 0;
 	}
 	
-	if (buf = xml_get_value("parallel", "Headings"))
+	if ((buf = xml_get_value("parallel", "Headings")))
 		settings.parallel_headings = atoi(buf);
 	else {
 		xml_add_new_item_to_section("parallel", "Headings", "0");
 		settings.parallel_headings = 0;
 	}
 	
-	if (buf = xml_get_value("parallel", "Lemmas"))
+	if ((buf = xml_get_value("parallel", "Lemmas")))
 		settings.parallel_lemmas = atoi(buf);
 	else {
 		xml_add_new_item_to_section("parallel", "Lemmas", "0");
 		settings.parallel_lemmas = 0;
 	}
 	
-	if (buf = xml_get_value("parallel", "Textual_Variants"))
+	if ((buf = xml_get_value("parallel", "Textual_Variants")))
 		settings.parallel_variants = atoi(buf);
 	else {
 		xml_add_new_item_to_section("parallel", "Textual_Variants", "0");
 		settings.parallel_variants = 0;
 	}
 	
-	if (buf = xml_get_value("parallel", "Greek_Accents"))
+	if ((buf = xml_get_value("parallel", "Greek_Accents")))
 		settings.parallel_greekaccents = atoi(buf);
 	else {
 		xml_add_new_item_to_section("parallel", "Greek_Accents", "1");
@@ -684,36 +677,35 @@ void load_settings_structure(void)
 	    atoi(xml_get_value("misc", "dailydevotional"));
 	settings.versestyle = atoi(xml_get_value("misc", "versestyle"));
 
-	if (buf = xml_get_value("misc", "pinnedtabs"))
+	if ((buf = xml_get_value("misc", "pinnedtabs")))
 		settings.linkedtabs = atoi(buf);
 	else {
 		xml_add_new_item_to_section("misc", "pinnedtabs", "0");
 		settings.linkedtabs = 0;
 	}
 
-	if (buf = xml_get_value("misc", "readaloud"))
+	if ((buf = xml_get_value("misc", "readaloud")))
 		settings.readaloud = atoi(buf);
 	else {
 		xml_add_new_item_to_section("misc", "readaloud", "0");
 		settings.readaloud = 0;
 	}
 
-	if (buf = xml_get_value("misc", "showversenum"))
+	if ((buf = xml_get_value("misc", "showversenum")))
 		settings.showversenum = atoi(buf);
 	else {
 		xml_add_new_item_to_section("misc", "showversenum", "1");
 		settings.showversenum = 1;
 	}
 
-	if (buf = xml_get_value("misc", "versehighlight"))
+	if ((buf = xml_get_value("misc", "versehighlight")))
 		settings.versehighlight = atoi(buf);
 	else {
 		xml_add_new_item_to_section("misc", "versehighlight", "0");
 		settings.versehighlight = 0;
 	}
 
-	buf = xml_get_value("misc", "doublespace");
-	if (buf)
+	if ((buf = xml_get_value("misc", "doublespace")))
 		settings.doublespace = atoi(buf);
 	else {
 		xml_add_new_item_to_section("misc", "doublespace", "0");
@@ -722,26 +714,19 @@ void load_settings_structure(void)
 
 	settings.usedefault = atoi(xml_get_value("misc", "usedefault"));
 	
-	if (buf = xml_get_value("misc", "chapter-scroll")) {
+	if ((buf = xml_get_value("misc", "chapter-scroll"))) {
 		settings.chapter_scroll = atoi(buf);
 	} else {
 		xml_add_new_item_to_section("misc","chapter-scroll","0");
 		settings.chapter_scroll = 0;
 	}
 
-	if (buf = xml_get_value("misc", "imageresize")) {
+	if ((buf = xml_get_value("misc", "imageresize"))) {
 		settings.imageresize = atoi(buf);
 	} else {
 		xml_add_new_item_to_section("misc","imageresize","1");
 		settings.imageresize = 1;
 	}
-
-/*	settings.use_studypad =
-	    atoi(xml_get_value("editor", "UseStudyPad"));
-	settings.use_studypad_dialog =
-	    atoi(xml_get_value("editor", "UseStudypadDialog"));
-	settings.use_percomm_dialog =
-	    atoi(xml_get_value("editor", "UsePercommDialog"));*/
 
 	if (xml_get_value("editor", "spell_language"))
 		settings.spell_language = xml_get_value("editor","spell_language");
@@ -838,7 +823,6 @@ char *gconf_keys[GS_GCONF_MAX][2] = {
 void gconf_setup()
 {
 	int i;
-	char msg[256];
 	gchar *str;
 	gboolean retval;
 	GConfClient* client = gconf_client_get_default();
@@ -877,6 +861,7 @@ void gconf_setup()
 					 NULL));
 #ifdef DEBUG
 			if (!retval) {
+				char msg[256];
 				sprintf(msg, _("Xiphos failed to complete handler init for key #%d:\n%s"),
 					i, gconf_keys[i][0]);
 				gui_generic_warning(msg);
