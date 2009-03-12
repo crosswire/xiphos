@@ -57,9 +57,6 @@
 extern gboolean do_display;
 
 static 
-gboolean save_through_persist_file(EDITOR * e, const gchar * filename);
-
-static 
 int app_delete_cb(GtkWidget * widget, GdkEvent * event, gpointer data);
 
 static 
@@ -79,9 +76,6 @@ gint ask_about_saving(EDITOR * e);
 
 
 static GList *editors_all = NULL;
-static gint formatHTML = 1;
-static GtkWidget *win;
-//static GtkHTML *html;
 
  
 static void
@@ -126,6 +120,7 @@ void change_window_title(GtkWidget * window, const gchar * window_title)
 
 
 #ifdef USE_GTKHTML3_14
+#if 0
 static gint
 _calc_header_height (GtkHTML *html, GtkPrintOperation *operation,
                          GtkPrintContext *context)
@@ -185,7 +180,6 @@ _draw_header (GtkHTML *html, GtkPrintOperation *operation,
 	PangoFontDescription *desc;
 	PangoLayout *layout;
 	gdouble x, y;
-	gint n_pages;
 	gchar *text;
 	cairo_t *cr;
 
@@ -264,7 +258,6 @@ _do_print (EDITOR * e,
 	GtkPrintOperation *operation;
 	GtkPrintSettings *psettings;
 	GtkPageSetup *setup;
-	GtkPaperSize *letter;
 	GtkPrintOperationResult result;
 	GError *error = NULL;
 
@@ -298,6 +291,7 @@ _do_print (EDITOR * e,
 
 	return result;
 }
+#endif /* 0 */
 #endif
 
 
@@ -577,9 +571,6 @@ static void
 action_save_cb (GtkAction *action,
                 EDITOR *e)
 {
-	const gchar *filename;
-	gboolean as_html;
-	GError *error = NULL;
 	switch(e->type) {
 	case STUDYPAD_EDITOR:	
 		_save_file (e);
@@ -1108,9 +1099,9 @@ editor_load_note(EDITOR * e, const gchar * module_name,
 
 gboolean editor_close_all(void)
 {
+/*
 	GList *tmp = NULL;
 	EDITOR *e = NULL;
-/*
 #ifdef USE_GTKHTML3_14_23
 	
 #else	
@@ -1124,6 +1115,7 @@ gboolean editor_close_all(void)
 	}
 	g_list_free(editors_all);
 #endif*/
+	return TRUE;
 }
 
 static int
@@ -1242,7 +1234,6 @@ gint ask_about_saving(EDITOR * e)
 static
 gint _create_new(const gchar * filename, const gchar * key, gint editor_type)
 {
-	gchar *title = NULL;
 	EDITOR *editor;
 	GtkWidget *vbox = NULL;
 	GtkWidget *toolbar_nav = NULL;

@@ -26,12 +26,15 @@
 
 #include <string.h>
 
+#include "gui/dialog.h"
 #include "gui/gui.h"
 #include "gui/main_window.h"
 #include "gui/splash.h"
+#include "gui/tabbed_browser.h"
 #include "gui/xiphos.h"
 //#include "gui/widgets.h"
 
+#include "main/sword.h"
 #include "main/url.hh"
 #ifdef USE_GTKMOZEMBED
 #include "gecko/gecko-html.h"
