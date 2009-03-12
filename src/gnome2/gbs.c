@@ -83,6 +83,7 @@
  * Return value
  *   gboolean
  */
+#ifndef USE_GTKMOZEMBED	
 static gboolean on_book_button_press_event(GtkWidget * widget,
 					GdkEventButton * event,
 					gpointer data)
@@ -123,10 +124,12 @@ static gboolean on_book_button_release_event(GtkWidget * widget,
 					GdkEventButton * event,
 					gpointer data)
 {
+#ifdef GTKHTML
 	extern gboolean in_url;
 	gchar *key;
 	const gchar *url;
 	gchar *buf = NULL;
+#endif /*GTKHTML */
 	
 	if (!settings.havebook)
 		return FALSE;
@@ -182,7 +185,7 @@ static gboolean on_book_button_release_event(GtkWidget * widget,
 #endif
 	return FALSE;
 }
-
+#endif /* !USE_GTKMOZEMBED */
 
 /******************************************************************************
  * Name
@@ -199,7 +202,7 @@ static gboolean on_book_button_release_event(GtkWidget * widget,
  * Return value
  *   void
  */
-
+#if 0
 static void set_gbs_label(gchar * mod_name)
 {
 	/*
@@ -207,6 +210,7 @@ static void set_gbs_label(gchar * mod_name)
 	 */
 	gtk_label_set_text (GTK_LABEL(widgets.label_comm),mod_name);
 }
+#endif /* 0 */
 
 /******************************************************************************
  * Name
@@ -294,7 +298,9 @@ _popupmenu_requested_cb (GeckoHtml *html,
 GtkWidget *gui_create_book_pane(void)
 {
 	GtkWidget *box;
+#ifndef USE_GTKMOZEMBED	
 	GtkWidget *scrolledwindow;
+#endif /* !USE_GTKMOZEMBED */
 	GtkWidget *eventbox;	
 	GtkWidget *navbar;
 	

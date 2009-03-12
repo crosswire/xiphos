@@ -33,6 +33,7 @@
 #include "gui/display_info.h"
 
 
+#include "main/previewer.h"
 #include "main/sword.h"
 #include "main/settings.h"
 
@@ -66,7 +67,11 @@ void gui_display_mod_and_key(const gchar * mod_name, const gchar * key)
 	text = main_get_rendered_text(mod_name, key);
 	GS_message((text));
 	if (text) {
-		main_entry_display(html_widget, mod_name, text, key, TRUE);
+		main_entry_display(html_widget, 
+				   (gchar*)mod_name, 
+				   text, 
+				   (gchar*)key, 
+				   TRUE);
 		free(text);
 	}
 }
@@ -169,8 +174,9 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 	
 	GtkWidget *dialog_vbox23;
 	GtkWidget *hbox;
-	GtkWidget *frame71;
+#ifndef USE_GTKMOZEMBED
 	GtkWidget *scrolledwindow70;
+#endif /* !USE_GTKMOZEMBED */
 	GtkWidget *dialog_action_area23;
 	GtkWidget *hbuttonbox2;
 	GtkWidget *button_close;
