@@ -111,6 +111,8 @@ static gchar *true_false2yes_no(int true_false)
  */
 void gui_recompute_shows(void)
 {
+	static gboolean already_clearing_events = FALSE;
+
 	if (cur_passage_tab)
 		gui_reassign_strdup(&settings.currentverse,
 				    cur_passage_tab->text_commentary_key);
@@ -134,8 +136,12 @@ void gui_recompute_shows(void)
 				       (widgets.viewpreview_item),
 				       settings.showpreview);
 
-	while (gtk_events_pending())
-		gtk_main_iteration();
+	if (!already_clearing_events) {
+		already_clearing_events = TRUE;
+		while (gtk_events_pending())
+			gtk_main_iteration();
+		already_clearing_events = FALSE;
+	}
 }
 
 
