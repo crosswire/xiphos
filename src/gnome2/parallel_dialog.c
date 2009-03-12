@@ -63,9 +63,11 @@ GtkWidget *entryIntLookup;
 static GtkWidget *parallel_UnDock_Dialog;
 static GtkWidget *vboxInt;
 static gboolean ApplyChangeBook;
-static GtkWidget *sync_button;
 static NAVBAR navbar;
 NAVBAR_VERSEKEY navbar_parallel;
+#ifdef OLD_NAVBAR
+static GtkWidget *sync_button;
+#endif /* OLD_NAVBAR */
 
 static GtkWidget *create_parallel_dialog(void);
 static void sync_with_main(void);
@@ -208,7 +210,6 @@ static void sync_with_main(void)
 {
 	//GS_message((xml_get_value("keys", "verse")));
 	gchar *buf = NULL;
-	gchar *url = NULL;
 	
 	buf = (gchar*)main_url_encode (settings.currentverse);
 	
@@ -287,12 +288,13 @@ void gui_set_parallel_navbar(const char * key)
  * Return value
  *   void
  */
-
+#ifdef OLD_NAVBAR
 static void sync_toggled(GtkToggleButton * button, gpointer data)
 {
 	if (button->active)
 		sync_with_main();
 }
+#endif /* OLD_NAVBAR */
 
 /******************************************************************************
  * Name
@@ -309,7 +311,7 @@ static void sync_toggled(GtkToggleButton * button, gpointer data)
  * Return value
  *   void
  */
-//#ifdef OLD_NAVBAR
+#ifdef OLD_NAVBAR
 static void on_entry_activate(GtkEntry * entry, gpointer data)
 {
 	
@@ -445,7 +447,7 @@ static void on_comboboxentry6_changed(GtkComboBox * combobox, gpointer data)
 	g_free(verse);
 	g_free(buf);
 }
-//#endif
+#endif
 
 /******************************************************************************
  * Name
@@ -619,18 +621,14 @@ GtkWidget *create_parallel_dialog(void)
   	GtkWidget *box_parallel_labels;
 	GtkWidget *dialog_vbox25;
 	GtkWidget *toolbar29;
-	GtkWidget *tmp_toolbar_icon;
-	GtkWidget *buttonIntSync;
-	GtkWidget *cbIntBook;
-	GtkObject *sbIntChapter_adj;
-	GtkObject *sbIntVerse_adj;
-	GtkWidget *btnIntGotoVerse;
 	GtkWidget *dialog_action_area25;
 	GtkWidget *hbuttonbox4;
 	GtkWidget *btnDockInt;
 	GtkWidget *eventbox;
 	GtkWidget *frame;
+#ifndef USE_GTKMOZEMBED
 	GtkWidget *scrolled_window;
+#endif
 	gchar title[256];
 	
 	sprintf(title,"%s - %s", settings.program_title, _("Parallel"));

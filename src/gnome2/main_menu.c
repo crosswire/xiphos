@@ -328,7 +328,7 @@ void on_daily_devotion_activate(GtkMenuItem * menuitem,
  */
 
 void on_preferences_activate(GtkMenuItem * menuitem,
-			 gpointer user_data)
+			     gpointer user_data)
 {
 	gui_setup_preferences_dialog();
 }

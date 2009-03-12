@@ -45,6 +45,7 @@
 #include "main/lists.h"
 #include "main/mod_mgr.h"
 #include "main/settings.h"
+#include "main/sidebar.h"
 #include "main/sword.h"
 #include "main/xml.h"
 #include "main/modulecache.hh"
@@ -109,15 +110,11 @@ static GtkWidget *radiobutton_source;
 static GtkWidget *radiobutton2;
 static GtkWidget *radiobutton_dest;
 static GtkWidget *radiobutton4;
-static GtkWidget *fileentry1;
 static GtkWidget *combo_entry1;
 static GtkWidget *combo_entry2;
-static GtkWidget *combo1;
 static GtkWidget *dialog;
 static GtkWidget *treeview_local;
 static GtkWidget *treeview_remote;
-static GtkWidget *button_add_remote;
-static GtkWidget *button_remove_remote;
 
 static gboolean local;
 static const gchar *source;
@@ -126,7 +123,6 @@ static gboolean have_configs;
 static gboolean have_changes;
 static gboolean need_update;
 static gint current_page;
-static gint response;
 static GdkPixbuf *INSTALLED;
 static GdkPixbuf *FASTICON;
 static GdkPixbuf *NO_INDEX;
@@ -225,7 +221,7 @@ remove_install_modules(GList * modules,
 {
 	GList *tmp;
 	gchar *buf;
-	gchar *verb;
+	gchar *verb = "";
 	const gchar *new_dest;
 	gint failed = 1;
 	GString *mods;
@@ -559,7 +555,6 @@ get_list_mods_to_remove_install(int activity)
 {
 	GList *retval = NULL;
 	GtkTreeIter root;
-	GtkTreeIter iter;
 	GtkTreeModel *model;
 	gchar *name;
 	gboolean fixed;
@@ -615,7 +610,6 @@ add_module_to_language_folder(GtkTreeModel *model,
 			      gboolean checkmark)
 {
 	GtkTreeIter iter_iter;
-	GtkTreeIter parent;
 	GtkTreeIter child_iter;
 	gboolean valid;
 	GdkPixbuf *installed;
@@ -623,8 +617,6 @@ add_module_to_language_folder(GtkTreeModel *model,
 	GdkPixbuf *locked;
 	GdkPixbuf *refresh;
 	gchar *description = NULL;
-	gsize bytes_read;
-	gsize bytes_written;
 
 	/* Check language */
 	const gchar *buf = info->language;
@@ -647,12 +639,12 @@ add_module_to_language_folder(GtkTreeModel *model,
 
 			locked    = ((info->locked)    ? LOCKED    : BLANK);
 
-			if (info->installed &&
-			    (!info->old_version && info->new_version &&
-			     strcmp(info->new_version, " ")) ||
-			    (info->old_version && !info->new_version) ||
-			    (info->old_version && info->new_version &&
-			     strcmp(info->new_version, info->old_version) > 0))
+			if ((info->installed &&
+			     (!info->old_version && info->new_version &&
+			      strcmp(info->new_version, " "))) ||
+			    ((info->old_version && !info->new_version)) ||
+			    ((info->old_version && info->new_version &&
+			      strcmp(info->new_version, info->old_version) > 0)))
 				refresh = REFRESH;
 			else
 				refresh = BLANK;
@@ -717,7 +709,6 @@ language_add_folders(GtkTreeModel * model,
 		     gchar ** languages)
 {
 	GtkTreeIter iter_iter;
-	GtkTreeIter parent;
 	GtkTreeIter child_iter;
 	int j;
 
@@ -760,10 +751,7 @@ add_language_folder(GtkTreeModel *model,
 		    const gchar *language)
 {
 	GtkTreeIter iter_iter;
-	GtkTreeIter parent;
 	GtkTreeIter child_iter;
-	gsize bytes_read;
-	gsize bytes_written;
 	gboolean valid;
 
 	/* Check language */
@@ -822,8 +810,6 @@ static void
 load_module_tree(GtkTreeView * treeview,
 		 gboolean install)
 {
-	gint i;
-	static gboolean need_column = TRUE;
 	GtkTreeStore *store;
 	GtkTreeIter repository_name;
 	gchar *repository_identifier;
@@ -840,9 +826,6 @@ load_module_tree(GtkTreeView * treeview,
 	GtkTreeIter update;
 	GtkTreeIter uninstalled;
 	GtkTreeIter prayerlist;
-	GtkCellRenderer *renderer;
-	GtkTreeViewColumn *column;
-	GtkTreeIter child_iter;
 	GList *tmp = NULL;
 	GList *tmp2 = NULL;
 	MOD_MGR *info;
@@ -1444,8 +1427,6 @@ add_columns_to_first(GtkTreeView * treeview)
 {
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
-	GtkTreeModel *model = gtk_tree_view_get_model(treeview);
-
 
 	renderer = gtk_cell_renderer_text_new();
 	column =
@@ -1453,8 +1434,6 @@ add_columns_to_first(GtkTreeView * treeview)
 						     renderer, "text",
 						     COLUMN_NAME, NULL);
 	gtk_tree_view_append_column(treeview, column);
-
-
 }
 
 
@@ -1479,7 +1458,6 @@ add_columns_to_remote_treeview(GtkTreeView * treeview)
 {
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
-	GtkTreeModel *model = gtk_tree_view_get_model(treeview);
 
 	renderer = gtk_cell_renderer_text_new();
 	column =
@@ -1562,10 +1540,7 @@ create_model_to_first(void)
 static GtkTreeModel *
 create_model(void)
 {
-	gint i = 0;
 	GtkTreeStore *store;
-	GtkTreeIter iter;
-	GtkTreeIter parent;
 
 	/* create list store */
 	store = gtk_tree_store_new(NUM_COLUMNS,
@@ -1586,9 +1561,7 @@ create_model(void)
 static GtkTreeModel *
 create_remote_source_treeview_model(void)
 {
-	gint i = 0;
 	GtkListStore *store;
-	GtkTreeIter iter;
 
 	/* create list store */
 	store = gtk_list_store_new(NUM_REMOTE_COLUMNS,
@@ -1605,7 +1578,6 @@ load_source_treeviews(void)
 {
 	GList *tmp = NULL;
 	GList *tmp2 = NULL;
-	GList *combo1_items = NULL;
 	GtkTreeIter iter;
 	GtkTreeIter combo_iter;
 	MOD_MGR_SOURCE *mms;
@@ -2003,7 +1975,7 @@ on_dialog_destroy(GtkObject * object, gpointer user_data)
 	 * if we uninstalled a current module, substitute a live one
 	 */
 	if (!main_is_module(settings.MainWindowModule)) {
-		if (tmp = get_list(TEXT_LIST))
+		if ((tmp = get_list(TEXT_LIST)))
 			main_display_bible((char *)tmp->data, settings.currentverse);
 		else {
 			/* Zero Bibles is just not workable in Xiphos. */
@@ -2020,15 +1992,15 @@ on_dialog_destroy(GtkObject * object, gpointer user_data)
 		}		    
 	}
 	if (!main_is_module(settings.CommWindowModule)) {
-		if (tmp = get_list(COMM_LIST))
+		if ((tmp = get_list(COMM_LIST)))
 			main_display_commentary((char *)tmp->data, settings.currentverse);
 	}
 	if (!main_is_module(settings.DictWindowModule)) {
-		if (tmp = get_list(DICT_LIST))
+		if ((tmp = get_list(DICT_LIST)))
 			main_display_commentary((char *)tmp->data, settings.dictkey);
 	}
 	if (!main_is_module(settings.book_mod)) {
-		if (tmp = get_list(GBS_LIST))
+		if ((tmp = get_list(GBS_LIST)))
 			main_display_book((char *)tmp->data, "/");	/* blank key */
 	}
 }
@@ -2102,8 +2074,6 @@ on_mod_mgr_response(GtkDialog * dialog,
 		    gint response_id,
 		    gpointer user_data)
 {
-	GList *modules = NULL;
-
 	switch (response_id) {
 	case GTK_RESPONSE_CANCEL:
 		mod_mgr_terminate();
@@ -2187,7 +2157,6 @@ on_button6_clicked(GtkButton * button,
 	gchar *name_string;
 	GtkTreeSelection *selection;
 	GtkTreeIter selected;
-	GtkTreeIter iter;
 	gchar *caption = NULL;
 	gchar *type = NULL;
 	gchar *source = NULL;
@@ -2388,7 +2357,6 @@ on_button8_clicked(GtkButton * button,
 	gchar *name_string;
 	GtkTreeSelection *selection;
 	GtkTreeIter selected;
-	GtkTreeIter iter;
 	gchar *caption = NULL;
 	gchar *type = NULL;
 	gchar *source = NULL;
@@ -2469,7 +2437,6 @@ on_treeview1_button_release_event(GtkWidget * widget,
 {
 	GtkTreeSelection *selection = NULL;
 	GtkTreeIter selected;
-	gboolean is_selected = FALSE;
 	gint sel;
 	GtkTreeModel *model;
 
@@ -2663,21 +2630,21 @@ setup_dialog_action_area(GtkDialog * dialog)
 	
 }
 
-static gint
+static void
 set_controls_to_last_use(void)
 {
 	/* local or remote source */
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(radiobutton2),
-				      settings.mod_mgr_source);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radiobutton2),
+				     settings.mod_mgr_source);
 	/* local source */
-	gtk_combo_box_set_active (GTK_COMBO_BOX(combo_entry1),
-				  settings.mod_mgr_local_source_index);
+	gtk_combo_box_set_active(GTK_COMBO_BOX(combo_entry1),
+				 settings.mod_mgr_local_source_index);
 	/* remote source */
-	gtk_combo_box_set_active (GTK_COMBO_BOX(combo_entry2),
-				  settings.mod_mgr_remote_source_index);
+	gtk_combo_box_set_active(GTK_COMBO_BOX(combo_entry2),
+				 settings.mod_mgr_remote_source_index);
 	/* destination */
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(radiobutton4),
-				      settings.mod_mgr_destination);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radiobutton4),
+				     settings.mod_mgr_destination);
 }
 
 static void
@@ -2750,17 +2717,14 @@ create_module_manager_dialog(gboolean first_run)
 	gchar *glade_file;
 	GtkWidget *dialog_vbox;
 	GtkWidget *hpaned;
-	GtkWidget *chooser;
 	GtkWidget *button5;
 	GtkWidget *button6;
 	GtkWidget *button7;
 	GtkWidget *button8;
 	GtkWidget *widget;
-	gint index = 0;
-	GString *str = g_string_new(NULL);
 
 	glade_file = gui_general_user_file ("module-manager.glade", FALSE);
-	g_return_if_fail(glade_file != NULL);
+	g_return_val_if_fail((glade_file != NULL), NULL);
 	GS_message((glade_file));
 	
 	/* build the widget */
@@ -2772,7 +2736,7 @@ create_module_manager_dialog(gboolean first_run)
 	}
 	//gxml = glade_xml_new (glade_file, "hpaned1", NULL);       //"dialog", NULL);
 	g_free (glade_file);
-	g_return_if_fail (gxml != NULL);
+	g_return_val_if_fail ((gxml != NULL), NULL);
 
 	/* lookup the root widget */
 	if (first_run) {		

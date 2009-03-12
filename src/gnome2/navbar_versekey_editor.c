@@ -408,10 +408,6 @@ static gboolean select_verse_button_press_callback(GtkWidget * widget,
 
 static void on_entry_activate(GtkEntry * entry, EDITOR * editor)
 {
-	gsize bytes_read;
-	gsize bytes_written;
-	GError *error = NULL;
-	
 	const gchar *buf = gtk_entry_get_text(entry);
 	if(buf == NULL)
 		return;
@@ -861,7 +857,7 @@ GtkWidget *gui_navbar_versekey_editor_new(EDITOR * editor)
 	
 	glade_file =
 		    gui_general_user_file("navbar_versekey.glade", FALSE);
-	g_return_if_fail(glade_file != NULL);
+	g_return_val_if_fail((glade_file != NULL), NULL);
 	GS_message((glade_file));
 
 	/* build the widget */

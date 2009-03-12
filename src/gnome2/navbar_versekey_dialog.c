@@ -256,57 +256,14 @@ void menu_position_under(GtkMenu * menu, int * x, int * y,
 
 /******************************************************************************
  * Name
- *   select_button_press_callback
+ *   select_book_button_press_callback
  *
  * Synopsis
  *   #include "gui/navbar_versekey.h"
  *
- *   gboolean select_button_press_callback (GtkWidget *widget,
- *			      GdkEventButton *event,
- *			      gpointer user_data)
- *
- * Description
- *    make the tooglebutton act like a gtk optionmenu by dropping a popup
- *    under the button
- *
- * Return value
- *   gboolean
- */
-
-static 
-gboolean select_button_press_callback(GtkWidget * widget,
-					     GdkEventButton * event,
-					     gpointer user_data)
-{
-	GtkWidget *menu;
-	
-	menu = main_versekey_drop_down_new(cur_passage_tab);
-	if(!menu)
-		return 0;		
-	g_signal_connect(menu, "deactivate",
-			 G_CALLBACK(menu_deactivate_callback), widget);
-	if ((event->type == GDK_BUTTON_PRESS) && event->button == 1) {
-		gtk_widget_grab_focus(widget);
-		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), TRUE);
-		gtk_menu_popup(GTK_MENU(menu), NULL, NULL,
-			       menu_position_under, widget, event->button,
-			       event->time);
-		return TRUE;
-	}
-	return FALSE;
-}
-
-
-/******************************************************************************
- * Name
- *   select_button_press_callback
- *
- * Synopsis
- *   #include "gui/navbar_versekey.h"
- *
- *   gboolean select_button_press_callback (GtkWidget *widget,
- *			      GdkEventButton *event,
- *			      gpointer user_data)
+ *   gboolean select_book_button_press_callback (GtkWidget *widget,
+ *						 GdkEventButton *event,
+ *						 gpointer user_data)
  *
  * Description
  *    make the tooglebutton act like a gtk optionmenu by dropping a popup
@@ -363,14 +320,14 @@ gboolean select_book_button_press_callback(GtkWidget * widget,
 
 /******************************************************************************
  * Name
- *   select_button_press_callback
+ *   select_chapter_button_press_callback
  *
  * Synopsis
  *   #include "gui/navbar_versekey.h"
  *
- *   gboolean select_button_press_callback (GtkWidget *widget,
- *			      GdkEventButton *event,
- *			      gpointer user_data)
+ *   gboolean select_chapter_button_press_callback (GtkWidget *widget,
+ *						    GdkEventButton *event,
+ *						    gpointer user_data)
  *
  * Description
  *    make the tooglebutton act like a gtk optionmenu by dropping a popup
@@ -407,14 +364,14 @@ gboolean select_chapter_button_press_callback(GtkWidget * widget,
 
 /******************************************************************************
  * Name
- *   select_button_press_callback
+ *   select_verse_button_press_callback
  *
  * Synopsis
  *   #include "gui/navbar_versekey.h"
  *
- *   gboolean select_button_press_callback (GtkWidget *widget,
- *			      GdkEventButton *event,
- *			      gpointer user_data)
+ *   gboolean select_verse_button_press_callback (GtkWidget *widget,
+ *						  GdkEventButton *event,
+ *						  gpointer user_data)
  *
  * Description
  *    make the tooglebutton act like a gtk optionmenu by dropping a popup
@@ -464,10 +421,6 @@ static gboolean select_verse_button_press_callback(GtkWidget * widget,
 
 static void on_entry_activate(GtkEntry * entry, DIALOG_DATA *dialog)
 {
-	gsize bytes_read;
-	gsize bytes_written;
-	GError *error = NULL;
-	
 	const gchar *buf = gtk_entry_get_text(entry);
 	if(buf == NULL)
 		return;
@@ -914,7 +867,7 @@ GtkWidget *gui_navbar_versekey_dialog_new(DIALOG_DATA * dialog)
 	
 	glade_file =
 		    gui_general_user_file("navbar_versekey.glade", FALSE);
-	g_return_if_fail(glade_file != NULL);
+	g_return_val_if_fail((glade_file != NULL), NULL);
 	GS_message((glade_file));
 
 	/* build the widget */

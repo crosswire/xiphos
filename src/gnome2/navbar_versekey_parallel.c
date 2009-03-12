@@ -781,7 +781,7 @@ GtkWidget *gui_navbar_versekey_parallel_new(void)
 	
 	glade_file =
 		    gui_general_user_file("navbar_versekey.glade", FALSE);
-	g_return_if_fail(glade_file != NULL);
+	g_return_val_if_fail((glade_file != NULL), NULL);
 	GS_message((glade_file));
 
 	/* build the widget */

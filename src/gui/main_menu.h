@@ -29,7 +29,9 @@ extern "C" {
 
 GtkWidget * gui_create_main_menu(void);
 void gui_parallel_tab_activate(GtkCheckMenuItem * menuitem, gpointer user_data);
-	
+void on_module_manager_activate(GtkMenuItem * menuitem, gpointer user_data);
+void on_preferences_activate(GtkMenuItem * menuitem, gpointer user_data);
+void on_help_contents_activate(GtkMenuItem * menuitem, gpointer user_data);
 #ifdef __cplusplus
 }
 #endif
