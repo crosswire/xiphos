@@ -42,10 +42,16 @@
 #include "gui/cipher_key_dialog.h"
 #include "gui/sidebar.h"
 #include "gui/main_window.h"
+#include "gui/menu_popup.h"
 #include "gui/find_dialog.h"
 #include "gui/font_dialog.h"
 #include "gui/widgets.h"
 
+#ifdef USE_GTKHTML3_14_23
+#include "editor/slib-editor.h"
+#else
+#include "editor/bonobo-editor.h"
+#endif
 
 #include "main/settings.h"
 #include "main/lists.h"
@@ -88,6 +94,7 @@ void access_to_edit_percomm()
 
 
 
+#ifndef USE_GTKMOZEMBED
 /******************************************************************************
  * Name
  *  on_comm_button_press_event
@@ -142,6 +149,7 @@ static gboolean on_comm_button_release_event(GtkWidget * widget,
 					GdkEventButton * event,
 					gpointer data)
 {
+#ifdef GTKHTML	
 	extern gboolean in_url;
 	gchar *key;
 	const gchar *url;
@@ -149,7 +157,6 @@ static gboolean on_comm_button_release_event(GtkWidget * widget,
 	
 	settings.whichwindow = COMMENTARY_WINDOW;
 
-#ifdef GTKHTML	
 	switch (event->button) {
 	case 1:
 		if (in_url) 
@@ -210,7 +217,7 @@ static gboolean on_comm_button_release_event(GtkWidget * widget,
 #endif /* GTKHTML */
 	return FALSE;
 }
-
+#endif /* !USE_GTKMOZEMBED */
 
 static gboolean on_enter_notify_event(GtkWidget * widget,
 				      GdkEventCrossing * event,
@@ -253,7 +260,9 @@ _popupmenu_requested_cb (GeckoHtml *html,
 GtkWidget *gui_create_commentary_pane(void)
 {
 	GtkWidget *box_comm;
+#ifndef USE_GTKMOZEMBED	
 	GtkWidget *scrolledwindow;
+#endif
 	GtkWidget *eventbox1;
 	box_comm = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(box_comm);

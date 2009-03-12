@@ -34,6 +34,7 @@
 
 #include "gui/dictlex_dialog.h"
 #include "gui/main_window.h"
+#include "gui/menu_popup.h"
 #include "gui/sidebar.h"
 
 
@@ -47,8 +48,8 @@ extern gboolean dialog_freed;
 /******************************************************************************
  * static - global to this file only
  */
-static GList *dialog_list;
-static DIALOG_DATA *cur_dlg;
+//static GList *dialog_list;
+//static DIALOG_DATA *cur_dlg;
 static gint cell_height;
 
 /******************************************************************************
@@ -144,7 +145,7 @@ static void list_selection_changed(GtkTreeSelection *selection,
  * Return value
  *   gint
  */
-
+/*
 static gint button_press_event(GtkWidget *html,
 			       GdkEventButton *event,
 			       DIALOG_DATA *dlg)
@@ -152,7 +153,7 @@ static gint button_press_event(GtkWidget *html,
 	//cur_dlg = dlg;
 	return FALSE;
 }
-
+*/
 
 /******************************************************************************
  * Name
@@ -243,7 +244,7 @@ static void add_columns(GtkTreeView *treeview)
 {
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
-	GtkTreeModel *model = gtk_tree_view_get_model(treeview);
+//	GtkTreeModel *model = gtk_tree_view_get_model(treeview);
 
 	/* column for fixed toggles */
 	renderer = gtk_cell_renderer_text_new();
@@ -358,11 +359,13 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 	GtkWidget *hbox_toolbar;
 	GtkWidget *tmp_toolbar_icon;
 	GtkWidget *btnSyncDL;
-	GtkWidget *label205;
+//	GtkWidget *label205;
 	GtkWidget *frameDictHTML;
+#ifndef USE_GTKMOZEMBED
 	GtkWidget *scrolledwindowDictHTML;
+#endif /* !USE_GTKMOZEMBED */
 	GtkWidget *scrolledwindow;
-	GtkWidget *label;
+//	GtkWidget *label;
 	GtkListStore *model;
 
 	dlg->dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
@@ -484,9 +487,9 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 			 G_CALLBACK(url_requested), NULL);
 	g_signal_connect(GTK_OBJECT(dlg->html), "on_url",
 			 G_CALLBACK(dialog_url), dlg);
-	g_signal_connect(GTK_OBJECT(dlg->html),
+	/*g_signal_connect(GTK_OBJECT(dlg->html),
 			 "button_press_event",
-			 G_CALLBACK(button_press_event), dlg);
+			 G_CALLBACK(button_press_event), dlg);*/
 #endif
 	g_signal_connect(GTK_OBJECT(dlg->dialog), "set_focus",
 			 G_CALLBACK(dialog_set_focus), dlg);
