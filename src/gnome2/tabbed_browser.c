@@ -64,6 +64,7 @@ static GtkWidget* tab_widget_new(PASSAGE_TAB_INFO *tbinf,
 void notebook_main_add_page(PASSAGE_TAB_INFO *tbinf);
 void set_current_tab (PASSAGE_TAB_INFO *pt);
 
+gboolean stop_refresh = FALSE;
 
 GList *passage_list;
 
@@ -111,36 +112,34 @@ static gchar *true_false2yes_no(int true_false)
  */
 void gui_recompute_shows(void)
 {
-	static gboolean already_clearing_events = FALSE;
+	if (!stop_refresh) {
+		if (cur_passage_tab)
+			gui_reassign_strdup(&settings.currentverse,
+					    cur_passage_tab->text_commentary_key);
 
-	if (cur_passage_tab)
-		gui_reassign_strdup(&settings.currentverse,
-				    cur_passage_tab->text_commentary_key);
+		gui_show_hide_preview(settings.showpreview);
+		gui_show_hide_texts(settings.showtexts);
+		gui_show_hide_dicts(settings.showdicts);
+		gui_show_hide_comms(settings.showcomms);
+		gui_set_bible_comm_layout();
 
-	gui_show_hide_preview(settings.showpreview);
-	gui_show_hide_texts(settings.showtexts);
-	gui_show_hide_dicts(settings.showdicts);
-	gui_show_hide_comms(settings.showcomms);
-	gui_set_bible_comm_layout();
+		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+					       (widgets.viewtexts_item),
+					       settings.showtexts);
+		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+					       (widgets.viewcomms_item),
+					       settings.showcomms);
+		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+					       (widgets.viewdicts_item),
+					       settings.showdicts);
+		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+					       (widgets.viewpreview_item),
+					       settings.showpreview);
 
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.viewtexts_item),
-				       settings.showtexts);
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.viewcomms_item),
-				       settings.showcomms);
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.viewdicts_item),
-				       settings.showdicts);
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.viewpreview_item),
-				       settings.showpreview);
-
-	if (!already_clearing_events) {
-		already_clearing_events = TRUE;
+		stop_refresh = TRUE;
 		while (gtk_events_pending())
 			gtk_main_iteration();
-		already_clearing_events = FALSE;
+		stop_refresh = FALSE;
 	}
 }
 
@@ -504,6 +503,8 @@ void gui_load_tabs(const gchar *filename)
 	GList *tmp = NULL;
 	PASSAGE_TAB_INFO *pt = NULL, *pt_first = NULL;
 
+	stop_refresh = TRUE;
+
 	if (filename == NULL)
 	{
 		error = TRUE;
@@ -690,6 +691,8 @@ void gui_load_tabs(const gchar *filename)
 			settings.book_offset = atol(pt->book_offset);
 		}
 	}
+
+	stop_refresh = FALSE;
 	set_current_tab(pt);
 }
 
