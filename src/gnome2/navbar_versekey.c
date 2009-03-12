@@ -43,6 +43,7 @@
 #include "main/settings.h"
 #include "main/sword.h"
 #include "main/tab_history.h"
+#include "main/url.hh"
 
 NAVBAR_VERSEKEY navbar_versekey;
 
@@ -371,10 +372,6 @@ void on_button_history_back_clicked(GtkButton * button, gpointer user_data)
 
 static void on_entry_activate(GtkEntry * entry, gpointer user_data)
 {
-	gsize bytes_read;
-	gsize bytes_written;
-	GError *error = NULL;
-	DIALOG_DATA *dialog;
 	char *rawtext;
 	
 	const gchar *buf = gtk_entry_get_text(entry);
@@ -920,7 +917,7 @@ GtkWidget *gui_navbar_versekey_new(void)
 	GladeXML *gxml;
 	
 	glade_file = gui_general_user_file("navbar_versekey.glade", FALSE);
-	g_return_if_fail(glade_file != NULL);
+	g_return_val_if_fail((glade_file != NULL), NULL);
 	GS_message((glade_file));
 
 	/* build the widget */

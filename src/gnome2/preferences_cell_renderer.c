@@ -321,8 +321,8 @@ void preferences_cell_renderer_captioned_image_render(GtkCellRenderer *
 
 static void preferences_cell_renderer_captioned_image_dispose(GObject * obj)
 {
-	CellRendererCaptionedImage *cell =
-	    PREFS_CELL_RENDERER_CAPTIONED_IMAGE(obj);
+	//CellRendererCaptionedImage *cell =
+	//    PREFS_CELL_RENDERER_CAPTIONED_IMAGE(obj);
 
 	//g_object_unref (cell->image);
 	//g_object_unref (cell->caption);
