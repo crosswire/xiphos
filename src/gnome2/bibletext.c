@@ -65,7 +65,9 @@ gboolean shift_key_presed = FALSE;
 guint scroll_adj_signal;
 GtkAdjustment* adjustment;
 
+#ifndef USE_GTKMOZEMBED
 static GtkTextBuffer *text_buffer;
+#endif
 
 
 /******************************************************************************
@@ -103,6 +105,7 @@ _popupmenu_requested_cb (GeckoHtml *html,
 }
 #endif
 
+#ifndef USE_GTKMOZEMBED
 /******************************************************************************
  * Name
  *  on_text_button_press_event
@@ -158,6 +161,8 @@ static gboolean on_text_button_release_event(GtkWidget * widget,
 					GdkEventButton * event,
 					gpointer date)
 {
+
+#ifdef GTKHTML
 	extern gboolean in_url;
 	gchar *key;
 	const gchar *url;
@@ -168,8 +173,6 @@ static gboolean on_text_button_release_event(GtkWidget * widget,
 	 * set program title to current text module name
 	 */
 	gui_change_window_title(settings.MainWindowModule);
-
-#ifdef GTKHTML
 	switch (event->button) {
 	case 1:
 		if (!in_url) {
@@ -223,15 +226,15 @@ static gboolean textview_button_release_event(GtkWidget * widget,
 					GdkEventButton * event,
 					gpointer data)
 {
-	extern gboolean in_url;
-	gchar *key;
+//	extern gboolean in_url;
+//	gchar *key;
 
 	settings.whichwindow = MAIN_TEXT_WINDOW;
 	/*
 	 * set program title to current text module name
 	 */
 	gui_change_window_title(settings.MainWindowModule);
-
+/*
 	switch (event->button) {
 	case 1:
 		break;
@@ -240,6 +243,7 @@ static gboolean textview_button_release_event(GtkWidget * widget,
 	case 3:
 		break;
 	}
+*/
 	return FALSE;
 }
 
@@ -260,7 +264,6 @@ static gboolean textview_button_press_event(GtkWidget * widget,
 	}
 	return FALSE;
 }
-
 
 
 static gboolean
@@ -426,10 +429,10 @@ static void create_text_tags(GtkTextBuffer * buffer)
 {
 	GtkTextTag *tag;
 	GdkColor color;
-	GdkColor color2;
-	GdkColor color_red;
-	GdkColor colorLink;
-	PangoFontDescription *font_desc;
+	//GdkColor color2;
+	//GdkColor color_red;
+	//GdkColor colorLink;
+	//PangoFontDescription *font_desc;
 
 
 
@@ -438,7 +441,7 @@ static void create_text_tags(GtkTextBuffer * buffer)
 	setup_tag (tag, buffer);
 	color.red = color.green = 0;
 	color.blue = 0xffff;
-		"scale", PANGO_SCALE_XX_SMALL,
+	//	"scale", PANGO_SCALE_XX_SMALL,
 	g_object_set (G_OBJECT (tag),
                 "foreground_gdk", &color,
                 NULL);
@@ -513,6 +516,8 @@ void adj_changed(GtkAdjustment * adjustment1, gpointer user_data)
 	} else 	scroll = 1;
 }
 
+#endif /* !USE_GTKMOZEMBED */
+
 /******************************************************************************
  * Name
  *   gui_create_bible_pane
@@ -532,7 +537,9 @@ void adj_changed(GtkAdjustment * adjustment1, gpointer user_data)
 GtkWidget *gui_create_bible_pane(void)
 {
 	GtkWidget *notebook_text;
+#ifndef USE_GTKMOZEMBED
 	GtkWidget *scrolledwindow;
+#endif
 	
 	notebook_text = gtk_notebook_new();
 	gtk_widget_show(notebook_text);
@@ -544,8 +551,8 @@ GtkWidget *gui_create_bible_pane(void)
 		      "popupmenu_requested",
 		      G_CALLBACK (_popupmenu_requested_cb),
 		      NULL);
-
-#else		
+#else	
+	
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
 	gtk_container_add(GTK_CONTAINER(notebook_text),
@@ -559,7 +566,6 @@ GtkWidget *gui_create_bible_pane(void)
 	scroll_adj_signal = g_signal_connect(GTK_OBJECT(adjustment), "value-changed",
 				G_CALLBACK(adj_changed),
 				NULL);
-	
 	widgets.html_text = gtk_html_new();
 	gtk_widget_show(widgets.html_text);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
@@ -589,7 +595,8 @@ GtkWidget *gui_create_bible_pane(void)
 	g_signal_connect(GTK_OBJECT(widgets.html_text),
 			 "url_requested",
 			 G_CALLBACK(url_requested), NULL);
-#endif
+	
+	/* gtktextview stuff */
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
 	gtk_container_add(GTK_CONTAINER(notebook_text),
@@ -622,7 +629,9 @@ GtkWidget *gui_create_bible_pane(void)
 				   "button_press_event",
 				   G_CALLBACK
 				   (textview_button_press_event),
-				  NULL);
+					 NULL);
+#endif			 
+
 	return 	notebook_text;			   
 	
 }
