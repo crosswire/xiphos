@@ -1043,7 +1043,7 @@ void gui_open_passage_in_new_tab(gchar *verse_key)
 
 	pt->text_commentary_key = g_strdup(verse_key);
 	pt->dictlex_key = g_strdup(settings.dictkey);
-	pt->book_offset = g_strdup_printf("%d",settings.book_offset);
+	pt->book_offset = g_strdup_printf("%ld",settings.book_offset);
 	pt->comm_showing = settings.comm_showing;
 	
 	if(cur_passage_tab && cur_passage_tab->showparallel) {
@@ -1118,7 +1118,7 @@ void gui_open_parallel_view_in_new_tab(void)
 
 	pt->text_commentary_key = g_strdup(settings.currentverse);
 	pt->dictlex_key = g_strdup(settings.dictkey);	
-	pt->book_offset = g_strdup_printf("%d",settings.book_offset);
+	pt->book_offset = g_strdup_printf("%ld",settings.book_offset);
 	
 	passage_list = g_list_append(passage_list, (PASSAGE_TAB_INFO*)pt);
 	set_current_tab(pt);
@@ -1219,7 +1219,7 @@ void gui_open_module_in_new_tab(gchar *module)
 
 	pt->text_commentary_key = g_strdup(settings.currentverse);
 	pt->dictlex_key = g_strdup(settings.dictkey);	
-	pt->book_offset = g_strdup_printf("%d",settings.book_offset);
+	pt->book_offset = g_strdup_printf("%ld",settings.book_offset);
 	
 	passage_list = g_list_append(passage_list, (PASSAGE_TAB_INFO*)pt);
 	//set_current_tab(pt);

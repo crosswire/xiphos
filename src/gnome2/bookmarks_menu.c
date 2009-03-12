@@ -50,7 +50,7 @@
 #include "main/sword.h"
 #include "main/xml.h"
 #include "main/module_dialogs.h"
-
+#include "main/url.hh"
 
 #ifdef USE_GTKHTML3_14_23
 #include "editor/slib-editor.h"
