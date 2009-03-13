@@ -47,6 +47,7 @@
 #include "main/search_dialog.h"
 #include "main/configs.h"
 #include "main/lists.h"
+#include "main/previewer.h"
 #include "main/settings.h"
 #include "main/sword.h"
 #include "main/url.hh"
@@ -102,7 +103,9 @@ void button_clean(GtkButton * button, gpointer user_data)
 {	 
 	GtkTreeModel *model;
 	GtkListStore *list_store;
+#ifdef USE_GTKMOZEMBED
 	GString *html_text;
+#endif
 	
 	GS_message(("button_clean"));
 	model =
@@ -272,7 +275,7 @@ void on_togglebutton_show_main(GtkToggleButton * togglebutton,
  * Return value
  *   void
  */
-#ifndef USE_GTKMOZEMBED
+#if 0
 static void _url(GtkHTML * html, const gchar * url, gpointer data)
 {
 	gchar *buf = NULL;
@@ -332,7 +335,6 @@ static void _url(GtkHTML * html, const gchar * url, gpointer data)
 		buf = g_strdup(newref);
 
 		if (buf) {
-			gchar *str;
 
 			text =
 			    main_get_search_rendered_text(modbuf, buf);
@@ -348,7 +350,7 @@ static void _url(GtkHTML * html, const gchar * url, gpointer data)
 	g_free(newmod);
 	g_free(newref);
 }
-#endif
+#endif /* 0 */
 
 /******************************************************************************
  * Name
@@ -366,7 +368,7 @@ static void _url(GtkHTML * html, const gchar * url, gpointer data)
  *   void
  */
 
-#ifndef USE_GTKMOZEMBED
+#if 0
 static void _link_clicked(GtkHTML * html, const gchar * url,
 			  gpointer data)
 {
@@ -452,7 +454,7 @@ static void _link_clicked(GtkHTML * html, const gchar * url,
 	g_free(newmod);
 	g_free(newref);
 }
-#endif
+#endif /* 0 */
 
 
 /******************************************************************************
@@ -472,13 +474,13 @@ static void _link_clicked(GtkHTML * html, const gchar * url,
  *   void
  */
 
-#ifndef USE_GTKMOZEMBED
+#if 0
 static void report_link_clicked(GtkHTML * html, const gchar * url,
 				gpointer data)
 {
 //	gtk_html_jump_to_anchor(GTK_HTML(search1.results_html), url);
 }
-#endif
+#endif /* 0 */
 
 /******************************************************************************
  * Name

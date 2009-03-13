@@ -665,9 +665,10 @@ GtkWidget *_create_parallel_tab(void)
 {
 	GtkWidget *toolbar29;
   	GtkWidget *box_parallel_labels;
+#ifdef USE_GTKMOZEMBED
 	GtkWidget *eventbox;
-	GtkWidget *frame;
-#ifndef USE_GTKMOZEMBED
+	GtkWidget *frame;	
+#else
 	GtkWidget *scrolled_window;
 #endif
     

@@ -227,13 +227,6 @@ static gint button_press_event(GtkWidget *html,
 	}
 	return FALSE;
 }
-static gboolean html_key_press_event(GtkWidget *widget,
-				     GdkEventKey *event,
-				     DIALOG_DATA *d)
-{
-	cur_d = d;
-	return FALSE;
-}
 
 #endif
 

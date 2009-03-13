@@ -45,6 +45,7 @@
 #include "gui/menu_popup.h"
 #include "gui/find_dialog.h"
 #include "gui/font_dialog.h"
+#include "gui/tabbed_browser.h"
 #include "gui/widgets.h"
 
 #ifdef USE_GTKHTML3_14_23
@@ -60,6 +61,7 @@
 #include "main/global_ops.hh"
 #include "main/search_sidebar.h"
 #include "main/display.hh"
+#include "main/url.hh"
 
 
 /******************************************************************************
@@ -153,7 +155,6 @@ static gboolean on_comm_button_release_event(GtkWidget * widget,
 	extern gboolean in_url;
 	gchar *key;
 	const gchar *url;
-	gchar *buf = NULL;
 	
 	settings.whichwindow = COMMENTARY_WINDOW;
 
@@ -219,6 +220,7 @@ static gboolean on_comm_button_release_event(GtkWidget * widget,
 }
 #endif /* !USE_GTKMOZEMBED */
 
+#ifdef USE_GTKMOZEMBED
 static gboolean on_enter_notify_event(GtkWidget * widget,
 				      GdkEventCrossing * event,
 				      gpointer user_data)
@@ -231,7 +233,6 @@ static gboolean on_enter_notify_event(GtkWidget * widget,
 }
 
 
-#ifdef USE_GTKMOZEMBED
 static void
 _popupmenu_requested_cb (GeckoHtml *html,
 			     gchar *uri,
@@ -260,10 +261,11 @@ _popupmenu_requested_cb (GeckoHtml *html,
 GtkWidget *gui_create_commentary_pane(void)
 {
 	GtkWidget *box_comm;
-#ifndef USE_GTKMOZEMBED	
+#ifdef USE_GTKMOZEMBED	
+	GtkWidget *eventbox1;
+#else
 	GtkWidget *scrolledwindow;
 #endif
-	GtkWidget *eventbox1;
 	box_comm = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(box_comm);
     

@@ -50,6 +50,7 @@
 #include "main/sword.h"
 #include "main/settings.h"
 #include "main/lists.h"
+#include "main/url.hh"
 #include "main/xml.h"
 
 /******************************************************************************
@@ -392,15 +393,6 @@ static void add_columns(GtkTreeView * treeview)
 }
 #endif /* 0 */
 
-static gboolean on_enter_notify_event(GtkWidget * widget,
-				      GdkEventCrossing * event,
-				      gpointer user_data)
-{
-	//gtk_widget_grab_focus (widgets.html_dict);
-	//settings.whichwindow = DICTIONARY_WINDOW;
-	//gui_change_window_title(settings.DictWindowModule);
-  	return FALSE;
-}
 
 void dict_key_entry_changed(GtkEntry * entry, gpointer data)
 {
@@ -565,12 +557,12 @@ GtkWidget *gui_create_dictionary_pane(void)
 //	GtkWidget *tmp_toolbar_icon;
 //	GtkWidget *label205;
 #ifdef USE_GTKMOZEMBED
-	GtkWidget *frame;	
+	GtkWidget *frame;
+	GtkWidget *eventbox;	
 #else
 	GtkWidget *scrolledwindow;
 #endif
 //	GtkListStore *model;
-	GtkWidget *eventbox;
 //	GtkListStore *store;
 
 	box_dict = gtk_vbox_new(FALSE, 0);
@@ -631,9 +623,6 @@ GtkWidget *gui_create_dictionary_pane(void)
 		      "popupmenu_requested",
 		      G_CALLBACK (_popupmenu_requested_cb),
 		      NULL);
-	g_signal_connect ((gpointer) eventbox, "enter_notify_event",
-		    G_CALLBACK (on_enter_notify_event),
-		    NULL);
 #else
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
