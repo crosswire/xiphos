@@ -701,11 +701,12 @@ void create_mainwindow(void)
 	GtkWidget *tab_button_icon;
 	GtkTooltips *tooltips;
 	GtkWidget *label;
-#ifndef USE_GTKMOZEMBED
+#ifdef USE_GTKMOZEMBED
+	GtkWidget *frame;	
+#else
 	GtkWidget *scrolledwindow;
-#endif
+#endif /* USE_GTKMOZEMBED */
 	GtkWidget *box_book;
-	GtkWidget *frame;
 	GtkWidget *image;
 	GdkPixbuf* pixbuf;
 	/*

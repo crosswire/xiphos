@@ -166,7 +166,6 @@ static gboolean on_text_button_release_event(GtkWidget * widget,
 	extern gboolean in_url;
 	gchar *key;
 	const gchar *url;
-	gchar *buf = NULL;
 
 	settings.whichwindow = MAIN_TEXT_WINDOW;
 	/*

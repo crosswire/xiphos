@@ -55,6 +55,7 @@
 #include "gui/font_dialog.h"
 #include "gui/widgets.h"
 #include "gui/navbar_book.h"
+#include "gui/tabbed_browser.h"
 #include "gui/menu_popup.h"
 
 #include "main/settings.h"
@@ -63,6 +64,7 @@
 #include "main/sword.h"
 #include "main/xml.h"
 #include "main/display.hh"
+#include "main/url.hh"
 
 //static void create_menu(GdkEventButton * event);
 
@@ -128,7 +130,6 @@ static gboolean on_book_button_release_event(GtkWidget * widget,
 	extern gboolean in_url;
 	gchar *key;
 	const gchar *url;
-	gchar *buf = NULL;
 #endif /*GTKHTML */
 	
 	if (!settings.havebook)
@@ -258,17 +259,6 @@ void gui_update_gbs_global_ops(gchar * option, gboolean choice)
 }
 
 
-
-static gboolean on_enter_notify_event(GtkWidget * widget,
-				      GdkEventCrossing * event,
-				      gpointer user_data)
-{
-	//shift_key_presed = FALSE;
-	//gtk_widget_grab_focus (widgets.html_book);
-	//settings.whichwindow = BOOK_WINDOW;
-  	return FALSE;
-}
-
 #ifdef USE_GTKMOZEMBED
 static void
 _popupmenu_requested_cb (GeckoHtml *html,
@@ -298,10 +288,11 @@ _popupmenu_requested_cb (GeckoHtml *html,
 GtkWidget *gui_create_book_pane(void)
 {
 	GtkWidget *box;
-#ifndef USE_GTKMOZEMBED	
+#ifdef USE_GTKMOZEMBED	
+	GtkWidget *eventbox;
+#else
 	GtkWidget *scrolledwindow;
-#endif /* !USE_GTKMOZEMBED */
-	GtkWidget *eventbox;	
+#endif /* USE_GTKMOZEMBED */	
 	GtkWidget *navbar;
 	
 	box = gtk_vbox_new(FALSE, 0);
@@ -323,10 +314,6 @@ GtkWidget *gui_create_book_pane(void)
 		      "popupmenu_requested",
 		      G_CALLBACK (_popupmenu_requested_cb),
 		      NULL);
-	g_signal_connect ((gpointer) eventbox, "enter_notify_event",
-		    G_CALLBACK (on_enter_notify_event),
-		    NULL);
-
 #else
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
