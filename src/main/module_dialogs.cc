@@ -1648,7 +1648,7 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 			     TRUE, t);
 		be->set_treekey(t->offset);
 		main_setup_navbar_book_dialog(t);
-		GS_message(("offset = %d",t->offset));
+		GS_message(("offset = %ld",t->offset));
 	} else
 		be->set_key(t->key);
 	
