@@ -126,7 +126,7 @@ void on_changeint1mod_activate(GtkMenuItem * menuitem,
 {
 	
 	gchar *mod_name = NULL;
-	GS_message(("mod_name",(gchar *) user_data));
+//	GS_message(("mod_name",(gchar *) user_data));
 	mod_name = main_module_name_from_description((gchar *) user_data);
 	
 	if(!mod_name) 
