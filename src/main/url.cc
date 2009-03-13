@@ -395,7 +395,6 @@ static gint show_strongs(const gchar * stype, const gchar * svalue,
 	gchar *val = NULL;
 
 	val = g_strdup(svalue);
-	GS_message(("buf len = %d",strlen(buf)));
 	/*if((val1 = strchar(val,'|')) != NULL)	{
 		val1 = (val1) ? (val1 + 1) : val;
 		
