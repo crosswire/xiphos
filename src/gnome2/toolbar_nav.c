@@ -56,69 +56,6 @@ extern gboolean do_display;
 
 /******************************************************************************
  * Name
- *   on_btnLookup_clicked
- *
- * Synopsis
- *   #include "toolbar_nav.h"
- *
- *   void on_btnLookup_clicked(GtkButton * button, gpointer user_data)	
- *
- * Description
- *    go to verse in free form entry
- *
- * Return value
- *   void
- */
-
-static void on_btnLookup_clicked(GtkButton * button, gpointer user_data)
-{
-	const gchar *buf;
-	gchar *url;
-
-	buf = gtk_entry_get_text(GTK_ENTRY(cbe_freeform_lookup));
-	url = g_strdup_printf("sword:///%s", buf);
-	main_url_handler(url, TRUE);	//-- change verse to entry text
-	g_free(url);
-}
-
-
-/******************************************************************************
- * Name
- *   on_cbeFreeformLookup_key_press_event
- *
- * Synopsis
- *   #include "toolbar_nav.h"
- *
- *   gboolean on_cbeFreeformLookup_key_press_event(GtkWidget * widget,
- *				GdkEventKey * event, gpointer user_data)	
- *
- * Description
- *   go to verse in free form entry if user hit <enter>
- *
- * Return value
- *   gboolean
- */
-
-static gboolean
-on_cbeFreeformLookup_key_press_event(GtkWidget * widget,
-				     GdkEventKey * event,
-				     gpointer user_data)
-{
-	const gchar *buf;
-	gchar *url;
-
-	buf = gtk_entry_get_text(GTK_ENTRY(widget));
-	/* if <enter> key */
-	if (event->keyval == 65293 || event->keyval == 65421) {
-		url = g_strdup_printf("sword:///%s", buf);
-		main_url_handler(url, TRUE);
-		g_free(url);
-	}
-	return FALSE;
-}
-
-/******************************************************************************
- * Name
  *   on_entry_activate
  *
  * Synopsis
@@ -135,22 +72,8 @@ on_cbeFreeformLookup_key_press_event(GtkWidget * widget,
 
 static void on_entry_activate(GtkEntry * entry, gpointer data)
 {
-	gsize bytes_read;
-	gsize bytes_written;
-	GError *error = NULL;
 	const gchar *buf = gtk_entry_get_text(entry);
-/*	gchar *key = g_convert(buf,
-			     -1,
-			     OLD_CODESET,
-			     UTF_8,
-			     &bytes_read,
-			     &bytes_written,
-			     &error);
-	if(key == NULL) {
-		g_print ("error: %s\n", error->message);
-		g_error_free (error);
-		return;
-	}*/
+
 	if (navbar_main.key)
 		g_free(navbar_main.key);
 	navbar_main.key = g_strdup(buf);
@@ -214,10 +137,6 @@ void gui_navbar_handle_spinbutton_click(gint button, gint direction)
 	gchar *chapter = NULL;
 	gchar *verse = NULL;
 	gchar *new = NULL;
-	gchar *buf = NULL;
-	gsize bytes_read;
-	gsize bytes_written;
-	GError *error = NULL;
 	GtkTreeIter iter;
 	gint index = 0;
 
@@ -342,12 +261,7 @@ on_comboboxentry4_changed(GtkComboBox * combobox, gpointer data)
 {
 	gchar *url = NULL;
 	gchar *book = NULL;
-	//gchar *buf = NULL;
 	GtkTreeIter iter;
-	gsize bytes_read;
-	gsize bytes_written;
-	GError *error = NULL;
-	gchar *key = NULL;
 	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
 
 	if (!do_display)
@@ -355,28 +269,12 @@ on_comboboxentry4_changed(GtkComboBox * combobox, gpointer data)
 	gtk_combo_box_get_active_iter(combobox, &iter);
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &book, -1);
 	GS_message(("on_comboboxentry4_changed: %s",book));
-	//      g_error_free (error);
-/*	key = g_convert(book,
-			     -1,
-			     OLD_CODESET,
-			     UTF_8,
-			     &bytes_read,
-			     &bytes_written,
-			     NULL); //&error);
-	if(key == NULL) {
-		g_print ("error: %s\n", error->message);
-		g_error_free (error);
-		return;
-	}*/
+
 	url = g_strdup_printf("sword:///%s 1:1", book);
-	//buf = g_strdup_printf("%s 1:1", book);
 
 	main_url_handler(url, TRUE);
-	//main_navbar_set(navbar_main, buf);
 	g_free(url);
 	g_free(book);
-	//g_free(buf);
-	//g_free(key);
 }
 
 
@@ -427,10 +325,6 @@ on_comboboxentry6_changed(GtkComboBox * combobox, gpointer data)
 	gchar *book = NULL;
 	gchar *chapter = NULL;
 	gchar *verse = NULL;
-	//gchar *buf = NULL;
-	gsize bytes_read;
-	gsize bytes_written;
-	GError *error = NULL;
 	GtkTreeIter iter;
 
 	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
@@ -494,7 +388,6 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 {
 	GtkWidget *hbox3;
 	GtkWidget *hbox;
-	GtkWidget *vbox;
 	GtkWidget *image;
 	GtkWidget *separatortoolitem;
 	GtkWidget *eventbox;

@@ -130,9 +130,7 @@ void gui_create_search_sidebar(void)
 {
 	GtkWidget *vbox1;
 	GtkWidget *vbox90;
-	GtkWidget *frame_search;
 	GtkWidget *vbox5;
-	GtkWidget *tmp_toolbar_icon;
 	GtkWidget *frame2;
 	GtkWidget *vbox2;
 	GtkWidget *frame3;
@@ -142,7 +140,6 @@ void gui_create_search_sidebar(void)
 	GtkWidget *table1;
 	GtkWidget *label1;
 	GtkWidget *label2;
-	GtkWidget *frame6;
 	GtkWidget *scrolledwindow_search;
 	GtkWidget *viewport_search;
 	GtkTooltips *tooltips;

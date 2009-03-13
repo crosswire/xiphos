@@ -159,23 +159,3 @@ gs_session_is_restored (void)
 
 	return restored;
 }
-
-
-/**
- * gs_session_load:
- * 
- * Loads the session by fetching the necessary information from the session
- * manager and opening files.
- * 
- * Return value: TRUE if the session was loaded successfully, FALSE otherwise.
- **/
-gboolean
-gs_session_load (void)
-{
-	int retval;
-
-	gnome_config_push_prefix (gnome_client_get_config_prefix (master_client));
-
-	gnome_config_pop_prefix ();
-	return retval;
-}

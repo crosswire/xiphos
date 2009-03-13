@@ -45,6 +45,8 @@
 #include "gui/dictlex_dialog.h"
 #include "gui/gbs_dialog.h"
 #include "gui/widgets.h"
+#include "gui/search_sidebar.h"
+#include "gui/tabbed_browser.h"
 
 
 #ifdef USE_GTKMOZEMBED
@@ -55,6 +57,7 @@
 #include "main/settings.h"
 #include "main/lists.h"
 #include "main/prayerlists.h"
+#include "main/previewer.h"
 #include "main/sidebar.h"
 #include "main/url.hh"
 #include "main/xml.h"
@@ -62,14 +65,10 @@
 
 
 SIDEBAR sidebar;
-static GtkWidget *vl_html;
-static GtkWidget *menu1;
 static GtkWidget *button_bookmarks;
 static GtkWidget *button_search;
 static GtkWidget *button_v_lists;
 static GtkWidget *button_modules;
-static gchar *s_module_name;
-static gint button_vl_html;
 static gchar *buf_module;
 static gchar *buf_caption;
 GList *list_of_verses;
@@ -155,7 +154,6 @@ static void add_columns(GtkTreeView * treeview)
 {
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
-	GtkTreeModel *model = gtk_tree_view_get_model(treeview);
 
 	renderer = gtk_cell_renderer_text_new();
 
@@ -564,7 +562,6 @@ static gboolean on_treeview_button_press_event(GtkWidget * widget,
 	GtkTreeModel *model;
 	GtkTreeIter selected;
 	gchar *key = NULL;
-	gchar *text = NULL;
 
 	selection =
 	    gtk_tree_view_get_selection((GtkTreeView *) sidebar.results_list);
@@ -593,39 +590,6 @@ static gboolean on_treeview_button_press_event(GtkWidget * widget,
 		break;
 	}
 	return FALSE;
-}
-
-
-/******************************************************************************
- * Name
- *   vpaned_srch_rslt_button_release_event
- *
- * Synopsis
- *   #include "gui/sidebar.h"
- *
- *   gboolean vpaned_srch_rslt_button_release_event(GtkWidget *widget,
- *                           GdkEventButton  *event, gpointer user_data)
- *
- * Description
- *   This function is called when the pane in the search result window is
- *   resized.  It saves the position in the settings.
- *
- * Return value
- *   gboolean
- */
-
-gboolean vpaned_srch_rslt_button_release_event(GtkWidget * widget,
-					       GdkEventButton * event,
-					       gpointer user_data)
-{
-	gint panesize;
-	gchar layout[80];
-
-	panesize = gtk_paned_get_position(GTK_PANED(widget));
-
-	settings.verselist_toppane_height = panesize;
-	sprintf(layout, "%d", panesize);
-	xml_set_value("Xiphos", "layout", "vltoppaneheight", layout);
 }
 
 
@@ -1131,183 +1095,6 @@ static void create_search_results_page(GtkWidget * notebook)
 
 /******************************************************************************
  * Name
- *
- *
- * Synopsis
- *   #include "gui/sidebar.h"
- *
- *
- *
- * Description
- *
- *
- * Return value
- *
- */
-
-static void menu_position_under(GtkMenu *menu,
-				int *x,
-				int *y,
-				gboolean *push_in,
-				gpointer user_data)
-{
-	GtkWidget *widget;
-
-	g_return_if_fail(GTK_IS_BUTTON(user_data));
-	g_return_if_fail(GTK_WIDGET_NO_WINDOW(user_data));
-
-	widget = GTK_WIDGET(user_data);
-
-	gdk_window_get_origin(widget->window, x, y);
-
-	*x += widget->allocation.x;
-	*y += widget->allocation.y + widget->allocation.height;
-
-	*push_in = FALSE;
-}
-
-
-/******************************************************************************
- * Name
- *   select_button_press_callback
- *
- * Synopsis
- *   #include "gui/sidebar.h"
- *
- *   gboolean select_button_press_callback (GtkWidget *widget,
- *			      GdkEventButton *event,
- *			      gpointer user_data)
- *
- * Description
- *    make the tooglebutton act like a gtk optionmenu by dropping a popup
- *    under the button
- *
- * Return value
- *   gboolean
- */
-
-static gboolean select_button_press_callback(GtkWidget * widget,
-					     GdkEventButton * event,
-					     gpointer user_data)
-{
-	extern GtkWidget *menu;
-
-	if ((event->type == GDK_BUTTON_PRESS) && event->button == 1) {
-		gtk_widget_grab_focus(widget);
-
-		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget),
-					     TRUE);
-		gtk_menu_popup(GTK_MENU(sidebar.optionmenu1), NULL,
-			       NULL, menu_position_under, widget,
-			       event->button, event->time);
-
-		return TRUE;
-	}
-	return FALSE;
-}
-
-
-/******************************************************************************
- * Name
- *   menu_deactivate_callback
- *
- * Synopsis
- *   #include "gui/sidebar.h"
- *
- *   void menu_deactivate_callback (GtkWidget *widget, gpointer user_data)
- *
- * Description
- *
- *
- * Return value
- *   void
- */
-
-static void menu_deactivate_callback(GtkWidget * widget,
-				     gpointer user_data)
-{
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(GTK_WIDGET(user_data)), FALSE);
-}
-
-
-static GnomeUIInfo menu_uiinfo[] = {
-	{ /* 0 */
-	 GNOME_APP_UI_ITEM,
-	 N_("_Modules"),
-	 NULL,
-	 (gpointer) on_modules_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK,
-	 GNOME_STOCK_BOOK_RED, 0,
-	 (GdkModifierType) 0, NULL},
-	{ /* 1 */
-	 GNOME_APP_UI_ITEM,
-	 N_("_Bookmarks"), NULL,
-	 (gpointer) on_bookmarks_activate,
-	 NULL,
-	 NULL, GNOME_APP_PIXMAP_FILENAME,
-	 NULL /* init'd in menu creation */, 0,
-	 (GdkModifierType) 0, NULL},
-	{ /* 2 */
-	 GNOME_APP_UI_ITEM,
-	 N_("_Search"),
-	 NULL,
-	 (gpointer) on_search_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK,
-	 GTK_STOCK_FIND,
-	 0,
-	 (GdkModifierType) 0, NULL},
-	{ /* 3 */
-	 GNOME_APP_UI_ITEM,
-	 N_("Verse _List"),
-	 NULL,
-	 (gpointer) on_search_results_activate, NULL,
-	 NULL,
-	 GNOME_APP_PIXMAP_STOCK,
-	 GNOME_STOCK_TEXT_BULLETED_LIST,
-	 0,
-	 (GdkModifierType) 0, NULL},
-	GNOMEUIINFO_END
-};
-
-
-/******************************************************************************
- * Name
- *   create_menu
- *
- * Synopsis
- *   #include "gui/sidebar.h"
- *
- *   GtkWidget* create_menu(void)
- *
- * Description
- *   main sidebar menu
- *
- * Return value
- *   GtkWidget*
- */
-
-static GtkWidget *create_menu(void)
-{
-	GtkWidget *menu;
-
-	/*
-	 * this is total magic.  set up menu before using it.
-	 * indices are direct from GnomeUIInfo above.
-	 */
-	if (!menu_uiinfo[1].pixmap_info)
-		menu_uiinfo[1].pixmap_info =
-		    image_locator("epiphany-bookmarks.png");
-	/* end magic */
-
-	menu = gtk_menu_new();
-	gnome_app_fill_menu(GTK_MENU_SHELL(menu), menu_uiinfo,
-			    NULL, FALSE, 0);
-	return menu;
-}
-
-
-/******************************************************************************
- * Name
  *   paned_button_release_event
  *
  * Synopsis
@@ -1387,32 +1174,13 @@ void gui_show_previewer_in_sidebar(gint choice)
 GtkWidget *gui_create_sidebar(GtkWidget * paned)
 {
 	GtkWidget *vbox1;
-	GtkWidget *toolbar2;
 	GtkWidget *scrolledwindow4;
 	GtkWidget *scrolledwindow_bm;
-	GtkWidget *scrolledwindow5;
-	GtkWidget *treeview2;
-	GtkWidget *label3;
-	GtkWidget *empty_notebook_page;
-	GtkWidget *label4;
-	GtkWidget *vpaned_sidebar;
-	GtkWidget *vbox2;
-	GtkWidget *vbox_search_results;
-	GtkWidget *vbox_verse_list;
-	GtkWidget *vbox_viewer;
 	GtkWidget *frame;
-	GtkWidget *hbox;
-	GtkWidget *select_button;
-	GtkWidget *alignment1;
-	GtkWidget *select_hbox;
-	GtkWidget *title_label;
-	GtkWidget *arrow;
-	GtkWidget *close_button;
-	GtkWidget *image;
-	GtkWidget *shortcut_box;
+	GtkWidget *title_label = NULL;
+#ifndef USE_GTKMOZEMBED
 	GtkWidget *scrolledwindow;
-	GtkCellRenderer *renderer;
-	GtkTreeViewColumn *column;
+#endif
 
 	GtkWidget *table2;
 	
@@ -1433,7 +1201,7 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 			(gchar *) "paned_sidebar");
 	widgets.shortcutbar = widgets.paned_sidebar;
 	
-#ifdef USE_GTKMOZEMBED 
+#ifdef USE_GTKMOZEMBED
 	frame = gtk_frame_new(NULL);
 	gtk_widget_show(frame);
 	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);

@@ -30,6 +30,5 @@
 
 void gs_session_init (const char *argv0);
 gboolean gs_session_is_restored (void);
-gboolean gs_session_load (void);
 
 #endif
