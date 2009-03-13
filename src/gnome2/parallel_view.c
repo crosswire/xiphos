@@ -409,8 +409,9 @@ _popupmenu_requested_cb(GtkHTML *html,
 void gui_create_parallel_page(void)
 {
 	GtkWidget *label;
+#ifdef USE_GTKMOZEMBED
 	GtkWidget *eventbox;
-#ifndef USE_GTKMOZEMBED
+#else
 	GtkWidget *scrolled_window;
 #endif
 
