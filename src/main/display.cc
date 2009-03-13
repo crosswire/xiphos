@@ -409,7 +409,10 @@ block_dump(SWBuf& rendered,
 	   const char **strongs,
 	   const char **morph)
 {
-	int wlen, slen, mlen, min_length;
+#ifdef USE_GTKMOZEMBED
+	int wlen;
+#endif
+	int slen, mlen, min_length;
 	char *s, *s0, *t;
 
 	// unannotated words need no help.
@@ -1646,7 +1649,6 @@ GTKChapDisp::Display(SWModule &imodule)
 char
 GTKTextviewChapDisp::Display(SWModule &imodule)
 {
-	char tmpBuf[255];
 	VerseKey *key = (VerseKey *)(SWKey *)imodule;
 	int curVerse = key->Verse();
 	int curChapter = key->Chapter();
@@ -1759,6 +1761,7 @@ GTKTextviewChapDisp::Display(SWModule &imodule)
 	mf = NULL;
 	g_free(ops);
 	ops = NULL;
+	return 0;
 }
 #endif
 
@@ -2159,7 +2162,6 @@ DialogChapDisp::Display(SWModule &imodule)
 char
 DialogTextviewChapDisp::Display(SWModule &imodule)
 {
-	char tmpBuf[255];
 	VerseKey *key = (VerseKey *)(SWKey *)imodule;
 	int curVerse = key->Verse();
 	int curChapter = key->Chapter();
@@ -2283,6 +2285,7 @@ DialogTextviewChapDisp::Display(SWModule &imodule)
 	free_font(mf);
 	g_free(ops);
     	ops = NULL;
+	return 0;
 }
 #endif
 
