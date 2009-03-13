@@ -112,37 +112,38 @@ static gchar *true_false2yes_no(int true_false)
  */
 void gui_recompute_shows(void)
 {
-	if (!stop_refresh) {
-		main_flush_widgets_content();
+	if (stop_refresh)
+		return;
 
-		if (cur_passage_tab)
-			gui_reassign_strdup(&settings.currentverse,
-					    cur_passage_tab->text_commentary_key);
+	main_flush_widgets_content();
 
-		gui_show_hide_preview(settings.showpreview);
-		gui_show_hide_texts(settings.showtexts);
-		gui_show_hide_dicts(settings.showdicts);
-		gui_show_hide_comms(settings.showcomms);
-		gui_set_bible_comm_layout();
+	if (cur_passage_tab)
+		gui_reassign_strdup(&settings.currentverse,
+				    cur_passage_tab->text_commentary_key);
 
-		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-					       (widgets.viewtexts_item),
-					       settings.showtexts);
-		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-					       (widgets.viewcomms_item),
-					       settings.showcomms);
-		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-					       (widgets.viewdicts_item),
-					       settings.showdicts);
-		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-					       (widgets.viewpreview_item),
-					       settings.showpreview);
+	gui_show_hide_preview(settings.showpreview);
+	gui_show_hide_texts(settings.showtexts);
+	gui_show_hide_dicts(settings.showdicts);
+	gui_show_hide_comms(settings.showcomms);
+	gui_set_bible_comm_layout();
 
-		stop_refresh = TRUE;
-		while (gtk_events_pending())
-			gtk_main_iteration();
-		stop_refresh = FALSE;
-	}
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+				       (widgets.viewtexts_item),
+				       settings.showtexts);
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+				       (widgets.viewcomms_item),
+				       settings.showcomms);
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+				       (widgets.viewdicts_item),
+				       settings.showdicts);
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+				       (widgets.viewpreview_item),
+				       settings.showpreview);
+
+	stop_refresh = TRUE;
+	while (gtk_events_pending())
+		gtk_main_iteration();
+	stop_refresh = FALSE;
 }
 
 
@@ -153,8 +154,6 @@ void setup_book_editor_tab(PASSAGE_TAB_INFO *pt)
 	
 	gtk_box_pack_start (GTK_BOX (widgets.vboxMain), GTK_WIDGET(pt->editor), 
 				TRUE, TRUE, 0);*/
-	
-	
 }
 
 /******************************************************************************
@@ -178,6 +177,9 @@ void set_current_tab (PASSAGE_TAB_INFO *pt)
 {
 	PASSAGE_TAB_INFO *ot = cur_passage_tab;
 	
+	if (stop_refresh)
+		return;
+
 	if (ot != NULL && ot->button_close != NULL) {
 		//gtk_widget_set_sensitive(ot->button_close, FALSE);
 		gtk_widget_hide (ot->button_close);
@@ -269,8 +271,9 @@ void notebook_main_add_page(PASSAGE_TAB_INFO *tbinf)
 {
 	GtkWidget *tab_widget;
 	GtkWidget *menu_label;
-	GString *str = pick_tab_label(tbinf);
+	GString *str;
 
+	str = pick_tab_label(tbinf);
 	tbinf->page_widget = gtk_vbox_new (FALSE, 0);
 	if(tbinf->showparallel)
 		widgets.parallel_tab = tbinf->page_widget;
@@ -321,6 +324,10 @@ void gui_save_tabs(const gchar *filename)
 	gchar *file;
 	GList *tmp = NULL;
 	PASSAGE_TAB_INFO *pt;
+
+	if (stop_refresh)
+		return;
+
 	if (NULL == filename)
 		filename = default_tab_filename;
 	
@@ -814,6 +821,10 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
 	gboolean comm_showing;
 	gint number_of_pages = gtk_notebook_get_n_pages(notebook);
 	PASSAGE_TAB_INFO *pt;
+
+	if (stop_refresh)
+		return;
+
 	GS_message(("on_notebook_main_switch_page"));
 	page_change = TRUE;
 	/* get data structure for new passage */
@@ -901,6 +912,9 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
  
 void gui_set_tab_label(const gchar * key, gboolean one_tab)
 {
+	if (stop_refresh)
+		return;
+
 	if ((settings.linkedtabs && !one_tab) || (cur_passage_tab == NULL)) {
 		GList *tmp = NULL;
 		for (tmp = g_list_first(passage_list); tmp != NULL; tmp = g_list_next(tmp))
@@ -935,6 +949,9 @@ void gui_set_named_tab_label(const gchar * key, PASSAGE_TAB_INFO *pt, gboolean u
 {
 	GString *str;
 	
+	if (stop_refresh)
+		return;
+
 	gui_reassign_strdup(&pt->text_commentary_key, (char *)key);
 	str = pick_tab_label(pt);
 		
@@ -976,6 +993,9 @@ void gui_update_tab_struct(const gchar * text_mod,
 			   gboolean showcomms,
 			   gboolean showdicts)
 {	
+	if (stop_refresh)
+		return;
+
 /*	if(!settings.browsing)
 	        return;
 */
@@ -1029,6 +1049,9 @@ void gui_open_passage_in_new_tab(gchar *verse_key)
 {
 	PASSAGE_TAB_INFO *pt;
 	
+	if (stop_refresh)
+		return;
+
 	if(!settings.browsing)
 		return;
 
@@ -1097,6 +1120,9 @@ void gui_open_parallel_view_in_new_tab(void)
 #ifdef USE_PARALLEL_TAB
 	PASSAGE_TAB_INFO *pt;
 	
+	if (stop_refresh)
+		return;
+
 	if(!settings.browsing)
 		return;
 	
@@ -1157,6 +1183,9 @@ void gui_open_module_in_new_tab(gchar *module)
 	PASSAGE_TAB_INFO *pt;
 	gint module_type;
 	
+	if (stop_refresh)
+		return;
+
 	if(!settings.browsing)
 		return;
 	
@@ -1254,6 +1283,10 @@ void gui_close_all_tabs(void)
 	gint i;
 	gint number_of_pages = 
 		gtk_notebook_get_n_pages(GTK_NOTEBOOK(widgets.notebook_main));
+
+	if (stop_refresh)
+		return;
+
 	for(i = number_of_pages - 1; i > -1; i--) {
 		PASSAGE_TAB_INFO *pt = 
 			(PASSAGE_TAB_INFO*)g_list_nth_data(passage_list, (guint)i);
@@ -1293,6 +1326,9 @@ void gui_close_all_tabs(void)
  */
 void gui_open_tabs(void)
 {
+	if (stop_refresh)
+		return;
+
 	removed_page = 1;
 	cur_passage_tab = NULL;
 	passage_list = NULL;
@@ -1320,6 +1356,9 @@ void gui_open_tabs(void)
  */
 void gui_close_passage_tab(gint pagenum)
 {
+	if (stop_refresh)
+		return;
+
 	if (-1 == pagenum)
 		pagenum = gtk_notebook_get_current_page(GTK_NOTEBOOK(widgets.notebook_main));
 	if (1 == gtk_notebook_get_n_pages(GTK_NOTEBOOK(widgets.notebook_main)))
@@ -1371,6 +1410,9 @@ static void on_notebook_main_new_tab_clicked(GtkButton *button, gpointer user_da
  */
 void gui_notebook_main_setup(int tabs)
 {
+	if (stop_refresh)
+		return;
+
 	removed_page = 1;
 	cur_passage_tab = NULL;
 	passage_list = NULL;
@@ -1410,6 +1452,9 @@ void gui_notebook_main_setup(int tabs)
  */
 void gui_notebook_main_shutdown(int tabs)
 {	
+	if (stop_refresh)
+		return;
+
 	gui_save_tabs(tabs ? default_tab_filename : no_tab_filename);
 	passage_list = g_list_first(passage_list);
 	while (passage_list != NULL) {
