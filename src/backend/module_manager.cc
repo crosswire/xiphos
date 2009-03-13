@@ -734,11 +734,10 @@ void backend_module_mgr_add_source(const char * vtype,
 }
 
 char *set_mod_mgr_locale(const char *sys_locale) {
-	const char *mylocale;
 	char *retval = NULL;
 	char buf[32];
 	int i = 0;
-	SWLocale *sw_locale;
+	SWLocale *sw_locale = NULL;
 	
 	if (sys_locale) {
 		if (!strncmp(sys_locale,"ru_RU",5)) {

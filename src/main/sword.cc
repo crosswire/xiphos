@@ -35,6 +35,17 @@
 
 #ifdef USE_GTKMOZEMBED
 #include <gtkmozembed.h>
+
+#ifdef NS_HIDDEN
+# undef NS_HIDDEN
+#endif
+#ifdef NS_IMPORT_
+# undef NS_IMPORT_
+#endif
+#ifdef NS_EXPORT_
+# undef NS_EXPORT_
+#endif
+
 #include <gtkmozembed_internal.h>
 #include <nsIDOMMouseEvent.h>
 #ifndef HAVE_GECKO_1_9
@@ -893,15 +904,10 @@ static void dict_key_list_select(GtkMenuItem * menuitem, gpointer user_data)
 GtkWidget *main_dictionary_drop_down_new(char * mod_name, char * old_key)
 {	
 	gint count = 9, i;
-	gchar *new_key, *text = NULL;
+	gchar *new_key;
 	gchar *key = NULL;
-//	gchar *key2 = NULL;
-	gint height;
 	GtkWidget *menu;
 	GtkWidget * item;
-/*	gsize bytes_read;
-	gsize bytes_written;
-	GError **error = NULL;    */
 	
 	menu = gtk_menu_new();
 	
@@ -916,18 +922,7 @@ GtkWidget *main_dictionary_drop_down_new(char * mod_name, char * old_key)
 	key = g_strdup((gchar*)gtk_entry_get_text(GTK_ENTRY(widgets.entry_dict)));
 	
 	GS_message(("\nold_key: %s\nkey: %s",old_key,key));
-//	key2 = g_utf8_strup(key,strlen(key));
-/*	key2 = g_convert(  key,	
-			     -1,	
-			     UTF_8,	
-			     OLD_CODESET,	
-			     &bytes_read,	
-			     &bytes_written,
-			     error);    */
-
-//	backend->set_module_key(mod_name, key2);
 	backend->set_module_key(mod_name, key);
-//	g_free(key2);
 	g_free(key);
 	key = backend->get_module_key();
 	
@@ -936,33 +931,16 @@ GtkWidget *main_dictionary_drop_down_new(char * mod_name, char * old_key)
 	
 	backend->set_module_key(mod_name, key);
 	backend->display_mod->Display();
-	/*new_key = g_locale_to_utf8((char*)backend->display_mod->KeyText(),
-                                             -1,
-                                             NULL,
-                                             &bytes_written,
-                                             NULL);*/
 	
 	new_key = g_strdup((char*)backend->display_mod->KeyText());
 	
 	for (i = 0; i < (count / 2)+1; i++) {
-		//free(new_key);
 		(*backend->display_mod)--;
-		/*new_key = g_locale_to_utf8((char*)backend->display_mod->KeyText(),
-                                             -1,
-                                             NULL,
-                                             &bytes_written,
-                                             NULL);*/
-		//new_key = g_strdup((char*)backend->display_mod->KeyText());
 	}
 
 	for (i = 0; i < count; i++) {
 		free(new_key);			
 		(*backend->display_mod)++;
-		/*new_key = g_locale_to_utf8((char*)backend->display_mod->KeyText(),
-                                             -1,
-                                             NULL,
-                                             &bytes_written,
-                                             NULL);*/
 		new_key = g_strdup((char*)backend->display_mod->KeyText());
 		/* add menu item */
 		item =
@@ -1571,9 +1549,9 @@ char *main_get_mod_config_file(const char * module_name,
 
 	name =  moddir;
 	name += "/mods.d";
-	if (dir = g_dir_open(name, 0, NULL)) {
+	if ((dir = g_dir_open(name, 0, NULL))) {
 	        g_dir_rewind(dir);
-		while (ent = g_dir_read_name(dir)) {
+		while ((ent = g_dir_read_name(dir))) {
 		        name =  moddir;
 			name += "/mods.d/";
 			name += ent;

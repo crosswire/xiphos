@@ -37,11 +37,10 @@
 
 
 char *main_module_mgr_set_sword_locale(const char *sys_locale) {
-	const char *mylocale;
 	char *retval = NULL;
 	char buf[32];
 	int i = 0;
-	SWLocale *sw_locale;
+	SWLocale *sw_locale = NULL;
 	
 	if(sys_locale) {
 		if(!strncmp(sys_locale,"ru_RU",5)) {
@@ -102,7 +101,7 @@ char *main_module_mgr_set_sword_locale(const char *sys_locale) {
 		LocaleMgr::getSystemLocaleMgr()->setDefaultLocaleName(sys_locale);
 		sw_locale = LocaleMgr::getSystemLocaleMgr()->getLocale(sys_locale);
 	}
-	if(sw_locale) {
+	if (sw_locale) {
 		OLD_CODESET = (char*)sw_locale->getEncoding();
 	} else {
 		OLD_CODESET = (char*)"iso8859-1";

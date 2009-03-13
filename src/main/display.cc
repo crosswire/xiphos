@@ -298,7 +298,7 @@ ClearImages(gchar *text)
 	gchar *s, *t;
 
 	for (s = strstr(text, "<img "); s; s = strstr(s, "<img ")) {
-		if (t = strchr(s+4, '>')) {
+		if ((t = strchr(s+4, '>'))) {
 			while (s <= t)
 				*(s++) = ' ';
 		} else {
@@ -319,7 +319,7 @@ ClearFontFaces(gchar *text)
 	// huge assumption: no nested <font> specs: <font face="">
 	// is never followed by another <font anything> before </font>.
 	for (s = strstr(text, "<font face=\"Galax"); s; s = strstr(s, "<font face=\"Galax")) {
-		if (t = strchr(s+15, '>')) {
+		if ((t = strchr(s+15, '>'))) {
 			while (s <= t)
 				*(s++) = ' ';
 			s = strstr(s, "</font>");
@@ -433,7 +433,7 @@ block_dump(SWBuf& rendered,
 		*s = '\0';
 		t = (char*)strrchr(*strongs, '>') + 1;
 		// correct weird NASB lexicon references.
-		if (s0 = (char*)strchr(*strongs, '!')) {
+		if ((s0 = (char*)strchr(*strongs, '!'))) {
 			do {
 				*s0 = *(s0+1);
 				++s0;
@@ -735,7 +735,6 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule, gint mod_type)
 	int curVerse = key->Verse();
 	int curChapter = key->Chapter();
 	int curBook = key->Book();
-	gchar *utf8_key;
 	gchar *buf;
 	char *ModuleName = imodule.Name();
 	const char *rework;	// for image size analysis rework.
@@ -929,6 +928,7 @@ GTKEntryDisp::Display(SWModule &imodule)
 	mf = NULL;
 	g_free(ops);
 	ops = NULL;
+	return 0;
 }
 
 void
@@ -1101,7 +1101,6 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 {
 	gchar *utf8_key;
 	gchar *buf;
-	char *num;
 	SWMgr *mgr = be->get_main_mgr();
 	const char *ModuleName = imodule.Name();
 	SWModule *mod_bottom = mgr->getModule(ModuleName);
@@ -1274,7 +1273,7 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 		for (s = strstr(text->str, "<span class=\"strongs\">");
 		     s;
 		     s = strstr(s, "<span class=\"strongs\">")) {
-			if (t = strstr(s, "</span>")) {
+			if ((t = strstr(s, "</span>"))) {
 				t += 6;
 				while (s <= t)
 					*(s++) = ' ';
@@ -1286,7 +1285,7 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 		for (s = strstr(text->str, "<span class=\"morph\">");
 		     s;
 		     s = strstr(s, "<span class=\"morph\">")) {
-			if (t = strstr(s, "</span>")) {
+			if ((t = strstr(s, "</span>"))) {
 				t += 6;
 				while (s <= t)
 					*(s++) = ' ';
@@ -1302,7 +1301,7 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 
 		// clean: no <tokens>.
 		for (s = strchr(text->str, '<'); s; s = strchr(s, '<')) {
-			if (t = strchr(s, '>')) {
+			if ((t = strchr(s, '>'))) {
 				while (s <= t)
 					*(s++) = ' ';
 			} else {
@@ -1313,7 +1312,7 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 
 		// clean: no &lt;...&gt; sequences.  (Strong's ref, "<1234>".)
 		for (s = strstr(text->str, "&lt;"); s; s = strstr(s, "&lt;")) {
-			if (t = strstr(s, "&gt;")) {
+			if ((t = strstr(s, "&gt;"))) {
 				t += 3;
 				while (s <= t)
 					*(s++) = ' ';
@@ -1325,7 +1324,7 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 
 		// clean: no other &symbols;.
 		for (s = strchr(text->str, '&'); s; s = strchr(s, '&')) {
-			if (t = strchr(s, ';')) {
+			if ((t = strchr(s, ';'))) {
 				while (s <= t)
 					*(s++) = ' ';
 			} else {
@@ -1403,7 +1402,6 @@ GTKChapDisp::Display(SWModule &imodule)
 	gchar *buf;
 	char *num;
 	const gchar *paragraphMark = NULL;
-	gchar *br = NULL;
 	const char *rework;	// for image size analysis rework.
 
 	char *ModuleName = imodule.Name();
@@ -1623,6 +1621,7 @@ GTKChapDisp::Display(SWModule &imodule)
 	mf = NULL;
 	g_free(ops);
 	ops = NULL;
+	return 0;
 }
 
 
@@ -1652,7 +1651,6 @@ GTKTextviewChapDisp::Display(SWModule &imodule)
 	int curVerse = key->Verse();
 	int curChapter = key->Chapter();
 	int curBook = key->Book();
-	gfloat adjVal;
 	GtkTextMark   *mark = NULL;
 	GtkTextIter iter, startiter, enditer;
 	static GtkTextTag *font_tag = NULL;
@@ -1775,7 +1773,6 @@ DialogEntryDisp::DisplayByChapter(SWModule &imodule, gint mod_type)
 	int curVerse = key->Verse();
 	int curChapter = key->Chapter();
 	int curBook = key->Book();
-	gchar *utf8_key;
 	gchar *buf;
 	char *ModuleName = imodule.Name();
 	const char *rework;	// for image size analysis rework.
@@ -1931,6 +1928,7 @@ DialogEntryDisp::Display(SWModule &imodule)
 	mf = NULL;
 	g_free(ops);
 	ops = NULL;
+	return 0;
 }
 
 
@@ -1942,17 +1940,12 @@ DialogChapDisp::Display(SWModule &imodule)
 	int curVerse = key->Verse();
 	int curChapter = key->Chapter();
 	int curBook = key->Book();
-	int curTestament = key->Testament();
-	gfloat adjVal;
 	MOD_FONT *mf = get_font(imodule.Name());
 	//GString *str = g_string_new(NULL);
 	gchar *buf;
 	char *num;
 	is_rtol = main_is_mod_rtol(ModuleName);
-	gchar *preverse = NULL;
 	const gchar *paragraphMark = "&para;";
-	gchar *br = NULL;
-	gchar heading[32];
 	gboolean newparagraph = FALSE;
 
 	gboolean strongs_and_morph, strongs_or_morph;
@@ -2158,6 +2151,7 @@ DialogChapDisp::Display(SWModule &imodule)
 	free_font(mf);
 	g_free(ops);
     	ops = NULL;
+	return 0;
 }
 
 
@@ -2170,7 +2164,6 @@ DialogTextviewChapDisp::Display(SWModule &imodule)
 	int curVerse = key->Verse();
 	int curChapter = key->Chapter();
 	int curBook = key->Book();
-	gfloat adjVal;
 	GtkTextMark   *mark = NULL;
 	GtkTextIter iter, startiter, enditer;
 	static GtkTextTag *font_tag = NULL;
@@ -2302,15 +2295,12 @@ GTKPrintEntryDisp::Display(SWModule &imodule)
 	SWBuf swbuf = "";
 	gint mod_type;
 	MOD_FONT *mf = get_font(imodule.Name());
-	gint font_size;
 
 	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(gtkText))) return 0;
 	GeckoHtml *html = GECKO_HTML(gtkText);
 	gecko_html_open_stream(html,"text/html");
 
 	GLOBAL_OPS * ops = main_new_globals(imodule.Name(),0);
-
-	const char *rework;	// for image size analysis rework.
 
 	(const char *)imodule;	// snap to entry
 	GS_message(((const char *)imodule.getRawEntry()));
@@ -2358,6 +2348,7 @@ GTKPrintEntryDisp::Display(SWModule &imodule)
 	if (keytext)
 		g_free(keytext);
 #endif
+	return 0;
 }
 
 char
@@ -2372,7 +2363,6 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 	gchar *buf;
 	gchar *preverse = NULL;
 	const gchar *paragraphMark = NULL;
-	gchar *br = NULL;
 	gchar heading[32];
 	SWBuf swbuf;
 	char *num;
@@ -2502,4 +2492,5 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 	free_font(mf);
 	g_free(ops);
 #endif
+	return 0;
 }

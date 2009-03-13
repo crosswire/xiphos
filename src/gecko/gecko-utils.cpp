@@ -28,6 +28,16 @@
 
 #include <nsStringAPI.h>
 
+#ifdef NS_HIDDEN
+# undef NS_HIDDEN
+#endif
+#ifdef NS_IMPORT_
+# undef NS_IMPORT_
+#endif
+#ifdef NS_EXPORT_
+# undef NS_EXPORT_
+#endif
+
 #ifdef HAVE_GECKO_1_9
 #include <gtkmozembed_glue.cpp>
 #endif

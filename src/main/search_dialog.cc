@@ -101,8 +101,6 @@ void main_range_text_changed(GtkEditable * editable)
 {
 	const gchar *entry;
 	gchar *buf = NULL;
-	gint count;
-	gint i = 0;
 	GtkTreeModel *model;
 	GtkListStore *list_store;
 	GtkTreeModel *model_list_ranges;
@@ -196,7 +194,6 @@ static void set_search_global_option(const gchar * option, gboolean choice)
 
 void main_save_modlist(void)
 {
-	gint i = 0;
 	gchar *text1 = NULL;
 	gchar *text2 = NULL;
 	GtkTreeModel *model;
@@ -240,7 +237,6 @@ void main_save_modlist(void)
 
 void main_save_range(void)
 {
-	gint i = 0;
 	gchar *text1 = NULL;
 	gchar *text2 = NULL;
 	GtkTreeModel *model;
@@ -340,7 +336,7 @@ void main_delete_range(void)
 
 static void add_module_finds(GList * versekeys)
 {
-	gchar *buf,*buf2;
+	gchar *buf;
 	GtkTreeModel *model;
 	GtkListStore *list_store;
 	GtkTreeIter iter;
@@ -759,8 +755,6 @@ void main_selection_finds_list_changed(GtkTreeSelection *
 	gchar *text, *path_str;
 	GList *tmp = NULL;
 	GtkTreeModel *model;
-	GtkTreeIter iter;
-	GtkListStore *list_store;
 	GtkTreeIter selected;
 	GtkTreePath *path;
 	
@@ -885,7 +879,7 @@ void main_finds_verselist_selection_changed(GtkTreeSelection * selection,
 void main_selection_modules_lists_changed(GtkTreeSelection *
 					    selection, gpointer data)
 {
-	gchar *name, *modules, *module[2];
+	gchar *name, *modules;
 	GList *tmp = NULL;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
@@ -1029,51 +1023,8 @@ void main_comboboxentry2_changed(GtkComboBox * combobox, gpointer user_data)
 	g_free(mod_list_str);
 	g_free(str);
 }
-/******************************************************************************
- * Name
- *   gui_add_to_found_list
- *
- * Synopsis
- *   #include "gui/search_dialog.h"
- *
- *   void gui_add_to_found_list(gchar * result_text, gchar * module)
- *
- * Description
- *   loads result_text (key) and modlue (name) to the results html widget
- *   we got here from  
- *   on_button_begin_search_clicked -> 
- *   do_dialog_search -> 
- *   backend_do_dialog_search ->
- *   add_to_found_list ->
- *
- * Return value
- *   void
- */
 
-static void add_to_found_list(gchar * result_text, gchar * module)
-{
-	//gchar buf[256];
-	GString *str;
-	gchar *buf[2];
-	GtkTreeModel *model;
-	GtkListStore *list_store;
-	GtkTreeIter iter;
 
-	model =
-	    gtk_tree_view_get_model(GTK_TREE_VIEW(search1.listview_verses));
-	list_store = GTK_LIST_STORE(model);
-
-	gtk_list_store_append(list_store, &iter);
-	gtk_list_store_set(list_store, 
-			   &iter,
-			   0, module, 
-			   1, result_text, 
-			   -1);
-		
-//	if (result_text) /* allocated by g_convert() in BackEnd::get_next_listkey() */
-//		g_free(result_text);
-	g_string_free(str, TRUE);
-}
 /******************************************************************************
  * Name
  *   
@@ -1155,7 +1106,6 @@ static GList *get_current_list(void)
 {
 	GList *items = NULL;
 	gchar *buf;
-	gint i = 0;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 
@@ -1330,9 +1280,7 @@ void main_do_dialog_search(void)
 	const gchar *search_string;
 	const gchar *attribute_search_string = NULL;
 	gchar *module;
-	gchar buf[256], *utf8str;
-	gchar *tmp_buf;
-	gint utf8len;
+	gchar buf[256];
 	GList *search_mods = NULL;
 	const gchar *key_buf;
 	GString *str;
@@ -1344,7 +1292,6 @@ void main_do_dialog_search(void)
 	GtkTreeIter iter;
 	GtkTreeModel *model2;
 	GtkListStore *list_store2;
-	GtkTreeIter iter2;
 	gint x = 0;
 	gint mod_type;
 	char *num;
@@ -1526,10 +1473,6 @@ void main_do_dialog_search(void)
 void main_open_search_dialog(void)
 {
 	if (!is_running) {
-		GtkTreeModel *model;
-		GtkListStore *list_store;
-		GtkTreeIter iter;
-		
 		// get rid of holdover from last time, if it exited poorly.
 		if (backendSearch)
 			delete backendSearch;

@@ -57,16 +57,8 @@ extern "C" {
 #define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
 
 static BackEnd *backendSearch;
-static gboolean is_running = FALSE;
 
 int search_dialog;
-
-static GList *get_current_list(void);
-static gchar *get_modlist_string(GList * mods);
-static GList *get_custom_list_from_name(const gchar * label);
-static void add_ranges(void);
-static void add_modlist(void);
-
 
 /**********************************************************************/
 /****************************** sidebar search ************************/
@@ -90,10 +82,9 @@ static void add_modlist(void);
 
 static void fill_search_results_list(int finds)
 {
-	gchar *utf8str, buf[256];
+	gchar buf[256];
 	gchar *tmpbuf;
 	const gchar *key_buf = NULL;
-	gint i = 0;
 	GtkTreeModel *model;
 	GtkListStore *list_store;
 	GtkTreeIter iter;
@@ -289,8 +280,7 @@ void main_search_sidebar_fill_bounds_combos(void)
 	GError *error = NULL;    */
 	char *book = NULL;
 	char *module_name;
-	GtkTreeIter iter;
-	int i = 0, j = 0, x = 2;
+	int i = 0;
 	int testaments;
 	
 	//module_name = settings.sb_search_mod;
