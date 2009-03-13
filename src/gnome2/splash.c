@@ -470,7 +470,6 @@ void gui_splash_init()
 {
 	GdkPixbuf *icon_pixbuf;
 	GError *error = NULL;
-	GtkWidget *image;
 
 	if (settings.showsplash) {
 		splash = e_splash_new();

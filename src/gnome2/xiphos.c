@@ -55,16 +55,22 @@
 #include "gui/sidebar.h"
 #include "gui/mod_mgr.h"
 #include "gui/tabbed_browser.h"
+#include "gui/bookmarks_menu.h"
 
 #include "main/sword_treekey.h"
 #include "main/navbar_book.h"
 #include "main/parallel_view.h"
+#include "main/previewer.h"
 #include "main/sword.h"
 #include "main/settings.h"
 #include "main/sidebar.h"
+#include "main/search_sidebar.h"
 #include "main/lists.h"
 #include "main/xml.h"
 
+#ifdef USE_GTKMOZEMBED
+#include "gecko/gecko-html.h"
+#endif
 
 /******************************************************************************
  * Name
@@ -85,7 +91,6 @@
 
 void frontend_init(void)
 {
-	guint number_of_pages = 0;
 	GS_print(("%s\n", "Initiating Xiphos"));
 	settings.comm_showing = TRUE;
 	settings.displaySearchResults = FALSE;
@@ -140,11 +145,6 @@ void frontend_init(void)
 
 void frontend_display(void)
 {
-	gint test;
-	GS_DIALOG *info;
-	GString *str;
-	gchar *url;
-	extern GList *passage_list;
 	GS_print(("%s\n", "Displaying Xiphos"));
 	gui_show_main_window();
 	

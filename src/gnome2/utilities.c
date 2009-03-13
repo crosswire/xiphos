@@ -36,12 +36,14 @@
 #include "gui/xiphos.h"
 #include "gui/mod_mgr.h"
 #include "gui/widgets.h"
+#include "gui/dialog.h"
 
 #include "main/lists.h"
 #include "main/mod_mgr.h"
 #include "main/settings.h"
 #include "main/configs.h"
 #include "main/sword.h"
+#include "main/url.hh"
 
 
 gint gui_of2tf(const gchar * on_off)
@@ -323,7 +325,6 @@ language_add_folders(GtkTreeModel * model,
 		      gchar ** languages)
 {
 	GtkTreeIter iter_iter;
-	GtkTreeIter parent;
 	GtkTreeIter child_iter;
 	int j;
 
@@ -373,69 +374,6 @@ static void add_module_to_prayerlist_folder(GtkTreeModel * model,
 
 /******************************************************************************
  * Name
- *   add_language_folder
- *
- * Synopsis
- *   #include "gui/utilities.h"
- *
- *   void add_language_folder(GtkTreeModel * model, GtkTreeIter iter,
- *			 gchar * language)
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-
-static void add_language_folder(GtkTreeModel *model,
-				GtkTreeIter iter,
-				const gchar *language)
-{
-	GtkTreeIter iter_iter;
-	GtkTreeIter parent;
-	GtkTreeIter child_iter;
-	gsize bytes_read;
-	gsize bytes_written;
-	gboolean valid;
-
-	/* Check language */
-	const gchar *buf = language;
-	if (!g_utf8_validate(buf,-1,NULL))
-		language = _("Unknown");
-	if (!g_unichar_isalnum(g_utf8_get_char(buf)) || (language == NULL))
-		language = _("Unknown");
-
-	valid = gtk_tree_model_iter_children(model, &iter_iter, &iter);
-	while (valid) {
-		/* Walk through the list, reading each row */
-		gchar *str_data;
-
-		gtk_tree_model_get(model,
-				   &iter_iter,
-				   0,
-				   &str_data,
-				   -1);
-
-		if(!g_utf8_collate(g_utf8_casefold(language, -1),
-				   g_utf8_casefold(str_data, -1))) {
-			g_free(str_data);
-			return;
-		}
-		g_free(str_data);
-		valid = gtk_tree_model_iter_next(model, &iter_iter);
-	}
-	gtk_tree_store_append(GTK_TREE_STORE(model), &child_iter, &iter);
-	gtk_tree_store_set(GTK_TREE_STORE(model), 
-			&child_iter, 
-			0,
-			language,
-			-1);
-}
-
-
-/******************************************************************************
- * Name
  *   add_module_to_language_folder
  *
  * Synopsis
@@ -457,7 +395,6 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 					  gchar * module_name)
 {
 	GtkTreeIter iter_iter;
-	GtkTreeIter parent;
 	GtkTreeIter child_iter;
 	gboolean valid;
 
@@ -507,7 +444,6 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 
 void gui_load_module_tree(GtkWidget * tree)
 {
-	gint i;
 	GtkTreeStore *store;
 	GtkTreeIter text;
 	GtkTreeIter commentary;
@@ -517,7 +453,6 @@ void gui_load_module_tree(GtkWidget * tree)
 	GtkTreeIter map;
 	GtkTreeIter image;
 	GtkTreeIter prayerlist;
-	GtkTreeIter child_iter;
 	GList *tmp = NULL;
 	GList *tmp2 = NULL;
 	MOD_MGR *info;
@@ -1134,8 +1069,7 @@ language_make_list(GList *modlist,
 		   void (*add)(GtkTreeModel *, GtkTreeIter, gchar **))
 {
 	MOD_MGR *info;
-	int i, j;
-	char **s;
+	int i;
 
 	language_clear();
 

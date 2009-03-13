@@ -43,14 +43,18 @@
 #include "gui/parallel_view.h"
 #include "gui/main_window.h"
 #include "gui/sidebar.h"
+#include "gui/tabbed_browser.h"
 #include "gui/widgets.h"
 #include "gui/preferences_cell_renderer.h"
 
 #include "main/sword.h"
 #include "main/lists.h"
+#include "main/mod_mgr.h"
 #include "main/parallel_view.h"
 #include "main/settings.h"
+#include "main/sidebar.h"
 #include "main/xml.h"
+#include "main/url.hh"
 
 //gtk_toggle_button_set_active
 typedef enum {
@@ -194,7 +198,6 @@ static GtkWidget *notebook;
 static COMBOBOXS combo;
 static COLOR_PICKERS color_picker;
 static CHECK_BUTTONS check_button;
-static BUTTONS button;
 
 
 /******************************************************************************
@@ -1147,7 +1150,7 @@ on_combobox1_changed(GtkComboBox * combobox,
 	settings.verse_num_font_size = atoi(settings.verse_num_font_size_str);
 	url = g_strdup_printf("sword://%s/%s",settings.MainWindowModule,
 					      settings.currentverse);
-	main_url_handler(url);
+	main_url_handler(url, TRUE);
 	g_free(url);
 	g_free(buf);
 }
@@ -1193,7 +1196,7 @@ on_basecombobox1_changed(GtkComboBox * combobox,
 	url = g_strdup_printf("sword://%s/%s",
 			      settings.MainWindowModule,
 			      settings.currentverse);
-	main_url_handler(url);
+	main_url_handler(url, TRUE);
 	g_free(url);
 	g_free(buf);
 }
@@ -1231,7 +1234,7 @@ on_combobox2_changed(GtkComboBox * combobox,
 		return;
 
 	url = g_strdup_printf("sword://%s/%s",buf,settings.currentverse);
-	main_url_handler(url);
+	main_url_handler(url, TRUE);
 	g_free(url);
 	g_free(buf);
 }
@@ -1269,7 +1272,7 @@ on_combobox4_changed(GtkComboBox * combobox,
 		return;
 
 	url = g_strdup_printf("sword://%s/%s",buf,settings.dictkey);
-	main_url_handler(url);
+	main_url_handler(url, TRUE);
 	g_free(url);
 	g_free(buf);
 }
@@ -1297,7 +1300,6 @@ on_combobox5_changed(GtkComboBox * combobox,
 		     gpointer user_data)
 {
 	gchar *buf = NULL;
-	gchar *url = NULL;
 	GtkTreeIter iter;
 	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
 
@@ -1333,7 +1335,6 @@ on_combobox6_changed(GtkComboBox * combobox,
 		     gpointer user_data)
 {
 	gchar *buf = NULL;
-	gchar *url = NULL;
 	GtkTreeIter iter;
 	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
 
@@ -1369,7 +1370,6 @@ on_combobox7_changed(GtkComboBox * combobox,
 		     gpointer user_data)
 {
 	gchar *buf = NULL;
-	gchar *url = NULL;
 	GtkTreeIter iter;
 	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
 	gtk_combo_box_get_active_iter(combobox, &iter);
@@ -1403,7 +1403,6 @@ on_combobox8_changed(GtkComboBox * combobox,
 		     gpointer user_data)
 {
 	gchar *buf = NULL;
-	gchar *url = NULL;
 	GtkTreeIter iter;
 	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
 	gtk_combo_box_get_active_iter(combobox, &iter);
@@ -1436,7 +1435,6 @@ on_combobox9_changed(GtkComboBox * combobox,
 		     gpointer user_data)
 {
 	gchar *buf = NULL;
-	gchar *url = NULL;
 	GtkTreeIter iter;
 	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
 	gtk_combo_box_get_active_iter(combobox, &iter);
@@ -1470,7 +1468,6 @@ on_combobox10_changed(GtkComboBox * combobox,
 		      gpointer user_data)
 {
 	gchar *buf = NULL;
-	gchar *url = NULL;
 	GtkTreeIter iter;
 	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
 	gtk_combo_box_get_active_iter(combobox, &iter);
@@ -1503,7 +1500,6 @@ on_combobox11_changed(GtkComboBox * combobox,
 		      gpointer user_data)
 {
 	gchar *buf = NULL;
-	gchar *url = NULL;
 	GtkTreeIter iter;
 	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
 	gtk_combo_box_get_active_iter(combobox, &iter);
@@ -1537,7 +1533,6 @@ on_combobox12_changed(GtkComboBox * combobox,
 		      gpointer user_data)
 {
 	gchar *buf = NULL;
-	gchar *url = NULL;
 	GtkTreeIter iter;
 	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
 
@@ -1573,7 +1568,6 @@ on_combobox13_changed(GtkComboBox * combobox,
 		      gpointer user_data)
 {
 	gchar *buf = NULL;
-	gchar *url = NULL;
 	GtkTreeIter iter;
 	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
 
@@ -1609,7 +1603,6 @@ on_combobox14_changed(GtkComboBox * combobox,
 		      gpointer user_data)
 {
 	gchar *buf = NULL;
-	gchar *url = NULL;
 	GtkTreeIter iter;
 	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
 
@@ -1654,7 +1647,7 @@ on_combobox15_changed(GtkComboBox * combobox,
 	if (!buf || !strcmp(buf, _("-- Select --")))	/* see fill_combobox */
 		return;
 	url = g_strdup_printf("sword://%s/%s",buf,"1");
-	main_url_handler(url);
+	main_url_handler(url, TRUE);
 	g_free(url);
 	g_free(buf);
 }
@@ -1714,7 +1707,6 @@ tree_selection_changed(GtkTreeSelection * selection,
 		       gpointer data)
 {
 	GtkTreeIter selected;
-	gchar *name = NULL;
 	gint page;
 	GtkTreeModel *model;
 
@@ -2082,7 +2074,6 @@ fill_combobox(GList * glist,
 static gint
 get_font_size_index(const char *font)
 {
-	gint i = 0;
 	if (!strcmp(font, "-2"))
 		return 0;
 	if (!strcmp(font, "-1"))
@@ -2106,8 +2097,6 @@ get_font_size_index(const char *font)
 static void
 setup_module_comboboxes(void)
 {
-	GList *glist = NULL;
-
 	/*
 	 * Main Window Modules page
 	 */
