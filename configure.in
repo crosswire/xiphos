@@ -274,9 +274,9 @@ if test "x$GXX" = xyes; then
 if test x$debug = xyes; then
   AC_DEFINE(DEBUG, 1, [Define if you want to see debug messages])
   if test x$ac_cv_prog_cc_g = xyes; then
-    CFLAGS="-g3 -O0"
+    CFLAGS="-g3 -O0 -Werror -Wall"
   else
-    CFLAGS="-O0"
+    CFLAGS="-O0 -Werror -Wall"
   fi
   if test x$ac_cv_prog_cxx_g = xyes; then
     CXXFLAGS="$CXXFLAGS -g3 -O0"
@@ -287,6 +287,9 @@ if test x$debug = xyes; then
   CXXFLAGS="$CXXFLAGS "
 fi
 fi
+
+CFLAGS="$CFLAGS -Werror -Wall"
+CXXFLAGS="$CXXFLAGS -Werror -Wall"
 
 ORBIT_IDL="`$PKG_CONFIG --variable=orbit_idl ORBit-2.0`"
 AC_SUBST(ORBIT_IDL)

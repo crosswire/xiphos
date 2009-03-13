@@ -196,7 +196,7 @@ unsigned long main_treekey_append_sibling (char *book, char *name, char * offset
 
 	TreeKeyIdx *treekey = (TreeKeyIdx *) mod->CreateKey ();
 	treekey->setOffset (atol(offset));
-	GS_message (("offset1: %d",  treekey->getOffset()));
+	GS_message (("offset1: %ld",  treekey->getOffset()));
 	treekey->append ();
 	treekey->setLocalName (name);
 	treekey->save ();
@@ -205,7 +205,7 @@ unsigned long main_treekey_append_sibling (char *book, char *name, char * offset
 	mod->KeyText();      //snap to entry
 	(*mod) << name;
 
-	GS_message (("offset2: %d",  treekey->getOffset()));
+	GS_message (("offset2: %ld",  treekey->getOffset()));
 	return treekey->getOffset();
 }
 

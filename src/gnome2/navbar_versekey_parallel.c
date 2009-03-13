@@ -134,14 +134,14 @@ gboolean select_book_button_press_callback(GtkWidget * widget,
 	guint32 time_add;
 
 	g_get_current_time( &start_time );
-	GS_message(("Start time is: %d sec %d mil", start_time.tv_sec, start_time.tv_usec));
+	GS_message(("Start time is: %ld sec %ld mil", start_time.tv_sec, start_time.tv_usec));
 	
 	menu = main_versekey_drop_down_book_menu(navbar_parallel, 
 						NB_PARALLEL, 
 						NULL, NULL);
 
 	g_get_current_time( &end_time );
-	GS_message(("End time is: %d sec %d mil", end_time.tv_sec, end_time.tv_usec));
+	GS_message(("End time is: %ld sec %ld mil", end_time.tv_sec, end_time.tv_usec));
 	time_diff = ((end_time.tv_sec - start_time.tv_sec) * 1000000) + (end_time.tv_usec - start_time.tv_usec);
 	time_add = 0;
 	if (time_diff > 10000)
