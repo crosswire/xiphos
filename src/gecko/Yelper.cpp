@@ -321,7 +321,9 @@ gint
 Yelper::ProcessMouseOver (void* aEvent, int pane, 
 			  gboolean is_dialog, DIALOG_DATA * dialog)
 {
+#ifdef HAVE_GECKO_1_9
 	extern gboolean in_url;
+#endif
 	PRBool aShiftKey;
 
 	GS_message(("mouse over pane: %d",pane));
