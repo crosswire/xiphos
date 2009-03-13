@@ -500,7 +500,6 @@ void gui_load_tabs(const gchar *filename)
 	gboolean error = FALSE;
 	gboolean back_compat_need_save = FALSE;
 	settings.showparatab = FALSE;
-	GList *tmp = NULL;
 	PASSAGE_TAB_INFO *pt = NULL, *pt_first = NULL;
 
 	stop_refresh = TRUE;
@@ -608,7 +607,7 @@ void gui_load_tabs(const gchar *filename)
 							 * if there is no per-tab state,
 							 * take tab state from global state.
 							 */
-							if (val = (gchar*)xmlGetProp(tmp_node, (const xmlChar *)"showtexts")) {
+							if ((val = (gchar*)xmlGetProp(tmp_node, (const xmlChar *)"showtexts"))) {
 								pt->showtexts = yes_no2true_false(val);
 								xmlFree(val);
 								val = (gchar*)xmlGetProp(tmp_node, (const xmlChar *)"showpreview");

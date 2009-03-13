@@ -30,6 +30,7 @@ extern "C" {
 void gui_parallel_tab_sync(const gchar * key);
 GtkWidget *gui_create_parallel_tab(void);
 void gui_keep_parallel_tab_in_sync(void);
+void gui_destroy_parallel_tab(void);
 	
 #ifdef __cplusplus
 }
