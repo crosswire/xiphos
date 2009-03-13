@@ -488,7 +488,7 @@ int BackEnd::key_get_verse(const char *key)
 	return vkey.Verse();
 }
 
-const unsigned int BackEnd::key_chapter_count(const char *key)
+unsigned int BackEnd::key_chapter_count(const char *key)
 {
 	VerseKey vkey;
 	vkey.AutoNormalize(1);
@@ -504,7 +504,7 @@ const unsigned int BackEnd::key_chapter_count(const char *key)
 }
 
 
-const unsigned int BackEnd::key_verse_count(const char *key)
+unsigned int BackEnd::key_verse_count(const char *key)
 {
 	VerseKey vkey;  
 	vkey.AutoNormalize(1);
@@ -1022,7 +1022,7 @@ int BackEnd::set_scope2last_search(void)
 	return 1;
 }
 
-int BackEnd::do_module_index(char *module_name, int is_dialog)
+int BackEnd::do_module_index(char *module_name)
 {
 	
 	search_mod = main_mgr->Modules[module_name];
@@ -1038,7 +1038,7 @@ int BackEnd::do_module_index(char *module_name, int is_dialog)
 	return 1;
 }
 
-int BackEnd::do_module_delete_index(char *module_name, int is_dialog)
+int BackEnd::do_module_delete_index(char *module_name)
 {
 	
 	search_mod = main_mgr->Modules[module_name];

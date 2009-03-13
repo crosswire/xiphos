@@ -85,8 +85,8 @@ public:
 	char *key_get_book(const char *key);
 	int key_get_chapter(const char *key);
 	int key_get_verse(const char *key);
-	const unsigned int key_chapter_count(const char *key);
-	const unsigned int key_verse_count(const char *key);
+	unsigned int key_chapter_count(const char *key);
+	unsigned int key_verse_count(const char *key);
 	
 	
 	char *get_module_key(void);
@@ -130,8 +130,8 @@ public:
 	void set_scope2range(void);
 	int set_scope2last_search(void);
 	int check_for_optimal_search(char * module_name);
-	int do_module_index(char *module_name, int is_dialog);
-	int do_module_delete_index(char *module_name, int is_dialog);
+	int do_module_index(char *module_name);
+	int do_module_delete_index(char *module_name);
 	int do_module_search(char *module_name, const char *search_string, 
 				int search_type, int search_params, int is_dialog);
 	void terminate_search();
