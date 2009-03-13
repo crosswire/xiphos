@@ -803,7 +803,6 @@ void main_finds_verselist_selection_changed(GtkTreeSelection * selection,
 	gint textlen;
 	//GtkTreeModel *model;
 	GtkTreeIter selected;
-	GString *html_text;
 
  	if (!gtk_tree_selection_get_selected (selection, &model, &selected))
 		return;
@@ -838,7 +837,7 @@ void main_finds_verselist_selection_changed(GtkTreeSelection * selection,
 	mark_search_words(text_str, FALSE);
 
 #ifdef USE_GTKMOZEMBED
-	html_text = g_string_new(HTML_START);
+	GString *html_text = g_string_new(HTML_START);
 	g_string_append(html_text, text_str->str);
 	g_string_append(html_text, "</html>");	
 	gecko_html_open_stream(GECKO_HTML(search1.preview_html), "text/html");
