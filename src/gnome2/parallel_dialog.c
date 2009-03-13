@@ -624,9 +624,10 @@ GtkWidget *create_parallel_dialog(void)
 	GtkWidget *dialog_action_area25;
 	GtkWidget *hbuttonbox4;
 	GtkWidget *btnDockInt;
+#ifdef USE_GTKMOZEMBED
 	GtkWidget *eventbox;
 	GtkWidget *frame;
-#ifndef USE_GTKMOZEMBED
+#else
 	GtkWidget *scrolled_window;
 #endif
 	gchar title[256];

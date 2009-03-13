@@ -1130,10 +1130,6 @@ static void create_text_tags(GtkTextBuffer *buffer)
 {
 	GtkTextTag *tag;
 	GdkColor color;
-	GdkColor color2;
-	GdkColor color_red;
-	GdkColor colorLink;
-	PangoFontDescription *font_desc;
 
 	/* verse number tag verse style*/
 	tag = gtk_text_buffer_create_tag (buffer, "verseNumber", NULL);

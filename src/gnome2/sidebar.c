@@ -1176,9 +1176,10 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	GtkWidget *vbox1;
 	GtkWidget *scrolledwindow4;
 	GtkWidget *scrolledwindow_bm;
-	GtkWidget *frame;
 	GtkWidget *title_label = NULL;
-#ifndef USE_GTKMOZEMBED
+#ifdef USE_GTKMOZEMBED
+	GtkWidget *frame;
+#else
 	GtkWidget *scrolledwindow;
 #endif
 

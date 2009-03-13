@@ -330,10 +330,11 @@ void gui_create_gbs_dialog(DIALOG_DATA *dlg)
 //	GtkWidget *label241;
 //	GtkWidget *label242;
 //	GtkWidget *label243;
-#ifndef USE_GTKMOZEMBED  
-	GtkWidget *scrolledwindow_html;
-#endif /* !USE_GTKMOZEMBED */
+#ifdef USE_GTKMOZEMBED  
 	GtkWidget *frame;
+#else
+	GtkWidget *scrolledwindow_html;
+#endif /* USE_GTKMOZEMBED */
 	GObject *selection;
 
 
