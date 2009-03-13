@@ -352,7 +352,7 @@ HtmlOutput(SWBuf& swbuf,
 	PangoContext* pc = gtk_widget_create_pango_context(gtkText);
 	PangoFontDescription *desc = pango_context_get_font_description(pc);
 	pango_font_description_set_family(
-	    desc, ((mf->old_font) ? mf->old_font : "Serif"));
+	    desc, ((mf && mf->old_font) ? mf->old_font : "Serif"));
 	gtk_widget_modify_font(gtkText, desc);
 	GtkHTMLStream *stream = gtk_html_begin(html);
 	GtkHTMLStreamStatus status;
