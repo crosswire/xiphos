@@ -2,6 +2,10 @@
 
 	* added -Werror -Wall to build
 
+2009-03-13  terry <tbiggs@users.sourceforge.net> and karl <charcoal@users.sf.net>
+
+	* lots of de-linting due to experimental -Wall -Werror use.
+
 2009-03-09  terry <tbiggs@users.sourceforge.net>
 
 	* added <save> button to editors main toolbar
