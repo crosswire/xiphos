@@ -355,7 +355,7 @@ HtmlOutput(SWBuf& swbuf,
 	    desc, ((mf && mf->old_font) ? mf->old_font : "Serif"));
 	gtk_widget_modify_font(gtkText, desc);
 	GtkHTMLStream *stream = gtk_html_begin(html);
-	GtkHTMLStreamStatus status;
+	//GtkHTMLStreamStatus status;
 	gboolean was_editable = gtk_html_get_editable(html);
 	if (was_editable)
 		gtk_html_set_editable(html, FALSE);
@@ -381,7 +381,7 @@ HtmlOutput(SWBuf& swbuf,
 	if (anchor)
 		gecko_html_jump_to_anchor(html, anchor);
 #else
-	gtk_html_end(html, stream, status);
+	gtk_html_end(html, stream, GTK_HTML_STREAM_OK);
 	gtk_html_set_editable(html, was_editable);
 	if (anchor)
 		gtk_html_jump_to_anchor(html, anchor);
