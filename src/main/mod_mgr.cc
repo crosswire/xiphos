@@ -111,12 +111,12 @@ char *main_module_mgr_set_sword_locale(const char *sys_locale) {
 
 int main_module_mgr_index_mod(char * module_name)
 {
-	return backend->do_module_index(module_name, 0);
+	return backend->do_module_index(module_name);
 }
 
 int main_module_mgr_delete_index_mod(char * module_name)
 {
-	return backend->do_module_delete_index(module_name, 0);
+	return backend->do_module_delete_index(module_name);
 }
 
 /******************************************************************************
