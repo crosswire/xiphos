@@ -30,7 +30,9 @@
 #include "gui/find_dialog.h"
 #include "main/settings.h"
 #include "main/sword.h"
+#ifdef USE_GTKMOZEMBED
 #include "gecko/gecko-html.h"
+#endif
 
 typedef struct _find_dialog FIND_DIALOG;
 
