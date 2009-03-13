@@ -1201,41 +1201,6 @@ void main_display_dictionary(const char * mod_name, const char * key)
 }
 
 
-void main_display_prev_verse(const char * mod_name, char * current_verse)
-{
-	char *url = NULL;
-	char *key = NULL;
-	
-	backend->set_module_key(mod_name, current_verse);
-	(*backend->display_mod)--;
-	//backend->display_mod
-	key = (char*)backend->display_mod->getKeyText();
-	url = g_strdup_printf("sword://%s/%s", mod_name,key);
-	main_url_handler(url, TRUE);
-	g_free(url);
-	gtk_widget_grab_focus(widgets.html_text);
-/*	url = g_strdup_printf("xiphos.url?action=showBookmark&"
-					"type=%s&value=%s&module=%s",
-					"newTab",
-					main_url_encode(key), 
-					main_url_encode(mod_name));*/
-}
-
-
-void main_display_next_verse(const char * mod_name, char * current_verse)
-{
-	char *url = NULL;
-	char *key = NULL;
-	
-	backend->set_module_key(mod_name, current_verse);
-	(*backend->display_mod)++;
-	url = g_strdup_printf("sword://%s/%s", mod_name,key);
-	main_url_handler(url, TRUE);
-	g_free(url);
-	gtk_widget_grab_focus(widgets.html_text);
-}
-
-
 void main_display_bible(const char * mod_name, const char * key)
 {
 	gchar *file = NULL;
@@ -1886,4 +1851,32 @@ main_deformat_number(char *digitstring)
 		return result;
 	}
 	return atoi(digitstring);
+}
+
+/******************************************************************************
+ * Name
+ *  main_flush_widgets_content
+ *
+ * Synopsis
+ *   #include "main/sword.h"
+ *   void main_flush_widgets_content()
+ *
+ * Description
+ *   cleans content from all subwindow widgets.
+ *
+ * Return value
+ *   int
+ */ 
+static SWBuf blank_html_content("<html><head></head><body> </body></html>");
+
+void main_flush_widgets_content(void)
+{
+	if (GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.html_text)))
+		HtmlOutput(blank_html_content, widgets.html_text, NULL, NULL);
+	if (GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.html_comm)))
+		HtmlOutput(blank_html_content, widgets.html_comm, NULL, NULL);
+	if (GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.html_dict)))
+		HtmlOutput(blank_html_content, widgets.html_dict, NULL, NULL);
+	if (GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.html_book)))
+		HtmlOutput(blank_html_content, widgets.html_book, NULL, NULL);
 }
