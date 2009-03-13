@@ -171,12 +171,12 @@ static void dialog_url(GtkHTML * html, const gchar * url,
  * Return value
  *   void
  */
-/*
+
 static void link_clicked(GtkButton * button, gpointer user_data)
 {
 
 }
-*/
+
 
 /******************************************************************************
  * Name
