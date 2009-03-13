@@ -38,6 +38,7 @@
 #include "editor/bonobo-editor.h"
 
 #include "gui/navbar_versekey_editor.h"
+#include "gui/bookmark_dialog.h"
 
 #include "main/settings.h"
 #include "main/sword.h"
@@ -54,6 +55,8 @@
 #define CONTROL_ID         "OAFIID:GNOME_GtkHTML_Editor:" GTKHTML_API_VERSION
 
 extern gboolean do_display;
+
+static gboolean editor_is_dirty(EDITOR *e);
 
 static 
 gboolean save_through_persist_file(EDITOR * e, const gchar * filename);
@@ -198,7 +201,6 @@ _draw_header (GtkHTML *html, GtkPrintOperation *operation,
 	PangoFontDescription *desc;
 	PangoLayout *layout;
 	gdouble x, y;
-	gint n_pages;
 	gchar *text;
 	cairo_t *cr;
 
@@ -277,7 +279,6 @@ _do_print (EDITOR * e,
 	GtkPrintOperation *operation;
 	GtkPrintSettings *psettings;
 	GtkPageSetup *setup;
-	GtkPaperSize *letter;
 	GtkPrintOperationResult result;
 	GError *error = NULL;
 
@@ -360,7 +361,6 @@ save_through_persist_stream_cb(GtkWidget * widget, gpointer data)
 	CORBA_Environment ev;
 	const gchar *text;
 	gchar *buf;
-	size_t len;
 	EDITOR *ed = (EDITOR *) data;
 
 	CORBA_exception_init(&ev);
@@ -399,7 +399,6 @@ save_through_plain_persist_stream_cb(GtkWidget * widget, gpointer data)
 	BonoboObject *smem;
 	CORBA_Environment ev;
 	const char *text;
-	size_t len;
 	EDITOR *ed = (EDITOR *) data;
 
 	CORBA_exception_init(&ev);
@@ -473,17 +472,6 @@ struct _FileSelectionInfo {
 };
 typedef struct _FileSelectionInfo FileSelectionInfo;
 
-static FileSelectionInfo file_selection_info = {
-	NULL,
-	NULL,
-	OP_NONE
-};
-
-static void file_selection_destroy_cb(GtkWidget * widget, gpointer data)
-{
-	file_selection_info.widget = NULL;
-}
-
 static void
 view_source_dialog(BonoboWindow * app, char *type, gboolean as_html)
 {
@@ -504,42 +492,6 @@ static void view_html_source_html_cb(GtkWidget * widget, gpointer data)
 {
 	view_source_dialog(data, "text/html", TRUE);
 }
-
-static void file_selection_cancel_cb(GtkWidget * widget, gpointer data)
-{
-	gtk_widget_destroy(GTK_WIDGET(data));
-}
-
-static void file_selection_ok_cb(GtkWidget * widget, gpointer data)
-{
-	EDITOR *e = (EDITOR *) data;
-	const gchar *fname;
-
-	fname = gtk_file_selection_get_filename
-	    (GTK_FILE_SELECTION(file_selection_info.widget));
-
-	switch (file_selection_info.operation) {
-	case OP_LOAD_THROUGH_PERSIST_STREAM:
-		//load_through_persist_stream (fname, interface);
-		break;
-	case OP_SAVE_THROUGH_PERSIST_STREAM:
-		//save_through_persist_stream (fname, interface);
-		break;
-	case OP_SAVE_THROUGH_PLAIN_PERSIST_STREAM:
-		//save_through_plain_persist_stream (fname, interface);
-		break;
-	case OP_LOAD_THROUGH_PERSIST_FILE:
-		_load_file (e, g_strdup(fname));
-		break;
-	case OP_SAVE_THROUGH_PERSIST_FILE:
-		save_through_persist_file(e, g_strdup(fname));
-		break;
-	default:
-		g_assert_not_reached();
-	}
-	gtk_widget_destroy(file_selection_info.widget);
-}
-
 
 static void
 open_or_save_as_dialog(EDITOR * e, FileSelectionOperation op)
@@ -657,7 +609,6 @@ save_through_persist_file_cb(GtkWidget * widget, gpointer data)
 static void
 save_as_through_persist_file_cb(GtkWidget * widget, gpointer data)
 {
-	gchar *filename = NULL;
 	EDITOR *e = (EDITOR *) data;
 	open_or_save_as_dialog(e, OP_SAVE_THROUGH_PERSIST_FILE);
 }
@@ -932,6 +883,7 @@ gboolean editor_close_all(void)
 		tmp = g_list_next(tmp);
 	}
 	g_list_free(editors_all);
+        return 1;
 }
 
 static int
@@ -986,37 +938,9 @@ static gboolean on_key_release_event(GtkWidget * widget,
 }
 
 
-/******************************************************************************
- * Name
- *   
- *
- * Synopsis
- *   #include "/.h"
- *
- *   void on_entry_activate(GtkEntry * entry, EDITOR * e)	
- *
- * Description
- *   this is called when user hits enter key in the lookup entry
- *
- * Return value
- *   void
- */
-
-static void on_entry_activate(GtkEntry * entry, EDITOR * e)
-{
-	const gchar *buf = gtk_entry_get_text(entry);
-	if (e->navbar.key)
-		g_free(e->navbar.key);
-	e->navbar.key = g_string_assign(e->navbar.key,buf);
-	editor_load_note(e, NULL, buf);
-}
-
-
 static
 gint ask_about_saving(EDITOR * e)
 {
-	CORBA_Object interface;
-	CORBA_Environment ev;
 	
 	gint test;
 	GS_DIALOG *info;
@@ -1111,7 +1035,6 @@ static GtkWidget *container_create(const gchar * window_title,
 	BonoboUIComponent *component;
 	BonoboUIContainer *container;
 	CORBA_Environment ev;
-	GNOME_GtkHTML_Editor_Engine engine;
 	gpointer servant;
 	BonoboObject *impl;
 
@@ -1273,10 +1196,7 @@ static GtkWidget *container_create(const gchar * window_title,
 static
 gint _create_new(const gchar * filename, const gchar * key, gint editor_type)
 {
-	gchar *title = NULL;
 	EDITOR *editor;
-	GtkWidget *vbox = NULL;
-	GtkWidget *toolbar_nav = NULL;
 	
 	
 	editor = g_new(EDITOR, 1);
