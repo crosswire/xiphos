@@ -463,10 +463,8 @@ void on_verse_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 
 void main_navbar_versekey_set(NAVBAR_VERSEKEY navbar, const char * key)
 {	
-	char buf[5];
 	char *tmpbuf = NULL;
 	int book;
-	gint i,x;	
 	VerseKey vkey; 
 	char *num;
 	
@@ -536,7 +534,7 @@ GtkWidget *main_versekey_drop_down_verse_menu(NAVBAR_VERSEKEY navbar,
 	GtkWidget *menu;
 	GtkMenuShell *menu_shell;
 	GtkWidget *item;
-	GtkWidget *select_item;
+	GtkWidget *select_item = NULL;
 	c_dialog = NULL;
 	c_editor = NULL;	
 	c_dialog = (DIALOG_DATA *) dialog;
@@ -556,14 +554,14 @@ GtkWidget *main_versekey_drop_down_verse_menu(NAVBAR_VERSEKEY navbar,
 	}
 	vkey = gkey;    */
 	vkey = navbar.key->str;
-	char xtestament = vkey.Testament() ;
-	char xbook = vkey.Book();
-	int xchapter = vkey.Chapter();
 	int xverse = vkey.Verse();
 		
 #ifdef SWORD_MULTIVERSE
 	x = (vkey.getVerseMax());
 #else
+	char xtestament = vkey.Testament() ;
+	char xbook = vkey.Book();
+	int xchapter = vkey.Chapter();
 	x = (vkey.books[xtestament-1][xbook-1].versemax[xchapter-1]);
 #endif
 	for(i=1; i <= x; i++) {
@@ -587,8 +585,8 @@ GtkWidget *main_versekey_drop_down_verse_menu(NAVBAR_VERSEKEY navbar,
 		}
 		g_free(num);
 	}
-	if(select_item)
-		gtk_menu_shell_select_item(menu_shell,select_item);
+	if (select_item)
+		gtk_menu_shell_select_item(menu_shell, select_item);
 	return menu;
 }
 
@@ -626,7 +624,7 @@ GtkWidget *main_versekey_drop_down_chapter_menu(NAVBAR_VERSEKEY navbar,
 	GtkWidget *menu;
 	GtkMenuShell *menu_shell;
 	GtkWidget *item;
-	GtkWidget *select_item;
+	GtkWidget *select_item = NULL;
 	c_dialog = NULL;
 	c_dialog = (DIALOG_DATA *) dialog;
 	c_editor = NULL;
@@ -644,12 +642,12 @@ GtkWidget *main_versekey_drop_down_chapter_menu(NAVBAR_VERSEKEY navbar,
 	}
 	vkey = gkey;    */
 	vkey = navbar.key->str;
-	char xtestament = vkey.Testament() ;
-	char xbook = vkey.Book();
 	int xchapter = vkey.Chapter();
 #ifdef SWORD_MULTIVERSE
 	x = (vkey.getChapterMax());
 #else
+	char xtestament = vkey.Testament() ;
+	char xbook = vkey.Book();
 	x = (vkey.books[xtestament-1][xbook-1].chapmax);
 #endif
 	for(i=1; i <= x; i++) {
@@ -673,8 +671,8 @@ GtkWidget *main_versekey_drop_down_chapter_menu(NAVBAR_VERSEKEY navbar,
 		}
 		g_free(num);
 	}
-	if(select_item)
-		gtk_menu_shell_select_item(menu_shell,select_item);	
+	if (select_item)
+		gtk_menu_shell_select_item(menu_shell, select_item);	
 	return menu;
 }
 
@@ -704,10 +702,10 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar,
 	VerseKey key_current; 
 	GtkWidget *menu;
 	GtkWidget *item;
-	GtkWidget *select_item;
+	GtkWidget *select_item = NULL;
 	char *book = NULL;
 	char *current_book = NULL;
-	int i = 0, j = 0, x = 2;
+	int i = 0;
 	GtkMenuShell *menu_shell;
 	
 	c_dialog = NULL;
@@ -808,8 +806,8 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar,
 			g_free(rawtext);
 		}
 	}
-	if(select_item)
-		gtk_menu_shell_select_item(menu_shell,select_item);
+	if (select_item)
+		gtk_menu_shell_select_item(menu_shell, select_item);
 	if(current_book)
 		g_free(current_book);	
 	return menu;

@@ -68,13 +68,11 @@ extern GtkWidget *entryIntLookup;
 static GtkHTMLStreamStatus status1;
 static GtkHTMLStream *htmlstream;
 #endif
-static GtkWidget *module_options_menu;
 static gboolean parallel1;
 static gboolean parallel2;
 static gboolean parallel3;
 static gboolean parallel4;
 static gboolean parallel5;
-static GLOBAL_OPS *ops;
 
 BackEnd *backend_p;
 
@@ -555,7 +553,7 @@ void main_update_parallel_page(void)
 	gchar *font_size_tmp = NULL, *font_size = NULL;
 	gchar *utf8str, *mod_name, *font_name = NULL;
 	gint utf8len, i, j;
-	gboolean was_editable, use_gtkhtml_font;
+	gboolean use_gtkhtml_font;
 	gboolean is_rtol = FALSE;
 	gchar *buf;
 	gchar *file = NULL;
@@ -1037,7 +1035,6 @@ static void int_display(GtkHTML *html, gchar * key)
 {
 	gchar  	*utf8str,
 		*textColor,
-	    buf[500],
 		*tmpkey,
 		tmpbuf[256],
 		*mod_name[5],
@@ -1050,16 +1047,13 @@ static void int_display(GtkHTML *html, gchar * key)
 	gboolean is_rtol = FALSE;
 	gchar *buf2;
 	gchar *file = NULL;
-	gint utf8len, cur_verse, cur_chapter, i = 1, j;
+	gint cur_verse, cur_chapter, i = 1, j;
 	char *cur_book;
 
 	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(html))) return;
 
 	// need #verses to process in this book.
 	VerseKey vkey;
-	gsize bytes_read;
-	gsize bytes_written;
-	GError *error = NULL;
 	int xverses;
 
 	vkey.AutoNormalize(1);
@@ -1430,7 +1424,6 @@ void main_load_menu_form_mod_list(GtkWidget * pmInt, gchar * label,
 	GtkWidget *item;
 	GtkWidget *view_module;
 	GtkWidget *view_module_menu;
-	GtkAccelGroup *view_module_menu_accels;
 
 	view_module = gtk_menu_item_new_with_label(label);
 	gtk_widget_show(view_module);

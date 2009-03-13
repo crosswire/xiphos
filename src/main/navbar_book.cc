@@ -322,7 +322,7 @@ void on_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 {
 	char *tmpbuf = NULL;
 
-	tmpbuf = g_strdup_printf("%ld", GPOINTER_TO_INT(user_data));
+	tmpbuf = g_strdup_printf("%d", GPOINTER_TO_INT(user_data));
 	main_display_book(settings.book_mod, tmpbuf);
 }
 
@@ -404,7 +404,6 @@ GtkWidget *main_book_drop_down_new(void)
 
 void main_setup_navbar_book(gchar * book_name, unsigned long offset)
 {
-	gchar buf[256];
 	gchar *tmpbuf = NULL;
 	GS_message(("offset: %ld",offset));
 	backend->set_module(book_name);

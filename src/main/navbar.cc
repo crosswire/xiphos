@@ -155,7 +155,7 @@ void main_navbar_fill_book_combo(NAVBAR navbar)
 	GError *error = NULL;   */
 	char *book = NULL;
 	GtkTreeIter iter;
-	int i = 0, j = 0, x = 2;
+	int i = 0;
 	
 	if(navbar.testaments == backend->module_get_testaments(navbar.module_name))
 		return;

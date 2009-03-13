@@ -328,7 +328,7 @@ void mark_search_words(GString * str, gboolean eliminate)
 		for (s = strchr(str->str, '<'); s; s = strchr(s, '<')) {
 			if ((*(s+1) == 'a') ||
 			    ((*(s+1) == '/') && (*(s+2) == 'a'))) {
-				if (t = strchr(s, '>')) {
+				if ((t = strchr(s, '>'))) {
 					while (s <= t)
 						*(s++) = ' ';
 				} else {
@@ -448,7 +448,6 @@ void main_entry_display(gpointer data, gchar * mod_name,
 	GString *tmp_str = g_string_new(NULL);
 	GString *str;
 	GString *search_str;
-	gboolean was_editable = FALSE;
 	MOD_FONT *mf = get_font(mod_name);
 #ifdef USE_GTKMOZEMBED
 	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(html_widget)))
@@ -456,6 +455,7 @@ void main_entry_display(gpointer data, gchar * mod_name,
 	GeckoHtml *html = GECKO_HTML(html_widget);
 	gecko_html_open_stream(html, "text/html");
 #else
+	gboolean was_editable = FALSE;
 	GtkHTML *html = GTK_HTML(html_widget);
 	PangoContext* pc = gtk_widget_create_pango_context(html_widget);
 	PangoFontDescription *desc = pango_context_get_font_description(pc);

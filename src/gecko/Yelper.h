@@ -55,7 +55,6 @@ public:
 	PRBool Find (const gchar *aSearchString);
 	PRBool FindAgain (PRBool aForward);
 	void SetSelectionAttention (PRBool aSelectionAttention);
-        gchar *GetAttribute (nsIDOMNode *node, gchar *attribute);
         gint ProcessMouseOver (void* aEvent, gint pane,  
 			       gboolean is_dialog, DIALOG_DATA * d);
         gint ProcessMouseDblClickEvent (void* aEvent);
@@ -63,7 +62,6 @@ public:
 	gint ProcessMouseEvent (void *aEvent);
         gint ProcessKeyDownEvent(GtkMozEmbed *embed, gpointer dom_event);
         gint ProcessKeyReleaseEvent(GtkMozEmbed *embed, gpointer dom_event);
-        gint redraw(GtkMozEmbed *embed);
 #ifdef USE_GTKUPRINT
 	nsresult Print (GeckoPrintInfo *print_info, PRBool preview,
 			gint *prev_pages);

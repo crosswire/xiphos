@@ -25,6 +25,7 @@
 #include <config.h>
 #endif
 #ifdef USE_GTKUPRINT
+
 #include <nsIPrintingPromptService.h>
 #include <nsIPrintProgressParams.h>
 #include <nsIWebProgressListener.h>

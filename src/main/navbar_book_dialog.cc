@@ -276,7 +276,6 @@ void main_navbar_book_dialog_next(gpointer data)
 static
 void on_menu_select(GtkMenuItem * menuitem, gpointer data)
 {
-	char *tmpbuf = NULL;
 	cur_d->offset = GPOINTER_TO_INT(data);	
 	main_setup_navbar_book_dialog(cur_d);
 }
@@ -361,7 +360,6 @@ GtkWidget *main_navbar_book_dialog_drop_down_new(gpointer data)
 
 void main_setup_navbar_book_dialog(gpointer data)
 {
-	gchar buf[256];
 	gchar *tmpbuf = NULL;
 	DIALOG_DATA * d = (DIALOG_DATA *) data;
 	BackEnd *be = (BackEnd *) d->backend;
