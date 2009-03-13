@@ -113,6 +113,8 @@ static gchar *true_false2yes_no(int true_false)
 void gui_recompute_shows(void)
 {
 	if (!stop_refresh) {
+		main_flush_widgets_content();
+
 		if (cur_passage_tab)
 			gui_reassign_strdup(&settings.currentverse,
 					    cur_passage_tab->text_commentary_key);

@@ -68,8 +68,6 @@ extern gboolean companion_activity;
 
 void main_book_heading(char * mod_name);
 void main_chapter_heading(char * mod_name);
-void main_display_prev_verse(const char * mod_name, char * current_verse);
-void main_display_next_verse(const char * mod_name, char * current_verse);
 void main_delete_note(	const gchar * module_name, 
 								const gchar * key_str);
 void main_save_note(const gchar * module_name, const gchar * key_str, 
@@ -119,6 +117,7 @@ char *main_get_book_key_from_offset(unsigned long offset);
 void main_refresh_all(void);
 char *main_format_number(int x);
 int main_deformat_number(char *digitstring);
+void main_flush_widgets_content(void);
 
 const char *main_get_language_map(const char *language);
 void main_init_language_map(void);
