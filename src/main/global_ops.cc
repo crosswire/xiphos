@@ -261,7 +261,6 @@ GLOBAL_OPS *main_new_globals(gchar * mod_name, int dialog)
 {
 	GLOBAL_OPS *ops;
 	gchar *buf = NULL;
-	bool retval = false;
     	
 	if (dialog)
 		buf = g_strdup_printf("%s/modops-dialog.conf", settings.gSwordDir);

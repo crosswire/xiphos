@@ -38,13 +38,12 @@
 
 #define HTML_START "<HTML><HEAD><META HTTP-EQUIV=\"content-type\" CONTENT=\"text/html; CHARSET=utf-8\"><STYLE TYPE=\"text/css\"><!-- A { text-decoration:none } %s --></STYLE></HEAD><BODY>"
 
-static int _save(char *filename, char* text,int len)
+static void _save(char *filename, char* text,int len)
 {
 	GS_message((filename));
 	g_file_set_contents(filename, text, len, NULL);
 	if(filename)
 		g_free(filename);	
-	
 }
 
 static void _export_book(char *filename, int type)
@@ -54,11 +53,8 @@ static void _export_book(char *filename, int type)
 	SWModule *mod = mgr->Modules[settings.MainWindowModule];
 	mod->setKey(settings.currentverse);
 	VerseKey *key = (VerseKey *)(SWKey *)(*mod);
-	int curVerse = 1;
 	int curChapter = 1;
 	int curBook = key->Book();
-	int curTestament = key->Testament();
-	int curPos = 0;
 	int mychapter = 1;
 	int myverse = 1;
 	key->Chapter(1);

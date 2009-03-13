@@ -42,6 +42,17 @@
 #include "gui/utilities.h"
 
 #include "gecko/gecko-html.h"
+
+#ifdef NS_HIDDEN
+# undef NS_HIDDEN
+#endif
+#ifdef NS_IMPORT_
+# undef NS_IMPORT_
+#endif
+#ifdef NS_EXPORT_
+# undef NS_EXPORT_
+#endif
+
 #include "gecko/gecko-services.h"
 #include "gecko/gecko-utils.h"
 #include "gecko/Yelper.h"
@@ -61,10 +72,6 @@ struct _GeckoHtmlPriv {
 	gint pane;
 	DIALOG_DATA * dialog;
 };
-
-static void html_set_fonts(void);
-static void html_set_colors(void);
-static void html_set_a11y(void);
 
 enum {
 	URI_SELECTED,
@@ -225,7 +232,7 @@ static gint html_open_uri(GtkMozEmbed * embed, const gchar * uri)
 
 	// for some reason, `/' is not properly encoded for us as "%2F"
 	// so we have to do it ourselves.  /mutter/ *ick*
-	if (place = strchr((char*)uri, '?')) {		// url's beginning, as-is.
+	if ((place = strchr((char*)uri, '?'))) {	// url's beginning, as-is.
 		strncpy(tmpbuf, uri, (++place)-uri);
 		tmpbuf[place-uri] = '\0';
 		tmpstr = g_string_append(tmpstr, tmpbuf);
@@ -249,7 +256,7 @@ static gint html_open_uri(GtkMozEmbed * embed, const gchar * uri)
 		strcpy(book, priv->dialog->key);
 		*(strrchr(book, ' ')) = '\0';
 		
-		if (buf = strstr((char*)uri, "&value=")) {
+		if ((buf = strstr((char*)uri, "&value="))) {
 			buf += 7;
 			place = buf;
 	
@@ -304,27 +311,6 @@ static void html_init(GeckoHtml * html)
 
 	priv->yelper = new Yelper(GTK_MOZ_EMBED(html));
 	klass = GECKO_HTML_GET_CLASS(html);
-/*	if (!klass->font_handler) {
-		klass->font_handler =
-		   gecko_settings_notify_add (GECKO_SETTINGS_INFO_FONTS,
-		   (GHookFunc) html_set_fonts,
-		   NULL);
-		   html_set_fonts (); 
-	}
-	if (!klass->color_handler) {
-		klass->color_handler =
-		   gecko_settings_notify_add (GS_SETTINGS_INFO_COLOR,
-		   (GHookFunc) html_set_colors,
-		   NULL);
-		   html_set_colors (); 
-	}
-	if (!klass->a11y_handler) {
-		klass->a11y_handler =
-		   gecko_settings_notify_add (GS_SETTINGS_INFO_A11Y,
-		   (GHookFunc) html_set_a11y,
-		   NULL);
-		   html_set_a11y (); 
-	} */
 }
 
 static void html_dispose(GObject * object)
@@ -603,41 +589,6 @@ void gecko_html_preview_navigate(GeckoHtml * html, gint page_no)
 void gecko_html_preview_end(GeckoHtml * html)
 {
 	html->priv->yelper->PrintPreviewEnd();
-}
-
-static void html_set_fonts(void)
-{
-/*	  gchar *font;
-
-	   font = gecko_settings_get_font (GECKO_FONT_VARIABLE);
-	   gecko_set_font (GECKO_FONT_VARIABLE, font);
-	   g_free (font);
-
-	   font = gecko_settings_get_font (GECKO_FONT_FIXED);
-	   gecko_set_font (GECKO_FONT_FIXED, font);
-	   g_free (font); */
-}
-
-static void html_set_colors(void)
-{
-	/*   const gchar *color;
-
-	   color = gs_settings_get_color (GS_COLOR_FG);
-	   gs_gecko_set_color (GS_COLOR_FG, color);
-
-	   color = gs_settings_get_color (GS_COLOR_BG);
-	   gs_gecko_set_color (GS_COLOR_BG, color);
-
-	   color = gs_settings_get_color (GS_COLOR_ANCHOR);
-	   gs_gecko_set_color (GS_COLOR_ANCHOR, color); */
-}
-
-static void html_set_a11y(void)
-{
-/*    gboolean caret;
-
-    caret = gs_settings_get_caret ();
-    gs_gecko_set_caret (caret);*/
 }
 
 gboolean gecko_html_initialize(void)

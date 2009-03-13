@@ -219,8 +219,6 @@ static void add_children_to_tree(GtkTreeModel * model, GtkTreeIter iter,
 {
 	gchar buf[256];
 	gchar *tmpbuf = NULL;
-	GdkPixbuf *open;
-	GdkPixbuf *closed;
 	GtkTreeIter child_iter;
 
 
@@ -479,7 +477,6 @@ static void add_chapters_to_book(GtkTreeModel * model, GtkTreeIter iter,
 static void add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
 			       const gchar * mod_name)
 {
-	GList *tmp = NULL;
 	VerseKey key;
 	gint j = 0;
 	GtkTreeIter child_iter;
@@ -593,8 +590,6 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 	gchar *cap = NULL;
 	gchar *mod = NULL;
 	gchar *key = NULL;
-	gchar *offset = NULL;
-	gint mod_type;
 	GtkTreePath *path;
 	static int old_page = 0;
 
@@ -645,9 +640,6 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 						      (widgets.
 						       notebook_comm_book),
 						      0);
-			/*main_display_commentary(settings.
-			   CommWindowModule,
-			   settings.currentverse); */
 		}
 	}
 
@@ -658,11 +650,6 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 						      (widgets.
 						       notebook_comm_book),
 						      1);
-			/*offset =
-			   g_strdup_printf("%lu",
-			   settings.book_offset);
-			   main_display_book(settings.book_mod, offset);
-			   g_free(offset); */
 		}
 	}
 
@@ -760,60 +747,6 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 
 /******************************************************************************
  * Name
- *   add_language_folder
- *
- * Synopsis
- *   #include "main/sidebar.h"
- *
- *   void add_language_folder(GtkTreeModel * model, GtkTreeIter iter,
- *			 gchar * language)
- *
- * Description
- *
- *
- * Return value
- *   void
- */
-
-static void add_language_folder(GtkTreeModel * model, GtkTreeIter iter,
-				const gchar * language)
-{
-	GtkTreeIter iter_iter;
-	GtkTreeIter parent;
-	GtkTreeIter child_iter;
-	gboolean valid;
-
-	/* Check language */
-	const gchar *buf = language;
-	if (!g_utf8_validate(buf,-1,NULL))
-		language = _("Unknown");
-	if (!g_unichar_isalnum(g_utf8_get_char(buf)) || (language == NULL))
-		language = _("Unknown");
-
-	valid = gtk_tree_model_iter_children(model, &iter_iter, &iter);
-	while (valid) {
-		/* Walk through the list, reading each row */
-		gchar *str_data;
-
-		gtk_tree_model_get(model, &iter_iter, 2, &str_data, -1);
-		if (!strcmp(language, str_data)) {
-			g_free(str_data);
-			return;
-		}
-		valid = gtk_tree_model_iter_next(model, &iter_iter);
-	}
-	gtk_tree_store_append(GTK_TREE_STORE(model), &child_iter,
-			      &iter);
-	gtk_tree_store_set(GTK_TREE_STORE(model), &child_iter,
-			   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
-			   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
-			   COL_CAPTION, (gchar *) language,
-			   COL_MODULE, NULL, COL_OFFSET, NULL, -1);
-}
-
-
-/******************************************************************************
- * Name
  *   language_add_folders
  *
  * Synopsis
@@ -834,7 +767,6 @@ language_add_folders(GtkTreeModel * model,
 		     gchar ** languages)
 {
 	GtkTreeIter iter_iter;
-	GtkTreeIter parent;
 	GtkTreeIter child_iter;
 	int j;
 
@@ -913,7 +845,6 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 					  gchar * module_name)
 {
 	GtkTreeIter iter_iter;
-	GtkTreeIter parent;
 	GtkTreeIter child_iter;
 	gboolean valid;
 
@@ -969,7 +900,6 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 
 void main_load_module_tree(GtkWidget * tree)
 {
-	gint i;
 	GtkTreeStore *store;
 	GtkTreeIter text;
 	GtkTreeIter commentary;
@@ -1187,7 +1117,6 @@ void main_load_module_tree(GtkWidget * tree)
 void main_add_mod_tree_columns(GtkTreeView * tree)
 {
 	GtkTreeViewColumn *column;
-	GtkTreeViewColumn *column2;
 	GtkCellRenderer *renderer;
 
 	column = gtk_tree_view_column_new();

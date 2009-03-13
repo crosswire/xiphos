@@ -114,7 +114,6 @@ gboolean bible_apply_change;
 static DIALOG_DATA *dlg_bible;
 static DIALOG_DATA *dlg_percom;
 static GList *list_dialogs;
-static gboolean bible_in_url;
 
 /******************************************************************************
  * externs
@@ -209,13 +208,13 @@ void main_dialogs_clear_viewer(DIALOG_DATA *d)
 {
 	GString *tmp_str = g_string_new(NULL);
 	GString *str;
-	GString *search_str;
-	gboolean was_editable = FALSE;
 	const char *buf;
 
 #ifdef USE_GTKMOZEMBED
 	GtkMozEmbed *new_browser = GTK_MOZ_EMBED(d->previewer);
 #else	
+	gboolean was_editable = FALSE;
+
 	/* setup gtkhtml widget */
 	GtkHTML *html = GTK_HTML(d->previewer);
 	was_editable = gtk_html_get_editable(html);
@@ -277,7 +276,6 @@ void main_dialogs_information_viewer(DIALOG_DATA * d, gchar * mod_name,
 {
 	GString *tmp_str = g_string_new(NULL);
 	GString *str;
-	GString *search_str;
 	MOD_FONT *mf = get_font(mod_name);
 #ifdef USE_GTKMOZEMBED
 	GtkMozEmbed *new_browser = GTK_MOZ_EMBED(sidebar.html_viewer_widget);
@@ -401,7 +399,6 @@ void main_dialog_information_viewer(const gchar * mod_name, const gchar * text,
 {
 	GString *tmp_str = g_string_new(NULL);
 	GString *str;
-	GString *search_str;
 	MOD_FONT *mf = get_font((gchar*)mod_name);
 	
 	if(!d->previewer)
@@ -546,10 +543,7 @@ void main_dialogs_add_children_to_tree(GtkTreeModel * model, GtkTreeIter iter,
 {
 	gchar buf[256];
 	gchar *tmpbuf;
-	gchar *mod_name;
 	TreeItem treeitem, *p_treeitem;
-	GdkPixbuf *open;
-	GdkPixbuf *closed;
 	BackEnd *be = (BackEnd *)d->backend;
 	
 	p_treeitem = &treeitem;
@@ -722,7 +716,7 @@ void main_dialogs_tree_selection_changed(GtkTreeModel * model,
 void main_dialogs_dictionary_entry_changed(DIALOG_DATA * d)
 {
 	gint count = 10, i;
-	gchar *new_key, *text = NULL;
+	gchar *new_key;
 	gchar *key = NULL;
 	static gboolean firsttime = TRUE;
 	GtkTreeModel *model;
@@ -778,90 +772,6 @@ void main_dialogs_dictionary_entry_changed(DIALOG_DATA * d)
 } 
 
 
-/******************************************************************************
- * Name
- *   save_note_receiver
- *
- * Synopsis
- *   #include ".h"
- *
- *   	gboolean save_note_receiver(const HTMLEngine * engine,
- *		   const char *data, unsigned int len, void *user_data)
- *
- * Description
- *    
- *
- * Return value
- *   gboolean
- */
-/*
-static GString *note_str;
-static gboolean save_note_receiver(const HTMLEngine * engine,
-				   const char *data, unsigned int len,
-				   void *user_data)
-{
-	static gboolean startgrabing = FALSE;
-	if (!strncmp(data, "</BODY>", 7))
-		startgrabing = FALSE;
-	if (startgrabing) {
-		note_str = g_string_append(note_str, data);
-	}
-	if (strstr(data, "<BODY") != NULL)
-		startgrabing = TRUE;
-
-	return TRUE;
-}
-*/
-
-/******************************************************************************
- * Name
- *   main_dialog_save_note
- *
- * Synopsis
- *   #include ".h"
- *
- *   void main_dialog_save_note(DIALOG_DATA * d)	
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-/*
-void main_dialog_save_note(gpointer data)
-{
-	//gchar *buf = NULL;                                       
-//	gsize bytes_read;
-//	gsize bytes_written;
-//	GError **error = NULL;
-#ifndef USE_GTKHTML38
-	GSHTMLEditorControlData *e = (GSHTMLEditorControlData*) data;
-	BackEnd *be = (BackEnd*)e->be;
-	
-	
-	if(!be)
-		return;	
-	
-	gtk_html_set_editable(e->html, FALSE);
-	note_str = g_string_new("");
-	
-	if (!gtk_html_export (e->html, "text/html",
-		 (GtkHTMLSaveReceiverFn) save_note_receiver,
-		 GINT_TO_POINTER(0)) ){
-		g_warning("file not writen");
-	} else {
-		
-		//g_message(note_str->str);
-		be->save_entry(note_str->str);	
-		g_print("\nnote saved\n");
-		//g_free(buf);
-	}
-	g_string_free(note_str, 0);
-	gtk_html_set_editable(e->html, TRUE);
-#endif
-}
-*/
 /******************************************************************************
  * Name
  *   main_dialog_delete_note
@@ -1321,14 +1231,9 @@ static gint show_note(DIALOG_DATA * d,const gchar * module, const gchar * passag
 static gint show_strongs(DIALOG_DATA * t, const gchar * type, 
 			const gchar * value, gboolean clicked)
 {	
-	gchar *modbuf_viewer = NULL;
 	const gchar *modbuf = NULL;
 	gchar *mybuf = NULL;
-	guint delay;	
-	guint i;
 	static GtkWidget *dlg;	
-	
-	BackEnd* be = (BackEnd*)t->backend;
 	
 	if(!strcmp(t->mod_name,"NASB")) {
 		if(!strcmp(type,"Greek")) 
@@ -1447,13 +1352,10 @@ static gint sword_uri(DIALOG_DATA * t, const gchar * url, gboolean clicked)
 static gint show_strongs_morph(DIALOG_DATA * d,const gchar * type, const gchar * value, 
 			 const gchar * morph, gboolean clicked)
 {	
-	gchar *modbuf_viewer = NULL;
 	const gchar *modbuf = NULL;
 	const gchar *morph_mod = NULL;
 	gchar *strongs_buf = NULL;
 	gchar *morph_buf = NULL;
-	guint delay;	
-	guint i;
 	static GtkWidget *dlg;	
 	
 	if(!strcmp(d->mod_name,"NASB")) {
@@ -1513,7 +1415,6 @@ static gint new_url_handler(DIALOG_DATA * t, const gchar * url, gboolean clicked
 	gchar* passage = NULL;
 	gchar* strongs = NULL;
 	gchar* morph = NULL;
-	gchar *buf = NULL;
 	URL* m_url;
 	
 	GS_message(("new_url_handler url = %s",url));
@@ -1608,12 +1509,10 @@ gint main_dialogs_url_handler(DIALOG_DATA * t, const gchar * url, gboolean click
 
 DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 {	
-	GtkWidget *popupmenu;
 	BackEnd *be;
 	DIALOG_DATA *t = NULL;
 	gint type;
 	gchar *direction = NULL;
-	gchar *url;
 
 	do_display = TRUE;
 	if(!backend->is_module(mod_name))

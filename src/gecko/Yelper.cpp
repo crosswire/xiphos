@@ -25,14 +25,21 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-
-
-
 #ifdef HAVE_GECKO_1_9
 #include <nsStringAPI.h>
 #else
 #define MOZILLA_INTERNAL_API
 #include <nsString.h>
+#endif
+
+#ifdef NS_HIDDEN
+# undef NS_HIDDEN
+#endif
+#ifdef NS_IMPORT_
+# undef NS_IMPORT_
+#endif
+#ifdef NS_EXPORT_
+# undef NS_EXPORT_
 #endif
 
 #include <gtkmozembed.h>
@@ -310,38 +317,13 @@ Yelper::SetSelectionAttention (PRBool aAttention)
 
 // Nautilus CREDITS here
  
-gchar *Yelper::GetAttribute (nsIDOMNode *node, gchar *attribute)
-{
- /*    	nsresult result;
-
-	nsCOMPtr<nsIDOMNamedNodeMap> attributes;
-	result = node->GetAttributes(getter_AddRefs(attributes));
-	if (!NS_SUCCEEDED (result) || !attributes) return NULL;
-
-	nsAutoString attr; 
-
-	attr.AssignWithConversion(attribute);
-
-	nsCOMPtr<nsIDOMNode> attrNode;
-	result = attributes->GetNamedItem (attr, getter_AddRefs(attrNode));
-	if (!NS_SUCCEEDED(result) || !attrNode)  return NULL;
-
-	nsAutoString nodeValue;
-
-	result = attrNode->GetNodeValue(nodeValue);
-	if (!NS_SUCCEEDED(result))  return NULL;
-
-	return ToNewCString(nodeValue);*/
-}
-
 gint
 Yelper::ProcessMouseOver (void* aEvent, int pane, 
 			  gboolean is_dialog, DIALOG_DATA * dialog)
 {
-	nsresult result;
 	extern gboolean in_url;
 	PRBool aShiftKey;
-	nsIDOMEventTarget *aCurrentTarget;
+
 	GS_message(("mouse over pane: %d",pane));
 	nsIDOMMouseEvent *event = (nsIDOMMouseEvent*) aEvent;	
 	//DIALOG_DATA *dialog = (DIALOG_DATA *)data;
@@ -457,8 +439,7 @@ void get_clipboard_text (GtkClipboard *clipboard, const gchar *text, gpointer da
 gint Yelper::ProcessMouseDblClickEvent (void* aEvent)
 {
 	nsAutoString aType;
-	nsresult rv;
-	PRUnichar **selText;
+
 	g_return_val_if_fail(aEvent != NULL,0);
 	nsCOMPtr<nsISelection> oSelection;
 	nsIDOMEvent *domEvent = static_cast<nsIDOMEvent*>(aEvent);
@@ -581,28 +562,6 @@ gint Yelper::ProcessKeyReleaseEvent(GtkMozEmbed *embed, gpointer dom_event)
 	GS_message(("Yelper::ProcessKeyReleaseEvent"));
 	shift_key_presed = FALSE;
 	return NS_OK;	
-}
-
-gint Yelper::redraw(GtkMozEmbed *embed)
-{
-/*	nsresult rv = NS_ERROR_FAILURE;
-	nsCOMPtr<nsIDocShell> docShell (do_GetInterface (mWebBrowser, &rv));
-	NS_ENSURE_SUCCESS (rv, rv);
-	nsCOMPtr<nsIPresShell> presShell;
-	rv = docShell->GetPresShell(getter_AddRefs(presShell));
-        if (NS_SUCCEEDED(rv) && presShell) {
-		nsIFrame *rootFrame = presShell->GetRootFrame();
- 
-		if (rootFrame) {
-			nsRect r(nsPoint(0, 0), rootFrame->GetSize());
-			rootFrame->Invalidate(r, 1);
-			return 1;
-	        }
-	}
-	return 0;
-	*/
-	
-	//mDOMWindow->Redraw();	
 }
 
 #ifdef USE_GTKUPRINT

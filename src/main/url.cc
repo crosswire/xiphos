@@ -110,36 +110,6 @@ static void alert_url_not_found(const gchar * url)
 
 /******************************************************************************
  * Name
- *   show_in_appbar
- *
- * Synopsis
- *   #include "gui/url.h"
- *
- *   void show_in_appbar(GtkWidget * appbar, gchar * key, 
- *							gchar * mod)
- *
- * Description
- *   display information (morph or strongs) in appbar
- *
- * Return value
- *   void
- */
-
-static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
-{
-	gchar *str;
-	gchar *text;
-	text = main_get_striptext(mod, key);
-	str = remove_linefeeds(text);
-	if (str) {
-		gnome_appbar_set_status(GNOME_APPBAR(appbar), str);
-		g_free(str);
-	}
-	g_free(text);
-}
-
-/******************************************************************************
- * Name
  *   
  *
  * Synopsis
@@ -420,15 +390,9 @@ static gint show_strongs(const gchar * stype, const gchar * svalue,
 	if ((stype == NULL) || (*stype == '\0'))
 		return 1;	// it's a lemma only - no lexdict reference.
 
-	gchar *modbuf_viewer = NULL;
 	const gchar *modbuf = NULL;
 	gchar *mybuf = NULL;
 	gchar *val = NULL;
-	gchar *val1 = NULL;
-	gchar *val2 = NULL;
-	gchar *buf = g_new(gchar,strlen(svalue));
-	guint delay;	
-	guint i;	
 
 	val = g_strdup(svalue);
 	GS_message(("buf len = %d",strlen(buf)));
@@ -472,133 +436,6 @@ static gint show_strongs(const gchar * stype, const gchar * svalue,
 }
 
 
- /******************************************************************************
- * Name
- *   show_strongs_morph
- *
- * Synopsis
- *   #include "main/url.hh"
- *
- *   gint show_strongs_morph(const gchar * type, const gchar * value, 
-			 const gchar * morph, gboolean clicked)
- *
- * Description
- *  
- *
- * Return value
- *   gint
- */ 
- 
-static gint show_strongs_morph(const gchar * stype, const gchar * svalue, 
-			 const gchar * morph, gboolean clicked)
-{	
-	gchar *modbuf_viewer = NULL;
-	const gchar *modbuf = NULL;
-	const gchar *morph_mod = NULL;
-	gchar *strongs_buf = NULL;
-	gchar *strongs_buf2 = NULL;
-	gchar *morph_buf = NULL;
-	gchar *morph_buf2 = NULL;
-	guint delay;	
-	guint i;	
-	gchar *buf = NULL;
-	gchar *val = g_new(gchar,strlen(svalue));
-	gchar *val2 = NULL;
-	//gboolean realstrongs;
-	
-	
-	
-	if(!strcmp(settings.MainWindowModule,"NASB")) {
-		if(!strcmp(stype,"Greek")) 
-			modbuf = "NASGreek";
-		else 
-			modbuf = "NASHebrew";
-	} else {
-		if(!strcmp(stype,"Greek")) {
-			modbuf = settings.lex_greek;
-			if(backend->is_module("Robinson")) 
-				morph_mod = "Robinson";
-			//realstrongs = (!strcmp(modbuf,"StrongsRealGreek"));
-		} else {
-			modbuf = settings.lex_hebrew;
-			//realstrongs = (!strcmp(modbuf,"StrongsRealHebrew"));
-		}
-	}
-	buf = g_strdup(svalue);
-	//g_message("buf len = %d",strlen(buf));
-	if(strchr(buf,'|')) {
-		//g_message("buf = %s", buf);
-		gint valuelen = strlen(svalue);
-		for (i = 0; i < valuelen; i++) {
-			if(svalue[i] == '|') {
-				val[i] = '\0';
-				break;
-			}
-			val[i] = svalue[i];
-		}
-		val2 = strchr(buf,'|');
-		++val2;
-		strongs_buf = g_strdup_printf("%s<br /><br />%s",
-					main_get_rendered_text(modbuf, (gchar*)val),
-					main_get_rendered_text(modbuf, (gchar*)val2));
-	} else { 
-		strongs_buf = main_get_rendered_text(modbuf, (gchar*)svalue);
-	}
-	
-	// morph stuff
-	g_free(buf);	
-	g_free(val);	
-	buf = g_strdup(morph);			
-	val = g_new(gchar,strlen(morph));
-	if(morph_mod)  {		
-		if(strchr(buf,'|')) {
-			gint morphlen = strlen(morph);
-			GS_message(("buf = %s", buf));
-			for (i = 0; i < morphlen; i++) {
-				if(morph[i] == '|') {
-					val[i] = '\0';
-					break;
-				}
-				val[i] = morph[i];
-			}
-			val2 = strchr(buf,'|');
-			++val2;
-			
-			GS_message(("val = %s", val));
-			GS_message(("val2 = %s", val2));
-			morph_buf = g_strdup_printf("%s<br />%s<br /><br />%s<br />%s",
-					val,
-					main_get_rendered_text(morph_mod, (gchar*)val),
-					val2,
-					main_get_rendered_text(morph_mod, (gchar*)val2));		
-		} else { 
-			morph_buf = main_get_rendered_text(morph_mod, (gchar*)morph);
-		}
-	}
-	
-	if (clicked) {
-		main_display_dictionary(modbuf, (gchar*)svalue);		
-	} else {
-		//morph_buf = main_get_rendered_text(morph_mod, (gchar*)morph);
-		if (strongs_buf) {
-			main_information_viewer(  
-					modbuf, 
-					strongs_buf, 
-					(gchar*)svalue, 
-					"showStrongsMorph",
-					(gchar*)stype,
-					(gchar*)morph_buf,
-					(gchar*)morph);
-		}
-	}
-	if(morph_buf) g_free(morph_buf);
-	g_free(buf);
-	g_free(val);
-	g_free(strongs_buf);
-	return 1;
-}
- 
-
 /******************************************************************************
  * Name
  *   note_uri
@@ -623,16 +460,15 @@ static gint show_note(const gchar * module, const gchar * passage,
 	gchar *work_buf = NULL;
 	GString *str = g_string_new(NULL);
 	GList *tmp = NULL;
-	gint i = 0, j = 0;
 	RESULTS *list_item;
 	
-	if(!in_url)
+	if (!in_url)
 		return 1;
 	
-	if(!backend->is_module((gchar*)module)) 
+	if (!backend->is_module((gchar*)module)) 
 		module = settings.MainWindowModule;
 	
-	if(passage && (strlen(passage) < 5))
+	if (passage && (strlen(passage) < 5))
 		passage = settings.currentverse;
 	
 	//
@@ -640,8 +476,9 @@ static gint show_note(const gchar * module, const gchar * passage,
 	// we must stop autonormalization for a moment.
 	//
 	int stop_autonorm = ((strstr(passage, ":0")) != NULL);
-	VerseKey *vkey;
-	char oldAutoNorm;
+	VerseKey *vkey = NULL;
+	char oldAutoNorm = 0;
+
 	if (stop_autonorm) {
 		SWMgr *mgr = backend->get_display_mgr();
 		backend->display_mod = mgr->Modules[module];
@@ -738,7 +575,7 @@ static gint show_note(const gchar * module, const gchar * passage,
 		}
 	}
 
-	if (stop_autonorm)
+	if (stop_autonorm && vkey)
 		vkey->AutoNormalize(oldAutoNorm);
 	if(work_buf)
 		g_free(work_buf);
@@ -799,11 +636,8 @@ static gint show_ref(const gchar * module, const gchar * list, gboolean clicked)
 static int show_module_and_key(const char * module, const char * key, 
 					const char * stype, gboolean clicked)
 {
-	gchar *buf = NULL;
 	gchar *tmpkey = NULL;
 	gint mod_type;
-	gint verse_count;
-	gboolean change_verse = FALSE;
 	
 	if(module && (strlen((char*)module) < 3) && 
 		backend->is_Bible_key(key, settings.currentverse)) {
@@ -900,11 +734,7 @@ static gint show_in_previewer(const gchar * url)
 {	
 	
 	gchar **work_buf = NULL;       
-	gchar *modbuf_viewer = NULL;
-	const gchar *modbuf = NULL;
 	gchar *mybuf = NULL;
-	guint delay;	
-	guint i;	
 
 	work_buf = g_strsplit (url,"/",4);
 	//GS_message(("work_buf :%s, %s",work_buf[MODULE],work_buf[KEY]));	
@@ -948,24 +778,16 @@ static gint show_in_previewer(const gchar * url)
 
 static gint sword_uri(const gchar * url, gboolean clicked)
 {
-	gchar *buf = NULL;
-	gchar *module = NULL;
 	const gchar *key = NULL;
 	gchar *tmpkey = NULL;
 	gint mod_type;
 	gint verse_count;
-	gboolean change_verse = FALSE;
 	gchar **work_buf = NULL;                                                  
-        gsize bytes_read;
-        gsize bytes_written;
-        GError **error;
-	char *mykey;
 		
 	if (!clicked) {
 		gchar *name = g_strstr_len(url, 10, "://");
 		if (!name)
 			gui_set_statusbar (url);
-			//gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), url);
 		else {
 			name += 3;		// at name beginning.
 			gchar *slash = g_strstr_len(name, 20, "/");
@@ -979,13 +801,11 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 				show_in_previewer(url);			
 			else
 				gui_set_statusbar (url);
-				//gnome_appbar_set_status (GNOME_APPBAR(widgets.appbar), url);
 		}
 		return 1;
 	}
 	
 	work_buf = g_strsplit (url,"/",4);
-	//if(work_buf[KEY][0] == '/' ) ++work_buf[KEY];
 	GS_message(("work_buf: %s, %s",work_buf[MODULE],work_buf[KEY]));
 	if (!work_buf[MODULE] && !work_buf[KEY]) {
 		alert_url_not_found(url);
@@ -997,20 +817,7 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 	} else
 		tmpkey = work_buf[KEY];
 	
-/*	mykey = g_convert(tmpkey,
-                             -1,
-                             OLD_CODESET,
-                             UTF_8,
-                             &bytes_read,
-                             &bytes_written,
-                             error);
-*/	
 	verse_count = 1; //backend->is_Bible_key(mykey, settings.currentverse);
-	/*if(!work_buf[3] && !verse_count){
-		alert_url_not_found(url);
-		g_strfreev(work_buf);
-		return 0;
-	}*/
 	if(backend->is_module(work_buf[MODULE])) {
 		mod_type = backend->module_type(work_buf[MODULE]);
 		switch(mod_type) {
@@ -1025,7 +832,6 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 				if(key) g_free((gchar*)key);
 			break;				
 			case COMMENTARY_TYPE:	
-				//settings.comm_showing = TRUE;
 				key = main_update_nav_controls(tmpkey);
 				main_display_commentary(work_buf[MODULE],key);
 				main_display_bible(NULL, key);
@@ -1086,7 +892,6 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 	gchar* passage = NULL;
 	gchar* morph = NULL;
 	gchar* strongs = NULL;
-	gchar *buf = NULL;
 	URL* m_url;
 	int retval = 0;		// assume failure.
 

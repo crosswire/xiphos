@@ -303,8 +303,6 @@ void main_load_book_tree_in_editor (GtkTreeView * treeview, char *book)
 {
 	GtkTreeIter parent;
 	GtkTreeStore *store;
-	TreeKeyIdx *target = 0;
-	int level = 1;
 	SWMgr *mgr = backend->get_display_mgr ();
 	SWModule *mod = mgr->Modules[book];
 
@@ -314,7 +312,6 @@ void main_load_book_tree_in_editor (GtkTreeView * treeview, char *book)
 	mod_name = book;
 	TreeKeyIdx root = *((TreeKeyIdx *) mod->CreateKey ());
 	root.root ();
-	TreeKeyIdx *treeKey = (TreeKeyIdx *) mod->CreateKey ();
 
 	store = gtk_tree_store_new (N_COLUMNS,
 				    GDK_TYPE_PIXBUF,
@@ -342,108 +339,4 @@ void add_prayer_list_sections (RawGenBook * book, TreeKeyIdx * treeKey)
 	setEntryText (book, _("<b>Miscellaneous</b><br>"));
 
 	treeKey->parent ();
-}
-
-/******************************************************************************
- * Name
- *   main_prayer_list_new
- *
- * Synopsis
- *   #include "main/prayer_list.h"
- *
- *   gint main_prayer_list_new(gchar * list_name)
- *
- * Description
- *   create a new prayer list module and add it to the sidebar module tree
- *
- * Return value
- *   int
- */
-
-gint main_prayer_list_new (gchar * list_name)
-{
-	RawGenBook *book = NULL;
-	gchar *path;
-	TreeKeyIdx *treeKey;
-	gint test;
-	GS_DIALOG *info;
-
-	if (list_name == NULL) {
-		info = gui_new_dialog ();
-		info->stock_icon = (gchar *) GTK_STOCK_DIALOG_QUESTION;
-		info->title = _("Prayer List/Journal");
-		info->label_top = _("Name for new prayer list");
-		info->label1 = _("Name: ");
-		info->text1 = g_strdup (_("MyPrayerList"));
-		info->ok = TRUE;
-		info->cancel = TRUE;
-	}
-	test = gui_gs_dialog (info);
-	//list_name = "prayer";
-
-	if (test == GS_OK) {
-		list_name = info->text1;
-	} else {
-		g_free (info->text1);
-		g_free (info);
-		return 0;
-	}
-
-	path = g_strdup_printf ("%s/" DOTSWORD "/modules/genbook/rawgenbook/%s",
-				settings.homedir, list_name);
-	if (access (path, F_OK) == -1) {
-		if ((Mkdir(path, S_IRWXU)) != 0) {
-			printf (_("can not create path\n"));
-		}
-	} else {
-		printf (_("Prayer list already exist\n"));
-		g_free (path);
-		return 0;
-	}
-	g_free (path);
-	path = g_strdup_printf ("./modules/genbook/rawgenbook/%s/%s",
-				list_name, list_name);
-	gchar *conf_path = g_strdup_printf ("%s/" DOTSWORD "/mods.d/%s.conf",
-					    settings.homedir,
-					    list_name);
-	SWConfig config (conf_path);
-	config[list_name]["DataPath"] = path;
-	config[list_name]["ModDrv"] = "RawGenBook";
-	config[list_name]["GSType"] = "PrayerList";
-	config[list_name]["Encoding"] = "UTF-8";
-	config[list_name]["Lang"] = "en";	/* fix me */
-	config[list_name]["Version"] = "0.1";
-	config[list_name]["MinimumVersion"] = "1.5.10";
-	config[list_name]["DisplayLevel"] = "2";
-	config[list_name]["Description"] = _("Prayer List/Journal");
-	config[list_name]["About"] =
-		  _("\\par\\par My prayer list \\par\\par Module created in Xiphos");
-	config.Save ();
-
-	g_free (path);
-	g_free (conf_path);
-	path = g_strdup_printf ("%s/" DOTSWORD "/modules/genbook/rawgenbook/%s/%s",
-				settings.homedir, list_name, list_name);
-
-	RawGenBook::createModule (path);
-	book = new RawGenBook (path);
-
-	TreeKeyIdx root = *((TreeKeyIdx *) ((SWKey *) (*book)));
-	treeKey = (TreeKeyIdx *) (SWKey *) (*book);
-
-	appendChild (treeKey, "Salvation");
-	setEntryText (book, "<b>Salvation</b><br>");
-	//add_prayer_list_sections (book, treeKey);
-	appendSibbling (treeKey, "Spiritual Growth");
-	setEntryText (book, "<b>Spiritual Growth</b><br>");
-	//add_prayer_list_sections (book, treeKey);
-	appendSibbling (treeKey, "Health");
-	setEntryText (book, "<b>Health</b><br>");
-	//add_prayer_list_sections (book, treeKey);
-
-	delete treeKey;
-	g_free (info->text1);
-	g_free (info);
-	main_update_module_lists ();
-	main_load_module_tree (sidebar.module_list);
 }
