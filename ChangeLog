@@ -1,3 +1,9 @@
+2009-03-14  karl <charcoal@users.sf.net>
+
+	* alter adv.search to provide for warning when downgrading from
+	  lucene search to multi-word search, including resetting back
+	  to lucene search for each module searched.
+
 2009-03-13  terry <tbiggs@users.sourceforge.net>
 
 	* added -Werror -Wall to build
