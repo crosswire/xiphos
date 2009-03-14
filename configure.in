@@ -288,8 +288,12 @@ if test x$debug = xyes; then
 fi
 fi
 
-CFLAGS="$CFLAGS -Werror -Wall"
-CXXFLAGS="$CXXFLAGS -Werror -Wall"
+# ubuntu is demented about -Werror
+grep -i -q -s ubuntu /etc/issue
+if test $? != 0 ; then
+  CFLAGS="$CFLAGS -Werror -Wall"
+  CXXFLAGS="$CXXFLAGS -Werror -Wall"
+fi
 
 ORBIT_IDL="`$PKG_CONFIG --variable=orbit_idl ORBit-2.0`"
 AC_SUBST(ORBIT_IDL)
