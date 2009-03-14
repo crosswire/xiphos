@@ -1294,6 +1294,7 @@ void main_do_dialog_search(void)
 	gint x = 0;
 	gint mod_type;
 	char *num;
+	gchar msg[300];
 	
 	_clear_find_lists();
 	model =
@@ -1316,7 +1317,6 @@ void main_do_dialog_search(void)
 	str = g_string_new("");
 
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(search1.notebook), 1);
-	//search1.notebook
 	search_type = 
 	    GTK_TOGGLE_BUTTON(search1.rb_regexp)->active ? 0 :
 	    GTK_TOGGLE_BUTTON(search1.rb_exact_phrase)->active ? -1 :
@@ -1327,19 +1327,16 @@ void main_do_dialog_search(void)
 	search_params =
 	    GTK_TOGGLE_BUTTON(search1.cb_case_sensitive)->active ? 0 : REG_ICASE;
 
+	// For attribute-based searches, e.g. "Word//Lemma/G140",
+	// we must constrain the match to whole words.  Otherwise,
+	// we will inadvertently return e.g. 140 plus 1401 and 1404.		
 	if(search_type == -3) {
 		if(GTK_TOGGLE_BUTTON(search1.rb_strongs)->active) {
-			// For attribute-based searches, e.g. "Word//Lemma/G140",
-			// we must constrain the match to whole words.  Otherwise,
-			// we will inadvertently return e.g. 140 plus 1401 and 1404.		
 			search_params |= SEARCHFLAG_MATCHWHOLEENTRY;
 			attribute_search_string = g_strdup_printf(
 					"Word//Lemma/%s",
 					search_string);
 		} else if(GTK_TOGGLE_BUTTON(search1.rb_morphs)->active) {
-			// For attribute-based searches, e.g. "Word//Lemma/G140",
-			// we must constrain the match to whole words.  Otherwise,
-			// we will inadvertently return e.g. 140 plus 1401 and 1404.		
 			search_params |= SEARCHFLAG_MATCHWHOLEENTRY;
 			attribute_search_string = g_strdup_printf(
 					"Word//Morph/%s",
@@ -1351,6 +1348,7 @@ void main_do_dialog_search(void)
 		}
 		GS_message((attribute_search_string));
 	}
+
 	if (GTK_TOGGLE_BUTTON(search1.rb_custom_list)->active) {
 		const gchar *name;
 		name =
@@ -1383,22 +1381,31 @@ void main_do_dialog_search(void)
 		}
 
 		if (!main_is_module(module)) {
-			gchar msg[300];
 			sprintf(msg, _("%s:\nNo such module is installed.\n%s"),
 				module,
 				_("Please adjust the module list."));
 			gui_generic_warning(msg);
-			g_free(module);
-			search_mods = g_list_next(search_mods);
-			continue;
+			goto clean;
 		}
 
 		sprintf(buf, "%s %s %s", SEARCHING, module, SMODULE);
 
 		gui_set_progressbar_text(search1.progressbar, buf);
 
-		if (search_type == -4)	// possibly demote "lucene"=>"word" search.
+		// reset search type each time through, because
+		// it might have gotten downgraded last time.
+		search_type = settings.searchType;
+
+		if (search_type == -4) {
 			search_type = backendSearch->check_for_optimal_search(module);
+			if (search_type == -2) {
+				sprintf(msg, _("No fast-search index exists for %s.%s%s"),
+					module,
+					_("\nSearch on this module is now `multi word'."),
+					_("\nSee the Module Manager, Maintenance pane."));
+				gui_generic_warning(msg);
+			}
+		}
 		GS_message(("search_type = %d",search_type));
 		
 		finds = backendSearch->do_module_search(module, 
