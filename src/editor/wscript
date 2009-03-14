@@ -41,5 +41,5 @@ def build(bld):
             includes='. ../../ ../../src ../../src/editor %s' % bld.env['GECKO_INCLUDE'], # ../../ for config.h
             source='bonobo-editor.c Editor-common.c Editor-skels.c Editor-stubs.c',
             target='editor',
-            uselib='GTKHTML',
+            uselib='GTK GLIB GNOMEUI SWORD GTKMOZEMBED GTKMOZEMBED_UNSTABLE GTKHTML GTKHTML_EDITOR',
         )

@@ -117,8 +117,10 @@ def configure(conf):
 
     ## CXX flags (compiler arguments)
     conf.check_cxx(cxxflags='-ftemplate-depth-25')
-    conf.env.append_value('CCFLAGS', '-g -O2')
-    conf.env.append_value('CXXFLAGS', '-g -O2 -ftemplate-depth-128')
+    conf.check_cxx(cxxflags='-Werror')
+    conf.check_cxx(cxxflags='-Wall')
+    conf.env.append_value('CCFLAGS', '-g -O2 -Werror -Wall')
+    conf.env.append_value('CXXFLAGS', '-g -O2 -ftemplate-depth-128 -Werror -Wall')
 
     # pkg-config
     conf.check_cfg(atleast_pkgconfig_version='0.9.0')
