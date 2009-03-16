@@ -46,6 +46,7 @@
 #include "main/xml.h"
 
 #include "gui/dialog.h"
+#include "gui/html.h"
 #include "gui/widgets.h"
 #include "gui/xiphos.h"
 #include "gui/treekey-editor.h"
@@ -77,6 +78,7 @@ static gint formatHTML = 1;
 static GtkWidget *win;
 
  
+#ifdef USE_GTKHTML3_14
 static void
 handle_error (GError **error)
 {
@@ -85,6 +87,7 @@ handle_error (GError **error)
 		g_clear_error (error);
 	}
 }
+#endif
 
 static
 void do_exit(EDITOR * e)
@@ -640,7 +643,7 @@ void print_message_cb(GtkWidget * widget, gpointer data)
 #ifdef USE_GTKHTML3_14
 	_do_print(e, GTK_PRINT_OPERATION_ACTION_PRINT_DIALOG);
 #else
-	gui_html_print(e->html_widget,FALSE);
+	gui_html_print(e->html_widget, FALSE, "");
 #endif
 }
 
@@ -651,7 +654,7 @@ void print_preview_message_cb(GtkWidget * widget, gpointer data)
 #ifdef USE_GTKHTML3_14
 	_do_print(e, GTK_PRINT_OPERATION_ACTION_PREVIEW);
 #else
-	gui_html_print(e->html_widget,TRUE);
+	gui_html_print(e->html_widget, TRUE, "");
 #endif
 }
 
