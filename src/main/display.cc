@@ -1412,6 +1412,9 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 char
 GTKChapDisp::Display(SWModule &imodule)
 {
+        //following line ensures linked verses work correctly
+        //it does not solve the problem of marking groups of verses (1-4), etc
+        imodule.setSkipConsecutiveLinks(true);
 	VerseKey *key = (VerseKey *)(SWKey *)imodule;
 	int curVerse = key->Verse();
 	int curChapter = key->Chapter();
