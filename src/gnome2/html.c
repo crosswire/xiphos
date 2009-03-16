@@ -65,6 +65,7 @@ static GtkHTMLStreamStatus status1;
 gboolean in_url;
 
 
+#ifdef USE_GTKHTML3_14
 static void
 handle_error (GError **error)
 {
@@ -73,6 +74,7 @@ handle_error (GError **error)
 		g_clear_error (error);
 	}
 }
+#endif
 
 
 /******************************************************************************
@@ -565,8 +567,8 @@ void gui_display_html(GtkWidget * html, const gchar * txt, gint lentxt)
 struct _info {
 	GnomeFont *local_font;
 	gint page_num, pages;
-	gchar *header_title;
-	gchar *footer_title;
+	guchar *header_title;
+	guchar *footer_title;
 	gboolean header_date;
 	gboolean header_page_num;
 	gboolean footer_date;
@@ -701,8 +703,8 @@ struct _info *info_new(GtkHTML * html, GnomePrintContext * pc, gdouble * line)
 
 	info->page_num = 1;
 	info->pages = gtk_html_print_get_pages_num(html, pc, *line, *line);
-	info->header_title = g_strdup("");
-	info->footer_title = g_strdup("");
+	info->header_title = (guchar*)g_strdup("");
+	info->footer_title = (guchar*)g_strdup("");
 	info->header_date = FALSE;
 	info->header_page_num = TRUE;
 	info->footer_date = FALSE;
@@ -911,7 +913,6 @@ void gui_html_print(GtkWidget * htmlwidget, gboolean preview, const gchar * mod_
 #else
 #ifdef USE_GTKHTML38
 	GtkHTML *html;
-	GtkWidget *w = NULL;
 	GnomePrintContext *print_context;
 	GnomePrintJob *print_master;
 	GnomePrintConfig *config = NULL;
