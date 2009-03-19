@@ -1,3 +1,11 @@
+2009-03-19  karl <charcoal@users.sf.net>
+
+	* enable InvStrongsRealGreek lemma lookup when "stype" is not
+	  present.  bad side effect is that we don't handle Hebrew lemmas,
+	  but right now there are no Hebrew modules with lemmas, so, eh. :-)
+	  this lookup is imprecise due to InvStrongsRealGreek being
+	  imprecisely ordered, consequent to diacriticals not sorting well.
+
 2009-03-14  karl <charcoal@users.sf.net>
 
 	* alter adv.search to provide for warning when downgrading from
