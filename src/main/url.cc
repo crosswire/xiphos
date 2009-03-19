@@ -387,9 +387,6 @@ static gint show_separate_image(const gchar * filename, gboolean clicked)
 static gint show_strongs(const gchar * stype, const gchar * svalue, 
 			gboolean clicked)
 {	
-	if ((stype == NULL) || (*stype == '\0'))
-		return 1;	// it's a lemma only - no lexdict reference.
-
 	const gchar *modbuf = NULL;
 	gchar *mybuf = NULL;
 	gchar *val = NULL;
@@ -405,13 +402,14 @@ static gint show_strongs(const gchar * stype, const gchar * svalue,
 			modbuf = "NASGreek";
 		else 
 			modbuf = "NASHebrew";
-		//if(strstr(svalue,"!"))
-			//g_strdelimit((gchar*)svalue,"!",'\0');
 	} else {
-		if(!strcmp(stype,"Greek")) 
-			modbuf = settings.lex_greek;
-		else  
-			modbuf = settings.lex_hebrew;
+		if (stype && (*stype != '\0')) {
+			if(!strcmp(stype,"Greek")) 
+				modbuf = settings.lex_greek;
+			else  
+				modbuf = settings.lex_hebrew;
+		} else
+			modbuf = "InvStrongsRealGreek";
 	}
 	
 	if (clicked) {
