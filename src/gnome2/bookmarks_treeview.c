@@ -230,7 +230,6 @@ static void get_xml_bookmark_data(xmlNodePtr cur, BOOKMARK_DATA * data)
 	xmlChar *mod_desc;
 	xmlChar *description;
 	gchar buf[500];
-//	gchar *url = NULL;
 
 	data->opened = bm_pixbufs->pixbuf_helpdoc;
 	data->closed = NULL;
@@ -239,14 +238,6 @@ static void get_xml_bookmark_data(xmlNodePtr cur, BOOKMARK_DATA * data)
 	//caption = xmlGetProp(cur, "caption"); 
 	mod_desc = xmlGetProp(cur, (const xmlChar *)"moduledescription");
 	description = xmlGetProp(cur, (const xmlChar *)"description");
-/*	if (caption) {
-		if (strlen(caption) > 0) {
-			data->caption = g_strdup(caption);
-		} else {
-			sprintf(buf, "%s, %s", key, mod1);
-			data->caption = g_strdup(buf);
-		}
-	} else {*/
 	caption = xmlGetProp(cur, (const xmlChar *)"description");
 	if ((char *)caption) {
 		if (strlen((char *)caption) > 0) {
@@ -257,18 +248,11 @@ static void get_xml_bookmark_data(xmlNodePtr cur, BOOKMARK_DATA * data)
 		}
 	} else
 		data->caption = g_strdup((char *)key);
-//      }
-/*	if(strstr(key,"sword://"))
-		url = g_strdup(key);
-	else 
-		url = g_strdup_printf("sword://%s/%s",mod1,key);
-*/
 	data->key = g_strdup((char *)key);
 	data->module = g_strdup((char *)mod1);
 	data->description = g_strdup((char *)description);
 	data->module_desc = g_strdup((char *)mod_desc);
 	data->is_leaf = TRUE;
-//      if(url) g_free(url);
 }
 
 
@@ -752,7 +736,6 @@ static gboolean button_release_event(GtkWidget * widget,
 	gchar *mod_desc = NULL;
 	gchar *description = NULL;
 	gchar *url = NULL;
-//	gint which_tree = GPOINTER_TO_INT(data);
 	button_one = FALSE;
 	button_two = FALSE;
 
