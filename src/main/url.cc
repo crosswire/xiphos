@@ -599,10 +599,10 @@ static gint show_note(const gchar * module, const gchar * passage,
  
 static gint show_ref(const gchar * module, const gchar * list, gboolean clicked)
 {	
-	if(!clicked)
+	if (!clicked)
 		return 1;
 	
-	if(!backend->is_module(module)) 
+	if (!backend->is_module(module)) 
 		module = settings.MainWindowModule;
 	main_display_verse_list_in_sidebar(settings.currentverse,
 						  (gchar*)module,
@@ -633,25 +633,27 @@ static gint show_ref(const gchar * module, const gchar * list, gboolean clicked)
 static int show_module_and_key(const char * module, const char * key, 
 					const char * stype, gboolean clicked)
 {
+#if 0
 	gchar *tmpkey = NULL;
+#endif
 	gint mod_type;
 	
-	if(module && (strlen((char*)module) < 3) && 
-		backend->is_Bible_key(key, settings.currentverse)) {
+	if (module && (strlen((char*)module) < 3) && 
+	    backend->is_Bible_key(key, settings.currentverse)) {
 		module = settings.MainWindowModule;
 	}
-	if(!clicked) {
+	if (!clicked) {
 		//gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), url);
 		return 1;
 	}
 	
-	if(backend->is_module(module)) {
-		if(!strcmp(stype,"newTab")) {
+	if (backend->is_module(module)) {
+		if (!strcmp(stype,"newTab")) {
 			main_open_bookmark_in_new_tab((gchar*)module, 
 					(gchar*)key);
 			return 1;
 		}
-		if(!strcmp(stype,"newDialog"))  {
+		if (!strcmp(stype,"newDialog"))  {
 #ifdef USE_GTKHTML38
 			if(module && (main_get_mod_type((gchar*)module) == PERCOM_TYPE)) {			
 				editor_create_new(module,key,TRUE);
@@ -663,7 +665,16 @@ static int show_module_and_key(const char * module, const char * key,
 			return 1;
 		}		
 		mod_type = backend->module_type((gchar*)module);
-		switch(mod_type) {
+		switch (mod_type) {
+#if 1
+			case TEXT_TYPE:	
+			case COMMENTARY_TYPE:
+			case PERCOM_TYPE:				
+				main_display_verse_list_in_sidebar
+				    (settings.currentverse,
+				     (gchar*)module, (gchar*)key);
+				break;
+#else
 			case TEXT_TYPE:	
 				tmpkey = main_update_nav_controls(key);
 				main_display_bible(module, tmpkey);
@@ -673,7 +684,7 @@ static int show_module_and_key(const char * module, const char * key,
 				editor_sync_with_main();
 #endif
 				if(tmpkey) g_free((gchar*)tmpkey);
-			break;
+				break;
 			case COMMENTARY_TYPE:
 			case PERCOM_TYPE:				
 				tmpkey = main_update_nav_controls(key);
@@ -687,11 +698,12 @@ static int show_module_and_key(const char * module, const char * key,
 			 				GTK_NOTEBOOK (widgets.
 							notebook_comm_book),
 							0);
-			break;
+				break;
+#endif
 			case DICTIONARY_TYPE:
 				main_display_dictionary((gchar*)module,
 							(gchar*)key);
-			break;
+				break;
 			case BOOK_TYPE:
 			case PRAYERLIST_TYPE:
 				main_display_book((gchar*)module, (gchar*)key); 
@@ -702,7 +714,7 @@ static int show_module_and_key(const char * module, const char * key,
 							GTK_NOTEBOOK (widgets.
 							notebook_comm_book),
 							1);
-			break;
+				break;
 		}
 	}
 	settings.addhistoryitem = TRUE;
@@ -889,16 +901,13 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 	gchar* passage = NULL;
 	gchar* morph = NULL;
 	gchar* strongs = NULL;
-	URL* m_url;
 	int retval = 0;		// assume failure.
 
 	GS_message(("main_url_handler()"));
 	GS_message(("url = %s", url));
 
 	if (strstr(url, "sword://") ||
-	    strstr(url, "bible://") ||
-	    strstr(url, "book://")  ||
-	    strstr(url, "chapter://")) {
+	    strstr(url, "bible://")) {
 		GString *url_clean = hex_decode(url);
 		GS_message(("url_clean = %s", url_clean->str));
 		
@@ -931,12 +940,12 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 		}
 
 		/* passagestudy.jsp?action=showStrongs&type= */
-		m_url = new URL((const char*)tmpstr->str);
-		action = g_strdup(m_url->getParameterValue("action"));
-		morph = g_strdup((gchar*)m_url->getParameterValue("morph"));
-		strongs = g_strdup((gchar*)m_url->getParameterValue("lemma"));
-		stype = g_strdup((gchar*)m_url->getParameterValue("type"));
-		svalue = g_strdup((gchar*)m_url->getParameterValue("value"));
+		URL m_url((const char*)tmpstr->str);
+		action = g_strdup(m_url.getParameterValue("action"));
+		morph = g_strdup((gchar*)m_url.getParameterValue("morph"));
+		strongs = g_strdup((gchar*)m_url.getParameterValue("lemma"));
+		stype = g_strdup((gchar*)m_url.getParameterValue("type"));
+		svalue = g_strdup((gchar*)m_url.getParameterValue("value"));
 		
 		// XXX gross hack-fix
 		// AraSVD is named "Smith & Van Dyke", using a literal '&'.
@@ -952,45 +961,39 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 		GS_message(("morph = %s", morph));
 
 		if (!strcmp(action, "showStrongs")) {
-			//stype = g_strdup((gchar*)m_url->getParameterValue("type"));
-			//svalue = g_strdup((gchar*)m_url->getParameterValue("value"));
 			show_strongs(stype, svalue, clicked);
 		}
 
 		else if (!strcmp(action, "showMorph")) {
-			//stype = g_strdup((gchar*)m_url->getParameterValue("type"));
-			//svalue = g_strdup((gchar*)m_url->getParameterValue("value"));
 			show_morph(stype, svalue, clicked);
 		}
 
 		else if (!strcmp(action, "showNote")) {
-			module = g_strdup(m_url->getParameterValue("module"));
-			passage = g_strdup((gchar*)m_url->getParameterValue("passage"));
+			module = g_strdup(m_url.getParameterValue("module"));
+			passage = g_strdup((gchar*)m_url.getParameterValue("passage"));
 			show_note(module, passage, stype, svalue, clicked);
 			if (module) g_free(module);
 			if (passage) g_free(passage);
 		}
 
 		else if (!strcmp(action, "showRef")) {
-			module = g_strdup(m_url->getParameterValue("module"));
+			module = g_strdup(m_url.getParameterValue("module"));
 			if (!strcmp(stype, "scripRef"))
 				show_ref(module, svalue, clicked);
 			if (!strcmp(stype, "swordURL")) {
 				// do nothing?
 			}
-			if (module)
-				g_free(module);
+			if (module) g_free(module);
 		}
 
 		else if (!strcmp(action, "showBookmark")) {
-			module = g_strdup(m_url->getParameterValue("module"));
+			module = g_strdup(m_url.getParameterValue("module"));
 			show_module_and_key(module, svalue, stype, clicked);
 			if (module) g_free(module);
 		}
 
 		else if (!strcmp(action, "showModInfo")) {
-			//svalue = g_strdup((gchar*)m_url->getParameterValue("value"));
-			module = g_strdup(m_url->getParameterValue("module"));
+			module = g_strdup(m_url.getParameterValue("module"));
 			show_mod_info(module, svalue, clicked);
 			if (module) g_free(module);
 		}
@@ -1013,7 +1016,6 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 		if (strongs) g_free(strongs);
 		if (morph) g_free(morph);
 		g_string_free(tmpstr, TRUE);
-		delete m_url;
 		retval = 1;
 	} else if (clicked)
 		gnome_url_show(url, NULL);
@@ -1021,148 +1023,6 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 	return retval;
 }
 
-
-/******************************************************************************
- * Name
- *	main_url_handler_gecko
- *
- * Synopsis
- *   #include "main/url.hh"
- *
- *	gint main_url_handler_gecko(const gchar * url)
- *
- * Description
- *	
- *
- * Return value
- *	gint
- */
-/*
-gint main_url_handler_gecko(const gchar * url)
-{
-	gchar* url_work = g_strdup(url);;
-	int retval = 0;		// assume failure.
-	
-	if (strstr(url, "sword://")) {
-		GString *url_clean = hex_decode(url);
-		GS_message(("main_url_handler_gecko: url_clean = %s", url_clean->str));
-		
-		retval = sword_uri(url_clean->str, 0);
-		g_string_free(url_clean, TRUE);
-		return retval;
-	}
-	
-	if (strstr(url_work, "passagestudy.jsp") ||
-	    strstr(url_work, "xiphos.url")) {
-		gchar* action = NULL;
-		const gchar* stype = NULL;
-		gchar* svalue = NULL;
-		gchar* module = NULL;
-		gchar* passage = NULL;
-		gchar **work_buf = NULL;
-
-		// XXX gross hack-fix
-		// AraSVD is named "Smith & Van Dyke", using a literal '&'.
-		// this is technically a Sword bug: Sword should encode it.
-		// we work around it here: replace '&' with '+'.  *sigh*
-		if (svalue = strstr(url_work, " & "))
-			*(svalue+1) = '-';
-
-		if((action = g_strstr_len(url_work, 40, "action")) == NULL)
-			return 0;
-		 
-		work_buf = g_strsplit (action,"&",6);	
-			
-		GS_message(("action = %s", work_buf[0]));
-		if (strstr(action, "showStrongs")) {
-			if (strstr(work_buf[1],"Greek")) 
-				stype = "Greek";
-			else if (strstr(work_buf[1],"Hebrew")) 
-				stype = "Hebrew";
-			else
-				stype = "";
-			svalue = strchr(work_buf[2],'=');
-			++svalue;
-			GS_message(("type = %s", stype));
-			GS_message(("value = %s", svalue));
-			show_strongs(stype, svalue, FALSE);
-		}
-		else if (strstr(action, "showMorph")) {
-			stype = strchr(work_buf[1],'=');
-			++stype;
-			svalue = strchr(work_buf[2],'=');
-			++svalue;
-			GS_message(("type = %s", stype));
-			GS_message(("value = %s", svalue));
-			show_morph(stype, svalue, FALSE);
-		}
-		else if (strstr(action, "showModInfo")) {
-			svalue = strchr(work_buf[1],'=');
-			++svalue;
-			module = strchr(work_buf[2],'=');
-			++module;
-			GS_message(("module = %s", module));
-			GS_message(("svalue = %s", svalue));
-			show_mod_info(module, svalue, FALSE);
-		}
-		else if (strstr(action, "showNote")) {
-			stype = strchr(work_buf[1],'=');
-			++stype;
-			svalue = strchr(work_buf[2],'=');
-			++svalue;
-			module = strchr(work_buf[3],'=');
-			++module;
-			passage = strchr(work_buf[4],'=');
-			++passage;
-			int plen = strlen(passage);
-			for (int i = 0; i < plen; i++) {
-				if (passage[i] == '+') passage[i] = ' ';
-				else if (!strncmp(&(passage[i]), "%2F", 3)) {
-					// repair undecoded "%2F" -> "/"
-					char *lead, *follow;
-					passage[i] = '/';
-					for (follow = &(passage[i+1]), lead = follow + 2;
-					     *lead;
-					     ++follow, ++lead)
-					    *follow = *lead;
-					*follow = '\0';
-					plen -= 2;
-				}
-			}
-			GS_message(("stype = %s", stype));
-			GS_message(("svalue = %s", svalue));
-			show_note(module, passage, stype, svalue, FALSE);
-		}
-		else if (strstr(action, "showRef")) {
-			stype = strchr(work_buf[1],'=');
-			++stype;
-			svalue = strchr(work_buf[2],'=');
-			++svalue;
-			int slen = strlen(svalue);
-			for (int i = 0; i < slen; i++) {
-				if (svalue[i] == '+') svalue[i] = ' ';
-				else if (!strncmp(&(svalue[i]), "%2F", 3)) {
-					// repair undecoded "%2F" -> "/"
-					char *lead, *follow;
-					svalue[i] = '/';
-					for (follow = &(svalue[i+1]), lead = follow + 2;
-					     *lead;
-					     ++follow, ++lead)
-					    *follow = *lead;
-					*follow = '\0';
-					slen -= 2;
-				}
-			}
-			module = strchr(work_buf[3],'=');
-			if (module) ++module;
-			if (!strcmp(stype, "scripRef"))
-				show_ref(module, svalue, FALSE);
-		}
-		g_strfreev (work_buf);
-		g_free(url_work);
-	}
-}
-*/
 
 /******************************************************************************
  * Name
@@ -1182,12 +1042,7 @@ gint main_url_handler_gecko(const gchar * url)
 
 const gchar *main_url_encode(const gchar * pram)
 {
-	SWBuf retval;
-	retval = URL::encode(pram);
-/*#ifdef DEBUG
-	g_warning(pram);
-	g_warning(retval.c_str());
-#endif*/
+	SWBuf retval = URL::encode(pram);
 	if (retval.length())
 		return g_strdup(retval.c_str());
 	else
