@@ -118,6 +118,7 @@ void main_refresh_all(void);
 char *main_format_number(int x);
 int main_deformat_number(char *digitstring);
 void main_flush_widgets_content(void);
+gboolean main_is_Bible_key(gchar *key);
 
 const char *main_get_language_map(const char *language);
 void main_init_language_map(void);

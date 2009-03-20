@@ -1,6 +1,7 @@
 2009-03-20  karl <charcoal@users.sf.net>
 
 	* change bookmark click to use verse list rather than to navigate.
+	* change verse list save to offer single bookmark save.
 
 2009-03-19  karl <charcoal@users.sf.net>
 
