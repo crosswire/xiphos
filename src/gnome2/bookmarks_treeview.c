@@ -86,9 +86,8 @@ BookMarksPixbufs *bm_pixbufs;
 void gui_verselist_to_bookmarks(GList * verses)
 {
 	gint test;
-//	const gchar *key_buf = NULL;
 	gchar *tmpbuf;
-	gchar *module_name;
+	gchar *module_name = NULL;
 	GString *str;
 	GtkTreeIter parent;
 	GtkTreeIter iter;
