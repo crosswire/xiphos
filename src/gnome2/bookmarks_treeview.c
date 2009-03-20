@@ -95,6 +95,39 @@ void gui_verselist_to_bookmarks(GList * verses)
 	GS_DIALOG *info;
 	RESULTS *list_item;
 
+	gchar *dlg = g_strdup_printf("<span weight=\"bold\">%s</span>\n%s",
+					   _("Save these results as a single bookmark?"),
+					   _("(rather than as a series of bookmarks)"));
+	if (gui_yes_no_dialog(dlg, NULL)) {
+		GString *name = g_string_new(NULL);
+		GString *verse_string = g_string_new("");
+		gboolean first_entry = TRUE;
+
+		g_string_printf(name, _("Search result: %s"), settings.searchText);
+		while (verses) {
+			list_item = (RESULTS *) verses->data;
+			if (main_is_Bible_key(list_item->key)) {
+				if (first_entry) {
+					module_name = g_strdup(list_item->module);
+					first_entry = FALSE;
+				} else {
+					verse_string = g_string_append(verse_string,
+								       "; ");
+				}
+				verse_string = g_string_append(verse_string,
+							       list_item->key);
+			}
+			verses = g_list_next(verses);
+		}
+		gui_bookmark_dialog(name->str, module_name, verse_string->str);
+		g_string_free(name, TRUE);
+		g_string_free(verse_string, TRUE);
+		g_free(module_name);
+		g_free(dlg);
+		return;
+	}
+	g_free(dlg);
+
 	gtk_tree_model_get_iter_first(GTK_TREE_MODEL(model), &iter);
 	info = gui_new_dialog();
 	info->stock_icon = GTK_STOCK_OPEN;

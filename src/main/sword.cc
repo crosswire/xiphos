@@ -1858,3 +1858,22 @@ void main_flush_widgets_content(void)
 	if (GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.html_book)))
 		HtmlOutput(blank_html_content, widgets.html_book, NULL, NULL);
 }
+
+/******************************************************************************
+ * Name
+ *  main_is_Bible_key
+ *
+ * Synopsis
+ *   #include "main/sword.h"
+ *   void main_is_Bible_key()
+ *
+ * Description
+ *   returns boolean status of whether input is a legit Bible key.
+ *
+ * Return value
+ *   gboolean
+ */ 
+gboolean main_is_Bible_key(gchar *key)
+{
+	return (gboolean)(backend->is_Bible_key(key, settings.currentverse) != 0);
+}
