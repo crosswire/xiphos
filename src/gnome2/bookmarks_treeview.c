@@ -761,6 +761,7 @@ static gboolean button_release_event(GtkWidget * widget,
 {
 	GtkTreeSelection *selection = NULL;
 	GtkTreeIter selected;
+	GtkTreePath *path;
 	gboolean is_selected = FALSE;
 	gchar *caption = NULL;
 	gchar *key = NULL;
@@ -791,6 +792,17 @@ static gboolean button_release_event(GtkWidget * widget,
 			gtk_widget_set_sensitive(menu.rr_submenu,
 						 FALSE);
 		} else {
+			/* click on treeview folder to expand or collapse it */			
+			path = gtk_tree_model_get_path(
+					GTK_TREE_MODEL (model), &selected);
+			if (gtk_tree_view_row_expanded (bookmark_tree, path))
+			       gtk_tree_view_collapse_row (bookmark_tree, 
+							   path);
+			else
+			       gtk_tree_view_expand_row (bookmark_tree, 
+							 path, FALSE);
+			gtk_tree_path_free ( path );
+			
 			gtk_widget_set_sensitive(menu.in_tab, FALSE);
 			gtk_widget_set_sensitive(menu.in_dialog, FALSE);
 			gtk_widget_set_sensitive(menu.new, TRUE);
