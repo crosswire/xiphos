@@ -695,7 +695,7 @@ void main_mod_selection_changed(GtkTreeSelection * selection,
 	selection_modules_lists = gtk_tree_view_get_selection
 	    (GTK_TREE_VIEW(search1.module_lists));
 
-	if (gtk_tree_model_iter_has_child(model, &selected))
+	if (gtk_tree_model_iter_has_child(model, &selected)) 
 		return;
 
 	gtk_tree_model_get(model, &selected, 0, &mod, -1);

@@ -75,6 +75,34 @@ GtkWidget *remember_search;	/* needed to change button in search stop */
 
 extern int drag_module_type;
 
+
+/* click on treeview folder to expand or collapse it */
+static gboolean button_release_event(GtkWidget * widget,
+				     GdkEventButton * event,
+				     gpointer data)
+{
+	GtkTreeSelection *selection = NULL;
+	GtkTreeIter selected;
+	GtkTreeModel *model;
+	GtkTreePath *path;
+	
+	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(widget));
+	
+	if (!gtk_tree_selection_get_selected(selection, &model, &selected))
+		return FALSE;
+	
+	if (!gtk_tree_model_iter_has_child(model, &selected)) 
+		return FALSE;
+	
+	path = gtk_tree_model_get_path(model, &selected);
+	if (gtk_tree_view_row_expanded (GTK_TREE_VIEW(widget), path))
+	       gtk_tree_view_collapse_row ( GTK_TREE_VIEW(widget), path );
+        else
+	       gtk_tree_view_expand_row ( GTK_TREE_VIEW(widget), path, FALSE );
+	gtk_tree_path_free ( path );
+	return FALSE;	
+}
+
 void on_comboboxentry2_changed(GtkComboBox * combobox,
 			       gpointer user_data)
 {
@@ -1395,6 +1423,11 @@ void _setup_treeview(GtkWidget * treeview)
 		     (GTK_TREE_VIEW(treeview)));
 	g_signal_connect(selection, "changed",
 			 G_CALLBACK(mod_selection_changed), treeview);
+	
+	g_signal_connect_after(G_OBJECT(treeview),
+			       "button_release_event",
+			       G_CALLBACK(button_release_event),
+			       GINT_TO_POINTER(0));
 
 }
 
