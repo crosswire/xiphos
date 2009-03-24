@@ -36,7 +36,7 @@ extern "C" {
 #include "gui/html.h"
 #endif  /* USE_GTKMOZEMBED */
 
-
+#include "backend/sword_main.hh"
 
 #include "gui/parallel_view.h"
 #include "gui/parallel_dialog.h"
@@ -50,9 +50,7 @@ extern "C" {
 #include "main/settings.h"
 #include "main/url.hh"
 #include "main/xml.h"
-
-
-#include "backend/sword_main.hh"
+#include "main/display.hh"
 
 #define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><STYLE type=\"text/css\"><!--A { text-decoration:none }--></STYLE></head>"
 
@@ -110,9 +108,8 @@ static void set_global_option(char * option, gboolean choice)
 
 	mgr->setGlobalOption(option, on_off);
 	
-	g_strdelimit (option,"' ", '_');
-	//GS_message((option));
-	xml_set_value("Xiphos", "parallel", option,	choice ? "1" : "0");
+	g_strdelimit(option,"' ", '_');
+	xml_set_value("Xiphos", "parallel", option, choice ? "1" : "0");
 }
 
 
@@ -1018,39 +1015,33 @@ void main_update_parallel_page(void)
  * Synopsis
  *   #include "main/parallel_view.h
  *
- *   void int_display(gchar *key)
+ *   void int_display(SWBuf& text, gchar *key, char *mod_name[])
  *
  * Description
- *
+ *   carry out the hard work of getting verses for parallel display.
  *
  * Return value
  *   void
  */
 
-#ifdef USE_GTKMOZEMBED	
-static void int_display(GeckoHtml *html, gchar * key)	
-#else
-static void int_display(GtkHTML *html, gchar * key)
-#endif
+static void int_display(SWBuf& text, gchar *key, char *mod_name[])
 {
 	gchar  	*utf8str,
 		*textColor,
 		*tmpkey,
 		tmpbuf[256],
-		*mod_name[5],
 		*use_font_size[5],
 		*font_size_tmp[5],
 		*use_font_name[5];
 	const gchar *bgColor;
-	GString *str;
+	gchar str[500];
 	gboolean evenRow = FALSE;
 	gboolean is_rtol = FALSE;
-	gchar *buf2;
 	gchar *file = NULL;
 	gint cur_verse, cur_chapter, i = 1, j;
 	char *cur_book;
 
-	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(html))) return;
+	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.notebook_bible_parallel))) return;
 
 	// need #verses to process in this book.
 	VerseKey vkey;
@@ -1067,13 +1058,7 @@ static void int_display(GtkHTML *html, gchar * key)
 				 versemax[vkey.Chapter()-1]);
 #endif
 
-	// quick cache of modules and fonts.
-	mod_name[0] = (parallel1 ? settings.parallel1Module : NULL);
-	mod_name[1] = (parallel2 ? settings.parallel2Module : NULL);
-	mod_name[2] = (parallel3 ? settings.parallel3Module : NULL);
-	mod_name[3] = (parallel4 ? settings.parallel4Module : NULL);
-	mod_name[4] = (parallel5 ? settings.parallel5Module : NULL);
-
+	// quick cache of fonts.  (mod_name was passed in.)
 	file = g_strdup_printf("%s/fonts.conf", settings.gSwordDir);
 	for (j = 0; j < 5; ++j) {
 		font_size_tmp[j] = get_conf_file_item(file, mod_name[j], "Fontsize");
@@ -1098,33 +1083,28 @@ static void int_display(GtkHTML *html, gchar * key)
 	}
 	g_free(file);
 
-	str = g_string_new("");
-	tmpkey = backend_p->get_valid_key(key);
-
 	bgColor = "#f1f1f1";
+
+	tmpkey = backend_p->get_valid_key(key);
 	cur_verse = backend_p->key_get_verse(tmpkey);
 	settings.intCurVerse = cur_verse;
 	cur_chapter = backend_p->key_get_chapter(tmpkey);
 	cur_book = backend_p->key_get_book(tmpkey);
 
-	for (i = 1; i <= xverses; i++) {
-		sprintf(tmpbuf, "%s %d:%d", cur_book, cur_chapter, i);
+	for (i = 1; i <= xverses; ++i) {
+		snprintf(tmpbuf, 255, "%s %d:%d", cur_book, cur_chapter, i);
 		free(tmpkey);
 		tmpkey = backend_p->get_valid_key(tmpbuf);
 
-		
-		g_string_assign(str, "<tr valign=\"top\">");
-#ifdef USE_GTKMOZEMBED
-		gecko_html_write(html, str->str, str->len);
-#else
-		gtk_html_write(html, htmlstream, str->str, str->len);
-#endif
+		text += "<tr valign=\"top\">";
 
+		// mark current verse properly.
 		if (i == cur_verse)
 			textColor = settings.currentverse_color;
 		else
 			textColor = settings.bible_text_color;
 
+		// alternate background colors.
 		if (evenRow) {
 			evenRow = FALSE;
 			bgColor = "#f1f1f1";
@@ -1134,9 +1114,10 @@ static void int_display(GtkHTML *html, gchar * key)
 		}
 
 		for (j = 0; j < 5; j++) {
-			char *num = main_format_number(i);
 			is_rtol = main_is_mod_rtol(mod_name[j]);
-			g_string_printf(str,
+
+			char *num = main_format_number(i);
+			snprintf(str, 499,
 				"<td width=\"20%%\" bgcolor=\"%s\">"
 				"<a href=\"xiphos.url?action=showParallel&"
 				"type=verse&value=%s\" name=\"%d\">"
@@ -1150,70 +1131,28 @@ static void int_display(GtkHTML *html, gchar * key)
 				use_font_name[j],
 				use_font_size[j],
 				textColor);
-			if (str->len) {
-#ifdef USE_GTKMOZEMBED
-				gecko_html_write(html, str->str, str->len);
-#else
-				gtk_html_write(html, htmlstream,
-					       str->str, str->len);
-#endif
-			}
-			if(is_rtol) {
-				buf2 = g_strdup("<br><DIV ALIGN=right>");
-#ifdef USE_GTKMOZEMBED	
-				gecko_html_write(html, buf2, strlen(buf2));
-#else
-				gtk_html_write(html, htmlstream, 
-					       buf2,
-					       strlen(buf2));
-#endif
-				free(buf2);
-			}
+			g_free(num);
+			text += str;
+
+			if(is_rtol)
+				text += "<br><DIV ALIGN=right>";
 
 			if (mod_name[j]) {
 				utf8str = backend_p->get_render_text
-				    //main_get_rendered_text
 				    (mod_name[j], tmpkey);
 				if (strlen(utf8str)) {
-#ifdef USE_GTKMOZEMBED
-					gecko_html_write(html, utf8str, 
-							strlen(utf8str));
-#else
-					gtk_html_write(html, htmlstream,
-						       utf8str,
-						       strlen(utf8str));
-#endif
+					text += utf8str;
 					free(utf8str);
 				}
 			}
 
-			if(is_rtol) {
-				buf2 = g_strdup("</DIV>");
-#ifdef USE_GTKMOZEMBED
-				gecko_html_write(html, buf2, strlen(buf2));
-#else
-				gtk_html_write(html, htmlstream,
-					       buf2,
-					       strlen(buf2));
-#endif
-				free(buf2);
-			}
-			g_string_assign(str, "</font></td>");
-#ifdef USE_GTKMOZEMBED
-			gecko_html_write(html, str->str, str->len);
-#else
-			gtk_html_write(html, htmlstream,
-				       str->str,str->len);
-#endif
+			if(is_rtol)
+				text += "</DIV>";
+
+			text += "</font></td>";
 		}
 
-		g_string_assign(str, "</tr>");
-#ifdef USE_GTKMOZEMBED
-		gecko_html_write(html, str->str, str->len);
-#else
-		gtk_html_write(html, htmlstream,
-			       str->str,str->len);
-#endif
+		text += "</tr>";
 	}
 
 	for (j = 0; j < 5; ++j) {
@@ -1244,9 +1183,9 @@ static void int_display(GtkHTML *html, gchar * key)
 
 void main_update_parallel_page_detached(void)
 {
+	SWBuf text("");
 	gchar buf[500], *mod_name[5];
-    	gchar *buf_tmp = NULL;
-	gint utf8len, j;
+	gint j;
 	gchar space[2];  //there is surely a better way?
 	space[0] = ' ';
 	space[1] = '\0';
@@ -1256,108 +1195,49 @@ void main_update_parallel_page_detached(void)
 	mod_name[3] = (parallel4 ? settings.parallel4Module : space);
 	mod_name[4] = (parallel5 ? settings.parallel5Module : space);
     
-    	buf_tmp = g_strdup_printf("<span color='blue' weight='bold'>%s</span>",
-				      mod_name[0]);
-    	gtk_label_set_markup(GTK_LABEL(plabels.label_1),buf_tmp);
-    	g_free(buf_tmp);
+    	snprintf(buf, 499, "<span color='blue' weight='bold'>%s</span>", mod_name[0]);
+    	gtk_label_set_markup(GTK_LABEL(plabels.label_1), buf);
     
-    	buf_tmp = g_strdup_printf("<span color='blue' weight='bold'>%s</span>",
-				      mod_name[1]);
-    	gtk_label_set_markup(GTK_LABEL(plabels.label_2),buf_tmp);
-    	g_free(buf_tmp);
+    	snprintf(buf, 499, "<span color='blue' weight='bold'>%s</span>", mod_name[1]);
+    	gtk_label_set_markup(GTK_LABEL(plabels.label_2), buf);
     
-    	buf_tmp = g_strdup_printf("<span color='blue' weight='bold'>%s</span>",
-				      mod_name[2]);
-    	gtk_label_set_markup(GTK_LABEL(plabels.label_3),buf_tmp);
-    	g_free(buf_tmp);
+    	snprintf(buf, 499, "<span color='blue' weight='bold'>%s</span>", mod_name[2]);
+    	gtk_label_set_markup(GTK_LABEL(plabels.label_3), buf);
     	
-    	buf_tmp = g_strdup_printf("<span color='blue' weight='bold'>%s</span>",
-				      mod_name[3]);
-    	gtk_label_set_markup(GTK_LABEL(plabels.label_4),buf_tmp);
-    	g_free(buf_tmp);
+    	snprintf(buf, 499, "<span color='blue' weight='bold'>%s</span>", mod_name[3]);
+    	gtk_label_set_markup(GTK_LABEL(plabels.label_4), buf);
     
-    	buf_tmp = g_strdup_printf("<span color='blue' weight='bold'>%s</span>",
-				      mod_name[4]);
-    	gtk_label_set_markup(GTK_LABEL(plabels.label_5),buf_tmp);
-    	g_free(buf_tmp);
+    	snprintf(buf, 499, "<span color='blue' weight='bold'>%s</span>", mod_name[4]);
+    	gtk_label_set_markup(GTK_LABEL(plabels.label_5), buf);
     
 #ifdef USE_GTKMOZEMBED
-	GS_message(("USE_GTKMOZEMBED1"));
 	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.html_parallel_dialog))) return;
-	GS_message(("USE_GTKMOZEMBED2"));
-	GeckoHtml *html = GECKO_HTML(widgets.html_parallel_dialog);
-	gecko_html_open_stream(html,"text/html");
-#else
-	//-- setup gtkhtml widget
-	GtkHTML *html = GTK_HTML(widgets.html_parallel_dialog);
-	gboolean was_editable = gtk_html_get_editable(html);
-	if (was_editable)
-		gtk_html_set_editable(html, FALSE);
-	htmlstream =
-		gtk_html_begin_content(html, (gchar *)"text/html; charset=utf-8");
 #endif
-	sprintf(buf,HTML_START
+
+	snprintf(buf, 499, HTML_START
 		"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table align=\"left\" valign=\"top\"><tr valign=\"top\" >",
 		settings.bible_bg_color, settings.bible_text_color,
 		settings.link_color);
-	utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;
-	if (utf8len) {
-#ifdef USE_GTKMOZEMBED	
-		gecko_html_write(html, buf, utf8len);
-#else
-		gtk_html_write(GTK_HTML(html), htmlstream, buf,utf8len);
-#endif
-	}
+	text += buf;
 	
 	for (j = 0; j < 5; ++j){
-		sprintf(buf,
+		snprintf(buf, 499,
 			"<td valign=\"top\" width=\"20%%\" bgcolor=\"#f1f1f1\"><font color=\"%s\" size=\"%+d\"><b>%s</b></td>",
 			settings.bible_verse_num_color, 
 			settings.verse_num_font_size + settings.base_font_size,
 			mod_name[j]);
-		utf8len = strlen(buf);
-		if (utf8len) {
-#ifdef USE_GTKMOZEMBED
-			gecko_html_write(html, buf, utf8len);
-#else
-			gtk_html_write(GTK_HTML(html), htmlstream, buf, utf8len);
-#endif
-		}
+		text += buf;
 	}
 
-	sprintf(buf, "%s", "</tr>");
-	utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;
-	if (utf8len) {
-#ifdef USE_GTKMOZEMBED	
-		gecko_html_write(html, buf, utf8len);
-#else
-		gtk_html_write(GTK_HTML(html), htmlstream, buf,utf8len);
-#endif
-	}
+	text += "</tr>";
+	int_display(text, settings.cvparallel, mod_name);	
+	text += "</table></body></html>";
 
-	int_display(html, settings.cvparallel);	
-	sprintf(buf, "%s", "</table></body></html>");
-	utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;
-	if (utf8len) {
-#ifdef USE_GTKMOZEMBED	
-		gecko_html_write(html, buf, utf8len);
-#else
-		gtk_html_write(GTK_HTML(html), htmlstream, buf,utf8len);
-#endif
-	}
-	sprintf(buf, "%d", ((settings.intCurVerse > 1)
-			    ? settings.intCurVerse - 1
-			    : settings.intCurVerse));
-#ifdef USE_GTKMOZEMBED	
-	gecko_html_close(html);
-	if (settings.intCurVerse > 1)
-		gecko_html_jump_to_anchor (html,buf);
-#else
-	gtk_html_end(GTK_HTML(html), htmlstream, status1);
-	gtk_html_set_editable(html, was_editable);
-	if (settings.intCurVerse > 1)
-		gtk_html_jump_to_anchor(html, buf);
-#endif 
+	snprintf(buf, 499, "%d", ((settings.intCurVerse > 1)
+				  ? settings.intCurVerse - 1
+				  : settings.intCurVerse));
+
+	HtmlOutput(text, widgets.html_parallel_dialog, NULL, buf);
 }
 
 /******************************************************************************
