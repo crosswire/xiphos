@@ -2,6 +2,8 @@
 
 	* change bookmark click to use verse list rather than to navigate.
 	* change verse list save to offer single bookmark save.
+	* modify bookmark click to auto-navigate single verses but use
+	  verse list for multiples.
 
 2009-03-19  karl <charcoal@users.sf.net>
 
