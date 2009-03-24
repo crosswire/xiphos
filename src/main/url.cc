@@ -633,9 +633,7 @@ static gint show_ref(const gchar * module, const gchar * list, gboolean clicked)
 static int show_module_and_key(const char * module, const char * key, 
 					const char * stype, gboolean clicked)
 {
-#if 0
 	gchar *tmpkey = NULL;
-#endif
 	gint mod_type;
 	
 	if (module && (strlen((char*)module) < 3) && 
@@ -663,43 +661,45 @@ static int show_module_and_key(const char * module, const char * key,
 			main_dialog_goto_bookmark((gchar*)module,
 						(gchar*)key);
 			return 1;
-		}		
+		}
 		mod_type = backend->module_type((gchar*)module);
 		switch (mod_type) {
-#if 1
-			case TEXT_TYPE:	
-			case COMMENTARY_TYPE:
-			case PERCOM_TYPE:				
-				main_display_verse_list_in_sidebar
-				    (settings.currentverse,
-				     (gchar*)module, (gchar*)key);
-				break;
-#else
-			case TEXT_TYPE:	
-				tmpkey = main_update_nav_controls(key);
-				main_display_bible(module, tmpkey);
-				main_display_commentary(NULL, tmpkey);
-				main_keep_bibletext_dialog_in_sync((gchar*)tmpkey);
+			case TEXT_TYPE:
+				if (strpbrk(key, "-;,")) {	// >1 verse marked
+					main_display_verse_list_in_sidebar
+					    (settings.currentverse,
+					     (gchar*)module, (gchar*)key);
+				} else {
+					tmpkey = main_update_nav_controls(key);
+					main_display_bible(module, tmpkey);
+					main_display_commentary(NULL, tmpkey);
+					main_keep_bibletext_dialog_in_sync((gchar*)tmpkey);
+					if (tmpkey) g_free((gchar*)tmpkey);
 #ifdef USE_GTKHTML38
-				editor_sync_with_main();
+					editor_sync_with_main();
 #endif
-				if(tmpkey) g_free((gchar*)tmpkey);
+				}
 				break;
 			case COMMENTARY_TYPE:
-			case PERCOM_TYPE:				
-				tmpkey = main_update_nav_controls(key);
-				main_display_bible(NULL, tmpkey);
-				main_display_commentary(module, tmpkey);
-				if(tmpkey) g_free((gchar*)tmpkey);
-				if(gtk_notebook_get_current_page (GTK_NOTEBOOK
-						(widgets.notebook_comm_book)) 
-				   		!= 0)
-					gtk_notebook_set_current_page(
-			 				GTK_NOTEBOOK (widgets.
-							notebook_comm_book),
-							0);
+			case PERCOM_TYPE:
+				if (strpbrk(key, "-;,")) {	// >1 verse marked
+					main_display_verse_list_in_sidebar
+					    (settings.currentverse,
+					     (gchar*)module, (gchar*)key);
+				} else {
+					tmpkey = main_update_nav_controls(key);
+					main_display_bible(NULL, tmpkey);
+					main_display_commentary(module, tmpkey);
+					main_keep_bibletext_dialog_in_sync((gchar*)tmpkey);
+					if (tmpkey) g_free((gchar*)tmpkey);
+					if (gtk_notebook_get_current_page
+					    (GTK_NOTEBOOK
+					     (widgets.notebook_comm_book)) != 0)
+					    gtk_notebook_set_current_page(
+						GTK_NOTEBOOK (widgets.
+							      notebook_comm_book), 0);
+				}
 				break;
-#endif
 			case DICTIONARY_TYPE:
 				main_display_dictionary((gchar*)module,
 							(gchar*)key);
