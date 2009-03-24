@@ -83,7 +83,7 @@ BookMarksPixbufs *bm_pixbufs;
  *   void
  */
 
-void gui_verselist_to_bookmarks(GList * verses)
+void gui_verselist_to_bookmarks(GList * verses, gint save_as_single)
 {
 	gint test;
 	gchar *tmpbuf;
@@ -94,10 +94,10 @@ void gui_verselist_to_bookmarks(GList * verses)
 	GS_DIALOG *info;
 	RESULTS *list_item;
 
-	gchar *dlg = g_strdup_printf("<span weight=\"bold\">%s</span>\n%s",
+	/*gchar *dlg = g_strdup_printf("<span weight=\"bold\">%s</span>\n%s",
 					   _("Save these results as a single bookmark?"),
-					   _("(rather than as a series of bookmarks)"));
-	if (gui_yes_no_dialog(dlg, NULL)) {
+					   _("(rather than as a series of bookmarks)"));*/
+	if (save_as_single) {
 		GString *name = g_string_new(NULL);
 		GString *verse_string = g_string_new("");
 		gboolean first_entry = TRUE;
@@ -122,10 +122,10 @@ void gui_verselist_to_bookmarks(GList * verses)
 		g_string_free(name, TRUE);
 		g_string_free(verse_string, TRUE);
 		g_free(module_name);
-		g_free(dlg);
+//		g_free(dlg);
 		return;
 	}
-	g_free(dlg);
+	//g_free(dlg);
 
 	gtk_tree_model_get_iter_first(GTK_TREE_MODEL(model), &iter);
 	info = gui_new_dialog();
