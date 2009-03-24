@@ -25,6 +25,7 @@
 
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
+#include <glade/glade-xml.h>
 
 #ifdef USE_GTKHTML3_14_23
 #include "editor/slib-editor.h"
@@ -584,6 +585,8 @@ static gboolean on_treeview_button_press_event(GtkWidget * widget,
 	}	
 	switch (event->button) {
 	case 3:
+		gtk_menu_popup ((GtkMenu*)sidebar.menu_item_save_search, NULL, NULL, NULL, NULL, 2,
+		     			gtk_get_current_event_time());
 		return TRUE;
 
 	default:
@@ -609,13 +612,13 @@ static gboolean on_treeview_button_press_event(GtkWidget * widget,
  * Return value
  *   void
  */
-
+/*
 static void on_save_list_as_bookmarks_activate(GtkMenuItem * menuitem,
 					       gpointer user_data)
 {
 	gui_verselist_to_bookmarks(list_of_verses);
 }
-
+*/
 
 /******************************************************************************
  * Name
@@ -705,15 +708,21 @@ static void on_about2_activate(GtkMenuItem * menuitem,
 }
 
 
-static GnomeUIInfo results_menu_uiinfo[] = {
-	{
-	 GNOME_APP_UI_ITEM, N_("Save List"),
-	 N_("Save the search results as bookmarks"),
-	 (gpointer) on_save_list_as_bookmarks_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_TEXT_NUMBERED_LIST,
-	 0, (GdkModifierType) 0, NULL},
-	GNOMEUIINFO_END
-};
+void
+on_save_list_as_a_single_bookmark_activate (GtkMenuItem * menuitem,
+                                        gpointer user_data)
+{
+	gui_verselist_to_bookmarks(list_of_verses, TRUE);
+}
+
+
+void
+on_save_list_as_a_series_of_bookmarks_activate (GtkMenuItem * menuitem,
+                                        gpointer user_data)
+{
+	gui_verselist_to_bookmarks(list_of_verses, FALSE);
+}
+
 
 
 /******************************************************************************
@@ -734,14 +743,24 @@ static GnomeUIInfo results_menu_uiinfo[] = {
 
 GtkWidget *create_results_menu(void)
 {
-	GtkWidget *menu1;
-
-	menu1 = gtk_menu_new();
-	gnome_app_fill_menu(GTK_MENU_SHELL(menu1), results_menu_uiinfo,
-			    NULL, FALSE, 0);
-	sidebar.menu_item_save_search = results_menu_uiinfo[0].widget;
-	gtk_widget_set_sensitive(sidebar.menu_item_save_search, FALSE);
-	return menu1;
+	GtkWidget *menu;
+	gchar *glade_file;
+	GladeXML *gxml;
+	
+	glade_file = gui_general_user_file ("xi-menus.glade", FALSE);
+	g_return_val_if_fail ((glade_file != NULL), NULL);
+	
+	gxml = glade_xml_new (glade_file, "menu_verselist", NULL);
+		
+	g_free (glade_file);
+	g_return_val_if_fail ((gxml != NULL), NULL);
+	
+	menu = glade_xml_get_widget (gxml, "menu_verselist");
+    	/* connect signals and data */
+	glade_xml_signal_autoconnect_full
+		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);
+	
+	return menu;
 }
 
 static GnomeUIInfo menu_modules_uiinfo[] = {
@@ -1049,7 +1068,7 @@ static void create_search_results_page(GtkWidget * notebook)
 	GtkWidget *scrolledwindow3;
 	GtkListStore *model;
 	GtkTreeSelection *selection;
-	GtkWidget *menu = create_results_menu();
+	sidebar.menu_item_save_search = create_results_menu();
 
 	scrolledwindow3 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow3);
@@ -1073,9 +1092,9 @@ static void create_search_results_page(GtkWidget * notebook)
 
 	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(sidebar.results_list));
 
-	gnome_popup_menu_attach(menu, sidebar.results_list, NULL);
+	//gnome_popup_menu_attach(menu, sidebar.results_list, NULL);
 	//gnome_app_install_menu_hints(GNOME_APP(widgets.app), results_menu_uiinfo);
-		
+	//gtk_menu_attach_to_widget ((GtkMenu*)menu, sidebar.results_list,NULL);	
 	g_signal_connect((gpointer) sidebar.results_list,
 			 "key_press_event",
 			 G_CALLBACK(tree_key_press_cb), NULL);
