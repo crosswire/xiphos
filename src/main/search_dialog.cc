@@ -47,6 +47,8 @@ extern "C" {
 #include "main/url.hh"
  
 #include "gui/search_dialog.h"
+#include "gui/bookmark_dialog.h"
+#include "gui/bookmarks_treeview.h"
 #include "gui/sidebar.h"
 #include "gui/widgets.h"
 #include "gui/dialog.h"
@@ -76,6 +78,63 @@ gboolean search_active;		// also accessed from search_dialog.c.
 int drag_module_type;
 
 static GList *list_of_finds;
+static GList *list_for_bookmarking = NULL;
+
+/******************************************************************************
+ * Name
+ *   main_save_current_adv_search_as_bookmarks
+ *
+ * Synopsis
+ *   #include "main/search_dialog.h"
+ *
+ *   void main_save_current_adv_search_as_bookmarks (void)
+ *
+ * Description
+ *   saves search results as bookmarks - single bookmark per module
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void main_save_current_adv_search_as_bookmarks (void)
+{	
+	GList *verses = NULL;
+	RESULTS *list_item;
+	gchar *module_name = NULL;
+	
+	list_for_bookmarking = g_list_first(list_for_bookmarking);
+	while (list_for_bookmarking) {
+		verses = (GList*) list_for_bookmarking->data;
+		
+		GString *name = g_string_new(NULL);
+		GString *verse_string = g_string_new("");
+		gboolean first_entry = TRUE;
+
+		while (verses) {
+			list_item = (RESULTS *) verses->data;
+			if (main_is_Bible_key(list_item->key)) {
+				if (first_entry) {
+					module_name = g_strdup(list_item->module);
+					first_entry = FALSE;
+				} else {
+					verse_string = g_string_append(verse_string,
+								       "; ");
+				}
+				verse_string = g_string_append(verse_string,
+							       list_item->key);
+			}
+			verses = g_list_next(verses);
+		}
+		g_string_printf(name, _("Search result %s: %s"), module_name, settings.searchText);
+		gui_bookmark_dialog(name->str, module_name, verse_string->str);
+		g_string_free(name, TRUE);
+		g_string_free(verse_string, TRUE);
+		g_free(module_name);
+		list_for_bookmarking = g_list_next(list_for_bookmarking);
+	}
+}
+
 
 /******************************************************************************
  * Name
@@ -317,7 +376,6 @@ void main_delete_range(void)
 }
 
 
-
 /******************************************************************************
  * Name
  *   add_module_finds
@@ -341,7 +399,7 @@ static void add_module_finds(GList * versekeys)
 	GtkListStore *list_store;
 	GtkTreeIter iter;
 	GList *tmp = g_list_first(versekeys);
-
+	
 	model =
 	    gtk_tree_view_get_model(GTK_TREE_VIEW
 				    (search1.listview_verses));
@@ -359,7 +417,6 @@ static void add_module_finds(GList * versekeys)
 		tmp = g_list_next(tmp);
 	}
 }
-
 
 
 /******************************************************************************
@@ -1273,6 +1330,30 @@ void _clear_find_lists(void)
 	list_of_finds = NULL;
 }
 
+static
+void _clear_bookmarking_lists(void)
+{
+	GList *tmp = NULL;
+	RESULTS *results;
+	
+	list_for_bookmarking = g_list_first(list_for_bookmarking);
+	while (list_for_bookmarking) {
+		tmp = (GList*) list_for_bookmarking->data;
+		while (tmp) {
+			results = (RESULTS*) tmp->data;
+			GS_message(("%s://%s",results->module,results->key));
+			if (results->module) g_free(results->module);
+			if (results->key) g_free(results->key);
+			if (results) g_free (results);
+			tmp = g_list_next(tmp);
+		}
+		list_for_bookmarking = g_list_next(list_for_bookmarking);
+	}
+	if (list_for_bookmarking)
+		g_list_free(list_for_bookmarking);
+	list_for_bookmarking = NULL;
+}
+
 void main_do_dialog_search(void)
 {
 	gint search_type, search_params, finds;
@@ -1285,6 +1366,7 @@ void main_do_dialog_search(void)
 	GString *str;
 	GList *tmp = NULL;
 	GList *tmp_list = NULL;
+	GList *tmp_bookmark_list = NULL;
 	SWBuf swbuf = "";
 	GtkTreeModel *model;
 	GtkListStore *list_store;
@@ -1295,8 +1377,11 @@ void main_do_dialog_search(void)
 	gint mod_type;
 	char *num;
 	gchar msg[300];
+	RESULTS *results;
 	
 	_clear_find_lists();
+	_clear_bookmarking_lists();
+	
 	model =
 	    gtk_tree_view_get_model(GTK_TREE_VIEW
 				    (search1.listview_results));
@@ -1418,6 +1503,8 @@ void main_do_dialog_search(void)
 		
 		tmp_list = g_list_first(tmp_list);
 		tmp_list = NULL;
+		tmp_bookmark_list = g_list_first(tmp_bookmark_list);
+		tmp_bookmark_list = NULL;
 		
 		mod_type = backendSearch->module_type(module);	
 		while ((key_buf = backendSearch->get_next_listkey()) != NULL) {
@@ -1426,9 +1513,15 @@ void main_do_dialog_search(void)
 			else			
 				g_string_printf(str, "%s: %s", module,  key_buf);				
 			tmp_list = g_list_append(tmp_list, (char*) g_strdup(str->str));
-//			g_free((char*)key_buf);	
+						  
+			results = g_new(RESULTS,1);
+			results->module = g_strdup(module);
+			results->key = g_strdup(key_buf);
+			tmp_bookmark_list = g_list_append(tmp_bookmark_list, 
+							(RESULTS*) results);
 		}
 		list_of_finds = g_list_append(list_of_finds, (GList*)tmp_list);
+		list_for_bookmarking = g_list_append(list_for_bookmarking, (GList*)tmp_bookmark_list);
 
 		// add number of hits in each module to finds listview
 		num = main_format_number(finds);
@@ -1515,6 +1608,7 @@ void main_open_search_dialog(void)
 void main_close_search_dialog(void)
 {
 	_clear_find_lists();
+	_clear_bookmarking_lists();
 	is_running = FALSE;
 	delete backendSearch;
 	backendSearch = NULL;

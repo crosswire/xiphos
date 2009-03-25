@@ -169,11 +169,11 @@ void button_clean(GtkButton * button, gpointer user_data)
  * Synopsis
  *   #include "gui/search_dialog.h"
  *
- *   void button_save(GtkButton * button, 
- *						gpointer user_data)
+ *   void button_save(GtkButton * button, gpointer user_data)
  *
  * Description
- *   
+ *   calls main_save_current_adv_search_as_bookmarks() in main/search_dialog.cc
+ *   to do the work of saving current search as bookmarks
  *
  * Return value
  *   void
@@ -181,7 +181,7 @@ void button_clean(GtkButton * button, gpointer user_data)
 
 void button_save(GtkButton * button, gpointer user_data)
 {
-	GS_warning(("FIXME: please"));
+	main_save_current_adv_search_as_bookmarks ();
 }
 
 

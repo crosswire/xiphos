@@ -763,6 +763,7 @@ GtkWidget *create_results_menu(void)
 	return menu;
 }
 
+
 static GnomeUIInfo menu_modules_uiinfo[] = {
 	{ /* 0 */
 	 GNOME_APP_UI_ITEM, N_("Open in a new tab"),
