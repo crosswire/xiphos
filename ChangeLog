@@ -1,5 +1,6 @@
 2009-03-25  terry <tbiggs@users.sourceforge.net>
 
+	* changed export dialog to Copy/Export dialog
 	* added single bookmark per module results save to search dialog
 
 2009-03-24  karl <charcoal@users.sf.net>

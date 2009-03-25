@@ -44,6 +44,8 @@ static gchar *filename;
 
 typedef struct _export_dialog EXPORT_DIALOG;
 struct _export_dialog {
+	GtkWidget *rb_copy;
+	GtkWidget *rb_export;
 	GtkWidget *rb_book;
 	GtkWidget *rb_chapter;
 	GtkWidget *rb_verse;
@@ -131,8 +133,10 @@ void _get_export_filename(void)
 	gxml = glade_xml_new(glade_file, "filechooserdialog1", NULL);
 	
 	fdialog =  glade_xml_get_widget (gxml, "filechooserdialog1");	
-	g_signal_connect(fdialog, "response",
-			 G_CALLBACK(on_filechooserdialog_response), (GtkFileChooser *)fdialog);	
+	g_signal_connect(fdialog, 
+			 "response",
+			 G_CALLBACK(on_filechooserdialog_response), 
+			 (GtkFileChooser *)fdialog);	
 	
 }
 
@@ -163,7 +167,7 @@ void on_dialog_export_passage_response(GtkDialog * dialog,
 		gtk_widget_destroy(GTK_WIDGET(dialog));	
 		break;
 	case GTK_RESPONSE_OK:
-		if(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(d.rb_html)))
+		if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(d.rb_html)))
 			d.format = 1;
 		else
 			d.format = 0;
@@ -172,8 +176,15 @@ void on_dialog_export_passage_response(GtkDialog * dialog,
 			gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(d.rb_book)) ? BOOK
 			 : gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(d.rb_chapter)) ? CHAPTER
 			 : VERSE;
-		
-		_get_export_filename();
+		if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(d.rb_export)))
+			_get_export_filename();
+		else {		
+			if(d.format)
+				main_export_html(NULL, d.passage_type);
+			else
+				main_export_plain(NULL, d.passage_type);
+		}
+			
 		gtk_widget_destroy(GTK_WIDGET(dialog));
 		break;
 	}
@@ -272,6 +283,8 @@ void gui_export_dialog(void)
 	d.rb_verse = glade_xml_get_widget(gxml, "radiobutton3");
 	d.rb_html = glade_xml_get_widget(gxml, "radiobutton4");
 	d.rb_plain = glade_xml_get_widget(gxml, "radiobutton5");
+	d.rb_copy = glade_xml_get_widget(gxml, "rb_copy");
+	d.rb_export = glade_xml_get_widget(gxml, "rb_export");
 	d.lb_version = glade_xml_get_widget(gxml, "label3");
 	d.lb_key = glade_xml_get_widget(gxml, "label4");
 	d.warning_label = glade_xml_get_widget(gxml, "hbox2");
