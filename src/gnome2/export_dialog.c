@@ -276,10 +276,13 @@ void gui_export_dialog(void)
 	d.lb_key = glade_xml_get_widget(gxml, "label4");
 	d.warning_label = glade_xml_get_widget(gxml, "hbox2");
 	
-	if(dist_license)
+	if(dist_license) {
 		gtk_widget_show(d.warning_label);
-	else
+		gtk_widget_hide(d.rb_book);
+	} else {
 		gtk_widget_hide(d.warning_label);
+		gtk_widget_show(d.rb_book);
+	}
 	
 	gtk_label_set_text (GTK_LABEL(d.lb_version), settings.MainWindowModule);	
 	gtk_label_set_text (GTK_LABEL(d.lb_key), settings.currentverse);
