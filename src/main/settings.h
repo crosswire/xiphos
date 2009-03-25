@@ -104,7 +104,9 @@ struct _settings {
 		parallel_segmentation, //-- check menu state parallel mods		
 		parallel_red_words, //-- check menu state parallel mods	
 		parallel_transliteration, //-- check menu state parallel mods
-		parallel_variants, //-- check menu state parallel mods
+		parallel_variants_primary, //-- check menu state parallel mods
+		parallel_variants_secondary, //-- check menu state parallel mods
+		parallel_variants_all, //-- check menu state parallel mods
 		parallel_hebrewpoints, //-- check menu state parallel mods
 		parallel_cantillationmarks, //-- check menu state parallel mods
 	        parallel_footnotes, //-- check menu state parallel mods
