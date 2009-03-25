@@ -38,6 +38,14 @@
 
 #define HTML_START "<HTML><HEAD><META HTTP-EQUIV=\"content-type\" CONTENT=\"text/html; CHARSET=utf-8\"><STYLE TYPE=\"text/css\"><!-- A { text-decoration:none } %s --></STYLE></HEAD><BODY>"
 
+
+static void _copy_to_clipboard (char* text,int len)
+{
+	GtkClipboard *clipboard = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
+	 
+	gtk_clipboard_set_text (clipboard, text, len);
+}
+
 static void _save(char *filename, char* text,int len)
 {
 	GS_message((filename));
@@ -99,7 +107,10 @@ static void _export_book(char *filename, int type)
 	}
 	if(type == HTML)
 		g_string_append_printf(str,"%s","</BODY></HTML>");
-	_save(filename, str->str,str->len);
+	if (filename) 
+		_save(filename, str->str,str->len);
+	else
+		_copy_to_clipboard (str->str, str->len);
 	g_string_free(str,TRUE);
 	
 }
@@ -152,7 +163,10 @@ static void _export_chapter(char *filename, int type)
 	}
 	if(type == HTML)
 		g_string_append_printf(str,"%s","</BODY></HTML>");
-	_save(filename, str->str,str->len);
+	if (filename) 
+		_save(filename, str->str,str->len);
+	else
+		_copy_to_clipboard (str->str, str->len);
 	g_string_free(str,TRUE);
 	if(book)
 		g_free(book);
@@ -190,7 +204,10 @@ static void _export_verse(char *filename, int type)
 				       (char*)mod->StripText(), 
 				       settings.versestyle ? "\n" : "");
 	
-	_save(filename, str->str,str->len);
+	if (filename) 
+		_save(filename, str->str,str->len);
+	else
+		_copy_to_clipboard (str->str, str->len);
 	
 	g_string_free(str,TRUE);
 	
