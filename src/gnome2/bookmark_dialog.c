@@ -334,9 +334,9 @@ static void setup_entrys(gchar * label,
  *   
  */
  
-static void create_bookmark_dialog(gchar * label, 
-				   gchar * module, 
-				   gchar * key)
+static GtkWidget *_create_bookmark_dialog(gchar * label, 
+				   	gchar * module, 
+				   	gchar * key)
 {
 	GladeXML *gxml;
 	gchar *glade_file;
@@ -345,13 +345,13 @@ static void create_bookmark_dialog(gchar * label,
 //	gint index = 0;
 
 	glade_file = gui_general_user_file ("bookmarks.glade", TRUE);
-	g_return_if_fail(glade_file != NULL);
+	g_return_val_if_fail(glade_file != NULL, NULL);
 	GS_message((glade_file));
 	
 	/* build the widget */
 	gxml = glade_xml_new (glade_file, NULL, NULL);
 	g_free (glade_file);
-	g_return_if_fail (gxml != NULL);
+	 g_return_val_if_fail(gxml != NULL, NULL);
 
 	/* lookup the root widget */
 	dialog = glade_xml_get_widget (gxml, "dialog");
@@ -371,29 +371,34 @@ static void create_bookmark_dialog(gchar * label,
 	/* dialog buttons */
 	button_new_folder = glade_xml_get_widget (gxml, "button1");
 	button_add_bookmark = glade_xml_get_widget (gxml, "button3");
+	
 	/* connect signals and data */
 /*	glade_xml_signal_autoconnect_full
 		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);*/
+	return dialog;
 }
 
 
 /******************************************************************************
  * Name
- *   
+ *   gui_bookmark_dialog
  *
  * Synopsis
  *   #include "gui/bookmark_dialog.h"
  *
- *   
+ *   void gui_bookmark_dialog(gchar * label, gchar * module_name, gchar * key)
  *
  * Description
- *   
+ *   calls _create_bookmark_dialog() and use gtk_dialog_run() 
+ *   to make it modal (needed for saving multiple search results)
  *
  * Return value
- *   
+ *   void
  */
  
 void gui_bookmark_dialog(gchar * label, gchar * module_name, gchar * key)
 {
-	create_bookmark_dialog(label, module_name, key);
+	GtkWidget *dialog = _create_bookmark_dialog(label, module_name, key);
+	if (!dialog) return;
+	gtk_dialog_run(GTK_DIALOG( dialog));
 }
