@@ -122,10 +122,8 @@ void gui_verselist_to_bookmarks(GList * verses, gint save_as_single)
 		g_string_free(name, TRUE);
 		g_string_free(verse_string, TRUE);
 		g_free(module_name);
-//		g_free(dlg);
 		return;
 	}
-	//g_free(dlg);
 
 	gtk_tree_model_get_iter_first(GTK_TREE_MODEL(model), &iter);
 	info = gui_new_dialog();
@@ -148,8 +146,10 @@ void gui_verselist_to_bookmarks(GList * verses, gint save_as_single)
 				   bm_pixbufs->pixbuf_opened,
 				   COL_CLOSED_PIXBUF,
 				   bm_pixbufs->pixbuf_closed,
-				   COL_CAPTION, info->text1, COL_KEY,
-				   NULL, COL_MODULE, NULL, -1);
+				   COL_CAPTION, info->text1, 
+				   COL_KEY, NULL, 
+				   COL_MODULE, NULL, 
+				   -1);
 //              set_results_position((char) 1); // TOP 
 		str = g_string_new(" ");
 		while (verses) {
@@ -166,8 +166,9 @@ void gui_verselist_to_bookmarks(GList * verses, gint save_as_single)
 					   bm_pixbufs->pixbuf_helpdoc,
 					   COL_CLOSED_PIXBUF, NULL,
 					   COL_CAPTION, str->str,
-					   COL_KEY, tmpbuf, COL_MODULE,
-					   module_name, -1);
+					   COL_KEY, tmpbuf, 
+					   COL_MODULE, module_name, 
+					   -1);
 			verses = g_list_next(verses);
 		}
 		g_string_free(str, TRUE);
@@ -176,7 +177,6 @@ void gui_verselist_to_bookmarks(GList * verses, gint save_as_single)
 	}
 	g_free(info->text1);
 	g_free(info);
-//	gtk_widget_set_sensitive(sidebar.menu_item_save_search, FALSE);
 }
 
 /******************************************************************************
