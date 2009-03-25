@@ -619,11 +619,25 @@ void load_settings_structure(void)
 		settings.parallel_lemmas = 0;
 	}
 	
-	if ((buf = xml_get_value("parallel", "Textual_Variants")))
-		settings.parallel_variants = atoi(buf);
+	if ((buf = xml_get_value("parallel", "Primary_Reading")))
+		settings.parallel_variants_primary = atoi(buf);
 	else {
-		xml_add_new_item_to_section("parallel", "Textual_Variants", "0");
-		settings.parallel_variants = 0;
+		xml_add_new_item_to_section("parallel", "Primary_Reading", "1");
+		settings.parallel_variants_primary = 1;
+	}	
+	
+	if ((buf = xml_get_value("parallel", "Secondary_Reading")))
+		settings.parallel_variants_secondary = atoi(buf);
+	else {
+		xml_add_new_item_to_section("parallel", "Secondary_Reading", "0");
+		settings.parallel_variants_secondary = 0;
+	}
+	
+	if ((buf = xml_get_value("parallel", "All_Readings")))
+		settings.parallel_variants_all = atoi(buf);
+	else {
+		xml_add_new_item_to_section("parallel", "All_Readings", "0");
+		settings.parallel_variants_all = 0;
 	}
 	
 	if ((buf = xml_get_value("parallel", "Greek_Accents")))
