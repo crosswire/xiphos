@@ -191,6 +191,12 @@ void on_dialog_export_passage_response(GtkDialog * dialog,
 			edata.end_verse = 
 				gtk_spin_button_get_value_as_int (
 				    GTK_SPIN_BUTTON (d.sb_end_verse));
+			if (edata.end_verse < edata.start_verse) {
+				int swap;
+				swap = edata.end_verse;
+				edata.end_verse = edata.start_verse;
+				edata.start_verse = swap;
+			}
 		} else {
 			edata.start_verse = 0 ;
 			edata.end_verse = 0;
@@ -299,7 +305,7 @@ void gui_export_dialog(void)
 {
 	gchar *glade_file;
 	GladeXML *gxml;
-	gint dist_license;
+	gint dist_license, curVerse;
 	gdouble max;
 	
 	dist_license = _check_for_distribution_license(settings.MainWindowModule);
@@ -331,11 +337,14 @@ void gui_export_dialog(void)
 	
 	max = main_get_max_verses ();
 	gtk_spin_button_set_range (GTK_SPIN_BUTTON (d.sb_start_verse), 
-				   1, 
-				   max-1);
+				   1, max);
 	gtk_spin_button_set_range (GTK_SPIN_BUTTON (d.sb_end_verse), 
-				   2, 
-				   max);
+				   1, max);
+	curVerse = main_get_current_verse();
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (d.sb_start_verse), 
+				   curVerse);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (d.sb_end_verse), 
+				   curVerse);
 	gtk_widget_set_sensitive (d.sb_start_verse, FALSE);
 	gtk_widget_set_sensitive (d.sb_end_verse, FALSE);
 
