@@ -38,6 +38,14 @@
 
 #define HTML_START "<HTML><HEAD><META HTTP-EQUIV=\"content-type\" CONTENT=\"text/html; CHARSET=utf-8\"><STYLE TYPE=\"text/css\"><!-- A { text-decoration:none } %s --></STYLE></HEAD><BODY>"
 
+int main_get_max_verses (void)
+{
+	SWMgr *mgr = backend->get_main_mgr();
+	SWModule *mod = mgr->Modules[settings.MainWindowModule];
+	mod->setKey(settings.currentverse);
+	VerseKey *key = (VerseKey *)(SWKey *)(*mod);
+	return key->getVerseMax();
+}
 
 static void _copy_to_clipboard (char* text,int len)
 {
@@ -216,36 +224,98 @@ static void _export_verse(char *filename, int type)
 	
 }
 
-void main_export_html(char * filename, int passage_type)
+static void _export_verse_range (EXPORT_DATA data, int type)
 {
-	switch(passage_type) {
+	GString *str = g_string_new(NULL);
+	char* book;
+	SWMgr *mgr = backend->get_main_mgr();
+	SWModule *mod = mgr->Modules[settings.MainWindowModule];
+	mod->setKey(settings.currentverse);
+	VerseKey *key = (VerseKey *)(SWKey *)(*mod);
+	int curChapter = key->Chapter();
+	int curBook = key->Book();
+	//int myverse = 1;
+	
+	book = backend->key_get_book(settings.currentverse);
+	if(type == HTML)
+		g_string_append_printf(str,
+				       "%s<BR>%s: %s Chapter %d<BR>", 
+				       HTML_START, 
+				       settings.MainWindowModule,
+				       book, 
+				       key->Chapter());
+	else
+		g_string_append_printf(str,
+				       "\n%s: %s Chapter %d\n", 
+				       settings.MainWindowModule,
+				       book, 
+				       key->Chapter());		
+	
+	for (key->Verse(data.start_verse);
+	     (key->Verse() <= data.end_verse) &&
+	     (key->Book() == curBook) &&
+	     (key->Chapter() == curChapter) &&
+	     !mod->Error();
+	     (*mod)++) {
+		     
+		if(type == HTML)
+			g_string_append_printf(str,"%d. %s%s",
+					       key->Verse(),
+					       (char*)mod->RenderText(), 
+					       settings.versestyle ? "<BR>" : "");
+		else
+			g_string_append_printf(str,"%d. %s%s",
+					       key->Verse(),
+					       (char*)mod->StripText(), 
+					       settings.versestyle ? "\n" : "");
+	}
+	if(type == HTML)
+		g_string_append_printf(str,"%s","</BODY></HTML>");
+	if (data.filename) 
+		_save(data.filename, str->str,str->len);
+	else
+		_copy_to_clipboard (str->str, str->len);
+	g_string_free(str,TRUE);
+	if(book)
+		g_free(book);
+	
+}
+
+
+void main_export_html(EXPORT_DATA data)
+{
+	switch(data.passage_type) {
 		case BOOK:
-			_export_book(filename, HTML);
+			_export_book(data.filename, HTML);
 			break;
 		case CHAPTER:
-			_export_chapter(filename, HTML);
+			_export_chapter(data.filename, HTML);
 			break;
 		case VERSE:
-			_export_verse(filename, HTML);
+			_export_verse(data.filename, HTML);
 			break;
-		
+		case VERSE_RANGE:
+			_export_verse_range(data, HTML);
+			break;
 	}
 	
 }
 
-void main_export_plain(char *filename, int what_to_export)
+void main_export_plain(EXPORT_DATA data)
 {
-	switch(what_to_export) {
+	switch(data.passage_type) {
 		case BOOK:
-			_export_book(filename, PLAIN);
+			_export_book(data.filename, PLAIN);
 			break;
 		case CHAPTER:
-			_export_chapter(filename, PLAIN);
+			_export_chapter(data.filename, PLAIN);
 			break;
 		case VERSE:
-			_export_verse(filename, PLAIN);
+			_export_verse(data.filename, PLAIN);
 			break;
-		
+		case VERSE_RANGE:
+			_export_verse_range(data, PLAIN);
+			break;
 	}
 	
 }
