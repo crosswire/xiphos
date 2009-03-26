@@ -47,6 +47,15 @@ int main_get_max_verses (void)
 	return key->getVerseMax();
 }
 
+int main_get_current_verse (void)
+{
+	SWMgr *mgr = backend->get_main_mgr();
+	SWModule *mod = mgr->Modules[settings.MainWindowModule];
+	mod->setKey(settings.currentverse);
+	VerseKey *key = (VerseKey *)(SWKey *)(*mod);
+	return key->Verse();
+}
+
 static void _copy_to_clipboard (char* text,int len)
 {
 	GtkClipboard *clipboard = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);

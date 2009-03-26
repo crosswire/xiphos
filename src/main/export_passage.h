@@ -45,6 +45,7 @@ enum {
 };
 
 int main_get_max_verses (void);
+int main_get_current_verse (void);
 void main_export_html (EXPORT_DATA data);
 void main_export_plain (EXPORT_DATA data);
 
