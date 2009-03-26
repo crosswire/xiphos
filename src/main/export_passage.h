@@ -27,16 +27,26 @@
 extern "C" {
 #endif	
 
+typedef struct _export_data EXPORT_DATA;
+struct _export_data {
+	char *filename;
+	int passage_type;
+	int start_verse;
+	int end_verse;
+};
+
 enum {
 	BOOK,
 	CHAPTER,
 	VERSE,
+	VERSE_RANGE,
 	HTML,
 	PLAIN
 };
 
-void main_export_html(char *filename, int what_to_export);
-void main_export_plain(char *filename, int what_to_export);
+int main_get_max_verses (void);
+void main_export_html (EXPORT_DATA data);
+void main_export_plain (EXPORT_DATA data);
 
 #ifdef __cplusplus
 }

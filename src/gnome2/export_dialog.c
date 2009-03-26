@@ -49,17 +49,22 @@ struct _export_dialog {
 	GtkWidget *rb_book;
 	GtkWidget *rb_chapter;
 	GtkWidget *rb_verse;
+	GtkWidget *rb_multi_verse;
 	GtkWidget *rb_html;
 	GtkWidget *rb_plain;
 	GtkWidget *lb_version;
 	GtkWidget *lb_key;
+	GtkWidget *sb_start_verse;
+	GtkWidget *sb_end_verse;
 	GtkWidget *warning_label;
 	gint format;
+	gint start_verse;
+	gint end_verse;
 	gint passage_type;
 };
 
 EXPORT_DIALOG d;
-
+EXPORT_DATA edata;
 
 /******************************************************************************
  * Name
@@ -84,14 +89,15 @@ void on_filechooserdialog_response(GtkDialog * fdialog,
 					    gint response_id,
 					    GtkFileChooser * filesel)
 {
+	
 	switch (response_id) {
 	case GTK_RESPONSE_OK:
-		filename = g_strdup(gtk_file_chooser_get_filename(filesel));
+		edata.filename = g_strdup(gtk_file_chooser_get_filename(filesel));
 		
 		if(d.format)
-			main_export_html(filename, d.passage_type);
+			main_export_html(edata);
 		else
-			main_export_plain(filename, d.passage_type);
+			main_export_plain(edata);
 		break;
 
 	case GTK_RESPONSE_CANCEL:
@@ -172,17 +178,32 @@ void on_dialog_export_passage_response(GtkDialog * dialog,
 		else
 			d.format = 0;
 			
-		d.passage_type = 
+		edata.passage_type = 
 			gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(d.rb_book)) ? BOOK
 			 : gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(d.rb_chapter)) ? CHAPTER
-			 : VERSE;
+			 : gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(d.rb_verse)) ? VERSE
+			 : VERSE_RANGE;
+		
+		if (edata.passage_type == VERSE_RANGE) {
+			edata.start_verse = 
+				gtk_spin_button_get_value_as_int (
+				    GTK_SPIN_BUTTON (d.sb_start_verse));
+			edata.end_verse = 
+				gtk_spin_button_get_value_as_int (
+				    GTK_SPIN_BUTTON (d.sb_end_verse));
+		} else {
+			edata.start_verse = 0 ;
+			edata.end_verse = 0;
+		}
+			
 		if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(d.rb_export)))
 			_get_export_filename();
-		else {		
+		else {	
+			edata.filename = NULL;
 			if(d.format)
-				main_export_html(NULL, d.passage_type);
+				main_export_html(edata);
 			else
-				main_export_plain(NULL, d.passage_type);
+				main_export_plain(edata);
 		}
 			
 		gtk_widget_destroy(GTK_WIDGET(dialog));
@@ -243,6 +264,21 @@ gint _check_for_distribution_license(gchar * mod_name)
 }			     
 			     
 
+static
+void on_rb_multi_verse_toggled (GtkToggleButton *togglebutton,
+                                gpointer user_data)
+{
+	if (togglebutton->active) {
+		gtk_widget_set_sensitive (d.sb_start_verse, TRUE);
+		gtk_widget_set_sensitive (d.sb_end_verse, TRUE);
+		
+	} else {
+		gtk_widget_set_sensitive (d.sb_start_verse, FALSE);
+		gtk_widget_set_sensitive (d.sb_end_verse, FALSE);		
+	}
+}
+
+
 /******************************************************************************
  * Name
  *   gui_export_dialog
@@ -264,6 +300,7 @@ void gui_export_dialog(void)
 	gchar *glade_file;
 	GladeXML *gxml;
 	gint dist_license;
+	gdouble max;
 	
 	dist_license = _check_for_distribution_license(settings.MainWindowModule);
 	
@@ -281,13 +318,27 @@ void gui_export_dialog(void)
 	d.rb_book = glade_xml_get_widget(gxml, "radiobutton1");
 	d.rb_chapter = glade_xml_get_widget(gxml, "radiobutton2");
 	d.rb_verse = glade_xml_get_widget(gxml, "radiobutton3");
+	d.rb_multi_verse = glade_xml_get_widget(gxml, "rb_multi_verse");
 	d.rb_html = glade_xml_get_widget(gxml, "radiobutton4");
 	d.rb_plain = glade_xml_get_widget(gxml, "radiobutton5");
 	d.rb_copy = glade_xml_get_widget(gxml, "rb_copy");
 	d.rb_export = glade_xml_get_widget(gxml, "rb_export");
 	d.lb_version = glade_xml_get_widget(gxml, "label3");
 	d.lb_key = glade_xml_get_widget(gxml, "label4");
+	d.sb_start_verse = glade_xml_get_widget(gxml, "sb_start_verse");
+	d.sb_end_verse = glade_xml_get_widget(gxml, "sb_end_verse");
 	d.warning_label = glade_xml_get_widget(gxml, "hbox2");
+	
+	max = main_get_max_verses ();
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (d.sb_start_verse), 
+				   1, 
+				   max-1);
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (d.sb_end_verse), 
+				   2, 
+				   max);
+	gtk_widget_set_sensitive (d.sb_start_verse, FALSE);
+	gtk_widget_set_sensitive (d.sb_end_verse, FALSE);
+
 	
 	if(dist_license) {
 		gtk_widget_show(d.warning_label);
@@ -299,6 +350,10 @@ void gui_export_dialog(void)
 	
 	gtk_label_set_text (GTK_LABEL(d.lb_version), settings.MainWindowModule);	
 	gtk_label_set_text (GTK_LABEL(d.lb_key), settings.currentverse);
+	
+	g_signal_connect ((gpointer) d.rb_multi_verse, "toggled",
+		    G_CALLBACK (on_rb_multi_verse_toggled),
+		    NULL);
 
 	
 }
