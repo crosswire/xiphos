@@ -1545,12 +1545,7 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 #ifdef USE_GTKMOZEMBED
 		be->chapDisplay = new DialogChapDisp(t->html, t, be);
 #else
-		if(t->is_rtol)
-			be->dialogRTOLDisplay 
-			    = new DialogTextviewChapDisp(t->text,  t, be);
-		else	
-			be->chapDisplay 
-			    = new DialogChapDisp(t->html,  t, be); 
+		be->chapDisplay = new DialogChapDisp(t->html,  t, be); 
 #endif
 		be->init_SWORD(1);
 		if(key)
@@ -1565,8 +1560,7 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 		main_navbar_fill_book_combo(t->navbar);
 #else
 		t->navbar.module_name = g_string_new(mod_name);
-		t->navbar.key =  g_string_new(settings.currentverse);
-		//main_navbar_versekey_set(t->navbar, (char*)d->navbar.key->str); 
+		t->navbar.key =  g_string_new(settings.currentverse); 
 #endif
 		break;
 
@@ -1586,8 +1580,7 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 		main_navbar_fill_book_combo(t->navbar);
 #else
 		t->navbar.module_name = g_string_new(mod_name);
-		t->navbar.key =  g_string_new(settings.currentverse);
-		//main_navbar_versekey_set(t->navbar, (char*)d->navbar.key); 
+		t->navbar.key =  g_string_new(settings.currentverse); 
 #endif
 		break;
 

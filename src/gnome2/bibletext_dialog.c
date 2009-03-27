@@ -988,193 +988,6 @@ static gboolean on_button_release_event(GtkWidget *widget,
 	}
 	return FALSE;
 }
-
-static gboolean textview_button_press_event(GtkWidget *widget,
-					    GdkEventButton *event,
-					    DIALOG_DATA *t)
-{
-	switch (event->button) {
-	case 1:
-		break;
-	case 2:
-		break;
-	case 3:
-		//create_menu(t, event);
-		gui_menu_popup (NULL, t);
-		return TRUE;
-		break;
-	}
-	return FALSE;
-}
-
-static gboolean textview_button_release_event(GtkWidget * widget,
-					GdkEventButton * event,
-					gpointer data)
-{
-	switch (event->button) {
-	case 1:
-		break;
-	case 2:
-		break;
-	case 3:
-		break;
-	}
-	return FALSE;
-}
-
-
-
-static gint tag_event_handler(GtkTextTag *tag,
-			      GtkWidget *widget,
-			      GdkEvent *event,
-			      const GtkTextIter *iter,
-			      gpointer user_data)
-{
-	gint char_index;
-
-	char_index = gtk_text_iter_get_offset (iter);
-	//printf ("offset = %d", char_index);
-	switch (event->type)
-	{
-	case GDK_MOTION_NOTIFY:
-		printf ("Motion event at char %d tag `%s'\n",
-			char_index, tag->name);
-		return TRUE;
-		break;
-
-	case GDK_BUTTON_PRESS:
-		printf ("Button press at char %d tag `%s'\n",
-			char_index, tag->name);
-		switch(event->button.button){
-		case 1:
-			//return do_something_with_tag(tag, iter, user_data);
-			break;
-		case 2:
-		case 3:
-			break;
-		}
-
-		return TRUE;
-		break;
-
-	case GDK_2BUTTON_PRESS:
-		printf ("Double click at char %d tag `%s'\n",
-			char_index, tag->name);
-		return TRUE;
-		break;
-
-	case GDK_3BUTTON_PRESS:
-		printf ("Triple click at char %d tag `%s'\n",
-			char_index, tag->name);
-		return TRUE;
-		break;
-
-	case GDK_BUTTON_RELEASE:
-		printf ("Button release at char %d tag `%s'\n",
-			char_index, tag->name);
-		return TRUE;
-		break;
-
-	case GDK_KEY_PRESS:
-	case GDK_KEY_RELEASE:
-		printf ("Key event at char %d tag `%s'\n",
-			char_index, tag->name);
-		return TRUE;
-		break;
-
-	case GDK_ENTER_NOTIFY:
-		printf ("enter event at char %d tag `%s'\n",
-			char_index, tag->name);
-		return TRUE;
-		break;
-
-	case GDK_LEAVE_NOTIFY:
-		printf ("leave event at char %d tag `%s'\n",
-			char_index, tag->name);
-		return TRUE;
-		break;
-
-	case GDK_PROPERTY_NOTIFY:
-	case GDK_SELECTION_CLEAR:
-	case GDK_SELECTION_REQUEST:
-	case GDK_SELECTION_NOTIFY:
-	case GDK_PROXIMITY_IN:
-	case GDK_PROXIMITY_OUT:
-#if 0
-	case GDK_DRAG_ENTER:
-	case GDK_DRAG_LEAVE:
-	case GDK_DRAG_MOTION:
-	case GDK_DRAG_STATUS:
-	case GDK_DROP_START:
-	case GDK_DROP_FINISHED:
-#endif /* 0 */
-		return FALSE;
-
-	default:
-		return FALSE;
-		break;
-	}
-	return FALSE;
-}
-
-static void setup_tag (GtkTextTag *tag,
-		       gpointer user_data)
-{
-	g_signal_connect (G_OBJECT (tag),
-			  "event",
-			  G_CALLBACK (tag_event_handler),
-			  user_data);
-}
-
-static void create_text_tags(GtkTextBuffer *buffer)
-{
-	GtkTextTag *tag;
-	GdkColor color;
-
-	/* verse number tag verse style*/
-	tag = gtk_text_buffer_create_tag (buffer, "verseNumber", NULL);
-	setup_tag (tag, buffer);
-	color.red = 0;
-	color.green = 0;
-	color.blue = 0xffff;
-	g_object_set (G_OBJECT (tag),
-		      "foreground_gdk", &color,
-		      NULL);
-
-	/* current verse color tag */
-	tag = gtk_text_buffer_create_tag (buffer, "fg_currentverse", NULL);
-	color.red = 0;
-	color.green = 0xbbbb;
-	color.blue = 0;
-	g_object_set (G_OBJECT (tag),
-		      "foreground_gdk", &color,
-		      NULL);
-
-	/*  verse color tag */
-	tag = gtk_text_buffer_create_tag (buffer, "fg_verse", NULL);
-	color.red = 0;
-	color.green = 0;
-	color.blue = 0;
-	g_object_set (G_OBJECT (tag),
-		      "foreground_gdk", &color,
-		      NULL);
-
-	/* right to left tag */
-	tag = gtk_text_buffer_create_tag (buffer, "rtl_text", NULL);
-        g_object_set (G_OBJECT (tag),
-		      "wrap_mode", GTK_WRAP_WORD,
-		      "direction", GTK_TEXT_DIR_RTL,
-		      "indent", 0,
-		      "left_margin", 0,
-		      "right_margin", 0,
-		      NULL);
-
-	/* large tag */
-	tag = gtk_text_buffer_create_tag (buffer, "large", NULL);
-        g_object_set (G_OBJECT (tag),
-		      "scale", PANGO_SCALE_XX_LARGE,
-		      NULL);
-}
 #endif
 
 #ifdef USE_GTKMOZEMBED
@@ -1212,7 +1025,7 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 #ifndef USE_GTKMOZEMBED
 	GtkWidget *swVText;
 	//gchar *gdk_font = NULL;
-	gchar file[250];
+//	gchar file[250];
 #endif
 
 	vt->dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
@@ -1270,62 +1083,34 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 				       GTK_POLICY_ALWAYS);
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)swVText,
 					    settings.shadow_type);
-
-	if (!vt->is_rtol) {
-		vt->html = gtk_html_new();
-		gtk_widget_show(vt->html);
-		gtk_container_add(GTK_CONTAINER(swVText), vt->html);
-		gtk_html_load_empty(GTK_HTML(vt->html));
-		g_signal_connect(G_OBJECT(vt->html), "on_url",
-				   G_CALLBACK(dialog_url), (gpointer) vt);
-		g_signal_connect(GTK_OBJECT(vt->html), "link_clicked",
-				   G_CALLBACK(link_clicked), vt);
-		g_signal_connect(GTK_OBJECT(vt->html),
-				   "motion_notify_event",
-				   G_CALLBACK
-				   (on_dialog_motion_notify_event), vt);
-		g_signal_connect(GTK_OBJECT(vt->html),
-				   "button_release_event",
-				   G_CALLBACK
-				   (on_button_release_event),
-				   (DIALOG_DATA *) vt);
-		g_signal_connect(GTK_OBJECT(vt->html),
-				   "button_press_event",
-				   G_CALLBACK
-				   (on_text_button_press_event),
-				   (DIALOG_DATA *) vt);
-		g_signal_connect(GTK_OBJECT(vt->html),
-				   "url_requested",
-				   G_CALLBACK
-				   (url_requested),
-				   (DIALOG_DATA *) vt);
-	} else {
-		// * use gtktextview for right to left text * //
-		sprintf(file, "%s/fonts.conf", settings.gSwordDir);
-		vt->text = gtk_text_view_new ();
-		gtk_widget_show (vt->text);
-		gtk_container_add (GTK_CONTAINER (swVText), vt->text);
-		gtk_text_view_set_editable (GTK_TEXT_VIEW (vt->text), FALSE);
-		text_buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW (vt->text));
-		create_text_tags(text_buffer);
-		gtk_text_view_set_wrap_mode(GTK_TEXT_VIEW (vt->text), GTK_WRAP_WORD);
-
-		g_signal_connect(GTK_OBJECT(vt->text),
-				   "button_press_event",
-				   G_CALLBACK
-				   (textview_button_press_event),
-				   (DIALOG_DATA *) vt);
-		g_signal_connect(GTK_OBJECT(vt->text),
-				   "button_release_event",
-				   G_CALLBACK
-				   (textview_button_release_event),
-				   (DIALOG_DATA *) vt);
-		g_signal_connect(GTK_OBJECT(vt->text),
-				   "url_requested",
-				   G_CALLBACK
-				   (url_requested),
-				   (DIALOG_DATA *) vt);
-	}
+	vt->html = gtk_html_new();
+	gtk_widget_show(vt->html);
+	gtk_container_add(GTK_CONTAINER(swVText), vt->html);
+	gtk_html_load_empty(GTK_HTML(vt->html));
+	g_signal_connect(G_OBJECT(vt->html), "on_url",
+			   G_CALLBACK(dialog_url), (gpointer) vt);
+	g_signal_connect(GTK_OBJECT(vt->html), "link_clicked",
+			   G_CALLBACK(link_clicked), vt);
+	g_signal_connect(GTK_OBJECT(vt->html),
+			   "motion_notify_event",
+			   G_CALLBACK
+			   (on_dialog_motion_notify_event), vt);
+	g_signal_connect(GTK_OBJECT(vt->html),
+			   "button_release_event",
+			   G_CALLBACK
+			   (on_button_release_event),
+			   (DIALOG_DATA *) vt);
+	g_signal_connect(GTK_OBJECT(vt->html),
+			   "button_press_event",
+			   G_CALLBACK
+			   (on_text_button_press_event),
+			   (DIALOG_DATA *) vt);
+	g_signal_connect(GTK_OBJECT(vt->html),
+			   "url_requested",
+			   G_CALLBACK
+			   (url_requested),
+			   (DIALOG_DATA *) vt);
+	
 
 	frame = gtk_frame_new(NULL);
 	gtk_widget_show(frame);

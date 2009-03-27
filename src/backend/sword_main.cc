@@ -26,7 +26,6 @@
 #include <swmodule.h>
 #include <localemgr.h>
 #include <swversion.h>
-#include <thmlosis.h>
 
 #include <markupfiltmgr.h>
 #include <swlocale.h>
@@ -62,9 +61,6 @@ BackEnd::BackEnd()
 {	
 	main_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
 	display_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
-
-	//thml2osis = new  ThMLOSIS();
-	//osis2html = new  GS_OSISHTMLHREF();
 	
 	display_mod = NULL;	
 	tree_key = NULL;	
@@ -145,7 +141,7 @@ void BackEnd::init_SWORD(int gsType)
 				display_mod->setDisplay(entryDisplay);
 			}
 		}	
-	} else if(gsType == 2) {	
+	} else if(gsType == 2) { // search
 		for (it = display_mgr->Modules.begin(); it != display_mgr->Modules.end(); it++) {	
 			display_mod = (*it).second;
 			display_mod->setDisplay(entryDisplay);
