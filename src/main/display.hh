@@ -82,18 +82,6 @@ public:
 private:
 };
 
-#ifndef USE_GTKMOZEMBED
-class GTKTextviewChapDisp : public GTKEntryDisp {
-public:
-	GTKTextviewChapDisp(GtkWidget *_gtkText,
-			    BackEnd   *_be)
-	    : GTKEntryDisp(_gtkText, _be)
-	{
-	}
-	virtual char Display(SWModule &imodule);
-};
-#endif
-
 class DialogEntryDisp : public SWDisplay {
 public:
 	DialogEntryDisp(GtkWidget   *_gtkText,
@@ -137,18 +125,6 @@ public:
 	virtual char Display(SWModule &imodule);
 };
 
-#ifndef USE_GTKMOZEMBED
-class DialogTextviewChapDisp : public  DialogEntryDisp {
-public:
-	DialogTextviewChapDisp(GtkWidget   *_gtkText,
-			       DIALOG_DATA *_d,
-			       BackEnd     *_be)
-	    : DialogEntryDisp(_gtkText, _d, _be)
-	{
-	}
-	virtual char Display(SWModule &imodule);
-};
-#endif
 
 class GTKPrintEntryDisp : public SWDisplay {
 public:	
