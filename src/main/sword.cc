@@ -1396,23 +1396,10 @@ void main_refresh_all(void)
     
 void main_setup_displays(void)
 { 
-/*
-#ifdef USE_GTKMOZEMBED
-	backend->textDisplay = new GtkMozChapDisp(widgets.html_text,backend);
-//	backend->RTOLDisplay = new GtkMozChapDisp(widgets.html_text,backend);
-	backend->commDisplay = new GTKMozEntryDisp(widgets.html_comm,backend);
-	backend->bookDisplay = new GTKMozEntryDisp(widgets.html_book,backend);
-	backend->dictDisplay = new GTKMozEntryDisp(widgets.html_dict,backend);
-
-#else*/
-#ifndef USE_GTKMOZEMBED
-	backend->RTOLDisplay = new GTKTextviewChapDisp(widgets.textview,backend);
-#endif
 	backend->textDisplay = new GTKChapDisp(widgets.html_text,backend);
 	backend->commDisplay = new GTKEntryDisp(widgets.html_comm,backend);
 	backend->bookDisplay = new GTKEntryDisp(widgets.html_book,backend);
 	backend->dictDisplay = new GTKEntryDisp(widgets.html_dict,backend);
-//#endif
 }
 
 const char *main_get_module_language(const char *module_name)
