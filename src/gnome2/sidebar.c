@@ -48,6 +48,7 @@
 #include "gui/widgets.h"
 #include "gui/search_sidebar.h"
 #include "gui/tabbed_browser.h"
+#include "gui/search_dialog.h"
 
 
 #ifdef USE_GTKMOZEMBED
@@ -577,11 +578,10 @@ static gboolean on_treeview_button_press_event(GtkWidget * widget,
 
 	if (event->type == GDK_2BUTTON_PRESS)
 	{
-		gchar *val_key;
-		main_display_bible(NULL, key);
-		main_display_commentary(NULL, key);
-		val_key = main_update_nav_controls(settings.currentverse);
-		g_free(val_key);
+		if (verse_selected)
+			g_free(verse_selected);
+		verse_selected = g_strdup_printf("sword:///%s", key);
+		main_url_handler(verse_selected, TRUE);
 	}	
 	switch (event->button) {
 	case 3:
