@@ -1191,6 +1191,7 @@ static void int_display(SWBuf& text, gchar *key, char *mod_name[])
 	gchar *file = NULL;
 	gint cur_verse, cur_chapter, i = 1, j;
 	char *cur_book;
+	gboolean is_module[5] = { FALSE, FALSE, FALSE, FALSE, FALSE };
 
 	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.notebook_bible_parallel))) return;
 
@@ -1212,6 +1213,12 @@ static void int_display(SWBuf& text, gchar *key, char *mod_name[])
 	// quick cache of fonts.  (mod_name was passed in.)
 	file = g_strdup_printf("%s/fonts.conf", settings.gSwordDir);
 	for (j = 0; j < 5; ++j) {
+		// determine module presence just once each for this routine.
+		is_module[j] = (mod_name[j] &&
+				*(mod_name[j]) &&
+				backend->is_module(mod_name[j]));
+
+		// collect decorations.
 		font_size_tmp[j] = get_conf_file_item(file, mod_name[j], "Fontsize");
 		if (!font_size_tmp[j]) {
 			font_size_tmp[j] =
@@ -1285,20 +1292,20 @@ static void int_display(SWBuf& text, gchar *key, char *mod_name[])
 			g_free(num);
 			text += str;
 
-			if(is_rtol)
-				text += "<br><DIV ALIGN=right>";
+			if (is_module[j]) {
+				if (is_rtol)
+					text += "<br><DIV ALIGN=right>";
 
-			if (mod_name[j]) {
 				utf8str = backend_p->get_render_text
 				    (mod_name[j], tmpkey);
 				if (strlen(utf8str)) {
 					text += utf8str;
 					free(utf8str);
 				}
-			}
 
-			if(is_rtol)
-				text += "</DIV>";
+				if (is_rtol)
+					text += "</DIV>";
+			}
 
 			text += "</font></td>";
 		}
