@@ -1,6 +1,7 @@
 2009-03-27  karl <charcoal@users.sf.net>
 
 	* fix verse list double-click to use main_url_handler().
+	* fix failure to check for module in parallel tab.
 
 2009-03-26  terry <tbiggs@users.sourceforge.net>
 
