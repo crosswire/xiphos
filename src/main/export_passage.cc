@@ -40,20 +40,19 @@
 
 int main_get_max_verses (void)
 {
-	SWMgr *mgr = backend->get_main_mgr();
-	SWModule *mod = mgr->Modules[settings.MainWindowModule];
-	mod->setKey(settings.currentverse);
-	VerseKey *key = (VerseKey *)(SWKey *)(*mod);
-	return key->getVerseMax();
+	VerseKey key = settings.currentverse;
+#ifdef SWORD_MULTIVERSE
+	return (key.getVerseMax());
+#else
+	return (key.books[vkey.Testament()-1] [key.Book()-1].
+				 versemax[key.Chapter()-1]);
+#endif
 }
 
 int main_get_current_verse (void)
 {
-	SWMgr *mgr = backend->get_main_mgr();
-	SWModule *mod = mgr->Modules[settings.MainWindowModule];
-	mod->setKey(settings.currentverse);
-	VerseKey *key = (VerseKey *)(SWKey *)(*mod);
-	return key->Verse();
+	VerseKey key = settings.currentverse;
+	return key.Verse();
 }
 
 static void _copy_to_clipboard (char* text,int len)

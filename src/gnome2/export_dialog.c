@@ -308,6 +308,7 @@ void gui_export_dialog(void)
 	gint dist_license, curVerse;
 	gdouble max;
 	
+	
 	dist_license = _check_for_distribution_license(settings.MainWindowModule);
 	
 	glade_file = gui_general_user_file("export-dialog.glade", FALSE);
