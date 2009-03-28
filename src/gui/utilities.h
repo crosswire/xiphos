@@ -81,6 +81,8 @@ char *image_locator(char *image);
 GtkWidget *pixmap_finder(char *image);
 GdkPixbuf *pixbuf_finder(char *image, GError **error);
 
+void HtmlOutput(char *text, GtkWidget *gtkText, MOD_FONT *mf, char *anchor);
+
 enum {
 	LANGSET_BIBLE,
 	LANGSET_COMMENTARY,

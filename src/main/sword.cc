@@ -1832,7 +1832,7 @@ main_deformat_number(char *digitstring)
  * Return value
  *   int
  */ 
-static SWBuf blank_html_content("<html><head></head><body> </body></html>");
+static char blank_html_content[] = "<html><head></head><body> </body></html>";
 
 void main_flush_widgets_content(void)
 {
