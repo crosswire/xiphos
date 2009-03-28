@@ -805,13 +805,17 @@ on_modules_list_button_press(GtkWidget * widget,
 	char *description, *about;
 	const char *version;
 
+	
 	if (event->type != GDK_2BUTTON_PRESS)
 		return FALSE;
-
+	
 	selection = gtk_tree_view_get_selection((GtkTreeView *) widget);
 	model = gtk_tree_view_get_model(GTK_TREE_VIEW(widget));
-
+	
 	if (!gtk_tree_selection_get_selected(selection, NULL, &selected))
+		return FALSE;
+	
+	if(gtk_tree_model_iter_has_child (GTK_TREE_MODEL(model), &selected))
 		return FALSE;
 
 	gtk_tree_model_get(model, &selected, COLUMN_ABOUT, &about, -1);
@@ -825,7 +829,9 @@ on_modules_list_button_press(GtkWidget * widget,
 					      about,
 					      version);
 	}
-
+	g_free (about);
+	g_free (description);
+	g_free ((gchar*)version);
 	return FALSE;
 }
 
