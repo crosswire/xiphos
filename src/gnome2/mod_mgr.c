@@ -41,6 +41,7 @@
 #include "gui/sidebar.h"
 #include "gui/utilities.h"
 #include "gui/widgets.h"
+#include "gui/about_modules.h"
 
 #include "main/lists.h"
 #include "main/mod_mgr.h"
@@ -801,7 +802,8 @@ on_modules_list_button_press(GtkWidget * widget,
 	GtkTreeSelection *selection;
 	GtkTreeModel *model;
 	GtkTreeIter selected;
-	char *about;
+	char *description, *about;
+	const char *version;
 
 	if (event->type != GDK_2BUTTON_PRESS)
 		return FALSE;
@@ -813,10 +815,15 @@ on_modules_list_button_press(GtkWidget * widget,
 		return FALSE;
 
 	gtk_tree_model_get(model, &selected, COLUMN_ABOUT, &about, -1);
+	gtk_tree_model_get(model, &selected, COLUMN_DESC, &description, -1);
+	gtk_tree_model_get(model, &selected, COLUMN_AVAILABLE_VERSION, &version, -1);
+
 	if (!about || ((*about) == '\0')) {
 		gui_generic_warning(_("There is no About for that line."));
 	} else {
-		GS_message((about));
+		gui_core_display_about_dialog(description,
+					      about,
+					      version);
 	}
 
 	return FALSE;

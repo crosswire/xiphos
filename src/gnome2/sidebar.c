@@ -702,7 +702,7 @@ static void on_open_in_tab_activate(GtkMenuItem * menuitem,
 static void on_about2_activate(GtkMenuItem * menuitem,
 			       gpointer user_data)
 {
-	gui_display_about_module_dialog(buf_module, FALSE);
+	gui_display_about_module_dialog(buf_module);
 	g_free(buf_module);
 	buf_module = NULL;
 }

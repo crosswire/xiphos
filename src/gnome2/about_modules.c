@@ -31,14 +31,15 @@
 #include <gtkhtml/gtkhtml.h>
 #include "gui/html.h"
 #endif
+
 #include "gui/about_modules.h"
 #include "gui/utilities.h"
 #include "gui/xiphos.h"
 #include "gui/widgets.h"
 
-
 #include "main/sword.h"
 #include "main/settings.h"
+#include "main/display.hh"
 
 /******************************************************************************
  * static
@@ -88,49 +89,44 @@ static void
 about_module_display(GString * str,
 		     gchar * text)
 {
-	gint i, len = strlen(text);
 	gboolean center = FALSE;
 
-	for (i = 0; i < len; i++) {
-		if (text[i] == '\\')	// a RTF command
-		{
-			if ((text[i + 1] == 'p') &&
-			    (text[i + 2] == 'a') &&
-			    (text[i + 3] == 'r') &&
-			    (text[i + 4] == 'd')) {
-
+	for (/* */; *text; ++text) {
+		if (*text == '\\') {	// a RTF command
+			if ((text[1] == 'p') &&
+			    (text[2] == 'a') &&
+			    (text[3] == 'r') &&
+			    (text[4] == 'd')) {
 				if (center) {
 					str = g_string_append(str, "</center>");
 					center = FALSE;
 				}
-				i += 4;
+				text += 4;
 				continue;
 			}
-			if ((text[i + 1] == 'p') && (text[i + 2] == 'a')
-			    && (text[i + 3] == 'r')) {
+			if ((text[1] == 'p') &&
+			    (text[2] == 'a') &&
+			    (text[3] == 'r')) {
 				str = g_string_append(str, "<br>\n");
-				i += 3;
+				text += 3;
 				continue;
 			}
-			if (text[i + 1] == ' ') {
-				i += 1;
+			if ((text[1] == ' ') ||
+			    (text[1] == '\n')) {
+				text += 1;
 				continue;
 			}
-			if (text[i + 1] == '\n') {
-				i += 1;
-				continue;
-			}
-			if ((text[i + 1] == 'q')
-			    && (text[i + 2] == 'c')) {
+			if ((text[1] == 'q') &&
+			    (text[2] == 'c')) {
 				if (!center) {
 					str = g_string_append(str, "<center>");
 					center = TRUE;
 				}
-				i += 2;
+				text += 2;
 				continue;
 			}
 		}
-		str = g_string_append_c(str, text[i]);
+		str = g_string_append_c(str, *text);
 	}
 }
 
@@ -333,6 +329,59 @@ gui_create_about_modules(void)
 }
 
 /******************************************************************************
+ * Name
+ *   gui_core_display_about_dialog
+ *
+ * Synopsis
+ *   #include "about_modules.h"
+ *
+ *   void gui_core_display_about_dialog(gchar * desc, gchar * abouttext, gchar * version)
+ *
+ * Description
+ *   internal routine to carry out About dialog manufacture.
+ *
+ * Return value
+ *   void
+ */
+
+void
+gui_core_display_about_dialog(gchar * desc,
+			      gchar * abouttext,
+			      const gchar * version)
+{
+	GtkWidget *aboutbox;	//-- pointer to about dialog
+	GString *str = g_string_new(NULL);
+	GString *description = g_string_new(NULL);
+	GString *text = g_string_new(NULL);
+	static const char *html_start =
+	    "<html><head><meta http-equiv=\"content-type\" "
+	    "content=\"text/html; charset=utf-8\"></head><body>";
+	static const char *html_end = "</body></html>";
+
+	g_string_printf(description,
+		"<center><font color=\"#000fcf\"><b>%s</b></font><hr>%s %s</center><br>",
+		desc,
+		(version) ? "<br>Sword module version" : "",
+		(version) ? version : "");
+	aboutbox = gui_create_about_modules();
+	gtk_widget_show(aboutbox);
+
+	about_module_display(str, ((abouttext && *abouttext)
+				   ? abouttext
+				   : _("The module has no About information.")));
+
+	g_string_append_len(text, html_start, strlen(html_start));
+	g_string_append_len(text, description->str, strlen(description->str));
+	g_string_append_len(text, str->str, strlen(str->str));
+	g_string_append_len(text, html_end, strlen(html_end));
+	HtmlOutput(text->str, text_html, NULL, NULL);
+
+	g_string_free(text, TRUE);
+	g_string_free(str, TRUE);
+	g_string_free(description, TRUE);
+}
+
+/******************************************************************************
  * public
  *****************************************************************************/
 
@@ -343,7 +392,7 @@ gui_create_about_modules(void)
  * Synopsis
  *   #include "about_modules.h"
  *
- *   void gui_display_about_module_dialog(gchar * modname, gboolean isGBS)
+ *   void gui_display_about_module_dialog(gchar * modname)
  *
  * Description
  *
@@ -353,73 +402,18 @@ gui_create_about_modules(void)
  */
 
 void
-gui_display_about_module_dialog(gchar * modname,
-				gboolean isGBS)
+gui_display_about_module_dialog(gchar *modname)
 {
-	GtkWidget *aboutbox = NULL;	//-- pointer to about dialog
-	GtkWidget *text;	//-- pointer to text widget of dialog
-	gchar *buf = NULL,	//-- pointer to text buffer for label (mod name)
-	*bufabout;		//-- pointer to text buffer for text widget (mod about)
-	// description[500];
-	gint len, maxlen;
-	GString *str = g_string_new(NULL);
-	GString *description = g_string_new(NULL);
-	const gchar * version = NULL;
-
-	bufabout = NULL;
+	gchar *buf;		//-- pointer to text buffer for label (mod name)
+	gchar *bufabout;	//-- pointer to text buffer for text widget (mod about)
+	const gchar * version;
 
 	buf = main_get_module_description(modname);
 	bufabout = main_get_mod_about_info(modname);
 	version = main_get_mod_config_entry(modname, "Version");
 
-	g_string_printf(description,
-		"<center><FONT COLOR=\"#000FCF\"><b>%s</b></font><HR>%s %s</center><br>",
-		buf,
-		(version)?"<br>Sword module version":"",
-		(version)?version:"");
-	if (!isGBS) {
-		aboutbox = gui_create_about_modules();
-		gtk_widget_show(aboutbox);
-	}
-
-	if (bufabout) {
-		len = strlen(bufabout);
-		maxlen = len * 8;
-
-		if (!isGBS) {
-			text = text_html;	/* get text widget */
-		} else {
-			text = widgets.html_book;
-		}
-
-		about_module_display(str, bufabout);	/* send about info to display function filter from rtf to html*/
-#ifdef USE_GTKMOZEMBED
-		gecko_html_open_stream(GECKO_HTML(text), "text/html");
-		gecko_html_write(GECKO_HTML(text), "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head><body>",
-				 strlen("<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head><body>"));
-		gecko_html_write(GECKO_HTML(text),description->str,
-				 description->len);
-		gecko_html_write(GECKO_HTML(text),str->str, str->len);
-		gecko_html_write(GECKO_HTML(text), "</body></html>",
-				 strlen("</body></html>"));
-		gecko_html_close(GECKO_HTML(text));
-#else
-		gui_begin_html(text, FALSE);
-		gui_display_html(text, "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head><body>",
-				 strlen("<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head><body>"));
-		gui_display_html(text, description->str,
-				 description->len);
-		gui_display_html(text, str->str, str->len);
-
-		gui_display_html(text, "</body></html>",
-				 strlen("</body></html>"));
-		gui_end_html(text);
-#endif
-	} else
- 		GS_warning(("gui_display_about_module_dialog: oops"));
+	gui_core_display_about_dialog(buf, bufabout, version);
 
 	if (bufabout)
 		g_free(bufabout);
-	g_string_free(str,TRUE);
-	g_string_free(description,TRUE);
 }

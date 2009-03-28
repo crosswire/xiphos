@@ -45,6 +45,13 @@
 #include "main/sword.h"
 #include "main/url.hh"
 
+#ifdef USE_GTKMOZEMBED
+#include "gecko/gecko-html.h"
+#else
+#include <gtkhtml/gtkhtml.h>
+#include <gtkhtml/htmltypes.h>
+#endif /* USE_GTKMOZEMBED */
+
 
 gint gui_of2tf(const gchar * on_off)
 {
@@ -1184,6 +1191,65 @@ pixbuf_finder(char *image, GError **error)
 	p = gdk_pixbuf_new_from_file(image_file, error);
 	g_free(image_file);
 	return p;
+}
+
+
+//
+// utility function to write out HTML.
+//
+#define min(x,y)	((x) < (y) ? (x) : (y))
+
+void
+HtmlOutput(char *text,
+	   GtkWidget *gtkText,
+	   MOD_FONT *mf,
+	   char *anchor)
+{
+	int len = strlen(text), offset = 0, write_size;
+
+#ifdef USE_GTKMOZEMBED
+	GeckoHtml *html = GECKO_HTML(gtkText);
+	gecko_html_open_stream(html,"text/html");
+#else
+	GtkHTML *html = GTK_HTML(gtkText);
+	PangoContext* pc = gtk_widget_create_pango_context(gtkText);
+	PangoFontDescription *desc = pango_context_get_font_description(pc);
+	pango_font_description_set_family(
+	    desc, ((mf && mf->old_font) ? mf->old_font : "Serif"));
+	gtk_widget_modify_font(gtkText, desc);
+	GtkHTMLStream *stream = gtk_html_begin(html);
+	//GtkHTMLStreamStatus status;
+	gboolean was_editable = gtk_html_get_editable(html);
+	if (was_editable)
+		gtk_html_set_editable(html, FALSE);
+#endif
+
+	// html widgets are uptight about being handed
+	// huge quantities of text -- producer/consumer problem,
+	// and we mustn't overload the receiver.  10k chunks.
+
+	while (len > 0) {
+		write_size = min(10000, len);
+#ifdef USE_GTKMOZEMBED
+		gecko_html_write(html, text+offset, write_size);
+#else
+		gtk_html_write(html, stream, text+offset, write_size);
+#endif
+		offset += write_size;
+		len -= write_size;
+	}
+
+#ifdef USE_GTKMOZEMBED
+	gecko_html_close(html);
+	if (anchor)
+		gecko_html_jump_to_anchor(html, anchor);
+#else
+	gtk_html_end(html, stream, GTK_HTML_STREAM_OK);
+	gtk_html_set_editable(html, was_editable);
+	if (anchor)
+		gtk_html_jump_to_anchor(html, anchor);
+	gtk_html_flush(html);
+#endif
 }
 
 /******   end of file   ******/
