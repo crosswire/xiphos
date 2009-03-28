@@ -73,6 +73,7 @@ enum {
 	COLUMN_INSTALLED_VERSION,
 	COLUMN_FASTREADY,
 	COLUMN_LOCKED,
+	COLUMN_ABOUT,
 	COLUMN_DIFFERENT,
 	COLUMN_AVAILABLE_VERSION,
 	COLUMN_INSTALLSIZE,
@@ -670,6 +671,7 @@ add_module_to_language_folder(GtkTreeModel *model,
 					   info->old_version,
 					   COLUMN_FASTREADY, fasticon,
 					   COLUMN_LOCKED, locked,
+					   COLUMN_ABOUT, info->about,
 					   COLUMN_DIFFERENT, refresh,
 					   COLUMN_AVAILABLE_VERSION,
 					   info->new_version,
@@ -789,6 +791,37 @@ add_language_folder(GtkTreeModel *model,
 			language, 
 			-1);
 }
+
+
+static gboolean
+on_modules_list_button_press(GtkWidget * widget,
+			     GdkEventButton * event,
+			     gpointer data)
+{
+	GtkTreeSelection *selection;
+	GtkTreeModel *model;
+	GtkTreeIter selected;
+	char *about;
+
+	if (event->type != GDK_2BUTTON_PRESS)
+		return FALSE;
+
+	selection = gtk_tree_view_get_selection((GtkTreeView *) widget);
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(widget));
+
+	if (!gtk_tree_selection_get_selected(selection, NULL, &selected))
+		return FALSE;
+
+	gtk_tree_model_get(model, &selected, COLUMN_ABOUT, &about, -1);
+	if (!about || ((*about) == '\0')) {
+		gui_generic_warning(_("There is no About for that line."));
+	} else {
+		GS_message((about));
+	}
+
+	return FALSE;
+}
+
 
 /******************************************************************************
  * Name
@@ -1036,6 +1069,7 @@ load_module_tree(GtkTreeView * treeview,
 		}
 
 		g_free(info->name);
+		g_free(info->about);
 		g_free(info->type);
 		g_free(info->new_version);
 		g_free(info->installsize);
@@ -1043,6 +1077,11 @@ load_module_tree(GtkTreeView * treeview,
 		tmp2 = g_list_next(tmp2);
 	}
 	g_list_free(tmp);
+
+	g_signal_connect((gpointer) treeview,
+			 "button_press_event",
+			 G_CALLBACK
+			 (on_modules_list_button_press), NULL);
 }
 
 
@@ -1253,13 +1292,12 @@ add_columns(GtkTreeView * treeview,
 	GtkTreeModel *model = gtk_tree_view_get_model(treeview);
 	GtkWidget *image;
 
-	/* column for sword module name */
+	/* -- column for sword module name -- */
 	renderer = gtk_cell_renderer_text_new();
-
 	column =
-	    gtk_tree_view_column_new_with_attributes(_("Module Name"),
-						     renderer, "text",
-						     COLUMN_NAME, NULL);
+	    gtk_tree_view_column_new_with_attributes(_("Module Name"), renderer,
+						     "text", COLUMN_NAME,
+						     NULL);
 					/* fixed sizing (200 pixels) */
 	gtk_tree_view_column_set_sizing(GTK_TREE_VIEW_COLUMN(column),
 					GTK_TREE_VIEW_COLUMN_FIXED);
@@ -1267,7 +1305,7 @@ add_columns(GtkTreeView * treeview,
 					     (column), 200);	
 	gtk_tree_view_append_column(treeview, column);
 
-	/* installed */
+	/* -- installed -- */
 	column = gtk_tree_view_column_new();
 	image = (remove
 		 ? gtk_image_new_from_stock("gnome-stock-blank",
@@ -1276,7 +1314,9 @@ add_columns(GtkTreeView * treeview,
 					    GTK_ICON_SIZE_MENU));
 	gtk_widget_show(image);
 	gtk_widget_set_tooltip_text(image,
-				    _("A checkmark means this module is already installed"));
+				    (remove
+				     ? _("A checkmark means this module is already installed")
+				     : ""));
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
 	gtk_tree_view_column_set_widget(column, image);
 	gtk_tree_view_column_pack_start(column, renderer, TRUE);
@@ -1285,7 +1325,7 @@ add_columns(GtkTreeView * treeview,
 					    NULL);
 	gtk_tree_view_append_column(treeview, column);
 
-	/* toggle choice */
+	/* -- toggle choice -- */
 	renderer = gtk_cell_renderer_toggle_new();
 	g_signal_connect(renderer, "toggled",
 			 G_CALLBACK(fixed_toggled), model);
@@ -1315,7 +1355,7 @@ add_columns(GtkTreeView * treeview,
 					     (column), 25);
 	gtk_tree_view_append_column(treeview, column);
 
-	/* installed version */
+	/* -- installed version -- */
 	renderer = gtk_cell_renderer_text_new();
 	column =
 	    gtk_tree_view_column_new_with_attributes(_("Installed"),
@@ -1324,7 +1364,7 @@ add_columns(GtkTreeView * treeview,
 						     NULL);
 	gtk_tree_view_append_column(treeview, column);
 
-	/* fast index ready */
+	/* -- fast index ready -- */
 	column = gtk_tree_view_column_new();
 	image = pixmap_finder("indexed-16.png");
 	gtk_widget_show(image);
@@ -1342,7 +1382,7 @@ add_columns(GtkTreeView * treeview,
 					     (column), 25);
 	gtk_tree_view_append_column(treeview, column);
 
-	/* locked */
+	/* -- locked -- */
 	column = gtk_tree_view_column_new();
 	image = pixmap_finder("epiphany-secure.png");
 	gtk_widget_show(image);
@@ -1360,10 +1400,25 @@ add_columns(GtkTreeView * treeview,
 					     (column), 25);
 	gtk_tree_view_append_column(treeview, column);
 
+	/* -- About content (invisible) -- */
+	renderer = gtk_cell_renderer_text_new();
+	column =
+	    gtk_tree_view_column_new_with_attributes(_("About"), renderer,
+						     "text", COLUMN_ABOUT,
+						     NULL);
+	/* column not shown */
+	gtk_tree_view_column_set_visible(column, FALSE);
+					/* fixed sizing (2 pixels) */
+	gtk_tree_view_column_set_sizing(GTK_TREE_VIEW_COLUMN(column),
+					GTK_TREE_VIEW_COLUMN_FIXED);
+	gtk_tree_view_column_set_fixed_width(GTK_TREE_VIEW_COLUMN
+					     (column), 2);	
+	gtk_tree_view_append_column(treeview, column);
+
 	if (remove)
 		return;	/* no more fields needed */
 
-	/* refresh/update */
+	/* -- refresh/update -- */
 	column = gtk_tree_view_column_new();
 	image = gtk_image_new_from_stock(GTK_STOCK_REFRESH,
 					 GTK_ICON_SIZE_MENU);
@@ -1377,7 +1432,7 @@ add_columns(GtkTreeView * treeview,
 					    NULL);
 	gtk_tree_view_append_column(treeview, column);
 
-	/* available version */
+	/* -- available version -- */
 	renderer = gtk_cell_renderer_text_new();
 	column =
 	    gtk_tree_view_column_new_with_attributes(_("Available"),
@@ -1386,7 +1441,7 @@ add_columns(GtkTreeView * treeview,
 						     NULL);
 	gtk_tree_view_append_column(treeview, column);
 
-	/* install size */
+	/* -- install size -- */
 	renderer = gtk_cell_renderer_text_new();
 	column =
 	    gtk_tree_view_column_new_with_attributes(_("Size"),
@@ -1395,7 +1450,7 @@ add_columns(GtkTreeView * treeview,
 						     NULL);
 	gtk_tree_view_append_column(treeview, column);
 
-	/* description */
+	/* -- description -- */
 	renderer = gtk_cell_renderer_text_new();
 	column =
 	    gtk_tree_view_column_new_with_attributes(_("Description"),
@@ -1550,6 +1605,7 @@ create_model(void)
 				   G_TYPE_STRING,	/* installed verssion */
 				   GDK_TYPE_PIXBUF,	/* fastready */
 				   GDK_TYPE_PIXBUF,	/* locked */
+				   G_TYPE_STRING,	/* about */
 				   GDK_TYPE_PIXBUF,	/* refresh */
 				   G_TYPE_STRING,	/* available version */
 				   G_TYPE_STRING,	/* size */
@@ -2539,7 +2595,8 @@ setup_treeviews_install_remove(GtkTreeView * install, GtkTreeView * remove)
 	model = create_model();
 	gtk_tree_view_set_model(install, model);
 	add_columns(install, FALSE);
-	model =  create_model();	
+
+	model =  create_model();
 	gtk_tree_view_set_model(remove, model);
 	add_columns(remove, TRUE);
 }
