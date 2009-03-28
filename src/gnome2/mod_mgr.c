@@ -793,6 +793,31 @@ add_language_folder(GtkTreeModel *model,
 			-1);
 }
 
+static gboolean
+on_modules_list_button_release(GtkWidget * widget,
+			     GdkEventButton * event,
+			     gpointer data)
+{
+	GtkTreeSelection *selection;
+	GtkTreeModel *model;
+	GtkTreeIter selected;
+	GtkTreePath *path;
+	
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW(data));
+	
+	if (!gtk_tree_selection_get_selected (selection, &model, &selected))
+		return FALSE;
+
+	path = gtk_tree_model_get_path (model, &selected);
+	if (gtk_tree_view_row_expanded (GTK_TREE_VIEW(data), path))
+	       gtk_tree_view_collapse_row ( GTK_TREE_VIEW(data), path );
+        else
+	       gtk_tree_view_expand_row ( GTK_TREE_VIEW(data), path, FALSE );
+	gtk_tree_path_free ( path );
+	return TRUE;
+}
+
+
 
 static gboolean
 on_modules_list_button_press(GtkWidget * widget,
@@ -804,19 +829,19 @@ on_modules_list_button_press(GtkWidget * widget,
 	GtkTreeIter selected;
 	char *description, *about;
 	const char *version;
-
 	
 	if (event->type != GDK_2BUTTON_PRESS)
 		return FALSE;
 	
-	selection = gtk_tree_view_get_selection((GtkTreeView *) widget);
-	model = gtk_tree_view_get_model(GTK_TREE_VIEW(widget));
+	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(widget));
+	// model is set in gtk_tree_selection_get_selected)()
+	//model = gtk_tree_view_get_model(GTK_TREE_VIEW(data));
 	
-	if (!gtk_tree_selection_get_selected(selection, NULL, &selected))
+	if (!gtk_tree_selection_get_selected(selection, &model, &selected))
 		return FALSE;
-	
+
 	if(gtk_tree_model_iter_has_child (GTK_TREE_MODEL(model), &selected))
-		return FALSE;
+		return TRUE;	
 
 	gtk_tree_model_get(model, &selected, COLUMN_ABOUT, &about, -1);
 	gtk_tree_model_get(model, &selected, COLUMN_DESC, &description, -1);
@@ -832,7 +857,7 @@ on_modules_list_button_press(GtkWidget * widget,
 	g_free (about);
 	g_free (description);
 	g_free ((gchar*)version);
-	return FALSE;
+	return TRUE;
 }
 
 
@@ -1095,6 +1120,10 @@ load_module_tree(GtkTreeView * treeview,
 			 "button_press_event",
 			 G_CALLBACK
 			 (on_modules_list_button_press), NULL);
+	g_signal_connect((gpointer) treeview,
+			 "button_release_event",
+			 G_CALLBACK
+			 (on_modules_list_button_release), treeview);
 }
 
 
@@ -2781,6 +2810,34 @@ on_comboboxentry_remote_changed(GtkComboBox *combobox, gpointer user_data)
 	remote_source = g_strdup(gtk_entry_get_text(GTK_ENTRY(GTK_BIN(combobox)->child)));
 }
 
+/*
+static void on_install_selection_changed_cb (GtkTreeSelection * selection,
+					     gpointer data)
+{
+	GtkTreeModel *model;
+	GtkTreeIter selected;
+	GtkTreePath *path;
+	GS_message(("\n\non_install_selection_changed_cb\n\n"));
+	if (!gtk_tree_selection_get_selected(selection, &model, &selected))
+		return;
+	
+	if(!gtk_tree_model_iter_has_child (model, &selected))
+		return;
+	//uncomment the following two lines if you want to see how it looks without
+	//triangls or plus symbols
+	//gtk_tree_view_set_show_expanders(GTK_TREE_VIEW(sidebar.module_list), FALSE);
+	//gtk_tree_view_set_level_indentation(GTK_TREE_VIEW(sidebar.module_list), 12);
+	path = gtk_tree_model_get_path(model, &selected);
+	if (gtk_tree_view_row_expanded (GTK_TREE_VIEW(data), path))
+	       gtk_tree_view_collapse_row ( GTK_TREE_VIEW(data), path );
+        else
+	       gtk_tree_view_expand_row ( GTK_TREE_VIEW(data), path, FALSE );
+	gtk_tree_path_free ( path );
+
+	
+}
+*/
+
 static GtkWidget *
 create_module_manager_dialog(gboolean first_run)
 {
@@ -2792,6 +2849,7 @@ create_module_manager_dialog(gboolean first_run)
 	GtkWidget *button7;
 	GtkWidget *button8;
 	GtkWidget *widget;
+//	GtkTreeSelection *selection;
 
 	glade_file = gui_general_user_file ("module-manager.glade", FALSE);
 	g_return_val_if_fail((glade_file != NULL), NULL);
@@ -2852,6 +2910,11 @@ create_module_manager_dialog(gboolean first_run)
 	setup_treeviews_local_remote(GTK_TREE_VIEW(treeview_local), GTK_TREE_VIEW(treeview_remote));
 	
 	treeview = glade_xml_get_widget (gxml, "treeview4");
+	/*selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview));
+	g_signal_connect((gpointer) selection,
+			 "changed",
+			 G_CALLBACK(on_install_selection_changed_cb), treeview);*/
+
 	treeview2 = glade_xml_get_widget (gxml, "treeview5");
 	setup_treeviews_install_remove(GTK_TREE_VIEW(treeview), GTK_TREE_VIEW(treeview2));
 	
