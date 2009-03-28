@@ -152,8 +152,6 @@ public:
 	MOD_FONT *mf;
 };
 
-void HtmlOutput(SWBuf& swbuf, GtkWidget *gtkText, MOD_FONT *mf, char *anchor);
-
 #endif /* __cplusplus */
 
 void ReadAloud(unsigned int verse, const char *suppliedtext);

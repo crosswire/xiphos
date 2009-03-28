@@ -315,8 +315,7 @@ void on_popup_about_activate (GtkMenuItem * menuitem, gpointer user_data)
 {
 	gui_display_about_module_dialog((is_dialog ?
 					dialog->mod_name :
-					menu_mod_name),
-					FALSE);
+					menu_mod_name));
 }
 
 

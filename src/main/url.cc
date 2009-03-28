@@ -250,9 +250,9 @@ static gint show_separate_image(const gchar * filename, gboolean clicked)
  static gint show_mod_info(const gchar * module, const gchar * description,
 						gboolean clicked)
 {
-	if(clicked) {
+	if (clicked) {
 		GS_print(("module = %s\n",module));
-		gui_display_about_module_dialog((gchar*)module, FALSE);		
+		gui_display_about_module_dialog((gchar*)module);		
 	} else {
 		/* some mod descriptions contain fun(ny) characters */
 		GString *desc_clean = hex_decode(description);

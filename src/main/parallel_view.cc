@@ -1395,7 +1395,7 @@ void main_update_parallel_page_detached(void)
 				  ? settings.intCurVerse - 1
 				  : settings.intCurVerse));
 
-	HtmlOutput(text, widgets.html_parallel_dialog, NULL, buf);
+	HtmlOutput((char *)text.c_str(), widgets.html_parallel_dialog, NULL, buf);
 }
 
 /******************************************************************************

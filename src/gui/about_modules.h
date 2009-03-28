@@ -28,7 +28,10 @@ extern "C" {
 
 #include <gnome.h>
 	
-void gui_display_about_module_dialog(gchar * modname, gboolean isGBS);
+void gui_display_about_module_dialog(gchar * modname);
+void gui_core_display_about_dialog(gchar *desc,
+				   gchar *abouttext,
+				   const gchar *version);
 
 #ifdef __cplusplus
 }

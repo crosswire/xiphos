@@ -347,63 +347,6 @@ ClearFontFaces(gchar *text)
 }
 
 //
-// utility function to write out HTML.
-//
-void
-HtmlOutput(SWBuf& swbuf,
-	   GtkWidget *gtkText,
-	   MOD_FONT *mf,
-	   char *anchor)
-{
-	int len = swbuf.length(), offset = 0, write_size;
-
-#ifdef USE_GTKMOZEMBED
-	GeckoHtml *html = GECKO_HTML(gtkText);
-	gecko_html_open_stream(html,"text/html");
-#else
-	GtkHTML *html = GTK_HTML(gtkText);
-	PangoContext* pc = gtk_widget_create_pango_context(gtkText);
-	PangoFontDescription *desc = pango_context_get_font_description(pc);
-	pango_font_description_set_family(
-	    desc, ((mf && mf->old_font) ? mf->old_font : "Serif"));
-	gtk_widget_modify_font(gtkText, desc);
-	GtkHTMLStream *stream = gtk_html_begin(html);
-	//GtkHTMLStreamStatus status;
-	gboolean was_editable = gtk_html_get_editable(html);
-	if (was_editable)
-		gtk_html_set_editable(html, FALSE);
-#endif
-
-	// html widgets are uptight about being handed
-	// huge quantities of text -- producer/consumer problem,
-	// and we mustn't overload the receiver.  10k chunks.
-
-	while (len > 0) {
-		write_size = min(10000, len);
-#ifdef USE_GTKMOZEMBED
-		gecko_html_write(html, swbuf.c_str()+offset, write_size);
-#else
-		gtk_html_write(html, stream, swbuf.c_str()+offset, write_size);
-#endif
-		offset += write_size;
-		len -= write_size;
-	}
-
-#ifdef USE_GTKMOZEMBED
-	gecko_html_close(html);
-	if (anchor)
-		gecko_html_jump_to_anchor(html, anchor);
-#else
-	gtk_html_end(html, stream, GTK_HTML_STREAM_OK);
-	gtk_html_set_editable(html, was_editable);
-	if (anchor)
-		gtk_html_jump_to_anchor(html, anchor);
-	gtk_html_flush(html);
-#endif
-}
-
-
-//
 // utility function for block_render() below.
 // having a word + annotation in hand, stuff them into the buffer.
 // span class names are from CSS_BLOCK macros.
@@ -809,7 +752,7 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule, gint mod_type)
 	swbuf.append("</font></body></html>");
 
 	buf = g_strdup_printf("%d", curVerse);
-	HtmlOutput(swbuf, gtkText, mf, buf);
+	HtmlOutput((char *)swbuf.c_str(), gtkText, mf, buf);
 	g_free(buf);
 
 	free_font(mf);
@@ -938,7 +881,7 @@ GTKEntryDisp::Display(SWModule &imodule)
 
 	swbuf.append("</font></body></html>");
 
-	HtmlOutput(swbuf, gtkText, mf, NULL);
+	HtmlOutput((char *)swbuf.c_str(), gtkText, mf, NULL);
 
 	free_font(mf);
 	mf = NULL;
@@ -1632,7 +1575,7 @@ GTKChapDisp::Display(SWModule &imodule)
 		buf = g_strdup_printf("%d", curVerse - display_boundary);
 	else
 		buf = NULL;
-	HtmlOutput(swbuf, gtkText, mf, buf);
+	HtmlOutput((char *)swbuf.c_str(), gtkText, mf, buf);
 	if (buf)
 		g_free(buf);
 
@@ -1712,7 +1655,7 @@ DialogEntryDisp::DisplayByChapter(SWModule &imodule, gint mod_type)
 	swbuf.append("</font></body></html>");
 
 	buf = g_strdup_printf("%d", curVerse);
-	HtmlOutput(swbuf, gtkText, mf, buf);
+	HtmlOutput((char *)swbuf.c_str(), gtkText, mf, buf);
 	g_free(buf);
 
 	free_font(mf);
@@ -1803,7 +1746,7 @@ DialogEntryDisp::Display(SWModule &imodule)
 
 	swbuf.append("</font></body></html>");
 
-	HtmlOutput(swbuf, gtkText, mf, NULL);
+	HtmlOutput((char *)swbuf.c_str(), gtkText, mf, NULL);
 
 	free_font(mf);
 	mf = NULL;
@@ -2025,7 +1968,7 @@ DialogChapDisp::Display(SWModule &imodule)
 		buf = g_strdup_printf("%d", curVerse - display_boundary);
 	else
 		buf = NULL;
-	HtmlOutput(swbuf, gtkText, mf, buf);
+	HtmlOutput((char *)swbuf.c_str(), gtkText, mf, buf);
 	if (buf)
 		g_free(buf);
 
