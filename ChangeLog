@@ -2,6 +2,7 @@
 
 	* fix verse list double-click to use main_url_handler().
 	* fix failure to check for module in parallel tab.
+	* add structure for dbl-clk to give About content in mod.mgr.
 
 2009-03-26  terry <tbiggs@users.sourceforge.net>
 

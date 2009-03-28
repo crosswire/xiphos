@@ -1208,7 +1208,6 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	vbox1 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox1);
 
-//#ifdef USE_PARALLEL_TAB	
 	widgets.paned_sidebar = gtk_vpaned_new();
 	gtk_paned_pack1 (GTK_PANED (paned), widgets.paned_sidebar, FALSE, TRUE);	
 	gtk_widget_show (widgets.paned_sidebar);	
@@ -1252,15 +1251,6 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 			 NULL);
 #endif /* USE_GTKMOZEMBED*/
 	gtk_widget_show(sidebar.html_viewer_widget);
-
-	
-	
-/*	
-#else
-	gtk_paned_pack1(GTK_PANED(paned), vbox1, FALSE, TRUE);
-	widgets.shortcutbar = vbox1;
-
-#endif */ /*  USE_PARALLEL_TAB  */
 
 	/* ---------------------------------------------------------------- */
 	/* 2x2 button box set: modules/bookmarks/search/vlist */
