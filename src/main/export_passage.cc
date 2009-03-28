@@ -44,7 +44,7 @@ int main_get_max_verses (void)
 #ifdef SWORD_MULTIVERSE
 	return (key.getVerseMax());
 #else
-	return (key.books[vkey.Testament()-1] [key.Book()-1].
+	return (key.books[key.Testament()-1] [key.Book()-1].
 				 versemax[key.Chapter()-1]);
 #endif
 }
