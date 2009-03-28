@@ -248,7 +248,8 @@ MOD_MGR *backend_module_mgr_get_next_module(void)
 			mod_info->name = g_strdup(name);
 			mod_info->language =
 			    main_get_language_map(module->Lang());
-			mod_info->type = strdup(module->Type());
+			mod_info->type = g_strdup(module->Type());
+			mod_info->about = g_strdup((char *)module->getConfigEntry("About"));
 
 			char *vers = (char *)module->getConfigEntry("Version");
 			mod_info->new_version = strdup(vers ? vers : " ");

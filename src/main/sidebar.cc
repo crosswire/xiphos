@@ -1082,6 +1082,7 @@ void main_load_module_tree(GtkWidget * tree)
 		g_free(info);
 		tmp2 = g_list_next(tmp2);
 	}
+	g_list_free(tmp);
 
 	/* prayer list folders */
 	if (settings.prayerlist) {
