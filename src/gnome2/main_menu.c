@@ -57,29 +57,6 @@
 #include "main/xml.h"
 
 
-
-/******************************************************************************
- * Name
- *  gui_about_activate
- *
- * Synopsis
- *   #include "gui/main_menu.h"
- *
- *   void gui_about_activate(GtkMenuItem * menuitem, gpointer user_data)	
- *
- * Description
- *   display module about information
- *
- * Return value
- *   void
- */
-
-void gui_about_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	gui_display_about_module_dialog((char *) user_data, FALSE);
-}
-
-
 /******************************************************************************
  * Name
  *  on_help_contents_activate
