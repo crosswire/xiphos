@@ -798,6 +798,7 @@ on_modules_list_button_release(GtkWidget * widget,
 			     GdkEventButton * event,
 			     gpointer data)
 {
+#if 0
 	GtkTreeSelection *selection;
 	GtkTreeModel *model;
 	GtkTreeIter selected;
@@ -815,6 +816,8 @@ on_modules_list_button_release(GtkWidget * widget,
 	       gtk_tree_view_expand_row ( GTK_TREE_VIEW(data), path, FALSE );
 	gtk_tree_path_free ( path );
 	return TRUE;
+#endif
+	return FALSE;
 }
 
 
@@ -829,19 +832,19 @@ on_modules_list_button_press(GtkWidget * widget,
 	GtkTreeIter selected;
 	char *description, *about;
 	const char *version;
-	
+	static time_t last = 0, now;
+
 	if (event->type != GDK_2BUTTON_PRESS)
 		return FALSE;
-	
+
+	now = time(NULL);
+	if (now - last < 2)
+		return FALSE;
+	last = now;
+
 	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(widget));
-	// model is set in gtk_tree_selection_get_selected)()
-	//model = gtk_tree_view_get_model(GTK_TREE_VIEW(data));
-	
 	if (!gtk_tree_selection_get_selected(selection, &model, &selected))
 		return FALSE;
-
-	if(gtk_tree_model_iter_has_child (GTK_TREE_MODEL(model), &selected))
-		return TRUE;	
 
 	gtk_tree_model_get(model, &selected, COLUMN_ABOUT, &about, -1);
 	gtk_tree_model_get(model, &selected, COLUMN_DESC, &description, -1);
