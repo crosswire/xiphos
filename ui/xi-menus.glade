@@ -1242,7 +1242,7 @@
   <child>
     <widget class="GtkImageMenuItem" id="save_list_as_a_series_of_bookmarks">
       <property name="visible">True</property>
-      <property name="tooltip" translatable="yes">Save these results as a series of bookmarks in their on folder</property>
+      <property name="tooltip" translatable="yes">Save these results as a series of bookmarks in their own folder</property>
       <property name="label" translatable="yes">Save list as a series of bookmarks</property>
       <property name="use_underline">True</property>
       <signal name="activate" handler="on_save_list_as_a_series_of_bookmarks_activate" last_modification_time="Tue, 24 Mar 2009 13:00:20 GMT"/>
