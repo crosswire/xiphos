@@ -3190,7 +3190,7 @@ msgid "Save list as a single bookmark"
 msgstr "Liste als einzelnes Lesezeichen speichern"
 
 #: ../ui/xi-menus.glade.h:36
-msgid "Save these results as a series of bookmarks in their on folder"
+msgid "Save these results as a series of bookmarks in their own folder"
 msgstr ""
 "Speichere diese Ergebnisse als eine Reihe von Lesezeichen in einen eigenen "
 "Ordner"
