@@ -143,6 +143,145 @@ static void load_module_tree(GtkTreeView * treeview, gboolean install);
 
 /******************************************************************************
  * Name
+ *   about_module_display
+ *
+ * Synopsis
+ *   #include "about_modules.h"
+ *
+ *   void about_module_display(gchar * to, gchar * text)
+ *
+ * Description
+ *   to filter rtf to html
+ *
+ * Return value
+ *   void
+ */
+
+static void
+about_module_tooltip_display(GString * str,
+		     gchar * text)
+{
+//	gboolean center = FALSE;
+
+	for (/* */; *text; ++text) {
+		if (*text == '\\') {	// a RTF command
+			if ((text[1] == 'p') &&
+			    (text[2] == 'a') &&
+			    (text[3] == 'r') &&
+			    (text[4] == 'd')) {
+				/*if (center) {
+					str = g_string_append(str, "</center>");
+					center = FALSE;
+				}*/
+				text += 4;
+				continue;
+			}
+			if ((text[1] == 'p') &&
+			    (text[2] == 'a') &&
+			    (text[3] == 'r')) {
+				str = g_string_append(str, "\n");
+				text += 3;
+				continue;
+			}
+			if ((text[1] == ' ') ||
+			    (text[1] == '\n')) {
+				text += 1;
+				continue;
+			}
+			if ((text[1] == 'q') &&
+			    (text[2] == 'c')) {
+				/*if (!center) {
+					str = g_string_append(str, "<center>");
+					center = TRUE;
+				}*/
+				text += 2;
+				continue;
+			}
+		}
+		str = g_string_append_c(str, *text);
+	}
+}
+
+
+static
+gboolean query_tooltip (GtkWidget  *widget,
+			gint        x,
+			gint        y,
+			gboolean    keyboard_mode,
+			GtkTooltip *tooltip,
+			gpointer    user_data)  
+{
+	GtkTreeModel *model;
+	GtkTreePath *path;
+	GtkTreeIter iter;
+	GtkTreeViewColumn *column;
+	gchar *about;	
+	gchar *version;	
+	gchar *desc;
+	GString *str  = g_string_new (NULL);
+	GString *text = g_string_new(NULL);
+	GString *description = g_string_new(NULL);
+	
+	
+	if (!gtk_tree_view_get_tooltip_context ((GtkTreeView *)widget,
+						 &x,
+						 &y,
+						 keyboard_mode,
+						 &model,
+						 &path,
+						 &iter)) {
+		return FALSE;
+	}
+		GS_message (("\n\nquery_tooltip\n\n"));
+	
+	if (gtk_tree_model_iter_has_child (model ,&iter)) {
+		GS_message (("\n\nquery_tooltip\nhas children\n\n"));
+		gtk_tree_path_free (path);		
+		return FALSE;
+	}
+	column = gtk_tree_view_get_column ( (GtkTreeView *)widget, 0);
+	gtk_tree_model_get(model, &iter, COLUMN_ABOUT, &about, -1);
+	gtk_tree_model_get(model, &iter, COLUMN_DESC, &desc, -1);
+	gtk_tree_model_get(model, &iter, COLUMN_AVAILABLE_VERSION, &version, -1);
+	g_string_printf(description,
+		"%s\n%s %s\n",
+		desc,
+		(version) ? "\nSword module version" : "",
+		(version) ? version : "");
+	
+	about_module_tooltip_display(str, ((about && *about)
+				     ? about
+				     : _("The module has no About information.")
+				      ));
+	
+	text = g_string_append_len(text, description->str, description->len);
+	text = g_string_append_len(text, str->str, str->len);
+	if (text->len > 1200) {
+		text = g_string_truncate (text, 1200);
+		text = g_string_append_len(text, " ...", strlen (" ..."));
+	}
+	//gtk_tooltip_set_icon (GtkTooltip *tooltip, GdkPixbuf *pixbuf);
+	gtk_tooltip_set_icon_from_stock (tooltip, "gtk-info", GTK_ICON_SIZE_DIALOG);
+	gtk_tooltip_set_text (tooltip, text->str);
+	
+	
+	gtk_tree_view_set_tooltip_cell ( (GtkTreeView *)widget,
+					 tooltip,
+					 path,
+					 column, 
+					 NULL );
+	gtk_tree_path_free (path);
+	g_free (about);
+	g_free (desc);
+	g_free (version);
+	g_string_free (str, TRUE);
+	g_string_free (text, TRUE);
+	g_string_free (description, TRUE);
+	return TRUE;
+}
+
+/******************************************************************************
+ * Name
  *   create_pixbufs
  *
  * Synopsis
@@ -606,20 +745,23 @@ get_list_mods_to_remove_install(int activity)
  */
 
 static void
-add_module_to_language_folder(GtkTreeModel *model,
+add_module_to_language_folder(GtkTreeView * tree,
+			      GtkTreeModel *model,
 			      GtkTreeIter iter,
 			      MOD_MGR *info,
 			      gboolean checkmark)
 {
 	GtkTreeIter iter_iter;
 	GtkTreeIter child_iter;
+	//GtkTreePath *path;
 	gboolean valid;
 	GdkPixbuf *installed;
 	GdkPixbuf *fasticon;
 	GdkPixbuf *locked;
 	GdkPixbuf *refresh;
 	gchar *description = NULL;
-
+//	GtkTooltip *tooltip;
+	
 	/* Check language */
 	const gchar *buf = info->language;
 	if (!g_utf8_validate(buf,-1,NULL))
@@ -633,7 +775,9 @@ add_module_to_language_folder(GtkTreeModel *model,
 	while (valid) {
 		/* Walk through the list, reading each row */
 		gchar *str_data;
-
+		
+		/*gtk_tooltip_set_markup ( tooltip,
+                                         "<b>a little</b><br>tooltip");*/
 		gtk_tree_model_get(model, &iter_iter, COLUMN_NAME,
 				   &str_data, -1);
 		if (!strcmp(info->language, str_data)) {
@@ -804,10 +948,13 @@ on_modules_list_button_release(GtkWidget * widget,
 	GtkTreeIter selected;
 	GtkTreePath *path;
 	
-	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW(data));
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW(data));	
 	
 	if (!gtk_tree_selection_get_selected (selection, &model, &selected))
 		return FALSE;
+	
+	if (!gtk_tree_model_iter_has_child (model ,&selected))
+		return FALSE;		
 
 	path = gtk_tree_model_get_path (model, &selected);
 	if (gtk_tree_view_row_expanded (GTK_TREE_VIEW(data), path))
@@ -1043,7 +1190,8 @@ load_module_tree(GtkTreeView * treeview,
 		if (install && !first_time_user) {
 			// special lists: updated and uninstalled modules.
 			if (!info->installed) {
-				add_module_to_language_folder(GTK_TREE_MODEL
+				add_module_to_language_folder(treeview,
+							      GTK_TREE_MODEL
 							      (store), uninstalled,
 							      info, install);
 			} else if ((!info->old_version && info->new_version &&
@@ -1051,7 +1199,8 @@ load_module_tree(GtkTreeView * treeview,
 				   (info->old_version && !info->new_version) ||
 				   (info->old_version && info->new_version &&
 				    strcmp(info->new_version, info->old_version) > 0)) {
-				add_module_to_language_folder(GTK_TREE_MODEL
+				add_module_to_language_folder(treeview,
+							      GTK_TREE_MODEL
 							      (store), update,
 							      info, install);
 			}
@@ -1060,32 +1209,38 @@ load_module_tree(GtkTreeView * treeview,
 		// see comment on similar code in src/main/sidebar.cc.
 
 		if (info->type[0] == 'B') {
-			add_module_to_language_folder(GTK_TREE_MODEL
+			add_module_to_language_folder(treeview,
+						      GTK_TREE_MODEL
 						      (store), text,
 						      info, install);
 		}
 		else if (info->type[0] == 'C') {
-			add_module_to_language_folder(GTK_TREE_MODEL
+			add_module_to_language_folder(treeview,
+						      GTK_TREE_MODEL
 						      (store), commentary,
 						      info, install);
 		}
 		else if (info->is_maps) {
-			add_module_to_language_folder(GTK_TREE_MODEL
+			add_module_to_language_folder(treeview,
+						      GTK_TREE_MODEL
 						      (store), map,
 						      info, install);
 		}
 		else if (info->is_images) {
-			add_module_to_language_folder(GTK_TREE_MODEL
+			add_module_to_language_folder(treeview,
+						      GTK_TREE_MODEL
 						      (store), image,
 						      info, install);
 		}
 		else if (info->is_devotional) {
-			add_module_to_language_folder(GTK_TREE_MODEL
+			add_module_to_language_folder(treeview,
+						      GTK_TREE_MODEL
 						      (store), devotional,
 						      info, install);
 		}
 		else if (info->type[0] == 'L') {
-			add_module_to_language_folder(GTK_TREE_MODEL
+			add_module_to_language_folder(treeview,
+						      GTK_TREE_MODEL
 						      (store), dictionary,
 						      info, install);
 		}
@@ -1096,12 +1251,12 @@ load_module_tree(GtkTreeView * treeview,
 			     == NULL) ||
 			    strcmp(gstype, "PrayerList")) {
 				add_module_to_language_folder
-				    (GTK_TREE_MODEL(store), book, info, install);
+				    (treeview,GTK_TREE_MODEL(store), book, info, install);
 			} else if (settings.prayerlist) {
 				add_language_folder
 				    (GTK_TREE_MODEL(store), prayerlist, info->language);
 				add_module_to_language_folder
-				    (GTK_TREE_MODEL(store), prayerlist, info, install);
+				    (treeview,GTK_TREE_MODEL(store), prayerlist, info, install);
 			}
 		}
 		else {
@@ -2913,13 +3068,17 @@ create_module_manager_dialog(gboolean first_run)
 	setup_treeviews_local_remote(GTK_TREE_VIEW(treeview_local), GTK_TREE_VIEW(treeview_remote));
 	
 	treeview = glade_xml_get_widget (gxml, "treeview4");
-	/*selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview));
-	g_signal_connect((gpointer) selection,
-			 "changed",
-			 G_CALLBACK(on_install_selection_changed_cb), treeview);*/
+	gtk_widget_set_has_tooltip (treeview, TRUE);
+	g_signal_connect((gpointer) treeview,
+			 "query-tooltip",
+			 G_CALLBACK(query_tooltip), NULL);
 
 	treeview2 = glade_xml_get_widget (gxml, "treeview5");
 	setup_treeviews_install_remove(GTK_TREE_VIEW(treeview), GTK_TREE_VIEW(treeview2));
+	gtk_widget_set_has_tooltip (treeview2, TRUE);
+	g_signal_connect((gpointer) treeview2,
+			 "query-tooltip",
+			 G_CALLBACK(query_tooltip), NULL);
 	
 	/* notebook */
 	notebook1 = glade_xml_get_widget (gxml, "notebook1");		
