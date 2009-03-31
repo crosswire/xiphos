@@ -942,7 +942,6 @@ on_modules_list_button_release(GtkWidget * widget,
 			     GdkEventButton * event,
 			     gpointer data)
 {
-#if 0
 	GtkTreeSelection *selection;
 	GtkTreeModel *model;
 	GtkTreeIter selected;
@@ -963,52 +962,8 @@ on_modules_list_button_release(GtkWidget * widget,
 	       gtk_tree_view_expand_row ( GTK_TREE_VIEW(data), path, FALSE );
 	gtk_tree_path_free ( path );
 	return TRUE;
-#endif
-	return FALSE;
 }
 
-
-
-static gboolean
-on_modules_list_button_press(GtkWidget * widget,
-			     GdkEventButton * event,
-			     gpointer data)
-{
-	GtkTreeSelection *selection;
-	GtkTreeModel *model;
-	GtkTreeIter selected;
-	char *description, *about;
-	const char *version;
-	static time_t last = 0, now;
-
-	if (event->type != GDK_2BUTTON_PRESS)
-		return FALSE;
-
-	now = time(NULL);
-	if (now - last < 2)
-		return FALSE;
-	last = now;
-
-	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(widget));
-	if (!gtk_tree_selection_get_selected(selection, &model, &selected))
-		return FALSE;
-
-	gtk_tree_model_get(model, &selected, COLUMN_ABOUT, &about, -1);
-	gtk_tree_model_get(model, &selected, COLUMN_DESC, &description, -1);
-	gtk_tree_model_get(model, &selected, COLUMN_AVAILABLE_VERSION, &version, -1);
-
-	if (!about || ((*about) == '\0')) {
-		gui_generic_warning(_("There is no About for that line."));
-	} else {
-		gui_core_display_about_dialog(description,
-					      about,
-					      version);
-	}
-	g_free (about);
-	g_free (description);
-	g_free ((gchar*)version);
-	return TRUE;
-}
 
 
 /******************************************************************************
@@ -1274,10 +1229,6 @@ load_module_tree(GtkTreeView * treeview,
 	}
 	g_list_free(tmp);
 
-	g_signal_connect((gpointer) treeview,
-			 "button_press_event",
-			 G_CALLBACK
-			 (on_modules_list_button_press), NULL);
 	g_signal_connect((gpointer) treeview,
 			 "button_release_event",
 			 G_CALLBACK
