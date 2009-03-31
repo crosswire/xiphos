@@ -36,7 +36,6 @@
 #include "main/settings.h"
 #include "main/sword.h"
 
-#include "gecko/gecko-html.h"
 
 #define HTML_START "<HTML><HEAD><META HTTP-EQUIV=\"content-type\" CONTENT=\"text/html; CHARSET=utf-8\"><STYLE TYPE=\"text/css\"><!-- A { text-decoration:none } %s --></STYLE></HEAD><BODY>"
 
@@ -60,9 +59,7 @@ int main_get_current_verse (void)
 static void _copy_to_clipboard (char* text,int len)
 {
 	GtkClipboard *clipboard = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
-	 
 	gtk_clipboard_set_text (clipboard, text, len);
-	gecko_html_copy_selection (GECKO_HTML (text));
 }
 
 static void _save(char *filename, char* text,int len)
