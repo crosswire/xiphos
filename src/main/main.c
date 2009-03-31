@@ -62,6 +62,8 @@ int main(int argc, char *argv[])
 	int newbookmarks = FALSE;
 	int have_sword_url = FALSE;
 
+	g_thread_init(NULL);
+
 #ifdef WIN32
 	/*
 	 * WIN32 perversity: We very much want to be *in* the

@@ -90,10 +90,10 @@ extern ModuleCache::CacheMap ModuleMap;
 // ONE is when he wants one or the other, so we can use a single
 // specification which overlays both on top of one another.
 #define CSS_BLOCK_BOTH \
-" *        { line-height: 3.5em; }" \
+" *        { line-height: 3.8em; }" \
 " .word    { position: relative; }" \
-" .strongs { position: absolute; top: 0.3em; left: 0 }" \
-" .morph   { position: absolute; top: 1.3em; left: 0 }"
+" .strongs { position: absolute; top: 0.3em; left: 0; z-index: 2; height: 1em }" \
+" .morph   { position: absolute; top: 1.3em; left: 0; z-index: 1 }"
 #define CSS_BLOCK_ONE \
 " *        { line-height: 2.7em; }" \
 " .word    { position: relative; }" \
