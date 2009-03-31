@@ -214,7 +214,7 @@ gboolean query_tooltip (GtkWidget  *widget,
 	GtkTreeModel *model;
 	GtkTreePath *path;
 	GtkTreeIter iter;
-	GtkTreeViewColumn *column;
+	//GtkTreeViewColumn *column;
 	gchar *about;	
 	gchar *version;	
 	gchar *desc;
@@ -239,7 +239,7 @@ gboolean query_tooltip (GtkWidget  *widget,
 		gtk_tree_path_free (path);		
 		return FALSE;
 	}
-	column = gtk_tree_view_get_column ( (GtkTreeView *)widget, 0);
+	//column = gtk_tree_view_get_column ( (GtkTreeView *)widget, 0);
 	gtk_tree_model_get(model, &iter, COLUMN_ABOUT, &about, -1);
 	gtk_tree_model_get(model, &iter, COLUMN_DESC, &desc, -1);
 	gtk_tree_model_get(model, &iter, COLUMN_AVAILABLE_VERSION, &version, -1);
@@ -268,7 +268,7 @@ gboolean query_tooltip (GtkWidget  *widget,
 	gtk_tree_view_set_tooltip_cell ( (GtkTreeView *)widget,
 					 tooltip,
 					 path,
-					 column, 
+					 NULL, 
 					 NULL );
 	gtk_tree_path_free (path);
 	g_free (about);
