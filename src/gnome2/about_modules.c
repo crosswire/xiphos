@@ -69,67 +69,6 @@ about_modules_ok(GtkButton * button,
 }
 
 
-/******************************************************************************
- * Name
- *   about_module_display
- *
- * Synopsis
- *   #include "about_modules.h"
- *
- *   void about_module_display(gchar * to, gchar * text)
- *
- * Description
- *   to filter rtf to html
- *
- * Return value
- *   void
- */
-
-static void
-about_module_display(GString * str,
-		     gchar * text)
-{
-	gboolean center = FALSE;
-
-	for (/* */; *text; ++text) {
-		if (*text == '\\') {	// a RTF command
-			if ((text[1] == 'p') &&
-			    (text[2] == 'a') &&
-			    (text[3] == 'r') &&
-			    (text[4] == 'd')) {
-				if (center) {
-					str = g_string_append(str, "</center>");
-					center = FALSE;
-				}
-				text += 4;
-				continue;
-			}
-			if ((text[1] == 'p') &&
-			    (text[2] == 'a') &&
-			    (text[3] == 'r')) {
-				str = g_string_append(str, "<br>\n");
-				text += 3;
-				continue;
-			}
-			if ((text[1] == ' ') ||
-			    (text[1] == '\n')) {
-				text += 1;
-				continue;
-			}
-			if ((text[1] == 'q') &&
-			    (text[2] == 'c')) {
-				if (!center) {
-					str = g_string_append(str, "<center>");
-					center = TRUE;
-				}
-				text += 2;
-				continue;
-			}
-		}
-		str = g_string_append_c(str, *text);
-	}
-}
-
 static void
 on_copy_activate(GtkMenuItem * menuitem,
 		 gpointer data)
@@ -329,6 +268,72 @@ gui_create_about_modules(void)
 }
 
 /******************************************************************************
+ * public
+ *****************************************************************************/
+
+/******************************************************************************
+ * Name
+ *   about_module_display
+ *
+ * Synopsis
+ *   #include "about_modules.h"
+ *
+ *   void about_module_display(gchar * to, gchar * text)
+ *
+ * Description
+ *   to filter rtf to html
+ *
+ * Return value
+ *   void
+ */
+
+void
+about_module_display(GString * str,
+		     gchar * text,
+		     gboolean tooltip)
+{
+	gboolean center = FALSE;
+
+	for (/* */; *text; ++text) {
+		if (*text == '\\') {	// a RTF command
+			if ((text[1] == 'p') &&
+			    (text[2] == 'a') &&
+			    (text[3] == 'r') &&
+			    (text[4] == 'd')) {
+				if (center && !tooltip) {
+					str = g_string_append(str, "</center>");
+					center = FALSE;
+				}
+				text += 4;
+				continue;
+			}
+			if ((text[1] == 'p') &&
+			    (text[2] == 'a') &&
+			    (text[3] == 'r')) {
+				str = g_string_append(str, (tooltip ? "\n" : "<br>\n"));
+				text += 3;
+				continue;
+			}
+			if ((text[1] == ' ') ||
+			    (text[1] == '\n')) {
+				text += 1;
+				continue;
+			}
+			if ((text[1] == 'q') &&
+			    (text[2] == 'c')) {
+				if (!center && !tooltip) {
+					str = g_string_append(str, "<center>");
+					center = TRUE;
+				}
+				text += 2;
+				continue;
+			}
+		}
+		str = g_string_append_c(str, *text);
+	}
+}
+
+/******************************************************************************
  * Name
  *   gui_core_display_about_dialog
  *
@@ -366,9 +371,11 @@ gui_core_display_about_dialog(gchar * desc,
 	aboutbox = gui_create_about_modules();
 	gtk_widget_show(aboutbox);
 
-	about_module_display(str, ((abouttext && *abouttext)
-				   ? abouttext
-				   : _("The module has no About information.")));
+	about_module_display(str,
+			     ((abouttext && *abouttext)
+			      ? abouttext
+			      : _("The module has no About information.")),
+			     FALSE);
 
 	g_string_append_len(text, html_start, strlen(html_start));
 	g_string_append_len(text, description->str, strlen(description->str));
@@ -380,10 +387,6 @@ gui_core_display_about_dialog(gchar * desc,
 	g_string_free(str, TRUE);
 	g_string_free(description, TRUE);
 }
-
-/******************************************************************************
- * public
- *****************************************************************************/
 
 /******************************************************************************
  * Name
