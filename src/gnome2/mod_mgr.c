@@ -141,67 +141,6 @@ GladeXML *gxml;
 
 static void load_module_tree(GtkTreeView * treeview, gboolean install);
 
-/******************************************************************************
- * Name
- *   about_module_display
- *
- * Synopsis
- *   #include "about_modules.h"
- *
- *   void about_module_display(gchar * to, gchar * text)
- *
- * Description
- *   to filter rtf to html
- *
- * Return value
- *   void
- */
-
-static void
-about_module_tooltip_display(GString * str,
-		     gchar * text)
-{
-//	gboolean center = FALSE;
-
-	for (/* */; *text; ++text) {
-		if (*text == '\\') {	// a RTF command
-			if ((text[1] == 'p') &&
-			    (text[2] == 'a') &&
-			    (text[3] == 'r') &&
-			    (text[4] == 'd')) {
-				/*if (center) {
-					str = g_string_append(str, "</center>");
-					center = FALSE;
-				}*/
-				text += 4;
-				continue;
-			}
-			if ((text[1] == 'p') &&
-			    (text[2] == 'a') &&
-			    (text[3] == 'r')) {
-				str = g_string_append(str, "\n");
-				text += 3;
-				continue;
-			}
-			if ((text[1] == ' ') ||
-			    (text[1] == '\n')) {
-				text += 1;
-				continue;
-			}
-			if ((text[1] == 'q') &&
-			    (text[2] == 'c')) {
-				/*if (!center) {
-					str = g_string_append(str, "<center>");
-					center = TRUE;
-				}*/
-				text += 2;
-				continue;
-			}
-		}
-		str = g_string_append_c(str, *text);
-	}
-}
-
 static void
 handle_error (GError **error)
 {
@@ -286,10 +225,11 @@ gboolean query_tooltip (GtkWidget  *widget,
 		
 	}
 	
-	about_module_tooltip_display(str, ((utf8_str && *utf8_str)
-				     ? utf8_str
-				     : _("The module has no About information.")
-				      ));
+	about_module_display(str,
+			     ((utf8_str && *utf8_str)
+			      ? utf8_str
+			      : _("The module has no About information.")),
+			     TRUE);
 	
 	text = g_string_append_len(text, description->str, description->len);
 	text = g_string_append_len(text, str->str, str->len);

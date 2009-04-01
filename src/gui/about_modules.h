@@ -32,6 +32,9 @@ void gui_display_about_module_dialog(gchar * modname);
 void gui_core_display_about_dialog(gchar *desc,
 				   gchar *abouttext,
 				   const gchar *version);
+void about_module_display(GString * str,
+			  gchar * text,
+			  gboolean tooltip);
 
 #ifdef __cplusplus
 }
