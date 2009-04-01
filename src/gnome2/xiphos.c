@@ -204,8 +204,7 @@ void frontend_display(void)
 			   "toggled",
 			   G_CALLBACK(gui_parallel_tab_activate),
 			   NULL	);
-	if(settings.show_previewer_in_sidebar) 
-		gui_show_previewer_in_sidebar(1);
+	gui_show_previewer_in_sidebar(settings.show_previewer_in_sidebar);
 #endif /*  USE_PARALLEL_TAB  */	
 
 		
