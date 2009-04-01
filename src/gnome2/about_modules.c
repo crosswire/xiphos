@@ -329,6 +329,11 @@ about_module_display(GString * str,
 				continue;
 			}
 		}
+		if (tooltip && (*text == '<')) {	/* no htmlisms in tooltips */
+			while (*text && (*text != '>'))
+				++text;
+			continue;
+		}
 		str = g_string_append_c(str, *text);
 	}
 }
