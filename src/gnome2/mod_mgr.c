@@ -141,15 +141,6 @@ GladeXML *gxml;
 
 static void load_module_tree(GtkTreeView * treeview, gboolean install);
 
-static void
-handle_error (GError **error)
-{
-	if (*error != NULL) {
-		g_warning ("\n\n\nhandle_error: %s", (*error)->message);
-		g_clear_error (error);
-	}
-}
-
 static
 gboolean query_tooltip (GtkWidget  *widget,
 			gint        x,
@@ -161,20 +152,13 @@ gboolean query_tooltip (GtkWidget  *widget,
 	GtkTreeModel *model;
 	GtkTreePath *path;
 	GtkTreeIter iter;
-	GtkWidget *pixmap;
 	GdkPixbuf *pixbuf;
-	//GtkTreeViewColumn *column;
 	gchar *about;	
 	gchar *version;	
 	gchar *desc;
-	gchar *utf8_str;
 	GString *str  = g_string_new (NULL);
 	GString *text = g_string_new(NULL);
 	GString *description = g_string_new(NULL);
-	GError *error = NULL;
-	//gsize bytes_read;
-	//gsize bytes_written;
-	
 	
 	if (!gtk_tree_view_get_tooltip_context ((GtkTreeView *)widget,
 						 &x,
@@ -185,49 +169,29 @@ gboolean query_tooltip (GtkWidget  *widget,
 						 &iter)) {
 		return FALSE;
 	}
-		GS_message (("\n\nquery_tooltip\n\n"));
+	GS_message (("\nquery_tooltip\n"));
 	
 	if (gtk_tree_model_iter_has_child (model ,&iter)) {
 		GS_message (("\n\nquery_tooltip\nhas children\n\n"));
 		gtk_tree_path_free (path);		
 		return FALSE;
 	}
-	//column = gtk_tree_view_get_column ( (GtkTreeView *)widget, 0);
+
 	gtk_tree_model_get(model, &iter, COLUMN_ABOUT, &about, -1);
 	gtk_tree_model_get(model, &iter, COLUMN_DESC, &desc, -1);
 	gtk_tree_model_get(model, &iter, COLUMN_AVAILABLE_VERSION, &version, -1);
-	 
-	if (!about)
-		return FALSE;
 	
-	g_strdelimit (about, "&", '+');
-	utf8_str = g_locale_to_utf8 (about, 
-				     strlen (about),
-				     NULL,
-				     NULL,
-				     &error);
-	handle_error (&error);
-	
-	if (utf8_str) {
-		GS_message (("\n\n%s\n\n", utf8_str));
-		g_string_printf(description,
-			"<span foreground=\"blue\" weight=\"bold\">%s</span>\n%s %s\n",
-			desc,
-			(version) ? "\nSword module version" : "",
-			(version) ? version : "");
-	} else {
-		g_string_printf(description,
+	if (about)
+		g_strdelimit (about, "&", '+');
+	g_string_printf(description,
 			"%s\n%s %s\n",
 			desc,
 			(version) ? "\nSword module version" : "",
 			(version) ? version : "");
-		
-		
-	}
 	
 	about_module_display(str,
-			     ((utf8_str && *utf8_str)
-			      ? utf8_str
+			     ((about && *about)
+			      ? about
 			      : _("The module has no About information.")),
 			     TRUE);
 	
@@ -237,20 +201,15 @@ gboolean query_tooltip (GtkWidget  *widget,
 		text = g_string_truncate (text, 1200);
 		text = g_string_append_len(text, " ...", strlen (" ..."));
 	}
-	pixmap = pixmap_finder("sword3.png");
-	pixbuf = gtk_image_get_pixbuf ((GtkImage *)pixmap);
+	pixbuf = pixbuf_finder("sword3.png", NULL);
 	gtk_tooltip_set_icon (tooltip, pixbuf);
-	//gtk_tooltip_set_icon_from_stock (tooltip, "gtk-info", GTK_ICON_SIZE_LARGE_TOOLBAR);
-	if (utf8_str) 
-		gtk_tooltip_set_markup (tooltip, text->str);
-	else
-		gtk_tooltip_set_text (tooltip, text->str);
+	gtk_tooltip_set_text (tooltip, text->str);
 	
-	gtk_tree_view_set_tooltip_cell ( (GtkTreeView *)widget,
-					 tooltip,
-					 path,
-					 NULL, 
-					 NULL );
+	gtk_tree_view_set_tooltip_cell((GtkTreeView *)widget,
+				       tooltip,
+				       path,
+				       NULL, 
+				       NULL);
 	gtk_tree_path_free (path);
 	g_free (about);
 	g_free (desc);
