@@ -177,16 +177,18 @@ gboolean query_tooltip (GtkWidget  *widget,
 		return FALSE;
 	}
 
-	gtk_tree_model_get(model, &iter, COLUMN_ABOUT, &about, -1);
 	gtk_tree_model_get(model, &iter, COLUMN_DESC, &desc, -1);
+	if (!desc)
+		return FALSE;
+	gtk_tree_model_get(model, &iter, COLUMN_ABOUT, &about, -1);
 	gtk_tree_model_get(model, &iter, COLUMN_AVAILABLE_VERSION, &version, -1);
 	
 	if (about)
 		g_strdelimit (about, "&", '+');
 	g_string_printf(description,
-			"%s\n%s %s\n",
+			"%s\n%s %s\n\n",
 			desc,
-			(version) ? "\nSword module version" : "",
+			(version) ? "Sword module version" : "",
 			(version) ? version : "");
 	
 	about_module_display(str,
