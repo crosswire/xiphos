@@ -202,6 +202,14 @@ about_module_tooltip_display(GString * str,
 	}
 }
 
+static void
+handle_error (GError **error)
+{
+	if (*error != NULL) {
+		g_warning ("\n\n\nhandle_error: %s", (*error)->message);
+		g_clear_error (error);
+	}
+}
 
 static
 gboolean query_tooltip (GtkWidget  *widget,
@@ -214,13 +222,19 @@ gboolean query_tooltip (GtkWidget  *widget,
 	GtkTreeModel *model;
 	GtkTreePath *path;
 	GtkTreeIter iter;
+	GtkWidget *pixmap;
+	GdkPixbuf *pixbuf;
 	//GtkTreeViewColumn *column;
 	gchar *about;	
 	gchar *version;	
 	gchar *desc;
+	gchar *utf8_str;
 	GString *str  = g_string_new (NULL);
 	GString *text = g_string_new(NULL);
 	GString *description = g_string_new(NULL);
+	GError *error = NULL;
+	//gsize bytes_read;
+	//gsize bytes_written;
 	
 	
 	if (!gtk_tree_view_get_tooltip_context ((GtkTreeView *)widget,
@@ -243,14 +257,37 @@ gboolean query_tooltip (GtkWidget  *widget,
 	gtk_tree_model_get(model, &iter, COLUMN_ABOUT, &about, -1);
 	gtk_tree_model_get(model, &iter, COLUMN_DESC, &desc, -1);
 	gtk_tree_model_get(model, &iter, COLUMN_AVAILABLE_VERSION, &version, -1);
-	g_string_printf(description,
-		"%s\n%s %s\n",
-		desc,
-		(version) ? "\nSword module version" : "",
-		(version) ? version : "");
+	 
+	if (!about)
+		return FALSE;
 	
-	about_module_tooltip_display(str, ((about && *about)
-				     ? about
+	g_strdelimit (about, "&", '+');
+	utf8_str = g_locale_to_utf8 (about, 
+				     strlen (about),
+				     NULL,
+				     NULL,
+				     &error);
+	handle_error (&error);
+	
+	if (utf8_str) {
+		GS_message (("\n\n%s\n\n", utf8_str));
+		g_string_printf(description,
+			"<span foreground=\"blue\" weight=\"bold\">%s</span>\n%s %s\n",
+			desc,
+			(version) ? "\nSword module version" : "",
+			(version) ? version : "");
+	} else {
+		g_string_printf(description,
+			"%s\n%s %s\n",
+			desc,
+			(version) ? "\nSword module version" : "",
+			(version) ? version : "");
+		
+		
+	}
+	
+	about_module_tooltip_display(str, ((utf8_str && *utf8_str)
+				     ? utf8_str
 				     : _("The module has no About information.")
 				      ));
 	
@@ -260,10 +297,14 @@ gboolean query_tooltip (GtkWidget  *widget,
 		text = g_string_truncate (text, 1200);
 		text = g_string_append_len(text, " ...", strlen (" ..."));
 	}
-	//gtk_tooltip_set_icon (GtkTooltip *tooltip, GdkPixbuf *pixbuf);
-	gtk_tooltip_set_icon_from_stock (tooltip, "gtk-info", GTK_ICON_SIZE_DIALOG);
-	gtk_tooltip_set_text (tooltip, text->str);
-	
+	pixmap = pixmap_finder("sword3.png");
+	pixbuf = gtk_image_get_pixbuf ((GtkImage *)pixmap);
+	gtk_tooltip_set_icon (tooltip, pixbuf);
+	//gtk_tooltip_set_icon_from_stock (tooltip, "gtk-info", GTK_ICON_SIZE_LARGE_TOOLBAR);
+	if (utf8_str) 
+		gtk_tooltip_set_markup (tooltip, text->str);
+	else
+		gtk_tooltip_set_text (tooltip, text->str);
 	
 	gtk_tree_view_set_tooltip_cell ( (GtkTreeView *)widget,
 					 tooltip,
