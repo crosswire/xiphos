@@ -270,13 +270,13 @@ on_enter_notify_event        (GtkWidget       *widget,
                                         GdkEventCrossing *event,
                                         gpointer         user_data)
 {
-	shift_key_presed = FALSE;
+	//shift_key_presed = FALSE;
 	//gtk_widget_grab_focus (widgets.html_text);
 	settings.whichwindow = MAIN_TEXT_WINDOW;
 	gui_change_window_title(settings.MainWindowModule);
   	return FALSE;
 }
-
+/*
 static gboolean on_key_press_event           (GtkWidget       *widget,
                                         GdkEventKey     *event,
                                         gpointer         user_data)
@@ -296,6 +296,7 @@ static gboolean on_key_press_event           (GtkWidget       *widget,
 		case 50:
 		case 62:
 			shift_key_presed = TRUE;
+  			return TRUE;
 		break;
 	}
 	GS_message(("on_key_press_event\nkeycode: %d",event->hardware_keycode));
@@ -324,7 +325,7 @@ static gboolean on_key_release_event         (GtkWidget       *widget,
 	GS_message(("on_key_release_event\nkeycode: %d",event->hardware_keycode));
   	return FALSE;
 }
-
+*/
 
 static gint tag_event_handler (GtkTextTag *tag, GtkWidget *widget,
 	GdkEvent *event, const GtkTextIter *iter, gpointer user_data)
@@ -585,12 +586,12 @@ GtkWidget *gui_create_bible_pane(void)
 	g_signal_connect(GTK_OBJECT(widgets.html_text), "enter_notify_event",
 		    		G_CALLBACK (on_enter_notify_event),
 		       		NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_text), "key_press_event",
+/*	g_signal_connect(GTK_OBJECT(widgets.html_text), "key_press_event",
 		    		G_CALLBACK (on_key_press_event),
-		    		NULL);
+		    		NULL);  
 	g_signal_connect(GTK_OBJECT(widgets.html_text), "key_release_event",
 		    		G_CALLBACK (on_key_release_event),
-		    		NULL);				   
+		    		NULL);	*/			   
 	g_signal_connect(GTK_OBJECT(widgets.html_text),
 			 "url_requested",
 			 G_CALLBACK(url_requested), NULL);

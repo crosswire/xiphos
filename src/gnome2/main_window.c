@@ -526,6 +526,9 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 	guint state = event->state & (GDK_SHIFT_MASK  | GDK_CONTROL_MASK | GDK_MOD1_MASK | GDK_MOD4_MASK );
 
 	switch(event->hardware_keycode) {
+	case 50: /* shift keys - we need this for locking strongs (and other stuff) while moving mouse */
+	case 62: /* to previewer */
+			shift_key_presed = TRUE;
 	case GS_KEY_D: // Alt-D  dictionary entry
 		if (state == GDK_MOD1_MASK)
 			gtk_widget_grab_focus(widgets.entry_dict);
