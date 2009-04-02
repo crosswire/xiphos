@@ -274,9 +274,9 @@ if test "x$GXX" = xyes; then
 if test x$debug = xyes; then
   AC_DEFINE(DEBUG, 1, [Define if you want to see debug messages])
   if test x$ac_cv_prog_cc_g = xyes; then
-    CFLAGS="-g3 -O0 -Werror -Wall"
+    CFLAGS="-g3 -O0 "
   else
-    CFLAGS="-O0 -Werror -Wall"
+    CFLAGS="-O0 "
   fi
   if test x$ac_cv_prog_cxx_g = xyes; then
     CXXFLAGS="$CXXFLAGS -g3 -O0"
