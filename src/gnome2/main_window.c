@@ -97,8 +97,10 @@ void gui_show_hide_texts(gboolean choice)
 			gtk_widget_hide(widgets.vpaned);
 		xml_set_value("Xiphos", "misc", "showtexts", "0");
 	} else {
-		if (main_window_created)
+		if (main_window_created) {
 			gtk_widget_show(widgets.vpaned);
+			gtk_widget_show(nav_toolbar);
+		}
 		xml_set_value("Xiphos", "misc", "showtexts", "1");
 	}
 	/*if (main_window_created)
