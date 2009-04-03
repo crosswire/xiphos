@@ -65,7 +65,7 @@ static GtkHTMLStreamStatus status1;
 gboolean in_url;
 
 
-#ifdef USE_GTKHTML3_14
+#ifdef USE_GTKHTML3_14_23
 static void
 handle_error (GError **error)
 {
@@ -361,8 +361,8 @@ gchar *gui_get_word_or_selection(GtkWidget * html_widget, gboolean word)
 
 	html = GTK_HTML(html_widget);
 	if (word)
-		gtk_html_select_word(html);	
-#ifdef USE_GTKHTML38		
+		gtk_html_select_word(html);
+	
 	key = gtk_html_get_selection_html (html, &len);
 	if ((key == NULL) || (*key == '\0'))
 	{
@@ -388,15 +388,6 @@ gchar *gui_get_word_or_selection(GtkWidget * html_widget, gboolean word)
 	buf2= g_strdup(key);
 	g_free(buf);
 	return buf2; /* must be freed by calling function */
-#else
-	if (html_engine_is_selection_active(html->engine)) {
-		key = html_engine_get_selection_string(html->engine);
-		key = g_strdelimit(key, ".,\"<>;:?", ' ');
-		key = g_strstrip(key);
-		return g_strdup(key);	/* must be freed by calling function */
-	}
-#endif
-	return key;
 }
 
 
@@ -425,7 +416,6 @@ gchar *gui_button_press_lookup(GtkWidget * html_widget)
 	gint len;
 
 	html = GTK_HTML(html_widget);
-#ifdef USE_GTKHTML38
 	if (!html->in_selection) {
 		gtk_html_select_word(html);
 		key = gtk_html_get_selection_html(html, &len);
@@ -452,26 +442,6 @@ gchar *gui_button_press_lookup(GtkWidget * html_widget)
 		g_free(buf);
 		return rtval;	// * must be freed by calling function *
 	}
-#else
-	if (!html_engine_is_selection_active(html->engine)) {
-		gtk_html_select_word(html);
-		if (html_engine_is_selection_active(html->engine)) {
-			key =
-			    html_engine_get_selection_string(html->
-							     engine);
-			key = g_strdelimit(key, ".,\"<>;:?", ' ');
-			key = g_strstrip(key);
-			len = strlen(key);
-			if (key[len - 1] == 's' || key[len - 1] == 'd')
-				key[len - 1] = '\0';
-			if (key[len - 1] == 'h' && key[len - 2] == 't'
-			    && key[len - 3] == 'e')
-				key[len - 3] = '\0';
-			return g_strdup(key);	// * must be freed by calling function *
-		}
-
-	}
-#endif
 	return key;
 }
 
@@ -558,163 +528,7 @@ void gui_display_html(GtkWidget * html, const gchar * txt, gint lentxt)
 }
 
 
-
-
-
-#ifndef USE_GTKHTML3_14
-#ifdef USE_GTKHTML38
-
-struct _info {
-	GnomeFont *local_font;
-	gint page_num, pages;
-	guchar *header_title;
-	guchar *footer_title;
-	gboolean header_date;
-	gboolean header_page_num;
-	gboolean footer_date;
-	gboolean footer_page_num;
-};
-/*void  print_header(		GtkHTML *html, 
-				GtkPrintContext *print_context,				      
-				gdouble x, gdouble y, 
-				gdouble width, gdouble height, 
-				gpointer user_data)*/
-
-static void print_header(GtkHTML * html,
-			 GnomePrintContext * print_context, gdouble x,
-			 gdouble y, gdouble width, gdouble height,
-			 gpointer user_data)
-{
-	struct _info *info = (struct  _info*) user_data;
-	
-	if (info->local_font) {
-		gnome_print_line_stroked(print_context, x, y, width, y);
-		
-		gnome_print_gsave(print_context);
-		gnome_print_newpath(print_context);
-		gnome_print_setrgbcolor(print_context, .0, .0, .0);		
-		gnome_print_moveto(print_context, x,
-				   y -
-				   gnome_font_get_ascender(info->local_font));
-		gnome_print_setfont(print_context, info->local_font);
-		gnome_print_show(print_context, info->header_title);
-		gnome_print_grestore(print_context);
-		
-	
-		info->page_num++;
-	}
-}
-
-
-/******************************************************************************
- * Name
- *   print_footer
- *
- * Synopsis
- *   #include "gui/html.h"
- *
- *   void print_footer(GtkHTML * html, GnomePrintContext * context,
- *		gdouble x, gdouble y, gdouble width, gdouble height,
- *						gpointer user_data)
- *
- * Description
- *   printing stuff - take from Evolution 1.4.x
- *
- * Return value
- *   void
- */
-static void print_footer(	GtkHTML *html, 
-				GnomePrintContext *print_context,				      
-				gdouble x, gdouble y, 
-				gdouble width, gdouble height, 
-				gpointer user_data)
-{
-	/*gdouble h = height - 10.0;
-	struct _info *info = (struct _info *) user_data;
-
-	if (info->local_font) {
-		//gnome_print_setfont(print_context, info->local_font);
-		//gnome_print_line_stroked(print_context, x, y, width, y);
-		//gnome_print_gsave(print_context);
-		//gnome_print_newpath(print_context);
-		//gnome_print_setrgbcolor(print_context, .0, .0, .0);		
-		gnome_print_moveto(print_context, x,
-				   y -
-				   gnome_font_get_ascender(info->local_font));
-		gnome_print_setfont(print_context, info->local_font);
-		gnome_print_show(print_context, info->footer_title);*/
-		
-		/*
-		if(info->footer_page_num) {
-			char *text =
-			    g_strdup_printf(_("Page %d of %d"), info->page_num,
-					    info->pages);
-			gdouble tw = strlen(text) * 8;
-			
-			gnome_print_moveto(print_context, x + width - tw,
-					   y -
-					   gnome_font_get_ascender(info->
-								   local_font));
-			gnome_print_setfont(print_context, info->local_font);
-			gnome_print_show(print_context, (const guchar *)text);
-			g_free(text);
-		}
-		if(info->footer_date) {
-			char *text =
-			    g_strdup_printf("%s", "April 08, 2005");
-			gdouble tw = strlen(text) * 6;
-			
-			gnome_print_moveto(print_context, x + width - tw,
-					   y -
-					   gnome_font_get_ascender(info->
-								   local_font));
-			gnome_print_setfont(print_context, info->local_font);
-			gnome_print_show(print_context, (const guchar *)text);	
-			g_free(text);
-		}
-		gnome_print_grestore(print_context);
-		info->page_num++;
-	}*/
-}
-
-static void info_free(struct _info *info)
-{
-	if (info->local_font)
-		gnome_font_unref(info->local_font);
-	if(info->header_title)
-		g_free(info->header_title);
-	if(info->footer_title)
-		g_free(info->footer_title);
-	g_free(info);
-}
-
-static 
-struct _info *info_new(GtkHTML * html, GnomePrintContext * pc, gdouble * line)
-{
-	struct _info *info = NULL;
-
-	info = g_new(struct _info, 1);
-	info->local_font = gnome_font_find_closest((const guchar *)"Sans Regular", 10.0);
-
-	if (info->local_font)
-		*line =
-		    gnome_font_get_ascender(info->local_font) -
-		    gnome_font_get_descender(info->local_font);
-
-	info->page_num = 1;
-	info->pages = gtk_html_print_get_pages_num(html, pc, *line, *line);
-	info->header_title = (guchar*)g_strdup("");
-	info->footer_title = (guchar*)g_strdup("");
-	info->header_date = FALSE;
-	info->header_page_num = TRUE;
-	info->footer_date = FALSE;
-	info->footer_page_num = TRUE;
-	return info;
-}
-#endif /* USE_GTKHTML38 */
-#endif /* !USE_GTKHTML3_14 */
-
-#ifdef USE_GTKHTML3_14
+#ifdef USE_GTKHTML3_14_23
 static gint
 _calc_header_height (GtkHTML *html, GtkPrintOperation *operation,
                          GtkPrintContext *context)
@@ -865,12 +679,11 @@ _draw_footer (GtkHTML *html, GtkPrintOperation *operation,
 
 void gui_html_print(GtkWidget * htmlwidget, gboolean preview, const gchar * mod_name)
 {
-#ifdef USE_GTKHTML3_14
+#ifdef USE_GTKHTML3_14_23
 	
 	GtkPrintOperation *operation;
 	GtkPrintSettings *psettings;
 	GtkPageSetup *setup;
-//	GtkPaperSize *letter;
 	GtkPrintOperationResult result;
 	GError *error = NULL;
 	GtkPrintOperationAction action;
@@ -909,87 +722,5 @@ void gui_html_print(GtkWidget * htmlwidget, gboolean preview, const gchar * mod_
 
 	g_object_unref (operation);
 	handle_error (&error);
-	
-#else
-#ifdef USE_GTKHTML38
-	GtkHTML *html;
-	GnomePrintContext *print_context;
-	GnomePrintJob *print_master;
-	GnomePrintConfig *config = NULL;
-	GtkDialog *dialog;
-	gdouble line = 0.0;
-	struct _info *info;
-
-	if (!preview) {
-		dialog =
-		    (GtkDialog *) gnome_print_dialog_new(NULL,
-						(const guchar *) _("Print"),
-						 GNOME_PRINT_DIALOG_COPIES);
-		gtk_dialog_set_default_response(dialog,
-					GNOME_PRINT_DIALOG_RESPONSE_PRINT);
-		gtk_window_set_transient_for((GtkWindow *) dialog,
-					     (GtkWindow *)
-					     gtk_widget_get_toplevel
-					     (widgets.app));
-
-		switch (gtk_dialog_run(dialog)) {
-		case GNOME_PRINT_DIALOG_RESPONSE_PRINT:
-			break;
-		case GNOME_PRINT_DIALOG_RESPONSE_PREVIEW:
-			preview = TRUE;
-			break;
-		default:
-			gtk_widget_destroy((GtkWidget *) dialog);
-			return;
-		}
-
-		//config = gnome_print_config_default();
-		    gnome_print_dialog_get_config((GnomePrintDialog *)
-						  dialog);
-		gtk_widget_destroy((GtkWidget *) dialog);
-	}
-
-	if (config) {
-		print_master = gnome_print_job_new(config);
-		gnome_print_config_unref(config);
-	} else
-		print_master = gnome_print_job_new(NULL);
-
-	print_context = gnome_print_job_get_context(print_master);
-
-	html = GTK_HTML(htmlwidget);
-
-	//gtk_html_print_set_master(html, print_master);
-
-	info = info_new(html, print_context, &line);
-	gtk_html_print_with_header_footer(html, print_context, line,
-					  line, print_header, print_footer,
-					  info);
-/*	gtk_html_print_page_with_header_footer  (html,
-						   (GtkPrintContext*)print_context,
-						   line,
-						   line,
-						   print_header,
-						   print_footer,
-						   info);*/
-	info_free(info);
-
-	gnome_print_job_close(print_master);
-
-	if (preview) {
-		GtkWidget *pw;
-
-		pw = gnome_print_job_preview_new(print_master,
-						(const guchar *) _("Print Preview"));
-		gtk_widget_show(pw);
-	} else {
-		int result = gnome_print_job_print(print_master);
-
-		if (result == -1)
-			g_warning(_("Failed to print the document"));
-	}
-
-	g_object_unref(print_master);
-#endif
 #endif
 }
