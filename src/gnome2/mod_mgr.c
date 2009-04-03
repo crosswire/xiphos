@@ -141,6 +141,7 @@ GladeXML *gxml;
 
 static void load_module_tree(GtkTreeView * treeview, gboolean install);
 
+#ifdef HAVE_LIBGTK_X11_2_0
 static
 gboolean query_tooltip (GtkWidget  *widget,
 			gint        x,
@@ -221,6 +222,7 @@ gboolean query_tooltip (GtkWidget  *widget,
 	g_string_free (description, TRUE);
 	return TRUE;
 }
+#endif
 
 /******************************************************************************
  * Name
@@ -2961,17 +2963,21 @@ create_module_manager_dialog(gboolean first_run)
 	setup_treeviews_local_remote(GTK_TREE_VIEW(treeview_local), GTK_TREE_VIEW(treeview_remote));
 	
 	treeview = glade_xml_get_widget (gxml, "treeview4");
+
+	treeview2 = glade_xml_get_widget (gxml, "treeview5");
+	setup_treeviews_install_remove(GTK_TREE_VIEW(treeview), GTK_TREE_VIEW(treeview2));
+	
+#ifdef HAVE_LIBGTK_X11_2_0
 	gtk_widget_set_has_tooltip (treeview, TRUE);
 	g_signal_connect((gpointer) treeview,
 			 "query-tooltip",
 			 G_CALLBACK(query_tooltip), NULL);
-
-	treeview2 = glade_xml_get_widget (gxml, "treeview5");
-	setup_treeviews_install_remove(GTK_TREE_VIEW(treeview), GTK_TREE_VIEW(treeview2));
+	
 	gtk_widget_set_has_tooltip (treeview2, TRUE);
 	g_signal_connect((gpointer) treeview2,
 			 "query-tooltip",
 			 G_CALLBACK(query_tooltip), NULL);
+#endif	
 	
 	/* notebook */
 	notebook1 = glade_xml_get_widget (gxml, "notebook1");		
