@@ -686,6 +686,7 @@ set_morph_order(SWModule& imodule)
 char
 GTKEntryDisp::DisplayByChapter(SWModule &imodule)
 {
+       imodule.setSkipConsecutiveLinks(true);
 	VerseKey *key = (VerseKey *)(SWKey *)imodule;
 	int curVerse = key->Verse();
 	int curChapter = key->Chapter();
@@ -897,7 +898,6 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 	sword::VerseKey key_top( mod_top->KeyText() );
 	SWModule *mod = mgr->getModule(ModuleName);
 	mod->setKey(imodule.getKey());
-
 	VerseKey *key = (VerseKey *)(SWKey *)*mod;
 	int chapter = key->Chapter();
 	key->Verse(1);
@@ -1581,6 +1581,7 @@ GTKChapDisp::Display(SWModule &imodule)
 char
 DialogEntryDisp::DisplayByChapter(SWModule &imodule)
 {
+       imodule.setSkipConsecutiveLinks(true);
 	VerseKey *key = (VerseKey *)(SWKey *)imodule;
 	int curVerse = key->Verse();
 	int curChapter = key->Chapter();
@@ -1744,6 +1745,7 @@ char
 DialogChapDisp::Display(SWModule &imodule)
 {
 	const char *ModuleName = imodule.Name();
+       imodule.setSkipConsecutiveLinks(true);
 	VerseKey *key = (VerseKey *)(SWKey *)imodule;
 	int curVerse = key->Verse();
 	int curChapter = key->Chapter();
@@ -2032,6 +2034,7 @@ char
 GTKPrintChapDisp::Display(SWModule &imodule)
 {
 #ifdef USE_GTKMOZEMBED
+       imodule.setSkipConsecutiveLinks(true);
 	VerseKey *key = (VerseKey *)(SWKey *)imodule;
 	int curVerse = key->Verse();
 	int curChapter = key->Chapter();
