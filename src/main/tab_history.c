@@ -41,6 +41,14 @@
 #include "main/xml.h"
 #include "main/navbar_versekey.h"
 
+/* de-uglify all references to button sensitivitiy */
+#ifdef OLD_NAVBAR
+# define BUTTON_BACK	nav_bar.button_back
+# define BUTTON_FORW	nav_bar.button_forward
+#else
+# define BUTTON_BACK	navbar_versekey.button_history_back
+# define BUTTON_FORW	navbar_versekey.button_history_next
+#endif
 
 /******************************************************************************
  * Name
@@ -84,25 +92,15 @@ on_menu_historyitem_activate(GtkMenuItem * menuitem,
 
 void main_clear_tab_history(void)
 {
-	PASSAGE_TAB_INFO *tab = NULL;
-    
-    	//if(!settings.browsing) return;
-	
-    	tab = (PASSAGE_TAB_INFO*) cur_passage_tab;
+	PASSAGE_TAB_INFO *tab = cur_passage_tab;
 
 	gui_remove_menu_items(_("H_istory/<Separator>"),
 			      tab->history_items + 1);
 	gui_add_separator2menu(widgets.app, _("H_istory/C_lear"));
 	
 	/* set sensitivity of history buttons */
-#ifdef OLD_NAVBAR
-	gtk_widget_set_sensitive(nav_bar.button_back, FALSE);
-	gtk_widget_set_sensitive(nav_bar.button_forward, FALSE);
-#else
-	gtk_widget_set_sensitive(navbar_versekey.button_history_back, FALSE);
-	gtk_widget_set_sensitive(navbar_versekey.button_history_next, FALSE);
-	
-#endif
+	gtk_widget_set_sensitive(BUTTON_BACK, FALSE);
+	gtk_widget_set_sensitive(BUTTON_FORW, FALSE);
 	
 	tab->history_items = 0;
 	tab->current_history_item = 0;
@@ -129,23 +127,13 @@ void main_clear_tab_history(void)
 void main_update_tab_history_menu(gpointer data)
 {
 	PASSAGE_TAB_INFO *tab = (PASSAGE_TAB_INFO*) data;
-	// * set sensitivity of history buttons * 
-	if (tab->current_history_item > 1)
-#ifdef OLD_NAVBAR
-		gtk_widget_set_sensitive(nav_bar.button_back, TRUE);
-#else
-		gtk_widget_set_sensitive(navbar_versekey.button_history_back, TRUE);
-#endif
-	if (tab->current_history_item < tab->history_items)
-#ifdef OLD_NAVBAR
-		gtk_widget_set_sensitive(nav_bar.button_forward,
-					 TRUE);
-#else
-		gtk_widget_set_sensitive(navbar_versekey.button_history_next,
-					 TRUE);
-#endif
 
-	
+	/* set sensitivity of history buttons */
+	gtk_widget_set_sensitive(BUTTON_BACK,
+				 (tab->current_history_item > 0));
+
+	gtk_widget_set_sensitive(BUTTON_FORW,
+				 (tab->current_history_item < (tab->history_items - 1)));
 }
 
 
@@ -170,40 +158,33 @@ void main_add_tab_history_item(gpointer data)
 	PASSAGE_TAB_INFO *tab = (PASSAGE_TAB_INFO*) data;
 	
 	/* check to see if item is already in list  
-	   if so do nothing */
-	for (i = 0; i < tab->history_items; i++) {
-		if (!strcmp(tab->history_list[i].verseref, tab->text_commentary_key))
+	   if so do nothing except set button sensitivity */
+	for (i = 0; i < tab->history_items; ++i) {
+		if (!strcmp(tab->history_list[i].verseref, tab->text_commentary_key)) {
+			tab->current_history_item = i;
+			main_update_tab_history_menu(data);
 			return;
+		}
 	}
-	/* add item to history menu */
-	if (tab->history_items >= 24) {
-		for (i = 0; i < 24; i++) { 
+
+	/* if we have hit max length, dispose of oldest */
+	if (tab->history_items == TABHISTORYLENGTH) {
+		for (i = 0; i < (TABHISTORYLENGTH - 1); ++i) { 
 			tab->history_list[i] = tab->history_list[i + 1];
 		}
-		tab->history_items = 23;
+		--tab->history_items;
 	}
-	tab->history_list[tab->history_items].itemnum = tab->history_items;
 	
+	/* add item to history menu */
 	strcpy(tab->history_list[tab->history_items].verseref, tab->text_commentary_key);
-	if(tab->text_mod)
+	if (tab->text_mod)
 		strcpy(tab->history_list[tab->history_items].textmod, tab->text_mod);
-	if(tab->commentary_mod)
+	if (tab->commentary_mod)
 		strcpy(tab->history_list[tab->history_items].commod, tab->commentary_mod);
 
-	++tab->history_items;
 	tab->current_history_item = tab->history_items;
-	/* set sensitivity of history buttons */
-	if (tab->current_history_item > 1)
-#ifdef OLD_NAVBAR
-		gtk_widget_set_sensitive(nav_bar.button_back, TRUE);
-#else
-		gtk_widget_set_sensitive(navbar_versekey.button_history_back, TRUE);
-#endif
-#ifdef OLD_NAVBAR
-	gtk_widget_set_sensitive(nav_bar.button_forward, FALSE);
-#else
-	gtk_widget_set_sensitive(navbar_versekey.button_history_next, FALSE);
-#endif
+	++tab->history_items;
+
 	main_update_tab_history_menu(data);
 	tab->first_back_click = TRUE;
 }
@@ -247,14 +228,15 @@ GtkWidget *main_versekey_drop_down_new(gpointer data)
 				   (on_clear_activate),
 				   NULL);		
 		gtk_container_add(GTK_CONTAINER(menu), item); 
-	for (i = 0; i < tab->history_items; i++) {
+
+	for (i = 0; i < tab->history_items; ++i) {
 		item = gtk_menu_item_new_with_label(tab->history_list[i].verseref);
 		gtk_widget_show(item);	
 		gtk_container_add(GTK_CONTAINER(menu), item);
 		g_signal_connect(GTK_OBJECT(item), "activate",
 				   G_CALLBACK
 				   (on_menu_historyitem_activate),
-				   GINT_TO_POINTER(tab->history_list[i].itemnum));	
+				   GINT_TO_POINTER(i));	
 		if (!strcmp(tab->history_list[i].verseref, tab->text_commentary_key))
 			gtk_widget_set_sensitive(item,FALSE);
 	}
@@ -280,30 +262,25 @@ GtkWidget *main_versekey_drop_down_new(gpointer data)
 
 void main_change_verse_tab_history(gint historynum)
 {
-	gchar *url;
-	PASSAGE_TAB_INFO *tab = NULL;
-	
-	tab = (PASSAGE_TAB_INFO*) cur_passage_tab;
-	
+	PASSAGE_TAB_INFO *tab = cur_passage_tab;
+	gchar *key;
+
 	tab->current_history_item = historynum;
-	if (tab->first_back_click) {
-		settings.addhistoryitem = TRUE;
-	} else {
-		settings.addhistoryitem = FALSE;
-	}
+	settings.addhistoryitem = tab->first_back_click;
+
 	GS_print(("commod = %s\n",tab->history_list[historynum].commod));
 	GS_print(("textmod = %s\n",tab->history_list[historynum].textmod));	
-	// ** change commentary mod **
-	url = g_strdup_printf("sword://%s/%s",tab->history_list[historynum].commod,
-				  tab->history_list[historynum].verseref);
-	main_url_handler(url, TRUE);
-	g_free(url);
-	// ** change text mod **
-	url = g_strdup_printf("sword://%s/%s",tab->history_list[historynum].textmod,
-				  tab->history_list[historynum].verseref);
-	main_url_handler(url, TRUE);
-	g_free(url);
 
+	// ** change commentary mod **
+	main_display_commentary(tab->history_list[historynum].commod,
+				tab->history_list[historynum].verseref);
+
+	// ** change text mod **
+	main_display_bible(tab->history_list[historynum].textmod,
+			   tab->history_list[historynum].verseref);
+
+	key = main_update_nav_controls(tab->history_list[historynum].verseref);
+	if (key) g_free(key);
 }
 
 
@@ -325,57 +302,28 @@ void main_change_verse_tab_history(gint historynum)
 
 void main_navigate_tab_history(gint direction)
 {
-	PASSAGE_TAB_INFO *tab = NULL;
-    
-	tab = (PASSAGE_TAB_INFO*) cur_passage_tab;
+	PASSAGE_TAB_INFO *tab = cur_passage_tab;
+
 	settings.addhistoryitem = FALSE;
 	if (direction) {
 		if (tab->current_history_item < tab->history_items - 1) {
 			++tab->current_history_item;
 			main_change_verse_tab_history(tab->current_history_item);
 		}
-		/* set sensitivity of history buttons */
-#ifdef OLD_NAVBAR
-		if (tab->current_history_item >= tab->history_items - 1)
-			gtk_widget_set_sensitive(nav_bar.button_forward,
-						 FALSE);
-		if (tab->current_history_item >= 0)
-			gtk_widget_set_sensitive(nav_bar.button_back,
-						 TRUE);
-#else
-		if (tab->current_history_item >= tab->history_items - 1)
-			gtk_widget_set_sensitive(navbar_versekey.button_history_next,
-						 FALSE);
-		if (tab->current_history_item >= 0)
-			gtk_widget_set_sensitive(navbar_versekey.button_history_back,
-						 TRUE);
-#endif
 	} else {
 		if (tab->current_history_item > 0) {
 			--tab->current_history_item;
-			if (tab->first_back_click)
+#if 0
+			if (tab->first_back_click &&
+			    (tab->current_history_item > 0))
 				--tab->current_history_item;
+#endif
 			
 			main_change_verse_tab_history(tab->current_history_item);
 			tab->first_back_click = FALSE;
 		}
-		/* set sensitivity of history buttons */
-#ifdef OLD_NAVBAR
-		if (tab->current_history_item < 1)
-			gtk_widget_set_sensitive(nav_bar.button_back,
-						 FALSE);
-		if (tab->current_history_item < tab->history_items)
-			gtk_widget_set_sensitive(nav_bar.button_forward,
-						 TRUE);
-#else
-		if (tab->current_history_item < 1)
-			gtk_widget_set_sensitive(navbar_versekey.button_history_back,
-						 FALSE);
-		if (tab->current_history_item < tab->history_items)
-			gtk_widget_set_sensitive(navbar_versekey.button_history_next,
-						 TRUE);
-#endif
 	}
+
+	main_update_tab_history_menu((gpointer) tab);
 	settings.addhistoryitem = TRUE;
-	
 }
