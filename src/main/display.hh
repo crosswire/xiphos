@@ -54,7 +54,7 @@ public:
 	{
 	}
 	virtual char Display(SWModule &imodule);
-	virtual char DisplayByChapter(SWModule &imodule, gint mod_type);
+	virtual char DisplayByChapter(SWModule &imodule);
 
 protected:
 	GtkWidget  *gtkText;
@@ -99,7 +99,7 @@ public:
 	{
 	}
 	virtual char Display(SWModule &imodule);
-	virtual char DisplayByChapter(SWModule &imodule, gint mod_type);
+	virtual char DisplayByChapter(SWModule &imodule);
 
 protected:
 	GtkWidget   *gtkText;
