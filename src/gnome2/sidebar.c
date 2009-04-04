@@ -613,7 +613,7 @@ static gboolean on_treeview_button_press_event(GtkWidget * widget,
  *   void
  */
 /*
-static void on_save_list_as_bookmarks_activate(GtkMenuItem * menuitem,
+G_MODULE_EXPORT static void on_save_list_as_bookmarks_activate(GtkMenuItem * menuitem,
 					       gpointer user_data)
 {
 	gui_verselist_to_bookmarks(list_of_verses);
@@ -708,7 +708,7 @@ static void on_about2_activate(GtkMenuItem * menuitem,
 }
 
 
-void
+G_MODULE_EXPORT void
 on_save_list_as_a_single_bookmark_activate (GtkMenuItem * menuitem,
                                         gpointer user_data)
 {
@@ -716,7 +716,7 @@ on_save_list_as_a_single_bookmark_activate (GtkMenuItem * menuitem,
 }
 
 
-void
+G_MODULE_EXPORT void
 on_save_list_as_a_series_of_bookmarks_activate (GtkMenuItem * menuitem,
                                         gpointer user_data)
 {
