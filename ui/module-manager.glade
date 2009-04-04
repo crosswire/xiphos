@@ -6,7 +6,7 @@
     <property name="visible">True</property>
     <property name="title" translatable="yes">Module Manager</property>
     <property name="modal">False</property>
-    <property name="default_width">600</property>
+    <property name="default_width">636</property>
     <property name="default_height">341</property>
     <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
     <signal name="destroy" handler="on_dialog_destroy"/>

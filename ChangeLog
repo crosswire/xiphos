@@ -1,3 +1,7 @@
+2009-04-03  karl <charcoal@users.sf.net>
+
+	* fixed bug #2704655 history glitches
+
 2009-04-03  terry <tbiggs@users.sourceforge.net>
 
 	* fixed bug #2704651 genbook tab, show Bible doesn't show navbar

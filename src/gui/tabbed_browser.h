@@ -28,8 +28,9 @@ extern "C" {
 #endif
 #include <gnome.h>
 #include "main/tab_history.h"
+
+#define	TABHISTORYLENGTH	25
 	
-typedef struct _passage_tab_info PASSAGE_TAB_INFO;
 struct _passage_tab_info {
 	GtkWidget *page_widget;
 	GtkLabel *tab_label;
@@ -45,7 +46,7 @@ struct _passage_tab_info {
 	gchar *dictlex_key;
 	gchar *book_offset;
 	gboolean comm_showing;
-	TAB_HISTORY history_list[25];
+	TAB_HISTORY history_list[TABHISTORYLENGTH];
 	gint history_items;
 	gint current_history_item;
 	gboolean first_back_click;
@@ -58,8 +59,10 @@ struct _passage_tab_info {
 	gboolean showbookeditor;
 	gboolean showparallel;
 };
+typedef struct _passage_tab_info PASSAGE_TAB_INFO;
 
-extern PASSAGE_TAB_INFO *cur_passage_tab; //need to update this every time one of the variables changes (i.e. new verse selected)
+extern PASSAGE_TAB_INFO *cur_passage_tab;
+//need to update this every time one of the variables changes (i.e. new verse selected)
 
 void gui_save_tabs(const gchar *filename);
 void gui_load_tabs(const gchar *filename);

@@ -26,21 +26,17 @@
 extern "C" {
 #endif
 
-//#include <gnome.h>
-
-typedef struct _tab_history TAB_HISTORY;
 struct _tab_history {
-        gint itemnum;
-        gchar verseref[80];
-        gchar textmod[80];
-        gchar commod[80];
+        gchar verseref[40];
+        gchar textmod[40];
+        gchar commod[40];
 };
+typedef struct _tab_history TAB_HISTORY;
 
 GtkWidget *main_versekey_drop_down_new(gpointer data);
 void main_clear_tab_history(void);
 void main_add_tab_history_item(gpointer data);
 void main_navigate_tab_history(gint direction);
-//void main_update_tab_history_menu(gpointer data);		
 void main_change_verse_tab_history(gint historynum);
 
 #ifdef __cplusplus
