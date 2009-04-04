@@ -197,8 +197,7 @@ strcasestr(const char *haystack, const char *needle)
 
 const char *
 AnalyzeForImageSize(const char *origtext,
-		    GdkWindow *window,
-		    gint mod_type)
+		    GdkWindow *window)
 {
 	static SWBuf resized;
 	SWBuf text;
@@ -228,9 +227,6 @@ AnalyzeForImageSize(const char *origtext,
 
 		if (window_y == -999) {
 			/* we have images, but we don't know bounds yet */
-
-			if (mod_type == PERCOM_TYPE)
-				mod_type = COMMENTARY_TYPE; // equivalent
 
 			gdk_drawable_get_size(window, &window_x, &window_y);
 			if ((window_x > 200) || (window_y > 200)) {
@@ -688,7 +684,7 @@ set_morph_order(SWModule& imodule)
 // display of commentary by chapter.
 //
 char
-GTKEntryDisp::DisplayByChapter(SWModule &imodule, gint mod_type)
+GTKEntryDisp::DisplayByChapter(SWModule &imodule)
 {
 	VerseKey *key = (VerseKey *)(SWKey *)imodule;
 	int curVerse = key->Verse();
@@ -742,8 +738,7 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule, gint mod_type)
 		g_free(buf);
 		swbuf.append(settings.imageresize
 			     ? AnalyzeForImageSize(rework,
-						   GDK_WINDOW(gtkText->window),
-						   mod_type)
+						   GDK_WINDOW(gtkText->window))
 			     : rework /* left as-is */);
 	}
 
@@ -773,7 +768,6 @@ GTKEntryDisp::Display(SWModule &imodule)
 #endif
 
 	gchar *buf;
-	gint mod_type;
 	mf = get_font(imodule.Name());
 	swbuf = "";
 
@@ -783,8 +777,6 @@ GTKEntryDisp::Display(SWModule &imodule)
 
 	(const char *)imodule;	// snap to entry
 	main_set_global_options(ops);
-	mod_type = backend->module_type(imodule.Name());
-	GS_message(("mod_type: %d",mod_type));
 
 	strongs_and_morph = ((ops->strongs || ops->lemmas) &&
 			     ops->morphs);
@@ -826,7 +818,7 @@ GTKEntryDisp::Display(SWModule &imodule)
 	// (this option can be enabled only in commentaries.)
 	//
 	if (ops->commentary_by_chapter)
-		return DisplayByChapter(imodule, mod_type);
+		return DisplayByChapter(imodule);
 
 	// we will use the module cache for regular commentaries,
 	// which navigate/change a lot, whereas pers.comms, lexdicts,
@@ -875,8 +867,7 @@ GTKEntryDisp::Display(SWModule &imodule)
 
 	swbuf.append(settings.imageresize
 		     ? AnalyzeForImageSize(rework,
-					   GDK_WINDOW(gtkText->window),
-					   mod_type)
+					   GDK_WINDOW(gtkText->window))
 		     : rework /* left as-is */);
 
 	swbuf.append("</font></body></html>");
@@ -1450,8 +1441,7 @@ GTKChapDisp::Display(SWModule &imodule)
 		if (cache_flags & ModuleCache::Headings)
 			swbuf.append(settings.imageresize
 				     ? AnalyzeForImageSize(cVerse.GetHeader(),
-							   GDK_WINDOW(gtkText->window),
-							   TEXT_TYPE)
+							   GDK_WINDOW(gtkText->window))
 				     : cVerse.GetHeader() /* left as-is */);
 		else
 			cVerse.InvalidateHeader();
@@ -1521,15 +1511,13 @@ GTKChapDisp::Display(SWModule &imodule)
 			}
 			swbuf.append(settings.imageresize
 				     ? AnalyzeForImageSize(text->str,
-							   GDK_WINDOW(gtkText->window),
-							   TEXT_TYPE)
+							   GDK_WINDOW(gtkText->window))
 				     : text->str /* left as-is */);
 			g_string_free(text, TRUE);
 		} else
 			swbuf.append(settings.imageresize
 				     ? AnalyzeForImageSize(rework,
-							   GDK_WINDOW(gtkText->window),
-							   TEXT_TYPE)
+							   GDK_WINDOW(gtkText->window))
 				     : rework /* left as-is */);
 
 		if (key->Verse() == curVerse) {
@@ -1591,7 +1579,7 @@ GTKChapDisp::Display(SWModule &imodule)
 // display of commentary by chapter.
 //
 char
-DialogEntryDisp::DisplayByChapter(SWModule &imodule, gint mod_type)
+DialogEntryDisp::DisplayByChapter(SWModule &imodule)
 {
 	VerseKey *key = (VerseKey *)(SWKey *)imodule;
 	int curVerse = key->Verse();
@@ -1645,8 +1633,7 @@ DialogEntryDisp::DisplayByChapter(SWModule &imodule, gint mod_type)
 		g_free(buf);
 		swbuf.append(settings.imageresize
 			     ? AnalyzeForImageSize(rework,
-						   GDK_WINDOW(gtkText->window),
-						   mod_type)
+						   GDK_WINDOW(gtkText->window))
 			     : rework /* left as-is */);
 	}
 
@@ -1670,7 +1657,6 @@ DialogEntryDisp::Display(SWModule &imodule)
 {
 	swbuf = "";
 	char *buf;
-	gint mod_type;
 	mf = get_font(imodule.Name());
 	ops = main_new_globals(imodule.Name(),1);
 	main_dialog_set_global_options((BackEnd*)be, ops);
@@ -1678,7 +1664,6 @@ DialogEntryDisp::Display(SWModule &imodule)
 
 	(const char *)imodule;	// snap to entry
 	//main_set_global_options(ops);
-	mod_type = backend->module_type(imodule.Name());
 
 	buf = g_strdup_printf(HTML_START
 			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
@@ -1706,7 +1691,7 @@ DialogEntryDisp::Display(SWModule &imodule)
 	// instead heading off to show a whole chapter
 	//
 	if (ops->commentary_by_chapter)
-		return DisplayByChapter(imodule, mod_type);
+		return DisplayByChapter(imodule);
 
 	if (be->module_type(imodule.Name()) == COMMENTARY_TYPE) {
 		VerseKey *key = (VerseKey *)(SWKey *)imodule;
@@ -1740,8 +1725,7 @@ DialogEntryDisp::Display(SWModule &imodule)
 
 	swbuf.append(settings.imageresize
 		     ? AnalyzeForImageSize(rework,
-					   GDK_WINDOW(gtkText->window),
-					   mod_type)
+					   GDK_WINDOW(gtkText->window))
 		     : rework /* left as-is */);
 
 	swbuf.append("</font></body></html>");
