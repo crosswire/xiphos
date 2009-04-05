@@ -141,7 +141,7 @@ GladeXML *gxml;
 
 static void load_module_tree(GtkTreeView * treeview, gboolean install);
 
-#if defined(HAVE_LIBGTK_X11_2_0) || defined(HAVE_LIBGTK_WIN32_2_0)
+#ifdef HAVE_WIDGET_TOOLTIP_TEXT
 static
 gboolean query_tooltip (GtkWidget  *widget,
 			gint        x,
@@ -170,10 +170,8 @@ gboolean query_tooltip (GtkWidget  *widget,
 						 &iter)) {
 		return FALSE;
 	}
-	GS_message (("\nquery_tooltip\n"));
 	
 	if (gtk_tree_model_iter_has_child (model ,&iter)) {
-		GS_message (("\n\nquery_tooltip\nhas children\n\n"));
 		gtk_tree_path_free (path);		
 		return FALSE;
 	}
@@ -222,7 +220,7 @@ gboolean query_tooltip (GtkWidget  *widget,
 	g_string_free (description, TRUE);
 	return TRUE;
 }
-#endif /* HAVE_LIBGTK_X11_2_0 || HAVE_LIBGTK_WIN32_2_0 */
+#endif /* HAVE_WIDGET_TOOLTIP_TEXT */
 
 /******************************************************************************
  * Name
@@ -1374,9 +1372,9 @@ fixed_toggled(GtkCellRendererToggle *cell,
  *   void
  */
 
-#if !defined(HAVE_LIBGTK_X11_2_0) && !defined(HAVE_LIBGTK_WIN32_2_0)
+#ifndef HAVE_WIDGET_TOOLTIP_TEXT
 #define	gtk_widget_set_tooltip_text(x,y)	/* too old for this tooltip support */
-#endif /* !HAVE_LIBGTK_X11_2_0 && !HAVE_LIBGTK_WIN32_2_0 */
+#endif /* !HAVE_WIDGET_TOOLTIP_TEXT */
 
 static void
 add_columns(GtkTreeView * treeview,
@@ -1410,8 +1408,8 @@ add_columns(GtkTreeView * treeview,
 	gtk_widget_show(image);
 	gtk_widget_set_tooltip_text(image,
 				    (remove
-				     ? _("A checkmark means this module is already installed")
-				     : ""));
+				     ? ""
+				     : _("A checkmark means this module is already installed")));
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
 	gtk_tree_view_column_set_widget(column, image);
 	gtk_tree_view_column_pack_start(column, renderer, TRUE);
@@ -2967,7 +2965,7 @@ create_module_manager_dialog(gboolean first_run)
 	treeview2 = glade_xml_get_widget (gxml, "treeview5");
 	setup_treeviews_install_remove(GTK_TREE_VIEW(treeview), GTK_TREE_VIEW(treeview2));
 	
-#if defined(HAVE_LIBGTK_X11_2_0) || defined(HAVE_LIBGTK_WIN32_2_0)
+#ifdef HAVE_WIDGET_TOOLTIP_TEXT
 	gtk_widget_set_has_tooltip (treeview, TRUE);
 	g_signal_connect((gpointer) treeview,
 			 "query-tooltip",
@@ -2977,7 +2975,7 @@ create_module_manager_dialog(gboolean first_run)
 	g_signal_connect((gpointer) treeview2,
 			 "query-tooltip",
 			 G_CALLBACK(query_tooltip), NULL);
-#endif /* HAVE_LIBGTK_X11_2_0 || HAVE_LIBGTK_WIN32_2_0 */
+#endif /* HAVE_WIDGET_TOOLTIP_TEXT */
 	
 	/* notebook */
 	notebook1 = glade_xml_get_widget (gxml, "notebook1");		
