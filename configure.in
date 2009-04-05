@@ -219,32 +219,39 @@ if test "x$cygwin" = xno; then
 	gecko=no 
   fi
 
-  dnl ====================================
-  dnl Gnome-doc-utils
-  dnl ====================================
-  GNOME_DOC_INIT
+  case "$host_os" in
+    mingw*)
+      ;;
+    *)
+      dnl ====================================
+      dnl Gnome-doc-utils
+      dnl ====================================
+      GNOME_DOC_INIT
 
-  dnl ====================================
-  dnl = Begin tests for scrollkeeper
-  dnl ====================================
-  AC_PATH_PROG(SCROLLKEEPER_CONFIG, scrollkeeper-config,no)
-  if test x$SCROLLKEEPER_CONFIG = xno; then
-    AC_MSG_ERROR(Couldn't find scrollkeeper-config. Please install the scrollkeeper package: http://scrollkeeper.sourceforge.net)
-  fi
-  dnl ====================================
-  dnl = End tests for scrollkeeper
-  dnl ====================================Y
-  SCROLLKEEPER_BUILD_REQUIRED=0.3.5
-  AC_SUBST(SCROLLKEEPER_BUILD_REQUIRED)
+      dnl ====================================
+      dnl = Begin tests for scrollkeeper
+      dnl ====================================
+      AC_PATH_PROG(SCROLLKEEPER_CONFIG, scrollkeeper-config,no)
+      if test x$SCROLLKEEPER_CONFIG = xno; then
+        AC_MSG_ERROR(Couldn't find scrollkeeper-config. Please install the scrollkeeper package: http://scrollkeeper.sourceforge.net)
+      fi
+      dnl ====================================
+      dnl = End tests for scrollkeeper
+      dnl ====================================Y
+      SCROLLKEEPER_BUILD_REQUIRED=0.3.5
+      AC_SUBST(SCROLLKEEPER_BUILD_REQUIRED)
+      ;;
+  esac
 else
-	GECKO_COMPONENT_LIBS=""
-	GECKO_COMPONENT_CFLAGS=""
-	GECKO_HOME=""
-	AM_CONDITIONAL(USE_GTKMOZEMBED, false)
-	gecko=no 
-	
-	enable_scrollkeeper=no
-	AM_CONDITIONAL(ENABLE_SK,  test "x$enable_scrollkeeper" = "xyes")
+  dnl cygwin-specific
+  GECKO_COMPONENT_LIBS=""
+  GECKO_COMPONENT_CFLAGS=""
+  GECKO_HOME=""
+  AM_CONDITIONAL(USE_GTKMOZEMBED, false)
+  gecko=no 
+
+  enable_scrollkeeper=no
+  AM_CONDITIONAL(ENABLE_SK,  test "x$enable_scrollkeeper" = "xyes")
 fi
 
 AC_CHECK_FUNCS(strcasestr, [have_strcasestr="yes"])
