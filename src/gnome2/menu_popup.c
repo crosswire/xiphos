@@ -311,7 +311,7 @@ static void on_edit_prayerlist_activate (GtkMenuItem * menuitem, gpointer user_d
  *   
  */
 
-void on_popup_about_activate (GtkMenuItem * menuitem, gpointer user_data)
+G_MODULE_EXPORT void on_popup_about_activate (GtkMenuItem * menuitem, gpointer user_data)
 {
 	gui_display_about_module_dialog((is_dialog ?
 					dialog->mod_name :
@@ -335,7 +335,7 @@ void on_popup_about_activate (GtkMenuItem * menuitem, gpointer user_data)
  *   
  */
 
-void on_popup_bookmark_activate        (GtkMenuItem     *menuitem,
+G_MODULE_EXPORT void on_popup_bookmark_activate        (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
 	gchar *key = NULL;
@@ -373,7 +373,7 @@ void on_popup_bookmark_activate        (GtkMenuItem     *menuitem,
  *   
  */
 
-void on_popup_export_passage_activate  (GtkMenuItem     *menuitem,
+G_MODULE_EXPORT void on_popup_export_passage_activate  (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {	
     	if (is_dialog) return;
@@ -398,7 +398,7 @@ void on_popup_export_passage_activate  (GtkMenuItem     *menuitem,
  *   
  */
 
-void on_popup_print_activate           (GtkMenuItem     *menuitem,
+G_MODULE_EXPORT void on_popup_print_activate           (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
 	if (is_dialog) {
@@ -439,7 +439,7 @@ void on_popup_print_activate           (GtkMenuItem     *menuitem,
  *   
  */
 
-void on_close_activate           (GtkMenuItem     *menuitem,
+G_MODULE_EXPORT void on_close_activate           (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
 	/* FIXME */    
@@ -462,7 +462,7 @@ void on_close_activate           (GtkMenuItem     *menuitem,
  *   
  */
 
-void on_popup_copy_activate            (GtkMenuItem     *menuitem,
+G_MODULE_EXPORT void on_popup_copy_activate            (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
 	if (is_dialog) {
@@ -497,7 +497,7 @@ void on_popup_copy_activate            (GtkMenuItem     *menuitem,
  *   
  */
 
-void on_popup_find_activate            (GtkMenuItem     *menuitem,
+G_MODULE_EXPORT void on_popup_find_activate            (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
     	if (is_dialog)
@@ -523,7 +523,7 @@ void on_popup_find_activate            (GtkMenuItem     *menuitem,
  *   
  */
 
-void on_popup_font_activate (GtkMenuItem * menuitem, gpointer user_data)
+G_MODULE_EXPORT void on_popup_font_activate (GtkMenuItem * menuitem, gpointer user_data)
 {
 	if (is_dialog) {
 		gchar *url = g_strdup_printf("sword://%s/%s",
@@ -565,7 +565,7 @@ void on_popup_font_activate (GtkMenuItem * menuitem, gpointer user_data)
  *   
  */
 
-void on_words_of_chist_in_red_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
+G_MODULE_EXPORT void on_words_of_chist_in_red_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
    	_global_option_main_pane((GtkMenuItem*)menuitem, 
 					 "Words of Christ in Red"); /* string not seen by user */
@@ -588,7 +588,7 @@ void on_words_of_chist_in_red_activate (GtkCheckMenuItem * menuitem, gpointer us
  *   
  */
 
-void on_strong_s_numbers_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
+G_MODULE_EXPORT void on_strong_s_numbers_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
 	_global_option_main_pane((GtkMenuItem*)menuitem, "Strong's Numbers"); /* string not seen by user */
 }
@@ -610,7 +610,7 @@ void on_strong_s_numbers_activate (GtkCheckMenuItem * menuitem, gpointer user_da
  *   
  */
 
-void on_morphological_tags_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
+G_MODULE_EXPORT void on_morphological_tags_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
 	_global_option_main_pane((GtkMenuItem*)menuitem, "Morphological Tags"); /* string not seen by user */
 }
@@ -632,7 +632,7 @@ void on_morphological_tags_activate (GtkCheckMenuItem * menuitem, gpointer user_
  *   
  */
 
-void on_footnotes_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
+G_MODULE_EXPORT void on_footnotes_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
 	_global_option_main_pane((GtkMenuItem*)menuitem, "Footnotes"); /* string not seen by user */
 }
@@ -654,7 +654,7 @@ void on_footnotes_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
  *   
  */
 
-void on_greek_accents_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
+G_MODULE_EXPORT void on_greek_accents_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
 	_global_option_main_pane((GtkMenuItem*)menuitem, "Greek Accents"); /* string not seen by user */
 }
@@ -676,7 +676,7 @@ void on_greek_accents_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
  *   
  */
 
-void on_lemmas_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
+G_MODULE_EXPORT void on_lemmas_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
 	_global_option_main_pane((GtkMenuItem*)menuitem, "Lemmas"); /* string not seen by user */
 }
@@ -698,7 +698,7 @@ void on_lemmas_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
  *   
  */
 
-void on_scripture_cross_references_activate (GtkCheckMenuItem * menuitem,
+G_MODULE_EXPORT void on_scripture_cross_references_activate (GtkCheckMenuItem * menuitem,
                                         	gpointer user_data)
 {
 	_global_option_main_pane((GtkMenuItem*)menuitem, "Scripture Cross-references"); /* string not seen by user */
@@ -721,7 +721,7 @@ void on_scripture_cross_references_activate (GtkCheckMenuItem * menuitem,
  *   
  */
 
-void on_hebrew_vowel_points_activate (GtkCheckMenuItem * menuitem,
+G_MODULE_EXPORT void on_hebrew_vowel_points_activate (GtkCheckMenuItem * menuitem,
                                         gpointer user_data)
 {
 	_global_option_main_pane((GtkMenuItem*)menuitem, "Hebrew Vowel Points"); /* string not seen by user */
@@ -744,7 +744,7 @@ void on_hebrew_vowel_points_activate (GtkCheckMenuItem * menuitem,
  *   
  */
 
-void on_hebrew_cantillation_activate (GtkCheckMenuItem * menuitem,
+G_MODULE_EXPORT void on_hebrew_cantillation_activate (GtkCheckMenuItem * menuitem,
                                         gpointer user_data)
 {
 	_global_option_main_pane((GtkMenuItem*)menuitem, "Hebrew Cantillation"); /* string not seen by user */
@@ -767,7 +767,7 @@ void on_hebrew_cantillation_activate (GtkCheckMenuItem * menuitem,
  *   
  */
 
-void on_headings_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
+G_MODULE_EXPORT void on_headings_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
 	_global_option_main_pane((GtkMenuItem*)menuitem, "Headings"); /* string not seen by user */
 }
@@ -789,7 +789,7 @@ void on_headings_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
  *   
  */
 
-void on_transliteration_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
+G_MODULE_EXPORT void on_transliteration_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
 	_global_option_main_pane((GtkMenuItem*)menuitem, "Transliteration"); /* string not seen by user */
 }
@@ -810,7 +810,7 @@ void on_transliteration_activate (GtkCheckMenuItem * menuitem, gpointer user_dat
  *   
  */
 
-void on_commentary_by_chapter_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
+G_MODULE_EXPORT void on_commentary_by_chapter_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
    	_global_option_main_pane((GtkMenuItem*)menuitem, "Commentary by Chapter"); /* string not seen by user */
 }
@@ -832,7 +832,7 @@ void on_commentary_by_chapter_activate (GtkCheckMenuItem * menuitem, gpointer us
  *   
  */
 
-void on_primary_reading_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
+G_MODULE_EXPORT void on_primary_reading_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
 	gchar *key = NULL;
     
@@ -872,7 +872,7 @@ void on_primary_reading_activate (GtkCheckMenuItem * menuitem, gpointer user_dat
  *   
  */
 
-void on_secondary_reading_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
+G_MODULE_EXPORT void on_secondary_reading_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {	
     	gchar *key = NULL;
     
@@ -912,7 +912,7 @@ void on_secondary_reading_activate (GtkCheckMenuItem * menuitem, gpointer user_d
  *   
  */
 
-void on_all_readings_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
+G_MODULE_EXPORT void on_all_readings_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {	
     	gchar *key = NULL;
     
@@ -953,7 +953,7 @@ void on_all_readings_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
  *   
  */
 
-void on_image_content_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
+G_MODULE_EXPORT void on_image_content_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
 	_global_option_main_pane((GtkMenuItem*)menuitem, "Image Content"); /* string not seen by user */
 }
@@ -975,7 +975,7 @@ void on_image_content_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
  *   
  */
 
-void on_respect_font_faces_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
+G_MODULE_EXPORT void on_respect_font_faces_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
 	_global_option_main_pane((GtkMenuItem*)menuitem, "Respect Font Faces"); /* string not seen by user */
 }
@@ -997,7 +997,7 @@ void on_respect_font_faces_activate (GtkCheckMenuItem * menuitem, gpointer user_
  *   
  */
 
-void on_unlock_this_module_activate (GtkMenuItem * menuitem, gpointer user_data)
+G_MODULE_EXPORT void on_unlock_this_module_activate (GtkMenuItem * menuitem, gpointer user_data)
 {
 	gchar *cipher_key;
 	gchar *cipher_old;
@@ -1036,7 +1036,7 @@ void on_unlock_this_module_activate (GtkMenuItem * menuitem, gpointer user_data)
  *   
  */
 
-void on_display_book_heading_activate (GtkMenuItem * menuitem, gpointer user_data)
+G_MODULE_EXPORT void on_display_book_heading_activate (GtkMenuItem * menuitem, gpointer user_data)
 {
 	if (is_dialog)
 		main_dialogs_book_heading (dialog);
@@ -1061,7 +1061,7 @@ void on_display_book_heading_activate (GtkMenuItem * menuitem, gpointer user_dat
  *   
  */
 
-void on_display_chapter_heading_activate (GtkMenuItem * menuitem, gpointer user_data)
+G_MODULE_EXPORT void on_display_chapter_heading_activate (GtkMenuItem * menuitem, gpointer user_data)
 {
 	if (is_dialog)
 		main_dialogs_chapter_heading (dialog);
@@ -1086,7 +1086,7 @@ void on_display_chapter_heading_activate (GtkMenuItem * menuitem, gpointer user_
  *   
  */
 
-void on_use_current_dictionary_activate (GtkMenuItem * menuitem, gpointer user_data)
+G_MODULE_EXPORT void on_use_current_dictionary_activate (GtkMenuItem * menuitem, gpointer user_data)
 {			
 #ifdef USE_GTKMOZEMBED
 	gecko_html_copy_selection(GECKO_HTML(_get_html ()));
@@ -1120,7 +1120,7 @@ void on_use_current_dictionary_activate (GtkMenuItem * menuitem, gpointer user_d
  *   
  */
 
-void on_rename_perscomm_activate (GtkMenuItem * menuitem, gpointer user_data)
+G_MODULE_EXPORT void on_rename_perscomm_activate (GtkMenuItem * menuitem, gpointer user_data)
 {
     	if (is_dialog) return;
     
@@ -1271,7 +1271,7 @@ out1:
  *   
  */
 
-void on_dump_perscomm_activate (GtkMenuItem * menuitem, gpointer user_data)
+G_MODULE_EXPORT void on_dump_perscomm_activate (GtkMenuItem * menuitem, gpointer user_data)
 {
 	main_sidebar_perscomm_dump ();
 }
@@ -1293,7 +1293,7 @@ void on_dump_perscomm_activate (GtkMenuItem * menuitem, gpointer user_data)
  *   
  */
 
-void on_read_selection_aloud_activate (GtkMenuItem * menuitem, gpointer user_data)
+G_MODULE_EXPORT void on_read_selection_aloud_activate (GtkMenuItem * menuitem, gpointer user_data)
 {
 	gchar *dict_key;
 	int len;
@@ -1334,7 +1334,7 @@ void on_read_selection_aloud_activate (GtkMenuItem * menuitem, gpointer user_dat
  *   GtkWidget*
  */
 
-void _add_and_check_global_opts (GladeXML *gxml,
+G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 				 const gchar * mod_name, 
 				 GtkWidget * submenu, 
 				 DIALOG_DATA * d)
