@@ -625,6 +625,14 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 		if (state == GDK_CONTROL_MASK)		// Ctrl-Q quit
 			delete_event (NULL, NULL, NULL);
 		break;
+	case GS_KEY_J: // J    "next verse"
+		access_on_down_eventbox_button_release_event
+			(VERSE_BUTTON);
+		break;
+	case GS_KEY_K: // K    "previous verse"
+		access_on_up_eventbox_button_release_event
+			(VERSE_BUTTON);
+		break;
 	case GS_KEY_N: // N    "next"
 		if (state == GDK_CONTROL_MASK)		// Ctrl-N verse
 			access_on_down_eventbox_button_release_event

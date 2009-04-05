@@ -1,3 +1,7 @@
+2009-04-04  karl <charcoal@users.sf.net>
+
+	* feat.req.#2705145 add j/k for verse up/down (dup of ^n/^p).
+
 2009-04-03  karl <charcoal@users.sf.net>
 
 	* fixed bug #2704655 history glitches
