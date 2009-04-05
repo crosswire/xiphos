@@ -8,12 +8,36 @@ AM_CONFIG_HEADER(config.h)
 
 AC_PROG_MAKE_SET
 
+dnl ***
+dnl Sword libs
+dnl ***
+PKG_CHECK_MODULES(SWORD, sword >= 1.5.11, , echo error: either no sword or sword not recent enough && exit 1)
+PKG_CHECK_MODULES(SWORD_MULTIVERSE, sword > 1.5.11, have_sword_multiverse=yes, have_sword_multiverse=no)
+if test "x$have_sword_multiverse" = xyes; then
+	export SWORD_CFLAGS="$SWORD_CFLAGS -DSWORD_MULTIVERSE"
+fi
+AC_SUBST(SWORD_LIBS)
+AC_SUBST(SWORD_CFLAGS)
+
+dnl ***
+dnl basic environment
+dnl ***
 DIRS="backend gecko editor main gnome2"
 AC_SUBST(DIRS)
 xiphos_exec="xiphos"
 AC_SUBST(xiphos_exec)	
+case "$host_os" in
+  mingw*)
+    export SWORD_LIBS="$SWORD_LIBS -lcurldll"
+    PKG_CHECK_MODULES(GNOME, glib-2.0 gtk+-2.0 libgnomeprintui-2.2 libgnomeui-2.0 libxml-2.0 libglade-2.0 gmodule-no-export-2.0,,echo error: some devel libs are missing: check for glib2 gtk2 libgnomeprintui22 libgnomeui libxml2 libglade2 && exit 1)
+    ;;
+  *)
+    PKG_CHECK_MODULES(GNOME, glib-2.0 gtk+-2.0 libgnomeprintui-2.2 libgnomeui-2.0 libxml-2.0 libglade-2.0 gmodule-export-2.0,,echo error: some devel libs are missing: check for glib2 gtk2 libgnomeprintui22 libgnomeui libxml2 libglade2 && exit 1)
+    ;;
+esac
 AC_SUBST(GNOME_LIBS)
 AC_SUBST(GNOME_CFLAGS)
+
 dnl AC_ENABLE_STATIC(yes)
 
 dnl ***
@@ -39,19 +63,6 @@ if test "x$have_gtkuprint" = xyes; then
 fi
 AC_SUBST(UPRINT_LIBS)
 AC_SUBST(UPRINT_CFLAGS)
-
-
-dnl ***
-dnl Sword libs
-dnl ***
-PKG_CHECK_MODULES(SWORD, sword >= 1.5.11, , echo error: either no sword or sword not recent enough && exit 1)
-PKG_CHECK_MODULES(SWORD_MULTIVERSE, sword > 1.5.11, have_sword_multiverse=yes, have_sword_multiverse=no)
-if test "x$have_sword_multiverse" = xyes; then
-	export SWORD_CFLAGS="$SWORD_CFLAGS -DSWORD_MULTIVERSE"
-fi
-
-AC_SUBST(SWORD_LIBS)
-AC_SUBST(SWORD_CFLAGS)
 
 
 dnl ***
@@ -213,23 +224,13 @@ if test "x$cygwin" = xno; then
   dnl ====================================
   GNOME_DOC_INIT
 
-case $host_os in mingw*)
-  export SWORD_LIBS="$SWORD_LIBS -lcurldll"
-  PKG_CHECK_MODULES(GNOME, glib-2.0 gtk+-2.0 libgnomeprintui-2.2 libgnomeui-2.0 libxml-2.0 libglade-2.0 gmodule-no-export-2.0,,echo error: some devel libs are missing: check for glib2 gtk2 libgnomeprintui22 libgnomeui libxml2 libglade2 && exit 1)
-esac
-  
   dnl ====================================
   dnl = Begin tests for scrollkeeper
   dnl ====================================
   AC_PATH_PROG(SCROLLKEEPER_CONFIG, scrollkeeper-config,no)
-case !$host_os in mingw*)
   if test x$SCROLLKEEPER_CONFIG = xno; then
     AC_MSG_ERROR(Couldn't find scrollkeeper-config. Please install the scrollkeeper package: http://scrollkeeper.sourceforge.net)
   fi
-  PKG_CHECK_MODULES(GNOME, glib-2.0 gtk+-2.0 libgnomeprintui-2.2 libgnomeui-2.0 libxml-2.0 libglade-2.0 gmodule-export-2.0,,echo error: some devel libs are missing: check for glib2 gtk2 libgnomeprintui22 libgnomeui libxml2 libglade2 && exit 1)
-esac
-
-
   dnl ====================================
   dnl = End tests for scrollkeeper
   dnl ====================================Y
