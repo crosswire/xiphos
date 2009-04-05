@@ -38,6 +38,14 @@ esac
 AC_SUBST(GNOME_LIBS)
 AC_SUBST(GNOME_CFLAGS)
 
+dnl all platforms have a gtk-VIDEOPLATFORM-2.0 lib, but
+dnl it must be at least version 2.12 in order for widget
+dnl tooltips to be set (ha, giggle - cf. F7).
+PKG_CHECK_MODULES(tooltiptext, gtk+-2.0 >= 2.12, have_new_gtk2=yes, have_new_gtk2=no)
+if test "x$have_new_gtk2" = xyes; then
+  AC_DEFINE(HAVE_WIDGET_TOOLTIP_TEXT, 1, [Means gtk_widget_set_tooltip_text works])
+fi
+
 dnl AC_ENABLE_STATIC(yes)
 
 dnl ***
@@ -141,16 +149,6 @@ AC_DEFINE_UNQUOTED(GTKHTML_API_VERSION, "$GTKHTML_API_VERSION", [The gtkhtml api
 AC_SUBST(GTKHTML_LIBS)
 AC_SUBST(GTKHTML_CFLAGS)
 AC_SUBST(GTKHTML_DATA_DIR)
-
-dnl AC_ARG_ENABLE(prayer_list,[  --enable-prayer_list    use prayer_list [default=no]],prayer_list=$enableval,prayer_list=no)
-dnl if test "x$prayer_list" = xyes; then
-dnl   AC_DEFINE(PRAYERLIST, 1, [Define if wish to enable the PrayerList])
-dnl fi
-
-dnl AC_ARG_ENABLE(exporter,[  --enable-exporter    use exporter [default=yes]],exporter=$enableval,exporter=yes)
-dnl if test "x$exporter" = xyes; then
-dnl   AC_DEFINE(USE_EXPORTER, 1, [Define if wish to enable the Passage exporter])
-dnl fi
 
 AC_ARG_ENABLE(paratab,[  --enable-paratab    use paratab [default=yes]],paratab=$enableval,paratab=yes)
 if test "x$paratab" = xyes; then
@@ -256,12 +254,6 @@ fi
 
 AC_CHECK_FUNCS(strcasestr, [have_strcasestr="yes"])
 AM_CONDITIONAL(HAVE_STRCASESTR, test x$have_strcasestr = xyes)
-
-dnl all platforms have one of these 2 libs, but not all such libs
-dnl have the needed tooltip routine so we can set tips properly,
-dnl even though they're all "2.0" (ha, giggle - cf. F7).
-AC_CHECK_LIB(gtk-x11-2.0, gtk_widget_set_tooltip_text)
-AC_CHECK_LIB(gtk-win32-2.0, gtk_widget_set_tooltip_text)
 
 AC_SUBST(GECKO_HOME)
 AC_SUBST(GECKO_COMPONENT_LIBS)
