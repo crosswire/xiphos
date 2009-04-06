@@ -774,35 +774,6 @@ void main_dialogs_dictionary_entry_changed(DIALOG_DATA * d)
 
 /******************************************************************************
  * Name
- *   main_dialog_delete_note
- *
- * Synopsis
- *   #include ".h"
- *
- *   void main_dialog_delete_note(DIALOG_DATA * d)	
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-/*
-void main_dialog_delete_note(gpointer data)
-{
-#ifndef USE_GTKHTML38
-	GSHTMLEditorControlData *e = (GSHTMLEditorControlData*) data;
-	BackEnd *be = (BackEnd*)e->be;
-	
-	if(!be)
-		return;	
-	be->delete_entry();
-#endif	
-}
-*/
-
-/******************************************************************************
- * Name
  *   main_free_on_destroy
  *
  * Synopsis

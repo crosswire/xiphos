@@ -48,7 +48,6 @@
 #include "gui/dictlex.h"
 #include "gui/dictlex_dialog.h"
 #include "gui/bookmarks.h"
-#include "gui/studypad.h"
 #include "gui/parallel_view.h"
 #include "gui/dialog.h"
 #include "gui/widgets.h"

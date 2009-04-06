@@ -228,118 +228,6 @@ static gint button_press_event(GtkWidget *html,
 	return FALSE;
 }
 
-#endif
-
-
-/******************************************************************************
- * Name
- *   book_changed
- *
- * Synopsis
- *   #include ".h"
- *
- *   void book_changed(GtkEditable * editable, gpointer user_data)	
- *
- * Description
- *   change book 
- *
- * Return value
- *   void
- */
-/*
-static void book_changed(GtkEditable *editable,
-			 DIALOG_DATA *d)
-{
-	gchar *url;
-	gchar *bookname = gtk_editable_get_chars(editable, 0, -1);
-
-	cur_d = d;
-	if (*bookname) {
-		url = g_strdup_printf("sword:///%s 1:1", bookname);
-		main_dialogs_url_handler(d, url, TRUE);
-		g_free(url);
-	}
-}
-*/
-
-/******************************************************************************
- * Name
- *   chapter_button_release_event
- *
- * Synopsis
- *   #include "bibletext_dialog.h"
- *
- *   gboolean chapter_button_release_event(GtkWidget * widget,
- *			GdkEventButton * event,   gpointer user_data)	
- *
- * Description
- *    change chapter 
- *
- * Return value
- *   gboolean
- */
-/*
-static gboolean chapter_button_release_event(GtkWidget *widget,
-					     GdkEventButton *event,
-					     DIALOG_DATA *d)
-{
-	G_CONST_RETURN gchar *bookname;
-	gchar *url;
-//	gchar *val_key;
-	gint chapter;
-	cur_d = d;
-	bookname = (gchar *) gtk_entry_get_text(GTK_ENTRY(d->cbe_book));
-	chapter =
-	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(d->spb_chapter));
-	url = g_strdup_printf("sword:///%s %d:1", bookname, chapter);
-	main_dialogs_url_handler(d, url, TRUE);
-	g_free(url);
-
-	return FALSE;
-}
-*/
-
-/******************************************************************************
- * Name
- *   
- *
- * Synopsis
- *   #include "bibletext_dialog.h"
- *
- *   gboolean (GtkWidget * widget, 
- *			GdkEventButton * event,  gpointer user_data)	
- *
- * Description
- *    change verse
- *
- * Return value
- *   gboolean
- */
-/*
-static gboolean verse_button_release_event(GtkWidget *widget,
-					   GdkEventButton *event,
-					   DIALOG_DATA *d)
-{
-	G_CONST_RETURN gchar *bookname;
-	gchar *url;
-//	gchar *val_key;
-	gint chapter, verse;
-	cur_d = d;
-	bookname = (gchar *) gtk_entry_get_text(GTK_ENTRY(d->cbe_book));
-	chapter =
-	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(d->spb_chapter));
-	verse =
-	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(d->spb_verse));
-	url =
-	    g_strdup_printf("sword:///%s %d:%d",
-			    bookname, chapter, verse);
-
-	main_dialogs_url_handler(d, url, TRUE);
-	g_free(url);
-
-	return FALSE;
-}
-*/
 
 /******************************************************************************
  * Name
@@ -352,12 +240,11 @@ static gboolean verse_button_release_event(GtkWidget *widget,
  *
  * Description
  *    front-end-ish handler for xref clicks, to supply book name to prefix.
- *
+ *o
  * Return value
  *   void
  */
 
-#ifndef USE_GTKHTML38
 void commentary_prefixable_link(GtkHTML *html,
 				const gchar *url,
 				gpointer data)
@@ -824,12 +711,12 @@ void gui_create_commentary_dialog(DIALOG_DATA *d,
 	gtk_container_add(GTK_CONTAINER(scrolledwindow38),
 			  d->html);
 	gtk_html_load_empty(GTK_HTML(d->html));
-	
-#ifndef USE_GTKHTML38
+
+#ifndef USE_GTKMOZEMBED	
 	g_signal_connect(GTK_OBJECT(d->html),
 			 "link_clicked",
 			 G_CALLBACK(commentary_prefixable_link), d);
-#endif
+#endif	
 	
 	g_signal_connect(GTK_OBJECT(d->html), "on_url",
 			 G_CALLBACK(dialog_url), d);

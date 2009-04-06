@@ -44,7 +44,6 @@
 #include "gui/sidebar.h"
 #include "gui/sidebar_dialog.h"
 #include "gui/search_dialog.h"
-#include "gui/studypad.h"
 #include "gui/tabbed_browser.h"
 #include "gui/utilities.h"
 #include "gui/widgets.h"
@@ -866,19 +865,7 @@ G_MODULE_EXPORT void on_module_manager_activate(GtkMenuItem * menuitem,
  
 G_MODULE_EXPORT void on_open_studypad_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-
-#ifdef USE_GTKHTML38
 	editor_create_new(settings.studypadfilename, NULL, FALSE);
-#else
-	if (settings.studypad_dialog_exist) {
-		gtk_widget_show(widgets.studypad_dialog);
-		gdk_window_raise(GTK_WIDGET(widgets.studypad_dialog)->
-				 window);
-	} else {
-		settings.studypad_dialog_exist =
-			  gui_open_studypad(settings.studypadfilename);
-	}
-#endif
 }
 
 

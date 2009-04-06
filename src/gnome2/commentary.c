@@ -87,11 +87,7 @@ void access_to_edit_percomm()
 	if (!main_is_module(personal))
 		return;
 	
-#ifdef USE_GTKHTML38
-	editor_create_new (personal,(gchar *) settings.currentverse,TRUE);
-#else
-	main_dialogs_open (personal, (gchar *) settings.currentverse);
-#endif
+	editor_create_new (personal,(gchar *) settings.currentverse,NOTE_EDITOR);
 }
 
 
@@ -151,7 +147,7 @@ static gboolean on_comm_button_release_event(GtkWidget * widget,
 					GdkEventButton * event,
 					gpointer data)
 {
-#ifdef GTKHTML	
+//#ifdef GTKHTML	
 	extern gboolean in_url;
 	gchar *key;
 	const gchar *url;
@@ -193,15 +189,11 @@ static gboolean on_comm_button_release_event(GtkWidget * widget,
 	case 2:
 		if (!in_url)
 			break;
-#ifdef USE_GTKHTML38
+			
 		url = gtk_html_get_url_at (GTK_HTML(widgets.html_comm),		
 								event->x,
 								event->y);
-#else
-		url = html_engine_get_link_at (GTK_HTML(widgets.html_comm)->engine,
-					 event->x,
-					 event->y);
-#endif
+			
 		if (url) {
 			if (strstr(url,"sword://")) {
 				gchar **work_buf = g_strsplit (url,"/",4);
@@ -215,7 +207,7 @@ static gboolean on_comm_button_release_event(GtkWidget * widget,
 	case 3:
 		break;
 	}
-#endif /* GTKHTML */
+//#endif /* GTKHTML */
 	return FALSE;
 }
 #endif /* !USE_GTKMOZEMBED */
