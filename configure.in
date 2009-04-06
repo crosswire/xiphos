@@ -123,7 +123,7 @@ if test "x$have_gtkhtml" = xyes; then
 	GTKHTML_API_VERSION=`$PKG_CONFIG --variable gtkhtml_apiversion libgtkhtml-3.14`
 	AM_CONDITIONAL(USE_GTKHTML_BONOBO_EDITOR, false)
 else
-	PKG_CHECK_MODULES(GTKHTML, libgtkhtml-3.14 >= 3.23, have_gtkhtml=yes,have_gtkhtml=no)
+	PKG_CHECK_MODULES(GTKHTML, libgtkhtml-3.14, have_gtkhtml=yes,have_gtkhtml=no)
 	AC_DEFINE(USE_GTKHTML3_14, 1, [Define if you want to use GtkHtml-3.14])
 	dnl gtkhtml_datadir
 	GTKHTML_DATA_DIR="`$PKG_CONFIG --variable=gtkhtml_datadir libgtkhtml-3.14`"
@@ -284,8 +284,8 @@ fi
 # ubuntu is demented about -Werror
 grep -i -q -s ubuntu /etc/issue
 if test $? != 0 ; then
-  CFLAGS="$CFLAGS -Werror -Wall"
-  CXXFLAGS="$CXXFLAGS -Werror -Wall"
+  CFLAGS="$CFLAGS "
+  CXXFLAGS="$CXXFLAGS "
 fi
 
 ORBIT_IDL="`$PKG_CONFIG --variable=orbit_idl ORBit-2.0`"
