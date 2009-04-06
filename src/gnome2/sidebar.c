@@ -639,7 +639,6 @@ G_MODULE_EXPORT static void on_save_list_as_bookmarks_activate(GtkMenuItem * men
 static void on_open_in_dialog_activate(GtkMenuItem * menuitem,
 				       gpointer user_data)
 {
-#ifdef USE_GTKHTML38
 	if (main_get_mod_type(buf_module) == PERCOM_TYPE)
 		editor_create_new((gchar *)buf_module,
 				  (gchar *)settings.currentverse,
@@ -650,9 +649,7 @@ static void on_open_in_dialog_activate(GtkMenuItem * menuitem,
 				  BOOK_EDITOR);
 	else
 		main_dialogs_open(buf_module, NULL);
-#else
-	main_dialogs_open(buf_module, NULL);
-#endif
+	
 	g_free(buf_module);
 	buf_module = NULL;
 }

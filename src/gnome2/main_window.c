@@ -42,7 +42,6 @@
 #include "gui/main_menu.h"
 #include "gui/shortcutbar_main.h"
 #include "gui/shortcutbar_dialog.h"
-#include "gui/studypad.h"
 #include "gui/sidebar.h"
 #include "gui/toolbar_nav.h"
 #include "gui/utilities.h"
