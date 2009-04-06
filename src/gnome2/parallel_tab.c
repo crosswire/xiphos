@@ -23,9 +23,6 @@
 #  include <config.h>
 #endif
 
-
-#ifdef USE_PARALLEL_TAB
-
 #include <gnome.h>
 #include <glade/glade-xml.h>
 #ifdef USE_GTKMOZEMBED
@@ -801,7 +798,5 @@ void gui_destroy_parallel_tab(void)
 	gtk_widget_destroy(parallel_vbox);
 	gtk_widget_show(widgets.hpaned);
 }
-
-#endif /*  USE_PARALLEL_TAB  */
 
 /******   end of file   ******/

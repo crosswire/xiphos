@@ -785,7 +785,6 @@ on_checkbutton10_toggled(GtkToggleButton * togglebutton,
  *   void
  */
 
-#ifdef USE_PARALLEL_TAB
 static void
 on_checkbutton_showparatab_toggled(GtkToggleButton * togglebutton,
 			 gpointer user_data)
@@ -799,7 +798,6 @@ on_checkbutton_showparatab_toggled(GtkToggleButton * togglebutton,
 		
 	
 }	
-#endif /* USE_PARALLEL_TAB */
 
 
 /******************************************************************************
@@ -1942,11 +1940,9 @@ setup_check_buttons(void)
 				     (check_button.prayerlist),
 				     settings.prayerlist);
 
-#ifdef USE_PARALLEL_TAB
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.show_paratab),
 				     settings.showparatab);	
-#endif /* USE_PARALLEL_TAB */
 	
 #if 0
 #ifdef USE_GTKMOZEMBED
@@ -1982,10 +1978,8 @@ setup_check_buttons(void)
 			 G_CALLBACK(on_checkbutton_versehighlight_toggled), NULL);
 	g_signal_connect(check_button.prayerlist, "toggled",
 			 G_CALLBACK(on_checkbutton_prayerlist_toggled), NULL);
-#ifdef USE_PARALLEL_TAB
 	g_signal_connect(check_button.show_paratab, "toggled",
 			 G_CALLBACK(on_checkbutton_showparatab_toggled), NULL);
-#endif /* USE_PARALLEL_TAB */
 	
 #if 0
 #ifdef USE_GTKMOZEMBED
@@ -2283,9 +2277,7 @@ create_preferences_dialog(void)
 
 	check_button.show_paratab = glade_xml_get_widget(gxml, "checkbutton_paratab");
 
-//#ifndef USE_PARALLEL_TAB	
 	gtk_widget_hide(check_button.show_paratab);
-//#endif /*  USE_PARALLEL_TAB  */	
 	
 	setup_check_buttons();
 

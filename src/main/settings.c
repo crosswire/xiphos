@@ -664,7 +664,6 @@ void load_settings_structure(void)
 		settings.showpreview = 1;
 	}
 
-//#ifdef USE_PARALLEL_TAB	
 	if (xml_get_value("misc", "show_side_preview"))
 		settings.show_previewer_in_sidebar = atol(xml_get_value("misc", "show_side_preview"));
 	else {
@@ -672,20 +671,14 @@ void load_settings_structure(void)
 		settings.show_previewer_in_sidebar = 0;
 	}
     
-#ifdef USE_PARALLEL_TAB
 	if (xml_get_value("misc", "showparatab"))
 		settings.showparatab = atol(xml_get_value("misc", "showparatab"));
 	else {
 		xml_add_new_item_to_section("misc", "showparatab", "0");
 		settings.showparatab = 0;
 	}	
-#endif /*  USE_PARALLEL_TAB  */
 	
-//#ifdef USE_GTKHTML30	
 	settings.showsplash = atoi(xml_get_value("misc", "splash"));
-//#else	
-	//settings.showsplash = FALSE;	
-//#endif
 	
 	settings.showdevotional =
 	    atoi(xml_get_value("misc", "dailydevotional"));
