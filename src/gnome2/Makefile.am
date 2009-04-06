@@ -40,7 +40,6 @@ xiphos_SOURCES =  \
     display_info.c \
     dummy.cpp \
     export_dialog.c \
-    fileselection.c \
     find_dialog.c \
     font_dialog.c \
     gbs.c \
@@ -68,7 +67,6 @@ xiphos_SOURCES =  \
     sidebar.c \
     sidebar_dialog.c \
     splash.c \
-    studypad.c \
     toolbar_nav.c \
     tabbed_browser.c \
     treekey-editor.c \

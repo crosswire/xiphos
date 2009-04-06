@@ -255,11 +255,9 @@ static void on_edit_percomm_activate (GtkMenuItem * menuitem, gpointer user_data
     		key = _get_key (menu_mod_name);
     	if (key ) {
 		GS_message(("\n\npercomm key: %s\n\n",key));
-#ifdef USE_GTKHTML38
+		    
 		editor_create_new((gchar *)user_data, (gchar *) key, NOTE_EDITOR);
-#else
-		main_dialogs_open((gchar *)user_data, (gchar *) key);
-#endif
+		    
 		g_free (key);
 	 }
 }
