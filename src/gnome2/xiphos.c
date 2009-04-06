@@ -196,7 +196,6 @@ void frontend_display(void)
 	} */
 	/* must be set after tab stuff is done */
 
-#ifdef USE_PARALLEL_TAB
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.parallel_tab_item),
 				       settings.showparatab);
@@ -205,7 +204,6 @@ void frontend_display(void)
 			   G_CALLBACK(gui_parallel_tab_activate),
 			   NULL	);
 	gui_show_previewer_in_sidebar(settings.show_previewer_in_sidebar);
-#endif /*  USE_PARALLEL_TAB  */	
 
 		
 	if (settings.showdevotional) 

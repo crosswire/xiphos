@@ -470,7 +470,6 @@ G_MODULE_EXPORT void on_versehighlight_activate(GtkCheckMenuItem * menuitem, gpo
 	main_display_bible(NULL, settings.currentverse);
 }
 
-#ifdef USE_PARALLEL_TAB	
 /******************************************************************************
  * Name
  *  gui_parallel_tab_activate
@@ -529,7 +528,6 @@ G_MODULE_EXPORT void on_side_preview_activate(GtkCheckMenuItem * menuitem, gpoin
 		      (settings.show_previewer_in_sidebar ? "1" : "0"));
 	gui_show_previewer_in_sidebar(settings.show_previewer_in_sidebar);
 }
-#endif /*  USE_PARALLEL_TAB  */
 
 /******************************************************************************
  * Name
@@ -931,10 +929,8 @@ GtkWidget *gui_create_main_menu(void)
 	widgets.readaloud_item = glade_xml_get_widget (gxml, "read_aloud");
 	widgets.showversenum_item = glade_xml_get_widget (gxml, "show_verse_numbers");
 	widgets.versehighlight_item = glade_xml_get_widget (gxml, "highlight_current_verse");
-#ifdef USE_PARALLEL_TAB	
 	widgets.parallel_tab_item = glade_xml_get_widget (gxml, "show_parallel_view_in_a_tab");
 	widgets.side_preview_item = glade_xml_get_widget (gxml, "show_previewer_in_sidebar");
-#endif /*  USE_PARALLEL_TAB  */	
 	
 #ifdef USE_GTKMOZEMBED
 	widgets.doublespace_item = glade_xml_get_widget (gxml, "double_space_text");
@@ -956,14 +952,12 @@ GtkWidget *gui_create_main_menu(void)
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.viewpreview_item),
 				       settings.showpreview);
-#ifdef USE_PARALLEL_TAB	
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.parallel_tab_item),
 				       settings.showparatab);
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.side_preview_item),
 				       settings.show_previewer_in_sidebar);
-#endif /*  USE_PARALLEL_TAB  */	
 		
 	/* update other status toys */
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM

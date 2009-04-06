@@ -1306,11 +1306,9 @@ void main_display_bible(const char * mod_name, const char * key)
 	if (settings.dockedInt) 
 		main_update_parallel_page();
 	else {
-#ifdef USE_PARALLEL_TAB	
 		if(settings.showparatab)
 			gui_keep_parallel_tab_in_sync();
 		else
-#endif /*  USE_PARALLEL_TAB  */
 			gui_keep_parallel_dialog_in_sync();
 	}
 #ifndef USE_GTKMOZEMBED

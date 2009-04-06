@@ -597,7 +597,6 @@ void gui_load_tabs(const gchar *filename)
 							val = (gchar*)xmlGetProp(tmp_node, (const xmlChar *)"showparallel");
 							pt->showparallel = yes_no2true_false(val);
 							xmlFree(val);
-#ifdef USE_PARALLEL_TAB
 							if(pt->showparallel) {
 								settings.showparatab = TRUE;
 								pt->paratab = gui_create_parallel_tab();
@@ -609,7 +608,6 @@ void gui_load_tabs(const gchar *filename)
 							}
 							else
 								pt->paratab = NULL;
-#endif /*  USE_PARALLEL_TAB  */
 							/*
 							 * load per-tab "show" state.
 							 * includes backward compatibility:
@@ -1117,7 +1115,6 @@ void gui_open_passage_in_new_tab(gchar *verse_key)
 
 void gui_open_parallel_view_in_new_tab(void)
 {
-#ifdef USE_PARALLEL_TAB
 	PASSAGE_TAB_INFO *pt;
 	
 	if (stop_refresh)
@@ -1158,7 +1155,6 @@ void gui_open_parallel_view_in_new_tab(void)
 				gtk_notebook_page_num
 				(GTK_NOTEBOOK(widgets.notebook_main),
 				pt->page_widget));
-#endif /*  USE_PARALLEL_TAB  */
 }
 
 
@@ -1372,7 +1368,6 @@ void gui_close_passage_tab(gint pagenum)
 	if(pt->text_commentary_key) g_free(pt->text_commentary_key);
 	if(pt->dictlex_key) g_free(pt->dictlex_key);
 	if(pt->book_offset) g_free(pt->book_offset);
-#ifdef USE_PARALLEL_TAB
 	if(pt->showparallel) {
 		gtk_widget_hide(pt->paratab);
 		gui_destroy_parallel_tab();
@@ -1381,7 +1376,6 @@ void gui_close_passage_tab(gint pagenum)
 				       (widgets.parallel_tab_item),
 				       settings.showparatab);
 	}
-#endif /*  USE_PARALLEL_TAB  */
 	g_free(pt);
 	cur_passage_tab = NULL;
 	removed_page = pagenum;
