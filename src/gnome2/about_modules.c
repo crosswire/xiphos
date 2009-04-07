@@ -23,7 +23,7 @@
 #include <config.h>
 #endif
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 
 #ifdef USE_GTKMOZEMBED
 #include "gecko/gecko-html.h"
@@ -81,26 +81,27 @@ on_copy_activate(GtkMenuItem * menuitem,
 #endif
 }
 
-static GnomeUIInfo menu1_uiinfo[] =
-{
-  GNOMEUIINFO_MENU_COPY_ITEM (on_copy_activate, NULL),
-  GNOMEUIINFO_END
-};
-
 static void
 create_menu1(void)
 {
-  GtkWidget *menu1;
-  GtkAccelGroup *accel_group;
+  	GtkWidget *menu;
+	GtkWidget *item;
+	GtkAccelGroup *accel_group;
 
-  accel_group = gtk_accel_group_new ();
+	accel_group = gtk_accel_group_new ();
 
-  menu1 = gtk_menu_new ();
-  gnome_app_fill_menu (GTK_MENU_SHELL (menu1), menu1_uiinfo,
-                       accel_group, FALSE, 0);
-  gtk_menu_set_accel_group (GTK_MENU (menu1), accel_group);
-  gtk_menu_popup((GtkMenu*)menu1, NULL, NULL, NULL, NULL, 2,
-		     			gtk_get_current_event_time());
+	menu = gtk_menu_new ();
+	item =gtk_image_menu_item_new_from_stock  ("gtk-copy",
+                                                        accel_group);
+	gtk_widget_show(item);
+	g_signal_connect(GTK_OBJECT(item), "clicked",
+			   G_CALLBACK  (on_copy_activate),
+			  NULL);		
+	gtk_container_add(GTK_CONTAINER(menu), item); 
+	
+	gtk_menu_set_accel_group (GTK_MENU (menu), accel_group);
+	gtk_menu_popup((GtkMenu*)menu, NULL, NULL, NULL, NULL, 2,
+					gtk_get_current_event_time());
 }
 
 /******************************************************************************
