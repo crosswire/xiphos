@@ -250,6 +250,12 @@ if test "x$GXX" = xyes; then
 	CXXFLAGS="$CXXFLAGS -ftemplate-depth-25"
 fi
 
+AC_ARG_ENABLE(delint,[  --enable-delint         use -Wall -Werror [default=no]],delint=$enableval,delint=no)
+if test "x$delint" = xyes; then
+	CFLAGS="$CFLAGS -Wall -Werror"
+	CXXFLAGS="$CXXFLAGS -Wall -Werror"
+fi
+
 AM_MAINTAINER_MODE
 if test "x$USE_MAINTAINER_MODE" = "xyes"; then
   AC_DEFINE(MAINTAINER_MODE, 1, [Define to 1 if you wish to enable 'maintainer-only' behavior.])
@@ -279,13 +285,6 @@ if test x$debug = xyes; then
   CFLAGS="$CFLAGS "
   CXXFLAGS="$CXXFLAGS "
 fi
-fi
-
-# ubuntu is demented about -Werror
-grep -i -q -s ubuntu /etc/issue
-if test $? != 0 ; then
-  CFLAGS="$CFLAGS "
-  CXXFLAGS="$CXXFLAGS "
 fi
 
 ORBIT_IDL="`$PKG_CONFIG --variable=orbit_idl ORBit-2.0`"
