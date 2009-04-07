@@ -23,7 +23,7 @@
 #include <config.h>
 #endif
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 
 #include "gui/about_sword.h"
 #include "gui/utilities.h"
@@ -156,8 +156,9 @@ gui_create_about_sword(void)
 	gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, FALSE, 0);
 	gtk_widget_set_usize(label, -2, 24);
 
-	href =
-	    gnome_href_new("http://www.crosswire.org/sword", _("The SWORD Project"));
+	href =  gtk_link_button_new_with_label ("http://www.crosswire.org/sword",
+                                                       			_("The SWORD Project") );
+	//    gnome_href_new("http://www.crosswire.org/sword", _("The SWORD Project"));
 	gtk_widget_show(href);
 	gtk_box_pack_start(GTK_BOX(vbox), href, FALSE, FALSE, 0);
 
