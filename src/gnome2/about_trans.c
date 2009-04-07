@@ -23,7 +23,7 @@
 #include <config.h>
 #endif
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 
 #include "gui/about_trans.h"
 #include "gui/utilities.h"
@@ -141,9 +141,9 @@ gui_create_about_trans(void)
 	gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, FALSE, 0);
 	gtk_widget_set_usize(label, -2, 24);
 
-	href =
-	    gnome_href_new("http://xiphos.org/development/",
+	href =  gtk_link_button_new_with_label ("http://xiphos.org/development/",
 			   _("Xiphos development"));
+	//    gnome_href_new
 	gtk_widget_show(href);
 	gtk_box_pack_start(GTK_BOX(vbox), href, FALSE, FALSE, 0);
 
