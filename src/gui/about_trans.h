@@ -26,7 +26,7 @@
 extern "C" {
 #endif
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 
 GtkWidget *gui_create_about_trans(void);
  
