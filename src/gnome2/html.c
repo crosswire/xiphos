@@ -103,7 +103,8 @@ void url_requested(GtkHTML * html, const gchar * url,
 	if (!strncmp(url, "file:", 5))
 		url += 5;
 
-	fd = g_open(url, O_RDONLY | O_BINARY);
+	// fd = g_open(url, O_RDONLY | O_BINARY);
+	fd = g_open(url, 0, O_RDONLY | O_BINARY);
 	status = GTK_HTML_STREAM_OK;
 	if (fd != -1) {
 		ssize_t size;

@@ -45,6 +45,8 @@
 #include "main/sword.h"
 #include "main/xml.h"
 
+#include <glib/gstdio.h>
+
 
 /******************************************************************************
  * defines
