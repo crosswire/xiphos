@@ -7,7 +7,7 @@ def build(bld):
         features='cxx cc',
         includes = '. ../.. ../../src',
         target='backend',
-        uselib='GTK GLIB GNOMEUI SWORD')
+        uselib='GLIB GNOMEUI SWORD')
 
     lib.find_sources_in_dirs('.')
         

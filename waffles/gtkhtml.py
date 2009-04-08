@@ -18,11 +18,11 @@ class Gtkhtml(object):
         """
         Detect gtkhtml in system
         """
-        success = False
+        #success = False
         success = self.try_api314()
 
-        if not success:
-            success = self.try_38()
+        #if not success:
+            #success = self.try_38()
 
         return success
 
@@ -45,18 +45,18 @@ class Gtkhtml(object):
         return ret
 
 
-    def try_api38(self):
+    #def try_api38(self):
  
-        ret = False
+        #ret = False
+#
+        #check_pkg(self.conf, 'libgtkhtml-3.8', mandatory=True, var='GTKHTML')
 
-        check_pkg(self.conf, 'libgtkhtml-3.8', mandatory=True, var='GTKHTML')
+        #if self.env['GTKHTML']:
+            #self.conf.define('USE_GTKHTML38', 1)
+            #self.set_vars('3.8')
+            #ret = True
 
-        if self.env['GTKHTML']:
-            self.conf.define('USE_GTKHTML38', 1)
-            self.set_vars('3.8')
-            ret = True
-
-        return ret
+        #return ret
 
 
     def set_vars(self, api_ver):

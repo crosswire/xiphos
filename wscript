@@ -5,6 +5,8 @@
 
 #  SUSE_10_2
 #  USE_GTKHTML38_3_13 
+#  USE_GTKHTML38 
+
 
 import sys
 if sys.version_info < (2,3):
@@ -15,6 +17,12 @@ import intltool, gnome
 
 from os.path import join, dirname, abspath
 
+# waf imports
+import Utils
+import Options
+
+
+# custom imports
 from waffles.gecko import Gecko
 from waffles.gtkhtml import Gtkhtml
 from waffles.misc import *
@@ -48,6 +56,9 @@ headers = [
 
 def set_options(opt):
 
+    # options provided by the modules
+    opt.tool_options('compiler_cxx compiler_cc gnome intltool glib2')
+
     opt.add_option('--enable-debug', action='store_true', default=False,
             dest='debug', help='Build debug version [Default: False]')
 
@@ -68,35 +79,28 @@ def set_options(opt):
             default=False, dest='maintainer_mode',
             help='''Enable make rules and dependencies not useful (and sometimes confusing) to the casual installer''')
 
-    opt.tool_options('g++')
-    opt.tool_options('gcc')
-
 
 def configure(conf):
 
-    ## detect OS
-
     import Utils
-    platfm = Utils.detect_platform()
-    print 'Platform: %s' % platfm
+    platform = Utils.detect_platform()
+    conf.env['IS_LINUX'] = platform == 'linux'
+    conf.env['IS_WIN32'] = platform == 'win32'
 
-    if platfm == 'linux':
-        pass
-    elif platfm == 'win32':
-        pass
-    elif platfm == 'cygwin':
-        pass
-    elif platfm == 'darwin': # Mac OSX
-        pass
-    elif platfm == 'posix': # probably BSD will be in this category
-        pass
-    else:
-        print 'UNKNOWN or UNSUPPORTED platform'
-        pass # use default values
+    if conf.env['IS_LINUX']:
+        Utils.pprint('CYAN', "Linux detected")
+
+    if conf.env['IS_WIN32']:
+        Utils.pprint('CYAN', "Windows detected")
+
+    if not (conf.env['IS_LINUX'] or conf.env['IS_WIN32']):
+        Utils.pprint('RED', "Detected unknown or unsupported platform")
+        exit(1)
+
+    conf.check_tool('compiler_cxx compiler_cc gnome intltool glib2')
 
     ## cmd line options
 
-    import Options
     opt = Options.options
     dfn = conf.define
     env = conf.env
@@ -112,34 +116,40 @@ def configure(conf):
     if opt.maintainer_mode:
         dfn('MAINTAINER_MODE', 1)
 
-    # checks of waf tools (modules)
-    conf.check_tool('gcc g++ gnome intltool glib2')
 
     ## CXX flags (compiler arguments)
     conf.check_cxx(cxxflags='-ftemplate-depth-25')
     conf.check_cxx(cxxflags='-Werror')
     conf.check_cxx(cxxflags='-Wall')
-    conf.env.append_value('CCFLAGS', '-g -O2 -Werror -Wall')
-    conf.env.append_value('CXXFLAGS', '-g -O2 -ftemplate-depth-128 -Werror -Wall')
+    conf.env.append_value('CCFLAGS', '-g -O2 -Werror -Wall'.split())
+    conf.env.append_value('CXXFLAGS', '-g -O2 -ftemplate-depth-128 -Werror -Wall'.split())
 
     # pkg-config
     conf.check_cfg(atleast_pkgconfig_version='0.9.0')
 
 
-    # GTK+ implementation
-    check_pkg(conf, 'gtk+-x11-2.0', '2.0.0', var='LIBGTK_X11_2_0')
+    # GTK+
+    #check_pkg(conf, 'gtk+-x11-2.0', '2.0.0', var='LIBGTK_X11_2_0')
     #if not env['HAVE_LIBGTK_X11_2_0']:
     #    check_pkg(conf, 'gtk+-x11-2.0', '2.0.0', True, var='LIBGTK_WIN32_2_0')
+    check_pkg(conf, 'gtk+-2.0', '2.0.0', True, var='GTK')
 
-    # gtk popup menu
+    # tooltip function needs gtk+ >= 2.12 HAVE_WIDGET_TOOLTIP_TEXT
+    check_pkg(conf, 'gtk+-2.0', '2.12', var='WIDGET_TOOLTIP_TEXT')
+
+    # glade
+    check_pkg(conf, 'libglade-2.0', '2.0.0', var='GLADE')
+        
+
+    # gtk popup menus - dynamic loadable libs
     check_pkg(conf, 'gmodule-export-2.0', '2.0.0', True, var='GMODULEEXP')
 
     ## Gnome libs
     check_pkg(conf, 'glib-2.0', '2.0.0', True, 'GLIB')
     check_pkg(conf, 'libgnomeui-2.0', '2.0.0', True, var='GNOMEUI')
 
-    check_pkg(conf, 'libgnomeprintui-2.2', '2.2', True, var='GNOMEPRINTUI')
-    check_pkg(conf, 'libgnomeprint-2.2', '2.2', True, var='GNOMEPRINT')
+    #check_pkg(conf, 'libgnomeprintui-2.2', '2.2', True, var='GNOMEPRINTUI')
+    #check_pkg(conf, 'libgnomeprint-2.2', '2.2', True, var='GNOMEPRINT')
 
     ## Other
     check_pkg(conf, 'libxml-2.0', '2.0.0', True, var='XML')
