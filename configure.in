@@ -26,15 +26,7 @@ DIRS="backend gecko editor main gnome2"
 AC_SUBST(DIRS)
 xiphos_exec="xiphos"
 AC_SUBST(xiphos_exec)	
-case "$host_os" in
-  mingw*)
-    export SWORD_LIBS="$SWORD_LIBS -lcurldll"
-    PKG_CHECK_MODULES(GNOME, glib-2.0 gtk+-2.0 libgnomeui-2.0 libxml-2.0 libglade-2.0 gmodule-no-export-2.0,,echo error: some devel libs are missing: check for glib2 gtk2 libgnomeprintui22 libgnomeui libxml2 libglade2 && exit 1)
-    ;;
-  *)
-    PKG_CHECK_MODULES(GNOME, glib-2.0 gtk+-2.0 libgnomeui-2.0 libxml-2.0 libglade-2.0 gmodule-export-2.0,,echo error: some devel libs are missing: check for glib2 gtk2 libgnomeprintui22 libgnomeui libxml2 libglade2 && exit 1)
-    ;;
-esac
+
 AC_SUBST(GNOME_LIBS)
 AC_SUBST(GNOME_CFLAGS)
 
@@ -90,11 +82,23 @@ AC_ISC_POSIX
 AC_PROG_CC
 AM_PROG_CC_STDC
 AC_HEADER_STDC
+dnl ================================================================
+dnl host_os not declared until after the line below
+dnl ================================================================
 AM_PROG_LIBTOOL
+
+case "$host_os" in
+  mingw*)
+    export SWORD_LIBS="$SWORD_LIBS -lcurldll"
+    PKG_CHECK_MODULES(GNOME, glib-2.0 gtk+-2.0 libgnomeui-2.0 libxml-2.0 libglade-2.0 gmodule-no-export-2.0,,echo error: some devel libs are missing: check for glib2 gtk2 libgnomeprintui22 libgnomeui libxml2 libglade2 && exit 1)
+    ;;
+  *)
+    PKG_CHECK_MODULES(GNOME, glib-2.0 gtk+-2.0 libgnomeui-2.0 libxml-2.0 libglade-2.0 gmodule-export-2.0,,echo error: some devel libs are missing: check for glib2 gtk2 libgnomeprintui22 libgnomeui libxml2 libglade2 && exit 1)
+    ;;
+esac
 
 AC_PROG_CXX
 AC_LANG_CPLUSPLUS
-
 
 dnl ================================================================
 dnl Gettext stuff.
@@ -199,15 +203,17 @@ if test "x$cygwin" = xno; then
 	gecko=no 
   fi
 
+dnl ==================================================
+dnl Gnome-doc-utils
+dnl under mingw, if GNOME_DOC_INIT is not called we get
+dnl  error: conditional "ENABLE_SK" was never defined.
+dnl ==================================================
+      GNOME_DOC_INIT
+	  
   case "$host_os" in
     mingw*)
       ;;
     *)
-      dnl ====================================
-      dnl Gnome-doc-utils
-      dnl ====================================
-      GNOME_DOC_INIT
-
       dnl ====================================
       dnl = Begin tests for scrollkeeper
       dnl ====================================
