@@ -40,6 +40,8 @@
 #include "gecko/gecko-html.h"
 #endif
 //#include "backend/sword.h"
+
+#include <glib/gstdio.h>
  
 /******************************************************************************
  * Name

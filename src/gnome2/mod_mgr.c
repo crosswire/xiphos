@@ -51,6 +51,8 @@
 #include "main/xml.h"
 #include "main/modulecache.hh"
 
+#include <glib/gstdio.h>
+
 #define GTK_RESPONSE_REFRESH 301
 #define GTK_RESPONSE_REMOVE  302
 #define GTK_RESPONSE_INSTALL 303
