@@ -58,6 +58,8 @@
 #include "main/sword.h"
 #include "main/tab_history.h"
 #include "main/xml.h"
+
+#include <glib/gstdio.h>
 	
 static GtkWidget* tab_widget_new(PASSAGE_TAB_INFO *tbinf,
 					const gchar *label_text);
