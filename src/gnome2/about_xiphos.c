@@ -23,7 +23,7 @@
 #include <config.h>
 #endif
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 
 #include "gui/about_xiphos.h"
 #include "gui/utilities.h"

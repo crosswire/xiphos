@@ -23,8 +23,9 @@
 #include <config.h>
 #endif
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 #include <libxml/parser.h>
+#include <glade/glade-xml.h>
 //#include <gal/shortcut-bar/e-shortcut-bar.h>
 #include <math.h>
 #include <ctype.h>
@@ -308,7 +309,7 @@ static void add_item_to_tree(GtkTreeIter *iter,GtkTreeIter *parent,
  *   void
  */
 
-static void bibletime_bookmarks_activate(GtkMenuItem * menuitem,
+void bibletime_bookmarks_activate(GtkMenuItem * menuitem,
 				  gpointer user_data)
 {
 	GtkTreeIter iter;
@@ -357,7 +358,7 @@ static void bibletime_bookmarks_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-static void on_allow_reordering_activate(GtkMenuItem * menuitem,
+void on_allow_reordering_activate(GtkMenuItem * menuitem,
 				  gpointer user_data)
 {
 	 gtk_tree_view_set_reorderable(bookmark_tree,
@@ -381,7 +382,7 @@ static void on_allow_reordering_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-static void on_dialog_activate(GtkMenuItem * menuitem, gpointer user_data)
+void on_dialog_activate(GtkMenuItem * menuitem, gpointer user_data)
 {	
 	GtkTreeIter selected;
 	gchar *key = NULL;
@@ -436,7 +437,7 @@ static void on_dialog_activate(GtkMenuItem * menuitem, gpointer user_data)
  *   void
  */
 
-static void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user_data)
+void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GS_DIALOG *info;
 	BOOKMARK_DATA * data;	
@@ -554,7 +555,7 @@ static void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user_data)
  *   void
  */
 
-static void on_remove_folder_activate(GtkMenuItem * menuitem,
+void on_remove_folder_activate(GtkMenuItem * menuitem,
 			       gpointer user_data)
 {
 	GtkTreeSelection* selection;
@@ -598,7 +599,7 @@ static void on_remove_folder_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-static void restore_ok(GtkButton * button, GtkWidget * filesel)
+void restore_ok(GtkButton * button, GtkWidget * filesel)
 {
 	const xmlChar *file;
 	//gchar buf[256];
@@ -630,7 +631,7 @@ static void restore_ok(GtkButton * button, GtkWidget * filesel)
  *   void
  */
 
-static void restore_cancel(GtkButton * button, GtkWidget * dlg)
+void restore_cancel(GtkButton * button, GtkWidget * dlg)
 {
 	gtk_widget_destroy(dlg);
 }
@@ -652,7 +653,7 @@ static void restore_cancel(GtkButton * button, GtkWidget * dlg)
  *   void
  */
 
-static void on_restore_folder_activate(GtkMenuItem * menuitem,
+void on_restore_folder_activate(GtkMenuItem * menuitem,
 				gpointer user_data)
 {
 	GtkWidget *fileselection;
@@ -710,7 +711,7 @@ static void on_restore_folder_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-static void on_delete_item_activate(GtkMenuItem * menuitem, gpointer user_data)
+void on_delete_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	gchar *name_string;
 	GtkTreeSelection* selection;
@@ -822,7 +823,7 @@ void gui_save_bookmarks_treeview(void)
  *   void
  */
 
-static void on_expand_activate(GtkMenuItem * menuitem,
+void on_expand_activate(GtkMenuItem * menuitem,
 			       gpointer user_data)
 {
 	gtk_tree_view_expand_all(bookmark_tree);
@@ -846,7 +847,7 @@ static void on_expand_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-static void on_collapse_activate(GtkMenuItem * menuitem,
+void on_collapse_activate(GtkMenuItem * menuitem,
 				 gpointer user_data)
 {
  	gtk_tree_view_collapse_all(bookmark_tree);	
@@ -871,7 +872,7 @@ static void on_collapse_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-static void on_add_bookmark_activate(GtkMenuItem * menuitem,
+void on_add_bookmark_activate(GtkMenuItem * menuitem,
 				     gpointer user_data)
 {	
 	GtkTreeIter selected;
@@ -947,7 +948,7 @@ static void on_add_bookmark_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-static void on_insert_bookmark_activate(GtkMenuItem * menuitem,
+void on_insert_bookmark_activate(GtkMenuItem * menuitem,
 					gpointer user_data)
 {
 	on_add_bookmark_activate(menuitem,NULL);
@@ -971,7 +972,7 @@ static void on_insert_bookmark_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-static void on_new_folder_activate(GtkMenuItem * menuitem, gpointer user_data)
+void on_new_folder_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GtkTreeIter selected;
 	GtkTreeIter iter;
@@ -1071,113 +1072,6 @@ void on_open_in_tab_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 /******************************************************************************
  * Name
- *   pmBookmarkTree_uiinfo
- *
- * Synopsis
- *   #include "gui/bookmarks_menu.h"
- *
- *   GnomeUIInfo pmBookmarkTree_uiinfo[] 
- *
- * Description
- *  gnome menu structure for bookmarks popup menu
- *  !! CHANGING MENU STRUCTURE DON'T FORGET ALSO CHANGE create_bookmark_menu !!
- *
- */
-
-static GnomeUIInfo rr_menu_uiinfo[] = {
-	{
-	 GNOME_APP_UI_ITEM, N_("Remove Folder"),
-	 N_("Remove folder and save it"),
-	 on_remove_folder_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_ABOUT,
-	 0, 0, NULL},
-	GNOMEUIINFO_SEPARATOR,
-	{
-	 GNOME_APP_UI_ITEM, N_("Restore Folder"),
-	 N_("Restore saved folder"),
-	 on_restore_folder_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_PASTE,
-	 0, 0, NULL},
-	GNOMEUIINFO_END
-};
-
-static GnomeUIInfo pmBookmarkTree_uiinfo[] = {
-	{ /* 0 */
-	 GNOME_APP_UI_ITEM, N_("Open in a new tab"),
-	 N_("Open this bookmark in a new tab"),
-	 (gpointer) on_open_in_tab_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_FILENAME, NULL /* init'd in menu creation */,
-	 0, (GdkModifierType) 0, NULL},
-	{ /* 1 */
-	 GNOME_APP_UI_ITEM, N_("Open in a dialog"),
-	 N_("Open this bookmark in a dialog"),
-	 (gpointer) on_dialog_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_FILENAME, NULL /* init'd in menu creation */,
-	 0, (GdkModifierType) 0, NULL},
-	{ /* 2 */
-	 GNOME_APP_UI_ITEM, N_("New Folder"),
-	 N_("Add new folder to selected folder"),
-	 (gpointer) on_new_folder_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_NEW,
-	 0, (GdkModifierType) 0, NULL},
-	{ /* 3 */
-	 GNOME_APP_UI_ITEM, N_("Insert Bookmark"),
-	 N_("Insert new bookmark here"),
-	 (gpointer) on_insert_bookmark_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_NEW,
-	 0, (GdkModifierType) 0, NULL},
-	{ /* 4 */
-	 GNOME_APP_UI_ITEM, N_("_Edit Item"),
-	 N_("Edit bookmark item"),
-	 (gpointer) on_edit_item_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_PROPERTIES,
-	 0, (GdkModifierType) 0, NULL},
-	{ /* 5 */
-	 GNOME_APP_UI_ITEM, N_("Delete Item"),
-	 N_("Delete item"),
-	 (gpointer) on_delete_item_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_TRASH,
-	 0, (GdkModifierType) 0, NULL},
-	GNOMEUIINFO_SEPARATOR, /* 6 */
-	{ /* 7 */
-	 GNOME_APP_UI_ITEM, N_("Expand All"),
-	 N_("Expand all Bookmarks groups"),
-	 (gpointer) on_expand_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_GOTO_BOTTOM,
-	 0, (GdkModifierType) 0, NULL},
-	{ /* 8 */
-	 GNOME_APP_UI_ITEM, N_("Collapse All"),
-	 N_("Collapse all Bookmarks groups"),
-	 (gpointer) on_collapse_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_GOTO_TOP,
-	 0, (GdkModifierType) 0, NULL},
-	GNOMEUIINFO_SEPARATOR, /* 9 */
-	{ /* 10 */
-	 GNOME_APP_UI_TOGGLEITEM, N_("Allow Reordering"),
-	 N_
-	 ("Allow items to be moved from one folder to another"),
-	 (gpointer) on_allow_reordering_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, (GdkModifierType) 0, NULL},
-	GNOMEUIINFO_SEPARATOR, /* 11 */
-	{ /* 12 */
-	 GNOME_APP_UI_ITEM, N_("Import Bibletime Bookmarks"),
-	 N_("Load Bookmarks from Bibletime"),
-	 (gpointer) bibletime_bookmarks_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, (GdkModifierType) 0, NULL},
-	{ /* 13 */
-	 GNOME_APP_UI_SUBTREE, N_("Remove - Restore"),
-	 NULL,
-	 rr_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_GOTO_TOP,
-	 0, 0, NULL},
-	GNOMEUIINFO_END
-};
-
-
-/******************************************************************************
- * Name
  *   create_bookmark_menu
  *
  * Synopsis
@@ -1195,38 +1089,34 @@ static GnomeUIInfo pmBookmarkTree_uiinfo[] = {
 
 void gui_create_bookmark_menu(void)
 {
-	/*
-	 * this is total magic.  set up menu before using it.
-	 * indices are direct from GnomeUIInfo above.
-	 */
-	if (!pmBookmarkTree_uiinfo[0].pixmap_info)
-		pmBookmarkTree_uiinfo[0].pixmap_info =
-		    image_locator("new_tab_button.png");
-	if (!pmBookmarkTree_uiinfo[1].pixmap_info)
-		pmBookmarkTree_uiinfo[1].pixmap_info =
-		    image_locator("dlg-un.png");
-	/* end magic */
+	gchar *glade_file;
+	GladeXML *gxml;
+    	const gchar *mname = NULL;
+	
+	glade_file = gui_general_user_file ("xi-menus.glade", FALSE);
+	g_return_if_fail ((glade_file != NULL));
+	
+	gxml = glade_xml_new (glade_file, "menu_bookmark", NULL);
+		
+	g_free (glade_file);
+	g_return_if_fail ((gxml != NULL));
+	
+	 menu.menu = glade_xml_get_widget (gxml, "menu_bookmark");
 
-	menu.menu = gtk_menu_new();
-	gtk_object_set_data(GTK_OBJECT(menu.menu),
-			    "menu.menu", menu.menu);
-	gnome_app_fill_menu(GTK_MENU_SHELL(menu.menu),
-			    pmBookmarkTree_uiinfo, NULL, FALSE, 0);
+	menu.in_tab = glade_xml_get_widget (gxml, "open_in_new_tab");  // pmBookmarkTree_uiinfo[0].widget;
+	menu.in_dialog = glade_xml_get_widget (gxml, "open_in_a_dialog");  // pmBookmarkTree_uiinfo[1].widget;
+	menu.new = glade_xml_get_widget (gxml, "new_folder");  // pmBookmarkTree_uiinfo[2].widget;
+	menu.insert = glade_xml_get_widget (gxml, "insert_bookmark");  // pmBookmarkTree_uiinfo[3].widget;
+	menu.edit = glade_xml_get_widget (gxml, "edit_item");  // pmBookmarkTree_uiinfo[4].widget;
+	menu.delete = glade_xml_get_widget (gxml, "delete_item");  // pmBookmarkTree_uiinfo[5].widget;
 
-	menu.in_tab = pmBookmarkTree_uiinfo[0].widget;
-	menu.in_dialog = pmBookmarkTree_uiinfo[1].widget;
-	menu.new = pmBookmarkTree_uiinfo[2].widget;
-	menu.insert = pmBookmarkTree_uiinfo[3].widget;
-	menu.edit = pmBookmarkTree_uiinfo[4].widget;
-	menu.delete = pmBookmarkTree_uiinfo[5].widget;
+	menu.reorder = glade_xml_get_widget (gxml, "allow_reordering");  // pmBookmarkTree_uiinfo[10].widget;
 
-	menu.reorder = pmBookmarkTree_uiinfo[10].widget;
+	menu.bibletime = glade_xml_get_widget (gxml, "import_bibletime_bookmarks1");  // pmBookmarkTree_uiinfo[12].widget;
+	menu.rr_submenu = glade_xml_get_widget (gxml, "remove_restore");  // pmBookmarkTree_uiinfo[13].widget;
 
-	menu.bibletime = pmBookmarkTree_uiinfo[12].widget;
-	menu.rr_submenu = pmBookmarkTree_uiinfo[13].widget;
-
-	menu.remove = rr_menu_uiinfo[0].widget;
-	menu.restore = rr_menu_uiinfo[2].widget;
+	menu.remove = glade_xml_get_widget (gxml, "remove_folder");  // rr_menu_uiinfo[0].widget;
+	menu.restore = glade_xml_get_widget (gxml, "restore_folder");  // rr_menu_uiinfo[2].widget;
 
 	gtk_widget_set_sensitive(menu.in_tab, FALSE);
 	gtk_widget_set_sensitive(menu.in_dialog, FALSE);
@@ -1234,17 +1124,17 @@ void gui_create_bookmark_menu(void)
 	gtk_widget_set_sensitive(menu.insert, FALSE);
 	gtk_widget_set_sensitive(menu.edit, FALSE);
 	gtk_widget_set_sensitive(menu.delete, FALSE);
-	gtk_widget_set_sensitive(menu.bibletime,
-				 settings.have_bibletime);
+	gtk_widget_set_sensitive(menu.bibletime, settings.have_bibletime);
 
 	gtk_widget_set_sensitive(menu.rr_submenu, FALSE);
 	gtk_widget_set_sensitive(menu.remove, TRUE);
 	gtk_widget_set_sensitive(menu.restore, TRUE);
 
-	gtk_widget_hide(pmBookmarkTree_uiinfo[13].widget);
+	gtk_widget_hide(menu.rr_submenu);
 	/* don't know what this is -- turn it off for now */
 	
-	/*gnome_app_install_menu_hints(GNOME_APP(widgets.app),
-				     pmBookmarkTree_uiinfo);*/
+    	/* connect signals and data */
+	glade_xml_signal_autoconnect_full
+		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);
 				    
 }
