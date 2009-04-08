@@ -1091,7 +1091,6 @@ void gui_create_bookmark_menu(void)
 {
 	gchar *glade_file;
 	GladeXML *gxml;
-    	const gchar *mname = NULL;
 	
 	glade_file = gui_general_user_file ("xi-menus.glade", FALSE);
 	g_return_if_fail ((glade_file != NULL));
