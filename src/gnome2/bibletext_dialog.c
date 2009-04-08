@@ -23,7 +23,7 @@
 #include <config.h>
 #endif
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 #ifdef USE_GTKMOZEMBED
 #include "gecko/gecko-html.h"
 #else

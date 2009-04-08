@@ -23,7 +23,7 @@
 #define ___BIBLETEXT_H_
 
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 
 void gui_setup_bibletext(void);
 gboolean gui_text_button_release_event(GtkWidget * widget,
