@@ -6,16 +6,16 @@ def build(bld):
     env = bld.env
     
     # GTK
-    gtk = 'LIBGTK_X11_2_0'
-    if not env['HAVE_LIBGTK_X11_2_0']:
-        gtk = 'LIBGTK_WIN32_2_0'
+    #gtk = 'LIBGTK_X11_2_0'
+    #if not env['HAVE_LIBGTK_X11_2_0']:
+        #gtk = 'LIBGTK_WIN32_2_0'
 
-    gtk += ' %s' % 'GLIB GMODULEEXP'
+    #gtk += ' %s' % 'GLIB GMODULEEXP'
 
     # GTKHTML
     gtkhtml = 'GTKHTML'
     if env['HAVE_GTKHTML_EDITOR']:
-        gtkhtml += ' %s' % 'GTKHTML'
+        gtkhtml += ' %s' % 'GTKHTML_EDITOR'
 
     # GECKO
     gecko = 'GTKMOZEMBED'
@@ -26,7 +26,7 @@ def build(bld):
         features='cxx cc cprogram',
         includes='. ../.. ../../src ../../src/editor %s' % bld.env['GECKO_INCLUDE'], # ../../ for config.h
         target='xiphos',
-        uselib='GNOMEUI GNOMEPRINT GECKONSPR MAGICK GNOMEPRINTUI GECKONSS   UPRINT SWORD  %s %s %s' % (gtk, gtkhtml, gecko),
+        uselib='GNOMEUI GECKONSPR MAGICK GECKONSS GTK GLADE GLIB GMODULEEXP UPRINT SWORD  %s %s' % (gtkhtml, gecko),
         add_objects='backend gecko editor main', # used instead of libbackend.a, libgecko.a, libeditor.a, libmain.a
     )
 

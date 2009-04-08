@@ -7,7 +7,7 @@ def build(bld):
         features='cxx cc',
         includes='. ../.. ../../src %s' % bld.env['GECKO_INCLUDE'], # ../../ for config.h
         target='main',
-        uselib='GLIB GTK GNOMEUI SWORD GTKMOZEMBED GTKMOZEMBED_UNSTABLE GECKONSS GECKONSPR GTKHTML UPRINT MAGICK',
+        uselib='GLIB GNOMEUI SWORD GTKMOZEMBED GTKMOZEMBED_UNSTABLE GECKONSS GECKONSPR GTKHTML UPRINT MAGICK',
         #uselib_local='backend gecko editor',
     )
 
