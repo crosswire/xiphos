@@ -3231,10 +3231,6 @@ msgstr "Mit der Modulverwaltung Sword Module installieren und deinstallieren"
 msgid "Variants"
 msgstr "Varianten"
 
-#: ../ui/xi-menus.glade.h:49
-msgid "Words of Christ in Red"
-msgstr "Christi Worte in Rot"
-
 #: ../ui/xi-menus.glade.h:50
 msgid "_About The SWORD Project"
 msgstr "_Über das SWORD-Projekt"
