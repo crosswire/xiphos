@@ -11,6 +11,11 @@ def build(bld):
         #gtk = 'LIBGTK_WIN32_2_0'
 
     #gtk += ' %s' % 'GLIB GMODULEEXP'
+    
+    # use GECKO as html engine
+    objects = 'backend editor main'
+    if not bld.env['ENABLE_GTKHTML']:
+        objects += ' %s' % 'gecko'
 
     # GTKHTML
     gtkhtml = 'GTKHTML'
@@ -27,7 +32,7 @@ def build(bld):
         includes='. ../.. ../../src ../../src/editor %s' % bld.env['GECKO_INCLUDE'], # ../../ for config.h
         target='xiphos',
         uselib='GNOMEUI GECKONSPR MAGICK GECKONSS GTK GLADE GLIB GMODULEEXP UPRINT SWORD  %s %s' % (gtkhtml, gecko),
-        add_objects='backend gecko editor main', # used instead of libbackend.a, libgecko.a, libeditor.a, libmain.a
+        add_objects=objects, # used instead of libbackend.a, libgecko.a, libeditor.a, libmain.a
     )
 
     lib.find_sources_in_dirs('.')

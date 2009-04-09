@@ -154,6 +154,11 @@ def configure(conf):
     if opt.old_navbar:
         dfn('OLD_NAVBAR ', 1)
 
+    # gtkhtml
+    if opt.gtkhtml:
+        env['ENABLE_GTKHTML'] = True
+        dfn('GTKHTML', 1)
+
 
     ## CXX flags (compiler arguments)
     #conf.check_cxx(cxxflags='-ftemplate-depth-25')
@@ -235,18 +240,12 @@ def configure(conf):
     ######################
     ### gecko (xulrunner) for html rendering
     # gtkhtml only for editor
-    if not opt.gtkhtml and Gecko(conf).detect():
+    if not env['ENABLE_GTKHTML']:
+        Gecko(conf).detect()
         dfn('USE_GTKMOZEMBED', 1)
         env.append_value('CCFLAGS', env['GECKO_CCFLAGS'])
         env.append_value('CXXFLAGS', env['GECKO_CCFLAGS'])
-    # gtkhtml for html rendering and editor
-    else:
-        print "Using 'GTKHTML instead of Gecko' isn't yet implemented"
-        dfn('GTKHTML', 1)
-
     ######################
-
-
 
 
     # TODO: maybe the following checks should be in a more generic module.
@@ -342,21 +341,20 @@ def configure(conf):
     # process configure for subfolders
     conf.sub_config('src/editor') # generate Editor source from idl
 
-    Utils.pprint('RED', 'release flags: ' + str(env['CXXFLAGS_OPTIMIZED']))
-    Utils.pprint('RED', 'staticlib: ' + str(env['STATICLIB_MARKER']))
-    
 
 
 def build(bld):
 
-    # process subfolders from here
-    bld.add_subdirs('''
+    # process subfolders
+    bld.add_subdirs("""
         src/backend
-        src/gecko
         src/editor
         src/main
         src/gnome2
-    ''')
+    """)
+    # use GECKO
+    if not bld.env['ENABLE_GTKHTML']:
+        bld.add_subdirs('src/gecko')
 
     #mkenums marshal pixmaps')
 
