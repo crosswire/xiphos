@@ -108,7 +108,8 @@ def configure(conf):
         Utils.pprint('RED', "Detected unknown or unsupported platform")
         exit(1)
 
-    conf.check_tool('g++ gcc gnome intltool glib2')
+    #WIN32 conf.check_tool('g++ gcc gnome intltool glib2')
+    conf.check_tool('g++ gcc')
 
     # delint flags
     env['CXXFLAGS_DELINT'] = ['-Werror', '-Wall']
@@ -117,14 +118,14 @@ def configure(conf):
     # gcc compiler debug levels
     # msvc has levels predefined
     if env['CC_NAME'] == 'gcc':
-        env['CCFLAGS']            = []
+        env['CCFLAGS']            = ['-pipe']
         env['CCFLAGS_OPTIMIZED']  = ['-O2']
         env['CCFLAGS_RELEASE']    = ['-O2']
         env['CCFLAGS_DEBUG']      = ['-g', '-DDEBUG']
         env['CCFLAGS_ULTRADEBUG'] = ['-g3', '-O0', '-DDEBUG']
 
     if env['CXX_NAME'] == 'gcc':
-        env['CXXFLAGS']            = []
+        env['CXXFLAGS']            = ['-pipe']
         env['CXXFLAGS_OPTIMIZED']  = ['-O2']
         env['CXXFLAGS_RELEASE']    = ['-O2']
         env['CXXFLAGS_DEBUG']      = ['-g', '-DDEBUG', '-ftemplate-depth-25']
@@ -137,9 +138,13 @@ def configure(conf):
     dfn = conf.define
     env = conf.env
 
+
     # appropriate cflags
     env.append_value('CXXFLAGS', env['CXXFLAGS_%s' % opt.debug_level.upper()])
     env.append_value('CCFLAGS', env['CCFLAGS_%s' % opt.debug_level.upper()])
+
+    if env['IS_WIN32']:
+        dfn('WIN32', 1)
 
     if opt.delint:
         env.append_value('CXXFLAGS', env['CXXFLAGS_DELINT'])
@@ -185,7 +190,10 @@ def configure(conf):
         
 
     # gtk popup menus - dynamic loadable libs
-    check_pkg(conf, 'gmodule-export-2.0', '2.0.0', True, var='GMODULEEXP')
+    if env['IS_WIN32']:
+        check_pkg(conf, 'gmodule-no-export-2.0', '2.0.0', True, var='GMODULEEXP')
+    else: 
+        check_pkg(conf, 'gmodule-export-2.0', '2.0.0', True, var='GMODULEEXP')
 
     ## Gnome libs
     check_pkg(conf, 'glib-2.0', '2.0.0', True, 'GLIB')
@@ -273,9 +281,13 @@ def configure(conf):
     for h in headers:
         conf.check(header_name=h)
 
-    # TODO: check these defines
-    # Define to 1 if you have the `strcasestr' function. */
-    dfn('HAVE_STRCASESTR', 1)
+
+    # Define to 1 if you have the `strcasestr' function.
+    # this function is part of some glibc, string.h
+    # could be missing in win32
+    conf.check_cc(msg='Checking for function strcasestr', define_name="HAVE_STRCASESTR",
+            fragment='int main() {strcasestr("hello","he");}\n')
+
 
     # TODO: What's the purpose of STDC? Is xiphos able compile without that?
     # Define to 1 if you have the ANSI C header files. */
