@@ -3232,7 +3232,7 @@ msgid "Variants"
 msgstr "Varianten"
 
 #: ../ui/xi-menus.glade.h:49
-msgid "Words of Chist in Red"
+msgid "Words of Christ in Red"
 msgstr "Christi Worte in Rot"
 
 #: ../ui/xi-menus.glade.h:50

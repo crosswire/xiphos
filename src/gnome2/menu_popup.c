@@ -563,7 +563,7 @@ G_MODULE_EXPORT void on_popup_font_activate (GtkMenuItem * menuitem, gpointer us
  *   
  */
 
-G_MODULE_EXPORT void on_words_of_chist_in_red_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
+G_MODULE_EXPORT void on_words_of_christ_in_red_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
    	_global_option_main_pane((GtkMenuItem*)menuitem, 
 					 "Words of Christ in Red"); /* string not seen by user */
@@ -1346,7 +1346,7 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 		ops = main_new_globals((gchar*) mod_name, 0);
     
     
-    	item = glade_xml_get_widget (gxml, "words_of_chist_in_red");
+    	item = glade_xml_get_widget (gxml, "words_of_christ_in_red");
     	gtk_widget_hide (item);
     
 	if ((main_check_for_global_option ((gchar*) mod_name, "GBFRedLetterWords")) ||
