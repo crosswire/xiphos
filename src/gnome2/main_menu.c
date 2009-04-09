@@ -105,7 +105,7 @@ G_MODULE_EXPORT void on_help_contents_activate(GtkMenuItem * menuitem, gpointer 
 	
 	if (gnome_help_display((const gchar*)"xiphos.xml", 
 			       NULL, &error) == FALSE) {
-		GS_warning((error->message));
+		GS_warning(("%s",error->message));
 		g_error_free(error);        
 	}
 # endif /* WIN32 */
@@ -141,7 +141,7 @@ G_MODULE_EXPORT void on_mailing_list_activate(GtkMenuItem * menuitem, gpointer u
 	}*/	
 	if (gnome_url_show("https://lists.sourceforge.net/lists/listinfo/gnomesword-users/",
 				&error) == FALSE) {
-		GS_warning((error->message));
+		GS_warning(("%s",error->message));
 		g_error_free (error);
 	}
 }
@@ -176,7 +176,7 @@ G_MODULE_EXPORT void on_live_chat_activate(GtkMenuItem * menuitem, gpointer user
 	}*/
 	if (gnome_url_show("http://embed.mibbit.com/?server=irc.freenode.net&channel=%23xiphos",
 				&error) == FALSE) {
-		GS_warning((error->message));
+		GS_warning(("%s",error->message));
 		g_error_free (error);
 	}
 }
@@ -210,7 +210,7 @@ G_MODULE_EXPORT void on_report_bug_activate(GtkMenuItem * menuitem, gpointer use
 	}*/
 	if (gnome_url_show(PACKAGE_BUGREPORT,
 				&error) == FALSE) {
-		GS_warning((error->message));
+		GS_warning(("%s",error->message));
 		g_error_free (error);
 	}
 }

@@ -269,7 +269,7 @@ void main_save_modlist(void)
 		gtk_tree_model_get(model, &iter,
 				   0, &text1, 1, &text2, -1);
 		xml_set_list_item("modlists", "modlist", text1, text2);
-		GS_warning((text2));
+		GS_warning(("%s",text2));
 		g_free(text1);
 		g_free(text2);
 	} while (gtk_tree_model_iter_next(model, &iter));
@@ -314,7 +314,7 @@ void main_save_range(void)
 				   0, &text1, 1, &text2, -1);
 
 		xml_set_list_item("ranges", "range", text1, text2);
-		GS_warning((text2));
+		GS_warning(("%s",text2));
 		g_free(text1);
 		g_free(text2);
 	} while (gtk_tree_model_iter_next(model, &iter));
@@ -1319,7 +1319,7 @@ void _clear_find_lists(void)
 		tmp = (GList*) list_of_finds->data;
 		while (tmp) {
 			tmp_buf = (char*) tmp->data;
-			GS_message((tmp_buf));
+			GS_message(("%s",tmp_buf));
 			if (tmp_buf) g_free(tmp_buf);
 			tmp = g_list_next(tmp);
 		}
@@ -1431,7 +1431,7 @@ void main_do_dialog_search(void)
 					"Footnote//body/%s",
 					search_string);
 		}
-		GS_message((attribute_search_string));
+		GS_message(("%s",attribute_search_string));
 	}
 
 	if (GTK_TOGGLE_BUTTON(search1.rb_custom_list)->active) {

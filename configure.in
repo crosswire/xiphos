@@ -117,14 +117,20 @@ dnl ================================================================
 GTKHTML_LIBS=""
 GTKHTML_CFLAGS=""
 
-PKG_CHECK_MODULES(GTKHTML, gtkhtml-editor libgtkhtml-3.14 >= 3.23, have_gtkhtml=yes,have_gtkhtml=no)
+PKG_CHECK_MODULES(GTKHTML, libgtkhtml-3.14 >= 3.23, have_gtkhtml=yes,have_gtkhtml=no)
 if test "x$have_gtkhtml" = xyes; then
+	PKG_CHECK_MODULES(EDITOR, gtkhtml-editor, , echo error: no gtkhtml-editor && exit 1)
 	AC_DEFINE(USE_GTKHTML3_14_23, 1, [Define if you want to use GtkHtml-3.14])
 	AC_DEFINE(USE_GTKHTML3_14, 1, [Define if you want to use GtkHtml-3.14])
 	dnl gtkhtml_datadir
 	GTKHTML_DATA_DIR="`$PKG_CONFIG --variable=gtkhtml_datadir libgtkhtml-3.14`"
 	dnl gtkhtml api version
 	GTKHTML_API_VERSION=`$PKG_CONFIG --variable gtkhtml_apiversion libgtkhtml-3.14`
+	AC_SUBST(EDITOR_LIBS)
+	AC_SUBST(EDITOR_CFLAGS)
+	CFLAGS="$CFLAGS $EDITOR_CFLAGS"
+	CXXFLAGS="$CXXFLAGS $EDITOR_CFLAGS"
+	LIBS="$LIBS $EDITOR_LIBS"
 	AM_CONDITIONAL(USE_GTKHTML_BONOBO_EDITOR, false)
 else
 	PKG_CHECK_MODULES(GTKHTML, libgtkhtml-3.14, have_gtkhtml=yes,have_gtkhtml=no)
@@ -268,14 +274,13 @@ else
   A_CPPFLAGS=
 fi
 AC_SUBST(A_CPPFLAGS)
-
 if test "x$GXX" = xyes; then
 if test x$debug = xyes; then
   AC_DEFINE(DEBUG, 1, [Define if you want to see debug messages])
   if test x$ac_cv_prog_cc_g = xyes; then
-    CFLAGS="-g3 -O0 "
+    CFLAGS="$CFLAGS -g3 -O0 "
   else
-    CFLAGS="-O0 "
+    CFLAGS="$CFLAGS -O0 "
   fi
   if test x$ac_cv_prog_cxx_g = xyes; then
     CXXFLAGS="$CXXFLAGS -g3 -O0"

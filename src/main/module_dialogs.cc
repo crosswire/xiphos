@@ -145,7 +145,7 @@ void main_dialogs_book_heading(DIALOG_DATA * d)
 	SWMgr *mgr = be->get_display_mgr();
 	
 	be->display_mod = mgr->Modules[d->mod_name];
-	GS_message(((char*)be->display_mod->RenderText()));
+	GS_message(("%s",(char*)be->display_mod->RenderText()));
 	vkey = (VerseKey*)(SWKey*)(*be->display_mod);	
 	vkey->Headings(1);
 	vkey->AutoNormalize(0);
