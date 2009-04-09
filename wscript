@@ -20,6 +20,7 @@ from os.path import join, dirname, abspath
 # waf imports
 import Utils
 import Options
+import ccroot
 
 
 # custom imports
@@ -57,13 +58,10 @@ headers = [
 def set_options(opt):
 
     # options provided by the modules
-    opt.tool_options('compiler_cxx compiler_cc gnome intltool glib2')
+    opt.tool_options('g++ gcc gnome intltool glib2')
 
-    opt.add_option('--enable-debug', action='store_true', default=False,
-            dest='debug', help='Build debug version [Default: False]')
-
-    opt.add_option('--enable-paratab', action='store_true', default=True,
-            dest='paratab', help='Use paratab [Default: True]')
+    #opt.add_option('--enable-paratab', action='store_true', default=True,
+            #dest='paratab', help='Use paratab [Default: True]')
 
     opt.add_option('--enable-autoclear', action='store_true', default=False,
             dest='autoclear', help='Use previewer autoclear [Default: False]')
@@ -75,29 +73,63 @@ def set_options(opt):
             dest='gtkhtml',
             help='Use gtkhtml instead of gtkmozembed [Default: False]')
 
-    opt.add_option('--enable-maintainer-mode', action='store_true',
-            default=False, dest='maintainer_mode',
-            help='''Enable make rules and dependencies not useful (and sometimes confusing) to the casual installer''')
+    #opt.add_option('--enable-maintainer-mode', action='store_true',
+            #default=False, dest='maintainer_mode',
+            #help='''Enable make rules and dependencies not useful (and sometimes confusing) to the casual installer''')
+
+    # replaces '--enable-maintainer-mode', '--enable-debug'
+    opt.add_option('-d', '--debug-level',
+		action = 'store',
+		default = ccroot.DEBUG_LEVELS.ULTRADEBUG,
+		help = "Specify the debug level [Allowed Values: '%s']" % "', '".join(ccroot.DEBUG_LEVELS.ALL),
+		choices = ccroot.DEBUG_LEVELS.ALL,
+		dest = 'debug_level')
+
+    opt.add_option('--enable-delint', action='store_true', default=False,
+            dest='delint',
+            help='Use -Wall -Werror [Default: False]')
 
 
 def configure(conf):
 
+    env = conf.env
     import Utils
     platform = Utils.detect_platform()
-    conf.env['IS_LINUX'] = platform == 'linux'
-    conf.env['IS_WIN32'] = platform == 'win32'
+    env['IS_LINUX'] = platform == 'linux'
+    env['IS_WIN32'] = platform == 'win32'
 
-    if conf.env['IS_LINUX']:
+    if env['IS_LINUX']:
         Utils.pprint('CYAN', "Linux detected")
 
-    if conf.env['IS_WIN32']:
+    if env['IS_WIN32']:
         Utils.pprint('CYAN', "Windows detected")
 
-    if not (conf.env['IS_LINUX'] or conf.env['IS_WIN32']):
+    if not (env['IS_LINUX'] or env['IS_WIN32']):
         Utils.pprint('RED', "Detected unknown or unsupported platform")
         exit(1)
 
-    conf.check_tool('compiler_cxx compiler_cc gnome intltool glib2')
+    conf.check_tool('g++ gcc gnome intltool glib2')
+
+    # delint flags
+    env['CXXFLAGS_DELINT'] = ['-Werror', '-Wall']
+    env['CCFLAGS_DELINT'] = ['-Werror', '-Wall']
+
+    # gcc compiler debug levels
+    # msvc has levels predefined
+    if env['CC_NAME'] == 'gcc':
+        env['CCFLAGS']            = []
+        env['CCFLAGS_OPTIMIZED']  = ['-O2']
+        env['CCFLAGS_RELEASE']    = ['-O2']
+        env['CCFLAGS_DEBUG']      = ['-g', '-DDEBUG']
+        env['CCFLAGS_ULTRADEBUG'] = ['-g3', '-O0', '-DDEBUG']
+
+    if env['CXX_NAME'] == 'gcc':
+        env['CXXFLAGS']            = []
+        env['CXXFLAGS_OPTIMIZED']  = ['-O2']
+        env['CXXFLAGS_RELEASE']    = ['-O2']
+        env['CXXFLAGS_DEBUG']      = ['-g', '-DDEBUG', '-ftemplate-depth-25']
+        env['CXXFLAGS_ULTRADEBUG'] = ['-g3', '-O0', '-DDEBUG', '-ftemplate-depth-25']
+
 
     ## cmd line options
 
@@ -105,24 +137,30 @@ def configure(conf):
     dfn = conf.define
     env = conf.env
 
-    if opt.debug:
-        dfn('DEBUG', 1)
-    if opt.paratab:
-        dfn('USE_PARALLEL_TAB', 1)
+    # appropriate cflags
+    env.append_value('CXXFLAGS', env['CXXFLAGS_%s' % opt.debug_level.upper()])
+    env.append_value('CCFLAGS', env['CCFLAGS_%s' % opt.debug_level.upper()])
+
+    if opt.delint:
+        env.append_value('CXXFLAGS', env['CXXFLAGS_DELINT'])
+        env.append_value('CCFLAGS', env['CCFLAGS_DELINT'])
+
+    if opt.debug_level == 'ultradebug' or opt.debug_level == 'debug':
+        dfn('MAINTAINER_MODE', 1)
+    #if opt.paratab:
+        #dfn('USE_PARALLEL_TAB', 1)
     if opt.autoclear:
         dfn('USE_PREVIEWER_AUTOCLEAR', 1)
     if opt.old_navbar:
         dfn('OLD_NAVBAR ', 1)
-    if opt.maintainer_mode:
-        dfn('MAINTAINER_MODE', 1)
 
 
     ## CXX flags (compiler arguments)
-    conf.check_cxx(cxxflags='-ftemplate-depth-25')
-    conf.check_cxx(cxxflags='-Werror')
-    conf.check_cxx(cxxflags='-Wall')
-    conf.env.append_value('CCFLAGS', '-g -O2 -Werror -Wall'.split())
-    conf.env.append_value('CXXFLAGS', '-g -O2 -ftemplate-depth-128 -Werror -Wall'.split())
+    #conf.check_cxx(cxxflags='-ftemplate-depth-25')
+    #conf.check_cxx(cxxflags='-Werror')
+    #conf.check_cxx(cxxflags='-Wall')
+    #conf.env.append_value('CCFLAGS', '-g -O2 -Werror -Wall'.split())
+    #conf.env.append_value('CXXFLAGS', '-g -O2 -ftemplate-depth-128 -Werror -Wall'.split())
 
     # pkg-config
     conf.check_cfg(atleast_pkgconfig_version='0.9.0')
@@ -294,13 +332,19 @@ def configure(conf):
     #dfn('__cplusplus', 1)
 
     # let compiler know that we have 'config.h'
-    conf.env.append_value('CCFLAGS', '-DHAVE_CONFIG_H')
-    conf.env.append_value('CXXFLAGS', '-DHAVE_CONFIG_H')
+    
+    # portable adding define, should work gcc and msvc
+    env.append_value('CXXFLAGS', env['CXXDEFINES_ST'] % 'HAVE_CONFIG_H')
+    env.append_value('CCFLAGS', env['CCDEFINES_ST'] % 'HAVE_CONFIG_H')
 
     conf.write_config_header('config.h')
 
     # process configure for subfolders
     conf.sub_config('src/editor') # generate Editor source from idl
+
+    Utils.pprint('RED', 'release flags: ' + str(env['CXXFLAGS_OPTIMIZED']))
+    Utils.pprint('RED', 'staticlib: ' + str(env['STATICLIB_MARKER']))
+    
 
 
 def build(bld):
@@ -332,7 +376,7 @@ def build(bld):
 
 def shutdown():
     # Postinstall tasks:
-    #gnome.postinstall_scrollkeeper('gnome-hello') # Installing the user docs
+    #gnome.postinstall_srrcrollkeeper('gnome-hello') # Installing the user docs
     #gnome.postinstall_schemas('gnome-test') # Installing GConf schemas
     #gnome.postinstall_icons() # Updating the icon cache
     pass

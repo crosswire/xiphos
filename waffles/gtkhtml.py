@@ -36,7 +36,7 @@ class Gtkhtml(object):
         check_pkg(self.conf, 'libgtkhtml-3.14', var='GTKHTML')
 
         if self.env['HAVE_GTKHTML']:
-            dfn('USE_GTKHTML38', 1)
+            #dfn('USE_GTKHTML38', 1)
             dfn('USE_GTKHTML3_14', 1)
             self.set_vars('3.14')
             self.check_version323()
