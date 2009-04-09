@@ -549,7 +549,7 @@ void main_init_language_map() {
 		    (_("Xiphos's file for language\nabbreviations is missing."));
 		return;
 	}
-	GS_message((language_file));
+	GS_message(("%s",language_file));
 
 	if ((language = fopen(language_file, "r")) == NULL) {
 		gui_generic_warning

@@ -228,7 +228,7 @@ static void add_children_to_tree(GtkTreeModel * model, GtkTreeIter iter,
 			   -1);
 
 	GS_message(("offset: %ld",backend->get_treekey_offset()));
-	GS_message((backend->display_mod->Name()));
+	GS_message(("%s",backend->display_mod->Name()));
 	if (backend->treekey_first_child(offset)) {
 		GS_message(("treekey_first_child1 %s",mod_name));
 		

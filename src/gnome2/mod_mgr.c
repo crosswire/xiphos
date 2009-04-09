@@ -482,7 +482,7 @@ remove_install_modules(GList * modules,
 				} else {
 					new_dest = gtk_label_get_text
 					    (GTK_LABEL(label_home));
-					GS_warning((new_dest));
+					GS_warning(("%s",new_dest));
 				}
 				GS_print(("removing %s from %s\n",
 					  buf,
@@ -1305,7 +1305,7 @@ response_close(void)
 		g_string_printf(str, "%s/dirlist", settings.homedir);
 		if (mod_mgr_check_for_file(str->str)) {
 #ifdef DEBUG
-			g_warning(str->str); /* special: no GS_warning. */
+			g_warning("%s",str->str); /* special: no GS_warning. */
 #else
 			unlink(str->str);
 #endif
@@ -2054,7 +2054,7 @@ create_fileselection_local_source(void)
 				      NULL);
 	if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT) {
 		filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
-		GS_message((filename));
+		GS_message(("%s",filename));
 		gtk_list_store_append(GTK_LIST_STORE(model), &iter);
 		gtk_list_store_set(GTK_LIST_STORE(model), &iter,
 				   COLUMN_TYPE, "DIR",
@@ -2906,7 +2906,7 @@ create_module_manager_dialog(gboolean first_run)
 
 	glade_file = gui_general_user_file ("module-manager.glade", FALSE);
 	g_return_val_if_fail((glade_file != NULL), NULL);
-	GS_message((glade_file));
+	GS_message(("%s",glade_file));
 	
 	/* build the widget */
 	if (first_run) {		

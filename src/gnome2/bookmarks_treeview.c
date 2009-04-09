@@ -773,7 +773,7 @@ static gboolean button_release_event(GtkWidget * widget,
 	button_two = FALSE;
 
 
-	GS_warning((main_url_encode("test this")));
+	GS_warning(("%s",main_url_encode("test this")));
 
 	selection = gtk_tree_view_get_selection(bookmark_tree);
 	current_selection = selection;

@@ -179,7 +179,7 @@ static void sync_with_main(const gchar * key)
 		buf = (gchar*)main_url_encode(key);
 	else
 		buf = (gchar*)main_url_encode(xml_get_value("keys", "verse"));
-	GS_message((buf));
+	GS_message(("%s",buf));
 	if(buf && (strlen(buf) > 3)) {
 		url =
 		    g_strdup_printf("xiphos.url?action=showParallel&"

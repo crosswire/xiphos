@@ -310,7 +310,7 @@ void mark_search_words(GString * str, gboolean eliminate)
 	    (settings.searchText[0] == '\0')) {
 		return;
 	}
-	GS_message((settings.searchText));
+	GS_message(("%s",settings.searchText));
 	/* close tags */
 	sprintf(closestr, "</b></font>");
 	/* open tags */

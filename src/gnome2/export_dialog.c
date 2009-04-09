@@ -133,7 +133,7 @@ void _get_export_filename(void)
 	
 	glade_file = gui_general_user_file("export-dialog.glade", FALSE);
 	g_return_if_fail(glade_file != NULL);
-	GS_message((glade_file));
+	GS_message(("%s",glade_file));
 
 	/* build the widget */
 	gxml = glade_xml_new(glade_file, "filechooserdialog1", NULL);
@@ -313,7 +313,7 @@ void gui_export_dialog(void)
 	
 	glade_file = gui_general_user_file("export-dialog.glade", FALSE);
 	g_return_if_fail(glade_file != NULL);
-	GS_message((glade_file));
+	GS_message(("%s",glade_file));
 
 	/* build the widget */
 	gxml = glade_xml_new(glade_file, "dialog_export_passage", NULL);

@@ -1982,7 +1982,7 @@ GTKPrintEntryDisp::Display(SWModule &imodule)
 	GLOBAL_OPS * ops = main_new_globals(imodule.Name(),0);
 
 	(const char *)imodule;	// snap to entry
-	GS_message(((const char *)imodule.getRawEntry()));
+	GS_message(("%s",(const char *)imodule.getRawEntry()));
 	main_set_global_options(ops);
 	mod_type = backend->module_type(imodule.Name());
 
