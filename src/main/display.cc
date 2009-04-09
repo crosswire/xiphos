@@ -91,14 +91,14 @@ extern ModuleCache::CacheMap ModuleMap;
 // specification which overlays both on top of one another.
 #define CSS_BLOCK_BOTH \
 " *        { line-height: 3.8em; }" \
-" .word    { position: relative; }" \
-" .strongs { position: absolute; top: 0.3em; left: 0; z-index: 2; height: 1em }" \
-" .morph   { position: absolute; top: 1.3em; left: 0; z-index: 1 }"
+" .word    { position: relative; top: -1.1em; left: 0 }" \
+" .strongs { position: absolute; top:  0.1em; left: 0; z-index: 2; height: 1em }" \
+" .morph   { position: absolute; top:  1.1em; left: 0; z-index: 1 }"
 #define CSS_BLOCK_ONE \
 " *        { line-height: 2.7em; }" \
-" .word    { position: relative; }" \
-" .strongs { position: absolute; top:  0.6em; left: 0 }" \
-" .morph   { position: absolute; top:  0.6em; left: 0 }"
+" .word    { position: relative; top: -0.7em; left: 0 }" \
+" .strongs { position: absolute; top:  0.9em; left: 0 }" \
+" .morph   { position: absolute; top:  0.9em; left: 0 }"
 
 #define DOUBLE_SPACE " * { line-height: 2em ! important; }"
 
@@ -369,7 +369,9 @@ block_dump(SWBuf& rendered,
 
 	// unannotated words need no help.
 	if (*word && (*strongs == NULL) && (*morph == NULL)) {
+                rendered += "<span class=\"word\">";
 		rendered += *word;
+                rendered += "</span>";
 		g_free((char *)*word);
 		*word = NULL;
 		rendered += " ";
@@ -437,20 +439,18 @@ block_dump(SWBuf& rendered,
 	g_free((char *)*word);
 	*word = NULL;
 
-	if (*strongs) {
-		rendered += "<span class=\"strongs\">";
-		rendered += *strongs;
-		rendered += "</span>";
-		g_free((char *)*strongs);
-		*strongs = NULL;
-	}
-	if (*morph) {
-		rendered += "<span class=\"morph\">";
-		rendered += *morph;
-		rendered += "</span>";
-		g_free((char *)*morph);
-		*morph = NULL;
-	}
+	rendered += "<span class=\"strongs\">";
+	rendered += (*strongs ? *strongs : "&nbsp;");
+	rendered += "</span>";
+	if (*strongs) g_free((char *)*strongs);
+	*strongs = NULL;
+
+	rendered += "<span class=\"morph\">";
+	rendered += (*morph ? *morph : "&nbsp;");
+	rendered += "</span>";
+	if (*morph) g_free((char *)*morph);
+	*morph = NULL;
+
 	rendered += "</span> ";
 }
 
@@ -1464,8 +1464,10 @@ GTKChapDisp::Display(SWModule &imodule)
 
 		num = main_format_number(key->Verse());
 		buf=g_strdup_printf(settings.showversenum
-			? "&nbsp; <a name=\"%d\" href=\"sword:///%s\">"
-			  "<font size=\"%+d\" color=\"%s\">%s</font></a> "
+			? "&nbsp; <span class=\"word\"><a name=\"%d\" href=\"sword:///%s\">"
+			  "<font size=\"%+d\" color=\"%s\">%s</font></a></span> "
+                          "<span class=\"strongs\">&nbsp;</span>"
+                          "<span class=\"morph\">&nbsp;</span>"
 			: "&nbsp; <a name=\"%d\"> </a>",
 			key->Verse(),
 			utf8_key,
