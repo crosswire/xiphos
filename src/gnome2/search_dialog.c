@@ -1602,7 +1602,7 @@ void _create_search_dialog(void)
 
 	glade_file = gui_general_user_file("search-dialog.glade", FALSE);
 	g_return_if_fail(glade_file != NULL);
-	GS_message((glade_file));
+	GS_message(("%s",glade_file));
 
 	/* build the widget */
 	gxml = glade_xml_new(glade_file, "dialog", NULL);

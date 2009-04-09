@@ -346,7 +346,7 @@ static GtkWidget *_create_bookmark_dialog(gchar * label,
 
 	glade_file = gui_general_user_file ("bookmarks.glade", TRUE);
 	g_return_val_if_fail(glade_file != NULL, NULL);
-	GS_message((glade_file));
+	GS_message(("%s",glade_file));
 	
 	/* build the widget */
 	gxml = glade_xml_new (glade_file, NULL, NULL);

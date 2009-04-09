@@ -91,9 +91,9 @@ static
 void do_exit(EDITOR * e)
 {
 	GS_message(("do_exit"));
-	GS_message((e->filename ? e->filename : "no filename"));
-	GS_message((e->module ? e->module : "no module"));
-	GS_message((e->key ? e->key : "no key"));
+//	GS_message((((char*)e->filename ? e->filename : "no filename")));
+//	GS_message(((char*)e->module ? e->module : "no module"));
+//	GS_message(((char*)e->key ? e->key : "no key"));
 
 	if (e->studypad)
 		settings.studypad_dialog_exist = FALSE;

@@ -284,7 +284,7 @@ gdkcolor_to_hex(GdkColor color,
 					color.green/256,
 					color.blue/256);
 	}
-	GS_message((tmpstr));
+	GS_message(("%s",tmpstr));
 	return tmpstr;
 }
 

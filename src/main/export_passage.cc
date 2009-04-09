@@ -64,7 +64,7 @@ static void _copy_to_clipboard (char* text,int len)
 
 static void _save(char *filename, char* text,int len)
 {
-	GS_message((filename));
+	GS_message(("%s",filename));
 	g_file_set_contents(filename, text, len, NULL);
 	if(filename)
 		g_free(filename);	
