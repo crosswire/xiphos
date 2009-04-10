@@ -136,6 +136,9 @@ def configure(conf):
 
     #WIN32 conf.check_tool('g++ gcc gnome intltool glib2')
     conf.check_tool('g++ gcc')
+    if not env['IS_WIN32']:
+        # check for locale.h
+        conf.check_tool('intltool misc')
 
     # delint flags
     env['CXXFLAGS_DELINT'] = ['-Werror', '-Wall']
@@ -337,10 +340,6 @@ def configure(conf):
     dfn('HAVE_DCGETTEXT', 1)
 
 
-    #Define if your <locale.h> file defines LC_MESSAGES.
-    #conf.check(header_name='locale.h', define_name='HAVE_LC_MESSAGES')
-    #dfn('HAVE_LC_MESSAGES', 1)
-
     # Check for header files
     for h in headers:
         conf.check(header_name=h)
@@ -417,17 +416,34 @@ def build(bld):
 
     bld.install_files('${PACKAGE_PIXMAPS_DIR}','pixmaps/*')
 
+    # handle .desktop creation and installation
+    if not bld.env["IS_WIN32"]:
+        bld.new_task_gen(
+                features='subst',
+                source='xiphos.desktop.in.in',
+                target='xiphos.desktop.in',
+                dict={'xiphos_exec':'xiphos',
+                      'PACKAGE_PIXMAPS_DIR': bld.env['PACKAGE_PIXMAPS_DIR']})
+        bld.new_task_gen(
+                features='intltool_in',
+                source='xiphos.desktop.in',
+                target='xiphos.desktop',
+                install_path='${PACKAGE_MENU_DIR}',
+                podir='po',
+                flags='-d')
+
+
     #mkenums marshal pixmaps')
 
     #env = bld.env
     #if env['XML2PO'] and env['XSLTPROC2PO']:
-            #bld.add_subdirs('help')
+        #bld.add_subdirs('help')
 
-    #if env['INTLTOOL']:
-            #bld.add_subdirs('po data')
+    if bld.env['INTLTOOL']:
+        bld.add_subdirs('po')
 
     #if env['HAVE_GTKSHARP'] and env['MCS']:
-            #bld.add_subdirs('sharp')
+        #bld.add_subdirs('sharp')
 
     #if env['SGML2MAN']:
     #	bld.add_subdirs('man')
