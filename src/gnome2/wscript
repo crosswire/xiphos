@@ -28,12 +28,18 @@ def build(bld):
         gecko += ' %s' % 'GTKMOZEMBED_UNSTABLE'
         
     lib = bld.new_task_gen(
-        features='cxx cc cprogram',
-        includes='. ../.. ../../src ../../src/editor %s' % bld.env['GECKO_INCLUDE'], # ../../ for config.h
-        target='xiphos',
-        uselib='GNOMEUI GECKONSPR MAGICK GECKONSS GTK GLADE GLIB GMODULEEXP UPRINT SWORD  %s %s' % (gtkhtml, gecko),
-        add_objects=objects, # used instead of libbackend.a, libgecko.a, libeditor.a, libmain.a
+        features = 'cxx cc cprogram',
+        includes = '. ../.. ../../src ../../src/editor %s' % bld.env['GECKO_INCLUDE'], # ../../ for config.h
+        target = 'xiphos',
+        uselib = 'GNOMEUI GECKONSPR MAGICK GECKONSS GTK GLADE GLIB GMODULEEXP UPRINT SWORD  %s %s' % (gtkhtml, gecko),
+        add_objects = objects, # used instead of libbackend.a, libgecko.a, libeditor.a, libmain.a
+        install_path= '${BINDIR}',
     )
 
     lib.find_sources_in_dirs('.')
+
+    # notification about project name change
+    if not env['IS_WIN32']:
+        is_executable = 0755
+        bld.install_files('${BINDIR}', 'gnomesword2', chmod=is_executable)
 
