@@ -25,7 +25,7 @@
 #endif
 //#ifdef USE_EXPORTER
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 #include <glade/glade-xml.h>
 
 #include "gui/export_dialog.h"

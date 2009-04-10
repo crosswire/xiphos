@@ -23,7 +23,7 @@
 #  include <config.h>
 #endif
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 #include <gtkhtml/gtkhtml.h>
 
 #include "gui/cipher_key_dialog.h"
