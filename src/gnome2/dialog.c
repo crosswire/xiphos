@@ -25,7 +25,7 @@
 
 
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 #include "gui/dialog.h"
 #include "gui/widgets.h"
 
