@@ -395,10 +395,27 @@ def build(bld):
         src/editor
         src/main
         src/gnome2
+        ui
     """)
     # use GECKO
     if not bld.env['ENABLE_GTKHTML']:
         bld.add_subdirs('src/gecko')
+
+    bld.install_files('${PACKAGE_DOC_DIR}', """
+        README
+	RELEASE-NOTES
+	COPYING
+	COPYING-DOCS
+	AUTHORS
+	ChangeLog
+	INSTALL
+	NEWS
+	TODO
+	Xiphos.ogg
+        help/xiphos.pdf
+    """)
+
+    bld.install_files('${PACKAGE_PIXMAPS_DIR}','pixmaps/*')
 
     #mkenums marshal pixmaps')
 
