@@ -1128,7 +1128,8 @@ static GtkWidget *container_create(const gchar * window_title,
 					 editor->treeview);
 			gtk_paned_set_position(GTK_PANED(paned),
 				       125);
-			gtk_tree_view_expand_all((GtkTreeView *)editor->treeview);
+			gtk_tree_view_collapse_all((GtkTreeView *)editor->treeview);
+			// then we should expand on the item to which we've opened for edit.
     			gtk_paned_pack2(GTK_PANED(paned), GTK_WIDGET(editor->control),
 						TRUE, TRUE);
 		break;
