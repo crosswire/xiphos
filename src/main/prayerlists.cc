@@ -168,7 +168,7 @@ add_outline_sections (RawGenBook * book, TreeKeyIdx * treeKey)
  *
  * Synopsis
  *   #include "main/prayer_list.h"
- *   void prayerlist_fundamentals(gchar *listname, gchar *summary)
+ *   void prayerlist_construct(gchar *listname, gchar *summary)
  *
  * Description
  *   manufacture prayer list configuration fundamentals.
@@ -224,7 +224,8 @@ prayerlist_construct(gchar *listname, gchar *summary)
  */
 
 gchar *
-prayerlist_fundamentals(gchar *summary)
+prayerlist_fundamentals(gchar *summary,
+			gchar *defaultname)
 {
 	char *listname = NULL;	// assume failure.
 	GS_DIALOG *info;
@@ -237,7 +238,7 @@ prayerlist_fundamentals(gchar *summary)
 	info->title = _("Prayer List/Journal");
 	info->label_top = _("Name for new prayer list or journal");
 	info->label1 = _("Name: ");
-	info->text1 = g_strdup(_("MyPrayerList"));
+	info->text1 = g_strdup(defaultname);
 	info->ok = TRUE;
 	info->cancel = TRUE;
 	test = gui_gs_dialog(info);
@@ -319,7 +320,8 @@ gboolean
 main_prayerlist_basic_create(void)
 {
 	char *listname = prayerlist_fundamentals
-	    (_("A basic prayer list. \\par\\par Module created by Xiphos."));
+	    (_("A basic prayer list. \\par\\par Module created by Xiphos."),
+	     _("BasicPrayerList"));
 	if (listname == NULL)
 		return FALSE;
 
@@ -360,7 +362,8 @@ gboolean
 main_prayerlist_subject_create(void)
 {
 	char *listname = prayerlist_fundamentals
-	    (_("A subject-based prayer list. \\par\\par Module created by Xiphos."));
+	    (_("A subject-based prayer list. \\par\\par Module created by Xiphos."),
+	     _("SubjectPrayerList"));
 	if (listname == NULL)
 		return FALSE;
 
@@ -405,7 +408,8 @@ gboolean
 main_prayerlist_monthly_create(void)
 {
 	char *listname = prayerlist_fundamentals
-	    (_("A monthly prayer list. \\par\\par Module created by Xiphos."));
+	    (_("A monthly prayer list. \\par\\par Module created by Xiphos."),
+	     _("MonthlyPrayerList"));
 	if (listname == NULL)
 		return FALSE;
 
@@ -456,7 +460,8 @@ gboolean
 main_prayerlist_journal_create(void)
 {
 	char *listname = prayerlist_fundamentals
-	    (_("A daily journal. \\par\\par Module created by Xiphos."));
+	    (_("A daily journal. \\par\\par Module created by Xiphos."),
+	     _("DailyJournal"));
 	if (listname == NULL)
 		return FALSE;
 
@@ -520,7 +525,8 @@ gboolean
 main_prayerlist_outlined_topic_create(void)
 {
 	char *listname = prayerlist_fundamentals
-	    (_("An outlined topic (e.g. sermon). \\par\\par Module created by Xiphos."));
+	    (_("An outlined topic (e.g. sermon). \\par\\par Module created by Xiphos."),
+	     _("OutlinedTopic"));
 	if (listname == NULL)
 		return FALSE;
 

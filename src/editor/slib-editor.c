@@ -1304,7 +1304,8 @@ gint _create_new(const gchar * filename, const gchar * key, gint editor_type)
 				 editor->treeview);
 		gtk_paned_set_position(GTK_PANED(hpaned1),
 			       125);
-		gtk_tree_view_expand_all((GtkTreeView *)editor->treeview);
+		gtk_tree_view_collapse_all((GtkTreeView *)editor->treeview);
+		// then we should expand on the item to which we've opened for edit.
 		vbox = GTKHTML_EDITOR(editor->window)->vbox;
 		
 		gtk_widget_reparent (vbox,box);
