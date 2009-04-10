@@ -31,7 +31,7 @@ from waffles.misc import *
 # the following two variables are used by the target "waf dist"
 VERSION='3.0.1'
 APPNAME='xiphos'
-
+PACKAGE='xiphos'
 
 # these variables are mandatory ('/' are converted automatically)
 srcdir = '.'
@@ -58,7 +58,25 @@ headers = [
 def set_options(opt):
 
     # options provided by the modules
-    opt.tool_options('g++ gcc gnome intltool glib2')
+    #opt.tool_options('g++ gcc gnome intltool glib2')
+    opt.tool_options('g++')
+    opt.tool_options('gcc')
+    opt.tool_options('gnu_dirs')
+
+    # unused options
+    opt.parser.remove_option ('--sbindir')
+    opt.parser.remove_option ('--libexecdir')
+    opt.parser.remove_option ('--sharedstatedir')
+    opt.parser.remove_option ('--localstatedir')
+    opt.parser.remove_option ('--includedir')
+    opt.parser.remove_option ('--oldincludedir')
+    opt.parser.remove_option ('--datadir')
+    opt.parser.remove_option ('--infodir')
+    opt.parser.remove_option ('--mandir')
+    opt.parser.remove_option ('--htmldir')
+    opt.parser.remove_option ('--dvidir')
+    opt.parser.remove_option ('--pdfdir')
+    opt.parser.remove_option ('--psdir')
 
     #opt.add_option('--enable-paratab', action='store_true', default=True,
             #dest='paratab', help='Use paratab [Default: True]')
@@ -81,13 +99,20 @@ def set_options(opt):
     opt.add_option('-d', '--debug-level',
 		action = 'store',
 		default = ccroot.DEBUG_LEVELS.ULTRADEBUG,
-		help = "Specify the debug level [Allowed Values: '%s']" % "', '".join(ccroot.DEBUG_LEVELS.ALL),
-		choices = ccroot.DEBUG_LEVELS.ALL,
+		help = "Specify the debugging level ['ultradebug', 'debug', 'release', 'optimized']",
+		choices = ['ultradebug', 'debug', 'release', 'optimized'],
 		dest = 'debug_level')
 
     opt.add_option('--enable-delint', action='store_true', default=False,
             dest='delint',
             help='Use -Wall -Werror [Default: False]')
+
+    group = opt.add_option_group ('Localization and documentation', '')
+    group.add_option('--helpdir',
+		action = 'store',
+		default = '${DATAROOTDIR}/gnome/help/${PACKAGE}',
+                help = "user documentation [Default: ${DATAROOTDIR}/gnome/help/${PACKAGE}]",
+		dest = 'helpdir')
 
 
 def configure(conf):
@@ -107,6 +132,7 @@ def configure(conf):
     if not (env['IS_LINUX'] or env['IS_WIN32']):
         Utils.pprint('RED', "Detected unknown or unsupported platform")
         exit(1)
+
 
     #WIN32 conf.check_tool('g++ gcc gnome intltool glib2')
     conf.check_tool('g++ gcc')
@@ -132,7 +158,7 @@ def configure(conf):
         env['CXXFLAGS_ULTRADEBUG'] = ['-g3', '-O0', '-DDEBUG', '-ftemplate-depth-25']
 
 
-    ## cmd line options
+    ### cmd line options
 
     opt = Options.options
     dfn = conf.define
@@ -163,6 +189,44 @@ def configure(conf):
     if opt.gtkhtml:
         env['ENABLE_GTKHTML'] = True
         dfn('GTKHTML', 1)
+
+
+
+    ### App info, paths
+    define = conf.define
+    sub = Utils.subst_vars
+    conf.check_tool('gnu_dirs')
+
+    env['VERSION'] = VERSION
+    env['APPNAME'] = APPNAME
+    env['PACKAGE'] = PACKAGE
+    env['HELPDIR'] = sub(opt.helpdir, env)
+
+    define('VERSION', VERSION)
+    define('PACKAGE_VERSION', VERSION)
+    define('GETTEXT_PACKAGE', PACKAGE)
+    define('PACKAGE', PACKAGE)
+    define('PACKAGE_NAME', APPNAME)
+    define('PACKAGE_STRING', '%s %s' % (APPNAME, VERSION))
+    define('PACKAGE_TARNAME', PACKAGE)
+
+    define('INSTALL_PREFIX', sub('${PREFIX}/', env))
+    #dfn('LT_OBJDIR', '.libs') - what's the purpose?
+    define('PACKAGE_BUGREPORT','http://sourceforge.net/tracker/?group_id=5528&atid=105528' )
+    define('PACKAGE_DATA_DIR', sub('${DATAROOTDIR}/${PACKAGE}', env))
+    define('PACKAGE_DOC_DIR', env['DOCDIR'])
+    define('PACKAGE_HELP_DIR', sub('${DATAROOTDIR}/gnome/help/${PACKAGE}', env))
+    define('PACKAGE_LOCALE_DIR', env['LOCALEDIR'])
+    define('PACKAGE_MENU_DIR', sub('${DATAROOTDIR}/applications', env))
+    define('PACKAGE_PIXMAPS_DIR', sub('${DATAROOTDIR}/pixmaps/${PACKAGE}', env))
+    define('PACKAGE_SOURCE_DIR', abspath(srcdir)) # foder where was wscript executed
+
+    # some folders for final executable
+    define('PREFIX', env['PREFIX'])
+    define('SYSCONFDIR', env['SYSCONFDIR'])
+    define('DATADIR', env['DATAROOTDIR'])
+    define('LIBDIR', env['LIBDIR'])
+    define('SHARE_DIR', sub('${DATAROOTDIR}/{PACKAGE}', env))
 
 
     ## CXX flags (compiler arguments)
@@ -297,39 +361,7 @@ def configure(conf):
     dfn('TIME_WITH_SYS_TIME', 1)
 
 
-    dfn('VERSION', VERSION)
-    dfn('PACKAGE_VERSION', VERSION)
-    dfn('GETTEXT_PACKAGE', APPNAME)
-    dfn('PACKAGE', APPNAME)
-    dfn('PACKAGE_NAME', APPNAME)
-    dfn('PACKAGE_STRING', '%s %s' % (APPNAME, VERSION))
-    dfn('PACKAGE_TARNAME', APPNAME)
-
-
-    ## HARDCODED DEFINES
-    import Utils
-    sub = Utils.subst_vars
-    env = conf.env
-
-    dfn('INSTALL_PREFIX', sub('${PREFIX}/', env))
-    #dfn('LT_OBJDIR', '.libs') - what's the purpose?
-    dfn('PACKAGE_BUGREPORT','http://sourceforge.net/tracker/?group_id=5528&atid=105528' )
-    dfn('PACKAGE_DATA_DIR', sub('${PREFIX}/share/xiphos', env))
-    dfn('PACKAGE_DOC_DIR', sub('${PREFIX}/share/doc/xiphos', env))
-    dfn('PACKAGE_HELP_DIR', sub('${PREFIX}/share/gnome/help/xiphos', env))
-    dfn('PACKAGE_LOCALE_DIR', sub('${PREFIX}/share/locale', env))
-    dfn('PACKAGE_MENU_DIR', sub('${PREFIX}/share/applications', env))
-    dfn('PACKAGE_PIXMAPS_DIR', sub('${PREFIX}/share/pixmaps/xiphos', env))
-    dfn('PACKAGE_SOURCE_DIR', abspath('.')) # foder where was wscript executed
-
-    # some folders for final executable
-    dfn('PREFIX', sub('${PREFIX}', env))
-    dfn('SYSCONFDIR', sub('${PREFIX}/etc', env))
-    dfn('DATADIR', sub('${PREFIX}/share', env))
-    dfn('LIBDIR', sub('${PREFIX}/lib', env))
-    dfn('SHARE_DIR', sub('${PREFIX}/share/xiphos', env))
-
-        # TODO: how to detect these values? is it possible to detect them?
+            # TODO: how to detect these values? is it possible to detect them?
 
     # TODO: not necessary SELECT* defines?
     # Define to the type of arg 1 for `select'. */
