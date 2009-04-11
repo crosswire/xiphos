@@ -229,7 +229,7 @@ def configure(conf):
     define('SYSCONFDIR', env['SYSCONFDIR'])
     define('DATADIR', env['DATAROOTDIR'])
     define('LIBDIR', env['LIBDIR'])
-    define('SHARE_DIR', sub('${DATAROOTDIR}/{PACKAGE}', env))
+    define('SHARE_DIR', sub('${DATAROOTDIR}/${PACKAGE}', env))
 
 
     ## CXX flags (compiler arguments)
