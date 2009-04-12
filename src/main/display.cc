@@ -1344,17 +1344,17 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 char
 GTKChapDisp::Display(SWModule &imodule)
 {
-        //following line ensures linked verses work correctly
-        //it does not solve the problem of marking groups of verses (1-4), etc
+        // following line ensures linked verses work correctly
+        // it does not solve the problem of marking groups of verses (1-4), etc
         imodule.setSkipConsecutiveLinks(true);
 	VerseKey *key = (VerseKey *)(SWKey *)imodule;
 	int curVerse = key->Verse();
 	int curChapter = key->Chapter();
 	int curBook = key->Book();
-	gchar *utf8_key;
 	gchar *buf;
 	char *num;
 	const gchar *paragraphMark = NULL;
+	gboolean newparagraph = FALSE;
 	const char *rework;	// for image size analysis rework.
 
 	char *ModuleName = imodule.Name();
@@ -1362,7 +1362,6 @@ GTKChapDisp::Display(SWModule &imodule)
 	cache_flags = ConstructFlags(ops);
 
 	is_rtol = main_is_mod_rtol(ModuleName);
-	gboolean newparagraph = FALSE;
 	mf = get_font(ModuleName);
 
 	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(gtkText))) return 0;
@@ -1446,8 +1445,6 @@ GTKChapDisp::Display(SWModule &imodule)
 		else
 			cVerse.InvalidateHeader();
 
-		utf8_key = strdup((char*)key->getText());
-
 		// special contrasty highlighting
 		if ((key->Verse() == curVerse) && settings.versehighlight) {
 			buf=g_strdup_printf(
@@ -1470,7 +1467,7 @@ GTKChapDisp::Display(SWModule &imodule)
                           "<span class=\"morph\">&nbsp;</span>"
 			: "&nbsp; <a name=\"%d\"> </a>",
 			key->Verse(),
-			utf8_key,
+			(char*)key->getText(),
 			settings.verse_num_font_size + settings.base_font_size,
 			((settings.versehighlight && (key->Verse() == curVerse))
 			 ? settings.highlight_fg
@@ -1552,9 +1549,8 @@ GTKChapDisp::Display(SWModule &imodule)
 	key->Verse(curVerse);
 
 	if (is_rtol && !ops->transliteration)
-		swbuf.append("</div></font></body></html>");
-	else
-		swbuf.append("</font></body></html>");
+		swbuf.append("</div>");
+	swbuf.append("</font></body></html>");
 
 #ifdef USE_GTKMOZEMBED
 	if (strongs_and_morph)
@@ -1746,30 +1742,44 @@ DialogEntryDisp::Display(SWModule &imodule)
 char
 DialogChapDisp::Display(SWModule &imodule)
 {
-	const char *ModuleName = imodule.Name();
-       imodule.setSkipConsecutiveLinks(true);
+	imodule.setSkipConsecutiveLinks(true);
 	VerseKey *key = (VerseKey *)(SWKey *)imodule;
 	int curVerse = key->Verse();
 	int curChapter = key->Chapter();
 	int curBook = key->Book();
-	MOD_FONT *mf = get_font(imodule.Name());
-	//GString *str = g_string_new(NULL);
 	gchar *buf;
 	char *num;
-	is_rtol = main_is_mod_rtol(ModuleName);
-	const gchar *paragraphMark = "&para;";
+	const gchar *paragraphMark = NULL;
 	gboolean newparagraph = FALSE;
+	const char *rework;	// for image size analysis rework.
 
-	gboolean strongs_and_morph, strongs_or_morph;
-	gint display_boundary;
+	char *ModuleName = imodule.Name();
+	ops = main_new_globals(ModuleName, 1);
+	cache_flags = ConstructFlags(ops);
+    
+	is_rtol = main_is_mod_rtol(ModuleName);
+	mf = get_font(ModuleName);
+
+	strongs_and_morph = ((ops->strongs || ops->lemmas) &&
+			     ops->morphs);
+	strongs_or_morph  = ((ops->strongs || ops->lemmas) ||
+			     ops->morphs);
+	if (strongs_and_morph)
+		set_morph_order(imodule);
+
+	// when strongs/morph are on, the anchor boundary must be smaller.
+	gint display_boundary = (strongs_or_morph ? 1 : 2);
+
+	if (!strcmp(ModuleName, "KJV"))
+		paragraphMark = "&para;";
+	else
+		paragraphMark = "";
 
 	gint versestyle;
 	gchar *file = NULL, *style = NULL;
 
-	ops = main_new_globals(imodule.Name(),1);
-    
 	file = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
-	style = get_conf_file_item(file, imodule.Name(), "style");
+	style = get_conf_file_item(file, ModuleName, "style");
 	if ((style) && strcmp(style, "verse"))
 		versestyle = FALSE;
 	else
@@ -1778,16 +1788,8 @@ DialogChapDisp::Display(SWModule &imodule)
 	g_free(file);
 
 	main_dialog_set_global_options((BackEnd*)be, ops);
-	cache_flags = ConstructFlags(ops);
-	strongs_and_morph = ((ops->strongs || ops->lemmas) &&
-			     ops->morphs);
-	strongs_or_morph  = ((ops->strongs || ops->lemmas) ||
-			     ops->morphs);
-	display_boundary = (strongs_or_morph ? 1 : 2);
 
-	if (strongs_and_morph)
-		set_morph_order(imodule);
-
+	swbuf = "";
 	buf = g_strdup_printf(HTML_START
 			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
 			      "<font face=\"%s\" size=\"%+d\">",
@@ -1805,8 +1807,7 @@ DialogChapDisp::Display(SWModule &imodule)
 			      ((mf->old_font_size)
 			       ? atoi(mf->old_font_size) + settings.base_font_size
 			       : settings.base_font_size));
-	swbuf = "";
-	swbuf += buf;
+	swbuf.append(buf);
 	g_free(buf);
 
 	if (is_rtol && !ops->transliteration)
@@ -1826,27 +1827,23 @@ DialogChapDisp::Display(SWModule &imodule)
 		    [key->Verse()];
 
 		// use the module cache rather than re-accessing Sword.
-#if 1
-		if (!cVerse.CacheIsValid(cache_flags))
-			cVerse.SetText((strongs_or_morph
-					? block_render((const char *)imodule)
-					: (const char *)imodule),
-				       cache_flags);
-#else
 		if (!cVerse.CacheIsValid(cache_flags)) {
-			const char *text = (strongs_or_morph
-					    ? block_render((const char *)imodule)
-					    : (const char *)imodule);
-			CleanupContent(text, ops, imodule.Name());
-			cVerse.SetText(text, cache_flags);
-		}
-#endif
+			rework = (strongs_or_morph
+				  ? block_render(imodule.RenderText())
+				  : imodule.RenderText());
+			CleanupContent(rework, ops, imodule.Name());
+			cVerse.SetText(rework, cache_flags);
+		} else
+			rework = cVerse.GetText();
 
 		if (!cVerse.HeaderIsValid())
 			CacheHeader(cVerse, imodule, ops);
 
 		if (cache_flags & ModuleCache::Headings)
-			swbuf.append(cVerse.GetHeader());
+			swbuf.append(settings.imageresize
+				     ? AnalyzeForImageSize(cVerse.GetHeader(),
+							   GDK_WINDOW(gtkText->window))
+				     : cVerse.GetHeader() /* left as-is */);
 		else
 			cVerse.InvalidateHeader();
 
@@ -1881,11 +1878,10 @@ DialogChapDisp::Display(SWModule &imodule)
 		g_free(buf);
 
 		if (key->Verse() == curVerse) {
-			buf = g_strdup_printf(
-				"<font color=\"%s\">",
-				(settings.versehighlight
-				 ? settings.highlight_fg
-				 : settings.currentverse_color));
+			buf = g_strdup_printf("<font color=\"%s\">",
+					      (settings.versehighlight
+					       ? settings.highlight_fg
+					       : settings.currentverse_color));
 			swbuf.append(buf);
 			g_free(buf);
 		}
@@ -1901,7 +1897,7 @@ DialogChapDisp::Display(SWModule &imodule)
 		    (key->Verse() == curVerse)) {
 			GString *text = g_string_new(NULL);
 
-			g_string_printf(text, "%s", cVerse.GetText());
+			g_string_printf(text, "%s", rework);
 			if (!strcmp(text->str + text->len - 6, "<br />")) {
 				text->len -= 6;
 				*(text->str + text->len) = '\0';
@@ -1910,10 +1906,16 @@ DialogChapDisp::Display(SWModule &imodule)
 				text->len -= 4;
 				*(text->str + text->len) = '\0';
 			}
-			swbuf.append(text->str);
+			swbuf.append(settings.imageresize
+				     ? AnalyzeForImageSize(text->str,
+							   GDK_WINDOW(gtkText->window))
+				     : text->str /* left as-is */);
 			g_string_free(text, TRUE);
 		} else
-			swbuf.append(cVerse.GetText());
+			swbuf.append(settings.imageresize
+				     ? AnalyzeForImageSize(rework,
+							   GDK_WINDOW(gtkText->window))
+				     : rework /* left as-is */);
 
 		if (key->Verse() == curVerse) {
 			swbuf.append("</font>");
@@ -1943,9 +1945,8 @@ DialogChapDisp::Display(SWModule &imodule)
 	key->Verse(curVerse);
 
 	if (is_rtol && !ops->transliteration)
-		swbuf.append("</div></font></body></html>");
-	else
-		swbuf.append("</font></body></html>");
+		swbuf.append("</div>");
+	swbuf.append("</font></body></html>");
 
 #ifdef USE_GTKMOZEMBED
 	if (strongs_and_morph)
@@ -1961,6 +1962,7 @@ DialogChapDisp::Display(SWModule &imodule)
 		g_free(buf);
 
 	free_font(mf);
+	mf = NULL;
 	g_free(ops);
     	ops = NULL;
 	return 0;
