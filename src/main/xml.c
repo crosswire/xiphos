@@ -106,7 +106,7 @@ void xml_new_bookmark_file(void)
 	xml_folder = xml_add_folder_to_parent(xml_root, _("What is the Gospel?"));
 	xml_add_bookmark_to_parent(xml_folder, 
 					_("1 Cor 15:1-4"),
-					_("1 Cor 15:1"),
+					_("1 Cor 15:1-4"),
 					NULL,
 					NULL);
 
