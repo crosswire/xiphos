@@ -1,3 +1,7 @@
+2009-04-15  karl <charcoal@users.sf.net>
+
+	* fix #2764410 Segfault in commentary view window.
+
 2009-04-09  karl <charcoal@users.sf.net>
 
 	* applied veritos' patch: make verse highlight align with strongs/morph.
