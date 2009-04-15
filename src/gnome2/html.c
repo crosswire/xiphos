@@ -417,7 +417,7 @@ gchar *gui_button_press_lookup(GtkWidget * html_widget)
 	if (!html->in_selection) {
 		gtk_html_select_word(html);
 		key = gtk_html_get_selection_html(html, &len);
-		if(!len) {
+		if ((key == NULL) || (len == 0)) {
 			return NULL;
 		}
 		//converts encoding from ncr to utf8
