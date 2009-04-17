@@ -118,83 +118,6 @@ ModuleManager::ModuleManager() {
 ModuleManager::~ModuleManager() {
 	
 }
-/*
-void ModuleManager::initMgr(const char *dir)
-{
-	if (dir)
-		mgr = new SWMgr(dir);
-	else
-		mgr = new SWMgr();
-}
-
-void ModuleManager::deleteMgr(void)
-{
-	delete mgr;
-}
-
-void ModuleManager::initModuleMgr(void)
-{	
-	installMgr = new InstallMgr(baseDir, statusReporter);
-}
-
-void ModuleManager::deleteModuleMgr(void)
-{	
-	delete installMgr;
-}
-
-
-MOD_MGR *ModuleManager::getNextModule(void)
-{
-	MOD_MGR *mod_info = NULL;
-	const char *buf;
-	gsize bytes_read;
-	gsize bytes_written;
-	GError **error;
-	SWModule *module;
-	
-	if (it != end) {
-		module = it->second;
-		mod_info = g_new(MOD_MGR, 1);
-//		mod_info->name = g_convert(module->Name(),
-					   -1,
-					   UTF_8,
-					   OLD_CODESET,
-					   &bytes_read,
-					   &bytes_written, error);
-		if (mod_info->name) {
-			mod_info->language = (module->Lang())?
-				backend->get_language_map(module->Lang()): 
-				"unknown";
-//			mod_info->type = g_convert(module->Type(),
-						   -1,
-						   UTF_8,
-						   OLD_CODESET,
-						   &bytes_read,
-						   &bytes_written,
-						   error);
-			buf =
-			    (module->getConfigEntry("Version")) ? module->
-			    getConfigEntry("Version") : " ";
-//			mod_info->new_version = g_convert(buf, 
-						-1, UTF_8, OLD_CODESET,
-				      		&bytes_read, 
-						&bytes_written,
-				      		error);
-			mod_info->old_version =
-			    backend->get_config_entry(mod_info->name, "Version"); //backend_get_module_version(mod_info->name);
-			mod_info->installed =
-			    backend->is_module(mod_info->name);
-			mod_info->description = module->Description();
-			mod_info->locked = 
-				(module->getConfigEntry("CipherKey")) ? 1 : 0;
-			it++;	
-			return (MOD_MGR *) mod_info;
-		}
-	} 
-	return NULL;
-}
-
-*/
 
 char *backend_mod_mgr_get_config_entry(char *module_name,
 				       const char *entry) {
@@ -386,7 +309,6 @@ int backend_uninstall_module(const char *dir,
 			modName);
 		return -1;
 	}
-	//printf("\nprefixPath = %s\n",tmp_mgr->prefixPath);
 	module = it->second;
 	retval = installMgr->removeModule(tmp_mgr, module->Name());
 	delete tmp_mgr;

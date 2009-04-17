@@ -649,7 +649,7 @@ void main_init_backend(void)
 	GS_print(("%s: %s\n","path to sword", settings.path_to_mods));
 	GS_print(("%s %s\n", "System locale is", lang));
 	GS_print(("%s %s\n", "SWORD locale is", sword_locale));
-	GS_print(("OLD_CODESET = %s\n\n", OLD_CODESET));
+	GS_print(("OLD_CODESET = %s\n\n", (OLD_CODESET ? OLD_CODESET : "-none-")));
 	GS_print(("%s\n", "Checking for SWORD Modules"));
 	sys_locale = strdup(lang);
 	settings.spell_language = strdup(sys_locale);
@@ -688,111 +688,6 @@ void main_shutdown_backend(void)
 
 /******************************************************************************
  * Name
- *   main_locked_module_display
- *
- * Synopsis
- *   #include ".h"
- *
- *   main_locked_module_display(GtkWidget * html_widget,
-				  gchar * mod_name, gchar * cipher_key)
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-/*
-void main_locked_module_display(gpointer data,
-				  char * mod_name, char * cipher_key)
-{
-	GtkWidget *html_widget = (GtkWidget *) data;
-	GtkHTML *html = GTK_HTML(html_widget);
-	GtkHTMLStreamStatus status1;
-	GtkHTMLStream *htmlstream;
-	gchar buf[500];
-	GString *str;
-
-	str = g_string_new("");
-	htmlstream =
-	    gtk_html_begin(html);
-
-	g_string_printf(str, "%s", HTML_START "<body><br>");
-	if (str->len) {
-		gtk_html_write(GTK_HTML(html), htmlstream, str->str,
-			       str->len);
-	}
-
-	if (!cipher_key) {
-		g_string_printf(str, "%s %s %s %s %s",
-			_("The"),
-			"<b>",
-			mod_name, "</b>", _("module is locked."));
-		if (str->len) {
-			gtk_html_write(GTK_HTML(html), htmlstream,
-				       str->str, str->len);
-		}
-	} else {
-		g_string_printf(str, "%s %s %s %s %s",
-			_("The"),
-			"<b>",
-			mod_name,
-			"</b>", _("module has been unlocked."));
-		
-		if (str->len) {
-			gtk_html_write(GTK_HTML(html), htmlstream,
-				       str->str, str->len);
-		}
-	}
-
-	if (!cipher_key) {
-		g_string_printf(str, "%s %s %s%s%s %s %s %s",
-			"<br><br>",
-			_("If you have the cipher key you can"),
-			"<a href=\"U",
-			mod_name,
-			"\">",
-			_("click here"),
-			" </a>", _("to unlock the module"));
-		
-		if (str->len) {
-			gtk_html_write(GTK_HTML(html), htmlstream,
-				       str->str, str->len);
-		}
-
-		g_string_printf(str, "%s%s",
-			"<br><br>",
-			_
-			("You will need to restart Xiphos after you unlock it."));
-
-		if (str->len) {
-			gtk_html_write(GTK_HTML(html), htmlstream,
-				       str->str, str->len);
-		}
-	} else {
-		g_string_printf(str, "%s%s",
-			"<br><br>",
-			_("You need to restart Xiphos to view it"));
-		
-		if (str->len) {
-			gtk_html_write(GTK_HTML(html), htmlstream,
-				       str->str, str->len);
-		}
-	}
-
-	g_string_printf(str, "%s", "</body></html>");
-	if (str->len) {
-		gtk_html_write(GTK_HTML(html), htmlstream, str->str,
-			       str->len);
-	}
-
-	gtk_html_end(GTK_HTML(html), htmlstream, status1);
-	g_string_free(str,TRUE);
-
-}
-*/
-/******************************************************************************
- * Name
  *   main_dictionary_entry_changed
  *
  * Synopsis
@@ -810,10 +705,6 @@ void main_locked_module_display(gpointer data,
 void main_dictionary_entry_changed(char * mod_name)
 {	
 	gchar *key = NULL;
-/*	gchar *key2 = NULL;
-	gsize bytes_read;	
-	gsize bytes_written;	
-	GError **error = NULL;    */
 
 	if (!mod_name) 
 		return;
@@ -824,61 +715,26 @@ void main_dictionary_entry_changed(char * mod_name)
 
 	key = g_strdup((gchar*)gtk_entry_get_text(GTK_ENTRY(widgets.entry_dict)));
 	
-//	key2 = g_utf8_strup(key, strlen(key));
-/*	key2 = g_convert(  key,	
-			     -1,	
-			     UTF_8,	
-			     OLD_CODESET,	
-			     &bytes_read,	
-			     &bytes_written,
-			     error);	   */	
-
-//	backend->set_module_key(mod_name, key2);
 	backend->set_module_key(mod_name, key);
-//	g_free(key2);
 	g_free(key);
 	key = backend->get_module_key();
 
-/*	key2 = g_convert(  key,	
-			     -1,	
-			     OLD_CODESET,	
-			     UTF_8,	
-			     &bytes_read,	
-			     &bytes_written,
-			     error);	   */
-		
 	xml_set_value("Xiphos", "keys", "dictionary", key);
 	settings.dictkey = xml_get_value("keys", "dictionary");
 	
 	backend->set_module_key(mod_name, key);
 	backend->display_mod->Display();
 	
-//	gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), key2);
 	gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), key);
 	g_free(key);
-//	g_free(key2);
 } 
 
 
 
 static void dict_key_list_select(GtkMenuItem * menuitem, gpointer user_data)
 {
-/*	gchar *buf;                                       
-	gsize bytes_read;
-	gsize bytes_written;
-	GError **error = NULL;	*/
-
-/*	buf = g_convert((char*)(gchar*) user_data,
-                             -1,
-                             UTF_8,
-                             OLD_CODESET,
-                             &bytes_read,
-                             &bytes_written,
-                             error);
-	GS_message(("\nuser_data: %s\nbuf: %s",(gchar*) user_data,buf));  */
 	gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), (gchar*) user_data);
 	gtk_widget_activate(widgets.entry_dict);
-//	g_free(buf);
 }
 
 /******************************************************************************
