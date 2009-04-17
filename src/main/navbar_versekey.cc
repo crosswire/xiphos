@@ -136,11 +136,7 @@ void main_navbar_versekey_spin_chapter(NAVBAR_VERSEKEY navbar, int direction)
 {
 	
 	VerseKey vkey; 
-//	char *gkey = NULL;
 	char *tmpkey = NULL;
-/*	gsize bytes_read;
-	gsize bytes_written;
-	GError *error = NULL;    */
 	int chapter;
 	
 	if(!navbar.module_name->len)
@@ -149,14 +145,6 @@ void main_navbar_versekey_spin_chapter(NAVBAR_VERSEKEY navbar, int direction)
 	tmpkey = backend->get_valid_key(navbar.key->str);
 	
 	vkey.AutoNormalize(1);
-/*	gkey = g_convert(tmpkey, -1, OLD_CODESET, UTF_8, &bytes_read,
-			 &bytes_written, &error);
-	if(gkey == NULL) {
-		GS_print(("error: %s\n", error->message));
-		g_error_free (error);
-		return;
-	}
-	vkey = gkey;    */
 	vkey = tmpkey;
 	chapter = (direction)?(vkey.Chapter()+1):(vkey.Chapter()-1);
 	vkey.Chapter(chapter);
@@ -164,7 +152,6 @@ void main_navbar_versekey_spin_chapter(NAVBAR_VERSEKEY navbar, int direction)
 	gtk_entry_set_text(GTK_ENTRY(navbar.lookup_entry), tmpkey);
 	gtk_widget_activate(navbar.lookup_entry);
 	g_free(tmpkey);
-//	g_free(gkey);
 }
 
 
@@ -188,11 +175,7 @@ void main_navbar_versekey_spin_verse(NAVBAR_VERSEKEY navbar, int direction)
 {
 	
 	VerseKey vkey; 
-//	char *gkey = NULL;
 	char *tmpkey = NULL;
-/*	gsize bytes_read;
-	gsize bytes_written;
-	GError *error = NULL;   */
 	int verse;
 	
 	if(!navbar.module_name->len)
@@ -201,14 +184,6 @@ void main_navbar_versekey_spin_verse(NAVBAR_VERSEKEY navbar, int direction)
 	tmpkey = backend->get_valid_key(navbar.key->str);
 	
 	vkey.AutoNormalize(1);
-/*	gkey = g_convert(tmpkey, -1, OLD_CODESET, UTF_8, &bytes_read,
-			 &bytes_written, &error);
-	if(gkey == NULL) {
-		GS_print(("error: %s\n", error->message));
-		g_error_free (error);
-		return;
-	}
-	vkey = gkey;    */
 	vkey = tmpkey;
 	verse = (direction)?(vkey.Verse()+1):(vkey.Verse()-1);
 	vkey.Verse(verse);
@@ -217,7 +192,6 @@ void main_navbar_versekey_spin_verse(NAVBAR_VERSEKEY navbar, int direction)
 	gtk_entry_set_text(GTK_ENTRY(navbar.lookup_entry), tmpkey);
 	gtk_widget_activate(navbar.lookup_entry);
 	g_free(tmpkey);
-//	g_free(gkey);
 }
 
 
@@ -524,12 +498,7 @@ GtkWidget *main_versekey_drop_down_verse_menu(NAVBAR_VERSEKEY navbar,
 						gpointer editor)
 {
 	VerseKey vkey; 
-//	char *gkey = NULL;
-	// char buf[5];
 	char *num;
-/*	gsize bytes_read;
-	gsize bytes_written;
-	GError *error = NULL;    */
 	gint i,x;
 	GtkWidget *menu;
 	GtkMenuShell *menu_shell;
@@ -545,14 +514,6 @@ GtkWidget *main_versekey_drop_down_verse_menu(NAVBAR_VERSEKEY navbar,
 	menu_shell = GTK_MENU_SHELL(menu);
 	
 	vkey.AutoNormalize(1);
-/*	gkey = g_convert(navbar.key->str, -1, OLD_CODESET, UTF_8, &bytes_read,
-			 &bytes_written, &error);
-	if(gkey == NULL) {
-		GS_print(("error: %s\n", error->message));
-		g_error_free (error);
-		return NULL;
-	}
-	vkey = gkey;    */
 	vkey = navbar.key->str;
 	int xverse = vkey.Verse();
 		
@@ -613,12 +574,7 @@ GtkWidget *main_versekey_drop_down_chapter_menu(NAVBAR_VERSEKEY navbar,
 						gpointer editor)
 {
 	VerseKey vkey; 
-//	char *gkey = NULL;
-	// char buf[5];
 	char *num;
-/*	gsize bytes_read;
-	gsize bytes_written;
-	GError *error = NULL;   */
 	vkey.AutoNormalize(1);
 	gint i,x;
 	GtkWidget *menu;
@@ -633,14 +589,6 @@ GtkWidget *main_versekey_drop_down_chapter_menu(NAVBAR_VERSEKEY navbar,
 	
 	menu = gtk_menu_new();
 	menu_shell = GTK_MENU_SHELL(menu);
-/*	gkey = g_convert(navbar.key->str, -1, OLD_CODESET, UTF_8, &bytes_read,
-			 &bytes_written, &error);
-	if(gkey == NULL) {
-		GS_print(("error: %s\n", error->message));
-		g_error_free (error);
-		return NULL;
-	}
-	vkey = gkey;    */
 	vkey = navbar.key->str;
 	int xchapter = vkey.Chapter();
 #ifdef SWORD_MULTIVERSE
@@ -713,11 +661,7 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar,
 	c_editor = NULL;
 	c_editor = (EDITOR *) editor;
 	c_type = nb_type;
-	/*
-	if(navbar.testaments == backend->module_get_testaments(navbar.module_name->str))
-		return NULL;	
-	navbar.testaments = backend->module_get_testaments(navbar.module_name->str);
-	*/
+
 	key_current = navbar.key->str;
 	current_book = strdup((const char *) key_current.getBookName());
 	menu = gtk_menu_new();

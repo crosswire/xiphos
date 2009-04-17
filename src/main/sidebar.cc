@@ -465,7 +465,7 @@ static void add_chapters_to_book(GtkTreeModel * model, GtkTreeIter iter,
  *   #include "main/sidebar.h"
  *
  *   void main_add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
-				const gchar * mod_name)	
+ *				const gchar * mod_name)	
  *
  * Description
  *
@@ -480,25 +480,12 @@ static void add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
 	VerseKey key;
 	gint j = 0;
 	GtkTreeIter child_iter;
-/*	gsize bytes_read;
-	gsize bytes_written;
-	GError *error = NULL;    */
 	gchar *buf = NULL;
 
 	gtk_tree_store_set(GTK_TREE_STORE(model), &iter,
 			   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened, -1);
 	if (backend->module_has_testament(mod_name, 1)) {
 		while (j < key.BMAX[0]) {
-/*			buf =
-//			    g_convert((const char *) key.books[0][j].
-				      name, -1, UTF_8, OLD_CODESET,
-				      &bytes_read, &bytes_written,
-				      &error);
-			if (buf == NULL) {
-				GS_print(("error: %s\n", error->message));
-				g_error_free(error);
-				continue;
-			}    */
 #ifdef SWORD_MULTIVERSE
 			key.Testament(1);
 			key.Book(j+1);
@@ -528,16 +515,6 @@ static void add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
 	j = 0;
 	if (backend->module_has_testament(mod_name, 2)) {
 		while (j < key.BMAX[1]) {
-/*			buf =
-//			    g_convert((const char *) key.books[1][j].
-				      name, -1, UTF_8, OLD_CODESET,
-				      &bytes_read, &bytes_written,
-				      &error);
-			if (buf == NULL) {
-				GS_print(("error: %s\n", error->message));
-				g_error_free(error);
-				continue;
-			}    */
 #ifdef SWORD_MULTIVERSE
 			key.Testament(2);
 			key.Book(j+1);

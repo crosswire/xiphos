@@ -1,6 +1,10 @@
+2009-04-17  karl <charcoal@users.sf.net>
+
+	* removed a bunch of dead code re: OLD_CODESET and defunct utf8ification.
+
 2009-04-15  karl <charcoal@users.sf.net>
 
-	* fix #2764410 Segfault in commentary view window.
+	* fixed #2764410 Segfault in commentary view window.
 
 2009-04-09  karl <charcoal@users.sf.net>
 
