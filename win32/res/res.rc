@@ -28,7 +28,10 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDI_ICON1               ICON                    "..\\..\\pixmaps\\gs2-48x48.ico"
+// IDI_ICON1               ICON                    "..\\..\\pixmaps\\gs2-48x48.ico"
+// as above if windres -ires.rc -ores.o called from win32\res directory
+// as below if windres -iwin32/res/res.rc -osrc/gnome2/res.o called from xiphos directory
+IDI_ICON1               ICON                    "pixmaps\\gs2-48x48.ico"
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
