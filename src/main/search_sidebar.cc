@@ -123,8 +123,6 @@ static void fill_search_results_list(int finds)
 		list_item->key = g_strdup(tmpbuf);
 		list_of_verses = g_list_append(list_of_verses, 
 						(RESULTS *) list_item);
-//		if(key_buf) /* allocated by g_convert() in BackEnd::get_next_listkey() */
-//			g_free((gchar*)key_buf);
 	}
 	
 	num = main_format_number(finds);
@@ -275,9 +273,6 @@ void main_delete_sidebar_search_backend(void)
 void main_search_sidebar_fill_bounds_combos(void)
 {
 	VerseKey key; 
-/*	gsize bytes_read;
-	gsize bytes_written;
-	GError *error = NULL;    */
 	char *book = NULL;
 	char *module_name;
 	int i = 0;
@@ -297,19 +292,6 @@ void main_search_sidebar_fill_bounds_combos(void)
 	
 	if (backendSearch->module_has_testament(module_name, 1)) {
 		while(i < key.BMAX[0]) { 			
-/*			book = g_convert((const char *) key.books[0][i].name,
-				     -1,
-				     UTF_8,
-				     OLD_CODESET,
-				     &bytes_read,
-				     &bytes_written,
-				     &error);
-
-			if(book == NULL) {
-				GS_print(("error: %s\n", error->message));
-				g_error_free (error);
-				continue;
-			}    */
 #ifdef SWORD_MULTIVERSE
 			key.Testament(1);
 			key.Book(i+1);
@@ -327,18 +309,6 @@ void main_search_sidebar_fill_bounds_combos(void)
 	i = 0;
 	if (backendSearch->module_has_testament(module_name, 2)) {
 		while(i < key.BMAX[1]) {			
-/*			book = g_convert((const char *) key.books[1][i].name,
-				     -1,
-				     UTF_8,
-				     OLD_CODESET,
-				     &bytes_read,
-				     &bytes_written,
-				     &error);
-			if(book == NULL) {
-				GS_print(("error: %s\n", error->message));
-				g_error_free (error);
-				continue;
-			}    */
 #ifdef SWORD_MULTIVERSE
 			key.Testament(2);
 			key.Book(i+1);

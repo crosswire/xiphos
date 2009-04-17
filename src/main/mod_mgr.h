@@ -60,7 +60,6 @@ int main_module_mgr_index_mod(char * module_name);
 int main_module_mgr_delete_index_mod(char * module_name);
 void main_index_percent_update(char percent,
 			       void *userData);
-char *main_module_mgr_set_sword_locale(const char *sys_locale);
 void main_update_module_lists(void);
 MOD_MGR *mod_mgr_get_next_module(void);
 void update_install_status(long total,
