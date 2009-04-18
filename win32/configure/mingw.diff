@@ -1,0 +1,67 @@
+Index: configure.ac
+===================================================================
+--- configure.ac	(revision 2323)
++++ configure.ac	(working copy)
+@@ -67,7 +67,7 @@
+ AC_ARG_ENABLE(tests,
+ 	AC_HELP_STRING([--enable-tests],[build test programs (default=no)]),,enable_tests=no)
+ AC_ARG_ENABLE(utilities,
+-	AC_HELP_STRING([--enable-utilities],[build utilities (default=yes)]),,enable_utilities=yes)
++	AC_HELP_STRING([--enable-utilities],[build utilities (default=no)]),,enable_utilities=no)
+ AC_ARG_ENABLE(examples,
+ 	AC_HELP_STRING([--enable-examples],[build examples (default=no)]),,enable_examples=no)
+ AM_MAINTAINER_MODE
+@@ -154,13 +154,15 @@
+ 	   echo "*** The icu-config script installed by icu could not be found"
+ 	   echo "*** continuing anyway and assuming 2.1 or earlier"
+ 	   ICU_VER="2.1"
+-	   ICU_LIBS="-licui18n -licuuc -licudata"
+-	   ICU_IOLIBS="-lustdio"
++	   ICU_LIBS=
++	   ICU_IOLIBS=
++	#  ICU_LIBS="-licui18n -licuuc -licudata"
++	#  ICU_IOLIBS="-lustdio"
+ 	else
+ 	   ICU_VER=`$ICU_CONFIG --version`
+-	   ICU_LIBS=`$ICU_CONFIG --ldflags`
++	   #ICU_LIBS=`$ICU_CONFIG --ldflags`
+ 	   #ICU_IOLIBS=`if test $(echo "$ICU_VER >= 3.0"|bc) -eq 1; then $ICU_CONFIG --ldflags-icuio; else $ICU_CONFIG --ldflags-ustdio; fi;`
+-	   ICU_IOLIBS=`$ICU_CONFIG --ldflags-icuio`
++	   #ICU_IOLIBS=`$ICU_CONFIG --ldflags-icuio`
+ 	fi
+      AM_CXXFLAGS="$AM_CXXFLAGS -D_ICU_"
+      AM_CFLAGS="$AM_CFLAGS -D_ICU_"
+Index: include/config.h
+===================================================================
+--- include/config.h	(revision 2323)
++++ include/config.h	(working copy)
+@@ -5,13 +5,13 @@
+ /* #undef AC_APPLE_UNIVERSAL_BUILD */
+ 
+ /* Define to 1 if you have the <dlfcn.h> header file. */
+-#define HAVE_DLFCN_H 1
++/* #undef HAVE_DLFCN_H */
+ 
+ /* Define to 1 if you have the <inttypes.h> header file. */
+ #define HAVE_INTTYPES_H 1
+ 
+ /* Define to 1 if you have the `z' library (-lz). */
+-#define HAVE_LIBZ 1
++/* #undef HAVE_LIBZ */
+ 
+ /* Define to 1 if you have the <memory.h> header file. */
+ #define HAVE_MEMORY_H 1
+Index: usrinst.sh
+===================================================================
+--- usrinst.sh	(revision 2323)
++++ usrinst.sh	(working copy)
+@@ -8,7 +8,8 @@
+ OPTIONS="--enable-debug $OPTIONS"
+ #OPTIONS="--enable-profile $OPTIONS"
+ 
+-OPTIONS="--with-icu $OPTIONS"
++OPTIONS="--without-icu $OPTIONS"
++#OPTIONS="--with-icu $OPTIONS"
+ #OPTIONS="--without-clucene $OPTIONS"
+ #OPTIONS="--without-curl $OPTIONS"
+ 
