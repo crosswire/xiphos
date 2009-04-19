@@ -27,9 +27,6 @@ AC_SUBST(DIRS)
 xiphos_exec="xiphos"
 AC_SUBST(xiphos_exec)	
 
-AC_SUBST(GNOME_LIBS)
-AC_SUBST(GNOME_CFLAGS)
-
 dnl all platforms have a gtk-VIDEOPLATFORM-2.0 lib, but
 dnl it must be at least version 2.12 in order for widget
 dnl tooltips to be set (ha, giggle - cf. F7).
@@ -96,6 +93,8 @@ case "$host_os" in
     PKG_CHECK_MODULES(GNOME, glib-2.0 gtk+-2.0 libgnomeui-2.0 libxml-2.0 libglade-2.0 gmodule-export-2.0,,echo error: some devel libs are missing: check for glib2 gtk2 libgnomeprintui22 libgnomeui libxml2 libglade2 && exit 1)
     ;;
 esac
+AC_SUBST(GNOME_LIBS)
+AC_SUBST(GNOME_CFLAGS)
 
 AC_PROG_CXX
 AC_LANG_CPLUSPLUS
