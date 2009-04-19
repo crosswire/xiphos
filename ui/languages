@@ -233,7 +233,7 @@ nn	Nynorsk
 # correct: Norwegian
 #no	Norsk (bokmål)
 # a hack while g_utf8_validate() dislikes 'å': Norwegian
-no	Norsk (bokmaal)
+no	Norsk Bokmaal
 # Ndebele, South
 nr	Nrebele
 # Navajo
