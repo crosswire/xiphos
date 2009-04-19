@@ -3,6 +3,7 @@ AC_CONFIG_SRCDIR(src/gnome2/xiphos.c)
 AC_CONFIG_MACRO_DIR([m4])
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 
+dnl cr/lf changed to lf only
 
 AM_CONFIG_HEADER(config.h)
 
