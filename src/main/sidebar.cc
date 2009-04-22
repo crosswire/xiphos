@@ -39,6 +39,7 @@
 #include "gui/utilities.h"
 
 #include "main/sidebar.h"
+#include "main/configs.h"
 #include "main/lists.h"
 #include "main/mod_mgr.h"
 #include "main/navbar.h"
@@ -62,7 +63,6 @@ enum {
 };
 
 TreePixbufs *pixbufs;
-
 
 
 /******************************************************************************
@@ -128,7 +128,7 @@ void main_open_bookmark_in_new_tab(gchar * mod_name, gchar * key)
  * Return value
  *   void
  */
-
+  
 void main_display_verse_list_in_sidebar(gchar * key,
 					gchar * module_name,
 					gchar * verse_list)
@@ -544,6 +544,45 @@ static void add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
 }
 
 
+gboolean main_expand_treeview_to_path (GtkTreeModel *model, GtkTreeIter iter)
+{	
+	//gchar *cap = NULL;
+	gchar *mod = NULL;
+	gchar *key = NULL;
+	//GtkTreePath *path;
+	//gchar *path_str = NULL;
+	
+	//static int old_page = 0;
+
+	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 3, &mod, 4, &key, -1);
+	
+	//backend->set_module(mod);
+	//backend->set_treekey(key ? atoi(key) : 0);
+	//path = gtk_tree_model_get_path(model, &iter);
+	if (!gtk_tree_model_iter_has_child
+	    (GTK_TREE_MODEL(model), &iter)
+	    && !key) {
+		add_children_to_tree(model,
+				     iter,
+				     mod,
+				     0);
+	}
+	if (!gtk_tree_model_iter_has_child
+	    (GTK_TREE_MODEL(model), &iter)
+	    && backend->treekey_has_children(key ? atoi(key) : 0)) {
+		add_children_to_tree(model,
+				     iter, mod, atol(key));
+	}
+		
+	/*gtk_tree_view_expand_row(GTK_TREE_VIEW
+				 (sidebar.module_list), path,
+				 FALSE);*/
+	//gtk_tree_path_free(path);
+	main_display_book(mod, (key ? key : (gchar *) "0"));
+	main_setup_navbar_book(mod, (key ? atoi(key) : 0));
+	return 1;
+}
+
 /******************************************************************************
  * Name
  *   main_mod_treeview_button_one
@@ -568,6 +607,8 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 	gchar *mod = NULL;
 	gchar *key = NULL;
 	GtkTreePath *path;
+	gchar *path_str = NULL;
+	
 	static int old_page = 0;
 
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &selected, 2, &cap, 3,
@@ -699,6 +740,11 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 			add_children_to_tree(model,
 					     selected, mod, atol(key));
 		}
+			
+		path_str = gtk_tree_path_to_string (path);
+		//GS_message (("path: %s", path_str));
+		//g_free (path_str);
+		gui_save_treeview_path_string (path_str, mod);
 		gtk_tree_view_expand_row(GTK_TREE_VIEW
 					 (sidebar.module_list), path,
 					 FALSE);

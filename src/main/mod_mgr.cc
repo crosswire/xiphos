@@ -133,8 +133,6 @@ void main_index_percent_update(char percent,
 		gui_update_install_progressbar((gdouble)num);
 		printed++;
 	}
-	while (gtk_events_pending())
-		gtk_main_iteration();
 	printed = 0;
 }
 
