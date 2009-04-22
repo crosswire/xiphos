@@ -81,6 +81,182 @@ extern gboolean shift_key_presed;
 
 static void create_menu_modules(void);
 
+
+
+/******************************************************************************
+ * Name
+ *   gui_save_treeview_path_string
+ *
+ * Synopsis
+ *   #include "gui/sidebar.h"
+ *
+ *   void gui_save_treeview_path_string (const gchar * path_str, const gchar * book_name)
+ *
+ * Description
+ *   saves a books's treeview path in .xiphos/book_path.conf
+ *
+ * Return value
+ *   void
+ */
+
+void gui_save_treeview_path_string (const gchar * path_str, const gchar * book_name)
+{
+	gchar file[250];
+	
+	sprintf(file, "%s/book_path.conf", settings.gSwordDir);
+	save_conf_file_item(file, book_name, "PATH", path_str);
+	GS_message (("\n\nPATH: %s\n\n", path_str));
+	g_free ((gchar*)path_str);
+}
+
+
+/******************************************************************************
+ * Name
+ *   gui_collapse_treeview_to_book
+ *
+ * Synopsis
+ *   #include "gui/sidebar.h"
+ *
+ *   void gui_collapse_treeview_to_book (GtkTreeView * tree, const gchar * book_name)
+ *
+ * Description
+ *   collapses a book treeview to it's name - it's called by tabbed browsing 
+ *   before the next book is expanded 
+ *
+ * Return value
+ *   void
+ */
+
+void gui_collapse_treeview_to_book (GtkTreeView * tree, const gchar * book_name)
+{
+	gchar file[250];
+	gchar *path_string = NULL; 
+	gchar *tmp_path_string = NULL; 
+	gchar **work_buf = NULL;
+	GtkTreePath *path;
+	
+	sprintf(file, "%s/book_path.conf", settings.gSwordDir);
+	path_string = get_conf_file_item (file, (gchar*)book_name, "PATH");
+	
+	if (!path_string) return;
+		
+	work_buf = g_strsplit ( path_string, ":", 4);
+	
+	tmp_path_string = g_strdup_printf ("%s:%s:%s", 
+					   work_buf[0], 
+					   work_buf[1], 
+					   work_buf[2]);
+	
+	path = gtk_tree_path_new_from_string ((gchar *)tmp_path_string);
+	gtk_tree_view_collapse_row (tree, path);
+	
+	gtk_tree_path_free(path);
+	g_free (path_string);
+	g_free (tmp_path_string);
+	g_strfreev(work_buf);	
+}
+
+/******************************************************************************
+ * Name
+ *   gui_expand_treeview_to_path
+ *
+ * Synopsis
+ *   #include "gui/sidebar.h"
+ *
+ *   gboolean gui_expand_treeview_to_path (GtkTreeView * tree, const gchar * book_name)
+ *
+ * Description
+ *   expands a books treeview to it's last path called by tabbed browsing when
+ *   a tab is shown that has a book  (and soon by the book editor - I hope)
+ *
+ * Return value
+ *   gboolean
+ */
+
+gboolean gui_expand_treeview_to_path (GtkTreeView * tree, const gchar * book_name)
+{
+	gchar file[250];
+	gchar *path_string = NULL; 
+	gchar *tmp_path_string = NULL; 
+	gchar *mod = NULL;
+	GtkTreeIter iter;
+	GtkTreeModel *model;
+	GtkTreePath *path;
+	GtkTreeSelection *selection;
+	gchar **work_buf = NULL;
+	gint i = 3;
+	
+	sprintf(file, "%s/book_path.conf", settings.gSwordDir);
+	path_string = get_conf_file_item (file, (gchar*)book_name, "PATH");
+	if (!path_string) return 0;
+	
+	work_buf = g_strsplit ( path_string, ":", -1);
+	GS_message (("\n\nbuf[0]: %s\nbuf[1]: %s\nbuf[2]: %s\n\n", 
+		     work_buf[0], 
+		     work_buf[1], 
+		     work_buf[2]));
+	model = gtk_tree_view_get_model (tree);
+	
+	tmp_path_string = g_strdup_printf ("%s:%s:%s", 
+					   work_buf[0], 
+					   work_buf[1], 
+					   work_buf[2]);
+	if (gtk_tree_model_get_iter_from_string (model, &iter, 
+						 (gchar *)tmp_path_string)) {
+		gtk_tree_model_get(model, &iter,  3, &mod, -1);
+		if (!g_utf8_collate(mod, book_name)) {
+			selection = gtk_tree_view_get_selection (tree);
+			path = gtk_tree_path_new_from_string ((gchar *)tmp_path_string);
+			gtk_tree_view_expand_to_path (tree, path);
+			gtk_tree_selection_select_path (selection, path);
+			
+			main_expand_treeview_to_path(model,iter);
+			gtk_tree_path_free(path);
+			while (work_buf[i]) {
+				GS_message (("\n\nwork_buf[%d]: %s\n\n", 
+					     i, 
+					     work_buf[i]));
+				
+				tmp_path_string = 
+					g_strdup_printf ("%s:%s", 
+							 tmp_path_string, 
+							 work_buf[i]);
+				gtk_tree_model_get_iter_from_string (model, 
+								     &iter, 
+								     (gchar *)tmp_path_string);
+			
+				GS_message (("\n\nmod: %s\npath: %s\n\n", 
+					     mod, 
+					     tmp_path_string));
+				path = gtk_tree_path_new_from_string (
+						   (gchar *)tmp_path_string);
+				gtk_tree_view_expand_to_path (tree, path);
+				gtk_tree_selection_select_path (selection, path);
+				
+				main_expand_treeview_to_path(model,iter);
+				gtk_tree_path_free(path);
+				++i;
+			}
+		}
+		g_free (mod);
+	}
+	path = gtk_tree_path_new_from_string ((gchar *)tmp_path_string);
+	gtk_tree_view_scroll_to_cell (tree,
+                                       path,
+                                       NULL,
+                                       FALSE,
+                                       0.0,
+                                       0.0);
+	gtk_tree_path_free(path);
+	
+	g_free (tmp_path_string);	
+	
+	g_strfreev(work_buf);
+	
+	return 1;
+}
+
+
 /******************************************************************************
  * Name
  *   on_notebook_switch_page
