@@ -24,7 +24,6 @@
 #endif
 
 #include <gnome.h>
-#include <gtk/gtk.h>
 
 #include "gui/gui.h"
 #include "gui/session.h"

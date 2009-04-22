@@ -23,16 +23,12 @@
 #  include <config.h>
 #endif
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 #include <gtkhtml/gtkhtml.h>
 #include <glib.h>
 #include <glib/gstdio.h>
 
 #include <ctype.h>
-
-//#include <libgnomeprint/gnome-print.h>
-//#include <libgnomeprintui/gnome-print-dialog.h>
-//#include <libgnomeprintui/gnome-print-job-preview.h>
 #include <fcntl.h>
 
 #include "gui/html.h"
@@ -150,7 +146,6 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 	
 	if (url == NULL) { /* moved out of url - clear appbar - info viewer*/
 		gui_set_statusbar ("");
-		//gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), "");
 		in_url = FALSE;
 		if (GPOINTER_TO_INT(data) == TEXT_TYPE)
 			main_clear_viewer();
@@ -167,8 +162,7 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 		} else /* any other link */
 			sprintf(buf, "%s", "");
 		
-		gui_set_statusbar (buf);			
-		//gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),buf);
+		gui_set_statusbar (buf);
 	}
 }
 
