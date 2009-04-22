@@ -86,7 +86,6 @@ AM_PROG_LIBTOOL
 
 case "$host_os" in
   mingw*)
-    export SWORD_LIBS="$SWORD_LIBS -lcurldll"
     PKG_CHECK_MODULES(GNOME, glib-2.0 gtk+-2.0 libgnomeui-2.0 libxml-2.0 libglade-2.0 gmodule-no-export-2.0,,echo error: some devel libs are missing: check for glib2 gtk2 libgnomeprintui22 libgnomeui libxml2 libglade2 && exit 1)
     ;;
   *)
