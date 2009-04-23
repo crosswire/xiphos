@@ -1460,11 +1460,9 @@ GTKChapDisp::Display(SWModule &imodule)
 		}
 
 		num = main_format_number(key->Verse());
-		buf=g_strdup_printf(settings.showversenum
+		buf = g_strdup_printf(settings.showversenum
 			? "&nbsp; <span class=\"word\"><a name=\"%d\" href=\"sword:///%s\">"
 			  "<font size=\"%+d\" color=\"%s\">%s</font></a></span> "
-                          "<span class=\"strongs\">&nbsp;</span>"
-                          "<span class=\"morph\">&nbsp;</span>"
 			: "&nbsp; <a name=\"%d\"> </a>",
 			key->Verse(),
 			(char*)key->getText(),
