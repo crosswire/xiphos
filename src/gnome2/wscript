@@ -29,8 +29,10 @@ def build(bld):
 
     # on WIN32 compile Xiphos icon into executable
     winresource = ''
+    staticlib = []
     if env['IS_WIN32']:
         winresource = '../../win32/res/res.rc'
+        staticlib = 'sword'.split()
         
     lib = bld.new_task_gen(
         features = 'cxx cc cprogram',
@@ -38,6 +40,7 @@ def build(bld):
         source = '%s' % winresource, 
         target = 'xiphos',
         uselib = 'GNOMEUI GECKONSPR MAGICK GECKONSS GTK GLADE GLIB GMODULEEXP UPRINT SWORD  %s %s' % (gtkhtml, gecko),
+        staticlib = staticlib, # like cflag -lsword
         add_objects = objects, # used instead of libbackend.a, libgecko.a, libeditor.a, libmain.a
         install_path= '${BINDIR}',
     )
