@@ -136,9 +136,14 @@ def configure(conf):
 
     #WIN32 conf.check_tool('g++ gcc gnome intltool glib2')
     conf.check_tool('g++ gcc')
-    if not env['IS_WIN32']:
-        # check for locale.h
-        conf.check_tool('intltool misc')
+
+    if env['IS_WIN32']:
+        # tool to link icon with executable
+        conf.check_tool('winres')
+    else:
+        conf.check_tool('intltool') # check for locale.h included
+        conf.check_tool('misc')
+
 
     # delint flags
     env['CXXFLAGS_DELINT'] = ['-Werror', '-Wall']
@@ -147,14 +152,14 @@ def configure(conf):
     # gcc compiler debug levels
     # msvc has levels predefined
     if env['CC_NAME'] == 'gcc':
-        env['CCFLAGS']            = ['-pipe']
+        env['CCFLAGS']            = []
         env['CCFLAGS_OPTIMIZED']  = ['-O2']
         env['CCFLAGS_RELEASE']    = ['-O2']
         env['CCFLAGS_DEBUG']      = ['-g', '-DDEBUG']
         env['CCFLAGS_ULTRADEBUG'] = ['-g3', '-O0', '-DDEBUG']
 
     if env['CXX_NAME'] == 'gcc':
-        env['CXXFLAGS']            = ['-pipe']
+        env['CXXFLAGS']            = []
         env['CXXFLAGS_OPTIMIZED']  = ['-O2']
         env['CXXFLAGS_RELEASE']    = ['-O2']
         env['CXXFLAGS_DEBUG']      = ['-g', '-DDEBUG', '-ftemplate-depth-25']
@@ -213,23 +218,23 @@ def configure(conf):
     define('PACKAGE_STRING', '%s %s' % (APPNAME, VERSION))
     define('PACKAGE_TARNAME', PACKAGE)
 
-    define('INSTALL_PREFIX', sub('${PREFIX}/', env))
+    define('INSTALL_PREFIX', escpath(sub('${PREFIX}/', env)))
     #dfn('LT_OBJDIR', '.libs') - what's the purpose?
     define('PACKAGE_BUGREPORT','http://sourceforge.net/tracker/?group_id=5528&atid=105528' )
-    define('PACKAGE_DATA_DIR', sub('${DATAROOTDIR}/${PACKAGE}', env))
-    define('PACKAGE_DOC_DIR', env['DOCDIR'])
-    define('PACKAGE_HELP_DIR', sub('${DATAROOTDIR}/gnome/help/${PACKAGE}', env))
-    define('PACKAGE_LOCALE_DIR', env['LOCALEDIR'])
-    define('PACKAGE_MENU_DIR', sub('${DATAROOTDIR}/applications', env))
-    define('PACKAGE_PIXMAPS_DIR', sub('${DATAROOTDIR}/pixmaps/${PACKAGE}', env))
-    define('PACKAGE_SOURCE_DIR', abspath(srcdir)) # foder where was wscript executed
+    define('PACKAGE_DATA_DIR', escpath(sub('${DATAROOTDIR}/${PACKAGE}', env)))
+    define('PACKAGE_DOC_DIR', escpath(env['DOCDIR']))
+    define('PACKAGE_HELP_DIR', escpath(sub('${DATAROOTDIR}/gnome/help/${PACKAGE}', env)))
+    define('PACKAGE_LOCALE_DIR', escpath(env['LOCALEDIR']))
+    define('PACKAGE_MENU_DIR', escpath(sub('${DATAROOTDIR}/applications', env)))
+    define('PACKAGE_PIXMAPS_DIR', escpath(sub('${DATAROOTDIR}/pixmaps/${PACKAGE}', env)))
+    define('PACKAGE_SOURCE_DIR', escpath(abspath(srcdir))) # foder where was wscript executed
 
     # some folders for final executable
-    define('PREFIX', env['PREFIX'])
-    define('SYSCONFDIR', env['SYSCONFDIR'])
-    define('DATADIR', env['DATAROOTDIR'])
-    define('LIBDIR', env['LIBDIR'])
-    define('SHARE_DIR', sub('${DATAROOTDIR}/${PACKAGE}', env))
+    define('PREFIX', escpath(env['PREFIX']))
+    define('SYSCONFDIR', escpath(env['SYSCONFDIR']))
+    define('DATADIR', escpath(env['DATAROOTDIR']))
+    define('LIBDIR', escpath(env['LIBDIR']))
+    define('SHARE_DIR', escpath(sub('${DATAROOTDIR}/${PACKAGE}', env)))
 
 
     ## CXX flags (compiler arguments)

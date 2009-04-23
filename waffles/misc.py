@@ -42,4 +42,19 @@ def check_pkg_msg(conf, name, version='', mandatory=False, var=None, msg=''):
         atleast_version=version, mandatory=mandatory, msg=msg)
 
 
+def escape(string):
+    """
+    Escape string
+    Useful to use for string and paths before writing them to config.h
+    """
+    return string.decode('string-escape')
+
+def escpath(path):
+    """
+    Escape path - useful in win32
+    """
+    from os.path import normpath
+    # double backslash '\\' needs to be written to config.h in paths in win32
+    return repr(normpath(path))
+    
 
