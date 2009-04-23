@@ -1220,9 +1220,13 @@ static void int_display(SWBuf& text, gchar *key, char *mod_name[])
 
 		// collect decorations.
 		font_size_tmp[j] = get_conf_file_item(file, mod_name[j], "Fontsize");
-		if (!font_size_tmp[j]) {
+		if ((font_size_tmp[j] == NULL) ||
+		    !strcmp(font_size_tmp[j], "+0")) {
+			g_free(font_size_tmp[j]);
 			font_size_tmp[j] =
 			    main_get_mod_config_entry(mod_name[j], "Fontsize");
+			if ((font_size_tmp[j] == NULL) || (*font_size_tmp[j] == '\0'))
+				font_size_tmp[j] = g_strdup("+0");
 		}
 
 		use_font_size[j] =
