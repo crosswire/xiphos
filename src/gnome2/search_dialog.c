@@ -290,228 +290,6 @@ void on_togglebutton_show_main(GtkToggleButton * togglebutton,
 
 /******************************************************************************
  * Name
- *   url
- *
- * Synopsis
- *   #include "gui/search_dialog.h"
- *
- *   void url(GtkHTML * html, const gchar * url, gpointer data)
- *
- * Description
- *   called when mouse moves over an url (link)
- *
- * Return value
- *   void
- */
-#if 0
-static void _url(GtkHTML * html, const gchar * url, gpointer data)
-{
-	gchar *buf = NULL;
-	gchar *modbuf = NULL;
-	gchar *text = NULL;
-	gchar *newmod;
-	gchar *newref;
-	gint i = 0, havemod = 0;
-
-
-	/***  moved out of url  ***/
-	if (url == NULL) {
-		_in_url = FALSE;
-		return;
-	} else
-		_in_url = TRUE;
-
-/*	if (!_preview_on)
-		return;
-*/
-	/***  we are in an url  ***/
-	newmod = g_new0(gchar, strlen(url));
-	newref = g_new0(gchar, strlen(url));
-	/*** thml verse reference ***/
-	if (!strncmp(url, "version=", 7)
-	    || !strncmp(url, "passage=", 7)) {
-		gchar *mybuf = NULL;
-		mybuf = strstr(url, "version=");
-		if (mybuf) {
-			mybuf = strchr(mybuf, '=');
-			++mybuf;
-			i = 0;
-			while (mybuf[i] != ' ') {
-				newmod[i] = mybuf[i];
-				newmod[i + 1] = '\0';
-				++i;
-				++havemod;
-			}
-		}
-		mybuf = NULL;
-		mybuf = strstr(url, "passage=");
-		i = 0;
-		if (mybuf) {
-			mybuf = strchr(mybuf, '=');
-			++mybuf;
-			while (i < strlen(mybuf)) {
-				newref[i] = mybuf[i];
-				newref[i + 1] = '\0';
-				++i;
-			}
-		}
-		if (havemod > 2) {
-			modbuf = newmod;
-		} else {
-			modbuf = settings.MainWindowModule;
-		}
-		buf = g_strdup(newref);
-
-		if (buf) {
-
-			text =
-			    main_get_search_rendered_text(modbuf, buf);
-			if (text) {
-				main_entry_display(search1.preview_html,
-						   modbuf, text, buf,
-						   TRUE);
-				free(text);
-			}
-			g_free(buf);
-		}
-	}
-	g_free(newmod);
-	g_free(newref);
-}
-#endif /* 0 */
-
-/******************************************************************************
- * Name
- *   link_clicked
- *
- * Synopsis
- *   #include "gui/search_dialog.h"
- *
- *   void link_clicked(GtkHTML * html, const gchar * url, gpointer data)
- *
- * Description
- *   html link clicked
- *
- * Return value
- *   void
- */
-
-#if 0
-static void _link_clicked(GtkHTML * html, const gchar * url,
-			  gpointer data)
-{
-	gchar *buf = NULL, *modbuf = NULL;
-	gchar *newmod, *newref;
-	gint i = 0, havemod = 0;
-	gchar *text = NULL;
-	gchar *url2 = NULL;
-
-	if (_preview_on)
-		_preview_on = FALSE;
-	else
-		_preview_on = TRUE;
-
-
-	newmod = g_new0(gchar, strlen(url));
-	newref = g_new0(gchar, strlen(url));
-	/*** thml verse reference ***/
-	if (!strncmp(url, "version=", 7)
-	    || !strncmp(url, "passage=", 7)) {
-		gchar *mybuf = NULL;
-		mybuf = strstr(url, "version=");
-		if (mybuf) {
-			mybuf = strchr(mybuf, '=');
-			++mybuf;
-			i = 0;
-			while (mybuf[i] != ' ') {
-				newmod[i] = mybuf[i];
-				newmod[i + 1] = '\0';
-				++i;
-				++havemod;
-			}
-		}
-		mybuf = NULL;
-		mybuf = strstr(url, "passage=");
-		i = 0;
-		if (mybuf) {
-			mybuf = strchr(mybuf, '=');
-			++mybuf;
-			while (i < strlen(mybuf)) {
-				newref[i] = mybuf[i];
-				newref[i + 1] = '\0';
-				++i;
-			}
-		}
-		if (havemod > 2) {
-			modbuf = newmod;
-		} else {
-			modbuf = settings.MainWindowModule;
-		}
-		buf = g_strdup(newref);
-		settings.displaySearchResults = TRUE;
-
-		url2 = g_strdup_printf("sword://%s/%s", modbuf, buf);
-
-		switch (GPOINTER_TO_INT(data)) {
-		case 0:
-			if (search1.show_in_main ||
-			    gtk_toggle_tool_button_get_active
-			    (GTK_TOGGLE_TOOL_BUTTON
-			     (search1.togglebutton_show_main))) {
-
-				main_url_handler(url2, TRUE);
-			}
-
-			text =
-			    main_get_search_rendered_text(modbuf, buf);
-			if (text) {
-				main_entry_display(search1.preview_html,
-						   modbuf, text, buf,
-						   TRUE);
-				free(text);
-			}
-			break;
-		case 1:
-			main_url_handler(url2, TRUE);
-			break;
-		}
-		settings.displaySearchResults = FALSE;
-		g_free(buf);
-		g_free(url2);
-	}
-	g_free(newmod);
-	g_free(newref);
-}
-#endif /* 0 */
-
-
-/******************************************************************************
- * Name
- *   report_link_clicked
- *
- * Synopsis
- *   #include "gui/search_dialog.h"
- *
- *   void report_link_clicked(GtkHTML * html, const gchar * url,
- *				gpointer data)
- *
- * Description
- *   jumps to the start of the module list in result_html
- *
- * Return value
- *   void
- */
-
-#if 0
-static void report_link_clicked(GtkHTML * html, const gchar * url,
-				gpointer data)
-{
-//	gtk_html_jump_to_anchor(GTK_HTML(search1.results_html), url);
-}
-#endif /* 0 */
-
-/******************************************************************************
- * Name
  *   list_name_changed
  *
  * Synopsis
@@ -1575,12 +1353,23 @@ void _add_html_widget(GtkWidget * vbox)
 {	
 #ifdef USE_GTKMOZEMBED
 	search1.preview_html = GTK_WIDGET(gecko_html_new(NULL, FALSE, DIALOG_SEARCH_PREVIEW_TYPE));
+	gtk_box_pack_start(GTK_BOX(vbox), search1.preview_html, TRUE, TRUE, 0);
 #else
+	GtkWidget *scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_show(scrolledwindow);
+	gtk_box_pack_start(GTK_BOX(vbox), scrolledwindow, TRUE, TRUE, 0);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
+				       (scrolledwindow),
+				       GTK_POLICY_NEVER,
+				       GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
+					    scrolledwindow,
+					    settings.shadow_type);
 	search1.preview_html = gtk_html_new();
+	gtk_container_add(GTK_CONTAINER(scrolledwindow), search1.preview_html);
+	gtk_box_pack_start(GTK_BOX(scrolledwindow), search1.preview_html, TRUE, TRUE, 0);
 #endif
 	gtk_widget_show(search1.preview_html);
-	gtk_box_pack_start(GTK_BOX(vbox), search1.preview_html, TRUE,
-			   TRUE, 0);
 }
 
 
