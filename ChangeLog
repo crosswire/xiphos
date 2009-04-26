@@ -2,6 +2,7 @@
 
 	* kill off remaining cygwin support.
 	* make multi-bookmarks not open-able in new tab or dialog.
+	* fixed #2781318 gtkhtml adv.search needs preview scrollbar.
 
 2009-04-26 matthew <ransom1982@users.sourceforge.net>
 
