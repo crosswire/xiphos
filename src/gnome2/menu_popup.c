@@ -1122,7 +1122,7 @@ G_MODULE_EXPORT void on_rename_perscomm_activate (GtkMenuItem * menuitem, gpoint
 {
     	if (is_dialog) return;
     
-#if defined(__CYGWIN__) || defined(WIN32)
+#if defined(WIN32)
 	gui_generic_warning(_("Renaming is not available in Windows.\n\n"
 			      "Xiphos is limited by Windows' filesystem,\n"
 			      "because it disallows the renaming of filename\n"
@@ -1249,7 +1249,7 @@ out1:
 	g_free(info->text1);
 	g_free(info);
 	g_string_free(workstr, TRUE);
-#endif /* !__CYGWIN__ */
+#endif /* !WIN32 */
 }
 
 
@@ -1618,13 +1618,6 @@ GtkWidget * _create_popup_menu ( const gchar * mod_name, DIALOG_DATA * d)
 	GtkWidget *rename_percomm = glade_xml_get_widget (gxml, "rename_perscomm");
     	GtkWidget *dump_percomm = glade_xml_get_widget (gxml, "dump_perscomm");
 	
-#if defined(__CYGWIN__)
-	GtkWidget *read_aloud	= glade_xml_get_widget (gxml, "read_selection_aloud");
-#endif /* __CYGWIN__ */	 
-#if 0
-	GtkWidget *print 	= glade_xml_get_widget (gxml, "print");
-#endif
-
     	GtkWidget *open_sub 	= gtk_menu_new ();
 	GtkWidget *note_sub 	= gtk_menu_new ();
 	
@@ -1694,10 +1687,6 @@ GtkWidget * _create_popup_menu ( const gchar * mod_name, DIALOG_DATA * d)
 		break;
 	}	
 	
-#if defined(__CYGWIN__)
-	gtk_widget_hide(read_aloud);	// read aloud
-#endif /* __CYGWIN__ */	 
-    
 	gtk_menu_item_set_submenu (GTK_MENU_ITEM (lookup),
 				  lookup_sub);
     

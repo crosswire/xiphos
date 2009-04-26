@@ -1,3 +1,7 @@
+2009-04-26  karl <charcoal@users.sf.net>
+
+	* kill off remaining cygwin support.
+
 2009-04-26 matthew <ransom1982@users.sourceforge.net>
 
 	* add icons to dialogs
