@@ -240,9 +240,7 @@ int settings_init(int new_configs, int new_bookmarks)
 	xml_parse_settings_file(settings.fnconfigure);
 	load_settings_structure();
 
-#ifndef __CYGWIN__
 	gconf_setup();
-#endif /* !__CYGWIN__ */
 
 	return retval;
 }
@@ -797,7 +795,6 @@ void load_settings_structure(void)
 }
 
 
-#ifndef __CYGWIN__
 /******************************************************************************
  * Name
  *    gconf_setup
@@ -883,4 +880,3 @@ void gconf_setup()
 #endif /* DEBUG */
 	}
 }
-#endif /* !__CYGWIN__ */

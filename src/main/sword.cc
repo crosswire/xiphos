@@ -595,13 +595,7 @@ void main_init_language_map() {
 			break;
 		}
 		*(name++) = '\0';	// NUL-terminate abbrev, mark name.
-#ifdef __CYGWIN__
-		// cygwin pango chokes (w/abort()) on encoding for korean.
-		if (!strcmp(abbrev, "ko"))
-			languageMap[SWBuf(abbrev)] = SWBuf("Korean");
-		else
-#endif /* __CYGWIN__ */
-			languageMap[SWBuf(abbrev)] = SWBuf(name);
+		languageMap[SWBuf(abbrev)] = SWBuf(name);
 		s = newline;
 	}
 
