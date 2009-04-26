@@ -309,7 +309,7 @@ static void add_item_to_tree(GtkTreeIter *iter,GtkTreeIter *parent,
  *   void
  */
 
-void bibletime_bookmarks_activate(GtkMenuItem * menuitem,
+G_MODULE_EXPORT void bibletime_bookmarks_activate(GtkMenuItem * menuitem,
 				  gpointer user_data)
 {
 	GtkTreeIter iter;
@@ -358,7 +358,7 @@ void bibletime_bookmarks_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-void on_allow_reordering_activate(GtkMenuItem * menuitem,
+G_MODULE_EXPORT void on_allow_reordering_activate(GtkMenuItem * menuitem,
 				  gpointer user_data)
 {
 	 gtk_tree_view_set_reorderable(bookmark_tree,
@@ -382,7 +382,7 @@ void on_allow_reordering_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-void on_dialog_activate(GtkMenuItem * menuitem, gpointer user_data)
+G_MODULE_EXPORT void on_dialog_activate(GtkMenuItem * menuitem, gpointer user_data)
 {	
 	GtkTreeIter selected;
 	gchar *key = NULL;
@@ -437,7 +437,7 @@ void on_dialog_activate(GtkMenuItem * menuitem, gpointer user_data)
  *   void
  */
 
-void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user_data)
+G_MODULE_EXPORT void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GS_DIALOG *info;
 	BOOKMARK_DATA * data;	
@@ -555,7 +555,7 @@ void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user_data)
  *   void
  */
 
-void on_remove_folder_activate(GtkMenuItem * menuitem,
+G_MODULE_EXPORT void on_remove_folder_activate(GtkMenuItem * menuitem,
 			       gpointer user_data)
 {
 	GtkTreeSelection* selection;
@@ -653,7 +653,7 @@ void restore_cancel(GtkButton * button, GtkWidget * dlg)
  *   void
  */
 
-void on_restore_folder_activate(GtkMenuItem * menuitem,
+G_MODULE_EXPORT void on_restore_folder_activate(GtkMenuItem * menuitem,
 				gpointer user_data)
 {
 	GtkWidget *fileselection;
@@ -711,7 +711,7 @@ void on_restore_folder_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-void on_delete_item_activate(GtkMenuItem * menuitem, gpointer user_data)
+G_MODULE_EXPORT void on_delete_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	gchar *name_string;
 	GtkTreeSelection* selection;
@@ -823,7 +823,7 @@ void gui_save_bookmarks_treeview(void)
  *   void
  */
 
-void on_expand_activate(GtkMenuItem * menuitem,
+G_MODULE_EXPORT void on_expand_activate(GtkMenuItem * menuitem,
 			       gpointer user_data)
 {
 	gtk_tree_view_expand_all(bookmark_tree);
@@ -847,7 +847,7 @@ void on_expand_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-void on_collapse_activate(GtkMenuItem * menuitem,
+G_MODULE_EXPORT void on_collapse_activate(GtkMenuItem * menuitem,
 				 gpointer user_data)
 {
  	gtk_tree_view_collapse_all(bookmark_tree);	
@@ -948,7 +948,7 @@ void on_add_bookmark_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-void on_insert_bookmark_activate(GtkMenuItem * menuitem,
+G_MODULE_EXPORT void on_insert_bookmark_activate(GtkMenuItem * menuitem,
 					gpointer user_data)
 {
 	on_add_bookmark_activate(menuitem,NULL);
@@ -972,7 +972,7 @@ void on_insert_bookmark_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-void on_new_folder_activate(GtkMenuItem * menuitem, gpointer user_data)
+G_MODULE_EXPORT void on_new_folder_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GtkTreeIter selected;
 	GtkTreeIter iter;
@@ -1041,7 +1041,7 @@ void on_new_folder_activate(GtkMenuItem * menuitem, gpointer user_data)
  *   void
  */
 
-void on_open_in_tab_activate(GtkMenuItem * menuitem, gpointer user_data)
+G_MODULE_EXPORT void on_open_in_tab_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GtkTreeSelection* selection;
 	GtkTreeIter selected;
