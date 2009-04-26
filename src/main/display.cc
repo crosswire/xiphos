@@ -1367,7 +1367,7 @@ StartFestival()
 	g_spawn_async ( NULL,
 			festival_args,
 			NULL,
-			G_SPAWN_STDOUT_TO_DEV_NULL,
+			G_SPAWN_SEARCH_PATH,
 			NULL,
 			NULL,
 			NULL,
