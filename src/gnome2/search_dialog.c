@@ -1462,13 +1462,96 @@ void on_closebutton2_clicked(GtkButton * button, gpointer user_data)
 	gtk_widget_hide(search1.mod_sel_dialog);
 }
 
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *   
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   
+ */
+
+void _on_dialog2_response(GtkDialog * dialog, gint response_id,
+			 gpointer user_data)
+{
+	switch (response_id) {
+	case GTK_RESPONSE_CLOSE:
+		gtk_widget_hide(GTK_WIDGET(dialog));
+		break;
+	case GTK_RESPONSE_APPLY:
+		main_add_mod_to_list(search1.listview_modules, module_selected);
+		break;
+	}
+}
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *   
+ *
+ * Description
+ *   Creates the module selection dialog
+ *
+ * Return value
+ *   void
+ */
+
+static 
+void _create_mod_sel_dialog(void)
+{
+	gchar *glade_file;
+	GladeXML *gxml2;
+
+	glade_file = gui_general_user_file("search-dialog.glade", FALSE);
+	g_return_if_fail(glade_file != NULL);
+	GS_message(("%s",glade_file));
+
+	gxml2 = glade_xml_new(glade_file, "dialog2", NULL);
+	search1.mod_sel_dialog = glade_xml_get_widget(gxml2, "dialog2");
+	g_signal_connect((gpointer)search1.mod_sel_dialog, "response",
+			 G_CALLBACK(_on_dialog2_response), NULL);
+	search1.mod_sel_dlg_treeview =
+	    glade_xml_get_widget(gxml2, "treeview8");
+	_setup_treeview2(search1.mod_sel_dlg_treeview);
+	gtk_widget_hide(search1.mod_sel_dialog);
+
+	g_free(glade_file);
+
+}
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *   
+ *
+ * Description
+ *   Shows the module selection dialog
+ *
+ * Return value
+ *   void
+ */
 
 void
 on_toolbutton12_clicked(GtkToolButton * toolbutton, gpointer user_data)
 {
+        _create_mod_sel_dialog();
 	gtk_widget_show(search1.mod_sel_dialog);
 }
-
 
 /******************************************************************************
  * Name
@@ -1529,39 +1612,6 @@ void _on_dialog_response(GtkDialog * dialog, gint response_id,
 	}
 }
 
-
-
-
-/******************************************************************************
- * Name
- *   
- *
- * Synopsis
- *   #include "gui/search_dialog.h"
- *
- *   
- *
- * Description
- *   
- *
- * Return value
- *   
- */
-
-void _on_dialog2_response(GtkDialog * dialog, gint response_id,
-			 gpointer user_data)
-{
-	switch (response_id) {
-	case GTK_RESPONSE_CLOSE:
-		gtk_widget_hide(GTK_WIDGET(dialog));
-		break;
-	case GTK_RESPONSE_APPLY:
-		main_add_mod_to_list(search1.listview_modules, module_selected);
-		break;
-	}
-}
-
-
 /******************************************************************************
  * Name
  *   _create_search_dialog
@@ -1583,7 +1633,6 @@ void _create_search_dialog(void)
 {
 	gchar *glade_file;
 	GladeXML *gxml;
-	GladeXML *gxml2;
 	GtkWidget *toolbutton1;
 	GtkWidget *toolbutton2;
 	GtkWidget *toolbutton3;
@@ -1606,17 +1655,6 @@ void _create_search_dialog(void)
 
 	/* build the widget */
 	gxml = glade_xml_new(glade_file, "dialog", NULL);
-
-	gxml2 = glade_xml_new(glade_file, "dialog2", NULL);
-	search1.mod_sel_dialog = glade_xml_get_widget(gxml2, "dialog2");
-	g_signal_connect((gpointer)search1.mod_sel_dialog, "response",
-			 G_CALLBACK(_on_dialog2_response), NULL);
-	search1.mod_sel_dlg_treeview =
-	    glade_xml_get_widget(gxml2, "treeview8");
-	_setup_treeview2(search1.mod_sel_dlg_treeview);
-	gtk_widget_hide(search1.mod_sel_dialog);
-
-	g_free(glade_file);
 	g_return_if_fail(gxml != NULL);
 
 /*	g_signal_connect(search1., "",
