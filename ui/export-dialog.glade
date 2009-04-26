@@ -11,6 +11,7 @@
   <property name="modal">False</property>
   <property name="resizable">True</property>
   <property name="destroy_with_parent">False</property>
+  <property name="icon">xiphos-x-16.png</property>
   <property name="decorated">True</property>
   <property name="skip_taskbar_hint">False</property>
   <property name="skip_pager_hint">False</property>
@@ -721,7 +722,7 @@
   <property name="action">GTK_FILE_CHOOSER_ACTION_SAVE</property>
   <property name="local_only">True</property>
   <property name="select_multiple">False</property>
-  <property name="show_hidden">True</property>
+  <property name="show_hidden">False</property>
   <property name="do_overwrite_confirmation">False</property>
   <property name="title" translatable="yes">Save Export As</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
@@ -729,6 +730,7 @@
   <property name="modal">False</property>
   <property name="resizable">True</property>
   <property name="destroy_with_parent">False</property>
+  <property name="icon">xiphos-x-16.png</property>
   <property name="decorated">True</property>
   <property name="skip_taskbar_hint">False</property>
   <property name="skip_pager_hint">False</property>
