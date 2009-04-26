@@ -354,7 +354,7 @@ e_splash_construct(ESplash * splash, GdkPixbuf * splash_image_pixbuf)
 	g_signal_connect(GTK_OBJECT(splash), "button-press-event",
 			 G_CALLBACK(button_press_event), splash);
 
-	//gtk_window_set_decorated(GTK_WINDOW(splash), FALSE);
+	gtk_window_set_decorated(GTK_WINDOW(splash), FALSE);
 	gtk_window_set_position(GTK_WINDOW(splash), GTK_WIN_POS_CENTER); 
 	gtk_window_set_resizable(GTK_WINDOW(splash), FALSE);
 	//gtk_window_set_policy(GTK_WINDOW(splash), FALSE, FALSE, FALSE);
