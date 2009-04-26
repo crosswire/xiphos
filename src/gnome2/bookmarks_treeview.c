@@ -772,9 +772,6 @@ static gboolean button_release_event(GtkWidget * widget,
 	button_one = FALSE;
 	button_two = FALSE;
 
-
-	GS_warning(("%s",main_url_encode("test this")));
-
 	selection = gtk_tree_view_get_selection(bookmark_tree);
 	current_selection = selection;
 	if (gtk_tree_selection_get_selected(selection, NULL, &selected)) {
@@ -785,8 +782,9 @@ static gboolean button_release_event(GtkWidget * widget,
 				   5, &mod_desc, 6, &description, -1);
 		if (!gtk_tree_model_iter_has_child
 		    (GTK_TREE_MODEL(model), &selected) && key != NULL) {
-			gtk_widget_set_sensitive(menu.in_tab, TRUE);
-			gtk_widget_set_sensitive(menu.in_dialog, TRUE);
+			gboolean multi = (strpbrk(key, "-;,") != NULL);
+			gtk_widget_set_sensitive(menu.in_tab, !multi);
+			gtk_widget_set_sensitive(menu.in_dialog, !multi);
 			gtk_widget_set_sensitive(menu.new, FALSE);
 			gtk_widget_set_sensitive(menu.insert, FALSE);
 			gtk_widget_set_sensitive(menu.rr_submenu,
