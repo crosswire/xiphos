@@ -1620,9 +1620,9 @@ GtkWidget * _create_popup_menu ( const gchar * mod_name, DIALOG_DATA * d)
 	
 #if defined(__CYGWIN__) || defined(WIN32)
 	GtkWidget *read_aloud	= glade_xml_get_widget (gxml, "read_selection_aloud");
-	GtkWidget *print 	= glade_xml_get_widget (gxml, "print");
 #endif
-    	
+
+	GtkWidget *print 	= glade_xml_get_widget (gxml, "print");
     	GtkWidget *open_sub 	= gtk_menu_new ();
 	GtkWidget *note_sub 	= gtk_menu_new ();
 	
@@ -1694,7 +1694,6 @@ GtkWidget * _create_popup_menu ( const gchar * mod_name, DIALOG_DATA * d)
 	
 #if defined(__CYGWIN__) || defined(WIN32)
 	gtk_widget_hide(read_aloud);	// read aloud
-	gtk_widget_hide(print);		// print
 #endif /* __CYGWIN__ */	 
     
 	gtk_menu_item_set_submenu (GTK_MENU_ITEM (lookup),
