@@ -922,7 +922,7 @@ GtkWidget *gui_create_main_menu(void)
 #ifdef USE_GTKMOZEMBED
 	widgets.doublespace_item = glade_xml_get_widget (gxml, "double_space_text");
 #endif /* USE_GTKMOZEMBED */
-#if defined(__CYGWIN__) || defined(WIN32)
+#if defined(__CYGWIN__)
 	gtk_widget_hide(widgets.readaloud_item);
 #endif /* __CYGWIN */
 	
