@@ -155,6 +155,9 @@ public:
 #endif /* __cplusplus */
 
 void ReadAloud(unsigned int verse, const char *suppliedtext);
+void StartFestival();
+void StopFestival(int tts_socket);
+gboolean FestivalSpeak(gchar *text, int length, int tts_socket);
 
 #ifdef __cplusplus
 }

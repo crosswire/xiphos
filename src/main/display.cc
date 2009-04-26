@@ -23,6 +23,7 @@
 #include <config.h>
 #endif
 
+#include <glib.h>
 #include <osishtmlhref.h>
 #include <osisvariants.h>
 #include <thmlvariants.h>
@@ -39,6 +40,8 @@
 #ifndef WIN32
 #include <sys/socket.h>
 #include <netinet/in.h>
+#else
+#include <Winsock2.h>
 #endif /* !WIN32 */
 #include <errno.h>
 
@@ -1151,8 +1154,11 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 void
 ReadAloud(unsigned int verse, const char *suppliedtext)
 {
-#ifndef WIN32
+#ifdef WIN32	
+	static int tts_socket = INVALID_SOCKET;	// no initial connection.
+#else
 	static int tts_socket = -1;	// no initial connection.
+#endif
 	static int use_counter = -2;	// to shortcircuit early uses.
 
 	if (settings.readaloud ||       // read anything, or
@@ -1182,9 +1188,12 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 			service.sin_addr.s_addr = htonl(0x7f000001);
 			if (connect(tts_socket, (const sockaddr *)&service,
 				    sizeof(service)) != 0) {
-				system("festival --server &");
+				StartFestival();
+#ifdef WIN32
+				Sleep(2); // give festival a moment to init.
+#else
 				sleep(2); // give festival a moment to init.
-
+#endif
 				if (connect(tts_socket, (const sockaddr *)&service,
 					    sizeof(service)) != 0) {
 					// it still didn't work -- missing.
@@ -1192,8 +1201,7 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 					sprintf(msg, "%s\n%s, %s",
 						"TTS \"festival\" not started -- perhaps not installed",
 						"TTS connect failed", strerror(errno));
-					close(tts_socket);
-					tts_socket = -1;
+					StopFestival(tts_socket);
 					settings.readaloud = 0;
 					gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 								       (widgets.readaloud_item),
@@ -1303,18 +1311,13 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 		// in case it isn't obvious, i'd really like a  standard
 		// function that walks a string for multiple individual chars.
 		GS_message(("ReadAloud: clean: %s\n", text->str));
-
 		// scribble clean text to the socket.
-		if ((write(tts_socket, "(SayText \"", 10) < 0)  ||
-		    (write(tts_socket, text->str, strlen(text->str)) < 0) ||
-		    (write(tts_socket, "\")\r\n", 4) < 0))
+		if (FestivalSpeak(text->str, strlen(text->str), tts_socket) == false) 
 		{
 			char msg[256];
 			sprintf(msg, "TTS disappeared?\nTTS write failed: %s",
 				strerror(errno));
-			shutdown(tts_socket, SHUT_RDWR);
-			close(tts_socket);
-			tts_socket = -1;
+			StopFestival(tts_socket);
 			settings.readaloud = 0;
 			gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 						       (widgets.readaloud_item),
@@ -1331,15 +1334,78 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 		// Reading aloud is disabled.
 		// If we had been reading, shut it down.
 		if (tts_socket >= 0) {
-			shutdown(tts_socket, SHUT_RDWR);
-			close(tts_socket);
-			tts_socket = -1;
+			StopFestival(tts_socket);
 		}
 		use_counter++;
 		return;
 	}
-#endif /* WIN32 */
 }
+
+//starts festival in a async process
+void
+StartFestival()
+{
+#ifdef WIN32
+	//on windows, we will ship festival directly under Xiphos
+	gchar *festival_args[5];
+        gchar *festival_com = g_win32_get_package_installation_directory_of_module(NULL);
+	festival_com = g_strconcat(festival_com, "\0", NULL);
+	gchar *festival_lib = g_build_filename(festival_com, "festival\\lib\0");
+	festival_com = g_build_filename(festival_com, "festival\\festival.exe\0");
+	festival_args[0] = festival_com;
+	festival_args[1] = g_strdup("--libdir");
+	festival_args[2] = festival_lib;
+	festival_args[3] = g_strdup("--server");
+	festival_args[4] = NULL;
+#else
+	gchar *festival_args[3];
+	festival_args[0] = g_strdup("festival");
+	festival_args[1] = g_strdup("--server");
+	festival_args[2] = NULL;
+#endif
+	GS_message((festival_args[0]));
+	g_spawn_async ( NULL,
+			festival_args,
+			NULL,
+			G_SPAWN_STDOUT_TO_DEV_NULL,
+			NULL,
+			NULL,
+			NULL,
+			NULL);
+}
+
+//shuts down Festival
+void
+StopFestival(int tts_socket)
+{
+#ifdef WIN32
+	closesocket (tts_socket);
+	tts_socket = INVALID_SOCKET;
+#else
+	shutdown(tts_socket, SHUT_RDWR);
+	close(tts_socket);
+	tts_socket = -1;
+#endif
+}
+
+//tells Festival to say the given text
+gboolean
+FestivalSpeak(gchar *text, int length, int tts_socket)
+{
+#ifdef WIN32
+	if ((send(tts_socket, "(SayText \"", 10, MSG_DONTROUTE) == INVALID_SOCKET)  ||
+	    (send(tts_socket, text, length, MSG_DONTROUTE) == INVALID_SOCKET) ||
+	    (send(tts_socket, "\")\r\n", 4, MSG_DONTROUTE) == INVALID_SOCKET ))
+		return false;
+#else
+	if ((write(tts_socket, "(SayText \"", 10) < 0)  ||
+	    (write(tts_socket, text, length ) < 0) ||
+	    (write(tts_socket, "\")\r\n", 4) < 0))
+		return false;
+#endif
+	return true;
+}
+
 
 char
 GTKChapDisp::Display(SWModule &imodule)
