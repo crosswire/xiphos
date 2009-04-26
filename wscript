@@ -164,7 +164,10 @@ def configure(conf):
         env['CXXFLAGS_RELEASE']    = ['-O2']
         env['CXXFLAGS_DEBUG']      = ['-g', '-DDEBUG', '-ftemplate-depth-25']
         env['CXXFLAGS_ULTRADEBUG'] = ['-g3', '-O0', '-DDEBUG', '-ftemplate-depth-25']
-
+    
+    if env['IS_WIN32']:
+        env['CCFLAGS']            = ['-mms-bitfields']
+        env['CXXFLAGS']           = ['-mms-bitfields']
 
     ### cmd line options
 
