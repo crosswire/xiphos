@@ -1618,8 +1618,12 @@ GtkWidget * _create_popup_menu ( const gchar * mod_name, DIALOG_DATA * d)
 	GtkWidget *rename_percomm = glade_xml_get_widget (gxml, "rename_perscomm");
     	GtkWidget *dump_percomm = glade_xml_get_widget (gxml, "dump_perscomm");
 	
+#if defined(__CYGWIN__)
 	GtkWidget *read_aloud	= glade_xml_get_widget (gxml, "read_selection_aloud");
+#endif /* __CYGWIN__ */	 
+#if 0
 	GtkWidget *print 	= glade_xml_get_widget (gxml, "print");
+#endif
 
     	GtkWidget *open_sub 	= gtk_menu_new ();
 	GtkWidget *note_sub 	= gtk_menu_new ();
