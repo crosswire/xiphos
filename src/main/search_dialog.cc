@@ -1419,7 +1419,11 @@ void main_do_dialog_search(void)
 		if(GTK_TOGGLE_BUTTON(search1.rb_strongs)->active) {
 			search_params |= SEARCHFLAG_MATCHWHOLEENTRY;
 			attribute_search_string = g_strdup_printf(
+#ifdef SWORD_MULTIVERSE
+					"Word//Lemma./%s",
+#else
 					"Word//Lemma/%s",
+#endif
 					search_string);
 		} else if(GTK_TOGGLE_BUTTON(search1.rb_morphs)->active) {
 			search_params |= SEARCHFLAG_MATCHWHOLEENTRY;
