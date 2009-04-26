@@ -147,10 +147,8 @@ static void alert_url_not_found(const gchar * url)
  */
 
 const char *display_progs[] = {
-#ifndef __CYGWIN__
 	"/usr/bin/gvfs-open",
 	"/usr/bin/gnome-open",
-#endif /* !__CYGWIN__ */
 	"/usr/bin/display",
 	NULL
 };

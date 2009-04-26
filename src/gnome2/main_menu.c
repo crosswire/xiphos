@@ -77,18 +77,9 @@
 
 G_MODULE_EXPORT void on_help_contents_activate(GtkMenuItem * menuitem, gpointer user_data)
 {	
-# ifdef WIN32
-	const char *lang = getenv("LANG");
-#endif /* WIN32 */
-
-#ifdef __CYGWIN__
-	gui_generic_warning("Cygwin does not have the\n"
-			    "documentation viewer needed to\n"
-			    "view the Xiphos manual.\n"
-			    "See http://xiphos.org/manual/.");
-#else
 	GError *error = NULL;
-# ifdef WIN32
+#ifdef WIN32
+	const char *lang = getenv("LANG");
 	gchar *help_file = g_win32_get_package_installation_directory_of_module(NULL);
 	help_file = g_strconcat(help_file, "\0", NULL);
 	if (strncmp(lang,"fr",2)==0)
@@ -101,15 +92,14 @@ G_MODULE_EXPORT void on_help_contents_activate(GtkMenuItem * menuitem, gpointer 
 		g_error_free(error);
 	}
 	g_free(help_file);
-# else
+#else
 	
 	if (gnome_help_display((const gchar*)"xiphos.xml", 
 			       NULL, &error) == FALSE) {
 		GS_warning(("%s",error->message));
 		g_error_free(error);        
 	}
-# endif /* WIN32 */
-#endif /* __CYGWIN__ */
+#endif /* WIN32 */
 }
 
 /******************************************************************************
@@ -922,9 +912,6 @@ GtkWidget *gui_create_main_menu(void)
 #ifdef USE_GTKMOZEMBED
 	widgets.doublespace_item = glade_xml_get_widget (gxml, "double_space_text");
 #endif /* USE_GTKMOZEMBED */
-#if defined(__CYGWIN__)
-	gtk_widget_hide(widgets.readaloud_item);
-#endif /* __CYGWIN */
 	
 	/* map tab's show state into view menu. */
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
