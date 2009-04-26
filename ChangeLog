@@ -1,3 +1,9 @@
+2009-04-26 matthew <ransom1982@users.sourceforge.net>
+
+	* add icons to dialogs
+	* added ReadAloud for Windows
+	* added back printing for Windows
+
 2009-04-23  karl <charcoal@users.sf.net>
 
 	* correct a spacing glitch in absence of strongs/morph.
