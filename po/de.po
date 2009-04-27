@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 3.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-26 15:06+0200\n"
+"POT-Creation-Date: 2009-04-27 20:29+0200\n"
 "PO-Revision-Date: 2009-04-26 15:06+0100\n"
 "Last-Translator: Eicke Godehardt <sf at godehardt.org>\n"
 "Language-Team: Xiphos Translation Team <farsi@lists.sharif.edu>\n"
@@ -755,23 +755,23 @@ msgstr " Modul"
 msgid "found in "
 msgstr "gefunden in "
 
-#: ../src/gnome2/search_dialog.c:720
+#: ../src/gnome2/search_dialog.c:498
 msgid "Clear List?"
 msgstr "Liste leeren?"
 
-#: ../src/gnome2/search_dialog.c:721
+#: ../src/gnome2/search_dialog.c:499
 msgid "Are you sure you want to clear the module list?"
 msgstr "Möchten Sie die Modulliste wirklich leeren?"
 
-#: ../src/gnome2/search_dialog.c:904
+#: ../src/gnome2/search_dialog.c:682
 msgid "The last module list may not be deleted"
 msgstr "Die letzte Modulliste wird eventuell nicht gelöscht"
 
-#: ../src/gnome2/search_dialog.c:921
+#: ../src/gnome2/search_dialog.c:699
 msgid "Delete list?"
 msgstr "Liste löschen?"
 
-#: ../src/gnome2/search_dialog.c:922
+#: ../src/gnome2/search_dialog.c:700
 msgid "Are you sure you want to delete:"
 msgstr "Möchten Sie Folgendes löschen:"
 
