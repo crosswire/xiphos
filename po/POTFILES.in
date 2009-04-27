@@ -6,7 +6,7 @@ src/backend/module_manager.cc
 src/backend/sword_main.cc
 src/backend/gs_stringmgr.cpp
 ## Editor Source files
-src/editor/html-editor.c
+#src/editor/html-editor.c
 ## Gecko Source files
 src/gecko/gecko-html.cpp
 src/gecko/gecko-services.cpp
@@ -14,7 +14,7 @@ src/gecko/gecko-utils.cpp
 src/gecko/gecko-print.c
 ## GNOME2 Source files
 src/gnome2/dictlex_dialog.c
-src/gnome2/fileselection.c
+#src/gnome2/fileselection.c
 src/gnome2/bibletext.c
 src/gnome2/about_sword.c
 src/gnome2/navbar_versekey_editor.c
@@ -53,7 +53,7 @@ src/gnome2/display_info.c
 src/gnome2/preferences_dialog.c
 src/gnome2/preferences_cell_renderer.c
 src/gnome2/about_xiphos.c
-src/gnome2/studypad.c
+#src/gnome2/studypad.c
 src/gnome2/parallel_dialog.c
 src/gnome2/xiphos.c
 src/gnome2/bookmarks_menu.c
