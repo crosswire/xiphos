@@ -24,22 +24,15 @@ def configure(conf):
 
 def build(bld):
 
-    # slib editor
-    if bld.env['HAVE_EDITOR_IDL']:
-        lib = bld.new_task_gen(
-            features='cc cxx', # compile C with gcc, C++ with g++
-            includes='. ../../ ../../src ../../src/editor %s' % bld.env['GECKO_INCLUDE'], # ../../ for config.h
-            source='slib-editor.c',
-            target='editor',
-            uselib='GLIB GNOMEUI SWORD GTKMOZEMBED GTKMOZEMBED_UNSTABLE GTKHTML GTKHTML_EDITOR',
-        )
+    source = 'slib-editor.c' if bld.env['HAVE_EDITOR_IDL'] else \
+        'bonobo-editor.c Editor-common.c Editor-skels.c Editor-stubs.c'
 
-    # bonobo editor
-    else:
-        lib = bld.new_task_gen(
-            features='cc cxx', # compile C with gcc, C++ with g++
-            includes='. ../../ ../../src ../../src/editor %s' % bld.env['GECKO_INCLUDE'], # ../../ for config.h
-            source='bonobo-editor.c Editor-common.c Editor-skels.c Editor-stubs.c',
-            target='editor',
-            uselib='GLIB GNOMEUI SWORD GTKMOZEMBED GTKMOZEMBED_UNSTABLE GTKHTML GTKHTML_EDITOR',
-        )
+    bld.new_task_gen(
+        features='cc cxx', # compile C with gcc, C++ with g++
+        includes='. ../../ ../../src ../../src/editor %s' %
+            bld.env['GECKO_INCLUDE'], # ../../ for config.h
+        source=source,
+        target='editor',
+        uselib='GLIB GNOMEUI SWORD GTKMOZEMBED GTKMOZEMBED_UNSTABLE GTKHTML GTKHTML_EDITOR'
+    )
+
