@@ -117,6 +117,8 @@ void gui_show_main_window(void);
 
 #define	GS_KEY_PLUS	21
 #define	GS_KEY_MINUS	20
+#define GS_KEY_SHIFT    50
+#define GS_KEY_SHIFT_R  62
 
 #else
 
@@ -140,6 +142,8 @@ void gui_show_main_window(void);
 
 #define	GS_KEY_PLUS	187
 #define	GS_KEY_MINUS	189
+#define GS_KEY_SHIFT    16
+#define GS_KEY_SHIFT_R  161
 
 #endif /* !WIN32 */
 

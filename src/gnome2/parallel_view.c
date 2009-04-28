@@ -45,7 +45,7 @@
 #include "main/sword.h"
 #include "main/xml.h"
 
-extern gboolean shift_key_presed;
+extern gboolean shift_key_pressed;
 
 /******************************************************************************
  * static
@@ -347,7 +347,7 @@ static gboolean on_key_press_event           (GtkWidget       *widget,
 	switch(event->hardware_keycode) {
 		case 50:
 		case 62:
-			shift_key_presed = TRUE;
+			shift_key_pressed = TRUE;
 		break;
 	}
   	return FALSE;
@@ -361,7 +361,7 @@ static gboolean on_key_release_event         (GtkWidget       *widget,
 	switch(event->hardware_keycode) {
 		case 50:
 		case 62:
-			shift_key_presed = FALSE;
+			shift_key_pressed = FALSE;
 		break;
 	}
   	return FALSE;

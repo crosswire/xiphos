@@ -61,7 +61,7 @@
 #include "main/display.hh"
 
 
-gboolean shift_key_presed = FALSE;
+gboolean shift_key_pressed = FALSE;
 guint scroll_adj_signal;
 GtkAdjustment* adjustment;
 
@@ -130,7 +130,7 @@ static gboolean on_text_button_press_event(GtkWidget * widget,
 	case 1:
 		break;
 	case 2:
-		shift_key_presed = TRUE;
+		shift_key_pressed = TRUE;
 		break;
 	case 3:
 		gui_popup_pm_text();
@@ -193,8 +193,8 @@ static gboolean on_text_button_release_event(GtkWidget * widget,
 		}
 		break;
 	case 2:
-		if (shift_key_presed) {
-			shift_key_presed = FALSE;
+		if (shift_key_pressed) {
+			shift_key_pressed = FALSE;
 			break;
 		}
 		if (!in_url)
@@ -266,7 +266,7 @@ on_enter_notify_event        (GtkWidget       *widget,
                                         GdkEventCrossing *event,
                                         gpointer         user_data)
 {
-	//shift_key_presed = FALSE;
+	//shift_key_pressed = FALSE;
 	//gtk_widget_grab_focus (widgets.html_text);
 	settings.whichwindow = MAIN_TEXT_WINDOW;
 	gui_change_window_title(settings.MainWindowModule);
@@ -291,7 +291,7 @@ static gboolean on_key_press_event           (GtkWidget       *widget,
 	switch(event->hardware_keycode) {
 		case 50:
 		case 62:
-			shift_key_presed = TRUE;
+			shift_key_pressed = TRUE;
   			return TRUE;
 		break;
 	}
@@ -315,7 +315,7 @@ static gboolean on_key_release_event         (GtkWidget       *widget,
 	switch(event->hardware_keycode) {
 		case 50:
 		case 62:
-			shift_key_presed = FALSE;
+			shift_key_pressed = FALSE;
 		break;
 	}
 	GS_message(("on_key_release_event\nkeycode: %d",event->hardware_keycode));

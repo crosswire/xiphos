@@ -51,7 +51,7 @@
 
 
 extern gboolean do_display;
-extern gboolean shift_key_presed;
+extern gboolean shift_key_pressed;
 
 GtkWidget *entrycbIntBook;
 GtkWidget *sbIntChapter;
@@ -592,7 +592,7 @@ static gboolean on_text_button_press_event(GtkWidget * widget,
 	case 1:
 		break;
 	case 2:
-		shift_key_presed = TRUE;
+		shift_key_pressed = TRUE;
 		break;
 	case 3:
 		//gui_popup_pm_text();
@@ -629,8 +629,8 @@ static gboolean on_text_button_release_event(GtkWidget * widget,
 		
 		break;
 	case 2:
-		if (shift_key_presed) {
-			shift_key_presed = FALSE;
+		if (shift_key_pressed) {
+			shift_key_pressed = FALSE;
 			break;
 		}
 		break;

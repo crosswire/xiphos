@@ -90,7 +90,7 @@
 #include "main/url.hh"
 
 
-extern gboolean shift_key_presed;
+extern gboolean shift_key_pressed;
 
 #define NS_TYPEAHEADFIND_CONTRACTID "@mozilla.org/typeaheadfind;1"
 
@@ -333,7 +333,7 @@ Yelper::ProcessMouseOver (void* aEvent, int pane,
 	if(aShiftKey)  {    
 	       return 1;
 	}
-	if(shift_key_presed)
+	if(shift_key_pressed)
 		return FALSE;
 	if(pane == VIEWER_TYPE)
 		return FALSE;
@@ -505,7 +505,7 @@ Yelper::ProcessMouseUpEvent (void* aEvent)
 
 	//GS_message(("mouse button up: %d",button));
 	if(button == 1)	       
-	        shift_key_presed = FALSE; 
+	        shift_key_pressed = FALSE; 
 	
 	
 	return 0;	
@@ -534,7 +534,7 @@ Yelper::ProcessMouseEvent (void* aEvent)
 	
 	GS_message(("mouse button: %d",button));	
 	
-	if(button == 1) shift_key_presed = TRUE; 
+	if(button == 1) shift_key_pressed = TRUE; 
 	
 	/* Mozilla uses 2 as its right mouse button code */
 	if (button != 2) return 0;	
@@ -562,7 +562,7 @@ gint Yelper::ProcessKeyDownEvent(GtkMozEmbed *embed, gpointer dom_event)
 gint Yelper::ProcessKeyReleaseEvent(GtkMozEmbed *embed, gpointer dom_event)
 {
 	GS_message(("Yelper::ProcessKeyReleaseEvent"));
-	shift_key_presed = FALSE;
+	shift_key_pressed = FALSE;
 	return NS_OK;	
 }
 

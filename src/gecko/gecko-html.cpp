@@ -57,7 +57,7 @@
 #include "gecko/gecko-utils.h"
 #include "gecko/Yelper.h"
 
-extern gboolean shift_key_presed;
+extern gboolean shift_key_pressed;
 extern gboolean in_url;
 
 #define GECKO_HTML_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GECKO_TYPE_HTML, GeckoHtmlPriv))
@@ -128,7 +128,7 @@ static void html_link_message(GtkMozEmbed * embed)
 	
 	GS_message(("html_link_message: url = %s",url));
 	
-	if (shift_key_presed)
+	if (shift_key_pressed)
 		return;
 	
 	if (!strlen(url)) { //* moved out of url - clear appbar - info viewer*
@@ -202,7 +202,7 @@ gint html_dom_mouse_out(GtkMozEmbed * embed, gpointer dom_event)
 	GeckoHtml *html = GECKO_HTML(embed);
 	GeckoHtmlPriv *priv = GECKO_HTML_GET_PRIVATE(html);
 	if(priv->pane == VIEWER_TYPE)
-		shift_key_presed = FALSE;
+		shift_key_pressed = FALSE;
 	return 1; 
 }
 

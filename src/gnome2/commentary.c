@@ -217,7 +217,7 @@ static gboolean on_enter_notify_event(GtkWidget * widget,
 				      GdkEventCrossing * event,
 				      gpointer user_data)
 {
-	//shift_key_presed = FALSE;
+	//shift_key_pressed = FALSE;
 	//gtk_widget_grab_focus (widgets.html_comm);
 	//settings.whichwindow = COMMENTARY_WINDOW;
 	//gui_change_window_title(settings.CommWindowModule);
