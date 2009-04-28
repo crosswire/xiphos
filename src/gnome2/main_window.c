@@ -65,7 +65,7 @@
 WIDGETS widgets;
 
 
-extern gboolean shift_key_presed;
+extern gboolean shift_key_pressed;
 
 static GtkWidget *nav_toolbar;
 static int main_window_created = FALSE;
@@ -525,11 +525,11 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 {
 	/* these are the mods we actually use for global keys, we always only check for these set */
 	guint state = event->state & (GDK_SHIFT_MASK  | GDK_CONTROL_MASK | GDK_MOD1_MASK | GDK_MOD4_MASK );
-
+	
 	switch(event->hardware_keycode) {
-	case 50: /* shift keys - we need this for locking strongs (and other stuff) while moving mouse */
-	case 62: /* to previewer */
-			shift_key_presed = TRUE;
+	case GS_KEY_SHIFT: /* shift keys - we need this for locking strongs (and other stuff) while moving mouse */
+	case GS_KEY_SHIFT_R: /* to previewer */
+		shift_key_pressed = TRUE;
 	case GS_KEY_D: // Alt-D  dictionary entry
 		if (state == GDK_MOD1_MASK)
 			gtk_widget_grab_focus(widgets.entry_dict);
@@ -681,9 +681,9 @@ gboolean on_vbox1_key_release_event(GtkWidget * widget,
                                         gpointer user_data)
 {
         switch(event->hardware_keycode) {			
-		case 50: 
-		case 62: 
-			shift_key_presed = FALSE;				
+		case GS_KEY_SHIFT: 
+		case GS_KEY_SHIFT_R: 
+			shift_key_pressed = FALSE;				
 		break;
 	}
   return FALSE;

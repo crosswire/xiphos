@@ -102,7 +102,7 @@ extern GtkWidget *cbe_book;
 extern GtkWidget *spb_chapter;
 extern GtkWidget *spb_verse;
 extern GtkWidget *cbe_freeform_lookup;
-extern gboolean shift_key_presed;
+extern gboolean shift_key_pressed;
 
 gboolean style_display = TRUE;
 char *sword_locale = NULL;
