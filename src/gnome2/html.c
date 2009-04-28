@@ -139,9 +139,9 @@ void url_requested(GtkHTML * html, const gchar * url,
 void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 {
 	gchar buf[500];
-	extern gboolean shift_key_presed;
+	extern gboolean shift_key_pressed;
 	
-	if(shift_key_presed)
+	if(shift_key_pressed)
 		return;
 	
 	if (url == NULL) { /* moved out of url - clear appbar - info viewer*/
