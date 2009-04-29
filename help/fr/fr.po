@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 2.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-08 22:11+0100\n"
-"PO-Revision-Date: 2009-02-08 22:55+0100\n"
+"POT-Creation-Date: 2009-04-29 13:48+0200\n"
+"PO-Revision-Date: 2009-04-29 13:58+0200\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>>\n"
 "Language-Team: French <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -267,10 +267,11 @@ msgstr ""
 "Une façon d'obtenir de l'aide au sujet de <application>&appname;</"
 "application> est d'utiliser nos listes de diffusion à faible trafic. il "
 "suffit de s'abonner en sélectionnant <ulink url=\"https://lists.sourceforge."
-"net/lists/listinfo/gnomesword-users/\"> ce lien</ulink>. Une fois inscrit, un "
-"simple e-mail envoyé sur la liste décrivant les problèmes rencontrés amènera "
-"une réponse des autres utilisateurs ou des développeurs généralement dans la "
-"journée.<para>[NDT : La liste de diffusion est en langue anglaise]</para>"
+"net/lists/listinfo/gnomesword-users/\"> ce lien</ulink>. Une fois inscrit, "
+"un simple e-mail envoyé sur la liste décrivant les problèmes rencontrés "
+"amènera une réponse des autres utilisateurs ou des développeurs généralement "
+"dans la journée.<para>[NDT : La liste de diffusion est en langue anglaise]</"
+"para>"
 
 #: ../C/originallanguage.xml:4(title) ../C/xiphos.xml:4(title)
 msgid "Installing Needed Modules"
@@ -278,11 +279,11 @@ msgstr "Installer les modules nécessaires"
 
 #: ../C/originallanguage.xml:5(para) ../C/xiphos.xml:5(para)
 msgid ""
-"Xiphos is ideally suited for studying the original Greek and Hebrew texts. "
-"To get started, you will want the following modules:"
+"Xiphos is ideally suited for studying the original Greek and Hebrew. To get "
+"started, you will want the following modules:"
 msgstr ""
 "Xiphos convient parfaitement à l'étude des textes originaux en grec ou "
-"hébreu. Pour démarrer, il est recommandé d'installer les modules suivants :"
+"hébreu. Pour commencer, il est recommandé d'installer les modules suivants :"
 
 #: ../C/originallanguage.xml:8(para) ../C/xiphos.xml:8(para)
 msgid "From Crosswire Repository:"
@@ -753,7 +754,7 @@ msgid "This is what the Studypad typically looks like:"
 msgstr "Présentation du bloc-notes :"
 
 #: ../C/studypad.xml:12(title) ../C/studypad.xml:25(phrase)
-#: ../C/xiphos.xml:413(title) ../C/xiphos.xml:12(title)
+#: ../C/xiphos.xml:416(title) ../C/xiphos.xml:12(title)
 #: ../C/xiphos.xml:25(phrase)
 msgid "The Studypad"
 msgstr "Bloc-notes"
@@ -944,7 +945,7 @@ msgstr "interface_dictionary.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/xiphos.xml:774(None)
+#: ../C/xiphos.xml:815(None)
 msgid ""
 "@@image: 'figures/gtkhtml3-vs-mozembed.png'; "
 "md5=deec924e49812ac32cfd027e53d2b193"
@@ -1068,8 +1069,8 @@ msgid "2003"
 msgstr "2003"
 
 #: ../C/xiphos.xml:62(year)
-msgid "2008"
-msgstr "2008"
+msgid "2009"
+msgstr "2009"
 
 #: ../C/xiphos.xml:63(holder) ../C/xiphos.xml:78(publishername)
 msgid "The Xiphos Team"
@@ -1116,400 +1117,408 @@ msgid "Talbert"
 msgstr "Talbert"
 
 #: ../C/xiphos.xml:139(revnumber)
-msgid "Xiphos Manual 2.4.0"
-msgstr "Manuel de Xiphos &manrevision;"
+msgid "Xiphos 3.0.0"
+msgstr "Xiphos 3.0.0"
 
 #: ../C/xiphos.xml:140(date)
-msgid "Sat, 20 Sep 2008"
-msgstr "20 septembre 2008"
+msgid "2009-02-09"
+msgstr "2009-02-09"
 
-#: ../C/xiphos.xml:144(revnumber)
+#: ../C/xiphos.xml:143(revnumber)
+msgid "Xiphos 2.4.0"
+msgstr "Xiphos 2.4.0"
+
+#: ../C/xiphos.xml:144(date)
+msgid "2008-09-20"
+msgstr "2008-09-20"
+
+#: ../C/xiphos.xml:147(revnumber)
 msgid "Xiphos 2.3.6"
 msgstr "Xiphos 2.3.6"
 
-#: ../C/xiphos.xml:145(date)
+#: ../C/xiphos.xml:148(date)
 msgid "2008-08-02"
 msgstr "2008-08-02"
 
-#: ../C/xiphos.xml:148(revnumber)
+#: ../C/xiphos.xml:151(revnumber)
 msgid "Xiphos 2.3.5"
 msgstr "Xiphos 2.3.5"
 
-#: ../C/xiphos.xml:149(date)
+#: ../C/xiphos.xml:152(date)
 msgid "2008-07-02"
 msgstr "2007-07-02"
 
-#: ../C/xiphos.xml:152(revnumber)
+#: ../C/xiphos.xml:155(revnumber)
 msgid "Xiphos 2.3.4"
 msgstr "Xiphos 2.3.4"
 
-#: ../C/xiphos.xml:153(date)
+#: ../C/xiphos.xml:156(date)
 msgid "2008-05-26"
 msgstr "2008-05-26"
 
-#: ../C/xiphos.xml:156(revnumber)
+#: ../C/xiphos.xml:159(revnumber)
 msgid "Xiphos 2.3.3"
 msgstr "Xiphos 2.3.3"
 
-#: ../C/xiphos.xml:157(date)
+#: ../C/xiphos.xml:160(date)
 msgid "2008-01-20"
 msgstr "2007-01-20"
 
-#: ../C/xiphos.xml:160(revnumber)
+#: ../C/xiphos.xml:163(revnumber)
 msgid "Xiphos 2.3.2"
 msgstr "Xiphos 2.3.2"
 
-#: ../C/xiphos.xml:161(date)
+#: ../C/xiphos.xml:164(date)
 msgid "2007-12-26"
 msgstr "2007-12-26"
 
-#: ../C/xiphos.xml:164(revnumber)
+#: ../C/xiphos.xml:167(revnumber)
 msgid "Xiphos 2.3.1"
 msgstr "Xiphos 2.3.1"
 
-#: ../C/xiphos.xml:165(date)
+#: ../C/xiphos.xml:168(date)
 msgid "2007-10-15"
 msgstr "2007-10-15"
 
-#: ../C/xiphos.xml:168(revnumber)
+#: ../C/xiphos.xml:171(revnumber)
 msgid "Xiphos 2.2.3"
 msgstr "Xiphos 2.2.3"
 
-#: ../C/xiphos.xml:169(date)
+#: ../C/xiphos.xml:172(date)
 msgid "2007-03-26"
 msgstr "2007-03-26"
 
-#: ../C/xiphos.xml:172(revnumber)
+#: ../C/xiphos.xml:175(revnumber)
 msgid "Xiphos 2.2.1"
 msgstr "Xiphos 2.2.1"
 
-#: ../C/xiphos.xml:173(date)
+#: ../C/xiphos.xml:176(date)
 msgid "2007-01-27"
 msgstr "2007-01-27"
 
-#: ../C/xiphos.xml:176(revnumber)
+#: ../C/xiphos.xml:179(revnumber)
 msgid "Xiphos 2.2.0"
 msgstr "Xiphos 2.2.0"
 
-#: ../C/xiphos.xml:177(date)
+#: ../C/xiphos.xml:180(date)
 msgid "2006-12-23"
 msgstr "2006-12-23"
 
-#: ../C/xiphos.xml:180(revnumber)
+#: ../C/xiphos.xml:183(revnumber)
 msgid "Xiphos 2.1.10"
 msgstr "Xiphos 2.1.10"
 
-#: ../C/xiphos.xml:181(date)
+#: ../C/xiphos.xml:184(date)
 msgid "2006-12-10"
 msgstr "2006-12-10"
 
-#: ../C/xiphos.xml:184(revnumber)
+#: ../C/xiphos.xml:187(revnumber)
 msgid "Xiphos 2.1.9"
 msgstr "Xiphos 2.1.9"
 
-#: ../C/xiphos.xml:185(date)
+#: ../C/xiphos.xml:188(date)
 msgid "2006-11-12"
 msgstr "2006-11-12"
 
-#: ../C/xiphos.xml:188(revnumber)
+#: ../C/xiphos.xml:191(revnumber)
 msgid "Xiphos 2.1.8"
 msgstr "Xiphos 2.1.8"
 
-#: ../C/xiphos.xml:189(date)
+#: ../C/xiphos.xml:192(date)
 msgid "2006-11-08"
 msgstr "2006-11-08"
 
-#: ../C/xiphos.xml:192(revnumber)
+#: ../C/xiphos.xml:195(revnumber)
 msgid "Xiphos 2.1.7"
 msgstr "Xiphos 2.1.7"
 
-#: ../C/xiphos.xml:193(date)
+#: ../C/xiphos.xml:196(date)
 msgid "2006-05-04"
 msgstr "2006-05-04"
 
-#: ../C/xiphos.xml:196(revnumber)
+#: ../C/xiphos.xml:199(revnumber)
 msgid "Xiphos 2.1.6"
 msgstr "Xiphos 2.1.6"
 
-#: ../C/xiphos.xml:197(date)
+#: ../C/xiphos.xml:200(date)
 msgid "2006-04-13"
 msgstr "2006-04-13"
 
-#: ../C/xiphos.xml:200(revnumber)
+#: ../C/xiphos.xml:203(revnumber)
 msgid "Xiphos 2.1.5"
 msgstr "Xiphos 2.1.5"
 
-#: ../C/xiphos.xml:201(date)
+#: ../C/xiphos.xml:204(date)
 msgid "2005-12-14"
 msgstr "2005-12-14"
 
-#: ../C/xiphos.xml:204(revnumber)
+#: ../C/xiphos.xml:207(revnumber)
 msgid "Xiphos 2.1.4"
 msgstr "Xiphos 2.1.4"
 
-#: ../C/xiphos.xml:205(date)
+#: ../C/xiphos.xml:208(date)
 msgid "2005-12-13"
 msgstr "2005-12-13"
 
-#: ../C/xiphos.xml:208(revnumber)
+#: ../C/xiphos.xml:211(revnumber)
 msgid "Xiphos 2.1.2"
 msgstr "Xiphos 2.1.2"
 
-#: ../C/xiphos.xml:209(date)
+#: ../C/xiphos.xml:212(date)
 msgid "2005-05-31"
 msgstr "2005-05-31"
 
-#: ../C/xiphos.xml:212(revnumber)
+#: ../C/xiphos.xml:215(revnumber)
 msgid "Xiphos 2.1.1"
 msgstr "Xiphos 2.1.1"
 
-#: ../C/xiphos.xml:213(date)
+#: ../C/xiphos.xml:216(date)
 msgid "2004-07-18"
 msgstr "2004-07-18"
 
-#: ../C/xiphos.xml:216(revnumber)
+#: ../C/xiphos.xml:219(revnumber)
 msgid "Xiphos 2.1.0"
 msgstr "Xiphos 2.1.0"
 
-#: ../C/xiphos.xml:217(date)
+#: ../C/xiphos.xml:220(date)
 msgid "2004-08-30"
 msgstr "2004-08-30"
 
-#: ../C/xiphos.xml:220(revnumber)
+#: ../C/xiphos.xml:223(revnumber)
 msgid "Xiphos 2.0.0"
 msgstr "Xiphos 2.0.0"
 
-#: ../C/xiphos.xml:221(date)
+#: ../C/xiphos.xml:224(date)
 msgid "2003-12-25"
 msgstr "2003-12-25"
 
-#: ../C/xiphos.xml:224(revnumber)
+#: ../C/xiphos.xml:227(revnumber)
 msgid "Xiphos 0.7.10"
 msgstr "Xiphos 0.7.10"
 
-#: ../C/xiphos.xml:225(date)
+#: ../C/xiphos.xml:228(date)
 msgid "2003-09-05"
 msgstr "2003-09-05"
 
-#: ../C/xiphos.xml:228(revnumber)
+#: ../C/xiphos.xml:231(revnumber)
 msgid "Xiphos 0.7.9"
 msgstr "Xiphos 0.7.9"
 
-#: ../C/xiphos.xml:229(date)
+#: ../C/xiphos.xml:232(date)
 msgid "2003-03-26"
 msgstr "2003-03-26"
 
-#: ../C/xiphos.xml:232(revnumber)
+#: ../C/xiphos.xml:235(revnumber)
 msgid "Xiphos 0.7.8"
 msgstr "Xiphos 0.7.8"
 
-#: ../C/xiphos.xml:233(date)
+#: ../C/xiphos.xml:236(date)
 msgid "2003-01-12"
 msgstr "2003-01-12"
 
-#: ../C/xiphos.xml:236(revnumber)
+#: ../C/xiphos.xml:239(revnumber)
 msgid "Xiphos 0.7.7"
 msgstr "Xiphos 0.7.7"
 
-#: ../C/xiphos.xml:237(date)
+#: ../C/xiphos.xml:240(date)
 msgid "2002-12-20"
 msgstr "2002-12-20"
 
-#: ../C/xiphos.xml:240(revnumber)
+#: ../C/xiphos.xml:243(revnumber)
 msgid "Xiphos 0.7.6"
 msgstr "Xiphos 0.7.6"
 
-#: ../C/xiphos.xml:241(date)
+#: ../C/xiphos.xml:244(date)
 msgid "2002-11-03"
 msgstr "2002-11-03"
 
-#: ../C/xiphos.xml:244(revnumber)
+#: ../C/xiphos.xml:247(revnumber)
 msgid "Xiphos 0.7.5"
 msgstr "Xiphos 0.7.5"
 
-#: ../C/xiphos.xml:245(date)
+#: ../C/xiphos.xml:248(date)
 msgid "2002-07-01"
 msgstr "2002-07-01"
 
-#: ../C/xiphos.xml:248(revnumber)
+#: ../C/xiphos.xml:251(revnumber)
 msgid "Xiphos 0.7.4"
 msgstr "Xiphos 0.7.4"
 
-#: ../C/xiphos.xml:249(date)
+#: ../C/xiphos.xml:252(date)
 msgid "2002-06-10"
 msgstr "2002-06-10"
 
-#: ../C/xiphos.xml:252(revnumber)
+#: ../C/xiphos.xml:255(revnumber)
 msgid "Xiphos 0.7.3"
 msgstr "Xiphos 0.7.3"
 
-#: ../C/xiphos.xml:253(date)
+#: ../C/xiphos.xml:256(date)
 msgid "2002-05-10"
 msgstr "2002-05-10"
 
-#: ../C/xiphos.xml:256(revnumber)
+#: ../C/xiphos.xml:259(revnumber)
 msgid "Xiphos 0.7.2"
 msgstr "Xiphos 0.7.2"
 
-#: ../C/xiphos.xml:257(date)
+#: ../C/xiphos.xml:260(date)
 msgid "2002-04-22"
 msgstr "2002-04-22"
 
-#: ../C/xiphos.xml:260(revnumber)
+#: ../C/xiphos.xml:263(revnumber)
 msgid "Xiphos 0.7.1"
 msgstr "Xiphos 0.7.1"
 
-#: ../C/xiphos.xml:261(date)
+#: ../C/xiphos.xml:264(date)
 msgid "2002-04-10"
 msgstr "2002-04-10"
 
-#: ../C/xiphos.xml:264(revnumber)
+#: ../C/xiphos.xml:267(revnumber)
 msgid "Xiphos 0.7.0"
 msgstr "Xiphos 0.7.0"
 
-#: ../C/xiphos.xml:265(date)
+#: ../C/xiphos.xml:268(date)
 msgid "2002-04-09"
 msgstr "2002-04-09"
 
-#: ../C/xiphos.xml:268(revnumber)
+#: ../C/xiphos.xml:271(revnumber)
 msgid "Xiphos 0.5.0"
 msgstr "Xiphos 0.5.0"
 
-#: ../C/xiphos.xml:269(date)
+#: ../C/xiphos.xml:272(date)
 msgid "2001-08-13"
 msgstr "2001-08-13"
 
-#: ../C/xiphos.xml:272(revnumber)
+#: ../C/xiphos.xml:275(revnumber)
 msgid "Xiphos 0.4.1"
 msgstr "Xiphos 0.4.1"
 
-#: ../C/xiphos.xml:273(date)
+#: ../C/xiphos.xml:276(date)
 msgid "2001-04-10"
 msgstr "2001-04-10"
 
-#: ../C/xiphos.xml:276(revnumber)
+#: ../C/xiphos.xml:279(revnumber)
 msgid "Xiphos 0.4.0"
 msgstr "Xiphos 0.4.0"
 
-#: ../C/xiphos.xml:277(date)
+#: ../C/xiphos.xml:280(date)
 msgid "2001-04-06"
 msgstr "2001-04-06"
 
-#: ../C/xiphos.xml:280(revnumber)
+#: ../C/xiphos.xml:283(revnumber)
 msgid "Xiphos 0.3.7"
 msgstr "Xiphos 0.3.7"
 
-#: ../C/xiphos.xml:281(date)
+#: ../C/xiphos.xml:284(date)
 msgid "2000-12-08"
 msgstr "2000-12-08"
 
-#: ../C/xiphos.xml:284(revnumber)
+#: ../C/xiphos.xml:287(revnumber)
 msgid "Xiphos 0.3.6"
 msgstr "Xiphos 0.3.6"
 
-#: ../C/xiphos.xml:285(date)
+#: ../C/xiphos.xml:288(date)
 msgid "2000-12-07"
 msgstr "2000-12-07"
 
-#: ../C/xiphos.xml:288(revnumber)
+#: ../C/xiphos.xml:291(revnumber)
 msgid "Xiphos 0.3.2"
 msgstr "Xiphos 0.3.2"
 
-#: ../C/xiphos.xml:289(date)
+#: ../C/xiphos.xml:292(date)
 msgid "2000-11-21"
 msgstr "2000-11-21"
 
-#: ../C/xiphos.xml:292(revnumber)
+#: ../C/xiphos.xml:295(revnumber)
 msgid "Xiphos 0.3.0"
 msgstr "Xiphos 0.3.0"
 
-#: ../C/xiphos.xml:293(date)
+#: ../C/xiphos.xml:296(date)
 msgid "2000-11-10"
 msgstr "2000-11-10"
 
-#: ../C/xiphos.xml:296(revnumber)
+#: ../C/xiphos.xml:299(revnumber)
 msgid "Xiphos 0.2.5"
 msgstr "Xiphos 0.2.5"
 
-#: ../C/xiphos.xml:297(date)
+#: ../C/xiphos.xml:300(date)
 msgid "2000-10-06"
 msgstr "2000-10-06"
 
-#: ../C/xiphos.xml:300(revnumber)
+#: ../C/xiphos.xml:303(revnumber)
 msgid "Xiphos 0.2.4"
 msgstr "Xiphos 0.2.4"
 
-#: ../C/xiphos.xml:301(date)
+#: ../C/xiphos.xml:304(date)
 msgid "2000-09-16"
 msgstr "2000-09-16"
 
-#: ../C/xiphos.xml:304(revnumber)
+#: ../C/xiphos.xml:307(revnumber)
 msgid "Xiphos 0.2.3"
 msgstr "Xiphos 0.2.3"
 
-#: ../C/xiphos.xml:305(date)
+#: ../C/xiphos.xml:308(date)
 msgid "2000-09-07"
 msgstr "2000-09-07"
 
-#: ../C/xiphos.xml:308(revnumber)
+#: ../C/xiphos.xml:311(revnumber)
 msgid "Xiphos 0.2.2"
 msgstr "Xiphos 0.2.2"
 
-#: ../C/xiphos.xml:309(date)
+#: ../C/xiphos.xml:312(date)
 msgid "2000-09-06"
 msgstr "2000-09-06"
 
-#: ../C/xiphos.xml:312(revnumber)
+#: ../C/xiphos.xml:315(revnumber)
 msgid "Xiphos 0.2.1"
 msgstr "Xiphos 0.2.1"
 
-#: ../C/xiphos.xml:313(date)
+#: ../C/xiphos.xml:316(date)
 msgid "2000-08-29"
 msgstr "2000-08-29"
 
-#: ../C/xiphos.xml:316(revnumber)
+#: ../C/xiphos.xml:319(revnumber)
 msgid "Xiphos 0.2.0"
 msgstr "Xiphos 0.2.0"
 
-#: ../C/xiphos.xml:317(date)
+#: ../C/xiphos.xml:320(date)
 msgid "2000-08-19"
 msgstr "2000-08-19"
 
-#: ../C/xiphos.xml:320(revnumber)
+#: ../C/xiphos.xml:323(revnumber)
 msgid "Xiphos 0.1.8"
 msgstr "Xiphos 0.1.8"
 
-#: ../C/xiphos.xml:321(date)
+#: ../C/xiphos.xml:324(date)
 msgid "2000-06-10"
 msgstr "2000-06-10"
 
-#: ../C/xiphos.xml:324(revnumber)
+#: ../C/xiphos.xml:327(revnumber)
 msgid "Xiphos 0.1.7"
 msgstr "Xiphos 0.1.7"
 
-#: ../C/xiphos.xml:325(date)
+#: ../C/xiphos.xml:328(date)
 msgid "2000-05-19"
 msgstr "2000-05-19"
 
-#: ../C/xiphos.xml:328(revnumber)
+#: ../C/xiphos.xml:331(revnumber)
 msgid "Xiphos 0.1.6"
 msgstr "Xiphos 0.1.6"
 
-#: ../C/xiphos.xml:329(date)
+#: ../C/xiphos.xml:332(date)
 msgid "2000-05-08"
 msgstr "2000-05-08"
 
-#: ../C/xiphos.xml:333(releaseinfo)
-msgid "This manual describes version 2.4.0 of Xiphos."
+#: ../C/xiphos.xml:336(releaseinfo)
+msgid "This manual describes version 3.0.0 of Xiphos."
 msgstr ""
 "Ce manuel documente la version &manrevision; de <application>&appname;</"
 "application>"
 
-#: ../C/xiphos.xml:336(title)
+#: ../C/xiphos.xml:339(title)
 msgid "Feedback"
 msgstr "Votre avis"
 
-#: ../C/xiphos.xml:337(para)
+#: ../C/xiphos.xml:340(para)
 msgid ""
 "To report a bug or make a suggestion regarding the Xiphos application or "
 "this manual, Use the <ulink url=\"http://sourceforge.net/tracker/?"
@@ -1520,31 +1529,31 @@ msgstr ""
 "tracker/?group_id=5528\">Tracker de SourceForge</ulink>  ou aux listes de "
 "diffusion."
 
-#: ../C/xiphos.xml:345(keyword)
+#: ../C/xiphos.xml:348(keyword)
 msgid "gnome"
 msgstr "gnome"
 
-#: ../C/xiphos.xml:346(keyword)
+#: ../C/xiphos.xml:349(keyword)
 msgid "xiphos"
 msgstr "xiphos"
 
-#: ../C/xiphos.xml:347(keyword)
+#: ../C/xiphos.xml:350(keyword)
 msgid "sword"
 msgstr "sword"
 
-#: ../C/xiphos.xml:348(keyword)
+#: ../C/xiphos.xml:351(keyword)
 msgid "crosswire"
 msgstr "crosswire"
 
-#: ../C/xiphos.xml:349(keyword)
+#: ../C/xiphos.xml:352(keyword)
 msgid "help dialog"
 msgstr "Fenêtre d'aide"
 
-#: ../C/xiphos.xml:355(primary) ../C/xiphos.xml:677(application)
+#: ../C/xiphos.xml:358(primary)
 msgid "Xiphos"
 msgstr "&appname;"
 
-#: ../C/xiphos.xml:370(title)
+#: ../C/xiphos.xml:373(title)
 msgid "Introduction"
 msgstr "Introduction"
 
@@ -1640,7 +1649,7 @@ msgstr ""
 "email> Toute aide est appréciée et permet d'améliorer <application>&appname;"
 "</application>."
 
-#: ../C/xiphos.xml:383(title)
+#: ../C/xiphos.xml:386(title)
 msgid "Getting Started with Xiphos"
 msgstr "Premiers pas"
 
@@ -1831,7 +1840,7 @@ msgstr ""
 "contextuel permettant d'imprimer ou d'accéder aux options spécifiques du "
 "module concerné."
 
-#: ../C/xiphos.xml:389(title)
+#: ../C/xiphos.xml:392(title)
 msgid "Interface"
 msgstr "Interface"
 
@@ -2517,188 +2526,126 @@ msgstr ""
 "<application>Xiphos</application>  présente un certain nombre de raccourcis "
 "clavier :"
 
-#: ../C/xiphos.xml:663(guibutton)
-msgid "F1"
-msgstr "F1"
+#: ../C/xiphos.xml:663(para)
+msgid "<guibutton>F1</guibutton>: opens this manual."
+msgstr "<guibutton>F1</guibutton> : ouvre ce manuel."
 
-#: ../C/xiphos.xml:662(listitem)
-msgid "<placeholder-1/>: opens this manual."
-msgstr "<placeholder-1/> ouvre ce manuel."
-
-#: ../C/xiphos.xml:666(guibutton)
-msgid "F2"
-msgstr "F2"
-
-#: ../C/xiphos.xml:666(guibutton) ../C/xiphos.xml:395(title)
-msgid "Preferences"
-msgstr "Préférences"
-
-#: ../C/xiphos.xml:665(listitem)
-msgid "<placeholder-1/>: opens the <placeholder-2/> dialog."
-msgstr "<placeholder-1/> ouvre la fenêtre <placeholder-2/>."
-
-#: ../C/xiphos.xml:669(guibutton)
-msgid "F3"
-msgstr "F3"
-
-#: ../C/xiphos.xml:669(guibutton)
-msgid "Advanced Search"
-msgstr "Recherche avancée"
-
-#: ../C/xiphos.xml:668(listitem)
-msgid "<placeholder-1/>: opens <placeholder-2/>."
-msgstr "<placeholder-1/> : ouvre <placeholder-2/>."
-
-#: ../C/xiphos.xml:672(guibutton)
-msgid "F4"
-msgstr "F4"
-
-#: ../C/xiphos.xml:672(guibutton) ../C/xiphos.xml:401(title)
-msgid "Module Manager"
-msgstr "Gérer les modules"
-
-#: ../C/xiphos.xml:671(listitem)
-msgid "<placeholder-1/>: opens the <placeholder-2/>."
-msgstr "<placeholder-1/> : ouvre <placeholder-2/>."
-
-#: ../C/xiphos.xml:675(guibutton)
-msgid "Ctrl-L"
-msgstr "Ctrl-L"
-
-#: ../C/xiphos.xml:674(listitem)
+#: ../C/xiphos.xml:668(para)
 msgid ""
-"<placeholder-1/> focuses and selects the main verse navbar text. You can "
-"then immediately type in new verse selection text. Be aware that, as is the "
-"case with most Sword applications, <placeholder-2/> understands many "
-"abbreviations: \"G\" is adequate to specify Genesis, for example, and any "
-"book name by itself implies 1:1."
+"<guibutton>F2</guibutton>: opens the <guibutton>Preferences</guibutton> "
+"dialog."
 msgstr ""
-"<placeholder-1/> sélectionne la zone de saisie de référence biblique. Il est "
-"ainsi possible de saisir directement une nouvelle référence de verset. Il "
+"<guibutton>F2</guibutton>:·ouvre·la fenêtre des·<guibutton>Préférences"
+"</guibutton>·"
+""
+
+#: ../C/xiphos.xml:673(para)
+msgid ""
+"<guibutton>F3</guibutton>: opens <guibutton>Advanced Search</guibutton>."
+msgstr "<guibutton>F3</guibutton> :·ouvre·la <guibutton>Recherche avancée</guibutton>"
+
+#: ../C/xiphos.xml:678(para)
+msgid ""
+"<guibutton>F4</guibutton>: opens the <guibutton>Module Manager</guibutton>."
+msgstr "<guibutton>F4</guibutton> :·ouvre·le·<guibutton>Gestionnaire de modules"
+"</guibutton>."
+
+#: ../C/xiphos.xml:683(para)
+msgid ""
+"<guibutton>Ctrl-L</guibutton> focuses and selects the main verse navbar "
+"text. You can then immediately type in new verse selection text. Be aware "
+"that, as is the case with most Sword applications, <application>Xiphos</"
+"application> understands many abbreviations: \"G\" is adequate to specify "
+"Genesis, for example, and any book name by itself implies 1:1."
+msgstr ""
+"<guibutton>Ctrl-L</guibutton> sélectionne la zone de saisie de référence biblique. "
+"Il est ainsi possible de saisir directement une nouvelle référence de verset. Il "
 "est à noter que <placeholder-2/>, comme d'autres applications Sword, accepte "
 "de nombreuses abréviations. «­­&nbsp;G&nbsp;»  correspond à Genèse par "
 "exemple, et n'importe quel nom de livre saisi seul implique chapitre 1, "
 "verset 1."
 
-#: ../C/xiphos.xml:681(guibutton)
-msgid "Ctrl-F"
-msgstr "Ctrl-F"
-
-#: ../C/xiphos.xml:680(listitem)
+#: ../C/xiphos.xml:691(para)
 msgid ""
-"<placeholder-1/> opens the \"Find\" dialog. The subwindow to which it "
-"applies depends on which of them are visible: The Bible is first preference, "
-"then the commentary or general book, then the dictionary. So a tab can be "
-"dedicated to just a genbook, and Ctrl-F will perform \"Find\" within that "
-"pane."
+"<guibutton>Ctrl-F</guibutton> opens the \"Find\" dialog. The subwindow to "
+"which it applies depends on which of them are visible: The Bible is first "
+"preference, then the commentary or general book, then the dictionary. So a "
+"tab can be dedicated to just a genbook, and Ctrl-F will perform \"Find\" "
+"within that pane."
 msgstr ""
-"<placeholder-1/> ouvre la fenêtre de recherche. Le volet sur lequel elle est "
-"exécutée dépend desquels d'entre eux sont visibles. Le volet biblique a la "
+"<guibutton>Ctrl-F</guibutton> ouvre la fenêtre de recherche. Le volet sur lequel "
+"elle est exécutée dépend desquels d'entre eux sont visibles. Le volet biblique a la "
 "première préférence, puis le volet des commentaires ou le livre et enfin le "
 "dictionnaire. Ainsi un onglet peut être dédié à n'afficher que le volet "
 "livre et la recherche initiée par <placeholder-1/> ne sera effectuée que "
 "dans les limites de ce volet."
 
-#: ../C/xiphos.xml:686(guibutton)
-msgid "Alt-C"
-msgstr "Alt-C"
-
-#: ../C/xiphos.xml:685(listitem)
+#: ../C/xiphos.xml:698(para)
 msgid ""
-"<placeholder-1/> brings the Commentary View forward when previously obscured "
-"by the Book View."
+"<guibutton>Alt-C</guibutton> brings the Commentary View forward when "
+"previously obscured by the Book View."
 msgstr ""
-"<placeholder-1/> ramène au premier-plan le volet <interface>Commentaire</"
-"interface> si celui-ci est masqué par le volet <interface>Livre</interface>."
+"<guibutton>Alt-C</guibutton> ramène au premier-plan le volet <interface>"
+"Commentaire</interface> si celui-ci est masqué par le volet <interface>Livre"
+"</interface>."
 
-#: ../C/xiphos.xml:689(guibutton)
-msgid "Alt-G"
-msgstr "Alt-G"
-
-#: ../C/xiphos.xml:688(listitem)
+#: ../C/xiphos.xml:703(para)
 msgid ""
-"<placeholder-1/> is the opposite of Alt-C, focusing on the general book."
+"<guibutton>Alt-G</guibutton> is the opposite of Alt-C, focusing on the "
+"general book."
 msgstr ""
-"<placeholder-1/> ramène au premier-plan le volet <interface>Livre</"
-"interface>."
+"<guibutton>Alt-G</guibutton> ramène au premier-plan le volet "
+"<interface>Livre</interface>."
 
-#: ../C/xiphos.xml:692(guibutton)
-msgid "Alt-B"
-msgstr "Alt-B"
-
-#: ../C/xiphos.xml:691(listitem)
-msgid "<placeholder-1/> opens a bookmark dialog on the current verse."
+#: ../C/xiphos.xml:708(para)
+msgid ""
+"<guibutton>Alt-B</guibutton> opens a bookmark dialog on the current verse."
 msgstr ""
-"<placeholder-1/> ouvre la fenêtre <interface>Ajouter un signet</interface> "
-"sur le verset en cours"
+"<guibutton>Alt-B</guibutton> ouvre la fenêtre <interface>Ajouter un signet"
+"</interface> sur le verset en cours"
 
-#: ../C/xiphos.xml:695(guibutton)
-msgid "Alt-D"
-msgstr "Alt-D"
-
-#: ../C/xiphos.xml:694(listitem)
-msgid "<placeholder-1/> focuses on the dictionary navbar text."
+#: ../C/xiphos.xml:713(para)
+msgid "<guibutton>Alt-D</guibutton> focuses on the dictionary navbar text."
 msgstr ""
-"<placeholder-1/> place le focus sur la barre de navigation du volet "
+"<guibutton>Alt-D</guibutton> place le focus sur la barre de navigation du volet "
 "<interface>Dictionnaire</interface>."
 
-#: ../C/xiphos.xml:698(guibutton)
-msgid "Alt-P"
-msgstr "Alt-P"
+#: ../C/xiphos.xml:718(para)
+msgid ""
+"<guibutton>Alt-P</guibutton> detaches/re-attaches the parallel view dialog."
+msgstr "<guibutton>Alt-P</guibutton> détache / rattache la fenêtre de vue parallèle."
 
-#: ../C/xiphos.xml:697(listitem)
-msgid "<placeholder-1/> detaches/re-attaches the parallel view dialog."
-msgstr "<placeholder-1/> détache / rattache la fenêtre de vue parallèle."
+#: ../C/xiphos.xml:723(para)
+msgid "<guibutton>Alt-Z</guibutton> opens the personal commentary editor."
+msgstr "<guibutton>Alt-Z</guibutton> ouvre l'éditeur de commentaires personnels."
 
-#: ../C/xiphos.xml:701(guibutton)
-msgid "Alt-Z"
-msgstr "Alt-Z"
+#: ../C/xiphos.xml:728(para)
+msgid ""
+"<guibutton>Ctrl-Plus/Ctrl-Minus</guibutton> increases/decreases the base "
+"font size."
+msgstr "<guibutton>Ctrl-Plus/Ctrl-Minus</guibutton> augmente / diminue la taille de police"
 
-#: ../C/xiphos.xml:700(listitem)
-msgid "<placeholder-1/> opens the personal commentary editor."
-msgstr "<placeholder-1/> ouvre l'éditeur de commentaires personnels."
+#: ../C/xiphos.xml:737(para)
+msgid "<guibutton>Ctrl-p/Ctrl-n</guibutton>: Verse previous/next."
+msgstr "<guibutton>Ctrl-p/Ctrl-n</guibutton> : Verset précédent/suivant."
 
-#: ../C/xiphos.xml:704(guibutton)
-msgid "Ctrl-Plus/Ctrl-Minus"
-msgstr "Ctrl-+/Ctrl--"
+#: ../C/xiphos.xml:741(para)
+msgid "<guibutton>p/n</guibutton>: Chapter previous/next."
+msgstr "<guibutton>p/n</guibutton> : Chapitre précédent/suivant."
 
-#: ../C/xiphos.xml:703(listitem)
-msgid "<placeholder-1/> increases/decreases the base font size."
-msgstr "<placeholder-1/> augmente / diminue la taille de police"
+#: ../C/xiphos.xml:745(para)
+msgid "<guibutton>P/N</guibutton>: Book previous/next."
+msgstr "<guibutton>P/N</guibutton>:·Livre biblique suivant/précédent."
 
-#: ../C/xiphos.xml:710(guibutton)
-msgid "Ctrl-p/Ctrl-n"
-msgstr "Ctrl-P/Ctrl-N"
-
-#: ../C/xiphos.xml:709(listitem)
-msgid "<placeholder-1/>: Verse previous/next."
-msgstr "<placeholder-1/> Verset précédent/suivant."
-
-#: ../C/xiphos.xml:713(guibutton)
-msgid "p/n"
-msgstr "P/N"
-
-#: ../C/xiphos.xml:712(listitem)
-msgid "<placeholder-1/>: Chapter previous/next."
-msgstr "<placeholder-1/> : Chapitre précédent/suivant."
-
-#: ../C/xiphos.xml:716(guibutton)
-msgid "P/N"
-msgstr "P/N"
-
-#: ../C/xiphos.xml:715(listitem)
-msgid "<placeholder-1/>: Book previous/next."
-msgstr "<placeholder-1/> Livre précédent/suivant."
-
-#: ../C/xiphos.xml:706(listitem)
+#: ../C/xiphos.xml:733(para)
 msgid "Location bar navigation: <placeholder-1/>"
 msgstr "Activer la barre de navigation:·<placeholder-1/>"
 
-#: ../C/xiphos.xml:724(title)
+#: ../C/xiphos.xml:755(title)
 msgid "Version Differences in <application>Xiphos</application>'s Display"
 msgstr "Différences d'affichage dans <application>&appname;</application> :"
 
-#: ../C/xiphos.xml:725(para)
+#: ../C/xiphos.xml:756(para)
 msgid ""
 "The <application>Xiphos</application> interface has evolved over time, and "
 "there are two display libraries with which <application>Xiphos</application> "
@@ -2713,7 +2660,7 @@ msgstr ""
 "moins complète se nomme «&nbsp;gtkhtml3&nbsp;», et la nouvelle offrant plus "
 "de possibilités est «&nbsp;MozEmbed&nbsp;»."
 
-#: ../C/xiphos.xml:732(para)
+#: ../C/xiphos.xml:763(para)
 msgid ""
 "Several desirable capabilities are unsupportable in gtkhtml3, and although "
 "recent <application>Xiphos</application> is written to take advantage of "
@@ -2736,7 +2683,7 @@ msgstr ""
 "feront observer selon l'utilisation de «&nbsp;gtkhtml3&nbsp;» ou «&nbsp;"
 "MozEmbed&nbsp;» comme moteur d'affichage :"
 
-#: ../C/xiphos.xml:742(listitem)
+#: ../C/xiphos.xml:774(para)
 msgid ""
 "Morphology and Strong's references, enabled via the right-click menu in some "
 "modules, are displayed inline with gtkhtml3; with MozEmbed, a blocked "
@@ -2749,23 +2696,16 @@ msgstr ""
 "références sont alignées au-dessous du mot auxquelles elles se rapportent de "
 "façon à procurer un affichage plus aéré et plus lisible."
 
-#: ../C/xiphos.xml:748(guibutton)
-msgid "*n"
-msgstr "*n"
-
-#: ../C/xiphos.xml:748(guibutton)
-msgid "*x"
-msgstr "*x"
-
-#: ../C/xiphos.xml:747(listitem)
+#: ../C/xiphos.xml:781(para)
 msgid ""
-"Footnote and cross-reference markers (<placeholder-1/>, <placeholder-2/>) "
-"are displayed as proper superscripts in MozEmbed, but not in gtkhtml3."
+"Footnote and cross-reference markers (<guibutton>*n</guibutton>, "
+"<guibutton>*x</guibutton>) are displayed as proper superscripts in MozEmbed, "
+"but not in gtkhtml3."
 msgstr ""
-"Les notes de pied de page et les références croisées (<placeholder-1/>, "
-"<placeholder-2/>) s'affichent en mode exposant avec «&nbsp;MozEmbed&nbsp;»."
+"Les notes de pied de page et les références croisées (<guibutton>*n</guibutton>,·"
+"<guibutton>*x</guibutton>) s'affichent en mode exposant avec «&nbsp;MozEmbed&nbsp;»."
 
-#: ../C/xiphos.xml:751(listitem)
+#: ../C/xiphos.xml:787(para)
 msgid ""
 "Links in gtkhtml3 are necessarily both colored and underlined; in MozEmbed, "
 "no underlines are needed."
@@ -2773,20 +2713,16 @@ msgstr ""
 "Les liens avec «&nbsp;gtkhtml3&nbsp;» sont à la fois colorés et soulignés. "
 "Ils ne sont pas soulignés avec «&nbsp;MozEmbed&nbsp;»."
 
-#: ../C/xiphos.xml:755(guimenuitem)
-msgid "View"
-msgstr "Affichage"
-
-#: ../C/xiphos.xml:754(listitem)
+#: ../C/xiphos.xml:792(para)
 msgid ""
-"Under MozEmbed, double-space display is available using the <placeholder-1/> "
-"menu, but not under gtkhtml3."
+"Under MozEmbed, double-space display is available using the "
+"<guimenuitem>View</guimenuitem> menu, but not under gtkhtml3."
 msgstr ""
 "Avec «&nbsp;MozEmbed&nbsp;», l'affichage en double espacement du texte est "
-"activable à l'aide du menu <placeholder-1/>, cette option est indisponible "
-"avec «&nbsp;gtkhtml3&nbsp;»."
+"activable à l'aide du menu <guimenuitem>Affichage</guimenuitem>, cette "
+"option est indisponible avec «&nbsp;gtkhtml3&nbsp;»."
 
-#: ../C/xiphos.xml:758(listitem)
+#: ../C/xiphos.xml:798(para)
 msgid ""
 "It is not possible for gtkhtml3 to interpret multiple font face directives "
 "in a single window, so the gtkhtml3 detached parallel view window cannot "
@@ -2797,7 +2733,7 @@ msgstr ""
 "une même fenêtre, c'est pourquoi la fenêtre détachée «&nbsp;Vue "
 "parallèle&nbsp;» ne permet pas une sélection de police par module."
 
-#: ../C/xiphos.xml:765(para)
+#: ../C/xiphos.xml:806(para)
 msgid ""
 "Using the \"About Xiphos\" selection under the <guimenuitem>Help</"
 "guimenuitem> menu, you will see the display library with which "
@@ -2808,9 +2744,13 @@ msgstr ""
 "bibliothèque avec laquelle <application>&appname;</application> a été "
 "construit."
 
-#: ../C/xiphos.xml:770(title) ../C/xiphos.xml:777(phrase)
+#: ../C/xiphos.xml:811(title) ../C/xiphos.xml:818(phrase)
 msgid "Comparison, gtkhtml3 -vs- mozembed"
 msgstr "Comparaison d'affichage entre gtkhtml3 et mozembed"
+
+#: ../C/xiphos.xml:398(title)
+msgid "Preferences"
+msgstr "Préférences"
 
 #: ../C/xiphos.xml:30(title)
 msgid "Fonts And Colors"
@@ -2956,6 +2896,10 @@ msgstr "Préférences diverses des modules"
 msgid "Various Preferences Modules"
 msgstr "Préférences diverses des modules"
 
+#: ../C/xiphos.xml:404(title)
+msgid "Module Manager"
+msgstr "Gérer les modules"
+
 #: ../C/xiphos.xml:41(title)
 msgid "Sword Module Configurations"
 msgstr "Configuration des modules de Sword"
@@ -3061,12 +3005,12 @@ msgstr ""
 "Les modules peuvent être installés dans un dossier partagé de façon à "
 "permettre l'accès à ces modules par tous les utilisateurs. Si le logiciel "
 "«&nbsp;The·Sword Project for Windows&nbsp;» a été utilisé précédemment, ce "
-"répertoire est «&nbsp;C:\\Program Files\\Crosswire\\The Sword Project\\Sword&nbsp;», "
-"sinon c'est «&nbsp;C:\\Documents and Settings\\All Users\\Application Data"
-"\\Sword&nbsp;». Les modules peuvent être également installés dans un compte "
-"d'utilisateur spécifique et seront accessibles à lui seul, ce dossier est «&nbsp;"
-"C:\\Documents and Settings\\{Nom du compte d'utilisateur}\\Application "
-"Data\\Sword&nbsp;»"
+"répertoire est «&nbsp;C:\\Program Files\\Crosswire\\The Sword Project"
+"\\Sword&nbsp;», sinon c'est «&nbsp;C:\\Documents and Settings\\All Users"
+"\\Application Data\\Sword&nbsp;». Les modules peuvent être également "
+"installés dans un compte d'utilisateur spécifique et seront accessibles à "
+"lui seul, ce dossier est «&nbsp;C:\\Documents and Settings\\{Nom du compte "
+"d'utilisateur}\\Application Data\\Sword&nbsp;»"
 
 #: ../C/xiphos.xml:126(title)
 msgid "Windows Vista"
@@ -3259,7 +3203,7 @@ msgstr ""
 "avoir installé un module non-standard de façon à ce que le logiciel détecte "
 "le nouveau module en place."
 
-#: ../C/xiphos.xml:407(title)
+#: ../C/xiphos.xml:410(title)
 msgid "The Search Function"
 msgstr "Fonctions de recherche"
 
@@ -3929,7 +3873,7 @@ msgstr "\\w signifie alphanumérique, identique à [a-zA-Z0-9_]."
 msgid "\\W means not alphanumeric; same as [^a-zA-Z0-9_]."
 msgstr "\\W signifie non alphanumérique, identique à [^a-zA-Z0-9_]."
 
-#: ../C/xiphos.xml:419(title) ../C/xiphos.xml:31(phrase)
+#: ../C/xiphos.xml:422(title) ../C/xiphos.xml:31(phrase)
 msgid "The Personal Commentary"
 msgstr "Commentaires personnels"
 
@@ -4055,7 +3999,7 @@ msgstr ""
 "fonction <guimenuitem>Lien</guimenuitem> pour relier les commentaires entre "
 "eux."
 
-#: ../C/xiphos.xml:425(title)
+#: ../C/xiphos.xml:428(title)
 msgid "Journals and Prayer Lists"
 msgstr "Listes de prières et Journaux"
 
@@ -4200,7 +4144,7 @@ msgstr ""
 "contenu composé personnellement, avec d'autres utilisateurs d'applications "
 "utilisant l'architecture logicielle du Projet SWORD."
 
-#: ../C/xiphos.xml:431(title)
+#: ../C/xiphos.xml:434(title)
 msgid "Getting Help Online"
 msgstr "Obtenir de l'aide en ligne"
 
@@ -4232,7 +4176,7 @@ msgstr ""
 "peut prendre quelques minutes voire plus longtemps.<para>[NDT : Le chat en "
 "ligne est en langue anglaise]</para>"
 
-#: ../C/xiphos.xml:437(title)
+#: ../C/xiphos.xml:440(title)
 msgid "Original Language Research"
 msgstr "Étude des textes originaux"
 
@@ -4412,7 +4356,7 @@ msgstr ""
 "Sont inclus les codes Strong, les étiquettes morphologiques et les accents "
 "grecs."
 
-#: ../C/xiphos.xml:443(title)
+#: ../C/xiphos.xml:446(title)
 msgid "Authors"
 msgstr "Auteurs"
 
@@ -4467,7 +4411,7 @@ msgstr ""
 "<ulink type=\"http\" url=\"http://www.sourceforge.net/projects/xiphos"
 "\">http://www.sourceforge.net/projects/xiphos</ulink>"
 
-#: ../C/xiphos.xml:449(title)
+#: ../C/xiphos.xml:452(title)
 msgid "License"
 msgstr "Licence"
 
@@ -4506,6 +4450,87 @@ msgstr ""
 #: ../C/xiphos.xml:0(None)
 msgid "translator-credits"
 msgstr "Accréditions aux traducteurs"
+
+#~ msgid "2008"
+#~ msgstr "2008"
+
+#~ msgid "Xiphos Manual 2.4.0"
+#~ msgstr "Manuel de Xiphos &manrevision;"
+
+#~ msgid "Sat, 20 Sep 2008"
+#~ msgstr "20 septembre 2008"
+
+#~ msgid "F1"
+#~ msgstr "F1"
+
+#~ msgid "F2"
+#~ msgstr "F2"
+
+#~ msgid "<placeholder-1/>: opens the <placeholder-2/> dialog."
+#~ msgstr "<placeholder-1/> ouvre la fenêtre <placeholder-2/>."
+
+#~ msgid "F3"
+#~ msgstr "F3"
+
+#~ msgid "Advanced Search"
+#~ msgstr "Recherche avancée"
+
+#~ msgid "<placeholder-1/>: opens <placeholder-2/>."
+#~ msgstr "<placeholder-1/> : ouvre <placeholder-2/>."
+
+#~ msgid "F4"
+#~ msgstr "F4"
+
+#~ msgid "<placeholder-1/>: opens the <placeholder-2/>."
+#~ msgstr "<placeholder-1/> : ouvre <placeholder-2/>."
+
+#~ msgid "Ctrl-L"
+#~ msgstr "Ctrl-L"
+
+#~ msgid "Ctrl-F"
+#~ msgstr "Ctrl-F"
+
+#~ msgid "Alt-C"
+#~ msgstr "Alt-C"
+
+#~ msgid "Alt-G"
+#~ msgstr "Alt-G"
+
+#~ msgid "Alt-B"
+#~ msgstr "Alt-B"
+
+#~ msgid "Alt-D"
+#~ msgstr "Alt-D"
+
+#~ msgid "Alt-P"
+#~ msgstr "Alt-P"
+
+#~ msgid "Alt-Z"
+#~ msgstr "Alt-Z"
+
+#~ msgid "Ctrl-Plus/Ctrl-Minus"
+#~ msgstr "Ctrl-+/Ctrl--"
+
+#~ msgid "Ctrl-p/Ctrl-n"
+#~ msgstr "Ctrl-P/Ctrl-N"
+
+#~ msgid "p/n"
+#~ msgstr "P/N"
+
+#~ msgid "P/N"
+#~ msgstr "P/N"
+
+#~ msgid "<placeholder-1/>: Book previous/next."
+#~ msgstr "<placeholder-1/> Livre précédent/suivant."
+
+#~ msgid "*n"
+#~ msgstr "*n"
+
+#~ msgid "*x"
+#~ msgstr "*x"
+
+#~ msgid "View"
+#~ msgstr "Affichage"
 
 #~ msgid "@@image: 'figures/sword3.png'; md5=c07bf21f1faa092c00ecf8207d976277"
 #~ msgstr "sword3.png"
