@@ -1437,11 +1437,8 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 	} 
     
     	item = glade_xml_get_widget (gxml, "transliteration");
-	gtk_widget_hide (item);
-#ifndef WIN32	   
-	gtk_widget_show (item);	
 	GTK_CHECK_MENU_ITEM (item)->active = ops->transliteration;
-#endif 
+
     	item = glade_xml_get_widget (gxml, "variants");
     	gtk_widget_hide (item);
     
