@@ -1761,7 +1761,7 @@ msgstr ""
 #: ../src/main/settings.c:148 ../src/main/settings.c:156
 #: ../src/main/settings.c:164
 msgid "can not create "
-msgstr "לא ניתן ליצור\n"
+msgstr "לא ניתן ליצור"
 
 #: ../src/main/settings.c:196
 msgid ""
