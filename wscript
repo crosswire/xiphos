@@ -14,8 +14,8 @@ if sys.version_info < (2,3):
 
 import os, os.path
 import intltool, gnome
-
 from os.path import join, dirname, abspath
+
 
 # waf imports
 import Utils
@@ -37,46 +37,54 @@ PACKAGE='xiphos'
 srcdir = '.'
 blddir = 'build'
 
-headers = [
-    'dlfcn.h', # HAVE_DLFCN_H
-    'inttypes.h', # HAVE_INTTYPES_H
-    'locale.h', # HAVE_LOCALE_H
-    'memory.h', # HAVE_MEMORY_H
-    'stdint.h', # HAVE_STDINT_H
-    'stdlib.h', # HAVE_STDLIB_H
-    'strings.h', # HAVE_STRINGS_H
-    'string.h', # HAVE_STRING_H
-    'sys/stat.h', # HAVE_SYS_STAT_H
-    'sys/types.h', # HAVE_SYS_TYPES_H
-    'unistd.h', # HAVE_UNISTD_H
-    'sys/select.h', # HAVE_SYS_SELECT_H
-    'sys/socket.h', # HAVE_SYS_SOCKET_H
-]
+_prefix = '/usr/local'
 
+_headers = '''
+dlfcn.h
+inttypes.h
+locale.h
+memory.h
+stdint.h
+stdlib.h
+strings.h
+string.h
+sys/stat.h
+sys/types.h
+unistd.h
+sys/select.h
+sys/socket.h
+'''.split()
+
+_unused_options = '''
+sbindir
+sysconfdir
+libdir
+libexecdir
+sharedstatedir
+localstatedir
+includedir
+oldincludedir
+datadir
+infodir
+mandir
+htmldir
+dvidir
+pdfdir
+psdir
+'''.split()
 
 
 def set_options(opt):
 
+
     # options provided by the modules
     #opt.tool_options('g++ gcc gnome intltool glib2')
-    opt.tool_options('g++')
-    opt.tool_options('gcc')
-    opt.tool_options('gnu_dirs')
+    opt.tool_options('g++ gcc gnu_dirs')
 
     # unused options
-    opt.parser.remove_option ('--sbindir')
-    opt.parser.remove_option ('--libexecdir')
-    opt.parser.remove_option ('--sharedstatedir')
-    opt.parser.remove_option ('--localstatedir')
-    opt.parser.remove_option ('--includedir')
-    opt.parser.remove_option ('--oldincludedir')
-    opt.parser.remove_option ('--datadir')
-    opt.parser.remove_option ('--infodir')
-    opt.parser.remove_option ('--mandir')
-    opt.parser.remove_option ('--htmldir')
-    opt.parser.remove_option ('--dvidir')
-    opt.parser.remove_option ('--pdfdir')
-    opt.parser.remove_option ('--psdir')
+    for name in _unused_options:
+        option_name = '--' + name
+        opt.parser.remove_option(option_name)
 
     #opt.add_option('--enable-paratab', action='store_true', default=True,
             #dest='paratab', help='Use paratab [Default: True]')
@@ -130,12 +138,16 @@ def configure(conf):
         Utils.pprint('CYAN', "Windows detected")
 
     if not (env['IS_LINUX'] or env['IS_WIN32']):
-        Utils.pprint('RED', "Detected unknown or unsupported platform")
+        Utils.pprint('RED', "Unknown or unsupported platform")
         exit(1)
 
 
-    #WIN32 conf.check_tool('g++ gcc gnome intltool glib2')
-    conf.check_tool('g++ gcc')
+    ## temporary HACKS for win32
+    if env['IS_WIN32']:
+        env['PREFIX'] = _prefix
+    ##
+
+    conf.check_tool('g++ gcc gnu_dirs')
 
     if env['IS_WIN32']:
         # tool to link icon with executable
@@ -146,8 +158,8 @@ def configure(conf):
 
 
     # delint flags
-    env['CXXFLAGS_DELINT'] = ['-Werror', '-Wall']
-    env['CCFLAGS_DELINT'] = ['-Werror', '-Wall']
+    for name in ('CXXFLAGS_DELINT', 'CCFLAGS_DELINT'):
+        env[name] = ['-Werror', '-Wall']
 
     # gcc compiler debug levels
     # msvc has levels predefined
@@ -165,10 +177,14 @@ def configure(conf):
         env['CXXFLAGS_DEBUG']      = ['-g', '-DDEBUG', '-ftemplate-depth-25']
         env['CXXFLAGS_ULTRADEBUG'] = ['-g3', '-O0', '-DDEBUG', '-ftemplate-depth-25']
     
+    
+    ## temporary HACKS for win32
     if env['IS_WIN32']:
-        env['CCFLAGS']            = ['-mms-bitfields']
-        env['CXXFLAGS']           = ['-mms-bitfields']
+        env['CCFLAGS'] = ['-mms-bitfields']
+        env['CXXFLAGS'] = ['-mms-bitfields']
+    ##
 
+    
     ### cmd line options
 
     opt = Options.options
@@ -206,7 +222,6 @@ def configure(conf):
     ### App info, paths
     define = conf.define
     sub = Utils.subst_vars
-    conf.check_tool('gnu_dirs')
 
     env['VERSION'] = VERSION
     env['APPNAME'] = APPNAME
@@ -233,11 +248,13 @@ def configure(conf):
     define('PACKAGE_SOURCE_DIR', escpath(abspath(srcdir))) # foder where was wscript executed
 
     # some folders for final executable
-    define('PREFIX', escpath(env['PREFIX']))
-    define('SYSCONFDIR', escpath(env['SYSCONFDIR']))
-    define('DATADIR', escpath(env['DATAROOTDIR']))
-    define('LIBDIR', escpath(env['LIBDIR']))
-    define('SHARE_DIR', escpath(sub('${DATAROOTDIR}/${PACKAGE}', env)))
+    #define('PREFIX', escpath(env['PREFIX']))
+    #define('SYSCONFDIR', escpath(env['SYSCONFDIR']))
+    #define('DATADIR', escpath(env['DATAROOTDIR']))
+    #env.append_value('CXXFLAGS', env['CXXDEFINES_ST'] % ('DATADIR='+escpath(env['DATAROOTDIR'])))
+    #env.append_value('CCFLAGS', env['CCDEFINES_ST'] % ('DATADIR='+escpath(env['DATAROOTDIR'])))
+    #define('LIBDIR', escpath(env['LIBDIR']))
+    #define('SHARE_DIR', escpath(sub('${DATAROOTDIR}/${PACKAGE}', env)))
 
 
     ## CXX flags (compiler arguments)
@@ -255,20 +272,26 @@ def configure(conf):
     #check_pkg(conf, 'gtk+-x11-2.0', '2.0.0', var='LIBGTK_X11_2_0')
     #if not env['HAVE_LIBGTK_X11_2_0']:
     #    check_pkg(conf, 'gtk+-x11-2.0', '2.0.0', True, var='LIBGTK_WIN32_2_0')
-    check_pkg(conf, 'gtk+-2.0', '2.0.0', True, var='GTK')
+    check_pkg(conf, 'gtk+-2.0', '2.0', True, var='GTK')
 
     # tooltip function needs gtk+ >= 2.12 HAVE_WIDGET_TOOLTIP_TEXT
-    check_pkg(conf, 'gtk+-2.0', '2.12', var='WIDGET_TOOLTIP_TEXT')
+    #check_pkg(conf, 'gtk+-2.0', '2.12', var='WIDGET_TOOLTIP_TEXT')
+    #conf.check_cfg(conf, 'gtk+-2.0', '2.12', var='WIDGET_TOOLTIP_TEXT')
+    #conf.check_cfg (package='gtk+-2.0', msg='Checking for widget_tooltip_text',
+        #uselib_store='WIDGET_TOOLTIP_TEXT', atleast_version='2.12')
+    check_pkgver_msg(conf, 'gtk+-2.0', '2.12', var='WIDGET_TOOLTIP_TEXT',
+        msg='Checking for gtk+-2.0 widget_tooltip_text')
 
     # glade
     check_pkg(conf, 'libglade-2.0', '2.0.0', var='GLADE')
         
 
     # gtk popup menus - dynamic loadable libs
-    if env['IS_WIN32']:
-        check_pkg(conf, 'gmodule-no-export-2.0', '2.0.0', True, var='GMODULEEXP')
-    else: 
-        check_pkg(conf, 'gmodule-export-2.0', '2.0.0', True, var='GMODULEEXP')
+    #if env['IS_WIN32']:
+        #check_pkg(conf, 'gmodule-no-export-2.0', '2.0.0', True, var='GMODULEEXP')
+    #else: 
+        #check_pkg(conf, 'gmodule-export-2.0', '2.0.0', True, var='GMODULEEXP')
+    check_pkg(conf, 'gmodule-2.0', '2.0.0', True, var='GMODULEEXP')
 
     ## Gnome libs
     check_pkg(conf, 'glib-2.0', '2.0.0', True, 'GLIB')
@@ -288,7 +311,7 @@ def configure(conf):
     ## Sword
     check_pkg(conf, 'sword', '1.5.11', True, var='SWORD')
 
-    check_pkg_msg(conf, 'sword', '1.5.11.99', var='MULTIVERSE',
+    check_pkgver_msg(conf, 'sword', '1.5.11.99', var='MULTIVERSE',
             msg='Checking for sword multiverse')
     if env['HAVE_MULTIVERSE']:
         dfn('SWORD_MULTIVERSE', 1)
@@ -349,7 +372,7 @@ def configure(conf):
 
 
     # Check for header files
-    for h in headers:
+    for h in _headers:
         conf.check(header_name=h)
 
 

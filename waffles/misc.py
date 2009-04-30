@@ -25,20 +25,41 @@ def get_pkgvar(conf, pkg, var):
 
 def check_pkg(conf, name, version='', mandatory=False, var=None):
     """
-    Check package and its version
+    Check package version and its cflags/libs
     """
     if not var:
         var = name.split ('-')[0].upper ()
     conf.check_cfg (package=name, uselib_store=var, args='--cflags --libs',
         atleast_version=version, mandatory=mandatory)
 
+
 def check_pkg_msg(conf, name, version='', mandatory=False, var=None, msg=''):
     """
-    Check package and its version
+    Check package version and its cflags/libs
     """
     if not var:
         var = name.split ('-')[0].upper ()
     conf.check_cfg (package=name, uselib_store=var, args='--cflags --libs',
+        atleast_version=version, mandatory=mandatory, msg=msg)
+
+
+def check_pkgver(conf, name, version='', mandatory=False, var=None):
+    """
+    Check package version without cflags/libs
+    """
+    if not var:
+        var = name.split ('-')[0].upper ()
+    conf.check_cfg (package=name, uselib_store=var,
+        atleast_version=version, mandatory=mandatory)
+
+
+def check_pkgver_msg(conf, name, version='', mandatory=False, var=None, msg=''):
+    """
+    Check package version without cflags/libs
+    """
+    if not var:
+        var = name.split ('-')[0].upper ()
+    conf.check_cfg (package=name, uselib_store=var,
         atleast_version=version, mandatory=mandatory, msg=msg)
 
 
@@ -54,7 +75,13 @@ def escpath(path):
     Escape path - useful in win32
     """
     from os.path import normpath
-    # double backslash '\\' needs to be written to config.h in paths in win32
-    return repr(normpath(path))
+    normpath(path)
+
+    # double backslashes '\\' needs to be written to config.h in win32 paths in win32
+    path = '%r' % path # convert string to raw form - '%r'
+    max = len(path) - 1
+    path = path[1:max] # trim apostrophes at begin and end
+
+    return path
     
 

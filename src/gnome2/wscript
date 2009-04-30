@@ -1,9 +1,12 @@
 #!/usr/bin/env python
 # encoding: utf8
 
+import Utils
+
 def build(bld):
 
     env = bld.env
+    sub = Utils.subst_vars
     
     # GTK
     #gtk = 'LIBGTK_X11_2_0'
@@ -33,10 +36,21 @@ def build(bld):
     if env['IS_WIN32']:
         winresource = '../../win32/res/res.rc'
         staticlib = 'sword'.split()
+
+    # DATADIR direct in config.h - conflict in win32 (mingw)
+    defines = sub('''
+        PREFIX="${PREFIX}"
+        SYSCONFDIR="${SYSCONFDIR}"
+        DATADIR="${DATAROOTDIR}"
+        LIBDIR="${LIBDIR}"
+        SHARE_DIR="${DATAROOTDIR}/${PACKAGE}"
+    ''', env)
+        
         
     lib = bld.new_task_gen(
         features = 'cxx cc cprogram',
         includes = '. ../.. ../../src ../../src/editor %s' % bld.env['GECKO_INCLUDE'], # ../../ for config.h
+        defines = defines, 
         source = '%s' % winresource, 
         target = 'xiphos',
         uselib = 'GNOMEUI GECKONSPR MAGICK GECKONSS GTK GLADE GLIB GMODULEEXP UPRINT SWORD  %s %s' % (gtkhtml, gecko),
