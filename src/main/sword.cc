@@ -627,10 +627,9 @@ const char *main_get_language_map(const char *language) {
 
 void main_init_backend(void)
 {
-	char *sys_locale = NULL;
 	const char *lang = getenv("LANG");
 	
-	if (!lang) lang="C";
+	if (!lang) lang = "C";
 
 	StringMgr::setSystemStringMgr( new GS_StringMgr() );
 
@@ -645,10 +644,8 @@ void main_init_backend(void)
 	GS_print(("%s %s\n", "SWORD locale is", sword_locale));
 	GS_print(("OLD_CODESET = %s\n\n", (OLD_CODESET ? OLD_CODESET : "-none-")));
 	GS_print(("%s\n", "Checking for SWORD Modules"));
-	sys_locale = strdup(lang);
-	settings.spell_language = strdup(sys_locale);
+	settings.spell_language = strdup(lang);
 	main_init_lists();
-	free(sys_locale);
 }
 
 
