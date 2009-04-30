@@ -91,18 +91,20 @@ def set_options(opt):
             #dest='paratab', help='Use paratab [Default: True]')
 
     opt.add_option('--enable-autoclear', action='store_true', default=False,
-            dest='autoclear', help='Use previewer autoclear [Default: False]')
+            dest='autoclear', help='Use previewer autoclear [Default: disabled]')
 
     opt.add_option('--enable-old_navbar', action='store_true', default=False,
-            dest='old_navbar', help='Use old_navbar [Default: False]')
+            dest='old_navbar', help='Use old_navbar [Default: disabled]')
 
     opt.add_option('--enable-gtkhtml', action='store_true', default=False,
             dest='gtkhtml',
-            help='Use gtkhtml instead of gtkmozembed [Default: False]')
+            help='Use gtkhtml instead of gtkmozembed [Default: disabled]')
 
-    #opt.add_option('--enable-maintainer-mode', action='store_true',
-            #default=False, dest='maintainer_mode',
-            #help='''Enable make rules and dependencies not useful (and sometimes confusing) to the casual installer''')
+    opt.add_option('--disable-console',
+            action='store_true',
+            default=False,
+            help='Disable console window in win32 [Defauld: enabled]',
+            dest='no_console')
 
     # replaces '--enable-maintainer-mode', '--enable-debug'
     opt.add_option('-d', '--debug-level',
@@ -114,7 +116,7 @@ def set_options(opt):
 
     opt.add_option('--enable-delint', action='store_true', default=False,
             dest='delint',
-            help='Use -Wall -Werror [Default: False]')
+            help='Use -Wall -Werror [Default: disabled]')
 
     group = opt.add_option_group ('Localization and documentation', '')
     group.add_option('--helpdir',
@@ -223,6 +225,11 @@ def configure(conf):
     if opt.gtkhtml:
         env['ENABLE_GTKHTML'] = True
         dfn('GTKHTML', 1)
+
+    # disable console window in win32
+    if opt.no_console and env['IS_WIN32']:
+        env.append_value('LINKFLAGS', '-mwindows')
+
 
 
 
