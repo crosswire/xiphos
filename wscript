@@ -53,6 +53,7 @@ sys/types.h
 unistd.h
 sys/select.h
 sys/socket.h
+winsock.h
 '''.split()
 
 _unused_options = '''
@@ -183,6 +184,12 @@ def configure(conf):
         env['CCFLAGS'] = ['-mms-bitfields']
         env['CXXFLAGS'] = ['-mms-bitfields']
     ##
+
+    ## how to add LINK flags
+    #env['LINKFLAGS'] = ['-lgdi32']
+    #if env['IS_WIN32']:
+        # libraries, and how to reuse the checks
+        #conf.check(lib='ws2_32', uselib='WSOCK', mandatory=True)
 
     
     ### cmd line options
