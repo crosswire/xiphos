@@ -123,7 +123,10 @@ static void ok_clicked(GtkButton * button,  gpointer data)
 	save_conf_file_item(file, mf->mod_name, "GdkFont", mf->new_gdk_font);
 	save_conf_file_item(file, mf->mod_name, "Fontsize", mf->new_font_size);
 	
-	GS_message (("\n\nFont: %s\nGdkFont: %s\nFontsize: %s\n\n", mf->new_font, mf->new_gdk_font, mf->new_font_size));
+	//evidently new_gdk_font is never set on Windows
+	GS_message (("\n\nFont: %s\nGdkFont: %s\nFontsize: %s\n\n", (mf->new_font ? mf->new_font : "-none-"),
+		     (mf->new_gdk_font ? mf->new_gdk_font : "-none-"), 
+		     (mf->new_font_size ? mf->new_font_size : "-none-")));
 
 	gtk_widget_destroy(dlg);
 	if (font_name)
