@@ -76,7 +76,7 @@ class Gtkhtml(object):
         """
         gtkhtml >=3.23 don't need generating sources form Editor.idl
         """
-        check_pkg(self.conf, 'libgtkhtml-3.14', '3.23', var='EDITOR_IDL')
+        check_pkgver(self.conf, 'libgtkhtml-3.14', '3.23', var='EDITOR_IDL')
 
         if self.conf.env['HAVE_EDITOR_IDL']:
             check_pkg(self.conf, 'gtkhtml-editor', mandatory=True, var='GTKHTML_EDITOR')
