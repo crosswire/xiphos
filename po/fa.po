@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 3.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-27 20:29+0200\n"
-"PO-Revision-Date: 2009-04-29 08:29+0100\n"
+"POT-Creation-Date: 2009-04-29 08:47+0100\n"
+"PO-Revision-Date: 2009-04-30 21:23+0100\n"
 "Last-Translator: Peter von Kaehne <refdoc@crosswire.org>\n"
 "Language-Team: English/GB <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -109,7 +109,7 @@ msgstr "درباره مدول سورد"
 
 #: ../src/gnome2/about_modules.c:383 ../src/gnome2/mod_mgr.c:198
 msgid "The module has no About information."
-msgstr ""
+msgstr "عتلاعت نداریم درباره این انون"
 
 #: ../src/gnome2/cipher_key_dialog.c:62
 msgid "Cipher Key?"
@@ -1398,7 +1398,6 @@ msgid "An outlined topic (e.g. sermon). \\par\\par Module created by Xiphos."
 msgstr "اصلی/ لیستهای دعا"
 
 #: ../src/main/prayerlists.cc:529
-#, fuzzy
 msgid "OutlinedTopic"
 msgstr "موضوع مشخص شده"
 
@@ -1601,9 +1600,8 @@ msgid "Transliteration"
 msgstr "درباره ترجمه زیفوس"
 
 #: ../src/main/parallel_view.cc:518
-#, fuzzy
 msgid "Textual Variants"
-msgstr "نسخه‌ها"
+msgstr "نسخه‌ها "
 
 #: ../src/main/parallel_view.cc:526 ../ui/xi-menus.glade.h:49
 msgid "Primary Reading"
@@ -2157,7 +2155,7 @@ msgstr "مکاشفه یوحنا"
 
 #: ../ui/navbar_versekey.glade.h:3
 msgid "Book Selector Button"
-msgstr ""
+msgstr "دقمه انتخاب کتاب"
 
 #: ../ui/navbar_versekey.glade.h:4
 msgid "Choose book to display"
@@ -2173,11 +2171,11 @@ msgstr "ترجیحات"
 
 #: ../ui/navbar_versekey.glade.h:7
 msgid "Toggle Chapter Button"
-msgstr ""
+msgstr "دقمه انتخاب باب"
 
 #: ../ui/navbar_versekey.glade.h:8
 msgid "Toggle Verse Button"
-msgstr ""
+msgstr "دقمه انتخاب ایات"
 
 #: ../ui/prefs.glade.h:1
 msgid ""
