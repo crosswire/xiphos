@@ -97,7 +97,8 @@ static void ok_clicked(GtkButton * button,  gpointer data)
 	gchar *new_font = NULL;
 	gchar *font_name = NULL;
 
-	GS_message (("ok_clicked: %s", mf->new_gdk_font));
+	GS_message(("ok_clicked: %s",
+		    (mf->new_gdk_font ? mf->new_gdk_font : "-none-")));
 	sprintf(file, "%s/fonts.conf", settings.gSwordDir);
 	
 	if (!mf->no_font) { 
