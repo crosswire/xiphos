@@ -155,6 +155,10 @@ def configure(conf):
     if env['IS_WIN32']:
         # tool to link icon with executable
         conf.check_tool('winres')
+        # the following line does not work because of a problem with waf
+        # conf.check_tool('intltool')
+        env['POCOM'] = conf.find_program('msgfmt')
+        env['INTLTOOL'] = '/usr/local/bin/intltool-merge'
     else:
         conf.check_tool('intltool') # check for locale.h included
         conf.check_tool('misc')
@@ -180,19 +184,14 @@ def configure(conf):
         env['CXXFLAGS_DEBUG']      = ['-g', '-DDEBUG', '-ftemplate-depth-25']
         env['CXXFLAGS_ULTRADEBUG'] = ['-g3', '-O0', '-DDEBUG', '-ftemplate-depth-25']
     
-    
-    ## temporary HACKS for win32
     if env['IS_WIN32']:
+        ## setup for Winsock on Windows (required for read-aloud)
+        conf.check(lib='ws2_32', uselib='WSOCK', mandatory=True)
+        # this isn't supposed to be necessary
+        env['LINKFLAGS'] = ['-lws2_32']
+        #temporary hacks (still doesn't work with pkg-config cflags)
         env['CCFLAGS'] = ['-mms-bitfields']
         env['CXXFLAGS'] = ['-mms-bitfields']
-    ##
-
-    ## how to add LINK flags
-    #env['LINKFLAGS'] = ['-lgdi32']
-    #if env['IS_WIN32']:
-        # libraries, and how to reuse the checks
-        #conf.check(lib='ws2_32', uselib='WSOCK', mandatory=True)
-
     
     ### cmd line options
 
