@@ -46,8 +46,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-27 20:29+0200\n"
-"PO-Revision-Date: 2009-04-27 22:45+0100\n"
+"POT-Creation-Date: 2009-05-01 11:13+0200\n"
+"PO-Revision-Date: 2009-05-01 11:38+0100\n"
 "Last-Translator: Martin Zibricky <matysek03@users.sourceforge.net>\n"
 "Language-Team: Xiphos Translation Team\n"
 "MIME-Version: 1.0\n"
@@ -56,19 +56,147 @@ msgstr ""
 "X-Poedit-Language: Czech\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 
-#: ../xiphos.desktop.in.in.h:1
-msgid "Study the Bible"
-msgstr "Studium Bible"
-
-#: ../xiphos.desktop.in.in.h:2
-msgid "Xiphos Bible Guide"
-msgstr "Xiphos Průvodce Biblí"
-
 #: ../src/backend/sword_main.cc:1154
 msgid "Configuration not found"
 msgstr "Konfigurace nebyla nenalezena"
 
-#: ../src/gecko/gecko-html.cpp:178 ../src/gnome2/html.c:161
+#: ../src/editor/bonobo-editor.c:252
+#: ../src/editor/slib-editor.c:228
+#: ../src/gnome2/html.c:629
+#, c-format
+msgid "Page %d of %d"
+msgstr "Strana %d z %d"
+
+#: ../src/editor/bonobo-editor.c:351
+msgid "Are you sure you want to delete the note for"
+msgstr "Jste si jist, že chcete odstranit poznámku k"
+
+#: ../src/editor/bonobo-editor.c:963
+#: ../src/editor/bonobo-editor.c:996
+#: ../src/editor/slib-editor.c:1161
+#: ../src/editor/slib-editor.c:1198
+msgid "Save the changes to document"
+msgstr "Uložit změny do dokumentu"
+
+#: ../src/editor/bonobo-editor.c:964
+#: ../src/editor/bonobo-editor.c:997
+#: ../src/editor/slib-editor.c:1162
+#: ../src/editor/slib-editor.c:1199
+msgid "before closing?"
+msgstr "před uzavřením?"
+
+#: ../src/editor/bonobo-editor.c:971
+#: ../src/editor/bonobo-editor.c:1004
+#: ../src/editor/slib-editor.c:1169
+#: ../src/editor/slib-editor.c:1206
+msgid "If you don't save, changes will be permanently lost."
+msgstr "Pokud neprovedete uložení, změny budou trvale ztraceny."
+
+#: ../src/editor/bonobo-editor.c:995
+#: ../src/editor/slib-editor.c:1197
+#: ../ui/xi-menus.glade.h:24
+msgid "File"
+msgstr "Soubor"
+
+#: ../src/editor/bonobo-editor.c:1222
+#: ../src/editor/slib-editor.c:1254
+msgid "StudyPad"
+msgstr "Poznámkový blok"
+
+#: ../src/editor/bonobo-editor.c:1235
+#: ../src/editor/slib-editor.c:1268
+msgid "Note Editor"
+msgstr "Editor poznámek"
+
+#: ../src/editor/bonobo-editor.c:1244
+#: ../src/editor/slib-editor.c:1282
+msgid "Prayer List/Journal Editor"
+msgstr "Editor pro Modlitební seznam/deník"
+
+#: ../src/editor/slib-editor.c:382
+#: ../src/editor/slib-editor.c:429
+msgid "Save As"
+msgstr "Uložit jako"
+
+#: ../src/editor/slib-editor.c:400
+#: ../src/editor/slib-editor.c:447
+msgid "Untitled document"
+msgstr "Dokument bez názvu"
+
+#: ../src/editor/slib-editor.c:612
+msgid "HTML Output"
+msgstr "HTML výstup"
+
+#: ../src/editor/slib-editor.c:619
+msgid "HTML Source"
+msgstr "HTML zdroj"
+
+#: ../src/editor/slib-editor.c:626
+msgid "Plain Source"
+msgstr "Prostý zdroj"
+
+#: ../src/editor/slib-editor.c:633
+#: ../ui/editor_note.xml.h:15
+#: ../ui/editor_studypad.xml.h:21
+msgid "_Print..."
+msgstr "_Tisk..."
+
+#: ../src/editor/slib-editor.c:640
+#: ../ui/editor_note.xml.h:9
+#: ../ui/editor_studypad.xml.h:14
+msgid "Print Pre_view"
+msgstr "_Náhled tisku"
+
+#: ../src/editor/slib-editor.c:647
+msgid "_Quit"
+msgstr "U_končit"
+
+#: ../src/editor/slib-editor.c:654
+msgid "_Open"
+msgstr "_Otevřít"
+
+#: ../src/editor/slib-editor.c:661
+msgid "_Save"
+msgstr "_Uložit"
+
+#: ../src/editor/slib-editor.c:668
+msgid "Save _As..."
+msgstr "Uložit _jako..."
+
+#: ../src/editor/slib-editor.c:675
+#: ../ui/editor_note.xml.h:14
+#: ../ui/editor_studypad.xml.h:20
+#: ../ui/editor.xml.h:13
+#: ../ui/xi-menus.glade.h:83
+msgid "_File"
+msgstr "_Soubor"
+
+#: ../src/editor/slib-editor.c:730
+msgid "HTML _Output"
+msgstr "HTML _výstup"
+
+#: ../src/editor/slib-editor.c:737
+msgid "_HTML Source"
+msgstr "_HTML zdroj"
+
+#: ../src/editor/slib-editor.c:744
+msgid "_Plain Source"
+msgstr "_Prostý zdroj"
+
+#: ../src/editor/slib-editor.c:751
+#: ../ui/xi-menus.glade.h:98
+msgid "_View"
+msgstr "_Zobrazit"
+
+#: ../src/editor/slib-editor.c:762
+#: ../ui/editor_note.xml.h:11
+#: ../ui/editor_studypad.xml.h:16
+#: ../ui/editor.xml.h:11
+msgid "Save"
+msgstr "Uložit"
+
+#: ../src/gecko/gecko-html.cpp:178
+#: ../src/gnome2/html.c:161
 msgid "Unlock "
 msgstr "Odemknout"
 
@@ -85,7 +213,8 @@ msgstr "Tisk není na této tiskárně podporován"
 msgid "Printer %s does not support PostScript printing."
 msgstr "Tiskárna %s nepodporuje tisk technologií PostScript."
 
-#: ../src/gecko/gecko-print.c:341 ../src/gecko/gecko-print.c:369
+#: ../src/gecko/gecko-print.c:341
+#: ../src/gecko/gecko-print.c:369
 msgid "Printing"
 msgstr "Tisk"
 
@@ -102,20 +231,18 @@ msgstr "Vznika chyba během tisku"
 msgid "It was not possible to print your document: %s"
 msgstr "Nezdařil se tisk vašeho dokumentu: %s"
 
+#: ../src/gnome2/about_modules.c:189
+msgid "About Sword Module"
+msgstr "O Sword modulu"
+
+#: ../src/gnome2/about_modules.c:383
+#: ../src/gnome2/mod_mgr.c:198
+msgid "The module has no About information."
+msgstr "Informace o modulu nejsou k dispozici."
+
 #: ../src/gnome2/about_sword.c:88
-msgid ""
-"The SWORD Project is an effort to create an ever-expanding software package "
-"for research and study of God and His Word. The SWORD Project framework "
-"allows easy use and study of Bible texts, commentaries, lexicons, "
-"dictionaries, and other books. Many frontends are built using this "
-"framework. An installed set of books may be shared among all frontends using "
-"the framework."
-msgstr ""
-"The SWORD Project je snaha o vytvoření programového vybavení pro zkoumání a "
-"studium Božího slova. The SWORD Project Framework umožňuje lehké ovládání "
-"biblických textů, komentářů, slovníků a dalších knih. Několik aplikací "
-"využívá toto programové vybavení. Nainstalované knihy lze sdílet mezi více "
-"aplikacemi, využívající toto programové vybavení."
+msgid "The SWORD Project is an effort to create an ever-expanding software package for research and study of God and His Word. The SWORD Project framework allows easy use and study of Bible texts, commentaries, lexicons, dictionaries, and other books. Many frontends are built using this framework. An installed set of books may be shared among all frontends using the framework."
+msgstr "The SWORD Project je snaha o vytvoření programového vybavení pro zkoumání a studium Božího slova. The SWORD Project Framework umožňuje lehké ovládání biblických textů, komentářů, slovníků a dalších knih. Několik aplikací využívá toto programové vybavení. Nainstalované knihy lze sdílet mezi více aplikacemi, využívající toto programové vybavení."
 
 #: ../src/gnome2/about_sword.c:106
 msgid "About the SWORD Project"
@@ -133,19 +260,133 @@ msgstr "Knihy lze stáhnout ze stránek aplikace SWORD Project"
 msgid "The SWORD Project"
 msgstr "SWORD Project"
 
-#: ../src/gnome2/navbar_versekey_editor.c:877
-#: ../src/gnome2/navbar_versekey_dialog.c:887
-#: ../src/gnome2/navbar_versekey_parallel.c:801
-msgid "Synchronize this window from main window"
-msgstr "Synchronizace okna z hlavního okna aplikace"
+#: ../src/gnome2/about_trans.c:84
+msgid ""
+"Do you like using Xiphos to study the Bible? Would you like to see its display using your native language? You could translate Xiphos! \n"
+"\n"
+"We are always looking for contributions of new translations of Xiphos into other languages. If you are able to translate for us, please see the link below, contact us, and get involved with our efforts."
+msgstr ""
+"Používáte rád(a) Xiphos při studiu Bible? Chtěl(a) byste vidět Xiphos ve svém rodném jazyce? Můžete vytvořit překlad aplikace Xiphos! \n"
+"\n"
+"Rádi uvítáme překlady aplikace Xiphos do dalších jazyků. Pokud jste schopen (schopna) vytvořit překlad, podívejte se na odkaz níže, kontaktujte nás a připojte se k našemu úsilí."
 
-#: ../src/gnome2/about_modules.c:189
-msgid "About Sword Module"
-msgstr "O Sword modulu"
+#: ../src/gnome2/about_trans.c:98
+msgid "About Xiphos Translation"
+msgstr "O překladu aplikace Xiphos"
 
-#: ../src/gnome2/about_modules.c:383 ../src/gnome2/mod_mgr.c:198
-msgid "The module has no About information."
-msgstr "Informace o modulu nejsou k dispozici."
+#: ../src/gnome2/about_trans.c:139
+msgid "See TRANSLATION-HOWTO in Xiphos source"
+msgstr "Viz TRANSLATION-HOWTO u zdrojového kódu Xiphos"
+
+#: ../src/gnome2/about_trans.c:145
+msgid "Xiphos development"
+msgstr "Vývoj aplikace Xiphos"
+
+#: ../src/gnome2/about_xiphos.c:132
+msgid "Copyright 2000-2009 The Xiphos Development Team"
+msgstr "Copyright 2000-2009 The Xiphos Development Team"
+
+#: ../src/gnome2/about_xiphos.c:135
+msgid ""
+"(formerly known as GnomeSword)\n"
+"\n"
+"Powered by The SWORD Project.\n"
+"We would like to thank Troy Griffitts and all the other folks who have given us The SWORD Project."
+msgstr ""
+"(dříve znám jako GnomeSword)\n"
+"\n"
+"Využívá The SWORD Project.\n"
+"Děkujeme Troy Griffittsovi a všem ostatním, kdo vytvořili programové vybavení The SWORD Project."
+
+#: ../src/gnome2/bibletext_dialog.c:525
+msgid "Go to "
+msgstr "Přejít na"
+
+#. info->stock_icon = GTK_STOCK_OPEN;
+#: ../src/gnome2/bookmark_dialog.c:145
+#: ../src/gnome2/bookmarks_menu.c:471
+#: ../src/gnome2/bookmarks_menu.c:897
+#: ../src/gnome2/bookmarks_menu.c:995
+#: ../src/gnome2/bookmarks_treeview.c:131
+#: ../ui/editor_studypad.xml.h:2
+#: ../ui/xi-menus.glade.h:8
+msgid "Bookmark"
+msgstr "Záložka"
+
+#: ../src/gnome2/bookmark_dialog.c:147
+#: ../src/gnome2/bookmarks_menu.c:997
+#: ../src/gnome2/bookmarks_treeview.c:132
+msgid "Enter Folder Name"
+msgstr "Vložte jméno složky"
+
+#: ../src/gnome2/bookmark_dialog.c:149
+#: ../src/gnome2/bookmarks_menu.c:999
+msgid "Folder Name"
+msgstr "Jméno složky"
+
+#: ../src/gnome2/bookmark_dialog.c:150
+#: ../src/gnome2/bookmarks_menu.c:1000
+#: ../src/gnome2/bookmarks_treeview.c:134
+msgid "Folder: "
+msgstr "Složka: "
+
+#: ../src/gnome2/bookmarks_menu.c:457
+#: ../src/gnome2/treekey-editor.c:321
+#: ../ui/xi-menus.glade.h:20
+msgid "Edit"
+msgstr "Upravit"
+
+#: ../src/gnome2/bookmarks_menu.c:474
+msgid "Folder name: "
+msgstr "Jméno složky: "
+
+#: ../src/gnome2/bookmarks_menu.c:477
+msgid "Bookmark name: "
+msgstr "Jméno záložky: "
+
+#: ../src/gnome2/bookmarks_menu.c:480
+#: ../src/gnome2/bookmarks_menu.c:905
+msgid "Verse: "
+msgstr "Verš: "
+
+#: ../src/gnome2/bookmarks_menu.c:481
+#: ../src/gnome2/bookmarks_menu.c:906
+msgid "Module: "
+msgstr "Modul: "
+
+#: ../src/gnome2/bookmarks_menu.c:665
+msgid "Restore Bookmark Folder"
+msgstr "Obnovit složku záložek"
+
+#: ../src/gnome2/bookmarks_menu.c:734
+msgid "Remove the selected folder"
+msgstr "Odstranit vybranou složku"
+
+#: ../src/gnome2/bookmarks_menu.c:736
+msgid "(and all its contents)?"
+msgstr "(a všechno, co obsahuje)?"
+
+#: ../src/gnome2/bookmarks_menu.c:739
+msgid "Remove the selected bookmark"
+msgstr "Odstranit vybranou záložku"
+
+#: ../src/gnome2/bookmarks_menu.c:898
+msgid "Add"
+msgstr "Přidat"
+
+#: ../src/gnome2/bookmarks_menu.c:904
+msgid "Label: "
+msgstr "Jmenovka: "
+
+#: ../src/gnome2/bookmarks_treeview.c:105
+#, c-format
+msgid "Search result: %s"
+msgstr "Výsledky hledání: %s"
+
+#: ../src/gnome2/bookmarks_treeview.c:934
+#: ../src/gnome2/sidebar.c:1438
+msgid "Bookmarks"
+msgstr "Záložky"
 
 #: ../src/gnome2/cipher_key_dialog.c:62
 msgid "Cipher Key?"
@@ -159,76 +400,6 @@ msgstr "pro:"
 msgid "Enter Cipher Key: "
 msgstr "Vložte šifrovací klíč"
 
-#: ../src/gnome2/parallel_view.c:271
-msgid "Copy"
-msgstr "Kopírovat"
-
-#: ../src/gnome2/parallel_view.c:281
-msgid "Detach/Attach"
-msgstr "Uvolnit/Ukotvit"
-
-#: ../src/gnome2/parallel_view.c:287 ../ui/xi-menus.glade.h:38
-msgid "Module Options"
-msgstr "Nastavení modulů"
-
-#. build change parallel modules submenu
-#: ../src/gnome2/parallel_view.c:302
-msgid "Change parallel 1"
-msgstr "Změnit souběžně 1"
-
-#: ../src/gnome2/parallel_view.c:304
-msgid "Change parallel 2"
-msgstr "Změnit souběžně 2"
-
-#: ../src/gnome2/parallel_view.c:306
-msgid "Change parallel 3"
-msgstr "Změnit souběžně 3"
-
-#: ../src/gnome2/parallel_view.c:308
-msgid "Change parallel 4"
-msgstr "Změnit souběžně 4"
-
-#: ../src/gnome2/parallel_view.c:310
-msgid "Change parallel 5"
-msgstr "Změnit souběžně 5"
-
-#: ../src/gnome2/parallel_view.c:467 ../src/gnome2/sidebar.c:599
-#: ../src/gnome2/sidebar.c:605 ../src/gnome2/tabbed_browser.c:231
-#: ../src/main/sidebar.cc:618 ../src/main/sidebar.cc:956
-#: ../src/main/sidebar.cc:957 ../src/main/sidebar.cc:958
-msgid "Parallel View"
-msgstr "Souběžný pohled"
-
-#: ../src/gnome2/find_dialog.c:200 ../src/gnome2/find_dialog.c:369
-msgid "Find"
-msgstr "Hledat"
-
-#: ../src/gnome2/find_dialog.c:218
-msgid "Enter Word or Phrase"
-msgstr "Zadejte slovo nebo výraz"
-
-#: ../src/gnome2/find_dialog.c:234 ../src/gnome2/search_sidebar.c:303
-#: ../ui/search-dialog.glade.h:57
-msgid "Match case"
-msgstr "Velikost písmen"
-
-#: ../src/gnome2/find_dialog.c:241
-msgid "Search backwards"
-msgstr "Hledat pozpátku"
-
-#: ../src/gnome2/find_dialog.c:250 ../src/gnome2/search_sidebar.c:268
-#: ../ui/search-dialog.glade.h:74
-msgid "Regular expression"
-msgstr "Regulární výraz"
-
-#: ../src/gnome2/find_dialog.c:291
-msgid "Find Next"
-msgstr "Najít další"
-
-#: ../src/gnome2/bibletext_dialog.c:525
-msgid "Go to "
-msgstr "Přejít na"
-
 #: ../src/gnome2/dialog.c:241
 msgid "Close without Saving"
 msgstr "Zavřít bez uložení"
@@ -241,53 +412,159 @@ msgstr "Xiphos:"
 msgid "Close _without Saving"
 msgstr "Zavřít _bez uložení"
 
-#: ../src/gnome2/font_dialog.c:297
+#: ../src/gnome2/export_dialog.c:265
+#: ../ui/export-dialog.glade.h:20
+msgid "Please check copyright before exporting!"
+msgstr "Před exportováním prosím prověřte autorská práva!"
+
+#: ../src/gnome2/find_dialog.c:200
+#: ../src/gnome2/find_dialog.c:369
+msgid "Find"
+msgstr "Hledat"
+
+#: ../src/gnome2/find_dialog.c:218
+msgid "Enter Word or Phrase"
+msgstr "Zadejte slovo nebo výraz"
+
+#: ../src/gnome2/find_dialog.c:234
+#: ../src/gnome2/search_sidebar.c:303
+#: ../ui/search-dialog.glade.h:57
+msgid "Match case"
+msgstr "Velikost písmen"
+
+#: ../src/gnome2/find_dialog.c:241
+msgid "Search backwards"
+msgstr "Hledat pozpátku"
+
+#: ../src/gnome2/find_dialog.c:250
+#: ../src/gnome2/search_sidebar.c:268
+#: ../ui/search-dialog.glade.h:74
+msgid "Regular expression"
+msgstr "Regulární výraz"
+
+#: ../src/gnome2/find_dialog.c:291
+msgid "Find Next"
+msgstr "Najít další"
+
+#: ../src/gnome2/font_dialog.c:301
 msgid "Set Module Font"
 msgstr "Nastavit písmo modulu"
 
-#: ../src/gnome2/font_dialog.c:327
+#: ../src/gnome2/font_dialog.c:331
 msgid "Change font for"
 msgstr "Změnit písmo pro"
 
-#: ../src/gnome2/font_dialog.c:331
+#: ../src/gnome2/font_dialog.c:335
 msgid "Module"
 msgstr "Modul"
 
-#: ../src/gnome2/font_dialog.c:335
+#: ../src/gnome2/font_dialog.c:339
 msgid "Current font: "
 msgstr "Aktuální písmo: "
 
-#: ../src/gnome2/font_dialog.c:372
+#: ../src/gnome2/font_dialog.c:376
 msgid "+0"
 msgstr "+0"
 
-#: ../src/gnome2/font_dialog.c:376
+#: ../src/gnome2/font_dialog.c:380
 msgid "Use the default font for this module"
 msgstr "Použít výchozí písmo pro modul"
 
-#: ../src/gnome2/toolbar_nav.c:416
-msgid "Move backwards through history"
-msgstr "Pohyb v historii pozpátku"
+#: ../src/gnome2/main_window.c:740
+msgid "Xiphos - Bible Study Software"
+msgstr "Xiphos - software pro studium Bible"
 
-#: ../src/gnome2/toolbar_nav.c:437
-msgid "Move foward through history"
-msgstr "Pohyb v historii dopředu"
+#: ../src/gnome2/main_window.c:794
+msgid "Open a new tab"
+msgstr "Otevřít nový panel"
 
-#: ../src/gnome2/toolbar_nav.c:458
-msgid "Select a Book of the Bible"
-msgstr "Výběr knihy z Bible"
+#: ../src/gnome2/main_window.c:880
+#: ../src/gnome2/sidebar.c:600
+#: ../src/gnome2/sidebar.c:606
+#: ../src/main/sidebar.cc:638
+#: ../src/main/sidebar.cc:964
+#: ../src/main/sidebar.cc:965
+#: ../src/main/sidebar.cc:966
+msgid "Standard View"
+msgstr "Standardní pohled"
 
-#: ../src/gnome2/toolbar_nav.c:523
-msgid "Change Chapter"
-msgstr "Změna kapitoly"
+#: ../src/gnome2/main_window.c:957
+msgid "Commentary View"
+msgstr "Komentář/Výklad"
 
-#: ../src/gnome2/toolbar_nav.c:593
-msgid "Change Verse"
-msgstr "Změna verše"
+#: ../src/gnome2/main_window.c:973
+msgid "Book View"
+msgstr "Kniha"
 
-#: ../src/gnome2/toolbar_nav.c:661
-msgid "Enter a Verse reference in Book 1:1 format and press Return"
-msgstr "Zadej odkaz na verš ve formátu  Kniha 1:1  a stiskni Enter"
+#: ../src/gnome2/main_window.c:998
+msgid "Welcome to Xiphos"
+msgstr "Vítá vás Xiphos"
+
+#: ../src/gnome2/menu_popup.c:1126
+msgid ""
+"Renaming is not available in Windows.\n"
+"\n"
+"Xiphos is limited by Windows' filesystem,\n"
+"because it disallows the renaming of filename\n"
+"components of currently-open files,\n"
+"such as the contents of this commentary.\n"
+"Therefore, personal commentary renaming is\n"
+"not available in the Windows environment."
+msgstr ""
+"Přejmenování není ve Windows dostupné.\n"
+"\n"
+"Aplikace Xiphos je omezena systémem souborů\n"
+"Windows. Problémy totiž vznikají s přejmenováváním\n"
+"právě otevřených souborů, jako je například obsah\n"
+"tohoto komentáře. Proto přejmenování osobního\n"
+"komentáře není dostupné v prostředí Windows."
+
+#: ../src/gnome2/menu_popup.c:1145
+msgid "Rename Commentary"
+msgstr "Přejmenovat komentář"
+
+#: ../src/gnome2/menu_popup.c:1148
+msgid "Choose Commentary Name"
+msgstr "Vybrat jméno komentáře"
+
+#: ../src/gnome2/menu_popup.c:1150
+msgid "New Name"
+msgstr "Nové jméno"
+
+#: ../src/gnome2/menu_popup.c:1151
+#: ../src/gnome2/treekey-editor.c:131
+#: ../src/gnome2/treekey-editor.c:190
+#: ../src/gnome2/treekey-editor.c:276
+#: ../src/main/prayerlists.cc:240
+msgid "Name: "
+msgstr "Jméno: "
+
+#: ../src/gnome2/menu_popup.c:1161
+#: ../src/main/prayerlists.cc:254
+msgid "Module names must contain [A-Za-z0-9_] only."
+msgstr "Jméno smí obsahovat jen znaky [A-Za-z0-9_]."
+
+#: ../src/gnome2/menu_popup.c:1168
+#: ../src/main/prayerlists.cc:261
+msgid "Xiphos already knows a module by that name."
+msgstr "Modul s tímto jménem už exituje."
+
+#: ../src/gnome2/menu_popup.c:1211
+#, c-format
+msgid ""
+"Failed to create new configuration:\n"
+"%s"
+msgstr ""
+"Nepodařilo se vytvořit novou konfiguraci:\n"
+"%s"
+
+#: ../src/gnome2/menu_popup.c:1220
+msgid ""
+"Configuration build error:\n"
+"\n"
+msgstr ""
+"Chyba během vytváření konfigurace:\n"
+"\n"
 
 #: ../src/gnome2/mod_mgr.c:333
 msgid "Install these modules:"
@@ -386,12 +663,14 @@ msgstr ""
 msgid "Journals and prayer lists cannot be indexed."
 msgstr "Pro Deník a Modlitební seznam není možno vytvořit rejstřík."
 
-#: ../src/gnome2/mod_mgr.c:535 ../src/gnome2/mod_mgr.c:2753
+#: ../src/gnome2/mod_mgr.c:535
+#: ../src/gnome2/mod_mgr.c:2753
 #: ../ui/module-manager.glade.h:15
 msgid "Install"
 msgstr "Přidat"
 
-#: ../src/gnome2/mod_mgr.c:537 ../src/gnome2/treekey-editor.c:315
+#: ../src/gnome2/mod_mgr.c:537
+#: ../src/gnome2/treekey-editor.c:315
 msgid "Remove"
 msgstr "Odstranit"
 
@@ -412,16 +691,23 @@ msgstr "Smazání"
 msgid "%s failed"
 msgstr "%s se nezdařilo"
 
-#: ../src/gnome2/mod_mgr.c:547 ../src/gnome2/mod_mgr.c:1267
+#: ../src/gnome2/mod_mgr.c:547
+#: ../src/gnome2/mod_mgr.c:1267
 msgid "Finished"
 msgstr "Dokončeno"
 
-#: ../src/gnome2/mod_mgr.c:712 ../src/gnome2/mod_mgr.c:714
-#: ../src/gnome2/mod_mgr.c:816 ../src/gnome2/mod_mgr.c:851
-#: ../src/gnome2/mod_mgr.c:853 ../src/gnome2/utilities.c:346
-#: ../src/gnome2/utilities.c:411 ../src/gnome2/utilities.c:413
-#: ../src/gnome2/utilities.c:1031 ../src/main/sidebar.cc:801
-#: ../src/main/sidebar.cc:873 ../src/main/sidebar.cc:875
+#: ../src/gnome2/mod_mgr.c:712
+#: ../src/gnome2/mod_mgr.c:714
+#: ../src/gnome2/mod_mgr.c:816
+#: ../src/gnome2/mod_mgr.c:851
+#: ../src/gnome2/mod_mgr.c:853
+#: ../src/gnome2/utilities.c:346
+#: ../src/gnome2/utilities.c:411
+#: ../src/gnome2/utilities.c:413
+#: ../src/gnome2/utilities.c:1031
+#: ../src/main/sidebar.cc:801
+#: ../src/main/sidebar.cc:873
+#: ../src/main/sidebar.cc:875
 msgid "Unknown"
 msgstr "Neznámé"
 
@@ -442,40 +728,55 @@ msgstr ""
 "Tříděné podle\n"
 "typu modulu"
 
-#: ../src/gnome2/mod_mgr.c:1029 ../src/gnome2/utilities.c:472
-#: ../src/main/sidebar.cc:948 ../src/main/sidebar.cc:950
+#: ../src/gnome2/mod_mgr.c:1029
+#: ../src/gnome2/utilities.c:472
+#: ../src/main/sidebar.cc:948
+#: ../src/main/sidebar.cc:950
 msgid "Biblical Texts"
 msgstr "Biblické texty"
 
-#: ../src/gnome2/mod_mgr.c:1033 ../src/gnome2/utilities.c:476
-#: ../src/main/sidebar.cc:650 ../src/main/sidebar.cc:973
-#: ../src/main/sidebar.cc:975 ../ui/prefs.glade.h:33
+#: ../src/gnome2/mod_mgr.c:1033
+#: ../src/gnome2/utilities.c:476
+#: ../src/main/sidebar.cc:650
+#: ../src/main/sidebar.cc:973
+#: ../src/main/sidebar.cc:975
+#: ../ui/prefs.glade.h:33
 msgid "Commentaries"
 msgstr "Komentáře/Výklady"
 
-#: ../src/gnome2/mod_mgr.c:1037 ../src/gnome2/utilities.c:480
-#: ../src/main/sidebar.cc:982 ../src/main/sidebar.cc:984
+#: ../src/gnome2/mod_mgr.c:1037
+#: ../src/gnome2/utilities.c:480
+#: ../src/main/sidebar.cc:982
+#: ../src/main/sidebar.cc:984
 msgid "Dictionaries"
 msgstr "Slovníky"
 
-#: ../src/gnome2/mod_mgr.c:1041 ../src/gnome2/utilities.c:484
-#: ../src/main/sidebar.cc:991 ../src/main/sidebar.cc:993
+#: ../src/gnome2/mod_mgr.c:1041
+#: ../src/gnome2/utilities.c:484
+#: ../src/main/sidebar.cc:991
+#: ../src/main/sidebar.cc:993
 msgid "Daily Devotionals"
 msgstr "Čtení na každý den"
 
-#: ../src/gnome2/mod_mgr.c:1045 ../src/gnome2/utilities.c:488
-#: ../src/main/sidebar.cc:660 ../src/main/sidebar.cc:1000
+#: ../src/gnome2/mod_mgr.c:1045
+#: ../src/gnome2/utilities.c:488
+#: ../src/main/sidebar.cc:660
+#: ../src/main/sidebar.cc:1000
 #: ../src/main/sidebar.cc:1002
 msgid "General Books"
 msgstr "Knihy obecně"
 
-#: ../src/gnome2/mod_mgr.c:1049 ../src/gnome2/utilities.c:492
-#: ../src/main/sidebar.cc:1009 ../src/main/sidebar.cc:1011
+#: ../src/gnome2/mod_mgr.c:1049
+#: ../src/gnome2/utilities.c:492
+#: ../src/main/sidebar.cc:1009
+#: ../src/main/sidebar.cc:1011
 msgid "Maps"
 msgstr "Mapy"
 
-#: ../src/gnome2/mod_mgr.c:1053 ../src/gnome2/utilities.c:496
-#: ../src/main/sidebar.cc:1018 ../src/main/sidebar.cc:1020
+#: ../src/gnome2/mod_mgr.c:1053
+#: ../src/gnome2/utilities.c:496
+#: ../src/main/sidebar.cc:1018
+#: ../src/main/sidebar.cc:1020
 msgid "Images"
 msgstr "Obrazy"
 
@@ -495,9 +796,12 @@ msgstr "Aktualizace"
 msgid "Uninstalled"
 msgstr "Odinstalováno"
 
-#: ../src/gnome2/mod_mgr.c:1074 ../src/gnome2/sidebar.c:616
-#: ../src/gnome2/utilities.c:501 ../src/main/prayerlists.cc:238
-#: ../src/main/sidebar.cc:1028 ../src/main/sidebar.cc:1030
+#: ../src/gnome2/mod_mgr.c:1074
+#: ../src/gnome2/sidebar.c:616
+#: ../src/gnome2/utilities.c:501
+#: ../src/main/prayerlists.cc:238
+#: ../src/main/sidebar.cc:1028
+#: ../src/main/sidebar.cc:1030
 msgid "Prayer List/Journal"
 msgstr "Modlitební seznam/Deník"
 
@@ -530,34 +834,24 @@ msgid "Installed"
 msgstr "Instalovaný"
 
 #: ../src/gnome2/mod_mgr.c:1466
-msgid ""
-"The index icon means you have built an optimized ('lucene') index for this "
-"module for fast searching (see the Maintenance pane for this function)"
-msgstr ""
-"Ikona rejstříku značí, že jste vytvořily optimalizovaný ('lucene') index pro "
-"tento modul. To umožňuje rychlé vyhledávání (viz \" -"
+msgid "The index icon means you have built an optimized ('lucene') index for this module for fast searching (see the Maintenance pane for this function)"
+msgstr "Ikona rejstříku značí, že jste vytvořily optimalizovaný ('lucene') index pro tento modul. To umožňuje rychlé vyhledávání (viz \" -"
 
 #: ../src/gnome2/mod_mgr.c:1484
-msgid ""
-"The lock icon means this module is encrypted, and requires that you purchase "
-"an unlock key from the content owner"
-msgstr ""
-"Ikona se zámkem znamená, že tento modul je šifrován, a je potřeba pořídit si "
-"klíč pro odemčení od vlastníka tohoto modulu"
+msgid "The lock icon means this module is encrypted, and requires that you purchase an unlock key from the content owner"
+msgstr "Ikona se zámkem znamená, že tento modul je šifrován, a je potřeba pořídit si klíč pro odemčení od vlastníka tohoto modulu"
 
 #. 2
-#: ../src/gnome2/mod_mgr.c:1501 ../src/gnome2/sidebar.c:954
-#: ../src/gnome2/sidebar.c:1122 ../ui/xi-menus.glade.h:1
+#: ../src/gnome2/mod_mgr.c:1501
+#: ../src/gnome2/sidebar.c:954
+#: ../src/gnome2/sidebar.c:1122
+#: ../ui/xi-menus.glade.h:1
 msgid "About"
 msgstr "O modulu"
 
 #: ../src/gnome2/mod_mgr.c:1521
-msgid ""
-"The refresh icon means the Installed module is older than the newer "
-"Available module: You should update the module"
-msgstr ""
-"Ikona pro obnovení značí, že instalovaný modul je starší, než nejnovější "
-"dostupná verze: Měl byste modul aktualizovat"
+msgid "The refresh icon means the Installed module is older than the newer Available module: You should update the module"
+msgstr "Ikona pro obnovení značí, že instalovaný modul je starší, než nejnovější dostupná verze: Měl byste modul aktualizovat"
 
 #: ../src/gnome2/mod_mgr.c:1533
 msgid "Available"
@@ -571,7 +865,8 @@ msgstr "Velikost"
 msgid "Description"
 msgstr "Popis"
 
-#: ../src/gnome2/mod_mgr.c:1583 ../src/gnome2/mod_mgr.c:1660
+#: ../src/gnome2/mod_mgr.c:1583
+#: ../src/gnome2/mod_mgr.c:1660
 msgid "Configure"
 msgstr "Nastavení"
 
@@ -595,8 +890,9 @@ msgstr "Adresář"
 msgid "Sources"
 msgstr "Zdroje"
 
-#: ../src/gnome2/mod_mgr.c:1664 ../src/gnome2/sidebar.c:1462
+#: ../src/gnome2/mod_mgr.c:1664
 #: ../src/gnome2/preferences_dialog.c:1784
+#: ../src/gnome2/sidebar.c:1462
 msgid "Modules"
 msgstr "Moduly"
 
@@ -616,7 +912,8 @@ msgstr "Prosím obnovit"
 msgid "Your module list is not up to date!"
 msgstr "Váš seznam modulů není aktuální!"
 
-#: ../src/gnome2/mod_mgr.c:2336 ../src/gnome2/mod_mgr.c:2542
+#: ../src/gnome2/mod_mgr.c:2336
+#: ../src/gnome2/mod_mgr.c:2542
 msgid "Remove the selected source"
 msgstr "Odstranit vybraný zdroj"
 
@@ -649,141 +946,167 @@ msgstr "Zdroj s tímto jménem už existuje."
 msgid "Delete a remote source"
 msgstr "Smazat vzdálený zdroj"
 
-#: ../src/gnome2/sidebar_dialog.c:135
-msgid "Sidebar"
-msgstr "Postranní lišta"
-
-#: ../src/gnome2/html.c:629
-#, c-format
-msgid "Page %d of %d"
-msgstr "Strana %d z %d"
-
-#: ../src/gnome2/main_window.c:740
-msgid "Xiphos - Bible Study Software"
-msgstr "Xiphos - software pro studium Bible"
-
-#: ../src/gnome2/main_window.c:794
-msgid "Open a new tab"
-msgstr "Otevřít nový panel"
-
-#: ../src/gnome2/main_window.c:880 ../src/gnome2/sidebar.c:600
-#: ../src/gnome2/sidebar.c:606 ../src/main/sidebar.cc:638
-#: ../src/main/sidebar.cc:964 ../src/main/sidebar.cc:965
-#: ../src/main/sidebar.cc:966
-msgid "Standard View"
-msgstr "Standardní pohled"
-
-#: ../src/gnome2/main_window.c:957
-msgid "Commentary View"
-msgstr "Komentář/Výklad"
-
-#: ../src/gnome2/main_window.c:973
-msgid "Book View"
-msgstr "Kniha"
-
-#: ../src/gnome2/main_window.c:998
-msgid "Welcome to Xiphos"
-msgstr "Vítá vás Xiphos"
-
-#: ../src/gnome2/navbar_book.c:359 ../src/gnome2/navbar_book_dialog.c:299
+#: ../src/gnome2/navbar_book.c:359
+#: ../src/gnome2/navbar_book_dialog.c:299
 msgid "Go outward, to the section containing this one"
 msgstr "Jít ven, na sekci obsahující tuto položku"
 
-#: ../src/gnome2/navbar_book.c:375 ../src/gnome2/navbar_book_dialog.c:315
+#: ../src/gnome2/navbar_book.c:375
+#: ../src/gnome2/navbar_book_dialog.c:315
 msgid "Go to previous item"
 msgstr "Jdi na předchozí položku"
 
-#: ../src/gnome2/navbar_book.c:390 ../src/gnome2/navbar_book_dialog.c:330
+#: ../src/gnome2/navbar_book.c:390
+#: ../src/gnome2/navbar_book_dialog.c:330
 msgid "Go to next item"
 msgstr "Jdi na následující položku"
 
-#: ../src/gnome2/navbar_book.c:406 ../src/gnome2/navbar_book_dialog.c:346
+#: ../src/gnome2/navbar_book.c:406
+#: ../src/gnome2/navbar_book_dialog.c:346
 msgid "Go inward, to the first subsection"
 msgstr "Jít dovnitř, na první podsekci"
 
-#. 0
-#: ../src/gnome2/sidebar.c:942 ../src/gnome2/sidebar.c:1110
-msgid "Open in a new tab"
-msgstr "Otevřít v novém panelu"
+#: ../src/gnome2/navbar_versekey_dialog.c:887
+#: ../src/gnome2/navbar_versekey_editor.c:877
+#: ../src/gnome2/navbar_versekey_parallel.c:801
+msgid "Synchronize this window from main window"
+msgstr "Synchronizace okna z hlavního okna aplikace"
 
-#: ../src/gnome2/sidebar.c:943 ../src/gnome2/sidebar.c:1111
-msgid "Open selected module in a new tab"
-msgstr "Otevřít vybraný modul v novém panelu"
+#: ../src/gnome2/parallel_dialog.c:635
+#: ../src/gnome2/preferences_dialog.c:1790
+msgid "Parallel"
+msgstr "Souběžně"
 
-#. 1
-#: ../src/gnome2/sidebar.c:948
-msgid "Open in a separate window"
-msgstr "Otevřít v samostatném okně"
+#: ../src/gnome2/parallel_view.c:271
+msgid "Copy"
+msgstr "Kopírovat"
 
-#: ../src/gnome2/sidebar.c:949
-msgid "Open selected module in a separate ['dialog'] window"
-msgstr "Otevřít vybraný modul v samostatném dialogovém okně"
+#: ../src/gnome2/parallel_view.c:281
+msgid "Detach/Attach"
+msgstr "Uvolnit/Ukotvit"
 
-#: ../src/gnome2/sidebar.c:955 ../src/gnome2/sidebar.c:1123
-msgid "View information about the selected dialog"
-msgstr "Zobrazit informace o vybraném dialogovém okně"
+#: ../src/gnome2/parallel_view.c:287
+#: ../ui/xi-menus.glade.h:38
+msgid "Module Options"
+msgstr "Nastavení modulů"
 
-#: ../src/gnome2/sidebar.c:1046
-msgid "Simple"
-msgstr "Jednoduchý"
+#. build change parallel modules submenu
+#: ../src/gnome2/parallel_view.c:302
+msgid "Change parallel 1"
+msgstr "Změnit souběžně 1"
 
-#: ../src/gnome2/sidebar.c:1047
-msgid "Create a new simple prayer list"
-msgstr "Nový jednoduchý modlitební seznam"
+#: ../src/gnome2/parallel_view.c:304
+msgid "Change parallel 2"
+msgstr "Změnit souběžně 2"
 
-#: ../src/gnome2/sidebar.c:1053
-msgid "Subject"
-msgstr "Předmět"
+#: ../src/gnome2/parallel_view.c:306
+msgid "Change parallel 3"
+msgstr "Změnit souběžně 3"
 
-#: ../src/gnome2/sidebar.c:1060
-msgid "Monthly"
-msgstr "Měsíčně"
+#: ../src/gnome2/parallel_view.c:308
+msgid "Change parallel 4"
+msgstr "Změnit souběžně 4"
 
-#: ../src/gnome2/sidebar.c:1061 ../src/gnome2/sidebar.c:1068
-#: ../src/gnome2/sidebar.c:1075
-msgid "Create a new prayer list"
-msgstr "Vytvořit nový modlitební seznam"
+#: ../src/gnome2/parallel_view.c:310
+msgid "Change parallel 5"
+msgstr "Změnit souběžně 5"
 
-#: ../src/gnome2/sidebar.c:1067
-msgid "Daily Journal"
-msgstr "Deník"
+#: ../src/gnome2/parallel_view.c:467
+#: ../src/gnome2/sidebar.c:599
+#: ../src/gnome2/sidebar.c:605
+#: ../src/gnome2/tabbed_browser.c:231
+#: ../src/main/sidebar.cc:618
+#: ../src/main/sidebar.cc:956
+#: ../src/main/sidebar.cc:957
+#: ../src/main/sidebar.cc:958
+msgid "Parallel View"
+msgstr "Souběžný pohled"
 
-#: ../src/gnome2/sidebar.c:1074
-msgid "Outlined Topic"
-msgstr "Navržené téma"
+#: ../src/gnome2/preferences_cell_renderer.c:398
+msgid "Text"
+msgstr "Text"
 
-#. 1
-#: ../src/gnome2/sidebar.c:1116 ../ui/xi-menus.glade.h:45
-msgid "Open in editor"
-msgstr "Otevřít v editoru"
+#: ../src/gnome2/preferences_cell_renderer.c:400
+msgid "Text to render"
+msgstr "Text k vykreslení"
 
-#: ../src/gnome2/sidebar.c:1117
-msgid "Open selected module in a dialog"
-msgstr "Otevřít vybraný modul v dialogovém okně"
+#: ../src/gnome2/preferences_cell_renderer.c:406
+msgid "Pixbuf Object"
+msgstr "Pixbuf objekt"
 
-#: ../src/gnome2/sidebar.c:1438 ../src/gnome2/bookmarks_treeview.c:934
-msgid "Bookmarks"
-msgstr "Záložky"
+#: ../src/gnome2/preferences_cell_renderer.c:408
+msgid "The pixbuf to render."
+msgstr "Poskytnutý pixbuf."
 
-#: ../src/gnome2/sidebar.c:1446
-msgid "Search"
-msgstr "Hledat"
+#: ../src/gnome2/preferences_dialog.c:1231
+#: ../src/gnome2/preferences_dialog.c:1269
+#: ../src/gnome2/preferences_dialog.c:1306
+#: ../src/gnome2/preferences_dialog.c:1341
+#: ../src/gnome2/preferences_dialog.c:1375
+#: ../src/gnome2/preferences_dialog.c:1408
+#: ../src/gnome2/preferences_dialog.c:1440
+#: ../src/gnome2/preferences_dialog.c:1473
+#: ../src/gnome2/preferences_dialog.c:1505
+#: ../src/gnome2/preferences_dialog.c:1539
+#: ../src/gnome2/preferences_dialog.c:1574
+#: ../src/gnome2/preferences_dialog.c:1609
+#: ../src/gnome2/preferences_dialog.c:1645
+#: ../src/gnome2/preferences_dialog.c:2045
+msgid "-- Select --"
+msgstr "-- Vybrat --"
 
-#: ../src/gnome2/sidebar.c:1454
-msgid "Verse List"
-msgstr "Verše"
+#: ../src/gnome2/preferences_dialog.c:1678
+#: ../ui/prefs.glade.h:74
+msgid "Preferences"
+msgstr "Nastavení"
 
-#: ../src/gnome2/search_dialog.c:61 ../src/main/search_dialog.cc:60
+#: ../src/gnome2/preferences_dialog.c:1760
+msgid "Fonts"
+msgstr "Písma"
+
+#: ../src/gnome2/preferences_dialog.c:1763
+msgid "Color"
+msgstr "Barva"
+
+#: ../src/gnome2/preferences_dialog.c:1766
+msgid "Sizes"
+msgstr "Velikosti"
+
+#: ../src/gnome2/preferences_dialog.c:1770
+msgid "General"
+msgstr "Obecné"
+
+#: ../src/gnome2/preferences_dialog.c:1773
+#: ../ui/prefs.glade.h:85
+msgid "Tabs and Panes"
+msgstr "Panely a pole"
+
+#: ../src/gnome2/preferences_dialog.c:1780
+msgid "Options"
+msgstr "Nastavení"
+
+#: ../src/gnome2/preferences_dialog.c:1787
+msgid "Main"
+msgstr "Hlavní"
+
+#: ../src/gnome2/preferences_dialog.c:1793
+msgid "Special"
+msgstr "Zvláštní"
+
+#: ../src/gnome2/search_dialog.c:61
+#: ../src/main/search_dialog.cc:60
 #: ../src/main/search_sidebar.cc:54
 msgid "Searching the "
 msgstr "Prohledávání"
 
-#: ../src/gnome2/search_dialog.c:62 ../src/main/search_dialog.cc:61
+#: ../src/gnome2/search_dialog.c:62
+#: ../src/main/search_dialog.cc:61
 #: ../src/main/search_sidebar.cc:55
 msgid " Module"
 msgstr " Modul"
 
-#: ../src/gnome2/search_dialog.c:63 ../src/main/search_dialog.cc:62
+#: ../src/gnome2/search_dialog.c:63
+#: ../src/main/search_dialog.cc:62
 #: ../src/main/search_sidebar.cc:56
 msgid "found in "
 msgstr "nalezeno v"
@@ -824,7 +1147,8 @@ msgstr "Hledat modul"
 msgid "Bible"
 msgstr "Bible"
 
-#: ../src/gnome2/search_sidebar.c:229 ../ui/prefs.glade.h:35
+#: ../src/gnome2/search_sidebar.c:229
+#: ../ui/prefs.glade.h:35
 msgid "Commentary"
 msgstr "Komentář/Výklad"
 
@@ -832,11 +1156,13 @@ msgstr "Komentář/Výklad"
 msgid "Search Type"
 msgstr "Typ hledání"
 
-#: ../src/gnome2/search_sidebar.c:257 ../ui/search-dialog.glade.h:64
+#: ../src/gnome2/search_sidebar.c:257
+#: ../ui/search-dialog.glade.h:64
 msgid "Multi word"
 msgstr "Více slov"
 
-#: ../src/gnome2/search_sidebar.c:276 ../ui/search-dialog.glade.h:44
+#: ../src/gnome2/search_sidebar.c:276
+#: ../ui/search-dialog.glade.h:44
 msgid "Exact phrase"
 msgstr "Přesný výraz"
 
@@ -872,202 +1198,82 @@ msgstr "Dolní"
 msgid "Upper"
 msgstr "Horní"
 
-#. info->stock_icon = GTK_STOCK_OPEN;
-#: ../src/gnome2/bookmark_dialog.c:145 ../src/gnome2/bookmarks_menu.c:471
-#: ../src/gnome2/bookmarks_menu.c:897 ../src/gnome2/bookmarks_menu.c:995
-#: ../src/gnome2/bookmarks_treeview.c:131 ../ui/editor_studypad.xml.h:2
-#: ../ui/xi-menus.glade.h:8
-msgid "Bookmark"
-msgstr "Záložka"
+#. 0
+#: ../src/gnome2/sidebar.c:942
+#: ../src/gnome2/sidebar.c:1110
+msgid "Open in a new tab"
+msgstr "Otevřít v novém panelu"
 
-#: ../src/gnome2/bookmark_dialog.c:147 ../src/gnome2/bookmarks_menu.c:997
-#: ../src/gnome2/bookmarks_treeview.c:132
-msgid "Enter Folder Name"
-msgstr "Vložte jméno složky"
+#: ../src/gnome2/sidebar.c:943
+#: ../src/gnome2/sidebar.c:1111
+msgid "Open selected module in a new tab"
+msgstr "Otevřít vybraný modul v novém panelu"
 
-#: ../src/gnome2/bookmark_dialog.c:149 ../src/gnome2/bookmarks_menu.c:999
-msgid "Folder Name"
-msgstr "Jméno složky"
+#. 1
+#: ../src/gnome2/sidebar.c:948
+msgid "Open in a separate window"
+msgstr "Otevřít v samostatném okně"
 
-#: ../src/gnome2/bookmark_dialog.c:150 ../src/gnome2/bookmarks_menu.c:1000
-#: ../src/gnome2/bookmarks_treeview.c:134
-msgid "Folder: "
-msgstr "Složka: "
+#: ../src/gnome2/sidebar.c:949
+msgid "Open selected module in a separate ['dialog'] window"
+msgstr "Otevřít vybraný modul v samostatném dialogovém okně"
 
-#: ../src/gnome2/preferences_dialog.c:1231
-#: ../src/gnome2/preferences_dialog.c:1269
-#: ../src/gnome2/preferences_dialog.c:1306
-#: ../src/gnome2/preferences_dialog.c:1341
-#: ../src/gnome2/preferences_dialog.c:1375
-#: ../src/gnome2/preferences_dialog.c:1408
-#: ../src/gnome2/preferences_dialog.c:1440
-#: ../src/gnome2/preferences_dialog.c:1473
-#: ../src/gnome2/preferences_dialog.c:1505
-#: ../src/gnome2/preferences_dialog.c:1539
-#: ../src/gnome2/preferences_dialog.c:1574
-#: ../src/gnome2/preferences_dialog.c:1609
-#: ../src/gnome2/preferences_dialog.c:1645
-#: ../src/gnome2/preferences_dialog.c:2045
-msgid "-- Select --"
-msgstr "-- Vybrat --"
+#: ../src/gnome2/sidebar.c:955
+#: ../src/gnome2/sidebar.c:1123
+msgid "View information about the selected dialog"
+msgstr "Zobrazit informace o vybraném dialogovém okně"
 
-#: ../src/gnome2/preferences_dialog.c:1678 ../ui/prefs.glade.h:74
-msgid "Preferences"
-msgstr "Nastavení"
+#: ../src/gnome2/sidebar.c:1046
+msgid "Simple"
+msgstr "Jednoduchý"
 
-#: ../src/gnome2/preferences_dialog.c:1760
-msgid "Fonts"
-msgstr "Písma"
+#: ../src/gnome2/sidebar.c:1047
+msgid "Create a new simple prayer list"
+msgstr "Nový jednoduchý modlitební seznam"
 
-#: ../src/gnome2/preferences_dialog.c:1763
-msgid "Color"
-msgstr "Barva"
+#: ../src/gnome2/sidebar.c:1053
+msgid "Subject"
+msgstr "Předmět"
 
-#: ../src/gnome2/preferences_dialog.c:1766
-msgid "Sizes"
-msgstr "Velikosti"
+#: ../src/gnome2/sidebar.c:1060
+msgid "Monthly"
+msgstr "Měsíčně"
 
-#: ../src/gnome2/preferences_dialog.c:1770
-msgid "General"
-msgstr "Obecné"
+#: ../src/gnome2/sidebar.c:1061
+#: ../src/gnome2/sidebar.c:1068
+#: ../src/gnome2/sidebar.c:1075
+msgid "Create a new prayer list"
+msgstr "Vytvořit nový modlitební seznam"
 
-#: ../src/gnome2/preferences_dialog.c:1773 ../ui/prefs.glade.h:85
-msgid "Tabs and Panes"
-msgstr "Panely a pole"
+#: ../src/gnome2/sidebar.c:1067
+msgid "Daily Journal"
+msgstr "Deník"
 
-#: ../src/gnome2/preferences_dialog.c:1780
-msgid "Options"
-msgstr "Nastavení"
+#: ../src/gnome2/sidebar.c:1074
+msgid "Outlined Topic"
+msgstr "Navržené téma"
 
-#: ../src/gnome2/preferences_dialog.c:1787
-msgid "Main"
-msgstr "Hlavní"
+#. 1
+#: ../src/gnome2/sidebar.c:1116
+#: ../ui/xi-menus.glade.h:45
+msgid "Open in editor"
+msgstr "Otevřít v editoru"
 
-#: ../src/gnome2/preferences_dialog.c:1790 ../src/gnome2/parallel_dialog.c:635
-msgid "Parallel"
-msgstr "Souběžně"
+#: ../src/gnome2/sidebar.c:1117
+msgid "Open selected module in a dialog"
+msgstr "Otevřít vybraný modul v dialogovém okně"
 
-#: ../src/gnome2/preferences_dialog.c:1793
-msgid "Special"
-msgstr "Zvláštní"
+#: ../src/gnome2/sidebar.c:1446
+msgid "Search"
+msgstr "Hledat"
 
-#: ../src/gnome2/preferences_cell_renderer.c:398
-msgid "Text"
-msgstr "Text"
+#: ../src/gnome2/sidebar.c:1454
+msgid "Verse List"
+msgstr "Verše"
 
-#: ../src/gnome2/preferences_cell_renderer.c:400
-msgid "Text to render"
-msgstr "Text k vykreslení"
-
-#: ../src/gnome2/preferences_cell_renderer.c:406
-msgid "Pixbuf Object"
-msgstr "Pixbuf objekt"
-
-#: ../src/gnome2/preferences_cell_renderer.c:408
-msgid "The pixbuf to render."
-msgstr "Poskytnutý pixbuf."
-
-#: ../src/gnome2/about_xiphos.c:132
-msgid "Copyright 2000-2009 The Xiphos Development Team"
-msgstr "Copyright 2000-2009 The Xiphos Development Team"
-
-#: ../src/gnome2/about_xiphos.c:135
-msgid ""
-"(formerly known as GnomeSword)\n"
-"\n"
-"Powered by The SWORD Project.\n"
-"We would like to thank Troy Griffitts and all the other folks who have given "
-"us The SWORD Project."
-msgstr ""
-"(dříve znám jako GnomeSword)\n"
-"\n"
-"Využívá The SWORD Project.\n"
-"Děkujeme Troy Griffittsovi a všem ostatním, kdo vytvořili programové "
-"vybavení The SWORD Project."
-
-#: ../src/gnome2/bookmarks_menu.c:457 ../src/gnome2/treekey-editor.c:321
-#: ../ui/xi-menus.glade.h:20
-msgid "Edit"
-msgstr "Upravit"
-
-#: ../src/gnome2/bookmarks_menu.c:474
-msgid "Folder name: "
-msgstr "Jméno složky: "
-
-#: ../src/gnome2/bookmarks_menu.c:477
-msgid "Bookmark name: "
-msgstr "Jméno záložky: "
-
-#: ../src/gnome2/bookmarks_menu.c:480 ../src/gnome2/bookmarks_menu.c:905
-msgid "Verse: "
-msgstr "Verš: "
-
-#: ../src/gnome2/bookmarks_menu.c:481 ../src/gnome2/bookmarks_menu.c:906
-msgid "Module: "
-msgstr "Modul: "
-
-#: ../src/gnome2/bookmarks_menu.c:665
-msgid "Restore Bookmark Folder"
-msgstr "Obnovit složku záložek"
-
-#: ../src/gnome2/bookmarks_menu.c:734
-msgid "Remove the selected folder"
-msgstr "Odstranit vybranou složku"
-
-#: ../src/gnome2/bookmarks_menu.c:736
-msgid "(and all its contents)?"
-msgstr "(a všechno, co obsahuje)?"
-
-#: ../src/gnome2/bookmarks_menu.c:739
-msgid "Remove the selected bookmark"
-msgstr "Odstranit vybranou záložku"
-
-#: ../src/gnome2/bookmarks_menu.c:898
-msgid "Add"
-msgstr "Přidat"
-
-#: ../src/gnome2/bookmarks_menu.c:904
-msgid "Label: "
-msgstr "Jmenovka: "
-
-#: ../src/gnome2/treekey-editor.c:129 ../src/gnome2/treekey-editor.c:188
-#: ../src/gnome2/treekey-editor.c:274
-msgid "Prayer List/Journal Item"
-msgstr "Položka Modlitebního seznamu/Deníku"
-
-#: ../src/gnome2/treekey-editor.c:130 ../src/gnome2/treekey-editor.c:189
-#: ../src/gnome2/treekey-editor.c:275
-msgid "New name"
-msgstr "Nové jméno"
-
-#: ../src/gnome2/treekey-editor.c:131 ../src/gnome2/treekey-editor.c:190
-#: ../src/gnome2/treekey-editor.c:276 ../src/main/prayerlists.cc:240
-msgid "Name: "
-msgstr "Jméno: "
-
-#: ../src/gnome2/treekey-editor.c:245
-msgid "Remove the selected item"
-msgstr "Odstranit vybranou složku"
-
-#: ../src/gnome2/treekey-editor.c:303
-msgid "Add Child"
-msgstr "Přidat potomka"
-
-#: ../src/gnome2/treekey-editor.c:304 ../src/gnome2/treekey-editor.c:310
-msgid "Add an item"
-msgstr "Přidat položku"
-
-#: ../src/gnome2/treekey-editor.c:309
-msgid "Add Sibling"
-msgstr "Přidat souseda"
-
-#: ../src/gnome2/treekey-editor.c:316
-msgid "Remove this item"
-msgstr "Odstranit tuto položku"
-
-#: ../src/gnome2/treekey-editor.c:322
-msgid "Edit this item"
-msgstr "Upravit tuto položku"
+#: ../src/gnome2/sidebar_dialog.c:135
+msgid "Sidebar"
+msgstr "Postranní lišta"
 
 #: ../src/gnome2/splash.c:363
 msgid "Powered by the SWORD Project"
@@ -1093,149 +1299,215 @@ msgstr "Spouštím Sword"
 msgid "Displaying Xiphos"
 msgstr "Zobrazuji Xiphos"
 
-#: ../src/gnome2/export_dialog.c:265 ../ui/export-dialog.glade.h:20
-msgid "Please check copyright before exporting!"
-msgstr "Před exportováním prosím prověřte autorská práva!"
+#: ../src/gnome2/toolbar_nav.c:416
+msgid "Move backwards through history"
+msgstr "Pohyb v historii pozpátku"
 
-#: ../src/gnome2/bookmarks_treeview.c:105
-#, c-format
-msgid "Search result: %s"
-msgstr "Výsledky hledání: %s"
+#: ../src/gnome2/toolbar_nav.c:437
+msgid "Move foward through history"
+msgstr "Pohyb v historii dopředu"
 
-#: ../src/gnome2/about_trans.c:84
+#: ../src/gnome2/toolbar_nav.c:458
+msgid "Select a Book of the Bible"
+msgstr "Výběr knihy z Bible"
+
+#: ../src/gnome2/toolbar_nav.c:523
+msgid "Change Chapter"
+msgstr "Změna kapitoly"
+
+#: ../src/gnome2/toolbar_nav.c:593
+msgid "Change Verse"
+msgstr "Změna verše"
+
+#: ../src/gnome2/toolbar_nav.c:661
+msgid "Enter a Verse reference in Book 1:1 format and press Return"
+msgstr "Zadej odkaz na verš ve formátu  Kniha 1:1  a stiskni Enter"
+
+#: ../src/gnome2/treekey-editor.c:129
+#: ../src/gnome2/treekey-editor.c:188
+#: ../src/gnome2/treekey-editor.c:274
+msgid "Prayer List/Journal Item"
+msgstr "Položka Modlitebního seznamu/Deníku"
+
+#: ../src/gnome2/treekey-editor.c:130
+#: ../src/gnome2/treekey-editor.c:189
+#: ../src/gnome2/treekey-editor.c:275
+msgid "New name"
+msgstr "Nové jméno"
+
+#: ../src/gnome2/treekey-editor.c:245
+msgid "Remove the selected item"
+msgstr "Odstranit vybranou složku"
+
+#: ../src/gnome2/treekey-editor.c:303
+msgid "Add Child"
+msgstr "Přidat potomka"
+
+#: ../src/gnome2/treekey-editor.c:304
+#: ../src/gnome2/treekey-editor.c:310
+msgid "Add an item"
+msgstr "Přidat položku"
+
+#: ../src/gnome2/treekey-editor.c:309
+msgid "Add Sibling"
+msgstr "Přidat souseda"
+
+#: ../src/gnome2/treekey-editor.c:316
+msgid "Remove this item"
+msgstr "Odstranit tuto položku"
+
+#: ../src/gnome2/treekey-editor.c:322
+msgid "Edit this item"
+msgstr "Upravit tuto položku"
+
+#: ../src/main/display.cc:278
 msgid ""
-"Do you like using Xiphos to study the Bible? Would you like to see its "
-"display using your native language? You could translate Xiphos! \n"
-"\n"
-"We are always looking for contributions of new translations of Xiphos into "
-"other languages. If you are able to translate for us, please see the link "
-"below, contact us, and get involved with our efforts."
+"An image file's size could not be determined.\n"
+"Is ImageMagick's 'identify' not installed?\n"
+"(Or possibly the image is of type other than bmp/gif/jpg/png.)\n"
+"Xiphos cannot resize images to fit window."
 msgstr ""
-"Používáte rád(a) Xiphos při studiu Bible? Chtěl(a) byste vidět Xiphos ve "
-"svém rodném jazyce? Můžete vytvořit překlad aplikace Xiphos! \n"
-"\n"
-"Rádi uvítáme překlady aplikace Xiphos do dalších jazyků. Pokud jste schopen "
-"(schopna) vytvořit překlad, podívejte se na odkaz níže, kontaktujte nás a "
-"připojte se k našemu úsilí."
+"Nelze určit velikost souboru s obrázkem.\n"
+"Je nainstalována utilitka 'identify' z balíku ImageMagick?\n"
+"(Nebo možná typ obrázku je jiný než bmp/gif/jpg/png.)\n"
+"Xiphos není schopen přizpůsobit obrázek velikosti okna."
 
-#: ../src/gnome2/about_trans.c:98
-msgid "About Xiphos Translation"
-msgstr "O překladu aplikace Xiphos"
-
-#: ../src/gnome2/about_trans.c:139
-msgid "See TRANSLATION-HOWTO in Xiphos source"
-msgstr "Viz TRANSLATION-HOWTO u zdrojového kódu Xiphos"
-
-#: ../src/gnome2/about_trans.c:145
-msgid "Xiphos development"
-msgstr "Vývoj aplikace Xiphos"
-
-#: ../src/main/sword.cc:549
-msgid ""
-"Xiphos's file for language\n"
-"abbreviations is missing."
-msgstr ""
-"Schází soubor se zkratkami\n"
-"jazyků pro Xiphos."
-
-#: ../src/main/sword.cc:556
-msgid ""
-"Xiphos's language abbreviation\n"
-"file cannot be opened."
-msgstr ""
-"Nelze otevřít soubor se zkratkami\n"
-"jazyků pro Xiphos."
-
-#: ../src/main/sword.cc:567
-msgid ""
-"Xiphos cannot allocate space\n"
-"for language abbreviations."
-msgstr ""
-"Aplikace Xiphos nemůže přidělit\n"
-"místo pro zkratky jazyků."
-
-#: ../src/main/sword.cc:574
-msgid ""
-"Xiphos cannot read the\n"
-"language abbreviation file."
-msgstr ""
-"Aplikace Xiphos nemůže přečíst\n"
-"soubor se zkratkami jazyků."
-
-#: ../src/main/sword.cc:1202
-msgid "Daily devotional was requested, but there are none installed."
-msgstr "Čtení na každý den bylo požadováno, ale žádné není nainstalované."
-
-#: ../src/main/search_dialog.cc:129
-#, c-format
-msgid "Search result %s: %s"
-msgstr "Výsledky hledání %s: %s"
-
-#: ../src/main/search_dialog.cc:363
-msgid "Delete Range?"
-msgstr "Smazat rozsah?"
-
-#: ../src/main/search_dialog.cc:364
-msgid "Are you sure you want to delete this range?"
-msgstr "Jste si jist, že chcete odstranit tento rozsah?"
-
-#: ../src/main/search_dialog.cc:578 ../src/main/search_dialog.cc:1049
-#: ../src/main/search_dialog.cc:1052 ../src/main/search_dialog.cc:1074
-#: ../src/main/search_dialog.cc:1077
-msgid "Search: "
-msgstr "Hledat:"
-
-#: ../src/main/search_dialog.cc:623
-msgid "Remove Module?"
-msgstr "Smazat modul?"
-
-#: ../src/main/search_dialog.cc:624
-msgid "Are you sure you want to remove the selected module?"
-msgstr "Jste si jist, že chcete smazat vybraný modul?"
-
-#: ../src/main/search_dialog.cc:1473
-#, c-format
-msgid ""
-"%s:\n"
-"No such module is installed.\n"
-"%s"
-msgstr ""
-"%s:\n"
-"Takový modul není k dispozici.\n"
-"%s"
-
-#: ../src/main/search_dialog.cc:1475
-msgid "Please adjust the module list."
-msgstr "Prosím nastavte seznam modulů."
-
-#: ../src/main/search_dialog.cc:1491
-#, c-format
-msgid "No fast-search index exists for %s.%s%s"
-msgstr "Rejstříky pro rychlé vyhledávání neexistují u %s. %s%s"
-
-#: ../src/main/search_dialog.cc:1493
-msgid ""
-"\n"
-"Search on this module is now `multi word'."
-msgstr ""
-"\n"
-"Hledání v modulu je nyní víceslovné."
-
-#: ../src/main/search_dialog.cc:1494
-msgid ""
-"\n"
-"See the Module Manager, Maintenance pane."
-msgstr ""
-"\n"
-"Viz Správce modulů, panel Udržování"
-
-#: ../src/main/search_dialog.cc:1555
-msgid "Search finished"
-msgstr "Hledání dokončeno"
+#: ../src/main/display.cc:931
+#: ../src/main/display.cc:993
+#: ../src/main/display.cc:1081
+#: ../src/main/display.cc:1089
+#: ../ui/export-dialog.glade.h:7
+msgid "Chapter"
+msgstr "Kapitola"
 
 #: ../src/main/main.c:109
 msgid "Xiphos does not understand more than one argument."
 msgstr "Xiphos nerozezná více než jeden argument."
+
+#: ../src/main/module_dialogs.cc:231
+#: ../src/main/previewer.cc:122
+#: ../ui/prefs.glade.h:75
+msgid "Previewer"
+msgstr "Náhled"
+
+#: ../src/main/module_dialogs.cc:297
+#: ../src/main/module_dialogs.cc:423
+#: ../src/main/previewer.cc:197
+msgid "Footnote"
+msgstr "Vysvětlivka"
+
+#: ../src/main/module_dialogs.cc:303
+#: ../src/main/module_dialogs.cc:428
+#: ../src/main/previewer.cc:203
+msgid "Cross Reference"
+msgstr "Odkaz"
+
+#: ../src/main/module_dialogs.cc:309
+#: ../src/main/module_dialogs.cc:323
+#: ../src/main/module_dialogs.cc:433
+#: ../src/main/module_dialogs.cc:445
+#: ../src/main/previewer.cc:209
+#: ../src/main/previewer.cc:228
+msgid "Strongs"
+msgstr "Strongův"
+
+#: ../src/main/module_dialogs.cc:315
+#: ../src/main/module_dialogs.cc:334
+#: ../src/main/module_dialogs.cc:438
+#: ../src/main/module_dialogs.cc:455
+#: ../src/main/previewer.cc:215
+#: ../src/main/previewer.cc:241
+msgid "Morphology"
+msgstr "Morfologie"
+
+#: ../src/main/module_dialogs.cc:1104
+#: ../src/main/url.cc:543
+msgid "Back to "
+msgstr "Zpět k"
+
+#: ../src/main/parallel_view.cc:398
+#: ../ui/xi-menus.glade.h:67
+msgid "Strong's Numbers"
+msgstr "Strongova čísla"
+
+#: ../src/main/parallel_view.cc:408
+#: ../ui/search-dialog.glade.h:50
+#: ../ui/xi-menus.glade.h:25
+msgid "Footnotes"
+msgstr "Poznámky pod čarou"
+
+#: ../src/main/parallel_view.cc:418
+#: ../ui/search-dialog.glade.h:62
+#: ../ui/xi-menus.glade.h:39
+msgid "Morphological Tags"
+msgstr "Morfologické značky"
+
+#: ../src/main/parallel_view.cc:428
+#: ../ui/xi-menus.glade.h:29
+msgid "Hebrew Vowel Points"
+msgstr "Punktuace hebrejských samohlásek"
+
+#: ../src/main/parallel_view.cc:438
+#: ../ui/xi-menus.glade.h:28
+msgid "Hebrew Cantillation"
+msgstr "Hebrejská vokalizace"
+
+#: ../src/main/parallel_view.cc:448
+#: ../ui/xi-menus.glade.h:26
+msgid "Greek Accents"
+msgstr "Řecké přízvuky"
+
+#: ../src/main/parallel_view.cc:458
+msgid "Cross-references"
+msgstr "Křížové odkazy"
+
+#: ../src/main/parallel_view.cc:468
+#: ../ui/xi-menus.glade.h:35
+msgid "Lemmas"
+msgstr "Lemmata"
+
+#: ../src/main/parallel_view.cc:478
+#: ../ui/xi-menus.glade.h:27
+msgid "Headings"
+msgstr "Nadpisy"
+
+#: ../src/main/parallel_view.cc:488
+msgid "Morpheme Segmentation"
+msgstr "Členění morfémů"
+
+#: ../src/main/parallel_view.cc:498
+#: ../ui/xi-menus.glade.h:73
+msgid "Words of Christ in Red"
+msgstr "Ježíšova slova v červené barvě"
+
+#: ../src/main/parallel_view.cc:508
+#: ../ui/xi-menus.glade.h:68
+msgid "Transliteration"
+msgstr "Přepis"
+
+#: ../src/main/parallel_view.cc:518
+msgid "Textual Variants"
+msgstr "Varianty textu"
+
+#: ../src/main/parallel_view.cc:526
+#: ../ui/xi-menus.glade.h:49
+msgid "Primary Reading"
+msgstr "Prvořadé čtení"
+
+#: ../src/main/parallel_view.cc:535
+#: ../ui/xi-menus.glade.h:63
+msgid "Secondary Reading"
+msgstr "Pomocné čtení"
+
+#: ../src/main/parallel_view.cc:544
+#: ../ui/xi-menus.glade.h:5
+msgid "All Readings"
+msgstr "Všechna čtení"
+
+#: ../src/main/parallel_view.cc:878
+#: ../src/main/parallel_view.cc:1130
+msgid "view context"
+msgstr "zobrazit souvislosti"
 
 #: ../src/main/prayerlists.cc:71
 msgid "January"
@@ -1285,29 +1557,35 @@ msgstr "Listopad"
 msgid "December"
 msgstr "Prosinec"
 
-#: ../src/main/prayerlists.cc:121 ../src/main/sword_treekey.cc:332
+#: ../src/main/prayerlists.cc:121
+#: ../src/main/sword_treekey.cc:332
 msgid "Growth"
 msgstr "Růst"
 
-#: ../src/main/prayerlists.cc:122 ../src/main/sword_treekey.cc:333
+#: ../src/main/prayerlists.cc:122
+#: ../src/main/sword_treekey.cc:333
 msgid "<b>For Growth</b><br>"
 msgstr "<b>Za růst</b><br>"
 
-#: ../src/main/prayerlists.cc:123 ../src/main/prayerlists.cc:380
+#: ../src/main/prayerlists.cc:123
+#: ../src/main/prayerlists.cc:380
 #: ../src/main/sword_treekey.cc:334
 msgid "Salvation"
 msgstr "Spasení"
 
-#: ../src/main/prayerlists.cc:124 ../src/main/sword_treekey.cc:335
+#: ../src/main/prayerlists.cc:124
+#: ../src/main/sword_treekey.cc:335
 msgid "<b>For Salvation</b><br>"
 msgstr "<b>Za spasení</b><br>"
 
-#: ../src/main/prayerlists.cc:125 ../src/main/prayerlists.cc:384
+#: ../src/main/prayerlists.cc:125
+#: ../src/main/prayerlists.cc:384
 #: ../src/main/sword_treekey.cc:336
 msgid "Health"
 msgstr "Zdraví"
 
-#: ../src/main/prayerlists.cc:126 ../src/main/sword_treekey.cc:337
+#: ../src/main/prayerlists.cc:126
+#: ../src/main/sword_treekey.cc:337
 msgid "<b>For Health</b><br>"
 msgstr "<b>Za zdraví</b><br>"
 
@@ -1315,7 +1593,8 @@ msgstr "<b>Za zdraví</b><br>"
 msgid "Misc"
 msgstr "Ostatní"
 
-#: ../src/main/prayerlists.cc:128 ../src/main/sword_treekey.cc:339
+#: ../src/main/prayerlists.cc:128
+#: ../src/main/sword_treekey.cc:339
 msgid "<b>Miscellaneous</b><br>"
 msgstr "<b>Různé</b><br>"
 
@@ -1379,14 +1658,6 @@ msgstr "<b>Podtéma 4</b><br>"
 msgid "Name for new prayer list or journal"
 msgstr "Jméno pro nový modlitební seznam nebo deník"
 
-#: ../src/main/prayerlists.cc:254
-msgid "Module names must contain [A-Za-z0-9_] only."
-msgstr "Jméno smí obsahovat jen znaky [A-Za-z0-9_]."
-
-#: ../src/main/prayerlists.cc:261
-msgid "Xiphos already knows a module by that name."
-msgstr "Modul s tímto jménem už exituje."
-
 #: ../src/main/prayerlists.cc:270
 msgid "Xiphos finds that prayer list already."
 msgstr "Xiphos už takový modlitební seznam našel."
@@ -1406,19 +1677,15 @@ msgstr "Základní modlitební seznam. \\par\\par Modul vytvořil Xiphos."
 
 #: ../src/main/prayerlists.cc:324
 msgid "BasicPrayerList"
-msgstr ""
+msgstr "ZakladniSeznam"
 
 #: ../src/main/prayerlists.cc:338
 msgid "MyPrayerList"
 msgstr "MujModlitebniSeznam"
 
 #: ../src/main/prayerlists.cc:339
-msgid ""
-"<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</"
-"b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"
-msgstr ""
-"<b>Lidé:</b><br>Bob<br>Sam<br>Sue<br><br><b>Sbor:</"
-"b><br>lavice<br>společenství<br>Bible pro misionáře<br><br><br>"
+msgid "<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"
+msgstr "<b>Lidé:</b><br>Bob<br>Sam<br>Sue<br><br><b>Sbor:</b><br>lavice<br>společenství<br>Bible pro misionáře<br><br><br>"
 
 #: ../src/main/prayerlists.cc:365
 msgid "A subject-based prayer list. \\par\\par Module created by Xiphos."
@@ -1426,7 +1693,7 @@ msgstr "Modlitební seznam s náměty. \\par\\par Modul vytvořil Xiphos."
 
 #: ../src/main/prayerlists.cc:366
 msgid "SubjectPrayerList"
-msgstr ""
+msgstr "PredmetovySeznam"
 
 #: ../src/main/prayerlists.cc:381
 msgid "Bob<br>Sam<br>Sue<br>John<br>"
@@ -1450,7 +1717,7 @@ msgstr "Měsíční modlitební seznam. \\par\\par Modul vytvořil Xiphos."
 
 #: ../src/main/prayerlists.cc:412
 msgid "MonthlyPrayerList"
-msgstr ""
+msgstr "MesicniSeznam"
 
 #: ../src/main/prayerlists.cc:463
 msgid "A daily journal. \\par\\par Module created by Xiphos."
@@ -1458,7 +1725,7 @@ msgstr "Deník. \\par\\par Modul vytvořil Xiphos."
 
 #: ../src/main/prayerlists.cc:464
 msgid "DailyJournal"
-msgstr ""
+msgstr "Denik"
 
 #: ../src/main/prayerlists.cc:528
 msgid "An outlined topic (e.g. sermon). \\par\\par Module created by Xiphos."
@@ -1466,7 +1733,7 @@ msgstr "Navržené (např. kázání). \\par\\par Modul vytvořil Xiphos."
 
 #: ../src/main/prayerlists.cc:529
 msgid "OutlinedTopic"
-msgstr ""
+msgstr "NastineneTema"
 
 #: ../src/main/prayerlists.cc:543
 msgid "Major Topic A"
@@ -1492,250 +1759,86 @@ msgstr "Hlavní téma C"
 msgid "<b>Major Topic C</b><br>"
 msgstr "<b>Hlavní téma C</b><br>"
 
-#: ../src/main/xml.c:80 ../src/main/xml.c:465
+#: ../src/main/search_dialog.cc:129
 #, c-format
-msgid "Document not created successfully. \n"
-msgstr "Dokument nebyl správně vytvořen. \n"
+msgid "Search result %s: %s"
+msgstr "Výsledky hledání %s: %s"
 
-#: ../src/main/xml.c:89
-msgid "Personal"
-msgstr "Osobní"
+#: ../src/main/search_dialog.cc:363
+msgid "Delete Range?"
+msgstr "Smazat rozsah?"
 
-#: ../src/main/xml.c:90
-msgid "What must I do to be saved?"
-msgstr "Co musím udělat, abych byl zachráněn?"
+#: ../src/main/search_dialog.cc:364
+msgid "Are you sure you want to delete this range?"
+msgstr "Jste si jist, že chcete odstranit tento rozsah?"
 
-#: ../src/main/xml.c:92 ../src/main/xml.c:93
-msgid "Acts 16:31"
-msgstr "Skutky 16:31"
+#: ../src/main/search_dialog.cc:578
+#: ../src/main/search_dialog.cc:1049
+#: ../src/main/search_dialog.cc:1052
+#: ../src/main/search_dialog.cc:1074
+#: ../src/main/search_dialog.cc:1077
+msgid "Search: "
+msgstr "Hledat:"
 
-#: ../src/main/xml.c:97 ../src/main/xml.c:98
-msgid "Eph 2:8"
-msgstr "Efezským 2:8"
+#: ../src/main/search_dialog.cc:623
+msgid "Remove Module?"
+msgstr "Smazat modul?"
 
-#: ../src/main/xml.c:102 ../src/main/xml.c:103
-msgid "Romans 1:16"
-msgstr "Římanům 1:16"
+#: ../src/main/search_dialog.cc:624
+msgid "Are you sure you want to remove the selected module?"
+msgstr "Jste si jist, že chcete smazat vybraný modul?"
 
-#: ../src/main/xml.c:106
-msgid "What is the Gospel?"
-msgstr "Co je to evangelium?"
-
-#: ../src/main/xml.c:108 ../src/main/xml.c:109
-msgid "1 Cor 15:1-4"
-msgstr "1. Korintským 15:1-4"
-
-#: ../src/main/xml.c:413 ../src/main/xml.c:1078
+#: ../src/main/search_dialog.cc:1473
 #, c-format
-msgid "Document not parsed successfully. \n"
-msgstr "Dokument nebyl správně rozparsován. \n"
-
-#: ../src/main/xml.c:419 ../src/main/xml.c:681 ../src/main/xml.c:959
-#: ../src/main/xml.c:1138
-#, c-format
-msgid "empty document \n"
-msgstr "prázdný dokument \n"
-
-#: ../src/main/xml.c:425
-#, c-format
-msgid "wrong type, root node != SwordBookmarks\n"
-msgstr "chybný typ, root nod != SwordBookmarks\n"
-
-#: ../src/main/xml.c:479
-msgid "Old Testament"
-msgstr "Starý zákon"
-
-#: ../src/main/xml.c:481
-msgid "Gen - Mal"
-msgstr "Genesis - Malachiáš"
-
-#: ../src/main/xml.c:487
-msgid "New Testament"
-msgstr "Nový zákon"
-
-#: ../src/main/xml.c:489
-msgid "Mat - Rev"
-msgstr "Mt - Zj"
-
-#: ../src/main/xml.c:497
-msgid "Sample Module List"
-msgstr "Příklad seznamu modulů"
-
-#: ../src/main/xml.c:687 ../src/main/xml.c:965
-#, c-format
-msgid "wrong type, root node != %s\n"
-msgstr "chybný typ, root node != %s\n"
-
-#: ../src/main/display.cc:278
 msgid ""
-"An image file's size could not be determined.\n"
-"Is ImageMagick's 'identify' not installed?\n"
-"(Or possibly the image is of type other than bmp/gif/jpg/png.)\n"
-"Xiphos cannot resize images to fit window."
+"%s:\n"
+"No such module is installed.\n"
+"%s"
 msgstr ""
-"Nelze určit velikost souboru s obrázkem.\n"
-"Je nainstalována utilitka 'identify' z balíku ImageMagick?\n"
-"(Nebo možná typ obrázku je jiný než bmp/gif/jpg/png.)\n"
-"Xiphos není schopen přizpůsobit obrázek velikosti okna."
+"%s:\n"
+"Takový modul není k dispozici.\n"
+"%s"
 
-#: ../src/main/display.cc:931 ../src/main/display.cc:993
-#: ../src/main/display.cc:1081 ../src/main/display.cc:1089
-#: ../ui/export-dialog.glade.h:7
-msgid "Chapter"
-msgstr "Kapitola"
+#: ../src/main/search_dialog.cc:1475
+msgid "Please adjust the module list."
+msgstr "Prosím nastavte seznam modulů."
 
-#: ../src/main/previewer.cc:122 ../src/main/module_dialogs.cc:231
-#: ../ui/prefs.glade.h:75
-msgid "Previewer"
-msgstr "Náhled"
+#: ../src/main/search_dialog.cc:1491
+#, c-format
+msgid "No fast-search index exists for %s.%s%s"
+msgstr "Rejstříky pro rychlé vyhledávání neexistují u %s. %s%s"
 
-#: ../src/main/previewer.cc:197 ../src/main/module_dialogs.cc:297
-#: ../src/main/module_dialogs.cc:423
-msgid "Footnote"
-msgstr "Vysvětlivka"
+#: ../src/main/search_dialog.cc:1493
+msgid ""
+"\n"
+"Search on this module is now `multi word'."
+msgstr ""
+"\n"
+"Hledání v modulu je nyní víceslovné."
 
-#: ../src/main/previewer.cc:203 ../src/main/module_dialogs.cc:303
-#: ../src/main/module_dialogs.cc:428
-msgid "Cross Reference"
-msgstr "Odkaz"
+#: ../src/main/search_dialog.cc:1494
+msgid ""
+"\n"
+"See the Module Manager, Maintenance pane."
+msgstr ""
+"\n"
+"Viz Správce modulů, panel Udržování"
 
-#: ../src/main/previewer.cc:209 ../src/main/previewer.cc:228
-#: ../src/main/module_dialogs.cc:309 ../src/main/module_dialogs.cc:323
-#: ../src/main/module_dialogs.cc:433 ../src/main/module_dialogs.cc:445
-msgid "Strongs"
-msgstr "Strongův"
-
-#: ../src/main/previewer.cc:215 ../src/main/previewer.cc:241
-#: ../src/main/module_dialogs.cc:315 ../src/main/module_dialogs.cc:334
-#: ../src/main/module_dialogs.cc:438 ../src/main/module_dialogs.cc:455
-msgid "Morphology"
-msgstr "Morfologie"
-
-#: ../src/main/module_dialogs.cc:1104 ../src/main/url.cc:543
-msgid "Back to "
-msgstr "Zpět k"
+#: ../src/main/search_dialog.cc:1555
+msgid "Search finished"
+msgstr "Hledání dokončeno"
 
 #: ../src/main/search_sidebar.cc:93
 msgid "matches"
 msgstr "výsledky(ů)"
 
-#: ../src/main/parallel_view.cc:398 ../ui/xi-menus.glade.h:67
-msgid "Strong's Numbers"
-msgstr "Strongova čísla"
-
-#: ../src/main/parallel_view.cc:408 ../ui/search-dialog.glade.h:50
-#: ../ui/xi-menus.glade.h:25
-msgid "Footnotes"
-msgstr "Poznámky pod čarou"
-
-#: ../src/main/parallel_view.cc:418 ../ui/search-dialog.glade.h:62
-#: ../ui/xi-menus.glade.h:39
-msgid "Morphological Tags"
-msgstr "Morfologické značky"
-
-#: ../src/main/parallel_view.cc:428 ../ui/xi-menus.glade.h:29
-msgid "Hebrew Vowel Points"
-msgstr "Punktuace hebrejských samohlásek"
-
-#: ../src/main/parallel_view.cc:438 ../ui/xi-menus.glade.h:28
-msgid "Hebrew Cantillation"
-msgstr "Hebrejská vokalizace"
-
-#: ../src/main/parallel_view.cc:448 ../ui/xi-menus.glade.h:26
-msgid "Greek Accents"
-msgstr "Řecké přízvuky"
-
-#: ../src/main/parallel_view.cc:458
-msgid "Cross-references"
-msgstr "Křížové odkazy"
-
-#: ../src/main/parallel_view.cc:468 ../ui/xi-menus.glade.h:35
-msgid "Lemmas"
-msgstr "Lemmata"
-
-#: ../src/main/parallel_view.cc:478 ../ui/xi-menus.glade.h:27
-msgid "Headings"
-msgstr "Nadpisy"
-
-#: ../src/main/parallel_view.cc:488
-msgid "Morpheme Segmentation"
-msgstr "Členění morfémů"
-
-#: ../src/main/parallel_view.cc:498 ../ui/xi-menus.glade.h:73
-msgid "Words of Christ in Red"
-msgstr "Ježíšova slova v červené barvě"
-
-#: ../src/main/parallel_view.cc:508 ../ui/xi-menus.glade.h:68
-msgid "Transliteration"
-msgstr "Přepis"
-
-#: ../src/main/parallel_view.cc:518
-msgid "Textual Variants"
-msgstr "Varianty textu"
-
-#: ../src/main/parallel_view.cc:526 ../ui/xi-menus.glade.h:49
-msgid "Primary Reading"
-msgstr "Prvořadé čtení"
-
-#: ../src/main/parallel_view.cc:535 ../ui/xi-menus.glade.h:63
-msgid "Secondary Reading"
-msgstr "Pomocné čtení"
-
-#: ../src/main/parallel_view.cc:544 ../ui/xi-menus.glade.h:5
-msgid "All Readings"
-msgstr "Všechna čtení"
-
-#: ../src/main/parallel_view.cc:878 ../src/main/parallel_view.cc:1130
-msgid "view context"
-msgstr "zobrazit souvislosti"
-
-#: ../src/main/url.cc:99
-msgid "URL not found:"
-msgstr "URL nenalezeno:"
-
-#: ../src/main/url.cc:194
-#, c-format
-msgid "Xiphos could not execute %s"
-msgstr "Xiphos nemůže spustit %s"
-
-#: ../src/main/url.cc:202
-msgid "Viewer error:\n"
-msgstr "Chyba prohlížeče:\n"
-
-#: ../src/main/url.cc:278
-#, c-format
-msgid "Show %s in main window"
-msgstr "Zobrazit %s hlavním okně"
-
-#: ../src/main/tab_history.c:97
-msgid "H_istory/<Separator>"
-msgstr "H_istorie/<Separator>"
-
-#: ../src/main/tab_history.c:99
-msgid "H_istory/C_lear"
-msgstr "H_istorie/V_yčistit"
-
-#: ../src/main/tab_history.c:224
-msgid "Clear History"
-msgstr "Vymazat historii"
-
-#: ../src/main/sidebar.cc:375
-msgid "verse"
-msgstr "verš"
-
-#: ../src/main/sidebar.cc:437
-msgid "chapter"
-msgstr "kapitola"
-
 #: ../src/main/settings.c:56
 msgid ""
 "Welcome to Xiphos.\n"
 "\n"
-"There are no Bible modules installed. In order to initialize, Xiphos needs "
-"you to install at least one Bible.\n"
+"There are no Bible modules installed. In order to initialize, Xiphos needs you to install at least one Bible.\n"
 "\n"
-"With your permission, Xiphos will invoke the Module Manager so that you may "
-"install from Crosswire:\n"
+"With your permission, Xiphos will invoke the Module Manager so that you may install from Crosswire:\n"
 "1. Configure remote install.\n"
 "2. Connect.\n"
 "3. Select a Bible text of your language preference.\n"
@@ -1748,11 +1851,9 @@ msgid ""
 msgstr ""
 "Vítá vás Xiphos.\n"
 "\n"
-"Nemáte nainstalovaný žádný modul s Biblickými texty. Xiphos potřebuje pro "
-"správnou funkčnost alespoň jeden takový modul.\n"
+"Nemáte nainstalovaný žádný modul s Biblickými texty. Xiphos potřebuje pro správnou funkčnost alespoň jeden takový modul.\n"
 "\n"
-"S vaším svolením, Xiphos spustí Správce modulů, aby bylo možno instalovat "
-"Crosswire moduly:\n"
+"S vaším svolením, Xiphos spustí Správce modulů, aby bylo možno instalovat Crosswire moduly:\n"
 "1. Nastavení vzdálené instalace.\n"
 "2. Obnovit.\n"
 "3. Vyberte si Bibli v požadovaném jazyce.\n"
@@ -1797,7 +1898,8 @@ msgstr ""
 "\n"
 "Xiphos nemůže pokračovat."
 
-#: ../src/main/settings.c:148 ../src/main/settings.c:156
+#: ../src/main/settings.c:148
+#: ../src/main/settings.c:156
 #: ../src/main/settings.c:164
 msgid "can not create "
 msgstr "nemohu vytvořit "
@@ -1892,6 +1994,163 @@ msgstr ""
 "Xiphos selhal při nastavení obsluhy pro klíč #%d:\n"
 "%s"
 
+#: ../src/main/sidebar.cc:375
+msgid "verse"
+msgstr "verš"
+
+#: ../src/main/sidebar.cc:437
+msgid "chapter"
+msgstr "kapitola"
+
+#: ../src/main/sword.cc:549
+msgid ""
+"Xiphos's file for language\n"
+"abbreviations is missing."
+msgstr ""
+"Schází soubor se zkratkami\n"
+"jazyků pro Xiphos."
+
+#: ../src/main/sword.cc:556
+msgid ""
+"Xiphos's language abbreviation\n"
+"file cannot be opened."
+msgstr ""
+"Nelze otevřít soubor se zkratkami\n"
+"jazyků pro Xiphos."
+
+#: ../src/main/sword.cc:567
+msgid ""
+"Xiphos cannot allocate space\n"
+"for language abbreviations."
+msgstr ""
+"Aplikace Xiphos nemůže přidělit\n"
+"místo pro zkratky jazyků."
+
+#: ../src/main/sword.cc:574
+msgid ""
+"Xiphos cannot read the\n"
+"language abbreviation file."
+msgstr ""
+"Aplikace Xiphos nemůže přečíst\n"
+"soubor se zkratkami jazyků."
+
+#: ../src/main/sword.cc:1199
+msgid "Daily devotional was requested, but there are none installed."
+msgstr "Čtení na každý den bylo požadováno, ale žádné není nainstalované."
+
+#: ../src/main/tab_history.c:97
+msgid "H_istory/<Separator>"
+msgstr "H_istorie/<Separator>"
+
+#: ../src/main/tab_history.c:99
+msgid "H_istory/C_lear"
+msgstr "H_istorie/V_yčistit"
+
+#: ../src/main/tab_history.c:224
+msgid "Clear History"
+msgstr "Vymazat historii"
+
+#: ../src/main/url.cc:99
+msgid "URL not found:"
+msgstr "URL nenalezeno:"
+
+#: ../src/main/url.cc:194
+#, c-format
+msgid "Xiphos could not execute %s"
+msgstr "Xiphos nemůže spustit %s"
+
+#: ../src/main/url.cc:202
+msgid "Viewer error:\n"
+msgstr "Chyba prohlížeče:\n"
+
+#: ../src/main/url.cc:278
+#, c-format
+msgid "Show %s in main window"
+msgstr "Zobrazit %s hlavním okně"
+
+#: ../src/main/xml.c:80
+#: ../src/main/xml.c:465
+#, c-format
+msgid "Document not created successfully. \n"
+msgstr "Dokument nebyl správně vytvořen. \n"
+
+#: ../src/main/xml.c:89
+msgid "Personal"
+msgstr "Osobní"
+
+#: ../src/main/xml.c:90
+msgid "What must I do to be saved?"
+msgstr "Co musím udělat, abych byl zachráněn?"
+
+#: ../src/main/xml.c:92
+#: ../src/main/xml.c:93
+msgid "Acts 16:31"
+msgstr "Skutky 16:31"
+
+#: ../src/main/xml.c:97
+#: ../src/main/xml.c:98
+msgid "Eph 2:8"
+msgstr "Efezským 2:8"
+
+#: ../src/main/xml.c:102
+#: ../src/main/xml.c:103
+msgid "Romans 1:16"
+msgstr "Římanům 1:16"
+
+#: ../src/main/xml.c:106
+msgid "What is the Gospel?"
+msgstr "Co je to evangelium?"
+
+#: ../src/main/xml.c:108
+#: ../src/main/xml.c:109
+msgid "1 Cor 15:1-4"
+msgstr "1. Korintským 15:1-4"
+
+#: ../src/main/xml.c:413
+#: ../src/main/xml.c:1078
+#, c-format
+msgid "Document not parsed successfully. \n"
+msgstr "Dokument nebyl správně rozparsován. \n"
+
+#: ../src/main/xml.c:419
+#: ../src/main/xml.c:681
+#: ../src/main/xml.c:959
+#: ../src/main/xml.c:1138
+#, c-format
+msgid "empty document \n"
+msgstr "prázdný dokument \n"
+
+#: ../src/main/xml.c:425
+#, c-format
+msgid "wrong type, root node != SwordBookmarks\n"
+msgstr "chybný typ, root nod != SwordBookmarks\n"
+
+#: ../src/main/xml.c:479
+msgid "Old Testament"
+msgstr "Starý zákon"
+
+#: ../src/main/xml.c:481
+msgid "Gen - Mal"
+msgstr "Genesis - Malachiáš"
+
+#: ../src/main/xml.c:487
+msgid "New Testament"
+msgstr "Nový zákon"
+
+#: ../src/main/xml.c:489
+msgid "Mat - Rev"
+msgstr "Mt - Zj"
+
+#: ../src/main/xml.c:497
+msgid "Sample Module List"
+msgstr "Příklad seznamu modulů"
+
+#: ../src/main/xml.c:687
+#: ../src/main/xml.c:965
+#, c-format
+msgid "wrong type, root node != %s\n"
+msgstr "chybný typ, root node != %s\n"
+
 #: ../ui/bookmarks.glade.h:1
 msgid "Add Bookmark"
 msgstr "Přidat záložku"
@@ -1932,7 +2191,8 @@ msgstr "Modul:"
 msgid "New ..."
 msgstr "Nová ..."
 
-#: ../ui/bookmarks.glade.h:11 ../ui/xi-menus.glade.h:40
+#: ../ui/bookmarks.glade.h:11
+#: ../ui/xi-menus.glade.h:40
 msgid "New Folder"
 msgstr "Nová složka"
 
@@ -1948,32 +2208,38 @@ msgstr "Verš:"
 msgid "Delete the current note"
 msgstr "Odstranit aktuálni poznámku"
 
-#: ../ui/editor_note.xml.h:2 ../ui/editor_studypad.xml.h:4
+#: ../ui/editor_note.xml.h:2
+#: ../ui/editor_studypad.xml.h:4
 #: ../ui/editor.xml.h:2
 msgid "E_xit"
 msgstr "U_končit"
 
-#: ../ui/editor_note.xml.h:3 ../ui/editor_studypad.xml.h:5
+#: ../ui/editor_note.xml.h:3
+#: ../ui/editor_studypad.xml.h:5
 #: ../ui/editor.xml.h:3
 msgid "Exit"
 msgstr "Ukončit"
 
-#: ../ui/editor_note.xml.h:4 ../ui/editor_studypad.xml.h:6
+#: ../ui/editor_note.xml.h:4
+#: ../ui/editor_studypad.xml.h:6
 #: ../ui/editor.xml.h:4
 msgid "Exit the program"
 msgstr "Ukončit program"
 
-#: ../ui/editor_note.xml.h:5 ../ui/editor_studypad.xml.h:7
+#: ../ui/editor_note.xml.h:5
+#: ../ui/editor_studypad.xml.h:7
 #: ../ui/editor.xml.h:5
 msgid "For_mat"
 msgstr "_Formát"
 
-#: ../ui/editor_note.xml.h:6 ../ui/editor_studypad.xml.h:8
+#: ../ui/editor_note.xml.h:6
+#: ../ui/editor_studypad.xml.h:8
 #: ../ui/editor.xml.h:6
 msgid "HTML Format switch"
 msgstr "HTML formát přepínače"
 
-#: ../ui/editor_note.xml.h:7 ../ui/editor_studypad.xml.h:9
+#: ../ui/editor_note.xml.h:7
+#: ../ui/editor_studypad.xml.h:9
 #: ../ui/editor.xml.h:7
 msgid "HTML mode"
 msgstr "HTML režim"
@@ -1982,18 +2248,9 @@ msgstr "HTML režim"
 msgid "Preview the note to be printed"
 msgstr "Náhled poznámky pro tisk"
 
-#: ../ui/editor_note.xml.h:9 ../ui/editor_studypad.xml.h:14
-msgid "Print Pre_view"
-msgstr "_Náhled tisku"
-
 #: ../ui/editor_note.xml.h:10
 msgid "Print this note"
 msgstr "Tisk poznámky"
-
-#: ../ui/editor_note.xml.h:11 ../ui/editor_studypad.xml.h:16
-#: ../ui/editor.xml.h:11
-msgid "Save"
-msgstr "Uložit"
 
 #: ../ui/editor_note.xml.h:12
 msgid "Save the current note"
@@ -2003,15 +2260,6 @@ msgstr "Uložit aktuální poznámku"
 msgid "_Delete Personal Comment"
 msgstr "_Odstranit osobní komentář"
 
-#: ../ui/editor_note.xml.h:14 ../ui/editor_studypad.xml.h:20
-#: ../ui/editor.xml.h:13 ../ui/xi-menus.glade.h:83
-msgid "_File"
-msgstr "_Soubor"
-
-#: ../ui/editor_note.xml.h:15 ../ui/editor_studypad.xml.h:21
-msgid "_Print..."
-msgstr "_Tisk..."
-
 #: ../ui/editor_note.xml.h:16
 msgid "_Save (Personal Comment)"
 msgstr "_Uložit (Osobní komentář)"
@@ -2020,15 +2268,18 @@ msgstr "_Uložit (Osobní komentář)"
 msgid "Add this file to your bookmarks"
 msgstr "Přidat soubor mezi záložky"
 
-#: ../ui/editor_studypad.xml.h:3 ../ui/editor.xml.h:1
+#: ../ui/editor_studypad.xml.h:3
+#: ../ui/editor.xml.h:1
 msgid "Create a new document"
 msgstr "Vytvořit nový dokument"
 
-#: ../ui/editor_studypad.xml.h:10 ../ui/editor.xml.h:8
+#: ../ui/editor_studypad.xml.h:10
+#: ../ui/editor.xml.h:8
 msgid "New Document"
 msgstr "Nový dokument"
 
-#: ../ui/editor_studypad.xml.h:11 ../ui/editor.xml.h:9
+#: ../ui/editor_studypad.xml.h:11
+#: ../ui/editor.xml.h:9
 msgid "Open"
 msgstr "Otevřít"
 
@@ -2048,7 +2299,8 @@ msgstr "Tiskt dokumentu"
 msgid "Save AS"
 msgstr "Uložit jako..."
 
-#: ../ui/editor_studypad.xml.h:18 ../ui/editor.xml.h:12
+#: ../ui/editor_studypad.xml.h:18
+#: ../ui/editor.xml.h:12
 msgid "Save the current file"
 msgstr "Uložit aktuální soubor"
 
@@ -2076,7 +2328,8 @@ msgstr "<b>Export</b>"
 msgid "<b>Format</b>"
 msgstr "<b>Formát</b>"
 
-#: ../ui/export-dialog.glade.h:5 ../ui/prefs.glade.h:25
+#: ../ui/export-dialog.glade.h:5
+#: ../ui/prefs.glade.h:25
 msgid "Book"
 msgstr "Kniha"
 
@@ -2088,7 +2341,8 @@ msgstr "Výběrové pole Kniha"
 msgid "Chapter Radio Button"
 msgstr "Výběrové pole Kapitola"
 
-#: ../ui/export-dialog.glade.h:9 ../ui/xi-menus.glade.h:12
+#: ../ui/export-dialog.glade.h:9
+#: ../ui/xi-menus.glade.h:12
 msgid "Copy/Export Passage"
 msgstr "Kopírovat/Exportovat pasáž"
 
@@ -2180,12 +2434,8 @@ msgstr ""
 "používejte obezřetně."
 
 #: ../ui/module-manager.glade.h:8
-msgid ""
-"<b>Warning:</b> If you live in a persecuted country and do not wish to risk "
-"detection you should NOT use  the remote installation feature! "
-msgstr ""
-"<b>Varování:</b> Pokud nežijete ve svobodné zemi a nepřejete si riskovat "
-"odhalení, NEMĚLI byste používat instalaci modulů přes Internet! "
+msgid "<b>Warning:</b> If you live in a persecuted country and do not wish to risk detection you should NOT use  the remote installation feature! "
+msgstr "<b>Varování:</b> Pokud nežijete ve svobodné zemi a nepřejete si riskovat odhalení, NEMĚLI byste používat instalaci modulů přes Internet! "
 
 #: ../ui/module-manager.glade.h:9
 msgid "<i>Personal area, for your use only:</i>"
@@ -2324,12 +2574,8 @@ msgid "Apply high-contrast highlight to current verse"
 msgstr "Použít zvýšený kontrast pro zvýraznění aktuálního verše"
 
 #: ../ui/prefs.glade.h:19
-msgid ""
-"Automatically resize commentary, book, and dictionary image content to fit "
-"subwindow"
-msgstr ""
-"Automaticky přizpůsobit velikost podoken u komentářů, knih a slovníků pro "
-"vyplnění hlavního okna."
+msgid "Automatically resize commentary, book, and dictionary image content to fit subwindow"
+msgstr "Automaticky přizpůsobit velikost podoken u komentářů, knih a slovníků pro vyplnění hlavního okna."
 
 #: ../ui/prefs.glade.h:20
 msgid "Background"
@@ -2573,9 +2819,7 @@ msgstr "Roletové menu Výchozí adresář pro Poznámkový blok"
 
 #: ../ui/prefs.glade.h:86
 msgid "Use Bible Text scroll bar to scroll to previous or next chapter"
-msgstr ""
-"Použít rolovací lištu u Biblické texty pro posun na předchozí nebo další "
-"kapitolu."
+msgstr "Použít rolovací lištu u Biblické texty pro posun na předchozí nebo další kapitolu."
 
 #: ../ui/prefs.glade.h:87
 msgid "Use Verse Per Line"
@@ -3087,10 +3331,6 @@ msgstr "Rozvinout vše"
 msgid "Expand all Bookmarks groups"
 msgstr "Rozvinout všechny skupiny záložek"
 
-#: ../ui/xi-menus.glade.h:24
-msgid "File"
-msgstr "Soubor"
-
 #: ../ui/xi-menus.glade.h:30
 msgid "Image Content"
 msgstr "Obsah obrazu"
@@ -3319,368 +3559,190 @@ msgstr "_Zobrazit/Skrýt postranní lištu"
 msgid "_Verse Per Line"
 msgstr "_Jeden verš na řádek"
 
-#: ../ui/xi-menus.glade.h:98
-msgid "_View"
-msgstr "_Zobrazit"
+#: ../xiphos.desktop.in.in.h:1
+msgid "Study the Bible"
+msgstr "Studium Bible"
 
-#~ msgid "Save As"
-#~ msgstr "Uložit jako"
-
-#~ msgid "Untitled document"
-#~ msgstr "Dokument bez názvu"
-
-#~ msgid "HTML Output"
-#~ msgstr "HTML výstup"
-
-#~ msgid "HTML Source"
-#~ msgstr "HTML zdroj"
-
-#~ msgid "Plain Source"
-#~ msgstr "Prostý zdroj"
-
-#~ msgid "_Quit"
-#~ msgstr "U_končit"
-
-#~ msgid "_Open"
-#~ msgstr "_Otevřít"
-
-#~ msgid "_Save"
-#~ msgstr "_Uložit"
-
-#~ msgid "Save _As..."
-#~ msgstr "Uložit _jako..."
-
-#~ msgid "HTML _Output"
-#~ msgstr "HTML _výstup"
-
-#~ msgid "_HTML Source"
-#~ msgstr "_HTML zdroj"
-
-#~ msgid "_Plain Source"
-#~ msgstr "_Prostý zdroj"
-
-#~ msgid "Are you sure you want to delete the note for"
-#~ msgstr "Jste si jist, že chcete odstranit poznámku k"
-
-#~ msgid "Save the changes to document"
-#~ msgstr "Uložit změny do dokumentu"
-
-#~ msgid "before closing?"
-#~ msgstr "před uzavřením?"
-
-#~ msgid "If you don't save, changes will be permanently lost."
-#~ msgstr "Pokud neprovedete uložení, změny budou trvale ztraceny."
-
-#~ msgid "StudyPad"
-#~ msgstr "Poznámkový blok"
-
-#~ msgid "Note Editor"
-#~ msgstr "Editor poznámek"
-
-#~ msgid "Prayer List/Journal Editor"
-#~ msgstr "Editor pro Modlitební seznam/deník"
+#: ../xiphos.desktop.in.in.h:2
+msgid "Xiphos Bible Guide"
+msgstr "Xiphos Průvodce Biblí"
 
 #~ msgid "Open StudyPad File"
 #~ msgstr "Otevřít soubor pro Poznámkový blok"
-
 #~ msgid "Save StudyPad File"
 #~ msgstr "Uložit soubor pro Poznámkový blok"
-
 #~ msgid "item1"
 #~ msgstr "položka1"
-
 #~ msgid "item2"
 #~ msgstr "položka2"
-
 #~ msgid "_Module Options"
 #~ msgstr "_Volby modulu"
-
 #~ msgid "Sync with main"
 #~ msgstr "Synchronizovat s hlavním oknem"
-
 #~ msgid "Stay in sync"
 #~ msgstr "Zůstat při synchronizaci"
-
-#~ msgid ""
-#~ "Renaming is not available in Windows.\n"
-#~ "\n"
-#~ "Xiphos is limited by Windows' filesystem,\n"
-#~ "because it disallows the renaming of filename\n"
-#~ "components of currently-open files,\n"
-#~ "such as the contents of this commentary.\n"
-#~ "Therefore, personal commentary renaming is\n"
-#~ "not available in the Windows environment."
-#~ msgstr ""
-#~ "Přejmenování není ve Windows dostupné.\n"
-#~ "\n"
-#~ "Aplikace Xiphos je omezena systémem souborů\n"
-#~ "Windows. Problémy totiž vznikají s přejmenováváním\n"
-#~ "právě otevřených souborů, jako je například obsah\n"
-#~ "tohoto komentáře. Proto přejmenování osobního\n"
-#~ "komentáře není dostupné v prostředí Windows."
-
-#~ msgid "Rename Commentary"
-#~ msgstr "Přejmenovat komentář"
-
-#~ msgid "Choose Commentary Name"
-#~ msgstr "Vybrat jméno komentáře"
-
-#~ msgid "New Name"
-#~ msgstr "Nové jméno"
-
-#~ msgid ""
-#~ "Failed to create new configuration:\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Nepodařilo se vytvořit novou konfiguraci:\n"
-#~ "%s"
-
-#~ msgid ""
-#~ "Configuration build error:\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Chyba během vytváření konfigurace:\n"
-#~ "\n"
-
 #~ msgid "Print"
 #~ msgstr "Tisk"
-
 #~ msgid "Print Preview"
 #~ msgstr "Náhled tisku"
-
 #~ msgid "Failed to print the document"
 #~ msgstr "Nezdařil se tisk dokumentu"
-
 #~ msgid "Save List"
 #~ msgstr "Uložit seznam"
-
 #~ msgid "_Modules"
 #~ msgstr "_Moduly"
-
 #~ msgid "_Bookmarks"
 #~ msgstr "_Záložky"
-
 #~ msgid "Verse _List"
 #~ msgstr "Seznam _veršů"
-
 #~ msgid "%s not found"
 #~ msgstr "%s nenalezeno"
-
 #~ msgid "has been modified. Do you wish to save it?"
 #~ msgstr "byl změněm. Přejete si změny uložit?"
-
 #~ msgid "not loaded"
 #~ msgstr "nenačten"
-
 #~ msgid "Open the StudyPad editor"
 #~ msgstr "Otevřít Poznámkový blok"
-
 #~ msgid "Open a saved session"
 #~ msgstr "Otevřít uložené sezení"
-
 #~ msgid "Save the current session to a file"
 #~ msgstr "Uložit současné sezení do souboru"
-
 #~ msgid "_Copy"
 #~ msgstr "_Kopírovat"
-
 #~ msgid "Copy highlighted text from main window"
 #~ msgstr "Kopírovat zvýrazněný text z hlavního okna"
-
 #~ msgid "Search using the shortcut bar"
 #~ msgstr "Hledat s použitím tabulky zkratek"
-
 #~ msgid "Advanced search using the search dialog"
 #~ msgstr "Pokročilé hledání s použitím tabulky zkratek"
-
 #~ msgid "Set user preferences"
 #~ msgstr "Nastavit volby uživatele"
-
 #~ msgid "C_lear"
 #~ msgstr "_Vymazat"
-
 #~ msgid "Clear history list"
 #~ msgstr "Vymazat historii"
-
 #~ msgid "Show the Daily Devotion for today"
 #~ msgstr "Zobrazit Dnešní čtení pro dnešní datum"
-
 #~ msgid "Show or hide Bible texts window"
 #~ msgstr "Zobrazit/Skrýt okno Biblické texty"
-
 #~ msgid "Show or hide Preview window"
 #~ msgstr "Zobrazit/Skrýt okno Náhled"
-
 #~ msgid "Show or hide commentaries"
 #~ msgstr "Zobrazit/Skrýt komentáře/výklady"
-
 #~ msgid "Show or hide - dictionaries and lexicons"
 #~ msgstr "Zobrazit/Skrýt - slovníky a lexikony"
-
 #~ msgid "Open the Xiphos manual"
 #~ msgstr "Otevřít příručku pro Xiphos"
-
 #~ msgid "Sign up for the users' mailing list"
 #~ msgstr "Přihlásit se do e-mailové konference pro uživatele"
-
 #~ msgid "Chat with other users and developers"
 #~ msgstr "Komunikace s dalšími uživateli a vývojáři"
-
 #~ msgid "Report bug to SourceForge"
 #~ msgstr "Nahlásit chybu na SourceForge"
-
 #~ msgid "Translating Xiphos to other languages"
 #~ msgstr "Překládání aplikace Xiphos do dalších jazyků"
-
 #~ msgid "More information about the SWORD Project"
 #~ msgstr "Více informací o aplikace The SWORD Project"
-
 #~ msgid "About this application"
 #~ msgstr "O této aplikaci"
-
 #~ msgid "Hi_story"
 #~ msgstr "_Historie"
-
 #~ msgid "1 Cor 15:1"
 #~ msgstr "1. Korintským 15:1"
-
 #~ msgid "Name for new prayer list"
 #~ msgstr "Jméno nového modlitebního seznamu"
-
 #~ msgid "can not create path\n"
 #~ msgstr "nemohu vytvořit cestu\n"
-
 #~ msgid "Prayer list already exist\n"
 #~ msgstr "Modlitební seznam už existuje\n"
-
 #~ msgid "\\par\\par My prayer list \\par\\par Module created in Xiphos"
 #~ msgstr "\\par\\par Můj modlitební seznam \\par\\par Modul vytvořil Xiphos"
-
 #~ msgid "Delete Index"
 #~ msgstr "Odstranit rejstřík"
-
 #~ msgid "+5"
 #~ msgstr "+5"
-
 #~ msgid "+4"
 #~ msgstr "+4"
-
 #~ msgid "+3"
 #~ msgstr "+3"
-
 #~ msgid "+2"
 #~ msgstr "+2"
-
 #~ msgid "+1"
 #~ msgstr "+1"
-
 #~ msgid "-1"
 #~ msgstr "-1"
-
 #~ msgid "-2"
 #~ msgstr "-2"
-
 #~ msgid "-3"
 #~ msgstr "-3"
-
 #~ msgid "Starting"
 #~ msgstr "Startuji"
-
 #~ msgid "Building Xiphos interface"
 #~ msgstr "Vytvářím rozhraní Xiphos"
-
 #~ msgid "Initiating Xiphos"
 #~ msgstr "Inicializuji Xiphos"
-
 #~ msgid "done"
 #~ msgstr "hotovo"
-
 #~ msgid "Xiphos is shutdown"
 #~ msgstr "Xiphos je zastaven"
-
 #~ msgid "Initiating SWORD"
 #~ msgstr "Zavádím SWORD"
-
 #~ msgid "path to sword"
 #~ msgstr "cesta k sword"
-
 #~ msgid "System locale is"
 #~ msgstr "Systémová lokalizace je"
-
 #~ msgid "SWORD locale is"
 #~ msgstr "SWORD lokalizace je"
-
 #~ msgid "Checking for SWORD Modules"
 #~ msgstr "Kontrola SWORD modulů"
-
 #~ msgid "SWORD is shutdown"
 #~ msgstr "SWORD je zastaven"
-
 #~ msgid "Number of Text modules"
 #~ msgstr "Počet modulů Biblické texty"
-
 #~ msgid "Number of Commentary modules"
 #~ msgstr "Počet modulů Komentáře/Výklady"
-
 #~ msgid "Number of Dict/lex modules"
 #~ msgstr "Počet modulů Slovníky"
-
 #~ msgid "Number of Book modules"
 #~ msgstr "Počet modulů Knihy"
-
 #~ msgid "Number of Percomm modules"
 #~ msgstr "Počet modulů Osobní komentáře"
-
 #~ msgid "Number of Devotion modules"
 #~ msgstr "Počet modulů Čtení na každý den"
-
 #~ msgid "Number of Prayer modules"
 #~ msgstr "Počet modulů s Modlitbami"
-
 #~ msgid ""
 #~ "\n"
 #~ "First Run: need to create settings!\n"
 #~ msgstr ""
 #~ "\n"
 #~ "První spuštění: potřeba vytvořit nastavení!\n"
-
 #~ msgid "can not create  .sword"
 #~ msgstr "nelze vytvořit  .sword"
-
 #~ msgid "can not create  .sword/mods.d"
 #~ msgstr "nelze vytvořit  .sword/mods.d"
-
 #~ msgid "can not create  .sword/modules"
 #~ msgstr "nelze vytvořit  .sword/modules"
-
 #~ msgid "Select Local Source"
 #~ msgstr "Vybrat lokální zdroj"
-
 #~ msgid "It will be lost permanently!"
 #~ msgstr "Bude trvale ztracen!"
-
 #~ msgid "Open file..."
 #~ msgstr "Otevřít soubor..."
-
 #~ msgid "Save file as..."
 #~ msgstr "Uložit jako..."
-
 #~ msgid "Open in dialog"
 #~ msgstr "Otevřít v samostatném okně"
-
 #~ msgid ""
 #~ "For multi-word search, use\n"
 #~ "+FirstWord +SecondWord"
 #~ msgstr ""
 #~ "Pro víceslovné hledání použijte\n"
 #~ "+PrvníSlovo +DruhéSlovo"
-
 #~ msgid "_About the SWORD Project ..."
 #~ msgstr "O aplikaci _SWORD Project ..."
-
 #~ msgid "Select the modules you want"
 #~ msgstr "Vyberte modul, který chcete"
-
 #~ msgid ""
 #~ "There is currently no program set as your\n"
 #~ "handler for \"sword://\" and similar URLs.\n"
@@ -3691,9 +3753,8 @@ msgstr "_Zobrazit"
 #~ "pro obsluhu URL \"sword://\" a podobných.\n"
 #~ "Přejete si, aby se Xiphos používal\n"
 #~ "pro obsluhu těchto URL?"
-
 #~ msgid "<b>Font Miscellaneous</b>"
 #~ msgstr "<b>Písmo - různé</b>"
-
 #~ msgid "Bible text"
 #~ msgstr "Biblický text"
+
