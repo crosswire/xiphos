@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-29 14:21+0200\n"
+"POT-Creation-Date: 2009-05-01 11:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -372,27 +372,27 @@ msgstr ""
 msgid "Find Next"
 msgstr ""
 
-#: ../src/gnome2/font_dialog.c:297
+#: ../src/gnome2/font_dialog.c:301
 msgid "Set Module Font"
 msgstr ""
 
-#: ../src/gnome2/font_dialog.c:327
+#: ../src/gnome2/font_dialog.c:331
 msgid "Change font for"
 msgstr ""
 
-#: ../src/gnome2/font_dialog.c:331
+#: ../src/gnome2/font_dialog.c:335
 msgid "Module"
 msgstr ""
 
-#: ../src/gnome2/font_dialog.c:335
+#: ../src/gnome2/font_dialog.c:339
 msgid "Current font: "
 msgstr ""
 
-#: ../src/gnome2/font_dialog.c:372
+#: ../src/gnome2/font_dialog.c:376
 msgid "+0"
 msgstr ""
 
-#: ../src/gnome2/font_dialog.c:376
+#: ../src/gnome2/font_dialog.c:380
 msgid "Use the default font for this module"
 msgstr ""
 
@@ -1775,7 +1775,7 @@ msgid ""
 "language abbreviation file."
 msgstr ""
 
-#: ../src/main/sword.cc:1202
+#: ../src/main/sword.cc:1199
 msgid "Daily devotional was requested, but there are none installed."
 msgstr ""
 
