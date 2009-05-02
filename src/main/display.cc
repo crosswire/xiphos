@@ -1151,14 +1151,15 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 // then scribbled out the local static socket with (SayText "...").
 // Non-zero verse param is prefixed onto supplied text.
 //
+
+#ifndef INVALID_SOCKET
+# define INVALID_SOCKET -1
+#endif
+
 void
 ReadAloud(unsigned int verse, const char *suppliedtext)
 {
-#ifdef WIN32	
 	static int tts_socket = INVALID_SOCKET;	// no initial connection.
-#else
-	static int tts_socket = -1;	// no initial connection.
-#endif
 	static int use_counter = -2;	// to shortcircuit early uses.
 
 	if (settings.readaloud ||       // read anything, or
@@ -1201,7 +1202,7 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 					sprintf(msg, "%s\n%s, %s",
 						"TTS \"festival\" not started -- perhaps not installed",
 						"TTS connect failed", strerror(errno));
-					StopFestival(tts_socket);
+					StopFestival(&tts_socket);
 					settings.readaloud = 0;
 					gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 								       (widgets.readaloud_item),
@@ -1317,7 +1318,7 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 			char msg[256];
 			sprintf(msg, "TTS disappeared?\nTTS write failed: %s",
 				strerror(errno));
-			StopFestival(tts_socket);
+			StopFestival(&tts_socket);
 			settings.readaloud = 0;
 			gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 						       (widgets.readaloud_item),
@@ -1334,14 +1335,16 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 		// Reading aloud is disabled.
 		// If we had been reading, shut it down.
 		if (tts_socket >= 0) {
-			StopFestival(tts_socket);
+			StopFestival(&tts_socket);
 		}
 		use_counter++;
 		return;
 	}
 }
 
-//starts festival in a async process
+//
+// starts festival in a async process
+//
 void
 StartFestival()
 {
@@ -1374,21 +1377,24 @@ StartFestival()
 			NULL);
 }
 
-//shuts down Festival
+//
+// shuts down Festival
+//
 void
-StopFestival(int tts_socket)
+StopFestival(int *tts_socket)
 {
 #ifdef WIN32
-	closesocket (tts_socket);
-	tts_socket = INVALID_SOCKET;
+	closesocket(*tts_socket);
 #else
-	shutdown(tts_socket, SHUT_RDWR);
-	close(tts_socket);
-	tts_socket = -1;
+	shutdown(*tts_socket, SHUT_RDWR);
+	close(*tts_socket);
 #endif
+	*tts_socket = INVALID_SOCKET;
 }
 
-//tells Festival to say the given text
+//
+// tells Festival to say the given text
+//
 gboolean
 FestivalSpeak(gchar *text, int length, int tts_socket)
 {
