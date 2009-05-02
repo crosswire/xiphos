@@ -90,6 +90,7 @@ gint  _get_type_mod_list (void)
 			return TEXT_DESC_LIST;
 			break;
 		case COMMENTARY_TYPE:	
+		case PERCOM_TYPE:
 			return COMM_DESC_LIST;			
 			break;
 		case DICTIONARY_TYPE:	

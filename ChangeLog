@@ -1,3 +1,7 @@
+2009-05-02  karl <charcoal@users.sf.net>
+
+	* fixed #2781508 no "open file" modlist when pers.comm open.
+
 2009-04-26  karl <charcoal@users.sf.net>
 
 	* kill off remaining cygwin support.
