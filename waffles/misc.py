@@ -32,6 +32,10 @@ def check_pkg(conf, name, version='', mandatory=False, var=None):
     conf.check_cfg (package=name, uselib_store=var, args='--cflags --libs',
         atleast_version=version, mandatory=mandatory)
 
+    # make available libs to all source files
+    #(compile code with cflags from pkgconf e.g. -fshort-wchar, -mms-bitfields)
+    conf.env.append_value('ALL_LIBS', var)
+
 
 def check_pkg_msg(conf, name, version='', mandatory=False, var=None, msg=''):
     """
@@ -41,6 +45,12 @@ def check_pkg_msg(conf, name, version='', mandatory=False, var=None, msg=''):
         var = name.split ('-')[0].upper ()
     conf.check_cfg (package=name, uselib_store=var, args='--cflags --libs',
         atleast_version=version, mandatory=mandatory, msg=msg)
+
+    # make available libs to all source files
+    #(compile code with cflags from pkgconf e.g. -fshort-wchar, -mms-bitfields)
+    conf.env.append_value('ALL_LIBS', var)
+
+
 
 
 def check_pkgver(conf, name, version='', mandatory=False, var=None):

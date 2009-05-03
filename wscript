@@ -190,8 +190,8 @@ def configure(conf):
         # this isn't supposed to be necessary
         env['LINKFLAGS'] = ['-lws2_32']
         #temporary hacks (still doesn't work with pkg-config cflags)
-        env['CCFLAGS'] = ['-mms-bitfields']
-        env['CXXFLAGS'] = ['-mms-bitfields']
+        #env['CCFLAGS'] = ['-mms-bitfields']
+        #env['CXXFLAGS'] = ['-mms-bitfields']
     
     ### cmd line options
 
@@ -362,8 +362,8 @@ def configure(conf):
     if not env['ENABLE_GTKHTML']:
         Gecko(conf).detect()
         dfn('USE_GTKMOZEMBED', 1)
-        env.append_value('CCFLAGS', env['GECKO_CCFLAGS'])
-        env.append_value('CXXFLAGS', env['GECKO_CCFLAGS'])
+        #env.append_value('CCFLAGS', env['GECKO_CCFLAGS'])
+        #env.append_value('CXXFLAGS', env['GECKO_CCFLAGS'])
     ######################
 
 
