@@ -79,9 +79,9 @@ class Gecko(object):
         TODO: ignore pkgconfig when supplied custom
               gecko incldir and libdir
         """
-        self.conf.check_cxx(cxxflags='-fshort-wchar',
-                errmsg='fail flag is needed for libxul 1.9')
-        self.env['GECKO_CCFLAGS'] = '-fshort-wchar'
+        #self.conf.check_cxx(cxxflags='-fshort-wchar',
+        #        errmsg='fail flag is needed for libxul 1.9')
+        #self.env['GECKO_CCFLAGS'] = '-fshort-wchar'
 
         # try first the latest xulrunner version
         success = False
@@ -96,10 +96,10 @@ class Gecko(object):
     def check_version(self, name):
 
         cfg = self.conf
-        check_pkg(cfg, name, '1.7', var='GECKO_1_7')
-        check_pkg(cfg, name, '1.8', var='GECKO_1_8')
-        check_pkg(cfg, name, '1.8.1', var='GECKO_1_8_1')
-        check_pkg(cfg, name, '1.9', var='GECKO_1_9')
+        check_pkgver(cfg, name, '1.7', var='GECKO_1_7')
+        check_pkgver(cfg, name, '1.8', var='GECKO_1_8')
+        check_pkgver(cfg, name, '1.8.1', var='GECKO_1_8_1')
+        check_pkgver(cfg, name, '1.9', var='GECKO_1_9')
 
     
     def get_gecko_includes(self, incldir):
