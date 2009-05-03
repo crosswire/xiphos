@@ -33,6 +33,7 @@ def build(bld):
             bld.env['GECKO_INCLUDE'], # ../../ for config.h
         source=source,
         target='editor',
-        uselib='GLIB GNOMEUI SWORD GTKMOZEMBED GTKMOZEMBED_UNSTABLE GTKHTML GTKHTML_EDITOR'
+        #uselib='GLIB GNOMEUI SWORD GTKMOZEMBED GTKMOZEMBED_UNSTABLE GTKHTML GTKHTML_EDITOR'
+        uselib= bld.env['ALL_LIBS'],
     )
 
