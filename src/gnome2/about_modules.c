@@ -370,10 +370,10 @@ gui_core_display_about_dialog(gchar * desc,
 	static const char *html_end = "</body></html>";
 
 	g_string_printf(description,
-		"<center><font color=\"#000fcf\"><b>%s</b></font><hr>%s %s</center><br>",
-		desc,
-		(version) ? "<br>Sword module version" : "",
-		(version) ? version : "");
+			"<center><font color=\"#000fcf\"><b>%s</b></font><hr>%s %s</center><br>",
+			(desc ? desc : "No module present"),
+			(version ? "<br>Sword module version" : ""),
+			(version ? version : ""));
 	aboutbox = gui_create_about_modules();
 	gtk_widget_show(aboutbox);
 
