@@ -414,7 +414,10 @@ remove_install_modules(GList * modules,
 			char *datapath, *conf_file;
 			FILE *result;
 
-			GS_print(("archive %s in %s\n", buf, destination));
+			GS_print(("archive %s in %s\n", buf,
+				  (destination
+				   ? destination
+				   : settings.path_to_mods)));
 			sprintf(dir, "%s/%s", settings.homedir, ZIP_DIR);
 			if ((access(dir, F_OK) == -1) &&
 			    (Mkdir(dir, S_IRWXU) != 0)) {
@@ -432,11 +435,16 @@ remove_install_modules(GList * modules,
 			if (access(datapath, F_OK) == -1)
 			    *(strrchr(datapath, '/')) = '\0';
 
-			conf_file = main_get_mod_config_file(buf, destination);
+			conf_file = main_get_mod_config_file
+					    (buf, (destination
+						   ? destination
+						   : settings.path_to_mods));
 			g_remove(zipfile);
 			g_string_printf(cmd,
 				"( cd \"%s\" && zip -r \"%s\" \"mods.d/%s\" \"%s\" ) 2>&1",
-				destination,
+				(destination
+				 ? destination
+				 : settings.path_to_mods),
 				zipfile,
 				conf_file,
 				datapath);
