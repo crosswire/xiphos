@@ -421,7 +421,13 @@ int e_splash_add_icon(ESplash * splash, GdkPixbuf * icon_pixbuf)
 	priv = splash->priv;
 
 	icon = icon_new(splash, icon_pixbuf);
-	priv->icons = g_list_append(priv->icons, icon);
+
+	GtkTextDirection dir = gtk_widget_get_direction(GTK_WIDGET (splash));
+	
+	if(dir == GTK_TEXT_DIR_LTR)
+		priv->icons = g_list_append(priv->icons, icon);
+	else
+		priv->icons = g_list_prepend(priv->icons, icon);
 
 	priv->num_icons++;
 
@@ -453,7 +459,12 @@ e_splash_set_icon_highlight(ESplash * splash,
 
 	priv = splash->priv;
 
-	icon = (Icon *) g_list_nth(priv->icons, num)->data;
+	GtkTextDirection dir = gtk_widget_get_direction(GTK_WIDGET (splash));
+
+	if (dir == GTK_TEXT_DIR_LTR)
+		icon = (Icon *) g_list_nth(priv->icons, num)->data;
+	else
+		icon = (Icon *) g_list_nth(priv->icons, priv->num_icons - num -1)->data;
 
 	gtk_object_set(GTK_OBJECT(icon->canvas_item),
 		       "pixbuf",
@@ -470,6 +481,7 @@ void gui_splash_init()
 {
 	GdkPixbuf *icon_pixbuf;
 	GError *error = NULL;
+	GList *icons = NULL;
 
 	if (settings.showsplash) {
 		splash = e_splash_new();
@@ -478,161 +490,50 @@ void gui_splash_init()
 
 		gtk_widget_show(splash);
 		gtk_object_ref(GTK_OBJECT(splash));
-
-#ifdef USE_GTKMOZEMBED		
-		icon_pixbuf = pixbuf_finder("mozilla-icon.png", &error);
-		if (!icon_pixbuf) {
-			GS_warning(("pixmap file error: %s\n",
-				    error->message));
-			g_error_free(error);
-			error = NULL;
-			/* this is ugly but better than a crash */
-			settings.showsplash = 0;
-			gtk_widget_unref(splash);
-			gtk_widget_destroy(splash);
-			return;
-		}
-		e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
-		gdk_pixbuf_unref(icon_pixbuf);
+		
+		
+#ifdef USE_GTKMOZEMBED
+		icons = g_list_append(icons, "mozilla-icon.png");
 #endif
-		icon_pixbuf = pixbuf_finder("gnome-session.png", &error);
-		if (!icon_pixbuf) {
-			GS_warning(("pixmap file error: %s\n",
-				    error->message));
-			g_error_free(error);
-			error = NULL;
-			settings.showsplash = 0;
-			gtk_widget_unref(splash);
-			gtk_widget_destroy(splash);
-			return;
-		}
-		e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
-		gdk_pixbuf_unref(icon_pixbuf);
-
-		icon_pixbuf = pixbuf_finder("gnome-windows.png", &error);
-		if (!icon_pixbuf) {
-			GS_warning(("pixmap file error: %s\n",
-				    error->message));
-			g_error_free(error);
-			error = NULL;
-			settings.showsplash = 0;
-			gtk_widget_unref(splash);
-			gtk_widget_destroy(splash);
-			return;
-		}
-		e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
-		gdk_pixbuf_unref(icon_pixbuf);
-
-		icon_pixbuf = pixbuf_finder("sword.png", &error);
-		if (!icon_pixbuf) {
-			GS_warning(("pixmap file error: %s\n",
-				    error->message));
-			g_error_free(error);
-			error = NULL;
-			settings.showsplash = 0;
-			gtk_widget_unref(splash);
-			gtk_widget_destroy(splash);
-			return;
-		}
-		e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
-		gdk_pixbuf_unref(icon_pixbuf);
-
-		icon_pixbuf = pixbuf_finder("gs2-48x48.png", &error);
-		if (!icon_pixbuf) {
-			GS_warning(("pixmap file error: %s\n",
-				    error->message));
-			g_error_free(error);
-			error = NULL;
-			settings.showsplash = 0;
-			gtk_widget_unref(splash);
-			gtk_widget_destroy(splash);
-			return;
-		}
-		e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
-		gdk_pixbuf_unref(icon_pixbuf);
-	}
-}
-
-void gui_splash_step0()
-{
-	ESplashPrivate *priv;
-	if (settings.showsplash) {
+		icons = g_list_append(icons, "gnome-windows.png");
+		icons = g_list_append(icons, "sword.png");
+		icons = g_list_append(icons, "gnome-session.png");
+		icons = g_list_append(icons, "gs2-48x48.png");
 		
-		priv = E_SPLASH(splash)->priv;
-		gtk_progress_bar_set_text(priv->progressbar,
-                                             _("Initiating Gecko"));
-		gtk_progress_bar_set_fraction(priv->progressbar,
-                                             0.0);
-		e_splash_set_icon_highlight(E_SPLASH(splash), 0, TRUE);
-		
-		while (gtk_events_pending()) {
-			gtk_main_iteration();
+		while (icons != NULL)
+		{
+			icon_pixbuf = pixbuf_finder(icons->data, &error);
+			if (!icon_pixbuf) {
+				GS_warning(("pixmap file error: %s\n",
+					    error->message));
+				error = NULL;
+				/* this is ugly but better than a crash */
+				settings.showsplash = 0;
+				gtk_widget_unref(splash);
+				gtk_widget_destroy(splash);
+				return;
+			}
+			e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
+			gdk_pixbuf_unref(icon_pixbuf);
+			icons = g_list_next(icons);
 		}
-	}
-}
-void gui_splash_step1()
-{
-	ESplashPrivate *priv;
-	if (settings.showsplash) {
-		
-		priv = E_SPLASH(splash)->priv;
-		gtk_progress_bar_set_text(priv->progressbar,
-                                             _("Loading settings"));
-		gtk_progress_bar_set_fraction(priv->progressbar,
-                                             0.2);
-		e_splash_set_icon_highlight(E_SPLASH(splash), 0, TRUE);
-		
-		while (gtk_events_pending()) {
-			gtk_main_iteration();
-		}
+
+		g_list_free(icons);
 	}
 }
 
 
-void gui_splash_step2()
+
+void gui_splash_step(gchar *text, gdouble progress, gint step)
 {
 	ESplashPrivate *priv;
 	if (settings.showsplash) {
 		priv = E_SPLASH(splash)->priv;
 		gtk_progress_bar_set_text(priv->progressbar,
-                                             _("Building Interface"));
+					  text);
 		gtk_progress_bar_set_fraction(priv->progressbar,
-                                             0.5);
-		e_splash_set_icon_highlight(E_SPLASH(splash), 1, TRUE);
-
-		while (gtk_events_pending()) {
-			gtk_main_iteration();
-		}
-	}
-}
-
-void gui_splash_step3()
-{
-	ESplashPrivate *priv;
-	if (settings.showsplash) {
-		priv = E_SPLASH(splash)->priv;
-		gtk_progress_bar_set_text(priv->progressbar,
-                                             _("Starting Sword"));
-		gtk_progress_bar_set_fraction(priv->progressbar,
-                                             0.8);
-		e_splash_set_icon_highlight(E_SPLASH(splash), 2, TRUE);
-
-		while (gtk_events_pending()) {
-			gtk_main_iteration();
-		}
-	}
-}
-
-void gui_splash_step4()
-{
-	ESplashPrivate *priv;
-	if (settings.showsplash) {
-		priv = E_SPLASH(splash)->priv;
-		gtk_progress_bar_set_text(priv->progressbar,
-                                             _("Displaying Xiphos"));
-		gtk_progress_bar_set_fraction(priv->progressbar,
-                                             1.0);
-		e_splash_set_icon_highlight(E_SPLASH(splash), 3, TRUE);
+					      progress);
+		e_splash_set_icon_highlight(E_SPLASH(splash), step, TRUE);
 
 		while (gtk_events_pending()) {
 			gtk_main_iteration();

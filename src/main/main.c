@@ -63,7 +63,8 @@ int main(int argc, char *argv[])
 	int newconfigs = FALSE;
 	int newbookmarks = FALSE;
 	int have_sword_url = FALSE;
-
+	gint base_step = 0; //needed for splash
+	
 	g_thread_init(NULL);
 
 #ifdef WIN32
@@ -136,31 +137,35 @@ int main(int argc, char *argv[])
 			have_sword_url = TRUE;
 		}
 	}
+
 	/* 
 	 * check for directories and files
 	 */   
     	settings_init(newconfigs,newbookmarks);
-	
+
 	gui_splash_init();
 	
 #ifdef USE_GTKMOZEMBED
-	gui_splash_step0();
+	
+	gui_splash_step(_("Initiating Gecko"), 0.0, 0);
 	
 	gecko_html_initialize();
+
+	base_step = 1;
 #endif
-	gui_splash_step1();
-	
+	gui_splash_step(_("Building Interface"), 0.2, 0 + base_step);
+
 	create_mainwindow();
 
-	gui_splash_step2();
-		
+	gui_splash_step(_("Starting Sword"), 0.5, 1 + base_step);
+
 	main_init_backend();
 	
-	gui_splash_step3();
+	gui_splash_step(_("Loading Settings"), 0.8, 2 + base_step);
 
 	frontend_init();
 	
-	gui_splash_step4();
+	gui_splash_step(_("Displaying Xiphos"), 1.0, 3 + base_step);
 	
 	frontend_display();
 	
