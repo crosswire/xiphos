@@ -9,5 +9,5 @@ X-MultipleArgs=false
 Type=Application
 Categories=Utility;X-Red-Hat-Extra;
 StartupNotify=true
-TryExec=/usr/bin/xiphos
+TryExec=@INSTALL_PREFIX@bin/xiphos
 X-Desktop-File-Install-Version=0.15
