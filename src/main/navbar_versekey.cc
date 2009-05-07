@@ -146,7 +146,7 @@ void main_navbar_versekey_spin_chapter(NAVBAR_VERSEKEY navbar, int direction)
 	
 	vkey.AutoNormalize(1);
 	vkey = tmpkey;
-	chapter = (direction)?(vkey.Chapter()+1):(vkey.Chapter()-1);
+	chapter = (direction ? (vkey.Chapter()+1) : (vkey.Chapter()-1));
 	vkey.Chapter(chapter);
 	tmpkey = g_strdup_printf("%s %d:1", vkey.getBookName(), vkey.Chapter());
 	gtk_entry_set_text(GTK_ENTRY(navbar.lookup_entry), tmpkey);
@@ -217,7 +217,7 @@ void on_nt_book_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 {
 	VerseKey vkey;
 	GtkWidget *entry = NULL;
-	char book = GPOINTER_TO_INT(user_data);
+	int book = GPOINTER_TO_INT(user_data);
 
 #ifndef OLD_NAVBAR	
 	vkey.AutoNormalize(1);
@@ -273,7 +273,7 @@ void on_ot_book_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 {
 	VerseKey vkey;
 	GtkWidget *entry = NULL;
-	char book = GPOINTER_TO_INT(user_data);
+	int book = GPOINTER_TO_INT(user_data);
 #ifndef OLD_NAVBAR	
 	vkey.AutoNormalize(1);
 	
@@ -329,7 +329,7 @@ void on_chapter_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 {
 	VerseKey vkey;
 	GtkWidget *entry = NULL;
-	char chapter = GPOINTER_TO_INT(user_data);
+	int chapter = GPOINTER_TO_INT(user_data);
 		
 #ifndef OLD_NAVBAR	
 	vkey.AutoNormalize(1);
@@ -385,7 +385,7 @@ void on_verse_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 {	
 	VerseKey vkey;
 	GtkWidget *entry = NULL;
-	char verse = GPOINTER_TO_INT(user_data);
+	int verse = GPOINTER_TO_INT(user_data);
 	
 #ifndef OLD_NAVBAR	
 	vkey.AutoNormalize(1);
