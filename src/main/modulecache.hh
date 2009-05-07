@@ -43,6 +43,7 @@
 #ifdef __cplusplus
 
 #include <map>
+#include <string>
 
 extern "C" {
 
@@ -109,7 +110,7 @@ namespace ModuleCache {
 	typedef std::map < int, CacheTestament > CacheModule;
 
 	// Index by module name => Cache for that module.
-	typedef std::map < const char *, CacheModule > CacheMap;
+	typedef std::map < const std::string, CacheModule > CacheMap;
 
 	// Textually:
 	// CacheMap contains modules of testaments of books of chapters of
