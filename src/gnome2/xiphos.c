@@ -106,6 +106,7 @@ void frontend_init(void)
 	 *  setup sidebar
 	 */
 	gui_create_sidebar(widgets.epaned);
+
 	main_init_sidebar_search_backend();
 	main_search_sidebar_fill_bounds_combos();
 	

@@ -442,6 +442,11 @@ GeckoHtml *gecko_html_new(DIALOG_DATA * dialog, gboolean is_dialog, gint pane)
 	priv->pane = pane;
 	priv->is_dialog = is_dialog;
 	priv->dialog = dialog;
+	
+	//make scrollbar appear on the left for RTL locales
+	GtkTextDirection dir = gtk_widget_get_direction(GTK_WIDGET (html));
+	if (dir == GTK_TEXT_DIR_RTL)
+	    priv->yelper->SetRTL();
 	return html;
 }
 
