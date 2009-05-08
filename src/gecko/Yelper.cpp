@@ -570,54 +570,66 @@ gint Yelper::ProcessKeyReleaseEvent(GtkMozEmbed *embed, gpointer dom_event)
 nsresult 
 Yelper::Print (GeckoPrintInfo *print_info, PRBool preview, int *prev_pages)
 {
-  nsresult rv;
+	nsresult rv;
 	
-  nsCOMPtr<nsIWebBrowserPrint> print(do_GetInterface (mWebBrowser, &rv));
-  NS_ENSURE_SUCCESS (rv, rv);
-
-  nsCOMPtr<nsIPrintSettings> settings;
-
-  rv = print->GetGlobalPrintSettings (getter_AddRefs (settings));
-  NS_ENSURE_SUCCESS (rv, rv);
-
-  rv = PrintListener::SetPrintSettings (print_info, preview, settings);
-
-  NS_ENSURE_SUCCESS (rv, rv);
-
-  nsCOMPtr<PrintListener> listener = new PrintListener (print_info, print);
-
-  if (!preview){
-	GS_message(("Yelper::Print4"));
-	rv = print->Print (settings, listener);
-	GS_message(("Yelper::Print5"));
-  }
-  else {
-    rv = print->PrintPreview (settings, mDOMWindow, nsnull);
-    rv |= print->GetPrintPreviewNumPages (prev_pages);
-  }
-  GS_message(("Yelper::Print6"));
-  return rv;
-
+	nsCOMPtr<nsIWebBrowserPrint> print(do_GetInterface (mWebBrowser, &rv));
+	NS_ENSURE_SUCCESS (rv, rv);
+	
+	nsCOMPtr<nsIPrintSettings> settings;
+	
+	rv = print->GetGlobalPrintSettings (getter_AddRefs (settings));
+	NS_ENSURE_SUCCESS (rv, rv);
+	
+	rv = PrintListener::SetPrintSettings (print_info, preview, settings);
+	
+	NS_ENSURE_SUCCESS (rv, rv);
+	
+	nsCOMPtr<PrintListener> listener = new PrintListener (print_info, print);
+	
+	if (!preview){
+		GS_message(("Yelper::Print4"));
+		rv = print->Print (settings, listener);
+		GS_message(("Yelper::Print5"));
+	}
+	else {
+		rv = print->PrintPreview (settings, mDOMWindow, nsnull);
+		rv |= print->GetPrintPreviewNumPages (prev_pages);
+	}
+	GS_message(("Yelper::Print6"));
+	return rv;
+	
 }
 #endif
 
 nsresult
 Yelper::PrintPreviewNavigate (int page_no)
 {
-  nsresult rv;
-  nsCOMPtr<nsIWebBrowserPrint> print(do_GetInterface (mWebBrowser, &rv));
-  NS_ENSURE_SUCCESS (rv, rv);
-
-  return print->PrintPreviewNavigate (0, page_no);
+	nsresult rv;
+	nsCOMPtr<nsIWebBrowserPrint> print(do_GetInterface (mWebBrowser, &rv));
+	NS_ENSURE_SUCCESS (rv, rv);
+	
+	return print->PrintPreviewNavigate (0, page_no);
 }
 
 nsresult 
 Yelper::PrintPreviewEnd ()
 {
-  nsresult rv;
-  nsCOMPtr<nsIWebBrowserPrint> print(do_GetInterface (mWebBrowser, &rv));
-  NS_ENSURE_SUCCESS (rv, rv);
+	nsresult rv;
+	nsCOMPtr<nsIWebBrowserPrint> print(do_GetInterface (mWebBrowser, &rv));
+	NS_ENSURE_SUCCESS (rv, rv);
+	
+	return print->ExitPrintPreview ();
 
-  return print->ExitPrintPreview ();
+}
 
+//make all xulrunner widgets appear RTL
+void
+Yelper::SetRTL()
+{
+	nsresult rv;
+	nsCOMPtr<nsIPrefService> prefService = 
+		do_GetService (NS_PREFSERVICE_CONTRACTID);
+	nsCOMPtr<nsIPrefBranch> pref;
+	prefService->GetBranch("", getter_AddRefs(pref));
+	rv = pref->SetIntPref("bidi.direction", 2);
 }
