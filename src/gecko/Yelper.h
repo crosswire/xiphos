@@ -57,11 +57,12 @@ public:
 	void SetSelectionAttention (PRBool aSelectionAttention);
         gint ProcessMouseOver (void* aEvent, gint pane,  
 			       gboolean is_dialog, DIALOG_DATA * d);
-        gint ProcessMouseDblClickEvent (void* aEvent);
+	gint ProcessMouseDblClickEvent (void* aEvent);
 	gint ProcessMouseUpEvent (void* aEvent);
 	gint ProcessMouseEvent (void *aEvent);
-        gint ProcessKeyDownEvent(GtkMozEmbed *embed, gpointer dom_event);
-        gint ProcessKeyReleaseEvent(GtkMozEmbed *embed, gpointer dom_event);
+	gint ProcessKeyDownEvent(GtkMozEmbed *embed, gpointer dom_event);
+	gint ProcessKeyReleaseEvent(GtkMozEmbed *embed, gpointer dom_event);
+	void SetRTL();
 #ifdef USE_GTKUPRINT
 	nsresult Print (GeckoPrintInfo *print_info, PRBool preview,
 			gint *prev_pages);
