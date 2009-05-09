@@ -43,7 +43,7 @@
     !define APP_NAME "Xiphos"
     !define INSTALLER_NAME "xiphos"
     !define APP_BINARY_NAME "xiphos.exe"
-    !define APP_VERS "3.0.1"
+    !define APP_VERS "3.1.0"
     !define APP_EDITION "win32"
     !define APP_URL "http://xiphos.org"
 
@@ -305,6 +305,9 @@ Section $(CORE_SEC_TITLE) SecCore
         CreateDirectory '${STM_DIR}'
         CreateShortCut '${STM_DIR}\${APP_NAME}.lnk' '$INSTDIR\bin\${APP_BINARY_NAME}'
         CreateShortCut '${STM_DIR}\Uninstall.lnk' '${UNINST_EXE}'
+        ; utils.bat and EN help file
+        CreateShortCut '${STM_DIR}\Utils.lnk' '$INSTDIR\bin\utils.bat'
+        CreateShortCut '${STM_DIR}\Help.lnk' '$INSTDIR\share\help\C\xiphos.chm'
     !insertmacro MUI_STARTMENU_WRITE_END
 
     ; Desktop shortcuts
@@ -392,6 +395,8 @@ Section Uninstall
 
     Delete "${ST_MENU}\${APP_NAME}.lnk"
     Delete "${ST_MENU}\Uninstall.lnk"
+    Delete "${ST_MENU}\Utils.lnk"
+    Delete "${ST_MENU}\Help.lnk"
     RMDir "${ST_MENU}"
     Delete "$DESKTOP\${APP_NAME}.lnk"
 
