@@ -150,18 +150,20 @@ def configure(conf):
         env['PREFIX'] = _prefix
     ##
 
-    conf.check_tool('g++ gcc gnu_dirs')
+    conf.check_tool('g++ gcc gnu_dirs misc')
+    conf.check_tool('intltool') # check for locale.h included
+
+    # DATADIR is defined by intltool in config.h - conflict in win32 (mingw)
+    conf.undefine('DATADIR')
 
     if env['IS_WIN32']:
         # tool to link icon with executable
         conf.check_tool('winres')
         # the following line does not work because of a problem with waf
         # conf.check_tool('intltool')
-        env['POCOM'] = conf.find_program('msgfmt')
-        env['INTLTOOL'] = '/usr/local/bin/intltool-merge'
-    else:
-        conf.check_tool('intltool') # check for locale.h included
-        conf.check_tool('misc')
+        #env['POCOM'] = conf.find_program('msgfmt')
+        #env['INTLTOOL'] = '/usr/local/bin/intltool-merge'
+    #else:
 
 
     # delint flags
@@ -189,9 +191,6 @@ def configure(conf):
         conf.check(lib='ws2_32', uselib='WSOCK', mandatory=True)
         # this isn't supposed to be necessary
         env['LINKFLAGS'] = ['-lws2_32']
-        #temporary hacks (still doesn't work with pkg-config cflags)
-        #env['CCFLAGS'] = ['-mms-bitfields']
-        #env['CXXFLAGS'] = ['-mms-bitfields']
     
     ### cmd line options
 
@@ -228,6 +227,10 @@ def configure(conf):
     # disable console window in win32
     if opt.no_console and env['IS_WIN32']:
         env.append_value('LINKFLAGS', '-mwindows')
+
+
+    # strip xiphos binary
+    env['STRIP'] = conf.find_program('strip', mandatory=True)
 
 
 
@@ -432,6 +435,8 @@ def configure(conf):
 
 def build(bld):
 
+    env = bld.env
+
     # process subfolders
     bld.add_subdirs("""
         src/backend
@@ -441,7 +446,7 @@ def build(bld):
         ui
     """)
     # use GECKO
-    if not bld.env['ENABLE_GTKHTML']:
+    if not env['ENABLE_GTKHTML']:
         bld.add_subdirs('src/gecko')
 
     bld.install_files('${PACKAGE_DOC_DIR}', """
@@ -461,20 +466,23 @@ def build(bld):
     bld.install_files('${PACKAGE_PIXMAPS_DIR}','pixmaps/*')
 
     # handle .desktop creation and installation
-    if not bld.env["IS_WIN32"]:
+    if not env["IS_WIN32"]:
         bld.new_task_gen(
                 features='subst',
                 source='xiphos.desktop.in.in',
                 target='xiphos.desktop.in',
-                dict={'xiphos_exec':'xiphos',
-                      'PACKAGE_PIXMAPS_DIR': bld.env['PACKAGE_PIXMAPS_DIR']})
+                dict={'xiphos_exec': 'xiphos',
+                      'PACKAGE_PIXMAPS_DIR': env['PACKAGE_PIXMAPS_DIR'],
+                      'INSTALL_PREFIX': env['INSTALL_PREFIX']},
+        )
         bld.new_task_gen(
                 features='intltool_in',
                 source='xiphos.desktop.in',
                 target='xiphos.desktop',
                 install_path='${PACKAGE_MENU_DIR}',
                 podir='po',
-                flags='-d')
+                flags=['-d', '-q', '-u', '-c']
+        )
 
 
     #mkenums marshal pixmaps')
