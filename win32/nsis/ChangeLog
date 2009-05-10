@@ -1,5 +1,10 @@
 2009-02-18  matysek <matysek03@users.sf.net>
 
+	* added quick launch icon
+	* added possibility to install shortcuts for all/current user
+
+2009-02-18  matysek <matysek03@users.sf.net>
+
 	* added Start menu shortcut to EN xiphos help (chm file)
 	* added Start menu shortcut to ./bin/utils.bat
 	  (file to set cli environment for running sword utilities)
