@@ -186,11 +186,11 @@
     !insertmacro MUI_PAGE_WELCOME
     !insertmacro MUI_PAGE_LICENSE \
         $(LICENSE_FILE) ; defined in language file
-    ;!insertmacro MUI_PAGE_COMPONENTS
+    !insertmacro MUI_PAGE_COMPONENTS
     !insertmacro MUI_PAGE_DIRECTORY
     !insertmacro MUI_PAGE_INSTFILES
 
-    !insertmacro MUI_PAGE_STARTMENU Application $StartMenuDir
+    ;!insertmacro MUI_PAGE_STARTMENU Application $StartMenuDir
 
     ; page with release notes
     !insertmacro MUI_PAGE_README "..\..\RELEASE-NOTES"
@@ -243,11 +243,6 @@
 ; Section is like one component
 Section $(CORE_SEC_TITLE) SecCore
 
-    ; shortcuts will be installed for all users - Desktop/Startmenu
-    ; and Sword data files will be also installed for all users
-    SetShellVarContext all
-
-
     ; Install fonts
 
     StrCpy $FONT_DIR $FONTS
@@ -292,26 +287,13 @@ Section $(CORE_SEC_TITLE) SecCore
         File /r "${CORE_F}"
     !insertmacro UNINSTALL.LOG_CLOSE_INSTALL
 
-    ; Install Sword files
+    ; Sword data files need to be installed for all users
+    SetShellVarContext all
+    ; Install Sword files - not needed to uninstall
     SetOutPath '$APPDATA\${INSTPATH_SWORD}'
     File /r "${SWORD_F}"
-
-    ; startmenu/shortcuts
-
-    !define STM_DIR "$SMPROGRAMS\$StartMenuDir"
-
-    !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
-        ;Create shortcuts
-        CreateDirectory '${STM_DIR}'
-        CreateShortCut '${STM_DIR}\${APP_NAME}.lnk' '$INSTDIR\bin\${APP_BINARY_NAME}'
-        CreateShortCut '${STM_DIR}\Uninstall.lnk' '${UNINST_EXE}'
-        ; utils.bat and EN help file
-        CreateShortCut '${STM_DIR}\Utils.lnk' '$INSTDIR\bin\utils.bat'
-        CreateShortCut '${STM_DIR}\Help.lnk' '$INSTDIR\share\help\C\xiphos.chm'
-    !insertmacro MUI_STARTMENU_WRITE_END
-
-    ; Desktop shortcuts
-    CreateShortCut '$DESKTOP\${APP_NAME}.lnk' '$INSTDIR\bin\${APP_BINARY_NAME}'
+    ; set to default value 
+    SetShellVarContext current
 
     ; Add uninstall information to Add/Remove Programs
     WriteRegStr ${INSTDIR_REG_ROOT} "${INSTDIR_REG_KEY}" "InstallDir" "$INSTDIR"
@@ -336,6 +318,34 @@ Section $(CORE_SEC_TITLE) SecCore
     ;Create uninstaller
     WriteUninstaller "${UNINST_EXE}"
 
+SectionEnd
+
+;--------------------------------
+; Other Sections Section
+
+Section "Install for All Users"
+    ; shortcuts will be installed for all users - Desktop/Startmenu/Quick launch
+    SetShellVarContext all
+SectionEnd
+
+Section "Start Menu Shortcuts"
+    ; startmenu/shortcuts
+    !define STM_DIR "$SMPROGRAMS\${APP_NAME}"
+
+    ; Create shortcuts
+    CreateDirectory '${STM_DIR}'
+    CreateShortCut '${STM_DIR}\Uninstall.lnk' '${UNINST_EXE}'
+    CreateShortCut '${STM_DIR}\Xiphos Help.lnk' '$INSTDIR\share\help\C\xiphos.chm'
+    CreateShortCut '${STM_DIR}\Utils.lnk' '$INSTDIR\bin\utils.bat'
+    CreateShortCut '${STM_DIR}\${APP_NAME}.lnk' '$INSTDIR\bin\${APP_BINARY_NAME}'
+SectionEnd
+ 
+Section "Desktop Shortcut"
+    CreateShortCut '$DESKTOP\${APP_NAME}.lnk' '$INSTDIR\bin\${APP_BINARY_NAME}'
+SectionEnd
+
+Section "Quick Launch Icon"
+    CreateShortCut '$QUICKLAUNCH\${APP_NAME}.lnk' '$INSTDIR\bin\${APP_BINARY_NAME}'
 SectionEnd
 
 ;--------------------------------
@@ -368,9 +378,6 @@ FunctionEnd
 
 Section Uninstall
 
-    ; uninstall shortcuts for all users - Desktop/Startmenu
-    SetShellVarContext all
-
     ; Hack to speed up uninstaller
     RMDir /r "$INSTDIR\bin\*.*"
     RMDir /r "$INSTDIR\data\*.*"
@@ -390,15 +397,49 @@ Section Uninstall
     ; remove Crosswire folder if exists and is empty
     RMDir "$PROGRAMFILES\CrossWire"
 
-    !insertmacro MUI_STARTMENU_GETFOLDER Application $StartMenuDir
-    !define ST_MENU "$SMPROGRAMS\$StartMenuDir"
 
+    ;-----------------------------------
+    ; Uninstall shortcuts for all susers
+
+    ; uninstall shortcuts for all users - Desktop/Startmenu
+    SetShellVarContext all
+
+    !define ST_MENU "$SMPROGRAMS\${APP_NAME}"
+
+    ; remove Startmenu
     Delete "${ST_MENU}\${APP_NAME}.lnk"
     Delete "${ST_MENU}\Uninstall.lnk"
     Delete "${ST_MENU}\Utils.lnk"
-    Delete "${ST_MENU}\Help.lnk"
+    Delete "${ST_MENU}\${APP_NAME} Help.lnk"
     RMDir "${ST_MENU}"
+
+    ; remove desktop icon
     Delete "$DESKTOP\${APP_NAME}.lnk"
+
+    ; remove Quick Launch icon
+    Delete "$QUICKLAUNCH\${APP_NAME}.lnk"
+
+    ;-------------------------------------
+    ; Uninstall shortcuts for current user
+
+    ; uninstall shortcuts for current user - Desktop/Startmenu
+    SetShellVarContext current
+
+    !define ST2_MENU "$SMPROGRAMS\${APP_NAME}"
+
+    ; remove Startmenu
+    Delete "${ST2_MENU}\${APP_NAME}.lnk"
+    Delete "${ST2_MENU}\Uninstall.lnk"
+    Delete "${ST2_MENU}\Utils.lnk"
+    Delete "${ST2_MENU}\${APP_NAME} Help.lnk"
+    RMDir "${ST2_MENU}"
+
+    ; remove desktop icon
+    Delete "$DESKTOP\${APP_NAME}.lnk"
+
+    ; remove Quick Launch icon
+    Delete "$QUICKLAUNCH\${APP_NAME}.lnk"
+
 
     ; clean Windows Registry
     
