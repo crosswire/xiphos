@@ -34,3 +34,12 @@ LangString UNLOG_ERROR_CREATE ${LANG_ENGLISH} "Error creating ${UNINSTALL_LOG}."
     "About $(^name):" \
     "$\n  Click on scrollbar arrows or press Page Down to review the entire text."
 
+
+;--------------------------------
+; Components Page
+
+LangString ALLUSERS_SECTITLE ${LANG_ENGLISH} "Install for All Users"
+LangString STARTMENU_SECTITLE ${LANG_ENGLISH} "Start Menu Shortcuts"
+LangString DESKTOP_SECTITLE ${LANG_ENGLISH} "Desktop Shortcut"
+LangString QUICKLAUNCH_SECTITLE ${LANG_ENGLISH} "Quick Launch Icon"
+

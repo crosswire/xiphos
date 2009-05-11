@@ -34,3 +34,12 @@ LangString UNLOG_ERROR_CREATE ${LANG_FRENCH} "Erreur de création de ${UNINSTALL
     "À propos de $(^name):" \
     "$\n  Utilisez la barre de défilement ou les touches de déplacement pour voir la suite du texte."
 
+
+;--------------------------------
+; Components Page
+
+LangString ALLUSERS_SECTITLE ${LANG_FRENCH} "Install for All Users"
+LangString STARTMENU_SECTITLE ${LANG_FRENCH} "Start Menu Shortcuts"
+LangString DESKTOP_SECTITLE ${LANG_FRENCH} "Desktop Shortcut"
+LangString QUICKLAUNCH_SECTITLE ${LANG_FRENCH} "Quick Launch Icon"
+
