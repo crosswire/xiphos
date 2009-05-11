@@ -1,25 +1,10 @@
-ImageMagick fails to find a certain function in -lpng which is actually there, so must edit config file for that. (still don't have this figured out)
-
-Xiphos configure fails to find a function in gtk for tooltips, so edit config.h for that.
-
-Xiphos needs to link against /dev/bin/libcurl.dll directly rather than -lcurl
-
-Xiphos needs to link against res.o, created from the resource file in the win32 resource directory. On final build, I just copy this in to src/gnome2 and edit the Makefile manually.
 
 Currently we're using gnome-vfs version 14 (no openssl)[http://ftp.gnome.org/pub/gnome/binaries/win32/gnome-vfs/2.14/gnome-vfs-2.14.2-no-openssl.zip]  because that's the latest version that works on w2k
 
 Cannot change the verion of gconfd used or the associated dll's because images stop working in the menus (this is ridiculous). We need to get rid of the gconf dependency.
 
-Something that needs fixed for Sword is the regex. Either I need to teach autotools to link against the regex dll I have, or get it to recognize that I'm using mingw so it will add regex.lo to the required dependencies
+The sword that I modified is at http://code.google.com/p/xiphos-sword/.
 
-With patched sword, now I have undefined refs to gzread, solved by linking to lz (also necessary in the final linking for buildtest.exe in sword) (I think this is due to a change I made in the autotools config, that turns out to be the wrong change)
+I am using tdragon's mingw distro along with msys 1.0.11. He has binaries for gcc/g++ 4.3.3. I got the SJLJ Unwinding versions. Site is http://www.tdragon.net/recentgcc.
 
-I run exetype on xiphos.exe to keep the console window from appearing. This is easier to do than remembering to link with -mwindows. Also, for release, I run strip on xiphos.exe. This typically reduces size from ~20MB to ~5MB.
-
-The sword that I modified is at http://code.google.com/p/xiphos-sword/. I have not actually checked to see if this code compiles, it's just an initial upload. I will be working on it more soon.
-
-For the latest binary, I used tdragon's mingw distro along with msys 1.0. He has binaries for gcc/g++ 4.3.3. I got the SJLJ Unwinding versions. Site is http://www.tdragon.net/recentgcc. I just renamed C:\MinGW, then used his installer to install his distro.
-
-Currently I'm building lcms, tiff, imagemagick, clucene, and sword, in addition to xiphos. I will probably end up building libpng (or at least trying) to see if that will solve the png issue.
-
-I have taken out the fa-utf8.conf out of the Sword folder, because the book names do not work correctly when they display in Farsi.
+Currently I'm building icu, curl, imagemagick, clucene, and sword, in addition to xiphos.
