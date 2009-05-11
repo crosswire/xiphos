@@ -32,3 +32,12 @@ LangString UNLOG_ERROR_CREATE ${LANG_CZECH} "Chyba při vytváření ${UNINSTALL
     "O aplikaci $(^name):" \
     "$\n  Klepnutím na posuvnou lištu nebo stisknutím klávesy Page Down posunete text poznámek k vydání."
 
+
+;--------------------------------
+; Components Page
+
+LangString ALLUSERS_SECTITLE ${LANG_CZECH} "Pro všechny uživatele instalovat"
+LangString STARTMENU_SECTITLE ${LANG_CZECH} "Zástupce v Nabídce Start"
+LangString DESKTOP_SECTITLE ${LANG_CZECH} "Zástupce na Ploše"
+LangString QUICKLAUNCH_SECTITLE ${LANG_CZECH} "Ikona Snadné spuštění"
+

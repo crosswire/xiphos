@@ -323,12 +323,12 @@ SectionEnd
 ;--------------------------------
 ; Other Sections Section
 
-Section "Install for All Users"
+Section $(ALLUSERS_SECTITLE) SecAllusers
     ; shortcuts will be installed for all users - Desktop/Startmenu/Quick launch
     SetShellVarContext all
 SectionEnd
 
-Section "Start Menu Shortcuts"
+Section $(STARTMENU_SECTITLE) SecStartmenu
     ; startmenu/shortcuts
     !define STM_DIR "$SMPROGRAMS\${APP_NAME}"
 
@@ -340,11 +340,11 @@ Section "Start Menu Shortcuts"
     CreateShortCut '${STM_DIR}\${APP_NAME}.lnk' '$INSTDIR\bin\${APP_BINARY_NAME}'
 SectionEnd
  
-Section "Desktop Shortcut"
+Section $(DESKTOP_SECTITLE) SecDesktop
     CreateShortCut '$DESKTOP\${APP_NAME}.lnk' '$INSTDIR\bin\${APP_BINARY_NAME}'
 SectionEnd
 
-Section "Quick Launch Icon"
+Section $(QUICKLAUNCH_SECTITLE) SecQuicklaunch
     CreateShortCut '$QUICKLAUNCH\${APP_NAME}.lnk' '$INSTDIR\bin\${APP_BINARY_NAME}'
 SectionEnd
 
