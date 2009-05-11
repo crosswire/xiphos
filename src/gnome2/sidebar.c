@@ -85,6 +85,28 @@ static void create_menu_modules(void);
 
 /******************************************************************************
  * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/sidebar.h"
+ *
+ *   
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void  gui_sync_module_treeview(gint direction)
+{
+	
+}
+
+
+/******************************************************************************
+ * Name
  *   gui_save_treeview_path_string
  *
  * Synopsis
@@ -98,7 +120,7 @@ static void create_menu_modules(void);
  * Return value
  *   void
  */
-
+#if 0
 void gui_save_treeview_path_string (const gchar * path_str, const gchar * book_name)
 {
 	gchar file[250];
@@ -126,6 +148,7 @@ void gui_save_treeview_path_string (const gchar * path_str, const gchar * book_n
  * Return value
  *   void
  */
+
 
 void gui_collapse_treeview_to_book (GtkTreeView * tree, const gchar * book_name)
 {
@@ -255,7 +278,7 @@ gboolean gui_expand_treeview_to_path (GtkTreeView * tree, const gchar * book_nam
 	
 	return 1;
 }
-
+#endif
 
 /******************************************************************************
  * Name
