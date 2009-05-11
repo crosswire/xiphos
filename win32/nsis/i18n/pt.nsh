@@ -15,3 +15,12 @@
     "Sobre $(^name):" \
     "$\n  Clique nas setas de deslocamento ou pressione Page Down para rever o texto completo."
 
+
+;--------------------------------
+; Components Page
+
+LangString ALLUSERS_SECTITLE ${LANG_PORTUGUESE} "Install for All Users"
+LangString STARTMENU_SECTITLE ${LANG_PORTUGUESE} "Start Menu Shortcuts"
+LangString DESKTOP_SECTITLE ${LANG_PORTUGUESE} "Desktop Shortcut"
+LangString QUICKLAUNCH_SECTITLE ${LANG_PORTUGUESE} "Quick Launch Icon"
+
