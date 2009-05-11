@@ -262,7 +262,11 @@ void main_navbar_book_next(void)
 {
 	char *tmpbuf = NULL;
 	unsigned long offset;
-
+	//const gchar *path;
+	
+	/*gchar *buf = g_strrstr_len (path,
+                                    sizeof (path),
+                                    ":");*/
 	backend->set_module(settings.book_mod);
 	backend->set_treekey(settings.book_offset);
 	if (backend->treekey_next_sibling(settings.book_offset)) {

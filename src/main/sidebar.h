@@ -32,7 +32,9 @@ typedef struct {
 } TreePixbufs;
 extern TreePixbufs *pixbufs;
 
+/*  *** until after 3.1 ***
 gboolean main_expand_treeview_to_path (GtkTreeModel *model, GtkTreeIter iter);
+*/
 void main_open_bookmark_in_new_tab(gchar * mod_name, gchar * key);
 void main_display_verse_list_in_sidebar(gchar * key, gchar * module_name, 
 						gchar * verse_list);	

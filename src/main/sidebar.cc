@@ -543,7 +543,7 @@ static void add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
 	}
 }
 
-
+#if 0
 gboolean main_expand_treeview_to_path (GtkTreeModel *model, GtkTreeIter iter)
 {	
 	//gchar *cap = NULL;
@@ -582,6 +582,7 @@ gboolean main_expand_treeview_to_path (GtkTreeModel *model, GtkTreeIter iter)
 	main_setup_navbar_book(mod, (key ? atoi(key) : 0));
 	return 1;
 }
+#endif
 
 /******************************************************************************
  * Name
@@ -607,7 +608,9 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 	gchar *mod = NULL;
 	gchar *key = NULL;
 	GtkTreePath *path;
+	/*  *** until after 3.1 ***
 	gchar *path_str = NULL;
+	*/
 	
 	static int old_page = 0;
 
@@ -740,11 +743,13 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 			add_children_to_tree(model,
 					     selected, mod, atol(key));
 		}
-			
+		
+		/*  *** until after 3.1 ***	
 		path_str = gtk_tree_path_to_string (path);
 		//GS_message (("path: %s", path_str));
-		//g_free (path_str);
 		gui_save_treeview_path_string (path_str, mod);
+		g_free (path_str);
+		*/
 		gtk_tree_view_expand_row(GTK_TREE_VIEW
 					 (sidebar.module_list), path,
 					 FALSE);
