@@ -1,3 +1,7 @@
+2009-05-11 terry <tbiggs@users.sourceforge.net>
+
+	* fixed bug #2783271 Parallel View tab moves to bottom of window
+
 2009-05-11 matthew <ransom1982@users.sourceforge.net>
 
 	* fixed #2737136 Headings problem in detached window

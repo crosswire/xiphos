@@ -838,9 +838,9 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
 	else
 		pt = (PASSAGE_TAB_INFO*)g_list_nth_data(*tl, page_num);
 	removed_page = 1;
-	cur_passage_tab = pt;
+	//cur_passage_tab = pt;
 	
-	if(cur_passage_tab->book_mod)
+	if(cur_passage_tab && cur_passage_tab->book_mod)
 		gui_collapse_treeview_to_book (GTK_TREE_VIEW (sidebar.module_list), 
 					       cur_passage_tab->book_mod);		
 	if(!pt->showparallel) {	
@@ -1369,6 +1369,7 @@ void gui_close_passage_tab(gint pagenum)
 	if (1 == gtk_notebook_get_n_pages(GTK_NOTEBOOK(widgets.notebook_main)))
 		return;
 	PASSAGE_TAB_INFO *pt = (PASSAGE_TAB_INFO*)g_list_nth_data(passage_list, (guint)pagenum);
+	cur_passage_tab = (PASSAGE_TAB_INFO*)g_list_nth_data(passage_list, (guint)pagenum-1);
 	passage_list = g_list_remove(passage_list, pt);
 	if(pt->text_mod) g_free(pt->text_mod);
 	if(pt->commentary_mod) g_free(pt->commentary_mod);
@@ -1386,7 +1387,7 @@ void gui_close_passage_tab(gint pagenum)
 				       settings.showparatab);
 	}
 	g_free(pt);
-	cur_passage_tab = NULL;
+	//cur_passage_tab = NULL;
 	removed_page = pagenum;
 	gtk_notebook_remove_page(GTK_NOTEBOOK(widgets.notebook_main), pagenum);
 }
