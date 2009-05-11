@@ -840,9 +840,11 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
 	removed_page = 1;
 	//cur_passage_tab = pt;
 	
+	/*  *** until after 3.1 ***
 	if(cur_passage_tab && cur_passage_tab->book_mod)
 		gui_collapse_treeview_to_book (GTK_TREE_VIEW (sidebar.module_list), 
-					       cur_passage_tab->book_mod);		
+					       cur_passage_tab->book_mod);
+	*/
 	if(!pt->showparallel) {	
 		if(cur_passage_tab && cur_passage_tab->paratab)
 			gtk_widget_hide(cur_passage_tab->paratab);
@@ -866,10 +868,11 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
 	
 	//sets the book mod and key
 	main_display_book(pt->book_mod, pt->book_offset);
+	/*  *** until after 3.1 ***
 	if (pt->showcomms && pt->book_mod)
 		gui_expand_treeview_to_path (GTK_TREE_VIEW (sidebar.module_list), 
 					     pt->book_mod);
-	
+	*/
 	comm_showing = settings.comm_showing;
 	settings.comm_showing = 1;
 	//sets the commentary mod and key
