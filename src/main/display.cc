@@ -644,7 +644,7 @@ CleanupContent(const char *text,
 void
 CacheHeader(ModuleCache::CacheVerse& cVerse,
 	    SWModule& mod,
-	    GLOBAL_OPS *ops)
+	    GLOBAL_OPS *ops, BackEnd *be)
 {
 	int x = 0;
 	gchar heading[8];
@@ -654,7 +654,7 @@ CacheHeader(ModuleCache::CacheVerse& cVerse,
 	cVerse.SetHeader("");
 
 	sprintf(heading, "%d", x);
-	while ((preverse = backend->get_entry_attribute("Heading", "Preverse",
+	while ((preverse = be->get_entry_attribute("Heading", "Preverse",
 							heading)) != NULL) {
 		preverse2 = mod.RenderText(preverse);
 		text = g_strdup_printf("<br><b>%s</b><br><br>",
@@ -1507,7 +1507,7 @@ GTKChapDisp::Display(SWModule &imodule)
 			rework = cVerse.GetText();
 
 		if (!cVerse.HeaderIsValid())
-			CacheHeader(cVerse, imodule, ops);
+			CacheHeader(cVerse, imodule, ops, be);
 
 		if (cache_flags & ModuleCache::Headings)
 			swbuf.append(settings.imageresize
@@ -1907,7 +1907,7 @@ DialogChapDisp::Display(SWModule &imodule)
 			rework = cVerse.GetText();
 
 		if (!cVerse.HeaderIsValid())
-			CacheHeader(cVerse, imodule, ops);
+			CacheHeader(cVerse, imodule, ops, be);
 
 		if (cache_flags & ModuleCache::Headings)
 			swbuf.append(settings.imageresize
