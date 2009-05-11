@@ -10,17 +10,17 @@
 ; Text for page with release notes
 
 !insertmacro ReadmeLangStrings "" "${LANG_GERMAN}" \
-    "Release Notes" \
-    "Please review the following important information." \
-    "About $(^name):" \
-    "$\n  Click on scrollbar arrows or press Page Down to review the entire text."
+    "Informationen zu dieser Version" \
+    "Bitte lesen Sie die folgenden wichtigen Informationen." \
+    "Info $(^name):" \
+    "$\n  Klicken Sie auf die Pfeile des Scrollbalken oder Bild runter, um den ganzen Text lesen zu können."
 
 
 ;--------------------------------
 ; Components Page
 
-LangString ALLUSERS_SECTITLE ${LANG_GERMAN} "Install for All Users"
-LangString STARTMENU_SECTITLE ${LANG_GERMAN} "Start Menu Shortcuts"
-LangString DESKTOP_SECTITLE ${LANG_GERMAN} "Desktop Shortcut"
-LangString QUICKLAUNCH_SECTITLE ${LANG_GERMAN} "Quick Launch Icon"
+LangString ALLUSERS_SECTITLE ${LANG_GERMAN} "Für alle Benutzer installieren"
+LangString STARTMENU_SECTITLE ${LANG_GERMAN} "Startmenu Eintrag"
+LangString DESKTOP_SECTITLE ${LANG_GERMAN} "Desktop Symbol"
+LangString QUICKLAUNCH_SECTITLE ${LANG_GERMAN} "Schnellstart Eintrag"
 
