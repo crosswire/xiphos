@@ -1,3 +1,7 @@
+2009-05-11 matthew <ransom1982@users.sourceforge.net>
+
+	* fixed #2737136 Headings problem in detached window
+
 2009-05-07  karl <charcoal@users.sf.net>
 
 	* correct index type of module cache map for proper string use.
