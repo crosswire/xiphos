@@ -1345,4 +1345,19 @@ gint editor_create_new(const gchar * filename, const gchar * key, gint editor_ty
 	return _create_new(filename, key, editor_type);
 }
 
+void editor_maybe_save_all(void)
+{
+	GList *tmp, *tmp2;
+	
+	tmp = g_list_first(editors_all);
+	while (tmp != NULL) {
+		/* 2ndary list chaser:
+		   elements will be removed by the saver. */
+		tmp2 = g_list_next(tmp);
+
+		app_delete_cb(NULL, NULL, (EDITOR*)tmp->data);
+		tmp = tmp2;
+	}
+}
+
 #endif /* USE_GTKHTML3_14_23 */
