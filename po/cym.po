@@ -1099,7 +1099,7 @@ msgstr "Agor mewn  tab newydd"
 
 #: ../src/gnome2/sidebar.c:740 ../src/gnome2/sidebar.c:890
 msgid "Open selected module in a new tab"
-msgstr "Agor i modiwl ddewiswyd mewn tab newydd""Agor y modiwl ayb"
+msgstr "Agor i modiwl ddewiswyd mewn tab newydd"
 
 #: ../src/gnome2/sidebar.c:746
 msgid "Open in dialog"
@@ -1519,7 +1519,7 @@ msgid "Load Bookmarks from Bibletime"
 msgstr "Llwytho Nodau Tudalen o Bibletime"
 
 #: ../src/gnome2/bookmarks_menu.c:1184
-msgid "Remove - Restore""
+msgid "Remove - Restore"
 msgstr "Diddymu - Adfer"
 
 #: ../src/gnome2/treekey-editor.c:125 ../src/gnome2/treekey-editor.c:184
