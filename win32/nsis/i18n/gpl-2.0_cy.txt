@@ -1,0 +1,329 @@
+Cyfieithiad answyddogol o Drwydded Gyhoeddus Gyffredinol (TGG) GNU i’r Gymraeg
+yw hwn. Ni chyhoeddwyd mohono gan y Free Software Foundation, ac nid yw’n
+mynegi’n gyfreithiol termau dosbarthu meddalwedd sy’n defnyddio TGG GNU--testun
+Saesneg gwreiddiol TGG GNU yn unig a wna hynny. Serch hynny, gobeithiwn y bydd
+y cyfieithiad yma’n gymorth i siaradwyr Cymraeg ddeall a gwneud gwell defnydd
+o TGG GNU.
+
+This is an unofficial translation of the GNU General Public License into Welsh.
+It was not published by the Free Software Foundation, and does not legally state
+the distribution terms for software that uses the GNU GPL--only the original English
+text of the GNU GPL does that. However, we hope that this translation will help
+Welsh speakers understand the GNU GPL better.
+
+Fersiwn 2, Mehefin 1991
+
+Hawlfraint (C) 1989, 1991 Free Software Foundation, Inc. 59 Temple Place, Suite 330,
+Boston, MA 02111-1307 USA
+
+Mae gan bawb yr hawl i gopïo a dosbarthu copïau gair am air o’r drwydded hon,
+ond nid oes hawl ei newid.
+
+Rhagair
+
+Mae trwyddedau ar gyfer y rhan fwyaf o feddalwedd wedi’u cynllunio i’ch amddifadu
+o’ch rhyddid i’w rhannu a’i newid. I’r gwrthwyneb mae Trwydded Gyhoeddus Gyffredinol
+GNU wedi’i bwriadu i warantu eich rhyddid i rannu a newid meddalwedd rhydd--i wneud
+yn siwr fod pob meddalwedd yn rhydd ar gyfer ei holl ddefnyddwyr. Mae’r Drwydded
+Gyhoeddus Gyffredinol yn berthnasol i’r rhan fwyaf o feddalwedd y Free Software
+Foundation ac i unrhyw raglen mae ei hawduron yn ymrwymo i’w defnyddio.
+(Mae peth meddalwedd Free Software Foundation arall yn cael ei gynnwys o fewn
+y Drwydded Gyhoeddus Gyffredinol Llyfrgelloedd yn lle hynny.) Mae modd ei gosod
+ar gyfer eich rhaglenni chi hefyd.
+
+Pan ydym yn sôn am feddalwedd rhydd (free software), rydym yn sôn am ryddid nid pris.
+Mae ein Trwyddedau Cyhoeddus Cyffredinol wedi’u cynllunio i wneud yn siwr fod gennych
+y rhyddid i ddosbarthu copïau o feddalwedd rhydd (a chodi am y gwasanaeth
+hwn os dymunwch), eich bod yn derbyn y côd ffynhonnell neu bod modd i chi ei gael
+os dymunwch, bod modd i chi newid y feddalwedd neu ddefnyddio darnau ohoni ar gyfer
+rhaglenni rhydd newydd; a’ch bod yn gwybod bod bod modd i chi wneud y pethau hyn.
+
+I ddiogleu eich hawliau, mae angen i ni osod cyfyngiadau sy’n atal unrhyw un rhag
+eich amddifadu o’r hawliau hyn neu ofyn i chi ildio’r hawliau. Mae’r cyfyngiadau’n
+trosi i rhai cyfrifoldebau penodol i chi os ydych yn dosbarthu copïau o’r feddalwedd,
+neu yn ei newid.
+
+Er engrhaifft, os byddwch yn dosbarthu copïau o raglen, p’un ai am ddim neu am
+bris, rhaid i chi rhoi i’r derbynwyr yr holl hawliau sydd gennych chi. Rhaid
+i chi hefyd wneud yn siwr eu bod hwy hefyd yn derbyn neu yn medru cael y côd
+ffynhonnell. A rhaid i chi ddangos yr amodau hyn iddyn nhw wybod eu hawliau.
+
+Rydym yn diogelu eich hawliau gyda dau gam: (1) hawlfreintio’r feddalwedd,
+a (2) cynnig y drwydded hon sy’n rhoi caniatâd i chi gopïo, dosbarthu a/neu
+addasu’r feddalwedd.
+
+Hefyd, ar gyfer diogelwch pob awdur a’n diogelwch ni, rydym eisiau gwneud yn
+siwr fod pawb yn deall nad oes gwarant ar gyfer y feddalwedd rydd hon. Os yw’r
+feddalwedd yn cael ei haddasu gan rywun a’i phasio ymlaen, rydym am i’w derbynwyr
+wybod nad y gwreiddiol sydd ganddynt, fel nad yw problemau sydd wedi’u cyflwyno
+gan eraill yn adlewyrchu ar enw da’r awduron gwreiddiol.
+
+Yn olaf, mae unrhyw rhaglen rydd o dan fygythiad parhaus patentau meddalwedd.
+Rydym yn awyddus i osgoi’r perygl fod ailddosbarthwyr rhaglen rydd yn cymryd
+trwydded patent, gan wneud y rhaglen yn berchnogol. I rwystro hyn, rydym wedi’i
+gwneud hi’n glir y dylai unrhyw batent gael ei drwyddedu ar gyfer defnydd rhydd
+pawb neu beidio gael ei drwyddedu o gwbl.
+
+Isod ceir yr union amodau ar gyfer copïo, dosbarthu ac addasu.
+TRWYDDED GYHOEDDUS GYFFREDINOL GNU
+
+TELERAU AC AMODAU AR GYFER COPÏO, DOSBARTHU AC ADDASU
+
+0. Mae’r Drwydded hon yn berthnasol i unrhyw raglen neu waith arall sy’n cynnwys
+hysbysiad wedi’i osod gan y daliwr hawlfraint sy’n nodi bod modd ei ddosbarthu o
+dan amodau’r Drwydded Gyhoeddus Gyffredinol hon. Mae’r “Rhaglen” , isod, yn cyfeirio
+at unrhyw raglen neu waith, ac mae “gwaith yn seiliedig ar y Rhaglen” yn golygu un ai
+y Rhaglen neu unrhyw waith deilliannol o dan gyfraith hawlfraint: hynny yw, gwaith yn
+cynnwys y rhaglen neu ran ohoni, un ai air am air neu gyda newidiadau a/neu gyfieithiad
+i iaith arall. (O hyn ymlaen, bydd cyfieithu yn cael ei gynnwys heb gyfyngiad o fewn
+y term “addasu” . Cyfeirir at bob daliwr trwydded fel “chi” .
+
+Nid yw gweithgareddau ar wahân i gopïo, dosbarthu ac addasu yn cael eu cynnwys
+yn y Drwydded hon; maen nhw tu allan iddi. Nid oes cyfyngiad ar y weithred o redeg
+y Rhaglen, ac mae allbwn y Rhaglen yn gynwysedig dim ond os yw cynnwys yr allbwn
+yn ffurfio gwaith sy’n seiliedig ar y Rhaglen (yn annibynnol o fod wedi cael
+ei wneud o redeg y Rhaglen). Mae p’un ai yw hyn yn wir yn dibynnu ar beth mae’r
+Rhaglen yn ei wneud.
+
+1. Mae hawl i chi gopïo a dosbarthu copïau gair am air o’r côd ffynhonnell fel
+i chi ei dderbyn, ar unrhyw gyfrwng, ar yr amod eich bod yn cyhoeddi yn eich copi
+yn amlwg ac yn addas hysbysiad hawlfraint a gwadiad gwarant; yn cadw pob hysbysiad
+sy’n cyfeirio at y Drwydded hon ac i absenoldeb unrhyw warant gyda’i gilydd yn gyfan;
+a rhoi i dderbynwyr eraill y Rhaglen gopi o’r Drwydded hon gyda’r Rhaglen.
+
+Mae modd i chi godi tâl am y weithred gorfforol o drosglwyddo copi, ac mae modd
+i chi, yn ôl eich dewis, gynnig diogelwch gwarant yn gyfnewid am dâl.
+
+2. Mae modd i chi newid eich copi neu gopïau o’r rhaglen neu unrhyw rhan ohoni,
+gan felly greu gwaith yn seiliedig ar y Rhaglen, a chopïo a dosbarthu yr addasiadau
+neu’r gwaith o dan amodau Adran 1 uchod, ar yr amod eich bod hefyd yn bodloni pob
+un o’r amodau hyn:
+
+a) Rhaid i chi achosi i’r ffeiliau sydd wedi’u haddasu gario hysbysiadau amlwg yn
+datgan eich bod wedi newid y ffeiliau a dyddiad unrhyw newid.
+
+b) Rhaid i chi achosi i unrhyw waith rydych yn ei ddosbarthu neu ei gyhoeddi,
+sydd yn gyfangwbl neu yn rhannol yn deillio o’r Rhalgen neu unrhyw ran ohoni,
+gael ei thrwyddedu fel cyfanwaith heb unrhyw gost i bob trydydd parti dan
+delerau’r Drwydded hon.
+
+c) Os yw’r rhaglen sydd wedi’i haddasu fel arfer yn darllen gorchmynion yn
+rhyngweithiol pan gaiff ei rhedeg, rhaid i chi achosi iddi, pan fydd yn cychwyn
+rhedeg ar gyfer defnydd rhyngweithiol o’r fath yn y ffordd fwyaf cyffredin,
+argraffu neu arddangos datganiad yn cynnwys hysbysiad hawlfraint addas a hysbysiad
+nad oes yna warant (neu fel arall, yn dweud eich bod chi yn rhoi gwarant) ac y gall
+defnyddwyr ailddosbarthu’r rhaglen dan yr amodau hyn, ac yn dweud wrth y defnyddiwr
+sut i edrych ar gopi o’r Drwydded hon. (Eithriad: os yw’r Rhaglen ei hun yn
+rhyngweithiol ond nad yw fel arfer yn argraffu datganiad o’r fath, nid oes raid
+i’ch gwaith sy’n seiliedig ar y Rhaglen argraffu datganiad.) Mae’r gofynion hyn
+wedi’u gosod ar y gwaith sydd wedi’i addasu fel cyfanwaith. Os ceir rhannau
+y mae modd eu hadnabod o’r gwaith hwnnw sydd heb ddeillio o’r Rhaglen, a bod modd yn
+rhesymol eu hystyried fel gweithiau annibynnol ac ar wahân ynddynt eu hunain, yna
+nid yw’r Drwydded hon, a’i thelerau, yn berthnasol i’r adrannau hynny pan fyddwch
+yn eu dosbarthu fel gweithiau ar wahân. Ond pan fyddwch yn dosbarthu’r un rhannau
+fel rhan o gyfanwaith sy’n waith seiliedig ar y Rhaglen, rhaid i ddosbarthiad
+y cyfanwaith fod ar delerau’r Drwydded hon, y mae ei chaniatâd i drwyddedigion
+eraill yn estyn i’r cyfanwaith i gyd, ac felly i bob un rhan ohoni heb wneud
+cyfrif o bwy wnaeth ei ysgrifennu.
+
+Felly, nid bwriad yr adran hon yw hawlio hawliau na herio eich hawliau i waith sydd
+wedi’i ysgrifennu yn gyfangwbl gennych chi; yn hytrach, y bwriad yw gweithredu’r
+hawl i reoli dosbarthiad gweithiau deilliannol neu gyfunol sy’n seiliedig ar y Rhaglen.
+
+Yn ychwanegol, nid yw cydgrynhoi gwaith arall nad yw wedi’i seilio ar y Rhaglen
+gyda’r Rhaglen (neu gyda gwaith sydd wedi’i seilio ar y Rhalgen) ar gyfrol
+o gyfrwng storio neu ddosbarthu yn dod â’r gwaith arall o fewn cwmpas y Drwydded hon.
+
+3. Gallwch gopïo a dosbarthu’r Rhaglen (neu waith wedi’i seilio arni, dan Adran
+2) mewn côd gwrthrych neu ffurf weithredadwy dan delerau Adrannau 1 a 2 uchod ond
+i chi hefyd wneud un o’r canlynol:
+
+a) Rhoi gyda hi y côd ffynhonnell darllenadwy i beiriant cyfatebol cyflawn,
+sydd yn gorfod cael ei ddosbarthu dan delerau Adrannau 1 a 2 uchod ar gyfrwng
+sydd yn gyffredin yn cael ei ddefnyddio ar gyfer ymgyfnewid meddalwedd; neu,
+
+b) Rhoi gyda hi gynnig ysgrifenedig, sy’n ddilys am o leiaf dair blynedd, i roi
+i unrhyw drydydd parti, am dâl sydd ddim mwy na’ch cost am y weithred gorfforol
+o ddosbarthu côd, i’w dosbarthu dan delerau Adrannau 1 a 2 uchod ar gyfrwng sydd
+fel arfer yn cael ei ddefnyddio ar gyfer ymgyfnewid meddalwedd; neu,
+
+c) Rhoi gyda hi y wybodaeth y gwnaethoch chi ei derbyn ynghylch y cynnig i ddosbarthu
+côd ffynhonnell cyfatebol. (Dim ond ar gyfer dosbarthiad anfasnachol y mae’r dewis
+arall hwn yn cael ei ganiatâu a dim ond os gwnaethoch chi dderbyn y rhaglen mewn
+côd gwrthrych neu ffurf weithredadwy gyda chynnig o’r fath, yn unol ag Isadran b uchod.)
+
+Mae’r côd ffynhonnell ar gyfer gwaith yn golygu ffurf ddewisol y gwaith ar gyfer
+ei addasu. Ar gyfer gwaith gweithredadwy, ystyr côd ffynhonnell cyflawn yw’r cyfan
+o’r côd ffynhonnell ar gyfer pob modiwl y mae’n eu cynnwys, a hefyd unrhyw ffeiliau
+diffinio rhyngwyneb cysylltiedig, a hefyd y sgriptiau a ddefnyddiwyd i reoli creu
+a gosod y gwaith gweithredadwy. Fodd bynnag, fel eithriad arbennig, nid oes raid
+i’r côd ffynhonnell sy’n cael ei ddosbarthu gynnwys unrhyw beth sy’n cael ei ddosbarthu
+fel arfer (naill ai ar ffurf ffynhonnell neu ddeuaidd) gyda phrif gydrannau (crynhoydd,
+cnewyllyn, ac ati) y system weithredu y mae’r gwaith gweithredadwy yn rhedeg arno,
+on bai fod y gydran honno ei hun yn dod gyda’r gwaith gweithredadwy.
+
+Os yw’r gwaith gweithredadwy neu gôd gwrthrych yn cael ei ddosbarthu drwy gynnig
+mynediad at gopi o le dynodedig, yna mae cynnig mynediad cyfatebol i gopïo’r côd
+ffynhonnell o’r un lle yn cyfrif fel dosbarthu’r côd ffynhonnell, er nad yw trydydd
+partïon yn cael eu gorfodi i gopïo’r ffynhonnell ynghyd â’r côd gwrthrych.
+
+4. Nid oes hawl i chi gopïo, addasu, isdrwyddedu na dosbarthu’r Rhaglen ac eithrio
+fel sy’n cael ei ddarparu mewn cymaint eiriau dan y Drwydded hon. Mae unrhyw ymgais
+fel arall i gopïo, addasu, isdrwyddedu neu ddosbarthu’r Rhaglen yn ddi-rym, a bydd
+yn awtomatig yn terfynu eich hawliau dan y Drwydded hon. Fodd bynnag, ni fydd partïon
+sydd wedi derbyn copïau, neu hawliau, oddi wrthych dan y Drwydded hon yn cael eu
+trwyddedau wedi’u terfynu cyn belled â bo’r partïon hynny yn parhau i gydymffurfio’n
+llawn.
+
+5. Nid oes raid i chi dderbyn y Drwydded hon, gan nad ydych wedi’i llofnodi.
+Fodd bynnag, nid oes unrhyw beth arall yn rhoi hawl i chi addasu neu ddosbarthu’r
+Rhaglen na’r gweithiau sy’n deillio ohoni. Mae’r gweithredoedd hyn yn cael eu
+gwahardd gan y ddeddf os nad ydych yn derbyn y Drwydded hon. Felly, drwy addasu
+neu ddosbarthu’r Rhaglen (neu unrhyw waith sy’n seiliedig ar y Rhaglen), rydych
+yn dangos eich bod yn derbyn y Drwydded hon i wneud hynny, a’i holl delerau ac
+amodau ar gyfer copïo, dosbarthu neu addasu’r Rhaglen neu weithiau sy’n seiliedig arni.
+
+6. Bob tro rydych yn ailddosbarthu’r Rhaglen (neu unrhyw waith sy’n seiliedig ar
+y Rhaglen), mae’r derbyniwr yn awtomatig yn derbyn trwydded oddi wrth y trwyddedwr
+gwreiddiol i gopïo, dosbarthu neu addasu’r Rhaglen yn unol â’r telerau ac amodau
+hynny. Nid oes hawl gennych osod unrhyw gyfyngiadau pellach ar weithrediad derbynwyr
+o’r hawliau sy’n cael ei rhoi ynddi. Nid ydych yn gyfrifol am orfodi trydydd partïon
+i gydymffurfio â’r Drwydded hon.
+
+7. 7. Os yw amodau yn cael eu gosod arnoch, o ganlyniad i ddyfarniad llys neu
+honiad o dorri patent neu am unrhyw reswm arall (heb fod yn gyfyngedig i faterion
+patent), p’un ai gan orchymyn llys, cytundeb neu rywbeth arall, sy’n croesddweud
+amodau’r Drwydded hon, nid ydynt yn eich esgusodi rhag amodau’r Drwydded hon. Os
+na allwch ddosbarthu fel ag i fodloni ar yr un pryd eich rhwymedigaethau dan y
+Drwydded hon ac unrhyw rwymedigaethau perthnasol eraill, yna o ganlyniad i hyn ni
+chewch ddosbarthu’r Rhaglen o gwbl. Er enghraifft, pe na bai trwydded patent yn
+caniatâu i’r Rhaglen gael ei hailddosbarthu yn rhydd rhag breindal gan bawb sy’n
+derbyn copïau yn uniongyrchol neu’n anuniongyrchol drwyddoch chi, yna’r unig ffordd
+y gallech ei bodloni hi a’r Drwydded hon fyddai i ymatal yn llwyr rhag dosbarthu’r
+Rhaglen.
+
+Os yw unrhyw ran o’r adran hon yn cael ei hystyried i fod yn annilys neu’n amhosibl
+ei gweithredu dan unrhyw amgylchiad arbennig, bwriedir gweddill yr adran i fod yn
+berthnasol a bwriedir yr adran yn gyfan i fod yn berhnasol dan amgylchiadau eraill.
+
+Nid pwrpas yr adran hon yw gwneud i chi dorri unrhyw hawlio patentau neu hawliau
+eiddo eraill neu ymladd dilysrwydd unrhyw hawlio o’r fath; unig bwrpas yr adran
+hon yw diogelu cyfanrwydd y system ddosbarthu meddalwedd rhydd, sy’n cael ei
+weithredu gan arferion trwyddedu cyhoeddus. Mae llawer o bobl wedi gwneud
+cyfraniadau hael i’r dewis eang o feddalwedd sy’n cael ei dosbarthu drwy’r
+system honno ac sy’n dibynnu ar gysondeb gweithrediad y system honno; mater
+i’r awdur/rhoddwr yw penderfynu a yw ef/hi yn barod i ddosbarthu meddalwedd
+drwy unrhyw systemau eraill ac ni all y sawl sy’n drwyddedig orfodi’r dewis hwnnw.
+
+Bwriad yr adran hon yw ei gwneud hi’n hollol eglur beth y credir ei fod yn
+ganlyniad gweddill y Drwydded hon. 8. Os yw dosbarthiad a/neu ddefnydd y Rhaglen
+hon yn cael ei gyfyngu mewn rhai gwledydd naill ai gan batentau neu ryngwynebau
+wedi’u hawlfreintio, gall deiliad yr hawlfraint gwreiddiol sy’n gosod y Rhaglen
+dan y Drwydded hon ychwanegu cyfyngiad dosbarthu daearyddol yn cau allan y
+gwledydd hynny, fel bod dosbarthu yn cael ei ganiatâu yn unig o fewn neu rhwng
+gwledydd nad ydynt wedi cael eu cau allan fel hyn. Mewn achos o’r fath, mae’r
+Drwydded hon yn ymgorffori’r cyfyngiad fel petai wedi’i ysgrifennu yng nghorff
+y Drwydded hon.
+
+9. Efallai y bydd y Free Software Foundation yn cyhoeddi fersiynau wedi’u hadolygu
+a/neu rhai newydd o’r Drwydded Gyhoeddus Gyffredinol o dro i dro. Bydd fersiynau
+newydd o’r fath yn debyg o ran ysbryd i’r fersiwn presennol, ond efallai y byddant
+yn wahanol yn y manylion er mwyn delio gyda phroblemau neu bryderon newydd.
+Rhoddir rhif fersiwn gwahanol i bob fersiwn. Os yw’r Rhaglen yn pennu rhif fersiwn
+o’r Drwydded hon sy’n berthnasol iddi ac “unrhyw fersiwn diweddarach” , mae gennych
+y dewis o ddilyn telerau ac amodau naill ai’r fersiwn hwnnw neu unrhyw fersiwn
+diweddarach a gyhoeddir gan y Free Software Foundation. Os nad yw’r Rhaglen yn pennu
+rhif fersiwn o’r Drwydded hon, gallwch ddewis unrhyw fersiwn a gyhoeddwyd erioed
+gan y Free Software Foundation.
+
+10. Os dymunwch ymgorffori rhannau o’r Rhaglen i mewn i raglenni rhydd eraill y
+mae amodau eu dosbarthu yn wahanol, ysgrifennwch at yr awdur i ofyn caniatâd. Ar
+gyfer meddalwedd sydd wedi’i hawlfreintio gan y Free Software Foundation,
+ysgrifennwch at y Free Software Foundation; rydym ni weithiau yn gwneud eithriadau
+ar gyfer hyn. Bydd ein penderfyniad yn cael ei arwain gan y ddau nod o ddiogelu
+statws rhydd pob un o ddeilliannau ein meddalwedd rhydd ac o hybu rhannu ac
+ailddefnyddio meddalwedd yn gyffredinol.
+
+DIM GWARANT
+
+11. GAN FOD Y RHAGLEN YN CAEL EI THRWYDDEDU YN RHAD AC AM DDIM, NID OES GWARANT
+AR GYFER Y RHAGLEN, I’R GRADDAU Y MAE’R GYFRAITH BERTHNASOL YN CANIATÂU. AC
+EITHRIO LLE CEIR DATGANIAD YSGRIFENEDIG FEL ARALL MAE DALWYR YR HAWLFRAINT A/NEU
+BARTÏON ERAILL YN DARPARU’R RHAGLEN “FEL Y MAE” HEB WARANT O UNRHYW FATH, NAILL
+AI WEDI’I FYNEGI NEU YMHLYG, GAN GYNNWYS, OND HEB FOD YN GYFYNGEDIG I WARANTAU
+OBLYGEDIG YNGHYLCH MARSIANDWYAETH A FFITRWYDD AT BWRPAS ARBENNIG. MAE’R HOLL RISG
+YNGHYLCH ANSAWDD A PHERFFORMIAD Y RHAGLEN YN PERTHYN I CHI. PETAI’R RHAGLEN YN
+PROFI I FOD YN DDIFFYGIOL, CHI SY’N YSGWYDDO COST YR HOLL WASANAETHU, TRWSIO
+NEU GYWIRO ANGENRHEIDIOL.
+
+12. NI FYDD DALWYR YR HAWLFRAINT, NEU UNRHYW BARTI ARALL A FYDD EFALLAI YN ADDASU
+A/NEU AILDDOSBARTHU’R RHAGLEN FEL SY’N CAEL EI GANIATÂU UCHOD, DAN UNRYW AMGYLCHIADAU
+ONI BAI BOD HYNNY’N ORFODOL DAN GYFRAITH BERTHNASOL NEU WEDI’I GYTUNO YN YSGRIFENEDIG,
+YN ATEBOL I CHI AM IAWNDAL, GAN GYNNWYS UNRHYW IAWNDAL CYFFREDINOL, ARBENNIG, ATODOL
+NEU GANLYNIADOL YN CODI O DDEFNYDDIO NEU ANALLU I DDEFNYDDIO’R RHAGLEN (GAN GYNNWYS
+OND HEB FOD YN GYFYNGEDIG I GOLLI DATA NEU DDATA YN CAEL EI WNEUD YN WALLUS NEU
+GOLLEDION A DDIODDEFIR GENNYCH CHI NEU DRYDYDD PARTÏON NEU FETHIANT Y RHAGLEN I
+WEITHREDU GYDAG UNRHYW RAGLENNI ERAILL), HYD YN OED OS YW DALIWR O’R FATH NEU BARTI
+ARALL WEDI CAEL EI GYNGHORI O BOSIBILRWYDD IAWNDAL O’R FATH.
+
+DIWEDD Y TELERAU A’R AMODAU
+
+Sut i Gymhwyso’r Telerau hyn i’ch Rhaglenni Newydd
+
+Os ydych yn datblygu rhaglen newydd, a’ch bod am iddi fod mor ddefnyddiol ag y mae
+modd i’r cyhoedd, y ffordd orau i gyflawni hyn yw i’w gwneud yn feddalwedd rhydd
+y gall pawb ei hailddosbarthu a’i newid dan y telerau hyn.
+
+I wneud hyn, atodwch yr hysbysiadau canlynol i’r rhaglen. Y ffordd fwyaf diogel
+yw eu hatodi i ddechrau pob ffeil ffynhonnell i gyfleu’r ffaith fod gwarant wedi’i
+chau allan yn y ffordd fwyaf effeithiol; a dylai pob ffeil gael o leiaf un llinell
+“hawlfraint” a phwyntydd at y man lle ceir yr hysbysiad llawn.
+
+<un llinell i roi enw’r rhaglen a syniad byr o’r hyn mae’n gwneud.>
+Hawlfraint (C) <blwyddyn> <enw’r awdur>
+
+Mae’r rhaglen hon yn feddalwedd rhydd; gallwch ei hailddosbarthu a/neu ei haddasu
+dan delerau Trwydded Gyhoeddus Gyffredinol GNU fel y’i cyhoeddwyd gan 
+y Free Software Foundation; naill ai fersiwn 2 y Drwydded, neu (yn ôl eich dewis)
+unrhyw fersiwn diweddarach.
+
+Mae’r rhaglen hon yn cael ei dosbarthu yn y gobaith y bydd yn ddefnyddiol, ond
+HEB UNRHYW WARANT; heb hyd yn oed y warant oblygedig o FARSIANDWYAETH neu
+FFITRWYDD AT BWRPAS ARBENNIG. Gweler Trwydded Gyhoeddus Gyffredinol GNU am
+ragor o fanylion.
+
+Dylech fod wedi derbyn copi o Drwydded Gyhoeddus Gyffredinol GNU ynghyd â’r rhaglen
+hon; os na, ysgrifennwch at y
+
+Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston MA 02111-1307
+USAHefyd dylech gynnwys gwybodaeth am sut i gysylltu â chi drwy gyfrwng y post
+electronig a phapur.
+
+Os yw’r rhaglen yn rhyngweithiol, gwnewch iddi allbynnu hysbysiad byr fel hyn pan
+fydd yn dechrau mewn modd rhyngweithiol:
+
+Gnomovision fersiwn 69, Hawlfraint (C) blwyddyn enw’r awdur. Mae Gnomovision yn
+dod HEB UNRHYW WARANT O GWBL; am fanylion teipiwch ‘dangoswch w’. Meddalwedd rhydd
+yw hwn, ac mae croeso i chi ei ailddosbarthu dan amodau arbennig;
+teipiwch ‘dangoswch c’ am fanylion.
+
+Dylai’r gorchmynion damcaniaethol ‘dangoswch w’ a ‘dangoswch c’ ddangos y rhannau
+priodol o’r Drwydded Gyhoeddus Gyffredinol. Wrth gwrs, gall y gorchmynion rhydych
+chi’n eu defnyddio fod wedi’u galw’n rhywbeth arall ar wahân i ‘dangoswch w’
+a ‘dangoswch c’; gallent hyd yn oed fod yn cliciadau llygoden neu eitemau
+ar ddewislen--beth bynnag sy’n addas i’ch rhaglen.
+
+Dylech hefyd gael eich cyflogwr (os ydych chi’n gweithio fel rhaglennydd) neu
+eich ysgol, os oes un, i lofnodi “gwadiad hawlfraint” ar gyfer y rhaglen, os oes
+angen. Dyma sampl; newidiwch yr enwau:
+
+Mae Yoyodyne, Inc. drwy hyn yn gwadu pob buddiant hawlfraint yn y rhaglen
+‘Gnomovision’ (sy’n mwytho crynhowyr) a ysgrifennwyd gan James Hacker.
+<llofnod Ty Coon>, 1 Ebrill 1989
+Ty Coon, Llywydd Llygredd
+
+Nid yw’r Drwydded Gyhoeddus Gyffredinol hon yn caniatâu i’ch rhaglen gael ei
+hymgorffori mewn rhaglenni perchnogol. Os mai llyfrgell isreolwaith yw eich
+rhaglen, efallai y byddwch yn ystyried ei bod hi’n fwy defnyddiol cysylltu
+cymwyseddau perchnogol gyda’r llyfrgell. Os mai dyma’r hyn rydych am ei wneud,
+defnyddiwch Drwydded Gyhoeddus Gyfredinol Llyfrgelloedd GNU yn lle’r Drwydded hon.
