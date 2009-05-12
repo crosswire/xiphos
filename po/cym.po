@@ -3434,7 +3434,7 @@ msgstr "i  "
 #~ msgstr "Isel Almaeneg; Isel Sacsoneg"
 
 #~ msgid "Dutch"
-# ~ msgstr "Iseldireg"
+#~ msgstr "Iseldireg"
 
 #~ msgid "Norwegian"
 #~ msgstr "Norwyeg"
@@ -3572,7 +3572,7 @@ msgstr "i  "
 #~ msgstr "Bydd angen ichi ail gychwyn Gnome Sword ar ol ei ddatgloi."
 
 #~ msgid "You need to restart GnomeSword to view it"
-# ~ msgstr "Bydd angen i chi ail-gychwyn y Gnome Sword i’w weld"
+#~ msgstr "Bydd angen i chi ail-gychwyn y Gnome Sword i’w weld"
 
 #, fuzzy
 #~ msgid ""
@@ -3611,7 +3611,7 @@ msgstr "i  "
 #~ msgstr "URL:"
 
 #~ msgid "Go to parent"
-#~ msgstr "Ewch i’r rhiant
+#~ msgstr "Ewch i’r rhiant"
 #~ msgid "Go to first child"
 #~ msgstr "Ewch i’r plentyn cyntaf "
 
@@ -3806,7 +3806,7 @@ msgstr "i  "
 #~ msgstr "Dileu’r nodyn?"
 
 #~ msgid "Create a new file"
-# ~ msgstr "Creu ffeil newydd"
+#~ msgstr "Creu ffeil newydd"
 
 #~ msgid "Print window contents"
 #~ msgstr "Argraffu cynnwys y ffenestr"
@@ -3912,7 +3912,7 @@ msgstr "i  "
 #~ msgstr "Trwm"
 
 #~ msgid "Makes the text bold"
-#~ msgstr Troi’r testun yn drwm
+#~ msgstr "Troi’r testun yn drwm"
 
 #~ msgid "Makes the text italic"
 #~ msgstr "Troi’r testun yn italeg"
