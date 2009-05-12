@@ -68,6 +68,7 @@ void editor_load_note(EDITOR * e, const gchar * module_name, const gchar * key);
 void editor_load_book(EDITOR * e);
 gint editor_create_new(const gchar * filename, const gchar * key, gint note);
 void editor_save_book(EDITOR * e);
+void editor_maybe_save_all(void);
 
 #endif /* USE_GTKHTML3_14_23 */
 

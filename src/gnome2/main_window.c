@@ -61,6 +61,11 @@
 #include "gui/tabbed_browser.h"
 #include "gui/widgets.h"
 
+#ifdef USE_GTKHTML3_14_23
+#include "editor/slib-editor.h"
+#else
+#include "editor/bonobo-editor.h"
+#endif /* !USE_GTKHTML3_14_23 */
 
 WIDGETS widgets;
 
@@ -317,6 +322,9 @@ static gboolean  delete_event (GtkWidget *widget,
                                             GdkEvent *event,
                                             gpointer user_data)
 {
+	/* offer to save all editors remaining open */
+	editor_maybe_save_all();
+
 	shutdown_frontend();
 	/* shutdown the sword stuff */
 	main_shutdown_backend();
