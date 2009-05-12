@@ -1,4 +1,4 @@
-﻿# Welsh translation of Xiphos
+# Welsh translation of Xiphos
 # Copyright (C) 2006 Arfon Jones
 # This file is distributed under the same license as the Xiphos package.
 # Arfon Jones <gig.cymru@btinternet.com> 2009
@@ -90,7 +90,7 @@ msgstr "_Cod HTML"
 
 #: ../src/editor/html-editor.c:530
 msgid "_Plain Source"
-msgstr “_Cod plaen”
+msgstr "_Cod plaen"
 
 #: ../src/editor/html-editor.c:537 ../src/gnome2/main_menu.c:989
 msgid "_View"
@@ -472,7 +472,7 @@ msgstr "Copio"
 
 #: ../src/gnome2/parallel_view.c:254
 msgid "Detach/Attach"
-msgstr "Gwahanu/Atodi" datod
+msgstr "Gwahanu/Atodi"
 
 #: ../src/gnome2/parallel_view.c:259
 msgid "Module Options"
@@ -485,7 +485,7 @@ msgstr "Newid paralel 1"
 
 #: ../src/gnome2/parallel_view.c:277
 msgid "Change parallel 2"
-msgstr "Newid paralel 2"paralel
+msgstr "Newid paralel 2"
 
 #: ../src/gnome2/parallel_view.c:280
 msgid "Change parallel 3"
@@ -1099,7 +1099,7 @@ msgstr "Agor mewn  tab newydd"
 
 #: ../src/gnome2/sidebar.c:740 ../src/gnome2/sidebar.c:890
 msgid "Open selected module in a new tab"
-msgstr "Agor i modiwl ddewiswyd mewn tab newydd"”Agor y modiwl ayb”
+msgstr "Agor i modiwl ddewiswyd mewn tab newydd""Agor y modiwl ayb"
 
 #: ../src/gnome2/sidebar.c:746
 msgid "Open in dialog"
@@ -1519,7 +1519,7 @@ msgid "Load Bookmarks from Bibletime"
 msgstr "Llwytho Nodau Tudalen o Bibletime"
 
 #: ../src/gnome2/bookmarks_menu.c:1184
-msgid "Remove - Restore"”
+msgid "Remove - Restore""
 msgstr "Diddymu - Adfer"
 
 #: ../src/gnome2/treekey-editor.c:125 ../src/gnome2/treekey-editor.c:184
@@ -1712,7 +1712,7 @@ msgstr "Dangos Rhifau_Adnodau"
 #. 11
 #: ../src/gnome2/main_menu.c:916
 msgid "_Highlight Current Verse"
-msgstr "_Aroleuo’r Adnod Gyfredol" “Amlygu’r Adnod Gyfredol”
+msgstr "_Aroleuo’r Adnod Gyfredol" "Amlygu’r Adnod Gyfredol"
 
 #. 12
 #: ../src/gnome2/main_menu.c:923
@@ -2334,7 +2334,7 @@ msgstr "Dangos %au yn y prif ffenestr"
 #: ../src/main/tab_history.c:66 ../src/main/tab_history.c:110
 #: ../src/main/tab_history.c:125
 msgid "H_istory/<Separator>"
-msgstr "H_anes<Gwhanfar>"Gwahanydd”
+msgstr "H_anes<Gwhanfar>"Gwahanydd"
 
 #. tab->history_items + 1);
 #: ../src/main/tab_history.c:68 ../src/main/tab_history.c:112
@@ -2419,7 +2419,7 @@ msgid ""
 "GnomeSword cannot continue."
 msgstr ""
 "All GnomeSword ddim creu .gnomesword:
-“%au\n"
+"%au\n"
 "\n"
 "All GnomeSword ddim parhau."
 
@@ -2455,7 +2455,7 @@ msgid ""
 msgstr ""
 "Nid oes Beiblau wedi eu gosod\n"
 "Mae’n ymddangos eich bod wedi dewis peidio gosod rhai
-“\n"
+"\n"
 "Heb fodiwlau Beibl i’w dangos\n"
 "All GnomeSword ddim mynd ymlaen\n"
 "a bydd yn allanu. "
