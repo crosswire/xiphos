@@ -9,6 +9,7 @@
     !insertmacro MUI_LANGUAGE "English" ;first language is the default
     ;!insertmacro MUI_LANGUAGE "Bulgarian" ; bg
     !insertmacro MUI_LANGUAGE "Czech" ; cs
+    !insertmacro MUI_LANGUAGE "Welsh" ; cy
     !insertmacro MUI_LANGUAGE "German" ; de
     ;!insertmacro MUI_LANGUAGE "Spanish" ; es
     !insertmacro MUI_LANGUAGE "Farsi" ; fa
@@ -29,6 +30,7 @@
 
     !include "${LANG_DIR}\en.nsh"
     !include "${LANG_DIR}\cs.nsh"
+    !include "${LANG_DIR}\cy.nsh"
     !include "${LANG_DIR}\de.nsh"
     !include "${LANG_DIR}\fa.nsh"
     !include "${LANG_DIR}\fi.nsh"
@@ -48,6 +50,7 @@
 
     !define LIC_FILE_ENGLISH "${LANG_DIR}\gpl-2.0_en.txt"
     !define LIC_FILE_CZECH "${LANG_DIR}\gpl-2.0_cs.txt"
+    !define LIC_FILE_WELSH "${LANG_DIR}\gpl-2.0_cy.txt"
     !define LIC_FILE_GERMAN "${LANG_DIR}\gpl-2.0_de.txt"
     ;!define LIC_FILE_SPANISH "${LANG_DIR}\gpl-2.0_es.txt"
     !define LIC_FILE_FARSI "${LANG_DIR}\gpl-2.0_fa.txt"
@@ -68,6 +71,7 @@
     LicenseLangString LICENSE_FILE ${LANG_ENGLISH} "${LIC_FILE_ENGLISH}"
     ;LicenseLangString LICENSE_FILE ${LANG_BULGARIAN} "${LIC_FILE_BULGARIAN}"
     LicenseLangString LICENSE_FILE ${LANG_CZECH} "${LIC_FILE_CZECH}"
+    LicenseLangString LICENSE_FILE ${LANG_WELSH} "${LIC_FILE_WELSH}"
     LicenseLangString LICENSE_FILE ${LANG_GERMAN} "${LIC_FILE_GERMAN}"
     ;LicenseLangString LICENSE_FILE ${LANG_SPANISH} "${LIC_FILE_SPANISH}"
     LicenseLangString LICENSE_FILE ${LANG_FARSI} "${LIC_FILE_FARSI}"
@@ -89,6 +93,7 @@
 
     ReserveFile "${LANG_DIR}\en.nsh"
     ReserveFile "${LANG_DIR}\cs.nsh"
+    ReserveFile "${LANG_DIR}\cy.nsh"
     ReserveFile "${LANG_DIR}\de.nsh"
     ReserveFile "${LANG_DIR}\fa.nsh"
     ReserveFile "${LANG_DIR}\fi.nsh"
@@ -101,6 +106,7 @@
     ReserveFile "${LIC_FILE_ENGLISH}"
     ; ReserveFile "${LIC_FILE_BULGARIAN}"
     ReserveFile "${LIC_FILE_CZECH}"
+    ReserveFile "${LIC_FILE_WELSH}"
     ReserveFile "${LIC_FILE_GERMAN}"
     ; ReserveFile "${LIC_FILE_SPANISH}"
     ReserveFile "${LIC_FILE_FARSI}"
