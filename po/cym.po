@@ -2334,7 +2334,7 @@ msgstr "Dangos %au yn y prif ffenestr"
 #: ../src/main/tab_history.c:66 ../src/main/tab_history.c:110
 #: ../src/main/tab_history.c:125
 msgid "H_istory/<Separator>"
-msgstr "H_anes<Gwhanfar>"Gwahanydd"
+msgstr "H_anes/<Separator"
 
 #. tab->history_items + 1);
 #: ../src/main/tab_history.c:68 ../src/main/tab_history.c:112
@@ -2379,7 +2379,7 @@ msgstr ""
 "\n"
 "Gyda’ch caniatad, bydd GnomeSword yn  gofyn i’r Rheolydd Modiwlau eich galluogi "
 "i’w osod o Crosswire:\n"
-"1. Ffurfweddu arsefydlu o bell\n" Ffurfweddu osod o bell
+"1. Ffurfweddu arsefydlu o bell\n"
 "2. Cysylltu.\n"
 "3. Dewis testun Beibl yn eich iaith ddewisol.\n"
 "4. Clicio 'Arsefydlu'.\n"
@@ -2418,7 +2418,7 @@ msgid ""
 "\n"
 "GnomeSword cannot continue."
 msgstr ""
-"All GnomeSword ddim creu .gnomesword:
+"All GnomeSword ddim creu .gnomesword:"
 "%au\n"
 "\n"
 "All GnomeSword ddim parhau."
@@ -2454,7 +2454,7 @@ msgid ""
 "and will now exit."
 msgstr ""
 "Nid oes Beiblau wedi eu gosod\n"
-"Mae’n ymddangos eich bod wedi dewis peidio gosod rhai
+"Mae’n ymddangos eich bod wedi dewis peidio gosod rhai"
 "\n"
 "Heb fodiwlau Beibl i’w dangos\n"
 "All GnomeSword ddim mynd ymlaen\n"
@@ -3146,7 +3146,7 @@ msgstr "Modiwl cyfan"
 msgid ""
 "Fast, featureful, index-based search\n"
 "Indexes must have been built beforehand:\n"
-"See Module Manager's maintenance functions".
+"See Module Manager's maintenance functions"
 msgstr ""
 "Chwiliad chwim, llawn nodwedd gyda mynegair\n"
 "Rhaid llunio’r mynegeion ymlaen llaw:\n"
@@ -3181,7 +3181,7 @@ msgid "Open a dialog to select modules to add to the list"
 msgstr "Agorwch ddeialog i ddewis modiwlau i ychwanegu at y rhestr"
 
 #: ../ui/search-dialog.glade.h:46
-msgid "Optimized (\"Lucene
+msgid "Optimized"
 msgstr "Wedi ei optimeiddio"
 
 #: ../ui/search-dialog.glade.h:48
@@ -3298,7 +3298,7 @@ msgstr "i  "
 #~ msgid "Bulgarian"
 #~ msgstr "Bwlgareg"
 
-#~ msgid "Breton"ll
+#~ msgid "Breton"
 #~ msgstr "Llydaweg"
 
 #~ msgid "Bosnian"
