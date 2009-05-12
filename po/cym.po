@@ -1712,7 +1712,7 @@ msgstr "Dangos Rhifau_Adnodau"
 #. 11
 #: ../src/gnome2/main_menu.c:916
 msgid "_Highlight Current Verse"
-msgstr "_Aroleuo’r Adnod Gyfredol" "Amlygu’r Adnod Gyfredol"
+msgstr "_Aroleuo’r Adnod Gyfredol"
 
 #. 12
 #: ../src/gnome2/main_menu.c:923
@@ -1777,7 +1777,7 @@ msgid "_Help"
 msgstr "_Help"
 
 #: ../src/gnome2/export_dialog.c:228 ../ui/export-dialog.glade.h:13
-msgid "Please check copyright before exporting
+msgid "Please check copyright before exporting"
 msgstr "Gwiriwch yr hawlfraint cyn ei allforio!"
 
 #: ../src/gnome2/about_trans.c:83
@@ -1884,7 +1884,7 @@ msgstr "Ydych chi’n siwr eich bod am ddileu y modiwl a ddewiswyd?"
 #, c-format
 msgid ""
 "%s:\n"
-"No such module is installed.\n" ni osodwyd modiwl fel yna
+"No such module is installed.\n"
 "%s"
 msgstr ""
 "%s:\n"
