@@ -1,3 +1,7 @@
+2009-05-12  karl <charcoal@users.sf.net>
+
+	* fixed #2790711 first run - tabs not parsed successfully
+
 2009-05-11 matthew <ransom1982@users.sourceforge.net>
 
 	* updated manual in preparation for release

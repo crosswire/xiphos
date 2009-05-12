@@ -327,9 +327,6 @@ void gui_save_tabs(const gchar *filename)
 	GList *tmp = NULL;
 	PASSAGE_TAB_INFO *pt;
 
-	if (stop_refresh)
-		return;
-
 	if (NULL == filename)
 		filename = default_tab_filename;
 	
