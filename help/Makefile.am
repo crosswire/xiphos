@@ -54,4 +54,5 @@ DOC_FIGURES = 	figures/first_start.png \
 		figures/sword_remove.png \
 		figures/sword_sources.png
 
-DOC_LINGUAS =	fr
+DOC_LINGUAS =	fr fa de
+
