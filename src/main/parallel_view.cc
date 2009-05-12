@@ -1420,6 +1420,7 @@ void main_update_parallel_page_detached(void)
 
 void main_swap_parallel_with_main(char *intmod)
 {
+#if 0
 	if ((settings.parallel5Module) && !strcmp(settings.parallel5Module, intmod)) {
 		settings.parallel5Module = xml_get_value("modules", "bible");
 	}
@@ -1435,6 +1436,7 @@ void main_swap_parallel_with_main(char *intmod)
 	if ((settings.parallel1Module) && !strcmp(settings.parallel1Module, intmod)) {
 		settings.parallel1Module = xml_get_value("modules", "bible");
 	}
+#endif
 	main_display_bible(intmod, settings.currentverse);
 	main_update_parallel_page();
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_bible_parallel),

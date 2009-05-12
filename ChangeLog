@@ -2,6 +2,7 @@
 
 	* fixed #2790711 first run - tabs not parsed successfully
 	* fixed #2790487 save editor changes on exit
+	* fixed #2789879 view-context disturbs parallel tab
 
 2009-05-11 matthew <ransom1982@users.sourceforge.net>
 
