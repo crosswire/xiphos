@@ -2,6 +2,7 @@
 
 	* feat.req #2789973 smaller default size of dialog windows.
 	  (for the sake of really small screens e.g. XO.)
+	* feat.req #2789998 same modops for both main & dialogs.
 
 2009-05-12  karl <charcoal@users.sf.net>
 
