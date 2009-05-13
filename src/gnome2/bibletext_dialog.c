@@ -1034,7 +1034,7 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 			    vt->dialog);
 	gtk_window_set_title(GTK_WINDOW(vt->dialog),
 			     main_get_module_description(vt->mod_name));
-	gtk_window_set_default_size(GTK_WINDOW(vt->dialog), 400, 400);
+	gtk_window_set_default_size(GTK_WINDOW(vt->dialog), 200, 200);
 	gtk_window_set_resizable(GTK_WINDOW(vt->dialog), TRUE);
 
 	vbox33 = gtk_vbox_new(FALSE, 0);
@@ -1053,7 +1053,7 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 	frame = gtk_frame_new(NULL);
 	gtk_widget_show(frame);
 	gtk_paned_add1((GtkPaned *)paned,frame);
-	gtk_widget_set_size_request(frame, -1, 400);
+	gtk_widget_set_size_request(frame, -1, 200);
 
 #ifdef USE_GTKMOZEMBED
 	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
