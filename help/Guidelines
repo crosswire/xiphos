@@ -17,7 +17,8 @@ General:
 in PDF format, please email one of the Documentation developers. 
 
 2. Whilst editing, you can view your changes by simply going into your working directory and running :
-	" yelp filename.xml" 
+	" yelp filename.xml". You may have to give the full path, like this: "yelp `pwd`/xiphos.xml" 
+   Also, using xmllint can save a lot of frustration: "xmllint xiphos.xml"
 
 This also helps with finding errors and debugging. 
 3. Please make sure that you have properly edited xiphos-manual-(lang).omf and Makefile.am.

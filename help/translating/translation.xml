@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+"http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+
+  <!ENTITY introduction SYSTEM "introduction.xml">
+  <!ENTITY xiphospo SYSTEM "xiphospo.xml">
+  <!ENTITY xiphossvn SYSTEM "xiphossvn.xml">
+  <!ENTITY manual SYSTEM "manual.xml">
+  <!ENTITY installer SYSTEM "installer.xml">
+  <!ENTITY website SYSTEM "website.xml">
+
+  <!ENTITY appversion "3.1">
+  <!ENTITY date "2009-05-11">
+  <!ENTITY app "<application>Xiphos</application>">
+  <!ENTITY appname "Xiphos">
+  <!ENTITY xiphos "The Xiphos Team">
+]>
+
+<article id="index" lang="en">
+  <articleinfo>
+    <title> &app; Translation Guidelines</title>
+    <abstract>
+      <para>Guidelines to translate the different parts of &appname; into other languages</para>
+    </abstract>
+    <copyright>
+      <year>2009</year>
+      <holder> &xiphos; </holder>
+   </copyright>
+
+    <publisher>
+      <publishername>&xiphos;</publishername>
+    </publisher>
+
+    <authorgroup>
+      <author>
+	<firstname>Dr Peter</firstname>
+	<surname>von Kaehne</surname>
+      </author>
+      <author>
+	<firstname>Dominique</firstname>
+	<surname>Corbex</surname>
+      </author>
+      <author>
+	<firstname>Matthew</firstname>
+	<surname>Talbert</surname>
+      </author>
+    </authorgroup>
+  </articleinfo>
+
+  <sect1 id="introduction">
+    <title>Introduction to Translation</title>
+    &introduction;
+  </sect1>
+
+  <sect1 id="xiphospo">
+    <title>Translating from a PO file</title>
+    &xiphospo;
+  </sect1>
+
+  <sect1 id="xiphossvn">
+    <title>Translating from SVN</title>
+    &xiphossvn;
+  </sect1>
+
+  <sect1 id="manual">
+    <title>Translating the Manual</title>
+    &manual;
+  </sect1>
+
+  <sect1 id="installer">
+    <title>Translating the Installer</title>
+    &installer;
+  </sect1>
+
+  <sect1 id="website">
+    <title>Translating the Website</title>
+    &installer;
+  </sect1>
+
+</article>
