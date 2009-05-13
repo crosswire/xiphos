@@ -1,3 +1,8 @@
+2009-05-13  karl <charcoal@users.sf.net>
+
+	* feat.req #2789973 smaller default size of dialog windows.
+	  (for the sake of really small screens e.g. XO.)
+
 2009-05-12  karl <charcoal@users.sf.net>
 
 	* fixed #2790711 first run - tabs not parsed successfully
