@@ -112,9 +112,11 @@ int main_save_module_options(const char *mod_name,
 			     int dialog)
 {
 	gchar *buf = NULL;
+#if 0
     	if (dialog)	
 		buf = g_strdup_printf("%s/modops-dialog.conf", settings.gSwordDir);
 	else
+#endif
 		buf = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
 	SWConfig module_options(buf);
 	
@@ -262,9 +264,11 @@ GLOBAL_OPS *main_new_globals(gchar * mod_name, int dialog)
 	GLOBAL_OPS *ops;
 	gchar *buf = NULL;
     	
+#if 0
 	if (dialog)
 		buf = g_strdup_printf("%s/modops-dialog.conf", settings.gSwordDir);
     	else
+#endif
 		buf = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
 	SWConfig module_options(buf);
 	
