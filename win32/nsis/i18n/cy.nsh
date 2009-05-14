@@ -1,7 +1,7 @@
 ;;
-;;  he_IL.nsh
+;;  cy.nsh
 ;;
-;;  Hebrew language strings for the Xiphos installer.
+;;  Welsh language strings for the Xiphos installer.
 ;;
 ;;  Version 1
 ;;
