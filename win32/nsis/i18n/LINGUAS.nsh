@@ -17,7 +17,7 @@
     !insertmacro MUI_LANGUAGE "Finnish" ; fi
     !insertmacro MUI_LANGUAGE "French" ; fr
     !insertmacro MUI_LANGUAGE "Hebrew" ; he_IL
-    ;!insertmacro MUI_LANGUAGE "Norwegian" ; nb_NO
+    !insertmacro MUI_LANGUAGE "Norwegian" ; nb_NO
     !insertmacro MUI_LANGUAGE "Dutch" ; nl
     !insertmacro MUI_LANGUAGE "Portuguese" ; pt, pt_PT
     ;!insertmacro MUI_LANGUAGE "Russian" ; ru
@@ -38,6 +38,7 @@
     !include "${LANG_DIR}\fi.nsh"
     !include "${LANG_DIR}\fr.nsh"
     !include "${LANG_DIR}\he_IL.nsh"
+    !include "${LANG_DIR}\nb_NO.nsh"
     !include "${LANG_DIR}\nl.nsh"
     !include "${LANG_DIR}\pt.nsh"
     !include "${LANG_DIR}\sv_SE.nsh"
@@ -58,7 +59,7 @@
     !define LIC_FILE_FARSI "${LANG_DIR}\gpl-2.0_fa.txt"
     !define LIC_FILE_FINNISH "${LANG_DIR}\gpl-2.0_fi.txt"
     !define LIC_FILE_FRENCH "${LANG_DIR}\gpl-2.0_fr.txt"
-    ;!define LIC_FILE_NORWEGIAN "${LANG_DIR}\gpl-2.0_nb_NO.txt"
+    !define LIC_FILE_NORWEGIAN "${LANG_DIR}\gpl-2.0_nb_NO.txt"
     !define LIC_FILE_DUTCH "${LANG_DIR}\gpl-2.0_nl.txt"
     !define LIC_FILE_PORTUGUESE "${LANG_DIR}\gpl-2.0_pt.txt"
     ;!define LIC_FILE_RUSSIAN "${LANG_DIR}\gpl-2.0_ru.txt"
@@ -82,7 +83,7 @@
     LicenseLangString LICENSE_FILE ${LANG_FINNISH} "${LIC_FILE_FINNISH}"
     LicenseLangString LICENSE_FILE ${LANG_FRENCH} "${LIC_FILE_FRENCH}"
     LicenseLangString LICENSE_FILE ${LANG_HEBREW} "${LIC_FILE_HEBREW}"
-    ;LicenseLangString LICENSE_FILE ${LANG_NORWEGIAN} "${LIC_FILE_NORWEGIAN}"
+    LicenseLangString LICENSE_FILE ${LANG_NORWEGIAN} "${LIC_FILE_NORWEGIAN}"
     LicenseLangString LICENSE_FILE ${LANG_DUTCH} "${LIC_FILE_DUTCH}"
     LicenseLangString LICENSE_FILE ${LANG_PORTUGUESE} "${LIC_FILE_PORTUGUESE}"
     ;LicenseLangString LICENSE_FILE ${LANG_RUSSIAN} "${LIC_FILE_RUSSIAN}"
@@ -104,6 +105,7 @@
     ReserveFile "${LANG_DIR}\fi.nsh"
     ReserveFile "${LANG_DIR}\fr.nsh"
     ReserveFile "${LANG_DIR}\he_IL.nsh"
+    ReserveFile "${LANG_DIR}\nb_NO.nsh"
     ReserveFile "${LANG_DIR}\nl.nsh"
     ReserveFile "${LANG_DIR}\pt.nsh"
     ReserveFile "${LANG_DIR}\sv_SE.nsh"
@@ -119,7 +121,7 @@
     ReserveFile "${LIC_FILE_FINNISH}"
     ReserveFile "${LIC_FILE_FRENCH}"
     ; ReserveFile "${LIC_FILE_HEBREW}"
-    ; ReserveFile "${LIC_FILE_NORWEGIAN}"
+    ReserveFile "${LIC_FILE_NORWEGIAN}"
     ReserveFile "${LIC_FILE_DUTCH}"
     ReserveFile "${LIC_FILE_PORTUGUESE}"
     ; ReserveFile "${LIC_FILE_RUSSIAN}"
