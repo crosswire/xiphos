@@ -909,9 +909,10 @@ GtkWidget *gui_create_main_menu(void)
 	widgets.parallel_tab_item = glade_xml_get_widget (gxml, "show_parallel_view_in_a_tab");
 	widgets.side_preview_item = glade_xml_get_widget (gxml, "show_previewer_in_sidebar");
 	
-#ifdef USE_GTKMOZEMBED
 	widgets.doublespace_item = glade_xml_get_widget (gxml, "double_space_text");
-#endif /* USE_GTKMOZEMBED */
+#ifndef USE_GTKMOZEMBED
+	gtk_widget_hide(widgets.doublespace_item);
+#endif /* !USE_GTKMOZEMBED */
 	
 	/* map tab's show state into view menu. */
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
