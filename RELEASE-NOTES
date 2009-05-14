@@ -3,6 +3,115 @@ ____________________
 XIPHOS RELEASE NOTES
 ____________________
 
+Release 3.1
+17 May 2009
+
+This is a release to introduce two important features in Windows
+(improved feature parity with Linux) plus numerous small features and
+bugfixes for all platforms.
+
+ 1. The Windows build now supports ReadAloud (text-to-speech) and
+    transliteration of non-Latin character sets.
+
+ 2. The module manager is no longer modal, that is, the module manager
+    does not monopolize the application's attention: You can begin
+    downloading or indexing modules, and then go back to work in the
+    main window.
+
+ 3. New interface translations: Norwegian, Welsh, Afrikaans.
+
+ 4. New prayerlists/journals offer sensible default names, and their
+    editor support is much improved, including offering to save on
+    close/quit.
+
+ 5. RtoL languages' (right-to-left, such as Farsi and Hebrew)
+    scrollbars go on the correct side.
+
+ 6. Bookmark support:
+    Search results may be saved as bookmarks or sets of bookmarks.
+    Bookmarks containing multiple verses work.
+    Single-verse bookmarks auto-navigate directly when clicked.
+    Multi-verse bookmarks engage the verse list, where individual
+    selections can be made.
+
+ 7. Automatic lemma lookup in inverted Greek dictionary for ancient
+    texts.  This has marginal utility pending improvements to Sword's
+    dictionary support due to inconsistent key sort.
+
+ 8. 'j' and 'k' have been added for keyboard-driven verse selection.
+
+ 9. Module options are consistent between main and separate windows.
+
+10. Images' display has been fixed so as to use correct size when
+    first displayed.
+
+11. The module manager provides tooltips that show the "about" content
+    on mouse-hover during module list selection.
+
+12. The passage copier/exporter is much improved, and similar to other
+    applications' function.
+
+13. In gtkhtml3 build, Advanced Search has gained a previewer scrollbar.
+
+14. A great many fixes and minor improvements to many subsystems:
+    - module archiving.
+    - locale handling.
+    - font size management.
+    - spacing and highlight alignment.
+    - mouse hover alignment selection on Strong's and morphology.
+    - parallel Bible selection preservation.
+    - splash icons, direction and highlight timing.
+    - numerous code refactoring, cleanup, and efficiency improvements.
+    - history management corrections.
+    - "shift to lock previewer" fixes.
+
+Plans for the release after this revolve around final feature parity
+between Linux and Windows (especially the better display engine,
+providing many features such as blocked Strong's and morphology
+display) and full integration of Sword's new alternate versification
+capability with how Xiphos manages book/chapter/verse information.
+
+Bug reports addressed since 3.0.1:
+2790711  first run - tabs not parsed successfully
+2790487  Closing Xiphos looses unsaved changes in editor
+2789986  ISV MAT 1:19 crossref at 'secretly' not linked
+2789959  navbar chapter up changes book (-2) in addition to chapter
+2789879  "View Context" changes parallel view
+2789217  crash - indexing modules in /usr/share/sword
+2788398  Dropdown chapter number fails above 128
+2786599  win32 - book names not localized
+2785952  right-click->about on empty pane causes crash
+2784883  archiving issues
+2784533  Performance seems slow in XP
+2783271  Parallel View tab moves to bottom of window
+2781508  Commentary file->open module doesn't work properly
+2781318  gtkhtml build-advanced search results does not have scrollba
+2779126  Personal Commentary module crash
+2764410  Segfault in commentary view window
+2762625  module manager - maintenance
+2737136  Headings problem in detached bible window
+2707964  Chinese Version
+2704666  gtkhtml build "Hold shift to lock previewer" does not work
+2704659  Parallel view always shows variants
+2704655  History glitches
+2704651  genbook tab, show Bible doesn't show navbar
+2599921  Copy fails in detached windows
+
+New feature requests pending:
+2791621  Biblical resource in seperate window: synchronize from/with?
+2791414  Parallel View tab should behave like a real tab
+2790489  Add Bible References to Study Pad
+2789881  Default CSS file
+2781509  Export->Copy HTML doesn't work properly
+2717893  Prayerlist/Daily Journal Enhancements
+
+Feature requests closed:
+2789998  Choice of module options in tabs/seperate windows
+2789973  Reseizing seperate windows
+2744739  When closing Xiphos could remember last place
+2705145  Allow moving to previous/next verse by 'j' and 'k' keys
+________________________________________________________________
+
 Release 3.0.1
 19 Feb 2009
 
