@@ -74,6 +74,7 @@ capability with how Xiphos manages book/chapter/verse information.
 Bug reports addressed since 3.0.1:
 2790711  first run - tabs not parsed successfully
 2790487  Closing Xiphos looses unsaved changes in editor
+2789990  Tabs: Chosen and showns bible references not the same
 2789986  ISV MAT 1:19 crossref at 'secretly' not linked
 2789959  navbar chapter up changes book (-2) in addition to chapter
 2789879  "View Context" changes parallel view
