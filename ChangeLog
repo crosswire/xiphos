@@ -1,6 +1,7 @@
 2009-05-15  karl <charcoal@users.sf.net>
 
 	* fixed #2789990 consistent display when en/disabling comm/dict.
+	* feat.req #2792002 add kbd shortcut ctrl-T to open a new tab.
 
 2009-05-13  karl <charcoal@users.sf.net>
 
