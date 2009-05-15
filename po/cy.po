@@ -1656,7 +1656,9 @@ msgstr "Nid oes mynegai chwilio cyflym i %s.%s%s"
 msgid ""
 "\n"
 "Search on this module is now `multi word'."
-msgstr "Mae'r chwiliad ar y modiwl hwn yn `aml-air'."
+msgstr ""
+"\n"
+"Mae'r chwiliad ar y modiwl hwn yn `aml-air'."
 
 #: ../src/main/search_dialog.cc:1494
 msgid ""
