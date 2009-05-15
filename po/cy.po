@@ -1,15 +1,15 @@
 # Welsh translation of Xiphos
-# Copyright (C) 2006 Arfon Jones
+# Copyright (C) 2009 Arfon Jones, Dafydd Watkin
 # This file is distributed under the same license as the Xiphos package.
-# Arfon Jones <gig.cymru@btinternet.com> 2009
 #
 #
+# Arfon Jones <gig.cymru@btinternet.com> 2009, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 3.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-05-01 11:13+0200\n"
-"PO-Revision-Date: 2009-05-11 21:45+0200\n"
+"PO-Revision-Date: 2009-05-15 21:11+0100\n"
 "Last-Translator: Arfon Jones <gig.cymru@btinternet.com>\n"
 "Language-Team: Gnomesword-developers <gnomesword-developers@lists>\n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,6 @@ msgstr "Methu ffeindio’r ffurfweddiad"
 
 #: ../src/editor/bonobo-editor.c:252 ../src/editor/slib-editor.c:228
 #: ../src/gnome2/html.c:629
-#, c-format
 msgid "Page %d of %d"
 msgstr "Tud %d o %d"
 
@@ -90,7 +89,7 @@ msgstr "_Argraffu..."
 #: ../src/editor/slib-editor.c:640 ../ui/editor_note.xml.h:9
 #: ../ui/editor_studypad.xml.h:14
 msgid "Print Pre_view"
-msgstr "Rhagolwg_argraffu"
+msgstr "Rhagolwg Argraffu"
 
 #: ../src/editor/slib-editor.c:647
 msgid "_Quit"
@@ -148,7 +147,6 @@ msgid "Printing is not supported on this printer"
 msgstr "Yr argraffydd hwn ddim yn gymwys i argraffu"
 
 #: ../src/gecko/gecko-print.c:268
-#, c-format
 msgid "Printer %s does not support PostScript printing."
 msgstr "% Argraffydd ddim yn gallu argraffu ôl-nodiadau."
 
@@ -165,7 +163,6 @@ msgid "An error occurred while printing"
 msgstr "Bu gwall wrth argraffu"
 
 #: ../src/gecko/gecko-print.c:587
-#, c-format
 msgid "It was not possible to print your document: %s"
 msgstr "Ni fu’n bosibl argraffu eich dogfen: %s"
 
@@ -175,10 +172,9 @@ msgstr "Am y Modiwl SWORD"
 
 #: ../src/gnome2/about_modules.c:383 ../src/gnome2/mod_mgr.c:198
 msgid "The module has no About information."
-msgstr ""
+msgstr "Does gan y modiwl ddim gwybodaeth Amdani"
 
 #: ../src/gnome2/about_sword.c:88
-#, fuzzy
 msgid ""
 "The SWORD Project is an effort to create an ever-expanding software package "
 "for research and study of God and His Word. The SWORD Project framework "
@@ -189,7 +185,7 @@ msgid ""
 msgstr ""
 "Mae prosiect SWORD yn ymgais i greu pecyn meddalwedd sy’n datblygu’n gyson i "
 "ymchwilio ac i astudio Duw a’i Air. Mae fframwaith prosiect SWORD  yn ei "
-"gwneud yn hawdd i astudio’r Beibl, esboniadau, geiriaduron Groega llyfrau "
+"gwneud yn hawdd i astudio’r Beibl, esboniadau, geiriaduron Groeg a llyfrau "
 "eraill.  Mae nifer o raglenni’n cael eu hadeiladu gan ddefnyddio’r "
 "fframwaith yma. Gall pob rhaglen sy’n defnyddio’r fframwaith rannu’r set o "
 "lyfrau sydd wedi eu gosod ar un."
@@ -200,18 +196,17 @@ msgstr "Gwybodaeth am brosiect SWORD"
 
 #: ../src/gnome2/about_sword.c:123
 msgid "Sword Version"
-msgstr "fersiwn SWORD"
+msgstr "Fersiwn SWORD"
 
 #: ../src/gnome2/about_sword.c:154
 msgid "Books can be downloaded from the SWORD Project"
-msgstr "Gellir lawr-lwytho llyfrau o’r Prosiect SWORD"
+msgstr "Gellir lawrlwytho llyfrau o’r Prosiect SWORD"
 
 #: ../src/gnome2/about_sword.c:160
 msgid "The SWORD Project"
 msgstr "Prosiect SWORD"
 
 #: ../src/gnome2/about_trans.c:84
-#, fuzzy
 msgid ""
 "Do you like using Xiphos to study the Bible? Would you like to see its "
 "display using your native language? You could translate Xiphos! \n"
@@ -220,34 +215,27 @@ msgid ""
 "other languages. If you are able to translate for us, please see the link "
 "below, contact us, and get involved with our efforts."
 msgstr ""
-"Ydych chi’n defnyddio Xiphos i astudio’r Beibl? Hoffech weld ei "
-"ymddangosiad gan ddefnyddio’ch iaith frodorol? Gallech chi gyfieithu "
-"Xiphos!.Rydym bob amser yn edrych am bobl all gyfrannu cyfieithiadau "
-"newydd o Xiphos i ieithoedd eraill.  Os gallwch chi ei gyfieithu i ni, "
-"gweler y ddolen isodcysylltwch a ni, a’n helpu gyda’n hymdrechion. "
+"Ydych chi’n defnyddio Xiphos i astudio’r Beibl? Hoffech weld ei ymddangosiad "
+"gan ddefnyddio’ch iaith frodorol? Gallech chi gyfieithu Xiphos!\n"
+"\n"
 
 #: ../src/gnome2/about_trans.c:98
-#, fuzzy
 msgid "About Xiphos Translation"
-msgstr "Am _Gyfieithu ..."
+msgstr "Am Gyfieithu Xiphos"
 
 #: ../src/gnome2/about_trans.c:139
-#, fuzzy
 msgid "See TRANSLATION-HOWTO in Xiphos source"
 msgstr "gw. SUT_I-GYFIEITHU yn ffynhonnell Xiphos"
 
 #: ../src/gnome2/about_trans.c:145
-#, fuzzy
 msgid "Xiphos development"
 msgstr "Datblygiad Xiphos"
 
 #: ../src/gnome2/about_xiphos.c:132
-#, fuzzy
 msgid "Copyright 2000-2009 The Xiphos Development Team"
-msgstr "Hawlfraint 2000-2008 Tîm Datblygu Xiphos"
+msgstr "Hawlfraint 2000-2009 Tîm Datblygu Xiphos"
 
 #: ../src/gnome2/about_xiphos.c:135
-#, fuzzy
 msgid ""
 "(formerly known as GnomeSword)\n"
 "\n"
@@ -255,7 +243,10 @@ msgid ""
 "We would like to thank Troy Griffitts and all the other folks who have given "
 "us The SWORD Project."
 msgstr ""
-"Carem ddiolch iTroy Griffits a phawb arall sydd wedi rhoi  prosiect SWORD i "
+"(adnabuwyd o'r blaen fel GnomeSword)\n"
+"\n"
+"Gyrrir gan Brosiect SWORD.\n"
+"Carem ddiolch i Troy Griffits a phawb arall sydd wedi rhoi prosiect SWORD i "
 "ni."
 
 #: ../src/gnome2/bibletext_dialog.c:525
@@ -330,9 +321,8 @@ msgid "Label: "
 msgstr "Label: "
 
 #: ../src/gnome2/bookmarks_treeview.c:105
-#, fuzzy, c-format
 msgid "Search result: %s"
-msgstr "<b>Canlyniadau’r Chwiliad</b>"
+msgstr "Canlyniadau’r Chwiliad: %s"
 
 #: ../src/gnome2/bookmarks_treeview.c:934 ../src/gnome2/sidebar.c:1438
 msgid "Bookmarks"
@@ -352,12 +342,11 @@ msgstr "Teipio Allwedd Seiffr: "
 
 #: ../src/gnome2/dialog.c:241
 msgid "Close without Saving"
-msgstr "Cau heb gadw"
+msgstr "Cau heb Gadw"
 
 #: ../src/gnome2/dialog.c:730
-#, fuzzy
 msgid "Xiphos:"
-msgstr "Xhosa"
+msgstr "Xiphos:"
 
 #: ../src/gnome2/dialog.c:831
 msgid "Close _without Saving"
@@ -419,7 +408,6 @@ msgid "Use the default font for this module"
 msgstr "Defnyddio’r ffont diofyn i’r modiwl"
 
 #: ../src/gnome2/main_window.c:740
-#, fuzzy
 msgid "Xiphos - Bible Study Software"
 msgstr "Xiphos – Meddalwedd Astudio’r Beibl"
 
@@ -444,10 +432,9 @@ msgstr "Golwg Llyfr"
 
 #: ../src/gnome2/main_window.c:998
 msgid "Welcome to Xiphos"
-msgstr ""
+msgstr "Croeso i Xiphos"
 
 #: ../src/gnome2/menu_popup.c:1126
-#, fuzzy
 msgid ""
 "Renaming is not available in Windows.\n"
 "\n"
@@ -458,12 +445,14 @@ msgid ""
 "Therefore, personal commentary renaming is\n"
 "not available in the Windows environment."
 msgstr ""
-"Ni ellir ailenwi yn CygWin.\n"
+"Ni ellir ailenwi yn Windows.\n"
 "\n"
 "Mae Xiphos wedi ei gyfyngu gan system ffeilio Windows,\n"
 "sydd ddim yn caniatau ailenwi \n"
 "rhannau o ffeiliau sydd eisoes ar agor,\n"
 "fel cynnwys yr esboniad hwn.\n"
+"Felly, ni ellir ailenwi esboniad personol\n"
+"yn amgylchedd Windows."
 
 #: ../src/gnome2/menu_popup.c:1145
 msgid "Rename Commentary"
@@ -488,12 +477,10 @@ msgid "Module names must contain [A-Za-z0-9_] only."
 msgstr "Dylai enwau Modiwlau gynnwys llythrennau a rhifau yn unig."
 
 #: ../src/gnome2/menu_popup.c:1168 ../src/main/prayerlists.cc:261
-#, fuzzy
 msgid "Xiphos already knows a module by that name."
 msgstr "Mae Xiphos eisoes yn gwybod am Fodiwl gyda’r enw yna."
 
 #: ../src/gnome2/menu_popup.c:1211
-#, c-format
 msgid ""
 "Failed to create new configuration:\n"
 "%s"
@@ -574,7 +561,6 @@ msgid "Deleting index"
 msgstr "Dileu Mynegai"
 
 #: ../src/gnome2/mod_mgr.c:422
-#, c-format
 msgid ""
 "`mkdir %s' failed:\n"
 "%s."
@@ -583,7 +569,6 @@ msgstr ""
 "%s."
 
 #: ../src/gnome2/mod_mgr.c:448
-#, fuzzy
 msgid "Xiphos could not execute archiver"
 msgstr "Allai Xiphos ddim dechrau’r archifwr"
 
@@ -605,7 +590,7 @@ msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:514
 msgid "Journals and prayer lists cannot be indexed."
-msgstr ""
+msgstr "Ni ellir creu mynegai i Ddyddlyfrau a rhestrau gweddi"
 
 #: ../src/gnome2/mod_mgr.c:535 ../src/gnome2/mod_mgr.c:2753
 #: ../ui/module-manager.glade.h:15
@@ -629,7 +614,6 @@ msgid "Deletion"
 msgstr "Dilewyd"
 
 #: ../src/gnome2/mod_mgr.c:545
-#, c-format
 msgid "%s failed"
 msgstr "%s wedi methu"
 
@@ -647,7 +631,6 @@ msgid "Unknown"
 msgstr "Anhysbys"
 
 #: ../src/gnome2/mod_mgr.c:1012
-#, c-format
 msgid ""
 "Repository:\n"
 "%s"
@@ -704,7 +687,7 @@ msgid ""
 "Availability"
 msgstr ""
 " Dosbarthwyd yn ôl\n"
-"argaeledd"
+"Argaeledd"
 
 #: ../src/gnome2/mod_mgr.c:1066
 msgid "Updates"
@@ -734,16 +717,15 @@ msgstr "Enw’r Modiwl"
 
 #: ../src/gnome2/mod_mgr.c:1414
 msgid "A checkmark means this module is already installed"
-msgstr ""
+msgstr "Mae marc gwiro yn golygu fod y modiwl hwn wedi ei osod eisoes"
 
 #: ../src/gnome2/mod_mgr.c:1436
-#, fuzzy
 msgid "Click the box to work on this module"
-msgstr "Defnyddio’r ffont diofyn i’r modiwl"
+msgstr "Clicio'r bocs i weithio ar y modiwl"
 
 #: ../src/gnome2/mod_mgr.c:1437
 msgid "Click the box to select this module for install/update"
-msgstr ""
+msgstr "Clicio'r bocs i ddewis y modiwl hwn i'w osod/ddiweddaru"
 
 #: ../src/gnome2/mod_mgr.c:1456
 msgid "Installed"
@@ -754,12 +736,17 @@ msgid ""
 "The index icon means you have built an optimized ('lucene') index for this "
 "module for fast searching (see the Maintenance pane for this function)"
 msgstr ""
+"mae eicon y mynegai yn golygu eich bod wedi adeiladu mynegai ('lucene')llawn "
+"wedi ei optimeiddio i'r modiwl hwn ar gyfer chwilio cyflym (gweler y cwarel "
+"Cynnal a Chadw ar gyfe y swyddogaeth yma)"
 
 #: ../src/gnome2/mod_mgr.c:1484
 msgid ""
 "The lock icon means this module is encrypted, and requires that you purchase "
 "an unlock key from the content owner"
 msgstr ""
+"Mae'r eicon clo yn golygu fod y modiwl hwn wedi ei amgryptio, a bod angen i "
+"chi brynu allwedd gan berchennog y cynnwys"
 
 #. 2
 #: ../src/gnome2/mod_mgr.c:1501 ../src/gnome2/sidebar.c:954
@@ -772,6 +759,8 @@ msgid ""
 "The refresh icon means the Installed module is older than the newer "
 "Available module: You should update the module"
 msgstr ""
+"Mae'r eicon adnewyddu yn golygu fod y modiwl yn hyn na'r modiwl newydd sydd "
+"ar gael: Mae angen diweddaru'r modiwl"
 
 #: ../src/gnome2/mod_mgr.c:1533
 msgid "Available"
@@ -883,9 +872,8 @@ msgstr "Mynd i mewn, i’r isadran gyntaf"
 #: ../src/gnome2/navbar_versekey_dialog.c:887
 #: ../src/gnome2/navbar_versekey_editor.c:877
 #: ../src/gnome2/navbar_versekey_parallel.c:801
-#, fuzzy
 msgid "Synchronize this window from main window"
-msgstr "Dangos %au yn y prif ffenestr"
+msgstr "Cydamseru'r ffenestr hon o'r prif ffenestr"
 
 #: ../src/gnome2/parallel_dialog.c:635 ../src/gnome2/preferences_dialog.c:1790
 msgid "Parallel"
@@ -940,12 +928,10 @@ msgid "Text to render"
 msgstr "Testun i’w gyflwyno"
 
 #: ../src/gnome2/preferences_cell_renderer.c:406
-#, fuzzy
 msgid "Pixbuf Object"
 msgstr "Gwrthrych Pixbwf"
 
 #: ../src/gnome2/preferences_cell_renderer.c:408
-#, fuzzy
 msgid "The pixbuf to render."
 msgstr "Y pixbwf i’w gyflwyno."
 
@@ -979,7 +965,6 @@ msgid "Color"
 msgstr "Lliw"
 
 #: ../src/gnome2/preferences_dialog.c:1766
-#, fuzzy
 msgid "Sizes"
 msgstr "Maint"
 
@@ -992,18 +977,16 @@ msgid "Tabs and Panes"
 msgstr "Tabiau a cwareli"
 
 #: ../src/gnome2/preferences_dialog.c:1780
-#, fuzzy
 msgid "Options"
-msgstr "Pennawd"
+msgstr "Dewisiadau"
 
 #: ../src/gnome2/preferences_dialog.c:1787
 msgid "Main"
 msgstr "Prif"
 
 #: ../src/gnome2/preferences_dialog.c:1793
-#, fuzzy
 msgid "Special"
-msgstr "Sillafu"
+msgstr "Arbennig"
 
 #: ../src/gnome2/search_dialog.c:61 ../src/main/search_dialog.cc:60
 #: ../src/main/search_sidebar.cc:54
@@ -1030,7 +1013,7 @@ msgstr "Ydych chi’n siŵr eich bod am glirio’r rhestr?"
 
 #: ../src/gnome2/search_dialog.c:682
 msgid "The last module list may not be deleted"
-msgstr ""
+msgstr "Ni ellir diddymu'r rhestr modiwlau diwethaf"
 
 #: ../src/gnome2/search_dialog.c:699
 msgid "Delete list?"
@@ -1045,6 +1028,8 @@ msgid ""
 "This is an inclusive (\"AND\") search:\n"
 "Find matches showing all words."
 msgstr ""
+"Mae hon yn chwiliad cynhwysol (\"A\"):\n"
+"Darganfod y rhai sy'n dangos pob gair."
 
 #: ../src/gnome2/search_sidebar.c:206
 msgid "Search Module"
@@ -1072,7 +1057,7 @@ msgstr "Union gymal"
 
 #: ../src/gnome2/search_sidebar.c:290
 msgid "Search Options"
-msgstr "Chwiliwch y Dewisiadau"
+msgstr "Dewisiadau Chwilio"
 
 #: ../src/gnome2/search_sidebar.c:318
 msgid "Search Scope"
@@ -1114,10 +1099,9 @@ msgstr "Agor i modiwl ddewiswyd mewn tab newydd"
 #. 1
 #: ../src/gnome2/sidebar.c:948
 msgid "Open in a separate window"
-msgstr ""
+msgstr "Agor mewn ffenestr arall"
 
 #: ../src/gnome2/sidebar.c:949
-#, fuzzy
 msgid "Open selected module in a separate ['dialog'] window"
 msgstr "Agor y modiwl ddewiswyd mewn deialog"
 
@@ -1157,7 +1141,7 @@ msgstr "Pwnc Amlinellwyd"
 #. 1
 #: ../src/gnome2/sidebar.c:1116 ../ui/xi-menus.glade.h:45
 msgid "Open in editor"
-msgstr "Ar agor yn Golygydd"
+msgstr "Agor yn Golygydd"
 
 #: ../src/gnome2/sidebar.c:1117
 msgid "Open selected module in a dialog"
@@ -1196,17 +1180,16 @@ msgid "Starting Sword"
 msgstr "Dechrau Sword"
 
 #: ../src/gnome2/splash.c:632
-#, fuzzy
 msgid "Displaying Xiphos"
 msgstr "Arddangos Xiphos "
 
 #: ../src/gnome2/toolbar_nav.c:416
 msgid "Move backwards through history"
-msgstr "Yn ôl drwy hanes"
+msgstr "Yn ôl drwy'r hanes"
 
 #: ../src/gnome2/toolbar_nav.c:437
 msgid "Move foward through history"
-msgstr "Ymlaen drwy hanes"
+msgstr "Ymlaen drwy'r hanes"
 
 #: ../src/gnome2/toolbar_nav.c:458
 msgid "Select a Book of the Bible"
@@ -1259,7 +1242,6 @@ msgid "Edit this item"
 msgstr "Golygu’r eitem hon"
 
 #: ../src/main/display.cc:278
-#, fuzzy
 msgid ""
 "An image file's size could not be determined.\n"
 "Is ImageMagick's 'identify' not installed?\n"
@@ -1278,7 +1260,6 @@ msgid "Chapter"
 msgstr "Pennod"
 
 #: ../src/main/main.c:109
-#, fuzzy
 msgid "Xiphos does not understand more than one argument."
 msgstr "Nid yw Xiphos yn deall mwy nag un ddadl."
 
@@ -1340,9 +1321,8 @@ msgid "Greek Accents"
 msgstr "Acenion y Roeg"
 
 #: ../src/main/parallel_view.cc:458
-#, fuzzy
 msgid "Cross-references"
-msgstr "Croesgyfeiriad"
+msgstr "Croesgyfeiriadau"
 
 #: ../src/main/parallel_view.cc:468 ../ui/xi-menus.glade.h:35
 msgid "Lemmas"
@@ -1354,21 +1334,19 @@ msgstr "Teitlau"
 
 #: ../src/main/parallel_view.cc:488
 msgid "Morpheme Segmentation"
-msgstr ""
+msgstr "Segmentiad Morffemau"
 
 #: ../src/main/parallel_view.cc:498 ../ui/xi-menus.glade.h:73
 msgid "Words of Christ in Red"
 msgstr "Geiriau Iesu mewn coch"
 
 #: ../src/main/parallel_view.cc:508 ../ui/xi-menus.glade.h:68
-#, fuzzy
 msgid "Transliteration"
-msgstr "Gludo Dyfyniad"
+msgstr "Trawslythreniad"
 
 #: ../src/main/parallel_view.cc:518
-#, fuzzy
 msgid "Textual Variants"
-msgstr "Amrywiadau"
+msgstr "Amrywiadau Testunol"
 
 #: ../src/main/parallel_view.cc:526 ../ui/xi-menus.glade.h:49
 msgid "Primary Reading"
@@ -1529,26 +1507,22 @@ msgid "Name for new prayer list or journal"
 msgstr "Enw rhestr weddi neu ddyddlyfr newydd"
 
 #: ../src/main/prayerlists.cc:270
-#, fuzzy
 msgid "Xiphos finds that prayer list already."
 msgstr "Mae Xiphos wedi darganfod y rhestr weddi yna eisoes."
 
 #: ../src/main/prayerlists.cc:283
-#, fuzzy, c-format
 msgid ""
 "Xiphos cannot create module's path:\n"
 "%s"
-msgstr "Xiphos yn methu creu’r llwybr modiwl."
+msgstr "Xiphos yn methu creu’r llwybr modiwl.%s"
 
 #: ../src/main/prayerlists.cc:323
-#, fuzzy
 msgid "A basic prayer list. \\par\\par Module created by Xiphos."
 msgstr "Rhestr weddi sylfaenol. \\par\\par Modiwl wedi ei greu gan Xiphos."
 
 #: ../src/main/prayerlists.cc:324
-#, fuzzy
 msgid "BasicPrayerList"
-msgstr "FyRhestrWeddi"
+msgstr "RhestrWeddiSylfaenol"
 
 #: ../src/main/prayerlists.cc:338
 msgid "MyPrayerList"
@@ -1563,14 +1537,12 @@ msgstr ""
 "b><br>seddi<br>cymdeithas<br>Beiblau i genhadon<br><br><br>"
 
 #: ../src/main/prayerlists.cc:365
-#, fuzzy
 msgid "A subject-based prayer list. \\par\\par Module created by Xiphos."
 msgstr "Rhestr pynciau gweddi. \\par\\par Modiwl wedi ei greu gan Xiphos."
 
 #: ../src/main/prayerlists.cc:366
-#, fuzzy
 msgid "SubjectPrayerList"
-msgstr "FyRhestrWeddi"
+msgstr "RhestrPynciauGweddi"
 
 #: ../src/main/prayerlists.cc:381
 msgid "Bob<br>Sam<br>Sue<br>John<br>"
@@ -1589,36 +1561,29 @@ msgid "Sue<br>John<br>"
 msgstr "Sue<br>John<br>"
 
 #: ../src/main/prayerlists.cc:411
-#, fuzzy
 msgid "A monthly prayer list. \\par\\par Module created by Xiphos."
 msgstr "Rhestr weddi fisol. \\par\\par Modiwl wedi ei greu gan Xiphos."
 
 #: ../src/main/prayerlists.cc:412
-#, fuzzy
 msgid "MonthlyPrayerList"
-msgstr "FyRhestrWeddi"
+msgstr "RhestrWeddiFisol"
 
 #: ../src/main/prayerlists.cc:463
-#, fuzzy
 msgid "A daily journal. \\par\\par Module created by Xiphos."
 msgstr "Dyddlyfr. \\par\\par Modiwl wedi ei greu gan Xiphos."
 
 #: ../src/main/prayerlists.cc:464
-#, fuzzy
 msgid "DailyJournal"
 msgstr "Dyddlyfr"
 
 #: ../src/main/prayerlists.cc:528
-#, fuzzy
 msgid "An outlined topic (e.g. sermon). \\par\\par Module created by Xiphos."
 msgstr ""
-"Amlinelliad o bwnc (e.g. pregeth). \\par\\par Modiwl wedi ei greu gan "
-"Xiphos."
+"Amlinelliad o bwnc (e.g. pregeth). \\par\\par Modiwl wedi ei greu gan Xiphos."
 
 #: ../src/main/prayerlists.cc:529
-#, fuzzy
 msgid "OutlinedTopic"
-msgstr "Pwnc Amlinellwyd"
+msgstr "AmlinelliadPwnc"
 
 #: ../src/main/prayerlists.cc:543
 msgid "Major Topic A"
@@ -1645,9 +1610,8 @@ msgid "<b>Major Topic C</b><br>"
 msgstr "<b> Prif Bwnc C</b><br>"
 
 #: ../src/main/search_dialog.cc:129
-#, fuzzy, c-format
 msgid "Search result %s: %s"
-msgstr "Cadwch ganlyniadau’r chwiliad fel nod tudalen"
+msgstr "Canlyniad chwiliad %s: %s"
 
 #: ../src/main/search_dialog.cc:363
 msgid "Delete Range?"
@@ -1672,7 +1636,6 @@ msgid "Are you sure you want to remove the selected module?"
 msgstr "Ydych chi’n siwr eich bod am ddileu y modiwl a ddewiswyd?"
 
 #: ../src/main/search_dialog.cc:1473
-#, c-format
 msgid ""
 "%s:\n"
 "No such module is installed.\n"
@@ -1687,21 +1650,20 @@ msgid "Please adjust the module list."
 msgstr "Newidiwch y rhestr modiwlau."
 
 #: ../src/main/search_dialog.cc:1491
-#, fuzzy, c-format
 msgid "No fast-search index exists for %s.%s%s"
-msgstr "Dileu’r mynegai chwilio cyflym i’r modiwlau hyn:"
+msgstr "Nid oes mynegai chwilio cyflym i %s.%s%s"
 
 #: ../src/main/search_dialog.cc:1493
 msgid ""
 "\n"
 "Search on this module is now `multi word'."
-msgstr ""
+msgstr "Mae'r chwiliad ar y modiwl hwn yn `aml-air'."
 
 #: ../src/main/search_dialog.cc:1494
 msgid ""
 "\n"
 "See the Module Manager, Maintenance pane."
-msgstr ""
+msgstr "Gweler y Rheolydd Modiwlau, Cwarel Cynnal a Chadw."
 
 #: ../src/main/search_dialog.cc:1555
 msgid "Search finished"
@@ -1712,7 +1674,6 @@ msgid "matches"
 msgstr "canlyniadau"
 
 #: ../src/main/settings.c:56
-#, fuzzy
 msgid ""
 "Welcome to Xiphos.\n"
 "\n"
@@ -1736,8 +1697,8 @@ msgstr ""
 "Nid oes modiwlau Beibl wedi eu gosod. I ymgychwyn mae Xiphos angen i chi "
 "osod o leiaf un Beibl.\n"
 "\n"
-"Gyda’ch caniatad, bydd Xiphos yn  gofyn i’r Rheolydd Modiwlau eich "
-"galluogi i’w osod o Crosswire:\n"
+"Gyda’ch caniatad, bydd Xiphos yn  gofyn i’r Rheolydd Modiwlau eich galluogi "
+"i’w osod o Crosswire:\n"
 "1. Ffurfweddu arsefydlu o bell\n"
 "2. Cysylltu.\n"
 "3. Dewis testun Beibl yn eich iaith ddewisol.\n"
@@ -1754,10 +1715,9 @@ msgstr "$HOME heb ei osod!"
 
 #: ../src/main/settings.c:124
 msgid "Xiphos has renamed .xiphos-2.0 to .xiphos"
-msgstr ""
+msgstr "Mae Xiphos wedi ail-enwi .xiphos-2.0 yn .xiphos"
 
 #: ../src/main/settings.c:127
-#, fuzzy, c-format
 msgid ""
 "Xiphos can not rename  .xiphos-2.0 to .xiphos:\n"
 "%s\n"
@@ -1770,25 +1730,22 @@ msgstr ""
 "All Xiphos ddim parhau."
 
 #: ../src/main/settings.c:135
-#, fuzzy, c-format
 msgid ""
 "Xiphos can not create  .xiphos:\n"
 "%s\n"
 "\n"
 "Xiphos cannot continue."
 msgstr ""
-"All Xiphos ddim creu .xiphos:%au\n"
+"All Xiphos ddim creu .xiphos:\n"
 "\n"
 "All Xiphos ddim parhau."
 
 #: ../src/main/settings.c:148 ../src/main/settings.c:156
 #: ../src/main/settings.c:164
-#, fuzzy
 msgid "can not create "
-msgstr "methu creu llwybr\n"
+msgstr "methu creu\n"
 
 #: ../src/main/settings.c:196
-#, fuzzy
 msgid ""
 "There are still no Bibles installed.\n"
 "Evidently, you declined to install any.\n"
@@ -1808,7 +1765,6 @@ msgid "Bible module installation complete."
 msgstr "Gosod Modiwl Beibl wedi ei gwblhau."
 
 #: ../src/main/settings.c:203
-#, fuzzy
 msgid ""
 "Without any Bible modules to display,\n"
 "Xiphos cannot proceed,\n"
@@ -1845,9 +1801,15 @@ msgid ""
 "Would you like Xiphos to set itself as the\n"
 "program to handle these references?"
 msgstr ""
+"Gellir defnyddio cyfeirnodau URL yn defnyddio \"sword://\" \n"
+"(tebyg i gyfeirnodau tudalen we) gan raglenni i edrych ar\n"
+"gyfeiriadau ysgrythyrol. Ar hyn o bryd nid yw eich rhaglen\n"
+"wedi ei osod i reoli y cyfeirnodau hyn.\n"
+"\n"
+"Garech chi i Xiphos osod ei hun fel y rhaglen\n"
+"i reoli y cyfeirnodau hyn?"
 
 #: ../src/main/settings.c:818
-#, fuzzy
 msgid ""
 "Xiphos has successfully set itself\n"
 "as the handler of sword:// and bible:// URLs.\n"
@@ -1864,7 +1826,6 @@ msgstr ""
 "os oes angen eu newid."
 
 #: ../src/main/settings.c:871
-#, fuzzy, c-format
 msgid ""
 "Xiphos failed to complete handler init for key #%d:\n"
 "%s"
@@ -1881,40 +1842,34 @@ msgid "chapter"
 msgstr "pennod"
 
 #: ../src/main/sword.cc:549
-#, fuzzy
 msgid ""
 "Xiphos's file for language\n"
 "abbreviations is missing."
 msgstr ""
-"Ffeil Xiphos i’r iaith\n"
-"talfyriadau yn eisiau."
+"Ffeil Xiphos i’r talfyriadau\n"
+"iaith yn eisiau."
 
 #: ../src/main/sword.cc:556
-#, fuzzy
 msgid ""
 "Xiphos's language abbreviation\n"
 "file cannot be opened."
 msgstr ""
-"Talfyriad iaith Xiphos\n"
-"ni ellir agor y ffeil."
 
 #: ../src/main/sword.cc:567
-#, fuzzy
 msgid ""
 "Xiphos cannot allocate space\n"
 "for language abbreviations."
 msgstr ""
 "Ni all Xiphos fapio’r\n"
-"ffeil talfyriad iaith."
+"ffeil talfyriadau iaith."
 
 #: ../src/main/sword.cc:574
-#, fuzzy
 msgid ""
 "Xiphos cannot read the\n"
 "language abbreviation file."
 msgstr ""
 "Ni all Xiphos fapio’r\n"
-"ffeil talfyriad iaith."
+"ffeil talfyriadau iaith."
 
 #: ../src/main/sword.cc:1199
 msgid "Daily devotional was requested, but there are none installed."
@@ -1937,22 +1892,18 @@ msgid "URL not found:"
 msgstr "methu dod o hyd i’r URL:"
 
 #: ../src/main/url.cc:194
-#, fuzzy, c-format
 msgid "Xiphos could not execute %s"
 msgstr "Xiphos yn methu gweithredu %au"
 
 #: ../src/main/url.cc:202
-#, fuzzy
 msgid "Viewer error:\n"
 msgstr "Gwall gweld:\n"
 
 #: ../src/main/url.cc:278
-#, c-format
 msgid "Show %s in main window"
 msgstr "Dangos %au yn y prif ffenestr"
 
 #: ../src/main/xml.c:80 ../src/main/xml.c:465
-#, c-format
 msgid "Document not created successfully. \n"
 msgstr "Methu creu’r ddogfen.\n"
 
@@ -1985,18 +1936,15 @@ msgid "1 Cor 15:1-4"
 msgstr "1 Cor 15:1-4"
 
 #: ../src/main/xml.c:413 ../src/main/xml.c:1078
-#, c-format
 msgid "Document not parsed successfully. \n"
 msgstr "Methu dosrannu’r ddogfen.\n"
 
 #: ../src/main/xml.c:419 ../src/main/xml.c:681 ../src/main/xml.c:959
 #: ../src/main/xml.c:1138
-#, c-format
 msgid "empty document \n"
 msgstr "dogfen wag \n"
 
 #: ../src/main/xml.c:425
-#, c-format
 msgid "wrong type, root node != SwordBookmarks\n"
 msgstr "math anghywir, cwgn gwreiddyn != DalennodauSword\n"
 
@@ -2021,7 +1969,6 @@ msgid "Sample Module List"
 msgstr "Sampl o Restr Modiwlau"
 
 #: ../src/main/xml.c:687 ../src/main/xml.c:965
-#, c-format
 msgid "wrong type, root node != %s\n"
 msgstr "math anghywir, cwgn gwreiddyn != %s\n"
 
@@ -2030,37 +1977,32 @@ msgid "Add Bookmark"
 msgstr "Ychwanegu Nod Llyfr"
 
 #: ../ui/bookmarks.glade.h:2
-#, fuzzy
 msgid "Bookmark Dialog"
-msgstr "Nod Tudalen"
+msgstr "Deialog Nod Tudalen"
 
 #: ../ui/bookmarks.glade.h:3
-#, fuzzy
 msgid "Bookmark Folder Treeview"
-msgstr "Adfer Ffolder Nod Tudalen"
+msgstr "Canghennau Ffolder Nod Tudalen"
 
 #: ../ui/bookmarks.glade.h:4
-#, fuzzy
 msgid "Cancel Bookmark"
-msgstr "Mewnosod Nod Tudalen"
+msgstr "Canslo Nod Tudalen"
 
 #: ../ui/bookmarks.glade.h:5
 msgid "Create new folder"
 msgstr "Creu Ffolder Newydd"
 
 #: ../ui/bookmarks.glade.h:6
-#, fuzzy
 msgid "Label Entry"
-msgstr "Label: "
+msgstr "Cofnod Label: "
 
 #: ../ui/bookmarks.glade.h:7
 msgid "Label:"
 msgstr "Label:"
 
 #: ../ui/bookmarks.glade.h:8
-#, fuzzy
 msgid "Module Entry"
-msgstr "Modiwl: "
+msgstr "Cofnod Modiwl: "
 
 #: ../ui/bookmarks.glade.h:9
 msgid "Module:"
@@ -2075,9 +2017,8 @@ msgid "New Folder"
 msgstr "Ffolder Newydd"
 
 #: ../ui/bookmarks.glade.h:12
-#, fuzzy
 msgid "Verse Entry"
-msgstr "_Arddull Adnodau"
+msgstr "_Cofnod Adnod"
 
 #: ../ui/bookmarks.glade.h:13
 msgid "Verse:"
@@ -2110,7 +2051,7 @@ msgstr "Ffor_madu"
 #: ../ui/editor_note.xml.h:6 ../ui/editor_studypad.xml.h:8
 #: ../ui/editor.xml.h:6
 msgid "HTML Format switch"
-msgstr "HTML Fformadu switsh"
+msgstr "Switsio Fformadu HTML"
 
 #: ../ui/editor_note.xml.h:7 ../ui/editor_studypad.xml.h:9
 #: ../ui/editor.xml.h:7
@@ -2155,7 +2096,7 @@ msgstr "Agor"
 
 #: ../ui/editor_studypad.xml.h:12
 msgid "Open a file in Studypad"
-msgstr "Agor ffeil yn Studypad"
+msgstr "Agor ffeil yn PadAstudio"
 
 #: ../ui/editor_studypad.xml.h:13
 msgid "Preview the document to be printed"
@@ -2179,16 +2120,15 @@ msgstr "Cadw’r ffeil gyfredol fel"
 
 #: ../ui/editor.xml.h:10
 msgid "Open the file in Studypad"
-msgstr "Agor y ffeil yn Studypad"
+msgstr "Agor y ffeil yn PadAstudio"
 
 #: ../ui/export-dialog.glade.h:1
 msgid ": "
 msgstr ": "
 
 #: ../ui/export-dialog.glade.h:2
-#, fuzzy
 msgid "<b>Copy</b>"
-msgstr "<b>Cwmpas</b>"
+msgstr "<b>Copio</b>"
 
 #: ../ui/export-dialog.glade.h:3
 msgid "<b>Export</b>"
@@ -2204,26 +2144,23 @@ msgstr "Llyfr"
 
 #: ../ui/export-dialog.glade.h:6
 msgid "Book Radio Button"
-msgstr ""
+msgstr "Botwm Dewis Llyfr"
 
 #: ../ui/export-dialog.glade.h:8
 msgid "Chapter Radio Button"
-msgstr ""
+msgstr "Botwm Dewis Pennod"
 
 #: ../ui/export-dialog.glade.h:9 ../ui/xi-menus.glade.h:12
-#, fuzzy
 msgid "Copy/Export Passage"
-msgstr "Allfudo’r darn"
+msgstr "Copio/Allfudo’r darn"
 
 #: ../ui/export-dialog.glade.h:10
-#, fuzzy
 msgid "Export Passage Cancel"
-msgstr "Allfudo’r darn"
+msgstr "Canslo Allfudo’r darn"
 
 #: ../ui/export-dialog.glade.h:11
-#, fuzzy
 msgid "Export Passage OK"
-msgstr "Allfudo’r darn"
+msgstr "Allfudo’r darn yn iawn"
 
 #: ../ui/export-dialog.glade.h:12
 msgid "Export complete book"
@@ -2243,7 +2180,7 @@ msgstr "HTML"
 
 #: ../ui/export-dialog.glade.h:16
 msgid "HTML Radio Button"
-msgstr ""
+msgstr "Botwm Dewis HTML"
 
 #: ../ui/export-dialog.glade.h:17
 msgid "Key"
@@ -2254,9 +2191,8 @@ msgid "Plain Text"
 msgstr "Testun Plaen"
 
 #: ../ui/export-dialog.glade.h:19
-#, fuzzy
 msgid "Plain Text Radio Button"
-msgstr "Testun Plaen"
+msgstr "Borwm Radio Testun Plaen"
 
 #: ../ui/export-dialog.glade.h:21
 msgid "Save Export As"
@@ -2268,12 +2204,11 @@ msgstr "Adnod"
 
 #: ../ui/export-dialog.glade.h:23
 msgid "Verse Radio Button"
-msgstr ""
+msgstr "Botwm Dewis Adnod"
 
 #: ../ui/export-dialog.glade.h:24
-#, fuzzy
 msgid "Verse range"
-msgstr "Dewisiadau adnodau personol"
+msgstr "amrediad adnodau"
 
 #: ../ui/export-dialog.glade.h:25
 msgid "Version"
@@ -2304,7 +2239,7 @@ msgstr "<b>Sword</b>"
 msgid "<b>WARNING:</b> If you live in a persecuted country use with care."
 msgstr ""
 "<b>RHYBUDD:</b> Byddwch yn ofalus os ydych yn byw mewn gwlad ble mae "
-"erledigaeth vervolgd."
+"erledigaeth."
 
 #: ../ui/module-manager.glade.h:8
 msgid ""
@@ -2316,11 +2251,11 @@ msgstr ""
 
 #: ../ui/module-manager.glade.h:9
 msgid "<i>Personal area, for your use only:</i>"
-msgstr ""
+msgstr "<i>Adran bersonol, i'ch defnydd chi yn unig:</i>"
 
 #: ../ui/module-manager.glade.h:10
 msgid "<i>System area, for all users:</i>"
-msgstr ""
+msgstr "<i>Adran y System, at ddefnydd pawb:</i>"
 
 #: ../ui/module-manager.glade.h:11
 msgid "Continue"
@@ -2367,31 +2302,28 @@ msgid "<b>Revelation of John</b>"
 msgstr "<b>Datguddiad Ioan</b>"
 
 #: ../ui/navbar_versekey.glade.h:3
-#, fuzzy
 msgid "Book Selector Button"
-msgstr "Edrych ar y dewisiad"
+msgstr "Botwm Dewis Llyfr"
 
 #: ../ui/navbar_versekey.glade.h:4
 msgid "Choose book to display"
-msgstr ""
+msgstr "Dewiswch lyfr i'w ddangos"
 
 #: ../ui/navbar_versekey.glade.h:5
-#, fuzzy
 msgid "Drop down history list"
-msgstr "Rhestrau llusgo lawr"
+msgstr "Rhestr hanes llusgo lawr"
 
 #: ../ui/navbar_versekey.glade.h:6
-#, fuzzy
 msgid "Reference Entry"
-msgstr "Dewisiadau"
+msgstr "Cofnod Cyfeirnod"
 
 #: ../ui/navbar_versekey.glade.h:7
 msgid "Toggle Chapter Button"
-msgstr ""
+msgstr "Botwm Toglo Pennod"
 
 #: ../ui/navbar_versekey.glade.h:8
 msgid "Toggle Verse Button"
-msgstr ""
+msgstr "Botwm Toglo Adnod"
 
 #: ../ui/prefs.glade.h:1
 msgid ""
@@ -2418,9 +2350,8 @@ msgid "<b>Font Colors</b>"
 msgstr "<b>Lliwiau’r ffont<b>"
 
 #: ../ui/prefs.glade.h:10
-#, fuzzy
 msgid "<b>Font Sizes</b>"
-msgstr "<b>Lliwiau’r ffont<b>"
+msgstr "<b>Maint ffont<b>"
 
 #: ../ui/prefs.glade.h:11
 msgid "<b>General</b>"
@@ -2439,13 +2370,12 @@ msgid "<b>Show</b>"
 msgstr "<b>Dangos</b>"
 
 #: ../ui/prefs.glade.h:15
-#, fuzzy
 msgid "<b>Special Purpose Modules</b>"
-msgstr "<b>Modiwlau amrywiol</b>"
+msgstr "<b>Modiwlau Pwrpas Arbennig</b>"
 
 #: ../ui/prefs.glade.h:16
 msgid "<b>StudyPad default directory</b>"
-msgstr "<b>Cyfeiriadur diofyn Pad Astudio</b>"
+msgstr "<b>Cyfeiriadur diofyn PadAstudio</b>"
 
 #: ../ui/prefs.glade.h:17
 msgid "<b>Tabs</b>"
@@ -2468,7 +2398,6 @@ msgid "Background"
 msgstr "Cefndir"
 
 #: ../ui/prefs.glade.h:21
-#, fuzzy
 msgid "Base text size"
 msgstr "Maint ffont y bôn"
 
@@ -2477,68 +2406,58 @@ msgid "Bible Texts"
 msgstr "Testunau’r Beibl"
 
 #: ../ui/prefs.glade.h:23
-#, fuzzy
 msgid "Bible Texts Checkbox"
-msgstr "Testunau’r Beibl"
+msgstr "Bocs Gwiriad Testunau’r Beibl"
 
 #: ../ui/prefs.glade.h:24
 msgid "Biblical Text"
 msgstr "Testun Beiblaidd"
 
 #: ../ui/prefs.glade.h:26
-#, fuzzy
 msgid "Change Biblical Text Combo"
-msgstr "Testun Beiblaidd"
+msgstr "Newid Testun Beiblaidd"
 
 #: ../ui/prefs.glade.h:27
-#, fuzzy
 msgid "Change Book Combo"
-msgstr "Newid ffont i"
+msgstr "Newid Llyfr"
 
 #: ../ui/prefs.glade.h:28
-#, fuzzy
 msgid "Change Commentary Combo"
-msgstr "Dewis enw i’r Esboniad"
+msgstr "Newid Esboniad"
 
 #: ../ui/prefs.glade.h:29
-#, fuzzy
 msgid "Change Default Dictionary Combo"
-msgstr "Geiriadur Diofyn"
+msgstr "Newid Geiriadur Diofyn"
 
 #: ../ui/prefs.glade.h:30
-#, fuzzy
 msgid "Change Dictionary Combo"
-msgstr "%s Geiriadur"
+msgstr "Newid Geiriadur"
 
 #: ../ui/prefs.glade.h:31
-#, fuzzy
 msgid "Change Personal Notes Combo"
-msgstr "Nodiadau Personol"
+msgstr "Newid Nodiadau Personol"
 
 #: ../ui/prefs.glade.h:32
 msgid "Choose to enable Prayer lists "
 msgstr "Dethol i alluogi rhestrau gweddi"
 
 #: ../ui/prefs.glade.h:34
-#, fuzzy
 msgid "Commentaries Checkbox"
-msgstr "Esboniadau"
+msgstr "Bocs Gwiriad Esboniadau"
 
 #: ../ui/prefs.glade.h:36
 msgid "Cover"
 msgstr "Gorchuddio"
 
 #: ../ui/prefs.glade.h:37
-#, fuzzy
 msgid "Current Verse"
-msgstr "testun yr Adnod Gyfredol"
+msgstr "Adnod Gyfredol"
 
 #: ../ui/prefs.glade.h:38
 msgid "Daily Devotional"
 msgstr "Defosiwn Dyddiol"
 
 #: ../ui/prefs.glade.h:39
-#, fuzzy
 msgid "Daily Devotional Combo"
 msgstr "Defosiwn Dyddiol"
 
@@ -2555,18 +2474,16 @@ msgid "Dictionary/Lexicon"
 msgstr "Geiriadur/Lexicon"
 
 #: ../ui/prefs.glade.h:43
-#, fuzzy
 msgid "Dictionary/Lexicon Checkbox"
-msgstr "Geiriadur/Lexicon"
+msgstr "Bocs Gwiriad Geiriadur/Lexicon"
 
 #: ../ui/prefs.glade.h:44
 msgid "Enable Prayer Lists"
 msgstr "Galluogi rhestrau gweddi"
 
 #: ../ui/prefs.glade.h:45
-#, fuzzy
 msgid "Enable Prayer Lists Checkbox"
-msgstr "Galluogi rhestrau gweddi"
+msgstr "Galluogi Bocs Ticio rhestrau gweddi"
 
 #: ../ui/prefs.glade.h:46
 msgid "Font Colors"
@@ -2577,9 +2494,8 @@ msgid "Font Misc"
 msgstr "Ffontiau Amrywiol"
 
 #: ../ui/prefs.glade.h:48
-#, fuzzy
 msgid "Foreground"
-msgstr "Amlygu’r Blaendir"
+msgstr "Blaendir"
 
 #: ../ui/prefs.glade.h:49
 msgid "General Misc"
@@ -2590,7 +2506,6 @@ msgid "Greek Lexicon"
 msgstr "Geiriadur Groeg"
 
 #: ../ui/prefs.glade.h:51
-#, fuzzy
 msgid "Greek Lexicon Combo"
 msgstr "Geiriadur Groeg"
 
@@ -2599,7 +2514,6 @@ msgid "Hebrew Lexicon"
 msgstr "Geiriadur Hebraeg"
 
 #: ../ui/prefs.glade.h:53
-#, fuzzy
 msgid "Hebrew Lexicon Combo"
 msgstr "Geiriadur Hebraeg"
 
@@ -2616,9 +2530,8 @@ msgid "Highlight current verse"
 msgstr "Amlygu’r Adnod Bresennol"
 
 #: ../ui/prefs.glade.h:57
-#, fuzzy
 msgid "Highlight current verse check box"
-msgstr "Amlygu’r Adnod Bresennol"
+msgstr "Amlygu Bocs Ticio yr Adnod Bresennol"
 
 #: ../ui/prefs.glade.h:58
 msgid "Links"
@@ -2641,7 +2554,6 @@ msgid "Parallel 1"
 msgstr "Paralel 1"
 
 #: ../ui/prefs.glade.h:63
-#, fuzzy
 msgid "Parallel 1 Combo"
 msgstr "Paralel 1"
 
@@ -2650,7 +2562,6 @@ msgid "Parallel 2"
 msgstr "Paralel 2"
 
 #: ../ui/prefs.glade.h:65
-#, fuzzy
 msgid "Parallel 2 Combo"
 msgstr "Paralel 2"
 
@@ -2659,7 +2570,6 @@ msgid "Parallel 3"
 msgstr "Paralel 3"
 
 #: ../ui/prefs.glade.h:67
-#, fuzzy
 msgid "Parallel 3 Combo"
 msgstr "Paralel 3"
 
@@ -2668,7 +2578,6 @@ msgid "Parallel 4"
 msgstr "Paralel 4"
 
 #: ../ui/prefs.glade.h:69
-#, fuzzy
 msgid "Parallel 4 Combo"
 msgstr "Paralel 4"
 
@@ -2677,41 +2586,36 @@ msgid "Parallel 5"
 msgstr "Paralel 5"
 
 #: ../ui/prefs.glade.h:71
-#, fuzzy
 msgid "Parallel 5 Combo"
 msgstr "Paralel 5"
 
 #: ../ui/prefs.glade.h:72
-#, fuzzy
 msgid "Parallel View in a tab"
-msgstr "Golwg Paralel"
+msgstr "Golwg Paralel mewn tab"
 
 #: ../ui/prefs.glade.h:73
 msgid "Personal Notes"
 msgstr "Nodiadau Personol"
 
 #: ../ui/prefs.glade.h:76
-#, fuzzy
 msgid "Previewer Checkbox"
-msgstr "Rhagolygwr"
+msgstr "Bocs Ticio Rhagolygwr"
 
 #: ../ui/prefs.glade.h:77
 msgid "Resize images"
 msgstr "Ail-feintio’r delweddau"
 
 #: ../ui/prefs.glade.h:78
-#, fuzzy
 msgid "Resize images checkbox"
-msgstr "Ail-feintio’r delweddau"
+msgstr "Bocs Ticio Ail-feintio delweddau"
 
 #: ../ui/prefs.glade.h:79
 msgid "Scroll to Previous/Next Chapter"
 msgstr "Sgrolio i’r Bennod nesaf/bennod flaenorol"
 
 #: ../ui/prefs.glade.h:80
-#, fuzzy
 msgid "Scroll to Previous/Next Chapter Checkbox"
-msgstr "Sgrolio i’r Bennod nesaf/bennod flaenorol"
+msgstr "Bocs Ticio Sgrolio i’r Bennod nesaf/flaenorol"
 
 #: ../ui/prefs.glade.h:81
 msgid "Select A Directory"
@@ -2726,9 +2630,8 @@ msgid "Show splash screen at start up"
 msgstr "Dangoswch y sgrin sblasio ar y cychwyn"
 
 #: ../ui/prefs.glade.h:84
-#, fuzzy
 msgid "StudyPad default directory combo"
-msgstr "<b>Cyfeiriadur diofyn Pad Astudio</b>"
+msgstr "Cyfeiriadur diofyn PadAstudio"
 
 #: ../ui/prefs.glade.h:86
 msgid "Use Bible Text scroll bar to scroll to previous or next chapter"
@@ -2737,34 +2640,30 @@ msgstr ""
 "bennod nesaf"
 
 #: ../ui/prefs.glade.h:87
-#, fuzzy
 msgid "Use Verse Per Line"
-msgstr "Defnyddiwch arddull adnod"
+msgstr "Defnyddiwch adnod i bob llinnell"
 
 #: ../ui/prefs.glade.h:88
 msgid "Use Verse Per Line Checkbox"
-msgstr ""
+msgstr "Defnyddio Bocs Ticio Adnod i bob Llinnell"
 
 #: ../ui/prefs.glade.h:89
 msgid "Use default Dictionary"
 msgstr "Defnyddiwch y Geiriadur rhagosodedig"
 
 #: ../ui/prefs.glade.h:90
-#, fuzzy
 msgid "Use default Dictionary Checkbox"
-msgstr "Defnyddiwch y Geiriadur rhagosodedig"
+msgstr "Defnyddiwch Focs Gwiro y Geiriadur rhagosodedig"
 
 #: ../ui/prefs.glade.h:91
 msgid "Use tabbed browsing"
 msgstr "Defnyddiwch y porwr sydd wedi ei dabio"
 
 #: ../ui/prefs.glade.h:92
-#, fuzzy
 msgid "Use tabbed browsing Checkbox"
-msgstr "Defnyddiwch y porwr sydd wedi ei dabio"
+msgstr "Defnyddiwch focs Gwiro y porwr sydd wedi ei dabio"
 
 #: ../ui/prefs.glade.h:93
-#, fuzzy
 msgid "Verse number size"
 msgstr "Maint ffont rhif yr adnod"
 
@@ -2841,19 +2740,16 @@ msgid "Attributes"
 msgstr "Priodoleddau"
 
 #: ../ui/search-dialog.glade.h:19
-#, fuzzy
 msgid "Attributes radiobutton"
-msgstr "Priodoleddau"
+msgstr "Botwm Dewis Priodoleddau"
 
 #: ../ui/search-dialog.glade.h:20
-#, fuzzy
 msgid "Clear Custom Module List Button"
-msgstr "Rhestrau Modiwlau Personol"
+msgstr "Clirio Botwm Rhestr Modiwlau Personol"
 
 #: ../ui/search-dialog.glade.h:21
-#, fuzzy
 msgid "Clear Modules from List Button"
-msgstr "Dileu pob modiwl o’r rhestr"
+msgstr "Botwm dileu pob modiwl o’r rhestr"
 
 #: ../ui/search-dialog.glade.h:22
 msgid "Clear all modules from the list"
@@ -2876,54 +2772,48 @@ msgid "Current results"
 msgstr "Canlyniadau cyfredol"
 
 #: ../ui/search-dialog.glade.h:27
-#, fuzzy
 msgid "Current results radiobutton"
-msgstr "Canlyniadau cyfredol"
+msgstr "Botwm Dewis Canlyniadau cyfredol"
 
 #: ../ui/search-dialog.glade.h:28
-#, fuzzy
 msgid "Custom Module List Combo"
-msgstr "Rhestrau Modiwlau Personol"
+msgstr "Rhestr Modiwlau Personol"
 
 #: ../ui/search-dialog.glade.h:29
-#, fuzzy
 msgid "Custom Module List Name Entry"
-msgstr "Rhestrau Modiwlau Personol"
+msgstr "Enwi Rhestr Modiwlau Personol"
 
 #: ../ui/search-dialog.glade.h:30
 msgid "Custom Module Lists"
 msgstr "Rhestrau Modiwlau Personol"
 
 #: ../ui/search-dialog.glade.h:31
-#, fuzzy
 msgid "Custom Range Preview"
-msgstr " Dewisiadau o Adnodau Personol"
+msgstr "Rhagolwg Dewisiadau Personol"
 
 #: ../ui/search-dialog.glade.h:32
 msgid "Custom Range Selector Combo"
-msgstr ""
+msgstr "Dewisiadau Personol"
 
 #: ../ui/search-dialog.glade.h:33
 msgid "Custom Verse Ranges"
-msgstr " Dewisiadau o Adnodau Personol"
+msgstr "Dewisiadau o Adnodau Personol"
 
 #: ../ui/search-dialog.glade.h:34
 msgid "Custom module list"
 msgstr "Rhestr Modiwl Personol"
 
 #: ../ui/search-dialog.glade.h:35
-#, fuzzy
 msgid "Custom module list radiobutton"
-msgstr "Rhestr Modiwl Personol"
+msgstr "Botwm Dewis Rhestr Modiwl Personol"
 
 #: ../ui/search-dialog.glade.h:36
 msgid "Custom verse range"
 msgstr "Dewisiadau adnodau personol"
 
 #: ../ui/search-dialog.glade.h:37
-#, fuzzy
 msgid "Custom verse range radiobutton"
-msgstr "Dewisiadau adnodau personol"
+msgstr "Botwm Dewisiadau adnodau personol"
 
 #: ../ui/search-dialog.glade.h:38
 #, fuzzy
@@ -2948,14 +2838,12 @@ msgid "Entire module"
 msgstr "Modiwl cyfan"
 
 #: ../ui/search-dialog.glade.h:43
-#, fuzzy
 msgid "Entire module radiobutton"
-msgstr "Modiwl cyfan"
+msgstr "Botwm Dewis Modiwl cyfan"
 
 #: ../ui/search-dialog.glade.h:45
-#, fuzzy
 msgid "Exact phrase radiobutton"
-msgstr "Union gymal"
+msgstr "Botwm Dewis Union gymal"
 
 #: ../ui/search-dialog.glade.h:46
 msgid ""
@@ -2968,14 +2856,12 @@ msgstr ""
 "Gweler swyddogaethau cynnal a chadw Rheolydd y Modiwl"
 
 #: ../ui/search-dialog.glade.h:49
-#, fuzzy
 msgid "Find Button"
-msgstr "Darganfod Nesaf"
+msgstr "Botwm Darganfod"
 
 #: ../ui/search-dialog.glade.h:51
-#, fuzzy
 msgid "Footnotes radiobutton"
-msgstr "Troednodiadau"
+msgstr "Botwm Dewis Troednodiadau"
 
 #: ../ui/search-dialog.glade.h:52
 msgid "In modules that have Footnotes"
@@ -2991,81 +2877,71 @@ msgstr "Mewn modiwlau sydd a rhifau Strong"
 
 #: ../ui/search-dialog.glade.h:55
 msgid "Main Search Entry"
-msgstr ""
+msgstr "Cofnod Prif Chwiliad"
 
 #: ../ui/search-dialog.glade.h:56
 msgid "Make selections on the Attribute Search tab"
 msgstr "Dewisiwch gan ddefnyddio’r tab chwilio priodoleddau"
 
 #: ../ui/search-dialog.glade.h:58
-#, fuzzy
 msgid "Match case checkbox"
-msgstr "Cydweddu"
+msgstr "Bocs Ticio Cydweddu"
 
 #: ../ui/search-dialog.glade.h:59
 msgid "Module Selection"
-msgstr "Detholiad modiwlau"
+msgstr "Dewisiad modiwlau"
 
 #: ../ui/search-dialog.glade.h:60
 msgid "Module list"
 msgstr "Rhestr Modiwlau"
 
 #: ../ui/search-dialog.glade.h:61
-#, fuzzy
 msgid "Module list radiobutton"
-msgstr "Rhestr Modiwlau"
+msgstr "Botwm Dewis Rhestr Modiwlau"
 
 #: ../ui/search-dialog.glade.h:63
-#, fuzzy
 msgid "Morphological Tags radiobutton"
-msgstr "Tagiau Morffolegol"
+msgstr "Botwm Dewis Tagiau Morffolegol"
 
 #: ../ui/search-dialog.glade.h:65
-#, fuzzy
 msgid "Multi word radiobutton"
-msgstr "Aml-eiriau"
+msgstr "Botwm Dewis Aml-eiriau"
 
 #: ../ui/search-dialog.glade.h:66
-#, fuzzy
 msgid "New Custom Module List Button"
-msgstr "Rhestrau Modiwlau Personol"
+msgstr "Botwm Rhestr Modiwlau Personol Newydd"
 
 #: ../ui/search-dialog.glade.h:67
 msgid "New Range Button"
-msgstr ""
+msgstr "Botwm Amrediad Newydd"
 
 #: ../ui/search-dialog.glade.h:68
-#, fuzzy
 msgid "Open Selection Dialog Button"
-msgstr "Darllen y detholiad yn uchel"
+msgstr "botwm Agor Dewis Deialog"
 
 #: ../ui/search-dialog.glade.h:69
 msgid "Open a dialog to select modules to add to the list"
 msgstr "Agorwch ddeialog i ddewis modiwlau i ychwanegu at y rhestr"
 
 #: ../ui/search-dialog.glade.h:70
-#, fuzzy
 msgid "Optimized (\"Lucene\")"
-msgstr "Wedi ei optimeiddio"
+msgstr "Wedi ei optimeiddio (\"Lucene\")"
 
 #: ../ui/search-dialog.glade.h:71
 msgid "Optimized (\"Lucene\") radiobutton"
-msgstr ""
+msgstr "Botwm dewis optimeiddio (\"Lucene\")"
 
 #: ../ui/search-dialog.glade.h:72
-#, fuzzy
 msgid "Range Definition Entry"
-msgstr "<b>Diffinio’r amrediad</b>"
+msgstr "Diffinio’r amrediad"
 
 #: ../ui/search-dialog.glade.h:73
-#, fuzzy
 msgid "Range Name Entry"
-msgstr "Ailenwi’r Esboniad"
+msgstr "Ailenwi’r Amrediad"
 
 #: ../ui/search-dialog.glade.h:75
-#, fuzzy
 msgid "Regular expression radiobutton"
-msgstr "Ymadrodd cyson"
+msgstr "Botwm Dewis Ymadrodd cyson"
 
 #: ../ui/search-dialog.glade.h:76
 msgid "Remove the selected module from the list"
@@ -3073,24 +2949,23 @@ msgstr "Symudwch y modiwl dewisedig o’r rhestr"
 
 #: ../ui/search-dialog.glade.h:77
 msgid "Result Summary Table"
-msgstr ""
+msgstr "Tabl Crynhoi'r Canlyniadau"
 
 #: ../ui/search-dialog.glade.h:78
 msgid "Result Summary Window"
-msgstr ""
+msgstr "ffenestr Crynhoi'r Canlyniadau"
 
 #: ../ui/search-dialog.glade.h:79
 msgid "Results"
 msgstr "Canlyniadau"
 
 #: ../ui/search-dialog.glade.h:80
-#, fuzzy
 msgid "Save Custom Module List Button"
-msgstr "Rhestrau Modiwlau Personol"
+msgstr "Botwm Rhestrau Modiwlau Personol"
 
 #: ../ui/search-dialog.glade.h:81
 msgid "Save Range Button"
-msgstr ""
+msgstr "Botwm Cadw Amrediad"
 
 #: ../ui/search-dialog.glade.h:82
 msgid "Save custom range"
@@ -3109,9 +2984,8 @@ msgid "Search  Criteria"
 msgstr "Meini prawf y chwiliad"
 
 #: ../ui/search-dialog.glade.h:86
-#, fuzzy
 msgid "Search Criteria Treeview"
-msgstr "Meini prawf y chwiliad"
+msgstr "Canghennau Meini prawf y chwiliad"
 
 #: ../ui/search-dialog.glade.h:87
 msgid "Search entire module"
@@ -3134,27 +3008,24 @@ msgid "Show Footnotes"
 msgstr "Dangos Troednodiadau"
 
 #: ../ui/search-dialog.glade.h:92
-#, fuzzy
 msgid "Show Footnotes checkbox"
-msgstr "Dangos Troednodiadau"
+msgstr "Bocs ticio Dangos Troednodiadau"
 
 #: ../ui/search-dialog.glade.h:93
 msgid "Show Morphological Tags"
 msgstr "Dangos tagiau morffologol"
 
 #: ../ui/search-dialog.glade.h:94
-#, fuzzy
 msgid "Show Morphological Tags checkbox"
-msgstr "Dangos tagiau morffologol"
+msgstr "Dangos bocs ticio tagiau morffologol"
 
 #: ../ui/search-dialog.glade.h:95
 msgid "Show Strong's Numbers"
 msgstr "Dangos rhifau Strong"
 
 #: ../ui/search-dialog.glade.h:96
-#, fuzzy
 msgid "Show Strong's Numbers checkbox"
-msgstr "Dangos rhifau Strong"
+msgstr "Dangos bocs ticio rhifau Strong"
 
 #: ../ui/search-dialog.glade.h:97
 msgid "Show in main window"
@@ -3165,9 +3036,8 @@ msgid "Single module"
 msgstr "Modiwl unigol"
 
 #: ../ui/search-dialog.glade.h:99
-#, fuzzy
 msgid "Single module radiobutton"
-msgstr "Modiwl unigol"
+msgstr "Botwm Dewis Modiwl unigol"
 
 #: ../ui/search-dialog.glade.h:100
 msgid "Start/stop searching"
@@ -3178,9 +3048,8 @@ msgid "Strongs Numbers"
 msgstr "Rhifau Strong"
 
 #: ../ui/search-dialog.glade.h:102
-#, fuzzy
 msgid "Strongs Numbers radiobutton"
-msgstr "Rhifau Strong"
+msgstr "Botwm Dewis Rhifau Strong"
 
 #: ../ui/search-dialog.glade.h:103
 msgid "Use a custom module list for the search"
@@ -3211,13 +3080,12 @@ msgid "for "
 msgstr "i  "
 
 #: ../ui/xi-menus.glade.h:2
-#, fuzzy
 msgid "About _Translation"
 msgstr "Am _Gyfieithu ..."
 
 #: ../ui/xi-menus.glade.h:3
 msgid "About _Xiphos"
-msgstr ""
+msgstr "Am _Xiphos"
 
 #: ../ui/xi-menus.glade.h:4
 msgid "Add new folder to selected folder"
@@ -3240,9 +3108,8 @@ msgid "Collapse all Bookmarks groups"
 msgstr "Dymchwel pob grwp Nod Tudalen"
 
 #: ../ui/xi-menus.glade.h:11
-#, fuzzy
 msgid "Commentary by Chapter"
-msgstr "Golwg Esboniad"
+msgstr "Esboniad bob yn bennod"
 
 #: ../ui/xi-menus.glade.h:13
 msgid "D_ouble-Space Text"
@@ -3309,7 +3176,6 @@ msgid "Load Bookmarks from Bibletime"
 msgstr "Llwytho Nodau Tudalen o Bibletime"
 
 #: ../ui/xi-menus.glade.h:37
-#, fuzzy
 msgid "Lookup Selection"
 msgstr "Edrych ar y dewisiad"
 
@@ -3322,7 +3188,6 @@ msgid "Open Module"
 msgstr "Agor Modiwl"
 
 #: ../ui/xi-menus.glade.h:43
-#, fuzzy
 msgid "Open Study_pad"
 msgstr "Agor Pad_Astudio"
 
@@ -3331,7 +3196,6 @@ msgid "Open in a dialog"
 msgstr "Agor mewn deialog"
 
 #: ../ui/xi-menus.glade.h:46
-#, fuzzy
 msgid "Open in new tab"
 msgstr "Agor mewn  tab newydd"
 
@@ -3340,13 +3204,12 @@ msgid "Open this bookmark in a dialog"
 msgstr "Agor y Nod Tudalen mewn deialog"
 
 #: ../ui/xi-menus.glade.h:48
-#, fuzzy
 msgid "Open this bookmark in a new tab"
-msgstr "Agor y Nod Tudalen mewn deialog"
+msgstr "Agor y Nod Tudalen mewn tab newydd"
 
 #: ../ui/xi-menus.glade.h:50
 msgid "Read Selection Aloud"
-msgstr "Darllen y detholiad yn uchel"
+msgstr "Darllen y dewisiad yn uchel"
 
 #: ../ui/xi-menus.glade.h:51
 msgid "Remove - Restore"
@@ -3366,49 +3229,43 @@ msgstr "Ailenwi Esboniad Personol."
 
 #: ../ui/xi-menus.glade.h:55
 msgid "Respect Font Faces"
-msgstr ""
+msgstr "Parchu Wyneb teip y ffont"
 
 #: ../ui/xi-menus.glade.h:56
 msgid "Restore Folder"
 msgstr "Adfer Ffolder"
 
 #: ../ui/xi-menus.glade.h:57
-#, fuzzy
 msgid "Restore saved folder"
 msgstr "Adfer y Ffolder Gadwyd "
 
 #: ../ui/xi-menus.glade.h:58
-#, fuzzy
 msgid "Save list as a series of bookmarks"
-msgstr "Cadw’r canlyniadau chwilio fel nodau dalen"
+msgstr "Cadw’r rhestr fel nodau dalen"
 
 #: ../ui/xi-menus.glade.h:59
-#, fuzzy
 msgid "Save list as a single bookmark"
-msgstr "Cadwch ganlyniadau’r chwiliad fel nod tudalen"
+msgstr "Cadwch y rhestr fel nod tudalen"
 
 #: ../ui/xi-menus.glade.h:60
-#, fuzzy
 msgid "Save these results as a series of bookmarks in their own folder"
-msgstr "Cadw’r canlyniadau chwilio fel nodau dalen"
+msgstr "Cadw’r canlyniadau chwilio fel nodau dalen yn eu ffolder eu hunain"
 
 #: ../ui/xi-menus.glade.h:61
-#, fuzzy
 msgid "Save these results as a single bookmark"
-msgstr "Cadw’r canlyniadau chwilio fel nodau dalen"
+msgstr "Cadw’r canlyniadau chwilio fel un nod dalen"
 
 #: ../ui/xi-menus.glade.h:62
 msgid "Scripture Cross-references"
 msgstr "Croesgyfeiriadau"
 
 #: ../ui/xi-menus.glade.h:64
-#, fuzzy
 msgid "Show Parallel View in a _Tab"
-msgstr "Golwg Paralel"
+msgstr "Golwg Paralel mewn Tab"
 
 #: ../ui/xi-menus.glade.h:65
 msgid "Show Previe_wer in the Sidebar"
-msgstr ""
+msgstr "Dangos Rhagolygwr yn y bar ochr"
 
 #: ../ui/xi-menus.glade.h:66
 msgid "Show Verse _Numbers"
@@ -3431,9 +3288,8 @@ msgid "Variants"
 msgstr "Amrywiadau"
 
 #: ../ui/xi-menus.glade.h:74
-#, fuzzy
 msgid "_About The SWORD Project"
-msgstr "Gwybodaeth am brosiect SWORD"
+msgstr "_am brosiect SWORD"
 
 #: ../ui/xi-menus.glade.h:75
 msgid "_Advanced Search"
@@ -3444,9 +3300,8 @@ msgid "_Attach/Detach Sidebar"
 msgstr "_Atodi/Gwahanu Bar ochr"
 
 #: ../ui/xi-menus.glade.h:77
-#, fuzzy
 msgid "_Bible Text"
-msgstr "_Testunau Beiblaidd"
+msgstr "_Testun Beiblaidd"
 
 #: ../ui/xi-menus.glade.h:78
 msgid "_Commentary"
@@ -3478,11 +3333,11 @@ msgstr "_Aroleuo’r Adnod Gyfredol"
 
 #: ../ui/xi-menus.glade.h:86
 msgid "_Live Chat"
-msgstr ""
+msgstr "_Sgwrs Fyw"
 
 #: ../ui/xi-menus.glade.h:87
 msgid "_Mailing List"
-msgstr ""
+msgstr "_Rhestr Bostio"
 
 #: ../ui/xi-menus.glade.h:88
 msgid "_Module Manager"
@@ -3493,7 +3348,6 @@ msgid "_Open Session"
 msgstr "_Agor Sesiwn"
 
 #: ../ui/xi-menus.glade.h:90
-#, fuzzy
 msgid "_Preferences"
 msgstr "Dewisiadau"
 
@@ -3507,7 +3361,7 @@ msgstr "_Darllen yn uchel"
 
 #: ../ui/xi-menus.glade.h:93
 msgid "_Report Bug"
-msgstr ""
+msgstr "_Dweud am Nam"
 
 #: ../ui/xi-menus.glade.h:94
 msgid "_Save Session"
@@ -3522,18 +3376,16 @@ msgid "_Show/Hide Sidebar"
 msgstr "_Dangos/Cuddio Bar ochr"
 
 #: ../ui/xi-menus.glade.h:97
-#, fuzzy
 msgid "_Verse Per Line"
-msgstr "Rhestr Adnodau"
+msgstr "_Adnod y llinnell"
 
 #: ../xiphos.desktop.in.in.h:1
 msgid "Study the Bible"
 msgstr "Astudio’r Beibl"
 
 #: ../xiphos.desktop.in.in.h:2
-#, fuzzy
 msgid "Xiphos Bible Guide"
-msgstr "Xiphos"
+msgstr "Canllaw Beibl Xiphos"
 
 #~ msgid "It will be lost permanently!"
 #~ msgstr "Bydd yn cael ei ddileu’n barhaol!"
@@ -3651,7 +3503,7 @@ msgstr "Xiphos"
 #~ msgstr "Xiphos wedi cau"
 
 #~ msgid "Open the StudyPad editor"
-#~ msgstr "Agor golygydd y Pad Astudio"
+#~ msgstr "Agor golygydd y PadAstudio"
 
 #~ msgid "Open a saved session"
 #~ msgstr "Agor y sesiwn gadwyd"
@@ -3695,7 +3547,6 @@ msgstr "Xiphos"
 #~ msgid "Open the Xiphos manual"
 #~ msgstr "Agor Llawlyfr Xiphos"
 
-#, fuzzy
 #~ msgid "Translating Xiphos to other languages"
 #~ msgstr "Cyfieithu Xiphos i ieithoedd eraill"
 
@@ -3764,7 +3615,6 @@ msgstr "Xiphos"
 #~ msgid "Number of Book modules"
 #~ msgstr "Nifer y modiwlau Llyfr"
 
-#, fuzzy
 #~ msgid "Number of Percomm modules"
 #~ msgstr "Nifer y Modiwlau PerComm"
 
@@ -4104,7 +3954,6 @@ msgstr "Xiphos"
 #~ msgid "You need to restart Xiphos to view it"
 #~ msgstr "Bydd angen i chi ail-gychwyn y Xiphos i’w weld"
 
-#, fuzzy
 #~ msgid ""
 #~ "Unlink of old configuration failed:\n"
 #~ "%s"
@@ -4118,7 +3967,6 @@ msgstr "Xiphos"
 #~ msgid "Go to %s"
 #~ msgstr "Ewch i %s"
 
-#, fuzzy
 #~ msgid "The Setup Druid was cancelled."
 #~ msgstr "Canslwyd y Gosodiad Druid"
 
@@ -4143,24 +3991,20 @@ msgstr "Xiphos"
 #~ msgid "Go to first child"
 #~ msgstr "Ewch i’r plentyn cyntaf "
 
-#, fuzzy
 #~ msgid "Save using the PersistStream interface"
-#~ msgstr "Cadwch gan ddefnyddio’r rhyngwynebPersist Stream"
+#~ msgstr "Cadwch gan ddefnyddio’r rhyngwyneb PersistStream"
 
-#, fuzzy
 #~ msgid "Open (PersistFile)"
 #~ msgstr " Agorwch (PersistFile)"
 
-#, fuzzy
 #~ msgid "Open using the PersistFile interface"
-#~ msgstr " Agorwch gan ddefnyddio’r rhyngwyneb Persist File"
+#~ msgstr " Agorwch gan ddefnyddio’r rhyngwyneb PersistFile"
 
 #~ msgid "Save (PersistFile)"
 #~ msgstr " Cadwch (PersistFile)"
 
-#, fuzzy
 #~ msgid "Save using the PersistFile interface"
-#~ msgstr "Cadwch gan ddefnyddio’r rhyngwyneb Persit File"
+#~ msgstr "Cadwch gan ddefnyddio’r rhyngwyneb PersitFile"
 
 #~ msgid "Remove failed"
 #~ msgstr " Methu symud"
@@ -4172,7 +4016,7 @@ msgstr "Xiphos"
 #~ msgstr "Ychwanegu y ddolen gyfeiriadol"
 
 #~ msgid "Link text: "
-#~ msgstr " Testun dolennog "
+#~ msgstr "Dolennu Testun: "
 
 #~ msgid "Export"
 #~ msgstr "Allforio"
@@ -4402,30 +4246,27 @@ msgstr "Xiphos"
 #~ msgid "Left align"
 #~ msgstr "Alinio i’r chwith"
 
-#, fuzzy
 #~ msgid "Left justifies the paragraphs"
-#~ msgstr "Mae’r chwith yn unioni’r paragraffau"
+#~ msgstr "Unioni’r paragraffau ar y chwith"
 
 #~ msgid "Center"
 #~ msgstr "Canoli"
 
-#, fuzzy
 #~ msgid "Center justifies the paragraphs"
-#~ msgstr "Mae canoli yn unioni’r paragraffau"
+#~ msgstr "Canoli'r paragraffau"
 
 #~ msgid "Right align"
 #~ msgstr "Alinio i’r dde"
 
-#, fuzzy
 #~ msgid "Right justifies the paragraphs"
-#~ msgstr "Mae’r Dde yn unioni’r paragraffau"
+#~ msgstr "Unioni’r paragraffau ar y dde"
 
 #~ msgid "Typewriter"
 #~ msgstr "Teipiadur"
 
 #, fuzzy
 #~ msgid "Toggle typewriter font style"
-#~ msgstr "dull ffont teipiadur togl"
+#~ msgstr "Toglo dull ffont teipiadur"
 
 #~ msgid "Bold"
 #~ msgstr "Trwm"
@@ -4482,9 +4323,9 @@ msgstr "Xiphos"
 #~ "Once you have completed these steps, you can always change the settings "
 #~ "later by using the Preferences dialog. "
 #~ msgstr ""
-#~ "Gan eich bod yn rhedeg Xiphos am y tro cyntaf bydd y cynorthwydd yn "
-#~ "eich arwain i’w osod ar y cychwyn gan ofyn rhai cwestiynau syml ichi Ar "
-#~ "ol ichi gwblhau’r camau hyn gallwch newid y gosodiadau unrhyw bryd  nes "
+#~ "Gan eich bod yn rhedeg Xiphos am y tro cyntaf bydd y cynorthwydd yn eich "
+#~ "arwain i’w osod ar y cychwyn gan ofyn rhai cwestiynau syml ichi Ar ol "
+#~ "ichi gwblhau’r camau hyn gallwch newid y gosodiadau unrhyw bryd  nes "
 #~ "ymlaen gan ddefnyddio’r deialog dewisiadau personol."
 
 #~ msgid "Xiphos Configuration - Page 2 of 5"
