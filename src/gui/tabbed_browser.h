@@ -98,6 +98,8 @@ void gui_tab_set_showcomms(int show);
 void gui_tab_set_showdicts(int show);
 void gui_tabs_on_off(int on);
 
+void on_notebook_main_new_tab_clicked(GtkButton *button, gpointer user_data);
+
 #ifdef __cplusplus
 }
 #endif

@@ -60,6 +60,7 @@
 #include "gui/navbar_versekey.h"
 #include "gui/tabbed_browser.h"
 #include "gui/widgets.h"
+#include "gui/tabbed_browser.h"
 
 #ifdef USE_GTKHTML3_14_23
 #include "editor/slib-editor.h"
@@ -631,6 +632,10 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 	case GS_KEY_Q: // quit
 		if (state == GDK_CONTROL_MASK)		// Ctrl-Q quit
 			delete_event (NULL, NULL, NULL);
+		break;
+	case GS_KEY_T: // open a new tab
+		if (state == GDK_CONTROL_MASK)
+			on_notebook_main_new_tab_clicked(NULL, NULL);
 		break;
 	case GS_KEY_J: // J    "next verse"
 		access_on_down_eventbox_button_release_event
