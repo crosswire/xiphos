@@ -1392,7 +1392,7 @@ void gui_close_passage_tab(gint pagenum)
 	gtk_notebook_remove_page(GTK_NOTEBOOK(widgets.notebook_main), pagenum);
 }
 
-static void on_notebook_main_new_tab_clicked(GtkButton *button, gpointer user_data)
+void on_notebook_main_new_tab_clicked(GtkButton *button, gpointer user_data)
 {
 	gui_open_passage_in_new_tab(settings.currentverse);
 }
