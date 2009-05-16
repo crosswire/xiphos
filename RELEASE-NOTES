@@ -11,7 +11,9 @@ This is a release to introduce two important features in Windows
 bugfixes for all platforms.
 
  1. The Windows build now supports ReadAloud (text-to-speech) and
-    transliteration of non-Latin character sets.
+    transliteration of non-Latin character sets. It is also now 
+    packaged with the latest SWORD release, 1.6.0, and includes the
+    utilities for creating and working with modules.
 
  2. The module manager is no longer modal, that is, the module manager
     does not monopolize the application's attention: You can begin
