@@ -72,6 +72,7 @@ display) and full integration of Sword's new alternate versification
 capability with how Xiphos manages book/chapter/verse information.
 
 Bug reports addressed since 3.0.1:
+2792569  Restaring Ubuntu with Xiphos open gives error messages
 2790711  first run - tabs not parsed successfully
 2790487  Closing Xiphos looses unsaved changes in editor
 2789990  Tabs: Chosen and showns bible references not the same
