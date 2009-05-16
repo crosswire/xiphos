@@ -164,6 +164,17 @@ void frontend_display(void)
 	gui_show_hide_dicts(settings.showdicts);
 	gui_show_hide_comms(settings.showcomms);
 	
+	/*
+	 * a little paranoia:
+	 * clamp geometry values to a reasonable bound.
+	 * sometimes xiphos gets insane reconfig events as it dies,
+	 * especially if it's due to just shutting linux down.
+	 */
+	if ((settings.app_x < 0) || (settings.app_x > 400))
+		settings.app_x = 0;
+	if ((settings.app_y < 0) || (settings.app_y > 400))
+		settings.app_y = 0;
+
  	gtk_window_move(GTK_WINDOW(widgets.app),settings.app_x,settings.app_y);
 	
 #ifdef USE_GTKMOZEMBED	/* gecko  needs the widgets to be visible before
