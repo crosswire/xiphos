@@ -20,7 +20,8 @@ bugfixes for all platforms.
     downloading or indexing modules, and then go back to work in the
     main window.
 
- 3. New interface translations: Norwegian, Welsh, Afrikaans.
+ 3. New interface translations: Norwegian and Welsh.  We should have
+    an Afrikaans translation in time for 3.2.
 
  4. New prayerlists/journals offer sensible default names, and their
     editor support is much improved, including offering to save on
@@ -114,6 +115,7 @@ New feature requests pending:
 2717893  Prayerlist/Daily Journal Enhancements
 
 Feature requests closed:
+2793036  e-Sword bibles support [not being done at this time]
 2792002  Better keyboard support
 2789998  Choice of module options in tabs/seperate windows
 2789973  Resizing seperate windows
