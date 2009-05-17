@@ -66,6 +66,7 @@ bugfixes for all platforms.
     - numerous code refactoring, cleanup, and efficiency improvements.
     - history management corrections.
     - "shift to lock previewer" fixes.
+    - initial support for linked verses in Bibles.
 
 Plans for the release after this revolve around final feature parity
 between Linux and Windows (especially the better display engine,
@@ -112,7 +113,7 @@ New feature requests pending:
 Feature requests closed:
 2792002  Better keyboard support
 2789998  Choice of module options in tabs/seperate windows
-2789973  Reseizing seperate windows
+2789973  Resizing seperate windows
 2744739  When closing Xiphos could remember last place
 2705145  Allow moving to previous/next verse by 'j' and 'k' keys
 ________________________________________________________________
