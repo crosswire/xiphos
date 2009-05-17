@@ -94,17 +94,18 @@ static void fill_search_results_list(int finds)
 	RESULTS *list_item;
 	gchar *num;
 	
-	if(list_of_verses) {
-		while(list_of_verses) {
-			list_item = (RESULTS*)list_of_verses->data;
+	if (list_of_verses) {
+		GList *chaser = list_of_verses;
+		while (chaser) {
+			list_item = (RESULTS*)chaser->data;
 			g_free(list_item->module);
 			g_free(list_item->key);
 			g_free(list_item);
-			list_of_verses = g_list_next(list_of_verses);
+			chaser = g_list_next(chaser);
 		}
 		g_list_free(list_of_verses);
+		list_of_verses = NULL;
 	}
-	list_of_verses = NULL;
 	
 	gtk_widget_set_sensitive(sidebar.menu_item_save_search,FALSE);
 	selection = gtk_tree_view_get_selection
