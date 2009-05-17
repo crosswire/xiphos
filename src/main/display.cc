@@ -1057,7 +1057,7 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 	SWMgr *mgr = be->get_main_mgr();
 	const char *ModuleName = imodule.Name();
 	SWModule *mod_bottom = mgr->getModule(ModuleName);
-	mod_bottom->setSkipConsecutiveLinks(true);
+		mod_bottom->setSkipConsecutiveLinks(true);
 	*mod_bottom = sword::BOTTOM;
 	sword::VerseKey key_bottom( mod_bottom->KeyText() );
 	SWModule *mod = mgr->getModule(ModuleName);
@@ -1423,7 +1423,6 @@ GTKChapDisp::Display(SWModule &imodule)
 	int curVerse = key->Verse();
 	int curChapter = key->Chapter();
 	int curBook = key->Book();
-	int curTestament = key->Testament();
 	gchar *buf;
 	char *num;
 	const gchar *paragraphMark = NULL;
@@ -1482,15 +1481,8 @@ GTKChapDisp::Display(SWModule &imodule)
 		swbuf.append("<div align=right>");
 
 	main_set_global_options(ops);
-
 	getVerseBefore(imodule);
-	
-	key = (VerseKey *)(SWKey *)imodule;
-	key->Book(curBook);
-	key->Chapter(curChapter);
-	key->Verse(curVerse);
-	key->Testament(curTestament);
-	
+
 	for (key->Verse(1);
 	     (key->Book()    == curBook)    &&
 	     (key->Chapter() == curChapter) &&
@@ -1619,8 +1611,6 @@ GTKChapDisp::Display(SWModule &imodule)
 	}
 
 	getVerseAfter(imodule);
-
-	key = (VerseKey *)(SWKey *)imodule;
 
 	// Reset the Bible location before GTK gets access:
 	// Mouse activity destroys this key, so we must be finished with it.

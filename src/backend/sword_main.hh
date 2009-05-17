@@ -36,7 +36,7 @@ using std::list;
 using namespace sword;
 	
 class BackEnd {
-	//SWMgr *main_mgr;
+	SWMgr *main_mgr;
 	SWMgr *display_mgr;
 	TreeKeyIdx *tree_key;
 	ListKey results;
@@ -140,7 +140,7 @@ public:
 	void save_conf_file_item(const char * file, const char * mod_name, const char * item, const char * value);
 	void save_module_key(char *mod_name, char *key);
 	SWMgr *get_display_mgr(void) {return(display_mgr);};
-	SWMgr *get_main_mgr(void) {return(display_mgr);};
+	SWMgr *get_main_mgr(void) {return(main_mgr);};
 };
 extern BackEnd *backend;
 

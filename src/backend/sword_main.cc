@@ -59,7 +59,7 @@ static const char *f_message = "backend/sword_main.cc line #%d \"%s\" = %s";
 
 BackEnd::BackEnd()
 {	
-	//main_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
+	main_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
 	display_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
 	
 	display_mod = NULL;	
@@ -77,11 +77,11 @@ BackEnd::BackEnd()
 
 BackEnd::~BackEnd()
 {
-//	if(main_mgr)
-//		delete main_mgr;
+	if(main_mgr)
+		delete main_mgr;
 	if(display_mgr)
 		delete display_mgr;
-//	main_mgr = 0;
+	main_mgr = 0;
 	display_mgr = 0;
 	if (commDisplay)
 		delete commDisplay;
@@ -229,8 +229,8 @@ void BackEnd::init_lists(MOD_LISTS * mods)
 {
 	ModMap::iterator it;
 	
-	for (it = display_mgr->Modules.begin();
-				it != display_mgr->Modules.end(); it++) {
+	for (it = main_mgr->Modules.begin();
+				it != main_mgr->Modules.end(); it++) {
 		if (!strcmp((*it).second->Type(), TEXT_MODS)) {
 			mods->biblemods =
 			    g_list_append(mods->biblemods,
@@ -314,7 +314,7 @@ const char *BackEnd::get_sword_version(void)
 GList *BackEnd::get_module_options(void)
 {
 	GList *options = NULL;
-	StringList optionslist = display_mgr->getGlobalOptions();	
+	StringList optionslist = main_mgr->getGlobalOptions();	
 	for (StringList::iterator it = optionslist.begin(); 
 				  it != optionslist.end(); it++) {
 		options = g_list_append(options, strdup((char *) (*it).c_str()));
@@ -327,9 +327,9 @@ int BackEnd::has_global_option(char * module_name, char * option)
 	SWModule *mod;
 	ModMap::iterator it;
 	//-- iterate through the modules until we find modName  
-	it = display_mgr->Modules.find(module_name);
+	it = main_mgr->Modules.find(module_name);
 	//-- if we find the module
-	if (it != display_mgr->Modules.end()) {
+	if (it != main_mgr->Modules.end()) {
 		mod = (*it).second;
 		return mod->getConfig().has("GlobalOptionFilter", option);
 	} else
@@ -338,14 +338,14 @@ int BackEnd::has_global_option(char * module_name, char * option)
 
 char *BackEnd::get_config_entry(char * module_name, char * entry)
 {
-	if ((this == NULL) || (display_mgr == NULL))
+	if ((this == NULL) || (main_mgr == NULL))
 		return NULL;
 	SWModule *mod;
 	ModMap::iterator it;
 	//-- iterate through the modules until we find modName  
-	it = display_mgr->Modules.find(module_name);
+	it = main_mgr->Modules.find(module_name);
 	//-- if we find the module
-	if (it != display_mgr->Modules.end()) {
+	if (it != main_mgr->Modules.end()) {
 		mod = (*it).second;
 		//GS_message(("get_config_entry: %s",mod->getConfigEntry(entry)));
 		return g_strdup((char *) mod->getConfigEntry(entry));
@@ -417,9 +417,9 @@ char *BackEnd::get_strip_text_from_string(const char * module_name, const char *
 	SWModule *mod;
 	ModMap::iterator it;
 	//-- iterate through the modules until we find modName  
-	it = display_mgr->Modules.find(module_name);
+	it = main_mgr->Modules.find(module_name);
 	//-- if we find the module
-	if (it != display_mgr->Modules.end()) {
+	if (it != main_mgr->Modules.end()) {
 		mod = (*it).second;
 		return strdup((char *) mod->StripText(string));
 	}
@@ -430,9 +430,9 @@ char *BackEnd::get_strip_text(const char *module_name, const char *key)
 	SWModule *mod;
 	ModMap::iterator it;
 	//-- iterate through the modules until we find modName  
-	it = display_mgr->Modules.find(module_name);
+	it = main_mgr->Modules.find(module_name);
 	//-- if we find the module
-	if (it != display_mgr->Modules.end()) {
+	if (it != main_mgr->Modules.end()) {
 		mod = (*it).second;
 		mod->setKey(key);
 		return strdup((char *) mod->StripText());
@@ -555,9 +555,9 @@ const char *BackEnd::module_get_language(const char *module_name)
 {
 	ModMap::iterator it;
 	//-- iterate through the modules until we find modName  
-	it = display_mgr->Modules.find(module_name);
+	it = main_mgr->Modules.find(module_name);
 	//-- if we find the module
-	if (it != display_mgr->Modules.end())
+	if (it != main_mgr->Modules.end())
 		return main_get_language_map((*it).second->Lang());
 	return "unknown";
 }
@@ -567,8 +567,8 @@ int BackEnd::is_module(const char *mod_name)
 {
 	if (mod_name == NULL)
 		return 0;
-	ModMap::iterator it = display_mgr->Modules.find(mod_name);
-	if (it != display_mgr->Modules.end()) {
+	ModMap::iterator it = main_mgr->Modules.find(mod_name);
+	if (it != main_mgr->Modules.end()) {
 		return 1;
 	}
 	return 0;
@@ -581,9 +581,9 @@ int BackEnd::module_type(const char *mod_name)
 	if((!mod_name) || (strlen(mod_name) < 2)) 
 		return -1;
 	//-- iterate through the modules until we find modName 
-	it = display_mgr->Modules.find(mod_name);
+	it = main_mgr->Modules.find(mod_name);
 	//-- if we find the module
-	if (it != display_mgr->Modules.end()) {
+	if (it != main_mgr->Modules.end()) {
 
 		if (!strcmp((*it).second->Type(), TEXT_MODS)) {
 			return TEXT_TYPE;
@@ -616,9 +616,9 @@ char *BackEnd::module_description(char *mod_name)
 	if((!mod_name) || (strlen(mod_name) < 2)) 
 		return NULL;
 	//-- iterate through the modules until we find modName 
-	it = display_mgr->Modules.find(mod_name);
+	it = main_mgr->Modules.find(mod_name);
 	//-- if we find the module
-	if (it != display_mgr->Modules.end()) {	
+	if (it != main_mgr->Modules.end()) {	
 		return (*it).second->Description();
 	}
 	return NULL;
@@ -632,8 +632,8 @@ char *BackEnd::module_name_from_description(char *description)
 	if(!description)
 		return NULL;
 	
-	for (it = display_mgr->Modules.begin();
-	     it != display_mgr->Modules.end(); it++) {
+	for (it = main_mgr->Modules.begin();
+	     it != main_mgr->Modules.end(); it++) {
 		  if (!strcmp((*it).second->Description(), description))
 			retval = strdup((*it).second->Name());
 	}
@@ -653,8 +653,8 @@ int BackEnd::module_has_testament(const char * module_name,  int testament)
 	int ot = 0;
 	int nt = 0;
 	
-	it = display_mgr->Modules.find(module_name);
-	if (it != display_mgr->Modules.end()) {
+	it = main_mgr->Modules.find(module_name);
+	if (it != main_mgr->Modules.end()) {
 		SWModule *module = (*it).second;
 		module->setSkipConsecutiveLinks(true);
 
@@ -692,8 +692,8 @@ int BackEnd::module_get_testaments(const char * module_name)
 	int ot = 0;
 	int nt = 0;
 	
-	it = display_mgr->Modules.find(module_name);
-	if (it != display_mgr->Modules.end()) {
+	it = main_mgr->Modules.find(module_name);
+	if (it != main_mgr->Modules.end()) {
 		SWModule *module = (*it).second;
 		module->setSkipConsecutiveLinks(true);
 			*module = sword::TOP; //position to first entry
@@ -822,9 +822,9 @@ unsigned long BackEnd::get_treekey_offset_from_key(const char * module_name, con
 	ModMap::iterator it;
 	unsigned long retval = 0;
 	//-- iterate through the modules until we find modName  
-	it = display_mgr->Modules.find(module_name);
+	it = main_mgr->Modules.find(module_name);
 	//-- if we find the module
-	if (it != display_mgr->Modules.end()) {		
+	if (it != main_mgr->Modules.end()) {		
 		mod = (*it).second;
 		TreeKeyIdx *tree_key_idx = (TreeKeyIdx *) mod->CreateKey();
 		tree_key_idx->setText(key);
@@ -1021,7 +1021,7 @@ int BackEnd::set_scope2last_search(void)
 int BackEnd::do_module_index(char *module_name)
 {
 	
-	search_mod = display_mgr->Modules[module_name];
+	search_mod = main_mgr->Modules[module_name];
 	if (!search_mod)
 		return -1;
 	char progressunits = 70;
@@ -1037,7 +1037,7 @@ int BackEnd::do_module_index(char *module_name)
 int BackEnd::do_module_delete_index(char *module_name)
 {
 	
-	search_mod = display_mgr->Modules[module_name];
+	search_mod = main_mgr->Modules[module_name];
 	if (!search_mod)
 		return -1;
 	if (!search_mod->hasSearchFramework())
@@ -1049,7 +1049,7 @@ int BackEnd::do_module_delete_index(char *module_name)
 
 int BackEnd::check_for_optimal_search(char * module_name)
 {
-	search_mod = display_mgr->Modules[module_name];
+	search_mod = main_mgr->Modules[module_name];
 	
 	if (!search_mod)
 		return -2;
@@ -1071,7 +1071,7 @@ int BackEnd::do_module_search(char *module_name,
 	//search_scope_list.ClearList()
 	search_mod = NULL;
 
-	search_mod = display_mgr->Modules[module_name];
+	search_mod = main_mgr->Modules[module_name];
 	if (!search_mod)
 		return -1;
 	if ((current_scope == &search_scope_list) &&
