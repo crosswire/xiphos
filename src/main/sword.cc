@@ -554,8 +554,10 @@ void main_init_language_map() {
 	if ((language = fopen(language_file, "r")) == NULL) {
 		gui_generic_warning
 		    (_("Xiphos's language abbreviation\nfile cannot be opened."));
+		g_free(language_file);
 		return;
 	}
+	g_free(language_file);
 	(void) fseek(language, 0L, SEEK_END);
 	length = ftell(language);
 	rewind(language);
