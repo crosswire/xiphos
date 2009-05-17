@@ -37,7 +37,7 @@ struct  _mm {
 	char *name;
 	char *type;
 	const char *language;
-	const char *old_version;
+	char *old_version;
 	char *new_version;
 	char *description;
 	int installed;
