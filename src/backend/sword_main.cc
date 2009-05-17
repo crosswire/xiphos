@@ -979,10 +979,18 @@ void BackEnd::set_listkey_position(char pos)
 
 const char *BackEnd::get_next_listkey(void)
 {
-	const char *retval = NULL;                                                  
+	// formerly, this used a const char *retval, which was assigned
+	// to results.getText().  this seems to have a problem in
+	// 64-bit worlds (only), where retval would be trashed by results++
+	// because the underlying keytext (sword/src/keys/listkey.cpp)
+	// would be updated, leaving our retval bogus.  OW.
+	// we solve the problem by copying the data while it's current.
+	// it's ugly (returning a pointer to a static char []) but it works.
+
+	static char retval[128];                                                  
 	
 	while(!results.Error()) {		
-		retval = results.getText();
+		(void) g_strlcpy(retval, results.getText(), 126);
 		results++;
 		return retval;
 	}
