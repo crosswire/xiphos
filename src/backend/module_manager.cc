@@ -656,8 +656,7 @@ void backend_module_mgr_add_source(const char * vtype,
 	config.Save();
 }
 
-char *set_mod_mgr_locale(const char *sys_locale) {
-	char *retval = NULL;
+void set_mod_mgr_locale(const char *sys_locale) {
 	char buf[32];
 	int i = 0;
 	SWLocale *sw_locale = NULL;
@@ -717,7 +716,6 @@ char *set_mod_mgr_locale(const char *sys_locale) {
 				sys_locale = buf;
 			}
 		}
-		retval = strdup(sys_locale);
 		LocaleMgr::getSystemLocaleMgr()->setDefaultLocaleName(sys_locale);
 		sw_locale = LocaleMgr::getSystemLocaleMgr()->getLocale(sys_locale);
 	}
@@ -726,7 +724,6 @@ char *set_mod_mgr_locale(const char *sys_locale) {
 	} else {
 		OLD_CODESET = (char*)"iso8859-1";
 	}
-	return retval;
 }
 
 /******************************************************************************

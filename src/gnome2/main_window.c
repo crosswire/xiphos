@@ -760,6 +760,7 @@ void create_mainwindow(void)
 
 	image = gtk_image_new_from_file (image_locator("gs2-48x48.png"));
 	pixbuf = gtk_image_get_pixbuf (GTK_IMAGE(image));
+	g_free(image);
 	gtk_window_set_icon (GTK_WINDOW(widgets.app), pixbuf);
 
 	vbox_gs = gtk_vbox_new(FALSE, 0);
