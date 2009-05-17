@@ -67,6 +67,9 @@ bugfixes for all platforms.
     - history management corrections.
     - "shift to lock previewer" fixes.
     - initial support for linked verses in Bibles.
+    - fixed initial font issue in gtkhtml previewer
+    - made the tab close buttons display correctly
+    - added module labels that remain visible in parallel tab/dialog
 
 Plans for the release after this revolve around final feature parity
 between Linux and Windows (especially the better display engine,
