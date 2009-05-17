@@ -561,6 +561,7 @@ void gui_load_module_tree(GtkWidget * tree)
 		g_free(info->name);
 		g_free(info->type);
 		g_free(info->new_version);
+		g_free(info->old_version);
 		g_free(info->installsize);
 		g_free(info);
 		tmp2 = g_list_next(tmp2);
