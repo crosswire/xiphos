@@ -813,7 +813,7 @@ void gui_add_mods_to_menus(GList * modlist, gchar * menu,
 		//++i;
 		tmp = g_list_next(tmp);	
 	}
-	g_list_free(tmp);
+	g_list_free(modlist);
 }			
 
 
