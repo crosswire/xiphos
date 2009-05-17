@@ -720,6 +720,7 @@ gboolean on_vbox1_key_release_event(GtkWidget * widget,
 
 void create_mainwindow(void)
 {
+	char *imagename;
 	GtkWidget *vbox_gs;
 	GtkWidget *menu;
 	GtkWidget *hbox25;
@@ -758,9 +759,10 @@ void create_mainwindow(void)
 	GTK_WIDGET_SET_FLAGS(widgets.app, GTK_CAN_FOCUS);
 	gtk_window_set_resizable(GTK_WINDOW(widgets.app), TRUE);
 
-	image = gtk_image_new_from_file (image_locator("gs2-48x48.png"));
+	imagename = image_locator("gs2-48x48.png");
+	image = gtk_image_new_from_file (imagename);
+	g_free(imagename);
 	pixbuf = gtk_image_get_pixbuf (GTK_IMAGE(image));
-	g_free(image);
 	gtk_window_set_icon (GTK_WINDOW(widgets.app), pixbuf);
 
 	vbox_gs = gtk_vbox_new(FALSE, 0);
