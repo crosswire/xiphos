@@ -258,17 +258,18 @@ void shutdown_frontend(void)
 		g_free(navbar_main.key);
 	
 	/* free verse list used for saving search results */
-	if(list_of_verses) {
-		while(list_of_verses) {
-			list_item = (RESULTS*)list_of_verses->data;
+	if (list_of_verses) {
+		GList *chaser = list_of_verses;
+		while (chaser) {
+			list_item = (RESULTS*)chaser->data;
 			g_free(list_item->module);
 			g_free(list_item->key);
 			g_free(list_item);
-			list_of_verses = g_list_next(list_of_verses);
+			chaser = g_list_next(chaser);
 		}
 		g_list_free(list_of_verses);
+		list_of_verses = NULL;
 	}
-	list_of_verses = NULL;
 
 	gui_save_bookmarks_treeview();
 

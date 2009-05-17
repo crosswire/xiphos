@@ -1065,17 +1065,18 @@ static gint show_note(DIALOG_DATA * d,const gchar * module, const gchar * passag
 		
 		
 		list_of_verses = g_list_first(list_of_verses);
-		if(list_of_verses) {
-			while(list_of_verses) {
-				list_item = (RESULTS*)list_of_verses->data;
+		if (list_of_verses) {
+			GList *chaser = list_of_verses;
+			while (chaser) {
+				list_item = (RESULTS*)chaser->data;
 				g_free(list_item->module);
 				g_free(list_item->key);
 				g_free(list_item);
-				list_of_verses = g_list_next(list_of_verses);
+				chaser = g_list_next(chaser);
 			}
 			g_list_free(list_of_verses);
+			list_of_verses = NULL;
 		}
-		list_of_verses = NULL;
 		
 		tmp = be->parse_verse_list(tmpbuf, settings.currentverse);  
 		while (tmp != NULL) {
