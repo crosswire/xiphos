@@ -1,5 +1,9 @@
 2009-05-17  karl <charcoal@users.sf.net>
 
+	* 3.1 release.
+
+2009-05-17  karl <charcoal@users.sf.net>
+
 	* correct huge memory leaks in g_list_free() use.
 	* also other memleaks...valgrind is a harsh task master.
 
