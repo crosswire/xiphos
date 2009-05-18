@@ -1,4 +1,13 @@
-2009-05-13  matysek <matysek03@users.sf.net>
+2009-05-18  matysek <matysek03@users.sf.net>
+
+	* disabled Afrikaans translation (will be in 3.2)
+	* added  ttf font
+	  unifont-5.1.20080907.ttf
+	* removed ttf fonts
+	  FreeSans*.ttf
+	  FreeSerif*.ttf
+
+2009-05-14  matysek <matysek03@users.sf.net>
 
 	* enabled Afrikaans translation
 	* enabled Norwegian translation
