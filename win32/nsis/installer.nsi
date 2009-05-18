@@ -257,25 +257,29 @@ Section $(CORE_SEC_TITLE) SecCore
     !insertmacro InstallTTFFont "${PATH_FONT}\LinLibertine_BI.ttf" \
         "Linux Libertine Bold Italic (TrueType)"
 
+    ; GNU Unifont - contains all unicode characters
+    !insertmacro InstallTTFFont "${PATH_FONT}\unifont-5.1.20080907.ttf" \
+        "GNU Unifont (TrueType)"
+
     ; FreeSans font
-    !insertmacro InstallTTFFont "${PATH_FONT}\FreeSans.ttf" \
-        "Free Sans (TrueType)"
-    !insertmacro InstallTTFFont "${PATH_FONT}\FreeSansBold.ttf" \
-        "Free Sans Bold (TrueType)"
-    !insertmacro InstallTTFFont "${PATH_FONT}\FreeSansOblique.ttf" \
-        "Free Sans Oblique (TrueType)"
-    !insertmacro InstallTTFFont "${PATH_FONT}\FreeSansBoldOblique.ttf" \
-        "Free Sans Bold Oblique (TrueType)"
+    ;!insertmacro InstallTTFFont "${PATH_FONT}\FreeSans.ttf" \
+        ;"Free Sans (TrueType)"
+    ;!insertmacro InstallTTFFont "${PATH_FONT}\FreeSansBold.ttf" \
+        ;"Free Sans Bold (TrueType)"
+    ;!insertmacro InstallTTFFont "${PATH_FONT}\FreeSansOblique.ttf" \
+        ;"Free Sans Oblique (TrueType)"
+    ;!insertmacro InstallTTFFont "${PATH_FONT}\FreeSansBoldOblique.ttf" \
+        ;"Free Sans Bold Oblique (TrueType)"
 
     ; FreeSerif font
-    !insertmacro InstallTTFFont "${PATH_FONT}\FreeSerif.ttf" \
-        "Free Serif (TrueType)"
-    !insertmacro InstallTTFFont "${PATH_FONT}\FreeSerifBold.ttf" \
-        "Free Serif Bold (TrueType)"
-    !insertmacro InstallTTFFont "${PATH_FONT}\FreeSerifItalic.ttf" \
-        "Free Serif Italic (TrueType)"
-    !insertmacro InstallTTFFont "${PATH_FONT}\FreeSerifBoldItalic.ttf" \
-        "Free Serif Bold Italic (TrueType)"
+    ;!insertmacro InstallTTFFont "${PATH_FONT}\FreeSerif.ttf" \
+        ;"Free Serif (TrueType)"
+    ;!insertmacro InstallTTFFont "${PATH_FONT}\FreeSerifBold.ttf" \
+        ;"Free Serif Bold (TrueType)"
+    ;!insertmacro InstallTTFFont "${PATH_FONT}\FreeSerifItalic.ttf" \
+        ;"Free Serif Italic (TrueType)"
+    ;!insertmacro InstallTTFFont "${PATH_FONT}\FreeSerifBoldItalic.ttf" \
+        ;"Free Serif Bold Italic (TrueType)"
 
     ; Notify Windows applications about new fonts
     SendMessage ${HWND_BROADCAST} ${WM_FONTCHANGE} 0 0 /TIMEOUT=5000
