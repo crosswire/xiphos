@@ -35,7 +35,7 @@ def build(bld):
     staticlib = []
     if env['IS_WIN32']:
         winresource = '../../win32/res/res.rc'
-        staticlib = 'sword'.split()
+        # staticlib = 'sword'.split()
 
     # DATADIR direct in config.h - conflict in win32 (mingw)
     defines = sub('''
