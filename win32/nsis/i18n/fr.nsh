@@ -38,8 +38,8 @@ LangString UNLOG_ERROR_CREATE ${LANG_FRENCH} "Erreur de création de ${UNINSTALL
 ;--------------------------------
 ; Components Page
 
-LangString ALLUSERS_SECTITLE ${LANG_FRENCH} "Install for All Users"
-LangString STARTMENU_SECTITLE ${LANG_FRENCH} "Start Menu Shortcuts"
-LangString DESKTOP_SECTITLE ${LANG_FRENCH} "Desktop Shortcut"
-LangString QUICKLAUNCH_SECTITLE ${LANG_FRENCH} "Quick Launch Icon"
+LangString ALLUSERS_SECTITLE ${LANG_FRENCH} "Installer pour tous les utilisateurs"
+LangString STARTMENU_SECTITLE ${LANG_FRENCH} "Raccourci dans le menu"
+LangString DESKTOP_SECTITLE ${LANG_FRENCH} "Raccourci sur le bureau"
+LangString QUICKLAUNCH_SECTITLE ${LANG_FRENCH} "Icône dans la barre de lancement rapide"
 
