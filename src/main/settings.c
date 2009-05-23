@@ -389,8 +389,6 @@ void load_settings_structure(void)
 			      settings.DefaultDict);
 	}
 
-//	settings.inViewer = atoi(xml_get_value("lexicons", "inviewer"));
-//	settings.inDictpane = atoi(xml_get_value("lexicons", "indictpane"));
 	settings.useDefaultDict = atoi(xml_get_value("lexicons","usedefaultdict"));
 
 	/* mod mgr stuff */ 
@@ -719,8 +717,6 @@ void load_settings_structure(void)
 		settings.doublespace = 0;
 	}
 
-	settings.usedefault = atoi(xml_get_value("misc", "usedefault"));
-	
 	if ((buf = xml_get_value("misc", "chapter-scroll"))) {
 		settings.chapter_scroll = atoi(buf);
 	} else {
