@@ -59,6 +59,7 @@
 #define GTK_RESPONSE_ARCHIVE 304
 #define GTK_RESPONSE_FASTMOD 305
 #define GTK_RESPONSE_DELFAST 306
+#define GTK_RESPONSE_SOURCES 307
 /* see these codes' use in ui/module-manager.glade. */
 
 enum {
@@ -105,6 +106,7 @@ static GtkWidget *button3;
 static GtkWidget *button_arch;
 static GtkWidget *button_idx;
 static GtkWidget *button_delidx;
+static GtkWidget *button_sources;
 static GtkWidget *label_home;
 static GtkWidget *label_system;
 //static GtkWidget *progressbar;
@@ -380,6 +382,7 @@ remove_install_modules(GList * modules,
 	gtk_widget_hide(button_arch);
 	gtk_widget_hide(button_idx);
 	gtk_widget_hide(button_delidx);
+	gtk_widget_hide(button_sources);
 	gtk_widget_show(button_cancel);
 	while (gtk_events_pending())
 		gtk_main_iteration();
@@ -571,12 +574,14 @@ remove_install_modules(GList * modules,
 			gtk_widget_hide(button_arch);
 			gtk_widget_hide(button_idx);
 			gtk_widget_hide(button_delidx);
+			gtk_widget_hide(button_sources);
 		break;
 		case 4:
 			gtk_widget_show(button3);
 			gtk_widget_show(button_arch);
 			gtk_widget_show(button_idx);
 			gtk_widget_show(button_delidx);
+			gtk_widget_hide(button_sources);
 		break;		
 	}
 }
@@ -1283,6 +1288,7 @@ response_refresh(void)
 		gtk_widget_hide(button_arch);
 		gtk_widget_hide(button_idx);
 		gtk_widget_hide(button_delidx);
+		gtk_widget_hide(button_sources);
 	}
 
 	working = FALSE;
@@ -2205,6 +2211,15 @@ on_delete_index_clicked(GtkButton * button, gpointer  user_data)
 }
 
 void
+on_load_sources_clicked(GtkButton * button, gpointer  user_data)
+{
+	gui_generic_warning((mod_mgr_init_config_extras() == 0)
+			    ? _("Sources loaded.")
+			    : _("Could not load sources from CrossWire."));
+	load_source_treeviews();
+}
+
+void
 on_cancel_clicked(GtkButton * button, gpointer  user_data)
 {
 	mod_mgr_terminate();
@@ -2261,6 +2276,9 @@ on_mod_mgr_response(GtkDialog * dialog,
 	case GTK_RESPONSE_DELFAST:
 		remove_install_wrapper(DELFAST);
 		break;
+	case GTK_RESPONSE_SOURCES:
+		on_load_sources_clicked(NULL, NULL);
+		break;
 	}
 }
 
@@ -2301,7 +2319,7 @@ on_button5_clicked(GtkButton * button,
  * Synopsis
  *   #include "gui/mod_mgr.h"
  *
- *   void on_button2_clicked(GtkButton * button, gpointer user_data)
+ *   void on_button6_clicked(GtkButton * button, gpointer user_data)
  *
  * Description
  *   remove local source
@@ -2407,7 +2425,7 @@ on_button7_clicked(GtkButton * button,
 	dialog->label2 = _("Type:");
 	dialog->label3 = _("Host:");
 	dialog->label4 = _("Directory:");
-	dialog->text1 = g_strdup("Crosswire");
+	dialog->text1 = g_strdup("CrossWire");
 	dialog->text2 = g_strdup("FTP");
 	dialog->text3 = g_strdup("ftp.crosswire.org");
 	dialog->text4 = g_strdup("/pub/sword/raw");
@@ -2621,6 +2639,7 @@ on_treeview1_button_release_event(GtkWidget * widget,
 				gtk_widget_hide(button_arch);
 				gtk_widget_hide(button_idx);
 				gtk_widget_hide(button_delidx);
+				gtk_widget_show(button_sources);
 				break;
 			case 2:
 				if (GTK_TOGGLE_BUTTON(radiobutton2)->
@@ -2633,6 +2652,7 @@ on_treeview1_button_release_event(GtkWidget * widget,
 				gtk_widget_hide(button_arch);
 				gtk_widget_hide(button_idx);
 				gtk_widget_hide(button_delidx);
+				gtk_widget_hide(button_sources);
 				break;
 			case 3:
 				if (GTK_TOGGLE_BUTTON(radiobutton2)->
@@ -2645,12 +2665,14 @@ on_treeview1_button_release_event(GtkWidget * widget,
 				gtk_widget_hide(button_arch);
 				gtk_widget_hide(button_idx);
 				gtk_widget_hide(button_delidx);
+				gtk_widget_hide(button_sources);
 				break;
 			case 4:
 				gtk_widget_show(button3);
 				gtk_widget_show(button_arch);
 				gtk_widget_show(button_idx);
 				gtk_widget_show(button_delidx);
+				gtk_widget_hide(button_sources);
 				gtk_widget_hide(button1);
 				gtk_widget_hide(button2);
 				break;
@@ -2763,28 +2785,32 @@ setup_dialog_action_area(GtkDialog * dialog)
 	gtk_widget_show (label1);
 	gtk_box_pack_start (GTK_BOX (hbox1), label1, FALSE, FALSE, 0);
 
-  
-	/* remove */	
+	/* remove */
 	button3 =  gtk_button_new_from_stock ("gtk-remove");
 	gtk_box_pack_start(GTK_BOX(dialog_action_area1),button3,FALSE, FALSE,0);
 	g_signal_connect(button3, "clicked", G_CALLBACK(on_remove_clicked), NULL);
 
-	/* archive */	
+	/* archive */
 	button_arch =  gtk_button_new_from_stock ("gtk-save");
 	gtk_box_pack_start(GTK_BOX(dialog_action_area1),button_arch,FALSE, FALSE,0);
 	g_signal_connect(button_arch, "clicked", G_CALLBACK(on_archive_clicked), NULL);
 
-	/* index */	
+	/* index */
 	button_idx =  gtk_button_new_from_stock ("gtk-save-as");
 	gtk_box_pack_start(GTK_BOX(dialog_action_area1),button_idx,FALSE, FALSE,0);
 	g_signal_connect(button_idx, "clicked", G_CALLBACK(on_index_clicked), NULL);
 
-	/* index */	
+	/* delete index */
 	button_delidx =  gtk_button_new_from_stock ("edit-delete");
 	gtk_box_pack_start(GTK_BOX(dialog_action_area1),button_delidx,FALSE, FALSE,0);
 	g_signal_connect(button_delidx, "clicked", G_CALLBACK(on_delete_index_clicked), NULL);
 
-	/* cancel */	
+	/* load sources */
+	button_sources =  gtk_button_new_from_stock ("gtk-execute");
+	gtk_box_pack_start(GTK_BOX(dialog_action_area1),button_sources,FALSE, FALSE,0);
+	g_signal_connect(button_sources, "clicked", G_CALLBACK(on_load_sources_clicked), NULL);
+
+	/* cancel */
 	button_cancel =  gtk_button_new_from_stock ("gtk-cancel");
 	gtk_box_pack_start(GTK_BOX(dialog_action_area1),button_cancel,FALSE, FALSE,0);
 	g_signal_connect(button_cancel, "clicked", G_CALLBACK(on_cancel_clicked), NULL);
@@ -2872,34 +2898,6 @@ on_comboboxentry_remote_changed(GtkComboBox *combobox, gpointer user_data)
 	remote_source = g_strdup(gtk_entry_get_text(GTK_ENTRY(GTK_BIN(combobox)->child)));
 }
 
-/*
-static void on_install_selection_changed_cb (GtkTreeSelection * selection,
-					     gpointer data)
-{
-	GtkTreeModel *model;
-	GtkTreeIter selected;
-	GtkTreePath *path;
-	GS_message(("\n\non_install_selection_changed_cb\n\n"));
-	if (!gtk_tree_selection_get_selected(selection, &model, &selected))
-		return;
-	
-	if(!gtk_tree_model_iter_has_child (model, &selected))
-		return;
-	//uncomment the following two lines if you want to see how it looks without
-	//triangls or plus symbols
-	//gtk_tree_view_set_show_expanders(GTK_TREE_VIEW(sidebar.module_list), FALSE);
-	//gtk_tree_view_set_level_indentation(GTK_TREE_VIEW(sidebar.module_list), 12);
-	path = gtk_tree_model_get_path(model, &selected);
-	if (gtk_tree_view_row_expanded (GTK_TREE_VIEW(data), path))
-	       gtk_tree_view_collapse_row ( GTK_TREE_VIEW(data), path );
-        else
-	       gtk_tree_view_expand_row ( GTK_TREE_VIEW(data), path, FALSE );
-	gtk_tree_path_free ( path );
-
-	
-}
-*/
-
 static GtkWidget *
 create_module_manager_dialog(gboolean first_run)
 {
@@ -2953,6 +2951,7 @@ create_module_manager_dialog(gboolean first_run)
 		button_arch = glade_xml_get_widget (gxml, "button13"); /* archive */
 		button_idx = glade_xml_get_widget (gxml, "button14"); /* index */
 		button_delidx = glade_xml_get_widget (gxml, "button15"); /* delete index */
+		button_sources = glade_xml_get_widget (gxml, "button0"); /* load sources */
 	}
 		
 	g_signal_connect(dialog, "response",
