@@ -504,9 +504,8 @@ GList *backend_module_mgr_list_local_sources(void)
 
 int backend_module_mgr_refresh_remote_source(const char *sourceName)
 {
-	InstallSourceMap::iterator source = installMgr->sources.begin();
-	
-	source = installMgr->sources.find(sourceName);
+	InstallSourceMap::iterator source = installMgr->sources.find(sourceName);
+
 	if (source == installMgr->sources.end()) {
 		printf("Couldn't find remote source [%s]\n",
 			sourceName);
@@ -544,7 +543,7 @@ void backend_init_module_mgr_config(void)
 	SWConfig config(confPath.c_str());
 
 	InstallSource is("FTP");
-	is.caption = "Crosswire";
+	is.caption = "CrossWire";
 	is.source = "ftp.crosswire.org";
 	is.directory = "/pub/sword/raw";
 
@@ -560,13 +559,28 @@ void backend_init_module_mgr_config(void)
 	config.Save();
 }
 
-void
+int
 backend_init_module_mgr_config_extras()
 {
+#ifdef SWORD_MULTIVERSE
+	bool needNewInstallMgr = (installMgr == NULL);
+	int retval;
+
+	if (needNewInstallMgr)
+		backend_init_module_mgr(NULL, false, false);
+
+	retval = installMgr->refreshRemoteSourceConfiguration();
+
+	if (needNewInstallMgr) {
+		backend_terminate_module_mgr();
+		backend_shut_down_module_mgr();
+	}
+	return retval;
+#else
 	// also the beta repo.
 	backend_module_mgr_add_source("FTPSource",
 				      "FTP",
-				      "Crosswire-beta",
+				      "CrossWire Beta",
 				      "www.crosswire.org",
 				      "/pub/sword/betaraw");
 	// new concept: we are our own first-class source.
@@ -578,9 +592,11 @@ backend_init_module_mgr_config_extras()
 	// NET @ bible.org.
 	backend_module_mgr_add_source("FTPSource",
 				      "FTP",
-				      "NET",
+				      "Bible.org",
 				      "ftp.bible.org",
 				      "/sword");
+	return 0;
+#endif /* !SWORD_MULTIVERSE */
 }
 
 /******************************************************************************

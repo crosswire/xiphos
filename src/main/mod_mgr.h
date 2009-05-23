@@ -81,7 +81,7 @@ int mod_mgr_local_install_module(const char *destdir,
 GList *mod_mgr_remote_list_modules(const char *source_name);
 int mod_mgr_refresh_remote_source(const char *source_name);
 void mod_mgr_init_config(void);
-void mod_mgr_init_config_extras(void);
+int mod_mgr_init_config_extras(void);
 void mod_mgr_clear_config(void);
 void mod_mgr_add_source(const char * vtype, 
 			const char * type, 
