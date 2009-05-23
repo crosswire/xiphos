@@ -1446,7 +1446,8 @@ GTKChapDisp::Display(SWModule &imodule)
 		set_morph_order(imodule);
 
 	// when strongs/morph are on, the anchor boundary must be smaller.
-	gint display_boundary = (strongs_or_morph ? 1 : 2);
+	// or if main window is too small to keep curverse in-pane.
+	gint display_boundary = ((settings.gs_hight < 500) ? 0 : (strongs_or_morph ? 1 : 2));
 
 	if (!strcmp(ModuleName, "KJV"))
 		paragraphMark = "&para;";
