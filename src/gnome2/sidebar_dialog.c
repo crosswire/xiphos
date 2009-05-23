@@ -129,6 +129,7 @@ static void on_dialog_destroy(GtkObject *object, gpointer user_data)
 GtkWidget* create_sidebar_dialog(void)
 {
 	GtkWidget *dlgDock; 
+	gchar *title;
 
 	dlgDock = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_object_set_data(GTK_OBJECT(dlgDock), "dlgDock", dlgDock);
@@ -140,6 +141,10 @@ GtkWidget* create_sidebar_dialog(void)
 	vbox_dock = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox_dock);
 	gtk_container_add(GTK_CONTAINER(dlgDock), vbox_dock);
+
+	title = g_strdup_printf("%s - %s", _("Sidebar"), settings.program_title);
+	gtk_window_set_title(GTK_WINDOW(dlgDock), title);
+	g_free(title);
 
 	g_signal_connect(G_OBJECT(dlgDock), "destroy",
 			G_CALLBACK(on_dialog_destroy), NULL);
