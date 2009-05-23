@@ -1,3 +1,8 @@
+2009-05-23  karl <charcoal@users.sf.net>
+
+	* tweaked #2789990 for no context in very small windows.
+	* added support for master repo list at crosswire.
+
 2009-05-17  karl <charcoal@users.sf.net>
 
 	* 3.1 release.
