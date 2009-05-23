@@ -83,7 +83,6 @@ struct _settings {
 		commpane_hight,
 		sidebar_notebook_hight,
 		gs_width,
-		tmp_width,
 		gs_hight,	
 		searchbargroup,      //-- number of search group in shortcut bar
 		searchType,
@@ -94,7 +93,6 @@ struct _settings {
 		percomm_page;   /* percomm editor workbook page number */
 						
 	int   
-		usedefault, /* use default settings in xiphos or those used for last session */
 		strongs,	//-- toogle button and check menu state
 		parallel_strongs, //-- check menu state parallel mods
 		parallel_headings, //-- check menu state parallel mods	
