@@ -2,6 +2,7 @@
 
 	* tweaked #2789990 for no context in very small windows.
 	* added support for master repo list at crosswire.
+	* feat.req #2795758 title bar change for det.sidebar.
 
 2009-05-17  karl <charcoal@users.sf.net>
 
