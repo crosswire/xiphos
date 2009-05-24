@@ -1,3 +1,7 @@
+2009-05-24  karl <charcoal@users.sf.net>
+
+	* fix #2777165 Opening aplication doesn't bring it to previous place.
+
 2009-05-23  karl <charcoal@users.sf.net>
 
 	* tweaked #2789990 for no context in very small windows.
