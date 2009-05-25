@@ -277,9 +277,9 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 	GtkWidget *label10;
 	GtkWidget *label11;
 	GtkWidget *label12;
+	GtkWidget *label13;
+	GtkWidget *label14;
 	GtkWidget *dialog_action_area3;
-//	GtkWidget *cancelbutton2;
-//	GtkWidget *okbutton3;
 
 	dialog_request = gtk_dialog_new();
 	info->dialog = dialog_request;
@@ -414,6 +414,50 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 
 	}
 
+	if (info->label5) {
+		label13 = gtk_label_new(info->label5);
+		gtk_widget_show(label13);
+		gtk_table_attach(GTK_TABLE(table2), label13, 0, 1, 4, 5,
+				 (GtkAttachOptions) (GTK_FILL),
+				 (GtkAttachOptions) (0), 0, 0);
+		gtk_label_set_justify(GTK_LABEL(label13),
+				      GTK_JUSTIFY_LEFT);
+		gtk_misc_set_alignment(GTK_MISC(label13), 0, 0.5);
+
+		entry5 = gtk_entry_new();
+		gtk_widget_show(entry5);
+		gtk_table_attach(GTK_TABLE(table2), entry5, 1, 2, 4, 5,
+				 (GtkAttachOptions) (GTK_EXPAND |
+						     GTK_FILL),
+				 (GtkAttachOptions) (0), 0, 0);
+		if (info->text5)
+			gtk_entry_set_text(GTK_ENTRY(entry5),
+					   info->text5);
+
+	}
+
+	if (info->label6) {
+		label14 = gtk_label_new(info->label6);
+		gtk_widget_show(label14);
+		gtk_table_attach(GTK_TABLE(table2), label14, 0, 1, 5, 6,
+				 (GtkAttachOptions) (GTK_FILL),
+				 (GtkAttachOptions) (0), 0, 0);
+		gtk_label_set_justify(GTK_LABEL(label14),
+				      GTK_JUSTIFY_LEFT);
+		gtk_misc_set_alignment(GTK_MISC(label14), 0, 0.5);
+
+		entry6 = gtk_entry_new();
+		gtk_widget_show(entry6);
+		gtk_table_attach(GTK_TABLE(table2), entry6, 1, 2, 5, 6,
+				 (GtkAttachOptions) (GTK_EXPAND |
+						     GTK_FILL),
+				 (GtkAttachOptions) (0), 0, 0);
+		if (info->text6)
+			gtk_entry_set_text(GTK_ENTRY(entry6),
+					   info->text6);
+
+	}
+
 	dialog_action_area3 = GTK_DIALOG(dialog_request)->action_area;
 	gtk_widget_show(dialog_action_area3);
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area3),
@@ -440,211 +484,6 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 	return dialog_request;
 }
 
-
-
-/******************************************************************************
- * Name
- *   gs_dialog_build
- *
- * Synopsis
- *   #include "gui/dialog.h"
- *
- *   GtkWidget *gs_dialog_build(GS_DIALOG * info)
- *
- * Description
- *   creates the dialog
- *
- * Return value
- *   GtkWidget *
- */
-/*
-static GtkWidget *gs_dialog_build(GS_DIALOG * info)
-{
-
-	GtkWidget *dialog_vbox;
-	GtkWidget *hbox83;
-	GtkWidget *image;
-	GtkWidget *vbox84;
-	GtkWidget *label_top;
-	GtkWidget *label_middle;
-	GtkWidget *table14;
-	GtkWidget *label1;
-	GtkWidget *label2;
-	GtkWidget *label3;
-	GtkWidget *label4;
-	//GtkWidget *label5;
-	//GtkWidget *label6;
-	GtkWidget *label_bottom;
-//	GtkWidget *dialog_action_area21;
-//	GtkWidget *hbuttonbox1;
-//	GtkWidget *button_ok;
-//	GtkWidget *button_cancel;
-//	GtkWidget *button_yes;
-//	GtkWidget *button_no;
-//	GString *str;
-
-
-	gs_dialog = gtk_dialog_new();
-	info->dialog = gs_dialog;
-	gtk_object_set_data(GTK_OBJECT(gs_dialog), "gs_dialog",
-			    gs_dialog);
-	gtk_window_set_title(GTK_WINDOW(gs_dialog),
-			     info->title ? info->title : " ");
-	gtk_window_set_resizable(GTK_WINDOW(gs_dialog), TRUE);
-	gtk_container_set_border_width(GTK_CONTAINER(gs_dialog), 12);
-
-	if (info->no)
-		gtk_dialog_add_button(GTK_DIALOG(gs_dialog),
-				      GTK_STOCK_NO, GTK_RESPONSE_NO);
-	if (info->yes)
-		gtk_dialog_add_button(GTK_DIALOG(gs_dialog),
-				      GTK_STOCK_YES, GTK_RESPONSE_YES);
-
-	if (info->cancel)
-		gtk_dialog_add_button(GTK_DIALOG(gs_dialog),
-				      GTK_STOCK_CANCEL,
-				      GTK_RESPONSE_CANCEL);
-	if (info->ok)
-		gtk_dialog_add_button(GTK_DIALOG(gs_dialog),
-				      GTK_STOCK_OK, GTK_RESPONSE_OK);
-
-	dialog_vbox = GTK_DIALOG(gs_dialog)->vbox;
-	gtk_object_set_data(GTK_OBJECT(gs_dialog), "dialog_vbox",
-			    dialog_vbox);
-	gtk_widget_show(dialog_vbox);
-
-	hbox83 = gtk_hbox_new(FALSE, 0);
-	gtk_widget_show(hbox83);
-	gtk_box_pack_start(GTK_BOX(dialog_vbox), hbox83, TRUE, TRUE, 0);
-
-	if (info->stock_icon) {
-		image = gtk_image_new_from_stock(info->stock_icon,
-						 GTK_ICON_SIZE_DND);
-		gtk_widget_show(image);
-		gtk_box_pack_start(GTK_BOX(hbox83), image, FALSE, TRUE,
-				   0);
-		gtk_misc_set_alignment(GTK_MISC(image), 0.5, 0);
-		gtk_misc_set_padding(GTK_MISC(image), 12, 0);
-	}
-
-	vbox84 = gtk_vbox_new(FALSE, 8);
-	gtk_widget_show(vbox84);
-	gtk_box_pack_start(GTK_BOX(hbox83), vbox84, TRUE, TRUE, 0);
-	gtk_container_set_border_width(GTK_CONTAINER(vbox84), 6);
-
-	if (info->label_top) {
-		label_top = gtk_label_new(NULL);
-		gtk_label_set_markup((GtkLabel *) label_top,
-				     info->label_top);
-		gtk_widget_show(label_top);
-		gtk_box_pack_start(GTK_BOX(vbox84), label_top, TRUE,
-				   TRUE, 0);
-	}
-
-	if (info->label_middle) {
-		label_middle = gtk_label_new(info->label_middle);
-		gtk_widget_show(label_middle);
-		gtk_box_pack_start(GTK_BOX(vbox84), label_middle, TRUE,
-				   TRUE, 0);
-	}
-
-	if (info->label_bottom) {
-		label_bottom = gtk_label_new(info->label_bottom);
-		gtk_widget_show(label_bottom);
-		gtk_box_pack_start(GTK_BOX(vbox84), label_bottom, TRUE,
-				   TRUE, 0);
-	}
-
-	table14 = gtk_table_new(6, 2, FALSE);;
-	gtk_widget_show(table14);
-	gtk_box_pack_start(GTK_BOX(vbox84), table14, TRUE, TRUE, 0);
-	gtk_table_set_row_spacings(GTK_TABLE(table14), 4);
-	gtk_table_set_col_spacings(GTK_TABLE(table14), 7);
-
-	if (info->label1) {
-		label1 = gtk_label_new(info->label1);
-		gtk_widget_show(label1);
-		gtk_table_attach(GTK_TABLE(table14), label1, 0, 1, 0, 1,
-				 (GtkAttachOptions) (GTK_FILL),
-				 (GtkAttachOptions) (0), 0, 0);
-		gtk_misc_set_alignment(GTK_MISC(label1), 0, 0.5);
-
-		entry1 = gtk_entry_new();
-		gtk_widget_show(entry1);
-		gtk_table_attach(GTK_TABLE(table14), entry1, 1, 2, 0, 1,
-				 (GtkAttachOptions) (GTK_EXPAND |
-						     GTK_FILL),
-				 (GtkAttachOptions) (0), 0, 0);
-		gtk_widget_set_size_request(entry1, 250, -1);
-		if (info->text1)
-			gtk_entry_set_text(GTK_ENTRY(entry1),
-					   info->text1);
-	}
-
-	if (info->label2) {
-		label2 = gtk_label_new(info->label2);
-		gtk_widget_show(label2);
-		gtk_table_attach(GTK_TABLE(table14), label2, 0, 1, 1, 2,
-				 (GtkAttachOptions) (GTK_FILL),
-				 (GtkAttachOptions) (0), 0, 0);
-		gtk_misc_set_alignment(GTK_MISC(label2), 0, 0.5);
-
-		entry2 = gtk_entry_new();
-		gtk_widget_show(entry2);
-		gtk_table_attach(GTK_TABLE(table14), entry2, 1, 2, 1, 2,
-				 (GtkAttachOptions) (GTK_EXPAND |
-						     GTK_FILL),
-				 (GtkAttachOptions) (0), 0, 0);
-		if (info->text2)
-			gtk_entry_set_text(GTK_ENTRY(entry2),
-					   info->text2);
-	}
-
-	if (info->label3) {
-		label3 = gtk_label_new(info->label3);
-		gtk_widget_show(label3);
-		gtk_table_attach(GTK_TABLE(table14), label3, 0, 1, 2, 3,
-				 (GtkAttachOptions) (GTK_FILL),
-				 (GtkAttachOptions) (0), 0, 0);
-		gtk_misc_set_alignment(GTK_MISC(label3), 0, 0.5);
-
-
-		entry3 = gtk_entry_new();
-		gtk_widget_show(entry3);
-		gtk_table_attach(GTK_TABLE(table14), entry3, 1, 2, 2, 3,
-				 (GtkAttachOptions) (GTK_EXPAND |
-						     GTK_FILL),
-				 (GtkAttachOptions) (0), 0, 0);
-		if (info->text3)
-			gtk_entry_set_text(GTK_ENTRY(entry3),
-					   info->text3);
-	}
-
-	if (info->label4) {
-		label4 = gtk_label_new(info->label4);
-		gtk_widget_show(label4);
-		gtk_table_attach(GTK_TABLE(table14), label4, 0, 1, 3, 4,
-				 (GtkAttachOptions) (GTK_FILL),
-				 (GtkAttachOptions) (0), 0, 0);
-		gtk_misc_set_alignment(GTK_MISC(label4), 0, 0.5);
-
-		entry4 = gtk_entry_new();
-		gtk_widget_show(entry4);
-		gtk_table_attach(GTK_TABLE(table14), entry4, 1, 2, 3, 4,
-				 (GtkAttachOptions) (GTK_EXPAND |
-						     GTK_FILL),
-				 (GtkAttachOptions) (0), 0, 0);
-		if (info->text4)
-			gtk_entry_set_text(GTK_ENTRY(entry4),
-					   info->text4);
-	}
-	g_signal_connect((gpointer) gs_dialog, "response",
-			 G_CALLBACK(on_dialog_response), info);
-
-	gtk_widget_show_all(gs_dialog);
-	return gs_dialog;
-}
-*/
 
 /******************************************************************************
  * Name

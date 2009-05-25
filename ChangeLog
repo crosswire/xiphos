@@ -1,6 +1,7 @@
 2009-05-24  karl <charcoal@users.sf.net>
 
 	* fix #2777165 Opening aplication doesn't bring it to previous place.
+	* added support for non-anonymous repository use.
 
 2009-05-23  karl <charcoal@users.sf.net>
 

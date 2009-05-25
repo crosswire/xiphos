@@ -85,7 +85,10 @@ void backend_module_mgr_add_source(const char * vtype,
 				   const char * type, 
 				   const char * caption, 
 				   const char * source, 
-				   const char * directory);
+				   const char * directory,
+				   const char * user,
+				   const char * pass,
+				   const char * uid);
 
 #ifdef __cplusplus
 }
