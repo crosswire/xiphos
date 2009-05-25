@@ -91,6 +91,9 @@ enum {
 	COLUMN_CAPTION,
 	COLUMN_SOURCE,
 	COLUMN_DIRECTORY,
+	COLUMN_USER,
+	COLUMN_PASS,
+	COLUMN_UID,
 	NUM_REMOTE_COLUMNS
 };
 
@@ -991,6 +994,9 @@ load_module_tree(GtkTreeView * treeview,
 				g_free((gchar*)mms->caption);
 				g_free((gchar*)mms->source);
 				g_free((gchar*)mms->directory);
+				g_free((gchar*)mms->user);
+				g_free((gchar*)mms->pass);
+				g_free((gchar*)mms->uid);
 				g_free(mms);
 				tmp = g_list_next(tmp);
 			}
@@ -1655,6 +1661,29 @@ add_columns_to_remote_treeview(GtkTreeView * treeview)
 						     NULL);
 	gtk_tree_view_append_column(treeview, column);
 
+	renderer = gtk_cell_renderer_text_new();
+	column =
+	    gtk_tree_view_column_new_with_attributes(_("User"),
+						     renderer, "text",
+						     COLUMN_USER,
+						     NULL);
+	gtk_tree_view_append_column(treeview, column);
+
+	renderer = gtk_cell_renderer_text_new();
+	column =
+	    gtk_tree_view_column_new_with_attributes(_("Password"),
+						     renderer, "text",
+						     COLUMN_PASS,
+						     NULL);
+	gtk_tree_view_append_column(treeview, column);
+
+	renderer = gtk_cell_renderer_text_new();
+	column =
+	    gtk_tree_view_column_new_with_attributes(_("UID"),
+						     renderer, "text",
+						     COLUMN_UID,
+						     NULL);
+	gtk_tree_view_append_column(treeview, column);
 }
 
 static GtkTreeModel *
@@ -1733,7 +1762,11 @@ create_remote_source_treeview_model(void)
 	store = gtk_list_store_new(NUM_REMOTE_COLUMNS,
 				   G_TYPE_STRING,
 				   G_TYPE_STRING,
-				   G_TYPE_STRING, G_TYPE_STRING);
+				   G_TYPE_STRING,
+				   G_TYPE_STRING,
+				   G_TYPE_STRING,
+				   G_TYPE_STRING,
+				   G_TYPE_STRING);
 
 	return GTK_TREE_MODEL(store);
 }
@@ -1769,6 +1802,9 @@ load_source_treeviews(void)
 				   COLUMN_CAPTION,   mms->caption,
 				   COLUMN_SOURCE,    mms->source,
 				   COLUMN_DIRECTORY, mms->directory,
+				   COLUMN_USER,      mms->user,
+				   COLUMN_PASS,      mms->pass,
+				   COLUMN_UID,       mms->uid,
 				   -1);
 		gtk_list_store_append(GTK_LIST_STORE(module_box_remote), &combo_iter);
 		gtk_list_store_set(GTK_LIST_STORE(module_box_remote), 
@@ -1780,6 +1816,9 @@ load_source_treeviews(void)
 		g_free((gchar*)mms->caption);
 		g_free((gchar*)mms->source);
 		g_free((gchar*)mms->directory);
+		g_free((gchar*)mms->user);
+		g_free((gchar*)mms->pass);
+		g_free((gchar*)mms->uid);
 		g_free(mms);
 		tmp = g_list_next(tmp);
 	}
@@ -1799,6 +1838,9 @@ load_source_treeviews(void)
 				   COLUMN_CAPTION,   mms->caption,
 				   COLUMN_SOURCE,    " ", // mms->source - eh.
 				   COLUMN_DIRECTORY, mms->directory,
+				   COLUMN_USER,      "",
+				   COLUMN_PASS,      "",
+				   COLUMN_UID,       "",
 				   -1);
 		gtk_list_store_append(GTK_LIST_STORE(module_box_local), &combo_iter);
 		gtk_list_store_set(GTK_LIST_STORE(module_box_local), 
@@ -1810,6 +1852,9 @@ load_source_treeviews(void)
 		g_free((gchar*)mms->caption);
 		g_free((gchar*)mms->source);
 		g_free((gchar*)mms->directory);
+		g_free((gchar*)mms->user);
+		g_free((gchar*)mms->pass);
+		g_free((gchar*)mms->uid);
 		g_free(mms);
 		tmp = g_list_next(tmp);
 	}
@@ -1988,6 +2033,9 @@ save_sources(void)
 	gchar *caption = NULL;
 	gchar *source = NULL;
 	gchar *directory = NULL;
+	gchar *user = NULL;
+	gchar *pass = NULL;
+	gchar *uid = NULL;
 	gboolean valid;
 	GtkTreeIter iter;
 	GtkTreeModel *remote_model =
@@ -2003,14 +2051,22 @@ save_sources(void)
 				   COLUMN_TYPE, &type,
 				   COLUMN_CAPTION, &caption,
 				   COLUMN_SOURCE, &source,
-				   COLUMN_DIRECTORY, &directory, -1);
+				   COLUMN_DIRECTORY, &directory,
+				   COLUMN_USER, &user,
+				   COLUMN_PASS, &pass,
+				   COLUMN_UID, &uid,
+				   -1);
 
 		mod_mgr_add_source("FTPSource",
-				   type, caption, source, directory);
+				   type, caption, source, directory,
+				   user, pass, uid);
 		g_free(type);
 		g_free(caption);
 		g_free(source);
 		g_free(directory);
+		g_free(user);
+		g_free(pass);
+		g_free(uid);
 		valid = gtk_tree_model_iter_next(remote_model, &iter);
 	}
 
@@ -2020,14 +2076,22 @@ save_sources(void)
 				   COLUMN_TYPE, &type,
 				   COLUMN_CAPTION, &caption,
 				   COLUMN_SOURCE, &source,
-				   COLUMN_DIRECTORY, &directory, -1);
+				   COLUMN_DIRECTORY, &directory,
+				   COLUMN_USER, &user,
+				   COLUMN_PASS, &pass,
+				   COLUMN_UID, &uid,
+				   -1);
 
 		mod_mgr_add_source("DIRSource",
-				   type, caption, "[local]", directory);
+				   type, caption, "[local]", directory,
+				   "", "", "");
 		g_free(type);
 		g_free(caption);
 		g_free(source);
 		g_free(directory);
+		g_free(user);
+		g_free(pass);
+		g_free(uid);
 		valid = gtk_tree_model_iter_next(local_model, &iter);
 	}
 
@@ -2075,7 +2139,10 @@ create_fileselection_local_source(void)
 				   COLUMN_TYPE, "DIR",
 				   COLUMN_CAPTION, filename, 
 				   COLUMN_SOURCE, "[local]",
-				   COLUMN_DIRECTORY,filename, 
+				   COLUMN_DIRECTORY, filename, 
+				   COLUMN_USER, "", 
+				   COLUMN_PASS, "", 
+				   COLUMN_UID,  "", 
 				   -1);
 		save_sources();
 		g_free (filename);
@@ -2214,8 +2281,8 @@ void
 on_load_sources_clicked(GtkButton * button, gpointer  user_data)
 {
 	gui_generic_warning((mod_mgr_init_config_extras() == 0)
-			    ? _("Sources loaded.")
-			    : _("Could not load sources from CrossWire."));
+			    ? _("Standard remote sources have been loaded.")
+			    : _("Could not load standard sources from CrossWire."));
 	load_source_treeviews();
 }
 
@@ -2339,6 +2406,9 @@ on_button6_clicked(GtkButton * button,
 	gchar *type = NULL;
 	gchar *source = NULL;
 	gchar *directory = NULL;
+	gchar *user = NULL;
+	gchar *pass = NULL;
+	gchar *uid = NULL;
 	gchar *str;
 	GtkTreeModel *model;
 
@@ -2356,7 +2426,11 @@ on_button6_clicked(GtkButton * button,
 			   COLUMN_TYPE, &type,
 			   COLUMN_CAPTION, &caption,
 			   COLUMN_SOURCE, &source,
-			   COLUMN_DIRECTORY, &directory, -1);
+			   COLUMN_DIRECTORY, &directory,
+			   COLUMN_USER, &user,
+			   COLUMN_PASS, &pass,
+			   COLUMN_UID, &uid,
+			   -1);
 	name_string = caption;
 
 	str = g_strdup_printf("<span weight=\"bold\">%s</span>\n\n%s|%s|%s|%s",
@@ -2371,6 +2445,9 @@ on_button6_clicked(GtkButton * button,
 	g_free(caption);
 	g_free(source);
 	g_free(directory);
+	g_free(user);
+	g_free(pass);
+	g_free(uid);
 	g_free(str);
 
 	working = FALSE;
@@ -2425,10 +2502,14 @@ on_button7_clicked(GtkButton * button,
 	dialog->label2 = _("Type:");
 	dialog->label3 = _("Host:");
 	dialog->label4 = _("Directory:");
+	dialog->label5 = _("User (optional):");
+	dialog->label6 = _("Password (optional):");
 	dialog->text1 = g_strdup("CrossWire");
 	dialog->text2 = g_strdup("FTP");
 	dialog->text3 = g_strdup("ftp.crosswire.org");
 	dialog->text4 = g_strdup("/pub/sword/raw");
+	dialog->text5 = g_strdup("");
+	dialog->text6 = g_strdup("");
 	dialog->cancel = TRUE;
 	dialog->ok = TRUE;
 
@@ -2438,6 +2519,8 @@ on_button7_clicked(GtkButton * button,
 		g_free(dialog->text2);
 		g_free(dialog->text3);
 		g_free(dialog->text4);
+		g_free(dialog->text5);
+		g_free(dialog->text6);
 		g_free(dialog);
 		g_string_free(str, TRUE);
 		goto out;
@@ -2456,6 +2539,9 @@ on_button7_clicked(GtkButton * button,
 		g_free((gchar*)mms->caption);
 		g_free((gchar*)mms->source);
 		g_free((gchar*)mms->directory);
+		g_free((gchar*)mms->user);
+		g_free((gchar*)mms->pass);
+		g_free((gchar*)mms->uid);
 		g_free(mms);
 	}
 	g_list_free(tmp2);
@@ -2463,10 +2549,14 @@ on_button7_clicked(GtkButton * button,
 	if (!name_conflict) {
 		gtk_list_store_append(GTK_LIST_STORE(model), &iter);
 		gtk_list_store_set(GTK_LIST_STORE(model), &iter,
-				   COLUMN_TYPE, dialog->text2,
-				   COLUMN_CAPTION, dialog->text1,
-				   COLUMN_SOURCE, dialog->text3,
-				   COLUMN_DIRECTORY, dialog->text4, -1);
+				   COLUMN_TYPE,      dialog->text2,
+				   COLUMN_CAPTION,   dialog->text1,
+				   COLUMN_SOURCE,    dialog->text3,
+				   COLUMN_DIRECTORY, dialog->text4,
+				   COLUMN_USER,      dialog->text5,
+				   COLUMN_PASS,      dialog->text6,
+				   COLUMN_UID,       "",
+				   -1);
 		save_sources();
 
 		/* set the new item's index as active */
@@ -2482,6 +2572,9 @@ on_button7_clicked(GtkButton * button,
 			g_free((gchar*)mms->caption);
 			g_free((gchar*)mms->source);
 			g_free((gchar*)mms->directory);
+			g_free((gchar*)mms->user);
+			g_free((gchar*)mms->pass);
+			g_free((gchar*)mms->uid);
 			g_free(mms);
 		}
 		g_list_free(tmp2);
@@ -2495,6 +2588,8 @@ on_button7_clicked(GtkButton * button,
 	g_free(dialog->text2);
 	g_free(dialog->text3);
 	g_free(dialog->text4);
+	g_free(dialog->text5);
+	g_free(dialog->text6);
 	g_free(dialog);
 	g_string_free(str, TRUE);
 
@@ -2539,6 +2634,9 @@ on_button8_clicked(GtkButton * button,
 	gchar *type = NULL;
 	gchar *source = NULL;
 	gchar *directory = NULL;
+	gchar *user = NULL;
+	gchar *pass = NULL;
+	gchar *uid = NULL;
 	GtkTreeModel *model;
 	GString *str;
 
@@ -2558,7 +2656,11 @@ on_button8_clicked(GtkButton * button,
 			   COLUMN_TYPE, &type,
 			   COLUMN_CAPTION, &caption,
 			   COLUMN_SOURCE, &source,
-			   COLUMN_DIRECTORY, &directory, -1);
+			   COLUMN_DIRECTORY, &directory,
+			   COLUMN_USER, &user,
+			   COLUMN_PASS, &pass,
+			   COLUMN_UID, &uid,
+			   -1);
 	name_string = caption;
 
 	yes_no_dialog = gui_new_dialog();
@@ -2583,6 +2685,9 @@ on_button8_clicked(GtkButton * button,
 	g_free(caption);
 	g_free(source);
 	g_free(directory);
+	g_free(user);
+	g_free(pass);
+	g_free(uid);
 	g_string_free(str, TRUE);
 
 	working = FALSE;

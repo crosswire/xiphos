@@ -428,6 +428,9 @@ GList *backend_module_mgr_list_remote_sources(void)
 		mms->type = g_strdup(it->second->type);
 		mms->source = g_strdup(it->second->source);
 		mms->directory = g_strdup(it->second->directory);
+		mms->user = g_strdup(it->second->u);
+		mms->pass = g_strdup(it->second->p);
+		mms->uid = g_strdup(it->second->uid);
 		retval = g_list_append(retval, (MOD_MGR_SOURCE *) mms);
 	}
 	delete inst_mgr;
@@ -477,6 +480,9 @@ GList *backend_module_mgr_list_local_sources(void)
 			mms->type = is->type;
 			mms->source = is->source;
 			mms->directory = is->directory;
+			mms->user = is->u;
+			mms->pass = is->p;
+			mms->uid = is->uid;
 			retval = g_list_append(retval,(MOD_MGR_SOURCE*) mms);
 			sourceBegin++;
 		}
@@ -654,7 +660,10 @@ void backend_module_mgr_add_source(const char * vtype,
 				   const char * type,
 				   const char * caption,
 				   const char * source,
-				   const char * directory)
+				   const char * directory,
+				   const char * user,
+				   const char * pass,
+				   const char * uid)
 {
 	const gchar *envhomedir = g_getenv(HOMEVAR);
 	SWBuf confPath = (envhomedir) ? envhomedir : ".";
@@ -667,6 +676,9 @@ void backend_module_mgr_add_source(const char * vtype,
 	is.caption = caption;
 	is.source = source;
 	is.directory = directory;
+	is.u = user;
+	is.p = pass;
+	is.uid = uid;
 	config.Sections["Sources"].insert(ConfigEntMap::value_type(vtype, 
 		is.getConfEnt().c_str()));	
 	config.Save();

@@ -55,6 +55,9 @@ struct  _mms {
 	const char *type;
 	const char *source;
 	const char *directory;
+	const char *user;
+	const char *pass;
+	const char *uid;
 };
 int main_module_mgr_index_mod(char * module_name);
 int main_module_mgr_delete_index_mod(char * module_name);
@@ -87,7 +90,10 @@ void mod_mgr_add_source(const char * vtype,
 			const char * type, 
 			const char * caption, 
 			const char * source, 
-			const char * directory);
+			const char * directory,
+			const char * user,
+			const char * pass,
+			const char * uid);
 void mod_mgr_init(const char *dir,
 		  gboolean augment,
 		  gboolean regular);
