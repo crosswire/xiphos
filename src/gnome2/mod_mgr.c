@@ -31,6 +31,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <errno.h>
+#include <time.h>
 
 #include <bonobo.h>
 #include <gnome.h>
@@ -2547,6 +2548,20 @@ on_button7_clicked(GtkButton * button,
 	g_list_free(tmp2);
 
 	if (!name_conflict) {
+		/* timestamped UID field */
+		time_t now = time(NULL);
+		struct tm *local = localtime(&now);
+		/*
+		 * who is the psychotic moron who gave us tm_year as "# yrs
+		 * since 1900" and tm_mon as "# months since january, [0-11]"?
+		 * flensing, trepanation, and hari-kari all apply.
+		 */
+		gchar *uid = g_strdup_printf("%d%02d%02d%02d%02d%02d",
+					     local->tm_year+1900,
+					     local->tm_mon+1, local->tm_mday,
+					     local->tm_hour, local->tm_min,
+					     local->tm_sec);
+
 		gtk_list_store_append(GTK_LIST_STORE(model), &iter);
 		gtk_list_store_set(GTK_LIST_STORE(model), &iter,
 				   COLUMN_TYPE,      dialog->text2,
@@ -2555,8 +2570,9 @@ on_button7_clicked(GtkButton * button,
 				   COLUMN_DIRECTORY, dialog->text4,
 				   COLUMN_USER,      dialog->text5,
 				   COLUMN_PASS,      dialog->text6,
-				   COLUMN_UID,       "",
+				   COLUMN_UID,       uid,
 				   -1);
+		g_free(uid);
 		save_sources();
 
 		/* set the new item's index as active */
