@@ -4,6 +4,7 @@ mozilla_include_subdirs =	\
 	xpcom
 
 INCLUDES =  \
+    $(SWORD_CFLAGS) \
     $(GNOME_CFLAGS) \
     $(GTKHTML_CFLAGS) \
     $(addprefix -I$(GECKO_INCLUDE_ROOT)/,$(mozilla_include_subdirs))      \

@@ -2503,14 +2503,14 @@ on_button7_clicked(GtkButton * button,
 	dialog->label2 = _("Type:");
 	dialog->label3 = _("Host:");
 	dialog->label4 = _("Directory:");
+#ifdef SWORD_MULTIVERSE
 	dialog->label5 = _("User (optional):");
 	dialog->label6 = _("Password (optional):");
+#endif
 	dialog->text1 = g_strdup("CrossWire");
 	dialog->text2 = g_strdup("FTP");
 	dialog->text3 = g_strdup("ftp.crosswire.org");
 	dialog->text4 = g_strdup("/pub/sword/raw");
-	dialog->text5 = g_strdup("");
-	dialog->text6 = g_strdup("");
 	dialog->cancel = TRUE;
 	dialog->ok = TRUE;
 
