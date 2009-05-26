@@ -34,7 +34,7 @@
 #include "main/url.hh"
 
 
-#include "gui/toolbar_nav.h"
+//#include "gui/toolbar_nav.h"
 #include "gui/commentary_dialog.h"
 #include "gui/bibletext_dialog.h"
 

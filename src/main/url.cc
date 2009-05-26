@@ -52,7 +52,7 @@
 #include "gui/parallel_dialog.h"
 #include "gui/parallel_view.h"
 #include "gui/main_window.h"
-#include "gui/toolbar_nav.h"
+//#include "gui/toolbar_nav.h"
 
 #include "main/url.hh"
 #include "main/lists.h"
@@ -283,14 +283,8 @@ static gint show_separate_image(const gchar * filename, gboolean clicked)
 	}
 	if(!strcmp(stype,"verse")) {
 		if(clicked) {
-#ifdef OLD_NAVBAR
-			settings.cvparallel = backend->get_valid_key(svalue);
-			main_update_parallel_page_detached();
-			gui_set_parallel_navbar((char*)svalue);
-#else
 			gtk_entry_set_text(GTK_ENTRY(navbar_parallel.lookup_entry),svalue);
 			gtk_widget_activate(navbar_parallel.lookup_entry);
-#endif
 		} 
 	}
 	return 1;

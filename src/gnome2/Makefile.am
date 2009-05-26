@@ -68,7 +68,6 @@ xiphos_SOURCES =  \
     sidebar.c \
     sidebar_dialog.c \
     splash.c \
-    toolbar_nav.c \
     tabbed_browser.c \
     treekey-editor.c \
     utilities.c \

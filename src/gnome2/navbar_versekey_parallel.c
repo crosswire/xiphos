@@ -35,7 +35,6 @@
 #include "main/sword.h"
 #include "main/url.hh"
 
-#ifndef OLD_NAVBAR
 NAVBAR_VERSEKEY navbar_parallel;
 
 /******************************************************************************
@@ -844,4 +843,3 @@ GtkWidget *gui_navbar_versekey_parallel_new(void)
 	
 	return navbar_parallel.navbar;
 }
-#endif

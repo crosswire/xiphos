@@ -544,7 +544,7 @@ static void add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
 	}
 }
 
-#if 0
+#ifdef USE_TREEVIEW_PATH
 gboolean main_expand_treeview_to_path (GtkTreeModel *model, GtkTreeIter iter)
 {	
 	//gchar *cap = NULL;
@@ -583,7 +583,7 @@ gboolean main_expand_treeview_to_path (GtkTreeModel *model, GtkTreeIter iter)
 	main_setup_navbar_book(mod, (key ? atoi(key) : 0));
 	return 1;
 }
-#endif
+#endif /* USE_TREEVIEW_PATH */
 
 /******************************************************************************
  * Name
@@ -697,16 +697,8 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 
 		if (key)
 			main_url_handler(key, TRUE);
-		else {
-#ifdef OLD_NAVBAR
-			if (navbar_main.module_name)
-				g_free(navbar_main.module_name);
-			navbar_main.module_name = g_strdup(mod);
-			main_navbar_fill_book_combo(navbar_main);
-#else
-#endif
+		else 
 			main_display_bible(mod, settings.currentverse);
-		}
 
 		break;
 	case COMMENTARY_TYPE:

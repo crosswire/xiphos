@@ -37,7 +37,7 @@
 #include "main/sword.h"
 #include "main/tab_history.h"
 
-#ifndef OLD_NAVBAR
+
 /******************************************************************************
  * Name
  *   on_verse_button_up_clicked
@@ -923,4 +923,3 @@ GtkWidget *gui_navbar_versekey_dialog_new(DIALOG_DATA * dialog)
 	
 	return dialog->navbar.navbar;
 }
-#endif
