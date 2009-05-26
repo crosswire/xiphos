@@ -31,11 +31,7 @@ typedef struct _dialog_data DIALOG_DATA;
 
 #include "main/global_ops.hh"
 #include "main/navbar_book.h"
-//#ifdef OLD_NAVBAR
-#include "main/navbar.h"
-//#else
 #include "main/navbar_versekey.h"
-//#endif
 
 struct _dialog_data {
 	/* dialog widgets */
@@ -83,14 +79,8 @@ struct _dialog_data {
 	
         GObject *mod_selection;
 	
-#ifdef OLD_NAVBAR
-	NAVBAR navbar;
-#else
 	NAVBAR_VERSEKEY navbar;
-#endif
-
 	NAVBAR_BOOK navbar_book;
-//	GLOBAL_OPS *ops;
 };
 
 void main_dialogs_book_heading(DIALOG_DATA * d);

@@ -43,7 +43,7 @@
 #include "gui/shortcutbar_main.h"
 #include "gui/shortcutbar_dialog.h"
 #include "gui/sidebar.h"
-#include "gui/toolbar_nav.h"
+//#include "gui/toolbar_nav.h"
 #include "gui/utilities.h"
 #include "gui/bibletext.h"
 #include "gui/parallel_view.h"
@@ -553,11 +553,7 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 
 	case GS_KEY_L: // Ctrl-L  verse entry
 		if (state == GDK_CONTROL_MASK)
-#ifdef OLD_NAVBAR
-			gtk_widget_grab_focus(nav_bar.lookup_entry);
-#else
 			gtk_widget_grab_focus(navbar_versekey.lookup_entry);
-#endif
 		break;
 
 	case GS_KEY_F: // Ctrl-F  find text
@@ -587,11 +583,7 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 
 	case GS_KEY_C: // Alt-C  commentary pane
 		if (state == GDK_MOD1_MASK) {
-#ifdef OLD_NAVBAR
-			gtk_widget_grab_focus(nav_bar.lookup_entry);
-#else
 			gtk_widget_grab_focus(navbar_versekey.lookup_entry);
-#endif
 			gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),0);
 		}
 		break;
@@ -828,15 +820,9 @@ void create_mainwindow(void)
 	/*
 	 * nav toolbar
 	 */
-#ifdef OLD_NAVBAR
-	nav_toolbar = gui_create_nav_toolbar(NULL);
-	gtk_box_pack_start(GTK_BOX(widgets.page), nav_toolbar, FALSE,
-			   FALSE, 0);
-#else
 	nav_toolbar = gui_navbar_versekey_new();
 	gtk_box_pack_start(GTK_BOX(widgets.page), nav_toolbar, FALSE,
 			   FALSE, 0);
-#endif
 	/*
 	 * end nav toolbar
 	 */
@@ -1053,11 +1039,7 @@ void create_mainwindow(void)
 			   (epaned_button_release_event),
 			   (gchar *) "hpaned1");
 
-#ifdef OLD_NAVBAR
-	gtk_widget_grab_focus(nav_bar.lookup_entry);
-#else
 	gtk_widget_grab_focus(navbar_versekey.lookup_entry);
-#endif
 
 	gtk_window_set_default_size((GtkWindow *)widgets.app,
                                              settings.gs_width,

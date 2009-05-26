@@ -150,9 +150,14 @@ if test "x$autoclear" = xyes; then
   AC_DEFINE(USE_PREVIEWER_AUTOCLEAR, 1, [Define if wish to enable previewer autoclear])
 fi
 
-AC_ARG_ENABLE(old_navbar,[  --enable-old_navbar    use old_navbar [default=no]],old_navbar=$enableval,old_navbar=no)
-if test "x$old_navbar" = xyes; then
-  AC_DEFINE(OLD_NAVBAR, 1, [Define if wish to use the old style navbar])
+dnl AC_ARG_ENABLE(old_navbar,[  --enable-old_navbar    use old_navbar [default=no]],old_navbar=$enableval,old_navbar=no)
+dnl if test "x$old_navbar" = xyes; then
+dnl   AC_DEFINE(OLD_NAVBAR, 1, [Define if wish to use the old style navbar])
+dnl fi
+
+AC_ARG_ENABLE(treeview_path,[  --enable-treeview_path    use  treeview_path [default=no]],treeview_path=$enableval,treeview_path=no)
+if test "x$treeview_path" = xyes; then
+  AC_DEFINE(USE_TREEVIEW_PATH, 1, [Define if wish to use the treeview paths])
 fi
 
 AC_ARG_ENABLE(gtkhtml,[  --enable-gtkhtml    use gtkhtml instead of gtkmozembed [default=no]],gtkhtml=$enableval,gtkhtml=no)

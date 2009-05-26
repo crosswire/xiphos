@@ -120,7 +120,7 @@ void  gui_sync_module_treeview(gint direction)
  * Return value
  *   void
  */
-#if 0
+#ifdef USE_TREEVIEW_PATH
 void gui_save_treeview_path_string (const gchar * path_str, const gchar * book_name)
 {
 	gchar file[250];
@@ -278,7 +278,7 @@ gboolean gui_expand_treeview_to_path (GtkTreeView * tree, const gchar * book_nam
 	
 	return 1;
 }
-#endif
+#endif /* USE_TREEVIEW_PATH */
 
 /******************************************************************************
  * Name

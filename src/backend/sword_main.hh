@@ -38,7 +38,7 @@ using namespace sword;
 class BackEnd {
 	SWMgr *main_mgr;
 	SWMgr *display_mgr;
-	TreeKeyIdx *tree_key;
+	//TreeKeyIdx *tree_key;
 	ListKey results;
 	ListKey search_range;
 	ListKey	search_scope_list; //--search list for searching verses found on last search
@@ -50,6 +50,7 @@ class BackEnd {
 	//SWFilter *osis2html;
 	
 public:	
+	TreeKeyIdx *tree_key;
 	SWModule *display_mod;
 		
 	const char *version;	

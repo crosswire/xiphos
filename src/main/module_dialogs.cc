@@ -796,17 +796,11 @@ void main_free_on_destroy(DIALOG_DATA * d)
 	g_free(d->key);
 	g_free(d->mod_name);
 	
-#ifdef OLD_NAVBAR
-		if(d->navbar.key)
-			g_free(d->navbar.key);
-		if(d->navbar.module_name)
-			g_free(d->navbar.module_name);
-#else
 		if (d->navbar.module_name)
 			g_string_free(d->navbar.module_name,TRUE);
 		if (d->navbar.key)
 			g_string_free(d->navbar.key,TRUE);
-#endif
+	
 	if((BackEnd*)d->backend) {
 		BackEnd* be = (BackEnd*)d->backend;
 		delete be;
@@ -853,10 +847,7 @@ void main_dialog_goto_bookmark(const gchar * module, const gchar * key)
 			}
 			if(t->mod_type == TEXT_TYPE || 
 					t->mod_type == COMMENTARY_TYPE)
-#ifdef OLD_NAVBAR
-				main_navbar_set(t->navbar, key);
-#else
-#endif
+				
 			be->display_mod->Display();
 			gdk_window_raise(t->dialog->window);
 			return;
@@ -974,15 +965,8 @@ void main_dialogs_shutdown(void)
 			BackEnd* be = (BackEnd*)t->backend;
 			delete be;
 		}
-#ifdef OLD_NAVBAR
-		if(t->navbar.key)
-			g_free(t->navbar.key);
-		if(t->navbar.module_name)
-			g_free(t->navbar.module_name);
-#else
 		g_string_free(t->navbar.module_name,TRUE);
 		g_string_free(t->navbar.key,TRUE);
-#endif
 		g_free(t->mod_name);
 		g_free(t->key);
 		g_free(t);
@@ -1305,14 +1289,8 @@ static gint sword_uri(DIALOG_DATA * t, const gchar * url, gboolean clicked)
 	
 	be->set_module_key(t->mod_name, t->key);
 	be->display_mod->Display();
-	if(t->navbar.module_name) {
-#ifdef OLD_NAVBAR
-		main_navbar_set(t->navbar, t->key);
-#else
+	if(t->navbar.module_name) 
 		main_navbar_versekey_set(t->navbar, t->key);
-#endif
-		
-	}
 	
 	g_free(module);
 	g_free(key);
@@ -1525,15 +1503,8 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 		else			
 			t->key = g_strdup(settings.currentverse);
 		dlg_bible = t;
-#ifdef OLD_NAVBAR
-		t->navbar.is_dialog = TRUE;
-		t->navbar.key = g_strdup(settings.currentverse);
-		t->navbar.module_name = g_strdup(mod_name);
-		main_navbar_fill_book_combo(t->navbar);
-#else
 		t->navbar.module_name = g_string_new(mod_name);
 		t->navbar.key =  g_string_new(settings.currentverse); 
-#endif
 		break;
 
 	case COMMENTARY_TYPE:
@@ -1545,15 +1516,8 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 			t->key = g_strdup(key);
 		else			
 			t->key = g_strdup(settings.currentverse);
-#ifdef OLD_NAVBAR
-		t->navbar.is_dialog = TRUE;
-		t->navbar.key = g_strdup(settings.currentverse);
-		t->navbar.module_name = g_strdup(mod_name);
-		main_navbar_fill_book_combo(t->navbar);
-#else
 		t->navbar.module_name = g_string_new(mod_name);
 		t->navbar.key =  g_string_new(settings.currentverse); 
-#endif
 		break;
 
 	case DICTIONARY_TYPE:
@@ -1630,10 +1594,10 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 	}
 	if(type == TEXT_TYPE)
 		main_dialogs_clear_viewer(t); 
-#ifndef OLD_NAVBAR	
+	
 	if(type == COMMENTARY_TYPE || type == TEXT_TYPE)
 		main_navbar_versekey_set(t->navbar, (char*)t->key);
-#endif		
+	
 	if(type == DICTIONARY_TYPE)
 		gtk_entry_set_text(GTK_ENTRY(t->entry),t->key);	
 	return t;

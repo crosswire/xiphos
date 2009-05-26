@@ -45,7 +45,7 @@
 #include "gui/dictlex_dialog.h"
 #include "gui/gbs_dialog.h"
 #include "gui/sidebar.h"
-#include "gui/toolbar_nav.h"
+//#include "gui/toolbar_nav.h"
 #include "gui/widgets.h"
 
 #include "main/settings.h"

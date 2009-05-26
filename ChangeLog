@@ -1,3 +1,8 @@
+2009-05-26 terry <tbiggs@users.sourceforge.net>
+
+	* removed old navbar code
+	* added --enable-treeview_path option to configure.in
+
 2009-05-24  karl <charcoal@users.sf.net>
 
 	* fix #2777165 Opening aplication doesn't bring it to previous place.
