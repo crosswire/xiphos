@@ -409,14 +409,10 @@ GtkWidget *main_book_drop_down_new(void)
 void main_setup_navbar_book(gchar * book_name, unsigned long offset)
 {
 	gchar *tmpbuf = NULL;
-	int level;
 	GS_message(("offset: %ld",offset));
 	backend->set_module(book_name);
 	backend->set_treekey(offset);
-	
-	level = backend->tree_key->getLevel();
-	GS_message(("\n\nlevel: %d\n\n",level));
-	
+		
 	tmpbuf = backend->get_key_from_offset(offset);
 	gtk_entry_set_text(GTK_ENTRY(navbar_book.lookup_entry), tmpbuf);
 	gtk_tooltips_set_tip(navbar_book.tooltips,
