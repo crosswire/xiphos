@@ -57,7 +57,6 @@ src/gnome2/sidebar.c
 src/gnome2/sidebar_dialog.c
 src/gnome2/splash.c
 src/gnome2/tabbed_browser.c
-src/gnome2/toolbar_nav.c
 src/gnome2/treekey-editor.c
 src/gnome2/utilities.c
 src/gnome2/xiphos.c

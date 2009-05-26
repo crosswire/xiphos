@@ -97,12 +97,6 @@ void frontend_init(void)
 	settings.havebdb = main_is_module("BDB");
 	
 	/*
-	 * get and load books of the Bible 
-	 */
-#ifdef OLD_NAVBAR
-	main_navbar_fill_book_combo(navbar_main);
-#endif
-	/*
 	 *  setup sidebar
 	 */
 	gui_create_sidebar(widgets.epaned);
@@ -251,11 +245,6 @@ void shutdown_frontend(void)
 		g_object_unref(pixbufs->pixbuf_opened);
 	if(pixbufs->pixbuf_helpdoc)
 		g_object_unref(pixbufs->pixbuf_helpdoc);
-
-	if(navbar_main.module_name) 
-		g_free(navbar_main.module_name);
-	if(navbar_main.key) 
-		g_free(navbar_main.key);
 	
 	/* free verse list used for saving search results */
 	if (list_of_verses) {
@@ -296,10 +285,9 @@ void shutdown_frontend(void)
 	main_dialogs_shutdown();
 	main_delete_sidebar_search_backend();
 	main_delete_parallel_view();
-#ifndef OLD_NAVBAR	
+	
 	g_string_free(navbar_versekey.module_name,TRUE);
 	g_string_free(navbar_versekey.key,TRUE);
-#endif
 	
 	GS_print(("\n%s\n", "Xiphos is shutdown"));
 }

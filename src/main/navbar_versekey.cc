@@ -218,8 +218,7 @@ void on_nt_book_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 	VerseKey vkey;
 	GtkWidget *entry = NULL;
 	int book = GPOINTER_TO_INT(user_data);
-
-#ifndef OLD_NAVBAR	
+	
 	vkey.AutoNormalize(1);
 	switch(c_type) {
 		case NB_MAIN:
@@ -247,7 +246,6 @@ void on_nt_book_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 		gtk_entry_set_text(GTK_ENTRY(entry),vkey.getText());
 		gtk_widget_activate(entry);
 	}
-#endif
 }
 
 
@@ -274,7 +272,7 @@ void on_ot_book_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 	VerseKey vkey;
 	GtkWidget *entry = NULL;
 	int book = GPOINTER_TO_INT(user_data);
-#ifndef OLD_NAVBAR	
+//#ifndef OLD_NAVBAR	
 	vkey.AutoNormalize(1);
 	
 	switch(c_type) {
@@ -303,7 +301,7 @@ void on_ot_book_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 		gtk_entry_set_text(GTK_ENTRY(entry),vkey.getText());
 		gtk_widget_activate(entry);
 	}
-#endif
+//#endif
 }
 
 
@@ -331,7 +329,7 @@ void on_chapter_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 	GtkWidget *entry = NULL;
 	int chapter = GPOINTER_TO_INT(user_data);
 		
-#ifndef OLD_NAVBAR	
+//#ifndef OLD_NAVBAR	
 	vkey.AutoNormalize(1);
 	
 	switch(c_type) {
@@ -359,7 +357,7 @@ void on_chapter_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 		gtk_entry_set_text(GTK_ENTRY(entry),vkey.getText());
 		gtk_widget_activate(entry);
 	}
-#endif
+//#endif
 }
 
 
@@ -387,7 +385,7 @@ void on_verse_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 	GtkWidget *entry = NULL;
 	int verse = GPOINTER_TO_INT(user_data);
 	
-#ifndef OLD_NAVBAR	
+//#ifndef OLD_NAVBAR	
 	vkey.AutoNormalize(1);
 	switch(c_type) {
 		case NB_MAIN:
@@ -414,7 +412,7 @@ void on_verse_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 		gtk_entry_set_text(GTK_ENTRY(entry),vkey.getText());
 		gtk_widget_activate(entry);
 	}
-#endif
+//#endif
 }
 
 

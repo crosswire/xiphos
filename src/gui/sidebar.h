@@ -26,6 +26,10 @@
 extern "C" {
 #endif
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+	
 typedef struct _sidebar SIDEBAR;
 struct _sidebar {
 	GtkWidget *module_list;
@@ -53,11 +57,11 @@ struct _search_results {
 
 extern GList *list_of_verses;
 
-/*  *** until after 3.1 ***
+#ifdef USE_TREEVIEW_PATH
 void gui_collapse_treeview_to_book (GtkTreeView * tree, const gchar * book_name);
 void gui_save_treeview_path_string (const gchar * path_str, const gchar * book_name);
 gboolean gui_expand_treeview_to_path (GtkTreeView * tree, const gchar * book_name);
-*/
+#endif
 void gui_set_sidebar_program_start(void);
 void gui_sidebar_showhide(void);
 //gboolean main_sidebar_display_dictlex(char *mod_name, char *key);

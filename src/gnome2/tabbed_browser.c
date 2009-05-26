@@ -836,12 +836,13 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
 		pt = (PASSAGE_TAB_INFO*)g_list_nth_data(*tl, page_num);
 	removed_page = 1;
 	//cur_passage_tab = pt;
-	
-	/*  *** until after 3.1 ***
+
+#ifdef USE_TREEVIEW_PATH	
 	if(cur_passage_tab && cur_passage_tab->book_mod)
 		gui_collapse_treeview_to_book (GTK_TREE_VIEW (sidebar.module_list), 
 					       cur_passage_tab->book_mod);
-	*/
+#endif /* USE_TREEVIEW_PATH */
+	
 	if(!pt->showparallel) {	
 		if(cur_passage_tab && cur_passage_tab->paratab)
 			gtk_widget_hide(cur_passage_tab->paratab);
@@ -865,11 +866,13 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
 	
 	//sets the book mod and key
 	main_display_book(pt->book_mod, pt->book_offset);
-	/*  *** until after 3.1 ***
+	
+#ifdef USE_TREEVIEW_PATH
 	if (pt->showcomms && pt->book_mod)
 		gui_expand_treeview_to_path (GTK_TREE_VIEW (sidebar.module_list), 
 					     pt->book_mod);
-	*/
+#endif /* USE_TREEVIEW_PATH */
+	
 	comm_showing = settings.comm_showing;
 	settings.comm_showing = 1;
 	//sets the commentary mod and key
@@ -877,14 +880,9 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
 	settings.comm_showing = comm_showing; 
 	//sets the text mod and key
 	main_display_bible(pt->text_mod, pt->text_commentary_key);
-	//if(navbar_versekey.module_name)
-		//g_free(navbar_versekey.module_name);
-#ifndef OLD_NAVBAR
+	
 	navbar_versekey.module_name = g_string_assign(navbar_versekey.module_name,pt->text_mod);
-	//if(navbar_versekey.key)
-		//g_free(navbar_versekey.key);
 	navbar_versekey.key = g_string_assign(navbar_versekey.key,pt->text_commentary_key);
-#endif
 	main_update_nav_controls(pt->text_commentary_key);
 	
 	//sets the dictionary mod and key

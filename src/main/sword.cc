@@ -316,14 +316,11 @@ gchar *main_update_nav_controls(const gchar * key)
 	settings.currentverse = xml_get_value("keys", "verse");
 	
 	settings.apply_change = FALSE;
-#ifdef OLD_NAVBAR
-	main_navbar_set(navbar_main, val_key);
-#else
-	navbar_versekey.module_name = g_string_assign(navbar_versekey.module_name,settings.MainWindowModule);
 	
+	navbar_versekey.module_name = g_string_assign(navbar_versekey.module_name,settings.MainWindowModule);
 	navbar_versekey.key = g_string_assign(navbar_versekey.key,val_key);
 	main_navbar_versekey_set(navbar_versekey, val_key);
-#endif
+	
 	settings.apply_change = TRUE;
 	return val_key;
 }
@@ -1079,20 +1076,13 @@ void main_display_bible(const char * mod_name, const char * key)
 			companion_activity = FALSE;
 		}
 		if (companion) g_free(companion);
-#ifdef OLD_NAVBAR
-		gui_reassign_strdup(&navbar_main.module_name, settings.MainWindowModule);
-		gui_reassign_strdup(&navbar_main.key, settings.currentverse);
-		main_navbar_fill_book_combo(navbar_main);
-#else
-		//if (navbar_versekey.module_name) 
-			//g_free(navbar_versekey.module_name);
+		
 		navbar_versekey.module_name = g_string_assign(navbar_versekey.module_name,
 							      settings.MainWindowModule);
-		//if (navbar_versekey.key)
-			//g_free(navbar_versekey.key);
+		
 		navbar_versekey.key = g_string_assign(navbar_versekey.key,
 						      settings.currentverse);
-#endif
+		
 		main_search_sidebar_fill_bounds_combos();
 	}
 	

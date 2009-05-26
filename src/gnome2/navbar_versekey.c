@@ -49,7 +49,6 @@ NAVBAR_VERSEKEY navbar_versekey;
 
 extern PASSAGE_TAB_INFO *cur_passage_tab;
 
-#ifndef OLD_NAVBAR
 
 
 /******************************************************************************
@@ -966,4 +965,3 @@ GtkWidget *gui_navbar_versekey_new(void)
 
 	return navbar_versekey.navbar;
 }
-#endif

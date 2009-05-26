@@ -29,7 +29,7 @@
 #include "gui/main_menu.h"
 #include "gui/main_window.h"
 #include "gui/tabbed_browser.h"
-#include "gui/toolbar_nav.h"
+//#include "gui/toolbar_nav.h"
 #include "gui/utilities.h"
 #include "gui/xiphos.h"
 #include "gui/widgets.h"
@@ -42,13 +42,8 @@
 #include "main/navbar_versekey.h"
 
 /* de-uglify all references to button sensitivitiy */
-#ifdef OLD_NAVBAR
-# define BUTTON_BACK	nav_bar.button_back
-# define BUTTON_FORW	nav_bar.button_forward
-#else
 # define BUTTON_BACK	navbar_versekey.button_history_back
 # define BUTTON_FORW	navbar_versekey.button_history_next
-#endif
 
 /******************************************************************************
  * Name
