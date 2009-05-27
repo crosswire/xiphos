@@ -1,6 +1,7 @@
 2009-05-27  matysek <matysek03@users.sf.net>
 
 	* improve uninstall speed by explicit removing folder festival
+	* removed the need to install Sword locale to a separate folder
 
 2009-05-18  matysek <matysek03@users.sf.net>
 
