@@ -61,6 +61,7 @@
 #include "gui/tabbed_browser.h"
 #include "gui/widgets.h"
 #include "gui/tabbed_browser.h"
+#include "gui/menu_popup.h"
 
 #ifdef USE_GTKHTML3_14_23
 #include "editor/slib-editor.h"
@@ -673,6 +674,10 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 	case GS_KEY_F4: // F4 module manager
 		if (state == 0)
 			on_module_manager_activate (NULL, NULL);
+		break;
+	case GS_KEY_F10: // F10 bible module right click
+		if (state == GDK_SHIFT_MASK)
+			gui_menu_popup(settings.MainWindowModule, NULL);
 		break;
 	}
 	GS_message(("on_vbox1_key_press_event\nkeycode: %d, state: %d",
