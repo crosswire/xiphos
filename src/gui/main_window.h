@@ -98,6 +98,7 @@ void gui_show_main_window(void);
 #define	GS_KEY_F2	68
 #define	GS_KEY_F3	69
 #define	GS_KEY_F4	70
+#define	GS_KEY_F10	76
 
 #define	GS_KEY_B	56
 #define	GS_KEY_C	54
@@ -124,6 +125,7 @@ void gui_show_main_window(void);
 #define	GS_KEY_F2	113
 #define	GS_KEY_F3	114
 #define	GS_KEY_F4	115
+#define	GS_KEY_F10	121
 
 #define	GS_KEY_B	66
 #define	GS_KEY_C	67
