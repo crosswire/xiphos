@@ -387,6 +387,7 @@ Section Uninstall
     RMDir /r "$INSTDIR\data\*.*"
     RMDir /r "$INSTDIR\dict\*.*"
     RMDir /r "$INSTDIR\etc\*.*"
+    RMDir /r "$INSTDIR\festival\*.*"
     RMDir /r "$INSTDIR\lib\*.*"
     RMDir /r "$INSTDIR\libexec\*.*"
     RMDir /r "$INSTDIR\share\*.*"
