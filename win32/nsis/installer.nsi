@@ -49,19 +49,11 @@
 
     ; Paths with application files for installer
     !define PATH_CORE "..\binaries\Xiphos"
-    !define PATH_SWORD "..\binaries\Sword" 
     !define PATH_IMG "pixmaps"
     !define PATH_FONT "..\fonts"
 
-    ; Folder in ALLUSERSAPPS/Application Data/ for Sword files
-    ; the string 'Application Data' maybe also localized in
-    ; different Win32 versions.
-    ; e.g. in Czech Windows it is 'Data aplikací'
-    !define INSTPATH_SWORD "Sword"
-
     ; Files
     !define CORE_F "${PATH_CORE}\*.*"
-    !define SWORD_F "${PATH_SWORD}\*.*"
 
     ; Following two definitions required by Uninstall log.
     !define INSTDIR_REG_ROOT "HKLM" # HKEY_LOCAL_MACHINE
@@ -290,14 +282,6 @@ Section $(CORE_SEC_TITLE) SecCore
     !insertmacro UNINSTALL.LOG_OPEN_INSTALL
         File /r "${CORE_F}"
     !insertmacro UNINSTALL.LOG_CLOSE_INSTALL
-
-    ; Sword data files need to be installed for all users
-    SetShellVarContext all
-    ; Install Sword files - not needed to uninstall
-    SetOutPath '$APPDATA\${INSTPATH_SWORD}'
-    File /r "${SWORD_F}"
-    ; set to default value 
-    SetShellVarContext current
 
     ; Add uninstall information to Add/Remove Programs
     WriteRegStr ${INSTDIR_REG_ROOT} "${INSTDIR_REG_KEY}" "InstallDir" "$INSTDIR"
