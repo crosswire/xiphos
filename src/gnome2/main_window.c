@@ -674,6 +674,11 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 	case GS_KEY_F4: // F4 module manager
 		if (state == 0)
 			on_module_manager_activate (NULL, NULL);
+		else if (state == GDK_CONTROL_MASK)
+			gui_close_passage_tab(gtk_notebook_page_num
+					      (GTK_NOTEBOOK(widgets.notebook_main),
+					       ((PASSAGE_TAB_INFO*)cur_passage_tab)->
+					       page_widget));
 		break;
 	case GS_KEY_F10: // F10 bible module right click
 		if (state == GDK_SHIFT_MASK)
