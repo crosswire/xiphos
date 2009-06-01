@@ -658,7 +658,10 @@ CacheHeader(ModuleCache::CacheVerse& cVerse,
 							heading)) != NULL) {
 		preverse2 = mod.RenderText(preverse);
 		text = g_strdup_printf("<br><b>%s</b><br><br>",
-				       preverse2);
+				       (((ops->strongs || ops->lemmas) ||
+					ops->morphs)
+					? block_render(preverse2)
+					: preverse2));
 		CleanupContent(text, ops, mod.Name());
 
 		cVerse.AppendHeader(text);
@@ -1504,8 +1507,8 @@ GTKChapDisp::Display(SWModule &imodule)
 				  : imodule.RenderText());
 			CleanupContent(rework, ops, imodule.Name());
 			cVerse.SetText(rework, cache_flags);
-		} else
-			rework = cVerse.GetText();
+		}
+		rework = cVerse.GetText();
 
 		if (!cVerse.HeaderIsValid())
 			CacheHeader(cVerse, imodule, ops, be);
@@ -1904,8 +1907,8 @@ DialogChapDisp::Display(SWModule &imodule)
 				  : imodule.RenderText());
 			CleanupContent(rework, ops, imodule.Name());
 			cVerse.SetText(rework, cache_flags);
-		} else
-			rework = cVerse.GetText();
+		}
+		rework = cVerse.GetText();
 
 		if (!cVerse.HeaderIsValid())
 			CacheHeader(cVerse, imodule, ops, be);
