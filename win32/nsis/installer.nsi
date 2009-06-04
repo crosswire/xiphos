@@ -52,6 +52,12 @@
     !define PATH_IMG "pixmaps"
     !define PATH_FONT "..\fonts"
 
+    ; Folder in ALLUSERSAPPS/Application Data/ for Sword files
+    ; the string 'Application Data' maybe also localized in
+    ; different Win32 versions.
+    ; e.g. in Czech Windows it is 'Data aplikacÃ­'
+    !define INSTPATH_SWORD "Sword"
+
     ; Files
     !define CORE_F "${PATH_CORE}\*.*"
 
@@ -282,6 +288,14 @@ Section $(CORE_SEC_TITLE) SecCore
     !insertmacro UNINSTALL.LOG_OPEN_INSTALL
         File /r "${CORE_F}"
     !insertmacro UNINSTALL.LOG_CLOSE_INSTALL
+
+    ; Shared folder for Sword modules must exist
+    SetShellVarContext all 
+    ; Shared Sword Folder 
+    SetOutPath '$APPDATA\${INSTPATH_SWORD}' 
+    ; set to default value  
+    SetShellVarContext current 
+
 
     ; Add uninstall information to Add/Remove Programs
     WriteRegStr ${INSTDIR_REG_ROOT} "${INSTDIR_REG_KEY}" "InstallDir" "$INSTDIR"

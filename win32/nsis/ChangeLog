@@ -1,3 +1,8 @@
+2009-06-04  matysek <matysek03@users.sf.net>
+
+	* Sword folder needs to be created for shared modules
+	  in %ALLUSERSAPPDATA%
+
 2009-05-27  matysek <matysek03@users.sf.net>
 
 	* improve uninstall speed by explicit removing folder festival
