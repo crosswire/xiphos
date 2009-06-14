@@ -1453,7 +1453,7 @@ GTKChapDisp::Display(SWModule &imodule)
 	gint display_boundary = ((settings.gs_hight < 500) ? 0 : (strongs_or_morph ? 1 : 2));
 
 	if (!strcmp(ModuleName, "KJV"))
-		paragraphMark = "&para;";
+		paragraphMark = "&para;&nbsp;";
 	else
 		paragraphMark = "";
 
@@ -1845,7 +1845,7 @@ DialogChapDisp::Display(SWModule &imodule)
 	gint display_boundary = (strongs_or_morph ? 1 : 2);
 
 	if (!strcmp(ModuleName, "KJV"))
-		paragraphMark = "&para;";
+		paragraphMark = "&para;&nbsp;";
 	else
 		paragraphMark = "";
 
@@ -2135,7 +2135,7 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 	gecko_html_open_stream(html,"text/html");
 
 	if (!strcmp(imodule.Name(), "KJV"))
-		paragraphMark = "&para;";
+		paragraphMark = "&para;&nbsp;";
 	else
 		paragraphMark = "";
 
