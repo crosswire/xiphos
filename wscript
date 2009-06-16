@@ -147,7 +147,7 @@ def configure(conf):
 
     ## temporary HACKS for win32
     if env['IS_WIN32']:
-        env['PREFIX'] = _prefix
+        env['PREFIX'] = 'C:/msys/home/xiphos/win32/binaries/Xiphos'
     ##
 
     conf.check_tool('g++ gcc gnu_dirs misc')
