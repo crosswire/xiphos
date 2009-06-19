@@ -1,3 +1,7 @@
+2009-06-19  karl <charcoal@users.sf.net>
+
+	* replace mibbit (no longer usable) w/freenode's own webchat.
+
 2009-06-06  karl <charcoal@users.sf.net>
 
 	* fix #2797731 minor edits for consistent names, View menu.

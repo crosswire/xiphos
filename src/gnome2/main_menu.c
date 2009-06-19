@@ -158,13 +158,13 @@ on_live_chat_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GError *error = NULL;
 	/*if (gtk_show_uri (NULL,
-			"http://embed.mibbit.com/?server=irc.freenode.net&channel=%23xiphos",
+			"http://webchat.freenode.net/?channels=xiphos",
 			GDK_CURRENT_TIME,
 			&error) == FALSE) {
 		GS_warning((error->message));
 		g_error_free (error);
 	}*/
-	if (gnome_url_show("http://embed.mibbit.com/?server=irc.freenode.net&channel=%23xiphos",
+	if (gnome_url_show("http://webchat.freenode.net/?channels=xiphos",
 				&error) == FALSE) {
 		GS_warning(("%s",error->message));
 		g_error_free (error);
