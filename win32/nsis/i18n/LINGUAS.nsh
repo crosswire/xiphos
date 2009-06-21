@@ -21,7 +21,7 @@
     !insertmacro MUI_LANGUAGE "Dutch" ; nl
     !insertmacro MUI_LANGUAGE "Portuguese" ; pt, pt_PT
     ;!insertmacro MUI_LANGUAGE "Russian" ; ru
-    ;!insertmacro MUI_LANGUAGE "Slovak" ; sk
+    !insertmacro MUI_LANGUAGE "Slovak" ; sk
     !insertmacro MUI_LANGUAGE "Swedish" ; sv_SE
     ;!insertmacro MUI_LANGUAGE "Ukrainian" ; uk
 
@@ -63,7 +63,7 @@
     !define LIC_FILE_DUTCH "${LANG_DIR}\gpl-2.0_nl.txt"
     !define LIC_FILE_PORTUGUESE "${LANG_DIR}\gpl-2.0_pt.txt"
     ;!define LIC_FILE_RUSSIAN "${LANG_DIR}\gpl-2.0_ru.txt"
-    ;!define LIC_FILE_SLOVAK "${LANG_DIR}\gpl-2.0_sk.txt"
+    !define LIC_FILE_SLOVAK "${LANG_DIR}\gpl-2.0_sk.txt"
     !define LIC_FILE_SWEDISH "${LANG_DIR}\gpl-2.0_sv_SE.txt"
     ;!define LIC_FILE_UKRAINIAN "${LANG_DIR}\gpl-2.0_uk.txt"
 
@@ -87,7 +87,7 @@
     LicenseLangString LICENSE_FILE ${LANG_DUTCH} "${LIC_FILE_DUTCH}"
     LicenseLangString LICENSE_FILE ${LANG_PORTUGUESE} "${LIC_FILE_PORTUGUESE}"
     ;LicenseLangString LICENSE_FILE ${LANG_RUSSIAN} "${LIC_FILE_RUSSIAN}"
-    ;LicenseLangString LICENSE_FILE ${LANG_SLOVAK} "${LIC_FILE_SLOVAK}"
+    LicenseLangString LICENSE_FILE ${LANG_SLOVAK} "${LIC_FILE_SLOVAK}"
     LicenseLangString LICENSE_FILE ${LANG_SWEDISH} "${LIC_FILE_SWEDISH}"
     ;LicenseLangString LICENSE_FILE ${LANG_UKRAINIAN} "${LIC_FILE_UKRAINIAN}"
 
@@ -125,7 +125,7 @@
     ReserveFile "${LIC_FILE_DUTCH}"
     ReserveFile "${LIC_FILE_PORTUGUESE}"
     ; ReserveFile "${LIC_FILE_RUSSIAN}"
-    ; ReserveFile "${LIC_FILE_SLOVAK}"
+    ReserveFile "${LIC_FILE_SLOVAK}"
     ReserveFile "${LIC_FILE_SWEDISH}"
     ; ReserveFile "${LIC_FILE_UKRAINIAN}"
 
