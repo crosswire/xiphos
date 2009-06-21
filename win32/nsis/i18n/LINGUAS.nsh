@@ -41,6 +41,7 @@
     !include "${LANG_DIR}\nb_NO.nsh"
     !include "${LANG_DIR}\nl.nsh"
     !include "${LANG_DIR}\pt.nsh"
+    !include "${LANG_DIR}\sk.nsh"
     !include "${LANG_DIR}\sv_SE.nsh"
 
 !macroend
