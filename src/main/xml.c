@@ -94,8 +94,8 @@ void xml_new_bookmark_file(void)
 					NULL,
 					NULL);
 	xml_add_bookmark_to_parent(xml_folder, 
-					_("Eph 2:8"),
-					_("Eph 2:8"),
+					_("Eph 2:8,9"),
+					_("Eph 2:8,9"),
 					NULL,
 					NULL);
 	xml_add_bookmark_to_parent(xml_folder, 
