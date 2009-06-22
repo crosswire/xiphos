@@ -481,10 +481,7 @@ remove_install_modules(GList * modules,
 			failed = 0;
 		}
 
-		if ((activity == REMOVE) ||	// just delete it
-		    (!first_time_user &&	// don't trip on "no modules".
-		     (activity == INSTALL) &&
-		     main_is_module(buf))) {	// delete before re-install
+		if (activity == REMOVE) {
 			GS_print(("remove %s from %s\n", buf,
 				  (destination
 				   ? destination
