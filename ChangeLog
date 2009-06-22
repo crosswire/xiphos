@@ -1,3 +1,9 @@
+2009-06-21  karl <charcoal@users.sf.net>
+
+	* remove old module install workaround:
+	  don't pre-delete a module being updated: ~30% faster result.
+	  (workaround formerly needed for old sword InstallMgr bug.)
+
 2009-06-20  karl <charcoal@users.sf.net>
 
 	* sk.po (slovak) thanx to Zdenko Podobný <zdposter@gmail.com>.
