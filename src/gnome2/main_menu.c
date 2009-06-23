@@ -79,6 +79,7 @@ on_help_contents_activate(GtkMenuItem * menuitem, gpointer user_data)
 {	
 	GError *error = NULL;
 #ifdef WIN32
+	gchar *showstr;
 	const char *lang = getenv("LANG");
 	gchar *help_file = g_win32_get_package_installation_directory_of_module(NULL);
 	help_file = g_strconcat(help_file, "\0", NULL);
@@ -86,11 +87,12 @@ on_help_contents_activate(GtkMenuItem * menuitem, gpointer user_data)
 		help_file = g_build_filename(help_file, "share", "help", "fr", "xiphos_fr.chm", NULL);
 	else
 		help_file = g_build_filename(help_file, "share", "help", "C", "xiphos.chm", NULL);
-	if (gnome_url_show(g_strconcat("file:///", help_file, NULL),
-			   &error) == FALSE) {
+	showstr = g_strconcat("file:///", help_file, NULL);
+	if (gnome_url_show(showstr, &error) == FALSE) {
 		GS_warning((error->message));
 		g_error_free(error);
 	}
+	g_free(showstr);
 	g_free(help_file);
 #else
 	

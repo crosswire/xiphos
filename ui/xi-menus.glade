@@ -1080,6 +1080,15 @@
 	  </child>
 
 	  <child>
+	    <widget class="GtkMenuItem" id="lookup_google">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">Browse in Google Maps</property>
+	      <property name="use_underline">True</property>
+	      <signal name="activate" handler="on_lookup_google_activate" last_modification_time="Sat, 23 Jun 2009 11:14:54 GMT"/>
+	    </widget>
+	  </child>
+
+	  <child>
 	    <widget class="GtkSeparatorMenuItem" id="separator4">
 	      <property name="visible">True</property>
 	    </widget>

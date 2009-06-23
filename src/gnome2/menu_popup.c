@@ -1088,18 +1088,61 @@ G_MODULE_EXPORT void on_display_chapter_heading_activate (GtkMenuItem * menuitem
 G_MODULE_EXPORT void on_use_current_dictionary_activate (GtkMenuItem * menuitem, gpointer user_data)
 {			
 #ifdef USE_GTKMOZEMBED
-	gecko_html_copy_selection(GECKO_HTML(_get_html ()));
+	gecko_html_copy_selection(GECKO_HTML(_get_html()));
 	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
 	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
 	gtk_widget_activate(widgets.entry_dict);
 #else
-	gchar *dict_key = gui_get_word_or_selection(_get_html (), FALSE);
+	gchar *dict_key = gui_get_word_or_selection(_get_html(), FALSE);
 	if (dict_key) {
 		gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), dict_key);
 		gtk_widget_activate(widgets.entry_dict);
 		g_free(dict_key);
 	}
 #endif
+}
+
+
+/******************************************************************************
+ * Name
+ *   on_lookup_google_activate
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ * Description
+ *   offer mouse-swept selection as a google maps browser reference.
+ *
+ * Return value
+ *   void
+ */
+
+G_MODULE_EXPORT void on_lookup_google_activate (GtkMenuItem * menuitem, gpointer user_data)
+{			
+	gchar *dict_key, *showstr;
+	GError *error = NULL;
+
+#ifdef USE_GTKMOZEMBED
+	gecko_html_copy_selection(GECKO_HTML(_get_html()));
+	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
+	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
+	dict_key = g_strdup(gtk_editable_get_chars(
+				(GtkEditable *)widgets.entry_dict,0,-1));
+#else
+	dict_key = gui_get_word_or_selection(_get_html(), FALSE);
+#endif
+
+	if ((dict_key == NULL) || (*dict_key == '\0')) {
+		gui_generic_warning("No selection made");
+	} else {
+		showstr = g_strconcat("http://maps.google.com/?q=", dict_key, NULL);
+		if (gnome_url_show(showstr, &error) == FALSE) {
+			GS_warning(("%s",error->message));
+			g_error_free (error);
+		}
+		g_free(showstr);
+	}
+	g_free(dict_key);
 }
 
 
@@ -1296,7 +1339,7 @@ G_MODULE_EXPORT void on_read_selection_aloud_activate (GtkMenuItem * menuitem, g
 {
 	gchar *dict_key;
 	int len;
-	GtkWidget *html_widget = _get_html ();
+	GtkWidget *html_widget = _get_html();
 #ifdef USE_GTKMOZEMBED
 	gecko_html_copy_selection(GECKO_HTML(html_widget));
 	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
