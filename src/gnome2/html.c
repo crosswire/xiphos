@@ -347,39 +347,43 @@ gchar *gui_get_word_or_selection(GtkWidget * html_widget, gboolean word)
 {
 	gchar *key = NULL;
 	gchar *buf = NULL;
-	gchar *buf2 = NULL;
+	gchar *s, *t;
 	GtkHTML *html;
-	gint len, i, keylen;
+	gint len;
 
 	html = GTK_HTML(html_widget);
 	if (word)
 		gtk_html_select_word(html);
 	
 	key = gtk_html_get_selection_html (html, &len);
-	if ((key == NULL) || (*key == '\0'))
-	{
-		gui_generic_warning("No selection provided\nSubstituting `Jesus'");
-		key = ">Jesus<";
-	}
-	if ((buf = strchr(key, '>')))	/* it might not have >< delimiters? */
-		key = buf + 1;
-	keylen = strlen(key);
-	buf = g_new(gchar, keylen);
-	
-	for (i = 0; i < keylen; i++) {
-		if(key[i] == '<')  {
-			buf[i] = '\0';
-			break;
+	if (key && *key) {
+		for (s = strchr(key, '<'); s; s = strchr(s, '<')) {
+			if ((t = strchr(s, '>'))) {
+				while (s <= t)
+					*(s++) = ' ';
+			} else {
+				GS_message(("gui_get_word: Unmatched <> in %s\n", s));
+				goto out;
+			}
 		}
-		buf[i] = key[i];
-	}
+		for (s = strstr(key, "*n"); s; s = strstr(s, "*n")) {
+			*(s++) = ' ';
+			*(s++) = ' ';
+		}
+		for (s = strstr(key, "*x"); s; s = strstr(s, "*x")) {
+			*(s++) = ' ';
+			*(s++) = ' ';
+		}
+		key = g_strdelimit(key, ".,\"<>;:?", ' ');
+		key = g_strstrip(key);
 	
-	GS_message(("gui_get_word_or_selection\nkey: %s",key));
-	key = g_strdelimit(buf, ".,\"<>;:?", ' ');
-	key = g_strstrip(key);
-	buf2= g_strdup(key);
-	g_free(buf);
-	return buf2; /* must be freed by calling function */
+		GS_message(("gui_get_word key: %s", key));
+		buf = g_strdup(key);
+		return buf; /* must be freed by calling function */
+	}
+
+out:
+	return NULL;
 }
 
 
