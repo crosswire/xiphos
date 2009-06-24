@@ -1135,7 +1135,7 @@ G_MODULE_EXPORT void on_lookup_google_activate (GtkMenuItem * menuitem, gpointer
 	if ((dict_key == NULL) || (*dict_key == '\0')) {
 		gui_generic_warning("No selection made");
 	} else {
-		showstr = g_strconcat("http://maps.google.com/?q=", dict_key, NULL);
+		showstr = g_strconcat("http://www.biblemap.org/#", dict_key, NULL);
 		if (gnome_url_show(showstr, &error) == FALSE) {
 			GS_warning(("%s",error->message));
 			g_error_free (error);
