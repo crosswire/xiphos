@@ -461,8 +461,7 @@ int xml_create_settings_file(char *path)
 	xml_settings_doc = xmlNewDoc((const xmlChar *) "1.0");
 
 	if (xml_settings_doc == NULL) {
-		fprintf(stderr,
-			_("Document not created successfully. \n"));
+		fprintf(stderr, _("Document not created successfully. \n"));
 		return 0;
 	}
 
@@ -470,34 +469,27 @@ int xml_create_settings_file(char *path)
 	xml_attr = xmlNewProp(root_node, (const xmlChar *) "Version", (const xmlChar *) VERSION);
 	xmlDocSetRootElement(xml_settings_doc, root_node);
 
-	section_node = xmlNewChild(root_node, NULL,
-				   (const xmlChar *) "ranges", NULL);
-	cur_node = xmlNewChild(section_node,
-			       NULL, (const xmlChar *) "range", NULL);
+	section_node = xmlNewChild(root_node, NULL, (const xmlChar *) "ranges", NULL);
+	cur_node = xmlNewChild(section_node, NULL, (const xmlChar *) "range", NULL);
 	xml_attr = xmlNewProp(cur_node,
 			      (const xmlChar *) "label",
 			      (const xmlChar *) _("Old Testament"));
-	xml_attr =
-	    xmlNewProp(cur_node, (const xmlChar *) "list", (const xmlChar *) _("Gen - Mal"));
-	cur_node =
-	    xmlNewChild(section_node, NULL, (const xmlChar *) "range",
-			NULL);
-	xml_attr =
-	    xmlNewProp(cur_node, (const xmlChar *) "label",
-		       (const xmlChar *) _("New Testament"));
-	xml_attr =
-	    xmlNewProp(cur_node, (const xmlChar *) "list", (const xmlChar *) _("Mat - Rev"));
+	xml_attr = xmlNewProp(cur_node, (const xmlChar *) "list", (const xmlChar *) _("Gen - Mal"));
 
-	section_node = xmlNewChild(root_node, NULL,
-				   (const xmlChar *) "modlists", NULL);
-	cur_node = xmlNewChild(section_node,
-			       NULL, (const xmlChar *) "modlist", NULL);
+	cur_node = xmlNewChild(section_node, NULL, (const xmlChar *) "range", NULL);
+	xml_attr = xmlNewProp(cur_node,
+			      (const xmlChar *) "label",
+			      (const xmlChar *) _("New Testament"));
+	xml_attr = xmlNewProp(cur_node, (const xmlChar *) "list", (const xmlChar *) _("Mat - Rev"));
+
+	section_node = xmlNewChild(root_node, NULL, (const xmlChar *) "modlists", NULL);
+	cur_node = xmlNewChild(section_node, NULL, (const xmlChar *) "modlist", NULL);
 	xml_attr = xmlNewProp(cur_node,
 			      (const xmlChar *) "label",
 			      (const xmlChar *) _("Sample Module List"));
-	xml_attr =
-	    xmlNewProp(cur_node, (const xmlChar *) "list",
-		       (const xmlChar *)(gchar *)(get_list(TEXT_LIST)->data));
+	xml_attr = xmlNewProp(cur_node,
+			      (const xmlChar *) "list",
+			      (const xmlChar *)(gchar *)(get_list(TEXT_LIST)->data));
 
 
 	section_node = xmlNewChild(root_node, NULL,
@@ -557,7 +549,6 @@ int xml_create_settings_file(char *path)
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"biblehight", (const xmlChar *)"250");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"commentaryhight", (const xmlChar *)"240");
 
-
 	section_node = xmlNewChild(root_node, NULL, (const xmlChar *)"lexicons", NULL);
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"indictpane", (const xmlChar *)"1");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"inviewer", (const xmlChar *)"0");
@@ -566,6 +557,8 @@ int xml_create_settings_file(char *path)
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"greek", NULL);
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"hebrew", NULL);
 
+	section_node = xmlNewChild(root_node, NULL,
+				   (const xmlChar *) "markedverses", NULL); /* initially empty */
 
 	section_node = xmlNewChild(root_node, NULL, (const xmlChar *)"misc", NULL);
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"dailydevotional", (const xmlChar *)"0");
@@ -817,19 +810,19 @@ void xml_set_list_item(const char *section, const char *item, const char *label,
 	xmlNodePtr cur = NULL;
 	xmlNodePtr cur_item = NULL;
 	xmlNodePtr new = NULL;
-	if ((cur =
-	     xml_find_section("Xiphos", section)) != NULL) {
-		if ((cur_item = xml_find_item(cur, item, label)) !=
-		    NULL) {
+
+	if ((cur = xml_find_section("Xiphos", section)) == NULL) {
+		xmlNodePtr root_node = xmlDocGetRootElement(xml_settings_doc);
+		cur = xmlNewChild(root_node, NULL, (const xmlChar *) section, NULL);
+	}
+
+	if (cur) {
+		if ((cur_item = xml_find_item(cur, item, label))) {
 			xmlSetProp(cur_item, (const xmlChar *) "list", (const xmlChar *) value);
 		} else {
-			new = xmlNewChild(cur,
-					  NULL, (const xmlChar *) item,
-					  NULL);
-			xmlNewProp(new,(const xmlChar *) "label",
-				   (const xmlChar *) label);
-			xmlNewProp(new, (const xmlChar *)"list",
-				   (const xmlChar *) value);
+			new = xmlNewChild(cur, NULL, (const xmlChar *) item, NULL);
+			xmlNewProp(new,(const xmlChar *) "label", (const xmlChar *) label);
+			xmlNewProp(new, (const xmlChar *)"list", (const xmlChar *) value);
 		}
 	}
 }
