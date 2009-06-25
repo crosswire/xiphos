@@ -259,8 +259,7 @@ void main_save_modlist(void)
 	GtkListStore *list_store;
 	GtkTreeIter iter;
 
-	model =
-	    gtk_tree_view_get_model(GTK_TREE_VIEW(search1.module_lists));
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(search1.module_lists));
 	list_store = GTK_LIST_STORE(model);
 
 	if (!gtk_tree_model_get_iter_first(model, &iter))

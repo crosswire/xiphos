@@ -197,6 +197,12 @@ void main_information_viewer(const gchar * mod_name, const gchar * text, const g
 					_("Footnote"));
 			str = g_string_append(str, tmp_str->str);
 		}
+		if (!strcmp(type, "u")) {
+			g_string_printf(tmp_str,
+					"<font color=\"grey\">%s<HR></font><br>",
+					_("User Annotation"));
+			str = g_string_append(str, tmp_str->str);
+		}
 		if (!strcmp(type, "x")) {
 			g_string_printf(tmp_str,
 					"<font color=\"grey\">%s<HR></font><br>",
@@ -217,9 +223,9 @@ void main_information_viewer(const gchar * mod_name, const gchar * text, const g
 		}
 	} else {
 		g_string_printf(tmp_str,
-					"<font color=\"grey\">%s: %s<HR></font><br>",
-					mod_name, key);
-			str = g_string_append(str, tmp_str->str);
+				"<font color=\"grey\">%s: %s<HR></font><br>",
+				mod_name, key);
+		str = g_string_append(str, tmp_str->str);
 	}
 
 	if (action && (!strcmp(action, "showStrongsMorph"))) {	//&& !strcmp(type,"Greek")

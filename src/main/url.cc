@@ -346,15 +346,14 @@ static gint show_separate_image(const gchar * filename, gboolean clicked)
 }
 
 
- /******************************************************************************
+/******************************************************************************
  * Name
  *   show_strongs
  *
  * Synopsis
  *   #include "main/url.hh"
  *
- *   gint show_strongs(const gchar * type, const gchar * value, 
-			gboolean clicked)
+ *   gint show_strongs(const gchar * type, const gchar * value, gboolean clicked)
  *
  * Description
  *  
@@ -949,6 +948,18 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 			show_note(module, passage, stype, svalue, clicked);
 			if (module) g_free(module);
 			if (passage) g_free(passage);
+		}
+
+		else if (!strcmp(action, "showUserNote")) {
+			module = g_strdup(m_url.getParameterValue("module"));
+			main_information_viewer(module,
+						(gchar*)svalue,
+						(gchar*)svalue, 
+						"showUserNote",
+						(gchar*)"u",
+						NULL,
+						NULL);
+			if (module) g_free(module);
 		}
 
 		else if (!strcmp(action, "showRef")) {

@@ -33,8 +33,10 @@
 #include "gui/dialog.h"
 #include "gui/utilities.h"
 
+#include "main/display.hh"
 #include "main/sword.h"
-
+#include "main/settings.h"
+#include "main/xml.h"
 
 extern GtkTreeStore *model;
 
@@ -218,6 +220,52 @@ void on_dialog_response(GtkDialog * dialog,
 
 /******************************************************************************
  * Name
+ *   on_mark_verse_response
+ *
+ * Synopsis
+ *   #include "gui/bookmark_dialog.h"
+ *
+ * Description
+ *   finish off a verse-markin event.
+ *
+ * Return value
+ *   void
+ */
+ 
+void on_mark_verse_response(GtkDialog * dialog, 
+			    gint response_id, 
+			    gpointer user_data)
+{
+	gchar reference[100];
+
+	g_snprintf(reference, 100, "%s %s",
+		   (gchar *)gtk_entry_get_text(GTK_ENTRY(entry_module)),
+		   (gchar *)gtk_entry_get_text(GTK_ENTRY(entry_key)));
+
+	switch (response_id) {
+	case GTK_RESPONSE_CANCEL: /*  cancel button pressed  */
+	case GTK_RESPONSE_NONE:   /*  dialog destroyed  */
+		break;
+	case GTK_RESPONSE_ACCEPT: /*  mark the verse  */
+		xml_set_list_item("markedverses", "markedverse",
+				  reference, "user content");
+		marked_cache_fill(settings.MainWindowModule, settings.currentverse);
+		main_display_bible(NULL, settings.currentverse);
+		/* XXX figure out the user content later */
+		break;
+	case GTK_RESPONSE_OK:     /*  unmark the verse  */
+		xml_remove_node("markedverses", "markedverse", reference);
+		marked_cache_fill(settings.MainWindowModule, settings.currentverse);
+		main_display_bible(NULL, settings.currentverse);
+		break;
+	}
+	gtk_widget_destroy(GTK_WIDGET(dialog));
+	xml_save_settings_doc(settings.fnconfigure);
+}
+
+
+/******************************************************************************
+ * Name
  *   
  *
  * Synopsis
@@ -308,32 +356,6 @@ static void setup_treeview(void)
  *   
  */
  
-static void setup_entrys(gchar * label, 
-			 gchar * module, 
-			 gchar * key)
-{
-	gtk_entry_set_text(GTK_ENTRY(entry_label), label);
-	gtk_entry_set_text(GTK_ENTRY(entry_key), key);
-	gtk_entry_set_text(GTK_ENTRY(entry_module), module);
-}
-
-
-/******************************************************************************
- * Name
- *   
- *
- * Synopsis
- *   #include "gui/bookmark_dialog.h"
- *
- *   
- *
- * Description
- *   
- *
- * Return value
- *   
- */
- 
 static GtkWidget *_create_bookmark_dialog(gchar * label, 
 				   	gchar * module, 
 				   	gchar * key)
@@ -351,7 +373,7 @@ static GtkWidget *_create_bookmark_dialog(gchar * label,
 	/* build the widget */
 	gxml = glade_xml_new (glade_file, NULL, NULL);
 	g_free (glade_file);
-	 g_return_val_if_fail(gxml != NULL, NULL);
+	g_return_val_if_fail(gxml != NULL, NULL);
 
 	/* lookup the root widget */
 	dialog = glade_xml_get_widget (gxml, "dialog");
@@ -367,7 +389,10 @@ static GtkWidget *_create_bookmark_dialog(gchar * label,
 	entry_label = glade_xml_get_widget (gxml, "entry1");
 	entry_key = glade_xml_get_widget (gxml, "entry2");
 	entry_module = glade_xml_get_widget (gxml, "entry3");
-	setup_entrys(label, module, key);
+	gtk_entry_set_text(GTK_ENTRY(entry_label), label);
+	gtk_entry_set_text(GTK_ENTRY(entry_key), key);
+	gtk_entry_set_text(GTK_ENTRY(entry_module), module);
+
 	/* dialog buttons */
 	button_new_folder = glade_xml_get_widget (gxml, "button1");
 	button_add_bookmark = glade_xml_get_widget (gxml, "button3");
@@ -375,6 +400,51 @@ static GtkWidget *_create_bookmark_dialog(gchar * label,
 	/* connect signals and data */
 /*	glade_xml_signal_autoconnect_full
 		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);*/
+	return dialog;
+}
+
+
+/******************************************************************************
+ * Name
+ *   _create_mark_verse_dialog
+ *
+ * Synopsis
+ *   #include "gui/bookmark_dialog.h"
+ *
+ * Description
+ *   marks/unmarks a verse for display highlight.
+ *
+ * Return value
+ *   void
+ */
+ 
+static GtkWidget *_create_mark_verse_dialog(gchar * module, 
+					    gchar * key)
+{
+	GladeXML *gxml;
+	gchar *glade_file;
+	GtkWidget *dialog;
+
+	glade_file = gui_general_user_file("markverse.glade", TRUE);
+	g_return_val_if_fail(glade_file != NULL, NULL);
+	GS_message(("%s",glade_file));
+	
+	/* build the widget */
+	gxml = glade_xml_new(glade_file, NULL, NULL);
+	g_free(glade_file);
+	g_return_val_if_fail(gxml != NULL, NULL);
+
+	/* lookup the root widget */
+	dialog = glade_xml_get_widget(gxml, "dialog");
+	g_signal_connect(dialog, "response",
+			 G_CALLBACK(on_mark_verse_response), NULL);
+	
+	/* entrys */	
+	entry_key = glade_xml_get_widget(gxml, "entry2");
+	entry_module = glade_xml_get_widget(gxml, "entry3");
+	gtk_entry_set_text(GTK_ENTRY(entry_key), key);
+	gtk_entry_set_text(GTK_ENTRY(entry_module), module);
+	
 	return dialog;
 }
 
@@ -400,5 +470,28 @@ void gui_bookmark_dialog(gchar * label, gchar * module_name, gchar * key)
 {
 	GtkWidget *dialog = _create_bookmark_dialog(label, module_name, key);
 	if (!dialog) return;
-	gtk_dialog_run(GTK_DIALOG( dialog));
+	gtk_dialog_run(GTK_DIALOG(dialog));
+}
+
+
+/******************************************************************************
+ * Name
+ *   gui_mark_verse_dialog
+ *
+ * Synopsis
+ *   #include "gui/bookmark_dialog.h"
+ *   void gui_mark_verse_dialog(gchar * module_name, gchar * key)
+ *
+ * Description
+ *   marks/unmarks a verse for display highlighting.
+ *
+ * Return value
+ *   void
+ */
+ 
+void gui_mark_verse_dialog(gchar * module_name, gchar * key)
+{
+	GtkWidget *dialog = _create_mark_verse_dialog(module_name, key);
+	if (!dialog) return;
+	gtk_dialog_run(GTK_DIALOG(dialog));
 }
