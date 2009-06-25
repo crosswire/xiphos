@@ -731,25 +731,17 @@ void load_settings_structure(void)
 		settings.imageresize = 1;
 	}
 
-	if (xml_get_value("editor", "spell_language"))
-		settings.spell_language = xml_get_value("editor","spell_language");
+	if ((buf = xml_get_value("editor", "spell_language")))
+		settings.spell_language = g_strdup(buf);
 	else {
 		xml_add_new_item_to_section("editor","spell_language","unknown");
 		settings.spell_language = "unknown";
 	}
 
-
 	settings.studypadfilename =
 	    xml_get_value("studypad", "lastfile");
 	settings.studypaddir = xml_get_value("studypad", "directory");
-/*
-	if (buf = xml_get_value("shortcutbar", "shortcutbar"))
-		settings.showshortcutbar = atoi(buf);
-	
-	if (buf = xml_get_value("shortcutbar", "docked"))
-		settings.docked =  atoi(buf);
-	
-*/		
+
 	if (xml_get_value("misc", "show_sidebar")) {
 		buf = xml_get_value("misc", "show_sidebar");
 		settings.showshortcutbar = atoi(buf);

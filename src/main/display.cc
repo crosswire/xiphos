@@ -76,15 +76,30 @@ extern "C" {
 #include "main/global_ops.hh"
 #include "main/sword.h"
 #include "main/modulecache.hh"
+#include "main/xml.h"
 
 #include "gui/utilities.h"
 #include "gui/widgets.h"
 #include "gui/dialog.h"
 
 #include "backend/sword_main.hh"
-//#include "backend/gs_osishtmlhref.h"
 
+// for one-time content rendering.
 extern ModuleCache::CacheMap ModuleMap;
+
+// for tracking personal annotations.
+typedef struct {
+    gchar *module;
+    gchar *book;
+    int   chapter;
+    int   verse;
+    gchar *annotation;
+} marked_element;
+
+marked_element marked_cache[180];	/* Ps119 => 176 */
+gchar *marked_cache_modname = NULL, *marked_cache_book = NULL;
+int marked_cache_chapter = -1;
+int marked_cache_count = 0;
 
 #define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><STYLE type=\"text/css\"><!-- A { text-decoration:none } %s --></STYLE></head>"
 
@@ -167,6 +182,101 @@ out:
 	return retval;
 }
 #endif
+
+//
+// user annotation cache filling.
+//
+void
+marked_cache_fill(gchar *modname, gchar *key)
+{
+	int i = marked_cache_count;
+	gchar *s, *t, *err;
+	char *key_book;
+	int key_chapter, key_verse;
+
+	// free the old cache
+	while (--i >= 0) {
+		g_free(marked_cache[i].module);
+		g_free(marked_cache[i].annotation);
+	}
+	marked_cache_count = 0;
+
+	// tear apart the key
+	key_book = g_strdup(key);
+	*(s = strrchr(key_book, ' ')) = '\0';
+	t = ++s;
+	s = strchr(t, ':');
+	*(s++) = '\0';
+	key_chapter = atoi(t);
+	key_verse   = atoi(s);
+
+	// remember exactly what chapter this cache is for
+	g_free(marked_cache_modname);
+	g_free(marked_cache_book);
+	marked_cache_modname = g_strdup(modname);
+	marked_cache_book    = g_strdup(key_book);
+	marked_cache_chapter = key_chapter;
+
+	// load up the annotation content
+    	if (xml_set_section_ptr("markedverses") && xml_get_label()) {
+		do {
+			marked_element &e = marked_cache[marked_cache_count];
+			e.module = xml_get_label();
+			e.annotation = xml_get_list();
+			gchar *m = e.module;
+
+			// tear apart "NASB Revelation of John 1:1"
+			if ((s = strrchr(m, ' ')) == NULL)	// rightmost space
+				goto fail;
+			*s = '\0';
+			if ((s = strchr((t = s+1), ':')) == NULL) // chapter:verse
+				goto fail;
+			*(s++) = '\0';
+			e.chapter = atoi(t);
+			e.verse   = atoi(s);
+			if ((s = strchr(m, ' ')) == NULL)	// leftmost space
+				goto fail;
+			*(s++) = '\0';
+			e.book = s;
+			// now properly delimited: module & book, plus numeric c:v.
+
+			// for fast reference: is this annotation relevant?
+			if ((key_chapter != e.chapter) ||
+			    (*m && (strcasecmp(m, modname) != 0)) ||
+			    (strcasecmp(e.book, key_book) != 0)) {
+				*m = '\001';
+				// ^A => "nope, not useful in this chapter."
+				// notice that we allow for an empty modname as
+				// an indicator of annotations into any module.
+				// " Gen 1:1" has an empty module specification
+			}
+
+			++marked_cache_count;
+		} while (xml_next_item() && xml_get_label());
+	}
+	g_free(key_book);
+	return;
+
+fail:
+	err = g_strdup_printf(_("Improperly encoded personal annotation label:\n'%s'"), s);
+	gui_generic_warning(err);
+	g_free(err);
+	g_free(key_book);
+	return;
+}
+
+//
+// user annotation cache checking: is "this verse" annotated?
+//
+marked_element *
+marked_cache_check(int thisVerse)
+{
+	for (int i = 0; i < marked_cache_count; ++i)
+		if ((*(marked_cache[i].module) != '\001') &&
+		    marked_cache[i].verse == thisVerse)
+			return &marked_cache[i];
+	return NULL;
+}
 
 #ifndef HAVE_STRCASESTR
 /*
@@ -1300,6 +1410,10 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 			*(s++) = ' ';
 			*(s++) = ' ';
 		}
+		for (s = strstr(text->str, "*u"); s; s = strstr(s, "*n")) {
+			*(s++) = ' ';
+			*(s++) = ' ';
+		}
 		for (s = strstr(text->str, "*x"); s; s = strstr(s, "*x")) {
 			*(s++) = ' ';
 			*(s++) = ' ';
@@ -1431,6 +1545,7 @@ GTKChapDisp::Display(SWModule &imodule)
 	const gchar *paragraphMark = NULL;
 	gboolean newparagraph = FALSE;
 	const char *rework;	// for image size analysis rework.
+	marked_element *e;
 
 	char *ModuleName = imodule.Name();
 	ops = main_new_globals(ModuleName, 0);
@@ -1452,6 +1567,13 @@ GTKChapDisp::Display(SWModule &imodule)
 	// or if main window is too small to keep curverse in-pane.
 	gint display_boundary = ((settings.gs_hight < 500) ? 0 : (strongs_or_morph ? 1 : 2));
 
+	// if we are no longer where annotations were current, re-load.
+	if (strcasecmp(ModuleName,
+		       (marked_cache_modname ? marked_cache_modname : "")) ||
+	    strcasecmp(key->getBookName(), marked_cache_book) ||
+	    (curChapter != marked_cache_chapter))
+		marked_cache_fill(ModuleName, settings.currentverse);
+
 	if (!strcmp(ModuleName, "KJV"))
 		paragraphMark = "&para;&nbsp;";
 	else
@@ -1466,7 +1588,7 @@ GTKChapDisp::Display(SWModule &imodule)
 			    // strongs & morph specs win over dblspc.
 			    (strongs_and_morph		// both
 			     ? CSS_BLOCK_BOTH
-			     : (strongs_or_morph		// either
+			     : (strongs_or_morph	// either
 				? CSS_BLOCK_ONE
 				: (settings.doublespace	// neither
 				   ? DOUBLE_SPACE
@@ -1522,8 +1644,9 @@ GTKChapDisp::Display(SWModule &imodule)
 			cVerse.InvalidateHeader();
 
 		// special contrasty highlighting
-		if ((key->Verse() == curVerse) && settings.versehighlight) {
-			buf=g_strdup_printf(
+		if (((key->Verse() == curVerse) && settings.versehighlight) ||
+		    ((e = marked_cache_check(key->Verse())))) {
+			buf = g_strdup_printf(
 			    "<table bgcolor=\"%s\"><tr><td>"
 			    "<font face=\"%s\" size=\"%+d\">",
 			    settings.highlight_bg,
@@ -1531,6 +1654,17 @@ GTKChapDisp::Display(SWModule &imodule)
 			    ((mf->old_font_size)
 			     ? atoi(mf->old_font_size) + settings.base_font_size
 			     : settings.base_font_size));
+			swbuf.append(buf);
+			g_free(buf);
+		}
+
+		// insert the userfootnote reference
+		if (e) {
+			(void) g_strdelimit(e->annotation, "\"<>", '\'');
+			buf = g_strdup_printf("<a href=\"xiphos.url?action=showUserNote&"
+					      "module=%s&value=%s\"><small>*u</small></a>",
+					      settings.MainWindowModule,
+					      e->annotation);
 			swbuf.append(buf);
 			g_free(buf);
 		}
@@ -1543,7 +1677,7 @@ GTKChapDisp::Display(SWModule &imodule)
 			key->Verse(),
 			(char*)key->getText(),
 			settings.verse_num_font_size + settings.base_font_size,
-			((settings.versehighlight && (key->Verse() == curVerse))
+			(((settings.versehighlight && (key->Verse() == curVerse)) || e)
 			 ? settings.highlight_fg
 			 : settings.bible_verse_num_color),
 			num);
@@ -1551,9 +1685,9 @@ GTKChapDisp::Display(SWModule &imodule)
 		swbuf.append(buf);
 		g_free(buf);
 
-		if (key->Verse() == curVerse) {
+		if ((key->Verse() == curVerse) || e) {
 			buf=g_strdup_printf("<font color=\"%s\">",
-					    (settings.versehighlight
+					    ((settings.versehighlight || e)
 					     ? settings.highlight_fg
 					     : settings.currentverse_color));
 			swbuf.append(buf);
@@ -1610,7 +1744,8 @@ GTKChapDisp::Display(SWModule &imodule)
 		}
 
 		// special contrasty highlighting
-		if ((key->Verse() == curVerse) && settings.versehighlight)
+		if (((key->Verse() == curVerse) && settings.versehighlight) ||
+		    e)
 			swbuf.append("</font></td></tr></table>");
 	}
 
@@ -1826,6 +1961,7 @@ DialogChapDisp::Display(SWModule &imodule)
 	const gchar *paragraphMark = NULL;
 	gboolean newparagraph = FALSE;
 	const char *rework;	// for image size analysis rework.
+	marked_element *e;
 
 	char *ModuleName = imodule.Name();
 	ops = main_new_globals(ModuleName, 1);
@@ -1843,6 +1979,13 @@ DialogChapDisp::Display(SWModule &imodule)
 
 	// when strongs/morph are on, the anchor boundary must be smaller.
 	gint display_boundary = (strongs_or_morph ? 1 : 2);
+
+	// if we are no longer where annotations were current, re-load.
+	if (strcasecmp(ModuleName,
+		       (marked_cache_modname ? marked_cache_modname : "")) ||
+	    strcasecmp(key->getBookName(), marked_cache_book) ||
+	    (curChapter != marked_cache_chapter))
+		marked_cache_fill(ModuleName, (gchar *)key->getShortText());
 
 	if (!strcmp(ModuleName, "KJV"))
 		paragraphMark = "&para;&nbsp;";
@@ -1922,7 +2065,8 @@ DialogChapDisp::Display(SWModule &imodule)
 			cVerse.InvalidateHeader();
 
 		// special contrasty highlighting
-		if ((key->Verse() == curVerse) && settings.versehighlight) {
+		if (((key->Verse() == curVerse) && settings.versehighlight) ||
+		    ((e = marked_cache_check(key->Verse())))) {
 			buf = g_strdup_printf(
 			    "<table bgcolor=\"%s\"><tr><td>"
 			    "<font face=\"%s\" size=\"%+d\">",
@@ -1935,6 +2079,17 @@ DialogChapDisp::Display(SWModule &imodule)
 			g_free(buf);
 		}
 
+		// insert the userfootnote reference
+		if (e) {
+			(void) g_strdelimit(e->annotation, "\"<>", '\'');
+			buf = g_strdup_printf("<a href=\"xiphos.url?action=showUserNote&"
+					      "module=%s&value=%s\"><small>*u</small></a>",
+					      settings.MainWindowModule,
+					      e->annotation);
+			swbuf.append(buf);
+			g_free(buf);
+		}
+
 		num = main_format_number(key->Verse());
 		buf = g_strdup_printf(settings.showversenum
 			? "&nbsp; <a name=\"%d\" href=\"sword:///%s\">"
@@ -1943,7 +2098,7 @@ DialogChapDisp::Display(SWModule &imodule)
 			key->Verse(),
 			(char*)key->getText(),
 			settings.verse_num_font_size + settings.base_font_size,
-			((settings.versehighlight && (key->Verse() == curVerse))
+			(((settings.versehighlight && (key->Verse() == curVerse)) || e)
 			 ? settings.highlight_fg
 			 : settings.bible_verse_num_color),
 			num);
@@ -1951,9 +2106,9 @@ DialogChapDisp::Display(SWModule &imodule)
 		swbuf.append(buf);
 		g_free(buf);
 
-		if (key->Verse() == curVerse) {
+		if ((key->Verse() == curVerse) || e) {
 			buf = g_strdup_printf("<font color=\"%s\">",
-					      (settings.versehighlight
+					      ((settings.versehighlight || e)
 					       ? settings.highlight_fg
 					       : settings.currentverse_color));
 			swbuf.append(buf);
@@ -2008,7 +2163,8 @@ DialogChapDisp::Display(SWModule &imodule)
 		}
 
 		// special contrasty highlighting
-		if ((key->Verse() == curVerse) && settings.versehighlight)
+		if (((key->Verse() == curVerse) && settings.versehighlight) ||
+		    e)
 			swbuf.append("</font></td></tr></table>");
 	}
 

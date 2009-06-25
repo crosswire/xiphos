@@ -207,7 +207,7 @@ GtkWidget * _get_html (void)
 static 
 void _global_option_main_pane(GtkMenuItem * menuitem, const gchar * option)
 {
-	gchar *key = _get_key (menu_mod_name);
+	gchar *key = _get_key(menu_mod_name);
 	gchar *mod = (gchar*) (is_dialog ? dialog->mod_name : menu_mod_name);
     	
     	if (key) {
@@ -249,16 +249,15 @@ void _global_option_main_pane(GtkMenuItem * menuitem, const gchar * option)
 
 static void on_edit_percomm_activate (GtkMenuItem * menuitem, gpointer user_data)
 {
-	gchar *key = NULL;
+	gchar *key;
+
     	if (is_dialog)
-		key = g_strdup (dialog->key);
+		key = g_strdup(dialog->key);
     	else
-    		key = _get_key (menu_mod_name);
+    		key = _get_key(menu_mod_name);
     	if (key ) {
 		GS_message(("\n\npercomm key: %s\n\n",key));
-		    
 		editor_create_new((gchar *)user_data, (gchar *) key, NOTE_EDITOR);
-		    
 		g_free (key);
 	 }
 }
@@ -337,13 +336,11 @@ G_MODULE_EXPORT void on_popup_about_activate (GtkMenuItem * menuitem, gpointer u
 G_MODULE_EXPORT void on_popup_bookmark_activate        (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
-	gchar *key = NULL;
+	gchar *key;
     	
 	if (is_dialog) return;
-    
-	key = _get_key (menu_mod_name);
 	
-    	if (key) {
+    	if ((key = _get_key(menu_mod_name))) {
 		gchar *label = g_strdup_printf("%s, %s",
 					       key,
 					       menu_mod_name);
@@ -533,11 +530,11 @@ G_MODULE_EXPORT void on_popup_font_activate (GtkMenuItem * menuitem, gpointer us
 		main_dialogs_url_handler(dialog, url, TRUE);
 		g_free(url);
 	} else {
-	    	gchar *key = _get_key (menu_mod_name);
+	    	gchar *key = _get_key(menu_mod_name);
 	    	if (key) {
-			gchar *url = g_strdup_printf (	"sword://%s/%s",
-							menu_mod_name,
-							key);
+			gchar *url = g_strdup_printf("sword://%s/%s",
+						     menu_mod_name,
+						     key);
 			gui_set_module_font (menu_mod_name);
 			/* show the change */
 			main_url_handler (url, TRUE);		
@@ -842,8 +839,7 @@ G_MODULE_EXPORT void on_primary_reading_activate (GtkCheckMenuItem * menuitem, g
 				 (GtkMenuItem*)menuitem,
 				 GINT_TO_POINTER(0));
 	} else {
-		key = _get_key(menu_mod_name);
-		if (key) {
+		if ((key = _get_key(menu_mod_name))) {
 			reading_selector(menu_mod_name,
 					 key,
 					 NULL,
@@ -882,8 +878,7 @@ G_MODULE_EXPORT void on_secondary_reading_activate (GtkCheckMenuItem * menuitem,
 				 (GtkMenuItem*)menuitem,
 				 GINT_TO_POINTER(1));
 	} else {
-		key = _get_key(menu_mod_name);
-		if (key) {
+		if ((key = _get_key(menu_mod_name))) {
 			reading_selector(menu_mod_name,
 					 key,
 					 NULL,
@@ -922,8 +917,7 @@ G_MODULE_EXPORT void on_all_readings_activate (GtkCheckMenuItem * menuitem, gpoi
 				 (GtkMenuItem*)menuitem,
 				 GINT_TO_POINTER(2));
 	} else {
-		key = _get_key(menu_mod_name);
-		if (key) {
+		if ((key = _get_key(menu_mod_name))) {
 			reading_selector(menu_mod_name,
 					 key,
 					 NULL,
@@ -1007,8 +1001,7 @@ G_MODULE_EXPORT void on_unlock_this_module_activate (GtkMenuItem * menuitem, gpo
 	cipher_old = main_get_mod_config_entry (menu_mod_name, "CipherKey");
 	cipher_key = gui_add_cipher_key (menu_mod_name, cipher_old);
 	if (cipher_key) {
-	    	key = _get_key (menu_mod_name);
-	    	if (key) {
+	    	if ((key = _get_key(menu_mod_name))) {
 			main_display_bible (menu_mod_name, key);
 			g_free (key);
 		}
@@ -1321,18 +1314,16 @@ G_MODULE_EXPORT void on_dump_perscomm_activate (GtkMenuItem * menuitem, gpointer
 
 /******************************************************************************
  * Name
- *   
+ *   on_read_selection_aloud_activate
  *
  * Synopsis
  *   #include "gui/menu_popup.h"
  *
- *   
- *
  * Description
- *
+ *   takes mouse-swept text and funnels it through TTS.
  *
  * Return value
- *   
+ *   void
  */
 
 G_MODULE_EXPORT void on_read_selection_aloud_activate (GtkMenuItem * menuitem, gpointer user_data)
@@ -1358,6 +1349,32 @@ G_MODULE_EXPORT void on_read_selection_aloud_activate (GtkMenuItem * menuitem, g
 		g_free(dict_key);
 	} else
 		gui_generic_warning("No selection made");
+}
+
+/******************************************************************************
+ * Name
+ *   on_mark_verse_activate
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ * Description
+ *   mark/unmark a verse for highlighting and possible user comment.
+ *
+ * Return value
+ *   void
+ */
+
+G_MODULE_EXPORT void on_mark_verse_activate (GtkMenuItem * menuitem, gpointer user_data)
+{
+	gchar *key;
+    	
+	if (is_dialog) return;
+    
+    	if ((key = _get_key(menu_mod_name))) {
+		gui_mark_verse_dialog(menu_mod_name, key);
+		g_free(key);
+	}
 }
 
 /******************************************************************************
@@ -1549,8 +1566,7 @@ static void on_view_mod_activate(GtkMenuItem *menuitem,
 	gchar *url = NULL;
     	gchar *key = NULL;
     
-    	key = _get_key (menu_mod_name);
-	if (module_name && key) {
+	if (module_name && (key = _get_key(menu_mod_name))) {
 		url = g_strdup_printf ("sword://%s/%s",
 					module_name,
 					key);
@@ -1647,6 +1663,7 @@ GtkWidget * _create_popup_menu ( const gchar * mod_name, DIALOG_DATA * d)
 	GtkWidget *export_	= glade_xml_get_widget (gxml, "export_passage");
 	GtkWidget *close 	= glade_xml_get_widget (gxml, "close");
 	GtkWidget *note 	= glade_xml_get_widget (gxml, "note"); /*  */
+	GtkWidget *mark_verse	= glade_xml_get_widget (gxml, "mark_verse"); /*  */
 	GtkWidget *open_edit	= glade_xml_get_widget (gxml, "open_in_editor");
 	
     	GtkWidget *mod_opt_sub 	= GTK_WIDGET (glade_xml_get_widget (gxml, "module_options1_menu")); /*  */
@@ -1670,6 +1687,7 @@ GtkWidget * _create_popup_menu ( const gchar * mod_name, DIALOG_DATA * d)
 	gtk_widget_hide (dump_percomm);
 	gtk_widget_hide (note);
    	gtk_widget_hide (open_edit);
+   	gtk_widget_hide (mark_verse);
 	gtk_widget_hide (close); /* FIXME: hide until connected to dialog close */
     
     	if (is_dialog) {
@@ -1692,15 +1710,16 @@ GtkWidget * _create_popup_menu ( const gchar * mod_name, DIALOG_DATA * d)
     	switch (main_get_mod_type((gchar*) mname)) {
 	case TEXT_TYPE:	
 		gtk_widget_show (export_);
-		if (is_dialog ) break;
-		gtk_widget_show (note);		
-		gtk_menu_item_set_submenu (GTK_MENU_ITEM(note), note_sub);		    
+		if (is_dialog) break;
+		gtk_widget_show(note);
+		gtk_widget_show(mark_verse);
+		gtk_menu_item_set_submenu (GTK_MENU_ITEM(note), note_sub);
 		gui_add_mods_2_gtk_menu (PERCOMM_LIST, note_sub,
 				(GCallback) on_edit_percomm_activate);
 		break;
 	case COMMENTARY_TYPE:	
-		gtk_widget_show (book_heading);
-		gtk_widget_show (chapter_heading);			
+		gtk_widget_show(book_heading);
+		gtk_widget_show(chapter_heading);			
 		break;
 	case PERCOM_TYPE:
    		gtk_widget_show (open_edit);
@@ -1782,5 +1801,4 @@ void gui_menu_popup (const gchar * mod_name, DIALOG_DATA * d)
 	menu = _create_popup_menu (mod_name, d);
 	gtk_menu_popup ((GtkMenu*)menu, NULL, NULL, NULL, NULL, 2,
 		     			gtk_get_current_event_time());
-	
 }
