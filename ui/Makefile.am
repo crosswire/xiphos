@@ -1,6 +1,7 @@
 ui_DATA = \
 	bookmarks.glade \
 	export-dialog.glade \
+	markverse.glade \
 	module-manager.glade \
 	navbar_versekey.glade \
 	prefs.glade \
