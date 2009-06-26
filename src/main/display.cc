@@ -1545,7 +1545,7 @@ GTKChapDisp::Display(SWModule &imodule)
 	const gchar *paragraphMark = NULL;
 	gboolean newparagraph = FALSE;
 	const char *rework;	// for image size analysis rework.
-	marked_element *e;
+	marked_element *e = NULL;
 
 	char *ModuleName = imodule.Name();
 	ops = main_new_globals(ModuleName, 0);
@@ -1961,7 +1961,7 @@ DialogChapDisp::Display(SWModule &imodule)
 	const gchar *paragraphMark = NULL;
 	gboolean newparagraph = FALSE;
 	const char *rework;	// for image size analysis rework.
-	marked_element *e;
+	marked_element *e = NULL;
 
 	char *ModuleName = imodule.Name();
 	ops = main_new_globals(ModuleName, 1);
