@@ -1658,17 +1658,6 @@ GTKChapDisp::Display(SWModule &imodule)
 			g_free(buf);
 		}
 
-		// insert the userfootnote reference
-		if (e) {
-			(void) g_strdelimit(e->annotation, "\"<>", '\'');
-			buf = g_strdup_printf("<a href=\"xiphos.url?action=showUserNote&"
-					      "module=%s&value=%s\"><small>*u</small></a>",
-					      settings.MainWindowModule,
-					      e->annotation);
-			swbuf.append(buf);
-			g_free(buf);
-		}
-
 		num = main_format_number(key->Verse());
 		buf = g_strdup_printf(settings.showversenum
 			? "&nbsp; <span class=\"word\"><a name=\"%d\" href=\"sword:///%s\">"
@@ -1684,6 +1673,17 @@ GTKChapDisp::Display(SWModule &imodule)
 		g_free(num);
 		swbuf.append(buf);
 		g_free(buf);
+
+		// insert the userfootnote reference
+		if (e) {
+			(void) g_strdelimit(e->annotation, "\"<>", '\'');
+			buf = g_strdup_printf("<a href=\"xiphos.url?action=showUserNote&"
+					      "module=%s&value=%s\"><small><sup>*u</sup></small></a>",
+					      settings.MainWindowModule,
+					      e->annotation);
+			swbuf.append(buf);
+			g_free(buf);
+		}
 
 		if ((key->Verse() == curVerse) || e) {
 			buf=g_strdup_printf("<font color=\"%s\">",
@@ -2079,17 +2079,6 @@ DialogChapDisp::Display(SWModule &imodule)
 			g_free(buf);
 		}
 
-		// insert the userfootnote reference
-		if (e) {
-			(void) g_strdelimit(e->annotation, "\"<>", '\'');
-			buf = g_strdup_printf("<a href=\"xiphos.url?action=showUserNote&"
-					      "module=%s&value=%s\"><small>*u</small></a>",
-					      settings.MainWindowModule,
-					      e->annotation);
-			swbuf.append(buf);
-			g_free(buf);
-		}
-
 		num = main_format_number(key->Verse());
 		buf = g_strdup_printf(settings.showversenum
 			? "&nbsp; <a name=\"%d\" href=\"sword:///%s\">"
@@ -2105,6 +2094,17 @@ DialogChapDisp::Display(SWModule &imodule)
 		g_free(num);
 		swbuf.append(buf);
 		g_free(buf);
+
+		// insert the userfootnote reference
+		if (e) {
+			(void) g_strdelimit(e->annotation, "\"<>", '\'');
+			buf = g_strdup_printf("<a href=\"xiphos.url?action=showUserNote&"
+					      "module=%s&value=%s\"><small><sup>*u</sup></small></a>",
+					      settings.MainWindowModule,
+					      e->annotation);
+			swbuf.append(buf);
+			g_free(buf);
+		}
 
 		if ((key->Verse() == curVerse) || e) {
 			buf = g_strdup_printf("<font color=\"%s\">",
