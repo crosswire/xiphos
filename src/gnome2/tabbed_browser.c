@@ -1368,7 +1368,7 @@ void gui_close_passage_tab(gint pagenum)
 		return;
 	PASSAGE_TAB_INFO *pt = (PASSAGE_TAB_INFO*)g_list_nth_data(passage_list, (guint)pagenum);
 	cur_passage_tab = (PASSAGE_TAB_INFO*)g_list_nth_data(passage_list, (guint)pagenum-1);
-	if (pt->showparallel) {
+	if (pt->showparallel || (2 == gtk_notebook_get_n_pages(GTK_NOTEBOOK(widgets.notebook_main)))) {
 		if (pagenum > 0)
 			gtk_notebook_set_current_page (GTK_NOTEBOOK (
 			                               widgets.notebook_main),
