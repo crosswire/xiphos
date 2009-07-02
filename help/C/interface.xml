@@ -163,8 +163,7 @@
 		<para>
 	     	On the left hand side of <application>Xiphos</application> there is the Sidebar. Here the
 	     	user can switch between the different Sword modules, view bookmarks, do simple searches and view verse lists.
-		To switch between all Sidebar functions, shortcuts have been placed at the bottom of the Sidebar.
-		Clicking on the shortcut activates the option.
+		To switch between all Sidebar functions, buttons have been placed at the top of the Sidebar.
 		</para>
 		<figure id="shortcut_figure">
 			<title>Sidebar Shortcuts</title>
