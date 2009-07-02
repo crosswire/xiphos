@@ -1,3 +1,7 @@
+2009-07-02 terry <tbiggs@users.sourceforge.net>
+
+	* fix #2813865 Deleting middle tab makes problem for first one
+
 2009-06-25  karl <charcoal@users.sf.net>
 
 	* user-annotation (verse markup).

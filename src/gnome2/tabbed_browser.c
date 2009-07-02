@@ -1368,6 +1368,12 @@ void gui_close_passage_tab(gint pagenum)
 		return;
 	PASSAGE_TAB_INFO *pt = (PASSAGE_TAB_INFO*)g_list_nth_data(passage_list, (guint)pagenum);
 	cur_passage_tab = (PASSAGE_TAB_INFO*)g_list_nth_data(passage_list, (guint)pagenum-1);
+	if (pt->showparallel) {
+		if (pagenum > 0)
+			gtk_notebook_set_current_page (GTK_NOTEBOOK (
+			                               widgets.notebook_main),
+                                                       0);
+	}
 	passage_list = g_list_remove(passage_list, pt);
 	if(pt->text_mod) g_free(pt->text_mod);
 	if(pt->commentary_mod) g_free(pt->commentary_mod);
