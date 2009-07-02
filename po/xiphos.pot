@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-02 22:34+0100\n"
+"POT-Creation-Date: 2009-07-02 23:29+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -475,25 +475,25 @@ msgid ""
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:339
-msgid "Install these modules:"
+msgid "Install these modules?"
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:341
-msgid "Remove these modules:"
+msgid "Remove these modules?"
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:343
-msgid "Archive these modules:"
+msgid "Archive these modules?"
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:345
 msgid ""
 "Build fast-search index for these\n"
-"modules (may take minutes/module):"
+"modules (may take minutes/module)?"
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:347
-msgid "Delete fast-search index for these modules:"
+msgid "Delete fast-search index for these modules?"
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:367
@@ -673,11 +673,11 @@ msgid "Prayer List/Journal"
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:1268
-msgid "Refreshing remote"
+msgid "Refreshing remote source"
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:1279
-msgid "Remote not found"
+msgid "Remote source not found"
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:1412
