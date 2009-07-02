@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-02 22:34+0100\n"
-"PO-Revision-Date: 2009-07-02 22:35+0100\n"
+"POT-Creation-Date: 2009-07-02 23:29+0100\n"
+"PO-Revision-Date: 2009-07-02 23:31+0100\n"
 "Last-Translator: Ari Constâncio <ari.constancio@gmail.com>\n"
 "Language-Team: Xiphos Project\n"
 "MIME-Version: 1.0\n"
@@ -502,28 +502,28 @@ msgstr ""
 "\n"
 
 #: ../src/gnome2/mod_mgr.c:339
-msgid "Install these modules:"
-msgstr "Instalar estes módulos:"
+msgid "Install these modules?"
+msgstr "Instalar estes módulos?"
 
 #: ../src/gnome2/mod_mgr.c:341
-msgid "Remove these modules:"
-msgstr "Remover estes módulos:"
+msgid "Remove these modules?"
+msgstr "Remover estes módulos?"
 
 #: ../src/gnome2/mod_mgr.c:343
-msgid "Archive these modules:"
-msgstr "Arquivar estes módulos:"
+msgid "Archive these modules?"
+msgstr "Arquivar estes módulos?"
 
 #: ../src/gnome2/mod_mgr.c:345
 msgid ""
 "Build fast-search index for these\n"
-"modules (may take minutes/module):"
+"modules (may take minutes/module)?"
 msgstr ""
 "Construir índice de busca rápida para estes\n"
-"módulos (pode demorar minutos por módulo):"
+"módulos (pode demorar minutos por módulo)?"
 
 #: ../src/gnome2/mod_mgr.c:347
-msgid "Delete fast-search index for these modules:"
-msgstr "Apagar índice de busca rápida para estes módulos:"
+msgid "Delete fast-search index for these modules?"
+msgstr "Apagar índice de busca rápida para estes módulos?"
 
 #: ../src/gnome2/mod_mgr.c:367
 msgid "Preparing to install"
@@ -714,12 +714,12 @@ msgid "Prayer List/Journal"
 msgstr "Lista de Oração/Diário"
 
 #: ../src/gnome2/mod_mgr.c:1268
-msgid "Refreshing remote"
-msgstr "Actualizando remoto"
+msgid "Refreshing remote source"
+msgstr "Actualizando fonte remota"
 
 #: ../src/gnome2/mod_mgr.c:1279
-msgid "Remote not found"
-msgstr "Remoto não encontrado"
+msgid "Remote source not found"
+msgstr "Fonte remota não encontrada"
 
 #: ../src/gnome2/mod_mgr.c:1412
 msgid "Module Name"
