@@ -336,15 +336,15 @@ remove_install_modules(GList * modules,
 	switch (activity)
 	{
 	case INSTALL:
-		verb = _("Install these modules:"); break;
+		verb = _("Install these modules?"); break;
 	case REMOVE:
-		verb = _("Remove these modules:"); break;
+		verb = _("Remove these modules?"); break;
 	case ARCHIVE:
-		verb = _("Archive these modules:"); break;
+		verb = _("Archive these modules?"); break;
 	case FASTMOD:
-		verb = _("Build fast-search index for these\nmodules (may take minutes/module):"); break;
+		verb = _("Build fast-search index for these\nmodules (may take minutes/module)?"); break;
 	case DELFAST:
-		verb = _("Delete fast-search index for these modules:"); break;
+		verb = _("Delete fast-search index for these modules?"); break;
 	}
 	dialog_text = g_strdup_printf("<span weight=\"bold\">%s</span>\n\n%s",
 				      verb, mods->str);
@@ -1265,7 +1265,7 @@ response_refresh(void)
 		remote_source = g_strdup(gtk_combo_box_get_active_text(
 					     GTK_COMBO_BOX(combo_entry2)));
 
-	buf = g_strdup_printf("%s: %s", _("Refreshing remote"), remote_source);
+	buf = g_strdup_printf("%s: %s", _("Refreshing remote source"), remote_source);
 	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh), buf);
 	g_free(buf);
 	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar_refresh), 0);
@@ -1276,7 +1276,7 @@ response_refresh(void)
 	
 	if (failed) {
 		gtk_progress_bar_set_text(
-			GTK_PROGRESS_BAR(progressbar_refresh), _("Remote not found"));
+			GTK_PROGRESS_BAR(progressbar_refresh), _("Remote source not found"));
 		gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar_refresh), 0);
 		working = FALSE;
 		return;
