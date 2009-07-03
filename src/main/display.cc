@@ -1644,12 +1644,12 @@ GTKChapDisp::Display(SWModule &imodule)
 			cVerse.InvalidateHeader();
 
 		// special contrasty highlighting
-		if (((key->Verse() == curVerse) && settings.versehighlight) ||
-		    ((e = marked_cache_check(key->Verse())))) {
+		if (((e = marked_cache_check(key->Verse()))) ||
+		    ((key->Verse() == curVerse) && settings.versehighlight)) {
 			buf = g_strdup_printf(
 			    "<table bgcolor=\"%s\"><tr><td>"
 			    "<font face=\"%s\" size=\"%+d\">",
-			    settings.highlight_bg,
+			    (e ? settings.highlight_fg : settings.highlight_bg),
 			    ((mf->old_font) ? mf->old_font : ""),
 			    ((mf->old_font_size)
 			     ? atoi(mf->old_font_size) + settings.base_font_size
@@ -1667,7 +1667,7 @@ GTKChapDisp::Display(SWModule &imodule)
 			(char*)key->getText(),
 			settings.verse_num_font_size + settings.base_font_size,
 			(((settings.versehighlight && (key->Verse() == curVerse)) || e)
-			 ? settings.highlight_fg
+			 ? (e ? settings.highlight_bg : settings.highlight_fg)
 			 : settings.bible_verse_num_color),
 			num);
 		g_free(num);
@@ -1686,10 +1686,10 @@ GTKChapDisp::Display(SWModule &imodule)
 		}
 
 		if ((key->Verse() == curVerse) || e) {
-			buf=g_strdup_printf("<font color=\"%s\">",
-					    ((settings.versehighlight || e)
-					     ? settings.highlight_fg
-					     : settings.currentverse_color));
+			buf = g_strdup_printf("<font color=\"%s\">",
+					      ((settings.versehighlight || e)
+					       ? (e ? settings.highlight_bg : settings.highlight_fg)
+					       : settings.currentverse_color));
 			swbuf.append(buf);
 			g_free(buf);
 		}
@@ -2065,12 +2065,12 @@ DialogChapDisp::Display(SWModule &imodule)
 			cVerse.InvalidateHeader();
 
 		// special contrasty highlighting
-		if (((key->Verse() == curVerse) && settings.versehighlight) ||
-		    ((e = marked_cache_check(key->Verse())))) {
+		if (((e = marked_cache_check(key->Verse()))) ||
+		    ((key->Verse() == curVerse) && settings.versehighlight)) {
 			buf = g_strdup_printf(
 			    "<table bgcolor=\"%s\"><tr><td>"
 			    "<font face=\"%s\" size=\"%+d\">",
-			    settings.highlight_bg,
+			    (e ? settings.highlight_fg : settings.highlight_bg),
 			    ((mf->old_font) ? mf->old_font : ""),
 			    ((mf->old_font_size)
 			     ? atoi(mf->old_font_size) + settings.base_font_size
@@ -2088,7 +2088,7 @@ DialogChapDisp::Display(SWModule &imodule)
 			(char*)key->getText(),
 			settings.verse_num_font_size + settings.base_font_size,
 			(((settings.versehighlight && (key->Verse() == curVerse)) || e)
-			 ? settings.highlight_fg
+			 ? (e ? settings.highlight_bg : settings.highlight_fg)
 			 : settings.bible_verse_num_color),
 			num);
 		g_free(num);
@@ -2109,7 +2109,7 @@ DialogChapDisp::Display(SWModule &imodule)
 		if ((key->Verse() == curVerse) || e) {
 			buf = g_strdup_printf("<font color=\"%s\">",
 					      ((settings.versehighlight || e)
-					       ? settings.highlight_fg
+					       ? (e ? settings.highlight_bg : settings.highlight_fg)
 					       : settings.currentverse_color));
 			swbuf.append(buf);
 			g_free(buf);
