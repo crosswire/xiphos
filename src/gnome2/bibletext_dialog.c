@@ -775,7 +775,7 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 
 #ifdef USE_GTKMOZEMBED
 	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
-	vt->html = GTK_WIDGET(gecko_html_new(vt,TRUE,DIALOG_TEXT_TYPE));
+	vt->html = GTK_WIDGET(gecko_html_new(vt, TRUE, DIALOG_TEXT_TYPE));
 	gtk_widget_show(vt->html);
 	gtk_container_add(GTK_CONTAINER(frame), vt->html);
 	g_signal_connect((gpointer)vt->html,
@@ -789,7 +789,7 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 	gtk_widget_set_size_request(frame, -1, 100);
 	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
 
-	vt->previewer = GTK_WIDGET(gecko_html_new(vt,FALSE,VIEWER_TYPE));
+	vt->previewer = GTK_WIDGET(gecko_html_new(vt, TRUE, VIEWER_TYPE));
 	gtk_widget_show(vt->previewer);
 	gtk_container_add(GTK_CONTAINER(frame), vt->previewer);
 #else
