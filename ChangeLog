@@ -1,8 +1,13 @@
+2009-07-03  karl <charcoal@users.sf.net>
+
+	* experiment with inverting highlight sense for user annotation.
+	* correct test order for annotation -vs- highlight to guarantee
+	  a valid annotation pointer (truly, i hate corner cases.)
+
 2009-07-02 terry <tbiggs@users.sourceforge.net>
 
-	* fix bugs #2815605 and #2815612 Cross reference in seperate window 
+	* fix bugs #2815605 and #2815612 Cross reference in seperate window
 	  change module of main one.
-
 
 2009-07-02 terry <tbiggs@users.sourceforge.net>
 
