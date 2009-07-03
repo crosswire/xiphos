@@ -37,6 +37,7 @@
 
 #include "main/sidebar.h"
 #include "main/sword_treekey.h"
+#include "main/sword.h"
 
 
 
@@ -348,6 +349,12 @@ static gboolean on_button_release(GtkWidget *widget,
 			       GdkEventButton *event,
 			       EDITOR * editor)
 {
+	GtkTreeSelection *selection;
+	GtkTreeIter selected;
+	GtkTreeModel *model;
+	GtkTreePath *path;
+	gint depth = 0;
+	
 	switch (event->button) {
 	case 1:
 		_button_one(editor);
@@ -358,9 +365,18 @@ static gboolean on_button_release(GtkWidget *widget,
 		break;
 
 	case 3:
-		gtk_menu_popup(GTK_MENU(menu),
+		selection =
+		    gtk_tree_view_get_selection(GTK_TREE_VIEW(widget));
+		gtk_tree_selection_get_selected(selection, &model, &selected);		
+		path = gtk_tree_model_get_path(model, &selected);
+		depth = gtk_tree_path_get_depth (path);
+		
+		if (depth > 1)
+			gtk_menu_popup(GTK_MENU(menu),
 				       NULL, NULL, NULL, NULL,
 				       0, gtk_get_current_event_time());
+
+		gtk_tree_path_free(path);
 		return FALSE;		
 	}
 	return FALSE;
