@@ -68,6 +68,7 @@ extern "C" {
 #include "main/xml.h"
 #include "main/display.hh"
 #include "main/global_ops.hh"
+#include "main/url.hh"
 
 #include "backend/sword_main.hh"
 	
@@ -93,7 +94,7 @@ enum {
 	COL_OFFSET,
 	N_COLUMNS
 }; 
-
+/*
 enum {
 	TYPE_URI,
 	BLANK,
@@ -102,7 +103,7 @@ enum {
 	TYPE_NOTE,
 	NOTE_NUM
 };
-
+*/
 gboolean bible_freed;
 
 gboolean dialog_freed;
@@ -1009,7 +1010,7 @@ static gint show_note(DIALOG_DATA * d,const gchar * module, const gchar * passag
 		module = settings.MainWindowModule;
 	
 	if(passage && (strlen(passage) < 5))
-		passage = settings.currentverse;
+		passage = d->key;
 	
 	if(strstr(type,"x") && clicked) {
 		be->set_module_key((gchar*)module, (gchar*)passage);
@@ -1017,8 +1018,7 @@ static gint show_note(DIALOG_DATA * d,const gchar * module, const gchar * passag
 							 (gchar*)value,
 							"refList");
 		if (tmpbuf) {
-			main_display_verse_list_in_sidebar(settings.
-					  currentverse,
+			main_display_verse_list_in_sidebar(d->key,
 					  (gchar*)module,
 					  tmpbuf);
 			g_free(tmpbuf);
@@ -1062,7 +1062,7 @@ static gint show_note(DIALOG_DATA * d,const gchar * module, const gchar * passag
 			list_of_verses = NULL;
 		}
 		
-		tmp = be->parse_verse_list(tmpbuf, settings.currentverse);  
+		tmp = be->parse_verse_list(tmpbuf, d->key);  
 		while (tmp != NULL) {
 			buf = g_strdup_printf(
 				"<a href=\"sword://%s/%s\">"
@@ -1084,10 +1084,10 @@ static gint show_note(DIALOG_DATA * d,const gchar * module, const gchar * passag
 				"<a href=\"sword://%s/%s\">"
 				"<font color=\"%s\">%s%s</font></a><br>",
 				(gchar*)module,
-				settings.currentverse,
+				d->key,
 				settings.bible_text_color,
 				_("Back to "),
-				settings.currentverse);
+				d->key);
 		str = g_string_append(str,buf);
 		if(buf) g_free(buf);		
 		
@@ -1432,12 +1432,23 @@ static gint new_url_handler(DIALOG_DATA * t, const gchar * url, gboolean clicked
 
 gint main_dialogs_url_handler(DIALOG_DATA * t, const gchar * url, gboolean clicked)
 {	
+	gint retval = 0;
 	GS_message(("main_dialogs_url_handler url = %s",url));
+	
+
+	if (strstr(url, "sword://") ||
+	    strstr(url, "bible://")) {
+		GString *url_clean = hex_decode(url);
+		GS_message(("url_clean = %s", url_clean->str));
+		
+		retval = sword_uri(t, url_clean->str, clicked);
+		g_string_free(url_clean, TRUE);
+	}
 	if(strstr(url,"passagestudy.jsp") || strstr(url,"xiphos.url"))
 		return new_url_handler(t,url,clicked);
-	if(strstr(url,"sword://"))
-		return sword_uri(t, url, clicked);
-	return 0;
+	/*if(strstr(url,"sword://"))
+		return sword_uri(t, url, clicked);*/
+	return retval;
 }
 
 
