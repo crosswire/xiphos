@@ -1677,8 +1677,10 @@ GTKChapDisp::Display(SWModule &imodule)
 		// insert the userfootnote reference
 		if (e) {
 			(void) g_strdelimit(e->annotation, "\"<>", '\'');
-			buf = g_strdup_printf("<a href=\"xiphos.url?action=showUserNote&"
-					      "module=%s&value=%s\"><small><sup>*u</sup></small></a>",
+			buf = g_strdup_printf("<span class=\"word\">"
+					      "<a href=\"xiphos.url?action=showUserNote&"
+					      "module=%s&value=%s\"><small><sup>*u</sup>"
+					      "</small></a></span> ",
 					      settings.MainWindowModule,
 					      e->annotation);
 			swbuf.append(buf);
@@ -2098,8 +2100,10 @@ DialogChapDisp::Display(SWModule &imodule)
 		// insert the userfootnote reference
 		if (e) {
 			(void) g_strdelimit(e->annotation, "\"<>", '\'');
-			buf = g_strdup_printf("<a href=\"xiphos.url?action=showUserNote&"
-					      "module=%s&value=%s\"><small><sup>*u</sup></small></a>",
+			buf = g_strdup_printf("<span class=\"word\">"
+					      "<a href=\"xiphos.url?action=showUserNote&"
+					      "module=%s&value=%s\"><small><sup>*u</sup>"
+					      "</small></a></span> ",
 					      settings.MainWindowModule,
 					      e->annotation);
 			swbuf.append(buf);
