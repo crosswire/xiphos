@@ -8,6 +8,7 @@
 
 	* fix bugs #2815605 and #2815612 Cross reference in seperate window
 	  change module of main one.
+	* fix bugs #2801515 Adding a child to the root of journal causes problems
 
 2009-07-02 terry <tbiggs@users.sourceforge.net>
 
