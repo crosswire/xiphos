@@ -1687,9 +1687,10 @@ GTKChapDisp::Display(SWModule &imodule)
 		if (e) {
 			buf = g_strdup_printf("<span class=\"word\">"
 					      "<a href=\"xiphos.url?action=showUserNote&"
-					      "module=%s&value=%s\"><small><sup>*u</sup>"
+					      "module=%s&passage=%s&value=%s\"><small><sup>*u</sup>"
 					      "</small></a></span> ",
 					      settings.MainWindowModule,
+			                      (char*)key->getShortText(),
 					      e->annotation->str);
 			swbuf.append(buf);
 			g_free(buf);
