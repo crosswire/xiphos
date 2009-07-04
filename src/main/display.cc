@@ -96,10 +96,11 @@ typedef struct {
     GString *annotation;
 } marked_element;
 
-marked_element marked_cache[1000];
+typedef std::list <marked_element *> MC;
+MC marked_cache;
+
 gchar *marked_cache_modname = NULL, *marked_cache_book = NULL;
 int marked_cache_chapter = -1;
-int marked_cache_count = 0;
 
 #define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><STYLE type=\"text/css\"><!-- A { text-decoration:none } %s --></STYLE></head>"
 
@@ -189,17 +190,21 @@ out:
 void
 marked_cache_fill(gchar *modname, gchar *key)
 {
-	int i = marked_cache_count;
 	gchar *s, *t, *err;
 	char *key_book;
 	int key_chapter, key_verse;
 
-	// free the old cache
-	while (--i >= 0) {
-		g_free(marked_cache[i].module);
-		g_string_free(marked_cache[i].annotation, TRUE);
+	// free the old cache.  first free contents, then the set itself.
+	MC::iterator it;
+	for (it = marked_cache.begin();
+	     it != marked_cache.end();
+	     ++it) {
+		marked_element *e = *it;
+		g_free(e->module);
+		g_string_free(e->annotation, TRUE);
+		delete e;
 	}
-	marked_cache_count = 0;
+	marked_cache.clear();
 
 	// tear apart the key
 	key_book = g_strdup(key);
@@ -220,19 +225,19 @@ marked_cache_fill(gchar *modname, gchar *key)
 	// load up the annotation content
     	if (xml_set_section_ptr("markedverses") && xml_get_label()) {
 		do {
-			marked_element &e = marked_cache[marked_cache_count];
-			e.module = xml_get_label();
+			marked_element *e = new marked_element;
+			e->module = xml_get_label();
 			s = xml_get_list();
-			e.annotation = g_string_new(s);
+			e->annotation = g_string_new(s);
 			g_free(s);
 
 			// embedded newlines must be marked up for line breaks.
-			for (s = strchr(e.annotation->str, '\n'); s; s = strchr(s, '\n')) {
-				(void) g_string_insert(e.annotation,
-						       (s++) - (e.annotation->str) + 1,
+			for (s = strchr(e->annotation->str, '\n'); s; s = strchr(s, '\n')) {
+				(void) g_string_insert(e->annotation,
+						       (s++) - (e->annotation->str) + 1,
 						       "<br />");
 			}
-			gchar *m = e.module;
+			gchar *m = e->module;
 
 			// tear apart "NASB Revelation of John 1:1"
 			if ((s = strrchr(m, ' ')) == NULL)	// rightmost space
@@ -241,26 +246,25 @@ marked_cache_fill(gchar *modname, gchar *key)
 			if ((s = strchr((t = s+1), ':')) == NULL) // chapter:verse
 				goto fail;
 			*(s++) = '\0';
-			e.chapter = atoi(t);
-			e.verse   = atoi(s);
+			e->chapter = atoi(t);
+			e->verse   = atoi(s);
 			if ((s = strchr(m, ' ')) == NULL)	// leftmost space
 				goto fail;
 			*(s++) = '\0';
-			e.book = s;
+			e->book = s;
 			// now properly delimited: module & book, plus numeric c:v.
 
 			// for fast reference: is this annotation relevant?
-			if ((key_chapter != e.chapter) ||
+			if ((key_chapter != e->chapter) ||
 			    (*m && (strcasecmp(m, modname) != 0)) ||
-			    (strcasecmp(e.book, key_book) != 0)) {
+			    (strcasecmp(e->book, key_book) != 0)) {
 				*m = '\001';
 				// ^A => "nope, not useful in this chapter."
 				// notice that we allow for an empty modname as
 				// an indicator of annotations into any module.
 				// " Gen 1:1" has an empty module specification
 			}
-
-			++marked_cache_count;
+			marked_cache.insert(marked_cache.begin(), e);
 		} while (xml_next_item() && xml_get_label());
 	}
 	g_free(key_book);
@@ -280,10 +284,15 @@ fail:
 marked_element *
 marked_cache_check(int thisVerse)
 {
-	for (int i = 0; i < marked_cache_count; ++i)
-		if ((*(marked_cache[i].module) != '\001') &&
-		    marked_cache[i].verse == thisVerse)
-			return &marked_cache[i];
+	MC::iterator it;
+	for (it = marked_cache.begin();
+	     it != marked_cache.end();
+	     ++it) {
+		marked_element *e = *it;
+		if ((*(e->module) != '\001') &&
+		    (e->verse == thisVerse))
+			return e;
+	}
 	return NULL;
 }
 
