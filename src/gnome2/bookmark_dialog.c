@@ -443,7 +443,8 @@ static GtkWidget *_create_mark_verse_dialog(gchar * module,
 {
 	GladeXML *gxml;
 	gchar *glade_file;
-	GtkWidget *dialog;	
+	GtkWidget *dialog;
+	GtkWidget *sw;	
 	gchar reference[100];
 	gchar *old_note = NULL;
 
@@ -463,6 +464,9 @@ static GtkWidget *_create_mark_verse_dialog(gchar * module,
 
 	/* lookup the root widget */
 	dialog = glade_xml_get_widget(gxml, "dialog");
+gtk_window_set_default_size (GTK_WINDOW (dialog),
+                                   300, 350);
+	
 	g_signal_connect(dialog, "response",
 			 G_CALLBACK(on_mark_verse_response), NULL);
 	
@@ -473,6 +477,13 @@ static GtkWidget *_create_mark_verse_dialog(gchar * module,
 	textbuffer = gtk_text_view_get_buffer ((GtkTextView*)textview);
 	gtk_entry_set_text(GTK_ENTRY(entry_key), key);
 	gtk_entry_set_text(GTK_ENTRY(entry_module), module);
+	sw = glade_xml_get_widget(gxml, "scrolledwindow1");
+	
+      gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (textview), GTK_WRAP_WORD);
+      gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
+                                      GTK_POLICY_AUTOMATIC,
+                                      GTK_POLICY_AUTOMATIC);
+	
 
 	old_note = xml_get_list_from_label("markedverses", "markedverse", reference);
 	gtk_text_buffer_set_text (textbuffer, (old_note) ? old_note : "", -1);
