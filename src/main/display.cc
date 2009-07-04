@@ -89,14 +89,14 @@ extern ModuleCache::CacheMap ModuleMap;
 
 // for tracking personal annotations.
 typedef struct {
-    gchar *module;
-    gchar *book;
-    int   chapter;
-    int   verse;
-    gchar *annotation;
+    gchar   *module;
+    gchar   *book;
+    int     chapter;
+    int     verse;
+    GString *annotation;
 } marked_element;
 
-marked_element marked_cache[180];	/* Ps119 => 176 */
+marked_element marked_cache[1000];
 gchar *marked_cache_modname = NULL, *marked_cache_book = NULL;
 int marked_cache_chapter = -1;
 int marked_cache_count = 0;
@@ -197,7 +197,7 @@ marked_cache_fill(gchar *modname, gchar *key)
 	// free the old cache
 	while (--i >= 0) {
 		g_free(marked_cache[i].module);
-		g_free(marked_cache[i].annotation);
+		g_string_free(marked_cache[i].annotation, TRUE);
 	}
 	marked_cache_count = 0;
 
@@ -222,7 +222,16 @@ marked_cache_fill(gchar *modname, gchar *key)
 		do {
 			marked_element &e = marked_cache[marked_cache_count];
 			e.module = xml_get_label();
-			e.annotation = xml_get_list();
+			s = xml_get_list();
+			e.annotation = g_string_new(s);
+			g_free(s);
+
+			// embedded newlines must be marked up for line breaks.
+			for (s = strchr(e.annotation->str, '\n'); s; s = strchr(s, '\n')) {
+				(void) g_string_insert(e.annotation,
+						       (s++) - (e.annotation->str) + 1,
+						       "<br />");
+			}
 			gchar *m = e.module;
 
 			// tear apart "NASB Revelation of John 1:1"
@@ -1410,7 +1419,7 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 			*(s++) = ' ';
 			*(s++) = ' ';
 		}
-		for (s = strstr(text->str, "*u"); s; s = strstr(s, "*n")) {
+		for (s = strstr(text->str, "*u"); s; s = strstr(s, "*u")) {
 			*(s++) = ' ';
 			*(s++) = ' ';
 		}
@@ -1676,13 +1685,12 @@ GTKChapDisp::Display(SWModule &imodule)
 
 		// insert the userfootnote reference
 		if (e) {
-			(void) g_strdelimit(e->annotation, "\"<>", '\'');
 			buf = g_strdup_printf("<span class=\"word\">"
 					      "<a href=\"xiphos.url?action=showUserNote&"
 					      "module=%s&value=%s\"><small><sup>*u</sup>"
 					      "</small></a></span> ",
 					      settings.MainWindowModule,
-					      e->annotation);
+					      e->annotation->str);
 			swbuf.append(buf);
 			g_free(buf);
 		}
@@ -2099,13 +2107,12 @@ DialogChapDisp::Display(SWModule &imodule)
 
 		// insert the userfootnote reference
 		if (e) {
-			(void) g_strdelimit(e->annotation, "\"<>", '\'');
 			buf = g_strdup_printf("<span class=\"word\">"
 					      "<a href=\"xiphos.url?action=showUserNote&"
 					      "module=%s&value=%s\"><small><sup>*u</sup>"
 					      "</small></a></span> ",
 					      settings.MainWindowModule,
-					      e->annotation);
+					      e->annotation->str);
 			swbuf.append(buf);
 			g_free(buf);
 		}
