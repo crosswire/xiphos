@@ -199,8 +199,8 @@ void main_information_viewer(const gchar * mod_name, const gchar * text, const g
 		}
 		if (!strcmp(type, "u")) {
 			g_string_printf(tmp_str,
-					"<font color=\"grey\">%s<HR></font><br>",
-					_("User Annotation"));
+					"<font color=\"grey\">%s: %s<HR></font><br>",
+					_("User Annotation"), key);
 			str = g_string_append(str, tmp_str->str);
 		}
 		if (!strcmp(type, "x")) {
