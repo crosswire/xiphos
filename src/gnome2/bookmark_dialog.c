@@ -46,8 +46,28 @@ static GtkWidget *button_add_bookmark;
 static GtkWidget *entry_label;
 static GtkWidget *entry_key;
 static GtkWidget *entry_module;
+static GtkWidget *textview;
+static GtkTextBuffer *textbuffer;
+static gchar *note;
+
+void on_buffer_changed (GtkTextBuffer *textbuffer, gpointer user_data) 
+{
+	GtkTextIter start;
+	GtkTextIter end;
 
 
+	gtk_text_buffer_get_start_iter (textbuffer, &start);
+	gtk_text_buffer_get_end_iter (textbuffer, &end);
+	if (note)
+		g_free(note);
+	note = gtk_text_buffer_get_text (textbuffer,
+                                         &start,
+                                         &end,
+                                         FALSE);
+	GS_message (("note: %s", note));
+	
+
+}
 
 /******************************************************************************
  * Name
@@ -248,7 +268,7 @@ void on_mark_verse_response(GtkDialog * dialog,
 		break;
 	case GTK_RESPONSE_ACCEPT: /*  mark the verse  */
 		xml_set_list_item("markedverses", "markedverse",
-				  reference, "user content");
+				  reference, (note) ? note : "user content");
 		marked_cache_fill(settings.MainWindowModule, settings.currentverse);
 		main_display_bible(NULL, settings.currentverse);
 		/* XXX figure out the user content later */
@@ -423,8 +443,15 @@ static GtkWidget *_create_mark_verse_dialog(gchar * module,
 {
 	GladeXML *gxml;
 	gchar *glade_file;
-	GtkWidget *dialog;
+	GtkWidget *dialog;	
+	gchar reference[100];
+	gchar *old_note = NULL;
 
+	g_snprintf(reference, 100, "%s %s",
+		   (gchar *)module,
+		   (gchar *)key);
+	note = NULL;
+	
 	glade_file = gui_general_user_file("markverse.glade", TRUE);
 	g_return_val_if_fail(glade_file != NULL, NULL);
 	GS_message(("%s",glade_file));
@@ -442,9 +469,16 @@ static GtkWidget *_create_mark_verse_dialog(gchar * module,
 	/* entrys */	
 	entry_key = glade_xml_get_widget(gxml, "entry2");
 	entry_module = glade_xml_get_widget(gxml, "entry3");
+	textview = glade_xml_get_widget(gxml, "textview");
+	textbuffer = gtk_text_view_get_buffer ((GtkTextView*)textview);
 	gtk_entry_set_text(GTK_ENTRY(entry_key), key);
 	gtk_entry_set_text(GTK_ENTRY(entry_module), module);
-	
+
+	old_note = xml_get_list_from_label("markedverses", "markedverse", reference);
+	gtk_text_buffer_set_text (textbuffer, (old_note) ? old_note : "", -1);
+	g_signal_connect(textbuffer, "changed",
+			 G_CALLBACK(on_buffer_changed), NULL);
+
 	return dialog;
 }
 

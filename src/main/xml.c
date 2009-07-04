@@ -770,7 +770,7 @@ char *xml_get_list_from_label(const char *section, const char *item, const char 
 			if (!xmlStrcmp
 			    (cur->name, (const xmlChar *) item)) {
 				prop_label = xmlGetProp(cur, (const xmlChar *) "label");
-				//g_warning(prop_label);
+				GS_message(("\nprop_label: %s\nlabel: %s",prop_label,label));
 				if (!xmlStrcmp
 				    (prop_label,
 				     (const xmlChar *) label)) {
