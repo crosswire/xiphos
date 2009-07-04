@@ -460,9 +460,9 @@
 				</listitem>
 				<listitem>	
 					<para>
-					Read Aloud - If you enable this, then Xiphos will funnel all selected verses through the
-					<application>festival</application> text-to-speech system.  <application>Festival</application> is a
-					widely-available TTS, often installed by default in Linux distributions. Reading aloud is not currently
+					Read Aloud - If you enable this, then <application>Xiphos</application> will funnel all selected verses
+					through the <application>festival</application> text-to-speech system.  <application>Festival</application> is
+					a widely-available TTS, often installed by default in Linux distributions. Reading aloud is not currently
 					supported on Windows.
 					</para>
 					<para>
@@ -485,6 +485,39 @@
 					</para>
 				</listitem>
 			</itemizedlist>
+		</sect3>
+		
+		<sect3 id="xiphos-user-annotation">
+			<title>User Annotation</title>
+			<para>
+			Many users wish to make personal annotations on individual verses, without the need to put a full "personal commentary" module
+			to use.  <application>Xiphos</application> provides this at the bottom of the right-click context menu in the Bible pane.
+			This brings up a dialog showing the current verse reference and offering a text box into which to enter a brief personal note.
+			Once the user closes the dialog with "Mark," the verse will be displayed in reverse-highlight (default, blue on yellow) and a
+			marker <guibutton>*u</guibutton> will be inserted at the verse's beginning.  This is metaphorically similar for users who mark
+			verses in paper Bibles with a yellow highlighter and write personal notes in the margins.
+			</para>
+			<para>
+			Selecting an already-annotated verse will (in the usual case) bring up the existing content for re-editing.  An
+			already-annotated verse can be unmarked; the verse will cease to show in reverse-highlight.
+			</para>
+			<para>
+			If the user deletes the module name from the reference at the top of the dialog, then the annotation will apply to any Bible
+			module at the selected verse.  However, in this case, re-selecting the annotated verse will not initialize with the existing
+			content, because the dialog is created based on the specific module reference.
+			</para>
+		</sect3>
+		
+		<sect3 id="xiphos-geography-support">
+			<title>Geography Support</title>
+			<para>
+			A connection to browsing BibleMap.org is available by mouse-selecting a place name in any text.  Use the right-click context
+			menu to select <menuchoice><guimenuitem>Lookup Selection</guimenuitem><guimenuitem>Browse in
+			BibleMap.org</guimenuitem></menuchoice>.  A web browser will be brought up to show the selected name's geography via
+			BibleMap, which provides Biblical detail overlaid on a Google Maps interface.
+			</para>
+			<para>
+			</para>
 		</sect3>
 		
 		<sect3 id="xiphos-bible-dictionary">
@@ -539,7 +572,7 @@
 		</para>
 		<para>
 		Footnote content is displayed in the Previewer when you hover over the indicator <guibutton>*n</guibutton> in the Bible text;
-		It remains visible until your mouse moves over another indicator, Strong's number, etc. Sometimes you may want the text to
+		it remains visible until your mouse moves over another indicator, Strong's number, etc. Sometimes you may want the text to
 		remain anchored until you can move the mouse to the previewer to click on a link or to read large footnotes. To anchor the text so
 		that you can scroll it in the Previewer, middle-click the indicator (or hold down the <guibutton>Shift key</guibutton>)
 		and move to the Previewer.
@@ -548,6 +581,11 @@
 		Cross-reference indicators <guibutton>*x</guibutton> work much the same way.  Clicking the
 		indicator will send the set of references to the <guibutton>Verse List</guibutton> in the
 		<interface>Sidebar</interface>, where you can click them individually for reading in the Previewer.
+		</para>
+		<para>
+		Any verses shown in reverse-highlight have personal annotation associated with them, and such verses will include
+		<guibutton>*u</guibutton> at the beginning of the verse.  Hovering on this marker will show the annotation in the previewer, just as
+		for publisher's footnotes.
 		</para>
 	</sect2>	
 <!-- ============= Commentary Pane  ============--> 
