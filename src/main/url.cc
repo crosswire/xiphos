@@ -952,14 +952,16 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 
 		else if (!strcmp(action, "showUserNote")) {
 			module = g_strdup(m_url.getParameterValue("module"));
+			passage = g_strdup((gchar*)m_url.getParameterValue("passage"));
 			main_information_viewer(module,
 						(gchar*)svalue,
-						(gchar*)svalue, 
+						(gchar*)passage, 
 						"showUserNote",
 						(gchar*)"u",
 						NULL,
 						NULL);
 			if (module) g_free(module);
+			if (passage) g_free(passage);
 		}
 
 		else if (!strcmp(action, "showRef")) {

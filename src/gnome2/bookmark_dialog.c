@@ -271,8 +271,6 @@ void on_mark_verse_response(GtkDialog * dialog,
 				  reference, (note) ? note : "user content");
 		marked_cache_fill(settings.MainWindowModule, settings.currentverse);
 		main_display_bible(NULL, settings.currentverse);
-		g_free (note);
-		/* XXX figure out the user content later */
 		break;
 	case GTK_RESPONSE_OK:     /*  unmark the verse  */
 		xml_remove_node("markedverses", "markedverse", reference);
@@ -280,6 +278,7 @@ void on_mark_verse_response(GtkDialog * dialog,
 		main_display_bible(NULL, settings.currentverse);
 		break;
 	}
+	g_free (note);
 	gtk_widget_destroy(GTK_WIDGET(dialog));
 	xml_save_settings_doc(settings.fnconfigure);
 }
