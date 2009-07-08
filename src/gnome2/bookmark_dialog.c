@@ -268,7 +268,9 @@ void on_mark_verse_response(GtkDialog * dialog,
 		break;
 	case GTK_RESPONSE_ACCEPT: /*  mark the verse  */
 		xml_set_list_item("markedverses", "markedverse",
-				  reference, (note) ? note : "user content");
+				  reference, (note
+					      ? g_strdelimit(note, "\"", '\'')
+					      : "user content"));
 		marked_cache_fill(settings.MainWindowModule, settings.currentverse);
 		main_display_bible(NULL, settings.currentverse);
 		break;
