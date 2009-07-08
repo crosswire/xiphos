@@ -491,7 +491,7 @@
 			<title>User Annotation</title>
 			<para>
 			Many users wish to make personal annotations on individual verses, without the need to put a full "personal commentary" module
-			to use.  <application>Xiphos</application> provides this at the bottom of the right-click context menu in the Bible pane.
+			to use.  <application>Xiphos</application> provides this in the right-click context menu in the Bible pane.
 			This brings up a dialog showing the current verse reference and offering a text box into which to enter a brief personal note.
 			Once the user closes the dialog with "Mark," the verse will be displayed in reverse-highlight (default, blue on yellow) and a
 			marker <guibutton>*u</guibutton> will be inserted at the verse's beginning.  This is metaphorically similar for users who mark
