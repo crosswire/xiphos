@@ -188,7 +188,12 @@ out:
 // user annotation cache filling.
 //
 
+#ifdef USE_GTKMOZEMBED
 #define	NUM_REPLACE	4
+#else
+#define	NUM_REPLACE	3
+#endif /* !USE_GTKMOZEMBED */
+
 struct replace {
     gchar c;
     gchar *s;
@@ -196,8 +201,8 @@ struct replace {
     // < and > must be first.
     { '<',  (gchar *)"&lt;"   },
     { '>',  (gchar *)"&gt;"   },
-    { '"',  (gchar *)"&quot;" },
     { '\n', (gchar *)"<br />" },
+    { '"',  (gchar *)"&quot;" },
 };
 
 void
