@@ -187,6 +187,19 @@ out:
 //
 // user annotation cache filling.
 //
+
+#define	NUM_REPLACE	4
+struct replace {
+    gchar c;
+    gchar *s;
+} replacement[NUM_REPLACE] = {
+    // < and > must be first.
+    { '<',  (gchar *)"&lt;"   },
+    { '>',  (gchar *)"&gt;"   },
+    { '"',  (gchar *)"&quot;" },
+    { '\n', (gchar *)"<br />" },
+};
+
 void
 marked_cache_fill(gchar *modname, gchar *key)
 {
@@ -231,11 +244,17 @@ marked_cache_fill(gchar *modname, gchar *key)
 			e->annotation = g_string_new(s);
 			g_free(s);
 
-			// embedded newlines must be marked up for line breaks.
-			for (s = strchr(e->annotation->str, '\n'); s; s = strchr(s, '\n')) {
-				(void) g_string_insert(e->annotation,
-						       (++s) - (e->annotation->str),
-						       "<br />");
+			// replace embedded badness characters.
+			for (int i = 0; i < NUM_REPLACE; ++i) {
+				for (s = strchr(e->annotation->str, replacement[i].c);
+				     s;
+				     s = strchr(s, replacement[i].c)) {
+					(void) g_string_erase(e->annotation,
+							      s - (e->annotation->str), 1);
+					(void) g_string_insert(e->annotation,
+							       s - (e->annotation->str),
+							       replacement[i].s);
+				}
 			}
 			gchar *m = e->module;
 
