@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-02 23:29+0100\n"
+"POT-Creation-Date: 2009-07-08 13:17+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -243,28 +243,28 @@ msgid "Go to "
 msgstr ""
 
 #. info->stock_icon = GTK_STOCK_OPEN;
-#: ../src/gnome2/bookmark_dialog.c:147 ../src/gnome2/bookmarks_menu.c:471
+#: ../src/gnome2/bookmark_dialog.c:167 ../src/gnome2/bookmarks_menu.c:471
 #: ../src/gnome2/bookmarks_menu.c:897 ../src/gnome2/bookmarks_menu.c:995
 #: ../src/gnome2/bookmarks_treeview.c:131 ../ui/editor_studypad.xml.h:2
 #: ../ui/xi-menus.glade.h:9
 msgid "Bookmark"
 msgstr ""
 
-#: ../src/gnome2/bookmark_dialog.c:149 ../src/gnome2/bookmarks_menu.c:997
+#: ../src/gnome2/bookmark_dialog.c:169 ../src/gnome2/bookmarks_menu.c:997
 #: ../src/gnome2/bookmarks_treeview.c:132
 msgid "Enter Folder Name"
 msgstr ""
 
-#: ../src/gnome2/bookmark_dialog.c:151 ../src/gnome2/bookmarks_menu.c:999
+#: ../src/gnome2/bookmark_dialog.c:171 ../src/gnome2/bookmarks_menu.c:999
 msgid "Folder Name"
 msgstr ""
 
-#: ../src/gnome2/bookmark_dialog.c:152 ../src/gnome2/bookmarks_menu.c:1000
+#: ../src/gnome2/bookmark_dialog.c:172 ../src/gnome2/bookmarks_menu.c:1000
 #: ../src/gnome2/bookmarks_treeview.c:134
 msgid "Folder: "
 msgstr ""
 
-#: ../src/gnome2/bookmarks_menu.c:457 ../src/gnome2/treekey-editor.c:321
+#: ../src/gnome2/bookmarks_menu.c:457 ../src/gnome2/treekey-editor.c:322
 #: ../ui/xi-menus.glade.h:22
 msgid "Edit"
 msgstr ""
@@ -447,8 +447,8 @@ msgstr ""
 msgid "New Name"
 msgstr ""
 
-#: ../src/gnome2/menu_popup.c:1188 ../src/gnome2/treekey-editor.c:131
-#: ../src/gnome2/treekey-editor.c:190 ../src/gnome2/treekey-editor.c:276
+#: ../src/gnome2/menu_popup.c:1188 ../src/gnome2/treekey-editor.c:132
+#: ../src/gnome2/treekey-editor.c:191 ../src/gnome2/treekey-editor.c:277
 #: ../src/main/prayerlists.cc:240
 msgid "Name: "
 msgstr ""
@@ -568,7 +568,7 @@ msgstr ""
 msgid "Install"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:549 ../src/gnome2/treekey-editor.c:315
+#: ../src/gnome2/mod_mgr.c:549 ../src/gnome2/treekey-editor.c:316
 msgid "Remove"
 msgstr ""
 
@@ -1150,48 +1150,48 @@ msgstr ""
 msgid "Powered by the SWORD Project"
 msgstr ""
 
-#: ../src/gnome2/treekey-editor.c:129 ../src/gnome2/treekey-editor.c:188
-#: ../src/gnome2/treekey-editor.c:274
+#: ../src/gnome2/treekey-editor.c:130 ../src/gnome2/treekey-editor.c:189
+#: ../src/gnome2/treekey-editor.c:275
 msgid "Prayer List/Journal Item"
 msgstr ""
 
-#: ../src/gnome2/treekey-editor.c:130 ../src/gnome2/treekey-editor.c:189
-#: ../src/gnome2/treekey-editor.c:275
+#: ../src/gnome2/treekey-editor.c:131 ../src/gnome2/treekey-editor.c:190
+#: ../src/gnome2/treekey-editor.c:276
 msgid "New name"
 msgstr ""
 
-#: ../src/gnome2/treekey-editor.c:245
+#: ../src/gnome2/treekey-editor.c:246
 msgid "Remove the selected item"
 msgstr ""
 
-#: ../src/gnome2/treekey-editor.c:303
+#: ../src/gnome2/treekey-editor.c:304
 msgid "Add Child"
 msgstr ""
 
-#: ../src/gnome2/treekey-editor.c:304 ../src/gnome2/treekey-editor.c:310
+#: ../src/gnome2/treekey-editor.c:305 ../src/gnome2/treekey-editor.c:311
 msgid "Add an item"
 msgstr ""
 
-#: ../src/gnome2/treekey-editor.c:309
+#: ../src/gnome2/treekey-editor.c:310
 msgid "Add Sibling"
 msgstr ""
 
-#: ../src/gnome2/treekey-editor.c:316
+#: ../src/gnome2/treekey-editor.c:317
 msgid "Remove this item"
 msgstr ""
 
-#: ../src/gnome2/treekey-editor.c:322
+#: ../src/gnome2/treekey-editor.c:323
 msgid "Edit this item"
 msgstr ""
 
-#: ../src/main/display.cc:261
+#: ../src/main/display.cc:274
 #, c-format
 msgid ""
 "Improperly encoded personal annotation label:\n"
 "'%s'"
 msgstr ""
 
-#: ../src/main/display.cc:388
+#: ../src/main/display.cc:406
 msgid ""
 "An image file's size could not be determined.\n"
 "Is ImageMagick's 'identify' not installed?\n"
@@ -1199,8 +1199,8 @@ msgid ""
 "Xiphos cannot resize images to fit window."
 msgstr ""
 
-#: ../src/main/display.cc:1044 ../src/main/display.cc:1106
-#: ../src/main/display.cc:1194 ../src/main/display.cc:1202
+#: ../src/main/display.cc:1062 ../src/main/display.cc:1124
+#: ../src/main/display.cc:1212 ../src/main/display.cc:1220
 #: ../ui/export-dialog.glade.h:7
 msgid "Chapter"
 msgstr ""
@@ -1229,29 +1229,29 @@ msgstr ""
 msgid "Displaying Xiphos"
 msgstr ""
 
-#: ../src/main/module_dialogs.cc:231 ../src/main/previewer.cc:122
+#: ../src/main/module_dialogs.cc:232 ../src/main/previewer.cc:122
 #: ../ui/prefs.glade.h:75
 msgid "Previewer"
 msgstr ""
 
-#: ../src/main/module_dialogs.cc:297 ../src/main/module_dialogs.cc:423
+#: ../src/main/module_dialogs.cc:298 ../src/main/module_dialogs.cc:424
 #: ../src/main/previewer.cc:197
 msgid "Footnote"
 msgstr ""
 
-#: ../src/main/module_dialogs.cc:303 ../src/main/module_dialogs.cc:428
+#: ../src/main/module_dialogs.cc:304 ../src/main/module_dialogs.cc:429
 #: ../src/main/previewer.cc:209
 msgid "Cross Reference"
 msgstr ""
 
-#: ../src/main/module_dialogs.cc:309 ../src/main/module_dialogs.cc:323
-#: ../src/main/module_dialogs.cc:433 ../src/main/module_dialogs.cc:445
+#: ../src/main/module_dialogs.cc:310 ../src/main/module_dialogs.cc:324
+#: ../src/main/module_dialogs.cc:434 ../src/main/module_dialogs.cc:446
 #: ../src/main/previewer.cc:215 ../src/main/previewer.cc:234
 msgid "Strongs"
 msgstr ""
 
-#: ../src/main/module_dialogs.cc:315 ../src/main/module_dialogs.cc:334
-#: ../src/main/module_dialogs.cc:438 ../src/main/module_dialogs.cc:455
+#: ../src/main/module_dialogs.cc:316 ../src/main/module_dialogs.cc:335
+#: ../src/main/module_dialogs.cc:439 ../src/main/module_dialogs.cc:456
 #: ../src/main/previewer.cc:221 ../src/main/previewer.cc:247
 msgid "Morphology"
 msgstr ""
@@ -1902,7 +1902,7 @@ msgstr ""
 msgid "Add Bookmark"
 msgstr ""
 
-#: ../ui/bookmarks.glade.h:2
+#: ../ui/bookmarks.glade.h:2 ../ui/markverse.glade.h:1
 msgid "Bookmark Dialog"
 msgstr ""
 
@@ -1910,11 +1910,11 @@ msgstr ""
 msgid "Bookmark Folder Treeview"
 msgstr ""
 
-#: ../ui/bookmarks.glade.h:4
+#: ../ui/bookmarks.glade.h:4 ../ui/markverse.glade.h:2
 msgid "Cancel Bookmark"
 msgstr ""
 
-#: ../ui/bookmarks.glade.h:5
+#: ../ui/bookmarks.glade.h:5 ../ui/markverse.glade.h:3
 msgid "Create new folder"
 msgstr ""
 
@@ -1926,11 +1926,11 @@ msgstr ""
 msgid "Label:"
 msgstr ""
 
-#: ../ui/bookmarks.glade.h:8
+#: ../ui/bookmarks.glade.h:8 ../ui/markverse.glade.h:6
 msgid "Module Entry"
 msgstr ""
 
-#: ../ui/bookmarks.glade.h:9
+#: ../ui/bookmarks.glade.h:9 ../ui/markverse.glade.h:7
 msgid "Module:"
 msgstr ""
 
@@ -1938,15 +1938,16 @@ msgstr ""
 msgid "New ..."
 msgstr ""
 
-#: ../ui/bookmarks.glade.h:11 ../ui/xi-menus.glade.h:42
+#: ../ui/bookmarks.glade.h:11 ../ui/markverse.glade.h:8
+#: ../ui/xi-menus.glade.h:42
 msgid "New Folder"
 msgstr ""
 
-#: ../ui/bookmarks.glade.h:12
+#: ../ui/bookmarks.glade.h:12 ../ui/markverse.glade.h:10
 msgid "Verse Entry"
 msgstr ""
 
-#: ../ui/bookmarks.glade.h:13
+#: ../ui/bookmarks.glade.h:13 ../ui/markverse.glade.h:11
 msgid "Verse:"
 msgstr ""
 
@@ -2138,6 +2139,18 @@ msgstr ""
 
 #: ../ui/export-dialog.glade.h:25
 msgid "Version"
+msgstr ""
+
+#: ../ui/markverse.glade.h:4
+msgid "Mark"
+msgstr ""
+
+#: ../ui/markverse.glade.h:5
+msgid "Mark/Unmark Verse"
+msgstr ""
+
+#: ../ui/markverse.glade.h:9
+msgid "Unmark"
 msgstr ""
 
 #: ../ui/module-manager.glade.h:1
