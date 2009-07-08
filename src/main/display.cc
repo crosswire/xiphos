@@ -202,7 +202,9 @@ struct replace {
     { '<',  (gchar *)"&lt;"   },
     { '>',  (gchar *)"&gt;"   },
     { '\n', (gchar *)"<br />" },
+#ifdef USE_GTKMOZEMBED
     { '"',  (gchar *)"&quot;" },
+#endif /* USE_GTKMOZEMBED */
 };
 
 void
