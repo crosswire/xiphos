@@ -223,9 +223,9 @@ marked_cache_fill(gchar *modname, gchar *key)
 	marked_cache_chapter = key_chapter;
 
 	// load up the annotation content
+	marked_element *e = new marked_element;
     	if (xml_set_section_ptr("markedverses") && xml_get_label()) {
 		do {
-			marked_element *e = new marked_element;
 			e->module = xml_get_label();
 			s = xml_get_list();
 			e->annotation = g_string_new(s);
@@ -234,7 +234,7 @@ marked_cache_fill(gchar *modname, gchar *key)
 			// embedded newlines must be marked up for line breaks.
 			for (s = strchr(e->annotation->str, '\n'); s; s = strchr(s, '\n')) {
 				(void) g_string_insert(e->annotation,
-						       (s++) - (e->annotation->str) + 1,
+						       (++s) - (e->annotation->str),
 						       "<br />");
 			}
 			gchar *m = e->module;
@@ -258,14 +258,17 @@ marked_cache_fill(gchar *modname, gchar *key)
 			if ((key_chapter != e->chapter) ||
 			    (*m && (strcasecmp(m, modname) != 0)) ||
 			    (strcasecmp(e->book, key_book) != 0)) {
-				*m = '\001';
-				// ^A => "nope, not useful in this chapter."
-				// notice that we allow for an empty modname as
-				// an indicator of annotations into any module.
-				// " Gen 1:1" has an empty module specification
+				// junk: re-use same element in next loop.
+				g_free(e->module);
+				g_string_free(e->annotation, TRUE);
+			} else {
+				// valid: insert + get fresh one to work with.
+				marked_cache.insert(marked_cache.end(), e);
+				e = new marked_element;
 			}
-			marked_cache.insert(marked_cache.begin(), e);
 		} while (xml_next_item() && xml_get_label());
+		// remove extra element that we necessarily have at loop's end.
+		delete e;
 	}
 	g_free(key_book);
 	return;
@@ -289,8 +292,7 @@ marked_cache_check(int thisVerse)
 	     it != marked_cache.end();
 	     ++it) {
 		marked_element *e = *it;
-		if ((*(e->module) != '\001') &&
-		    (e->verse == thisVerse))
+		if (e->verse == thisVerse)
 			return e;
 	}
 	return NULL;
@@ -1588,7 +1590,7 @@ GTKChapDisp::Display(SWModule &imodule)
 	// if we are no longer where annotations were current, re-load.
 	if (strcasecmp(ModuleName,
 		       (marked_cache_modname ? marked_cache_modname : "")) ||
-	    strcasecmp(key->getBookName(), marked_cache_book) ||
+	    strcasecmp(key->getBookAbbrev(), marked_cache_book) ||
 	    (curChapter != marked_cache_chapter))
 		marked_cache_fill(ModuleName, settings.currentverse);
 
