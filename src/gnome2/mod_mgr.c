@@ -1265,7 +1265,7 @@ response_refresh(void)
 		remote_source = g_strdup(gtk_combo_box_get_active_text(
 					     GTK_COMBO_BOX(combo_entry2)));
 
-	buf = g_strdup_printf("%s: %s", _("Refreshing remote source"), remote_source);
+	buf = g_strdup_printf("%s: %s", _("Refreshing from remote source"), remote_source);
 	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh), buf);
 	g_free(buf);
 	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar_refresh), 0);
