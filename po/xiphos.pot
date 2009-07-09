@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-08 13:17+0100\n"
+"POT-Creation-Date: 2009-07-09 20:54+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -673,7 +673,7 @@ msgid "Prayer List/Journal"
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:1268
-msgid "Refreshing remote source"
+msgid "Refreshing from remote source"
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:1279
@@ -1184,14 +1184,14 @@ msgstr ""
 msgid "Edit this item"
 msgstr ""
 
-#: ../src/main/display.cc:274
+#: ../src/main/display.cc:303
 #, c-format
 msgid ""
 "Improperly encoded personal annotation label:\n"
 "'%s'"
 msgstr ""
 
-#: ../src/main/display.cc:406
+#: ../src/main/display.cc:434
 msgid ""
 "An image file's size could not be determined.\n"
 "Is ImageMagick's 'identify' not installed?\n"
@@ -1199,8 +1199,8 @@ msgid ""
 "Xiphos cannot resize images to fit window."
 msgstr ""
 
-#: ../src/main/display.cc:1062 ../src/main/display.cc:1124
-#: ../src/main/display.cc:1212 ../src/main/display.cc:1220
+#: ../src/main/display.cc:1090 ../src/main/display.cc:1152
+#: ../src/main/display.cc:1240 ../src/main/display.cc:1248
 #: ../ui/export-dialog.glade.h:7
 msgid "Chapter"
 msgstr ""
