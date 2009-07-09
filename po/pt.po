@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-08 13:17+0100\n"
-"PO-Revision-Date: 2009-07-08 13:18+0100\n"
+"POT-Creation-Date: 2009-07-09 20:54+0100\n"
+"PO-Revision-Date: 2009-07-09 20:54+0100\n"
 "Last-Translator: Ari Constâncio <ari.constancio@gmail.com>\n"
 "Language-Team: Xiphos Project\n"
 "MIME-Version: 1.0\n"
@@ -714,8 +714,8 @@ msgid "Prayer List/Journal"
 msgstr "Lista de Oração/Diário"
 
 #: ../src/gnome2/mod_mgr.c:1268
-msgid "Refreshing remote source"
-msgstr "Actualizando fonte remota"
+msgid "Refreshing from remote source"
+msgstr "Actualizando de fonte remota"
 
 #: ../src/gnome2/mod_mgr.c:1279
 msgid "Remote source not found"
@@ -1234,7 +1234,7 @@ msgstr "Remover este item"
 msgid "Edit this item"
 msgstr "Editar este item"
 
-#: ../src/main/display.cc:274
+#: ../src/main/display.cc:303
 #, c-format
 msgid ""
 "Improperly encoded personal annotation label:\n"
@@ -1243,7 +1243,7 @@ msgstr ""
 "Rótulo de anotação pessoal indevidamente codificado:\n"
 "'%s'"
 
-#: ../src/main/display.cc:406
+#: ../src/main/display.cc:434
 msgid ""
 "An image file's size could not be determined.\n"
 "Is ImageMagick's 'identify' not installed?\n"
@@ -1255,8 +1255,8 @@ msgstr ""
 "(Ou possivelmente o tipo de imagem é distinto de bmp/gif/jpg/png.)\n"
 "Xiphos não pode redimensionar as imagens para ajustar à janela."
 
-#: ../src/main/display.cc:1062 ../src/main/display.cc:1124
-#: ../src/main/display.cc:1212 ../src/main/display.cc:1220
+#: ../src/main/display.cc:1090 ../src/main/display.cc:1152
+#: ../src/main/display.cc:1240 ../src/main/display.cc:1248
 #: ../ui/export-dialog.glade.h:7
 msgid "Chapter"
 msgstr "Capítulo"
