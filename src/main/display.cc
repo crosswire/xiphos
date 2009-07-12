@@ -96,7 +96,7 @@ typedef struct {
     GString *annotation;
 } marked_element;
 
-typedef std::list <marked_element *> MC;
+typedef std::map <int, marked_element *> MC;
 MC marked_cache;
 
 gchar *marked_cache_modname = NULL, *marked_cache_book = NULL;
@@ -188,11 +188,7 @@ out:
 // user annotation cache filling.
 //
 
-#ifdef USE_GTKMOZEMBED
 #define	NUM_REPLACE	4
-#else
-#define	NUM_REPLACE	3
-#endif /* !USE_GTKMOZEMBED */
 
 struct replace {
     gchar c;
@@ -204,7 +200,9 @@ struct replace {
     { '\n', (gchar *)"<br />" },
 #ifdef USE_GTKMOZEMBED
     { '"',  (gchar *)"&quot;" },
-#endif /* USE_GTKMOZEMBED */
+#else
+    { '"',  (gchar *)"'" },
+#endif /* !USE_GTKMOZEMBED */
 };
 
 void
@@ -214,12 +212,12 @@ marked_cache_fill(gchar *modname, gchar *key)
 	char *key_book;
 	int key_chapter, key_verse;
 
-	// free the old cache.  first free contents, then the set itself.
+	// free the old cache.  first free contents, then the map itself.
 	MC::iterator it;
 	for (it = marked_cache.begin();
 	     it != marked_cache.end();
 	     ++it) {
-		marked_element *e = *it;
+		marked_element *e = (*it).second;
 		g_free(e->module);
 		g_string_free(e->annotation, TRUE);
 		delete e;
@@ -251,18 +249,6 @@ marked_cache_fill(gchar *modname, gchar *key)
 			e->annotation = g_string_new(s);
 			g_free(s);
 
-			// replace embedded badness characters.
-			for (int i = 0; i < NUM_REPLACE; ++i) {
-				for (s = strchr(e->annotation->str, replacement[i].c);
-				     s;
-				     s = strchr(s, replacement[i].c)) {
-					(void) g_string_erase(e->annotation,
-							      s - (e->annotation->str), 1);
-					(void) g_string_insert(e->annotation,
-							       s - (e->annotation->str),
-							       replacement[i].s);
-				}
-			}
 			gchar *m = e->module;
 
 			// tear apart "NASB Revelation of John 1:1"
@@ -288,8 +274,20 @@ marked_cache_fill(gchar *modname, gchar *key)
 				g_free(e->module);
 				g_string_free(e->annotation, TRUE);
 			} else {
+				// replace embedded badness characters.
+				for (int i = 0; i < NUM_REPLACE; ++i) {
+					for (s = strchr(e->annotation->str, replacement[i].c);
+					     s;
+					     s = strchr(s, replacement[i].c)) {
+						(void) g_string_erase(e->annotation,
+								      s - (e->annotation->str), 1);
+						(void) g_string_insert(e->annotation,
+								       s - (e->annotation->str),
+								       replacement[i].s);
+					}
+				}
 				// valid: insert + get fresh one to work with.
-				marked_cache.insert(marked_cache.end(), e);
+				marked_cache[e->verse] = e;
 				e = new marked_element;
 			}
 		} while (xml_next_item() && xml_get_label());
@@ -313,14 +311,9 @@ fail:
 marked_element *
 marked_cache_check(int thisVerse)
 {
-	MC::iterator it;
-	for (it = marked_cache.begin();
-	     it != marked_cache.end();
-	     ++it) {
-		marked_element *e = *it;
-		if (e->verse == thisVerse)
-			return e;
-	}
+	MC::iterator it = marked_cache.find(thisVerse);
+	if (it != marked_cache.end())
+		return (*it).second;
 	return NULL;
 }
 
