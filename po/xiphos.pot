@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-09 20:54+0100\n"
+"POT-Creation-Date: 2009-07-25 15:20-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1184,14 +1184,14 @@ msgstr ""
 msgid "Edit this item"
 msgstr ""
 
-#: ../src/main/display.cc:303
+#: ../src/main/display.cc:301
 #, c-format
 msgid ""
 "Improperly encoded personal annotation label:\n"
 "'%s'"
 msgstr ""
 
-#: ../src/main/display.cc:434
+#: ../src/main/display.cc:427
 msgid ""
 "An image file's size could not be determined.\n"
 "Is ImageMagick's 'identify' not installed?\n"
@@ -1199,8 +1199,8 @@ msgid ""
 "Xiphos cannot resize images to fit window."
 msgstr ""
 
-#: ../src/main/display.cc:1090 ../src/main/display.cc:1152
-#: ../src/main/display.cc:1240 ../src/main/display.cc:1248
+#: ../src/main/display.cc:1083 ../src/main/display.cc:1145
+#: ../src/main/display.cc:1233 ../src/main/display.cc:1241
 #: ../ui/export-dialog.glade.h:7
 msgid "Chapter"
 msgstr ""
@@ -1730,7 +1730,7 @@ msgstr ""
 #. * Return value
 #. *   void
 #.
-#: ../src/main/settings.c:804
+#: ../src/main/settings.c:794
 msgid ""
 "URL references using \"sword://\" (similar to web page\n"
 "references) can be used by programs to look up\n"
@@ -1741,7 +1741,7 @@ msgid ""
 "program to handle these references?"
 msgstr ""
 
-#: ../src/main/settings.c:806
+#: ../src/main/settings.c:796
 msgid ""
 "Xiphos has successfully set itself\n"
 "as the handler of sword:// and bible:// URLs.\n"
@@ -1751,7 +1751,7 @@ msgid ""
 "if you need to change these."
 msgstr ""
 
-#: ../src/main/settings.c:859
+#: ../src/main/settings.c:849
 #, c-format
 msgid ""
 "Xiphos failed to complete handler init for key #%d:\n"
