@@ -1,6 +1,7 @@
 2009-07-28  karl <charcoal@users.sf.net>
 
 	* fix #2797262 freakish european keycodes for +/- on font size change.
+	* fix #2800932 failure to re-draw any of the panes' text.
 
 2009-07-21  karl <charcoal@users.sf.net>
 
