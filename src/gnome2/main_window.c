@@ -651,11 +651,13 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 		break;
 
 	case GS_KEY_PLUS : // Ctrl-Plus  Increase base font size
+	case GS_FREAK_PLUS:	// freakish european keycode
 		if (state == (GDK_CONTROL_MASK|GDK_SHIFT_MASK))
 			new_base_font_size(TRUE);
 		break;
 
 	case GS_KEY_MINUS: // Ctrl-Minus  Decrease base font size
+	case GS_FREAK_MINUS:	// freakish european keycode
 		if (state == GDK_CONTROL_MASK)
 			new_base_font_size(FALSE);
 		break;
