@@ -650,6 +650,39 @@ on_save_session_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 /******************************************************************************
  * Name
+ *  redisplay_to_realign
+ *
+ * Synopsis
+ *   void redisplay_to_realign()	
+ *
+ * Description
+ *    when en/disabling panes, we must redisplay in order that text
+ *    (especially current verse) not suddenly find themselves out of view.
+ *
+ * Return value
+ *   void
+ */
+static void
+redisplay_to_realign()
+{
+	/* first realize the pane size updates. */
+	while (gtk_events_pending())
+		gtk_main_iteration();
+	/* then just redisplay everything as-is. */
+	gchar *url = g_strdup_printf("sword://%s/%s",
+				     settings.MainWindowModule,
+				     settings.currentverse);
+	main_url_handler(url, TRUE);		
+	g_free(url);
+	url = g_strdup_printf("sword://%s/%s",
+			      settings.DictWindowModule,
+			      settings.dictkey);
+	main_url_handler(url, TRUE);		
+	g_free(url);
+}
+
+/******************************************************************************
+ * Name
  *  on_open_session_activate
  *
  * Synopsis
@@ -693,38 +726,11 @@ on_open_session_activate(GtkMenuItem * menuitem, gpointer user_data)
 		filename = g_path_get_basename(filename);
 		gui_close_all_tabs();
 		gui_load_tabs(filename);
+		redisplay_to_realign();
 		g_free (filename);
 	}
 
 	gtk_widget_destroy (dialog);
-}
-
-/******************************************************************************
- * Name
- *  redisplay_to_realign
- *
- * Synopsis
- *   void redisplay_to_realign()	
- *
- * Description
- *    when en/disabling panes, we must redisplay in order that text
- *    (especially current verse) not suddenly find themselves out of view.
- *
- * Return value
- *   void
- */
-static void
-redisplay_to_realign()
-{
-	/* first realize the pane size updates. */
-	while (gtk_events_pending())
-		gtk_main_iteration();
-	/* then just redisplay everything as-is. */
-	gchar *url = g_strdup_printf("sword://%s/%s",
-				     settings.MainWindowModule,
-				     settings.currentverse);
-	main_url_handler(url, TRUE);		
-	g_free(url);
 }
 
 /******************************************************************************
