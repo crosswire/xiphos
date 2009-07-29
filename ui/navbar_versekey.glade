@@ -262,14 +262,11 @@
                         <child>
                           <widget class="GtkLabel" id="label_chapter">
                             <property name="visible">True</property>
-                            <property name="xalign">1</property>
                             <property name="label" translatable="yes">1</property>
                             <property name="use_markup">True</property>
                             <property name="justify">right</property>
                           </widget>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
                             <property name="position">0</property>
                           </packing>
                         </child>
@@ -391,14 +388,11 @@
                         <child>
                           <widget class="GtkLabel" id="label_verse">
                             <property name="visible">True</property>
-                            <property name="xalign">1</property>
                             <property name="label" translatable="yes">1</property>
                             <property name="use_markup">True</property>
                             <property name="justify">right</property>
                           </widget>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
                             <property name="position">0</property>
                           </packing>
                         </child>
