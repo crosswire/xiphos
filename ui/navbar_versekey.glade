@@ -248,7 +248,6 @@
                 <property name="visible">True</property>
                 <child>
                   <widget class="GtkToggleButton" id="togglebutton_chapter">
-                    <property name="width_request">40</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">False</property>
@@ -262,6 +261,7 @@
                         <child>
                           <widget class="GtkLabel" id="label_chapter">
                             <property name="visible">True</property>
+                            <property name="xpad">3</property>
                             <property name="label" translatable="yes">1</property>
                             <property name="use_markup">True</property>
                             <property name="justify">right</property>
@@ -275,7 +275,6 @@
                   </widget>
                   <packing>
                     <property name="expand">False</property>
-                    <property name="fill">False</property>
                     <property name="position">0</property>
                   </packing>
                 </child>
@@ -375,7 +374,6 @@
                 <property name="visible">True</property>
                 <child>
                   <widget class="GtkToggleButton" id="togglebutton_verse">
-                    <property name="width_request">40</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">False</property>
@@ -388,6 +386,7 @@
                         <child>
                           <widget class="GtkLabel" id="label_verse">
                             <property name="visible">True</property>
+                            <property name="xpad">3</property>
                             <property name="label" translatable="yes">1</property>
                             <property name="use_markup">True</property>
                             <property name="justify">right</property>
@@ -401,7 +400,6 @@
                   </widget>
                   <packing>
                     <property name="expand">False</property>
-                    <property name="fill">False</property>
                     <property name="position">0</property>
                   </packing>
                 </child>
