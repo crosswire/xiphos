@@ -17,6 +17,7 @@
               <widget class="GtkToggleButton" id="togglebutton_sync">
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
+                <property name="relief">none</property>
                 <child>
                   <widget class="GtkImage" id="image3">
                     <property name="visible">True</property>
@@ -36,6 +37,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
+                <property name="relief">none</property>
                 <child>
                   <widget class="GtkImage" id="image2">
                     <property name="visible">True</property>
@@ -87,6 +89,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
+                <property name="relief">none</property>
                 <child>
                   <widget class="GtkImage" id="image1">
                     <property name="visible">True</property>
@@ -245,9 +248,11 @@
                 <property name="visible">True</property>
                 <child>
                   <widget class="GtkToggleButton" id="togglebutton_chapter">
+                    <property name="width_request">40</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">False</property>
+                    <property name="xalign">1</property>
                     <accessibility>
                       <atkproperty name="AtkObject::accessible-name" translatable="yes">Toggle Chapter Button</atkproperty>
                     </accessibility>
@@ -257,8 +262,10 @@
                         <child>
                           <widget class="GtkLabel" id="label_chapter">
                             <property name="visible">True</property>
+                            <property name="xalign">1</property>
                             <property name="label" translatable="yes">1</property>
                             <property name="use_markup">True</property>
+                            <property name="justify">right</property>
                           </widget>
                           <packing>
                             <property name="expand">False</property>
@@ -371,6 +378,7 @@
                 <property name="visible">True</property>
                 <child>
                   <widget class="GtkToggleButton" id="togglebutton_verse">
+                    <property name="width_request">40</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">False</property>
@@ -383,8 +391,10 @@
                         <child>
                           <widget class="GtkLabel" id="label_verse">
                             <property name="visible">True</property>
+                            <property name="xalign">1</property>
                             <property name="label" translatable="yes">1</property>
                             <property name="use_markup">True</property>
+                            <property name="justify">right</property>
                           </widget>
                           <packing>
                             <property name="expand">False</property>
