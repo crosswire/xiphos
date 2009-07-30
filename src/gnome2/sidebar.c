@@ -443,23 +443,21 @@ void gui_sidebar_showhide(void)
 	if (settings.showshortcutbar) {
 		xml_set_value("Xiphos", "misc", "show_sidebar",	"0");
 		settings.showshortcutbar = FALSE;
-		settings.biblepane_width = settings.gs_width / 2;
 		gtk_widget_hide(widgets.shortcutbar);
-		gtk_paned_set_position(GTK_PANED(widgets.epaned), 0);
-		gtk_paned_set_position(GTK_PANED
-				       (widgets.hpaned),
-				       settings.biblepane_width);
+		while (gtk_events_pending())
+			gtk_main_iteration();
+		settings.biblepane_width = GTK_WIDGET(widgets.vpaned)->allocation.width;	
+	
 	} else {
 		xml_set_value("Xiphos", "misc", "show_sidebar",	"1");
 		settings.showshortcutbar = TRUE;
-		settings.biblepane_width =
-		    (settings.gs_width -
-		     settings.sidebar_width) / 2;
 		gtk_paned_set_position(GTK_PANED(widgets.epaned),
 				       settings.sidebar_width);
-		gtk_paned_set_position(GTK_PANED(widgets.hpaned),
-				       settings.biblepane_width);
 		gtk_widget_show(widgets.shortcutbar);
+		while (gtk_events_pending())
+			gtk_main_iteration();
+		settings.biblepane_width = GTK_WIDGET(widgets.vpaned)->allocation.width;	
+		
 	}
 }
 
