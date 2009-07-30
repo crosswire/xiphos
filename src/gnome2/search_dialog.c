@@ -577,7 +577,6 @@ void new_range(GtkButton * button, gpointer user_data)
 	GtkTreeModel *model;
 	GtkListStore *list_store;
 	GtkTreeSelection *selection;
-	GtkTreeIter selected;
 	GtkTreeIter iter;
 	GtkTreePath *path;
 
@@ -674,10 +673,13 @@ void delete_list(GtkButton * button, gpointer user_data)
 	GtkTreeIter selected;
 	gchar *str;
 
+#if 0
+	// #if 0'd until list_rows is properly managed.
 	if (search1.list_rows < 2) {
 		gui_generic_warning(_("The last module list may not be deleted"));
 		return;
 	}
+#endif
 
 	model =
 	    gtk_tree_view_get_model(GTK_TREE_VIEW
