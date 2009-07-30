@@ -2199,7 +2199,7 @@ on_dialog_destroy(GtkObject * object, gpointer user_data)
 	g_list_free(tmp);
 
 	working = FALSE;
-
+	is_running = FALSE;
 	if (first_time_user) return;	/* no deeper analysis, first time around. */
 
 	/*
