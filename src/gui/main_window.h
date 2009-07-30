@@ -144,9 +144,9 @@ void gui_show_main_window(void);
 #define	GS_KEY_Z	90
 
 #define	GS_KEY_PLUS	187
-#define	GS_FREAK_PLUS	-999	/* never match - unknown until someone tells us */
+#define	GS_FREAK_PLUS	9999	/* never match - unknown until someone tells us */
 #define	GS_KEY_MINUS	189
-#define	GS_FREAK_MINUS	-998	/* never match - unknown until someone tells us */
+#define	GS_FREAK_MINUS	9998	/* never match - unknown until someone tells us */
 #define GS_KEY_SHIFT    16
 #define GS_KEY_SHIFT_R  161
 
