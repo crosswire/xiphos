@@ -32,7 +32,7 @@ struct  _app_widgets {
 		*appbar, /* gnome status/progress bar */
 		*vboxMain, /*  */
 		*page, /*  */
-		*epaned, /* sidebar bar and main panle */
+		*epaned, /* sidebar bar and main panel */
 		*paned_sidebar, /*pane to show previewer in sidebar bar */
 		*box_side_preview, /* box for packing previewer in side bar */
 		*vpaned, /* bible/previewer paned */
