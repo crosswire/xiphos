@@ -953,7 +953,6 @@ GList *BackEnd::parse_range_list(const char * list)
 	GList *retlist = NULL;
 	const char *buf = NULL;
 	VerseKey key;
-	int count = 0;
 	
 	verses.ClearList();
 	verses = key.ParseVerseList(list, key, true);
