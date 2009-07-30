@@ -919,7 +919,7 @@ on_modules_list_button_release(GtkWidget * widget,
         else
 	       gtk_tree_view_expand_row ( GTK_TREE_VIEW(data), path, FALSE );
 	gtk_tree_path_free ( path );
-	return TRUE;
+	return FALSE;
 }
 
 
@@ -2720,7 +2720,7 @@ on_button8_clicked(GtkButton * button,
  * Description
  *   button release in main treeview 
  *   change notebook page to 'sel' returned from selection
- *   show/hide dialog responce buttons as needed
+ *   show/hide dialog response buttons as needed
  *
  * Return value
  *   void
@@ -2869,7 +2869,7 @@ setup_dialog_action_area(GtkDialog * dialog)
 	gtk_button_box_set_layout (GTK_BUTTON_BOX (dialog_action_area1), GTK_BUTTONBOX_END);
 
 	/*
-	 * responce buttons
+	 * response buttons
 	 */
 	/* close */	
 	button_close = gtk_button_new_from_stock ("gtk-close");
@@ -3060,7 +3060,7 @@ create_module_manager_dialog(gboolean first_run)
 		setup_dialog_action_area(GTK_DIALOG (dialog));
 	} else {
 		dialog =  glade_xml_get_widget (gxml, "dialog");
-		/* responce buttons */
+		/* response buttons */
 		button_close = glade_xml_get_widget (gxml, "button1"); /* close */
 		button_cancel = glade_xml_get_widget (gxml, "button12"); /* close */
 		button1 = glade_xml_get_widget (gxml, "button2"); /* refresh */
