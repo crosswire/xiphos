@@ -349,7 +349,7 @@ void main_create_pixbufs(void)
  * Return value
  *   void
  */
-
+#if 0
 static void add_verses_to_chapter(GtkTreeModel * model,
 				  GtkTreeIter iter, const gchar * key)
 {
@@ -543,6 +543,7 @@ static void add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
 		}
 	}
 }
+#endif
 
 #ifdef USE_TREEVIEW_PATH
 gboolean main_expand_treeview_to_path (GtkTreeModel *model, GtkTreeIter iter)
@@ -682,7 +683,7 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 					       notebook_bible_parallel),
 					      0);
 		// MainWindowModule is set in main_bible_display(), not here.
-		if (!gtk_tree_model_iter_has_child
+		/*if (!gtk_tree_model_iter_has_child
 		    (GTK_TREE_MODEL(model), &selected)
 		    && !key)
 			add_books_to_bible(model, selected, mod);
@@ -694,6 +695,7 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 		    (GTK_TREE_MODEL(model), &selected)
 		    && strstr(key, "chapter:"))
 			add_verses_to_chapter(model, selected, key);
+		*/
 
 		if (key)
 			main_url_handler(key, TRUE);
