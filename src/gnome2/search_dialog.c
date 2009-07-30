@@ -588,10 +588,6 @@ void new_range(GtkButton * button, gpointer user_data)
 	selection = gtk_tree_view_get_selection
 	    (GTK_TREE_VIEW(search1.list_range_name));
 
-	if (!gtk_tree_selection_get_selected
-	    (selection, NULL, &selected))
-		return;
-
 	text[0] = "[New Range]";
 	text[1] = "";
 

@@ -143,8 +143,7 @@ void main_save_current_adv_search_as_bookmarks (void)
  * Synopsis
  *   #include "gui/search_dialog.h"
  *
- *   void main_range_text_changed(GtkEditable * editable,
- *			       gpointer user_data)
+ *   void main_range_text_changed(GtkEditable * editable)
  *
  * Description
  *   text in the range text entry has changed
