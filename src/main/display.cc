@@ -920,7 +920,8 @@ char
 GTKEntryDisp::Display(SWModule &imodule)
 {
 #ifdef USE_GTKMOZEMBED
-	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(gtkText))) return 0;
+	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(gtkText)))
+		gtk_widget_realize(gtkText);
 #endif
 
 	gchar *buf;
