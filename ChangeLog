@@ -1,3 +1,17 @@
+2009-07-30  karl <charcoal@users.sf.net>
+
+	* make mozembed genbook widget realize before filling.
+
+2009-07-29 matthew <ransom1982@users.sourceforge.net>
+
+	* fix #2819999 custom range not working.
+	* fix #2816143 show/hide sidebar geometry changes.
+
+2009-07-29 terry <tbiggs@users.sourceforge.net>
+
+	* add relief to versekey navbar b/c/v buttons.
+	* fix #2800991, remove sidebar Bible nav (eliminate nav right-click).
+
 2009-07-28  karl <charcoal@users.sf.net>
 
 	* fix #2797262 freakish european keycodes for +/- on font size change.
