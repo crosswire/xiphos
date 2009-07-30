@@ -951,24 +951,16 @@ GList *BackEnd::parse_verse_list(const char * list, char * current_key)
 GList *BackEnd::parse_range_list(const char * list)
 {
 	GList *retlist = NULL;
-	char *buf = NULL;
+	const char *buf = NULL;
 	VerseKey key;
 	int count = 0;
 	
 	verses.ClearList();
 	verses = key.ParseVerseList(list, key, true);
-	
-	while (!verses.Error()) {	
-		VerseKey *element = SWDYNAMIC_CAST(VerseKey, 
-					verses.GetElement(count));
-		if (element) {
-			buf = g_strdup_printf("%s - %s",(const char *)element->LowerBound(),
-				(const char *)element->UpperBound());
-			retlist = g_list_append(retlist,(char*)buf);
-		}
-		verses++;
-		count++;
-	}
+
+	buf = verses.getRangeText();
+	retlist = g_list_append(retlist, g_strdup(buf));
+    
 	return retlist;
 }
 
