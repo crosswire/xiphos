@@ -1,22 +1,22 @@
-# translation of xiphos.pot to British English
-# Copyright (C) 2009
-# This file is distributed under the same license as the Xiphos package.
+# translation of xiphos.po to
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
 #
 # Thomas Abthorpe <tabthorpe@FreeBSD.org>, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-25 15:20-0400\n"
-"PO-Revision-Date: 2009-07-25 15:26-0400\n"
+"POT-Creation-Date: 2009-08-02 22:07+0200\n"
+"PO-Revision-Date: 2009-08-03 00:46-0400\n"
 "Last-Translator: Thomas Abthorpe <tabthorpe@FreeBSD.org>\n"
-"Language-Team: Xiphos Translation Team\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: ../src/backend/sword_main.cc:1162
+#: ../src/backend/sword_main.cc:1153
 msgid "Configuration not found"
 msgstr ""
 
@@ -314,7 +314,7 @@ msgstr ""
 msgid "Search result: %s"
 msgstr ""
 
-#: ../src/gnome2/bookmarks_treeview.c:934 ../src/gnome2/sidebar.c:1461
+#: ../src/gnome2/bookmarks_treeview.c:934 ../src/gnome2/sidebar.c:1459
 msgid "Bookmarks"
 msgstr ""
 
@@ -396,30 +396,30 @@ msgstr ""
 msgid "Use the default font for this module"
 msgstr ""
 
-#: ../src/gnome2/main_window.c:756
+#: ../src/gnome2/main_window.c:758
 msgid "Xiphos - Bible Study Software"
 msgstr ""
 
-#: ../src/gnome2/main_window.c:812
+#: ../src/gnome2/main_window.c:814
 msgid "Open a new tab"
 msgstr ""
 
-#: ../src/gnome2/main_window.c:892 ../src/gnome2/sidebar.c:623
-#: ../src/gnome2/sidebar.c:629 ../src/main/sidebar.cc:642
-#: ../src/main/sidebar.cc:962 ../src/main/sidebar.cc:963
-#: ../src/main/sidebar.cc:964
+#: ../src/gnome2/main_window.c:894 ../src/gnome2/sidebar.c:621
+#: ../src/gnome2/sidebar.c:627 ../src/main/sidebar.cc:643
+#: ../src/main/sidebar.cc:964 ../src/main/sidebar.cc:965
+#: ../src/main/sidebar.cc:966
 msgid "Standard View"
 msgstr ""
 
-#: ../src/gnome2/main_window.c:969
+#: ../src/gnome2/main_window.c:971
 msgid "Commentary View"
 msgstr ""
 
-#: ../src/gnome2/main_window.c:985
+#: ../src/gnome2/main_window.c:987
 msgid "Book View"
 msgstr ""
 
-#: ../src/gnome2/main_window.c:1010
+#: ../src/gnome2/main_window.c:1012
 msgid "Welcome to Xiphos"
 msgstr ""
 
@@ -597,8 +597,8 @@ msgstr ""
 #: ../src/gnome2/mod_mgr.c:830 ../src/gnome2/mod_mgr.c:865
 #: ../src/gnome2/mod_mgr.c:867 ../src/gnome2/utilities.c:346
 #: ../src/gnome2/utilities.c:411 ../src/gnome2/utilities.c:413
-#: ../src/gnome2/utilities.c:1032 ../src/main/sidebar.cc:799
-#: ../src/main/sidebar.cc:871 ../src/main/sidebar.cc:873
+#: ../src/gnome2/utilities.c:1032 ../src/main/sidebar.cc:801
+#: ../src/main/sidebar.cc:873 ../src/main/sidebar.cc:875
 msgid "Unknown"
 msgstr ""
 
@@ -618,39 +618,39 @@ msgstr ""
 "Module Type"
 
 #: ../src/gnome2/mod_mgr.c:1046 ../src/gnome2/utilities.c:472
-#: ../src/main/sidebar.cc:946 ../src/main/sidebar.cc:948
+#: ../src/main/sidebar.cc:948 ../src/main/sidebar.cc:950
 msgid "Biblical Texts"
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:1050 ../src/gnome2/utilities.c:476
-#: ../src/main/sidebar.cc:654 ../src/main/sidebar.cc:971
-#: ../src/main/sidebar.cc:973 ../ui/prefs.glade.h:33
+#: ../src/main/sidebar.cc:655 ../src/main/sidebar.cc:973
+#: ../src/main/sidebar.cc:975 ../ui/prefs.glade.h:33
 msgid "Commentaries"
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:1054 ../src/gnome2/utilities.c:480
-#: ../src/main/sidebar.cc:980 ../src/main/sidebar.cc:982
+#: ../src/main/sidebar.cc:982 ../src/main/sidebar.cc:984
 msgid "Dictionaries"
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:1058 ../src/gnome2/utilities.c:484
-#: ../src/main/sidebar.cc:989 ../src/main/sidebar.cc:991
+#: ../src/main/sidebar.cc:991 ../src/main/sidebar.cc:993
 msgid "Daily Devotionals"
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:1062 ../src/gnome2/utilities.c:488
-#: ../src/main/sidebar.cc:664 ../src/main/sidebar.cc:998
-#: ../src/main/sidebar.cc:1000
+#: ../src/main/sidebar.cc:665 ../src/main/sidebar.cc:1000
+#: ../src/main/sidebar.cc:1002
 msgid "General Books"
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:1066 ../src/gnome2/utilities.c:492
-#: ../src/main/sidebar.cc:1007 ../src/main/sidebar.cc:1009
+#: ../src/main/sidebar.cc:1009 ../src/main/sidebar.cc:1011
 msgid "Maps"
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:1070 ../src/gnome2/utilities.c:496
-#: ../src/main/sidebar.cc:1016 ../src/main/sidebar.cc:1018
+#: ../src/main/sidebar.cc:1018 ../src/main/sidebar.cc:1020
 msgid "Images"
 msgstr ""
 
@@ -670,9 +670,9 @@ msgstr ""
 msgid "Uninstalled"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1091 ../src/gnome2/sidebar.c:639
+#: ../src/gnome2/mod_mgr.c:1091 ../src/gnome2/sidebar.c:637
 #: ../src/gnome2/utilities.c:501 ../src/main/prayerlists.cc:238
-#: ../src/main/sidebar.cc:1026 ../src/main/sidebar.cc:1028
+#: ../src/main/sidebar.cc:1028 ../src/main/sidebar.cc:1030
 msgid "Prayer List/Journal"
 msgstr ""
 
@@ -709,7 +709,7 @@ msgid ""
 "The index icon means you have built an optimized ('lucene') index for this "
 "module for fast searching (see the Maintenance pane for this function)"
 msgstr ""
-"The index icon means you have built an optimised ('lucene') index for this "
+"The index icon means you have built an optimized ('lucene') index for this "
 "module for fast searching (see the Maintenance pane for this function)"
 
 #: ../src/gnome2/mod_mgr.c:1503
@@ -719,8 +719,8 @@ msgid ""
 msgstr ""
 
 #. 2
-#: ../src/gnome2/mod_mgr.c:1520 ../src/gnome2/sidebar.c:977
-#: ../src/gnome2/sidebar.c:1145 ../ui/xi-menus.glade.h:1
+#: ../src/gnome2/mod_mgr.c:1520 ../src/gnome2/sidebar.c:975
+#: ../src/gnome2/sidebar.c:1143 ../ui/xi-menus.glade.h:1
 msgid "About"
 msgstr ""
 
@@ -779,7 +779,7 @@ msgid "Sources"
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:1706 ../src/gnome2/preferences_dialog.c:1784
-#: ../src/gnome2/sidebar.c:1485
+#: ../src/gnome2/sidebar.c:1483
 msgid "Modules"
 msgstr ""
 
@@ -907,10 +907,10 @@ msgstr ""
 msgid "Change parallel 5"
 msgstr ""
 
-#: ../src/gnome2/parallel_view.c:467 ../src/gnome2/sidebar.c:622
-#: ../src/gnome2/sidebar.c:628 ../src/gnome2/tabbed_browser.c:231
-#: ../src/main/sidebar.cc:622 ../src/main/sidebar.cc:954
-#: ../src/main/sidebar.cc:955 ../src/main/sidebar.cc:956
+#: ../src/gnome2/parallel_view.c:467 ../src/gnome2/sidebar.c:620
+#: ../src/gnome2/sidebar.c:626 ../src/gnome2/tabbed_browser.c:231
+#: ../src/main/sidebar.cc:623 ../src/main/sidebar.cc:956
+#: ../src/main/sidebar.cc:957 ../src/main/sidebar.cc:958
 msgid "Parallel View"
 msgstr ""
 
@@ -1006,15 +1006,15 @@ msgstr ""
 msgid "Are you sure you want to clear the module list?"
 msgstr ""
 
-#: ../src/gnome2/search_dialog.c:682
+#: ../src/gnome2/search_dialog.c:679
 msgid "The last module list may not be deleted"
 msgstr ""
 
-#: ../src/gnome2/search_dialog.c:699
+#: ../src/gnome2/search_dialog.c:697
 msgid "Delete list?"
 msgstr ""
 
-#: ../src/gnome2/search_dialog.c:700
+#: ../src/gnome2/search_dialog.c:698
 msgid "Are you sure you want to delete:"
 msgstr ""
 
@@ -1081,70 +1081,70 @@ msgid "Upper"
 msgstr ""
 
 #. 0
-#: ../src/gnome2/sidebar.c:965 ../src/gnome2/sidebar.c:1133
+#: ../src/gnome2/sidebar.c:963 ../src/gnome2/sidebar.c:1131
 msgid "Open in a new tab"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:966 ../src/gnome2/sidebar.c:1134
+#: ../src/gnome2/sidebar.c:964 ../src/gnome2/sidebar.c:1132
 msgid "Open selected module in a new tab"
 msgstr ""
 
 #. 1
-#: ../src/gnome2/sidebar.c:971
+#: ../src/gnome2/sidebar.c:969
 msgid "Open in a separate window"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:972
+#: ../src/gnome2/sidebar.c:970
 msgid "Open selected module in a separate ['dialog'] window"
-msgstr "Open selected module in a separate ['dialogue'] window"
+msgstr "Open selected module in a separate ['dialog'] window"
 
-#: ../src/gnome2/sidebar.c:978 ../src/gnome2/sidebar.c:1146
+#: ../src/gnome2/sidebar.c:976 ../src/gnome2/sidebar.c:1144
 msgid "View information about the selected dialog"
 msgstr "View information about the selected dialogue"
 
-#: ../src/gnome2/sidebar.c:1069
+#: ../src/gnome2/sidebar.c:1067
 msgid "Simple"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:1070
+#: ../src/gnome2/sidebar.c:1068
 msgid "Create a new simple prayer list"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:1076
+#: ../src/gnome2/sidebar.c:1074
 msgid "Subject"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:1083
+#: ../src/gnome2/sidebar.c:1081
 msgid "Monthly"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:1084 ../src/gnome2/sidebar.c:1091
-#: ../src/gnome2/sidebar.c:1098
+#: ../src/gnome2/sidebar.c:1082 ../src/gnome2/sidebar.c:1089
+#: ../src/gnome2/sidebar.c:1096
 msgid "Create a new prayer list"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:1090
+#: ../src/gnome2/sidebar.c:1088
 msgid "Daily Journal"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:1097
+#: ../src/gnome2/sidebar.c:1095
 msgid "Outlined Topic"
 msgstr ""
 
 #. 1
-#: ../src/gnome2/sidebar.c:1139 ../ui/xi-menus.glade.h:47
+#: ../src/gnome2/sidebar.c:1137 ../ui/xi-menus.glade.h:47
 msgid "Open in editor"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:1140
+#: ../src/gnome2/sidebar.c:1138
 msgid "Open selected module in a dialog"
 msgstr "Open selected module in a dialogue"
 
-#: ../src/gnome2/sidebar.c:1469
+#: ../src/gnome2/sidebar.c:1467
 msgid "Search"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:1477
+#: ../src/gnome2/sidebar.c:1475
 msgid "Verse List"
 msgstr ""
 
@@ -1205,8 +1205,8 @@ msgid ""
 "Xiphos cannot resize images to fit window."
 msgstr ""
 
-#: ../src/main/display.cc:1083 ../src/main/display.cc:1145
-#: ../src/main/display.cc:1233 ../src/main/display.cc:1241
+#: ../src/main/display.cc:1084 ../src/main/display.cc:1146
+#: ../src/main/display.cc:1234 ../src/main/display.cc:1242
 #: ../ui/export-dialog.glade.h:7
 msgid "Chapter"
 msgstr ""
@@ -1588,29 +1588,29 @@ msgstr ""
 msgid "Search result %s: %s"
 msgstr ""
 
-#: ../src/main/search_dialog.cc:362
+#: ../src/main/search_dialog.cc:361
 msgid "Delete Range?"
 msgstr ""
 
-#: ../src/main/search_dialog.cc:363
+#: ../src/main/search_dialog.cc:362
 msgid "Are you sure you want to delete this range?"
 msgstr ""
 
-#: ../src/main/search_dialog.cc:577 ../src/main/search_dialog.cc:1048
-#: ../src/main/search_dialog.cc:1051 ../src/main/search_dialog.cc:1073
-#: ../src/main/search_dialog.cc:1076
+#: ../src/main/search_dialog.cc:576 ../src/main/search_dialog.cc:1047
+#: ../src/main/search_dialog.cc:1050 ../src/main/search_dialog.cc:1072
+#: ../src/main/search_dialog.cc:1075
 msgid "Search: "
 msgstr ""
 
-#: ../src/main/search_dialog.cc:622
+#: ../src/main/search_dialog.cc:621
 msgid "Remove Module?"
 msgstr ""
 
-#: ../src/main/search_dialog.cc:623
+#: ../src/main/search_dialog.cc:622
 msgid "Are you sure you want to remove the selected module?"
 msgstr ""
 
-#: ../src/main/search_dialog.cc:1472
+#: ../src/main/search_dialog.cc:1471
 #, c-format
 msgid ""
 "%s:\n"
@@ -1618,28 +1618,28 @@ msgid ""
 "%s"
 msgstr ""
 
-#: ../src/main/search_dialog.cc:1474
+#: ../src/main/search_dialog.cc:1473
 msgid "Please adjust the module list."
 msgstr ""
 
-#: ../src/main/search_dialog.cc:1490
+#: ../src/main/search_dialog.cc:1489
 #, c-format
 msgid "No fast-search index exists for %s.%s%s"
 msgstr ""
 
-#: ../src/main/search_dialog.cc:1492
+#: ../src/main/search_dialog.cc:1491
 msgid ""
 "\n"
 "Search on this module is now `multi word'."
 msgstr ""
 
-#: ../src/main/search_dialog.cc:1493
+#: ../src/main/search_dialog.cc:1492
 msgid ""
 "\n"
 "See the Module Manager, Maintenance pane."
 msgstr ""
 
-#: ../src/main/search_dialog.cc:1554
+#: ../src/main/search_dialog.cc:1553
 msgid "Search finished"
 msgstr ""
 
@@ -1668,7 +1668,7 @@ msgid ""
 msgstr ""
 "Welcome to Xiphos.\n"
 "\n"
-"There are no Bible modules installed. In order to initialise, Xiphos needs "
+"There are no Bible modules installed. In order to initialize, Xiphos needs "
 "you to install at least one Bible.\n"
 "\n"
 "With your permission, Xiphos will invoke the Module Manager so that you may "
