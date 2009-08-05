@@ -3,6 +3,161 @@ ____________________
 XIPHOS RELEASE NOTES
 ____________________
 
+Release 3.1.1
+09 Aug 2009
+
+Today's release is for intermediate bugfixes and small features.  We
+are still working toward several major features' completion for 3.2,
+but slow summer schedules have left us needing to present these
+smaller issues to the public.
+
+ 1. The Help->Chat interface had to change, because policy equilibrium
+    broke down between Freenode, where our #xiphos channel exists, and
+    the folks who run mibbit, the previous browser chat interface.
+    Now we use Freenode's own.
+
+ 2. Per-verse user annotations ("inline marking").  Along with the
+    personal commentary plus journals and prayer lists, we now offer a
+    smaller, more immediate form of personalized markup.  In dead-tree
+    Bibles, many people use a yellow highlighter to mark verses,
+    writing marginal notes to themselves.  Xiphos now offers this as
+    "Annotate Verse" on the right-click context menu.  Ask to
+    annotate, and a dialog for the current verse opens, offering a
+    text box in which to type a note to oneself.  Finish by clicking
+    "Mark."  Remove an annotation by selecting "Unmark" instead.  When
+    an annotation is visible in the current chapter, it is displayed
+    in reverse emphasis colorization (default, navy blue on yellow)
+    and the beginning of the verse gains a marker *u, after the
+    fashion of footnote *n and cross-reference *x.  Mouse-hover on
+    this new marker and the previewer shows your personal annotation.
+    When marking, delete the module name in the dialog to make the
+    annotation apply to any Bible module.
+
+ 3. There is a new geography interface through BibleMap.org:
+    Mouse-select any place name, right-click, select Lookup Selection
+    -> Browse in BibleMap.org.  Your browser will open a new window to
+    obtain a Google Maps-driven display of that place.
+
+ 4. Module manager now can do automatic repository discovery from the
+    "known repositories" list maintained at CrossWire.  At the moment,
+    the 4 entries there duplicate the 4 hard-coded names previously
+    known to Xiphos, though the official names change somewhat.  In
+    the module manager, on the Sources page, there is now a button
+    labeled Load Standard, which updates your list of sources from the
+    official content.  It does not remove any, but it will replace any
+    that have exactly the same name with their updated information.
+    It will be necessary to remove any old-name versions manually,
+    because Xiphos cannot detect that they are duplicates.
+
+ 5. Module manager no longer takes click-anywhere-on-line in module
+    lists because it interfered with other navigation.
+
+ 6. An ancient module manager bug was fixed, where closing the mod.mgr
+    via the title bar "X" decoration would leave the mod.mgr unable to
+    re-open until after a restart.
+
+ 7. An equally ancient difficulty with the general book window (that
+    alternates with commentary) not being filled when first viewed was
+    finally fixed.
+
+ 8. A workaround is in place regarding a failure of the logic for
+    removing a module list from Advanced Search.  Also, other logic
+    for creation of module lists and range lists has been updated.
+
+ 9. The verse navbar now has normal relief on book/chapter/verse.
+
+10. A failure to redisplay properly after loading a tab set is fixed.
+
+11. Freakish European keyboard Ctrl +/- should now work.
+
+12. Some fixes were applied to journal/prayerlist editing.
+
+13. If the sidebar is detached, it now gets a title bar name.
+
+14. Bugfixes to the logic which preserves tab names as they are added
+    or deleted.
+
+15. New Slovak translation.
+
+16. Strong's markup is now handled in pre-verse headers.
+
+17. Ctrl-F4 will delete a tab.
+
+18. Some general resource management fixes have been made: Window size
+    causing trouble with 2-verse context; lack of any genbooks making
+    Xiphos unable to remember on what  Bible verse it should start;
+    redisplay faults in several circumstances.
+
+Bug reports addressed since 3.1:
+2831484  Lacks support for deuterocanon
+2828434  Xiphos Forget Where it Was
+2827567  Selected verse does not show in window
+2826433  Advanced Attribute/Footnote search: Preview?
+2825256  Different Logo
+2819999  Advanced Searches: Creat new custom range: not working
+2818966  Search: using ?: no or wrong results
+2818957  Search: using +: no results or crash
+2817351  Module Manager problems
+2816143  Show/Hide Sidebar <-> width of Commentary pane
+2815612  Cross reference in seperate window change module of main one
+2815605  Cross references in seperate Bible text: Back to what?
+2813865  Deleting middle tab makes problem for first one
+2801620  Xiphos shows too many linebreaks
+2801566  Preview stops working if exiting with minimal window height
+2801550  Tabs document not parsed successfully?
+2801515  Adding a child to the root of journal causes problems
+2800991  Reference choice by Sidebar/Module not working
+2800932  Open session: not showing text in biblical texts
+2799900  Show Previewer in Sidebar: Footnotes not shown
+2797795  View Daily Devotion not working
+2797792  Manual: Menubar: History
+2797741  Manual/Sidebar/shortcuts
+2797731  Classification of resources
+2797262  Change of base font size
+2796406  unexpected shutdowns
+2796241  Install on Ubuntu 8.04
+2795781  Studypad/Intended paragraph: Justification not working
+2795743  Tab name mixed up
+2795741  segfaults under Arch Linux
+
+New feature requests pending:
+2832230  No option for local install on fresh install
+2824127  Sidebar search: Regular expression?
+2818965  Search: using ?: no or wrong results
+2817369  Parallel View: Display more than one verse
+2817366  Parallel View: vertical tiled Biblical texts
+2817333  Module: Install/Update: Hotkeys
+2815637  Cross referencs in seperate windows: book,commentaries?
+2814482  Keep seperate windows at restart
+2813891  Switching off Commentary: name kept for Tab
+2813476  Interface localization
+2813475  Selectable number of columns in parallel view layout
+2805266  Parallel View: Allow to display less Biblical texts
+2801630  Showing the Sourceforge/Xiphos webpage at restart
+2800947  Sessions: more settings to be remembered
+2799867  Increase reducing of window sizes
+2798728  How to localized the interface of XI?
+2798255  Manual: View Daily Devotion
+2797805  View: Hide (attached) sidebar
+2797801  Manual: Explain Link Tabs
+2797789  Open pane for activated resource
+2797780  Manual: Synchronize resources in seperate windows
+2797739  Manual/Sidebar/Modules:Rightclick description
+2796313  Help: 3.8.Keyboard Shortcuts: order by tasks
+2795762  Reference bar: Choosing a book name
+2792003  Saved sets of parallelism
+2792001  Sessions Menu
+
+Feature requests closed:
+2805809  Cross references link to modules in panes/seperate window
+2800180  in-line marking capability
+2797304  Hotkey for right click
+2797292  Range of font sizes
+2795770  hotkey to close tab
+2795768  Hotkeys for the choice of a bible reference
+2795758  Detached sidebar: Name
+________________________________________________________________
+
 Release 3.1
 17 May 2009
 
