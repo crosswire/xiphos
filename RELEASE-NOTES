@@ -49,41 +49,38 @@ smaller issues to the public.
     It will be necessary to remove any old-name versions manually,
     because Xiphos cannot detect that they are duplicates.
 
- 5. Module manager no longer takes click-anywhere-on-line in module
-    lists because it interfered with other navigation.
-
- 6. An ancient module manager bug was fixed, where closing the mod.mgr
+ 5. An ancient module manager bug was fixed, where closing the mod.mgr
     via the title bar "X" decoration would leave the mod.mgr unable to
     re-open until after a restart.
 
- 7. An equally ancient difficulty with the general book window (that
+ 6. An equally ancient difficulty with the general book window (that
     alternates with commentary) not being filled when first viewed was
     finally fixed.
 
- 8. A workaround is in place regarding a failure of the logic for
+ 7. A workaround is in place regarding a failure of the logic for
     removing a module list from Advanced Search.  Also, other logic
     for creation of module lists and range lists has been updated.
 
- 9. The verse navbar now has normal relief on book/chapter/verse.
+ 8. The verse navbar now has normal relief on book/chapter/verse.
 
-10. A failure to redisplay properly after loading a tab set is fixed.
+ 9. A failure to redisplay properly after loading a tab set is fixed.
 
-11. Freakish European keyboard Ctrl +/- should now work.
+10. Freakish European keyboard Ctrl +/- should now work.
 
-12. Some fixes were applied to journal/prayerlist editing.
+11. Some fixes were applied to journal/prayerlist editing.
 
-13. If the sidebar is detached, it now gets a title bar name.
+12. If the sidebar is detached, it now gets a title bar name.
 
-14. Bugfixes to the logic which preserves tab names as they are added
+13. Bugfixes to the logic which preserves tab names as they are added
     or deleted.
 
-15. New Slovak translation.
+14. New Slovak translation.
 
-16. Strong's markup is now handled in pre-verse headers.
+15. Strong's markup is now handled in pre-verse headers.
 
-17. Ctrl-F4 will delete a tab.
+16. Ctrl-F4 will delete a tab.
 
-18. Some general resource management fixes have been made: Window size
+17. Some general resource management fixes have been made: Window size
     causing trouble with 2-verse context; lack of any genbooks making
     Xiphos unable to remember on what  Bible verse it should start;
     redisplay faults in several circumstances.
