@@ -2157,7 +2157,7 @@ msgstr "כפתור רדיו: פרק"
 #: ../ui/export-dialog.glade.h:9
 #: ../ui/xi-menus.glade.h:12
 msgid "Copy/Export Passage"
-msgstr "העתק\ייצא קטע"
+msgstr "העתקייצא קטע"
 
 #: ../ui/export-dialog.glade.h:10
 msgid "Export Passage Cancel"
