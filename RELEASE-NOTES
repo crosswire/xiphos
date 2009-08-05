@@ -120,9 +120,6 @@ Bug reports addressed since 3.1:
 New feature requests pending:
 2832230  No option for local install on fresh install
 2824127  Sidebar search: Regular expression?
-2818965  Search: using ?: no or wrong results
-2817369  Parallel View: Display more than one verse
-2817366  Parallel View: vertical tiled Biblical texts
 2817333  Module: Install/Update: Hotkeys
 2815637  Cross referencs in seperate windows: book,commentaries?
 2814482  Keep seperate windows at restart
@@ -130,7 +127,6 @@ New feature requests pending:
 2813476  Interface localization
 2813475  Selectable number of columns in parallel view layout
 2805266  Parallel View: Allow to display less Biblical texts
-2801630  Showing the Sourceforge/Xiphos webpage at restart
 2800947  Sessions: more settings to be remembered
 2799867  Increase reducing of window sizes
 2798728  How to localized the interface of XI?
@@ -146,6 +142,10 @@ New feature requests pending:
 2792001  Sessions Menu
 
 Feature requests closed:
+2818965  Search: using ?: no or wrong results
+2817369  Parallel View: Display more than one verse
+2817366  Parallel View: vertical tiled Biblical texts
+2801630  Showing the Sourceforge/Xiphos webpage at restart
 2805809  Cross references link to modules in panes/seperate window
 2800180  in-line marking capability
 2797304  Hotkey for right click
