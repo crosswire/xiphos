@@ -116,6 +116,7 @@ void gui_recompute_shows(void)
 {
 	if (stop_refresh)
 		return;
+	stop_refresh = TRUE;
 
 	main_flush_widgets_content();
 
@@ -142,7 +143,6 @@ void gui_recompute_shows(void)
 				       (widgets.viewpreview_item),
 				       settings.showpreview);
 
-	stop_refresh = TRUE;
 	while (gtk_events_pending())
 		gtk_main_iteration();
 	stop_refresh = FALSE;
