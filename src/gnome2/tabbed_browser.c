@@ -1399,7 +1399,6 @@ void gui_close_passage_tab(gint pagenum)
 	//cur_passage_tab = NULL;
 	removed_page = pagenum;
 	cur_passage_tab = (PASSAGE_TAB_INFO*)g_list_nth_data(passage_list, (guint)pagenum);
-	settings.comm_showing = cur_passage_tab->comm_showing;
 	gtk_notebook_remove_page(GTK_NOTEBOOK(widgets.notebook_main), pagenum);
 }
 
