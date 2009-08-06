@@ -1361,7 +1361,6 @@ void gui_close_passage_tab(gint pagenum)
 {
 	if (stop_refresh)
 		return;
-	stop_refresh = TRUE;
 
 	if (-1 == pagenum)
 		pagenum = gtk_notebook_get_current_page(GTK_NOTEBOOK(widgets.notebook_main));
@@ -1375,6 +1374,7 @@ void gui_close_passage_tab(gint pagenum)
                                                        0);
 	}
 	
+	stop_refresh = TRUE;
 	while (gtk_events_pending())
 		gtk_main_iteration();
 	stop_refresh = FALSE;
