@@ -665,6 +665,12 @@ on_save_session_activate(GtkMenuItem * menuitem, gpointer user_data)
 static void
 redisplay_to_realign()
 {
+	static int realign_busy = FALSE;
+
+	if (realign_busy)
+		return;
+	realign_busy = TRUE;
+
 	/* first realize the pane size updates. */
 	while (gtk_events_pending())
 		gtk_main_iteration();
@@ -679,6 +685,8 @@ redisplay_to_realign()
 			      settings.dictkey);
 	main_url_handler(url, TRUE);		
 	g_free(url);
+
+	realign_busy = FALSE;
 }
 
 /******************************************************************************

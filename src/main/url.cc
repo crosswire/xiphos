@@ -807,7 +807,8 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 		switch(mod_type) {
 			case TEXT_TYPE:
 				key = main_update_nav_controls(tmpkey);
-				main_display_commentary(NULL, key);
+				if (settings.comm_showing)
+					main_display_commentary(NULL, key);
 				main_display_bible(work_buf[MODULE], key);
 				main_keep_bibletext_dialog_in_sync((gchar*)key);
 				editor_sync_with_main();
