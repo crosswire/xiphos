@@ -2402,7 +2402,7 @@ msgstr "מרקוס"
 
 #: ../ui/markverse.glade.h:5
 msgid "Mark/Unmark Verse"
-msgstr "סמן \ הסר סימון מפסוק"
+msgstr "סמן הסר סימון מפסוק"
 
 #: ../ui/markverse.glade.h:9
 msgid "Unmark"
@@ -3497,7 +3497,7 @@ msgstr "_כתבי קודש"
 
 #: ../ui/xi-menus.glade.h:80
 msgid "_Commentary/Book"
-msgstr "_פירוש \ ספר"
+msgstr "_פירוש ספר"
 
 #: ../ui/xi-menus.glade.h:81
 msgid "_Contents"
