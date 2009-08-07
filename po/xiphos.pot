@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-02 22:07+0200\n"
+"POT-Creation-Date: 2009-08-07 14:58-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -559,286 +559,286 @@ msgid ""
 "Archive in "
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:526
+#: ../src/gnome2/mod_mgr.c:529
 msgid "Journals and prayer lists cannot be indexed."
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:547 ../src/gnome2/mod_mgr.c:2902
+#: ../src/gnome2/mod_mgr.c:550 ../src/gnome2/mod_mgr.c:2905
 #: ../ui/module-manager.glade.h:15
 msgid "Install"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:549 ../src/gnome2/treekey-editor.c:316
+#: ../src/gnome2/mod_mgr.c:552 ../src/gnome2/treekey-editor.c:316
 msgid "Remove"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:551
+#: ../src/gnome2/mod_mgr.c:554
 msgid "Archive"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:553
+#: ../src/gnome2/mod_mgr.c:556
 msgid "Index"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:555
+#: ../src/gnome2/mod_mgr.c:558
 msgid "Deletion"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:557
+#: ../src/gnome2/mod_mgr.c:560
 #, c-format
 msgid "%s failed"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:559 ../src/gnome2/mod_mgr.c:1285
+#: ../src/gnome2/mod_mgr.c:562 ../src/gnome2/mod_mgr.c:1288
 msgid "Finished"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:726 ../src/gnome2/mod_mgr.c:728
-#: ../src/gnome2/mod_mgr.c:830 ../src/gnome2/mod_mgr.c:865
-#: ../src/gnome2/mod_mgr.c:867 ../src/gnome2/utilities.c:346
+#: ../src/gnome2/mod_mgr.c:729 ../src/gnome2/mod_mgr.c:731
+#: ../src/gnome2/mod_mgr.c:833 ../src/gnome2/mod_mgr.c:868
+#: ../src/gnome2/mod_mgr.c:870 ../src/gnome2/utilities.c:346
 #: ../src/gnome2/utilities.c:411 ../src/gnome2/utilities.c:413
 #: ../src/gnome2/utilities.c:1032 ../src/main/sidebar.cc:801
 #: ../src/main/sidebar.cc:873 ../src/main/sidebar.cc:875
 msgid "Unknown"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1029
+#: ../src/gnome2/mod_mgr.c:1032
 #, c-format
 msgid ""
 "Repository:\n"
 "%s"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1041
+#: ../src/gnome2/mod_mgr.c:1044
 msgid ""
 "Categorized by\n"
 "Module Type"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1046 ../src/gnome2/utilities.c:472
+#: ../src/gnome2/mod_mgr.c:1049 ../src/gnome2/utilities.c:472
 #: ../src/main/sidebar.cc:948 ../src/main/sidebar.cc:950
 msgid "Biblical Texts"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1050 ../src/gnome2/utilities.c:476
+#: ../src/gnome2/mod_mgr.c:1053 ../src/gnome2/utilities.c:476
 #: ../src/main/sidebar.cc:655 ../src/main/sidebar.cc:973
 #: ../src/main/sidebar.cc:975 ../ui/prefs.glade.h:33
 msgid "Commentaries"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1054 ../src/gnome2/utilities.c:480
+#: ../src/gnome2/mod_mgr.c:1057 ../src/gnome2/utilities.c:480
 #: ../src/main/sidebar.cc:982 ../src/main/sidebar.cc:984
 msgid "Dictionaries"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1058 ../src/gnome2/utilities.c:484
+#: ../src/gnome2/mod_mgr.c:1061 ../src/gnome2/utilities.c:484
 #: ../src/main/sidebar.cc:991 ../src/main/sidebar.cc:993
 msgid "Daily Devotionals"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1062 ../src/gnome2/utilities.c:488
+#: ../src/gnome2/mod_mgr.c:1065 ../src/gnome2/utilities.c:488
 #: ../src/main/sidebar.cc:665 ../src/main/sidebar.cc:1000
 #: ../src/main/sidebar.cc:1002
 msgid "General Books"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1066 ../src/gnome2/utilities.c:492
+#: ../src/gnome2/mod_mgr.c:1069 ../src/gnome2/utilities.c:492
 #: ../src/main/sidebar.cc:1009 ../src/main/sidebar.cc:1011
 msgid "Maps"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1070 ../src/gnome2/utilities.c:496
+#: ../src/gnome2/mod_mgr.c:1073 ../src/gnome2/utilities.c:496
 #: ../src/main/sidebar.cc:1018 ../src/main/sidebar.cc:1020
 msgid "Images"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1078
+#: ../src/gnome2/mod_mgr.c:1081
 msgid ""
 "Categorized by\n"
 "Availability"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1083
+#: ../src/gnome2/mod_mgr.c:1086
 msgid "Updates"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1087
+#: ../src/gnome2/mod_mgr.c:1090
 msgid "Uninstalled"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1091 ../src/gnome2/sidebar.c:637
+#: ../src/gnome2/mod_mgr.c:1094 ../src/gnome2/sidebar.c:637
 #: ../src/gnome2/utilities.c:501 ../src/main/prayerlists.cc:238
 #: ../src/main/sidebar.cc:1028 ../src/main/sidebar.cc:1030
 msgid "Prayer List/Journal"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1268
+#: ../src/gnome2/mod_mgr.c:1271
 msgid "Refreshing from remote source"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1279
+#: ../src/gnome2/mod_mgr.c:1282
 msgid "Remote source not found"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1412
+#: ../src/gnome2/mod_mgr.c:1415
 msgid "Module Name"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1433
+#: ../src/gnome2/mod_mgr.c:1436
 msgid "A checkmark means this module is already installed"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1455
+#: ../src/gnome2/mod_mgr.c:1458
 msgid "Click the box to work on this module"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1456
+#: ../src/gnome2/mod_mgr.c:1459
 msgid "Click the box to select this module for install/update"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1475
+#: ../src/gnome2/mod_mgr.c:1478
 msgid "Installed"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1485
+#: ../src/gnome2/mod_mgr.c:1488
 msgid ""
 "The index icon means you have built an optimized ('lucene') index for this "
 "module for fast searching (see the Maintenance pane for this function)"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1503
+#: ../src/gnome2/mod_mgr.c:1506
 msgid ""
 "The lock icon means this module is encrypted, and requires that you purchase "
 "an unlock key from the content owner"
 msgstr ""
 
 #. 2
-#: ../src/gnome2/mod_mgr.c:1520 ../src/gnome2/sidebar.c:975
+#: ../src/gnome2/mod_mgr.c:1523 ../src/gnome2/sidebar.c:975
 #: ../src/gnome2/sidebar.c:1143 ../ui/xi-menus.glade.h:1
 msgid "About"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1540
+#: ../src/gnome2/mod_mgr.c:1543
 msgid ""
 "The refresh icon means the Installed module is older than the newer "
 "Available module: You should update the module"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1552
+#: ../src/gnome2/mod_mgr.c:1555
 msgid "Available"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1561
+#: ../src/gnome2/mod_mgr.c:1564
 msgid "Size"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1570
+#: ../src/gnome2/mod_mgr.c:1573
 msgid "Description"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1602 ../src/gnome2/mod_mgr.c:1702
+#: ../src/gnome2/mod_mgr.c:1605 ../src/gnome2/mod_mgr.c:1705
 msgid "Configure"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1633
+#: ../src/gnome2/mod_mgr.c:1636
 msgid "Type"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1640
+#: ../src/gnome2/mod_mgr.c:1643
 msgid "Caption"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1648
+#: ../src/gnome2/mod_mgr.c:1651
 msgid "Source"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1656
+#: ../src/gnome2/mod_mgr.c:1659
 msgid "Directory"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1664
+#: ../src/gnome2/mod_mgr.c:1667
 msgid "User"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1672
+#: ../src/gnome2/mod_mgr.c:1675
 msgid "Password"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1680
+#: ../src/gnome2/mod_mgr.c:1683
 msgid "UID"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1700
+#: ../src/gnome2/mod_mgr.c:1703
 msgid "Sources"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1706 ../src/gnome2/preferences_dialog.c:1784
+#: ../src/gnome2/mod_mgr.c:1709 ../src/gnome2/preferences_dialog.c:1784
 #: ../src/gnome2/sidebar.c:1483
 msgid "Modules"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1708
+#: ../src/gnome2/mod_mgr.c:1711
 msgid "Install/Update"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1710
+#: ../src/gnome2/mod_mgr.c:1713
 msgid "Maintenance"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1930
+#: ../src/gnome2/mod_mgr.c:1933
 msgid "Please Refresh"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1931
+#: ../src/gnome2/mod_mgr.c:1934
 msgid "Your module list is not up to date!"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2282
+#: ../src/gnome2/mod_mgr.c:2285
 msgid "Standard remote sources have been loaded."
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2283
+#: ../src/gnome2/mod_mgr.c:2286
 msgid "Could not load standard sources from CrossWire."
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2435 ../src/gnome2/mod_mgr.c:2684
+#: ../src/gnome2/mod_mgr.c:2438 ../src/gnome2/mod_mgr.c:2687
 msgid "Remove the selected source"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2495
+#: ../src/gnome2/mod_mgr.c:2498
 msgid "Enter a remote source"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2499
+#: ../src/gnome2/mod_mgr.c:2502
 msgid "Caption:"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2500
+#: ../src/gnome2/mod_mgr.c:2503
 msgid "Type:"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2501
+#: ../src/gnome2/mod_mgr.c:2504
 msgid "Host:"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2502
+#: ../src/gnome2/mod_mgr.c:2505
 msgid "Directory:"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2504
+#: ../src/gnome2/mod_mgr.c:2507
 msgid "User (optional):"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2505
+#: ../src/gnome2/mod_mgr.c:2508
 msgid "Password (optional):"
 msgstr ""
 
 #. this can happen at most once
-#: ../src/gnome2/mod_mgr.c:2533
+#: ../src/gnome2/mod_mgr.c:2536
 msgid "A source by that name already exists."
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2681
+#: ../src/gnome2/mod_mgr.c:2684
 msgid "Delete a remote source"
 msgstr ""
 
@@ -902,7 +902,7 @@ msgid "Change parallel 5"
 msgstr ""
 
 #: ../src/gnome2/parallel_view.c:467 ../src/gnome2/sidebar.c:620
-#: ../src/gnome2/sidebar.c:626 ../src/gnome2/tabbed_browser.c:231
+#: ../src/gnome2/sidebar.c:626 ../src/gnome2/tabbed_browser.c:256
 #: ../src/main/sidebar.cc:623 ../src/main/sidebar.cc:956
 #: ../src/main/sidebar.cc:957 ../src/main/sidebar.cc:958
 msgid "Parallel View"
