@@ -5,25 +5,26 @@ Warning: The intended audience is Xiphos developpers. If you
 are a regular user of Xiphos, please install the binary packages 
 provided by your distribution.
 
-You need the following dev packages installed on your system:
+If you have deb-src line enabled for crosswire-ppa or debian testing run:
+
+$ sudo apt-get build-dep xiphos
+
+to install all necessory build dependencies.
+
+Additionaly you need the following dev packages installed on your system:
 
 [a] build-essential 
 Install  gcc, make and all other needed tools for building
 Xiphos.
 
-[b] dpkg-dev 
-package building tools for Debian
-
-[c] fakeroot 
-fakeroot runs a command in an environment wherein it appears to 
-have root privileges for file manipulation. This is useful for 
-allowing users to create a deb package without root 
-permissions/ownership.
-
+[b] devscripts
+package building tools for Debian (install all recommeds)
 
 build the package (at the source top-level)
-$ dpkg-buildpackage -rfakeroot -b
+$ debuild -us -uc
 
 Now wait for some time as compile procedure going to take 
 its own time. To install the newly-built package, enter:
-# dpkg -i ../xiphos_version-revision_arch.deb
+$ sudo dpkg -i ../xiphos-svn_version-revision_arch.deb
+
+ -- Dmitrijs Ledkovs <dmitrij.ledkov@gmail.com>, Thu,  6 Aug 2009 16:26:32 +0300
