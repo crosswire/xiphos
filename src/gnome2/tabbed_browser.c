@@ -119,7 +119,7 @@ void gui_recompute_shows(void)
 	stop_refresh = TRUE;
 
 	main_flush_widgets_content();
-
+	
 	if (cur_passage_tab)
 		gui_reassign_strdup(&settings.currentverse,
 				    cur_passage_tab->text_commentary_key);
@@ -130,6 +130,31 @@ void gui_recompute_shows(void)
 	gui_show_hide_comms(settings.showcomms);
 	gui_set_bible_comm_layout();
 
+	while (gtk_events_pending())
+		gtk_main_iteration();
+
+	stop_refresh = FALSE;
+}
+
+/******************************************************************************
+ * Name
+ *  gui_recompute_view_menu_choices
+ *
+ * Synopsis
+ *   #include "tabbed_browser.h"
+ *
+ *   void gui_recompute_view_menu_choices(void)	
+ *
+ * Description
+ *   formerly part of gui_recompute_shows, but moved here to keep from
+ *   triggering toggled signals on these items before new content is 
+ *   ready to be displayed
+ *
+ * Return value
+ *   void
+ */
+void gui_recompute_view_menu_choices(void)
+{
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.viewtexts_item),
 				       settings.showtexts);
@@ -142,12 +167,7 @@ void gui_recompute_shows(void)
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.viewpreview_item),
 				       settings.showpreview);
-
-	while (gtk_events_pending())
-		gtk_main_iteration();
-	stop_refresh = FALSE;
 }
-
 
 void setup_book_editor_tab(PASSAGE_TAB_INFO *pt)
 {
@@ -699,6 +719,7 @@ void gui_load_tabs(const gchar *filename)
 
 	stop_refresh = FALSE;
 	set_current_tab(pt);
+	gui_recompute_view_menu_choices();
 }
 
 
@@ -890,6 +911,8 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
 
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),
 				      (pt->comm_showing ? 0 : 1));
+
+	gui_recompute_view_menu_choices();
 
 	companion_activity = FALSE;
 
@@ -1153,6 +1176,7 @@ void gui_open_parallel_view_in_new_tab(void)
 	
 	passage_list = g_list_append(passage_list, (PASSAGE_TAB_INFO*)pt);
 	set_current_tab(pt);
+	gui_recompute_view_menu_choices();
 	notebook_main_add_page(pt);
 	pt->paratab = gui_create_parallel_tab();
 	gui_parallel_tab_sync((gchar*)settings.currentverse);
