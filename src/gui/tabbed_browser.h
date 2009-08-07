@@ -100,6 +100,8 @@ void gui_tabs_on_off(int on);
 
 void on_notebook_main_new_tab_clicked(GtkButton *button, gpointer user_data);
 
+extern gboolean change_tabs_no_redisplay;
+
 #ifdef __cplusplus
 }
 #endif
