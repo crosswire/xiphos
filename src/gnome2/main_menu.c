@@ -667,7 +667,7 @@ redisplay_to_realign()
 {
 	static int realign_busy = FALSE;
 
-	if (realign_busy)
+	if (realign_busy || change_tabs_no_redisplay)
 		return;
 	realign_busy = TRUE;
 

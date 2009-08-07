@@ -67,6 +67,7 @@ void notebook_main_add_page(PASSAGE_TAB_INFO *tbinf);
 void set_current_tab (PASSAGE_TAB_INFO *pt);
 
 gboolean stop_refresh = FALSE;
+gboolean change_tabs_no_redisplay = FALSE;
 
 GList *passage_list;
 
@@ -155,6 +156,8 @@ void gui_recompute_shows(void)
  */
 void gui_recompute_view_menu_choices(void)
 {
+	change_tabs_no_redisplay = TRUE;
+
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.viewtexts_item),
 				       settings.showtexts);
@@ -167,6 +170,8 @@ void gui_recompute_view_menu_choices(void)
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.viewpreview_item),
 				       settings.showpreview);
+
+	change_tabs_no_redisplay = FALSE;
 }
 
 void setup_book_editor_tab(PASSAGE_TAB_INFO *pt)
