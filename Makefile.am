@@ -2,11 +2,7 @@
 
 @INTLTOOL_DESKTOP_RULE@
 
-#ifdef WIN32
-SUBDIRS = doc po src ui
-#else
 SUBDIRS = doc po src ui help
-#endif
 
 DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper
 
