@@ -1,4 +1,8 @@
-2009-08--7  karl <charcoal@users.sf.net> and matthew <ransom1982@users.sourceforge.net>
+2009-08-09  karl <charcoal@users.sf.net>
+
+	* 3.1.1 release.
+
+2009-08-07  karl <charcoal@users.sf.net> and matthew <ransom1982@users.sourceforge.net>
 
 	* solve headaches of tab switch redisplay management.
 
