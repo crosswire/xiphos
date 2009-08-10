@@ -44,4 +44,5 @@ libgecko_a_SOURCES =  \
 endif
 
 EXTRA_DIST = \
-	README
+	README \
+	wscript
