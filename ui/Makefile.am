@@ -24,6 +24,7 @@ ui_DATA = \
 	translation_icon-16.png \
 	xiphos-x-16.png \
 	languages \
+	editor_link_dialog.xml \
 	editor_studypad.xml \
 	editor_note.xml 
 

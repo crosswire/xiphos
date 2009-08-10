@@ -1,7 +1,7 @@
 /*
  * Xiphos Bible Study Tool
  * html-editor.c - the html editor
- *
+ * 
  * Copyright (C) 2005-2009 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -40,11 +40,13 @@
 #include <gtkhtml/gtkhtml-stream.h>
 
 #include "editor/slib-editor.h"
+#include "editor/link_dialog.h"
 
 
 #include "main/settings.h"
 #include "main/sword.h"
 #include "main/sword_treekey.h"
+#include "main/url.hh"
 #include "main/xml.h"
 
 #include "gui/navbar_versekey_editor.h"
@@ -587,6 +589,16 @@ action_save_cb (GtkAction *action,
 	}
 }
 
+
+static void
+action_insert_link_cb (GtkAction *action,
+                EDITOR *e)
+{
+	editor_link_dialog (e);
+}
+
+
+
 static void
 action_save_as_cb (GtkAction *action,
                    EDITOR *e)
@@ -766,12 +778,31 @@ static GtkActionEntry main_entries[] = {
 };
 
 
+static GtkActionEntry test_entries[] = {
+
+	{ "context-insert-link",
+	  "insert-link",
+	  N_("Insert Link"),
+	  NULL,
+	  NULL,
+	  G_CALLBACK (action_insert_link_cb) },
+
+	{ "insert-link",
+	  "insert-link",
+	  N_("Insert Link"),
+	  NULL,
+	  NULL,
+	  G_CALLBACK (action_insert_link_cb) }
+};
+
+
 GtkWidget * editor_new (const gchar * title, EDITOR *e)
 {
 	GtkActionGroup *action_group;
 	GtkUIManager *manager;
 	GtkWidget *editor;
 	GError *error = NULL;
+//	GtkAction *action;
 
 	editor = gtkhtml_editor_new ();
 	e->window = editor;
@@ -816,6 +847,19 @@ GtkWidget * editor_new (const gchar * title, EDITOR *e)
 		action_group, main_entries,
 		G_N_ELEMENTS (main_entries), e);
 	gtk_ui_manager_insert_action_group (manager, action_group, 0);
+
+
+
+	action_group = gtk_action_group_new ("context-menu");
+	gtk_action_group_set_translation_domain (
+		action_group, GETTEXT_PACKAGE);
+	gtk_action_group_add_actions (
+		action_group, test_entries,
+		G_N_ELEMENTS (test_entries), e);
+	gtk_ui_manager_insert_action_group (manager, action_group, 0);
+
+
+	
 	
 	gtk_ui_manager_ensure_update (manager);
 	gtk_widget_show (editor);
@@ -826,6 +870,14 @@ GtkWidget * editor_new (const gchar * title, EDITOR *e)
 	g_signal_connect(editor, "delete-event",
 			 G_CALLBACK(app_delete_cb), (EDITOR *) e);
 
+	/*action = gtkhtml_editor_get_action (GTKHTML_EDITOR(editor),"context-insert-link");
+	if(action)
+		gtk_action_block_activate (action);
+	else
+		GS_message (("action: %s not found","context-insert-link"));
+*/
+	/*gtk_activatable_set_related_action  (GtkActivatable *activatable,
+                                                         GtkAction *action);*/
 	return editor;
 
 }
