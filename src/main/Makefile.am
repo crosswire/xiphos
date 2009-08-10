@@ -59,3 +59,6 @@ libmain_a_SOURCES =  \
     tab_history.c tab_history.h\
     url.cc url.hh\
     xml.c xml.h
+
+EXTRA_DIST = \
+	wscript
