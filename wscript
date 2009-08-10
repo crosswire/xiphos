@@ -29,7 +29,7 @@ from waffles.gtkhtml import Gtkhtml
 from waffles.misc import *
 
 # the following two variables are used by the target "waf dist"
-VERSION='3.1'
+VERSION='3.1.1'
 APPNAME='xiphos'
 PACKAGE='xiphos'
 
