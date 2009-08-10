@@ -40,7 +40,7 @@ EXTRA_DIST = \
 	waffles/editor.py \
 	waffles/gecko.py \
 	waffles/gtkhtml.py \
-	waffles/misc.py \
+	waffles/misc.py 
 
 DISTCLEANFILES = gnome-doc-utils.make
 
