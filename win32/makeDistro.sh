@@ -26,7 +26,7 @@
 cd ..
 
 # configure and build xiphos
-./waf configure --enable-gtkhtml --disable-console --prefix='C:/msys/home/xiphos/win32/binaries/Xiphos' --debug-level='optimized'
+./waf configure --enable-gtkhtml --disable-console --debug-level='optimized'
 ./waf
 ./waf install
 
