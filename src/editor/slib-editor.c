@@ -58,6 +58,9 @@
 
 extern gboolean do_display;
 
+static
+gboolean editor_is_dirty(EDITOR * e);
+
 static 
 int app_delete_cb(GtkWidget * widget, GdkEvent * event, gpointer data);
 
@@ -305,6 +308,7 @@ static const gchar *file_ui =
 "     <menuitem action='open'/>\n"
 "     <menuitem action='save'/>\n"
 "     <menuitem action='save-as'/>\n"
+"     <menuitem action='new'/>\n"
 "     <separator/>\n"
 "     <menuitem action='print-preview'/>\n"
 "     <menuitem action='print'/>\n"
@@ -320,6 +324,7 @@ static const gchar *note_file_ui =
 "    <menu action='file-menu'>\n"
 "     <menuitem action='save'/>\n"
 "     <menuitem action='save-as'/>\n"
+"     <menuitem action='delete'/>\n"
 "     <separator/>\n"
 "     <menuitem action='print-preview'/>\n"
 "     <menuitem action='print'/>\n"
@@ -341,17 +346,28 @@ static const gchar *view_ui =
 "</ui>";
 
 
-static const gchar *main_ui =
+static const gchar *main_ui_note =
 "<ui>\n"
 "  <toolbar name='main-toolbar'> \n"
 "    <placeholder name='pre-main-toolbar'> \n"
 "      <toolitem action='save'/> \n"
+"      <toolitem action='delete'/> \n"
 "      <separator/> \n"
 "    </placeholder> \n"
 "  </toolbar> \n"
 "</ui>";
 
 
+static const gchar *main_ui_studypad =
+"<ui>\n"
+"  <toolbar name='main-toolbar'> \n"
+"    <placeholder name='pre-main-toolbar'> \n"
+"      <toolitem action='save'/> \n"
+"      <toolitem action='new'/> \n"
+"      <separator/> \n"
+"    </placeholder> \n"
+"  </toolbar> \n"
+"</ui>";
 
 static GtkPrintOperationResult
 print (GtkhtmlEditor *editor,
@@ -421,7 +437,7 @@ open_dialog (EDITOR * e)
 
 
 static gint
-save_dialog (GtkhtmlEditor *editor)
+save_dialog (GtkhtmlEditor *editor, EDITOR * e)
 {
 	GtkWidget *dialog;
 	const gchar *filename;
@@ -456,7 +472,20 @@ save_dialog (GtkhtmlEditor *editor)
 
 		new_filename = gtk_file_chooser_get_filename (
 			GTK_FILE_CHOOSER (dialog));
+		//GS_message (("\nnew_filename: %s\n",new_filename));
 		gtkhtml_editor_set_filename (editor, new_filename);
+
+		if (e->filename)
+			g_free(e->filename);
+		e->filename = g_strdup(new_filename);
+		
+		xml_set_value("Xiphos", "studypad", "lastfile",
+			      e->filename);
+		settings.studypadfilename =
+		    xml_get_value("studypad", "lastfile");
+		
+		change_window_title(e->window, e->filename);
+		
 		g_free (new_filename);
 	}
 
@@ -589,6 +618,55 @@ action_save_cb (GtkAction *action,
 	}
 }
 
+static void
+action_new_cb (GtkAction *action,
+                EDITOR *e)	/* for studypad only */
+{
+
+	if (editor_is_dirty(e))
+		_save_file (e);
+	
+	_load_file(e, g_strdup_printf("%s/%s",settings.gSwordDir,"template.pad"));
+	
+	if (e->filename)
+		g_free(e->filename);
+	e->filename = g_strdup(_("Untitled document"));
+	
+	xml_set_value("Xiphos", "studypad", "lastfile",
+		      e->filename);
+	settings.studypadfilename =
+	    xml_get_value("studypad", "lastfile");
+	change_window_title(e->window, e->filename);
+	
+	gtkhtml_editor_set_filename(GTKHTML_EDITOR(e->window), NULL);	
+	gtkhtml_editor_set_changed (GTKHTML_EDITOR(e->window), TRUE);
+}
+
+
+static void
+action_delete_cb (GtkAction *action,
+                EDITOR *e)	/* for note only */
+{
+
+	gchar *buf;
+	
+	if (e->studypad)
+		return;
+	
+	buf = g_strdup_printf
+	    ("<span weight=\"bold\" size=\"larger\">%s %s?</span>",
+	    _("Are you sure you want to delete the note for") , e->key);
+	
+	if (gui_yes_no_dialog(buf, GTK_STOCK_DIALOG_WARNING)) {
+		main_delete_note(e->module, e->key);
+		gtkhtml_editor_set_text_html (GTKHTML_EDITOR(e->window),
+					      "",
+					      strlen(""));
+	}
+	g_free(buf);
+	
+}
+
 
 static void
 action_insert_link_cb (GtkAction *action,
@@ -607,7 +685,7 @@ action_save_as_cb (GtkAction *action,
 	gboolean as_html;
 	GError *error = NULL;
 
-	if (save_dialog (GTKHTML_EDITOR(e->window)) == GTK_RESPONSE_CANCEL)
+	if (save_dialog (GTKHTML_EDITOR(e->window), e) == GTK_RESPONSE_CANCEL)
 		return;
 
 	filename = gtkhtml_editor_get_filename (GTKHTML_EDITOR(e->window));
@@ -681,6 +759,18 @@ static GtkActionEntry file_entries[] = {
 	  NULL,
 	  NULL,
 	  G_CALLBACK (action_save_as_cb) },
+	{ "new",
+	  "gtk-new",
+	  N_("New"),
+	  NULL,
+	  N_("Open new document"),
+	  G_CALLBACK (action_new_cb) },
+	{ "delete",
+	  "gtk-delete",
+	  N_("Delete"),
+	  NULL,
+	  N_("Delete current note"),
+	  G_CALLBACK (action_delete_cb) },
 
 	{ "file-menu",
 	  NULL,
@@ -802,7 +892,6 @@ GtkWidget * editor_new (const gchar * title, EDITOR *e)
 	GtkUIManager *manager;
 	GtkWidget *editor;
 	GError *error = NULL;
-//	GtkAction *action;
 
 	editor = gtkhtml_editor_new ();
 	e->window = editor;
@@ -817,11 +906,15 @@ GtkWidget * editor_new (const gchar * title, EDITOR *e)
 		
 	handle_error (&error);
 
-	
+		
 	gtk_ui_manager_add_ui_from_string (manager, view_ui, -1, &error);
 	handle_error (&error);
 	
-	gtk_ui_manager_add_ui_from_string (manager, main_ui, -1, &error);
+	if (e->type == STUDYPAD_EDITOR) 
+		gtk_ui_manager_add_ui_from_string (manager, main_ui_studypad, -1, &error);
+	else
+		gtk_ui_manager_add_ui_from_string (manager, main_ui_note, -1, &error);
+		
 	handle_error (&error);
 
 	action_group = gtk_action_group_new ("file");
@@ -849,7 +942,6 @@ GtkWidget * editor_new (const gchar * title, EDITOR *e)
 	gtk_ui_manager_insert_action_group (manager, action_group, 0);
 
 
-
 	action_group = gtk_action_group_new ("context-menu");
 	gtk_action_group_set_translation_domain (
 		action_group, GETTEXT_PACKAGE);
@@ -857,8 +949,6 @@ GtkWidget * editor_new (const gchar * title, EDITOR *e)
 		action_group, test_entries,
 		G_N_ELEMENTS (test_entries), e);
 	gtk_ui_manager_insert_action_group (manager, action_group, 0);
-
-
 	
 	
 	gtk_ui_manager_ensure_update (manager);
@@ -869,15 +959,6 @@ GtkWidget * editor_new (const gchar * title, EDITOR *e)
 	
 	g_signal_connect(editor, "delete-event",
 			 G_CALLBACK(app_delete_cb), (EDITOR *) e);
-
-	/*action = gtkhtml_editor_get_action (GTKHTML_EDITOR(editor),"context-insert-link");
-	if(action)
-		gtk_action_block_activate (action);
-	else
-		GS_message (("action: %s not found","context-insert-link"));
-*/
-	/*gtk_activatable_set_related_action  (GtkActivatable *activatable,
-                                                         GtkAction *action);*/
 	return editor;
 
 }
@@ -912,6 +993,8 @@ _save_note(EDITOR * e)
 	main_save_note (e->module, e->key, string->str);
 	
 	g_string_free(string,TRUE);
+	gtkhtml_editor_drop_undo(GTKHTML_EDITOR(e->window));
+	gtkhtml_editor_set_changed (GTKHTML_EDITOR(e->window), FALSE);
 }
 
 
@@ -930,6 +1013,8 @@ _save_book(EDITOR * e)
 	
 	main_treekey_save_book_text(e->module, e->key, string->str);
 	g_string_free(string,TRUE);
+	gtkhtml_editor_drop_undo(GTKHTML_EDITOR(e->window));
+	gtkhtml_editor_set_changed (GTKHTML_EDITOR(e->window), FALSE);
 }	
 
 
@@ -941,14 +1026,19 @@ _save_file (EDITOR * e)
 	GError *error = NULL;
 	
 	if (gtkhtml_editor_get_filename (GTKHTML_EDITOR(e->window)) == NULL)
-		if (save_dialog (GTKHTML_EDITOR(e->window)) == GTK_RESPONSE_CANCEL)
+		if (save_dialog (GTKHTML_EDITOR(e->window), e) == GTK_RESPONSE_CANCEL)
 			return;
 
-	filename = gtkhtml_editor_get_filename (GTKHTML_EDITOR(e->window));
+	filename = gtkhtml_editor_get_filename (GTKHTML_EDITOR(e->window));	
 	as_html = gtkhtml_editor_get_html_mode (GTKHTML_EDITOR(e->window));
+
+	GS_message (("\n_save_file filename: %s\n",filename));
 
 	gtkhtml_editor_save (GTKHTML_EDITOR(e->window), filename, as_html, &error);
 	handle_error (&error);	
+	
+	gtkhtml_editor_drop_undo(GTKHTML_EDITOR(e->window));
+	gtkhtml_editor_set_changed (GTKHTML_EDITOR(e->window), FALSE);
 }	
 
 
