@@ -29,12 +29,10 @@ extern "C"
 
 #include <config.h>	
 
-
-
 #include "editor/slib-editor.h"
+	
  
 void editor_link_dialog (EDITOR *e);
-
 
 
 #ifdef __cplusplus
