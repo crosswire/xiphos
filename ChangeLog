@@ -1,3 +1,10 @@
+2009-08-10 terry <tbiggs@users.sourceforge.net>
+
+	* added ui/editor_link_dialog.xml, editor/link_dialog.c and
+	  editor/link_dialog.h 
+	* added New menu item and button to studypad (slib-editor)
+	* added Delete menu item and button to note editor (slib-editor) 
+
 2009-08-09  karl <charcoal@users.sf.net>
 
 	* 3.1.1 release.
