@@ -24,7 +24,7 @@ def configure(conf):
 
 def build(bld):
 
-    source = 'slib-editor.c' if bld.env['HAVE_EDITOR_IDL'] else \
+    source = 'slib-editor.c link_dialog.c' if bld.env['HAVE_EDITOR_IDL'] else \
         'bonobo-editor.c Editor-common.c Editor-skels.c Editor-stubs.c'
 
     bld.new_task_gen(
