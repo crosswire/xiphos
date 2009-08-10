@@ -33,7 +33,14 @@ EXTRA_DIST = \
 	TRANSLATION-HOWTO \
 	RELEASE-NOTES \
 	Xiphos.ogg \
-	help/xiphos.pdf
+	help/xiphos.pdf \
+	waf \
+	wscript \
+	waffles/__init__.py \
+	waffles/editor.py \
+	waffles/gecko.py \
+	waffles/gtkhtml.py \
+	waffles/misc.py \
 
 DISTCLEANFILES = gnome-doc-utils.make
 

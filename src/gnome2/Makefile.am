@@ -107,4 +107,5 @@ xiphos_LDADD = \
 
 EXTRA_DIST = \
     $(top_builddir)/src/gui/*.h \
-    gnomesword2
+    gnomesword2 \
+    wscript
