@@ -68,15 +68,31 @@ void button_ok_clicked_cb(GtkObject *object, EDITOR *e)
 	const gchar *encoded_mod = NULL;
 	const gchar *encoded_verse = NULL;
 	GString *str = g_string_new (NULL);
+	gint type = 0;
 
 	mod_str = gtk_entry_get_text (GTK_ENTRY (entry_module));
 	verse_str = gtk_entry_get_text (GTK_ENTRY (entry_verse));
 	text_str = gtk_entry_get_text (GTK_ENTRY (entry_text));
+
+	type = main_get_mod_type((gchar*)mod_str);
 	
-	encoded_mod = main_url_encode(mod_str);
+	if (mod_str)
+		encoded_mod = main_url_encode(mod_str);
 	encoded_verse = main_url_encode(verse_str);
-	 
-	g_string_printf(str,"<a href=\"passagestudy.jsp?action=showRef&type=scripRef&value=%s&module=%s\">%s</a>", encoded_verse, encoded_mod, text_str);
+
+	switch (type) {
+		case -1:
+		case TEXT_TYPE:
+			g_string_printf(str,"<a href=\"xiphos.url?action=showRef&type=scripRef&value=%s&module=%s\">%s</a>", encoded_verse, encoded_mod, text_str);
+			break;
+		case COMMENTARY_TYPE:
+		case DICTIONARY_TYPE:
+		case BOOK_TYPE:
+		case PRAYERLIST_TYPE:
+			g_string_printf(str,"<a href=\"sword://%s/%s\">%s</a>", encoded_mod, encoded_verse, text_str);
+			break;
+	}
+	
 	GS_message (("link: %s", str->str));
 	gtkhtml_editor_insert_html (GTKHTML_EDITOR (e->window), str->str);
 	g_string_free (str, TRUE);
