@@ -88,6 +88,7 @@ src/main/url.cc
 src/main/xml.c
 ## Glade files
 ui/bookmarks.glade
+ui/editor_link_dialog.xml
 ui/editor_note.xml
 ui/editor_studypad.xml
 ui/editor.xml

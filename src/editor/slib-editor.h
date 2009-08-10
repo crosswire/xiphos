@@ -61,6 +61,11 @@ enum {
 	BOOK_EDITOR
 };
 
+
+/*
+void button_test_clicked_cb(GtkObject *object, gpointer user_data);
+void button_ok_clicked_cb(GtkObject *object, gpointer user_data);
+void button_cancel_clicked_cb(GtkObject *object, gpointer user_data);*/
 void editor_sync_toggled(GtkToggleButton * button, EDITOR * e);
 void editor_sync_with_main(void);
 gboolean editor_close_all(void);
