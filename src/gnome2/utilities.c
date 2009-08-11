@@ -1253,4 +1253,16 @@ HtmlOutput(char *text,
 #endif
 }
 
+void set_window_icon (GtkWindow *window)
+{
+	gchar *imagename;
+	GdkPixbuf *pixbuf;
+
+	imagename = image_locator("xiphos-x-16.png");
+	pixbuf = gdk_pixbuf_new_from_file (imagename, NULL);
+	g_free (imagename);
+	gtk_window_set_icon (window, pixbuf);
+
+}
+
 /******   end of file   ******/
