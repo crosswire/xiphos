@@ -146,7 +146,7 @@ def configure(conf):
 
     ## temporary HACKS for win32
     if env['IS_WIN32']:
-        env['PREFIX'] = os.path.abspath('win32/binaries/Xiphos')
+        env['PREFIX'] = escpath(os.path.abspath('win32/binaries/Xiphos'))
     ##
     
     conf.check_tool('g++ gcc gnu_dirs misc')
