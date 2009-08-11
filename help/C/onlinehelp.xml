@@ -12,7 +12,7 @@
 	<sect2 id="xiphos-live-chat">
 		<title>Live Chat</title>
 		<para>Another way to get help is with online chat. Xiphos has an IRC channel on freenode, #xiphos.
-		If you don't know what that means, it's ok. Just click <ulink url="http://webchat.freenode.net/?randomnick=1&channels=xiphos&prompt=1</ulink> (it will open your web browser), type a nickname or accept the default, and click "Click to join chatroom".
+		If you don't know what that means, it's ok. Just click <ulink url="http://webchat.freenode.net/?randomnick=1&amp;channels=xiphos&amp;prompt=1">this link</ulink> (it will open your web browser), type a nickname or accept the default, and click "Click to join chatroom".
 		This will take you to a chatroom where the developers and other users are available to help you with issues
 		you may be having. Although many times someone will answer your question immediately, sometimes you may
 		have to wait a few minutes or longer.
