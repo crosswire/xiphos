@@ -96,6 +96,7 @@ gui_create_about_trans(void)
 			    "dialog_about_trans", dialog_about_trans);
 	gtk_window_set_title(GTK_WINDOW(dialog_about_trans),
 			     _("About Xiphos Translation"));
+	set_window_icon (GTK_WINDOW(dialog_about_trans));
         gtk_window_set_resizable(GTK_WINDOW(dialog_about_trans), FALSE);
 
 	dialog_vbox = GTK_DIALOG(dialog_about_trans)->vbox;

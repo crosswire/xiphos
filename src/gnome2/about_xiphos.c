@@ -144,5 +144,7 @@ gui_create_about_xiphos(void)
 	gtk_about_dialog_set_logo
 	    (GTK_ABOUT_DIALOG (about1), about1_logo_pixbuf);
 
+	set_window_icon (GTK_WINDOW(about1));
+
 	return about1;
 }

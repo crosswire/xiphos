@@ -82,6 +82,7 @@ GtkWidget *pixmap_finder(char *image);
 GdkPixbuf *pixbuf_finder(char *image, GError **error);
 
 void HtmlOutput(char *text, GtkWidget *gtkText, MOD_FONT *mf, char *anchor);
+void set_window_icon(GtkWindow *window);
 
 enum {
 	LANGSET_BIBLE,

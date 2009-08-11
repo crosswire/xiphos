@@ -104,6 +104,7 @@ gui_create_about_sword(void)
 			    "dialog_about_sword", dialog_about_sword);
 	gtk_window_set_title(GTK_WINDOW(dialog_about_sword),
 			     _("About the SWORD Project"));
+	set_window_icon (GTK_WINDOW(dialog_about_sword));
         gtk_window_set_resizable(GTK_WINDOW(dialog_about_sword), FALSE);
 
 	dialog_vbox = GTK_DIALOG(dialog_about_sword)->vbox;
