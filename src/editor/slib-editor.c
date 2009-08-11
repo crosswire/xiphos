@@ -1539,7 +1539,7 @@ gint editor_create_new(const gchar * filename, const gchar * key, gint editor_ty
 		}
 		tmp = g_list_next(tmp);
 	}
-    	GS_message (("filename %s, key %s",filename, key));
+    	GS_message (("filename %s, key %s", (filename ? filename : "-null-"), (key ? key : "-null-")));
 	return _create_new(filename, key, editor_type);
 }
 

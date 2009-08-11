@@ -139,7 +139,6 @@ editor_link_dialog (EDITOR *e)
         GtkBuilder *builder;
 	gchar *gbuilder_file;
         
-        
         builder = gtk_builder_new ();
 	gbuilder_file = gui_general_user_file ("editor_link_dialog.xml", FALSE);
         gtk_builder_add_from_file (builder, gbuilder_file, NULL);
