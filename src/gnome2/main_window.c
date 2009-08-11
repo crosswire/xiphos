@@ -737,7 +737,6 @@ void create_mainwindow(void)
 	GtkWidget *scrolledwindow;
 #endif /* USE_GTKMOZEMBED */
 	GtkWidget *box_book;
-	GtkWidget *image;
 	GdkPixbuf* pixbuf;
 	/*
 	GTK_SHADOW_NONE
@@ -764,9 +763,8 @@ void create_mainwindow(void)
 	gtk_window_set_resizable(GTK_WINDOW(widgets.app), TRUE);
 
 	imagename = image_locator("gs2-48x48.png");
-	image = gtk_image_new_from_file (imagename);
+	pixbuf = gdk_pixbuf_new_from_file (imagename, NULL);
 	g_free(imagename);
-	pixbuf = gtk_image_get_pixbuf (GTK_IMAGE(image));
 	gtk_window_set_icon (GTK_WINDOW(widgets.app), pixbuf);
 
 	vbox_gs = gtk_vbox_new(FALSE, 0);
