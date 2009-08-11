@@ -898,6 +898,8 @@ GtkWidget * editor_new (const gchar * title, EDITOR *e)
 	e->html_widget = GTK_WIDGET(gtkhtml_editor_get_html (GTKHTML_EDITOR (editor)));
 	gtk_window_set_title(GTK_WINDOW(editor),title);
 	
+	set_window_icon (GTK_WINDOW(editor));
+	
 	manager = gtkhtml_editor_get_ui_manager (GTKHTML_EDITOR (editor));
 	if (e->type == STUDYPAD_EDITOR) 	
 		gtk_ui_manager_add_ui_from_string (manager, file_ui, -1, &error);

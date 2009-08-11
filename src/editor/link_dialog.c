@@ -144,6 +144,7 @@ editor_link_dialog (EDITOR *e)
         gtk_builder_add_from_file (builder, gbuilder_file, NULL);
  
         window = GTK_WIDGET (gtk_builder_get_object (builder, "dialog1"));
+	set_window_icon (GTK_WINDOW(window));
         gtk_builder_connect_signals (builder,(EDITOR*) e); 
 
 	entry_module = GTK_WIDGET (gtk_builder_get_object (builder, "entry_module"));
