@@ -34,47 +34,40 @@
                 <property name="orientation">vertical</property>
                 <property name="spacing">4</property>
                 <child>
-                  <object class="GtkHBox" id="hbox3">
+                  <object class="GtkTable" id="table1">
                     <property name="visible">True</property>
-                    <child>
-                      <object class="GtkLabel" id="label1">
-                        <property name="visible">True</property>
-                        <property name="tooltip_text" translatable="yes">The Sword Module you want to link to.</property>
-                        <property name="label" translatable="yes">Module </property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkEntry" id="entry_module">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="invisible_char">&#x25CF;</property>
-                      </object>
-                      <packing>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkHBox" id="hbox4">
-                    <property name="visible">True</property>
+                    <property name="n_rows">3</property>
+                    <property name="n_columns">2</property>
                     <child>
                       <object class="GtkLabel" id="label2">
                         <property name="visible">True</property>
-                        <property name="tooltip_text" translatable="yes">The verse or list of verses you want to link to</property>
-                        <property name="label" translatable="yes">Verse   </property>
+                        <property name="xalign">1</property>
+                        <property name="xpad">5</property>
+                        <property name="label" translatable="yes">Verse</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label1">
+                        <property name="visible">True</property>
+                        <property name="xalign">1</property>
+                        <property name="xpad">5</property>
+                        <property name="label" translatable="yes">Module</property>
                       </object>
                       <packing>
-                        <property name="expand">False</property>
-                        <property name="position">0</property>
+                        <property name="top_attach">1</property>
+                        <property name="bottom_attach">2</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label3">
+                        <property name="visible">True</property>
+                        <property name="xalign">1</property>
+                        <property name="xpad">5</property>
+                        <property name="label" translatable="yes">Link Text</property>
+                      </object>
+                      <packing>
+                        <property name="top_attach">2</property>
+                        <property name="bottom_attach">3</property>
                       </packing>
                     </child>
                     <child>
@@ -85,27 +78,21 @@
                         <signal name="changed" handler="entry_verse_changed_cb"/>
                       </object>
                       <packing>
-                        <property name="position">1</property>
+                        <property name="left_attach">1</property>
+                        <property name="right_attach">2</property>
                       </packing>
                     </child>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkHBox" id="hbox5">
-                    <property name="visible">True</property>
                     <child>
-                      <object class="GtkLabel" id="label3">
+                      <object class="GtkEntry" id="entry_module">
                         <property name="visible">True</property>
-                        <property name="tooltip_text" translatable="yes">The link text that will be visible</property>
-                        <property name="label" translatable="yes">Link Text </property>
+                        <property name="can_focus">True</property>
+                        <property name="invisible_char">&#x25CF;</property>
                       </object>
                       <packing>
-                        <property name="expand">False</property>
-                        <property name="position">0</property>
+                        <property name="left_attach">1</property>
+                        <property name="right_attach">2</property>
+                        <property name="top_attach">1</property>
+                        <property name="bottom_attach">2</property>
                       </packing>
                     </child>
                     <child>
@@ -115,14 +102,15 @@
                         <property name="invisible_char">&#x25CF;</property>
                       </object>
                       <packing>
-                        <property name="position">1</property>
+                        <property name="left_attach">1</property>
+                        <property name="right_attach">2</property>
+                        <property name="top_attach">2</property>
+                        <property name="bottom_attach">3</property>
                       </packing>
                     </child>
                   </object>
                   <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">False</property>
-                    <property name="position">2</property>
+                    <property name="position">0</property>
                   </packing>
                 </child>
                 <child>
@@ -160,8 +148,14 @@
                   </object>
                   <packing>
                     <property name="expand">False</property>
-                    <property name="position">3</property>
+                    <property name="position">1</property>
                   </packing>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+                <child>
+                  <placeholder/>
                 </child>
               </object>
               <packing>
@@ -174,6 +168,9 @@
             <property name="expand">False</property>
             <property name="position">1</property>
           </packing>
+        </child>
+        <child>
+          <placeholder/>
         </child>
         <child internal-child="action_area">
           <object class="GtkHButtonBox" id="dialog-action_area1">
