@@ -39,6 +39,7 @@
 #include <editor/gtkhtml-editor.h>
 #include <gtkhtml/gtkhtml-stream.h>
 
+
 #include "editor/slib-editor.h"
 #include "editor/link_dialog.h"
 
@@ -669,8 +670,7 @@ action_delete_cb (GtkAction *action,
 
 
 static void
-action_insert_link_cb (GtkAction *action,
-                EDITOR *e)
+action_insert_link_cb (GtkAction *action, EDITOR *e)
 {
 	editor_link_dialog (e);
 }
@@ -715,6 +715,9 @@ action_view_plain_source (GtkAction *action,
 {
 	view_source_dialog (editor, _("Plain Source"), "text/plain", FALSE);
 }
+
+
+
 
 static GtkActionEntry file_entries[] = {
 
