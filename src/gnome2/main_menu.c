@@ -680,11 +680,13 @@ redisplay_to_realign()
 				     settings.currentverse);
 	main_url_handler(url, TRUE);		
 	g_free(url);
-	url = g_strdup_printf("sword://%s/%s",
-			      settings.DictWindowModule,
-			      settings.dictkey);
-	main_url_handler(url, TRUE);		
-	g_free(url);
+	if (settings.DictWindowModule) {
+		url = g_strdup_printf("sword://%s/%s",
+				      settings.DictWindowModule,
+				      settings.dictkey);
+		main_url_handler(url, TRUE);		
+		g_free(url);
+	}
 
 	realign_busy = FALSE;
 }
