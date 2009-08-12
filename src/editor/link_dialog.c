@@ -138,6 +138,10 @@ editor_link_dialog (EDITOR *e)
 	
         GtkBuilder *builder;
 	gchar *gbuilder_file;
+	
+	GtkHTML  *html = gtkhtml_editor_get_html (GTKHTML_EDITOR(e->window));
+	if (html->pointer_url)  /* are we in a link */
+		return;		/* if so don't do anything */
         
         builder = gtk_builder_new ();
 	gbuilder_file = gui_general_user_file ("editor_link_dialog.xml", FALSE);
