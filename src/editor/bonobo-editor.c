@@ -52,6 +52,8 @@
 #include "gui/treekey-editor.h"
 #include "gui/utilities.h"
 
+#include "gui/debug_glib_null.h"
+
 
 #define CONTROL_ID         "OAFIID:GNOME_GtkHTML_Editor:" GTKHTML_API_VERSION
 

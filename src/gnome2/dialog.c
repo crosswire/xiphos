@@ -32,6 +32,8 @@
 #include "main/settings.h"
 #include "main/sword.h"
 
+#include "gui/debug_glib_null.h"
+
 //static GtkWidget *gs_dialog;
 static GtkWidget *entry1 = NULL;
 static GtkWidget *entry2 = NULL;

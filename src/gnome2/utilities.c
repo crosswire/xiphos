@@ -52,6 +52,8 @@
 #include <gtkhtml/htmltypes.h>
 #endif /* USE_GTKMOZEMBED */
 
+#include "gui/debug_glib_null.h"
+
 
 gint gui_of2tf(const gchar * on_off)
 {

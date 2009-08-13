@@ -45,6 +45,8 @@
 #include "main/tab_history.h"
 #include "main/url.hh"
 
+#include "gui/debug_glib_null.h"
+
 NAVBAR_VERSEKEY navbar_versekey;
 
 extern PASSAGE_TAB_INFO *cur_passage_tab;

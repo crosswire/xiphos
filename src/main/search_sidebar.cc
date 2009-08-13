@@ -51,6 +51,8 @@ extern "C" {
 
 #include "backend/sword_main.hh"
 
+#include "gui/debug_glib_null.h"
+
 #define SEARCHING N_("Searching the ")
 #define SMODULE N_(" Module")
 #define FINDS N_("found in ")		

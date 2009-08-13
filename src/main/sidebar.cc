@@ -52,6 +52,8 @@
 
 #include "backend/sword_main.hh"
 
+#include "gui/debug_glib_null.h"
+
 
 enum {
 	COL_OPEN_PIXBUF,

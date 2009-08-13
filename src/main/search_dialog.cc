@@ -54,8 +54,9 @@ extern "C" {
 #include "gui/dialog.h"
 #include "gui/utilities.h"
 
-
 #include "backend/sword_main.hh"
+
+#include "gui/debug_glib_null.h"
 
 #define SEARCHING _("Searching the ")
 #define SMODULE _(" Module")

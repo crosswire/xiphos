@@ -37,6 +37,8 @@
 #include "main/sword.h"
 #include "main/settings.h"
 
+#include "gui/debug_glib_null.h"
+
 
 SIDESEARCH ss;
 

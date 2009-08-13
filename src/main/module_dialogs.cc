@@ -71,6 +71,8 @@ extern "C" {
 #include "main/url.hh"
 
 #include "backend/sword_main.hh"
+
+#include "gui/debug_glib_null.h"
 	
 #define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
 

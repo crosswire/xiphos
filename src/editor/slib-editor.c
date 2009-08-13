@@ -57,6 +57,8 @@
 #include "gui/treekey-editor.h"
 #include "gui/utilities.h"
 
+#include "gui/debug_glib_null.h"
+
 extern gboolean do_display;
 
 static

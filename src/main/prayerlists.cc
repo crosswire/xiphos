@@ -48,6 +48,8 @@
 
 #include "backend/sword_main.hh"
 
+#include "gui/debug_glib_null.h"
+
 #ifndef NO_SWORD_NAMESPACE
 using sword::TreeKeyIdx;
 using sword::RawGenBook;

@@ -46,6 +46,8 @@
 #include "main/search_dialog.h"
 #include "gui/dialog.h"
 
+#include "gui/debug_glib_null.h"
+
 using namespace sword;
 using namespace std;
 

@@ -40,6 +40,7 @@
 #include "main/sword.h"
 
 #include "gui/utilities.h"
+#include "gui/debug_glib_null.h"
 
 /************* begin link dialog ****************/
 static GtkWidget *window;

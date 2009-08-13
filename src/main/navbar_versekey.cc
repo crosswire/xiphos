@@ -42,6 +42,7 @@
 
 #include "backend/sword_main.hh"
 
+#include "gui/debug_glib_null.h"
 
 extern gboolean do_display;
 extern gboolean do_display_dict;
