@@ -35,6 +35,8 @@
 #include "main/sword.h"
 #include "main/url.hh"
 
+#include "gui/debug_glib_null.h"
+
 NAVBAR_VERSEKEY navbar_parallel;
 
 /******************************************************************************

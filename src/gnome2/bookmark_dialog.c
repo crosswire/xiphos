@@ -38,6 +38,8 @@
 #include "main/settings.h"
 #include "main/xml.h"
 
+#include "gui/debug_glib_null.h"
+
 extern GtkTreeStore *model;
 
 static GtkWidget *treeview;

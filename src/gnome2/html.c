@@ -52,6 +52,8 @@
 #include "main/url.hh"
 #include "main/xml.h"
 
+#include "gui/debug_glib_null.h"
+
 static GtkHTMLStream *htmlstream;
 static GtkHTMLStreamStatus status1;
 gboolean in_url;

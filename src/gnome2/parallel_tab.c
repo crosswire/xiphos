@@ -48,6 +48,7 @@
 #include "main/url.hh"
 #include "main/xml.h"
 
+#include "gui/debug_glib_null.h"
 
 
 extern gboolean do_display;

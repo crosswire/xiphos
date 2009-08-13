@@ -93,6 +93,8 @@ extern "C" {
 #include "backend/sword_main.hh"
 #include "backend/gs_stringmgr.h"
 
+#include "gui/debug_glib_null.h"
+
 char *OLD_CODESET;
 using namespace sword; 
 	

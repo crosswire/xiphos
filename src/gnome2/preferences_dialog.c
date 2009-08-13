@@ -56,6 +56,8 @@
 #include "main/xml.h"
 #include "main/url.hh"
 
+#include "gui/debug_glib_null.h"
+
 //gtk_toggle_button_set_active
 typedef enum {
 	SHOW_BIBLE_TABS,

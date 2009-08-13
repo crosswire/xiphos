@@ -41,6 +41,8 @@
 #endif
 //#include "backend/sword.h"
 
+#include "gui/debug_glib_null.h"
+
 #include <glib/gstdio.h>
  
 /******************************************************************************

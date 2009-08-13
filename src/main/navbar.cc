@@ -38,8 +38,9 @@
 #include "gui/commentary_dialog.h"
 #include "gui/bibletext_dialog.h"
 
-
 #include "backend/sword_main.hh"
+
+#include "gui/debug_glib_null.h"
 
 //#ifdef OLD_NAVBAR
 

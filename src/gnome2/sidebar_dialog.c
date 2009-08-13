@@ -34,6 +34,8 @@
 
 #include "main/settings.h"
 
+#include "gui/debug_glib_null.h"
+
 static GtkWidget* create_sidebar_dialog(void);
 static GtkWidget * vbox_dock; 
 

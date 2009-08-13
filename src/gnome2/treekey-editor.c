@@ -39,6 +39,7 @@
 #include "main/sword_treekey.h"
 #include "main/sword.h"
 
+#include "gui/debug_glib_null.h"
 
 
 typedef struct _item_info INFO;

@@ -37,6 +37,8 @@
 #include "main/sword.h"
 #include "main/tab_history.h"
 
+#include "gui/debug_glib_null.h"
+
 
 /******************************************************************************
  * Name

@@ -52,6 +52,8 @@
 #include "main/xml.h"
 #include "main/modulecache.hh"
 
+#include "gui/debug_glib_null.h"
+
 #include <glib/gstdio.h>
 
 #define GTK_RESPONSE_REFRESH 301

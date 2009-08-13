@@ -71,6 +71,8 @@
 #include "gecko/gecko-html.h"
 #endif
 
+#include "gui/debug_glib_null.h"
+
 /******************************************************************************
  * Name
  *  init_xiphos
