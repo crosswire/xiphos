@@ -53,6 +53,8 @@
 #include "main/url.hh"
 #include "main/xml.h"
 
+#include "gui/debug_glib_null.h"
+
 /******************************************************************************/
 #define _BYTE   8
 #define _WORD   16

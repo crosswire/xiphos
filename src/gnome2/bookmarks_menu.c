@@ -59,6 +59,8 @@
 #include "editor/bonobo-editor.h"
 #endif
 
+#include "gui/debug_glib_null.h"
+
 BOOKMARK_MENU menu;
 
 gboolean bookmarks_changed;

@@ -48,6 +48,8 @@
 #include "main/navbar_versekey.h"
 #include "main/display.hh"
 
+#include "gui/debug_glib_null.h"
+
 //static void create_menu(DIALOG_DATA * d, GdkEventButton * event);
 
 extern gboolean dialog_freed;

@@ -43,6 +43,8 @@
 #include "main/settings.h"
 #include "main/sword.h"
 
+#include "gui/debug_glib_null.h"
+
 #ifdef DEBUG 
 static const gchar *f_message = "backend/module_manager.cc line #%d \"%s\" = %s\n";
 #endif

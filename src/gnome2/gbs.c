@@ -66,6 +66,8 @@
 #include "main/display.hh"
 #include "main/url.hh"
 
+#include "gui/debug_glib_null.h"
+
 //static void create_menu(GdkEventButton * event);
 
 

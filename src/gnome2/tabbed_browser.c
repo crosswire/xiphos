@@ -60,6 +60,8 @@
 #include "main/xml.h"
 
 #include <glib/gstdio.h>
+
+#include "gui/debug_glib_null.h"
 	
 static GtkWidget* tab_widget_new(PASSAGE_TAB_INFO *tbinf,
 					const gchar *label_text);

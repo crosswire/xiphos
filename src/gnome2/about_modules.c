@@ -41,6 +41,8 @@
 #include "main/settings.h"
 #include "main/display.hh"
 
+#include "gui/debug_glib_null.h"
+
 /******************************************************************************
  * static
  */

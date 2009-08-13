@@ -25,8 +25,15 @@
 
 #include <gnome.h>
 
+/* ----------------------------------------------- */
+/* do not #include "gui/debug_glib_null.h" in this */
+/* file: here we define the replacement functions, */
+/* so we need access to the real glib versions.    */
+/* ----------------------------------------------- */
+
 #include "gui/gui.h"
 #include "gui/session.h"
+#include "gui/dialog.h"
 
 void gui_init(int argc, char *argv[])
 {
@@ -55,3 +62,85 @@ void gui_main(void)
 {
 	gtk_main();
 }
+
+#ifdef DEBUG
+
+/* NOTE: these routines are here only and exactly because there is no other */
+/* code in this file that needs the real glib versions.  if there is ever a */
+/* reason for using g_str{dup,ing}_printf in this file, these functions     */
+/* will need to be moved to some other file which does not need them.  this */
+/* is because the file implementing replacements must not #include the .h   */
+/* that induces access to the replacements via #define.                     */
+
+/* this is a total mind game: we redefine the standard use of glib functions */
+/* so as to see our internal versions.  our internal versions scan for mis-  */
+/* use of %s, i.e. (char*)NULL that should (by rights) cause crashes anyhow. */
+
+/* GIVE US THE CRASHES, PLEASE!  MYSTERY BUGS ARE EVIL!  glibc.helpfulness-- */
+
+gchar*
+XI_g_strdup_printf(const gchar *format,
+		   ...)
+{
+	gchar *buffer, *next, *s;
+	va_list args;
+
+	va_start(args, format);
+	for (s = strchr(format, '%'); s; s = strchr(++s, '%'))
+	{
+		next = va_arg(args, gchar*);
+		if ((next == (gchar*) NULL) && (*(s+1) == 's'))
+		{
+			gchar *msg = g_strdup_printf
+			    ("%s\n%s\n\n\"%s\"",
+			     _("BUG! Xiphos is about to crash due to a \"STRDUP\" error."),
+			     _("Please report this error to the Xiphos team with:"),
+			     format);
+			gui_generic_warning(msg);
+			g_free(msg);
+			abort();
+		}
+	}
+	va_end(args);
+
+	/* real g_strdup_printf content */
+	va_start (args, format);
+	buffer = g_strdup_vprintf (format, args);
+	va_end (args);
+	return buffer;
+}
+
+void
+XI_g_string_printf(GString *string,
+		   const gchar *format,
+		   ...)
+{
+	gchar *next, *s;
+	va_list args;
+
+	va_start(args, format);
+	for (s = strchr(format, '%'); s; s = strchr(++s, '%'))
+	{
+		next = va_arg(args, gchar*);
+		if ((next == (gchar*) NULL) && (*(s+1) == 's'))
+		{
+			gchar *msg = g_strdup_printf
+			    ("%s\n%s\n\n\"%s\"",
+			     _("BUG! Xiphos is about to crash due to a \"STRING\" error."),
+			     _("Please report this error to the Xiphos team with:"),
+			     format);
+			gui_generic_warning(msg);
+			g_free(msg);
+			abort();
+		}
+	}
+	va_end(args);
+
+	/* real g_string_printf content */
+	g_string_truncate (string, 0);
+	va_start (args, format);
+	g_string_append_vprintf (string, format, args);
+	va_end (args);
+}
+
+#endif /* DEBUG */

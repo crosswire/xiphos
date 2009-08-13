@@ -66,6 +66,8 @@
 
 #include "backend/sword_main.hh"
 
+#include "gui/debug_glib_null.h"
+
 gint in_url;
 
 using namespace sword;

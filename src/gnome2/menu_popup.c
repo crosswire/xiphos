@@ -61,6 +61,8 @@
 #include "editor/bonobo-editor.h"
 #endif
 
+#include "gui/debug_glib_null.h"
+
 
 static gchar *menu_mod_name = NULL;
 static DIALOG_DATA * dialog = NULL;

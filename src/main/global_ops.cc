@@ -40,6 +40,8 @@
 
 #include "backend/sword_main.hh"
 
+#include "gui/debug_glib_null.h"
+
 
 static void _set_dialog_global_option(BackEnd *be,
 				     const char *option,

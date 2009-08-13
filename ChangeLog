@@ -1,3 +1,7 @@
+2009-08-13  karl <charcoal@users.sf.net>
+
+	* implemented glib null string detection skeleton.  enabled as part of DEBUG.
+
 2009-08-10 terry <tbiggs@users.sourceforge.net>
 
 	* added ui/editor_link_dialog.xml, editor/link_dialog.c and

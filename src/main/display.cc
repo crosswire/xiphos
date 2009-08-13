@@ -84,6 +84,8 @@ extern "C" {
 
 #include "backend/sword_main.hh"
 
+#include "gui/debug_glib_null.h"
+
 // for one-time content rendering.
 extern ModuleCache::CacheMap ModuleMap;
 

@@ -50,6 +50,8 @@
 #include "main/xml.h"
 #include "main/display.hh"
 
+#include "gui/debug_glib_null.h"
+
 
 /******************************************************************************
  * static - global to this file only

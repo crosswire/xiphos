@@ -65,6 +65,8 @@
 #include "main/xml.h"
 #include "main/module_dialogs.h"
 
+#include "gui/debug_glib_null.h"
+
 
 SIDEBAR sidebar;
 static GtkWidget *button_bookmarks;

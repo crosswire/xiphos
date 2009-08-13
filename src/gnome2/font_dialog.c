@@ -32,6 +32,8 @@
 #include "main/sword.h"
 #include "main/settings.h"
 
+#include "gui/debug_glib_null.h"
+
 static GtkWidget *dlg;
 static GtkWidget *combo_entry_size;
 static GtkWidget *font_button;

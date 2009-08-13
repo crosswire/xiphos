@@ -69,6 +69,8 @@
 #include "editor/bonobo-editor.h"
 #endif /* !USE_GTKHTML3_14_23 */
 
+#include "gui/debug_glib_null.h"
+
 WIDGETS widgets;
 
 

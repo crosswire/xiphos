@@ -37,6 +37,8 @@
 #include "main/settings.h"
 #include "main/sword.h"
 
+#include "gui/debug_glib_null.h"
+
 
 static GtkWidget *dialog;
 static gchar *filename;

@@ -47,6 +47,8 @@
 
 #include <glib/gstdio.h>
 
+#include "gui/debug_glib_null.h"
+
 
 /******************************************************************************
  * defines

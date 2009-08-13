@@ -55,6 +55,8 @@
 #include "main/module_dialogs.h"
 #include "main/url.hh"
 
+#include "gui/debug_glib_null.h"
+
 //TreePixbufs *pixbufs;
 GtkTreeStore *model;
 GtkTreeModel *tree_model;
