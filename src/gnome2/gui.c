@@ -79,7 +79,9 @@ void gui_main(void)
 /* GIVE US THE CRASHES, PLEASE!  MYSTERY BUGS ARE EVIL!  glibc.helpfulness-- */
 
 gchar*
-XI_g_strdup_printf(const gchar *format,
+XI_g_strdup_printf(char *filename,
+		   int linenumber,
+		   const gchar *format,
 		   ...)
 {
 	gchar *buffer, *next, *s;
@@ -92,10 +94,10 @@ XI_g_strdup_printf(const gchar *format,
 		if ((next == (gchar*) NULL) && (*(s+1) == 's'))
 		{
 			gchar *msg = g_strdup_printf
-			    ("%s\n%s\n\n\"%s\"",
+			    ("%s\n%s\n\n%s:%d \"%s\"",
 			     _("BUG! Xiphos is about to crash due to a \"STRDUP\" error."),
 			     _("Please report this error to the Xiphos team with:"),
-			     format);
+			     filename, linenumber, format);
 			gui_generic_warning(msg);
 			g_free(msg);
 			abort();
@@ -111,7 +113,9 @@ XI_g_strdup_printf(const gchar *format,
 }
 
 void
-XI_g_string_printf(GString *string,
+XI_g_string_printf(char *filename,
+		   int linenumber,
+		   GString *string,
 		   const gchar *format,
 		   ...)
 {
@@ -125,10 +129,10 @@ XI_g_string_printf(GString *string,
 		if ((next == (gchar*) NULL) && (*(s+1) == 's'))
 		{
 			gchar *msg = g_strdup_printf
-			    ("%s\n%s\n\n\"%s\"",
+			    ("%s\n%s\n\n%s:%d \"%s\"",
 			     _("BUG! Xiphos is about to crash due to a \"STRING\" error."),
 			     _("Please report this error to the Xiphos team with:"),
-			     format);
+			     filename, linenumber, format);
 			gui_generic_warning(msg);
 			g_free(msg);
 			abort();
