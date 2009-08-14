@@ -30,14 +30,19 @@
 extern "C" {
 #endif
 
-#define	g_strdup_printf	XI_g_strdup_printf
-#define	g_string_printf	XI_g_string_printf
+#define	g_strdup_printf(f, ...)		XI_g_strdup_printf(__FILE__, __LINE__, f, __VA_ARGS__)
+#define	g_string_printf(s, f, ...)	XI_g_string_printf(__FILE__, __LINE__, s, f, __VA_ARGS__)
 
+gchar*	XI_g_strdup_printf (const char *filename,
+			    int linenumber,
+			    const char *format,
+			    ...) G_GNUC_PRINTF (3, 4) G_GNUC_MALLOC;
 
-gchar*	XI_g_strdup_printf (const gchar *format, ...) G_GNUC_PRINTF (1, 2) G_GNUC_MALLOC;
-void	XI_g_string_printf (GString *string,
-			    const gchar *format,
-			    ...) G_GNUC_PRINTF (2, 3);
+void	XI_g_string_printf (const char *filename,
+			    int linenumber,
+			    GString *string,
+			    const char *format,
+			    ...) G_GNUC_PRINTF (4, 5);
 
 #ifdef __cplusplus
 }
