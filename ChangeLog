@@ -1,3 +1,9 @@
+2009-08-15  karl <charcoal@users.sf.net>
+
+	* fix #2803614 Search in unpointed Hebrew not working, by ensuring
+	  that all vowel points & accents are turned off in modules and
+	  search strings.
+
 2009-08-13  karl <charcoal@users.sf.net>
 
 	* implemented glib null string detection skeleton.  enabled as part of DEBUG.

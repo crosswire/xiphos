@@ -1459,6 +1459,12 @@ void main_do_dialog_search(void)
 	terminate_search = FALSE;
 	search_active = TRUE;
 
+	// must ensure that no accents or vowel points are enabled.
+	SWMgr *mgr = backendSearch->get_main_mgr();
+	mgr->setGlobalOption("Greek Accents", "Off");
+	mgr->setGlobalOption("Hebrew Vowel Points", "Off");
+	mgr->setGlobalOption("Arabic Vowel Points", "Off");
+
 	while (search_mods != NULL) {
 		module = (gchar *) search_mods->data;
 
@@ -1498,8 +1504,10 @@ void main_do_dialog_search(void)
 		
 		finds = backendSearch->do_module_search(module, 
 					(attribute_search_string
-					 ? attribute_search_string
-					 : search_string),
+					 ? mgr->getModule(module)->
+						StripText(attribute_search_string)
+					 : mgr->getModule(module)->
+						StripText(search_string)),
 					search_type, 
 					search_params, 
 					TRUE);
