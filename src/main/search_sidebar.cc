@@ -25,6 +25,7 @@
 #include <gnome.h>
 #include <regex.h>
 #include <ctype.h>
+#include <swmodule.h>
 
 
 #ifdef __cplusplus
@@ -239,8 +240,18 @@ void main_do_sidebar_search(gpointer user_data)
 	terminate_search = FALSE;
 	search_active = TRUE;
 
-	finds = backendSearch->do_module_search(search_module, search_string,
-				 settings.searchType, search_params, FALSE);
+	// must ensure that no accents or vowel points are enabled.
+	SWMgr *mgr = backendSearch->get_main_mgr();
+	mgr->setGlobalOption("Greek Accents", "Off");
+	mgr->setGlobalOption("Hebrew Vowel Points", "Off");
+	mgr->setGlobalOption("Arabic Vowel Points", "Off");
+
+	finds = backendSearch->do_module_search(search_module, 
+						mgr->getModule(search_module)->
+						     StripText(search_string),
+						settings.searchType,
+						search_params,
+						FALSE);
 	g_string_free(new_search, TRUE);
 
 	search_active = FALSE;
