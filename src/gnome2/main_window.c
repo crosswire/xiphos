@@ -311,11 +311,33 @@ void gui_set_bible_comm_layout(void)
 
 void gui_change_window_title(gchar * module_name)
 {
-	gchar *title;//[200];
+	gchar *title;
+
+	if (cur_passage_tab) {
+		/* borrowed from tabbed_browser.c:pick_tab_label() */
+		/* echo the current tab's module (full name) in title bar */
+		if (cur_passage_tab->showtexts || cur_passage_tab->comm_showing) {
+			title = (cur_passage_tab->showtexts
+				 ? cur_passage_tab->text_mod
+				 : (cur_passage_tab->commentary_mod
+				    ? cur_passage_tab->commentary_mod
+				    : "[no commentary]"));
+		} else {
+			title = (cur_passage_tab->showcomms
+				 ? (cur_passage_tab->book_mod
+				    ? cur_passage_tab->book_mod
+				    : "[no book]")
+				 : (cur_passage_tab->dictlex_mod
+				    ? cur_passage_tab->dictlex_mod
+				    : "[no dict]"));
+		}
+	} else
+		title = module_name;
+
 	/*
 	 * set program title to current module name
 	 */
-	title = g_strdup_printf("%s - %s", main_get_module_description(module_name),
+	title = g_strdup_printf("%s - %s", main_get_module_description(title),
 						settings.program_title);
 	gtk_window_set_title(GTK_WINDOW(widgets.app), title);
 	g_free(title);
