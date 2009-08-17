@@ -1,3 +1,8 @@
+2009-08-17  karl <charcoal@users.sf.net>
+
+	* change main window title per actually-displayed modules.
+	  (echoes tab module choice; borrows same code.)
+
 2009-08-15  karl <charcoal@users.sf.net>
 
 	* fix #2803614 Search in unpointed Hebrew not working, by ensuring
