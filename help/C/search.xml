@@ -106,7 +106,7 @@
 					to match a string of text. A regular expression can be 
 					used to find verses with words that match a particular 
 					pattern. For example the regular expression
-					<userinput>\ A[a-z]*iah </userinput> will match verses that contain
+					<userinput>[a-z]*iah </userinput> will match verses that contain
 					the words Aiah, Ahaziah, Athaliah and Amariah.</para>
 					<para>A complete discussion of regular expressions is 
 					beyond the scope of this manual, but more information 
