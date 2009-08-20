@@ -1,3 +1,7 @@
+2009-08-20 matthew <ransom1982@users.sourceforge.net>
+
+	* fix #2825281 Sidebar/Regular Expression search: not finding all matches
+	
 2009-08-17  karl <charcoal@users.sf.net>
 
 	* change main window title per actually-displayed modules.
