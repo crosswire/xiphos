@@ -337,8 +337,9 @@ void gui_change_window_title(gchar * module_name)
 	/*
 	 * set program title to current module name
 	 */
-	title = g_strdup_printf("%s - %s", main_get_module_description(title),
-						settings.program_title);
+	title = main_get_module_description(title);
+	title = g_strdup_printf("%s - %s", (title ? title : "[no title]"),
+				settings.program_title);
 	gtk_window_set_title(GTK_WINDOW(widgets.app), title);
 	g_free(title);
 }
