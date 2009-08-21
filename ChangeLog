@@ -1,3 +1,17 @@
+2009-08-21  karl <charcoal@users.sf.net>
+
+	* ensure a bit of whitespace between strong's elements when
+	  they repeat.  they can get bunched up on top of each other
+	  too easily.
+	* fix another blocking nightmare: some modules (ABP) contain
+	  bogus sequences like <seg><hi><seg><hi>word</hi></seg></hi></seg>.
+	  this results in doubling, <i><i>word</i></i>.  the block
+	  renderer gets unhappy when it mis-analyzes termination by
+	  finding the inner </i> as though it were the termination of
+	  the outer <i>.  so if we find we have an internal set of
+	  <i></i>, we simply wipe them to spaces, and try again.
+	  ugh.
+
 2009-08-20 matthew <ransom1982@users.sourceforge.net>
 
 	* fix #2825281 Sidebar/Regular Expression search: not finding all matches

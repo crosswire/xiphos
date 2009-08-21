@@ -605,7 +605,7 @@ block_dump(SWBuf& rendered,
 	if (*morph) g_free((char *)*morph);
 	*morph = NULL;
 
-	rendered += "</span> ";
+	rendered += "</span> <span class=\"word\">&nbsp;</span>";
 }
 
 //
@@ -632,7 +632,8 @@ block_render_secondary(const char *text,
 		   *strongs = NULL,
 		   *morph   = NULL;
 	int bracket;
-	const char *s, *t;
+	const char *s;
+	char *t, *u;
 
 	for (s = text; *s; ++s) {
 		switch (*s) {
@@ -654,10 +655,25 @@ block_render_secondary(const char *text,
 
 				static char end[5] = "</X>";
 				end[2] = *(s+1);
-				if ((t = strstr(s, end)) == NULL) {
+			again:
+				if ((t = strstr((char *)s, end)) == NULL) {
 					GS_warning(("No %s in %s\n", end, s));
 					break;
                                 }
+
+				// yet another nightmare:
+				// if the markup results in e.g. doubled <i>
+				// (bogus "<hi><hi>word</hi></hi>"),
+				// then we will mis-assess termination.
+				// so we search for the same markup embedded within.
+				// if we find an internal set, we just wipe it out.
+				static char embedded[4] = "<X>";
+				embedded[1] = *(s+1);
+				if ((u = g_strstr_len(s+3, t-(s+3), embedded))) {
+					*u = *(u+1) = *(u+2) =
+					    *t = *(t+1) = *(t+2) = *(t+3) = ' ';
+					goto again;	// yuck, yes, i know...
+				}
 
 				// nasb eph 5:31: whole verse is an italicized
 				// quotation of gen 2:24...containing strongs.
@@ -680,10 +696,10 @@ block_render_secondary(const char *text,
 					rendered += end;
 					s = t+3;
 				}
-                                break;
+				break;
 			} else if (!strncmp(s+1, "small>", 6)) {
 				// strongs and morph are bounded by "<small>".
-				if ((t = strstr(s, "</small>")) == NULL) {
+				if ((t = strstr((char *)s, "</small>")) == NULL) {
 					GS_warning(("No </small> in %s\n", s));
 					break;
 				}
