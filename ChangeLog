@@ -11,6 +11,8 @@
 	  the outer <i>.  so if we find we have an internal set of
 	  <i></i>, we simply wipe them to spaces, and try again.
 	  ugh.
+	* apply patch by andrew anderson, to respect showversenum in the
+	  passage exporter.  some additional mods beyond his basic patch.
 
 2009-08-20 matthew <ransom1982@users.sourceforge.net>
 

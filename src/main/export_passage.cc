@@ -83,41 +83,45 @@ static void _export_book(char *filename, int type)
 	int myverse = 1;
 	key->Chapter(1);
 	key->Verse(1);
-	
+
 	if(type == HTML)
 		g_string_append_printf(str,
-				       "%s<BR><CENTER>%s<BR>Chapter %d</CENTER><BR>", 
+				       "%s<BR><CENTER>%s<BR>Chapter %d</CENTER><BR><BR>", 
 				       HTML_START,
 				       mod->Description(),
 				       1);
 	else
-		g_string_append_printf(str,"\n%s\nChapter %d\n",
+		g_string_append_printf(str,"\n%s\nChapter %d\n\n",
 				       mod->Description(), 
 				       1);
-		
-	
+
 	while(key->Book() == curBook && !mod->Error()) {
 		if(key->Chapter() != curChapter) {
 			++mychapter;
 			myverse = 1;
 			curChapter = key->Chapter();
 			if(type == HTML)
-				g_string_append_printf(str,"<BR><CENTER>Chapter %d</CENTER><BR>", curChapter);
+				g_string_append_printf(str,"<BR><CENTER>Chapter %d</CENTER><BR><BR>", curChapter);
 			else
-				g_string_append_printf(str,"\nChapter %d\n", curChapter);
-				
+				g_string_append_printf(str,"\nChapter %d\n\n", curChapter);
 		}
+
+		if(settings.showversenum)
+			g_string_append_printf(str,
+					       ((type == HTML)
+						? "&nbsp;&nbsp;[%d]"
+						: "  [%d]"), 
+					       myverse);
+
 		if(type == HTML)
-			g_string_append_printf(str,"&nbsp;&nbsp;%d. %s%s",
-					       myverse,
+			g_string_append_printf(str, " %s%s",
 					       (char*)mod->RenderText(), 
-					       settings.versestyle ? "<BR>" : "");
+					       (settings.versestyle ? "<BR>" : ""));
 		else
-			g_string_append_printf(str,"  %d. %s%s",
-					       myverse,
+			g_string_append_printf(str, " %s%s",
 					       (char*)mod->StripText(), 
-					       settings.versestyle ? "\n" : "");
-			
+					       (settings.versestyle ? "\n" : ""));
+
 		++myverse;
 		(*mod)++;
 	}
@@ -128,7 +132,6 @@ static void _export_book(char *filename, int type)
 	else
 		_copy_to_clipboard (str->str, str->len);
 	g_string_free(str,TRUE);
-	
 }
 
 static void _export_chapter(char *filename, int type)
@@ -142,39 +145,39 @@ static void _export_chapter(char *filename, int type)
 	int curChapter = key->Chapter();
 	int curBook = key->Book();
 	int myverse = 1;
-	
+
 	book = backend->key_get_book(settings.currentverse);
 	if(type == HTML)
 		g_string_append_printf(str,
-				       "%s<BR>%s: %s Chapter %d<BR>", 
+				       "%s<BR>%s: %s Chapter %d<BR><BR>", 
 				       HTML_START, 
-				       settings.MainWindowModule,
+				       mod->Description(),
 				       book, 
 				       key->Chapter());
 	else
 		g_string_append_printf(str,
-				       "\n%s: %s Chapter %d\n", 
-				       settings.MainWindowModule,
+				       "\n%s: %s Chapter %d\n\n",
+				       mod->Description(),
 				       book, 
 				       key->Chapter());		
-	
+
 	for (key->Verse(1);
 	     (key->Book() == curBook) &&
 	     (key->Chapter() == curChapter) &&
 	     !mod->Error();
 	     (*mod)++) {
 		     
+		if(settings.showversenum)
+			g_string_append_printf(str, " [%d]", myverse);
+
 		if(type == HTML)
-			g_string_append_printf(str,"%d. %s%s",
-					       myverse,
+			g_string_append_printf(str," %s%s",
 					       (char*)mod->RenderText(), 
-					       settings.versestyle ? "<BR>" : "");
+					       (settings.versestyle ? "<BR>" : ""));
 		else
-			g_string_append_printf(str,"%d. %s%s",
-					       myverse,
+			g_string_append_printf(str," %s%s",
 					       (char*)mod->StripText(), 
-					       settings.versestyle ? "\n" : "");
-			
+					       (settings.versestyle ? "\n" : ""));
 		++myverse;
 	}
 	if(type == HTML)
@@ -186,7 +189,6 @@ static void _export_chapter(char *filename, int type)
 	g_string_free(str,TRUE);
 	if(book)
 		g_free(book);
-	
 }
 
 
@@ -198,7 +200,7 @@ static void _export_verse(char *filename, int type)
 	SWModule *mod = mgr->Modules[settings.MainWindowModule];
 	mod->setKey(settings.currentverse);
 	VerseKey *key = (VerseKey *)(SWKey *)(*mod);
-	
+
 	book = backend->key_get_book(settings.currentverse);
 	if(type == HTML)
 		g_string_append_printf(str,
@@ -209,7 +211,7 @@ static void _export_verse(char *filename, int type)
 				       key->Chapter(),
 				       key->Verse(),
 				       (char*)mod->RenderText(), 
-				       settings.versestyle ? "<BR>" : "");
+				       (settings.versestyle ? "<BR>" : ""));
 	else
 		g_string_append_printf(str,
 				       "\n%s: %s %d:%d. %s%s", 
@@ -218,18 +220,17 @@ static void _export_verse(char *filename, int type)
 				       key->Chapter(),
 				       key->Verse(),
 				       (char*)mod->StripText(), 
-				       settings.versestyle ? "\n" : "");
-	
+				       (settings.versestyle ? "\n" : ""));
+
 	if (filename) 
 		_save(filename, str->str,str->len);
 	else
 		_copy_to_clipboard (str->str, str->len);
-	
+
 	g_string_free(str,TRUE);
-	
+
 	if(book)
 		g_free(book);
-	
 }
 
 static void _export_verse_range (EXPORT_DATA data, int type)
@@ -243,22 +244,30 @@ static void _export_verse_range (EXPORT_DATA data, int type)
 	int curChapter = key->Chapter();
 	int curBook = key->Book();
 	//int myverse = 1;
-	
+
 	book = backend->key_get_book(settings.currentverse);
 	if(type == HTML)
 		g_string_append_printf(str,
-				       "%s<BR>%s: %s Chapter %d<BR>", 
+				       (settings.showversenum
+					? "%s<BR>%s: %s Chapter %d<BR><BR>"
+					: "%s<BR>%s: %s %d:%d-%d<BR><BR>"), 
 				       HTML_START, 
 				       settings.MainWindowModule,
 				       book, 
-				       key->Chapter());
+				       key->Chapter(),
+				       data.start_verse,
+				       data.end_verse);
 	else
 		g_string_append_printf(str,
-				       "\n%s: %s Chapter %d\n", 
+				       (settings.showversenum
+					? "\n%s: %s Chapter %d\n\n"
+					: "\n%s: %s %d:%d-%d\n\n"),
 				       settings.MainWindowModule,
 				       book, 
-				       key->Chapter());		
-	
+				       key->Chapter(),
+				       data.start_verse,
+				       data.end_verse);		
+
 	for (key->Verse(data.start_verse);
 	     (key->Verse() <= data.end_verse) &&
 	     (key->Book() == curBook) &&
@@ -266,16 +275,17 @@ static void _export_verse_range (EXPORT_DATA data, int type)
 	     !mod->Error();
 	     (*mod)++) {
 		     
+		if(settings.showversenum)
+			g_string_append_printf(str, " [%d]", key->Verse());
+
 		if(type == HTML)
-			g_string_append_printf(str,"%d. %s%s",
-					       key->Verse(),
+			g_string_append_printf(str," %s%s",
 					       (char*)mod->RenderText(), 
-					       settings.versestyle ? "<BR>" : "");
+					       (settings.versestyle ? "<BR>" : ""));
 		else
-			g_string_append_printf(str,"%d. %s%s",
-					       key->Verse(),
+			g_string_append_printf(str," %s%s",
 					       (char*)mod->StripText(), 
-					       settings.versestyle ? "\n" : "");
+					       (settings.versestyle ? "\n" : ""));
 	}
 	if(type == HTML)
 		g_string_append_printf(str,"%s","</BODY></HTML>");
@@ -286,7 +296,6 @@ static void _export_verse_range (EXPORT_DATA data, int type)
 	g_string_free(str,TRUE);
 	if(book)
 		g_free(book);
-	
 }
 
 
@@ -306,7 +315,6 @@ void main_export_html(EXPORT_DATA data)
 			_export_verse_range(data, HTML);
 			break;
 	}
-	
 }
 
 void main_export_plain(EXPORT_DATA data)
@@ -325,6 +333,5 @@ void main_export_plain(EXPORT_DATA data)
 			_export_verse_range(data, PLAIN);
 			break;
 	}
-	
 }
 //#endif
