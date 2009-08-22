@@ -489,6 +489,7 @@ void gui_splash_init()
 			return;
 
 		gtk_widget_show(splash);
+		set_window_icon(GTK_WINDOW(splash));
 		gtk_object_ref(GTK_OBJECT(splash));
 		
 		
