@@ -444,6 +444,9 @@ GtkWidget *create_parallel_dialog(void)
 	g_signal_connect(GTK_OBJECT(btnDockInt), "clicked",
 			   G_CALLBACK(gui_btnDockInt_clicked),
 			   NULL);
+
+	set_window_icon (GTK_WINDOW(dialog_parallel));
+
 	return dialog_parallel;
 }
 
