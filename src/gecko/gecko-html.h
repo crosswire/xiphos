@@ -84,6 +84,10 @@ void            gecko_html_printf         (GeckoHtml    *html,
 					  ...) G_GNUC_PRINTF (2,3);
 void            gecko_html_close          (GeckoHtml    *html);
 
+void            gecko_html_render_data    (GeckoHtml *html, 
+					   const char *data, 
+					   guint32 len);
+
 void            gecko_html_frames         (GeckoHtml    *html,
 					  gboolean     enable);
 

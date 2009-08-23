@@ -29,7 +29,6 @@
 #include <url.h>
 
 #ifdef USE_GTKMOZEMBED
-#include <gtkmozembed.h>
 #include "gecko/gecko-html.h"
 #else
 #ifdef __cplusplus
@@ -214,7 +213,7 @@ void main_dialogs_clear_viewer(DIALOG_DATA *d)
 	const char *buf;
 
 #ifdef USE_GTKMOZEMBED
-	GtkMozEmbed *new_browser = GTK_MOZ_EMBED(d->previewer);
+	GeckoHtml *new_browser = GECKO_HTML(d->previewer);
 #else	
 	gboolean was_editable = FALSE;
 
@@ -241,9 +240,8 @@ void main_dialogs_clear_viewer(DIALOG_DATA *d)
 
 #ifdef USE_GTKMOZEMBED
 	if (str->len)
-		gtk_moz_embed_render_data(new_browser, str->str, str->len,
-					"file:///sword", 
-					"text/html");
+		gecko_html_render_data(new_browser, str->str, str->len);
+
 #else	
 	if (str->len)
 		gtk_html_load_from_string(html,str->str,str->len);
@@ -281,7 +279,7 @@ void main_dialogs_information_viewer(DIALOG_DATA * d, gchar * mod_name,
 	GString *str;
 	MOD_FONT *mf = get_font(mod_name);
 #ifdef USE_GTKMOZEMBED
-	GtkMozEmbed *new_browser = GTK_MOZ_EMBED(sidebar.html_viewer_widget);
+	GeckoHtml *new_browser = GECKO_HTML(sidebar.html_viewer_widget);
 #else	
 	GtkHTML *html = GTK_HTML(sidebar.html_viewer_widget);
 #endif
@@ -356,9 +354,7 @@ void main_dialogs_information_viewer(DIALOG_DATA * d, gchar * mod_name,
 	
 #ifdef USE_GTKMOZEMBED
 	if (str->len)
-		gtk_moz_embed_render_data(new_browser, str->str, str->len,
-					"file:///sword", 
-					"text/html");
+		gecko_html_render_data(new_browser, str->str, str->len);
 #else	
 	if (str->len)
 		gtk_html_load_from_string(html,str->str,str->len);
