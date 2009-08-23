@@ -527,6 +527,12 @@ void gecko_html_close(GeckoHtml * html)
 					    html);
 }
 
+void gecko_html_render_data(GeckoHtml *html, const char *data, guint32 len)
+{
+	gtk_moz_embed_render_data(GTK_MOZ_EMBED(html), data, len, 
+				  "file:///sword", "text/html");
+}
+
 gboolean gecko_html_find(GeckoHtml * html, const gchar * find_string)
 {
 	return html->priv->yelper->Find(find_string);

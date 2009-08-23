@@ -33,26 +33,6 @@
 #include <stringmgr.h>
 #include <localemgr.h>
 
-#ifdef USE_GTKMOZEMBED
-#include <gtkmozembed.h>
-
-#ifdef NS_HIDDEN
-# undef NS_HIDDEN
-#endif
-#ifdef NS_IMPORT_
-# undef NS_IMPORT_
-#endif
-#ifdef NS_EXPORT_
-# undef NS_EXPORT_
-#endif
-
-#include <gtkmozembed_internal.h>
-#include <nsIDOMMouseEvent.h>
-#ifndef HAVE_GECKO_1_9
-#include <dom/nsIDOMKeyEvent.h>
-#endif
-#endif
-
 #ifdef __cplusplus
 extern "C" {
 #endif
