@@ -53,6 +53,7 @@ gecko18_subdirs = '''
 GECKOS = [
         'libxul-embedding', # xul 1.9
         'xulrunner-gtkmozembed', # xul 1.8
+        'xulrunner-windows', #windows
     ]
 
 
@@ -89,6 +90,9 @@ class Gecko(object):
 
         if not success:
             success = self.try_xulrunner18()
+
+        if not success:
+            success = self.try_libxulwin()
 
         return success
 
@@ -175,7 +179,21 @@ class Gecko(object):
             ret = True
 
         return ret
+    
+    def try_libxulwin(self):
+        cfg = self.conf
+        ret = False
+        gecko = 'libxul'
+        lib = 'GTKMOZEMBED'
 
+        check_pkg(cfg, gecko, var=lib)
+        
+        if self.env['HAVE_GTKMOZEMBED']:
+            self.check_version(gecko)
+            ret = True
+
+        return ret
+        
 
     def try_custom_conf(self):
         """

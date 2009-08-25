@@ -30,7 +30,11 @@
 #include <localemgr.h>
 
 #ifdef USE_GTKMOZEMBED
+#ifdef WIN32
+#include "geckowin/gecko-html.h"
+#else
 #include "gecko/gecko-html.h"
+#endif
 #endif
 
 #ifdef __cplusplus
