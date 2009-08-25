@@ -26,7 +26,11 @@
 #include <gtk/gtk.h>
 
 #ifdef USE_GTKMOZEMBED
+#ifdef WIN32
+#include "geckowin/gecko-html.h"
+#else
 #include "gecko/gecko-html.h"
+#endif
 #else
 #include <gtkhtml/gtkhtml.h>
 #include "gui/html.h"
@@ -289,7 +293,7 @@ void gui_set_bible_comm_layout(void)
 	
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),
 				      (settings.comm_showing ? 0 : 1));
-		
+  
 }
 
 
@@ -882,7 +886,7 @@ void create_mainwindow(void)
 	widgets.vbox_text = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(widgets.vbox_text);
 	gtk_paned_pack1(GTK_PANED(widgets.vpaned),
-					widgets.vbox_text, TRUE, TRUE);
+			widgets.vbox_text, TRUE, TRUE);
 
 	/*
 	 * bible/parallel notebook
@@ -892,13 +896,15 @@ void create_mainwindow(void)
 	gtk_box_pack_start(GTK_BOX(widgets.vbox_text),
 			   widgets.notebook_bible_parallel, TRUE,
 			   TRUE, 0);
-	gtk_notebook_set_tab_pos(GTK_NOTEBOOK(widgets.notebook_bible_parallel),
-                                             GTK_POS_BOTTOM);
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.
-				    notebook_bible_parallel), TRUE);
-	gtk_notebook_set_show_border(GTK_NOTEBOOK(widgets.
-				      notebook_bible_parallel), FALSE);
-	gtk_container_set_border_width (GTK_CONTAINER (widgets.notebook_bible_parallel), 1);
+	gtk_notebook_set_tab_pos(
+		GTK_NOTEBOOK(widgets.notebook_bible_parallel),
+				 GTK_POS_BOTTOM);
+	gtk_notebook_set_show_tabs(
+		GTK_NOTEBOOK(widgets.notebook_bible_parallel), TRUE);
+	gtk_notebook_set_show_border(
+		GTK_NOTEBOOK(widgets.notebook_bible_parallel), FALSE);
+	gtk_container_set_border_width (
+		GTK_CONTAINER (widgets.notebook_bible_parallel), 1);
 
 	g_signal_connect(GTK_OBJECT(widgets.notebook_bible_parallel),
 			   "switch_page",
@@ -909,12 +915,9 @@ void create_mainwindow(void)
 	 * text notebook
 	 */
 	widgets.notebook_text = gui_create_bible_pane();
-        gtk_container_add(GTK_CONTAINER(widgets.notebook_bible_parallel),
+
+	gtk_container_add(GTK_CONTAINER(widgets.notebook_bible_parallel),
 			  widgets.notebook_text);
-	gtk_notebook_set_scrollable(GTK_NOTEBOOK
-				    (widgets.notebook_text), TRUE);
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_text),FALSE);
-	gtk_notebook_set_show_border(GTK_NOTEBOOK(widgets.notebook_text),FALSE);
 
 	label = gtk_label_new(_("Standard View"));
 	gtk_widget_show(label);
