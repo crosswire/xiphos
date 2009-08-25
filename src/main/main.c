@@ -37,7 +37,11 @@
 #include "main/sword.h"
 #include "main/url.hh"
 #ifdef USE_GTKMOZEMBED
+#ifdef WIN32
+#include "geckowin/gecko-html.h"
+#else
 #include "gecko/gecko-html.h"
+#endif
 #endif
 //#include "backend/sword.h"
 

@@ -50,9 +50,12 @@
 #include "gui/tabbed_browser.h"
 #include "gui/search_dialog.h"
 
-
 #ifdef USE_GTKMOZEMBED
+#ifdef WIN32
+#include "geckowin/gecko-html.h"
+#else
 #include "gecko/gecko-html.h"
+#endif
 #endif
 
 #include "main/sword.h"

@@ -31,7 +31,11 @@
 #include "main/settings.h"
 #include "main/sword.h"
 #ifdef USE_GTKMOZEMBED
+#ifdef WIN32
+#include "geckowin/gecko-html.h"
+#else
 #include "gecko/gecko-html.h"
+#endif
 #endif
 
 typedef struct _find_dialog FIND_DIALOG;

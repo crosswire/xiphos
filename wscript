@@ -446,7 +446,10 @@ def build(bld):
     """)
     # use GECKO
     if not env['ENABLE_GTKHTML']:
-        bld.add_subdirs('src/gecko')
+        if env["IS_WIN32"]:
+            bld.add_subdirs('src/geckowin')
+        else:
+            bld.add_subdirs('src/gecko')
 
     bld.install_files('${PACKAGE_DOC_DIR}', """
         README
