@@ -26,7 +26,11 @@
 #include <gtk/gtk.h>
 
 #ifdef USE_GTKMOZEMBED
+#ifdef WIN32
+#include "geckowin/gecko-html.h"
+#else
 #include "gecko/gecko-html.h"
+#endif
 #else
 #include <gtkhtml/gtkhtml.h>
 #include "gui/html.h"
@@ -525,16 +529,27 @@ void adj_changed(GtkAdjustment * adjustment1, gpointer user_data)
 GtkWidget *gui_create_bible_pane(void)
 {
 	GtkWidget *notebook_text;
-#ifndef USE_GTKMOZEMBED
+#ifdef USE_GTKMOZEMBED
+	GtkWidget *eventbox1;
+#else
 	GtkWidget *scrolledwindow;
 #endif
-	
-	notebook_text = gtk_notebook_new();
+
+	notebook_text = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(notebook_text);
+
 #ifdef USE_GTKMOZEMBED
+
+	eventbox1 = gtk_event_box_new();
+	gtk_widget_show(eventbox1);
+	gtk_box_pack_start(GTK_BOX(notebook_text),
+			   eventbox1, TRUE,
+			   TRUE, 0);
 	widgets.html_text = GTK_WIDGET(gecko_html_new(NULL, FALSE, TEXT_TYPE)); 
 	gtk_widget_show(widgets.html_text);
-	gtk_container_add(GTK_CONTAINER(notebook_text), widgets.html_text);
+	gtk_container_add(GTK_CONTAINER(eventbox1),
+			  widgets.html_text);
+		
 	g_signal_connect((gpointer)widgets.html_text,
 		      "popupmenu_requested",
 		      G_CALLBACK (_popupmenu_requested_cb),

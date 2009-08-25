@@ -61,7 +61,11 @@
 # ifdef PACKAGE_VERSION
 #  undef PACKAGE_VERSION
 # endif
+#ifdef WIN32
+#include "geckowin/gecko-html.h"
+#else
 #include "gecko/gecko-html.h"
+#endif /* WIN32 */
 #else
 #ifdef __cplusplus
 extern "C" {
@@ -1638,7 +1642,6 @@ GTKChapDisp::Display(SWModule &imodule)
 		paragraphMark = "";
 
 	swbuf = "";
-	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_text), 0);
 
 	buf=g_strdup_printf(HTML_START
 			    "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
@@ -2357,7 +2360,6 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 		paragraphMark = "";
 
 	swbuf = "";
-	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_text), 0);
 
 	buf=g_strdup_printf(HTML_START
 			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
