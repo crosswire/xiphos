@@ -294,6 +294,7 @@ NS_INTERFACE_MAP_BEGIN(BrowserEmbed)
    NS_INTERFACE_MAP_ENTRY(nsIURIContentListener)
    NS_INTERFACE_MAP_ENTRY(nsIWebProgressListener)
    NS_INTERFACE_MAP_ENTRY(nsISupportsWeakReference)
+   NS_INTERFACE_MAP_ENTRY(nsIContextMenuListener)
 NS_INTERFACE_MAP_END
 
 
@@ -839,6 +840,8 @@ BrowserEmbed::AppendToStream(const PRUint8 *aData, PRUint32 aLen)
 nsresult
 BrowserEmbed::CloseStream(void)
 {
+	//GetListener();
+	AttachListeners();
 	nsCOMPtr<nsIWebBrowserStream> wbStream = do_QueryInterface(mWebBrowser);
 	if (!wbStream) return NS_ERROR_FAILURE;
 	
@@ -1066,3 +1069,11 @@ BrowserEmbed::ChildFocusOut(void)
 	webBrowserFocus->Deactivate();
 }
 
+NS_IMETHODIMP BrowserEmbed::OnShowContextMenu(
+	PRUint32 aContextFlags,
+	nsIDOMEvent *aEvent,
+	nsIDOMNode *aNode)
+{
+	g_signal_emit_by_name (mOwner, "popupmenu_requested", NULL);  //,
+	//return NS_OK;
+}
