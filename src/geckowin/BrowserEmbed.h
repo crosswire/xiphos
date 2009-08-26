@@ -23,6 +23,7 @@
 #include "nsEmbedString.h"
 #include "fastfind/nsITypeAheadFind.h"
 #include "dom/nsPIDOMWindow.h"
+#include "nsIContextMenuListener.h"
 
 #include "main/module_dialogs.h"
 
@@ -33,12 +34,13 @@ typedef void(*networkCallback)(PRBool is_start, void* data);
 class EmbedEventListener;
 
 class BrowserEmbed   : public nsIWebBrowserChrome,
-                           public nsIWebBrowserChromeFocus,
-                           public nsIEmbeddingSiteWindow,
-                           public nsIInterfaceRequestor,
-                           public nsIURIContentListener,
-                           public nsIWebProgressListener,
-                           public nsSupportsWeakReference
+	public nsIWebBrowserChromeFocus,
+	public nsIEmbeddingSiteWindow,
+	public nsIInterfaceRequestor,
+	public nsIURIContentListener,
+	public nsIWebProgressListener,
+	public nsSupportsWeakReference,
+	public nsIContextMenuListener
 
 {
 public:
@@ -57,6 +59,7 @@ public:
     NS_DECL_NSIWEBBROWSERCHROMEFOCUS
     NS_DECL_NSIURICONTENTLISTENER
     NS_DECL_NSIWEBPROGRESSLISTENER
+    NS_DECL_NSICONTEXTMENULISTENER
 
     /*
      * Methods to interact with the MiroBrowserEmbed from Cython.  These are
