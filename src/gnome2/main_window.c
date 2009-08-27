@@ -763,7 +763,8 @@ void create_mainwindow(void)
 	GtkTooltips *tooltips;
 	GtkWidget *label;
 #ifdef USE_GTKMOZEMBED
-	GtkWidget *frame;	
+	GtkWidget *frame;
+	GtkWidget *eventbox;	
 #else
 	GtkWidget *scrolledwindow;
 #endif /* USE_GTKMOZEMBED */
@@ -943,12 +944,16 @@ void create_mainwindow(void)
 	gtk_widget_show(frame);
 	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
 	gtk_box_pack_start(GTK_BOX(widgets.vbox_previewer), frame,
-				TRUE, TRUE,
-			   	0);
+				TRUE, TRUE, 0);
+	
+	
+	eventbox = gtk_event_box_new();
+	gtk_widget_show(eventbox);
+	gtk_container_add(GTK_CONTAINER(frame), eventbox);		   	
 
 	widgets.html_previewer_text
 			= GTK_WIDGET ( gecko_html_new( NULL, FALSE, VIEWER_TYPE));
-	gtk_container_add(GTK_CONTAINER(frame), widgets.html_previewer_text);
+	gtk_container_add(GTK_CONTAINER(eventbox), widgets.html_previewer_text);
 #else
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
