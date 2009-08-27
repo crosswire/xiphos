@@ -93,7 +93,7 @@ struct  _app_widgets {
 		*cb_books,
 		
 	/* textview widget */
-		*textview,
+		//*textview,
 	/* listview widget */
 		*listview_dict,
 		*store,
