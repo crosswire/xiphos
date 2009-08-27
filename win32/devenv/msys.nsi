@@ -31,13 +31,15 @@
     !define APP_NAME "Xiphos Development Environment"
     !define INSTALLER_NAME "xiphos_devenv"
     !define APP_BINARY_NAME "xiphos.exe"
-    !define APP_VERS "1.1"
+    !define APP_VERS "1.2"
     !define APP_EDITION "win32"
     !define APP_URL "http://xiphos.org"
     !define MSYS_NAME "msys"
     !define SHORTCUT_NAME "Xiphos Devel"
+
     !define UNINST_EXE "uninst-xiphos_devenv.exe"
     !define BAT_NAME "sh.bat"
+    !define FSTAB_NAME "etc\fstab"
 
     ; Paths with application files for installer
     !define PATH_CORE "..\binaries\devenv"
@@ -80,8 +82,8 @@
 ;--------------------------------
 ; Compression method
 
-    SetCompressor /SOLID zlib
-    #SetCompressorDictSize 16 ; in MB, default 8
+    SetCompressor /SOLID lzma
+    SetCompressorDictSize 16 ; in MB, default 8
 
 ;--------------------------------
 ; Includes
@@ -186,8 +188,11 @@ Section "msys" SecCore
     File /r '${FILES_MSYS}'
     #File '${FILES_SH}'
 
-    # write command to execute bash win windows prompt
+    # write command to execute bash in windows prompt
     ${WriteToFile} "$INSTDIR\bin\sh --login$\r$\n" "$INSTDIR\${BAT_NAME}"
+
+    # write right MINGW path to /etc/fstab for mounting MINGW to '/mingw'
+    ${WriteToFile} "$INSTDIR\mingw /mingw$\n" "$INSTDIR\${FSTAB_NAME}"
 
     ; Add binaries to system PATH
     ${EnvVarUpdate} $0 "PATH" "A" "HKLM" "$INSTDIR\${BIN_MINGW}"
