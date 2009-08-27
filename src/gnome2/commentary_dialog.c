@@ -343,7 +343,9 @@ void gui_create_commentary_dialog(DIALOG_DATA *d,
 	GtkWidget *vbox_toolbars;
 	GtkWidget *toolbar_nav;
 	GtkWidget *frame19;
-#ifndef USE_GTKMOZEMBED
+#ifdef USE_GTKMOZEMBED
+	GtkWidget *eventbox;
+#else
 	GtkWidget *scrolledwindow38;
 #endif
 	
@@ -382,8 +384,13 @@ void gui_create_commentary_dialog(DIALOG_DATA *d,
 	gtk_frame_set_shadow_type(GTK_FRAME(frame19), GTK_SHADOW_IN);
 
 #ifdef USE_GTKMOZEMBED	
+	
+	eventbox = gtk_event_box_new();
+	gtk_widget_show(eventbox);
+	gtk_container_add(GTK_CONTAINER(frame19), eventbox);
+	
 	d->html = GTK_WIDGET(gecko_html_new(((DIALOG_DATA*) d),TRUE,DIALOG_COMMENTARY_TYPE));
-	gtk_container_add(GTK_CONTAINER(frame19), d->html);
+	gtk_container_add(GTK_CONTAINER(eventbox), d->html);
 	gtk_widget_show(d->html);	
 	g_signal_connect((gpointer)d->html,
 		      "popupmenu_requested",
