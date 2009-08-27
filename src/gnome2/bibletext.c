@@ -528,21 +528,21 @@ void adj_changed(GtkAdjustment * adjustment1, gpointer user_data)
 
 GtkWidget *gui_create_bible_pane(void)
 {
-	GtkWidget *notebook_text;
+	GtkWidget *vbox;
 #ifdef USE_GTKMOZEMBED
 	GtkWidget *eventbox1;
 #else
 	GtkWidget *scrolledwindow;
 #endif
 
-	notebook_text = gtk_vbox_new(FALSE, 0);
-	gtk_widget_show(notebook_text);
+	vbox = gtk_vbox_new(FALSE, 0);
+	gtk_widget_show(vbox);
 
 #ifdef USE_GTKMOZEMBED
 
 	eventbox1 = gtk_event_box_new();
 	gtk_widget_show(eventbox1);
-	gtk_box_pack_start(GTK_BOX(notebook_text),
+	gtk_box_pack_start(GTK_BOX(vbox),
 			   eventbox1, TRUE,
 			   TRUE, 0);
 	widgets.html_text = GTK_WIDGET(gecko_html_new(NULL, FALSE, TEXT_TYPE)); 
@@ -558,8 +558,10 @@ GtkWidget *gui_create_bible_pane(void)
 	
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
-	gtk_container_add(GTK_CONTAINER(notebook_text),
-			  scrolledwindow);
+	gtk_box_pack_start(GTK_BOX(vbox),
+			   scrolledwindow, 
+	                   TRUE,
+			   TRUE, 0);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow),
 				       GTK_POLICY_AUTOMATIC,
@@ -588,53 +590,12 @@ GtkWidget *gui_create_bible_pane(void)
 				NULL);
 	g_signal_connect(GTK_OBJECT(widgets.html_text), "enter_notify_event",
 		    		G_CALLBACK (on_enter_notify_event),
-		       		NULL);
-/*	g_signal_connect(GTK_OBJECT(widgets.html_text), "key_press_event",
-		    		G_CALLBACK (on_key_press_event),
-		    		NULL);  
-	g_signal_connect(GTK_OBJECT(widgets.html_text), "key_release_event",
-		    		G_CALLBACK (on_key_release_event),
-		    		NULL);	*/			   
+		       		NULL);			   
 	g_signal_connect(GTK_OBJECT(widgets.html_text),
 			 "url_requested",
 			 G_CALLBACK(url_requested), NULL);
-	
-	/* gtktextview stuff */
-	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_show(scrolledwindow);
-	gtk_container_add(GTK_CONTAINER(notebook_text),
-			  scrolledwindow);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow),
-				       GTK_POLICY_AUTOMATIC,
-				       GTK_POLICY_AUTOMATIC);
-	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow,
-                                             settings.shadow_type);
-					     
-	widgets.textview = gtk_text_view_new ();
-	gtk_widget_show(widgets.textview);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow),
-			  widgets.textview);
-	gtk_text_view_set_editable (GTK_TEXT_VIEW (widgets.textview), FALSE);
-	text_buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW (widgets.textview));
-
-	create_text_tags(text_buffer);
-	gtk_text_view_set_wrap_mode(GTK_TEXT_VIEW (widgets.textview),
-						GTK_WRAP_WORD);
-
-		    
-	g_signal_connect(GTK_OBJECT(widgets.textview),
-				   "button_release_event",
-				   G_CALLBACK
-				   (textview_button_release_event),
-				  NULL);
-	g_signal_connect(GTK_OBJECT(widgets.textview),
-				   "button_press_event",
-				   G_CALLBACK
-				   (textview_button_press_event),
-					 NULL);
 #endif			 
 
-	return 	notebook_text;			   
+	return 	vbox;			   
 	
 }
