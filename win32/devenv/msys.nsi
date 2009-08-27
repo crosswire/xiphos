@@ -49,6 +49,7 @@
     !define INST_LIBXML2 "libxml2-python-2.7.3.win32-py2.6.exe"
     !define INST_PERL "strawberry-perl-5.8.9.2.msi"
     !define INST_NSISU "nsis-2.42.6-Unicode-setup.exe"
+    !define INST_MSHELP "htmlhelp.exe"
 
     ; Files
     !define FILES_MSYS "${PATH_MSYS}\*.*"
@@ -57,6 +58,7 @@
     !define FILES_LIBXML2 "${PATH_CORE}\${INST_LIBXML2}"
     !define FILES_PERL "${PATH_CORE}\${INST_PERL}"
     !define FILES_NSISU "${PATH_CORE}\${INST_NSISU}"
+    !define URL_MSHELP "http://go.microsoft.com/fwlink/?LinkId=14188"
 
     ; Folders with binaries for PATH
     !define BIN_MINGW "mingw\bin"
@@ -64,6 +66,7 @@
     !define BIN_PYTHON "C:\Python26"
     !define BIN_PERL "C:\strawberry\perl\bin"
     !define BIN_NSISU "C:\Program Files\NSIS\Unicode"
+    !define BIN_MSHELP "C:\Program Files\HTML Help Workshop"
 
     ; Following two definitions required by Uninstall log.
     !define INSTDIR_REG_ROOT "HKLM" # HKEY_LOCAL_MACHINE
@@ -162,6 +165,9 @@
     ReserveFile "${NSISDIR}\Plugins\System.dll"
     ReserveFile "${NSISDIR}\Plugins\nsDialogs.dll"
 
+    ; plugin for downloading files from the Internet (used for MS Help Compil.)
+    ReserveFile "${NSISDIR}\Plugins\NSISdl.dll"
+
     ReserveFile "${NSISDIR}\Include\nsDialogs.nsh"
 
     ;ReserveFile "${NSISDIR}\Include\LogicLib.nsh"
@@ -217,7 +223,7 @@ Section "Python 2.6" Sec01
     ${EnvVarUpdate} $0 "PATH" "A" "HKLM" "${BIN_PYTHON}"
 SectionEnd
 
-Section "libxml2 (for Python)" Sec02
+Section "libxml2 (bindings for Python)" Sec02
     SetOutPath '$TEMP'
     File '${FILES_LIBXML2}'
     ; FIXME unknown installer type, SILENT installation doesn't work
@@ -232,7 +238,7 @@ Section "Perl 5.8" Sec03
     ${EnvVarUpdate} $0 "PATH" "A" "HKLM" "${BIN_PERL}"
 SectionEnd
 
-Section "NSIS Unicode" Sec04
+Section "NSIS (for creating installers)" Sec04
     SetOutPath '$TEMP'
     File '${FILES_NSISU}'
     ; NSIS installer
@@ -240,6 +246,15 @@ Section "NSIS Unicode" Sec04
     ${EnvVarUpdate} $0 "PATH" "A" "HKLM" "${BIN_NSISU}"
 SectionEnd
 
+Section "MS Help Compiler (EULA will be accepted)" Sec05
+    ; download installer to TMP folder
+    ; It is not legal to include MS Help Compiler directly to installer
+    NSISdl::download '${URL_MSHELP}' '$TEMP\${INST_MSHELP}' 
+    ; works cli option '/?' - it says use '/Q' for silent instalation
+    ExecWait '"$TEMP\${INST_MSHELP}" /Q'
+    ; hhc command is necessary
+    ${EnvVarUpdate} $0 "PATH" "A" "HKLM" "${BIN_MSHELP}"
+SectionEnd
 
 ;--------------------------------
 ; Uninstaller Part
