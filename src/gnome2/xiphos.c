@@ -219,7 +219,7 @@ void frontend_display(void)
 	if (settings.showdevotional) 
 		main_display_devotional();
 	else 
-		main_clear_viewer();
+		main_init_previewer();
 	gtk_widget_grab_focus (sidebar.module_list);
 	
 	GS_print(("%s\n\n", "done"));
