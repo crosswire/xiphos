@@ -1371,6 +1371,7 @@ void gui_show_previewer_in_sidebar(gint choice)
 				       settings.biblepane_hight);
 	}
 	main_set_previewer_widget(choice);
+	main_init_previewer();
 }
 
 
