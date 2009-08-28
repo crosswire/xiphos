@@ -86,7 +86,7 @@ static WindowCreator *creator = NULL;
 
 static gint
 handle_child_focus_in(GtkWidget *aWidget,
-		      GdkEventCrossing *event,
+		      GdkEventMotion *event,
 		      gpointer user_data)
 {
 	GeckoHtml *html = GECKO_HTML(aWidget);
@@ -237,6 +237,7 @@ gint html_dom_key_up(GeckoHtml * embed, gpointer dom_event)
 
 static gint html_open_uri(GeckoHtml * embed, const gchar * uri)
 {
+	GS_message(("in html_open_uri"));
 	g_return_val_if_fail(uri != NULL, FALSE);
 
 	GeckoHtml *html = GECKO_HTML(embed);
@@ -365,7 +366,7 @@ static void html_realize(GtkWidget * widget)
 				html,
 				G_CONNECT_AFTER);
 	g_signal_connect_object(G_OBJECT(child_widget),
-				"enter-notify-event",
+				"motion-notify-event",
 				GTK_SIGNAL_FUNC(handle_child_focus_in),
 				html,
 				G_CONNECT_AFTER);
@@ -849,10 +850,70 @@ void gecko_html_emit_title_changed(GeckoHtml *html)
 	g_signal_emit(G_OBJECT(html), signals[HTML_TITLE], 0);
 }
 
-void gecko_html_emit_uri_open(GeckoHtml *html, const gchar *uri)
+gboolean gecko_html_emit_uri_open(GeckoHtml *html, const gchar *uri)
 {
+	GS_message(("emit uri open %s", uri));
 	gint return_val = FALSE;
-	g_signal_emit(G_OBJECT(html),
-		      signals[HTML_OPEN_URI], 0,
-		      uri, &return_val);
+	GS_message(("in html_open_uri"));
+	g_return_val_if_fail(uri != NULL, FALSE);
+
+	//GeckoHtml *html = GECKO_HTML(embed);
+	GeckoHtmlPriv *priv = GECKO_HTML_GET_PRIVATE(html);
+	gchar *buf, *place;
+	gchar tmpbuf[1023];
+	gchar book[32];
+	GString *tmpstr = g_string_new(NULL);
+
+	// for some reason, `/' is not properly encoded for us as "%2F"
+	// so we have to do it ourselves.  /mutter/ *ick*
+	if ((place = strchr((char*)uri, '?'))) {	// url's beginning, as-is.
+		strncpy(tmpbuf, uri, (++place)-uri);
+		tmpbuf[place-uri] = '\0';
+		tmpstr = g_string_append(tmpstr, tmpbuf);
+		for (/* */ ; *place; ++place) {
+			switch (*place) {
+			case '/':
+				tmpstr = g_string_append(tmpstr, "%2F"); break;
+			case ':':
+				tmpstr = g_string_append(tmpstr, "%3A"); break;
+			case ' ':
+				tmpstr = g_string_append(tmpstr, "%20"); break;
+			default:
+				tmpstr = g_string_append_c(tmpstr, *place);
+			}
+		}
+		uri = tmpstr->str;
+	}
+	
+	// prefixable link
+	if(priv->pane == DIALOG_COMMENTARY_TYPE) { 
+		strcpy(book, priv->dialog->key);
+		*(strrchr(book, ' ')) = '\0';
+		
+		if ((buf = strstr((char*)uri, "&value="))) {
+			buf += 7;
+			place = buf;
+	
+			while (*buf && isdigit(*buf))
+				buf++;
+			if ((*buf == ':') || strncmp(buf, "%3A", 3) == 0) {
+				/* url begins w/"digits:" only: fix */
+				strncpy(tmpbuf, uri, place - uri);
+				strcpy(tmpbuf+(place-uri), book);
+				strcat(tmpbuf, place);
+				uri = tmpbuf;
+			}
+		}
+		
+	}
+	
+	GS_message(("uri: %s", uri));
+	if(priv->is_dialog)
+		main_dialogs_url_handler(priv->dialog, uri, TRUE);
+	else
+		main_url_handler(uri, TRUE);
+
+	g_string_free(tmpstr, TRUE);
+	return TRUE;
+
 }

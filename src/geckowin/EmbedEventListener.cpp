@@ -42,10 +42,13 @@
 
 #include "dom/nsIDOMKeyEvent.h"
 #include "dom/nsIDOMUIEvent.h"
+#include "dom/nsIDOMNSEvent.h"
+#include "nsIContent.h"
 
 #include "EmbedEventListener.h"
 #include "BrowserEmbed.h"
 #include "geckowin/signals.h"
+#include "main/sword.h"
 
 EmbedEventListener::EmbedEventListener(void)
 {
@@ -56,15 +59,11 @@ EmbedEventListener::~EmbedEventListener()
 {
 }
 
+NS_INTERFACE_MAP_BEGIN(EmbedEventListener)
+   NS_INTERFACE_MAP_ENTRY(nsIDOMEventListener)
+NS_INTERFACE_MAP_END
 NS_IMPL_ADDREF(EmbedEventListener)
 NS_IMPL_RELEASE(EmbedEventListener)
-NS_INTERFACE_MAP_BEGIN(EmbedEventListener)
-  NS_INTERFACE_MAP_ENTRY_AMBIGUOUS(nsISupports, nsIDOMKeyListener)
-  NS_INTERFACE_MAP_ENTRY_AMBIGUOUS(nsIDOMEventListener, nsIDOMKeyListener)
-  NS_INTERFACE_MAP_ENTRY(nsIDOMKeyListener)
-  NS_INTERFACE_MAP_ENTRY(nsIDOMMouseListener)
-  NS_INTERFACE_MAP_ENTRY(nsIDOMUIListener)
-NS_INTERFACE_MAP_END
 
 nsresult
 EmbedEventListener::Init(BrowserEmbed *aOwner)
@@ -76,10 +75,35 @@ EmbedEventListener::Init(BrowserEmbed *aOwner)
 NS_IMETHODIMP
 EmbedEventListener::HandleEvent(nsIDOMEvent* aDOMEvent)
 {
-  return NS_OK;
+	if (!aDOMEvent)
+		return NS_OK;
+
+	nsAutoString eventType;
+	aDOMEvent->GetType(eventType);
+	if (eventType.EqualsLiteral("mouseover"))
+		MouseOver(aDOMEvent);
+	if (eventType.EqualsLiteral("click"))
+		MouseClick(aDOMEvent);
+	if (eventType.EqualsLiteral("keydown"))
+		KeyDown(aDOMEvent);
+	if (eventType.EqualsLiteral("keyup"))
+		KeyUp(aDOMEvent);
+	if (eventType.EqualsLiteral("keypress"))
+		KeyPress(aDOMEvent);
+	if (eventType.EqualsLiteral("mousedown"))
+		MouseDown(aDOMEvent);
+	if (eventType.EqualsLiteral("mouseup"))
+		MouseUp(aDOMEvent);
+	if (eventType.EqualsLiteral("dblclick"))
+		MouseDblClick(aDOMEvent);
+	if (eventType.EqualsLiteral("mouseout"))
+		MouseOut(aDOMEvent);
+	
+	
+	return NS_OK;
 }
 
-NS_IMETHODIMP
+nsresult
 EmbedEventListener::KeyDown(nsIDOMEvent* aDOMEvent)
 {
   nsCOMPtr <nsIDOMKeyEvent> keyEvent;
@@ -99,7 +123,7 @@ EmbedEventListener::KeyDown(nsIDOMEvent* aDOMEvent)
   return NS_OK;
 }
 
-NS_IMETHODIMP
+nsresult
 EmbedEventListener::KeyUp(nsIDOMEvent* aDOMEvent)
 {
   nsCOMPtr <nsIDOMKeyEvent> keyEvent;
@@ -119,7 +143,7 @@ EmbedEventListener::KeyUp(nsIDOMEvent* aDOMEvent)
   return NS_OK;
 }
 
-NS_IMETHODIMP
+nsresult
 EmbedEventListener::KeyPress(nsIDOMEvent* aDOMEvent)
 {
   nsCOMPtr <nsIDOMKeyEvent> keyEvent;
@@ -138,7 +162,7 @@ EmbedEventListener::KeyPress(nsIDOMEvent* aDOMEvent)
   return NS_OK;
 }
 
-NS_IMETHODIMP
+nsresult
 EmbedEventListener::MouseDown(nsIDOMEvent* aDOMEvent)
 {
   nsCOMPtr <nsIDOMMouseEvent> mouseEvent;
@@ -157,7 +181,7 @@ EmbedEventListener::MouseDown(nsIDOMEvent* aDOMEvent)
   return NS_OK;
 }
 
-NS_IMETHODIMP
+nsresult
 EmbedEventListener::MouseUp(nsIDOMEvent* aDOMEvent)
 {
   nsCOMPtr <nsIDOMMouseEvent> mouseEvent;
@@ -176,7 +200,7 @@ EmbedEventListener::MouseUp(nsIDOMEvent* aDOMEvent)
   return NS_OK;
 }
 
-NS_IMETHODIMP
+nsresult
 EmbedEventListener::MouseClick(nsIDOMEvent* aDOMEvent)
 {
   nsCOMPtr <nsIDOMMouseEvent> mouseEvent;
@@ -195,48 +219,39 @@ EmbedEventListener::MouseClick(nsIDOMEvent* aDOMEvent)
   return NS_OK;
 }
 
-NS_IMETHODIMP
+nsresult
 EmbedEventListener::MouseDblClick(nsIDOMEvent* aDOMEvent)
 {
-  nsCOMPtr <nsIDOMMouseEvent> mouseEvent;
-  mouseEvent = do_QueryInterface(aDOMEvent);
-  if (!mouseEvent)
-    return NS_OK;
-  // Return TRUE from your signal handler to mark the event as consumed.
-  gint return_val = FALSE;
-  g_signal_emit(G_OBJECT(mOwner->mOwner),
-                signals[HTML_DOM_MOUSE_DBL_CLICK], 0,
-                (void *)mouseEvent, &return_val);
-  if (return_val) {
-    aDOMEvent->StopPropagation();
-    aDOMEvent->PreventDefault();
-  }
-  return NS_OK;
+	mOwner->ProcessMouseDblClickEvent(aDOMEvent);
+	return NS_OK;
 }
 
-NS_IMETHODIMP
+nsresult
 EmbedEventListener::MouseOver(nsIDOMEvent* aDOMEvent)
 {
-  nsCOMPtr <nsIDOMMouseEvent> mouseEvent;
-  mouseEvent = do_QueryInterface(aDOMEvent);
-  if (!mouseEvent)
-    return NS_OK;
-  // Return TRUE from your signal handler to mark the event as consumed.
-  gint return_val = FALSE;
-  g_signal_emit(G_OBJECT(mOwner->mOwner),
-                signals[HTML_DOM_MOUSE_OVER], 0,
-                (void *)mouseEvent, &return_val);
-  if (return_val) {
-    aDOMEvent->StopPropagation();
-    aDOMEvent->PreventDefault();
-  }
-  return NS_OK;
+	//GS_message(("mouse over"));
+	mOwner->ChildFocusIn();
+	nsCOMPtr <nsIDOMMouseEvent> mouseEvent;
+	mouseEvent = do_QueryInterface(aDOMEvent);
+	if (!mouseEvent)
+		return NS_OK;
+	// Return TRUE from your signal handler to mark the event as consumed.
+	gint return_val = FALSE;
+	g_signal_emit(G_OBJECT(mOwner->mOwner),
+		      signals[HTML_DOM_MOUSE_OVER], 0,
+		      (void *)mouseEvent, &return_val);
+	if (return_val) {
+		aDOMEvent->StopPropagation();
+		aDOMEvent->PreventDefault();
+	}
+	return NS_OK;
 }
 
-NS_IMETHODIMP
+nsresult
 EmbedEventListener::MouseOut(nsIDOMEvent* aDOMEvent)
 {
-  nsCOMPtr <nsIDOMMouseEvent> mouseEvent;
+	mOwner->ChildFocusOut();
+	nsCOMPtr <nsIDOMMouseEvent> mouseEvent;
   mouseEvent = do_QueryInterface(aDOMEvent);
   if (!mouseEvent)
     return NS_OK;
@@ -252,7 +267,7 @@ EmbedEventListener::MouseOut(nsIDOMEvent* aDOMEvent)
   return NS_OK;
 }
 
-NS_IMETHODIMP
+nsresult
 EmbedEventListener::Activate(nsIDOMEvent* aDOMEvent)
 {
   nsCOMPtr <nsIDOMUIEvent> uiEvent = do_QueryInterface(aDOMEvent);
@@ -270,7 +285,7 @@ EmbedEventListener::Activate(nsIDOMEvent* aDOMEvent)
   return NS_OK;
 }
 
-NS_IMETHODIMP
+nsresult
 EmbedEventListener::FocusIn(nsIDOMEvent* aDOMEvent)
 {
   nsCOMPtr <nsIDOMUIEvent> uiEvent = do_QueryInterface(aDOMEvent);
@@ -288,7 +303,7 @@ EmbedEventListener::FocusIn(nsIDOMEvent* aDOMEvent)
   return NS_OK;
 }
 
-NS_IMETHODIMP
+nsresult
 EmbedEventListener::FocusOut(nsIDOMEvent* aDOMEvent)
 {
   nsCOMPtr <nsIDOMUIEvent> uiEvent = do_QueryInterface(aDOMEvent);

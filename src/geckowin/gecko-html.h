@@ -143,7 +143,7 @@ void gecko_html_emit_link_message(GeckoHtml *html);
 
 void gecko_html_emit_title_changed(GeckoHtml *html);
 
-void gecko_html_emit_uri_open(GeckoHtml *html, const gchar *uri);
+gboolean gecko_html_emit_uri_open(GeckoHtml *html, const gchar *uri);
 
 G_END_DECLS
 
