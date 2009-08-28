@@ -46,47 +46,34 @@
 
 class BrowserEmbed;
 
-class EmbedEventListener : public nsIDOMKeyListener,
-                           public nsIDOMMouseListener,
-                           public nsIDOMUIListener
+class EmbedEventListener : public nsIDOMEventListener
 {
- public:
+public:
 
-  EmbedEventListener();
-  virtual ~EmbedEventListener();
+	EmbedEventListener();
+	virtual ~EmbedEventListener();
 
-  nsresult Init(BrowserEmbed *aOwner);
+	nsresult Init(BrowserEmbed *aOwner);
 
-  NS_DECL_ISUPPORTS
+	NS_DECL_ISUPPORTS
+	NS_DECL_NSIDOMEVENTLISTENER
 
-  // nsIDOMEventListener
-
-  NS_IMETHOD HandleEvent(nsIDOMEvent* aEvent);
-
-  // nsIDOMKeyListener
-  
-  NS_IMETHOD KeyDown(nsIDOMEvent* aDOMEvent);
-  NS_IMETHOD KeyUp(nsIDOMEvent* aDOMEvent);
-  NS_IMETHOD KeyPress(nsIDOMEvent* aDOMEvent);
-
-  // nsIDOMMouseListener
-
-  NS_IMETHOD MouseDown(nsIDOMEvent* aDOMEvent);
-  NS_IMETHOD MouseUp(nsIDOMEvent* aDOMEvent);
-  NS_IMETHOD MouseClick(nsIDOMEvent* aDOMEvent);
-  NS_IMETHOD MouseDblClick(nsIDOMEvent* aDOMEvent);
-  NS_IMETHOD MouseOver(nsIDOMEvent* aDOMEvent);
-  NS_IMETHOD MouseOut(nsIDOMEvent* aDOMEvent);
-
-  // nsIDOMUIListener
-
-  NS_IMETHOD Activate(nsIDOMEvent* aDOMEvent);
-  NS_IMETHOD FocusIn(nsIDOMEvent* aDOMEvent);
-  NS_IMETHOD FocusOut(nsIDOMEvent* aDOMEvent);
-
+	
  private:
+	nsresult KeyDown(nsIDOMEvent* aDOMEvent);
+	nsresult KeyUp(nsIDOMEvent* aDOMEvent);
+	nsresult KeyPress(nsIDOMEvent* aDOMEvent);
+	nsresult MouseDown(nsIDOMEvent* aDOMEvent);
+	nsresult MouseUp(nsIDOMEvent* aDOMEvent);
+	nsresult MouseClick(nsIDOMEvent* aDOMEvent);
+	nsresult MouseDblClick(nsIDOMEvent* aDOMEvent);
+	nsresult MouseOver(nsIDOMEvent* aDOMEvent);
+	nsresult MouseOut(nsIDOMEvent* aDOMEvent);
+	nsresult Activate(nsIDOMEvent* aDOMEvent);
+	nsresult FocusIn(nsIDOMEvent* aDOMEvent);
+	nsresult FocusOut(nsIDOMEvent* aDOMEvent);
 
-  BrowserEmbed *mOwner;
+	BrowserEmbed *mOwner;
 
 };
 

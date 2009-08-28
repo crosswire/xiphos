@@ -91,7 +91,7 @@ NS_IMETHODIMP WindowCreator::CreateChromeWindow2(
 	  //log_warning("Trying to open window with no URI");
         }
     }
-    CreateChromeWindow(parent, chromeFlags, _retval);
+    CreateChromeWindow(parent, chromeFlags & nsIWebBrowserChrome::CHROME_STATUSBAR & nsIWebBrowserChrome::CHROME_TOOLBAR, _retval);
     *cancel = PR_FALSE;
     //*cancel = PR_TRUE;
     //*_retval = nsnull;

@@ -32,6 +32,11 @@
 #include "nsISelectionController.h"
 #include "commandhandler/nsICommandManager.h"
 #include "nsIFocusController.h"
+#include "nsIDOMBarProp.h"
+#include "nsIDOMEvent.h"
+#include "nsIDOMEventTarget.h"
+#include "nsIDOMEventGroup.h"
+
 
 #include "BrowserEmbed.h"
 #include "FixFocus.h"
@@ -55,6 +60,7 @@ BrowserEmbed::BrowserEmbed()
     mWindow = nsnull;
     mFocusCallback = nsnull;
     mInitialised = PR_FALSE;
+    mEventTarget = nsnull;
 }
 
 BrowserEmbed::~BrowserEmbed()
@@ -84,7 +90,7 @@ nsresult BrowserEmbed::init(unsigned long parentWindow, int x,
     //mWebBrowser->SetContainerWindow(static_cast<nsIWebBrowserChrome*>(this));
 
     nsCOMPtr<nsIDocShellTreeItem> dsti = do_QueryInterface(mWebBrowser);
-    dsti->SetItemType(nsIDocShellTreeItem::typeContentWrapper);
+    dsti->SetItemType(nsIDocShellTreeItem::typeAll);
 
     nsCOMPtr<nsIBaseWindow> browserBaseWindow(do_QueryInterface(mWebBrowser));
     browserBaseWindow->InitWindow(mWindow, nsnull, 0, 0, width, height);
@@ -113,14 +119,22 @@ nsresult BrowserEmbed::init(unsigned long parentWindow, int x,
     GS_message(("line 146"));
     //set up keyboard and mouse event listeners
     mEventListener = new EmbedEventListener();
-    mEventListenerGuard = 
-	    static_cast<nsISupports *>(static_cast<nsIDOMKeyListener *>(mEventListener));
     mEventListener->Init(this);
 
     mFinder = do_CreateInstance (NS_TYPEAHEADFIND_CONTRACTID, &rv);
     NS_ENSURE_SUCCESS (rv, rv);
+
+    nsCOMPtr<nsIDOMWindow> domWindow;
+    mWebBrowser->GetContentDOMWindow(getter_AddRefs(domWindow));
+
+    nsCOMPtr<nsIDOMWindow2> d2 (do_QueryInterface(domWindow));
+    d2->GetWindowRoot(getter_AddRefs(mEventTarget));
     
-    GS_message(("line 156"));
+    mEventTarget->AddEventListener(NS_LITERAL_STRING("mouseover"), (nsIDOMEventListener *)mEventListener, PR_FALSE);
+    mEventTarget->AddEventListener(NS_LITERAL_STRING("click"), (nsIDOMEventListener *)mEventListener, PR_FALSE);
+    mEventTarget->AddEventListener(NS_LITERAL_STRING("dblclick"), (nsIDOMEventListener *)mEventListener, PR_FALSE);
+    mEventTarget->AddEventListener(NS_LITERAL_STRING("mouseout"), (nsIDOMEventListener *) mEventListener, PR_FALSE);
+
     mInitialised = PR_TRUE;
     return NS_OK;
 }
@@ -338,7 +352,9 @@ NS_IMETHODIMP BrowserEmbed::GetChromeFlags(PRUint32* aChromeMask)
 
 NS_IMETHODIMP BrowserEmbed::SetChromeFlags(PRUint32 aChromeMask)
 {
+	
     mChromeFlags = aChromeMask;
+
     return NS_OK;
 }
 
@@ -473,7 +489,6 @@ NS_IMETHODIMP BrowserEmbed::OnStartURIOpen(nsIURI *aURI, PRBool *_retval)
 	if (NS_FAILED(rv))
 		return rv;
 	
-	GS_message(("508"));
 	gecko_html_emit_uri_open(mOwner, specString.get());
 
 	return NS_OK;
@@ -741,76 +756,79 @@ BrowserEmbed::ProcessKeyReleaseEvent (gpointer dom_event)
 void
 BrowserEmbed::AttachListeners (void)
 {
-	if (!mEventTarget || mListenersAttached)
-		return;
+// 	if (!mEventTarget || mListenersAttached)
+// 		return;
 	
-	nsIDOMEventListener *eventListener = 
-		static_cast<nsIDOMEventListener *>(static_cast<nsIDOMKeyListener *>(mEventListener));
+// 	nsIDOMEventListener *eventListener = 
+// 		static_cast<nsIDOMEventListener *>(static_cast<nsIDOMKeyListener *>(mEventListener));
 
-	nsresult rv;
-	rv = mEventTarget->AddEventListenerByIID(eventListener,
-						 NS_GET_IID(nsIDOMKeyListener));
-	if (NS_FAILED(rv)) {
-		NS_WARNING("Failed to add key listener\n");
-		return;
-	}
+// 	nsresult rv;
+// 	rv = mEventTarget->AddEventListenerByIID(eventListener,
+// 						 NS_GET_IID(nsIDOMKeyListener));
+// 	if (NS_FAILED(rv)) {
+// 		NS_WARNING("Failed to add key listener\n");
+// 		return;
+// 	}
 	
-	rv = mEventTarget->AddEventListenerByIID(eventListener,
-						 NS_GET_IID(nsIDOMMouseListener));
-	if (NS_FAILED(rv)) {
-		NS_WARNING("Failed to add mouse listener\n");
-		return;
-	}
+// 	rv = mEventTarget->AddEventListenerByIID(eventListener,
+// 						 NS_GET_IID(nsIDOMMouseListener));
+// 	if (NS_FAILED(rv)) {
+// 		NS_WARNING("Failed to add mouse listener\n");
+// 		return;
+// 	}
 
-	rv = mEventTarget->AddEventListenerByIID(eventListener,
-						 NS_GET_IID(nsIDOMUIListener));
-	if (NS_FAILED(rv)) {
-		NS_WARNING("Failed to add UI listener\n");
-		return;
-	}
+// 	rv = mEventTarget->AddEventListenerByIID(eventListener,
+// 						 NS_GET_IID(nsIDOMUIListener));
+// 	if (NS_FAILED(rv)) {
+// 		NS_WARNING("Failed to add UI listener\n");
+// 		return;
+// 	}
 	
-	mListenersAttached = PR_TRUE;
+// 	mListenersAttached = PR_TRUE;
 }
 
 void
 BrowserEmbed::DetachListeners(void)
 {
-	if (!mListenersAttached || !mEventTarget)
-		return;
+// 	if (!mListenersAttached || !mEventTarget)
+// 		return;
 
-	nsIDOMEventListener *eventListener =
-		static_cast<nsIDOMEventListener *>(static_cast<nsIDOMKeyListener *>(mEventListener));
+// 	nsIDOMEventListener *eventListener =
+// 		static_cast<nsIDOMEventListener *>(static_cast<nsIDOMKeyListener *>(mEventListener));
 	
-	nsresult rv;
-	rv = mEventTarget->RemoveEventListenerByIID(eventListener,
-						    NS_GET_IID(nsIDOMKeyListener));
-	if (NS_FAILED(rv)) {
-		NS_WARNING("Failed to remove key listener\n");
-		return;
-	}
+// 	nsresult rv;
+// 	rv = mEventTarget->RemoveEventListenerByIID(eventListener,
+// 						    NS_GET_IID(nsIDOMKeyListener));
+// 	if (NS_FAILED(rv)) {
+// 		NS_WARNING("Failed to remove key listener\n");
+// 		return;
+// 	}
 	
-	rv =
-		mEventTarget->RemoveEventListenerByIID(eventListener,
-						       NS_GET_IID(nsIDOMMouseListener));
-	if (NS_FAILED(rv)) {
-		NS_WARNING("Failed to remove mouse listener\n");
-		return;
-	}
+// 	rv =
+// 		mEventTarget->RemoveEventListenerByIID(eventListener,
+// 						       NS_GET_IID(nsIDOMMouseListener));
+// 	if (NS_FAILED(rv)) {
+// 		NS_WARNING("Failed to remove mouse listener\n");
+// 		return;
+// 	}
 	
-	rv = mEventTarget->RemoveEventListenerByIID(eventListener,
-						    NS_GET_IID(nsIDOMUIListener));
-	if (NS_FAILED(rv)) {
-		NS_WARNING("Failed to remove UI listener\n");
-		return;
-	}
+// 	rv = mEventTarget->RemoveEventListenerByIID(eventListener,
+// 						    NS_GET_IID(nsIDOMUIListener));
+// 	if (NS_FAILED(rv)) {
+// 		NS_WARNING("Failed to remove UI listener\n");
+// 		return;
+// 	}
 	
-	mListenersAttached = PR_FALSE;
+// 	mListenersAttached = PR_FALSE;
 }
 	
 nsresult
 BrowserEmbed::OpenStream(const char *aBaseURI, const char *aContentType)
 {
-  GS_message(("in open stream"));
+	//mEventTarget = nsnull;
+	mListenersAttached = nsnull;
+//	ContentStateChange();
+  
 	nsCOMPtr<nsIWebBrowserStream> wbStream = do_QueryInterface(mWebBrowser);
 	if (!wbStream) return NS_ERROR_FAILURE;
 
@@ -827,12 +845,13 @@ nsresult
 BrowserEmbed::AppendToStream(const PRUint8 *aData, PRUint32 aLen)
 {
   GS_message(("in append stream"));
-  //ContentStateChange();
+ 
 
 	nsCOMPtr<nsIWebBrowserStream> wbStream = do_QueryInterface(mWebBrowser);
 	if (!wbStream) return NS_ERROR_FAILURE;
 
 	GS_message(("end append stream"));
+
 	return wbStream->AppendToStream(aData, aLen);
 	
 }
@@ -840,14 +859,14 @@ BrowserEmbed::AppendToStream(const PRUint8 *aData, PRUint32 aLen)
 nsresult
 BrowserEmbed::CloseStream(void)
 {
-	//GetListener();
-	AttachListeners();
 	nsCOMPtr<nsIWebBrowserStream> wbStream = do_QueryInterface(mWebBrowser);
 	if (!wbStream) return NS_ERROR_FAILURE;
-	
+
+	nsresult rv =  wbStream->CloseStream();
+
 	GS_message(("end close stream"));
 
-	return wbStream->CloseStream();
+	return rv;
 }
 
 void
@@ -868,6 +887,7 @@ BrowserEmbed::ContentStateChange(void)
 void
 BrowserEmbed::GetListener(void)
 {
+	GS_message(("get listener begin"));
 	if (mEventTarget)
 		return;
 	
@@ -1028,6 +1048,7 @@ BrowserEmbed::DoCommand (const char *aAcommand)
 nsresult
 BrowserEmbed::GetPIDOMWindow(nsPIDOMWindow **aPIWin)
 {
+	GS_message(("in pidomwindow"));
 	*aPIWin = nsnull;
 
 	nsCOMPtr<nsIDOMWindow> domWindow;
@@ -1035,7 +1056,10 @@ BrowserEmbed::GetPIDOMWindow(nsPIDOMWindow **aPIWin)
 	if (!domWindow)
 		return NS_ERROR_FAILURE;
 
+	GS_message(("after getcontentdomwindow"));
+
 	nsCOMPtr<nsPIDOMWindow> domWindowPrivate = do_QueryInterface(domWindow);
+	GS_message(("before get private root"));
 	*aPIWin = domWindowPrivate->GetPrivateRoot();
 
 	if (*aPIWin) {
@@ -1043,6 +1067,8 @@ BrowserEmbed::GetPIDOMWindow(nsPIDOMWindow **aPIWin)
 		return NS_OK;
 	}
 	
+	GS_message(("end pidomwindow"));
+
 	return NS_ERROR_FAILURE;
 
 }
