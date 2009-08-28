@@ -62,7 +62,7 @@ struct _GeckoHtmlClass {
 				const gchar *new_title);
 	void (*popupmenu_requested) (GeckoHtml *view,
 				     const gchar *link);
-	void (*html_link_message) (GeckoHtml *view);
+	void (*link_message) (GeckoHtml *view);
 
 	void (*html_title) (GeckoHtml *view);
 

@@ -449,6 +449,7 @@ static void html_class_init(GeckoHtmlClass * klass)
 	klass->font_handler = 0;
 	klass->color_handler = 0;
 	klass->a11y_handler = 0;
+	klass->link_message = html_link_message;
 
 
 	signals[LINK_MESSAGE] =
@@ -456,7 +457,7 @@ static void html_class_init(GeckoHtmlClass * klass)
 			 G_TYPE_FROM_CLASS(klass),
 			 G_SIGNAL_RUN_LAST,
 			 G_STRUCT_OFFSET(GeckoHtmlClass,
-					 html_link_message),
+					 link_message),
 			 NULL, NULL,
 			 gtk_marshal_NONE__NONE,
 			 G_TYPE_NONE, 0);
