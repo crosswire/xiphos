@@ -136,7 +136,7 @@ public:
     EmbedEventListener *mEventListener;
     nsCOMPtr<nsISupports> mEventListenerGuard;
     PRBool mListenersAttached;
-    nsCOMPtr<nsPIDOMEventTarget> mEventTarget;
+    nsCOMPtr<nsIDOMEventTarget> mEventTarget;
 
     nsString mLinkMessage;
     GeckoHtml *mOwner;
