@@ -81,6 +81,71 @@ GtkWidget *main_get_previewer_widget(void)
 		: widgets.html_previewer_text;
 }
 
+/******************************************************************************
+ * Name
+ *   main_init_previewer
+ *
+ * Synopsis
+ *   #include "main/previewer.h"
+ *
+ *   void main_init_previewer(void)
+ *
+ * Description
+ *   clear the information viewer
+ *
+ * Return value
+ *   void
+ */ 
+
+void main_init_previewer(void)
+{
+	GString *tmp_str = g_string_new(NULL);
+	GString *str;
+	gchar *buf;
+
+#ifdef USE_GTKMOZEMBED
+	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(previewer_html_widget)))
+		return;
+	GeckoHtml *html = GECKO_HTML(previewer_html_widget);
+	gecko_html_open_stream(html, "text/html");
+#else
+	/* setup gtkhtml widget */
+	GtkHTML *html = GTK_HTML(previewer_html_widget);	
+	gboolean was_editable = gtk_html_get_editable(html);
+	
+	if (was_editable)
+		gtk_html_set_editable(html, FALSE);
+#endif
+	g_string_printf(tmp_str,
+			HTML_START
+			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+			"",			
+			settings.bible_bg_color, settings.bible_text_color,
+			settings.link_color);
+
+	str = g_string_new(tmp_str->str);
+	buf = _("Previewer");
+	g_string_printf(tmp_str,
+			"<b>%s</b><br><font color=\"grey\">"
+			"<HR></font><br>", buf);
+	str = g_string_append(str, tmp_str->str);
+
+	g_string_printf(tmp_str, " %s", "</font></body></html>");
+	str = g_string_append(str, tmp_str->str);
+
+#ifdef USE_GTKMOZEMBED
+	if (str->len)
+		gecko_html_write(html, str->str, str->len);
+	gecko_html_close(html);
+#else
+	if (str->len)
+		gtk_html_load_from_string(html, str->str, str->len);
+	gtk_html_set_editable(html, was_editable);
+#endif
+	g_string_free(str, TRUE);
+	g_string_free(tmp_str, TRUE);
+}
+
 
 /******************************************************************************
  * Name
@@ -103,7 +168,6 @@ void main_clear_viewer(void)
 #ifdef USE_PREVIEWER_AUTOCLEAR
 	GString *tmp_str = g_string_new(NULL);
 	GString *str;
-	gboolean was_editable = FALSE;
 	gchar *buf;
 
 #ifdef USE_GTKMOZEMBED
@@ -113,8 +177,9 @@ void main_clear_viewer(void)
 	gecko_html_open_stream(html, "text/html");
 #else
 	/* setup gtkhtml widget */
-	GtkHTML *html = GTK_HTML(previewer_html_widget);
-	was_editable = gtk_html_get_editable(html);
+	GtkHTML *html = GTK_HTML(previewer_html_widget);	
+	gboolean was_editable = gtk_html_get_editable(html);
+	
 	if (was_editable)
 		gtk_html_set_editable(html, FALSE);
 #endif
