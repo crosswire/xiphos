@@ -1196,7 +1196,7 @@ load_module_tree(GtkTreeView * treeview,
 	}
 	g_list_free(tmp);
 
-	g_signal_connect((gpointer) treeview,
+	g_signal_connect_after((gpointer) treeview,
 			 "button_release_event",
 			 G_CALLBACK
 			 (on_modules_list_button_release), treeview);
