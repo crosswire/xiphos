@@ -26,7 +26,8 @@
 extern "C"
 {
 #endif
-
+	
+void main_init_previewer(void);
 void main_set_previewer_widget(int in_sidebar);
 GtkWidget *main_get_previewer_widget(void);
 void main_clear_viewer(void);

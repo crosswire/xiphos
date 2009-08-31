@@ -1,0 +1,1 @@
+This is used to create the installer for the dev environment. Currently it will only work from C:\. Also, there are several things wrong or incomplete with it.

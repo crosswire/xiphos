@@ -37,6 +37,9 @@ PACKAGE='xiphos'
 srcdir = '.'
 blddir = 'build'
 
+# dir where waf will search custom (additional) files
+_tooldir = './waffles/'
+
 _prefix = '/usr/local'
 
 _headers = '''
@@ -317,7 +320,6 @@ def configure(conf):
 
     ## Other
     check_pkg(conf, 'libxml-2.0', '2.0.0', True, var='XML')
-    check_pkg(conf, 'ImageMagick++', '6.0.0', True, var='MAGICK')
 
     check_pkg(conf, 'gtk+-unix-print-2.0', '2.0.0', var='UPRINT')
     if env['HAVE_UPRINT']:
@@ -446,7 +448,10 @@ def build(bld):
     """)
     # use GECKO
     if not env['ENABLE_GTKHTML']:
-        bld.add_subdirs('src/gecko')
+        if env["IS_WIN32"]:
+            bld.add_subdirs('src/geckowin')
+        else:
+            bld.add_subdirs('src/gecko')
 
     bld.install_files('${PACKAGE_DOC_DIR}', """
         README

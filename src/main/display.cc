@@ -24,6 +24,8 @@
 #endif
 
 #include <glib.h>
+#include <gdk-pixbuf/gdk-pixbuf.h>
+
 #include <osishtmlhref.h>
 #include <osisvariants.h>
 #include <thmlvariants.h>
@@ -35,7 +37,6 @@
 #include <string.h>
 #include <ctype.h>
 #include <assert.h>
-#include <Magick++.h>
 
 #ifndef WIN32
 #include <sys/socket.h>
@@ -61,7 +62,11 @@
 # ifdef PACKAGE_VERSION
 #  undef PACKAGE_VERSION
 # endif
+#ifdef WIN32
+#include "geckowin/gecko-html.h"
+#else
 #include "gecko/gecko-html.h"
+#endif /* WIN32 */
 #else
 #ifdef __cplusplus
 extern "C" {
@@ -125,66 +130,16 @@ int marked_cache_chapter = -1;
 
 using namespace sword;
 using namespace std;
-using namespace Magick;
-
-#if 1
-// The easy ImageMagick API solution in Linux/UNIX environments.
 
 int
 ImageDimensions(const char *path, int *x, int *y)
 {
-	try {
-		Image image(path);
-		*x = image.baseColumns();
-		*y = image.baseRows();
+
+	if (gdk_pixbuf_get_file_info (path, x, y))
 		return 0;
-	}
-	catch (Exception &error_) {
-		GS_warning(("Caught exception: %s", error_.what()));
+	else
 		return -1;
-	}
 }
-#else
-// The ugly "shell command for `identify'" solution.
-
-// shell command to obtain size spec: prints exactly "123x456".
-// bad accommodation to Solaris (old sed): we cannot use \(this\|that\|other\).
-#define	IDENTIFY	"identify \"%s\" 2>&1 | head -1 | sed -e \"s/^.*BMP //\" -e \"s/^.*GIF //\" -e \"s/^.*JPEG //\" -e \"s/^.*PNG //\" -e \"s/ .*$//\""
-
-int
-ImageDimensions(const char *path, int *x, int *y)
-{
-	char buf[350];	// enough for path+100 bytes of command.
-	FILE *result;
-	int retval = 0;
-
-	if (strlen(path) > 250) {		// um...no.  forget it.
-		*x = *y = 1;
-		return -1;
-	}
-
-	sprintf(buf, IDENTIFY, path);
-	if (((result = popen(buf, "r")) == NULL) ||	// can't run.
-	    (fgets(buf, 384, result) == NULL)    ||	// can't read.
-	    (buf[0] < '0')                       ||	// not ...
-	    (buf[0] > '9'))   {				// ... numeric.
-		*x = *y = 1;
-		retval = -1;
-		goto out;
-	}
-	sscanf(buf, "%dx%d\n", x, y);
-
-	// cancel absurdities.
-	if ((*x < 1) || (*x > 5000))
-		*x = 1;
-	if ((*y < 1) || (*y > 5000))
-		*y = 1;
-
-out:
-	pclose(result);
-	return retval;
-}
-#endif
 
 //
 // user annotation cache filling.
@@ -1638,7 +1593,6 @@ GTKChapDisp::Display(SWModule &imodule)
 		paragraphMark = "";
 
 	swbuf = "";
-	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_text), 0);
 
 	buf=g_strdup_printf(HTML_START
 			    "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
@@ -2357,7 +2311,6 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 		paragraphMark = "";
 
 	swbuf = "";
-	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_text), 0);
 
 	buf=g_strdup_printf(HTML_START
 			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"

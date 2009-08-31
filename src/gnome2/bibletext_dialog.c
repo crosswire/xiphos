@@ -25,7 +25,11 @@
 
 #include <gtk/gtk.h>
 #ifdef USE_GTKMOZEMBED
+#ifdef WIN32
+#include "geckowin/gecko-html.h"
+#else
 #include "gecko/gecko-html.h"
+#endif
 #else
 #include <gtkhtml/gtkhtml.h>
 #include "gui/html.h"
@@ -742,10 +746,10 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 	GtkWidget *vbox33;
 	GtkWidget *paned;
 	GtkWidget *frame;
-#ifndef USE_GTKMOZEMBED
+#ifdef USE_GTKMOZEMBED
+	GtkWidget *eventbox;
+#else
 	GtkWidget *swVText;
-	//gchar *gdk_font = NULL;
-//	gchar file[250];
 #endif
 
 	vt->dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
@@ -777,9 +781,14 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 
 #ifdef USE_GTKMOZEMBED
 	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
+	
+	eventbox = gtk_event_box_new();
+	gtk_widget_show(eventbox);
+	gtk_container_add(GTK_CONTAINER(frame), eventbox);
+	
 	vt->html = GTK_WIDGET(gecko_html_new(vt, TRUE, DIALOG_TEXT_TYPE));
 	gtk_widget_show(vt->html);
-	gtk_container_add(GTK_CONTAINER(frame), vt->html);
+	gtk_container_add(GTK_CONTAINER(eventbox), vt->html);
 	g_signal_connect((gpointer)vt->html,
 		      "popupmenu_requested",
 		      G_CALLBACK(_popupmenu_requested_cb),
@@ -790,10 +799,14 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 	gtk_paned_add2((GtkPaned *)paned,frame);
 	gtk_widget_set_size_request(frame, -1, 100);
 	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
+	
+	eventbox = gtk_event_box_new();
+	gtk_widget_show(eventbox);
+	gtk_container_add(GTK_CONTAINER(frame), eventbox);
 
 	vt->previewer = GTK_WIDGET(gecko_html_new(vt, TRUE, VIEWER_TYPE));
 	gtk_widget_show(vt->previewer);
-	gtk_container_add(GTK_CONTAINER(frame), vt->previewer);
+	gtk_container_add(GTK_CONTAINER(eventbox), vt->previewer);
 #else
 	swVText = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(swVText);
