@@ -317,7 +317,6 @@ def configure(conf):
 
     ## Other
     check_pkg(conf, 'libxml-2.0', '2.0.0', True, var='XML')
-    check_pkg(conf, 'ImageMagick++', '6.0.0', True, var='MAGICK')
 
     check_pkg(conf, 'gtk+-unix-print-2.0', '2.0.0', var='UPRINT')
     if env['HAVE_UPRINT']:
