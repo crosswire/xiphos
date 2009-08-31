@@ -25,7 +25,11 @@
 
 #include <gtk/gtk.h>
 #ifdef USE_GTKMOZEMBED
+#ifdef WIN32
+#include "geckowin/gecko-html.h"
+#else
 #include "gecko/gecko-html.h"
+#endif
 #else
 #include <gtkhtml/gtkhtml.h>
 #include "gui/html.h"
@@ -361,7 +365,9 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 	GtkWidget *btnSyncDL;
 //	GtkWidget *label205;
 	GtkWidget *frameDictHTML;
-#ifndef USE_GTKMOZEMBED
+#ifdef USE_GTKMOZEMBED
+	GtkWidget *eventbox;	
+#else
 	GtkWidget *scrolledwindowDictHTML;
 #endif /* !USE_GTKMOZEMBED */
 	GtkWidget *scrolledwindow;
@@ -454,9 +460,14 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 	gtk_paned_pack2(GTK_PANED(hpaned7), frameDictHTML, TRUE, TRUE);
 
 #ifdef USE_GTKMOZEMBED
-	gtk_frame_set_shadow_type(GTK_FRAME(frameDictHTML), GTK_SHADOW_IN);	
+	gtk_frame_set_shadow_type(GTK_FRAME(frameDictHTML), GTK_SHADOW_IN);
+	
+	eventbox = gtk_event_box_new();
+	gtk_widget_show(eventbox);
+	gtk_container_add(GTK_CONTAINER(frameDictHTML), eventbox);
+	
 	dlg->html = GTK_WIDGET(gecko_html_new((DIALOG_DATA*) dlg,TRUE,DIALOG_DICTIONARY_TYPE));
-	gtk_container_add(GTK_CONTAINER(frameDictHTML), dlg->html);
+	gtk_container_add(GTK_CONTAINER(eventbox), dlg->html);
 	gtk_widget_show(dlg->html);
 	g_signal_connect((gpointer)dlg->html,
 		      "popupmenu_requested",

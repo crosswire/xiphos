@@ -1,3 +1,8 @@
+2009-08-31  karl <charcoal@users.sf.net>
+
+	* remove devotionals from "lookup selection" menus.
+	* correct null key pointer in sword.cc debug message.
+
 2009-08-21  karl <charcoal@users.sf.net>
 
 	* ensure a bit of whitespace between strong's elements when

@@ -257,22 +257,22 @@ void BackEnd::init_lists(MOD_LISTS * mods)
 			} 
 		}
 		if (!strcmp((*it).second->Type(), DICT_MODS)) {
-			mods->dictionarymods =
-			    g_list_append(mods->dictionarymods,
-			    strdup((char *) (*it).second->Name()));
-			mods->dict_descriptions =
-			    g_list_append(mods->dict_descriptions,
-			    strdup((char *) (*it).second->
-				   Description()));
-			
 			char *feature =
 			    (char *) (*it).second->getConfigEntry("Feature");
-			if (!feature)
-				continue;
-			if (!strcmp(feature, "DailyDevotion"))
-				mods->devotionmods
-				   = g_list_append(mods->devotionmods,
-				    strdup((char *) (*it).second->Name()));
+
+			if (feature && !strcmp(feature, "DailyDevotion")) {
+				mods->devotionmods =
+				    g_list_append(mods->devotionmods,
+						  strdup((char *) (*it).second->Name()));
+			} else {
+				mods->dictionarymods =
+				    g_list_append(mods->dictionarymods,
+						  strdup((char *) (*it).second->Name()));
+				mods->dict_descriptions =
+				    g_list_append(mods->dict_descriptions,
+						  strdup((char *) (*it).second->
+							 Description()));
+			}
 		}
 		if (!strcmp((*it).second->Type(), BOOK_MODS)) {
 			if ((*it).second->getConfigEntry("GSType") && 

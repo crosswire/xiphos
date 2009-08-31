@@ -26,7 +26,11 @@
 #include <gtk/gtk.h>
 
 #ifdef USE_GTKMOZEMBED
+#ifdef WIN32
+#include "geckowin/gecko-html.h"
+#else
 #include "gecko/gecko-html.h"
+#endif
 #else
 #include <gtkhtml/gtkhtml.h>
 #include "gui/html.h"
@@ -64,10 +68,6 @@
 gboolean shift_key_pressed = FALSE;
 guint scroll_adj_signal;
 GtkAdjustment* adjustment;
-
-#ifndef USE_GTKMOZEMBED
-static GtkTextBuffer *text_buffer;
-#endif
 
 
 /******************************************************************************
@@ -217,50 +217,6 @@ static gboolean on_text_button_release_event(GtkWidget * widget,
 	return FALSE;
 }
 
-static gboolean textview_button_release_event(GtkWidget * widget,
-					GdkEventButton * event,
-					gpointer data)
-{
-//	extern gboolean in_url;
-//	gchar *key;
-
-	settings.whichwindow = MAIN_TEXT_WINDOW;
-	/*
-	 * set program title to current text module name
-	 */
-	gui_change_window_title(settings.MainWindowModule);
-/*
-	switch (event->button) {
-	case 1:
-		break;
-	case 2:
-		break;
-	case 3:
-		break;
-	}
-*/
-	return FALSE;
-}
-
-
-static gboolean textview_button_press_event(GtkWidget * widget,
-					GdkEventButton * event,
-					gpointer data)
-{
-	switch (event->button) {
-	case 1:
-		break;
-	case 2:
-		break;
-	case 3:
-		gui_popup_pm_text();
-		return TRUE;
-		break;
-	}
-	return FALSE;
-}
-
-
 static gboolean
 on_enter_notify_event        (GtkWidget       *widget,
                                         GdkEventCrossing *event,
@@ -323,168 +279,6 @@ static gboolean on_key_release_event         (GtkWidget       *widget,
 }
 */
 
-static gint tag_event_handler (GtkTextTag *tag, GtkWidget *widget,
-	GdkEvent *event, const GtkTextIter *iter, gpointer user_data)
-{
-	gint char_index;
-
-	char_index = gtk_text_iter_get_offset (iter);
-	//printf ("offset = %d", char_index);
-  switch (event->type)
-    {
-    case GDK_MOTION_NOTIFY:
-      printf ("Motion event at char %d tag `%s'\n",
-             char_index, tag->name);
-    	return TRUE;
-      break;
-
-    case GDK_BUTTON_PRESS:
-      printf ("Button press at char %d tag `%s'\n",
-             char_index, tag->name);
-	    switch(event->button.button){
-		    case 1:
-			//return do_something_with_tag(tag, iter, user_data);
-		        break;
-		    case 2:
-		    case 3:
-		        break;
-
-	}
-
-    	return TRUE;
-      break;
-
-    case GDK_2BUTTON_PRESS:
-      printf ("Double click at char %d tag `%s'\n",
-             char_index, tag->name);
-    	return TRUE;
-      break;
-
-    case GDK_3BUTTON_PRESS:
-      printf ("Triple click at char %d tag `%s'\n",
-             char_index, tag->name);
-    	return TRUE;
-      break;
-
-    case GDK_BUTTON_RELEASE:
-      printf ("Button release at char %d tag `%s'\n",
-             char_index, tag->name);
-    	return TRUE;
-      break;
-
-    case GDK_KEY_PRESS:
-    case GDK_KEY_RELEASE:
-      printf ("Key event at char %d tag `%s'\n",
-              char_index, tag->name);
-    	return TRUE;
-      break;
-
-    case GDK_ENTER_NOTIFY:
-      printf ("enter event at char %d tag `%s'\n",
-             char_index, tag->name);
-    	return TRUE;
-      break;
-
-    case GDK_LEAVE_NOTIFY:
-      printf ("leave event at char %d tag `%s'\n",
-             char_index, tag->name);
-    	return TRUE;
-      break;
-
-    case GDK_PROPERTY_NOTIFY:
-    case GDK_SELECTION_CLEAR:
-    case GDK_SELECTION_REQUEST:
-    case GDK_SELECTION_NOTIFY:
-    case GDK_PROXIMITY_IN:
-    case GDK_PROXIMITY_OUT:
-#if 0
-    case GDK_DRAG_ENTER:
-    case GDK_DRAG_LEAVE:
-    case GDK_DRAG_MOTION:
-    case GDK_DRAG_STATUS:
-    case GDK_DROP_START:
-    case GDK_DROP_FINISHED:
-#endif /* 0 */
-    	return FALSE;
-    default:
-    	return FALSE;
-      break;
-    }
-    return FALSE;
-}
-
-static void setup_tag (GtkTextTag *tag, gpointer user_data)
-{
-	g_signal_connect (G_OBJECT (tag),
-		    "event",
-		    G_CALLBACK (tag_event_handler),
-		    user_data);
-}
-
-static void create_text_tags(GtkTextBuffer * buffer)
-{
-	GtkTextTag *tag;
-	GdkColor color;
-	//GdkColor color2;
-	//GdkColor color_red;
-	//GdkColor colorLink;
-	//PangoFontDescription *font_desc;
-
-
-
-	/* verse number tag verse style*/
-	tag = gtk_text_buffer_create_tag (buffer, "verseNumber", NULL);
-	setup_tag (tag, buffer);
-	color.red = color.green = 0;
-	color.blue = 0xffff;
-	//	"scale", PANGO_SCALE_XX_SMALL,
-	g_object_set (G_OBJECT (tag),
-                "foreground_gdk", &color,
-                NULL);
-
-	/* verse number tag verse style*/
-	/*tag = gtk_text_buffer_create_tag (buffer, "verse", NULL);
-	setup_tag (tag, buffer);
-	g_object_set (G_OBJECT (tag),
-                NULL);	*/
-
-	/* current verse color tag */
-	tag = gtk_text_buffer_create_tag (buffer, "fg_currentverse", NULL);
-	color.blue = 0;
-	color.green = 0xbbbb;
-	color.red = 0;
-	g_object_set (G_OBJECT (tag),
-                "foreground_gdk", &color,
-                NULL);
-
-	/*  verse color tag */
-	tag = gtk_text_buffer_create_tag (buffer, "fg_verse", NULL);
-	color.blue = 0;
-	color.green = 0;
-	color.red = 0;
-	g_object_set (G_OBJECT (tag),
-                "foreground_gdk", &color,
-                NULL);
-
-	/* right to left tag */
-	tag = gtk_text_buffer_create_tag (buffer, "rtl_text", NULL);
-        g_object_set (G_OBJECT (tag),
-		//"font", rtl_font,
-                "wrap_mode", GTK_WRAP_WORD,
-                "direction", GTK_TEXT_DIR_RTL,
-                "indent", 0,
-                "left_margin", 0,
-                "right_margin", 0,
-                NULL);
-
-	/* large tag */
-	tag = gtk_text_buffer_create_tag (buffer, "large", NULL);
-        g_object_set (G_OBJECT (tag),
-		"scale", (double)1.928, //PANGO_SCALE_XX_LARGE,
-                NULL);
-}
-
-
 static
 void adj_changed(GtkAdjustment * adjustment1, gpointer user_data) 
 
@@ -524,17 +318,28 @@ void adj_changed(GtkAdjustment * adjustment1, gpointer user_data)
 
 GtkWidget *gui_create_bible_pane(void)
 {
-	GtkWidget *notebook_text;
-#ifndef USE_GTKMOZEMBED
+	GtkWidget *vbox;
+#ifdef USE_GTKMOZEMBED
+	GtkWidget *eventbox1;
+#else
 	GtkWidget *scrolledwindow;
 #endif
-	
-	notebook_text = gtk_notebook_new();
-	gtk_widget_show(notebook_text);
+
+	vbox = gtk_vbox_new(FALSE, 0);
+	gtk_widget_show(vbox);
+
 #ifdef USE_GTKMOZEMBED
+
+	eventbox1 = gtk_event_box_new();
+	gtk_widget_show(eventbox1);
+	gtk_box_pack_start(GTK_BOX(vbox),
+			   eventbox1, TRUE,
+			   TRUE, 0);
 	widgets.html_text = GTK_WIDGET(gecko_html_new(NULL, FALSE, TEXT_TYPE)); 
 	gtk_widget_show(widgets.html_text);
-	gtk_container_add(GTK_CONTAINER(notebook_text), widgets.html_text);
+	gtk_container_add(GTK_CONTAINER(eventbox1),
+			  widgets.html_text);
+		
 	g_signal_connect((gpointer)widgets.html_text,
 		      "popupmenu_requested",
 		      G_CALLBACK (_popupmenu_requested_cb),
@@ -543,8 +348,10 @@ GtkWidget *gui_create_bible_pane(void)
 	
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
-	gtk_container_add(GTK_CONTAINER(notebook_text),
-			  scrolledwindow);
+	gtk_box_pack_start(GTK_BOX(vbox),
+			   scrolledwindow, 
+	                   TRUE,
+			   TRUE, 0);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow),
 				       GTK_POLICY_AUTOMATIC,
@@ -573,53 +380,12 @@ GtkWidget *gui_create_bible_pane(void)
 				NULL);
 	g_signal_connect(GTK_OBJECT(widgets.html_text), "enter_notify_event",
 		    		G_CALLBACK (on_enter_notify_event),
-		       		NULL);
-/*	g_signal_connect(GTK_OBJECT(widgets.html_text), "key_press_event",
-		    		G_CALLBACK (on_key_press_event),
-		    		NULL);  
-	g_signal_connect(GTK_OBJECT(widgets.html_text), "key_release_event",
-		    		G_CALLBACK (on_key_release_event),
-		    		NULL);	*/			   
+		       		NULL);			   
 	g_signal_connect(GTK_OBJECT(widgets.html_text),
 			 "url_requested",
 			 G_CALLBACK(url_requested), NULL);
-	
-	/* gtktextview stuff */
-	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_show(scrolledwindow);
-	gtk_container_add(GTK_CONTAINER(notebook_text),
-			  scrolledwindow);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow),
-				       GTK_POLICY_AUTOMATIC,
-				       GTK_POLICY_AUTOMATIC);
-	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow,
-                                             settings.shadow_type);
-					     
-	widgets.textview = gtk_text_view_new ();
-	gtk_widget_show(widgets.textview);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow),
-			  widgets.textview);
-	gtk_text_view_set_editable (GTK_TEXT_VIEW (widgets.textview), FALSE);
-	text_buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW (widgets.textview));
-
-	create_text_tags(text_buffer);
-	gtk_text_view_set_wrap_mode(GTK_TEXT_VIEW (widgets.textview),
-						GTK_WRAP_WORD);
-
-		    
-	g_signal_connect(GTK_OBJECT(widgets.textview),
-				   "button_release_event",
-				   G_CALLBACK
-				   (textview_button_release_event),
-				  NULL);
-	g_signal_connect(GTK_OBJECT(widgets.textview),
-				   "button_press_event",
-				   G_CALLBACK
-				   (textview_button_press_event),
-					 NULL);
 #endif			 
 
-	return 	notebook_text;			   
+	return 	vbox;			   
 	
 }

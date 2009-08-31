@@ -50,9 +50,12 @@
 #include "gui/tabbed_browser.h"
 #include "gui/search_dialog.h"
 
-
 #ifdef USE_GTKMOZEMBED
+#ifdef WIN32
+#include "geckowin/gecko-html.h"
+#else
 #include "gecko/gecko-html.h"
+#endif
 #endif
 
 #include "main/sword.h"
@@ -1368,6 +1371,7 @@ void gui_show_previewer_in_sidebar(gint choice)
 				       settings.biblepane_hight);
 	}
 	main_set_previewer_widget(choice);
+	main_init_previewer();
 }
 
 
@@ -1395,6 +1399,7 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	GtkWidget *title_label = NULL;
 #ifdef USE_GTKMOZEMBED
 	GtkWidget *frame;
+	GtkWidget *eventbox;
 #else
 	GtkWidget *scrolledwindow;
 #endif
@@ -1424,9 +1429,14 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	gtk_box_pack_start(GTK_BOX(widgets.box_side_preview), frame, 
 				TRUE, TRUE,
 			   	0);
-	//widgets.html_previewer
+
+	
+	eventbox = gtk_event_box_new();
+	gtk_widget_show(eventbox);
+	gtk_container_add(GTK_CONTAINER(frame), eventbox);
+	
 	sidebar.html_viewer_widget = GTK_WIDGET(gecko_html_new(NULL, FALSE, SB_VIEWER_TYPE));//embed_new(VIEWER_TYPE);
-	gtk_container_add(GTK_CONTAINER(frame), sidebar.html_viewer_widget);
+	gtk_container_add(GTK_CONTAINER(eventbox), sidebar.html_viewer_widget);
 #else
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
