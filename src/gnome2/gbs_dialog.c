@@ -26,7 +26,11 @@
 #include <gtk/gtk.h>
 
 #ifdef USE_GTKMOZEMBED
+#ifdef WIN32
+#include "geckowin/gecko-html.h"
+#else
 #include "gecko/gecko-html.h"
+#endif
 #else
 #include <gtkhtml/gtkhtml.h>
 #include "gui/html.h"
@@ -332,6 +336,7 @@ void gui_create_gbs_dialog(DIALOG_DATA *dlg)
 //	GtkWidget *label243;
 #ifdef USE_GTKMOZEMBED  
 	GtkWidget *frame;
+	GtkWidget *eventbox;
 #else
 	GtkWidget *scrolledwindow_html;
 #endif /* USE_GTKMOZEMBED */
@@ -389,9 +394,12 @@ void gui_create_gbs_dialog(DIALOG_DATA *dlg)
 	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
 	gtk_paned_pack2(GTK_PANED(hpaned), frame, FALSE, TRUE);
 	
+	eventbox = gtk_event_box_new();
+	gtk_widget_show(eventbox);
+	gtk_container_add(GTK_CONTAINER(frame), eventbox);
 	
 	dlg->html = GTK_WIDGET(gecko_html_new(((DIALOG_DATA*) dlg),TRUE,DIALOG_BOOK_TYPE));
-	gtk_container_add(GTK_CONTAINER(frame), dlg->html);
+	gtk_container_add(GTK_CONTAINER(eventbox), dlg->html);
 	gtk_widget_show(dlg->html);	
 	g_signal_connect((gpointer)dlg->html,
 		      "popupmenu_requested",

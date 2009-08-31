@@ -61,14 +61,6 @@ fi
 AC_SUBST(UPRINT_LIBS)
 AC_SUBST(UPRINT_CFLAGS)
 
-
-dnl ***
-dnl ImageMagick for image dimensions/resize
-dnl ***
-PKG_CHECK_MODULES(ImageMagick, ImageMagick++ >= 6.0.0, , echo error: either no ImageMagick++ or ImageMagick++ not recent enough && exit 1)
-AC_SUBST(ImageMagick_LIBS)
-AC_SUBST(ImageMagick_CFLAGS)
-
 dnl Checks select argument types
 AC_FUNC_SELECT_ARGTYPES
 AC_HEADER_TIME

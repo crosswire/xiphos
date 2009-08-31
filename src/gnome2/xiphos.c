@@ -68,7 +68,11 @@
 #include "main/xml.h"
 
 #ifdef USE_GTKMOZEMBED
+#ifdef WIN32
+#include "geckowin/gecko-html.h"
+#else
 #include "gecko/gecko-html.h"
+#endif
 #endif
 
 #include "gui/debug_glib_null.h"
@@ -215,7 +219,7 @@ void frontend_display(void)
 	if (settings.showdevotional) 
 		main_display_devotional();
 	else 
-		main_clear_viewer();
+		main_init_previewer();
 	gtk_widget_grab_focus (sidebar.module_list);
 	
 	GS_print(("%s\n\n", "done"));

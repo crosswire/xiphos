@@ -825,6 +825,9 @@ void main_display_book(const char * mod_name, const char * key)     //, unsigned
 {
 	if (!settings.havebook || !mod_name)
 		return;
+	
+	if (key == NULL)  // && offset == -1)
+		key = "0";
 
 	GS_message(("main_display_book\nmod_name: %s\nkey: %s", mod_name, key));
 
@@ -837,9 +840,6 @@ void main_display_book(const char * mod_name, const char * key)     //, unsigned
 		xml_set_value("Xiphos", "modules", "book", mod_name);
 		gui_reassign_strdup(&settings.book_mod, (gchar *)mod_name);
 	}
-	
-	if (key == NULL)  // && offset == -1)
-		key = "0";
 
 	if (!isdigit(key[0])) {
 		xml_set_value("Xiphos", "keys", "book", key);
