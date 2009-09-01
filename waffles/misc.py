@@ -22,7 +22,7 @@ def get_pkgvar(conf, pkg, var):
     # for cross-compilation it is necessary to prepend custom
     # prefix for include paths
     if conf.env['IS_CROSS_WIN32']:
-        ret = conf.check_cfg(package=pkg, args='--variable=%s --define-variable=prefix=%s'%(var, conf.env['PKG_CONF_PREFIX'] ), okmsg=myokmsg,
+        ret = conf.check_cfg(package=pkg, args='--variable=%s --define-variable=prefix=%s'%(var, conf.env['PKG_CONFIG_PREFIX'] ), okmsg=myokmsg,
                 msg='Checking for var %s in %s' % (var, pkg)).strip()
     else:
         ret = conf.check_cfg(package=pkg, args='--variable=%s' % var, okmsg=myokmsg,
@@ -40,7 +40,7 @@ def check_pkg(conf, name, version='', mandatory=False, var=None):
     # for cross-compilation it is necessary to prepend custom
     # prefix for include paths
     if conf.env['IS_CROSS_WIN32']:
-        conf.check_cfg (package=name, uselib_store=var, args='--cflags --libs --define-variable=prefix=%s'%conf.env['PKG_CONF_PREFIX'],
+        conf.check_cfg (package=name, uselib_store=var, args='--cflags --libs --define-variable=prefix=%s'%conf.env['PKG_CONFIG_PREFIX'],
             atleast_version=version, mandatory=mandatory)
     else:
         conf.check_cfg (package=name, uselib_store=var, args='--cflags --libs',
