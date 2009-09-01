@@ -138,6 +138,11 @@ def set_options(opt):
 		help = "Specify prefix with folders for headers and libraries for cross-compilation",
 		dest = 'pkg_conf_prefix')
 
+    opt.add_option('--mozilla-distdir',
+		action = 'store',
+		help = "Folder 'dist' in unpacked mozilla devel tarball. Mandatory for win32 compilation",
+		dest = 'mozilla_distdir')
+
 
     group = opt.add_option_group ('Localization and documentation', '')
     group.add_option('--helpdir',
@@ -238,7 +243,14 @@ def configure(conf):
     if env['IS_CROSS_WIN32']:
         # allows to use linux pkg-config for cross-compilation
         os.environ['PKG_CONFIG_LIBDIR'] = opt.pkg_conf_libdir
-        env['PKG_CONF_PREFIX'] = opt.pkg_conf_prefix
+        env['PKG_CONFIG_PREFIX'] = opt.pkg_conf_prefix
+
+    # mozilla distdir mandatory for win32 for using libxul
+    if env['IS_WIN32']:
+        if opt.mozilla_distdir:
+            env['MOZILLA_DISTDIR'] = opt.mozilla_distdir
+        else:
+            env['MOZILLA_DISTDIR'] = '%s/../..' % env['PKG_CONFIG_LIBDIR']
 
     # appropriate cflags
     env.append_value('CXXFLAGS', env['CXXFLAGS_%s' % opt.debug_level.upper()])
