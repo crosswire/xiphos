@@ -42,7 +42,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #else
-#include <Winsock2.h>
+#include <winsock2.h>
 #endif /* !WIN32 */
 #include <errno.h>
 
