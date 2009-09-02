@@ -254,7 +254,7 @@ gchar * gui_general_user_file (const char *fname, gboolean critical)
 	/* specify alternate locations in order of precedence */
 	i = 0;
 	alternative[i++] = g_strdup (fname);
-#ifdef MAINTAINER_MODE
+#ifdef DEBUG
 	GS_message(("MAINTAINER_MODE"));
 	/* generally only developers have any use for these */
 	alternative[i++] = g_build_filename("..", fname, NULL);
