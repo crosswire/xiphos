@@ -667,7 +667,7 @@ void xml_convert_to_osisref()
 {
 	gchar *label, *content, *s, *t;
 	gchar reference[100];
-	GList *deletable, *hold;
+	GList *deletable = NULL, *hold;
 
 	/* pull entries from old "markedverses" set */
 	/* re-insert into new "osisrefmarkedverses" */
