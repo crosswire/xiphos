@@ -60,12 +60,16 @@ static const char *f_message = "backend/sword_main.cc line #%d \"%s\" = %s";
 #endif
 
 BackEnd::BackEnd()
-{	
+{
+	const char *lang = getenv("LANG");
+	if (!lang) lang = "C";
+	sword_locale = set_sword_locale(lang);
+
 	main_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
 	display_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
-	
-	display_mod = NULL;	
-	tree_key = NULL;	
+
+	display_mod = NULL;
+	tree_key = NULL;
 	commDisplay          = 0;
 	bookDisplay          = 0;
 	dictDisplay          = 0;
@@ -75,7 +79,6 @@ BackEnd::BackEnd()
 	verselistDisplay     = 0;
 	viewerDisplay        = 0;
 }
- 
 
 BackEnd::~BackEnd()
 {
@@ -1172,4 +1175,26 @@ void BackEnd::save_module_key(char *mod_name, char *key)
 	}
 	delete myConfig;
 }
+
+const char *BackEnd::get_osisref_from_key(const char *module, const char *key)
+{
+	ModMap::iterator it;
+
+	// we need an OSISRef in module-sensitive context.
+	// fallback positions: we hope for a supplied module.
+	// if not, assume KJV (v11n historical reasons; not anglocentric).
+	// if not, use the 1st module...by which time we're just guessing.
+
+	it = main_mgr->Modules.find((module && *module) ? module : "KJV");
+	if (it == main_mgr->Modules.end()) {
+		it = main_mgr->Modules.begin();
+		if (it == main_mgr->Modules.end())
+			return "";
+	}
+
+	VerseKey *vk = (VerseKey *)(*it).second->getKey();
+	*vk = key;
+	return vk->getOSISRef();
+}
+
 /* end of file */

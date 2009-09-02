@@ -956,9 +956,17 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 		else if (!strcmp(action, "showUserNote")) {
 			module = g_strdup(m_url.getParameterValue("module"));
 			passage = g_strdup((gchar*)m_url.getParameterValue("passage"));
+
+			// need localized key, not the osisref that we've got.
+			ModMap::iterator it = backend->get_main_mgr()->Modules.find
+						((module && *module) ? module : "KJV");
+			SWModule *m = (*it).second;
+			VerseKey *vk = (VerseKey *)m->getKey();
+			*vk = passage;
+
 			main_information_viewer(module,
 						(gchar*)svalue,
-						(gchar*)passage, 
+						(gchar*)m->getKeyText(),
 						"showUserNote",
 						(gchar*)"u",
 						NULL,
