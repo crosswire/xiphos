@@ -1,13 +1,6 @@
 #! /usr/bin/env python
 # encoding: utf-8
 
-# defines not needed anymore
-
-#  SUSE_10_2
-#  USE_GTKHTML38_3_13 
-#  USE_GTKHTML38 
-
-
 import sys
 if sys.version_info < (2,3):
     raise RuntimeError("Python 2.3 or newer is required")
@@ -90,9 +83,6 @@ def set_options(opt):
         option_name = '--' + name
         opt.parser.remove_option(option_name)
 
-    #opt.add_option('--enable-paratab', action='store_true', default=True,
-            #dest='paratab', help='Use paratab [Default: True]')
-
     opt.add_option('--enable-autoclear', action='store_true', default=False,
             dest='autoclear', help='Use previewer autoclear [Default: disabled]')
 
@@ -109,7 +99,6 @@ def set_options(opt):
             help='Disable console window in win32 [Defauld: enabled]',
             dest='no_console')
 
-    # replaces '--enable-maintainer-mode', '--enable-debug'
     opt.add_option('-d', '--debug-level',
 		action = 'store',
 		default = ccroot.DEBUG_LEVELS.ULTRADEBUG,
@@ -263,10 +252,6 @@ def configure(conf):
         env.append_value('CXXFLAGS', env['CXXFLAGS_DELINT'])
         env.append_value('CCFLAGS', env['CCFLAGS_DELINT'])
 
-    if opt.debug_level == 'ultradebug' or opt.debug_level == 'debug':
-        dfn('MAINTAINER_MODE', 1)
-    #if opt.paratab:
-        #dfn('USE_PARALLEL_TAB', 1)
     if opt.autoclear:
         dfn('USE_PREVIEWER_AUTOCLEAR', 1)
     if opt.old_navbar:
