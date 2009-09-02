@@ -608,15 +608,13 @@ const char *main_get_language_map(const char *language) {
 
 void main_init_backend(void)
 {
-	const char *lang = getenv("LANG");
-	
-	if (!lang) lang = "C";
-
 	StringMgr::setSystemStringMgr( new GS_StringMgr() );
 
 	backend = new BackEnd();
+
+	const char *lang = LocaleMgr::getSystemLocaleMgr()->getDefaultLocaleName();
+
 	backend->init_SWORD(0);
-	sword_locale = backend->set_sword_locale(lang);
 	settings.path_to_mods = main_get_path_to_mods();
 	GS_print(("%s sword-%s\n", "Starting", backend->get_sword_version()));
 	GS_print(("%s\n", "Initiating SWORD"));
@@ -1678,4 +1676,24 @@ void main_flush_widgets_content(void)
 gboolean main_is_Bible_key(gchar *key)
 {
 	return (gboolean)(backend->is_Bible_key(key, settings.currentverse) != 0);
+}
+
+/******************************************************************************
+ * Name
+ *  main_get_osisref_from_key
+ *
+ * Synopsis
+ *   #include "main/sword.h"
+ *   void main_get_osisref_from_key()
+ *
+ * Description
+ *   returns OSISRef-formatted key value.
+ *
+ * Return value
+ *   const char *
+ */ 
+const char *
+main_get_osisref_from_key(const char *module, const char *key)
+{
+    return backend->get_osisref_from_key(module, key);
 }

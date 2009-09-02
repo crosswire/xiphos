@@ -558,7 +558,7 @@ int xml_create_settings_file(char *path)
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"hebrew", NULL);
 
 	section_node = xmlNewChild(root_node, NULL,
-				   (const xmlChar *) "markedverses", NULL); /* initially empty */
+				   (const xmlChar *) "osisrefmarkedverses", NULL);
 
 	section_node = xmlNewChild(root_node, NULL, (const xmlChar *)"misc", NULL);
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"dailydevotional", (const xmlChar *)"0");
@@ -645,8 +645,70 @@ int xml_create_settings_file(char *path)
 	return 1;
 }
 
+/******************************************************************************
+ * Name
+ *   xml_convert_to_osisref
+ *
+ * Synopsis
+ *   #include "main/xml.h"
+ *
+ *   void xml_convert_to_osisref()
+ *
+ * Description
+ *   convert "Gen 1:1" format to OSISRef "Gen.1.1" format.
+ *   backward compatibility support from 3.1.1's first (bad) cut that
+ *   failed to localize.  for shame, the pain i cause myself...
+ *
+ * Return value
+ *   void
+ */
 
+void xml_convert_to_osisref()
+{
+	gchar *label, *content, *s, *t;
+	gchar reference[100];
+	GList *deletable = NULL, *hold;
 
+	/* pull entries from old "markedverses" set */
+	/* re-insert into new "osisrefmarkedverses" */
+    	if (xml_set_section_ptr("markedverses") && xml_get_label()) {
+		do {
+			label = xml_get_label();
+			content = g_strdup(xml_get_list());
+
+			/* detect "NASB Revelation of John 1:1" */
+			if (((s = strrchr(label, ' ')) != NULL) &&	/* rightmost space */
+			    ((s = strchr((t = s+1), ':')) != NULL) &&	/* chapter:verse */
+			    ((t = strchr(label, ' ')) < s)) {		/* leftmost space */
+
+				/* having gotten this far, we successfully */
+				/* detected a wrongly-formatted label.  convert. */
+
+				/* mark old bogus version for removal. */
+				deletable = g_list_prepend(deletable, g_strdup(label));
+
+				/* cons up a new version. */
+				*t = '\0';
+				g_snprintf(reference, 100, "%s %s",
+					   label /* this is just the module name now */,
+					   main_get_osisref_from_key((const char *)label,
+								     (const char *)t+1));
+				xml_set_list_item("osisrefmarkedverses", "markedverse",
+						  reference, content);
+			}
+			g_free(content);
+		} while (xml_next_item() && xml_get_label());
+	}
+
+	hold = deletable;
+	while (deletable) {
+		xml_remove_node("markedverses", "markedverse", deletable->data);
+		g_free(deletable->data);
+		deletable = g_list_next(deletable);
+	}
+	xml_remove_section("markedverses");
+	g_list_free(hold);
+}
 
 
 /******************************************************************************
@@ -1189,6 +1251,33 @@ void xml_remove_node(const char *section, const char *item, const char *label)
 			xmlUnlinkNode(cur_item);
 			xmlFreeNode(cur_item);      
 		} 	  
+	}	
+	
+}
+
+/******************************************************************************
+ * Name
+ *   xml_remove_section
+ *
+ * Synopsis
+ *   #include "gui/bookmarks.h"
+ *
+ *   void xml_remove_section(char *section)
+ *
+ * Description
+ *   annihilates an entire section from the document.
+ *
+ * Return value
+ *   void
+ */
+
+void xml_remove_section(const char *section)
+{
+	xmlNodePtr cur = NULL;
+
+	if ((cur = xml_find_section("Xiphos", section)) != NULL) {
+		xmlUnlinkNode(cur);
+		xmlFreeNode(cur);      
 	}	
 	
 }

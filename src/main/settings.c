@@ -90,7 +90,6 @@ int settings_init(int new_configs, int new_bookmarks)
 {
 	int retval = 0;
 	char *sword_dir = NULL;
-	char *gs_old = NULL;
 	char *tmp = NULL;
 	char *env;
 
@@ -120,19 +119,7 @@ int settings_init(int new_configs, int new_bookmarks)
 
 	/* if gSwordDir does not exist, create it. */
 	if (access(settings.gSwordDir, F_OK) == -1) {
-		gs_old = g_strdup_printf("%s/.xiphos-2.0", settings.homedir);
-		if (access(gs_old, F_OK) == 0) {
-			if (rename(gs_old, settings.gSwordDir) == 0)
-				gui_generic_warning(_("Xiphos has renamed .xiphos-2.0 to .xiphos"));
-			else {
-				char msg[300];
-				sprintf(msg, _("Xiphos can not rename  .xiphos-2.0 to .xiphos:\n%s\n\nXiphos cannot continue."),
-					strerror(errno));
-				gui_generic_warning(msg);
-				/* necessarily giving up. */
-				gtk_exit(1);
-			}
-		} else if ((Mkdir(settings.gSwordDir, S_IRWXU)) != 0) {
+		if ((Mkdir(settings.gSwordDir, S_IRWXU)) != 0) {
 			char msg[300];
 			sprintf(msg, _("Xiphos can not create  .xiphos:\n%s\n\nXiphos cannot continue."),
 				strerror(errno));
@@ -140,7 +127,6 @@ int settings_init(int new_configs, int new_bookmarks)
 			/* if we can not create gSwordDir exit */
 			gtk_exit(1);
 		}
-		g_free(gs_old);
 	}
 
 	/* if .sword does not exist create it */
