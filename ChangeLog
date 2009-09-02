@@ -1,3 +1,14 @@
+2009-09-01  karl <charcoal@users.sf.net>
+
+	* fix #2841441 per verse annotation - localized reference
+	* implied a bunch of other stuff:
+	  - convert <markedverses> to <osisrefmarkedverses> on init.
+	  - move locale init inside backend ctor.
+	  - localize *u refs for previewer, per bug report.
+	  - parse in osisref form.
+	  - dispose of bogus ".xiphos-2.0" dir rename (historic from
+	    very old .gnomesword-2.0 needs).
+
 2009-08-31  karl <charcoal@users.sf.net>
 
 	* remove devotionals from "lookup selection" menus.

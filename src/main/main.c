@@ -36,6 +36,7 @@
 
 #include "main/sword.h"
 #include "main/url.hh"
+#include "main/xml.h"
 #ifdef USE_GTKMOZEMBED
 #ifdef WIN32
 #include "geckowin/gecko-html.h"
@@ -173,10 +174,13 @@ int main(int argc, char *argv[])
 	
 	gui_splash_step(_("Displaying Xiphos"), 1.0, 3 + base_step);
 	
+	/* need to get rid of wrongly-formatted annotation labels. */
+	xml_convert_to_osisref();
+	
 	frontend_display();
 	
 	gui_splash_done();
-	
+
 	if (have_sword_url) {
 		if (!strncmp(argv[1], "sword:/", 7)) {
 			char *key = strchr(argv[1]+8, '/');
