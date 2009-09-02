@@ -456,28 +456,11 @@ static GtkWidget *_create_mark_verse_dialog(gchar * module,
 	GtkWidget *dialog;
 	GtkWidget *sw;	
 	gchar osisreference[100];
-	gchar *old_note = NULL, *s;
+	gchar *old_note = NULL;
 
 	g_snprintf(osisreference,  100, "%s %s", module,
 		   main_get_osisref_from_key((const char *)module,
 					     (const char *)key));
-	if ((s = strrchr(osisreference, '.')) == NULL)
-	{
-		gchar *err = g_strdup_printf(_("Invalid reference in \"%s\"?"),
-					     osisreference);
-		gui_generic_warning(err);
-		g_free(err);
-	}
-	*s = ':';
-	if ((s = strrchr(osisreference, '.')) == NULL)
-	{
-		gchar *err = g_strdup_printf(_("Invalid reference in \"%s\"?"),
-					     osisreference);
-		gui_generic_warning(err);
-		g_free(err);
-	}
-	*s = ' ';
-
 	note = NULL;
 	
 	glade_file = gui_general_user_file("markverse.glade", TRUE);
