@@ -357,7 +357,7 @@ remove_install_modules(GList * modules,
 			g_free((gchar*)tmp->data);
 			tmp = g_list_next(tmp);
 		}
-		g_list_free(tmp);
+		g_list_free(modules);
 		g_free(dialog_text);
 		return;
 	}
