@@ -53,6 +53,7 @@ void xml_save_settings_doc(char *file_name);
 void xml_free_settings_doc(void);
 void xml_add_new_item_to_section(char * section, char * item_name, char * value);
 void xml_remove_node(const char *section, const char *item, const char *label);
+void xml_remove_section(const char *section);
 void xml_convert_to_osisref();
 
 #ifdef __cplusplus

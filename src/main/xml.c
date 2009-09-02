@@ -706,6 +706,7 @@ void xml_convert_to_osisref()
 		g_free(deletable->data);
 		deletable = g_list_next(deletable);
 	}
+	xml_remove_section("markedverses");
 	g_list_free(hold);
 }
 
@@ -1250,6 +1251,33 @@ void xml_remove_node(const char *section, const char *item, const char *label)
 			xmlUnlinkNode(cur_item);
 			xmlFreeNode(cur_item);      
 		} 	  
+	}	
+	
+}
+
+/******************************************************************************
+ * Name
+ *   xml_remove_section
+ *
+ * Synopsis
+ *   #include "gui/bookmarks.h"
+ *
+ *   void xml_remove_section(char *section)
+ *
+ * Description
+ *   annihilates an entire section from the document.
+ *
+ * Return value
+ *   void
+ */
+
+void xml_remove_section(const char *section)
+{
+	xmlNodePtr cur = NULL;
+
+	if ((cur = xml_find_section("Xiphos", section)) != NULL) {
+		xmlUnlinkNode(cur);
+		xmlFreeNode(cur);      
 	}	
 	
 }
