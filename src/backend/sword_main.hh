@@ -142,6 +142,7 @@ public:
 	void save_module_key(char *mod_name, char *key);
 	SWMgr *get_display_mgr(void) {return(display_mgr);};
 	SWMgr *get_main_mgr(void) {return(main_mgr);};
+	const char *get_osisref_from_key(const char *module, const char *key);
 };
 extern BackEnd *backend;
 

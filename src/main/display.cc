@@ -165,8 +165,9 @@ struct replace {
 void
 marked_cache_fill(gchar *modname, gchar *key)
 {
-	gchar *s, *t, *err;
-	char *key_book;
+	gchar *s, *t, *err, *mhold;
+	char *key_book = g_strdup(main_get_osisref_from_key((const char *)modname,
+							    (const char *)key));
 	int key_chapter, key_verse;
 
 	// free the old cache.  first free contents, then the map itself.
@@ -181,14 +182,11 @@ marked_cache_fill(gchar *modname, gchar *key)
 	}
 	marked_cache.clear();
 
-	// tear apart the key
-	key_book = g_strdup(key);
-	*(s = strrchr(key_book, ' ')) = '\0';
-	t = ++s;
-	s = strchr(t, ':');
-	*(s++) = '\0';
-	key_chapter = atoi(t);
-	key_verse   = atoi(s);
+	// tear apart the key (e.g. "Gen.1.1").
+	*(s = strrchr(key_book, '.')) = '\0';
+	*(t = strrchr(key_book, '.')) = '\0';
+	key_chapter = atoi(t+1);
+	key_verse   = atoi(s+1);
 
 	// remember exactly what chapter this cache is for
 	g_free(marked_cache_modname);
@@ -199,7 +197,7 @@ marked_cache_fill(gchar *modname, gchar *key)
 
 	// load up the annotation content
 	marked_element *e = new marked_element;
-    	if (xml_set_section_ptr("markedverses") && xml_get_label()) {
+    	if (xml_set_section_ptr("osisrefmarkedverses") && xml_get_label()) {
 		do {
 			e->module = xml_get_label();
 			s = xml_get_list();
@@ -207,21 +205,24 @@ marked_cache_fill(gchar *modname, gchar *key)
 			g_free(s);
 
 			gchar *m = e->module;
+			mhold = g_strdup(m);
 
-			// tear apart "NASB Revelation of John 1:1"
-			if ((s = strrchr(m, ' ')) == NULL)	// rightmost space
+			// tear apart "NASB Gen.1.1"
+			if ((s = strrchr(m, '.')) == NULL)	// rightmost dot
 				goto fail;
 			*s = '\0';
-			if ((s = strchr((t = s+1), ':')) == NULL) // chapter:verse
+			if ((t = strrchr(m, '.')) == NULL)	// chapter:verse
 				goto fail;
-			*(s++) = '\0';
-			e->chapter = atoi(t);
-			e->verse   = atoi(s);
+			*t = '\0';
+			e->chapter = atoi(t+1);
+			e->verse   = atoi(s+1);
 			if ((s = strchr(m, ' ')) == NULL)	// leftmost space
 				goto fail;
 			*(s++) = '\0';
 			e->book = s;
 			// now properly delimited: module & book, plus numeric c:v.
+
+			g_free(mhold);
 
 			// for fast reference: is this annotation relevant?
 			if ((key_chapter != e->chapter) ||
@@ -255,7 +256,8 @@ marked_cache_fill(gchar *modname, gchar *key)
 	return;
 
 fail:
-	err = g_strdup_printf(_("Improperly encoded personal annotation label:\n'%s'"), s);
+	err = g_strdup_printf(_("Improperly encoded personal annotation label:\n'%s'"), 
+			      mhold);
 	gui_generic_warning(err);
 	g_free(err);
 	g_free(key_book);

@@ -26,7 +26,6 @@
 #include <gtk/gtk.h>
 #include <glade/glade-xml.h>
 
-
 #include "gui/bookmark_dialog.h"
 #include "gui/bookmarks_menu.h"
 #include "gui/bookmarks_treeview.h"
@@ -258,18 +257,21 @@ void on_mark_verse_response(GtkDialog * dialog,
 			    gint response_id, 
 			    gpointer user_data)
 {
-	gchar reference[100];
+	gchar reference[100], *module, *key;
 
-	g_snprintf(reference, 100, "%s %s",
-		   (gchar *)gtk_entry_get_text(GTK_ENTRY(entry_module)),
-		   (gchar *)gtk_entry_get_text(GTK_ENTRY(entry_key)));
+	module = (gchar *)gtk_entry_get_text(GTK_ENTRY(entry_module));
+	key    = (gchar *)gtk_entry_get_text(GTK_ENTRY(entry_key));
+
+	g_snprintf(reference, 100, "%s %s", module,
+		   main_get_osisref_from_key((const char *)module,
+					     (const char *)key));
 
 	switch (response_id) {
 	case GTK_RESPONSE_CANCEL: /*  cancel button pressed  */
 	case GTK_RESPONSE_NONE:   /*  dialog destroyed  */
 		break;
 	case GTK_RESPONSE_ACCEPT: /*  mark the verse  */
-		xml_set_list_item("markedverses", "markedverse",
+		xml_set_list_item("osisrefmarkedverses", "markedverse",
 				  reference, (note ?
 #ifdef USE_GTKMOZEMBED
 					      note
@@ -281,7 +283,7 @@ void on_mark_verse_response(GtkDialog * dialog,
 		main_display_bible(NULL, settings.currentverse);
 		break;
 	case GTK_RESPONSE_OK:     /*  unmark the verse  */
-		xml_remove_node("markedverses", "markedverse", reference);
+		xml_remove_node("osisrefmarkedverses", "markedverse", reference);
 		marked_cache_fill(settings.MainWindowModule, settings.currentverse);
 		main_display_bible(NULL, settings.currentverse);
 		break;
@@ -453,12 +455,12 @@ static GtkWidget *_create_mark_verse_dialog(gchar * module,
 	gchar *glade_file;
 	GtkWidget *dialog;
 	GtkWidget *sw;	
-	gchar reference[100];
+	gchar osisreference[100];
 	gchar *old_note = NULL;
 
-	g_snprintf(reference, 100, "%s %s",
-		   (gchar *)module,
-		   (gchar *)key);
+	g_snprintf(osisreference,  100, "%s %s", module,
+		   main_get_osisref_from_key((const char *)module,
+					     (const char *)key));
 	note = NULL;
 	
 	glade_file = gui_general_user_file("markverse.glade", TRUE);
@@ -493,7 +495,7 @@ static GtkWidget *_create_mark_verse_dialog(gchar * module,
 				      GTK_POLICY_AUTOMATIC);
 	
 
-	old_note = xml_get_list_from_label("markedverses", "markedverse", reference);
+	old_note = xml_get_list_from_label("osisrefmarkedverses", "markedverse", osisreference);
 	note = g_strdup ((old_note) ? old_note : "");
 	gtk_text_buffer_set_text (textbuffer, (old_note) ? old_note : "", -1);
 	g_signal_connect(textbuffer, "changed",
