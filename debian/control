@@ -1,8 +1,9 @@
 Source: xiphos-svn
-Build-Depends: autotools-dev,
+Build-Depends: automake,
                debhelper (>= 7),
                libsword-dev (>=1.5.11),
                gnome-spell,
+	       gnome-common,
                scrollkeeper,
                libgtkhtml3.14-dev,
                libgtkhtml-editor-dev | gtkhtml3.14,
@@ -11,7 +12,6 @@ Build-Depends: autotools-dev,
                libatspi-dev,
                libgnome2-dev,
                xulrunner-dev | libxul-dev | xulrunner-1.9.1-dev,
-               libmagick++-dev,
                libcurl4-gnutls-dev,
                libicu-dev,
                libclucene-dev 
