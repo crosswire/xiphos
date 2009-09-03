@@ -245,7 +245,10 @@ struct _settings {
 	int mod_mgr_remote_source_index;
 	/* mod mgr destination  */
 	int mod_mgr_destination; /* if = 0 destination is .sword 
-								 else sword directory  */
+				    else sword directory  */
+	/* has user seen the quick intro? */
+	int mod_mgr_intro; /* 0 = hasn't seen explanatoin, 1 = has */
+
 	/* if true use prayerlist */
 	int prayerlist;
 
