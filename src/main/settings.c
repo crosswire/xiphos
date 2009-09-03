@@ -405,6 +405,12 @@ void load_settings_structure(void)
 		xml_add_new_item_to_section("modmgr", "mod_mgr_remote_source_index", "0");
 		settings.mod_mgr_remote_source_index = 0;
 	}	
+	if ((buf = xml_get_value("modmgr", "mod_mgr_intro")))
+		settings.mod_mgr_intro = atoi(buf);
+	else {
+		xml_add_new_item_to_section("modmgr", "mod_mgr_intro", "0");
+		settings.mod_mgr_intro = 0;
+	}	
 	
 	/* end mod mgr stuff */
 	
