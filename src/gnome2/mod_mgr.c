@@ -3181,47 +3181,12 @@ create_module_manager_dialog(gboolean first_run)
  *   void
  */
 
-#define	MOD_INTRO	\
-"<b>Welcome to the Module Manager.</b>\n\
-\n\
-This is Xiphos' mechanism to get new and updated content.\n\
-It appears you have never been here before, so\n\
-please take a moment to look it over.\n\
-(You will see this information box just once.)\n\
-\n\
-Modules come from different <u>repositories</u>.  The <b>Sources</b>\n\
-pane will show you what repositories are currently known.\n\
-\n\
-<b>Configure</b> is for deciding from where modules should come,\n\
-that is, from which repository Xiphos should obtain them,\n\
-as well as where they should be placed on your system.\n\
-Set <i>Install Source</i> and <i>Install Destination</i>.\n\
-\n\
-<b>Install/Update</b> is for selecting and obtaining those modules.\n\
-\n\
-<b>Maintenance</b> is for creation of archives and indexes.\n\
-\n\
-See section 5 of our manual for Module Manager detail, or\n\
-ask for help via Live Chat, or (if no one is responsive there)\n\
-send mail to our users' mailing list.\n"
-
 void gui_open_mod_mgr(void)
 {
 	if (!is_running) {
 		need_update = TRUE;
 		create_module_manager_dialog(FALSE);
 		is_running = TRUE;
-		if (!settings.mod_mgr_intro) {
-			GS_DIALOG *d;
-			d = gui_new_dialog();
-			d->stock_icon = GTK_STOCK_INFO;
-			d->label_top = MOD_INTRO;
-			d->ok = TRUE;
-			(void) gui_alert_dialog(d);
-			g_free(d);
-			settings.mod_mgr_intro = 1;
-			xml_set_value("Xiphos", "modmgr", "mod_mgr_intro", "1");
-		}
 	} else
 		gdk_window_raise(GTK_WIDGET(dialog)->window);
 }
