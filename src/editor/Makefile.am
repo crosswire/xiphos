@@ -2,9 +2,7 @@
 
 INCLUDES = \
     -I$(top_srcdir)/src \
-    $(SWORD_INCLUDES) \
-    $(GNOME_CFLAGS) \
-    $(GTKHTML_CFLAGS) \
+    $(XIPHOS_CFLAGS) \
     $(GECKO_CFLAGS) 
 
 if USE_GTKHTML_BONOBO_EDITOR

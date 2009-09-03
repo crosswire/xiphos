@@ -4,9 +4,7 @@ mozilla_include_subdirs =	\
 	xpcom
 
 INCLUDES =  \
-    $(SWORD_CFLAGS) \
-    $(GNOME_CFLAGS) \
-    $(GTKHTML_CFLAGS) \
+    $(XIPHOS_CFLAGS) \
     $(addprefix -I$(GECKO_INCLUDE_ROOT)/,$(mozilla_include_subdirs))      \
     $(GECKO_COMPONENT_CFLAGS) \
     -DGECKO_HOME=\""$(GECKO_HOME)\""  \
@@ -14,9 +12,10 @@ INCLUDES =  \
     -DPREFIX=\""$(prefix)"\" \
     -DSYSCONFDIR=\""$(sysconfdir)"\" \
     -DDATADIR=\""$(datadir)"\" \
+    -DPACKAGE_LOCALE_DIR="\"$(datadir)/locale\"" \
+    -DPACKAGE_PIXMAPS_DIR="\"$(datadir)/pixmaps/$(PACKAGE)\"" \
     -DLIBDIR=\""$(libdir)"\" \
-    -DSHARE_DIR=\"$(pkgdatadir)\"  \
-    $(UPRINT_CFLAGS)
+    -DSHARE_DIR=\"$(pkgdatadir)\"
 
 bin_PROGRAMS = xiphos
 
@@ -97,13 +96,9 @@ xiphos_LDADD = \
     $(top_builddir)/src/backend/libbackend.a \
     $(top_builddir)/src/editor/libeditor.a\
     $(LIB_GECKO)\
-    $(GNOME_LIBS) \
-    $(GTKHTML_LIBS) \
+    $(XIPHOS_LIBS) \
     $(GECKO_COMPONENT_LIBS) \
-    $(GNOME_SPELL_LIBS)\
-    $(SWORD_LIBS) \
-    $(ImageMagick_LIBS) \
-    $(UPRINT_LIBS)
+    $(GNOME_SPELL_LIBS)
 
 EXTRA_DIST = \
     $(top_builddir)/src/gui/*.h \

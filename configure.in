@@ -1,375 +1,137 @@
-AC_INIT(xiphos, 3.1.1, http://sourceforge.net/tracker/?group_id=5528&atid=105528)
-AC_CONFIG_SRCDIR(src/gnome2/xiphos.c)
+AC_INIT([xiphos],[3.1.1],[http://sourceforge.net/tracker/?group_id=5528&atid=105528])
+AC_PREREQ(2.60)
+
+AC_CONFIG_SRCDIR([src/gnome2/xiphos.c])
 AC_CONFIG_MACRO_DIR([m4])
-AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
+AC_CONFIG_HEADERS([config.h])
 
+AM_INIT_AUTOMAKE([foreign])
+m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES])
+AC_SUBST([ACLOCAL_AMFLAGS], ["-I $ac_macro_dir \$(ACLOCAL_FLAGS)"])
 
-AM_CONFIG_HEADER(config.h)
-
-AC_PROG_MAKE_SET
-
-dnl ***
-dnl Sword libs
-dnl ***
-PKG_CHECK_MODULES(SWORD, sword >= 1.5.11, , echo error: either no sword or sword not recent enough && exit 1)
-PKG_CHECK_MODULES(SWORD_MULTIVERSE, sword > 1.5.11, have_sword_multiverse=yes, have_sword_multiverse=no)
-if test "x$have_sword_multiverse" = xyes; then
-	export SWORD_CFLAGS="$SWORD_CFLAGS -DSWORD_MULTIVERSE"
-fi
-AC_SUBST(SWORD_LIBS)
-AC_SUBST(SWORD_CFLAGS)
-
-dnl ***
-dnl basic environment
-dnl ***
-DIRS="backend gecko editor main gnome2"
-AC_SUBST(DIRS)
-xiphos_exec="xiphos"
-AC_SUBST(xiphos_exec)	
-
-dnl all platforms have a gtk-VIDEOPLATFORM-2.0 lib, but
-dnl it must be at least version 2.12 in order for widget
-dnl tooltips to be set (ha, giggle - cf. F7).
-PKG_CHECK_MODULES(tooltiptext, gtk+-2.0 >= 2.12, have_new_gtk2=yes, have_new_gtk2=no)
-if test "x$have_new_gtk2" = xyes; then
-  AC_DEFINE(HAVE_WIDGET_TOOLTIP_TEXT, 1, [Means gtk_widget_set_tooltip_text works])
-fi
-
-dnl AC_ENABLE_STATIC(yes)
-
-dnl ***
-dnl preliminary check for either flavor of libgtkhtml development support
-dnl ***
-PKG_CHECK_MODULES(GTKHTML_314_presence, libgtkhtml-3.14, have_314=yes, have_314=no)
-PKG_CHECK_MODULES(GTKHTML_38_presence,  libgtkhtml-3.8,  have_38=yes,  have_38=no)
-if test "x$have_314" = xno -a "x$have_38" = xno; then
-	echo error: no gtkhtml3 development library is available.
-	exit 1
-else
-	echo gtkhtml3 development library presence...confirmed
-fi
-
-dnl ***
-dnl gtk+-unix-print
-dnl ***
-UPRINT_LIBS=""
-UPRINT_CFLAGS=""
-PKG_CHECK_MODULES(UPRINT, gtk+-unix-print-2.0, have_gtkuprint=yes,have_gtkuprint=no)
-if test "x$have_gtkuprint" = xyes; then
-  AC_DEFINE(USE_GTKUPRINT, 1, [Define if you want to use gtk-unix-print])
-fi
-AC_SUBST(UPRINT_LIBS)
-AC_SUBST(UPRINT_CFLAGS)
-
-dnl Checks select argument types
-AC_FUNC_SELECT_ARGTYPES
-AC_HEADER_TIME
-
-AC_PROG_INTLTOOL()
-
-AC_ISC_POSIX
 AC_PROG_CC
-AM_PROG_CC_STDC
-AC_HEADER_STDC
-dnl ================================================================
-dnl host_os not declared until after the line below
-dnl ================================================================
-AM_PROG_LIBTOOL
-
-case "$host_os" in
-  mingw*)
-    PKG_CHECK_MODULES(GNOME, glib-2.0 gtk+-2.0 libgnomeui-2.0 libxml-2.0 libglade-2.0 gmodule-no-export-2.0,,echo error: some devel libs are missing: check for glib2 gtk2 libgnomeprintui22 libgnomeui libxml2 libglade2 && exit 1)
-    ;;
-  *)
-    PKG_CHECK_MODULES(GNOME, glib-2.0 gtk+-2.0 libgnomeui-2.0 libxml-2.0 libglade-2.0 gmodule-export-2.0,,echo error: some devel libs are missing: check for glib2 gtk2 libgnomeprintui22 libgnomeui libxml2 libglade2 && exit 1)
-    ;;
-esac
-AC_SUBST(GNOME_LIBS)
-AC_SUBST(GNOME_CFLAGS)
-
+AM_PROG_CC_C_O
 AC_PROG_CXX
-AC_LANG_CPLUSPLUS
 
-dnl ================================================================
-dnl Gettext stuff.
-dnl ================================================================
-GETTEXT_PACKAGE=xiphos
-AC_SUBST(GETTEXT_PACKAGE)
-AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package])
-dnl Languages which your application supports
-	ALL_LINGUAS=""
+AC_CHECK_FUNCS(strcasestr, [AM_CONDITIONAL(HAVE_STRCASESTR, true)], [AM_CONDITIONAL(HAVE_STRCASESTR, false)])
 
+IT_PROG_INTLTOOL([])
+LT_INIT
+
+AC_SUBST([GETTEXT_PACKAGE], [xiphos])
 AM_GLIB_GNU_GETTEXT
+AC_DEFINE([GETTEXT_PACKAGE], [PACKAGE_TARNAME], [Define to the gettext package name.])
 
-dnl ================================================================
-dnl check for GtkHTML
-dnl ================================================================
-GTKHTML_LIBS=""
-GTKHTML_CFLAGS=""
+GNOME_DOC_INIT
 
-PKG_CHECK_MODULES(GTKHTML, libgtkhtml-3.14 >= 3.23, have_gtkhtml=yes,have_gtkhtml=no)
-if test "x$have_gtkhtml" = xyes; then
-	PKG_CHECK_MODULES(EDITOR, gtkhtml-editor, , echo error: no gtkhtml-editor && exit 1)
-	AC_DEFINE(USE_GTKHTML3_14_23, 1, [Define if you want to use GtkHtml-3.14])
-	AC_DEFINE(USE_GTKHTML3_14, 1, [Define if you want to use GtkHtml-3.14])
-	dnl gtkhtml_datadir
-	GTKHTML_DATA_DIR="`$PKG_CONFIG --variable=gtkhtml_datadir libgtkhtml-3.14`"
-	dnl gtkhtml api version
-	GTKHTML_API_VERSION=`$PKG_CONFIG --variable gtkhtml_apiversion libgtkhtml-3.14`
-	AC_SUBST(EDITOR_LIBS)
-	AC_SUBST(EDITOR_CFLAGS)
-	CFLAGS="$CFLAGS $EDITOR_CFLAGS"
-	CXXFLAGS="$CXXFLAGS $EDITOR_CFLAGS"
-	LIBS="$LIBS $EDITOR_LIBS"
-	AM_CONDITIONAL(USE_GTKHTML_BONOBO_EDITOR, false)
-else
-	PKG_CHECK_MODULES(GTKHTML, libgtkhtml-3.14, have_gtkhtml=yes,have_gtkhtml=no)
-	AC_DEFINE(USE_GTKHTML3_14, 1, [Define if you want to use GtkHtml-3.14])
-	dnl gtkhtml_datadir
-	GTKHTML_DATA_DIR="`$PKG_CONFIG --variable=gtkhtml_datadir libgtkhtml-3.14`"
-	dnl gtkhtml api version
-	GTKHTML_API_VERSION=`$PKG_CONFIG --variable gtkhtml_apiversion libgtkhtml-3.14`
-	AM_CONDITIONAL(USE_GTKHTML_BONOBO_EDITOR, true)
-fi	
-AC_DEFINE_UNQUOTED(GTKHTML_DATA_DIR, "${GTKHTML_DATA_DIR}", [GtkHTML data directory])
-AC_DEFINE_UNQUOTED(GTKHTML_API_VERSION, "$GTKHTML_API_VERSION", [The gtkhtml api version])
-AC_SUBST(GTKHTML_LIBS)
-AC_SUBST(GTKHTML_CFLAGS)
-AC_SUBST(GTKHTML_DATA_DIR)
+AC_SUBST(DIRS, [["backend gecko editor main gnome2"]])
+AC_SUBST(xiphos_exec, [[xiphos]])
 
-AC_ARG_ENABLE(autoclear,[  --enable-autoclear    use previewer autoclear [default=no]],autoclear=$enableval,autoclear=no)
-if test "x$autoclear" = xyes; then
-  AC_DEFINE(USE_PREVIEWER_AUTOCLEAR, 1, [Define if wish to enable previewer autoclear])
-fi
+PKG_PROG_PKG_CONFIG([])
 
-dnl AC_ARG_ENABLE(old_navbar,[  --enable-old_navbar    use old_navbar [default=no]],old_navbar=$enableval,old_navbar=no)
-dnl if test "x$old_navbar" = xyes; then
-dnl   AC_DEFINE(OLD_NAVBAR, 1, [Define if wish to use the old style navbar])
-dnl fi
+AS_IF([test "x$with_gecko" != "xno"], [
+	    GECKO_INIT([GECKO])
+	    AC_DEFINE(USE_GTKMOZEMBED, 1, [Define if you want to use gtkmozembed])
+	    AM_CONDITIONAL(USE_GTKMOZEMBED, true)
+	    AS_CASE([$GECKO],
+		[xulrunner], [
+		     PKG_CHECK_MODULES([GECKO_COMPONENT],[${gecko_cv_gecko}-xpcom >= 1.8 $gecko_cv_extra_pkg_dependencies])],
+		[libxul*],   [
+		     PKG_CHECK_MODULES([GECKO_COMPONENT],[$GECKO $gecko_cv_extra_pkg_dependencies])
+		     GECKO_COMPONENT_CFLAGS="$GECKO_COMPONENT_CFLAGS `$PKG_CONFIG --cflags ${gecko_cv_gecko}` `$PKG_CONFIG --define-variable=includetype=unstable --cflags ${gecko_cv_gecko}`"],
+		[*firefox],  [
+		     PKG_CHECK_MODULES([GECKO_COMPONENT],[${gecko_cv_gecko}-xpcom >= 1.5 $gecko_cv_extra_pkg_dependencies])],
+		[AC_MSG_ERROR([$gecko_cv_gecko is not supported])])
+	    AC_SUBST([GECKO])
+	    AC_SUBST(GECKO_HOME)
+	    AC_SUBST(GECKO_COMPONENT_LIBS)
+	    AC_SUBST(GECKO_COMPONENT_CFLAGS)
+	    AC_SUBST([GECKO_FLAVOUR])
+	    AC_SUBST([GECKO_INCLUDE_ROOT])
+	    AC_SUBST([GECKO_PREFIX])
+	    AC_SUBST([GECKO_EXTRA_LIBS])
+	    AC_SUBST([GECKO_GLUE_LIBS])
+	    ],[
+	    AC_MSG_CHECKING([[for GECKO]])
+	    AC_MSG_RESULT([[disabled as requested]])
+	    AM_CONDITIONAL(USE_GTKMOZEMBED, false)
+	    AC_DEFINE(GTKHTML, 1, [Define if wish to use gtkhtml instead of gtkmozembed])])
 
-AC_ARG_ENABLE(treeview_path,[  --enable-treeview_path    use  treeview_path [default=no]],treeview_path=$enableval,treeview_path=no)
-if test "x$treeview_path" = xyes; then
-  AC_DEFINE(USE_TREEVIEW_PATH, 1, [Define if wish to use the treeview paths])
-fi
-
-AC_ARG_ENABLE(gtkhtml,[  --enable-gtkhtml    use gtkhtml instead of gtkmozembed [default=no]],gtkhtml=$enableval,gtkhtml=no)
-if test "x$gtkhtml" = xyes; then
-  AC_DEFINE(GTKHTML, 1, [Define if wish to use gtkhtml instead of gtkmozembed])
-fi
-
-dnl ====================================
-dnl cygwin
-dnl  ====================================
-AC_ARG_ENABLE(cygwin,[  --enable-cygwin    use cygwin [default=no]],cygwin=$enableval,cygwin=no)
-if test "x$cygwin" = xno; then
-
-  if test "x$gtkhtml" = xno; then
-	dnl  *****
-	dnl  Gecko
-	dnl  *****
-	
-	GECKO_INIT([GECKO])
-
-	AC_SUBST([GECKO])
-	AC_SUBST([GECKO_FLAVOUR])
-	AC_SUBST([GECKO_INCLUDE_ROOT])
-	AC_SUBST([GECKO_HOME])
-	AC_SUBST([GECKO_PREFIX])
-	AC_SUBST([GECKO_EXTRA_LIBS])
-	AC_SUBST([GECKO_GLUE_LIBS])
-
-	case "$GECKO" in
-	 libxul*) gecko_min_version=1.8 ;;
-	 xulrunner) gecko_min_version=1.8 ;;
-	 *firefox) gecko_min_version=1.5 ;;
-	 *) AC_MSG_ERROR([$gecko_cv_gecko is not supported])
-	esac
-	  
-	if test "$GECKO" = "firefox"; then
-	  gecko_cv_gecko=firefox-xpcom
-	elif test "$GECKO" = "xulrunner"; then
-	  gecko_cv_gecko=xulrunner-xpcom
-	fi
-
-	PKG_CHECK_MODULES([GECKO_COMPONENT],[${gecko_cv_gecko} >= $gecko_min_version $gecko_cv_extra_pkg_dependencies])
-
-	AC_DEFINE(USE_GTKMOZEMBED, 1, [Define if you want to use gtkmozembed])
-	AM_CONDITIONAL(USE_GTKMOZEMBED, true)
-	gecko=yes  
-  else
-	GECKO_COMPONENT_LIBS=""
-	GECKO_COMPONENT_CFLAGS="" 
-	GECKO_HOME=""
-	AM_CONDITIONAL(USE_GTKMOZEMBED, false)
-	gecko=no 
-  fi
-
-dnl ==================================================
-dnl Gnome-doc-utils
-dnl under mingw, if GNOME_DOC_INIT is not called we get
-dnl  error: conditional "ENABLE_SK" was never defined.
-dnl ==================================================
-      GNOME_DOC_INIT
-	  
-  case "$host_os" in
-    mingw*)
-      ;;
-    *)
-      dnl ====================================
-      dnl = Begin tests for scrollkeeper
-      dnl ====================================
-      AC_PATH_PROG(SCROLLKEEPER_CONFIG, scrollkeeper-config,no)
-      if test x$SCROLLKEEPER_CONFIG = xno; then
-        AC_MSG_ERROR(Couldn't find scrollkeeper-config. Please install the scrollkeeper package: http://scrollkeeper.sourceforge.net)
-      fi
-      dnl ====================================
-      dnl = End tests for scrollkeeper
-      dnl ====================================Y
-      SCROLLKEEPER_BUILD_REQUIRED=0.3.5
-      AC_SUBST(SCROLLKEEPER_BUILD_REQUIRED)
-      ;;
-  esac
-else
-  dnl cygwin-specific
-  GECKO_COMPONENT_LIBS=""
-  GECKO_COMPONENT_CFLAGS=""
-  GECKO_HOME=""
-  AM_CONDITIONAL(USE_GTKMOZEMBED, false)
-  gecko=no 
-
-  enable_scrollkeeper=no
-  AM_CONDITIONAL(ENABLE_SK,  test "x$enable_scrollkeeper" = "xyes")
-fi
-
-AC_CHECK_FUNCS(strcasestr, [have_strcasestr="yes"])
-AM_CONDITIONAL(HAVE_STRCASESTR, test x$have_strcasestr = xyes)
-
-AC_SUBST(GECKO_HOME)
-AC_SUBST(GECKO_COMPONENT_LIBS)
-AC_SUBST(GECKO_COMPONENT_CFLAGS)
 GECKO_DEFINES
+
 AM_CONDITIONAL([WITH_GECKO_ENGINE], [test "$with_engine" = "mozilla"])
 AM_CONDITIONAL([HAVE_XULRUNNER],[test "$gecko_cv_gecko" = "xulrunner"])
 AM_CONDITIONAL([WITH_XULRUNNER_ENGINE],[test "$with_engine" = "xulrunner"])
 
-AC_ARG_ENABLE(debug,[  --enable-debug          build debug library [default=no]],debug=$enableval,debug=no)
-if test "x$GXX" = xyes; then
-	CXXFLAGS="$CXXFLAGS -ftemplate-depth-25"
-fi
+REQUIRED_LIBS="glib-2.0 gtk+-2.0 libgnomeui-2.0 libxml-2.0 libglade-2.0 libgtkhtml-3.14 sword"
 
-AM_MAINTAINER_MODE
-if test "x$USE_MAINTAINER_MODE" = "xyes"; then
-  AC_DEFINE(MAINTAINER_MODE, 1, [Define to 1 if you wish to enable 'maintainer-only' behavior.])
-  disable_werror=no
-  enable_debug=yes
-  debug=yes
-dnl   A_CPPFLAGS="-DG_DISABLE_DEPRECATED -DGDK_DISABLE_DEPRECATED -DGDK_PIXBUF_DISABLE_DEPRECATED -DGCONF_DISABLE_DEPRECATED -DGNOME_VFS_DISABLE_DEPRECATED -DBONOBO_UI_DISABLE_DEPRECATED -DBONOBO_DISABLE_DEPRECATED -DLIBGLADE_DISABLE_DEPRECATED -DPANGO_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED -DGNOME_DISABLE_DEPRECATED"
-else
-  disable_werror=yes
-  A_CPPFLAGS=
-fi
-AC_SUBST(A_CPPFLAGS)
-if test "x$GXX" = xyes; then
-if test x$debug = xyes; then
-  AC_DEFINE(DEBUG, 1, [Define if you want to see debug messages])
-  if test x$ac_cv_prog_cc_g = xyes; then
-    CFLAGS="$CFLAGS -g3 -O0 "
-  else
-    CFLAGS="$CFLAGS -O0 "
-  fi
-  if test x$ac_cv_prog_cxx_g = xyes; then
-    CXXFLAGS="$CXXFLAGS -g3 -O0"
-  else
-    CXXFLAGS="$CXXFLAGS -O0"
-  fi
-  CFLAGS="$CFLAGS "
-  CXXFLAGS="$CXXFLAGS "
-fi
-fi
+AS_CASE([$host_os], [mingw*],
+		    [REQUIRED_LIBS="$REQUIRED_LIBS gmodule-no-export-2.0"],
+		    [REQUIRED_LIBS="$REQUIRED_LIBS gmodule-export-2.0"])
 
-AC_ARG_ENABLE(delint,[  --enable-delint         use -Wall -Werror [default=no]],delint=$enableval,delint=no)
-if test "x$delint" = xyes; then
-	CFLAGS="$CFLAGS -Wall -Werror"
-	CXXFLAGS="$CXXFLAGS -Wall -Werror"
-fi
+AC_MSG_CHECKING([for widget tooltips])
+PKG_CHECK_EXISTS(gtk+-2.0 >= 2.12,
+		[AC_DEFINE(HAVE_WIDGET_TOOLTIP_TEXT, 1, [Means gtk_widget_set_tooltip_text works])
+			AC_MSG_RESULT([yes])],
+		[AC_MSG_RESULT([no])])
 
-ORBIT_IDL="`$PKG_CONFIG --variable=orbit_idl ORBit-2.0`"
-AC_SUBST(ORBIT_IDL)
+AC_MSG_CHECKING([for gtk+-unix-print])
+PKG_CHECK_EXISTS(gtk+-unix-print-2.0,
+		[AC_DEFINE(USE_GTKUPRINT, 1, [Define if you want to use gtk-unix-print])
+			[REQUIRED_LIBS="$REQUIRED_LIBS gtk+-unix-print-2.0"]
+			AC_MSG_RESULT([yes])],
+		[AC_MSG_RESULT([no])])
 
-BONOBO_IDL_INCLUDES="-I`$PKG_CONFIG --variable=idldir libbonobo-2.0` -I`$PKG_CONFIG --variable=idldir bonobo-activation-2.0`"
-AC_SUBST(BONOBO_IDL_INCLUDES)
+AC_MSG_CHECKING([for gtkhtml-editor])
+PKG_CHECK_EXISTS(libgtkhtml-3.14 >= 3.23,
+		[AC_DEFINE(USE_GTKUPRINT, 1, [Define if you want to use gtk-unix-print])
+			REQUIRED_LIBS="$REQUIRED_LIBS gtkhtml-editor"
+			AC_DEFINE(USE_GTKHTML3_14_23, 1, [Define if you want to use GtkHtml-3.14])			   
+			AM_CONDITIONAL(USE_GTKHTML_BONOBO_EDITOR, false)
+			AC_MSG_RESULT([yes])],
+		[AC_SUBST(ORBIT_IDL, [`$PKG_CONFIG --variable=orbit_idl ORBit-2.0`])
+			AC_SUBST(BONOBO_IDL_INCLUDES, [-I`$PKG_CONFIG --variable=idldir libbonobo-2.0` -I`$PKG_CONFIG --variable=idldir bonobo-activation-2.0`])
+			AM_CONDITIONAL(USE_GTKHTML_BONOBO_EDITOR, true)
+			AC_MSG_RESULT([no, using bonobo])])
 
+PKG_CHECK_MODULES(XIPHOS, "$REQUIRED_LIBS")
 
-dnl Set PACKAGE_LOCALE_DIR in config.h.
-if test "x${prefix}" = "xNONE"; then
-  AC_DEFINE_UNQUOTED(PACKAGE_LOCALE_DIR, "${ac_default_prefix}/${DATADIRNAME}/locale",[package LOCALE directory])
-else
-  AC_DEFINE_UNQUOTED(PACKAGE_LOCALE_DIR, "${prefix}/${DATADIRNAME}/locale",[package LOCALE directory])
-fi
+AC_MSG_CHECKING([for SWORD multiverse])
+PKG_CHECK_EXISTS(sword > 1.5.11,
+		[AC_DEFINE(SWORD_MULTIVERSE, 1, [Define if sword has multiverse support])
+			AC_MSG_RESULT([yes])],
+		[AC_MSG_RESULT([no])])
 
+AC_DEFINE(USE_GTKHTML3_14, 1, [Define if you want to use GtkHtml-3.14])
+AC_DEFINE_UNQUOTED(GTKHTML_DATA_DIR, ["$PKG_CONFIG --variable=gtkhtml_datadir libgtkhtml-3.14"], [GtkHTML data directory])
+AC_DEFINE_UNQUOTED(GTKHTML_API_VERSION, ["$PKG_CONFIG --variable gtkhtml_apiversion libgtkhtml-3.14"], [The gtkhtml api version])
+AC_SUBST(GTKHTML_DATA_DIR)
 
-dnl Set PACKAGE SOURCE DIR in config.h.
-packagesrcdir=`cd $srcdir && pwd`
+AC_SUBST(XIPHOS_LIBS)
+AC_SUBST(XIPHOS_CFLAGS)
 
-dnl Set PACKAGE PREFIX
-if test "x${prefix}" = "xNONE"; then
-  packageprefix=${ac_default_prefix}
-else
-  packageprefix=${prefix}
-fi
+AC_ARG_ENABLE([autoclear],
+	AS_HELP_STRING([--enable-autoclear], [Enable previewer autoclear default=no]))
+AS_IF([test "x$enable_autoclear" != "xno"],
+  AC_DEFINE(USE_PREVIEWER_AUTOCLEAR, 1, [Define if wish to enable previewer autoclear]))
 
-INSTALL_PREFIX="${packageprefix}/"
-AC_SUBST(INSTALL_PREFIX)
-AC_DEFINE_UNQUOTED(INSTALL_PREFIX, "${packageprefix}/",[install prefix])
+AC_ARG_ENABLE([treeview_path],
+	AS_HELP_STRING([--enable-treeview_path], [Use treeview_path default=no]))
+AS_IF([test "x$enable_treeview_path" != "xno"], [
+  AC_DEFINE(USE_TREEVIEW_PATH, 1, [Define if wish to use the treeview paths])])
 
+AM_MAINTAINER_MODE([enable])
+GNOME_COMPILE_WARNINGS
 
-dnl Set PACKAGE DATA & DOC DIR
-packagedatadir=share/${PACKAGE}
-packagedocdir=share/doc/${PACKAGE}
+AC_MSG_CHECKING([for debug build])
+AC_ARG_ENABLE([debug],
+	AS_HELP_STRING([--enable-debug], [turn on debugging]))
+AS_IF([test "x$enable_debug" = "xyes"], [
+	    AC_DEFINE(DEBUG, 1, [Enable additional debugging at the expense of performance and size])
+			AC_MSG_RESULT([yes])],
+	    [AC_MSG_RESULT([no])])
 
-dnl Set PACKAGE DIRs in config.h.
-packagepixmapsdir=share/pixmaps/${PACKAGE}
-packagehelpdir=share/gnome/help/${PACKAGE}
-packagemenudir=share/applications
-
-dnl Subst PACKAGE_DATA_DIR.
-NO_PREFIX_PACKAGE_DATA_DIR="${packagedatadir}"
-AC_SUBST(NO_PREFIX_PACKAGE_DATA_DIR)
-PACKAGE_DATA_DIR="${packageprefix}/${packagedatadir}"
-AC_SUBST(PACKAGE_DATA_DIR)
-
-dnl Subst PACKAGE_DOC_DIR.
-NO_PREFIX_PACKAGE_DOC_DIR="${packagedocdir}"
-AC_SUBST(NO_PREFIX_PACKAGE_DOC_DIR)
-PACKAGE_DOC_DIR="${packageprefix}/${packagedocdir}"
-AC_SUBST(PACKAGE_DOC_DIR)
-
-dnl Subst PACKAGE_PIXMAPS_DIR.
-NO_PREFIX_PACKAGE_PIXMAPS_DIR="${packagepixmapsdir}"
-AC_SUBST(NO_PREFIX_PACKAGE_PIXMAPS_DIR)
-PACKAGE_PIXMAPS_DIR="${packageprefix}/${packagepixmapsdir}"
-AC_SUBST(PACKAGE_PIXMAPS_DIR)
-
-dnl Subst PACKAGE_HELP_DIR.
-NO_PREFIX_PACKAGE_HELP_DIR="${packagehelpdir}"
-AC_SUBST(NO_PREFIX_PACKAGE_HELP_DIR)
-PACKAGE_HELP_DIR="${packageprefix}/${packagehelpdir}"
-AC_SUBST(PACKAGE_HELP_DIR)
-
-dnl Subst PACKAGE_MENU_DIR.
-NO_PREFIX_PACKAGE_MENU_DIR="${packagemenudir}"
-AC_SUBST(NO_PREFIX_PACKAGE_MENU_DIR)
-PACKAGE_MENU_DIR="${packageprefix}/${packagemenudir}"
-AC_SUBST(PACKAGE_MENU_DIR)
-
-AC_DEFINE_UNQUOTED(PACKAGE_DATA_DIR, "${packageprefix}/${packagedatadir}",[package data directory])
-AC_DEFINE_UNQUOTED(PACKAGE_DOC_DIR, "${packageprefix}/${packagedocdir}",[package doc directory])
-AC_DEFINE_UNQUOTED(PACKAGE_PIXMAPS_DIR, "${packageprefix}/${packagepixmapsdir}",[package pixmap directory])
-AC_DEFINE_UNQUOTED(PACKAGE_HELP_DIR, "${packageprefix}/${packagehelpdir}",[package help directory])
-AC_DEFINE_UNQUOTED(PACKAGE_MENU_DIR, "${packageprefix}/${packagemenudir}",[package menu directory])
-AC_DEFINE_UNQUOTED(PACKAGE_SOURCE_DIR, "${packagesrcdir}",[package source directory])
-
-AC_OUTPUT([ 
+AC_CONFIG_FILES([
 Makefile
 po/Makefile.in
 doc/Makefile
@@ -384,50 +146,4 @@ ui/Makefile
 xiphos.desktop.in
 xiphos.spec
 ])
-
-echo
-echo "Summary of Xiphos configuration:"
-if test "x$gecko" = xyes; then
-echo "mozilla:                  enabled"
-else
-echo "mozilla:                  disabled"
-fi
-echo "install directory:      ${prefix}/bin"
-if test "x$have_gtkuprint" = xyes; then
-  echo "gtk-unix-print:          enabled"
-else
-  echo "gtk-unix-print:       not enabled"
-
-fi
-if test "x$debug" = xyes; then
-  echo "debug:                    enabled"
-  if test "x$have_gtkhtml" = xyes; then
-    echo "GTKHTML_CFLAGS        $GTKHTML_CFLAGS"
-  fi
-
-  dnl if test "x$no_gecko" = xyes; then
-    echo "GECKO_COMPONENT_CFLAGS  $GECKO_COMPONENT_CFLAGS"
-  dnl fi
-
-  if test "x$ac_static_sword" = xYES; then
-    echo "Static link to Sword:           enabled"
-  else  
-    echo "Dynamic link to Sword:          enabled"
-  fi
-  
-  if test "x$exporter" = xyes; then
-    echo "Passage exporter:           enabled"
-  else  
-    echo "Passage exporter:          disabled"
-  fi
-  
-  echo "SWORD_LIBS:   $SWORD_LIBS"
-  echo "SWORD_CFLAGS: $SWORD_CFLAGS"
-  echo "CFLAGS: $CFLAGS"
-  echo "CPPFLAGS: $CPPFLAGS"
-  echo "CXXFLAGS: $CXXFLAGS"
-  echo "GNOME_CFLAGS: $GNOME_CFLAGS"
-  echo "GTKHTML_DATA_DIR        $GTKHTML_DATA_DIR"
-  echo "GTKHTML_API_VERSION     $GTKHTML_API_VERSION"
-  echo "USE_MAINTAINER_MODE                    $USE_MAINTAINER_MODE"
-fi
+AC_OUTPUT
