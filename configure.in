@@ -123,13 +123,13 @@ AC_SUBST(XIPHOS_LIBS)
 AC_SUBST(XIPHOS_CFLAGS)
 
 AC_ARG_ENABLE([autoclear],
-	AS_HELP_STRING([--disable-autoclear], [Disable previewer autoclear]))
-AS_IF([test "x$enable_autoclear" != "xno"],
+	AS_HELP_STRING([--enable-autoclear], [Enable previewer autoclear EXPERIMENTAL]))
+AS_IF([test "x$enable_autoclear" = "xyes"],
   AC_DEFINE(USE_PREVIEWER_AUTOCLEAR, 1, [Define if wish to enable previewer autoclear]))
 
 AC_ARG_ENABLE([treeview_path],
-	AS_HELP_STRING([--disable-treeview_path], [Disable treeview path]))
-AS_IF([test "x$enable_treeview_path" != "xno"], [
+	AS_HELP_STRING([--enable-treeview_path], [Enable treeview path EXPERIMENTAL]))
+AS_IF([test "x$enable_treeview_path" = "xyes"], [
   AC_DEFINE(USE_TREEVIEW_PATH, 1, [Define if wish to use the treeview paths])])
 
 AM_MAINTAINER_MODE([enable])
