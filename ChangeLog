@@ -2,6 +2,7 @@
 
 	* add intro dialog box to first-time mod.mgr usage.
 	* re-work the entire locale-setting mechanism.
+	* force CrossWire as default remote repo after load-standard.
 
 2009-09-01  karl <charcoal@users.sf.net>
 

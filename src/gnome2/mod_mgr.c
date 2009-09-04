@@ -150,6 +150,7 @@ static gboolean is_running = FALSE;
 GladeXML *gxml;
 
 static void load_module_tree(GtkTreeView * treeview, gboolean install);
+static void set_controls_to_last_use(void);
 
 #ifdef HAVE_WIDGET_TOOLTIP_TEXT
 static
@@ -2199,8 +2200,13 @@ on_dialog_destroy(GtkObject * object, gpointer user_data)
 	 * if InstallMgr.conf has just been init'd, then we
 	 * want to add the rest of the standard repositories.
 	 */
-	if (g_list_length(tmp = mod_mgr_list_remote_sources()) <= 1)
+	if (g_list_length(tmp = mod_mgr_list_remote_sources()) <= 1) {
 		mod_mgr_init_config_extras();
+		load_source_treeviews();
+		settings.mod_mgr_remote_source_index = 1;
+		xml_set_value("Xiphos", "modmgr", "mod_mgr_remote_source_index", "1");
+		set_controls_to_last_use();
+	}
 	g_list_free(tmp);
 
 	working = FALSE;
@@ -2283,10 +2289,14 @@ on_delete_index_clicked(GtkButton * button, gpointer  user_data)
 void
 on_load_sources_clicked(GtkButton * button, gpointer  user_data)
 {
-	gui_generic_warning((mod_mgr_init_config_extras() == 0)
-			    ? _("Standard remote sources have been loaded.")
-			    : _("Could not load standard sources from CrossWire."));
-	load_source_treeviews();
+	if (mod_mgr_init_config_extras() == 0) {
+		gui_generic_warning(_("Standard remote sources have been loaded."));
+		load_source_treeviews();
+		settings.mod_mgr_remote_source_index = 1;
+		xml_set_value("Xiphos", "modmgr", "mod_mgr_remote_source_index", "1");
+		set_controls_to_last_use();
+	} else
+		gui_generic_warning(_("Could not load standard sources from CrossWire."));
 }
 
 void
