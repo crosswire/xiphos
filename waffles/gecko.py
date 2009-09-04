@@ -84,15 +84,18 @@ class Gecko(object):
         #        errmsg='fail flag is needed for libxul 1.9')
         #self.env['GECKO_CCFLAGS'] = '-fshort-wchar'
 
-        # try first the latest xulrunner version
         success = False
-        success = self.try_libxul19()
 
-        if not success:
-            success = self.try_xulrunner18()
-
-        if not success:
+        # try xulwin
+        if self.env['IS_WIN32']:
             success = self.try_libxulwin()
+        
+        else:
+            # try first the latest xulrunner version
+            success = self.try_libxul19()
+
+            if not success:
+                success = self.try_xulrunner18()
 
         return success
 
@@ -181,16 +184,41 @@ class Gecko(object):
         return ret
     
     def try_libxulwin(self):
-        cfg = self.conf
-        ret = False
-        gecko = 'libxul'
-        lib = 'GTKMOZEMBED'
+        v = self.env
+        df = self.conf.define
 
-        check_pkg(cfg, gecko, var=lib)
-        
-        if self.env['HAVE_GTKMOZEMBED']:
-            self.check_version(gecko)
-            ret = True
+        # FIXME hardcoded values
+        #if v['IS_CROSS_WIN32']:
+        d = v['MOZILLA_DISTDIR']
+        df('HAVE_GTKMOZEMBED', 1)
+        df('USE_GTKMOZEMBED', 1)
+        df('HAVE_GECKO_1_7', 1)
+        df('HAVE_GECKO_1_8', 1)
+        df('HAVE_GECKO_1_8_1', 1)
+        df('HAVE_GECKO_1_9', 1)
+        v['ALL_LIBS'].append('GTKMOZEMBED')
+        v['CPPPATH_GTKMOZEMBED'] = ['%s/sdk/include' % d,
+                '%s/include' % d,
+                '%s/include/widget' % d,
+                '%s/include/xpcom' % d,
+                '%s/include/dom' % d,
+                '%s/include/content' % d,
+                '%s/include/layout' % d,
+                '%s/include/gfx' % d]
+        v['LIBPATH_GTKMOZEMBED'] = ['%s/sdk/lib' % d]
+        v['LIB_GTKMOZEMBED'] = ['xpcomglue_s', 'xpcom', 'xul', 'nspr4']
+        ret = True
+
+        #else:
+            #ret = False
+            #gecko = 'libxul'
+            #lib = 'GTKMOZEMBED'
+
+            #check_pkg(cfg, gecko, var=lib)
+            
+            #if self.env['HAVE_GTKMOZEMBED']:
+                #self.check_version(gecko)
+                #ret = True
 
         return ret
         

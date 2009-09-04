@@ -1,13 +1,6 @@
 #! /usr/bin/env python
 # encoding: utf-8
 
-# defines not needed anymore
-
-#  SUSE_10_2
-#  USE_GTKHTML38_3_13 
-#  USE_GTKHTML38 
-
-
 import sys
 if sys.version_info < (2,3):
     raise RuntimeError("Python 2.3 or newer is required")
@@ -36,6 +29,9 @@ PACKAGE='xiphos'
 # these variables are mandatory ('/' are converted automatically)
 srcdir = '.'
 blddir = 'build'
+
+# dir where waf will search custom (additional) files
+_tooldir = './waffles/'
 
 _prefix = '/usr/local'
 
@@ -80,15 +76,12 @@ def set_options(opt):
 
     # options provided by the modules
     #opt.tool_options('g++ gcc gnome intltool glib2')
-    opt.tool_options('g++ gcc gnu_dirs')
+    opt.tool_options('compiler_cxx compiler_cc g++ gcc gnu_dirs')
 
     # unused options
     for name in _unused_options:
         option_name = '--' + name
         opt.parser.remove_option(option_name)
-
-    #opt.add_option('--enable-paratab', action='store_true', default=True,
-            #dest='paratab', help='Use paratab [Default: True]')
 
     opt.add_option('--enable-autoclear', action='store_true', default=False,
             dest='autoclear', help='Use previewer autoclear [Default: disabled]')
@@ -106,7 +99,6 @@ def set_options(opt):
             help='Disable console window in win32 [Defauld: enabled]',
             dest='no_console')
 
-    # replaces '--enable-maintainer-mode', '--enable-debug'
     opt.add_option('-d', '--debug-level',
 		action = 'store',
 		default = ccroot.DEBUG_LEVELS.ULTRADEBUG,
@@ -117,6 +109,29 @@ def set_options(opt):
     opt.add_option('--enable-delint', action='store_true', default=False,
             dest='delint',
             help='Use -Wall -Werror [Default: disabled]')
+
+
+    ### cross compilation from Linux/Unix for win32
+
+    opt.add_option('--target-platform-win32', action='store_true', default=False,
+            dest='cross_win32',
+            help='Cross-compile for win32 [Default: disabled]')
+
+    opt.add_option('--pkgconf-libdir',
+		action = 'store',
+		help = "Specify dir with *.pc files for cross-compilation",
+		dest = 'pkg_conf_libdir')
+
+    opt.add_option('--pkgconf-prefix',
+		action = 'store',
+		help = "Specify prefix with folders for headers and libraries for cross-compilation",
+		dest = 'pkg_conf_prefix')
+
+    opt.add_option('--mozilla-distdir',
+		action = 'store',
+		help = "Folder 'dist' in unpacked mozilla devel tarball. Mandatory for win32 compilation",
+		dest = 'mozilla_distdir')
+
 
     group = opt.add_option_group ('Localization and documentation', '')
     group.add_option('--helpdir',
@@ -131,14 +146,22 @@ def configure(conf):
     env = conf.env
     import Utils
     platform = Utils.detect_platform()
-    env['IS_LINUX'] = platform == 'linux'
     env['IS_WIN32'] = platform == 'win32'
+    env['IS_LINUX'] = platform == 'linux'
 
-    if env['IS_LINUX']:
-        Utils.pprint('CYAN', "Linux detected")
+    env['IS_CROSS_WIN32'] = Options.options.cross_win32
+
+    # cross-compilation for Windows
+    # behave mostly like on windows platform
+    if env['IS_CROSS_WIN32']:
+        env['IS_WIN32'] = True
+        env['IS_LINUX'] = False
+        Utils.pprint('CYAN', "Cross-compilation")
 
     if env['IS_WIN32']:
         Utils.pprint('CYAN', "Windows detected")
+    elif env['IS_LINUX']:
+        Utils.pprint('CYAN', "Linux detected")
 
     if not (env['IS_LINUX'] or env['IS_WIN32']):
         Utils.pprint('RED', "Unknown or unsupported platform")
@@ -149,7 +172,14 @@ def configure(conf):
         env['PREFIX'] = escpath(os.path.abspath('win32/binaries/Xiphos'))
     ##
     
-    conf.check_tool('g++ gcc gnu_dirs misc')
+    conf.check_tool('compiler_cxx compiler_cc')
+    # cross compiler
+    if env['IS_CROSS_WIN32']:
+        conf.check_tool('cross_linux_win32', tooldir=_tooldir)
+    #else:
+        #conf.check_tool('g++ gcc')
+
+    conf.check_tool('gnu_dirs misc')
     conf.check_tool('intltool') # check for locale.h included
 
     # DATADIR is defined by intltool in config.h - conflict in win32 (mingw)
@@ -157,7 +187,8 @@ def configure(conf):
 
     if env['IS_WIN32']:
         # tool to link icon with executable
-        conf.check_tool('winres')
+        # use tool modified for cross-compilation support
+        conf.check_tool('winres', tooldir=_tooldir)
         # the following line does not work because of a problem with waf
         # conf.check_tool('intltool')
         #env['POCOM'] = conf.find_program('msgfmt')
@@ -198,6 +229,18 @@ def configure(conf):
     env = conf.env
 
 
+    if env['IS_CROSS_WIN32']:
+        # allows to use linux pkg-config for cross-compilation
+        os.environ['PKG_CONFIG_LIBDIR'] = opt.pkg_conf_libdir
+        env['PKG_CONFIG_PREFIX'] = opt.pkg_conf_prefix
+
+    # mozilla distdir mandatory for win32 for using libxul
+    if env['IS_WIN32']:
+        if opt.mozilla_distdir:
+            env['MOZILLA_DISTDIR'] = opt.mozilla_distdir
+        else:
+            env['MOZILLA_DISTDIR'] = '%s/../..' % env['PKG_CONFIG_LIBDIR']
+
     # appropriate cflags
     env.append_value('CXXFLAGS', env['CXXFLAGS_%s' % opt.debug_level.upper()])
     env.append_value('CCFLAGS', env['CCFLAGS_%s' % opt.debug_level.upper()])
@@ -209,10 +252,6 @@ def configure(conf):
         env.append_value('CXXFLAGS', env['CXXFLAGS_DELINT'])
         env.append_value('CCFLAGS', env['CCFLAGS_DELINT'])
 
-    if opt.debug_level == 'ultradebug' or opt.debug_level == 'debug':
-        dfn('MAINTAINER_MODE', 1)
-    #if opt.paratab:
-        #dfn('USE_PARALLEL_TAB', 1)
     if opt.autoclear:
         dfn('USE_PREVIEWER_AUTOCLEAR', 1)
     if opt.old_navbar:
@@ -229,7 +268,10 @@ def configure(conf):
 
 
     # strip xiphos binary
-    env['STRIP'] = conf.find_program('strip', mandatory=True)
+    if env['IS_CROSS_WIN32']:
+        env['STRIP'] = conf.find_program('i686-mingw32-strip', mandatory=True)
+    else:
+        env['STRIP'] = conf.find_program('strip', mandatory=True)
 
 
 
@@ -283,11 +325,17 @@ def configure(conf):
     conf.check_cfg(atleast_pkgconfig_version='0.9.0')
 
 
+
     # GTK+
     #check_pkg(conf, 'gtk+-x11-2.0', '2.0.0', var='LIBGTK_X11_2_0')
     #if not env['HAVE_LIBGTK_X11_2_0']:
     #    check_pkg(conf, 'gtk+-x11-2.0', '2.0.0', True, var='LIBGTK_WIN32_2_0')
     check_pkg(conf, 'gtk+-2.0', '2.0', True, var='GTK')
+
+
+
+    #sys.exit()
+
 
     # tooltip function needs gtk+ >= 2.12 HAVE_WIDGET_TOOLTIP_TEXT
     #check_pkg(conf, 'gtk+-2.0', '2.12', var='WIDGET_TOOLTIP_TEXT')
