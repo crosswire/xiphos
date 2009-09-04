@@ -209,7 +209,7 @@ char *BackEnd::set_sword_locale(const char *sys_locale)
 				sys_locale = buf;
 			}
 		} else if(!strncmp(sys_locale,"fa",2)) {
-				sys_locale = "fa-utf8";
+				sys_locale = "fa";
 		} else {
 			if(strlen(sys_locale) > 2 ) {
 				buf[0] = sys_locale[0];
