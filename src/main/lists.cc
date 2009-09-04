@@ -93,7 +93,6 @@ GList *get_list(gint type)
 void main_init_lists(void)
 {	
 	gboolean start_backend = FALSE;
-	char *sword_locale = FALSE;
 	mod_lists = &mods;
 	
 	/* set glist to null */
@@ -120,17 +119,14 @@ void main_init_lists(void)
 	settings.havepercomm = FALSE;
 	settings.haveprayerlist = FALSE;
 	
-	if(backend) {
+	if (backend) {
 		mods.options = backend->get_module_options();
 	} else {
-		const char* lang = g_getenv("LANG");
 		start_backend = TRUE;
 		backend = new BackEnd();
-		sword_locale = backend->set_sword_locale(lang);
 	}
 	backend->init_lists(mod_lists);
-	if(start_backend) {
-		free((char*)sword_locale);
+	if (start_backend) {
 		delete backend;
 		backend = NULL;
 	}

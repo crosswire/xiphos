@@ -3182,28 +3182,7 @@ create_module_manager_dialog(gboolean first_run)
  */
 
 #define	MOD_INTRO	\
-"<b>Welcome to the Module Manager.</b>\n\
-\n\
-This is Xiphos' mechanism to get new and updated content.\n\
-It appears you have never been here before, so\n\
-please take a moment to look it over.\n\
-(You will see this information box just once.)\n\
-\n\
-Modules come from different <u>repositories</u>.  The <b>Sources</b>\n\
-pane will show you what repositories are currently known.\n\
-\n\
-<b>Configure</b> is for deciding from where modules should come,\n\
-that is, from which repository Xiphos should obtain them,\n\
-as well as where they should be placed on your system.\n\
-Set <i>Install Source</i> and <i>Install Destination</i>.\n\
-\n\
-<b>Install/Update</b> is for selecting and obtaining those modules.\n\
-\n\
-<b>Maintenance</b> is for creation of archives and indexes.\n\
-\n\
-See section 5 of our manual for Module Manager detail, or\n\
-ask for help via Live Chat, or (if no one is responsive there)\n\
-send mail to our users' mailing list.\n"
+"<b>Welcome to the Module Manager.</b>\n\nThis is Xiphos' mechanism to get new and updated content.\nIt appears you have never been here before, so please take a moment to look it over.\n(You will see this information box just once.)\n\nModules come from different <u>repositories</u>.  The <b>Sources</b> pane will show you what repositories are currently known.\n\n<b>Configure</b> is for deciding from where modules should come, that is, from which repository Xiphos should obtain them, as well as where they should be placed on your system.\nSet <i>Install Source</i> and <i>Install Destination</i>, then click <i>Refresh</i>.\n\n<b>Install/Update</b> is for selecting and obtaining modules after configuring source and destination.\n\n<b>Maintenance</b> is for archive and index creation.\n\nSee section 5 of our manual for Module Manager detail, or ask for help via Live Chat, or (if no one is responsive in chat) send mail to our users' mailing list.\n"
 
 void gui_open_mod_mgr(void)
 {
