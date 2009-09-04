@@ -18,7 +18,7 @@
 
   <!ENTITY appversion "3.1.1">
   <!ENTITY manrevision "3.1.1">
-  <!ENTITY date "2009-05-11">
+  <!ENTITY date "11 May 2009">
   <!ENTITY app "<application>Xiphos</application>">
   <!ENTITY appname "Xiphos">
   <!ENTITY xiphos "the Xiphos Team">
@@ -54,7 +54,7 @@ Template last modified Apr 11, 2002
 <!-- appropriate code -->
   <articleinfo>
     <title>&app; Manual</title>
-    <abstract>
+    <abstract role="description">
       <para>&appname; is an application to aid in study of the Bible.</para>
     </abstract>
     <copyright>
@@ -74,7 +74,7 @@ Template last modified Apr 11, 2002
     <!-- An address can be added to the publisher information.  If a role is
     not specified, the publisher/author is the same for all versions of the
     document.  -->
-    <publisher>
+    <publisher role="maintainer">
       <publishername>The Xiphos Team</publishername>
     </publisher>
 
@@ -146,7 +146,17 @@ Template last modified Apr 11, 2002
 
     <releaseinfo>This manual describes version &appversion; of &appname;.
     </releaseinfo>
-    <legalnotice>
+     <revhistory> 
+	<revision> 
+          <revnumber>Xiphos Manual V3.1.1</revnumber> 
+          <date>August 2009</date> 
+          <revdescription> 
+             <para role="author">The Xiphos Team</para>
+             <para role="publisher">The Xiphos Team</para>
+          </revdescription> 
+        </revision>
+     </revhistory> 
+     <legalnotice>
       <title>Feedback</title>
       <para>To report a bug or make a suggestion regarding the &appname; application or
       this manual, Use the <ulink url="http://sourceforge.net/tracker/?group_id=5528">

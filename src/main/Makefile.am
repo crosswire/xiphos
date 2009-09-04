@@ -22,14 +22,10 @@ mozilla_include_subdirs =	\
 
 INCLUDES =  \
     -I$(top_srcdir)/src \
-    $(SWORD_CFLAGS) \
-    $(ImageMagick_CFLAGS) \
-    $(GNOME_CFLAGS) \
-    $(GTKHTML_CFLAGS) \
+    $(XIPHOS_CFLAGS) \
     $(GECKO_COMPONENT_CFLAGS) \
     $(addprefix -I$(GECKO_INCLUDE_ROOT)/,$(mozilla_include_subdirs))      \
-    $(GECKO_CFLAGS) \
-    $(UPRINT_CFLAGS)
+    $(GECKO_CFLAGS)
 
 noinst_LIBRARIES = libmain.a
 
