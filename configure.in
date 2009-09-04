@@ -82,17 +82,28 @@ PKG_CHECK_EXISTS(gtk+-unix-print-2.0,
 			AC_MSG_RESULT([yes])],
 		[AC_MSG_RESULT([no])])
 
-AC_MSG_CHECKING([for gtkhtml-editor])
-PKG_CHECK_EXISTS(libgtkhtml-3.14 >= 3.23,
-		[AC_DEFINE(USE_GTKUPRINT, 1, [Define if you want to use gtk-unix-print])
-			REQUIRED_LIBS="$REQUIRED_LIBS gtkhtml-editor"
-			AC_DEFINE(USE_GTKHTML3_14_23, 1, [Define if you want to use GtkHtml-3.14])			   
-			AM_CONDITIONAL(USE_GTKHTML_BONOBO_EDITOR, false)
-			AC_MSG_RESULT([yes])],
-		[AC_SUBST(ORBIT_IDL, [`$PKG_CONFIG --variable=orbit_idl ORBit-2.0`])
-			AC_SUBST(BONOBO_IDL_INCLUDES, [-I`$PKG_CONFIG --variable=idldir libbonobo-2.0` -I`$PKG_CONFIG --variable=idldir bonobo-activation-2.0`])
-			AM_CONDITIONAL(USE_GTKHTML_BONOBO_EDITOR, true)
-			AC_MSG_RESULT([no, using bonobo])])
+
+AC_ARG_WITH([editor],
+    AS_HELP_STRING([--without-editor], [Ignore presence of gtkhtml-editor and use bonobo-editor instead]))
+
+AC_MSG_CHECKING([for editor])
+
+AS_IF([test "x$with_editor" != "xno"],
+      [PKG_CHECK_EXISTS([libgtkhtml-3.14 > 3.23 gtkhtml-editor], [have_editor=yes], [have_editor=no])],
+      [have_editor=no])
+
+AS_IF([test "x$have_editor" = "xyes"],
+      [AC_MSG_RESULT([gtkhtml-editor])
+      AC_DEFINE(USE_GTKHTML3_14_23, 1, [Define if you want to use GtkHtml-3.14])
+      REQUIRED_LIBS="$REQUIRED_LIBS gtkhtml-editor"
+      AM_CONDITIONAL(USE_GTKHTML_BONOBO_EDITOR, false)],
+      [AC_MSG_RESULT([bonobo])
+      AS_IF([test "x$with_editor" = "xyes"],
+            [AC_MSG_ERROR([gtkhtml-editor requested but not found])],
+	    [AM_CONDITIONAL(USE_GTKHTML_BONOBO_EDITOR, true)
+	    AC_SUBST(ORBIT_IDL, [`$PKG_CONFIG --variable=orbit_idl ORBit-2.0`])
+	    AC_SUBST(BONOBO_IDL_INCLUDES, ["-I`$PKG_CONFIG --variable=idldir libbonobo-2.0` -I`$PKG_CONFIG --variable=idldir bonobo-activation-2.0`"])])
+])
 
 PKG_CHECK_MODULES(XIPHOS, "$REQUIRED_LIBS")
 
@@ -103,7 +114,8 @@ PKG_CHECK_EXISTS(sword > 1.5.11,
 		[AC_MSG_RESULT([no])])
 
 AC_DEFINE(USE_GTKHTML3_14, 1, [Define if you want to use GtkHtml-3.14])
-AC_DEFINE_UNQUOTED(GTKHTML_DATA_DIR, ["$PKG_CONFIG --variable=gtkhtml_datadir libgtkhtml-3.14"], [GtkHTML data directory])
+GTKHTML_DATA_DIR=`$PKG_CONFIG --variable=gtkhtml_datadir libgtkhtml-3.14`
+AC_DEFINE_UNQUOTED(GTKHTML_DATA_DIR, ["$GTKHTML_DATA_DIR"], [GtkHTML data directory])
 AC_DEFINE_UNQUOTED(GTKHTML_API_VERSION, ["$PKG_CONFIG --variable gtkhtml_apiversion libgtkhtml-3.14"], [The gtkhtml api version])
 AC_SUBST(GTKHTML_DATA_DIR)
 

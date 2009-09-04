@@ -3,7 +3,8 @@
 INCLUDES = \
     -I$(top_srcdir)/src \
     $(XIPHOS_CFLAGS) \
-    $(GECKO_CFLAGS) 
+    $(GECKO_CFLAGS) \
+    -DINSTALL_PREFIX=\""$(prefix)"\"
 
 if USE_GTKHTML_BONOBO_EDITOR
 # CORBA stuff
