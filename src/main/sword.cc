@@ -606,25 +606,15 @@ const char *main_get_language_map(const char *language) {
  */
 char *set_sword_locale(const char *sys_locale)
 {
-	int ncmp[2] = { 5, 2 };	// fixed data
+	int ncmp[3] = { 100, 5, 2 };	// fixed data
 
 	if (sys_locale) {
 		SWBuf locale;
 		StringList localelist = LocaleMgr::getSystemLocaleMgr()->getAvailableLocales();
 		StringList::iterator it;
 
-		// whole match
-		for (it = localelist.begin(); it != localelist.end(); ++it) {
-			locale = *it;
-			if (!strcmp(sys_locale, locale.c_str())) {
-				LocaleMgr::getSystemLocaleMgr()->
-				    setDefaultLocaleName(locale.c_str());
-				return g_strdup(locale.c_str());
-			}
-		}
-
 		// length-limited match
-		for (int i = 0; i < 2; ++i) {
+		for (int i = 0; i < 3; ++i) {
 			for (it = localelist.begin(); it != localelist.end(); ++it) {
 				locale = *it;
 				if (!strncmp(sys_locale, locale.c_str(), ncmp[i])) {
