@@ -703,76 +703,6 @@ void backend_module_mgr_add_source(const char * vtype,
 	config.Save();
 }
 
-void set_mod_mgr_locale(const char *sys_locale) {
-	char buf[32];
-	int i = 0;
-	SWLocale *sw_locale = NULL;
-	
-	if (sys_locale) {
-		if (!strncmp(sys_locale,"ru_RU",5)) {
-			sys_locale = "ru_RU-koi8-r";		
-		} else if (!strncmp(sys_locale,"ru_RU-koi8-r",10)){
-			if (strlen(sys_locale) >  12) {
-				for(i = 0; i < 12; i++) {
-					buf[i] = sys_locale[i];
-					buf[i+1] = '\0';
-				}
-				sys_locale = buf;
-			}
-			
-		} else if (!strncmp(sys_locale,"uk_UA-cp1251",10)){
-			if (strlen(sys_locale) > 12 ) {
-				for(i = 0; i < 12; i++) {
-					buf[i] = sys_locale[i];
-					buf[i+1] = '\0';
-				}
-				sys_locale = buf;
-			}
-			
-		} else if (!strncmp(sys_locale,"uk_UA-koi8-u",10)){
-			if (strlen(sys_locale) > 12 ) {
-				for(i = 0; i < 12; i++) {
-					buf[i] = sys_locale[i];
-					buf[i+1] = '\0';
-				}
-				sys_locale = buf;
-			}
-			
-		} else if (!strncmp(sys_locale,"pt_BR",5)){
-			if (strlen(sys_locale) > 5 ) {
-				for(i = 0; i < 5; i++) {
-					buf[i] = sys_locale[i];
-					buf[i+1] = '\0';
-				}
-				sys_locale = buf;
-			}
-			
-		} else if (!strncmp(sys_locale,"en_GB",5)){
-			if (strlen(sys_locale) > 5 ) {
-				for(i = 0; i < 5; i++) {
-					buf[i] = sys_locale[i];
-					buf[i+1] = '\0';
-				}
-				sys_locale = buf;
-			}
-		} else {
-			if (strlen(sys_locale) > 2 ) {
-				buf[0] = sys_locale[0];
-				buf[1] = sys_locale[1];
-				buf[2] = '\0';
-				sys_locale = buf;
-			}
-		}
-		LocaleMgr::getSystemLocaleMgr()->setDefaultLocaleName(sys_locale);
-		sw_locale = LocaleMgr::getSystemLocaleMgr()->getLocale(sys_locale);
-	}
-	if (sw_locale) {
-		OLD_CODESET = (char*)sw_locale->getEncoding();
-	} else {
-		OLD_CODESET = (char*)"iso8859-1";
-	}
-}
-
 /******************************************************************************
  * Name
  *   backend_init_module_mgr
@@ -811,11 +741,6 @@ void backend_init_module_mgr(const char *dir,
 			delete list_mgr;
 		list_mgr = new SWMgr(dir, true, 0, false, false);
 	}
-
-	const char *lang = g_getenv("LANG");	
-	if (!lang)
-		lang="C";
-	set_mod_mgr_locale(lang);
 
 	const gchar *envhomedir = g_getenv(HOMEVAR);
 	SWBuf baseDir = (envhomedir) ? envhomedir : ".";

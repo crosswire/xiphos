@@ -275,13 +275,11 @@ void main_sidebar_perscomm_dump(void)
 void main_init_sidebar_search_backend(void)
 {
 	backendSearch = new BackEnd();
-	
 }
 
 void main_delete_sidebar_search_backend(void)
 {
 	delete backendSearch;
-	
 }
 
 void main_search_sidebar_fill_bounds_combos(void)
