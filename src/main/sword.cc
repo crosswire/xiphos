@@ -619,8 +619,8 @@ void main_init_backend(void)
 	GS_print(("%s sword-%s\n", "Starting", backend->get_sword_version()));
 	GS_print(("%s\n", "Initiating SWORD"));
 	GS_print(("%s: %s\n","path to sword", settings.path_to_mods));
-	GS_print(("%s %s\n", "System locale is", lang));
-	GS_print(("%s %s\n", "SWORD locale is", sword_locale));
+	GS_print(("%s %s\n", "SWORD locale is", lang));
+	//GS_print(("%s %s\n", "SWORD locale is", sword_locale));
 	GS_print(("OLD_CODESET = %s\n\n", (OLD_CODESET ? OLD_CODESET : "-none-")));
 	GS_print(("%s\n", "Checking for SWORD Modules"));
 	settings.spell_language = strdup(lang);
