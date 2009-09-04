@@ -176,8 +176,8 @@ def configure(conf):
     # cross compiler
     if env['IS_CROSS_WIN32']:
         conf.check_tool('cross_linux_win32', tooldir=_tooldir)
-    #else:
-        #conf.check_tool('g++ gcc')
+    else:
+        conf.check_tool('g++ gcc')
 
     conf.check_tool('gnu_dirs misc')
     conf.check_tool('intltool') # check for locale.h included
