@@ -75,7 +75,6 @@ extern "C" {
 
 #include "gui/debug_glib_null.h"
 
-char *OLD_CODESET;
 using namespace sword; 
 	
 #define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
@@ -592,6 +591,65 @@ const char *main_get_language_map(const char *language) {
 
 /******************************************************************************
  * Name
+ *   set_sword_locale
+ *
+ * Synopsis
+ *   #include "main/sword.h"
+ *
+ *   char *set_sword_locale(const char *sys_locale)	
+ *
+ * Description
+ *   set sword's idea of the locale in which the user operates
+ *
+ * Return value
+ *   char *
+ */
+char *set_sword_locale(const char *sys_locale)
+{
+	int ncmp[2] = { 5, 2 };	// fixed data
+
+	if (sys_locale) {
+		SWBuf locale;
+		StringList localelist = LocaleMgr::getSystemLocaleMgr()->getAvailableLocales();
+		StringList::iterator it;
+
+		// whole match
+		for (it = localelist.begin(); it != localelist.end(); ++it) {
+			locale = *it;
+			if (!strcmp(sys_locale, locale.c_str())) {
+				LocaleMgr::getSystemLocaleMgr()->
+				    setDefaultLocaleName(locale.c_str());
+				return g_strdup(locale.c_str());
+			}
+		}
+
+		// length-limited match
+		for (int i = 0; i < 2; ++i) {
+			for (it = localelist.begin(); it != localelist.end(); ++it) {
+				locale = *it;
+				if (!strncmp(sys_locale, locale.c_str(), ncmp[i])) {
+					LocaleMgr::getSystemLocaleMgr()->
+					    setDefaultLocaleName(locale.c_str());
+					return g_strdup(locale.c_str());
+				}
+			}
+		}
+
+	}
+
+	// either we were given a null sys_locale, or it didn't match anything.
+	char *err = g_strdup_printf("%s `%s'.\n%s.",
+				    _("No matching locale found for"),
+				    sys_locale,
+				    _("Book names and menus may not be translated"));
+	gui_generic_warning(err);
+	g_free(err);
+	return NULL;
+}
+
+
+/******************************************************************************
+ * Name
  *   backend_init
  *
  * Synopsis
@@ -610,9 +668,12 @@ void main_init_backend(void)
 {
 	StringMgr::setSystemStringMgr( new GS_StringMgr() );
 
-	backend = new BackEnd();
+	const char *lang = getenv("LANG");
+	if (!lang) lang = "C";
+	sword_locale = set_sword_locale(lang);
+	lang = LocaleMgr::getSystemLocaleMgr()->getDefaultLocaleName();
 
-	const char *lang = LocaleMgr::getSystemLocaleMgr()->getDefaultLocaleName();
+	backend = new BackEnd();
 
 	backend->init_SWORD(0);
 	settings.path_to_mods = main_get_path_to_mods();
@@ -620,8 +681,6 @@ void main_init_backend(void)
 	GS_print(("%s\n", "Initiating SWORD"));
 	GS_print(("%s: %s\n","path to sword", settings.path_to_mods));
 	GS_print(("%s %s\n", "SWORD locale is", lang));
-	//GS_print(("%s %s\n", "SWORD locale is", sword_locale));
-	GS_print(("OLD_CODESET = %s\n\n", (OLD_CODESET ? OLD_CODESET : "-none-")));
 	GS_print(("%s\n", "Checking for SWORD Modules"));
 	settings.spell_language = strdup(lang);
 	main_init_lists();
