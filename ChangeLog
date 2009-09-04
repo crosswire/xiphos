@@ -1,6 +1,7 @@
 2009-09-03  karl <charcoal@users.sf.net>
 
 	* add intro dialog box to first-time mod.mgr usage.
+	* re-work the entire locale-setting mechanism.
 
 2009-09-01  karl <charcoal@users.sf.net>
 

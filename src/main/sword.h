@@ -81,6 +81,7 @@ void main_save_module_key(char * mod_name, char * key);
 gchar *main_update_nav_controls(const gchar * key);
 char *main_get_active_pane_key(void);
 char *main_get_active_pane_module(void);
+char *set_sword_locale(const char *sys_locale);
 void main_init_backend(void);
 int main_is_mod_rtol(const char * module_name);
 char *main_module_name_from_description(char *description);

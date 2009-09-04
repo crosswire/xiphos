@@ -61,10 +61,6 @@ static const char *f_message = "backend/sword_main.cc line #%d \"%s\" = %s";
 
 BackEnd::BackEnd()
 {
-	const char *lang = getenv("LANG");
-	if (!lang) lang = "C";
-	sword_locale = set_sword_locale(lang);
-
 	main_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
 	display_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
 
@@ -152,82 +148,6 @@ void BackEnd::init_SWORD(int gsType)
 			display_mod->setDisplay(entryDisplay);
 		}	
 	}
-}
-
-char *BackEnd::set_sword_locale(const char *sys_locale)
-{
-	char *retval = NULL;
-	char buf[32];
-	int i = 0;
-	SWLocale *sw_locale = NULL;
-	
-	if(sys_locale) {
-		if(!strncmp(sys_locale,"ru_RU",5)) {
-			sys_locale = "ru_RU-koi8-r";		
-		} else if(!strncmp(sys_locale,"ru_RU-koi8-r",10)) {
-			if(strlen(sys_locale) >  12) {
-				for(i = 0; i < 12; i++) {
-					buf[i] = sys_locale[i];
-					buf[i+1] = '\0';
-				}
-				sys_locale = buf;
-			}
-			
-		} else if(!strncmp(sys_locale,"uk_UA-cp1251",10)) {
-			if(strlen(sys_locale) > 12 ) {
-				for(i = 0; i < 12; i++) {
-					buf[i] = sys_locale[i];
-					buf[i+1] = '\0';
-				}
-				sys_locale = buf;
-			}
-			
-		} else if(!strncmp(sys_locale,"uk_UA-koi8-u",10)) {
-			if(strlen(sys_locale) > 12 ) {
-				for(i = 0; i < 12; i++) {
-					buf[i] = sys_locale[i];
-					buf[i+1] = '\0';
-				}
-				sys_locale = buf;
-			}
-			
-		} else if(!strncmp(sys_locale,"pt_BR",5)) {
-			if(strlen(sys_locale) > 5 ) {
-				for(i = 0; i < 5; i++) {
-					buf[i] = sys_locale[i];
-					buf[i+1] = '\0';
-				}
-				sys_locale = buf;
-			}
-			
-		} else if(!strncmp(sys_locale,"en_GB",5)) {
-			if(strlen(sys_locale) > 5 ) {
-				for(i = 0; i < 5; i++) {
-					buf[i] = sys_locale[i];
-					buf[i+1] = '\0';
-				}
-				sys_locale = buf;
-			}
-		} else if(!strncmp(sys_locale,"fa",2)) {
-				sys_locale = "fa";
-		} else {
-			if(strlen(sys_locale) > 2 ) {
-				buf[0] = sys_locale[0];
-				buf[1] = sys_locale[1];
-				buf[2] = '\0';
-				sys_locale = buf;
-			}
-		}
-		retval = strdup(sys_locale);
-		LocaleMgr::getSystemLocaleMgr()->setDefaultLocaleName(sys_locale);
-		sw_locale = LocaleMgr::getSystemLocaleMgr()->getLocale(sys_locale);
-	}
-	if(sw_locale) {
-		OLD_CODESET = (char*)sw_locale->getEncoding();
-	} else {
-		OLD_CODESET = (char*)"UTF-8";
-	}
-	return retval;
 }
 
 void BackEnd::init_lists(MOD_LISTS * mods)
