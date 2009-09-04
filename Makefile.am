@@ -34,6 +34,7 @@ EXTRA_DIST = \
 	RELEASE-NOTES \
 	Xiphos.ogg \
 	help/xiphos.pdf \
+	m4 \
 	waf \
 	wscript \
 	waffles/__init__.py \

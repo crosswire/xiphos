@@ -21,17 +21,13 @@ mozilla_include_subdirs =	\
 	widget		\
 	xpcom
 
-	
 INCLUDES =  \
     -I$(top_srcdir)/src \
-    $(SWORD_CFLAGS) \
-    $(GNOME_CFLAGS) \
-    $(GTKHTML_CFLAGS)	\
+    $(XIPHOS_CFLAGS) \
     $(addprefix -I$(GECKO_INCLUDE_ROOT)/,$(mozilla_include_subdirs))      \
     $(GECKO_COMPONENT_CFLAGS) \
-    -DGECKO_HOME=\""$(GECKO_HOME)\""  \
-    $(UPRINT_CFLAGS)
- 
+    -DGECKO_HOME=\""$(GECKO_HOME)\""
+
 if USE_GTKMOZEMBED     
 noinst_LIBRARIES = libgecko.a
 

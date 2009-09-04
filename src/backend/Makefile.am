@@ -1,6 +1,5 @@
 INCLUDES = \
-    $(GNOME_CFLAGS) \
-    $(SWORD_CFLAGS) \
+    $(XIPHOS_CFLAGS) \
     -I$(top_srcdir)/src
 
 noinst_LIBRARIES = libbackend.a
@@ -12,3 +11,4 @@ libbackend_a_SOURCES =  \
 
 EXTRA_DIST = \
    wscript
+
