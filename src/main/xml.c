@@ -487,10 +487,12 @@ int xml_create_settings_file(char *path)
 	xml_attr = xmlNewProp(cur_node,
 			      (const xmlChar *) "label",
 			      (const xmlChar *) _("Sample Module List"));
+	tmp = get_list(TEXT_LIST);
 	xml_attr = xmlNewProp(cur_node,
 			      (const xmlChar *) "list",
-			      (const xmlChar *)(gchar *)(get_list(TEXT_LIST)->data));
-
+			      (tmp
+			       ? (const xmlChar *)(gchar *)(tmp->data)
+			       : (const xmlChar *)(gchar *)"-ReplaceMe-"));
 
 	section_node = xmlNewChild(root_node, NULL,
 				   (const xmlChar *) "editor", NULL);
@@ -499,6 +501,13 @@ int xml_create_settings_file(char *path)
 	xmlNewTextChild(section_node, NULL, (const xmlChar *) "UseStudypadDialog", (const xmlChar *) "1");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *) "spell_language", (const xmlChar *) "unknown");
 
+
+	section_node = xmlNewChild(root_node, NULL, (const xmlChar *) "modmgr", NULL);
+	xmlNewTextChild(section_node, NULL, (const xmlChar *) "mod_mgr_source", (const xmlChar *) "1");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *) "mod_mgr_destination", (const xmlChar *) "0");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *) "mod_mgr_local_source_index", (const xmlChar *) "0");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *) "mod_mgr_remote_source_index", (const xmlChar *) "0");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *) "mod_mgr_intro", (const xmlChar *) "0");
 
 	section_node = xmlNewChild(root_node, NULL, (const xmlChar *) "fontsize", NULL);
 	xmlNewTextChild(section_node, NULL, (const xmlChar *) "versenum", (const xmlChar *) "+0");
