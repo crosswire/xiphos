@@ -76,7 +76,7 @@ def set_options(opt):
 
     # options provided by the modules
     #opt.tool_options('g++ gcc gnome intltool glib2')
-    opt.tool_options('compiler_cxx compiler_cc g++ gcc gnu_dirs')
+    opt.tool_options('g++ gcc gnu_dirs')
 
     # unused options
     for name in _unused_options:
@@ -172,12 +172,10 @@ def configure(conf):
         env['PREFIX'] = escpath(os.path.abspath('win32/binaries/Xiphos'))
     ##
     
-    conf.check_tool('compiler_cxx compiler_cc')
+    conf.check_tool('g++ gcc')
     # cross compiler
     if env['IS_CROSS_WIN32']:
         conf.check_tool('cross_linux_win32', tooldir=_tooldir)
-    else:
-        conf.check_tool('g++ gcc')
 
     conf.check_tool('gnu_dirs misc')
     conf.check_tool('intltool') # check for locale.h included
