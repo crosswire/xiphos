@@ -161,6 +161,10 @@ int settings_init(int new_configs, int new_bookmarks)
 
 	init_bookmarks(new_bookmarks);
 
+	/* get the first cut at the set of modules available. */
+	/* maybe insufficient, contain no bibles: ok for now. */
+	main_init_lists();
+
 	/* set fnconfigure to gSwordDir and settings.xml */
 	settings.fnconfigure = g_new(char, strlen(settings.gSwordDir) +
 				     strlen("settings.xml") + 2);
@@ -173,35 +177,32 @@ int settings_init(int new_configs, int new_bookmarks)
 		GS_print(("\nFirst Run: need to create settings!\n"));
 		settings.first_run = TRUE;
 
-		main_init_lists();
-		if (settings.havebible == 0) {
-			if (gui_yes_no_dialog(GS_NET_PERMISSION, NULL)) {
-				main_shutdown_list();
-				gui_open_mod_mgr_initial_run();
-				main_init_lists();
-				if (settings.havebible == 0) {
-					gui_generic_warning
-					    (_("There are still no Bibles installed.\nEvidently, you declined to install any.\n\nWithout any Bible modules to display,\nXiphos cannot proceed,\nand will now exit."));
-					exit(1);
-				} else
-					gui_generic_warning
-					    (_("Bible module installation complete."));
-			} else {
-				gui_generic_warning
-				    (_("Without any Bible modules to display,\nXiphos cannot proceed,\nand will now exit."));
-				exit(1);
-			}
-		}
-		main_shutdown_list();
-
-		main_init_lists();
 		xml_create_settings_file(settings.fnconfigure);
-		//retval = gui_first_run();
-		main_shutdown_list();
 		xml_save_settings_doc(settings.fnconfigure);
 		xml_free_settings_doc();
 	}
-	
+	xml_parse_settings_file(settings.fnconfigure);
+
+	/* ensure that the user has a bible with which to work */
+	if (settings.havebible == 0) {
+		if (gui_yes_no_dialog(GS_NET_PERMISSION, NULL)) {
+			main_shutdown_list();
+			gui_open_mod_mgr_initial_run();
+			main_init_lists();
+			if (settings.havebible == 0) {
+				gui_generic_warning
+				    (_("There are still no Bibles installed.\nEvidently, you declined to install any.\n\nWithout any Bible modules to display,\nXiphos cannot proceed,\nand will now exit."));
+				exit(1);
+			} else
+				gui_generic_warning
+				    (_("Bible module installation complete."));
+		} else {
+			gui_generic_warning
+			    (_("Without any Bible modules to display,\nXiphos cannot proceed,\nand will now exit."));
+			exit(1);
+		}
+	}
+
 	/* check for template.pad file for studypad */
 	tmp = g_new(char, strlen(settings.gSwordDir) +
 				     strlen("template.pad") + 2);
@@ -225,7 +226,6 @@ int settings_init(int new_configs, int new_bookmarks)
 		g_file_set_contents(tmp, " ", strlen(" "), NULL);
 	}
     
-	xml_parse_settings_file(settings.fnconfigure);
 	load_settings_structure();
 
 	gconf_setup();
@@ -344,7 +344,10 @@ void load_settings_structure(void)
 	char *buf = NULL;
 	
 	settings.gs_version = VERSION;
-	settings.MainWindowModule = xml_get_value("modules", "bible");
+	if ((settings.MainWindowModule = xml_get_value("modules", "bible")) == NULL) {
+		/* by the time we are here, we *must* have at least 1 bible */
+		settings.MainWindowModule = g_strdup(get_list(TEXT_LIST)->data);
+	}
 	settings.CommWindowModule = xml_get_value("modules", "comm");
 	settings.DictWindowModule = xml_get_value("modules", "dict");
 	settings.parallel1Module = xml_get_value("modules", "int1");

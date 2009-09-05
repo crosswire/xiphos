@@ -151,6 +151,7 @@ GladeXML *gxml;
 
 static void load_module_tree(GtkTreeView * treeview, gboolean install);
 static void set_controls_to_last_use(void);
+static int load_source_treeviews(void);
 
 #ifdef HAVE_WIDGET_TOOLTIP_TEXT
 static
@@ -1306,6 +1307,40 @@ response_refresh(void)
 
 /******************************************************************************
  * Name
+ *   check_sync_repos
+ *
+ * Synopsis
+ *   #include "gui/mod_mgr.h"
+ *
+ *   void check_sync_repos(void)
+ *
+ * Description
+ *   verifies enough remote sources are known, and gets more if needed.
+ *
+ * Return value
+ *   void
+ */
+
+static void
+check_sync_repos(void)
+{
+	GList *tmp = mod_mgr_list_remote_sources();
+	/*
+	 * if too few remote sources, synchronize repos from crosswire.
+	 */
+	if (g_list_length(tmp) <= 1) {
+		char index[10];
+		mod_mgr_init_config_extras();
+		settings.mod_mgr_remote_source_index = load_source_treeviews();
+		g_snprintf(index, 10, "%d", settings.mod_mgr_remote_source_index);
+		xml_set_value("Xiphos", "modmgr", "mod_mgr_remote_source_index", index);
+		set_controls_to_last_use();
+	}
+	g_list_free(tmp);
+}
+
+/******************************************************************************
+ * Name
  *   response_close
  *
  * Synopsis
@@ -1328,16 +1363,12 @@ response_close(void)
 		
 		gtk_widget_destroy(GTK_WIDGET(dialog));
 		g_string_printf(str, "%s/dirlist", settings.homedir);
-		if (mod_mgr_check_for_file(str->str)) {
-#ifdef DEBUG
-			g_warning("%s",str->str); /* special: no GS_warning. */
-#else
+		if (mod_mgr_check_for_file(str->str))
 			unlink(str->str);
-#endif
-		}
 		g_string_free(str,TRUE);
 	}
 	is_running = FALSE;
+	check_sync_repos();
 }
 
 
@@ -1776,9 +1807,25 @@ create_remote_source_treeview_model(void)
 }
 
 
-static void
+/******************************************************************************
+ * Name
+ *   load_source_treeviews
+ *
+ * Synopsis
+ *   #include "gui/mod_mgr.h"
+ *   int load_source_treeviews(void)
+ *
+ * Description
+ *   inhale InstallMgr.conf content.  return CrossWire's position.
+ *
+ * Return value
+ *   int
+ */
+
+static int
 load_source_treeviews(void)
 {
+	int crosswire_index = 1 /* guess */, crosswire_tracker = 0 /* start */;
 	GList *tmp = NULL;
 	GList *tmp2 = NULL;
 	GtkTreeIter iter;
@@ -1799,6 +1846,8 @@ load_source_treeviews(void)
 	tmp = tmp2 = mod_mgr_list_remote_sources();
 	while (tmp) {
 		mms = (MOD_MGR_SOURCE *) tmp->data;
+		if (!strcmp(mms->caption, "CrossWire"))
+			crosswire_index = crosswire_tracker;
 		gtk_list_store_append(GTK_LIST_STORE(remote_model),
 				      &iter);
 		gtk_list_store_set(GTK_LIST_STORE(remote_model), &iter,
@@ -1825,6 +1874,7 @@ load_source_treeviews(void)
 		g_free((gchar*)mms->uid);
 		g_free(mms);
 		tmp = g_list_next(tmp);
+		crosswire_tracker++;
 	}
 	gtk_combo_box_set_active(GTK_COMBO_BOX(combo_entry2), 0);
 	g_list_free(tmp2);
@@ -1864,6 +1914,8 @@ load_source_treeviews(void)
 	}
 	gtk_combo_box_set_active(GTK_COMBO_BOX(combo_entry1), 0);
 	g_list_free(tmp2);
+
+	return crosswire_index;
 }
 
 
@@ -2174,7 +2226,7 @@ create_fileselection_local_source(void)
  *   void
  */
 
-void
+static void
 on_dialog_destroy(GtkObject * object, gpointer user_data)
 {
 	GList *tmp;
@@ -2196,18 +2248,7 @@ on_dialog_destroy(GtkObject * object, gpointer user_data)
 		main_load_module_tree(sidebar.module_list);
 	}
 
-	/*
-	 * if InstallMgr.conf has just been init'd, then we
-	 * want to add the rest of the standard repositories.
-	 */
-	if (g_list_length(tmp = mod_mgr_list_remote_sources()) <= 1) {
-		mod_mgr_init_config_extras();
-		load_source_treeviews();
-		settings.mod_mgr_remote_source_index = 1;
-		xml_set_value("Xiphos", "modmgr", "mod_mgr_remote_source_index", "1");
-		set_controls_to_last_use();
-	}
-	g_list_free(tmp);
+	check_sync_repos();
 
 	working = FALSE;
 	is_running = FALSE;
@@ -2290,10 +2331,12 @@ void
 on_load_sources_clicked(GtkButton * button, gpointer  user_data)
 {
 	if (mod_mgr_init_config_extras() == 0) {
+		/* not quite identical to check_sync_repos(). */
+		char index[10];
 		gui_generic_warning(_("Standard remote sources have been loaded."));
-		load_source_treeviews();
-		settings.mod_mgr_remote_source_index = 1;
-		xml_set_value("Xiphos", "modmgr", "mod_mgr_remote_source_index", "1");
+		settings.mod_mgr_remote_source_index = load_source_treeviews();
+		g_snprintf(index, 10, "%d", settings.mod_mgr_remote_source_index);
+		xml_set_value("Xiphos", "modmgr", "mod_mgr_remote_source_index", index);
 		set_controls_to_last_use();
 	} else
 		gui_generic_warning(_("Could not load standard sources from CrossWire."));
