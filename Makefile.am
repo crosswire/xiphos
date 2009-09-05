@@ -45,7 +45,7 @@ EXTRA_DIST = \
 
 DISTCLEANFILES = gnome-doc-utils.make
 
-xiphosdocdir = $(prefix)/@NO_PREFIX_PACKAGE_DOC_DIR@
+xiphosdocdir = $(docdir)
 
 gnomemenudir = $(datadir)/applications
 gnomemenu_premerge_file = xiphos.desktop.in
