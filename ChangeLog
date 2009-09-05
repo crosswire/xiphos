@@ -1,3 +1,9 @@
+2009-09-05  karl <charcoal@users.sf.net>
+
+	* 2nd shot at CrossWire as default remote repo, requiring rather a
+	  lot of other code re-factoring due to the interdependence of the
+	  1st-time user's mod.mgr vis-a-vis existence of settings.xml data.
+
 2009-09-03  karl <charcoal@users.sf.net>
 
 	* add intro dialog box to first-time mod.mgr usage.
