@@ -6,7 +6,7 @@ SUBDIRS = doc po src ui help
 
 DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper
 
-xiphosdoc_DATA = \
+dist_doc_DATA = \
 	README \
 	RELEASE-NOTES \
 	COPYING \
@@ -29,11 +29,7 @@ EXTRA_DIST = \
 	intltool-extract.in \
 	intltool-merge.in \
 	intltool-update.in \
-	COPYING-DOCS \
 	TRANSLATION-HOWTO \
-	RELEASE-NOTES \
-	Xiphos.ogg \
-	help/xiphos.pdf \
 	m4 \
 	waf \
 	wscript \
@@ -44,8 +40,6 @@ EXTRA_DIST = \
 	waffles/misc.py 
 
 DISTCLEANFILES = gnome-doc-utils.make
-
-xiphosdocdir = $(docdir)
 
 gnomemenudir = $(datadir)/applications
 gnomemenu_premerge_file = xiphos.desktop.in
