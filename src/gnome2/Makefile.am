@@ -83,8 +83,12 @@ if HAVE_GECKO
 LIB_GECKO=$(top_builddir)/src/gecko/libgecko.a
 endif
 
-if HAVE_GECKO_1_8_1
+if HAVE_GECKO_1_9_1
+else
+if HAVE_GECKO_1_9
+else
     xiphos_LDFLAGS = -R$(GECKO_HOME)
+endif
 endif
 
 
