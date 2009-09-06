@@ -587,6 +587,10 @@
 		<guibutton>*u</guibutton> at the beginning of the verse.  Hovering on this marker will show the annotation in the previewer, just as
 		for publisher's footnotes.
 		</para>
+		<para>
+		If a devotional has been set via the Preferences dialog, then the day's devotional reference will also appear in the
+		previewer, either on program startup or when the user requests it via the <guimenuitem>View</guimenuitem> menu.
+		</para>
 	</sect2>	
 <!-- ============= Commentary Pane  ============--> 
 	<sect2 id="xiphos-commentaries">
