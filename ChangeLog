@@ -7,6 +7,8 @@
 	* corrected gtk store error for prayerlist (lacking -1 terminator).
 	* avoid widget destroy whine for null widget.
 	* fix #2813891 lose comm name from tab when un-Viewed.
+	* address #2798255 with a manual update.
+	* also mention Load Standard button for module manager.
 
 2009-09-05  karl <charcoal@users.sf.net>
 
