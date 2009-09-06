@@ -645,11 +645,33 @@ void backend_module_mgr_clear_config(void)
 	confPath += "/" DOTSWORD "/InstallMgr/InstallMgr.conf";
 	FileMgr::createParent(confPath.c_str());
 	remove(confPath.c_str());
-	
+
 	SWConfig config(confPath.c_str());
-	
+
 	config["General"]["PassiveFTP"] = "true";
-	config.Save();	
+	config.Save();
+	backend_module_mgr_reread_config();
+}
+
+/******************************************************************************
+ * Name
+ *   backend_module_mgr_reread_config
+ *
+ * Synopsis
+ *   #include "backend/module_manager.hh"
+ *
+ *   void backend_module_mgr_reread_config(void)
+ *
+ * Description
+ *   re-init's installMgr's sense of sources.
+ *
+ * Return value
+ *   void
+ */
+
+void backend_module_mgr_reread_config(void)
+{
+	installMgr->readInstallConf();
 }
 
 
@@ -664,7 +686,10 @@ void backend_module_mgr_clear_config(void)
  *				   const char * type,
  *				   const char * caption,
  *				   const char * source,
- *				   const char * directory)
+ *				   const char * directory,
+ *				   const char * user,
+ *				   const char * pass,
+ *				   const char * uid)
  *
  * Description
  *   

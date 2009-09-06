@@ -364,6 +364,11 @@ void mod_mgr_clear_config(void)
 	backend_module_mgr_clear_config();
 }
 
+void mod_mgr_reread_config(void)
+{
+	backend_module_mgr_reread_config();
+}
+
 void mod_mgr_add_source(const char * vtype, 
 			const char * type, 
 			const char * caption, 
