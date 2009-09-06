@@ -97,6 +97,8 @@ AC_ARG_WITH([gecko-home],
 
 gecko_cv_gecko_home=$with_gecko_home
 
+AC_MSG_RESULT([$with_gecko_home])
+
 # ****************
 # Define variables
 # ****************
