@@ -6,6 +6,7 @@
 	* consequently removed <a></a> elimination code as well.
 	* corrected gtk store error for prayerlist (lacking -1 terminator).
 	* avoid widget destroy whine for null widget.
+	* fix #2813891 lose comm name from tab when un-Viewed.
 
 2009-09-05  karl <charcoal@users.sf.net>
 
