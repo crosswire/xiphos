@@ -1,33 +1,3 @@
-
-mozilla_include_subdirs =	\
-	.		\
-	commandhandler  \
-	content		\
-	docshell	\
-	browser		\
-	dom		\
-	fastfind	\
-	find		\
-	gtkembedmoz	\
-	gfx		\
-	layout		\
-	necko		\
-	nspr		\
-	pref		\
-	string		\
-	uriloader	\
-	webbrwsr	\
-	webshell	\
-	widget		\
-	xpcom
-
-INCLUDES =  \
-    -I$(top_srcdir)/src \
-    $(XIPHOS_CFLAGS) \
-    $(addprefix -I$(GECKO_INCLUDE_ROOT)/,$(mozilla_include_subdirs))      \
-    $(GECKO_COMPONENT_CFLAGS) \
-    -DGECKO_HOME=\""$(GECKO_HOME)\""
-
 if USE_GTKMOZEMBED     
 noinst_LIBRARIES = libgecko.a
 
@@ -37,6 +7,24 @@ libgecko_a_SOURCES =  \
 	gecko-print.c		gecko-print.h		\
 	gecko-services.h   	gecko-services.cpp 	\
 	gecko-utils.cpp		gecko-utils.h			
+
+libgecko_a_CXXFLAGS = \
+	-I$(top_srcdir)/src \
+	$(GECKO_COMPONENT_CFLAGS) \
+	$(GECKO_CFLAGS) \
+	$(XIPHOS_CFLAGS) \
+	$(WARN_CXXFLAGS)
+
+libgecko_a_CFLAGS = \
+	-I$(top_srcdir)/src \
+	$(GECKO_COMPONENT_CFLAGS) \
+	$(GECKO_CFLAGS) \
+	$(XIPHOS_CFLAGS) \
+	$(WARN_CFLAGS)
+
+libgecko_a_CPPFLAGS = \
+    -DGECKO_HOME=\""$(GECKO_HOME)\""
+
 endif
 
 EXTRA_DIST = \

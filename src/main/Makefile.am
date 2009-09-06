@@ -1,32 +1,3 @@
-
-mozilla_include_subdirs =	\
-	.		\
-	commandhandler  \
-	content		\
-	docshell	\
-	browser		\
-	dom		\
-	fastfind	\
-	find		\
-	gtkembedmoz	\
-	gfx		\
-	layout		\
-	necko		\
-	nspr		\
-	pref		\
-	string		\
-	uriloader	\
-	webbrwsr	\
-	webshell	\
-	widget
-
-INCLUDES =  \
-    -I$(top_srcdir)/src \
-    $(XIPHOS_CFLAGS) \
-    $(GECKO_COMPONENT_CFLAGS) \
-    $(addprefix -I$(GECKO_INCLUDE_ROOT)/,$(mozilla_include_subdirs))      \
-    $(GECKO_CFLAGS)
-
 noinst_LIBRARIES = libmain.a
 
 libmain_a_SOURCES =  \
@@ -55,6 +26,18 @@ libmain_a_SOURCES =  \
     tab_history.c tab_history.h\
     url.cc url.hh\
     xml.c xml.h
+
+libmain_a_CXXFLAGS =  \
+	-I$(top_srcdir)/src \
+	$(XIPHOS_CFLAGS) \
+	$(GECKO_COMPONENT_CFLAGS) \
+	$(GECKO_CFLAGS)
+
+libmain_a_CFLAGS =  \
+	-I$(top_srcdir)/src \
+	$(XIPHOS_CFLAGS) \
+	$(GECKO_COMPONENT_CFLAGS) \
+	$(GECKO_CFLAGS)
 
 EXTRA_DIST = \
 	wscript
