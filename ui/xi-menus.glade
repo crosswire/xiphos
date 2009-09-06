@@ -384,7 +384,7 @@
 		  <child>
 		    <widget class="GtkMenuItem" id="show_hide_sidebar">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">_Show/Hide Sidebar</property>
+		      <property name="label" translatable="yes">_Show/Hide Attached Sidebar</property>
 		      <property name="use_underline">True</property>
 		      <signal name="activate" handler="on_sidebar_showhide_activate" last_modification_time="Sat, 07 Mar 2009 00:37:01 GMT"/>
 		    </widget>
