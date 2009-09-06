@@ -1,22 +1,3 @@
-mozilla_include_subdirs =	\
-	.		\
-	gtkembedmoz	\
-	xpcom
-
-INCLUDES =  \
-    $(XIPHOS_CFLAGS) \
-    $(addprefix -I$(GECKO_INCLUDE_ROOT)/,$(mozilla_include_subdirs))      \
-    $(GECKO_COMPONENT_CFLAGS) \
-    -DGECKO_HOME=\""$(GECKO_HOME)\""  \
-    -I$(top_srcdir)/src \
-    -DPREFIX=\""$(prefix)"\" \
-    -DSYSCONFDIR=\""$(sysconfdir)"\" \
-    -DDATADIR=\""$(datadir)"\" \
-    -DPACKAGE_LOCALE_DIR="\"$(datadir)/locale\"" \
-    -DPACKAGE_PIXMAPS_DIR="\"$(datadir)/pixmaps/$(PACKAGE)\"" \
-    -DLIBDIR=\""$(libdir)"\" \
-    -DSHARE_DIR=\"$(pkgdatadir)\"
-
 bin_PROGRAMS = xiphos
 
 bin_SCRIPTS = gnomesword2
@@ -72,33 +53,45 @@ xiphos_SOURCES =  \
     utilities.c \
     xiphos.c
 
-if USE_GTKMOZEMBED
-    LIB_GECKO=$(top_builddir)/src/gecko/libgecko.a 
-else
-    LIB_GECKO=
-endif
+xiphos_CPPFLAGS =  \
+	-DGECKO_HOME=\""$(GECKO_HOME)\""  \
+	-DPREFIX=\""$(prefix)"\" \
+	-DSYSCONFDIR=\""$(sysconfdir)"\" \
+	-DDATADIR=\""$(datadir)"\" \
+	-DPACKAGE_LOCALE_DIR="\"$(datadir)/locale\"" \
+	-DPACKAGE_PIXMAPS_DIR="\"$(datadir)/pixmaps/$(PACKAGE)\"" \
+	-DLIBDIR=\""$(libdir)"\" \
+	-DSHARE_DIR=\"$(pkgdatadir)\" \
+	$(DISABLE_DEPRECATED) \
+	$(AM_CPPFLAGS)
 
-if HAVE_GECKO_1_7
-    xiphos_LDFLAGS = -R$(GECKO_HOME)
-endif
-if HAVE_GECKO_1_8
-    xiphos_LDFLAGS = -R$(GECKO_HOME)
-endif
-if HAVE_GECKO_1_8_1
-    xiphos_LDFLAGS = -R$(GECKO_HOME)
-endif
-if HAVE_GECKO_1_9
-    xiphos_LDFLAGS = $(AM_LDFLAGS)
+xiphos_CFLAGS = \
+	-I$(top_srcdir)/src \
+	$(XIPHOS_CFLAGS) \
+	$(GECKO_CFLAGS) \
+	$(GECKO_COMPONENT_CFLAGS) \
+	$(WARN_CFLAGS)
+
+xiphos_CXXFLAGS = \
+	-I$(top_srcdir)/src \
+	$(GECKO_CFLAGS) \
+	$(GECKO_COMPONENT_CFLAGS) \
+	$(XIPHOS_CFLAGS) \
+	$(WARN_CXXFLAGS)
+
+if USE_GTKMOZEMBED
+LIB_GECKO=$(top_builddir)/src/gecko/libgecko.a
 endif
 
 xiphos_LDADD = \
-    $(top_builddir)/src/main/libmain.a \
-    $(top_builddir)/src/backend/libbackend.a \
-    $(top_builddir)/src/editor/libeditor.a\
-    $(LIB_GECKO)\
-    $(XIPHOS_LIBS) \
-    $(GECKO_COMPONENT_LIBS) \
-    $(GNOME_SPELL_LIBS)
+	$(LIB_GECKO) \
+	$(top_builddir)/src/main/libmain.a \
+	$(top_builddir)/src/backend/libbackend.a \
+	$(top_builddir)/src/editor/libeditor.a\
+	$(XIPHOS_LIBS) \
+	$(GNOME_SPELL_LIBS) \
+	$(GECKO_COMPONENT_LIBS) \
+	$(GECKO_LIBS)
 
 EXTRA_DIST = \
     $(top_builddir)/src/gui/*.h \

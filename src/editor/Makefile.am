@@ -1,11 +1,3 @@
-# Basic setup
-
-INCLUDES = \
-    -I$(top_srcdir)/src \
-    $(XIPHOS_CFLAGS) \
-    $(GECKO_CFLAGS) \
-    -DINSTALL_PREFIX=\""$(prefix)"\"
-
 if USE_GTKHTML_BONOBO_EDITOR
 # CORBA stuff
 
@@ -21,7 +13,6 @@ $(HTML_EDITOR_GENERATED): $(GTKHTML_DATA_DIR)/Editor.idl
 	$(ORBIT_IDL) -I $(srcdir) $(BONOBO_IDL_INCLUDES) -I $(GTKHTML_DATA_DIR)/gtkhtml $(GTKHTML_DATA_DIR)/Editor.idl
 
 
-
 noinst_LIBRARIES = libeditor.a
 
 # The Editor Control
@@ -34,12 +25,16 @@ EXTRA_DIST = \
 
 CLEANFILES = \
     $(HTML_EDITOR_GENERATED)
-   
 
 else
 
 noinst_LIBRARIES = libeditor.a
 libeditor_a_SOURCES = slib-editor.c slib-editor.h link_dialog.c link_dialog.h
+libeditor_a_CPPFLAGS = -DINSTALL_PREFIX=\""$(prefix)"\"
+libeditor_a_CFLAGS = \
+	-I$(top_srcdir)/src \
+	$(XIPHOS_CFLAGS) \
+	$(WARN_CFLAGS)
 
 EXTRA_DIST = \
 	wscript
