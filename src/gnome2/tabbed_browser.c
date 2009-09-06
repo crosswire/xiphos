@@ -259,7 +259,7 @@ pick_tab_label(PASSAGE_TAB_INFO *pt)
 		return str;
 	}
 	
-	if (pt->showtexts || pt->comm_showing) {
+	if (pt->showtexts || (pt->showcomms && pt->comm_showing)) {
 		g_string_printf(str, "%s: %s",
 				(pt->showtexts
 				 ? pt->text_mod
