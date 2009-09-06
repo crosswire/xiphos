@@ -671,7 +671,9 @@ void backend_module_mgr_clear_config(void)
 
 void backend_module_mgr_reread_config(void)
 {
+#ifdef SWORD_MULTIVERSE
 	installMgr->readInstallConf();
+#endif
 }
 
 
