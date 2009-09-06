@@ -79,7 +79,7 @@ void gui_main(void)
 /* GIVE US THE CRASHES, PLEASE!  MYSTERY BUGS ARE EVIL!  glibc.helpfulness-- */
 
 gchar*
-XI_g_strdup_printf(char *filename,
+XI_g_strdup_printf(const char *filename,
 		   int linenumber,
 		   const gchar *format,
 		   ...)
@@ -113,7 +113,7 @@ XI_g_strdup_printf(char *filename,
 }
 
 void
-XI_g_string_printf(char *filename,
+XI_g_string_printf(const char *filename,
 		   int linenumber,
 		   GString *string,
 		   const gchar *format,

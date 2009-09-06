@@ -99,6 +99,8 @@ enum {
 
 #define	LANGSET_COUNT	200
 
+void language_init(void);
+
 #ifdef __cplusplus
 }
 #endif

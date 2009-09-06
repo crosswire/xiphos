@@ -291,7 +291,7 @@ void on_button_next_clicked(GtkButton * button, gpointer user_data)
  *   void
  */
 
-void  on_entry_activate (GtkEntry *entry, gpointer  user_data) 
+void on_entry_activate (GtkEntry *entry, gpointer  user_data)
 {
 	const gchar* entry_buf = NULL;
 	

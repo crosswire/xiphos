@@ -53,6 +53,7 @@ struct _item_info
 	GtkTreeModel *model;
 };
 
+INFO *_get_info (GtkWidget * tree);
 
 enum {
 	COL_OPEN_PIXBUF,

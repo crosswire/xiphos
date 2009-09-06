@@ -73,6 +73,18 @@ gboolean vpaned_srch_rslt_button_release_event(GtkWidget * widget,
 					       GdkEventButton * event,
 					       gpointer user_data);
 void gui_show_previewer_in_sidebar(gint choice);
+void  gui_sync_module_treeview(gint direction);
+void on_save_list_as_a_single_bookmark_activate (GtkMenuItem * menuitem, gpointer user_data);
+void on_save_list_as_a_series_of_bookmarks_activate (GtkMenuItem * menuitem, gpointer user_data);
+GtkWidget *create_results_menu(void);
+void on_simple_activate(GtkMenuItem *menuitem, gpointer user_data);
+void on_subject_activate(GtkMenuItem *menuitem, gpointer user_data);
+void on_monthly_activate(GtkMenuItem *menuitem, gpointer user_data);
+void on_journal_activate(GtkMenuItem *menuitem, gpointer user_data);
+void on_outlined_topic_activate(GtkMenuItem *menuitem, gpointer user_data);
+GtkWidget *create_menu_prayerlist(void);
+void on_edit_activate(GtkMenuItem *menuitem, gpointer user_data);
+GtkWidget *create_menu_prayerlist_mod(void);
 
 #ifdef __cplusplus
 }

@@ -340,10 +340,12 @@ G_MODULE_EXPORT void on_search_activate(GtkMenuItem * menuitem, gpointer user_da
  * Return value
  *   void
  */
+
+extern gboolean style_display;
+
 G_MODULE_EXPORT void
 on_verse_style_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 {
-	extern gboolean style_display;
 	if(style_display) {
 		gchar *file = g_strdup_printf("%s/modops.conf", 
 					      settings.gSwordDir);

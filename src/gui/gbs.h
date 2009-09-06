@@ -25,5 +25,6 @@
 GtkWidget *gui_create_book_pane(void);
 void gui_update_gbs_global_ops(gchar * option, gboolean choice);
 void gui_set_book_page_and_key(gchar * mod_name, gchar * key);
+void gui_set_book_mod_and_key(gchar * mod_name, gchar * key);
 
 #endif
