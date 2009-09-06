@@ -79,7 +79,7 @@ xiphos_CXXFLAGS = \
 	$(XIPHOS_CFLAGS) \
 	$(WARN_CXXFLAGS)
 
-if USE_GTKMOZEMBED
+if HAVE_GECKO
 LIB_GECKO=$(top_builddir)/src/gecko/libgecko.a
 endif
 
