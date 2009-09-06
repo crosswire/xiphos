@@ -9,6 +9,7 @@
 	* fix #2813891 lose comm name from tab when un-Viewed.
 	* address #2798255 with a manual update.
 	* also mention Load Standard button for module manager.
+	* fix #2797805 added a word: Show/Hide _Attached_ Sidebar.
 
 2009-09-05  karl <charcoal@users.sf.net>
 
