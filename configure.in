@@ -133,6 +133,10 @@ AS_IF([test "x$enable_debug" = "xyes"], [
 			AC_MSG_RESULT([yes])],
 	    [AC_MSG_RESULT([no])])
 
+AC_ARG_ENABLE([as-needed],
+	AS_HELP_STRING([--enable-as-needed], [Pass -Wl --as-needed to linker @<:@default=no@:>@]))
+AS_IF([test "x$enable_as_needed" = "xyes"], [AC_SUBST([AM_LDFLAGS],[[-Wl,--as-needed]])])
+
 AC_CONFIG_FILES([
 Makefile
 po/Makefile.in
