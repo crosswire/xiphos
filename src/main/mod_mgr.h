@@ -86,6 +86,7 @@ int mod_mgr_refresh_remote_source(const char *source_name);
 void mod_mgr_init_config(void);
 int mod_mgr_init_config_extras(void);
 void mod_mgr_clear_config(void);
+void mod_mgr_reread_config(void);
 void mod_mgr_add_source(const char * vtype, 
 			const char * type, 
 			const char * caption, 
