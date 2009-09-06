@@ -1399,7 +1399,10 @@ void _on_dialog_response(GtkDialog * dialog, gint response_id,
 {
 	switch (response_id) {
 	case GTK_RESPONSE_CLOSE:
-		gtk_widget_destroy(GTK_WIDGET(search1.mod_sel_dialog));
+		if (search1.mod_sel_dialog) {
+			gtk_widget_destroy(GTK_WIDGET(search1.mod_sel_dialog));
+			search1.mod_sel_dialog = NULL;
+		}
 		gtk_widget_destroy(GTK_WIDGET(dialog));
 		break;
 	}

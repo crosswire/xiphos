@@ -1,6 +1,11 @@
 2009-09-06  karl <charcoal@users.sf.net>
 
 	* correct re-appearing remote ftp source for delete-then-load-standard.
+	* fix #2825898 Search triggers show-up of markers in Preview
+	  (by accurately detecting within/without html constructs).
+	* consequently removed <a></a> elimination code as well.
+	* corrected gtk store error for prayerlist (lacking -1 terminator).
+	* avoid widget destroy whine for null widget.
 
 2009-09-05  karl <charcoal@users.sf.net>
 

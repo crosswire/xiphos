@@ -376,10 +376,10 @@ void main_information_viewer(const gchar * mod_name, const gchar * text, const g
  *   void
  */
 
-void mark_search_words(GString * str, gboolean eliminate)
+void mark_search_words(GString * str)
 {
 	gchar *tmpbuf, *buf, *searchbuf;
-	gint len1, len2, len3, len4;
+	gint len_overall, len_word, len_tail, len_prefix;
 	gchar closestr[40], openstr[40];
 	gchar *s, *t;
 
@@ -393,42 +393,16 @@ void mark_search_words(GString * str, gboolean eliminate)
 	sprintf(closestr, "</b></font>");
 	/* open tags */
 	sprintf(openstr, "<font color=\"%s\"><b>", settings.found_color);
-	/* point buf to found verse */
-	buf = g_utf8_casefold(str->str,-1);
 	searchbuf = g_utf8_casefold(g_strdup(settings.searchText),-1);
 	if (g_str_has_prefix(searchbuf, "\"")) {
 		searchbuf = g_strdelimit(searchbuf, "\"", ' ');
 		g_strstrip(searchbuf);
 	}
 
-	if (eliminate) {
-		/* blank out html <a></a> markup, to avoid mis-marking it as matches. */
-		for (s = strchr(str->str, '<'); s; s = strchr(s, '<')) {
-			if ((*(s+1) == 'a') ||
-			    ((*(s+1) == '/') && (*(s+2) == 'a'))) {
-				if ((t = strchr(s, '>'))) {
-					while (s <= t)
-						*(s++) = ' ';
-				} else {
-					GS_message(("mark_search_words: Unmatched <> in %s\n", s));
-					goto out;
-				}
-			} else
-				++s;
-		}
-		/* move <> with excess spaces up close to their intended targets. */
-		for (s = strstr(str->str, " &gt;"); s; s = strstr(str->str, " &gt;")) {
-			memcpy(s, "&gt; ", 5);
-		}
-		for (s = strstr(str->str, "&lt; "); s; s = strstr(s, "&lt; ")) {
-			memcpy(s, " &lt;", 5);
-		}
-	}
-out:
 	/* if we have a muti word search go here */
 	if (settings.searchType == -2 || settings.searchType == -4) {
 		char *token;
-		GList *list;
+		GList *list, *listbase;
 		gint count = 0, i = 0;
 
 		list = NULL;
@@ -449,55 +423,69 @@ out:
 			list = g_list_append(list, searchbuf);
 			count = 1;
 		}
-		list = g_list_first(list);
-		/* find each word in the list and mark it */
+
+		buf = g_utf8_casefold(str->str,-1);
+		listbase = list = g_list_first(list);
+
 		for (i = 0; i < count; i++) {
-			/* set len1 to length of verse */
-			len1 = strlen(buf);
-			/* set len2 to length of search word */
-			len2 = strlen((gchar *) list->data);
+			len_overall = strlen(buf);
+			len_word = strlen((gchar *)list->data);
+
 			/* find search word in verse */
-			while ((tmpbuf =
-			     g_strrstr(buf, (gchar *) list->data)) != NULL) {
-				/* set len3 to length of tmpbuf 
-				   (tmpbuf points to last occurance of 
-				   search word in verse) */
-				len3 = strlen(tmpbuf);
-				//-- set len4 to diff between len1 and len3
-				len4 = len1 - len3;
-				/* add end tags first 
-				   (position to add tag to is len4 + len2) */
-				str = g_string_insert(str, (len4 + len2),
-						      closestr);
-				/* then add start tags 
-				   (position to add tag to is len4) */
-				str = g_string_insert(str, len4, openstr);
-				/* prepare to search for another occurance */
-				buf[len4] = '\0';
-				len1 =len4;
+			while ((tmpbuf = g_strrstr(buf, (gchar *)list->data)) != NULL) {
+				char *angle_open, *angle_close;
+
+				len_tail = strlen(tmpbuf);
+				len_prefix = len_overall - len_tail;
+
+				// find html <> delimiters preceding this word.
+				*tmpbuf = '\0';
+				angle_open = strrchr(buf, '<');
+				angle_close = strrchr(buf, '>');
+
+				// contortions about that preceding markup.
+				// note placement of <> in good/bad examples.
+				// good: anything WORD anything [none]
+				// good: <token> anything WORD anything [outside]
+				// bad:  token> anything <token WORD anything [inside]
+				if (!angle_open ||		  // no open (safe), or
+				    (angle_close &&		  // there exists close and
+				     (angle_open < angle_close))) // open is before close
+				{
+					// add end tag first
+					str = g_string_insert(str,
+							      (len_prefix + len_word),
+							      closestr);
+					// then add start tag
+					str = g_string_insert(str,
+							      len_prefix,
+							      openstr);
+				}
+
+				len_overall = len_prefix;
 			}
-			/* point buf to changed str */
-			buf = g_utf8_casefold(str->str,-1);
-			list = g_list_next(list);
+
+			g_free(buf);
+			if ((list = g_list_next(list)))
+				buf = g_utf8_casefold(str->str,-1);
 		}
-		g_list_free(list);
+		g_list_free(listbase);
 
 		/* else we have a phrase and only need to mark it */
 	} else {
-		len1 = strlen(buf);
-		len2 = strlen(searchbuf);
+		len_overall = strlen(buf);
+		len_word = strlen(searchbuf);
 		tmpbuf = strstr(buf, searchbuf);
 		if (tmpbuf) {
-			len3 = strlen(tmpbuf);
-			len4 = len1 - len3;
+			len_tail = strlen(tmpbuf);
+			len_prefix = len_overall - len_tail;
 			/* place end tag first */
-			str = g_string_insert(str, (len4 + len2),
+			str = g_string_insert(str, (len_prefix + len_word),
 					      closestr);
 			/* then place start tag */
-			str = g_string_insert(str, len4, openstr);
+			str = g_string_insert(str, len_prefix, openstr);
 		}
 	}
-	/* free searchbuf */
 	g_free(searchbuf);
 }
 
@@ -588,7 +576,7 @@ void main_entry_display(gpointer data, gchar * mod_name,
 
 	if (settings.displaySearchResults) {
 		search_str = g_string_new(text);
-		mark_search_words(search_str, TRUE);
+		mark_search_words(search_str);
 		str = g_string_append(str, search_str->str);
 		g_string_free(search_str, TRUE);
 	} else {

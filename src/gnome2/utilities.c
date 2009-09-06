@@ -504,7 +504,7 @@ void gui_load_module_tree(GtkWidget * tree)
 	/*  Prayer lists folder */
 	if(settings.prayerlist) {
 		gtk_tree_store_append(store, &prayerlist, NULL);
-		gtk_tree_store_set(store, &prayerlist, 0, _("Prayer List/Journal"));
+		gtk_tree_store_set(store, &prayerlist, 0, _("Prayer List/Journal"), -1);
 	}
 
 	tmp = mod_mgr_list_local_modules(settings.path_to_mods, TRUE);

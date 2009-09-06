@@ -894,7 +894,7 @@ void main_finds_verselist_selection_changed(GtkTreeSelection * selection,
 	g_free((gchar *)temp_key);
 
 	text_str = g_string_new(backendSearch->get_render_text(module,key));
-	mark_search_words(text_str, FALSE);
+	mark_search_words(text_str);
 
 #ifdef USE_GTKMOZEMBED
 	GString *html_text = g_string_new(HTML_START);
