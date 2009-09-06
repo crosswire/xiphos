@@ -55,6 +55,7 @@
 #include "gui/debug_glib_null.h"
 
 //static void create_menu(DIALOG_DATA * d, GdkEventButton * event);
+void commentary_prefixable_link(GtkHTML *html, const gchar *url, gpointer data);
 
 extern gboolean dialog_freed;
 extern gboolean do_display;

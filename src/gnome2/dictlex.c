@@ -282,11 +282,12 @@ static gint html_button_pressed(GtkWidget * html,
  *   gint
  */
 
+extern gboolean in_url;
+
 static gint html_button_released(GtkWidget * html,
 				GdkEventButton * event, gpointer data)
 {
 #ifdef GTKHTML
-	extern gboolean in_url;
 	gchar *key;
 	const gchar *url;
 #endif

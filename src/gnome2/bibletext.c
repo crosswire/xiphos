@@ -157,13 +157,14 @@ static gboolean on_text_button_press_event(GtkWidget * widget,
  *   gboolean
  */
 
+extern gboolean in_url;
+
 static gboolean on_text_button_release_event(GtkWidget * widget,
 					GdkEventButton * event,
 					gpointer date)
 {
 
 //#ifdef GTKHTML
-	extern gboolean in_url;
 	gchar *key;
 	const gchar *url;
 
@@ -279,11 +280,12 @@ static gboolean on_key_release_event         (GtkWidget       *widget,
 }
 */
 
+extern NAVBAR_VERSEKEY navbar_versekey;
+
 static
 void adj_changed(GtkAdjustment * adjustment1, gpointer user_data) 
 
 {
-	extern NAVBAR_VERSEKEY navbar_versekey;
 	static int scroll = 1;
 	if (!settings.chapter_scroll) return;
 	if (scroll && (adjustment1->value <= adjustment1->lower)) {

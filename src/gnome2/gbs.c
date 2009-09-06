@@ -128,12 +128,13 @@ static gboolean on_book_button_press_event(GtkWidget * widget,
  *   gboolean
  */
 
+extern gboolean in_url;
+
 static gboolean on_book_button_release_event(GtkWidget * widget,
 					GdkEventButton * event,
 					gpointer data)
 {
 #ifdef GTKHTML
-	extern gboolean in_url;
 	gchar *key;
 	const gchar *url;
 #endif /*GTKHTML */
