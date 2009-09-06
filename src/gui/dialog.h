@@ -73,6 +73,7 @@ void gui_generic_warning(char *);
 gint gui_gs_dialog(GS_DIALOG * info);
 gint gui_alert_dialog(GS_DIALOG * info);
 gint gui_yes_no_dialog(char *, char *);
+gint gui_close_confirmation_dialog(GS_DIALOG * info);
 
 #ifdef __cplusplus
 }

@@ -28,6 +28,7 @@ extern "C"
 #endif
 
 GtkWidget *gui_create_editor_tree(EDITOR * editor);
+GtkWidget *create_edit_tree_menu (EDITOR * editor);
 
 #ifdef __cplusplus
 }

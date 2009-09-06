@@ -31,6 +31,25 @@ void gui_update_install_status(glong total, glong done, const gchar *message);
 void gui_update_install_progressbar(gdouble fraction);
 void gui_open_mod_mgr(void);
 void gui_open_mod_mgr_initial_run(void);
+void clear_and_hide_progress_bar(void);
+void on_notebook1_switch_page(GtkNotebook * notebook, GtkNotebookPage * page, guint page_num, gpointer user_data);
+void on_radiobutton2_toggled(GtkToggleButton * togglebutton, gpointer user_data);
+void on_radiobutton4_toggled(GtkToggleButton * togglebutton, gpointer user_data);
+void save_sources(void);
+void on_refresh_clicked(GtkButton * button, gpointer  user_data);
+void on_install_clicked(GtkButton * button, gpointer  user_data);
+void on_remove_clicked(GtkButton * button, gpointer  user_data);
+void on_archive_clicked(GtkButton * button, gpointer  user_data);
+void on_index_clicked(GtkButton * button, gpointer  user_data);
+void on_delete_index_clicked(GtkButton * button, gpointer  user_data);
+void on_load_sources_clicked(GtkButton * button, gpointer  user_data);
+void on_cancel_clicked(GtkButton * button, gpointer  user_data);
+void on_mod_mgr_response(GtkDialog * dialog, gint response_id, gpointer user_data);
+void on_button5_clicked(GtkButton * button, gpointer user_data);
+void on_button6_clicked(GtkButton * button, gpointer user_data);
+void on_button7_clicked(GtkButton * button, gpointer user_data);
+void on_button8_clicked(GtkButton * button, gpointer user_data);
+gboolean on_treeview1_button_release_event(GtkWidget * widget, GdkEventButton * event, gpointer user_data);
 
 #ifdef __cplusplus
 }

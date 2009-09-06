@@ -107,6 +107,31 @@ extern gchar *verse_selected;
 
 void gui_create_search_dialog(void);
 void gui_set_drop_target(GtkWidget * target);
+void on_comboboxentry2_changed(GtkComboBox * combobox, gpointer user_data);
+void button_clean(GtkButton * button, gpointer user_data);
+void button_save(GtkButton * button, gpointer user_data);
+void _on_destroy(GtkWidget * dialog, gpointer user_data);
+void on_button_begin_search(GtkButton * button, gpointer user_data);
+void on_togglebutton_show_main(GtkToggleButton * togglebutton, gpointer user_data);
+void list_name_changed(GtkEditable * editable, gpointer user_data);
+void range_name_changed(GtkEditable * editable, gpointer user_data);
+void range_text_changed(GtkEditable * editable, gpointer user_data);
+void new_modlist(GtkButton * button, gpointer user_data);
+void clear_modules(GtkButton * button, gpointer user_data);
+void delete_module(GtkButton * button, gpointer user_data);
+void save_modlist(GtkButton * button, gpointer user_data);
+void new_range(GtkButton * button, gpointer user_data);
+void save_range(GtkButton * button, gpointer user_data);
+void delete_range(GtkButton * button, gpointer user_data);
+void delete_list(GtkButton * button, gpointer user_data);
+void scope_toggled(GtkToggleButton * togglebutton, gpointer user_data);
+void mod_list_toggled(GtkToggleButton * togglebutton, gpointer user_data);
+void current_module_toggled(GtkToggleButton * togglebutton, gpointer user_data);
+gboolean _on_button_release_event(GtkWidget * widget, GdkEventButton * event, gpointer data);
+void on_closebutton2_clicked(GtkButton * button, gpointer user_data);
+void _on_dialog2_response(GtkDialog * dialog, gint response_id, gpointer user_data);
+void on_toolbutton12_clicked(GtkToolButton * toolbutton, gpointer user_data);
+void _on_dialog_response(GtkDialog * dialog, gint response_id, gpointer user_data);
 
 #ifdef __cplusplus
 }

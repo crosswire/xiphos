@@ -24,7 +24,6 @@
 #endif
 
 #include <gnome.h>
-#include <glade/glade-xml.h>
 #include <ctype.h>
 
 #ifdef USE_GTKMOZEMBED
@@ -128,7 +127,7 @@ gint  _get_type_mod_list (void)
  *   
  */
 
-gchar * _get_key (gchar * mod_name) 
+gchar * _get_key (gchar * mod_name)
 {
     	gchar *key = NULL;
     

@@ -51,7 +51,7 @@ static GtkWidget *textview;
 static GtkTextBuffer *textbuffer;
 static gchar *note;
 
-void on_buffer_changed (GtkTextBuffer *textbuffer, gpointer user_data) 
+void on_buffer_changed (GtkTextBuffer *textbuffer, gpointer user_data)
 {
 	GtkTextIter start;
 	GtkTextIter end;

@@ -33,16 +33,7 @@ extern "C" {
 #define	g_strdup_printf(f, ...)		XI_g_strdup_printf(__FILE__, __LINE__, f, __VA_ARGS__)
 #define	g_string_printf(s, f, ...)	XI_g_string_printf(__FILE__, __LINE__, s, f, __VA_ARGS__)
 
-gchar*	XI_g_strdup_printf (const char *filename,
-			    int linenumber,
-			    const char *format,
-			    ...) G_GNUC_PRINTF (3, 4) G_GNUC_MALLOC;
-
-void	XI_g_string_printf (const char *filename,
-			    int linenumber,
-			    GString *string,
-			    const char *format,
-			    ...) G_GNUC_PRINTF (4, 5);
+#include "gui.h"
 
 #ifdef __cplusplus
 }

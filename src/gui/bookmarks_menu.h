@@ -52,6 +52,21 @@ extern gboolean bookmarks_changed;
 void gui_save_bookmarks(GtkMenuItem * menuitem, gpointer user_data);
 void gui_create_bookmark_menu(void);
 void gui_save_bookmarks_treeview(void);
+void bibletime_bookmarks_activate(GtkMenuItem * menuitem, gpointer user_data);
+void on_allow_reordering_activate(GtkMenuItem * menuitem, gpointer user_data);
+void on_dialog_activate(GtkMenuItem * menuitem, gpointer user_data);
+void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user_data);
+void on_remove_folder_activate(GtkMenuItem * menuitem, gpointer user_data);
+void restore_ok(GtkButton * button, GtkWidget * filesel);
+void restore_cancel(GtkButton * button, GtkWidget * dlg);
+void on_restore_folder_activate(GtkMenuItem * menuitem, gpointer user_data);
+void on_delete_item_activate(GtkMenuItem * menuitem, gpointer user_data);
+void on_expand_activate(GtkMenuItem * menuitem, gpointer user_data);
+void on_collapse_activate(GtkMenuItem * menuitem, gpointer user_data);
+void on_add_bookmark_activate(GtkMenuItem * menuitem, gpointer user_data);
+void on_insert_bookmark_activate(GtkMenuItem * menuitem, gpointer user_data);
+void on_new_folder_activate(GtkMenuItem * menuitem, gpointer user_data);
+void on_open_in_tab_activate(GtkMenuItem * menuitem, gpointer user_data);
 
 #ifdef __cplusplus
 }

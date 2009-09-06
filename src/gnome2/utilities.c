@@ -1001,7 +1001,7 @@ struct language_set {
 
 /* one-shot setup during initialization. */
 void
-language_init()
+language_init(void)
 {
 	int i;
 	for (i = 0; i < N_LANGSET_MODTYPES; ++i) {
