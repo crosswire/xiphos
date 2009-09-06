@@ -102,6 +102,12 @@ void on_notebook_main_new_tab_clicked(GtkButton *button, gpointer user_data);
 
 extern gboolean change_tabs_no_redisplay;
 
+void gui_recompute_shows(void);
+void gui_recompute_view_menu_choices(void);
+void setup_book_editor_tab(PASSAGE_TAB_INFO *pt);
+GString *pick_tab_label(PASSAGE_TAB_INFO *pt);
+void gui_notebook_main_switch_page(GtkNotebook * notebook, GtkNotebookPage * page, gint page_num, GList **tl);
+
 #ifdef __cplusplus
 }
 #endif

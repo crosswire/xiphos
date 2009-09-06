@@ -37,7 +37,10 @@ void gui_lookup_dictlex_selection(GtkMenuItem * menuitem,
 void gui_set_dictlex_mod_and_key(gchar *mod, gchar *key);
 void gui_display_dictlex(gchar * key);
 GtkWidget *gui_create_dictionary_pane(void);
-	
+void on_entryDictLookup_changed(GtkEditable * editable, gpointer data);
+void dict_key_entry_changed(GtkEntry * entry, gpointer data);
+void button_back_clicked(GtkButton * button, gpointer user_data);
+void button_forward_clicked(GtkButton * button, gpointer user_data);	
 
 #ifdef __cplusplus
 }

@@ -61,8 +61,19 @@ void on_colorbutton5_color_set(GtkColorButton * colorbutton, gpointer user_data)
 
 void on_dialog_prefs_response(GtkDialog * dialog, gint response_id, gpointer user_data);
 
-
 void gui_setup_preferences_dialog(void);
+
+void on_colorbutton6_color_set(GtkColorButton * colorbutton, gpointer user_data);
+void on_colorbutton7_color_set(GtkColorButton * colorbutton, gpointer user_data);
+void on_checkbutton10_toggled(GtkToggleButton * togglebutton, gpointer user_data);
+void on_checkbutton11_toggled(GtkToggleButton * togglebutton, gpointer user_data);
+void on_checkbutton12_toggled(GtkToggleButton * togglebutton, gpointer user_data);
+void on_checkbutton_scroll_toggled(GtkToggleButton * togglebutton, gpointer user_data);
+void on_checkbutton_imageresize_toggled(GtkToggleButton * togglebutton, gpointer user_data);
+void on_checkbutton_versehighlight_toggled(GtkToggleButton * togglebutton, gpointer user_data);
+void on_checkbutton_doublespace_toggled(GtkToggleButton * togglebutton, gpointer user_data);
+void on_checkbutton_prayerlist_toggled(GtkToggleButton * togglebutton, gpointer user_data);
+void on_basecombobox1_changed(GtkComboBox * combobox, gpointer user_data);
 
 #ifdef __cplusplus
 }

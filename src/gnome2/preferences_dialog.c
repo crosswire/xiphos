@@ -726,11 +726,12 @@ on_checkbutton4_toggled(GtkToggleButton *togglebutton,
  *   void
  */
 
+extern gboolean style_display;
+
 void
 on_checkbutton5_toggled(GtkToggleButton * togglebutton,
 			gpointer user_data)
 {
-	extern gboolean style_display;
 	xml_set_value("Xiphos", "misc", "versestyle",
 		      (togglebutton->active ? "1" : "0"));
 	settings.versestyle = togglebutton->active;
