@@ -2151,6 +2151,7 @@ save_sources(void)
 		valid = gtk_tree_model_iter_next(local_model, &iter);
 	}
 
+	mod_mgr_reread_config();
 	load_source_treeviews();
 }
 

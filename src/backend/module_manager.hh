@@ -81,6 +81,7 @@ void backend_terminate_module_mgr(void);
 void backend_init_module_mgr_config(void);
 int backend_init_module_mgr_config_extras(void);
 void backend_module_mgr_clear_config(void);	
+void backend_module_mgr_reread_config(void);
 void backend_module_mgr_add_source(const char * vtype, 
 				   const char * type, 
 				   const char * caption, 

@@ -1,3 +1,7 @@
+2009-09-06  karl <charcoal@users.sf.net>
+
+	* correct re-appearing remote ftp source for delete-then-load-standard.
+
 2009-09-05  karl <charcoal@users.sf.net>
 
 	* 2nd shot at CrossWire as default remote repo, requiring rather a
