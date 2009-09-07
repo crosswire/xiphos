@@ -38,9 +38,9 @@ def detect(conf):
 	if not winrc:
 		if v['CC_NAME'] in ['gcc', 'cc', 'g++', 'c++']:
 			winrc = conf.find_program('windres', var='WINRC', path_list = v['PATH'])
-                        # cross-compilation
-                        if not winrc:
-                            winrc = conf.find_program('i686-mingw32-windres', var='WINRC', path_list = v['PATH'])
+			# cross-compilation
+			if not winrc:
+				winrc = conf.find_program('i686-mingw32-windres', var='WINRC', path_list = v['PATH'])
 		elif v['CC_NAME'] == 'msvc':
 			winrc = conf.find_program('RC', var='WINRC', path_list = v['PATH'])
 			v['WINRC_TGT_F'] = '/fo'
