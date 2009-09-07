@@ -399,6 +399,8 @@ void mark_search_words(GString * str)
 		g_strstrip(searchbuf);
 	}
 
+	buf = g_utf8_casefold(str->str,-1);
+
 	/* if we have a muti word search go here */
 	if (settings.searchType == -2 || settings.searchType == -4) {
 		char *token;
@@ -424,7 +426,6 @@ void mark_search_words(GString * str)
 			count = 1;
 		}
 
-		buf = g_utf8_casefold(str->str,-1);
 		listbase = list = g_list_first(list);
 
 		for (i = 0; i < count; i++) {
