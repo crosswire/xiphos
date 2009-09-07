@@ -99,18 +99,8 @@ enum {
 	COL_OFFSET,
 	N_COLUMNS
 }; 
-/*
-enum {
-	TYPE_URI,
-	BLANK,
-	MODULE,
-	KEY,
-	TYPE_NOTE,
-	NOTE_NUM
-};
-*/
-gboolean bible_freed;
 
+gboolean bible_freed;
 gboolean dialog_freed;
 gboolean bible_apply_change;
 
@@ -1434,9 +1424,13 @@ static gint new_url_handler(DIALOG_DATA * t, const gchar * url, gboolean clicked
 
 gint main_dialogs_url_handler(DIALOG_DATA * t, const gchar * url, gboolean clicked)
 {	
+	static int handling_url = FALSE;
 	gint retval = 0;
+
+	if (handling_url) return;
+	handling_url = TRUE;
+
 	GS_message(("main_dialogs_url_handler url = %s",url));
-	
 
 	if (strstr(url, "sword://") ||
 	    strstr(url, "bible://")) {
@@ -1450,6 +1444,8 @@ gint main_dialogs_url_handler(DIALOG_DATA * t, const gchar * url, gboolean click
 		return new_url_handler(t,url,clicked);
 	/*if(strstr(url,"sword://"))
 		return sword_uri(t, url, clicked);*/
+
+	handling_url = FALSE;
 	return retval;
 }
 
