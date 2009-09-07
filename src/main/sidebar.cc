@@ -33,6 +33,7 @@
 #include <swmodule.h>
 
 #include "gui/xiphos.h"
+#include "gui/main_menu.h"
 #include "gui/widgets.h"
 #include "gui/sidebar.h"
 #include "gui/tabbed_browser.h"
@@ -699,6 +700,12 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 			add_verses_to_chapter(model, selected, key);
 		*/
 
+		if (!GTK_CHECK_MENU_ITEM(widgets.viewtexts_item)->active) {
+			GTK_CHECK_MENU_ITEM(widgets.viewtexts_item)->active = 1;
+			on_show_bible_text_activate
+			    (GTK_MENU_ITEM(widgets.viewtexts_item), NULL);
+		}
+
 		if (key)
 			main_url_handler(key, TRUE);
 		else 
@@ -711,9 +718,23 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 					      (widgets.
 					       notebook_comm_book), 0);
 		settings.comm_showing = TRUE;
+
+		if ((!GTK_CHECK_MENU_ITEM(widgets.viewcomms_item)->active) ||
+		    (!settings.comm_showing)) {
+			GTK_CHECK_MENU_ITEM(widgets.viewcomms_item)->active = 1;
+			on_show_commentary_activate
+			    (GTK_MENU_ITEM(widgets.viewcomms_item), NULL);
+		}
+
 		main_display_commentary(mod, settings.currentverse);
 		break;
 	case DICTIONARY_TYPE:
+		if (!GTK_CHECK_MENU_ITEM(widgets.viewdicts_item)->active) {
+			GTK_CHECK_MENU_ITEM(widgets.viewdicts_item)->active = 1;
+			on_show_dictionary_lexicon_activate
+			    (GTK_MENU_ITEM(widgets.viewcomms_item), NULL);
+		}
+
 		main_display_dictionary(mod, settings.dictkey);
 		break;
 	case BOOK_TYPE:
@@ -751,6 +772,14 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 					 (sidebar.module_list), path,
 					 FALSE);
 		gtk_tree_path_free(path);
+
+		if ((!GTK_CHECK_MENU_ITEM(widgets.viewcomms_item)->active) ||
+		    (!settings.comm_showing)) {
+			GTK_CHECK_MENU_ITEM(widgets.viewcomms_item)->active = 1;
+			on_show_commentary_activate
+			    (GTK_MENU_ITEM(widgets.viewcomms_item), NULL);
+		}
+
 		main_display_book(mod, (key ? key : (gchar *) "0"));
 		main_setup_navbar_book(mod, (key ? atoi(key) : 0));
 		break;
