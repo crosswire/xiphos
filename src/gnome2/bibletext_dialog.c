@@ -62,41 +62,10 @@
  */
 static DIALOG_DATA *cur_vt;
 
-GtkTextBuffer *text_buffer;
 /******************************************************************************
  * externs
  */
-extern gboolean gsI_isrunning;	/* information dialog */
 extern gboolean bible_freed;
-extern gboolean bible_apply_change;
-extern gboolean do_display;
-
-
-/******************************************************************************
- * Name
- *   gui_close_text_dialog
- *
- * Synopsis
- *   #include "bibletext_dialog.h"
- *
- *   void btn_close_clicked(GtkButton * button,DIALOG_DATA * vt)
- *
- * Description
- *   call gtk_widget_destroy to destroy the bibletext dialog
- *   set vt->dialog to NULL
- *
- * Return value
- *   void
- */
-/*
-static void close_text_dialog(DIALOG_DATA * t)
-{
-	if (t->dialog) {
-		bible_freed = FALSE;
-		gtk_widget_destroy(t->dialog);
-	}
-}
-*/
 
 #ifndef USE_GTKMOZEMBED
 /******************************************************************************
@@ -137,7 +106,7 @@ static void show_in_statusbar(GtkWidget *statusbar,
 	}
 	g_free(text);
 }
-#endif
+#endif /* !USE_GTKMOZEMBED */
 
 
 /******************************************************************************
@@ -165,150 +134,8 @@ static void link_clicked(GtkHTML *html,
 	cur_vt = vt;
 	main_dialogs_url_handler(vt, url, TRUE);
 }
-#endif
+#endif /* !USE_GTKMOZEMBED */
 
-/******************************************************************************
- * Name
- *   book_changed
- *
- * Synopsis
- *   #include "bibletext_dialog.h"
- *
- *   void book_changed(GtkEditable * editable, gpointer user_data)
- *
- * Description
- *   change book
- *
- * Return value
- *   void
- */
-/*
-static void book_changed(GtkEditable *editable,
-			 DIALOG_DATA *vt)
-{
-//	gchar buf[256];
-	gchar *url;
-	gchar *bookname = gtk_editable_get_chars(editable, 0, -1);
-	cur_vt = vt;
-	if (*bookname) {
-		url = g_strdup_printf("sword:///%s 1:1", bookname);
-		main_dialogs_url_handler(vt, url, TRUE);
-		g_free(url);
-	}
-}
-
-*/
-/******************************************************************************
- * Name
- *   chapter_button_release_event
- *
- * Synopsis
- *   #include "bibletext_dialog.h"
- *
- *   gboolean chapter_button_release_event(GtkWidget * widget,
- *			GdkEventButton * event,   gpointer user_data)
- *
- * Description
- *    change chapter
- *
- * Return value
- *   gboolean
- */
-/*
-static gboolean chapter_button_release_event(GtkWidget *widget,
-					     GdkEventButton *event,
-					     DIALOG_DATA *vt)
-{
-	G_CONST_RETURN gchar *bookname;
-	gchar *url;
-	gint chapter;
-	cur_vt = vt;
-
-	bookname = (gchar*)gtk_entry_get_text(GTK_ENTRY(vt->cbe_book));
-	chapter =
-	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
-					     (vt->spb_chapter));
-	url = g_strdup_printf("sword:///%s %d:1", bookname, chapter);
-	main_dialogs_url_handler(vt, url, TRUE);
-	g_free(url);
-	return FALSE;
-}
-*/
-
-/******************************************************************************
- * Name
- *
- *
- * Synopsis
- *   #include "bibletext_dialog.h"
- *
- *   gboolean (GtkWidget * widget, GdkEventButton * event,  gpointer user_data)
- *
- * Description
- *    change verse
- *
- * Return value
- *   gboolean
- */
-/*
-static gboolean verse_button_release_event(GtkWidget *widget,
-					   GdkEventButton *event,
-					   DIALOG_DATA *vt)
-{
-	const gchar *bookname;
-//	gchar buf[256], *val_key;
-	gint chapter, verse;
-	gchar *url;
-	cur_vt = vt;
-
-	bookname = gtk_entry_get_text(GTK_ENTRY(vt->cbe_book));
-	chapter =
-	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
-					     (vt->spb_chapter));
-	verse =
-	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
-					     (vt->spb_verse));
-
-	url = g_strdup_printf("sword:///%s %d:%d", bookname, chapter, verse);
-	main_dialogs_url_handler(vt, url, TRUE);
-	g_free(url);
-	return FALSE;
-}
-*/
-
-/******************************************************************************
- * Name
- *   entry_key_press_event
- *
- * Synopsis
- *   #include "bibletext_dialog.h"
- *
- *   gboolean entry_key_press_event(GtkWidget * widget,
- *				GdkEventKey * event, gpointer user_data)
- *
- * Description
- *   go to verse in free form entry if user hit <enter>
- *
- * Return value
- *   gboolean
- */
-/*
-static gboolean entry_key_press_event(GtkWidget * widget,
-				      GdkEventKey * event,
-				      DIALOG_DATA * vt)
-{
-	// if <enter> key 
-	cur_vt = vt;
-	if (event->keyval == 65293 || event->keyval == 65421) {
-		const gchar *buf = gtk_entry_get_text(GTK_ENTRY(widget));
-		gchar *url = g_strdup_printf("sword:///%s", buf);
-		main_dialogs_url_handler(vt, url, TRUE);
-		g_free(url);
-	}
-	return FALSE;
-}
-*/
- 
 /******************************************************************************
  * Name
  *   dialog_destroy
@@ -535,7 +362,7 @@ static void dialog_url(GtkHTML *html,
 	if (url_buf)
 		g_free(url_buf);
 }
-#endif
+#endif /* !USE_GTKMOZEMBED */
 
 
 /******************************************************************************
@@ -712,7 +539,7 @@ static gboolean on_button_release_event(GtkWidget *widget,
 	}
 	return FALSE;
 }
-#endif
+#endif /* !USE_GTKMOZEMBED */
 
 #ifdef USE_GTKMOZEMBED
 static void
@@ -723,7 +550,7 @@ _popupmenu_requested_cb (GeckoHtml *html,
 	DIALOG_DATA * d = (DIALOG_DATA *)user_data;
 	gui_text_dialog_create_menu(d);
 }
-#endif
+#endif /* USE_GTKMOZEMBED */
 
 /******************************************************************************
  * Name
@@ -865,7 +692,8 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 
 	g_signal_connect(GTK_OBJECT(vt->previewer), "link_clicked",
 				   G_CALLBACK(link_clicked), vt);
-#endif
+#endif /* !USE_GTKMOZEMBED */
+
 	vt->statusbar = gtk_statusbar_new();
 	gtk_widget_show(vt->statusbar);
 	gtk_box_pack_start(GTK_BOX(vbox33), vt->statusbar, FALSE, FALSE,

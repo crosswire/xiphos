@@ -54,45 +54,18 @@
 
 #include "gui/debug_glib_null.h"
 
-//static void create_menu(DIALOG_DATA * d, GdkEventButton * event);
 #ifndef USE_GTKMOZEMBED
 void commentary_prefixable_link(GtkHTML *html, const gchar *url, gpointer data);
 #endif
 
 extern gboolean dialog_freed;
 extern gboolean do_display;
+
 /****************************************************************************************
  * static - global to this file only
  */
-
 DIALOG_DATA *cur_d;
-//static gboolean apply_change;
 
-
-/******************************************************************************
- * Name
- *   gui_display_commentary_with_struct
- *
- * Synopsis
- *   #include "commentary.h"
- *
- *   void gui_display_commentary_with_struct(gchar * key)	
- *
- * Description
- *    display new key in current commentary
- *
- * Return value
- *   void
- */
-
-void gui_display_commentary_with_struct(DIALOG_DATA *d,
-					gchar *key)
-{
-	strcpy(settings.comm_key, key);
-	if (d->key)
-		g_free(d->key);
-	d->key = g_strdup(key);
-}
 
 /******************************************************************************
  * Name
@@ -261,7 +234,7 @@ void commentary_prefixable_link(GtkHTML *html,
 	*(strrchr(buf, ' ')) = '\0';
 	gui_prefixable_link_clicked(html, url, data, buf);
 }
-#endif
+#endif /* !USE_GTKMOZEMBED */
 
 
 /******************************************************************************
@@ -321,7 +294,7 @@ _popupmenu_requested_cb (GeckoHtml *html,
     	gui_menu_popup (NULL, d);
 	//gui_commentary_dialog_create_menu(d); 
 }
-#endif
+#endif /* USE_GTKMOZEMBED */
 
 /******************************************************************************
  * Name
