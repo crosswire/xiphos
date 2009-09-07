@@ -87,7 +87,9 @@ if HAVE_GECKO_1_9_1
 else
 if HAVE_GECKO_1_9
 else
+if HAVE_GECKO
     xiphos_LDFLAGS = -R$(GECKO_HOME)
+endif
 endif
 endif
 
