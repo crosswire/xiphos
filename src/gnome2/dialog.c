@@ -43,7 +43,8 @@ static GtkWidget *entry5 = NULL;
 static GtkWidget *entry6 = NULL;
 static gint retval = 3;
 
-
+GS_DIALOG * standard_info;
+GtkWidget * dialog_request;
 
 /******************************************************************************
  * Name
@@ -111,8 +112,7 @@ static void get_entry_text(GS_DIALOG * info)
  * Synopsis
  *   #include "gui/dialog.h"
  *
- *   void on_dialog_response(GtkDialog * dialog, gint response_id,
- *							GS_DIALOG * info)
+ *   void on_dialog_response(GtkDialog * dialog, gint response_id, GS_DIALOG * info)
  *
  * Description
  *   
@@ -121,8 +121,7 @@ static void get_entry_text(GS_DIALOG * info)
  *   void
  */
 
-static void on_dialog_response(GtkDialog * dialog, gint response_id,
-			       GS_DIALOG * info)
+static void on_dialog_response(GtkDialog * dialog, gint response_id, GS_DIALOG * info)
 {
 	GS_warning(("%d", response_id));
 	switch (response_id) {
@@ -143,6 +142,29 @@ static void on_dialog_response(GtkDialog * dialog, gint response_id,
 
 	}
 }
+
+/******************************************************************************
+ * Name
+ *   on_dialog_enter
+ *
+ * Synopsis
+ *   #include "gui/dialog.h"
+ *
+ *   void on_dialog_enter(void)
+ *
+ * Description
+ *   canned Enter key route to on_dialog_response
+ *
+ * Return value
+ *   void
+ */
+
+static void on_dialog_enter(void)
+{
+	on_dialog_response(GTK_DIALOG(dialog_request), GTK_RESPONSE_OK, standard_info);
+	gtk_widget_destroy(GTK_WIDGET(dialog_request));
+}
+
 
 static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 {
@@ -268,7 +290,6 @@ static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 
 static GtkWidget *create_dialog_request(GS_DIALOG * info)
 {
-	GtkWidget *dialog_request;
 	GtkWidget *dialog_vbox3;
 	GtkWidget *hbox4;
 	GtkWidget *image6;
@@ -285,10 +306,9 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 
 	dialog_request = gtk_dialog_new();
 	info->dialog = dialog_request;
-	gtk_container_set_border_width(GTK_CONTAINER(dialog_request),
-				       6);
+	gtk_container_set_border_width(GTK_CONTAINER(dialog_request), 6);
 	gtk_window_set_title(GTK_WINDOW(dialog_request), 
-			     info->title ? info->title : " ");
+			     (info->title ? info->title : " "));
 	gtk_window_set_modal(GTK_WINDOW(dialog_request), TRUE);
 	gtk_window_set_resizable(GTK_WINDOW(dialog_request), FALSE);
 	gtk_dialog_set_has_separator(GTK_DIALOG(dialog_request), FALSE);
@@ -348,6 +368,8 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 		if (info->text1)
 			gtk_entry_set_text(GTK_ENTRY(entry1),
 					   info->text1);
+		g_signal_connect((gpointer) entry1, "activate",
+				 G_CALLBACK(on_dialog_enter), info);
 	}
 
 	if (info->label2) {
@@ -369,7 +391,8 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 		if (info->text2)
 			gtk_entry_set_text(GTK_ENTRY(entry2),
 					   info->text2);
-
+		g_signal_connect((gpointer) entry2, "activate",
+				 G_CALLBACK(on_dialog_enter), info);
 	}
 
 	if (info->label3) {
@@ -391,7 +414,8 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 		if (info->text3)
 			gtk_entry_set_text(GTK_ENTRY(entry3),
 					   info->text3);
-
+		g_signal_connect((gpointer) entry3, "activate",
+				 G_CALLBACK(on_dialog_enter), info);
 	}
 
 	if (info->label4) {
@@ -413,7 +437,8 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 		if (info->text4)
 			gtk_entry_set_text(GTK_ENTRY(entry4),
 					   info->text4);
-
+		g_signal_connect((gpointer) entry4, "activate",
+				 G_CALLBACK(on_dialog_enter), info);
 	}
 
 	if (info->label5) {
@@ -435,7 +460,8 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 		if (info->text5)
 			gtk_entry_set_text(GTK_ENTRY(entry5),
 					   info->text5);
-
+		g_signal_connect((gpointer) entry5, "activate",
+				 G_CALLBACK(on_dialog_enter), info);
 	}
 
 	if (info->label6) {
@@ -457,7 +483,8 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 		if (info->text6)
 			gtk_entry_set_text(GTK_ENTRY(entry6),
 					   info->text6);
-
+		g_signal_connect((gpointer) entry6, "activate",
+				 G_CALLBACK(on_dialog_enter), info);
 	}
 
 	dialog_action_area3 = GTK_DIALOG(dialog_request)->action_area;
@@ -505,32 +532,30 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 
 GS_DIALOG *gui_new_dialog(void)
 {
-	GS_DIALOG *info;
+	standard_info = g_new0(GS_DIALOG, 1);
 
-	info = g_new0(GS_DIALOG, 1);
-
-	info->stock_icon = NULL;
-	info->dialog = NULL;
-	info->title = NULL;
-	info->text1 = NULL;
-	info->text2 = NULL;
-	info->text3 = NULL;
-	info->text4 = NULL;
-	info->text5 = NULL;
-	info->text6 = NULL;
-	info->label_top = NULL;
-	info->label_middle = NULL;
-	info->label1 = NULL;
-	info->label2 = NULL;
-	info->label3 = NULL;
-	info->label4 = NULL;
-	info->label5 = NULL;
-	info->label6 = NULL;
-	info->label_bottom = NULL;
-	info->ok = FALSE;
-	info->cancel = FALSE;
-	info->yes = FALSE;
-	info->no = FALSE;
+	standard_info->stock_icon = NULL;
+	standard_info->dialog = NULL;
+	standard_info->title = NULL;
+	standard_info->text1 = NULL;
+	standard_info->text2 = NULL;
+	standard_info->text3 = NULL;
+	standard_info->text4 = NULL;
+	standard_info->text5 = NULL;
+	standard_info->text6 = NULL;
+	standard_info->label_top = NULL;
+	standard_info->label_middle = NULL;
+	standard_info->label1 = NULL;
+	standard_info->label2 = NULL;
+	standard_info->label3 = NULL;
+	standard_info->label4 = NULL;
+	standard_info->label5 = NULL;
+	standard_info->label6 = NULL;
+	standard_info->label_bottom = NULL;
+	standard_info->ok = FALSE;
+	standard_info->cancel = FALSE;
+	standard_info->yes = FALSE;
+	standard_info->no = FALSE;
 	/* set entrys to null */
 	entry1 = NULL;
 	entry2 = NULL;
@@ -539,7 +564,7 @@ GS_DIALOG *gui_new_dialog(void)
 	entry5 = NULL;
 	entry6 = NULL;
 
-	return info;
+	return standard_info;
 }
 
 
@@ -667,7 +692,7 @@ gint gui_close_confirmation_dialog(GS_DIALOG * info)
 	static gboolean is_running = FALSE;
 
 	if (!is_running) {
-		dialog = create_dialog_alert(info);	//gs_dialog_build(info);
+		dialog = create_dialog_alert(info);
 		gtk_dialog_add_button (GTK_DIALOG (dialog),
 				       _("Close _without Saving"),
 				       GTK_RESPONSE_NO);
