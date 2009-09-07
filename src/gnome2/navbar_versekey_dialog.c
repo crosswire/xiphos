@@ -210,9 +210,7 @@ gboolean on_book_down_button_release_event(GtkWidget * widget,
 
 static void menu_deactivate_callback(GtkWidget * widget, gpointer user_data)
 {
-	GtkWidget *menu_button;
-
-	menu_button = GTK_WIDGET(user_data);
+	GtkWidget *menu_button = GTK_WIDGET(user_data);
 
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(menu_button), FALSE);
 }
@@ -431,14 +429,13 @@ static void on_entry_activate(GtkEntry * entry, DIALOG_DATA *dialog)
 		return;
 	gchar *url = g_strdup_printf("sword:///%s", gkey);
 	
-	dialog->navbar.module_name = g_string_assign(dialog->navbar.module_name,settings.MainWindowModule);
+	dialog->navbar.module_name = g_string_assign(dialog->navbar.module_name,
+						     settings.MainWindowModule);
 	main_navbar_versekey_set(dialog->navbar, gkey);
 	main_dialogs_url_handler(dialog, url, TRUE);
 
-	if(url)
-		g_free(url);
-	if(gkey)
-		g_free((gchar*)gkey);
+	g_free(url);
+	g_free((gchar*)gkey);
 }
 
 
@@ -789,32 +786,8 @@ void _connect_signals(NAVBAR_VERSEKEY navbar, DIALOG_DATA * dialog)
 	g_signal_connect ((gpointer)navbar.button_verse_down , "leave_notify_event",
 		    G_CALLBACK (on_verse_down_leave_notify_event),
 		    dialog);		 
+
 			 
-			 
-			 
-			 
-	
-/*	
-	g_signal_connect((gpointer) navbar.button_book_up,
-			 "clicked", G_CALLBACK(on_book_button_up_clicked),
-			 dialog);
-	g_signal_connect((gpointer) navbar.button_book_down,
-			 "clicked", G_CALLBACK(on_book_button_down_clicked),
-			 dialog);
-	g_signal_connect((gpointer) navbar.button_chapter_up,
-			 "clicked", G_CALLBACK(on_chapter_button_up_clicked),
-			 dialog);
-	g_signal_connect((gpointer) navbar.button_chapter_down,
-			 "clicked", G_CALLBACK(on_chapter_button_down_clicked),
-			 dialog);
-	g_signal_connect((gpointer) navbar.button_verse_up,
-			 "clicked", G_CALLBACK(on_verse_button_up_clicked),
-			 dialog);
-	g_signal_connect((gpointer) navbar.button_verse_down,
-			 "clicked", G_CALLBACK(on_verse_button_down_clicked),
-			 dialog);
-			 
-*/
 	g_signal_connect((gpointer) navbar.button_sync,
 			 "clicked", G_CALLBACK(gui_bible_dialog_sync_toggled),
 			 dialog);
