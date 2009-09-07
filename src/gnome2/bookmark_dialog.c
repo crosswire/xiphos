@@ -51,6 +51,9 @@ static GtkWidget *textview;
 static GtkTextBuffer *textbuffer;
 static gchar *note;
 
+GtkWidget *bookmark_dialog;
+GtkWidget *mark_verse_dialog;
+
 void on_buffer_changed (GtkTextBuffer *textbuffer, gpointer user_data)
 {
 	GtkTextIter start;
@@ -241,6 +244,27 @@ void on_dialog_response(GtkDialog * dialog,
 
 /******************************************************************************
  * Name
+ *   on_dialog_enter
+ *
+ * Synopsis
+ *   #include "gui/bookmark_dialog.h"
+ *
+ * Description
+ *  "Enter" key route to on_dialog_response.
+ *
+ * Return value
+ *   void
+ */
+ 
+void on_dialog_enter(void)
+{
+	on_dialog_response(GTK_DIALOG(bookmark_dialog),
+			   GTK_RESPONSE_OK,
+			   NULL);
+}
+
+/******************************************************************************
+ * Name
  *   on_mark_verse_response
  *
  * Synopsis
@@ -293,6 +317,26 @@ void on_mark_verse_response(GtkDialog * dialog,
 	xml_save_settings_doc(settings.fnconfigure);
 }
 
+/******************************************************************************
+ * Name
+ *   on_mark_verse_enter
+ *
+ * Synopsis
+ *   #include "gui/bookmark_dialog.h"
+ *
+ * Description
+ *  "Enter" key route to on_mark_verse_response.
+ *
+ * Return value
+ *   void
+ */
+ 
+void on_mark_verse_enter(void)
+{
+	on_mark_verse_response(GTK_DIALOG(mark_verse_dialog),
+			       GTK_RESPONSE_ACCEPT,
+			       NULL);
+}
 
 /******************************************************************************
  * Name
@@ -387,14 +431,11 @@ static void setup_treeview(void)
  */
  
 static GtkWidget *_create_bookmark_dialog(gchar * label, 
-				   	gchar * module, 
-				   	gchar * key)
+					  gchar * module, 
+					  gchar * key)
 {
 	GladeXML *gxml;
 	gchar *glade_file;
-	GtkWidget *dialog;
-//	GtkWidget *chooser;
-//	gint index = 0;
 
 	glade_file = gui_general_user_file ("bookmarks.glade", TRUE);
 	g_return_val_if_fail(glade_file != NULL, NULL);
@@ -406,8 +447,8 @@ static GtkWidget *_create_bookmark_dialog(gchar * label,
 	g_return_val_if_fail(gxml != NULL, NULL);
 
 	/* lookup the root widget */
-	dialog = glade_xml_get_widget (gxml, "dialog");
-	g_signal_connect(dialog, "response",
+	bookmark_dialog = glade_xml_get_widget (gxml, "dialog");
+	g_signal_connect(bookmark_dialog, "response",
 			 G_CALLBACK(on_dialog_response), NULL);
 	
 	/* treeview */
@@ -422,15 +463,18 @@ static GtkWidget *_create_bookmark_dialog(gchar * label,
 	gtk_entry_set_text(GTK_ENTRY(entry_label), label);
 	gtk_entry_set_text(GTK_ENTRY(entry_key), key);
 	gtk_entry_set_text(GTK_ENTRY(entry_module), module);
+	g_signal_connect(entry_label, "activate",
+			 G_CALLBACK(on_dialog_enter), NULL);
+	g_signal_connect(entry_key, "activate",
+			 G_CALLBACK(on_dialog_enter), NULL);
+	g_signal_connect(entry_module, "activate",
+			 G_CALLBACK(on_dialog_enter), NULL);
 
 	/* dialog buttons */
 	button_new_folder = glade_xml_get_widget (gxml, "button1");
 	button_add_bookmark = glade_xml_get_widget (gxml, "button3");
 	
-	/* connect signals and data */
-/*	glade_xml_signal_autoconnect_full
-		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);*/
-	return dialog;
+	return bookmark_dialog;
 }
 
 
@@ -453,7 +497,6 @@ static GtkWidget *_create_mark_verse_dialog(gchar * module,
 {
 	GladeXML *gxml;
 	gchar *glade_file;
-	GtkWidget *dialog;
 	GtkWidget *sw;	
 	gchar osisreference[100];
 	gchar *old_note = NULL;
@@ -473,11 +516,11 @@ static GtkWidget *_create_mark_verse_dialog(gchar * module,
 	g_return_val_if_fail(gxml != NULL, NULL);
 
 	/* lookup the root widget */
-	dialog = glade_xml_get_widget(gxml, "dialog");
-	gtk_window_set_default_size (GTK_WINDOW (dialog),
+	mark_verse_dialog = glade_xml_get_widget(gxml, "dialog");
+	gtk_window_set_default_size (GTK_WINDOW (mark_verse_dialog),
                                    300, 350);
 	
-	g_signal_connect(dialog, "response",
+	g_signal_connect(mark_verse_dialog, "response",
 			 G_CALLBACK(on_mark_verse_response), NULL);
 	
 	/* entrys */	
@@ -493,7 +536,11 @@ static GtkWidget *_create_mark_verse_dialog(gchar * module,
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
 				      GTK_POLICY_AUTOMATIC,
 				      GTK_POLICY_AUTOMATIC);
-	
+	g_signal_connect(entry_key, "activate",
+			 G_CALLBACK(on_mark_verse_enter), NULL);
+	g_signal_connect(entry_module, "activate",
+			 G_CALLBACK(on_mark_verse_enter), NULL);
+
 
 	old_note = xml_get_list_from_label("osisrefmarkedverses", "markedverse", osisreference);
 	note = g_strdup ((old_note) ? old_note : "");
@@ -501,7 +548,7 @@ static GtkWidget *_create_mark_verse_dialog(gchar * module,
 	g_signal_connect(textbuffer, "changed",
 			 G_CALLBACK(on_buffer_changed), NULL);
 
-	return dialog;
+	return mark_verse_dialog;
 }
 
 
