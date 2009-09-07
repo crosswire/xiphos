@@ -1427,7 +1427,7 @@ gint main_dialogs_url_handler(DIALOG_DATA * t, const gchar * url, gboolean click
 	static int handling_url = FALSE;
 	gint retval = 0;
 
-	if (handling_url) return;
+	if (handling_url) return retval;
 	handling_url = TRUE;
 
 	GS_message(("main_dialogs_url_handler url = %s",url));
