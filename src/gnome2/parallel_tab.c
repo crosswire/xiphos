@@ -54,8 +54,6 @@
 
 #include "gui/debug_glib_null.h"
 
-
-extern gboolean do_display;
 extern gboolean shift_key_pressed;
 
 GtkWidget *entrycbIntBook;
@@ -217,6 +215,12 @@ void gui_keep_parallel_tab_in_sync(void)
 void gui_parallel_tab_sync(const gchar * key)
 {
 	sync_with_main(key);	
+}
+
+void gui_force_parallel_tab_sync(void)
+{
+	GTK_TOGGLE_BUTTON(navbar_parallel.button_sync)->active = settings.linkedtabs;
+	/* tell somebody that this button has been hacked */
 }
 
 

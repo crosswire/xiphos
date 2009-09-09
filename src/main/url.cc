@@ -762,7 +762,7 @@ static gint show_in_previewer(const gchar * url)
  *   gint
  */
 
-static gint sword_uri(const gchar * url, gboolean clicked)
+gint sword_uri(const gchar * url, gboolean clicked)
 {
 	const gchar *key = NULL;
 	gchar *tmpkey = NULL;
@@ -770,6 +770,12 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 	gint verse_count;
 	gchar **work_buf = NULL;                                                  
 		
+	// don't recurse between paratab and here.
+	static gboolean handling_uri = FALSE;
+
+	if (handling_uri) return 0;
+	handling_uri = TRUE;
+
 	if (!clicked) {
 		gchar *name = g_strstr_len(url, 10, "://");
 		if (!name)
@@ -788,20 +794,23 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 			else
 				gui_set_statusbar (url);
 		}
+		handling_uri = FALSE;
 		return 1;
 	}
 	
 	work_buf = g_strsplit (url,"/",4);
-	GS_message(("work_buf: %s, %s",work_buf[MODULE],work_buf[KEY]));
 	if (!work_buf[MODULE] && !work_buf[KEY]) {
 		alert_url_not_found(url);
 		g_strfreev(work_buf);
+		handling_uri = FALSE;
 		return 0;
 	}
 	if(!work_buf[KEY]) {
 		tmpkey = work_buf[MODULE];		
 	} else
 		tmpkey = work_buf[KEY];
+	
+	GS_message(("work_buf: %s, %s",work_buf[MODULE],work_buf[KEY]));
 	
 	verse_count = 1; //backend->is_Bible_key(mykey, settings.currentverse);
 	if(backend->is_module(work_buf[MODULE])) {
@@ -849,6 +858,7 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 	} 
 	g_strfreev(work_buf);
 	settings.addhistoryitem = TRUE;
+	handling_uri = FALSE;
 	return 1;
 }
 
@@ -880,8 +890,7 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 	gchar* strongs = NULL;
 	int retval = 0;		// assume failure.
 
-	GS_message(("main_url_handler()"));
-	GS_message(("url = %s", url));
+	GS_message(("main_url_handler => %s", url));
 
 	if (strstr(url, "sword://") ||
 	    strstr(url, "bible://")) {
