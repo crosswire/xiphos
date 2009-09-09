@@ -1037,7 +1037,8 @@ void gui_update_tab_struct(const gchar * text_mod,
 	
 	if(page_change)
 		return;
-
+	if (!cur_passage_tab)
+		return;
 	cur_passage_tab->showtexts   = showtexts;
 	cur_passage_tab->showpreview = showpreview;
 	cur_passage_tab->showcomms   = showcomms;
