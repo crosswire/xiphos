@@ -36,6 +36,7 @@
 #include "main/settings.h"
 #include "main/sword.h"
 #include "main/tab_history.h"
+#include "main/url.hh"
 
 #include "gui/debug_glib_null.h"
 
@@ -428,11 +429,12 @@ static void on_entry_activate(GtkEntry * entry, DIALOG_DATA *dialog)
 	if(gkey == NULL)
 		return;
 	gchar *url = g_strdup_printf("sword:///%s", gkey);
-	
-	dialog->navbar.module_name = g_string_assign(dialog->navbar.module_name,
-						     settings.MainWindowModule);
+	                             
+	dialog->navbar.module_name = g_string_assign(dialog->navbar.module_name, dialog->mod_name);
 	main_navbar_versekey_set(dialog->navbar, gkey);
 	main_dialogs_url_handler(dialog, url, TRUE);
+	if (dialog->sync) 
+		sword_uri(url, TRUE);
 
 	g_free(url);
 	g_free((gchar*)gkey);
