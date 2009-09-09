@@ -62,7 +62,7 @@ GtkWidget *sbIntVerse;
 GtkWidget *entryIntLookup;
     
 PARA_LABELS plabels;
-
+extern gboolean sync_on;
 /******************************************************************************
  * static
  */
@@ -220,6 +220,7 @@ void gui_parallel_tab_sync(const gchar * key)
 void gui_force_parallel_tab_sync(void)
 {
 	GTK_TOGGLE_BUTTON(navbar_parallel.button_sync)->active = settings.linkedtabs;
+	sync_on = settings.linkedtabs;
 	/* tell somebody that this button has been hacked */
 }
 
@@ -464,6 +465,7 @@ GtkWidget *gui_create_parallel_tab(void)
 void gui_destroy_parallel_tab(void)
 {
 	settings.dockedInt = TRUE;
+	sync_on = FALSE;
 	gtk_widget_destroy(parallel_vbox);
 	gtk_widget_show(widgets.hpaned);
 }

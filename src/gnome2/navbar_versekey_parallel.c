@@ -38,7 +38,7 @@
 #include "gui/debug_glib_null.h"
 
 NAVBAR_VERSEKEY navbar_parallel;
-static gboolean sync_on;
+gboolean sync_on;
 
 /******************************************************************************
  * Name
@@ -850,6 +850,6 @@ GtkWidget *gui_navbar_versekey_parallel_new(void)
 	navbar_parallel.chapter_menu = gtk_menu_new();
 	navbar_parallel.verse_menu = gtk_menu_new();
 	_connect_signals(navbar_parallel);
-	
+	GTK_TOGGLE_BUTTON(navbar_parallel.button_sync)->active = settings.linkedtabs;
 	return navbar_parallel.navbar;
 }
