@@ -38,6 +38,7 @@
 #include "gui/debug_glib_null.h"
 
 NAVBAR_VERSEKEY navbar_parallel;
+static gboolean sync_on;
 
 /******************************************************************************
  * Name
@@ -282,8 +283,13 @@ static void on_entry_activate(GtkEntry * entry, gpointer user_data)
 	settings.cvparallel = (gchar*)main_get_valid_key((gchar*)buf);
 	if(settings.cvparallel == NULL)
 		return;
-	main_navbar_versekey_set(navbar_parallel, settings.cvparallel);
+	main_navbar_versekey_set(navbar_parallel, settings.cvparallel);	
 	main_update_parallel_page_detached();
+	if (sync_on) {
+		const gchar *main_window_url = g_strdup_printf("sword:///%s", settings.cvparallel);
+		sword_uri(main_window_url, TRUE);
+		g_free((gchar*)main_window_url);
+	}
 }
 
 
@@ -378,7 +384,9 @@ static void sync_with_main (GtkToggleButton * button, gpointer data)
 {
 	gchar *buf = NULL;
 	gchar *url = NULL;
+	sync_on = FALSE;
 	if (button->active) {
+		sync_on = TRUE;
 		buf = (gchar*)main_url_encode(settings.currentverse);
 		if(buf && (strlen(buf) > 3)) {
 			url =
