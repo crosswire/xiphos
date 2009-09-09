@@ -41,6 +41,7 @@
 #include "gui/main_menu.h"
 #include "gui/mod_mgr.h"
 #include "gui/preferences_dialog.h"
+#include "gui/parallel_tab.h"
 #include "gui/sidebar.h"
 #include "gui/sidebar_dialog.h"
 #include "gui/search_dialog.h"
@@ -387,6 +388,8 @@ on_linked_tabs_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 	settings.linkedtabs = menuitem->active;
 	xml_set_value("Xiphos", "misc", "pinnedtabs",
 		      (settings.linkedtabs ? "1" : "0"));
+	if (settings.showparatab)
+		gui_force_parallel_tab_sync();
 }
 
 /******************************************************************************
@@ -489,9 +492,10 @@ gui_parallel_tab_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 	settings.showparatab = menuitem->active;
 	xml_set_value("Xiphos", "misc", "showparatab",
 		      (settings.showparatab ? "1" : "0"));
-	if(settings.showparatab)
+	if(settings.showparatab) {
 		gui_open_parallel_view_in_new_tab();
-	else 		
+		gui_force_parallel_tab_sync();
+	} else 		
 		gui_close_passage_tab  (gtk_notebook_page_num (
 					GTK_NOTEBOOK (widgets.notebook_main),
 					widgets.parallel_tab));
