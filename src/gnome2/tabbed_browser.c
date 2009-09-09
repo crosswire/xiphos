@@ -77,6 +77,7 @@ GList *passage_list;
  * externs
  */
 
+extern gboolean sync_on;
 //extern gboolean gsI_isrunning;
 PASSAGE_TAB_INFO *cur_passage_tab;
 
@@ -631,6 +632,7 @@ void gui_load_tabs(const gchar *filename)
 								gtk_widget_hide(pt->paratab);
 								gui_parallel_tab_sync((gchar*)settings.currentverse);
 								settings.showparatab = TRUE;
+								sync_on = TRUE;
 							}
 							else
 								pt->paratab = NULL;
