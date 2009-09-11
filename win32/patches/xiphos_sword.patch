@@ -1,0 +1,624 @@
+Index: cross-mingw.sh
+===================================================================
+--- cross-mingw.sh	(revision 0)
++++ cross-mingw.sh	(revision 0)
+@@ -0,0 +1,69 @@
++#!/bin/sh
++#******************************************************************************
++# Convenience script specifying most common options to ./configure
++#
++# $Id: usrinst.sh 2362 2009-04-29 07:21:35Z scribe $
++#
++# Copyright 1998-2009 CrossWire Bible Society (http://www.crosswire.org)
++#	CrossWire Bible Society
++#	P. O. Box 2528
++#	Tempe, AZ  85280-2528
++#
++# This program is free software; you can redistribute it and/or modify it
++# under the terms of the GNU General Public License as published by the
++# Free Software Foundation version 2.
++#
++# This program is distributed in the hope that it will be useful, but
++# WITHOUT ANY WARRANTY; without even the implied warranty of
++# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++# General Public License for more details.
++#
++#
++
++OPTIONS="--prefix=/opt/mingw $OPTIONS"
++OPTIONS="--sysconfdir=/etc $OPTIONS"
++OPTIONS="--without-conf $OPTIONS"
++#OPTIONS="--enable-debug $OPTIONS"
++OPTIONS="--enable-shared $OPTIONS"
++
++OPTIONS="--with-icu $OPTIONS"
++
++#OPTIONS="--enable-tests $OPTIONS"
++#OPTIONS="--disable-utilities $OPTIONS"
++
++OPTIONS="--host=i586-mingw32msvc $OPTIONS"
++OPTIONS="--with-clucene=/opt/mingw $OPTIONS"
++OPTIONS="lt_cv_deplibs_check_method=pass_all $OPTIONS"
++
++# mingw cross build
++export PKG_CONFIG_PATH=/opt/mingw/lib/pkgconfig
++export LDFLAGS=-L/opt/mingw/lib
++export CPPFLAGS=-I/opt/ming/include
++export CURL_CONFIG=/opt/mingw/bin/curl-config
++export ICU_CONFIG=/opt/mingw/bin/icu-config
++
++# Use these for Windows DLL build
++export LIBS="-no-undefined -lregex"
++export need_local_regex=no
++
++CPPFLAGS="$CFLAGS $CPPFLAGS -DUSBINARY" ./configure $OPTIONS $*
++
++
++echo ""
++echo ""
++echo ""
++echo "Configured to NOT write a global /etc/sword.conf on 'make install'."
++echo "If this is the first time you've installed sword, be sure to run"
++echo "'make install_config' if you would like a basic configuration installed"
++echo ""
++echo "Next you might try something like: "
++echo ""
++echo "make"
++echo "su"
++echo "make install"
++echo "(and optionally)"
++echo "make install_config"
++echo "make register"
++echo ""
++echo ""
++echo ""
+
+Property changes on: cross-mingw.sh
+___________________________________________________________________
+Added: svn:executable
+   + *
+
+Index: src/mgr/swmgr.cpp
+===================================================================
+--- src/mgr/swmgr.cpp	(revision 2451)
++++ src/mgr/swmgr.cpp	(working copy)
+@@ -23,6 +23,8 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <fcntl.h>
++#include <glib.h>
++#include <glib/gstdio.h>
+ 
+ #include <sys/stat.h>
+ #ifndef _MSC_VER
+@@ -256,10 +258,10 @@
+ SWBuf SWMgr::getHomeDir() {
+ 
+ 	// figure out 'home' directory for app data
+-	SWBuf homeDir = getenv("HOME");
++	SWBuf homeDir = g_getenv("HOME");
+ 	if (!homeDir.length()) {
+ 		// silly windows
+-		homeDir = getenv("APPDATA");
++		homeDir = g_getenv("APPDATA");
+ 	}
+ 	if (homeDir.length()) {
+ 		if ((homeDir[homeDir.length()-1] != '\\') && (homeDir[homeDir.length()-1] != '/')) {
+@@ -442,7 +444,7 @@
+ 			// check environment variable SWORD_PATH
+ 			SWLog::getSystemLog()->logDebug("Checking $SWORD_PATH...");
+ 
+-			SWBuf envsworddir = getenv("SWORD_PATH");
++			SWBuf envsworddir = g_getenv("SWORD_PATH");
+ 			if (envsworddir.length()) {
+ 				
+ 				SWLog::getSystemLog()->logDebug("found (%s).", envsworddir.c_str());
+@@ -573,14 +575,15 @@
+ 
+ 	SWLog::getSystemLog()->logDebug("Checking $ALLUSERSPROFILE/Application Data/sword/...");
+ 
+-	SWBuf envallusersdir  = getenv("ALLUSERSPROFILE");
++	//SWBuf envallusersdir  = g_getenv("ALLUSERSPROFILE");
++	SWBuf envallusersdir = g_get_system_data_dirs()[0];
+ 	if (envallusersdir.length()) {
+ 		SWLog::getSystemLog()->logDebug("found (%s).", envallusersdir.c_str());
+ 		path = envallusersdir;
+ 		if ((!path.endsWith("\\")) && (!path.endsWith("/")))
+ 			path += "/";
+ 
+-		path += "Application Data/sword/";
++		//path += "Application Data/sword/";
+ 		SWLog::getSystemLog()->logDebug("Checking %s for mods.d...", path.c_str());
+ 		if (FileMgr::existsDir(path.c_str(), "mods.d")) {
+ 			SWLog::getSystemLog()->logDebug("found.");
+@@ -622,7 +625,7 @@
+ 
+ 	if (homeDir.length()) {
+ 		path = homeDir;
+-		path += ".sword/";
++		path += "sword/";
+ 		SWLog::getSystemLog()->logDebug("  Checking for %smods.conf...", path.c_str());
+ 		if (FileMgr::existsFile(path.c_str(), "mods.conf")) {
+ 			SWLog::getSystemLog()->logDebug("found.");
+@@ -659,29 +662,29 @@
+ 
+ void SWMgr::loadConfigDir(const char *ipath)
+ {
+-	DIR *dir;
+-	struct dirent *ent;
++	GDir *dir;
++	const gchar *ent;
+ 	SWBuf newmodfile;
+  
+-	if ((dir = opendir(ipath))) {
+-		rewinddir(dir);
+-		while ((ent = readdir(dir))) {
++	if ((dir = g_dir_open(ipath, 0, NULL))) {
++	  g_dir_rewind(dir);
++		while ((ent = g_dir_read_name(dir))) {
+ 			//check whether it ends with .conf, if it doesn't skip it!
+-			if (!ent->d_name || (strlen(ent->d_name) <= 5) || strncmp(".conf", (ent->d_name + strlen(ent->d_name) - 5), 5 )) {
++			if (ent && (strlen(ent) > 5) && strncmp(".conf", (ent + strlen(ent) - 5), 5 )) {
+ 				continue;
+ 			}
+ 			
+ 			newmodfile = ipath;
+ 			if ((ipath[strlen(ipath)-1] != '\\') && (ipath[strlen(ipath)-1] != '/'))
+ 				newmodfile += "/";
+-			newmodfile += ent->d_name;
++			newmodfile += ent;
+ 			if (config) {
+ 				SWConfig tmpConfig(newmodfile.c_str());
+ 				*config += tmpConfig;
+ 			}
+ 			else	config = myconfig = new SWConfig(newmodfile.c_str());
+ 		}
+-		closedir(dir);
++		g_dir_close(dir);
+ 		
+ 		if (!config) {	// if no .conf file exist yet, create a default
+ 			newmodfile = ipath;
+@@ -799,7 +802,7 @@
+ 			SWBuf homeDir = getHomeDir();
+ 			if (homeDir.length() && configType != 2) { // 2 = user only
+ 				SWBuf path = homeDir;
+-				path += ".sword/";
++				path += "sword/";
+ 				augmentModules(path.c_str(), mgrModeMultiMod);
+ 				path = homeDir;
+ 				path += "sword/";
+@@ -1240,21 +1243,21 @@
+ 
+ void SWMgr::InstallScan(const char *dirname)
+ {
+-   DIR *dir;
+-   struct dirent *ent;
++   GDir *dir;
++   const gchar *ent;
+    FileDesc *conffd = 0;
+    SWBuf newmodfile;
+    SWBuf targetName;
+  
+ 	if (FileMgr::existsDir(dirname)) {
+-		if ((dir = opendir(dirname))) {
+-			rewinddir(dir);
+-			while ((ent = readdir(dir))) {
+-				if ((strcmp(ent->d_name, ".")) && (strcmp(ent->d_name, ".."))) {
++	  if ((dir = g_dir_open(dirname, 0, NULL))) {
++	    g_dir_rewind(dir);
++			while ((ent = g_dir_read_name(dir))) {
++				if ((strcmp(ent, ".")) && (strcmp(ent, ".."))) {
+ 					newmodfile = dirname;
+ 					if ((dirname[strlen(dirname)-1] != '\\') && (dirname[strlen(dirname)-1] != '/'))
+ 						newmodfile += "/";
+-					newmodfile += ent->d_name;
++					newmodfile += ent;
+ 
+ 					// mods.d
+ 					if (configType) {
+@@ -1263,7 +1266,7 @@
+ 						targetName = configPath;
+ 						if ((configPath[strlen(configPath)-1] != '\\') && (configPath[strlen(configPath)-1] != '/'))
+ 							targetName += "/";
+-						targetName += ent->d_name;
++						targetName += ent;
+ 						conffd = FileMgr::getSystemFileMgr()->open(targetName.c_str(), FileMgr::WRONLY|FileMgr::CREAT, FileMgr::IREAD|FileMgr::IWRITE);
+ 					}
+ 
+@@ -1285,7 +1288,7 @@
+ 			}
+ 			if (conffd)
+ 				FileMgr::getSystemFileMgr()->close(conffd);
+-			closedir(dir);
++			g_dir_close(dir);
+ 		}
+ 	}
+ }
+Index: src/mgr/curlftpt.cpp
+===================================================================
+--- src/mgr/curlftpt.cpp	(revision 2451)
++++ src/mgr/curlftpt.cpp	(working copy)
+@@ -31,6 +31,9 @@
+ 
+ #include <swlog.h>
+ 
++#include <glib.h>
++#include <glib/gstdio.h>
++
+ SWORD_NAMESPACE_START
+ 
+ 
+@@ -58,7 +61,7 @@
+ 	struct FtpFile *out=(struct FtpFile *)stream;
+ 	if (out && !out->stream && !out->destBuf) {
+ 		/* open file for writing */
+-		out->stream=fopen(out->filename, "wb");
++		out->stream=g_fopen(out->filename, "wb");
+ 		if (!out->stream)
+ 			return -1; /* failure, can't open file to write */
+ 	}
+Index: src/mgr/installmgr.cpp
+===================================================================
+--- src/mgr/installmgr.cpp	(revision 2451)
++++ src/mgr/installmgr.cpp	(working copy)
+@@ -33,6 +33,8 @@
+ #include <utilstr.h>
+ 
+ #include <fcntl.h>
++#include <glib.h>
++#include <glib/gstdio.h>
+ 
+ #include <swmgr.h>
+ #include <swmodule.h>
+@@ -227,20 +229,19 @@
+ 		}
+ 		else {	//remove all files in DataPath directory
+ 
+-			DIR *dir;
+-			struct dirent *ent;
++			GDir *dir;
++			const gchar *ent;
+ 			ConfigEntMap::iterator entry;
+ 
+ 			FileMgr::removeDir(modDir.c_str());
+ 
+-			if ((dir = opendir(manager->configPath))) {	// find and remove .conf file
+-				rewinddir(dir);
+-				while ((ent = readdir(dir))) {
+-					if ((strcmp(ent->d_name, ".")) && (strcmp(ent->d_name, ".."))) {
++			if ((dir = g_dir_open(manager->configPath, 0, NULL))) {	// find and remove .conf file
++			        g_dir_rewind(dir);
++				while ((ent =  g_dir_read_name(dir))) {
+ 						modFile = manager->configPath;
+ 						removeTrailingSlash(modFile);
+ 						modFile += "/";
+-						modFile += ent->d_name;
++				  modFile += ent;
+ 						SWConfig *config = new SWConfig(modFile.c_str());
+ 						if (config->Sections.find(modName) != config->Sections.end()) {
+ 							delete config;
+@@ -248,8 +249,8 @@
+ 						}
+ 						else	delete config;
+ 					}
+-				}
+-				closedir(dir);
++				g_dir_close(dir);
++				g_free(dir);
+ 			}
+ 		}
+ 		return 0;
+@@ -330,8 +331,8 @@
+ 	SWBuf buffer;
+ 	bool aborted = false;
+ 	bool cipher = false;
+-	DIR *dir;
+-	struct dirent *ent;
++	GDir *dir;
++	const gchar *ent;
+ 	SWBuf modFile;
+ 
+ 	SWLog::getSystemLog()->logDebug("***** InstallMgr::installModule\n");
+@@ -443,18 +444,18 @@
+ 		}
+ 		if (!aborted) {
+ 			SWBuf confDir = sourceDir + "mods.d/";
+-			if ((dir = opendir(confDir.c_str()))) {	// find and copy .conf file
+-				rewinddir(dir);
+-				while ((ent = readdir(dir))) {
+-					if ((strcmp(ent->d_name, ".")) && (strcmp(ent->d_name, ".."))) {
++			if ((dir = g_dir_open(confDir.c_str(), 0, NULL))) {	// find and copy .conf file
++				g_dir_rewind(dir);
++				while ((ent = g_dir_read_name(dir))) {
++					if ((strcmp(ent, ".")) && (strcmp(ent, ".."))) {
+ 						modFile = confDir;
+-						modFile += ent->d_name;
++						modFile += ent;
+ 						SWConfig *config = new SWConfig(modFile.c_str());
+ 						if (config->Sections.find(modName) != config->Sections.end()) {
+ 							SWBuf targetFile = destMgr->configPath; //"./mods.d/";
+ 							removeTrailingSlash(targetFile);
+ 							targetFile += "/";
+-							targetFile += ent->d_name;
++							targetFile += ent;
+ 							FileMgr::copyFile(modFile.c_str(), targetFile.c_str());
+ 							if (cipher) {
+ 								if (getCipherCode(modName, config)) {
+@@ -471,7 +472,7 @@
+ 						delete config;
+ 					}
+ 				}
+-				closedir(dir);
++				g_dir_close(dir);
+ 			}
+ 		}
+ 		return (aborted) ? -1 : 0;
+Index: src/mgr/filemgr.cpp
+===================================================================
+--- src/mgr/filemgr.cpp	(revision 2451)
++++ src/mgr/filemgr.cpp	(working copy)
+@@ -22,6 +22,8 @@
+ 
+ #include <filemgr.h>
+ #include <utilstr.h>
++#include <glib.h>
++#include <glib/gstdio.h>
+ 
+ #include <dirent.h>
+ #include <fcntl.h>
+@@ -37,6 +39,8 @@
+ #include <unistd.h>
+ #endif
+ 
++#include <glib.h>
++#include <glib/gstdio.h>
+ 
+ #ifndef O_BINARY
+ #define O_BINARY 0
+@@ -114,7 +118,7 @@
+ 
+ FileDesc::~FileDesc() {
+ 	if (fd > 0)
+-		close(fd);
++	  ::close(fd);
+ 		
+ 	if (path)
+ 		delete [] path;
+@@ -216,14 +220,14 @@
+ 				file->next = files;
+ 				files = file;
+ 			}
+-			if ((!access(file->path, 04)) || ((file->mode & O_CREAT) == O_CREAT)) {	// check for at least file exists / read access before we try to open
++			if ((!g_access(file->path, 04)) || ((file->mode & O_CREAT) == O_CREAT)) {	// check for at least file exists / read access before we try to open
+ 				char tries = (((file->mode & O_RDWR) == O_RDWR) && (file->tryDowngrade)) ? 2 : 1;  // try read/write if possible
+ 				for (int i = 0; i < tries; i++) {
+ 					if (i > 0) {
+ 						file->mode = (file->mode & ~O_RDWR);	// remove write access
+ 						file->mode = (file->mode | O_RDONLY);// add read access
+ 					}
+-					file->fd = ::open(file->path, file->mode|O_BINARY, file->perms);
++					file->fd = g_open(file->path, file->mode|O_BINARY, file->perms);
+ 
+ 					if (file->fd >= 0)
+ 						break;
+@@ -266,7 +270,7 @@
+ 		if (i == 9999)
+ 			return -2;
+ 
+-		int fd = ::open(buf, O_CREAT|O_RDWR, S_IREAD|S_IWRITE|S_IRGRP|S_IROTH);
++		int fd = g_open(buf, O_CREAT|O_RDWR, S_IREAD|S_IWRITE|S_IRGRP|S_IROTH);
+ 		if (fd < 0)
+ 			return -3;
+ 	
+@@ -278,7 +282,7 @@
+ 		}
+ 		// zero out the file
+ 		::close(file->fd);
+-		file->fd = ::open(file->path, O_TRUNC, S_IREAD|S_IWRITE|S_IRGRP|S_IROTH);
++		file->fd = g_open(file->path, O_TRUNC, S_IREAD|S_IWRITE|S_IRGRP|S_IROTH);
+ 		::close(file->fd);
+ 		file->fd = -77;	// force file open by filemgr
+ 		// copy tmp file back (dumb, but must preserve file permissions)
+@@ -315,7 +319,7 @@
+ 		ch = path + strlen(path);
+ 		sprintf(ch, "/%s", ifileName);
+ 	}
+-	signed char retVal = !access(path, 04);
++	signed char retVal = !g_access(path, 04);
+ 	delete [] path;
+ 	return retVal;
+ }
+@@ -337,7 +341,7 @@
+ 		ch = path + strlen(path);
+ 		sprintf(ch, "/%s", idirName);
+ 	}
+-	signed char retVal = !access(path, 04);
++	signed char retVal = !g_access(path, 04);
+ 	delete [] path;
+ 	return retVal;
+ }
+@@ -356,17 +360,13 @@
+ 	}
+ 	buf[end] = 0;
+ 	if (strlen(buf)>0) {
+-		if (access(buf, 02)) {  // not exists with write access?
+-			if ((retCode = mkdir(buf
+-#ifndef WIN32
++		if (g_access(buf, 02)) {  // not exists with write access?
++			if ((retCode = g_mkdir(buf
+ 					, 0755
+-#endif
+ 					))) {
+ 				createParent(buf);
+-				retCode = mkdir(buf
+-#ifndef WIN32
++				retCode = g_mkdir(buf
+ 					, 0755
+-#endif
+ 					);
+ 			}
+ 		}
+@@ -378,7 +378,7 @@
+ 	
+ 
+ int FileMgr::openFileReadOnly(const char *fName) {
+-	int fd = ::open(fName, O_RDONLY|O_BINARY, S_IREAD|S_IWRITE|S_IRGRP|S_IROTH);
++	int fd = g_open(fName, O_RDONLY|O_BINARY, S_IREAD|S_IWRITE|S_IRGRP|S_IROTH);
+ 	return fd;
+ }
+ 
+@@ -386,10 +386,10 @@
+ int FileMgr::createPathAndFile(const char *fName) {
+ 	int fd;
+ 	
+-	fd = ::open(fName, O_CREAT|O_WRONLY|O_BINARY, S_IREAD|S_IWRITE|S_IRGRP|S_IROTH);
++	fd = g_open(fName, O_CREAT|O_WRONLY|O_BINARY, S_IREAD|S_IWRITE|S_IRGRP|S_IROTH);
+ 	if (fd < 1) {
+ 		createParent(fName);
+-		fd = ::open(fName, O_CREAT|O_WRONLY|O_BINARY, S_IREAD|S_IWRITE|S_IRGRP|S_IROTH);
++		fd = g_open(fName, O_CREAT|O_WRONLY|O_BINARY, S_IREAD|S_IWRITE|S_IRGRP|S_IROTH);
+ 	}
+ 	return fd;
+ }
+@@ -399,7 +399,7 @@
+ 	int sfd, dfd, len;
+ 	char buf[4096];
+ 
+-	if ((sfd = ::open(sourceFile, O_RDONLY|O_BINARY, S_IREAD|S_IWRITE|S_IRGRP|S_IROTH)) < 1)
++	if ((sfd = g_open(sourceFile, O_RDONLY|O_BINARY, S_IREAD|S_IWRITE|S_IRGRP|S_IROTH)) < 1)
+ 		return -1;
+ 	if ((dfd = createPathAndFile(targetFile)) < 1)
+ 		return -1;
+@@ -417,7 +417,7 @@
+ 
+ 
+ int FileMgr::removeFile(const char *fName) {
+-	return ::remove(fName);
++	return g_remove(fName);
+ }
+ 
+ char FileMgr::getLine(FileDesc *fDesc, SWBuf &line) {
+@@ -494,14 +494,14 @@
+ 
+ 
+ int FileMgr::copyDir(const char *srcDir, const char *destDir) {
+-	DIR *dir;
+-	struct dirent *ent;
+-	if ((dir = opendir(srcDir))) {
+-		rewinddir(dir);
+-		while ((ent = readdir(dir))) {
+-			if ((strcmp(ent->d_name, ".")) && (strcmp(ent->d_name, ".."))) {
+-				SWBuf srcPath  = (SWBuf)srcDir  + (SWBuf)"/" + ent->d_name;
+-				SWBuf destPath = (SWBuf)destDir + (SWBuf)"/" + ent->d_name;
++	GDir *dir;
++	const gchar *ent;
++	if ((dir = g_dir_open(srcDir, 0, NULL))) {
++	  g_dir_rewind(dir);
++	  while ((ent = g_dir_read_name(dir))) {
++			if ((strcmp(ent, ".")) && (strcmp(ent, ".."))) {
++				SWBuf srcPath  = (SWBuf)srcDir  + (SWBuf)"/" + ent;
++				SWBuf destPath = (SWBuf)destDir + (SWBuf)"/" + ent;
+ 				if (!isDirectory(srcPath.c_str())) {
+ 					copyFile(srcPath.c_str(), destPath.c_str());
+ 				}
+@@ -510,20 +510,20 @@
+ 				}
+ 			}
+ 		}
+-		closedir(dir);
++		g_dir_close(dir);
+ 	}
+ 	return 0;
+ }
+ 
+ 
+ int FileMgr::removeDir(const char *targetDir) {
+-	DIR *dir = opendir(targetDir);
+-	struct dirent *ent;
++  GDir *dir = g_dir_open(targetDir, 0, NULL);
++	const gchar *ent;
+ 	if (dir) {
+-		rewinddir(dir);
+-		while ((ent = readdir(dir))) {
+-			if ((strcmp(ent->d_name, ".")) && (strcmp(ent->d_name, ".."))) {
+-				SWBuf targetPath = (SWBuf)targetDir + (SWBuf)"/" + ent->d_name;
++	  g_dir_rewind(dir);
++	  while ((ent = g_dir_read_name(dir))) {
++			if ((strcmp(ent, ".")) && (strcmp(ent, ".."))) {
++				SWBuf targetPath = (SWBuf)targetDir + (SWBuf)"/" + ent;
+ 				if (!isDirectory(targetPath.c_str())) {
+ 					FileMgr::removeFile(targetPath.c_str());
+ 				}
+@@ -532,7 +532,7 @@
+ 				}
+ 			}
+ 		}
+-		closedir(dir);
++		g_dir_close(dir);
+ 		removeFile(targetDir);
+ 	}
+ 	return 0;
+Index: src/utilfuns/zlib/untgz.c
+===================================================================
+--- src/utilfuns/zlib/untgz.c	(revision 2451)
++++ src/utilfuns/zlib/untgz.c	(working copy)
+@@ -5,6 +5,9 @@
+  * adaptation to Unix by Jean-loup Gailly <jloup@gzip.org>
+  */
+ 
++#include <glib.h>
++#include <glib/gstdio.h>
++
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
+@@ -225,7 +228,7 @@
+   if (buffer[len-1] == '/') {
+     buffer[len-1] = '\0';
+   }
+-  if (mkdir(buffer, 0775) == 0)
++  if (g_mkdir(buffer, 0775) == 0)
+     {
+       free(buffer);
+       return 1;
+@@ -240,7 +243,7 @@
+ 	p++;
+       hold = *p;
+       *p = 0;
+-      if ((mkdir(buffer, 0775) == -1) && (errno == ENOENT))
++      if ((g_mkdir(buffer, 0775) == -1) && (errno == ENOENT))
+ 	{
+ 	  fprintf(stderr,"%s: couldn't create directory %s\n",prog,buffer);
+ 	  free(buffer);
+@@ -315,15 +318,15 @@
+ 			case AREGTYPE:
+ 				remaining = getoct(buffer.header.size,12);
+ 				if (remaining) {
+-					outfile = fopen(fname,"wb");
++					outfile = g_fopen(fname,"wb");
+ 					if (outfile == NULL) {
+ 						// try creating directory
+ 						char *p = strrchr(fname, '/');
+ 						if (p != NULL) {
+ 							*p = '\0';
+-							makedir(fname);
++							g_mkdir(fname, 0);
+ 							*p = '/';
+-							outfile = fopen(fname,"wb");
++							outfile = g_fopen(fname,"wb");
+ 						}
+ 					}
+ /*
+@@ -368,7 +371,11 @@
+ 
+ 					localt = *localtime(&tartime);
+ 
+-					hFile = CreateFile(fname, GENERIC_READ | GENERIC_WRITE,
++					hFile = CreateFileW(g_utf8_to_utf16(fname,
++									    -1,
++									    NULL,
++									    NULL,
++									    NULL), GENERIC_READ | GENERIC_WRITE,
+ 					0, NULL, OPEN_EXISTING, 0, NULL);
+ 		  
+ 					st.wYear = (WORD)localt.tm_year+1900;
