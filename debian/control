@@ -12,6 +12,7 @@ Build-Depends: automake,
                libatspi-dev,
                libgnome2-dev,
                xulrunner-dev | libxul-dev | xulrunner-1.9.1-dev,
+	       libnspr4-dev,
                libcurl4-gnutls-dev,
                libicu-dev,
                libclucene-dev 
