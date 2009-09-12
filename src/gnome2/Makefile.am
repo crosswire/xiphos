@@ -55,21 +55,7 @@ xiphos_SOURCES =  \
     xiphos.c
 
 locale_set.c: ../../po/LINGUAS
-# FIXME:
-# problem: we'd like to 's/$/ (char*)0/'
-# but for some reason we can't get a proper $ through to sed
-# leading to a bogus "unterminated 's' command" complaint.
-# so for now the 2nd "-e s///" refers explicitly to the last language known.
-# 1. duplicate english.
-# 2. put a NULL at the end.
-# 3. wrap "", around each element.
-# 4. put an array declaration at the front.
-	sed < ../../po/LINGUAS \
-	    -e 's/en/& &/' \
-	    -e 's/ru/ru (char*)0 };/' \
-	    -e 's/\([a-z][a-z]\(_..\)\?\) /"\1", /g' \
-	    -e 's/^/char *locale_set[] = { /' \
-	    > locale_set.c
+	./make-locale-set.sh > locale_set.c
 
 xiphos_CPPFLAGS =  \
 	-DGECKO_HOME=\""$(GECKO_HOME)\""  \
