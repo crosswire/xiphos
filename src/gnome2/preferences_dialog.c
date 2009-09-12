@@ -34,6 +34,7 @@
 #include <glade/glade-xml.h>
 
 #include "gui/bibletext.h"
+#include "gui/dialog.h"
 #include "gui/xiphos.h"
 #include "gui/preferences_dialog.h"
 #include "gui/utilities.h"
@@ -133,6 +134,7 @@ struct _preferences_combo {
 	GtkWidget *combo_entry_sp_dir;
 	GtkWidget *base_font_size;
 	GtkWidget *verse_number_size;
+	GtkWidget *special_locale;
 };
 
 typedef struct _preferences_color_pickers COLOR_PICKERS;
@@ -1656,6 +1658,53 @@ on_combobox15_changed(GtkComboBox * combobox,
 
 /******************************************************************************
  * Name
+ *   on_combobox16_changed
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_combobox16_changed(GtkEditable * editable, gpointer user_data)
+ *
+ * Description
+ *   combobox16 (special locale),
+ *   has changed - update settings
+ *
+ * Return value
+ *  void
+ */
+
+void
+on_combobox16_changed(GtkComboBox * combobox,
+		      gpointer user_data)
+{
+	gchar *buf = NULL;
+	GtkTreeIter iter;
+	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
+	gboolean clear, set;
+
+	gtk_combo_box_get_active_iter(combobox, &iter);
+	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &buf, -1);
+	if (!buf || !strcmp(buf, _("-- Select --")))	/* see fill_combobox */
+		return;
+
+	clear = !strcmp(buf, NONE);
+	set   = ((!settings.special_locale && strcmp(buf, NONE)) ||
+		 (settings.special_locale && (strcmp(settings.special_locale, buf))));
+	if (clear || set)
+		gui_generic_warning(_("Locale will take effect after restart."));
+
+	if (clear)
+		*buf = '\0';
+
+	xml_set_value("Xiphos", "locale", "special", (clear ? NONE : buf));
+	g_free(settings.special_locale);	/* dispose of old content */
+	settings.special_locale = (clear ? NONE : g_strdup(buf));
+	g_free(buf);
+}
+
+
+/******************************************************************************
+ * Name
  *   add_columns
  *
  * Synopsis
@@ -2179,7 +2228,24 @@ setup_module_comboboxes(void)
 			 G_CALLBACK(on_combobox13_changed), NULL);
 	g_signal_connect(combo.greek_lex__module, "changed",
 			 G_CALLBACK(on_combobox14_changed), NULL);
+}
 
+
+static void
+setup_locale_combobox(void)
+{
+	char **locale;
+	GList *list = g_list_append(NULL, NONE);
+
+	for (locale = &locale_set[0]; *locale; ++locale)
+		list = g_list_append(list, *locale);
+	fill_combobox(list, GTK_COMBO_BOX(combo.special_locale),
+		      (settings.special_locale ? settings.special_locale : NONE),
+		      NULL, NULL);
+	g_list_free(list);
+
+	g_signal_connect(combo.special_locale, "changed",
+			 G_CALLBACK(on_combobox16_changed), NULL);
 }
 
 
@@ -2314,6 +2380,10 @@ create_preferences_dialog(void)
 	combo.greek_lex__module = glade_xml_get_widget (gxml, "combobox14");
 	combo.book_module = glade_xml_get_widget (gxml, "combobox15");
 	setup_module_comboboxes();
+
+	combo.special_locale = glade_xml_get_widget (gxml, "combobox16");
+	setup_locale_combobox();
+
 	/* studypad directory chooserbutton */
 	chooser = glade_xml_get_widget (gxml, "filechooserbutton1");
 	gtk_file_chooser_set_current_folder((GtkFileChooser *)chooser,

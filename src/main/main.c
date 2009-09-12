@@ -111,8 +111,6 @@ int main(int argc, char *argv[])
 	g_setenv("HOME", g_getenv("APPDATA"), TRUE);
 #endif /* WIN32 */
 
-	gui_init(argc, argv);
-	
 	if (argc > 2) {
 		gui_generic_warning(_("Xiphos does not understand more than one argument."));
 		exit(1);
@@ -150,6 +148,8 @@ int main(int argc, char *argv[])
 	 */   
     	settings_init(newconfigs,newbookmarks);
 
+	gui_init(argc, argv);
+	
 	gui_splash_init();
 	
 #ifdef USE_GTKMOZEMBED

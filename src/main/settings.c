@@ -39,6 +39,7 @@
 #include "gui/dialog.h"
 #include "gui/mod_mgr.h"
 #include "gui/utilities.h"
+#include "gui/preferences_dialog.h"
 
 #include "main/lists.h"
 #include "main/settings.h"
@@ -96,14 +97,6 @@ int settings_init(int new_configs, int new_bookmarks)
 	settings.first_run = FALSE;
 	/* set program title */
 	strcpy(settings.program_title, "Xiphos");
-
-	/* find out what kind of peculiar language environment we have */
-	re_encode_digits = FALSE;
-	if (((env = (char*) g_getenv("LC_ALL")) != NULL) &&
-	    // for now, farsi-sensitive only
-	    (strncmp (env, "fa", 2) == 0)) {
-		re_encode_digits = TRUE;
-	}
 
 	/* Get home dir */
 	if ((settings.homedir = (char*) g_getenv(HOMEVAR)) == NULL) {
@@ -228,7 +221,23 @@ int settings_init(int new_configs, int new_bookmarks)
     
 	load_settings_structure();
 
+	/*
+	 * if the user had forced a locale, we must set it now.
+	 */
+	if (settings.special_locale && strcmp(settings.special_locale, NONE)) {
+		g_setenv("LANG", settings.special_locale, TRUE);
+		g_setenv("LC_ALL", settings.special_locale, TRUE);
+	}
+
 	gconf_setup();
+
+	/* find out what kind of peculiar language environment we have */
+	re_encode_digits = FALSE;
+	if (((env = (char*) g_getenv("LANG")) != NULL) &&
+	    // for now, farsi-sensitive only
+	    (strncmp (env, "fa", 2) == 0)) {
+		re_encode_digits = TRUE;
+	}
 
 	return retval;
 }
@@ -382,7 +391,16 @@ void load_settings_structure(void)
 	settings.useDefaultDict = atoi((buf = xml_get_value("lexicons","usedefaultdict"))
 				       ? buf : "0");
 
-	/* mod mgr stuff */ 
+	/* unusual locale setting */
+	if ((buf = xml_get_value("locale", "special")))
+		settings.special_locale = g_strdup(buf);
+	else {
+		xml_add_new_section_to_settings_doc("locale");
+		xml_add_new_item_to_section("locale", "special", NONE);
+		settings.special_locale = g_strdup(NONE);
+	}	 
+
+	/* mod mgr stuff */
 	if ((buf = xml_get_value("modmgr", "mod_mgr_source")))
 		settings.mod_mgr_source = atoi(buf);
 	else {
