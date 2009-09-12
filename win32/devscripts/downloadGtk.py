@@ -18,7 +18,7 @@ def main():
 
     make_dir(PREFIX)
     make_dir(CACHE)
-    f = open(LIST)
+    f = open(PACKAGE_LIST)
 
     for line in f:
         url, filename = line.split()[0:2]
