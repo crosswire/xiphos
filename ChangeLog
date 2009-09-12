@@ -1,3 +1,7 @@
+2009-09-12  karl <charcoal@users.sf.net>
+
+	* feat.req #2813476 Interface localization (prefs->options)
+
 2009-09-06  karl <charcoal@users.sf.net>
 
 	* correct re-appearing remote ftp source for delete-then-load-standard.

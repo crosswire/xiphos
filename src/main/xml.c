@@ -501,6 +501,8 @@ int xml_create_settings_file(char *path)
 	xmlNewTextChild(section_node, NULL, (const xmlChar *) "UseStudypadDialog", (const xmlChar *) "1");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *) "spell_language", (const xmlChar *) "unknown");
 
+	section_node = xmlNewChild(root_node, NULL, (const xmlChar *) "locale", NULL);
+	xmlNewTextChild(section_node, NULL, (const xmlChar *) "special", (const xmlChar *) "");
 
 	section_node = xmlNewChild(root_node, NULL, (const xmlChar *) "modmgr", NULL);
 	xmlNewTextChild(section_node, NULL, (const xmlChar *) "mod_mgr_source", (const xmlChar *) "1");
