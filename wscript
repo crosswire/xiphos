@@ -474,6 +474,7 @@ def configure(conf):
 
     # process configure for subfolders
     conf.sub_config('src/editor') # generate Editor source from idl
+    conf.sub_config('src/gnome2') # generate locale_set.c
 
 
 
