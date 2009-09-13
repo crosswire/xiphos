@@ -141,6 +141,7 @@ Makefile
 po/Makefile.in
 doc/Makefile
 help/Makefile
+pixmaps/Makefile
 src/Makefile
 src/backend/Makefile
 src/gecko/Makefile
