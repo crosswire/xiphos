@@ -18,9 +18,9 @@ AC_CHECK_FUNCS(strcasestr, [AM_CONDITIONAL(HAVE_STRCASESTR, true)], [AM_CONDITIO
 IT_PROG_INTLTOOL([])
 AC_PROG_LIBTOOL dnl using old name instead of LT_INIT for compatability
 
-AC_SUBST([GETTEXT_PACKAGE], [xiphos-ui])
+AC_SUBST([GETTEXT_PACKAGE], [xiphos])
 AM_GLIB_GNU_GETTEXT
-AC_DEFINE([GETTEXT_PACKAGE], [xiphos-ui], [Define to the gettext package name.])
+AC_DEFINE([GETTEXT_PACKAGE], [PACKAGE_TARNAME], [Define to the gettext package name.])
 
 GNOME_DOC_INIT
 
@@ -32,10 +32,19 @@ PKG_PROG_PKG_CONFIG([])
 AS_IF([test "x$with_gecko" != "xno"], [
 	    GECKO_INIT([GECKO])
 	    AC_DEFINE(USE_GTKMOZEMBED, 1, [Define if you want to use gtkmozembed])
+	    AS_CASE([$GECKO],
+		[xulrunner], [
+		     PKG_CHECK_MODULES([GECKO_COMPONENT],[${gecko_cv_gecko}-xpcom >= 1.8 $gecko_cv_extra_pkg_dependencies])],
+		[libxul*],   [
+		     PKG_CHECK_MODULES([GECKO_COMPONENT],[$GECKO $gecko_cv_extra_pkg_dependencies])
+		     GECKO_COMPONENT_CFLAGS="$GECKO_COMPONENT_CFLAGS `$PKG_CONFIG --cflags ${gecko_cv_gecko}` `$PKG_CONFIG --define-variable=includetype=unstable --cflags ${gecko_cv_gecko}`"],
+		[*firefox],  [
+		     PKG_CHECK_MODULES([GECKO_COMPONENT],[${gecko_cv_gecko}-xpcom >= 1.5 $gecko_cv_extra_pkg_dependencies])],
+		[AC_MSG_ERROR([$gecko_cv_gecko is not supported])])
 	    AC_SUBST([GECKO])
-	    AC_SUBST([GECKO_HOME])
-	    AC_SUBST([GECKO_CFLAGS])
-	    AC_SUBST([GECKO_LIBS])
+	    AC_SUBST(GECKO_HOME)
+	    AC_SUBST(GECKO_COMPONENT_LIBS)
+	    AC_SUBST(GECKO_COMPONENT_CFLAGS)
 	    AC_SUBST([GECKO_FLAVOUR])
 	    AC_SUBST([GECKO_INCLUDE_ROOT])
 	    AC_SUBST([GECKO_PREFIX])
