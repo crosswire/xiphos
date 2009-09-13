@@ -54,8 +54,8 @@ xiphos_SOURCES =  \
     utilities.c \
     xiphos.c
 
-locale_set.c: ../../po/LINGUAS
-	./make-locale-set.sh > locale_set.c
+locale_set.c: ../../po/LINGUAS make-locale-set.sh
+	sh ./make-locale-set.sh > locale_set.c
 
 xiphos_CPPFLAGS =  \
 	-DGECKO_HOME=\""$(GECKO_HOME)\""  \

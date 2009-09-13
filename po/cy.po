@@ -1167,7 +1167,7 @@ msgid "Initiating Gecko"
 msgstr "Dechrau Gecko"
 
 #: ../src/gnome2/splash.c:580
-msgid "Loading settings"
+msgid "Loading Settings"
 msgstr "Llwytho Gosodiadau"
 
 #: ../src/gnome2/splash.c:598
