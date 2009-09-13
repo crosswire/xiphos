@@ -20,7 +20,7 @@ AC_PROG_LIBTOOL dnl using old name instead of LT_INIT for compatability
 
 AC_SUBST([GETTEXT_PACKAGE], [xiphos])
 AM_GLIB_GNU_GETTEXT
-AC_DEFINE([GETTEXT_PACKAGE], [PACKAGE_TARNAME], [Define to the gettext package name.])
+AC_DEFINE([GETTEXT_PACKAGE],  [PACKAGE_TARNAME], [Define to the gettext package name.])
 
 GNOME_DOC_INIT
 
