@@ -1036,7 +1036,7 @@ msgid "Initiating Gecko"
 msgstr "Starter Gecko"
 
 #: ../src/gnome2/splash.c:580
-msgid "Loading settings"
+msgid "Loading Settings"
 msgstr "Last innstillinger"
 
 #: ../src/gnome2/splash.c:598
