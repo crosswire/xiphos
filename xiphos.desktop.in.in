@@ -3,11 +3,11 @@
 _Name=Xiphos Bible Guide
 _Comment=Study the Bible
 Exec=@xiphos_exec@
-Icon=@PACKAGE_PIXMAPS_DIR@/xiphos.svg
+TryExec=xiphos
+Icon=xiphos
 Terminal=false
 X-MultipleArgs=false
 Type=Application
 Categories=Utility;X-Red-Hat-Extra;
 StartupNotify=true
-TryExec=@INSTALL_PREFIX@bin/xiphos
 X-Desktop-File-Install-Version=0.15
