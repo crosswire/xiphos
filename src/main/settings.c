@@ -229,7 +229,9 @@ int settings_init(int new_configs, int new_bookmarks)
 		g_setenv("LC_ALL", settings.special_locale, TRUE);
 	}
 
+#ifndef WIN32
 	gconf_setup();
+#endif
 
 	/* find out what kind of peculiar language environment we have */
 	re_encode_digits = FALSE;
