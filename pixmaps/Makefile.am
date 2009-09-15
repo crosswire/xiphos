@@ -1,7 +1,7 @@
 pkgicondir=@datadir@/icons/hicolor/scalable/apps
 pkgicon_DATA=xiphos.svg
 
-pixmapdir=@datadir@/pixmaps
+pixmapdir=@datadir@/pixmaps/xiphos
 pixmap_DATA= \
 	about.png \
 	chat_icon-16.png \
@@ -15,7 +15,7 @@ pixmap_DATA= \
 	gnome-window-manager.png \
 	gnome-windows.png \
 	gs2-48x48.ico \
-	gs2-48x48-old.ico
+	gs2-48x48-old.ico \
 	gs2-48x48-old.png \
 	gs2-48x48.png \
 	gs2.xpm \
