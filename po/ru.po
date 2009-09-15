@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xiphos\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-09-02 11:49+0100\n"
-"PO-Revision-Date: 2009-09-06 00:46+0300\n"
+"PO-Revision-Date: 2009-09-15 22:32+0300\n"
 "Last-Translator: Konstantin Maslyuk <kalemas@mail.ru>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "MIME-Version: 1.0\n"
@@ -90,15 +90,15 @@ msgstr "Безымянный документ"
 
 #: ../src/editor/slib-editor.c:704
 msgid "HTML Output"
-msgstr "HTML Output"
+msgstr "Результат в HTML"
 
 #: ../src/editor/slib-editor.c:711
 msgid "HTML Source"
-msgstr "HTML Source"
+msgstr "Исходный текст в HTML"
 
 #: ../src/editor/slib-editor.c:718
 msgid "Plain Source"
-msgstr "Plain Source"
+msgstr "Простой исходный текст"
 
 #: ../src/editor/slib-editor.c:728
 #: ../ui/editor_note.xml.h:15
@@ -154,15 +154,15 @@ msgstr "_Файл"
 
 #: ../src/editor/slib-editor.c:837
 msgid "HTML _Output"
-msgstr "HTML _Output"
+msgstr "_Результат в HTML"
 
 #: ../src/editor/slib-editor.c:844
 msgid "_HTML Source"
-msgstr "_HTML Source"
+msgstr "_Исходный текст в HTML"
 
 #: ../src/editor/slib-editor.c:851
 msgid "_Plain Source"
-msgstr "_Plain Source"
+msgstr "_Простой исходный текст"
 
 #: ../src/editor/slib-editor.c:858
 #: ../ui/xi-menus.glade.h:100
@@ -281,7 +281,7 @@ msgid ""
 "Powered by The SWORD Project.\n"
 "We would like to thank Troy Griffitts and all the other folks who have given us The SWORD Project."
 msgstr ""
-"(прежде известный как GnomeSword)\n"
+"(ранее известный как GnomeSword)\n"
 "\n"
 "Создано на основе Проекта SWORD.\n"
 "Мы хотим поблагодарить Troy Griffitts и других ребят, давших нам Проект SWORD."
@@ -758,7 +758,7 @@ msgstr "Словари"
 #: ../src/main/sidebar.cc:993
 #: ../src/main/sidebar.cc:995
 msgid "Daily Devotionals"
-msgstr "Дневные Планы"
+msgstr "Слово Дня"
 
 #: ../src/gnome2/mod_mgr.c:1067
 #: ../src/gnome2/utilities.c:494
@@ -1400,7 +1400,7 @@ msgstr "Загрузка Настроек"
 
 #: ../src/main/main.c:175
 msgid "Displaying Xiphos"
-msgstr "Представление  Xiphos"
+msgstr "Интерфейс Xiphos"
 
 #: ../src/main/module_dialogs.cc:237
 #: ../src/main/previewer.cc:127
@@ -2041,9 +2041,7 @@ msgstr ""
 
 #: ../src/main/sword.cc:1171
 msgid "Daily devotional was requested, but there are none installed."
-msgstr ""
-"Не установленно ни одного модуля плана\n"
-"ежедневного чтения Библии."
+msgstr "Не установлено ни одного модуля необходимого типа."
 
 #: ../src/main/tab_history.c:92
 msgid "H_istory/<Separator>"
@@ -2251,7 +2249,7 @@ msgstr "Для _мат"
 #: ../ui/editor_studypad.xml.h:8
 #: ../ui/editor.xml.h:6
 msgid "HTML Format switch"
-msgstr "HTML Формат переключатель"
+msgstr "Переключатель формата HTML"
 
 #: ../ui/editor_note.xml.h:7
 #: ../ui/editor_studypad.xml.h:9
@@ -2670,11 +2668,11 @@ msgstr "Текущий Стих"
 
 #: ../ui/prefs.glade.h:38
 msgid "Daily Devotional"
-msgstr "Дневные Планы"
+msgstr "Слово Дня"
 
 #: ../ui/prefs.glade.h:39
 msgid "Daily Devotional Combo"
-msgstr "Комбо Дневного Плана"
+msgstr "Комбо Слово Дня"
 
 #: ../ui/prefs.glade.h:40
 msgid "Default Dictionary"
@@ -2838,7 +2836,7 @@ msgstr "Выбрать Директорию"
 
 #: ../ui/prefs.glade.h:82
 msgid "Show Daily Devotion at start up"
-msgstr "Показывать Дневной План при загрузке"
+msgstr "Показывать Слово Дня при загрузке"
 
 #: ../ui/prefs.glade.h:83
 msgid "Show splash screen at start up"
@@ -3531,7 +3529,7 @@ msgstr "_Содержание"
 
 #: ../ui/xi-menus.glade.h:82
 msgid "_Daily Devotion"
-msgstr "Дневной _План"
+msgstr "Слово Д_ня"
 
 #: ../ui/xi-menus.glade.h:83
 msgid "_Edit"
