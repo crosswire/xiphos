@@ -180,6 +180,10 @@ def configure(conf):
     conf.check_tool('gnu_dirs misc')
     conf.check_tool('intltool') # check for locale.h included
 
+    # FIXME create and install help doesnt work yet on windows
+    if not env['IS_WIN32']:
+        conf.check_tool('documentation', tooldir=_tooldir) # stuff to create help files
+
     # DATADIR is defined by intltool in config.h - conflict in win32 (mingw)
     conf.undefine('DATADIR')
 
@@ -533,11 +537,12 @@ def build(bld):
         )
 
 
-    #mkenums marshal pixmaps')
-
-    #env = bld.env
-    #if env['XML2PO'] and env['XSLTPROC2PO']:
-        #bld.add_subdirs('help')
+    # Type of help format depends on OS.
+    # WIN32: chm
+    # Other OS: just xml
+    # FIXME create and install help doesnt work yet on windows
+    if not env['IS_WIN32']:
+        bld.add_subdirs('help')
 
     if bld.env['INTLTOOL']:
         bld.add_subdirs('po')
