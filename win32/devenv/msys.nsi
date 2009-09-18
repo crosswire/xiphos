@@ -65,6 +65,7 @@
     ; Folders with binaries for PATH
     !define BIN_MINGW "mingw\bin"
     !define BIN_MSYS "bin"
+    !define BIN_LOCAL_MSYS "local\bin"
     !define BIN_PYTHON "C:\Python26"
     !define BIN_PERL "C:\strawberry\perl\bin"
     !define BIN_NSISU "C:\Program Files\NSIS\Unicode"
@@ -197,6 +198,7 @@ Section "msys" SecCore
     ; Add binaries to system PATH
     ${EnvVarUpdate} $0 "PATH" "A" "HKLM" "$INSTDIR\${BIN_MINGW}"
     ${EnvVarUpdate} $0 "PATH" "A" "HKLM" "$INSTDIR\${BIN_MSYS}"
+    ${EnvVarUpdate} $0 "PATH" "A" "HKLM" "$INSTDIR\${BIN_LOCAL_MSYS}"
     
 
     ; Add uninstall information to Add/Remove Programs
