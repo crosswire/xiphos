@@ -35,6 +35,8 @@ _tooldir = './waffles/'
 
 _prefix = '/usr/local'
 
+ROOTDIR_WIN32 = 'C:\msys'
+
 _headers = '''
 dlfcn.h
 inttypes.h
@@ -117,18 +119,27 @@ def set_options(opt):
             dest='cross_win32',
             help='Cross-compile for win32 [Default: disabled]')
 
+    # FIXME - handle this option
+    #opt.add_option('--rootdir',
+		#action = 'store',
+		#help = 'Specify path where resides msys. This dir is used for finding libraries and other files',
+		#dest = 'rootdir')
+
     opt.add_option('--pkgconf-libdir',
 		action = 'store',
+		default = os.path.join(ROOTDIR_WIN32, 'local', 'lib', 'pkgconfig'),
 		help = "Specify dir with *.pc files for cross-compilation",
 		dest = 'pkg_conf_libdir')
 
     opt.add_option('--pkgconf-prefix',
 		action = 'store',
+		default = os.path.join(ROOTDIR_WIN32, 'local'),
 		help = "Specify prefix with folders for headers and libraries for cross-compilation",
 		dest = 'pkg_conf_prefix')
 
     opt.add_option('--mozilla-distdir',
 		action = 'store',
+		default = os.path.join(ROOTDIR_WIN32, 'local'),
 		help = "Folder 'dist' in unpacked mozilla devel tarball. Mandatory for win32 compilation",
 		dest = 'mozilla_distdir')
 
@@ -139,6 +150,11 @@ def set_options(opt):
 		default = '${DATAROOTDIR}/gnome/help/${PACKAGE}',
                 help = "user documentation [Default: ${DATAROOTDIR}/gnome/help/${PACKAGE}]",
 		dest = 'helpdir')
+    group.add_option('--disable-help',
+            action='store_true',
+            default=False,
+            help='Disable creating help files',
+            dest='disable_help')
 
 
 def configure(conf):
@@ -158,6 +174,7 @@ def configure(conf):
         env['IS_LINUX'] = False
         Utils.pprint('CYAN', "Cross-compilation")
 
+    # IS_WIN32 means compiling for win32, not compiling necessary on win32
     if env['IS_WIN32']:
         Utils.pprint('CYAN', "Windows detected")
     elif env['IS_LINUX']:
@@ -171,6 +188,9 @@ def configure(conf):
     if env['IS_WIN32']:
         env['PREFIX'] = escpath(os.path.abspath('win32/binaries/Xiphos'))
     ##
+
+    if env['IS_WIN32']:
+        env['ROOTDIR'] = ROOTDIR_WIN32
     
     conf.check_tool('g++ gcc')
     # cross compiler
@@ -180,8 +200,9 @@ def configure(conf):
     conf.check_tool('gnu_dirs misc')
     conf.check_tool('intltool') # check for locale.h included
 
-    # FIXME create and install help doesnt work yet on windows
-    if not env['IS_WIN32']:
+    opt = Options.options
+
+    if not opt.disable_help:
         conf.check_tool('documentation', tooldir=_tooldir) # stuff to create help files
 
     # DATADIR is defined by intltool in config.h - conflict in win32 (mingw)
@@ -485,6 +506,7 @@ def configure(conf):
 def build(bld):
 
     env = bld.env
+    opt = Options.options
 
     # process subfolders
     bld.add_subdirs("""
@@ -541,7 +563,7 @@ def build(bld):
     # WIN32: chm
     # Other OS: just xml
     # FIXME create and install help doesnt work yet on windows
-    if not env['IS_WIN32']:
+    if not opt.disable_help:
         bld.add_subdirs('help')
 
     if bld.env['INTLTOOL']:
