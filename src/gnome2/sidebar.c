@@ -1416,6 +1416,7 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	widgets.box_side_preview = gtk_vbox_new(FALSE, 0);	
 	gtk_paned_pack2 (GTK_PANED (widgets.paned_sidebar), 
 			widgets.box_side_preview, FALSE, TRUE);
+	gtk_container_set_border_width(GTK_CONTAINER(widgets.box_side_preview), 2);
 	g_signal_connect (GTK_OBJECT (widgets.paned_sidebar),
 			"button_release_event",
 			G_CALLBACK (paned_button_release_event),
