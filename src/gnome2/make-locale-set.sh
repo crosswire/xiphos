@@ -17,7 +17,7 @@ while read l ; do
 	    l="$l"_"$u"
 	    ;;
     esac
-    echo '	"'"$l.UTF-8"'",'
+    echo '	"'"$l"'",'
 done
 echo '        (char*)0'
 echo '};'
