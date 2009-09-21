@@ -237,10 +237,6 @@ int settings_init(int new_configs, int new_bookmarks)
 			GS_message(("set locale to %s", settings.special_locale));
 	}
 
-#ifndef WIN32
-	gconf_setup();
-#endif
-
 	/* find out what kind of peculiar language environment we have */
 	re_encode_digits = FALSE;
 	if (((env = (char*) g_getenv("LANG")) != NULL) &&
@@ -794,92 +790,5 @@ void load_settings_structure(void)
 	} else {
 		xml_add_new_item_to_section("tabs","browsing","1");
 		settings.browsing = 1;
-	}
-}
-
-
-/******************************************************************************
- * Name
- *    gconf_setup
- *
- * Synopsis
- *   #include "main/settings.h"
- *
- *   void gconf_setup()
- *
- * Description
- *   verifies and initializes the GConf subsystem, so that "sword://" and
- *   similar can be handled by url-comprehending programs such as browsers.
- *   dialogs for permission/success/failure => conditional on debug build.
- *
- * Return value
- *   void
- */
-
-#define	GS_GCONF_PERMISSION	_("URL references using \"sword://\" (similar to web page\nreferences) can be used by programs to look up\nscripture references. Your system currently has no\nprogram set to handle these references.\n\nWould you like Xiphos to set itself as the\nprogram to handle these references?")
-
-#define	GS_GCONF_SUCCESS	_("Xiphos has successfully set itself\nas the handler of sword:// and bible:// URLs.\n\nYou may wish to run the program \"gconf-editor\"\nto examine keys under /desktop/gnome/url-handlers,\nif you need to change these.")
-
-char *gconf_keys[GS_GCONF_MAX][2] = {
-    { "/desktop/gnome/url-handlers/bible/command",        "xiphos \"%s\"" },
-    { "/desktop/gnome/url-handlers/bible/enabled",        (char *) 1 },
-    { "/desktop/gnome/url-handlers/bible/needs_terminal", (char *) 0 },
-    { "/desktop/gnome/url-handlers/sword/command",        "xiphos \"%s\"" },
-    { "/desktop/gnome/url-handlers/sword/enabled",        (char *) 1 },
-    { "/desktop/gnome/url-handlers/sword/needs_terminal", (char *) 0 }
-};
-
-void gconf_setup()
-{
-	int i;
-	gchar *str;
-	gboolean retval;
-	GConfClient* client = gconf_client_get_default();
-
-	if (client == NULL)
-		return;		/* we're not running under GConf */
-
-	/*
-	 * This is deliberately somewhat simple-minded, at least for now.
-	 * We care about one thing: Is anything set to handle "bible://"?
-	 *
-	 * Unfortunate consequence of changing xiphos2 => xiphos:
-	 * We must fix broken keys.
-	 */
-	if ((((str = gconf_client_get_string(client, gconf_keys[0][0],
-					    NULL)) == NULL) ||
-	     (strncmp(str, "gnomesword", 10) == 0))
-#ifdef DEBUG
-	    && gui_yes_no_dialog(GS_GCONF_PERMISSION, NULL)
-#endif /* DEBUG */
-	    ) {
-		/*
-		 * Mechanical as can be, one after another.
-		 */
-		for (i = 0; i < GS_GCONF_MAX; ++i) {
-			retval = (((i % 3) == 0)	/* contrived hack */
-				  ? gconf_client_set_string
-					(client,
-					 gconf_keys[i][0],
-					 gconf_keys[i][1],
-					 NULL)
-				  : gconf_client_set_bool
-					(client,
-					 gconf_keys[i][0],
-					 (gconf_keys[i][1] ? TRUE : FALSE),
-					 NULL));
-#ifdef DEBUG
-			if (!retval) {
-				char msg[256];
-				sprintf(msg, _("Xiphos failed to complete handler init for key #%d:\n%s"),
-					i, gconf_keys[i][0]);
-				gui_generic_warning(msg);
-				return;
-			}
-#endif /* DEBUG */
-		}
-#ifdef DEBUG
-		gui_generic_warning(GS_GCONF_SUCCESS);
-#endif /* DEBUG */
 	}
 }

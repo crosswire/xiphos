@@ -4,6 +4,11 @@
 void gui_init(int argc, char*argv[]);
 void gui_main(void);
 
+#include <gconf/gconf-client.h>
+void gconf_setup(void);
+
+#define	GS_GCONF_MAX	6
+
 #ifdef DEBUG
 
 
