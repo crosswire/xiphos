@@ -37,7 +37,7 @@ def configure(self):
     # write
     fout.write('char *locale_set[] = {\n')
     for loc in locales_new:
-        fout.write('        "%s.UTF-8",\n' % loc)
+        fout.write('        "%s",\n' % loc)
     fout.write('        (char*)0\n')
     fout.write('};\n')
     fout.close
