@@ -1698,7 +1698,7 @@ on_combobox16_changed(GtkComboBox * combobox,
 
 	xml_set_value("Xiphos", "locale", "special", (clear ? NONE : buf));
 	g_free(settings.special_locale);	/* dispose of old content */
-	settings.special_locale = (clear ? NONE : g_strdup(buf));
+	settings.special_locale = (clear ? g_strdup(NONE) : g_strdup(buf));
 	g_free(buf);
 }
 
