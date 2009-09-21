@@ -49,6 +49,7 @@
 #include <glib/gstdio.h>
 
 #include "gui/debug_glib_null.h"
+#include <locale.h>
 
 
 /******************************************************************************
@@ -226,7 +227,14 @@ int settings_init(int new_configs, int new_bookmarks)
 	 */
 	if (settings.special_locale && strcmp(settings.special_locale, NONE)) {
 		g_setenv("LANG", settings.special_locale, TRUE);
-		g_setenv("LC_ALL", settings.special_locale, TRUE);
+		gchar *test = setlocale(LC_ALL, settings.special_locale);
+		if (test == NULL) {
+			gchar lfix[32];
+			sprintf(lfix, "%s.UTF-8", settings.special_locale); //for Ubuntu
+			test = setlocale(LC_ALL, lfix);
+		}
+		if (test != NULL)
+			GS_message(("set locale to %s", settings.special_locale));
 	}
 
 #ifndef WIN32
