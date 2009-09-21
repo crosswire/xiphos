@@ -80,11 +80,50 @@ def apply_xml_doc(self):
         for fig in figures:
             shutil.copyfile(os.path.join(srcdir, fig), os.path.join(destdir, fig))
 
+    def install_help(lang, self):
+        if self.env['IS_WIN32']:
+            chm_help = self.path.find_or_declare(lang + os.sep + 'htmlhelp.chm')
+            path = self.install_path
+            help_file = self.doc_module + '_' + lang + '.chm'
+            self.bld.install_as(os.path.join(path, help_file), chm_help.abspath(self.env))
+        else:
+            xml_help = self.path.find_or_declare(os.path.join(lang, self.doc_module+'.xml'))
+            path = os.path.join(self.install_path, lang)
+            bld = self.bld
+            # install xiphos.xml
+            bld.install_as(os.path.join(path, xml_help.file()), xml_help.abspath(self.env))
+            install_figures(lang, self)
+
+    def install_help_C(self):
+        if self.env['IS_WIN32']:
+            chm_help = self.path.find_or_declare('C' + os.sep + 'htmlhelp.chm')
+            path = self.install_path
+            self.bld.install_as(os.path.join(path, self.doc_module + '.chm'), chm_help.abspath(self.env))
+        else:
+            xml_help = self.path.find_resource('C' + os.sep + self.doc_module+'.xml')
+            path = self.install_path + os.sep + 'C'
+            bld = self.bld
+            # lang C needs all xml files
+            lst = self.to_list(self.doc_includes)
+            for item in lst:
+                bld.install_as(os.path.join(path, item),
+                        os.path.join(self.path.abspath(), 'C', item))
+            bld.install_as(os.path.join(path, self.doc_entities),
+                    os.path.join(self.path.abspath(), 'C',  self.doc_entities))
+            bld.install_as(os.path.join(path, xml_help.file()), xml_help.abspath(self.env))
+            install_figures('C', self)
+
+    def install_figures(lang, self):
+        figures = self.to_list(self.doc_figures)
+        for fig in figures:
+            self.bld.install_as(os.path.join(self.install_path, lang, fig),
+                    os.path.join(self.path.abspath(), lang, fig))
+
 
     figures = self.to_list(self.doc_figures)
     languages = self.to_list(self.doc_linguas)
-    bld = self.bld
     # C help - doesn't need xml2po phase
+    # on win32 just xsltproc and htmlhelpc
     if self.env['IS_WIN32']:
         C_src = self.path.find_resource('C' + os.sep + self.doc_module+'.xml')
         C_tsk, C_out = create_xsltproc_task('C', C_src)
@@ -104,28 +143,11 @@ def apply_xml_doc(self):
             # CHM help - windows help format
             tsk3, out3 = create_htmlhelpc_task(lang, out2, tsk2)
 
-        #if bld.is_install:
-            #path = self.install_path + '/' + x
-            #for y in self.to_list(self.doc_figures):
-                #try:
-                    #os.stat(self.path.abspath()+'/'+ x +'/'+ y)
-                    #bld.install_as(path + '/' + y, self.path.abspath() + '/' + x + '/' + y)
-                #except:
-                    #bld.install_as(path + '/' + y, self.path.abspath() + '/C/' + y)
-            #bld.install_as(path + '/%s.xml' % self.doc_module, out.abspath(self.env))
+        if self.bld.is_install:
+            install_help(lang, self)
 
-    # install help for 'C'
-    #if bld.is_install:
-        #path = os.path.join(self.install_path, 'C')
-        #path = self.install_path + '/' + 'C'
-        #lst = self.to_list(self.doc_includes) + self.to_list(self.doc_figures)
-        #for y in lst:
-            #bld.install_as(path + '/' + y, self.path.abspath() + '/' + 'C' + '/' + y)
-        # install 'xiphos.xml' and 'legal.xml'
-        #bld.install_as(path + '/%s.xml' % self.doc_module,
-                #self.path.abspath() + '/C/%s.xml' % self.doc_module)
-        #bld.install_as(path + '/%s.xml' % self.doc_entities,
-                #self.path.abspath() + '/C/%s' % self.doc_entities)
+    # install C help
+    install_help_C(self)
 
 
 def exec_xsltproc(self):
@@ -166,7 +188,7 @@ def exec_htmlhelpc(self):
     return ret
 
 
-Task.simple_task_type('xml2po', '${XML2PO} -o ${TGT} ${XML2PO_FLAGS} ${SRC}', color='BLUE', shell=False)
+Task.simple_task_type('xml2po', '${XML2PO} -o ${TGT} ${XML2PO_FLAGS} ${SRC}', color='BLUE')
 Task.task_type_from_func('xsltproc', vars=['XSLTPROC', 'HTMLHELP_XSL'], color='BLUE', func=exec_xsltproc)
 Task.task_type_from_func('htmlhelpc', vars=['HTMLHELPC'], color='BLUE', func=exec_htmlhelpc)
 
