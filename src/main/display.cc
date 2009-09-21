@@ -1498,7 +1498,6 @@ StartFestival()
 	festival_args[1] = g_strdup("--server");
 	festival_args[2] = NULL;
 #endif
-	GS_message((festival_args[0]));
 	g_spawn_async ( NULL,
 			festival_args,
 			NULL,
