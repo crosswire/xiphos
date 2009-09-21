@@ -1,3 +1,7 @@
+2009-09-21  karl <charcoal@users.sf.net>
+
+	* move gconf_setup() to gui_init() where it belongs.
+
 2009-09-12  karl <charcoal@users.sf.net>
 
 	* feat.req #2813476 Interface localization (prefs->options)

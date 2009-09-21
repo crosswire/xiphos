@@ -4,7 +4,7 @@
 # names in LINGUAS are either 5-char full "language_LOCALE" names or
 # 2-char "language-only" names.  convert the latter.
 #
-echo 'char *locale_set[] = { '
+( echo 'char *locale_set[] = { '
 sed -e 's/en_GB/& en_US/' < ../../po/LINGUAS |
 tr ' ' '\n' |
 while read l ; do
@@ -20,4 +20,5 @@ while read l ; do
     echo '	"'"$l"'",'
 done
 echo '        (char*)0'
-echo '};'
+echo '};' ) |
+uniq
