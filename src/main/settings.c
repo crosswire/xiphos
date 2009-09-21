@@ -234,6 +234,7 @@ int settings_init(int new_configs, int new_bookmarks)
 			test = setlocale(LC_ALL, lfix);
 		}
 		if (test != NULL)
+			g_setenv("LC_ALL", test, TRUE);
 			GS_message(("set locale to %s", settings.special_locale));
 	}
 
