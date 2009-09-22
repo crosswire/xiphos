@@ -1,3 +1,11 @@
+2009-09-21  matthew<ransom1982@users.sourceforge.net>
+
+	* change Windows to use ShellExecuteW instead of gnome_show_url
+	* new function xiphos_open_default to open anything on any platform
+	* change help menu to point to new location for chm files on Windows
+	* added linkbutton hook so that linkbuttons (in about dialogs) would
+	   work on Windows
+
 2009-09-21  karl <charcoal@users.sf.net>
 
 	* move gconf_setup() to gui_init() where it belongs.
