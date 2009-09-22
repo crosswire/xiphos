@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: 3.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-08-02 22:07+0200\n"
-"PO-Revision-Date: 2009-08-06 10:42+0100\n"
-"Last-Translator: Peter von Kaehne <refdoc@crosswire.org>\n"
+"PO-Revision-Date: 2009-09-21 21:22-0800\n"
+"Last-Translator: Mansour <manhid1@yahoo.com>\n"
 "Language-Team: English/GB <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,53 +23,66 @@ msgstr ""
 msgid "Configuration not found"
 msgstr "ترکیب پیدا نشد"
 
-#: ../src/editor/bonobo-editor.c:252 ../src/editor/slib-editor.c:228
+#: ../src/editor/bonobo-editor.c:252
+#: ../src/editor/slib-editor.c:228
 #: ../src/gnome2/html.c:633
 #, c-format
 msgid "Page %d of %d"
-msgstr "صفحه %d از %d"
+msgstr "صفحۀ %d  از %d"
 
 #: ../src/editor/bonobo-editor.c:351
 msgid "Are you sure you want to delete the note for"
 msgstr "آیا به یقین می‌خواهید این یادداشت حذف شود؟"
 
-#: ../src/editor/bonobo-editor.c:963 ../src/editor/bonobo-editor.c:996
-#: ../src/editor/slib-editor.c:1161 ../src/editor/slib-editor.c:1198
+#: ../src/editor/bonobo-editor.c:963
+#: ../src/editor/bonobo-editor.c:996
+#: ../src/editor/slib-editor.c:1161
+#: ../src/editor/slib-editor.c:1198
 msgid "Save the changes to document"
 msgstr "تغییرات را ضبط کن"
 
-#: ../src/editor/bonobo-editor.c:964 ../src/editor/bonobo-editor.c:997
-#: ../src/editor/slib-editor.c:1162 ../src/editor/slib-editor.c:1199
+#: ../src/editor/bonobo-editor.c:964
+#: ../src/editor/bonobo-editor.c:997
+#: ../src/editor/slib-editor.c:1162
+#: ../src/editor/slib-editor.c:1199
 msgid "before closing?"
 msgstr "قبل از بستن؟"
 
-#: ../src/editor/bonobo-editor.c:971 ../src/editor/bonobo-editor.c:1004
-#: ../src/editor/slib-editor.c:1169 ../src/editor/slib-editor.c:1206
+#: ../src/editor/bonobo-editor.c:971
+#: ../src/editor/bonobo-editor.c:1004
+#: ../src/editor/slib-editor.c:1169
+#: ../src/editor/slib-editor.c:1206
 msgid "If you don't save, changes will be permanently lost."
 msgstr "اگر ضبط نکنید، تغییرات به کلی حذف خواهد شد."
 
-#: ../src/editor/bonobo-editor.c:995 ../src/editor/slib-editor.c:1197
+#: ../src/editor/bonobo-editor.c:995
+#: ../src/editor/slib-editor.c:1197
 #: ../ui/xi-menus.glade.h:26
 msgid "File"
 msgstr "پرونده"
 
-#: ../src/editor/bonobo-editor.c:1222 ../src/editor/slib-editor.c:1254
+#: ../src/editor/bonobo-editor.c:1222
+#: ../src/editor/slib-editor.c:1254
 msgid "StudyPad"
 msgstr "یادداشتهای مطالعات شخصی"
 
-#: ../src/editor/bonobo-editor.c:1235 ../src/editor/slib-editor.c:1268
+#: ../src/editor/bonobo-editor.c:1235
+#: ../src/editor/slib-editor.c:1268
 msgid "Note Editor"
-msgstr "یادداشتهای شخصی"
+msgstr "ویرایشگر یادداشتهای شخصی"
 
-#: ../src/editor/bonobo-editor.c:1244 ../src/editor/slib-editor.c:1282
+#: ../src/editor/bonobo-editor.c:1244
+#: ../src/editor/slib-editor.c:1282
 msgid "Prayer List/Journal Editor"
-msgstr "لیست دعا"
+msgstr "لیست دعا/یادداشتهای هر روزه"
 
-#: ../src/editor/slib-editor.c:382 ../src/editor/slib-editor.c:429
+#: ../src/editor/slib-editor.c:382
+#: ../src/editor/slib-editor.c:429
 msgid "Save As"
-msgstr "ضبط ک به اسم"
+msgstr "ضبط کن به اسم"
 
-#: ../src/editor/slib-editor.c:400 ../src/editor/slib-editor.c:447
+#: ../src/editor/slib-editor.c:400
+#: ../src/editor/slib-editor.c:447
 msgid "Untitled document"
 msgstr "متن بی‌نام"
 
@@ -83,14 +96,16 @@ msgstr "منبع به فرمت اچ.تی.ام.ال"
 
 #: ../src/editor/slib-editor.c:626
 msgid "Plain Source"
-msgstr "منبع بدون فرمت"
+msgstr "منبع فرمت نشده "
 
-#: ../src/editor/slib-editor.c:633 ../ui/editor_note.xml.h:15
+#: ../src/editor/slib-editor.c:633
+#: ../ui/editor_note.xml.h:15
 #: ../ui/editor_studypad.xml.h:21
 msgid "_Print..."
 msgstr "...چاپ"
 
-#: ../src/editor/slib-editor.c:640 ../ui/editor_note.xml.h:9
+#: ../src/editor/slib-editor.c:640
+#: ../ui/editor_note.xml.h:9
 #: ../ui/editor_studypad.xml.h:14
 msgid "Print Pre_view"
 msgstr "چاپ پیشنگری"
@@ -111,15 +126,17 @@ msgstr "ضبط"
 msgid "Save _As..."
 msgstr "ضبط کن به اسم"
 
-#: ../src/editor/slib-editor.c:675 ../ui/editor_note.xml.h:14
-#: ../ui/editor_studypad.xml.h:20 ../ui/editor.xml.h:13
+#: ../src/editor/slib-editor.c:675
+#: ../ui/editor_note.xml.h:14
+#: ../ui/editor_studypad.xml.h:20
+#: ../ui/editor.xml.h:13
 #: ../ui/xi-menus.glade.h:85
 msgid "_File"
 msgstr "پرونده"
 
 #: ../src/editor/slib-editor.c:730
 msgid "HTML _Output"
-msgstr "نتیجه – اج.تی.ام.ال"
+msgstr "نتیجه به فرمت – اج.تی.ام.ال"
 
 #: ../src/editor/slib-editor.c:737
 msgid "_HTML Source"
@@ -127,24 +144,28 @@ msgstr "منبع به فرمت اچ.تی.ام.ال"
 
 #: ../src/editor/slib-editor.c:744
 msgid "_Plain Source"
-msgstr "منبع بدون فرمت"
+msgstr "منبع فرمت نشده"
 
-#: ../src/editor/slib-editor.c:751 ../ui/xi-menus.glade.h:100
+#: ../src/editor/slib-editor.c:751
+#: ../ui/xi-menus.glade.h:100
 msgid "_View"
-msgstr "نگرش"
+msgstr "مرور"
 
-#: ../src/editor/slib-editor.c:762 ../ui/editor_note.xml.h:11
-#: ../ui/editor_studypad.xml.h:16 ../ui/editor.xml.h:11
+#: ../src/editor/slib-editor.c:762
+#: ../ui/editor_note.xml.h:11
+#: ../ui/editor_studypad.xml.h:16
+#: ../ui/editor.xml.h:11
 msgid "Save"
 msgstr "ضبط"
 
-#: ../src/gecko/gecko-html.cpp:178 ../src/gnome2/html.c:161
+#: ../src/gecko/gecko-html.cpp:178
+#: ../src/gnome2/html.c:161
 msgid "Unlock "
 msgstr "قفل را باز کن"
 
 #: ../src/gecko/gecko-print.c:171
 msgid "Preparing to print"
-msgstr "آمادگی جهت نصب"
+msgstr "آمادگی جهت چاپ"
 
 #: ../src/gecko/gecko-print.c:265
 msgid "Printing is not supported on this printer"
@@ -153,15 +174,16 @@ msgstr "با چاپگر فعلی چاپ ممکن نیست"
 #: ../src/gecko/gecko-print.c:268
 #, c-format
 msgid "Printer %s does not support PostScript printing."
-msgstr "چاپگر این نوع متن را چاپ نمی‌کند"
+msgstr "چاپگر %s .این نوع متن را چاپ نمی‌کند"
 
-#: ../src/gecko/gecko-print.c:341 ../src/gecko/gecko-print.c:369
+#: ../src/gecko/gecko-print.c:341
+#: ../src/gecko/gecko-print.c:369
 msgid "Printing"
 msgstr "چاپ"
 
 #: ../src/gecko/gecko-print.c:371
 msgid "Waiting to print"
-msgstr "در صف چاپ"
+msgstr "منتظر چاپ کردن"
 
 #: ../src/gecko/gecko-print.c:583
 msgid "An error occurred while printing"
@@ -170,30 +192,20 @@ msgstr "در حین چاپ مشکلی پیش آمد"
 #: ../src/gecko/gecko-print.c:587
 #, c-format
 msgid "It was not possible to print your document: %s"
-msgstr "چاپ متن ممکن نشد"
+msgstr "چاپ متن %s امکان پذیر نمی‏باشد"
 
 #: ../src/gnome2/about_modules.c:189
 msgid "About Sword Module"
 msgstr "درباره مدول سورد"
 
-#: ../src/gnome2/about_modules.c:383 ../src/gnome2/mod_mgr.c:204
+#: ../src/gnome2/about_modules.c:383
+#: ../src/gnome2/mod_mgr.c:204
 msgid "The module has no About information."
-msgstr "عتلاعت نداریم درباره این انون"
+msgstr "در بارۀ این عنوان اطلاعاتی موجود نیست."
 
 #: ../src/gnome2/about_sword.c:88
-msgid ""
-"The SWORD Project is an effort to create an ever-expanding software package "
-"for research and study of God and His Word. The SWORD Project framework "
-"allows easy use and study of Bible texts, commentaries, lexicons, "
-"dictionaries, and other books. Many frontends are built using this "
-"framework. An installed set of books may be shared among all frontends using "
-"the framework."
-msgstr ""
-"پروژه سورد بر این تلاش است که نرم افزار فزاینده‌ای به جهت مطالعه کلام خدا در "
-"دسترس بگذارد. این نرم افزار به شخص این امکان را فراهم می‌کند که مطابق نیاز "
-"خود متون کتابمقدس، تفاسیر، کتب فرهنگ لغات، و دیگر کتب منابع را به هر مقدار "
-"که مي‌خواهد، در این نرم افزار قرار دهد. مدولهای نصب شده این قابلیت را دارند "
-"که افراد مختلف به شکل مشترک در آن کار کنند. "
+msgid "The SWORD Project is an effort to create an ever-expanding software package for research and study of God and His Word. The SWORD Project framework allows easy use and study of Bible texts, commentaries, lexicons, dictionaries, and other books. Many frontends are built using this framework. An installed set of books may be shared among all frontends using the framework."
+msgstr "پروژه سورد بر این تلاش است که نرم افزار فزاینده‌ای به جهت مطالعه کلام خدا در دسترس بگذارد. این نرم افزار برای شخص این امکان را فراهم می‌کند که مطابق نیاز خود متون کتابمقدس، تفاسیر، کتب فرهنگ لغات، و دیگر کتب منابع را به هر مقدار که مي‌خواهد، در این نرم افزار نصب کند. مدولهای نصب شده این قابلیت را دارند که افراد مختلف به شکل مشترک در آن کار کنند. "
 
 #: ../src/gnome2/about_sword.c:106
 msgid "About the SWORD Project"
@@ -205,7 +217,7 @@ msgstr "نسخه سورد"
 
 #: ../src/gnome2/about_sword.c:154
 msgid "Books can be downloaded from the SWORD Project"
-msgstr "مدولها را می‌توان از پروژه سورد بارگذاری کرد"
+msgstr "کتابهای مختلف را می‌توان از پروژه سورد بارگذاری کرد"
 
 #: ../src/gnome2/about_sword.c:160
 msgid "The SWORD Project"
@@ -213,24 +225,21 @@ msgstr "پروژه سورد"
 
 #: ../src/gnome2/about_trans.c:84
 msgid ""
-"Do you like using Xiphos to study the Bible? Would you like to see its "
-"display using your native language? You could translate Xiphos! \n"
+"Do you like using Xiphos to study the Bible? Would you like to see its display using your native language? You could translate Xiphos! \n"
 "\n"
-"We are always looking for contributions of new translations of Xiphos into "
-"other languages. If you are able to translate for us, please see the link "
-"below, contact us, and get involved with our efforts."
+"We are always looking for contributions of new translations of Xiphos into other languages. If you are able to translate for us, please see the link below, contact us, and get involved with our efforts."
 msgstr ""
-"ما همیشه علاقمند هستیم که زیفوس را به زبانهای دیگر ترجمه کنیم. لذا اگر از "
-"توان ترجمه برخوردارید، خواهش می‌کنیم با لینک زیر با ما تماس بگیرید و در این "
-"امر با ما همگام شوید."
+"آیا از برنامۀ زیفوس برای مطالعۀ کتاب‏مقدس خوشتان آمده است؟ آیا مشتاق هستید که که زیفوس به زبانهای دیگر نیز ترجمه شود؟ شما می‏توانید در کار ترجمۀ زیفوس با ما همگام شوید! \n"
+"\n"
+"ما همیشه علاقمند هستیم که زیفوس را به زبانهای دیگر ترجمه کنیم. لذا اگر از توان ترجمه برخوردارید، خواهش می‌کنیم با لینک زیر با ما تماس بگیرید و در این امر با ما همگام شوید."
 
 #: ../src/gnome2/about_trans.c:98
 msgid "About Xiphos Translation"
-msgstr "درباره ترجمه زیفوس"
+msgstr "درباره ترجمۀ زیفوس"
 
 #: ../src/gnome2/about_trans.c:139
 msgid "See TRANSLATION-HOWTO in Xiphos source"
-msgstr "لطفا به بخش ترجمه رجوع کنید"
+msgstr "لطفا به بخش ترجمه در قسمت منابع زیفوس مراجعه کنید"
 
 #: ../src/gnome2/about_trans.c:145
 msgid "Xiphos development"
@@ -245,39 +254,43 @@ msgid ""
 "(formerly known as GnomeSword)\n"
 "\n"
 "Powered by The SWORD Project.\n"
-"We would like to thank Troy Griffitts and all the other folks who have given "
-"us The SWORD Project."
-msgstr ""
-"پروژه سوردبدینوسیله از تروی گریفیتس و بقیه دوستان که پروژه سورد را در اختیار "
-"ما گذاشتند، تشکر می‌کنیم. "
+"We would like to thank Troy Griffitts and all the other folks who have given us The SWORD Project."
+msgstr "پروژه سوردبدینوسیله از تروی گریفیتس و بقیه دوستان که پروژه سورد را در اختیار ما گذاشتند، تشکر می‌کنیم. "
 
 #: ../src/gnome2/bibletext_dialog.c:525
 msgid "Go to "
 msgstr "برو به:"
 
 #. info->stock_icon = GTK_STOCK_OPEN;
-#: ../src/gnome2/bookmark_dialog.c:167 ../src/gnome2/bookmarks_menu.c:471
-#: ../src/gnome2/bookmarks_menu.c:897 ../src/gnome2/bookmarks_menu.c:995
-#: ../src/gnome2/bookmarks_treeview.c:131 ../ui/editor_studypad.xml.h:2
+#: ../src/gnome2/bookmark_dialog.c:167
+#: ../src/gnome2/bookmarks_menu.c:471
+#: ../src/gnome2/bookmarks_menu.c:897
+#: ../src/gnome2/bookmarks_menu.c:995
+#: ../src/gnome2/bookmarks_treeview.c:131
+#: ../ui/editor_studypad.xml.h:2
 #: ../ui/xi-menus.glade.h:9
 msgid "Bookmark"
 msgstr "علامت"
 
-#: ../src/gnome2/bookmark_dialog.c:169 ../src/gnome2/bookmarks_menu.c:997
+#: ../src/gnome2/bookmark_dialog.c:169
+#: ../src/gnome2/bookmarks_menu.c:997
 #: ../src/gnome2/bookmarks_treeview.c:132
 msgid "Enter Folder Name"
 msgstr "نام قفسه پرونده وارد کن"
 
-#: ../src/gnome2/bookmark_dialog.c:171 ../src/gnome2/bookmarks_menu.c:999
+#: ../src/gnome2/bookmark_dialog.c:171
+#: ../src/gnome2/bookmarks_menu.c:999
 msgid "Folder Name"
 msgstr "نام قفسه پرونده "
 
-#: ../src/gnome2/bookmark_dialog.c:172 ../src/gnome2/bookmarks_menu.c:1000
+#: ../src/gnome2/bookmark_dialog.c:172
+#: ../src/gnome2/bookmarks_menu.c:1000
 #: ../src/gnome2/bookmarks_treeview.c:134
 msgid "Folder: "
 msgstr "قفسه پرونده"
 
-#: ../src/gnome2/bookmarks_menu.c:457 ../src/gnome2/treekey-editor.c:322
+#: ../src/gnome2/bookmarks_menu.c:457
+#: ../src/gnome2/treekey-editor.c:322
 #: ../ui/xi-menus.glade.h:22
 msgid "Edit"
 msgstr "ویرایش"
@@ -290,11 +303,13 @@ msgstr "قفسه پرونده"
 msgid "Bookmark name: "
 msgstr "نام علامت"
 
-#: ../src/gnome2/bookmarks_menu.c:480 ../src/gnome2/bookmarks_menu.c:905
+#: ../src/gnome2/bookmarks_menu.c:480
+#: ../src/gnome2/bookmarks_menu.c:905
 msgid "Verse: "
 msgstr "آیه:"
 
-#: ../src/gnome2/bookmarks_menu.c:481 ../src/gnome2/bookmarks_menu.c:906
+#: ../src/gnome2/bookmarks_menu.c:481
+#: ../src/gnome2/bookmarks_menu.c:906
 msgid "Module: "
 msgstr "مدول:"
 
@@ -327,7 +342,8 @@ msgstr "مشخص کن"
 msgid "Search result: %s"
 msgstr "نتایج جستجو $s"
 
-#: ../src/gnome2/bookmarks_treeview.c:934 ../src/gnome2/sidebar.c:1459
+#: ../src/gnome2/bookmarks_treeview.c:934
+#: ../src/gnome2/sidebar.c:1459
 msgid "Bookmarks"
 msgstr "علائم"
 
@@ -355,11 +371,13 @@ msgstr "سیفوس:"
 msgid "Close _without Saving"
 msgstr "بستن بدون ضبط"
 
-#: ../src/gnome2/export_dialog.c:265 ../ui/export-dialog.glade.h:20
+#: ../src/gnome2/export_dialog.c:265
+#: ../ui/export-dialog.glade.h:20
 msgid "Please check copyright before exporting!"
 msgstr "لطفا قبل از استخراج به حقوق قانونی کپی و نشردقت کن "
 
-#: ../src/gnome2/find_dialog.c:200 ../src/gnome2/find_dialog.c:369
+#: ../src/gnome2/find_dialog.c:200
+#: ../src/gnome2/find_dialog.c:369
 msgid "Find"
 msgstr "پیدا کن"
 
@@ -367,7 +385,8 @@ msgstr "پیدا کن"
 msgid "Enter Word or Phrase"
 msgstr "کلمه یا عبارت را وارد کن"
 
-#: ../src/gnome2/find_dialog.c:234 ../src/gnome2/search_sidebar.c:303
+#: ../src/gnome2/find_dialog.c:234
+#: ../src/gnome2/search_sidebar.c:303
 #: ../ui/search-dialog.glade.h:57
 msgid "Match case"
 msgstr "مقایسه کن"
@@ -376,7 +395,8 @@ msgstr "مقایسه کن"
 msgid "Search backwards"
 msgstr "جستجو به شکل برگشت"
 
-#: ../src/gnome2/find_dialog.c:250 ../src/gnome2/search_sidebar.c:268
+#: ../src/gnome2/find_dialog.c:250
+#: ../src/gnome2/search_sidebar.c:268
 #: ../ui/search-dialog.glade.h:74
 msgid "Regular expression"
 msgstr "بیان معمول"
@@ -415,11 +435,14 @@ msgstr "زیفوس-نرم افزار مطالعه کتابمقدس"
 
 #: ../src/gnome2/main_window.c:814
 msgid "Open a new tab"
-msgstr "بخش جدید باز کن"
+msgstr "بخش جدید را باز کن"
 
-#: ../src/gnome2/main_window.c:894 ../src/gnome2/sidebar.c:621
-#: ../src/gnome2/sidebar.c:627 ../src/main/sidebar.cc:643
-#: ../src/main/sidebar.cc:964 ../src/main/sidebar.cc:965
+#: ../src/gnome2/main_window.c:894
+#: ../src/gnome2/sidebar.c:621
+#: ../src/gnome2/sidebar.c:627
+#: ../src/main/sidebar.cc:643
+#: ../src/main/sidebar.cc:964
+#: ../src/main/sidebar.cc:965
 #: ../src/main/sidebar.cc:966
 msgid "Standard View"
 msgstr "نگرش استاندارد"
@@ -460,17 +483,21 @@ msgstr "انتخاب نام تفسیر"
 msgid "New Name"
 msgstr "نام جدید"
 
-#: ../src/gnome2/menu_popup.c:1188 ../src/gnome2/treekey-editor.c:132
-#: ../src/gnome2/treekey-editor.c:191 ../src/gnome2/treekey-editor.c:277
+#: ../src/gnome2/menu_popup.c:1188
+#: ../src/gnome2/treekey-editor.c:132
+#: ../src/gnome2/treekey-editor.c:191
+#: ../src/gnome2/treekey-editor.c:277
 #: ../src/main/prayerlists.cc:240
 msgid "Name: "
 msgstr "نام"
 
-#: ../src/gnome2/menu_popup.c:1198 ../src/main/prayerlists.cc:254
+#: ../src/gnome2/menu_popup.c:1198
+#: ../src/main/prayerlists.cc:254
 msgid "Module names must contain [A-Za-z0-9_] only."
 msgstr "برای نامگذاری مدولها تنها از حروف القبا و اعداد صفر تا نه استفاده کنید"
 
-#: ../src/gnome2/menu_popup.c:1205 ../src/main/prayerlists.cc:261
+#: ../src/gnome2/menu_popup.c:1205
+#: ../src/main/prayerlists.cc:261
 msgid "Xiphos already knows a module by that name."
 msgstr "مدولی به این اسم در حال حاضر موجود است"
 
@@ -582,12 +609,14 @@ msgstr ""
 msgid "Journals and prayer lists cannot be indexed."
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:547 ../src/gnome2/mod_mgr.c:2902
+#: ../src/gnome2/mod_mgr.c:547
+#: ../src/gnome2/mod_mgr.c:2902
 #: ../ui/module-manager.glade.h:15
 msgid "Install"
 msgstr "نصب کن"
 
-#: ../src/gnome2/mod_mgr.c:549 ../src/gnome2/treekey-editor.c:316
+#: ../src/gnome2/mod_mgr.c:549
+#: ../src/gnome2/treekey-editor.c:316
 msgid "Remove"
 msgstr "منتقل کن"
 
@@ -608,16 +637,23 @@ msgstr "حذف"
 msgid "%s failed"
 msgstr " %sممکن نشد"
 
-#: ../src/gnome2/mod_mgr.c:559 ../src/gnome2/mod_mgr.c:1285
+#: ../src/gnome2/mod_mgr.c:559
+#: ../src/gnome2/mod_mgr.c:1285
 msgid "Finished"
 msgstr "تمام شد"
 
-#: ../src/gnome2/mod_mgr.c:726 ../src/gnome2/mod_mgr.c:728
-#: ../src/gnome2/mod_mgr.c:830 ../src/gnome2/mod_mgr.c:865
-#: ../src/gnome2/mod_mgr.c:867 ../src/gnome2/utilities.c:346
-#: ../src/gnome2/utilities.c:411 ../src/gnome2/utilities.c:413
-#: ../src/gnome2/utilities.c:1032 ../src/main/sidebar.cc:801
-#: ../src/main/sidebar.cc:873 ../src/main/sidebar.cc:875
+#: ../src/gnome2/mod_mgr.c:726
+#: ../src/gnome2/mod_mgr.c:728
+#: ../src/gnome2/mod_mgr.c:830
+#: ../src/gnome2/mod_mgr.c:865
+#: ../src/gnome2/mod_mgr.c:867
+#: ../src/gnome2/utilities.c:346
+#: ../src/gnome2/utilities.c:411
+#: ../src/gnome2/utilities.c:413
+#: ../src/gnome2/utilities.c:1032
+#: ../src/main/sidebar.cc:801
+#: ../src/main/sidebar.cc:873
+#: ../src/main/sidebar.cc:875
 msgid "Unknown"
 msgstr "ناشناس"
 
@@ -634,40 +670,55 @@ msgid ""
 "Module Type"
 msgstr "نوع مدول"
 
-#: ../src/gnome2/mod_mgr.c:1046 ../src/gnome2/utilities.c:472
-#: ../src/main/sidebar.cc:948 ../src/main/sidebar.cc:950
+#: ../src/gnome2/mod_mgr.c:1046
+#: ../src/gnome2/utilities.c:472
+#: ../src/main/sidebar.cc:948
+#: ../src/main/sidebar.cc:950
 msgid "Biblical Texts"
 msgstr "متون کتابمقدس"
 
-#: ../src/gnome2/mod_mgr.c:1050 ../src/gnome2/utilities.c:476
-#: ../src/main/sidebar.cc:655 ../src/main/sidebar.cc:973
-#: ../src/main/sidebar.cc:975 ../ui/prefs.glade.h:33
+#: ../src/gnome2/mod_mgr.c:1050
+#: ../src/gnome2/utilities.c:476
+#: ../src/main/sidebar.cc:655
+#: ../src/main/sidebar.cc:973
+#: ../src/main/sidebar.cc:975
+#: ../ui/prefs.glade.h:33
 msgid "Commentaries"
 msgstr "کتب تفاسیر"
 
-#: ../src/gnome2/mod_mgr.c:1054 ../src/gnome2/utilities.c:480
-#: ../src/main/sidebar.cc:982 ../src/main/sidebar.cc:984
+#: ../src/gnome2/mod_mgr.c:1054
+#: ../src/gnome2/utilities.c:480
+#: ../src/main/sidebar.cc:982
+#: ../src/main/sidebar.cc:984
 msgid "Dictionaries"
 msgstr "کتب فرهنگ لغات"
 
-#: ../src/gnome2/mod_mgr.c:1058 ../src/gnome2/utilities.c:484
-#: ../src/main/sidebar.cc:991 ../src/main/sidebar.cc:993
+#: ../src/gnome2/mod_mgr.c:1058
+#: ../src/gnome2/utilities.c:484
+#: ../src/main/sidebar.cc:991
+#: ../src/main/sidebar.cc:993
 msgid "Daily Devotionals"
 msgstr "دعا و تفکر روزانه"
 
-#: ../src/gnome2/mod_mgr.c:1062 ../src/gnome2/utilities.c:488
-#: ../src/main/sidebar.cc:665 ../src/main/sidebar.cc:1000
+#: ../src/gnome2/mod_mgr.c:1062
+#: ../src/gnome2/utilities.c:488
+#: ../src/main/sidebar.cc:665
+#: ../src/main/sidebar.cc:1000
 #: ../src/main/sidebar.cc:1002
 msgid "General Books"
 msgstr "کتب عمومی"
 
-#: ../src/gnome2/mod_mgr.c:1066 ../src/gnome2/utilities.c:492
-#: ../src/main/sidebar.cc:1009 ../src/main/sidebar.cc:1011
+#: ../src/gnome2/mod_mgr.c:1066
+#: ../src/gnome2/utilities.c:492
+#: ../src/main/sidebar.cc:1009
+#: ../src/main/sidebar.cc:1011
 msgid "Maps"
 msgstr "نقشه‌ها"
 
-#: ../src/gnome2/mod_mgr.c:1070 ../src/gnome2/utilities.c:496
-#: ../src/main/sidebar.cc:1018 ../src/main/sidebar.cc:1020
+#: ../src/gnome2/mod_mgr.c:1070
+#: ../src/gnome2/utilities.c:496
+#: ../src/main/sidebar.cc:1018
+#: ../src/main/sidebar.cc:1020
 msgid "Images"
 msgstr "تصاویر"
 
@@ -685,9 +736,12 @@ msgstr "روز رسانی"
 msgid "Uninstalled"
 msgstr "دیگر نصب نیست"
 
-#: ../src/gnome2/mod_mgr.c:1091 ../src/gnome2/sidebar.c:637
-#: ../src/gnome2/utilities.c:501 ../src/main/prayerlists.cc:238
-#: ../src/main/sidebar.cc:1028 ../src/main/sidebar.cc:1030
+#: ../src/gnome2/mod_mgr.c:1091
+#: ../src/gnome2/sidebar.c:637
+#: ../src/gnome2/utilities.c:501
+#: ../src/main/prayerlists.cc:238
+#: ../src/main/sidebar.cc:1028
+#: ../src/main/sidebar.cc:1030
 msgid "Prayer List/Journal"
 msgstr "لیست دعا"
 
@@ -720,33 +774,24 @@ msgid "Installed"
 msgstr "نصب شد"
 
 #: ../src/gnome2/mod_mgr.c:1485
-msgid ""
-"The index icon means you have built an optimized ('lucene') index for this "
-"module for fast searching (see the Maintenance pane for this function)"
-msgstr ""
-"نشانه اندکس به اين معني است که شما براي اين مدول قبلا اندکسي درست کرده‌ايد که "
-"کار جستجوي سريع را انجام دهد"
+msgid "The index icon means you have built an optimized ('lucene') index for this module for fast searching (see the Maintenance pane for this function)"
+msgstr "نشانه اندکس به اين معني است که شما براي اين مدول قبلا اندکسي درست کرده‌ايد که کار جستجوي سريع را انجام دهد"
 
 #: ../src/gnome2/mod_mgr.c:1503
-msgid ""
-"The lock icon means this module is encrypted, and requires that you purchase "
-"an unlock key from the content owner"
-msgstr ""
-"نشانه قفل يعني مدول قفل است و جهت استفاده بايد کليد اين قفل خريداري شود"
+msgid "The lock icon means this module is encrypted, and requires that you purchase an unlock key from the content owner"
+msgstr "نشانه قفل يعني مدول قفل است و جهت استفاده بايد کليد اين قفل خريداري شود"
 
 #. 2
-#: ../src/gnome2/mod_mgr.c:1520 ../src/gnome2/sidebar.c:975
-#: ../src/gnome2/sidebar.c:1143 ../ui/xi-menus.glade.h:1
+#: ../src/gnome2/mod_mgr.c:1520
+#: ../src/gnome2/sidebar.c:975
+#: ../src/gnome2/sidebar.c:1143
+#: ../ui/xi-menus.glade.h:1
 msgid "About"
 msgstr "درباره"
 
 #: ../src/gnome2/mod_mgr.c:1540
-msgid ""
-"The refresh icon means the Installed module is older than the newer "
-"Available module: You should update the module"
-msgstr ""
-"نشانه تجديد به اين معني است که مدول نصب شده از مدولهاي موجود قديمي‌تر است؛ "
-"لازم است که مدولهاي تازه‌تر را نصب فرماييد"
+msgid "The refresh icon means the Installed module is older than the newer Available module: You should update the module"
+msgstr "نشانه تجديد به اين معني است که مدول نصب شده از مدولهاي موجود قديمي‌تر است؛ لازم است که مدولهاي تازه‌تر را نصب فرماييد"
 
 #: ../src/gnome2/mod_mgr.c:1552
 msgid "Available"
@@ -760,7 +805,8 @@ msgstr "اندازه"
 msgid "Description"
 msgstr "توصیف"
 
-#: ../src/gnome2/mod_mgr.c:1602 ../src/gnome2/mod_mgr.c:1702
+#: ../src/gnome2/mod_mgr.c:1602
+#: ../src/gnome2/mod_mgr.c:1702
 msgid "Configure"
 msgstr "شکل‌بندی"
 
@@ -781,9 +827,8 @@ msgid "Directory"
 msgstr "لغت‌نامه"
 
 #: ../src/gnome2/mod_mgr.c:1664
-#, fuzzy
 msgid "User"
-msgstr "بالاتر"
+msgstr "کاربر"
 
 #: ../src/gnome2/mod_mgr.c:1672
 msgid "Password"
@@ -797,7 +842,8 @@ msgstr ""
 msgid "Sources"
 msgstr "منابع"
 
-#: ../src/gnome2/mod_mgr.c:1706 ../src/gnome2/preferences_dialog.c:1784
+#: ../src/gnome2/mod_mgr.c:1706
+#: ../src/gnome2/preferences_dialog.c:1784
 #: ../src/gnome2/sidebar.c:1483
 msgid "Modules"
 msgstr "مدولها"
@@ -826,7 +872,8 @@ msgstr ""
 msgid "Could not load standard sources from CrossWire."
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2435 ../src/gnome2/mod_mgr.c:2684
+#: ../src/gnome2/mod_mgr.c:2435
+#: ../src/gnome2/mod_mgr.c:2684
 msgid "Remove the selected source"
 msgstr "منبع انتخاب شده را حذف کنید"
 
@@ -867,30 +914,34 @@ msgstr "منبعی به همان اسم وجود استم"
 msgid "Delete a remote source"
 msgstr "منبع دوردست را وارد کنید "
 
-#: ../src/gnome2/navbar_book.c:359 ../src/gnome2/navbar_book_dialog.c:299
+#: ../src/gnome2/navbar_book.c:359
+#: ../src/gnome2/navbar_book_dialog.c:299
 msgid "Go outward, to the section containing this one"
 msgstr "برو به قسمتی که این را دارد"
 
-#: ../src/gnome2/navbar_book.c:375 ../src/gnome2/navbar_book_dialog.c:315
+#: ../src/gnome2/navbar_book.c:375
+#: ../src/gnome2/navbar_book_dialog.c:315
 msgid "Go to previous item"
 msgstr "برو به مورد قبلی"
 
-#: ../src/gnome2/navbar_book.c:390 ../src/gnome2/navbar_book_dialog.c:330
+#: ../src/gnome2/navbar_book.c:390
+#: ../src/gnome2/navbar_book_dialog.c:330
 msgid "Go to next item"
 msgstr "برو به مورد بعدی"
 
-#: ../src/gnome2/navbar_book.c:406 ../src/gnome2/navbar_book_dialog.c:346
+#: ../src/gnome2/navbar_book.c:406
+#: ../src/gnome2/navbar_book_dialog.c:346
 msgid "Go inward, to the first subsection"
 msgstr ""
 
 #: ../src/gnome2/navbar_versekey_dialog.c:887
 #: ../src/gnome2/navbar_versekey_editor.c:877
 #: ../src/gnome2/navbar_versekey_parallel.c:800
-#, fuzzy
 msgid "Synchronize this window from main window"
-msgstr "%s درپنجره اصلی را نشان بده"
+msgstr "این پنجره را با پنجرۀ اصلی مطابقت می‏دهد"
 
-#: ../src/gnome2/parallel_dialog.c:324 ../src/gnome2/preferences_dialog.c:1790
+#: ../src/gnome2/parallel_dialog.c:324
+#: ../src/gnome2/preferences_dialog.c:1790
 msgid "Parallel"
 msgstr "توازی"
 
@@ -902,7 +953,8 @@ msgstr "کپی"
 msgid "Detach/Attach"
 msgstr "جدا کن/ الصاق کن"
 
-#: ../src/gnome2/parallel_view.c:287 ../ui/xi-menus.glade.h:40
+#: ../src/gnome2/parallel_view.c:287
+#: ../ui/xi-menus.glade.h:40
 msgid "Module Options"
 msgstr "گزینشهای مختلف مدول"
 
@@ -927,10 +979,14 @@ msgstr "توازی 4 را عوض کن"
 msgid "Change parallel 5"
 msgstr "توازی 5 را عوض کن"
 
-#: ../src/gnome2/parallel_view.c:467 ../src/gnome2/sidebar.c:620
-#: ../src/gnome2/sidebar.c:626 ../src/gnome2/tabbed_browser.c:231
-#: ../src/main/sidebar.cc:623 ../src/main/sidebar.cc:956
-#: ../src/main/sidebar.cc:957 ../src/main/sidebar.cc:958
+#: ../src/gnome2/parallel_view.c:467
+#: ../src/gnome2/sidebar.c:620
+#: ../src/gnome2/sidebar.c:626
+#: ../src/gnome2/tabbed_browser.c:231
+#: ../src/main/sidebar.cc:623
+#: ../src/main/sidebar.cc:956
+#: ../src/main/sidebar.cc:957
+#: ../src/main/sidebar.cc:958
 msgid "Parallel View"
 msgstr "نگرش به شکل توازی"
 
@@ -967,7 +1023,8 @@ msgstr ""
 msgid "-- Select --"
 msgstr "انتخاب"
 
-#: ../src/gnome2/preferences_dialog.c:1678 ../ui/prefs.glade.h:74
+#: ../src/gnome2/preferences_dialog.c:1678
+#: ../ui/prefs.glade.h:74
 msgid "Preferences"
 msgstr "ترجیحات"
 
@@ -987,7 +1044,8 @@ msgstr "اندازه"
 msgid "General"
 msgstr "عمومی"
 
-#: ../src/gnome2/preferences_dialog.c:1773 ../ui/prefs.glade.h:85
+#: ../src/gnome2/preferences_dialog.c:1773
+#: ../ui/prefs.glade.h:85
 msgid "Tabs and Panes"
 msgstr "برگها و پنجره‌ها"
 
@@ -1003,17 +1061,20 @@ msgstr "اصلی"
 msgid "Special"
 msgstr "مخصوص"
 
-#: ../src/gnome2/search_dialog.c:61 ../src/main/search_dialog.cc:60
+#: ../src/gnome2/search_dialog.c:61
+#: ../src/main/search_dialog.cc:60
 #: ../src/main/search_sidebar.cc:54
 msgid "Searching the "
 msgstr "جستجوی"
 
-#: ../src/gnome2/search_dialog.c:62 ../src/main/search_dialog.cc:61
+#: ../src/gnome2/search_dialog.c:62
+#: ../src/main/search_dialog.cc:61
 #: ../src/main/search_sidebar.cc:55
 msgid " Module"
 msgstr "مدول"
 
-#: ../src/gnome2/search_dialog.c:63 ../src/main/search_dialog.cc:62
+#: ../src/gnome2/search_dialog.c:63
+#: ../src/main/search_dialog.cc:62
 #: ../src/main/search_sidebar.cc:56
 msgid "found in "
 msgstr "یافت شده در"
@@ -1042,9 +1103,7 @@ msgstr "آیا به یقین می‌خواهید که لیست را حذف کن�
 msgid ""
 "This is an inclusive (\"AND\") search:\n"
 "Find matches showing all words."
-msgstr ""
-"اين نوع جستجو، فراگير است (\"و\") جستجو:/ن تمامي کلمات مربوط به آن را پيدا "
-"مي‌کند"
+msgstr "اين نوع جستجو، فراگير است (\"و\") جستجو:/ن تمامي کلمات مربوط به آن را پيدا مي‌کند"
 
 #: ../src/gnome2/search_sidebar.c:206
 msgid "Search Module"
@@ -1054,7 +1113,8 @@ msgstr "جستجو در مدول"
 msgid "Bible"
 msgstr "کتابمقدس"
 
-#: ../src/gnome2/search_sidebar.c:229 ../ui/prefs.glade.h:35
+#: ../src/gnome2/search_sidebar.c:229
+#: ../ui/prefs.glade.h:35
 msgid "Commentary"
 msgstr "تفسیر"
 
@@ -1062,11 +1122,13 @@ msgstr "تفسیر"
 msgid "Search Type"
 msgstr "نوع جستجو"
 
-#: ../src/gnome2/search_sidebar.c:257 ../ui/search-dialog.glade.h:64
+#: ../src/gnome2/search_sidebar.c:257
+#: ../ui/search-dialog.glade.h:64
 msgid "Multi word"
 msgstr "کلمات متعدد"
 
-#: ../src/gnome2/search_sidebar.c:276 ../ui/search-dialog.glade.h:44
+#: ../src/gnome2/search_sidebar.c:276
+#: ../ui/search-dialog.glade.h:44
 msgid "Exact phrase"
 msgstr "عبارت به شکل دقیق"
 
@@ -1103,11 +1165,13 @@ msgid "Upper"
 msgstr "بالاتر"
 
 #. 0
-#: ../src/gnome2/sidebar.c:963 ../src/gnome2/sidebar.c:1131
+#: ../src/gnome2/sidebar.c:963
+#: ../src/gnome2/sidebar.c:1131
 msgid "Open in a new tab"
 msgstr "در بخشی جدید باز کن"
 
-#: ../src/gnome2/sidebar.c:964 ../src/gnome2/sidebar.c:1132
+#: ../src/gnome2/sidebar.c:964
+#: ../src/gnome2/sidebar.c:1132
 msgid "Open selected module in a new tab"
 msgstr "مدول انتخاب شده را در بخشی جدید باز کن"
 
@@ -1120,7 +1184,8 @@ msgstr "باز کن در پنچره تازه"
 msgid "Open selected module in a separate ['dialog'] window"
 msgstr "مدول انتخاب شده را در دیالوگ باز کن"
 
-#: ../src/gnome2/sidebar.c:976 ../src/gnome2/sidebar.c:1144
+#: ../src/gnome2/sidebar.c:976
+#: ../src/gnome2/sidebar.c:1144
 msgid "View information about the selected dialog"
 msgstr "نگرش اطلاعات مربوط به دیالوگ منتخب"
 
@@ -1140,7 +1205,8 @@ msgstr "موضوع"
 msgid "Monthly"
 msgstr "ماهانه"
 
-#: ../src/gnome2/sidebar.c:1082 ../src/gnome2/sidebar.c:1089
+#: ../src/gnome2/sidebar.c:1082
+#: ../src/gnome2/sidebar.c:1089
 #: ../src/gnome2/sidebar.c:1096
 msgid "Create a new prayer list"
 msgstr "ایجاد لیست دعا جدید"
@@ -1154,7 +1220,8 @@ msgid "Outlined Topic"
 msgstr "موضوع مشخص شده"
 
 #. 1
-#: ../src/gnome2/sidebar.c:1137 ../ui/xi-menus.glade.h:47
+#: ../src/gnome2/sidebar.c:1137
+#: ../ui/xi-menus.glade.h:47
 msgid "Open in editor"
 msgstr "در دیالوگ باز کن"
 
@@ -1170,7 +1237,8 @@ msgstr "جستجو"
 msgid "Verse List"
 msgstr "لیست آیات"
 
-#: ../src/gnome2/sidebar_dialog.c:136 ../src/gnome2/sidebar_dialog.c:145
+#: ../src/gnome2/sidebar_dialog.c:136
+#: ../src/gnome2/sidebar_dialog.c:145
 msgid "Sidebar"
 msgstr "قفسه جانبی"
 
@@ -1178,12 +1246,14 @@ msgstr "قفسه جانبی"
 msgid "Powered by the SWORD Project"
 msgstr "توسط پروژه سورد"
 
-#: ../src/gnome2/treekey-editor.c:130 ../src/gnome2/treekey-editor.c:189
+#: ../src/gnome2/treekey-editor.c:130
+#: ../src/gnome2/treekey-editor.c:189
 #: ../src/gnome2/treekey-editor.c:275
 msgid "Prayer List/Journal Item"
 msgstr "لیست دعا"
 
-#: ../src/gnome2/treekey-editor.c:131 ../src/gnome2/treekey-editor.c:190
+#: ../src/gnome2/treekey-editor.c:131
+#: ../src/gnome2/treekey-editor.c:190
 #: ../src/gnome2/treekey-editor.c:276
 msgid "New name"
 msgstr "نام جدید"
@@ -1196,7 +1266,8 @@ msgstr "قفسه پرونده انتخاب شده را حذف کن"
 msgid "Add Child"
 msgstr "آضافه کردن بچه"
 
-#: ../src/gnome2/treekey-editor.c:305 ../src/gnome2/treekey-editor.c:311
+#: ../src/gnome2/treekey-editor.c:305
+#: ../src/gnome2/treekey-editor.c:311
 msgid "Add an item"
 msgstr "اضافه کردن مورد"
 
@@ -1227,8 +1298,10 @@ msgid ""
 "Xiphos cannot resize images to fit window."
 msgstr ""
 
-#: ../src/main/display.cc:1084 ../src/main/display.cc:1146
-#: ../src/main/display.cc:1234 ../src/main/display.cc:1242
+#: ../src/main/display.cc:1084
+#: ../src/main/display.cc:1146
+#: ../src/main/display.cc:1234
+#: ../src/main/display.cc:1242
 #: ../ui/export-dialog.glade.h:7
 msgid "Chapter"
 msgstr "فصل"
@@ -1250,68 +1323,83 @@ msgid "Starting Sword"
 msgstr "شروع سورد"
 
 #: ../src/main/main.c:164
-#, fuzzy
 msgid "Loading Settings"
-msgstr "بار گذاری مجموعه"
+msgstr "بار گذاری تنظیمات"
 
 #: ../src/main/main.c:168
 msgid "Displaying Xiphos"
 msgstr "نمایش زیفوس"
 
-#: ../src/main/module_dialogs.cc:232 ../src/main/previewer.cc:122
+#: ../src/main/module_dialogs.cc:232
+#: ../src/main/previewer.cc:122
 #: ../ui/prefs.glade.h:75
 msgid "Previewer"
 msgstr "مرورگر"
 
-#: ../src/main/module_dialogs.cc:298 ../src/main/module_dialogs.cc:424
+#: ../src/main/module_dialogs.cc:298
+#: ../src/main/module_dialogs.cc:424
 #: ../src/main/previewer.cc:197
 msgid "Footnote"
 msgstr "زیرنویس"
 
-#: ../src/main/module_dialogs.cc:304 ../src/main/module_dialogs.cc:429
+#: ../src/main/module_dialogs.cc:304
+#: ../src/main/module_dialogs.cc:429
 #: ../src/main/previewer.cc:209
 msgid "Cross Reference"
 msgstr "ارجاعات"
 
-#: ../src/main/module_dialogs.cc:310 ../src/main/module_dialogs.cc:324
-#: ../src/main/module_dialogs.cc:434 ../src/main/module_dialogs.cc:446
-#: ../src/main/previewer.cc:215 ../src/main/previewer.cc:234
+#: ../src/main/module_dialogs.cc:310
+#: ../src/main/module_dialogs.cc:324
+#: ../src/main/module_dialogs.cc:434
+#: ../src/main/module_dialogs.cc:446
+#: ../src/main/previewer.cc:215
+#: ../src/main/previewer.cc:234
 msgid "Strongs"
 msgstr "شماره‌های استرانگ"
 
-#: ../src/main/module_dialogs.cc:316 ../src/main/module_dialogs.cc:335
-#: ../src/main/module_dialogs.cc:439 ../src/main/module_dialogs.cc:456
-#: ../src/main/previewer.cc:221 ../src/main/previewer.cc:247
+#: ../src/main/module_dialogs.cc:316
+#: ../src/main/module_dialogs.cc:335
+#: ../src/main/module_dialogs.cc:439
+#: ../src/main/module_dialogs.cc:456
+#: ../src/main/previewer.cc:221
+#: ../src/main/previewer.cc:247
 msgid "Morphology"
 msgstr "مورفولوژی"
 
-#: ../src/main/module_dialogs.cc:1089 ../src/main/url.cc:537
+#: ../src/main/module_dialogs.cc:1089
+#: ../src/main/url.cc:537
 msgid "Back to "
 msgstr "برگشت"
 
-#: ../src/main/parallel_view.cc:398 ../ui/xi-menus.glade.h:69
+#: ../src/main/parallel_view.cc:398
+#: ../ui/xi-menus.glade.h:69
 msgid "Strong's Numbers"
 msgstr "شماره‌های استرانگ"
 
-#: ../src/main/parallel_view.cc:408 ../ui/search-dialog.glade.h:50
+#: ../src/main/parallel_view.cc:408
+#: ../ui/search-dialog.glade.h:50
 #: ../ui/xi-menus.glade.h:27
 msgid "Footnotes"
 msgstr "زیرنویس"
 
-#: ../src/main/parallel_view.cc:418 ../ui/search-dialog.glade.h:62
+#: ../src/main/parallel_view.cc:418
+#: ../ui/search-dialog.glade.h:62
 #: ../ui/xi-menus.glade.h:41
 msgid "Morphological Tags"
 msgstr "علائم مورفولوژیک"
 
-#: ../src/main/parallel_view.cc:428 ../ui/xi-menus.glade.h:31
+#: ../src/main/parallel_view.cc:428
+#: ../ui/xi-menus.glade.h:31
 msgid "Hebrew Vowel Points"
 msgstr "نقاط حروف صدادار عبری"
 
-#: ../src/main/parallel_view.cc:438 ../ui/xi-menus.glade.h:30
+#: ../src/main/parallel_view.cc:438
+#: ../ui/xi-menus.glade.h:30
 msgid "Hebrew Cantillation"
 msgstr "نتهای عبری جهت قرائت"
 
-#: ../src/main/parallel_view.cc:448 ../ui/xi-menus.glade.h:28
+#: ../src/main/parallel_view.cc:448
+#: ../ui/xi-menus.glade.h:28
 msgid "Greek Accents"
 msgstr "اِعراب یونانی"
 
@@ -1319,11 +1407,13 @@ msgstr "اِعراب یونانی"
 msgid "Cross-references"
 msgstr "ارجاعات"
 
-#: ../src/main/parallel_view.cc:468 ../ui/xi-menus.glade.h:37
+#: ../src/main/parallel_view.cc:468
+#: ../ui/xi-menus.glade.h:37
 msgid "Lemmas"
 msgstr "کلمه ریشه‌ای"
 
-#: ../src/main/parallel_view.cc:478 ../ui/xi-menus.glade.h:29
+#: ../src/main/parallel_view.cc:478
+#: ../ui/xi-menus.glade.h:29
 msgid "Headings"
 msgstr "تیترها"
 
@@ -1331,32 +1421,37 @@ msgstr "تیترها"
 msgid "Morpheme Segmentation"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:498 ../ui/xi-menus.glade.h:75
+#: ../src/main/parallel_view.cc:498
+#: ../ui/xi-menus.glade.h:75
 msgid "Words of Christ in Red"
 msgstr "سخنان مسیح به رنگ قرمز"
 
-#: ../src/main/parallel_view.cc:508 ../ui/xi-menus.glade.h:70
-#, fuzzy
+#: ../src/main/parallel_view.cc:508
+#: ../ui/xi-menus.glade.h:70
 msgid "Transliteration"
-msgstr "درباره ترجمه زیفوس"
+msgstr "نویسه گردانی"
 
 #: ../src/main/parallel_view.cc:518
 msgid "Textual Variants"
 msgstr "نسخه‌ها "
 
-#: ../src/main/parallel_view.cc:526 ../ui/xi-menus.glade.h:51
+#: ../src/main/parallel_view.cc:526
+#: ../ui/xi-menus.glade.h:51
 msgid "Primary Reading"
 msgstr "قرائت نخستین"
 
-#: ../src/main/parallel_view.cc:535 ../ui/xi-menus.glade.h:65
+#: ../src/main/parallel_view.cc:535
+#: ../ui/xi-menus.glade.h:65
 msgid "Secondary Reading"
 msgstr "قرائت دومین"
 
-#: ../src/main/parallel_view.cc:544 ../ui/xi-menus.glade.h:5
+#: ../src/main/parallel_view.cc:544
+#: ../ui/xi-menus.glade.h:5
 msgid "All Readings"
 msgstr "تمامی قرائتها"
 
-#: ../src/main/parallel_view.cc:878 ../src/main/parallel_view.cc:1130
+#: ../src/main/parallel_view.cc:878
+#: ../src/main/parallel_view.cc:1130
 msgid "view context"
 msgstr "نگرش به متن"
 
@@ -1408,29 +1503,35 @@ msgstr "نوامبر"
 msgid "December"
 msgstr "دسامبر"
 
-#: ../src/main/prayerlists.cc:121 ../src/main/sword_treekey.cc:332
+#: ../src/main/prayerlists.cc:121
+#: ../src/main/sword_treekey.cc:332
 msgid "Growth"
 msgstr "رشد"
 
-#: ../src/main/prayerlists.cc:122 ../src/main/sword_treekey.cc:333
+#: ../src/main/prayerlists.cc:122
+#: ../src/main/sword_treekey.cc:333
 msgid "<b>For Growth</b><br>"
 msgstr "برای رشد"
 
-#: ../src/main/prayerlists.cc:123 ../src/main/prayerlists.cc:380
+#: ../src/main/prayerlists.cc:123
+#: ../src/main/prayerlists.cc:380
 #: ../src/main/sword_treekey.cc:334
 msgid "Salvation"
 msgstr "نجات"
 
-#: ../src/main/prayerlists.cc:124 ../src/main/sword_treekey.cc:335
+#: ../src/main/prayerlists.cc:124
+#: ../src/main/sword_treekey.cc:335
 msgid "<b>For Salvation</b><br>"
 msgstr "برای نجات"
 
-#: ../src/main/prayerlists.cc:125 ../src/main/prayerlists.cc:384
+#: ../src/main/prayerlists.cc:125
+#: ../src/main/prayerlists.cc:384
 #: ../src/main/sword_treekey.cc:336
 msgid "Health"
 msgstr "سلامتی"
 
-#: ../src/main/prayerlists.cc:126 ../src/main/sword_treekey.cc:337
+#: ../src/main/prayerlists.cc:126
+#: ../src/main/sword_treekey.cc:337
 msgid "<b>For Health</b><br>"
 msgstr "برای سلامتی"
 
@@ -1438,7 +1539,8 @@ msgstr "برای سلامتی"
 msgid "Misc"
 msgstr "مختلف"
 
-#: ../src/main/prayerlists.cc:128 ../src/main/sword_treekey.cc:339
+#: ../src/main/prayerlists.cc:128
+#: ../src/main/sword_treekey.cc:339
 msgid "<b>Miscellaneous</b><br>"
 msgstr "مختلف"
 
@@ -1526,9 +1628,7 @@ msgid "MyPrayerList"
 msgstr "لیست دعا"
 
 #: ../src/main/prayerlists.cc:339
-msgid ""
-"<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</"
-"b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"
+msgid "<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"
 msgstr "مشارکت، کتابمقدس به جهت مبشرین"
 
 #: ../src/main/prayerlists.cc:365
@@ -1620,8 +1720,10 @@ msgstr "حدود حذف"
 msgid "Are you sure you want to delete this range?"
 msgstr "آیا به یقین می‌خواهید این قسمت را حذف کنید؟"
 
-#: ../src/main/search_dialog.cc:576 ../src/main/search_dialog.cc:1047
-#: ../src/main/search_dialog.cc:1050 ../src/main/search_dialog.cc:1072
+#: ../src/main/search_dialog.cc:576
+#: ../src/main/search_dialog.cc:1047
+#: ../src/main/search_dialog.cc:1050
+#: ../src/main/search_dialog.cc:1072
 #: ../src/main/search_dialog.cc:1075
 msgid "Search: "
 msgstr "جستجو:"
@@ -1650,9 +1752,9 @@ msgid "Please adjust the module list."
 msgstr "لطفا لیست مدولها را هماهنگ کن"
 
 #: ../src/main/search_dialog.cc:1489
-#, fuzzy, c-format
+#, c-format
 msgid "No fast-search index exists for %s.%s%s"
-msgstr "برای این مدولها ایندکس جستجوی سریع را حذف کن"
+msgstr "برای این موارد %s.%s%s راهنمای جستجوی سریع وجود ندارد"
 
 #: ../src/main/search_dialog.cc:1491
 msgid ""
@@ -1678,11 +1780,9 @@ msgstr "مطابقت دارد"
 msgid ""
 "Welcome to Xiphos.\n"
 "\n"
-"There are no Bible modules installed. In order to initialize, Xiphos needs "
-"you to install at least one Bible.\n"
+"There are no Bible modules installed. In order to initialize, Xiphos needs you to install at least one Bible.\n"
 "\n"
-"With your permission, Xiphos will invoke the Module Manager so that you may "
-"install from Crosswire:\n"
+"With your permission, Xiphos will invoke the Module Manager so that you may install from Crosswire:\n"
 "1. Configure remote install.\n"
 "2. Connect.\n"
 "3. Select a Bible text of your language preference.\n"
@@ -1695,11 +1795,9 @@ msgid ""
 msgstr ""
 "به خيفوس خوش آمديد \n"
 "\n"
-"هيچ مدولي از کتابمقدس نصب نشده است. براي راه اندازي خيفوس لازم است حداقل يک "
-"مدول از کتابمقدس نصب شده باشد\n"
+"هيچ مدولي از کتابمقدس نصب نشده است. براي راه اندازي خيفوس لازم است حداقل يک مدول از کتابمقدس نصب شده باشد\n"
 "\n"
-"به اجازه شما خيفوس مدول مدير نرم افزار را فعال خواهد ساخت تا شما بتوانيد از "
-"کراس‌واير نصب کنيد\n"
+"به اجازه شما خيفوس مدول مدير نرم افزار را فعال خواهد ساخت تا شما بتوانيد از کراس‌واير نصب کنيد\n"
 "\n"
 "پيکربندي، دوردست، نصب\n"
 "\n"
@@ -1711,8 +1809,7 @@ msgstr ""
 "\n"
 "بعد از اتمام مدير مدول را ببنديد\n"
 "\n"
-"هشدار: اگر در کشور تحت جفا زندگي مي‌کنيد، در بکار گيري اين نرم افزار احتياط "
-"کنيد\n"
+"هشدار: اگر در کشور تحت جفا زندگي مي‌کنيد، در بکار گيري اين نرم افزار احتياط کنيد\n"
 "\n"
 "آيا اجازه مي‌دهيد که خيفوس مدير مدول را جهت نصب کتابمقدس فعال کند؟"
 
@@ -1745,11 +1842,11 @@ msgid ""
 "Xiphos cannot continue."
 msgstr "زیفوس قادر به ادامه نیست"
 
-#: ../src/main/settings.c:148 ../src/main/settings.c:156
+#: ../src/main/settings.c:148
+#: ../src/main/settings.c:156
 #: ../src/main/settings.c:164
-#, fuzzy
 msgid "can not create "
-msgstr "طریق قابل ایجاد نیست \n"
+msgstr "طریق قابل ایجاد نیست"
 
 #: ../src/main/settings.c:196
 msgid ""
@@ -1760,9 +1857,7 @@ msgid ""
 "Xiphos cannot proceed,\n"
 "and will now exit."
 msgstr ""
-"هیچ کتابمقدسی در حال حاضر نصب نشده است. در مقابل پیشنهاد نصب جواب منفی "
-"داده‌اید. بدون نمایش مدول کتابمقدس زیفوس قادر به ادامه نیست و برنامه خود را "
-"خواهد بست \n"
+"هیچ کتابمقدسی در حال حاضر نصب نشده است. در مقابل پیشنهاد نصب جواب منفی داده‌اید. بدون نمایش مدول کتابمقدس زیفوس قادر به ادامه نیست و برنامه خود را خواهد بست \n"
 "."
 
 #: ../src/main/settings.c:200
@@ -1774,8 +1869,7 @@ msgid ""
 "Without any Bible modules to display,\n"
 "Xiphos cannot proceed,\n"
 "and will now exit."
-msgstr ""
-" بدون نمایش مدول کتابمقدس زیفوس قادر به ادامه نیست و برنامه خود را خواهد بست."
+msgstr " بدون نمایش مدول کتابمقدس زیفوس قادر به ادامه نیست و برنامه خود را خواهد بست."
 
 #. *****************************************************************************
 #. * Name
@@ -1803,9 +1897,7 @@ msgid ""
 "\n"
 "Would you like Xiphos to set itself as the\n"
 "program to handle these references?"
-msgstr ""
-"آيا اجازه مي‌دهيد که خيفوس خود را به عنوان برنامه‌اي که با اين ارجاعات بايد "
-"کار کند، قلمداد نمايد؟"
+msgstr "آيا اجازه مي‌دهيد که خيفوس خود را به عنوان برنامه‌اي که با اين ارجاعات بايد کار کند، قلمداد نمايد؟"
 
 #: ../src/main/settings.c:796
 msgid ""
@@ -1890,7 +1982,8 @@ msgstr "اشتباه مرورگر:\n"
 msgid "Show %s in main window"
 msgstr "%s درپنجره اصلی را نشان بده"
 
-#: ../src/main/xml.c:80 ../src/main/xml.c:464
+#: ../src/main/xml.c:80
+#: ../src/main/xml.c:464
 #, c-format
 msgid "Document not created successfully. \n"
 msgstr "متن به وجود نیامد\n"
@@ -1903,15 +1996,18 @@ msgstr "شخصی"
 msgid "What must I do to be saved?"
 msgstr "چکنم تا نجات یابم؟"
 
-#: ../src/main/xml.c:92 ../src/main/xml.c:93
+#: ../src/main/xml.c:92
+#: ../src/main/xml.c:93
 msgid "Acts 16:31"
 msgstr "اعمال 16: 31"
 
-#: ../src/main/xml.c:97 ../src/main/xml.c:98
+#: ../src/main/xml.c:97
+#: ../src/main/xml.c:98
 msgid "Eph 2:8,9"
 msgstr "افس 2: 8"
 
-#: ../src/main/xml.c:102 ../src/main/xml.c:103
+#: ../src/main/xml.c:102
+#: ../src/main/xml.c:103
 msgid "Romans 1:16"
 msgstr "رومیان 1: 16"
 
@@ -1919,16 +2015,20 @@ msgstr "رومیان 1: 16"
 msgid "What is the Gospel?"
 msgstr "انجیل چیست؟"
 
-#: ../src/main/xml.c:108 ../src/main/xml.c:109
+#: ../src/main/xml.c:108
+#: ../src/main/xml.c:109
 msgid "1 Cor 15:1-4"
 msgstr "1قرن 15: 1-4"
 
-#: ../src/main/xml.c:413 ../src/main/xml.c:1071
+#: ../src/main/xml.c:413
+#: ../src/main/xml.c:1071
 #, c-format
 msgid "Document not parsed successfully. \n"
 msgstr "متن شناخته نشد\n"
 
-#: ../src/main/xml.c:419 ../src/main/xml.c:674 ../src/main/xml.c:952
+#: ../src/main/xml.c:419
+#: ../src/main/xml.c:674
+#: ../src/main/xml.c:952
 #: ../src/main/xml.c:1131
 #, c-format
 msgid "empty document \n"
@@ -1959,7 +2059,8 @@ msgstr "متی-مکا"
 msgid "Sample Module List"
 msgstr "لیست مدولهای نمونه"
 
-#: ../src/main/xml.c:680 ../src/main/xml.c:958
+#: ../src/main/xml.c:680
+#: ../src/main/xml.c:958
 #, c-format
 msgid "wrong type, root node != %s\n"
 msgstr "نوع پرونده غلط است !=%s\n"
@@ -1968,7 +2069,8 @@ msgstr "نوع پرونده غلط است !=%s\n"
 msgid "Add Bookmark"
 msgstr "علامت بگذار"
 
-#: ../ui/bookmarks.glade.h:2 ../ui/markverse.glade.h:1
+#: ../ui/bookmarks.glade.h:2
+#: ../ui/markverse.glade.h:1
 msgid "Bookmark Dialog"
 msgstr "علامت"
 
@@ -1976,11 +2078,13 @@ msgstr "علامت"
 msgid "Bookmark Folder Treeview"
 msgstr "قفسه پرونده علامت را به حالت اول بازگردان"
 
-#: ../ui/bookmarks.glade.h:4 ../ui/markverse.glade.h:2
+#: ../ui/bookmarks.glade.h:4
+#: ../ui/markverse.glade.h:2
 msgid "Cancel Bookmark"
 msgstr "علامت وارد کن"
 
-#: ../ui/bookmarks.glade.h:5 ../ui/markverse.glade.h:3
+#: ../ui/bookmarks.glade.h:5
+#: ../ui/markverse.glade.h:3
 msgid "Create new folder"
 msgstr "قفسه پرونده جدید"
 
@@ -1992,11 +2096,13 @@ msgstr "نامگذاری کن"
 msgid "Label:"
 msgstr "اتیکت"
 
-#: ../ui/bookmarks.glade.h:8 ../ui/markverse.glade.h:6
+#: ../ui/bookmarks.glade.h:8
+#: ../ui/markverse.glade.h:6
 msgid "Module Entry"
 msgstr "ورود مدول"
 
-#: ../ui/bookmarks.glade.h:9 ../ui/markverse.glade.h:7
+#: ../ui/bookmarks.glade.h:9
+#: ../ui/markverse.glade.h:7
 msgid "Module:"
 msgstr "مدول:"
 
@@ -2004,16 +2110,19 @@ msgstr "مدول:"
 msgid "New ..."
 msgstr "جدید:"
 
-#: ../ui/bookmarks.glade.h:11 ../ui/markverse.glade.h:8
+#: ../ui/bookmarks.glade.h:11
+#: ../ui/markverse.glade.h:8
 #: ../ui/xi-menus.glade.h:42
 msgid "New Folder"
 msgstr "قفسه پرونده جدید"
 
-#: ../ui/bookmarks.glade.h:12 ../ui/markverse.glade.h:10
+#: ../ui/bookmarks.glade.h:12
+#: ../ui/markverse.glade.h:10
 msgid "Verse Entry"
 msgstr "شیوه آیه"
 
-#: ../ui/bookmarks.glade.h:13 ../ui/markverse.glade.h:11
+#: ../ui/bookmarks.glade.h:13
+#: ../ui/markverse.glade.h:11
 msgid "Verse:"
 msgstr "آیه:"
 
@@ -2021,32 +2130,38 @@ msgstr "آیه:"
 msgid "Delete the current note"
 msgstr "یادداشت فعلی را حذف کن"
 
-#: ../ui/editor_note.xml.h:2 ../ui/editor_studypad.xml.h:4
+#: ../ui/editor_note.xml.h:2
+#: ../ui/editor_studypad.xml.h:4
 #: ../ui/editor.xml.h:2
 msgid "E_xit"
 msgstr "خروج"
 
-#: ../ui/editor_note.xml.h:3 ../ui/editor_studypad.xml.h:5
+#: ../ui/editor_note.xml.h:3
+#: ../ui/editor_studypad.xml.h:5
 #: ../ui/editor.xml.h:3
 msgid "Exit"
 msgstr "خروج"
 
-#: ../ui/editor_note.xml.h:4 ../ui/editor_studypad.xml.h:6
+#: ../ui/editor_note.xml.h:4
+#: ../ui/editor_studypad.xml.h:6
 #: ../ui/editor.xml.h:4
 msgid "Exit the program"
 msgstr "خروج از برنامه"
 
-#: ../ui/editor_note.xml.h:5 ../ui/editor_studypad.xml.h:7
+#: ../ui/editor_note.xml.h:5
+#: ../ui/editor_studypad.xml.h:7
 #: ../ui/editor.xml.h:5
 msgid "For_mat"
 msgstr "فرمت"
 
-#: ../ui/editor_note.xml.h:6 ../ui/editor_studypad.xml.h:8
+#: ../ui/editor_note.xml.h:6
+#: ../ui/editor_studypad.xml.h:8
 #: ../ui/editor.xml.h:6
 msgid "HTML Format switch"
 msgstr "کلید فرمت اچ.تی.ام.ال"
 
-#: ../ui/editor_note.xml.h:7 ../ui/editor_studypad.xml.h:9
+#: ../ui/editor_note.xml.h:7
+#: ../ui/editor_studypad.xml.h:9
 #: ../ui/editor.xml.h:7
 msgid "HTML mode"
 msgstr "حالت اچ.تی.ام.ال"
@@ -2075,15 +2190,18 @@ msgstr "ضبط (نظریات شخصی)"
 msgid "Add this file to your bookmarks"
 msgstr "این پرونده را به عیست علائم اضافه کنید"
 
-#: ../ui/editor_studypad.xml.h:3 ../ui/editor.xml.h:1
+#: ../ui/editor_studypad.xml.h:3
+#: ../ui/editor.xml.h:1
 msgid "Create a new document"
 msgstr "ایجاد متن جدید"
 
-#: ../ui/editor_studypad.xml.h:10 ../ui/editor.xml.h:8
+#: ../ui/editor_studypad.xml.h:10
+#: ../ui/editor.xml.h:8
 msgid "New Document"
 msgstr "متن جدید"
 
-#: ../ui/editor_studypad.xml.h:11 ../ui/editor.xml.h:9
+#: ../ui/editor_studypad.xml.h:11
+#: ../ui/editor.xml.h:9
 msgid "Open"
 msgstr "باز کن"
 
@@ -2103,7 +2221,8 @@ msgstr "چاپ متن"
 msgid "Save AS"
 msgstr "ضبط به نام "
 
-#: ../ui/editor_studypad.xml.h:18 ../ui/editor.xml.h:12
+#: ../ui/editor_studypad.xml.h:18
+#: ../ui/editor.xml.h:12
 msgid "Save the current file"
 msgstr "قسمت فعلی را در یک پرونده ضبط کن"
 
@@ -2131,7 +2250,8 @@ msgstr "<b>صادرات</b>"
 msgid "<b>Format</b>"
 msgstr "فرمت"
 
-#: ../ui/export-dialog.glade.h:5 ../ui/prefs.glade.h:25
+#: ../ui/export-dialog.glade.h:5
+#: ../ui/prefs.glade.h:25
 msgid "Book"
 msgstr "کتاب"
 
@@ -2143,10 +2263,10 @@ msgstr "دگمه کتاب رادیو"
 msgid "Chapter Radio Button"
 msgstr "دگمه فصل رادیو"
 
-#: ../ui/export-dialog.glade.h:9 ../ui/xi-menus.glade.h:14
-#, fuzzy
+#: ../ui/export-dialog.glade.h:9
+#: ../ui/xi-menus.glade.h:14
 msgid "Copy/Export Passage"
-msgstr "استخراج متن"
+msgstr "کپی/استخراج متن"
 
 #: ../ui/export-dialog.glade.h:10
 msgid "Export Passage Cancel"
@@ -2209,9 +2329,8 @@ msgid "Version"
 msgstr "نسخه"
 
 #: ../ui/markverse.glade.h:4
-#, fuzzy
 msgid "Mark"
-msgstr "مارس"
+msgstr "مرقس"
 
 #: ../ui/markverse.glade.h:5
 msgid "Mark/Unmark Verse"
@@ -2247,12 +2366,8 @@ msgid "<b>WARNING:</b> If you live in a persecuted country use with care."
 msgstr "تذکر: اگر در کشور زیر جفا زندگی می‌کنید، باید با احتیاط استفاده کنید"
 
 #: ../ui/module-manager.glade.h:8
-msgid ""
-"<b>Warning:</b> If you live in a persecuted country and do not wish to risk "
-"detection you should NOT use  the remote installation feature! "
-msgstr ""
-"اگر در کشور تحت جفا زندگی می‌کنید، به منظور جلوگیری از خطرات احتمالی لطفا بخش "
-"مربوط به نصب دوردست را انجام ندهید"
+msgid "<b>Warning:</b> If you live in a persecuted country and do not wish to risk detection you should NOT use  the remote installation feature! "
+msgstr "اگر در کشور تحت جفا زندگی می‌کنید، به منظور جلوگیری از خطرات احتمالی لطفا بخش مربوط به نصب دوردست را انجام ندهید"
 
 #: ../ui/module-manager.glade.h:9
 msgid "<i>Personal area, for your use only:</i>"
@@ -2279,9 +2394,8 @@ msgid "Home dir"
 msgstr "شاخه خانه"
 
 #: ../ui/module-manager.glade.h:16
-#, fuzzy
 msgid "Load Standard"
-msgstr "نگرش استاندارد"
+msgstr "بارگذاری استاندارد"
 
 #: ../ui/module-manager.glade.h:17
 msgid "Local"
@@ -2396,9 +2510,7 @@ msgid "Apply high-contrast highlight to current verse"
 msgstr "این آیه را قویا مشخص کن"
 
 #: ../ui/prefs.glade.h:19
-msgid ""
-"Automatically resize commentary, book, and dictionary image content to fit "
-"subwindow"
+msgid "Automatically resize commentary, book, and dictionary image content to fit subwindow"
 msgstr "اندازه محتویات را به شکل اتوماتیک عوض کن که بگنجد"
 
 #: ../ui/prefs.glade.h:20
@@ -2406,9 +2518,8 @@ msgid "Background"
 msgstr "زمینه"
 
 #: ../ui/prefs.glade.h:21
-#, fuzzy
 msgid "Base font size"
-msgstr "سایز قلم بنیاد"
+msgstr "سایز قلم پایه"
 
 #: ../ui/prefs.glade.h:22
 msgid "Bible Texts"
@@ -2856,10 +2967,8 @@ msgid ""
 "Indexes must have been built beforehand:\n"
 "See Module Manager's maintenance functions"
 msgstr ""
-"براي بهبود کار، مدولها نياز به اندکس شدن دارند. اين امر فقط يکبار صورت "
-"مي‌گيرد.\n"
-"سريع، پر از موارد جوانب گوناگون، جستجوي بر اساس اندکساندسکسها بايد قبلا "
-"آماده گردند.به عملکردهاي خودبقاي مدير مدول رجوع کنيد"
+"براي بهبود کار، مدولها نياز به اندکس شدن دارند. اين امر فقط يکبار صورت مي‌گيرد.\n"
+"سريع، پر از موارد جوانب گوناگون، جستجوي بر اساس اندکساندسکسها بايد قبلا آماده گردند.به عملکردهاي خودبقاي مدير مدول رجوع کنيد"
 
 #: ../ui/search-dialog.glade.h:49
 msgid "Find Button"
@@ -3408,126 +3517,86 @@ msgstr "زیفوس-نرم·افزار·مطالعه·کتابمقدس"
 
 #~ msgid "Move backwards through history"
 #~ msgstr "در سابقه به عقب برو"
-
 #~ msgid "Move foward through history"
 #~ msgstr "در سابقه به پیش برو"
-
 #~ msgid "Select a Book of the Bible"
 #~ msgstr "یکی از کتابهای کتابمقدس را انتخاب کن"
-
 #~ msgid "Change Chapter"
 #~ msgstr "فصل را عوض کن"
-
 #~ msgid "Enter a Verse reference in Book 1:1 format and press Return"
 #~ msgstr "آیه ارجاعی را در فرمت کتاب 1: 1 وارد کرده و برگشت کن"
-
 #~ msgid "Dictionary/_Lexicon"
 #~ msgstr "کتاب فرهنگ"
-
 #~ msgid "_Bible Text"
 #~ msgstr "متون کتابمقدس"
-
 #~ msgid "Open StudyPad File"
 #~ msgstr "پرونده یادداشتهای مطالعه را باز کن"
-
 #~ msgid "Save StudyPad File"
 #~ msgstr "پرونده یادداشتهای مطالعه را ضبط کن"
-
 #~ msgid "item1"
 #~ msgstr "مورد1 "
-
 #~ msgid "item2"
 #~ msgstr "مورد2"
-
 #~ msgid "_Module Options"
 #~ msgstr "ترجیحات مدول"
-
 #~ msgid "Sync with main"
 #~ msgstr "به اصل مرتبط کن"
-
 #~ msgid "Stay in sync"
 #~ msgstr "در ارتباط بمان"
-
 #~ msgid "Print"
 #~ msgstr "چاپ"
-
 #~ msgid "Print Preview"
 #~ msgstr "نگرش قبل از چاپ"
-
 #~ msgid "Failed to print the document"
 #~ msgstr "چاپ متن ممکن نشد"
-
 #~ msgid "Save List"
 #~ msgstr "لیست را ضبط کن"
-
 #~ msgid "_Modules"
 #~ msgstr "مدولها"
-
 #~ msgid "_Bookmarks"
 #~ msgstr "علامات"
-
 #~ msgid "Verse _List"
 #~ msgstr "لیست آیات"
-
 #~ msgid "%s not found"
 #~ msgstr "%s پیدا نشد"
-
 #~ msgid "has been modified. Do you wish to save it?"
 #~ msgstr "عوض شده است. آیا ضبط شود؟"
-
 #~ msgid "not loaded"
 #~ msgstr "بارگذاری نشده است"
-
 #~ msgid "Open the StudyPad editor"
 #~ msgstr "ویرایشگر یادداشت مطالعه را باز کن"
-
 #~ msgid "Open a saved session"
 #~ msgstr "قسمت ضبط شده را باز کن"
-
 #~ msgid "Save the current session to a file"
 #~ msgstr "قسمت فعلی را در یک پرونده ضبط کن"
-
 #~ msgid "_Copy"
 #~ msgstr "کپی"
-
 #~ msgid "Copy highlighted text from main window"
 #~ msgstr "متن گزیده شده از پنجره اصلی را کپی کن"
-
 #~ msgid "Search using the shortcut bar"
 #~ msgstr "جستجو با استفاده از بخش شورتکاتها"
-
 #~ msgid "Advanced search using the search dialog"
 #~ msgstr "جستجوی پیشرفته با استفاده از دیالوگ جستجو"
-
 #~ msgid "C_lear"
 #~ msgstr "پاک"
-
 #~ msgid "Clear history list"
 #~ msgstr "سابقه پاک شود"
-
 #~ msgid "Show the Daily Devotion for today"
 #~ msgstr "دعا و تفکر روزانه امروز را نشان بده"
-
 #~ msgid "Show or hide Bible texts window"
 #~ msgstr "پنجره متون کتابمقدس را آشکار و یا مخفی کن"
-
 #~ msgid "Show or hide Preview window"
 #~ msgstr "پنجره پیش‌نگری را آشکار و یا مخفی کن"
-
 #~ msgid "Show or hide commentaries"
 #~ msgstr "تفاسیر را آشکار و یا مخفی کن"
-
 #~ msgid "Show or hide - dictionaries and lexicons"
 #~ msgstr "کتب فرهنگ را آشکار و یا مخفی کن"
-
 #~ msgid "Open the Xiphos manual"
 #~ msgstr "دستورالعمل زیفوس را باز کن"
-
 #~ msgid "Translating Xiphos to other languages"
 #~ msgstr "در حال ترجمه زیفوس به دیگر زبانها"
-
 #~ msgid "More information about the SWORD Project"
 #~ msgstr "اطلاعات بیشتر در مورد پروژه سورد؟"
-
 #~ msgid "About this application"
 #~ msgstr "درباره این برنامه"
+
