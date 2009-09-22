@@ -242,6 +242,7 @@ def configure(conf):
     if env['IS_WIN32']:
         ## setup for Winsock on Windows (required for read-aloud)
         conf.check(lib='ws2_32', uselib='WSOCK', mandatory=True)
+        conf.check(lib='shell32', uselib='SHELLAPI', mandatory=True)
         # this isn't supposed to be necessary
         env['LINKFLAGS'] = ['-lws2_32']
     
