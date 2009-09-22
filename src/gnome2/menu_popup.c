@@ -1118,7 +1118,6 @@ G_MODULE_EXPORT void on_use_current_dictionary_activate (GtkMenuItem * menuitem,
 G_MODULE_EXPORT void on_lookup_google_activate (GtkMenuItem * menuitem, gpointer user_data)
 {			
 	gchar *dict_key, *showstr;
-	GError *error = NULL;
 
 #ifdef USE_GTKMOZEMBED
 	gecko_html_copy_selection(GECKO_HTML(_get_html()));
@@ -1134,10 +1133,7 @@ G_MODULE_EXPORT void on_lookup_google_activate (GtkMenuItem * menuitem, gpointer
 		gui_generic_warning("No selection made");
 	} else {
 		showstr = g_strconcat("http://www.biblemap.org/#", dict_key, NULL);
-		if (gnome_url_show(showstr, &error) == FALSE) {
-			GS_warning(("%s",error->message));
-			g_error_free (error);
-		}
+		xiphos_open_default (showstr);
 		g_free(showstr);
 	}
 	g_free(dict_key);

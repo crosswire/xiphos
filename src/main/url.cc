@@ -159,17 +159,12 @@ static gint show_separate_image(const gchar * filename, gboolean clicked)
 {
 	if (clicked) {
 #ifdef WIN32
-		// as of october 2008, gnome_url_show() doesn't behave
-		// properly on linux, because it does not respect the user's
-		// preferences properly.  so this is used on windows only.
-		// it kicks off the standard windows fax/pic viewer.
-
 		gboolean result;
-		gchar *file_as_url = g_strdup_printf("file://%s", filename);
-
-		GS_print(("file = %s\n", file_as_url));
-		result = gnome_url_show(file_as_url, NULL);
-		g_free(file_as_url);
+		gchar *win_path = g_strdup(filename);
+		//ShellExecute can handle all / or all \\ but not a combination
+		win_path = g_strdelimit(win_path,  "/", '\\');
+		result = xiphos_open_default ((const gchar*)win_path);
+		g_free(win_path);
 		if (result == FALSE) {
 			gui_generic_warning((char *)"Could not display that image");
 		}
@@ -211,7 +206,6 @@ static gint show_separate_image(const gchar * filename, gboolean clicked)
 #endif
 	} else {
 		gui_set_statusbar (filename);
-		//gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),filename);
 	}
 	return 1;
 }
@@ -1026,7 +1020,7 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 		g_string_free(tmpstr, TRUE);
 		retval = 1;
 	} else if (clicked)
-		gnome_url_show(url, NULL);
+		xiphos_open_default (url);
 
 	return retval;
 }
@@ -1095,7 +1089,7 @@ hex_decode(const gchar *url)
 						  (gchar) from_hex);
 				url_chase += 2;
 			} else {
-				// failed %xx enconding; normal character.
+				// failed %xx encoding; normal character.
 				// should we instead do nothing with this '%'?
 				g_string_append_c(url_clean, '%');
 			}

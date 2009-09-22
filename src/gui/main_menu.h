@@ -58,6 +58,7 @@ void on_open_studypad_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_advanced_search_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_attach_detach_sidebar_activate(GtkMenuItem *menuitem, gpointer user_data);
 void on_sidebar_showhide_activate(GtkMenuItem *menuitem, gpointer user_data);
+void link_uri_hook(GtkLinkButton *button, const gchar *link, gpointer user_data);
 
 #ifdef __cplusplus
 }

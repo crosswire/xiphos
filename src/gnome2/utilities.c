@@ -48,6 +48,9 @@
 #ifdef USE_GTKMOZEMBED
 #ifdef WIN32
 #include "geckowin/gecko-html.h"
+#undef DATADIR
+#include <windows.h>
+#include <shellapi.h>
 #else
 #include "gecko/gecko-html.h"
 #endif
@@ -57,7 +60,6 @@
 #endif /* USE_GTKMOZEMBED */
 
 #include "gui/debug_glib_null.h"
-
 
 gint gui_of2tf(const gchar * on_off)
 {
@@ -1269,6 +1271,50 @@ void set_window_icon (GtkWindow *window)
 	g_free (imagename);
 	gtk_window_set_icon (window, pixbuf);
 
+}
+
+/**************************************************************************
+ * Name
+ *  xiphos_open_default
+ *
+ * Synopsis
+ *  #include "glib.h"
+ *  #include <gnome.h>
+ *  #include <windows.h>
+ *  #include <shellapi.h>
+ *
+ * xiphos_open_default (gchar *file)
+ *
+ * Description
+ *  this is a generic "open anything with the default program" function;
+ *  on Windows, it uses the ShellExecuteW API (more robust than the gnome
+ *  or gtk implementations on Windows)
+ *  on *nix, it uses gnome_url_show; in the future, this could be changed
+ *  to gtk_show_uri as gnome_url_show is deprecated
+ * 
+ * Return value
+ *   void
+ */
+gboolean xiphos_open_default (const gchar *file)
+{
+#ifdef WIN32
+	gunichar2 *w_file;
+	gint rt;
+	w_file = g_utf8_to_utf16(file, -1, NULL, NULL, NULL);
+	GS_message(("opening file %ls", w_file));
+	rt = (gint)ShellExecuteW(NULL, L"open", w_file, NULL, NULL, SW_SHOWDEFAULT);
+	return rt > 32;
+	
+#else
+	GError *error = NULL;
+	if (gnome_url_show(file, &error) == FALSE){
+		GS_warning(("%s", error->message));
+		g_error_free (error);
+		return FALSE;
+	}
+	else
+		return TRUE;
+#endif
 }
 
 /******   end of file   ******/
