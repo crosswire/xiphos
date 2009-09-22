@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: 3.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-08-02 22:07+0200\n"
-"PO-Revision-Date: 2009-09-21 21:22-0800\n"
+"PO-Revision-Date: 2009-09-21 21:46-0800\n"
 "Last-Translator: Mansour <manhid1@yahoo.com>\n"
 "Language-Team: English/GB <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -340,7 +340,7 @@ msgstr "مشخص کن"
 #: ../src/gnome2/bookmarks_treeview.c:105
 #, c-format
 msgid "Search result: %s"
-msgstr "نتایج جستجو $s"
+msgstr "نتایج جستجو %s"
 
 #: ../src/gnome2/bookmarks_treeview.c:934
 #: ../src/gnome2/sidebar.c:1459
@@ -582,8 +582,8 @@ msgid ""
 "`mkdir %s' failed:\n"
 "%s."
 msgstr ""
-"ممکن نشد \n"
-":%S."
+"`mkdir %s' failed:\n"
+"%s."
 
 #: ../src/gnome2/mod_mgr.c:463
 msgid "Xiphos could not execute archiver"
@@ -1710,7 +1710,7 @@ msgstr ""
 #: ../src/main/search_dialog.cc:129
 #, c-format
 msgid "Search result %s: %s"
-msgstr "نتایج جستجو را به عنوان علائم ضبط کن$s : $s"
+msgstr "نتایج جستجو را به عنوان علائم ضبط کن%s: %s"
 
 #: ../src/main/search_dialog.cc:361
 msgid "Delete Range?"
@@ -1754,7 +1754,7 @@ msgstr "لطفا لیست مدولها را هماهنگ کن"
 #: ../src/main/search_dialog.cc:1489
 #, c-format
 msgid "No fast-search index exists for %s.%s%s"
-msgstr "برای این موارد %s.%s%s راهنمای جستجوی سریع وجود ندارد"
+msgstr "برای این موارد  راهنمای جستجوی سریع وجود ندارد %s.%s%s"
 
 #: ../src/main/search_dialog.cc:1491
 msgid ""
@@ -1829,7 +1829,7 @@ msgid ""
 "\n"
 "Xiphos cannot continue."
 msgstr ""
-"%\n"
+"%s\n"
 "\n"
 "زیفوس قادر به ادامه نیست"
 
@@ -1840,7 +1840,11 @@ msgid ""
 "%s\n"
 "\n"
 "Xiphos cannot continue."
-msgstr "زیفوس قادر به ادامه نیست"
+msgstr ""
+"Xiphos can not create  .xiphos:\n"
+"%s\n"
+"\n"
+"زیفوس قادر به ادامه نیست"
 
 #: ../src/main/settings.c:148
 #: ../src/main/settings.c:156
@@ -1914,7 +1918,9 @@ msgstr "خيفوس خود را با موفقيت براي اين کار ترتي
 msgid ""
 "Xiphos failed to complete handler init for key #%d:\n"
 "%s"
-msgstr "زیفوس قادر به انجام نیست"
+msgstr ""
+"زیفوس قادر به انجام نیست #%d:\n"
+"%s"
 
 #: ../src/main/sidebar.cc:376
 msgid "verse"
@@ -1971,7 +1977,7 @@ msgstr "پیدا نشد"
 #: ../src/main/url.cc:194
 #, c-format
 msgid "Xiphos could not execute %s"
-msgstr "زیفوس نتوانست آرشیوگر را راه اندازی کند"
+msgstr "زیفوس نتوانست آرشیوگر را راه اندازی کند %s"
 
 #: ../src/main/url.cc:202
 msgid "Viewer error:\n"
@@ -3215,9 +3221,8 @@ msgid "Allow items to be moved from one folder to another"
 msgstr "انتقال یک مورد را از قفسه‌ای به قفسه‌ای دیگر اجازه بده"
 
 #: ../ui/xi-menus.glade.h:8
-#, fuzzy
 msgid "Annotate Verse"
-msgstr "آیه را عوض کن"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:10
 msgid "Browse in BibleMap.org"
