@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: 3.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-08-02 22:07+0200\n"
-"PO-Revision-Date: 2009-09-23 11:42-0800\n"
+"PO-Revision-Date: 2009-09-23 13:16-0800\n"
 "Last-Translator: Mansour <manhid1@yahoo.com>\n"
 "Language-Team: English/GB <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1954,12 +1954,12 @@ msgid ""
 "to examine keys under /desktop/gnome/url-handlers,\n"
 "if you need to change these."
 msgstr ""
-"Xiphos has successfully set itself\n"
-"as the handler of sword:// and bible:// URLs.\n"
+"برنامۀ زیفوس توانست با موفقیت\n"
+"خود را بعنوان برنامۀ مجری سورد:// و کتاب‏مقدس نصب کند:// URLs.\n"
 "\n"
-"You may wish to run the program \"gconf-editor\"\n"
-"to examine keys under /desktop/gnome/url-handlers,\n"
-"if you need to change theseزیفوس با موفقیت خود را بعنوان برنامۀ مجری سورد تنظیم کرد: .زیفوس با موفقیت خود را بعنوان خيفوس خود را با موفقيت براي اين کار ترتيب داد"
+"شاید بد نباشد که برنامه را اجرا کنید \"gconf-editor\"\n"
+"و کلیدهای مختلف را بررسی کنید /desktop/gnome/url-handlers,\n"
+"و ببینید که آیا نیاز به هیچ تغییری هست یا نه."
 
 #: ../src/main/settings.c:849
 #, c-format
@@ -1967,7 +1967,7 @@ msgid ""
 "Xiphos failed to complete handler init for key #%d:\n"
 "%s"
 msgstr ""
-"زیفوس قادر به انجام نیست #%d:\n"
+"Xiphos failed to complete handler init for key #%d:\n"
 "%s"
 
 #: ../src/main/sidebar.cc:376
@@ -1982,29 +1982,37 @@ msgstr "فصل"
 msgid ""
 "Xiphos's file for language\n"
 "abbreviations is missing."
-msgstr "برخی از اطلاعات پرونده پیدا نشد"
+msgstr ""
+"فایل زیفوس برای زبان\n"
+"پیدا نشد."
 
 #: ../src/main/sword.cc:553
 msgid ""
 "Xiphos's language abbreviation\n"
 "file cannot be opened."
-msgstr "پرونده قابل گشایش نیست"
+msgstr ""
+"زیفوس نتوانست فایل مخفف سازی زبان \n"
+"را باز کند."
 
 #: ../src/main/sword.cc:566
 msgid ""
 "Xiphos cannot allocate space\n"
 "for language abbreviations."
-msgstr "به جهت اطلاعات مربوط به زبان"
+msgstr ""
+"زیفوس قادر نیست که فضای\n"
+"را برای مخفف سازی زبان در اختیار بگیرد."
 
 #: ../src/main/sword.cc:573
 msgid ""
 "Xiphos cannot read the\n"
 "language abbreviation file."
-msgstr "زیفوس قادر به شناخت اطلاعات پرونده نیست"
+msgstr ""
+"زیفوس قادر به خواندن\n"
+"پروندۀ مخفف‏سازی زبان نیست."
 
 #: ../src/main/sword.cc:1191
 msgid "Daily devotional was requested, but there are none installed."
-msgstr "دعا و تفکر روزانه خواسته شد، لیکن چیزی برای نصب نیست"
+msgstr "دعا و تفکر روزانه درخواست شد، لیکن چیزی برای نصب وجود ندارد."
 
 #: ../src/main/tab_history.c:92
 msgid "H_istory/<Separator>"
@@ -2020,27 +2028,27 @@ msgstr "سابقه پاک شود"
 
 #: ../src/main/url.cc:99
 msgid "URL not found:"
-msgstr "پیدا نشد"
+msgstr "یو آر ال پیدا نشد:"
 
 #: ../src/main/url.cc:194
 #, c-format
 msgid "Xiphos could not execute %s"
-msgstr "زیفوس نتوانست آرشیوگر را راه اندازی کند %s"
+msgstr "زیفوس قادر به اجرا نبود %s"
 
 #: ../src/main/url.cc:202
 msgid "Viewer error:\n"
-msgstr "اشتباه مرورگر:\n"
+msgstr "مرورگر اشتباه\n"
 
 #: ../src/main/url.cc:278
 #, c-format
 msgid "Show %s in main window"
-msgstr "%s درپنجره اصلی را نشان بده"
+msgstr "در پنجرۀ اصلی %s را نمایش بده"
 
 #: ../src/main/xml.c:80
 #: ../src/main/xml.c:464
 #, c-format
 msgid "Document not created successfully. \n"
-msgstr "متن به وجود نیامد\n"
+msgstr "متن با موفقیت ایجاد نشد. \n"
 
 #: ../src/main/xml.c:89
 msgid "Personal"
@@ -2048,7 +2056,7 @@ msgstr "شخصی"
 
 #: ../src/main/xml.c:90
 msgid "What must I do to be saved?"
-msgstr "چکنم تا نجات یابم؟"
+msgstr "چه کنم تا نجات یابم؟"
 
 #: ../src/main/xml.c:92
 #: ../src/main/xml.c:93
@@ -2058,7 +2066,7 @@ msgstr "اعمال 16: 31"
 #: ../src/main/xml.c:97
 #: ../src/main/xml.c:98
 msgid "Eph 2:8,9"
-msgstr "افس 2: 8"
+msgstr "افسسیان 2: 8"
 
 #: ../src/main/xml.c:102
 #: ../src/main/xml.c:103
@@ -2072,13 +2080,13 @@ msgstr "انجیل چیست؟"
 #: ../src/main/xml.c:108
 #: ../src/main/xml.c:109
 msgid "1 Cor 15:1-4"
-msgstr "1قرن 15: 1-4"
+msgstr "اول قرنتیان 15: 1-4"
 
 #: ../src/main/xml.c:413
 #: ../src/main/xml.c:1071
 #, c-format
 msgid "Document not parsed successfully. \n"
-msgstr "متن شناخته نشد\n"
+msgstr "Document not parsed successfully. \n"
 
 #: ../src/main/xml.c:419
 #: ../src/main/xml.c:674
@@ -2091,7 +2099,7 @@ msgstr "متن خالی \n"
 #: ../src/main/xml.c:425
 #, c-format
 msgid "wrong type, root node != SwordBookmarks\n"
-msgstr "نوع پرونده غلط است \n"
+msgstr "نوع پرونده غلط است, ایراد ساختاری != SwordBookmarks\n"
 
 #: ../src/main/xml.c:476
 msgid "Old Testament"
@@ -2126,21 +2134,21 @@ msgstr "علامت بگذار"
 #: ../ui/bookmarks.glade.h:2
 #: ../ui/markverse.glade.h:1
 msgid "Bookmark Dialog"
-msgstr "علامت"
+msgstr "علامت گذاری دیالوگ"
 
 #: ../ui/bookmarks.glade.h:3
 msgid "Bookmark Folder Treeview"
-msgstr "قفسه پرونده علامت را به حالت اول بازگردان"
+msgstr "پرونده را به حالت اول بازگردان"
 
 #: ../ui/bookmarks.glade.h:4
 #: ../ui/markverse.glade.h:2
 msgid "Cancel Bookmark"
-msgstr "علامت وارد کن"
+msgstr "علامت را ابطال کن"
 
 #: ../ui/bookmarks.glade.h:5
 #: ../ui/markverse.glade.h:3
 msgid "Create new folder"
-msgstr "قفسه پرونده جدید"
+msgstr "ایچاد پروندۀ جدید"
 
 #: ../ui/bookmarks.glade.h:6
 msgid "Label Entry"
@@ -2148,12 +2156,12 @@ msgstr "نامگذاری کن"
 
 #: ../ui/bookmarks.glade.h:7
 msgid "Label:"
-msgstr "اتیکت"
+msgstr "برچسب:"
 
 #: ../ui/bookmarks.glade.h:8
 #: ../ui/markverse.glade.h:6
 msgid "Module Entry"
-msgstr "ورود مدول"
+msgstr "ثبت مدول"
 
 #: ../ui/bookmarks.glade.h:9
 #: ../ui/markverse.glade.h:7
@@ -2162,18 +2170,18 @@ msgstr "مدول:"
 
 #: ../ui/bookmarks.glade.h:10
 msgid "New ..."
-msgstr "جدید:"
+msgstr "جدید ..."
 
 #: ../ui/bookmarks.glade.h:11
 #: ../ui/markverse.glade.h:8
 #: ../ui/xi-menus.glade.h:42
 msgid "New Folder"
-msgstr "قفسه پرونده جدید"
+msgstr "پروندۀ جدید"
 
 #: ../ui/bookmarks.glade.h:12
 #: ../ui/markverse.glade.h:10
 msgid "Verse Entry"
-msgstr "شیوه آیه"
+msgstr "ثبت آیه"
 
 #: ../ui/bookmarks.glade.h:13
 #: ../ui/markverse.glade.h:11
@@ -2222,7 +2230,7 @@ msgstr "حالت اچ.تی.ام.ال"
 
 #: ../ui/editor_note.xml.h:8
 msgid "Preview the note to be printed"
-msgstr "پیشنگری یادداشت قبل از چاپ"
+msgstr "مرور  یادداشت قبل از چاپ"
 
 #: ../ui/editor_note.xml.h:10
 msgid "Print this note"
@@ -2230,11 +2238,11 @@ msgstr "این یادداشت را چاپ کن"
 
 #: ../ui/editor_note.xml.h:12
 msgid "Save the current note"
-msgstr "یادداشت فعلی را حذف کن"
+msgstr "یادداشت فعلی را ذخیره کن"
 
 #: ../ui/editor_note.xml.h:13
 msgid "_Delete Personal Comment"
-msgstr "نظریات شخصی را حذف کن"
+msgstr "نظرات شخصی را حذف کن"
 
 #: ../ui/editor_note.xml.h:16
 msgid "_Save (Personal Comment)"
@@ -2242,7 +2250,7 @@ msgstr "ضبط (نظریات شخصی)"
 
 #: ../ui/editor_studypad.xml.h:1
 msgid "Add this file to your bookmarks"
-msgstr "این پرونده را به عیست علائم اضافه کنید"
+msgstr "این پرونده را به لیست علائم اضافه کنید"
 
 #: ../ui/editor_studypad.xml.h:3
 #: ../ui/editor.xml.h:1
@@ -2261,32 +2269,32 @@ msgstr "باز کن"
 
 #: ../ui/editor_studypad.xml.h:12
 msgid "Open a file in Studypad"
-msgstr "پرونده را در یادداشت مطالعه‌ باز کن"
+msgstr "پرونده را در بخش یادداشت‏ها باز کن"
 
 #: ../ui/editor_studypad.xml.h:13
 msgid "Preview the document to be printed"
-msgstr "پیشنگری متن قبل از ارسال به چاپ"
+msgstr "پیشنگری متن قبل از ارسال به چاپگر"
 
 #: ../ui/editor_studypad.xml.h:15
 msgid "Print this document"
-msgstr "چاپ متن"
+msgstr "این متن را چاپ کن"
 
 #: ../ui/editor_studypad.xml.h:17
 msgid "Save AS"
-msgstr "ضبط به نام "
+msgstr "ذخیره با نام "
 
 #: ../ui/editor_studypad.xml.h:18
 #: ../ui/editor.xml.h:12
 msgid "Save the current file"
-msgstr "قسمت فعلی را در یک پرونده ضبط کن"
+msgstr "این فایل را دخیره کن"
 
 #: ../ui/editor_studypad.xml.h:19
 msgid "Save the current file as"
-msgstr "قسمت فعلی را در یک پرونده ضبط کن نه نام"
+msgstr "این فایل را ذخیره کن با نام"
 
 #: ../ui/editor.xml.h:10
 msgid "Open the file in Studypad"
-msgstr "ویرایشگر یادداشت مطالعه را باز کن"
+msgstr "این فایل را در ویرایشگر یادداشت مطالعه باز کن"
 
 #: ../ui/export-dialog.glade.h:1
 msgid ": "
@@ -2294,15 +2302,15 @@ msgstr ": "
 
 #: ../ui/export-dialog.glade.h:2
 msgid "<b>Copy</b>"
-msgstr "کپی"
+msgstr "<b>کپی</b>"
 
 #: ../ui/export-dialog.glade.h:3
 msgid "<b>Export</b>"
-msgstr "<b>صادرات</b>"
+msgstr "<b>ارسال</b>"
 
 #: ../ui/export-dialog.glade.h:4
 msgid "<b>Format</b>"
-msgstr "فرمت"
+msgstr "<b>فرمت</b>"
 
 #: ../ui/export-dialog.glade.h:5
 #: ../ui/prefs.glade.h:25
@@ -2311,36 +2319,36 @@ msgstr "کتاب"
 
 #: ../ui/export-dialog.glade.h:6
 msgid "Book Radio Button"
-msgstr "دگمه کتاب رادیو"
+msgstr "یک گزینه را علامت گذاری کنید"
 
 #: ../ui/export-dialog.glade.h:8
 msgid "Chapter Radio Button"
-msgstr "دگمه فصل رادیو"
+msgstr "یک فصل را علامت گذاری کنید"
 
 #: ../ui/export-dialog.glade.h:9
 #: ../ui/xi-menus.glade.h:14
 msgid "Copy/Export Passage"
-msgstr "کپی/استخراج متن"
+msgstr "کپی/ارسال متن"
 
 #: ../ui/export-dialog.glade.h:10
 msgid "Export Passage Cancel"
-msgstr "صرفنظر از استخراج متن"
+msgstr "صرفنظر از ارسال متن"
 
 #: ../ui/export-dialog.glade.h:11
 msgid "Export Passage OK"
-msgstr "تایید استخراج متن"
+msgstr "تایید ارسال متن"
 
 #: ../ui/export-dialog.glade.h:12
 msgid "Export complete book"
-msgstr "استخراج تمامی کتاب"
+msgstr "ارسال تمامی کتاب"
 
 #: ../ui/export-dialog.glade.h:13
 msgid "Export complete chapter"
-msgstr "استخراج تمامی فصل"
+msgstr "ارسال تمامی فصل"
 
 #: ../ui/export-dialog.glade.h:14
 msgid "Export single verse"
-msgstr "استخراج یک آیه"
+msgstr "ارسال یک آیه"
 
 #: ../ui/export-dialog.glade.h:15
 msgid "HTML"
@@ -2348,7 +2356,7 @@ msgstr "اچ.تی.ام.ال"
 
 #: ../ui/export-dialog.glade.h:16
 msgid "HTML Radio Button"
-msgstr "دگمه اچ.تی.ام.ال رادیو"
+msgstr "یک اچ.تی.ام.ال را علامت گذاری کنید"
 
 #: ../ui/export-dialog.glade.h:17
 msgid "Key"
@@ -2356,15 +2364,15 @@ msgstr "کلید"
 
 #: ../ui/export-dialog.glade.h:18
 msgid "Plain Text"
-msgstr "متن بدون فرمت"
+msgstr "متن فرمت نشده"
 
 #: ../ui/export-dialog.glade.h:19
 msgid "Plain Text Radio Button"
-msgstr "دگمه متن بدون فرمت رادیو"
+msgstr "یک متن فرمت نشده را علامت گذاری کنید"
 
 #: ../ui/export-dialog.glade.h:21
 msgid "Save Export As"
-msgstr "ضبط استخراج به نام"
+msgstr "ذخیرۀ متن ارسال شده با نام"
 
 #: ../ui/export-dialog.glade.h:22
 msgid "Verse"
@@ -2372,7 +2380,7 @@ msgstr "آیه"
 
 #: ../ui/export-dialog.glade.h:23
 msgid "Verse Radio Button"
-msgstr "دگمه آیه رادیو"
+msgstr "یک آیه را علامت گذاری کنید "
 
 #: ../ui/export-dialog.glade.h:24
 msgid "Verse range"
@@ -2380,11 +2388,11 @@ msgstr "لیست آیات"
 
 #: ../ui/export-dialog.glade.h:25
 msgid "Version"
-msgstr "نسخه"
+msgstr "ویرایش"
 
 #: ../ui/markverse.glade.h:4
 msgid "Mark"
-msgstr "مرقس"
+msgstr "علامت‏گذاری‏کن"
 
 #: ../ui/markverse.glade.h:5
 msgid "Mark/Unmark Verse"
@@ -2396,32 +2404,32 @@ msgstr ""
 
 #: ../ui/module-manager.glade.h:1
 msgid "<b>Add and Remove Sources</b>"
-msgstr "منابع را آضافه/کم کن"
+msgstr "<b>منابع را اضافه/کم کن</b>"
 
 #: ../ui/module-manager.glade.h:2
 msgid "<b>Install Destination</b>"
-msgstr "مقصد را نصب کن"
+msgstr "<b>مقصد را نصب کن</b>"
 
 #: ../ui/module-manager.glade.h:3
 msgid "<b>Install Source</b>"
-msgstr "منبع را نصب کن "
+msgstr "<b>منبع را نصب کن</b>"
 
 #: ../ui/module-manager.glade.h:4
 msgid "<b>Module Manager</b>"
-msgstr "مدیر مدول"
+msgstr "<b>مدیر مدول</b>"
 
 #. do not translate <b> and </b> they are html formating
 #: ../ui/module-manager.glade.h:6
 msgid "<b>Sword</b>"
-msgstr "سورد"
+msgstr "<b>سورد</b>"
 
 #: ../ui/module-manager.glade.h:7
 msgid "<b>WARNING:</b> If you live in a persecuted country use with care."
-msgstr "تذکر: اگر در کشور زیر جفا زندگی می‌کنید، باید با احتیاط استفاده کنید"
+msgstr "<b>هشدار:</b>اگر در کشور زیر جفا زندگی می‌کنید، باید با احتیاط استفاده کنید."
 
 #: ../ui/module-manager.glade.h:8
 msgid "<b>Warning:</b> If you live in a persecuted country and do not wish to risk detection you should NOT use  the remote installation feature! "
-msgstr "اگر در کشور تحت جفا زندگی می‌کنید، به منظور جلوگیری از خطرات احتمالی لطفا بخش مربوط به نصب دوردست را انجام ندهید"
+msgstr "<b>هشدار:/b>اگر در کشور تحت جفا زندگی می‌کنید، به منظور جلوگیری از خطرات احتمالی لطفا بخش مربوط به نصب از راه دور را انجام ندهید!"
 
 #: ../ui/module-manager.glade.h:9
 msgid "<i>Personal area, for your use only:</i>"
@@ -2437,7 +2445,7 @@ msgstr "ادامه"
 
 #: ../ui/module-manager.glade.h:12
 msgid "Current Remote Sources"
-msgstr "منابع دوردست فعلی"
+msgstr "منابع  راه دور فعلی"
 
 #: ../ui/module-manager.glade.h:13
 msgid "Current local sources"
@@ -2445,7 +2453,7 @@ msgstr "منابع محلی فعلی"
 
 #: ../ui/module-manager.glade.h:14
 msgid "Home dir"
-msgstr "شاخه خانه"
+msgstr "فهرست پرونده‏های محلی"
 
 #: ../ui/module-manager.glade.h:16
 msgid "Load Standard"
@@ -2469,7 +2477,7 @@ msgstr "دوردست"
 
 #: ../ui/module-manager.glade.h:21
 msgid "Sword sys dir"
-msgstr "شاخه سیستم سورد"
+msgstr "فهرست سیستم سورد"
 
 #: ../ui/navbar_versekey.glade.h:1
 msgid "1"
@@ -2477,11 +2485,11 @@ msgstr "۱"
 
 #: ../ui/navbar_versekey.glade.h:2
 msgid "<b>Revelation of John</b>"
-msgstr "مکاشفه یوحنا"
+msgstr "<b>مکاشفه یوحنا</b>"
 
 #: ../ui/navbar_versekey.glade.h:3
 msgid "Book Selector Button"
-msgstr "دقمه انتخاب کتاب"
+msgstr "کلید انتخاب کتاب"
 
 #: ../ui/navbar_versekey.glade.h:4
 msgid "Choose book to display"
@@ -2489,19 +2497,19 @@ msgstr "انتخاب کتاب جهت نمایش"
 
 #: ../ui/navbar_versekey.glade.h:5
 msgid "Drop down history list"
-msgstr "از لیست سابقه را صرفنظر کن"
+msgstr "لیست تاریخچه"
 
 #: ../ui/navbar_versekey.glade.h:6
 msgid "Reference Entry"
-msgstr "ترجیحات"
+msgstr "ثبت ترجیحات"
 
 #: ../ui/navbar_versekey.glade.h:7
 msgid "Toggle Chapter Button"
-msgstr "دقمه انتخاب باب"
+msgstr "دکمۀ انتخاب باب"
 
 #: ../ui/navbar_versekey.glade.h:8
 msgid "Toggle Verse Button"
-msgstr "دقمه انتخاب ایات"
+msgstr "دکمۀ انتخاب آیات"
 
 #: ../ui/prefs.glade.h:1
 msgid ""
@@ -2525,39 +2533,39 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:9
 msgid "<b>Font Colors</b>"
-msgstr "رنگ قلم"
+msgstr "<b>رنگ‏های قلم</b>"
 
 #: ../ui/prefs.glade.h:10
 msgid "<b>Font Sizes</b>"
-msgstr "<b>اندازه فونت</b>"
+msgstr "<b>اندازه‏های قلم</b>"
 
 #: ../ui/prefs.glade.h:11
 msgid "<b>General</b>"
-msgstr "عمومی"
+msgstr "<b>عمومی</b>"
 
 #: ../ui/prefs.glade.h:12
 msgid "<b>Main Window Modules</b>"
-msgstr "مدولهای پنجره اصلی"
+msgstr "<b>مدولهای پنجره اصلی</b>"
 
 #: ../ui/prefs.glade.h:13
 msgid "<b>Parallel View</b>"
-msgstr "<b>نگرش به شکل توازی<b>"
+msgstr "<b>مرور موازی<b>"
 
 #: ../ui/prefs.glade.h:14
 msgid "<b>Show</b>"
-msgstr "نشان بده"
+msgstr "<b>نمایش</b>"
 
 #: ../ui/prefs.glade.h:15
 msgid "<b>Special Purpose Modules</b>"
-msgstr "<b>مدولهای مختلف</b>"
+msgstr "<b>مدولهای ویژه</b>"
 
 #: ../ui/prefs.glade.h:16
 msgid "<b>StudyPad default directory</b>"
-msgstr "شاخه پیش‌گزیده یادداشت مطالعه"
+msgstr "<b>شاخه پیش‌گزیده یادداشت مطالعه</b>"
 
 #: ../ui/prefs.glade.h:17
 msgid "<b>Tabs</b>"
-msgstr "بخش"
+msgstr "<b>بخش‏ها</b>"
 
 #: ../ui/prefs.glade.h:18
 msgid "Apply high-contrast highlight to current verse"
@@ -2565,11 +2573,11 @@ msgstr "این آیه را قویا مشخص کن"
 
 #: ../ui/prefs.glade.h:19
 msgid "Automatically resize commentary, book, and dictionary image content to fit subwindow"
-msgstr "اندازه محتویات را به شکل اتوماتیک عوض کن که بگنجد"
+msgstr "اندازه محتویات تفاسیر، کتب، یا دیکشنری را به شکل اتوماتیک عوض کن تا در صفحات فرعی بگنجند"
 
 #: ../ui/prefs.glade.h:20
 msgid "Background"
-msgstr "زمینه"
+msgstr "پیش‏زمینه"
 
 #: ../ui/prefs.glade.h:21
 msgid "Base font size"
@@ -2577,19 +2585,19 @@ msgstr "سایز قلم پایه"
 
 #: ../ui/prefs.glade.h:22
 msgid "Bible Texts"
-msgstr "متون کتابمقدس"
+msgstr "متون کتاب‏مقدس"
 
 #: ../ui/prefs.glade.h:23
 msgid "Bible Texts Checkbox"
-msgstr "متون کتاب مقدس"
+msgstr "علامت گذاری متون کتاب‏مقدس"
 
 #: ../ui/prefs.glade.h:24
 msgid "Biblical Text"
-msgstr "متن از کتابمقدس"
+msgstr "متن از کتاب‏مقدس"
 
 #: ../ui/prefs.glade.h:26
 msgid "Change Biblical Text Combo"
-msgstr "متن از کتابمقدس"
+msgstr "تغییر ترکیبی متن کتاب‏مقدس"
 
 #: ../ui/prefs.glade.h:27
 msgid "Change Book Combo"
@@ -2597,7 +2605,7 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:28
 msgid "Change Commentary Combo"
-msgstr "انتخاب نام تفسیر"
+msgstr "تغییر ترکیبی تفسیر"
 
 #: ../ui/prefs.glade.h:29
 msgid "Change Default Dictionary Combo"
@@ -2605,19 +2613,19 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:30
 msgid "Change Dictionary Combo"
-msgstr "کتاب فرهنگ لغات"
+msgstr "تغییر ترکیبی فرهنگ واژه‏ها"
 
 #: ../ui/prefs.glade.h:31
 msgid "Change Personal Notes Combo"
-msgstr "یادداشتهای شخصی"
+msgstr "تغییر ترکیبی یادداشت‏های شخصی"
 
 #: ../ui/prefs.glade.h:32
 msgid "Choose to enable Prayer lists "
-msgstr "لیستهای دعا را فعال کن"
+msgstr "لیست‏های دعا را فعال کن"
 
 #: ../ui/prefs.glade.h:34
 msgid "Commentaries Checkbox"
-msgstr "کتب تفاسیر"
+msgstr "علامت‏گذاری کتب تفاسیر"
 
 #: ../ui/prefs.glade.h:36
 msgid "Cover"
@@ -2625,7 +2633,7 @@ msgstr "جلد"
 
 #: ../ui/prefs.glade.h:37
 msgid "Current Verse"
-msgstr "متن آیه فعلی"
+msgstr "آیۀ فعلی"
 
 #: ../ui/prefs.glade.h:38
 msgid "Daily Devotional"
@@ -2633,67 +2641,67 @@ msgstr "دعا و تفکر روزانه"
 
 #: ../ui/prefs.glade.h:39
 msgid "Daily Devotional Combo"
-msgstr "دعا و تفکر روزانه"
+msgstr "دعا و تفکر روزانه بصورت ترکیبی"
 
 #: ../ui/prefs.glade.h:40
 msgid "Default Dictionary"
-msgstr "فرهنگ لغات پیش‌گزیده"
+msgstr "فرهنگ قراردادی واژگان"
 
 #: ../ui/prefs.glade.h:41
 msgid "Dictionary"
-msgstr "کتاب فرهنگ لغات"
+msgstr "فرهنگ واژگان"
 
 #: ../ui/prefs.glade.h:42
 msgid "Dictionary/Lexicon"
-msgstr "کتاب فرهنگ لغات"
+msgstr "فرهنگ واژگان/قاموس"
 
 #: ../ui/prefs.glade.h:43
 msgid "Dictionary/Lexicon Checkbox"
-msgstr "کتاب فرهنگ لغات"
+msgstr "علامت‏گذاری فرهنگ واژگان/قاموس"
 
 #: ../ui/prefs.glade.h:44
 msgid "Enable Prayer Lists"
-msgstr "لیست دعا"
+msgstr "لیست دعا را فعال کن"
 
 #: ../ui/prefs.glade.h:45
 msgid "Enable Prayer Lists Checkbox"
-msgstr "قسمت فعال کردن لیستهای دعا را تیک بزن"
+msgstr "قسمت فعال کردن لیستهای دعا را علامت‏گذاری کن "
 
 #: ../ui/prefs.glade.h:46
 msgid "Font Colors"
-msgstr "رنگهای قلم"
+msgstr "رنگ‏های قلم"
 
 #: ../ui/prefs.glade.h:47
 msgid "Font Misc"
-msgstr "گوناگونی قلم"
+msgstr "قلم ... متفرقه"
 
 #: ../ui/prefs.glade.h:48
 msgid "Foreground"
-msgstr "پیشن نما"
+msgstr "پیش‏نما"
 
 #: ../ui/prefs.glade.h:49
 msgid "General Misc"
-msgstr "گوناگونی عمومی"
+msgstr "عمومی ... متفرقه"
 
 #: ../ui/prefs.glade.h:50
 msgid "Greek Lexicon"
-msgstr "فرهنگ لغات یونانی"
+msgstr "قاموس به زبان یونانی"
 
 #: ../ui/prefs.glade.h:51
 msgid "Greek Lexicon Combo"
-msgstr "فرهنگ لغات یونانی"
+msgstr "قاموس یونانی ترکیبی"
 
 #: ../ui/prefs.glade.h:52
 msgid "Hebrew Lexicon"
-msgstr "فرهنگ لغات عبری"
+msgstr "قاموس عبری"
 
 #: ../ui/prefs.glade.h:53
 msgid "Hebrew Lexicon Combo"
-msgstr "فرهنگ لغات عبری"
+msgstr "قاموس عبری ترکیبی"
 
 #: ../ui/prefs.glade.h:54
 msgid "Highlight Background"
-msgstr "زمینه را مشخص کن"
+msgstr "پیش‏زمینه را مشخص کن"
 
 #: ../ui/prefs.glade.h:55
 msgid "Highlight Foreground"
@@ -2701,7 +2709,7 @@ msgstr "رو زمینه را مشخص کن"
 
 #: ../ui/prefs.glade.h:56
 msgid "Highlight current verse"
-msgstr "آیه فعلی را مشخص کن"
+msgstr "آیۀ فعلی را مشخص کن"
 
 #: ../ui/prefs.glade.h:57
 msgid "Highlight current verse check box"
@@ -2709,7 +2717,7 @@ msgstr "آیه فعلی را مشخص کن"
 
 #: ../ui/prefs.glade.h:58
 msgid "Links"
-msgstr "لینکها"
+msgstr "پیوندها"
 
 #: ../ui/prefs.glade.h:59
 msgid "Modules Main"
@@ -2721,7 +2729,7 @@ msgstr "گوناگونی مدولها"
 
 #: ../ui/prefs.glade.h:61
 msgid "Modules Parallel"
-msgstr "توازی مدولها"
+msgstr "مدولهای موازی"
 
 #: ../ui/prefs.glade.h:62
 msgid "Parallel 1"
