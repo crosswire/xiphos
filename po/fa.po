@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: 3.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-08-02 22:07+0200\n"
-"PO-Revision-Date: 2009-09-23 13:16-0800\n"
+"PO-Revision-Date: 2009-09-23 15:50-0800\n"
 "Last-Translator: Mansour <manhid1@yahoo.com>\n"
 "Language-Team: English/GB <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -2589,7 +2589,7 @@ msgstr "متون کتاب‏مقدس"
 
 #: ../ui/prefs.glade.h:23
 msgid "Bible Texts Checkbox"
-msgstr "علامت گذاری متون کتاب‏مقدس"
+msgstr "انتخاب متون کتاب‏مقدس"
 
 #: ../ui/prefs.glade.h:24
 msgid "Biblical Text"
@@ -2625,7 +2625,7 @@ msgstr "لیست‏های دعا را فعال کن"
 
 #: ../ui/prefs.glade.h:34
 msgid "Commentaries Checkbox"
-msgstr "علامت‏گذاری کتب تفاسیر"
+msgstr "انتخاب کتب تفاسیر"
 
 #: ../ui/prefs.glade.h:36
 msgid "Cover"
@@ -2657,7 +2657,7 @@ msgstr "فرهنگ واژگان/قاموس"
 
 #: ../ui/prefs.glade.h:43
 msgid "Dictionary/Lexicon Checkbox"
-msgstr "علامت‏گذاری فرهنگ واژگان/قاموس"
+msgstr "انتخاب فرهنگ واژگان/قاموس"
 
 #: ../ui/prefs.glade.h:44
 msgid "Enable Prayer Lists"
@@ -2665,7 +2665,7 @@ msgstr "لیست دعا را فعال کن"
 
 #: ../ui/prefs.glade.h:45
 msgid "Enable Prayer Lists Checkbox"
-msgstr "قسمت فعال کردن لیستهای دعا را علامت‏گذاری کن "
+msgstr "قسمت فعال کردن لیستهای دعا را انتخاب کن "
 
 #: ../ui/prefs.glade.h:46
 msgid "Font Colors"
@@ -2773,15 +2773,15 @@ msgstr "توازی ترکیبی ۵"
 
 #: ../ui/prefs.glade.h:72
 msgid "Parallel View in a tab"
-msgstr "نگرش به شکل موازی در برگ"
+msgstr "نگرش به شکل موازی در یک بخش"
 
 #: ../ui/prefs.glade.h:73
 msgid "Personal Notes"
-msgstr "یادداشتهای شخصی"
+msgstr "یادداشت‏های شخصی"
 
 #: ../ui/prefs.glade.h:76
 msgid "Previewer Checkbox"
-msgstr "مرورگر"
+msgstr "انتخاب مرورگر"
 
 #: ../ui/prefs.glade.h:77
 msgid "Resize images"
@@ -2789,7 +2789,7 @@ msgstr "اندازه تصاویر را عوض کن"
 
 #: ../ui/prefs.glade.h:78
 msgid "Resize images checkbox"
-msgstr "اندازه تصاویر را عوض کن"
+msgstr "اندازه تصاویر را عوض کن انتخاب"
 
 #: ../ui/prefs.glade.h:79
 msgid "Scroll to Previous/Next Chapter"
@@ -2797,7 +2797,7 @@ msgstr "برو به فصل قبل/بعد"
 
 #: ../ui/prefs.glade.h:80
 msgid "Scroll to Previous/Next Chapter Checkbox"
-msgstr "برو به فصل قبل/بعد"
+msgstr "انتخاب حرکت به فصل قبل/بعد"
 
 #: ../ui/prefs.glade.h:81
 msgid "Select A Directory"
@@ -2813,7 +2813,7 @@ msgstr "لوگو را در شروع نشان بده"
 
 #: ../ui/prefs.glade.h:84
 msgid "StudyPad default directory combo"
-msgstr "شاخه پیش‌گزیده یادداشت مطالعه"
+msgstr "شاخه ترکیبی پیش‌گزیده یادداشت مطالعه"
 
 #: ../ui/prefs.glade.h:86
 msgid "Use Bible Text scroll bar to scroll to previous or next chapter"
@@ -2821,19 +2821,19 @@ msgstr "از ستون بالابر/پایین‌بر جهت رفتن به فصل
 
 #: ../ui/prefs.glade.h:87
 msgid "Use Verse Per Line"
-msgstr "از شیوه آیه استفاده کن"
+msgstr "از شیوۀ یک آیه در هر خط استفاده کن"
 
 #: ../ui/prefs.glade.h:88
 msgid "Use Verse Per Line Checkbox"
-msgstr "از شیوه آیه استفاده کن"
+msgstr "انتخاب شیوۀ یک آیه در هر خط استفاده کن"
 
 #: ../ui/prefs.glade.h:89
 msgid "Use default Dictionary"
-msgstr "فرهنگ لغات پیش گزیده را بکار گیر"
+msgstr "فرهنگ واژگان قراردادی را بکار گیر"
 
 #: ../ui/prefs.glade.h:90
 msgid "Use default Dictionary Checkbox"
-msgstr "فرهنگ لغات پیش گزیده را بکار گیر"
+msgstr "انتخاب فرهنگ واژگان قراردادی"
 
 #: ../ui/prefs.glade.h:91
 msgid "Use tabbed browsing"
@@ -2845,67 +2845,67 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:93
 msgid "Verse number size"
-msgstr "اندازه قلم شماره آیه"
+msgstr "اندازۀ قلم شماره آیه"
 
 #: ../ui/search-dialog.glade.h:1
 msgid "<b>Attribute</b>"
-msgstr "مشخصه"
+msgstr "<b>مشخصه</b>"
 
 #: ../ui/search-dialog.glade.h:2
 msgid "<b>Found</b>"
-msgstr "پیدا شد"
+msgstr "<b>پیدا شد</b>"
 
 #: ../ui/search-dialog.glade.h:3
 msgid "<b>List Name</b>"
-msgstr "نام لینک"
+msgstr "<b>نام لینک</b>"
 
 #: ../ui/search-dialog.glade.h:4
 msgid "<b>Module Lists</b>"
-msgstr "لیستهای مدول"
+msgstr "<b>لیست‏های مدول</b>"
 
 #: ../ui/search-dialog.glade.h:5
 msgid "<b>Modules</b>"
-msgstr "مدولها"
+msgstr "<b>مدول‏ها</b>"
 
 #: ../ui/search-dialog.glade.h:6
 msgid "<b>Options</b>"
-msgstr "ترجیحات"
+msgstr "<b>گزینه‏ها</b>"
 
 #: ../ui/search-dialog.glade.h:7
 msgid "<b>Preview</b>"
-msgstr "پیشنگری"
+msgstr "<b>پیش‏نگری</b>"
 
 #: ../ui/search-dialog.glade.h:8
 msgid "<b>Range Definition</b>"
-msgstr "متن محدوده"
+msgstr "<b>تعیین محدوده</b>"
 
 #: ../ui/search-dialog.glade.h:9
 msgid "<b>Range Name</b>"
-msgstr "نام محدوده"
+msgstr "<b>نام محدوده</b>"
 
 #: ../ui/search-dialog.glade.h:10
 msgid "<b>Ranges</b>"
-msgstr "محدوده‌ها"
+msgstr "<b>محدوده‌ها</b>"
 
 #: ../ui/search-dialog.glade.h:11
 msgid "<b>Results Display Options</b>"
-msgstr "ترجیحات نمایش نتایج"
+msgstr "<b>گزینه‏های نتایج نمایش</b>"
 
 #: ../ui/search-dialog.glade.h:12
 msgid "<b>Scope</b>"
-msgstr "حدود"
+msgstr "<b>محدوده</b>"
 
 #: ../ui/search-dialog.glade.h:13
 msgid "<b>Search Results</b>"
-msgstr "نتایج جستجو"
+msgstr "<b>نتایج جستجو</b>"
 
 #: ../ui/search-dialog.glade.h:14
 msgid "<b>Search Type</b>"
-msgstr "نوع جستجو"
+msgstr "<b>نوع جستجو</b>"
 
 #: ../ui/search-dialog.glade.h:15
 msgid "Add Modules"
-msgstr "مدولها را اضافه کن"
+msgstr "اضافه کردن مدول‏ها"
 
 #: ../ui/search-dialog.glade.h:16
 msgid "Advanced Search"
@@ -2921,7 +2921,7 @@ msgstr "مشخصات"
 
 #: ../ui/search-dialog.glade.h:19
 msgid "Attributes radiobutton"
-msgstr "مشخصات"
+msgstr "انتخاب مشخصات"
 
 #: ../ui/search-dialog.glade.h:20
 msgid "Clear Custom Module List Button"
@@ -2929,11 +2929,11 @@ msgstr "دگمه خالی کردن لیست مدولهای غیر استاندا
 
 #: ../ui/search-dialog.glade.h:21
 msgid "Clear Modules from List Button"
-msgstr "همه مدولها را از لیست پاک کن"
+msgstr "مدول‏ها را از لیست پاک کن"
 
 #: ../ui/search-dialog.glade.h:22
 msgid "Clear all modules from the list"
-msgstr "همه مدولها را از لیست پاک کن"
+msgstr "همۀ مدول‏ها را از لیست پاک کن"
 
 #: ../ui/search-dialog.glade.h:23
 msgid "Clear lists for new search"
@@ -2941,7 +2941,7 @@ msgstr "لیست را برای جستجوی جدید پاک کن"
 
 #: ../ui/search-dialog.glade.h:24
 msgid "Create a new module list"
-msgstr "ایجاد لیست جدید"
+msgstr "ایجاد لیست مدول جدید"
 
 #: ../ui/search-dialog.glade.h:25
 msgid "Create new custom range"
@@ -2953,11 +2953,11 @@ msgstr "نتایج فعلی"
 
 #: ../ui/search-dialog.glade.h:27
 msgid "Current results radiobutton"
-msgstr "نتایج فعلی"
+msgstr "انتخاب نتایج فعلی"
 
 #: ../ui/search-dialog.glade.h:28
 msgid "Custom Module List Combo"
-msgstr "ترکیب لیست مدولهای غیر استاندارد"
+msgstr "ترکیب لیست مدول‏های غیر استاندارد"
 
 #: ../ui/search-dialog.glade.h:29
 msgid "Custom Module List Name Entry"
@@ -2965,7 +2965,7 @@ msgstr "درج نام لیست مدول غیر استاندارد"
 
 #: ../ui/search-dialog.glade.h:30
 msgid "Custom Module Lists"
-msgstr "لیستهای مدول غیر استاندارد"
+msgstr "لیست‏های مدول غیر استاندارد"
 
 #: ../ui/search-dialog.glade.h:31
 msgid "Custom Range Preview"
@@ -2981,7 +2981,7 @@ msgstr "محدوده‌های آیه غیر استاندارد"
 
 #: ../ui/search-dialog.glade.h:34
 msgid "Custom module list"
-msgstr "لیست مدولها غیراستانداردها"
+msgstr "لیست مدول‏های غیراستاندارد"
 
 #: ../ui/search-dialog.glade.h:35
 msgid "Custom module list radiobutton"
@@ -2989,7 +2989,7 @@ msgstr ""
 
 #: ../ui/search-dialog.glade.h:36
 msgid "Custom verse range"
-msgstr "محدوده غیر استاندارد"
+msgstr "محدودۀ غیر استاندارد"
 
 #: ../ui/search-dialog.glade.h:37
 msgid "Custom verse range radiobutton"
@@ -2997,7 +2997,7 @@ msgstr ""
 
 #: ../ui/search-dialog.glade.h:38
 msgid "Delete Range Button"
-msgstr "دگمه حذف محدوده"
+msgstr "کلید حذف محدوده"
 
 #: ../ui/search-dialog.glade.h:39
 msgid "Delete Selected Module From List Button"
@@ -3017,7 +3017,7 @@ msgstr "تمامی مدول"
 
 #: ../ui/search-dialog.glade.h:43
 msgid "Entire module radiobutton"
-msgstr "تمامی مدول"
+msgstr "انتخاب تمامی مدول"
 
 #: ../ui/search-dialog.glade.h:45
 msgid "Exact phrase radiobutton"
@@ -3029,32 +3029,33 @@ msgid ""
 "Indexes must have been built beforehand:\n"
 "See Module Manager's maintenance functions"
 msgstr ""
-"براي بهبود کار، مدولها نياز به اندکس شدن دارند. اين امر فقط يکبار صورت مي‌گيرد.\n"
-"سريع، پر از موارد جوانب گوناگون، جستجوي بر اساس اندکساندسکسها بايد قبلا آماده گردند.به عملکردهاي خودبقاي مدير مدول رجوع کنيد"
+"سريع، پر از موارد جوانب گوناگون، جستجوي بر اساس اندکس\n"
+"اندکسها بايد قبلا آماده گردند:\n"
+"به عملکردهاي خود بقاي مدير مدول رجوع کنيد"
 
 #: ../ui/search-dialog.glade.h:49
 msgid "Find Button"
-msgstr "بعدی را پیدا کن"
+msgstr "کلید را جستجو کن"
 
 #: ../ui/search-dialog.glade.h:51
 msgid "Footnotes radiobutton"
-msgstr "زیرنویس"
+msgstr "انتخاب پانویس"
 
 #: ../ui/search-dialog.glade.h:52
 msgid "In modules that have Footnotes"
-msgstr "در مدولهایی که زیر نویس دارند"
+msgstr "در مدول‏هایی که پانویس دارند"
 
 #: ../ui/search-dialog.glade.h:53
 msgid "In modules that have Morphological Tags"
-msgstr "در مدولهایی که بخشهای مورفولوژیک دارند"
+msgstr "در مدول‏هایی که بخش‏های واژه‏شناسی دارند"
 
 #: ../ui/search-dialog.glade.h:54
 msgid "In modules that have Strong's Numbers"
-msgstr "در مدولهایی که شماره‌های استرانگ دارند"
+msgstr "در مدول‏هایی که شماره‌های کشف‏الآیات استرانگ را دارند"
 
 #: ../ui/search-dialog.glade.h:55
 msgid "Main Search Entry"
-msgstr "بخش جستجوی اصلی"
+msgstr "ثبت جستجوی اصلی"
 
 #: ../ui/search-dialog.glade.h:56
 msgid "Make selections on the Attribute Search tab"
@@ -3074,51 +3075,51 @@ msgstr "لیست مدول"
 
 #: ../ui/search-dialog.glade.h:61
 msgid "Module list radiobutton"
-msgstr "لیست مدول"
+msgstr "انتخاب لیست مدول"
 
 #: ../ui/search-dialog.glade.h:63
 msgid "Morphological Tags radiobutton"
-msgstr "علائم مورفولوژیک"
+msgstr "انتخاب علائم واژه‏شناسی"
 
 #: ../ui/search-dialog.glade.h:65
 msgid "Multi word radiobutton"
-msgstr "کلمات متعدد"
+msgstr "انتخاب کلمات متعدد"
 
 #: ../ui/search-dialog.glade.h:66
 msgid "New Custom Module List Button"
-msgstr "دکمه·لیست شخصی ·نو مدول"
+msgstr "دکمۀ لیست شخصی مدول جدید"
 
 #: ../ui/search-dialog.glade.h:67
 msgid "New Range Button"
-msgstr "دگمه محدوده جدید"
+msgstr "دکمۀ محدودۀ جدید"
 
 #: ../ui/search-dialog.glade.h:68
 msgid "Open Selection Dialog Button"
-msgstr "دگمه باز کردن دیالوق بخش"
+msgstr "دکمۀ دیالوگ بخش باز"
 
 #: ../ui/search-dialog.glade.h:69
 msgid "Open a dialog to select modules to add to the list"
-msgstr "بازکردن دیالوگ برای انتخاب مدول به جهت اضافه کردن به لیست"
+msgstr "بازکردن یک دیالوگ برای انتخاب مدول به جهت اضافه کردن به لیست"
 
 #: ../ui/search-dialog.glade.h:70
 msgid "Optimized (\"Lucene\")"
-msgstr "بهترسازی"
+msgstr "بهینه‏سازی (\"Lucene\")"
 
 #: ../ui/search-dialog.glade.h:71
 msgid "Optimized (\"Lucene\") radiobutton"
-msgstr "بهتر سازی"
+msgstr "انتخاب (\"Lucene\") بهینه‏سازی"
 
 #: ../ui/search-dialog.glade.h:72
 msgid "Range Definition Entry"
-msgstr "بخش درج تعریف محدوده"
+msgstr "ثبت تعریف محدوده"
 
 #: ../ui/search-dialog.glade.h:73
 msgid "Range Name Entry"
-msgstr "بخش درج نام محدوده"
+msgstr "ثبت نام محدوده"
 
 #: ../ui/search-dialog.glade.h:75
 msgid "Regular expression radiobutton"
-msgstr "بیان معمول"
+msgstr "انتخاب بیان معمول"
 
 #: ../ui/search-dialog.glade.h:76
 msgid "Remove the selected module from the list"
@@ -3126,11 +3127,11 @@ msgstr "مدول انتخاب شده را از لیست حذف کن"
 
 #: ../ui/search-dialog.glade.h:77
 msgid "Result Summary Table"
-msgstr "لیست نتیجه‌ها"
+msgstr "لیست نتیجه‏ها"
 
 #: ../ui/search-dialog.glade.h:78
 msgid "Result Summary Window"
-msgstr "پنجره خلاصه نتیجه"
+msgstr "پنجرۀ خلاصۀ نتیجه"
 
 #: ../ui/search-dialog.glade.h:79
 msgid "Results"
@@ -3138,11 +3139,11 @@ msgstr "نتایج"
 
 #: ../ui/search-dialog.glade.h:80
 msgid "Save Custom Module List Button"
-msgstr "ضبط لیست مدول"
+msgstr "دکمۀ مدول ذخیره‏سازی غیر استاندارد"
 
 #: ../ui/search-dialog.glade.h:81
 msgid "Save Range Button"
-msgstr "دگمه ضبط محدوده"
+msgstr "کلید ذخیره‏سازی محدوده"
 
 #: ../ui/search-dialog.glade.h:82
 msgid "Save custom range"
@@ -3158,11 +3159,11 @@ msgstr "ضبط لیست مدول"
 
 #: ../ui/search-dialog.glade.h:85
 msgid "Search  Criteria"
-msgstr "محدوده جستجو"
+msgstr "جستجوی معیارهای"
 
 #: ../ui/search-dialog.glade.h:86
 msgid "Search Criteria Treeview"
-msgstr "محدوده جستجو"
+msgstr "جستجوی معیارهای شاخه‏ای"
 
 #: ../ui/search-dialog.glade.h:87
 msgid "Search entire module"
@@ -3170,43 +3171,43 @@ msgstr "جستجوی تمامی مدول"
 
 #: ../ui/search-dialog.glade.h:88
 msgid "Search for Morphological tags"
-msgstr "جستجو به جهت بخشهای مورفولوژیکی"
+msgstr "جستجو برای علائم واژه‏شناسی"
 
 #: ../ui/search-dialog.glade.h:89
 msgid "Search for Strongs Numbers like G4442 or H1121"
-msgstr "جستجو به جهت شماره‌های استرانگ نظیر گ یا ح"
+msgstr "جستجو به جهت شماره‌های کشف‏الآیات استرانگ نظیر G4442 or H1121"
 
 #: ../ui/search-dialog.glade.h:90
 msgid "Search in footnotes"
-msgstr "جستجو در زیرنویس"
+msgstr "جستجو در پانویس"
 
 #: ../ui/search-dialog.glade.h:91
 msgid "Show Footnotes"
-msgstr "زیرنویسها را نشان بده"
+msgstr "پانویس‏ها را نشان بده"
 
 #: ../ui/search-dialog.glade.h:92
 msgid "Show Footnotes checkbox"
-msgstr "زیرنویسها را نشان بده"
+msgstr "نمایش انتخاب پانویسها"
 
 #: ../ui/search-dialog.glade.h:93
 msgid "Show Morphological Tags"
-msgstr "بخشهای مورفولوژیکی را نشان بده"
+msgstr "بخشهای واژه‏شناسی را نشان بده"
 
 #: ../ui/search-dialog.glade.h:94
 msgid "Show Morphological Tags checkbox"
-msgstr "بخشهای مورفولوژیکی را نشان بده"
+msgstr "انتخاب بخشهای واژه‏شناسی"
 
 #: ../ui/search-dialog.glade.h:95
 msgid "Show Strong's Numbers"
-msgstr "شماره‌های استرانگ را نشان بده"
+msgstr "شماره‌های کشف‏اآیات استرانگ را نشان بده"
 
 #: ../ui/search-dialog.glade.h:96
 msgid "Show Strong's Numbers checkbox"
-msgstr "شماره‌های استرانگ را نشان بده"
+msgstr "انتخاب شماره‌های کشف‏اآیات استرانگ"
 
 #: ../ui/search-dialog.glade.h:97
 msgid "Show in main window"
-msgstr "پنجره اصلی را نشان بده"
+msgstr "نمایش پنجره اصلی"
 
 #: ../ui/search-dialog.glade.h:98
 msgid "Single module"
@@ -3214,7 +3215,7 @@ msgstr "مدول فردی"
 
 #: ../ui/search-dialog.glade.h:99
 msgid "Single module radiobutton"
-msgstr "مدول فردی"
+msgstr "انتخاب مدول فردی"
 
 #: ../ui/search-dialog.glade.h:100
 msgid "Start/stop searching"
@@ -3222,15 +3223,15 @@ msgstr "شروع/ توقف جستجو"
 
 #: ../ui/search-dialog.glade.h:101
 msgid "Strongs Numbers"
-msgstr "شماره‌‌های استرانگ"
+msgstr "شماره‌‌های کشف‏الآیات استرانگ"
 
 #: ../ui/search-dialog.glade.h:102
 msgid "Strongs Numbers radiobutton"
-msgstr "شماره‌‌های استرانگ"
+msgstr "انتخاب شماره‌‌های کشف‏الآیات استرانگ"
 
 #: ../ui/search-dialog.glade.h:103
 msgid "Use a custom module list for the search"
-msgstr "جهت جستجو از لیست غیراستاندارد استفاده کن"
+msgstr "لیست یک مدول غیر استاندارد را برای جستجو استفاده کن"
 
 #: ../ui/search-dialog.glade.h:104
 msgid "Use a custom range for the scope of the search"
