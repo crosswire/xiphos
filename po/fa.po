@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: 3.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-08-02 22:07+0200\n"
-"PO-Revision-Date: 2009-09-24 00:14-0800\n"
+"PO-Revision-Date: 2009-09-24 06:51-0800\n"
 "Last-Translator: Mansour <manhid1@yahoo.com>\n"
 "Language-Team: English/GB <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1011,7 +1011,7 @@ msgstr "توازی 5 را عوض کن"
 #: ../src/main/sidebar.cc:957
 #: ../src/main/sidebar.cc:958
 msgid "Parallel View"
-msgstr "نگرش به شکل موازی"
+msgstr "نگرش موازی"
 
 #: ../src/gnome2/preferences_cell_renderer.c:398
 msgid "Text"
@@ -2559,7 +2559,7 @@ msgstr "<b>مدولهای پنجره اصلی</b>"
 
 #: ../ui/prefs.glade.h:13
 msgid "<b>Parallel View</b>"
-msgstr "<b>مرور موازی<b>"
+msgstr "<b>نگرش موازی<b>"
 
 #: ../ui/prefs.glade.h:14
 msgid "<b>Show</b>"
@@ -3457,7 +3457,7 @@ msgstr "ارجاعات کتاب‏مقدس"
 
 #: ../ui/xi-menus.glade.h:66
 msgid "Show Parallel View in a _Tab"
-msgstr "نمایش موازی در یک بخش"
+msgstr "نگرش موازی در یک بخش"
 
 #: ../ui/xi-menus.glade.h:67
 msgid "Show Previe_wer in the Sidebar"
