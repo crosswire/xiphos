@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2009-05-11 23:54+0100\n"
-"PO-Revision-Date: 2009-09-23 23:55-0800\n"
+"PO-Revision-Date: 2009-09-24 01:25-0800\n"
 "PO-Revision-Date: 2009-09-23 22:44-0800\n"
 "Last-Translator: Mansour <manhid1@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1144,31 +1144,31 @@ msgstr ""
 
 #: ../C/xiphos.xml:343(para)
 msgid "Words Of Christ In Red"
-msgstr ""
+msgstr "کلمات عیسی مسیح به رنگ قرمز"
 
 #: ../C/xiphos.xml:348(para)
 msgid "Strong's Numbers"
-msgstr ""
+msgstr "شماره‏های کشف‏الآیات استرانگ"
 
 #: ../C/xiphos.xml:353(para)
 msgid "Morphological Tags"
-msgstr ""
+msgstr "علائم واژه‏شناسی"
 
 #: ../C/xiphos.xml:358(para)
 msgid "Footnotes"
-msgstr ""
+msgstr "پانویس‏ها"
 
 #: ../C/xiphos.xml:363(para)
 msgid "Scripture Cross-Reference"
-msgstr ""
+msgstr "ارجاعات به کتاب‏مقدس"
 
 #: ../C/xiphos.xml:368(para)
 msgid "Headings"
-msgstr ""
+msgstr "سر تیترها"
 
 #: ../C/xiphos.xml:373(para)
 msgid "Image Content"
-msgstr ""
+msgstr "محتویات تصویر"
 
 #: ../C/xiphos.xml:379(para)
 msgid "Translations in other languages such as Greek or Hebrew have specific options which deal only with the specific language."
@@ -1176,17 +1176,17 @@ msgstr ""
 
 #: ../C/xiphos.xml:383(para)
 msgid "In order to access these options:"
-msgstr ""
+msgstr "به منظور دستیابی به این گزینه‏ها:"
 
 #: ../C/xiphos.xml:388(para)
 msgid "right-click in the <interface>Bible Text pane</interface>. In the popup menu (example shown), choose <guibutton>Module Options</guibutton> and select the specific option."
-msgstr ""
+msgstr "روی ماوس رایت کلیک کنید،<interface>چارچوب متن کتابمقدس باز خواهد شد.</interface>در منویی که باز خواهد شد (مانند نمونۀ زیر)،<guibutton>گزینۀ مدول</guibutton>را انتخاب و کاربرد مورد نظر را علامت گذاری کنید."
 
 #: ../C/xiphos.xml:416(title)
 #: ../C/xiphos.xml:421(title)
 #: ../C/xiphos.xml:433(phrase)
 msgid "View Options"
-msgstr ""
+msgstr "گزینه‏های مرور"
 
 #: ../C/xiphos.xml:417(para)
 msgid "There are several additional modes that can be selected from the menubar's <guimenuitem>View</guimenuitem> pulldown."
