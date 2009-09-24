@@ -68,8 +68,8 @@
     !define BIN_LOCAL_MSYS "local\bin"
     !define BIN_PYTHON "C:\Python26"
     !define BIN_PERL "C:\strawberry\perl\bin"
-    !define BIN_NSISU "C:\Program Files\NSIS\Unicode"
-    !define BIN_MSHELP "C:\Program Files\HTML Help Workshop"
+    !define BIN_NSISU "$PROGRAMFILES\NSIS\Unicode"
+    !define BIN_MSHELP "$PROGRAMFILES\HTML Help Workshop"
 
     ; Following two definitions required by Uninstall log.
     !define INSTDIR_REG_ROOT "HKLM" # HKEY_LOCAL_MACHINE
