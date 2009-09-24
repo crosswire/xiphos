@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 # encoding: utf-8
 
-DOC_LINGUAS = 'fr'
+DOC_LINGUAS = 'fa fr'
 DOC_INCLUDES = '''
     introduction.xml
     interface.xml
