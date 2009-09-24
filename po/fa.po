@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: 3.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-08-02 22:07+0200\n"
-"PO-Revision-Date: 2009-09-23 15:50-0800\n"
+"PO-Revision-Date: 2009-09-23 18:33-0800\n"
 "Last-Translator: Mansour <manhid1@yahoo.com>\n"
 "Language-Team: English/GB <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -624,7 +624,7 @@ msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:526
 msgid "Journals and prayer lists cannot be indexed."
-msgstr ""
+msgstr "ژورنال و لیست دعا قابل ایندکس شدن نیستند"
 
 #: ../src/gnome2/mod_mgr.c:547
 #: ../src/gnome2/mod_mgr.c:2902
@@ -782,15 +782,15 @@ msgstr "نام عنوان"
 
 #: ../src/gnome2/mod_mgr.c:1433
 msgid "A checkmark means this module is already installed"
-msgstr ""
+msgstr "علامت تیک به این معناست که این مدول قبلاً نصب شده است."
 
 #: ../src/gnome2/mod_mgr.c:1455
 msgid "Click the box to work on this module"
-msgstr ""
+msgstr "روی جعبه کلیک کنید تا بتوانید روی این مدول کار کنید."
 
 #: ../src/gnome2/mod_mgr.c:1456
 msgid "Click the box to select this module for install/update"
-msgstr ""
+msgstr "روی این علامت کلیک کنید تا بتوانید مدول را نصب/به روز کنید"
 
 #: ../src/gnome2/mod_mgr.c:1475
 msgid "Installed"
@@ -855,11 +855,11 @@ msgstr "کاربر"
 
 #: ../src/gnome2/mod_mgr.c:1672
 msgid "Password"
-msgstr ""
+msgstr "اسم رمز"
 
 #: ../src/gnome2/mod_mgr.c:1680
 msgid "UID"
-msgstr ""
+msgstr "کاربر"
 
 #: ../src/gnome2/mod_mgr.c:1700
 msgid "Sources"
@@ -889,11 +889,11 @@ msgstr "لیست عنوان شما روز رسانی نشده است!"
 
 #: ../src/gnome2/mod_mgr.c:2282
 msgid "Standard remote sources have been loaded."
-msgstr ""
+msgstr "منابع دوردست استاندارد قبلاً نصب شده‏اند"
 
 #: ../src/gnome2/mod_mgr.c:2283
 msgid "Could not load standard sources from CrossWire."
-msgstr ""
+msgstr "امکان بارگذاری منابع استاندارد از سایت کراس‏وایر موجود نیست."
 
 #: ../src/gnome2/mod_mgr.c:2435
 #: ../src/gnome2/mod_mgr.c:2684
@@ -922,11 +922,11 @@ msgstr "فهرست:"
 
 #: ../src/gnome2/mod_mgr.c:2504
 msgid "User (optional):"
-msgstr ""
+msgstr "کاربر (اختیاری)"
 
 #: ../src/gnome2/mod_mgr.c:2505
 msgid "Password (optional):"
-msgstr ""
+msgstr "اسم رمز (اختیاری)"
 
 #. this can happen at most once
 #: ../src/gnome2/mod_mgr.c:2533
@@ -955,7 +955,7 @@ msgstr "به مورد بعدی برو"
 #: ../src/gnome2/navbar_book.c:406
 #: ../src/gnome2/navbar_book_dialog.c:346
 msgid "Go inward, to the first subsection"
-msgstr ""
+msgstr "به سمت اولین بخش فرعی به پیش برو"
 
 #: ../src/gnome2/navbar_versekey_dialog.c:887
 #: ../src/gnome2/navbar_versekey_editor.c:877
@@ -1023,11 +1023,11 @@ msgstr "ارائه متن"
 
 #: ../src/gnome2/preferences_cell_renderer.c:406
 msgid "Pixbuf Object"
-msgstr ""
+msgstr "Pixbuf Object"
 
 #: ../src/gnome2/preferences_cell_renderer.c:408
 msgid "The pixbuf to render."
-msgstr ""
+msgstr "The pixbuf to render."
 
 #: ../src/gnome2/preferences_dialog.c:1231
 #: ../src/gnome2/preferences_dialog.c:1269
@@ -1112,7 +1112,7 @@ msgstr "آیا به یقین می‌خواهید که لیست مدول را پ�
 
 #: ../src/gnome2/search_dialog.c:679
 msgid "The last module list may not be deleted"
-msgstr ""
+msgstr "لیست مدول پیشین ممکن است ذخیره نشده باشد"
 
 #: ../src/gnome2/search_dialog.c:697
 msgid "Delete list?"
@@ -1314,6 +1314,8 @@ msgid ""
 "Improperly encoded personal annotation label:\n"
 "'%s'"
 msgstr ""
+"برچسب حاشیه‏نویسی شخصی به صورت درستی کدبندی نشده است:\n"
+"'%s'"
 
 #: ../src/main/display.cc:427
 msgid ""
@@ -1322,6 +1324,10 @@ msgid ""
 "(Or possibly the image is of type other than bmp/gif/jpg/png.)\n"
 "Xiphos cannot resize images to fit window."
 msgstr ""
+"تعیین اندازۀ فایل تصویر ممکن نبود.\n"
+"آیا گزینۀ «تعیین» از برنامۀ ایمیج‏ماجیک نصب شده است؟\n"
+"(شاید نوع فایل تصویر در فرمتی بجز bmp/gif/jpg/pngاست.)\n"
+"زیفوس نمی‏تواند اندازۀ تصویر را مناسب با پنجرۀ باز تنظیم کند."
 
 #: ../src/main/display.cc:1084
 #: ../src/main/display.cc:1146
@@ -1444,7 +1450,7 @@ msgstr "تیترها"
 
 #: ../src/main/parallel_view.cc:488
 msgid "Morpheme Segmentation"
-msgstr ""
+msgstr "تقسیم بندی یک واژه"
 
 #: ../src/main/parallel_view.cc:498
 #: ../ui/xi-menus.glade.h:75
@@ -1732,7 +1738,7 @@ msgstr "<b>عنوان اصلی ج</b><br>"
 
 #: ../src/main/previewer.cc:203
 msgid "User Annotation"
-msgstr ""
+msgstr "یادداشت کاربر"
 
 #: ../src/main/search_dialog.cc:129
 #, c-format
@@ -1788,12 +1794,16 @@ msgid ""
 "\n"
 "Search on this module is now `multi word'."
 msgstr ""
+"\n"
+"جستجو در این مدول اکنون بصورت «چندکلمه‏ای» می‏باشد."
 
 #: ../src/main/search_dialog.cc:1492
 msgid ""
 "\n"
 "See the Module Manager, Maintenance pane."
 msgstr ""
+"\n"
+"به چارچوب تعمیران، در بخش مدیر مدول مراجعه کنید."
 
 #: ../src/main/search_dialog.cc:1553
 msgid "Search finished"
@@ -2396,11 +2406,11 @@ msgstr "علامت‏گذاری‏کن"
 
 #: ../ui/markverse.glade.h:5
 msgid "Mark/Unmark Verse"
-msgstr ""
+msgstr "علامت‏گذاری/حذف علامت یک آیه"
 
 #: ../ui/markverse.glade.h:9
 msgid "Unmark"
-msgstr ""
+msgstr "حذف علامت"
 
 #: ../ui/module-manager.glade.h:1
 msgid "<b>Add and Remove Sources</b>"
@@ -2433,11 +2443,11 @@ msgstr "<b>هشدار:/b>اگر در کشور تحت جفا زندگی می‌ک
 
 #: ../ui/module-manager.glade.h:9
 msgid "<i>Personal area, for your use only:</i>"
-msgstr ""
+msgstr "<i>محدودۀ شخصی، منحصراً برای استفادۀ شخصی شما</i>"
 
 #: ../ui/module-manager.glade.h:10
 msgid "<i>System area, for all users:</i>"
-msgstr ""
+msgstr "<i>محدودۀ سیستم، برای تمام کاربران:</i>"
 
 #: ../ui/module-manager.glade.h:11
 msgid "Continue"
@@ -2601,7 +2611,7 @@ msgstr "تغییر ترکیبی متن کتاب‏مقدس"
 
 #: ../ui/prefs.glade.h:27
 msgid "Change Book Combo"
-msgstr ""
+msgstr "تغییر ترکیب کتاب"
 
 #: ../ui/prefs.glade.h:28
 msgid "Change Commentary Combo"
@@ -2609,7 +2619,7 @@ msgstr "تغییر ترکیبی تفسیر"
 
 #: ../ui/prefs.glade.h:29
 msgid "Change Default Dictionary Combo"
-msgstr ""
+msgstr "تغییر ترکیب فرهنگ واژه‏های قراردادی"
 
 #: ../ui/prefs.glade.h:30
 msgid "Change Dictionary Combo"
@@ -2837,11 +2847,11 @@ msgstr "انتخاب فرهنگ واژگان قراردادی"
 
 #: ../ui/prefs.glade.h:91
 msgid "Use tabbed browsing"
-msgstr ""
+msgstr "گزینۀ جستجوی بخشی را استفاده کنید"
 
 #: ../ui/prefs.glade.h:92
 msgid "Use tabbed browsing Checkbox"
-msgstr ""
+msgstr "انتخاب گزینۀ جستجوی بخشی"
 
 #: ../ui/prefs.glade.h:93
 msgid "Verse number size"
@@ -2985,7 +2995,7 @@ msgstr "لیست مدول‏های غیراستاندارد"
 
 #: ../ui/search-dialog.glade.h:35
 msgid "Custom module list radiobutton"
-msgstr ""
+msgstr "انتخاب لیست مدول"
 
 #: ../ui/search-dialog.glade.h:36
 msgid "Custom verse range"
@@ -2993,7 +3003,7 @@ msgstr "محدودۀ غیر استاندارد"
 
 #: ../ui/search-dialog.glade.h:37
 msgid "Custom verse range radiobutton"
-msgstr ""
+msgstr "انتخاب محدودۀ آیات"
 
 #: ../ui/search-dialog.glade.h:38
 msgid "Delete Range Button"
@@ -3063,7 +3073,7 @@ msgstr "گزینه در بخش جستجو در مشخصات"
 
 #: ../ui/search-dialog.glade.h:58
 msgid "Match case checkbox"
-msgstr ""
+msgstr "انتخاب تطبیق مورد"
 
 #: ../ui/search-dialog.glade.h:59
 msgid "Module Selection"
@@ -3251,7 +3261,7 @@ msgstr "نتایج جستجوی آخر را به عنوان محدوده جست�
 
 #: ../ui/search-dialog.glade.h:108
 msgid "e.g. Matt-John;Rev4"
-msgstr "متی، یوحنا، مکا"
+msgstr "مثلاً متی-یوحنا؛مکا۴"
 
 #: ../ui/search-dialog.glade.h:109
 msgid "for "
@@ -3259,15 +3269,15 @@ msgstr "برای"
 
 #: ../ui/xi-menus.glade.h:2
 msgid "About _Translation"
-msgstr "درباره ترجمه زیفوس"
+msgstr "دربارۀ ترجمه"
 
 #: ../ui/xi-menus.glade.h:3
 msgid "About _Xiphos"
-msgstr "درباره زیفوس"
+msgstr "دربارۀ زیفوس"
 
 #: ../ui/xi-menus.glade.h:4
 msgid "Add new folder to selected folder"
-msgstr "به قفسه انتخاب شده قفسه پرونده جدید اضافه کن"
+msgstr "قفسۀ جدیدی را در این قفسه اضافه کن"
 
 #: ../ui/xi-menus.glade.h:6
 msgid "Allow Reordering"
@@ -3279,23 +3289,23 @@ msgstr "انتقال یک مورد را از قفسه‌ای به قفسه‌ا�
 
 #: ../ui/xi-menus.glade.h:8
 msgid "Annotate Verse"
-msgstr ""
+msgstr "تفسیر یک آیه"
 
 #: ../ui/xi-menus.glade.h:10
 msgid "Browse in BibleMap.org"
-msgstr ""
+msgstr "جستجو ی نقشه‏های کتاب‏مقدس در بایبل‏مپ "
 
 #: ../ui/xi-menus.glade.h:11
 msgid "Collapse All"
-msgstr "فروریزی همه"
+msgstr "فروریزی تمام"
 
 #: ../ui/xi-menus.glade.h:12
 msgid "Collapse all Bookmarks groups"
-msgstr "فروریزی همه گروههای علائم"
+msgstr "فروریزی تمام گروههای علائم"
 
 #: ../ui/xi-menus.glade.h:13
 msgid "Commentary by Chapter"
-msgstr "تفسیر فصل به إصل"
+msgstr "تفسیر فصل به فصل"
 
 #: ../ui/xi-menus.glade.h:15
 msgid "D_ouble-Space Text"
@@ -3311,7 +3321,7 @@ msgstr "حذف مورد"
 
 #: ../ui/xi-menus.glade.h:18
 msgid "Dictionar_y"
-msgstr "کتاب فرهنگ لغات"
+msgstr "فرهنگ واژه‏ها"
 
 #: ../ui/xi-menus.glade.h:19
 msgid "Display Book Heading"
@@ -3335,7 +3345,7 @@ msgstr "بسط همه"
 
 #: ../ui/xi-menus.glade.h:25
 msgid "Expand all Bookmarks groups"
-msgstr "بسط همه گروههای علائم"
+msgstr "بسط همۀ گروههای علائم"
 
 #: ../ui/xi-menus.glade.h:32
 msgid "Image Content"
@@ -3343,11 +3353,11 @@ msgstr "محتویات تصویر"
 
 #: ../ui/xi-menus.glade.h:33
 msgid "Import Bibletime Bookmarks"
-msgstr "علائم را از نرم افزار بایبلتایم وارد کن"
+msgstr "علائم را از نرم افزار بایبل‏تایم وارد کن"
 
 #: ../ui/xi-menus.glade.h:34
 msgid "Insert Bookmark"
-msgstr "علامت وارد کن"
+msgstr "ایجاد علامت "
 
 #: ../ui/xi-menus.glade.h:35
 msgid "Insert new bookmark here"
@@ -3355,11 +3365,11 @@ msgstr "علامت جدید را در اینجا وارد کن"
 
 #: ../ui/xi-menus.glade.h:36
 msgid "L_ink Tabs"
-msgstr "پحوندگاه برگها "
+msgstr "بخش پیوندگاه"
 
 #: ../ui/xi-menus.glade.h:38
 msgid "Load Bookmarks from Bibletime"
-msgstr "علائم را از نرم افزار بایبلتایم بارگذاری کن"
+msgstr "علائم را از نرم افزار بایبل‏تایم بارگذاری کن"
 
 #: ../ui/xi-menus.glade.h:39
 msgid "Lookup Selection"
@@ -3379,7 +3389,7 @@ msgstr "یادداشت مطالعه‌ را باز کن"
 
 #: ../ui/xi-menus.glade.h:46
 msgid "Open in a dialog"
-msgstr "یک ایالوگ باز کن"
+msgstr "یک دیالوگ باز کن"
 
 #: ../ui/xi-menus.glade.h:48
 msgid "Open in new tab"
@@ -3391,11 +3401,11 @@ msgstr "این علامت را در دیالوگ باز کن"
 
 #: ../ui/xi-menus.glade.h:50
 msgid "Open this bookmark in a new tab"
-msgstr "این علامت را در دیالوگ تازه باز کن"
+msgstr "این علامت را در بخشی تازه باز کن"
 
 #: ../ui/xi-menus.glade.h:52
 msgid "Read Selection Aloud"
-msgstr "گزیده را به صدای بلند بخوان"
+msgstr "گزیده را با صدای بلند بخوان"
 
 #: ../ui/xi-menus.glade.h:53
 msgid "Remove - Restore"
@@ -3403,11 +3413,11 @@ msgstr "حذف - احیا"
 
 #: ../ui/xi-menus.glade.h:54
 msgid "Remove Folder"
-msgstr "قفسه پرونده را حذف کن"
+msgstr "حذف پرونده"
 
 #: ../ui/xi-menus.glade.h:55
 msgid "Remove folder and save it"
-msgstr "قفسه پرونده را حذف کن و آن را ضبط نما"
+msgstr "پرونده را حذف کن و آن را ضبط نما"
 
 #: ../ui/xi-menus.glade.h:56
 msgid "Rename Pers.Comm."
@@ -3415,43 +3425,43 @@ msgstr "نامگذاری جدید تفاسیر شخصی"
 
 #: ../ui/xi-menus.glade.h:57
 msgid "Respect Font Faces"
-msgstr ""
+msgstr "پذیرش فونت به گونه‏ای که هست"
 
 #: ../ui/xi-menus.glade.h:58
 msgid "Restore Folder"
-msgstr "قفسه پرونده را به حالت اول برگردان"
+msgstr "پرونده را به حالت اول برگردان"
 
 #: ../ui/xi-menus.glade.h:59
 msgid "Restore saved folder"
-msgstr "قفسه پرونده ضبط شده را به حالت اول برگردان"
+msgstr "پروندۀ ذخیره شده را به حالت اول برگردان"
 
 #: ../ui/xi-menus.glade.h:60
 msgid "Save list as a series of bookmarks"
-msgstr "نتایج جستجو را به یک لیست عنوان علامت ضبط کن"
+msgstr "لیست را بعنوان لیستی از علائم ذخیره کن"
 
 #: ../ui/xi-menus.glade.h:61
 msgid "Save list as a single bookmark"
-msgstr "نتایج جستجو را به عنوان علائم ضبط کن"
+msgstr "لیست را بعنوان یک علامت ذخیره کن"
 
 #: ../ui/xi-menus.glade.h:62
 msgid "Save these results as a series of bookmarks in their own folder"
-msgstr "نتایج جستجو را به  پرڤنده تازه عنوان علامت ضبط کن"
+msgstr "این نتایج را بعنوان لیستی از علائم در پروندۀ من ذخیره کن"
 
 #: ../ui/xi-menus.glade.h:63
 msgid "Save these results as a single bookmark"
-msgstr "نتایج جستجو را به عنوان علامت ضبط کن"
+msgstr "این نتایج را بعنوان یک علامت در پروندۀ من ذخیره کن"
 
 #: ../ui/xi-menus.glade.h:64
 msgid "Scripture Cross-references"
-msgstr "ارجاعات کتابمقدس"
+msgstr "ارجاعات کتاب‏مقدس"
 
 #: ../ui/xi-menus.glade.h:66
 msgid "Show Parallel View in a _Tab"
-msgstr "نگرش به شکل موازی"
+msgstr "نمایش موازی در یک بخش"
 
 #: ../ui/xi-menus.glade.h:67
 msgid "Show Previe_wer in the Sidebar"
-msgstr ""
+msgstr "مرورگر را در ستون جانبی نشان بده"
 
 #: ../ui/xi-menus.glade.h:68
 msgid "Show Verse _Numbers"
@@ -3463,35 +3473,35 @@ msgstr "قفل این مدول را باز کن"
 
 #: ../ui/xi-menus.glade.h:72
 msgid "Use Current Dictionary"
-msgstr "لغتنامه فعلی را استفاده کن"
+msgstr "فرهنگ لغت فعلی را استفاده کن"
 
 #: ../ui/xi-menus.glade.h:73
 msgid "Use module manager to install and remove Sword modules"
-msgstr "از مدیر مدولها به جهت نصب و یا حذف مدولها استفاده کن"
+msgstr "از مدیر مدول‏ها به جهت نصب و یا حذف مدول‏ها استفاده کن"
 
 #: ../ui/xi-menus.glade.h:74
 msgid "Variants"
-msgstr "نسخه‌ها"
+msgstr "مغایرت‏ها"
 
 #: ../ui/xi-menus.glade.h:76
 msgid "_About The SWORD Project"
-msgstr "درباره پروژه سورد"
+msgstr "دربارۀ پروژه سورد"
 
 #: ../ui/xi-menus.glade.h:77
 msgid "_Advanced Search"
-msgstr "جستجوی پیسرفته"
+msgstr "جستجوی پیشرفته"
 
 #: ../ui/xi-menus.glade.h:78
 msgid "_Attach/Detach Sidebar"
-msgstr "اضافه/حذف قفسه جانبی"
+msgstr "اضافه/حذف ستون جانبی"
 
 #: ../ui/xi-menus.glade.h:79
 msgid "_Bible"
-msgstr "کتابمقدس"
+msgstr "کتاب‏مقدس"
 
 #: ../ui/xi-menus.glade.h:80
 msgid "_Commentary/Book"
-msgstr "تفسیر"
+msgstr "تفسیر/کتاب"
 
 #: ../ui/xi-menus.glade.h:81
 msgid "_Contents"
@@ -3519,11 +3529,11 @@ msgstr "کمک"
 
 #: ../ui/xi-menus.glade.h:87
 msgid "_Highlight Current Verse"
-msgstr "آیه فعلی را علامت بگذار"
+msgstr "آیۀ فعلی را علامت بگذار"
 
 #: ../ui/xi-menus.glade.h:88
 msgid "_Live Chat"
-msgstr "گپ الکترونیکی"
+msgstr "چت زنده"
 
 #: ../ui/xi-menus.glade.h:89
 msgid "_Mailing List"
@@ -3531,7 +3541,7 @@ msgstr "لیست  پست الکترونيک"
 
 #: ../ui/xi-menus.glade.h:90
 msgid "_Module Manager"
-msgstr "مدیر مدولهاا"
+msgstr "مدیر مدول‏ها"
 
 #: ../ui/xi-menus.glade.h:91
 msgid "_Open Session"
@@ -3547,15 +3557,15 @@ msgstr "پیش‌نگری"
 
 #: ../ui/xi-menus.glade.h:94
 msgid "_Read Aloud"
-msgstr "به صدای بلند بخوان"
+msgstr "با صدای بلند بخوان"
 
 #: ../ui/xi-menus.glade.h:95
 msgid "_Report Bug"
-msgstr "مشگل با برنامه؟"
+msgstr "گزارش دادن مشکل در برنامه"
 
 #: ../ui/xi-menus.glade.h:96
 msgid "_Save Session"
-msgstr "قسمت را ضبط کن"
+msgstr "قسمت را ذخیره کن"
 
 #: ../ui/xi-menus.glade.h:97
 msgid "_Search"
@@ -3563,19 +3573,19 @@ msgstr "جستجو"
 
 #: ../ui/xi-menus.glade.h:98
 msgid "_Show/Hide Sidebar"
-msgstr "آشکار/مخفی کردن قفسه جانبی"
+msgstr "آشکار/مخفی کردن ستون جانبی"
 
 #: ../ui/xi-menus.glade.h:99
 msgid "_Verse Per Line"
-msgstr "لیست آیات"
+msgstr "یک آیه در هر خط"
 
 #: ../xiphos.desktop.in.in.h:1
 msgid "Study the Bible"
-msgstr "کتابمقدس چه می‌گوید؟"
+msgstr "کتاب‏مقدس چه می‌گوید؟"
 
 #: ../xiphos.desktop.in.in.h:2
 msgid "Xiphos Bible Guide"
-msgstr "زیفوس-نرم·افزار·مطالعه·کتابمقدس"
+msgstr "راهنمای کتاب‏مقدس زیفوس"
 
 #~ msgid "Move backwards through history"
 #~ msgstr "در سابقه به عقب برو"
