@@ -45,15 +45,18 @@
 #include "main/sword.h"
 #include "main/url.hh"
 
-#ifdef USE_GTKMOZEMBED
 #ifdef WIN32
-#include "geckowin/gecko-html.h"
 #undef DATADIR
 #include <windows.h>
 #include <shellapi.h>
+#endif /* WIN32 */
+
+#ifdef USE_GTKMOZEMBED
+#ifdef WIN32
+#include "geckowin/gecko-html.h"
 #else
 #include "gecko/gecko-html.h"
-#endif
+#endif /* WIN32 */
 #else
 #include <gtkhtml/gtkhtml.h>
 #include <gtkhtml/htmltypes.h>
