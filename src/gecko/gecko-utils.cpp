@@ -39,7 +39,9 @@
 #endif
 
 #ifdef HAVE_GECKO_1_9
+#ifdef XPCOM_GLUE
 #include <gtkmozembed_glue.cpp>
+#endif
 #endif
 
 #include <gtkmozembed.h>
