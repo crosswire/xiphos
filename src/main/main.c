@@ -73,6 +73,7 @@ int main(int argc, char *argv[])
 	gint base_step = 0; //needed for splash
 	
 	g_thread_init(NULL);
+	g_type_init();
 
 #ifdef WIN32
 	/*
