@@ -260,7 +260,7 @@ struct _settings {
 
 extern SETTINGS settings;
 
-int settings_init(int new_configs, int new_bookmarks);
+int settings_init(int argc, char **argv, int new_configs, int new_bookmarks);
 void load_settings_structure(void);
 
 #ifdef __cplusplus

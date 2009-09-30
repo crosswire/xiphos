@@ -1,3 +1,9 @@
+2009-09-30  karl <charcoal@users.sf.net>
+
+	* add gui_init() calls to settings_init() to ensure that gnome/gtk
+	  are ready if we should need any dialogs.
+	* add static status variable to gui_init() so it happens just once.
+
 2009-09-21  matthew<ransom1982@users.sourceforge.net>
 
 	* change Windows to use ShellExecuteW instead of gnome_show_url

@@ -147,7 +147,7 @@ int main(int argc, char *argv[])
 	/* 
 	 * check for directories and files
 	 */   
-    	settings_init(newconfigs,newbookmarks);
+    	settings_init(argc, argv, newconfigs, newbookmarks);
 
 	gui_init(argc, argv);
 	
