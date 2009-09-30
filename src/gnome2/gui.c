@@ -37,6 +37,11 @@
 
 void gui_init(int argc, char *argv[])
 {
+	static int gui_init_done = FALSE;
+
+	if (gui_init_done) return;
+	gui_init_done = TRUE;
+
 #ifdef ENABLE_NLS
 	bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
