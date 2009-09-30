@@ -88,7 +88,7 @@ static int init_bookmarks(int new_bookmarks);
  *   gint
  */
 
-int settings_init(int new_configs, int new_bookmarks)
+int settings_init(int argc, char **argv, int new_configs, int new_bookmarks)
 {
 	int retval = 0;
 	char *sword_dir = NULL;
@@ -101,6 +101,7 @@ int settings_init(int new_configs, int new_bookmarks)
 
 	/* Get home dir */
 	if ((settings.homedir = (char*) g_getenv(HOMEVAR)) == NULL) {
+		gui_init(argc, argv);
 		gui_generic_warning(_("$HOME is not set!"));
 		/* if not found in env exit */
 		exit(0);
@@ -115,6 +116,7 @@ int settings_init(int new_configs, int new_bookmarks)
 	if (access(settings.gSwordDir, F_OK) == -1) {
 		if ((Mkdir(settings.gSwordDir, S_IRWXU)) != 0) {
 			char msg[300];
+			gui_init(argc, argv);
 			sprintf(msg, _("Xiphos can not create  .xiphos:\n%s\n\nXiphos cannot continue."),
 				strerror(errno));
 			gui_generic_warning(msg);
@@ -127,6 +129,7 @@ int settings_init(int new_configs, int new_bookmarks)
 	sword_dir = g_strdup_printf("%s/%s", settings.homedir, DOTSWORD);
 	if (access(sword_dir, F_OK) == -1) {
 		if ((Mkdir(sword_dir, S_IRWXU)) != 0) {
+			gui_init(argc, argv);
 			gui_generic_warning(_("can not create " DOTSWORD));
 		} 
 	}
@@ -135,6 +138,7 @@ int settings_init(int new_configs, int new_bookmarks)
 	sword_dir = g_strdup_printf("%s/%s", settings.homedir, DOTSWORD "/mods.d");
 	if (access(sword_dir, F_OK) == -1) {
 		if ((Mkdir(sword_dir, S_IRWXU)) != 0) {
+			gui_init(argc, argv);
 			gui_generic_warning(_("can not create " DOTSWORD "/mods.d"));
 		} 
 	}	
@@ -143,6 +147,7 @@ int settings_init(int new_configs, int new_bookmarks)
 	sword_dir = g_strdup_printf("%s/%s", settings.homedir, DOTSWORD "/modules");
 	if (access(sword_dir, F_OK) == -1) {
 		if ((Mkdir(sword_dir, S_IRWXU)) != 0) {
+			gui_init(argc, argv);
 			gui_generic_warning(_("can not create " DOTSWORD "/modules"));
 		} 
 	}
@@ -179,6 +184,7 @@ int settings_init(int new_configs, int new_bookmarks)
 
 	/* ensure that the user has a bible with which to work */
 	if (settings.havebible == 0) {
+		gui_init(argc, argv);
 		if (gui_yes_no_dialog(GS_NET_PERMISSION, NULL)) {
 			main_shutdown_list();
 			gui_open_mod_mgr_initial_run();
@@ -233,9 +239,10 @@ int settings_init(int new_configs, int new_bookmarks)
 			sprintf(lfix, "%s.UTF-8", settings.special_locale); //for Ubuntu
 			test = setlocale(LC_ALL, lfix);
 		}
-		if (test != NULL)
+		if (test != NULL) {
 			g_setenv("LC_ALL", test, TRUE);
 			GS_message(("set locale to %s", settings.special_locale));
+		}
 	}
 
 	/* find out what kind of peculiar language environment we have */
