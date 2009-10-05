@@ -707,7 +707,10 @@ void gui_html_print(GtkWidget * htmlwidget, gboolean preview, const gchar * mod_
 	
 		
 	gtk_print_operation_set_default_page_setup(operation, setup);
-	
+#if GTK_CHECK_VERSION(2, 18, 0)
+	gtk_print_operation_set_embed_page_setup(operation, TRUE);
+#endif
+
 	result = gtk_html_print_operation_run (GTK_HTML(htmlwidget), 
 					       operation, 
 					       action,
