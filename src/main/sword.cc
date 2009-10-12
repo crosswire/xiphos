@@ -75,6 +75,10 @@ extern "C" {
 
 #include "gui/debug_glib_null.h"
 
+#ifdef HAVE_DBUS
+#include "gui/ipc.h"
+#endif
+
 using namespace sword; 
 	
 #define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
@@ -303,6 +307,11 @@ gchar *main_update_nav_controls(const gchar * key)
 	main_navbar_versekey_set(navbar_versekey, val_key);
 	
 	settings.apply_change = TRUE;
+
+#ifdef HAVE_DBUS
+	IpcObject* ipc = ipc_get_main_ipc();
+	ipc_object_navigation_signal (ipc, (const gchar*)val_key, NULL);
+#endif
 	return val_key;
 }
 
