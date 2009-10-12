@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include "gui/ipc.h"
 
+G_DEFINE_TYPE(IpcObject, ipc_object, G_TYPE_OBJECT)
+
 gboolean ipc_object_navigate(IpcObject* obj, 
 			     gchar* reference,
 			     GError** error);

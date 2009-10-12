@@ -28,19 +28,20 @@ typedef enum {
 	LAST_SIGNAL
 } IpcSignalNumber;
 
-typedef struct {
+typedef struct _IpcObject IpcObject;
+typedef struct _IpcObjectClass IpcObjectClass;
+
+struct _IpcObject {
 	GObject parent;
 	GList *references;
-} IpcObject;
+};
 
-typedef struct {
+struct _IpcObjectClass {
 	GObjectClass parent;
 	guint signals[LAST_SIGNAL];
-} IpcObjectClass;
+};
 
 GType ipc_object_get_type(void);
-
-G_DEFINE_TYPE(IpcObject, ipc_object, G_TYPE_OBJECT)
 
 gboolean ipc_object_search_performed (IpcObject* obj, 
 				      const gchar* reference,
