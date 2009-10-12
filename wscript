@@ -143,6 +143,12 @@ def set_options(opt):
 		help = "Folder 'dist' in unpacked mozilla devel tarball. Mandatory for win32 compilation",
 		dest = 'mozilla_distdir')
 
+    opt.add_option('--with-dbus',
+                   action = 'store',
+                   default = True,
+                   help = "Enable the Xiphos dbus API",
+                   dest = 'with_dbus')
+
 
     group = opt.add_option_group ('Localization and documentation', '')
     group.add_option('--helpdir',
@@ -297,7 +303,9 @@ def configure(conf):
     else:
         env['STRIP'] = conf.find_program('strip', mandatory=True)
 
-
+    if opt.with_dbus:
+        check_pkg(conf, 'dbus-glib-1', '0.60', True, var='ENABLE_DBUS')
+        conf.check_tool('dbus')
 
 
     ### App info, paths
