@@ -6,15 +6,25 @@
 <node>
   <interface name="org.xiphos.remote">
 
-    <method name="navigate">
+    <method name="setCurrentReference">
       <arg type="s" name="reference" direction="in" />
     </method>
 
-    <method name="getNextReference">
+    <method name="getCurrentReference">
       <arg type="s" name="reference" direction="out" />
     </method>
 
-    <signal name="searchPerformed">
+    <method name="getNextSearchReference">
+      <arg type="s" name="reference" direction="out" />
+    </method>
+
+    <signal name="searchPerformedSignal">
+      <arg type="s" name="reference" direction="out" />
+      <arg type="i" name="hits" direction="out" />
+    </signal>
+
+    <signal name="navigationSignal">
+      <arg type="s" name="reference" direction="out" />
     </signal>
   </interface>
 </node>
