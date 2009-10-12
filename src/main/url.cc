@@ -1010,7 +1010,10 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 		}
 
 		else if (!strcmp(action, "showImage")) {
-			show_separate_image(svalue+5, clicked);	// skip "file:"
+			show_separate_image((!strncmp(svalue, "file:", 5)
+					     ? svalue+5
+					     : svalue),
+					    clicked);
 		}
 
 		if (action) g_free(action);
