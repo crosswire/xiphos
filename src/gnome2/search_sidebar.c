@@ -31,6 +31,7 @@
 //#include "gui/html.h"
 #include "gui/xiphos.h"
 #include "gui/widgets.h"
+#include "gui/ipc.h"
 
 #include "main/search_dialog.h"
 #include "main/search_sidebar.h"
@@ -46,12 +47,12 @@ GtkWidget *remember_search;	/* needed to change button in search stop */
 
 /******************************************************************************
  * Name
- *    on_search_botton_clicked
+ *    on_search_button_clicked
  *
  * Synopsis
  *   #include "shortcutbar_search.h"
  *
- *   void on_search_botton_clicked(GtkButton * button, gpointer user_data)
+ *   void on_search_button_clicked(GtkButton * button, gpointer user_data)
  *
  * Description
  *   prepare to begin search
@@ -60,8 +61,9 @@ GtkWidget *remember_search;	/* needed to change button in search stop */
  *   void
  */
 
-static void on_search_botton_clicked(GtkButton * button, gpointer user_data)
+static void on_search_button_clicked(GtkButton * button, gpointer user_data)
 {
+	IpcObject *obj;
 	if (search_active) {
 		terminate_search = TRUE;
 		const gchar *label;
@@ -79,6 +81,8 @@ static void on_search_botton_clicked(GtkButton * button, gpointer user_data)
 		label = g_strdup("gtk-find");
 		gtk_button_set_label((GtkButton *)remember_search, label);
 		gtk_button_set_use_stock((GtkButton *)remember_search, TRUE);
+		obj = ipc_get_main_ipc();
+		ipc_object_search_performed(obj, settings.searchText, NULL);
 	}
 }
  
@@ -414,10 +418,10 @@ void gui_create_search_sidebar(void)
 			 G_CALLBACK(on_rrbUseBounds_toggled),
 			 NULL);
 	g_signal_connect(GTK_OBJECT(remember_search), "clicked",
-			 G_CALLBACK(on_search_botton_clicked), NULL);
+			 G_CALLBACK(on_search_button_clicked), NULL);
 			   
 	g_signal_connect(GTK_OBJECT(ss.entrySearch), "activate",
-			 G_CALLBACK(on_search_botton_clicked), NULL);
+			 G_CALLBACK(on_search_button_clicked), NULL);
 			   
 			   
 	gtk_object_set_data(GTK_OBJECT(widgets.app), "tooltips",

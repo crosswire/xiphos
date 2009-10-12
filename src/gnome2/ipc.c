@@ -15,6 +15,8 @@ gboolean ipc_object_get_next_reference(IpcObject* obj,
 #include "ipc-server-stub.h"
 #include "main/url.hh"
 
+static IpcObject *main_ipc_obj;
+
 static void ipc_object_init(IpcObject* obj) {
 	g_assert(obj != NULL);
 	obj->references = NULL;
@@ -42,7 +44,9 @@ gboolean ipc_object_search_performed(IpcObject* obj,
 					const gchar* reference,
 					GError **error)
  {
-	IpcObjectClass* klass = IPC_OBJECT_GET_CLASS(obj);
+	 g_print ("search performed signal");
+	 
+	 IpcObjectClass* klass = IPC_OBJECT_GET_CLASS(obj);
 
 	g_signal_emit(obj,
 		      klass->signals[SEARCH_PERFORMED],
@@ -124,8 +128,14 @@ IpcObject* ipc_init_dbus_connection(IpcObject* obj)
 					    "/org/xiphos/remote/ipc",
 					    G_OBJECT(obj));
 
+	main_ipc_obj = obj;
+	
 	return obj;
 }
-	
+
+IpcObject* ipc_get_main_ipc()
+{
+	return main_ipc_obj;
+}
 
 	
