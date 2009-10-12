@@ -70,7 +70,7 @@ marshal.h:
 	$< > $@
 
 ipc-interface.h:
-	dbus-binding-tool --prefix=ipc_object --mode=glib-server dbus-interface.xml \
+	dbus-binding-tool --prefix=ipc_object --mode=glib-server ipc-interface.xml \
 	$< > $@
 
 xiphos_CPPFLAGS =  \
