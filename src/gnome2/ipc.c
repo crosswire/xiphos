@@ -5,14 +5,18 @@
 
 G_DEFINE_TYPE(IpcObject, ipc_object, G_TYPE_OBJECT)
 
-gboolean ipc_object_navigate(IpcObject* obj, 
-			     gchar* reference,
-			     GError** error);
-gboolean ipc_object_get_next_reference(IpcObject* obj, 
+
+gboolean ipc_object_set_current_reference(IpcObject* obj,
+					  gchar* reference,
+					  GError** error);
+gboolean ipc_object_get_current_reference(IpcObject* obj,
+					  gchar* reference,
+					  GError** error);
+gboolean ipc_object_get_next_search_reference(IpcObject* obj, 
 				       gchar* reference,
 				       GError** error);
 
-#include "ipc-server-stub.h"
+#include "ipc-interface.h"
 #include "main/url.hh"
 
 static IpcObject *main_ipc_obj;
@@ -31,6 +35,17 @@ static void ipc_object_class_init(IpcObjectClass* klass) {
 			      0,
 			      NULL,
 			      NULL,
+			      ipc_marshal_VOID__STRING_INT,
+			      G_TYPE_NONE,
+			      1,
+			      G_TYPE_STRING);
+	klass->signals[NAVIGATION] =
+		g_signal_new ("navigation",
+			      G_OBJECT_CLASS_TYPE(klass),
+			      G_SIGNAL_RUN_LAST,
+			      0,
+			      NULL,
+			      NULL,
 			      g_cclosure_marshal_VOID__STRING,
 			      G_TYPE_NONE,
 			      1,
@@ -41,23 +56,38 @@ static void ipc_object_class_init(IpcObjectClass* klass) {
 }
 
 gboolean ipc_object_search_performed(IpcObject* obj,
-					const gchar* reference,
-					GError **error)
+				     const gchar* search_term,
+				     const int* hits,
+				     GError **error)
  {
 	 g_print ("search performed signal");
 	 
 	 IpcObjectClass* klass = IPC_OBJECT_GET_CLASS(obj);
 
-	g_signal_emit(obj,
-		      klass->signals[SEARCH_PERFORMED],
-		      0,
-		      reference);
+	 g_signal_emit(obj,
+		       klass->signals[SEARCH_PERFORMED],
+		       0,
+		       search_term, hits);
 	return TRUE;
 }
 
+gboolean ipc_object_navigation_signal (IpcObject* obj,
+					const gchar* reference,
+					GError** error)
+{
+	g_print ("navigation performed signal");
 
-gboolean ipc_object_get_next_reference(IpcObject* obj, gchar* reference,
-				       GError** error) 
+	IpcObjectClass* klass = IPC_OBJECT_GET_CLASS(obj);
+
+	g_signal_emit(obj,
+		      klass->signals[NAVIGATION],
+		      0,
+		      reference);
+}
+
+gboolean ipc_object_get_next_search_reference(IpcObject* obj, 
+				       gchar* reference,
+				       GError** error)
 {
 	obj->references = g_list_next(obj->references);
 	if (obj->references)
@@ -68,8 +98,9 @@ gboolean ipc_object_get_next_reference(IpcObject* obj, gchar* reference,
 	return TRUE;
 }
 
-gboolean ipc_object_navigate(IpcObject* obj, gchar* reference,
-			     GError** error)
+gboolean ipc_object_set_current_reference(IpcObject* obj,
+					  gchar* reference,
+					  GError** error)
 {
 	//easy route
 	main_url_handler((const gchar*)reference, TRUE);
@@ -80,7 +111,14 @@ gboolean ipc_object_navigate(IpcObject* obj, gchar* reference,
 
 	return TRUE;
 }
-		
+
+gboolean ipc_object_get_current_reference(IpcObject* obj,
+					  gchar* reference,
+					  GError** error)
+{
+	return TRUE;
+}
+
 IpcObject* ipc_init_dbus_connection(IpcObject* obj)
 {
 	DBusGConnection* bus = NULL;
