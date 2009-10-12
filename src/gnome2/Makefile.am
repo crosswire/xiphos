@@ -27,6 +27,7 @@ xiphos_SOURCES =  \
     gbs_dialog.c \
     gui.c \
     html.c \
+    ipc.c \
     locale_set.c \
     main_menu.c \
     main_window.c \
@@ -74,14 +75,17 @@ xiphos_CFLAGS = \
 	$(XIPHOS_CFLAGS) \
 	$(GECKO_CFLAGS) \
 	$(GECKO_COMPONENT_CFLAGS) \
-	$(WARN_CFLAGS)
+	$(WARN_CFLAGS) \
+	$(DBUS_CFLAGS) \
+	$(DBUS_GLIB_CFLAGS)
 
 xiphos_CXXFLAGS = \
 	-I$(top_srcdir)/src \
 	$(GECKO_CFLAGS) \
 	$(GECKO_COMPONENT_CFLAGS) \
 	$(XIPHOS_CFLAGS) \
-	$(WARN_CXXFLAGS)
+	$(WARN_CXXFLAGS) \
+	$(DBUS_CXXFLAGS)
 
 if HAVE_GECKO
 LIB_GECKO=$(top_builddir)/src/gecko/libgecko.a
@@ -106,7 +110,8 @@ xiphos_LDADD = \
 	$(XIPHOS_LIBS) \
 	$(GNOME_SPELL_LIBS) \
 	$(GECKO_COMPONENT_LIBS) \
-	$(GECKO_LIBS)
+	$(GECKO_LIBS) \
+	$(DBUS_LIBS)
 
 EXTRA_DIST = \
     $(top_builddir)/src/gui/*.h \
