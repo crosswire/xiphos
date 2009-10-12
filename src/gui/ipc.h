@@ -76,7 +76,7 @@ gboolean ipc_object_navigation_signal (IpcObject* obj,
 				       GError** error);
 
 IpcObject* ipc_init_dbus_connection(IpcObject* obj);
-IpcObject* ipc_get_main_ipc();
+IpcObject* ipc_get_main_ipc(void);
 
 G_END_DECLS
 
