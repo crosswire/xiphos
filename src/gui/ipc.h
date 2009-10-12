@@ -35,6 +35,7 @@ typedef struct _IpcObjectClass IpcObjectClass;
 struct _IpcObject {
 	GObject parent;
 	GList *references;
+	gchar *current_ref;
 };
 
 struct _IpcObjectClass {
