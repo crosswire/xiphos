@@ -717,7 +717,6 @@ static gint show_in_previewer(const gchar * url)
 	gchar *mybuf = NULL;
 
 	work_buf = g_strsplit (url,"/",4);
-	//GS_message(("work_buf :%s, %s",work_buf[MODULE],work_buf[KEY]));	
 	
 	mybuf = main_get_rendered_text(work_buf[MODULE], work_buf[KEY]);
 	
@@ -804,7 +803,9 @@ gint sword_uri(const gchar * url, gboolean clicked)
 	} else
 		tmpkey = work_buf[KEY];
 	
-	GS_message(("work_buf: %s, %s",work_buf[MODULE],work_buf[KEY]));
+	GS_message(("work_buf: %s, %s",
+		    work_buf[MODULE],
+		    (work_buf[KEY] ? work_buf[KEY] : "-null-")));
 	
 	verse_count = 1; //backend->is_Bible_key(mykey, settings.currentverse);
 	if(backend->is_module(work_buf[MODULE])) {
