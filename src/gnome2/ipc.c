@@ -25,6 +25,7 @@ static IpcObject *main_ipc_obj;
 static void ipc_object_init(IpcObject* obj) {
 	g_assert(obj != NULL);
 	obj->references = NULL;
+	obj->current_ref = NULL;
 }
 
 static void ipc_object_class_init(IpcObjectClass* klass) {
@@ -69,13 +70,14 @@ gboolean ipc_object_search_performed(IpcObject* obj,
 		       klass->signals[SEARCH_PERFORMED],
 		       0,
 		       search_term, hits);
-	return TRUE;
+	return FALSE;
 }
 
 gboolean ipc_object_navigation_signal (IpcObject* obj,
 					const gchar* reference,
 					GError** error)
 {
+	obj->current_ref = reference;
 	g_print ("navigation performed signal");
 
 	IpcObjectClass* klass = IPC_OBJECT_GET_CLASS(obj);
@@ -84,6 +86,7 @@ gboolean ipc_object_navigation_signal (IpcObject* obj,
 		      klass->signals[NAVIGATION],
 		      0,
 		      reference);
+	return FALSE;
 }
 
 gboolean ipc_object_get_next_search_reference(IpcObject* obj, 
@@ -117,6 +120,7 @@ gboolean ipc_object_get_current_reference(IpcObject* obj,
 					  gchar* reference,
 					  GError** error)
 {
+	reference = obj->current_ref;
 	return TRUE;
 }
 
