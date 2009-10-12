@@ -278,8 +278,8 @@ void main_do_sidebar_search(gpointer user_data)
 
 #ifdef HAVE_DBUS
 	IpcObject *obj = ipc_get_main_ipc();
-	ipc_object_search_performed(obj, settings.searchText, &finds, NULL);
 	obj->references = get_list_of_references();
+	ipc_object_search_performed(obj, settings.searchText, &finds, NULL);	
 #endif
 	
 }
