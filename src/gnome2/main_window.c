@@ -74,7 +74,6 @@
 #endif /* !USE_GTKHTML3_14_23 */
 
 #include "gui/debug_glib_null.h"
-#include "gui/ipc.h"
 
 WIDGETS widgets;
 

@@ -34,9 +34,11 @@
 #include "gui/gui.h"
 #include "gui/session.h"
 #include "gui/dialog.h"
-#include "gui/ipc.h"
 
+#ifdef HAVE_DBUS
+#include "gui/ipc.h"
 static IpcObject* ipc;
+#endif
 
 void gui_init(int argc, char *argv[])
 {
@@ -66,6 +68,8 @@ void gui_init(int argc, char *argv[])
 #ifndef WIN32
 	gs_session_init(argv[0]);
 	gconf_setup();
+#endif
+#ifdef HAVE_DBUS
 	ipc = ipc_init_dbus_connection(ipc);
 #endif
 }
