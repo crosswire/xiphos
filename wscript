@@ -305,7 +305,7 @@ def configure(conf):
 
     if opt.with_dbus:
         check_pkg(conf, 'dbus-glib-1', '0.60', True, var='ENABLE_DBUS')
-        conf.check_tool('dbus')
+        conf.check_tool('dbus glib2')
 
 
     ### App info, paths
