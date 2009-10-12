@@ -310,7 +310,8 @@ gchar *main_update_nav_controls(const gchar * key)
 
 #ifdef HAVE_DBUS
 	IpcObject* ipc = ipc_get_main_ipc();
-	ipc_object_navigation_signal (ipc, (const gchar*)val_key, NULL);
+	if (ipc)
+		ipc_object_navigation_signal (ipc, (const gchar*)val_key, NULL);
 #endif
 	return val_key;
 }
