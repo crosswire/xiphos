@@ -54,6 +54,10 @@ extern "C" {
 
 #include "gui/debug_glib_null.h"
 
+#ifdef HAVE_DBUS
+#include "gui/ipc.h"
+#endif
+
 #define SEARCHING N_("Searching the ")
 #define SMODULE N_(" Module")
 #define FINDS N_("found in ")		
@@ -150,6 +154,20 @@ static void fill_search_results_list(int finds)
 	gui_verselist_button_release_event(NULL,NULL,NULL);
 }
 
+#ifdef HAVE_DBUS
+GList* get_list_of_references()
+{
+	RESULTS* list_item;
+	GList *tmp = list_of_verses;
+	GList *references = NULL;
+	while (tmp) {
+		list_item = (RESULTS*)tmp->data;
+		references = g_list_append(references, list_item->key);
+		tmp = g_list_next(tmp);
+	}
+	return g_list_first(references);
+}	
+#endif
 
 /******************************************************************************
  * Name
@@ -257,6 +275,13 @@ void main_do_sidebar_search(gpointer user_data)
 	search_active = FALSE;
 
 	fill_search_results_list(finds);
+
+#ifdef HAVE_DBUS
+	IpcObject *obj = ipc_get_main_ipc();
+	ipc_object_search_performed(obj, settings.searchText, &finds, NULL);
+	obj->references = get_list_of_references();
+#endif
+	
 }
 
 void main_sidebar_perscomm_dump(void)
