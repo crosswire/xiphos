@@ -2,6 +2,7 @@
 #include <dbus/dbus-glib.h>
 #include <stdlib.h>
 #include "gui/ipc.h"
+#include "marshal.h"
 
 G_DEFINE_TYPE(IpcObject, ipc_object, G_TYPE_OBJECT)
 
