@@ -1,53 +1,17 @@
 #include <glib.h>
 #include <dbus/dbus-glib.h>
 #include <stdlib.h>
+#include "gui/ipc.h"
 
-
-typedef enum {
-	SEARCH_PERFORMED,
-	LAST_SIGNAL
-} IpcSignalNumber;
-
-typedef struct {
-	GObject parent;
-	GList *references;
-} IpcObject;
-
-typedef struct {
-	GObjectClass parent;
-	guint signals[LAST_SIGNAL];
-} IpcObjectClass;
-
-GType ipc_object_get_type(void);
-
-#define IPC_TYPE_OBJECT             (ipc_object_get_type())
-#define IPC_OBJECT(object) \
-	(G_TYPE_CHECK_INSTANCE_CAST ((object), \
-	 IPC_TYPE_OBJECT, IpcObject))
-#define IPC_OBJECT_CLASS(klass) \
-	(G_TYPE_CHECK_CLASS_CAST ((klass), \
-	 IPC_TYPE_OBJECT, IpcObjectClass))
-#define IPC_IS_OBJECT(klass) \
-	(G_TYPE_CHECK_CLASS_TYPE ((klass), \
-	 IPC_TYPE_OBJECT))
-#define IPC_IS_OBJECT_CLASS(klass) \
-	(G_TYPE_CHECK_CLASS_TYPE ((klass), \
-	 IPC_TYPE_OBJECT))
-#define IPC_OBJECT_GET_CLASS(obj) \
-	(G_TYPE_INSTANCE_GET_CLASS ((obj), \
-	 IPC_TYPE_OBJECT, IpcObjectClass))
-
-G_DEFINE_TYPE(IpcObject, ipc_object, G_TYPE_OBJECT)
-
-gboolean ipc_object_search_performed (IpcObject* obj, char* reference,
-				      GError** error);
-
-gboolean ipc_object_navigate(IpcObject* obj, gchar* reference,
+gboolean ipc_object_navigate(IpcObject* obj, 
+			     gchar* reference,
 			     GError** error);
-gboolean ipc_object_get_next_reference(IpcObject* obj, gchar* reference,
+gboolean ipc_object_get_next_reference(IpcObject* obj, 
+				       gchar* reference,
 				       GError** error);
 
 #include "ipc-server-stub.h"
+#include "main/url.hh"
 
 static void ipc_object_init(IpcObject* obj) {
 	g_assert(obj != NULL);
@@ -72,16 +36,17 @@ static void ipc_object_class_init(IpcObjectClass* klass) {
 					&dbus_glib_ipc_object_object_info);
 }
 
-static void ipc_object_search_performed(IpcObject* obj,
+gboolean ipc_object_search_performed(IpcObject* obj,
 					const gchar* reference,
 					GError **error)
  {
-	IpcObjectClass* klass = IPC_OBJECT_GET_KLASS(obj);
+	IpcObjectClass* klass = IPC_OBJECT_GET_CLASS(obj);
 
 	g_signal_emit(obj,
 		      klass->signals[SEARCH_PERFORMED],
 		      0,
 		      reference);
+	return TRUE;
 }
 
 
@@ -89,10 +54,12 @@ gboolean ipc_object_get_next_reference(IpcObject* obj, gchar* reference,
 				       GError** error) 
 {
 	obj->references = g_list_next(obj->references);
-	if (references)
-		reference = (gchar*)references->data;
+	if (obj->references)
+		reference = (gchar*)obj->references->data;
 	else
 		reference = NULL;
+
+	return TRUE;
 }
 
 gboolean ipc_object_navigate(IpcObject* obj, gchar* reference,
@@ -104,9 +71,11 @@ gboolean ipc_object_navigate(IpcObject* obj, gchar* reference,
 	/* g_signal_emit(obj,
 		      "navigate-requested",
 		      reference); */
+
+	return TRUE;
 }
 		
-gboolean ipc_init_dbus_connection(IpcObject* ob)
+IpcObject* ipc_init_dbus_connection(IpcObject* obj)
 {
 	DBusGConnection* bus = NULL;
 	DBusGProxy* busProxy = NULL;
@@ -126,7 +95,7 @@ gboolean ipc_init_dbus_connection(IpcObject* ob)
 					     "/org/freedesktop/DBus",
 					     "org.freedesktop.DBus");
 	if (busProxy == NULL)
-		return FALSE;
+		return NULL;
 
 	if (!dbus_g_proxy_call(busProxy,
 			       "RequestName",
@@ -139,13 +108,13 @@ gboolean ipc_init_dbus_connection(IpcObject* ob)
 			       G_TYPE_UINT,
 			       &result,
 			       G_TYPE_INVALID)) {
-		return FALSE;
+		return NULL;
 	}
 
 	g_print("RequestName returned %d.\n", result);
 					     
 	if (result != 1)
-		return FALSE;
+		return NULL;
 	
 	obj = g_object_new(IPC_TYPE_OBJECT, NULL);
 
@@ -153,7 +122,7 @@ gboolean ipc_init_dbus_connection(IpcObject* ob)
 					    "/org/xiphos/remote/ipc",
 					    G_OBJECT(obj));
 
-	return TRUE;
+	return obj;
 }
 	
 
