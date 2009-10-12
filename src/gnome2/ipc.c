@@ -29,7 +29,7 @@ static void ipc_object_init(IpcObject* obj) {
 static void ipc_object_class_init(IpcObjectClass* klass) {
 
 	klass->signals[SEARCH_PERFORMED] = 
-		g_signal_new ("search_performed",
+		g_signal_new ("search_performed_signal",
 			      G_OBJECT_CLASS_TYPE(klass),
 			      G_SIGNAL_RUN_LAST,
 			      0,
@@ -40,7 +40,7 @@ static void ipc_object_class_init(IpcObjectClass* klass) {
 			      1,
 			      G_TYPE_STRING);
 	klass->signals[NAVIGATION] =
-		g_signal_new ("navigation",
+		g_signal_new ("navigation_signal",
 			      G_OBJECT_CLASS_TYPE(klass),
 			      G_SIGNAL_RUN_LAST,
 			      0,
