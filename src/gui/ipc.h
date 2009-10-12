@@ -3,7 +3,6 @@
 
 #include <glib.h>
 #include <dbus/dbus-glib.h>
-#include "marshal.h"
 
 G_BEGIN_DECLS
 
