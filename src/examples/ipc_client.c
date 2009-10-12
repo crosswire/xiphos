@@ -1,13 +1,51 @@
 #include <dbus/dbus-glib.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
+#include "ipc-client-stub.h"
+#include "marshal.h"
+
+//this function will be called every time the user does a sidebar search
 static gboolean
 search_performed_signal_handler (DBusGProxy *proxy,
-				 const char *search_term,
+				 char* results,
 				 gpointer user_data)
 {
-	printf ("Search was for %s\n", search_term);
+	char *ref;
+
+	printf ("number hits: %s\n", results);
+
+	//method generated automatically in ipc-client-stub.h
+	//this method can be called anywhere in your program
+	org_xiphos_remote_get_next_search_reference(proxy, &ref, NULL);
+
+	while (strcmp (ref, "END")) {
+		printf ("ref: %s\n", ref);
+		org_xiphos_remote_get_next_search_reference(proxy, &ref, NULL);
+	}
+	
+	return FALSE;
+}
+
+//this function will be called every time Xiphos navigates
+static gboolean
+navigation_performed_signal_handler (DBusGProxy *proxy,
+				     char* reference,
+				     gpointer user_data)
+{
+	printf ("new reference is: %s\n", reference);
+	printf ("now calling remote method just to be sure\n");
+
+	char *ref;
+
+	//method generated automatically in ipc-client-stub.h
+	//can be called anywhere in your program
+	org_xiphos_remote_get_current_reference(proxy, &ref, NULL);
+
+	//of course, this doesn't actually *check* to see if they're the same :)
+	printf ("yep! Xiphos says the new reference is %s\n", ref);
+
 	return FALSE;
 }
 
@@ -18,23 +56,34 @@ int main (int argc, char **argv)
 	GError *error = NULL;
 	GMainLoop *mainloop;
 
+	//not necessary if using from a gtk/gnome program
 	g_type_init ();
 
 	mainloop = g_main_loop_new (NULL, FALSE);
 
+	//get the "session" dbus
 	bus = dbus_g_bus_get (DBUS_BUS_SESSION, &error);
 
+	//conect to xiphos
 	remote_object = dbus_g_proxy_new_for_name (bus,
 						   "org.xiphos.remote",
 						   "/org/xiphos/remote/ipc",
 						   "org.xiphos.remote");
 
-	dbus_g_proxy_add_signal (remote_object, "searchPerformed",
+	//add and connect to the searchPerformedSignal
+	dbus_g_proxy_add_signal (remote_object, "searchPerformedSignal",
 				 G_TYPE_STRING, G_TYPE_INVALID);
-
-	dbus_g_proxy_connect_signal (remote_object, "searchPerformed",
+	dbus_g_proxy_connect_signal (remote_object, "searchPerformedSignal",
 				     G_CALLBACK(search_performed_signal_handler),
 				     NULL, NULL);
+	
+	//add and connect to the navigationSignal
+	dbus_g_proxy_add_signal (remote_object, "navigationSignal",
+				 G_TYPE_STRING, G_TYPE_INVALID);
+	dbus_g_proxy_connect_signal (remote_object, "navigationSignal",
+				     G_CALLBACK(navigation_performed_signal_handler),
+				     NULL, NULL);
+	
 	g_main_loop_run (mainloop);
 
 	exit (0);
