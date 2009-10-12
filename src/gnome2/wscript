@@ -102,14 +102,14 @@ def build(bld):
         install_path= '${BINDIR}',
     )
 
-    if env['DBUS']:
+    # DBUS generate binding and marshallers
+    if env['HAVE_DBUS']:
         lib.add_dbus_file('ipc-interface.xml', 'ipc_object', 'glib-server')
         lib.add_marshal_file('marshal.list', 'ipc_marshal')
         lib.find_sources_in_dirs('.')
     else:
         lib.find_sources_in_dirs('.', excludes=['ipc.c',])
-        print 'dbus disabled'
-
+  
     # notification about project name change
     if not env['IS_WIN32']:
         is_executable = 0755
