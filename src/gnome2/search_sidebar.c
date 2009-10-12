@@ -31,7 +31,10 @@
 //#include "gui/html.h"
 #include "gui/xiphos.h"
 #include "gui/widgets.h"
+
+#ifdef HAVE_DBUS
 #include "gui/ipc.h"
+#endif
 
 #include "main/search_dialog.h"
 #include "main/search_sidebar.h"
@@ -63,7 +66,9 @@ GtkWidget *remember_search;	/* needed to change button in search stop */
 
 static void on_search_button_clicked(GtkButton * button, gpointer user_data)
 {
+#ifdef HAVE_DBUS
 	IpcObject *obj;
+#endif
 	if (search_active) {
 		terminate_search = TRUE;
 		const gchar *label;
@@ -81,8 +86,10 @@ static void on_search_button_clicked(GtkButton * button, gpointer user_data)
 		label = g_strdup("gtk-find");
 		gtk_button_set_label((GtkButton *)remember_search, label);
 		gtk_button_set_use_stock((GtkButton *)remember_search, TRUE);
+#ifdef HAVE_DEBUS		
 		obj = ipc_get_main_ipc();
 		ipc_object_search_performed(obj, settings.searchText, 50,  NULL);
+#endif
 	}
 }
  

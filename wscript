@@ -98,7 +98,7 @@ def set_options(opt):
     opt.add_option('--disable-console',
             action='store_true',
             default=False,
-            help='Disable console window in win32 [Defauld: enabled]',
+            help='Disable console window in win32 [Default: enabled]',
             dest='no_console')
 
     opt.add_option('-d', '--debug-level',
@@ -143,11 +143,11 @@ def set_options(opt):
 		help = "Folder 'dist' in unpacked mozilla devel tarball. Mandatory for win32 compilation",
 		dest = 'mozilla_distdir')
 
-    opt.add_option('--with-dbus',
-                   action = 'store',
-                   default = True,
-                   help = "Enable the Xiphos dbus API",
-                   dest = 'with_dbus')
+    opt.add_option('--disable-dbus',
+                   action = 'store_true',
+                   default = False,
+                   help = "Disable the Xiphos dbus API [Default: enabled]",
+                   dest = 'without_dbus')
 
 
     group = opt.add_option_group ('Localization and documentation', '')
@@ -303,8 +303,8 @@ def configure(conf):
     else:
         env['STRIP'] = conf.find_program('strip', mandatory=True)
 
-    if opt.with_dbus:
-        check_pkg(conf, 'dbus-glib-1', '0.60', True, var='ENABLE_DBUS')
+    if not opt.without_dbus:
+        check_pkg(conf, 'dbus-glib-1', '0.60', True, var='DBUS')
         conf.check_tool('dbus glib2')
 
 
