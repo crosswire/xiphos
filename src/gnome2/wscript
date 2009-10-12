@@ -103,7 +103,8 @@ def build(bld):
     )
 
     lib.find_sources_in_dirs('.')
-    lib.add_dbus_file('dbus-interface.xml', 'ipc_object', 'glib-server')
+    lib.add_dbus_file('ipc-interface.xml', 'ipc_object', 'glib-server')
+    lib.add_marshal_file('marshal.list', 'ipc_marshal')
 
     # notification about project name change
     if not env['IS_WIN32']:

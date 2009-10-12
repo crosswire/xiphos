@@ -82,7 +82,7 @@ static void on_search_button_clicked(GtkButton * button, gpointer user_data)
 		gtk_button_set_label((GtkButton *)remember_search, label);
 		gtk_button_set_use_stock((GtkButton *)remember_search, TRUE);
 		obj = ipc_get_main_ipc();
-		ipc_object_search_performed(obj, settings.searchText, NULL);
+		ipc_object_search_performed(obj, settings.searchText, 50,  NULL);
 	}
 }
  

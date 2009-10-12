@@ -3,6 +3,7 @@
 
 #include <glib.h>
 #include <dbus/dbus-glib.h>
+#include "marshal.h"
 
 G_BEGIN_DECLS
 
@@ -25,6 +26,7 @@ G_BEGIN_DECLS
 
 typedef enum {
 	SEARCH_PERFORMED,
+	NAVIGATION,
 	LAST_SIGNAL
 } IpcSignalNumber;
 
@@ -44,8 +46,13 @@ struct _IpcObjectClass {
 GType ipc_object_get_type(void);
 
 gboolean ipc_object_search_performed (IpcObject* obj, 
-				      const gchar* reference,
+				      const gchar* search_term,
+				      const int* hits,
 				      GError** error);
+gboolean ipc_object_navigation_signal (IpcObject* obj,
+				       const gchar* reference,
+				       GError** error);
+
 IpcObject* ipc_init_dbus_connection(IpcObject* obj);
 IpcObject* ipc_get_main_ipc();
 
