@@ -47,6 +47,7 @@ gboolean ipc_object_search_performed (IpcObject* obj,
 				      const gchar* reference,
 				      GError** error);
 IpcObject* ipc_init_dbus_connection(IpcObject* obj);
+IpcObject* ipc_get_main_ipc();
 
 G_END_DECLS
 
