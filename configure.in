@@ -59,7 +59,7 @@ GECKO_DEFINES
 AM_CONDITIONAL([HAVE_GECKO],[test "$gecko_cv_have_gecko" = "yes"])
 
 
-REQUIRED_LIBS="glib-2.0 gtk+-2.0 libgnomeui-2.0 libxml-2.0 libglade-2.0 libgtkhtml-3.14 sword"
+REQUIRED_LIBS="glib-2.0 gtk+-2.0 libgnomeui-2.0 libxml-2.0 libglade-2.0 libgtkhtml-3.14 sword dbus-1 dbus-glib-1"
 
 AS_CASE([$host_os], [mingw*],
 		    [REQUIRED_LIBS="$REQUIRED_LIBS gmodule-no-export-2.0"],
