@@ -298,7 +298,7 @@ IpcObject* ipc_init_dbus_connection(IpcObject* obj)
  * 
  * Since: 3.2
  */
-IpcObject* ipc_get_main_ipc()
+IpcObject* ipc_get_main_ipc(void)
 {
 	return main_ipc_obj;
 }

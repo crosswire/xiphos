@@ -64,6 +64,7 @@ locale_set.c: ../../po/LINGUAS make-locale-set.sh
 marshal.c:
 	glib-genmarshal --body --prefix=ipc_marshal marshal.list \
 	$< > $@
+	sed -i -e 's;<glib-object.h>;"marshal.h";' $@
 
 marshal.h:
 	glib-genmarshal --header --prefix=ipc_marshal marshal.list \
