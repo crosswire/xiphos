@@ -2,6 +2,8 @@ bin_PROGRAMS = xiphos
 
 bin_SCRIPTS = gnomesword2
 
+BUILT_SOURCES = ipc-interface.h marshal.h
+
 xiphos_SOURCES =  \
     about_modules.c \
     about_sword.c \
@@ -31,6 +33,7 @@ xiphos_SOURCES =  \
     locale_set.c \
     main_menu.c \
     main_window.c \
+    marshal.c \
     menu_popup.c \
     mod_mgr.c \
     navbar_book.c \
@@ -57,6 +60,18 @@ xiphos_SOURCES =  \
 
 locale_set.c: ../../po/LINGUAS make-locale-set.sh
 	sh ./make-locale-set.sh > locale_set.c
+
+marshal.c:
+	glib-genmarshal --body --prefix=ipc_marshal marshal.list \
+	$< > $@
+
+marshal.h:
+	glib-genmarshal --header --prefix=ipc_marshal marshal.list \
+	$< > $@
+
+ipc-interface.h:
+	dbus-binding-tool --prefix=ipc_object --mode=glib-server dbus-interface.xml \
+	$< > $@
 
 xiphos_CPPFLAGS =  \
 	-DGECKO_HOME=\""$(GECKO_HOME)\""  \

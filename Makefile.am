@@ -20,8 +20,7 @@ dist_doc_DATA = \
 	INSTALL \
 	NEWS \
 	TODO \
-	Xiphos.ogg \
-	help/xiphos.pdf
+	Xiphos.ogg
 
 ACLOCAL_AMFLAGS = -I m4
 
@@ -41,7 +40,10 @@ EXTRA_DIST = \
 	waffles/editor.py \
 	waffles/gecko.py \
 	waffles/gtkhtml.py \
-	waffles/misc.py 
+	waffles/misc.py \
+	src/examples/ipc_client.c \
+	src/examples/ipc_client.py \
+	src/examples/Makefile
 
 DISTCLEANFILES = gnome-doc-utils.make
 
