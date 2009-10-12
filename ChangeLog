@@ -1,7 +1,3 @@
-2009-10-05  karl <charcoal@users.sf.net>
-
-	* gtk 2.18 print fix from Mark__T.
-
 2009-09-30  karl <charcoal@users.sf.net>
 
 	* add gui_init() calls to settings_init() to ensure that gnome/gtk

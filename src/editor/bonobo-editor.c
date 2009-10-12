@@ -300,10 +300,7 @@ _do_print (EDITOR * e,
 	gtk_print_operation_set_unit(operation, GTK_UNIT_POINTS);
 #endif	
 	gtk_print_operation_set_default_page_setup (operation, setup);
-#if GTK_CHECK_VERSION(2, 18, 0)
-	gtk_print_operation_set_embed_page_setup(operation, TRUE);
-#endif
-
+	
 	result = gtk_html_print_operation_run (GTK_HTML(e->html_widget), 
 					       operation, 
 					       action,
