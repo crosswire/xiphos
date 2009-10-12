@@ -1,4 +1,4 @@
-interface_xml := ../gnome2/dbus-interface.xml
+interface_xml := ../gnome2/ipc-interface.xml
 
 pkg_packages := dbus-1 dbus-glib-1
 
@@ -15,7 +15,7 @@ cleanfiles := ipc-client-stub.h
 targets = client
 
 .PHONY: all clean
-all: $targets
+all: $(targets)
 
 client: receive.o
 	$(CC) $^ -o $@ $(LDFLAGS)
