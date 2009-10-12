@@ -1,4 +1,4 @@
-interface_xml := dbus-interface.xml
+interface_xml := ../gnome2/dbus-interface.xml
 
 pkg_packages := dbus-1 dbus-glib-1
 
@@ -20,8 +20,8 @@ all: $targets
 client: receive.o
 	$(CC) $^ -o $@ $(LDFLAGS)
 
-receive.o: ipc_receive.c ipc-client-stub.h
-	   $(CC) $(CFLAGS) -DPROGRNAME=\"ipc_receive\" -c $< -o $@
+receive.o: ipc_client.c ipc-client-stub.h
+	   $(CC) $(CFLAGS) -DPROGRNAME=\"ipc_client\" -c $< -o $@
 
 ipc-client-stub.h: $(interface_xml)
 		   dbus-binding-tool --prefix=ipc_object --mode=glib-client \

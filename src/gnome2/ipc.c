@@ -11,10 +11,10 @@ gboolean ipc_object_set_current_reference(IpcObject* obj,
 					  gchar* reference,
 					  GError** error);
 gboolean ipc_object_get_current_reference(IpcObject* obj,
-					  gchar* reference,
+					  gchar** reference,
 					  GError** error);
 gboolean ipc_object_get_next_search_reference(IpcObject* obj, 
-				       gchar* reference,
+				       gchar** reference,
 				       GError** error);
 
 #include "ipc-interface.h"
@@ -66,10 +66,14 @@ gboolean ipc_object_search_performed(IpcObject* obj,
 	 
 	 IpcObjectClass* klass = IPC_OBJECT_GET_CLASS(obj);
 
+	 GString *s = g_string_new ("");
+	 g_string_printf(s, "%d", *hits);
+	 
 	 g_signal_emit(obj,
 		       klass->signals[SEARCH_PERFORMED],
 		       0,
-		       search_term, hits);
+		       s->str,
+		       hits);
 	return FALSE;
 }
 
@@ -77,7 +81,7 @@ gboolean ipc_object_navigation_signal (IpcObject* obj,
 					const gchar* reference,
 					GError** error)
 {
-	obj->current_ref = reference;
+	obj->current_ref = g_strdup(reference);
 	g_print ("navigation performed signal");
 
 	IpcObjectClass* klass = IPC_OBJECT_GET_CLASS(obj);
@@ -90,15 +94,15 @@ gboolean ipc_object_navigation_signal (IpcObject* obj,
 }
 
 gboolean ipc_object_get_next_search_reference(IpcObject* obj, 
-				       gchar* reference,
+				       gchar** reference,
 				       GError** error)
 {
-	obj->references = g_list_next(obj->references);
 	if (obj->references)
-		reference = (gchar*)obj->references->data;
+		*reference = g_strdup((gchar*)obj->references->data);
 	else
-		reference = NULL;
-
+		*reference = g_strdup("END");
+	
+	obj->references = g_list_next(obj->references);
 	return TRUE;
 }
 
@@ -117,10 +121,10 @@ gboolean ipc_object_set_current_reference(IpcObject* obj,
 }
 
 gboolean ipc_object_get_current_reference(IpcObject* obj,
-					  gchar* reference,
+					  gchar** reference,
 					  GError** error)
 {
-	reference = obj->current_ref;
+	*reference = g_strdup(obj->current_ref);
 	return TRUE;
 }
 
