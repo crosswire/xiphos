@@ -305,7 +305,9 @@ def configure(conf):
 
     if not opt.without_dbus:
         check_pkg(conf, 'dbus-glib-1', '0.60', True, var='DBUS')
-        conf.check_tool('dbus glib2')
+        # we need a modified version of dbus.py for running on windows
+        conf.check_tool('dbus', tooldir=_tooldir)
+        conf.check_tool('glib2')
 
 
     ### App info, paths
