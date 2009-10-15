@@ -28,7 +28,6 @@
 #include <string.h>
 
 #include "ipc-client-stub.h"
-#include "../gnome2/marshal.h"
 
 //this function will be called every time the user does a sidebar search
 static gboolean
