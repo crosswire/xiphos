@@ -78,11 +78,6 @@ static gboolean parallel2;
 static gboolean parallel3;
 static gboolean parallel4;
 static gboolean parallel5;
-static gboolean parallel6;
-static gboolean parallel7;
-static gboolean parallel8;
-static gboolean parallel9;
-static gboolean parallel10;
 
 BackEnd *backend_p;
 
@@ -566,7 +561,7 @@ void main_load_g_ops_parallel(GtkWidget *menu)
 
 /******************************************************************************
  * Name
- *   main_check_parallel_modules
+ *   gui_check_parallel_modules
  *
  * Synopsis
  *   #include "main/parallel_view.h
@@ -614,45 +609,17 @@ void main_check_parallel_modules(void)
 	else
 		parallel5 = FALSE;
 
-	if (settings.parallel6Module)
-		parallel6 =
-		    main_is_module(settings.parallel6Module);
-	else
-		parallel6 = FALSE;
-
-	if (settings.parallel7Module)
-		parallel7 =
-		    main_is_module(settings.parallel7Module);
-	else
-		parallel7 = FALSE;
-
-	if (settings.parallel8Module)
-		parallel8 =
-		    main_is_module(settings.parallel8Module);
-	else
-		parallel8 = FALSE;
-
-	if (settings.parallel9Module)
-		parallel9 =
-		    main_is_module(settings.parallel9Module);
-	else
-		parallel9 = FALSE;
-	if (settings.parallel10Module)
-		parallel10 =
-		    main_is_module(settings.parallel10Module);
-	else
-		parallel10 = FALSE;
 }
 
 
 /******************************************************************************
  * Name
- *   main_change_parallel_module
+ *   gui_change_int1_mod
  *
  * Synopsis
  *   #include "main/parallel_view.h
  *
- *   void main_change_parallel_module_mod(gchar * mod_name)
+ *   void gui_changeint1_mod(gchar * mod_name)
  *
  * Description
  *
@@ -698,53 +665,13 @@ void main_change_parallel_module(GSParallel parallel, gchar * mod_name)
 		parallel4 =
 		    main_is_module(settings.parallel4Module);
 		break;
-	case PARALLEL5:
+	case PARALLEL5:	
 		xml_set_value("Xiphos", "modules", "int5",
 			      mod_name);
 		settings.parallel5Module =
 		    xml_get_value("modules", "int5");
 		parallel5 =
 		    main_is_module(settings.parallel5Module);
-		break;
-	case PARALLEL6:
-		xml_set_value("Xiphos", "modules", "int6",
-			      mod_name);
-		settings.parallel6Module =
-		    xml_get_value("modules", "int6");
-		parallel6 =
-		    main_is_module(settings.parallel6Module);
-		break;
-	case PARALLEL7:
-		xml_set_value("Xiphos", "modules", "int7",
-			      mod_name);
-		settings.parallel7Module =
-		    xml_get_value("modules", "int7");
-		parallel7 =
-		    main_is_module(settings.parallel7Module);
-		break;
-	case PARALLEL8:
-		xml_set_value("Xiphos", "modules", "int8",
-			      mod_name);
-		settings.parallel8Module =
-		    xml_get_value("modules", "int8");
-		parallel8 =
-		    main_is_module(settings.parallel8Module);
-		break;
-	case PARALLEL9:
-		xml_set_value("Xiphos", "modules", "int9",
-			      mod_name);
-		settings.parallel9Module =
-		    xml_get_value("modules", "int9");
-		parallel9 =
-		    main_is_module(settings.parallel9Module);
-		break;
-	case PARALLEL10:
-		xml_set_value("Xiphos", "modules", "int10",
-			      mod_name);
-		settings.parallel10Module =
-		    xml_get_value("modules", "int10");
-		parallel10 =
-		    main_is_module(settings.parallel10Module);
 		break;
 	default:
 		return;
@@ -759,12 +686,12 @@ void main_change_parallel_module(GSParallel parallel, gchar * mod_name)
 #ifdef USE_GTKMOZEMBED
 /******************************************************************************
  * Name
- *   main_update_parallel_page
+ *   gui_update_parallel_page
  *
  * Synopsis
  *   #include "main/parallel_view.h
  *
- *   void main_update_parallel_page(void)
+ *   void gui_update_parallel_page(void)
  *
  * Description
  *
@@ -804,7 +731,7 @@ void main_update_parallel_page(void)
 			data = g_strconcat(tmpBuf,NULL);
 		}
 
-		for (i = 0, j = 0; i < 10; i++) {
+		for (i = 0, j = 0; i < 5; i++) {
 			mod_name = NULL;
 			switch (i) {
 			case 0:
@@ -839,41 +766,6 @@ void main_update_parallel_page(void)
 				if (parallel5)
 					mod_name =
 					    settings.parallel5Module;
-				else
-					mod_name = NULL;
-				break;
-			case 5:
-				if (parallel6)
-					mod_name =
-					    settings.parallel6Module;
-				else
-					mod_name = NULL;
-				break;
-			case 6:
-				if (parallel7)
-					mod_name =
-					    settings.parallel7Module;
-				else
-					mod_name = NULL;
-				break;
-			case 7:
-				if (parallel8)
-					mod_name =
-					    settings.parallel8Module;
-				else
-					mod_name = NULL;
-				break;
-			case 8:
-				if (parallel9)
-					mod_name =
-					    settings.parallel9Module;
-				else
-					mod_name = NULL;
-				break;
-			case 9:
-				if (parallel10)
-					mod_name =
-					    settings.parallel10Module;
 				else
 					mod_name = NULL;
 				break;
@@ -1019,12 +911,12 @@ void main_update_parallel_page(void)
 #else
 /******************************************************************************
  * Name
- *   main_update_parallel_page
+ *   gui_update_parallel_page
  *
  * Synopsis
  *   #include "main/parallel_view.h
  *
- *   void main_update_parallel_page(void)
+ *   void gui_update_parallel_page(void)
  *
  * Description
  *
@@ -1068,7 +960,7 @@ void main_update_parallel_page(void)
 				       tmpBuf, utf8len);
 		}
 
-		for (i = 0, j = 0; i < 10; i++) {
+		for (i = 0, j = 0; i < 5; i++) {
 			mod_name = NULL;
 			switch (i) {
 			case 0:
@@ -1103,41 +995,6 @@ void main_update_parallel_page(void)
 				if (parallel5)
 					mod_name =
 					    settings.parallel5Module;
-				else
-					mod_name = NULL;
-				break;
-			case 5:
-				if (parallel6)
-					mod_name =
-					    settings.parallel6Module;
-				else
-					mod_name = NULL;
-				break;
-			case 6:
-				if (parallel7)
-					mod_name =
-					    settings.parallel7Module;
-				else
-					mod_name = NULL;
-				break;
-			case 7:
-				if (parallel8)
-					mod_name =
-					    settings.parallel8Module;
-				else
-					mod_name = NULL;
-				break;
-			case 8:
-				if (parallel9)
-					mod_name =
-					    settings.parallel9Module;
-				else
-					mod_name = NULL;
-				break;
-			case 9:
-				if (parallel10)
-					mod_name =
-					    settings.parallel10Module;
 				else
 					mod_name = NULL;
 				break;
@@ -1330,9 +1187,9 @@ static void int_display(SWBuf& text, gchar *key, char *mod_name[])
 		*textColor,
 		*tmpkey,
 		tmpbuf[256],
-		*use_font_size[10],
-		*font_size_tmp[10],
-		*use_font_name[10];
+		*use_font_size[5],
+		*font_size_tmp[5],
+		*use_font_name[5];
 	const gchar *bgColor;
 	gchar str[500];
 	gboolean evenRow = FALSE;
@@ -1340,7 +1197,7 @@ static void int_display(SWBuf& text, gchar *key, char *mod_name[])
 	gchar *file = NULL;
 	gint cur_verse, cur_chapter, i = 1, j;
 	char *cur_book;
-	gboolean is_module[10] = { FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE };
+	gboolean is_module[5] = { FALSE, FALSE, FALSE, FALSE, FALSE };
 
 	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.notebook_bible_parallel))) return;
 
@@ -1361,7 +1218,7 @@ static void int_display(SWBuf& text, gchar *key, char *mod_name[])
 
 	// quick cache of fonts.  (mod_name was passed in.)
 	file = g_strdup_printf("%s/fonts.conf", settings.gSwordDir);
-	for (j = 0; j < 10; ++j) {
+	for (j = 0; j < 5; ++j) {
 		// determine module presence just once each for this routine.
 		is_module[j] = (mod_name[j] &&
 				*(mod_name[j]) &&
@@ -1424,7 +1281,7 @@ static void int_display(SWBuf& text, gchar *key, char *mod_name[])
 			bgColor = settings.bible_bg_color;
 		}
 
-		for (j = 0; j < 10; j++) {
+		for (j = 0; j < 5; j++) {
 			is_rtol = main_is_mod_rtol(mod_name[j]);
 
 			char *num = main_format_number(i);
@@ -1466,7 +1323,7 @@ static void int_display(SWBuf& text, gchar *key, char *mod_name[])
 		text += "</tr>";
 	}
 
-	for (j = 0; j < 10; ++j) {
+	for (j = 0; j < 5; ++j) {
 		g_free(use_font_size[j]);
 		g_free(font_size_tmp[j]);
 		g_free(use_font_name[j]);
@@ -1495,21 +1352,16 @@ static void int_display(SWBuf& text, gchar *key, char *mod_name[])
 void main_update_parallel_page_detached(void)
 {
 	SWBuf text("");
-	gchar buf[500], *mod_name[10];
+	gchar buf[500], *mod_name[5];
 	gint j;
 	gchar space[2];  //there is surely a better way?
 	space[0] = ' ';
 	space[1] = '\0';
-	mod_name[0]  = (parallel1 ?  settings.parallel1Module :  space);
-	mod_name[1]  = (parallel2 ?  settings.parallel2Module :  space);
-	mod_name[2]  = (parallel3 ?  settings.parallel3Module :  space);
-	mod_name[3]  = (parallel4 ?  settings.parallel4Module :  space);
-	mod_name[4]  = (parallel5 ?  settings.parallel5Module :  space);
-	mod_name[5]  = (parallel6 ?  settings.parallel6Module :  space);
-	mod_name[6]  = (parallel7 ?  settings.parallel7Module :  space);
-	mod_name[8]  = (parallel8 ?  settings.parallel8Module :  space);
-	mod_name[9]  = (parallel9 ?  settings.parallel9Module : space);
-	mod_name[10] = (parallel10 ? settings.parallel10Module : space);
+	mod_name[0] = (parallel1 ? settings.parallel1Module : space);
+	mod_name[1] = (parallel2 ? settings.parallel2Module : space);
+	mod_name[2] = (parallel3 ? settings.parallel3Module : space);
+	mod_name[3] = (parallel4 ? settings.parallel4Module : space);
+	mod_name[4] = (parallel5 ? settings.parallel5Module : space);
     
     	snprintf(buf, 499, "<span color='blue' weight='bold'>%s</span>", mod_name[0]);
     	gtk_label_set_markup(GTK_LABEL(plabels.label_1), buf);
@@ -1526,21 +1378,6 @@ void main_update_parallel_page_detached(void)
     	snprintf(buf, 499, "<span color='blue' weight='bold'>%s</span>", mod_name[4]);
     	gtk_label_set_markup(GTK_LABEL(plabels.label_5), buf);
     
-    	snprintf(buf, 499, "<span color='blue' weight='bold'>%s</span>", mod_name[5]);
-    	gtk_label_set_markup(GTK_LABEL(plabels.label_6), buf);
-    
-    	snprintf(buf, 499, "<span color='blue' weight='bold'>%s</span>", mod_name[6]);
-    	gtk_label_set_markup(GTK_LABEL(plabels.label_7), buf);
-    
-    	snprintf(buf, 499, "<span color='blue' weight='bold'>%s</span>", mod_name[7]);
-    	gtk_label_set_markup(GTK_LABEL(plabels.label_8), buf);
-    
-    	snprintf(buf, 499, "<span color='blue' weight='bold'>%s</span>", mod_name[8]);
-    	gtk_label_set_markup(GTK_LABEL(plabels.label_9), buf);
-    
-    	snprintf(buf, 499, "<span color='blue' weight='bold'>%s</span>", mod_name[9]);
-    	gtk_label_set_markup(GTK_LABEL(plabels.label_10), buf);
-    
 #ifdef USE_GTKMOZEMBED
 	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.html_parallel_dialog))) return;
 #endif
@@ -1551,7 +1388,7 @@ void main_update_parallel_page_detached(void)
 		settings.link_color);
 	text += buf;
 	
-	for (j = 0; j < 10; ++j){
+	for (j = 0; j < 5; ++j){
 		snprintf(buf, 499,
 			"<td valign=\"top\" width=\"20%%\" bgcolor=\"#f1f1f1\"><font color=\"%s\" size=\"%+d\"><b>%s</b></td>",
 			settings.bible_verse_num_color, 
@@ -1573,12 +1410,12 @@ void main_update_parallel_page_detached(void)
 
 /******************************************************************************
  * Name
- *   main_swap_parallel_with_main
+ *   gui_swap_parallel_with_main
  *
  * Synopsis
  *   #include "main/parallel_view.h
  *
- *   void main_swap_parallel_with_main(char * intmod)
+ *   void gui_swap_parallel_with_main(char * intmod)
  *
  * Description
  *   swaps parallel mod with mod in main text window
@@ -1590,21 +1427,6 @@ void main_update_parallel_page_detached(void)
 void main_swap_parallel_with_main(char *intmod)
 {
 #if 0
-	if ((settings.parallel10Module) && !strcmp(settings.parallel10Module, intmod)) {
-		settings.parallel10Module = xml_get_value("modules", "bible");
-	}
-	if ((settings.parallel9Module) && !strcmp(settings.parallel9Module, intmod)) {
-		settings.parallel9Module = xml_get_value("modules", "bible");
-	}
-	if ((settings.parallel8Module) && !strcmp(settings.parallel8Module, intmod)) {
-		settings.parallel8Module = xml_get_value("modules", "bible");
-	}
-	if ((settings.parallel7Module) && !strcmp(settings.parallel7Module, intmod)) {
-		settings.parallel7Module = xml_get_value("modules", "bible");
-	}
-	if ((settings.parallel6Module) && !strcmp(settings.parallel6Module, intmod)) {
-		settings.parallel6Module = xml_get_value("modules", "bible");
-	}
 	if ((settings.parallel5Module) && !strcmp(settings.parallel5Module, intmod)) {
 		settings.parallel5Module = xml_get_value("modules", "bible");
 	}

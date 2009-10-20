@@ -378,11 +378,6 @@ void load_settings_structure(void)
 	settings.parallel3Module = xml_get_value("modules", "int3");
 	settings.parallel4Module = xml_get_value("modules", "int4");
 	settings.parallel5Module = xml_get_value("modules", "int5");
-	settings.parallel6Module = xml_get_value("modules", "int6");
-	settings.parallel7Module = xml_get_value("modules", "int7");
-	settings.parallel8Module = xml_get_value("modules", "int8");
-	settings.parallel9Module = xml_get_value("modules", "int9");
-	settings.parallel10Module = xml_get_value("modules", "int10");
 	settings.personalcommentsmod = xml_get_value("modules", "percomm");
 	settings.devotionalmod = xml_get_value("modules", "devotional");
 	settings.book_mod = xml_get_value("modules", "book");
