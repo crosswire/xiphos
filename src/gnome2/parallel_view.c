@@ -258,6 +258,156 @@ static void on_changeint5mod_activate(GtkMenuItem * menuitem,
 }
 
 
+/******************************************************************************
+ * Name
+ *   on_changeint6mod_activate
+ *
+ * Synopsis
+ *   #include "gui/parallel.h
+ *
+ *   void on_changeint6mod_activate(GtkMenuItem * menuitem,
+			       gpointer user_data)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   void
+ */
+
+static void on_changeint6mod_activate(GtkMenuItem * menuitem,
+				      gpointer user_data)
+{
+	gchar *mod_name = NULL;
+
+	mod_name = main_module_name_from_description((gchar *) user_data);
+
+	if (!mod_name) 
+		return;
+	main_change_parallel_module(PARALLEL6, mod_name);
+}
+
+
+/******************************************************************************
+ * Name
+ *   on_changeint7mod_activate
+ *
+ * Synopsis
+ *   #include "gui/parallel.h
+ *
+ *   void on_changeint7mod_activate(GtkMenuItem * menuitem,
+			       gpointer user_data)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   void
+ */
+
+static void on_changeint7mod_activate(GtkMenuItem * menuitem,
+				      gpointer user_data)
+{
+	gchar *mod_name = NULL;
+
+	mod_name = main_module_name_from_description((gchar *) user_data);
+
+	if (!mod_name) 
+		return;
+	main_change_parallel_module(PARALLEL7, mod_name);
+}
+
+
+/******************************************************************************
+ * Name
+ *   on_changeint8mod_activate
+ *
+ * Synopsis
+ *   #include "gui/parallel.h
+ *
+ *   void on_changeint8mod_activate(GtkMenuItem * menuitem,
+			       gpointer user_data)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   void
+ */
+
+static void on_changeint8mod_activate(GtkMenuItem * menuitem,
+				      gpointer user_data)
+{
+	gchar *mod_name = NULL;
+
+	mod_name = main_module_name_from_description((gchar *) user_data);
+
+	if (!mod_name) 
+		return;
+	main_change_parallel_module(PARALLEL8, mod_name);
+}
+
+
+/******************************************************************************
+ * Name
+ *   on_changeint9mod_activate
+ *
+ * Synopsis
+ *   #include "gui/parallel.h
+ *
+ *   void on_changeint9mod_activate(GtkMenuItem * menuitem,
+			       gpointer user_data)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   void
+ */
+
+static void on_changeint9mod_activate(GtkMenuItem * menuitem,
+				      gpointer user_data)
+{
+	gchar *mod_name = NULL;
+
+	mod_name = main_module_name_from_description((gchar *) user_data);
+
+	if (!mod_name) 
+		return;
+	main_change_parallel_module(PARALLEL9, mod_name);
+}
+
+
+/******************************************************************************
+ * Name
+ *   on_changeint10mod_activate
+ *
+ * Synopsis
+ *   #include "gui/parallel.h
+ *
+ *   void on_changeint10mod_activate(GtkMenuItem * menuitem,
+			       gpointer user_data)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   void
+ */
+
+static void on_changeint10mod_activate(GtkMenuItem * menuitem,
+				      gpointer user_data)
+{
+	gchar *mod_name = NULL;
+
+	mod_name = main_module_name_from_description((gchar *) user_data);
+
+	if (!mod_name) 
+		return;
+	main_change_parallel_module(PARALLEL10, mod_name);
+}
+
+
 void gui_popup_menu_parallel(void)
 {	
 	GtkWidget *menu;
@@ -313,6 +463,16 @@ void gui_popup_menu_parallel(void)
 				     G_CALLBACK(on_changeint4mod_activate));
 	main_load_menu_form_mod_list(menu, _("Change parallel 5"),
 				     G_CALLBACK(on_changeint5mod_activate));
+	main_load_menu_form_mod_list(menu, _("Change parallel 6"),
+				     G_CALLBACK(on_changeint6mod_activate));
+	main_load_menu_form_mod_list(menu, _("Change parallel 7"),
+				     G_CALLBACK(on_changeint7mod_activate));
+	main_load_menu_form_mod_list(menu, _("Change parallel 8"),
+				     G_CALLBACK(on_changeint8mod_activate));
+	main_load_menu_form_mod_list(menu, _("Change parallel 9"),
+				     G_CALLBACK(on_changeint9mod_activate));
+	main_load_menu_form_mod_list(menu, _("Change parallel 10"),
+				     G_CALLBACK(on_changeint10mod_activate));
 
 /*	g_signal_connect(GTK_OBJECT(copy7), "activate",
 			   G_CALLBACK(gui_copyhtml_activate),
