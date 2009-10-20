@@ -103,11 +103,6 @@ typedef enum {
 	PARALLEL_3_MODULE,
 	PARALLEL_4_MODULE,
 	PARALLEL_5_MODULE,
-	PARALLEL_6_MODULE,
-	PARALLEL_7_MODULE,
-	PARALLEL_8_MODULE,
-	PARALLEL_9_MODULE,
-	PARALLEL_10_MODULE,
 	COMMENTARY_MODULE,
 	DICTIONARY_MODULE,
 	DEFAULT_DICTIONARY_MODULE,
@@ -128,11 +123,6 @@ struct _preferences_combo {
 	GtkWidget *parallel_3_module;
 	GtkWidget *parallel_4_module;
 	GtkWidget *parallel_5_module;
-	GtkWidget *parallel_6_module;
-	GtkWidget *parallel_7_module;
-	GtkWidget *parallel_8_module;
-	GtkWidget *parallel_9_module;
-	GtkWidget *parallel_10_module;
 	GtkWidget *commentary_module;
 	GtkWidget *dictionary_module;
 	GtkWidget *default_dictionary_module;
@@ -1526,171 +1516,6 @@ on_combobox11_changed(GtkComboBox * combobox,
 
 /******************************************************************************
  * Name
- *   on_combobox_parallel_6_changed
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_combobox_parallel_6_changed(GtkEditable * editable, gpointer user_data)
- *
- * Description
- *
- *   has changed - update parallel pane
- *
- * Return value
- *  void
- */
-
-void
-on_combobox_parallel_6_changed(GtkComboBox * combobox,
-		      gpointer user_data)
-{
-	gchar *buf = NULL;
-	GtkTreeIter iter;
-	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
-	gtk_combo_box_get_active_iter(combobox, &iter);
-	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &buf, -1);
-	if (!buf || !strcmp(buf, _("-- Select --")))	/* see fill_combobox */
-		return;
-	main_change_parallel_module(PARALLEL6, buf);
-	g_free(buf);
-}
-
-
-/******************************************************************************
- * Name
- *   on_combobox_parallel_7_changed
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_combobox_parallel_7_changed(GtkEditable * editable, gpointer user_data)
- *
- * Description
- *
- *   has changed - update parallel pane
- *
- * Return value
- *  void
- */
-
-void
-on_combobox_parallel_7_changed(GtkComboBox * combobox,
-		      gpointer user_data)
-{
-	gchar *buf = NULL;
-	GtkTreeIter iter;
-	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
-	gtk_combo_box_get_active_iter(combobox, &iter);
-	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &buf, -1);
-	if (!buf || !strcmp(buf, _("-- Select --")))	/* see fill_combobox */
-		return;
-	main_change_parallel_module(PARALLEL7, buf);
-	g_free(buf);
-}
-
-
-/******************************************************************************
- * Name
- *   on_combobox_parallel_8_changed
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_combobox_parallel_8_changed(GtkEditable * editable, gpointer user_data)
- *
- * Description
- *
- *   has changed - update parallel pane
- *
- * Return value
- *  void
- */
-
-void
-on_combobox_parallel_8_changed(GtkComboBox * combobox,
-		      gpointer user_data)
-{
-	gchar *buf = NULL;
-	GtkTreeIter iter;
-	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
-	gtk_combo_box_get_active_iter(combobox, &iter);
-	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &buf, -1);
-	if (!buf || !strcmp(buf, _("-- Select --")))	/* see fill_combobox */
-		return;
-	main_change_parallel_module(PARALLEL8, buf);
-	g_free(buf);
-}
-
-
-/******************************************************************************
- * Name
- *   on_combobox_parallel_9_changed
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_combobox_parallel_9_changed(GtkEditable * editable, gpointer user_data)
- *
- * Description
- *
- *   has changed - update parallel pane
- *
- * Return value
- *  void
- */
-
-void
-on_combobox_parallel_9_changed(GtkComboBox * combobox,
-		      gpointer user_data)
-{
-	gchar *buf = NULL;
-	GtkTreeIter iter;
-	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
-	gtk_combo_box_get_active_iter(combobox, &iter);
-	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &buf, -1);
-	if (!buf || !strcmp(buf, _("-- Select --")))	/* see fill_combobox */
-		return;
-	main_change_parallel_module(PARALLEL9, buf);
-	g_free(buf);
-}
-
-
-/******************************************************************************
- * Name
- *   on_combobox_parallel_10_changed
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_combobox_parallel_10_changed(GtkEditable * editable, gpointer user_data)
- *
- * Description
- *
- *   has changed - update parallel pane
- *
- * Return value
- *  void
- */
-
-void
-on_combobox_parallel_10_changed(GtkComboBox * combobox,
-		      gpointer user_data)
-{
-	gchar *buf = NULL;
-	GtkTreeIter iter;
-	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
-	gtk_combo_box_get_active_iter(combobox, &iter);
-	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &buf, -1);
-	if (!buf || !strcmp(buf, _("-- Select --")))	/* see fill_combobox */
-		return;
-	main_change_parallel_module(PARALLEL10, buf);
-	g_free(buf);
-}
-
-
-/******************************************************************************
- * Name
  *   on_combobox12_changed
  *
  * Synopsis
@@ -2341,7 +2166,7 @@ setup_module_comboboxes(void)
 		      NULL, NULL);
 
 	/*
-	 * Parallel page
+	 * parallel page
 	 */
 	fill_combobox(get_list(TEXT_LIST), GTK_COMBO_BOX(combo.parallel_1_module),
 		      settings.parallel1Module,
@@ -2358,21 +2183,6 @@ setup_module_comboboxes(void)
 	fill_combobox(get_list(TEXT_LIST), GTK_COMBO_BOX(combo.parallel_5_module),
 		      settings.parallel5Module,
 		      NULL, NULL);
-	fill_combobox(get_list(TEXT_LIST), GTK_COMBO_BOX(combo.parallel_6_module),
-		      settings.parallel6Module,
-		      NULL, NULL);
-	fill_combobox(get_list(TEXT_LIST), GTK_COMBO_BOX(combo.parallel_7_module),
-		      settings.parallel7Module,
-		      NULL, NULL);
-	fill_combobox(get_list(TEXT_LIST), GTK_COMBO_BOX(combo.parallel_8_module),
-		      settings.parallel8Module,
-		      NULL, NULL);
-	fill_combobox(get_list(TEXT_LIST), GTK_COMBO_BOX(combo.parallel_9_module),
-		      settings.parallel9Module,
-		      NULL, NULL);
-	fill_combobox(get_list(TEXT_LIST), GTK_COMBO_BOX(combo.parallel_10_module),
-		      settings.parallel10Module,
-		      NULL, NULL);
 
 	/*
 	 * Miscellaneous Modules page
@@ -2388,7 +2198,7 @@ setup_module_comboboxes(void)
 		      dict_match_feature, "GreekDef");
 
 	/*
-	 * Signal connectivity
+	 * signal connectivity
 	 */
 	g_signal_connect(combo.text_module, "changed",
 			 G_CALLBACK(on_combobox2_changed), NULL);
@@ -2412,16 +2222,6 @@ setup_module_comboboxes(void)
 			 G_CALLBACK(on_combobox10_changed), NULL);
 	g_signal_connect(combo.parallel_5_module, "changed",
 			 G_CALLBACK(on_combobox11_changed), NULL);
-	g_signal_connect(combo.parallel_6_module, "changed",
-			 G_CALLBACK(on_combobox_parallel_6_changed), NULL);
-	g_signal_connect(combo.parallel_7_module, "changed",
-			 G_CALLBACK(on_combobox_parallel_7_changed), NULL);
-	g_signal_connect(combo.parallel_8_module, "changed",
-			 G_CALLBACK(on_combobox_parallel_8_changed), NULL);
-	g_signal_connect(combo.parallel_9_module, "changed",
-			 G_CALLBACK(on_combobox_parallel_9_changed), NULL);
-	g_signal_connect(combo.parallel_10_module, "changed",
-			 G_CALLBACK(on_combobox_parallel_10_changed), NULL);
 	g_signal_connect(combo.devotion_module, "changed",
 			 G_CALLBACK(on_combobox12_changed), NULL);
 	g_signal_connect(combo.hebrew_lex__module, "changed",
@@ -2575,11 +2375,6 @@ create_preferences_dialog(void)
 	combo.parallel_3_module = glade_xml_get_widget (gxml, "combobox9");
 	combo.parallel_4_module = glade_xml_get_widget (gxml, "combobox10");
 	combo.parallel_5_module = glade_xml_get_widget (gxml, "combobox11");
-	combo.parallel_6_module = glade_xml_get_widget (gxml, "combobox_parallel_6");
-	combo.parallel_7_module = glade_xml_get_widget (gxml, "combobox_parallel_7");
-	combo.parallel_8_module = glade_xml_get_widget (gxml, "combobox_parallel_8");
-	combo.parallel_9_module = glade_xml_get_widget (gxml, "combobox_parallel_9");
-	combo.parallel_10_module = glade_xml_get_widget (gxml, "combobox_parallel_10");
 	combo.devotion_module = glade_xml_get_widget (gxml, "combobox12");
 	combo.hebrew_lex__module = glade_xml_get_widget (gxml, "combobox13");
 	combo.greek_lex__module = glade_xml_get_widget (gxml, "combobox14");

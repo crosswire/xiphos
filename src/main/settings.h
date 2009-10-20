@@ -34,16 +34,11 @@ struct _settings {
 		*MainWindowModule,	/* module to open at program startup  */
 		*CommWindowModule,	/* module to open at program startup  */
 		*DictWindowModule,	/* module to open at program startup  */
-	        *parallel1Module,	/* 10 parallel passage modules  */
+	        *parallel1Module,	/* 5 parallel passage modules  */
 	        *parallel2Module,	/*   */
 	        *parallel3Module,	/*   */
 	        *parallel4Module,	/*   */
 	        *parallel5Module,	/*   */
-	        *parallel6Module,	/*   */
-	        *parallel7Module,	/*   */
-	        *parallel8Module,	/*   */
-	        *parallel9Module,	/*   */
-	        *parallel10Module,	/*   */
 	        *personalcommentsmod,	/* module to open at program startup  */
 		sb_search_mod[80], 	/* module for sidebar search */
 	        *devotionalmod, 	/* module for devotional */
