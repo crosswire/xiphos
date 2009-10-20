@@ -32,7 +32,12 @@ typedef enum
 	PARALLEL2,
 	PARALLEL3,
 	PARALLEL4,
-	PARALLEL5
+	PARALLEL5,
+	PARALLEL6,
+	PARALLEL7,
+	PARALLEL8,
+	PARALLEL9,
+	PARALLEL10
 	
 }GSParallel;
 
@@ -44,6 +49,11 @@ struct _para_labels {
 	GtkWidget *label_3;
 	GtkWidget *label_4;
 	GtkWidget *label_5;
+	GtkWidget *label_6;
+	GtkWidget *label_7;
+	GtkWidget *label_8;
+	GtkWidget *label_9;
+	GtkWidget *label_10;
 };
 extern PARA_LABELS plabels;
 

@@ -628,6 +628,26 @@ int xml_create_settings_file(char *path)
 		xmlNewTextChild(section_node, NULL, (const xmlChar *)"int5", (const xmlChar *)(gchar*)tmp->data);
 	else
 		xmlNewTextChild(section_node, NULL, (const xmlChar *)"int5", NULL);
+	if((tmp = g_list_next(tmp)) != NULL)
+		xmlNewTextChild(section_node, NULL, (const xmlChar *)"int6", (const xmlChar *)(gchar*)tmp->data);
+	else
+		xmlNewTextChild(section_node, NULL, (const xmlChar *)"int6", NULL);
+	if((tmp = g_list_next(tmp)) != NULL)
+		xmlNewTextChild(section_node, NULL, (const xmlChar *)"int7", (const xmlChar *)(gchar*)tmp->data);
+	else
+		xmlNewTextChild(section_node, NULL, (const xmlChar *)"int7", NULL);
+	if((tmp = g_list_next(tmp)) != NULL)
+		xmlNewTextChild(section_node, NULL, (const xmlChar *)"int8", (const xmlChar *)(gchar*)tmp->data);
+	else
+		xmlNewTextChild(section_node, NULL, (const xmlChar *)"int8", NULL);
+	if((tmp = g_list_next(tmp)) != NULL)
+		xmlNewTextChild(section_node, NULL, (const xmlChar *)"int9", (const xmlChar *)(gchar*)tmp->data);
+	else
+		xmlNewTextChild(section_node, NULL, (const xmlChar *)"int9", NULL);
+	if((tmp = g_list_next(tmp)) != NULL)
+		xmlNewTextChild(section_node, NULL, (const xmlChar *)"int10", (const xmlChar *)(gchar*)tmp->data);
+	else
+		xmlNewTextChild(section_node, NULL, (const xmlChar *)"int10", NULL);
 	tmp = get_list(TEXT_LIST);
 	if(tmp)
 		xmlNewTextChild(section_node, NULL, (const xmlChar *)"bible", (const xmlChar *)(gchar*)tmp->data);
