@@ -1,3 +1,7 @@
+2009-10-20  teus <teusjannette@gmail.com>
+
+	* Bump the parallel passages up from 5 to 10
+
 2009-09-30  karl <charcoal@users.sf.net>
 
 	* add gui_init() calls to settings_init() to ensure that gnome/gtk
