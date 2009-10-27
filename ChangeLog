@@ -1,6 +1,7 @@
-2009-10-20  teus <teusjannette@gmail.com>
+2009-10-27  karl <charcoal@users.sf.net>
 
-	* Bump the parallel passages up from 5 to 10
+	* Resurrect verse number color selector in preferences.
+	  Also removed some defunct enums, unused for years.
 
 2009-09-30  karl <charcoal@users.sf.net>
 
