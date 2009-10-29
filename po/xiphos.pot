@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-29 14:06-0400\n"
+"POT-Creation-Date: 2009-10-28 22:37+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -375,7 +375,7 @@ msgstr ""
 msgid "Enter Word or Phrase"
 msgstr ""
 
-#: ../src/gnome2/find_dialog.c:238 ../src/gnome2/search_sidebar.c:308
+#: ../src/gnome2/find_dialog.c:238 ../src/gnome2/search_sidebar.c:305
 #: ../ui/search-dialog.glade.h:57
 msgid "Match case"
 msgstr ""
@@ -384,7 +384,7 @@ msgstr ""
 msgid "Search backwards"
 msgstr ""
 
-#: ../src/gnome2/find_dialog.c:254 ../src/gnome2/search_sidebar.c:273
+#: ../src/gnome2/find_dialog.c:254 ../src/gnome2/search_sidebar.c:270
 #: ../ui/search-dialog.glade.h:74
 msgid "Regular expression"
 msgstr ""
@@ -434,7 +434,7 @@ msgstr ""
 #. * Return value
 #. *   void
 #.
-#: ../src/gnome2/gui.c:90
+#: ../src/gnome2/gui.c:101
 msgid ""
 "URL references using \"sword://\" (similar to web page\n"
 "references) can be used by programs to look up\n"
@@ -445,7 +445,7 @@ msgid ""
 "program to handle these references?"
 msgstr ""
 
-#: ../src/gnome2/gui.c:92
+#: ../src/gnome2/gui.c:103
 msgid ""
 "Xiphos has successfully set itself\n"
 "as the handler of sword:// and bible:// URLs.\n"
@@ -455,22 +455,22 @@ msgid ""
 "if you need to change these."
 msgstr ""
 
-#: ../src/gnome2/gui.c:145
+#: ../src/gnome2/gui.c:156
 #, c-format
 msgid ""
 "Xiphos failed to complete handler init for key #%d:\n"
 "%s"
 msgstr ""
 
-#: ../src/gnome2/gui.c:191
+#: ../src/gnome2/gui.c:202
 msgid "BUG! Xiphos is about to crash due to a \"STRDUP\" error."
 msgstr ""
 
-#: ../src/gnome2/gui.c:192 ../src/gnome2/gui.c:227
+#: ../src/gnome2/gui.c:203 ../src/gnome2/gui.c:238
 msgid "Please report this error to the Xiphos team with:"
 msgstr ""
 
-#: ../src/gnome2/gui.c:226
+#: ../src/gnome2/gui.c:237
 msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
 msgstr ""
 
@@ -673,9 +673,9 @@ msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:733 ../src/gnome2/mod_mgr.c:735
 #: ../src/gnome2/mod_mgr.c:837 ../src/gnome2/mod_mgr.c:872
-#: ../src/gnome2/mod_mgr.c:874 ../src/gnome2/utilities.c:354
-#: ../src/gnome2/utilities.c:419 ../src/gnome2/utilities.c:421
-#: ../src/gnome2/utilities.c:1040 ../src/main/sidebar.cc:832
+#: ../src/gnome2/mod_mgr.c:874 ../src/gnome2/utilities.c:357
+#: ../src/gnome2/utilities.c:422 ../src/gnome2/utilities.c:424
+#: ../src/gnome2/utilities.c:1043 ../src/main/sidebar.cc:832
 #: ../src/main/sidebar.cc:904 ../src/main/sidebar.cc:906
 msgid "Unknown"
 msgstr ""
@@ -693,39 +693,39 @@ msgid ""
 "Module Type"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1053 ../src/gnome2/utilities.c:480
+#: ../src/gnome2/mod_mgr.c:1053 ../src/gnome2/utilities.c:483
 #: ../src/main/sidebar.cc:979 ../src/main/sidebar.cc:981
 msgid "Biblical Texts"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1057 ../src/gnome2/utilities.c:484
+#: ../src/gnome2/mod_mgr.c:1057 ../src/gnome2/utilities.c:487
 #: ../src/main/sidebar.cc:658 ../src/main/sidebar.cc:1004
 #: ../src/main/sidebar.cc:1006 ../ui/prefs.glade.h:33
 msgid "Commentaries"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1061 ../src/gnome2/utilities.c:488
+#: ../src/gnome2/mod_mgr.c:1061 ../src/gnome2/utilities.c:491
 #: ../src/main/sidebar.cc:1013 ../src/main/sidebar.cc:1015
 msgid "Dictionaries"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1065 ../src/gnome2/utilities.c:492
+#: ../src/gnome2/mod_mgr.c:1065 ../src/gnome2/utilities.c:495
 #: ../src/main/sidebar.cc:1022 ../src/main/sidebar.cc:1024
 msgid "Daily Devotionals"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1069 ../src/gnome2/utilities.c:496
+#: ../src/gnome2/mod_mgr.c:1069 ../src/gnome2/utilities.c:499
 #: ../src/main/sidebar.cc:668 ../src/main/sidebar.cc:1031
 #: ../src/main/sidebar.cc:1033
 msgid "General Books"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1073 ../src/gnome2/utilities.c:500
+#: ../src/gnome2/mod_mgr.c:1073 ../src/gnome2/utilities.c:503
 #: ../src/main/sidebar.cc:1040 ../src/main/sidebar.cc:1042
 msgid "Maps"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1077 ../src/gnome2/utilities.c:504
+#: ../src/gnome2/mod_mgr.c:1077 ../src/gnome2/utilities.c:507
 #: ../src/main/sidebar.cc:1049 ../src/main/sidebar.cc:1051
 msgid "Images"
 msgstr ""
@@ -745,7 +745,7 @@ msgid "Uninstalled"
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:1098 ../src/gnome2/sidebar.c:642
-#: ../src/gnome2/utilities.c:509 ../src/main/prayerlists.cc:240
+#: ../src/gnome2/utilities.c:512 ../src/main/prayerlists.cc:240
 #: ../src/main/sidebar.cc:1059 ../src/main/sidebar.cc:1061
 msgid "Prayer List/Journal"
 msgstr ""
@@ -854,7 +854,7 @@ msgstr ""
 msgid "Choose"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1743 ../src/gnome2/preferences_dialog.c:1836
+#: ../src/gnome2/mod_mgr.c:1743 ../src/gnome2/preferences_dialog.c:1780
 #: ../src/gnome2/sidebar.c:1496
 msgid "Modules"
 msgstr ""
@@ -946,7 +946,7 @@ msgstr ""
 msgid "Synchronize this window from main window"
 msgstr ""
 
-#: ../src/gnome2/parallel_dialog.c:328 ../src/gnome2/preferences_dialog.c:1842
+#: ../src/gnome2/parallel_dialog.c:328 ../src/gnome2/preferences_dialog.c:1786
 msgid "Parallel"
 msgstr ""
 
@@ -1006,76 +1006,76 @@ msgstr ""
 msgid "The pixbuf to render."
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1236
-#: ../src/gnome2/preferences_dialog.c:1274
-#: ../src/gnome2/preferences_dialog.c:1311
-#: ../src/gnome2/preferences_dialog.c:1346
-#: ../src/gnome2/preferences_dialog.c:1380
-#: ../src/gnome2/preferences_dialog.c:1413
-#: ../src/gnome2/preferences_dialog.c:1445
-#: ../src/gnome2/preferences_dialog.c:1478
-#: ../src/gnome2/preferences_dialog.c:1510
-#: ../src/gnome2/preferences_dialog.c:1544
-#: ../src/gnome2/preferences_dialog.c:1579
-#: ../src/gnome2/preferences_dialog.c:1614
-#: ../src/gnome2/preferences_dialog.c:1650
-#: ../src/gnome2/preferences_dialog.c:1687
-#: ../src/gnome2/preferences_dialog.c:2097
+#: ../src/gnome2/preferences_dialog.c:1180
+#: ../src/gnome2/preferences_dialog.c:1218
+#: ../src/gnome2/preferences_dialog.c:1255
+#: ../src/gnome2/preferences_dialog.c:1290
+#: ../src/gnome2/preferences_dialog.c:1324
+#: ../src/gnome2/preferences_dialog.c:1357
+#: ../src/gnome2/preferences_dialog.c:1389
+#: ../src/gnome2/preferences_dialog.c:1422
+#: ../src/gnome2/preferences_dialog.c:1454
+#: ../src/gnome2/preferences_dialog.c:1488
+#: ../src/gnome2/preferences_dialog.c:1523
+#: ../src/gnome2/preferences_dialog.c:1558
+#: ../src/gnome2/preferences_dialog.c:1594
+#: ../src/gnome2/preferences_dialog.c:1631
+#: ../src/gnome2/preferences_dialog.c:2039
 msgid "-- Select --"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1694
+#: ../src/gnome2/preferences_dialog.c:1638
 msgid "Locale will take effect after restart."
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1730 ../ui/prefs.glade.h:74
+#: ../src/gnome2/preferences_dialog.c:1674 ../ui/prefs.glade.h:74
 msgid "Preferences"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1812
+#: ../src/gnome2/preferences_dialog.c:1756
 msgid "Fonts"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1815
+#: ../src/gnome2/preferences_dialog.c:1759
 msgid "Color"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1818
+#: ../src/gnome2/preferences_dialog.c:1762
 msgid "Sizes"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1822
+#: ../src/gnome2/preferences_dialog.c:1766
 msgid "General"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1825 ../ui/prefs.glade.h:87
+#: ../src/gnome2/preferences_dialog.c:1769 ../ui/prefs.glade.h:87
 msgid "Tabs and Panes"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1832
+#: ../src/gnome2/preferences_dialog.c:1776
 msgid "Options"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1839
+#: ../src/gnome2/preferences_dialog.c:1783
 msgid "Main"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1845
+#: ../src/gnome2/preferences_dialog.c:1789
 msgid "Special"
 msgstr ""
 
 #: ../src/gnome2/search_dialog.c:67 ../src/main/search_dialog.cc:65
-#: ../src/main/search_sidebar.cc:57
+#: ../src/main/search_sidebar.cc:61
 msgid "Searching the "
 msgstr ""
 
 #: ../src/gnome2/search_dialog.c:68 ../src/main/search_dialog.cc:66
-#: ../src/main/search_sidebar.cc:58
+#: ../src/main/search_sidebar.cc:62
 msgid " Module"
 msgstr ""
 
 #: ../src/gnome2/search_dialog.c:69 ../src/main/search_dialog.cc:67
-#: ../src/main/search_sidebar.cc:59
+#: ../src/main/search_sidebar.cc:63
 msgid "found in "
 msgstr ""
 
@@ -1099,65 +1099,65 @@ msgstr ""
 msgid "Are you sure you want to delete:"
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:194
+#: ../src/gnome2/search_sidebar.c:191
 msgid ""
 "This is an inclusive (\"AND\") search:\n"
 "Find matches showing all words."
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:211
+#: ../src/gnome2/search_sidebar.c:208
 msgid "Search Module"
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:225
+#: ../src/gnome2/search_sidebar.c:222
 msgid "Bible"
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:234 ../ui/prefs.glade.h:35
+#: ../src/gnome2/search_sidebar.c:231 ../ui/prefs.glade.h:35
 msgid "Commentary"
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:248
+#: ../src/gnome2/search_sidebar.c:245
 msgid "Search Type"
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:262 ../ui/search-dialog.glade.h:64
+#: ../src/gnome2/search_sidebar.c:259 ../ui/search-dialog.glade.h:64
 msgid "Multi word"
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:281 ../ui/search-dialog.glade.h:44
+#: ../src/gnome2/search_sidebar.c:278 ../ui/search-dialog.glade.h:44
 msgid "Exact phrase"
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:295
+#: ../src/gnome2/search_sidebar.c:292
 msgid "Search Options"
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:323
+#: ../src/gnome2/search_sidebar.c:320
 msgid "Search Scope"
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:336
+#: ../src/gnome2/search_sidebar.c:333
 msgid "No scope"
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:346
+#: ../src/gnome2/search_sidebar.c:343
 msgid "Use bounds"
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:355
+#: ../src/gnome2/search_sidebar.c:352
 msgid "Last search"
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:370
+#: ../src/gnome2/search_sidebar.c:367
 msgid "Bounds"
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:384
+#: ../src/gnome2/search_sidebar.c:381
 msgid "Lower"
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:391
+#: ../src/gnome2/search_sidebar.c:388
 msgid "Upper"
 msgstr ""
 
@@ -1292,27 +1292,27 @@ msgstr ""
 msgid "Chapter"
 msgstr ""
 
-#: ../src/main/main.c:115
+#: ../src/main/main.c:116
 msgid "Xiphos does not understand more than one argument."
 msgstr ""
 
-#: ../src/main/main.c:157
+#: ../src/main/main.c:158
 msgid "Initiating Gecko"
 msgstr ""
 
-#: ../src/main/main.c:163
+#: ../src/main/main.c:164
 msgid "Building Interface"
 msgstr ""
 
-#: ../src/main/main.c:167
+#: ../src/main/main.c:168
 msgid "Starting Sword"
 msgstr ""
 
-#: ../src/main/main.c:171
+#: ../src/main/main.c:172
 msgid "Loading Settings"
 msgstr ""
 
-#: ../src/main/main.c:175
+#: ../src/main/main.c:176
 msgid "Displaying Xiphos"
 msgstr ""
 
@@ -1724,7 +1724,7 @@ msgstr ""
 msgid "Search finished"
 msgstr ""
 
-#: ../src/main/search_sidebar.cc:96
+#: ../src/main/search_sidebar.cc:100
 msgid "matches"
 msgstr ""
 
@@ -1748,11 +1748,11 @@ msgid ""
 "May Xiphos invoke the Module Manager so that you may install a Bible?"
 msgstr ""
 
-#: ../src/main/settings.c:104
+#: ../src/main/settings.c:105
 msgid "$HOME is not set!"
 msgstr ""
 
-#: ../src/main/settings.c:118
+#: ../src/main/settings.c:120
 #, c-format
 msgid ""
 "Xiphos can not create  .xiphos:\n"
@@ -1761,12 +1761,12 @@ msgid ""
 "Xiphos cannot continue."
 msgstr ""
 
-#: ../src/main/settings.c:130 ../src/main/settings.c:138
-#: ../src/main/settings.c:146
+#: ../src/main/settings.c:133 ../src/main/settings.c:142
+#: ../src/main/settings.c:151
 msgid "can not create "
 msgstr ""
 
-#: ../src/main/settings.c:188
+#: ../src/main/settings.c:194
 msgid ""
 "There are still no Bibles installed.\n"
 "Evidently, you declined to install any.\n"
@@ -1776,11 +1776,11 @@ msgid ""
 "and will now exit."
 msgstr ""
 
-#: ../src/main/settings.c:192
+#: ../src/main/settings.c:198
 msgid "Bible module installation complete."
 msgstr ""
 
-#: ../src/main/settings.c:195
+#: ../src/main/settings.c:201
 msgid ""
 "Without any Bible modules to display,\n"
 "Xiphos cannot proceed,\n"
@@ -1795,39 +1795,39 @@ msgstr ""
 msgid "chapter"
 msgstr ""
 
-#: ../src/main/sword.cc:527
+#: ../src/main/sword.cc:537
 msgid ""
 "Xiphos's file for language\n"
 "abbreviations is missing."
 msgstr ""
 
-#: ../src/main/sword.cc:534
+#: ../src/main/sword.cc:544
 msgid ""
 "Xiphos's language abbreviation\n"
 "file cannot be opened."
 msgstr ""
 
-#: ../src/main/sword.cc:547
+#: ../src/main/sword.cc:557
 msgid ""
 "Xiphos cannot allocate space\n"
 "for language abbreviations."
 msgstr ""
 
-#: ../src/main/sword.cc:554
+#: ../src/main/sword.cc:564
 msgid ""
 "Xiphos cannot read the\n"
 "language abbreviation file."
 msgstr ""
 
-#: ../src/main/sword.cc:632
+#: ../src/main/sword.cc:642
 msgid "No matching locale found for"
 msgstr ""
 
-#: ../src/main/sword.cc:634
+#: ../src/main/sword.cc:644
 msgid "Book names and menus may not be translated"
 msgstr ""
 
-#: ../src/main/sword.cc:1220
+#: ../src/main/sword.cc:1230
 msgid "Daily devotional was requested, but there are none installed."
 msgstr ""
 
@@ -2636,6 +2636,10 @@ msgid "Use tabbed browsing Checkbox"
 msgstr ""
 
 #: ../ui/prefs.glade.h:95
+msgid "Verse Number"
+msgstr ""
+
+#: ../ui/prefs.glade.h:96
 msgid "Verse number size"
 msgstr ""
 
