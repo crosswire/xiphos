@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-28 22:37+0100\n"
+"POT-Creation-Date: 2009-10-31 21:43+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -642,7 +642,7 @@ msgid "Journals and prayer lists cannot be indexed."
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:554 ../src/gnome2/mod_mgr.c:2961
-#: ../ui/module-manager.glade.h:15
+#: ../ui/module-manager.glade.h:18
 msgid "Install"
 msgstr ""
 
@@ -650,11 +650,11 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:558
+#: ../src/gnome2/mod_mgr.c:558 ../ui/module-manager.glade.h:11
 msgid "Archive"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:560
+#: ../src/gnome2/mod_mgr.c:560 ../ui/module-manager.glade.h:17
 msgid "Index"
 msgstr ""
 
@@ -846,6 +846,10 @@ msgstr ""
 msgid "UID"
 msgstr ""
 
+#: ../src/gnome2/mod_mgr.c:1734
+msgid "Module Sources"
+msgstr ""
+
 #: ../src/gnome2/mod_mgr.c:1737
 msgid "Add/Remove"
 msgstr ""
@@ -922,6 +926,48 @@ msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:2740
 msgid "Delete a remote source"
+msgstr ""
+
+#. *****************************************************************************
+#. * Name
+#. *   gui_open_mod_mgr
+#. *
+#. * Synopsis
+#. *   #include "gui/mod_mgr.h"
+#. *
+#. *   void gui_open_mod_mgr(void)
+#. *
+#. * Description
+#. *
+#. *
+#. * Return value
+#. *   void
+#.
+#: ../src/gnome2/mod_mgr.c:3240
+msgid ""
+"<b>Welcome to the Module Manager.</b>\n"
+"\n"
+"This is Xiphos' mechanism to get new and updated content.\n"
+"It appears you have never been here before, so please take a moment to look "
+"it over.\n"
+"(You will see this information box just once.)\n"
+"\n"
+"Modules come from different <u>repositories</u>.  <b>Module Sources: Add/"
+"Remove</b> will show you what repositories are currently known.\n"
+"\n"
+"<b>Module Sources: Choose</b> is for deciding from where modules should "
+"come, that is, from which repository Xiphos should obtain them, as well as "
+"where they should be placed on your system. Set <i>Install Source</i> and "
+"<i>Install Destination</i>, then click <i>Refresh</i>.\n"
+"\n"
+"<b>Modules: Install/Update</b> is for selecting and obtaining modules after "
+"choosing source and destination.\n"
+"\n"
+"<b>Modules: Maintenance</b> is for archive and index creation.\n"
+"\n"
+"See section 5 of our manual for Module Manager detail, or ask for help via "
+"Live Chat, or (if no one is responsive in chat) send mail to our users' "
+"mailing list.\n"
 msgstr ""
 
 #: ../src/gnome2/navbar_book.c:359 ../src/gnome2/navbar_book_dialog.c:299
@@ -2229,43 +2275,47 @@ msgstr ""
 msgid "<i>System area, for all users:</i>"
 msgstr ""
 
-#: ../ui/module-manager.glade.h:11
+#: ../ui/module-manager.glade.h:12
 msgid "Continue"
 msgstr ""
 
-#: ../ui/module-manager.glade.h:12
+#: ../ui/module-manager.glade.h:13
 msgid "Current Remote Sources"
 msgstr ""
 
-#: ../ui/module-manager.glade.h:13
+#: ../ui/module-manager.glade.h:14
 msgid "Current local sources"
 msgstr ""
 
-#: ../ui/module-manager.glade.h:14
-msgid "Home dir"
+#: ../ui/module-manager.glade.h:15
+msgid "Delete Index"
 msgstr ""
 
 #: ../ui/module-manager.glade.h:16
-msgid "Load Standard"
-msgstr ""
-
-#: ../ui/module-manager.glade.h:17
-msgid "Local"
-msgstr ""
-
-#: ../ui/module-manager.glade.h:18
-msgid "Local Install Folder"
+msgid "Home dir"
 msgstr ""
 
 #: ../ui/module-manager.glade.h:19
-msgid "Module Manager"
+msgid "Load Standard"
 msgstr ""
 
 #: ../ui/module-manager.glade.h:20
-msgid "Remote"
+msgid "Local"
 msgstr ""
 
 #: ../ui/module-manager.glade.h:21
+msgid "Local Install Folder"
+msgstr ""
+
+#: ../ui/module-manager.glade.h:22
+msgid "Module Manager"
+msgstr ""
+
+#: ../ui/module-manager.glade.h:23
+msgid "Remote"
+msgstr ""
+
+#: ../ui/module-manager.glade.h:24
 msgid "Sword sys dir"
 msgstr ""
 
