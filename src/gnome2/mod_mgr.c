@@ -3242,8 +3242,10 @@ _("<b>Welcome to the Module Manager.</b>\n\nThis is Xiphos' mechanism to get new
 void gui_open_mod_mgr(void)
 {
 	if (!is_running) {
+		GtkWidget *dlg;
 		need_update = TRUE;
-		create_module_manager_dialog(FALSE);
+		dlg = create_module_manager_dialog(FALSE);
+		set_window_icon(GTK_WINDOW(dlg));
 		is_running = TRUE;
 		if (!settings.mod_mgr_intro) {
 			GtkWidget *dialog;
@@ -3287,6 +3289,7 @@ void gui_open_mod_mgr_initial_run(void)
 	need_update = FALSE;
 	first_time_user = TRUE;
 	dlg = create_module_manager_dialog(TRUE);
+	set_window_icon(GTK_WINDOW(dlg));
 	gtk_dialog_run((GtkDialog *) dlg);
 	gtk_widget_destroy(dlg);
 	first_time_user = FALSE;
