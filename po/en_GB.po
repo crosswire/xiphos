@@ -3,19 +3,20 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Thomas Abthorpe <tabthorpe@FreeBSD.org>, 2009.
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: xiphos\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-09-02 11:49+0100\n"
-"PO-Revision-Date: 2009-10-15 16:07-0400\n"
+"PO-Revision-Date: 2009-11-04\n"
 "Last-Translator: Thomas Abthorpe <tabthorpe@FreeBSD.org>\n"
 "Language-Team: British English\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Language: en_GB\n"
 
 #: ../src/backend/sword_main.cc:1158
 msgid "Configuration not found"
@@ -763,7 +764,7 @@ msgstr "Module Name"
 
 #: ../src/gnome2/mod_mgr.c:1438
 msgid "A checkmark means this module is already installed"
-msgstr "A checkmark means this module is already installed"
+msgstr "A tickmark means this module is already installed"
 
 #: ../src/gnome2/mod_mgr.c:1460
 msgid "Click the box to work on this module"
@@ -1580,8 +1581,8 @@ msgstr ""
 
 #: ../src/main/prayerlists.cc:341
 msgid ""
-"<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</"
-"b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"
+"<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</b><br>pews<br>fellowship<br>Bibles "
+"for missionaries<br><br><br>"
 msgstr ""
 
 #: ../src/main/prayerlists.cc:367
@@ -2041,33 +2042,27 @@ msgstr ""
 msgid "Delete the current note"
 msgstr ""
 
-#: ../ui/editor_note.xml.h:2 ../ui/editor_studypad.xml.h:4
-#: ../ui/editor.xml.h:2
+#: ../ui/editor_note.xml.h:2 ../ui/editor_studypad.xml.h:4 ../ui/editor.xml.h:2
 msgid "E_xit"
 msgstr ""
 
-#: ../ui/editor_note.xml.h:3 ../ui/editor_studypad.xml.h:5
-#: ../ui/editor.xml.h:3
+#: ../ui/editor_note.xml.h:3 ../ui/editor_studypad.xml.h:5 ../ui/editor.xml.h:3
 msgid "Exit"
 msgstr ""
 
-#: ../ui/editor_note.xml.h:4 ../ui/editor_studypad.xml.h:6
-#: ../ui/editor.xml.h:4
+#: ../ui/editor_note.xml.h:4 ../ui/editor_studypad.xml.h:6 ../ui/editor.xml.h:4
 msgid "Exit the program"
 msgstr ""
 
-#: ../ui/editor_note.xml.h:5 ../ui/editor_studypad.xml.h:7
-#: ../ui/editor.xml.h:5
+#: ../ui/editor_note.xml.h:5 ../ui/editor_studypad.xml.h:7 ../ui/editor.xml.h:5
 msgid "For_mat"
 msgstr ""
 
-#: ../ui/editor_note.xml.h:6 ../ui/editor_studypad.xml.h:8
-#: ../ui/editor.xml.h:6
+#: ../ui/editor_note.xml.h:6 ../ui/editor_studypad.xml.h:8 ../ui/editor.xml.h:6
 msgid "HTML Format switch"
 msgstr ""
 
-#: ../ui/editor_note.xml.h:7 ../ui/editor_studypad.xml.h:9
-#: ../ui/editor.xml.h:7
+#: ../ui/editor_note.xml.h:7 ../ui/editor_studypad.xml.h:9 ../ui/editor.xml.h:7
 msgid "HTML mode"
 msgstr ""
 
@@ -3402,5 +3397,3 @@ msgstr ""
 #: ../xiphos.desktop.in.in.h:2
 msgid "Xiphos Bible Guide"
 msgstr ""
-
-
