@@ -789,8 +789,7 @@ static gboolean button_release_event(GtkWidget * widget,
 			gtk_widget_set_sensitive(menu.in_dialog, !multi);
 			gtk_widget_set_sensitive(menu.new, FALSE);
 			gtk_widget_set_sensitive(menu.insert, FALSE);
-			gtk_widget_set_sensitive(menu.rr_submenu,
-						 FALSE);
+			gtk_widget_set_sensitive(menu.remove, FALSE);
 		} else {
 			/* click on treeview folder to expand or collapse it */			
 			path = gtk_tree_model_get_path(
@@ -807,7 +806,7 @@ static gboolean button_release_event(GtkWidget * widget,
 			gtk_widget_set_sensitive(menu.in_dialog, FALSE);
 			gtk_widget_set_sensitive(menu.new, TRUE);
 			gtk_widget_set_sensitive(menu.insert, TRUE);
-			gtk_widget_set_sensitive(menu.rr_submenu, TRUE);
+			gtk_widget_set_sensitive(menu.remove, TRUE);
 		}
 
 		gtk_widget_set_sensitive(menu.bibletime,
@@ -842,10 +841,9 @@ static gboolean button_release_event(GtkWidget * widget,
 			gtk_widget_set_sensitive(menu.edit, FALSE);
 			gtk_widget_set_sensitive(menu.delete, FALSE);
 			gtk_widget_set_sensitive(menu.bibletime, FALSE);
-			gtk_widget_set_sensitive(menu.rr_submenu,
-						 FALSE);
 			gtk_widget_set_sensitive(menu.remove, FALSE);
-			gtk_widget_set_sensitive(menu.restore, FALSE);
+			//gtk_widget_set_sensitive(menu.remove, FALSE);
+			//gtk_widget_set_sensitive(menu.restore, FALSE);
 			return TRUE;
 		} else {
 			gtk_widget_set_sensitive(menu.bibletime,

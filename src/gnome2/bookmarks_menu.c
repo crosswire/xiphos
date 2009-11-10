@@ -1,4 +1,4 @@
-/*
+/* 
  * Xiphos Bible Study Tool
  * bookmarks_treeview.c - gui for bookmarks using treeview
  *
@@ -37,6 +37,7 @@
 #include "gui/xiphos.h"
 #include "gui/bookmarks_menu.h"
 #include "gui/bookmarks_treeview.h"
+#include "gui/export_bookmarks.h"
 #include "gui/utilities.h"
 #include "gui/main_window.h"
 #include "gui/dialog.h"
@@ -61,128 +62,14 @@
 
 #include "gui/debug_glib_null.h"
 
+
+
+
 BOOKMARK_MENU menu;
 
 gboolean bookmarks_changed;
 
 
-
-/******************************************************************************
- * Name
- *  parse_treeview
- *
- * Synopsis
- *   #include "gui/bookmarks_menu.h"
- *
- *   void parse_treeview(xmlNodePtr parent, GtkTreeIter * tree_parent)	
- *
- * Description
- *    
- *
- * Return value
- *   void
- */
-
-static void parse_treeview(xmlNodePtr parent, GtkTreeIter * tree_parent)
-{
-	static xmlNodePtr cur_node;
-	GtkTreeIter child;
-	gchar *caption = NULL;
-	gchar *key = NULL;
-	gchar *module = NULL;
-	gchar *mod_desc = NULL;
-	gchar *description = NULL;
-	
-	gtk_tree_model_iter_children(GTK_TREE_MODEL(model), &child,
-                                             tree_parent);
-	
-	do {
-		gtk_tree_model_get(GTK_TREE_MODEL(model), &child,
-			   		2, &caption, 
-					3, &key, 
-					4, &module, 
-					5, &mod_desc, 
-					6, &description,
-					-1);
-		if(gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model), 
-							&child)) {
-			cur_node = xml_add_folder_to_parent(parent, 
-							caption);
-			parse_treeview(cur_node, &child);
-						     
-		}
-		else 
-			xml_add_bookmark_to_parent(parent, 
-						description,
-						key,
-						module,
-						mod_desc);
-		
-		g_free(caption);
-		g_free(key);
-		g_free(module);	
-		g_free(mod_desc);
-		g_free(description);
-	} while(gtk_tree_model_iter_next(GTK_TREE_MODEL(model), &child));
-}
-
-
-/******************************************************************************
- * Name
- *   save_iter_to_xml_removed
- *
- * Synopsis
- *   #include "gui/bookmarks_menu.h"
- *
- *   void save_iter_to_xml_removed(GtkTreeIter * iter)	
- *
- * Description
- *    
- *
- * Return value
- *   void
- */
-
-static void save_iter_to_xml_removed(GtkTreeIter * iter)
-{
-	xmlNodePtr root_node = NULL;
-	xmlNodePtr cur_node = NULL;
-	xmlDocPtr root_doc;
-	xmlAttrPtr root_attr;
-	//const xmlChar *xml_filename;
-	gchar *caption = NULL;
-	gchar filename[256];
-//	GtkTreeIter child;
-	
-	if (!bookmarks_changed) 
-		return;
-	
-	gtk_tree_model_get(GTK_TREE_MODEL(model), iter,
-			   2, &caption, -1);
-	sprintf(filename, "%s/bookmarks/removed/%s.xml", settings.gSwordDir,caption);
-	//xml_filename = (const xmlChar *) buf;
-	root_doc = xmlNewDoc((const xmlChar *) "1.0");
-	
-	if (root_doc != NULL) {
-		root_node = xmlNewNode(NULL, (const xmlChar *)
-				       "SwordBookmarks");
-		root_attr =
-		    xmlNewProp(root_node, (const xmlChar *)"syntaxVersion",
-			       (const xmlChar *) "1");
-		xmlDocSetRootElement(root_doc, root_node);
-	}
-	gtk_tree_model_get(GTK_TREE_MODEL(model), iter,
-			   2, &caption, -1);
-		if( gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model),iter)) {
-			cur_node = xml_add_folder_to_parent(root_node, caption);
-			parse_treeview(cur_node, iter);
-		}
-	g_free(caption);
-	xmlSaveFormatFile(filename, root_doc,1);
-	xmlFreeDoc(root_doc);
-	
-	bookmarks_changed = FALSE;
-}
 
 /******************************************************************************
  * Name
@@ -238,7 +125,7 @@ static void save_treeview_to_xml_bookmarks(GtkTreeIter * iter, gchar * filename)
 					-1);
 		if( gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model),iter)) {
 			cur_node = xml_add_folder_to_parent(root_node, caption);
-			parse_treeview(cur_node, iter);
+			utilities_parse_treeview(cur_node, iter, model);
 		}
 		else 		
 			xml_add_bookmark_to_parent(root_node,  
@@ -540,7 +427,8 @@ G_MODULE_EXPORT void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user
 	g_string_free(str,TRUE);
 }
 
-
+//dialog_export_bookmarks_response_cb
+//dialog_export_bookmarks_close_cb
 /******************************************************************************
  * Name
  *   on_remove_folder_activate
@@ -557,31 +445,11 @@ G_MODULE_EXPORT void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user
  *   void
  */
 
-G_MODULE_EXPORT void on_remove_folder_activate(GtkMenuItem * menuitem,
+G_MODULE_EXPORT void on_export_folder_activate(GtkMenuItem * menuitem,
 			       gpointer user_data)
 {
-	GtkTreeSelection* selection;
-	GtkTreeIter selected;
-//	GtkTreeIter iter;
-	gchar buf[256];
-	gchar *caption = NULL;
-	
-	selection = gtk_tree_view_get_selection(bookmark_tree);
-	if(!gtk_tree_selection_get_selected(selection, NULL, &selected)) 
-		return;
-	gtk_tree_model_get(GTK_TREE_MODEL(model), &selected,
-				   2, &caption, -1);
+	gui_export_bookmarks_dialog();
 
-	sprintf(buf, "%s/removed/%s.xml", settings.swbmDir,
-		caption);
-	GS_warning(("%s", buf));
-
-	bookmarks_changed = TRUE;
-	save_iter_to_xml_removed(&selected);
-	gtk_tree_store_remove(GTK_TREE_STORE(model), &selected);
-	bookmarks_changed = TRUE;
-	gui_save_bookmarks(NULL, NULL);
-	g_free(caption);
 }
 
 
@@ -1088,7 +956,7 @@ G_MODULE_EXPORT void on_open_in_tab_activate(GtkMenuItem * menuitem, gpointer us
  * Return value
  *   void
  */
-
+ 
 void gui_create_bookmark_menu(void)
 {
 	gchar *glade_file;
@@ -1114,7 +982,7 @@ void gui_create_bookmark_menu(void)
 	menu.reorder = glade_xml_get_widget (gxml, "allow_reordering");  // pmBookmarkTree_uiinfo[10].widget;
 
 	menu.bibletime = glade_xml_get_widget (gxml, "import_bibletime_bookmarks1");  // pmBookmarkTree_uiinfo[12].widget;
-	menu.rr_submenu = glade_xml_get_widget (gxml, "remove_restore");  // pmBookmarkTree_uiinfo[13].widget;
+	//menu.rr_submenu = glade_xml_get_widget (gxml, "remove_restore");  // pmBookmarkTree_uiinfo[13].widget;
 
 	menu.remove = glade_xml_get_widget (gxml, "remove_folder");  // rr_menu_uiinfo[0].widget;
 	menu.restore = glade_xml_get_widget (gxml, "restore_folder");  // rr_menu_uiinfo[2].widget;
@@ -1127,12 +995,11 @@ void gui_create_bookmark_menu(void)
 	gtk_widget_set_sensitive(menu.delete, FALSE);
 	gtk_widget_set_sensitive(menu.bibletime, settings.have_bibletime);
 
-	gtk_widget_set_sensitive(menu.rr_submenu, FALSE);
+	//gtk_widget_set_sensitive(menu.rr_submenu, FALSE);
 	gtk_widget_set_sensitive(menu.remove, TRUE);
 	gtk_widget_set_sensitive(menu.restore, TRUE);
-
-	gtk_widget_hide(menu.rr_submenu);
-	/* don't know what this is -- turn it off for now */
+	//gtk_widget_hide(menu.remove);
+	gtk_widget_hide(menu.restore);
 	
     	/* connect signals and data */
 	glade_xml_signal_autoconnect_full
