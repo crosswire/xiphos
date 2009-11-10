@@ -56,7 +56,7 @@ void bibletime_bookmarks_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_allow_reordering_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_dialog_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user_data);
-void on_remove_folder_activate(GtkMenuItem * menuitem, gpointer user_data);
+void on_export_folder_activate(GtkMenuItem * menuitem, gpointer user_data);
 void restore_ok(GtkButton * button, GtkWidget * filesel);
 void restore_cancel(GtkButton * button, GtkWidget * dlg);
 void on_restore_folder_activate(GtkMenuItem * menuitem, gpointer user_data);

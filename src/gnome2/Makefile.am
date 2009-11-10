@@ -22,6 +22,7 @@ xiphos_SOURCES =  \
     dictlex_dialog.c \
     display_info.c \
     dummy.cpp \
+    export_bookmarks.c \
     export_dialog.c \
     find_dialog.c \
     font_dialog.c \
