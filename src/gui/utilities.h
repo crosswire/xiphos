@@ -27,6 +27,7 @@ extern "C" {
 #endif
 	
 #include <gnome.h>
+#include <libxml/parser.h>
 #include "main/configs.h"
 #include "main/module_dialogs.h"
 
@@ -84,6 +85,9 @@ GdkPixbuf *pixbuf_finder(char *image, GError **error);
 void HtmlOutput(char *text, GtkWidget *gtkText, MOD_FONT *mf, char *anchor);
 void set_window_icon(GtkWindow *window);
 gboolean xiphos_open_default(const gchar *file);
+void utilities_parse_treeview(xmlNodePtr parent, 
+                              GtkTreeIter * tree_parent, 
+                              GtkTreeStore *model);
 
 enum {
 	LANGSET_BIBLE,

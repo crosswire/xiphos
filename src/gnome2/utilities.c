@@ -44,6 +44,7 @@
 #include "main/configs.h"
 #include "main/sword.h"
 #include "main/url.hh"
+#include "main/xml.h"
 
 #ifdef WIN32
 #undef DATADIR
@@ -63,6 +64,68 @@
 #endif /* USE_GTKMOZEMBED */
 
 #include "gui/debug_glib_null.h"
+
+
+
+/******************************************************************************
+ * Name
+ *  utilities_parse_treeview
+ *
+ * Synopsis
+ *   #include "gui/bookmarks_menu.h"
+ *
+ *   void utilities_parse_treeview(xmlNodePtr parent, GtkTreeIter * tree_parent)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
+
+void utilities_parse_treeview(xmlNodePtr parent, GtkTreeIter * tree_parent, GtkTreeStore *model)
+{
+	static xmlNodePtr cur_node;
+	GtkTreeIter child;
+	gchar *caption = NULL;
+	gchar *key = NULL;
+	gchar *module = NULL;
+	gchar *mod_desc = NULL;
+	gchar *description = NULL;
+	
+	gtk_tree_model_iter_children(GTK_TREE_MODEL(model), &child,
+                                             tree_parent);
+	
+	do {
+		gtk_tree_model_get(GTK_TREE_MODEL(model), &child,
+			   		2, &caption, 
+					3, &key, 
+					4, &module, 
+					5, &mod_desc, 
+					6, &description,
+					-1);
+		if(gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model), 
+							&child)) {
+			cur_node = xml_add_folder_to_parent(parent, 
+							caption);
+			utilities_parse_treeview(cur_node, &child, model);
+						     
+		}
+		else 
+			xml_add_bookmark_to_parent(parent, 
+						description,
+						key,
+						module,
+						mod_desc);
+		
+		g_free(caption);
+		g_free(key);
+		g_free(module);	
+		g_free(mod_desc);
+		g_free(description);
+	} while(gtk_tree_model_iter_next(GTK_TREE_MODEL(model), &child));
+}
+
 
 gint gui_of2tf(const gchar * on_off)
 {
