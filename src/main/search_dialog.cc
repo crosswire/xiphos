@@ -1565,7 +1565,8 @@ void main_do_dialog_search(void)
 	g_list_free(search_mods);
 	gui_set_progressbar_text(search1.progressbar, _("Search finished"));
 	gui_set_progressbar_fraction(search1.progressbar, 0);
-	g_string_free(str, TRUE);	
+	g_string_free(str, TRUE);
+	gtk_widget_grab_focus(search1.listview_verses);
 }
 
 /******************************************************************************

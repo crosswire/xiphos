@@ -1000,7 +1000,6 @@ static void _finds_verselist_selection_changed(GtkWidget * widget,
 	main_finds_verselist_selection_changed(selection, model, event->type == GDK_2BUTTON_PRESS);
 }
 
-
 /******************************************************************************
  * Name
  *   selection_range_lists_changed
@@ -1039,6 +1038,42 @@ static void selection_range_lists_changed(GtkTreeSelection * selection,
 	gtk_entry_set_text(GTK_ENTRY(search1.entry_range_text), range);
 	g_free(name);
 	g_free(range);
+}
+
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *   void (GtkTreeSelection * selection,
+ *		     					 gpointer data)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void selection_verselist_changed(GtkTreeSelection * selection,
+					  gpointer data)
+{
+	GtkTreeModel *model;
+	GtkTreeIter selected;
+
+	if (!gtk_tree_selection_get_selected
+	    (selection, NULL, &selected))
+		return;
+
+	model =
+	    gtk_tree_view_get_model(GTK_TREE_VIEW
+				    (search1.list_range_name));
+	main_finds_verselist_selection_changed(selection,
+					    model, 
+					    FALSE);
 }
 
 
@@ -1151,6 +1186,7 @@ static
 void _setup_listviews2(GtkWidget * listview, GCallback callback)
 {
 	GtkListStore *model;
+	GObject *selection;
 
 	model = gtk_list_store_new(2, G_TYPE_STRING, G_TYPE_STRING);
 	gtk_tree_view_set_model(GTK_TREE_VIEW(listview),
@@ -1164,7 +1200,15 @@ void _setup_listviews2(GtkWidget * listview, GCallback callback)
 	g_signal_connect((gpointer) listview,
 				"button_release_event",
 				G_CALLBACK(callback), NULL);
-
+	selection =
+	    G_OBJECT(gtk_tree_view_get_selection
+		     (GTK_TREE_VIEW(listview)));
+	/*g_signal_connect((gpointer) listview,
+				"key_press_event",
+				G_CALLBACK(tree_key_press_cb), NULL);*/
+	g_signal_connect(selection, "changed", G_CALLBACK(selection_verselist_changed),
+			 NULL);
+	
 }
 
 
