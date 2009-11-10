@@ -118,10 +118,10 @@ void _parse_treeview (GString *str, GtkTreeIter * tree_parent,
 		if ( key ) {
 			switch (data->type) {
 				case HTML:
-					buf = g_strdup_printf("<li>%s:%s",module,key);
+					buf = g_strdup_printf("<li>%s &nbsp;&nbsp;%s &nbsp;&nbsp;%s",description,module,key);
 				break;
 				case PLAIN:
-					buf = g_strdup_printf("%s%s:%s\n",tab,module,key);
+					buf = g_strdup_printf("%s%s   %s  %s\n",tab,description,module,key);
 				break;
 			}
 		} else { 
