@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <interface>
-  <requires lib="gtk+" version="2.16"/>
+  <!-- interface-requires gtk+ 2.12 -->
   <!-- interface-naming-policy project-wide -->
   <object class="GtkDialog" id="dialog_export_bookmarks">
     <property name="border_width">5</property>
@@ -133,8 +133,8 @@
               <object class="GtkFileChooserWidget" id="filechooserwidget">
                 <property name="visible">True</property>
                 <property name="orientation">vertical</property>
-                <property name="do_overwrite_confirmation">True</property>
                 <property name="action">save</property>
+                <property name="do_overwrite_confirmation">True</property>
                 <property name="local_only">False</property>
               </object>
               <packing>
