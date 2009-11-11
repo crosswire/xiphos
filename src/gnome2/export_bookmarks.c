@@ -60,7 +60,39 @@ void checkbutton_include_text_toggled_cb(GtkToggleButton * togglebutton,
 void radiobutton_html_toggled_cb(GtkToggleButton * togglebutton,
 								BK_EXPORT * data);
 
+/*
+void _search_verselist_export(GList * verses, gint save_as_single)
+{
+	//gint test;
+	gchar *tmpbuf;
+	gchar *module_name = NULL;
+	GString *str = g_string_new ("");
+	//GtkTreeIter parent;
+	//GtkTreeIter iter;
+	//RESULTS *list_item;
 
+	while (verses) {
+		list_item = (RESULTS *) verses->data;
+		module_name = list_item->module;
+		tmpbuf = list_item->key;
+		g_string_sprintf(str, "%s, %s", tmpbuf,
+				 module_name);
+		GS_message(("bookmark: %s",str->str));*/
+		/*gtk_tree_store_append(GTK_TREE_STORE(model),
+				      &iter, &parent);
+		gtk_tree_store_set(GTK_TREE_STORE(model), &iter,
+				   COL_OPEN_PIXBUF,
+				   bm_pixbufs->pixbuf_helpdoc,
+				   COL_CLOSED_PIXBUF, NULL,
+				   COL_CAPTION, str->str,
+				   COL_KEY, tmpbuf, 
+				   COL_MODULE, module_name, 
+				   -1);*/
+/*		verses = g_list_next(verses);
+	}
+	g_string_free(str, TRUE);
+}
+*/
 /******************************************************************************
  * Name
  *  _parse_treeview_html
@@ -393,6 +425,15 @@ void dialog_export_bookmarks_response_cb (  GtkDialog * dialog,
 		g_free(data->filename);
 	g_free(data);
 	gtk_widget_destroy(GTK_WIDGET(dialog));
+}
+
+G_MODULE_EXPORT
+gboolean dialog_vbox1_key_press_event_cb (GtkWidget   * widget,
+                                          GdkEventKey * event,
+                                          gpointer     user_data)
+{
+
+
 }
 
 void gui_export_bookmarks_dialog(void)
