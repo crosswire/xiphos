@@ -44,6 +44,9 @@ typedef struct  _export_bookmarks BK_EXPORT;
 
 
 void gui_export_bookmarks_dialog(void);
+gboolean dialog_vbox1_key_press_event_cb(GtkWidget   * widget,
+					 GdkEventKey * event,
+					 gpointer    user_data);
 
 #ifdef __cplusplus
 }

@@ -432,8 +432,7 @@ gboolean dialog_vbox1_key_press_event_cb (GtkWidget   * widget,
                                           GdkEventKey * event,
                                           gpointer     user_data)
 {
-
-
+	return TRUE;
 }
 
 void gui_export_bookmarks_dialog(void)
