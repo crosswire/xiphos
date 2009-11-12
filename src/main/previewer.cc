@@ -410,12 +410,12 @@ void mark_search_words(GString * str)
 		list = NULL;
 		/* seperate the search words and add them to a glist */
 		if ((token = strtok(searchbuf, " ")) != NULL) {
-			if (!isalpha(*token) && isalpha(*(token+1)))
+			if (!isalnum(*token) && isalnum(*(token+1)))
 				token++;
 			list = g_list_append(list, token);
 			++count;
 			while ((token = strtok(NULL, " ")) != NULL) {
-				if (!isalpha(*token) && isalpha(*(token+1)))
+				if (!isalnum(*token) && isalnum(*(token+1)))
 					token++;
 				list = g_list_append(list, token);
 				++count;
@@ -430,6 +430,15 @@ void mark_search_words(GString * str)
 
 		for (i = 0; i < count; i++) {
 			len_overall = strlen(buf);
+			if (settings.searchType == -4) {
+				// remove metachars and anything following ("WORD*")
+				for (tmpbuf = (gchar *)list->data;
+				     *tmpbuf && isalnum(*tmpbuf);
+				     ++tmpbuf)
+					; // nothing, just skipping to end or non-alnum
+				if (*tmpbuf)
+					*tmpbuf = '\0';
+			}
 			len_word = strlen((gchar *)list->data);
 
 			/* find search word in verse */
