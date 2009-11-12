@@ -1,3 +1,8 @@
+2009-11-12  karl <charcoal@users.sf.net>
+
+	* improve search word color marking slightly, so that wildcard-
+	  matched roots get colored.
+
 2009-11-10 terry <tbiggs@users.sourceforge.net>
 
 	* add bookmark exporter.
