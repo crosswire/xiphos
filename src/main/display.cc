@@ -236,7 +236,7 @@ marked_cache_fill(gchar *modname, gchar *key)
 				for (int i = 0; i < NUM_REPLACE; ++i) {
 					for (s = strchr(e->annotation->str, replacement[i].c);
 					     s;
-					     s = strchr(s, replacement[i].c)) {
+					     s = strchr(e->annotation->str, replacement[i].c)) {
 						(void) g_string_erase(e->annotation,
 								      s - (e->annotation->str), 1);
 						(void) g_string_insert(e->annotation,
