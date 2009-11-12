@@ -436,7 +436,7 @@ void mark_search_words(GString * str)
 				     *tmpbuf && isalnum(*tmpbuf);
 				     ++tmpbuf)
 					; // nothing, just skipping to end or non-alnum
-				if (*tmpbuf)
+				if ((tmpbuf != list->data) && *tmpbuf)
 					*tmpbuf = '\0';
 			}
 			len_word = strlen((gchar *)list->data);
