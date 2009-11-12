@@ -438,9 +438,9 @@ void mark_search_words(GString * str)
 					; // nothing, just skipping to end or non-alnum
 				if ((tmpbuf != list->data) && *tmpbuf)
 					*tmpbuf = '\0';
-				else if (!stricmp((gchar *)list->data, "and") ||
-					 !stricmp((gchar *)list->data, "or")  ||
-					 !stricmp((gchar *)list->data, "not")) {
+				else if (!sword::stricmp((gchar *)list->data, "and") ||
+					 !sword::stricmp((gchar *)list->data, "or")  ||
+					 !sword::stricmp((gchar *)list->data, "not")) {
 						// don't color boolean ops.
 						goto next_word;
 				}
