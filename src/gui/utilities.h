@@ -87,7 +87,7 @@ void set_window_icon(GtkWindow *window);
 gboolean xiphos_open_default(const gchar *file);
 void utilities_parse_treeview(xmlNodePtr parent, 
                               GtkTreeIter * tree_parent, 
-                              GtkTreeStore *model);
+                              GtkTreeModel *model);
 
 enum {
 	LANGSET_BIBLE,
