@@ -26,6 +26,7 @@
 extern "C" {
 #endif
 
+gboolean main_export_current_adv_search (GString * str, gboolean html, gboolean with_scripture);
 void main_save_current_adv_search_as_bookmarks (void);
 void main_drag_drop_display_in_main(const char * uri);
 void main_add_mod_to_list(GtkWidget * tree_widget, gchar * mod_name);

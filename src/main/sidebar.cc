@@ -145,6 +145,8 @@ void main_display_verse_list_in_sidebar(gchar * key,
 	GtkTreeIter iter;
 	RESULTS *list_item;
 
+	is_search_result = FALSE;
+	
 	GS_warning(("verse_list = %s",verse_list));
 	list_of_verses = g_list_first(list_of_verses);
 	if (list_of_verses) {
@@ -181,6 +183,13 @@ void main_display_verse_list_in_sidebar(gchar * key,
 		gtk_list_store_set(list_store, &iter, 0,
 				   (const char *) tmp->data, -1);
 		++i;
+		
+		list_item = g_new(RESULTS,1);
+		list_item->module = g_strdup(module_name);
+		list_item->key = g_strdup((const char *) tmp->data);
+		list_of_verses = g_list_append(list_of_verses, 
+					       (RESULTS *) list_item);
+		
 		tmp = g_list_next(tmp);
 	}
 

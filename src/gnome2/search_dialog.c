@@ -47,6 +47,7 @@
 #include "gui/utilities.h"
 #include "gui/widgets.h"
 #include "gtk/gtk.h"
+#include "gui/export_bookmarks.h"
 
 #include "main/search_dialog.h"
 #include "main/configs.h"
@@ -190,6 +191,28 @@ void button_save(GtkButton * button, gpointer user_data)
 	main_save_current_adv_search_as_bookmarks ();
 }
 
+
+/******************************************************************************
+ * Name
+ *   button_export
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *   void button_export(GtkButton * button, gpointer user_data)
+ *
+ * Description
+ *   calls main_save_current_adv_search_as_bookmarks() in main/search_dialog.cc
+ *   to do the work of saving current search as bookmarks
+ *
+ * Return value
+ *   void
+ */
+
+void button_export(GtkButton * button, gpointer user_data)
+{
+	gui_export_bookmarks_dialog(ADV_SEARCH_RESULTS_EXPORT, NULL);
+}
 
 /******************************************************************************
  * Name
@@ -1483,8 +1506,8 @@ void _create_search_dialog(void)
 	GtkWidget *toolbutton8;
 	GtkWidget *toolbutton10;
 	GtkWidget *toolbutton11;
-	GtkWidget *toolbutton12;
-	
+	GtkWidget *toolbutton12;	
+	GtkWidget *toolbutton13;
 	module_selected = NULL;
 	verse_selected = NULL;
 	_preview_on = TRUE;
@@ -1622,6 +1645,10 @@ void _create_search_dialog(void)
 	g_signal_connect(toolbutton12, "clicked",
 			 G_CALLBACK(on_toolbutton12_clicked), NULL);
 			 
+	toolbutton13 = glade_xml_get_widget(gxml, "toolbutton_export");
+	g_signal_connect(toolbutton13, "clicked",
+			 G_CALLBACK(button_export), NULL);
+	
 	search1.togglebutton_show_main =
 	    glade_xml_get_widget(gxml, "toggletoolbutton1");
 	g_signal_connect(search1.togglebutton_show_main, "toggled",
