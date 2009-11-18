@@ -66,7 +66,6 @@
 #include "gui/debug_glib_null.h"
 
 
-
 /******************************************************************************
  * Name
  *  utilities_parse_treeview
@@ -83,7 +82,7 @@
  *   void
  */
 
-void utilities_parse_treeview(xmlNodePtr parent, GtkTreeIter * tree_parent, GtkTreeStore *model)
+void utilities_parse_treeview(xmlNodePtr parent, GtkTreeIter * tree_parent, GtkTreeModel *model)
 {
 	static xmlNodePtr cur_node;
 	GtkTreeIter child;

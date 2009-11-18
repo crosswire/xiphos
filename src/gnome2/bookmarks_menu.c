@@ -93,7 +93,6 @@ static void save_treeview_to_xml_bookmarks(GtkTreeIter * iter, gchar * filename)
 	xmlNodePtr cur_node = NULL;
 	xmlDocPtr root_doc;
 	xmlAttrPtr root_attr;
-	//const xmlChar *xml_filename;
 	gchar *caption = NULL;
 	gchar *key = NULL;
 	gchar *module = NULL;
@@ -102,8 +101,7 @@ static void save_treeview_to_xml_bookmarks(GtkTreeIter * iter, gchar * filename)
 	
 	if (!bookmarks_changed) 
 		return;
-	
-	//xml_filename = (const xmlChar *) filename;
+
 	root_doc = xmlNewDoc((const xmlChar *) "1.0");
 	
 	if (root_doc != NULL) {
@@ -125,7 +123,7 @@ static void save_treeview_to_xml_bookmarks(GtkTreeIter * iter, gchar * filename)
 					-1);
 		if( gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model),iter)) {
 			cur_node = xml_add_folder_to_parent(root_node, caption);
-			utilities_parse_treeview(cur_node, iter, model);
+			utilities_parse_treeview(cur_node, iter, GTK_TREE_MODEL(model));
 		}
 		else 		
 			xml_add_bookmark_to_parent(root_node,  
@@ -448,7 +446,7 @@ G_MODULE_EXPORT void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user
 G_MODULE_EXPORT void on_export_folder_activate(GtkMenuItem * menuitem,
 			       gpointer user_data)
 {
-	gui_export_bookmarks_dialog();
+	gui_export_bookmarks_dialog(BOOKMARKS_EXPORT,NULL);
 
 }
 

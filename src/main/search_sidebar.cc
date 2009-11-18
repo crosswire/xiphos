@@ -101,6 +101,8 @@ static void fill_search_results_list(int finds)
 	RESULTS *list_item;
 	gchar *num;
 
+	is_search_result = TRUE;
+	
 	if (list_of_verses) {
 		GList *chaser = list_of_verses;
 		while (chaser) {

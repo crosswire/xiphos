@@ -57,6 +57,7 @@ extern "C" {
 #include "gui/widgets.h"
 #include "gui/dialog.h"
 #include "gui/utilities.h"
+#include "gui/export_bookmarks.h"
 
 #include "backend/sword_main.hh"
 
@@ -84,6 +85,83 @@ int drag_module_type;
 
 static GList *list_of_finds;
 static GList *list_for_bookmarking = NULL;
+
+
+
+/******************************************************************************
+ * Name
+ *   main_export_current_adv_search
+ *
+ * Synopsis
+ *   #include "main/search_dialog.h"
+ *
+ *   void  main_export_current_adv_search(GString * str, gboolean html)
+ *
+ * Description
+ *   exports search results to html or plain text
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+gboolean main_export_current_adv_search (GString * str, gboolean html, gboolean with_scripture)
+{	
+	GList *verses = NULL;
+	GList *tmp = NULL;
+	RESULTS *list_item;
+	gboolean ret = FALSE;
+	gchar *desc;
+	
+	tmp = g_list_first(list_for_bookmarking);
+	if (html)
+		str = g_string_append(str, "<html><body>");
+	while (tmp) {
+		verses = (GList*) tmp->data;
+		
+		GString *verse_string = g_string_new("");
+		gboolean first_entry = TRUE;
+		
+		while (verses) {
+			list_item = (RESULTS *) verses->data;
+			if (main_is_Bible_key(list_item->key)) {
+				ret = TRUE;
+				if (first_entry) {					
+					if (html)
+						g_string_printf(verse_string, "<ul><b>%s</b>", list_item->module);
+					else
+						g_string_printf(verse_string, "%s\n", list_item->module);
+					first_entry = FALSE;
+					str = g_string_append(str, verse_string->str);
+				} else {
+					desc = g_strdup_printf("%s %s",
+					    			list_item->key,
+					    			list_item->module);
+					if (html) 
+						gui_set_html_item ( str,
+								desc,
+								list_item->module, 
+								list_item->key,
+								with_scripture);
+					else 
+						gui_set_plain_text_item ( str, 
+								desc,
+								list_item->module, 
+								list_item->key,
+								with_scripture);
+												
+				}
+			}
+			verses = g_list_next(verses);
+		}
+		g_string_free(verse_string, TRUE);
+		if (html)
+			str = g_string_append(str, "</ul>");
+		tmp = g_list_next(tmp);
+	}
+	return ret;
+}
+
 
 /******************************************************************************
  * Name

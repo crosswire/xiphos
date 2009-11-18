@@ -56,6 +56,8 @@ struct _search_results {
 };
 
 extern GList *list_of_verses;
+extern GtkListStore *model_verselist;
+extern gboolean is_search_result;
 
 #ifdef USE_TREEVIEW_PATH
 void gui_collapse_treeview_to_book (GtkTreeView * tree, const gchar * book_name);
