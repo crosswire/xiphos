@@ -724,6 +724,13 @@ void gui_export_bookmarks_dialog(gint export_type, GList * verses)
                                                          TRUE);
 	}
 	
+	
+	if (ex_data->verselist == ADV_SEARCH_RESULTS_EXPORT) {
+		gtk_widget_set_sensitive (ex_data->rb_bookmarks,FALSE);
+		gtk_toggle_button_set_active ((GtkToggleButton *)ex_data->rb_html,
+                                                         TRUE);
+	}
+	
         g_object_unref (G_OBJECT (builder));        
         gtk_widget_show (dialog); 
 }
