@@ -87,7 +87,7 @@ extern gboolean shift_key_pressed;
 
 
 static void create_menu_modules(void);
-void on_exportverselist_activate (GtkMenuItem * menuitem, gpointer user_data);
+void on_export_verselist_activate (GtkMenuItem * menuitem, gpointer user_data);
 
 
 /******************************************************************************
@@ -926,7 +926,7 @@ on_save_list_as_a_series_of_bookmarks_activate (GtkMenuItem * menuitem,
 
 
 G_MODULE_EXPORT void
-on_exportverselist_activate (GtkMenuItem * menuitem,
+on_export_verselist_activate (GtkMenuItem * menuitem,
                                         gpointer user_data)
 {
 	gui_export_bookmarks_dialog((is_search_result?SEARCH_RESULTS_EXPORT:VERSE_LIST_EXPORT), list_of_verses);
