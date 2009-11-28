@@ -1509,6 +1509,8 @@ remove_install_wrapper(int activity)
 		gtk_main_iteration();
 
 	remove_install_modules(modules, activity);
+	mod_mgr_shut_down();
+	mod_mgr_init(destination, FALSE, TRUE);
 	load_module_tree(GTK_TREE_VIEW(treeview), (activity == INSTALL));
 
 	while (gtk_events_pending())
