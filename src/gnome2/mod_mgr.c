@@ -65,6 +65,7 @@
 #define GTK_RESPONSE_SOURCES 307
 /* see these codes' use in ui/module-manager.glade. */
 
+/* activity codes */
 enum {
 	REMOVE  = 0,
 	INSTALL = 1,
@@ -73,6 +74,15 @@ enum {
 	DELFAST = 4,
 };
 
+/* dialog & progress bar phrases */
+enum {
+	PHRASE_INQUIRY  = 0,
+	PHRASE_PREPARE  = 1,
+	PHRASE_DOING    = 2,
+	PHRASE_COMPLETE = 3,
+};
+
+/* treeview columns */
 enum {
 	COLUMN_NAME,
 	COLUMN_INSTALLED,
@@ -89,6 +99,7 @@ enum {
 	NUM_COLUMNS
 };
 
+/* new install source dialog fields */
 enum {
 	COLUMN_TYPE,
 	COLUMN_CAPTION,
@@ -152,6 +163,40 @@ GladeXML *gxml;
 static void load_module_tree(GtkTreeView * treeview, gboolean install);
 static void set_controls_to_last_use(void);
 static int load_source_treeviews(void);
+
+/* indexed by REMOVE/INSTALL/ARCHIVE/FASTMOD/DELFAST and PHRASE_* */
+char *verbs[5][4] = {
+    {
+	N_("Remove these modules?"),
+	N_("Preparing to remove"),
+	N_("Removing"),
+	N_("Remove")
+    },
+    {
+	N_("Install these modules?"),
+	N_("Preparing to install"),
+	N_("Installing"),
+	N_("Install")
+    },
+    {
+	N_("Archive these modules?"),
+	N_("Preparing to archive"),
+	N_("Archiving"),
+	N_("Archive")
+    },
+    {
+	N_("Build fast-search index for these\nmodules (may take minutes/module)?"),
+	N_("Preparing to index"),
+	N_("Indexing"),
+	N_("Index")
+    },
+    {
+	N_("Delete fast-search index for these modules?"),
+	N_("Preparing to delete index"),
+	N_("Deleting index"),
+	N_("Deletion")
+    },
+};
 
 #ifdef HAVE_WIDGET_TOOLTIP_TEXT
 static
@@ -611,7 +656,6 @@ remove_install_modules(GList * modules,
 {
 	GList *tmp;
 	gchar *buf;
-	gchar *verb = "";
 	const gchar *new_dest;
 	gint failed = 1;
 	GString *mods;
@@ -632,21 +676,8 @@ remove_install_modules(GList * modules,
 		tmp = g_list_next(tmp);
 	}
 
-	switch (activity)
-	{
-	case INSTALL:
-		verb = _("Install these modules?"); break;
-	case REMOVE:
-		verb = _("Remove these modules?"); break;
-	case ARCHIVE:
-		verb = _("Archive these modules?"); break;
-	case FASTMOD:
-		verb = _("Build fast-search index for these\nmodules (may take minutes/module)?"); break;
-	case DELFAST:
-		verb = _("Delete fast-search index for these modules?"); break;
-	}
 	dialog_text = g_strdup_printf("<span weight=\"bold\">%s</span>\n\n%s",
-				      verb, mods->str);
+				      verbs[activity][PHRASE_INQUIRY], mods->str);
 
 	if (!gui_yes_no_dialog(dialog_text, NULL)) {
 		tmp = modules; /* free list data */
@@ -660,20 +691,8 @@ remove_install_modules(GList * modules,
 	}
 	g_free(dialog_text);
 
-	switch (activity)
-	{
-	case INSTALL:
-		verb = _("Preparing to install"); break;
-	case REMOVE:
-		verb = _("Preparing to remove"); break;
-	case ARCHIVE:
-		verb = _("Preparing to archive"); break;
-	case FASTMOD:
-		verb = _("Preparing to index"); break;
-	case DELFAST:
-		verb = _("Preparing to delete index"); break;
-	}
-	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh), verb);
+	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh),
+				  verbs[activity][PHRASE_PREPARE]);
 	gtk_widget_show(progressbar_refresh);	
 	while (gtk_events_pending())
 		gtk_main_iteration();
@@ -694,20 +713,7 @@ remove_install_modules(GList * modules,
 	while (tmp) {
 		buf = (gchar *) tmp->data;
 		current_mod = buf;
-		switch (activity)
-		{
-		case INSTALL:
-			verb = _("Installing"); break;
-		case REMOVE:
-			verb = _("Removing"); break;
-		case ARCHIVE:
-			verb = _("Archiving"); break;
-		case FASTMOD:
-			verb = _("Indexing"); break;
-		case DELFAST:
-			verb = _("Deleting index"); break;
-		}
-		g_string_printf(mods, "%s: %s", verb, buf);
+		g_string_printf(mods, "%s: %s", verbs[activity][PHRASE_DOING], buf);
 		gtk_progress_bar_set_text(GTK_PROGRESS_BAR
 					  (progressbar_refresh),
 					  mods->str);
@@ -824,20 +830,7 @@ remove_install_modules(GList * modules,
 	have_changes = TRUE;
 	g_list_free(tmp);
 	if (failed) {
-		switch (activity)
-		{
-		case INSTALL:
-		    verb = _("Install"); break;
-		case REMOVE:
-		    verb = _("Remove"); break;
-		case ARCHIVE:
-		    verb = _("Archive"); break;
-		case FASTMOD:
-		    verb = _("Index"); break;
-		case DELFAST:
-		    verb = _("Deletion"); break;
-		}
-		g_string_printf(mods, _("%s failed"), verb);
+		g_string_printf(mods, _("%s failed"), verbs[activity][PHRASE_COMPLETE]);
 	} else {
 		g_string_printf(mods, "%s", _("Finished"));		
 	}
