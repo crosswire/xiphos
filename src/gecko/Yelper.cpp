@@ -326,7 +326,7 @@ Yelper::ProcessMouseOver (void* aEvent, int pane,
 #endif
 	PRBool aShiftKey;
 
-	GS_message(("mouse over pane: %d",pane));
+	//GS_message(("mouse over pane: %d",pane));
 	nsIDOMMouseEvent *event = (nsIDOMMouseEvent*) aEvent;	
 	//DIALOG_DATA *dialog = (DIALOG_DATA *)data;
 	event->GetShiftKey(&aShiftKey);
