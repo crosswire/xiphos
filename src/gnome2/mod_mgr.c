@@ -677,7 +677,7 @@ remove_install_modules(GList * modules,
 	}
 
 	dialog_text = g_strdup_printf("<span weight=\"bold\">%s</span>\n\n%s",
-				      verbs[activity][PHRASE_INQUIRY], mods->str);
+				      gettext (verbs[activity][PHRASE_INQUIRY]), mods->str);
 
 	if (!gui_yes_no_dialog(dialog_text, NULL)) {
 		tmp = modules; /* free list data */
@@ -692,7 +692,7 @@ remove_install_modules(GList * modules,
 	g_free(dialog_text);
 
 	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh),
-				  verbs[activity][PHRASE_PREPARE]);
+				  gettext (verbs[activity][PHRASE_PREPARE]));
 	gtk_widget_show(progressbar_refresh);	
 	while (gtk_events_pending())
 		gtk_main_iteration();
@@ -713,7 +713,8 @@ remove_install_modules(GList * modules,
 	while (tmp) {
 		buf = (gchar *) tmp->data;
 		current_mod = buf;
-		g_string_printf(mods, "%s: %s", verbs[activity][PHRASE_DOING], buf);
+		g_string_printf(mods, "%s: %s",
+				gettext (verbs[activity][PHRASE_DOING]), buf);
 		gtk_progress_bar_set_text(GTK_PROGRESS_BAR
 					  (progressbar_refresh),
 					  mods->str);
@@ -830,7 +831,8 @@ remove_install_modules(GList * modules,
 	have_changes = TRUE;
 	g_list_free(tmp);
 	if (failed) {
-		g_string_printf(mods, _("%s failed"), verbs[activity][PHRASE_COMPLETE]);
+		g_string_printf(mods, _("%s failed"),
+				gettext(verbs[activity][PHRASE_COMPLETE]));
 	} else {
 		g_string_printf(mods, "%s", _("Finished"));		
 	}
