@@ -32,7 +32,6 @@
 #include <swmodule.h>
 #include <stringmgr.h>
 #include <localemgr.h>
-#include <filemgr.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -668,7 +667,6 @@ char *set_sword_locale(const char *sys_locale)
 void main_init_backend(void)
 {
 	StringMgr::setSystemStringMgr( new GS_StringMgr() );
-	FileMgr::getSystemFileMgr()->maxFiles = 25000;
 	
 	const char *lang = getenv("LANG");
 	if (!lang) lang = "C";
