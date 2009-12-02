@@ -87,7 +87,7 @@ int main(int argc, char *argv[])
 	g_chdir (bin_dir);
 	
 	/* add this directory to $PATH for other stuff, e.g. zip */
-	g_setenv("PATH", g_strdup_printf("%s;%s", bin_dir,
+	g_setenv("PATH", g_strdup_printf("%s;%s", install_dir,
 					        g_getenv("PATH")),
 		                                TRUE);
 
