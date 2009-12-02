@@ -20,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 3.1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-24 19:00+0100\n"
-"PO-Revision-Date: 2009-11-24 19:02+0100\n"
+"POT-Creation-Date: 2009-11-30 21:06+0100\n"
+"PO-Revision-Date: 2009-11-30 21:11+0100\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: emacs + po-mode <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -29,7 +29,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 
-#: ../src/backend/sword_main.cc:1078
+#: ../src/backend/sword_main.cc:1087
 msgid "Configuration not found"
 msgstr "Configuration non trouvée"
 
@@ -208,7 +208,7 @@ msgstr "Le document %s n'a pas pu être imprimé"
 msgid "About Sword Module"
 msgstr "À propos de ce module SWORD"
 
-#: ../src/gnome2/about_modules.c:389 ../src/gnome2/mod_mgr.c:208
+#: ../src/gnome2/about_modules.c:389 ../src/gnome2/mod_mgr.c:253
 msgid "The module has no About information."
 msgstr "Ce module ne contient pas d'information À propos"
 
@@ -614,19 +614,56 @@ msgstr ""
 "Erreur de configuration\n"
 "\n"
 
-#: ../src/gnome2/mod_mgr.c:343
-msgid "Install these modules?"
-msgstr "Installer ces modules ?"
-
-#: ../src/gnome2/mod_mgr.c:345
+#: ../src/gnome2/mod_mgr.c:170
 msgid "Remove these modules?"
 msgstr "Supprimer ces modules ?"
 
-#: ../src/gnome2/mod_mgr.c:347
+#: ../src/gnome2/mod_mgr.c:171
+msgid "Preparing to remove"
+msgstr "Préparation à la suppression"
+
+#: ../src/gnome2/mod_mgr.c:172
+msgid "Removing"
+msgstr "Suppression de"
+
+#: ../src/gnome2/mod_mgr.c:173 ../src/gnome2/treekey-editor.c:318
+msgid "Remove"
+msgstr "Supprimer"
+
+#: ../src/gnome2/mod_mgr.c:176
+msgid "Install these modules?"
+msgstr "Installer ces modules ?"
+
+#: ../src/gnome2/mod_mgr.c:177
+msgid "Preparing to install"
+msgstr "Préparation à l'installation"
+
+#: ../src/gnome2/mod_mgr.c:178
+msgid "Installing"
+msgstr "Installation de"
+
+#: ../src/gnome2/mod_mgr.c:179 ../src/gnome2/mod_mgr.c:2965
+#: ../ui/module-manager.glade.h:18
+msgid "Install"
+msgstr "Installer"
+
+#: ../src/gnome2/mod_mgr.c:182
 msgid "Archive these modules?"
 msgstr "Archiver ces modules ?"
 
-#: ../src/gnome2/mod_mgr.c:349
+#: ../src/gnome2/mod_mgr.c:183
+msgid "Preparing to archive"
+msgstr "Préparation à l'archivage"
+
+#: ../src/gnome2/mod_mgr.c:184
+msgid "Archiving"
+msgstr "Archivage de"
+
+#: ../src/gnome2/mod_mgr.c:185 ../ui/module-manager.glade.h:11
+msgid "Archive"
+msgstr "Archiver"
+
+#: ../src/gnome2/mod_mgr.c:188
 msgid ""
 "Build fast-search index for these\n"
 "modules (may take minutes/module)?"
@@ -634,228 +671,56 @@ msgstr ""
 "Construire un index de recherche rapide pour les modules suivants (dure un "
 "certain temps) ?"
 
-#: ../src/gnome2/mod_mgr.c:351
-msgid "Delete fast-search index for these modules?"
-msgstr "Supprimer l'index de recherche rapide pour les modules suivants ?"
-
-#: ../src/gnome2/mod_mgr.c:371
-msgid "Preparing to install"
-msgstr "Préparation à l'installation"
-
-#: ../src/gnome2/mod_mgr.c:373
-msgid "Preparing to remove"
-msgstr "Préparation à la suppression"
-
-#: ../src/gnome2/mod_mgr.c:375
-msgid "Preparing to archive"
-msgstr "Préparation à l'archivage"
-
-#: ../src/gnome2/mod_mgr.c:377
+#: ../src/gnome2/mod_mgr.c:189
 msgid "Preparing to index"
 msgstr "Préparation à l'indexation"
 
-#: ../src/gnome2/mod_mgr.c:379
-msgid "Preparing to delete index"
-msgstr "Préparation à la suppression d'index"
-
-#: ../src/gnome2/mod_mgr.c:405
-msgid "Installing"
-msgstr "Installation de"
-
-#: ../src/gnome2/mod_mgr.c:407
-msgid "Removing"
-msgstr "Suppression de"
-
-#: ../src/gnome2/mod_mgr.c:409
-msgid "Archiving"
-msgstr "Archivage de"
-
-#: ../src/gnome2/mod_mgr.c:411
+#: ../src/gnome2/mod_mgr.c:190
 msgid "Indexing"
 msgstr "Indexation de"
 
-#: ../src/gnome2/mod_mgr.c:413
-msgid "Deleting index"
-msgstr "Suppression de l'index à"
-
-#: ../src/gnome2/mod_mgr.c:436
-#, c-format
-msgid ""
-"`mkdir %s' failed:\n"
-"%s."
-msgstr ""
-"Impossible de créer le répertoire %s\n"
-"%s"
-
-#: ../src/gnome2/mod_mgr.c:467
-msgid "Xiphos could not execute archiver"
-msgstr "Xiphos n'a pas pu démarrer l'archivage"
-
-#: ../src/gnome2/mod_mgr.c:472
-msgid ""
-" archival result:\n"
-"\n"
-msgstr ""
-" résultat de l'archivage\n"
-"\n"
-
-#: ../src/gnome2/mod_mgr.c:476
-msgid ""
-"\n"
-"Archive in "
-msgstr ""
-"\n"
-" Archive dans "
-
-#: ../src/gnome2/mod_mgr.c:533
-msgid "Journals and prayer lists cannot be indexed."
-msgstr "Les listes de prières et journaux ne peuvent pas être indexés."
-
-#: ../src/gnome2/mod_mgr.c:554 ../src/gnome2/mod_mgr.c:2961
-#: ../ui/module-manager.glade.h:18
-msgid "Install"
-msgstr "Installer"
-
-#: ../src/gnome2/mod_mgr.c:556 ../src/gnome2/treekey-editor.c:318
-msgid "Remove"
-msgstr "Supprimer"
-
-#: ../src/gnome2/mod_mgr.c:558 ../ui/module-manager.glade.h:11
-msgid "Archive"
-msgstr "Archiver"
-
-#: ../src/gnome2/mod_mgr.c:560 ../ui/module-manager.glade.h:17
+#: ../src/gnome2/mod_mgr.c:191 ../ui/module-manager.glade.h:17
 msgid "Index"
 msgstr "Indexer"
 
-#: ../src/gnome2/mod_mgr.c:562
+#: ../src/gnome2/mod_mgr.c:194
+msgid "Delete fast-search index for these modules?"
+msgstr "Supprimer l'index de recherche rapide pour les modules suivants ?"
+
+#: ../src/gnome2/mod_mgr.c:195
+msgid "Preparing to delete index"
+msgstr "Préparation à la suppression d'index"
+
+#: ../src/gnome2/mod_mgr.c:196
+msgid "Deleting index"
+msgstr "Suppression de l'index à"
+
+#: ../src/gnome2/mod_mgr.c:197
 msgid "Deletion"
 msgstr "Suppression"
 
-#: ../src/gnome2/mod_mgr.c:564
-#, c-format
-msgid "%s failed"
-msgstr "%s a échoué"
-
-#: ../src/gnome2/mod_mgr.c:566 ../src/gnome2/mod_mgr.c:1292
-msgid "Finished"
-msgstr "Terminé"
-
-#: ../src/gnome2/mod_mgr.c:733 ../src/gnome2/mod_mgr.c:735
-#: ../src/gnome2/mod_mgr.c:837 ../src/gnome2/mod_mgr.c:872
-#: ../src/gnome2/mod_mgr.c:874 ../src/gnome2/utilities.c:419
-#: ../src/gnome2/utilities.c:484 ../src/gnome2/utilities.c:486
-#: ../src/gnome2/utilities.c:1105 ../src/main/sidebar.cc:841
-#: ../src/main/sidebar.cc:913 ../src/main/sidebar.cc:915
-msgid "Unknown"
-msgstr "Inconnu"
-
-#: ../src/gnome2/mod_mgr.c:1036
-#, c-format
-msgid ""
-"Repository:\n"
-"%s"
-msgstr ""
-"Dépôt :\n"
-"%s"
-
-#: ../src/gnome2/mod_mgr.c:1048
-msgid ""
-"Categorized by\n"
-"Module Type"
-msgstr ""
-"Modules classés\n"
-"par type"
-
-#: ../src/gnome2/mod_mgr.c:1053 ../src/gnome2/utilities.c:545
-#: ../src/main/sidebar.cc:988 ../src/main/sidebar.cc:990
-msgid "Biblical Texts"
-msgstr "Textes bibliques"
-
-#: ../src/gnome2/mod_mgr.c:1057 ../src/gnome2/utilities.c:549
-#: ../src/main/sidebar.cc:667 ../src/main/sidebar.cc:1013
-#: ../src/main/sidebar.cc:1015 ../ui/prefs.glade.h:33
-msgid "Commentaries"
-msgstr "Commentaires"
-
-#: ../src/gnome2/mod_mgr.c:1061 ../src/gnome2/utilities.c:553
-#: ../src/main/sidebar.cc:1022 ../src/main/sidebar.cc:1024
-msgid "Dictionaries"
-msgstr "Dictionnaires"
-
-#: ../src/gnome2/mod_mgr.c:1065 ../src/gnome2/utilities.c:557
-#: ../src/main/sidebar.cc:1031 ../src/main/sidebar.cc:1033
-msgid "Daily Devotionals"
-msgstr "Calendriers bibliques"
-
-#: ../src/gnome2/mod_mgr.c:1069 ../src/gnome2/utilities.c:561
-#: ../src/main/sidebar.cc:677 ../src/main/sidebar.cc:1040
-#: ../src/main/sidebar.cc:1042
-msgid "General Books"
-msgstr "Livres"
-
-#: ../src/gnome2/mod_mgr.c:1073 ../src/gnome2/utilities.c:565
-#: ../src/main/sidebar.cc:1049 ../src/main/sidebar.cc:1051
-msgid "Maps"
-msgstr "Cartes"
-
-#: ../src/gnome2/mod_mgr.c:1077 ../src/gnome2/utilities.c:569
-#: ../src/main/sidebar.cc:1058 ../src/main/sidebar.cc:1060
-msgid "Images"
-msgstr "Images"
-
-#: ../src/gnome2/mod_mgr.c:1085
-msgid ""
-"Categorized by\n"
-"Availability"
-msgstr ""
-"Modules classés\n"
-"par disponibilité"
-
-#: ../src/gnome2/mod_mgr.c:1090
-msgid "Updates"
-msgstr "Mise à jour disponible"
-
-#: ../src/gnome2/mod_mgr.c:1094
-msgid "Uninstalled"
-msgstr "Non installé"
-
-#: ../src/gnome2/mod_mgr.c:1098 ../src/gnome2/sidebar.c:644
-#: ../src/gnome2/utilities.c:574 ../src/main/prayerlists.cc:240
-#: ../src/main/sidebar.cc:1068 ../src/main/sidebar.cc:1070
-msgid "Prayer List/Journal"
-msgstr "Liste de prières / Journal"
-
-#: ../src/gnome2/mod_mgr.c:1275
-msgid "Refreshing from remote source"
-msgstr "Rafraîchissement en cours"
-
-#: ../src/gnome2/mod_mgr.c:1286
-msgid "Remote source not found"
-msgstr "Serveur non trouvé"
-
-#: ../src/gnome2/mod_mgr.c:1449
+#: ../src/gnome2/mod_mgr.c:428
 msgid "Module Name"
 msgstr "Nom du module"
 
-#: ../src/gnome2/mod_mgr.c:1470
+#: ../src/gnome2/mod_mgr.c:449
 msgid "A checkmark means this module is already installed"
 msgstr "Une coche indique un module déjà installé"
 
-#: ../src/gnome2/mod_mgr.c:1492
+#: ../src/gnome2/mod_mgr.c:471
 msgid "Click the box to work on this module"
 msgstr "Cocher la case pour travailler avec ce module"
 
-#: ../src/gnome2/mod_mgr.c:1493
+#: ../src/gnome2/mod_mgr.c:472
 msgid "Click the box to select this module for install/update"
 msgstr ""
 "Cocher la case pour sélectionner ce module à installer ou à mettre à jour"
 
-#: ../src/gnome2/mod_mgr.c:1512
+#: ../src/gnome2/mod_mgr.c:491
 msgid "Installed"
 msgstr "Installé"
 
-#: ../src/gnome2/mod_mgr.c:1522
+#: ../src/gnome2/mod_mgr.c:501
 msgid ""
 "The index icon means you have built an optimized ('lucene') index for this "
 "module for fast searching (see the Maintenance pane for this function)"
@@ -863,7 +728,7 @@ msgstr ""
 "L'icône index indique qu'un index optimisé pour des requêtes rapides "
 "(lucène) a été construit à l'aide du bouton indexer."
 
-#: ../src/gnome2/mod_mgr.c:1540
+#: ../src/gnome2/mod_mgr.c:519
 msgid ""
 "The lock icon means this module is encrypted, and requires that you purchase "
 "an unlock key from the content owner"
@@ -872,12 +737,12 @@ msgstr ""
 "de déverrouillage auprès de l'éditeur du document"
 
 #. 2
-#: ../src/gnome2/mod_mgr.c:1557 ../src/gnome2/sidebar.c:988
+#: ../src/gnome2/mod_mgr.c:536 ../src/gnome2/sidebar.c:988
 #: ../src/gnome2/sidebar.c:1156 ../ui/xi-menus.glade.h:1
 msgid "About"
 msgstr "À propos"
 
-#: ../src/gnome2/mod_mgr.c:1577
+#: ../src/gnome2/mod_mgr.c:556
 msgid ""
 "The refresh icon means the Installed module is older than the newer "
 "Available module: You should update the module"
@@ -885,131 +750,267 @@ msgstr ""
 "L'icône Rafraichir indique un module installé plus vieux que le nouveau "
 "disponible. Le module est à mettre à jour."
 
-#: ../src/gnome2/mod_mgr.c:1589
+#: ../src/gnome2/mod_mgr.c:568
 msgid "Available"
 msgstr "Dispo"
 
-#: ../src/gnome2/mod_mgr.c:1598
+#: ../src/gnome2/mod_mgr.c:577
 msgid "Size"
 msgstr "Taille"
 
-#: ../src/gnome2/mod_mgr.c:1607
+#: ../src/gnome2/mod_mgr.c:586
 msgid "Description"
 msgstr "Description"
 
-#: ../src/gnome2/mod_mgr.c:1639
+#: ../src/gnome2/mod_mgr.c:737
+#, c-format
+msgid ""
+"`mkdir %s' failed:\n"
+"%s."
+msgstr ""
+"Impossible de créer le répertoire %s\n"
+"%s"
+
+#: ../src/gnome2/mod_mgr.c:760
+msgid " archived in: \n"
+msgstr "Archivé dans"
+
+#: ../src/gnome2/mod_mgr.c:816
+msgid "Journals and prayer lists cannot be indexed."
+msgstr "Les listes de prières et journaux ne peuvent pas être indexés."
+
+#: ../src/gnome2/mod_mgr.c:834
+#, c-format
+msgid "%s failed"
+msgstr "%s a échoué"
+
+#: ../src/gnome2/mod_mgr.c:837 ../src/gnome2/mod_mgr.c:1563
+msgid "Finished"
+msgstr "Terminé"
+
+#: ../src/gnome2/mod_mgr.c:1004 ../src/gnome2/mod_mgr.c:1006
+#: ../src/gnome2/mod_mgr.c:1108 ../src/gnome2/mod_mgr.c:1143
+#: ../src/gnome2/mod_mgr.c:1145 ../src/gnome2/utilities.c:431
+#: ../src/gnome2/utilities.c:496 ../src/gnome2/utilities.c:498
+#: ../src/gnome2/utilities.c:1033 ../src/main/sidebar.cc:841
+#: ../src/main/sidebar.cc:913 ../src/main/sidebar.cc:915
+msgid "Unknown"
+msgstr "Inconnu"
+
+#: ../src/gnome2/mod_mgr.c:1302
+#, c-format
+msgid ""
+"Repository:\n"
+"%s"
+msgstr ""
+"Dépôt :\n"
+"%s"
+
+#: ../src/gnome2/mod_mgr.c:1314
+msgid ""
+"Categorized by\n"
+"Module Type"
+msgstr ""
+"Modules classés\n"
+"par type"
+
+#: ../src/gnome2/mod_mgr.c:1319 ../src/gnome2/utilities.c:557
+#: ../src/main/sidebar.cc:988 ../src/main/sidebar.cc:990
+msgid "Biblical Texts"
+msgstr "Textes bibliques"
+
+#: ../src/gnome2/mod_mgr.c:1323 ../src/gnome2/utilities.c:561
+#: ../src/main/sidebar.cc:667 ../src/main/sidebar.cc:1013
+#: ../src/main/sidebar.cc:1015 ../ui/prefs.glade.h:33
+msgid "Commentaries"
+msgstr "Commentaires"
+
+#: ../src/gnome2/mod_mgr.c:1327 ../src/gnome2/utilities.c:565
+#: ../src/main/sidebar.cc:1022 ../src/main/sidebar.cc:1024
+msgid "Dictionaries"
+msgstr "Dictionnaires"
+
+#: ../src/gnome2/mod_mgr.c:1331 ../src/gnome2/utilities.c:569
+#: ../src/main/sidebar.cc:1031 ../src/main/sidebar.cc:1033
+msgid "Daily Devotionals"
+msgstr "Calendriers bibliques"
+
+#: ../src/gnome2/mod_mgr.c:1335 ../src/gnome2/utilities.c:573
+#: ../src/main/sidebar.cc:677 ../src/main/sidebar.cc:1040
+#: ../src/main/sidebar.cc:1042
+msgid "General Books"
+msgstr "Livres"
+
+#: ../src/gnome2/mod_mgr.c:1339 ../src/gnome2/utilities.c:577
+#: ../src/main/sidebar.cc:1049 ../src/main/sidebar.cc:1051
+msgid "Maps"
+msgstr "Cartes"
+
+#: ../src/gnome2/mod_mgr.c:1343 ../src/gnome2/utilities.c:581
+#: ../src/main/sidebar.cc:1058 ../src/main/sidebar.cc:1060
+msgid "Images"
+msgstr "Images"
+
+#: ../src/gnome2/mod_mgr.c:1351
+msgid ""
+"Categorized by\n"
+"Availability"
+msgstr ""
+"Modules classés\n"
+"par disponibilité"
+
+#: ../src/gnome2/mod_mgr.c:1356
+msgid "Updates"
+msgstr "Mise à jour disponible"
+
+#: ../src/gnome2/mod_mgr.c:1360
+msgid "Uninstalled"
+msgstr "Non installé"
+
+#: ../src/gnome2/mod_mgr.c:1364 ../src/gnome2/sidebar.c:644
+#: ../src/gnome2/utilities.c:586 ../src/main/prayerlists.cc:240
+#: ../src/main/sidebar.cc:1068 ../src/main/sidebar.cc:1070
+msgid "Prayer List/Journal"
+msgstr "Liste de prières / Journal"
+
+#: ../src/gnome2/mod_mgr.c:1546
+msgid "Refreshing from remote source"
+msgstr "Rafraîchissement en cours"
+
+#: ../src/gnome2/mod_mgr.c:1557
+msgid "Remote source not found"
+msgstr "Serveur non trouvé"
+
+#: ../src/gnome2/mod_mgr.c:1671
 msgid "Configure"
 msgstr "Configurer"
 
-#: ../src/gnome2/mod_mgr.c:1670
+#: ../src/gnome2/mod_mgr.c:1702
 msgid "Type"
 msgstr "Type"
 
-#: ../src/gnome2/mod_mgr.c:1677
+#: ../src/gnome2/mod_mgr.c:1709
 msgid "Caption"
 msgstr "Libellé"
 
-#: ../src/gnome2/mod_mgr.c:1685
+#: ../src/gnome2/mod_mgr.c:1717
 msgid "Source"
 msgstr "Source"
 
 # src/gs_preferences_dlg.c
-#: ../src/gnome2/mod_mgr.c:1693
+#: ../src/gnome2/mod_mgr.c:1725
 msgid "Directory"
 msgstr "Répertoire"
 
-#: ../src/gnome2/mod_mgr.c:1701
+#: ../src/gnome2/mod_mgr.c:1733
 msgid "User"
 msgstr "Identifiant"
 
-#: ../src/gnome2/mod_mgr.c:1709
+#: ../src/gnome2/mod_mgr.c:1741
 msgid "Password"
 msgstr "Mot de passe"
 
-#: ../src/gnome2/mod_mgr.c:1717
+#: ../src/gnome2/mod_mgr.c:1749
 msgid "UID"
 msgstr "UID"
 
-#: ../src/gnome2/mod_mgr.c:1734
+#: ../src/gnome2/mod_mgr.c:1766
 msgid "Module Sources"
 msgstr "Dépots"
 
-#: ../src/gnome2/mod_mgr.c:1737
+#: ../src/gnome2/mod_mgr.c:1769
 msgid "Add/Remove"
 msgstr "Ajouter/Supprimer"
 
-#: ../src/gnome2/mod_mgr.c:1739
+#: ../src/gnome2/mod_mgr.c:1771
 msgid "Choose"
 msgstr "Choisir"
 
-#: ../src/gnome2/mod_mgr.c:1743 ../src/gnome2/preferences_dialog.c:1780
+#: ../src/gnome2/mod_mgr.c:1775 ../src/gnome2/preferences_dialog.c:1780
 #: ../src/gnome2/sidebar.c:1501
 msgid "Modules"
 msgstr "Modules"
 
-#: ../src/gnome2/mod_mgr.c:1745
+#: ../src/gnome2/mod_mgr.c:1777
 msgid "Install/Update"
 msgstr "Installer"
 
-#: ../src/gnome2/mod_mgr.c:1747
+#: ../src/gnome2/mod_mgr.c:1779
 msgid "Maintenance"
 msgstr "Maintenance"
 
-#: ../src/gnome2/mod_mgr.c:1988
+#: ../src/gnome2/mod_mgr.c:2000
 msgid "Please Refresh"
 msgstr "Rafraîchir"
 
-#: ../src/gnome2/mod_mgr.c:1989
+#: ../src/gnome2/mod_mgr.c:2001
 msgid "Your module list is not up to date!"
 msgstr "La liste des modules n'est pas à jour!"
 
-#: ../src/gnome2/mod_mgr.c:2337
+#. Zero Bibles is just not workable in Xiphos.
+#: ../src/gnome2/mod_mgr.c:2283
+msgid ""
+"You have uninstalled your last Bible.\n"
+"Xiphos requires at least one."
+msgstr ""
+"Vous avez désinstallé votre dernière Bible.\\n\n"
+"Xiphos requiert au minimum une."
+
+#: ../src/gnome2/mod_mgr.c:2289
+msgid ""
+"There are still no Bibles installed.\n"
+"Xiphos cannot continue without one."
+msgstr ""
+"Toujours aucune Bible installée.\\n\n"
+"Xiphos ne peut pas continuer sans."
+
+#: ../src/gnome2/mod_mgr.c:2354
 msgid "Standard remote sources have been loaded."
 msgstr "Les dépôts distants standards ont été chargés."
 
-#: ../src/gnome2/mod_mgr.c:2343
+#: ../src/gnome2/mod_mgr.c:2360
 msgid "Could not load standard sources from CrossWire."
 msgstr "Impossible de charger les dépôts standards depuis CrossWire."
 
-#: ../src/gnome2/mod_mgr.c:2494 ../src/gnome2/mod_mgr.c:2743
+#: ../src/gnome2/mod_mgr.c:2511 ../src/gnome2/mod_mgr.c:2760
 msgid "Remove the selected source"
 msgstr "Supprime le dépôt sélectionné"
 
-#: ../src/gnome2/mod_mgr.c:2554
+#: ../src/gnome2/mod_mgr.c:2571
 msgid "Enter a remote source"
 msgstr "Ajouter un dépôt distant"
 
-#: ../src/gnome2/mod_mgr.c:2558
+#: ../src/gnome2/mod_mgr.c:2575
 msgid "Caption:"
 msgstr "Libellé :"
 
-#: ../src/gnome2/mod_mgr.c:2559
+#: ../src/gnome2/mod_mgr.c:2576
 msgid "Type:"
 msgstr "Type :"
 
-#: ../src/gnome2/mod_mgr.c:2560
+#: ../src/gnome2/mod_mgr.c:2577
 msgid "Host:"
 msgstr "Serveur :"
 
 # src/gs_preferences_dlg.c
-#: ../src/gnome2/mod_mgr.c:2561
+#: ../src/gnome2/mod_mgr.c:2578
 msgid "Directory:"
 msgstr "Répertoire :"
 
-#: ../src/gnome2/mod_mgr.c:2563
+#: ../src/gnome2/mod_mgr.c:2580
 msgid "User (optional):"
 msgstr "Identifiant (optionnel) :"
 
-#: ../src/gnome2/mod_mgr.c:2564
+#: ../src/gnome2/mod_mgr.c:2581
 msgid "Password (optional):"
 msgstr "Password (optional):(optionnel) :"
 
 #. this can happen at most once
-#: ../src/gnome2/mod_mgr.c:2592
+#: ../src/gnome2/mod_mgr.c:2609
 msgid "A source by that name already exists."
 msgstr "Un dépôt du même nom existe déjà"
 
-#: ../src/gnome2/mod_mgr.c:2740
+#: ../src/gnome2/mod_mgr.c:2757
 msgid "Delete a remote source"
 msgstr "Supprimer un dépôt distant"
 
@@ -1028,7 +1029,7 @@ msgstr "Supprimer un dépôt distant"
 #. * Return value
 #. *   void
 #.
-#: ../src/gnome2/mod_mgr.c:3240
+#: ../src/gnome2/mod_mgr.c:3245
 msgid ""
 "<b>Welcome to the Module Manager.</b>\n"
 "\n"
@@ -1454,27 +1455,27 @@ msgstr ""
 msgid "Chapter"
 msgstr "Chapitre"
 
-#: ../src/main/main.c:116
+#: ../src/main/main.c:115
 msgid "Xiphos does not understand more than one argument."
 msgstr "Xiphos n'accepte pas plus d'un argument."
 
-#: ../src/main/main.c:158
+#: ../src/main/main.c:157
 msgid "Initiating Gecko"
 msgstr "Initialisation de Gecko"
 
-#: ../src/main/main.c:164
+#: ../src/main/main.c:163
 msgid "Building Interface"
 msgstr "Construction de l'interface"
 
-#: ../src/main/main.c:168
+#: ../src/main/main.c:167
 msgid "Starting Sword"
 msgstr "Démarrage de Sword"
 
-#: ../src/main/main.c:172
+#: ../src/main/main.c:171
 msgid "Loading Settings"
 msgstr "Chargement des préférences"
 
-#: ../src/main/main.c:176
+#: ../src/main/main.c:175
 msgid "Displaying Xiphos"
 msgstr "Affichage de Xiphos"
 
@@ -3621,6 +3622,16 @@ msgstr "Aide à l'étude de la Bible"
 #: ../xiphos.desktop.in.in.h:2
 msgid "Xiphos Bible Guide"
 msgstr "Guide de la Bible Xiphos"
+
+#~ msgid "Xiphos could not execute archiver"
+#~ msgstr "Xiphos n'a pas pu démarrer l'archivage"
+
+#~ msgid ""
+#~ " archival result:\n"
+#~ "\n"
+#~ msgstr ""
+#~ " résultat de l'archivage\n"
+#~ "\n"
 
 #~ msgid "Remove - Restore"
 #~ msgstr "Charger - Sauver"
