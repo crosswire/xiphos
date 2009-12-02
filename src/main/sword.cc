@@ -113,7 +113,7 @@ gboolean companion_activity = FALSE;
 void main_book_heading(char * mod_name)
 {	
 	VerseKey *vkey;	
-	SWMgr *mgr = backend->get_display_mgr();
+	SWMgr *mgr = backend->get_mgr();
 	
 	backend->display_mod = mgr->Modules[mod_name];
 	vkey = (VerseKey*)(SWKey*)(*backend->display_mod);	
@@ -144,7 +144,7 @@ void main_book_heading(char * mod_name)
 void main_chapter_heading(char * mod_name)
 {	
 	VerseKey *vkey;	
-	SWMgr *mgr = backend->get_display_mgr();
+	SWMgr *mgr = backend->get_mgr();
 	
 	backend->display_mod = mgr->Modules[mod_name];
 	backend->display_mod->setKey(settings.currentverse);
@@ -248,7 +248,7 @@ void main_delete_note(	const gchar * module_name, const gchar * key_str)
 
 void main_set_module_unlocked(char * mod_name, char * key)
 {
-	SWMgr *mgr = backend->get_display_mgr();
+	SWMgr *mgr = backend->get_mgr();
 	mgr->setCipherKey(mod_name, key);	
 }
 
@@ -502,7 +502,7 @@ char *main_get_search_results_text(char * mod_name, char * key)
 
 char *main_get_path_to_mods(void)
 {
-	SWMgr *mgr = backend->get_main_mgr();
+	SWMgr *mgr = backend->get_mgr();
 	char *path = mgr->prefixPath;
 	return (path ? g_strdup(path) : NULL);
 }
@@ -1017,7 +1017,7 @@ void main_display_dictionary(const char * mod_name, const char * key)
 		time_t curtime;
 		struct tm *loctime;
 		char *feature;
-		if ((feature = (char *)backend->get_main_mgr()->
+		if ((feature = (char *)backend->get_mgr()->
 					getModule(mod_name)->
 					getConfigEntry("Feature")) &&
 		    !strcmp(feature, "DailyDevotion")) {
@@ -1343,7 +1343,7 @@ int main_is_module(char * mod_name)
 
 int main_has_search_framework(char *mod_name)
 {
-	SWMgr *mgr = backend->get_main_mgr();
+	SWMgr *mgr = backend->get_mgr();
 	SWModule *mod = mgr->getModule(mod_name);
 	return (mod && mod->hasSearchFramework());
 }
@@ -1366,7 +1366,7 @@ int main_has_search_framework(char *mod_name)
 
 int main_optimal_search(char *mod_name)
 {
-	SWMgr *mgr = backend->get_main_mgr();
+	SWMgr *mgr = backend->get_mgr();
 	SWModule *mod = mgr->Modules.find(mod_name)->second;
 	return mod->isSearchOptimallySupported("God", -4, 0, 0);
 }
