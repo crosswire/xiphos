@@ -47,7 +47,7 @@ static void _set_dialog_global_option(BackEnd *be,
 				     const char *option,
 				     gboolean choice)
 {
-	SWMgr *mgr = be->get_display_mgr();
+	SWMgr *mgr = be->get_mgr();
 	char *on_off;
 
 	on_off = gui_tf2of(choice);
@@ -59,8 +59,7 @@ static void _set_dialog_global_textual(BackEnd *be,
 				      const char *option,
 				      const char *choice)
 {
-	SWMgr *mgr = be->get_display_mgr();
-
+	SWMgr *mgr = be->get_mgr();
 	mgr->setGlobalOption(option, choice);
 }
 
@@ -69,13 +68,11 @@ static void _set_global_option(int manager,
 			      const char *option,
 			      gboolean choice)
 {
-	SWMgr *mgr = backend->get_display_mgr();
-	SWMgr *main_mgr = backend->get_main_mgr();
+	SWMgr *mgr = backend->get_mgr();
 	char *on_off;
 
 	on_off = gui_tf2of(choice);
 	mgr->setGlobalOption(option, on_off);
-	main_mgr->setGlobalOption(option, on_off);
 }
 
 
@@ -83,11 +80,9 @@ static void _set_global_textual(int manager,
 			       const char *option,
 			       const char *choice)
 {
-	SWMgr *mgr = backend->get_display_mgr();
-	SWMgr *main_mgr = backend->get_main_mgr();
-
+	SWMgr *mgr = backend->get_mgr();
 	mgr->setGlobalOption(option, choice);
-	main_mgr->setGlobalOption(option, choice);
+
 }
 
 

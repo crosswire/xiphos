@@ -451,7 +451,7 @@ static gint show_note(const gchar * module, const gchar * passage,
 	char oldAutoNorm = 0;
 
 	if (stop_autonorm) {
-		SWMgr *mgr = backend->get_display_mgr();
+		SWMgr *mgr = backend->get_mgr();
 		backend->display_mod = mgr->Modules[module];
 		backend->display_mod->setKey(passage);
 		vkey = (VerseKey*)(SWKey*)(*backend->display_mod);
@@ -962,7 +962,7 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 			passage = g_strdup((gchar*)m_url.getParameterValue("passage"));
 
 			// need localized key, not the osisref that we've got.
-			ModMap::iterator it = backend->get_main_mgr()->Modules.find
+			ModMap::iterator it = backend->get_mgr()->Modules.find
 						((module && *module) ? module : "KJV");
 			SWModule *m = (*it).second;
 			VerseKey *vk = (VerseKey *)m->getKey();

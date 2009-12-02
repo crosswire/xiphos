@@ -167,7 +167,7 @@ void setLocalName (TreeKeyIdx * treeKey, char *new_name)
 
 unsigned long main_treekey_remove (char *book, char *name, char * offset)
 {
-	SWMgr *mgr = backend->get_display_mgr ();
+	SWMgr *mgr = backend->get_mgr ();
 	SWModule *mod = mgr->Modules[book];
 	
 	if(!g_ascii_isdigit(offset[0])) return 0; /* make sure offset is a number */
@@ -186,7 +186,7 @@ unsigned long main_treekey_remove (char *book, char *name, char * offset)
 
 unsigned long main_treekey_append_sibling (char *book, char *name, char * offset)
 {
-	SWMgr *mgr = backend->get_display_mgr ();
+	SWMgr *mgr = backend->get_mgr ();
 	SWModule *mod = mgr->Modules[book];
 	
 	if(!g_ascii_isdigit(offset[0])) return 0; /* make sure offset is a number */
@@ -212,7 +212,7 @@ unsigned long main_treekey_append_sibling (char *book, char *name, char * offset
 
 unsigned long main_treekey_append_child (char *book, char *name, char * offset)
 {
-	SWMgr *mgr = backend->get_display_mgr ();
+	SWMgr *mgr = backend->get_mgr ();
 	SWModule *mod = mgr->Modules[book];
 	
 	if(!g_ascii_isdigit(offset[0])) return 0; /* make sure offset is a number */
@@ -236,7 +236,7 @@ unsigned long main_treekey_append_child (char *book, char *name, char * offset)
 
 void main_treekey_set_local_name (char *book, char *name, char * offset)
 {
-	SWMgr *mgr = backend->get_display_mgr ();
+	SWMgr *mgr = backend->get_mgr ();
 	SWModule *mod = mgr->Modules[book];
 	
 	if(!g_ascii_isdigit(offset[0])) return; /* make sure offset is a number */
@@ -256,7 +256,7 @@ void main_treekey_set_local_name (char *book, char *name, char * offset)
 
 char *main_get_book_raw_text (char *book, char * offset)
 {
-	SWMgr *mgr = backend->get_display_mgr ();
+	SWMgr *mgr = backend->get_mgr ();
 	SWModule *mod = mgr->Modules[book];
 	
 	if(!g_ascii_isdigit(offset[0])) return NULL; /* make sure offset is a number */
@@ -275,7 +275,7 @@ char *main_get_book_raw_text (char *book, char * offset)
 
 void main_treekey_save_book_text (char *book, char * offset, char * text)
 {
-	SWMgr *mgr = backend->get_display_mgr ();
+	SWMgr *mgr = backend->get_mgr ();
 	SWModule *mod = mgr->Modules[book];
 		
 	if(!offset || !g_ascii_isdigit(offset[0])) return; /* make sure offset is a number */
@@ -303,7 +303,7 @@ void main_load_book_tree_in_editor (GtkTreeView * treeview, char *book)
 {
 	GtkTreeIter parent;
 	GtkTreeStore *store;
-	SWMgr *mgr = backend->get_display_mgr ();
+	SWMgr *mgr = backend->get_mgr ();
 	SWModule *mod = mgr->Modules[book];
 
 	if (!mod)
