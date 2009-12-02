@@ -773,7 +773,7 @@ msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:760
 msgid " archived in: \n"
-msgstr "Archivé dans"
+msgstr "Archivé dans \n"
 
 #: ../src/gnome2/mod_mgr.c:816
 msgid "Journals and prayer lists cannot be indexed."
