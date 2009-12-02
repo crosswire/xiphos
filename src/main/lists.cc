@@ -25,7 +25,6 @@
 
 #include <gnome.h>
 #include <string.h>
-#include <filemgr.h>
 
 #include "main/lists.h"
 #include "main/sword.h"
@@ -123,7 +122,6 @@ void main_init_lists(void)
 		mods.options = backend->get_module_options();
 	} else {
 		start_backend = TRUE;
-		//FileMgr::getSystemFileMgr()->maxFiles = 25000;
 		backend = new BackEnd();
 	}
 	backend->init_lists(mod_lists);

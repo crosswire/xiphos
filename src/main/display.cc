@@ -1214,12 +1214,6 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 		if (is_rtol && !ops->transliteration)
 			swbuf.append("</div>");
 	}
-	//imodule--;
-	/* key->Book(curBook); */
-	/* key->Chapter(chapter); */
-	/* key->Verse(curVerse); */
-	/* key->Testament(curTest); */
-
 }
 
 //
