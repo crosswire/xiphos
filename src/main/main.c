@@ -72,13 +72,12 @@ int main(int argc, char *argv[])
 	int newbookmarks = FALSE;
 	int have_sword_url = FALSE;
 	gint base_step = 0; //needed for splash
-	GTimer *total, *t;
+	GTimer *total;
 	double d;
 
-	total = g_timer_new();
-	
 	g_thread_init(NULL);
 	g_type_init();
+	total = g_timer_new();
 
 #ifdef WIN32
 	/*
