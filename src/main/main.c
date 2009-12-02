@@ -72,6 +72,10 @@ int main(int argc, char *argv[])
 	int newbookmarks = FALSE;
 	int have_sword_url = FALSE;
 	gint base_step = 0; //needed for splash
+	GTimer *total, *t;
+	double d;
+
+	total = g_timer_new();
 	
 	g_thread_init(NULL);
 	g_type_init();
@@ -87,7 +91,7 @@ int main(int argc, char *argv[])
 	g_chdir (bin_dir);
 	
 	/* add this directory to $PATH for other stuff, e.g. zip */
-	g_setenv("PATH", g_strdup_printf("%s;%s", install_dir,
+	g_setenv("PATH", g_strdup_printf("%s;%s", bin_dir,
 					        g_getenv("PATH")),
 		                                TRUE);
 
@@ -143,34 +147,78 @@ int main(int argc, char *argv[])
 		}
 	}
 
+	t = g_timer_new();
 	/* 
 	 * check for directories and files
 	 */   
     	settings_init(argc, argv, newconfigs, newbookmarks);
 
+	g_timer_stop(t);
+	d = g_timer_elapsed(t, NULL);
+	printf("settings_init time is %f\n", d);
+
+	g_timer_start(t);
+
 	gui_init(argc, argv);
+
+	g_timer_stop(t);
+	d = g_timer_elapsed(t, NULL);
+	printf("gui_init time is %f\n", d);
+
+	g_timer_start(t);
 	
 	gui_splash_init();
-	
+
+	g_timer_stop(t);
+	d = g_timer_elapsed(t, NULL);
+	printf("gui_splash_init time is %f\n", d);
+
+	g_timer_start(t);
+		
 #ifdef USE_GTKMOZEMBED
 	
 	gui_splash_step(_("Initiating Gecko"), 0.0, 0);
 	
 	gecko_html_initialize();
+	
+	g_timer_stop(t);
+	d = g_timer_elapsed(t, NULL);
+	printf("gecko_init time is %f\n", d);
 
+	g_timer_start(t);
+	
 	base_step = 1;
 #endif
 	gui_splash_step(_("Building Interface"), 0.2, 0 + base_step);
 
 	create_mainwindow();
+	
+	g_timer_stop(t);
+	d = g_timer_elapsed(t, NULL);
+	printf("create_mainwindow time is %f\n", d);
 
+	g_timer_start(t);
+	
 	gui_splash_step(_("Starting Sword"), 0.5, 1 + base_step);
 
 	main_init_backend();
+		
+	g_timer_stop(t);
+	d = g_timer_elapsed(t, NULL);
+	printf("main_init_backend time is %f\n", d);
+
+	g_timer_start(t);
 	
 	gui_splash_step(_("Loading Settings"), 0.8, 2 + base_step);
 
 	frontend_init();
+		
+	g_timer_stop(t);
+	d = g_timer_elapsed(t, NULL);
+	printf("frontend_init time is %f\n", d);
+
+	g_timer_start(t);
+	
 	
 	gui_splash_step(_("Displaying Xiphos"), 1.0, 3 + base_step);
 	
@@ -178,7 +226,11 @@ int main(int argc, char *argv[])
 	xml_convert_to_osisref();
 	
 	frontend_display();
-	
+		
+	g_timer_stop(t);
+	d = g_timer_elapsed(t, NULL);
+	printf("frontend_display time is %f\n", d);
+
 	gui_splash_done();
 
 	if (have_sword_url) {
@@ -195,6 +247,9 @@ int main(int argc, char *argv[])
 
 	/*gtk_notebook_set_current_page(GTK_NOTEBOOK
 					(widgets.notebook_comm_book), 0);*/
+	g_timer_stop(total);
+	d = g_timer_elapsed(total, NULL);
+	printf("total time is %f\n", d);
 	gui_main();
 	return 0;
 }

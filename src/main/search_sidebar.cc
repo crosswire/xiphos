@@ -101,6 +101,9 @@ static void fill_search_results_list(int finds)
 	RESULTS *list_item;
 	gchar *num;
 
+	if (!backendSearch)
+		main_init_sidebar_search_backend();
+
 	is_search_result = TRUE;
 	
 	if (list_of_verses) {
@@ -193,6 +196,9 @@ void main_do_sidebar_search(gpointer user_data)
 	gint search_params, finds;
 	const char *search_string = NULL;
 	char *search_module;	
+
+	if (!backendSearch)
+		main_init_sidebar_search_backend();
 	
 	gtk_widget_set_sensitive(sidebar.menu_item_save_search,FALSE);
 	search_dialog = FALSE;
@@ -291,6 +297,9 @@ void main_do_sidebar_search(gpointer user_data)
 
 void main_sidebar_perscomm_dump(void)
 {
+	if (!backendSearch)
+		main_init_sidebar_search_backend();
+	
 	strcpy(settings.sb_search_mod,settings.MainWindowModule);
 	backendSearch->clear_scope();
 	backendSearch->clear_search_list();
@@ -304,7 +313,11 @@ void main_sidebar_perscomm_dump(void)
 
 void main_init_sidebar_search_backend(void)
 {
-	backendSearch = new BackEnd();
+	if (!backendSearch)
+	{
+		backendSearch = new BackEnd();
+		main_search_sidebar_fill_bounds_combos();
+	}
 }
 
 void main_delete_sidebar_search_backend(void)
@@ -319,7 +332,10 @@ void main_search_sidebar_fill_bounds_combos(void)
 	char *module_name;
 	int i = 0;
 	int testaments;
-	
+
+	if (!backendSearch)
+		main_init_sidebar_search_backend();
+
 	//module_name = settings.sb_search_mod;
 	module_name = g_strdup(settings.MainWindowModule);
 
@@ -391,6 +407,8 @@ void main_sidebar_search_percent_update(char percent, void *userData)
 	float num;
 	char buf[80];
 	static char printed = 0;
+	if (!backendSearch)
+		main_init_sidebar_search_backend();
 	
 	if (terminate_search) {
 		backendSearch->terminate_search();
