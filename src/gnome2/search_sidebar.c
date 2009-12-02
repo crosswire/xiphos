@@ -104,6 +104,7 @@ static void on_search_button_clicked(GtkButton * button, gpointer user_data)
 static void on_rrbUseBounds_toggled(GtkToggleButton * togglebutton,
 				    gpointer user_data)
 {
+	main_init_sidebar_search_backend();
 	if (togglebutton->active) {
 		gtk_widget_show(ss.frame5);
 	} else {
