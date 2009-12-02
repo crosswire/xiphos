@@ -1,3 +1,8 @@
+2009-12-02 matthew<ransom1982@users.sourceforge.net>
+
+	* removed display_mgr from backend
+	* delay starting search backend
+
 2009-11-28 matthew<ransom1982@users.sourceforge.net>
 
 	* added code to use libgsf to archive files
