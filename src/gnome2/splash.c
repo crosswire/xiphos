@@ -487,6 +487,7 @@ e_splash_set_icon_highlight(ESplash * splash,
 	ESplashPrivate *priv;
 	Icon *icon;
 	GtkWidget *canvas;
+	GdkRectangle rectangle;
 
 	g_return_if_fail(splash != NULL);
 	g_return_if_fail(E_IS_SPLASH(splash));
@@ -505,13 +506,13 @@ e_splash_set_icon_highlight(ESplash * splash,
 
 	icon->light = TRUE;
 
-	canvas = GTK_WIDGET(priv->canvas);
-	gdk_window_show(canvas->window);
+	rectangle.x = icon->x;
+	rectangle.y = icon->y;
+	rectangle.width = gdk_pixbuf_get_width(icon->light_pixbuf);
+	rectangle.height = gdk_pixbuf_get_height(icon->light_pixbuf);
 
-	/* gtk_object_set(GTK_OBJECT(icon->canvas_item), */
-	/* 	       "pixbuf", */
-	/* 	       highlight ? icon->light_pixbuf : icon-> */
-	/* 	       dark_pixbuf, NULL); */
+	canvas = GTK_WIDGET(priv->canvas);
+	gdk_window_invalidate_rect(canvas->window, &rectangle, TRUE);
 }
 
 E_MAKE_TYPE(e_splash, "ESplash", ESplash, class_init, init, PARENT_TYPE)
@@ -563,6 +564,10 @@ void gui_splash_init()
 
 		g_list_free(icons);
 	}
+	while (gtk_events_pending()) {
+			gtk_main_iteration();
+		}
+
 }
 
 
