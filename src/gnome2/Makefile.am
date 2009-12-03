@@ -46,7 +46,6 @@ xiphos_SOURCES =  \
     parallel_dialog.c \
     parallel_tab.c \
     parallel_view.c \
-    preferences_cell_renderer.c \
     preferences_dialog.c \
     search_dialog.c \
     search_sidebar.c \
