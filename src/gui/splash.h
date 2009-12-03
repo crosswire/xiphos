@@ -29,5 +29,6 @@ GtkType l##_get_type(void)\
 void gui_splash_init(void);
 gboolean gui_splash_done(void);
 void gui_splash_step(gchar *text, gdouble progress, gint step);
+gboolean expose_event_callback (GtkWidget *widget, GdkEventExpose *event, gpointer data);
 
 #endif
