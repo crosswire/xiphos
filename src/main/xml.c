@@ -674,7 +674,7 @@ int xml_create_settings_file(char *path)
  *   void
  */
 
-void xml_convert_to_osisref()
+void xml_convert_to_osisref(void)
 {
 	gchar *label, *content, *s, *t;
 	gchar reference[100];
