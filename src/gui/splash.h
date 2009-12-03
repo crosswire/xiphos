@@ -27,7 +27,7 @@ GtkType l##_get_type(void)\
 }
 
 void gui_splash_init(void);
-void gui_splash_done(void);
+gboolean gui_splash_done(void);
 void gui_splash_step(gchar *text, gdouble progress, gint step);
 
 #endif

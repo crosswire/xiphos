@@ -182,8 +182,6 @@ int main(int argc, char *argv[])
 	
 	frontend_display();
 		
-	gui_splash_done();
-
 	if (have_sword_url) {
 		if (!strncmp(argv[1], "sword:/", 7)) {
 			char *key = strchr(argv[1]+8, '/');
@@ -203,6 +201,8 @@ int main(int argc, char *argv[])
 #ifdef DEBUG
 	printf("total time is %f\n", d);
 #endif
+	g_idle_add ((GSourceFunc)gui_splash_done, NULL);
+
 	gui_main();
 	return 0;
 }
