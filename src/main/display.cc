@@ -1151,7 +1151,6 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 	gchar *buf;
 	const char *ModuleName = imodule.Name();
 	sword::VerseKey *key = (VerseKey *)(SWKey *)imodule;
-	int chapter = key->Chapter();
 
 	imodule++;
 	if (imodule.Error()) {
