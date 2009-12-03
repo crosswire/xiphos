@@ -218,7 +218,7 @@ static void schedule_relayout(ESplash * splash)
 	if (priv->layout_idle_id != 0)
 		return;
 
-	priv->layout_idle_id = g_idle_add(layout_idle_cb, splash);
+	layout_idle_cb (splash);
 }
 
 /* GtkObject methods.  */
@@ -455,6 +455,8 @@ int e_splash_add_icon(ESplash * splash, GdkPixbuf * icon_pixbuf)
 
 	icon = icon_new(splash, icon_pixbuf);
 	icon->light = FALSE;
+	icon->x = 0;
+	icon->y = ICON_Y;
 
 	GtkTextDirection dir = gtk_widget_get_direction(GTK_WIDGET (splash));
 	
