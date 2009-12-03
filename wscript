@@ -110,7 +110,7 @@ def set_options(opt):
 
     opt.add_option('--enable-delint', action='store_true', default=False,
             dest='delint',
-            help='Use -Wall -Werror [Default: disabled]')
+            help='Use -Wall -Werror[Default: disabled]')
 
 
     ### cross compilation from Linux/Unix for win32
@@ -226,8 +226,9 @@ def configure(conf):
 
 
     # delint flags
-    for name in ('CXXFLAGS_DELINT', 'CCFLAGS_DELINT'):
-        env[name] = ['-Werror', '-Wall']
+    env['CXXFLAGS_DELINT'] = ['-Werror', '-Wall']
+    env['CCFLAGS_DELINT'] = ['-Werror', '-Wall', '-Wmissing-prototypes',
+                             '-Wnested-externs', '-Wpointer-arith', '-Wno-sign-compare']
 
     # gcc compiler debug levels
     # msvc has levels predefined
