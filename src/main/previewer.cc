@@ -381,7 +381,6 @@ void mark_search_words(GString * str)
 	gchar *tmpbuf, *buf, *searchbuf;
 	gint len_overall, len_word, len_tail, len_prefix;
 	gchar closestr[40], openstr[40];
-	gchar *s, *t;
 
 	/* regular expression search results         **fixme** */
 	if ((settings.searchType == 0) ||
