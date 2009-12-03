@@ -46,7 +46,6 @@
 #include "gui/sidebar.h"
 #include "gui/tabbed_browser.h"
 #include "gui/widgets.h"
-#include "gui/preferences_cell_renderer.h"
 
 #include "main/sword.h"
 #include "main/lists.h"
