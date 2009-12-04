@@ -612,10 +612,10 @@ static void create_pixbufs(void)
 
 	if (!bm_pixbufs->pixbuf_closed)
 		bm_pixbufs->pixbuf_closed =
-			pixbuf_finder("stock_book_blue.png", NULL);
+			pixbuf_finder("book_closed.png", NULL);
 
 	bm_pixbufs->pixbuf_opened =
-		pixbuf_finder("stock_book_open.png", NULL);
+		pixbuf_finder("book_open.png", NULL);
 	bm_pixbufs->pixbuf_helpdoc =
 	    pixbuf_finder("epiphany-bookmark-page.png", NULL);
 
