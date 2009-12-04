@@ -23,7 +23,6 @@
 #include <config.h>
 #endif
 
-#include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 #include <glade/glade-xml.h>
 
@@ -1013,98 +1012,61 @@ GtkWidget* create_menu_modules(void)
 }
 
 
-void
+G_MODULE_EXPORT void
 on_simple_activate(GtkMenuItem *menuitem,
 		   gpointer    user_data)
 {
 	main_prayerlist_basic_create();
 }
 
-void
+G_MODULE_EXPORT void
 on_subject_activate(GtkMenuItem *menuitem,
 		    gpointer    user_data)
 {
 	main_prayerlist_subject_create();
 }
 
-void
+G_MODULE_EXPORT void
 on_monthly_activate(GtkMenuItem *menuitem,
 		    gpointer    user_data)
 {
 	main_prayerlist_monthly_create();
 }
 
-void
+G_MODULE_EXPORT void
 on_journal_activate(GtkMenuItem *menuitem,
 		    gpointer    user_data)
 {
 	main_prayerlist_journal_create();
 }
 
-void
+G_MODULE_EXPORT void
 on_outlined_topic_activate(GtkMenuItem *menuitem,
 			   gpointer    user_data)
 {
 	main_prayerlist_outlined_topic_create();
 }
 
-static GnomeUIInfo new_prayerlist_menu_uiinfo[] =
-{
-  {
-    GNOME_APP_UI_ITEM, N_("Simple"),
-    N_("Create a new simple prayer list"),
-    (gpointer) on_simple_activate, NULL, NULL,
-    GNOME_APP_PIXMAP_STOCK, "gtk-edit",
-    0, (GdkModifierType) 0, NULL
-  },
-  {
-    GNOME_APP_UI_ITEM, N_("Subject"),
-    NULL,
-    (gpointer) on_subject_activate, NULL, NULL,
-    GNOME_APP_PIXMAP_STOCK, "gnome-stock-text-bulleted-list",
-    0, (GdkModifierType) 0, NULL
-  },
-  {
-    GNOME_APP_UI_ITEM, N_("Monthly"),
-    N_("Create a new prayer list"),
-    (gpointer) on_monthly_activate, NULL, NULL,
-    GNOME_APP_PIXMAP_STOCK, "gnome-stock-text-numbered-list",
-    0, (GdkModifierType) 0, NULL
-  },
-  {
-    GNOME_APP_UI_ITEM, N_("Daily Journal"),
-    N_("Create a new prayer list"),
-    (gpointer) on_journal_activate, NULL, NULL,
-    GNOME_APP_PIXMAP_STOCK, "gnome-stock-text-numbered-list",
-    0, (GdkModifierType) 0, NULL
-  },
-  {
-    GNOME_APP_UI_ITEM, N_("Outlined Topic"),
-    N_("Create a new prayer list"),
-    (gpointer) on_outlined_topic_activate, NULL, NULL,
-    GNOME_APP_PIXMAP_STOCK, "gnome-stock-text-numbered-list",
-    0, (GdkModifierType) 0, NULL
-  },
-  GNOMEUIINFO_END
-};
-
-static GnomeUIInfo menu_prayerlist_uiinfo[] =
-{
-  GNOMEUIINFO_MENU_NEW_SUBTREE (new_prayerlist_menu_uiinfo),
-  GNOMEUIINFO_END
-};
-
 GtkWidget *create_menu_prayerlist(void)
 {
 	GtkWidget *menu;
+	gchar *glade_file;
+	GladeXML *gxml;
 
-	menu = gtk_menu_new();
-	gnome_app_fill_menu(GTK_MENU_SHELL(menu),
-			    menu_prayerlist_uiinfo, NULL, FALSE, 0);
+	glade_file = gui_general_user_file ("xi-menus.glade", FALSE);
+	g_return_val_if_fail ((glade_file != NULL), NULL);
+	
+	gxml = glade_xml_new (glade_file, "menu_prayerlist", NULL);
+		
+	g_free (glade_file);
+	g_return_val_if_fail ((gxml != NULL), NULL);
+
+	menu = glade_xml_get_widget (gxml, "menu_prayerlist");
+	glade_xml_signal_autoconnect_full
+		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);
 	return menu;
+	
 }
-
-
 
 void
 on_edit_activate(GtkMenuItem *menuitem,
@@ -1113,47 +1075,23 @@ on_edit_activate(GtkMenuItem *menuitem,
 	editor_create_new(buf_module, NULL, BOOK_EDITOR);
 }
 
-static GnomeUIInfo menu_prayerlist_mod_uiinfo[] = {
-        { /* 0 */
-	 GNOME_APP_UI_ITEM, N_("Open in a new tab"),
-	 N_("Open selected module in a new tab"),
-	 (gpointer) on_open_in_tab_activate2, NULL, NULL,
-	 GNOME_APP_PIXMAP_FILENAME, NULL /* init'd in menu creation */,
-	 0, (GdkModifierType) 0, NULL},
-	{ /* 1 */
-	 GNOME_APP_UI_ITEM, N_("Open in editor"),
-	 N_("Open selected module in a dialog"),
-	 (gpointer) on_open_in_dialog_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_FILENAME, NULL /* init'd in menu creation */,
-	 0, (GdkModifierType) 0, NULL},
-	{ /* 2 */
-	 GNOME_APP_UI_ITEM, N_("About"),
-	 N_("View information about the selected dialog"),
-	 (gpointer) on_about2_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_ABOUT,
-	 0, (GdkModifierType) 0, NULL},
-	GNOMEUIINFO_END
-};
-
 GtkWidget *create_menu_prayerlist_mod(void)
 {
 	GtkWidget *menu;
+	gchar *glade_file;
+	GladeXML *gxml;
 
-	/*
-	 * this is total magic.  set up menu before using it.
-	 * indices are direct from GnomeUIInfo above.
-	 */
-	if (!menu_prayerlist_mod_uiinfo[0].pixmap_info)
-		menu_prayerlist_mod_uiinfo[0].pixmap_info =
-		    image_locator("new_tab_button.png");
-	if (!menu_prayerlist_mod_uiinfo[1].pixmap_info)
-		menu_prayerlist_mod_uiinfo[1].pixmap_info =
-		    image_locator("silk-edit-bookmarks.png");
-	/* end magic */
+	glade_file = gui_general_user_file ("xi-menus.glade", FALSE);
+	g_return_val_if_fail ((glade_file != NULL), NULL);
+	
+	gxml = glade_xml_new (glade_file, "menu_prayerlist_mod", NULL);
+		
+	g_free (glade_file);
+	g_return_val_if_fail ((gxml != NULL), NULL);
 
-	menu = gtk_menu_new();
-	gnome_app_fill_menu(GTK_MENU_SHELL(menu),
-			    menu_prayerlist_mod_uiinfo, NULL, FALSE, 0);
+	menu = glade_xml_get_widget (gxml, "menu_prayerlist_mod");
+	glade_xml_signal_autoconnect_full
+		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);
 	return menu;
 }
 
