@@ -50,12 +50,8 @@ void gui_load_module_tree(GtkWidget * tree);
 MOD_FONT *get_font(gchar * mod_name);
 void free_font(MOD_FONT *mf);
 gchar * remove_linefeeds(gchar * buf);	
-void gui_add_item2gnome_menu(GtkWidget * MainFrm, gchar * itemname,
-     gchar * itemdata, gchar * submenuname, GCallback mycallback);
-void gui_add_separator2menu(GtkWidget * MainFrm, gchar * subtreelabel);
 void gui_add_mods_to_menus(GList * modlist, gchar * menu,
 					GCallback callback);
-void gui_remove_menu_items(gchar *startitem, gint numberofitems);
 void gui_add_mods_2_gtk_menu(gint mod_type, GtkWidget * menu,
 				GCallback callback);
 gchar *ncr_to_utf8(gchar * text);

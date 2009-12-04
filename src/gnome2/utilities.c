@@ -792,57 +792,6 @@ gchar * remove_linefeeds(gchar * buf)
 
 /******************************************************************************
  * Name
- *   gui_add_separator2menu
- *
- * Synopsis
- *   #include "gui/utilities.h
- *
- *   void gui_add_separator2menu(GtkWidget * MainFrm, gchar * subtreelabel)
- *
- * Description
- *   add separator line to menu
- *
- * Return value
- *   void
- */
-
-void gui_add_separator2menu(GtkWidget * MainFrm, gchar * subtreelabel)
-{
-	GnomeUIInfo *bookmarkitem;
-	bookmarkitem = g_new(GnomeUIInfo, 2);
-	bookmarkitem->type = GNOME_APP_UI_SEPARATOR;
-	bookmarkitem->pixmap_type = GNOME_APP_PIXMAP_NONE;
-	bookmarkitem->accelerator_key = 0;
-	bookmarkitem[1].type = GNOME_APP_UI_ENDOFINFO;
-	gnome_app_insert_menus_with_data(GNOME_APP(MainFrm), subtreelabel,
-					 bookmarkitem, NULL);
-	//g_free(bookmarkitem); 
-}
-
-/******************************************************************************
- * Name
- *   gui_remove_menu_items
- *
- * Synopsis
- *   #include "gui/utilities.h
- *
- *   void gui_remove_menu_items(gchar * startitem, gint numberofitems)
- *
- * Description
- *   remove a number(numberofitems) of items form a menu or submenu(startitem)
- *
- * Return value
- *   void
- */
-
-void gui_remove_menu_items(gchar * startitem, gint numberofitems)
-{				
-	gnome_app_remove_menus(GNOME_APP(widgets.app), startitem,
-			       numberofitems);
-}			
-
-/******************************************************************************
- * Name
  *  add_mods_2_gtk_menu
  *
  * Synopsis
