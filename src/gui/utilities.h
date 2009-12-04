@@ -26,7 +26,6 @@
 extern "C" {
 #endif
 	
-#include <gnome.h>
 #include <libxml/parser.h>
 #include "main/configs.h"
 #include "main/module_dialogs.h"

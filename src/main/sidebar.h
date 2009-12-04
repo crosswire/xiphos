@@ -27,7 +27,7 @@ extern "C" {
 #include <config.h>
 #endif
 	
-#include <gnome.h>
+#include <gtk/gtk.h>
 
 typedef struct {
 	GdkPixbuf *pixbuf_opened;

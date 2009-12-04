@@ -24,7 +24,7 @@
 #endif
 
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 #include <glib.h>
 #include <glib/gstdio.h>
 

@@ -76,7 +76,7 @@ void gui_display_mod_and_key(const gchar * mod_name, const gchar * key)
 				   text, 
 				   (gchar*)key, 
 				   TRUE);
-		free(text);
+		g_free(text);
 	}
 }
 

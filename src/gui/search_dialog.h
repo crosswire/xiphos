@@ -25,7 +25,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#include <gnome.h>	
+#include <gtk/gtk.h>	
 
 
 typedef struct _search_dialog1 SEARCH_DIALOG1;

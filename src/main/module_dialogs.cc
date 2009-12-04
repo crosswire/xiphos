@@ -23,7 +23,7 @@
 #include <config.h>
 #endif
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 #include <swmgr.h>
 #include <swmodule.h>	
 #include <url.h>

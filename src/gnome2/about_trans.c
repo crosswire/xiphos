@@ -144,7 +144,6 @@ gui_create_about_trans(void)
 
 	href =  gtk_link_button_new_with_label ("http://xiphos.org/development/",
 			   _("Xiphos development"));
-	//    gnome_href_new
 	gtk_widget_show(href);
 	gtk_box_pack_start(GTK_BOX(vbox), href, FALSE, FALSE, 0);
 

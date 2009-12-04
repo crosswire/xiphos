@@ -22,7 +22,7 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <gnome.h>
+#include <gtk/gtk.h>
 #include <regex.h>
 #include <ctype.h>
 #include <swmodule.h>

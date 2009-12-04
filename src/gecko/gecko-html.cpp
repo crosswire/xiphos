@@ -133,7 +133,6 @@ static void html_link_message(GtkMozEmbed * embed)
 	
 	if (!strlen(url)) { //* moved out of url - clear appbar - info viewer*
 		gui_set_statusbar ("");
-		//gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), "");
 		in_url = FALSE;
 		//*if(GPOINTER_TO_INT(data) == TEXT_TYPE)
 		//	main_clear_viewer();*
@@ -179,7 +178,6 @@ static void html_link_message(GtkMozEmbed * embed)
 		} else //* any other link *
 			sprintf(buf, "%s", "");
 		gui_set_statusbar (buf);
-		//gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), buf);
 	}
 }
 

@@ -35,7 +35,7 @@
 #include <swmgr.h>
 #include <swmodule.h>
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 
 #ifdef USE_GTKHTML3_14_23
 #include "editor/slib-editor.h"
@@ -239,8 +239,6 @@ static gint show_separate_image(const gchar * filename, gboolean clicked)
 		GString *desc_clean = hex_decode(description);
 		GS_print(("description = %s\n", desc_clean->str));
 		gui_set_statusbar (desc_clean->str);
-		/*gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
-					desc_clean->str);*/
 		g_string_free(desc_clean, TRUE);
 	}
 	return 1;
@@ -273,7 +271,6 @@ static gint show_separate_image(const gchar * filename, gboolean clicked)
 			gchar *buf = g_strdup_printf( 
 				_("Show %s in main window"), svalue);
 			gui_set_statusbar (buf);
-			//gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), buf);
 			g_free(buf);
 		}
 	}
@@ -616,7 +613,6 @@ static int show_module_and_key(const char * module, const char * key,
 		module = settings.MainWindowModule;
 	}
 	if (!clicked) {
-		//gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), url);
 		return 1;
 	}
 	
