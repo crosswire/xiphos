@@ -52,7 +52,6 @@ src/gnome2/preferences_cell_renderer.c
 src/gnome2/preferences_dialog.c
 src/gnome2/search_dialog.c
 src/gnome2/search_sidebar.c
-src/gnome2/session.c
 src/gnome2/sidebar.c
 src/gnome2/sidebar_dialog.c
 src/gnome2/splash.c

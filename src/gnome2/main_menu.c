@@ -23,7 +23,13 @@
 #include <config.h>
 #endif
 
+#ifndef WITHOUT_GNOME
 #include <gnome.h>
+#else
+#include <gtk/gtk.h>
+#include <unistd.h>
+#endif
+
 #include <glade/glade-xml.h>
 
 #ifdef USE_GTKHTML3_14_23
@@ -100,12 +106,20 @@ on_help_contents_activate(GtkMenuItem * menuitem, gpointer user_data)
 	xiphos_open_default(help_file);
 	g_free(help_file);
 #else
-	
+#ifndef WITHOUT_GNOME
 	if (gnome_help_display((const gchar*)"xiphos.xml", 
 			       NULL, &error) == FALSE) {
 		GS_warning(("%s",error->message));
 		g_error_free(error);        
 	}
+#else
+	gtk_show_uri (NULL, "ghelp:xiphos", gtk_get_current_event_time(), &error);
+	if (error != NULL) {
+		GS_warning(("%s", error->message));
+		g_error_free(error);
+	}
+#endif /* WITHOUT_GNOME */
+
 #endif /* WIN32 */
 }
 
@@ -594,8 +608,8 @@ on_save_session_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 	tabs_dir = g_strdup_printf("%s/tabs/",settings.gSwordDir);
 	
-	if (access(tabs_dir, F_OK) == -1) {
-		if ((Mkdir(tabs_dir, S_IRWXU)) == -1) {
+	if (g_access(tabs_dir, F_OK) == -1) {
+		if ((g_mkdir(tabs_dir, S_IRWXU)) == -1) {
 			fprintf(stderr, "can't create tabs dir");
 			return;
 		}
@@ -688,8 +702,8 @@ on_open_session_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 	tabs_dir = g_strdup_printf("%s/tabs/",settings.gSwordDir);
 	
-	if (access(tabs_dir, F_OK) == -1) {
-		if ((Mkdir(tabs_dir, S_IRWXU)) == -1) {
+	if (g_access(tabs_dir, F_OK) == -1) {
+		if ((g_mkdir(tabs_dir, S_IRWXU)) == -1) {
 			fprintf(stderr, "can't create tabs dir");
 			return;
 		}

@@ -28,7 +28,7 @@
 #include <unistd.h>
 #include <string.h>
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 #include <swmgr.h>
 #include <swmodule.h>
 
@@ -330,14 +330,12 @@ static void add_children_to_tree(GtkTreeModel * model, GtkTreeIter iter,
 void main_create_pixbufs(void)
 {
 	pixbufs = g_new0(TreePixbufs, 1);
-	pixbufs->pixbuf_closed = gtk_widget_render_icon(widgets.app,
-							GNOME_STOCK_BOOK_BLUE,
-							GTK_ICON_SIZE_MENU,
-							NULL);
+	pixbufs->pixbuf_closed =
+		pixbuf_finder("stock_book_blue.png", NULL);
+		
 	pixbufs->pixbuf_opened =
-	    gtk_widget_render_icon(widgets.app,
-				   GNOME_STOCK_BOOK_OPEN,
-				   GTK_ICON_SIZE_MENU, NULL);
+		pixbuf_finder("stock_book_open.png", NULL);
+
 	pixbufs->pixbuf_helpdoc =
 	    gtk_widget_render_icon(widgets.app,
 				   GTK_STOCK_DND,

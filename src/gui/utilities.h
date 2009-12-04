@@ -74,9 +74,9 @@ void language_make_list(GList *modlist,
 			GtkTreeIter *uninstalled,
 			void (*add)(GtkTreeModel *, GtkTreeIter, gchar **));
 
-char *image_locator(char *image);
+char *image_locator(const char *image);
 GtkWidget *pixmap_finder(char *image);
-GdkPixbuf *pixbuf_finder(char *image, GError **error);
+GdkPixbuf *pixbuf_finder(const char *image, GError **error);
 
 void HtmlOutput(char *text, GtkWidget *gtkText, MOD_FONT *mf, char *anchor);
 void set_window_icon(GtkWindow *window);

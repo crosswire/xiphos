@@ -1,3 +1,8 @@
+2009-12-04 matthew<ransom1982@users.sourceforge.net>
+
+	* de-gnome menus and as many other functions as possible
+	* add option to waf to build without gnome
+
 2009-12-02 matthew<ransom1982@users.sourceforge.net>
 
 	* removed display_mgr from backend

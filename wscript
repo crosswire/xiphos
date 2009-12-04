@@ -149,6 +149,11 @@ def set_options(opt):
                    help = "Disable the Xiphos dbus API [Default: enabled]",
                    dest = 'without_dbus')
 
+    opt.add_option('--without-gnome',
+                   action = 'store_true',
+                   default = False,
+                   help = "Disable GNOME [Default: enabled]",
+                   dest = 'without_gnome')
 
     group = opt.add_option_group ('Localization and documentation', '')
     group.add_option('--helpdir',
@@ -390,10 +395,13 @@ def configure(conf):
     #else: 
         #check_pkg(conf, 'gmodule-export-2.0', '2.0.0', True, var='GMODULEEXP')
     check_pkg(conf, 'gmodule-2.0', '2.0.0', True, var='GMODULEEXP')
+    check_pkg(conf, 'glib-2.0', '2.0.0', True, 'GLIB')
 
     ## Gnome libs
-    check_pkg(conf, 'glib-2.0', '2.0.0', True, 'GLIB')
-    check_pkg(conf, 'libgnomeui-2.0', '2.0.0', True, var='GNOMEUI')
+    if not opt.without_gnome:
+        check_pkg(conf, 'libgnomeui-2.0', '2.0.0', True, var='GNOMEUI')
+    else:
+        dfn('WITHOUT_GNOME', 1)
 
     ## gfs
     check_pkg(conf, 'libgsf-1', '1.14', True, 'GFS')
