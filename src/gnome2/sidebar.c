@@ -86,7 +86,7 @@ gboolean is_search_result;
 extern gboolean shift_key_pressed;
 
 
-static void create_menu_modules(void);
+static GtkWidget* create_menu_modules(void);
 void on_export_verselist_activate (GtkMenuItem * menuitem, gpointer user_data);
 
 
@@ -840,7 +840,8 @@ G_MODULE_EXPORT static void on_save_list_as_bookmarks_activate(GtkMenuItem * men
  *   void
  */
 
-static void on_open_in_dialog_activate(GtkMenuItem * menuitem,
+G_MODULE_EXPORT void
+on_open_in_dialog_activate(GtkMenuItem * menuitem,
 				       gpointer user_data)
 {
 	if (main_get_mod_type(buf_module) == PERCOM_TYPE)
@@ -875,7 +876,8 @@ static void on_open_in_dialog_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-static void on_open_in_tab_activate(GtkMenuItem * menuitem,
+G_MODULE_EXPORT void
+on_open_in_tab_activate2(GtkMenuItem * menuitem,
 				    gpointer user_data)
 {
 	gui_open_module_in_new_tab(buf_module);
@@ -900,7 +902,8 @@ static void on_open_in_tab_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-static void on_about2_activate(GtkMenuItem * menuitem,
+G_MODULE_EXPORT void
+on_about2_activate(GtkMenuItem * menuitem,
 			       gpointer user_data)
 {
 	gui_display_about_module_dialog(buf_module);
@@ -970,29 +973,6 @@ GtkWidget *create_results_menu(void)
 	return menu;
 }
 
-
-static GnomeUIInfo menu_modules_uiinfo[] = {
-	{ /* 0 */
-	 GNOME_APP_UI_ITEM, N_("Open in a new tab"),
-	 N_("Open selected module in a new tab"),
-	 (gpointer) on_open_in_tab_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_FILENAME, NULL /* init'd in menu creation */,
-	 0, (GdkModifierType) 0, NULL},
-	{ /* 1 */
-	 GNOME_APP_UI_ITEM, N_("Open in a separate window"),
-	 N_("Open selected module in a separate ['dialog'] window"),
-	 (gpointer) on_open_in_dialog_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_FILENAME, NULL /* init'd in menu creation */,
-	 0, (GdkModifierType) 0, NULL},
-	{ /* 2 */
-	 GNOME_APP_UI_ITEM, N_("About"),
-	 N_("View information about the selected dialog"),
-	 (gpointer) on_about2_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_ABOUT,
-	 0, (GdkModifierType) 0, NULL},
-	GNOMEUIINFO_END
-};
-
 /******************************************************************************
  * Name
  *   create_menu_modules
@@ -1008,34 +988,28 @@ static GnomeUIInfo menu_modules_uiinfo[] = {
  * Return value
  *   void
  */
-
 static
-void create_menu_modules(void)
+GtkWidget* create_menu_modules(void)
 {
-	GtkWidget *menu_modules;
+	gchar *glade_file;
+	GladeXML *gxml;
 
-	/*
-	 * this is total magic.  set up menu before using it.
-	 * indices are direct from GnomeUIInfo above.
-	 */
-	if (!menu_modules_uiinfo[0].pixmap_info)
-		menu_modules_uiinfo[0].pixmap_info =
-		    image_locator("new_tab_button.png");
-	if (!menu_modules_uiinfo[1].pixmap_info)
-		menu_modules_uiinfo[1].pixmap_info =
-		    image_locator("dlg-un.png");
-	/* end magic */
-
-	menu_modules = gtk_menu_new();
-	gnome_app_fill_menu(GTK_MENU_SHELL(menu_modules),
-			    menu_modules_uiinfo, NULL, FALSE, 0);
-	if (!settings.browsing)  
-		gtk_widget_hide (menu_modules_uiinfo[0].widget);
+	glade_file = gui_general_user_file ("xi-menus.glade", FALSE);
+	g_return_val_if_fail ((glade_file != NULL), NULL);
 	
-	gtk_menu_popup ((GtkMenu*)menu_modules, NULL, NULL, NULL, NULL, 2,
-		     			gtk_get_current_event_time());
-	// return menu_modules;
-    
+	gxml = glade_xml_new (glade_file, "menu_modules", NULL);
+		
+	g_free (glade_file);
+	g_return_val_if_fail ((gxml != NULL), NULL);
+	
+	GtkWidget *menu 	= glade_xml_get_widget (gxml, "menu_modules");
+	glade_xml_signal_autoconnect_full
+		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);
+	
+	gtk_menu_popup ((GtkMenu*)menu, NULL, NULL, NULL, NULL, 2,
+			gtk_get_current_event_time());
+
+	return menu;
 }
 
 
@@ -1143,7 +1117,7 @@ static GnomeUIInfo menu_prayerlist_mod_uiinfo[] = {
         { /* 0 */
 	 GNOME_APP_UI_ITEM, N_("Open in a new tab"),
 	 N_("Open selected module in a new tab"),
-	 (gpointer) on_open_in_tab_activate, NULL, NULL,
+	 (gpointer) on_open_in_tab_activate2, NULL, NULL,
 	 GNOME_APP_PIXMAP_FILENAME, NULL /* init'd in menu creation */,
 	 0, (GdkModifierType) 0, NULL},
 	{ /* 1 */
