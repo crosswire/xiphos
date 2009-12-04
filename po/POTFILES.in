@@ -48,7 +48,7 @@ src/gnome2/navbar_versekey_editor.c
 src/gnome2/navbar_versekey_parallel.c
 src/gnome2/parallel_dialog.c
 src/gnome2/parallel_view.c
-#src/gnome2/preferences_cell_renderer.c
+src/gnome2/preferences_cell_renderer.c
 src/gnome2/preferences_dialog.c
 src/gnome2/search_dialog.c
 src/gnome2/search_sidebar.c
