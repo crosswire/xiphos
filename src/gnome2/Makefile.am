@@ -49,7 +49,6 @@ xiphos_SOURCES =  \
     preferences_dialog.c \
     search_dialog.c \
     search_sidebar.c \
-    session.c \
     sidebar.c \
     sidebar_dialog.c \
     splash.c \

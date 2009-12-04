@@ -23,7 +23,14 @@
 #include <config.h>
 #endif
 
+#ifndef WITHOUT_GNOME
 #include <gnome.h>
+#else
+#include <gtk/gtk.h>
+#include <glib/gi18n.h>
+#include <locale.h>
+#include <stdlib.h>
+#endif
 
 /* ----------------------------------------------- */
 /* do not #include "gui/debug_glib_null.h" in this */
@@ -60,10 +67,14 @@ void gui_init(int argc, char *argv[])
 	textdomain (GETTEXT_PACKAGE);
 	g_free (locale_dir);
 #endif
+#ifndef WITHOUT_GNOME	
 	gnome_program_init (PACKAGE, VERSION, LIBGNOMEUI_MODULE,
 			    argc, argv,
 			    GNOME_PROGRAM_STANDARD_PROPERTIES,
 			    NULL);
+#else
+	gtk_init(&argc, &argv);
+#endif
 #ifndef WIN32
 	gconf_setup();
 #endif

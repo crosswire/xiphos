@@ -29,7 +29,11 @@
 #include <string.h>
 #include <assert.h>
 
+#ifndef WITHOUT_GNOME
 #include <gnome.h>
+#else
+#include <gtk/gtk.h>
+#endif
 
 #include "gui/utilities.h"
 #include "gui/preferences_dialog.h"
@@ -1103,7 +1107,7 @@ language_make_list(GList *modlist,
  * caller must free the returned string.
  */
 char *
-image_locator(char *image)
+image_locator(const char *image)
 {
 #ifndef WIN32
 	return g_strdup_printf("%s/%s", PACKAGE_PIXMAPS_DIR, image);
@@ -1132,7 +1136,7 @@ pixmap_finder(char *image)
  * get a pixbuf from specified file.
  */
 GdkPixbuf *
-pixbuf_finder(char *image, GError **error)
+pixbuf_finder(const char *image, GError **error)
 {
 	GdkPixbuf *p;
 	char *image_file;
@@ -1248,6 +1252,7 @@ gboolean xiphos_open_default (const gchar *file)
 	
 #else
 	GError *error = NULL;
+#ifndef WITHOUT_GNOME
 	if (gnome_url_show(file, &error) == FALSE){
 		GS_warning(("%s", error->message));
 		g_error_free (error);
@@ -1255,6 +1260,16 @@ gboolean xiphos_open_default (const gchar *file)
 	}
 	else
 		return TRUE;
+#else
+	gtk_show_uri (NULL, file, gtk_get_current_event_time(), &error);
+	if (error != NULL) {
+		GS_warning(("%s", error->message));
+		g_error_free (error);
+		return FALSE;
+	}
+	else
+		return TRUE;
+#endif
 #endif
 }
 

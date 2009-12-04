@@ -28,6 +28,8 @@ pixmap_DATA= \
 	new_tab_button.png \
 	silk-edit-bookmarks.png \
 	splash.png \
+	stock_book_blue.png \
+	stock_book_open.png \
 	sword3.png \
 	sword_icon-16.png \
 	sword.png \
