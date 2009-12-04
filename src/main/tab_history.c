@@ -89,9 +89,9 @@ void main_clear_tab_history(void)
 {
 	PASSAGE_TAB_INFO *tab = cur_passage_tab;
 
-	gui_remove_menu_items(_("H_istory/<Separator>"),
-			      tab->history_items + 1);
-	gui_add_separator2menu(widgets.app, _("H_istory/C_lear"));
+	//gui_remove_menu_items(_("H_istory/<Separator>"),
+	//		      tab->history_items + 1);
+	//gui_add_separator2menu(widgets.app, _("H_istory/C_lear"));
 	
 	/* set sensitivity of history buttons */
 	gtk_widget_set_sensitive(BUTTON_BACK, FALSE);
