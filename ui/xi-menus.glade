@@ -1845,4 +1845,103 @@
   </child>
 </widget>
 
+<widget class="GtkMenu" id="menu_edit_tree">
+
+  <child>
+    <widget class="GtkImageMenuItem" id="add_child">
+      <property name="visible">True</property>
+      <property name="tooltip"
+		translatable="yes">Add a sub-item</property>
+      <property name="label" translatable="yes">Add Sub-Item</property>
+      <property name="use_underline">True</property>
+      <signal name="activate" handler="on_add_child_activate"
+	      last_modification_time="Tue, 07 Apr 2009 23:29:59 GMT"/>
+
+      <child internal-child="image">
+	<widget class="GtkImage" id="image1469">
+	  <property name="visible">True</property>
+	  <property name="stock">gtk-add</property>
+	  <property name="icon_size">4</property>
+	  <property name="xalign">0.5</property>
+	  <property name="yalign">0.5</property>
+	  <property name="xpad">0</property>
+	  <property name="ypad">0</property>
+	</widget>
+      </child>
+    </widget>
+  </child>
+  
+  <child>
+    <widget class="GtkImageMenuItem" id="add_sibling">
+      <property name="visible">True</property>
+      <property name="tooltip"
+		translatable="yes">Add an item</property>
+      <property name="label" translatable="yes">Add Item</property>
+      <property name="use_underline">True</property>
+      <signal name="activate" handler="on_add_sibling_activate"
+	      last_modification_time="Tue, 07 Apr 2009 23:29:59 GMT"/>
+
+      <child internal-child="image">
+	<widget class="GtkImage" id="image1469">
+	  <property name="visible">True</property>
+	  <property name="stock">gtk-add</property>
+	  <property name="icon_size">4</property>
+	  <property name="xalign">0.5</property>
+	  <property name="yalign">0.5</property>
+	  <property name="xpad">0</property>
+	  <property name="ypad">0</property>
+	</widget>
+      </child>
+    </widget>
+  </child>
+
+  <child>
+    <widget class="GtkImageMenuItem" id="remove">
+      <property name="visible">True</property>
+      <property name="tooltip"
+		translatable="yes">Remove this item</property>
+      <property name="label" translatable="yes">Remove</property>
+      <property name="use_underline">True</property>
+      <signal name="activate" handler="on_remove_activate"
+	      last_modification_time="Tue, 07 Apr 2009 23:29:59 GMT"/>
+
+      <child internal-child="image">
+	<widget class="GtkImage" id="image1469">
+	  <property name="visible">True</property>
+	  <property name="stock">gtk-remove</property>
+	  <property name="icon_size">4</property>
+	  <property name="xalign">0.5</property>
+	  <property name="yalign">0.5</property>
+	  <property name="xpad">0</property>
+	  <property name="ypad">0</property>
+	</widget>
+      </child>
+    </widget>
+  </child>
+  
+  <child>
+    <widget class="GtkImageMenuItem" id="edit">
+      <property name="visible">True</property>
+      <property name="tooltip"
+		translatable="yes">Edit this item</property>
+      <property name="label" translatable="yes">Edit</property>
+      <property name="use_underline">True</property>
+      <signal name="activate" handler="on_edit_activate2"
+	      last_modification_time="Tue, 07 Apr 2009 23:29:59 GMT"/>
+
+      <child internal-child="image">
+	<widget class="GtkImage" id="image1469">
+	  <property name="visible">True</property>
+	  <property name="stock">gtk-edit</property>
+	  <property name="icon_size">4</property>
+	  <property name="xalign">0.5</property>
+	  <property name="yalign">0.5</property>
+	  <property name="xpad">0</property>
+	  <property name="ypad">0</property>
+	</widget>
+      </child>
+    </widget>
+  </child>
+</widget>
+
 </glade-interface>
