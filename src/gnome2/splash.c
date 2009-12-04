@@ -513,6 +513,7 @@ e_splash_set_icon_highlight(ESplash * splash,
 
 	canvas = GTK_WIDGET(priv->canvas);
 	gdk_window_invalidate_rect(canvas->window, &rectangle, TRUE);
+	gdk_window_process_updates(canvas->window, TRUE);
 }
 
 E_MAKE_TYPE(e_splash, "ESplash", ESplash, class_init, init, PARENT_TYPE)
