@@ -24,7 +24,7 @@
 #include <config.h>
 #endif
 
-#include <gnome.h>
+#include <glade/glade-xml.h>
 
 #ifdef USE_GTKHTML3_14_23
 #include "editor/slib-editor.h"
@@ -34,6 +34,7 @@
 
 #include "gui/treekey-editor.h"
 #include "gui/dialog.h"
+#include "gui/utilities.h"
 
 #include "main/sidebar.h"
 #include "main/sword_treekey.h"
@@ -41,6 +42,10 @@
 
 #include "gui/debug_glib_null.h"
 
+void on_add_sibling_activate (GtkMenuItem * menuitem, gpointer user_data);
+void on_add_child_activate (GtkMenuItem * menuitem, gpointer user_data);
+void on_remove_activate (GtkMenuItem * menuitem, gpointer user_data);
+void on_edit_activate2 (GtkMenuItem * menuitem, gpointer user_data);
 
 typedef struct _item_info INFO;
 struct _item_info
@@ -113,7 +118,7 @@ static void _button_one(EDITOR * e)
 	g_free(info);	
 }
 
-static void
+G_MODULE_EXPORT void
 on_add_sibling_activate (GtkMenuItem * menuitem, gpointer user_data)
 {	
 	INFO *info;
@@ -172,7 +177,7 @@ on_add_sibling_activate (GtkMenuItem * menuitem, gpointer user_data)
 
 
 
-static void
+G_MODULE_EXPORT void
 on_add_child_activate (GtkMenuItem * menuitem, gpointer user_data)
 {	
 	INFO *info;
@@ -235,7 +240,7 @@ on_add_child_activate (GtkMenuItem * menuitem, gpointer user_data)
 }
 
 
-static void
+G_MODULE_EXPORT void
 on_remove_activate (GtkMenuItem * menuitem, gpointer user_data)
 {
 	INFO *info;
@@ -261,8 +266,8 @@ on_remove_activate (GtkMenuItem * menuitem, gpointer user_data)
 }
 
 
-static void
-on_edit_activate (GtkMenuItem * menuitem, gpointer user_data)
+G_MODULE_EXPORT void
+on_edit_activate2 (GtkMenuItem * menuitem, gpointer user_data)
 {
 	INFO *info;
 	EDITOR * editor = (EDITOR*) user_data;
@@ -300,51 +305,27 @@ on_edit_activate (GtkMenuItem * menuitem, gpointer user_data)
 	g_free (d);
 }
 
-
-static GnomeUIInfo edit_tree_menu_uiinfo[] = {
-	{
-	 GNOME_APP_UI_ITEM, N_("Add Child"),
-	 N_("Add an item"),
-	 (gpointer) on_add_child_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, "gtk-add",
-	 0, (GdkModifierType) 0, NULL},
-	{
-	 GNOME_APP_UI_ITEM, N_("Add Sibling"),
-	 N_("Add an item"),
-	 (gpointer) on_add_sibling_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, "gtk-add",
-	 0, (GdkModifierType) 0, NULL},
-	{
-	 GNOME_APP_UI_ITEM, N_("Remove"),
-	 N_("Remove this item"),
-	 (gpointer) on_remove_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, "gtk-remove",
-	 0, (GdkModifierType) 0, NULL},
-	{
-	 GNOME_APP_UI_ITEM, N_("Edit"),
-	 N_("Edit this item"),
-	 (gpointer) on_edit_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, "gtk-edit",
-	 0, (GdkModifierType) 0, NULL},
-	GNOMEUIINFO_END
-};
-
 GtkWidget *
 create_edit_tree_menu (EDITOR * editor)
 {
-	GtkWidget *edit_tree_menu;
-	GtkAccelGroup *accel_group;
-
-	accel_group = gtk_accel_group_new ();
-
-	edit_tree_menu = gtk_menu_new ();
-	gnome_app_fill_menu_with_data (GTK_MENU_SHELL (edit_tree_menu),
-				       edit_tree_menu_uiinfo,
-				       accel_group, FALSE, 0, editor);
-	// gnome_app_fill_menu (GTK_MENU_SHELL (edit_tree_menu), edit_tree_menu_uiinfo, accel_group, FALSE, 0);
-	gtk_menu_set_accel_group (GTK_MENU (edit_tree_menu), accel_group);
-
-	return edit_tree_menu;
+	GtkWidget *menu;
+	gchar *glade_file;
+	GladeXML *gxml;
+	
+	glade_file = gui_general_user_file ("xi-menus.glade", FALSE);
+	g_return_val_if_fail ((glade_file != NULL), NULL);
+	
+	gxml = glade_xml_new (glade_file, "menu_edit_tree", NULL);
+		
+	g_free (glade_file);
+	g_return_val_if_fail ((gxml != NULL), NULL);
+	
+	menu = glade_xml_get_widget (gxml, "menu_edit_tree");
+    	/* connect signals and data */
+	glade_xml_signal_autoconnect_full
+		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, editor);
+	
+	return menu;
 }
 
 static gboolean on_button_release(GtkWidget *widget,
