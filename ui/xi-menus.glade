@@ -1620,8 +1620,7 @@
 	separate ['dialog'] window</property>
       <property name="label" translatable="yes">Open in a separate window</property>
       <property name="use_underline">True</property>
-      <signal name="activate" handler="on_open_in_dialog_activate"
-	      last_modification_time="Tue, 07 Apr 2009 23:37:07 GMT"/>
+      <signal name="activate" handler="on_open_in_dialog_activate" last_modification_time="Tue, 07 Apr 2009 23:37:07 GMT"/>
 
       <child internal-child="image">
 	<widget class="GtkImage" id="image1470">
@@ -1636,7 +1635,7 @@
     </widget>
   </child>
 
-    <child>
+  <child>
     <widget class="GtkImageMenuItem" id="about">
       <property name="visible">True</property>
       <property name="label" translatable="yes">About</property>
@@ -1657,6 +1656,193 @@
   </child>
 </widget>
 
+<widget class="GtkMenu" id="menu_prayerlist">
 
+  <child>
+    <widget class="GtkImageMenuItem" id="create_simple_prayer_list">
+      <property name="visible">True</property>
+      <property name="tooltip"
+		translatable="yes">Create a new simple prayer list</property>
+      <property name="label" translatable="yes">Simple</property>
+      <property name="use_underline">True</property>
+      <signal name="activate" handler="on_simple_activate"
+	      last_modification_time="Tue, 07 Apr 2009 23:29:59 GMT"/>
+
+      <child internal-child="image">
+	<widget class="GtkImage" id="image1469">
+	  <property name="visible">True</property>
+	  <property name="stock">gtk-edit</property>
+	  <property name="icon_size">4</property>
+	  <property name="xalign">0.5</property>
+	  <property name="yalign">0.5</property>
+	  <property name="xpad">0</property>
+	  <property name="ypad">0</property>
+	</widget>
+      </child>
+    </widget>
+  </child>
+  
+  <child>
+    <widget class="GtkImageMenuItem" id="create_subject_prayer_list">
+      <property name="visible">True</property>
+      <property name="tooltip"
+		translatable="yes">Create a new subject prayer list</property>
+      <property name="label" translatable="yes">Subject</property>
+      <property name="use_underline">True</property>
+      <signal name="activate" handler="on_subject_activate"
+	      last_modification_time="Tue, 07 Apr 2009 23:29:59 GMT"/>
+
+      <child internal-child="image">
+	<widget class="GtkImage" id="image1469">
+	  <property name="visible">True</property>
+	  <property name="stock">gtk-edit</property>
+	  <property name="icon_size">4</property>
+	  <property name="xalign">0.5</property>
+	  <property name="yalign">0.5</property>
+	  <property name="xpad">0</property>
+	  <property name="ypad">0</property>
+	</widget>
+      </child>
+    </widget>
+  </child>
+
+  <child>
+    <widget class="GtkImageMenuItem" id="create_monthly_prayer_list">
+      <property name="visible">True</property>
+      <property name="tooltip"
+		translatable="yes">Create a new monthly journal</property>
+      <property name="label" translatable="yes">Monthly</property>
+      <property name="use_underline">True</property>
+      <signal name="activate" handler="on_monthly_activate"
+	      last_modification_time="Tue, 07 Apr 2009 23:29:59 GMT"/>
+
+      <child internal-child="image">
+	<widget class="GtkImage" id="image1469">
+	  <property name="visible">True</property>
+	  <property name="stock">gtk-edit</property>
+	  <property name="icon_size">4</property>
+	  <property name="xalign">0.5</property>
+	  <property name="yalign">0.5</property>
+	  <property name="xpad">0</property>
+	  <property name="ypad">0</property>
+	</widget>
+      </child>
+    </widget>
+  </child>
+
+  <child>
+    <widget class="GtkImageMenuItem" id="create_daily_journal">
+      <property name="visible">True</property>
+      <property name="tooltip"
+		translatable="yes">Create a new daily journal</property>
+      <property name="label" translatable="yes">Daily</property>
+      <property name="use_underline">True</property>
+      <signal name="activate" handler="on_journal_activate"
+	      last_modification_time="Tue, 07 Apr 2009 23:29:59 GMT"/>
+
+      <child internal-child="image">
+	<widget class="GtkImage" id="image1469">
+	  <property name="visible">True</property>
+	  <property name="stock">gtk-edit</property>
+	  <property name="icon_size">4</property>
+	  <property name="xalign">0.5</property>
+	  <property name="yalign">0.5</property>
+	  <property name="xpad">0</property>
+	  <property name="ypad">0</property>
+	</widget>
+      </child>
+    </widget>
+  </child>
+
+  <child>
+    <widget class="GtkImageMenuItem" id="create_outlined_topic_list">
+      <property name="visible">True</property>
+      <property name="tooltip"
+		translatable="yes">Create a new outlined topic</property>
+      <property name="label" translatable="yes">Outlined</property>
+      <property name="use_underline">True</property>
+      <signal name="activate" handler="on_outlined_topic_activate"
+	      last_modification_time="Tue, 07 Apr 2009 23:29:59 GMT"/>
+
+      <child internal-child="image">
+	<widget class="GtkImage" id="image1469">
+	  <property name="visible">True</property>
+	  <property name="stock">gtk-edit</property>
+	  <property name="icon_size">4</property>
+	  <property name="xalign">0.5</property>
+	  <property name="yalign">0.5</property>
+	  <property name="xpad">0</property>
+	  <property name="ypad">0</property>
+	</widget>
+      </child>
+    </widget>
+  </child>
+
+</widget>
+
+<widget class="GtkMenu" id="menu_prayerlist_mod">
+
+  <child>
+    <widget class="GtkImageMenuItem" id="open_in_new_tab">
+      <property name="visible">True</property>
+      <property name="tooltip" translatable="yes">Open selected module in a new tab</property>
+      <property name="label" translatable="yes">Open in new tab</property>
+      <property name="use_underline">True</property>
+      <signal name="activate" handler="on_open_in_tab_activate2" last_modification_time="Tue, 07 Apr 2009 23:29:59 GMT"/>
+
+      <child internal-child="image">
+	<widget class="GtkImage" id="image1469">
+	  <property name="visible">True</property>
+	  <property name="pixbuf">new_tab_button.png</property>
+	  <property name="xalign">0.5</property>
+	  <property name="yalign">0.5</property>
+	  <property name="xpad">0</property>
+	  <property name="ypad">0</property>
+	</widget>
+      </child>
+    </widget>
+  </child>
+
+  <child>
+    <widget class="GtkImageMenuItem" id="open_in_a_dialog">
+      <property name="visible">True</property>
+      <property name="tooltip" translatable="yes">Open in editor</property>
+      <property name="label" translatable="yes">Open in editor</property>
+      <property name="use_underline">True</property>
+      <signal name="activate" handler="on_open_in_dialog_activate" last_modification_time="Tue, 07 Apr 2009 23:37:07 GMT"/>
+
+      <child internal-child="image">
+	<widget class="GtkImage" id="image1470">
+	  <property name="visible">True</property>
+	  <property name="pixbuf">silk-edit-bookmarks.png</property>
+	  <property name="xalign">0.5</property>
+	  <property name="yalign">0.5</property>
+	  <property name="xpad">0</property>
+	  <property name="ypad">0</property>
+	</widget>
+      </child>
+    </widget>
+  </child>
+
+  <child>
+    <widget class="GtkImageMenuItem" id="about">
+      <property name="visible">True</property>
+      <property name="label" translatable="yes">About</property>
+      <property name="use_underline">True</property>
+      <signal name="activate" handler="on_about2_activate" last_modification_time="Fri, 06 Mar 2009 14:37:21 GMT"/>
+
+      <child internal-child="image">
+	<widget class="GtkImage" id="image1295">
+	  <property name="visible">True</property>
+	  <property name="pixbuf">sword_icon-16.png</property>
+	  <property name="xalign">0.5</property>
+	  <property name="yalign">0.5</property>
+	  <property name="xpad">0</property>
+	  <property name="ypad">0</property>
+	</widget>
+      </child>
+    </widget>
+  </child>
+</widget>
 
 </glade-interface>
