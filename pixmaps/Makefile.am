@@ -4,6 +4,8 @@ pkgicon_DATA=xiphos.svg
 pixmapdir=@datadir@/pixmaps/xiphos
 pixmap_DATA= \
 	about.png \
+	book_closed.png \
+	book_open.png \
 	chat_icon-16.png \
 	dlg-un-16.png \
 	dlg-un.png \
@@ -28,8 +30,6 @@ pixmap_DATA= \
 	new_tab_button.png \
 	silk-edit-bookmarks.png \
 	splash.png \
-	stock_book_blue.png \
-	stock_book_open.png \
 	sword3.png \
 	sword_icon-16.png \
 	sword.png \
