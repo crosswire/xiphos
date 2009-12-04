@@ -34,7 +34,7 @@
 #include <time.h>
 
 #include <bonobo.h>
-#include <gnome.h>
+#include <gtk/gtk.h>
 #include <glade/glade-xml.h>
 
 #include "gui/mod_mgr.h"

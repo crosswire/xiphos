@@ -31,7 +31,7 @@
 #include <markupfiltmgr.h>
 #include <swlocale.h>
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 #include <versekey.h>
 #include <regex.h>
 #include <string.h>

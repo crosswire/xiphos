@@ -35,7 +35,7 @@
 #include <config.h>
 #endif
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 #include <glib.h>
 #include <assert.h>
 #include "main/global_ops.hh"

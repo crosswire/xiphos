@@ -24,6 +24,7 @@
 #endif
 
 #include <gtk/gtk.h>
+#include <glib/gi18n.h>
 
 #include "gui/about_xiphos.h"
 #include "gui/utilities.h"

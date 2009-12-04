@@ -25,7 +25,7 @@
 
 #include <gtk/gtk.h>
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 
 #ifdef USE_GTKMOZEMBED
 #ifdef WIN32

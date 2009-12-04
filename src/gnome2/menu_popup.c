@@ -23,7 +23,11 @@
 #include <config.h>
 #endif
 
-#include <gnome.h>
+#include <gtk/gtk.h>
+#include <glib.h>
+#include <glib/gstdio.h>
+#include <errno.h>
+#include <unistd.h>
 #include <ctype.h>
 
 #ifdef USE_GTKMOZEMBED
@@ -1234,7 +1238,7 @@ G_MODULE_EXPORT void on_rename_perscomm_activate (GtkMenuItem * menuitem, gpoint
 	datapath_new = s;	// ..and in with the new.
 
 	// move old data directory to new.
-	if ((chdir(sworddir) != 0) ||
+	if ((g_chdir(sworddir) != 0) ||
 	    (rename(datapath_old, datapath_new) != 0)) {
 		gui_generic_warning("Failed to rename directory.");
 		goto out2;

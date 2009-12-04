@@ -29,7 +29,7 @@
 #include <unistd.h>
 #include <string.h>
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 #include <gtk/gtk.h>
 #include <glade/glade-xml.h>
 

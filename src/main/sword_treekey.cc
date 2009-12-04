@@ -24,7 +24,7 @@
 #include <config.h>
 #endif
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 #include <glib/gstdio.h>
 #include <swmodule.h>
 #include <swmgr.h>
