@@ -28,7 +28,7 @@ extern "C"
 #endif	
 
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 
 typedef struct _module_lists MOD_LISTS;
 struct _module_lists {

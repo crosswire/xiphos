@@ -23,7 +23,10 @@
 #include <config.h>
 #endif
 
-#include <gnome.h>
+#include <unistd.h>
+#include <gtk/gtk.h>
+#include <glib.h>
+#include <glib/gstdio.h>
 #include <libxml/tree.h>
 #include <libxml/parser.h>
 
@@ -360,8 +363,8 @@ void gui_save_tabs(const gchar *filename)
 	
 	tabs_dir = g_strdup_printf("%s/tabs/",settings.gSwordDir);
 	
-	if (access(tabs_dir, F_OK) == -1) {
-		if ((Mkdir(tabs_dir, S_IRWXU)) == -1) {
+	if (g_access(tabs_dir, F_OK) == -1) {
+		if ((g_mkdir(tabs_dir, S_IRWXU)) == -1) {
 			gui_generic_warning("Can't create tabs dir.");
 			return;
 		}
@@ -455,8 +458,8 @@ void _save_off_tab (const gchar * filename)
 	
 	tabs_dir = g_strdup_printf("%s/tabs/",settings.gSwordDir);
 	
-	if (access(tabs_dir, F_OK) == -1) {
-		if ((Mkdir(tabs_dir, S_IRWXU)) == -1) {
+	if (g_access(tabs_dir, F_OK) == -1) {
+		if ((g_mkdir(tabs_dir, S_IRWXU)) == -1) {
 			gui_generic_warning("Can't create tabs dir.");
 			return;
 		}
@@ -547,7 +550,7 @@ void gui_load_tabs(const gchar *filename)
 	else
 	{
 		tabs_dir = g_strdup_printf("%s/tabs/",settings.gSwordDir);
-		if (access(tabs_dir, F_OK) == -1) {
+		if (g_access(tabs_dir, F_OK) == -1) {
 			GS_message(("Creating new tabs directory\n"));
 			gui_save_tabs (filename);
 			//return;
@@ -556,7 +559,7 @@ void gui_load_tabs(const gchar *filename)
 		g_free(tabs_dir);
 		
 	    	/* we need this for first time non tabbed browsing */
-	    	if (!settings.browsing && access(file, F_OK) == -1) {
+	    	if (!settings.browsing && g_access(file, F_OK) == -1) {
 			_save_off_tab (filename);
 		}
 

@@ -26,7 +26,6 @@
 extern "C" {
 #endif
 
-#include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 
 extern gboolean in_url;

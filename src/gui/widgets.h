@@ -29,7 +29,7 @@ typedef struct _app_widgets WIDGETS;
 struct  _app_widgets {
 	GtkWidget
 		*app,  /* main form */
-		*appbar, /* gnome status/progress bar */
+		*appbar, /* gtk status/progress bar */
 		*vboxMain, /*  */
 		*page, /*  */
 		*epaned, /* sidebar bar and main panel */

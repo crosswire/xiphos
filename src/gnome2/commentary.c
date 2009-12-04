@@ -24,7 +24,7 @@
 #endif
 
 #include <errno.h>
-#include <gtk/gtk.h>
+#include <gnome.h>
 
 
 #ifdef USE_GTKMOZEMBED

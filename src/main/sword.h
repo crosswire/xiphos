@@ -25,7 +25,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#include <gnome.h>
+#include <gtk/gtk.h>
 #include <glib/gi18n.h>
 	
 #include "main/configs.h"	

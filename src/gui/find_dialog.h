@@ -22,7 +22,7 @@
 #ifndef _FIND_DIALOG_H_
 #define _FIND_DIALOG_H_
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 
 void gui_find_dlg(GtkWidget *htmlwidget, gchar *mod_name, 
 		  gboolean regular, gchar *text);
