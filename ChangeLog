@@ -1,3 +1,9 @@
+2009-12-04 simon<DrMeers@users.sourceforge.net>
+
+	* fixed window title bug -- changing modules in the sidebar treeview
+	  updated window title to _previous_ module, because
+	  gui_change_window_title used tab settings prior to update
+
 2009-12-04 matthew<ransom1982@users.sourceforge.net>
 	   simon<DrMeers@users.sourceforge.net>
 
