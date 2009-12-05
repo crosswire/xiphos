@@ -1126,7 +1126,6 @@ void main_display_bible(const char * mod_name, const char * key)
 	}
 	
 	settings.whichwindow = MAIN_TEXT_WINDOW;
-	gui_change_window_title(settings.MainWindowModule);
 	
 	file = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
 	style = get_conf_file_item(file, mod_name, "style");
@@ -1173,6 +1172,9 @@ void main_display_bible(const char * mod_name, const char * key)
 				      settings.showdicts);
 		gui_set_tab_label(settings.currentverse, FALSE);
 	//}
+
+	gui_change_window_title(settings.MainWindowModule);
+	// (called _after_ tab data updated so not overwritten with old tab)
 
 	/*
 	 * change parallel verses
