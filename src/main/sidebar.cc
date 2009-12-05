@@ -329,12 +329,25 @@ static void add_children_to_tree(GtkTreeModel * model, GtkTreeIter iter,
 
 void main_create_pixbufs(void)
 {
+	GtkTextDirection dir = gtk_widget_get_direction (GTK_WIDGET(widgets.app));
+	
 	pixbufs = g_new0(TreePixbufs, 1);
-	pixbufs->pixbuf_closed =
-		pixbuf_finder("book_closed.png", NULL);
+
+	if (dir == GTK_TEXT_DIR_LTR) {
+		pixbufs->pixbuf_closed =
+			pixbuf_finder("book_closed.png", 16, NULL);
 		
-	pixbufs->pixbuf_opened =
-		pixbuf_finder("book_open.png", NULL);
+		pixbufs->pixbuf_opened =
+			pixbuf_finder("book_open.png", 16, NULL);
+	}
+	else {
+		pixbufs->pixbuf_closed =
+			pixbuf_finder("book_closed_rtol.png", 16, NULL);
+		
+		pixbufs->pixbuf_opened =
+			pixbuf_finder("book_open_rtol.png", 16, NULL);
+	}
+		
 
 	pixbufs->pixbuf_helpdoc =
 	    gtk_widget_render_icon(widgets.app,

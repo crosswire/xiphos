@@ -116,7 +116,7 @@ gui_create_about_xiphos(void)
 #endif
 		);
 
-	about1_logo_pixbuf = pixbuf_finder("about.png", NULL);
+	about1_logo_pixbuf = pixbuf_finder("about.png", 0, NULL);
 
 	about1 = gtk_about_dialog_new();
 	g_signal_connect(about1, "response",

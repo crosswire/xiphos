@@ -259,7 +259,7 @@ gboolean query_tooltip (GtkWidget  *widget,
 		text = g_string_truncate (text, 1200);
 		text = g_string_append_len(text, " ...", strlen (" ..."));
 	}
-	pixbuf = pixbuf_finder("sword3.png", NULL);
+	pixbuf = pixbuf_finder("sword3.png", 0, NULL);
 	gtk_tooltip_set_icon (tooltip, pixbuf);
 	gtk_tooltip_set_text (tooltip, text->str);
 	
@@ -301,11 +301,11 @@ create_pixbufs(void)
 	INSTALLED = gtk_widget_render_icon(dialog,
 					   GTK_STOCK_APPLY,
 					   GTK_ICON_SIZE_MENU, NULL);
-	FASTICON  = pixbuf_finder("indexed-16.png", NULL);
+	FASTICON  = pixbuf_finder("indexed-16.png", 0, NULL);
 	NO_INDEX  = gtk_widget_render_icon(dialog,
 					   GTK_STOCK_CANCEL,
 					   GTK_ICON_SIZE_MENU, NULL);
-	LOCKED    = pixbuf_finder("epiphany-secure.png", NULL);
+	LOCKED    = pixbuf_finder("epiphany-secure.png", 0, NULL);
 	REFRESH   = gtk_widget_render_icon(dialog,
 					   GTK_STOCK_REFRESH,
 					   GTK_ICON_SIZE_MENU, NULL);

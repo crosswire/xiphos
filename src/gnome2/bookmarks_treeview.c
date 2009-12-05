@@ -605,19 +605,33 @@ static void row_deleted(GtkTreeModel * treemodel, GtkTreePath * arg1,
 
 static void create_pixbufs(void)
 {
+	GtkTextDirection dir = gtk_widget_get_direction (GTK_WIDGET(widgets.app));
 
 	bm_pixbufs = g_new0(BookMarksPixbufs, 1);
+
+	if (dir == GTK_TEXT_DIR_LTR) {
+		if (!bm_pixbufs->pixbuf_closed)
+			pixbufs->pixbuf_closed =
+				pixbuf_finder("book_closed.png", 16, NULL);
+		
+		pixbufs->pixbuf_opened =
+			pixbuf_finder("book_open.png", 16, NULL);
+	}
+	else {
+		if (!bm_pixbufs->pixbuf_closed)
+			pixbufs->pixbuf_closed =
+				pixbuf_finder("book_closed_rtol.png", 16, NULL);
+		
+		pixbufs->pixbuf_opened =
+			pixbuf_finder("book_open_rtol.png", 16, NULL);
+	}
+
 	bm_pixbufs->pixbuf_closed =
-	    pixbuf_finder("epiphany-bookmarks.png", NULL);
+		pixbuf_finder("epiphany-bookmarks.png", 0, NULL);
 
-	if (!bm_pixbufs->pixbuf_closed)
-		bm_pixbufs->pixbuf_closed =
-			pixbuf_finder("book_closed.png", NULL);
-
-	bm_pixbufs->pixbuf_opened =
-		pixbuf_finder("book_open.png", NULL);
+	
 	bm_pixbufs->pixbuf_helpdoc =
-	    pixbuf_finder("epiphany-bookmark-page.png", NULL);
+		pixbuf_finder("epiphany-bookmark-page.png", 0, NULL);
 
 	if (!bm_pixbufs->pixbuf_helpdoc)
 		bm_pixbufs->pixbuf_helpdoc

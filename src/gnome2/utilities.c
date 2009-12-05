@@ -1136,17 +1136,22 @@ pixmap_finder(char *image)
  * get a pixbuf from specified file.
  */
 GdkPixbuf *
-pixbuf_finder(const char *image, GError **error)
+pixbuf_finder(const char *image, int size, GError **error)
 {
 	GdkPixbuf *p;
 	char *image_file;
 
 	image_file = image_locator(image);
-	p = gdk_pixbuf_new_from_file(image_file, error);
+	if (size == 0)
+		p = gdk_pixbuf_new_from_file(image_file, error);
+	else
+		p = gdk_pixbuf_new_from_file_at_scale (image_file,
+					       size, size,
+					       TRUE,
+					       error);
 	g_free(image_file);
 	return p;
 }
-
 
 //
 // utility function to write out HTML.
