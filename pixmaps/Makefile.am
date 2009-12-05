@@ -5,7 +5,9 @@ pixmapdir=@datadir@/pixmaps/xiphos
 pixmap_DATA= \
 	about.png \
 	book_closed.png \
+	book_closed_rtol.png \
 	book_open.png \
+	book_open_rtol.png \
 	chat_icon-16.png \
 	dlg-un-16.png \
 	dlg-un.png \

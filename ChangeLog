@@ -1,4 +1,11 @@
 2009-12-04 matthew<ransom1982@users.sourceforge.net>
+	   simon<DrMeers@users.sourceforge.net>
+
+	* new book icons for module list to better match colors
+	* improved rendering for icons
+	* rtol icons for module lists
+
+2009-12-04 matthew<ransom1982@users.sourceforge.net>
 
 	* de-gnome menus and as many other functions as possible
 	* add option to waf to build without gnome
