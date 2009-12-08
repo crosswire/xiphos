@@ -33,7 +33,6 @@
 #include <errno.h>
 #include <time.h>
 
-#include <bonobo.h>
 #include <gtk/gtk.h>
 #include <glade/glade-xml.h>
 
