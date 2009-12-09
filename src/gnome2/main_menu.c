@@ -107,13 +107,13 @@ on_help_contents_activate(GtkMenuItem * menuitem, gpointer user_data)
 	g_free(help_file);
 #else
 #ifndef WITHOUT_GNOME
-	if (gnome_help_display((const gchar*)"xiphos.xml", 
+	if (gnome_help_display((const gchar*)"xiphos-manual.xml", 
 			       NULL, &error) == FALSE) {
 		GS_warning(("%s",error->message));
 		g_error_free(error);        
 	}
 #else
-	gtk_show_uri (NULL, "ghelp:xiphos", gtk_get_current_event_time(), &error);
+	gtk_show_uri (NULL, "ghelp:xiphos-manual", gtk_get_current_event_time(), &error);
 	if (error != NULL) {
 		GS_warning(("%s", error->message));
 		g_error_free(error);
