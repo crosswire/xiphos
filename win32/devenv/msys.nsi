@@ -65,10 +65,11 @@
     ; Folders with binaries for PATH
     !define BIN_MINGW "mingw\bin"
     !define BIN_MSYS "bin"
+    !define BIN_LOCAL_MSYS "local\bin"
     !define BIN_PYTHON "C:\Python26"
     !define BIN_PERL "C:\strawberry\perl\bin"
-    !define BIN_NSISU "C:\Program Files\NSIS\Unicode"
-    !define BIN_MSHELP "C:\Program Files\HTML Help Workshop"
+    !define BIN_NSISU "$PROGRAMFILES\NSIS\Unicode"
+    !define BIN_MSHELP "$PROGRAMFILES\HTML Help Workshop"
 
     ; Following two definitions required by Uninstall log.
     !define INSTDIR_REG_ROOT "HKLM" # HKEY_LOCAL_MACHINE
@@ -197,6 +198,7 @@ Section "msys" SecCore
     ; Add binaries to system PATH
     ${EnvVarUpdate} $0 "PATH" "A" "HKLM" "$INSTDIR\${BIN_MINGW}"
     ${EnvVarUpdate} $0 "PATH" "A" "HKLM" "$INSTDIR\${BIN_MSYS}"
+    ${EnvVarUpdate} $0 "PATH" "A" "HKLM" "$INSTDIR\${BIN_LOCAL_MSYS}"
     
 
     ; Add uninstall information to Add/Remove Programs

@@ -1035,7 +1035,7 @@ msgid "Initiating Gecko"
 msgstr "Initialiseren van Gecko"
 
 #: ../src/gnome2/splash.c:580
-msgid "Loading settings"
+msgid "Loading Settings"
 msgstr "Instellingen worden geladen"
 
 #: ../src/gnome2/splash.c:598

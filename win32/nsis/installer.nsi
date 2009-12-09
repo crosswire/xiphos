@@ -337,7 +337,7 @@ Section $(STARTMENU_SECTITLE) SecStartmenu
     ; Create shortcuts
     CreateDirectory '${STM_DIR}'
     CreateShortCut '${STM_DIR}\Uninstall.lnk' '${UNINST_EXE}'
-    CreateShortCut '${STM_DIR}\Xiphos Help.lnk' '$INSTDIR\share\help\C\xiphos.chm'
+    CreateShortCut '${STM_DIR}\Xiphos Help.lnk' '$INSTDIR\share\help\xiphos.chm'
     CreateShortCut '${STM_DIR}\Utils.lnk' '$INSTDIR\bin\utils.bat'
     CreateShortCut '${STM_DIR}\${APP_NAME}.lnk' '$INSTDIR\bin\${APP_BINARY_NAME}'
 SectionEnd

@@ -33,6 +33,10 @@ struct _tab_history {
 };
 typedef struct _tab_history TAB_HISTORY;
 
+void on_menu_historyitem_activate(GtkMenuItem *menuitem,
+					  gpointer user_data);
+void main_update_tab_history_menu(gpointer data);
+void on_clear_activate(GtkMenuItem * menuitem, gpointer user_data);
 GtkWidget *main_versekey_drop_down_new(gpointer data);
 void main_clear_tab_history(void);
 void main_add_tab_history_item(gpointer data);

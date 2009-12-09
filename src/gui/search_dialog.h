@@ -25,7 +25,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#include <gnome.h>	
+#include <gtk/gtk.h>	
 
 
 typedef struct _search_dialog1 SEARCH_DIALOG1;
@@ -110,6 +110,7 @@ void gui_set_drop_target(GtkWidget * target);
 void on_comboboxentry2_changed(GtkComboBox * combobox, gpointer user_data);
 void button_clean(GtkButton * button, gpointer user_data);
 void button_save(GtkButton * button, gpointer user_data);
+void button_export(GtkButton * button, gpointer user_data);
 void _on_destroy(GtkWidget * dialog, gpointer user_data);
 void on_button_begin_search(GtkButton * button, gpointer user_data);
 void on_togglebutton_show_main(GtkToggleButton * togglebutton, gpointer user_data);

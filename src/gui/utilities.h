@@ -26,9 +26,10 @@
 extern "C" {
 #endif
 	
-#include <gnome.h>
+#include <libxml/parser.h>
 #include "main/configs.h"
 #include "main/module_dialogs.h"
+#include <gsf/gsf-outfile.h>
 
 gint gui_of2tf(const gchar * on_off);
 gchar *gui_tf2of(gint true_false);
@@ -48,12 +49,8 @@ void gui_load_module_tree(GtkWidget * tree);
 MOD_FONT *get_font(gchar * mod_name);
 void free_font(MOD_FONT *mf);
 gchar * remove_linefeeds(gchar * buf);	
-void gui_add_item2gnome_menu(GtkWidget * MainFrm, gchar * itemname,
-     gchar * itemdata, gchar * submenuname, GCallback mycallback);
-void gui_add_separator2menu(GtkWidget * MainFrm, gchar * subtreelabel);
 void gui_add_mods_to_menus(GList * modlist, gchar * menu,
 					GCallback callback);
-void gui_remove_menu_items(gchar *startitem, gint numberofitems);
 void gui_add_mods_2_gtk_menu(gint mod_type, GtkWidget * menu,
 				GCallback callback);
 gchar *ncr_to_utf8(gchar * text);
@@ -77,12 +74,26 @@ void language_make_list(GList *modlist,
 			GtkTreeIter *uninstalled,
 			void (*add)(GtkTreeModel *, GtkTreeIter, gchar **));
 
-char *image_locator(char *image);
+char *image_locator(const char *image);
 GtkWidget *pixmap_finder(char *image);
-GdkPixbuf *pixbuf_finder(char *image, GError **error);
+GdkPixbuf *pixbuf_finder(const char *image, int size, GError **error);
 
 void HtmlOutput(char *text, GtkWidget *gtkText, MOD_FONT *mf, char *anchor);
 void set_window_icon(GtkWindow *window);
+gboolean xiphos_open_default(const gchar *file);
+	
+void archive_addfile(GsfOutfile *output, const gchar *file, const gchar *name);
+void archive_adddir(GsfOutfile *output, gchar *path, const gchar *name);
+void xiphos_create_archive(gchar* conf_file, gchar* datapath, gchar *zip,
+			   const gchar *destination);
+	
+
+#ifdef WIN32
+gchar* xiphos_win32_get_subdir(const gchar *subdir);
+#endif
+void utilities_parse_treeview(xmlNodePtr parent, 
+                              GtkTreeIter * tree_parent, 
+                              GtkTreeModel *model);
 
 enum {
 	LANGSET_BIBLE,

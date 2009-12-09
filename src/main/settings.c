@@ -24,7 +24,7 @@
 #include <config.h>
 #endif
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 
 #include <fcntl.h>
 #include <stdio.h>
@@ -49,6 +49,7 @@
 #include <glib/gstdio.h>
 
 #include "gui/debug_glib_null.h"
+#include <locale.h>
 
 
 /******************************************************************************
@@ -87,7 +88,7 @@ static int init_bookmarks(int new_bookmarks);
  *   gint
  */
 
-int settings_init(int new_configs, int new_bookmarks)
+int settings_init(int argc, char **argv, int new_configs, int new_bookmarks)
 {
 	int retval = 0;
 	char *sword_dir = NULL;
@@ -100,6 +101,7 @@ int settings_init(int new_configs, int new_bookmarks)
 
 	/* Get home dir */
 	if ((settings.homedir = (char*) g_getenv(HOMEVAR)) == NULL) {
+		gui_init(argc, argv);
 		gui_generic_warning(_("$HOME is not set!"));
 		/* if not found in env exit */
 		exit(0);
@@ -114,6 +116,7 @@ int settings_init(int new_configs, int new_bookmarks)
 	if (access(settings.gSwordDir, F_OK) == -1) {
 		if ((Mkdir(settings.gSwordDir, S_IRWXU)) != 0) {
 			char msg[300];
+			gui_init(argc, argv);
 			sprintf(msg, _("Xiphos can not create  .xiphos:\n%s\n\nXiphos cannot continue."),
 				strerror(errno));
 			gui_generic_warning(msg);
@@ -126,6 +129,7 @@ int settings_init(int new_configs, int new_bookmarks)
 	sword_dir = g_strdup_printf("%s/%s", settings.homedir, DOTSWORD);
 	if (access(sword_dir, F_OK) == -1) {
 		if ((Mkdir(sword_dir, S_IRWXU)) != 0) {
+			gui_init(argc, argv);
 			gui_generic_warning(_("can not create " DOTSWORD));
 		} 
 	}
@@ -134,6 +138,7 @@ int settings_init(int new_configs, int new_bookmarks)
 	sword_dir = g_strdup_printf("%s/%s", settings.homedir, DOTSWORD "/mods.d");
 	if (access(sword_dir, F_OK) == -1) {
 		if ((Mkdir(sword_dir, S_IRWXU)) != 0) {
+			gui_init(argc, argv);
 			gui_generic_warning(_("can not create " DOTSWORD "/mods.d"));
 		} 
 	}	
@@ -142,6 +147,7 @@ int settings_init(int new_configs, int new_bookmarks)
 	sword_dir = g_strdup_printf("%s/%s", settings.homedir, DOTSWORD "/modules");
 	if (access(sword_dir, F_OK) == -1) {
 		if ((Mkdir(sword_dir, S_IRWXU)) != 0) {
+			gui_init(argc, argv);
 			gui_generic_warning(_("can not create " DOTSWORD "/modules"));
 		} 
 	}
@@ -178,6 +184,7 @@ int settings_init(int new_configs, int new_bookmarks)
 
 	/* ensure that the user has a bible with which to work */
 	if (settings.havebible == 0) {
+		gui_init(argc, argv);
 		if (gui_yes_no_dialog(GS_NET_PERMISSION, NULL)) {
 			main_shutdown_list();
 			gui_open_mod_mgr_initial_run();
@@ -226,10 +233,17 @@ int settings_init(int new_configs, int new_bookmarks)
 	 */
 	if (settings.special_locale && strcmp(settings.special_locale, NONE)) {
 		g_setenv("LANG", settings.special_locale, TRUE);
-		g_setenv("LC_ALL", settings.special_locale, TRUE);
+		gchar *test = setlocale(LC_ALL, settings.special_locale);
+		if (test == NULL) {
+			gchar lfix[32];
+			sprintf(lfix, "%s.UTF-8", settings.special_locale); //for Ubuntu
+			test = setlocale(LC_ALL, lfix);
+		}
+		if (test != NULL) {
+			g_setenv("LC_ALL", test, TRUE);
+			GS_message(("set locale to %s", settings.special_locale));
+		}
 	}
-
-	gconf_setup();
 
 	/* find out what kind of peculiar language environment we have */
 	re_encode_digits = FALSE;
@@ -784,92 +798,5 @@ void load_settings_structure(void)
 	} else {
 		xml_add_new_item_to_section("tabs","browsing","1");
 		settings.browsing = 1;
-	}
-}
-
-
-/******************************************************************************
- * Name
- *    gconf_setup
- *
- * Synopsis
- *   #include "main/settings.h"
- *
- *   void gconf_setup()
- *
- * Description
- *   verifies and initializes the GConf subsystem, so that "sword://" and
- *   similar can be handled by url-comprehending programs such as browsers.
- *   dialogs for permission/success/failure => conditional on debug build.
- *
- * Return value
- *   void
- */
-
-#define	GS_GCONF_PERMISSION	_("URL references using \"sword://\" (similar to web page\nreferences) can be used by programs to look up\nscripture references. Your system currently has no\nprogram set to handle these references.\n\nWould you like Xiphos to set itself as the\nprogram to handle these references?")
-
-#define	GS_GCONF_SUCCESS	_("Xiphos has successfully set itself\nas the handler of sword:// and bible:// URLs.\n\nYou may wish to run the program \"gconf-editor\"\nto examine keys under /desktop/gnome/url-handlers,\nif you need to change these.")
-
-char *gconf_keys[GS_GCONF_MAX][2] = {
-    { "/desktop/gnome/url-handlers/bible/command",        "xiphos \"%s\"" },
-    { "/desktop/gnome/url-handlers/bible/enabled",        (char *) 1 },
-    { "/desktop/gnome/url-handlers/bible/needs_terminal", (char *) 0 },
-    { "/desktop/gnome/url-handlers/sword/command",        "xiphos \"%s\"" },
-    { "/desktop/gnome/url-handlers/sword/enabled",        (char *) 1 },
-    { "/desktop/gnome/url-handlers/sword/needs_terminal", (char *) 0 }
-};
-
-void gconf_setup()
-{
-	int i;
-	gchar *str;
-	gboolean retval;
-	GConfClient* client = gconf_client_get_default();
-
-	if (client == NULL)
-		return;		/* we're not running under GConf */
-
-	/*
-	 * This is deliberately somewhat simple-minded, at least for now.
-	 * We care about one thing: Is anything set to handle "bible://"?
-	 *
-	 * Unfortunate consequence of changing xiphos2 => xiphos:
-	 * We must fix broken keys.
-	 */
-	if ((((str = gconf_client_get_string(client, gconf_keys[0][0],
-					    NULL)) == NULL) ||
-	     (strncmp(str, "gnomesword", 10) == 0))
-#ifdef DEBUG
-	    && gui_yes_no_dialog(GS_GCONF_PERMISSION, NULL)
-#endif /* DEBUG */
-	    ) {
-		/*
-		 * Mechanical as can be, one after another.
-		 */
-		for (i = 0; i < GS_GCONF_MAX; ++i) {
-			retval = (((i % 3) == 0)	/* contrived hack */
-				  ? gconf_client_set_string
-					(client,
-					 gconf_keys[i][0],
-					 gconf_keys[i][1],
-					 NULL)
-				  : gconf_client_set_bool
-					(client,
-					 gconf_keys[i][0],
-					 (gconf_keys[i][1] ? TRUE : FALSE),
-					 NULL));
-#ifdef DEBUG
-			if (!retval) {
-				char msg[256];
-				sprintf(msg, _("Xiphos failed to complete handler init for key #%d:\n%s"),
-					i, gconf_keys[i][0]);
-				gui_generic_warning(msg);
-				return;
-			}
-#endif /* DEBUG */
-		}
-#ifdef DEBUG
-		gui_generic_warning(GS_GCONF_SUCCESS);
-#endif /* DEBUG */
 	}
 }

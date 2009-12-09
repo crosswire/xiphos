@@ -133,7 +133,6 @@ static void html_link_message(GtkMozEmbed * embed)
 	
 	if (!strlen(url)) { //* moved out of url - clear appbar - info viewer*
 		gui_set_statusbar ("");
-		//gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), "");
 		in_url = FALSE;
 		//*if(GPOINTER_TO_INT(data) == TEXT_TYPE)
 		//	main_clear_viewer();*
@@ -179,7 +178,6 @@ static void html_link_message(GtkMozEmbed * embed)
 		} else //* any other link *
 			sprintf(buf, "%s", "");
 		gui_set_statusbar (buf);
-		//gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), buf);
 	}
 }
 
@@ -626,10 +624,10 @@ gecko_html_print_document(GtkWindow * window, gchar * mod_name,
 	SWMgr *mgr;
 	if(dialog) {
 		BackEnd *be = (BackEnd *)dialog->backend;
-		mgr = be->get_display_mgr();
+		mgr = be->get_mgr();
 	}
 	else 
-		mgr = backend->get_display_mgr();
+		mgr = backend->get_mgr();
 	
 	SWModule *mod = mgr->Modules[mod_name];
 	

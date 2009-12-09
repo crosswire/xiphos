@@ -20,9 +20,7 @@
  */
 
 #include <config.h>
-#include <libgnome/gnome-i18n.h>
 
-#include <gnome.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>

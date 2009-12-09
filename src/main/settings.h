@@ -22,8 +22,6 @@
 #ifndef _SETTINGS_H_
 #define _SETTINGS_H_
 
-#include <gconf/gconf-client.h>
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -262,11 +260,8 @@ struct _settings {
 
 extern SETTINGS settings;
 
-int settings_init(int new_configs, int new_bookmarks);
+int settings_init(int argc, char **argv, int new_configs, int new_bookmarks);
 void load_settings_structure(void);
-void gconf_setup(void);
-
-#define	GS_GCONF_MAX	6
 
 #ifdef __cplusplus
 }

@@ -23,8 +23,9 @@
 #  include <config.h>
 #endif
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 #include <gtkhtml/gtkhtml.h>
+#include <glib/gi18n.h>
 
 #include "gui/sidebar.h"
 #include "gui/sidebar_dialog.h"

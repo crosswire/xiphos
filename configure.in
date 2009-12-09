@@ -20,7 +20,7 @@ AC_PROG_LIBTOOL dnl using old name instead of LT_INIT for compatability
 
 AC_SUBST([GETTEXT_PACKAGE], [xiphos])
 AM_GLIB_GNU_GETTEXT
-AC_DEFINE([GETTEXT_PACKAGE], [PACKAGE_TARNAME], [Define to the gettext package name.])
+AC_DEFINE([GETTEXT_PACKAGE],  [PACKAGE_TARNAME], [Define to the gettext package name.])
 
 GNOME_DOC_INIT
 
@@ -58,12 +58,15 @@ AS_IF([test "x$with_gecko" != "xno"], [
 GECKO_DEFINES
 AM_CONDITIONAL([HAVE_GECKO],[test "$gecko_cv_have_gecko" = "yes"])
 
+REQUIRED_LIBS="glib-2.0 gtk+-2.0 libxml-2.0 libglade-2.0 libgtkhtml-3.14 sword dbus-glib-1 libgsf-1"
 
-REQUIRED_LIBS="glib-2.0 gtk+-2.0 libgnomeui-2.0 libxml-2.0 libglade-2.0 libgtkhtml-3.14 sword"
+AC_DEFINE(HAVE_DBUS, 1, [Define to enable dbus])
 
 AS_CASE([$host_os], [mingw*],
 		    [REQUIRED_LIBS="$REQUIRED_LIBS gmodule-no-export-2.0"],
 		    [REQUIRED_LIBS="$REQUIRED_LIBS gmodule-export-2.0"])
+
+PKG_CHECK_EXISTS(${GECKO} >= 1.9.1.3, [REQUIRED_LIBS="$REQUIRED_LIBS nspr"])
 
 AC_MSG_CHECKING([for widget tooltips])
 PKG_CHECK_EXISTS(gtk+-2.0 >= 2.12,
@@ -100,6 +103,21 @@ AS_IF([test "x$have_editor" = "xyes"],
 	    AC_SUBST(ORBIT_IDL, [`$PKG_CONFIG --variable=orbit_idl ORBit-2.0`])
 	    AC_SUBST(BONOBO_IDL_INCLUDES, ["-I`$PKG_CONFIG --variable=idldir libbonobo-2.0` -I`$PKG_CONFIG --variable=idldir bonobo-activation-2.0`"])])
 ])
+
+AC_MSG_CHECKING([whether to use oldgnome])
+AC_ARG_WITH([gnome], AS_HELP_STRING([--with-oldgnome], [Compile using libgnome]))
+
+AS_IF([test "x$with_oldgnome" != "xyes"],[
+	   PKG_CHECK_EXISTS(gtk+-2.0 >= 2.14, [have_newgtk="yes"], [have_newgtk="no"])],
+	   [have_newgtk="no"]) 
+
+AS_IF([test "x$have_newgtk" = "xyes"],
+      [AC_DEFINE(WITHOUT_GNOME, 1, [Not using libgnomeui])
+      		AC_MSG_RESULT([no])],
+      [AS_IF([test "x$with_oldgnome" = "xyes"],
+             [REQUIRED_LIBS="$REQUIRED_LIBS libgnomeui-2.0"
+	     AC_MSG_RESULT([yes])])
+      ])
 
 PKG_CHECK_MODULES(XIPHOS, "$REQUIRED_LIBS")
 
@@ -139,6 +157,7 @@ Makefile
 po/Makefile.in
 doc/Makefile
 help/Makefile
+pixmaps/Makefile
 src/Makefile
 src/backend/Makefile
 src/gecko/Makefile

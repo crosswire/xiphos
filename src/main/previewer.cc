@@ -23,7 +23,7 @@
 #include <config.h>
 #endif
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 #include <swmgr.h>
 #include <swmodule.h>
 #include <stringmgr.h>
@@ -381,7 +381,6 @@ void mark_search_words(GString * str)
 	gchar *tmpbuf, *buf, *searchbuf;
 	gint len_overall, len_word, len_tail, len_prefix;
 	gchar closestr[40], openstr[40];
-	gchar *s, *t;
 
 	/* regular expression search results         **fixme** */
 	if ((settings.searchType == 0) ||
@@ -410,12 +409,12 @@ void mark_search_words(GString * str)
 		list = NULL;
 		/* seperate the search words and add them to a glist */
 		if ((token = strtok(searchbuf, " ")) != NULL) {
-			if (!isalpha(*token) && isalpha(*(token+1)))
+			if (!isalnum(*token) && isalnum(*(token+1)))
 				token++;
 			list = g_list_append(list, token);
 			++count;
 			while ((token = strtok(NULL, " ")) != NULL) {
-				if (!isalpha(*token) && isalpha(*(token+1)))
+				if (!isalnum(*token) && isalnum(*(token+1)))
 					token++;
 				list = g_list_append(list, token);
 				++count;
@@ -430,6 +429,21 @@ void mark_search_words(GString * str)
 
 		for (i = 0; i < count; i++) {
 			len_overall = strlen(buf);
+			if (settings.searchType == -4) {
+				// remove metachars and anything following ("WORD*")
+				for (tmpbuf = (gchar *)list->data;
+				     *tmpbuf && isalnum(*tmpbuf);
+				     ++tmpbuf)
+					; // nothing, just skipping to end or non-alnum
+				if ((tmpbuf != list->data) && *tmpbuf)
+					*tmpbuf = '\0';
+				else if (!sword::stricmp((gchar *)list->data, "and") ||
+					 !sword::stricmp((gchar *)list->data, "or")  ||
+					 !sword::stricmp((gchar *)list->data, "not")) {
+						// don't color boolean ops.
+						goto next_word;
+				}
+			}
 			len_word = strlen((gchar *)list->data);
 
 			/* find search word in verse */
@@ -465,7 +479,7 @@ void mark_search_words(GString * str)
 
 				len_overall = len_prefix;
 			}
-
+		next_word:
 			g_free(buf);
 			if ((list = g_list_next(list)))
 				buf = g_utf8_casefold(str->str,-1);

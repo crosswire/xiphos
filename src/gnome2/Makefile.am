@@ -2,6 +2,8 @@ bin_PROGRAMS = xiphos
 
 bin_SCRIPTS = gnomesword2
 
+BUILT_SOURCES = ipc-interface.h marshal.h
+
 xiphos_SOURCES =  \
     about_modules.c \
     about_sword.c \
@@ -20,6 +22,7 @@ xiphos_SOURCES =  \
     dictlex_dialog.c \
     display_info.c \
     dummy.cpp \
+    export_bookmarks.c \
     export_dialog.c \
     find_dialog.c \
     font_dialog.c \
@@ -27,9 +30,11 @@ xiphos_SOURCES =  \
     gbs_dialog.c \
     gui.c \
     html.c \
+    ipc.c \
     locale_set.c \
     main_menu.c \
     main_window.c \
+    marshal.c \
     menu_popup.c \
     mod_mgr.c \
     navbar_book.c \
@@ -41,11 +46,9 @@ xiphos_SOURCES =  \
     parallel_dialog.c \
     parallel_tab.c \
     parallel_view.c \
-    preferences_cell_renderer.c \
     preferences_dialog.c \
     search_dialog.c \
     search_sidebar.c \
-    session.c \
     sidebar.c \
     sidebar_dialog.c \
     splash.c \
@@ -54,22 +57,21 @@ xiphos_SOURCES =  \
     utilities.c \
     xiphos.c
 
-locale_set.c: ../../po/LINGUAS
-# FIXME:
-# problem: we'd like to 's/$/ (char*)0/'
-# but for some reason we can't get a proper $ through to sed
-# leading to a bogus "unterminated 's' command" complaint.
-# so for now the 2nd "-e s///" refers explicitly to the last language known.
-# 1. duplicate english.
-# 2. put a NULL at the end.
-# 3. wrap "", around each element.
-# 4. put an array declaration at the front.
-	sed < ../../po/LINGUAS \
-	    -e 's/en/& &/' \
-	    -e 's/ru/ru (char*)0 };/' \
-	    -e 's/\([a-z][a-z]\(_..\)\?\) /"\1", /g' \
-	    -e 's/^/char *locale_set[] = { /' \
-	    > locale_set.c
+locale_set.c: ../../po/LINGUAS make-locale-set.sh
+	sh ./make-locale-set.sh > locale_set.c
+
+marshal.c:
+	glib-genmarshal --body --prefix=ipc_marshal marshal.list \
+	$< > $@
+	sed -i -e 's;<glib-object.h>;"marshal.h";' $@
+
+marshal.h:
+	glib-genmarshal --header --prefix=ipc_marshal marshal.list \
+	$< > $@
+
+ipc-interface.h:
+	dbus-binding-tool --prefix=ipc_object --mode=glib-server ipc-interface.xml \
+	$< > $@
 
 xiphos_CPPFLAGS =  \
 	-DGECKO_HOME=\""$(GECKO_HOME)\""  \
@@ -88,14 +90,17 @@ xiphos_CFLAGS = \
 	$(XIPHOS_CFLAGS) \
 	$(GECKO_CFLAGS) \
 	$(GECKO_COMPONENT_CFLAGS) \
-	$(WARN_CFLAGS)
+	$(WARN_CFLAGS) \
+	$(DBUS_CFLAGS) \
+	$(DBUS_GLIB_CFLAGS)
 
 xiphos_CXXFLAGS = \
 	-I$(top_srcdir)/src \
 	$(GECKO_CFLAGS) \
 	$(GECKO_COMPONENT_CFLAGS) \
 	$(XIPHOS_CFLAGS) \
-	$(WARN_CXXFLAGS)
+	$(WARN_CXXFLAGS) \
+	$(DBUS_CXXFLAGS)
 
 if HAVE_GECKO
 LIB_GECKO=$(top_builddir)/src/gecko/libgecko.a
@@ -120,7 +125,8 @@ xiphos_LDADD = \
 	$(XIPHOS_LIBS) \
 	$(GNOME_SPELL_LIBS) \
 	$(GECKO_COMPONENT_LIBS) \
-	$(GECKO_LIBS)
+	$(GECKO_LIBS) \
+	$(DBUS_LIBS)
 
 EXTRA_DIST = \
     $(top_builddir)/src/gui/*.h \

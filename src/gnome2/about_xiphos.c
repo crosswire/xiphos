@@ -24,6 +24,7 @@
 #endif
 
 #include <gtk/gtk.h>
+#include <glib/gi18n.h>
 
 #include "gui/about_xiphos.h"
 #include "gui/utilities.h"
@@ -83,7 +84,6 @@ on_dialog_response(GtkDialog * dialog, gint response_id,
 	gtk_widget_destroy(GTK_WIDGET(dialog));
 }
 
-
 /******************************************************************************
  * Name
  *   gui_create_about_xiphos
@@ -116,10 +116,9 @@ gui_create_about_xiphos(void)
 #endif
 		);
 
-	about1_logo_pixbuf = pixbuf_finder("about.png", NULL);
+	about1_logo_pixbuf = pixbuf_finder("about.png", 0, NULL);
 
 	about1 = gtk_about_dialog_new();
-  
 	g_signal_connect(about1, "response",
 			 G_CALLBACK(on_dialog_response), NULL);
   

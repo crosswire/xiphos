@@ -23,7 +23,7 @@
 #include <config.h>
 #endif
  
-#include <gnome.h>
+#include <gtk/gtk.h>
 #include <glade/glade-xml.h>
 
 #ifdef USE_GTKMOZEMBED 
@@ -47,6 +47,7 @@
 #include "gui/utilities.h"
 #include "gui/widgets.h"
 #include "gtk/gtk.h"
+#include "gui/export_bookmarks.h"
 
 #include "main/search_dialog.h"
 #include "main/configs.h"
@@ -190,6 +191,28 @@ void button_save(GtkButton * button, gpointer user_data)
 	main_save_current_adv_search_as_bookmarks ();
 }
 
+
+/******************************************************************************
+ * Name
+ *   button_export
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *   void button_export(GtkButton * button, gpointer user_data)
+ *
+ * Description
+ *   calls main_save_current_adv_search_as_bookmarks() in main/search_dialog.cc
+ *   to do the work of saving current search as bookmarks
+ *
+ * Return value
+ *   void
+ */
+
+void button_export(GtkButton * button, gpointer user_data)
+{
+	gui_export_bookmarks_dialog(ADV_SEARCH_RESULTS_EXPORT, NULL);
+}
 
 /******************************************************************************
  * Name
@@ -1000,7 +1023,6 @@ static void _finds_verselist_selection_changed(GtkWidget * widget,
 	main_finds_verselist_selection_changed(selection, model, event->type == GDK_2BUTTON_PRESS);
 }
 
-
 /******************************************************************************
  * Name
  *   selection_range_lists_changed
@@ -1039,6 +1061,42 @@ static void selection_range_lists_changed(GtkTreeSelection * selection,
 	gtk_entry_set_text(GTK_ENTRY(search1.entry_range_text), range);
 	g_free(name);
 	g_free(range);
+}
+
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *   void (GtkTreeSelection * selection,
+ *		     					 gpointer data)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void selection_verselist_changed(GtkTreeSelection * selection,
+					  gpointer data)
+{
+	GtkTreeModel *model;
+	GtkTreeIter selected;
+
+	if (!gtk_tree_selection_get_selected
+	    (selection, NULL, &selected))
+		return;
+
+	model =
+	    gtk_tree_view_get_model(GTK_TREE_VIEW
+				    (search1.list_range_name));
+	main_finds_verselist_selection_changed(selection,
+					    model, 
+					    FALSE);
 }
 
 
@@ -1151,6 +1209,7 @@ static
 void _setup_listviews2(GtkWidget * listview, GCallback callback)
 {
 	GtkListStore *model;
+	GObject *selection;
 
 	model = gtk_list_store_new(2, G_TYPE_STRING, G_TYPE_STRING);
 	gtk_tree_view_set_model(GTK_TREE_VIEW(listview),
@@ -1164,7 +1223,15 @@ void _setup_listviews2(GtkWidget * listview, GCallback callback)
 	g_signal_connect((gpointer) listview,
 				"button_release_event",
 				G_CALLBACK(callback), NULL);
-
+	selection =
+	    G_OBJECT(gtk_tree_view_get_selection
+		     (GTK_TREE_VIEW(listview)));
+	/*g_signal_connect((gpointer) listview,
+				"key_press_event",
+				G_CALLBACK(tree_key_press_cb), NULL);*/
+	g_signal_connect(selection, "changed", G_CALLBACK(selection_verselist_changed),
+			 NULL);
+	
 }
 
 
@@ -1439,8 +1506,8 @@ void _create_search_dialog(void)
 	GtkWidget *toolbutton8;
 	GtkWidget *toolbutton10;
 	GtkWidget *toolbutton11;
-	GtkWidget *toolbutton12;
-	
+	GtkWidget *toolbutton12;	
+	GtkWidget *toolbutton13;
 	module_selected = NULL;
 	verse_selected = NULL;
 	_preview_on = TRUE;
@@ -1578,6 +1645,10 @@ void _create_search_dialog(void)
 	g_signal_connect(toolbutton12, "clicked",
 			 G_CALLBACK(on_toolbutton12_clicked), NULL);
 			 
+	toolbutton13 = glade_xml_get_widget(gxml, "toolbutton_export");
+	g_signal_connect(toolbutton13, "clicked",
+			 G_CALLBACK(button_export), NULL);
+	
 	search1.togglebutton_show_main =
 	    glade_xml_get_widget(gxml, "toggletoolbutton1");
 	g_signal_connect(search1.togglebutton_show_main, "toggled",

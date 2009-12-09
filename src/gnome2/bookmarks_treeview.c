@@ -23,7 +23,7 @@
 #include <config.h>
 #endif
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 #include <libxml/parser.h>
 //#include <gal/shortcut-bar/e-shortcut-bar.h>
 #include <math.h>
@@ -605,24 +605,33 @@ static void row_deleted(GtkTreeModel * treemodel, GtkTreePath * arg1,
 
 static void create_pixbufs(void)
 {
-	//GtkWidget *image;
+	GtkTextDirection dir = gtk_widget_get_direction (GTK_WIDGET(widgets.app));
 
 	bm_pixbufs = g_new0(BookMarksPixbufs, 1);
+
+	if (dir == GTK_TEXT_DIR_LTR) {
+		if (!bm_pixbufs->pixbuf_closed)
+			pixbufs->pixbuf_closed =
+				pixbuf_finder("book_closed.png", 16, NULL);
+		
+		pixbufs->pixbuf_opened =
+			pixbuf_finder("book_open.png", 16, NULL);
+	}
+	else {
+		if (!bm_pixbufs->pixbuf_closed)
+			pixbufs->pixbuf_closed =
+				pixbuf_finder("book_closed_rtol.png", 16, NULL);
+		
+		pixbufs->pixbuf_opened =
+			pixbuf_finder("book_open_rtol.png", 16, NULL);
+	}
+
 	bm_pixbufs->pixbuf_closed =
-	    pixbuf_finder("epiphany-bookmarks.png", NULL);
+		pixbuf_finder("epiphany-bookmarks.png", 0, NULL);
 
-	if (!bm_pixbufs->pixbuf_closed)
-		bm_pixbufs->pixbuf_closed
-		    = gtk_widget_render_icon(widgets.app,
-					     GNOME_STOCK_BOOK_BLUE,
-					     GTK_ICON_SIZE_MENU, NULL);
-
-	bm_pixbufs->pixbuf_opened =
-	    gtk_widget_render_icon(widgets.app,
-				   GNOME_STOCK_BOOK_OPEN,
-				   GTK_ICON_SIZE_MENU, NULL);
+	
 	bm_pixbufs->pixbuf_helpdoc =
-	    pixbuf_finder("epiphany-bookmark-page.png", NULL);
+		pixbuf_finder("epiphany-bookmark-page.png", 0, NULL);
 
 	if (!bm_pixbufs->pixbuf_helpdoc)
 		bm_pixbufs->pixbuf_helpdoc
@@ -789,8 +798,7 @@ static gboolean button_release_event(GtkWidget * widget,
 			gtk_widget_set_sensitive(menu.in_dialog, !multi);
 			gtk_widget_set_sensitive(menu.new, FALSE);
 			gtk_widget_set_sensitive(menu.insert, FALSE);
-			gtk_widget_set_sensitive(menu.rr_submenu,
-						 FALSE);
+			gtk_widget_set_sensitive(menu.remove, FALSE);
 		} else {
 			/* click on treeview folder to expand or collapse it */			
 			path = gtk_tree_model_get_path(
@@ -807,7 +815,7 @@ static gboolean button_release_event(GtkWidget * widget,
 			gtk_widget_set_sensitive(menu.in_dialog, FALSE);
 			gtk_widget_set_sensitive(menu.new, TRUE);
 			gtk_widget_set_sensitive(menu.insert, TRUE);
-			gtk_widget_set_sensitive(menu.rr_submenu, TRUE);
+			gtk_widget_set_sensitive(menu.remove, TRUE);
 		}
 
 		gtk_widget_set_sensitive(menu.bibletime,
@@ -842,10 +850,9 @@ static gboolean button_release_event(GtkWidget * widget,
 			gtk_widget_set_sensitive(menu.edit, FALSE);
 			gtk_widget_set_sensitive(menu.delete, FALSE);
 			gtk_widget_set_sensitive(menu.bibletime, FALSE);
-			gtk_widget_set_sensitive(menu.rr_submenu,
-						 FALSE);
 			gtk_widget_set_sensitive(menu.remove, FALSE);
-			gtk_widget_set_sensitive(menu.restore, FALSE);
+			//gtk_widget_set_sensitive(menu.remove, FALSE);
+			//gtk_widget_set_sensitive(menu.restore, FALSE);
 			return TRUE;
 		} else {
 			gtk_widget_set_sensitive(menu.bibletime,

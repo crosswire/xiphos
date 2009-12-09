@@ -23,7 +23,13 @@
 #include <config.h>
 #endif
 
+#ifndef WITHOUT_GNOME
+#include <gnome.h>
+#else
 #include <gtk/gtk.h>
+#include <unistd.h>
+#endif
+
 #include <glade/glade-xml.h>
 
 #ifdef USE_GTKHTML3_14_23
@@ -60,6 +66,14 @@
 
 #include "gui/debug_glib_null.h"
 
+//global function to handle gtk_uri calls
+void
+link_uri_hook(GtkLinkButton *button,
+	      const gchar *link,
+	      gpointer user_data)
+{
+	xiphos_open_default(link);
+}
 
 /******************************************************************************
  * Name
@@ -82,28 +96,30 @@ on_help_contents_activate(GtkMenuItem * menuitem, gpointer user_data)
 {	
 	GError *error = NULL;
 #ifdef WIN32
-	gchar *showstr;
-	const char *lang = getenv("LANG");
+	const char *lang = g_getenv("LANG");
 	gchar *help_file = g_win32_get_package_installation_directory_of_module(NULL);
 	help_file = g_strconcat(help_file, "\0", NULL);
 	if (strncmp(lang,"fr",2)==0)
-		help_file = g_build_filename(help_file, "share", "help", "fr", "xiphos_fr.chm", NULL);
+		help_file = g_build_filename(help_file, "share", "help", "xiphos_fr.chm", NULL);
 	else
-		help_file = g_build_filename(help_file, "share", "help", "C", "xiphos.chm", NULL);
-	showstr = g_strconcat("file:///", help_file, NULL);
-	if (gnome_url_show(showstr, &error) == FALSE) {
-		GS_warning((error->message));
-		g_error_free(error);
-	}
-	g_free(showstr);
+		help_file = g_build_filename(help_file, "share", "help", "xiphos.chm", NULL);
+	xiphos_open_default(help_file);
 	g_free(help_file);
 #else
-	
+#ifndef WITHOUT_GNOME
 	if (gnome_help_display((const gchar*)"xiphos.xml", 
 			       NULL, &error) == FALSE) {
 		GS_warning(("%s",error->message));
 		g_error_free(error);        
 	}
+#else
+	gtk_show_uri (NULL, "ghelp:xiphos", gtk_get_current_event_time(), &error);
+	if (error != NULL) {
+		GS_warning(("%s", error->message));
+		g_error_free(error);
+	}
+#endif /* WITHOUT_GNOME */
+
 #endif /* WIN32 */
 }
 
@@ -126,19 +142,7 @@ on_help_contents_activate(GtkMenuItem * menuitem, gpointer user_data)
 G_MODULE_EXPORT void
 on_mailing_list_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	GError *error = NULL;
-	/*if (gtk_show_uri (NULL,
-			"https://lists.sourceforge.net/lists/listinfo/gnomesword-users/",
-			GDK_CURRENT_TIME,
-			&error) == FALSE) {
-		GS_warning((error->message));
-		g_error_free (error);
-	}*/	
-	if (gnome_url_show("https://lists.sourceforge.net/lists/listinfo/gnomesword-users/",
-				&error) == FALSE) {
-		GS_warning(("%s",error->message));
-		g_error_free (error);
-	}
+	xiphos_open_default("https://lists.sourceforge.net/lists/listinfo/gnomesword-users/");
 }
 
 
@@ -153,7 +157,7 @@ on_mailing_list_activate(GtkMenuItem * menuitem, gpointer user_data)
  *						gpointer user_data)	
  *
  * Description
- *   open web browser to mibbit irc chat
+ *   open web browser to freenode irc chat
  *
  * Return value
  *   void
@@ -161,19 +165,7 @@ on_mailing_list_activate(GtkMenuItem * menuitem, gpointer user_data)
 G_MODULE_EXPORT void
 on_live_chat_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	GError *error = NULL;
-	/*if (gtk_show_uri (NULL,
-			"http://webchat.freenode.net/?randomnick=1&channels=xiphos&prompt=1",
-			GDK_CURRENT_TIME,
-			&error) == FALSE) {
-		GS_warning((error->message));
-		g_error_free (error);
-	}*/
-	if (gnome_url_show("http://webchat.freenode.net/?randomnick=1&channels=xiphos&prompt=1",
-				&error) == FALSE) {
-		GS_warning(("%s",error->message));
-		g_error_free (error);
-	}
+	xiphos_open_default("http://webchat.freenode.net/?randomnick=1&channels=xiphos&prompt=1");
 }
 
 /******************************************************************************
@@ -195,19 +187,7 @@ on_live_chat_activate(GtkMenuItem * menuitem, gpointer user_data)
 G_MODULE_EXPORT void
 on_report_bug_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	GError *error = NULL;
-	/*if (gtk_show_uri (NULL,
-			,
-			GDK_CURRENT_TIME,
-			&error) == FALSE) {
-		GS_warning((error->message));
-		g_error_free (error);
-	}*/
-	if (gnome_url_show(PACKAGE_BUGREPORT,
-				&error) == FALSE) {
-		GS_warning(("%s",error->message));
-		g_error_free (error);
-	}
+	xiphos_open_default(PACKAGE_BUGREPORT);
 }
 
 
@@ -628,8 +608,8 @@ on_save_session_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 	tabs_dir = g_strdup_printf("%s/tabs/",settings.gSwordDir);
 	
-	if (access(tabs_dir, F_OK) == -1) {
-		if ((Mkdir(tabs_dir, S_IRWXU)) == -1) {
+	if (g_access(tabs_dir, F_OK) == -1) {
+		if ((g_mkdir(tabs_dir, S_IRWXU)) == -1) {
 			fprintf(stderr, "can't create tabs dir");
 			return;
 		}
@@ -722,8 +702,8 @@ on_open_session_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 	tabs_dir = g_strdup_printf("%s/tabs/",settings.gSwordDir);
 	
-	if (access(tabs_dir, F_OK) == -1) {
-		if ((Mkdir(tabs_dir, S_IRWXU)) == -1) {
+	if (g_access(tabs_dir, F_OK) == -1) {
+		if ((g_mkdir(tabs_dir, S_IRWXU)) == -1) {
 			fprintf(stderr, "can't create tabs dir");
 			return;
 		}
@@ -972,6 +952,9 @@ GtkWidget *gui_create_main_menu(void)
     	/* connect signals and data */
 	glade_xml_signal_autoconnect_full
 		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);
+
+	//set up global function to handle all link buttons
+	gtk_link_button_set_uri_hook (link_uri_hook, NULL, NULL);
 	
 	return menu;
 }

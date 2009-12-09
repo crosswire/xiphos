@@ -28,7 +28,7 @@
 #include <unistd.h>
 #include <string.h>
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 #include <swmgr.h>
 #include <swmodule.h>
 
@@ -145,6 +145,8 @@ void main_display_verse_list_in_sidebar(gchar * key,
 	GtkTreeIter iter;
 	RESULTS *list_item;
 
+	is_search_result = FALSE;
+	
 	GS_warning(("verse_list = %s",verse_list));
 	list_of_verses = g_list_first(list_of_verses);
 	if (list_of_verses) {
@@ -181,6 +183,13 @@ void main_display_verse_list_in_sidebar(gchar * key,
 		gtk_list_store_set(list_store, &iter, 0,
 				   (const char *) tmp->data, -1);
 		++i;
+		
+		list_item = g_new(RESULTS,1);
+		list_item->module = g_strdup(module_name);
+		list_item->key = g_strdup((const char *) tmp->data);
+		list_of_verses = g_list_append(list_of_verses, 
+					       (RESULTS *) list_item);
+		
 		tmp = g_list_next(tmp);
 	}
 
@@ -320,15 +329,26 @@ static void add_children_to_tree(GtkTreeModel * model, GtkTreeIter iter,
 
 void main_create_pixbufs(void)
 {
+	GtkTextDirection dir = gtk_widget_get_direction (GTK_WIDGET(widgets.app));
+	
 	pixbufs = g_new0(TreePixbufs, 1);
-	pixbufs->pixbuf_closed = gtk_widget_render_icon(widgets.app,
-							GNOME_STOCK_BOOK_BLUE,
-							GTK_ICON_SIZE_MENU,
-							NULL);
-	pixbufs->pixbuf_opened =
-	    gtk_widget_render_icon(widgets.app,
-				   GNOME_STOCK_BOOK_OPEN,
-				   GTK_ICON_SIZE_MENU, NULL);
+
+	if (dir == GTK_TEXT_DIR_LTR) {
+		pixbufs->pixbuf_closed =
+			pixbuf_finder("book_closed.png", 16, NULL);
+		
+		pixbufs->pixbuf_opened =
+			pixbuf_finder("book_open.png", 16, NULL);
+	}
+	else {
+		pixbufs->pixbuf_closed =
+			pixbuf_finder("book_closed_rtol.png", 16, NULL);
+		
+		pixbufs->pixbuf_opened =
+			pixbuf_finder("book_open_rtol.png", 16, NULL);
+	}
+		
+
 	pixbufs->pixbuf_helpdoc =
 	    gtk_widget_render_icon(widgets.app,
 				   GTK_STOCK_DND,

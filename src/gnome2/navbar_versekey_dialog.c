@@ -23,7 +23,7 @@
 #include <config.h>
 #endif
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 #include <glade/glade-xml.h>
 
 #include "gui/navbar_versekey_dialog.h"

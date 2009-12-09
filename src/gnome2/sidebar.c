@@ -23,7 +23,6 @@
 #include <config.h>
 #endif
 
-#include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 #include <glade/glade-xml.h>
 
@@ -36,6 +35,7 @@
 
 #include "gui/sidebar.h"
 #include "gui/bookmarks_treeview.h"
+#include "gui/export_bookmarks.h"
 #include "gui/utilities.h"
 #include "gui/about_modules.h"
 #include "gui/main_window.h"
@@ -79,13 +79,14 @@ static GtkWidget *button_modules;
 static gchar *buf_module;
 static gchar *buf_caption;
 GList *list_of_verses;
-
+GtkListStore *model_verselist;
+gboolean is_search_result;
 
 extern gboolean shift_key_pressed;
 
 
-static void create_menu_modules(void);
-
+static GtkWidget* create_menu_modules(void);
+void on_export_verselist_activate (GtkMenuItem * menuitem, gpointer user_data);
 
 
 /******************************************************************************
@@ -838,7 +839,8 @@ G_MODULE_EXPORT static void on_save_list_as_bookmarks_activate(GtkMenuItem * men
  *   void
  */
 
-static void on_open_in_dialog_activate(GtkMenuItem * menuitem,
+G_MODULE_EXPORT void
+on_open_in_dialog_activate(GtkMenuItem * menuitem,
 				       gpointer user_data)
 {
 	if (main_get_mod_type(buf_module) == PERCOM_TYPE)
@@ -873,7 +875,8 @@ static void on_open_in_dialog_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-static void on_open_in_tab_activate(GtkMenuItem * menuitem,
+G_MODULE_EXPORT void
+on_open_in_tab_activate2(GtkMenuItem * menuitem,
 				    gpointer user_data)
 {
 	gui_open_module_in_new_tab(buf_module);
@@ -898,7 +901,8 @@ static void on_open_in_tab_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-static void on_about2_activate(GtkMenuItem * menuitem,
+G_MODULE_EXPORT void
+on_about2_activate(GtkMenuItem * menuitem,
 			       gpointer user_data)
 {
 	gui_display_about_module_dialog(buf_module);
@@ -923,6 +927,12 @@ on_save_list_as_a_series_of_bookmarks_activate (GtkMenuItem * menuitem,
 }
 
 
+G_MODULE_EXPORT void
+on_export_verselist_activate (GtkMenuItem * menuitem,
+                                        gpointer user_data)
+{
+	gui_export_bookmarks_dialog((is_search_result?SEARCH_RESULTS_EXPORT:VERSE_LIST_EXPORT), list_of_verses);
+}
 
 /******************************************************************************
  * Name
@@ -962,29 +972,6 @@ GtkWidget *create_results_menu(void)
 	return menu;
 }
 
-
-static GnomeUIInfo menu_modules_uiinfo[] = {
-	{ /* 0 */
-	 GNOME_APP_UI_ITEM, N_("Open in a new tab"),
-	 N_("Open selected module in a new tab"),
-	 (gpointer) on_open_in_tab_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_FILENAME, NULL /* init'd in menu creation */,
-	 0, (GdkModifierType) 0, NULL},
-	{ /* 1 */
-	 GNOME_APP_UI_ITEM, N_("Open in a separate window"),
-	 N_("Open selected module in a separate ['dialog'] window"),
-	 (gpointer) on_open_in_dialog_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_FILENAME, NULL /* init'd in menu creation */,
-	 0, (GdkModifierType) 0, NULL},
-	{ /* 2 */
-	 GNOME_APP_UI_ITEM, N_("About"),
-	 N_("View information about the selected dialog"),
-	 (gpointer) on_about2_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_ABOUT,
-	 0, (GdkModifierType) 0, NULL},
-	GNOMEUIINFO_END
-};
-
 /******************************************************************************
  * Name
  *   create_menu_modules
@@ -1000,129 +987,86 @@ static GnomeUIInfo menu_modules_uiinfo[] = {
  * Return value
  *   void
  */
-
 static
-void create_menu_modules(void)
+GtkWidget* create_menu_modules(void)
 {
-	GtkWidget *menu_modules;
+	gchar *glade_file;
+	GladeXML *gxml;
 
-	/*
-	 * this is total magic.  set up menu before using it.
-	 * indices are direct from GnomeUIInfo above.
-	 */
-	if (!menu_modules_uiinfo[0].pixmap_info)
-		menu_modules_uiinfo[0].pixmap_info =
-		    image_locator("new_tab_button.png");
-	if (!menu_modules_uiinfo[1].pixmap_info)
-		menu_modules_uiinfo[1].pixmap_info =
-		    image_locator("dlg-un.png");
-	/* end magic */
-
-	menu_modules = gtk_menu_new();
-	gnome_app_fill_menu(GTK_MENU_SHELL(menu_modules),
-			    menu_modules_uiinfo, NULL, FALSE, 0);
-	if (!settings.browsing)  
-		gtk_widget_hide (menu_modules_uiinfo[0].widget);
+	glade_file = gui_general_user_file ("xi-menus.glade", FALSE);
+	g_return_val_if_fail ((glade_file != NULL), NULL);
 	
-	gtk_menu_popup ((GtkMenu*)menu_modules, NULL, NULL, NULL, NULL, 2,
-		     			gtk_get_current_event_time());
-	// return menu_modules;
-    
+	gxml = glade_xml_new (glade_file, "menu_modules", NULL);
+		
+	g_free (glade_file);
+	g_return_val_if_fail ((gxml != NULL), NULL);
+	
+	GtkWidget *menu 	= glade_xml_get_widget (gxml, "menu_modules");
+	glade_xml_signal_autoconnect_full
+		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);
+	
+	gtk_menu_popup ((GtkMenu*)menu, NULL, NULL, NULL, NULL, 2,
+			gtk_get_current_event_time());
+
+	return menu;
 }
 
 
-void
+G_MODULE_EXPORT void
 on_simple_activate(GtkMenuItem *menuitem,
 		   gpointer    user_data)
 {
 	main_prayerlist_basic_create();
 }
 
-void
+G_MODULE_EXPORT void
 on_subject_activate(GtkMenuItem *menuitem,
 		    gpointer    user_data)
 {
 	main_prayerlist_subject_create();
 }
 
-void
+G_MODULE_EXPORT void
 on_monthly_activate(GtkMenuItem *menuitem,
 		    gpointer    user_data)
 {
 	main_prayerlist_monthly_create();
 }
 
-void
+G_MODULE_EXPORT void
 on_journal_activate(GtkMenuItem *menuitem,
 		    gpointer    user_data)
 {
 	main_prayerlist_journal_create();
 }
 
-void
+G_MODULE_EXPORT void
 on_outlined_topic_activate(GtkMenuItem *menuitem,
 			   gpointer    user_data)
 {
 	main_prayerlist_outlined_topic_create();
 }
 
-static GnomeUIInfo new_prayerlist_menu_uiinfo[] =
-{
-  {
-    GNOME_APP_UI_ITEM, N_("Simple"),
-    N_("Create a new simple prayer list"),
-    (gpointer) on_simple_activate, NULL, NULL,
-    GNOME_APP_PIXMAP_STOCK, "gtk-edit",
-    0, (GdkModifierType) 0, NULL
-  },
-  {
-    GNOME_APP_UI_ITEM, N_("Subject"),
-    NULL,
-    (gpointer) on_subject_activate, NULL, NULL,
-    GNOME_APP_PIXMAP_STOCK, "gnome-stock-text-bulleted-list",
-    0, (GdkModifierType) 0, NULL
-  },
-  {
-    GNOME_APP_UI_ITEM, N_("Monthly"),
-    N_("Create a new prayer list"),
-    (gpointer) on_monthly_activate, NULL, NULL,
-    GNOME_APP_PIXMAP_STOCK, "gnome-stock-text-numbered-list",
-    0, (GdkModifierType) 0, NULL
-  },
-  {
-    GNOME_APP_UI_ITEM, N_("Daily Journal"),
-    N_("Create a new prayer list"),
-    (gpointer) on_journal_activate, NULL, NULL,
-    GNOME_APP_PIXMAP_STOCK, "gnome-stock-text-numbered-list",
-    0, (GdkModifierType) 0, NULL
-  },
-  {
-    GNOME_APP_UI_ITEM, N_("Outlined Topic"),
-    N_("Create a new prayer list"),
-    (gpointer) on_outlined_topic_activate, NULL, NULL,
-    GNOME_APP_PIXMAP_STOCK, "gnome-stock-text-numbered-list",
-    0, (GdkModifierType) 0, NULL
-  },
-  GNOMEUIINFO_END
-};
-
-static GnomeUIInfo menu_prayerlist_uiinfo[] =
-{
-  GNOMEUIINFO_MENU_NEW_SUBTREE (new_prayerlist_menu_uiinfo),
-  GNOMEUIINFO_END
-};
-
 GtkWidget *create_menu_prayerlist(void)
 {
 	GtkWidget *menu;
+	gchar *glade_file;
+	GladeXML *gxml;
 
-	menu = gtk_menu_new();
-	gnome_app_fill_menu(GTK_MENU_SHELL(menu),
-			    menu_prayerlist_uiinfo, NULL, FALSE, 0);
+	glade_file = gui_general_user_file ("xi-menus.glade", FALSE);
+	g_return_val_if_fail ((glade_file != NULL), NULL);
+	
+	gxml = glade_xml_new (glade_file, "menu_prayerlist", NULL);
+		
+	g_free (glade_file);
+	g_return_val_if_fail ((gxml != NULL), NULL);
+
+	menu = glade_xml_get_widget (gxml, "menu_prayerlist");
+	glade_xml_signal_autoconnect_full
+		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);
 	return menu;
+	
 }
-
-
 
 void
 on_edit_activate(GtkMenuItem *menuitem,
@@ -1131,47 +1075,23 @@ on_edit_activate(GtkMenuItem *menuitem,
 	editor_create_new(buf_module, NULL, BOOK_EDITOR);
 }
 
-static GnomeUIInfo menu_prayerlist_mod_uiinfo[] = {
-        { /* 0 */
-	 GNOME_APP_UI_ITEM, N_("Open in a new tab"),
-	 N_("Open selected module in a new tab"),
-	 (gpointer) on_open_in_tab_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_FILENAME, NULL /* init'd in menu creation */,
-	 0, (GdkModifierType) 0, NULL},
-	{ /* 1 */
-	 GNOME_APP_UI_ITEM, N_("Open in editor"),
-	 N_("Open selected module in a dialog"),
-	 (gpointer) on_open_in_dialog_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_FILENAME, NULL /* init'd in menu creation */,
-	 0, (GdkModifierType) 0, NULL},
-	{ /* 2 */
-	 GNOME_APP_UI_ITEM, N_("About"),
-	 N_("View information about the selected dialog"),
-	 (gpointer) on_about2_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_ABOUT,
-	 0, (GdkModifierType) 0, NULL},
-	GNOMEUIINFO_END
-};
-
 GtkWidget *create_menu_prayerlist_mod(void)
 {
 	GtkWidget *menu;
+	gchar *glade_file;
+	GladeXML *gxml;
 
-	/*
-	 * this is total magic.  set up menu before using it.
-	 * indices are direct from GnomeUIInfo above.
-	 */
-	if (!menu_prayerlist_mod_uiinfo[0].pixmap_info)
-		menu_prayerlist_mod_uiinfo[0].pixmap_info =
-		    image_locator("new_tab_button.png");
-	if (!menu_prayerlist_mod_uiinfo[1].pixmap_info)
-		menu_prayerlist_mod_uiinfo[1].pixmap_info =
-		    image_locator("silk-edit-bookmarks.png");
-	/* end magic */
+	glade_file = gui_general_user_file ("xi-menus.glade", FALSE);
+	g_return_val_if_fail ((glade_file != NULL), NULL);
+	
+	gxml = glade_xml_new (glade_file, "menu_prayerlist_mod", NULL);
+		
+	g_free (glade_file);
+	g_return_val_if_fail ((gxml != NULL), NULL);
 
-	menu = gtk_menu_new();
-	gnome_app_fill_menu(GTK_MENU_SHELL(menu),
-			    menu_prayerlist_mod_uiinfo, NULL, FALSE, 0);
+	menu = glade_xml_get_widget (gxml, "menu_prayerlist_mod");
+	glade_xml_signal_autoconnect_full
+		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);
 	return menu;
 }
 
@@ -1266,7 +1186,6 @@ static gboolean tree_key_press_cb(GtkWidget * widget,
 static void create_search_results_page(GtkWidget * notebook)
 {
 	GtkWidget *scrolledwindow3;
-	GtkListStore *model;
 	GtkTreeSelection *selection;
 	sidebar.menu_item_save_search = create_results_menu();
 
@@ -1280,9 +1199,9 @@ static void create_search_results_page(GtkWidget * notebook)
 					    settings.shadow_type);
 
 	/* create list model */
-	model = gtk_list_store_new(1, G_TYPE_STRING);
+	model_verselist = gtk_list_store_new(1, G_TYPE_STRING);
 
-	sidebar.results_list = gtk_tree_view_new_with_model(GTK_TREE_MODEL(model));
+	sidebar.results_list = gtk_tree_view_new_with_model(GTK_TREE_MODEL(model_verselist));
 	gtk_widget_show(sidebar.results_list);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow3), sidebar.results_list);
 	gtk_tree_view_set_rules_hint(GTK_TREE_VIEW(sidebar.results_list), TRUE);
@@ -1292,9 +1211,7 @@ static void create_search_results_page(GtkWidget * notebook)
 
 	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(sidebar.results_list));
 
-	//gnome_popup_menu_attach(menu, sidebar.results_list, NULL);
-	//gnome_app_install_menu_hints(GNOME_APP(widgets.app), results_menu_uiinfo);
-	//gtk_menu_attach_to_widget ((GtkMenu*)menu, sidebar.results_list,NULL);	
+		
 	g_signal_connect((gpointer) sidebar.results_list,
 			 "key_press_event",
 			 G_CALLBACK(tree_key_press_cb), NULL);
@@ -1416,6 +1333,7 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	widgets.box_side_preview = gtk_vbox_new(FALSE, 0);	
 	gtk_paned_pack2 (GTK_PANED (widgets.paned_sidebar), 
 			widgets.box_side_preview, FALSE, TRUE);
+	gtk_container_set_border_width(GTK_CONTAINER(widgets.box_side_preview), 2);
 	g_signal_connect (GTK_OBJECT (widgets.paned_sidebar),
 			"button_release_event",
 			G_CALLBACK (paned_button_release_event),

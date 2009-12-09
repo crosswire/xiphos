@@ -1,3 +1,72 @@
+2009-12-04 simon<DrMeers@users.sourceforge.net>
+
+	* fixed window title bug -- changing modules in the sidebar treeview
+	  updated window title to _previous_ module, because
+	  gui_change_window_title used tab settings prior to update
+
+2009-12-04 matthew<ransom1982@users.sourceforge.net>
+	   simon<DrMeers@users.sourceforge.net>
+
+	* new book icons for module list to better match colors
+	* improved rendering for icons
+	* rtol icons for module lists
+
+2009-12-04 matthew<ransom1982@users.sourceforge.net>
+
+	* de-gnome menus and as many other functions as possible
+	* add option to waf to build without gnome
+
+2009-12-02 matthew<ransom1982@users.sourceforge.net>
+
+	* removed display_mgr from backend
+	* delay starting search backend
+
+2009-11-28 matthew<ransom1982@users.sourceforge.net>
+
+	* added code to use libgsf to archive files
+	* small improvements to Windows file finding
+	* module manager optimizations
+
+2009-11-18 terry <tbiggs@users.sourceforge.net>
+
+	*added search results and verse lists to exporter
+
+2009-11-12  karl <charcoal@users.sf.net>
+
+	* improve search word color marking slightly, so that wildcard-
+	  matched roots get colored.
+
+2009-11-10 terry <tbiggs@users.sourceforge.net>
+
+	* add bookmark exporter.
+
+2009-11-04  karl <charcoal@users.sf.net>
+
+	* Ensure mod.mgr always has a proper icon.
+
+2009-10-27  karl <charcoal@users.sf.net>
+
+	* Resurrect verse number color selector in preferences.
+	  Also removed some defunct enums, unused for years.
+
+2009-09-30  karl <charcoal@users.sf.net>
+
+	* add gui_init() calls to settings_init() to ensure that gnome/gtk
+	  are ready if we should need any dialogs.
+	* add static status variable to gui_init() so it happens just once.
+
+2009-09-21  matthew<ransom1982@users.sourceforge.net>
+
+	* change Windows to use ShellExecuteW instead of gnome_show_url
+	* new function xiphos_open_default to open anything on any platform
+	* change help menu to point to new location for chm files on Windows
+	* added linkbutton hook so that linkbuttons (in about dialogs) would
+	   work on Windows
+
+2009-09-21  karl <charcoal@users.sf.net>
+
+	* move gconf_setup() to gui_init() where it belongs.
+
 2009-09-12  karl <charcoal@users.sf.net>
 
 	* feat.req #2813476 Interface localization (prefs->options)

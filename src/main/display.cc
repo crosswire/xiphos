@@ -236,7 +236,7 @@ marked_cache_fill(gchar *modname, gchar *key)
 				for (int i = 0; i < NUM_REPLACE; ++i) {
 					for (s = strchr(e->annotation->str, replacement[i].c);
 					     s;
-					     s = strchr(s, replacement[i].c)) {
+					     s = strchr(e->annotation->str, replacement[i].c)) {
 						(void) g_string_erase(e->annotation,
 								      s - (e->annotation->str), 1);
 						(void) g_string_insert(e->annotation,
@@ -1019,54 +1019,36 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 	gchar *utf8_key;
 	gchar *buf;
 	char *num;
-	SWMgr *mgr = be->get_main_mgr();
 
-	const char *ModuleName = imodule.Name();
-	SWModule *mod_top = mgr->getModule(ModuleName);
-	mod_top->setSkipConsecutiveLinks(true);
-	*mod_top = sword::TOP;
-
-	sword::VerseKey key_top( mod_top->KeyText() );
-	SWModule *mod = mgr->getModule(ModuleName);
-	mod->setKey(imodule.getKey());
-	VerseKey *key = (VerseKey *)(SWKey *)*mod;
+	sword::VerseKey *key = (VerseKey *)(SWKey *)imodule;
+	int curVerse = key->Verse();
 	int chapter = key->Chapter();
-	key->Verse(1);
+	int curBook = key->Book();
+	int curTest = key->Testament();
+	const char *ModuleName = imodule.Name();
 
-	if (!key->_compare(key_top)) {
-		if ((!strcmp(settings.MainWindowModule, "KJV"))){
-			buf=g_strdup_printf("<div style=\"text-align: center\">"
-					    "<b><font size=\"%+d\">%s</font></b>"
-					    "<hr></div>",
-					    1 + ((mf->old_font_size)
-						 ? atoi(mf->old_font_size) +
-						 settings.base_font_size
-						 : settings.base_font_size),
-					    mod->Description());
-			swbuf.append(buf);
-			g_free(buf);
-		}
-		else {
-			num = main_format_number(chapter);
-			buf=g_strdup_printf("<div style=\"text-align: center\">"
-					    "<p><b><font size=\"%+d\">%s</font></b></p>"
-					    "<b>%s %s</b></div>",
-					    1 + ((mf->old_font_size)
-						 ? atoi(mf->old_font_size) +
-						 settings.base_font_size
-						 : settings.base_font_size),
-					    mod->Description(),
-					    _("Chapter"),
-					    num);
-			g_free(num);
-			swbuf.append(buf);
-			g_free(buf);
-		}
+	key->Verse(1);
+	imodule--;
+
+	if (imodule.Error()) {
+		num = main_format_number(chapter);
+		buf=g_strdup_printf("<div style=\"text-align: center\">"
+				    "<p><b><font size=\"%+d\">%s</font></b></p>"
+				    "<b>%s %s</b></div>",
+				    1 + ((mf->old_font_size)
+					 ? atoi(mf->old_font_size) +
+					 settings.base_font_size
+					 : settings.base_font_size),
+				    imodule.Description(),
+				    _("Chapter"),
+				    num);
+		g_free(num);
+		swbuf.append(buf);
+		g_free(buf);
 	} else {
-		(*mod)--;
 
 		if (strongs_and_morph)
-			set_morph_order(*mod);
+			set_morph_order(imodule);
 
 		ModuleCache::CacheVerse& cVerse = ModuleMap
 		    [ModuleName]
@@ -1075,21 +1057,11 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 		    [key->Chapter()]
 		    [key->Verse()];
 
-#if 1
 		if (!cVerse.CacheIsValid(cache_flags))
 			cVerse.SetText((strongs_or_morph
-					? block_render((const char *)*mod)
-					: (const char *)*mod),
+					? block_render((const char *)imodule)
+					: (const char *)imodule),
 				       cache_flags);
-#else
-		if (!cVerse.CacheIsValid(cache_flags)) {
-			const char *text = (strongs_or_morph
-					    ? block_render((const char *)mod)
-					    : (const char *)mod);
-			CleanupContent(text, ops, imodule.Name());
-			cVerse.SetText(text, cache_flags);
-		}
-#endif
 
 		utf8_key = strdup((char*)key->getText());
 
@@ -1126,9 +1098,10 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 		if (is_rtol && !ops->transliteration)
 			swbuf.append("</div>");
 
-		(*mod)++;
 	}
 
+	imodule++;
+	
 	if (!ops->headings)
 		return;
 
@@ -1153,28 +1126,22 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 		    [key->Chapter()]
 		    [key->Verse()];
 
-#if 1
 		if (!cVerse.CacheIsValid(cache_flags))
 			cVerse.SetText((strongs_or_morph
-					? block_render((const char *)*mod)
-					: (const char *)*mod),
+					? block_render((const char *)imodule)
+					: (const char *)imodule),
 				       cache_flags);
-#else
-		if (!cVerse.CacheIsValid(cache_flags)) {
-			const char *text = (strongs_or_morph
-					    ? block_render((const char *)mod)
-					    : (const char *)mod);
-			CleanupContent(text, ops, imodule.Name());
-			cVerse.SetText(text, cache_flags);
-		}
-#endif
-
 		buf=g_strdup_printf("%s<br />", cVerse.GetText());
 		swbuf.append(buf);
 		g_free(buf);
 	}
 
 	key->AutoNormalize(oldAutoNorm);
+
+	key->Book(curBook);
+	key->Chapter(chapter);
+	key->Verse(curVerse);
+	key->Testament(curTest);
 }
 
 void
@@ -1182,42 +1149,28 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 {
 	gchar *utf8_key;
 	gchar *buf;
-	SWMgr *mgr = be->get_main_mgr();
 	const char *ModuleName = imodule.Name();
-	SWModule *mod_bottom = mgr->getModule(ModuleName);
-		mod_bottom->setSkipConsecutiveLinks(true);
-	*mod_bottom = sword::BOTTOM;
-	sword::VerseKey key_bottom( mod_bottom->KeyText() );
-	SWModule *mod = mgr->getModule(ModuleName);
-	mod->setKey(imodule.getKey());
-	VerseKey *key = (VerseKey *)(SWKey *)*mod;
+	sword::VerseKey *key = (VerseKey *)(SWKey *)imodule;
 
-	if (key_bottom._compare(key) < 1) {
+	imodule++;
+	if (imodule.Error()) {
 		buf=g_strdup_printf(
 			"%s<hr><div style=\"text-align: center\"><p><b>%s</b></p></div>",
 			// extra break when excess strongs/morph space.
 			(strongs_or_morph ? "<br>" : ""),
-			mod->Description());
+			imodule.Description());
 		swbuf.append(buf);
 		g_free(buf);
 	} else {
+		imodule--;
 		char *num = main_format_number(key->Chapter());
-		if ((!strcmp(settings.MainWindowModule, "KJV"))){
-			buf=g_strdup_printf(
-				"%s<hr><b>%s %s.</b><br><br>",
-				(strongs_or_morph ? "<br>" : ""),
-				_("Chapter"), num);
-			swbuf.append(buf);
-			g_free(buf);
-		}
-		else {
-			buf=g_strdup_printf(
-				"%s<hr><div style=\"text-align: center\"><b>%s %s</b></div>",
-				(strongs_or_morph ? "<br>" : ""),
-				_("Chapter"), num);
-			swbuf.append(buf);
-			g_free(buf);
-		}
+
+		buf=g_strdup_printf(
+			"%s<hr><div style=\"text-align: center\"><b>%s %s</b></div>",
+			(strongs_or_morph ? "<br>" : ""),
+			_("Chapter"), num);
+		swbuf.append(buf);
+		g_free(buf);
 		g_free(num);
 
 		utf8_key = strdup((char*)key->getText());
@@ -1242,7 +1195,7 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 		g_free(buf);
 
 		if (strongs_and_morph)
-			set_morph_order(*mod);
+			set_morph_order(imodule);
 
 		ModuleCache::CacheVerse& cVerse = ModuleMap
 		    [ModuleName]
@@ -1251,22 +1204,11 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 		    [key->Chapter()]
 		    [key->Verse()];
 
-#if 1
 		if (!cVerse.CacheIsValid(cache_flags))
 			cVerse.SetText((strongs_or_morph
-					? block_render((const char *)*mod)
-					: (const char *)*mod),
+					? block_render((const char *)imodule)
+					: (const char *)imodule),
 				       cache_flags);
-#else
-		if (!cVerse.CacheIsValid(cache_flags)) {
-			const char *text = (strongs_or_morph
-					    ? block_render((const char *)mod)
-					    : (const char *)mod);
-			CleanupContent(text, ops, imodule.Name());
-			cVerse.SetText(text, cache_flags);
-		}
-#endif
-
 		swbuf.append(cVerse.GetText());
 		if (is_rtol && !ops->transliteration)
 			swbuf.append("</div>");
@@ -1498,7 +1440,6 @@ StartFestival()
 	festival_args[1] = g_strdup("--server");
 	festival_args[2] = NULL;
 #endif
-	GS_message((festival_args[0]));
 	g_spawn_async ( NULL,
 			festival_args,
 			NULL,

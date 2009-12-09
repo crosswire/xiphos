@@ -23,7 +23,8 @@
 #include <config.h>
 #endif
 
-#include <gnome.h>
+#include <gtk/gtk.h>
+#include <glib/gi18n.h>
 
 #include "gui/navbar_book_dialog.h"
 

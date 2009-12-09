@@ -35,7 +35,7 @@
 #include <swmgr.h>
 #include <swmodule.h>
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 
 #ifdef USE_GTKHTML3_14_23
 #include "editor/slib-editor.h"
@@ -159,17 +159,12 @@ static gint show_separate_image(const gchar * filename, gboolean clicked)
 {
 	if (clicked) {
 #ifdef WIN32
-		// as of october 2008, gnome_url_show() doesn't behave
-		// properly on linux, because it does not respect the user's
-		// preferences properly.  so this is used on windows only.
-		// it kicks off the standard windows fax/pic viewer.
-
 		gboolean result;
-		gchar *file_as_url = g_strdup_printf("file://%s", filename);
-
-		GS_print(("file = %s\n", file_as_url));
-		result = gnome_url_show(file_as_url, NULL);
-		g_free(file_as_url);
+		gchar *win_path = g_strdup(filename);
+		//ShellExecute can handle all / or all \\ but not a combination
+		win_path = g_strdelimit(win_path,  "/", '\\');
+		result = xiphos_open_default ((const gchar*)win_path);
+		g_free(win_path);
 		if (result == FALSE) {
 			gui_generic_warning((char *)"Could not display that image");
 		}
@@ -211,7 +206,6 @@ static gint show_separate_image(const gchar * filename, gboolean clicked)
 #endif
 	} else {
 		gui_set_statusbar (filename);
-		//gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),filename);
 	}
 	return 1;
 }
@@ -245,8 +239,6 @@ static gint show_separate_image(const gchar * filename, gboolean clicked)
 		GString *desc_clean = hex_decode(description);
 		GS_print(("description = %s\n", desc_clean->str));
 		gui_set_statusbar (desc_clean->str);
-		/*gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
-					desc_clean->str);*/
 		g_string_free(desc_clean, TRUE);
 	}
 	return 1;
@@ -279,7 +271,6 @@ static gint show_separate_image(const gchar * filename, gboolean clicked)
 			gchar *buf = g_strdup_printf( 
 				_("Show %s in main window"), svalue);
 			gui_set_statusbar (buf);
-			//gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), buf);
 			g_free(buf);
 		}
 	}
@@ -457,7 +448,7 @@ static gint show_note(const gchar * module, const gchar * passage,
 	char oldAutoNorm = 0;
 
 	if (stop_autonorm) {
-		SWMgr *mgr = backend->get_display_mgr();
+		SWMgr *mgr = backend->get_mgr();
 		backend->display_mod = mgr->Modules[module];
 		backend->display_mod->setKey(passage);
 		vkey = (VerseKey*)(SWKey*)(*backend->display_mod);
@@ -622,7 +613,6 @@ static int show_module_and_key(const char * module, const char * key,
 		module = settings.MainWindowModule;
 	}
 	if (!clicked) {
-		//gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), url);
 		return 1;
 	}
 	
@@ -723,7 +713,6 @@ static gint show_in_previewer(const gchar * url)
 	gchar *mybuf = NULL;
 
 	work_buf = g_strsplit (url,"/",4);
-	//GS_message(("work_buf :%s, %s",work_buf[MODULE],work_buf[KEY]));	
 	
 	mybuf = main_get_rendered_text(work_buf[MODULE], work_buf[KEY]);
 	
@@ -810,7 +799,9 @@ gint sword_uri(const gchar * url, gboolean clicked)
 	} else
 		tmpkey = work_buf[KEY];
 	
-	GS_message(("work_buf: %s, %s",work_buf[MODULE],work_buf[KEY]));
+	GS_message(("work_buf: %s, %s",
+		    work_buf[MODULE],
+		    (work_buf[KEY] ? work_buf[KEY] : "-null-")));
 	
 	verse_count = 1; //backend->is_Bible_key(mykey, settings.currentverse);
 	if(backend->is_module(work_buf[MODULE])) {
@@ -967,7 +958,7 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 			passage = g_strdup((gchar*)m_url.getParameterValue("passage"));
 
 			// need localized key, not the osisref that we've got.
-			ModMap::iterator it = backend->get_main_mgr()->Modules.find
+			ModMap::iterator it = backend->get_mgr()->Modules.find
 						((module && *module) ? module : "KJV");
 			SWModule *m = (*it).second;
 			VerseKey *vk = (VerseKey *)m->getKey();
@@ -1015,7 +1006,10 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 		}
 
 		else if (!strcmp(action, "showImage")) {
-			show_separate_image(svalue+5, clicked);	// skip "file:"
+			show_separate_image((!strncmp(svalue, "file:", 5)
+					     ? svalue+5
+					     : svalue),
+					    clicked);
 		}
 
 		if (action) g_free(action);
@@ -1026,7 +1020,7 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 		g_string_free(tmpstr, TRUE);
 		retval = 1;
 	} else if (clicked)
-		gnome_url_show(url, NULL);
+		xiphos_open_default (url);
 
 	return retval;
 }
@@ -1095,7 +1089,7 @@ hex_decode(const gchar *url)
 						  (gchar) from_hex);
 				url_chase += 2;
 			} else {
-				// failed %xx enconding; normal character.
+				// failed %xx encoding; normal character.
 				// should we instead do nothing with this '%'?
 				g_string_append_c(url_clean, '%');
 			}
