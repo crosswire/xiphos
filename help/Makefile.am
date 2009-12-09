@@ -1,7 +1,7 @@
 include $(top_srcdir)/gnome-doc-utils.make
 dist-hook: doc-dist-hook
 
-DOC_MODULE = 	xiphos
+DOC_MODULE = 	xiphos-manual
 
 DOC_ENTITIES = 	legal.xml
 
