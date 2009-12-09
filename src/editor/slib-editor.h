@@ -27,7 +27,9 @@ extern "C"
 {
 #endif
 
-#include <config.h>	
+#include <config.h>
+
+#include <gtk/gtk.h>
 	
 #ifdef USE_GTKHTML3_14_23
 	

@@ -15,8 +15,6 @@ Build-Depends: automake,
 	       libnspr4-dev,
                libcurl4-gnutls-dev,
                libicu-dev,
-	       libdbus-glib-1-dev,
-	       libgsf-1-dev,
                libclucene-dev 
 Section: gnome
 Priority: optional
