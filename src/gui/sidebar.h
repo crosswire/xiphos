@@ -56,6 +56,8 @@ struct _search_results {
 };
 
 extern GList *list_of_verses;
+extern GtkListStore *model_verselist;
+extern gboolean is_search_result;
 
 #ifdef USE_TREEVIEW_PATH
 void gui_collapse_treeview_to_book (GtkTreeView * tree, const gchar * book_name);
@@ -77,6 +79,12 @@ void  gui_sync_module_treeview(gint direction);
 void on_save_list_as_a_single_bookmark_activate (GtkMenuItem * menuitem, gpointer user_data);
 void on_save_list_as_a_series_of_bookmarks_activate (GtkMenuItem * menuitem, gpointer user_data);
 GtkWidget *create_results_menu(void);
+void on_open_in_dialog_activate(GtkMenuItem * menuitem,
+				gpointer user_data);
+void on_open_in_tab_activate2(GtkMenuItem * menuitem,
+			     gpointer user_data);
+void on_about2_activate(GtkMenuItem * menuitem,
+			gpointer user_data);
 void on_simple_activate(GtkMenuItem *menuitem, gpointer user_data);
 void on_subject_activate(GtkMenuItem *menuitem, gpointer user_data);
 void on_monthly_activate(GtkMenuItem *menuitem, gpointer user_data);

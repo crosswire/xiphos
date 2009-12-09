@@ -23,14 +23,13 @@
 #include <config.h>
 #endif
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 #include <string.h>
 
 #include "main/lists.h"
 #include "main/sword.h"
 #include "main/settings.h"
 #include "main/xml.h"
-
 #include "backend/sword_main.hh"
 
 

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE node PUBLIC
+	  "-//freedesktop//DTD D-Bus Object Introspection 1.0//EN"
+	  "http://standards.freedesktop.org/dbus/1.0/introspect.dtd">
+<node>
+  <interface name="org.xiphos.remote">
+
+    <method name="setCurrentReference">
+      <arg type="s" name="reference" direction="in" />
+    </method>
+
+    <method name="getCurrentReference">
+      <arg type="s" name="reference" direction="out" />
+    </method>
+
+    <method name="getNextSearchReference">
+      <arg type="s" name="reference" direction="out" />
+    </method>
+
+    <signal name="searchPerformedSignal">
+      <arg type="s" name="reference" direction="out" />
+      <arg type="i" name="hits" direction="out" />
+    </signal>
+
+    <signal name="navigationSignal">
+      <arg type="s" name="reference" direction="out" />
+    </signal>
+  </interface>
+</node>

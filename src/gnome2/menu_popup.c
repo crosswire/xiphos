@@ -23,7 +23,11 @@
 #include <config.h>
 #endif
 
-#include <gnome.h>
+#include <gtk/gtk.h>
+#include <glib.h>
+#include <glib/gstdio.h>
+#include <errno.h>
+#include <unistd.h>
 #include <ctype.h>
 
 #ifdef USE_GTKMOZEMBED
@@ -1118,7 +1122,6 @@ G_MODULE_EXPORT void on_use_current_dictionary_activate (GtkMenuItem * menuitem,
 G_MODULE_EXPORT void on_lookup_google_activate (GtkMenuItem * menuitem, gpointer user_data)
 {			
 	gchar *dict_key, *showstr;
-	GError *error = NULL;
 
 #ifdef USE_GTKMOZEMBED
 	gecko_html_copy_selection(GECKO_HTML(_get_html()));
@@ -1134,10 +1137,7 @@ G_MODULE_EXPORT void on_lookup_google_activate (GtkMenuItem * menuitem, gpointer
 		gui_generic_warning("No selection made");
 	} else {
 		showstr = g_strconcat("http://www.biblemap.org/#", dict_key, NULL);
-		if (gnome_url_show(showstr, &error) == FALSE) {
-			GS_warning(("%s",error->message));
-			g_error_free (error);
-		}
+		xiphos_open_default (showstr);
 		g_free(showstr);
 	}
 	g_free(dict_key);
@@ -1238,7 +1238,7 @@ G_MODULE_EXPORT void on_rename_perscomm_activate (GtkMenuItem * menuitem, gpoint
 	datapath_new = s;	// ..and in with the new.
 
 	// move old data directory to new.
-	if ((chdir(sworddir) != 0) ||
+	if ((g_chdir(sworddir) != 0) ||
 	    (rename(datapath_old, datapath_new) != 0)) {
 		gui_generic_warning("Failed to rename directory.");
 		goto out2;

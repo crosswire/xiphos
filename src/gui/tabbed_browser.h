@@ -26,7 +26,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#include <gnome.h>
+#include <gtk/gtk.h>
 #include "main/tab_history.h"
 
 #define	TABHISTORYLENGTH	25

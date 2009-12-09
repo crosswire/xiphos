@@ -32,6 +32,7 @@
 #include "gui/splash.h"
 #include "gui/tabbed_browser.h"
 #include "gui/xiphos.h"
+#include "gui/utilities.h"
 //#include "gui/widgets.h"
 
 #include "main/sword.h"
@@ -71,8 +72,12 @@ int main(int argc, char *argv[])
 	int newbookmarks = FALSE;
 	int have_sword_url = FALSE;
 	gint base_step = 0; //needed for splash
-	
+	GTimer *total;
+	double d;
+
 	g_thread_init(NULL);
+	g_type_init();
+	total = g_timer_new();
 
 #ifdef WIN32
 	/*
@@ -81,13 +86,11 @@ int main(int argc, char *argv[])
 	 * gspawn happy.  Glib provides this nice function for us
 	 * to determine where we are (we can't depend on argv).
 	 */
-	gchar *install_dir = g_win32_get_package_installation_directory_of_module(NULL);
-	install_dir = g_strconcat(install_dir, "\0", NULL);
-	install_dir = g_build_filename (install_dir, "bin\0");
-	g_chdir (install_dir);
+	gchar *bin_dir = xiphos_win32_get_subdir("bin");
+	g_chdir (bin_dir);
 	
 	/* add this directory to $PATH for other stuff, e.g. zip */
-	g_setenv("PATH", g_strdup_printf("%s;%s", install_dir,
+	g_setenv("PATH", g_strdup_printf("%s;%s", bin_dir,
 					        g_getenv("PATH")),
 		                                TRUE);
 
@@ -146,41 +149,39 @@ int main(int argc, char *argv[])
 	/* 
 	 * check for directories and files
 	 */   
-    	settings_init(newconfigs,newbookmarks);
+    	settings_init(argc, argv, newconfigs, newbookmarks);
 
 	gui_init(argc, argv);
-	
+
 	gui_splash_init();
-	
+
 #ifdef USE_GTKMOZEMBED
 	
 	gui_splash_step(_("Initiating Gecko"), 0.0, 0);
 	
 	gecko_html_initialize();
-
+	
 	base_step = 1;
 #endif
 	gui_splash_step(_("Building Interface"), 0.2, 0 + base_step);
 
 	create_mainwindow();
-
+	
 	gui_splash_step(_("Starting Sword"), 0.5, 1 + base_step);
 
 	main_init_backend();
-	
+		
 	gui_splash_step(_("Loading Settings"), 0.8, 2 + base_step);
 
 	frontend_init();
-	
+		
 	gui_splash_step(_("Displaying Xiphos"), 1.0, 3 + base_step);
 	
 	/* need to get rid of wrongly-formatted annotation labels. */
 	xml_convert_to_osisref();
 	
 	frontend_display();
-	
-	gui_splash_done();
-
+		
 	if (have_sword_url) {
 		if (!strncmp(argv[1], "sword:/", 7)) {
 			char *key = strchr(argv[1]+8, '/');
@@ -195,6 +196,13 @@ int main(int argc, char *argv[])
 
 	/*gtk_notebook_set_current_page(GTK_NOTEBOOK
 					(widgets.notebook_comm_book), 0);*/
+	g_timer_stop(total);
+	d = g_timer_elapsed(total, NULL);
+#ifdef DEBUG
+	printf("total time is %f\n", d);
+#endif
+	g_idle_add ((GSourceFunc)gui_splash_done, NULL);
+
 	gui_main();
 	return 0;
 }

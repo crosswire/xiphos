@@ -23,7 +23,14 @@
 #include <config.h>
 #endif
 
+#ifndef WITHOUT_GNOME
 #include <gnome.h>
+#else
+#include <gtk/gtk.h>
+#include <glib/gi18n.h>
+#include <locale.h>
+#include <stdlib.h>
+#endif
 
 /* ----------------------------------------------- */
 /* do not #include "gui/debug_glib_null.h" in this */
@@ -32,36 +39,142 @@
 /* ----------------------------------------------- */
 
 #include "gui/gui.h"
-#include "gui/session.h"
 #include "gui/dialog.h"
+
+#ifdef HAVE_DBUS
+#include "gui/ipc.h"
+static IpcObject* ipc;
+#endif
 
 void gui_init(int argc, char *argv[])
 {
+	static int gui_init_done = FALSE;
+
+	if (gui_init_done) return;
+	gui_init_done = TRUE;
+
 #ifdef ENABLE_NLS
-  bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
-  bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-  textdomain (GETTEXT_PACKAGE);
+	bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
+	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+	textdomain (GETTEXT_PACKAGE);
 #endif
 #ifdef WIN32
-  gchar *locale_dir = g_win32_get_package_installation_directory_of_module(NULL);
-  locale_dir = g_strconcat(locale_dir, "\0", NULL);
-  locale_dir = g_build_filename (locale_dir, "share", "locale", NULL);
-  bindtextdomain(GETTEXT_PACKAGE, locale_dir);
-  bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-  textdomain (GETTEXT_PACKAGE);
-  g_free (locale_dir);
+	gchar *locale_dir = g_win32_get_package_installation_directory_of_module(NULL);
+	locale_dir = g_strconcat(locale_dir, "\0", NULL);
+	locale_dir = g_build_filename (locale_dir, "share", "locale", NULL);
+	bindtextdomain(GETTEXT_PACKAGE, locale_dir);
+	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+	textdomain (GETTEXT_PACKAGE);
+	g_free (locale_dir);
 #endif
+#ifndef WITHOUT_GNOME	
 	gnome_program_init (PACKAGE, VERSION, LIBGNOMEUI_MODULE,
-                      argc, argv,
-                      GNOME_PROGRAM_STANDARD_PROPERTIES,
-                      NULL);
-	gs_session_init(argv[0]);
+			    argc, argv,
+			    GNOME_PROGRAM_STANDARD_PROPERTIES,
+			    NULL);
+#else
+	gtk_init(&argc, &argv);
+#endif
+#ifndef WIN32
+	gconf_setup();
+#endif
+#ifdef HAVE_DBUS
+	ipc = ipc_init_dbus_connection(ipc);
+#endif
 }
 
 void gui_main(void)
 {
 	gtk_main();
 }
+
+
+/******************************************************************************
+ * Name
+ *    gconf_setup
+ *
+ * Synopsis
+ *   #include "main/settings.h"
+ *
+ *   void gconf_setup()
+ *
+ * Description
+ *   verifies and initializes the GConf subsystem, so that "sword://" and
+ *   similar can be handled by url-comprehending programs such as browsers.
+ *   dialogs for permission/success/failure => conditional on debug build.
+ *
+ * Return value
+ *   void
+ */
+
+#define	GS_GCONF_PERMISSION	_("URL references using \"sword://\" (similar to web page\nreferences) can be used by programs to look up\nscripture references. Your system currently has no\nprogram set to handle these references.\n\nWould you like Xiphos to set itself as the\nprogram to handle these references?")
+
+#define	GS_GCONF_SUCCESS	_("Xiphos has successfully set itself\nas the handler of sword:// and bible:// URLs.\n\nYou may wish to run the program \"gconf-editor\"\nto examine keys under /desktop/gnome/url-handlers,\nif you need to change these.")
+
+char *gconf_keys[GS_GCONF_MAX][2] = {
+    { "/desktop/gnome/url-handlers/bible/command",        "xiphos \"%s\"" },
+    { "/desktop/gnome/url-handlers/bible/enabled",        (char *) 1 },
+    { "/desktop/gnome/url-handlers/bible/needs_terminal", (char *) 0 },
+    { "/desktop/gnome/url-handlers/sword/command",        "xiphos \"%s\"" },
+    { "/desktop/gnome/url-handlers/sword/enabled",        (char *) 1 },
+    { "/desktop/gnome/url-handlers/sword/needs_terminal", (char *) 0 }
+};
+
+void gconf_setup()
+{
+	int i;
+	gchar *str;
+	gboolean retval;
+	GConfClient* client = gconf_client_get_default();
+
+	if (client == NULL)
+		return;		/* we're not running under GConf */
+
+	/*
+	 * This is deliberately somewhat simple-minded, at least for now.
+	 * We care about one thing: Is anything set to handle "bible://"?
+	 *
+	 * Unfortunate consequence of changing xiphos2 => xiphos:
+	 * We must fix broken keys.
+	 */
+	if ((((str = gconf_client_get_string(client, gconf_keys[0][0],
+					    NULL)) == NULL) ||
+	     (strncmp(str, "gnomesword", 10) == 0))
+#ifdef DEBUG
+	    && gui_yes_no_dialog(GS_GCONF_PERMISSION, NULL)
+#endif /* DEBUG */
+	    ) {
+		/*
+		 * Mechanical as can be, one after another.
+		 */
+		for (i = 0; i < GS_GCONF_MAX; ++i) {
+			retval = (((i % 3) == 0)	/* contrived hack */
+				  ? gconf_client_set_string
+					(client,
+					 gconf_keys[i][0],
+					 gconf_keys[i][1],
+					 NULL)
+				  : gconf_client_set_bool
+					(client,
+					 gconf_keys[i][0],
+					 (gconf_keys[i][1] ? TRUE : FALSE),
+					 NULL));
+#ifdef DEBUG
+			if (!retval) {
+				char msg[256];
+				sprintf(msg, _("Xiphos failed to complete handler init for key #%d:\n%s"),
+					i, gconf_keys[i][0]);
+				gui_generic_warning(msg);
+				return;
+			}
+#endif /* DEBUG */
+		}
+#ifdef DEBUG
+		gui_generic_warning(GS_GCONF_SUCCESS);
+#endif /* DEBUG */
+	}
+}
+
 
 #ifdef DEBUG
 

@@ -26,8 +26,9 @@
 #endif
 #ifdef USE_GTKUPRINT
 #include <unistd.h>
-#include <gnome.h>
 #include <sys/stat.h>
+#include <gtk/gtk.h>
+#include <glib/gi18n.h>
 #include <glib.h>
 #include <glib/gstdio.h>
 #include <string.h>

@@ -29,7 +29,7 @@
 #include <unistd.h>
 #include <string.h>
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 #include <gtk/gtk.h>
 #include <glade/glade-xml.h>
 
@@ -46,7 +46,6 @@
 #include "gui/sidebar.h"
 #include "gui/tabbed_browser.h"
 #include "gui/widgets.h"
-#include "gui/preferences_cell_renderer.h"
 
 #include "main/sword.h"
 #include "main/lists.h"
@@ -58,62 +57,6 @@
 #include "main/url.hh"
 
 #include "gui/debug_glib_null.h"
-
-//gtk_toggle_button_set_active
-typedef enum {
-	SHOW_BIBLE_TABS,
-	SHOW_COMMENTARY_TABS,
-	SHOW_DICTIONARY_TABS,
-	SHOW_BOOK_TABS,
-	USE_DEFAULT_DICTIONARY,
-	USE_VERSE_STYLE,
-	USE_LINKED_TABS,
-	READ_ALOUD,
-	SHOW_VERSE_NUM,
-	VERSE_HIGHLIGHT,
-	DOUBLE_SPACE,
-	SHOW_SPLASH_SCREEN,
-	SHOW_BIBLE_PANE,
-	SHOW_COMMENTARY_PANE,
-	SHOW_DICTIONARY_PANE,
-	SHOW_IN_VIEWER,
-	SHOW_IN_DICTIONARY,
-	SHOW_DEVOTION,
-	USE_STUDYPAD,
-	USE_STUDYPAD_DIALOG,
-	USE_PERCOMM_DIALOG,
-	TABBED_BROWSING
-} which_check_button;
-
-typedef enum {
-	TEXT_FORGROUND,
-	TEXT_BACKGROUND,
-	TEXT_CURRENT_VERSE,
-	VERSE_NUMBERS,
-	HREF_LINKS,
-	HIGHLIGHT_FG,
-	HIGHLIGHT_BG
-} which_color_combo;
-
-
-typedef enum {
-	TEXT_MODULE,
-	PARALLEL_1_MODULE,
-	PARALLEL_2_MODULE,
-	PARALLEL_3_MODULE,
-	PARALLEL_4_MODULE,
-	PARALLEL_5_MODULE,
-	COMMENTARY_MODULE,
-	DICTIONARY_MODULE,
-	DEFAULT_DICTIONARY_MODULE,
-	PERCOMM_MODULE,
-	DEVOTION_MODULE,
-	GREEK_LEX__MODULE,
-	HEBREW_LEX__MODULE,
-	COMBO_ENTRY_SP_DIR,
-	BASE_FONT_SIZE,
-	VERSE_NUMBER_SIZE
-} which_entry;
 
 typedef struct _preferences_combo COMBOBOXS;
 struct _preferences_combo {
@@ -1698,7 +1641,7 @@ on_combobox16_changed(GtkComboBox * combobox,
 
 	xml_set_value("Xiphos", "locale", "special", (clear ? NONE : buf));
 	g_free(settings.special_locale);	/* dispose of old content */
-	settings.special_locale = (clear ? NONE : g_strdup(buf));
+	settings.special_locale = (clear ? g_strdup(NONE) : g_strdup(buf));
 	g_free(buf);
 }
 
@@ -1903,7 +1846,6 @@ setup_color_pickers(void)
                                         &color);
 	}
 
-/*
 	if (string_is_color(settings.bible_verse_num_color)) {
 		gdk_color_parse(settings.bible_verse_num_color, &color);
 		gtk_color_button_set_color(
@@ -1915,7 +1857,6 @@ setup_color_pickers(void)
 			GTK_COLOR_BUTTON(color_picker.verse_numbers),
                                         &color);
 	}
-*/
 
 	if (string_is_color(settings.link_color)) {
 		gdk_color_parse(settings.link_color, &color);
@@ -2306,11 +2247,9 @@ create_preferences_dialog(void)
 	color_picker.text_current_verse = glade_xml_get_widget (gxml, "colorbutton3");
 	g_signal_connect(color_picker.text_current_verse, "color_set",
 			 G_CALLBACK(on_colorbutton3_color_set), NULL);
-/*
 	color_picker.verse_numbers = glade_xml_get_widget (gxml, "colorbutton4");
 	g_signal_connect(color_picker.verse_numbers, "color_set",
 			 G_CALLBACK(on_colorbutton4_color_set), NULL);
-*/
 	color_picker.href_links = glade_xml_get_widget (gxml, "colorbutton5");
 	g_signal_connect(color_picker.href_links, "color_set",
 			 G_CALLBACK(on_colorbutton5_color_set), NULL);

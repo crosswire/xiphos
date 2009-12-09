@@ -22,7 +22,7 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <gnome.h>
+#include <gtk/gtk.h>
 #include <regex.h>
 #include <swbuf.h>
 #include <swmodule.h>
@@ -57,6 +57,7 @@ extern "C" {
 #include "gui/widgets.h"
 #include "gui/dialog.h"
 #include "gui/utilities.h"
+#include "gui/export_bookmarks.h"
 
 #include "backend/sword_main.hh"
 
@@ -84,6 +85,83 @@ int drag_module_type;
 
 static GList *list_of_finds;
 static GList *list_for_bookmarking = NULL;
+
+
+
+/******************************************************************************
+ * Name
+ *   main_export_current_adv_search
+ *
+ * Synopsis
+ *   #include "main/search_dialog.h"
+ *
+ *   void  main_export_current_adv_search(GString * str, gboolean html)
+ *
+ * Description
+ *   exports search results to html or plain text
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+gboolean main_export_current_adv_search (GString * str, gboolean html, gboolean with_scripture)
+{	
+	GList *verses = NULL;
+	GList *tmp = NULL;
+	RESULTS *list_item;
+	gboolean ret = FALSE;
+	gchar *desc;
+	
+	tmp = g_list_first(list_for_bookmarking);
+	if (html)
+		str = g_string_append(str, "<html><body>");
+	while (tmp) {
+		verses = (GList*) tmp->data;
+		
+		GString *verse_string = g_string_new("");
+		gboolean first_entry = TRUE;
+		
+		while (verses) {
+			list_item = (RESULTS *) verses->data;
+			if (main_is_Bible_key(list_item->key)) {
+				ret = TRUE;
+				if (first_entry) {					
+					if (html)
+						g_string_printf(verse_string, "<ul><b>%s</b>", list_item->module);
+					else
+						g_string_printf(verse_string, "%s\n", list_item->module);
+					first_entry = FALSE;
+					str = g_string_append(str, verse_string->str);
+				} else {
+					desc = g_strdup_printf("%s %s",
+					    			list_item->key,
+					    			list_item->module);
+					if (html) 
+						gui_set_html_item ( str,
+								desc,
+								list_item->module, 
+								list_item->key,
+								with_scripture);
+					else 
+						gui_set_plain_text_item ( str, 
+								desc,
+								list_item->module, 
+								list_item->key,
+								with_scripture);
+												
+				}
+			}
+			verses = g_list_next(verses);
+		}
+		g_string_free(verse_string, TRUE);
+		if (html)
+			str = g_string_append(str, "</ul>");
+		tmp = g_list_next(tmp);
+	}
+	return ret;
+}
+
 
 /******************************************************************************
  * Name
@@ -227,7 +305,7 @@ void main_range_text_changed(GtkEditable * editable)
 static void set_search_global_option(const gchar * option, gboolean choice)
 {	
 	const char *on_off;
-	SWMgr *mgr = backendSearch->get_display_mgr();
+	SWMgr *mgr = backendSearch->get_mgr();
 
 	if (choice) {
 		on_off = "On";
@@ -1464,7 +1542,7 @@ void main_do_dialog_search(void)
 	search_active = TRUE;
 
 	// must ensure that no accents or vowel points are enabled.
-	SWMgr *mgr = backendSearch->get_main_mgr();
+	SWMgr *mgr = backendSearch->get_mgr();
 	mgr->setGlobalOption("Greek Accents", "Off");
 	mgr->setGlobalOption("Hebrew Vowel Points", "Off");
 	mgr->setGlobalOption("Arabic Vowel Points", "Off");
@@ -1565,7 +1643,8 @@ void main_do_dialog_search(void)
 	g_list_free(search_mods);
 	gui_set_progressbar_text(search1.progressbar, _("Search finished"));
 	gui_set_progressbar_fraction(search1.progressbar, 0);
-	g_string_free(str, TRUE);	
+	g_string_free(str, TRUE);
+	gtk_widget_grab_focus(search1.listview_verses);
 }
 
 /******************************************************************************

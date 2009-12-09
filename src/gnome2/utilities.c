@@ -29,7 +29,11 @@
 #include <string.h>
 #include <assert.h>
 
+#ifndef WITHOUT_GNOME
 #include <gnome.h>
+#else
+#include <gtk/gtk.h>
+#endif
 
 #include "gui/utilities.h"
 #include "gui/preferences_dialog.h"
@@ -44,19 +48,94 @@
 #include "main/configs.h"
 #include "main/sword.h"
 #include "main/url.hh"
+#include "main/xml.h"
+
+#ifdef WIN32
+#undef DATADIR
+#include <windows.h>
+#include <shellapi.h>
+#endif /* WIN32 */
 
 #ifdef USE_GTKMOZEMBED
 #ifdef WIN32
 #include "geckowin/gecko-html.h"
 #else
 #include "gecko/gecko-html.h"
-#endif
+#endif /* WIN32 */
 #else
 #include <gtkhtml/gtkhtml.h>
 #include <gtkhtml/htmltypes.h>
 #endif /* USE_GTKMOZEMBED */
 
+#include <gsf/gsf-utils.h>
+#include <gsf/gsf-outfile-zip.h>
+#include <gsf/gsf-output-stdio.h>
+#include <gsf/gsf-output.h>
+#include <gsf/gsf-input.h>
+#include <gsf/gsf-outfile.h>
+#include <gsf/gsf-input-stdio.h>
+
 #include "gui/debug_glib_null.h"
+
+
+/******************************************************************************
+ * Name
+ *  utilities_parse_treeview
+ *
+ * Synopsis
+ *   #include "gui/bookmarks_menu.h"
+ *
+ *   void utilities_parse_treeview(xmlNodePtr parent, GtkTreeIter * tree_parent)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
+
+void utilities_parse_treeview(xmlNodePtr parent, GtkTreeIter * tree_parent, GtkTreeModel *model)
+{
+	static xmlNodePtr cur_node;
+	GtkTreeIter child;
+	gchar *caption = NULL;
+	gchar *key = NULL;
+	gchar *module = NULL;
+	gchar *mod_desc = NULL;
+	gchar *description = NULL;
+	
+	gtk_tree_model_iter_children(GTK_TREE_MODEL(model), &child,
+                                             tree_parent);
+	
+	do {
+		gtk_tree_model_get(GTK_TREE_MODEL(model), &child,
+			   		2, &caption, 
+					3, &key, 
+					4, &module, 
+					5, &mod_desc, 
+					6, &description,
+					-1);
+		if(gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model), 
+							&child)) {
+			cur_node = xml_add_folder_to_parent(parent, 
+							caption);
+			utilities_parse_treeview(cur_node, &child, model);
+						     
+		}
+		else 
+			xml_add_bookmark_to_parent(parent, 
+						description,
+						key,
+						module,
+						mod_desc);
+		
+		g_free(caption);
+		g_free(key);
+		g_free(module);	
+		g_free(mod_desc);
+		g_free(description);
+	} while(gtk_tree_model_iter_next(GTK_TREE_MODEL(model), &child));
+}
 
 
 gint gui_of2tf(const gchar * on_off)
@@ -239,7 +318,7 @@ gchar * gui_general_user_file (const char *fname, gboolean critical)
 	}
 
 	/* try the default */
-	file = g_build_filename(getenv(HOMEVAR), ".xiphos", fname, NULL);
+	file = g_build_filename(g_getenv(HOMEVAR), ".xiphos", fname, NULL);
 	
 	/* success? */
 	if (g_file_test (file, G_FILE_TEST_EXISTS))
@@ -262,8 +341,12 @@ gchar * gui_general_user_file (const char *fname, gboolean critical)
 	alternative[i++] = g_build_filename("..", "ui", fname, NULL);
 	alternative[i++] = g_build_filename("..", "..", "ui", fname, NULL);
 #endif
+#ifdef WIN32
+	alternative[i++] = g_build_filename(xiphos_win32_get_subdir("share"),
+					    "xiphos", fname, NULL);
+#else
 	alternative[i++] = g_build_filename("..", "share", "xiphos", fname, NULL);
-	/* above line for WIN32, mostly. */
+#endif
 	alternative[i++] = g_build_filename(SHARE_DIR, fname, NULL);
 	alternative[i++] = NULL;  /* NULL terminator needed */
 	
@@ -711,141 +794,6 @@ gchar * remove_linefeeds(gchar * buf)
 		
 }
 
-
-/******************************************************************************
- * Name
- *   gui_add_item2gnome_menu
- *
- * Synopsis
- *   #include "gui/utilities.h
- *
- *   void gui_add_item2gnome_menu(GtkWidget * MainFrm, gchar * itemname, 
- *	gchar * itemdata, gchar * menuname, GCallback mycallback)
- *
- * Description
- *   adds an item to the main menu bar
- *
- * Return value
- *   void
- */
-
-void gui_add_item2gnome_menu(GtkWidget * MainFrm, gchar * itemname, 
-	gchar * itemdata, gchar * menuname, GCallback mycallback)
-{
-	GnomeUIInfo *menuitem;
-
-	menuitem = g_new(GnomeUIInfo, 2);
-	menuitem->type = GNOME_APP_UI_ITEM;
-	menuitem->moreinfo = (gpointer) mycallback;
-	menuitem->user_data = itemdata;
-	menuitem->label = itemname;
-	menuitem->pixmap_type = GNOME_APP_PIXMAP_STOCK;
-	menuitem->pixmap_info = GNOME_STOCK_BOOK_OPEN;
-	menuitem->accelerator_key = 0;
-	menuitem[1].type = GNOME_APP_UI_ENDOFINFO;
-	gnome_app_insert_menus_with_data(GNOME_APP(MainFrm), menuname,
-					 menuitem, NULL);
-}
-
-
-/******************************************************************************
- * Name
- *   gui_add_separator2menu
- *
- * Synopsis
- *   #include "gui/utilities.h
- *
- *   void gui_add_separator2menu(GtkWidget * MainFrm, gchar * subtreelabel)
- *
- * Description
- *   add separator line to menu
- *
- * Return value
- *   void
- */
-
-void gui_add_separator2menu(GtkWidget * MainFrm, gchar * subtreelabel)
-{
-	GnomeUIInfo *bookmarkitem;
-	bookmarkitem = g_new(GnomeUIInfo, 2);
-	bookmarkitem->type = GNOME_APP_UI_SEPARATOR;
-	bookmarkitem->pixmap_type = GNOME_APP_PIXMAP_NONE;
-	bookmarkitem->accelerator_key = 0;
-	bookmarkitem[1].type = GNOME_APP_UI_ENDOFINFO;
-	gnome_app_insert_menus_with_data(GNOME_APP(MainFrm), subtreelabel,
-					 bookmarkitem, NULL);
-	//g_free(bookmarkitem); 
-}
-
-
-/******************************************************************************
- * Name
- *   
- *
- * Synopsis
- *   #include "gui/utilities.h
- *
- *   void add_mods_to_menus(GList * modlist, gchar * menu,
- *				GCallback callback) 
- *
- * Description
- *   add a list of modules to a menu
- *
- * Return value
- *   void
- */
-
-void gui_add_mods_to_menus(GList * modlist, gchar * menu,
-				GCallback callback) 
-{	
-	gchar	
-		view_remember_last_item[80];
-	//gint	i = 0;
-	GList 	*tmp = NULL;
-
-	sprintf(view_remember_last_item,"%s", menu);
-	
-	
-	tmp = modlist;
-	while (tmp != NULL) {	
-		gui_add_item2gnome_menu(widgets.app, 
-			(gchar *) tmp->data, 
-			(gchar *) tmp->data,
-			view_remember_last_item, 
-			callback);
-		/* remember last item - so next item will be placed below it */
-		sprintf(view_remember_last_item,"%s%s", 
-				menu, 
-				(gchar *) tmp->data);	
-		//++i;
-		tmp = g_list_next(tmp);	
-	}
-	g_list_free(modlist);
-}			
-
-
-/******************************************************************************
- * Name
- *   gui_remove_menu_items
- *
- * Synopsis
- *   #include "gui/utilities.h
- *
- *   void gui_remove_menu_items(gchar * startitem, gint numberofitems)
- *
- * Description
- *   remove a number(numberofitems) of items form a menu or submenu(startitem)
- *
- * Return value
- *   void
- */
-
-void gui_remove_menu_items(gchar * startitem, gint numberofitems)
-{				
-	gnome_app_remove_menus(GNOME_APP(widgets.app), startitem,
-			       numberofitems);
-}			
-
 /******************************************************************************
  * Name
  *  add_mods_2_gtk_menu
@@ -1159,13 +1107,12 @@ language_make_list(GList *modlist,
  * caller must free the returned string.
  */
 char *
-image_locator(char *image)
+image_locator(const char *image)
 {
 #ifndef WIN32
 	return g_strdup_printf("%s/%s", PACKAGE_PIXMAPS_DIR, image);
 #else
-	gchar d[PATH_MAX+2];
-	return g_build_filename(getcwd(d, PATH_MAX), "..", "share",
+	return g_build_filename(xiphos_win32_get_subdir("share"),
 				"pixmaps", "xiphos", image, NULL);
 #endif /* WIN32 */
 }
@@ -1189,17 +1136,22 @@ pixmap_finder(char *image)
  * get a pixbuf from specified file.
  */
 GdkPixbuf *
-pixbuf_finder(char *image, GError **error)
+pixbuf_finder(const char *image, int size, GError **error)
 {
 	GdkPixbuf *p;
 	char *image_file;
 
 	image_file = image_locator(image);
-	p = gdk_pixbuf_new_from_file(image_file, error);
+	if (size == 0)
+		p = gdk_pixbuf_new_from_file(image_file, error);
+	else
+		p = gdk_pixbuf_new_from_file_at_scale (image_file,
+					       size, size,
+					       TRUE,
+					       error);
 	g_free(image_file);
 	return p;
 }
-
 
 //
 // utility function to write out HTML.
@@ -1271,4 +1223,200 @@ void set_window_icon (GtkWindow *window)
 
 }
 
+/**************************************************************************
+ * Name
+ *  xiphos_open_default
+ *
+ * Synopsis
+ *  #include "glib.h"
+ *  #include <gnome.h>
+ *  #include <windows.h>
+ *  #include <shellapi.h>
+ *
+ * xiphos_open_default (gchar *file)
+ *
+ * Description
+ *  this is a generic "open anything with the default program" function;
+ *  on Windows, it uses the ShellExecuteW API (more robust than the gnome
+ *  or gtk implementations on Windows)
+ *  on *nix, it uses gnome_url_show; in the future, this could be changed
+ *  to gtk_show_uri as gnome_url_show is deprecated
+ * 
+ * Return value
+ *   void
+ */
+gboolean xiphos_open_default (const gchar *file)
+{
+#ifdef WIN32
+	gunichar2 *w_file;
+	gint rt;
+	w_file = g_utf8_to_utf16(file, -1, NULL, NULL, NULL);
+	GS_message(("opening file %ls", w_file));
+	rt = (gint)ShellExecuteW(NULL, L"open", w_file, NULL, NULL, SW_SHOWDEFAULT);
+	return rt > 32;
+	
+#else
+	GError *error = NULL;
+#ifndef WITHOUT_GNOME
+	if (gnome_url_show(file, &error) == FALSE){
+		GS_warning(("%s", error->message));
+		g_error_free (error);
+		return FALSE;
+	}
+	else
+		return TRUE;
+#else
+	gtk_show_uri (NULL, file, gtk_get_current_event_time(), &error);
+	if (error != NULL) {
+		GS_warning(("%s", error->message));
+		g_error_free (error);
+		return FALSE;
+	}
+	else
+		return TRUE;
+#endif
+#endif
+}
+
+/**
+ * xiphos_win32_get_subdir
+ * @subdir: a #gchar, the name of the subdir desired
+ *
+ * get the full path of the subdir; for instance, 'bin'
+ * would return something like C:/Program Files/Crosswire/Xiphos/bin
+ *
+ * Since 3.1.2
+ */
+#ifdef WIN32
+gchar* xiphos_win32_get_subdir(const gchar *subdir)
+{
+	gchar *ret_dir = g_win32_get_package_installation_directory_of_module(NULL);
+	ret_dir = g_strconcat(ret_dir, "\0", NULL);
+	ret_dir = g_build_filename(ret_dir, subdir, NULL);
+	return ret_dir;
+}
+#endif
+
+/**
+ * archive_addfile
+ * @output: a #GsfOutfile, the parent of the desired child
+ * @file: a #gchar, the on disk path of the file to add
+ * @name: a #gchar, the name (without path) of the file to add
+ *
+ * add a single file to the #GsfOutfile
+ *
+ * Since 3.1.2
+ */
+void archive_addfile(GsfOutfile *output, const gchar *file, const gchar *name)
+{
+	GsfInput *inputchild = NULL;
+	GsfOutput *outputchild = NULL;
+
+	inputchild = GSF_INPUT(gsf_input_stdio_new(file, NULL));
+	outputchild = gsf_outfile_new_child(output, name, FALSE);
+	gsf_input_copy(inputchild, outputchild);
+	gsf_output_close(outputchild);
+	g_object_unref(inputchild);
+	g_object_unref(outputchild);
+}
+
+/**
+ * archive_adddir
+ * @output: a #GsfOutfile, the parent of the desired child
+ * @path: a #gchar, the on disk path of the desired child directory
+ * @name: a #gchar, the name (without path) of the desired child dir
+ *
+ * add a child directory and all subdirs and files to the GsfOutfile;
+ * recursive
+ *
+ * Since 3.1.2
+ */
+void archive_adddir(GsfOutfile *output, gchar *path, const gchar *name)
+{
+	GDir *dir;
+	const gchar *file;
+	gchar *complete_file;
+	GsfOutfile *child;
+
+	child = GSF_OUTFILE(gsf_outfile_new_child(output, name, TRUE));
+	dir = g_dir_open(path, 0, NULL);
+	while ((file = g_dir_read_name(dir))) {
+		complete_file = g_build_filename(path, file, NULL);
+		if (g_file_test(complete_file, G_FILE_TEST_IS_DIR))
+			archive_adddir(GSF_OUTFILE(child), complete_file, file);
+		else
+			archive_addfile(GSF_OUTFILE(child), complete_file, file);
+	}
+	g_dir_close(dir);
+}
+
+
+/**
+ * xiphos_create_archive
+ * @conf_file: a #gchar with the location of the module's .conf
+ * @datapath: a #gchar with the location of the module's data
+ * @zip: a #gchar with the name of the zip file
+ * @destination: #gchar with the location to store the zip
+ *
+ * archive the specified module in the specified location
+ *
+ * Since 3.1.2
+ */
+void xiphos_create_archive(gchar* conf_file, gchar* datapath, gchar *zip,
+			   const gchar *destination)
+{
+	GsfOutfile *outputfile;
+	GsfOutput *output;
+	GsfOutfile *tmp;
+	gchar** path;
+	gchar* moddirname;
+	GString *modpath;
+	int i;
+	gsf_init();
+	
+	/* the module dir is the last part of the path */
+	path = g_strsplit(datapath, "/", -1);
+	moddirname = g_strdup(path[g_strv_length(path) - 1]);
+
+	/* create a relative path without preceding "." */
+	/* or the trailing dir name */
+	modpath = g_string_new(NULL);
+	for (i = 1; i <= (g_strv_length(path) - 2); i++)
+	{
+		modpath = g_string_append(modpath, path[i]);
+		if (i < g_strv_length(path) -2) /* avoid a trailing / */
+			modpath = g_string_append(modpath, "/");
+	}
+	
+	/* open zip file for writing */
+	output = gsf_output_stdio_new(zip, NULL);
+	outputfile = gsf_outfile_zip_new(output, NULL);
+
+	/* add the module directory */
+	tmp = GSF_OUTFILE(gsf_outfile_new_child(outputfile, modpath->str, TRUE));
+
+	/* add all data files */
+	archive_adddir(tmp,
+		       g_build_filename(destination, datapath, NULL),
+		       moddirname);
+	gsf_output_close(GSF_OUTPUT(tmp));
+	g_object_unref(tmp);
+
+	/* add conf file */
+	tmp = GSF_OUTFILE(gsf_outfile_new_child(outputfile, "mods.d", TRUE));
+	archive_addfile(tmp,
+			g_build_filename(destination, "mods.d", conf_file, NULL),
+			conf_file);
+
+	/* cleanup */
+	gsf_output_close(GSF_OUTPUT(outputfile));
+	gsf_output_close(output);
+	g_object_unref(tmp);
+	g_object_unref(outputfile);
+	g_object_unref(output);
+	g_strfreev(path);
+	g_free(moddirname);
+	
+}
+		
 /******   end of file   ******/

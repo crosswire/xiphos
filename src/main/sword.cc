@@ -24,7 +24,7 @@
 #endif
 
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 #include <glib.h>
 #include <glib/gstdio.h>
 
@@ -75,6 +75,10 @@ extern "C" {
 
 #include "gui/debug_glib_null.h"
 
+#ifdef HAVE_DBUS
+#include "gui/ipc.h"
+#endif
+
 using namespace sword; 
 	
 #define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
@@ -108,7 +112,7 @@ gboolean companion_activity = FALSE;
 void main_book_heading(char * mod_name)
 {	
 	VerseKey *vkey;	
-	SWMgr *mgr = backend->get_display_mgr();
+	SWMgr *mgr = backend->get_mgr();
 	
 	backend->display_mod = mgr->Modules[mod_name];
 	vkey = (VerseKey*)(SWKey*)(*backend->display_mod);	
@@ -139,7 +143,7 @@ void main_book_heading(char * mod_name)
 void main_chapter_heading(char * mod_name)
 {	
 	VerseKey *vkey;	
-	SWMgr *mgr = backend->get_display_mgr();
+	SWMgr *mgr = backend->get_mgr();
 	
 	backend->display_mod = mgr->Modules[mod_name];
 	backend->display_mod->setKey(settings.currentverse);
@@ -243,7 +247,7 @@ void main_delete_note(	const gchar * module_name, const gchar * key_str)
 
 void main_set_module_unlocked(char * mod_name, char * key)
 {
-	SWMgr *mgr = backend->get_display_mgr();
+	SWMgr *mgr = backend->get_mgr();
 	mgr->setCipherKey(mod_name, key);	
 }
 
@@ -303,6 +307,12 @@ gchar *main_update_nav_controls(const gchar * key)
 	main_navbar_versekey_set(navbar_versekey, val_key);
 	
 	settings.apply_change = TRUE;
+
+#ifdef HAVE_DBUS
+	IpcObject* ipc = ipc_get_main_ipc();
+	if (ipc)
+		ipc_object_navigation_signal (ipc, (const gchar*)val_key, NULL);
+#endif
 	return val_key;
 }
 
@@ -491,7 +501,7 @@ char *main_get_search_results_text(char * mod_name, char * key)
 
 char *main_get_path_to_mods(void)
 {
-	SWMgr *mgr = backend->get_main_mgr();
+	SWMgr *mgr = backend->get_mgr();
 	char *path = mgr->prefixPath;
 	return (path ? g_strdup(path) : NULL);
 }
@@ -657,7 +667,7 @@ char *set_sword_locale(const char *sys_locale)
 void main_init_backend(void)
 {
 	StringMgr::setSystemStringMgr( new GS_StringMgr() );
-
+	
 	const char *lang = getenv("LANG");
 	if (!lang) lang = "C";
 	sword_locale = set_sword_locale(lang);
@@ -1005,7 +1015,7 @@ void main_display_dictionary(const char * mod_name, const char * key)
 		time_t curtime;
 		struct tm *loctime;
 		char *feature;
-		if ((feature = (char *)backend->get_main_mgr()->
+		if ((feature = (char *)backend->get_mgr()->
 					getModule(mod_name)->
 					getConfigEntry("Feature")) &&
 		    !strcmp(feature, "DailyDevotion")) {
@@ -1116,7 +1126,6 @@ void main_display_bible(const char * mod_name, const char * key)
 	}
 	
 	settings.whichwindow = MAIN_TEXT_WINDOW;
-	gui_change_window_title(settings.MainWindowModule);
 	
 	file = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
 	style = get_conf_file_item(file, mod_name, "style");
@@ -1163,6 +1172,9 @@ void main_display_bible(const char * mod_name, const char * key)
 				      settings.showdicts);
 		gui_set_tab_label(settings.currentverse, FALSE);
 	//}
+
+	gui_change_window_title(settings.MainWindowModule);
+	// (called _after_ tab data updated so not overwritten with old tab)
 
 	/*
 	 * change parallel verses
@@ -1331,7 +1343,7 @@ int main_is_module(char * mod_name)
 
 int main_has_search_framework(char *mod_name)
 {
-	SWMgr *mgr = backend->get_main_mgr();
+	SWMgr *mgr = backend->get_mgr();
 	SWModule *mod = mgr->getModule(mod_name);
 	return (mod && mod->hasSearchFramework());
 }
@@ -1354,7 +1366,7 @@ int main_has_search_framework(char *mod_name)
 
 int main_optimal_search(char *mod_name)
 {
-	SWMgr *mgr = backend->get_main_mgr();
+	SWMgr *mgr = backend->get_mgr();
 	SWModule *mod = mgr->Modules.find(mod_name)->second;
 	return mod->isSearchOptimallySupported("God", -4, 0, 0);
 }

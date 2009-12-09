@@ -26,11 +26,12 @@
 #include <swmodule.h>
 #include <localemgr.h>
 #include <swversion.h>
+#include <filemgr.h>
 
 #include <markupfiltmgr.h>
 #include <swlocale.h>
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 #include <versekey.h>
 #include <regex.h>
 #include <string.h>
@@ -61,8 +62,15 @@ static const char *f_message = "backend/sword_main.cc line #%d \"%s\" = %s";
 
 BackEnd::BackEnd()
 {
+	GTimer *t;
+	double d;
+	t = g_timer_new();
+
 	main_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
-	display_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
+
+	g_timer_stop(t);
+	d = g_timer_elapsed(t, NULL);
+	GS_message(("create main_mgr time is %f", d));
 
 	display_mod = NULL;
 	tree_key = NULL;
@@ -80,10 +88,7 @@ BackEnd::~BackEnd()
 {
 	if(main_mgr)
 		delete main_mgr;
-	if(display_mgr)
-		delete display_mgr;
 	main_mgr = 0;
-	display_mgr = 0;
 	if (commDisplay)
 		delete commDisplay;
 	if (bookDisplay)
@@ -117,8 +122,8 @@ void BackEnd::init_SWORD(int gsType)
 	ModMap::iterator it;
 	if(gsType == 0) {
 		main_setup_displays();		
-		for (it = display_mgr->Modules.begin();
-					it != display_mgr->Modules.end(); it++) {
+		for (it = main_mgr->Modules.begin();
+					it != main_mgr->Modules.end(); it++) {
 			display_mod = (*it).second;
 			if (!strcmp(display_mod->Type(), TEXT_MODS)) {
 				display_mod->setDisplay(textDisplay);
@@ -134,7 +139,7 @@ void BackEnd::init_SWORD(int gsType)
 			}			
 		}
 	} else if(gsType == 1) { // dialogs
-		for (it = display_mgr->Modules.begin(); it != display_mgr->Modules.end(); it++) {	
+		for (it = main_mgr->Modules.begin(); it != main_mgr->Modules.end(); it++) {	
 			display_mod = (*it).second;
 			if (!strcmp(display_mod->Type(), TEXT_MODS)) {	
 				display_mod->setDisplay(chapDisplay);
@@ -143,7 +148,7 @@ void BackEnd::init_SWORD(int gsType)
 			}
 		}	
 	} else if(gsType == 2) { // search
-		for (it = display_mgr->Modules.begin(); it != display_mgr->Modules.end(); it++) {	
+		for (it = main_mgr->Modules.begin(); it != main_mgr->Modules.end(); it++) {	
 			display_mod = (*it).second;
 			display_mod->setDisplay(entryDisplay);
 		}	
@@ -280,7 +285,7 @@ char *BackEnd::get_config_entry(char * module_name, char * entry)
 
 void BackEnd::set_cipher_key(char * mod_name, char * key)
 {
-	display_mgr->setCipherKey(mod_name, key);	
+	main_mgr->setCipherKey(mod_name, key);	
 }
 
 int BackEnd::is_Bible_key(const char * list, char * current_key)
@@ -298,9 +303,9 @@ char *BackEnd::get_render_text(const char *module_name, const char *key)
 	SWModule *mod;
 	ModMap::iterator it;
 	//-- iterate through the modules until we find modName  
-	it = display_mgr->Modules.find(module_name);
+	it = main_mgr->Modules.find(module_name);
 	//-- if we find the module
-	if (it != display_mgr->Modules.end()) {
+	if (it != main_mgr->Modules.end()) {
 		mod = (*it).second;
 		mod->setKey(key);
 		return strdup((char *) mod->RenderText());
@@ -313,9 +318,9 @@ char *BackEnd::get_raw_text(const char *module_name, const char *key)
 	SWModule *mod;
 	ModMap::iterator it;
 	//-- iterate through the modules until we find modName  
-	it = display_mgr->Modules.find(module_name);
+	it = main_mgr->Modules.find(module_name);
 	//-- if we find the module
-	if (it != display_mgr->Modules.end()) {
+	if (it != main_mgr->Modules.end()) {
 		mod = (*it).second;
 		mod->setKey(key);
 		return strdup((char *) mod->getRawEntry());
@@ -328,9 +333,9 @@ char *BackEnd::render_this_text(const char * module_name, const char * text)
 	SWModule *mod;
 	ModMap::iterator it;
 	//-- iterate through the modules until we find modName  
-	it = display_mgr->Modules.find(module_name);
+	it = main_mgr->Modules.find(module_name);
 	//-- if we find the module
-	if (it != display_mgr->Modules.end()) {
+	if (it != main_mgr->Modules.end()) {
 		mod = (*it).second;		
 		return strdup((char *) mod->RenderText(text));
 	}
@@ -457,7 +462,7 @@ void BackEnd::save_entry(const char * entry)
 
 void BackEnd::save_note_entry(const char * module, const char * key, const char * entry)
 {
-	display_mod = display_mgr->Modules[module];
+	display_mod = main_mgr->Modules[module];
 	
 	if (display_mod) {		
 		display_mod->setKey(key);
@@ -664,7 +669,7 @@ char *BackEnd::get_entry_attribute(const char *level1, const char *level2, const
  
 int BackEnd::set_module(const char *module_name)
 {
-	display_mod = display_mgr->Modules[module_name];
+	display_mod = main_mgr->Modules[module_name];
 	if (display_mod) 
 		return 1;
 	else 
@@ -674,7 +679,7 @@ int BackEnd::set_module(const char *module_name)
 
 int BackEnd::set_module_key(const char *module_name, const char *key)
 {
-	display_mod = display_mgr->Modules[module_name];
+	display_mod = main_mgr->Modules[module_name];
 	
 	if (display_mod) {
 		GS_message((f_message,878,"key",key));

@@ -23,7 +23,7 @@
 #include <config.h>
 #endif
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 #include <regex.h>
 
 #include "gui/sidebar.h"
@@ -46,12 +46,12 @@ GtkWidget *remember_search;	/* needed to change button in search stop */
 
 /******************************************************************************
  * Name
- *    on_search_botton_clicked
+ *    on_search_button_clicked
  *
  * Synopsis
  *   #include "shortcutbar_search.h"
  *
- *   void on_search_botton_clicked(GtkButton * button, gpointer user_data)
+ *   void on_search_button_clicked(GtkButton * button, gpointer user_data)
  *
  * Description
  *   prepare to begin search
@@ -60,7 +60,7 @@ GtkWidget *remember_search;	/* needed to change button in search stop */
  *   void
  */
 
-static void on_search_botton_clicked(GtkButton * button, gpointer user_data)
+static void on_search_button_clicked(GtkButton * button, gpointer user_data)
 {
 	if (search_active) {
 		terminate_search = TRUE;
@@ -104,6 +104,7 @@ static void on_search_botton_clicked(GtkButton * button, gpointer user_data)
 static void on_rrbUseBounds_toggled(GtkToggleButton * togglebutton,
 				    gpointer user_data)
 {
+	main_init_sidebar_search_backend();
 	if (togglebutton->active) {
 		gtk_widget_show(ss.frame5);
 	} else {
@@ -414,10 +415,10 @@ void gui_create_search_sidebar(void)
 			 G_CALLBACK(on_rrbUseBounds_toggled),
 			 NULL);
 	g_signal_connect(GTK_OBJECT(remember_search), "clicked",
-			 G_CALLBACK(on_search_botton_clicked), NULL);
+			 G_CALLBACK(on_search_button_clicked), NULL);
 			   
 	g_signal_connect(GTK_OBJECT(ss.entrySearch), "activate",
-			 G_CALLBACK(on_search_botton_clicked), NULL);
+			 G_CALLBACK(on_search_button_clicked), NULL);
 			   
 			   
 	gtk_object_set_data(GTK_OBJECT(widgets.app), "tooltips",

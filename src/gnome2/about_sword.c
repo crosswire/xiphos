@@ -159,7 +159,6 @@ gui_create_about_sword(void)
 
 	href =  gtk_link_button_new_with_label ("http://www.crosswire.org/sword",
                                                        			_("The SWORD Project") );
-	//    gnome_href_new("http://www.crosswire.org/sword", _("The SWORD Project"));
 	gtk_widget_show(href);
 	gtk_box_pack_start(GTK_BOX(vbox), href, FALSE, FALSE, 0);
 

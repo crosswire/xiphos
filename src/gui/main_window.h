@@ -26,7 +26,7 @@
 extern "C" {
 #endif
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 //#include "gui/toolbar_nav.h"
 #include "main/navbar_versekey.h"
 	

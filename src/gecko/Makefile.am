@@ -30,6 +30,8 @@ libgecko_a_CPPFLAGS = \
     -DGECKO_HOME=
 endif
 
+if HAVE_GECKO_1_9
+else
 if HAVE_GECKO_1_8_1
 mozilla_include_subdirs =	\
         .		\
@@ -59,6 +61,7 @@ libgecko_a_CXXFLAGS += \
 libgecko_a_CFLAGS += \
 	$(addprefix -I$(GECKO_INCLUDE_ROOT)/,$(mozilla_include_subdirs))
 
+endif
 endif
 
 endif

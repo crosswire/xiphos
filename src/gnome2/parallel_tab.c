@@ -23,7 +23,7 @@
 #  include <config.h>
 #endif
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 #include <glade/glade-xml.h>
 #ifdef USE_GTKMOZEMBED
 #ifdef WIN32

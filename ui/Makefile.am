@@ -7,6 +7,7 @@ ui_DATA = \
 	prefs.glade \
 	search-dialog.glade \
 	xi-menus.glade \
+	xi-export-bookmarks.glade \
 	arrow_down.png \
 	arrow_down_box.png \
 	arrow_up.png \

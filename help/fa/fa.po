@@ -2,8 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2009-05-11 23:54+0100\n"
-"PO-Revision-Date: 2009-08-22 23:24-0800\n"
-"Last-Translator: nahid <manhid1@yahoo.com>\n"
+"PO-Revision-Date: 2009-09-24 06:54-0800\n"
+"PO-Revision-Date: 2009-09-23 22:44-0800\n"
+"Last-Translator: Mansour <manhid1@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -743,7 +744,7 @@ msgid "Introduction"
 msgstr "مقدمه"
 
 #. Use the Introduction section to give a brief overview of what
-#.      the application is and what it does.
+#. the application is and what it does.
 #: ../C/xiphos.xml:5(para)
 msgid "<application>Xiphos</application> is a Bible study and research tool based upon the \"SWORD Project\" libraries and the GNOME Desktop libraries. You can use <application>Xiphos</application> to do the following:"
 msgstr "<application>زیفوس</application> ابزاری برای مطالعۀ کتاب‏مقدّس است که بر پایۀ \"SWORD Project\" کتابخانه‏های جی‏ان‏او‏ام‏ای بنا شده است. برنامۀ <application>زیفوس</application> را می‏توانید برای موارد زیر بکار ببرید:"
@@ -840,7 +841,7 @@ msgstr "شروع برنامۀ زیفوس برای اولین مرتبه"
 
 #: ../C/xiphos.xml:42(para)
 msgid "When you start <application>Xiphos</application> for the first time, <application>Xiphos</application> creates a default selection of options for display. Also, if no other Sword application has ever been run, and thus there are no Bible modules installed, then <application>Xiphos</application> asks permission to start the Module Manager so that you can select and install a Bible module in your language preference."
-msgstr ""
+msgstr "هنگامی که<application>برنامۀ زیفوس</application> را برای اولین مرتبه باز می‏کنید،<application>زیفوس</application> یک‏سری گزینه‏های قراردادی ایجاد می‏کند. همچنین، چنانچه در گذشته برنامۀ دیگری از سری سورد اجرا شده باشد، ولی با این وجود هیچ مدول کتاب‏مقدس نصب نشده باشد، در آنصورت <application>زیفوس</application> از شما اجازه خواهد خواست تا برنامۀ مدیر مدول را اجرا نماید که به کمک آن شما می‏توانید یک مدول کتاب‏مقدس را به زبانی که بیشتر آنرا ترجیح می‏دهید، نصب کنید."
 
 #: ../C/xiphos.xml:49(title)
 #: ../C/xiphos.xml:62(phrase)
@@ -849,7 +850,7 @@ msgstr "پرسش‏های مرتبط با دانلود کردن زیفوس"
 
 #: ../C/xiphos.xml:69(para)
 msgid "<application>Xiphos</application> then opens its interface with one tab displayed, showing Romans 8:28. Once the interface is open, you can use <menuchoice><guimenuitem>Edit</guimenuitem><guimenuitem>Preferences</guimenuitem></menuchoice> to change any of the selections already made by default."
-msgstr ""
+msgstr "<application>زیفوس</application> در ابتدای اجرای آن یک محیط کاری دارای یک برگه باز می‏کند، که در آن آیۀ رومیان 8: 28 به چشم می‏خورد. کاربر در این محیط کاری، می‏تواند در  بخش <menuchoice><guimenuitem>ویرایش</guimenuitem><guimenuitem>فرمان ترجیحات</guimenuitem></menuchoice> را برگزیند و بدینوسیله تغییرات دلخواه را در قسمت‏هایی که بصورت اتوماتیک ایجاد شده‏اند، بدهد."
 
 #: ../C/xiphos.xml:78(title)
 msgid "Launching Xiphos"
@@ -857,19 +858,19 @@ msgstr "بارگذاری زیفوس"
 
 #: ../C/xiphos.xml:79(para)
 msgid "When you start <application>Xiphos</application>, the following interface is displayed:"
-msgstr "هر زمان که برنامۀ <application>زیفوس</application>را باز کنید، صفحۀ زیر را مشاهده خواهید کرد:"
+msgstr "هر زمان که برنامۀ <application>زیفوس</application>را باز کنید، محیط کاری زیر را مشاهده خواهید کرد:"
 
 #: ../C/xiphos.xml:83(title)
 msgid "Xiphos interface"
-msgstr "صفحات زیفوس"
+msgstr "محیط کاری زیفوس"
 
 #: ../C/xiphos.xml:96(phrase)
 msgid "The Xiphos Interface"
-msgstr ""
+msgstr "محیط کاری زیفوس"
 
 #: ../C/xiphos.xml:103(para)
 msgid "The <application>Xiphos</application> interface contains the following elements:"
-msgstr ""
+msgstr "محیط کاری <application>زیفوس</application>دارای عناصر زیر می‏باشد."
 
 #: ../C/xiphos.xml:108(term)
 #: ../C/xiphos.xml:5(title)
@@ -877,213 +878,213 @@ msgstr ""
 #: ../C/interface.xml:5(title)
 #: ../C/interface.xml:14(title)
 msgid "Menubar"
-msgstr ""
+msgstr "خط فرمان"
 
 #: ../C/xiphos.xml:110(para)
 msgid "The menus on the menubar contain several commands which extend the use of <application>Xiphos </application>. These include the StudyPad and advanced search functions. The menus also help you to customize your use of <application>Xiphos</application>."
-msgstr ""
+msgstr "خط فرمان دارای چند فرمان است که کاربرد<application>زیفوس</application>را گسترش می‏بخشد. این فرامین شامل محلی برای یادداشت‏های مطالعه و نیز توابع جستجوی پیشرفته می‏باشد. فرامی همچنین به شما کمک می‏کنند تا بتوانید استفاده از برنامۀ <application>زیفوس </application>را بسیار شخصی و به دلخواه خود بنمایید."
 
 #: ../C/xiphos.xml:118(term)
 msgid "Toolbar"
-msgstr ""
+msgstr "ستون ابزار"
 
 #: ../C/xiphos.xml:120(para)
 msgid "The <interface>toolbar</interface> contains buttons that let you quickly navigate through the Bible."
-msgstr ""
+msgstr "ستون<interface>ابزار</interface>شامل کلیدهایی است که به شما کمک می‏کند تا به سرعت و سهولت بتوانید از کتاب‏مقدس استفاده نمایید."
 
 #: ../C/xiphos.xml:126(term)
 #: ../C/xiphos.xml:144(title)
 msgid "Sidebar"
-msgstr ""
+msgstr "ستون جانبی"
 
 #: ../C/xiphos.xml:128(para)
 msgid "The <interface>Sidebar</interface> provides access to several features. It contains your bookmarks and the list of installed books. It can also be used to perform simple searches."
-msgstr ""
+msgstr "ستون<interface>جانبی</interface>دستیابی به چندین کاربرد اساسی را ممکن می‏سازذ. این ستون شامل تمام علائم و نیز لیست کتابهایی است که نصب کرده‏اید. این ابزار همچنین برای جستجوهای ساده نیز قابل استفاده است."
 
 #: ../C/xiphos.xml:136(term)
 msgid "Bible Text Pane"
-msgstr ""
+msgstr "چارچوب متن کتاب‏مقدس"
 
 #: ../C/xiphos.xml:138(para)
 msgid "The <interface>Bible Text pane</interface> displays the Bible text which is currently being viewed."
-msgstr ""
+msgstr "چارچوب<interface>متن کتاب‏مقدس</interface>متن کتاب‏مقدسی را که باز دارید نشان می‏دهد."
 
 #: ../C/xiphos.xml:144(term)
 #: ../C/xiphos.xml:517(title)
 #: ../C/xiphos.xml:531(phrase)
 msgid "Previewer"
-msgstr ""
+msgstr "پیش‏نگر"
 
 #: ../C/xiphos.xml:146(para)
 msgid "The <interface>Previewer</interface> displays Bible text module options. These include Strong's numbers, footnotes and morphological tags. It is located below the Bible Text Pane."
-msgstr ""
+msgstr "فرمان <interface>پیش‏نگر</interface>گزینه‏های مدول متن کتاب‏مقدس را نشان می‏دهد. این شامل اعداد مرتبط با کشف‏الآیات استرانگ، پانویس‏ها و نیز علائم زبان‏شناسی می‏باشند. این فرمان در زیر چاچوب متن کتاب‏مقدس قرار دارد."
 
 #: ../C/xiphos.xml:153(term)
 #: ../C/xiphos.xml:571(phrase)
 msgid "Commentary Pane"
-msgstr ""
+msgstr "چارچوب تفاسیر"
 
 #: ../C/xiphos.xml:155(para)
 msgid "The <interface>Commentary pane</interface> displays commentaries on the current Bible Text being used."
-msgstr ""
+msgstr "فرمان<interface>چارچوب تفسیر</interface>کتابهای تفسیری را که در مرتبط با متن کتاب‏مقدس در حال استفاده است، نشان می‏دهد."
 
 #: ../C/xiphos.xml:161(term)
 msgid "Book Pane"
-msgstr ""
+msgstr "چارچوب کتاب"
 
 #: ../C/xiphos.xml:163(para)
 msgid "The <interface>Book Pane</interface> displays general books available from the Sword Project. These include modules like \"Calvin's Institutes\", \"Josephus: The Complete Works\" etc. This Pane can be accessed via the Book View tab just below the Commentary Pane."
-msgstr ""
+msgstr "فرمان <interface>چارچوب کتاب</interface>کتابهای عمومی را که از طریق سورد در اختیار کاربر قرار دارند، نشان می‏دهد. این شامل مدول‏هایی از قبیل کتابهایی چون: \"قوانین کالوین\", \"ژوزفوس: سری کامل نوشتجات \" و غیره. این چارچوب را می‏توان از طریق فرمان مشاهدۀ مرور کتاب که در زیر فرمان چارچوب تفسیر است مورد استفاده قرار داد."
 
 #: ../C/xiphos.xml:171(term)
 msgid "Dictionary/Book Pane"
-msgstr ""
+msgstr "چارچوب فرهنگ واژه‏ها/کتاب"
 
 #: ../C/xiphos.xml:173(para)
 msgid "The <interface>Dictionary/Book Pane</interface> displays dictionary information on selected words in the <interface>Bible Text Pane</interface>. It is located just below the Commentary Pane"
-msgstr ""
+msgstr "گزینه <interface>دیکشنری</interface> تعریف واژه های برگزیده شده را نشان می دهد در در بخش <interface>متن کتاب مقدس</interface>. نشان می دهد این گزینه پس از گزینه تفسیر قرار دارد."
 
 #: ../C/xiphos.xml:180(para)
 msgid "When you right-click in the different interface sections, the interface displays a popup menu, which provides access to more module-specific options, including display controls and printing services."
-msgstr ""
+msgstr "هنگامی که شما در محیط‏های کاری گوناگون روی ماوس رایت‏کلیک بکنید، یک صفحۀ جدید در آن محیط کاری باز خواهد شد، که به شما گزینه‏های بیشتری خواهد داد، شامل کنترل‏های صفحۀ نمایش و خدمات چاپ."
 
 #: ../C/xiphos.xml:392(title)
 msgid "Interface"
-msgstr ""
+msgstr "محیط کاری"
 
 #: ../C/xiphos.xml:6(para)
 #: ../C/interface.xml:6(para)
 msgid "At the top of the <application>Xiphos</application> main window is the menubar. Almost all of the functions are available by activating the appropriate menu item. The functions have been grouped according to their type. For example, the file operations have been grouped into the <guisubmenu>File</guisubmenu> menu."
-msgstr ""
+msgstr "در بخش بالایی برنامۀ<application>زیفوس</application>خط فرمان قرار دارد.تقریباً تمامی کاربردها توسط انتخاب منوی درست اجرا می‏شوند. این کابردها بسته به نوع کاری که انجام می‏دهند گروه‏بندی شده‏اند. بعنوان نمونه، گروه فرامین کاربردی مرتبط با فایل، زیر فرمان<guisubmenu>پرونده</guisubmenu>دسته‏بندی شده‏اند."
 
 #: ../C/xiphos.xml:27(phrase)
 msgid "Xiphos menubar"
-msgstr ""
+msgstr "خط فرمان زیفوس"
 
 #: ../C/xiphos.xml:37(title)
 msgid "Toolbars"
-msgstr ""
+msgstr "ستون‏فرمان"
 
 #: ../C/xiphos.xml:38(para)
 msgid "The function of the Toolbar is to provide control over the Bible and Commentary Panes. Activation of the Toolbar option is done by moving the mouse cursor over the desired toolbar button and selecting it. A tooltip will appear if the mouse cursor is held stationary over a toolbar button, describing the function of the button."
-msgstr ""
+msgstr "The function of the Toolbar is to provide control over the Bible and Commentary Panes. Activation of the Toolbar option is done by moving the mouse cursor over the desired toolbar button and selecting it. A tooltip will appear if the mouse cursor is held stationary over a toolbar button, describing the function of the button.کاربرد ستون ابزار اینست که کنترل‏های مربویط به چارچوب‏های کتاب‏مقدس و تفسیر را فراهم نماید. با حرکت دادن نشانگر ماوس بر روی دکمۀ ابزار مورد نظرتان و انتخاب آن، این گزینه فعال خواهد شد. اگر نشانگر ماوس را برای چند لحظه بر روی ابزار نگاه دارید، یک راهنمای کوچک باز خواهد شد که کاربرد آن کلید را توضیح خواهد داد. "
 
 #: ../C/xiphos.xml:45(title)
 msgid "ToolBar"
-msgstr ""
+msgstr "ابزار"
 
 #: ../C/xiphos.xml:58(phrase)
 msgid "The Toolbar"
-msgstr ""
+msgstr "ابزار"
 
 #: ../C/xiphos.xml:63(para)
 msgid "The <interface>Toolbar</interface> consists of the following functions:"
-msgstr ""
+msgstr "گزینۀ <interface>ابزار</interface>شامل کاربردهای زیر است:"
 
 #: ../C/xiphos.xml:68(para)
 msgid "History View Toggle and drop-down menu"
-msgstr ""
+msgstr "تاریخچه مرور انتخاب و لیست"
 
 #: ../C/xiphos.xml:73(para)
 #: ../C/xiphos.xml:102(title)
 msgid "Bible Book Selector"
-msgstr ""
+msgstr "انتخاب بخشی از کتاب‏مقدس"
 
 #: ../C/xiphos.xml:78(para)
 #: ../C/xiphos.xml:110(title)
 msgid "Bible Chapter Selector"
-msgstr ""
+msgstr "انتخاب فصلی از کتاب‏مقدس"
 
 #: ../C/xiphos.xml:83(para)
 #: ../C/xiphos.xml:118(title)
 msgid "Bible Verse Selector"
-msgstr ""
+msgstr "انتخاب آیه‏ای از کتاب‏مقدس"
 
 #: ../C/xiphos.xml:88(para)
 #: ../C/xiphos.xml:126(title)
 msgid "Bible Passage Summary"
-msgstr ""
+msgstr "خلاصۀ بخش بخصوصی از کتاب‏مقدس"
 
 #: ../C/xiphos.xml:95(title)
 msgid "History Forward/Backward Selector"
-msgstr ""
+msgstr "انتخاب کردن تاریخچۀ پیشین/پسین"
 
 #: ../C/xiphos.xml:96(para)
 msgid "Switches between current and previous passage selections."
-msgstr ""
+msgstr "حرکت بین قسمت برگزیده شدۀ فعلی و پیشین."
 
 #: ../C/xiphos.xml:103(para)
 msgid "Selects the Biblical book to be displayed in the <interface>Bible Text Pane</interface> and <interface>Commentary Pane</interface>. Changes take immediate effect."
-msgstr ""
+msgstr "این فرمان یک کتاب از کتاب‏مقدس را که مایل هستید در بخش <interface>چارچوب متن کتاب‏مقدس</interface> و <interface>چارچوب تفسیر</interface>نشان می‏دهد. هرگونه تغییری در این قسمت بلافاصله اعمال خواهد شد."
 
 #: ../C/xiphos.xml:111(para)
 msgid "Selects the Biblical chapter of current book to be displayed in the <interface>Bible Text Pane</interface> and <interface>Commentary Pane</interface>. Changes take immediate effect."
-msgstr ""
+msgstr "این فرمان فصلی از کتاب‏مقدس را که مایل هستید در بخش <interface>چارچوب متن کتاب‏مقدس</interface> و <interface>چارچوب تفسیر</interface>نشان می‏دهد. هرگونه تغییری در این قسمت بلافاصله اعمال خواهد شد."
 
 #: ../C/xiphos.xml:119(para)
 msgid "Selects the Biblical verse of current chapter to be displayed in the <interface>Bible Text Pane</interface> and <interface>Commentary Pane</interface>. Changes take immediate effect."
-msgstr ""
+msgstr "این فرمان یک آیه از کتاب‏مقدس را که مایل هستید در بخش <interface>چارچوب متن کتاب‏مقدس</interface> و <interface>چارچوب تفسیر</interface>نشان می‏دهد. هرگونه تغییری در این قسمت بلافاصله اعمال خواهد شد."
 
 #: ../C/xiphos.xml:127(para)
 msgid "Allows manual editing of passages which are displayed in the <interface>Bible Text Pane</interface> and <interface>Commentary Pane</interface>. Changes take effect once Enter is typed."
-msgstr ""
+msgstr "Allows manual editing of passages which are displayed in the <interface>Bible Text Pane</interface> and <interface>Commentary Pane</interface>. Changes take effect once Enter is typed.این فرمان، اجازه می‏دهد که شما قسمتهایی  را که مایل هستید در بخش <interface>چارچوب متن کتاب‏مقدس</interface> و <interface>چارچوب تفسیر</interface>ویرایش کنید. هرگونه تغییری در این قسمت بلافاصله اعمال خواهد شد."
 
 #: ../C/xiphos.xml:132(para)
 msgid "Ensure that edited book,chapter and verse naming is correct, otherwise the wrong or no information will be displayed."
-msgstr ""
+msgstr "لطفا اطمینان حاصل کنید که کتاب، فصل، و یا آیه‏ای که آنرا ویرایش کرده‏اید به درستی نامگذاری شده است، در غیر اینصورت اطلاعات اشتباه نمایش داده خواهد شد."
 
 #: ../C/xiphos.xml:142(title)
 #: ../C/xiphos.xml:157(phrase)
 msgid "The Sidebar"
-msgstr ""
+msgstr "ابزار جانبی"
 
 #: ../C/xiphos.xml:163(para)
 msgid "On the left hand side of <application>Xiphos</application> there is the Sidebar. Here the user can switch between the different Sword modules, view bookmarks, do simple searches and view verse lists. To switch between all Sidebar functions, shortcuts have been placed at the bottom of the Sidebar. Clicking on the shortcut activates the option."
-msgstr ""
+msgstr "در بخش کناری برنامۀ<application>زیفوس</application>ستون جانبی به چشم می‏خورد. در این بخش، کاربر می‏تواند بین مدول‏های مختلف حرکت کند، علامت‏گذاری‏هایش را مشاهده کند، فرمان جستجوی ساده را اجرا کند و لیست آیات را مشاهده نماید. به منظور تغییر کاربرد فرامین ستون جانبی، آیکون‏هایی به همین منظور ساخته شده‏اند که در پایین ستون جانبی قرار دارند. توسط کلیک کردن بر روی این آیکون‏ها، مسیرهای کوتاه فعال و اجرا خواهند شد. "
 
 #: ../C/xiphos.xml:170(title)
 msgid "Sidebar Shortcuts"
-msgstr ""
+msgstr "میان‏بر به ابزار جانبی"
 
 #: ../C/xiphos.xml:183(phrase)
 msgid "Sidebar shortcuts"
-msgstr ""
+msgstr "میان‏بر به ابزار جانبی"
 
 #: ../C/xiphos.xml:191(title)
 msgid "The Bible Text Pane"
-msgstr ""
+msgstr "چارچوب متن کتاب‏مقدس"
 
 #: ../C/xiphos.xml:193(title)
 msgid "The Bible Textpane"
-msgstr ""
+msgstr "چارچوب متن کتاب‏مقدس"
 
 #: ../C/xiphos.xml:206(phrase)
 msgid "The Bible textpane"
-msgstr ""
+msgstr "چارچوب متن کتاب‏مقدس"
 
 #: ../C/xiphos.xml:212(para)
 msgid "Positioned to the right of the Shortcut bar is the Bible text pane. All your different translations will be displayed for full viewing. When starting <application>Xiphos</application> either your default Bible translation or the translation last used will be displayed."
-msgstr ""
+msgstr "در سمت راست ستون شورت‏کات‏ها، چارچوب متن کتاب‏مقدس قرار دارد. تمام ترجمه‏های گوناگونی که شما دارید در این قسمت نشان داده می‏شوند. هنگامی که برنامۀ <application>زیفوس</application>را باز می‏کنید، بصورت اتوماتیک یا کتاب‏مقدس استاندارد شما و یا آخرین کتاب‏مقدسی که باز کرده بودید، بر روی این صفحه باز خواهد شد. "
 
 #: ../C/xiphos.xml:219(title)
 msgid "Opening A Specific Bible Translation"
-msgstr ""
+msgstr "باز کردن ترجمۀ خاصی از کتاب‏مقدس"
 
 #: ../C/xiphos.xml:220(para)
 msgid "In order to change the current Bible translation to another of your choice:"
-msgstr ""
+msgstr "به منظور تعویض ترجمۀ فعلی کتاب‏مقدس به یکی دیگر از ترجمه‏ها:"
 
 #: ../C/xiphos.xml:225(para)
 msgid "right-click in the <interface>Bible Text Pane</interface>. In the popup menu choose <menuchoice><guimenuitem>File</guimenuitem><guimenuitem>Open Module</guimenuitem></menuchoice> and select your specific translation that you want to view."
-msgstr ""
+msgstr "بر روی <interface>چارچوب متن کتاب‏مقدس</interface>رایت‏کلیک کنید. از صفحۀ فهرستی که باز شد، گزینۀ <menuchoice><guimenuitem>پرونده</guimenuitem><guimenuitem>بازکردن مدول</guimenuitem></menuchoice>را برگزینید و سپس ترجمه‏ای را دوست دارید، استفاده کنید، باز نمایید."
 
 #: ../C/xiphos.xml:232(para)
 msgid "under the <guibutton>Modules</guibutton> option in the <interface>Sidebar</interface>, choose <menuchoice><guimenuitem>Biblical Texts</guimenuitem><guimenuitem>language choice</guimenuitem></menuchoice> and select your specific translation."
-msgstr ""
+msgstr "زیر عنوان<guibutton> مدول‏ها،</guibutton>در بخش <interface>ستون جانبی</interface>،گزینۀ<menuchoice><guimenuitem>متون کتابمقدس</guimenuitem><guimenuitem>،زبان مورد علاقه</guimenuitem></menuchoice>، و ترجمۀ خاصی را که دوست دارید، می‏توانید انتخاب کنید."
 
 #: ../C/xiphos.xml:242(title)
 msgid "Using the Parallel View Mode"
-msgstr ""
+msgstr "استفاده از کاربرد موازی"
 
 #: ../C/xiphos.xml:243(para)
 msgid "A nice function in <application>Xiphos</application> is the ability to view your specified bible text in five parallel translations of your choice. The Parallel View mode can be accessed by selecting <guimenuitem>Parallel View</guimenuitem> just below the <interface>Bible Text Pane</interface>, next to the <guimenuitem>Standard View</guimenuitem> tab. Please note that you can only view one verse at a time. You can change the verse by selecting another verse, chapter, or book at the toolbar. Also note that modules that are Old Testament or New Testament only (eg Westminster Leningrad Codex and Byzantine Majority Text ) will not be able to display books, chapters, or verses that they don't have."
@@ -1092,7 +1093,7 @@ msgstr ""
 #: ../C/xiphos.xml:252(title)
 #: ../C/xiphos.xml:264(phrase)
 msgid "Bible textpane - parallel view"
-msgstr ""
+msgstr "چارچوب متن کتاب‏مقدس- نگرش موازی"
 
 #: ../C/xiphos.xml:270(para)
 msgid "Additionally, a separate Parallel View window can be selected from the right click menu with <guimenuitem>Detach/Attach</guimenuitem>. Your Bible pane will return to its normal single text view, and the new Parallel View window will show the complete chapter, in all 5 translations."
@@ -1101,15 +1102,15 @@ msgstr ""
 #: ../C/xiphos.xml:276(title)
 #: ../C/xiphos.xml:288(phrase)
 msgid "Parallel View - separate window"
-msgstr ""
+msgstr "نگرش موازی - پنجره‏ای دیگر"
 
 #: ../C/xiphos.xml:297(title)
 msgid "Opening A Separate Bible Translation"
-msgstr ""
+msgstr "ترجمۀ دیگری از کتاب‏مقدس را باز می‏کند"
 
 #: ../C/xiphos.xml:298(para)
 msgid "In order to view a Bible translation separate from the <application>Xiphos</application> interface:"
-msgstr ""
+msgstr "به منظور مشاهدۀ یک ترجمۀ دیگری از کتاب‏مقدس از ترجمه‏های موجود در <application>محیط کاری</application>زیفوس:"
 
 #: ../C/xiphos.xml:303(para)
 msgid "Under the <guibutton>Modules</guibutton> option in the <interface>Sidebar</interface>,choose <menuchoice><guimenuitem>Biblical Texts</guimenuitem><guimenuitem>language choice</guimenuitem></menuchoice>. Then right-click on a translation and choose the <guimenuitem>Open in dialog</guimenuitem> option."
@@ -1129,13 +1130,13 @@ msgstr ""
 
 #: ../C/xiphos.xml:326(para)
 msgid "Under the <guibutton>Modules</guibutton> option in the <interface>Sidebar</interface>,choose <menuchoice><guimenuitem>Biblical Texts</guimenuitem><guimenuitem>language choice</guimenuitem></menuchoice>. Then right-click on a translation and choose the <guimenuitem>About</guimenuitem> option."
-msgstr ""
+msgstr "تحت <guibutton>مدول‏های</guibutton>موجود در<interface>ستون جانبی،</interface>گزینۀ<menuchoice><guimenuitem>متون کتاب‏مقدس</guimenuitem><guimenuitem>گزینۀ زبان‏ها</guimenuitem></menuchoice>را برگزینید. سپس روی یک ترجمه کلیک سمت راست ماوس را فشار دهید و در این قسمت گزینۀ<guimenuitem>در بارۀ</guimenuitem>را برگزینید."
 
 #: ../C/xiphos.xml:337(title)
 #: ../C/xiphos.xml:395(title)
 #: ../C/xiphos.xml:407(phrase)
 msgid "Module Options"
-msgstr ""
+msgstr "گزینه‏های مدول"
 
 #: ../C/xiphos.xml:338(para)
 msgid "Most Bible translations have additional options which the user can select."
@@ -1143,31 +1144,31 @@ msgstr ""
 
 #: ../C/xiphos.xml:343(para)
 msgid "Words Of Christ In Red"
-msgstr ""
+msgstr "کلمات عیسی مسیح به رنگ قرمز"
 
 #: ../C/xiphos.xml:348(para)
 msgid "Strong's Numbers"
-msgstr ""
+msgstr "شماره‏های کشف‏الآیات استرانگ"
 
 #: ../C/xiphos.xml:353(para)
 msgid "Morphological Tags"
-msgstr ""
+msgstr "علائم واژه‏شناسی"
 
 #: ../C/xiphos.xml:358(para)
 msgid "Footnotes"
-msgstr ""
+msgstr "پانویس‏ها"
 
 #: ../C/xiphos.xml:363(para)
 msgid "Scripture Cross-Reference"
-msgstr ""
+msgstr "ارجاعات به کتاب‏مقدس"
 
 #: ../C/xiphos.xml:368(para)
 msgid "Headings"
-msgstr ""
+msgstr "سر تیترها"
 
 #: ../C/xiphos.xml:373(para)
 msgid "Image Content"
-msgstr ""
+msgstr "محتویات تصویر"
 
 #: ../C/xiphos.xml:379(para)
 msgid "Translations in other languages such as Greek or Hebrew have specific options which deal only with the specific language."
@@ -1175,17 +1176,17 @@ msgstr ""
 
 #: ../C/xiphos.xml:383(para)
 msgid "In order to access these options:"
-msgstr ""
+msgstr "به منظور دستیابی به این گزینه‏ها:"
 
 #: ../C/xiphos.xml:388(para)
 msgid "right-click in the <interface>Bible Text pane</interface>. In the popup menu (example shown), choose <guibutton>Module Options</guibutton> and select the specific option."
-msgstr ""
+msgstr "روی ماوس رایت کلیک کنید،<interface>چارچوب متن کتابمقدس باز خواهد شد.</interface>در منویی که باز خواهد شد (مانند نمونۀ زیر)،<guibutton>گزینۀ مدول</guibutton>را انتخاب و کاربرد مورد نظر را علامت گذاری کنید."
 
 #: ../C/xiphos.xml:416(title)
 #: ../C/xiphos.xml:421(title)
 #: ../C/xiphos.xml:433(phrase)
 msgid "View Options"
-msgstr ""
+msgstr "گزینه‏های مرور"
 
 #: ../C/xiphos.xml:417(para)
 msgid "There are several additional modes that can be selected from the menubar's <guimenuitem>View</guimenuitem> pulldown."
@@ -2577,7 +2578,7 @@ msgid "A copy of the <citetitle>GNU General Public License</citetitle> is includ
 msgstr ""
 
 #. Use the Introduction section to give a brief overview of what
-#.      the application is and what it does.
+#. the application is and what it does.
 #: ../C/introduction.xml:5(para)
 msgid "is a Bible study and research tool based upon the \"SWORD Project\" libraries and the GNOME Desktop libraries. You can use to do the following:"
 msgstr ""

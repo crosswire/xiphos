@@ -22,7 +22,7 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <gnome.h>
+#include <gtk/gtk.h>
 #include <regex.h>
 #include <ctype.h>
 #include <swmodule.h>
@@ -53,6 +53,10 @@ extern "C" {
 #include "backend/sword_main.hh"
 
 #include "gui/debug_glib_null.h"
+
+#ifdef HAVE_DBUS
+#include "gui/ipc.h"
+#endif
 
 #define SEARCHING N_("Searching the ")
 #define SMODULE N_(" Module")
@@ -96,6 +100,11 @@ static void fill_search_results_list(int finds)
 	gchar *buf1 = _("matches");
 	RESULTS *list_item;
 	gchar *num;
+
+	if (!backendSearch)
+		main_init_sidebar_search_backend();
+
+	is_search_result = TRUE;
 	
 	if (list_of_verses) {
 		GList *chaser = list_of_verses;
@@ -109,31 +118,32 @@ static void fill_search_results_list(int finds)
 		g_list_free(list_of_verses);
 		list_of_verses = NULL;
 	}
-	
+
 	gtk_widget_set_sensitive(sidebar.menu_item_save_search,FALSE);
 	selection = gtk_tree_view_get_selection
-                                          (GTK_TREE_VIEW(sidebar.results_list));
-	model = gtk_tree_view_get_model(GTK_TREE_VIEW(sidebar.results_list));
-	list_store = GTK_LIST_STORE(model);
-	gtk_list_store_clear(list_store);
+		(GTK_TREE_VIEW(sidebar.results_list));
+	list_store = gtk_list_store_new(1, G_TYPE_STRING);
+
 	backendSearch->set_listkey_position((char) 1);	/* TOP */
 	while ((key_buf = backendSearch->get_next_listkey()) != NULL) {
 		tmpbuf = (gchar*) key_buf;
 		gtk_list_store_append(list_store, &iter);
 		gtk_list_store_set(list_store, &iter, 0,
-					   tmpbuf, -1);
+				   tmpbuf, -1);
 		list_item = g_new(RESULTS,1);
 		list_item->module = g_strdup(settings.sb_search_mod);
 		list_item->key = g_strdup(tmpbuf);
 		list_of_verses = g_list_append(list_of_verses, 
-						(RESULTS *) list_item);
+					       (RESULTS *) list_item);
 	}
-	
+
+	model = GTK_TREE_MODEL(list_store);
+	gtk_tree_view_set_model (GTK_TREE_VIEW(sidebar.results_list), model);
+
 	num = main_format_number(finds);
 	sprintf(buf, "%s %s", num, buf1);
 	g_free(num);
 	gui_set_statusbar (buf);
-	//gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), buf);
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_sidebar),3);
 	/* cleanup progress bar */
 	gtk_progress_bar_update(GTK_PROGRESS_BAR(ss.progressbar_search),
@@ -145,23 +155,36 @@ static void fill_search_results_list(int finds)
 	gtk_widget_set_sensitive(sidebar.menu_item_save_search,TRUE);
 	path = gtk_tree_model_get_path(model,&iter);				
 	gtk_tree_selection_select_path(selection,
-                                             path);
+				       path);
 	gtk_tree_path_free(path);	 
 	gui_verselist_button_release_event(NULL,NULL,NULL);
+	return;
 }
 
+#ifdef HAVE_DBUS
+GList* get_list_of_references()
+{
+	RESULTS* list_item;
+	GList *tmp = list_of_verses;
+	GList *references = NULL;
+	while (tmp) {
+		list_item = (RESULTS*)tmp->data;
+		references = g_list_append(references, list_item->key);
+		tmp = g_list_next(tmp);
+	}
+	return g_list_first(references);
+}	
+#endif
 
 /******************************************************************************
  * Name
- *    on_search_botton_clicked
+ *    main_do_sidebar_search
  *
  * Synopsis
- *   #include "shortcutbar_search.h"
- *
- *   void on_search_botton_clicked(GtkButton * button, gpointer user_data)
+ *    main_do_sidebar_search(gpointer user_data)
  *
  * Description
- *   prepare to begin search
+ *   search from sidebar
  *
  * Return value
  *   void
@@ -170,9 +193,12 @@ static void fill_search_results_list(int finds)
 void main_do_sidebar_search(gpointer user_data)
 {
 	GString *new_search = g_string_new(NULL);
-	int search_params, finds;
+	gint search_params, finds;
 	const char *search_string = NULL;
 	char *search_module;	
+
+	if (!backendSearch)
+		main_init_sidebar_search_backend();
 	
 	gtk_widget_set_sensitive(sidebar.menu_item_save_search,FALSE);
 	search_dialog = FALSE;
@@ -241,7 +267,7 @@ void main_do_sidebar_search(gpointer user_data)
 	search_active = TRUE;
 
 	// must ensure that no accents or vowel points are enabled.
-	SWMgr *mgr = backendSearch->get_main_mgr();
+	SWMgr *mgr = backendSearch->get_mgr();
 	mgr->setGlobalOption("Greek Accents", "Off");
 	mgr->setGlobalOption("Hebrew Vowel Points", "Off");
 	mgr->setGlobalOption("Arabic Vowel Points", "Off");
@@ -256,11 +282,24 @@ void main_do_sidebar_search(gpointer user_data)
 
 	search_active = FALSE;
 
-	fill_search_results_list(finds);
+	fill_search_results_list (finds);
+
+#ifdef HAVE_DBUS
+	IpcObject *obj = ipc_get_main_ipc();
+	if (obj){
+		obj->references = get_list_of_references();
+		ipc_object_search_performed(obj, settings.searchText,
+					    &finds, NULL);
+	}
+#endif
+	
 }
 
 void main_sidebar_perscomm_dump(void)
 {
+	if (!backendSearch)
+		main_init_sidebar_search_backend();
+	
 	strcpy(settings.sb_search_mod,settings.MainWindowModule);
 	backendSearch->clear_scope();
 	backendSearch->clear_search_list();
@@ -269,12 +308,16 @@ void main_sidebar_perscomm_dump(void)
 		/* find one character */	".",
 		/* regexp */			0,
 		/* case is irrelevant */	0,
-		/* happening in sidebar */	FALSE));
+						 /* happening in sidebar */	FALSE));
 }
 
 void main_init_sidebar_search_backend(void)
 {
-	backendSearch = new BackEnd();
+	if (!backendSearch)
+	{
+		backendSearch = new BackEnd();
+		main_search_sidebar_fill_bounds_combos();
+	}
 }
 
 void main_delete_sidebar_search_backend(void)
@@ -289,7 +332,10 @@ void main_search_sidebar_fill_bounds_combos(void)
 	char *module_name;
 	int i = 0;
 	int testaments;
-	
+
+	if (!backendSearch)
+		main_init_sidebar_search_backend();
+
 	//module_name = settings.sb_search_mod;
 	module_name = g_strdup(settings.MainWindowModule);
 
@@ -361,6 +407,8 @@ void main_sidebar_search_percent_update(char percent, void *userData)
 	float num;
 	char buf[80];
 	static char printed = 0;
+	if (!backendSearch)
+		main_init_sidebar_search_backend();
 	
 	if (terminate_search) {
 		backendSearch->terminate_search();

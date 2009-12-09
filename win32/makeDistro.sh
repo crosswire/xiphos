@@ -30,20 +30,6 @@ cd ..
 ./waf
 ./waf install
 
-# convert English help manual to chm
-cd help/C
-xsltproc /share/docbook/htmlhelp/htmlhelp.xsl xiphos.xml
-hhc htmlhelp.hhp
-cp htmlhelp.chm ../../win32/binaries/Xiphos/share/help/C/xiphos.chm
-
-# convert French help manual to chm
-cd ../fr
-xsltproc /share/docbook/htmlhelp/htmlhelp.xsl xiphos.xml
-hhc htmlhelp.hhp
-cp htmlhelp.chm ../../win32/binaries/Xiphos/share/help/fr/xiphos_fr.chm
-
-cd ../../
-
 # copy sword utils and libs
 outdir=win32/binaries/Xiphos/bin/
 origdir=/usr/local/bin/
