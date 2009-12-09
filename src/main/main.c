@@ -25,6 +25,7 @@
 
 
 #include <string.h>
+#include <glib.h>
 
 #include "gui/dialog.h"
 #include "gui/gui.h"
@@ -75,7 +76,7 @@ int main(int argc, char *argv[])
 	GTimer *total;
 	double d;
 
-	g_thread_init(NULL);
+	//	g_thread_init(NULL);
 	g_type_init();
 	total = g_timer_new();
 

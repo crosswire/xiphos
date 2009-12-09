@@ -120,6 +120,7 @@ char *gconf_keys[GS_GCONF_MAX][2] = {
     { "/desktop/gnome/url-handlers/sword/needs_terminal", (char *) 0 }
 };
 
+#ifndef WIN32
 void gconf_setup()
 {
 	int i;
@@ -174,7 +175,7 @@ void gconf_setup()
 #endif /* DEBUG */
 	}
 }
-
+#endif /* WIN32 */
 
 #ifdef DEBUG
 
