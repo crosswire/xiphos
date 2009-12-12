@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-09 04:25-0500\n"
-"PO-Revision-Date: 2009-12-10 00:45+0000\n"
+"POT-Creation-Date: 2009-12-12 12:02+0000\n"
+"PO-Revision-Date: 2009-12-12 12:09+0000\n"
 "Last-Translator: Ari Constâncio <Unknown>\n"
 "Language-Team: Xiphos Project\n"
 "MIME-Version: 1.0\n"
@@ -450,7 +450,7 @@ msgstr "Usar a fonte por omissão para este módulo"
 #. *
 #. * Return value
 #. *   void
-#. 
+#.
 #: ../src/gnome2/gui.c:110
 msgid ""
 "URL references using \"sword://\" (similar to web page\n"
@@ -490,8 +490,8 @@ msgid ""
 "Xiphos failed to complete handler init for key #%d:\n"
 "%s"
 msgstr ""
-"Xiphos não conseguiu completar a inicialização do handler para a chave #%d: "
-"\n"
+"Xiphos não conseguiu completar a inicialização do handler para a chave #%"
+"d: \n"
 "%s"
 
 #: ../src/gnome2/gui.c:212
@@ -694,8 +694,7 @@ msgstr "Clique na caixa para trabalhar neste módulo"
 
 #: ../src/gnome2/mod_mgr.c:471
 msgid "Click the box to select this module for install/update"
-msgstr ""
-"Clique na caixa para seleccionar este módulo para instalar/actualizar"
+msgstr "Clique na caixa para seleccionar este módulo para instalar/actualizar"
 
 #: ../src/gnome2/mod_mgr.c:490
 msgid "Installed"
@@ -753,7 +752,7 @@ msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:759
 msgid " archived in: \n"
-msgstr ""
+msgstr "arquivado em: \n"
 
 #: ../src/gnome2/mod_mgr.c:815
 msgid "Journals and prayer lists cannot be indexed."
@@ -932,12 +931,16 @@ msgid ""
 "You have uninstalled your last Bible.\n"
 "Xiphos requires at least one."
 msgstr ""
+"Desinstalou a sua última Bíblia.\n"
+"Xiphos requer no mínimo uma."
 
 #: ../src/gnome2/mod_mgr.c:2288
 msgid ""
 "There are still no Bibles installed.\n"
 "Xiphos cannot continue without one."
 msgstr ""
+"Ainda não tem Bíblias instaladas.\n"
+"Xiphos não pode continuar sem nenhuma."
 
 #: ../src/gnome2/mod_mgr.c:2353
 msgid "Standard remote sources have been loaded."
@@ -1002,7 +1005,7 @@ msgstr "Apagar uma fonte remota"
 #. *
 #. * Return value
 #. *   void
-#. 
+#.
 #: ../src/gnome2/mod_mgr.c:3244
 msgid ""
 "<b>Welcome to the Module Manager.</b>\n"
@@ -1012,8 +1015,8 @@ msgid ""
 "it over.\n"
 "(You will see this information box just once.)\n"
 "\n"
-"Modules come from different <u>repositories</u>.  <b>Module Sources: "
-"Add/Remove</b> will show you what repositories are currently known.\n"
+"Modules come from different <u>repositories</u>.  <b>Module Sources: Add/"
+"Remove</b> will show you what repositories are currently known.\n"
 "\n"
 "<b>Module Sources: Choose</b> is for deciding from where modules should "
 "come, that is, from which repository Xiphos should obtain them, as well as "
@@ -1626,11 +1629,11 @@ msgstr "Minha Lista de Oração"
 
 #: ../src/main/prayerlists.cc:342
 msgid ""
-"<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</b><br>pews<br>fellowsh"
-"ip<br>Bibles for missionaries<br><br><br>"
+"<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</"
+"b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"
 msgstr ""
-"<b>Pessoas:</b><br>Bob<br>Sam<br>Sue<br><br><b>Igreja:</b><br>bancos<br>congr"
-"egação<br>Bíblias para missionários<br><br><br>"
+"<b>Pessoas:</b><br>Bob<br>Sam<br>Sue<br><br><b>Igreja:</"
+"b><br>bancos<br>congregação<br>Bíblias para missionários<br><br><br>"
 
 #: ../src/main/prayerlists.cc:368
 msgid "A subject-based prayer list. \\par\\par Module created by Xiphos."
@@ -2921,11 +2924,11 @@ msgstr "Rádio Frase exacta"
 
 #: ../ui/search-dialog.glade.h:46
 msgid "Export"
-msgstr ""
+msgstr "Exportar"
 
 #: ../ui/search-dialog.glade.h:47
 msgid "Export current search results"
-msgstr ""
+msgstr "Exportar os resultados da pesquisa actual"
 
 #: ../ui/search-dialog.glade.h:48
 msgid ""
@@ -3171,15 +3174,15 @@ msgstr "Sobre _Xiphos"
 
 #: ../ui/xi-menus.glade.h:4
 msgid "Add Item"
-msgstr ""
+msgstr "Adicionar Item"
 
 #: ../ui/xi-menus.glade.h:5
 msgid "Add Sub-Item"
-msgstr ""
+msgstr "Adicionar Sub-Item"
 
 #: ../ui/xi-menus.glade.h:6
 msgid "Add a sub-item"
-msgstr ""
+msgstr "Adicionar um sub-item"
 
 #: ../ui/xi-menus.glade.h:7
 msgid "Add an item"
@@ -3219,11 +3222,11 @@ msgstr "Comentário por capítulo"
 
 #: ../ui/xi-menus.glade.h:19
 msgid "Create a new daily journal"
-msgstr ""
+msgstr "Criar um novo diário"
 
 #: ../ui/xi-menus.glade.h:20
 msgid "Create a new monthly journal"
-msgstr ""
+msgstr "Criar um novo registo mensal"
 
 #: ../ui/xi-menus.glade.h:21
 msgid "Create a new outlined topic"
@@ -3243,7 +3246,7 @@ msgstr "Texto em Espaço D_uplo"
 
 #: ../ui/xi-menus.glade.h:25
 msgid "Daily"
-msgstr ""
+msgstr "Diário"
 
 #: ../ui/xi-menus.glade.h:26
 msgid "Delete Item"
@@ -3291,7 +3294,7 @@ msgstr "Exportar Pasta"
 
 #: ../ui/xi-menus.glade.h:38
 msgid "Export List"
-msgstr ""
+msgstr "Exportar Lista"
 
 #: ../ui/xi-menus.glade.h:45
 msgid "Image Content"
@@ -3358,6 +3361,8 @@ msgid ""
 "Open selected module in a\n"
 "\tseparate ['dialog'] window"
 msgstr ""
+"Abrir módulo seleccionado numa\n"
+"      janela ['diálogo'] separada "
 
 #: ../ui/xi-menus.glade.h:66
 msgid "Open selected module in a new tab"
@@ -3381,7 +3386,7 @@ msgstr "Ler Selecção em voz alta"
 
 #: ../ui/xi-menus.glade.h:73
 msgid "Remove folder and save it"
-msgstr ""
+msgstr "Remover pasta e guardá-la"
 
 #: ../ui/xi-menus.glade.h:74
 msgid "Remove this item"
@@ -3658,7 +3663,8 @@ msgstr "Guia Bíblico Xiphos"
 
 #~ msgid "Enter a Verse reference in Book 1:1 format and press Return"
 #~ msgstr ""
-#~ "Introduza uma referência de versículo no formato Livro 1:1 e pressione Return"
+#~ "Introduza uma referência de versículo no formato Livro 1:1 e pressione "
+#~ "Return"
 
 #~ msgid "Dictionary/_Lexicon"
 #~ msgstr "Dicionário/_Léxico"
