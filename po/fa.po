@@ -130,10 +130,8 @@ msgstr "حذف"
 msgid "Delete current note"
 msgstr "یادداشت فعلی را حذف کن"
 
-#: ../src/editor/slib-editor.c:780
-#: ../ui/editor_note.xml.h:14
-#: ../ui/editor_studypad.xml.h:20
-#: ../ui/editor.xml.h:13
+#: ../src/editor/slib-editor.c:780 ../ui/editor_note.xml.h:14
+#: ../ui/editor_studypad.xml.h:20 ../ui/editor.xml.h:13
 #: ../ui/xi-menus.glade.h:106
 msgid "_File"
 msgstr "پرونده"
@@ -159,16 +157,13 @@ msgstr "مرور"
 msgid "Save"
 msgstr "ضبط"
 
-#: ../src/editor/slib-editor.c:878
-#: ../src/editor/slib-editor.c:885
-#, fuzzy
+#: ../src/editor/slib-editor.c:878 ../src/editor/slib-editor.c:885
 msgid "Insert Link"
 msgstr "ایجاد علامت "
 
-#: ../src/gecko/gecko-html.cpp:177
-#: ../src/gnome2/html.c:165
+#: ../src/gecko/gecko-html.cpp:177 ../src/gnome2/html.c:165
 msgid "Unlock "
-msgstr "قفل را باز کن"
+msgstr "قفل را باز کن "
 
 #: ../src/gecko/gecko-print.c:172
 msgid "Preparing to print"
@@ -220,8 +215,8 @@ msgstr ""
 "پروژه سورد بر این تلاش است که نرم افزار فزاینده‌ای به جهت مطالعه کلام خدا در "
 "دسترس بگذارد. این نرم افزار برای شخص این امکان را فراهم می‌کند که مطابق نیاز "
 "خود متون کتابمقدس، تفاسیر، کتب فرهنگ لغات، و دیگر کتب منابع را به هر مقدار "
-"که مي‌خواهد، در این نرم افزار نصب کند. مدولهای نصب شده این قابلیت را دارند "
-"که افراد مختلف به شکل مشترک در آن کار کنند."
+"که مي‌خواهد، در این نرم افزار نصب کند. مدولهای نصب شده این قابلیت را دارند که "
+"افراد مختلف به شکل مشترک در آن کار کنند."
 
 #: ../src/gnome2/about_sword.c:106
 msgid "About the SWORD Project"
@@ -248,9 +243,9 @@ msgid ""
 "other languages. If you are able to translate for us, please see the link "
 "below, contact us, and get involved with our efforts."
 msgstr ""
-"آیا از برنامۀ زیفوس برای مطالعۀ کتاب‏مقدس خوشتان آمده است؟ آیا مشتاق هستید "
-"که که زیفوس به زبانهای دیگر نیز ترجمه شود؟ شما می‏توانید در کار ترجمۀ زیفوس "
-"با ما همگام شوید! \n"
+"آیا از برنامۀ زیفوس برای مطالعۀ کتاب‏مقدس خوشتان آمده است؟ آیا مشتاق هستید که "
+"که زیفوس به زبانهای دیگر نیز ترجمه شود؟ شما می‏توانید در کار ترجمۀ زیفوس با "
+"ما همگام شوید! \n"
 "\n"
 "ما همیشه علاقمند هستیم که زیفوس را به زبانهای دیگر ترجمه کنیم. لذا اگر از "
 "توان ترجمه برخوردارید، خواهش می‌کنیم با لینک زیر با ما تماس بگیرید و در این "
@@ -460,7 +455,7 @@ msgstr "قلم پیش گزیده را برای این عنوان استفاده 
 #. *
 #. * Return value
 #. *   void
-#. 
+#.
 #: ../src/gnome2/gui.c:110
 msgid ""
 "URL references using \"sword://\" (similar to web page\n"
@@ -524,28 +519,10 @@ msgstr "زیفوس- نرم افزار مطالعۀ کتاب‏مقدس"
 msgid "Open a new tab"
 msgstr "بخش جدیدی را باز کن"
 
-#<<<<<<< variant A
-#: ../src/gnome2/main_window.c:923
-#: ../src/gnome2/sidebar.c:627
-#: ../src/gnome2/sidebar.c:633
-#: ../src/main/sidebar.cc:666
-#: ../src/main/sidebar.cc:1015
-#: ../src/main/sidebar.cc:1016
-#: ../src/main/sidebar.cc:1017
-#>>>>>>> variant B
 #: ../src/gnome2/main_window.c:923 ../src/gnome2/sidebar.c:627
 #: ../src/gnome2/sidebar.c:633 ../src/main/sidebar.cc:666
 #: ../src/main/sidebar.cc:1015 ../src/main/sidebar.cc:1016
 #: ../src/main/sidebar.cc:1017
-####### Ancestor
-#: ../src/gnome2/main_window.c:894
-#: ../src/gnome2/sidebar.c:621
-#: ../src/gnome2/sidebar.c:627
-#: ../src/main/sidebar.cc:643
-#: ../src/main/sidebar.cc:964
-#: ../src/main/sidebar.cc:965
-#: ../src/main/sidebar.cc:966
-#======= end
 msgid "Standard View"
 msgstr "نگرش استاندارد"
 
@@ -593,35 +570,13 @@ msgstr "انتخاب نام تفسیر"
 msgid "New Name"
 msgstr "نام جدید"
 
-#<<<<<<< variant A
-#: ../src/gnome2/menu_popup.c:1193
-#: ../src/gnome2/treekey-editor.c:139
-#: ../src/gnome2/treekey-editor.c:198
-#: ../src/gnome2/treekey-editor.c:284
-#: ../src/main/prayerlists.cc:243
-#>>>>>>> variant B
 #: ../src/gnome2/menu_popup.c:1193 ../src/gnome2/treekey-editor.c:139
 #: ../src/gnome2/treekey-editor.c:198 ../src/gnome2/treekey-editor.c:284
 #: ../src/main/prayerlists.cc:243
-####### Ancestor
-#: ../src/gnome2/menu_popup.c:1188
-#: ../src/gnome2/treekey-editor.c:132
-#: ../src/gnome2/treekey-editor.c:191
-#: ../src/gnome2/treekey-editor.c:277
-#: ../src/main/prayerlists.cc:240
-#======= end
 msgid "Name: "
 msgstr "نام: "
 
-#<<<<<<< variant A
-#: ../src/gnome2/menu_popup.c:1203
-#: ../src/main/prayerlists.cc:257
-#>>>>>>> variant B
 #: ../src/gnome2/menu_popup.c:1203 ../src/main/prayerlists.cc:257
-####### Ancestor
-#: ../src/gnome2/menu_popup.c:1198
-#: ../src/main/prayerlists.cc:254
-#======= end
 msgid "Module names must contain [A-Za-z0-9_] only."
 msgstr ""
 "برای نامگذاری عناوین تنها می‏توانید از حروف القبا و اعداد صفر تا نه استفاده "
@@ -805,6 +760,8 @@ msgstr ""
 #: ../src/gnome2/mod_mgr.c:759
 msgid " archived in: \n"
 msgstr ""
+"\n"
+"آرشیو کن در"
 
 #: ../src/gnome2/mod_mgr.c:815
 msgid "Journals and prayer lists cannot be indexed."
@@ -946,11 +903,11 @@ msgstr "کاربر"
 
 #: ../src/gnome2/mod_mgr.c:1765
 msgid "Module Sources"
-msgstr ""
+msgstr "منابع"
 
 #: ../src/gnome2/mod_mgr.c:1768
 msgid "Add/Remove"
-msgstr ""
+msgstr "حذف کن"
 
 #: ../src/gnome2/mod_mgr.c:1770
 msgid "Choose"
@@ -1053,7 +1010,7 @@ msgstr "منبع راه‏ دور را حذف کنید"
 #. *
 #. * Return value
 #. *   void
-#. 
+#.
 #: ../src/gnome2/mod_mgr.c:3244
 msgid ""
 "<b>Welcome to the Module Manager.</b>\n"
@@ -1063,8 +1020,8 @@ msgid ""
 "it over.\n"
 "(You will see this information box just once.)\n"
 "\n"
-"Modules come from different <u>repositories</u>.  <b>Module Sources: "
-"Add/Remove</b> will show you what repositories are currently known.\n"
+"Modules come from different <u>repositories</u>.  <b>Module Sources: Add/"
+"Remove</b> will show you what repositories are currently known.\n"
 "\n"
 "<b>Module Sources: Choose</b> is for deciding from where modules should "
 "come, that is, from which repository Xiphos should obtain them, as well as "
@@ -1654,11 +1611,11 @@ msgstr "دعای من"
 
 #: ../src/main/prayerlists.cc:342
 msgid ""
-"<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</b><br>pews<br>fellowsh"
-"ip<br>Bibles for missionaries<br><br><br>"
+"<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</"
+"b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"
 msgstr ""
-"<b>افراد:</b><br>حمید:<br>شهرام:<br>سپیده:<br><br><b>کلیسا:</b><br>نیمکت‏ها<b"
-"r>مشارکت<br>کتاب‏مقدس برای مبشرین<br><br><br>"
+"<b>افراد:</b><br>حمید:<br>شهرام:<br>سپیده:<br><br><b>کلیسا:</"
+"b><br>نیمکت‏ها<br>مشارکت<br>کتاب‏مقدس برای مبشرین<br><br><br>"
 
 #: ../src/main/prayerlists.cc:368
 msgid "A subject-based prayer list. \\par\\par Module created by Xiphos."
@@ -1702,8 +1659,7 @@ msgstr "روزانه"
 
 #: ../src/main/prayerlists.cc:531
 msgid "An outlined topic (e.g. sermon). \\par\\par Module created by Xiphos."
-msgstr ""
-"رئوس مطالب (مثلاً موعظه) \\par\\par این مدول توسط زیفوس ایجاد شده است."
+msgstr "رئوس مطالب (مثلاً موعظه) \\par\\par این مدول توسط زیفوس ایجاد شده است."
 
 #: ../src/main/prayerlists.cc:532
 msgid "OutlinedTopic"
@@ -1845,8 +1801,8 @@ msgstr ""
 "\n"
 "بعد از اتمام مدول مدير نرم‏افزار را ببنديد.\n"
 "\n"
-"هشدار: اگر در کشوری که تحت جفا است، زندگي مي‌کنيد، در بکار گيري اين نرم "
-"افزار احتياط کنيد.\n"
+"هشدار: اگر در کشوری که تحت جفا است، زندگي مي‌کنيد، در بکار گيري اين نرم افزار "
+"احتياط کنيد.\n"
 "\n"
 "آيا اجازه مي‌دهيد که زيفوس مدول مدیر برنامه را جهت نصب کتاب‏مقدس فعال کند؟"
 
@@ -2360,7 +2316,6 @@ msgid "Current local sources"
 msgstr "منابع محلی فعلی"
 
 #: ../ui/module-manager.glade.h:15
-#, fuzzy
 msgid "Delete Index"
 msgstr "حذف مورد"
 
@@ -2769,7 +2724,6 @@ msgid "Use tabbed browsing Checkbox"
 msgstr "انتخاب گزینۀ جستجوی بخشی"
 
 #: ../ui/prefs.glade.h:95
-#, fuzzy
 msgid "Verse Number"
 msgstr "شماره‌های آیات را نشان بده"
 
@@ -2955,11 +2909,11 @@ msgstr "عبارت به شکل دقیق"
 
 #: ../ui/search-dialog.glade.h:46
 msgid "Export"
-msgstr ""
+msgstr "<b>ارسال</b>"
 
 #: ../ui/search-dialog.glade.h:47
 msgid "Export current search results"
-msgstr ""
+msgstr "نتایج فعلی"
 
 #: ../ui/search-dialog.glade.h:48
 msgid ""
@@ -3205,15 +3159,15 @@ msgstr "دربارۀ زیفوس"
 
 #: ../ui/xi-menus.glade.h:4
 msgid "Add Item"
-msgstr ""
+msgstr "اضافه کردن مورد"
 
 #: ../ui/xi-menus.glade.h:5
 msgid "Add Sub-Item"
-msgstr ""
+msgstr "اضافه کردن مورد"
 
 #: ../ui/xi-menus.glade.h:6
 msgid "Add a sub-item"
-msgstr ""
+msgstr "اضافه کردن مورد"
 
 #: ../ui/xi-menus.glade.h:7
 msgid "Add an item"
@@ -3253,15 +3207,15 @@ msgstr "تفسیر فصل به فصل"
 
 #: ../ui/xi-menus.glade.h:19
 msgid "Create a new daily journal"
-msgstr ""
+msgstr "ایجاد متن جدید"
 
 #: ../ui/xi-menus.glade.h:20
 msgid "Create a new monthly journal"
-msgstr ""
+msgstr "ایجاد لیست مدول جدید"
 
 #: ../ui/xi-menus.glade.h:21
 msgid "Create a new outlined topic"
-msgstr ""
+msgstr "ایجاد لیست مدول جدید"
 
 #: ../ui/xi-menus.glade.h:22
 msgid "Create a new simple prayer list"
@@ -3269,7 +3223,7 @@ msgstr "ایجاد لیست سادۀ دعا"
 
 #: ../ui/xi-menus.glade.h:23
 msgid "Create a new subject prayer list"
-msgstr ""
+msgstr "ایجاد لیست سادۀ دعا"
 
 #: ../ui/xi-menus.glade.h:24
 msgid "D_ouble-Space Text"
@@ -3321,11 +3275,11 @@ msgstr "بسط همۀ گروههای علائم"
 
 #: ../ui/xi-menus.glade.h:37
 msgid "Export Folder"
-msgstr ""
+msgstr "پرونده را به حالت اول برگردان"
 
 #: ../ui/xi-menus.glade.h:38
 msgid "Export List"
-msgstr ""
+msgstr "ذخیرۀ متن ارسال شده با نام"
 
 #: ../ui/xi-menus.glade.h:45
 msgid "Image Content"
@@ -3391,7 +3345,7 @@ msgstr "در بخشی جدید باز کن"
 msgid ""
 "Open selected module in a\n"
 "\tseparate ['dialog'] window"
-msgstr ""
+msgstr "مدول انتخاب شده را در پنجرۀ ['دیالوگ'] باز کن"
 
 #: ../ui/xi-menus.glade.h:66
 msgid "Open selected module in a new tab"
@@ -3407,7 +3361,7 @@ msgstr "این علامت را در بخشی تازه باز کن"
 
 #: ../ui/xi-menus.glade.h:69
 msgid "Outlined"
-msgstr ""
+msgstr "رئوس"
 
 #: ../ui/xi-menus.glade.h:71
 msgid "Read Selection Aloud"
@@ -3583,7 +3537,7 @@ msgstr "جستجو"
 
 #: ../ui/xi-menus.glade.h:119
 msgid "_Show/Hide Attached Sidebar"
-msgstr ""
+msgstr "آشکار/مخفی کردن ستون جانبی"
 
 #: ../ui/xi-menus.glade.h:120
 msgid "_Verse Per Line"
