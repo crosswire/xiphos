@@ -524,7 +524,7 @@ msgstr "زیفوس- نرم افزار مطالعۀ کتاب‏مقدس"
 msgid "Open a new tab"
 msgstr "بخش جدیدی را باز کن"
 
-<<<<<<< variant A
+#<<<<<<< variant A
 #: ../src/gnome2/main_window.c:923
 #: ../src/gnome2/sidebar.c:627
 #: ../src/gnome2/sidebar.c:633
@@ -532,7 +532,7 @@ msgstr "بخش جدیدی را باز کن"
 #: ../src/main/sidebar.cc:1015
 #: ../src/main/sidebar.cc:1016
 #: ../src/main/sidebar.cc:1017
->>>>>>> variant B
+#>>>>>>> variant B
 #: ../src/gnome2/main_window.c:923 ../src/gnome2/sidebar.c:627
 #: ../src/gnome2/sidebar.c:633 ../src/main/sidebar.cc:666
 #: ../src/main/sidebar.cc:1015 ../src/main/sidebar.cc:1016
@@ -545,7 +545,7 @@ msgstr "بخش جدیدی را باز کن"
 #: ../src/main/sidebar.cc:964
 #: ../src/main/sidebar.cc:965
 #: ../src/main/sidebar.cc:966
-======= end
+#======= end
 msgid "Standard View"
 msgstr "نگرش استاندارد"
 
@@ -593,13 +593,13 @@ msgstr "انتخاب نام تفسیر"
 msgid "New Name"
 msgstr "نام جدید"
 
-<<<<<<< variant A
+#<<<<<<< variant A
 #: ../src/gnome2/menu_popup.c:1193
 #: ../src/gnome2/treekey-editor.c:139
 #: ../src/gnome2/treekey-editor.c:198
 #: ../src/gnome2/treekey-editor.c:284
 #: ../src/main/prayerlists.cc:243
->>>>>>> variant B
+#>>>>>>> variant B
 #: ../src/gnome2/menu_popup.c:1193 ../src/gnome2/treekey-editor.c:139
 #: ../src/gnome2/treekey-editor.c:198 ../src/gnome2/treekey-editor.c:284
 #: ../src/main/prayerlists.cc:243
@@ -609,19 +609,19 @@ msgstr "نام جدید"
 #: ../src/gnome2/treekey-editor.c:191
 #: ../src/gnome2/treekey-editor.c:277
 #: ../src/main/prayerlists.cc:240
-======= end
+#======= end
 msgid "Name: "
 msgstr "نام: "
 
-<<<<<<< variant A
+#<<<<<<< variant A
 #: ../src/gnome2/menu_popup.c:1203
 #: ../src/main/prayerlists.cc:257
->>>>>>> variant B
+#>>>>>>> variant B
 #: ../src/gnome2/menu_popup.c:1203 ../src/main/prayerlists.cc:257
 ####### Ancestor
 #: ../src/gnome2/menu_popup.c:1198
 #: ../src/main/prayerlists.cc:254
-======= end
+#======= end
 msgid "Module names must contain [A-Za-z0-9_] only."
 msgstr ""
 "برای نامگذاری عناوین تنها می‏توانید از حروف القبا و اعداد صفر تا نه استفاده "
