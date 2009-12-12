@@ -1,5 +1,5 @@
 # French translation for Xiphos
-# Copyright (C) 2002, 2009 Free Software Foundation, Inc.
+# Copyright (C) 2002, 2010 Free Software Foundation, Inc.
 # Contributions are welcome.
 # Translation Notes (Any comment welcome)
 # ---------------------------------------
@@ -15,20 +15,19 @@
 # Daily Devotion          -> Calendrier biblique
 #
 #
-# Dominique Corbex <domcox@users.sourceforge.net>, 2002, 2009.
+# Dominique Corbex <domcox@users.sourceforge.net>, 2002, 2010.
 msgid ""
 msgstr ""
-"Project-Id-Version: Xiphos 3.1.1\n"
+"Project-Id-Version: Xiphos 3.1.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-09 04:25-0500\n"
-"PO-Revision-Date: 2009-12-09 21:59+0000\n"
-"Last-Translator: Dominique Corbex <Unknown>\n"
+"POT-Creation-Date: 2009-12-12 13:15+0100\n"
+"PO-Revision-Date: 2009-12-12 13:39+0100\n"
+"Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: emacs + po-mode <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-12-10 04:38+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"Plural-Forms: nplurals=2; plural=n>1;\n"
 
 #: ../src/backend/sword_main.cc:1083
 msgid "Configuration not found"
@@ -258,12 +257,11 @@ msgid ""
 "below, contact us, and get involved with our efforts."
 msgstr ""
 "Si vous appréciez Xiphos, vous aimeriez peut-être le voir s'afficher dans "
-"votre langue maternelle ? Sachez que vous pouvez participer à sa traduction. "
-"!\n"
+"votre langue maternelle ? Sachez que vous pouvez participer à sa traduction. !\n"
 "\n"
-"Toute nouvelle contribution à la traduction de Xiphos est la bienvenue. Si "
-"vous souhaitez apporter votre aide, suivez le lien ci-dessous. N'hésitez pas "
-"à nous contacter et nous rejoindre."
+"Toute nouvelle contribution à la traduction de Xiphos est la bienvenue. "
+"Si vous souhaitez apporter votre aide, suivez le lien ci-dessous. "
+"N'hésitez pas à nous contacter et nous rejoindre."
 
 #: ../src/gnome2/about_trans.c:98
 msgid "About Xiphos Translation"
@@ -384,7 +382,7 @@ msgstr "pour :"
 
 #: ../src/gnome2/cipher_key_dialog.c:66
 msgid "Enter Cipher Key: "
-msgstr "Entrer la clé de déverrouillage: "
+msgstr "Entrer la clé de déverrouillage : "
 
 #: ../src/gnome2/dialog.c:265
 msgid "Close without Saving"
@@ -468,7 +466,7 @@ msgstr "Police par défaut dans ce module"
 #. *
 #. * Return value
 #. *   void
-#. 
+#.
 #: ../src/gnome2/gui.c:110
 msgid ""
 "URL references using \"sword://\" (similar to web page\n"
@@ -771,7 +769,7 @@ msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:759
 msgid " archived in: \n"
-msgstr " Archivé dans \n"
+msgstr "Archivé dans \n"
 
 #: ../src/gnome2/mod_mgr.c:815
 msgid "Journals and prayer lists cannot be indexed."
@@ -951,7 +949,7 @@ msgid ""
 "You have uninstalled your last Bible.\n"
 "Xiphos requires at least one."
 msgstr ""
-"Vous avez désinstallé votre dernière Bible.\\n\n"
+"Vous avez désinstallé votre dernière Bible.\n"
 "Xiphos requiert au minimum une."
 
 #: ../src/gnome2/mod_mgr.c:2288
@@ -959,7 +957,7 @@ msgid ""
 "There are still no Bibles installed.\n"
 "Xiphos cannot continue without one."
 msgstr ""
-"Toujours aucune Bible installée.\\n\n"
+"Toujours aucune Bible installée.\n"
 "Xiphos ne peut pas continuer sans."
 
 #: ../src/gnome2/mod_mgr.c:2353
@@ -1026,7 +1024,7 @@ msgstr "Supprimer un dépôt distant"
 #. *
 #. * Return value
 #. *   void
-#. 
+#.
 #: ../src/gnome2/mod_mgr.c:3244
 msgid ""
 "<b>Welcome to the Module Manager.</b>\n"
@@ -1036,8 +1034,8 @@ msgid ""
 "it over.\n"
 "(You will see this information box just once.)\n"
 "\n"
-"Modules come from different <u>repositories</u>.  <b>Module Sources: "
-"Add/Remove</b> will show you what repositories are currently known.\n"
+"Modules come from different <u>repositories</u>.  <b>Module Sources: Add/"
+"Remove</b> will show you what repositories are currently known.\n"
 "\n"
 "<b>Module Sources: Choose</b> is for deciding from where modules should "
 "come, that is, from which repository Xiphos should obtain them, as well as "
@@ -1055,28 +1053,27 @@ msgid ""
 msgstr ""
 "<b>Bienvenue dans le Gestionnaire de modules</b>\n"
 "\n"
-"C'est le mécanisme utilisé par Xiphos pour obtenir et mettre à jour les "
-"contenus.\n"
-"Il ressort qu'il n'a pas encore été utilisé, arrêtez-vous donc un petit "
-"moment pour mieux le connaître.\n"
+"C'est le mécanisme utilisé par Xiphos pour obtenir et mettre à jour les contenus.\n"
+"Il ressort qu'il n'a pas encore été utilisé, arrêtez-vous donc un petit moment "
+"pour mieux le connaître.\n"
 "(Cette information n'apparaitra qu'une seule fois).\n"
 " \n"
-"Les modules proviennent de différents <u>dépots</u>.  <b>Dépots : "
-"Ajouter/Supprimer</b> indique quels dépots sont actuellement répertoriés.\n"
+"Les modules proviennent de différents <u>dépots</u>.  <b>Dépots : Ajouter/"
+"Supprimer</b> indique quels dépots sont actuellement répertoriés.\n"
 "\n"
 "<b>Dépots : Choisir</b> permet de décider d'où les modules doivent provenir, "
 "c'est-à-dire de quel dépot Xiphos doit les obtenir, et aussi à quel endroit "
-"ils doivent être placés sur le système. Sélectionnez <i>Source des "
-"dépots</i> et <i>Dossier d'installation</i>, puis ensuite "
-"<i>Actualiser</i>.\n"
+"ils doivent être placés sur le système. Sélectionnez <i>Source des dépots</i> "
+"et <i>Dossier d'installation</i>, puis ensuite <i>Actualiser</i>.\n"
 "\n"
 "<b>Modules : Installer</b> permet de sélectionner et d'obtenir des modules "
 "après avoir choisi la source et le dossier d'installation.\n"
 "\n"
 "<b>Modules ; Maintenance</b> est pour l'archivage et la création d'index.\n"
 "\n"
-"Pour plus d'informations sur le gestionnaire de modules, voir la section 5 "
-"du manuel d'aide.\n"
+"Pour plus d'informations sur le gestionnaire de modules, voir la section 5"
+"du manuel d'aide. "
+"\n"
 
 #: ../src/gnome2/navbar_book.c:359 ../src/gnome2/navbar_book_dialog.c:300
 msgid "Go outward, to the section containing this one"
@@ -1639,7 +1636,7 @@ msgstr ""
 
 #: ../src/main/prayerlists.cc:326
 msgid "A basic prayer list. \\par\\par Module created by Xiphos."
-msgstr "\\par\\par Liste simple\\par\\par Module crée par Xiphos"
+msgstr "Une liste simple. \\par\\par Module crée par Xiphos."
 
 #: ../src/main/prayerlists.cc:327
 msgid "BasicPrayerList"
@@ -1651,17 +1648,15 @@ msgstr "MaListe"
 
 #: ../src/main/prayerlists.cc:342
 msgid ""
-"<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</b><br>pews<br>fellowsh"
-"ip<br>Bibles for missionaries<br><br><br>"
+"<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</"
+"b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"
 msgstr ""
-"<b>Personnes:</b><br>Personne 1<br>Personne 2<br>Personne "
-"3<br><br><b>Assemblées:</b><br>Participants<br>Fonctionnement<br>Missions<br>"
-"<br><br>"
+"<b>Personnes:</b><br>Jean<br>Pierre<br>Paul<br><br><b>Assemblée:</b><br>"
+"Participants<br>Fonctionnement<br>Missions<br><br><br>"
 
 #: ../src/main/prayerlists.cc:368
 msgid "A subject-based prayer list. \\par\\par Module created by Xiphos."
-msgstr ""
-"\\par\\par Liste ordonnée par sujets\\par\\par Module crée par Xiphos"
+msgstr "Liste ordonnée par sujets. \\par\\par Module crée par Xiphos."
 
 #: ../src/main/prayerlists.cc:369
 msgid "SubjectPrayerList"
@@ -1669,7 +1664,7 @@ msgstr "MaListeParSujets"
 
 #: ../src/main/prayerlists.cc:384
 msgid "Bob<br>Sam<br>Sue<br>John<br>"
-msgstr "Personne 1<br>Personne 2<br>Personne 3<br>"
+msgstr "Jean<br>Pierre<br>Paul<br>Esther<br>"
 
 #: ../src/main/prayerlists.cc:385
 msgid "Spiritual Growth"
@@ -1685,7 +1680,7 @@ msgstr "Personne 1<br>Personne 2<br>Personne 3<br>"
 
 #: ../src/main/prayerlists.cc:414
 msgid "A monthly prayer list. \\par\\par Module created by Xiphos."
-msgstr "\\par\\par Suivi mensuel\\par\\par Module crée par Xiphos"
+msgstr "Liste mensuelle. \\par\\par Module crée par Xiphos."
 
 #: ../src/main/prayerlists.cc:415
 msgid "MonthlyPrayerList"
@@ -1693,16 +1688,15 @@ msgstr "MaListeMensuelle"
 
 #: ../src/main/prayerlists.cc:466
 msgid "A daily journal. \\par\\par Module created by Xiphos."
-msgstr "\\par\\par Journal quotidien\\par\\par Module crée par Xiphos"
+msgstr "Un journal quotidien. \\par\\par Module crée par Xiphos."
 
 #: ../src/main/prayerlists.cc:467
 msgid "DailyJournal"
-msgstr "Journal quotidien"
+msgstr "JournalQuotidien"
 
 #: ../src/main/prayerlists.cc:531
 msgid "An outlined topic (e.g. sermon). \\par\\par Module created by Xiphos."
-msgstr ""
-"\\par\\par Note structurée (ex sermon)\\par\\par Module crée par Xiphos"
+msgstr "Une note structurée (ex sermon). \\par\\par Module crée par Xiphos."
 
 #: ../src/main/prayerlists.cc:532
 msgid "OutlinedTopic"
@@ -1859,7 +1853,7 @@ msgstr ""
 "Xiphos n'a pas pu créer ~/.xiphos:\n"
 "%s\n"
 "\n"
-"Xiphos ne peut s\"exécuter normalement."
+"Xiphos ne peut s'exécuter normalement."
 
 #: ../src/main/settings.c:133 ../src/main/settings.c:142
 #: ../src/main/settings.c:151
@@ -1938,7 +1932,7 @@ msgstr ""
 
 #: ../src/main/sword.cc:642
 msgid "No matching locale found for"
-msgstr "Pas de langue pour"
+msgstr "Pas de locale pour"
 
 #: ../src/main/sword.cc:644
 msgid "Book names and menus may not be translated"
@@ -1946,8 +1940,7 @@ msgstr "Les noms de livres et les menus ne seront peut-être pas traduits"
 
 #: ../src/main/sword.cc:1232
 msgid "Daily devotional was requested, but there are none installed."
-msgstr ""
-"Impossible d'afficher le calendrier biblique, aucun module de ce type n'est "
+msgstr "Impossible d'afficher le calendrier biblique, aucun module de ce type n'est "
 "installé."
 
 #: ../src/main/tab_history.c:219
@@ -2330,9 +2323,7 @@ msgstr "<b>Attention :</b> Prudence dans les pays de persécution"
 msgid ""
 "<b>Warning:</b> If you live in a persecuted country and do not wish to risk "
 "detection you should NOT use  the remote installation feature! "
-msgstr ""
-"<b>Attention :</b> Ne pas utiliser les dépôts distants depuis les pays où il "
-"est dangereux d'être repéré! "
+msgstr "<b>Attention :</b> Ne pas utiliser les dépôts distants depuis les pays où il est dangereux d'être repéré! "
 
 #: ../ui/module-manager.glade.h:9
 msgid "<i>Personal area, for your use only:</i>"
@@ -2533,7 +2524,7 @@ msgstr "Boite combinée Changement de notes personnelles"
 
 #: ../ui/prefs.glade.h:32
 msgid "Choose to enable Prayer lists "
-msgstr "Autorise les listes de prières "
+msgstr "Active les listes de prières "
 
 #: ../ui/prefs.glade.h:34
 msgid "Commentaries Checkbox"
@@ -2740,8 +2731,7 @@ msgstr "Boite combinée Répertoire par défaut du bloc-notes"
 
 #: ../ui/prefs.glade.h:88
 msgid "Use Bible Text scroll bar to scroll to previous or next chapter"
-msgstr ""
-"Permet d'utiliser la barre de déplacement vertical du volet des textes "
+msgstr "Permet d'utiliser la barre de déplacement vertical du volet des textes "
 "bibliques pour se déplacer au chapitre suivant ou précédent"
 
 #: ../ui/prefs.glade.h:89
@@ -3454,8 +3444,7 @@ msgstr "Enregistre la liste sous un seul signet"
 
 #: ../ui/xi-menus.glade.h:81
 msgid "Save these results as a series of bookmarks in their own folder"
-msgstr ""
-"Enregistre ces résultats sous une série de signets dans leur propre dossier"
+msgstr "Enregistre ces résultats sous une série de signets dans leur propre dossier"
 
 #: ../ui/xi-menus.glade.h:82
 msgid "Save these results as a single bookmark"
