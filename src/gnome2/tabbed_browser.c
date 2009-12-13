@@ -1405,10 +1405,14 @@ void gui_close_passage_tab(gint pagenum)
 		return;
 	PASSAGE_TAB_INFO *pt = (PASSAGE_TAB_INFO*)g_list_nth_data(passage_list, (guint)pagenum);
 	if (pt->showparallel || (2 <= gtk_notebook_get_n_pages(GTK_NOTEBOOK(widgets.notebook_main)))) {
-		if (pagenum > 0)
-			gtk_notebook_set_current_page (GTK_NOTEBOOK (
-			                               widgets.notebook_main),
-                                                       0);
+		// (surely this is always true!?)
+
+		if (pagenum > 0){
+			gtk_notebook_set_current_page(
+				GTK_NOTEBOOK(widgets.notebook_main), 0);
+			cur_passage_tab = (PASSAGE_TAB_INFO*)		
+				g_list_nth_data(passage_list, (guint)0);
+		}
 	}
 	
 	stop_refresh = TRUE;
@@ -1435,7 +1439,6 @@ void gui_close_passage_tab(gint pagenum)
 	g_free(pt);
 	//cur_passage_tab = NULL;
 	removed_page = pagenum;
-	cur_passage_tab = (PASSAGE_TAB_INFO*)g_list_nth_data(passage_list, (guint)pagenum);
 	gtk_notebook_remove_page(GTK_NOTEBOOK(widgets.notebook_main), pagenum);
 }
 
