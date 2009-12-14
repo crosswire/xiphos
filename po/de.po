@@ -11,14 +11,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 3.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-09 04:25-0500\n"
-"PO-Revision-Date: 2009-12-09 21:50+0000\n"
-"Last-Translator: Dmitrijs Ledkovs <dmitrij.ledkov@gmail.com>\n"
+"POT-Creation-Date: 2009-12-12 12:02+0000\n"
+"PO-Revision-Date: 2009-12-12 17:27+0000\n"
+"Last-Translator: MixCool <lars.thoms@mixcool.de>\n"
 "Language-Team: Xiphos Translation Team <farsi@lists.sharif.edu>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-12-10 04:38+0000\n"
+"X-Launchpad-Export-Date: 2009-12-13 04:41+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
@@ -122,11 +122,11 @@ msgstr "Neu"
 
 #: ../src/editor/slib-editor.c:769
 msgid "Open new document"
-msgstr ""
+msgstr "Neues Dokument öffnen"
 
 #: ../src/editor/slib-editor.c:773
 msgid "Delete"
-msgstr ""
+msgstr "Löschen"
 
 #: ../src/editor/slib-editor.c:775
 msgid "Delete current note"
@@ -503,14 +503,16 @@ msgstr ""
 #: ../src/gnome2/gui.c:212
 msgid "BUG! Xiphos is about to crash due to a \"STRDUP\" error."
 msgstr ""
+"BUG! Xiphos steht kurz vor dem Absturz Aufgrund eines \"STRDUP\" Fehlers."
 
 #: ../src/gnome2/gui.c:213 ../src/gnome2/gui.c:248
 msgid "Please report this error to the Xiphos team with:"
-msgstr ""
+msgstr "Bitte melden Sie diesen Fehler dem Xiphos Team mit:"
 
 #: ../src/gnome2/gui.c:247
 msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
 msgstr ""
+"BUG! Xiphos steht kurz vor dem Absturz Aufgrund eines \"STRING\" Fehlers."
 
 #: ../src/gnome2/main_window.c:789
 msgid "Xiphos - Bible Study Software"
@@ -900,11 +902,11 @@ msgstr "UID"
 
 #: ../src/gnome2/mod_mgr.c:1765
 msgid "Module Sources"
-msgstr ""
+msgstr "Modul-Quellen"
 
 #: ../src/gnome2/mod_mgr.c:1768
 msgid "Add/Remove"
-msgstr ""
+msgstr "Hinzufügen/Entfernen"
 
 #: ../src/gnome2/mod_mgr.c:1770
 msgid "Choose"
@@ -937,12 +939,16 @@ msgid ""
 "You have uninstalled your last Bible.\n"
 "Xiphos requires at least one."
 msgstr ""
+"Du hast deine letzte Bibel deinstalliert.\n"
+"Xiphos benötigt mindestens eine."
 
 #: ../src/gnome2/mod_mgr.c:2288
 msgid ""
 "There are still no Bibles installed.\n"
 "Xiphos cannot continue without one."
 msgstr ""
+"Es sind noch immer keine Bibeln installiert.\n"
+"Xiphos kann ohne einer nicht fortgesetzt"
 
 #: ../src/gnome2/mod_mgr.c:2353
 msgid "Standard remote sources have been loaded."
@@ -1121,7 +1127,7 @@ msgstr "-- Auswahl --"
 
 #: ../src/gnome2/preferences_dialog.c:1637
 msgid "Locale will take effect after restart."
-msgstr ""
+msgstr "Lokalisierung wird nach einem Neustart wirksam."
 
 #: ../src/gnome2/preferences_dialog.c:1673 ../ui/prefs.glade.h:74
 msgid "Preferences"
@@ -1896,11 +1902,11 @@ msgstr ""
 
 #: ../src/main/sword.cc:642
 msgid "No matching locale found for"
-msgstr ""
+msgstr "Keine passende Lokalisierung gefunden für"
 
 #: ../src/main/sword.cc:644
 msgid "Book names and menus may not be translated"
-msgstr ""
+msgstr "Bücher-Namen und Menüs können nicht übersetzt werden"
 
 #: ../src/main/sword.cc:1232
 msgid "Daily devotional was requested, but there are none installed."
@@ -2680,11 +2686,11 @@ msgstr "Startbildschirm anzeigen"
 
 #: ../ui/prefs.glade.h:84
 msgid "Special Locale (requires restart)"
-msgstr ""
+msgstr "Spezielle Lokalisierung (erfordert Neustart)"
 
 #: ../ui/prefs.glade.h:85
 msgid "Special Locale Combo"
-msgstr ""
+msgstr "Spezielle Lokalisierungskombination"
 
 #: ../ui/prefs.glade.h:86
 msgid "StudyPad default directory combo"
@@ -2722,7 +2728,7 @@ msgstr "Benutze Reiter zur Anzeige Kontrollkästchen"
 
 #: ../ui/prefs.glade.h:95
 msgid "Verse Number"
-msgstr ""
+msgstr "Vers Nummer"
 
 #: ../ui/prefs.glade.h:96
 msgid "Verse number size"
@@ -2910,7 +2916,7 @@ msgstr "Exportieren"
 
 #: ../ui/search-dialog.glade.h:47
 msgid "Export current search results"
-msgstr ""
+msgstr "Exportiere aktuelle Suchergebnisse"
 
 #: ../ui/search-dialog.glade.h:48
 msgid ""
@@ -3220,7 +3226,7 @@ msgstr "Erstelle eine neue einfache Gebetsliste"
 
 #: ../ui/xi-menus.glade.h:23
 msgid "Create a new subject prayer list"
-msgstr ""
+msgstr "Erstelle eine neue Themen-Gebetsliste"
 
 #: ../ui/xi-menus.glade.h:24
 msgid "D_ouble-Space Text"
@@ -3228,7 +3234,7 @@ msgstr "D_oppelter Zeilenabstand"
 
 #: ../ui/xi-menus.glade.h:25
 msgid "Daily"
-msgstr ""
+msgstr "Täglich"
 
 #: ../ui/xi-menus.glade.h:26
 msgid "Delete Item"
@@ -3272,11 +3278,11 @@ msgstr "Alle Lesezeichengruppen ausklappen"
 
 #: ../ui/xi-menus.glade.h:37
 msgid "Export Folder"
-msgstr ""
+msgstr "Ordner exportieren"
 
 #: ../ui/xi-menus.glade.h:38
 msgid "Export List"
-msgstr ""
+msgstr "Liste exportieren"
 
 #: ../ui/xi-menus.glade.h:45
 msgid "Image Content"
@@ -3343,6 +3349,8 @@ msgid ""
 "Open selected module in a\n"
 "\tseparate ['dialog'] window"
 msgstr ""
+"Öffne ausgewähltes Modul in einem\n"
+"\tseparaten ['Dialog'] Fenster"
 
 #: ../ui/xi-menus.glade.h:66
 msgid "Open selected module in a new tab"
@@ -3358,7 +3366,7 @@ msgstr "Dieses Lesezeichen in einem Dialogfenster öffnen"
 
 #: ../ui/xi-menus.glade.h:69
 msgid "Outlined"
-msgstr ""
+msgstr "Skizziert"
 
 #: ../ui/xi-menus.glade.h:71
 msgid "Read Selection Aloud"
