@@ -875,9 +875,7 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule)
 			     : rework /* left as-is */);
 	}
 
-	if (is_rtol && !ops->transliteration)
-		swbuf.append("</div>");
-	swbuf.append("</font></body></html>");
+	swbuf.append("</div></font></body></html>");
 
 	buf = g_strdup_printf("%d", curVerse);
 	HtmlOutput((char *)swbuf.c_str(), gtkText, mf, buf);
@@ -1099,8 +1097,7 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 		swbuf.append(buf);
 		g_free(buf);
 
-		if (is_rtol && !ops->transliteration)
-			swbuf.append("</div>");
+		swbuf.append("</div>");
 
 	}
 
@@ -1216,8 +1213,7 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 					: (const char *)imodule),
 				       cache_flags);
 		swbuf.append(cVerse.GetText());
-		if (is_rtol && !ops->transliteration)
-			swbuf.append("</div>");
+		swbuf.append("</div>");
 	}
 }
 
@@ -1722,9 +1718,7 @@ GTKChapDisp::Display(SWModule &imodule)
 	key->Chapter(curChapter);
 	key->Verse(curVerse);
 
-	if (is_rtol && !ops->transliteration)
-		swbuf.append("</div>");
-	swbuf.append("</font></body></html>");
+	swbuf.append("</div></font></body></html>");
 
 #ifdef USE_GTKMOZEMBED
 	if (strongs_and_morph)
@@ -1812,9 +1806,7 @@ DialogEntryDisp::DisplayByChapter(SWModule &imodule)
 			     : rework /* left as-is */);
 	}
 
-	if (is_rtol && !ops->transliteration)
-		swbuf.append("</div>");
-	swbuf.append("</font></body></html>");
+	swbuf.append("</div></font></body></html>");
 
 	buf = g_strdup_printf("%d", curVerse);
 	HtmlOutput((char *)swbuf.c_str(), gtkText, mf, buf);
@@ -2144,9 +2136,7 @@ DialogChapDisp::Display(SWModule &imodule)
 	key->Chapter(curChapter);
 	key->Verse(curVerse);
 
-	if (is_rtol && !ops->transliteration)
-		swbuf.append("</div>");
-	swbuf.append("</font></body></html>");
+	swbuf.append("</div></font></body></html>");
 
 #ifdef USE_GTKMOZEMBED
 	if (strongs_and_morph)
@@ -2360,10 +2350,7 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 	key->Chapter(curChapter);
 	key->Verse(curVerse);
 
-	if (is_rtol && !ops->transliteration)
-		swbuf.append("</div></font></body></html>");
-	else
-		swbuf.append("</font></body></html>");
+	swbuf.append("</div></font></body></html>");
 
 	if (swbuf.length())
 		gecko_html_write(html,swbuf.c_str(),swbuf.length());
