@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-09 04:25-0500\n"
-"PO-Revision-Date: 2009-12-09 21:54+0000\n"
+"POT-Creation-Date: 2009-12-12 12:02+0000\n"
+"PO-Revision-Date: 2009-12-12 13:23+0000\n"
 "Last-Translator: Eduardo Rivas <jerivasmelgar@gmail.com>\n"
 "Language-Team: Español <gnomesword-users@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-12-10 04:39+0000\n"
+"X-Launchpad-Export-Date: 2009-12-13 04:42+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../src/backend/sword_main.cc:1083
@@ -1042,15 +1042,16 @@ msgstr ""
 "familiarizarse.\n"
 "(Sólo verá este mensaje una vez).\n"
 "\n"
-"Los módulos vienen de distintos<u>repositorios</u>.  <b>Fuentes de Módulos: "
+"Los módulos vienen de distintos <u>repositorios</u>.  <b>Fuentes de Módulos: "
 "Añadir/Quitar</b> le mostrará los repositorios conocidos.\n"
 "\n"
 "<b>Fuentes de Módulos: Escoger</b> es para decidir de dónde vienen los "
 "módulos, esto es, de que repositorio los obtiene Xiphos, al igual que dónde "
-"deben ser guardados en su sistema. Seleccione la<i>Fuente de Instalación</i> "
-"y el <i>Destino de Instalación</i>, y haga clic en <i>Actualizar</i>.\n"
+"deben ser guardados en su sistema. Seleccione la <i>Fuente de "
+"Instalación</i> y el <i>Destino de Instalación</i>, y haga clic en "
+"<i>Actualizar</i>.\n"
 "\n"
-"<b>Módulos: Instalar/Actualizar</b>es para seleccionar y actualizar módulos "
+"<b>Módulos: Instalar/Actualizar</b> es para seleccionar y actualizar módulos "
 "después de haber elegido las fuentes y destino.\n"
 "\n"
 "<b>Módulos: Mantenimiento</b> es para crear archivos e índices.\n"
@@ -3178,15 +3179,15 @@ msgstr "Acerca de _Xiphos"
 
 #: ../ui/xi-menus.glade.h:4
 msgid "Add Item"
-msgstr ""
+msgstr "Añadir elemento"
 
 #: ../ui/xi-menus.glade.h:5
 msgid "Add Sub-Item"
-msgstr ""
+msgstr "Añadir sub-elemento"
 
 #: ../ui/xi-menus.glade.h:6
 msgid "Add a sub-item"
-msgstr ""
+msgstr "Añadir un sub-elemento"
 
 #: ../ui/xi-menus.glade.h:7
 msgid "Add an item"
@@ -3226,15 +3227,15 @@ msgstr "Comentario por capítulo"
 
 #: ../ui/xi-menus.glade.h:19
 msgid "Create a new daily journal"
-msgstr ""
+msgstr "Crear un nuevo diario"
 
 #: ../ui/xi-menus.glade.h:20
 msgid "Create a new monthly journal"
-msgstr ""
+msgstr "Crear un nuevo diario mensual"
 
 #: ../ui/xi-menus.glade.h:21
 msgid "Create a new outlined topic"
-msgstr ""
+msgstr "Crear un nuevo esbozo"
 
 #: ../ui/xi-menus.glade.h:22
 msgid "Create a new simple prayer list"
@@ -3242,7 +3243,7 @@ msgstr "Crear una lista de oración simple"
 
 #: ../ui/xi-menus.glade.h:23
 msgid "Create a new subject prayer list"
-msgstr ""
+msgstr "Crar una nueva lista de oración por sujetos"
 
 #: ../ui/xi-menus.glade.h:24
 msgid "D_ouble-Space Text"
@@ -3250,7 +3251,7 @@ msgstr "Texto a _doble espacio"
 
 #: ../ui/xi-menus.glade.h:25
 msgid "Daily"
-msgstr ""
+msgstr "Diariamente"
 
 #: ../ui/xi-menus.glade.h:26
 msgid "Delete Item"
@@ -3365,6 +3366,8 @@ msgid ""
 "Open selected module in a\n"
 "\tseparate ['dialog'] window"
 msgstr ""
+"Abrir el módulo seleccionado en una\n"
+"\t ventana ['diálogo'] separada"
 
 #: ../ui/xi-menus.glade.h:66
 msgid "Open selected module in a new tab"
@@ -3380,7 +3383,7 @@ msgstr "Abrir este marcador en una nueva pestaña"
 
 #: ../ui/xi-menus.glade.h:69
 msgid "Outlined"
-msgstr ""
+msgstr "Esbozado"
 
 #: ../ui/xi-menus.glade.h:71
 msgid "Read Selection Aloud"
