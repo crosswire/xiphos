@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: 3.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-12-13 00:07+0000\n"
-"PO-Revision-Date: 2009-12-14 09:52+0100\n"
+"PO-Revision-Date: 2009-12-14 15:07+0100\n"
 "Last-Translator: Peter von Kaehne <refdoc@crosswire.org>\n"
 "Language-Team: English/GB <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -955,7 +955,7 @@ msgstr "کاربر"
 
 #: ../src/gnome2/mod_mgr.c:1765
 msgid "Module Sources"
-msgstr ""
+msgstr "منبع‌های عنوان"
 
 #: ../src/gnome2/mod_mgr.c:1768
 msgid "Add/Remove"
@@ -2801,7 +2801,7 @@ msgstr "لوگو را در شروع نشان بده"
 
 #: ../ui/prefs.glade.h:84
 msgid "Special Locale (requires restart)"
-msgstr ""
+msgstr "زبان برنامه"
 
 #: ../ui/prefs.glade.h:85
 msgid "Special Locale Combo"
@@ -3652,9 +3652,8 @@ msgid "_Search"
 msgstr "جستجو"
 
 #: ../ui/xi-menus.glade.h:119
-#, fuzzy
 msgid "_Show/Hide Attached Sidebar"
-msgstr "ستون جانبی"
+msgstr "ستون جانبی نمایش بده/نده"
 
 #: ../ui/xi-menus.glade.h:120
 msgid "_Verse Per Line"
