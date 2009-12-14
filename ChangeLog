@@ -1,6 +1,7 @@
 2009-12-14  karl <charcoal@users.sf.net>
 
 	* preferences locale list: display language names, not xx_YY.
+	* fixed <div align=(right|left)> problem.
 	
 2009-12-14 simon<DrMeers@users.sourceforge.net>
 
