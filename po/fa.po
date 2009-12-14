@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: 3.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-12-13 00:07+0000\n"
-"PO-Revision-Date: 2009-12-13 00:21+0100\n"
+"PO-Revision-Date: 2009-12-14 09:52+0100\n"
 "Last-Translator: Peter von Kaehne <refdoc@crosswire.org>\n"
 "Language-Team: English/GB <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1336,7 +1336,7 @@ msgstr "لیست آیات"
 #: ../src/gnome2/sidebar_dialog.c:139
 #: ../src/gnome2/sidebar_dialog.c:148
 msgid "Sidebar"
-msgstr "قفسه جانبی"
+msgstr "ستون جانبی"
 
 #: ../src/gnome2/splash.c:396
 msgid "Powered by the SWORD Project"
@@ -2840,9 +2840,8 @@ msgid "Use tabbed browsing Checkbox"
 msgstr "انتخاب گزینۀ جستجوی بخشی"
 
 #: ../ui/prefs.glade.h:95
-#, fuzzy
 msgid "Verse Number"
-msgstr "شماره‌های آیات را نشان بده"
+msgstr "شماره‌های آیات"
 
 #: ../ui/prefs.glade.h:96
 msgid "Verse number size"
@@ -3026,11 +3025,11 @@ msgstr "عبارت به شکل دقیق"
 
 #: ../ui/search-dialog.glade.h:46
 msgid "Export"
-msgstr ""
+msgstr "صادرت"
 
 #: ../ui/search-dialog.glade.h:47
 msgid "Export current search results"
-msgstr ""
+msgstr "صادرت نتایج جستجو"
 
 #: ../ui/search-dialog.glade.h:48
 msgid ""
@@ -3392,11 +3391,11 @@ msgstr "بسط همۀ گروههای علائم"
 
 #: ../ui/xi-menus.glade.h:37
 msgid "Export Folder"
-msgstr ""
+msgstr "صادرت پرونده"
 
 #: ../ui/xi-menus.glade.h:38
 msgid "Export List"
-msgstr ""
+msgstr "صادرت لیست"
 
 #: ../ui/xi-menus.glade.h:45
 msgid "Image Content"
@@ -3653,8 +3652,9 @@ msgid "_Search"
 msgstr "جستجو"
 
 #: ../ui/xi-menus.glade.h:119
+#, fuzzy
 msgid "_Show/Hide Attached Sidebar"
-msgstr ""
+msgstr "ستون جانبی"
 
 #: ../ui/xi-menus.glade.h:120
 msgid "_Verse Per Line"
