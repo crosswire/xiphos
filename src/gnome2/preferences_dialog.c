@@ -1624,11 +1624,26 @@ on_combobox16_changed(GtkComboBox * combobox,
 	GtkTreeIter iter;
 	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
 	gboolean clear, set;
+	char **locale, brief_locale[3], *real_locale;
 
 	gtk_combo_box_get_active_iter(combobox, &iter);
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &buf, -1);
 	if (!buf || !strcmp(buf, _("-- Select --")))	/* see fill_combobox */
 		return;
+
+	/* get us back to an xx_YY locale name from the full name.  */
+	/* "buf" is necessarily an entry to be found in locale_set. */
+	for (locale = &locale_set[0]; *locale; ++locale) {
+		brief_locale[0] = (*locale)[0];
+		brief_locale[1] = (*locale)[1];
+		brief_locale[2] = '\0';
+		real_locale = (gpointer)main_get_language_map(brief_locale);
+		if (!strcmp(real_locale, buf)) {
+			g_free(buf);
+			buf = *locale;
+			break;
+		}
+	}
 
 	clear = !strcmp(buf, NONE);
 	set   = ((!settings.special_locale && strcmp(buf, NONE)) ||
@@ -1642,7 +1657,6 @@ on_combobox16_changed(GtkComboBox * combobox,
 	xml_set_value("Xiphos", "locale", "special", (clear ? NONE : buf));
 	g_free(settings.special_locale);	/* dispose of old content */
 	settings.special_locale = (clear ? g_strdup(NONE) : g_strdup(buf));
-	g_free(buf);
 }
 
 
@@ -2172,16 +2186,26 @@ setup_module_comboboxes(void)
 }
 
 
-static void
+void
+setup_locale_combobox(void);
+void
 setup_locale_combobox(void)
 {
-	char **locale;
+	char **locale, brief_locale[3], *real_locale, *current_locale = NULL;
 	GList *list = g_list_append(NULL, NONE);
 
-	for (locale = &locale_set[0]; *locale; ++locale)
-		list = g_list_append(list, *locale);
+	for (locale = &locale_set[0]; *locale; ++locale) {
+		brief_locale[0] = (*locale)[0];
+		brief_locale[1] = (*locale)[1];
+		brief_locale[2] = '\0';
+		real_locale = (gpointer)main_get_language_map(brief_locale);
+		list = g_list_append(list, real_locale);
+		if (settings.special_locale &&
+		    !strcmp(settings.special_locale, *locale))
+			current_locale = real_locale;
+	}
 	fill_combobox(list, GTK_COMBO_BOX(combo.special_locale),
-		      (settings.special_locale ? settings.special_locale : NONE),
+		      (current_locale ? current_locale : NONE),
 		      NULL, NULL);
 	g_list_free(list);
 
