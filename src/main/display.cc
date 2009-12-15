@@ -838,11 +838,6 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule)
 	if (strongs_and_morph)
 		set_morph_order(imodule);
 
-	swbuf.appendFormatted("<div dir=%s>",
-			      ((is_rtol && !ops->transliteration)
-			       ? "rtl"
-			       : "ltr"));
-
 	for (key->Verse(1);
 	     (key->Book()    == curBook)    &&
 	     (key->Chapter() == curChapter) &&
@@ -944,6 +939,10 @@ GTKEntryDisp::Display(SWModule &imodule)
 	swbuf.append(buf);
 	g_free(buf);
 
+	swbuf.appendFormatted("<div dir=%s>",
+			      ((is_rtol && !ops->transliteration)
+			       ? "rtl"
+			       : "ltr"));
 	//
 	// the rest of this routine is irrelevant if we are
 	// instead heading off to show a whole chapter
@@ -1002,7 +1001,7 @@ GTKEntryDisp::Display(SWModule &imodule)
 					   GDK_WINDOW(gtkText->window))
 		     : rework /* left as-is */);
 
-	swbuf.append("</font></body></html>");
+	swbuf.append("</div></font></body></html>");
 
 	HtmlOutput((char *)swbuf.c_str(), gtkText, mf, NULL);
 
