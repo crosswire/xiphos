@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-12 12:02+0000\n"
+"POT-Creation-Date: 2009-12-14 23:45+0000\n"
 "PO-Revision-Date: 2009-12-12 12:24+0000\n"
 "Last-Translator: Ari Constâncio <ari.constancio@gmail.com>\n"
 "Language-Team: Xiphos Project\n"
@@ -904,7 +904,7 @@ msgstr "Adicionar/Remover"
 msgid "Choose"
 msgstr "Escolher"
 
-#: ../src/gnome2/mod_mgr.c:1774 ../src/gnome2/preferences_dialog.c:1779
+#: ../src/gnome2/mod_mgr.c:1774 ../src/gnome2/preferences_dialog.c:1793
 #: ../src/gnome2/sidebar.c:1413
 msgid "Modules"
 msgstr "Módulos"
@@ -1078,7 +1078,7 @@ msgstr "Ir para dentro, para a primeira subsecção"
 msgid "Synchronize this window from main window"
 msgstr "Sincronizar esta janela com a janela principal"
 
-#: ../src/gnome2/parallel_dialog.c:328 ../src/gnome2/preferences_dialog.c:1785
+#: ../src/gnome2/parallel_dialog.c:328 ../src/gnome2/preferences_dialog.c:1799
 msgid "Parallel"
 msgstr "Paralelo"
 
@@ -1135,48 +1135,48 @@ msgstr "Vista Paralela"
 #: ../src/gnome2/preferences_dialog.c:1522
 #: ../src/gnome2/preferences_dialog.c:1557
 #: ../src/gnome2/preferences_dialog.c:1593
-#: ../src/gnome2/preferences_dialog.c:1630
-#: ../src/gnome2/preferences_dialog.c:2038
+#: ../src/gnome2/preferences_dialog.c:1631
+#: ../src/gnome2/preferences_dialog.c:2052
 msgid "-- Select --"
 msgstr "-- Seleccionar --"
 
-#: ../src/gnome2/preferences_dialog.c:1637
+#: ../src/gnome2/preferences_dialog.c:1652
 msgid "Locale will take effect after restart."
 msgstr "Locale tem efeito após reinício do programa."
 
-#: ../src/gnome2/preferences_dialog.c:1673 ../ui/prefs.glade.h:74
+#: ../src/gnome2/preferences_dialog.c:1687 ../ui/prefs.glade.h:74
 msgid "Preferences"
 msgstr "Preferências"
 
-#: ../src/gnome2/preferences_dialog.c:1755
+#: ../src/gnome2/preferences_dialog.c:1769
 msgid "Fonts"
 msgstr "Fontes"
 
-#: ../src/gnome2/preferences_dialog.c:1758
+#: ../src/gnome2/preferences_dialog.c:1772
 msgid "Color"
 msgstr "Cor"
 
-#: ../src/gnome2/preferences_dialog.c:1761
+#: ../src/gnome2/preferences_dialog.c:1775
 msgid "Sizes"
 msgstr "Tamanhos"
 
-#: ../src/gnome2/preferences_dialog.c:1765
+#: ../src/gnome2/preferences_dialog.c:1779
 msgid "General"
 msgstr "Geral"
 
-#: ../src/gnome2/preferences_dialog.c:1768 ../ui/prefs.glade.h:87
+#: ../src/gnome2/preferences_dialog.c:1782 ../ui/prefs.glade.h:87
 msgid "Tabs and Panes"
 msgstr "Abas e painéis"
 
-#: ../src/gnome2/preferences_dialog.c:1775
+#: ../src/gnome2/preferences_dialog.c:1789
 msgid "Options"
 msgstr "Opções"
 
-#: ../src/gnome2/preferences_dialog.c:1782
+#: ../src/gnome2/preferences_dialog.c:1796
 msgid "Main"
 msgstr "Principal"
 
-#: ../src/gnome2/preferences_dialog.c:1788
+#: ../src/gnome2/preferences_dialog.c:1802
 msgid "Special"
 msgstr "Especial"
 
@@ -1330,8 +1330,8 @@ msgstr ""
 "(Ou possivelmente o tipo de imagem é distinto de bmp/gif/jpg/png.)\n"
 "Xiphos não pode redimensionar as imagens para ajustar à janela."
 
-#: ../src/main/display.cc:1043 ../src/main/display.cc:1093
-#: ../src/main/display.cc:1171 ../ui/export-dialog.glade.h:7
+#: ../src/main/display.cc:1043 ../src/main/display.cc:1095
+#: ../src/main/display.cc:1172 ../ui/export-dialog.glade.h:7
 msgid "Chapter"
 msgstr "Capítulo"
 

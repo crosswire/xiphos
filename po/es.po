@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-12 12:02+0000\n"
+"POT-Creation-Date: 2009-12-14 23:45+0000\n"
 "PO-Revision-Date: 2009-12-12 13:23+0000\n"
 "Last-Translator: Eduardo Rivas <jerivasmelgar@gmail.com>\n"
 "Language-Team: Español <gnomesword-users@lists.sourceforge.net>\n"
@@ -450,7 +450,7 @@ msgstr "Utilizar la tipografía por defecto para este módulo"
 #. *
 #. * Return value
 #. *   void
-#. 
+#.
 #: ../src/gnome2/gui.c:110
 msgid ""
 "URL references using \"sword://\" (similar to web page\n"
@@ -696,8 +696,8 @@ msgstr "Haga clic en la caja para trabajar en este módulo"
 #: ../src/gnome2/mod_mgr.c:471
 msgid "Click the box to select this module for install/update"
 msgstr ""
-"Haga clic en la caja para seleccionar este módulo para "
-"instalación/actualización"
+"Haga clic en la caja para seleccionar este módulo para instalación/"
+"actualización"
 
 #: ../src/gnome2/mod_mgr.c:490
 msgid "Installed"
@@ -907,7 +907,7 @@ msgstr "Añadir/Quitar"
 msgid "Choose"
 msgstr "Escoger"
 
-#: ../src/gnome2/mod_mgr.c:1774 ../src/gnome2/preferences_dialog.c:1779
+#: ../src/gnome2/mod_mgr.c:1774 ../src/gnome2/preferences_dialog.c:1793
 #: ../src/gnome2/sidebar.c:1413
 msgid "Modules"
 msgstr "Módulos"
@@ -1008,7 +1008,7 @@ msgstr "Borrar una fuente remota"
 #. *
 #. * Return value
 #. *   void
-#. 
+#.
 #: ../src/gnome2/mod_mgr.c:3244
 msgid ""
 "<b>Welcome to the Module Manager.</b>\n"
@@ -1018,8 +1018,8 @@ msgid ""
 "it over.\n"
 "(You will see this information box just once.)\n"
 "\n"
-"Modules come from different <u>repositories</u>.  <b>Module Sources: "
-"Add/Remove</b> will show you what repositories are currently known.\n"
+"Modules come from different <u>repositories</u>.  <b>Module Sources: Add/"
+"Remove</b> will show you what repositories are currently known.\n"
 "\n"
 "<b>Module Sources: Choose</b> is for deciding from where modules should "
 "come, that is, from which repository Xiphos should obtain them, as well as "
@@ -1047,9 +1047,8 @@ msgstr ""
 "\n"
 "<b>Fuentes de Módulos: Escoger</b> es para decidir de dónde vienen los "
 "módulos, esto es, de que repositorio los obtiene Xiphos, al igual que dónde "
-"deben ser guardados en su sistema. Seleccione la <i>Fuente de "
-"Instalación</i> y el <i>Destino de Instalación</i>, y haga clic en "
-"<i>Actualizar</i>.\n"
+"deben ser guardados en su sistema. Seleccione la <i>Fuente de Instalación</"
+"i> y el <i>Destino de Instalación</i>, y haga clic en <i>Actualizar</i>.\n"
 "\n"
 "<b>Módulos: Instalar/Actualizar</b> es para seleccionar y actualizar módulos "
 "después de haber elegido las fuentes y destino.\n"
@@ -1082,7 +1081,7 @@ msgstr "Ir adentro, a la primera subsección"
 msgid "Synchronize this window from main window"
 msgstr "Sincronizar esta ventana desde la ventana principal"
 
-#: ../src/gnome2/parallel_dialog.c:328 ../src/gnome2/preferences_dialog.c:1785
+#: ../src/gnome2/parallel_dialog.c:328 ../src/gnome2/preferences_dialog.c:1799
 msgid "Parallel"
 msgstr "Paralelo"
 
@@ -1139,48 +1138,48 @@ msgstr "Vista Paralela"
 #: ../src/gnome2/preferences_dialog.c:1522
 #: ../src/gnome2/preferences_dialog.c:1557
 #: ../src/gnome2/preferences_dialog.c:1593
-#: ../src/gnome2/preferences_dialog.c:1630
-#: ../src/gnome2/preferences_dialog.c:2038
+#: ../src/gnome2/preferences_dialog.c:1631
+#: ../src/gnome2/preferences_dialog.c:2052
 msgid "-- Select --"
 msgstr "-- Seleccionar --"
 
-#: ../src/gnome2/preferences_dialog.c:1637
+#: ../src/gnome2/preferences_dialog.c:1652
 msgid "Locale will take effect after restart."
 msgstr "Los cambios de idioma tendrán efecto al reiniciar"
 
-#: ../src/gnome2/preferences_dialog.c:1673 ../ui/prefs.glade.h:74
+#: ../src/gnome2/preferences_dialog.c:1687 ../ui/prefs.glade.h:74
 msgid "Preferences"
 msgstr "Preferencias"
 
-#: ../src/gnome2/preferences_dialog.c:1755
+#: ../src/gnome2/preferences_dialog.c:1769
 msgid "Fonts"
 msgstr "Tipografías"
 
-#: ../src/gnome2/preferences_dialog.c:1758
+#: ../src/gnome2/preferences_dialog.c:1772
 msgid "Color"
 msgstr "Color"
 
-#: ../src/gnome2/preferences_dialog.c:1761
+#: ../src/gnome2/preferences_dialog.c:1775
 msgid "Sizes"
 msgstr "Tamaños"
 
-#: ../src/gnome2/preferences_dialog.c:1765
+#: ../src/gnome2/preferences_dialog.c:1779
 msgid "General"
 msgstr "General"
 
-#: ../src/gnome2/preferences_dialog.c:1768 ../ui/prefs.glade.h:87
+#: ../src/gnome2/preferences_dialog.c:1782 ../ui/prefs.glade.h:87
 msgid "Tabs and Panes"
 msgstr "Pestañas y paneles"
 
-#: ../src/gnome2/preferences_dialog.c:1775
+#: ../src/gnome2/preferences_dialog.c:1789
 msgid "Options"
 msgstr "Opciones"
 
-#: ../src/gnome2/preferences_dialog.c:1782
+#: ../src/gnome2/preferences_dialog.c:1796
 msgid "Main"
 msgstr "Principal"
 
-#: ../src/gnome2/preferences_dialog.c:1788
+#: ../src/gnome2/preferences_dialog.c:1802
 msgid "Special"
 msgstr "Especial"
 
@@ -1334,8 +1333,8 @@ msgstr ""
 "(O quizá la imagen no está en formato bmp/gif/jpg/png.)\n"
 "Xiphos no puede ajustar la imagen a la ventana."
 
-#: ../src/main/display.cc:1043 ../src/main/display.cc:1093
-#: ../src/main/display.cc:1171 ../ui/export-dialog.glade.h:7
+#: ../src/main/display.cc:1043 ../src/main/display.cc:1095
+#: ../src/main/display.cc:1172 ../ui/export-dialog.glade.h:7
 msgid "Chapter"
 msgstr "Capítulo"
 
@@ -1633,11 +1632,11 @@ msgstr "MiListaDeOración"
 
 #: ../src/main/prayerlists.cc:342
 msgid ""
-"<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</b><br>pews<br>fellowsh"
-"ip<br>Bibles for missionaries<br><br><br>"
+"<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</"
+"b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"
 msgstr ""
-"<b>Gente:</b><br>Luis<br>Juan<br>Sara<br><br><b>Iglesia:</b><br>sillas<br>com"
-"unión<br>Biblias para los misioneros<br><br><br>"
+"<b>Gente:</b><br>Luis<br>Juan<br>Sara<br><br><b>Iglesia:</"
+"b><br>sillas<br>comunión<br>Biblias para los misioneros<br><br><br>"
 
 #: ../src/main/prayerlists.cc:368
 msgid "A subject-based prayer list. \\par\\par Module created by Xiphos."

@@ -46,7 +46,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-09 04:25-0500\n"
+"POT-Creation-Date: 2009-12-14 23:45+0000\n"
 "PO-Revision-Date: 2009-12-10 21:43+0000\n"
 "Last-Translator: matysek <Unknown>\n"
 "Language-Team: Xiphos Translation Team\n"
@@ -490,7 +490,7 @@ msgstr "Použít výchozí písmo pro modul"
 #. *
 #. * Return value
 #. *   void
-#. 
+#.
 #: ../src/gnome2/gui.c:110
 msgid ""
 "URL references using \"sword://\" (similar to web page\n"
@@ -943,7 +943,7 @@ msgstr "Přidat/Odstranit"
 msgid "Choose"
 msgstr "Vybrat"
 
-#: ../src/gnome2/mod_mgr.c:1774 ../src/gnome2/preferences_dialog.c:1779
+#: ../src/gnome2/mod_mgr.c:1774 ../src/gnome2/preferences_dialog.c:1793
 #: ../src/gnome2/sidebar.c:1413
 msgid "Modules"
 msgstr "Moduly"
@@ -1045,7 +1045,7 @@ msgstr "Smazat vzdálený zdroj"
 #. *
 #. * Return value
 #. *   void
-#. 
+#.
 #: ../src/gnome2/mod_mgr.c:3244
 msgid ""
 "<b>Welcome to the Module Manager.</b>\n"
@@ -1055,8 +1055,8 @@ msgid ""
 "it over.\n"
 "(You will see this information box just once.)\n"
 "\n"
-"Modules come from different <u>repositories</u>.  <b>Module Sources: "
-"Add/Remove</b> will show you what repositories are currently known.\n"
+"Modules come from different <u>repositories</u>.  <b>Module Sources: Add/"
+"Remove</b> will show you what repositories are currently known.\n"
 "\n"
 "<b>Module Sources: Choose</b> is for deciding from where modules should "
 "come, that is, from which repository Xiphos should obtain them, as well as "
@@ -1080,8 +1080,8 @@ msgstr ""
 "následujících věcí.\n"
 "(Toto informační okno se zobrazí jen jednou.)\n"
 "\n"
-"Moduly pochází z různých <u>míst</u>.  <b>Zdroje modulů: "
-"Přidat/Odstranit</b> zobrazuje známá umístění modulů.\n"
+"Moduly pochází z různých <u>míst</u>.  <b>Zdroje modulů: Přidat/Odstranit</"
+"b> zobrazuje známá umístění modulů.\n"
 "\n"
 "<b>Zdroje modulů: Vybrat</b> je k určení, kam mají moduly přijít. To "
 "znamená, odkud moduly stahovat a také kam je ukládat v systému. Nastavte "
@@ -1119,7 +1119,7 @@ msgstr "Jít dovnitř, na první podsekci"
 msgid "Synchronize this window from main window"
 msgstr "Synchronizace okna z hlavního okna aplikace"
 
-#: ../src/gnome2/parallel_dialog.c:328 ../src/gnome2/preferences_dialog.c:1785
+#: ../src/gnome2/parallel_dialog.c:328 ../src/gnome2/preferences_dialog.c:1799
 msgid "Parallel"
 msgstr "Souběžně"
 
@@ -1176,48 +1176,48 @@ msgstr "Souběžný pohled"
 #: ../src/gnome2/preferences_dialog.c:1522
 #: ../src/gnome2/preferences_dialog.c:1557
 #: ../src/gnome2/preferences_dialog.c:1593
-#: ../src/gnome2/preferences_dialog.c:1630
-#: ../src/gnome2/preferences_dialog.c:2038
+#: ../src/gnome2/preferences_dialog.c:1631
+#: ../src/gnome2/preferences_dialog.c:2052
 msgid "-- Select --"
 msgstr "-- Vybrat --"
 
-#: ../src/gnome2/preferences_dialog.c:1637
+#: ../src/gnome2/preferences_dialog.c:1652
 msgid "Locale will take effect after restart."
 msgstr "Změna jazyka se projeví až po opětovném spuštění."
 
-#: ../src/gnome2/preferences_dialog.c:1673 ../ui/prefs.glade.h:74
+#: ../src/gnome2/preferences_dialog.c:1687 ../ui/prefs.glade.h:74
 msgid "Preferences"
 msgstr "Nastavení"
 
-#: ../src/gnome2/preferences_dialog.c:1755
+#: ../src/gnome2/preferences_dialog.c:1769
 msgid "Fonts"
 msgstr "Písma"
 
-#: ../src/gnome2/preferences_dialog.c:1758
+#: ../src/gnome2/preferences_dialog.c:1772
 msgid "Color"
 msgstr "Barva"
 
-#: ../src/gnome2/preferences_dialog.c:1761
+#: ../src/gnome2/preferences_dialog.c:1775
 msgid "Sizes"
 msgstr "Velikosti"
 
-#: ../src/gnome2/preferences_dialog.c:1765
+#: ../src/gnome2/preferences_dialog.c:1779
 msgid "General"
 msgstr "Obecné"
 
-#: ../src/gnome2/preferences_dialog.c:1768 ../ui/prefs.glade.h:87
+#: ../src/gnome2/preferences_dialog.c:1782 ../ui/prefs.glade.h:87
 msgid "Tabs and Panes"
 msgstr "Panely a pole"
 
-#: ../src/gnome2/preferences_dialog.c:1775
+#: ../src/gnome2/preferences_dialog.c:1789
 msgid "Options"
 msgstr "Nastavení"
 
-#: ../src/gnome2/preferences_dialog.c:1782
+#: ../src/gnome2/preferences_dialog.c:1796
 msgid "Main"
 msgstr "Hlavní"
 
-#: ../src/gnome2/preferences_dialog.c:1788
+#: ../src/gnome2/preferences_dialog.c:1802
 msgid "Special"
 msgstr "Zvláštní"
 
@@ -1371,8 +1371,8 @@ msgstr ""
 "(Nebo možná typ obrázku je jiný než bmp/gif/jpg/png.)\n"
 "Xiphos není schopen přizpůsobit obrázek velikosti okna."
 
-#: ../src/main/display.cc:1043 ../src/main/display.cc:1093
-#: ../src/main/display.cc:1171 ../ui/export-dialog.glade.h:7
+#: ../src/main/display.cc:1043 ../src/main/display.cc:1095
+#: ../src/main/display.cc:1172 ../ui/export-dialog.glade.h:7
 msgid "Chapter"
 msgstr "Kapitola"
 
@@ -1670,11 +1670,11 @@ msgstr "MujModlitebniSeznam"
 
 #: ../src/main/prayerlists.cc:342
 msgid ""
-"<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</b><br>pews<br>fellowsh"
-"ip<br>Bibles for missionaries<br><br><br>"
+"<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</"
+"b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"
 msgstr ""
-"<b>Lidé:</b><br>Bob<br>Sam<br>Sue<br><br><b>Sbor:</b><br>lavice<br>společenst"
-"ví<br>Bible pro misionáře<br><br><br>"
+"<b>Lidé:</b><br>Bob<br>Sam<br>Sue<br><br><b>Sbor:</"
+"b><br>lavice<br>společenství<br>Bible pro misionáře<br><br><br>"
 
 #: ../src/main/prayerlists.cc:368
 msgid "A subject-based prayer list. \\par\\par Module created by Xiphos."

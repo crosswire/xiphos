@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Romanian Version\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-09 04:25-0500\n"
+"POT-Creation-Date: 2009-12-14 23:45+0000\n"
 "PO-Revision-Date: 2009-12-09 22:13+0000\n"
 "Last-Translator: Laurentiu N. <Unknown>\n"
 "Language-Team: Xiphos <nick.laurentiu.nica@gmail.com>\n"
@@ -453,7 +453,7 @@ msgstr "Foloseste fontul implicit pentru acest modul"
 #. *
 #. * Return value
 #. *   void
-#. 
+#.
 #: ../src/gnome2/gui.c:110
 msgid ""
 "URL references using \"sword://\" (similar to web page\n"
@@ -698,8 +698,7 @@ msgstr "Apasa pe casuta pentru a lucra la acest modul"
 
 #: ../src/gnome2/mod_mgr.c:471
 msgid "Click the box to select this module for install/update"
-msgstr ""
-"Apasa casuta pentru a selecta acest modul pentru instalare/actualizare"
+msgstr "Apasa casuta pentru a selecta acest modul pentru instalare/actualizare"
 
 #: ../src/gnome2/mod_mgr.c:490
 msgid "Installed"
@@ -909,7 +908,7 @@ msgstr "Adauga/Elimina"
 msgid "Choose"
 msgstr "Alege"
 
-#: ../src/gnome2/mod_mgr.c:1774 ../src/gnome2/preferences_dialog.c:1779
+#: ../src/gnome2/mod_mgr.c:1774 ../src/gnome2/preferences_dialog.c:1793
 #: ../src/gnome2/sidebar.c:1413
 msgid "Modules"
 msgstr "Module"
@@ -1006,7 +1005,7 @@ msgstr "Sterge o sursa indepartata"
 #. *
 #. * Return value
 #. *   void
-#. 
+#.
 #: ../src/gnome2/mod_mgr.c:3244
 msgid ""
 "<b>Welcome to the Module Manager.</b>\n"
@@ -1016,8 +1015,8 @@ msgid ""
 "it over.\n"
 "(You will see this information box just once.)\n"
 "\n"
-"Modules come from different <u>repositories</u>.  <b>Module Sources: "
-"Add/Remove</b> will show you what repositories are currently known.\n"
+"Modules come from different <u>repositories</u>.  <b>Module Sources: Add/"
+"Remove</b> will show you what repositories are currently known.\n"
 "\n"
 "<b>Module Sources: Choose</b> is for deciding from where modules should "
 "come, that is, from which repository Xiphos should obtain them, as well as "
@@ -1056,7 +1055,7 @@ msgstr "Mergi in interior, la prima sub-sectiune"
 msgid "Synchronize this window from main window"
 msgstr "Sincronizeaza aceasta fereastra din fereastra principala"
 
-#: ../src/gnome2/parallel_dialog.c:328 ../src/gnome2/preferences_dialog.c:1785
+#: ../src/gnome2/parallel_dialog.c:328 ../src/gnome2/preferences_dialog.c:1799
 msgid "Parallel"
 msgstr "Paralel"
 
@@ -1113,48 +1112,48 @@ msgstr "Vedere Paralela"
 #: ../src/gnome2/preferences_dialog.c:1522
 #: ../src/gnome2/preferences_dialog.c:1557
 #: ../src/gnome2/preferences_dialog.c:1593
-#: ../src/gnome2/preferences_dialog.c:1630
-#: ../src/gnome2/preferences_dialog.c:2038
+#: ../src/gnome2/preferences_dialog.c:1631
+#: ../src/gnome2/preferences_dialog.c:2052
 msgid "-- Select --"
 msgstr "-- Selecteaza --"
 
-#: ../src/gnome2/preferences_dialog.c:1637
+#: ../src/gnome2/preferences_dialog.c:1652
 msgid "Locale will take effect after restart."
 msgstr "Limba va avea efect dupa restartare."
 
-#: ../src/gnome2/preferences_dialog.c:1673 ../ui/prefs.glade.h:74
+#: ../src/gnome2/preferences_dialog.c:1687 ../ui/prefs.glade.h:74
 msgid "Preferences"
 msgstr "Preferinte"
 
-#: ../src/gnome2/preferences_dialog.c:1755
+#: ../src/gnome2/preferences_dialog.c:1769
 msgid "Fonts"
 msgstr "Fonturi"
 
-#: ../src/gnome2/preferences_dialog.c:1758
+#: ../src/gnome2/preferences_dialog.c:1772
 msgid "Color"
 msgstr "Culoare"
 
-#: ../src/gnome2/preferences_dialog.c:1761
+#: ../src/gnome2/preferences_dialog.c:1775
 msgid "Sizes"
 msgstr "Marimi"
 
-#: ../src/gnome2/preferences_dialog.c:1765
+#: ../src/gnome2/preferences_dialog.c:1779
 msgid "General"
 msgstr "General"
 
-#: ../src/gnome2/preferences_dialog.c:1768 ../ui/prefs.glade.h:87
+#: ../src/gnome2/preferences_dialog.c:1782 ../ui/prefs.glade.h:87
 msgid "Tabs and Panes"
 msgstr "Taburi si Panouri"
 
-#: ../src/gnome2/preferences_dialog.c:1775
+#: ../src/gnome2/preferences_dialog.c:1789
 msgid "Options"
 msgstr "Optiuni"
 
-#: ../src/gnome2/preferences_dialog.c:1782
+#: ../src/gnome2/preferences_dialog.c:1796
 msgid "Main"
 msgstr "Principal"
 
-#: ../src/gnome2/preferences_dialog.c:1788
+#: ../src/gnome2/preferences_dialog.c:1802
 msgid "Special"
 msgstr "Special"
 
@@ -1308,8 +1307,8 @@ msgstr ""
 "(Sau probabil imaginea e de alt tip decat bmp/gif/jpg/png.)\n"
 "Xiphos nu poate redimensiona imaginile pentru a se potrivi in fereastra."
 
-#: ../src/main/display.cc:1043 ../src/main/display.cc:1093
-#: ../src/main/display.cc:1171 ../ui/export-dialog.glade.h:7
+#: ../src/main/display.cc:1043 ../src/main/display.cc:1095
+#: ../src/main/display.cc:1172 ../ui/export-dialog.glade.h:7
 msgid "Chapter"
 msgstr "Capitol"
 
@@ -1607,11 +1606,11 @@ msgstr "ListaMeaDeRugaciune"
 
 #: ../src/main/prayerlists.cc:342
 msgid ""
-"<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</b><br>pews<br>fellowsh"
-"ip<br>Bibles for missionaries<br><br><br>"
+"<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</"
+"b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"
 msgstr ""
-"<b>Oameni:</b><br>Bob<br>Sam<br>Sue<br><br><b>Biserica:</b><br>scaune<br>part"
-"asie<br>Biblii pentru misionari<br><br><br>"
+"<b>Oameni:</b><br>Bob<br>Sam<br>Sue<br><br><b>Biserica:</"
+"b><br>scaune<br>partasie<br>Biblii pentru misionari<br><br><br>"
 
 #: ../src/main/prayerlists.cc:368
 msgid "A subject-based prayer list. \\par\\par Module created by Xiphos."
@@ -3435,8 +3434,7 @@ msgstr "Foloseste Dictionarul Curent"
 
 #: ../ui/xi-menus.glade.h:94
 msgid "Use module manager to install and remove Sword modules"
-msgstr ""
-"Foloseste managerul de modul pentru a instala si elimina module Sword"
+msgstr "Foloseste managerul de modul pentru a instala si elimina module Sword"
 
 #: ../ui/xi-menus.glade.h:95
 msgid "Variants"
