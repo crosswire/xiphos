@@ -838,10 +838,10 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule)
 	if (strongs_and_morph)
 		set_morph_order(imodule);
 
-	swbuf.appendFormatted("<div align=%s>",
+	swbuf.appendFormatted("<div dir=%s>",
 			      ((is_rtol && !ops->transliteration)
-			       ? "right"
-			       : "left"));
+			       ? "rtl"
+			       : "ltr"));
 
 	for (key->Verse(1);
 	     (key->Book()    == curBook)    &&
@@ -1065,10 +1065,10 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 
 		utf8_key = strdup((char*)key->getText());
 
-		swbuf.appendFormatted("<div align=%s>",
+		swbuf.appendFormatted("<div dir=%s>",
 				      ((is_rtol && !ops->transliteration)
-				       ? "right"
-				       : "left"));
+				       ? "rtl"
+				       : "ltr"));
 
 		num = main_format_number(key->Verse());
 		buf=g_strdup_printf(settings.showversenum
@@ -1176,10 +1176,10 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 
 		utf8_key = strdup((char*)key->getText());
 
-		swbuf.appendFormatted("<div align=%s>",
+		swbuf.appendFormatted("<div dir=%s>",
 				      ((is_rtol && !ops->transliteration)
-				       ? "right"
-				       : "left"));
+				       ? "rtl"
+				       : "ltr"));
 
 		num = main_format_number(key->Verse());
 		buf=g_strdup_printf(settings.showversenum
@@ -1560,10 +1560,10 @@ GTKChapDisp::Display(SWModule &imodule)
 	swbuf.append(buf);
 	g_free(buf);
 
-	swbuf.appendFormatted("<div align=%s>",
+	swbuf.appendFormatted("<div dir=%s>",
 			      ((is_rtol && !ops->transliteration)
-			       ? "right"
-			       : "left"));
+			       ? "rtl"
+			       : "ltr"));
 
 	main_set_global_options(ops);
 	getVerseBefore(imodule);
@@ -1769,10 +1769,10 @@ DialogEntryDisp::DisplayByChapter(SWModule &imodule)
 	if (strongs_and_morph)
 		set_morph_order(imodule);
 
-	swbuf.appendFormatted("<div align=%s>",
+	swbuf.appendFormatted("<div dir=%s>",
 			      ((is_rtol && !ops->transliteration)
-			       ? "right"
-			       : "left"));
+			       ? "rtl"
+			       : "ltr"));
 
 	for (key->Verse(1);
 	     (key->Book()    == curBook)    &&
@@ -1986,10 +1986,10 @@ DialogChapDisp::Display(SWModule &imodule)
 	swbuf.append(buf);
 	g_free(buf);
 
-	swbuf.appendFormatted("<div align=%s>",
+	swbuf.appendFormatted("<div dir=%s>",
 			      ((is_rtol && !ops->transliteration)
-			       ? "right"
-			       : "left"));
+			       ? "rtl"
+			       : "ltr"));
 
 	for (key->Verse(1);
 	     (key->Book() == curBook) &&
@@ -2271,10 +2271,10 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 	swbuf.append(buf);
 	g_free(buf);
 
-	swbuf.appendFormatted("<div align=%s>",
+	swbuf.appendFormatted("<div dir=%s>",
 			      ((is_rtol && !ops->transliteration)
-			       ? "right"
-			       : "left"));
+			       ? "rtl"
+			       : "ltr"));
 
 	gecko_html_write(html,swbuf.c_str(),swbuf.length());
 
