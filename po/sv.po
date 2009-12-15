@@ -3,13 +3,13 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-12-14 23:45+0000\n"
-"PO-Revision-Date: 2009-12-09 22:27+0000\n"
-"Last-Translator: Tomas Gustavsson <tomplast@gmail.com>\n"
+"PO-Revision-Date: 2009-12-14 23:09+0000\n"
+"Last-Translator: Matthew Talbert <ransom1982@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-12-10 04:39+0000\n"
+"X-Launchpad-Export-Date: 2009-12-15 05:09+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../src/backend/sword_main.cc:1083
@@ -20,7 +20,7 @@ msgstr "Konfiguration hittades inte"
 #: ../src/gnome2/html.c:637
 #, c-format
 msgid "Page %d of %d"
-msgstr ""
+msgstr "Sida %d av %d"
 
 #: ../src/editor/bonobo-editor.c:353 ../src/editor/slib-editor.c:659
 msgid "Are you sure you want to delete the note for"
@@ -54,7 +54,7 @@ msgstr "StudyPad"
 
 #: ../src/editor/bonobo-editor.c:1237 ../src/editor/slib-editor.c:1415
 msgid "Note Editor"
-msgstr ""
+msgstr "Notisredigerare"
 
 #: ../src/editor/bonobo-editor.c:1246 ../src/editor/slib-editor.c:1429
 msgid "Prayer List/Journal Editor"
@@ -79,7 +79,7 @@ msgstr "HTML-källa"
 
 #: ../src/editor/slib-editor.c:716
 msgid "Plain Source"
-msgstr ""
+msgstr "Vanlig källkod"
 
 #: ../src/editor/slib-editor.c:726 ../ui/editor_note.xml.h:15
 #: ../ui/editor_studypad.xml.h:21
@@ -109,15 +109,15 @@ msgstr "Spara _som..."
 
 #: ../src/editor/slib-editor.c:767
 msgid "New"
-msgstr ""
+msgstr "Nytt"
 
 #: ../src/editor/slib-editor.c:769
 msgid "Open new document"
-msgstr ""
+msgstr "Öppna nytt dokument"
 
 #: ../src/editor/slib-editor.c:773
 msgid "Delete"
-msgstr ""
+msgstr "Radera"
 
 #: ../src/editor/slib-editor.c:775
 msgid "Delete current note"
@@ -139,7 +139,7 @@ msgstr "_HTML-källa"
 
 #: ../src/editor/slib-editor.c:849
 msgid "_Plain Source"
-msgstr ""
+msgstr "_Vanlig källkod"
 
 #: ../src/editor/slib-editor.c:856 ../ui/xi-menus.glade.h:121
 msgid "_View"
@@ -430,7 +430,7 @@ msgstr "Använd standardtypsnittet för denna modul"
 #. *
 #. * Return value
 #. *   void
-#.
+#. 
 #: ../src/gnome2/gui.c:110
 msgid ""
 "URL references using \"sword://\" (similar to web page\n"
@@ -636,7 +636,7 @@ msgstr "Tar bort index"
 
 #: ../src/gnome2/mod_mgr.c:196
 msgid "Deletion"
-msgstr ""
+msgstr "Radering"
 
 #: ../src/gnome2/mod_mgr.c:427
 msgid "Module Name"
@@ -725,7 +725,7 @@ msgstr "Färdigt"
 #: ../src/gnome2/utilities.c:986 ../src/main/sidebar.cc:852
 #: ../src/main/sidebar.cc:924 ../src/main/sidebar.cc:926
 msgid "Unknown"
-msgstr ""
+msgstr "Okänd"
 
 #: ../src/gnome2/mod_mgr.c:1301
 #, c-format
@@ -831,15 +831,15 @@ msgstr "Mapp"
 
 #: ../src/gnome2/mod_mgr.c:1732
 msgid "User"
-msgstr ""
+msgstr "Användare"
 
 #: ../src/gnome2/mod_mgr.c:1740
 msgid "Password"
-msgstr ""
+msgstr "Lösenord"
 
 #: ../src/gnome2/mod_mgr.c:1748
 msgid "UID"
-msgstr ""
+msgstr "UID"
 
 #: ../src/gnome2/mod_mgr.c:1765
 msgid "Module Sources"
@@ -847,11 +847,11 @@ msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:1768
 msgid "Add/Remove"
-msgstr ""
+msgstr "Lägg till/Ta bort"
 
 #: ../src/gnome2/mod_mgr.c:1770
 msgid "Choose"
-msgstr ""
+msgstr "Välj"
 
 #: ../src/gnome2/mod_mgr.c:1774 ../src/gnome2/preferences_dialog.c:1793
 #: ../src/gnome2/sidebar.c:1413
@@ -925,7 +925,7 @@ msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:2580
 msgid "Password (optional):"
-msgstr ""
+msgstr "Lösenord (valfritt):"
 
 #. this can happen at most once
 #: ../src/gnome2/mod_mgr.c:2608
@@ -950,7 +950,7 @@ msgstr ""
 #. *
 #. * Return value
 #. *   void
-#.
+#. 
 #: ../src/gnome2/mod_mgr.c:3244
 msgid ""
 "<b>Welcome to the Module Manager.</b>\n"
@@ -960,8 +960,8 @@ msgid ""
 "it over.\n"
 "(You will see this information box just once.)\n"
 "\n"
-"Modules come from different <u>repositories</u>.  <b>Module Sources: Add/"
-"Remove</b> will show you what repositories are currently known.\n"
+"Modules come from different <u>repositories</u>.  <b>Module Sources: "
+"Add/Remove</b> will show you what repositories are currently known.\n"
 "\n"
 "<b>Module Sources: Choose</b> is for deciding from where modules should "
 "come, that is, from which repository Xiphos should obtain them, as well as "
@@ -1060,7 +1060,7 @@ msgstr "Parallell vy"
 #: ../src/gnome2/preferences_dialog.c:1631
 #: ../src/gnome2/preferences_dialog.c:2052
 msgid "-- Select --"
-msgstr ""
+msgstr "-- Välj --"
 
 #: ../src/gnome2/preferences_dialog.c:1652
 msgid "Locale will take effect after restart."
@@ -1080,7 +1080,7 @@ msgstr "Färg"
 
 #: ../src/gnome2/preferences_dialog.c:1775
 msgid "Sizes"
-msgstr ""
+msgstr "Storlekar"
 
 #: ../src/gnome2/preferences_dialog.c:1779
 msgid "General"
@@ -1092,7 +1092,7 @@ msgstr ""
 
 #: ../src/gnome2/preferences_dialog.c:1789
 msgid "Options"
-msgstr ""
+msgstr "Alternativ"
 
 #: ../src/gnome2/preferences_dialog.c:1796
 msgid "Main"
@@ -1100,7 +1100,7 @@ msgstr "Allmänt"
 
 #: ../src/gnome2/preferences_dialog.c:1802
 msgid "Special"
-msgstr ""
+msgstr "Speciell"
 
 #: ../src/gnome2/search_dialog.c:68 ../src/main/search_dialog.cc:66
 #: ../src/main/search_sidebar.cc:61
@@ -1286,13 +1286,13 @@ msgstr "Fotnot"
 #: ../src/main/module_dialogs.cc:298 ../src/main/module_dialogs.cc:421
 #: ../src/main/previewer.cc:281
 msgid "Cross Reference"
-msgstr ""
+msgstr "Korsreferens"
 
 #: ../src/main/module_dialogs.cc:304 ../src/main/module_dialogs.cc:318
 #: ../src/main/module_dialogs.cc:426 ../src/main/module_dialogs.cc:438
 #: ../src/main/previewer.cc:287 ../src/main/previewer.cc:306
 msgid "Strongs"
-msgstr ""
+msgstr "Strongs"
 
 #: ../src/main/module_dialogs.cc:310 ../src/main/module_dialogs.cc:329
 #: ../src/main/module_dialogs.cc:431 ../src/main/module_dialogs.cc:448
@@ -1306,7 +1306,7 @@ msgstr "Tillbaka till "
 
 #: ../src/main/parallel_view.cc:404 ../ui/xi-menus.glade.h:89
 msgid "Strong's Numbers"
-msgstr ""
+msgstr "Strongs nummer"
 
 #: ../src/main/parallel_view.cc:414 ../ui/search-dialog.glade.h:52
 #: ../ui/xi-menus.glade.h:40
@@ -1332,7 +1332,7 @@ msgstr ""
 
 #: ../src/main/parallel_view.cc:464
 msgid "Cross-references"
-msgstr ""
+msgstr "Korsreferens"
 
 #: ../src/main/parallel_view.cc:474 ../ui/xi-menus.glade.h:50
 msgid "Lemmas"
@@ -1541,11 +1541,11 @@ msgstr "MinBönelista"
 
 #: ../src/main/prayerlists.cc:342
 msgid ""
-"<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</"
-"b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"
+"<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</b><br>pews<br>fellowsh"
+"ip<br>Bibles for missionaries<br><br><br>"
 msgstr ""
-"<b>Personer:</b><br>Anna<br>Johannes<br>Lars<br><br><b>Kyrkan:</"
-"b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"
+"<b>Personer:</b><br>Anna<br>Johannes<br>Lars<br><br><b>Kyrkan:</b><br>pews<br"
+">fellowship<br>Bibles for missionaries<br><br><br>"
 
 #: ../src/main/prayerlists.cc:368
 msgid "A subject-based prayer list. \\par\\par Module created by Xiphos."
@@ -1589,7 +1589,8 @@ msgstr ""
 
 #: ../src/main/prayerlists.cc:531
 msgid "An outlined topic (e.g. sermon). \\par\\par Module created by Xiphos."
-msgstr "An outlined topic (t.ex. predikan). \\par\\par Modul skapad av Xiphos."
+msgstr ""
+"An outlined topic (t.ex. predikan). \\par\\par Modul skapad av Xiphos."
 
 #: ../src/main/prayerlists.cc:532
 msgid "OutlinedTopic"
@@ -1688,7 +1689,7 @@ msgstr "Sökning slutförd"
 
 #: ../src/main/search_sidebar.cc:100
 msgid "matches"
-msgstr ""
+msgstr "matchar"
 
 #: ../src/main/settings.c:60
 msgid ""
@@ -2132,7 +2133,7 @@ msgstr ""
 
 #: ../ui/export-dialog.glade.h:17
 msgid "Key"
-msgstr ""
+msgstr "Nyckel"
 
 #: ../ui/export-dialog.glade.h:18
 msgid "Plain Text"
@@ -2164,7 +2165,7 @@ msgstr "Version"
 
 #: ../ui/markverse.glade.h:4
 msgid "Mark"
-msgstr ""
+msgstr "Markera"
 
 #: ../ui/markverse.glade.h:5
 msgid "Mark/Unmark Verse"
@@ -2172,7 +2173,7 @@ msgstr ""
 
 #: ../ui/markverse.glade.h:9
 msgid "Unmark"
-msgstr ""
+msgstr "Avmarkera"
 
 #: ../ui/module-manager.glade.h:1
 msgid "<b>Add and Remove Sources</b>"
@@ -2461,7 +2462,7 @@ msgstr "Typsnitt övrigt"
 
 #: ../ui/prefs.glade.h:48
 msgid "Foreground"
-msgstr ""
+msgstr "Förgrund"
 
 #: ../ui/prefs.glade.h:49
 msgid "General Misc"
@@ -2665,7 +2666,7 @@ msgstr "<b>Moduler</b>"
 
 #: ../ui/search-dialog.glade.h:6
 msgid "<b>Options</b>"
-msgstr ""
+msgstr "<b>Alternativ</b>"
 
 #: ../ui/search-dialog.glade.h:7
 msgid "<b>Preview</b>"
@@ -2821,7 +2822,7 @@ msgstr ""
 
 #: ../ui/search-dialog.glade.h:46
 msgid "Export"
-msgstr ""
+msgstr "Exportera"
 
 #: ../ui/search-dialog.glade.h:47
 msgid "Export current search results"
@@ -3069,7 +3070,7 @@ msgstr ""
 
 #: ../ui/xi-menus.glade.h:4
 msgid "Add Item"
-msgstr ""
+msgstr "Lägg till objekt"
 
 #: ../ui/xi-menus.glade.h:5
 msgid "Add Sub-Item"
@@ -3141,7 +3142,7 @@ msgstr "_Dubbelt radavstånd"
 
 #: ../ui/xi-menus.glade.h:25
 msgid "Daily"
-msgstr ""
+msgstr "Daglig"
 
 #: ../ui/xi-menus.glade.h:26
 msgid "Delete Item"
@@ -3153,7 +3154,7 @@ msgstr "Ta bort objekt"
 
 #: ../ui/xi-menus.glade.h:28
 msgid "Dictionar_y"
-msgstr ""
+msgstr "Dictionar_y"
 
 #: ../ui/xi-menus.glade.h:29
 msgid "Display Book Heading"
@@ -3185,11 +3186,11 @@ msgstr "Expandera alla bokmärkesgrupper"
 
 #: ../ui/xi-menus.glade.h:37
 msgid "Export Folder"
-msgstr ""
+msgstr "Exportera till mapp"
 
 #: ../ui/xi-menus.glade.h:38
 msgid "Export List"
-msgstr ""
+msgstr "Exportera lista"
 
 #: ../ui/xi-menus.glade.h:45
 msgid "Image Content"
@@ -3249,7 +3250,7 @@ msgstr "Öppna i redigerare"
 
 #: ../ui/xi-menus.glade.h:63
 msgid "Open in new tab"
-msgstr ""
+msgstr "Öppna i ny flik"
 
 #: ../ui/xi-menus.glade.h:64
 msgid ""
@@ -3267,11 +3268,11 @@ msgstr "Öppna detta bokmärke i ett dialogfönster"
 
 #: ../ui/xi-menus.glade.h:68
 msgid "Open this bookmark in a new tab"
-msgstr ""
+msgstr "Öppna detta bokmärke i en ny flik"
 
 #: ../ui/xi-menus.glade.h:69
 msgid "Outlined"
-msgstr ""
+msgstr "Konturerad"
 
 #: ../ui/xi-menus.glade.h:71
 msgid "Read Selection Aloud"
@@ -3327,7 +3328,7 @@ msgstr ""
 
 #: ../ui/xi-menus.glade.h:86
 msgid "Show Previe_wer in the Sidebar"
-msgstr ""
+msgstr "_Visa förhandsgranskare i sidomenyn"
 
 #: ../ui/xi-menus.glade.h:87
 msgid "Show Verse _Numbers"
@@ -3355,7 +3356,7 @@ msgstr "Använd modulhanteraren för att installera och ta bort SWORD-moduler"
 
 #: ../ui/xi-menus.glade.h:95
 msgid "Variants"
-msgstr ""
+msgstr "Varianter"
 
 #: ../ui/xi-menus.glade.h:97
 msgid "_About The SWORD Project"
@@ -3371,7 +3372,7 @@ msgstr "_Fäst/koppla loss sidomeny"
 
 #: ../ui/xi-menus.glade.h:100
 msgid "_Bible"
-msgstr ""
+msgstr "_Bibeln"
 
 #: ../ui/xi-menus.glade.h:101
 msgid "_Commentary/Book"
@@ -3419,11 +3420,11 @@ msgstr "_Öppna session"
 
 #: ../ui/xi-menus.glade.h:113
 msgid "_Preferences"
-msgstr ""
+msgstr "In_ställningar"
 
 #: ../ui/xi-menus.glade.h:114
 msgid "_Preview"
-msgstr ""
+msgstr "_Förhandsvisning"
 
 #: ../ui/xi-menus.glade.h:115
 msgid "_Read Aloud"
@@ -3431,7 +3432,7 @@ msgstr ""
 
 #: ../ui/xi-menus.glade.h:116
 msgid "_Report Bug"
-msgstr ""
+msgstr "_Rapportera fel"
 
 #: ../ui/xi-menus.glade.h:117
 msgid "_Save Session"
