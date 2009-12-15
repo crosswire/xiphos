@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 3.1.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-12 13:15+0100\n"
+"POT-Creation-Date: 2009-12-14 23:45+0000\n"
 "PO-Revision-Date: 2009-12-12 13:39+0100\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: emacs + po-mode <gnomefr@traduc.org>\n"
@@ -257,11 +257,12 @@ msgid ""
 "below, contact us, and get involved with our efforts."
 msgstr ""
 "Si vous appréciez Xiphos, vous aimeriez peut-être le voir s'afficher dans "
-"votre langue maternelle ? Sachez que vous pouvez participer à sa traduction. !\n"
+"votre langue maternelle ? Sachez que vous pouvez participer à sa "
+"traduction. !\n"
 "\n"
-"Toute nouvelle contribution à la traduction de Xiphos est la bienvenue. "
-"Si vous souhaitez apporter votre aide, suivez le lien ci-dessous. "
-"N'hésitez pas à nous contacter et nous rejoindre."
+"Toute nouvelle contribution à la traduction de Xiphos est la bienvenue. Si "
+"vous souhaitez apporter votre aide, suivez le lien ci-dessous. N'hésitez pas "
+"à nous contacter et nous rejoindre."
 
 #: ../src/gnome2/about_trans.c:98
 msgid "About Xiphos Translation"
@@ -922,7 +923,7 @@ msgstr "Ajouter/Supprimer"
 msgid "Choose"
 msgstr "Choisir"
 
-#: ../src/gnome2/mod_mgr.c:1774 ../src/gnome2/preferences_dialog.c:1779
+#: ../src/gnome2/mod_mgr.c:1774 ../src/gnome2/preferences_dialog.c:1793
 #: ../src/gnome2/sidebar.c:1413
 msgid "Modules"
 msgstr "Modules"
@@ -1053,9 +1054,10 @@ msgid ""
 msgstr ""
 "<b>Bienvenue dans le Gestionnaire de modules</b>\n"
 "\n"
-"C'est le mécanisme utilisé par Xiphos pour obtenir et mettre à jour les contenus.\n"
-"Il ressort qu'il n'a pas encore été utilisé, arrêtez-vous donc un petit moment "
-"pour mieux le connaître.\n"
+"C'est le mécanisme utilisé par Xiphos pour obtenir et mettre à jour les "
+"contenus.\n"
+"Il ressort qu'il n'a pas encore été utilisé, arrêtez-vous donc un petit "
+"moment pour mieux le connaître.\n"
 "(Cette information n'apparaitra qu'une seule fois).\n"
 " \n"
 "Les modules proviennent de différents <u>dépots</u>.  <b>Dépots : Ajouter/"
@@ -1063,17 +1065,16 @@ msgstr ""
 "\n"
 "<b>Dépots : Choisir</b> permet de décider d'où les modules doivent provenir, "
 "c'est-à-dire de quel dépot Xiphos doit les obtenir, et aussi à quel endroit "
-"ils doivent être placés sur le système. Sélectionnez <i>Source des dépots</i> "
-"et <i>Dossier d'installation</i>, puis ensuite <i>Actualiser</i>.\n"
+"ils doivent être placés sur le système. Sélectionnez <i>Source des dépots</"
+"i> et <i>Dossier d'installation</i>, puis ensuite <i>Actualiser</i>.\n"
 "\n"
 "<b>Modules : Installer</b> permet de sélectionner et d'obtenir des modules "
 "après avoir choisi la source et le dossier d'installation.\n"
 "\n"
 "<b>Modules ; Maintenance</b> est pour l'archivage et la création d'index.\n"
 "\n"
-"Pour plus d'informations sur le gestionnaire de modules, voir la section 5"
-"du manuel d'aide. "
-"\n"
+"Pour plus d'informations sur le gestionnaire de modules, voir la section 5du "
+"manuel d'aide. \n"
 
 #: ../src/gnome2/navbar_book.c:359 ../src/gnome2/navbar_book_dialog.c:300
 msgid "Go outward, to the section containing this one"
@@ -1097,7 +1098,7 @@ msgstr "Descendre d'un niveau dans le sommaire du livre"
 msgid "Synchronize this window from main window"
 msgstr "Synchronise cette fenêtre avec la fenêtre principale"
 
-#: ../src/gnome2/parallel_dialog.c:328 ../src/gnome2/preferences_dialog.c:1785
+#: ../src/gnome2/parallel_dialog.c:328 ../src/gnome2/preferences_dialog.c:1799
 msgid "Parallel"
 msgstr "Vue parallèle"
 
@@ -1154,48 +1155,48 @@ msgstr "Vue parallèle"
 #: ../src/gnome2/preferences_dialog.c:1522
 #: ../src/gnome2/preferences_dialog.c:1557
 #: ../src/gnome2/preferences_dialog.c:1593
-#: ../src/gnome2/preferences_dialog.c:1630
-#: ../src/gnome2/preferences_dialog.c:2038
+#: ../src/gnome2/preferences_dialog.c:1631
+#: ../src/gnome2/preferences_dialog.c:2052
 msgid "-- Select --"
 msgstr "[ Aucun ]"
 
-#: ../src/gnome2/preferences_dialog.c:1637
+#: ../src/gnome2/preferences_dialog.c:1652
 msgid "Locale will take effect after restart."
 msgstr "La langue prendra effet après redémarrage"
 
-#: ../src/gnome2/preferences_dialog.c:1673 ../ui/prefs.glade.h:74
+#: ../src/gnome2/preferences_dialog.c:1687 ../ui/prefs.glade.h:74
 msgid "Preferences"
 msgstr "Préférences"
 
-#: ../src/gnome2/preferences_dialog.c:1755
+#: ../src/gnome2/preferences_dialog.c:1769
 msgid "Fonts"
 msgstr "Polices"
 
-#: ../src/gnome2/preferences_dialog.c:1758
+#: ../src/gnome2/preferences_dialog.c:1772
 msgid "Color"
 msgstr "Couleurs"
 
-#: ../src/gnome2/preferences_dialog.c:1761
+#: ../src/gnome2/preferences_dialog.c:1775
 msgid "Sizes"
 msgstr "Tailles"
 
-#: ../src/gnome2/preferences_dialog.c:1765
+#: ../src/gnome2/preferences_dialog.c:1779
 msgid "General"
 msgstr "Général"
 
-#: ../src/gnome2/preferences_dialog.c:1768 ../ui/prefs.glade.h:87
+#: ../src/gnome2/preferences_dialog.c:1782 ../ui/prefs.glade.h:87
 msgid "Tabs and Panes"
 msgstr "Onglets et volets"
 
-#: ../src/gnome2/preferences_dialog.c:1775
+#: ../src/gnome2/preferences_dialog.c:1789
 msgid "Options"
 msgstr "Options"
 
-#: ../src/gnome2/preferences_dialog.c:1782
+#: ../src/gnome2/preferences_dialog.c:1796
 msgid "Main"
 msgstr "Base"
 
-#: ../src/gnome2/preferences_dialog.c:1788
+#: ../src/gnome2/preferences_dialog.c:1802
 msgid "Special"
 msgstr "Spécial"
 
@@ -1349,8 +1350,8 @@ msgstr ""
 "(ou l'image n'est pas de type bmp/gif/jpg/png).\n"
 "&app; ne peut redimensionner les images."
 
-#: ../src/main/display.cc:1043 ../src/main/display.cc:1093
-#: ../src/main/display.cc:1171 ../ui/export-dialog.glade.h:7
+#: ../src/main/display.cc:1043 ../src/main/display.cc:1095
+#: ../src/main/display.cc:1172 ../ui/export-dialog.glade.h:7
 msgid "Chapter"
 msgstr "Chapitre"
 
@@ -1651,8 +1652,8 @@ msgid ""
 "<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</"
 "b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"
 msgstr ""
-"<b>Personnes:</b><br>Jean<br>Pierre<br>Paul<br><br><b>Assemblée:</b><br>"
-"Participants<br>Fonctionnement<br>Missions<br><br><br>"
+"<b>Personnes:</b><br>Jean<br>Pierre<br>Paul<br><br><b>Assemblée:</"
+"b><br>Participants<br>Fonctionnement<br>Missions<br><br><br>"
 
 #: ../src/main/prayerlists.cc:368
 msgid "A subject-based prayer list. \\par\\par Module created by Xiphos."
@@ -1940,7 +1941,8 @@ msgstr "Les noms de livres et les menus ne seront peut-être pas traduits"
 
 #: ../src/main/sword.cc:1232
 msgid "Daily devotional was requested, but there are none installed."
-msgstr "Impossible d'afficher le calendrier biblique, aucun module de ce type n'est "
+msgstr ""
+"Impossible d'afficher le calendrier biblique, aucun module de ce type n'est "
 "installé."
 
 #: ../src/main/tab_history.c:219
@@ -2323,7 +2325,9 @@ msgstr "<b>Attention :</b> Prudence dans les pays de persécution"
 msgid ""
 "<b>Warning:</b> If you live in a persecuted country and do not wish to risk "
 "detection you should NOT use  the remote installation feature! "
-msgstr "<b>Attention :</b> Ne pas utiliser les dépôts distants depuis les pays où il est dangereux d'être repéré! "
+msgstr ""
+"<b>Attention :</b> Ne pas utiliser les dépôts distants depuis les pays où il "
+"est dangereux d'être repéré! "
 
 #: ../ui/module-manager.glade.h:9
 msgid "<i>Personal area, for your use only:</i>"
@@ -2731,7 +2735,8 @@ msgstr "Boite combinée Répertoire par défaut du bloc-notes"
 
 #: ../ui/prefs.glade.h:88
 msgid "Use Bible Text scroll bar to scroll to previous or next chapter"
-msgstr "Permet d'utiliser la barre de déplacement vertical du volet des textes "
+msgstr ""
+"Permet d'utiliser la barre de déplacement vertical du volet des textes "
 "bibliques pour se déplacer au chapitre suivant ou précédent"
 
 #: ../ui/prefs.glade.h:89
@@ -3444,7 +3449,8 @@ msgstr "Enregistre la liste sous un seul signet"
 
 #: ../ui/xi-menus.glade.h:81
 msgid "Save these results as a series of bookmarks in their own folder"
-msgstr "Enregistre ces résultats sous une série de signets dans leur propre dossier"
+msgstr ""
+"Enregistre ces résultats sous une série de signets dans leur propre dossier"
 
 #: ../ui/xi-menus.glade.h:82
 msgid "Save these results as a single bookmark"

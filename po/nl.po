@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-09 04:25-0500\n"
+"POT-Creation-Date: 2009-12-14 23:45+0000\n"
 "PO-Revision-Date: 2009-12-09 22:11+0000\n"
 "Last-Translator: Gertjan <gwfrancke@gmail.com>\n"
 "Language-Team: Xiphos-developers <xiphos-developers@lists>\n"
@@ -449,7 +449,7 @@ msgstr "Gebruik het standaardlettertype voor deze module"
 #. *
 #. * Return value
 #. *   void
-#. 
+#.
 #: ../src/gnome2/gui.c:110
 msgid ""
 "URL references using \"sword://\" (similar to web page\n"
@@ -891,7 +891,7 @@ msgstr ""
 msgid "Choose"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1774 ../src/gnome2/preferences_dialog.c:1779
+#: ../src/gnome2/mod_mgr.c:1774 ../src/gnome2/preferences_dialog.c:1793
 #: ../src/gnome2/sidebar.c:1413
 msgid "Modules"
 msgstr "Modules"
@@ -988,7 +988,7 @@ msgstr "Verwijder een externe bron"
 #. *
 #. * Return value
 #. *   void
-#. 
+#.
 #: ../src/gnome2/mod_mgr.c:3244
 msgid ""
 "<b>Welcome to the Module Manager.</b>\n"
@@ -998,8 +998,8 @@ msgid ""
 "it over.\n"
 "(You will see this information box just once.)\n"
 "\n"
-"Modules come from different <u>repositories</u>.  <b>Module Sources: "
-"Add/Remove</b> will show you what repositories are currently known.\n"
+"Modules come from different <u>repositories</u>.  <b>Module Sources: Add/"
+"Remove</b> will show you what repositories are currently known.\n"
 "\n"
 "<b>Module Sources: Choose</b> is for deciding from where modules should "
 "come, that is, from which repository Xiphos should obtain them, as well as "
@@ -1038,7 +1038,7 @@ msgstr "Ga naar binnen, naar de eerste subsectie"
 msgid "Synchronize this window from main window"
 msgstr ""
 
-#: ../src/gnome2/parallel_dialog.c:328 ../src/gnome2/preferences_dialog.c:1785
+#: ../src/gnome2/parallel_dialog.c:328 ../src/gnome2/preferences_dialog.c:1799
 msgid "Parallel"
 msgstr "Parallel"
 
@@ -1095,48 +1095,48 @@ msgstr "Parallelweergave"
 #: ../src/gnome2/preferences_dialog.c:1522
 #: ../src/gnome2/preferences_dialog.c:1557
 #: ../src/gnome2/preferences_dialog.c:1593
-#: ../src/gnome2/preferences_dialog.c:1630
-#: ../src/gnome2/preferences_dialog.c:2038
+#: ../src/gnome2/preferences_dialog.c:1631
+#: ../src/gnome2/preferences_dialog.c:2052
 msgid "-- Select --"
 msgstr "-- Selecteer --"
 
-#: ../src/gnome2/preferences_dialog.c:1637
+#: ../src/gnome2/preferences_dialog.c:1652
 msgid "Locale will take effect after restart."
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1673 ../ui/prefs.glade.h:74
+#: ../src/gnome2/preferences_dialog.c:1687 ../ui/prefs.glade.h:74
 msgid "Preferences"
 msgstr "Voorkeuren"
 
-#: ../src/gnome2/preferences_dialog.c:1755
+#: ../src/gnome2/preferences_dialog.c:1769
 msgid "Fonts"
 msgstr "Lettertypes"
 
-#: ../src/gnome2/preferences_dialog.c:1758
+#: ../src/gnome2/preferences_dialog.c:1772
 msgid "Color"
 msgstr "Kleur"
 
-#: ../src/gnome2/preferences_dialog.c:1761
+#: ../src/gnome2/preferences_dialog.c:1775
 msgid "Sizes"
 msgstr "Groottes"
 
-#: ../src/gnome2/preferences_dialog.c:1765
+#: ../src/gnome2/preferences_dialog.c:1779
 msgid "General"
 msgstr "Algemeen"
 
-#: ../src/gnome2/preferences_dialog.c:1768 ../ui/prefs.glade.h:87
+#: ../src/gnome2/preferences_dialog.c:1782 ../ui/prefs.glade.h:87
 msgid "Tabs and Panes"
 msgstr "Tabbladen en panelen"
 
-#: ../src/gnome2/preferences_dialog.c:1775
+#: ../src/gnome2/preferences_dialog.c:1789
 msgid "Options"
 msgstr "Opties"
 
-#: ../src/gnome2/preferences_dialog.c:1782
+#: ../src/gnome2/preferences_dialog.c:1796
 msgid "Main"
 msgstr "Hoofdscherm"
 
-#: ../src/gnome2/preferences_dialog.c:1788
+#: ../src/gnome2/preferences_dialog.c:1802
 msgid "Special"
 msgstr "Geavanceerd"
 
@@ -1288,8 +1288,8 @@ msgstr ""
 "(Mogelijks is het bestandstype iets anders dan bm/gif/jpg/png.)\n"
 "Xiphos kan illustraties niet aanpassen aan de schermgrootte."
 
-#: ../src/main/display.cc:1043 ../src/main/display.cc:1093
-#: ../src/main/display.cc:1171 ../ui/export-dialog.glade.h:7
+#: ../src/main/display.cc:1043 ../src/main/display.cc:1095
+#: ../src/main/display.cc:1172 ../ui/export-dialog.glade.h:7
 msgid "Chapter"
 msgstr "Hoofdstuk"
 
@@ -1586,16 +1586,15 @@ msgstr "MijnGebedslijst"
 
 #: ../src/main/prayerlists.cc:342
 msgid ""
-"<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</b><br>pews<br>fellowsh"
-"ip<br>Bibles for missionaries<br><br><br>"
+"<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</"
+"b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"
 msgstr ""
-"<b>Personen:</b><br>Bob<br>Sam<br>Sue<br><br><b>Kerk:</b><br>Veiligheid<br>Ee"
-"nheid<br>Bijbels voor zendelingen<br><br><br>"
+"<b>Personen:</b><br>Bob<br>Sam<br>Sue<br><br><b>Kerk:</"
+"b><br>Veiligheid<br>Eenheid<br>Bijbels voor zendelingen<br><br><br>"
 
 #: ../src/main/prayerlists.cc:368
 msgid "A subject-based prayer list. \\par\\par Module created by Xiphos."
-msgstr ""
-"Een gebedslijst op onderwerp. \\par\\par Module aangemaakt met Xiphos."
+msgstr "Een gebedslijst op onderwerp. \\par\\par Module aangemaakt met Xiphos."
 
 #: ../src/main/prayerlists.cc:369
 msgid "SubjectPrayerList"
@@ -2407,8 +2406,7 @@ msgstr "Hoog contrast toepassen op het huidige vers"
 msgid ""
 "Automatically resize commentary, book, and dictionary image content to fit "
 "subwindow"
-msgstr ""
-"Commentaar, boek en woordenboek automatisch passend maken aan venster"
+msgstr "Commentaar, boek en woordenboek automatisch passend maken aan venster"
 
 #: ../ui/prefs.glade.h:20
 msgid "Background"
@@ -2660,8 +2658,7 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:88
 msgid "Use Bible Text scroll bar to scroll to previous or next chapter"
-msgstr ""
-"Gebruik de schuifbalk om naar het vorige of volgende hoofdstuk te gaan"
+msgstr "Gebruik de schuifbalk om naar het vorige of volgende hoofdstuk te gaan"
 
 #: ../ui/prefs.glade.h:89
 msgid "Use Verse Per Line"
@@ -4533,15 +4530,16 @@ msgstr "Xiphos Bijbelgids"
 #~ msgstr "Xiphos Configuratie - Pagina 1 of 5"
 
 #~ msgid ""
-#~ "Since this is the first time you have run Xiphos, this assistant will guide "
-#~ "you through the initial setup by asking a few simple questions.\n"
+#~ "Since this is the first time you have run Xiphos, this assistant will "
+#~ "guide you through the initial setup by asking a few simple questions.\n"
 #~ "\n"
 #~ "Once you have completed these steps, you can always change the settings "
 #~ "later by using the Preferences dialog."
 #~ msgstr ""
-#~ "Omdat dit de eerste keer dat u Xiphos gebruikt zal deze assistent u door de "
-#~ "initiële configuratie leiden met behulp van eenvoudige vragen.Als u klaar "
-#~ "bent, kunt u de configuratie altijd wijzigen met het venster Voorkeuren."
+#~ "Omdat dit de eerste keer dat u Xiphos gebruikt zal deze assistent u door "
+#~ "de initiële configuratie leiden met behulp van eenvoudige vragen.Als u "
+#~ "klaar bent, kunt u de configuratie altijd wijzigen met het venster "
+#~ "Voorkeuren."
 
 #~ msgid "Xiphos Configuration - Page 2 of 5"
 #~ msgstr "Xiphos Configuratie - Pagina 2 of 5"
@@ -4604,18 +4602,18 @@ msgstr "Xiphos Bijbelgids"
 #~ msgstr "Algemeen boek"
 
 #~ msgid ""
-#~ "Which Greek Lexicon to display in Dictionary/Lexicon Window when a link or "
-#~ "word is clicked"
+#~ "Which Greek Lexicon to display in Dictionary/Lexicon Window when a link "
+#~ "or word is clicked"
 #~ msgstr ""
-#~ "Het Griekse lexicon dat wordt getoond in het Woordenboek/Lexicon scherm als "
-#~ "er op een verwijzing of een woord wordt geklikt"
+#~ "Het Griekse lexicon dat wordt getoond in het Woordenboek/Lexicon scherm "
+#~ "als er op een verwijzing of een woord wordt geklikt"
 
 #~ msgid ""
-#~ "Which Hebrew Lexicon to display in Dictionary/Lexicon Window when a link or "
-#~ "word is clicked"
+#~ "Which Hebrew Lexicon to display in Dictionary/Lexicon Window when a link "
+#~ "or word is clicked"
 #~ msgstr ""
-#~ "Het Hebreeuwse lexicon dat wordt getoond in het Woordenboek/Lexicon scherm "
-#~ "als er op een verwijzing of een woord wordt geklikt"
+#~ "Het Hebreeuwse lexicon dat wordt getoond in het Woordenboek/Lexicon "
+#~ "scherm als er op een verwijzing of een woord wordt geklikt"
 
 #~ msgid "Xiphos Configuration - Page 5 of 5"
 #~ msgstr "Xiphos Configuratie - Pagina 5 van 5"

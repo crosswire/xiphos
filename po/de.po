@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 3.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-12 12:02+0000\n"
+"POT-Creation-Date: 2009-12-14 23:45+0000\n"
 "PO-Revision-Date: 2009-12-12 17:27+0000\n"
 "Last-Translator: MixCool <lars.thoms@mixcool.de>\n"
 "Language-Team: Xiphos Translation Team <farsi@lists.sharif.edu>\n"
@@ -456,7 +456,7 @@ msgstr "Standardschriftart für dieses Modul verwenden"
 #. *
 #. * Return value
 #. *   void
-#. 
+#.
 #: ../src/gnome2/gui.c:110
 msgid ""
 "URL references using \"sword://\" (similar to web page\n"
@@ -912,7 +912,7 @@ msgstr "Hinzufügen/Entfernen"
 msgid "Choose"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1774 ../src/gnome2/preferences_dialog.c:1779
+#: ../src/gnome2/mod_mgr.c:1774 ../src/gnome2/preferences_dialog.c:1793
 #: ../src/gnome2/sidebar.c:1413
 msgid "Modules"
 msgstr "Module"
@@ -1013,7 +1013,7 @@ msgstr "Geben sie eine Quelle im Internet an"
 #. *
 #. * Return value
 #. *   void
-#. 
+#.
 #: ../src/gnome2/mod_mgr.c:3244
 msgid ""
 "<b>Welcome to the Module Manager.</b>\n"
@@ -1023,8 +1023,8 @@ msgid ""
 "it over.\n"
 "(You will see this information box just once.)\n"
 "\n"
-"Modules come from different <u>repositories</u>.  <b>Module Sources: "
-"Add/Remove</b> will show you what repositories are currently known.\n"
+"Modules come from different <u>repositories</u>.  <b>Module Sources: Add/"
+"Remove</b> will show you what repositories are currently known.\n"
 "\n"
 "<b>Module Sources: Choose</b> is for deciding from where modules should "
 "come, that is, from which repository Xiphos should obtain them, as well as "
@@ -1063,7 +1063,7 @@ msgstr "Nach innen, zum ersten Unterabschnitt"
 msgid "Synchronize this window from main window"
 msgstr "Synchronisiert dieses Fenster vom Hauptfenster"
 
-#: ../src/gnome2/parallel_dialog.c:328 ../src/gnome2/preferences_dialog.c:1785
+#: ../src/gnome2/parallel_dialog.c:328 ../src/gnome2/preferences_dialog.c:1799
 msgid "Parallel"
 msgstr "Parallel"
 
@@ -1120,48 +1120,48 @@ msgstr "Parallelansicht"
 #: ../src/gnome2/preferences_dialog.c:1522
 #: ../src/gnome2/preferences_dialog.c:1557
 #: ../src/gnome2/preferences_dialog.c:1593
-#: ../src/gnome2/preferences_dialog.c:1630
-#: ../src/gnome2/preferences_dialog.c:2038
+#: ../src/gnome2/preferences_dialog.c:1631
+#: ../src/gnome2/preferences_dialog.c:2052
 msgid "-- Select --"
 msgstr "-- Auswahl --"
 
-#: ../src/gnome2/preferences_dialog.c:1637
+#: ../src/gnome2/preferences_dialog.c:1652
 msgid "Locale will take effect after restart."
 msgstr "Lokalisierung wird nach einem Neustart wirksam."
 
-#: ../src/gnome2/preferences_dialog.c:1673 ../ui/prefs.glade.h:74
+#: ../src/gnome2/preferences_dialog.c:1687 ../ui/prefs.glade.h:74
 msgid "Preferences"
 msgstr "Einstellungen"
 
-#: ../src/gnome2/preferences_dialog.c:1755
+#: ../src/gnome2/preferences_dialog.c:1769
 msgid "Fonts"
 msgstr "Schriften"
 
-#: ../src/gnome2/preferences_dialog.c:1758
+#: ../src/gnome2/preferences_dialog.c:1772
 msgid "Color"
 msgstr "Farben"
 
-#: ../src/gnome2/preferences_dialog.c:1761
+#: ../src/gnome2/preferences_dialog.c:1775
 msgid "Sizes"
 msgstr "Größen"
 
-#: ../src/gnome2/preferences_dialog.c:1765
+#: ../src/gnome2/preferences_dialog.c:1779
 msgid "General"
 msgstr "Allgemein"
 
-#: ../src/gnome2/preferences_dialog.c:1768 ../ui/prefs.glade.h:87
+#: ../src/gnome2/preferences_dialog.c:1782 ../ui/prefs.glade.h:87
 msgid "Tabs and Panes"
 msgstr "Reiter und Bereiche"
 
-#: ../src/gnome2/preferences_dialog.c:1775
+#: ../src/gnome2/preferences_dialog.c:1789
 msgid "Options"
 msgstr "Einstellungen"
 
-#: ../src/gnome2/preferences_dialog.c:1782
+#: ../src/gnome2/preferences_dialog.c:1796
 msgid "Main"
 msgstr "Hauptfenster"
 
-#: ../src/gnome2/preferences_dialog.c:1788
+#: ../src/gnome2/preferences_dialog.c:1802
 msgid "Special"
 msgstr "Spezial"
 
@@ -1317,8 +1317,8 @@ msgstr ""
 "Xiphos kann die Bilder nicht an die\n"
 "Fenstergröße anpassen."
 
-#: ../src/main/display.cc:1043 ../src/main/display.cc:1093
-#: ../src/main/display.cc:1171 ../ui/export-dialog.glade.h:7
+#: ../src/main/display.cc:1043 ../src/main/display.cc:1095
+#: ../src/main/display.cc:1172 ../ui/export-dialog.glade.h:7
 msgid "Chapter"
 msgstr "Kapitel"
 
@@ -1616,11 +1616,11 @@ msgstr "MeineGebetsliste"
 
 #: ../src/main/prayerlists.cc:342
 msgid ""
-"<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</b><br>pews<br>fellowsh"
-"ip<br>Bibles for missionaries<br><br><br>"
+"<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</"
+"b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"
 msgstr ""
-"<b>Personen:</b><br>Robert<br>Samuel<br>Susanne<br><br><b>Gemeinde:</b><br>Ki"
-"rchenbänke<br>Mitgliedschaft<br>Bibeln für Missionare<br><br><br>"
+"<b>Personen:</b><br>Robert<br>Samuel<br>Susanne<br><br><b>Gemeinde:</"
+"b><br>Kirchenbänke<br>Mitgliedschaft<br>Bibeln für Missionare<br><br><br>"
 
 #: ../src/main/prayerlists.cc:368
 msgid "A subject-based prayer list. \\par\\par Module created by Xiphos."
@@ -2445,8 +2445,7 @@ msgstr "Wende kontrastreiche Hervorhebung auf den aktuellen Vers an"
 msgid ""
 "Automatically resize commentary, book, and dictionary image content to fit "
 "subwindow"
-msgstr ""
-"Automatischen Anpassung von Bildern in Kommentar, Buch und Wörterbuch"
+msgstr "Automatischen Anpassung von Bildern in Kommentar, Buch und Wörterbuch"
 
 #: ../ui/prefs.glade.h:20
 msgid "Background"
@@ -4556,14 +4555,15 @@ msgstr "Xiphos Bibelleitfaden"
 #~ msgstr "Xiphos Konfiguration - Seite 1 von 5"
 
 #~ msgid ""
-#~ "Since this is the first time you have run Xiphos, this assistant will guide "
-#~ "you through the initial setup by asking a few simple questions.\n"
+#~ "Since this is the first time you have run Xiphos, this assistant will "
+#~ "guide you through the initial setup by asking a few simple questions.\n"
 #~ "\n"
 #~ "Once you have completed these steps, you can always change the settings "
 #~ "later by using the Preferences dialog."
 #~ msgstr ""
-#~ "Sie verwenden Xiphos zum ersten Mal. Deshalb wird ihnen dieser Assistent bei "
-#~ "der ersten Einrichtung helfen und Ihnen einige einfache Fragen stellen.\n"
+#~ "Sie verwenden Xiphos zum ersten Mal. Deshalb wird ihnen dieser Assistent "
+#~ "bei der ersten Einrichtung helfen und Ihnen einige einfache Fragen "
+#~ "stellen.\n"
 #~ "\n"
 #~ "Nachdem sie die folgenden Schritte durchgeführt haben, können diese "
 #~ "Einstellung später jederzeit ändern, indem Sie denentsprechenden Dialog "
@@ -4630,18 +4630,18 @@ msgstr "Xiphos Bibelleitfaden"
 #~ msgstr "Allgemeines Buch"
 
 #~ msgid ""
-#~ "Which Greek Lexicon to display in Dictionary/Lexicon Window when a link or "
-#~ "word is clicked"
+#~ "Which Greek Lexicon to display in Dictionary/Lexicon Window when a link "
+#~ "or word is clicked"
 #~ msgstr ""
-#~ "Welches Griechischlexikon angezeigt werden soll, wenn ein Verweis oder Wort "
-#~ "angeklickt wird"
+#~ "Welches Griechischlexikon angezeigt werden soll, wenn ein Verweis oder "
+#~ "Wort angeklickt wird"
 
 #~ msgid ""
-#~ "Which Hebrew Lexicon to display in Dictionary/Lexicon Window when a link or "
-#~ "word is clicked"
+#~ "Which Hebrew Lexicon to display in Dictionary/Lexicon Window when a link "
+#~ "or word is clicked"
 #~ msgstr ""
-#~ "Welches Hebräischlexikon angezeigt werden soll, wenn ein Verweis oder Wort "
-#~ "angeklickt wird"
+#~ "Welches Hebräischlexikon angezeigt werden soll, wenn ein Verweis oder "
+#~ "Wort angeklickt wird"
 
 #~ msgid "Xiphos Configuration - Page 5 of 5"
 #~ msgstr "Xiphos Konfiguration - Seite 5 von 5"
@@ -4653,7 +4653,8 @@ msgstr "Xiphos Bibelleitfaden"
 #~ msgstr ""
 #~ "Danke, dass Sie Xiphos benutzen.\n"
 #~ "\n"
-#~ "Klicken Sie auf Anwenden, um den Dialog zu schließen und Xiphos zu starten."
+#~ "Klicken Sie auf Anwenden, um den Dialog zu schließen und Xiphos zu "
+#~ "starten."
 
 #~ msgid "Include Footnotes"
 #~ msgstr "Fußnoten einschließen"
@@ -4713,11 +4714,11 @@ msgstr "Xiphos Bibelleitfaden"
 #~ msgstr "Im Wörterbuch/Lexikon-Fenster"
 
 #~ msgid ""
-#~ "Which Greek Lexicon to display in Dictionary/Lexicon window when a link or "
-#~ "word is clicked"
+#~ "Which Greek Lexicon to display in Dictionary/Lexicon window when a link "
+#~ "or word is clicked"
 #~ msgstr ""
-#~ "Welches Griechischlexikon angezeigt werden soll, wenn ein Verweis oder Wort "
-#~ "angeklickt wird"
+#~ "Welches Griechischlexikon angezeigt werden soll, wenn ein Verweis oder "
+#~ "Wort angeklickt wird"
 
 #~ msgid "Hebrew Lexicon Viewer"
 #~ msgstr "Hebräischlexikon-Betrachter"
@@ -4725,8 +4726,8 @@ msgstr "Xiphos Bibelleitfaden"
 #~ msgid ""
 #~ "Which Hebrew Lexicon to display in viewer when a link or word is clicked"
 #~ msgstr ""
-#~ "Welches Hebräischlexikon angezeigt werden soll, wenn ein Verweis oder Wort "
-#~ "angeklickt wird"
+#~ "Welches Hebräischlexikon angezeigt werden soll, wenn ein Verweis oder "
+#~ "Wort angeklickt wird"
 
 #~ msgid "Greek Lexicon Viewer"
 #~ msgstr "Griechischlexikon-Betrachter"
@@ -4734,8 +4735,8 @@ msgstr "Xiphos Bibelleitfaden"
 #~ msgid ""
 #~ "Which Greek Lexicon to display in viewer when a link or word is clicked"
 #~ msgstr ""
-#~ "Welches Griechischlexikon angezeigt werden soll, wenn ein Verweis oder Wort "
-#~ "angeklickt wird"
+#~ "Welches Griechischlexikon angezeigt werden soll, wenn ein Verweis oder "
+#~ "Wort angeklickt wird"
 
 #~ msgid "Scope"
 #~ msgstr "Bereich"
@@ -4829,11 +4830,11 @@ msgstr "Xiphos Bibelleitfaden"
 #~ msgstr "Haupttext-Modul"
 
 #~ msgid ""
-#~ "Which Hebrew Lexicon to display in Dictionary/Lexicon window when a link or "
-#~ "word is clicked"
+#~ "Which Hebrew Lexicon to display in Dictionary/Lexicon window when a link "
+#~ "or word is clicked"
 #~ msgstr ""
-#~ "Welches Hebräischlexikon angezeigt werden soll, wenn ein Verweis oder Wort "
-#~ "angeklickt wird"
+#~ "Welches Hebräischlexikon angezeigt werden soll, wenn ein Verweis oder "
+#~ "Wort angeklickt wird"
 
 #~ msgid "Toggle Dictionary View"
 #~ msgstr "Wörterbuchansicht ein/aus"

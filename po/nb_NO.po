@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-09 04:25-0500\n"
+"POT-Creation-Date: 2009-12-14 23:45+0000\n"
 "PO-Revision-Date: 2009-12-09 22:09+0000\n"
 "Last-Translator: Peter von Kaehne <Unknown>\n"
 "Language-Team: <i18n-nb@lister.ping.uio.no>\n"
@@ -449,7 +449,7 @@ msgstr "Bruk standard tegnsett for denne modulen"
 #. *
 #. * Return value
 #. *   void
-#. 
+#.
 #: ../src/gnome2/gui.c:110
 msgid ""
 "URL references using \"sword://\" (similar to web page\n"
@@ -692,8 +692,7 @@ msgstr "Klikk boksen for å bruke denne modulen"
 
 #: ../src/gnome2/mod_mgr.c:471
 msgid "Click the box to select this module for install/update"
-msgstr ""
-"Klikk i boksen for å velge denne modulen for innstallasjon/oppdatering"
+msgstr "Klikk i boksen for å velge denne modulen for innstallasjon/oppdatering"
 
 #: ../src/gnome2/mod_mgr.c:490
 msgid "Installed"
@@ -902,7 +901,7 @@ msgstr ""
 msgid "Choose"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1774 ../src/gnome2/preferences_dialog.c:1779
+#: ../src/gnome2/mod_mgr.c:1774 ../src/gnome2/preferences_dialog.c:1793
 #: ../src/gnome2/sidebar.c:1413
 msgid "Modules"
 msgstr "Moduler"
@@ -999,7 +998,7 @@ msgstr "Slett en ekstern kilde"
 #. *
 #. * Return value
 #. *   void
-#. 
+#.
 #: ../src/gnome2/mod_mgr.c:3244
 msgid ""
 "<b>Welcome to the Module Manager.</b>\n"
@@ -1009,8 +1008,8 @@ msgid ""
 "it over.\n"
 "(You will see this information box just once.)\n"
 "\n"
-"Modules come from different <u>repositories</u>.  <b>Module Sources: "
-"Add/Remove</b> will show you what repositories are currently known.\n"
+"Modules come from different <u>repositories</u>.  <b>Module Sources: Add/"
+"Remove</b> will show you what repositories are currently known.\n"
 "\n"
 "<b>Module Sources: Choose</b> is for deciding from where modules should "
 "come, that is, from which repository Xiphos should obtain them, as well as "
@@ -1049,7 +1048,7 @@ msgstr "Gå innover til den første subseksjonen"
 msgid "Synchronize this window from main window"
 msgstr "Synkroniser vinduet med hovedvindu"
 
-#: ../src/gnome2/parallel_dialog.c:328 ../src/gnome2/preferences_dialog.c:1785
+#: ../src/gnome2/parallel_dialog.c:328 ../src/gnome2/preferences_dialog.c:1799
 msgid "Parallel"
 msgstr "Parallell"
 
@@ -1106,48 +1105,48 @@ msgstr "Parallellvisning"
 #: ../src/gnome2/preferences_dialog.c:1522
 #: ../src/gnome2/preferences_dialog.c:1557
 #: ../src/gnome2/preferences_dialog.c:1593
-#: ../src/gnome2/preferences_dialog.c:1630
-#: ../src/gnome2/preferences_dialog.c:2038
+#: ../src/gnome2/preferences_dialog.c:1631
+#: ../src/gnome2/preferences_dialog.c:2052
 msgid "-- Select --"
 msgstr "-- Velg --"
 
-#: ../src/gnome2/preferences_dialog.c:1637
+#: ../src/gnome2/preferences_dialog.c:1652
 msgid "Locale will take effect after restart."
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1673 ../ui/prefs.glade.h:74
+#: ../src/gnome2/preferences_dialog.c:1687 ../ui/prefs.glade.h:74
 msgid "Preferences"
 msgstr "Innstillinger"
 
-#: ../src/gnome2/preferences_dialog.c:1755
+#: ../src/gnome2/preferences_dialog.c:1769
 msgid "Fonts"
 msgstr "Skrift"
 
-#: ../src/gnome2/preferences_dialog.c:1758
+#: ../src/gnome2/preferences_dialog.c:1772
 msgid "Color"
 msgstr "Farge"
 
-#: ../src/gnome2/preferences_dialog.c:1761
+#: ../src/gnome2/preferences_dialog.c:1775
 msgid "Sizes"
 msgstr "Størrelser"
 
-#: ../src/gnome2/preferences_dialog.c:1765
+#: ../src/gnome2/preferences_dialog.c:1779
 msgid "General"
 msgstr "Generelt"
 
-#: ../src/gnome2/preferences_dialog.c:1768 ../ui/prefs.glade.h:87
+#: ../src/gnome2/preferences_dialog.c:1782 ../ui/prefs.glade.h:87
 msgid "Tabs and Panes"
 msgstr "Arkfaner og paneler"
 
-#: ../src/gnome2/preferences_dialog.c:1775
+#: ../src/gnome2/preferences_dialog.c:1789
 msgid "Options"
 msgstr "Muligheter"
 
-#: ../src/gnome2/preferences_dialog.c:1782
+#: ../src/gnome2/preferences_dialog.c:1796
 msgid "Main"
 msgstr "Hoved"
 
-#: ../src/gnome2/preferences_dialog.c:1788
+#: ../src/gnome2/preferences_dialog.c:1802
 msgid "Special"
 msgstr "Spesial"
 
@@ -1297,8 +1296,8 @@ msgstr ""
 "(Bildet har annen filtype enn·bmp/gif/jpg/png.)\n"
 "Xiphos·kan ikke gjøre om bilde til å passe."
 
-#: ../src/main/display.cc:1043 ../src/main/display.cc:1093
-#: ../src/main/display.cc:1171 ../ui/export-dialog.glade.h:7
+#: ../src/main/display.cc:1043 ../src/main/display.cc:1095
+#: ../src/main/display.cc:1172 ../ui/export-dialog.glade.h:7
 msgid "Chapter"
 msgstr "Kapittel"
 
@@ -1596,11 +1595,11 @@ msgstr "MinBønneListe"
 
 #: ../src/main/prayerlists.cc:342
 msgid ""
-"<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</b><br>pews<br>fellowsh"
-"ip<br>Bibles for missionaries<br><br><br>"
+"<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</"
+"b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"
 msgstr ""
-"<b>Mennesker:</b><br>Bjarne<br>Sigurd<br>Siri<br><br><b>Kirke:</b><br>pews<br"
-">felleskap<br>Bibler for misjonærer<br><br><br>"
+"<b>Mennesker:</b><br>Bjarne<br>Sigurd<br>Siri<br><br><b>Kirke:</"
+"b><br>pews<br>felleskap<br>Bibler for misjonærer<br><br><br>"
 
 #: ../src/main/prayerlists.cc:368
 msgid "A subject-based prayer list. \\par\\par Module created by Xiphos."
@@ -1645,8 +1644,8 @@ msgstr ""
 #: ../src/main/prayerlists.cc:531
 msgid "An outlined topic (e.g. sermon). \\par\\par Module created by Xiphos."
 msgstr ""
-"En understreket linje (eks. forkynnelse). \\par\\"
-"par·Module·created·by·Xiphos."
+"En understreket linje (eks. forkynnelse). \\par"
+"\\par·Module·created·by·Xiphos."
 
 #: ../src/main/prayerlists.cc:532
 msgid "OutlinedTopic"
@@ -4164,8 +4163,8 @@ msgstr "Xiphos Bibel Guide"
 #~ "similar URLs.  Would you like Xiphos to install itself as the program to "
 #~ "handle these URLs?"
 #~ msgstr ""
-#~ "Ikke noe program er satt opp til å håndtere \"sword://\" og liknende URL-er. "
-#~ "Vil du at GnoneSword skal settes opp til å håndtere disse URL-ene?"
+#~ "Ikke noe program er satt opp til å håndtere \"sword://\" og liknende URL-"
+#~ "er. Vil du at GnoneSword skal settes opp til å håndtere disse URL-ene?"
 
 #~ msgid "The"
 #~ msgstr "<b></b>"
