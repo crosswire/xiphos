@@ -44,6 +44,11 @@ strip $outdir"xiphos.exe"
 
 cp -r /usr/local/share/sword/locales.d $outdir"../share/sword/locales.d"
 
+# update gtk+ mo files
+
+for f in `ls po/*.po`; do msgfmt f; done
+mv po/fa.mo binaries/Xiphos/share/locales/fa/LC_MESSAGES/gtk.mo
+
 # make installer
 cd win32/nsis
 makensis installer.nsi
