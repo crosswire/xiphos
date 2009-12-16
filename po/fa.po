@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: 3.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-12-14 23:45+0000\n"
-"PO-Revision-Date: 2009-12-14 23:28+0100\n"
+"PO-Revision-Date: 2009-12-16 23:39+0100\n"
 "Last-Translator: Peter von Kaehne <refdoc@crosswire.org>\n"
 "Language-Team: English/GB <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -956,7 +956,7 @@ msgstr ""
 msgid ""
 "There are still no Bibles installed.\n"
 "Xiphos cannot continue without one."
-msgstr ""
+msgstr "زیفوس یک عنون کتاب مقدس لازم درد. خواهش میکنم یکی نصب کن! "
 
 #: ../src/gnome2/mod_mgr.c:2353
 msgid "Standard remote sources have been loaded."
@@ -2327,9 +2327,8 @@ msgid "Current local sources"
 msgstr "منابع محلی فعلی"
 
 #: ../ui/module-manager.glade.h:15
-#, fuzzy
 msgid "Delete Index"
-msgstr "حذف مورد"
+msgstr "حذف ایندکس"
 
 #: ../ui/module-manager.glade.h:16
 msgid "Home dir"
@@ -3218,16 +3217,19 @@ msgid "Commentary by Chapter"
 msgstr "تفسیر فصل به فصل"
 
 #: ../ui/xi-menus.glade.h:19
+#, fuzzy
 msgid "Create a new daily journal"
-msgstr ""
+msgstr "یجاد لیست سادۀ دعا"
 
 #: ../ui/xi-menus.glade.h:20
+#, fuzzy
 msgid "Create a new monthly journal"
-msgstr ""
+msgstr "یجاد لیست سادۀ دعا"
 
 #: ../ui/xi-menus.glade.h:21
+#, fuzzy
 msgid "Create a new outlined topic"
-msgstr ""
+msgstr "یجاد لیست سادۀ دعا"
 
 #: ../ui/xi-menus.glade.h:22
 msgid "Create a new simple prayer list"
@@ -3235,7 +3237,7 @@ msgstr "ایجاد لیست سادۀ دعا"
 
 #: ../ui/xi-menus.glade.h:23
 msgid "Create a new subject prayer list"
-msgstr ""
+msgstr "یجاد لیست دعا درباره مرود"
 
 #: ../ui/xi-menus.glade.h:24
 msgid "D_ouble-Space Text"
