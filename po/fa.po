@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: 3.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-12-17 11:39+0000\n"
-"PO-Revision-Date: 2009-12-17 22:04+0000\n"
+"PO-Revision-Date: 2009-12-17 22:15+0000\n"
 "Last-Translator: Peter von Kaehne <refdoc@crosswire.org>\n"
 "Language-Team: English/GB <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -91,7 +91,7 @@ msgstr "منبع فرمت نشده"
 #: ../src/editor/slib-editor.c:726 ../ui/editor_note.xml.h:15
 #: ../ui/editor_studypad.xml.h:21
 msgid "_Print..."
-msgstr "...چاپ"
+msgstr "_چاپ..."
 
 #: ../src/editor/slib-editor.c:733 ../ui/editor_note.xml.h:9
 #: ../ui/editor_studypad.xml.h:14
@@ -100,19 +100,19 @@ msgstr "چاپ پیشنگری"
 
 #: ../src/editor/slib-editor.c:740
 msgid "_Quit"
-msgstr "خروج"
+msgstr "_خروج"
 
 #: ../src/editor/slib-editor.c:747
 msgid "_Open"
-msgstr "باز کردن"
+msgstr "_باز کردن"
 
 #: ../src/editor/slib-editor.c:754
 msgid "_Save"
-msgstr "ضبط"
+msgstr "_ضبط"
 
 #: ../src/editor/slib-editor.c:761
 msgid "Save _As..."
-msgstr "ضبط کن به اسم"
+msgstr "ضبط کن به _اسم"
 
 #: ../src/editor/slib-editor.c:767
 msgid "New"
@@ -134,7 +134,7 @@ msgstr "یادداشت فعلی را حذف کن"
 #: ../ui/editor_studypad.xml.h:20 ../ui/editor.xml.h:13
 #: ../ui/xi-menus.glade.h:106
 msgid "_File"
-msgstr "پرونده"
+msgstr "_پرونده"
 
 #: ../src/editor/slib-editor.c:835
 msgid "HTML _Output"
@@ -142,7 +142,7 @@ msgstr "نتیجه به فرمت – اج.تی.ام.ال"
 
 #: ../src/editor/slib-editor.c:842
 msgid "_HTML Source"
-msgstr "منبع به فرمت اچ.تی.ام.ال"
+msgstr "_منبع به فرمت اچ.تی.ام.ال"
 
 #: ../src/editor/slib-editor.c:849
 msgid "_Plain Source"
@@ -150,7 +150,7 @@ msgstr "منبع فرمت نشده"
 
 #: ../src/editor/slib-editor.c:856 ../ui/xi-menus.glade.h:121
 msgid "_View"
-msgstr "مرور"
+msgstr "_مرور"
 
 #: ../src/editor/slib-editor.c:867 ../ui/editor_note.xml.h:11
 #: ../ui/editor_studypad.xml.h:16 ../ui/editor.xml.h:11
