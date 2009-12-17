@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-14 23:45+0000\n"
-"PO-Revision-Date: 2009-12-12 12:24+0000\n"
+"POT-Creation-Date: 2009-12-17 11:39+0000\n"
+"PO-Revision-Date: 2009-12-17 11:38+0000\n"
 "Last-Translator: Ari Constâncio <ari.constancio@gmail.com>\n"
 "Language-Team: Xiphos Project\n"
 "MIME-Version: 1.0\n"
@@ -1330,8 +1330,8 @@ msgstr ""
 "(Ou possivelmente o tipo de imagem é distinto de bmp/gif/jpg/png.)\n"
 "Xiphos não pode redimensionar as imagens para ajustar à janela."
 
-#: ../src/main/display.cc:1043 ../src/main/display.cc:1095
-#: ../src/main/display.cc:1172 ../ui/export-dialog.glade.h:7
+#: ../src/main/display.cc:1042 ../src/main/display.cc:1094
+#: ../src/main/display.cc:1171 ../ui/export-dialog.glade.h:7
 msgid "Chapter"
 msgstr "Capítulo"
 
@@ -3230,7 +3230,7 @@ msgstr "Criar um novo registo mensal"
 
 #: ../ui/xi-menus.glade.h:21
 msgid "Create a new outlined topic"
-msgstr ""
+msgstr "Criar um novo tópico alinhado"
 
 #: ../ui/xi-menus.glade.h:22
 msgid "Create a new simple prayer list"
@@ -3238,7 +3238,7 @@ msgstr "Criar uma nova lista de oração simples"
 
 #: ../ui/xi-menus.glade.h:23
 msgid "Create a new subject prayer list"
-msgstr ""
+msgstr "Criar uma nova lista de oração por assunto"
 
 #: ../ui/xi-menus.glade.h:24
 msgid "D_ouble-Space Text"
@@ -3378,7 +3378,7 @@ msgstr "Abrir esta marca numa nova aba"
 
 #: ../ui/xi-menus.glade.h:69
 msgid "Outlined"
-msgstr ""
+msgstr "Alinhado"
 
 #: ../ui/xi-menus.glade.h:71
 msgid "Read Selection Aloud"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-14 23:45+0000\n"
+"POT-Creation-Date: 2009-12-17 11:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1234,8 +1234,8 @@ msgid ""
 "Xiphos cannot resize images to fit window."
 msgstr ""
 
-#: ../src/main/display.cc:1043 ../src/main/display.cc:1095
-#: ../src/main/display.cc:1172 ../ui/export-dialog.glade.h:7
+#: ../src/main/display.cc:1042 ../src/main/display.cc:1094
+#: ../src/main/display.cc:1171 ../ui/export-dialog.glade.h:7
 msgid "Chapter"
 msgstr ""
 
