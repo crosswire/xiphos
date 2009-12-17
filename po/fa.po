@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 3.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-14 23:45+0000\n"
-"PO-Revision-Date: 2009-12-16 23:39+0100\n"
+"POT-Creation-Date: 2009-12-17 11:39+0000\n"
+"PO-Revision-Date: 2009-12-17 22:04+0000\n"
 "Last-Translator: Peter von Kaehne <refdoc@crosswire.org>\n"
 "Language-Team: English/GB <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -158,7 +158,6 @@ msgid "Save"
 msgstr "ضبط"
 
 #: ../src/editor/slib-editor.c:878 ../src/editor/slib-editor.c:885
-#, fuzzy
 msgid "Insert Link"
 msgstr "ایجاد علامت "
 
@@ -202,7 +201,7 @@ msgstr "درباره برنامۀ سورد"
 
 #: ../src/gnome2/about_modules.c:389 ../src/gnome2/mod_mgr.c:252
 msgid "The module has no About information."
-msgstr "در بارۀ این عنوان اطلاعاتی موجود نیست."
+msgstr "در بارۀ این مدول اطلاعاتی موجود نیست."
 
 #: ../src/gnome2/about_sword.c:88
 msgid ""
@@ -327,7 +326,7 @@ msgstr "آیه: "
 
 #: ../src/gnome2/bookmarks_menu.c:368 ../src/gnome2/bookmarks_menu.c:774
 msgid "Module: "
-msgstr "عنوان: "
+msgstr "مدول: "
 
 #: ../src/gnome2/bookmarks_menu.c:533
 msgid "Restore Bookmark Folder"
@@ -418,7 +417,7 @@ msgstr "بعدی را پیدا کن"
 
 #: ../src/gnome2/font_dialog.c:303
 msgid "Set Module Font"
-msgstr "تنظیم نوع قلم هر عنوان"
+msgstr "تنظیم نوع قلم هر مدول"
 
 #: ../src/gnome2/font_dialog.c:333
 msgid "Change font for"
@@ -438,7 +437,7 @@ msgstr "+٠"
 
 #: ../src/gnome2/font_dialog.c:382
 msgid "Use the default font for this module"
-msgstr "قلم پیش گزیده را برای این عنوان استفاده کن"
+msgstr "قلم پیش گزیده را برای این مدول استفاده کن"
 
 #. *****************************************************************************
 #. * Name
@@ -472,7 +471,7 @@ msgstr ""
 "ارجاعات کتاب‏مقدسی باشند. کامپیوتر شما در حال حاضر هیچ\n"
 "برنامه‏ای را در خود ندارد که بتواند این ارجاعات را اجرا کند.\n"
 "\n"
-"آيا مایل هستید که زيفوس خود را به عنوان\n"
+"آيا مایل هستید که زيفوس خود را به مدول\n"
 "برنامه‌اي که با اين ارجاعات بايد کار کند، قلمداد نمايد؟"
 
 #: ../src/gnome2/gui.c:112
@@ -485,7 +484,7 @@ msgid ""
 "if you need to change these."
 msgstr ""
 "برنامۀ زیفوس توانست با موفقیت\n"
-"خود را بعنوان برنامۀ مجری سورد:// و کتاب‏مقدس نصب کند:// URLs.\n"
+"خود را بمدول برنامۀ مجری سورد:// و کتاب‏مقدس نصب کند:// URLs.\n"
 "\n"
 "شاید بد نباشد که برنامه را اجرا کنید \"gconf-editor\"\n"
 "و کلیدهای مختلف را بررسی کنید /desktop/gnome/url-handlers,\n"
@@ -559,7 +558,7 @@ msgstr ""
 "امکانات زیفوس محدود به توانایی‏های سیستم نام‏گذاری ویندوز می‏باشد.\n"
 "به این دلیل که ویندوز اجازۀ تغییر نام فایلی را که\n"
 "شخص دیگری همزمان آن را باز نموده است، نمی‏دهد،,\n"
-"بعنوان نمونه می‏توان به محتویات همین تفسیر اشاره کرد.\n"
+"بمدول نمونه می‏توان به محتویات همین تفسیر اشاره کرد.\n"
 "بنابراین، تغییر نام یک کتاب تفسیر بصورت دلخواه nدر محیط برنامۀ ویندوز امکان "
 "پذیر نمی‏باشد."
 
@@ -597,7 +596,7 @@ msgstr ""
 
 #: ../src/gnome2/menu_popup.c:1210 ../src/main/prayerlists.cc:264
 msgid "Xiphos already knows a module by that name."
-msgstr "یک عنوان با همین اسم موجود است."
+msgstr "یک مدول با همین اسم موجود است."
 
 #: ../src/gnome2/menu_popup.c:1253
 #, c-format
@@ -703,7 +702,7 @@ msgstr "حذف"
 
 #: ../src/gnome2/mod_mgr.c:427
 msgid "Module Name"
-msgstr "نام عنوان"
+msgstr "نام مدول"
 
 #: ../src/gnome2/mod_mgr.c:448
 msgid "A checkmark means this module is already installed"
@@ -726,7 +725,7 @@ msgid ""
 "The index icon means you have built an optimized ('lucene') index for this "
 "module for fast searching (see the Maintenance pane for this function)"
 msgstr ""
-"نشانۀ \"ایندکس\" به اين معني است که شما برای اين عنوان قبلا ایندکسي درست "
+"نشانۀ \"ایندکس\" به اين معني است که شما برای اين مدول قبلا ایندکسي درست "
 "کرده‌ايد که کار جستجوي سريع را انجام دهد."
 
 #: ../src/gnome2/mod_mgr.c:518
@@ -734,8 +733,8 @@ msgid ""
 "The lock icon means this module is encrypted, and requires that you purchase "
 "an unlock key from the content owner"
 msgstr ""
-"نشانه قفل يعني اینکه این عنوان قفل است و جهت استفاده از آن، بايد کليد اين "
-"قفل خريداري شود"
+"نشانه قفل يعني اینکه این مدول قفل است و جهت استفاده از آن، بايد کليد اين قفل "
+"خريداري شود"
 
 #: ../src/gnome2/mod_mgr.c:535 ../ui/xi-menus.glade.h:1
 msgid "About"
@@ -746,7 +745,7 @@ msgid ""
 "The refresh icon means the Installed module is older than the newer "
 "Available module: You should update the module"
 msgstr ""
-"نشانه تجديد به اين معني است که عنوان نصب شده از عناوین موجود قديمي‌تر است؛ "
+"نشانه تجديد به اين معني است که مدول نصب شده از عناوین موجود قديمي‌تر است؛ "
 "لازم است که عناوین تازه‌تر را نصب فرماييد."
 
 #: ../src/gnome2/mod_mgr.c:567
@@ -811,7 +810,7 @@ msgid ""
 "Module Type"
 msgstr ""
 "دسته بندی شده بر اساس\n"
-"عنوان"
+"مدول"
 
 #: ../src/gnome2/mod_mgr.c:1318 ../src/gnome2/utilities.c:561
 #: ../src/main/sidebar.cc:999 ../src/main/sidebar.cc:1001
@@ -914,7 +913,7 @@ msgstr "کاربر"
 
 #: ../src/gnome2/mod_mgr.c:1765
 msgid "Module Sources"
-msgstr "منبع‌های عنوان"
+msgstr "منبع‌های مدول"
 
 #: ../src/gnome2/mod_mgr.c:1768
 msgid "Add/Remove"
@@ -943,7 +942,7 @@ msgstr "لطفا دوباره راه اندازی کنید"
 
 #: ../src/gnome2/mod_mgr.c:2000
 msgid "Your module list is not up to date!"
-msgstr "لیست عنوان شما روز رسانی نشده است!"
+msgstr "لیست مدول شما روز رسانی نشده است!"
 
 #. Zero Bibles is just not workable in Xiphos.
 #: ../src/gnome2/mod_mgr.c:2282
@@ -1048,6 +1047,29 @@ msgid ""
 "Live Chat, or (if no one is responsive in chat) send mail to our users' "
 "mailing list.\n"
 msgstr ""
+"خوش امادید بە \n"
+"\n"
+"This is Xiphos' mechanism to get new and updated content.\n"
+"It appears you have never been here before, so please take a moment to look "
+"it over.\n"
+"(You will see this information box just once.)\n"
+"\n"
+"Modules come from different <u>repositories</u>.  <b>Module Sources: Add/"
+"Remove</b> will show you what repositories are currently known.\n"
+"\n"
+"<b>Module Sources: Choose</b> is for deciding from where modules should "
+"come, that is, from which repository Xiphos should obtain them, as well as "
+"where they should be placed on your system. Set <i>Install Source</i> and "
+"<i>Install Destination</i>, then click <i>Refresh</i>.\n"
+"\n"
+"<b>Modules: Install/Update</b> is for selecting and obtaining modules after "
+"choosing source and destination.\n"
+"\n"
+"<b>Modules: Maintenance</b> is for archive and index creation.\n"
+"\n"
+"See section 5 of our manual for Module Manager detail, or ask for help via "
+"Live Chat, or (if no one is responsive in chat) send mail to our users' "
+"mailing list.\n"
 
 #: ../src/gnome2/navbar_book.c:359 ../src/gnome2/navbar_book_dialog.c:300
 msgid "Go outward, to the section containing this one"
@@ -1300,7 +1322,7 @@ msgstr "نام جدید"
 
 #: ../src/gnome2/treekey-editor.c:253
 msgid "Remove the selected item"
-msgstr "عنوان انتخاب شده را حذف کن"
+msgstr "مدول انتخاب شده را حذف کن"
 
 #: ../src/main/display.cc:259
 #, c-format
@@ -1323,8 +1345,8 @@ msgstr ""
 "(شاید نوع فایل تصویر در فرمتی بجز bmp/gif/jpg/pngاست.)\n"
 "زیفوس نمی‏تواند اندازۀ تصویر را مناسب با پنجرۀ باز تنظیم کند."
 
-#: ../src/main/display.cc:1043 ../src/main/display.cc:1095
-#: ../src/main/display.cc:1172 ../ui/export-dialog.glade.h:7
+#: ../src/main/display.cc:1042 ../src/main/display.cc:1094
+#: ../src/main/display.cc:1171 ../ui/export-dialog.glade.h:7
 msgid "Chapter"
 msgstr "فصل"
 
@@ -1561,35 +1583,35 @@ msgstr "<b>(z)</b><br>"
 
 #: ../src/main/prayerlists.cc:152
 msgid "Minor Topic 1"
-msgstr "عنوان فرعی ۱"
+msgstr "مدول فرعی ۱"
 
 #: ../src/main/prayerlists.cc:153
 msgid "<b>Subtopic 1</b><br>"
-msgstr "زیر عنوان ۱"
+msgstr "زیر مدول ۱"
 
 #: ../src/main/prayerlists.cc:155
 msgid "Minor Topic 2"
-msgstr "عنوان فرعی ۲"
+msgstr "مدول فرعی ۲"
 
 #: ../src/main/prayerlists.cc:156
 msgid "<b>Subtopic 2</b><br>"
-msgstr "<b>زیر عنوان ۲</b><br>"
+msgstr "<b>زیر مدول ۲</b><br>"
 
 #: ../src/main/prayerlists.cc:158
 msgid "Minor Topic 3"
-msgstr "عنوان فرعی ۳"
+msgstr "مدول فرعی ۳"
 
 #: ../src/main/prayerlists.cc:159
 msgid "<b>Subtopic 3</b><br>"
-msgstr "<b>زیر عنوان ۳</b><br>"
+msgstr "<b>زیر مدول ۳</b><br>"
 
 #: ../src/main/prayerlists.cc:161
 msgid "Minor Topic 4"
-msgstr "عنوان فرعی ۴"
+msgstr "مدول فرعی ۴"
 
 #: ../src/main/prayerlists.cc:162
 msgid "<b>Subtopic 4</b><br>"
-msgstr "<b>زیر عنوان ۴</b><br>"
+msgstr "<b>زیر مدول ۴</b><br>"
 
 #: ../src/main/prayerlists.cc:242
 msgid "Name for new prayer list or journal"
@@ -1678,27 +1700,27 @@ msgstr "رئوس"
 
 #: ../src/main/prayerlists.cc:546
 msgid "Major Topic A"
-msgstr "عنوان اصلی الف"
+msgstr "مدول اصلی الف"
 
 #: ../src/main/prayerlists.cc:547
 msgid "<b>Major Topic A</b><br>"
-msgstr "<b>عنوان اصلی الف</b><br>"
+msgstr "<b>مدول اصلی الف</b><br>"
 
 #: ../src/main/prayerlists.cc:549
 msgid "Major Topic B"
-msgstr "عنوان اصلی ب"
+msgstr "مدول اصلی ب"
 
 #: ../src/main/prayerlists.cc:550
 msgid "<b>Major Topic B</b><br>"
-msgstr "<b>عنوان اصلی ب</b><br>"
+msgstr "<b>مدول اصلی ب</b><br>"
 
 #: ../src/main/prayerlists.cc:552
 msgid "Major Topic C"
-msgstr "عنوان اصلی ج"
+msgstr "مدول اصلی ج"
 
 #: ../src/main/prayerlists.cc:553
 msgid "<b>Major Topic C</b><br>"
-msgstr "<b>عنوان اصلی ج</b><br>"
+msgstr "<b>مدول اصلی ج</b><br>"
 
 #: ../src/main/previewer.cc:275
 msgid "User Annotation"
@@ -2118,11 +2140,11 @@ msgstr "یادداشت فعلی را ذخیره کن"
 
 #: ../ui/editor_note.xml.h:13
 msgid "_Delete Personal Comment"
-msgstr "نظرات شخصی را حذف کن"
+msgstr "_نظرات شخصی را حذف کن"
 
 #: ../ui/editor_note.xml.h:16
 msgid "_Save (Personal Comment)"
-msgstr "ضبط (نظریات شخصی)"
+msgstr "_ضبط (نظریات شخصی)"
 
 #: ../ui/editor_studypad.xml.h:1
 msgid "Add this file to your bookmarks"
@@ -2278,11 +2300,11 @@ msgstr "<b>منابع را اضافه/کم کن</b>"
 
 #: ../ui/module-manager.glade.h:2
 msgid "<b>Install Destination</b>"
-msgstr "<b>مقصد را نصب کن</b>"
+msgstr "<b>مقصد نصب</b>"
 
 #: ../ui/module-manager.glade.h:3
 msgid "<b>Install Source</b>"
-msgstr "<b>منبع را نصب کن</b>"
+msgstr "<b>منبع نصب </b>"
 
 #: ../ui/module-manager.glade.h:4
 msgid "<b>Module Manager</b>"
@@ -3054,7 +3076,7 @@ msgstr "محدوده غیراستاندارد را ضبط کن"
 
 #: ../ui/search-dialog.glade.h:85
 msgid "Save search results as bookmarks"
-msgstr "نتایج جستجو را به عنوان علائم ضبط کن"
+msgstr "نتایج جستجو را به مدول علائم ضبط کن"
 
 #: ../ui/search-dialog.glade.h:86
 msgid "Save the module list"
@@ -3150,7 +3172,7 @@ msgstr "برای جستجو از لیست فعلی استفاده کن"
 
 #: ../ui/search-dialog.glade.h:109
 msgid "Use the results of the last search as the scope of the search"
-msgstr "نتایج جستجوی آخر را به عنوان محدوده جستجو بکار گیر"
+msgstr "نتایج جستجوی آخر را به مدول محدوده جستجو بکار گیر"
 
 #: ../ui/search-dialog.glade.h:110
 msgid "e.g. Matt-John;Rev4"
@@ -3217,17 +3239,14 @@ msgid "Commentary by Chapter"
 msgstr "تفسیر فصل به فصل"
 
 #: ../ui/xi-menus.glade.h:19
-#, fuzzy
 msgid "Create a new daily journal"
 msgstr "یجاد لیست سادۀ دعا"
 
 #: ../ui/xi-menus.glade.h:20
-#, fuzzy
 msgid "Create a new monthly journal"
 msgstr "یجاد لیست سادۀ دعا"
 
 #: ../ui/xi-menus.glade.h:21
-#, fuzzy
 msgid "Create a new outlined topic"
 msgstr "یجاد لیست سادۀ دعا"
 
@@ -3407,19 +3426,19 @@ msgstr "پروندۀ ذخیره شده را به حالت اول برگردان"
 
 #: ../ui/xi-menus.glade.h:79
 msgid "Save list as a series of bookmarks"
-msgstr "لیست را بعنوان لیستی از علائم ذخیره کن"
+msgstr "لیست را بمدول لیستی از علائم ذخیره کن"
 
 #: ../ui/xi-menus.glade.h:80
 msgid "Save list as a single bookmark"
-msgstr "لیست را بعنوان یک علامت ذخیره کن"
+msgstr "لیست را بمدول یک علامت ذخیره کن"
 
 #: ../ui/xi-menus.glade.h:81
 msgid "Save these results as a series of bookmarks in their own folder"
-msgstr "این نتایج را بعنوان لیستی از علائم در پروندۀ من ذخیره کن"
+msgstr "این نتایج را بمدول لیستی از علائم در پروندۀ من ذخیره کن"
 
 #: ../ui/xi-menus.glade.h:82
 msgid "Save these results as a single bookmark"
-msgstr "این نتایج را بعنوان یک علامت در پروندۀ من ذخیره کن"
+msgstr "این نتایج را بمدول یک علامت در پروندۀ من ذخیره کن"
 
 #: ../ui/xi-menus.glade.h:83
 msgid "Scripture Cross-references"
@@ -3463,27 +3482,27 @@ msgstr "مغایرت‏ها"
 
 #: ../ui/xi-menus.glade.h:97
 msgid "_About The SWORD Project"
-msgstr "دربارۀ پروژه سورد"
+msgstr "_دربارۀ پروژه سورد"
 
 #: ../ui/xi-menus.glade.h:98
 msgid "_Advanced Search"
-msgstr "جستجوی پیشرفته"
+msgstr "_جستجوی پیشرفته"
 
 #: ../ui/xi-menus.glade.h:99
 msgid "_Attach/Detach Sidebar"
-msgstr "اضافه/حذف ستون جانبی"
+msgstr "_اضافه/حذف ستون جانبی"
 
 #: ../ui/xi-menus.glade.h:100
 msgid "_Bible"
-msgstr "کتاب‏مقدس"
+msgstr "_کتاب‏مقدس"
 
 #: ../ui/xi-menus.glade.h:101
 msgid "_Commentary/Book"
-msgstr "تفسیر/کتاب"
+msgstr "_تفسیر/کتاب"
 
 #: ../ui/xi-menus.glade.h:102
 msgid "_Contents"
-msgstr "محتویات"
+msgstr "_محتویات"
 
 # msgid "C_lear"
 # msgstr " پاک کن"
@@ -3491,71 +3510,71 @@ msgstr "محتویات"
 # msgstr "لیست سابقه را پاک کن"
 #: ../ui/xi-menus.glade.h:103
 msgid "_Daily Devotion"
-msgstr "دعا و تفکر روزانه"
+msgstr "_دعا و تفکر روزانه"
 
 #: ../ui/xi-menus.glade.h:104
 msgid "_Edit"
-msgstr "ویرایش"
+msgstr "_ویرایش"
 
 #: ../ui/xi-menus.glade.h:105
 msgid "_Edit Item"
-msgstr "ویرایش مورد"
+msgstr "_ویرایش مورد"
 
 #: ../ui/xi-menus.glade.h:107
 msgid "_Help"
-msgstr "کمک"
+msgstr "_کمک"
 
 #: ../ui/xi-menus.glade.h:108
 msgid "_Highlight Current Verse"
-msgstr "آیۀ فعلی را علامت بگذار"
+msgstr "_آیۀ فعلی را علامت بگذار"
 
 #: ../ui/xi-menus.glade.h:109
 msgid "_Live Chat"
-msgstr "چت زنده"
+msgstr "_چت زنده"
 
 #: ../ui/xi-menus.glade.h:110
 msgid "_Mailing List"
-msgstr "لیست  پست الکترونيک"
+msgstr "_لیست  پست الکترونيک"
 
 #: ../ui/xi-menus.glade.h:111
 msgid "_Module Manager"
-msgstr "مدیر مدول‏ها"
+msgstr "_مدیر مدول‏ها"
 
 #: ../ui/xi-menus.glade.h:112
 msgid "_Open Session"
-msgstr "قسمت را باز کن"
+msgstr "_قسمت را باز کن"
 
 #: ../ui/xi-menus.glade.h:113
 msgid "_Preferences"
-msgstr "ترجیحات"
+msgstr "_ترجیحات"
 
 #: ../ui/xi-menus.glade.h:114
 msgid "_Preview"
-msgstr "پیش‌نگری"
+msgstr "_پیش‌نگری"
 
 #: ../ui/xi-menus.glade.h:115
 msgid "_Read Aloud"
-msgstr "با صدای بلند بخوان"
+msgstr "_با صدای بلند بخوان"
 
 #: ../ui/xi-menus.glade.h:116
 msgid "_Report Bug"
-msgstr "گزارش دادن مشکل در برنامه"
+msgstr "_گزارش دادن مشکل در برنامه"
 
 #: ../ui/xi-menus.glade.h:117
 msgid "_Save Session"
-msgstr "قسمت را ذخیره کن"
+msgstr "_قسمت را ذخیره کن"
 
 #: ../ui/xi-menus.glade.h:118
 msgid "_Search"
-msgstr "جستجو"
+msgstr "_جستجو"
 
 #: ../ui/xi-menus.glade.h:119
 msgid "_Show/Hide Attached Sidebar"
-msgstr "ستون جانبی نمایش بده/نده"
+msgstr "_ستون جانبی نمایش بده/نده"
 
 #: ../ui/xi-menus.glade.h:120
 msgid "_Verse Per Line"
-msgstr "یک آیه در هر خط"
+msgstr "_یک آیه در هر خط"
 
 #: ../xiphos.desktop.in.in.h:1
 msgid "Study the Bible"
