@@ -165,7 +165,15 @@ on_mailing_list_activate(GtkMenuItem * menuitem, gpointer user_data)
 G_MODULE_EXPORT void
 on_live_chat_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	xiphos_open_default("http://webchat.freenode.net/?randomnick=1&channels=xiphos&prompt=1");
+	gchar *user = g_strdup_printf("%s", g_get_user_name()), *s, *url;
+	for (s = strchr(user, ' '); s; s = strchr(s, ' '))
+		*s = '_';
+	url = g_strdup_printf(
+	    "http://webchat.freenode.net/?nick=%s|xiphos&channels=xiphos&prompt=1",
+	    user);
+	xiphos_open_default(url);
+	g_free(url);
+	g_free(user);
 }
 
 /******************************************************************************
