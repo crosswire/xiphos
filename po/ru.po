@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xiphos\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-12-14 23:45+0000\n"
-"PO-Revision-Date: 2009-12-15 23:56+0300\n"
+"PO-Revision-Date: 2009-12-21 22:25+0300\n"
 "Last-Translator: Konstantin Maslyuk <kalemas@mail.ru>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "MIME-Version: 1.0\n"
@@ -1222,11 +1222,11 @@ msgstr "Опции"
 
 #: ../src/gnome2/preferences_dialog.c:1796
 msgid "Main"
-msgstr "Главное"
+msgstr "Основное"
 
 #: ../src/gnome2/preferences_dialog.c:1802
 msgid "Special"
-msgstr "Специальное"
+msgstr "Специальные"
 
 #: ../src/gnome2/search_dialog.c:68
 #: ../src/main/search_dialog.cc:66
@@ -1890,18 +1890,18 @@ msgid ""
 msgstr ""
 "Добро пожаловать в Xiphos.\n"
 "\n"
-"Ни одной Библии не установлено. Для начала, Xiphos нужен хотябы один модуль с Библии.\n"
+"Ни одной Библии не установлено. Для начала, Xiphos нужен хотябы один модуль Библии.\n"
 "\n"
-"С вашего разрешения, Xiphos запустит Менеджер Модулей и вы сможете установить их из Crosswire:\n"
-"1. Настройте уделенную установку.\n"
-"2. Содинитесь.\n"
-"3. Выберите Библейский.\n"
+"С вашего разрешения, Xiphos запустит Менеджер Модулей и вы сможете установливать модули из репозитория Crosswire:\n"
+"1. Настройте параметры Источников.\n"
+"2. Подключитесь.\n"
+"3. Выберите подходяций Библейский текст.\n"
 "4. Нажмите `Установить'.\n"
 "Закройте Менеджер Модуль когда вы закончите.\n"
 "\n"
 "Предупрежение: Используйте с осторожностью в странах преследующих за Слово Божие.\n"
 "\n"
-"Можно ли запустить Менеджер Модулей, для того чтобы вы могли установить тексты?"
+"Можно ли запустить Менеджер Модулей, для того чтобы вы могли устанавливать модули?"
 
 #: ../src/main/settings.c:105
 msgid "$HOME is not set!"
@@ -1936,11 +1936,11 @@ msgid ""
 "and will now exit."
 msgstr ""
 "Ни одной Библии не установлено.\n"
-"Видимо, вы отказались из установить.\n"
+"Видимо, вы отказались от установки.\n"
 "\n"
-"Без модуля Библии для отображения,\n"
-"Xiphos не может продолжить,\n"
-"и сейчас выйдет."
+"Xiphos не может работать без,\n"
+"хотя бы, одного модуля Библии,\n"
+"и заканчивает работу."
 
 #: ../src/main/settings.c:198
 msgid "Bible module installation complete."
@@ -1952,9 +1952,9 @@ msgid ""
 "Xiphos cannot proceed,\n"
 "and will now exit."
 msgstr ""
-"Без модуля Библии для отображения,\n"
-"Xiphos не может продолжить,\n"
-"и сейчас выйдет."
+"Xiphos не может работать без,\n"
+"хотя бы, одного модуля Библии,\n"
+"и заканчивает работу."
 
 #: ../src/main/sidebar.cc:399
 msgid "verse"
@@ -2533,11 +2533,11 @@ msgstr "<b>Размеры Шрифта</b>"
 
 #: ../ui/prefs.glade.h:11
 msgid "<b>General</b>"
-msgstr "<b>Общее</b>"
+msgstr "<b>Общие</b>"
 
 #: ../ui/prefs.glade.h:12
 msgid "<b>Main Window Modules</b>"
-msgstr "<b>Главное Окно Модулей</b>"
+msgstr "<b>Окно Модуля</b>"
 
 #: ../ui/prefs.glade.h:13
 msgid "<b>Parallel View</b>"
@@ -3482,7 +3482,7 @@ msgstr "Открыть эту закладку в новой вкладке"
 
 #: ../ui/xi-menus.glade.h:69
 msgid "Outlined"
-msgstr "Выделенный"
+msgstr "Тематический"
 
 #: ../ui/xi-menus.glade.h:71
 msgid "Read Selection Aloud"
