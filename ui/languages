@@ -2727,7 +2727,8 @@ hii	Hinduri
 hij	Hijuk
 hik	Seit-Kaitetu
 hil	Hiligaynon
-hin	Hindi
+# Hindi
+hin	हिन्दी
 hio	Tsoa
 hir	Himarimã
 hit	Hittite
@@ -3162,7 +3163,8 @@ kaj	Jju
 kak	Kayapa Kallahan
 kal	Kalaallisut
 kam	Kamba (Kenya)
-kan	Kannada
+# Kannada
+kan	ಕನ್ನಡ
 kao	Xaasongaxango
 kap	Bezhta
 kaq	Capanahua
@@ -6508,6 +6510,7 @@ tah	Tahitian
 taj	Eastern Tamang
 tak	Tala
 tal	Tal
+# Tamil
 tam	தமிழ்
 tan	Tangale
 tao	Yami
@@ -6601,7 +6604,8 @@ teg	Teke-Tege
 teh	Tehuelche
 tei	Torricelli
 tek	Ibali Teke
-tel	Telugu
+# Telugu
+tel	తెలుగు
 tem	Timne
 ten	Tama (Colombia)
 teo	Teso
