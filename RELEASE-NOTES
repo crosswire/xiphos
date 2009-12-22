@@ -3,6 +3,147 @@ ____________________
 XIPHOS RELEASE NOTES
 ____________________
 
+Release 3.1.2
+24 Dec 2009
+
+Merry Christmas from the Xiphos development team.
+
+This version of Xiphos is the final intermediate release prior to the
+larger features planned for the forthcoming 3.2.  This release
+contains several interesting new features and enhancements, and (as
+always) a number of bugfixes.
+
+New features
+
+ 1. We have implemented a Xiphos-internal interface language selector,
+    via Preferences -> General -> Options.  This makes unnecessary
+    most previous uses of difficult-to-understand environment
+    variables to control the desired language choice.  Choosing a new
+    language requires a restart of Xiphos.
+
+ 2. Bookmarks are exportable.  Select XML, HTML, or plaintext.  For
+    the latter two, select whether to include the text referenced.
+
+ 3. The StudyPad and personal commentary editor now has a Link dialog,
+    by which to arrange for verse reference linkage.
+
+ 4. Xiphos' main window navigation can now be sampled and driven via
+    external programs such as Bibledit, notably in support of Bible
+    translators' work.  (For developers, this uses the dbus feature.
+    A test program to exercise this feature can be found in
+    src/examples/ipc_client.py.)
+
+ 5. The Module Manager now has a first-time-user introductory dialog,
+    to offer brief explanation of its several parts.  All users, even
+    long-time users, will get it exactly once.
+
+ 6. CrossWire's module repository is forced as "current" after use of
+    the Load Standard button, which updates Xiphos' sense of which
+    repositories are officially recognized by CrossWire.
+
+ 7. Universal synchronization has been implemented between the main
+    window and all detached windows, including embedded parallel tab.
+    Navigating in any synchronized window makes all synchronized
+    windows follow.
+
+ 8. The verse number color selector has been resurrected, erroneously
+    removed in the early days of GnomeSword 2.2(!).  (Why did we do
+    that?  Nobody remembers.)
+
+ 9. New interface translations: Russian, Romanian, Spanish, Chinese,
+    and Afrikaans.  (The last two of these have been mechanically
+    generated and are very, very rough at this time -- they will need
+    human attention to gain acceptable quality.)
+
+Enhancements to existing behavior
+
+ 1. The Help->Chat interface has been improved by offering a default
+    IRC nickname based on the user's login name.
+
+ 2. Huge improvements have been made to startup, search, and module
+    manager setup times, due to internal refactoring of the usage of
+    the Sword library.
+
+ 3. Icons have been added to all dialogs which lacked them.
+
+ 4. Hebrew searches have been improved.
+
+ 5. The verse annotation feature now localizes verse references.
+
+ 6. The main window title now follows currently-open modules better.
+
+ 7. Sidebar search has had improvements and fixes.
+
+ 8. Internal improvements for poorly-marked-up module content,
+    including crash avoidance.  Some module content is really
+    dangerously bad.
+
+ 9. Improved passage export and printing.
+
+10. Much work has bee done for Windows with regard to our better
+    display engine, but it is still not complete, and not present in
+    today's Windows build for public distribution.  To be done in 3.2.
+
+11. Devotionals have been removed from Lookup Selection lists on the
+    right-click context menu.
+
+12. All locale-selection logic has been completely reworked.
+
+13. Cosmetic improvements have been made to Module Manager's and main
+    window's menus.
+
+14. The Enter key is recognized for completion in bookmarks and user
+    annotations.
+
+15. Module archival in Module Manager no longer requires external
+    program support.
+
+16. Many dependencies on GNOME libraries have been removed.  We are
+    intending to completely de-GNOME Xiphos, in favor of reliance on
+    GTK support alone.
+
+Problems resolved
+
+ 1. An error in use of FTP repository registration was fixed.
+
+ 2. When doing searches, both sidebar and advanced, the "purplify"
+    word-match facility has been rewritten from the ground up, and now
+    correctly identifies your search keywords.
+
+ 3. Tab names do not show the commentary when the general book is
+    displayed instead.
+
+ 4. A focus-and-select bug was fixed, when deleting one interface tab.
+
+ 5. Corrections were made to text justification handling for RtoL
+    (right-to-left) languages (Hebrew, Farsi).
+
+ 6. Minor adjustments to display have been made due to subtle
+    differences in text markup variety (ThML -vs- OSIS).
+
+ 7. A crash induced by dictionary usage with none installed was fixed.
+
+Improvements and helps for developers
+
+    - Function prototypes are enforced.
+    - The debug build of Xiphos includes substantial null pointer
+      detection in the use of certain common string functions.
+    - The ImageMagick dependency is gone, replaced with GTK functions.
+    - --enable-silent-rules leads to far less chatty output during
+      build.  Get noisy output temporarily with "V=1 make".
+    - File, URL, and Help invocations are now very general and use
+      uniform underlying library support.
+    - XPCOM_GLUE dependency errors have been fixed.
+    - Timers have been implemented to show SWMgr creation delays.
+    - Many, many updates to the build system and the Windows installer.
+
+Bug reports addressed since 3.1.1:
+
+New feature requests pending:
+
+Feature requests closed:
+________________________________________________________________
+
 Release 3.1.1
 09 Aug 2009
 
