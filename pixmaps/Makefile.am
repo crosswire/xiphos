@@ -1,4 +1,4 @@
-pkgicondir=@datadir@/icons/hicolor/scalable/apps
+pkgicondir=@datadir@/pixmaps
 pkgicon_DATA=xiphos.svg
 
 pixmapdir=@datadir@/pixmaps/xiphos
