@@ -2,7 +2,7 @@ bin_PROGRAMS = xiphos
 
 bin_SCRIPTS = gnomesword2
 
-BUILT_SOURCES = ipc-interface.h marshal.h
+BUILT_SOURCES = ipc-interface.h marshal.h locale_set.c
 
 xiphos_SOURCES =  \
     about_modules.c \
@@ -31,7 +31,6 @@ xiphos_SOURCES =  \
     gui.c \
     html.c \
     ipc.c \
-    locale_set.c \
     main_menu.c \
     main_window.c \
     marshal.c \
@@ -59,6 +58,9 @@ xiphos_SOURCES =  \
 
 locale_set.c: ../../po/LINGUAS make-locale-set.sh
 	sh ./make-locale-set.sh > locale_set.c
+
+xiphos-locale_set.o: locale_set.c
+	$(CC) $< -c -o $@
 
 marshal.c:
 	glib-genmarshal --body --prefix=ipc_marshal marshal.list \
@@ -126,9 +128,13 @@ xiphos_LDADD = \
 	$(GNOME_SPELL_LIBS) \
 	$(GECKO_COMPONENT_LIBS) \
 	$(GECKO_LIBS) \
-	$(DBUS_LIBS)
+	$(DBUS_LIBS) \
+	./xiphos-locale_set.o
 
 EXTRA_DIST = \
     $(top_builddir)/src/gui/*.h \
     gnomesword2 \
+    ipc-interface.xml \
+    make-locale-set.sh \
+    marshal.list \
     wscript
