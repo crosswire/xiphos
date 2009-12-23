@@ -23,10 +23,12 @@ def configure(self):
 
     # convert locale names to 5 chars version
     for loc in locales_old:
-        if loc == 'cs':
-            loc += '_CZ'
+        if loc == 'cs':    
+            loc += '_CZ'   # special case, czech.
         elif loc == 'fa':
-            loc += '_IR'
+            loc += '_IR'   # special case, iran.
+        elif loc == 'zh':
+            loc += '_CN'   # special case, simplified chinese.
         elif len(loc) == 2:
             loc = loc + '_' + loc.upper()
         locales_new.append(loc)
