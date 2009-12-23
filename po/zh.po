@@ -1402,7 +1402,7 @@ msgstr "啟動 Sword"
 
 #: ../src/main/main.c:175
 msgid "Loading Settings"
-msgstr "Loading Settings"
+msgstr "裝載設置"
 
 #: ../src/main/main.c:179
 msgid "Displaying Xiphos"
@@ -1905,7 +1905,7 @@ msgid ""
 "\n"
 "Xiphos cannot continue."
 msgstr ""
-"Xiphos不能創造。xiphos：\n"
+"Xiphos不能創造 .xiphos：\n"
 "%s \n"
 "\n"
 "Xiphos無法繼續。"
