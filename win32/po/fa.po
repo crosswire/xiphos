@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gtk+ 2.6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-08-29 00:06-0400\n"
-"PO-Revision-Date: 2009-12-15 22:52+0100\n"
+"PO-Revision-Date: 2009-12-23 22:49+0100\n"
 "Last-Translator: Peter von Kaehne <refdoc@crosswire.org>\n"
 "Language-Team: Persian <farsi@lists.sharif.edu>\n"
 "MIME-Version: 1.0\n"
@@ -172,12 +172,12 @@ msgstr "_پایین"
 #: gdk/keyname-table.h:3955
 msgctxt "keyboard label"
 msgid "End"
-msgstr ""
+msgstr "آخر"
 
 #: gdk/keyname-table.h:3956
 msgctxt "keyboard label"
 msgid "Begin"
-msgstr ""
+msgstr "شروح"
 
 #: gdk/keyname-table.h:3957
 #, fuzzy
@@ -1222,7 +1222,7 @@ msgstr "_چاپ"
 #: gdk/x11/gdkapplaunchcontext-x11.c:313
 #, c-format
 msgid "Opening %s"
-msgstr ""
+msgstr "باز کردن %s"
 
 #: gdk/x11/gdkapplaunchcontext-x11.c:316
 #, c-format
@@ -1398,7 +1398,7 @@ msgstr "calendar:week_start:6"
 #: gtk/gtkcalendar.c:1803
 msgctxt "year measurement template"
 msgid "2000"
-msgstr ""
+msgstr "۲۰۰۰"
 
 #. Translators: this defines whether the day numbers should use
 #. * localized digits or the ones used in English (0123...).
@@ -1415,7 +1415,7 @@ msgstr ""
 #, c-format
 msgctxt "calendar:day:digits"
 msgid "%d"
-msgstr ""
+msgstr "%d"
 
 #. Translators: this defines whether the week numbers should use
 #. * localized digits or the ones used in English (0123...).
@@ -1432,7 +1432,7 @@ msgstr ""
 #, c-format
 msgctxt "calendar:week:digits"
 msgid "%d"
-msgstr ""
+msgstr "%d"
 
 #. Translators: This dictates how the year is displayed in
 #. * gtkcalendar widget.  See strftime() manual for the format.
@@ -1473,7 +1473,7 @@ msgstr ""
 #, c-format
 msgctxt "progress bar label"
 msgid "%d %%"
-msgstr ""
+msgstr "%d %%"
 
 #: gtk/gtkcolorbutton.c:188
 #: gtk/gtkcolorbutton.c:559
@@ -1660,7 +1660,7 @@ msgstr ""
 
 #: gtk/gtkfilechooserdefault.c:1852
 msgid "Search"
-msgstr ""
+msgstr "جستجو"
 
 #: gtk/gtkfilechooserdefault.c:1876
 msgid "Recently Used"
@@ -1852,7 +1852,7 @@ msgstr "نمی‌توان بقیه را ذخیره کرد"
 #. Label
 #: gtk/gtkfilechooserdefault.c:9486
 msgid "_Search:"
-msgstr ""
+msgstr "_جستجو"
 
 #: gtk/gtkfilechooserdefault.c:10439
 #, c-format
@@ -3574,7 +3574,6 @@ msgid "_Underline"
 msgstr "_زیرخط‌دار"
 
 #: gtk/gtkstock.c:408
-#, fuzzy
 msgctxt "Stock label"
 msgid "_Undo"
 msgstr "_برگشت حرکت"
@@ -3599,13 +3598,11 @@ msgid "Best _Fit"
 msgstr "بهترین اندازه"
 
 #: gtk/gtkstock.c:414
-#, fuzzy
 msgctxt "Stock label"
 msgid "Zoom _In"
 msgstr "زوم به _داخل"
 
 #: gtk/gtkstock.c:415
-#, fuzzy
 msgctxt "Stock label"
 msgid "Zoom _Out"
 msgstr "زوم به _خارج"
