@@ -14,6 +14,7 @@ while read l ; do
 	*)  u="`echo \"$l\" | tr a-z A-Z`"
 	    [ "$u" = CS ] && u=CZ	# special case, czech.
 	    [ "$u" = FA ] && u=IR	# special case, iran.
+	    [ "$u" = ZH ] && u=CN	# special case, iran.
 	    l="$l"_"$u"
 	    ;;
     esac
