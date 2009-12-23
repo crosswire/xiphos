@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: Xiphos 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-12-14 23:45+0000\n"
-"PO-Revision-Date: 2009-12-09 22:11+0000\n"
-"Last-Translator: Gertjan <gwfrancke@gmail.com>\n"
+"PO-Revision-Date: 2009-12-23 08:34-0500\n"
+"Last-Translator: Karl Kleinpaste <charcoal@users.sourceforge.net>\n"
 "Language-Team: Xiphos-developers <xiphos-developers@lists>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,53 +22,67 @@ msgstr ""
 msgid "Configuration not found"
 msgstr "Configuratie niet gevonden"
 
-#: ../src/editor/bonobo-editor.c:254 ../src/editor/slib-editor.c:234
+#: ../src/editor/bonobo-editor.c:254
+#: ../src/editor/slib-editor.c:234
 #: ../src/gnome2/html.c:637
 #, c-format
 msgid "Page %d of %d"
 msgstr "Pagina %d van %d"
 
-#: ../src/editor/bonobo-editor.c:353 ../src/editor/slib-editor.c:659
+#: ../src/editor/bonobo-editor.c:353
+#: ../src/editor/slib-editor.c:659
 msgid "Are you sure you want to delete the note for"
 msgstr "Weet u zeker dat u de notitie wilt verwijderen voor"
 
-#: ../src/editor/bonobo-editor.c:965 ../src/editor/bonobo-editor.c:998
-#: ../src/editor/slib-editor.c:1308 ../src/editor/slib-editor.c:1345
+#: ../src/editor/bonobo-editor.c:965
+#: ../src/editor/bonobo-editor.c:998
+#: ../src/editor/slib-editor.c:1308
+#: ../src/editor/slib-editor.c:1345
 msgid "Save the changes to document"
 msgstr "Wijzigingen opslaan"
 
-#: ../src/editor/bonobo-editor.c:966 ../src/editor/bonobo-editor.c:999
-#: ../src/editor/slib-editor.c:1309 ../src/editor/slib-editor.c:1346
+#: ../src/editor/bonobo-editor.c:966
+#: ../src/editor/bonobo-editor.c:999
+#: ../src/editor/slib-editor.c:1309
+#: ../src/editor/slib-editor.c:1346
 msgid "before closing?"
 msgstr "voor afsluiten?"
 
-#: ../src/editor/bonobo-editor.c:973 ../src/editor/bonobo-editor.c:1006
-#: ../src/editor/slib-editor.c:1316 ../src/editor/slib-editor.c:1353
+#: ../src/editor/bonobo-editor.c:973
+#: ../src/editor/bonobo-editor.c:1006
+#: ../src/editor/slib-editor.c:1316
+#: ../src/editor/slib-editor.c:1353
 msgid "If you don't save, changes will be permanently lost."
 msgstr "Wijzigingen gaan verloren als u niet opslaat."
 
-#: ../src/editor/bonobo-editor.c:997 ../src/editor/slib-editor.c:1344
+#: ../src/editor/bonobo-editor.c:997
+#: ../src/editor/slib-editor.c:1344
 #: ../ui/xi-menus.glade.h:39
 msgid "File"
 msgstr "Bestand"
 
-#: ../src/editor/bonobo-editor.c:1224 ../src/editor/slib-editor.c:1401
+#: ../src/editor/bonobo-editor.c:1224
+#: ../src/editor/slib-editor.c:1401
 msgid "StudyPad"
 msgstr "Notitieblok"
 
-#: ../src/editor/bonobo-editor.c:1237 ../src/editor/slib-editor.c:1415
+#: ../src/editor/bonobo-editor.c:1237
+#: ../src/editor/slib-editor.c:1415
 msgid "Note Editor"
 msgstr "Notitieblok"
 
-#: ../src/editor/bonobo-editor.c:1246 ../src/editor/slib-editor.c:1429
+#: ../src/editor/bonobo-editor.c:1246
+#: ../src/editor/slib-editor.c:1429
 msgid "Prayer List/Journal Editor"
 msgstr "Gebedslijst/Berichten-editor"
 
-#: ../src/editor/slib-editor.c:401 ../src/editor/slib-editor.c:448
+#: ../src/editor/slib-editor.c:401
+#: ../src/editor/slib-editor.c:448
 msgid "Save As"
 msgstr "Opslaan als"
 
-#: ../src/editor/slib-editor.c:419 ../src/editor/slib-editor.c:466
+#: ../src/editor/slib-editor.c:419
+#: ../src/editor/slib-editor.c:466
 #: ../src/editor/slib-editor.c:634
 msgid "Untitled document"
 msgstr "Niet-opgeslagen document"
@@ -85,12 +99,14 @@ msgstr "HTML code"
 msgid "Plain Source"
 msgstr "Platte tekst"
 
-#: ../src/editor/slib-editor.c:726 ../ui/editor_note.xml.h:15
+#: ../src/editor/slib-editor.c:726
+#: ../ui/editor_note.xml.h:15
 #: ../ui/editor_studypad.xml.h:21
 msgid "_Print..."
 msgstr "_Printen..."
 
-#: ../src/editor/slib-editor.c:733 ../ui/editor_note.xml.h:9
+#: ../src/editor/slib-editor.c:733
+#: ../ui/editor_note.xml.h:9
 #: ../ui/editor_studypad.xml.h:14
 msgid "Print Pre_view"
 msgstr "Afdruk_voorbeeld"
@@ -117,18 +133,20 @@ msgstr "Nieuw"
 
 #: ../src/editor/slib-editor.c:769
 msgid "Open new document"
-msgstr ""
+msgstr "Open nieuw document"
 
 #: ../src/editor/slib-editor.c:773
 msgid "Delete"
-msgstr ""
+msgstr "Wissen"
 
 #: ../src/editor/slib-editor.c:775
 msgid "Delete current note"
-msgstr ""
+msgstr "Verwijderen huidige notitie"
 
-#: ../src/editor/slib-editor.c:780 ../ui/editor_note.xml.h:14
-#: ../ui/editor_studypad.xml.h:20 ../ui/editor.xml.h:13
+#: ../src/editor/slib-editor.c:780
+#: ../ui/editor_note.xml.h:14
+#: ../ui/editor_studypad.xml.h:20
+#: ../ui/editor.xml.h:13
 #: ../ui/xi-menus.glade.h:106
 msgid "_File"
 msgstr "_Bestand"
@@ -145,20 +163,25 @@ msgstr "_HTML broncode"
 msgid "_Plain Source"
 msgstr "_Platte tekst"
 
-#: ../src/editor/slib-editor.c:856 ../ui/xi-menus.glade.h:121
+#: ../src/editor/slib-editor.c:856
+#: ../ui/xi-menus.glade.h:121
 msgid "_View"
 msgstr "Beel_d"
 
-#: ../src/editor/slib-editor.c:867 ../ui/editor_note.xml.h:11
-#: ../ui/editor_studypad.xml.h:16 ../ui/editor.xml.h:11
+#: ../src/editor/slib-editor.c:867
+#: ../ui/editor_note.xml.h:11
+#: ../ui/editor_studypad.xml.h:16
+#: ../ui/editor.xml.h:11
 msgid "Save"
 msgstr "Opslaan"
 
-#: ../src/editor/slib-editor.c:878 ../src/editor/slib-editor.c:885
+#: ../src/editor/slib-editor.c:878
+#: ../src/editor/slib-editor.c:885
 msgid "Insert Link"
 msgstr "Verwijzing toevoegen"
 
-#: ../src/gecko/gecko-html.cpp:177 ../src/gnome2/html.c:165
+#: ../src/gecko/gecko-html.cpp:177
+#: ../src/gnome2/html.c:165
 msgid "Unlock "
 msgstr "Slot openen "
 
@@ -175,7 +198,8 @@ msgstr "Printen op deze printer wordt niet ondersteund"
 msgid "Printer %s does not support PostScript printing."
 msgstr "Printer %s ondersteund geen PostScript-printen."
 
-#: ../src/gecko/gecko-print.c:342 ../src/gecko/gecko-print.c:370
+#: ../src/gecko/gecko-print.c:342
+#: ../src/gecko/gecko-print.c:370
 msgid "Printing"
 msgstr "Bezig met afdrukken"
 
@@ -196,26 +220,14 @@ msgstr "Afdrukken van document %s is mislukt."
 msgid "About Sword Module"
 msgstr "Module over SWORD"
 
-#: ../src/gnome2/about_modules.c:389 ../src/gnome2/mod_mgr.c:252
+#: ../src/gnome2/about_modules.c:389
+#: ../src/gnome2/mod_mgr.c:252
 msgid "The module has no About information."
-msgstr ""
+msgstr "De module heeft geen \"Over\" informatie"
 
 #: ../src/gnome2/about_sword.c:88
-msgid ""
-"The SWORD Project is an effort to create an ever-expanding software package "
-"for research and study of God and His Word. The SWORD Project framework "
-"allows easy use and study of Bible texts, commentaries, lexicons, "
-"dictionaries, and other books. Many frontends are built using this "
-"framework. An installed set of books may be shared among all frontends using "
-"the framework."
-msgstr ""
-"Het SWORD-project levert de basis voor computer programma's waarmee de "
-"Bijbel kan worden gelezen en bestudeerd. Het SWORD-project brengt "
-"Bijbelvertalingen, commentaren, woordenboeken en nog veel meer literatuur op "
-"eenvoudige wijze beschikbaar. Meerdere programma's gebruiken de basis "
-"software van het Sword project. Een module(bijbelvertaling, commentaar, "
-"etc.) die is geïnstalleerd door één van deze programma's kan ook direct "
-"benut worden vanuit andere programma's."
+msgid "The SWORD Project is an effort to create an ever-expanding software package for research and study of God and His Word. The SWORD Project framework allows easy use and study of Bible texts, commentaries, lexicons, dictionaries, and other books. Many frontends are built using this framework. An installed set of books may be shared among all frontends using the framework."
+msgstr "Het SWORD-project levert de basis voor computer programma's waarmee de Bijbel kan worden gelezen en bestudeerd. Het SWORD-project brengt Bijbelvertalingen, commentaren, woordenboeken en nog veel meer literatuur op eenvoudige wijze beschikbaar. Meerdere programma's gebruiken de basis software van het Sword project. Een module(bijbelvertaling, commentaar, etc.) die is geïnstalleerd door één van deze programma's kan ook direct benut worden vanuit andere programma's."
 
 #: ../src/gnome2/about_sword.c:106
 msgid "About the SWORD Project"
@@ -235,17 +247,10 @@ msgstr "Het SWORD-project"
 
 #: ../src/gnome2/about_trans.c:84
 msgid ""
-"Do you like using Xiphos to study the Bible? Would you like to see its "
-"display using your native language? You could translate Xiphos! \n"
+"Do you like using Xiphos to study the Bible? Would you like to see its display using your native language? You could translate Xiphos! \n"
 "\n"
-"We are always looking for contributions of new translations of Xiphos into "
-"other languages. If you are able to translate for us, please see the link "
-"below, contact us, and get involved with our efforts."
-msgstr ""
-"Bevalt Xiphos u als bijbelstudiehulp? Wilt u dat het programma ook uw taal "
-"ondersteund? U kunt ook een bijdrage leveren.Wij zijn altijd op zoek naar "
-"nieuwe vertalingen van Xiphos. Als u daarvoor de tijd heeft, klik dan op de "
-"link hieronder voor meer informatie."
+"We are always looking for contributions of new translations of Xiphos into other languages. If you are able to translate for us, please see the link below, contact us, and get involved with our efforts."
+msgstr "Bevalt Xiphos u als bijbelstudiehulp? Wilt u dat het programma ook uw taal ondersteund? U kunt ook een bijdrage leveren.Wij zijn altijd op zoek naar nieuwe vertalingen van Xiphos. Als u daarvoor de tijd heeft, klik dan op de link hieronder voor meer informatie."
 
 #: ../src/gnome2/about_trans.c:98
 msgid "About Xiphos Translation"
@@ -268,41 +273,46 @@ msgid ""
 "(formerly known as GnomeSword)\n"
 "\n"
 "Powered by The SWORD Project.\n"
-"We would like to thank Troy Griffitts and all the other folks who have given "
-"us The SWORD Project."
+"We would like to thank Troy Griffitts and all the other folks who have given us The SWORD Project."
 msgstr ""
 "(voorheen bekend als GnomeSword)\n"
 "Mogelijk gemaakt voor het SWORD-project.\n"
-"We willen Troy Griffitts en vele anderen bedanken voor hun bijdrage aan "
-"SWORD."
+"We willen Troy Griffitts en vele anderen bedanken voor hun bijdrage aan SWORD."
 
 #: ../src/gnome2/bibletext_dialog.c:358
 msgid "Go to "
 msgstr "Ga naar "
 
 #. info->stock_icon = GTK_STOCK_OPEN;
-#: ../src/gnome2/bookmark_dialog.c:171 ../src/gnome2/bookmarks_menu.c:358
-#: ../src/gnome2/bookmarks_menu.c:765 ../src/gnome2/bookmarks_menu.c:863
-#: ../src/gnome2/bookmarks_treeview.c:133 ../ui/editor_studypad.xml.h:2
+#: ../src/gnome2/bookmark_dialog.c:171
+#: ../src/gnome2/bookmarks_menu.c:358
+#: ../src/gnome2/bookmarks_menu.c:765
+#: ../src/gnome2/bookmarks_menu.c:863
+#: ../src/gnome2/bookmarks_treeview.c:133
+#: ../ui/editor_studypad.xml.h:2
 #: ../ui/xi-menus.glade.h:13
 msgid "Bookmark"
 msgstr "Bladwijzer"
 
-#: ../src/gnome2/bookmark_dialog.c:173 ../src/gnome2/bookmarks_menu.c:865
+#: ../src/gnome2/bookmark_dialog.c:173
+#: ../src/gnome2/bookmarks_menu.c:865
 #: ../src/gnome2/bookmarks_treeview.c:134
 msgid "Enter Folder Name"
 msgstr "Mapnaam invoeren"
 
-#: ../src/gnome2/bookmark_dialog.c:175 ../src/gnome2/bookmarks_menu.c:867
+#: ../src/gnome2/bookmark_dialog.c:175
+#: ../src/gnome2/bookmarks_menu.c:867
 msgid "Folder Name"
 msgstr "Mapnaam"
 
-#: ../src/gnome2/bookmark_dialog.c:176 ../src/gnome2/bookmarks_menu.c:868
+#: ../src/gnome2/bookmark_dialog.c:176
+#: ../src/gnome2/bookmarks_menu.c:868
 #: ../src/gnome2/bookmarks_treeview.c:136
 msgid "Folder: "
 msgstr "Map: "
 
-#: ../src/gnome2/bookmarks_menu.c:344 ../ui/xi-menus.glade.h:32
+#: ../src/gnome2/bookmarks_menu.c:344
+#: ../ui/xi-menus.glade.h:32
 msgid "Edit"
 msgstr "Bewerken"
 
@@ -314,11 +324,13 @@ msgstr "Mapnaam: "
 msgid "Bookmark name: "
 msgstr "Bladwijzernaam: "
 
-#: ../src/gnome2/bookmarks_menu.c:367 ../src/gnome2/bookmarks_menu.c:773
+#: ../src/gnome2/bookmarks_menu.c:367
+#: ../src/gnome2/bookmarks_menu.c:773
 msgid "Verse: "
 msgstr "Vers: "
 
-#: ../src/gnome2/bookmarks_menu.c:368 ../src/gnome2/bookmarks_menu.c:774
+#: ../src/gnome2/bookmarks_menu.c:368
+#: ../src/gnome2/bookmarks_menu.c:774
 msgid "Module: "
 msgstr "Module: "
 
@@ -349,9 +361,10 @@ msgstr "Label: "
 #: ../src/gnome2/bookmarks_treeview.c:107
 #, c-format
 msgid "Search result: %s"
-msgstr ""
+msgstr "Zoekresultaat: %s"
 
-#: ../src/gnome2/bookmarks_treeview.c:943 ../src/gnome2/sidebar.c:1389
+#: ../src/gnome2/bookmarks_treeview.c:943
+#: ../src/gnome2/sidebar.c:1389
 msgid "Bookmarks"
 msgstr "Bladwijzers"
 
@@ -379,11 +392,13 @@ msgstr "Xiphos:"
 msgid "Close _without Saving"
 msgstr "Sluiten _zonder opslaan"
 
-#: ../src/gnome2/export_dialog.c:267 ../ui/export-dialog.glade.h:20
+#: ../src/gnome2/export_dialog.c:267
+#: ../ui/export-dialog.glade.h:20
 msgid "Please check copyright before exporting!"
 msgstr "Controleer de auteursrechten voordat u exporteert!"
 
-#: ../src/gnome2/find_dialog.c:204 ../src/gnome2/find_dialog.c:373
+#: ../src/gnome2/find_dialog.c:204
+#: ../src/gnome2/find_dialog.c:373
 msgid "Find"
 msgstr "Zoeken"
 
@@ -391,7 +406,8 @@ msgstr "Zoeken"
 msgid "Enter Word or Phrase"
 msgstr "Geef een woord of een zin"
 
-#: ../src/gnome2/find_dialog.c:238 ../src/gnome2/search_sidebar.c:306
+#: ../src/gnome2/find_dialog.c:238
+#: ../src/gnome2/search_sidebar.c:306
 #: ../ui/search-dialog.glade.h:59
 msgid "Match case"
 msgstr "Hoofdlettergevoelig"
@@ -400,7 +416,8 @@ msgstr "Hoofdlettergevoelig"
 msgid "Search backwards"
 msgstr "Terugwaarts zoeken"
 
-#: ../src/gnome2/find_dialog.c:254 ../src/gnome2/search_sidebar.c:271
+#: ../src/gnome2/find_dialog.c:254
+#: ../src/gnome2/search_sidebar.c:271
 #: ../ui/search-dialog.glade.h:76
 msgid "Regular expression"
 msgstr "Reguliere expressie"
@@ -460,9 +477,7 @@ msgid ""
 "Would you like Xiphos to set itself as the\n"
 "program to handle these references?"
 msgstr ""
-"URL-verwijzingen als \"sword://\"(net zoals http) kunnenworden gebruikt door "
-"programma's om bijbelverwijzingente openen. Wilt u dat Xiphos als standaard "
-"programma op uw systeem wordt ingesteld?\n"
+"URL-verwijzingen als \"sword://\"(net zoals http) kunnenworden gebruikt door programma's om bijbelverwijzingente openen. Wilt u dat Xiphos als standaard programma op uw systeem wordt ingesteld?\n"
 "\n"
 "Momenteel is er geen programma gekoppeld aan dit typeverwijzing."
 
@@ -493,15 +508,16 @@ msgstr ""
 
 #: ../src/gnome2/gui.c:212
 msgid "BUG! Xiphos is about to crash due to a \"STRDUP\" error."
-msgstr ""
+msgstr "BUG! Xiphos punt staat te crashen als gevolg van een \"STRDUP\" error."
 
-#: ../src/gnome2/gui.c:213 ../src/gnome2/gui.c:248
+#: ../src/gnome2/gui.c:213
+#: ../src/gnome2/gui.c:248
 msgid "Please report this error to the Xiphos team with:"
-msgstr ""
+msgstr "Meld deze fout aan de xiphos team met:"
 
 #: ../src/gnome2/gui.c:247
 msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
-msgstr ""
+msgstr "BUG! Xiphos punt staat te crashen als gevolg van een \"STRING\" error."
 
 #: ../src/gnome2/main_window.c:789
 msgid "Xiphos - Bible Study Software"
@@ -511,9 +527,12 @@ msgstr "Xiphos - Bijbelstudieprogramma"
 msgid "Open a new tab"
 msgstr "Nieuw tabblad openen"
 
-#: ../src/gnome2/main_window.c:923 ../src/gnome2/sidebar.c:627
-#: ../src/gnome2/sidebar.c:633 ../src/main/sidebar.cc:666
-#: ../src/main/sidebar.cc:1015 ../src/main/sidebar.cc:1016
+#: ../src/gnome2/main_window.c:923
+#: ../src/gnome2/sidebar.c:627
+#: ../src/gnome2/sidebar.c:633
+#: ../src/main/sidebar.cc:666
+#: ../src/main/sidebar.cc:1015
+#: ../src/main/sidebar.cc:1016
 #: ../src/main/sidebar.cc:1017
 msgid "Standard View"
 msgstr "Standaardweergave"
@@ -528,7 +547,7 @@ msgstr "Boek"
 
 #: ../src/gnome2/main_window.c:1045
 msgid "Welcome to Xiphos"
-msgstr ""
+msgstr "Welkom op Xiphos"
 
 #: ../src/gnome2/menu_popup.c:1168
 msgid ""
@@ -560,17 +579,21 @@ msgstr "Commentaarnaam kiezen"
 msgid "New Name"
 msgstr "Nieuwe naam"
 
-#: ../src/gnome2/menu_popup.c:1193 ../src/gnome2/treekey-editor.c:139
-#: ../src/gnome2/treekey-editor.c:198 ../src/gnome2/treekey-editor.c:284
+#: ../src/gnome2/menu_popup.c:1193
+#: ../src/gnome2/treekey-editor.c:139
+#: ../src/gnome2/treekey-editor.c:198
+#: ../src/gnome2/treekey-editor.c:284
 #: ../src/main/prayerlists.cc:243
 msgid "Name: "
 msgstr "Naam: "
 
-#: ../src/gnome2/menu_popup.c:1203 ../src/main/prayerlists.cc:257
+#: ../src/gnome2/menu_popup.c:1203
+#: ../src/main/prayerlists.cc:257
 msgid "Module names must contain [A-Za-z0-9_] only."
 msgstr "Modulenamen kunnen alleen letters en getallen.bevatten."
 
-#: ../src/gnome2/menu_popup.c:1210 ../src/main/prayerlists.cc:264
+#: ../src/gnome2/menu_popup.c:1210
+#: ../src/main/prayerlists.cc:264
 msgid "Xiphos already knows a module by that name."
 msgstr "Xiphos kent al een module met die naam."
 
@@ -593,7 +616,7 @@ msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:169
 msgid "Remove these modules?"
-msgstr ""
+msgstr "Verwijder deze modules?"
 
 #: ../src/gnome2/mod_mgr.c:170
 msgid "Preparing to remove"
@@ -603,13 +626,14 @@ msgstr "Verwijderen wordt voorbereid"
 msgid "Removing"
 msgstr "Verwijderen"
 
-#: ../src/gnome2/mod_mgr.c:172 ../ui/xi-menus.glade.h:72
+#: ../src/gnome2/mod_mgr.c:172
+#: ../ui/xi-menus.glade.h:72
 msgid "Remove"
 msgstr "Verwijder"
 
 #: ../src/gnome2/mod_mgr.c:175
 msgid "Install these modules?"
-msgstr ""
+msgstr "Installeer deze modules?"
 
 #: ../src/gnome2/mod_mgr.c:176
 msgid "Preparing to install"
@@ -619,14 +643,15 @@ msgstr "Installatie wordt voorbereid"
 msgid "Installing"
 msgstr "Installeren"
 
-#: ../src/gnome2/mod_mgr.c:178 ../src/gnome2/mod_mgr.c:2964
+#: ../src/gnome2/mod_mgr.c:178
+#: ../src/gnome2/mod_mgr.c:2964
 #: ../ui/module-manager.glade.h:18
 msgid "Install"
 msgstr "Installeer"
 
 #: ../src/gnome2/mod_mgr.c:181
 msgid "Archive these modules?"
-msgstr ""
+msgstr "Archief deze modules?"
 
 #: ../src/gnome2/mod_mgr.c:182
 msgid "Preparing to archive"
@@ -636,7 +661,8 @@ msgstr "Back-up wordt voorbereid"
 msgid "Archiving"
 msgstr "Bezig met maken back-up"
 
-#: ../src/gnome2/mod_mgr.c:184 ../ui/module-manager.glade.h:11
+#: ../src/gnome2/mod_mgr.c:184
+#: ../ui/module-manager.glade.h:11
 msgid "Archive"
 msgstr "Back-up maken"
 
@@ -645,6 +671,8 @@ msgid ""
 "Build fast-search index for these\n"
 "modules (may take minutes/module)?"
 msgstr ""
+"Bouw fast-index voor deze\n"
+"modules (kan minuten duren/module)?"
 
 #: ../src/gnome2/mod_mgr.c:188
 msgid "Preparing to index"
@@ -654,13 +682,14 @@ msgstr "Indexeren wordt voorbereid"
 msgid "Indexing"
 msgstr "Indexeren"
 
-#: ../src/gnome2/mod_mgr.c:190 ../ui/module-manager.glade.h:17
+#: ../src/gnome2/mod_mgr.c:190
+#: ../ui/module-manager.glade.h:17
 msgid "Index"
 msgstr "Zoekindex maken"
 
 #: ../src/gnome2/mod_mgr.c:193
 msgid "Delete fast-search index for these modules?"
-msgstr ""
+msgstr "Verwijder fast-search-index voor deze modules?"
 
 #: ../src/gnome2/mod_mgr.c:194
 msgid "Preparing to delete index"
@@ -684,37 +713,32 @@ msgstr "Het markeringssymbool betekent dat deze module al geïnstalleerd is."
 
 #: ../src/gnome2/mod_mgr.c:470
 msgid "Click the box to work on this module"
-msgstr ""
+msgstr "Klik op het vakje om te werken aan deze module"
 
 #: ../src/gnome2/mod_mgr.c:471
 msgid "Click the box to select this module for install/update"
-msgstr ""
+msgstr "Klik op het vakje te selecteren voor deze module te installeren/updaten"
 
 #: ../src/gnome2/mod_mgr.c:490
 msgid "Installed"
 msgstr "Geïnstalleerd"
 
 #: ../src/gnome2/mod_mgr.c:500
-msgid ""
-"The index icon means you have built an optimized ('lucene') index for this "
-"module for fast searching (see the Maintenance pane for this function)"
-msgstr ""
+msgid "The index icon means you have built an optimized ('lucene') index for this module for fast searching (see the Maintenance pane for this function)"
+msgstr "De index-pictogram betekent dat je een geoptimaliseerd ('Lucene') index gebouwd voor deze module voor snel zoeken (zie de Maintenance paneel voor deze functie)"
 
 #: ../src/gnome2/mod_mgr.c:518
-msgid ""
-"The lock icon means this module is encrypted, and requires that you purchase "
-"an unlock key from the content owner"
-msgstr ""
+msgid "The lock icon means this module is encrypted, and requires that you purchase an unlock key from the content owner"
+msgstr "Het slot pictogram betekent deze module is gecodeerd, en vereist dat u koopt een unlock sleutel van de eigenaar van de inhoud"
 
-#: ../src/gnome2/mod_mgr.c:535 ../ui/xi-menus.glade.h:1
+#: ../src/gnome2/mod_mgr.c:535
+#: ../ui/xi-menus.glade.h:1
 msgid "About"
 msgstr "In_fo"
 
 #: ../src/gnome2/mod_mgr.c:555
-msgid ""
-"The refresh icon means the Installed module is older than the newer "
-"Available module: You should update the module"
-msgstr ""
+msgid "The refresh icon means the Installed module is older than the newer Available module: You should update the module"
+msgstr "Het vernieuwen icoon betekent dat de geïnstalleerde module is ouder dan de nieuwere Beschikbaar module: U moet de module update"
 
 #: ../src/gnome2/mod_mgr.c:567
 msgid "Available"
@@ -739,7 +763,7 @@ msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:759
 msgid " archived in: \n"
-msgstr ""
+msgstr "gearchiveerd in:\n"
 
 #: ../src/gnome2/mod_mgr.c:815
 msgid "Journals and prayer lists cannot be indexed."
@@ -750,16 +774,23 @@ msgstr "Berichten en gebedslijsten kunnen niet geïndexeerd worden."
 msgid "%s failed"
 msgstr "%s is mislukt"
 
-#: ../src/gnome2/mod_mgr.c:836 ../src/gnome2/mod_mgr.c:1562
+#: ../src/gnome2/mod_mgr.c:836
+#: ../src/gnome2/mod_mgr.c:1562
 msgid "Finished"
 msgstr "Voltooid"
 
-#: ../src/gnome2/mod_mgr.c:1003 ../src/gnome2/mod_mgr.c:1005
-#: ../src/gnome2/mod_mgr.c:1107 ../src/gnome2/mod_mgr.c:1142
-#: ../src/gnome2/mod_mgr.c:1144 ../src/gnome2/utilities.c:435
-#: ../src/gnome2/utilities.c:500 ../src/gnome2/utilities.c:502
-#: ../src/gnome2/utilities.c:986 ../src/main/sidebar.cc:852
-#: ../src/main/sidebar.cc:924 ../src/main/sidebar.cc:926
+#: ../src/gnome2/mod_mgr.c:1003
+#: ../src/gnome2/mod_mgr.c:1005
+#: ../src/gnome2/mod_mgr.c:1107
+#: ../src/gnome2/mod_mgr.c:1142
+#: ../src/gnome2/mod_mgr.c:1144
+#: ../src/gnome2/utilities.c:435
+#: ../src/gnome2/utilities.c:500
+#: ../src/gnome2/utilities.c:502
+#: ../src/gnome2/utilities.c:986
+#: ../src/main/sidebar.cc:852
+#: ../src/main/sidebar.cc:924
+#: ../src/main/sidebar.cc:926
 msgid "Unknown"
 msgstr "Onbekend"
 
@@ -780,40 +811,55 @@ msgstr ""
 "Gesorteerd bij\n"
 "moduletype"
 
-#: ../src/gnome2/mod_mgr.c:1318 ../src/gnome2/utilities.c:561
-#: ../src/main/sidebar.cc:999 ../src/main/sidebar.cc:1001
+#: ../src/gnome2/mod_mgr.c:1318
+#: ../src/gnome2/utilities.c:561
+#: ../src/main/sidebar.cc:999
+#: ../src/main/sidebar.cc:1001
 msgid "Biblical Texts"
 msgstr "Bijbelvertalingen"
 
-#: ../src/gnome2/mod_mgr.c:1322 ../src/gnome2/utilities.c:565
-#: ../src/main/sidebar.cc:678 ../src/main/sidebar.cc:1024
-#: ../src/main/sidebar.cc:1026 ../ui/prefs.glade.h:33
+#: ../src/gnome2/mod_mgr.c:1322
+#: ../src/gnome2/utilities.c:565
+#: ../src/main/sidebar.cc:678
+#: ../src/main/sidebar.cc:1024
+#: ../src/main/sidebar.cc:1026
+#: ../ui/prefs.glade.h:33
 msgid "Commentaries"
 msgstr "Commentaren"
 
-#: ../src/gnome2/mod_mgr.c:1326 ../src/gnome2/utilities.c:569
-#: ../src/main/sidebar.cc:1033 ../src/main/sidebar.cc:1035
+#: ../src/gnome2/mod_mgr.c:1326
+#: ../src/gnome2/utilities.c:569
+#: ../src/main/sidebar.cc:1033
+#: ../src/main/sidebar.cc:1035
 msgid "Dictionaries"
 msgstr "Woordenboeken"
 
-#: ../src/gnome2/mod_mgr.c:1330 ../src/gnome2/utilities.c:573
-#: ../src/main/sidebar.cc:1042 ../src/main/sidebar.cc:1044
+#: ../src/gnome2/mod_mgr.c:1330
+#: ../src/gnome2/utilities.c:573
+#: ../src/main/sidebar.cc:1042
+#: ../src/main/sidebar.cc:1044
 msgid "Daily Devotionals"
 msgstr "Dagboeken"
 
-#: ../src/gnome2/mod_mgr.c:1334 ../src/gnome2/utilities.c:577
-#: ../src/main/sidebar.cc:688 ../src/main/sidebar.cc:1051
+#: ../src/gnome2/mod_mgr.c:1334
+#: ../src/gnome2/utilities.c:577
+#: ../src/main/sidebar.cc:688
+#: ../src/main/sidebar.cc:1051
 #: ../src/main/sidebar.cc:1053
 msgid "General Books"
 msgstr "Boeken"
 
-#: ../src/gnome2/mod_mgr.c:1338 ../src/gnome2/utilities.c:581
-#: ../src/main/sidebar.cc:1060 ../src/main/sidebar.cc:1062
+#: ../src/gnome2/mod_mgr.c:1338
+#: ../src/gnome2/utilities.c:581
+#: ../src/main/sidebar.cc:1060
+#: ../src/main/sidebar.cc:1062
 msgid "Maps"
 msgstr "Landkaarten"
 
-#: ../src/gnome2/mod_mgr.c:1342 ../src/gnome2/utilities.c:585
-#: ../src/main/sidebar.cc:1069 ../src/main/sidebar.cc:1071
+#: ../src/gnome2/mod_mgr.c:1342
+#: ../src/gnome2/utilities.c:585
+#: ../src/main/sidebar.cc:1069
+#: ../src/main/sidebar.cc:1071
 msgid "Images"
 msgstr "Illustraties"
 
@@ -833,19 +879,22 @@ msgstr "Updates"
 msgid "Uninstalled"
 msgstr "Niet geïnstalleerd"
 
-#: ../src/gnome2/mod_mgr.c:1363 ../src/gnome2/sidebar.c:643
-#: ../src/gnome2/utilities.c:590 ../src/main/prayerlists.cc:241
-#: ../src/main/sidebar.cc:1079 ../src/main/sidebar.cc:1081
+#: ../src/gnome2/mod_mgr.c:1363
+#: ../src/gnome2/sidebar.c:643
+#: ../src/gnome2/utilities.c:590
+#: ../src/main/prayerlists.cc:241
+#: ../src/main/sidebar.cc:1079
+#: ../src/main/sidebar.cc:1081
 msgid "Prayer List/Journal"
 msgstr "Gebedslijst/Bericht"
 
 #: ../src/gnome2/mod_mgr.c:1545
 msgid "Refreshing from remote source"
-msgstr ""
+msgstr "Verfrissend afgelegen bron"
 
 #: ../src/gnome2/mod_mgr.c:1556
 msgid "Remote source not found"
-msgstr ""
+msgstr "Remote source not found"
 
 #: ../src/gnome2/mod_mgr.c:1670
 msgid "Configure"
@@ -869,29 +918,30 @@ msgstr "Map"
 
 #: ../src/gnome2/mod_mgr.c:1732
 msgid "User"
-msgstr ""
+msgstr "Gebruiker"
 
 #: ../src/gnome2/mod_mgr.c:1740
 msgid "Password"
-msgstr ""
+msgstr "Wachtwoord"
 
 #: ../src/gnome2/mod_mgr.c:1748
 msgid "UID"
-msgstr ""
+msgstr "UID"
 
 #: ../src/gnome2/mod_mgr.c:1765
 msgid "Module Sources"
-msgstr ""
+msgstr "Module Bronnen"
 
 #: ../src/gnome2/mod_mgr.c:1768
 msgid "Add/Remove"
-msgstr ""
+msgstr "Toevoegen/Verwijderen"
 
 #: ../src/gnome2/mod_mgr.c:1770
 msgid "Choose"
-msgstr ""
+msgstr "Kiezen"
 
-#: ../src/gnome2/mod_mgr.c:1774 ../src/gnome2/preferences_dialog.c:1793
+#: ../src/gnome2/mod_mgr.c:1774
+#: ../src/gnome2/preferences_dialog.c:1793
 #: ../src/gnome2/sidebar.c:1413
 msgid "Modules"
 msgstr "Modules"
@@ -918,22 +968,27 @@ msgid ""
 "You have uninstalled your last Bible.\n"
 "Xiphos requires at least one."
 msgstr ""
+"U hebt verwijderd uw laatste Bijbel.\n"
+"Xiphos vereist ten minste een."
 
 #: ../src/gnome2/mod_mgr.c:2288
 msgid ""
 "There are still no Bibles installed.\n"
 "Xiphos cannot continue without one."
 msgstr ""
+"Er zijn nog geen bijbels geïnstalleerd.\n"
+"Xiphos kan niet doorgaan zonder een."
 
 #: ../src/gnome2/mod_mgr.c:2353
 msgid "Standard remote sources have been loaded."
-msgstr ""
+msgstr "Standaard afstandsbediening bronnen zijn geladen."
 
 #: ../src/gnome2/mod_mgr.c:2359
 msgid "Could not load standard sources from CrossWire."
-msgstr ""
+msgstr "Kan niet laden standaard bronnen van CrossWire."
 
-#: ../src/gnome2/mod_mgr.c:2510 ../src/gnome2/mod_mgr.c:2759
+#: ../src/gnome2/mod_mgr.c:2510
+#: ../src/gnome2/mod_mgr.c:2759
 msgid "Remove the selected source"
 msgstr "Geselecteerde bron verwijderen"
 
@@ -959,11 +1014,11 @@ msgstr "Map:"
 
 #: ../src/gnome2/mod_mgr.c:2579
 msgid "User (optional):"
-msgstr ""
+msgstr "Gebruiker (optioneel):"
 
 #: ../src/gnome2/mod_mgr.c:2580
 msgid "Password (optional):"
-msgstr ""
+msgstr "Wachtwoord (optioneel):"
 
 #. this can happen at most once
 #: ../src/gnome2/mod_mgr.c:2608
@@ -994,41 +1049,52 @@ msgid ""
 "<b>Welcome to the Module Manager.</b>\n"
 "\n"
 "This is Xiphos' mechanism to get new and updated content.\n"
-"It appears you have never been here before, so please take a moment to look "
-"it over.\n"
+"It appears you have never been here before, so please take a moment to look it over.\n"
 "(You will see this information box just once.)\n"
 "\n"
-"Modules come from different <u>repositories</u>.  <b>Module Sources: Add/"
-"Remove</b> will show you what repositories are currently known.\n"
+"Modules come from different <u>repositories</u>.  <b>Module Sources: Add/Remove</b> will show you what repositories are currently known.\n"
 "\n"
-"<b>Module Sources: Choose</b> is for deciding from where modules should "
-"come, that is, from which repository Xiphos should obtain them, as well as "
-"where they should be placed on your system. Set <i>Install Source</i> and "
-"<i>Install Destination</i>, then click <i>Refresh</i>.\n"
+"<b>Module Sources: Choose</b> is for deciding from where modules should come, that is, from which repository Xiphos should obtain them, as well as where they should be placed on your system. Set <i>Install Source</i> and <i>Install Destination</i>, then click <i>Refresh</i>.\n"
 "\n"
-"<b>Modules: Install/Update</b> is for selecting and obtaining modules after "
-"choosing source and destination.\n"
+"<b>Modules: Install/Update</b> is for selecting and obtaining modules after choosing source and destination.\n"
 "\n"
 "<b>Modules: Maintenance</b> is for archive and index creation.\n"
 "\n"
-"See section 5 of our manual for Module Manager detail, or ask for help via "
-"Live Chat, or (if no one is responsive in chat) send mail to our users' "
-"mailing list.\n"
+"See section 5 of our manual for Module Manager detail, or ask for help via Live Chat, or (if no one is responsive in chat) send mail to our users' mailing list.\n"
 msgstr ""
+"<b>Welkom op de Module Manager.</b>\n"
+"\n"
+"Dit mechanisme xiphos 'om nieuwe en bijgewerkte inhoud te krijgen.\n"
+"Het lijkt u hier nog nooit geweest, dus neem een moment om te kijken over.\n"
+"(U ziet deze informatie doos maar een keer.)\n"
+"\n"
+"Modules komen uit verschillende <u>repositories</u>. <b>Module Bronnen: Toevoegen/Verwijderen</b> zal u tonen wat repositories momenteel bekend zijn.\n"
+"\n"
+"<b> Module Bronnen: Kies </b> is voor de besluitvorming van waar modules moeten komen, dat wil zeggen, van waaruit menu xiphos hen zou verkrijgen, alsmede waar ze zouden moeten worden geplaatst op uw systeem. Stel <i> Install Source</i> en <i>Installeren Bestemming</i> en klik <i>Vernieuwen</i>.\n"
+"\n"
+"<b>Modules: Install/Update</b> is voor de selectie en het verkrijgen van modules na het kiezen van de bron en bestemming.\n"
+"\n"
+"<b>Modules: Onderhoud</b> is voor het archief en de index van de schepping.\n"
+"\n"
+"Zie punt 5 van onze handleiding voor Module Manager detail, of om hulp te vragen via Live Chat, of (als niemand reageert in chat) stuur mail naar mailing onze gebruikers 'lijst.\n"
 
-#: ../src/gnome2/navbar_book.c:359 ../src/gnome2/navbar_book_dialog.c:300
+#: ../src/gnome2/navbar_book.c:359
+#: ../src/gnome2/navbar_book_dialog.c:300
 msgid "Go outward, to the section containing this one"
 msgstr "Ga naar buiten, naar de sectie die deze bevat."
 
-#: ../src/gnome2/navbar_book.c:375 ../src/gnome2/navbar_book_dialog.c:316
+#: ../src/gnome2/navbar_book.c:375
+#: ../src/gnome2/navbar_book_dialog.c:316
 msgid "Go to previous item"
 msgstr "Vorig item"
 
-#: ../src/gnome2/navbar_book.c:390 ../src/gnome2/navbar_book_dialog.c:331
+#: ../src/gnome2/navbar_book.c:390
+#: ../src/gnome2/navbar_book_dialog.c:331
 msgid "Go to next item"
 msgstr "Volgend item"
 
-#: ../src/gnome2/navbar_book.c:406 ../src/gnome2/navbar_book_dialog.c:347
+#: ../src/gnome2/navbar_book.c:406
+#: ../src/gnome2/navbar_book_dialog.c:347
 msgid "Go inward, to the first subsection"
 msgstr "Ga naar binnen, naar de eerste subsectie"
 
@@ -1036,9 +1102,10 @@ msgstr "Ga naar binnen, naar de eerste subsectie"
 #: ../src/gnome2/navbar_versekey_editor.c:879
 #: ../src/gnome2/navbar_versekey_parallel.c:810
 msgid "Synchronize this window from main window"
-msgstr ""
+msgstr "Synchroniseren dit venster hoofdvenster"
 
-#: ../src/gnome2/parallel_dialog.c:328 ../src/gnome2/preferences_dialog.c:1799
+#: ../src/gnome2/parallel_dialog.c:328
+#: ../src/gnome2/preferences_dialog.c:1799
 msgid "Parallel"
 msgstr "Parallel"
 
@@ -1050,7 +1117,8 @@ msgstr "Kopieëren"
 msgid "Detach/Attach"
 msgstr "Koppel/Ontkoppel"
 
-#: ../src/gnome2/parallel_view.c:291 ../ui/xi-menus.glade.h:53
+#: ../src/gnome2/parallel_view.c:291
+#: ../ui/xi-menus.glade.h:53
 msgid "Module Options"
 msgstr "Moduleopties"
 
@@ -1075,10 +1143,14 @@ msgstr "Wijzig parallel 4"
 msgid "Change parallel 5"
 msgstr "Wijzig parallel 5"
 
-#: ../src/gnome2/parallel_view.c:471 ../src/gnome2/sidebar.c:626
-#: ../src/gnome2/sidebar.c:632 ../src/gnome2/tabbed_browser.c:262
-#: ../src/main/sidebar.cc:646 ../src/main/sidebar.cc:1007
-#: ../src/main/sidebar.cc:1008 ../src/main/sidebar.cc:1009
+#: ../src/gnome2/parallel_view.c:471
+#: ../src/gnome2/sidebar.c:626
+#: ../src/gnome2/sidebar.c:632
+#: ../src/gnome2/tabbed_browser.c:262
+#: ../src/main/sidebar.cc:646
+#: ../src/main/sidebar.cc:1007
+#: ../src/main/sidebar.cc:1008
+#: ../src/main/sidebar.cc:1009
 msgid "Parallel View"
 msgstr "Parallelweergave"
 
@@ -1102,9 +1174,10 @@ msgstr "-- Selecteer --"
 
 #: ../src/gnome2/preferences_dialog.c:1652
 msgid "Locale will take effect after restart."
-msgstr ""
+msgstr "Locale wordt van kracht na herstarten."
 
-#: ../src/gnome2/preferences_dialog.c:1687 ../ui/prefs.glade.h:74
+#: ../src/gnome2/preferences_dialog.c:1687
+#: ../ui/prefs.glade.h:74
 msgid "Preferences"
 msgstr "Voorkeuren"
 
@@ -1124,7 +1197,8 @@ msgstr "Groottes"
 msgid "General"
 msgstr "Algemeen"
 
-#: ../src/gnome2/preferences_dialog.c:1782 ../ui/prefs.glade.h:87
+#: ../src/gnome2/preferences_dialog.c:1782
+#: ../ui/prefs.glade.h:87
 msgid "Tabs and Panes"
 msgstr "Tabbladen en panelen"
 
@@ -1140,17 +1214,20 @@ msgstr "Hoofdscherm"
 msgid "Special"
 msgstr "Geavanceerd"
 
-#: ../src/gnome2/search_dialog.c:68 ../src/main/search_dialog.cc:66
+#: ../src/gnome2/search_dialog.c:68
+#: ../src/main/search_dialog.cc:66
 #: ../src/main/search_sidebar.cc:61
 msgid "Searching the "
 msgstr "Zoek in "
 
-#: ../src/gnome2/search_dialog.c:69 ../src/main/search_dialog.cc:67
+#: ../src/gnome2/search_dialog.c:69
+#: ../src/main/search_dialog.cc:67
 #: ../src/main/search_sidebar.cc:62
 msgid " Module"
 msgstr " Module"
 
-#: ../src/gnome2/search_dialog.c:70 ../src/main/search_dialog.cc:68
+#: ../src/gnome2/search_dialog.c:70
+#: ../src/main/search_dialog.cc:68
 #: ../src/main/search_sidebar.cc:63
 msgid "found in "
 msgstr "gevonden in "
@@ -1165,7 +1242,7 @@ msgstr "Weet u zeker dat u de module lijst wilt wissen?"
 
 #: ../src/gnome2/search_dialog.c:708
 msgid "The last module list may not be deleted"
-msgstr ""
+msgstr "De laatste module lijst mag niet worden verwijderd."
 
 #: ../src/gnome2/search_dialog.c:726
 msgid "Delete list?"
@@ -1191,7 +1268,8 @@ msgstr "Module zoeken"
 msgid "Bible"
 msgstr "Bijbel"
 
-#: ../src/gnome2/search_sidebar.c:232 ../ui/prefs.glade.h:35
+#: ../src/gnome2/search_sidebar.c:232
+#: ../ui/prefs.glade.h:35
 msgid "Commentary"
 msgstr "Commentaar"
 
@@ -1199,11 +1277,13 @@ msgstr "Commentaar"
 msgid "Search Type"
 msgstr "Zoektype"
 
-#: ../src/gnome2/search_sidebar.c:260 ../ui/search-dialog.glade.h:66
+#: ../src/gnome2/search_sidebar.c:260
+#: ../ui/search-dialog.glade.h:66
 msgid "Multi word"
 msgstr "Meerdere woorden"
 
-#: ../src/gnome2/search_sidebar.c:279 ../ui/search-dialog.glade.h:44
+#: ../src/gnome2/search_sidebar.c:279
+#: ../ui/search-dialog.glade.h:44
 msgid "Exact phrase"
 msgstr "Exacte zin"
 
@@ -1247,7 +1327,8 @@ msgstr "Zoeken"
 msgid "Verse List"
 msgstr "Verslijst"
 
-#: ../src/gnome2/sidebar_dialog.c:139 ../src/gnome2/sidebar_dialog.c:148
+#: ../src/gnome2/sidebar_dialog.c:139
+#: ../src/gnome2/sidebar_dialog.c:148
 msgid "Sidebar"
 msgstr "Zijbalk"
 
@@ -1255,12 +1336,14 @@ msgstr "Zijbalk"
 msgid "Powered by the SWORD Project"
 msgstr "Mede mogelijk gemaakt door het SWORD-project"
 
-#: ../src/gnome2/treekey-editor.c:137 ../src/gnome2/treekey-editor.c:196
+#: ../src/gnome2/treekey-editor.c:137
+#: ../src/gnome2/treekey-editor.c:196
 #: ../src/gnome2/treekey-editor.c:282
 msgid "Prayer List/Journal Item"
 msgstr "Gebedspunt/Bericht"
 
-#: ../src/gnome2/treekey-editor.c:138 ../src/gnome2/treekey-editor.c:197
+#: ../src/gnome2/treekey-editor.c:138
+#: ../src/gnome2/treekey-editor.c:197
 #: ../src/gnome2/treekey-editor.c:283
 msgid "New name"
 msgstr "Nieuwe naam"
@@ -1275,6 +1358,8 @@ msgid ""
 "Improperly encoded personal annotation label:\n"
 "'%s'"
 msgstr ""
+"Onjuist gecodeerde persoonlijke annotatie label:\n"
+"'%s'"
 
 #: ../src/main/display.cc:386
 msgid ""
@@ -1288,8 +1373,10 @@ msgstr ""
 "(Mogelijks is het bestandstype iets anders dan bm/gif/jpg/png.)\n"
 "Xiphos kan illustraties niet aanpassen aan de schermgrootte."
 
-#: ../src/main/display.cc:1043 ../src/main/display.cc:1095
-#: ../src/main/display.cc:1172 ../ui/export-dialog.glade.h:7
+#: ../src/main/display.cc:1043
+#: ../src/main/display.cc:1095
+#: ../src/main/display.cc:1172
+#: ../ui/export-dialog.glade.h:7
 msgid "Chapter"
 msgstr "Hoofdstuk"
 
@@ -1317,104 +1404,129 @@ msgstr "Instellingen worden geladen"
 msgid "Displaying Xiphos"
 msgstr "Opbouwen interface"
 
-#: ../src/main/module_dialogs.cc:227 ../src/main/previewer.cc:127
-#: ../src/main/previewer.cc:194 ../ui/prefs.glade.h:75
+#: ../src/main/module_dialogs.cc:227
+#: ../src/main/previewer.cc:127
+#: ../src/main/previewer.cc:194
+#: ../ui/prefs.glade.h:75
 msgid "Previewer"
 msgstr "Voorbeeldweergave"
 
-#: ../src/main/module_dialogs.cc:292 ../src/main/module_dialogs.cc:416
+#: ../src/main/module_dialogs.cc:292
+#: ../src/main/module_dialogs.cc:416
 #: ../src/main/previewer.cc:269
 msgid "Footnote"
 msgstr "Voetnoot"
 
-#: ../src/main/module_dialogs.cc:298 ../src/main/module_dialogs.cc:421
+#: ../src/main/module_dialogs.cc:298
+#: ../src/main/module_dialogs.cc:421
 #: ../src/main/previewer.cc:281
 msgid "Cross Reference"
 msgstr "Kruisverwijzing"
 
-#: ../src/main/module_dialogs.cc:304 ../src/main/module_dialogs.cc:318
-#: ../src/main/module_dialogs.cc:426 ../src/main/module_dialogs.cc:438
-#: ../src/main/previewer.cc:287 ../src/main/previewer.cc:306
+#: ../src/main/module_dialogs.cc:304
+#: ../src/main/module_dialogs.cc:318
+#: ../src/main/module_dialogs.cc:426
+#: ../src/main/module_dialogs.cc:438
+#: ../src/main/previewer.cc:287
+#: ../src/main/previewer.cc:306
 msgid "Strongs"
 msgstr "Strongs"
 
-#: ../src/main/module_dialogs.cc:310 ../src/main/module_dialogs.cc:329
-#: ../src/main/module_dialogs.cc:431 ../src/main/module_dialogs.cc:448
-#: ../src/main/previewer.cc:293 ../src/main/previewer.cc:319
+#: ../src/main/module_dialogs.cc:310
+#: ../src/main/module_dialogs.cc:329
+#: ../src/main/module_dialogs.cc:431
+#: ../src/main/module_dialogs.cc:448
+#: ../src/main/previewer.cc:293
+#: ../src/main/previewer.cc:319
 msgid "Morphology"
 msgstr "Morfologie"
 
-#: ../src/main/module_dialogs.cc:1081 ../src/main/url.cc:530
+#: ../src/main/module_dialogs.cc:1081
+#: ../src/main/url.cc:530
 msgid "Back to "
 msgstr "Terug naar "
 
-#: ../src/main/parallel_view.cc:404 ../ui/xi-menus.glade.h:89
+#: ../src/main/parallel_view.cc:404
+#: ../ui/xi-menus.glade.h:89
 msgid "Strong's Numbers"
 msgstr "Strongs getallen"
 
-#: ../src/main/parallel_view.cc:414 ../ui/search-dialog.glade.h:52
+#: ../src/main/parallel_view.cc:414
+#: ../ui/search-dialog.glade.h:52
 #: ../ui/xi-menus.glade.h:40
 msgid "Footnotes"
 msgstr "Voetnoten"
 
-#: ../src/main/parallel_view.cc:424 ../ui/search-dialog.glade.h:64
+#: ../src/main/parallel_view.cc:424
+#: ../ui/search-dialog.glade.h:64
 #: ../ui/xi-menus.glade.h:55
 msgid "Morphological Tags"
 msgstr "Morfologische Markeringen"
 
-#: ../src/main/parallel_view.cc:434 ../ui/xi-menus.glade.h:44
+#: ../src/main/parallel_view.cc:434
+#: ../ui/xi-menus.glade.h:44
 msgid "Hebrew Vowel Points"
 msgstr "Hebreeuwse Klinkertekens"
 
-#: ../src/main/parallel_view.cc:444 ../ui/xi-menus.glade.h:43
+#: ../src/main/parallel_view.cc:444
+#: ../ui/xi-menus.glade.h:43
 msgid "Hebrew Cantillation"
 msgstr "Hebreeuwse Cantillation"
 
-#: ../src/main/parallel_view.cc:454 ../ui/xi-menus.glade.h:41
+#: ../src/main/parallel_view.cc:454
+#: ../ui/xi-menus.glade.h:41
 msgid "Greek Accents"
 msgstr "Griekse Leestekens"
 
 #: ../src/main/parallel_view.cc:464
 msgid "Cross-references"
-msgstr ""
+msgstr "Kruisverwijzingen"
 
-#: ../src/main/parallel_view.cc:474 ../ui/xi-menus.glade.h:50
+#: ../src/main/parallel_view.cc:474
+#: ../ui/xi-menus.glade.h:50
 msgid "Lemmas"
 msgstr "Lemmas"
 
-#: ../src/main/parallel_view.cc:484 ../ui/xi-menus.glade.h:42
+#: ../src/main/parallel_view.cc:484
+#: ../ui/xi-menus.glade.h:42
 msgid "Headings"
 msgstr "Rubrieken"
 
 #: ../src/main/parallel_view.cc:494
 msgid "Morpheme Segmentation"
-msgstr ""
+msgstr "Morfeem Segmentatie"
 
-#: ../src/main/parallel_view.cc:504 ../ui/xi-menus.glade.h:96
+#: ../src/main/parallel_view.cc:504
+#: ../ui/xi-menus.glade.h:96
 msgid "Words of Christ in Red"
 msgstr "Uitspraken van Jezus rood weergeven"
 
-#: ../src/main/parallel_view.cc:514 ../ui/xi-menus.glade.h:91
+#: ../src/main/parallel_view.cc:514
+#: ../ui/xi-menus.glade.h:91
 msgid "Transliteration"
-msgstr ""
+msgstr "Transliteration"
 
 #: ../src/main/parallel_view.cc:524
 msgid "Textual Variants"
-msgstr ""
+msgstr "Tekstuele Varianten"
 
-#: ../src/main/parallel_view.cc:532 ../ui/xi-menus.glade.h:70
+#: ../src/main/parallel_view.cc:532
+#: ../ui/xi-menus.glade.h:70
 msgid "Primary Reading"
 msgstr "Primaire Lezing"
 
-#: ../src/main/parallel_view.cc:541 ../ui/xi-menus.glade.h:84
+#: ../src/main/parallel_view.cc:541
+#: ../ui/xi-menus.glade.h:84
 msgid "Secondary Reading"
 msgstr "Secundaire Lezing"
 
-#: ../src/main/parallel_view.cc:550 ../ui/xi-menus.glade.h:9
+#: ../src/main/parallel_view.cc:550
+#: ../ui/xi-menus.glade.h:9
 msgid "All Readings"
 msgstr "Alle lezingen"
 
-#: ../src/main/parallel_view.cc:884 ../src/main/parallel_view.cc:1136
+#: ../src/main/parallel_view.cc:884
+#: ../src/main/parallel_view.cc:1136
 msgid "view context"
 msgstr "context bekijken"
 
@@ -1466,29 +1578,35 @@ msgstr "November"
 msgid "December"
 msgstr "December"
 
-#: ../src/main/prayerlists.cc:124 ../src/main/sword_treekey.cc:332
+#: ../src/main/prayerlists.cc:124
+#: ../src/main/sword_treekey.cc:332
 msgid "Growth"
 msgstr "Groei"
 
-#: ../src/main/prayerlists.cc:125 ../src/main/sword_treekey.cc:333
+#: ../src/main/prayerlists.cc:125
+#: ../src/main/sword_treekey.cc:333
 msgid "<b>For Growth</b><br>"
 msgstr "<b>Voor groei</b><br>"
 
-#: ../src/main/prayerlists.cc:126 ../src/main/prayerlists.cc:383
+#: ../src/main/prayerlists.cc:126
+#: ../src/main/prayerlists.cc:383
 #: ../src/main/sword_treekey.cc:334
 msgid "Salvation"
 msgstr "Verlossing"
 
-#: ../src/main/prayerlists.cc:127 ../src/main/sword_treekey.cc:335
+#: ../src/main/prayerlists.cc:127
+#: ../src/main/sword_treekey.cc:335
 msgid "<b>For Salvation</b><br>"
 msgstr "<b>Voor verlossing</b><br>"
 
-#: ../src/main/prayerlists.cc:128 ../src/main/prayerlists.cc:387
+#: ../src/main/prayerlists.cc:128
+#: ../src/main/prayerlists.cc:387
 #: ../src/main/sword_treekey.cc:336
 msgid "Health"
 msgstr "Gezondheid"
 
-#: ../src/main/prayerlists.cc:129 ../src/main/sword_treekey.cc:337
+#: ../src/main/prayerlists.cc:129
+#: ../src/main/sword_treekey.cc:337
 msgid "<b>For Health</b><br>"
 msgstr "<b>Voor gezondheid</b><br>"
 
@@ -1496,7 +1614,8 @@ msgstr "<b>Voor gezondheid</b><br>"
 msgid "Misc"
 msgstr "Overig"
 
-#: ../src/main/prayerlists.cc:131 ../src/main/sword_treekey.cc:339
+#: ../src/main/prayerlists.cc:131
+#: ../src/main/sword_treekey.cc:339
 msgid "<b>Miscellaneous</b><br>"
 msgstr "<b>Overig</b><br>"
 
@@ -1570,27 +1689,24 @@ msgid ""
 "Xiphos cannot create module's path:\n"
 "%s"
 msgstr ""
+"Xiphos kunt geen pad module:\n"
+"%s"
 
 #: ../src/main/prayerlists.cc:326
 msgid "A basic prayer list. \\par\\par Module created by Xiphos."
-msgstr ""
-"Een standaard gebedslijst. \\par\\par Module is aangemaakt door Xiphos."
+msgstr "Een standaard gebedslijst. \\par\\par Module is aangemaakt door Xiphos."
 
 #: ../src/main/prayerlists.cc:327
 msgid "BasicPrayerList"
-msgstr ""
+msgstr "BasicPrayerList"
 
 #: ../src/main/prayerlists.cc:341
 msgid "MyPrayerList"
 msgstr "MijnGebedslijst"
 
 #: ../src/main/prayerlists.cc:342
-msgid ""
-"<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</"
-"b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"
-msgstr ""
-"<b>Personen:</b><br>Bob<br>Sam<br>Sue<br><br><b>Kerk:</"
-"b><br>Veiligheid<br>Eenheid<br>Bijbels voor zendelingen<br><br><br>"
+msgid "<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"
+msgstr "<b>Personen:</b><br>Bob<br>Sam<br>Sue<br><br><b>Kerk:</b><br>Veiligheid<br>Eenheid<br>Bijbels voor zendelingen<br><br><br>"
 
 #: ../src/main/prayerlists.cc:368
 msgid "A subject-based prayer list. \\par\\par Module created by Xiphos."
@@ -1598,7 +1714,7 @@ msgstr "Een gebedslijst op onderwerp. \\par\\par Module aangemaakt met Xiphos."
 
 #: ../src/main/prayerlists.cc:369
 msgid "SubjectPrayerList"
-msgstr ""
+msgstr "OnderwerpPrayerList"
 
 #: ../src/main/prayerlists.cc:384
 msgid "Bob<br>Sam<br>Sue<br>John<br>"
@@ -1618,12 +1734,11 @@ msgstr "Sue<br>John<br>"
 
 #: ../src/main/prayerlists.cc:414
 msgid "A monthly prayer list. \\par\\par Module created by Xiphos."
-msgstr ""
-"Een maandelijkse gebedslijst. \\par\\par Module is aangemaakt bij Xiphos."
+msgstr "Een maandelijkse gebedslijst. \\par\\par Module is aangemaakt bij Xiphos."
 
 #: ../src/main/prayerlists.cc:415
 msgid "MonthlyPrayerList"
-msgstr ""
+msgstr "MaandelijksPrayerList"
 
 #: ../src/main/prayerlists.cc:466
 msgid "A daily journal. \\par\\par Module created by Xiphos."
@@ -1631,17 +1746,15 @@ msgstr "Een dagelijks bericht. \\par\\par Module is aangemaakt door Xiphos."
 
 #: ../src/main/prayerlists.cc:467
 msgid "DailyJournal"
-msgstr ""
+msgstr "DailyJournal"
 
 #: ../src/main/prayerlists.cc:531
 msgid "An outlined topic (e.g. sermon). \\par\\par Module created by Xiphos."
-msgstr ""
-"Een uitgelijnd onderwerp(e.g. preek). \\par\\par Module aangemaakt met "
-"Xiphos."
+msgstr "Een uitgelijnd onderwerp(e.g. preek). \\par\\par Module aangemaakt met Xiphos."
 
 #: ../src/main/prayerlists.cc:532
 msgid "OutlinedTopic"
-msgstr ""
+msgstr "GeschetstTopic"
 
 #: ../src/main/prayerlists.cc:546
 msgid "Major Topic A"
@@ -1669,12 +1782,12 @@ msgstr "<b>Hoofdondewerp C</b><br>"
 
 #: ../src/main/previewer.cc:275
 msgid "User Annotation"
-msgstr ""
+msgstr "Gebruiker Annotatie"
 
 #: ../src/main/search_dialog.cc:212
 #, c-format
 msgid "Search result %s: %s"
-msgstr ""
+msgstr "Zoekresultaat %s: %s"
 
 #: ../src/main/search_dialog.cc:444
 msgid "Delete Range?"
@@ -1684,8 +1797,10 @@ msgstr "Reeks verwijderen?"
 msgid "Are you sure you want to delete this range?"
 msgstr "Wilt u deze reeks echt verwijderen?"
 
-#: ../src/main/search_dialog.cc:659 ../src/main/search_dialog.cc:1130
-#: ../src/main/search_dialog.cc:1133 ../src/main/search_dialog.cc:1155
+#: ../src/main/search_dialog.cc:659
+#: ../src/main/search_dialog.cc:1130
+#: ../src/main/search_dialog.cc:1133
+#: ../src/main/search_dialog.cc:1155
 #: ../src/main/search_dialog.cc:1158
 msgid "Search: "
 msgstr "Zoeken in: "
@@ -1716,19 +1831,23 @@ msgstr "Pas de modulelijst aan."
 #: ../src/main/search_dialog.cc:1578
 #, c-format
 msgid "No fast-search index exists for %s.%s%s"
-msgstr ""
+msgstr "Geen snelle-index bestaat voor %s.%s%s"
 
 #: ../src/main/search_dialog.cc:1580
 msgid ""
 "\n"
 "Search on this module is now `multi word'."
 msgstr ""
+"\n"
+"Zoek op deze module is nu `multi woord '."
 
 #: ../src/main/search_dialog.cc:1581
 msgid ""
 "\n"
 "See the Module Manager, Maintenance pane."
 msgstr ""
+"\n"
+"Zie module Manager, Maintenance ruit."
 
 #: ../src/main/search_dialog.cc:1644
 msgid "Search finished"
@@ -1742,11 +1861,9 @@ msgstr "resultaten"
 msgid ""
 "Welcome to Xiphos.\n"
 "\n"
-"There are no Bible modules installed. In order to initialize, Xiphos needs "
-"you to install at least one Bible.\n"
+"There are no Bible modules installed. In order to initialize, Xiphos needs you to install at least one Bible.\n"
 "\n"
-"With your permission, Xiphos will invoke the Module Manager so that you may "
-"install from Crosswire:\n"
+"With your permission, Xiphos will invoke the Module Manager so that you may install from Crosswire:\n"
 "1. Configure remote install.\n"
 "2. Connect.\n"
 "3. Select a Bible text of your language preference.\n"
@@ -1759,19 +1876,16 @@ msgid ""
 msgstr ""
 "Welkom bij Xiphos.\n"
 "\n"
-"Er zijn geen Bijbelmodules geinstalleerd. Xiphos heeft minimaal een "
-"Bijbelmodule nodig, om te kunnen starten.\n"
+"Er zijn geen Bijbelmodules geinstalleerd. Xiphos heeft minimaal een Bijbelmodule nodig, om te kunnen starten.\n"
 "\n"
-"Met uw toestemming wordt het Modulebeheer gestart, zodat u modules kunt "
-"installeren vanaf Crosswire:\n"
+"Met uw toestemming wordt het Modulebeheer gestart, zodat u modules kunt installeren vanaf Crosswire:\n"
 "1. Configureer installatie vanaf een andere lokatie\n"
 "2. Maak een verbinding.\n"
 "3. Selecteer een Bijbelmodule naar keuze.\n"
 "4. Kies 'Installeren'.\n"
 "Sluit het Modulebeheer als u klaar bent.\n"
 "\n"
-"Waarschuwing: Wees voorzichtig met het gebruik als u in uw land wordt "
-"vervolgd.\n"
+"Waarschuwing: Wees voorzichtig met het gebruik als u in uw land wordt vervolgd.\n"
 "\n"
 "Modulebeheer opstarten om een Bijbelmodule te installeren?"
 
@@ -1791,7 +1905,8 @@ msgstr ""
 "\n"
 "Xiphos zal worden afgesloten."
 
-#: ../src/main/settings.c:133 ../src/main/settings.c:142
+#: ../src/main/settings.c:133
+#: ../src/main/settings.c:142
 #: ../src/main/settings.c:151
 msgid "can not create "
 msgstr "aanmaken niet gelukt van "
@@ -1853,20 +1968,24 @@ msgid ""
 "Xiphos cannot allocate space\n"
 "for language abbreviations."
 msgstr ""
+"Xiphos niet toewijzen ruimte\n"
+"voor taal afkortingen."
 
 #: ../src/main/sword.cc:564
 msgid ""
 "Xiphos cannot read the\n"
 "language abbreviation file."
 msgstr ""
+"Xiphos kan niet lezen\n"
+"taal afkorting bestand."
 
 #: ../src/main/sword.cc:642
 msgid "No matching locale found for"
-msgstr ""
+msgstr "Geen overeenkomende locale gevonden voor"
 
 #: ../src/main/sword.cc:644
 msgid "Book names and menus may not be translated"
-msgstr ""
+msgstr "Boek namen en menu's mogen niet worden vertaald"
 
 #: ../src/main/sword.cc:1232
 msgid "Daily devotional was requested, but there are none installed."
@@ -1887,17 +2006,18 @@ msgstr "Xiphos kon %s niet uitvoeren"
 
 #: ../src/main/url.cc:199
 msgid "Viewer error:\n"
-msgstr ""
+msgstr "Viewer fout:\n"
 
 #: ../src/main/url.cc:272
 #, c-format
 msgid "Show %s in main window"
 msgstr "%s in hoofdscherm tonen"
 
-#: ../src/main/xml.c:80 ../src/main/xml.c:464
+#: ../src/main/xml.c:80
+#: ../src/main/xml.c:464
 #, c-format
 msgid "Document not created successfully. \n"
-msgstr "Aanmaken document is mislukt. \n"
+msgstr "Aanmaken document is mislukt.\n"
 
 #: ../src/main/xml.c:89
 msgid "Personal"
@@ -1907,15 +2027,18 @@ msgstr "Persoonlijk"
 msgid "What must I do to be saved?"
 msgstr "Wat moet ik doen om gered te worden?"
 
-#: ../src/main/xml.c:92 ../src/main/xml.c:93
+#: ../src/main/xml.c:92
+#: ../src/main/xml.c:93
 msgid "Acts 16:31"
 msgstr "Handelingen 16:31"
 
-#: ../src/main/xml.c:97 ../src/main/xml.c:98
+#: ../src/main/xml.c:97
+#: ../src/main/xml.c:98
 msgid "Eph 2:8,9"
-msgstr ""
+msgstr "Eph 2:8,9"
 
-#: ../src/main/xml.c:102 ../src/main/xml.c:103
+#: ../src/main/xml.c:102
+#: ../src/main/xml.c:103
 msgid "Romans 1:16"
 msgstr "Romeinen 1:16"
 
@@ -1923,20 +2046,24 @@ msgstr "Romeinen 1:16"
 msgid "What is the Gospel?"
 msgstr "Wat is het Evangelie?"
 
-#: ../src/main/xml.c:108 ../src/main/xml.c:109
+#: ../src/main/xml.c:108
+#: ../src/main/xml.c:109
 msgid "1 Cor 15:1-4"
 msgstr "1 Kor 15:1-4"
 
-#: ../src/main/xml.c:413 ../src/main/xml.c:1144
+#: ../src/main/xml.c:413
+#: ../src/main/xml.c:1144
 #, c-format
 msgid "Document not parsed successfully. \n"
-msgstr "Document kon niet worden gelezen. \n"
+msgstr "Document kon niet worden gelezen.\n"
 
-#: ../src/main/xml.c:419 ../src/main/xml.c:747 ../src/main/xml.c:1025
+#: ../src/main/xml.c:419
+#: ../src/main/xml.c:747
+#: ../src/main/xml.c:1025
 #: ../src/main/xml.c:1204
 #, c-format
 msgid "empty document \n"
-msgstr "leeg document \n"
+msgstr "leeg document\n"
 
 #: ../src/main/xml.c:425
 #, c-format
@@ -1963,7 +2090,8 @@ msgstr "Matth. - Openbaring"
 msgid "Sample Module List"
 msgstr "Voorbeeld modulelijst"
 
-#: ../src/main/xml.c:753 ../src/main/xml.c:1031
+#: ../src/main/xml.c:753
+#: ../src/main/xml.c:1031
 #, c-format
 msgid "wrong type, root node != %s\n"
 msgstr "verkeerd type, sleutelnode != %s\n"
@@ -1972,35 +2100,40 @@ msgstr "verkeerd type, sleutelnode != %s\n"
 msgid "Add Bookmark"
 msgstr "Bladwijzer toevoegen"
 
-#: ../ui/bookmarks.glade.h:2 ../ui/markverse.glade.h:1
+#: ../ui/bookmarks.glade.h:2
+#: ../ui/markverse.glade.h:1
 msgid "Bookmark Dialog"
 msgstr "Bladwijzervenster"
 
 #: ../ui/bookmarks.glade.h:3
 msgid "Bookmark Folder Treeview"
-msgstr ""
+msgstr "Bladwijzermap Treeview"
 
-#: ../ui/bookmarks.glade.h:4 ../ui/markverse.glade.h:2
+#: ../ui/bookmarks.glade.h:4
+#: ../ui/markverse.glade.h:2
 msgid "Cancel Bookmark"
 msgstr "Bladwijzer verwijderen"
 
-#: ../ui/bookmarks.glade.h:5 ../ui/markverse.glade.h:3
+#: ../ui/bookmarks.glade.h:5
+#: ../ui/markverse.glade.h:3
 msgid "Create new folder"
 msgstr "Map aanmaken"
 
 #: ../ui/bookmarks.glade.h:6
 msgid "Label Entry"
-msgstr ""
+msgstr "Label Entry"
 
 #: ../ui/bookmarks.glade.h:7
 msgid "Label:"
 msgstr "Label:"
 
-#: ../ui/bookmarks.glade.h:8 ../ui/markverse.glade.h:6
+#: ../ui/bookmarks.glade.h:8
+#: ../ui/markverse.glade.h:6
 msgid "Module Entry"
-msgstr ""
+msgstr "Module Entry"
 
-#: ../ui/bookmarks.glade.h:9 ../ui/markverse.glade.h:7
+#: ../ui/bookmarks.glade.h:9
+#: ../ui/markverse.glade.h:7
 msgid "Module:"
 msgstr "Module:"
 
@@ -2008,16 +2141,19 @@ msgstr "Module:"
 msgid "New ..."
 msgstr "Nieuw ..."
 
-#: ../ui/bookmarks.glade.h:11 ../ui/markverse.glade.h:8
+#: ../ui/bookmarks.glade.h:11
+#: ../ui/markverse.glade.h:8
 #: ../ui/xi-menus.glade.h:56
 msgid "New Folder"
 msgstr "Nieuwe map"
 
-#: ../ui/bookmarks.glade.h:12 ../ui/markverse.glade.h:10
+#: ../ui/bookmarks.glade.h:12
+#: ../ui/markverse.glade.h:10
 msgid "Verse Entry"
-msgstr ""
+msgstr "Vers Entry"
 
-#: ../ui/bookmarks.glade.h:13 ../ui/markverse.glade.h:11
+#: ../ui/bookmarks.glade.h:13
+#: ../ui/markverse.glade.h:11
 msgid "Verse:"
 msgstr "Vers:"
 
@@ -2025,32 +2161,38 @@ msgstr "Vers:"
 msgid "Delete the current note"
 msgstr "Huidige notitie verwijderen"
 
-#: ../ui/editor_note.xml.h:2 ../ui/editor_studypad.xml.h:4
+#: ../ui/editor_note.xml.h:2
+#: ../ui/editor_studypad.xml.h:4
 #: ../ui/editor.xml.h:2
 msgid "E_xit"
 msgstr "Afsluiten"
 
-#: ../ui/editor_note.xml.h:3 ../ui/editor_studypad.xml.h:5
+#: ../ui/editor_note.xml.h:3
+#: ../ui/editor_studypad.xml.h:5
 #: ../ui/editor.xml.h:3
 msgid "Exit"
 msgstr "Afsluiten"
 
-#: ../ui/editor_note.xml.h:4 ../ui/editor_studypad.xml.h:6
+#: ../ui/editor_note.xml.h:4
+#: ../ui/editor_studypad.xml.h:6
 #: ../ui/editor.xml.h:4
 msgid "Exit the program"
 msgstr "Het programma afsluiten"
 
-#: ../ui/editor_note.xml.h:5 ../ui/editor_studypad.xml.h:7
+#: ../ui/editor_note.xml.h:5
+#: ../ui/editor_studypad.xml.h:7
 #: ../ui/editor.xml.h:5
 msgid "For_mat"
 msgstr "Op_maak"
 
-#: ../ui/editor_note.xml.h:6 ../ui/editor_studypad.xml.h:8
+#: ../ui/editor_note.xml.h:6
+#: ../ui/editor_studypad.xml.h:8
 #: ../ui/editor.xml.h:6
 msgid "HTML Format switch"
 msgstr "HTML-opmaak wisselaar"
 
-#: ../ui/editor_note.xml.h:7 ../ui/editor_studypad.xml.h:9
+#: ../ui/editor_note.xml.h:7
+#: ../ui/editor_studypad.xml.h:9
 #: ../ui/editor.xml.h:7
 msgid "HTML mode"
 msgstr "HTML weergave"
@@ -2079,15 +2221,18 @@ msgstr "_Opslaan (Persoonlijk Commentaar)"
 msgid "Add this file to your bookmarks"
 msgstr "Dit bestand aan uw bladwijzers toevoegen"
 
-#: ../ui/editor_studypad.xml.h:3 ../ui/editor.xml.h:1
+#: ../ui/editor_studypad.xml.h:3
+#: ../ui/editor.xml.h:1
 msgid "Create a new document"
 msgstr "Maak een nieuw document"
 
-#: ../ui/editor_studypad.xml.h:10 ../ui/editor.xml.h:8
+#: ../ui/editor_studypad.xml.h:10
+#: ../ui/editor.xml.h:8
 msgid "New Document"
 msgstr "Nieuw document"
 
-#: ../ui/editor_studypad.xml.h:11 ../ui/editor.xml.h:9
+#: ../ui/editor_studypad.xml.h:11
+#: ../ui/editor.xml.h:9
 msgid "Open"
 msgstr "Openen"
 
@@ -2107,7 +2252,8 @@ msgstr "Huidig document afdrukken"
 msgid "Save AS"
 msgstr "Opslaan als"
 
-#: ../ui/editor_studypad.xml.h:18 ../ui/editor.xml.h:12
+#: ../ui/editor_studypad.xml.h:18
+#: ../ui/editor.xml.h:12
 msgid "Save the current file"
 msgstr "Huidig bestand opslaan"
 
@@ -2125,7 +2271,7 @@ msgstr ": "
 
 #: ../ui/export-dialog.glade.h:2
 msgid "<b>Copy</b>"
-msgstr ""
+msgstr "<b>Kopiëren</b>"
 
 #: ../ui/export-dialog.glade.h:3
 msgid "<b>Export</b>"
@@ -2135,29 +2281,31 @@ msgstr "<b>Exporteren</b>"
 msgid "<b>Format</b>"
 msgstr "<b>Formaat</b>"
 
-#: ../ui/export-dialog.glade.h:5 ../ui/prefs.glade.h:25
+#: ../ui/export-dialog.glade.h:5
+#: ../ui/prefs.glade.h:25
 msgid "Book"
 msgstr "Boek"
 
 #: ../ui/export-dialog.glade.h:6
 msgid "Book Radio Button"
-msgstr ""
+msgstr "Book radio button"
 
 #: ../ui/export-dialog.glade.h:8
 msgid "Chapter Radio Button"
-msgstr ""
+msgstr "Show romanizationHoofdstuk keuzerondje"
 
-#: ../ui/export-dialog.glade.h:9 ../ui/xi-menus.glade.h:18
+#: ../ui/export-dialog.glade.h:9
+#: ../ui/xi-menus.glade.h:18
 msgid "Copy/Export Passage"
-msgstr ""
+msgstr "Copy/Export Passage"
 
 #: ../ui/export-dialog.glade.h:10
 msgid "Export Passage Cancel"
-msgstr ""
+msgstr "Export Passage Annuleren"
 
 #: ../ui/export-dialog.glade.h:11
 msgid "Export Passage OK"
-msgstr ""
+msgstr "Export Passage OK"
 
 #: ../ui/export-dialog.glade.h:12
 msgid "Export complete book"
@@ -2177,7 +2325,7 @@ msgstr "HTML"
 
 #: ../ui/export-dialog.glade.h:16
 msgid "HTML Radio Button"
-msgstr ""
+msgstr "HTML Radio Button"
 
 #: ../ui/export-dialog.glade.h:17
 msgid "Key"
@@ -2189,7 +2337,7 @@ msgstr "Tekst"
 
 #: ../ui/export-dialog.glade.h:19
 msgid "Plain Text Radio Button"
-msgstr ""
+msgstr "Plain Text Radio Button"
 
 #: ../ui/export-dialog.glade.h:21
 msgid "Save Export As"
@@ -2201,11 +2349,11 @@ msgstr "Vers"
 
 #: ../ui/export-dialog.glade.h:23
 msgid "Verse Radio Button"
-msgstr ""
+msgstr "Vers Radio Button"
 
 #: ../ui/export-dialog.glade.h:24
 msgid "Verse range"
-msgstr ""
+msgstr "Vers Range"
 
 #: ../ui/export-dialog.glade.h:25
 msgid "Version"
@@ -2213,15 +2361,15 @@ msgstr "Versie"
 
 #: ../ui/markverse.glade.h:4
 msgid "Mark"
-msgstr ""
+msgstr "Merken"
 
 #: ../ui/markverse.glade.h:5
 msgid "Mark/Unmark Verse"
-msgstr ""
+msgstr "Mark/Deselect Vers"
 
 #: ../ui/markverse.glade.h:9
 msgid "Unmark"
-msgstr ""
+msgstr "Deselect"
 
 #: ../ui/module-manager.glade.h:1
 msgid "<b>Add and Remove Sources</b>"
@@ -2246,17 +2394,11 @@ msgstr "<b>Sword</b>"
 
 #: ../ui/module-manager.glade.h:7
 msgid "<b>WARNING:</b> If you live in a persecuted country use with care."
-msgstr ""
-"<b>WAARSCHUWING:</b> Wees voorzichtig als u in een land leeft waar u wordt "
-"vervolgd."
+msgstr "<b>WAARSCHUWING:</b> Wees voorzichtig als u in een land leeft waar u wordt vervolgd."
 
 #: ../ui/module-manager.glade.h:8
-msgid ""
-"<b>Warning:</b> If you live in a persecuted country and do not wish to risk "
-"detection you should NOT use  the remote installation feature! "
-msgstr ""
-"<b>WAARSCHUWING:</b> Als u wordt vervolgd en niet wilt worden opgemerkt, "
-"gebruik dan geen externe bronnen! "
+msgid "<b>Warning:</b> If you live in a persecuted country and do not wish to risk detection you should NOT use  the remote installation feature! "
+msgstr "<b>WAARSCHUWING:</b> Als u wordt vervolgd en niet wilt worden opgemerkt, gebruik dan geen externe bronnen! "
 
 #: ../ui/module-manager.glade.h:9
 msgid "<i>Personal area, for your use only:</i>"
@@ -2288,7 +2430,7 @@ msgstr "Persoonlijke map"
 
 #: ../ui/module-manager.glade.h:19
 msgid "Load Standard"
-msgstr ""
+msgstr "Load Standard"
 
 #: ../ui/module-manager.glade.h:20
 msgid "Local"
@@ -2320,7 +2462,7 @@ msgstr "<b>Openbaringen van Johannes</b>"
 
 #: ../ui/navbar_versekey.glade.h:3
 msgid "Book Selector Button"
-msgstr ""
+msgstr "Boek Selector Button"
 
 #: ../ui/navbar_versekey.glade.h:4
 msgid "Choose book to display"
@@ -2328,19 +2470,19 @@ msgstr "Kies een boek om weer te geven"
 
 #: ../ui/navbar_versekey.glade.h:5
 msgid "Drop down history list"
-msgstr ""
+msgstr "Vervolgkeuzelijst geschiedenis lijst"
 
 #: ../ui/navbar_versekey.glade.h:6
 msgid "Reference Entry"
-msgstr ""
+msgstr "Referentie Entry"
 
 #: ../ui/navbar_versekey.glade.h:7
 msgid "Toggle Chapter Button"
-msgstr ""
+msgstr "Hoofdstuk Toggle Button"
 
 #: ../ui/navbar_versekey.glade.h:8
 msgid "Toggle Verse Button"
-msgstr ""
+msgstr "Vers Toggle Button"
 
 #: ../ui/prefs.glade.h:1
 msgid ""
@@ -2403,9 +2545,7 @@ msgid "Apply high-contrast highlight to current verse"
 msgstr "Hoog contrast toepassen op het huidige vers"
 
 #: ../ui/prefs.glade.h:19
-msgid ""
-"Automatically resize commentary, book, and dictionary image content to fit "
-"subwindow"
+msgid "Automatically resize commentary, book, and dictionary image content to fit subwindow"
 msgstr "Commentaar, boek en woordenboek automatisch passend maken aan venster"
 
 #: ../ui/prefs.glade.h:20
@@ -2414,7 +2554,7 @@ msgstr "Achtergrond"
 
 #: ../ui/prefs.glade.h:21
 msgid "Base font size"
-msgstr ""
+msgstr "Base lettergrootte"
 
 #: ../ui/prefs.glade.h:22
 msgid "Bible Texts"
@@ -2422,7 +2562,7 @@ msgstr "Bijbelteksten"
 
 #: ../ui/prefs.glade.h:23
 msgid "Bible Texts Checkbox"
-msgstr ""
+msgstr "Bijbelteksten selectievakje"
 
 #: ../ui/prefs.glade.h:24
 msgid "Biblical Text"
@@ -2430,27 +2570,27 @@ msgstr "Bijbelse tekst"
 
 #: ../ui/prefs.glade.h:26
 msgid "Change Biblical Text Combo"
-msgstr ""
+msgstr "Verander bijbelse tekst Combo"
 
 #: ../ui/prefs.glade.h:27
 msgid "Change Book Combo"
-msgstr ""
+msgstr "Verander Boek Combo"
 
 #: ../ui/prefs.glade.h:28
 msgid "Change Commentary Combo"
-msgstr ""
+msgstr "Verander Commentary Combo"
 
 #: ../ui/prefs.glade.h:29
 msgid "Change Default Dictionary Combo"
-msgstr ""
+msgstr "Verander Standaard Woordenboek Combo"
 
 #: ../ui/prefs.glade.h:30
 msgid "Change Dictionary Combo"
-msgstr ""
+msgstr "Verander Woordenboek Combo"
 
 #: ../ui/prefs.glade.h:31
 msgid "Change Personal Notes Combo"
-msgstr ""
+msgstr "Verander Persoonlijke notities Combo"
 
 #: ../ui/prefs.glade.h:32
 msgid "Choose to enable Prayer lists "
@@ -2458,7 +2598,7 @@ msgstr "Gebedspunten tonen "
 
 #: ../ui/prefs.glade.h:34
 msgid "Commentaries Checkbox"
-msgstr ""
+msgstr "Commentaren Checkbox"
 
 #: ../ui/prefs.glade.h:36
 msgid "Cover"
@@ -2474,7 +2614,7 @@ msgstr "Dagboek"
 
 #: ../ui/prefs.glade.h:39
 msgid "Daily Devotional Combo"
-msgstr ""
+msgstr "Daily Devotional Checkbox"
 
 #: ../ui/prefs.glade.h:40
 msgid "Default Dictionary"
@@ -2490,7 +2630,7 @@ msgstr "Woordenboek/Lexicon"
 
 #: ../ui/prefs.glade.h:43
 msgid "Dictionary/Lexicon Checkbox"
-msgstr ""
+msgstr "Woordenboek/Lexicon selectievakje"
 
 #: ../ui/prefs.glade.h:44
 msgid "Enable Prayer Lists"
@@ -2498,7 +2638,7 @@ msgstr "Gebedslijst inschakelen"
 
 #: ../ui/prefs.glade.h:45
 msgid "Enable Prayer Lists Checkbox"
-msgstr ""
+msgstr "Enable Gebed Lijsten selectievakje"
 
 #: ../ui/prefs.glade.h:46
 msgid "Font Colors"
@@ -2522,7 +2662,7 @@ msgstr "Grieks Lexicon"
 
 #: ../ui/prefs.glade.h:51
 msgid "Greek Lexicon Combo"
-msgstr ""
+msgstr "Grieks Lexicon Combo"
 
 #: ../ui/prefs.glade.h:52
 msgid "Hebrew Lexicon"
@@ -2530,7 +2670,7 @@ msgstr "Hebreeuws Lexicon"
 
 #: ../ui/prefs.glade.h:53
 msgid "Hebrew Lexicon Combo"
-msgstr ""
+msgstr "Hebreeuws Lexicon Combo"
 
 #: ../ui/prefs.glade.h:54
 msgid "Highlight Background"
@@ -2546,7 +2686,7 @@ msgstr "Huidig vers benadrukken"
 
 #: ../ui/prefs.glade.h:57
 msgid "Highlight current verse check box"
-msgstr ""
+msgstr "Markeer huidige vers selectievakje"
 
 #: ../ui/prefs.glade.h:58
 msgid "Links"
@@ -2570,7 +2710,7 @@ msgstr "Parallel 1"
 
 #: ../ui/prefs.glade.h:63
 msgid "Parallel 1 Combo"
-msgstr ""
+msgstr "Parallel 1 Combo"
 
 #: ../ui/prefs.glade.h:64
 msgid "Parallel 2"
@@ -2578,7 +2718,7 @@ msgstr "Parallel 2"
 
 #: ../ui/prefs.glade.h:65
 msgid "Parallel 2 Combo"
-msgstr ""
+msgstr "Parallel 2 Combo"
 
 #: ../ui/prefs.glade.h:66
 msgid "Parallel 3"
@@ -2586,7 +2726,7 @@ msgstr "Parallel 3"
 
 #: ../ui/prefs.glade.h:67
 msgid "Parallel 3 Combo"
-msgstr ""
+msgstr "Parallel 3 Combo"
 
 #: ../ui/prefs.glade.h:68
 msgid "Parallel 4"
@@ -2602,11 +2742,11 @@ msgstr "Parallel 5"
 
 #: ../ui/prefs.glade.h:71
 msgid "Parallel 5 Combo"
-msgstr ""
+msgstr "Parallel 5 Combo"
 
 #: ../ui/prefs.glade.h:72
 msgid "Parallel View in a tab"
-msgstr ""
+msgstr "Parallel Bekijk in een tabblad"
 
 #: ../ui/prefs.glade.h:73
 msgid "Personal Notes"
@@ -2614,7 +2754,7 @@ msgstr "Persoonlijke aantekeningen"
 
 #: ../ui/prefs.glade.h:76
 msgid "Previewer Checkbox"
-msgstr ""
+msgstr "Previewer selectievakje"
 
 #: ../ui/prefs.glade.h:77
 msgid "Resize images"
@@ -2622,7 +2762,7 @@ msgstr "Illustratiegrootte wijzigen"
 
 #: ../ui/prefs.glade.h:78
 msgid "Resize images checkbox"
-msgstr ""
+msgstr "Resize images selectievakje"
 
 #: ../ui/prefs.glade.h:79
 msgid "Scroll to Previous/Next Chapter"
@@ -2630,7 +2770,7 @@ msgstr "Ga naar het vorige/volgende hoofdstuk"
 
 #: ../ui/prefs.glade.h:80
 msgid "Scroll to Previous/Next Chapter Checkbox"
-msgstr ""
+msgstr "Ga naar vorige/volgende hoofdstuk selectievakje"
 
 #: ../ui/prefs.glade.h:81
 msgid "Select A Directory"
@@ -2646,15 +2786,15 @@ msgstr "Opstartscherm tonen bij opstarten"
 
 #: ../ui/prefs.glade.h:84
 msgid "Special Locale (requires restart)"
-msgstr ""
+msgstr "Speciale Locale (opnieuw opstarten vereist)"
 
 #: ../ui/prefs.glade.h:85
 msgid "Special Locale Combo"
-msgstr ""
+msgstr "Speciale Locale Combo"
 
 #: ../ui/prefs.glade.h:86
 msgid "StudyPad default directory combo"
-msgstr ""
+msgstr "StudiePad standaard directory combo"
 
 #: ../ui/prefs.glade.h:88
 msgid "Use Bible Text scroll bar to scroll to previous or next chapter"
@@ -2666,7 +2806,7 @@ msgstr "Eénregelige verzen"
 
 #: ../ui/prefs.glade.h:90
 msgid "Use Verse Per Line Checkbox"
-msgstr ""
+msgstr "Gebruik Vers Per Line selectievakje"
 
 #: ../ui/prefs.glade.h:91
 msgid "Use default Dictionary"
@@ -2674,7 +2814,7 @@ msgstr "Gebruik standaard woordenboek"
 
 #: ../ui/prefs.glade.h:92
 msgid "Use default Dictionary Checkbox"
-msgstr ""
+msgstr "Gebruik standaard woordenboek selectievakje"
 
 #: ../ui/prefs.glade.h:93
 msgid "Use tabbed browsing"
@@ -2682,11 +2822,11 @@ msgstr "Gebruik tabbladen"
 
 #: ../ui/prefs.glade.h:94
 msgid "Use tabbed browsing Checkbox"
-msgstr ""
+msgstr "Gebruik browsen met tabbladen selectievakje"
 
 #: ../ui/prefs.glade.h:95
 msgid "Verse Number"
-msgstr ""
+msgstr "Vers nummer"
 
 #: ../ui/prefs.glade.h:96
 msgid "Verse number size"
@@ -2766,15 +2906,15 @@ msgstr "Attributen"
 
 #: ../ui/search-dialog.glade.h:19
 msgid "Attributes radiobutton"
-msgstr ""
+msgstr "Attributen keuzerondje"
 
 #: ../ui/search-dialog.glade.h:20
 msgid "Clear Custom Module List Button"
-msgstr ""
+msgstr "Wissen Aangepaste Module knop Lijst"
 
 #: ../ui/search-dialog.glade.h:21
 msgid "Clear Modules from List Button"
-msgstr ""
+msgstr "Duidelijke Modules uit lijst Button"
 
 #: ../ui/search-dialog.glade.h:22
 msgid "Clear all modules from the list"
@@ -2798,15 +2938,15 @@ msgstr "Huidige resultaten"
 
 #: ../ui/search-dialog.glade.h:27
 msgid "Current results radiobutton"
-msgstr ""
+msgstr "Huidige resultaten Button"
 
 #: ../ui/search-dialog.glade.h:28
 msgid "Custom Module List Combo"
-msgstr ""
+msgstr "Aangepast Module Lijst Combo"
 
 #: ../ui/search-dialog.glade.h:29
 msgid "Custom Module List Name Entry"
-msgstr ""
+msgstr "Aangepast Module Naam Entry List"
 
 #: ../ui/search-dialog.glade.h:30
 msgid "Custom Module Lists"
@@ -2814,11 +2954,11 @@ msgstr "Aangepaste modulelijsten"
 
 #: ../ui/search-dialog.glade.h:31
 msgid "Custom Range Preview"
-msgstr ""
+msgstr "Aangepast Range Preview"
 
 #: ../ui/search-dialog.glade.h:32
 msgid "Custom Range Selector Combo"
-msgstr ""
+msgstr "Aangepast Range Selector Combo"
 
 #: ../ui/search-dialog.glade.h:33
 msgid "Custom Verse Ranges"
@@ -2830,7 +2970,7 @@ msgstr "Aangepaste modulelijst"
 
 #: ../ui/search-dialog.glade.h:35
 msgid "Custom module list radiobutton"
-msgstr ""
+msgstr "Aangepaste module lijst keuzerondje"
 
 #: ../ui/search-dialog.glade.h:36
 msgid "Custom verse range"
@@ -2838,15 +2978,15 @@ msgstr "Aangepaste versreeks"
 
 #: ../ui/search-dialog.glade.h:37
 msgid "Custom verse range radiobutton"
-msgstr ""
+msgstr "Aangepaste vers assortiment keuzerondje"
 
 #: ../ui/search-dialog.glade.h:38
 msgid "Delete Range Button"
-msgstr ""
+msgstr "Verwijderen bereik keuzerondje"
 
 #: ../ui/search-dialog.glade.h:39
 msgid "Delete Selected Module From List Button"
-msgstr ""
+msgstr "Geselecteerde module uit knop Lijst"
 
 #: ../ui/search-dialog.glade.h:40
 msgid "Delete selected range"
@@ -2862,11 +3002,11 @@ msgstr "Gehele module"
 
 #: ../ui/search-dialog.glade.h:43
 msgid "Entire module radiobutton"
-msgstr ""
+msgstr "Hele module keuzerondje"
 
 #: ../ui/search-dialog.glade.h:45
 msgid "Exact phrase radiobutton"
-msgstr ""
+msgstr "Exacte zin keuzerondje"
 
 #: ../ui/search-dialog.glade.h:46
 msgid "Export"
@@ -2874,7 +3014,7 @@ msgstr "Exporteer"
 
 #: ../ui/search-dialog.glade.h:47
 msgid "Export current search results"
-msgstr ""
+msgstr "Export huidige zoekresultaten"
 
 #: ../ui/search-dialog.glade.h:48
 msgid ""
@@ -2888,11 +3028,11 @@ msgstr ""
 
 #: ../ui/search-dialog.glade.h:51
 msgid "Find Button"
-msgstr ""
+msgstr "Zoek Knop"
 
 #: ../ui/search-dialog.glade.h:53
 msgid "Footnotes radiobutton"
-msgstr ""
+msgstr "Voetnoten keuzerondje"
 
 #: ../ui/search-dialog.glade.h:54
 msgid "In modules that have Footnotes"
@@ -2908,7 +3048,7 @@ msgstr "in modules met Strongs-getallen"
 
 #: ../ui/search-dialog.glade.h:57
 msgid "Main Search Entry"
-msgstr ""
+msgstr "Main Zoeken Entry"
 
 #: ../ui/search-dialog.glade.h:58
 msgid "Make selections on the Attribute Search tab"
@@ -2916,7 +3056,7 @@ msgstr "Maak een selectie in het tabblad zoekattributen"
 
 #: ../ui/search-dialog.glade.h:60
 msgid "Match case checkbox"
-msgstr ""
+msgstr "Hoofdlettergevoelig selectievakje"
 
 #: ../ui/search-dialog.glade.h:61
 msgid "Module Selection"
@@ -2928,27 +3068,27 @@ msgstr "Modulelijst"
 
 #: ../ui/search-dialog.glade.h:63
 msgid "Module list radiobutton"
-msgstr ""
+msgstr "Module lijst keuzerondje"
 
 #: ../ui/search-dialog.glade.h:65
 msgid "Morphological Tags radiobutton"
-msgstr ""
+msgstr "Morfologische Tags keuzerondje"
 
 #: ../ui/search-dialog.glade.h:67
 msgid "Multi word radiobutton"
-msgstr ""
+msgstr "Multi woord keuzerondje"
 
 #: ../ui/search-dialog.glade.h:68
 msgid "New Custom Module List Button"
-msgstr ""
+msgstr "New Custom Module Lijst keuzerondje"
 
 #: ../ui/search-dialog.glade.h:69
 msgid "New Range Button"
-msgstr ""
+msgstr "Nieuw Range Button"
 
 #: ../ui/search-dialog.glade.h:70
 msgid "Open Selection Dialog Button"
-msgstr ""
+msgstr "Open Selectie Dialog Button"
 
 #: ../ui/search-dialog.glade.h:71
 msgid "Open a dialog to select modules to add to the list"
@@ -2960,19 +3100,19 @@ msgstr "Snelzoeken met behulp van de zoekindex"
 
 #: ../ui/search-dialog.glade.h:73
 msgid "Optimized (\"Lucene\") radiobutton"
-msgstr ""
+msgstr "Geoptimaliseerd (\"Lucene\") radiobutton"
 
 #: ../ui/search-dialog.glade.h:74
 msgid "Range Definition Entry"
-msgstr ""
+msgstr "Range Definitie Entry"
 
 #: ../ui/search-dialog.glade.h:75
 msgid "Range Name Entry"
-msgstr ""
+msgstr "Range Naam Entry"
 
 #: ../ui/search-dialog.glade.h:77
 msgid "Regular expression radiobutton"
-msgstr ""
+msgstr "Reguliere expressie keuzerondje"
 
 #: ../ui/search-dialog.glade.h:78
 msgid "Remove the selected module from the list"
@@ -2980,11 +3120,11 @@ msgstr "Geselecteerde modules uit lijst verwijderen"
 
 #: ../ui/search-dialog.glade.h:79
 msgid "Result Summary Table"
-msgstr ""
+msgstr "Uitslag overzichtstabel"
 
 #: ../ui/search-dialog.glade.h:80
 msgid "Result Summary Window"
-msgstr ""
+msgstr "Uitslag samenvatting venster"
 
 #: ../ui/search-dialog.glade.h:81
 msgid "Results"
@@ -2992,11 +3132,11 @@ msgstr "Resultaten"
 
 #: ../ui/search-dialog.glade.h:82
 msgid "Save Custom Module List Button"
-msgstr ""
+msgstr "Sla aangepaste Module knop Lijst"
 
 #: ../ui/search-dialog.glade.h:83
 msgid "Save Range Button"
-msgstr ""
+msgstr "Opslaan Range Button"
 
 #: ../ui/search-dialog.glade.h:84
 msgid "Save custom range"
@@ -3016,7 +3156,7 @@ msgstr "Zoekcriteria"
 
 #: ../ui/search-dialog.glade.h:88
 msgid "Search Criteria Treeview"
-msgstr ""
+msgstr "Zoekcriteria Treeview"
 
 #: ../ui/search-dialog.glade.h:89
 msgid "Search entire module"
@@ -3040,7 +3180,7 @@ msgstr "Voetnoten tonen"
 
 #: ../ui/search-dialog.glade.h:94
 msgid "Show Footnotes checkbox"
-msgstr ""
+msgstr "Toon Voetnoten selectievakje"
 
 #: ../ui/search-dialog.glade.h:95
 msgid "Show Morphological Tags"
@@ -3048,7 +3188,7 @@ msgstr "Morfologische markeringen tonen"
 
 #: ../ui/search-dialog.glade.h:96
 msgid "Show Morphological Tags checkbox"
-msgstr ""
+msgstr "Toon Morfologische Tags selectievakje"
 
 #: ../ui/search-dialog.glade.h:97
 msgid "Show Strong's Numbers"
@@ -3056,7 +3196,7 @@ msgstr "Toon Strongsgetallen"
 
 #: ../ui/search-dialog.glade.h:98
 msgid "Show Strong's Numbers checkbox"
-msgstr ""
+msgstr "Toon Strong's Numbers selectievakje"
 
 #: ../ui/search-dialog.glade.h:99
 msgid "Show in main window"
@@ -3068,7 +3208,7 @@ msgstr "Enkele module"
 
 #: ../ui/search-dialog.glade.h:101
 msgid "Single module radiobutton"
-msgstr ""
+msgstr "Enkele module keuzerondje"
 
 #: ../ui/search-dialog.glade.h:102
 msgid "Start/stop searching"
@@ -3080,7 +3220,7 @@ msgstr "Strongs-getallen"
 
 #: ../ui/search-dialog.glade.h:104
 msgid "Strongs Numbers radiobutton"
-msgstr ""
+msgstr "Strong nummers keuzerondje"
 
 #: ../ui/search-dialog.glade.h:105
 msgid "Use a custom module list for the search"
@@ -3120,15 +3260,15 @@ msgstr "Over _Xiphos"
 
 #: ../ui/xi-menus.glade.h:4
 msgid "Add Item"
-msgstr ""
+msgstr "Add Item"
 
 #: ../ui/xi-menus.glade.h:5
 msgid "Add Sub-Item"
-msgstr ""
+msgstr "Voeg Sub-item"
 
 #: ../ui/xi-menus.glade.h:6
 msgid "Add a sub-item"
-msgstr ""
+msgstr "Voeg een sub-item"
 
 #: ../ui/xi-menus.glade.h:7
 msgid "Add an item"
@@ -3148,11 +3288,11 @@ msgstr "Items tussen mappen verplaatsen toestaan"
 
 #: ../ui/xi-menus.glade.h:12
 msgid "Annotate Verse"
-msgstr ""
+msgstr "Commenteren Vers"
 
 #: ../ui/xi-menus.glade.h:14
 msgid "Browse in BibleMap.org"
-msgstr ""
+msgstr "Bladeren in BibleMap.org"
 
 #: ../ui/xi-menus.glade.h:15
 msgid "Collapse All"
@@ -3168,15 +3308,15 @@ msgstr "Commentaar per hoofdstuk"
 
 #: ../ui/xi-menus.glade.h:19
 msgid "Create a new daily journal"
-msgstr ""
+msgstr "Maak een nieuwe dagelijkse journaal"
 
 #: ../ui/xi-menus.glade.h:20
 msgid "Create a new monthly journal"
-msgstr ""
+msgstr "Maak een nieuw maandblad"
 
 #: ../ui/xi-menus.glade.h:21
 msgid "Create a new outlined topic"
-msgstr ""
+msgstr "Maak een nieuw onderwerp geschetste"
 
 #: ../ui/xi-menus.glade.h:22
 msgid "Create a new simple prayer list"
@@ -3184,7 +3324,7 @@ msgstr "Een eenvoudige gebedslijst maken"
 
 #: ../ui/xi-menus.glade.h:23
 msgid "Create a new subject prayer list"
-msgstr ""
+msgstr "Maak een nieuw onderwerp gebed lijst"
 
 #: ../ui/xi-menus.glade.h:24
 msgid "D_ouble-Space Text"
@@ -3192,7 +3332,7 @@ msgstr "Dubbele spatiëring"
 
 #: ../ui/xi-menus.glade.h:25
 msgid "Daily"
-msgstr ""
+msgstr "Dagelijks"
 
 #: ../ui/xi-menus.glade.h:26
 msgid "Delete Item"
@@ -3204,7 +3344,7 @@ msgstr "Item verwijderen"
 
 #: ../ui/xi-menus.glade.h:28
 msgid "Dictionar_y"
-msgstr ""
+msgstr "Woordenboek"
 
 #: ../ui/xi-menus.glade.h:29
 msgid "Display Book Heading"
@@ -3236,11 +3376,11 @@ msgstr "Alle bladwijzergroepen uitklappen"
 
 #: ../ui/xi-menus.glade.h:37
 msgid "Export Folder"
-msgstr ""
+msgstr "Export Folder"
 
 #: ../ui/xi-menus.glade.h:38
 msgid "Export List"
-msgstr ""
+msgstr "Ausfuhrliste"
 
 #: ../ui/xi-menus.glade.h:45
 msgid "Image Content"
@@ -3284,7 +3424,7 @@ msgstr "Module openen"
 
 #: ../ui/xi-menus.glade.h:59
 msgid "Open Study_pad"
-msgstr ""
+msgstr "Open StudyPad"
 
 #: ../ui/xi-menus.glade.h:60
 msgid "Open in a dialog"
@@ -3300,13 +3440,15 @@ msgstr "In editor openen"
 
 #: ../ui/xi-menus.glade.h:63
 msgid "Open in new tab"
-msgstr ""
+msgstr "Openen in nieuw tabblad"
 
 #: ../ui/xi-menus.glade.h:64
 msgid ""
 "Open selected module in a\n"
 "\tseparate ['dialog'] window"
 msgstr ""
+"Open geselecteerde module in een\n"
+"\t aparte [ 'dialoog'] venster"
 
 #: ../ui/xi-menus.glade.h:66
 msgid "Open selected module in a new tab"
@@ -3322,7 +3464,7 @@ msgstr "Open deze bladwijzer in een nieuw tabblad"
 
 #: ../ui/xi-menus.glade.h:69
 msgid "Outlined"
-msgstr ""
+msgstr "Outlined"
 
 #: ../ui/xi-menus.glade.h:71
 msgid "Read Selection Aloud"
@@ -3354,19 +3496,19 @@ msgstr "Herstel opgeslagen map"
 
 #: ../ui/xi-menus.glade.h:79
 msgid "Save list as a series of bookmarks"
-msgstr ""
+msgstr "Lijst opslaan als een reeks van bladwijzers"
 
 #: ../ui/xi-menus.glade.h:80
 msgid "Save list as a single bookmark"
-msgstr ""
+msgstr "Lijst opslaan als een bladwijzer"
 
 #: ../ui/xi-menus.glade.h:81
 msgid "Save these results as a series of bookmarks in their own folder"
-msgstr ""
+msgstr "Sla deze resultaten als een reeks van bladwizjers in hun eigen map"
 
 #: ../ui/xi-menus.glade.h:82
 msgid "Save these results as a single bookmark"
-msgstr ""
+msgstr "Sla deze resultaten als een bladwijzer"
 
 #: ../ui/xi-menus.glade.h:83
 msgid "Scripture Cross-references"
@@ -3374,11 +3516,11 @@ msgstr "Kruisverwijzingen"
 
 #: ../ui/xi-menus.glade.h:85
 msgid "Show Parallel View in a _Tab"
-msgstr ""
+msgstr "Toon Parallel Bekijk in een Tab"
 
 #: ../ui/xi-menus.glade.h:86
 msgid "Show Previe_wer in the Sidebar"
-msgstr ""
+msgstr "Toon Previewer in de zijbalk"
 
 #: ../ui/xi-menus.glade.h:87
 msgid "Show Verse _Numbers"
@@ -3402,8 +3544,7 @@ msgstr "Gebruik huidig woordenboek"
 
 #: ../ui/xi-menus.glade.h:94
 msgid "Use module manager to install and remove Sword modules"
-msgstr ""
-"Gebruik het Modulebeheer om SWORD-modules te installeren of te verwijderen"
+msgstr "Gebruik het Modulebeheer om SWORD-modules te installeren of te verwijderen"
 
 #: ../ui/xi-menus.glade.h:95
 msgid "Variants"
@@ -3411,7 +3552,7 @@ msgstr "Varianten"
 
 #: ../ui/xi-menus.glade.h:97
 msgid "_About The SWORD Project"
-msgstr ""
+msgstr "Over The SWORD Project"
 
 #: ../ui/xi-menus.glade.h:98
 msgid "_Advanced Search"
@@ -3423,11 +3564,11 @@ msgstr "Zijbalk koppelen/ontkoppelen"
 
 #: ../ui/xi-menus.glade.h:100
 msgid "_Bible"
-msgstr ""
+msgstr "Bijbel"
 
 #: ../ui/xi-menus.glade.h:101
 msgid "_Commentary/Book"
-msgstr ""
+msgstr "Commentaar/boeken"
 
 #: ../ui/xi-menus.glade.h:102
 msgid "_Contents"
@@ -3495,7 +3636,7 @@ msgstr "_Zoeken"
 
 #: ../ui/xi-menus.glade.h:119
 msgid "_Show/Hide Attached Sidebar"
-msgstr ""
+msgstr "Show/Hide Bijgevoegde Sidebar"
 
 #: ../ui/xi-menus.glade.h:120
 msgid "_Verse Per Line"
@@ -3511,112 +3652,80 @@ msgstr "Xiphos Bijbelgids"
 
 #~ msgid "Move backwards through history"
 #~ msgstr "Schuif terugwaarts in de geschiedenis"
-
 #~ msgid "Move foward through history"
 #~ msgstr "Schuif voorwaarts in de geschiedenis"
-
 #~ msgid "Select a Book of the Bible"
 #~ msgstr "Selecteer een bijbelboek"
-
 #~ msgid "Change Chapter"
 #~ msgstr "Hoofdstuk wijzigen"
-
 #~ msgid "Change Verse"
 #~ msgstr "Vers wijzigen"
-
 #~ msgid "Enter a Verse reference in Book 1:1 format and press Return"
 #~ msgstr "Geef een versreferentie in Boek 1:1 formaat en druk op Enter"
-
 #~ msgid "Install these modules:"
 #~ msgstr "Deze modules installeren:"
-
 #~ msgid "Remove these modules:"
 #~ msgstr "Deze modules verwijderen:"
-
 #~ msgid "Archive these modules:"
 #~ msgstr "Back-up maken van:"
-
 #~ msgid ""
 #~ "Build fast-search index for these\n"
 #~ "modules (may take minutes/module):"
 #~ msgstr ""
 #~ "Snelzoek-index voor deze modules maken\n"
 #~ "(duurt enkele minuten):"
-
 #~ msgid "Delete fast-search index for these modules:"
 #~ msgstr "Snelzoek-index van deze modules verwijderen:"
-
 #~ msgid "Xiphos could not execute archiver"
 #~ msgstr "Xiphos kon het backupbeheer niet starten"
-
 #~ msgid ""
 #~ " archival result:\n"
 #~ "\n"
 #~ msgstr ""
 #~ " archiveer resultaat:\n"
 #~ "\n"
-
 #~ msgid ""
 #~ "\n"
 #~ "Archive in "
 #~ msgstr ""
 #~ "\n"
 #~ "Back-up in "
-
 #~ msgid "Refreshing remote"
 #~ msgstr "Bezig met zoeken naar updates"
-
 #~ msgid "Remote not found"
 #~ msgstr "Externe bron niet gevonden"
-
 #~ msgid "Sources"
 #~ msgstr "Bronnen"
-
 #~ msgid "Open in a new tab"
 #~ msgstr "In een nieuw tabblad openen"
-
 #~ msgid "Open selected module in a separate ['dialog'] window"
 #~ msgstr "Geselecteerde module in een dialoogvenster openen"
-
 #~ msgid "View information about the selected dialog"
 #~ msgstr "Informatie over het geselecteerde dialoogvenster tonen"
-
 #~ msgid "Create a new prayer list"
 #~ msgstr "Een nieuwe gebedslijst maken"
-
 #~ msgid "Daily Journal"
 #~ msgstr "Dagelijkse berichten"
-
 #~ msgid "Outlined Topic"
 #~ msgstr "Uitgelijnd onderwerp"
-
 #~ msgid "Open selected module in a dialog"
 #~ msgstr "Geselecteerde module in een dialoogvenster openen"
-
 #~ msgid "Text"
 #~ msgstr "Tekst"
-
 #~ msgid "Text to render"
 #~ msgstr "Te genereren tekst"
-
 #~ msgid "Add Child"
 #~ msgstr "Kind toevoegen"
-
 #~ msgid "Add Sibling"
 #~ msgstr "Element toevoegen"
-
 #~ msgid "Eph 2:8"
 #~ msgstr "Ef 2:8"
-
 #~ msgid "H_istory/<Separator>"
 #~ msgstr "_Geschiedenis<Separator>"
-
 #~ msgid "H_istory/C_lear"
 #~ msgstr "_Geschiedenis/_Wissen"
-
 #~ msgid "Xiphos has renamed .xiphos-2.0 to .xiphos"
 #~ msgstr "Xiphos heeft .xiphos-2.0 hernoemd naar .xiphos"
-
 #~ msgid ""
 #~ "Xiphos can not rename  .xiphos-2.0 to .xiphos:\n"
 #~ "%s\n"
@@ -3627,279 +3736,190 @@ msgstr "Xiphos Bijbelgids"
 #~ "%s\n"
 #~ "\n"
 #~ "Xiphos zal worden afgesloten."
-
 #~ msgid "Base text size"
 #~ msgstr "Standaard lettertypegrootte"
-
 #~ msgid "Dictionary/_Lexicon"
 #~ msgstr "Woordenboek/_Lexicon"
-
 #~ msgid "Remove - Restore"
 #~ msgstr "Verwijderen - Herstellen"
-
 #~ msgid "Remove Folder"
 #~ msgstr "Map verwijderen"
-
 #~ msgid "_Commentary"
 #~ msgstr "_Commentaar"
-
 #~ msgid "_Show/Hide Sidebar"
 #~ msgstr "Zijbalk tonen/verbergen"
-
 #~ msgid "Open StudyPad File"
 #~ msgstr "Open notitieblokbestand"
-
 #~ msgid "Save StudyPad File"
 #~ msgstr "Notitieblokbestand opslaan"
-
 #~ msgid "item1"
 #~ msgstr "item1"
-
 #~ msgid "item2"
 #~ msgstr "item2"
-
 #~ msgid "_Module Options"
 #~ msgstr "_Moduleopties"
-
 #~ msgid "Sync with main"
 #~ msgstr "Synchroniseer met main"
-
 #~ msgid "Stay in sync"
 #~ msgstr "Synchroon houden"
-
 #~ msgid "Print"
 #~ msgstr "Afdrukken"
-
 #~ msgid "Print Preview"
 #~ msgstr "Afdrukvoorbeeld"
-
 #~ msgid "Failed to print the document"
 #~ msgstr "Afdrukken is mislukt"
-
 #~ msgid "Save List"
 #~ msgstr "Lijst opslaan"
-
 #~ msgid "_Modules"
 #~ msgstr "_Modules"
-
 #~ msgid "_Bookmarks"
 #~ msgstr "_Bladwijzers"
-
 #~ msgid "Verse _List"
 #~ msgstr "Vers_lijst"
-
 #~ msgid "%s not found"
 #~ msgstr "%s is niet gevonden"
-
 #~ msgid "has been modified. Do you wish to save it?"
 #~ msgstr "is gewijzigd. Wijzigingen opslaan?"
-
 #~ msgid "not loaded"
 #~ msgstr "niet geladen"
-
 #~ msgid "Open the StudyPad editor"
 #~ msgstr "Notitieblok-editor openen"
-
 #~ msgid "Open a saved session"
 #~ msgstr "Open een opgeslagen sessie"
-
 #~ msgid "Save the current session to a file"
 #~ msgstr "Huidige sessie als bestand opslaan"
-
 #~ msgid "_Copy"
 #~ msgstr "Kopiëren"
-
 #~ msgid "Copy highlighted text from main window"
 #~ msgstr "Geselecteerde tekst van hoofdscherm kopiëren"
-
 #~ msgid "Search using the shortcut bar"
 #~ msgstr "Zoek met behulp van de snelkoppelingen balk"
-
 #~ msgid "Advanced search using the search dialog"
 #~ msgstr "Geavanceerd zoeken met het zoekvenster"
-
 #~ msgid "Set user preferences"
 #~ msgstr "Gebruikersinstellingen"
-
 #~ msgid "C_lear"
 #~ msgstr "_Wissen"
-
 #~ msgid "Clear history list"
 #~ msgstr "Geschiedenis wissen"
-
 #~ msgid "Show the Daily Devotion for today"
 #~ msgstr "Dagboek van vandaag tonen"
-
 #~ msgid "Show or hide Bible texts window"
 #~ msgstr "Bijbeltekstenscherm tonen of verbergen"
-
 #~ msgid "Show or hide Preview window"
 #~ msgstr "Toon of verberg Voorbeeldscherm"
-
 #~ msgid "Show or hide commentaries"
 #~ msgstr "Toon of verberg commentaren"
-
 #~ msgid "Show or hide - dictionaries and lexicons"
 #~ msgstr "Toon of verberg - woordenboeken en lexicons"
-
 #~ msgid "Open the Xiphos manual"
 #~ msgstr "Xiphos's gebruikershandleiding openen"
-
 #~ msgid "Sign up for the users' mailing list"
 #~ msgstr "Meld je aan voor de gebruikers e-maillijst"
-
 #~ msgid "Chat with other users and developers"
 #~ msgstr "Chat met andere gebruikers en ontwikkelaars"
-
 #~ msgid "Report bug to SourceForge"
 #~ msgstr "Meld een fout bij SourceForge"
-
 #~ msgid "Translating Xiphos to other languages"
 #~ msgstr "Xiphos vertalen"
-
 #~ msgid "More information about the SWORD Project"
 #~ msgstr "Meer informatie over het SWORD-project"
-
 #~ msgid "About this application"
 #~ msgstr "Over deze toepassing"
-
 #~ msgid "Hi_story"
 #~ msgstr "_Geschiedenis"
-
 #~ msgid "1 Cor 15:1"
 #~ msgstr "1 Kor 15:1"
-
 #~ msgid "Name for new prayer list"
 #~ msgstr "Gebedslijst naam"
-
 #~ msgid "can not create path\n"
 #~ msgstr "Aanmaken pad mislukt\n"
-
 #~ msgid "Prayer list already exist\n"
 #~ msgstr "Gebedslijst bestaat altijd\n"
-
 #~ msgid "\\par\\par My prayer list \\par\\par Module created in Xiphos"
 #~ msgstr "\\par\\par Mijn gebedslijst \\par\\par Module aangemaakt met Xiphos"
-
 #~ msgid "+5"
 #~ msgstr "+5"
-
 #~ msgid "+4"
 #~ msgstr "+4"
-
 #~ msgid "+3"
 #~ msgstr "+3"
-
 #~ msgid "+2"
 #~ msgstr "+2"
-
 #~ msgid "+1"
 #~ msgstr "+1"
-
 #~ msgid "-1"
 #~ msgstr "-1"
-
 #~ msgid "-2"
 #~ msgstr "-2"
-
 #~ msgid "-3"
 #~ msgstr "-3"
-
 #~ msgid "Starting"
 #~ msgstr "Bezig met starten"
-
 #~ msgid "Building Xiphos interface"
 #~ msgstr "Bezig met opbouwen Xiphos interface"
-
 #~ msgid "Initiating Xiphos"
 #~ msgstr "Initialiseren Xiphos"
-
 #~ msgid "done"
 #~ msgstr "klaar"
-
 #~ msgid "Xiphos is shutdown"
 #~ msgstr "Xiphos wordt afgesloten"
-
 #~ msgid "Initiating SWORD"
 #~ msgstr "Bezig met initialiseren van Xiphos"
-
 #~ msgid "path to sword"
 #~ msgstr "pad naar sword"
-
 #~ msgid "System locale is"
 #~ msgstr "Systeem lokalisatie is"
-
 #~ msgid "SWORD locale is"
 #~ msgstr "SWORD lokalisatie is"
-
 #~ msgid "Checking for SWORD Modules"
 #~ msgstr "Bezig met zoeken naar SWORD-modules"
-
 #~ msgid "SWORD is shutdown"
 #~ msgstr "SWORD wordt afgesloten"
-
 #~ msgid "Number of Text modules"
 #~ msgstr "Aantal bijbelvertalingmodules"
-
 #~ msgid "Number of Commentary modules"
 #~ msgstr "Aantal commentaarmodules"
-
 #~ msgid "Number of Dict/lex modules"
 #~ msgstr "Aantal woordenboek/lexiconmodules"
-
 #~ msgid "Number of Book modules"
 #~ msgstr "Aantal boekmodules"
-
 #~ msgid "Number of Devotion modules"
 #~ msgstr "Aantal dagboekmodules"
-
 #~ msgid "Number of Prayer modules"
 #~ msgstr "Aantal gebedsmodules"
-
 #~ msgid ""
 #~ "\n"
 #~ "First Run: need to create settings!\n"
 #~ msgstr ""
 #~ "\n"
 #~ "Eerste start: configuratie vereist!\n"
-
 #~ msgid "can not create  .sword"
 #~ msgstr "Kan .sword niet aanmaken"
-
 #~ msgid "can not create  .sword/mods.d"
 #~ msgstr "Kan .sword/mods.d niet aanmaken"
-
 #~ msgid "can not create  .sword/modules"
 #~ msgstr "Kan .sword/modules niet aanmaken"
-
 #~ msgid "Select Local Source"
 #~ msgstr "Selecteer een lokale bron"
-
 #~ msgid "It will be lost permanently!"
 #~ msgstr "Het gaat definitief verloren!"
-
 #~ msgid "Open file..."
 #~ msgstr "Bestand openen..."
-
 #~ msgid "Save file as..."
 #~ msgstr "Bestand opslaan als..."
-
 #~ msgid "Open in dialog"
 #~ msgstr "In een dialoogvenster openen"
-
 #~ msgid ""
 #~ "For multi-word search, use\n"
 #~ "+FirstWord +SecondWord"
 #~ msgstr ""
 #~ "Gebruik bij meerdere zoekwoorden het plus-teken:\n"
 #~ "+EersteWoord + TweedeWoord"
-
 #~ msgid "_About the SWORD Project ..."
 #~ msgstr "Over het SWORD-project ..."
-
 #~ msgid "Select the modules you want"
 #~ msgstr "Selecteer de gewenste modules"
-
 #~ msgid ""
 #~ "There is currently no program set as your\n"
 #~ "handler for \"sword://\" and similar URLs.\n"
@@ -3910,625 +3930,418 @@ msgstr "Xiphos Bijbelgids"
 #~ "\"sword://\" and gelijkwaardige URLs.\n"
 #~ "Wilt u dat Xiphos wordt ingesteld\n"
 #~ "als standaardprogramma voor deze URLs?"
-
 #~ msgid "<b>Font Miscellaneous</b>"
 #~ msgstr "<b>Overige Lettertypeinstellingen</b>"
-
 #~ msgid "Bible text"
 #~ msgstr "Bijbeltekst"
-
 #~ msgid "Afrikaans"
 #~ msgstr "Afrikaans"
-
 #~ msgid "English, Old (ca.450-1100)"
 #~ msgstr "Oud Engels (ca.450-1100)"
-
 #~ msgid "Arabic"
 #~ msgstr "Arabisch"
-
 #~ msgid "Azerbaijani"
 #~ msgstr "Azerbeidzjaans"
-
 #~ msgid "Belarusian"
 #~ msgstr "Wit-Russisch"
-
 #~ msgid "Bulgarian"
 #~ msgstr "Bulgaars"
-
 #~ msgid "Breton"
 #~ msgstr "Bretons"
-
 #~ msgid "Bosnian"
 #~ msgstr "Bosnisch"
-
 #~ msgid "Catalan"
 #~ msgstr "Catalaans"
-
 #~ msgid "Cebuano"
 #~ msgstr "Cebuano"
-
 #~ msgid "Coptic"
 #~ msgstr "Koptisch"
-
 #~ msgid "Czech"
 #~ msgstr "Tsjechisch"
-
 #~ msgid "Church Slavic"
 #~ msgstr "Oudkerkslavisch"
-
 #~ msgid "Welsh"
 #~ msgstr "Wels"
-
 #~ msgid "Danish"
 #~ msgstr "Deens"
-
 #~ msgid "German"
 #~ msgstr "Duits"
-
 #~ msgid "Greek, Modern (1453-)"
 #~ msgstr "Modern Grieks (1453-)"
-
 #~ msgid "English"
 #~ msgstr "Engels"
-
 #~ msgid "American English"
 #~ msgstr "Amerikaans Engels"
-
 #~ msgid "English, Middle (1100-1500)"
 #~ msgstr "Midden Engels (1100-1500)"
-
 #~ msgid "Esperanto"
 #~ msgstr "Esperanto"
-
 #~ msgid "Spanish"
 #~ msgstr "Spaans"
-
 #~ msgid "Estonian"
 #~ msgstr "Estisch"
-
 #~ msgid "Basque"
 #~ msgstr "Baskisch"
-
 #~ msgid "Finnish"
 #~ msgstr "Fins"
-
 #~ msgid "French"
 #~ msgstr "Frans"
-
 #~ msgid "Frisian"
 #~ msgstr "Fries"
-
 #~ msgid "Irish"
 #~ msgstr "Iers"
-
 #~ msgid "Gaelic (Scots)"
 #~ msgstr "Schots-Gaelisch"
-
 #~ msgid "Manx"
 #~ msgstr "Manx-Gaelisch"
-
 #~ msgid "Greek, Ancient (to 1453)"
 #~ msgstr "Oud Grieks (tot 1453)"
-
 #~ msgid "Hebrew"
 #~ msgstr "Hebreeuws"
-
 #~ msgid "Hawaiian"
 #~ msgstr "Hawaiiaans"
-
 #~ msgid "Croatian"
 #~ msgstr "Kroatisch"
-
 #~ msgid "Hungarian"
 #~ msgstr "Hongaars"
-
 #~ msgid "Armenian"
 #~ msgstr "Armeens"
-
 #~ msgid "Klingon"
 #~ msgstr "Klingon"
-
 #~ msgid "Icelandic"
 #~ msgstr "IJslands"
-
 #~ msgid "Italian"
 #~ msgstr "Italiaans"
-
 #~ msgid "Japanese"
 #~ msgstr "Japans"
-
 #~ msgid "Georgian"
 #~ msgstr "Georgisch"
-
 #~ msgid "Korean"
 #~ msgstr "Koreaans"
-
 #~ msgid "Kurdish"
 #~ msgstr "Koerdisch"
-
 #~ msgid "Kirghiz"
 #~ msgstr "Kirgizisch"
-
 #~ msgid "Latin"
 #~ msgstr "Latijn"
-
 #~ msgid "Lithuanian"
 #~ msgstr "Litouws"
-
 #~ msgid "Latvian"
 #~ msgstr "Lets"
-
 #~ msgid "Maori"
 #~ msgstr "Maori"
-
 #~ msgid "Macedonian"
 #~ msgstr "Macedonisch"
-
 #~ msgid "Maltese"
 #~ msgstr "Maltees"
-
 #~ msgid "Low German; Low Saxon"
 #~ msgstr "Nederduits"
-
 #~ msgid "Dutch"
 #~ msgstr "Nederlands"
-
 #~ msgid "Norwegian"
 #~ msgstr "Noors"
-
 #~ msgid "Papiamento"
 #~ msgstr "Papiamentu"
-
 #~ msgid "Polish"
 #~ msgstr "Pools"
-
 #~ msgid "Portuguese"
 #~ msgstr "Portugees"
-
 #~ msgid "Romanian"
 #~ msgstr "Roemeens"
-
 #~ msgid "Russian"
 #~ msgstr "Russisch"
-
 #~ msgid "Scots"
 #~ msgstr "Schots"
-
 #~ msgid "Slovak"
 #~ msgstr "Slowaaks"
-
 #~ msgid "Slovenian"
 #~ msgstr "Sloveens"
-
 #~ msgid "Somali"
 #~ msgstr "Somalisch"
-
 #~ msgid "Albanian"
 #~ msgstr "Albanees"
-
 #~ msgid "Swedish"
 #~ msgstr "Zweeds"
-
 #~ msgid "Swahili"
 #~ msgstr "Swahili"
-
 #~ msgid "Syriac"
 #~ msgstr "Syrisch"
-
 #~ msgid "Tamil"
 #~ msgstr "Tamil"
-
 #~ msgid "Thai"
 #~ msgstr "Thais"
-
 #~ msgid "Tagalog"
 #~ msgstr "Tagalog"
-
 #~ msgid "Tswana"
 #~ msgstr "Tswana"
-
 #~ msgid "Turkish"
 #~ msgstr "Turks"
-
 #~ msgid "Tahitian"
 #~ msgstr "Tahitisch"
-
 #~ msgid "Ukrainian"
 #~ msgstr "Oekraiens"
-
 #~ msgid "Vietnamese"
 #~ msgstr "Vietnamees"
-
 #~ msgid "Xhosa"
 #~ msgstr "Xhosa"
-
 #~ msgid "Bavarian"
 #~ msgstr "Beiers"
-
 #~ msgid "Alemannisch"
 #~ msgstr "Alemannisch"
-
 #~ msgid "Haitian Creole French"
 #~ msgstr "Kreyol"
-
 #~ msgid "Itz"
 #~ msgstr "Itza"
-
 #~ msgid "Shuar"
 #~ msgstr "Shuar"
-
 #~ msgid "Kekchi"
 #~ msgstr "Kekchi"
-
 #~ msgid "Lombard"
 #~ msgstr "Lombardisch"
-
 #~ msgid "Tok Pisin"
 #~ msgstr "Tok Pisin"
-
 #~ msgid "Uma"
 #~ msgstr "Uma"
-
 #~ msgid "Romani, Vlax"
 #~ msgstr "Romani, Vlax"
-
 #~ msgid "Sango"
 #~ msgstr "Sango"
-
 #~ msgid "Sranan"
 #~ msgstr "Sranan"
-
 #~ msgid "Chinese"
 #~ msgstr "Chinees"
-
 #~ msgid "Zulu"
 #~ msgstr "Zoeloe"
-
 #~ msgid "found in"
 #~ msgstr "gevonden in"
-
 #~ msgid "The"
 #~ msgstr "De"
-
 #~ msgid "module is locked."
 #~ msgstr "modules is vergrendeld."
-
 #~ msgid "module has been unlocked."
 #~ msgstr "module is beschikbaar."
-
 #~ msgid "If you have the cipher key you can"
 #~ msgstr "Als u de decodeersleutel heeft kunt u"
-
 #~ msgid "click here"
 #~ msgstr "hier klikken"
-
 #~ msgid "to unlock the module"
 #~ msgstr "Ontgrendel deze module"
-
 #~ msgid "You will need to restart Xiphos after you unlock it."
 #~ msgstr "U moet Xiphos herstarten na het ontgrendelen."
-
 #~ msgid "You need to restart Xiphos to view it"
 #~ msgstr "U moet Xiphos herstarten om het te bekijken"
-
 #~ msgid "Show Tabs"
 #~ msgstr "Tabbladen tonen"
-
 #~ msgid "Go to %s"
 #~ msgstr "Ga naar %s"
-
 #~ msgid "Do you wish to set preferences now?"
 #~ msgstr "Wilt u nu instellingen wijzigen?"
-
 #~ msgid "Old"
 #~ msgstr "Oud"
-
 #~ msgid "Remove/Archive"
 #~ msgstr "Verwijderen/Archiveer"
-
 #~ msgid "URL:"
 #~ msgstr "URL:"
-
 #~ msgid "Go to parent"
 #~ msgstr "Ga naar bovenliggende"
-
 #~ msgid "Go to first child"
 #~ msgstr "Ga naar het eerste"
-
 #~ msgid "Save (PersistFile)"
 #~ msgstr "Opslaan (PersistFile)"
-
 #~ msgid "Remove failed"
 #~ msgstr "Verwijderen is mislukt"
-
 #~ msgid "-untitled-"
 #~ msgstr "-naamloos-"
-
 #~ msgid "Add reference Link"
 #~ msgstr "Referentieverwijzing toevoegen"
-
 #~ msgid "Link text: "
 #~ msgstr "Verwijzing tekst "
-
 #~ msgid "Cut"
 #~ msgstr "Knippen"
-
 #~ msgid "Paste"
 #~ msgstr "Plakken"
-
 #~ msgid "Spell Check"
 #~ msgstr "Spellingscontrole"
-
 #~ msgid "Undo"
 #~ msgstr "Ongedaan maken"
-
 #~ msgid "Replace"
 #~ msgstr "Vervangen"
-
 #~ msgid "Link..."
 #~ msgstr "Verwijzing..."
-
 #~ msgid "Link"
 #~ msgstr "Verwijzing"
-
 #~ msgid "Paragraph"
 #~ msgstr "Paragraaf"
-
 #~ msgid "Page"
 #~ msgstr "Pagina"
-
 #~ msgid "Rule"
 #~ msgstr "Regel"
-
 #~ msgid "Cell"
 #~ msgstr "Cel"
-
 #~ msgid "Paste Quotation"
 #~ msgstr "Citaat plakken"
-
 #~ msgid "Remove Link"
 #~ msgstr "Verwijzing verwijderen"
-
 #~ msgid "Style"
 #~ msgstr "Stijl"
-
 #~ msgid "Text Style..."
 #~ msgstr "Tekstopmaak"
-
 #~ msgid "Paragraph Style..."
 #~ msgstr "Paragraafopmaak"
-
 #~ msgid "Link Style..."
 #~ msgstr "Verwijzingopmaak"
-
 #~ msgid "Rule Style..."
 #~ msgstr "Regelopmaak"
-
 #~ msgid "Image Style..."
 #~ msgstr "Illustratieopmaak"
-
 #~ msgid "Cell Style..."
 #~ msgstr "Celopmaak"
-
 #~ msgid "Table Style..."
 #~ msgstr "Tabelopmaak"
-
 #~ msgid "Page Style..."
 #~ msgstr "Paginaopmaak"
-
 #~ msgid "Table insert"
 #~ msgstr "Tabel invoegen"
-
 #~ msgid "Row above"
 #~ msgstr "Rij omhoog"
-
 #~ msgid "Row below"
 #~ msgstr "Rij beneden"
-
 #~ msgid "Column before"
 #~ msgstr "Kolom voor"
-
 #~ msgid "Column after"
 #~ msgstr "Kolom na"
-
 #~ msgid "Table delete"
 #~ msgstr "Tabel verwijderen"
-
 #~ msgid "Row"
 #~ msgstr "Rij"
-
 #~ msgid "Column"
 #~ msgstr "Kolom"
-
 #~ msgid "Check Word Spelling..."
 #~ msgstr "Spellingcontrole"
-
 #~ msgid "Add Word to"
 #~ msgstr "Woord toevoegen aan"
-
 #~ msgid "Add Word to Dictionary"
 #~ msgstr "Woord toevoegen aan Woordenboek"
-
 #~ msgid "Ignore Misspelled Word"
 #~ msgstr "Spelfout negeren"
-
 #~ msgid "Input Methods"
 #~ msgstr "Invoermethoden"
-
 #~ msgid "Replace confirmation"
 #~ msgstr "Vervangen bevestigen"
-
 #~ msgid "Replace _All"
 #~ msgstr "_Alles vervangen"
-
 #~ msgid "_Next"
 #~ msgstr "_Volgende"
-
 #~ msgid "_Replace"
 #~ msgstr "_Vervangen"
-
 #~ msgid "Search _backward"
 #~ msgstr "Terugwaarts _zoeken"
-
 #~ msgid "Case _sensitive"
 #~ msgstr "Hoofdletter _gevoelig"
-
 #~ msgid "Replace:"
 #~ msgstr "Vervangen:"
-
 #~ msgid "With:"
 #~ msgstr "Met:"
-
 #~ msgid "_Backward"
 #~ msgstr "_Terugwaarts"
-
 #~ msgid "_Regular Expression"
 #~ msgstr "_Reguliere expressie"
-
 #~ msgid "No misspelled word found"
 #~ msgstr "Geen spelfouten gevonden"
-
 #~ msgid "Spell checker"
 #~ msgstr "Spellingcontrole"
-
 #~ msgid "Current _Languages"
 #~ msgstr "Huidige _talen"
-
 #~ msgid "Insert"
 #~ msgstr "Toevoegen"
-
 #~ msgid "Delete Note?"
 #~ msgstr "Notitie verwijderen?"
-
 #~ msgid "Create a new file"
 #~ msgstr "Nieuw bestand"
-
 #~ msgid "Print window contents"
 #~ msgstr "Scherm afdrukken"
-
 #~ msgid "Find in this note"
 #~ msgstr "Zoek in notitie"
-
 #~ msgid "Find and Replace"
 #~ msgstr "Zoeken en vervangen"
-
 #~ msgid "Insert image at cursor"
 #~ msgstr "Illustratie toevoegen op cursor"
-
 #~ msgid "Insert link"
 #~ msgstr "Verwijzing invoegen"
-
 #~ msgid "Insert link at cursor"
 #~ msgstr "Verwijzing invoegen op cursor"
-
 #~ msgid "Insert rule"
 #~ msgstr "Regel invoegen"
-
 #~ msgid "Insert rule at cursor"
 #~ msgstr "Regel invoegen op cursor"
-
 #~ msgid "Insert table"
 #~ msgstr "Tabel invoegen"
-
 #~ msgid "Insert table at cursor"
 #~ msgstr "Tabel invoegen op cursor"
-
 #~ msgid "Check spelling in this note"
 #~ msgstr "Spelling controleren van deze notitie"
-
 #~ msgid "Preformat"
 #~ msgstr "Maak vooraf op"
-
 #~ msgid "Bulleted List"
 #~ msgstr "Ongenummerde lijst"
-
 #~ msgid "Numbered List"
 #~ msgstr "Genummerde lijst"
-
 #~ msgid "Alphabetical List"
 #~ msgstr "Alfabetische lijst"
-
 #~ msgid "Header 1"
 #~ msgstr "Kop 1"
-
 #~ msgid "Header 2"
 #~ msgstr "Kop 2"
-
 #~ msgid "Header 3"
 #~ msgstr "Kop 3"
-
 #~ msgid "Header 4"
 #~ msgstr "Kop 4"
-
 #~ msgid "Header 5"
 #~ msgstr "Kop 5"
-
 #~ msgid "Header 6"
 #~ msgstr "Kop 6"
-
 #~ msgid "Address"
 #~ msgstr "Adres"
-
 #~ msgid "Automatic"
 #~ msgstr "Automatisch"
-
 #~ msgid "Left align"
 #~ msgstr "Links uitlijnen"
-
 #~ msgid "Center"
 #~ msgstr "Centreer"
-
 #~ msgid "Right align"
 #~ msgstr "Rechts uitlijnen"
-
 #~ msgid "Typewriter"
 #~ msgstr "Typemachine"
-
 #~ msgid "Bold"
 #~ msgstr "Vet"
-
 #~ msgid "Makes the text bold"
 #~ msgstr "Maakt de tekst vet"
-
 #~ msgid "Makes the text italic"
 #~ msgstr "Tekst cursiveren"
-
 #~ msgid "Underline"
 #~ msgstr "Onderstrepen"
-
 #~ msgid "Underlines the text"
 #~ msgstr "Tekst onderstrepen"
-
 #~ msgid "Strikeout"
 #~ msgstr "Doorhalen"
-
 #~ msgid "Strikes out the text"
 #~ msgstr "Tekst doorhalen"
-
 #~ msgid "Unindent"
 #~ msgstr "Inspringen kleiner maken"
-
 #~ msgid "Indents the paragraphs less"
 #~ msgstr "De paragraaf minder inspringen"
-
 #~ msgid "Indents the paragraphs more"
 #~ msgstr "De paragraaf verder inspringen"
-
 #~ msgid "Save Note"
 #~ msgstr "Notitie opslaan"
-
 #~ msgid "Delete Note"
 #~ msgstr "Notitie verwijderen"
-
 #~ msgid "Genesis"
 #~ msgstr "Genesis"
-
 #~ msgid "Setup"
 #~ msgstr "Installatie"
-
 #~ msgid "Xiphos Configuration - Page 1 of 5"
 #~ msgstr "Xiphos Configuratie - Pagina 1 of 5"
-
 #~ msgid ""
 #~ "Since this is the first time you have run Xiphos, this assistant will "
 #~ "guide you through the initial setup by asking a few simple questions.\n"
@@ -4540,84 +4353,60 @@ msgstr "Xiphos Bijbelgids"
 #~ "de initiële configuratie leiden met behulp van eenvoudige vragen.Als u "
 #~ "klaar bent, kunt u de configuratie altijd wijzigen met het venster "
 #~ "Voorkeuren."
-
 #~ msgid "Xiphos Configuration - Page 2 of 5"
 #~ msgstr "Xiphos Configuratie - Pagina 2 of 5"
-
 #~ msgid "These values have been detected automatically"
 #~ msgstr "Deze gegevens zijn automatisch gedetecteerd"
-
 #~ msgid "Your home directory:"
 #~ msgstr "Uw persoonlijke map"
-
 #~ msgid "Sword"
 #~ msgstr "Sword"
-
 #~ msgid "SWORD version"
 #~ msgstr "Sword-versie"
-
 #~ msgid "SWORD Directory:"
 #~ msgstr "SWORD-map"
-
 #~ msgid "Number of Bible text modules:"
 #~ msgstr "Aantal Bijbel-modules"
-
 #~ msgid "Number of Commentary modules:"
 #~ msgstr "Aantal Commentaar-modules"
-
 #~ msgid "Number of Dictionary/Lexicon modules:"
 #~ msgstr "Aantal Woordenboek/Lexicon-modules"
-
 #~ msgid "Xiphos Configuration - Page 3 of 5"
 #~ msgstr "Xiphos Configuratie - Pagina 3 of 5"
-
 #~ msgid "Settings to use when Xiphos starts"
 #~ msgstr "Opstartinstellingen van Xiphos"
-
 #~ msgid "Show Bible tabs"
 #~ msgstr "Toon Bijbeltabbladen"
-
 #~ msgid "Show Bible window"
 #~ msgstr "Toon Bijbelscherm"
-
 #~ msgid "Show upper workbook"
 #~ msgstr "Toon upper workbook"
-
 #~ msgid "Show Dictionary/Lexicon tabs"
 #~ msgstr "Toon Woordeboek/Lexicon tabbladen"
-
 #~ msgid "Show lower workbook"
 #~ msgstr "Toon lager werkboek"
-
 #~ msgid "Show book tabs"
 #~ msgstr "Toon tabbladen met boeken"
-
 #~ msgid "Xiphos Configuration - Page 4 of 5"
 #~ msgstr "Xiphos Configuratie - Pagina 4 of 5"
-
 #~ msgid "Text Module       "
 #~ msgstr "Tekstmodule       "
-
 #~ msgid "Generic book"
 #~ msgstr "Algemeen boek"
-
 #~ msgid ""
 #~ "Which Greek Lexicon to display in Dictionary/Lexicon Window when a link "
 #~ "or word is clicked"
 #~ msgstr ""
 #~ "Het Griekse lexicon dat wordt getoond in het Woordenboek/Lexicon scherm "
 #~ "als er op een verwijzing of een woord wordt geklikt"
-
 #~ msgid ""
 #~ "Which Hebrew Lexicon to display in Dictionary/Lexicon Window when a link "
 #~ "or word is clicked"
 #~ msgstr ""
 #~ "Het Hebreeuwse lexicon dat wordt getoond in het Woordenboek/Lexicon "
 #~ "scherm als er op een verwijzing of een woord wordt geklikt"
-
 #~ msgid "Xiphos Configuration - Page 5 of 5"
 #~ msgstr "Xiphos Configuratie - Pagina 5 van 5"
-
 #~ msgid ""
 #~ "Thank you for using Xiphos.\n"
 #~ "\n"
@@ -4625,15 +4414,12 @@ msgstr "Xiphos Bijbelgids"
 #~ msgstr ""
 #~ "Bedankt voor het gebruiken van Xiphos.\n"
 #~ "Klik Toepassen om dit scherm te sluiten en Xiphos te starten"
-
 #~ msgid "Greed Lexicon"
 #~ msgstr "Grieks lexicon"
-
 #~ msgid "Include Footnotes"
 #~ msgstr "Inclusief voetnoten"
-
 #~ msgid "Include Morphological Tags"
 #~ msgstr "Morphologischetags invoegen"
-
 #~ msgid "Include Strong's Numbers"
 #~ msgstr "Strongs getallen invoegen"
+
