@@ -33,7 +33,7 @@ EXTRA_DIST = \
 	intltool-merge.in \
 	intltool-update.in \
 	TRANSLATION-HOWTO \
-	m4 \
+	m4/* \
 	waf \
 	wscript \
 	waffles/__init__.py \
