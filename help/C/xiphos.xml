@@ -16,8 +16,8 @@
   <!ENTITY onlinehelp SYSTEM "onlinehelp.xml">
   <!ENTITY originallanguage SYSTEM "originallanguage.xml">
 
-  <!ENTITY appversion "3.1.1">
-  <!ENTITY manrevision "3.1.1">
+  <!ENTITY appversion "3.1.2">
+  <!ENTITY manrevision "3.1.2">
   <!ENTITY date "11 May 2009">
   <!ENTITY app "<application>Xiphos</application>">
   <!ENTITY appname "Xiphos">
@@ -148,7 +148,7 @@ Template last modified Apr 11, 2002
     </releaseinfo>
      <revhistory> 
 	<revision> 
-          <revnumber>Xiphos Manual V3.1.1</revnumber> 
+          <revnumber>Xiphos Manual V3.1.2</revnumber> 
           <date>August 2009</date> 
           <revdescription> 
              <para role="author">The Xiphos Team</para>
