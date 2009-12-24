@@ -1171,13 +1171,14 @@ HtmlOutput(char *text,
 	gecko_html_open_stream(html,"text/html");
 #else
 	GtkHTML *html = GTK_HTML(gtkText);
-	PangoContext* pc = gtk_widget_create_pango_context(gtkText);
+	PangoContext* pc = gtk_widget_get_pango_context(gtkText);
 	PangoFontDescription *desc = pango_context_get_font_description(pc);
+
 	pango_font_description_set_family(
 	    desc, ((mf && mf->old_font) ? mf->old_font : "Serif"));
 	gtk_widget_modify_font(gtkText, desc);
+
 	GtkHTMLStream *stream = gtk_html_begin(html);
-	//GtkHTMLStreamStatus status;
 	gboolean was_editable = gtk_html_get_editable(html);
 	if (was_editable)
 		gtk_html_set_editable(html, FALSE);
