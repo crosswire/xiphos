@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: Xiphos 2.3.6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-12-14 23:45+0000\n"
-"PO-Revision-Date: 2009-12-09 22:01+0000\n"
-"Last-Translator: Yotam Benshalom <benshalom@gmail.com>\n"
+"PO-Revision-Date: 2009-12-17 10:02+0000\n"
+"Last-Translator: Ddorda <d.dorda@gmail.com>\n"
 "Language-Team: Xiphos Translation Team\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-12-10 04:38+0000\n"
+"X-Launchpad-Export-Date: 2009-12-18 04:37+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: ISRAEL\n"
 "X-Poedit-Language: Hebrew\n"
@@ -134,15 +134,15 @@ msgstr ""
 #: ../ui/editor_studypad.xml.h:20 ../ui/editor.xml.h:13
 #: ../ui/xi-menus.glade.h:106
 msgid "_File"
-msgstr "קובץ"
+msgstr "_קובץ"
 
 #: ../src/editor/slib-editor.c:835
 msgid "HTML _Output"
-msgstr "פלט HTML"
+msgstr "_פלט HTML"
 
 #: ../src/editor/slib-editor.c:842
 msgid "_HTML Source"
-msgstr "מקור"
+msgstr "_מקור HTML"
 
 #: ../src/editor/slib-editor.c:849
 msgid "_Plain Source"
@@ -150,16 +150,16 @@ msgstr "מקור"
 
 #: ../src/editor/slib-editor.c:856 ../ui/xi-menus.glade.h:121
 msgid "_View"
-msgstr "תצוגה"
+msgstr "_תצוגה"
 
 #: ../src/editor/slib-editor.c:867 ../ui/editor_note.xml.h:11
 #: ../ui/editor_studypad.xml.h:16 ../ui/editor.xml.h:11
 msgid "Save"
-msgstr "שמור"
+msgstr "שמירה"
 
 #: ../src/editor/slib-editor.c:878 ../src/editor/slib-editor.c:885
 msgid "Insert Link"
-msgstr ""
+msgstr "הוספת קישור"
 
 #: ../src/gecko/gecko-html.cpp:177 ../src/gnome2/html.c:165
 msgid "Unlock "
@@ -450,7 +450,7 @@ msgstr "השתמש בגופן ברירת המחדל עבור מודול זה"
 #. *
 #. * Return value
 #. *   void
-#.
+#. 
 #: ../src/gnome2/gui.c:110
 msgid ""
 "URL references using \"sword://\" (similar to web page\n"
@@ -763,7 +763,7 @@ msgstr "%sכישלון ב"
 
 #: ../src/gnome2/mod_mgr.c:836 ../src/gnome2/mod_mgr.c:1562
 msgid "Finished"
-msgstr "סיום"
+msgstr "הסתיים"
 
 #: ../src/gnome2/mod_mgr.c:1003 ../src/gnome2/mod_mgr.c:1005
 #: ../src/gnome2/mod_mgr.c:1107 ../src/gnome2/mod_mgr.c:1142
@@ -999,7 +999,7 @@ msgstr "מחק מקור מרוחק"
 #. *
 #. * Return value
 #. *   void
-#.
+#. 
 #: ../src/gnome2/mod_mgr.c:3244
 msgid ""
 "<b>Welcome to the Module Manager.</b>\n"
@@ -1009,8 +1009,8 @@ msgid ""
 "it over.\n"
 "(You will see this information box just once.)\n"
 "\n"
-"Modules come from different <u>repositories</u>.  <b>Module Sources: Add/"
-"Remove</b> will show you what repositories are currently known.\n"
+"Modules come from different <u>repositories</u>.  <b>Module Sources: "
+"Add/Remove</b> will show you what repositories are currently known.\n"
 "\n"
 "<b>Module Sources: Choose</b> is for deciding from where modules should "
 "come, that is, from which repository Xiphos should obtain them, as well as "
@@ -1117,7 +1117,7 @@ msgstr ""
 
 #: ../src/gnome2/preferences_dialog.c:1687 ../ui/prefs.glade.h:74
 msgid "Preferences"
-msgstr "הגדרות"
+msgstr "העדפות"
 
 #: ../src/gnome2/preferences_dialog.c:1769
 msgid "Fonts"
@@ -1600,11 +1600,11 @@ msgstr "רשימת התפילות שלי"
 
 #: ../src/main/prayerlists.cc:342
 msgid ""
-"<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</"
-"b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"
+"<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</b><br>pews<br>fellowsh"
+"ip<br>Bibles for missionaries<br><br><br>"
 msgstr ""
-"<b>אנשים:</b><br>בנימין<br>שמואל<br>שושנה<br><br><b>כנסייה:</"
-"b><br>מושבים<br>אחווה<br>ספרים למסיונרים<br><br><br>"
+"<b>אנשים:</b><br>בנימין<br>שמואל<br>שושנה<br><br><b>כנסייה:</b><br>מושבים<br>"
+"אחווה<br>ספרים למסיונרים<br><br><br>"
 
 #: ../src/main/prayerlists.cc:368
 msgid "A subject-based prayer list. \\par\\par Module created by Xiphos."
@@ -2425,7 +2425,8 @@ msgstr "הדגש את הפסוק הנוכחי בעזרת ניגודיות גבו
 msgid ""
 "Automatically resize commentary, book, and dictionary image content to fit "
 "subwindow"
-msgstr "שנה את גודל התמונות בחלוניות הפירוש, הספר והמילון כדי להתאים לתת-החלון"
+msgstr ""
+"שנה את גודל התמונות בחלוניות הפירוש, הספר והמילון כדי להתאים לתת-החלון"
 
 #: ../ui/prefs.glade.h:20
 msgid "Background"
@@ -3405,7 +3406,7 @@ msgstr "הצג מספרי פסוקים"
 
 #: ../ui/xi-menus.glade.h:88
 msgid "Simple"
-msgstr "קובץ"
+msgstr "פשוט"
 
 #: ../ui/xi-menus.glade.h:90
 msgid "Subject"
@@ -3449,7 +3450,7 @@ msgstr "_פירוש ספר"
 
 #: ../ui/xi-menus.glade.h:102
 msgid "_Contents"
-msgstr "תוכן"
+msgstr "_תכנים"
 
 #: ../ui/xi-menus.glade.h:103
 msgid "_Daily Devotion"
@@ -3457,7 +3458,7 @@ msgstr "דרשה יומית"
 
 #: ../ui/xi-menus.glade.h:104
 msgid "_Edit"
-msgstr "עריכה"
+msgstr "ע_ריכה"
 
 #: ../ui/xi-menus.glade.h:105
 msgid "_Edit Item"
@@ -3465,7 +3466,7 @@ msgstr "ערוך פריט"
 
 #: ../ui/xi-menus.glade.h:107
 msgid "_Help"
-msgstr "עזרה"
+msgstr "ע_זרה"
 
 #: ../ui/xi-menus.glade.h:108
 msgid "_Highlight Current Verse"
