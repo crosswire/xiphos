@@ -29,7 +29,7 @@ LangString UNLOG_ERROR_CREATE ${LANG_RUSSIAN} "Ошибка создания ${U
 ; Text for page with release notes
 
 !insertmacro ReadmeLangStrings "" "${LANG_RUSSIAN}" \
-    "Заметки Релиза" \
+    "Информация" \
     "Пожалуйста, изучите нижеприведенную важную информацию." \
     "О $(^name):" \
     "$\n  Используйте полосу прокрутки или нажмите Page Down чтобы просмотреть весь текст."
