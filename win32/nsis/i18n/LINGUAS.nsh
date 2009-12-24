@@ -8,7 +8,7 @@
 
     !insertmacro MUI_LANGUAGE "English" ;first language is the default
     ;!insertmacro MUI_LANGUAGE "Bulgarian" ; bg
-    !insertmacro MUI_LANGUAGE "Afrikaans" ; af
+    ;!insertmacro MUI_LANGUAGE "Afrikaans" ; af
     !insertmacro MUI_LANGUAGE "Czech" ; cs
     !insertmacro MUI_LANGUAGE "Welsh" ; cy
     !insertmacro MUI_LANGUAGE "German" ; de
@@ -32,7 +32,7 @@
 !macro LINGUAS_INCLUDE
 
     !include "${LANG_DIR}\en.nsh"
-    !include "${LANG_DIR}\af.nsh"
+    ;!include "${LANG_DIR}\af.nsh"
     !include "${LANG_DIR}\cs.nsh"
     !include "${LANG_DIR}\cy.nsh"
     !include "${LANG_DIR}\de.nsh"
@@ -76,14 +76,14 @@
     ;!define LIC_FILE_UKRAINIAN "${LANG_DIR}\gpl-2.0_uk.txt"
 
     ; not (yet) available GPL translations - use English
-    !define LIC_FILE_AFRIKAANS "${LANG_DIR}\gpl-2.0_en.txt"
+    ;!define LIC_FILE_AFRIKAANS "${LANG_DIR}\gpl-2.0_en.txt"
     ;!define LIC_FILE_BULGARIAN "${LANG_DIR}\gpl-2.0_en.txt"
     !define LIC_FILE_HEBREW "${LANG_DIR}\gpl-2.0_en.txt"
     !define LIC_FILE_SIMPCHINESE "${LANG_DIR}\gpl-2.0_en.txt"
 
     LicenseLangString LICENSE_FILE ${LANG_ENGLISH} "${LIC_FILE_ENGLISH}"
     ;LicenseLangString LICENSE_FILE ${LANG_BULGARIAN} "${LIC_FILE_BULGARIAN}"
-    LicenseLangString LICENSE_FILE ${LANG_AFRIKAANS} "${LIC_FILE_AFRIKAANS}"
+    ;LicenseLangString LICENSE_FILE ${LANG_AFRIKAANS} "${LIC_FILE_AFRIKAANS}"
     LicenseLangString LICENSE_FILE ${LANG_CZECH} "${LIC_FILE_CZECH}"
     LicenseLangString LICENSE_FILE ${LANG_WELSH} "${LIC_FILE_WELSH}"
     LicenseLangString LICENSE_FILE ${LANG_GERMAN} "${LIC_FILE_GERMAN}"
@@ -108,7 +108,7 @@
 !macro LINGUAS_RESERVEFILE
 
     ReserveFile "${LANG_DIR}\en.nsh"
-    ReserveFile "${LANG_DIR}\af.nsh"
+    ;ReserveFile "${LANG_DIR}\af.nsh"
     ReserveFile "${LANG_DIR}\cs.nsh"
     ReserveFile "${LANG_DIR}\cy.nsh"
     ReserveFile "${LANG_DIR}\de.nsh"
