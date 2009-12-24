@@ -24,16 +24,16 @@ New features
  2. Bookmarks are exportable.  Select XML, HTML, or plaintext.  For
     the latter two, select whether to include the text referenced.
 
- 3. The StudyPad and personal commentary editor now has a Link dialog,
-    by which to arrange for verse reference linkage.
+ 3. The StudyPad and personal commentary editor has gained a Link
+    dialog, by which to arrange for verse reference linkage.
 
- 4. Xiphos' main window navigation can now be sampled and driven via
+ 4. Xiphos' main window navigation can be sampled and driven via
     external programs such as Bibledit, notably in support of Bible
     translators' work.  (For developers, this uses the dbus feature.
     A test program to exercise this feature can be found in
     src/examples/ipc_client.py.)
 
- 5. The Module Manager now has a first-time-user introductory dialog,
+ 5. The Module Manager has a first-time-user introductory dialog,
     to offer brief explanation of its several parts.  All users, even
     long-time users, will get it exactly once.
 
@@ -50,10 +50,10 @@ New features
     removed in the early days of GnomeSword 2.2(!).  (Why did we do
     that?  Nobody remembers.)
 
- 9. New interface translations: Russian, Romanian, Spanish, Chinese,
-    and Afrikaans.  (The last two of these have been mechanically
-    generated and are very, very rough at this time -- they will need
-    human attention to gain acceptable quality.)
+ 9. New interface translations: Russian, Romanian, Spanish, Chinese.
+    (The last of these has been mechanically generated and is very,
+    very rough at this time -- it will need human attention to gain
+    acceptable quality.)
 
 Enhancements to existing behavior
 
@@ -68,9 +68,9 @@ Enhancements to existing behavior
 
  4. Hebrew searches have been improved.
 
- 5. The verse annotation feature now localizes verse references.
+ 5. The verse annotation feature localizes verse references.
 
- 6. The main window title now follows currently-open modules better.
+ 6. The main window title follows currently-open modules better.
 
  7. Sidebar search has had improvements and fixes.
 
@@ -80,7 +80,7 @@ Enhancements to existing behavior
 
  9. Improved passage export and printing.
 
-10. Much work has bee done for Windows with regard to our better
+10. Much work has been done for Windows with regard to our better
     display engine, but it is still not complete, and not present in
     today's Windows build for public distribution.  To be done in 3.2.
 
@@ -107,7 +107,7 @@ Problems resolved
  1. An error in use of FTP repository registration was fixed.
 
  2. When doing searches, both sidebar and advanced, the "purplify"
-    word-match facility has been rewritten from the ground up, and now
+    word-match facility has been rewritten from the ground up, and
     correctly identifies your search keywords.
 
  3. Tab names do not show the commentary when the general book is
@@ -138,10 +138,36 @@ Improvements and helps for developers
     - Many, many updates to the build system and the Windows installer.
 
 Bug reports addressed since 3.1.1:
+2908987  crash detected in xiphos-3.1.1-1.fc12
+2896427  Isa 49:6 in HunKar text
+2893828  Malachi 4:6 in Aleppo text
+2878951  KJV Stongs lexicon stops at 5624 (ophelimos)
+2873367  Advanced Search results: Hotkey(s) to display Preview
+2873362  Hotkey for activating simple searches not working
+2872186  missing verses
+2862814  Crash when compiled against xulrunner 1.9.1.3
+2858494  Bible Window Does Not Automatically Display Selected Verse
+2852779  delete source button enlarge sources list in twice
+2849730  Lucene Text Fields search not working
+2849693  Parallel view tab does not honour link tabs setting
+2848320  Preview: Symboles for Footnotes
+2844863  Lucene Search: Not finding all results
+2841441  per verse annotation - localized reference
 
 New feature requests pending:
+2907492  Interlinear commentary
+2902403  How to install for other than listed OS
+2901374  Need for Serbian translation
+2893826  Versification in the Psalms
+2890364  Don't need to see strongs numbers, morphology
+2873364  Highlight also upper case words
+2873363  Shortcut/hotkey for simple/sidebar searches
+2836740  Additional versification systems
 
 Feature requests closed:
+2871373  Increase number of texts in parallel view
+2840134  Hide Verse Numbers in Copy/Export
+2824127  Sidebar search: Regular expression?
 ________________________________________________________________
 
 Release 3.1.1
