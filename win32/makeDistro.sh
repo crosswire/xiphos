@@ -26,7 +26,7 @@
 cd ..
 
 # configure and build xiphos
-./waf configure --enable-gtkhtml --disable-console --debug-level='optimized'
+./waf configure --enable-gtkhtml --disable-console --debug-level='optimized' --without-gnome --disable-dbus
 ./waf
 ./waf install
 
@@ -46,11 +46,12 @@ cp -r /usr/local/share/sword/locales.d $outdir"../share/sword/locales.d"
 
 # update gtk+ mo files
 
-for f in `ls po/*.po`; do msgfmt f; done
-mv po/fa.mo binaries/Xiphos/share/locales/fa/LC_MESSAGES/gtk.mo
+cd win32/po
+for f in `ls *.po`; do msgfmt $f; done
+cp messages.mo ../binaries/Xiphos/share/locales/fa/LC_MESSAGES/gtk20.mo
 
 # make installer
-cd win32/nsis
+cd ../nsis
 makensis installer.nsi
 
 

@@ -557,7 +557,6 @@ def build(bld):
 	NEWS
 	TODO
 	Xiphos.ogg
-        help/xiphos.pdf
     """)
 
     bld.install_files('${PACKAGE_PIXMAPS_DIR}','pixmaps/*')
