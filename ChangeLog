@@ -1,3 +1,8 @@
+2009-12-24  karl <charcoal@users.sf.net>
+
+	* 3.1.2 release.
+	* updates to src/gnome2/Makefile.am: distribution tarball sanity.
+	
 2009-12-19  karl <charcoal@users.sf.net>
 
 	* change freenode webchat to use $USER (g_get_user_name()).
