@@ -209,7 +209,7 @@ G_MODULE_EXPORT void bibletime_bookmarks_activate(GtkMenuItem * menuitem,
 		return;
 	
 	str = g_string_new(settings.swbmDir);
-	g_string_sprintf(str, "%s/%s", settings.homedir,
+	g_string_printf(str, "%s/%s", settings.homedir,
 			 ".kde/share/apps/bibletime/bookmarks.xml");
 	
 	file = (const xmlChar *) str->str;

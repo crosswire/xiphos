@@ -146,7 +146,7 @@ static void fill_search_results_list(int finds)
 	gui_set_statusbar (buf);
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_sidebar),3);
 	/* cleanup progress bar */
-	gtk_progress_bar_update(GTK_PROGRESS_BAR(ss.progressbar_search),
+	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(ss.progressbar_search),
 				0.0);
 	/* display first item in list by selection row*/	
 	if(!gtk_tree_model_get_iter_first(model,&iter))
@@ -416,7 +416,7 @@ void main_sidebar_search_percent_update(char percent, void *userData)
 		while ((((float) percent) / 100) * maxHashes > printed) {
 		    sprintf(buf, "%f", (((float) percent) / 100));
 		    num = (float) percent / 100;
-		    gtk_progress_bar_update((GtkProgressBar *)
+		    gtk_progress_bar_set_fraction((GtkProgressBar *)
 					    ss.progressbar_search, num);
 		    printed++;
 		}
