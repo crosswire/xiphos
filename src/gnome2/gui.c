@@ -23,13 +23,13 @@
 #include <config.h>
 #endif
 
-#ifndef WITHOUT_GNOME
-#include <gnome.h>
-#else
+#ifdef HAVE_GTK214
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
 #include <locale.h>
 #include <stdlib.h>
+#else
+#include <gnome.h>
 #endif
 
 /* ----------------------------------------------- */
@@ -67,13 +67,13 @@ void gui_init(int argc, char *argv[])
 	textdomain (GETTEXT_PACKAGE);
 	g_free (locale_dir);
 #endif
-#ifndef WITHOUT_GNOME	
+#ifdef HAVE_GTK214	
+	gtk_init(&argc, &argv);
+#else
 	gnome_program_init (PACKAGE, VERSION, LIBGNOMEUI_MODULE,
 			    argc, argv,
 			    GNOME_PROGRAM_STANDARD_PROPERTIES,
 			    NULL);
-#else
-	gtk_init(&argc, &argv);
 #endif
 #ifndef WIN32
 	gconf_setup();
