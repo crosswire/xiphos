@@ -85,7 +85,6 @@ xiphos_CPPFLAGS =  \
 	-DLIBDIR=\""$(libdir)"\" \
 	-DSHARE_DIR=\"$(pkgdatadir)\" \
 	$(DISABLE_DEPRECATED) \
-	-UGTK_DISABLE_SINGLE_INCLUDES \
 	$(AM_CPPFLAGS)
 
 xiphos_CFLAGS = \

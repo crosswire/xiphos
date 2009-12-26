@@ -848,6 +848,10 @@ void _connect_signals(NAVBAR_VERSEKEY navbar, EDITOR * editor)
  *   GtkWidget *
  */
 
+#ifndef HAVE_WIDGET_TOOLTIP_TEXT
+#define	gtk_widget_set_tooltip_text(x,y)	/* too old for this tooltip support */
+#endif /* !HAVE_WIDGET_TOOLTIP_TEXT */
+
 GtkWidget *gui_navbar_versekey_editor_new(EDITOR * editor)
 {
 	gchar *glade_file;

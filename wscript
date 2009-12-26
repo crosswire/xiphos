@@ -370,12 +370,20 @@ def configure(conf):
     #check_pkg(conf, 'gtk+-x11-2.0', '2.0.0', var='LIBGTK_X11_2_0')
     #if not env['HAVE_LIBGTK_X11_2_0']:
     #    check_pkg(conf, 'gtk+-x11-2.0', '2.0.0', True, var='LIBGTK_WIN32_2_0')
-    check_pkg(conf, 'gtk+-2.0', '2.12', True, var='GTK')
+    check_pkg(conf, 'gtk+-2.0', '2.0', True, var='GTK')
 
 
 
     #sys.exit()
 
+
+    # tooltip function needs gtk+ >= 2.12 HAVE_WIDGET_TOOLTIP_TEXT
+    #check_pkg(conf, 'gtk+-2.0', '2.12', var='WIDGET_TOOLTIP_TEXT')
+    #conf.check_cfg(conf, 'gtk+-2.0', '2.12', var='WIDGET_TOOLTIP_TEXT')
+    #conf.check_cfg (package='gtk+-2.0', msg='Checking for widget_tooltip_text',
+        #uselib_store='WIDGET_TOOLTIP_TEXT', atleast_version='2.12')
+    check_pkgver_msg(conf, 'gtk+-2.0', '2.12', var='WIDGET_TOOLTIP_TEXT',
+        msg='Checking for gtk+-2.0 widget_tooltip_text')
 
     # glade
     check_pkg(conf, 'libglade-2.0', '2.0.0', var='GLADE')
@@ -393,7 +401,7 @@ def configure(conf):
     if not opt.without_gnome:
         check_pkg(conf, 'libgnomeui-2.0', '2.0.0', True, var='GNOMEUI')
     else:
-        dfn('HAVE_GTK214', 1)
+        dfn('WITHOUT_GNOME', 1)
 
     ## gfs
     check_pkg(conf, 'libgsf-1', '1.14', True, 'GFS')
