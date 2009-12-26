@@ -324,7 +324,6 @@ GtkWidget *gui_navbar_book_new(void)
 	GtkWidget *arrow1;
 	GtkWidget *image2;
 
-	navbar_book.tooltips = gtk_tooltips_new();
 	vbox1 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox1);
 
@@ -355,8 +354,8 @@ GtkWidget *gui_navbar_book_new(void)
 	gtk_widget_show(navbar_book.button_left);
 	gtk_box_pack_start(GTK_BOX(hbox1), navbar_book.button_left, FALSE,
 			   FALSE, 0);
-	gtk_tooltips_set_tip(navbar_book.tooltips, navbar_book.button_left,
-			     _("Go outward, to the section containing this one"), NULL);
+	gtk_widget_set_tooltip_text(navbar_book.button_left,
+			     _("Go outward, to the section containing this one"));
 
 	gtk_button_set_relief(GTK_BUTTON(navbar_book.button_left),
 			      GTK_RELIEF_NONE);
@@ -371,8 +370,7 @@ GtkWidget *gui_navbar_book_new(void)
 	gtk_widget_show(navbar_book.button_up);
 	gtk_box_pack_start(GTK_BOX(hbox1), navbar_book.button_up, FALSE,
 			   FALSE, 0);
-	gtk_tooltips_set_tip(navbar_book.tooltips, navbar_book.button_up,
-			     _("Go to previous item"), NULL);
+	gtk_widget_set_tooltip_text(navbar_book.button_up, _("Go to previous item"));
 	gtk_button_set_relief(GTK_BUTTON(navbar_book.button_up),
 			      GTK_RELIEF_NONE);
 	gtk_button_set_focus_on_click(GTK_BUTTON(navbar_book.button_up),
@@ -386,8 +384,7 @@ GtkWidget *gui_navbar_book_new(void)
 	gtk_widget_show(navbar_book.button_down);
 	gtk_box_pack_start(GTK_BOX(hbox1), navbar_book.button_down, FALSE,
 			   FALSE, 0);
-	gtk_tooltips_set_tip(navbar_book.tooltips, navbar_book.button_down,
-			     _("Go to next item"), NULL);
+	gtk_widget_set_tooltip_text(navbar_book.button_down, _("Go to next item"));
 	gtk_button_set_relief(GTK_BUTTON(navbar_book.button_down),
 			      GTK_RELIEF_NONE);
 	gtk_button_set_focus_on_click(GTK_BUTTON(navbar_book.button_down),
@@ -401,9 +398,7 @@ GtkWidget *gui_navbar_book_new(void)
 	gtk_widget_show(navbar_book.button_right);
 	gtk_box_pack_start(GTK_BOX(hbox1), navbar_book.button_right, FALSE,
 			   FALSE, 0);
-	gtk_tooltips_set_tip(navbar_book.tooltips,
-			     navbar_book.button_right,
-			     _("Go inward, to the first subsection"), NULL);
+	gtk_widget_set_tooltip_text(navbar_book.button_right, _("Go inward, to the first subsection"));
 
 	gtk_button_set_relief(GTK_BUTTON(navbar_book.button_right),
 			      GTK_RELIEF_NONE);

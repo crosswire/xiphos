@@ -760,7 +760,6 @@ void create_mainwindow(void)
 	GtkWidget *menu;
 	GtkWidget *hbox25;
 	GtkWidget *tab_button_icon;
-	GtkTooltips *tooltips;
 	GtkWidget *label;
 #ifdef USE_GTKMOZEMBED
 	GtkWidget *frame;
@@ -779,7 +778,6 @@ void create_mainwindow(void)
 	*/
 	settings.shadow_type = GTK_SHADOW_IN;
 
-	tooltips = gtk_tooltips_new ();
 	GS_print(("%s xiphos-%s\n", "Starting", VERSION));
 	GS_print(("%s\n\n", "Building Xiphos interface"));
 
@@ -841,8 +839,7 @@ void create_mainwindow(void)
 	gtk_container_add(GTK_CONTAINER(widgets.button_new_tab), tab_button_icon);
 	gtk_button_set_relief(GTK_BUTTON(widgets.button_new_tab), GTK_RELIEF_NONE);
 	gtk_box_pack_start(GTK_BOX(widgets.hboxtb), widgets.button_new_tab, FALSE, FALSE, 0);
-	gtk_tooltips_set_tip(tooltips, widgets.button_new_tab, _("Open a new tab"),
-				NULL);
+	gtk_widget_set_tooltip_text(widgets.button_new_tab, _("Open a new tab"));
 
 	widgets.notebook_main = gtk_notebook_new();
 	gtk_widget_show(widgets.notebook_main);

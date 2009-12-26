@@ -29,7 +29,10 @@ libeditor_a_SOURCES = slib-editor.c slib-editor.h link_dialog.c link_dialog.h
 
 endif
 
-libeditor_a_CPPFLAGS = -DINSTALL_PREFIX=\""$(prefix)"\"
+libeditor_a_CPPFLAGS = \
+	-DINSTALL_PREFIX=\""$(prefix)"\" \
+	$(DISABLE_DEPRECATED)
+
 libeditor_a_CFLAGS = \
 	-I$(top_srcdir)/src \
 	$(XIPHOS_CFLAGS) \
