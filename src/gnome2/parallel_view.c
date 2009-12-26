@@ -265,10 +265,8 @@ void gui_popup_menu_parallel(void)
 	GtkWidget *undockInt = NULL;
 	GtkWidget *module_options;
 	GtkWidget *separator2;
-	GtkTooltips *tooltips;	
 	GtkWidget *module_options_menu;
 	
-	tooltips = gtk_tooltips_new();
 	menu = gtk_menu_new();
 	gtk_object_set_data(GTK_OBJECT(menu), "pmInt", menu);
 
