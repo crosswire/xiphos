@@ -417,7 +417,8 @@ void main_setup_navbar_book(gchar * book_name, unsigned long offset)
 		
 	tmpbuf = backend->get_key_from_offset(offset);
 	gtk_entry_set_text(GTK_ENTRY(navbar_book.lookup_entry), tmpbuf);
-	gtk_widget_set_tooltip_text(navbar_book.lookup_entry, tmpbuf);
+	gtk_tooltips_set_tip(navbar_book.tooltips,
+			     navbar_book.lookup_entry, tmpbuf, NULL);
 
 	if ((settings.book_mod == NULL) ||
 	    (*settings.book_mod == '\0'))

@@ -367,7 +367,8 @@ void main_setup_navbar_book_dialog(gpointer data)
 	be->set_treekey(d->offset);
 	tmpbuf = be->get_key_from_offset(d->offset);
 	gtk_entry_set_text(GTK_ENTRY(d->navbar_book.lookup_entry), tmpbuf);
-	gtk_widget_set_tooltip_text(d->navbar_book.lookup_entry, tmpbuf);
+	gtk_tooltips_set_tip(d->navbar_book.tooltips,
+			     d->navbar_book.lookup_entry, tmpbuf, NULL);
 			     
 	if (check_for_parent(d))    
 		gtk_widget_set_sensitive(d->navbar_book.button_left, TRUE);

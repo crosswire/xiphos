@@ -145,9 +145,11 @@ void gui_create_search_sidebar(void)
 	GtkWidget *label2;
 	GtkWidget *scrolledwindow_search;
 	GtkWidget *viewport_search;
+	GtkTooltips *tooltips;
 	gchar *header;
 	//GtkListStore *store;
 
+	tooltips = gtk_tooltips_new();
 	//ss = &sss;
 	
 	scrolledwindow_search = gtk_scrolled_window_new(NULL, NULL);
@@ -185,8 +187,10 @@ void gui_create_search_sidebar(void)
 	remember_search = gtk_button_new_from_stock(GTK_STOCK_FIND);
 	gtk_widget_show (remember_search);
 	gtk_box_pack_start(GTK_BOX(vbox5), remember_search, TRUE, FALSE, 0);
-	gtk_widget_set_tooltip_text(remember_search,
-			     _("This is an inclusive (\"AND\") search:\nFind matches showing all words."));
+	gtk_tooltips_set_tip(tooltips,
+			     remember_search,
+			     _("This is an inclusive (\"AND\") search:\nFind matches showing all words."),
+			     NULL);
 	gtk_button_set_relief (GTK_BUTTON (remember_search), GTK_RELIEF_NONE);
 
 	ss.progressbar_search = gtk_progress_bar_new();
@@ -415,4 +419,8 @@ void gui_create_search_sidebar(void)
 			   
 	g_signal_connect(GTK_OBJECT(ss.entrySearch), "activate",
 			 G_CALLBACK(on_search_button_clicked), NULL);
+			   
+			   
+	gtk_object_set_data(GTK_OBJECT(widgets.app), "tooltips",
+			    tooltips);
 }
