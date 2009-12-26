@@ -35,6 +35,7 @@ struct _navbar_book {
 	GtkWidget *button_list;
 	GtkWidget *menu;
 	GtkWidget *lookup_entry;
+  	GtkTooltips *tooltips;	
 	gchar *key;
 	gchar *book_name;	
 };

@@ -10,7 +10,5 @@ libbackend_a_CXXFLAGS =  \
     $(XIPHOS_CFLAGS) \
 	$(WARN_CXXFLAGS)
 
-libbackend_a_CPPFLAGS = $(DISABLE_DEPRECATED)
-
 EXTRA_DIST = \
    wscript

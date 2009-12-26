@@ -197,6 +197,7 @@ char *verbs[5][4] = {
     },
 };
 
+#ifdef HAVE_WIDGET_TOOLTIP_TEXT
 static
 gboolean query_tooltip (GtkWidget  *widget,
 			gint        x,
@@ -275,6 +276,7 @@ gboolean query_tooltip (GtkWidget  *widget,
 	g_string_free (description, TRUE);
 	return TRUE;
 }
+#endif /* HAVE_WIDGET_TOOLTIP_TEXT */
 
 /******************************************************************************
  * Name
@@ -406,6 +408,10 @@ fixed_toggled(GtkCellRendererToggle *cell,
  * Return value
  *   void
  */
+
+#ifndef HAVE_WIDGET_TOOLTIP_TEXT
+#define	gtk_widget_set_tooltip_text(x,y)	/* too old for this tooltip support */
+#endif /* !HAVE_WIDGET_TOOLTIP_TEXT */
 
 static void
 add_columns(GtkTreeView * treeview,
@@ -3151,6 +3157,7 @@ create_module_manager_dialog(gboolean first_run)
 	setup_treeview_install(GTK_TREE_VIEW(treeview));
 	setup_treeview_maintenance(GTK_TREE_VIEW(treeview2));
 	
+#ifdef HAVE_WIDGET_TOOLTIP_TEXT
 	gtk_widget_set_has_tooltip (treeview, TRUE);
 	g_signal_connect((gpointer) treeview,
 			 "query-tooltip",
@@ -3160,6 +3167,7 @@ create_module_manager_dialog(gboolean first_run)
 	g_signal_connect((gpointer) treeview2,
 			 "query-tooltip",
 			 G_CALLBACK(query_tooltip), NULL);
+#endif /* HAVE_WIDGET_TOOLTIP_TEXT */
 	
 	/* notebook */
 	notebook1 = glade_xml_get_widget (gxml, "notebook1");		
