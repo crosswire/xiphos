@@ -15,6 +15,8 @@ while read l ; do
 	    [ "$u" = CS ] && u=CZ	# special case, czech.
 	    [ "$u" = FA ] && u=IR	# special case, iran.
 	    [ "$u" = ZH ] && u=CN	# special case, chinese.
+	    [ "$u" = HE ] && u=IL	# special case, israel.
+	    [ "$u" = NB ] && u=NO	# special case, norway.
 	    l="$l"_"$u"
 	    ;;
     esac

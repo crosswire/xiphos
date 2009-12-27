@@ -29,6 +29,10 @@ def configure(self):
             loc += '_IR'   # special case, iran.
         elif loc == 'zh':
             loc += '_CN'   # special case, simplified chinese.
+        elif loc == 'nb':
+            loc += '_NO'   # norway
+        elif loc == 'he':
+            loc += '_IL'   # israel
         elif len(loc) == 2:
             loc = loc + '_' + loc.upper()
         locales_new.append(loc)
