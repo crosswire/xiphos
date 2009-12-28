@@ -1133,6 +1133,7 @@ on_basecombobox1_changed(GtkComboBox * combobox,
 	if (!buf)
 		return;
 	xml_set_value("Xiphos", "fontsize", "basefontsize", buf);
+	g_free(buf);
 
 	if (settings.base_font_size_str)
 		g_free(settings.base_font_size_str);
@@ -1144,7 +1145,7 @@ on_basecombobox1_changed(GtkComboBox * combobox,
 			      settings.currentverse);
 	main_url_handler(url, TRUE);
 	g_free(url);
-	g_free(buf);
+	main_display_dictionary(settings.DictWindowModule, settings.dictkey);
 }
 
 
