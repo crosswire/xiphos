@@ -1,7 +1,5 @@
 bin_PROGRAMS = xiphos
 
-bin_SCRIPTS = gnomesword2
-
 BUILT_SOURCES = ipc-interface.h marshal.h locale_set.c
 
 xiphos_SOURCES =  \
@@ -134,7 +132,6 @@ xiphos_LDADD = \
 
 EXTRA_DIST = \
     $(top_builddir)/src/gui/*.h \
-    gnomesword2 \
     ipc-interface.xml \
     make-locale-set.sh \
     marshal.list \
