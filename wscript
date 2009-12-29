@@ -513,7 +513,6 @@ def configure(conf):
     conf.write_config_header('config.h')
 
     # process configure for subfolders
-    conf.sub_config('src/editor') # generate Editor source from idl
     conf.sub_config('src/gnome2') # generate locale_set.c
 
 
