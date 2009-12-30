@@ -55,7 +55,7 @@ def set_options(opt):
 
     # options provided by the modules
     #opt.tool_options('g++ gcc gnome intltool glib2')
-    opt.tool_options('g++ gcc gnu_dirs')
+    opt.tool_options('g++ gcc')
 
     opt.add_option('--enable-gtkhtml', action='store_true', default=False,
             dest='gtkhtml',
