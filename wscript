@@ -180,7 +180,10 @@ def configure(conf):
     opt = Options.options
 
     if not opt.disable_help:
-        conf.check_tool('documentation', tooldir=_tooldir) # stuff to create help files
+        if env['IS_LINUX']:
+            conf.check_tool('gnome')
+        else:
+            conf.check_tool('documentation', tooldir=_tooldir) # stuff to create help files
 
     # DATADIR is defined by intltool in config.h - conflict in win32 (mingw)
     conf.undefine('DATADIR')
