@@ -115,9 +115,3 @@ def build(bld):
         lib.find_sources_in_dirs('.')
     else:
         lib.find_sources_in_dirs('.', excludes=['ipc.c',])
-  
-    # notification about project name change
-    if not env['IS_WIN32']:
-        is_executable = 0755
-        bld.install_files('${BINDIR}', 'gnomesword2', chmod=is_executable)
-
