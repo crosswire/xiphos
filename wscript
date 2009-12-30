@@ -1,10 +1,6 @@
 #! /usr/bin/env python
 # encoding: utf-8
 
-import sys
-if sys.version_info < (2,3):
-    raise RuntimeError("Python 2.3 or newer is required")
-
 import os, os.path
 import intltool, gnome
 from os.path import join, dirname, abspath
@@ -54,42 +50,12 @@ sys/socket.h
 winsock.h
 '''.split()
 
-_unused_options = '''
-sbindir
-sysconfdir
-libdir
-libexecdir
-sharedstatedir
-localstatedir
-includedir
-oldincludedir
-datadir
-infodir
-mandir
-htmldir
-dvidir
-pdfdir
-psdir
-'''.split()
-
-
 def set_options(opt):
 
 
     # options provided by the modules
     #opt.tool_options('g++ gcc gnome intltool glib2')
     opt.tool_options('g++ gcc gnu_dirs')
-
-    # unused options
-    for name in _unused_options:
-        option_name = '--' + name
-        opt.parser.remove_option(option_name)
-
-    opt.add_option('--enable-autoclear', action='store_true', default=False,
-            dest='autoclear', help='Use previewer autoclear [Default: disabled]')
-
-    opt.add_option('--enable-old_navbar', action='store_true', default=False,
-            dest='old_navbar', help='Use old_navbar [Default: disabled]')
 
     opt.add_option('--enable-gtkhtml', action='store_true', default=False,
             dest='gtkhtml',
@@ -288,11 +254,6 @@ def configure(conf):
         env.append_value('CXXFLAGS', env['CXXFLAGS_DELINT'])
         env.append_value('CCFLAGS', env['CCFLAGS_DELINT'])
 
-    if opt.autoclear:
-        dfn('USE_PREVIEWER_AUTOCLEAR', 1)
-    if opt.old_navbar:
-        dfn('OLD_NAVBAR ', 1)
-
     # gtkhtml
     if opt.gtkhtml:
         env['ENABLE_GTKHTML'] = True
@@ -344,48 +305,17 @@ def configure(conf):
     define('PACKAGE_PIXMAPS_DIR', escpath(sub('${DATAROOTDIR}/pixmaps/${PACKAGE}', env)))
     define('PACKAGE_SOURCE_DIR', escpath(abspath(srcdir))) # foder where was wscript executed
 
-    # some folders for final executable
-    #define('PREFIX', escpath(env['PREFIX']))
-    #define('SYSCONFDIR', escpath(env['SYSCONFDIR']))
-    #define('DATADIR', escpath(env['DATAROOTDIR']))
-    #env.append_value('CXXFLAGS', env['CXXDEFINES_ST'] % ('DATADIR='+escpath(env['DATAROOTDIR'])))
-    #env.append_value('CCFLAGS', env['CCDEFINES_ST'] % ('DATADIR='+escpath(env['DATAROOTDIR'])))
-    #define('LIBDIR', escpath(env['LIBDIR']))
-    #define('SHARE_DIR', escpath(sub('${DATAROOTDIR}/${PACKAGE}', env)))
-
-
-    ## CXX flags (compiler arguments)
-    #conf.check_cxx(cxxflags='-ftemplate-depth-25')
-    #conf.check_cxx(cxxflags='-Werror')
-    #conf.check_cxx(cxxflags='-Wall')
-    #conf.env.append_value('CCFLAGS', '-g -O2 -Werror -Wall'.split())
-    #conf.env.append_value('CXXFLAGS', '-g -O2 -ftemplate-depth-128 -Werror -Wall'.split())
-
     # pkg-config
     conf.check_cfg(atleast_pkgconfig_version='0.9.0')
-
-
 
     # GTK+
     #check_pkg(conf, 'gtk+-x11-2.0', '2.0.0', var='LIBGTK_X11_2_0')
     #if not env['HAVE_LIBGTK_X11_2_0']:
     #    check_pkg(conf, 'gtk+-x11-2.0', '2.0.0', True, var='LIBGTK_WIN32_2_0')
     check_pkg(conf, 'gtk+-2.0', '2.12', True, var='GTK')
-
-
-
-    #sys.exit()
-
-
     # glade
     check_pkg(conf, 'libglade-2.0', '2.0.0', var='GLADE')
         
-
-    # gtk popup menus - dynamic loadable libs
-    #if env['IS_WIN32']:
-        #check_pkg(conf, 'gmodule-no-export-2.0', '2.0.0', True, var='GMODULEEXP')
-    #else: 
-        #check_pkg(conf, 'gmodule-export-2.0', '2.0.0', True, var='GMODULEEXP')
     check_pkg(conf, 'gmodule-2.0', '2.0.0', True, var='GMODULEEXP')
     check_pkg(conf, 'glib-2.0', '2.0.0', True, 'GLIB')
 
@@ -514,8 +444,6 @@ def configure(conf):
 
     # process configure for subfolders
     conf.sub_config('src/gnome2') # generate locale_set.c
-
-
 
 def build(bld):
 
