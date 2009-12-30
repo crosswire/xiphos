@@ -9,6 +9,7 @@ from os.path import join, dirname, abspath
 # waf imports
 import Utils
 import Options
+import Scripting
 import ccroot
 
 
@@ -21,6 +22,9 @@ from waffles.misc import *
 VERSION='3.1.2'
 APPNAME='xiphos'
 PACKAGE='xiphos'
+Scripting.g_gz = 'gz'
+
+
 
 # these variables are mandatory ('/' are converted automatically)
 srcdir = '.'
