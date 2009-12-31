@@ -15,8 +15,8 @@ import ccroot
 
 # custom imports
 from waffles.gecko import Gecko
-from waffles.gtkhtml import Gtkhtml
-from waffles.misc import *
+import waffles.misc
+from waffles.misc import escpath
 
 # the following two variables are used by the target "waf dist"
 VERSION='3.1.2'
@@ -278,7 +278,7 @@ def configure(conf):
         env['STRIP'] = conf.find_program('strip', mandatory=True)
 
     if not opt.without_dbus:
-        check_pkg(conf, 'dbus-glib-1', '0.60', True, var='DBUS')
+        conf.check_pkg('dbus-glib-1', '0.60', True, var='DBUS')
         # we need a modified version of dbus.py for running on windows
         conf.check_tool('dbus', tooldir=_tooldir)
         conf.check_tool('glib2')
@@ -319,61 +319,69 @@ def configure(conf):
     #check_pkg(conf, 'gtk+-x11-2.0', '2.0.0', var='LIBGTK_X11_2_0')
     #if not env['HAVE_LIBGTK_X11_2_0']:
     #    check_pkg(conf, 'gtk+-x11-2.0', '2.0.0', True, var='LIBGTK_WIN32_2_0')
-    check_pkg(conf, 'gtk+-2.0', '2.12', True, var='GTK')
+    conf.check_pkg('gtk+-2.0', '2.12', True, var='GTK')
     # glade
-    check_pkg(conf, 'libglade-2.0', '2.0.0', var='GLADE')
+    conf.check_pkg('libglade-2.0', '2.0.0', var='GLADE')
         
-    check_pkg(conf, 'gmodule-2.0', '2.0.0', True, var='GMODULEEXP')
-    check_pkg(conf, 'glib-2.0', '2.0.0', True, 'GLIB')
+    conf.check_pkg('gmodule-2.0', '2.0.0', True, var='GMODULEEXP')
+    conf.check_pkg('glib-2.0', '2.0.0', True, 'GLIB')
 
     ## Gnome libs
     if not opt.without_gnome:
-        check_pkg(conf, 'libgnomeui-2.0', '2.0.0', True, var='GNOMEUI')
+        conf.check_pkg('libgnomeui-2.0', '2.0.0', True, var='GNOMEUI')
     else:
         dfn('HAVE_GTK214', 1)
 
     ## gfs
-    check_pkg(conf, 'libgsf-1', '1.14', True, 'GFS')
+    conf.check_pkg('libgsf-1', '1.14', True, var='GFS')
 
     #check_pkg(conf, 'libgnomeprintui-2.2', '2.2', True, var='GNOMEPRINTUI')
     #check_pkg(conf, 'libgnomeprint-2.2', '2.2', True, var='GNOMEPRINT')
 
     ## Other
-    check_pkg(conf, 'libxml-2.0', '2.0.0', True, var='XML')
+    conf.check_pkg('libxml-2.0', '2.0.0', True, var='XML')
 
-    check_pkg(conf, 'gtk+-unix-print-2.0', '2.0.0', var='UPRINT')
+    conf.check_pkg('gtk+-unix-print-2.0', '2.0.0', var='UPRINT')
     if env['HAVE_UPRINT']:
         dfn('USE_GTKUPRINT', 1)
 
     ## Sword
-    check_pkg(conf, 'sword', '1.5.11', True, var='SWORD')
+    conf.check_pkg('sword', '1.5.11', True, var='SWORD')
 
-    check_pkgver_msg(conf, 'sword', '1.5.11.99', var='MULTIVERSE',
+    conf.check_pkgver_msg('sword', '1.5.11.99', var='MULTIVERSE',
             msg='Checking for sword multiverse')
     if env['HAVE_MULTIVERSE']:
         dfn('SWORD_MULTIVERSE', 1)
 
 
-    ### gtkhtml - decide HAVE_GTKHTML3_23
-    if not Gtkhtml(conf).detect():
-        print 'Error: GTKHTML not found'
-        exit(1)
+    #here gtkhtml
+    conf.check_pkg('libgtkhtml-3.14', mandatory=True, var='GTKHTML')
+
+    if conf.env['HAVE_GTKHTML']:
+	conf.define('USE_GTKHTML3_14', 1)
+
+    conf.define('GTKHTML_API_VERSION', conf.get_pkgvar('libgtkhtml-3.14', 'gtkhtml_apiversion'))
+    conf.check_pkgver('libgtkhtml-3.14', '3.23', var='EDITOR_IDL')
+
+    if conf.env['HAVE_EDITOR_IDL']:
+	conf.check_pkg('gtkhtml-editor', mandatory=True, var='GTKHTML_EDITOR')
+	conf.define('USE_GTKHTML3_14_23', 1)
 
 
     # bonobo editor variant, slib-editor otherwise
     if not env['HAVE_EDITOR_IDL']:
 
         ### editor.py
-        check_pkg(conf, 'ORBit-2.0', mandatory=True)
-        check_pkg(conf, 'libbonobo-2.0', mandatory=True)
-        check_pkg(conf, 'bonobo-activation-2.0', mandatory=True)
+        conf.check_pkg('ORBit-2.0', mandatory=True)
+        conf.check_pkg('libbonobo-2.0', mandatory=True)
+        conf.check_pkg('bonobo-activation-2.0', mandatory=True)
 
         # ORBIT_IDL
-        env['ORBIT_IDL'] = get_pkgvar(conf, 'ORBit-2.0', 'orbit_idl')
+        env['ORBIT_IDL'] = conf.get_pkgvar('ORBit-2.0', 'orbit_idl')
 
         # BONOBO_IDL_INCLUDES
-        idl1 = get_pkgvar(conf, 'libbonobo-2.0', 'idldir')
-        idl2 = get_pkgvar(conf, 'bonobo-activation-2.0', 'idldir')
+        idl1 = conf.get_pkgvar('libbonobo-2.0', 'idldir')
+        idl2 = conf.get_pkgvar('bonobo-activation-2.0', 'idldir')
 
         env['BONOBO_IDL_INCLUDES'] = '-I%s -I%s' % (idl1, idl2)
         ### END editor.py
