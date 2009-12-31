@@ -211,6 +211,7 @@ def configure(conf):
     # gcc compiler debug levels
     # msvc has levels predefined
     if env['CC_NAME'] == 'gcc':
+        env['CCFLAGS_SAFE']       = env['CCFLAGS']
         env['CCFLAGS']            = []
         env['CCFLAGS_OPTIMIZED']  = ['-O2']
         env['CCFLAGS_RELEASE']    = ['-O2']
@@ -218,6 +219,7 @@ def configure(conf):
         env['CCFLAGS_ULTRADEBUG'] = ['-g3', '-O0', '-DDEBUG']
 
     if env['CXX_NAME'] == 'gcc':
+        env['CXXFLAGS_SAFE']       = env['CXXFLAGS']
         env['CXXFLAGS']            = []
         env['CXXFLAGS_OPTIMIZED']  = ['-O2']
         env['CXXFLAGS_RELEASE']    = ['-O2']
@@ -459,6 +461,9 @@ def configure(conf):
 
     # process configure for subfolders
     conf.sub_config('src/gnome2') # generate locale_set.c
+
+    env.append_value('CCFLAGS', env['CCFLAGS_SAFE'])
+    env.append_value('CXXFLAGS', env['CXXFLAGS_SAFE'])
 
 def build(bld):
 
