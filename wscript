@@ -76,6 +76,9 @@ def set_options(opt):
 		choices = ['ultradebug', 'debug', 'release', 'optimized'],
 		dest = 'debug_level')
 
+    opt.add_option('--strip', action='store_true', default=False,
+                    help='Strip resulting binary')
+
     opt.add_option('--enable-delint', action='store_true', default=False,
             dest='delint',
             help='Use -Wall -Werror[Default: disabled]')
@@ -276,6 +279,11 @@ def configure(conf):
         env['STRIP'] = conf.find_program('i686-mingw32-strip', mandatory=True)
     else:
         env['STRIP'] = conf.find_program('strip', mandatory=True)
+
+    if (not env['IS_LINUX']) and (opt.debug_level in ['release','optimized']):
+        env['TO_STRIP'] = True
+    else:
+        env['TO_STRIP'] = opt.strip
 
     if not opt.without_dbus:
         conf.check_pkg('dbus-glib-1', '0.60', True, var='DBUS')
