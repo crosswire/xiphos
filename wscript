@@ -3,7 +3,6 @@
 
 import os, os.path
 import intltool, gnome
-from os.path import join, dirname, abspath
 
 
 # waf imports
@@ -16,7 +15,6 @@ import ccroot
 # custom imports
 from waffles.gecko import Gecko
 import waffles.misc
-from waffles.misc import escpath
 
 # the following two variables are used by the target "waf dist"
 VERSION='3.1.2'
@@ -167,7 +165,7 @@ def configure(conf):
 
     ## temporary HACKS for win32
     if env['IS_WIN32']:
-        env['PREFIX'] = escpath(os.path.abspath('win32/binaries/Xiphos'))
+        env['PREFIX'] = conf.escpath(os.path.abspath('win32/binaries/Xiphos'))
     ##
 
     if env['IS_WIN32']:
@@ -303,16 +301,16 @@ def configure(conf):
     define('PACKAGE_STRING', '%s %s' % (APPNAME, VERSION))
     define('PACKAGE_TARNAME', PACKAGE)
 
-    define('INSTALL_PREFIX', escpath(sub('${PREFIX}/', env)))
+    define('INSTALL_PREFIX', conf.escpath(sub('${PREFIX}/', env)))
     #dfn('LT_OBJDIR', '.libs') - what's the purpose?
     define('PACKAGE_BUGREPORT','http://sourceforge.net/tracker/?group_id=5528&atid=105528' )
-    define('PACKAGE_DATA_DIR', escpath(sub('${DATAROOTDIR}/${PACKAGE}', env)))
-    define('PACKAGE_DOC_DIR', escpath(env['DOCDIR']))
-    define('PACKAGE_HELP_DIR', escpath(sub('${DATAROOTDIR}/gnome/help/${PACKAGE}', env)))
-    define('PACKAGE_LOCALE_DIR', escpath(env['LOCALEDIR']))
-    define('PACKAGE_MENU_DIR', escpath(sub('${DATAROOTDIR}/applications', env)))
-    define('PACKAGE_PIXMAPS_DIR', escpath(sub('${DATAROOTDIR}/pixmaps/${PACKAGE}', env)))
-    define('PACKAGE_SOURCE_DIR', escpath(abspath(srcdir))) # foder where was wscript executed
+    define('PACKAGE_DATA_DIR', conf.escpath(sub('${DATAROOTDIR}/${PACKAGE}', env)))
+    define('PACKAGE_DOC_DIR', conf.escpath(env['DOCDIR']))
+    define('PACKAGE_HELP_DIR', conf.escpath(sub('${DATAROOTDIR}/gnome/help/${PACKAGE}', env)))
+    define('PACKAGE_LOCALE_DIR', conf.escpath(env['LOCALEDIR']))
+    define('PACKAGE_MENU_DIR', conf.escpath(sub('${DATAROOTDIR}/applications', env)))
+    define('PACKAGE_PIXMAPS_DIR', conf.escpath(sub('${DATAROOTDIR}/pixmaps/${PACKAGE}', env)))
+    define('PACKAGE_SOURCE_DIR', conf.escpath(os.path.abspath(srcdir))) # foder where was wscript executed
 
     # pkg-config
     conf.check_cfg(atleast_pkgconfig_version='0.9.0')
