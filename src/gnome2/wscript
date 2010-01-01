@@ -106,6 +106,7 @@ def build(bld):
         staticlib = staticlib, # like cflag -lsword
         add_objects = objects, # used instead of libbackend.a, libgecko.a, libeditor.a, libmain.a
         install_path= '${BINDIR}',
+        strip = bld.env['TO_STRIP']
     )
 
     # DBUS generate binding and marshallers
@@ -115,3 +116,16 @@ def build(bld):
         lib.find_sources_in_dirs('.')
     else:
         lib.find_sources_in_dirs('.', excludes=['ipc.c',])
+
+import Task
+from TaskGen import feature
+from Tools.ccroot import get_target_name
+
+@feature('cc')
+def process_strip(self):
+	if getattr(self, 'strip', None):
+		tsk = self.create_task('strip')
+		tsk.set_inputs(self.path.find_or_declare(get_target_name(self)))
+		tsk.set_outputs(self.path.find_or_declare(get_target_name(self)))		
+
+Task.simple_task_type('strip', "${STRIP} ${SRC}", color='BLUE', after='cxx_link')
