@@ -38,3 +38,6 @@ src/gnome2/locale_set.c
 src/gnome2/marshal.c
 src/gnome2/marshal.h
 src/gnome2/xiphos
+.waf*
+build
+.lock-wscript
