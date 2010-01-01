@@ -2,7 +2,7 @@
 # encoding: utf-8
 
 import os, os.path
-import intltool, gnome
+import intltool
 
 
 # waf imports
@@ -15,6 +15,7 @@ import ccroot
 # custom imports
 from waffles.gecko import Gecko
 import waffles.misc
+import waffles.gnome
 
 # the following two variables are used by the target "waf dist"
 VERSION='3.1.2'
@@ -186,7 +187,7 @@ def configure(conf):
 
     if not opt.disable_help:
         if env['IS_LINUX']:
-            conf.check_tool('gnome')
+            conf.check_tool('gnome', tooldir=_tooldir)
         else:
             conf.check_tool('documentation', tooldir=_tooldir) # stuff to create help files
 
