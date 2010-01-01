@@ -93,7 +93,8 @@ def escape(string):
     """
     return string.decode('string-escape')
 
-def escpath(path):
+@conf
+def escpath(self, path):
     """
     Escape path - useful in win32
     """
