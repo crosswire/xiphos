@@ -541,21 +541,3 @@ def shutdown():
     #gnome.postinstall_schemas('gnome-test') # Installing GConf schemas
     #gnome.postinstall_icons() # Updating the icon cache
     pass
-
-def distclean():
-
-    ### editor.py
-    lst = ('''
-        src/editor/Editor-common.c
-        src/editor/Editor.h
-        src/editor/Editor-skels.c
-        src/editor/Editor-stubs.c
-    ''').split()
-
-    print 'Removing files generated for editor:'
-    for i in lst:
-        if os.path.exists(i):
-            print i
-            os.remove(i)
-    ### END editor.py
-
