@@ -505,8 +505,10 @@ def build(bld):
 	Xiphos.ogg
     """)
 
-    bld.install_files('${PACKAGE_PIXMAPS_DIR}','pixmaps/*')
-
+    bld.install_files('${PACKAGE_PIXMAPS_DIR}',bld.path.ant_glob('pixmaps/*.png'))
+    bld.install_files('${PACKAGE_PIXMAPS_DIR}',bld.path.ant_glob('pixmaps/*.ico'))
+    bld.install_files('${PACKAGE_PIXMAPS_DIR}',bld.path.ant_glob('pixmaps/*.xpm'))    
+    bld.install_files('${DATAROOTDIR}/icons/hicolor/scalable/apps','pixmaps/xiphos.svg')
     # handle .desktop creation and installation
     if not env["IS_WIN32"]:
         bld.new_task_gen(
