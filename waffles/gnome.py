@@ -83,9 +83,12 @@ def apply_gnome_doc(self):
 				out = self.path.find_or_declare('%s/%s' % (x, xml))
 				tsk.set_inputs([node, src])
 				tsk.set_outputs(out)
-			if bld.is_install: bld.install_as(path + '/%s' % xml, out.abspath(self.env))
+			else:
+				out = self.path.find_resource('%s/%s' % (x, xml))
 
-		out = self.path.find_resource('%s/%s.xml' % (x, self.doc_module))
+			if bld.is_install:
+				bld.install_as(path + '/%s' % xml, out.abspath(self.env))
+				
 		tsk2 = self.create_task('xsltproc2po')
 		out2 = self.path.find_or_declare('%s/%s-%s.omf' % (x, self.doc_module, x))
 		tsk2.set_outputs(out2)
@@ -95,7 +98,7 @@ def apply_gnome_doc(self):
 		tsk2.run_after.append(tsk)
 
 		if bld.is_install:
-			bld.install_files(self.install_path + '/omf', out2, env=self.env)
+			bld.install_files(os.path.join(self.install_path, 'omf', self.doc_module, ''), out2, env=self.env)
 			for y in self.to_list(self.doc_figures):
 				try:
 					os.stat(self.path.abspath() + '/' + x + '/' + y)
@@ -191,7 +194,7 @@ xslt_magic = """${XSLTPROC2PO} -o ${TGT[0].abspath(env)} \
 --stringparam db2omf.basename ${APPNAME} \
 --stringparam db2omf.format docbook \
 --stringparam db2omf.lang ${TGT[0].abspath(env)[:-4].split('-')[-1]} \
---stringparam db2omf.dtd '-//OASIS//DTD DocBook XML V4.3//EN' \
+--stringparam db2omf.dtd '-//OASIS//DTD DocBook XML V4.1.2//EN' \
 --stringparam db2omf.omf_dir ${PREFIX}/share/omf \
 --stringparam db2omf.help_dir ${PREFIX}/share/gnome/help \
 --stringparam db2omf.omf_in ${SRC[0].abspath(env)} \
