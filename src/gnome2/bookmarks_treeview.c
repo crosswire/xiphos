@@ -614,7 +614,7 @@ static void create_pixbufs(void)
 			pixbufs->pixbuf_closed =
 				pixbuf_finder("book_closed.png", 16, NULL);
 		
-		pixbufs->pixbuf_opened =
+		bm_pixbufs->pixbuf_opened =
 			pixbuf_finder("book_open.png", 16, NULL);
 	}
 	else {
@@ -622,7 +622,7 @@ static void create_pixbufs(void)
 			pixbufs->pixbuf_closed =
 				pixbuf_finder("book_closed_rtol.png", 16, NULL);
 		
-		pixbufs->pixbuf_opened =
+		bm_pixbufs->pixbuf_opened =
 			pixbuf_finder("book_open_rtol.png", 16, NULL);
 	}
 
