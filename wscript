@@ -15,7 +15,7 @@ import ccroot
 # custom imports
 from waffles.gecko import Gecko
 import waffles.misc
-import waffles.gnome
+import waffles.gnome as gnome
 
 # the following two variables are used by the target "waf dist"
 VERSION='3.1.2'
@@ -502,7 +502,6 @@ def build(bld):
 	INSTALL
 	NEWS
 	TODO
-	Xiphos.ogg
     """)
 
     bld.install_files('${PACKAGE_PIXMAPS_DIR}',bld.path.ant_glob('pixmaps/*.png'))
