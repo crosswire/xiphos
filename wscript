@@ -502,6 +502,7 @@ def build(bld):
 	INSTALL
 	NEWS
 	TODO
+	Xiphos.ogg
     """)
 
     bld.install_files('${PACKAGE_PIXMAPS_DIR}',bld.path.ant_glob('pixmaps/*.png'))
@@ -553,5 +554,4 @@ def build(bld):
 
 def dist_hook():
     import shutil
-    os.remove('Xiphos.ogg')
     shutil.rmtree('win32')
