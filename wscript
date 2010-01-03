@@ -555,3 +555,8 @@ def build(bld):
 def dist_hook():
     import shutil
     shutil.rmtree('win32')
+
+def run(ctx):
+    '''Matthew Talbert special - run xiphos from build directory'''
+    import subprocess
+    subprocess.call(os.path.join(blddir,'default/src/gnome2/xiphos'))
