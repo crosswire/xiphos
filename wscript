@@ -545,10 +545,14 @@ def build(bld):
     #if env['SGML2MAN']:
     #	bld.add_subdirs('man')
 
+    def post(ctx):
+        # Postinstall tasks:
+        gnome.postinstall_scrollkeeper('xiphos') # Installing the user docs
+        gnome.postinstall_icons() # Updating the icon cache
 
-def shutdown():
-    # Postinstall tasks:
-    #gnome.postinstall_srrcrollkeeper('gnome-hello') # Installing the user docs
-    #gnome.postinstall_schemas('gnome-test') # Installing GConf schemas
-    #gnome.postinstall_icons() # Updating the icon cache
-    pass
+    bld.add_post_fun(post)
+
+def dist_hook():
+    import shutil
+    os.remove('Xiphos.ogg')
+    shutil.rmtree('win32')
