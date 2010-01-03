@@ -1,3 +1,11 @@
+2010-01-02 matthew <ransom1982@users.sourceforge.net>
+
+	* make copy to clipboard smart for html
+
+2010-01-02 dima <dmitrijledkov@users.sourceforge.net>
+
+	* lots of waf fixes
+
 2009-12-28  karl <charcoal@users.sf.net>
 
 	* fix #2922262 update dict pane when base font changes.

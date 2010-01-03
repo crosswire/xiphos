@@ -39,6 +39,57 @@
 
 #define HTML_START "<HTML><HEAD><META HTTP-EQUIV=\"content-type\" CONTENT=\"text/html; CHARSET=utf-8\"><STYLE TYPE=\"text/css\"><!-- A { text-decoration:none } %s --></STYLE></HEAD><BODY>"
 
+enum {
+        TARGET_HTML,
+        TARGET_UTF8_STRING,
+        TARGET_COMPOUND_TEXT,
+        TARGET_STRING,
+        TARGET_TEXT
+};
+
+/* these targets allow fallback to plain text if the target doesn't
+   want html */
+
+GtkTargetEntry selection_targets[] = {
+        { (gchar *) "text/html", 0, TARGET_HTML },
+        { (gchar *) "UTF8_STRING", 0, TARGET_UTF8_STRING },
+        { (gchar *) "COMPOUND_TEXT", 0, TARGET_COMPOUND_TEXT },
+        { (gchar *) "STRING", 0, TARGET_STRING },
+        { (gchar *) "TEXT", 0, TARGET_TEXT}
+};
+
+/* there is probably a better way to do this */
+static gchar* copy_text;
+
+/**
+ * clipboardreq_get:
+ * @clipboard: 
+ * @selection_data: 
+ * @info: 
+ * @user_data: 
+ *
+ * This function is called every time a user pastes in another application
+ **/
+static void clipboardreq_get (GtkClipboard *clipboard,
+			      GtkSelectionData *selection_data,
+			      guint info, gpointer user_data)
+{
+	gchar* text = g_strdup(copy_text);
+        if (info == TARGET_HTML)
+        {
+                gtk_selection_data_set(selection_data, gdk_atom_intern("text/html", FALSE),
+				       16, (const guchar*)text, strlen(text));
+
+        } else {
+                gtk_selection_data_set_text(selection_data, text, strlen(text));
+        }
+
+        g_free (text);
+
+        return;
+}
+
+
 int main_get_max_verses (void)
 {
 	VerseKey key = settings.currentverse;
@@ -56,10 +107,27 @@ int main_get_current_verse (void)
 	return key.Verse();
 }
 
+/**
+ * _copy_to_clipboard:
+ * @text: #gchar text to copy
+ * @len: #gint length (unused now)
+ *
+ * Copies the data to the clipboard as HTML if applicable (that is, HTML data,
+ * so that smart word processors such as OO.o will preserve markup; at this point,
+ * the HTML is *not* preserving the font.
+ **/
 static void _copy_to_clipboard (char* text,int len)
 {
 	GtkClipboard *clipboard = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
-	gtk_clipboard_set_text (clipboard, text, len);
+
+	if (copy_text)
+		g_free (copy_text);
+	copy_text = g_strdup (text);
+	gtk_clipboard_set_with_data (clipboard, selection_targets,
+				     G_N_ELEMENTS (selection_targets),
+				     (GtkClipboardGetFunc)clipboardreq_get,
+				     NULL,
+				     NULL);
 }
 
 static void _save(char *filename, char* text,int len)
