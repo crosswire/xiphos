@@ -1,10 +1,4 @@
 #!/usr/bin/make -f
 %:
-	dh $@
-build:
-	dh build --before dh_auto_configure
-	./autogen.sh --prefix=/usr --enable-silent-rules
-	dh_auto_build
-	dh build --after dh_auto_test
-binary: build
-	dh binary --after dh_auto_test
+	PERLLIB=debian dh --buildsystem=waf_src $@
+
