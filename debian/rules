@@ -24,9 +24,9 @@ system=autoconf
 endif
 
 %:
-	PERLDIR=debian dh --parallel $(with) --buildsystem=$(system) $@
+	PERLLIB=debian dh --parallel $(with) --buildsystem=$(system) $@
 override_dh_install:
-	PERLDIR=debian dh_install --list-missing
+	PERLLIB=debian dh_install --list-missing
 override_dh_clean:
 	dh_clean
 	rm -rf .waf*
