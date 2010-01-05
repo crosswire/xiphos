@@ -233,9 +233,17 @@ gecko_init (void)
 
 	nsresult rv;
 #ifdef XPCOM_GLUE
+	//needs to be tested on lower gecko versions
+#ifdef HAVE_GECKO_1_9_1
+#define UPPER_RANGE "1.9.1.99"
+#define LOWER_RANGE "1.9.1"
+#else
+#define UPPER_RANGE "1.9.0.99"
+#define LOWER_RANGE "1.9.0"
+#endif
 	static const GREVersionRange greVersion = {
-		"1.9a", PR_TRUE,
-		"2", PR_TRUE
+		LOWER_RANGE, PR_TRUE,
+		UPPER_RANGE, PR_TRUE
 	};
 	char xpcomLocation[PATH_MAX];
 	rv = GRE_GetGREPathWithProperties(&greVersion, 1, nsnull, 0, xpcomLocation, sizeof (xpcomLocation));
