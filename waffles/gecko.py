@@ -107,7 +107,7 @@ class Gecko(object):
         check_pkgver(cfg, name, '1.8', var='GECKO_1_8')
         check_pkgver(cfg, name, '1.8.1', var='GECKO_1_8_1')
         check_pkgver(cfg, name, '1.9', var='GECKO_1_9')
-        check_pkgver(cfg, name, '1.9.1' var='GECKO_1_9_1')
+        check_pkgver(cfg, name, '1.9.1', var='GECKO_1_9_1')
 
     
     def get_gecko_includes(self, incldir):
