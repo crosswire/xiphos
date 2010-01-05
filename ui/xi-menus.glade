@@ -248,7 +248,7 @@
 		  <child>
 		    <widget class="GtkMenuItem" id="daily_devotion">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">_Daily Devotion</property>
+		      <property name="label" translatable="yes">Preview _Daily Devotion</property>
 		      <property name="use_underline">True</property>
 		      <signal name="activate" handler="on_daily_devotion_activate" last_modification_time="Fri, 06 Mar 2009 18:27:19 GMT"/>
 		    </widget>
