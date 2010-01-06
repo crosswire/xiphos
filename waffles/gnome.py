@@ -65,30 +65,20 @@ def init_gnome_doc(self):
 def apply_gnome_doc(self):
 	self.env['APPNAME'] = self.doc_module
 	lst = self.to_list(self.doc_linguas)
-	lst.append('C')
 	bld = self.bld
-
-	xmls = self.to_list(self.doc_includes)
-	xmls.append(self.doc_entities)
-	xmls.append(self.doc_module+'.xml')
+	lst.append('C')
 
 	for x in lst:
-		if bld.is_install: path = self.install_path + '/gnome/help/%s/%s' % (self.doc_module, x)
+		if not x == 'C':
+			tsk = self.create_task('xml2po')
+			node = self.path.find_resource(x+'/'+x+'.po')
+			src = self.path.find_resource('C/%s.xml' % self.doc_module)
+			out = self.path.find_or_declare('%s/%s.xml' % (x, self.doc_module))
+			tsk.set_inputs([node, src])
+			tsk.set_outputs(out)
+		else:
+			out = self.path.find_resource('%s/%s.xml' % (x, self.doc_module))
 
-		for xml in xmls:
-			if not x == 'C':
-				tsk = self.create_task('xml2po')
-				node = self.path.find_resource(x+'/'+x+'.po')
-				src = self.path.find_resource('C/%s' % xml)
-				out = self.path.find_or_declare('%s/%s' % (x, xml))
-				tsk.set_inputs([node, src])
-				tsk.set_outputs(out)
-			else:
-				out = self.path.find_resource('%s/%s' % (x, xml))
-
-			if bld.is_install:
-				bld.install_as(path + '/%s' % xml, out.abspath(self.env))
-				
 		tsk2 = self.create_task('xsltproc2po')
 		out2 = self.path.find_or_declare('%s/%s-%s.omf' % (x, self.doc_module, x))
 		tsk2.set_outputs(out2)
@@ -98,13 +88,21 @@ def apply_gnome_doc(self):
 		tsk2.run_after.append(tsk)
 
 		if bld.is_install:
-			bld.install_files(os.path.join(self.install_path, 'omf', self.doc_module, ''), out2, env=self.env)
+			path = self.install_path + '/gnome/help/%s/%s' % (self.doc_module, x)
+			bld.install_files(self.install_path + '/omf', out2, env=self.env)
 			for y in self.to_list(self.doc_figures):
 				try:
 					os.stat(self.path.abspath() + '/' + x + '/' + y)
 					bld.install_as(path + '/' + y, self.path.abspath() + '/' + x + '/' + y)
 				except:
 					bld.install_as(path + '/' + y, self.path.abspath() + '/C/' + y)
+			bld.install_as(path + '/%s.xml' % self.doc_module, out.abspath(self.env))
+			if x == 'C':
+				xmls = self.to_list(self.doc_includes)
+				xmls.append(self.doc_entities)
+				for z in xmls:
+					out = self.path.find_resource('%s/%s' % (x, z))
+					bld.install_as(path + '/%s' % z, out.abspath(self.env))
 
 # OBSOLETE
 class xml_to_taskgen(TaskGen.task_gen):
@@ -165,7 +163,7 @@ def apply_gnome_sgml2man(self):
 		name = out.name
 		ext = name[-1]
 		env = task.env
-		self.bld.install_files('${DATROOTADIR}/man/man%s/' % ext, out, env)
+		self.bld.install_files('${DATAROOTDIR}/man/man%s/' % ext, out, env)
 
 	self.bld.rescan(self.path)
 	for name in self.bld.cache_dir_contents[self.path.id]:
