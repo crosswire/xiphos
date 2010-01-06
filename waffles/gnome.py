@@ -26,7 +26,7 @@ def postinstall_schemas(prog_name):
 			Utils.pprint('YELLOW', 'gconftool-2 --install-schema-file=%s' % dir)
 
 def postinstall_icons():
-	dir = Build.bld.get_install_path('${DATADIR}/icons/hicolor')
+	dir = Build.bld.get_install_path('${DATAROOTDIR}/icons/hicolor')
 	if Build.bld.is_install:
 		if not Options.options.destdir:
 			# update the pixmap cache directory
@@ -42,7 +42,7 @@ def postinstall_scrollkeeper(prog_name):
 		# now the scrollkeeper update if we can write to the log file
 		if os.access('/var/log/scrollkeeper.log', os.W_OK):
 			dir1 = Build.bld.get_install_path('${PREFIX}/var/scrollkeeper')
-			dir2 = Build.bld.get_install_path('${DATADIR}/omf/%s' % prog_name)
+			dir2 = Build.bld.get_install_path('${DATAROOTDIR}/omf/%s' % prog_name)
 			command = 'scrollkeeper-update -q -p %s -o %s' % (dir1, dir2)
 			ret = Utils.exec_command(command)
 
@@ -165,7 +165,7 @@ def apply_gnome_sgml2man(self):
 		name = out.name
 		ext = name[-1]
 		env = task.env
-		self.bld.install_files('${DATADIR}/man/man%s/' % ext, out, env)
+		self.bld.install_files('${DATROOTADIR}/man/man%s/' % ext, out, env)
 
 	self.bld.rescan(self.path)
 	for name in self.bld.cache_dir_contents[self.path.id]:
@@ -212,7 +212,7 @@ def detect(conf):
 		return getattr(Options.options, varname, '')
 
 	# addefine also sets the variable to the env
-	conf.define('GNOMELOCALEDIR', os.path.join(conf.env['DATADIR'], 'locale'))
+	conf.define('GNOMELOCALEDIR', os.path.join(conf.env['DATAROOTDIR'], 'locale'))
 
 	xml2po = conf.find_program('xml2po', var='XML2PO')
 	xsltproc2po = conf.find_program('xsltproc', var='XSLTPROC2PO')
