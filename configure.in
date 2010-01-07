@@ -57,7 +57,7 @@ AS_IF([test "x$with_gecko" != "xno"], [
 GECKO_DEFINES
 AM_CONDITIONAL([HAVE_GECKO],[test "$gecko_cv_have_gecko" = "yes"])
 
-REQUIRED_LIBS="glib-2.0 gtk+-2.0 >= 2.12 libxml-2.0 libglade-2.0 libgtkhtml-3.14 sword dbus-glib-1 libgsf-1"
+REQUIRED_LIBS="glib-2.0 gtk+-2.0 >= 2.12 libxml-2.0 libglade-2.0 libgtkhtml-3.14 >= 3.23  sword dbus-glib-1 libgsf-1 gtkhtml-editor"
 
 AC_DEFINE(HAVE_DBUS, 1, [Define to enable dbus])
 
@@ -73,28 +73,6 @@ PKG_CHECK_EXISTS(gtk+-unix-print-2.0,
 			[REQUIRED_LIBS="$REQUIRED_LIBS gtk+-unix-print-2.0"]
 			AC_MSG_RESULT([yes])],
 		[AC_MSG_RESULT([no])])
-
-AC_ARG_WITH([editor],
-    AS_HELP_STRING([--without-editor], [Ignore presence of gtkhtml-editor and use bonobo-editor instead]))
-
-AC_MSG_CHECKING([for editor])
-
-AS_IF([test "x$with_editor" != "xno"],
-      [PKG_CHECK_EXISTS([libgtkhtml-3.14 > 3.23 gtkhtml-editor], [have_editor=yes], [have_editor=no])],
-      [have_editor=no])
-
-AS_IF([test "x$have_editor" = "xyes"],
-      [AC_MSG_RESULT([gtkhtml-editor])
-      AC_DEFINE(USE_GTKHTML3_14_23, 1, [Define if you want to use GtkHtml-3.14])
-      REQUIRED_LIBS="$REQUIRED_LIBS gtkhtml-editor"
-      AM_CONDITIONAL(USE_GTKHTML_BONOBO_EDITOR, false)],
-      [AC_MSG_RESULT([bonobo])
-      AS_IF([test "x$with_editor" = "xyes"],
-            [AC_MSG_ERROR([gtkhtml-editor requested but not found])],
-	    [AM_CONDITIONAL(USE_GTKHTML_BONOBO_EDITOR, true)
-	    AC_SUBST(ORBIT_IDL, [`$PKG_CONFIG --variable=orbit_idl ORBit-2.0`])
-	    AC_SUBST(BONOBO_IDL_INCLUDES, ["-I`$PKG_CONFIG --variable=idldir libbonobo-2.0` -I`$PKG_CONFIG --variable=idldir bonobo-activation-2.0`"])])
-])
 
 AC_MSG_CHECKING([for gtk+-2.14])
 AC_ARG_WITH([gnome], AS_HELP_STRING([--with-gtk214], [Compile using gtk+-2.14 or better]))

@@ -3,8 +3,7 @@
 
 def build(bld):
 
-    source = 'slib-editor.c link_dialog.c' if bld.env['HAVE_EDITOR_IDL'] else \
-        'bonobo-editor.c Editor-common.c Editor-skels.c Editor-stubs.c'
+    source = 'slib-editor.c link_dialog.c'
 
     bld.new_task_gen(
         features='cc cxx', # compile C with gcc, C++ with g++

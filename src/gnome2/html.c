@@ -60,7 +60,6 @@ static GtkHTMLStreamStatus status1;
 gboolean in_url;
 
 
-#ifdef USE_GTKHTML3_14_23
 static void
 handle_error (GError **error)
 {
@@ -69,7 +68,6 @@ handle_error (GError **error)
 		g_clear_error (error);
 	}
 }
-#endif
 
 
 /******************************************************************************
@@ -528,7 +526,6 @@ void gui_display_html(GtkWidget * html, const gchar * txt, gint lentxt)
 }
 
 
-#ifdef USE_GTKHTML3_14_23
 static gint
 _calc_header_height (GtkHTML *html, GtkPrintOperation *operation,
                          GtkPrintContext *context)
@@ -659,7 +656,6 @@ _draw_footer (GtkHTML *html, GtkPrintOperation *operation,
 
 	g_free (text);
 }
-#endif
 
 /******************************************************************************
  * Name
@@ -679,8 +675,6 @@ _draw_footer (GtkHTML *html, GtkPrintOperation *operation,
 
 void gui_html_print(GtkWidget * htmlwidget, gboolean preview, const gchar * mod_name)
 {
-#ifdef USE_GTKHTML3_14_23
-	
 	GtkPrintOperation *operation;
 	GtkPrintSettings *psettings;
 	GtkPageSetup *setup;
@@ -722,5 +716,4 @@ void gui_html_print(GtkWidget * htmlwidget, gboolean preview, const gchar * mod_
 
 	g_object_unref (operation);
 	handle_error (&error);
-#endif
 }
