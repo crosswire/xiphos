@@ -364,38 +364,14 @@ def configure(conf):
 
 
     #here gtkhtml
-    conf.check_pkg('libgtkhtml-3.14', mandatory=True, var='GTKHTML')
+    conf.check_pkg('libgtkhtml-3.14', version='3.23', mandatory=True, var='GTKHTML')
 
     if conf.env['HAVE_GTKHTML']:
 	conf.define('USE_GTKHTML3_14', 1)
 
     conf.define('GTKHTML_API_VERSION', conf.get_pkgvar('libgtkhtml-3.14', 'gtkhtml_apiversion'))
-    conf.check_pkgver('libgtkhtml-3.14', '3.23', var='EDITOR_IDL')
 
-    if conf.env['HAVE_EDITOR_IDL']:
-	conf.check_pkg('gtkhtml-editor', mandatory=True, var='GTKHTML_EDITOR')
-	conf.define('USE_GTKHTML3_14_23', 1)
-
-
-    # bonobo editor variant, slib-editor otherwise
-    if not env['HAVE_EDITOR_IDL']:
-
-        ### editor.py
-        conf.check_pkg('ORBit-2.0', mandatory=True)
-        conf.check_pkg('libbonobo-2.0', mandatory=True)
-        conf.check_pkg('bonobo-activation-2.0', mandatory=True)
-
-        # ORBIT_IDL
-        env['ORBIT_IDL'] = conf.get_pkgvar('ORBit-2.0', 'orbit_idl')
-
-        # BONOBO_IDL_INCLUDES
-        idl1 = conf.get_pkgvar('libbonobo-2.0', 'idldir')
-        idl2 = conf.get_pkgvar('bonobo-activation-2.0', 'idldir')
-
-        env['BONOBO_IDL_INCLUDES'] = '-I%s -I%s' % (idl1, idl2)
-        ### END editor.py
-
-
+    conf.check_pkg('gtkhtml-editor', mandatory=True)
 
     ######################
     ### gecko (xulrunner) for html rendering

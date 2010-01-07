@@ -28,11 +28,7 @@
 #include <ctype.h>
 #include <time.h>
 
-#ifdef USE_GTKHTML3_14_23
 #include "editor/slib-editor.h"
-#else
-#include "editor/bonobo-editor.h"
-#endif
 
 #include "gui/xiphos.h"
 #include "gui/bookmarks_treeview.h"
@@ -268,7 +264,6 @@ void shutdown_frontend(void)
 
 	/* if study pad file has changed since last save */
 
-	editor_close_all();
 
 	xml_save_settings_doc(settings.fnconfigure);
 	xml_free_settings_doc();

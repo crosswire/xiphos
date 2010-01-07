@@ -52,11 +52,7 @@
 #include "gui/tabbed_browser.h"
 #include "gui/widgets.h"
 
-#ifdef USE_GTKHTML3_14_23
 #include "editor/slib-editor.h"
-#else
-#include "editor/bonobo-editor.h"
-#endif
 
 #include "main/settings.h"
 #include "main/lists.h"

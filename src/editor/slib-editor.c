@@ -27,7 +27,6 @@
  
 #include <glib.h>
 
-#ifdef USE_GTKHTML3_14_23
 
 #include <libintl.h>
 #include <locale.h>
@@ -125,7 +124,6 @@ void change_window_title(GtkWidget * window, const gchar * window_title)
 }
 
 
-#ifdef USE_GTKHTML3_14
 #if 0
 static gint
 _calc_header_height (GtkHTML *html, GtkPrintOperation *operation,
@@ -298,7 +296,7 @@ _do_print (EDITOR * e,
 	return result;
 }
 #endif /* 0 */
-#endif
+
 
 
 
@@ -1153,23 +1151,6 @@ void editor_load_book(EDITOR * e)
  *   void
  */
 
-void editor_sync_toggled(GtkToggleButton * button, EDITOR * e)
-{/*
-#ifdef USE_GTKHTML3_14_23
-	
-#else
-	if (button->active) {
-		if (editor_is_dirty(e))
-			save_through_persist_stream_cb(NULL, (EDITOR*)e);
-		editor_load_note(e, NULL,settings.currentverse);
-		e->sync = TRUE;
-	}
-	else		
-		e->sync = FALSE;
-#endif*/
-}
-
-
 void editor_sync_with_main(void)
 {
 	GList *tmp = NULL;
@@ -1184,7 +1165,6 @@ void editor_sync_with_main(void)
 			case BOOK_EDITOR:
 				break;			
 			case NOTE_EDITOR:
-			editor_sync_toggled(GTK_TOGGLE_BUTTON(e->navbar.button_sync), e);
 			break;
 		}
 		tmp = g_list_next(tmp);
@@ -1243,27 +1223,6 @@ editor_load_note(EDITOR * e, const gchar * module_name,
 		g_free(title);
 }
 
-
-gboolean editor_close_all(void)
-{
-/*
-	GList *tmp = NULL;
-	EDITOR *e = NULL;
-#ifdef USE_GTKHTML3_14_23
-	
-#else	
-	tmp = g_list_first(editors_all);
-	GS_message(("number of editors = %d",g_list_length(tmp)));
-	while (tmp != NULL) {
-		e = (EDITOR*)tmp->data;
-		if (e->window)
-			do_exit(e);			
-		tmp = g_list_next(tmp);
-	}
-	g_list_free(editors_all);
-#endif*/
-	return TRUE;
-}
 
 static int
 app_delete_cb(GtkWidget * widget, GdkEvent * event, gpointer data)
@@ -1563,4 +1522,3 @@ void editor_maybe_save_all(void)
 	}
 }
 
-#endif /* USE_GTKHTML3_14_23 */

@@ -27,11 +27,7 @@
 #include <glade/glade-xml.h>
 
 
-#ifdef USE_GTKHTML3_14_23
 #include "editor/slib-editor.h"
-#else
-#include "editor/bonobo-editor.h"
-#endif
 
 #include "gui/navbar_versekey_editor.h"
 #include "gui/bibletext_dialog.h"
@@ -805,9 +801,6 @@ void _connect_signals(NAVBAR_VERSEKEY navbar, EDITOR * editor)
 			 "clicked", G_CALLBACK(on_verse_button_down_clicked),
 			 editor);
 			 */
-	g_signal_connect((gpointer) navbar.button_sync,
-			 "clicked", G_CALLBACK(G_CALLBACK(editor_sync_toggled)),
-			 editor);
 	g_signal_connect((gpointer) navbar.button_book_menu,
 			 "button_press_event",
 			 G_CALLBACK(select_book_button_press_callback), 
