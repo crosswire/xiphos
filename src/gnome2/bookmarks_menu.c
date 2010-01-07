@@ -54,11 +54,7 @@
 #include "main/module_dialogs.h"
 #include "main/url.hh"
 
-#ifdef USE_GTKHTML3_14_23
 #include "editor/slib-editor.h"
-#else
-#include "editor/bonobo-editor.h"
-#endif
 
 #include "gui/debug_glib_null.h"
 

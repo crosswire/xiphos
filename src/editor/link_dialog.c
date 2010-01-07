@@ -22,7 +22,6 @@
  
 #include <config.h>
  
-#ifdef USE_GTKHTML3_14_23
 
 #include <gtk/gtk.h>
 #include <sys/types.h>
@@ -161,4 +160,3 @@ editor_link_dialog (EDITOR *e)
 }
 /************* end link dialog ****************/
 
-#endif /* USE_GTKHTML3_14_23 */

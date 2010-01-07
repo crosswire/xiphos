@@ -34,11 +34,7 @@
 #include "gui/navbar_versekey.h"
 #include "gui/tabbed_browser.h"
 
-#ifdef USE_GTKHTML3_14_23
 #include "editor/slib-editor.h"
-#else
-#include "editor/bonobo-editor.h"
-#endif
 
 #include "backend/sword_main.hh"
 

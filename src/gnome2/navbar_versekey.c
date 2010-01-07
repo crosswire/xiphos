@@ -26,11 +26,7 @@
 #include <gtk/gtk.h>
 #include <glade/glade-xml.h>
 
-#ifdef USE_GTKHTML3_14_23
 #include "editor/slib-editor.h"
-#else
-#include "editor/bonobo-editor.h"
-#endif
 
 #include "gui/navbar_versekey.h"
 #include "gui/bibletext_dialog.h"

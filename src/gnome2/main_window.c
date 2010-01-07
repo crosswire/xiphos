@@ -67,11 +67,7 @@
 #include "gui/tabbed_browser.h"
 #include "gui/menu_popup.h"
 
-#ifdef USE_GTKHTML3_14_23
 #include "editor/slib-editor.h"
-#else
-#include "editor/bonobo-editor.h"
-#endif /* !USE_GTKHTML3_14_23 */
 
 #include "gui/debug_glib_null.h"
 
