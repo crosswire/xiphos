@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xiphos\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-12-17 11:39+0000\n"
-"PO-Revision-Date: 2009-12-17 12:57-0500\n"
+"PO-Revision-Date: 2010-01-11 15:36-0500\n"
 "Last-Translator: Thomas Abthorpe <tabthorpe@FreeBSD.org>\n"
 "Language-Team: British English <gnomesword-developers@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -1963,7 +1963,6 @@ msgid "chapter"
 msgstr "chapter"
 
 #: ../src/main/sword.cc:537
-#, fuzzy
 msgid ""
 "Xiphos's file for language\n"
 "abbreviations is missing."
@@ -1972,7 +1971,6 @@ msgstr ""
 "abbreviations is missing."
 
 #: ../src/main/sword.cc:544
-#, fuzzy
 msgid ""
 "Xiphos's language abbreviation\n"
 "file cannot be opened."
