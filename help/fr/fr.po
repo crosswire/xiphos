@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Xiphos 3.1.2\n"
 "Report-Msgid-Bugs-To: Dominique Corbex <domcox@users.sourceforge.net>>\n"
 "POT-Creation-Date: 2010-01-11 21:09+0200\n"
-"PO-Revision-Date: 2009-12-12 13:58+0100\n"
+"PO-Revision-Date: 2010-01-12 22:24+0100\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>>\n"
 "Language-Team: emacs + po-mode; French <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -1276,14 +1276,12 @@ msgstr "Traduction française"
 
 #. to V3.0, and so on.
 #: C/xiphos.xml:147(releaseinfo)
-#, fuzzy
 msgid "This manual describes version 3.1.2 of Xiphos."
 msgstr ""
 "Ce manuel documente la version &manrevision; de <application>&appname;</"
 "application>"
 
 #: C/xiphos.xml:151(revnumber)
-#, fuzzy
 msgid "Xiphos Manual V3.1.2"
 msgstr "Manuel de Xiphos &manrevision;"
 
