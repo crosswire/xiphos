@@ -58,14 +58,13 @@ DOC_FIGURES = '''
 '''
 
 
-def build(bld):
-    if bld.env['IS_LINUX']:
-        obj = bld.new_task_gen('gnome_doc')
-    else:
-        obj = bld.new_task_gen('xml_doc')
-    obj.doc_module = 'xiphos'
-    obj.doc_entities = 'legal.xml'
-    obj.doc_includes = DOC_INCLUDES
-    obj.doc_figures = DOC_FIGURES
-    obj.doc_linguas = DOC_LINGUAS
+if bld.env['IS_LINUX']:
+    obj = bld.new_task_gen('gnome_doc')
+else:
+    obj = bld.new_task_gen('xml_doc')
+obj.doc_module = 'xiphos'
+obj.doc_entities = 'legal.xml'
+obj.doc_includes = DOC_INCLUDES
+obj.doc_figures = DOC_FIGURES
+obj.doc_linguas = DOC_LINGUAS
 

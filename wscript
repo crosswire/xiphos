@@ -443,9 +443,6 @@ def configure(conf):
 
     conf.write_config_header('config.h')
 
-    # process configure for subfolders
-    conf.sub_config('src/gnome2') # generate locale_set.c
-
     env.append_value('CCFLAGS', env['CCFLAGS_SAFE'])
     env.append_value('CXXFLAGS', env['CXXFLAGS_SAFE'])
 

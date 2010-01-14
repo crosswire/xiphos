@@ -5,7 +5,7 @@
 # 2-char "language-only" names.  convert the latter.
 #
 ( echo 'char *locale_set[] = { '
-sed -e 's/en_GB/& en_US/' < ../../po/LINGUAS |
+sed -e 's/en_GB/& en_US/' < $1 |
 tr ' ' '\n' |
 while read l ; do
     case "$l" in
