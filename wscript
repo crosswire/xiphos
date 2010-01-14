@@ -164,8 +164,8 @@ def configure(conf):
         Utils.pprint('CYAN', "Linux detected")
 
     if not (env['IS_LINUX'] or env['IS_WIN32']):
-        Utils.pprint('RED', "Unknown or unsupported platform")
-        exit(1)
+        Utils.pprint('RED', "Assuming %s is UNIX like platform" % platform)
+        env['IS_LINUX'] = True
 
     ## temporary HACKS for win32
     if env['IS_WIN32']:
@@ -184,6 +184,7 @@ def configure(conf):
     conf.check_tool('intltool') # check for locale.h included
 
     opt = Options.options
+    env['DISABLE_HELP'] = opt.disable_help
 
     if not opt.disable_help:
         if env['IS_LINUX']:
@@ -509,7 +510,7 @@ def build(bld):
     # WIN32: chm
     # Other OS: just xml
     # FIXME create and install help doesnt work yet on windows
-    if not opt.disable_help:
+    if not bld.env['DISABLE_HELP']:
         bld.add_subdirs('help')
 
     if bld.env['INTLTOOL']:
