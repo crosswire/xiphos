@@ -470,7 +470,6 @@ def build(bld):
         README
 	RELEASE-NOTES
 	COPYING
-	COPYING-DOCS
 	AUTHORS
 	ChangeLog
 	INSTALL
