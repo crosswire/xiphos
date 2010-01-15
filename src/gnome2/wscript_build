@@ -73,9 +73,9 @@ lib.allnodes.append(bld.path.find_or_declare('locale_set.c'))
 if env['HAVE_DBUS']:
     lib.add_dbus_file('ipc-interface.xml', 'ipc_object', 'glib-server')
     lib.add_marshal_file('marshal.list', 'ipc_marshal')
-    lib.find_sources_in_dirs('.')
+    lib.find_sources_in_dirs('.', excludes=['marshal.c'])
 else:
-    lib.find_sources_in_dirs('.', excludes=['ipc.c',])
+    lib.find_sources_in_dirs('.', excludes=['ipc.c', 'marshal.c'])
 
 
 @feature('cc')

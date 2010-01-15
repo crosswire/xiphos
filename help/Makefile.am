@@ -54,3 +54,5 @@ DOC_FIGURES = 	figures/first_start.png \
 
 # add "de" when it's farther along
 DOC_LINGUAS =	fr fa
+
+EXTRA_DIST = wscript_build
