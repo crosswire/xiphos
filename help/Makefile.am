@@ -14,8 +14,6 @@ DOC_INCLUDES = 	introduction.xml \
 		studypad.xml \
 		personal.xml \
 		journals.xml \
-		authors.xml \
-		license.xml \
 		onlinehelp.xml \
 		originallanguage.xml	
 

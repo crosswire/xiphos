@@ -15,8 +15,6 @@ DOC_INCLUDES = '''
     studypad.xml
     personal.xml
     journals.xml
-    authors.xml
-    license.xml
     onlinehelp.xml
     originallanguage.xml
 '''
