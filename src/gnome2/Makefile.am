@@ -2,6 +2,8 @@ bin_PROGRAMS = xiphos
 
 BUILT_SOURCES = ipc-interface.h marshal.h locale_set.c
 
+nodist_xiphos_SOURCES= $(BUILT_SOURCES)
+
 xiphos_SOURCES =  \
     about_modules.c \
     about_sword.c \
@@ -54,23 +56,20 @@ xiphos_SOURCES =  \
     utilities.c \
     xiphos.c
 
-locale_set.c: $(top_srcdir)/po/LINGUAS make-locale-set.sh
-	sh ./make-locale-set.sh $(top_srcdir)/po/LINGUAS > locale_set.c
-
-xiphos-locale_set.o: locale_set.c
-	$(CC) $< -c -o $@
+locale_set.c: $(top_srcdir)/po/LINGUAS $(top_srcdir)/src/gnome2/make-locale-set.sh
+	sh $(top_srcdir)/src/gnome2/make-locale-set.sh $(top_srcdir)/po/LINGUAS > $@
 
 marshal.c:
-	glib-genmarshal --body --prefix=ipc_marshal marshal.list \
+	glib-genmarshal --body --prefix=ipc_marshal $(top_srcdir)/src/gnome2/marshal.list \
 	$< > $@
 	sed -i -e 's;<glib-object.h>;"marshal.h";' $@
 
 marshal.h:
-	glib-genmarshal --header --prefix=ipc_marshal marshal.list \
+	glib-genmarshal --header --prefix=ipc_marshal $(top_srcdir)/src/gnome2/marshal.list \
 	$< > $@
 
 ipc-interface.h:
-	dbus-binding-tool --prefix=ipc_object --mode=glib-server ipc-interface.xml \
+	dbus-binding-tool --prefix=ipc_object --mode=glib-server $(top_srcdir)/src/gnome2/ipc-interface.xml \
 	$< > $@
 
 xiphos_CPPFLAGS =  \
@@ -127,12 +126,14 @@ xiphos_LDADD = \
 	$(GNOME_SPELL_LIBS) \
 	$(GECKO_COMPONENT_LIBS) \
 	$(GECKO_LIBS) \
-	$(DBUS_LIBS) \
-	./xiphos-locale_set.o
+	$(DBUS_LIBS)
 
 EXTRA_DIST = \
-    $(top_builddir)/src/gui/*.h \
+    $(top_builddir)/src/gui \
     ipc-interface.xml \
     make-locale-set.sh \
     marshal.list \
-    wscript
+    wscript_build
+
+CLEANFILES = \
+	$(BUILT_SOURCES)
