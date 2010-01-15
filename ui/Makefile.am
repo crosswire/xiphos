@@ -33,4 +33,4 @@ uidir = $(pkgdatadir)
 
 uixmldir = $(datadir)/gnome-2.0/ui
 
-EXTRA_DIST = $(ui_DATA)
+EXTRA_DIST = $(ui_DATA) wscript_build

@@ -36,6 +36,7 @@ EXTRA_DIST = \
 	m4/gecko.m4 \
 	waf \
 	wscript \
+	po/wscript_build \
 	waffles \
         src/examples/ipc_client.c \
 	src/examples/ipc_client.py \
