@@ -43,4 +43,4 @@ libmain_a_CPPFLAGS = $(DISABLE_DEPRECATED) \
 	-UGTK_DISABLE_SINGLE_INCLUDES
 
 EXTRA_DIST = \
-	wscript
+	wscript_build

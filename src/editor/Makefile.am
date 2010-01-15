@@ -11,4 +11,4 @@ libeditor_a_CFLAGS = \
 	$(WARN_CFLAGS)
 
 EXTRA_DIST = \
-	wscript
+	wscript_build

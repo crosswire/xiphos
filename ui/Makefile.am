@@ -27,7 +27,7 @@ ui_DATA = \
 	languages \
 	editor_link_dialog.xml \
 	editor_studypad.xml \
-	editor_note.xml 
+	editor_note.xml
 
 uidir = $(pkgdatadir)
 

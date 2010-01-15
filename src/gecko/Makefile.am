@@ -71,4 +71,4 @@ endif
 
 EXTRA_DIST = \
 	README \
-	wscript
+	wscript_build
