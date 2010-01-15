@@ -1,12 +1,14 @@
 ## Process this file with automake to produce Makefile.in
 
+SUBDIRS = doc po src ui help pixmaps
+
 desktopdir = $(datadir)/applications
 desktop_in_files = @PACKAGE@.desktop.in.in
 desktop_DATA = $(desktop_in_files:.desktop.in.in=.desktop)
 
 @INTLTOOL_DESKTOP_RULE@
 
-SUBDIRS = doc po src ui help pixmaps
+
 
 DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper
 
@@ -14,7 +16,6 @@ dist_doc_DATA = \
 	README \
 	RELEASE-NOTES \
 	COPYING \
-	COPYING-DOCS \
 	AUTHORS \
 	ChangeLog \
 	INSTALL \
@@ -29,23 +30,19 @@ EXTRA_DIST = \
 	${PACKAGE}.spec.in \
 	${PACKAGE}.spec \
 	gnome-doc-utils.make \
-	intltool-extract.in \
-	intltool-merge.in \
-	intltool-update.in \
+	xmldocs.make \
+	omf.make \
 	TRANSLATION-HOWTO \
-	m4/* \
+	m4/gecko.m4 \
 	waf \
 	wscript \
-	waffles/__init__.py \
-	waffles/editor.py \
-	waffles/gecko.py \
-	waffles/gtkhtml.py \
-	waffles/misc.py \
-	src/examples/ipc_client.c \
+	waffles \
+        src/examples/ipc_client.c \
 	src/examples/ipc_client.py \
 	src/examples/Makefile
 
-DISTCLEANFILES = gnome-doc-utils.make
+CLEANFILES = \
+	$(desktop_DATA)
 
 rpm: dist
 	rpmbuild -ta $(distdir).tar.gz
