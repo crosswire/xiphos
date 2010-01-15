@@ -8,7 +8,6 @@ import intltool
 # waf imports
 import Utils
 import Options
-import Scripting
 import ccroot
 
 
@@ -21,7 +20,6 @@ import waffles.gnome as gnome
 VERSION='3.1.2'
 APPNAME='xiphos'
 PACKAGE='xiphos'
-Scripting.g_gz = 'gz'
 
 
 
@@ -530,6 +528,12 @@ def dist_hook():
     shutil.rmtree('win32')
 
 def run(ctx):
-    '''Matthew Talbert special - run xiphos from build directory'''
+    '''Execute xiphos binary from build directory'''
     import subprocess
     subprocess.call(os.path.join(blddir,'default/src/gnome2/xiphos'))
+
+def dist(ctx):
+    import Scripting
+    Scripting.dist()
+    Scripting.g_gz = 'gz'
+    Scripting.dist()
