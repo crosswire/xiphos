@@ -68,7 +68,9 @@ void gui_init(int argc, char *argv[])
 	g_free (locale_dir);
 #endif
 #ifdef HAVE_GTK214	
-	gtk_init(&argc, &argv);
+	if (!gtk_init_with_args(&argc, &argv, NULL, NULL, NULL, NULL)) {
+	    exit(1);
+	};
 #else
 	gnome_program_init (PACKAGE, VERSION, LIBGNOMEUI_MODULE,
 			    argc, argv,
