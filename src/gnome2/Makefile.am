@@ -73,7 +73,6 @@ ipc-interface.h:
 	$< > $@
 
 xiphos_CPPFLAGS =  \
-	-DGECKO_HOME=\""$(GECKO_HOME)\""  \
 	-DPREFIX=\""$(prefix)"\" \
 	-DSYSCONFDIR=\""$(sysconfdir)"\" \
 	-DDATADIR=\""$(datadir)"\" \
@@ -89,7 +88,6 @@ xiphos_CFLAGS = \
 	-I$(top_srcdir)/src \
 	$(XIPHOS_CFLAGS) \
 	$(GECKO_CFLAGS) \
-	$(GECKO_COMPONENT_CFLAGS) \
 	$(WARN_CFLAGS) \
 	$(DBUS_CFLAGS) \
 	$(DBUS_GLIB_CFLAGS)
@@ -97,7 +95,6 @@ xiphos_CFLAGS = \
 xiphos_CXXFLAGS = \
 	-I$(top_srcdir)/src \
 	$(GECKO_CFLAGS) \
-	$(GECKO_COMPONENT_CFLAGS) \
 	$(XIPHOS_CFLAGS) \
 	$(WARN_CXXFLAGS) \
 	$(DBUS_CXXFLAGS)
@@ -113,7 +110,6 @@ xiphos_LDADD = \
 	$(top_builddir)/src/editor/libeditor.a\
 	$(XIPHOS_LIBS) \
 	$(GNOME_SPELL_LIBS) \
-	$(GECKO_COMPONENT_LIBS) \
 	$(GECKO_LIBS) \
 	$(DBUS_LIBS)
 

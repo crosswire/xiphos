@@ -30,14 +30,14 @@ AC_SUBST(xiphos_exec, [[xiphos]])
 
 REQUIRED_LIBS="glib-2.0 gtk+-2.0 >= 2.12 libxml-2.0 libglade-2.0 libgtkhtml-3.14 >= 3.23  sword dbus-glib-1 libgsf-1 gtkhtml-editor"
 
+AC_ARG_WITH([gecko], AS_HELP_STRING([--without-gecko], [Compile using gtkhtml backend instead]))
+
 AS_IF([test "x$with_gecko" != "xno"], [
 	    AC_DEFINE(USE_GTKMOZEMBED, 1, [Define if you want to use gtkmozembed])
 	    PKG_CHECK_MODULES(GECKO, libxul-embedding > 1.9.1)
 	    GECKO_CFLAGS="`$PKG_CONFIG --define-variable=includetype=unstable --cflags libxul-embedding`"
-	    AC_DEFINE(HAVE_GECKO, 1, [Define to enable dbus])
-	    AC_DEFINE(HAVE_GECKO_1_9, 1, [Define to enable dbus])
-	    AC_DEFINE(HAVE_GECKO_1_9_1, 1, [Define to enable dbus])
-	    AC_DEFINE(HAVE_GECKO_1_8_1, 1, [Define to enable dbus])
+	    GECKO_HOME="`$PKG_CONFIG --variable=sdkdir libxul-embedding`"
+	    AC_DEFINE_UNQUOTED(GECKO_HOME, ["$GECKO_HOME"], [Gecko sdkdir])
 	    have_gecko=true
 	    ],[
 	    AC_MSG_CHECKING([[for GECKO]])
@@ -45,10 +45,6 @@ AS_IF([test "x$with_gecko" != "xno"], [
 	    AC_DEFINE(GTKHTML, 1, [Define if wish to use gtkhtml instead of gtkmozembed])])
 
 AM_CONDITIONAL(HAVE_GECKO, test x$have_gecko = xtrue)
-AM_CONDITIONAL(HAVE_GECKO_1_9, test x$have_gecko = xtrue)
-AM_CONDITIONAL(HAVE_GECKO_1_9_1, test x$have_gecko = xtrue)
-AM_CONDITIONAL(HAVE_GECKO_1_8_1, test x$have_gecko = xtrue)
-AM_CONDITIONAL(HAVE_GECKO_HOME, test x$have_gecko = xfalse)
 
 AC_DEFINE(HAVE_DBUS, 1, [Define to enable dbus])
 
