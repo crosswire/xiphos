@@ -124,6 +124,12 @@ def set_options(opt):
                    help = "Disable GNOME [Default: enabled]",
                    dest = 'without_gnome')
 
+    opt.add_option('--no-post-install',
+                   action = 'store_false',
+                   default = True,
+                   help = "Disable post-install tasks",
+                   dest = 'post_install')
+
     group = opt.add_option_group ('Localization and documentation', '')
     group.add_option('--helpdir',
 		action = 'store',
@@ -192,9 +198,12 @@ def configure(conf):
     # DATADIR is defined by intltool in config.h - conflict in win32 (mingw)
     conf.undefine('DATADIR')
 
+    env['POST_INSTALL']=opt.post_install
+
     if env['IS_WIN32']:
         # tool to link icon with executable
         # use tool modified for cross-compilation support
+        env['POST_INSTALL']=False
         conf.check_tool('winres', tooldir=_tooldir)
         # the following line does not work because of a problem with waf
         # conf.check_tool('intltool')
@@ -536,9 +545,9 @@ def build(bld):
     #	bld.add_subdirs('man')
 
     def post(ctx):
-        # Postinstall tasks:
-        gnome.postinstall_scrollkeeper('xiphos') # Installing the user docs
-        gnome.postinstall_icons() # Updating the icon cache
+        if bld.env['POST_INSTALL']:
+            gnome.postinstall_scrollkeeper('xiphos') # Installing the user docs
+            gnome.postinstall_icons() # Updating the icon cache
 
     bld.add_post_fun(post)
 
