@@ -23,8 +23,6 @@ dist_doc_DATA = \
 	TODO \
 	Xiphos.ogg
 
-ACLOCAL_AMFLAGS = -I m4
-
 EXTRA_DIST = \
 	${PACKAGE}.desktop.in.in \
 	${PACKAGE}.spec.in \
@@ -33,7 +31,6 @@ EXTRA_DIST = \
 	xmldocs.make \
 	omf.make \
 	TRANSLATION-HOWTO \
-	m4/gecko.m4 \
 	waf \
 	wscript \
 	po/wscript_build \
