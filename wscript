@@ -12,7 +12,6 @@ import ccroot
 
 
 # custom imports
-from waffles.gecko import Gecko
 import waffles.misc
 import waffles.gnome as gnome
 
@@ -376,10 +375,30 @@ def configure(conf):
     ### gecko (xulrunner) for html rendering
     # gtkhtml only for editor
     if not env['ENABLE_GTKHTML']:
-        Gecko(conf).detect()
-        dfn('USE_GTKMOZEMBED', 1)
-        #env.append_value('CCFLAGS', env['GECKO_CCFLAGS'])
-        #env.append_value('CXXFLAGS', env['GECKO_CCFLAGS'])
+        if not env["IS_WIN32"]:
+
+            conf.check_cfg (package='libxul-embedding',
+                            uselib_store='GECKO',
+                            args='--define-variable=includetype=unstable --cflags --libs',
+                            atleast_version='1.9.1')
+            conf.define('GECKO_HOME', conf.get_pkgvar('libxul-embedding', 'sdkdir'))
+        else:
+                    d = env['MOZILLA_DISTDIR']
+                    conf.define['CPPPATH_GECKO'] = ['%s/sdk/include' % d,
+                                                '%s/include' % d,
+                                                '%s/include/widget' % d,
+                                                '%s/include/xpcom' % d,
+                                                '%s/include/dom' % d,
+                                                '%s/include/content' % d,
+                                                '%s/include/layout' % d,
+                                                '%s/include/gfx' % d]
+                    conf.define['LIBPATH_GECKO'] = ['%s/sdk/lib' % d]
+                    conf.define['LIB_GECKO'] = ['xpcomglue_s', 'xpcom', 'xul', 'nspr4']
+
+        env.append_value('ALL_LIBS', 'GECKO')
+        conf.define('USE_GTKMOZEMBED', 1)
+
+
     ######################
 
 
