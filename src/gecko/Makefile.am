@@ -33,40 +33,6 @@ endif
 libgecko_a_CPPFLAGS += $(DISABLE_DEPRECATED) \
 	-UGTK_DISABLE_SINGLE_INCLUDES
 
-if HAVE_GECKO_1_9
-else
-if HAVE_GECKO_1_8_1
-mozilla_include_subdirs =	\
-        .		\
-        commandhandler  \
-        content		\
-        docshell	\
-        browser		\
-        dom		\
-        fastfind	\
-        find		\
-        gtkembedmoz	\
-        gfx		\
-        layout		\
-        necko		\
-        nspr		\
-        pref		\
-        string		\
-        uriloader	\
-        webbrwsr	\
-        webshell	\
-        widget		\
-        xpcom
-
-libgecko_a_CXXFLAGS += \
-	$(addprefix -I$(GECKO_INCLUDE_ROOT)/,$(mozilla_include_subdirs))
-
-libgecko_a_CFLAGS += \
-	$(addprefix -I$(GECKO_INCLUDE_ROOT)/,$(mozilla_include_subdirs))
-
-endif
-endif
-
 endif
 
 EXTRA_DIST = \

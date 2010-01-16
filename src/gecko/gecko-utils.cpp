@@ -38,10 +38,8 @@
 # undef NS_EXPORT_
 #endif
 
-#ifdef HAVE_GECKO_1_9
 #ifdef XPCOM_GLUE
 #include <gtkmozembed_glue.cpp>
-#endif
 #endif
 
 #include <gtkmozembed.h>
@@ -227,20 +225,13 @@ gecko_init (void)
 {
     	GError *err = NULL;
 	gchar *fontname = NULL;
-#ifdef HAVE_GECKO_1_9
 	NS_LogInit ();
-#endif
 
 	nsresult rv;
 #ifdef XPCOM_GLUE
 	//needs to be tested on lower gecko versions
-#ifdef HAVE_GECKO_1_9_1
 #define UPPER_RANGE "1.9.1.99"
 #define LOWER_RANGE "1.9.1"
-#else
-#define UPPER_RANGE "1.9.0.99"
-#define LOWER_RANGE "1.9.0"
-#endif
 	static const GREVersionRange greVersion = {
 		LOWER_RANGE, PR_TRUE,
 		UPPER_RANGE, PR_TRUE
@@ -266,11 +257,7 @@ gecko_init (void)
 	gtk_moz_embed_set_path(xpcomLocation);
 
 #else
-#ifdef HAVE_GECKO_1_9
 	gtk_moz_embed_set_path (GECKO_HOME);
-#else
-	gtk_moz_embed_set_comp_path (GECKO_HOME);
-#endif
 #endif // XPCOM_GLUE
 
 	gtk_moz_embed_push_startup ();
@@ -310,7 +297,5 @@ gecko_shutdown (void)
 
 	gtk_moz_embed_pop_startup ();
 
-#ifdef HAVE_GECKO_1_9
         NS_LogTerm ();
-#endif
 }

@@ -28,44 +28,33 @@ GNOME_DOC_INIT
 AC_SUBST(DIRS, [["backend gecko editor main gnome2"]])
 AC_SUBST(xiphos_exec, [[xiphos]])
 
+REQUIRED_LIBS="glib-2.0 gtk+-2.0 >= 2.12 libxml-2.0 libglade-2.0 libgtkhtml-3.14 >= 3.23  sword dbus-glib-1 libgsf-1 gtkhtml-editor"
+
 AS_IF([test "x$with_gecko" != "xno"], [
-	    GECKO_INIT([GECKO])
 	    AC_DEFINE(USE_GTKMOZEMBED, 1, [Define if you want to use gtkmozembed])
-	    AS_CASE([$GECKO],
-		[xulrunner], [
-		     PKG_CHECK_MODULES([GECKO_COMPONENT],[${gecko_cv_gecko}-xpcom >= 1.8 $gecko_cv_extra_pkg_dependencies])],
-		[libxul*],   [
-		     PKG_CHECK_MODULES([GECKO_COMPONENT],[$GECKO $gecko_cv_extra_pkg_dependencies])
-		     GECKO_COMPONENT_CFLAGS="$GECKO_COMPONENT_CFLAGS `$PKG_CONFIG --cflags ${gecko_cv_gecko}` `$PKG_CONFIG --define-variable=includetype=unstable --cflags ${gecko_cv_gecko}`"],
-		[*firefox],  [
-		     PKG_CHECK_MODULES([GECKO_COMPONENT],[${gecko_cv_gecko}-xpcom >= 1.5 $gecko_cv_extra_pkg_dependencies])],
-		[AC_MSG_ERROR([$gecko_cv_gecko is not supported])])
-	    AC_SUBST([GECKO])
-	    AC_SUBST(GECKO_HOME)
-	    AC_SUBST(GECKO_COMPONENT_LIBS)
-	    AC_SUBST(GECKO_COMPONENT_CFLAGS)
-	    AC_SUBST([GECKO_FLAVOUR])
-	    AC_SUBST([GECKO_INCLUDE_ROOT])
-	    AC_SUBST([GECKO_PREFIX])
-	    AC_SUBST([GECKO_EXTRA_LIBS])
-	    AC_SUBST([GECKO_GLUE_LIBS])
+	    PKG_CHECK_MODULES(GECKO, libxul-embedding > 1.9.1)
+	    GECKO_CFLAGS="`$PKG_CONFIG --define-variable=includetype=unstable --cflags libxul-embedding`"
+	    AC_DEFINE(HAVE_GECKO, 1, [Define to enable dbus])
+	    AC_DEFINE(HAVE_GECKO_1_9, 1, [Define to enable dbus])
+	    AC_DEFINE(HAVE_GECKO_1_9_1, 1, [Define to enable dbus])
+	    AC_DEFINE(HAVE_GECKO_1_8_1, 1, [Define to enable dbus])
+	    have_gecko=true
 	    ],[
 	    AC_MSG_CHECKING([[for GECKO]])
 	    AC_MSG_RESULT([[disabled as requested]])
 	    AC_DEFINE(GTKHTML, 1, [Define if wish to use gtkhtml instead of gtkmozembed])])
 
-GECKO_DEFINES
-AM_CONDITIONAL([HAVE_GECKO],[test "$gecko_cv_have_gecko" = "yes"])
-
-REQUIRED_LIBS="glib-2.0 gtk+-2.0 >= 2.12 libxml-2.0 libglade-2.0 libgtkhtml-3.14 >= 3.23  sword dbus-glib-1 libgsf-1 gtkhtml-editor"
+AM_CONDITIONAL(HAVE_GECKO, test x$have_gecko = xtrue)
+AM_CONDITIONAL(HAVE_GECKO_1_9, test x$have_gecko = xtrue)
+AM_CONDITIONAL(HAVE_GECKO_1_9_1, test x$have_gecko = xtrue)
+AM_CONDITIONAL(HAVE_GECKO_1_8_1, test x$have_gecko = xtrue)
+AM_CONDITIONAL(HAVE_GECKO_HOME, test x$have_gecko = xfalse)
 
 AC_DEFINE(HAVE_DBUS, 1, [Define to enable dbus])
 
 AS_CASE([$host_os], [mingw*],
 		    [REQUIRED_LIBS="$REQUIRED_LIBS gmodule-no-export-2.0"],
 		    [REQUIRED_LIBS="$REQUIRED_LIBS gmodule-export-2.0"])
-
-PKG_CHECK_EXISTS(${GECKO} >= 1.9.1.3, [REQUIRED_LIBS="$REQUIRED_LIBS nspr"])
 
 AC_MSG_CHECKING([for gtk+-unix-print])
 PKG_CHECK_EXISTS(gtk+-unix-print-2.0,
