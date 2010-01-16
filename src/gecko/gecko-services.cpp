@@ -31,9 +31,7 @@
 
 #include <nsCOMPtr.h>
 #include <nsIComponentManager.h>
-#ifdef HAVE_GECKO_1_9
 #include <nsComponentManagerUtils.h>
-#endif
 #include <nsIComponentRegistrar.h>
 #include <nsIGenericFactory.h>
 #include <nsILocalFile.h>
@@ -311,9 +309,6 @@ PrintListener::SetPrintSettings (GeckoPrintInfo *settings,
 
   target->SetPaperSizeUnit(nsIPrintSettings::kPaperSizeMillimeters);
 
-#ifndef HAVE_GECKO_1_9	
-  target->SetPaperSize (nsIPrintSettings::kPaperSizeDefined);
-#endif
 	
   GtkPaperSize *paperSize = gtk_page_setup_get_paper_size (settings->setup);
   if (!paperSize) {
@@ -325,9 +320,7 @@ PrintListener::SetPrintSettings (GeckoPrintInfo *settings,
   target->SetPaperWidth (gtk_paper_size_get_width (paperSize, GTK_UNIT_MM));
   target->SetPaperHeight (gtk_paper_size_get_height (paperSize, GTK_UNIT_MM));
 
-#ifdef HAVE_GECKO_1_9
   target->SetPaperName (NS_ConvertUTF8toUTF16 (gtk_paper_size_get_name (paperSize)).get ());
-#else
   {
     /* Mozilla bug https://bugzilla.mozilla.org/show_bug.cgi?id=307404
      * means that we cannot actually use any paper sizes except mozilla's
@@ -363,7 +356,6 @@ PrintListener::SetPrintSettings (GeckoPrintInfo *settings,
   
     target->SetPaperName (NS_ConvertUTF8toUTF16 (paperName).get ());
   }
-#endif /* !HAVE_GECKO_1_9 */
  
   /* Sucky mozilla wants margins in inch! */
   target->SetMarginTop (gtk_page_setup_get_top_margin (settings->setup, GTK_UNIT_INCH));
@@ -452,21 +444,14 @@ gecko_register_printing ()
   NS_ENSURE_SUCCESS (rv, );
 
   nsCOMPtr<nsIGenericFactory> componentFactory;
-#ifdef HAVE_GECKO_1_9
   componentFactory = do_CreateInstance ("@mozilla.org/generic-factory;1", &rv);
-#else
-  rv = NS_NewGenericFactory(getter_AddRefs(componentFactory),
-			    &(sAppComps[0]));
-#endif
     
   if (NS_FAILED(rv) || !componentFactory)
     {
       GS_warning(("Failed to make a factory for %s\n", sAppComps[0].mDescription));
       return;
     }
-#ifdef HAVE_GECKO_1_9
   componentFactory->SetComponentInfo(&(sAppComps[0]));
-#endif
    
   rv = cr->RegisterFactory(sAppComps[0].mCID,
 			   sAppComps[0].mDescription,

@@ -642,14 +642,6 @@ BrowserEmbed::ProcessMouseDblClickEvent (void* aEvent)
 	nsCOMPtr<nsIDOMMouseEvent> event (do_QueryInterface (domEvent));
 	if (!event) return 0;
 	
-#ifdef DEBUG
-#ifndef HAVE_GECKO_1_9
-	domEvent->GetType(aType);
-	gchar mybuf[80];
-	aType.ToCString( mybuf, 79);
-	g_warning("domEvent->GetType: %s",mybuf);
-#endif
-#endif
 	gtk_editable_delete_text((GtkEditable *)widgets.entry_dict,0,-1);
 	
 	DoCommand("cmd_copy");
@@ -711,9 +703,7 @@ BrowserEmbed::ProcessMouseOver (void* aEvent, int pane,
 				gboolean is_dialog, DIALOG_DATA *dialog)
 {
   GS_message(("in mouse over"));
-#ifdef HAVE_GECKO_1_9
 	extern gboolean in_url;
-#endif
 	PRBool aShiftKey;
 
 	nsIDOMMouseEvent *event = (nsIDOMMouseEvent*) aEvent;
@@ -724,12 +714,10 @@ BrowserEmbed::ProcessMouseOver (void* aEvent, int pane,
 		return FALSE;
 	if (pane == VIEWER_TYPE)
 		return FALSE;
-#ifdef HAVE_GECKO_1_9
 	if (in_url) {
 		in_url = FALSE;
 		return FALSE;
 	}
-#endif
 	main_clear_viewer();
 	return FALSE;
 }
@@ -940,16 +928,7 @@ BrowserEmbed::FindAgain (PRBool aForward)
 	
 	nsresult rv;
 	PRUint16 found = nsITypeAheadFind::FIND_NOTFOUND;
-#ifdef HAVE_GECKO_1_9
 	rv = mFinder->FindAgain (!aForward, PR_FALSE, &found);
-#else
-	if (aForward) {
-		rv = mFinder->FindNext (&found);
-	}
-	else {
-		rv = mFinder->FindPrevious (&found);
-	}
-#endif
 
 	return NS_SUCCEEDED (rv) && (found == nsITypeAheadFind::FIND_FOUND
 				     || found == nsITypeAheadFind::FIND_WRAPPED);
@@ -973,9 +952,7 @@ BrowserEmbed::SetSelectionAttention (PRBool aAttention)
 		display = nsISelectionController::SELECTION_ON;
 	}
 
-#ifdef HAVE_GECKO_1_9
 	mFinder->SetSelectionModeAndRepaint (display);
-#endif
 	nsresult rv;
 	nsCOMPtr<nsIDocShell> shell (do_GetInterface (mWebBrowser, &rv));
 
