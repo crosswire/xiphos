@@ -44,9 +44,10 @@ static const gchar *authors[] = {
     "Peter von Kaehne",
     "Simon Meers",
     "Martin Zibricky",
+    "Dmitrijs Ledkovs",
     NULL
 };
-  
+
 static const gchar *documenters[] = { 
     "Pierre Benz",
     "Andy Piper",
