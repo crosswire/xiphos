@@ -33,7 +33,7 @@ AC_ARG_WITH([gecko], AS_HELP_STRING([--without-gecko], [Compile using gtkhtml ba
 
 AS_IF([test "x$with_gecko" != "xno"], [
 	    AC_DEFINE(USE_GTKMOZEMBED, 1, [Define if you want to use gtkmozembed])
-	    PKG_CHECK_MODULES(GECKO, libxul-embedding > 1.9.1)
+	    PKG_CHECK_MODULES(GECKO, libxul-embedding > 1.9.0)
 	    GECKO_CFLAGS="`$PKG_CONFIG --define-variable=includetype=unstable --cflags libxul-embedding`"
 	    GECKO_HOME="`$PKG_CONFIG --variable=sdkdir libxul-embedding`"
 	    AC_DEFINE_UNQUOTED(GECKO_HOME, ["$GECKO_HOME"], [Gecko sdkdir])
