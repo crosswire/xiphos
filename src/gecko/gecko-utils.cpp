@@ -231,7 +231,7 @@ gecko_init (void)
 #ifdef XPCOM_GLUE
 	//needs to be tested on lower gecko versions
 #define UPPER_RANGE "1.9.1.99"
-#define LOWER_RANGE "1.9.1"
+#define LOWER_RANGE "1.9.0"
 	static const GREVersionRange greVersion = {
 		LOWER_RANGE, PR_TRUE,
 		UPPER_RANGE, PR_TRUE

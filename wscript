@@ -389,7 +389,7 @@ def configure(conf):
             conf.check_cfg (package='libxul-embedding',
                             uselib_store='GECKO',
                             args='--define-variable=includetype=unstable --cflags --libs',
-                            atleast_version='1.9.1')
+                            atleast_version='1.9.0')
             conf.define('GECKO_HOME', conf.get_pkgvar('libxul-embedding', 'sdkdir'))
         else:
                     d = env['MOZILLA_DISTDIR']
