@@ -10,27 +10,17 @@ libgecko_a_SOURCES =  \
 
 libgecko_a_CXXFLAGS = \
 	-I$(top_srcdir)/src \
-	$(GECKO_COMPONENT_CFLAGS) \
 	$(GECKO_CFLAGS) \
 	$(XIPHOS_CFLAGS) \
 	$(WARN_CXXFLAGS)
 
 libgecko_a_CFLAGS = \
 	-I$(top_srcdir)/src \
-	$(GECKO_COMPONENT_CFLAGS) \
 	$(GECKO_CFLAGS) \
 	$(XIPHOS_CFLAGS) \
 	$(WARN_CFLAGS)
 
-if HAVE_GECKO_HOME
-libgecko_a_CPPFLAGS = \
-    -DGECKO_HOME=\""$(GECKO_HOME)\""
-else
-libgecko_a_CPPFLAGS = \
-    -DGECKO_HOME=
-endif
-
-libgecko_a_CPPFLAGS += $(DISABLE_DEPRECATED) \
+libgecko_a_CPPFLAGS = $(DISABLE_DEPRECATED) \
 	-UGTK_DISABLE_SINGLE_INCLUDES
 
 endif
