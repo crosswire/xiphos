@@ -32,7 +32,7 @@ pixmap_DATA= \
 	new_tab_button.png \
 	silk-edit-bookmarks.png \
 	splash.png \
-	sword3.png \
+	sword-big.png \
 	sword_icon-16.png \
 	sword.png \
 	translation_icon-16.png \
