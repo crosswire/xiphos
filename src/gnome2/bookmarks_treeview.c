@@ -23,6 +23,7 @@
 #include <config.h>
 #endif
 
+#include <glib.h>
 #include <gtk/gtk.h>
 #include <libxml/parser.h>
 //#include <gal/shortcut-bar/e-shortcut-bar.h>
