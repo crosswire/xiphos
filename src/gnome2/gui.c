@@ -23,14 +23,10 @@
 #include <config.h>
 #endif
 
-#ifdef HAVE_GTK214
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
 #include <locale.h>
 #include <stdlib.h>
-#else
-#include <gnome.h>
-#endif
 
 /* ----------------------------------------------- */
 /* do not #include "gui/debug_glib_null.h" in this */
@@ -67,16 +63,9 @@ void gui_init(int argc, char *argv[])
 	textdomain (GETTEXT_PACKAGE);
 	g_free (locale_dir);
 #endif
-#ifdef HAVE_GTK214	
 	if (!gtk_init_with_args(&argc, &argv, NULL, NULL, NULL, NULL)) {
 	    exit(1);
 	};
-#else
-	gnome_program_init (PACKAGE, VERSION, LIBGNOMEUI_MODULE,
-			    argc, argv,
-			    GNOME_PROGRAM_STANDARD_PROPERTIES,
-			    NULL);
-#endif
 #ifndef WIN32
 	gconf_setup();
 #endif
