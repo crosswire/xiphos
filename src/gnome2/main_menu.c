@@ -1,4 +1,4 @@
-1;2202;0c/*
+/*
  * Xiphos Bible Study Tool
  * main_menu.c - creation of and call backs for xiphos main menu
  *
