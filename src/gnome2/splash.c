@@ -38,12 +38,12 @@
 /* FIXME: clean up below */
 
 #define E_TYPE_SPLASH			(e_splash_get_type ())
-#define E_SPLASH(obj)			(GTK_CHECK_CAST ((obj), \
+#define E_SPLASH(obj)			(G_TYPE_CHECK_INSTANCE_CAST ((obj), \
                                               E_TYPE_SPLASH, ESplash))
-#define E_SPLASH_CLASS(klass)		(GTK_CHECK_CLASS_CAST ((klass), \
+#define E_SPLASH_CLASS(klass)		(G_TYPE_CHECK_CLASS_CAST ((klass), \
                                               E_TYPE_SPLASH, ESplashClass))
-#define E_IS_SPLASH(obj)		(GTK_CHECK_TYPE ((obj), E_TYPE_SPLASH))
-#define E_IS_SPLASH_CLASS(klass)	(GTK_CHECK_CLASS_TYPE ((obj), \
+#define E_IS_SPLASH(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), E_TYPE_SPLASH))
+#define E_IS_SPLASH_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((obj), \
 					      E_TYPE_SPLASH))
 
 typedef struct _ESplash ESplash;
@@ -158,8 +158,8 @@ static Icon *icon_new(ESplash * splash, GdkPixbuf * image_pixbuf)
 
 static void icon_free(Icon * icon)
 {
-	gdk_pixbuf_unref(icon->dark_pixbuf);
-	gdk_pixbuf_unref(icon->light_pixbuf);
+	g_object_unref(icon->dark_pixbuf);
+	g_object_unref(icon->light_pixbuf);
 
 	g_free(icon);
 }
@@ -233,7 +233,7 @@ static void impl_destroy(GtkObject * object)
 	priv = splash->priv;
 
 	if (priv->splash_image_pixbuf != NULL)
-		gdk_pixbuf_unref(priv->splash_image_pixbuf);
+		g_object_unref(priv->splash_image_pixbuf);
 
 	for (p = priv->icons; p != NULL; p = p->next) {
 		Icon *icon;
@@ -245,7 +245,7 @@ static void impl_destroy(GtkObject * object)
 	g_list_free(priv->icons);
 
 	if (priv->layout_idle_id != 0)
-		gtk_idle_remove(priv->layout_idle_id);
+		g_source_remove(priv->layout_idle_id);
 
 	g_free(priv);
 }
@@ -257,7 +257,7 @@ static void class_init(ESplashClass * klass)
 	object_class = GTK_OBJECT_CLASS(klass);
 	object_class->destroy = impl_destroy;
 
-	parent_class = gtk_type_class(gtk_window_get_type());
+	parent_class = g_type_class_ref(gtk_window_get_type());
 }
 
 static void init(ESplash * splash)
@@ -354,7 +354,7 @@ e_splash_construct(ESplash * splash, GdkPixbuf * splash_image_pixbuf)
 
 	priv = splash->priv;
 
-	priv->splash_image_pixbuf = gdk_pixbuf_ref(splash_image_pixbuf);
+	priv->splash_image_pixbuf = g_object_ref(splash_image_pixbuf);
 
 	canvas = gtk_drawing_area_new();
 	priv->canvas = GTK_DRAWING_AREA(canvas);
@@ -424,7 +424,7 @@ GtkWidget *e_splash_new(void)
 	new = g_object_new(e_splash_get_type(), NULL);
 	e_splash_construct(new, splash_image_pixbuf);
 
-	gdk_pixbuf_unref(splash_image_pixbuf);
+	g_object_unref(splash_image_pixbuf);
 
 	return GTK_WIDGET(new);
 }
@@ -534,7 +534,7 @@ void gui_splash_init()
 
 		gtk_widget_show(splash);
 		set_window_icon(GTK_WINDOW(splash));
-		gtk_object_ref(GTK_OBJECT(splash));
+		g_object_ref(G_OBJECT(splash));
 		
 		
 #ifdef USE_GTKMOZEMBED
@@ -554,12 +554,12 @@ void gui_splash_init()
 				error = NULL;
 				/* this is ugly but better than a crash */
 				settings.showsplash = 0;
-				gtk_widget_unref(splash);
+				g_object_unref(splash);
 				gtk_widget_destroy(splash);
 				return;
 			}
 			e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
-			gdk_pixbuf_unref(icon_pixbuf);
+			g_object_unref(icon_pixbuf);
 			icons = g_list_next(icons);
 		}
 
@@ -597,7 +597,7 @@ gboolean gui_splash_done()
 		while (gtk_events_pending()) {
 			gtk_main_iteration();
 		}
-		gtk_widget_unref(splash);
+		g_object_unref(splash);
 		gtk_widget_destroy(splash);
 	}
 	return FALSE;
