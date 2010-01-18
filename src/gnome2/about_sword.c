@@ -26,10 +26,10 @@
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
 
-#include "gui/about_xiphos.h"
+#include "gui/about_sword.h"
 #include "gui/utilities.h"
 #include "main/settings.h"
-
+#include "main/sword.h"
 
 /******************************************************************************
  * Name
@@ -76,7 +76,6 @@ gui_create_about_sword(void)
 {
 	GdkPixbuf *about1_logo_pixbuf;
 	GtkWidget *about1;
-	gchar version[128];
 	gchar *about =
 	    _
 	    ("The SWORD Project is an effort to create an ever-expanding \
