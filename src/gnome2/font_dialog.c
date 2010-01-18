@@ -294,10 +294,9 @@ static GtkWidget *create_dialog_mod_font()
 	GtkWidget *dialog_action_area21;
 	GtkWidget *hbuttonbox1;
 	GtkWidget *button_cancel;
-	GList *combo_size_items = NULL;
 
 	dialog_mod_font = gtk_dialog_new();
-	gtk_object_set_data(GTK_OBJECT(dialog_mod_font),
+	g_object_set_data(G_OBJECT(dialog_mod_font),
 			    "dialog_mod_font", dialog_mod_font);
 	gtk_window_set_title(GTK_WINDOW(dialog_mod_font),
 			     _("Set Module Font"));
@@ -356,26 +355,21 @@ static GtkWidget *create_dialog_mod_font()
 	gtk_widget_set_size_request(font_button, 240, -1);
 	gtk_font_button_set_show_size ((GtkFontButton *)font_button, FALSE);
 
-	combo_size = gtk_combo_new();
+	combo_size = gtk_combo_box_entry_new_text ();
 	gtk_widget_show(combo_size);
 	gtk_box_pack_start(GTK_BOX(hbox_picker), combo_size, TRUE, TRUE,
 			   0);
-	combo_size_items = g_list_append(combo_size_items, (gpointer) "+5");
-	combo_size_items = g_list_append(combo_size_items, (gpointer) "+4");
-	combo_size_items = g_list_append(combo_size_items, (gpointer) "+3");
-	combo_size_items = g_list_append(combo_size_items, (gpointer) "+2");
-	combo_size_items = g_list_append(combo_size_items, (gpointer) "+1");
-	combo_size_items = g_list_append(combo_size_items, (gpointer) "+0");
-	combo_size_items = g_list_append(combo_size_items, (gpointer) "-1");
-	combo_size_items = g_list_append(combo_size_items, (gpointer) "-2");
-	combo_size_items = g_list_append(combo_size_items, (gpointer) "-3");
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo_size),
-				      combo_size_items);
-	g_list_free(combo_size_items);
-
-	combo_entry_size = GTK_COMBO(combo_size)->entry;
-	gtk_widget_show(combo_entry_size);
-	gtk_entry_set_text(GTK_ENTRY(combo_entry_size), _("+0"));
+	gtk_combo_box_append_text(GTK_COMBO_BOX (combo_size), "+5");
+	gtk_combo_box_append_text(GTK_COMBO_BOX (combo_size), "+4");
+	gtk_combo_box_append_text(GTK_COMBO_BOX (combo_size), "+3");
+	gtk_combo_box_append_text(GTK_COMBO_BOX (combo_size), "+2");
+	gtk_combo_box_append_text(GTK_COMBO_BOX (combo_size), "+1");
+	gtk_combo_box_append_text(GTK_COMBO_BOX (combo_size), "+0");
+	gtk_combo_box_append_text(GTK_COMBO_BOX (combo_size), "-1");
+	gtk_combo_box_append_text(GTK_COMBO_BOX (combo_size), "-2");
+	gtk_combo_box_append_text(GTK_COMBO_BOX (combo_size), "-3");
+	combo_entry_size = (GTK_WIDGET (GTK_BIN (combo_size) -> child));
+	gtk_entry_set_text(GTK_ENTRY (GTK_BIN (combo_size) -> child), _("+0"));
 
 	checkbutton_no_font =
 	    gtk_check_button_new_with_label(_
@@ -422,7 +416,7 @@ static GtkWidget *create_dialog_mod_font()
 			 G_CALLBACK(ok_clicked), mf);
 	g_signal_connect(GTK_OBJECT(button_cancel), "clicked",
 			 G_CALLBACK(cancel_clicked), mf);
-	g_signal_connect(GTK_OBJECT(combo_entry_size), "changed",
+	g_signal_connect(GTK_OBJECT(combo_size), "changed",
 			 G_CALLBACK(size_changed), NULL);
 
 	return dialog_mod_font;
