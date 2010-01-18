@@ -27,7 +27,7 @@ GNOME_DOC_INIT
 AC_SUBST(DIRS, [["backend gecko editor main gnome2"]])
 AC_SUBST(xiphos_exec, [[xiphos]])
 
-REQUIRED_LIBS="glib-2.0 gtk+-2.0 >= 2.12 libxml-2.0 libglade-2.0 libgtkhtml-3.14 >= 3.23  sword dbus-glib-1 libgsf-1 gtkhtml-editor"
+REQUIRED_LIBS="glib-2.0 gtk+-2.0 >= 2.14 libxml-2.0 libglade-2.0 libgtkhtml-3.14 >= 3.23  sword dbus-glib-1 libgsf-1 gtkhtml-editor"
 
 AC_ARG_WITH([gecko], AS_HELP_STRING([--without-gecko], [Compile using gtkhtml backend instead]))
 
@@ -58,20 +58,6 @@ PKG_CHECK_EXISTS(gtk+-unix-print-2.0,
 			AC_MSG_RESULT([yes])],
 		[AC_MSG_RESULT([no])])
 
-AC_MSG_CHECKING([for gtk+-2.14])
-AC_ARG_WITH([gnome], AS_HELP_STRING([--with-gtk214], [Compile using gtk+-2.14 or better]))
-
-AS_IF([test "x$with_gtk214" != "xno"],[
-	   PKG_CHECK_EXISTS(gtk+-2.0 >= 2.14, [have_gtk214="yes"], [have_gtk214="no"])],
-	   [have_gtk214="no"])
-
-AS_IF([test "x$have_gtk214" = "xyes"],
-      [AC_DEFINE(HAVE_GTK214, 1, [We have gnome-2.14 hence we can use modern API])
-      		AC_MSG_RESULT([yes])],
-      [AS_IF([test "x$with_gtk214" = "xno"],
-             [REQUIRED_LIBS="$REQUIRED_LIBS libgnomeui-2.0"
-	     AC_MSG_RESULT([no])])
-      ])
 
 PKG_CHECK_MODULES(XIPHOS, "$REQUIRED_LIBS")
 

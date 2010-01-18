@@ -118,12 +118,6 @@ def set_options(opt):
                    help = "Disable the Xiphos dbus API [Default: enabled]",
                    dest = 'without_dbus')
 
-    opt.add_option('--without-gnome',
-                   action = 'store_true',
-                   default = False,
-                   help = "Disable GNOME [Default: enabled]",
-                   dest = 'without_gnome')
-
     opt.add_option('--no-post-install',
                    action = 'store_false',
                    default = True,
@@ -335,18 +329,12 @@ def configure(conf):
     #check_pkg(conf, 'gtk+-x11-2.0', '2.0.0', var='LIBGTK_X11_2_0')
     #if not env['HAVE_LIBGTK_X11_2_0']:
     #    check_pkg(conf, 'gtk+-x11-2.0', '2.0.0', True, var='LIBGTK_WIN32_2_0')
-    conf.check_pkg('gtk+-2.0', '2.12', True, var='GTK')
+    conf.check_pkg('gtk+-2.0', '2.14', True, var='GTK')
     # glade
     conf.check_pkg('libglade-2.0', '2.0.0', var='GLADE')
         
     conf.check_pkg('gmodule-2.0', '2.0.0', True, var='GMODULEEXP')
     conf.check_pkg('glib-2.0', '2.0.0', True, 'GLIB')
-
-    ## Gnome libs
-    if not opt.without_gnome:
-        conf.check_pkg('libgnomeui-2.0', '2.0.0', True, var='GNOMEUI')
-    else:
-        dfn('HAVE_GTK214', 1)
 
     ## gfs
     conf.check_pkg('libgsf-1', '1.14', True, var='GFS')
