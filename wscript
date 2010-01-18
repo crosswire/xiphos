@@ -376,8 +376,6 @@ def configure(conf):
     if conf.env['HAVE_GTKHTML']:
 	conf.define('USE_GTKHTML3_14', 1)
 
-    conf.define('GTKHTML_API_VERSION', conf.get_pkgvar('libgtkhtml-3.14', 'gtkhtml_apiversion'))
-
     conf.check_pkg('gtkhtml-editor', mandatory=True)
 
     ######################
