@@ -59,7 +59,6 @@ void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_export_folder_activate(GtkMenuItem * menuitem, gpointer user_data);
 void restore_ok(GtkButton * button, GtkWidget * filesel);
 void restore_cancel(GtkButton * button, GtkWidget * dlg);
-void on_restore_folder_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_delete_item_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_expand_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_collapse_activate(GtkMenuItem * menuitem, gpointer user_data);
