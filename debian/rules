@@ -17,7 +17,7 @@ endif
 ifneq ($(args),)
 with=--with $(args)
 endif
-ifeq ($(waf),1.5.10)
+ifeq ($(waf),1.5.11)
 system=waf_src
 else
 system=autoconf
