@@ -159,7 +159,7 @@ void gui_verselist_to_bookmarks(GList * verses, gint save_as_single)
 			list_item = (RESULTS *) verses->data;
 			module_name = list_item->module;
 			tmpbuf = list_item->key;
-			g_string_sprintf(str, "%s, %s", tmpbuf,
+			g_string_printf(str, "%s, %s", tmpbuf,
 					 module_name);
 			GS_message(("bookmark: %s",str->str));
 			gtk_tree_store_append(GTK_TREE_STORE(model),
@@ -532,7 +532,7 @@ static void load_xml_bookmarks(GtkTreeView * tree, GtkTreeIter * iter)
 	const xmlChar *file;
 
 	str = g_string_new(settings.swbmDir);
-	g_string_sprintf(str, "%s/bookmarks.xml", settings.swbmDir);
+	g_string_printf(str, "%s/bookmarks.xml", settings.swbmDir);
 	file = (const xmlChar *) str->str;
 	gui_parse_bookmarks(tree, file, iter);
 	g_string_free(str, TRUE);
