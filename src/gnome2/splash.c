@@ -60,7 +60,7 @@ struct _ESplashClass {
 	GtkWindowClass parent_class;
 };
 
-GtkType    e_splash_get_type            (void);
+GType      e_splash_get_type            (void);
 void       e_splash_construct           (ESplash * splash,
 					 GdkPixbuf * splash_image);
 GtkWidget *e_splash_new                 (void);
