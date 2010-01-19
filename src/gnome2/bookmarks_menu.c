@@ -449,118 +449,6 @@ G_MODULE_EXPORT void on_export_folder_activate(GtkMenuItem * menuitem,
 
 /******************************************************************************
  * Name
- *   restore_ok
- *
- * Synopsis
- *   #include "gui/bookmarks_menu.h"
- *   
- *   void restore_ok(GtkButton *button, gpointer data);
- *
- * Description
- *   OK button for restore fileselection was clicked.
- *
- * Return value
- *   void
- */
-
-void restore_ok(GtkButton * button, GtkWidget * filesel)
-{
-	const xmlChar *file;
-	//gchar buf[256];
-	
-	file = (const xmlChar *)
-	    gtk_file_selection_get_filename(GTK_FILE_SELECTION
-					    (filesel));	
-	gui_load_removed(file);
-	
-	bookmarks_changed = TRUE;
-	gui_save_bookmarks(NULL, NULL);
-	gtk_widget_destroy(filesel);
-}
-
-
-/******************************************************************************
- * Name
- *   restore_cancel
- *
- * Synopsis
- *   #include "gui/bookmarks_menu.h"
- *   
- *   void restore_cancel(GtkButton *button, gpointer data);
- *
- * Description
- *   Cancel button for restore fileselection was clicked.
- *
- * Return value
- *   void
- */
-
-void restore_cancel(GtkButton * button, GtkWidget * dlg)
-{
-	gtk_widget_destroy(dlg);
-}
-
-
-/******************************************************************************
- * Name
- *   on_restore_folder_activate
- *
- * Synopsis
- *   #include "gui/bookmarks_menu.h"
- *
- *   void on_restore_folder_activate(GtkMenuItem * menuitem, gpointer user_data)
- *
- * Description
- *   restore a saved bookmark folder
- *
- * Return value
- *   void
- */
-
-G_MODULE_EXPORT void on_restore_folder_activate(GtkMenuItem * menuitem,
-				gpointer user_data)
-{
-	GtkWidget *fileselection;
-	GtkWidget *ok;
-	GtkWidget *cancel;
-	gchar buf[256];
-
-	fileselection =
-	    gtk_file_selection_new(_("Restore Bookmark Folder"));
-	gtk_container_set_border_width(GTK_CONTAINER(fileselection),
-				       10);
-	gtk_file_selection_hide_fileop_buttons(GTK_FILE_SELECTION
-					       (fileselection));
-
-	ok = GTK_FILE_SELECTION(fileselection)->ok_button;
-	gtk_object_set_data(GTK_OBJECT(fileselection), "ok", ok);
-	gtk_widget_show(ok);
-	GTK_WIDGET_SET_FLAGS(ok, GTK_CAN_DEFAULT);
-
-	cancel = GTK_FILE_SELECTION(fileselection)->cancel_button;
-	gtk_object_set_data(GTK_OBJECT(fileselection), "cancel",
-			    cancel);
-	gtk_widget_show(cancel);
-	GTK_WIDGET_SET_FLAGS(cancel, GTK_CAN_DEFAULT);
-
-	sprintf(buf, "%s/removed/*.xml", settings.swbmDir);
-	gtk_file_selection_set_filename(GTK_FILE_SELECTION
-					(fileselection), buf);
-
-	gtk_widget_show(fileselection);
-
-	g_signal_connect(GTK_OBJECT(ok), "clicked",
-			   GTK_SIGNAL_FUNC(restore_ok),
-			   (GtkWidget *) fileselection);
-	g_signal_connect(GTK_OBJECT(cancel), "clicked",
-			   GTK_SIGNAL_FUNC(restore_cancel),
-			   (GtkWidget *) fileselection);
-
-}
-
-
-/******************************************************************************
- * Name
  *   on_delete_item_activate
  *
  * Synopsis
@@ -979,7 +867,6 @@ void gui_create_bookmark_menu(void)
 	//menu.rr_submenu = glade_xml_get_widget (gxml, "remove_restore");  // pmBookmarkTree_uiinfo[13].widget;
 
 	menu.remove = glade_xml_get_widget (gxml, "remove_folder");  // rr_menu_uiinfo[0].widget;
-	menu.restore = glade_xml_get_widget (gxml, "restore_folder");  // rr_menu_uiinfo[2].widget;
 
 	gtk_widget_set_sensitive(menu.in_tab, FALSE);
 	gtk_widget_set_sensitive(menu.in_dialog, FALSE);
@@ -993,7 +880,6 @@ void gui_create_bookmark_menu(void)
 	gtk_widget_set_sensitive(menu.remove, TRUE);
 	gtk_widget_set_sensitive(menu.restore, TRUE);
 	//gtk_widget_hide(menu.remove);
-	gtk_widget_hide(menu.restore);
 	
     	/* connect signals and data */
 	glade_xml_signal_autoconnect_full
