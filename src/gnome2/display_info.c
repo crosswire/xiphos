@@ -189,9 +189,9 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 	dialog_display_info = gtk_dialog_new();
 	gtk_container_set_border_width(GTK_CONTAINER(dialog_display_info),
 				       6);
-	gtk_object_set_data(GTK_OBJECT(dialog_display_info),
-			    "dialog_display_info",
-			    dialog_display_info);
+	g_object_set_data(G_OBJECT(dialog_display_info),
+			  "dialog_display_info",
+			  dialog_display_info);
 	gtk_window_set_title(GTK_WINDOW(dialog_display_info),
 			     " ");
 	GTK_WINDOW(dialog_display_info)->type =
@@ -203,8 +203,8 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 	gtk_dialog_set_has_separator(GTK_DIALOG(dialog_display_info), FALSE);
 
 	dialog_vbox23 = GTK_DIALOG(dialog_display_info)->vbox;
-	gtk_object_set_data(GTK_OBJECT(dialog_display_info),
-			    "dialog_vbox23", dialog_vbox23);
+	g_object_set_data(G_OBJECT(dialog_display_info),
+			  "dialog_vbox23", dialog_vbox23);
 	gtk_widget_show(dialog_vbox23);
 
 
@@ -241,9 +241,9 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 
 	dialog_action_area23 =
 	    GTK_DIALOG(dialog_display_info)->action_area;
-	gtk_object_set_data(GTK_OBJECT(dialog_display_info),
-			    "dialog_action_area23",
-			    dialog_action_area23);
+	g_object_set_data(G_OBJECT(dialog_display_info),
+			  "dialog_action_area23",
+			  dialog_action_area23);
 	gtk_widget_show(dialog_action_area23);
 	gtk_container_set_border_width(GTK_CONTAINER
 				       (dialog_action_area23), 10);

@@ -123,8 +123,6 @@ gui_create_about_xiphos(void)
 	g_signal_connect(about1, "response",
 			 G_CALLBACK(on_dialog_response), NULL);
   
-	gtk_about_dialog_set_name
-	    (GTK_ABOUT_DIALOG (about1), PACKAGE);
 	gtk_about_dialog_set_version
 	    (GTK_ABOUT_DIALOG (about1), versionbuild);
 	gtk_about_dialog_set_copyright

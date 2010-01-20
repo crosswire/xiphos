@@ -328,8 +328,8 @@ GtkWidget *create_parallel_dialog(void)
 	sprintf(title,"%s - %s", settings.program_title, _("Parallel"));
 
 	dialog_parallel = gtk_dialog_new();
-	gtk_object_set_data(GTK_OBJECT(dialog_parallel),
-			    "dialog_parallel", dialog_parallel);
+	g_object_set_data(G_OBJECT(dialog_parallel),
+			  "dialog_parallel", dialog_parallel);
 	gtk_window_set_title(GTK_WINDOW(dialog_parallel),
 			     title);
 	gtk_window_set_default_size(GTK_WINDOW(dialog_parallel), 657,
@@ -337,8 +337,8 @@ GtkWidget *create_parallel_dialog(void)
 	gtk_window_set_resizable(GTK_WINDOW(dialog_parallel), TRUE);
 
 	dialog_vbox25 = GTK_DIALOG(dialog_parallel)->vbox;
-	gtk_object_set_data(GTK_OBJECT(dialog_parallel),
-			    "dialog_vbox25", dialog_vbox25);
+	g_object_set_data(G_OBJECT(dialog_parallel),
+			  "dialog_vbox25", dialog_vbox25);
 	gtk_widget_show(dialog_vbox25);
     
     	
@@ -422,9 +422,9 @@ GtkWidget *create_parallel_dialog(void)
 #endif
 	dialog_action_area25 =
 	    GTK_DIALOG(dialog_parallel)->action_area;
-	gtk_object_set_data(GTK_OBJECT(dialog_parallel),
-			    "dialog_action_area25",
-			    dialog_action_area25);
+	g_object_set_data(G_OBJECT(dialog_parallel),
+			  "dialog_action_area25",
+			  dialog_action_area25);
 	gtk_widget_show(dialog_action_area25);
 	gtk_container_set_border_width(GTK_CONTAINER
 				       (dialog_action_area25), 10);

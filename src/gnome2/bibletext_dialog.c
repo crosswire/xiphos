@@ -581,8 +581,8 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 
 	vt->dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 
-	gtk_object_set_data(GTK_OBJECT(vt->dialog), "dlg->dialog",
-			    vt->dialog);
+	g_object_set_data(G_OBJECT(vt->dialog), "dlg->dialog",
+			  vt->dialog);
 	gtk_window_set_title(GTK_WINDOW(vt->dialog),
 			     main_get_module_description(vt->mod_name));
 	gtk_window_set_default_size(GTK_WINDOW(vt->dialog), 200, 200);

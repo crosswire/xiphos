@@ -358,8 +358,8 @@ static gboolean  delete_event (GtkWidget *widget,
 	/* shutdown the sword stuff */
 	main_shutdown_backend();
 	gtk_main_quit();
-	gtk_exit(0);
 	gtk_widget_destroy(widgets.app);
+	exit(0);
 	return TRUE;	
 }
 
@@ -782,8 +782,8 @@ void create_mainwindow(void)
 	widgets.app = gtk_window_new (GTK_WINDOW_TOPLEVEL);
 	gtk_window_set_title (GTK_WINDOW (widgets.app), _("Xiphos - Bible Study Software"));
 
-	gtk_object_set_data(GTK_OBJECT(widgets.app),
-			    "widgets.app", widgets.app);
+	g_object_set_data(G_OBJECT(widgets.app),
+			  "widgets.app", widgets.app);
 	gtk_widget_set_size_request(widgets.app, 680, 425);
 	GTK_WIDGET_SET_FLAGS(widgets.app, GTK_CAN_FOCUS);
 	gtk_window_set_resizable(GTK_WINDOW(widgets.app), TRUE);

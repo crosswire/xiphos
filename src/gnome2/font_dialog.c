@@ -306,8 +306,8 @@ static GtkWidget *create_dialog_mod_font()
 	gtk_window_set_resizable(GTK_WINDOW(dialog_mod_font), TRUE);
 
 	dialog_vbox21 = GTK_DIALOG(dialog_mod_font)->vbox;
-	gtk_object_set_data(GTK_OBJECT(dialog_mod_font),
-			    "dialog_vbox21", dialog_vbox21);
+	g_object_set_data(G_OBJECT(dialog_mod_font),
+			  "dialog_vbox21", dialog_vbox21);
 	gtk_widget_show(dialog_vbox21);
 
 	vbox56 = gtk_vbox_new(FALSE, 0);
@@ -382,9 +382,9 @@ static GtkWidget *create_dialog_mod_font()
 			   FALSE, 0);
 
 	dialog_action_area21 = GTK_DIALOG(dialog_mod_font)->action_area;
-	gtk_object_set_data(GTK_OBJECT(dialog_mod_font),
-			    "dialog_action_area21",
-			    dialog_action_area21);
+	g_object_set_data(G_OBJECT(dialog_mod_font),
+			  "dialog_action_area21",
+			  dialog_action_area21);
 	gtk_widget_show(dialog_action_area21);
 	gtk_container_set_border_width(GTK_CONTAINER
 				       (dialog_action_area21), 10);
