@@ -135,10 +135,10 @@ GtkWidget* create_sidebar_dialog(void)
 	gchar *title;
 
 	dlgDock = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-	gtk_object_set_data(GTK_OBJECT(dlgDock), "dlgDock", dlgDock);
+	g_object_set_data(G_OBJECT(dlgDock), "dlgDock", dlgDock);
 	gtk_window_set_title(GTK_WINDOW(dlgDock), _("Sidebar"));
 	gtk_window_set_resizable(GTK_WINDOW(dlgDock), TRUE);
-	gtk_widget_set_usize(dlgDock, settings.sidebar_width,
+	gtk_widget_set_size_request(dlgDock, settings.sidebar_width,
 			     settings.gs_hight);
 
 	vbox_dock = gtk_vbox_new(FALSE, 0);

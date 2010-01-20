@@ -787,11 +787,11 @@ static GtkWidget* tab_widget_new(PASSAGE_TAB_INFO *tbinf, const gchar *label_tex
 	tbinf->button_close = gtk_button_new();
 	gtk_container_add(GTK_CONTAINER(tbinf->button_close), tmp_toolbar_icon);
 	gtk_button_set_relief(GTK_BUTTON(tbinf->button_close), GTK_RELIEF_NONE);
-	gtk_widget_set_usize (tbinf->button_close, 18, 16);
+	gtk_widget_set_size_request(tbinf->button_close, 18, 16);
 
 	tbinf->close_pixmap = pixmap_finder("window-close.png");
-	gtk_widget_size_request (tbinf->button_close, &r);
-	gtk_widget_set_usize (tbinf->close_pixmap, r.width, r.height);
+	gtk_widget_size_request(tbinf->button_close, &r);
+	gtk_widget_set_size_request(tbinf->close_pixmap, r.width, r.height);
 	gtk_widget_set_sensitive(tbinf->close_pixmap, FALSE);
 	gtk_widget_show(tbinf->close_pixmap);
 

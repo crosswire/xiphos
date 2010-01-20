@@ -376,8 +376,8 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 
 	dlg->dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 
-	gtk_object_set_data(GTK_OBJECT(dlg->dialog), "dlg->dialog",
-			    dlg->dialog);
+	g_object_set_data(G_OBJECT(dlg->dialog), "dlg->dialog",
+			  dlg->dialog);
 	gtk_window_set_title(GTK_WINDOW(dlg->dialog),
 			     main_get_module_description(dlg->
 							 mod_name));

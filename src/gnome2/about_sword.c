@@ -93,7 +93,7 @@ Books can be downloaded from the SWORD Project.");
 	about1 = gtk_about_dialog_new();
 	g_signal_connect(about1, "response",
 			 G_CALLBACK(on_dialog_response), NULL);
-	gtk_about_dialog_set_name
+	gtk_about_dialog_set_program_name
 	    (GTK_ABOUT_DIALOG (about1), "The SWORD Project");
 	gtk_about_dialog_set_version
 	    (GTK_ABOUT_DIALOG (about1), (gchar *)main_get_sword_version());

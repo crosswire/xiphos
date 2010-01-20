@@ -328,8 +328,8 @@ void gui_create_commentary_dialog(DIALOG_DATA *d,
 	cur_d = d;
 	d->dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 
-	gtk_object_set_data(GTK_OBJECT(d->dialog), "d->dialog",
-			    d->dialog);
+	g_object_set_data(G_OBJECT(d->dialog), "d->dialog",
+			  d->dialog);
 	gtk_window_set_title(GTK_WINDOW(d->dialog),
 			     main_get_module_description(d->mod_name));
 	//gtk_window_set_default_size(GTK_WINDOW(d->dialog), 462, 280);

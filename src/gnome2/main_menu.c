@@ -548,8 +548,8 @@ on_quit_activate(GtkMenuItem * menuitem, gpointer user_data)
 	/* shutdown the sword stuff */
 	main_shutdown_backend();
 	gtk_main_quit();
-	gtk_exit(0);
 	gtk_widget_destroy(widgets.app);
+	exit(0);
 }
 
 
