@@ -199,8 +199,8 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 
 
 	dialog->dialog = gtk_dialog_new();
-	gtk_object_set_data(GTK_OBJECT(dialog->dialog),
-			    "dialog->dialog", dialog->dialog);
+	g_object_set_data(G_OBJECT(dialog->dialog),
+			  "dialog->dialog", dialog->dialog);
 	gtk_window_set_title(GTK_WINDOW(dialog->dialog), _("Find"));
 	GTK_WINDOW(dialog->dialog)->type = GTK_WINDOW_TOPLEVEL;
 	/*gtk_window_set_policy(GTK_WINDOW(dialog->dialog), TRUE, TRUE,
@@ -210,8 +210,8 @@ static void create_find_dialog(GtkWidget * htmlwidget)
   	gtk_dialog_set_has_separator (GTK_DIALOG (dialog->dialog), FALSE);
 
 	dialog_vbox29 = GTK_DIALOG(dialog->dialog)->vbox;
-	gtk_object_set_data(GTK_OBJECT(dialog->dialog), "dialog_vbox29",
-			    dialog_vbox29);
+	g_object_set_data(G_OBJECT(dialog->dialog), "dialog_vbox29",
+			  dialog_vbox29);
 	gtk_widget_show(dialog_vbox29);
 
 	vbox45 = gtk_vbox_new(FALSE, 12);
@@ -258,9 +258,9 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 #endif /* !USE_GTKMOZEMBED */
 
 	dialog_action_area29 = GTK_DIALOG(dialog->dialog)->action_area;
-	gtk_object_set_data(GTK_OBJECT(dialog->dialog),
-			    "dialog_action_area29",
-			    dialog_action_area29);
+	g_object_set_data(G_OBJECT(dialog->dialog),
+			  "dialog_action_area29",
+			  dialog_action_area29);
 	gtk_widget_show(dialog_action_area29);
 	gtk_container_set_border_width(GTK_CONTAINER
 				       (dialog_action_area29), 10);

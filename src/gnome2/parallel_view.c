@@ -268,7 +268,7 @@ void gui_popup_menu_parallel(void)
 	GtkWidget *module_options_menu;
 	
 	menu = gtk_menu_new();
-	gtk_object_set_data(GTK_OBJECT(menu), "pmInt", menu);
+	g_object_set_data(G_OBJECT(menu), "pmInt", menu);
 
 	copy7 = gtk_menu_item_new_with_label(_("Copy"));
 	gtk_widget_hide(copy7);
