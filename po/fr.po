@@ -20,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 3.1.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-07 15:37+0100\n"
-"PO-Revision-Date: 2010-01-07 15:37+0100\n"
+"POT-Creation-Date: 2010-02-26 22:45+0100\n"
+"PO-Revision-Date: 2010-02-27 17:47+0100\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: emacs + po-mode <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -106,8 +106,7 @@ msgid "Delete current note"
 msgstr "Supprime la note en cours"
 
 #: ../src/editor/slib-editor.c:778 ../ui/editor_note.xml.h:14
-#: ../ui/editor_studypad.xml.h:20 ../ui/editor.xml.h:13
-#: ../ui/xi-menus.glade.h:106
+#: ../ui/editor_studypad.xml.h:20 ../ui/xi-menus.glade.h:106
 msgid "_File"
 msgstr "_Fichier"
 
@@ -128,7 +127,7 @@ msgid "_View"
 msgstr "_Affichage"
 
 #: ../src/editor/slib-editor.c:865 ../ui/editor_note.xml.h:11
-#: ../ui/editor_studypad.xml.h:16 ../ui/editor.xml.h:11
+#: ../ui/editor_studypad.xml.h:16
 msgid "Save"
 msgstr "Enregistrer"
 
@@ -207,38 +206,24 @@ msgstr "À propos de ce module SWORD"
 msgid "The module has no About information."
 msgstr "Ce module ne contient pas d'information À propos"
 
-#: ../src/gnome2/about_sword.c:88
+#: ../src/gnome2/about_sword.c:81
 msgid ""
 "The SWORD Project is an effort to create an ever-expanding software package "
 "for research and study of God and His Word. The SWORD Project framework "
 "allows easy use and study of Bible texts, commentaries, lexicons, "
 "dictionaries, and other books. Many frontends are built using this "
 "framework. An installed set of books may be shared among all frontends using "
-"the framework."
+"the framework.\n"
+"\n"
+" Books can be downloaded from the SWORD Project."
 msgstr ""
-"Le Projet SWORD a pour objectif la création d'un ensemble croissant de "
-"logiciels destinés à l'étude de la Bible.\n"
-"Les composants de l'infrastructure logicielle du Projet SWORD donnent les "
-"moyens d'utiliser et étudier aisément textes bibliques, commentaires, "
-"dictionnaires ou autres documents.\n"
-"De nombreux logiciels utilisateurs ont été développés à partir de cette "
-"infrastructure. Un seul assortiment de documents bibliques installés est "
-"ainsi accessible par tous ces logiciels."
+"Le Projet SWORD a pour objectif la création d'un ensemble croissant de logiciels destinés à l'étude de Dieu et de la Bible.\n"
+"La base logicielle du Projet SWORD donne les moyens d'utiliser et étudier aisément textes bibliques, commentaires, dictionnaires ou autres documents.\n"
+"De nombreux logiciels utilisateurs sont développés sur cette base. L'installation d'une sélection de textes est ainsi exploitable par tous ces logiciels.\n"
+"\n"
+"Les textes peuvent être téléchargés sur le site du Projet SWORD."
 
-#: ../src/gnome2/about_sword.c:106
-msgid "About the SWORD Project"
-msgstr "À propos du Projet SWORD"
-
-#: ../src/gnome2/about_sword.c:124
-msgid "Sword Version"
-msgstr "Version de Sword"
-
-#: ../src/gnome2/about_sword.c:155
-msgid "Books can be downloaded from the SWORD Project"
-msgstr ""
-"Plus d'informations en ligne sur le site du Projet SWORD (en anglais) :"
-
-#: ../src/gnome2/about_sword.c:161
+#: ../src/gnome2/about_sword.c:105
 msgid "The SWORD Project"
 msgstr "The SWORD Project"
 
@@ -271,11 +256,11 @@ msgstr "Voir le TRANSLATION-HOWTO dans le source de Xiphos"
 msgid "Xiphos development"
 msgstr "SIte de développement de Xiphos"
 
-#: ../src/gnome2/about_xiphos.c:131
+#: ../src/gnome2/about_xiphos.c:130
 msgid "Copyright 2000-2009 The Xiphos Development Team"
 msgstr "Copyright 2000-2009 L'équipe de développement Xiphos"
 
-#: ../src/gnome2/about_xiphos.c:134
+#: ../src/gnome2/about_xiphos.c:133
 msgid ""
 "(formerly known as GnomeSword)\n"
 "\n"
@@ -295,23 +280,23 @@ msgstr "Aller à "
 
 #. info->stock_icon = GTK_STOCK_OPEN;
 #: ../src/gnome2/bookmark_dialog.c:171 ../src/gnome2/bookmarks_menu.c:354
-#: ../src/gnome2/bookmarks_menu.c:761 ../src/gnome2/bookmarks_menu.c:859
-#: ../src/gnome2/bookmarks_treeview.c:133 ../ui/editor_studypad.xml.h:2
+#: ../src/gnome2/bookmarks_menu.c:649 ../src/gnome2/bookmarks_menu.c:747
+#: ../src/gnome2/bookmarks_treeview.c:134 ../ui/editor_studypad.xml.h:2
 #: ../ui/xi-menus.glade.h:13
 msgid "Bookmark"
 msgstr "Signet"
 
-#: ../src/gnome2/bookmark_dialog.c:173 ../src/gnome2/bookmarks_menu.c:861
-#: ../src/gnome2/bookmarks_treeview.c:134
+#: ../src/gnome2/bookmark_dialog.c:173 ../src/gnome2/bookmarks_menu.c:749
+#: ../src/gnome2/bookmarks_treeview.c:135
 msgid "Enter Folder Name"
 msgstr "Saisir le nom du dossier"
 
-#: ../src/gnome2/bookmark_dialog.c:175 ../src/gnome2/bookmarks_menu.c:863
+#: ../src/gnome2/bookmark_dialog.c:175 ../src/gnome2/bookmarks_menu.c:751
 msgid "Folder Name"
 msgstr "Nom du dossier"
 
-#: ../src/gnome2/bookmark_dialog.c:176 ../src/gnome2/bookmarks_menu.c:864
-#: ../src/gnome2/bookmarks_treeview.c:136
+#: ../src/gnome2/bookmark_dialog.c:176 ../src/gnome2/bookmarks_menu.c:752
+#: ../src/gnome2/bookmarks_treeview.c:137
 msgid "Folder: "
 msgstr "Dossier : "
 
@@ -327,44 +312,41 @@ msgstr "Nom du dossier : "
 msgid "Bookmark name: "
 msgstr "Nom du signet : "
 
-#: ../src/gnome2/bookmarks_menu.c:363 ../src/gnome2/bookmarks_menu.c:769
+#: ../src/gnome2/bookmarks_menu.c:363 ../src/gnome2/bookmarks_menu.c:657
 msgid "Verse: "
 msgstr "Verset : "
 
-#: ../src/gnome2/bookmarks_menu.c:364 ../src/gnome2/bookmarks_menu.c:770
+#: ../src/gnome2/bookmarks_menu.c:364 ../src/gnome2/bookmarks_menu.c:658
 msgid "Module: "
 msgstr "Module : "
 
-#: ../src/gnome2/bookmarks_menu.c:529
-msgid "Restore Bookmark Folder"
-msgstr "Restaurer le dossier des signets"
-
-#: ../src/gnome2/bookmarks_menu.c:598
+#: ../src/gnome2/bookmarks_menu.c:486
 msgid "Remove the selected folder"
 msgstr "Supprimer le dossier sélectionné"
 
-#: ../src/gnome2/bookmarks_menu.c:600
+#: ../src/gnome2/bookmarks_menu.c:488
 msgid "(and all its contents)?"
 msgstr "(et tout son contenu)?"
 
-#: ../src/gnome2/bookmarks_menu.c:603
+#: ../src/gnome2/bookmarks_menu.c:491
 msgid "Remove the selected bookmark"
 msgstr "Supprimer le signet"
 
-#: ../src/gnome2/bookmarks_menu.c:762
+#: ../src/gnome2/bookmarks_menu.c:650
 msgid "Add"
 msgstr "Ajouter"
 
-#: ../src/gnome2/bookmarks_menu.c:768
+#: ../src/gnome2/bookmarks_menu.c:656
 msgid "Label: "
 msgstr "Étiquette : "
 
-#: ../src/gnome2/bookmarks_treeview.c:107
+#: ../src/gnome2/bookmarks_treeview.c:108 ../src/gnome2/export_bookmarks.c:187
+#: ../src/gnome2/export_bookmarks.c:246
 #, c-format
 msgid "Search result: %s"
 msgstr "Résultat de la requête : %s"
 
-#: ../src/gnome2/bookmarks_treeview.c:947 ../src/gnome2/sidebar.c:1385
+#: ../src/gnome2/bookmarks_treeview.c:948 ../src/gnome2/sidebar.c:1385
 msgid "Bookmarks"
 msgstr "Signets"
 
@@ -391,6 +373,20 @@ msgstr "Xiphos :"
 #: ../src/gnome2/dialog.c:697
 msgid "Close _without Saving"
 msgstr "Ferme sans enregistrer"
+
+#: ../src/gnome2/export_bookmarks.c:189 ../src/gnome2/export_bookmarks.c:248
+#: ../src/gnome2/sidebar.c:1401
+#, c-format
+msgid "Verse List"
+msgstr "_Versets"
+
+#: ../src/gnome2/export_bookmarks.c:683
+msgid "VerseList"
+msgstr "Liste de versets"
+
+#: ../src/gnome2/export_bookmarks.c:688
+msgid "SearchResults"
+msgstr "Résultat de la requête"
 
 #: ../src/gnome2/export_dialog.c:267 ../ui/export-dialog.glade.h:20
 msgid "Please check copyright before exporting!"
@@ -422,27 +418,27 @@ msgstr "Expression rationnelle"
 msgid "Find Next"
 msgstr "Rechercher suivant"
 
-#: ../src/gnome2/font_dialog.c:303
+#: ../src/gnome2/font_dialog.c:302
 msgid "Set Module Font"
 msgstr "Changer de police"
 
-#: ../src/gnome2/font_dialog.c:333
+#: ../src/gnome2/font_dialog.c:332
 msgid "Change font for"
 msgstr "Change la police de"
 
-#: ../src/gnome2/font_dialog.c:337
+#: ../src/gnome2/font_dialog.c:336
 msgid "Module"
 msgstr "Module"
 
-#: ../src/gnome2/font_dialog.c:341
+#: ../src/gnome2/font_dialog.c:340
 msgid "Current font: "
 msgstr "Police utilisée : "
 
-#: ../src/gnome2/font_dialog.c:378
+#: ../src/gnome2/font_dialog.c:372
 msgid "+0"
 msgstr "+0"
 
-#: ../src/gnome2/font_dialog.c:382
+#: ../src/gnome2/font_dialog.c:376
 msgid "Use the default font for this module"
 msgstr "Police par défaut dans ce module"
 
@@ -463,7 +459,7 @@ msgstr "Police par défaut dans ce module"
 #. * Return value
 #. *   void
 #.
-#: ../src/gnome2/gui.c:110
+#: ../src/gnome2/gui.c:101
 msgid ""
 "URL references using \"sword://\" (similar to web page\n"
 "references) can be used by programs to look up\n"
@@ -481,7 +477,7 @@ msgstr ""
 "Voulez-vous que Xiphos soit paramétré comme\n"
 "l'application gérant ces adresses URL?"
 
-#: ../src/gnome2/gui.c:112
+#: ../src/gnome2/gui.c:103
 msgid ""
 "Xiphos has successfully set itself\n"
 "as the handler of sword:// and bible:// URLs.\n"
@@ -497,7 +493,7 @@ msgstr ""
 "les clés sous : /desktop/gnome/url-handlers,\n"
 "si vous éprouvez le besoin de les changer."
 
-#: ../src/gnome2/gui.c:166
+#: ../src/gnome2/gui.c:157
 #, c-format
 msgid ""
 "Xiphos failed to complete handler init for key #%d:\n"
@@ -506,16 +502,16 @@ msgstr ""
 "Xiphos n'a pas pu initialiser la clé #%d:\n"
 "%s"
 
-#: ../src/gnome2/gui.c:212
+#: ../src/gnome2/gui.c:203
 msgid "BUG! Xiphos is about to crash due to a \"STRDUP\" error."
 msgstr "BUG! Xiphos va s'arrêter sur une erreur « STRDUP »"
 
-#: ../src/gnome2/gui.c:213 ../src/gnome2/gui.c:248
+#: ../src/gnome2/gui.c:204 ../src/gnome2/gui.c:239
 msgid "Please report this error to the Xiphos team with:"
 msgstr ""
 "Merci de signaler cette erreur à l'équipe de développement Xiphos avec :"
 
-#: ../src/gnome2/gui.c:247
+#: ../src/gnome2/gui.c:238
 msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
 msgstr "BUG! Xiphos va s'arrêter sur une erreur « STRING »."
 
@@ -782,9 +778,9 @@ msgstr "Terminé"
 
 #: ../src/gnome2/mod_mgr.c:997 ../src/gnome2/mod_mgr.c:999
 #: ../src/gnome2/mod_mgr.c:1101 ../src/gnome2/mod_mgr.c:1136
-#: ../src/gnome2/mod_mgr.c:1138 ../src/gnome2/utilities.c:435
-#: ../src/gnome2/utilities.c:500 ../src/gnome2/utilities.c:502
-#: ../src/gnome2/utilities.c:986 ../src/main/sidebar.cc:852
+#: ../src/gnome2/mod_mgr.c:1138 ../src/gnome2/utilities.c:431
+#: ../src/gnome2/utilities.c:496 ../src/gnome2/utilities.c:498
+#: ../src/gnome2/utilities.c:982 ../src/main/sidebar.cc:852
 #: ../src/main/sidebar.cc:924 ../src/main/sidebar.cc:926
 msgid "Unknown"
 msgstr "Inconnu"
@@ -806,39 +802,39 @@ msgstr ""
 "Modules classés\n"
 "par type"
 
-#: ../src/gnome2/mod_mgr.c:1312 ../src/gnome2/utilities.c:561
+#: ../src/gnome2/mod_mgr.c:1312 ../src/gnome2/utilities.c:557
 #: ../src/main/sidebar.cc:999 ../src/main/sidebar.cc:1001
 msgid "Biblical Texts"
 msgstr "Textes bibliques"
 
-#: ../src/gnome2/mod_mgr.c:1316 ../src/gnome2/utilities.c:565
+#: ../src/gnome2/mod_mgr.c:1316 ../src/gnome2/utilities.c:561
 #: ../src/main/sidebar.cc:678 ../src/main/sidebar.cc:1024
 #: ../src/main/sidebar.cc:1026 ../ui/prefs.glade.h:33
 msgid "Commentaries"
 msgstr "Commentaires"
 
-#: ../src/gnome2/mod_mgr.c:1320 ../src/gnome2/utilities.c:569
+#: ../src/gnome2/mod_mgr.c:1320 ../src/gnome2/utilities.c:565
 #: ../src/main/sidebar.cc:1033 ../src/main/sidebar.cc:1035
 msgid "Dictionaries"
 msgstr "Dictionnaires"
 
-#: ../src/gnome2/mod_mgr.c:1324 ../src/gnome2/utilities.c:573
+#: ../src/gnome2/mod_mgr.c:1324 ../src/gnome2/utilities.c:569
 #: ../src/main/sidebar.cc:1042 ../src/main/sidebar.cc:1044
 msgid "Daily Devotionals"
 msgstr "Calendriers bibliques"
 
-#: ../src/gnome2/mod_mgr.c:1328 ../src/gnome2/utilities.c:577
+#: ../src/gnome2/mod_mgr.c:1328 ../src/gnome2/utilities.c:573
 #: ../src/main/sidebar.cc:688 ../src/main/sidebar.cc:1051
 #: ../src/main/sidebar.cc:1053
 msgid "General Books"
 msgstr "Livres"
 
-#: ../src/gnome2/mod_mgr.c:1332 ../src/gnome2/utilities.c:581
+#: ../src/gnome2/mod_mgr.c:1332 ../src/gnome2/utilities.c:577
 #: ../src/main/sidebar.cc:1060 ../src/main/sidebar.cc:1062
 msgid "Maps"
 msgstr "Cartes"
 
-#: ../src/gnome2/mod_mgr.c:1336 ../src/gnome2/utilities.c:585
+#: ../src/gnome2/mod_mgr.c:1336 ../src/gnome2/utilities.c:581
 #: ../src/main/sidebar.cc:1069 ../src/main/sidebar.cc:1071
 msgid "Images"
 msgstr "Images"
@@ -860,7 +856,7 @@ msgid "Uninstalled"
 msgstr "Non installé"
 
 #: ../src/gnome2/mod_mgr.c:1357 ../src/gnome2/sidebar.c:639
-#: ../src/gnome2/utilities.c:590 ../src/main/prayerlists.cc:241
+#: ../src/gnome2/utilities.c:586 ../src/main/prayerlists.cc:241
 #: ../src/main/sidebar.cc:1079 ../src/main/sidebar.cc:1081
 msgid "Prayer List/Journal"
 msgstr "Liste de prières / Journal"
@@ -1297,10 +1293,6 @@ msgstr "Haute"
 #: ../src/gnome2/sidebar.c:1393
 msgid "Search"
 msgstr "Rechercher"
-
-#: ../src/gnome2/sidebar.c:1401
-msgid "Verse List"
-msgstr "_Versets"
 
 #: ../src/gnome2/sidebar_dialog.c:139 ../src/gnome2/sidebar_dialog.c:148
 msgid "Sidebar"
@@ -2094,32 +2086,26 @@ msgid "Delete the current note"
 msgstr "Supprime la note actuelle"
 
 #: ../ui/editor_note.xml.h:2 ../ui/editor_studypad.xml.h:4
-#: ../ui/editor.xml.h:2
 msgid "E_xit"
 msgstr "_Quitter"
 
 #: ../ui/editor_note.xml.h:3 ../ui/editor_studypad.xml.h:5
-#: ../ui/editor.xml.h:3
 msgid "Exit"
 msgstr "Quitter"
 
 #: ../ui/editor_note.xml.h:4 ../ui/editor_studypad.xml.h:6
-#: ../ui/editor.xml.h:4
 msgid "Exit the program"
 msgstr "Quitte l'application"
 
 #: ../ui/editor_note.xml.h:5 ../ui/editor_studypad.xml.h:7
-#: ../ui/editor.xml.h:5
 msgid "For_mat"
 msgstr "For_mat"
 
 #: ../ui/editor_note.xml.h:6 ../ui/editor_studypad.xml.h:8
-#: ../ui/editor.xml.h:6
 msgid "HTML Format switch"
 msgstr "Commutateur de format HTML"
 
 #: ../ui/editor_note.xml.h:7 ../ui/editor_studypad.xml.h:9
-#: ../ui/editor.xml.h:7
 msgid "HTML mode"
 msgstr "mode HTML"
 
@@ -2147,15 +2133,15 @@ msgstr "Enregistrer le commentaire"
 msgid "Add this file to your bookmarks"
 msgstr "Ajouter ce fichier à vos signets"
 
-#: ../ui/editor_studypad.xml.h:3 ../ui/editor.xml.h:1
+#: ../ui/editor_studypad.xml.h:3
 msgid "Create a new document"
 msgstr "Crée un nouveau document"
 
-#: ../ui/editor_studypad.xml.h:10 ../ui/editor.xml.h:8
+#: ../ui/editor_studypad.xml.h:10
 msgid "New Document"
 msgstr "Nouveau document"
 
-#: ../ui/editor_studypad.xml.h:11 ../ui/editor.xml.h:9
+#: ../ui/editor_studypad.xml.h:11
 msgid "Open"
 msgstr "Ouvrir"
 
@@ -2175,17 +2161,13 @@ msgstr "Imprime ce document"
 msgid "Save AS"
 msgstr "Enregistrer _sous.."
 
-#: ../ui/editor_studypad.xml.h:18 ../ui/editor.xml.h:12
+#: ../ui/editor_studypad.xml.h:18
 msgid "Save the current file"
 msgstr "Enregistrer le fichier"
 
 #: ../ui/editor_studypad.xml.h:19
 msgid "Save the current file as"
 msgstr "Enregistre le fichier le fichier en cours sous"
-
-#: ../ui/editor.xml.h:10
-msgid "Open the file in Studypad"
-msgstr "Ouvre le fichier dans le bloc-notes"
 
 #: ../ui/export-dialog.glade.h:1
 msgid ": "
@@ -3584,6 +3566,38 @@ msgstr "_Afficher/Cacher le volet latéral"
 msgid "_Verse Per Line"
 msgstr "_Verset par ligne"
 
+#: ../ui/xi-export-bookmarks.glade.h:1
+msgid "<b>Export to:</b>"
+msgstr "<b>Exporter sous :</b>"
+
+#: ../ui/xi-export-bookmarks.glade.h:2
+msgid "Export Bookmark Folder"
+msgstr "Exporter le dossier des signets"
+
+#: ../ui/xi-export-bookmarks.glade.h:3
+msgid "Html"
+msgstr "Html"
+
+#: ../ui/xi-export-bookmarks.glade.h:4
+msgid "Include Bible text"
+msgstr "Inclure le texte biblique"
+
+#: ../ui/xi-export-bookmarks.glade.h:5
+msgid "Plain text"
+msgstr "Texte simple"
+
+#: ../ui/xi-export-bookmarks.glade.h:6
+msgid "Xiphos bookmarks"
+msgstr "Signets Xiphos"
+
+#: ../ui/xi-export-bookmarks.glade.h:7
+msgid "gtk-cancel"
+msgstr "gtk-annuler"
+
+#: ../ui/xi-export-bookmarks.glade.h:8
+msgid "gtk-ok"
+msgstr "gtk-ok"
+
 #: ../xiphos.desktop.in.in.h:1
 msgid "Study the Bible"
 msgstr "Aide à l'étude de la Bible"
@@ -3591,6 +3605,19 @@ msgstr "Aide à l'étude de la Bible"
 #: ../xiphos.desktop.in.in.h:2
 msgid "Xiphos Bible Guide"
 msgstr "Guide de la Bible Xiphos"
+
+#~ msgid "About the SWORD Project"
+#~ msgstr "À propos du Projet SWORD"
+
+#~ msgid "Sword Version"
+#~ msgstr "Version de Sword"
+
+#~ msgid "Books can be downloaded from the SWORD Project"
+#~ msgstr ""
+#~ "Plus d'informations en ligne sur le site du Projet SWORD (en anglais) :"
+
+#~ msgid "Open the file in Studypad"
+#~ msgstr "Ouvre le fichier dans le bloc-notes"
 
 #~ msgid "Open in a new tab"
 #~ msgstr "Ouvrir dans un nouvel onglet"
