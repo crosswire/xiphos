@@ -230,7 +230,10 @@ gecko_init (void)
 	nsresult rv;
 #ifdef XPCOM_GLUE
 	//needs to be tested on lower gecko versions
-#define UPPER_RANGE "1.9.1.99"
+	//I have really no clue what this ranges mean but if xulrunner is
+	//outside of this range we get coredumps =( so here is a bold assumption
+	//that we will be able to work with any future xulrunner.
+#define UPPER_RANGE "1.9.99"
 #define LOWER_RANGE "1.9.0"
 	static const GREVersionRange greVersion = {
 		LOWER_RANGE, PR_TRUE,
