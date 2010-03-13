@@ -601,7 +601,7 @@ static void
 action_save_cb (GtkAction *action,
                 EDITOR *e)
 {
-	switch(e->type) {
+	switch (e->type) {
 	case STUDYPAD_EDITOR:	
 		_save_file (e);
 		break;
@@ -1160,7 +1160,7 @@ void editor_sync_with_main(void)
 	while (tmp != NULL) {
 		e = (EDITOR*)tmp->data;
 		//if (!e->studypad) {
-		switch(e->type) {
+		switch (e->type) {
 			case STUDYPAD_EDITOR:
 			case BOOK_EDITOR:
 				break;			
@@ -1257,7 +1257,7 @@ gint ask_about_saving(EDITOR * e)
 	gchar *buf3 = NULL;
 	gint retval = FALSE;	
 
-	switch(e->type) {
+	switch (e->type) {
 	case BOOK_EDITOR:
 	case NOTE_EDITOR:
 		info = gui_new_dialog();
@@ -1348,7 +1348,7 @@ gint _create_new(const gchar * filename, const gchar * key, gint editor_type)
 	editor->sync = FALSE;
 	editor->type = editor_type;
 	
-	switch(editor_type) {
+	switch (editor_type) {
 	case STUDYPAD_EDITOR:	
 		editor->studypad = TRUE;
 		editor->module = NULL;
@@ -1451,7 +1451,7 @@ gint editor_create_new(const gchar * filename, const gchar * key, gint editor_ty
 	tmp = g_list_first(editors_all);
 	while (tmp != NULL) {
 		e = (EDITOR*)tmp->data;
-		switch(editor_type) {
+		switch (editor_type) {
 		case STUDYPAD_EDITOR:
 			if (e->studypad) {
 				if (editor_is_dirty(e))
