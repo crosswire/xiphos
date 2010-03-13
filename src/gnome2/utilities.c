@@ -76,6 +76,32 @@
 
 /******************************************************************************
  * Name
+ *   sync_windows
+ *
+ * Synopsis
+ *   void sync_windows()	
+ *
+ * Description
+ *   forces GTK window updates iff the block flag is unset.
+ *   this flag is only checked here; set/unset by others.
+ *
+ * Return value
+ *   void
+ */
+
+gint stop_window_sync = 0;
+
+void
+sync_windows()
+{
+	if (stop_window_sync == 0) {
+		while (gtk_events_pending())
+			gtk_main_iteration();
+	}
+}
+
+/******************************************************************************
+ * Name
  *  utilities_parse_treeview
  *
  * Synopsis
@@ -155,9 +181,7 @@ void gui_reassign_strdup(gchar **where, gchar *what)
 void gui_set_progressbar_text(GtkWidget * pb, gchar * text)
 {
 	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(pb), text);
-	while (gtk_events_pending()) {
-		gtk_main_iteration();
-	}  
+	sync_windows();
 }
 
 void gui_set_statusbar (const gchar * message)
@@ -179,9 +203,7 @@ void gui_set_statusbar (const gchar * message)
 void gui_set_progressbar_fraction(GtkWidget * pb, gdouble fraction)
 {
 	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(pb), fraction);
-	while (gtk_events_pending()) {
-		gtk_main_iteration();
-	}  
+	sync_windows();
 }
 
 

@@ -639,7 +639,7 @@ on_save_session_activate(GtkMenuItem * menuitem, gpointer user_data)
  *
  * Description
  *    when en/disabling panes, we must redisplay in order that text
- *    (especially current verse) not suddenly find themselves out of view.
+ *    (especially current verse) not suddenly find itself out of view.
  *
  * Return value
  *   void
@@ -654,8 +654,8 @@ redisplay_to_realign()
 	realign_busy = TRUE;
 
 	/* first realize the pane size updates. */
-	while (gtk_events_pending())
-		gtk_main_iteration();
+	sync_windows();
+
 	/* then just redisplay everything as-is. */
 	gchar *url = g_strdup_printf("sword://%s/%s",
 				     settings.MainWindowModule,

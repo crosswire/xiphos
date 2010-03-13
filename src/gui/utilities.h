@@ -31,6 +31,9 @@ extern "C" {
 #include "main/module_dialogs.h"
 #include <gsf/gsf-outfile.h>
 
+extern gint stop_window_sync;
+void sync_windows(void);
+
 gint gui_of2tf(const gchar * on_off);
 gchar *gui_tf2of(gint true_false);
 void gui_reassign_strdup(gchar **where, gchar *what);

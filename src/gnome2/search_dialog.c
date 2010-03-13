@@ -236,8 +236,7 @@ void _on_destroy(GtkWidget * dialog, gpointer user_data)
 	/* main_do_dialog_search() initializes these as search starts */
 	if (search_active) {
 		terminate_search = TRUE;
-		while (gtk_events_pending())
-			gtk_main_iteration();
+		sync_windows();
 	} else {
 		main_close_search_dialog();
 		if (module_selected) {
@@ -278,8 +277,7 @@ void on_button_begin_search(GtkButton * button, gpointer user_data)
 		label = g_strdup("gtk-find");
 		gtk_button_set_label((GtkButton *)remember_search, label);
 		gtk_button_set_use_stock((GtkButton *)remember_search, TRUE);
-		while (gtk_events_pending())
-			gtk_main_iteration();
+		sync_windows();
 	} else {
 		const gchar *label;
 		label = g_strdup("gtk-stop");

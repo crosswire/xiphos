@@ -31,6 +31,7 @@
 //#include "gui/html.h"
 #include "gui/xiphos.h"
 #include "gui/widgets.h"
+#include "gui/utilities.h"
 
 #include "main/search_dialog.h"
 #include "main/search_sidebar.h"
@@ -68,8 +69,7 @@ static void on_search_button_clicked(GtkButton * button, gpointer user_data)
 		label = g_strdup("gtk-find");
 		gtk_button_set_label((GtkButton *)remember_search, label);
 		gtk_button_set_use_stock((GtkButton *)remember_search, TRUE);
-		while (gtk_events_pending())
-			gtk_main_iteration();
+		sync_windows();
 	} else {
 		const gchar *label;
 		label = g_strdup("gtk-stop");

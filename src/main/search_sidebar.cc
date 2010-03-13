@@ -421,7 +421,6 @@ void main_sidebar_search_percent_update(char percent, void *userData)
 		    printed++;
 		}
 	}
-	while (gtk_events_pending())
-		gtk_main_iteration();
+	sync_windows();
 	printed = 0;
 }

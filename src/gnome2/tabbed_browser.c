@@ -133,8 +133,7 @@ void gui_recompute_shows(void)
 	gui_show_hide_comms(settings.showcomms);
 	gui_set_bible_comm_layout();
 
-	while (gtk_events_pending())
-		gtk_main_iteration();
+	sync_windows();
 
 	stop_refresh = FALSE;
 }
@@ -1412,8 +1411,7 @@ void gui_close_passage_tab(gint pagenum)
 	}
 	
 	stop_refresh = TRUE;
-	while (gtk_events_pending())
-		gtk_main_iteration();
+	sync_windows();
 	stop_refresh = FALSE;
 	
 	passage_list = g_list_remove(passage_list, pt);

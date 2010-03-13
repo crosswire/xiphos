@@ -910,6 +910,7 @@ void main_keep_bibletext_dialog_in_sync(gchar * key)
 	GList *tmp = NULL;
 	gchar * url;
 	tmp = g_list_first(list_dialogs);
+	stop_window_sync++;
 	while (tmp != NULL) {
 		DIALOG_DATA * t = (DIALOG_DATA*) tmp->data;
 		if(t->sync) {
@@ -919,6 +920,7 @@ void main_keep_bibletext_dialog_in_sync(gchar * key)
 		}
 		tmp = g_list_next(tmp);
 	}
+	stop_window_sync--;
 }
 
 
