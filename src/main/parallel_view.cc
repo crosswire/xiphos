@@ -632,7 +632,7 @@ void main_change_parallel_module(GSParallel parallel, gchar * mod_name)
 {
 	if (!mod_name) 
 		return;
-	switch(parallel) {
+	switch (parallel) {
 	case PARALLEL1:	
 		xml_set_value("Xiphos", "modules", "int1",
 			      mod_name);

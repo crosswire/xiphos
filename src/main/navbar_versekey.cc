@@ -217,7 +217,7 @@ void on_nt_book_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 	int book = GPOINTER_TO_INT(user_data);
 	
 	vkey.AutoNormalize(1);
-	switch(c_type) {
+	switch (c_type) {
 		case NB_MAIN:
 			vkey = navbar_versekey.key->str;
 			entry = navbar_versekey.lookup_entry;
@@ -272,7 +272,7 @@ void on_ot_book_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 //#ifndef OLD_NAVBAR	
 	vkey.AutoNormalize(1);
 	
-	switch(c_type) {
+	switch (c_type) {
 		case NB_MAIN:
 			vkey = navbar_versekey.key->str;
 			entry = navbar_versekey.lookup_entry;
@@ -329,7 +329,7 @@ void on_chapter_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 //#ifndef OLD_NAVBAR	
 	vkey.AutoNormalize(1);
 	
-	switch(c_type) {
+	switch (c_type) {
 		case NB_MAIN:
 			vkey = navbar_versekey.key->str;
 			entry = navbar_versekey.lookup_entry;
@@ -384,7 +384,7 @@ void on_verse_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 	
 //#ifndef OLD_NAVBAR	
 	vkey.AutoNormalize(1);
-	switch(c_type) {
+	switch (c_type) {
 		case NB_MAIN:
 			vkey = navbar_versekey.key->str;
 			entry = navbar_versekey.lookup_entry;

@@ -245,7 +245,7 @@ static gboolean on_key_press_event           (GtkWidget       *widget,
 		g_message("GDK_MODIFIER_MASK");
 	g_message("state: %d",event->state);
 #endif
-	switch(event->hardware_keycode) {
+	switch (event->hardware_keycode) {
 		case 50:
 		case 62:
 			shift_key_pressed = TRUE;
@@ -269,7 +269,7 @@ static gboolean on_key_release_event         (GtkWidget       *widget,
 	if (event->state == GDK_MOD1_MASK)
 		g_message("GDK_MOD1_MASK");
 #endif
-	switch(event->hardware_keycode) {
+	switch (event->hardware_keycode) {
 		case 50:
 		case 62:
 			shift_key_pressed = FALSE;
