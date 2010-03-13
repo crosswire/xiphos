@@ -286,7 +286,7 @@ gboolean select_book_button_press_callback(GtkWidget * widget,
 	GtkWidget *menu;
 	
 	menu = main_versekey_drop_down_book_menu(editor->navbar, NB_EDITOR, NULL, editor);
-	if(!menu)
+	if (!menu)
 		return 0;		
 	g_signal_connect(menu, "deactivate",
 			 G_CALLBACK(menu_deactivate_callback), widget);
@@ -330,7 +330,7 @@ gboolean select_chapter_button_press_callback(GtkWidget * widget,
 	GtkWidget *menu;
 	
 	menu = main_versekey_drop_down_chapter_menu(editor->navbar, NB_EDITOR, NULL, editor);
-	if(!menu)
+	if (!menu)
 		return 0;		
 	g_signal_connect(menu, "deactivate",
 			 G_CALLBACK(menu_deactivate_callback), widget);
@@ -373,7 +373,7 @@ static gboolean select_verse_button_press_callback(GtkWidget * widget,
 	GtkWidget *menu;
 	
 	menu = main_versekey_drop_down_verse_menu(editor->navbar, NB_EDITOR, NULL, editor);
-	if(!menu)
+	if (!menu)
 		return 0;		
 	g_signal_connect(menu, "deactivate",
 			 G_CALLBACK(menu_deactivate_callback), widget);
@@ -407,10 +407,10 @@ static gboolean select_verse_button_press_callback(GtkWidget * widget,
 static void on_entry_activate(GtkEntry * entry, EDITOR * editor)
 {
 	const gchar *buf = gtk_entry_get_text(entry);
-	if(buf == NULL)
+	if (buf == NULL)
 		return;
 	const gchar *gkey = main_get_valid_key((gchar*)buf);
-	if(gkey == NULL)
+	if (gkey == NULL)
 		return;
 	gchar *url = g_strdup_printf("sword:///%s", gkey);
 	
@@ -419,9 +419,9 @@ static void on_entry_activate(GtkEntry * entry, EDITOR * editor)
 	
 	editor_load_note(editor, NULL, gkey);
 
-	if(url)
+	if (url)
 		g_free(url);
-	if(gkey)
+	if (gkey)
 		g_free((gchar*)gkey);
 }
 

@@ -102,7 +102,7 @@ static gboolean lookup_entry_press_callback(GtkWidget * widget,
 					     GdkEventKey * event,
 					     gpointer user_data)
 {
-	if(!settings.havebook)
+	if (!settings.havebook)
 		return FALSE;	
 	/* this does not work on my system - hope I'm not messing things up
 	   for others - 104 is the enter key on the number pad
@@ -156,7 +156,7 @@ static gboolean select_button_press_callback(GtkWidget * widget,
 {
 	GtkWidget *menu;
 	
-	if(!settings.havebook)
+	if (!settings.havebook)
 		return FALSE;	
 	menu = main_book_drop_down_new();
 	g_signal_connect(menu, "deactivate",
@@ -192,7 +192,7 @@ static gboolean select_button_press_callback(GtkWidget * widget,
 static
 void on_button_parent_clicked(GtkButton * button, gpointer user_data)
 {
-	if(!settings.havebook)
+	if (!settings.havebook)
 		return;	
 	main_navbar_book_parent();
 }
@@ -217,7 +217,7 @@ void on_button_parent_clicked(GtkButton * button, gpointer user_data)
 static
 void on_button_child_clicked(GtkButton * button, gpointer user_data)
 {
-	if(!settings.havebook)
+	if (!settings.havebook)
 		return;	
 	main_navbar_book_first_child();
 }
@@ -242,7 +242,7 @@ void on_button_child_clicked(GtkButton * button, gpointer user_data)
 static
 void on_button_prev_clicked(GtkButton * button, gpointer user_data)
 {
-	if(!settings.havebook)
+	if (!settings.havebook)
 		return;	
 	main_navbar_book_prev();
 }
@@ -267,7 +267,7 @@ void on_button_prev_clicked(GtkButton * button, gpointer user_data)
 static
 void on_button_next_clicked(GtkButton * button, gpointer user_data)
 {
-	if(!settings.havebook)
+	if (!settings.havebook)
 		return;	
 	main_navbar_book_next();
 }

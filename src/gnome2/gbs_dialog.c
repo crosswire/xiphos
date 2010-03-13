@@ -206,7 +206,7 @@ static gboolean button_press(GtkWidget *widget,
 			     DIALOG_DATA *g)
 {
 	//cur_dlg = g;
-	if(event->button == 2)
+	if (event->button == 2)
 		gui_menu_popup (NULL, g); 
 	return FALSE;
 }

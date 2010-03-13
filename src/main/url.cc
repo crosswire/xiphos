@@ -260,8 +260,8 @@ static gint show_separate_image(const gchar * filename, gboolean clicked)
  static gint show_parallel(const gchar * svalue, const gchar * stype, 
 							gboolean clicked)
 {
-	if(!strcmp(stype,"swap")) {
-		if(clicked) {
+	if (!strcmp(stype,"swap")) {
+		if (clicked) {
 			main_swap_parallel_with_main((gchar *) svalue);		
 		} else {
 			gchar *buf = g_strdup_printf( 
@@ -270,8 +270,8 @@ static gint show_separate_image(const gchar * filename, gboolean clicked)
 			g_free(buf);
 		}
 	}
-	if(!strcmp(stype,"verse")) {
-		if(clicked) {
+	if (!strcmp(stype,"verse")) {
+		if (clicked) {
 			gtk_entry_set_text(GTK_ENTRY(navbar_parallel.lookup_entry),svalue);
 			gtk_widget_activate(navbar_parallel.lookup_entry);
 		} 
@@ -359,19 +359,19 @@ static gint show_strongs(const gchar * stype, const gchar * svalue,
 	gchar *val = NULL;
 
 	val = g_strdup(svalue);
-	/*if((val1 = strchar(val,'|')) != NULL)	{
+	/*if ((val1 = strchar(val,'|')) != NULL)	{
 		val1 = (val1) ? (val1 + 1) : val;
 		
 	}*/
 	
-	if(!strcmp(settings.MainWindowModule,"NASB")) {
-		if(!strcmp(stype,"Greek")) 
+	if (!strcmp(settings.MainWindowModule,"NASB")) {
+		if (!strcmp(stype,"Greek")) 
 			modbuf = "NASGreek";
 		else 
 			modbuf = "NASHebrew";
 	} else {
 		if (stype && (*stype != '\0')) {
-			if(!strcmp(stype,"Greek")) 
+			if (!strcmp(stype,"Greek")) 
 				modbuf = settings.lex_greek;
 			else  
 				modbuf = settings.lex_hebrew;
@@ -455,7 +455,7 @@ static gint show_note(const gchar * module, const gchar * passage,
 	} else
 		backend->set_module_key((gchar*)module, (gchar*)passage);
 
-	if(strchr(stype,'x') && clicked) {
+	if (strchr(stype,'x') && clicked) {
 		tmpbuf = backend->get_entry_attribute("Footnote",
 						      (gchar*)svalue,
 						      "refList");
@@ -466,12 +466,12 @@ static gint show_note(const gchar * module, const gchar * passage,
 							   tmpbuf);
 			g_free(tmpbuf);
 		}
-	} else if(strchr(stype,'n') && !clicked) {
+	} else if (strchr(stype,'n') && !clicked) {
 		tmpbuf = backend->get_entry_attribute("Footnote",
 						      (gchar*)svalue,
 						      "body");
 		buf = backend->render_this_text((gchar*)module,(gchar*)tmpbuf);
-		if(tmpbuf) g_free(tmpbuf);
+		if (tmpbuf) g_free(tmpbuf);
 		if (buf) {
 			main_information_viewer((gchar*)module,
 						buf,
@@ -480,9 +480,9 @@ static gint show_note(const gchar * module, const gchar * passage,
 						(gchar*)stype,
 						NULL,
 						NULL);
-			if(buf) g_free(buf);
+			if (buf) g_free(buf);
 		}
-	} else if(strchr(stype,'x') && !clicked) {
+	} else if (strchr(stype,'x') && !clicked) {
 		tmpbuf = backend->get_entry_attribute("Footnote",
 						      (gchar*)svalue,
 						      "refList");
@@ -510,7 +510,7 @@ static gint show_note(const gchar * module, const gchar * passage,
 				settings.bible_text_color,
 				(const char *) tmp->data);
 			str = g_string_append(str,buf);
-			if(buf) g_free(buf);
+			if (buf) g_free(buf);
 			buf = NULL;
 			//++i;
 			g_free((char *) tmp->data);
@@ -526,9 +526,9 @@ static gint show_note(const gchar * module, const gchar * passage,
 				      _("Back to "),
 				      settings.currentverse);
 		str = g_string_append(str,buf);
-		if(buf) g_free(buf);
+		if (buf) g_free(buf);
 
-		if(tmpbuf) g_free(tmpbuf);
+		if (tmpbuf) g_free(tmpbuf);
 		if (str) {
 			main_information_viewer((gchar*)module,
 						str->str,
@@ -542,7 +542,7 @@ static gint show_note(const gchar * module, const gchar * passage,
 
 	if (stop_autonorm && vkey)
 		vkey->AutoNormalize(oldAutoNorm);
-	if(work_buf)
+	if (work_buf)
 		g_free(work_buf);
 	g_string_free(str, 1);
 	return 1;
@@ -619,7 +619,7 @@ static int show_module_and_key(const char * module, const char * key,
 			return 1;
 		}
 		if (!strcmp(stype,"newDialog"))  {
-			if(module && (main_get_mod_type((gchar*)module) == PERCOM_TYPE)) {			
+			if (module && (main_get_mod_type((gchar*)module) == PERCOM_TYPE)) {			
 				editor_create_new(module,key,TRUE);
 				return 1;
 			}
@@ -670,7 +670,7 @@ static int show_module_and_key(const char * module, const char * key,
 			case BOOK_TYPE:
 			case PRAYERLIST_TYPE:
 				main_display_book((gchar*)module, (gchar*)key); 
-				if(gtk_notebook_get_current_page (GTK_NOTEBOOK 
+				if (gtk_notebook_get_current_page (GTK_NOTEBOOK 
 						(widgets.notebook_comm_book)) 
 				   		!= 1)
 					gtk_notebook_set_current_page(
@@ -802,7 +802,7 @@ gint sword_uri(const gchar * url, gboolean clicked)
 		    (work_buf[KEY] ? work_buf[KEY] : "-null-")));
 	
 	verse_count = 1; //backend->is_Bible_key(mykey, settings.currentverse);
-	if(backend->is_module(work_buf[MODULE])) {
+	if (backend->is_module(work_buf[MODULE])) {
 		mod_type = backend->module_type(work_buf[MODULE]);
 		switch (mod_type) {
 			case TEXT_TYPE:

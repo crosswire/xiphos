@@ -111,7 +111,7 @@ void do_exit(EDITOR * e)
 	if (e->key) {
 		g_free(e->key);
 	}
-	if(e->window)	
+	if (e->window)	
 		gtk_widget_destroy(e->window);
 		//GS_message(("e->widow still exist!"));
 	g_free(e);
@@ -1067,7 +1067,7 @@ _load_file (EDITOR * e, const gchar * filename)
 	GFile *file;
 	file = g_file_new_for_path(filename);
 	gtkhtml_editor_set_filename(GTKHTML_EDITOR(e->window),e->filename);
-	if(g_file_load_contents (file,
+	if (g_file_load_contents (file,
                               NULL,
                               &contents,
                               &length,
@@ -1102,18 +1102,18 @@ void editor_load_book(EDITOR * e)
 	gchar *title = NULL;
 	gchar *text = NULL;	
 
-	if(!g_ascii_isdigit(e->key[0])) return; /* make sure is a number (offset) */
+	if (!g_ascii_isdigit(e->key[0])) return; /* make sure is a number (offset) */
 	
 	
 	title = g_strdup_printf("%s", e->module);
 	GS_message (("book: %s\noffset :%s", e->module, e->key));
 	
-	if(atol(e->key) != 0)
+	if (atol(e->key) != 0)
 		text = main_get_book_raw_text (e->module, e->key);
 	else
 		text = g_strdup(e->module);
 	
-	if(strlen(text)) {
+	if (strlen(text)) {
 		gtkhtml_editor_set_text_html (GTKHTML_EDITOR(e->window),
 					      text,
 					      strlen(text));
@@ -1196,7 +1196,7 @@ editor_load_note(EDITOR * e, const gchar * module_name,
 	
 	title = g_strdup_printf("%s - %s", e->module, e->key);
 	text = main_get_raw_text((gchar *) e->module, (gchar *) e->key);
-	if(strlen(text)) {
+	if (strlen(text)) {
 		//GS_message(("\n\n\neditor_load_note:\n%s\n\n\n", text));
 		gtkhtml_editor_set_text_html (GTKHTML_EDITOR(e->window),
 					      text,
@@ -1214,7 +1214,7 @@ editor_load_note(EDITOR * e, const gchar * module_name,
 	}
 	
 	change_window_title(e->window, title);
-    	if(e->type == NOTE_EDITOR)
+    	if (e->type == NOTE_EDITOR)
 		main_navbar_versekey_set(e->navbar, e->key);
 	
 	if (text)

@@ -102,7 +102,7 @@ void gui_get_clipboard_text_for_lookup (GtkClipboard *clipboard,
 	gchar *dict = NULL;
 	int len = 0;
 	
-	if(text == NULL) return;
+	if (text == NULL) return;
 	GS_message(("src/gnome2/dictlex.c: text =>%s<",text));
 	
 	key = g_strdelimit((char*)text, "&.,\"<>;:?", ' ');

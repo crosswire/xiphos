@@ -124,7 +124,7 @@ static gboolean select_button_press_callback(GtkWidget * widget,
 {
 	GtkWidget *menu;
 
-	if(!settings.havebook)
+	if (!settings.havebook)
 		return FALSE;	
 	menu = main_navbar_book_dialog_drop_down_new(user_data);	
 	g_signal_connect(menu, "deactivate",
@@ -160,7 +160,7 @@ static gboolean select_button_press_callback(GtkWidget * widget,
 static
 void on_button_parent_clicked(GtkButton * button, gpointer user_data)
 {
-	if(!settings.havebook)
+	if (!settings.havebook)
 		return;	
 	main_navbar_book_dialog_parent(user_data);
 }
@@ -185,7 +185,7 @@ void on_button_parent_clicked(GtkButton * button, gpointer user_data)
 static
 void on_button_child_clicked(GtkButton * button, gpointer user_data)
 {
-	if(!settings.havebook)
+	if (!settings.havebook)
 		return;	
 	main_navbar_book_dialog_first_child(user_data);
 }
@@ -210,7 +210,7 @@ void on_button_child_clicked(GtkButton * button, gpointer user_data)
 static
 void on_button_prev_clicked(GtkButton * button, gpointer user_data)
 {
-	if(!settings.havebook)
+	if (!settings.havebook)
 		return;	
 	main_navbar_book_dialog_prev(user_data);
 }
@@ -235,7 +235,7 @@ void on_button_prev_clicked(GtkButton * button, gpointer user_data)
 static
 void on_button_next_clicked(GtkButton * button, gpointer user_data)
 {
-	if(!settings.havebook)
+	if (!settings.havebook)
 		return;	
 	main_navbar_book_dialog_next(user_data);
 }

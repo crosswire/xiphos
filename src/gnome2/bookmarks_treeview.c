@@ -844,7 +844,7 @@ static gboolean button_release_event(GtkWidget * widget,
 			       NULL, NULL, NULL, NULL,
 			       event->button, event->time);
 		
-		if(!settings.browsing)  
+		if (!settings.browsing)  
 			gtk_widget_hide(menu.in_tab);
 		
 		if (GTK_CHECK_MENU_ITEM(menu.reorder)->active) {
@@ -871,7 +871,7 @@ static gboolean button_release_event(GtkWidget * widget,
 	if (is_selected) {
 		if (!gtk_tree_model_iter_has_child
 		    (GTK_TREE_MODEL(model), &selected) && key != NULL) {			
-			if(!strcmp(module,"studypad"))
+			if (!strcmp(module,"studypad"))
 				url =
 				    g_strdup_printf
 				    ("xiphos.url?action=showStudypad&"

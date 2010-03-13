@@ -149,7 +149,7 @@ gboolean select_book_button_press_callback(GtkWidget * widget,
 	if (time_diff > 10000)
 	  time_add = (guint32)(time_diff / 1000);
 
-	if(!menu)
+	if (!menu)
 		return 0;		
 	g_signal_connect(menu, "deactivate",
 			 G_CALLBACK(menu_deactivate_callback), widget);
@@ -199,7 +199,7 @@ gboolean select_chapter_button_press_callback(GtkWidget * widget,
 	menu = main_versekey_drop_down_chapter_menu(navbar_parallel, 
 						NB_PARALLEL, 
 						NULL, NULL);
-	if(!menu)
+	if (!menu)
 		return 0;		
 	g_signal_connect(menu, "deactivate",
 			 G_CALLBACK(menu_deactivate_callback), widget);
@@ -244,7 +244,7 @@ static gboolean select_verse_button_press_callback(GtkWidget * widget,
 	menu = main_versekey_drop_down_verse_menu(navbar_parallel, 
 						NB_PARALLEL, 
 						NULL, NULL);
-	if(!menu)
+	if (!menu)
 		return 0;		
 	g_signal_connect(menu, "deactivate",
 			 G_CALLBACK(menu_deactivate_callback), widget);
@@ -278,10 +278,10 @@ static gboolean select_verse_button_press_callback(GtkWidget * widget,
 static void on_entry_activate(GtkEntry * entry, gpointer user_data)
 {	
 	const gchar *buf = gtk_entry_get_text(entry);
-	if(buf == NULL)
+	if (buf == NULL)
 		return;
 	settings.cvparallel = (gchar*)main_get_valid_key((gchar*)buf);
-	if(settings.cvparallel == NULL)
+	if (settings.cvparallel == NULL)
 		return;
 	main_navbar_versekey_set(navbar_parallel, settings.cvparallel);	
 	main_update_parallel_page_detached();
@@ -388,7 +388,7 @@ static void sync_with_main (GtkToggleButton * button, gpointer data)
 	if (button->active) {
 		sync_on = TRUE;
 		buf = (gchar*)main_url_encode(settings.currentverse);
-		if(buf && (strlen(buf) > 3)) {
+		if (buf && (strlen(buf) > 3)) {
 			url =
 			    g_strdup_printf("xiphos.url?action=showParallel&"
 						"type=verse&value=%s",

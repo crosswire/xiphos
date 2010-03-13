@@ -94,16 +94,16 @@ static void _button_one(EDITOR * e)
 	
 	info = _get_info (e->treeview);
 	
-	if(atol(info->offset) == 0) 
+	if (atol(info->offset) == 0) 
 		gtk_widget_set_sensitive(e->html_widget,FALSE);
 	else
 		gtk_widget_set_sensitive(e->html_widget,TRUE);
 		
-	if(e->module)
+	if (e->module)
 		g_free(e->module);
 	e->module = g_strdup(info->book);
 		
-	if(e->key)
+	if (e->key)
 		g_free(e->key);
 	e->key = g_strdup(info->offset);
 	editor_load_book(e);
@@ -142,7 +142,7 @@ on_add_sibling_activate (GtkMenuItem * menuitem, gpointer user_data)
 		l_offset = main_treekey_append_sibling(info->book, 
 					    d->text1, 
 					    info->offset);
-		if(l_offset) {
+		if (l_offset) {
 			buf = g_strdup_printf("%ld",l_offset);
 			gtk_tree_store_insert_after(GTK_TREE_STORE(info->model), 
 						&sibling, 
@@ -156,7 +156,7 @@ on_add_sibling_activate (GtkMenuItem * menuitem, gpointer user_data)
 					COL_MODULE, info->book,
 					COL_OFFSET, buf,
 					-1);
-			if(e->key)
+			if (e->key)
 				g_free(e->key);
 			e->key = g_strdup(buf);
 			editor_load_book(e);
@@ -201,7 +201,7 @@ on_add_child_activate (GtkMenuItem * menuitem, gpointer user_data)
 		l_offset = main_treekey_append_child(info->book, 
 					    d->text1, 
 					    info->offset);
-		if(l_offset) {
+		if (l_offset) {
 			gtk_tree_store_set(GTK_TREE_STORE(info->model), /* change treenode pixbuf from leaf to branch */
 					&info->iter,
 			    		COL_OPEN_PIXBUF, pixbufs->pixbuf_closed,
@@ -219,7 +219,7 @@ on_add_child_activate (GtkMenuItem * menuitem, gpointer user_data)
 					COL_MODULE, info->book,
 					COL_OFFSET, buf,
 					-1);
-			if(e->key)
+			if (e->key)
 				g_free(e->key);
 			e->key = g_strdup(buf);
 			editor_load_book(e);

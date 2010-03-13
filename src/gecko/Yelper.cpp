@@ -292,14 +292,14 @@ Yelper::ProcessMouseOver (void* aEvent, int pane,
 	nsIDOMMouseEvent *event = (nsIDOMMouseEvent*) aEvent;	
 	//DIALOG_DATA *dialog = (DIALOG_DATA *)data;
 	event->GetShiftKey(&aShiftKey);
-	if(aShiftKey)  {    
+	if (aShiftKey)  {    
 	       return 1;
 	}
-	if(shift_key_pressed)
+	if (shift_key_pressed)
 		return FALSE;
-	if(pane == VIEWER_TYPE)
+	if (pane == VIEWER_TYPE)
 		return FALSE;
-	if(in_url) {
+	if (in_url) {
 		in_url = FALSE;
 		return FALSE;
 	}
@@ -347,7 +347,7 @@ Yelper::ProcessMouseUpEvent (void* aEvent)
 	PRUint16 button = 2;
 	event->GetButton (&button);
 
-	if(button == 1)	       
+	if (button == 1)	       
 	        shift_key_pressed = FALSE; 
 	
 	
@@ -368,13 +368,13 @@ Yelper::ProcessMouseEvent (void* aEvent)
 	
 	GS_message(("mouse button: %d",button));	
 	
-	if(button == 1) shift_key_pressed = TRUE; 
+	if (button == 1) shift_key_pressed = TRUE; 
 	
 	/* Mozilla uses 2 as its right mouse button code */
 	if (button != 2) return 0;	
 
 	GS_message(("g_signal_emit_by_name"));
-	if(mEmbed)
+	if (mEmbed)
 		g_signal_emit_by_name (mEmbed, "popupmenu_requested", NULL);  //,
 			        // NS_ConvertUTF16toUTF8 (href).get());
 	return 1;	

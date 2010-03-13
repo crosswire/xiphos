@@ -1496,8 +1496,8 @@ void main_do_dialog_search(void)
 	// For attribute-based searches, e.g. "Word//Lemma/G140",
 	// we must constrain the match to whole words.  Otherwise,
 	// we will inadvertently return e.g. 140 plus 1401 and 1404.		
-	if(search_type == -3) {
-		if(GTK_TOGGLE_BUTTON(search1.rb_strongs)->active) {
+	if (search_type == -3) {
+		if (GTK_TOGGLE_BUTTON(search1.rb_strongs)->active) {
 			search_params |= SEARCHFLAG_MATCHWHOLEENTRY;
 			attribute_search_string = g_strdup_printf(
 #ifdef SWORD_MULTIVERSE
@@ -1506,12 +1506,12 @@ void main_do_dialog_search(void)
 					"Word//Lemma/%s",
 #endif
 					search_string);
-		} else if(GTK_TOGGLE_BUTTON(search1.rb_morphs)->active) {
+		} else if (GTK_TOGGLE_BUTTON(search1.rb_morphs)->active) {
 			search_params |= SEARCHFLAG_MATCHWHOLEENTRY;
 			attribute_search_string = g_strdup_printf(
 					"Word//Morph/%s",
 					search_string);
-		} else if(GTK_TOGGLE_BUTTON(search1.rb_footnotes)->active) {
+		} else if (GTK_TOGGLE_BUTTON(search1.rb_footnotes)->active) {
 			attribute_search_string = g_strdup_printf(
 					"Footnote//body/%s",
 					search_string);
@@ -1638,7 +1638,7 @@ void main_do_dialog_search(void)
 	}
 	search_active = FALSE;
 
-	if(attribute_search_string)
+	if (attribute_search_string)
 		g_free((gchar*)attribute_search_string);
 	g_list_free(search_mods);
 	gui_set_progressbar_text(search1.progressbar, _("Search finished"));

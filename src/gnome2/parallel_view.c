@@ -133,7 +133,7 @@ void on_changeint1mod_activate(GtkMenuItem * menuitem,
 //	GS_message(("mod_name",(gchar *) user_data));
 	mod_name = main_module_name_from_description((gchar *) user_data);
 	
-	if(!mod_name) 
+	if (!mod_name) 
 		return;
 	main_change_parallel_module(PARALLEL1, mod_name);
 }
@@ -164,7 +164,7 @@ static void on_changeint2mod_activate(GtkMenuItem * menuitem,
 	gchar *mod_name = NULL;
 
 	mod_name = main_module_name_from_description((gchar *) user_data);
-	if(!mod_name) 
+	if (!mod_name) 
 		return;
 	main_change_parallel_module(PARALLEL2, mod_name);
 }
@@ -193,7 +193,7 @@ static void on_changeint3mod_activate(GtkMenuItem * menuitem,
 	gchar *mod_name = NULL;
 
 	mod_name = main_module_name_from_description((gchar *) user_data);
-	if(!mod_name) 
+	if (!mod_name) 
 		return;
 	main_change_parallel_module(PARALLEL3, mod_name);
 }
@@ -222,7 +222,7 @@ static void on_changeint4mod_activate(GtkMenuItem * menuitem,
 	gchar *mod_name = NULL;
 
 	mod_name = main_module_name_from_description((gchar *) user_data);
-	if(!mod_name) 
+	if (!mod_name) 
 		return;
 	main_change_parallel_module(PARALLEL4, mod_name);
 }

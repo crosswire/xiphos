@@ -242,7 +242,7 @@ static void sync_with_main(void)
 
 void gui_keep_parallel_dialog_in_sync(void)
 {
-	if(GTK_TOGGLE_BUTTON(navbar_parallel.button_sync)->active)
+	if (GTK_TOGGLE_BUTTON(navbar_parallel.button_sync)->active)
 		sync_with_main();
 }
 

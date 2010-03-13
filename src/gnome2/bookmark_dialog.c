@@ -109,7 +109,7 @@ void add_bookmark_button(void)
 	data->module = g_strdup((gchar *)gtk_entry_get_text(GTK_ENTRY
 						   (entry_module)));
 	
-	if(!strcmp(data->module,"studypad"))
+	if (!strcmp(data->module,"studypad"))
 		data->module_desc = "studypad";
 	else
 		data->module_desc =

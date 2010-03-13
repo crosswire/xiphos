@@ -143,7 +143,7 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 {
 	gchar buf[500];
 	
-	if(shift_key_pressed)
+	if (shift_key_pressed)
 		return;
 	
 	if (url == NULL) { /* moved out of url - clear appbar - info viewer*/
@@ -188,7 +188,7 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 {
 	
-	if(main_url_handler(url, TRUE))
+	if (main_url_handler(url, TRUE))
 		return;
 	
 	if (*url == '@') {
@@ -427,7 +427,7 @@ gchar *gui_button_press_lookup(GtkWidget * html_widget)
 						key);	
 		
 		GS_message(("src/gnome2/html.c: buf=>%s<",buf));
-		if(buf == NULL) return NULL;
+		if (buf == NULL) return NULL;
 		key = g_strdelimit(buf, "&.,\"<>;:?", ' ');
 		key = g_strstrip(key);
 		len = strlen(key);
@@ -682,7 +682,7 @@ void gui_html_print(GtkWidget * htmlwidget, gboolean preview, const gchar * mod_
 	GError *error = NULL;
 	GtkPrintOperationAction action;
 	
-	if(preview)
+	if (preview)
 		action = GTK_PRINT_OPERATION_ACTION_PREVIEW;
 	else
 		action = GTK_PRINT_OPERATION_ACTION_PRINT_DIALOG;
