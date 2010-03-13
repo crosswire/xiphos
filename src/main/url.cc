@@ -754,7 +754,7 @@ gint sword_uri(const gchar * url, gboolean clicked)
 	gint mod_type;
 	gint verse_count;
 	gchar **work_buf = NULL;                                                  
-		
+
 	// don't recurse between paratab and here.
 	static gboolean handling_uri = FALSE;
 
@@ -790,10 +790,12 @@ gint sword_uri(const gchar * url, gboolean clicked)
 		handling_uri = FALSE;
 		return 0;
 	}
-	if(!work_buf[KEY]) {
+	if (!work_buf[KEY]) {
 		tmpkey = work_buf[MODULE];		
 	} else
 		tmpkey = work_buf[KEY];
+	if ((settings.special_anchor = strchr(tmpkey, '#')))
+		*(settings.special_anchor++) = '\0';
 	
 	GS_message(("work_buf: %s, %s",
 		    work_buf[MODULE],
@@ -802,23 +804,23 @@ gint sword_uri(const gchar * url, gboolean clicked)
 	verse_count = 1; //backend->is_Bible_key(mykey, settings.currentverse);
 	if(backend->is_module(work_buf[MODULE])) {
 		mod_type = backend->module_type(work_buf[MODULE]);
-		switch(mod_type) {
+		switch (mod_type) {
 			case TEXT_TYPE:
 				key = main_update_nav_controls(tmpkey);
+				main_display_bible(work_buf[MODULE], key);
 				if (settings.comm_showing)
 					main_display_commentary(NULL, key);
-				main_display_bible(work_buf[MODULE], key);
 				main_keep_bibletext_dialog_in_sync((gchar*)key);
 				editor_sync_with_main();
 				
-				if(key) g_free((gchar*)key);
+				if (key) g_free((gchar*)key);
 			break;				
 			case COMMENTARY_TYPE:	
 				key = main_update_nav_controls(tmpkey);
 				main_display_commentary(work_buf[MODULE],key);
 				main_display_bible(NULL, key);
 				main_keep_bibletext_dialog_in_sync((gchar*)key);
-				if(key) g_free((gchar*)key);
+				if (key) g_free((gchar*)key);
 			break;
 			case DICTIONARY_TYPE:
 				main_display_dictionary(work_buf[MODULE],
@@ -829,7 +831,7 @@ gint sword_uri(const gchar * url, gboolean clicked)
 			break;
 		}
 	} else { /* module name not found or not given */
-		if(verse_count) { 
+		if (verse_count) { 
 			key = main_update_nav_controls(tmpkey);
 			/* display in current Bible and Commentary */
 			main_display_commentary(NULL, key);
@@ -838,7 +840,7 @@ gint sword_uri(const gchar * url, gboolean clicked)
 			
 			editor_sync_with_main();
 			
-			if(key) g_free((gchar*)key);
+			if (key) g_free((gchar*)key);
 		} else {
 			alert_url_not_found(url);
 		}
