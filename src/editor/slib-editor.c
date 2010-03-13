@@ -1330,9 +1330,7 @@ gint ask_about_saving(EDITOR * e)
 		g_free(buf3);
 		break;
 	}
-	while (gtk_events_pending()) {
-		gtk_main_iteration();
-	}
+	sync_windows();
 	return retval;
 }
 

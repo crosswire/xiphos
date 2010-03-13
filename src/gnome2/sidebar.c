@@ -446,8 +446,7 @@ void gui_sidebar_showhide(void)
 		xml_set_value("Xiphos", "misc", "show_sidebar",	"0");
 		settings.showshortcutbar = FALSE;
 		gtk_widget_hide(widgets.shortcutbar);
-		while (gtk_events_pending())
-			gtk_main_iteration();
+		sync_windows();
 		settings.biblepane_width = GTK_WIDGET(widgets.vpaned)->allocation.width;	
 	
 	} else {
@@ -456,8 +455,7 @@ void gui_sidebar_showhide(void)
 		gtk_paned_set_position(GTK_PANED(widgets.epaned),
 				       settings.sidebar_width);
 		gtk_widget_show(widgets.shortcutbar);
-		while (gtk_events_pending())
-			gtk_main_iteration();
+		sync_windows();
 		settings.biblepane_width = GTK_WIDGET(widgets.vpaned)->allocation.width;	
 		
 	}
@@ -1134,18 +1132,14 @@ static gboolean tree_key_press_cb(GtkWidget * widget,
 
 		case 0x20:	/* "32" */
 			gui_open_passage_in_new_tab(key);
-			while (gtk_events_pending()) {
-				gtk_main_iteration();
-			}
+			sync_windows();
 			break;
 
 		case 0xffe1:	/* shift keys */
 		case 0xffe2:
 			GS_warning(("shift key pressed"));
 			shift_key_pressed =  TRUE;
-			while (gtk_events_pending()) {
-				gtk_main_iteration();
-			}
+			sync_windows();
 			break;
 
 		default:
@@ -1154,9 +1148,7 @@ static gboolean tree_key_press_cb(GtkWidget * widget,
 	}
 	g_free(key);
 
-	while (gtk_events_pending()) {
-		gtk_main_iteration();
-	}
+	sync_windows();
 
 	gtk_widget_grab_focus(sidebar.results_list);
 	return FALSE;
