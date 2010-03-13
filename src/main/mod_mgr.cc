@@ -275,7 +275,7 @@ GList *mod_mgr_list_local_modules(const char *dir,
 	backend_init_module_mgr(dir, augment, augment);
 
 	backend_module_mgr_list_local_modules_init(!augment);
-	while((mod_info = backend_module_mgr_get_next_module()) != NULL) {
+	while ((mod_info = backend_module_mgr_get_next_module()) != NULL) {
 		list = g_list_append(list, (MOD_MGR*) mod_info);
 	}
 	return list;
@@ -304,7 +304,7 @@ GList *mod_mgr_remote_list_modules(const char *source_name)
 	MOD_MGR *mod_info;
 	
 	backend_module_mgr_remote_list_modules_init(source_name);
-	while((mod_info = backend_module_mgr_get_next_module()) != NULL) {
+	while ((mod_info = backend_module_mgr_get_next_module()) != NULL) {
 		list = g_list_append(list, (MOD_MGR*) mod_info);
 	}
 	return list;

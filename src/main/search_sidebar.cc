@@ -149,7 +149,7 @@ static void fill_search_results_list(int finds)
 	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(ss.progressbar_search),
 				0.0);
 	/* display first item in list by selection row*/	
-	if(!gtk_tree_model_get_iter_first(model,&iter))
+	if (!gtk_tree_model_get_iter_first(model,&iter))
 		return;
 	
 	gtk_widget_set_sensitive(sidebar.menu_item_save_search,TRUE);
@@ -204,7 +204,7 @@ void main_do_sidebar_search(gpointer user_data)
 	search_dialog = FALSE;
 	search_string = gtk_entry_get_text(GTK_ENTRY(ss.entrySearch));
 	
-	if(strlen(search_string) < 1) 
+	if (strlen(search_string) < 1) 
 		return;
 	
 	if (GTK_TOGGLE_BUTTON(ss.radiobutton_search_text)->active) {
@@ -349,7 +349,7 @@ void main_search_sidebar_fill_bounds_combos(void)
 	gtk_list_store_clear(GTK_LIST_STORE(lower_model));
 	
 	if (backendSearch->module_has_testament(module_name, 1)) {
-		while(i < key.BMAX[0]) { 			
+		while (i < key.BMAX[0]) { 			
 #ifdef SWORD_MULTIVERSE
 			key.Testament(1);
 			key.Book(i+1);
@@ -366,7 +366,7 @@ void main_search_sidebar_fill_bounds_combos(void)
 	
 	i = 0;
 	if (backendSearch->module_has_testament(module_name, 2)) {
-		while(i < key.BMAX[1]) {			
+		while (i < key.BMAX[1]) {			
 #ifdef SWORD_MULTIVERSE
 			key.Testament(2);
 			key.Book(i+1);

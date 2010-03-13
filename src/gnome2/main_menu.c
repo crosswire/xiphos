@@ -321,7 +321,7 @@ extern gboolean style_display;
 G_MODULE_EXPORT void
 on_verse_style_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 {
-	if(style_display) {
+	if (style_display) {
 		gchar *file = g_strdup_printf("%s/modops.conf", 
 					      settings.gSwordDir);
 		gchar *url = g_strdup_printf("sword://%s/%s",
@@ -457,8 +457,8 @@ on_versehighlight_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 G_MODULE_EXPORT void
 gui_parallel_tab_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 {
-	if(!settings.browsing) return;
-	if(!settings.showparatab && !menuitem->active) {
+	if (!settings.browsing) return;
+	if (!settings.showparatab && !menuitem->active) {
 		xml_set_value("Xiphos", "misc", "showparatab", "0");
 		return;
 	}
@@ -466,7 +466,7 @@ gui_parallel_tab_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 	settings.showparatab = menuitem->active;
 	xml_set_value("Xiphos", "misc", "showparatab",
 		      (settings.showparatab ? "1" : "0"));
-	if(settings.showparatab) {
+	if (settings.showparatab) {
 		gui_open_parallel_view_in_new_tab();
 		gui_force_parallel_tab_sync();
 	} else 		

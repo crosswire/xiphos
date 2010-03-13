@@ -152,7 +152,7 @@ static void html_link_message(GeckoHtml * embed)
 	if (!strlen(url)) { //* moved out of url - clear appbar - info viewer*
 		gui_set_statusbar ("");
 		in_url = FALSE;
-		//*if(GPOINTER_TO_INT(data) == TEXT_TYPE)
+		//*if (GPOINTER_TO_INT(data) == TEXT_TYPE)
 		//	main_clear_viewer();*
 	} else {		
 		GString *url_clean = g_string_new(NULL);
@@ -217,7 +217,7 @@ gint html_dom_mouse_out(GeckoHtml * embed, gpointer dom_event)
 {
 	GeckoHtml *html = GECKO_HTML(embed);
 	GeckoHtmlPriv *priv = GECKO_HTML_GET_PRIVATE(html);
-	if(priv->pane == VIEWER_TYPE)
+	if (priv->pane == VIEWER_TYPE)
 		shift_key_pressed = FALSE;
 	return 1; 
 }
@@ -269,7 +269,7 @@ static gint html_open_uri(GeckoHtml * embed, const gchar * uri)
 	}
 	
 	// prefixable link
-	if(priv->pane == DIALOG_COMMENTARY_TYPE) { 
+	if (priv->pane == DIALOG_COMMENTARY_TYPE) { 
 		strcpy(book, priv->dialog->key);
 		*(strrchr(book, ' ')) = '\0';
 		
@@ -291,7 +291,7 @@ static gint html_open_uri(GeckoHtml * embed, const gchar * uri)
 	}
 	
 	GS_message(("uri: %s", uri));
-	if(priv->is_dialog)
+	if (priv->is_dialog)
 		main_dialogs_url_handler(priv->dialog, uri, TRUE);
 	else
 		main_url_handler(uri, TRUE);
@@ -802,7 +802,7 @@ gecko_html_print_document(GtkWindow * window, gchar * mod_name,
     	SWDisplay *old_display = 0;
 	SWDisplay *swdisplay = 0;
 	SWMgr *mgr;
-	if(dialog) {
+	if (dialog) {
 		BackEnd *be = (BackEnd *)dialog->backend;
 		mgr = be->get_mgr();
 	}
@@ -887,7 +887,7 @@ gboolean gecko_html_emit_uri_open(GeckoHtml *html, const gchar *uri)
 	}
 	
 	// prefixable link
-	if(priv->pane == DIALOG_COMMENTARY_TYPE) { 
+	if (priv->pane == DIALOG_COMMENTARY_TYPE) { 
 		strcpy(book, priv->dialog->key);
 		*(strrchr(book, ' ')) = '\0';
 		
@@ -909,7 +909,7 @@ gboolean gecko_html_emit_uri_open(GeckoHtml *html, const gchar *uri)
 	}
 	
 	GS_message(("uri: %s", uri));
-	if(priv->is_dialog)
+	if (priv->is_dialog)
 		main_dialogs_url_handler(priv->dialog, uri, TRUE);
 	else
 		main_url_handler(uri, TRUE);

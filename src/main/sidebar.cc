@@ -644,13 +644,13 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 	if (!cap)
 		return;
 	if (!g_utf8_collate(cap, _("Parallel View"))) {
-		if(settings.dockedInt) {
+		if (settings.dockedInt) {
 			gtk_notebook_set_current_page (GTK_NOTEBOOK
 					      (widgets.
 					       notebook_bible_parallel),
 					      1);
 		}
-		if(settings.showparatab) {
+		if (settings.showparatab) {
 			old_page = gtk_notebook_get_current_page(
 					GTK_NOTEBOOK(widgets.notebook_main));
 		
@@ -672,7 +672,7 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 				0);
 	}
 	/* let's not do anything else if the parallel tab is showing */
-	if(settings.paratab_showing)
+	if (settings.paratab_showing)
 		return;
 	
 	if (!g_utf8_collate(cap, _("Commentaries"))) {

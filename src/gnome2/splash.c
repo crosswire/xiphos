@@ -460,7 +460,7 @@ int e_splash_add_icon(ESplash * splash, GdkPixbuf * icon_pixbuf)
 
 	GtkTextDirection dir = gtk_widget_get_direction(GTK_WIDGET (splash));
 	
-	if(dir == GTK_TEXT_DIR_LTR)
+	if (dir == GTK_TEXT_DIR_LTR)
 		priv->icons = g_list_append(priv->icons, icon);
 	else
 		priv->icons = g_list_prepend(priv->icons, icon);

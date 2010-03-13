@@ -762,7 +762,7 @@ void delete_list(GtkButton * button, gpointer user_data)
 void scope_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 {
 	search1.which_scope = togglebutton;  
-	if(GTK_TOGGLE_BUTTON(search1.rb_custom_range)->active)
+	if (GTK_TOGGLE_BUTTON(search1.rb_custom_range)->active)
 		gtk_widget_set_sensitive(search1.combo_range,TRUE);
 	else
 		gtk_widget_set_sensitive(search1.combo_range,FALSE);
@@ -793,7 +793,7 @@ void mod_list_toggled(GtkToggleButton * togglebutton,
 		main_comboboxentry2_changed((GtkComboBox *) search1.
 					    combo_list, user_data);
 	}
-	if(GTK_TOGGLE_BUTTON(search1.rb_custom_list)->active)
+	if (GTK_TOGGLE_BUTTON(search1.rb_custom_list)->active)
 		gtk_widget_set_sensitive(search1.combo_list,TRUE);
 	else
 		gtk_widget_set_sensitive(search1.combo_list,FALSE);
@@ -968,14 +968,14 @@ static void _modules_lists_changed(GtkTreeSelection *
 		return;
 	if (gtk_tree_model_iter_has_child(model, &selected)) {
 		
-		if(module_selected) g_free(module_selected);
+		if (module_selected) g_free(module_selected);
 		module_selected = NULL;	
 		return;
 	}
 	gtk_tree_model_get(model, &selected, 0, &mod, -1);
 	if (mod) {
 		
-		if(module_selected) g_free(module_selected);
+		if (module_selected) g_free(module_selected);
 		module_selected = g_strdup(mod);
 		g_free(mod);
 	}	

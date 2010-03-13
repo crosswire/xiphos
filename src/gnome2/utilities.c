@@ -137,7 +137,7 @@ void utilities_parse_treeview(xmlNodePtr parent, GtkTreeIter * tree_parent, GtkT
 					5, &mod_desc, 
 					6, &description,
 					-1);
-		if(gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model), 
+		if (gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model), 
 							&child)) {
 			cur_node = xml_add_folder_to_parent(parent, 
 							caption);
@@ -156,7 +156,7 @@ void utilities_parse_treeview(xmlNodePtr parent, GtkTreeIter * tree_parent, GtkT
 		g_free(module);	
 		g_free(mod_desc);
 		g_free(description);
-	} while(gtk_tree_model_iter_next(GTK_TREE_MODEL(model), &child));
+	} while (gtk_tree_model_iter_next(GTK_TREE_MODEL(model), &child));
 }
 
 
@@ -603,7 +603,7 @@ void gui_load_module_tree(GtkWidget * tree)
 	gtk_tree_store_set(store, &image, 0, _("Images"), -1);
 
 	/*  Prayer lists folder */
-	if(settings.prayerlist) {
+	if (settings.prayerlist) {
 		gtk_tree_store_append(store, &prayerlist, NULL);
 		gtk_tree_store_set(store, &prayerlist, 0, _("Prayer List/Journal"), -1);
 	}
@@ -676,7 +676,7 @@ void gui_load_module_tree(GtkWidget * tree)
 	g_list_free(tmp);
 
 	/* prayer list folders */
-	if(settings.prayerlist) {
+	if (settings.prayerlist) {
 		tmp = get_list(PRAYER_LIST);
 		while (tmp != NULL) {
 			add_module_to_prayerlist_folder(GTK_TREE_MODEL(store),
@@ -777,9 +777,9 @@ MOD_FONT *get_font(gchar * mod_name)
 void free_font(MOD_FONT *mf)
 {
 	
-	if(mf->old_font) g_free(mf->old_font);
-	if(mf->old_gdk_font) g_free(mf->old_gdk_font);
-	if(mf->old_font_size) g_free(mf->old_font_size);
+	if (mf->old_font) g_free(mf->old_font);
+	if (mf->old_gdk_font) g_free(mf->old_gdk_font);
+	if (mf->old_font_size) g_free(mf->old_font_size);
 	//mf->new_font = NULL;
 	//mf->new_gdk_font = NULL;
 	//mf->new_font_size = NULL;

@@ -139,7 +139,7 @@ static gboolean select_button_press_callback(GtkWidget * widget,
 	GtkWidget *menu;
 	
 	menu = main_versekey_drop_down_new(cur_passage_tab);
-	if(!menu)
+	if (!menu)
 		return 0;		
 	g_signal_connect(menu, "deactivate",
 			 G_CALLBACK(menu_deactivate_callback), widget);
@@ -198,7 +198,7 @@ static gboolean select_book_button_press_callback(GtkWidget * widget,
 	//if (time_diff > 10000)
 	time_add = (guint32)(time_diff / 1000);
 
-	if(!menu)
+	if (!menu)
 		return 0;		
 	g_signal_connect(menu, "deactivate",
 			 G_CALLBACK(menu_deactivate_callback), widget);
@@ -246,7 +246,7 @@ static gboolean select_chapter_button_press_callback(GtkWidget * widget,
 	
 	menu = main_versekey_drop_down_chapter_menu(navbar_versekey, NB_MAIN,
 						NULL,NULL);
-	if(!menu)
+	if (!menu)
 		return 0;		
 	g_signal_connect(menu, "deactivate",
 			 G_CALLBACK(menu_deactivate_callback), widget);
@@ -290,7 +290,7 @@ static gboolean select_verse_button_press_callback(GtkWidget * widget,
 	
 	menu = main_versekey_drop_down_verse_menu(navbar_versekey, NB_MAIN,
 						NULL,NULL);
-	if(!menu)
+	if (!menu)
 		return 0;		
 	g_signal_connect(menu, "deactivate",
 			 G_CALLBACK(menu_deactivate_callback), widget);
@@ -372,25 +372,25 @@ static void on_entry_activate(GtkEntry * entry, gpointer user_data)
 	char *rawtext;
 	
 	const gchar *buf = gtk_entry_get_text(entry);
-	if(buf == NULL)
+	if (buf == NULL)
 		return;
 	rawtext = main_get_raw_text(navbar_versekey.module_name->str, (gchar*)buf);
-	if(!rawtext || (rawtext && (strlen(rawtext) < 2))){
+	if (!rawtext || (rawtext && (strlen(rawtext) < 2))){
 		gtk_entry_set_text(entry,navbar_versekey.key->str);
 		g_free(rawtext);
 		return;
 	}
 	const gchar *gkey = main_get_valid_key((gchar*)buf);
-	if(gkey == NULL)
+	if (gkey == NULL)
 		return;
 	gchar *url = g_strdup_printf("sword:///%s", gkey);
 
 	navbar_versekey.module_name = g_string_assign(navbar_versekey.module_name,settings.MainWindowModule);
 	main_navbar_versekey_set(navbar_versekey, gkey);
 	main_url_handler(url, TRUE);
-	if(url)
+	if (url)
 		g_free(url);
-	if(gkey)
+	if (gkey)
 		g_free((gchar*)gkey);
 }
 

@@ -104,7 +104,7 @@ static void ok_clicked(GtkButton * button,  gpointer data)
 	sprintf(file, "%s/fonts.conf", settings.gSwordDir);
 	
 	if (!mf->no_font) { 
-		if(new_font_set) {
+		if (new_font_set) {
 			new_font = g_strdup(mf->new_gdk_font);
 			font_name = get_html_font_name(new_font);
 			mf->new_font = font_name;

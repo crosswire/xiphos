@@ -277,13 +277,13 @@ gecko_init (void)
 	
     	gconf_client = gconf_client_get_default ();
     	fontname = gconf_client_get_string (gconf_client, KEY_GNOME_VARIABLE_FONT, &err);
-	if(fontname) {
+	if (fontname) {
 		GS_message(("var fontname %s",fontname));
 		gecko_set_font (GECKO_FONT_VARIABLE, fontname);
 		g_free(fontname);
 	}
     	fontname = gconf_client_get_string (gconf_client, KEY_GNOME_FIXED_FONT, &err);
-	if(fontname) {
+	if (fontname) {
 		GS_message(("fixed fontname %s",fontname));
 		gecko_set_font (GECKO_FONT_FIXED, fontname);
 		g_free(fontname);

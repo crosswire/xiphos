@@ -1182,7 +1182,7 @@ void main_display_bible(const char * mod_name, const char * key)
 	if (settings.dockedInt) 
 		main_update_parallel_page();
 	else {
-		if(settings.showparatab)
+		if (settings.showparatab)
 			gui_keep_parallel_tab_in_sync();
 		else
 			gui_keep_parallel_dialog_in_sync();

@@ -388,7 +388,7 @@ void _parse_treeview (GString *str, GtkTreeIter * tree_parent,
 		g_free(module);	
 		g_free(mod_desc);
 		g_free(description);
-	} while(gtk_tree_model_iter_next(GTK_TREE_MODEL(model), &child));
+	} while (gtk_tree_model_iter_next(GTK_TREE_MODEL(model), &child));
 }
 
 

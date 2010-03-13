@@ -96,7 +96,7 @@ void on_filechooserdialog_response(GtkDialog * fdialog,
 	case GTK_RESPONSE_OK:
 		edata.filename = g_strdup(gtk_file_chooser_get_filename(filesel));
 		
-		if(d.format)
+		if (d.format)
 			main_export_html(edata);
 		else
 			main_export_plain(edata);
@@ -208,7 +208,7 @@ void on_dialog_export_passage_response(GtkDialog * dialog,
 			_get_export_filename();
 		else {	
 			edata.filename = NULL;
-			if(d.format)
+			if (d.format)
 				main_export_html(edata);
 			else
 				main_export_plain(edata);
@@ -248,7 +248,7 @@ gint _check_for_distribution_license(gchar * mod_name)
 				    g_utf8_strdown(mod_name,
                                     -1));
 		
-	if(g_file_test(conf_file,G_FILE_TEST_EXISTS))
+	if (g_file_test(conf_file,G_FILE_TEST_EXISTS))
 		distributionlicense = get_conf_file_item(
 							 conf_file,
 							 mod_name,
@@ -260,7 +260,7 @@ gint _check_for_distribution_license(gchar * mod_name)
 	g_free(conf_file);
 	GS_message(("DistributionLicense: %s",distributionlicense));
 		
-	if(!distributionlicense || (distributionlicense && 
+	if (!distributionlicense || (distributionlicense && 
 				          g_strstr_len(distributionlicense, 
 					  strlen(distributionlicense), 
 					  "Copyrighted"))) {
@@ -352,7 +352,7 @@ void gui_export_dialog(void)
 	gtk_widget_set_sensitive (d.sb_end_verse, FALSE);
 
 	
-	if(dist_license) {
+	if (dist_license) {
 		gtk_widget_show(d.warning_label);
 		gtk_widget_hide(d.rb_book);
 	} else {

@@ -134,7 +134,7 @@ static void _save(char *filename, char* text,int len)
 {
 	GS_message(("%s",filename));
 	g_file_set_contents(filename, text, len, NULL);
-	if(filename)
+	if (filename)
 		g_free(filename);	
 }
 
@@ -152,7 +152,7 @@ static void _export_book(char *filename, int type)
 	key->Chapter(1);
 	key->Verse(1);
 
-	if(type == HTML)
+	if (type == HTML)
 		g_string_append_printf(str,
 				       "%s<BR><CENTER>%s<BR>Chapter %d</CENTER><BR><BR>", 
 				       HTML_START,
@@ -163,25 +163,25 @@ static void _export_book(char *filename, int type)
 				       mod->Description(), 
 				       1);
 
-	while(key->Book() == curBook && !mod->Error()) {
-		if(key->Chapter() != curChapter) {
+	while (key->Book() == curBook && !mod->Error()) {
+		if (key->Chapter() != curChapter) {
 			++mychapter;
 			myverse = 1;
 			curChapter = key->Chapter();
-			if(type == HTML)
+			if (type == HTML)
 				g_string_append_printf(str,"<BR><CENTER>Chapter %d</CENTER><BR><BR>", curChapter);
 			else
 				g_string_append_printf(str,"\nChapter %d\n\n", curChapter);
 		}
 
-		if(settings.showversenum)
+		if (settings.showversenum)
 			g_string_append_printf(str,
 					       ((type == HTML)
 						? "&nbsp;&nbsp;[%d]"
 						: "  [%d]"), 
 					       myverse);
 
-		if(type == HTML)
+		if (type == HTML)
 			g_string_append_printf(str, " %s%s",
 					       (char*)mod->RenderText(), 
 					       (settings.versestyle ? "<BR>" : ""));
@@ -193,7 +193,7 @@ static void _export_book(char *filename, int type)
 		++myverse;
 		(*mod)++;
 	}
-	if(type == HTML)
+	if (type == HTML)
 		g_string_append_printf(str,"%s","</BODY></HTML>");
 	if (filename) 
 		_save(filename, str->str,str->len);
@@ -215,7 +215,7 @@ static void _export_chapter(char *filename, int type)
 	int myverse = 1;
 
 	book = backend->key_get_book(settings.currentverse);
-	if(type == HTML)
+	if (type == HTML)
 		g_string_append_printf(str,
 				       "%s<BR>%s: %s Chapter %d<BR><BR>", 
 				       HTML_START, 
@@ -235,10 +235,10 @@ static void _export_chapter(char *filename, int type)
 	     !mod->Error();
 	     (*mod)++) {
 		     
-		if(settings.showversenum)
+		if (settings.showversenum)
 			g_string_append_printf(str, " [%d]", myverse);
 
-		if(type == HTML)
+		if (type == HTML)
 			g_string_append_printf(str," %s%s",
 					       (char*)mod->RenderText(), 
 					       (settings.versestyle ? "<BR>" : ""));
@@ -248,14 +248,14 @@ static void _export_chapter(char *filename, int type)
 					       (settings.versestyle ? "\n" : ""));
 		++myverse;
 	}
-	if(type == HTML)
+	if (type == HTML)
 		g_string_append_printf(str,"%s","</BODY></HTML>");
 	if (filename) 
 		_save(filename, str->str,str->len);
 	else
 		_copy_to_clipboard (str->str, str->len);
 	g_string_free(str,TRUE);
-	if(book)
+	if (book)
 		g_free(book);
 }
 
@@ -270,7 +270,7 @@ static void _export_verse(char *filename, int type)
 	VerseKey *key = (VerseKey *)(SWKey *)(*mod);
 
 	book = backend->key_get_book(settings.currentverse);
-	if(type == HTML)
+	if (type == HTML)
 		g_string_append_printf(str,
 				       "%s%s: %s %d:%d. %s%s</BODY></HTML>", 
 				       HTML_START, 
@@ -297,7 +297,7 @@ static void _export_verse(char *filename, int type)
 
 	g_string_free(str,TRUE);
 
-	if(book)
+	if (book)
 		g_free(book);
 }
 
@@ -314,7 +314,7 @@ static void _export_verse_range (EXPORT_DATA data, int type)
 	//int myverse = 1;
 
 	book = backend->key_get_book(settings.currentverse);
-	if(type == HTML)
+	if (type == HTML)
 		g_string_append_printf(str,
 				       (settings.showversenum
 					? "%s<BR>%s: %s Chapter %d<BR><BR>"
@@ -343,10 +343,10 @@ static void _export_verse_range (EXPORT_DATA data, int type)
 	     !mod->Error();
 	     (*mod)++) {
 		     
-		if(settings.showversenum)
+		if (settings.showversenum)
 			g_string_append_printf(str, " [%d]", key->Verse());
 
-		if(type == HTML)
+		if (type == HTML)
 			g_string_append_printf(str," %s%s",
 					       (char*)mod->RenderText(), 
 					       (settings.versestyle ? "<BR>" : ""));
@@ -355,14 +355,14 @@ static void _export_verse_range (EXPORT_DATA data, int type)
 					       (char*)mod->StripText(), 
 					       (settings.versestyle ? "\n" : ""));
 	}
-	if(type == HTML)
+	if (type == HTML)
 		g_string_append_printf(str,"%s","</BODY></HTML>");
 	if (data.filename) 
 		_save(data.filename, str->str,str->len);
 	else
 		_copy_to_clipboard (str->str, str->len);
 	g_string_free(str,TRUE);
-	if(book)
+	if (book)
 		g_free(book);
 }
 
