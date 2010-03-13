@@ -255,7 +255,9 @@ struct _settings {
 
 	/* if true parallel tab is showing */
 	int paratab_showing;
-	
+
+	/* if set, this is used for an anchor jump if possible */
+	char *special_anchor;
 };
 
 extern SETTINGS settings;
