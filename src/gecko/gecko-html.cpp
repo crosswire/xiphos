@@ -221,6 +221,10 @@ static gint html_open_uri(GtkMozEmbed * embed, const gchar * uri)
 {
 	g_return_val_if_fail(uri != NULL, FALSE);
 
+	//for xulrunner 1.9.2
+	if (g_str_equal (uri, "file:///"))
+	    return FALSE;
+
 	GeckoHtml *html = GECKO_HTML(embed);
 	GeckoHtmlPriv *priv = GECKO_HTML_GET_PRIVATE(html);
 	gchar *buf, *place;
