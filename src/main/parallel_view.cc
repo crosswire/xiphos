@@ -579,7 +579,7 @@ void main_load_g_ops_parallel(GtkWidget *menu)
 
 void main_check_parallel_modules(void)
 {
-	if(settings.parallel1Module) 
+	if (settings.parallel1Module) 
 		parallel1 =
 		    main_is_module(settings.parallel1Module);
 	else
@@ -630,7 +630,7 @@ void main_check_parallel_modules(void)
 
 void main_change_parallel_module(GSParallel parallel, gchar * mod_name)
 {
-	if(!mod_name) 
+	if (!mod_name) 
 		return;
 	switch(parallel) {
 	case PARALLEL1:	
@@ -1097,13 +1097,13 @@ void main_update_parallel_page(void)
 							settings.
 							currentverse);
 /*#ifdef  DEBUG			
-			if(!strcmp(mod_name,"KJV2006"))
+			if (!strcmp(mod_name,"KJV2006"))
 				g_message("\nmod: %s\nRAW: %s\nRENDERED: %s", mod_name,
 						backend_p->get_raw_text(mod_name,
 								settings.currentverse),utf8str);
 #endif
 */			
-			if(is_rtol) {
+			if (is_rtol) {
 				buf = g_strdup_printf(
 					"%s","<br><DIV ALIGN=right>");			
 				if (strlen(buf)) {
@@ -1120,7 +1120,7 @@ void main_update_parallel_page(void)
 				free(utf8str);
 			}
 
-			if(is_rtol) {
+			if (is_rtol) {
 				buf = g_strdup_printf(
 					"%s","</DIV><br>");			
 				if (strlen(buf)) {
@@ -1199,7 +1199,7 @@ static void int_display(SWBuf& text, gchar *key, char *mod_name[])
 	char *cur_book;
 	gboolean is_module[5] = { FALSE, FALSE, FALSE, FALSE, FALSE };
 
-	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.notebook_bible_parallel))) return;
+	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.notebook_bible_parallel))) return;
 
 	// need #verses to process in this book.
 	VerseKey vkey;
@@ -1379,7 +1379,7 @@ void main_update_parallel_page_detached(void)
     	gtk_label_set_markup(GTK_LABEL(plabels.label_5), buf);
     
 #ifdef USE_GTKMOZEMBED
-	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.html_parallel_dialog))) return;
+	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.html_parallel_dialog))) return;
 #endif
 
 	snprintf(buf, 499, HTML_START

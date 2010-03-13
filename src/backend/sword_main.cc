@@ -86,7 +86,7 @@ BackEnd::BackEnd()
 
 BackEnd::~BackEnd()
 {
-	if(main_mgr)
+	if (main_mgr)
 		delete main_mgr;
 	main_mgr = 0;
 	if (commDisplay)
@@ -120,7 +120,7 @@ BackEnd::~BackEnd()
 void BackEnd::init_SWORD(int gsType)
 {
 	ModMap::iterator it;
-	if(gsType == 0) {
+	if (gsType == 0) {
 		main_setup_displays();		
 		for (it = main_mgr->Modules.begin();
 					it != main_mgr->Modules.end(); it++) {
@@ -138,7 +138,7 @@ void BackEnd::init_SWORD(int gsType)
 				display_mod->setDisplay(bookDisplay);
 			}			
 		}
-	} else if(gsType == 1) { // dialogs
+	} else if (gsType == 1) { // dialogs
 		for (it = main_mgr->Modules.begin(); it != main_mgr->Modules.end(); it++) {	
 			display_mod = (*it).second;
 			if (!strcmp(display_mod->Type(), TEXT_MODS)) {	
@@ -147,7 +147,7 @@ void BackEnd::init_SWORD(int gsType)
 				display_mod->setDisplay(entryDisplay);
 			}
 		}	
-	} else if(gsType == 2) { // search
+	} else if (gsType == 2) { // search
 		for (it = main_mgr->Modules.begin(); it != main_mgr->Modules.end(); it++) {	
 			display_mod = (*it).second;
 			display_mod->setDisplay(entryDisplay);
@@ -377,7 +377,7 @@ char *BackEnd::get_valid_key(const char *key)
 	char *mykey;                                                 
 	vkey.AutoNormalize(1);
 	vkey = key;
-	if((sword_locale) && (!strcmp(sword_locale,"en")))
+	if ((sword_locale) && (!strcmp(sword_locale,"en")))
 		mykey = (char*)vkey.getShortText();
 	else
 		mykey = (char*)vkey.getText();
@@ -508,7 +508,7 @@ int BackEnd::is_module(const char *mod_name)
 int BackEnd::module_type(const char *mod_name)
 {
 	ModMap::iterator it;
-	if((!mod_name) || (strlen(mod_name) < 2)) 
+	if ((!mod_name) || (strlen(mod_name) < 2)) 
 		return -1;
 	//-- iterate through the modules until we find modName 
 	it = main_mgr->Modules.find(mod_name);
@@ -543,7 +543,7 @@ char *BackEnd::module_description(char *mod_name)
 {
 	ModMap::iterator it;
 	
-	if((!mod_name) || (strlen(mod_name) < 2)) 
+	if ((!mod_name) || (strlen(mod_name) < 2)) 
 		return NULL;
 	//-- iterate through the modules until we find modName 
 	it = main_mgr->Modules.find(mod_name);
@@ -559,7 +559,7 @@ char *BackEnd::module_name_from_description(char *description)
 	ModMap::iterator it;
 	char *retval = NULL;
 	 
-	if(!description)
+	if (!description)
 		return NULL;
 	
 	for (it = main_mgr->Modules.begin();
@@ -643,11 +643,11 @@ int BackEnd::module_get_testaments(const char * module_name)
 			}
 	         module->setSkipConsecutiveLinks(false);
 	}
-	if(ot && nt)
+	if (ot && nt)
 		return 2;
-	else if(!ot && nt)
+	else if (!ot && nt)
 		return 1;
-	else if(ot && !nt)
+	else if (ot && !nt)
 		return 0;
 	return -1;
 }
@@ -693,7 +693,7 @@ int BackEnd::set_module_key(const char *module_name, const char *key)
 
 int BackEnd::set_key(const char *key)
 {
-	if(!key)
+	if (!key)
 		return 0;
 	if (display_mod) {
 		GS_message((f_message,758,"key",key));
@@ -721,7 +721,7 @@ char *BackEnd::get_key_from_offset(unsigned long offset)
 
 unsigned long BackEnd::treekey_set_key(char * key)
 {
-	if(tree_key) {
+	if (tree_key) {
                 TreeKeyIdx treenode = *tree_key;
 		treenode.setText(key);
                 display_mod->SetKey(treenode);
@@ -732,7 +732,7 @@ unsigned long BackEnd::treekey_set_key(char * key)
 }
 void BackEnd::set_treekey(unsigned long offset)
 {
-	if(tree_key)
+	if (tree_key)
 		delete tree_key;
 	tree_key = (TreeKeyIdx *) display_mod->CreateKey();
 	if (tree_key) {
@@ -820,7 +820,7 @@ int BackEnd::treekey_next_sibling(unsigned long offset)
 {
         if (tree_key) {
                 tree_key->setOffset(offset);
-                if(tree_key->nextSibling()) {
+                if (tree_key->nextSibling()) {
 			return 1;
 		}	
         }
@@ -833,7 +833,7 @@ int BackEnd::treekey_prev_sibling(unsigned long offset)
 {
         if (tree_key) {
                 tree_key->setOffset(offset);
-                if(tree_key->previousSibling()) {
+                if (tree_key->previousSibling()) {
 			return 1;
 		}	
         }
@@ -864,7 +864,7 @@ GList *BackEnd::parse_verse_list(const char * list, char * current_key)
 	VerseKey key;
 	ListKey vs;                                                   
 	
-	if(!list)
+	if (!list)
 		return retlist;
 	GS_message(("current_key=%s",current_key));
 	key.setText(current_key);
@@ -910,7 +910,7 @@ const char *BackEnd::get_next_listkey(void)
 
 	static char retval[128];                                                  
 	
-	while(!results.Error()) {		
+	while (!results.Error()) {		
 		(void) g_strlcpy(retval, results.getText(), 126);
 		results++;
 		return retval;
@@ -1034,7 +1034,7 @@ char *BackEnd::get_conf_file_item(const char * file, const char * mod_name, cons
 	conf_file.Load();
 
 	buf = (char *) conf_file[mod_name][item].c_str();
-	if(strlen(buf))
+	if (strlen(buf))
 		return strdup(buf);
 	else
 		return NULL;

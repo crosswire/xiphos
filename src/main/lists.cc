@@ -142,7 +142,7 @@ void main_init_lists(void)
 	
 	settings.haveprayerlist = g_list_length(mods.prayermods);
 	
-	if(g_list_length(mods.devotionmods)== 1) {		
+	if (g_list_length(mods.devotionmods)== 1) {		
 		xml_set_value("Xiphos", "modules", "devotional",(char*)mods.devotionmods->data );
 		settings.devotionalmod = xml_get_value("modules", "devotional");
 	}
@@ -161,7 +161,7 @@ void main_init_lists(void)
 void main_shutdown_list(void)
 {
 	/* free lists */
-	if(!mod_lists) return;
+	if (!mod_lists) return;
 		
 	while (mod_lists->options != NULL) {
 		g_free((char *) mod_lists->options->data);

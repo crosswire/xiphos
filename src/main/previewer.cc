@@ -68,7 +68,7 @@ static GtkWidget *previewer_html_widget;
 
 void main_set_previewer_widget(int in_sidebar)
 {
-    if(in_sidebar)
+    if (in_sidebar)
     	previewer_html_widget = sidebar.html_viewer_widget;
     else
 	previewer_html_widget = widgets.html_previewer_text;

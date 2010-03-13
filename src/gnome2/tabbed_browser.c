@@ -303,7 +303,7 @@ void notebook_main_add_page(PASSAGE_TAB_INFO *tbinf)
 
 	str = pick_tab_label(tbinf);
 	tbinf->page_widget = gtk_vbox_new (FALSE, 0);
-	if(tbinf->showparallel)
+	if (tbinf->showparallel)
 		widgets.parallel_tab = tbinf->page_widget;
 	gtk_widget_show(tbinf->page_widget);
 
@@ -622,7 +622,7 @@ void gui_load_tabs(const gchar *filename)
 							val = (gchar*)xmlGetProp(tmp_node, (const xmlChar *)"showparallel");
 							pt->showparallel = yes_no2true_false(val);
 							xmlFree(val);
-							if(pt->showparallel) {
+							if (pt->showparallel) {
 								settings.showparatab = TRUE;
 								pt->paratab = gui_create_parallel_tab();
 								gtk_box_pack_start(GTK_BOX(widgets.page), pt->paratab, TRUE, TRUE,
@@ -858,7 +858,7 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
 	 * there are only two tabs - because number_of_pages equals 2 even
 	 * thought there is only 1. 
 	 */
-	if(number_of_pages == 2 && removed_page == 0)
+	if (number_of_pages == 2 && removed_page == 0)
 		pt = (PASSAGE_TAB_INFO*)g_list_nth_data(*tl, 0);
 	else
 		pt = (PASSAGE_TAB_INFO*)g_list_nth_data(*tl, page_num);
@@ -866,13 +866,13 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
 	//cur_passage_tab = pt;
 
 #ifdef USE_TREEVIEW_PATH	
-	if(cur_passage_tab && cur_passage_tab->book_mod)
+	if (cur_passage_tab && cur_passage_tab->book_mod)
 		gui_collapse_treeview_to_book (GTK_TREE_VIEW (sidebar.module_list), 
 					       cur_passage_tab->book_mod);
 #endif /* USE_TREEVIEW_PATH */
 	
-	if(!pt->showparallel) {	
-		if(cur_passage_tab && cur_passage_tab->paratab)
+	if (!pt->showparallel) {	
+		if (cur_passage_tab && cur_passage_tab->paratab)
 			gtk_widget_hide(cur_passage_tab->paratab);
 		gtk_widget_show(widgets.hpaned);
 	}
@@ -880,9 +880,9 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
 	set_current_tab (pt);
 
 	companion_activity = TRUE;
-	if(pt->showparallel) {
+	if (pt->showparallel) {
 		gtk_widget_hide(widgets.hpaned);
-		if(pt->paratab)
+		if (pt->paratab)
 			gtk_widget_show(pt->paratab);		
 		companion_activity = FALSE;
 		page_change = FALSE;
@@ -1031,11 +1031,11 @@ void gui_update_tab_struct(const gchar * text_mod,
 	if (stop_refresh)
 		return;
 
-/*	if(!settings.browsing)
+/*	if (!settings.browsing)
 	        return;
 */
 	
-	if(page_change)
+	if (page_change)
 		return;
 	if (!cur_passage_tab)
 		return;
@@ -1044,24 +1044,24 @@ void gui_update_tab_struct(const gchar * text_mod,
 	cur_passage_tab->showcomms   = showcomms;
 	cur_passage_tab->showdicts   = showdicts;
 
-	if(text_mod) {
+	if (text_mod) {
 		gui_reassign_strdup(&cur_passage_tab->text_mod, (char *)text_mod);
 	}
-	if(commentary_mod) {
+	if (commentary_mod) {
 		cur_passage_tab->comm_showing = comm_showing;
 		gui_reassign_strdup(&cur_passage_tab->commentary_mod, (char *)commentary_mod);
 	} 
-	if(dictlex_mod) {
+	if (dictlex_mod) {
 		gui_reassign_strdup(&cur_passage_tab->dictlex_mod, (char *)dictlex_mod);
 	} 
-	if(book_mod) {
+	if (book_mod) {
 		cur_passage_tab->comm_showing = comm_showing;
 		gui_reassign_strdup(&cur_passage_tab->book_mod, (char *)book_mod);
 	}
-	if(book_offset) {
+	if (book_offset) {
 		gui_reassign_strdup(&cur_passage_tab->book_offset, (char *)book_offset);
 	}
-	if(dictlex_key) {
+	if (dictlex_key) {
 		gui_reassign_strdup(&cur_passage_tab->dictlex_key, (char *)dictlex_key);
 	}
 }
@@ -1088,7 +1088,7 @@ void gui_open_passage_in_new_tab(gchar *verse_key)
 	if (stop_refresh)
 		return;
 
-	if(!settings.browsing)
+	if (!settings.browsing)
 		return;
 
 	if ((pt = g_new0(PASSAGE_TAB_INFO, 1)) == NULL) {
@@ -1106,7 +1106,7 @@ void gui_open_passage_in_new_tab(gchar *verse_key)
 	pt->book_offset = g_strdup_printf("%ld",settings.book_offset);
 	pt->comm_showing = settings.comm_showing;
 	
-	if(cur_passage_tab && cur_passage_tab->showparallel) {
+	if (cur_passage_tab && cur_passage_tab->showparallel) {
 		pt->showtexts   = 1;
 		pt->showcomms   = 1;
 		pt->showdicts   = 1;
@@ -1158,7 +1158,7 @@ void gui_open_parallel_view_in_new_tab(void)
 	if (stop_refresh)
 		return;
 
-	if(!settings.browsing)
+	if (!settings.browsing)
 		return;
 	
 	if ((pt = g_new0(PASSAGE_TAB_INFO, 1)) == NULL) {
@@ -1221,7 +1221,7 @@ void gui_open_module_in_new_tab(gchar *module)
 	if (stop_refresh)
 		return;
 
-	if(!settings.browsing)
+	if (!settings.browsing)
 		return;
 	
 	if ((pt = g_new0(PASSAGE_TAB_INFO, 1)) == NULL) {
@@ -1415,14 +1415,14 @@ void gui_close_passage_tab(gint pagenum)
 	stop_refresh = FALSE;
 	
 	passage_list = g_list_remove(passage_list, pt);
-	if(pt->text_mod) g_free(pt->text_mod);
-	if(pt->commentary_mod) g_free(pt->commentary_mod);
-	if(pt->dictlex_mod) g_free(pt->dictlex_mod);
-	if(pt->book_mod) g_free(pt->book_mod);
-	if(pt->text_commentary_key) g_free(pt->text_commentary_key);
-	if(pt->dictlex_key) g_free(pt->dictlex_key);
-	if(pt->book_offset) g_free(pt->book_offset);
-	if(pt->showparallel) {
+	if (pt->text_mod) g_free(pt->text_mod);
+	if (pt->commentary_mod) g_free(pt->commentary_mod);
+	if (pt->dictlex_mod) g_free(pt->dictlex_mod);
+	if (pt->book_mod) g_free(pt->book_mod);
+	if (pt->text_commentary_key) g_free(pt->text_commentary_key);
+	if (pt->dictlex_key) g_free(pt->dictlex_key);
+	if (pt->book_offset) g_free(pt->book_offset);
+	if (pt->showparallel) {
 		gtk_widget_hide(pt->paratab);
 		gui_destroy_parallel_tab();
 		settings.showparatab = FALSE;
@@ -1548,7 +1548,7 @@ void gui_tab_set_showdicts(int show)
 static
 int _is_paratab_showing (void)
 {
-	if(settings.paratab_showing)
+	if (settings.paratab_showing)
 		return 1;
 	return 0;
 }

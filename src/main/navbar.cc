@@ -56,11 +56,11 @@ void main_navbar_set(NAVBAR navbar, const char * key)
 	gint i,x;	
 	VerseKey vkey; 
 	
-	if(!navbar.module_name)
+	if (!navbar.module_name)
 		return;
 	
 	navbar.key = backend->get_valid_key(key);
-	if(!navbar.is_dialog) {
+	if (!navbar.is_dialog) {
 		
 		
 	}
@@ -74,7 +74,7 @@ void main_navbar_set(NAVBAR navbar, const char * key)
 	vkey.AutoNormalize(1);
 	vkey = key;
 	
-	if((backend->module_has_testament(navbar.module_name, 1))
+	if ((backend->module_has_testament(navbar.module_name, 1))
 				&& (vkey.Testament() == 2))
 		book = 39 + vkey.Book();
 	else 
@@ -143,7 +143,7 @@ void main_navbar_fill_book_combo(NAVBAR navbar)
 	GtkTreeIter iter;
 	int i = 0;
 	
-	if(navbar.testaments == backend->module_get_testaments(navbar.module_name))
+	if (navbar.testaments == backend->module_get_testaments(navbar.module_name))
 		return;
 	
 	navbar.testaments = backend->module_get_testaments(navbar.module_name);
@@ -154,7 +154,7 @@ void main_navbar_fill_book_combo(NAVBAR navbar)
 			GTK_COMBO_BOX(navbar.comboboxentry_book));
 	gtk_list_store_clear(GTK_LIST_STORE(book_model));
 	if (backend->module_has_testament(navbar.module_name, 1)) {
-		while(i < key.BMAX[0]) { 		
+		while (i < key.BMAX[0]) { 		
 #ifdef SWORD_MULTIVERSE
 			key.Testament(1);
 			key.Book(i+1);
@@ -163,7 +163,7 @@ void main_navbar_fill_book_combo(NAVBAR navbar)
 			book = strdup((const char *) key.books[0][i].name);
 #endif
 			char *mykey = g_strdup_printf("%s 1:1",book);
-			if(!main_get_raw_text(navbar.module_name, mykey)){
+			if (!main_get_raw_text(navbar.module_name, mykey)){
 				GS_message(("book-out: %s",book));
 				g_free(book);
 				g_free(mykey);
@@ -182,7 +182,7 @@ void main_navbar_fill_book_combo(NAVBAR navbar)
 	}
 	i = 0;
 	if (backend->module_has_testament(navbar.module_name, 2)) {
-		while(i < key.BMAX[1]) {			
+		while (i < key.BMAX[1]) {			
 #ifdef SWORD_MULTIVERSE
 			key.Testament(2);
 			key.Book(i+1);
@@ -191,7 +191,7 @@ void main_navbar_fill_book_combo(NAVBAR navbar)
 			book = strdup((const char *) key.books[1][i].name);
 #endif
 			char *mykey = g_strdup_printf("%s 1:1",book);
-			if(!main_get_raw_text(navbar.module_name, mykey)){
+			if (!main_get_raw_text(navbar.module_name, mykey)){
 				GS_message(("book-in: %s",book));
 				g_free(book);
 				g_free(mykey);

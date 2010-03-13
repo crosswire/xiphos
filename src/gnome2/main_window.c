@@ -143,7 +143,7 @@ void gui_show_hide_preview(gboolean choice)
 		xml_set_value("Xiphos", "misc", "showpreview", "0");
 	} else {
 		if (main_window_created) {
-			if(settings.show_previewer_in_sidebar) 
+			if (settings.show_previewer_in_sidebar) 
 				gtk_widget_show(widgets.box_side_preview);
 			else 
 				gtk_widget_show(widgets.vbox_previewer);
@@ -281,7 +281,7 @@ void gui_set_bible_comm_layout(void)
 				       (widgets.hpaned),
 				       settings.biblepane_width);	   
 	}
-	if(((settings.showcomms == FALSE) && (settings.showtexts == FALSE)) ||
+	if (((settings.showcomms == FALSE) && (settings.showtexts == FALSE)) ||
 	   ((settings.comm_showing == FALSE) && (settings.showtexts == FALSE)))
 		gtk_widget_hide(nav_toolbar);
 	else
@@ -515,7 +515,7 @@ static void on_notebook_comm_book_switch_page(GtkNotebook * notebook,
 			      settings.showpreview,
 			      settings.showcomms,
 			      settings.showdicts);
-	if(settings.comm_showing)
+	if (settings.comm_showing)
 		main_display_commentary(settings.CommWindowModule, settings.currentverse);
 	else if (settings.book_mod && *settings.book_mod) {
 		url = g_strdup_printf("sword://%s/%ld", settings.book_mod,
@@ -823,7 +823,7 @@ void create_mainwindow(void)
 	 * between similar to bookmarks
 	 */
 	widgets.hboxtb = gtk_hbox_new(FALSE, 0);
-	if(settings.browsing)
+	if (settings.browsing)
 		gtk_widget_show(widgets.hboxtb);
 	gtk_box_pack_start(GTK_BOX(widgets.vboxMain), widgets.hboxtb, FALSE, FALSE, 0);
 

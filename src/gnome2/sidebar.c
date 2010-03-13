@@ -1255,7 +1255,7 @@ static gboolean paned_button_release_event(GtkWidget * widget,
 
 void gui_show_previewer_in_sidebar(gint choice)
 {
-	if(choice) {	   
+	if (choice) {	   
 		gtk_widget_show(widgets.box_side_preview);
 #ifdef USE_GTKMOZEMBED
 		gtk_widget_show (widgets.box_side_preview);

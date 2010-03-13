@@ -174,12 +174,12 @@ static void sync_with_main(const gchar * key)
 	gchar *buf = NULL;
 	gchar *url = NULL;
 	
-	if(key)
+	if (key)
 		buf = (gchar*)main_url_encode(key);
 	else
 		buf = (gchar*)main_url_encode(xml_get_value("keys", "verse"));
 	GS_message(("%s",buf));
-	if(buf && (strlen(buf) > 3)) {
+	if (buf && (strlen(buf) > 3)) {
 		url =
 		    g_strdup_printf("xiphos.url?action=showParallel&"
 					"type=verse&value=%s",
@@ -208,7 +208,7 @@ static void sync_with_main(const gchar * key)
 
 void gui_keep_parallel_tab_in_sync(void)
 {
-	if(GTK_TOGGLE_BUTTON(navbar_parallel.button_sync)->active)
+	if (GTK_TOGGLE_BUTTON(navbar_parallel.button_sync)->active)
 		sync_with_main(NULL);
 }
 

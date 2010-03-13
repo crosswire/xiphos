@@ -224,7 +224,7 @@ nsresult BrowserEmbed::resize(int x, int y, int width, int height)
 {
     nsCOMPtr<nsIBaseWindow>browserBaseWindow(
             do_QueryInterface(mWebBrowser));
-    if(!browserBaseWindow) return NS_ERROR_FAILURE;
+    if (!browserBaseWindow) return NS_ERROR_FAILURE;
     return browserBaseWindow->SetPositionAndSize(x, y, width, height,
             PR_TRUE);
 }
@@ -234,7 +234,7 @@ nsresult BrowserEmbed::focus()
 {
     nsCOMPtr<nsIWebBrowserFocus> browserFocus(
             do_GetInterface(mWebBrowser));
-    if(!browserFocus) return NS_ERROR_FAILURE;
+    if (!browserFocus) return NS_ERROR_FAILURE;
     return browserFocus->Activate();
 }
 
@@ -397,13 +397,13 @@ NS_IMETHODIMP BrowserEmbed::ExitModalEventLoop(nsresult aStatus)
 //*****************************************************************************   
 NS_IMETHODIMP BrowserEmbed::FocusNextElement()
 {
-    if(mFocusCallback) mFocusCallback(PR_TRUE, mFocusCallbackData);
+    if (mFocusCallback) mFocusCallback(PR_TRUE, mFocusCallbackData);
     return NS_OK;
 }
 
 NS_IMETHODIMP BrowserEmbed::FocusPrevElement()
 {
-    if(mFocusCallback) mFocusCallback(PR_FALSE, mFocusCallbackData);
+    if (mFocusCallback) mFocusCallback(PR_FALSE, mFocusCallbackData);
     return NS_OK;
 }
 
@@ -559,11 +559,11 @@ NS_IMETHODIMP BrowserEmbed::SetParentContentListener(nsIURIContentListener * aPa
 /* void onStateChange (in nsIWebProgress aWebProgress, in nsIRequest aRequest, in unsigned long aStateFlags, in nsresult aStatus); */
 NS_IMETHODIMP BrowserEmbed::OnStateChange(nsIWebProgress *aWebProgress, nsIRequest *aRequest, PRUint32 aStateFlags, nsresult aStatus)
 {
-    if((aStateFlags & nsIWebProgressListener::STATE_IS_NETWORK) &&
+    if ((aStateFlags & nsIWebProgressListener::STATE_IS_NETWORK) &&
             mNetworkCallback) {
-        if(aStateFlags & nsIWebProgressListener::STATE_START) {
+        if (aStateFlags & nsIWebProgressListener::STATE_START) {
             mNetworkCallback(PR_TRUE, mNetworkCallbackData);
-        } else if(aStateFlags & nsIWebProgressListener::STATE_STOP) {
+        } else if (aStateFlags & nsIWebProgressListener::STATE_STOP) {
             mNetworkCallback(PR_FALSE, mNetworkCallbackData);
         }
     }
@@ -668,13 +668,13 @@ BrowserEmbed::ProcessMouseEvent (void* aEvent)
 	
 	GS_message(("mouse button: %d",button));	
 	
-	if(button == 1) shift_key_pressed = TRUE; 
+	if (button == 1) shift_key_pressed = TRUE; 
 	
 	/* Mozilla uses 2 as its right mouse button code */
 	if (button != 2) return 0;	
 
 	GS_message(("g_signal_emit_by_name"));
-	if(mWebBrowser)
+	if (mWebBrowser)
 		g_signal_emit_by_name (mWebBrowser, "popupmenu_requested", NULL);  //,
 			        // NS_ConvertUTF16toUTF8 (href).get());
 	return 1;	
@@ -882,7 +882,7 @@ BrowserEmbed::GetListener(void)
 	nsCOMPtr<nsPIDOMWindow> piWin;
 	GetPIDOMWindow(getter_AddRefs(piWin));
 
-	if(!piWin)
+	if (!piWin)
 		return;
 	GS_message(("in get listener"));
 	mEventTarget = do_QueryInterface(piWin->GetChromeEventHandler());

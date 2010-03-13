@@ -739,7 +739,7 @@ on_checkbutton_showparatab_toggled(GtkToggleButton * togglebutton,
 {
 	xml_set_value("Xiphos", "misc", "showparatab",
 		      (togglebutton->active ? "1" : "0"));
-	if(togglebutton->active)
+	if (togglebutton->active)
 		gui_open_parallel_view_in_new_tab();
 	else
 		gui_close_passage_tab(1);
