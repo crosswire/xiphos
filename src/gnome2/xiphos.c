@@ -51,6 +51,7 @@
 #include "gui/mod_mgr.h"
 #include "gui/tabbed_browser.h"
 #include "gui/bookmarks_menu.h"
+#include "gui/utilities.h"
 
 #include "main/sword_treekey.h"
 #include "main/navbar_book.h"
@@ -171,11 +172,9 @@ void frontend_display(void)
 
  	gtk_window_move(GTK_WINDOW(widgets.app),settings.app_x,settings.app_y);
 	
-#ifdef USE_GTKMOZEMBED	/* gecko  needs the widgets to be visible before
-	                   writing */
-	while (gtk_events_pending()) {
-		gtk_main_iteration();
-	}
+#ifdef USE_GTKMOZEMBED
+	/* gecko  needs the widgets to be visible before writing */
+	sync_windows();
 #endif
 	// setup passage notebook
 //	if(settings.browsing) {

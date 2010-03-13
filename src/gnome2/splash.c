@@ -565,10 +565,7 @@ void gui_splash_init()
 
 		g_list_free(icons);
 	}
-	while (gtk_events_pending()) {
-			gtk_main_iteration();
-		}
-
+	sync_windows();
 }
 
 
@@ -584,19 +581,14 @@ void gui_splash_step(gchar *text, gdouble progress, gint step)
 					      progress);
 		e_splash_set_icon_highlight(E_SPLASH(splash), step, TRUE);
 
-		while (gtk_events_pending()) {
-			gtk_main_iteration();
-		}
+		sync_windows();
 	}
 }
 
 gboolean gui_splash_done()
 {
 	if (settings.showsplash) {
-
-		while (gtk_events_pending()) {
-			gtk_main_iteration();
-		}
+		sync_windows();
 		g_object_unref(splash);
 		gtk_widget_destroy(splash);
 	}

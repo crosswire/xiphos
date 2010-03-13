@@ -1,3 +1,8 @@
+2009-03-13  karl <charcoal@users.sf.net>
+
+	* introduce sync_windows() and stop_window_sync flag as a fix to
+	  the problem of universal sync not working.
+	
 2009-03-12  karl <charcoal@users.sf.net>
 
 	* add #name capability for footnote-specific navigation
