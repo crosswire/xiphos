@@ -563,7 +563,7 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 	/* these are the mods we actually use for global keys, we always only check for these set */
 	guint state = event->state & (GDK_SHIFT_MASK  | GDK_CONTROL_MASK | GDK_MOD1_MASK | GDK_MOD4_MASK );
 	
-	switch(event->hardware_keycode) {
+	switch (event->hardware_keycode) {
 	case GS_KEY_SHIFT: /* shift keys - we need this for locking strongs (and other stuff) while moving mouse */
 	case GS_KEY_SHIFT_R: /* to previewer */
 		shift_key_pressed = TRUE;
@@ -724,7 +724,7 @@ gboolean on_vbox1_key_release_event(GtkWidget * widget,
                                         GdkEventKey * event,
                                         gpointer user_data)
 {
-        switch(event->hardware_keycode) {			
+        switch (event->hardware_keycode) {			
 		case GS_KEY_SHIFT: 
 		case GS_KEY_SHIFT_R: 
 			shift_key_pressed = FALSE;				

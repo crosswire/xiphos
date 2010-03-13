@@ -346,7 +346,7 @@ static gboolean on_key_press_event           (GtkWidget       *widget,
                                         GdkEventKey     *event,
                                         gpointer         user_data)
 {
-	switch(event->hardware_keycode) {
+	switch (event->hardware_keycode) {
 		case 50:
 		case 62:
 			shift_key_pressed = TRUE;
@@ -360,7 +360,7 @@ static gboolean on_key_release_event         (GtkWidget       *widget,
                                         GdkEventKey     *event,
                                         gpointer         user_data)
 {
-	switch(event->hardware_keycode) {
+	switch (event->hardware_keycode) {
 		case 50:
 		case 62:
 			shift_key_pressed = FALSE;

@@ -1499,7 +1499,7 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 	}
 	t->sync = FALSE;
 	
-	switch(type) {
+	switch (type) {
 	case TEXT_TYPE:
 		t->mod_type = TEXT_TYPE;
 		gui_create_bibletext_dialog(t);

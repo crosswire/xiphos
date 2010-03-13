@@ -836,7 +836,7 @@ remove_install_modules(GList * modules,
 	g_string_free(mods, TRUE);
 	gtk_widget_hide(button_cancel);
 	gtk_widget_show(button_close);
-	switch(current_page) {
+	switch (current_page) {
 		case 3:
 			if (need_update) gtk_widget_show(button1);
 			gtk_widget_show(button2);

@@ -505,7 +505,7 @@ static
 gboolean on_up_enter_notify_event(GtkWidget * widget, GdkEventCrossing * event,
                                         gpointer  user_data)
 {
-	switch(GPOINTER_TO_INT(user_data)) {
+	switch (GPOINTER_TO_INT(user_data)) {
 		case BOOK_BUTTON:
 			gtk_widget_hide(navbar_versekey.arrow_book_up);
 			gtk_widget_show(navbar_versekey.arrow_book_up_box);			
@@ -545,7 +545,7 @@ static
 gboolean on_down_enter_notify_event(GtkWidget * widget, GdkEventCrossing * event,
                                         gpointer user_data)
 {
-	switch(GPOINTER_TO_INT(user_data)) {
+	switch (GPOINTER_TO_INT(user_data)) {
 		case BOOK_BUTTON:
 			gtk_widget_hide(navbar_versekey.arrow_book_down);
 			gtk_widget_show(navbar_versekey.arrow_book_down_box);			
@@ -585,7 +585,7 @@ static
 gboolean on_up_leave_notify_event(GtkWidget * widget, GdkEventCrossing * event,
                                         gpointer user_data)
 {
-	switch(GPOINTER_TO_INT(user_data)) {
+	switch (GPOINTER_TO_INT(user_data)) {
 		case BOOK_BUTTON:
 			gtk_widget_hide(navbar_versekey.arrow_book_up_box);
 			gtk_widget_show(navbar_versekey.arrow_book_up);			
@@ -625,7 +625,7 @@ static
 gboolean on_down_leave_notify_event(GtkWidget * widget, GdkEventCrossing * event,
                                         gpointer user_data)
 {
-	switch(GPOINTER_TO_INT(user_data)) {
+	switch (GPOINTER_TO_INT(user_data)) {
 		case BOOK_BUTTON:
 			gtk_widget_hide(navbar_versekey.arrow_book_down_box);
 			gtk_widget_show(navbar_versekey.arrow_book_down);			
@@ -666,7 +666,7 @@ gboolean on_up_eventbox_button_release_event (GtkWidget * widget,
                                         	GdkEventButton * event,
                                         	gpointer user_data)
 {
-	switch(GPOINTER_TO_INT(user_data)) {
+	switch (GPOINTER_TO_INT(user_data)) {
 		case BOOK_BUTTON:
 			main_navbar_versekey_spin_book(navbar_versekey,0);
 		break;
@@ -704,7 +704,7 @@ gboolean on_down_eventbox_button_release_event(GtkWidget * widget,
                                        	GdkEventButton * event,
                                        	gpointer user_data)
 {
-	switch(GPOINTER_TO_INT(user_data)) {
+	switch (GPOINTER_TO_INT(user_data)) {
 		case BOOK_BUTTON:
 			main_navbar_versekey_spin_book(navbar_versekey,1);
 		break;

@@ -305,7 +305,7 @@ static void on_notebook_switch_page(GtkNotebook * notebook,
 				    GtkNotebookPage * page,
 				    guint page_num, gpointer user_data)
 {
-	switch(page_num) {
+	switch (page_num) {
 	case 0:
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(button_v_lists), FALSE);
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(button_bookmarks), FALSE);

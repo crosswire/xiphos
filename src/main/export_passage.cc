@@ -369,7 +369,7 @@ static void _export_verse_range (EXPORT_DATA data, int type)
 
 void main_export_html(EXPORT_DATA data)
 {
-	switch(data.passage_type) {
+	switch (data.passage_type) {
 		case BOOK:
 			_export_book(data.filename, HTML);
 			break;
@@ -387,7 +387,7 @@ void main_export_html(EXPORT_DATA data)
 
 void main_export_plain(EXPORT_DATA data)
 {
-	switch(data.passage_type) {
+	switch (data.passage_type) {
 		case BOOK:
 			_export_book(data.filename, PLAIN);
 			break;

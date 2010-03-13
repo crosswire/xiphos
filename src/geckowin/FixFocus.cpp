@@ -62,7 +62,7 @@ LRESULT CALLBACK ToplevelFocusHackWndProc(HWND hwnd, UINT uMsg, WPARAM wParam,
         }
     }
 
-    switch(uMsg) {
+    switch (uMsg) {
         case WM_MOUSEACTIVATE:
             // Mouse click on a non-browser widget.  Ensure that the top-level
             // window has the keyboard focus.
@@ -99,7 +99,7 @@ LRESULT CALLBACK BrowserFocusHackWndProc(HWND hwnd, UINT uMsg, WPARAM wParam,
     if (!old_window_proc) {
         return DefWindowProc(hwnd, uMsg, wParam, lParam);
     }
-    switch(uMsg) {
+    switch (uMsg) {
         case WM_MOUSEACTIVATE:
             // The user clicked on a xulrunner browser.  Have the GTK widget
             // grab focus.
