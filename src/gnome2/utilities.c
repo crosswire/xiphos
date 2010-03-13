@@ -1195,17 +1195,25 @@ HtmlOutput(char *text,
 		len -= write_size;
 	}
 
+	/* use anchor if asked, but if so, special anchor takes priority. */
 #ifdef USE_GTKMOZEMBED
 	gecko_html_close(html);
 	if (anchor)
-		gecko_html_jump_to_anchor(html, anchor);
+		gecko_html_jump_to_anchor(html, (settings.special_anchor
+						 ? settings.special_anchor
+						 : anchor));
 #else
 	gtk_html_end(html, stream, GTK_HTML_STREAM_OK);
 	gtk_html_set_editable(html, was_editable);
 	if (anchor)
-		gtk_html_jump_to_anchor(html, anchor);
+		gtk_html_jump_to_anchor(html, (settings.special_anchor
+					       ? settings.special_anchor
+					       : anchor));
 	gtk_html_flush(html);
 #endif
+
+	/* the special anchor gets exactly one use. */
+	settings.special_anchor = NULL;
 }
 
 void set_window_icon (GtkWindow *window)
