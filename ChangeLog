@@ -1,6 +1,7 @@
 2009-03-14  karl <charcoal@users.sf.net>
 
 	* fix #2918463 xiphos crash due to zero-length settings: recreate.
+	* fix #2941684 correct read-aloud sense of smallcaps "LORD" (& "GOD").
 
 2009-03-13  karl <charcoal@users.sf.net>
 
