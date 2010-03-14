@@ -1,3 +1,7 @@
+2009-03-14  karl <charcoal@users.sf.net>
+
+	* fix #2918463 xiphos crash due to zero-length settings: recreate.
+
 2009-03-13  karl <charcoal@users.sf.net>
 
 	* introduce sync_windows() and stop_window_sync flag as a fix to

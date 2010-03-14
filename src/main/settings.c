@@ -94,6 +94,8 @@ int settings_init(int argc, char **argv, int new_configs, int new_bookmarks)
 	char *sword_dir = NULL;
 	char *tmp = NULL;
 	char *env;
+	struct stat buf;
+	gboolean buf_says_empty = FALSE;
 
 	settings.first_run = FALSE;
 	/* set program title */
@@ -171,9 +173,15 @@ int settings_init(int argc, char **argv, int new_configs, int new_bookmarks)
 		"settings.xml");
 
 	/* if settings.xml does not exist create it */
-	if ((access(settings.fnconfigure, F_OK) == -1) || new_configs) {
+	if (stat(settings.fnconfigure, &buf) == 0)
+		buf_says_empty = (buf.st_size == 0);
+	if (buf_says_empty ||
+	    (access(settings.fnconfigure, F_OK) == -1) ||
+	    new_configs) {
 		/* must be first run */
-		GS_print(("\nFirst Run: need to create settings!\n"));
+		GS_print((buf_says_empty
+			  ? "\nSETTINGS FILE EXISTS BUT IS EMPTY - RECREATING.\n"
+			  : "\nFirst Run: need to create settings!\n"));
 		settings.first_run = TRUE;
 
 		xml_create_settings_file(settings.fnconfigure);
