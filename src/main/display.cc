@@ -1386,6 +1386,29 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 			*s = ' ';
 		// in case it isn't obvious, i'd really like a  standard
 		// function that walks a string for multiple individual chars.
+
+		// walk the string, looking for dislocated "LORD" as "L<spaces>ORD".
+		// this occurs in "smallcaps" use in many bibles.
+		for (s = strchr(text->str, 'L'); s; s = strchr(s+1, 'L')) {
+			gchar *begin = s++;
+			while (*s == ' ')
+				++s;
+			if (!strncmp(s, "ORD", 3)) {
+				*begin = ' ';
+				*(s-1) = 'L';
+			}
+		}
+		// same song, second verse: G<spaces>OD.
+		for (s = strchr(text->str, 'G'); s; s = strchr(s+1, 'G')) {
+			gchar *begin = s++;
+			while (*s == ' ')
+				++s;
+			if (!strncmp(s, "OD", 2)) {
+				*begin = ' ';
+				*(s-1) = 'G';
+			}
+		}
+
 		GS_message(("ReadAloud: clean: %s\n", text->str));
 		// scribble clean text to the socket.
 		if (FestivalSpeak(text->str, strlen(text->str), tts_socket) == false)
