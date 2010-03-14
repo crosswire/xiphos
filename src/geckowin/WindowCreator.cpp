@@ -75,7 +75,7 @@ NS_IMETHODIMP WindowCreator::CreateChromeWindow(nsIWebBrowserChrome
 }
 
 NS_IMETHODIMP WindowCreator::CreateChromeWindow2(
-        nsIWebBrowserChrome *parent, PRUint32 chromeFlags, 
+        nsIWebBrowserChrome *parent, PRUint32 chromeFlags,
         PRUint32 contextFlags, nsIURI *uri, PRBool *cancel,
         nsIWebBrowserChrome **_retval)
 {

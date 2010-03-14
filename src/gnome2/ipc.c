@@ -45,7 +45,7 @@ gboolean ipc_object_set_current_reference(IpcObject* obj,
 gboolean ipc_object_get_current_reference(IpcObject* obj,
 					  gchar** reference,
 					  GError** error);
-gboolean ipc_object_get_next_search_reference(IpcObject* obj, 
+gboolean ipc_object_get_next_search_reference(IpcObject* obj,
 				       gchar** reference,
 				       GError** error);
 
@@ -72,7 +72,7 @@ static void ipc_object_class_init(IpcObjectClass* klass) {
 	 *
 	 * Since: 3.2
 	 */
-	klass->signals[SEARCH_PERFORMED] = 
+	klass->signals[SEARCH_PERFORMED] =
 		g_signal_new ("search-performed-signal",
 			      G_OBJECT_CLASS_TYPE(klass),
 			      G_SIGNAL_RUN_LAST,
@@ -126,12 +126,12 @@ gboolean ipc_object_search_performed(IpcObject* obj,
 				     const int* hits,
 				     GError **error)
  {
-	 
+
 	 IpcObjectClass* klass = IPC_OBJECT_GET_CLASS(obj);
 
 	 GString *s = g_string_new ("");
 	 g_string_printf(s, "%d", *hits);
-	 
+
 	 g_signal_emit(obj,
 		       klass->signals[SEARCH_PERFORMED],
 		       0,
@@ -175,11 +175,11 @@ gboolean ipc_object_navigation_signal (IpcObject* obj,
  *
  * to be called from dbus; returns all the current search
  * results; returns XIPHOS_SEARCH_END when all have been retrieved
- * 
+ *
  * Since: 3.2
  */
 
-gboolean ipc_object_get_next_search_reference(IpcObject* obj, 
+gboolean ipc_object_get_next_search_reference(IpcObject* obj,
 				       gchar** reference,
 				       GError** error)
 {
@@ -187,7 +187,7 @@ gboolean ipc_object_get_next_search_reference(IpcObject* obj,
 		*reference = g_strdup((gchar*)obj->references->data);
 	else
 		*reference = g_strdup("XIPHOS_SEARCH_END");
-	
+
 	obj->references = g_list_next(obj->references);
 	return TRUE;
 }
@@ -200,7 +200,7 @@ gboolean ipc_object_get_next_search_reference(IpcObject* obj,
  *
  * to be called from dbus; sets the current reference in Xiphos;
  * calls main_url_handler to handle the navigation
- * 
+ *
  * Since: 3.2
  */
 gboolean ipc_object_set_current_reference(IpcObject* obj,
@@ -224,7 +224,7 @@ gboolean ipc_object_set_current_reference(IpcObject* obj,
  * @error: GError
  *
  * to be called from dbus; gets the current reference in Xiphos;
- * 
+ *
  * Since: 3.2
  */
 gboolean ipc_object_get_current_reference(IpcObject* obj,
@@ -241,7 +241,7 @@ gboolean ipc_object_get_current_reference(IpcObject* obj,
  *
  * creates a new IpcObject and initiates the d-bus connection;
  * sets the single static object to this new object
- * 
+ *
  * Since: 3.2
  */
 IpcObject* ipc_init_dbus_connection(IpcObject* obj)
@@ -255,7 +255,7 @@ IpcObject* ipc_init_dbus_connection(IpcObject* obj)
 	bus = dbus_g_bus_get(DBUS_BUS_SESSION, &error);
 	if (error != NULL)
 		return FALSE;
-	
+
 	busProxy = dbus_g_proxy_new_for_name(bus,
 					     "org.freedesktop.DBus",
 					     "/org/freedesktop/DBus",
@@ -279,7 +279,7 @@ IpcObject* ipc_init_dbus_connection(IpcObject* obj)
 
 	if (result != 1)
 		return NULL;
-	
+
 	obj = g_object_new(IPC_TYPE_OBJECT, NULL);
 
 	dbus_g_connection_register_g_object(bus,
@@ -287,7 +287,7 @@ IpcObject* ipc_init_dbus_connection(IpcObject* obj)
 					    G_OBJECT(obj));
 
 	main_ipc_obj = obj;
-	
+
 	return obj;
 }
 
@@ -295,7 +295,7 @@ IpcObject* ipc_init_dbus_connection(IpcObject* obj)
  * ipc_get_main_ipc:
  *
  * returns the single static IpcObject
- * 
+ *
  * Since: 3.2
  */
 IpcObject* ipc_get_main_ipc(void)
@@ -303,4 +303,4 @@ IpcObject* ipc_get_main_ipc(void)
 	return main_ipc_obj;
 }
 
-	
+

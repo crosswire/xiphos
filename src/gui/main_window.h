@@ -1,6 +1,6 @@
 /*
  * Xiphos Bible Study Tool
- * main_window.h - main window gui 
+ * main_window.h - main window gui
  *
  * Copyright (C) 2000-2009 Xiphos Developer Team
  *
@@ -29,7 +29,7 @@ extern "C" {
 #include <gtk/gtk.h>
 //#include "gui/toolbar_nav.h"
 #include "main/navbar_versekey.h"
-	
+
 typedef struct _tab_page TAB_PAGE;
 struct  _tab_page {
 	GtkWidget *vbox;
@@ -37,7 +37,7 @@ struct  _tab_page {
 	GtkWidget *paned_text;
 	GtkWidget *paned_comm;
 	GtkWidget *paned_book;
-	
+
 	// ***** html widgets *****
 	GtkWidget *html_text;
 	GtkWidget *html_parallel;
@@ -45,7 +45,7 @@ struct  _tab_page {
 	GtkWidget *html_dict;
 	GtkWidget *html_book;
 	GtkWidget *html_preview;
-	
+
 	// ***** backend  *****
 	gpointer backend;
 	// **** modules *****
@@ -63,7 +63,7 @@ struct  _tab_page {
 	gchar *text_comm_key;
 	gchar *dict_key;
 	gchar *book_key;
-	
+
 	NAVBAR_VERSEKEY nav_bar;
 };
 /*
@@ -71,9 +71,9 @@ typedef struct _main_window MAIN_WINDOW;
 struct  _main_window {
 	GtkWidget *main_window;
 	GtkWidget *status_bar;
-	
+
 	GtkWidget *nb_sidebar;
-	
+
 	TAB_PAGE current_page;
 };
 */
@@ -83,7 +83,7 @@ void gui_show_hide_texts(int choice);
 void gui_show_hide_preview(int choice);
 void gui_show_hide_comms(int choice);
 void gui_show_hide_dicts(int choice);
-void gui_set_bible_comm_layout(void);	
+void gui_set_bible_comm_layout(void);
 void gui_change_window_title(char * module_name);
 void create_mainwindow(void);
 void gui_show_main_window(void);

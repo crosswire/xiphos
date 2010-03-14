@@ -47,7 +47,7 @@ search_performed_signal_handler (DBusGProxy *proxy,
 		printf ("ref: %s\n", ref);
 		org_xiphos_remote_get_next_search_reference(proxy, &ref, NULL);
 	}
-	
+
 	return FALSE;
 }
 
@@ -99,19 +99,19 @@ int main (int argc, char **argv)
 	dbus_g_proxy_connect_signal (remote_object, "searchPerformedSignal",
 				     G_CALLBACK(search_performed_signal_handler),
 				     NULL, NULL);
-	
+
 	//add and connect to the navigationSignal
 	dbus_g_proxy_add_signal (remote_object, "navigationSignal",
 				 G_TYPE_STRING, G_TYPE_INVALID);
 	dbus_g_proxy_connect_signal (remote_object, "navigationSignal",
 				     G_CALLBACK(navigation_performed_signal_handler),
 				     NULL, NULL);
-	
+
 	g_main_loop_run (mainloop);
 
 	exit (0);
 
 }
-		
 
-	
+
+

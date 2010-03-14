@@ -41,9 +41,9 @@ void on_checkbutton6_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 void on_checkbutton7_toggled(GtkToggleButton * togglebutton, gpointer user_data);
 void on_checkbutton8_toggled(GtkToggleButton * togglebutton, gpointer user_data);
 void on_checkbutton9_toggled(GtkToggleButton * togglebutton, gpointer user_data);
-	
+
 void on_folder_changed(GtkFileChooser  *filechooser, gpointer user_data);
-	
+
 void on_combobox1_changed(GtkComboBox * combobox, gpointer user_data);
 void on_combobox2_changed(GtkComboBox * combobox, gpointer user_data);
 void on_combobox4_changed(GtkComboBox * combobox, gpointer user_data);

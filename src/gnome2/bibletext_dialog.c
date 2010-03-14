@@ -608,11 +608,11 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 
 #ifdef USE_GTKMOZEMBED
 	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
-	
+
 	eventbox = gtk_event_box_new();
 	gtk_widget_show(eventbox);
 	gtk_container_add(GTK_CONTAINER(frame), eventbox);
-	
+
 	vt->html = GTK_WIDGET(gecko_html_new(vt, TRUE, DIALOG_TEXT_TYPE));
 	gtk_widget_show(vt->html);
 	gtk_container_add(GTK_CONTAINER(eventbox), vt->html);
@@ -626,7 +626,7 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 	gtk_paned_add2((GtkPaned *)paned,frame);
 	gtk_widget_set_size_request(frame, -1, 100);
 	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
-	
+
 	eventbox = gtk_event_box_new();
 	gtk_widget_show(eventbox);
 	gtk_container_add(GTK_CONTAINER(frame), eventbox);
@@ -670,7 +670,7 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 			   G_CALLBACK
 			   (url_requested),
 			   (DIALOG_DATA *) vt);
-	
+
 
 	frame = gtk_frame_new(NULL);
 	gtk_widget_show(frame);

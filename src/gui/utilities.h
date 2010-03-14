@@ -25,7 +25,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-	
+
 #include <libxml/parser.h>
 #include "main/configs.h"
 #include "main/module_dialogs.h"
@@ -40,10 +40,10 @@ void gui_reassign_strdup(gchar **where, gchar *what);
 void gui_set_statusbar (const gchar * message);
 void gui_set_progressbar_text(GtkWidget * pb, gchar * text);
 void gui_set_progressbar_fraction(GtkWidget * pb, gdouble fraction);
-void gui_set_combo_index(GtkWidget * combo, gint index);	
+void gui_set_combo_index(GtkWidget * combo, gint index);
 void gui_clear_combo(GtkWidget * combo);
 void gui_add_item_to_combo(GtkWidget * combo, gchar * item);
-void gui_glade_signal_connect_func (const gchar *cb_name, GObject *obj, 
+void gui_glade_signal_connect_func (const gchar *cb_name, GObject *obj,
 			   const gchar *signal_name, const gchar *signal_data,
 			   GObject *conn_obj, gboolean conn_after,
 			   gpointer user_data);
@@ -51,7 +51,7 @@ gchar *gui_general_user_file (const char *fname, gboolean critical);
 void gui_load_module_tree(GtkWidget * tree);
 MOD_FONT *get_font(gchar * mod_name);
 void free_font(MOD_FONT *mf);
-gchar * remove_linefeeds(gchar * buf);	
+gchar * remove_linefeeds(gchar * buf);
 void gui_add_mods_to_menus(GList * modlist, gchar * menu,
 					GCallback callback);
 void gui_add_mods_2_gtk_menu(gint mod_type, GtkWidget * menu,
@@ -84,18 +84,18 @@ GdkPixbuf *pixbuf_finder(const char *image, int size, GError **error);
 void HtmlOutput(char *text, GtkWidget *gtkText, MOD_FONT *mf, char *anchor);
 void set_window_icon(GtkWindow *window);
 gboolean xiphos_open_default(const gchar *file);
-	
+
 void archive_addfile(GsfOutfile *output, const gchar *file, const gchar *name);
 void archive_adddir(GsfOutfile *output, gchar *path, const gchar *name);
 void xiphos_create_archive(gchar* conf_file, gchar* datapath, gchar *zip,
 			   const gchar *destination);
-	
+
 
 #ifdef WIN32
 gchar* xiphos_win32_get_subdir(const gchar *subdir);
 #endif
-void utilities_parse_treeview(xmlNodePtr parent, 
-                              GtkTreeIter * tree_parent, 
+void utilities_parse_treeview(xmlNodePtr parent,
+                              GtkTreeIter * tree_parent,
                               GtkTreeModel *model);
 
 enum {

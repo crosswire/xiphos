@@ -6,7 +6,7 @@ libgecko_a_SOURCES =  \
 	gecko-html.cpp		gecko-html.h		\
 	gecko-print.c		gecko-print.h		\
 	gecko-services.h   	gecko-services.cpp 	\
-	gecko-utils.cpp		gecko-utils.h			
+	gecko-utils.cpp		gecko-utils.h
 
 libgecko_a_CXXFLAGS = \
 	-I$(top_srcdir)/src \

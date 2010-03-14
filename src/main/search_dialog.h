@@ -35,7 +35,7 @@ void main_selection_modules_lists_changed(GtkTreeSelection * selection, gpointer
 void main_selection_finds_list_changed(GtkTreeSelection *  selection, gpointer data);
 void main_comboboxentry2_changed(GtkComboBox * combobox, gpointer user_data);
 void main_dialog_search_percent_update(char percent, void *userData);
-void main_range_text_changed(GtkEditable * editable);	
+void main_range_text_changed(GtkEditable * editable);
 void main_save_modlist(void);
 void main_save_range(void);
 void main_delete_range(void);

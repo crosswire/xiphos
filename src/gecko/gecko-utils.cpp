@@ -183,17 +183,17 @@ gecko_set_font (GeckoFontType font_type, const gchar *fontname)
 	switch (font_type) {
 	case GECKO_FONT_VARIABLE:
 		for (i = 0; i < G_N_ELEMENTS (font_languages); ++i) {
-			g_snprintf (pref, sizeof (pref), 
+			g_snprintf (pref, sizeof (pref),
 				    "font.name.variable.%s",
 				    font_languages[i]);
 			gecko_prefs_set_string (pref, name);
-			
-			g_snprintf (pref, sizeof (pref), 
+
+			g_snprintf (pref, sizeof (pref),
 				    "font.size.variable.%s",
 				    font_languages[i]);
 			gecko_prefs_set_int (pref, size);
-			
-			g_snprintf (pref, sizeof (pref), 
+
+			g_snprintf (pref, sizeof (pref),
 				    "font.minimum-size.%s",
 				    font_languages[i]);
 			gecko_prefs_set_int (pref, 8);
@@ -201,24 +201,24 @@ gecko_set_font (GeckoFontType font_type, const gchar *fontname)
 		break;
 	case GECKO_FONT_FIXED:
 		for (i = 0; i < G_N_ELEMENTS (font_languages); ++i) {
-			g_snprintf (pref, sizeof (pref), 
+			g_snprintf (pref, sizeof (pref),
 				    "font.name.fixed.%s",
 				    font_languages[i]);
 			gecko_prefs_set_string (pref, name);
-			
-			g_snprintf (pref, sizeof (pref), 
+
+			g_snprintf (pref, sizeof (pref),
 				    "font.size.fixed.%s",
 				    font_languages[i]);
 			gecko_prefs_set_int (pref, size);
 		}
-		
+
 		break;
 	default:
 		break;
 	}
 
 	g_free (name);
-}		   
+}
 
 extern "C" gboolean
 gecko_init (void)
@@ -274,7 +274,7 @@ gecko_init (void)
 
 	rv = CallQueryInterface (prefService, &gPrefBranch);
 	NS_ENSURE_SUCCESS (rv, FALSE);
-	
+
     	gconf_client = gconf_client_get_default ();
     	fontname = gconf_client_get_string (gconf_client, KEY_GNOME_VARIABLE_FONT, &err);
 	if (fontname) {

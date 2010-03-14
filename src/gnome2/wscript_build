@@ -16,7 +16,7 @@ sub = Utils.subst_vars
 objects = 'backend editor main'
 if not bld.env['ENABLE_GTKHTML']:
     objects += ' %s' % 'gecko'
-    
+
 # GTKHTML
 gtkhtml = 'GTKHTML'
 if env['HAVE_GTKHTML_EDITOR']:
@@ -42,7 +42,7 @@ DATADIR="${DATAROOTDIR}"
 LIBDIR="${LIBDIR}"
 SHARE_DIR="${DATAROOTDIR}/${PACKAGE}"
 ''', env)
-        
+
 
 # generating locale.c
 
@@ -51,12 +51,12 @@ loc = bld.new_task_gen(
     target = 'locale_set.c',
     rule = 'sh ${SRC[0].abspath()} ${SRC[1].abspath()} > ${TGT}',
     )
-        
+
 lib = bld.new_task_gen(
     features = 'cxx cc cprogram',
     includes = '. ../.. ../../src ../../src/editor %s' % bld.env['GECKO_INCLUDE'], # ../../ for config.h
-    defines = defines, 
-    source = '%s' % winresource, 
+    defines = defines,
+    source = '%s' % winresource,
     target = 'xiphos',
     #uselib = 'GNOMEUI GECKONSPR MAGICK GECKONSS GTK GLADE GLIB GMODULEEXP UPRINT SWORD  %s %s' % (gtkhtml, gecko),
     #uselib = 'WSOCK GNOMEUI GECKONSPR MAGICK GECKONSS GTK GLADE GLIB GMODULEEXP UPRINT SWORD  %s %s' % (gtkhtml, gecko),
@@ -83,6 +83,6 @@ def process_strip(self):
 	if getattr(self, 'strip', None):
 		tsk = self.create_task('strip')
 		tsk.set_inputs(self.path.find_or_declare(get_target_name(self)))
-		tsk.set_outputs(self.path.find_or_declare(get_target_name(self)))		
+		tsk.set_outputs(self.path.find_or_declare(get_target_name(self)))
 
 Task.simple_task_type('strip', "${STRIP} ${SRC}", color='BLUE', after='cxx_link')

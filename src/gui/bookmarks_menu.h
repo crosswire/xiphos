@@ -1,6 +1,6 @@
 /*
  * Xiphos Bible Study Tool
- * bookmarks_menu.h - gui for bookmarks 
+ * bookmarks_menu.h - gui for bookmarks
  *
  * Copyright (C) 2003-2009 Xiphos Developer Team
  *

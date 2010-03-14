@@ -18,7 +18,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  */
- 
+
 #ifndef __MODULE_DIALOGS_H__
 #define __MODULE_DIALOGS_H__
 
@@ -43,7 +43,7 @@ struct _dialog_data {
 	GtkWidget *freeform_lookup;
 	GtkWidget *statusbar;
         GtkWidget *listview;
-	GtkWidget *tree; 
+	GtkWidget *tree;
 	/* widgets for text panes */
 	GtkWidget *vbox;
 	GtkWidget *html;
@@ -53,18 +53,18 @@ struct _dialog_data {
         GtkWidget *entry;
 	GtkWidget *showtabs;
 	GtkWidget *module_options_menu;
-	
+
 	gchar *mod_name;
 	gchar *search_string;
 	gchar *key;
 	gchar *cipher_key;
 	gchar *cipher_old;
-	
+
 	gint mod_num;
 	gint display_level;
 	gint mod_type;
 	unsigned long offset;
-	
+
 	gboolean is_locked;
 	gboolean is_percomm;
 	gboolean is_dialog;
@@ -73,28 +73,28 @@ struct _dialog_data {
 	gboolean book_heading;
 	gboolean chapter_heading;
 	gboolean sync;
-	
+
 	gpointer backend;
 	gpointer editor;
-	
+
         GObject *mod_selection;
-	
+
 	NAVBAR_VERSEKEY navbar;
 	NAVBAR_BOOK navbar_book;
 };
 
 void main_dialogs_book_heading(DIALOG_DATA * d);
 void main_dialogs_chapter_heading(DIALOG_DATA * d);
-void main_dialogs_information_viewer(DIALOG_DATA * d, gchar * mod_name, 
+void main_dialogs_information_viewer(DIALOG_DATA * d, gchar * mod_name,
 				     gchar * text, gchar * key,
 		             	     gchar * action ,gchar * type ,
 			     	     gchar * morph_text, gchar * morph);
 void main_dialogs_clear_viewer(DIALOG_DATA *d);
 void main_dialogs_add_children_to_tree(GtkTreeModel * model, GtkTreeIter iter,
 	  unsigned long offset, gboolean is_dialog, DIALOG_DATA * d);
-void main_dialogs_add_book_to_tree(GtkWidget * tree, gchar * mod_name, 
+void main_dialogs_add_book_to_tree(GtkWidget * tree, gchar * mod_name,
 			     gboolean is_dialog, DIALOG_DATA * d);
-void main_dialogs_tree_selection_changed(GtkTreeModel * model, 
+void main_dialogs_tree_selection_changed(GtkTreeModel * model,
 	   GtkTreeSelection * selection, gboolean is_dialog, DIALOG_DATA * g);
 
 void main_dialogs_dictionary_entry_changed(DIALOG_DATA * d);
@@ -115,8 +115,8 @@ DIALOG_DATA *main_dialogs_open( const gchar * mod_name,  const gchar * key);
 
 #ifdef __cplusplus
 }
-#endif	
-	
+#endif
+
 #endif
 
 /* end of file */

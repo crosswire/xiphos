@@ -25,7 +25,7 @@
 #ifdef __cplusplus
 extern "C"
 {
-#endif	
+#endif
 
 
 #include <gtk/gtk.h>
@@ -51,8 +51,8 @@ struct _module_lists {
 };
 
 /* list types */
-#define TEXT_LIST 0 
-#define TEXT_DESC_LIST 1 
+#define TEXT_LIST 0
+#define TEXT_DESC_LIST 1
 #define COMM_LIST 2
 #define COMM_DESC_LIST 3
 #define DICT_LIST 4

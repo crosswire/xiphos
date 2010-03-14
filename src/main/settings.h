@@ -28,7 +28,7 @@ extern "C" {
 
 typedef struct _settings SETTINGS;
 struct _settings {
-	char	
+	char
 		*gs_version,	 	/* Xiphos version */
 		*path_to_mods,		/* one-time retrieval */
 		*MainWindowModule,	/* module to open at program startup  */
@@ -44,7 +44,7 @@ struct _settings {
 	        *devotionalmod, 	/* module for devotional */
 	        *DefaultDict,		/* module for default dict */
 		*lex_greek,		/* module for greek lexicon - strongs or thayers */
-		*lex_hebrew,		/* module for hebrew lexicon - strongs or BDB */	        
+		*lex_hebrew,		/* module for hebrew lexicon - strongs or BDB */
 	        *currentverse,		/* where we are right now */
 		comm_key[80],		/*  */
 	        *cvparallel,		/* current verse for detached parallel */
@@ -56,12 +56,12 @@ struct _settings {
 		searchText[256],	/* search string used by sidebar search */
 		findText[256],		/* string used by find dialog */
 		*spell_language,
-		
+
 	/* fonts, font colors and font sizes */
 	        *bible_text_color,	/* color for text */
 	        *bible_bg_color,	/* color for background */
 	        *currentverse_color,	/* color for current verse */
-	        *link_color,		/* color for strongs, morph tags */	
+	        *link_color,		/* color for strongs, morph tags */
 		*bible_verse_num_color,	/* verse number color */
 		*found_color,		/* color for search word in results display */
 		*font_color,		/*  */
@@ -72,7 +72,7 @@ struct _settings {
 
 		*special_locale;	/* prefs dialog: pick abnormal locale */
 					/* --requires restart-- */
-		
+
 	int
 		verse_num_font_size,
 		base_font_size,
@@ -84,7 +84,7 @@ struct _settings {
 		commpane_hight,
 		sidebar_notebook_hight,
 		gs_width,
-		gs_hight,	
+		gs_hight,
 		searchbargroup,      //-- number of search group in shortcut bar
 		searchType,
 		whichwindow,      	/* which of the main form html windows is active */
@@ -92,16 +92,16 @@ struct _settings {
 		parallel_page,   /* parallel workbook page number */
 		tab_page,   /* studypad workbook page number */
 		percomm_page;   /* percomm editor workbook page number */
-						
-	int   
+
+	int
 		strongs,	//-- toogle button and check menu state
 		parallel_strongs, //-- check menu state parallel mods
-		parallel_headings, //-- check menu state parallel mods	
-		parallel_crossref, //-- check menu state parallel mods	
-		parallel_lemmas, //-- check menu state parallel mods		
-		parallel_morphs, //-- check menu state parallel mods		
-		parallel_segmentation, //-- check menu state parallel mods		
-		parallel_red_words, //-- check menu state parallel mods	
+		parallel_headings, //-- check menu state parallel mods
+		parallel_crossref, //-- check menu state parallel mods
+		parallel_lemmas, //-- check menu state parallel mods
+		parallel_morphs, //-- check menu state parallel mods
+		parallel_segmentation, //-- check menu state parallel mods
+		parallel_red_words, //-- check menu state parallel mods
 		parallel_transliteration, //-- check menu state parallel mods
 		parallel_variants_primary, //-- check menu state parallel mods
 		parallel_variants_secondary, //-- check menu state parallel mods
@@ -147,14 +147,14 @@ struct _settings {
 		useDefaultDict,
 //		strip_words_in_red,
 		browsing, /* true for tabbed browsing */
-		
+
 		/** if items are docked **/
 		docked, /* true when sidebar is docked */
 		dockedInt, /* true when parallel page is docked */
-		
+
 		/**  find dialogs info  **/
 		finddialog, /* if finddialog open (showing) */
-		
+
 		/** editors **/
 		editnote, /* true when percom html widget is in edit mode */
 		editgbs, /* true when gbs html widget is in edit mode */
@@ -166,29 +166,29 @@ struct _settings {
 		studypad_dialog_exist, /* studypad dialog has been created */
 //		use_percomm_dialog, /* display personal comments editor in a dialog */
 		percomm_dialog_exist, /* percomm dialog has been created */
-		
+
 		/** do we have these modules **/
-		havebible, 
-		havecomm, 
-		havedict, 
-		havebook, 
+		havebible,
+		havecomm,
+		havedict,
+		havebook,
 		havepercomm,
 		haveprayerlist,
 		/* do we need to add item to history */
 		addhistoryitem;
-	
-	
-		
-	/* gbs */	
+
+
+
+	/* gbs */
 	char *book_mod;	/* module to open at program startup  */
 	char *book_key;    /*  */
 	unsigned long book_offset;
-	
+
 	int comm_showing;	/* whether comm or book is visible */
-	
+
 	/* store program title */
 	char program_title[256];
-	
+
 	/* store $home directory */
 	char *homedir;
 
@@ -209,35 +209,35 @@ struct _settings {
 
 	/* apply changes to what? the text navigation bar */
 	int apply_change;
-	
+
 	/* load xml bookmarks */
 	int load_xml_bookmarks;
-	
+
 	/* is Bibletime on the system */
 	int have_bibletime;
-	
+
 	/* cell height of dictionary treeview */
 	int cell_height;
-	
+
 	/* window location at close */
 	int app_x;
 	int app_y;
-	
+
 	/* there is no settings.xml file */
 	int first_run;
-	
+
 	/* widget shadow type */
 	int shadow_type;
-	
+
 	/* chapter scroll */
 	int chapter_scroll;
-	
+
 	/* auto image resize in com/book/dict */
 	int imageresize;
-	
+
 	/* signal id dictionary combo changed */
 	long signal_id;
-	
+
 	/* mod mgr local or remote  */
 	int mod_mgr_source; /* 0 = local, 1 = remote */
 	/* mod mgr local sorce  */
@@ -245,7 +245,7 @@ struct _settings {
 	/* mod mgr remote source  */
 	int mod_mgr_remote_source_index;
 	/* mod mgr destination  */
-	int mod_mgr_destination; /* if = 0 destination is .sword 
+	int mod_mgr_destination; /* if = 0 destination is .sword
 				    else sword directory  */
 	/* has user seen the quick intro? */
 	int mod_mgr_intro; /* 0 = hasn't seen explanatoin, 1 = has */

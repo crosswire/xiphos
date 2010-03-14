@@ -9,4 +9,4 @@ lib = bld.new_task_gen(
     uselib= bld.env['ALL_LIBS'],
 )
 
-lib.find_sources_in_dirs('.')        
+lib.find_sources_in_dirs('.')

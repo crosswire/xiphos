@@ -1,6 +1,6 @@
 /*
  * Xiphos Bible Study Tool
- * configs.h - 
+ * configs.h -
  *
  * Copyright (C) 2000-2009 Xiphos Developer Team
  *
@@ -18,14 +18,14 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  */
- 
+
 #ifndef __CONFIGS_H__
 #define __CONFIGS_H__
 
 #ifdef __cplusplus
 extern "C" {
-#endif	
-	
+#endif
+
 typedef struct _mod_font MOD_FONT;
 struct  _mod_font {
 	const char *mod_name;
@@ -37,7 +37,7 @@ struct  _mod_font {
 	const char *new_font_size;
 	int no_font;
 };
- 
+
 char *get_conf_file_item(const char * file, const char * mod_name, const char * item);
 void save_conf_file_item(const char * file, const char * mod_name, const char * item,
 			const char * value);

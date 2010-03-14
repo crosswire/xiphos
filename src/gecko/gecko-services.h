@@ -71,8 +71,8 @@ public:
 
   NS_DECL_ISUPPORTS
   NS_DECL_NSIWEBPROGRESSLISTENER
-    
-    static nsresult SetPrintSettings (GeckoPrintInfo *settings, PRBool preview, 
+
+    static nsresult SetPrintSettings (GeckoPrintInfo *settings, PRBool preview,
 				      nsIPrintSettings *target);
 
 protected:

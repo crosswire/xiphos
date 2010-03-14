@@ -60,7 +60,7 @@
 #include <nsIWebBrowserPrint.h>
 #include <nsIWebBrowserSetup.h>
 #include <nsServiceManagerUtils.h>
-#include <nsIPresShell.h> 
+#include <nsIPresShell.h>
 #include <nsIDOMNamedNodeMap.h>
 //#include <nsIFrame.h>
 
@@ -163,9 +163,9 @@ void Yelper::JumpToAnchor(const char *anchor)
 {
 	nsAutoString aAnchorName;
 	nsresult rv, result;
-	
+
 	aAnchorName.Assign(NS_ConvertUTF8toUTF16(anchor));
-	
+
 	nsCOMPtr<nsIDocShell> docShell (do_GetInterface (mWebBrowser, &rv));
 
 	if ( !docShell  ) {
@@ -176,11 +176,11 @@ void Yelper::JumpToAnchor(const char *anchor)
 
 	nsCOMPtr<nsIPresShell> presShell;
 	result = docShell->GetPresShell(getter_AddRefs(presShell));
-	if (!NS_SUCCEEDED(result) || (!presShell)) 
+	if (!NS_SUCCEEDED(result) || (!presShell))
 		return;
-		
+
 	presShell->GoToAnchor(aAnchorName, 1);
-	
+
 }
 void
 Yelper::SetFindProperties (const char *aSearchString,
@@ -206,7 +206,7 @@ Yelper::Find (const char *aSearchString)
 
 	nsresult rv;
 	PRUint16 found = nsITypeAheadFind::FIND_NOTFOUND;
-	
+
 	rv = mFinder->Find (NS_ConvertUTF8toUTF16 (aSearchString),
 			    PR_FALSE ,//  links only? *
 			    //mHasFocus,
@@ -235,9 +235,9 @@ Yelper::SetSelectionAttention (PRBool aAttention)
 {
 #if 0
 	if (aAttention == mSelectionAttention) return;
-	
+
 	mSelectionAttention = aAttention;
-	
+
 	NS_ENSURE_TRUE (mFinder, );
 
 	PRInt16 display;
@@ -255,7 +255,7 @@ Yelper::SetSelectionAttention (PRBool aAttention)
 	* we weren't attached to any tab yet
 	*/
 	if (NS_FAILED (rv) || !shell) return;
-	
+
 	nsCOMPtr<nsISimpleEnumerator> enumerator;
 	rv = shell->GetDocShellEnumerator (nsIDocShellTreeItem::typeContent,
 					   nsIDocShell::ENUMERATE_FORWARDS,
@@ -267,32 +267,32 @@ Yelper::SetSelectionAttention (PRBool aAttention)
 		nsCOMPtr<nsISupports> element;
 		enumerator->GetNext (getter_AddRefs (element));
 		if (!element) continue;
-	
+
 		nsCOMPtr<nsISelectionDisplay> sd (do_GetInterface (element));
 		if (!sd) continue;
-	
+
 		nsCOMPtr<nsISelectionController> controller (do_QueryInterface (sd));
 		if (!controller) continue;
-	
+
 		controller->SetDisplaySelection (display);
 	}
 #endif /* 0 */
 }
 
 // Nautilus CREDITS here
- 
+
 gint
-Yelper::ProcessMouseOver (void* aEvent, int pane, 
+Yelper::ProcessMouseOver (void* aEvent, int pane,
 			  gboolean is_dialog, DIALOG_DATA * dialog)
 {
 	extern gboolean in_url;
 	PRBool aShiftKey;
 
 	//GS_message(("mouse over pane: %d",pane));
-	nsIDOMMouseEvent *event = (nsIDOMMouseEvent*) aEvent;	
+	nsIDOMMouseEvent *event = (nsIDOMMouseEvent*) aEvent;
 	//DIALOG_DATA *dialog = (DIALOG_DATA *)data;
 	event->GetShiftKey(&aShiftKey);
-	if (aShiftKey)  {    
+	if (aShiftKey)  {
 	       return 1;
 	}
 	if (shift_key_pressed)
@@ -304,7 +304,7 @@ Yelper::ProcessMouseOver (void* aEvent, int pane,
 		return FALSE;
 	}
 	main_clear_viewer();
-	return FALSE;	
+	return FALSE;
 }
 
 gint Yelper::ProcessMouseDblClickEvent (void* aEvent)
@@ -316,68 +316,68 @@ gint Yelper::ProcessMouseDblClickEvent (void* aEvent)
 	nsIDOMEvent *domEvent = static_cast<nsIDOMEvent*>(aEvent);
 	nsCOMPtr<nsIDOMMouseEvent> event (do_QueryInterface (domEvent));
 	if (!event) return 0;
-	
+
   /**
      * Returns the whole selection into a plain text string.
      */
   /* wstring toString (); */
  // NS_SCRIPTABLE NS_IMETHOD ToString(PRUnichar **_retval) = 0;
-	
+
 	gtk_editable_delete_text((GtkEditable *)widgets.entry_dict,0,-1);
-	
+
 	DoCommand("cmd_copy");
-	
+
 	GtkClipboard *clipboard = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
-	
+
 	gtk_clipboard_request_text (clipboard,
-				    gui_get_clipboard_text_for_lookup, 
+				    gui_get_clipboard_text_for_lookup,
 				    NULL);
 	return 1;
 }
 
 gint
 Yelper::ProcessMouseUpEvent (void* aEvent)
-{	
+{
 	g_return_val_if_fail(aEvent != NULL,0);
-	
+
 	nsIDOMEvent *domEvent = static_cast<nsIDOMEvent*>(aEvent);
 	nsCOMPtr<nsIDOMMouseEvent> event (do_QueryInterface (domEvent));
 	if (!event) return 0;
-		
+
 	PRUint16 button = 2;
 	event->GetButton (&button);
 
-	if (button == 1)	       
-	        shift_key_pressed = FALSE; 
-	
-	
-	return 0;	
+	if (button == 1)
+	        shift_key_pressed = FALSE;
+
+
+	return 0;
 }
 
 gint
 Yelper::ProcessMouseEvent (void* aEvent)
-{	
+{
 	g_return_val_if_fail(aEvent != NULL,0);
-	
+
 	nsIDOMEvent *domEvent = static_cast<nsIDOMEvent*>(aEvent);
 	nsCOMPtr<nsIDOMMouseEvent> event (do_QueryInterface (domEvent));
 	if (!event) return 0;
-	
+
 	PRUint16 button = 2;
 	event->GetButton (&button);
-	
-	GS_message(("mouse button: %d",button));	
-	
-	if (button == 1) shift_key_pressed = TRUE; 
-	
+
+	GS_message(("mouse button: %d",button));
+
+	if (button == 1) shift_key_pressed = TRUE;
+
 	/* Mozilla uses 2 as its right mouse button code */
-	if (button != 2) return 0;	
+	if (button != 2) return 0;
 
 	GS_message(("g_signal_emit_by_name"));
 	if (mEmbed)
 		g_signal_emit_by_name (mEmbed, "popupmenu_requested", NULL);  //,
 			        // NS_ConvertUTF16toUTF8 (href).get());
-	return 1;	
+	return 1;
 }
 
 gint Yelper::ProcessKeyDownEvent(GtkMozEmbed *embed, gpointer dom_event)
@@ -389,37 +389,37 @@ gint Yelper::ProcessKeyDownEvent(GtkMozEmbed *embed, gpointer dom_event)
 	rv = event->GetKeyCode(&keyCode);
 	if (NS_FAILED(rv)) return rv;
 	//g_message("keycode: %d",keyCode);
-	
+
 	return NS_OK;
-}	
+}
 
 gint Yelper::ProcessKeyReleaseEvent(GtkMozEmbed *embed, gpointer dom_event)
 {
 	GS_message(("Yelper::ProcessKeyReleaseEvent"));
 	shift_key_pressed = FALSE;
-	return NS_OK;	
+	return NS_OK;
 }
 
 #ifdef USE_GTKUPRINT
-nsresult 
+nsresult
 Yelper::Print (GeckoPrintInfo *print_info, PRBool preview, int *prev_pages)
 {
 	nsresult rv;
-	
+
 	nsCOMPtr<nsIWebBrowserPrint> print(do_GetInterface (mWebBrowser, &rv));
 	NS_ENSURE_SUCCESS (rv, rv);
-	
+
 	nsCOMPtr<nsIPrintSettings> settings;
-	
+
 	rv = print->GetGlobalPrintSettings (getter_AddRefs (settings));
 	NS_ENSURE_SUCCESS (rv, rv);
-	
+
 	rv = PrintListener::SetPrintSettings (print_info, preview, settings);
-	
+
 	NS_ENSURE_SUCCESS (rv, rv);
-	
+
 	nsCOMPtr<PrintListener> listener = new PrintListener (print_info, print);
-	
+
 	if (!preview){
 		GS_message(("Yelper::Print4"));
 		rv = print->Print (settings, listener);
@@ -431,7 +431,7 @@ Yelper::Print (GeckoPrintInfo *print_info, PRBool preview, int *prev_pages)
 	}
 	GS_message(("Yelper::Print6"));
 	return rv;
-	
+
 }
 #endif
 
@@ -441,17 +441,17 @@ Yelper::PrintPreviewNavigate (int page_no)
 	nsresult rv;
 	nsCOMPtr<nsIWebBrowserPrint> print(do_GetInterface (mWebBrowser, &rv));
 	NS_ENSURE_SUCCESS (rv, rv);
-	
+
 	return print->PrintPreviewNavigate (0, page_no);
 }
 
-nsresult 
+nsresult
 Yelper::PrintPreviewEnd ()
 {
 	nsresult rv;
 	nsCOMPtr<nsIWebBrowserPrint> print(do_GetInterface (mWebBrowser, &rv));
 	NS_ENSURE_SUCCESS (rv, rv);
-	
+
 	return print->ExitPrintPreview ();
 
 }
@@ -461,7 +461,7 @@ void
 Yelper::SetRTL()
 {
 	nsresult rv;
-	nsCOMPtr<nsIPrefService> prefService = 
+	nsCOMPtr<nsIPrefService> prefService =
 		do_GetService (NS_PREFSERVICE_CONTRACTID);
 	nsCOMPtr<nsIPrefBranch> pref;
 	prefService->GetBranch("", getter_AddRefs(pref));

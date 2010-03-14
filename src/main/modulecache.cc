@@ -1,6 +1,6 @@
 /*
  * Xiphos Bible Study Tool
- * modulecache.cc - 
+ * modulecache.cc -
  *
  * Copyright (C) 2007-2009 Xiphos Developer Team
  *

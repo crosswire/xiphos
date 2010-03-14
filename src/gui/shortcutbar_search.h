@@ -24,10 +24,10 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif	
-	
-void gui_search_update(char percent, void *userData);	
-void gui_set_search_label(void);	
+#endif
+
+void gui_search_update(char percent, void *userData);
+void gui_set_search_label(void);
 void gui_create_shortcutbar_search(GtkWidget *vp);
 
 #ifdef __cplusplus

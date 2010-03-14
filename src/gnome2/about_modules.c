@@ -102,9 +102,9 @@ create_menu1(void)
 	gtk_widget_show(item);
 	g_signal_connect(GTK_OBJECT(item), "clicked",
 			   G_CALLBACK  (on_copy_activate),
-			  NULL);		
-	gtk_container_add(GTK_CONTAINER(menu), item); 
-	
+			  NULL);
+	gtk_container_add(GTK_CONTAINER(menu), item);
+
 	gtk_menu_set_accel_group (GTK_MENU (menu), accel_group);
 	gtk_menu_popup((GtkMenu*)menu, NULL, NULL, NULL, NULL, 2,
 					gtk_get_current_event_time());

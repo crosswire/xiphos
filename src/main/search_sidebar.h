@@ -25,7 +25,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-	
+
 void main_sidebar_search_percent_update(char percent, void *userData);
 void main_do_sidebar_search(gpointer user_data);
 void main_sidebar_perscomm_dump(void);

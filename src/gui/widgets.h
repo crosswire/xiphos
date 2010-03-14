@@ -1,6 +1,6 @@
 /*
  * Xiphos Bible Study Tool
- * widgets.h - 
+ * widgets.h -
  *
  * Copyright (C) 2000-2009 Xiphos Developer Team
  *
@@ -58,23 +58,23 @@ struct  _app_widgets {
 		*vbox_previewer,
 		//*previewer,
 		*parallel_tab, /*  */
-	    
+
 	/* dock/undock stuff */
 		*dock_sb, /* dock for shortcut bar */
-		*frame_parallel, /* frame for interlinear html  */ 
-	
+		*frame_parallel, /* frame for interlinear html  */
+
 	/* editor_dialog */
 		*studypad_dialog,
-		
+
 	/* entry widgets */
 		*entry_dict,
-	
+
 	/* toolbars */
 		*toolbar_comments,
 		*toolbar_studypad,
-	
+
 	/* html widgets */
-		*eventbox1,	
+		*eventbox1,
 		*html_search_report,  /* html widget for serch report shortcut bar */
 		*html_parallel, /* parallel html widget */
 		*html_parallel_dialog, /* undocked parallel html widget */
@@ -84,34 +84,34 @@ struct  _app_widgets {
 		*html_dict, /* html dictionary widget */
 		*html_book, /* gbs html widget */
 		*html_studypad, /* studypad html widget */
-		*html_previewer, /* to display information (ie strongs) at  
+		*html_previewer, /* to display information (ie strongs) at
                                      bottom of text pane */
 		*html_previewer_text,
 		*html_previewer_sidebar,
-				     
+
 	/* book of the Bible combo */
 		*cb_books,
-		
+
 	/* textview widget */
 		//*textview,
 	/* listview widget */
 		*listview_dict,
 		*store,
-		
+
 	/* label widgets */
 		*label_comm,
 		*label_dict,
-		
+
 	/* comboboxentry widgets */
 		*comboboxentry_dict,
-		
-	/* popup menu submenu widgets */	
+
+	/* popup menu submenu widgets */
 		*add_bookmark_submenu,
-		
+
 	/* popup menu item widgets */
                 *viewtexts_item, /* widget to access toggle menu - for showtexts */
 		*viewpreview_item,
-		*parallel_tab_item, 
+		*parallel_tab_item,
 		*side_preview_item,
                 *viewcomms_item, /* widget to access toggle menu - for showcommss */
                 *viewdicts_item, /* widget to access toggle menu - for showdicts */
@@ -126,7 +126,7 @@ struct  _app_widgets {
 		*button_new_tab,	/* creates a new passage tab */
 		*hboxtb;		/* container for browsing notebook and button */
 };
-extern WIDGETS widgets;	
+extern WIDGETS widgets;
 
 #ifdef __cplusplus
 }
