@@ -27,29 +27,29 @@ extern "C" {
 #endif
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
-	
-#include "main/configs.h"	
-	
+
+#include "main/configs.h"
+
 /*** these defs need to be seen by gui and backend ***/
-	
+
 /* module types */
-#define TEXT_TYPE 0 
-#define COMMENTARY_TYPE 1 
+#define TEXT_TYPE 0
+#define COMMENTARY_TYPE 1
 #define DICTIONARY_TYPE 2
 #define BOOK_TYPE 3
 #define PERCOM_TYPE 4
-	
+
 #define PARALLEL_TYPE 5
 #define VIEWER_TYPE 6
 #define SB_VIEWER_TYPE 13
-	
+
 #define DIALOG_TEXT_TYPE 7
-#define DIALOG_COMMENTARY_TYPE 8 
+#define DIALOG_COMMENTARY_TYPE 8
 #define DIALOG_DICTIONARY_TYPE 9
 #define DIALOG_BOOK_TYPE 10
 #define DIALOG_SEARCH_PREVIEW_TYPE 11
 #define	PRAYERLIST_TYPE 12
-       
+
 /* these strings are not seen by users */
 /* they are returned by Sword in module->Type() */
 #define TEXT_MODS "Biblical Texts"
@@ -57,7 +57,7 @@ extern "C" {
 #define DICT_MODS "Lexicons / Dictionaries"
 #define BOOK_MODS "Generic Books"
 
-#define UTF_8 "UTF-8" 
+#define UTF_8 "UTF-8"
 extern char *OLD_CODESET;
 extern char *sword_locale;
 extern int re_encode_digits;
@@ -68,9 +68,9 @@ extern gboolean companion_activity;
 
 void main_book_heading(char * mod_name);
 void main_chapter_heading(char * mod_name);
-void main_delete_note(	const gchar * module_name, 
+void main_delete_note(	const gchar * module_name,
 								const gchar * key_str);
-void main_save_note(const gchar * module_name, const gchar * key_str, 
+void main_save_note(const gchar * module_name, const gchar * key_str,
 				               const gchar * note_str );
 GtkWidget *main_dictionary_drop_down_new(char * mod_name, char * old_key);
 char *main_get_path_to_mods(void);

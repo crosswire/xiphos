@@ -48,7 +48,7 @@ static const gchar *authors[] = {
     NULL
 };
 
-static const gchar *documenters[] = { 
+static const gchar *documenters[] = {
     "Pierre Benz",
     "Andy Piper",
     "Peter von Kaehne",
@@ -68,18 +68,18 @@ static gchar *translators = "Jan Paul Schmidt\nJorge Chacon\nDominique Corbex\nZ
  * Synopsis
  *   #include "gui/.h"
  *
- *   void on_dialog_response(GtkDialog * dialog, gint response_id, 
+ *   void on_dialog_response(GtkDialog * dialog, gint response_id,
 					gpointer user_data)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
  */
 
 static void
-on_dialog_response(GtkDialog * dialog, gint response_id, 
+on_dialog_response(GtkDialog * dialog, gint response_id,
 		   gpointer user_data)
 {
 	gtk_widget_destroy(GTK_WIDGET(dialog));
@@ -122,7 +122,7 @@ gui_create_about_xiphos(void)
 	about1 = gtk_about_dialog_new();
 	g_signal_connect(about1, "response",
 			 G_CALLBACK(on_dialog_response), NULL);
-  
+
 	gtk_about_dialog_set_version
 	    (GTK_ABOUT_DIALOG (about1), versionbuild);
 	gtk_about_dialog_set_copyright

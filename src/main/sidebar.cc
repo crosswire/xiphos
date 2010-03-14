@@ -131,7 +131,7 @@ void main_open_bookmark_in_new_tab(gchar * mod_name, gchar * key)
  * Return value
  *   void
  */
-  
+
 void main_display_verse_list_in_sidebar(gchar * key,
 					gchar * module_name,
 					gchar * verse_list)
@@ -146,7 +146,7 @@ void main_display_verse_list_in_sidebar(gchar * key,
 	RESULTS *list_item;
 
 	is_search_result = FALSE;
-	
+
 	GS_warning(("verse_list = %s",verse_list));
 	list_of_verses = g_list_first(list_of_verses);
 	if (list_of_verses) {
@@ -183,13 +183,13 @@ void main_display_verse_list_in_sidebar(gchar * key,
 		gtk_list_store_set(list_store, &iter, 0,
 				   (const char *) tmp->data, -1);
 		++i;
-		
+
 		list_item = g_new(RESULTS,1);
 		list_item->module = g_strdup(module_name);
 		list_item->key = g_strdup((const char *) tmp->data);
-		list_of_verses = g_list_append(list_of_verses, 
+		list_of_verses = g_list_append(list_of_verses,
 					       (RESULTS *) list_item);
-		
+
 		tmp = g_list_next(tmp);
 	}
 
@@ -244,11 +244,11 @@ static void add_children_to_tree(GtkTreeModel * model, GtkTreeIter iter,
 	GS_message(("%s",backend->display_mod->Name()));
 	if (backend->treekey_first_child(offset)) {
 		GS_message(("treekey_first_child1 %s",mod_name));
-		
+
 		offset = backend->get_treekey_offset();
-		
+
 		GS_message(("offset: %ld",offset));
-		
+
 		sprintf(buf, "%lu", offset);
 		tmpbuf = backend->treekey_get_local_name(offset);
 		gtk_tree_store_append(GTK_TREE_STORE(model),
@@ -318,7 +318,7 @@ static void add_children_to_tree(GtkTreeModel * model, GtkTreeIter iter,
  * Synopsis
  *   #include "main/sidebar.h"
  *
- *   void main_create_pixbufs(void)	
+ *   void main_create_pixbufs(void)
  *
  * Description
  *
@@ -330,24 +330,24 @@ static void add_children_to_tree(GtkTreeModel * model, GtkTreeIter iter,
 void main_create_pixbufs(void)
 {
 	GtkTextDirection dir = gtk_widget_get_direction (GTK_WIDGET(widgets.app));
-	
+
 	pixbufs = g_new0(TreePixbufs, 1);
 
 	if (dir == GTK_TEXT_DIR_LTR) {
 		pixbufs->pixbuf_closed =
 			pixbuf_finder("book_closed.png", 16, NULL);
-		
+
 		pixbufs->pixbuf_opened =
 			pixbuf_finder("book_open.png", 16, NULL);
 	}
 	else {
 		pixbufs->pixbuf_closed =
 			pixbuf_finder("book_closed_rtol.png", 16, NULL);
-		
+
 		pixbufs->pixbuf_opened =
 			pixbuf_finder("book_open_rtol.png", 16, NULL);
 	}
-		
+
 
 	pixbufs->pixbuf_helpdoc =
 	    gtk_widget_render_icon(widgets.app,
@@ -364,7 +364,7 @@ void main_create_pixbufs(void)
  *   #include "main/sidebar.h"
  *
  *   void main_add_verses_to_chapter(GtkTreeModel * model, GtkTreeIter iter,
- *				const gchar * key)	
+ *				const gchar * key)
  *
  * Description
  *
@@ -428,7 +428,7 @@ static void add_verses_to_chapter(GtkTreeModel * model,
  *   #include "main/sidebar.h"
  *
  *   void main_add_chapters_to_book(GtkTreeModel * model, GtkTreeIter iter,
-				const gchar * key)	
+				const gchar * key)
  *
  * Description
  *
@@ -489,7 +489,7 @@ static void add_chapters_to_book(GtkTreeModel * model, GtkTreeIter iter,
  *   #include "main/sidebar.h"
  *
  *   void main_add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
- *				const gchar * mod_name)	
+ *				const gchar * mod_name)
  *
  * Description
  *
@@ -570,17 +570,17 @@ static void add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
 
 #ifdef USE_TREEVIEW_PATH
 gboolean main_expand_treeview_to_path (GtkTreeModel *model, GtkTreeIter iter)
-{	
+{
 	//gchar *cap = NULL;
 	gchar *mod = NULL;
 	gchar *key = NULL;
 	//GtkTreePath *path;
 	//gchar *path_str = NULL;
-	
+
 	//static int old_page = 0;
 
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 3, &mod, 4, &key, -1);
-	
+
 	//backend->set_module(mod);
 	//backend->set_treekey(key ? atoi(key) : 0);
 	//path = gtk_tree_model_get_path(model, &iter);
@@ -598,7 +598,7 @@ gboolean main_expand_treeview_to_path (GtkTreeModel *model, GtkTreeIter iter)
 		add_children_to_tree(model,
 				     iter, mod, atol(key));
 	}
-		
+
 	/*gtk_tree_view_expand_row(GTK_TREE_VIEW
 				 (sidebar.module_list), path,
 				 FALSE);*/
@@ -636,7 +636,7 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 	/*  *** until after 3.1 ***
 	gchar *path_str = NULL;
 	*/
-	
+
 	static int old_page = 0;
 
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &selected, 2, &cap, 3,
@@ -653,19 +653,19 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 		if (settings.showparatab) {
 			old_page = gtk_notebook_get_current_page(
 					GTK_NOTEBOOK(widgets.notebook_main));
-		
+
 			gtk_notebook_set_current_page (
-				GTK_NOTEBOOK(widgets.notebook_main), 
+				GTK_NOTEBOOK(widgets.notebook_main),
 				gtk_notebook_page_num (
 				GTK_NOTEBOOK (widgets.notebook_main),
 				widgets.parallel_tab));
 		}
-		
+
 	}
 
 	if (!g_utf8_collate(cap, _("Standard View"))) {
 		gtk_notebook_set_current_page (
-				GTK_NOTEBOOK(widgets.notebook_main), 
+				GTK_NOTEBOOK(widgets.notebook_main),
 				old_page);
 		gtk_notebook_set_current_page (GTK_NOTEBOOK
 				(widgets.notebook_bible_parallel),
@@ -674,7 +674,7 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 	/* let's not do anything else if the parallel tab is showing */
 	if (settings.paratab_showing)
 		return;
-	
+
 	if (!g_utf8_collate(cap, _("Commentaries"))) {
 		if (!settings.comm_showing) {
 			settings.comm_showing = TRUE;
@@ -728,7 +728,7 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 
 		if (key)
 			main_url_handler(key, TRUE);
-		else 
+		else
 			main_display_bible(mod, settings.currentverse);
 
 		break;
@@ -781,8 +781,8 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 			add_children_to_tree(model,
 					     selected, mod, atol(key));
 		}
-		
-		/*  *** until after 3.1 ***	
+
+		/*  *** until after 3.1 ***
 		path_str = gtk_tree_path_to_string (path);
 		//GS_message (("path: %s", path_str));
 		gui_save_treeview_path_string (path_str, mod);
@@ -874,9 +874,9 @@ static void add_module_to_prayerlist_folder(GtkTreeModel * model,
 					  GtkTreeIter iter,
 					  gchar * module_name)
 {
-	
+
 	GtkTreeIter child_iter;
-	
+
 	gtk_tree_store_append(GTK_TREE_STORE(model),
 			      &child_iter, &iter);
 	gtk_tree_store_set(GTK_TREE_STORE(model),
@@ -1177,7 +1177,7 @@ void main_load_module_tree(GtkWidget * tree)
  * Synopsis
  *   #include "main/sidebar.h"
  *
- *   void main_add_mod_tree_columns(GtkTreeView * tree)	
+ *   void main_add_mod_tree_columns(GtkTreeView * tree)
  *
  * Description
  *

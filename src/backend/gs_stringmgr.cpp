@@ -1,6 +1,6 @@
 /******************************************************************************
  *  gs_stringmgr.cpp - GS implementation of class StringMgr
- *                     StringMgr is a way to provide UTf8 handling 
+ *                     StringMgr is a way to provide UTf8 handling
  *                     by the Sword frontend
  *
  *  gs_stringmgr was mostly inspired by BTSringMgr from BibleTime

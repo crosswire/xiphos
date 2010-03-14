@@ -28,8 +28,8 @@
 extern "C"
 {
 #endif
-void on_dialog_response(GtkDialog * dialog, 
-			gint response_id, 
+void on_dialog_response(GtkDialog * dialog,
+			gint response_id,
 			gpointer user_data);
 void gui_bookmark_dialog(gchar * label, gchar * module_name, gchar * key);
 void gui_mark_verse_dialog(gchar * module_name, gchar * key);

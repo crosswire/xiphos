@@ -1,6 +1,6 @@
 /*
  * Xiphos Bible Study Tool
- * find_dialog.c 
+ * find_dialog.c
  *
  * Copyright (C) 2000-2009 Xiphos Developer Team
  *
@@ -66,7 +66,7 @@ static FIND_DIALOG *dialog;
  *   void dialog_destroy(GtkObject *object, gpointer data)
  *
  * Description
- *    
+ *
  *
  * Return value
  *   void
@@ -87,10 +87,10 @@ static void dialog_destroy(GtkObject * object, gpointer data)
  * Synopsis
  *   #include ".h"
  *
- *   void find_clicked(GtkButton * button, FIND_DIALOG * d)	
+ *   void find_clicked(GtkButton * button, FIND_DIALOG * d)
  *
  * Description
- *    
+ *
  *
  * Return value
  *   void
@@ -119,10 +119,10 @@ static void find_clicked(GtkButton * button, FIND_DIALOG * d)
  * Synopsis
  *   #include ".h"
  *
- *   void next_clicked(GtkButton * button, FIND_DIALOG * d)	
+ *   void next_clicked(GtkButton * button, FIND_DIALOG * d)
  *
  * Description
- *    
+ *
  *
  * Return value
  *   void
@@ -146,10 +146,10 @@ static void next_clicked(GtkButton * button, FIND_DIALOG * d)
  * Synopsis
  *   #include ".h"
  *
- *   void close_clicked(GtkButton * button, FIND_DIALOG * d)	
+ *   void close_clicked(GtkButton * button, FIND_DIALOG * d)
  *
  * Description
- *    
+ *
  *
  * Return value
  *   void
@@ -168,10 +168,10 @@ static void close_clicked(GtkButton * button, FIND_DIALOG * d)
  * Synopsis
  *   #include ".h"
  *
- *   void create_find_dialog(GtkWidget * htmlwidget)	
+ *   void create_find_dialog(GtkWidget * htmlwidget)
  *
  * Description
- *    
+ *
  *
  * Return value
  *   void
@@ -327,7 +327,7 @@ static void create_find_dialog(GtkWidget * htmlwidget)
  *   void find_dialog(GtkWidget * htmlwidget, const gchar * title)
  *
  * Description
- *    
+ *
  *
  * Return value
  *   void
@@ -356,10 +356,10 @@ static void find_dialog(GtkWidget * htmlwidget, const gchar * title)
  *   #include ".h"
  *
  *   void gui_find_dlg(GtkWidget * htmlwidget, gchar * mod_name,
- *		  gboolean regular, gchar * text)	
+ *		  gboolean regular, gchar * text)
  *
  * Description
- *    
+ *
  *
  * Return value
  *   void

@@ -32,7 +32,7 @@ void gui_popup_menu_parallel(void);
 void on_undockInt_activate(GtkMenuItem * menuitem);
 void on_paratab_activate(GtkMenuItem * menuitem);
 void on_changeint1mod_activate(GtkMenuItem * menuitem, gpointer user_data);
-	
+
 #ifdef __cplusplus
 }
 #endif

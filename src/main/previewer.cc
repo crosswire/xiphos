@@ -1,6 +1,6 @@
 /*
  * Xiphos Bible Study Tool
- * previewer.cc - 
+ * previewer.cc -
  *
  * Copyright (C) 2000-2009 Xiphos Developer Team
  *
@@ -76,7 +76,7 @@ void main_set_previewer_widget(int in_sidebar)
 
 GtkWidget *main_get_previewer_widget(void)
 {
-	return 	settings.show_previewer_in_sidebar 
+	return 	settings.show_previewer_in_sidebar
 		? sidebar.html_viewer_widget
 		: widgets.html_previewer_text;
 }
@@ -95,7 +95,7 @@ GtkWidget *main_get_previewer_widget(void)
  *
  * Return value
  *   void
- */ 
+ */
 
 void main_init_previewer(void)
 {
@@ -110,16 +110,16 @@ void main_init_previewer(void)
 	gecko_html_open_stream(html, "text/html");
 #else
 	/* setup gtkhtml widget */
-	GtkHTML *html = GTK_HTML(previewer_html_widget);	
+	GtkHTML *html = GTK_HTML(previewer_html_widget);
 	gboolean was_editable = gtk_html_get_editable(html);
-	
+
 	if (was_editable)
 		gtk_html_set_editable(html, FALSE);
 #endif
 	g_string_printf(tmp_str,
 			HTML_START
 			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
-			"",			
+			"",
 			settings.bible_bg_color, settings.bible_text_color,
 			settings.link_color);
 
@@ -161,7 +161,7 @@ void main_init_previewer(void)
  *
  * Return value
  *   void
- */ 
+ */
 
 void main_clear_viewer(void)
 {
@@ -177,16 +177,16 @@ void main_clear_viewer(void)
 	gecko_html_open_stream(html, "text/html");
 #else
 	/* setup gtkhtml widget */
-	GtkHTML *html = GTK_HTML(previewer_html_widget);	
+	GtkHTML *html = GTK_HTML(previewer_html_widget);
 	gboolean was_editable = gtk_html_get_editable(html);
-	
+
 	if (was_editable)
 		gtk_html_set_editable(html, FALSE);
 #endif
 	g_string_printf(tmp_str,
 			HTML_START
 			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
-			"",			
+			"",
 			settings.bible_bg_color, settings.bible_text_color,
 			settings.link_color);
 
@@ -222,7 +222,7 @@ void main_clear_viewer(void)
  * Synopsis
  *   #include "main/previewer.h"
  *
- *   void main_information_viewer(GtkWidget * html_widget, gchar * mod_name, 
+ *   void main_information_viewer(GtkWidget * html_widget, gchar * mod_name,
  *		    gchar * text, gchar *key, gchar * type)
  *
  * Description
@@ -256,12 +256,12 @@ void main_information_viewer(const gchar * mod_name, const gchar * text, const g
 	g_string_printf(tmp_str,
 			HTML_START
 			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
-			(settings.doublespace ? DOUBLE_SPACE : ""),	
+			(settings.doublespace ? DOUBLE_SPACE : ""),
 			settings.bible_bg_color, settings.bible_text_color,
 			settings.link_color);
 
 	str = g_string_new(tmp_str->str);
-	
+
 	if (type) {
 		if (!strcmp(type, "n")) {
 			g_string_printf(tmp_str,
@@ -366,7 +366,7 @@ void main_information_viewer(const gchar * mod_name, const gchar * text, const g
  * Synopsis
  *   #include "main/previewer.h"
  *
- *   void mark_search_words(GString *str, gboolean eliminate)	
+ *   void mark_search_words(GString *str, gboolean eliminate)
  *
  * Description
  *    purplifies search terms in results.
@@ -552,7 +552,7 @@ void main_entry_display(gpointer data, gchar * mod_name,
 	g_string_printf(tmp_str,
 			HTML_START
 			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
-			(settings.doublespace ? DOUBLE_SPACE : ""),	
+			(settings.doublespace ? DOUBLE_SPACE : ""),
 			settings.bible_bg_color, settings.bible_text_color,
 			settings.link_color);
 

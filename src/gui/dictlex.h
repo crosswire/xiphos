@@ -27,9 +27,9 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-	
-void gui_get_clipboard_text_for_lookup (GtkClipboard *clipboard, 
-					const gchar *text, 
+
+void gui_get_clipboard_text_for_lookup (GtkClipboard *clipboard,
+					const gchar *text,
 					gpointer data);
 void gui_create_pm_dictionary(void);
 void gui_lookup_dictlex_selection(GtkMenuItem * menuitem,
@@ -40,7 +40,7 @@ GtkWidget *gui_create_dictionary_pane(void);
 void on_entryDictLookup_changed(GtkEditable * editable, gpointer data);
 void dict_key_entry_changed(GtkEntry * entry, gpointer data);
 void button_back_clicked(GtkButton * button, gpointer user_data);
-void button_forward_clicked(GtkButton * button, gpointer user_data);	
+void button_forward_clicked(GtkButton * button, gpointer user_data);
 
 #ifdef __cplusplus
 }

@@ -11,4 +11,4 @@ lib = bld.new_task_gen(
 )
 
 lib.find_sources_in_dirs('.')
-        
+

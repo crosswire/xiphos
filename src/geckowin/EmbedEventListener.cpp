@@ -98,8 +98,8 @@ EmbedEventListener::HandleEvent(nsIDOMEvent* aDOMEvent)
 		MouseDblClick(aDOMEvent);
 	if (eventType.EqualsLiteral("mouseout"))
 		MouseOut(aDOMEvent);
-	
-	
+
+
 	return NS_OK;
 }
 

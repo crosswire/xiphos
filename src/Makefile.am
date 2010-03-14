@@ -1,4 +1,4 @@
 
 SUBDIRS = @DIRS@
 
-INCLUDES = 
+INCLUDES =

@@ -1,5 +1,5 @@
 /******************************************************************************
- *	gs_stringmgr.h - A class which provides string handling functions 
+ *	gs_stringmgr.h - A class which provides string handling functions
  *                   reimplemented by Xiphos
  *
  *  gs_stringmgr was mostly inspired by BTSringMgr from BibleTime
@@ -24,8 +24,8 @@
 SWORD_NAMESPACE_START
 
 /* StringMgr is a way to provide UTf8 handling by the Sword frontend
- * Each platform, if it's up-to-date, should provide functions to handle 
- * unicode and utf8. This class makes it possible to implement Unicode 
+ * Each platform, if it's up-to-date, should provide functions to handle
+ * unicode and utf8. This class makes it possible to implement Unicode
  * support on the user-side and not in Sword itself.
  */
 
@@ -38,12 +38,12 @@ public:
 	*  @param max Only change max chars
 	*/
 	virtual char *upperUTF8(char *text, unsigned int max = 0) const;
-	
+
 protected:
 	/* Checks whether Utf8 support is available.
-	*  Override the function supportsUnicode() to tell whether 
+	*  Override the function supportsUnicode() to tell whether
 	*  your implementation has utf8 support.
-	*  @return True if this implementation provides support for 
+	*  @return True if this implementation provides support for
 	*  Utf8 handling or false if just latin1 handling is available
 	*/
 	virtual bool supportsUnicode() const;

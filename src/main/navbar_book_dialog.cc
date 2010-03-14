@@ -60,7 +60,7 @@ int check_for_parent(DIALOG_DATA * d)
 {
 	unsigned long offset_save;
 	BackEnd *be = (BackEnd *) d->backend;
-	
+
 	offset_save = d->offset;
 	be->set_treekey(d->offset);
 	if (be->treekey_parent(d->offset)) {
@@ -94,7 +94,7 @@ int check_for_prev_sib(DIALOG_DATA * d)
 {
 	unsigned long offset_save;
 	BackEnd *be = (BackEnd *) d->backend;
-	
+
 	offset_save = d->offset;
 	be->set_treekey(d->offset);
 	if (be->treekey_prev_sibling(d->offset)) {
@@ -120,7 +120,7 @@ int check_for_prev_sib(DIALOG_DATA * d)
  *   check to see if there is another sibling after the current one
  *
  * Return value
- *  int  
+ *  int
  */
 
 static
@@ -128,7 +128,7 @@ int check_for_next_sib(DIALOG_DATA * d)
 {
 	unsigned long offset_save;
 	BackEnd *be = (BackEnd *) d->backend;
-	
+
 	offset_save = d->offset;
 	be->set_treekey(d->offset);
 	if (be->treekey_next_sibling(d->offset)) {
@@ -160,7 +160,7 @@ void main_navbar_book_dialog_parent(gpointer data)
 {
 	DIALOG_DATA * d = (DIALOG_DATA *) data;
 	BackEnd *be = (BackEnd *) d->backend;
-	
+
 	be->set_treekey(d->offset);
 	if (be->treekey_parent(d->offset)) {
 		d->offset = be->get_treekey_offset();
@@ -189,7 +189,7 @@ void main_navbar_book_dialog_first_child(gpointer data)
 {
 	DIALOG_DATA * d = (DIALOG_DATA *) data;
 	BackEnd *be = (BackEnd *) d->backend;
-	
+
 	be->set_treekey(d->offset);
 	if (be->treekey_first_child(d->offset)) {
 		d->offset = be->get_treekey_offset();
@@ -262,12 +262,12 @@ void main_navbar_book_dialog_next(gpointer data)
  *
  * Synopsis
  *   #include "main/navbar_book_dialog.h"
- *   
+ *
  *   void on_menu_select(GtkMenuItem * menuitem, gpointer user_data)
  *
  * Description
  *   user clicked on an item in the drop down list - send the book offset
- *   stored in user_data to main_display_book to show 
+ *   stored in user_data to main_display_book to show
  *
  * Return value
  *   void
@@ -276,7 +276,7 @@ void main_navbar_book_dialog_next(gpointer data)
 static
 void on_menu_select(GtkMenuItem * menuitem, gpointer data)
 {
-	cur_d->offset = GPOINTER_TO_INT(data);	
+	cur_d->offset = GPOINTER_TO_INT(data);
 	main_setup_navbar_book_dialog(cur_d);
 }
 
@@ -306,7 +306,7 @@ GtkWidget *main_navbar_book_dialog_drop_down_new(gpointer data)
 	unsigned long offset;
 	DIALOG_DATA * d = (DIALOG_DATA *) data;
 	BackEnd *be = (BackEnd *) d->backend;
-	
+
 	cur_d = d;
 	be->set_treekey(d->offset);
 	menu = gtk_menu_new();
@@ -347,9 +347,9 @@ GtkWidget *main_navbar_book_dialog_drop_down_new(gpointer data)
  *
  * Synopsis
  *   #include "main/navbar_book_dialog.h"
- *   
+ *
  *   void main_setup_navbar_book_dialog(gpointer data)
- *   
+ *
  *
  * Description
  *   set  sensitive state of navbar buttons and set the entry to current book key
@@ -363,13 +363,13 @@ void main_setup_navbar_book_dialog(gpointer data)
 	gchar *tmpbuf = NULL;
 	DIALOG_DATA * d = (DIALOG_DATA *) data;
 	BackEnd *be = (BackEnd *) d->backend;
-	
+
 	be->set_treekey(d->offset);
 	tmpbuf = be->get_key_from_offset(d->offset);
 	gtk_entry_set_text(GTK_ENTRY(d->navbar_book.lookup_entry), tmpbuf);
 	gtk_widget_set_tooltip_text(d->navbar_book.lookup_entry, tmpbuf);
-			     
-	if (check_for_parent(d))    
+
+	if (check_for_parent(d))
 		gtk_widget_set_sensitive(d->navbar_book.button_left, TRUE);
 	else
 		gtk_widget_set_sensitive(d->navbar_book.button_left, FALSE);

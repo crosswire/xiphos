@@ -74,8 +74,8 @@ link_uri_hook(GtkLinkButton *button,
  * Synopsis
  *   #include "gui/main_menu.h"
  *
- *   void on_help_contents_activate(GtkMenuItem * menuitem, 
- *						gpointer user_data)	
+ *   void on_help_contents_activate(GtkMenuItem * menuitem,
+ *						gpointer user_data)
  *
  * Description
  *   display the help contents file
@@ -85,7 +85,7 @@ link_uri_hook(GtkLinkButton *button,
  */
 G_MODULE_EXPORT void
 on_help_contents_activate(GtkMenuItem * menuitem, gpointer user_data)
-{	
+{
 	GError *error = NULL;
 #ifdef WIN32
 	const char *lang = g_getenv("LANG");
@@ -116,8 +116,8 @@ on_help_contents_activate(GtkMenuItem * menuitem, gpointer user_data)
  * Synopsis
  *   #include "gui/main_menu.h"
  *
- *   void on_mailing_list_activate(GtkMenuItem * menuitem, 
- *						gpointer user_data)	
+ *   void on_mailing_list_activate(GtkMenuItem * menuitem,
+ *						gpointer user_data)
  *
  * Description
  *   open web browser to the mailing list signup page
@@ -139,8 +139,8 @@ on_mailing_list_activate(GtkMenuItem * menuitem, gpointer user_data)
  * Synopsis
  *   #include "gui/main_menu.h"
  *
- *   void on_live_chat_activate(GtkMenuItem * menuitem, 
- *						gpointer user_data)	
+ *   void on_live_chat_activate(GtkMenuItem * menuitem,
+ *						gpointer user_data)
  *
  * Description
  *   open web browser to freenode irc chat
@@ -169,8 +169,8 @@ on_live_chat_activate(GtkMenuItem * menuitem, gpointer user_data)
  * Synopsis
  *   #include "gui/main_menu.h"
  *
- *   void on_report_bug_activate(GtkMenuItem * menuitem, 
- *						gpointer user_data)	
+ *   void on_report_bug_activate(GtkMenuItem * menuitem,
+ *						gpointer user_data)
  *
  * Description
  *   open web browser to sourceforge bug tracker
@@ -193,7 +193,7 @@ on_report_bug_activate(GtkMenuItem * menuitem, gpointer user_data)
  *   #include "gui/main_menu.h"
  *
  *   void on_about_the_sword_project1_activate(GtkMenuItem * menuitem,
- *						gpointer user_data)	
+ *						gpointer user_data)
  *
  * Description
  *   display - The SWORD Project - about information
@@ -218,7 +218,7 @@ on_about_the_sword_project_activate(GtkMenuItem * menuitem, gpointer user_data)
  *   #include "gui/main_menu.h"
  *
  *   void on_about_translation_activate(GtkMenuItem * menuitem,
- *					gpointer user_data)	
+ *					gpointer user_data)
  *
  * Description
  *   display - The SWORD Project - about information
@@ -242,8 +242,8 @@ on_about_translation_activate(GtkMenuItem * menuitem, gpointer user_data)
  * Synopsis
  *   #include "gui/main_menu.h"
  *
- *   void on_daily_devotion_activate(GtkMenuItem *menuitem, 
- *						gpointer user_data)	
+ *   void on_daily_devotion_activate(GtkMenuItem *menuitem,
+ *						gpointer user_data)
  *
  * Description
  *   display daily devotion in shortcut bar viewer
@@ -264,7 +264,7 @@ on_daily_devotion_activate(GtkMenuItem * menuitem, gpointer user_data)
  * Synopsis
  *   #include "gui/main_menu.h"
  *
- *   void on_preferences_activate(GtkMenuItem *menuitem, gpointer user_data)	
+ *   void on_preferences_activate(GtkMenuItem *menuitem, gpointer user_data)
  *
  * Description
  *   open preferences dialog
@@ -285,7 +285,7 @@ on_preferences_activate(GtkMenuItem * menuitem, gpointer user_data)
  * Synopsis
  *   #include "gui/main_menu.h"
  *
- *   void on_search_activate(GtkMenuItem * menuitem, gpointer user_data)	
+ *   void on_search_activate(GtkMenuItem * menuitem, gpointer user_data)
  *
  * Description
  *   display search group in shortcut bar
@@ -295,7 +295,7 @@ on_preferences_activate(GtkMenuItem * menuitem, gpointer user_data)
  */
 G_MODULE_EXPORT void on_search_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	if (!settings.showshortcutbar) 
+	if (!settings.showshortcutbar)
 		gui_sidebar_showhide();
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_sidebar),2);
 }
@@ -307,7 +307,7 @@ G_MODULE_EXPORT void on_search_activate(GtkMenuItem * menuitem, gpointer user_da
  * Synopsis
  *   #include "gui/main_menu.h"
  *
- *   void on_verse_style_activate(GtkMenuItem *menuitem, gpointer user_data)	
+ *   void on_verse_style_activate(GtkMenuItem *menuitem, gpointer user_data)
  *
  * Description
  *   toggle between verse and paragraph style
@@ -322,7 +322,7 @@ G_MODULE_EXPORT void
 on_verse_style_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 {
 	if (style_display) {
-		gchar *file = g_strdup_printf("%s/modops.conf", 
+		gchar *file = g_strdup_printf("%s/modops.conf",
 					      settings.gSwordDir);
 		gchar *url = g_strdup_printf("sword://%s/%s",
 					     settings.MainWindowModule,
@@ -334,7 +334,7 @@ on_verse_style_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 				     ? "verse"
 				     : "paragraph"));
 		if (settings.havebible) {
-			main_url_handler(url, TRUE);		
+			main_url_handler(url, TRUE);
 		}
 		g_free(url);
 		g_free(file);
@@ -348,7 +348,7 @@ on_verse_style_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
  * Synopsis
  *   #include "gui/main_menu.h"
  *
- *   void on_linked_tabs_activate(GtkMenuItem *menuitem, gpointer user_data)	
+ *   void on_linked_tabs_activate(GtkMenuItem *menuitem, gpointer user_data)
  *
  * Description
  *   toggle linking tabs together.
@@ -373,7 +373,7 @@ on_linked_tabs_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
  * Synopsis
  *   #include "gui/main_menu.h"
  *
- *   void on_read_aloud_activate(GtkMenuItem *menuitem, gpointer user_data)	
+ *   void on_read_aloud_activate(GtkMenuItem *menuitem, gpointer user_data)
  *
  * Description
  *   toggle reading scripture out loud.
@@ -398,7 +398,7 @@ on_read_aloud_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
  * Synopsis
  *   #include "gui/main_menu.h"
  *
- *   void on_show_verse_numbers_activate(GtkMenuItem *menuitem, gpointer user_data)	
+ *   void on_show_verse_numbers_activate(GtkMenuItem *menuitem, gpointer user_data)
  *
  * Description
  *   toggle showing verse numbers together.
@@ -422,7 +422,7 @@ on_show_verse_numbers_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
  * Synopsis
  *   #include "gui/main_menu.h"
  *
- *   void on_versehighlight_activate(GtkMenuItem *menuitem, gpointer user_data)	
+ *   void on_versehighlight_activate(GtkMenuItem *menuitem, gpointer user_data)
  *
  * Description
  *   toggle special current verse highlight.
@@ -446,7 +446,7 @@ on_versehighlight_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
  * Synopsis
  *   #include "gui/main_menu.h"
  *
- *   void gui_parallel_tab_activate(GtkMenuItem *menuitem, gpointer user_data)	
+ *   void gui_parallel_tab_activate(GtkMenuItem *menuitem, gpointer user_data)
  *
  * Description
  *   toggle special current verse highlight.
@@ -462,14 +462,14 @@ gui_parallel_tab_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 		xml_set_value("Xiphos", "misc", "showparatab", "0");
 		return;
 	}
-		
+
 	settings.showparatab = menuitem->active;
 	xml_set_value("Xiphos", "misc", "showparatab",
 		      (settings.showparatab ? "1" : "0"));
 	if (settings.showparatab) {
 		gui_open_parallel_view_in_new_tab();
 		gui_force_parallel_tab_sync();
-	} else 		
+	} else
 		gui_close_passage_tab  (gtk_notebook_page_num (
 					GTK_NOTEBOOK (widgets.notebook_main),
 					widgets.parallel_tab));
@@ -482,7 +482,7 @@ gui_parallel_tab_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
  * Synopsis
  *   #include "gui/main_menu.h"
  *
- *   void on_side_preview_activate(GtkMenuItem *menuitem, gpointer user_data)	
+ *   void on_side_preview_activate(GtkMenuItem *menuitem, gpointer user_data)
  *
  * Description
  *   toggle special previewer in sidebar.
@@ -506,7 +506,7 @@ on_side_preview_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
  * Synopsis
  *   #include "gui/main_menu.h"
  *
- *   void on_double_space_text_activate(GtkMenuItem *menuitem, gpointer user_data)	
+ *   void on_double_space_text_activate(GtkMenuItem *menuitem, gpointer user_data)
  *
  * Description
  *   toggle double-spacing of text.
@@ -531,7 +531,7 @@ on_double_space_text_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
  * Synopsis
  *   #include "gui/main_menu.h"
  *
- *   void on_quit_activate(GtkMenuItem * menuitem, gpointer user_data)	
+ *   void on_quit_activate(GtkMenuItem * menuitem, gpointer user_data)
  *
  * Description
  *   do a nice orderly shut down and exit xiphos
@@ -560,11 +560,11 @@ on_quit_activate(GtkMenuItem * menuitem, gpointer user_data)
  * Synopsis
  *   #include "gui/main_menu.h"
  *
- *   void on_about_xiphos_activate(GtkMenuItem * menuitem, 
- *					gpointer user_data)	
+ *   void on_about_xiphos_activate(GtkMenuItem * menuitem,
+ *					gpointer user_data)
  *
  * Description
- *   display xiphos about dialog 
+ *   display xiphos about dialog
  *
  * Return value
  *   void
@@ -586,7 +586,7 @@ on_about_xiphos_activate(GtkMenuItem * menuitem, gpointer user_data)
  * Synopsis
  *   #include "gui/main_menu.h"
  *
- *   void on_save_session_activate(GtkMenuItem * menuitem, gpointer user_data)	
+ *   void on_save_session_activate(GtkMenuItem * menuitem, gpointer user_data)
  *
  * Description
  *   ask for a file name (with file-chooser) and save the current tabs to that file
@@ -601,14 +601,14 @@ on_save_session_activate(GtkMenuItem * menuitem, gpointer user_data)
 	gchar *tabs_dir;
 
 	tabs_dir = g_strdup_printf("%s/tabs/",settings.gSwordDir);
-	
+
 	if (g_access(tabs_dir, F_OK) == -1) {
 		if ((g_mkdir(tabs_dir, S_IRWXU)) == -1) {
 			fprintf(stderr, "can't create tabs dir");
 			return;
 		}
 	}
-	
+
 	dialog = gtk_file_chooser_dialog_new ("Save Session",
 				      NULL,
 				      GTK_FILE_CHOOSER_ACTION_SAVE,
@@ -635,7 +635,7 @@ on_save_session_activate(GtkMenuItem * menuitem, gpointer user_data)
  *  redisplay_to_realign
  *
  * Synopsis
- *   void redisplay_to_realign()	
+ *   void redisplay_to_realign()
  *
  * Description
  *    when en/disabling panes, we must redisplay in order that text
@@ -660,13 +660,13 @@ redisplay_to_realign()
 	gchar *url = g_strdup_printf("sword://%s/%s",
 				     settings.MainWindowModule,
 				     settings.currentverse);
-	main_url_handler(url, TRUE);		
+	main_url_handler(url, TRUE);
 	g_free(url);
 	if (settings.DictWindowModule) {
 		url = g_strdup_printf("sword://%s/%s",
 				      settings.DictWindowModule,
 				      settings.dictkey);
-		main_url_handler(url, TRUE);		
+		main_url_handler(url, TRUE);
 		g_free(url);
 	}
 
@@ -680,7 +680,7 @@ redisplay_to_realign()
  * Synopsis
  *   #include "gui/main_menu.h"
  *
- *   void on_open_session_activate(GtkMenuItem * menuitem, gpointer user_data)	
+ *   void on_open_session_activate(GtkMenuItem * menuitem, gpointer user_data)
  *
  * Description
  *   ask for file name (with file-chooser) and load tabs from that file
@@ -695,7 +695,7 @@ on_open_session_activate(GtkMenuItem * menuitem, gpointer user_data)
 	gchar *tabs_dir;
 
 	tabs_dir = g_strdup_printf("%s/tabs/",settings.gSwordDir);
-	
+
 	if (g_access(tabs_dir, F_OK) == -1) {
 		if ((g_mkdir(tabs_dir, S_IRWXU)) == -1) {
 			fprintf(stderr, "can't create tabs dir");
@@ -732,7 +732,7 @@ on_open_session_activate(GtkMenuItem * menuitem, gpointer user_data)
  * Synopsis
  *   #include "gui/main_menu.h"
  *
- *   void on_show_bible_text_activate(GtkMenuItem * menuitem, gpointer user_data)	
+ *   void on_show_bible_text_activate(GtkMenuItem * menuitem, gpointer user_data)
  *
  * Description
  *    toggle Bibletext window
@@ -747,7 +747,7 @@ on_show_bible_text_activate(GtkMenuItem * menuitem, gpointer user_data)
 	redisplay_to_realign();
 }
 
- 
+
 G_MODULE_EXPORT void
 on_preview_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
@@ -763,7 +763,7 @@ on_preview_activate(GtkMenuItem * menuitem, gpointer user_data)
  * Synopsis
  *   #include "gui/main_menu.h"
  *
- *   void on_show_commentary_activate(GtkMenuItem * menuitem, gpointer user_data)	
+ *   void on_show_commentary_activate(GtkMenuItem * menuitem, gpointer user_data)
  *
  * Description
  *    toggle commentary window *** we need to change the name of this
@@ -787,7 +787,7 @@ on_show_commentary_activate(GtkMenuItem * menuitem, gpointer user_data)
  * Synopsis
  *   #include "gui/main_menu.h"
  *
- *   void on_show_dictionary_lexicon_activate(GtkMenuItem * menuitem, gpointer user_data)	
+ *   void on_show_dictionary_lexicon_activate(GtkMenuItem * menuitem, gpointer user_data)
  *
  * Description
  *    toggle lower_workbook view (on or off)
@@ -810,10 +810,10 @@ on_show_dictionary_lexicon_activate(GtkMenuItem * menuitem, gpointer user_data)
  * Synopsis
  *   #include "gui/main_menu.h"
  *
- *   void on_module_manager_activate(GtkMenuItem * menuitem, gpointer user_data)	
+ *   void on_module_manager_activate(GtkMenuItem * menuitem, gpointer user_data)
  *
  * Description
- *    
+ *
  *
  * Return value
  *   void
@@ -831,7 +831,7 @@ on_module_manager_activate(GtkMenuItem * menuitem, gpointer user_data)
  * Synopsis
  *   #include "gui/main_menu.h"
  *
- *   void on_open_studypad_activate(GtkMenuItem * menuitem, gpointer user_data)	
+ *   void on_open_studypad_activate(GtkMenuItem * menuitem, gpointer user_data)
  *
  * Description
  *    open studypad editor - if studypad dialog exist bring it to the
@@ -873,17 +873,17 @@ GtkWidget *gui_create_main_menu(void)
 	gchar *glade_file;
 	GladeXML *gxml;
  //   	const gchar *mname = NULL;
-	
+
 	glade_file = gui_general_user_file ("xi-menus.glade", FALSE);
 	g_return_val_if_fail (glade_file != NULL, NULL);
-	
+
 	gxml = glade_xml_new (glade_file, "menu_main", NULL);
-		
+
 	g_free (glade_file);
 	g_return_val_if_fail (gxml != NULL, NULL);
-	
+
 	GtkWidget *menu 	= glade_xml_get_widget (gxml, "menu_main");
-	
+
 	widgets.viewtexts_item = glade_xml_get_widget (gxml, "show_bible_text");
 	widgets.viewpreview_item = glade_xml_get_widget (gxml, "preview");
 	widgets.viewcomms_item = glade_xml_get_widget (gxml, "commentary");
@@ -895,12 +895,12 @@ GtkWidget *gui_create_main_menu(void)
 	widgets.versehighlight_item = glade_xml_get_widget (gxml, "highlight_current_verse");
 	widgets.parallel_tab_item = glade_xml_get_widget (gxml, "show_parallel_view_in_a_tab");
 	widgets.side_preview_item = glade_xml_get_widget (gxml, "show_previewer_in_sidebar");
-	
+
 	widgets.doublespace_item = glade_xml_get_widget (gxml, "double_space_text");
 #ifndef USE_GTKMOZEMBED
 	gtk_widget_hide(widgets.doublespace_item);
 #endif /* !USE_GTKMOZEMBED */
-	
+
 	/* map tab's show state into view menu. */
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.viewtexts_item),
@@ -920,7 +920,7 @@ GtkWidget *gui_create_main_menu(void)
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.side_preview_item),
 				       settings.show_previewer_in_sidebar);
-		
+
 	/* update other status toys */
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.versestyle_item),
@@ -942,13 +942,13 @@ GtkWidget *gui_create_main_menu(void)
 				       (widgets.doublespace_item),
 				       settings.doublespace);
 #endif /* USE_GTKMOZEMBED */
-	
+
     	/* connect signals and data */
 	glade_xml_signal_autoconnect_full
 		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);
 
 	//set up global function to handle all link buttons
 	gtk_link_button_set_uri_hook (link_uri_hook, NULL, NULL);
-	
+
 	return menu;
 }

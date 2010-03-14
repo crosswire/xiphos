@@ -256,7 +256,7 @@ marked_cache_fill(gchar *modname, gchar *key)
 	return;
 
 fail:
-	err = g_strdup_printf(_("Improperly encoded personal annotation label:\n'%s'"), 
+	err = g_strdup_printf(_("Improperly encoded personal annotation label:\n'%s'"),
 			      mhold);
 	gui_generic_warning(err);
 	g_free(err);
@@ -1101,7 +1101,7 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 	}
 
 	imodule++;
-	
+
 	if (!ops->headings)
 		return;
 
@@ -1388,7 +1388,7 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 		// function that walks a string for multiple individual chars.
 		GS_message(("ReadAloud: clean: %s\n", text->str));
 		// scribble clean text to the socket.
-		if (FestivalSpeak(text->str, strlen(text->str), tts_socket) == false) 
+		if (FestivalSpeak(text->str, strlen(text->str), tts_socket) == false)
 		{
 			char msg[256];
 			sprintf(msg, "TTS disappeared?\nTTS write failed: %s",
@@ -1924,7 +1924,7 @@ DialogChapDisp::Display(SWModule &imodule)
 	char *ModuleName = imodule.Name();
 	ops = main_new_globals(ModuleName, 1);
 	cache_flags = ConstructFlags(ops);
-    
+
 	is_rtol = main_is_mod_rtol(ModuleName);
 	mf = get_font(ModuleName);
 
