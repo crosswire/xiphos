@@ -46,7 +46,7 @@
 /*
  * Override the Window proc for top-level GTK windows that contain an embedded
  * XULRunnerBrowser.  This is needed because GTK's focus model is much
- * different than XULRunner's.  
+ * different than XULRunner's.
  */
 LRESULT CALLBACK ToplevelFocusHackWndProc(HWND hwnd, UINT uMsg, WPARAM wParam,
         LPARAM lParam)

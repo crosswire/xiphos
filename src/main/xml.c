@@ -1,6 +1,6 @@
 /*
  * Xiphos Bible Study Tool
- * xml.c - 
+ * xml.c -
  *
  * Copyright (C) 2000-2009 Xiphos Developer Team
  *
@@ -37,7 +37,7 @@ struct _bookmark_data {
 	gboolean is_leaf;
 };
 typedef struct _bookmark_data BOOKMARK_DATA;
-	
+
 static BOOKMARK_DATA *es;
 static xmlDocPtr xml_settings_doc;
 static xmlNodePtr section_ptr;
@@ -51,10 +51,10 @@ static xmlDocPtr bookmark_doc;
  * Synopsis
  *   #include "gui/bookmarks.h"
  *
- *   void xml_new_bookmark_file(void)	
+ *   void xml_new_bookmark_file(void)
  *
  * Description
- *    
+ *
  *
  * Return value
  *   void
@@ -69,7 +69,7 @@ void xml_new_bookmark_file(void)
 	xmlAttrPtr xml_attr;
 	const char *xml_filename;
 	gchar buf[256];
-	
+
 	sprintf(buf, "%s/%s/bookmarks.xml", settings.gSwordDir,
 		"bookmarks");
 	xml_filename = buf;
@@ -88,23 +88,23 @@ void xml_new_bookmark_file(void)
 
 	xml_root = xml_add_folder_to_parent(xml_node, _("Personal"));
 	xml_folder = xml_add_folder_to_parent(xml_root, _("What must I do to be saved?"));
-	xml_add_bookmark_to_parent(xml_folder, 
+	xml_add_bookmark_to_parent(xml_folder,
 					_("Acts 16:31"),
 					_("Acts 16:31"),
 					NULL,
 					NULL);
-	xml_add_bookmark_to_parent(xml_folder, 
+	xml_add_bookmark_to_parent(xml_folder,
 					_("Eph 2:8,9"),
 					_("Eph 2:8,9"),
 					NULL,
 					NULL);
-	xml_add_bookmark_to_parent(xml_folder, 
+	xml_add_bookmark_to_parent(xml_folder,
 					_("Romans 1:16"),
 					_("Romans 1:16"),
 					NULL,
 					NULL);
 	xml_folder = xml_add_folder_to_parent(xml_root, _("What is the Gospel?"));
-	xml_add_bookmark_to_parent(xml_folder, 
+	xml_add_bookmark_to_parent(xml_folder,
 					_("1 Cor 15:1-4"),
 					_("1 Cor 15:1-4"),
 					NULL,
@@ -121,18 +121,18 @@ void xml_new_bookmark_file(void)
  * Synopsis
  *   #include "main/xml.h"
  *
- *   xmlNodePtr xml_add_folder_to_parent(xmlNodePtr parent, 
+ *   xmlNodePtr xml_add_folder_to_parent(xmlNodePtr parent,
  *						BOOKMARK_DATA * es)
  *
  * Description
- *    
+ *
  *
  * Return value
  *   xmlNodePtr
  */
 
 xmlNodePtr xml_add_folder_to_parent(xmlNodePtr parent, gchar * caption)
-{ 
+{
 	xmlNodePtr cur_node;
 	xmlAttrPtr xml_attr;
 
@@ -151,17 +151,17 @@ xmlNodePtr xml_add_folder_to_parent(xmlNodePtr parent, gchar * caption)
  * Synopsis
  *   #include "main/xml.h"
  *
- *   void xml_add_bookmark_to_parent(xmlNodePtr parent, 
- *						BOOKMARK_DATA * es)	
+ *   void xml_add_bookmark_to_parent(xmlNodePtr parent,
+ *						BOOKMARK_DATA * es)
  *
  * Description
- *    
+ *
  *
  * Return value
  *   void
  */
 
-void xml_add_bookmark_to_parent(xmlNodePtr parent, gchar * caption, 
+void xml_add_bookmark_to_parent(xmlNodePtr parent, gchar * caption,
 			gchar * key, gchar * module, gchar * mod_desc)
 {
 	xmlNodePtr xml_node;
@@ -202,10 +202,10 @@ void xml_add_bookmark_to_parent(xmlNodePtr parent, gchar * caption,
  * Synopsis
  *   #include "main/xml.h"
  *
- *   void get_node_data(GNode * node)	
+ *   void get_node_data(GNode * node)
  *
  * Description
- *    
+ *
  *
  * Return value
  *   void
@@ -224,10 +224,10 @@ static void get_node_data(GNode * node)
  * Synopsis
  *   #include "main/xml.h"
  *
- *   void parse_gnode_tree(GNode * node, xmlNodePtr parent)	
+ *   void parse_gnode_tree(GNode * node, xmlNodePtr parent)
  *
  * Description
- *    
+ *
  *
  * Return value
  *   void
@@ -264,7 +264,7 @@ static void parse_gnode_tree(GNode * node, xmlNodePtr parent)
  * Synopsis
  *   #include "main/xml.h"
  *
- *   void xml_save_gnode_to_bookmarks(GNode * node, gchar *file_buf)	
+ *   void xml_save_gnode_to_bookmarks(GNode * node, gchar *file_buf)
  *
  * Description
  *    for compatability with old bookmarks
@@ -281,7 +281,7 @@ void xml_save_gnode_to_bookmarks(GNode * gnode, gchar * file_buf)
 	xmlAttrPtr root_attr;
 	const char *xml_filename;
 	gchar *mod_desc = NULL;
-	
+
 	if (!gnode)
 		return;
 	xml_filename = file_buf;
@@ -308,7 +308,7 @@ void xml_save_gnode_to_bookmarks(GNode * gnode, gchar * file_buf)
 			if (strlen(es->module) > 2)
 				mod_desc = main_get_module_description(es->module);
 		}
-		xml_add_bookmark_to_parent(root_node, 
+		xml_add_bookmark_to_parent(root_node,
 						es->caption,
 						es->key,
 						es->module,
@@ -352,29 +352,29 @@ void xml_save_gnode_to_bookmarks(GNode * gnode, gchar * file_buf)
  *   void xml_write_bookmark_doc(const xmlChar * xml_filename)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
  */
 
 void xml_write_bookmark_doc(const xmlChar * xml_filename)
-{	
+{
 	GS_print(("\nsaving = %s\n", xml_filename));
 	xmlSaveFormatFile((const char *) xml_filename, bookmark_doc,1);
 }
 
 /******************************************************************************
  * Name
- *   
+ *
  *
  * Synopsis
  *   #include "main/xml.h"
  *
- *   void 
+ *   void
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
@@ -396,15 +396,15 @@ void xml_free_bookmark_doc(void)
  *   xmlNodePtr xml_load_bookmark_file(char * bookmark_file)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   xmlNodePtr
  */
 
-xmlNodePtr xml_load_bookmark_file(const xmlChar * bookmark_file) 
+xmlNodePtr xml_load_bookmark_file(const xmlChar * bookmark_file)
 {
-	
+
 	xmlNodePtr cur = NULL;
 
 	bookmark_doc = xmlParseFile((const char *) bookmark_file);
@@ -613,7 +613,7 @@ int xml_create_settings_file(char *path)
 	else
 		xmlNewTextChild(section_node, NULL, (const xmlChar *)"int1", NULL);
 	if ((tmp = g_list_next(tmp)) != NULL)
-		xmlNewTextChild(section_node, NULL, (const xmlChar *)"int2",(const xmlChar *)(gchar*)tmp->data);		
+		xmlNewTextChild(section_node, NULL, (const xmlChar *)"int2",(const xmlChar *)(gchar*)tmp->data);
 	else
 		xmlNewTextChild(section_node, NULL, (const xmlChar *)"int2", NULL);
 	if ((tmp = g_list_next(tmp)) != NULL)
@@ -732,7 +732,7 @@ void xml_convert_to_osisref(void)
  *   xmlNodePtr xml_find_section(char *type_doc, char *section)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   xmlNodePtr
@@ -776,11 +776,11 @@ static xmlNodePtr xml_find_section(const char *type_doc, const char *section)
  * Synopsis
  *   #include "main/xml.h"
  *
- *   xmlNodePtr xml_find_item(xmlNodePtr parent, char * item, 
+ *   xmlNodePtr xml_find_item(xmlNodePtr parent, char * item,
  *							char * label)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   xmlNodePtr
@@ -821,7 +821,7 @@ static xmlNodePtr xml_find_item(xmlNodePtr parent, const char *item,
  *   char *xml_get_list_from_label(char * section, char * item, char * label)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   char *
@@ -867,11 +867,11 @@ char *xml_get_list_from_label(const char *section, const char *item, const char 
  * Synopsis
  *   #include "main/xml.h"
  *
- *   void xml_set_list_item(char * section, char * item, char * label, 
+ *   void xml_set_list_item(char * section, char * item, char * label,
  *				char * value)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
@@ -1068,7 +1068,7 @@ static xmlNodePtr xml_find_prop(const char *type_doc, const char *section,
  *   char *xml_get_value(char *section, char *item)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   char *
@@ -1100,7 +1100,7 @@ char *xml_get_value(const char *section, const char *item)
  *		   char *value)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
@@ -1158,7 +1158,7 @@ int xml_parse_settings_file(char *file_name)
  *   void xml_save_settings_doc(char *file_name)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
@@ -1183,7 +1183,7 @@ void xml_save_settings_doc(char *file_name)
  *   void xml_free_settings_doc(void)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
@@ -1198,12 +1198,12 @@ void xml_add_new_section_to_settings_doc(char * section)
 {
 	xmlNodePtr root_node = NULL;
 	xmlNodePtr section_node = NULL;
-	
+
 	root_node = xmlDocGetRootElement(xml_settings_doc);
 	if (root_node == NULL) {
 		fprintf(stderr, _("empty document \n"));
 		return;
-	}	
+	}
 	section_node = xmlNewChild(root_node, NULL,
 				   (const xmlChar *) section, NULL);
 }
@@ -1211,42 +1211,42 @@ void xml_add_new_section_to_settings_doc(char * section)
 
 /******************************************************************************
  * Name
- *   
+ *
  *
  * Synopsis
  *   #include "main/xml.h"
  *
- *   
+ *
  *
  * Description
- *   
+ *
  *
  * Return value
- *   
+ *
  */
 
 void xml_add_new_item_to_section(char * section, char * item_name, char * value)
 {
 	xmlNodePtr section_node = NULL;
-	
+
 	section_node = xml_find_section("Xiphos", section);
-	
-	if (section_node) 		
-		xmlNewTextChild(section_node, NULL, (const xmlChar *)item_name, 
+
+	if (section_node)
+		xmlNewTextChild(section_node, NULL, (const xmlChar *)item_name,
 						    (const xmlChar *)value);
 }
 
 /******************************************************************************
  * Name
- *   
+ *
  *
  * Synopsis
  *   #include "gui/bookmarks.h"
  *
- *   	
+ *
  *
  * Description
- *    
+ *
  *
  * Return value
  *   void
@@ -1258,12 +1258,12 @@ void xml_remove_node(const char *section, const char *item, const char *label)
 	xmlNodePtr cur_item = NULL;
 	if ((cur =
 	     xml_find_section( "Xiphos", section)) != NULL) {
-		if ((cur_item = xml_find_item(cur, item, label)) != NULL) {			
+		if ((cur_item = xml_find_item(cur, item, label)) != NULL) {
 			xmlUnlinkNode(cur_item);
-			xmlFreeNode(cur_item);      
-		} 	  
-	}	
-	
+			xmlFreeNode(cur_item);
+		}
+	}
+
 }
 
 /******************************************************************************
@@ -1288,7 +1288,7 @@ void xml_remove_section(const char *section)
 
 	if ((cur = xml_find_section("Xiphos", section)) != NULL) {
 		xmlUnlinkNode(cur);
-		xmlFreeNode(cur);      
-	}	
-	
+		xmlFreeNode(cur);
+	}
+
 }

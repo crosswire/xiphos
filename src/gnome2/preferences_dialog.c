@@ -743,9 +743,9 @@ on_checkbutton_showparatab_toggled(GtkToggleButton * togglebutton,
 		gui_open_parallel_view_in_new_tab();
 	else
 		gui_close_passage_tab(1);
-		
-	
-}	
+
+
+}
 
 
 /******************************************************************************
@@ -1950,8 +1950,8 @@ setup_check_buttons(void)
 
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.show_paratab),
-				     settings.showparatab);	
-	
+				     settings.showparatab);
+
 #if 0
 #ifdef USE_GTKMOZEMBED
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
@@ -1988,7 +1988,7 @@ setup_check_buttons(void)
 			 G_CALLBACK(on_checkbutton_prayerlist_toggled), NULL);
 	g_signal_connect(check_button.show_paratab, "toggled",
 			 G_CALLBACK(on_checkbutton_showparatab_toggled), NULL);
-	
+
 #if 0
 #ifdef USE_GTKMOZEMBED
 	g_signal_connect(check_button.doublespace, "toggled",
@@ -2300,7 +2300,7 @@ create_preferences_dialog(void)
 	check_button.show_devotion = glade_xml_get_widget(gxml, "checkbutton7");
 	check_button.show_splash_screen = glade_xml_get_widget(gxml, "checkbutton8");
 	check_button.use_chapter_scroll = glade_xml_get_widget(gxml, "checkbutton_scroll");
-#ifdef USE_GTKMOZEMBED	
+#ifdef USE_GTKMOZEMBED
 	gtk_widget_hide(check_button.use_chapter_scroll);
 #endif
 	check_button.use_imageresize = glade_xml_get_widget(gxml, "checkbutton_imageresize");
@@ -2311,7 +2311,7 @@ create_preferences_dialog(void)
 	check_button.show_paratab = glade_xml_get_widget(gxml, "checkbutton_paratab");
 
 	gtk_widget_hide(check_button.show_paratab);
-	
+
 	setup_check_buttons();
 
 	/* verse number size */

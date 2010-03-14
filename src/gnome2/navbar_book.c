@@ -73,13 +73,13 @@ static void menu_deactivate_callback(GtkWidget * widget, gpointer user_data)
  *
  * Description
  *   position drop down menu under toogle button
- *   
+ *
  *
  * Return value
  *   void
  */
 
-static 
+static
 void menu_position_under(GtkMenu * menu, int * x, int * y,
 				gboolean * push_in, gpointer user_data)
 {
@@ -103,7 +103,7 @@ static gboolean lookup_entry_press_callback(GtkWidget * widget,
 					     gpointer user_data)
 {
 	if (!settings.havebook)
-		return FALSE;	
+		return FALSE;
 	/* this does not work on my system - hope I'm not messing things up
 	   for others - 104 is the enter key on the number pad
 	switch (event->hardware_keycode) {
@@ -111,11 +111,11 @@ static gboolean lookup_entry_press_callback(GtkWidget * widget,
 		gtk_button_clicked(GTK_BUTTON(navbar_book.button_up));
 		return TRUE;
 		break;
-	case 104: 
+	case 104:
 		gtk_button_clicked(GTK_BUTTON(navbar_book.button_down));
 		return TRUE;
 		break;
-	case 100: 
+	case 100:
 		gtk_button_clicked(GTK_BUTTON(navbar_book.button_left));
 		return TRUE;
 		break;
@@ -123,11 +123,11 @@ static gboolean lookup_entry_press_callback(GtkWidget * widget,
 		gtk_button_clicked(GTK_BUTTON(navbar_book.button_right));
 		return TRUE;
 		break;
-	} 
+	}
 	*/
 	GS_message(("lookup_entry_press_callback\nkeycode: %d",event->hardware_keycode));
 	return FALSE;
-	
+
 
 }
 
@@ -155,9 +155,9 @@ static gboolean select_button_press_callback(GtkWidget * widget,
 					     gpointer user_data)
 {
 	GtkWidget *menu;
-	
+
 	if (!settings.havebook)
-		return FALSE;	
+		return FALSE;
 	menu = main_book_drop_down_new();
 	g_signal_connect(menu, "deactivate",
 			 G_CALLBACK(menu_deactivate_callback), widget);
@@ -193,7 +193,7 @@ static
 void on_button_parent_clicked(GtkButton * button, gpointer user_data)
 {
 	if (!settings.havebook)
-		return;	
+		return;
 	main_navbar_book_parent();
 }
 
@@ -218,7 +218,7 @@ static
 void on_button_child_clicked(GtkButton * button, gpointer user_data)
 {
 	if (!settings.havebook)
-		return;	
+		return;
 	main_navbar_book_first_child();
 }
 
@@ -243,7 +243,7 @@ static
 void on_button_prev_clicked(GtkButton * button, gpointer user_data)
 {
 	if (!settings.havebook)
-		return;	
+		return;
 	main_navbar_book_prev();
 }
 
@@ -268,7 +268,7 @@ static
 void on_button_next_clicked(GtkButton * button, gpointer user_data)
 {
 	if (!settings.havebook)
-		return;	
+		return;
 	main_navbar_book_next();
 }
 
@@ -277,14 +277,14 @@ void on_button_next_clicked(GtkButton * button, gpointer user_data)
 /******************************************************************************
  * Name
  *    on_entry_activate
- *    
+ *
  * Synopsis
  *   #include "gui/navbar_book.h"
  *
  *  void on_entry_activate (GtkEntry *entry, gpointer  user_data)
  *
  * Description
- *    get entry text and call main_navbar_book_entry_activate(); 
+ *    get entry text and call main_navbar_book_entry_activate();
  *    in main/navbar_book.cc
  *
  * Return value
@@ -294,7 +294,7 @@ void on_button_next_clicked(GtkButton * button, gpointer user_data)
 void on_entry_activate (GtkEntry *entry, gpointer  user_data)
 {
 	const gchar* entry_buf = NULL;
-	
+
 	entry_buf = gtk_entry_get_text (entry);
 	main_navbar_book_entry_activate (entry_buf);
 }

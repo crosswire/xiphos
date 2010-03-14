@@ -1,6 +1,6 @@
-/* 
+/*
  * Xiphos Bible Study Tool
- * previewer.h - 
+ * previewer.h -
  *
  * Copyright (C) 2000-2009 Xiphos Developer Team
  *
@@ -18,7 +18,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  */
- 
+
 #ifndef _PREVIEWER_H
 #define _PREVIEWER_H
 
@@ -26,7 +26,7 @@
 extern "C"
 {
 #endif
-	
+
 void main_init_previewer(void);
 void main_set_previewer_widget(int in_sidebar);
 GtkWidget *main_get_previewer_widget(void);

@@ -55,7 +55,7 @@ public:
 	PRBool Find (const gchar *aSearchString);
 	PRBool FindAgain (PRBool aForward);
 	void SetSelectionAttention (PRBool aSelectionAttention);
-        gint ProcessMouseOver (void* aEvent, gint pane,  
+        gint ProcessMouseOver (void* aEvent, gint pane,
 			       gboolean is_dialog, DIALOG_DATA * d);
 	gint ProcessMouseDblClickEvent (void* aEvent);
 	gint ProcessMouseUpEvent (void* aEvent);

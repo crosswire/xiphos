@@ -29,7 +29,7 @@ extern "C" {
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-	
+
 typedef struct _sidebar SIDEBAR;
 struct _sidebar {
 	GtkWidget *module_list;

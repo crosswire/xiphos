@@ -1,6 +1,6 @@
 /*
  * Xiphos Bible Study Tool
- * export_passage.cc - 
+ * export_passage.cc -
  *
  * Copyright (C) 2008-2009 Xiphos Developer Team
  *
@@ -63,10 +63,10 @@ static gchar* copy_text;
 
 /**
  * clipboardreq_get:
- * @clipboard: 
- * @selection_data: 
- * @info: 
- * @user_data: 
+ * @clipboard:
+ * @selection_data:
+ * @info:
+ * @user_data:
  *
  * This function is called every time a user pastes in another application
  **/
@@ -135,7 +135,7 @@ static void _save(char *filename, char* text,int len)
 	GS_message(("%s",filename));
 	g_file_set_contents(filename, text, len, NULL);
 	if (filename)
-		g_free(filename);	
+		g_free(filename);
 }
 
 static void _export_book(char *filename, int type)
@@ -154,13 +154,13 @@ static void _export_book(char *filename, int type)
 
 	if (type == HTML)
 		g_string_append_printf(str,
-				       "%s<BR><CENTER>%s<BR>Chapter %d</CENTER><BR><BR>", 
+				       "%s<BR><CENTER>%s<BR>Chapter %d</CENTER><BR><BR>",
 				       HTML_START,
 				       mod->Description(),
 				       1);
 	else
 		g_string_append_printf(str,"\n%s\nChapter %d\n\n",
-				       mod->Description(), 
+				       mod->Description(),
 				       1);
 
 	while (key->Book() == curBook && !mod->Error()) {
@@ -178,16 +178,16 @@ static void _export_book(char *filename, int type)
 			g_string_append_printf(str,
 					       ((type == HTML)
 						? "&nbsp;&nbsp;[%d]"
-						: "  [%d]"), 
+						: "  [%d]"),
 					       myverse);
 
 		if (type == HTML)
 			g_string_append_printf(str, " %s%s",
-					       (char*)mod->RenderText(), 
+					       (char*)mod->RenderText(),
 					       (settings.versestyle ? "<BR>" : ""));
 		else
 			g_string_append_printf(str, " %s%s",
-					       (char*)mod->StripText(), 
+					       (char*)mod->StripText(),
 					       (settings.versestyle ? "\n" : ""));
 
 		++myverse;
@@ -195,7 +195,7 @@ static void _export_book(char *filename, int type)
 	}
 	if (type == HTML)
 		g_string_append_printf(str,"%s","</BODY></HTML>");
-	if (filename) 
+	if (filename)
 		_save(filename, str->str,str->len);
 	else
 		_copy_to_clipboard (str->str, str->len);
@@ -217,40 +217,40 @@ static void _export_chapter(char *filename, int type)
 	book = backend->key_get_book(settings.currentverse);
 	if (type == HTML)
 		g_string_append_printf(str,
-				       "%s<BR>%s: %s Chapter %d<BR><BR>", 
-				       HTML_START, 
+				       "%s<BR>%s: %s Chapter %d<BR><BR>",
+				       HTML_START,
 				       mod->Description(),
-				       book, 
+				       book,
 				       key->Chapter());
 	else
 		g_string_append_printf(str,
 				       "\n%s: %s Chapter %d\n\n",
 				       mod->Description(),
-				       book, 
-				       key->Chapter());		
+				       book,
+				       key->Chapter());
 
 	for (key->Verse(1);
 	     (key->Book() == curBook) &&
 	     (key->Chapter() == curChapter) &&
 	     !mod->Error();
 	     (*mod)++) {
-		     
+
 		if (settings.showversenum)
 			g_string_append_printf(str, " [%d]", myverse);
 
 		if (type == HTML)
 			g_string_append_printf(str," %s%s",
-					       (char*)mod->RenderText(), 
+					       (char*)mod->RenderText(),
 					       (settings.versestyle ? "<BR>" : ""));
 		else
 			g_string_append_printf(str," %s%s",
-					       (char*)mod->StripText(), 
+					       (char*)mod->StripText(),
 					       (settings.versestyle ? "\n" : ""));
 		++myverse;
 	}
 	if (type == HTML)
 		g_string_append_printf(str,"%s","</BODY></HTML>");
-	if (filename) 
+	if (filename)
 		_save(filename, str->str,str->len);
 	else
 		_copy_to_clipboard (str->str, str->len);
@@ -272,25 +272,25 @@ static void _export_verse(char *filename, int type)
 	book = backend->key_get_book(settings.currentverse);
 	if (type == HTML)
 		g_string_append_printf(str,
-				       "%s%s: %s %d:%d. %s%s</BODY></HTML>", 
-				       HTML_START, 
+				       "%s%s: %s %d:%d. %s%s</BODY></HTML>",
+				       HTML_START,
 				       settings.MainWindowModule,
-				       book, 
+				       book,
 				       key->Chapter(),
 				       key->Verse(),
-				       (char*)mod->RenderText(), 
+				       (char*)mod->RenderText(),
 				       (settings.versestyle ? "<BR>" : ""));
 	else
 		g_string_append_printf(str,
-				       "\n%s: %s %d:%d. %s%s", 
+				       "\n%s: %s %d:%d. %s%s",
 				       settings.MainWindowModule,
-				       book, 
+				       book,
 				       key->Chapter(),
 				       key->Verse(),
-				       (char*)mod->StripText(), 
+				       (char*)mod->StripText(),
 				       (settings.versestyle ? "\n" : ""));
 
-	if (filename) 
+	if (filename)
 		_save(filename, str->str,str->len);
 	else
 		_copy_to_clipboard (str->str, str->len);
@@ -318,10 +318,10 @@ static void _export_verse_range (EXPORT_DATA data, int type)
 		g_string_append_printf(str,
 				       (settings.showversenum
 					? "%s<BR>%s: %s Chapter %d<BR><BR>"
-					: "%s<BR>%s: %s %d:%d-%d<BR><BR>"), 
-				       HTML_START, 
+					: "%s<BR>%s: %s %d:%d-%d<BR><BR>"),
+				       HTML_START,
 				       settings.MainWindowModule,
-				       book, 
+				       book,
 				       key->Chapter(),
 				       data.start_verse,
 				       data.end_verse);
@@ -331,10 +331,10 @@ static void _export_verse_range (EXPORT_DATA data, int type)
 					? "\n%s: %s Chapter %d\n\n"
 					: "\n%s: %s %d:%d-%d\n\n"),
 				       settings.MainWindowModule,
-				       book, 
+				       book,
 				       key->Chapter(),
 				       data.start_verse,
-				       data.end_verse);		
+				       data.end_verse);
 
 	for (key->Verse(data.start_verse);
 	     (key->Verse() <= data.end_verse) &&
@@ -342,22 +342,22 @@ static void _export_verse_range (EXPORT_DATA data, int type)
 	     (key->Chapter() == curChapter) &&
 	     !mod->Error();
 	     (*mod)++) {
-		     
+
 		if (settings.showversenum)
 			g_string_append_printf(str, " [%d]", key->Verse());
 
 		if (type == HTML)
 			g_string_append_printf(str," %s%s",
-					       (char*)mod->RenderText(), 
+					       (char*)mod->RenderText(),
 					       (settings.versestyle ? "<BR>" : ""));
 		else
 			g_string_append_printf(str," %s%s",
-					       (char*)mod->StripText(), 
+					       (char*)mod->StripText(),
 					       (settings.versestyle ? "\n" : ""));
 	}
 	if (type == HTML)
 		g_string_append_printf(str,"%s","</BODY></HTML>");
-	if (data.filename) 
+	if (data.filename)
 		_save(data.filename, str->str,str->len);
 	else
 		_copy_to_clipboard (str->str, str->len);

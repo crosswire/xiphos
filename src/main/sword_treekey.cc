@@ -108,7 +108,7 @@ static void load_treeview (GtkTreeStore * model, GtkTreeIter * parent,
 
 	sprintf (buf, "%lu", treeKey.getOffset ());
 	tmpbuf = (char *) treeKey.getLocalName ();
-	if (atol(buf) == 0) 
+	if (atol(buf) == 0)
 		tmpbuf = mod_name;
 	//GS_message(("\nlocal_name: %d\noffset: %s",strlen(tmpbuf),buf));
 	if (treeKey.hasChildren ()) {
@@ -169,7 +169,7 @@ unsigned long main_treekey_remove (char *book, char *name, char * offset)
 {
 	SWMgr *mgr = backend->get_mgr ();
 	SWModule *mod = mgr->Modules[book];
-	
+
 	if (!g_ascii_isdigit(offset[0])) return 0; /* make sure offset is a number */
 
 	if (!mod)
@@ -188,7 +188,7 @@ unsigned long main_treekey_append_sibling (char *book, char *name, char * offset
 {
 	SWMgr *mgr = backend->get_mgr ();
 	SWModule *mod = mgr->Modules[book];
-	
+
 	if (!g_ascii_isdigit(offset[0])) return 0; /* make sure offset is a number */
 
 	if (!mod)
@@ -200,7 +200,7 @@ unsigned long main_treekey_append_sibling (char *book, char *name, char * offset
 	treekey->append ();
 	treekey->setLocalName (name);
 	treekey->save ();
-	
+
         mod->SetKey(treekey);
 	mod->KeyText();      //snap to entry
 	(*mod) << name;
@@ -214,7 +214,7 @@ unsigned long main_treekey_append_child (char *book, char *name, char * offset)
 {
 	SWMgr *mgr = backend->get_mgr ();
 	SWModule *mod = mgr->Modules[book];
-	
+
 	if (!g_ascii_isdigit(offset[0])) return 0; /* make sure offset is a number */
 
 	if (!mod)
@@ -225,7 +225,7 @@ unsigned long main_treekey_append_child (char *book, char *name, char * offset)
 	treekey->appendChild ();
 	treekey->setLocalName (name);
 	treekey->save ();
-	
+
         mod->SetKey(treekey);
 	mod->KeyText();      //snap to entry
 	(*mod) << name;
@@ -238,9 +238,9 @@ void main_treekey_set_local_name (char *book, char *name, char * offset)
 {
 	SWMgr *mgr = backend->get_mgr ();
 	SWModule *mod = mgr->Modules[book];
-	
+
 	if (!g_ascii_isdigit(offset[0])) return; /* make sure offset is a number */
-	
+
 	if (!mod)
 		return;
 
@@ -258,7 +258,7 @@ char *main_get_book_raw_text (char *book, char * offset)
 {
 	SWMgr *mgr = backend->get_mgr ();
 	SWModule *mod = mgr->Modules[book];
-	
+
 	if (!g_ascii_isdigit(offset[0])) return NULL; /* make sure offset is a number */
 
 	if (!mod)
@@ -269,7 +269,7 @@ char *main_get_book_raw_text (char *book, char * offset)
         treenode.setOffset(atol(offset));
 	mod->SetKey(treenode);
         mod->KeyText();      //snap to entry
-	
+
 	return strdup(mod->getRawEntry());
 }
 
@@ -277,9 +277,9 @@ void main_treekey_save_book_text (char *book, char * offset, char * text)
 {
 	SWMgr *mgr = backend->get_mgr ();
 	SWModule *mod = mgr->Modules[book];
-		
+
 	if (!offset || !g_ascii_isdigit(offset[0])) return; /* make sure offset is a number */
-	
+
 	if (!mod || (atol(offset) == 0))
 		return;
 
@@ -289,7 +289,7 @@ void main_treekey_save_book_text (char *book, char * offset, char * text)
 	mod->SetKey(treenode);
         mod->KeyText();      //snap to entry
 	(*mod) << text;
-	if (settings.book_mod && book 
+	if (settings.book_mod && book
 		   	&& !strcmp(settings.book_mod,book)){
 		GS_message(("main_treekey_save_book_text"));
 		main_display_book(book, offset);

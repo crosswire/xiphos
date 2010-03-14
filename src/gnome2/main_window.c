@@ -143,12 +143,12 @@ void gui_show_hide_preview(gboolean choice)
 		xml_set_value("Xiphos", "misc", "showpreview", "0");
 	} else {
 		if (main_window_created) {
-			if (settings.show_previewer_in_sidebar) 
+			if (settings.show_previewer_in_sidebar)
 				gtk_widget_show(widgets.box_side_preview);
-			else 
+			else
 				gtk_widget_show(widgets.vbox_previewer);
 		}
-			
+
 		xml_set_value("Xiphos", "misc", "showpreview", "1");
 	}
 }
@@ -248,11 +248,11 @@ void gui_set_bible_comm_layout(void)
 				       settings.biblepane_hight);
 	gtk_paned_set_position(GTK_PANED(widgets.vpaned2),
 				       settings.commpane_hight);
-	
+
 	if ((settings.showcomms == TRUE)  ||  (settings.showdicts == TRUE)) {
 		gtk_widget_show(widgets.vpaned2);
 	}
-	
+
 	gtk_paned_set_position(GTK_PANED(widgets.hpaned),
 			       (settings.showtexts
 				? settings.biblepane_width
@@ -262,34 +262,34 @@ void gui_set_bible_comm_layout(void)
 			       (settings.showcomms
 				? settings.commpane_hight
 				: 0));
-	
+
 	gtk_paned_set_position(GTK_PANED(widgets.vpaned2),
 			       (settings.showdicts
 				? settings.commpane_hight
 				: settings.gs_hight));
-	
+
 	if ((settings.showcomms == FALSE)  && (settings.showdicts == FALSE)) {
 		gtk_widget_hide(widgets.vpaned2);
 		gtk_paned_set_position(GTK_PANED
 				       (widgets.hpaned),
-				       settings.gs_width);	   
+				       settings.gs_width);
 	}
-	
+
 	if ((settings.showcomms == TRUE)
 		   || (settings.showdicts == TRUE)) {
 		gtk_paned_set_position(GTK_PANED
 				       (widgets.hpaned),
-				       settings.biblepane_width);	   
+				       settings.biblepane_width);
 	}
 	if (((settings.showcomms == FALSE) && (settings.showtexts == FALSE)) ||
 	   ((settings.comm_showing == FALSE) && (settings.showtexts == FALSE)))
 		gtk_widget_hide(nav_toolbar);
 	else
 		gtk_widget_show(nav_toolbar);
-	
+
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),
 				      (settings.comm_showing ? 0 : 1));
-  
+
 }
 
 
@@ -360,7 +360,7 @@ static gboolean  delete_event (GtkWidget *widget,
 	gtk_main_quit();
 	gtk_widget_destroy(widgets.app);
 	exit(0);
-	return TRUE;	
+	return TRUE;
 }
 
 /******************************************************************************
@@ -465,14 +465,14 @@ static gboolean on_configure_event(GtkWidget * widget,
 	sprintf(layout, "%d", settings.app_y);
 	xml_set_value("Xiphos", "layout", "app_y", layout);
 	xml_save_settings_doc(settings.fnconfigure);
-	
+
 	return FALSE;
 }
 
 static void on_notebook_bible_parallel_switch_page(GtkNotebook * notebook,
 					GtkNotebookPage * page,
 					gint page_num, GList **tl)
-{ 
+{
 #if 0
 	if (page_num == 0)
 		gui_set_drop_target(widgets.html_text);
@@ -484,9 +484,9 @@ static void on_notebook_bible_parallel_switch_page(GtkNotebook * notebook,
 static void on_notebook_comm_book_switch_page(GtkNotebook * notebook,
 					GtkNotebookPage * page,
 					gint page_num, GList **tl)
-{ 
+{
 	gchar *url = NULL;
-	
+
 	if (page_num == 0) {
 #if 0
 		gtk_drag_dest_unset(GTK_WIDGET(widgets.html_book));
@@ -503,11 +503,11 @@ static void on_notebook_comm_book_switch_page(GtkNotebook * notebook,
 		if (!settings.showtexts)
 			gtk_widget_hide(nav_toolbar);
 	}
-		
-	gui_update_tab_struct(NULL, 
-			      settings.CommWindowModule, 
-			      NULL, 
-			      NULL, 
+
+	gui_update_tab_struct(NULL,
+			      settings.CommWindowModule,
+			      NULL,
+			      NULL,
 			      NULL,
 			      NULL,
 			      settings.comm_showing,
@@ -562,7 +562,7 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 {
 	/* these are the mods we actually use for global keys, we always only check for these set */
 	guint state = event->state & (GDK_SHIFT_MASK  | GDK_CONTROL_MASK | GDK_MOD1_MASK | GDK_MOD4_MASK );
-	
+
 	switch (event->hardware_keycode) {
 	case GS_KEY_SHIFT: /* shift keys - we need this for locking strongs (and other stuff) while moving mouse */
 	case GS_KEY_SHIFT_R: /* to previewer */
@@ -724,10 +724,10 @@ gboolean on_vbox1_key_release_event(GtkWidget * widget,
                                         GdkEventKey * event,
                                         gpointer user_data)
 {
-        switch (event->hardware_keycode) {			
-		case GS_KEY_SHIFT: 
-		case GS_KEY_SHIFT_R: 
-			shift_key_pressed = FALSE;				
+        switch (event->hardware_keycode) {
+		case GS_KEY_SHIFT:
+		case GS_KEY_SHIFT_R:
+			shift_key_pressed = FALSE;
 		break;
 	}
   return FALSE;
@@ -759,7 +759,7 @@ void create_mainwindow(void)
 	GtkWidget *label;
 #ifdef USE_GTKMOZEMBED
 	GtkWidget *frame;
-	GtkWidget *eventbox;	
+	GtkWidget *eventbox;
 #else
 	GtkWidget *scrolledwindow;
 #endif /* USE_GTKMOZEMBED */
@@ -938,11 +938,11 @@ void create_mainwindow(void)
 	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
 	gtk_box_pack_start(GTK_BOX(widgets.vbox_previewer), frame,
 				TRUE, TRUE, 0);
-	
-	
+
+
 	eventbox = gtk_event_box_new();
 	gtk_widget_show(eventbox);
-	gtk_container_add(GTK_CONTAINER(frame), eventbox);		   	
+	gtk_container_add(GTK_CONTAINER(frame), eventbox);
 
 	widgets.html_previewer_text
 			= GTK_WIDGET ( gecko_html_new( NULL, FALSE, VIEWER_TYPE));

@@ -42,7 +42,7 @@
  * Synopsis
  *   #include "unlock_key_dialog.h"
  *
- *   gchar *gui_add_cipher_key(gchar *mod_name, gchar *cipher_old)	
+ *   gchar *gui_add_cipher_key(gchar *mod_name, gchar *cipher_old)
  *
  * Description
  *   create dialog to get key to unlock a module
@@ -56,7 +56,7 @@ gchar *gui_add_cipher_key(gchar *mod_name, gchar *cipher_old)
 	gchar *retval = NULL;
 	gint test;
 	GS_DIALOG *info;
-	
+
 	info = gui_new_dialog();
 	info->stock_icon = GTK_STOCK_DIALOG_WARNING;
 	info->label_top = _("Cipher Key?");

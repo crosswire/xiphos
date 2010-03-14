@@ -69,7 +69,7 @@ GPrintingPromptService::~GPrintingPromptService()
 NS_IMETHODIMP GPrintingPromptService::ShowPrintDialog(nsIDOMWindow *parent, nsIWebBrowserPrint *webBrowserPrint, nsIPrintSettings *printSettings)
 {
   return NS_OK;
-  
+
 }
 
 /* void showProgress (in nsIDOMWindow parent, in nsIWebBrowserPrint webBrowserPrint, in nsIPrintSettings printSettings, in nsIObserver openDialogObserver, in boolean isForPrinting, out nsIWebProgressListener webProgressListener, out nsIPrintProgressParams printProgressParams, out boolean notifyOnOpen); */
@@ -79,7 +79,7 @@ NS_IMETHODIMP GPrintingPromptService::ShowProgress(nsIDOMWindow *parent, nsIWebB
 }
 
 /* void showPageSetup (in nsIDOMWindow parent, in nsIPrintSettings printSettings, in nsIObserver printObserver); */
-NS_IMETHODIMP GPrintingPromptService::ShowPageSetup(nsIDOMWindow *parent, nsIPrintSettings *printSettings, 
+NS_IMETHODIMP GPrintingPromptService::ShowPageSetup(nsIDOMWindow *parent, nsIPrintSettings *printSettings,
 						    nsIObserver *printObserver)
 {
   return NS_OK;
@@ -167,7 +167,7 @@ NS_IMETHODIMP PrintListener::OnStateChange(nsIWebProgress *aWebProgress, nsIRequ
 /* void onProgressChange (in nsIWebProgress aWebProgress, in nsIRequest aRequest, in long aCurSelfProgress, in long aMaxSelfProgress, in long aCurTotalProgress, in long aMaxTotalProgress); */
 NS_IMETHODIMP PrintListener::OnProgressChange(nsIWebProgress *aWebProgress, nsIRequest *aRequest, PRInt32 aCurSelfProgress, PRInt32 aMaxSelfProgress, PRInt32 aCurTotalProgress, PRInt32 aMaxTotalProgress)
 {
-  /*gs_print_update_progress (info, 
+  /*gs_print_update_progress (info,
 			      (1.0 * aCurTotalProgress) / (aMaxTotalProgress * 1.0));*/
 
   if (info->cancelled && !cancel_happened) {
@@ -246,10 +246,10 @@ PrintListener::SetPrintSettings (GeckoPrintInfo *settings,
     fd = g_mkstemp (base);
     close(fd);
     settings->tempfile = g_strdup (base);
-    
+
     g_free (base);
-    
-    
+
+
     NS_CStringToUTF16 (nsDependentCString(settings->tempfile),
 		       NS_CSTRING_ENCODING_UTF8, tmp);
     target->SetPrintToFile (PR_TRUE);
@@ -269,7 +269,7 @@ PrintListener::SetPrintSettings (GeckoPrintInfo *settings,
       int numRanges = 0;
       GtkPageRange *pageRanges = gtk_print_settings_get_page_ranges (settings->config, &numRanges);
       if (numRanges > 0) {
-	/* FIXME: We can only support one range, 
+	/* FIXME: We can only support one range,
 	 * For now, ignore more ranges */
 	target->SetPrintRange (nsIPrintSettings::kRangeSpecifiedPageRange);
 	target->SetStartPageRange (pageRanges[0].start+1);
@@ -284,7 +284,7 @@ PrintListener::SetPrintSettings (GeckoPrintInfo *settings,
     case GTK_PRINT_PAGES_ALL:
       target->SetPrintRange (nsIPrintSettings::kRangeAllPages);
       break;
-      /* FIXME: we need some custom ranges here, "Selection" and 
+      /* FIXME: we need some custom ranges here, "Selection" and
        * "Focused Frame" */
     }
   } else {
@@ -309,7 +309,7 @@ PrintListener::SetPrintSettings (GeckoPrintInfo *settings,
 
   target->SetPaperSizeUnit(nsIPrintSettings::kPaperSizeMillimeters);
 
-	
+
   GtkPaperSize *paperSize = gtk_page_setup_get_paper_size (settings->setup);
   if (!paperSize) {
     GS_warning(("Paper size not set.  Aborting!\n"));
@@ -337,9 +337,9 @@ PrintListener::SetPrintSettings (GeckoPrintInfo *settings,
       { GTK_PAPER_NAME_LEGAL, "Legal" },
       { GTK_PAPER_NAME_EXECUTIVE, "Executive" },
     };
-  
+
     const char *paperName = gtk_paper_size_get_name (paperSize);
-  
+
     PRUint32 i;
     for (i = 0; i < G_N_ELEMENTS (paperTable); i++) {
       if (g_ascii_strcasecmp (paperTable[i].gtkPaperName, paperName) == 0) {
@@ -349,47 +349,47 @@ PrintListener::SetPrintSettings (GeckoPrintInfo *settings,
     }
     if (i == G_N_ELEMENTS (paperTable)) {
       /* Not in table, fall back to A4 */
-      GS_warning(("Unknown paper name '%s', falling back to A4", 
+      GS_warning(("Unknown paper name '%s', falling back to A4",
 		  gtk_paper_size_get_name (paperSize)));
       paperName = paperTable[1].mozPaperName;
     }
-  
+
     target->SetPaperName (NS_ConvertUTF8toUTF16 (paperName).get ());
   }
- 
+
   /* Sucky mozilla wants margins in inch! */
   target->SetMarginTop (gtk_page_setup_get_top_margin (settings->setup, GTK_UNIT_INCH));
   target->SetMarginBottom (gtk_page_setup_get_bottom_margin (settings->setup, GTK_UNIT_INCH));
   target->SetMarginLeft (gtk_page_setup_get_left_margin (settings->setup, GTK_UNIT_INCH));
   target->SetMarginRight (gtk_page_setup_get_right_margin (settings->setup, GTK_UNIT_INCH));
 
-  
+
   NS_CStringToUTF16 (nsDependentCString(settings->header_left_string),
 		     NS_CSTRING_ENCODING_UTF8, tmp);
   target->SetHeaderStrLeft (tmp.get());
-    
+
   NS_CStringToUTF16 (nsDependentCString(settings->header_center_string),
 		     NS_CSTRING_ENCODING_UTF8, tmp);
   target->SetHeaderStrCenter (tmp.get());
-    
+
   NS_CStringToUTF16 (nsDependentCString(settings->header_right_string),
 		     NS_CSTRING_ENCODING_UTF8, tmp);
   target->SetHeaderStrRight (tmp.get());
-    
+
   NS_CStringToUTF16 (nsDependentCString(settings->footer_left_string),
-		     NS_CSTRING_ENCODING_UTF8, tmp); 
+		     NS_CSTRING_ENCODING_UTF8, tmp);
   target->SetFooterStrLeft (tmp.get());
-    
+
   NS_CStringToUTF16 (nsDependentCString(settings->footer_center_string),
 		     NS_CSTRING_ENCODING_UTF8, tmp);
   target->SetFooterStrCenter(tmp.get());
-    
+
   NS_CStringToUTF16 (nsDependentCString(settings->footer_right_string),
 		     NS_CSTRING_ENCODING_UTF8, tmp);
   target->SetFooterStrRight(tmp.get());
 
   /* FIXME I think this is the right default, but this prevents the user
-   * from cancelling the print immediately, see the stupid comment in 
+   * from cancelling the print immediately, see the stupid comment in
    * nsPrintEngine:
    *  "DO NOT allow the print job to be cancelled if it is Print FrameAsIs
    *   because it is only printing one page."
@@ -401,11 +401,11 @@ PrintListener::SetPrintSettings (GeckoPrintInfo *settings,
   target->SetScaling (gtk_print_settings_get_scale (settings->config) / 100.0);
 
   /* FIXME: What do these do?  Need to learn to fix them properly
-   * For now, leave at Epiphany type defaults 
+   * For now, leave at Epiphany type defaults
    */
 
   target->SetShrinkToFit (PR_FALSE); /* FIXME setting */
-    
+
   target->SetPrintBGColors (PR_FALSE); /* FIXME setting */
   target->SetPrintBGImages (PR_FALSE); /* FIXME setting */
 
@@ -445,14 +445,14 @@ gecko_register_printing ()
 
   nsCOMPtr<nsIGenericFactory> componentFactory;
   componentFactory = do_CreateInstance ("@mozilla.org/generic-factory;1", &rv);
-    
+
   if (NS_FAILED(rv) || !componentFactory)
     {
       GS_warning(("Failed to make a factory for %s\n", sAppComps[0].mDescription));
       return;
     }
   componentFactory->SetComponentInfo(&(sAppComps[0]));
-   
+
   rv = cr->RegisterFactory(sAppComps[0].mCID,
 			   sAppComps[0].mDescription,
 			   sAppComps[0].mContractID,
@@ -461,6 +461,6 @@ gecko_register_printing ()
     {
       GS_warning(("Failed to register %s\n", sAppComps[0].mDescription));
     }
-    
+
 }
 #endif

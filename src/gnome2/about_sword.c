@@ -38,18 +38,18 @@
  * Synopsis
  *   #include "gui/.h"
  *
- *   void on_dialog_response(GtkDialog * dialog, gint response_id, 
+ *   void on_dialog_response(GtkDialog * dialog, gint response_id,
 					gpointer user_data)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
  */
 
 static void
-on_dialog_response(GtkDialog * dialog, gint response_id, 
+on_dialog_response(GtkDialog * dialog, gint response_id,
 		   gpointer user_data)
 {
 	gtk_widget_destroy(GTK_WIDGET(dialog));

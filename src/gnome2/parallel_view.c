@@ -128,12 +128,12 @@ void on_paratab_activate(GtkMenuItem * menuitem)
 void on_changeint1mod_activate(GtkMenuItem * menuitem,
 				      gpointer user_data)
 {
-	
+
 	gchar *mod_name = NULL;
 //	GS_message(("mod_name",(gchar *) user_data));
 	mod_name = main_module_name_from_description((gchar *) user_data);
-	
-	if (!mod_name) 
+
+	if (!mod_name)
 		return;
 	main_change_parallel_module(PARALLEL1, mod_name);
 }
@@ -164,7 +164,7 @@ static void on_changeint2mod_activate(GtkMenuItem * menuitem,
 	gchar *mod_name = NULL;
 
 	mod_name = main_module_name_from_description((gchar *) user_data);
-	if (!mod_name) 
+	if (!mod_name)
 		return;
 	main_change_parallel_module(PARALLEL2, mod_name);
 }
@@ -193,7 +193,7 @@ static void on_changeint3mod_activate(GtkMenuItem * menuitem,
 	gchar *mod_name = NULL;
 
 	mod_name = main_module_name_from_description((gchar *) user_data);
-	if (!mod_name) 
+	if (!mod_name)
 		return;
 	main_change_parallel_module(PARALLEL3, mod_name);
 }
@@ -222,7 +222,7 @@ static void on_changeint4mod_activate(GtkMenuItem * menuitem,
 	gchar *mod_name = NULL;
 
 	mod_name = main_module_name_from_description((gchar *) user_data);
-	if (!mod_name) 
+	if (!mod_name)
 		return;
 	main_change_parallel_module(PARALLEL4, mod_name);
 }
@@ -252,21 +252,21 @@ static void on_changeint5mod_activate(GtkMenuItem * menuitem,
 
 	mod_name = main_module_name_from_description((gchar *) user_data);
 
-	if (!mod_name) 
+	if (!mod_name)
 		return;
 	main_change_parallel_module(PARALLEL5, mod_name);
 }
 
 
 void gui_popup_menu_parallel(void)
-{	
+{
 	GtkWidget *menu;
 	GtkWidget *copy7;
 	GtkWidget *undockInt = NULL;
 	GtkWidget *module_options;
 	GtkWidget *separator2;
 	GtkWidget *module_options_menu;
-	
+
 	menu = gtk_menu_new();
 	g_object_set_data(G_OBJECT(menu), "pmInt", menu);
 
@@ -278,7 +278,7 @@ void gui_popup_menu_parallel(void)
 	gtk_widget_hide(separator2);
 	gtk_container_add(GTK_CONTAINER(menu), separator2);
 	gtk_widget_set_sensitive(separator2, FALSE);
-	
+
 	if (!settings.showparatab) {
 		undockInt = gtk_menu_item_new_with_label(_("Detach/Attach"));
 		gtk_widget_show(undockInt);
@@ -293,7 +293,7 @@ void gui_popup_menu_parallel(void)
 	module_options_menu = gtk_menu_new();
 	gtk_menu_item_set_submenu(GTK_MENU_ITEM(module_options),
 				  module_options_menu);
-				  
+
 	main_load_g_ops_parallel(module_options_menu);
 
 	separator2 = gtk_menu_item_new();
@@ -301,7 +301,7 @@ void gui_popup_menu_parallel(void)
 	gtk_container_add(GTK_CONTAINER(menu), separator2);
 	gtk_widget_set_sensitive(separator2, FALSE);
 	/* build change parallel modules submenu */
-	main_load_menu_form_mod_list(menu, _("Change parallel 1"),			       
+	main_load_menu_form_mod_list(menu, _("Change parallel 1"),
 				     G_CALLBACK(on_changeint1mod_activate));
 	main_load_menu_form_mod_list(menu, _("Change parallel 2"),
 				     G_CALLBACK(on_changeint2mod_activate));
@@ -315,7 +315,7 @@ void gui_popup_menu_parallel(void)
 /*	g_signal_connect(GTK_OBJECT(copy7), "activate",
 			   G_CALLBACK(gui_copyhtml_activate),
 			   NULL);*/
-	
+
 	if (!settings.showparatab) {
 		if (undockInt) {
 			g_signal_connect(GTK_OBJECT(undockInt), "activate",
@@ -325,7 +325,7 @@ void gui_popup_menu_parallel(void)
 			GS_warning(("undockInt is NULL?"));
 		}
 	}
-	
+
 	gtk_menu_popup((GtkMenu*)menu, NULL, NULL, NULL, NULL, 0,
 		       gtk_get_current_event_time());
 }
@@ -402,7 +402,7 @@ _popupmenu_requested_cb(GtkHTML *html,
  *   void gui_create_parallel_page(guint page_num)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
@@ -418,7 +418,7 @@ void gui_create_parallel_page(void)
 #endif
 
 	/*
-	 * parallel page 
+	 * parallel page
 	 */
 	settings.dockedInt = TRUE;
 #ifdef USE_GTKMOZEMBED

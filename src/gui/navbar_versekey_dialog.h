@@ -23,7 +23,7 @@
 #define __NAVBAR_VERSEKEY_DIALOG_H_
 
 #include "main/module_dialogs.h"
- 
+
 GtkWidget *gui_navbar_versekey_dialog_new(DIALOG_DATA * dialog);
 
 #endif

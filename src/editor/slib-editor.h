@@ -18,7 +18,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  */
- 
+
 #ifndef _SLIB_EDITOR_H
 #define _SLIB_EDITOR_H
 
@@ -30,7 +30,7 @@ extern "C"
 #include <config.h>
 
 #include <gtk/gtk.h>
-	
+
 #include "main/navbar_versekey.h"
 
 typedef struct _editor EDITOR;
@@ -43,7 +43,7 @@ struct _editor {
 	GtkWidget *statusbar;
 
 	NAVBAR_VERSEKEY navbar;
-	
+
 	gint type;
 
 	gboolean studypad;
@@ -53,7 +53,7 @@ struct _editor {
 	gchar *filename;
 	gchar *module;
 	gchar *key;
-};	
+};
 
 enum {
 	STUDYPAD_EDITOR,

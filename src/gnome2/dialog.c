@@ -1,6 +1,6 @@
 /*
  * Xiphos Bible Study Tool
- * dialog.c - 
+ * dialog.c -
  *
  * Copyright (C) 2000-2009 Xiphos Developer Team
  *
@@ -115,7 +115,7 @@ static void get_entry_text(GS_DIALOG * info)
  *   void on_dialog_response(GtkDialog * dialog, gint response_id, GS_DIALOG * info)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
@@ -205,39 +205,39 @@ static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 		gtk_misc_set_alignment(GTK_MISC(image5), 0.5, 0);
 		gtk_misc_set_padding(GTK_MISC(image5), 12, 0);
 	}
-	
-	
+
+
 	vbox2 = gtk_vbox_new(FALSE, 6);
 	gtk_widget_show(vbox2);
 	gtk_box_pack_start(GTK_BOX(hbox3), vbox2, TRUE, TRUE, 0);
 
 	label7 = gtk_label_new(info->label_top);
-	gtk_widget_show(label7);	
+	gtk_widget_show(label7);
 	gtk_box_pack_start(GTK_BOX(vbox2), label7, FALSE, FALSE, 0);
 	gtk_label_set_use_markup(GTK_LABEL(label7), TRUE);
 	gtk_label_set_justify(GTK_LABEL(label7), GTK_JUSTIFY_LEFT);
 	gtk_label_set_line_wrap(GTK_LABEL(label7), TRUE);
 	gtk_misc_set_alignment(GTK_MISC(label7), 0, 0.5);
 
-	if (info->label2) {	
+	if (info->label2) {
 		gtk_window_set_default_size (GTK_WINDOW (dialog_alert), 380, 200);
 		scrolledwindow = gtk_scrolled_window_new (NULL, NULL);
 		gtk_widget_show (scrolledwindow);
 		gtk_box_pack_start (GTK_BOX (vbox2), scrolledwindow, TRUE, TRUE, 0);
-		gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow), 
+		gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow),
 				GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-		
+
 		viewport = gtk_viewport_new (NULL, NULL);
 		gtk_widget_show (viewport);
 		gtk_container_add (GTK_CONTAINER (scrolledwindow), viewport);
-		
+
 		label10 = gtk_label_new(info->label2);
 		gtk_widget_show(label10);
 		gtk_container_add (GTK_CONTAINER (viewport), label10);
 		gtk_label_set_justify(GTK_LABEL(label10), GTK_JUSTIFY_LEFT);
 		gtk_misc_set_alignment(GTK_MISC(label10), 0, 0.5);
 	}
-	
+
 	dialog_action_area2 = GTK_DIALOG(dialog_alert)->action_area;
 	gtk_widget_show(dialog_action_area2);
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area2),
@@ -307,7 +307,7 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 	dialog_request = gtk_dialog_new();
 	info->dialog = dialog_request;
 	gtk_container_set_border_width(GTK_CONTAINER(dialog_request), 6);
-	gtk_window_set_title(GTK_WINDOW(dialog_request), 
+	gtk_window_set_title(GTK_WINDOW(dialog_request),
 			     (info->title ? info->title : " "));
 	gtk_window_set_modal(GTK_WINDOW(dialog_request), TRUE);
 	gtk_window_set_resizable(GTK_WINDOW(dialog_request), FALSE);
@@ -524,7 +524,7 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
  *   GS_DIALOG *gui_new_dialog(void)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   GS_DIALOG *
@@ -591,7 +591,7 @@ void gui_generic_warning(char *message)
 
 	dialog = gui_new_dialog();
 	dialog->stock_icon = GTK_STOCK_DIALOG_INFO;
-	
+
 	dialog_text = g_strdup_printf("<span weight=\"bold\">%s</span>",
 				      _("Xiphos:"));
 	dialog->label_top = dialog_text;
@@ -614,7 +614,7 @@ void gui_generic_warning(char *message)
  *   gint gui_gs_dialog(GS_DIALOG * info)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   gint
@@ -647,7 +647,7 @@ gint gui_gs_dialog(GS_DIALOG * info)
  *   gint gui_alert_dialog(GS_DIALOG * info)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   gint
@@ -680,7 +680,7 @@ gint gui_alert_dialog(GS_DIALOG * info)
  *   gint gui_close_confirmation_dialog(GS_DIALOG * info)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   gint
@@ -696,7 +696,7 @@ gint gui_close_confirmation_dialog(GS_DIALOG * info)
 		gtk_dialog_add_button (GTK_DIALOG (dialog),
 				       _("Close _without Saving"),
 				       GTK_RESPONSE_NO);
-	
+
 		gtk_dialog_add_buttons (GTK_DIALOG (dialog),
 					GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 					GTK_STOCK_SAVE, GTK_RESPONSE_YES, NULL);
