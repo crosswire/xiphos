@@ -1,3 +1,7 @@
+2009-03-15  karl <charcoal@users.sf.net>
+
+	* fix #2936311 provide direct sword:// as well as via verse list.
+
 2009-03-14  karl <charcoal@users.sf.net>
 
 	* fix #2918463 xiphos crash due to zero-length settings: recreate.
