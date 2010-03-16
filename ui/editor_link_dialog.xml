@@ -34,9 +34,6 @@
                 <property name="orientation">vertical</property>
                 <property name="spacing">4</property>
                 <child>
-                  <placeholder/>
-                </child>
-                <child>
                   <object class="GtkTable" id="table1">
                     <property name="visible">True</property>
                     <property name="n_rows">3</property>
