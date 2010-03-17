@@ -798,6 +798,17 @@ gint sword_uri(const gchar * url, gboolean clicked)
 				if (key) g_free((gchar*)key);
 			break;
 			case COMMENTARY_TYPE:
+				if (gtk_notebook_get_current_page
+				    (GTK_NOTEBOOK
+				     (widgets.notebook_comm_book)) != 0) {
+					gchar *save = settings.special_anchor;
+					gtk_notebook_set_current_page(
+					    GTK_NOTEBOOK (widgets.
+							  notebook_comm_book), 0);
+					settings.special_anchor = save;
+				}
+				settings.comm_showing = TRUE;
+				sync_windows();
 				key = main_update_nav_controls(tmpkey);
 				main_display_commentary(work_buf[MODULE],key);
 				main_display_bible(NULL, key);
