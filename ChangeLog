@@ -1,3 +1,7 @@
+2009-03-16  karl <charcoal@users.sf.net>
+
+	* feat.req #2791621 change tooltip on sync button for clearer meaning.
+
 2009-03-15  karl <charcoal@users.sf.net>
 
 	* fix #2936311 provide direct sword:// as well as via verse list.
