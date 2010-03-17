@@ -42,16 +42,17 @@ Bug reports addressed since 3.1.2:
 2936311  Add Link action not able to use bible:// for verse links
 
 Feature requests closed:
-2932551  Shortcut Keys
-2928388  personal note deletion
-2925935  One Year Daily reading Schedule
-2907492  Interlinear commentary
-2902403  How to install for other than listed OS
-2893826  Versification in the Psalms
-2799867  Increase reducing of window sizes
-2795762  Reference bar: Choosing a book name
-2791621  Biblical resource in seperate window: synchronize from/with?
+2781509  Export->Copy HTML doesn't work properly
 2791414  Parallel View tab should behave like a real tab
+2791621  Biblical resource in seperate window: synchronize from/with?
+2795762  Reference bar: Choosing a book name
+2799867  Increase reducing of window sizes
+2893826  Versification in the Psalms
+2902403  How to install for other than listed OS
+2907492  Interlinear commentary
+2925935  One Year Daily reading Schedule
+2928388  personal note deletion
+2932551  Shortcut Keys
 ________________________________________________________________
 
 Release 3.1.2
