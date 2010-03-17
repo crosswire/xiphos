@@ -808,7 +808,6 @@ gint sword_uri(const gchar * url, gboolean clicked)
 					settings.special_anchor = save;
 				}
 				settings.comm_showing = TRUE;
-				sync_windows();
 				key = main_update_nav_controls(tmpkey);
 				main_display_commentary(work_buf[MODULE],key);
 				main_display_bible(NULL, key);
