@@ -630,19 +630,6 @@ static int show_module_and_key(const char * module, const char * key,
 		mod_type = backend->module_type((gchar*)module);
 		switch (mod_type) {
 			case TEXT_TYPE:
-				if (strpbrk(key, "-;,")) {	// >1 verse marked
-					main_display_verse_list_in_sidebar
-					    (settings.currentverse,
-					     (gchar*)module, (gchar*)key);
-				} else {
-					tmpkey = main_update_nav_controls(key);
-					main_display_bible(module, tmpkey);
-					main_display_commentary(NULL, tmpkey);
-					main_keep_bibletext_dialog_in_sync((gchar*)tmpkey);
-					if (tmpkey) g_free((gchar*)tmpkey);
-					editor_sync_with_main();
-				}
-				break;
 			case COMMENTARY_TYPE:
 			case PERCOM_TYPE:
 				if (strpbrk(key, "-;,")) {	// >1 verse marked
@@ -650,17 +637,12 @@ static int show_module_and_key(const char * module, const char * key,
 					    (settings.currentverse,
 					     (gchar*)module, (gchar*)key);
 				} else {
-					tmpkey = main_update_nav_controls(key);
-					main_display_bible(NULL, tmpkey);
-					main_display_commentary(module, tmpkey);
-					main_keep_bibletext_dialog_in_sync((gchar*)tmpkey);
-					if (tmpkey) g_free((gchar*)tmpkey);
-					if (gtk_notebook_get_current_page
-					    (GTK_NOTEBOOK
-					     (widgets.notebook_comm_book)) != 0)
-					    gtk_notebook_set_current_page(
-						GTK_NOTEBOOK (widgets.
-							      notebook_comm_book), 0);
+					gchar *url =
+					    g_strdup_printf("sword://%s/%s",
+							    (module ? module : ""),
+							    key);
+					sword_uri(url, TRUE);
+					g_free(url);
 				}
 				break;
 			case DICTIONARY_TYPE:
