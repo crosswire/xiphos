@@ -3,6 +3,57 @@ ____________________
 XIPHOS RELEASE NOTES
 ____________________
 
+Release 3.1.3
+20 Mar 2010
+
+This is an urgent bugfix release, largely due to compatibility needs
+with regard to library packages that have been, or are soon to be,
+released in environments we support.
+
+Notably: [1] Upcoming xulrunner 1.9.2 in Linux had a conflict with
+respect to Nautilus file browser windows during module manager use;
+[2] The new version of the ftp access library, curl v7.20, had
+conflicts with the underlying Sword library ("the engine").
+
+We also addressed a number of other, less critical bugs, and have
+formally dropped support for these old environments: Windows 2000 (10+
+years old!), Fedora < 10 (F13 is about to be released), Ubuntu < 9.04
+(10.04 is about to be released).  For other Linux versions, this
+generally corresponds to gtkhtml3 older than 2.14.
+
+Small features: Support for footnotes containing intra-verse anchors
+(e.g. "Gen1:2#n12"); editor support for links in prayerlist/journal
+modules and personal commentaries providing navigation either directly
+("sword://" URLs) or via verse list machinery (bug #2936311, below).
+
+Bug reports addressed since 3.1.2:
+2915026  Right to Left Languages - Display
+2915912  RToL toolbar number order
+2918463  crash detected in Fedora 12 xiphos-3.1.1
+2924074  verse selection causes scroll-to-top
+2928849  Parallel views (reset) problem
+2936311  Add Link action not able to use bible:// for verse links
+2941678  Book name up arrow
+2941684  Small caps in "LORD"
+2943173  freeaddrinfo (win2k compatibility - dropped)
+2951941  Turkish Ubuntu blocks display of Old Testament books
+2956797  Xiphos crashes when trying to edit
+2958644  Nautilus?  -  Xiphos doesn't show bible text
+2936311  Add Link action not able to use bible:// for verse links
+
+Feature requests closed:
+2932551  Shortcut Keys
+2928388  personal note deletion
+2925935  One Year Daily reading Schedule
+2907492  Interlinear commentary
+2902403  How to install for other than listed OS
+2893826  Versification in the Psalms
+2799867  Increase reducing of window sizes
+2795762  Reference bar: Choosing a book name
+2791621  Biblical resource in seperate window: synchronize from/with?
+2791414  Parallel View tab should behave like a real tab
+________________________________________________________________
+
 Release 3.1.2
 24 Dec 2009
 
