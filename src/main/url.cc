@@ -819,6 +819,16 @@ gint sword_uri(const gchar * url, gboolean clicked)
 							tmpkey);
 			break;
 			case BOOK_TYPE:
+				if (gtk_notebook_get_current_page
+				    (GTK_NOTEBOOK
+				     (widgets.notebook_comm_book)) != 1) {
+					gchar *save = settings.special_anchor;
+					gtk_notebook_set_current_page(
+					    GTK_NOTEBOOK (widgets.
+							  notebook_comm_book), 1);
+					settings.special_anchor = save;
+				}
+				settings.comm_showing = FALSE;
 				main_display_book(work_buf[MODULE], tmpkey);
 			break;
 		}
