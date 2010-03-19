@@ -167,14 +167,26 @@ int settings_init(int argc, char **argv, int new_configs, int new_bookmarks)
 	main_init_lists();
 
 	/* set fnconfigure to gSwordDir and settings.xml */
-	settings.fnconfigure = g_new(char, strlen(settings.gSwordDir) +
-				     strlen("settings.xml") + 2);
-	sprintf(settings.fnconfigure, "%s/%s", settings.gSwordDir,
-		"settings.xml");
+	settings.fnconfigure = g_strdup_printf("%s/settings.xml", settings.gSwordDir);
+
+	/* check for a bad settings file. */
+	if ((stat(settings.fnconfigure, &buf) == 0) &&	/* exists... */
+	    (buf.st_size == 0)) {			/* ...but empty? */
+		char *backup_name = g_strdup_printf("%s.SAVE", settings.fnconfigure);
+
+		/* toss out the bad one and look for recovery. */
+		unlink(settings.fnconfigure);
+		if (stat(backup_name, &buf) == 0) {
+			buf_says_empty = (buf.st_size == 0);
+			rename(backup_name, settings.fnconfigure);
+			gui_init(argc, argv);
+			gui_generic_warning(_("Empty settings file -- backup recovery attempted.\nSome information may have been lost."));
+		}
+		else gui_generic_warning(_("Empty settings file -- no backup?!? Information lost!"));
+		g_free(backup_name);
+	}
 
 	/* if settings.xml does not exist create it */
-	if (stat(settings.fnconfigure, &buf) == 0)
-		buf_says_empty = (buf.st_size == 0);
 	if (buf_says_empty ||
 	    (access(settings.fnconfigure, F_OK) == -1) ||
 	    new_configs) {
