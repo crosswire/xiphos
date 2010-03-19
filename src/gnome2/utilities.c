@@ -1227,7 +1227,7 @@ HtmlOutput(char *text,
 #else
 	gtk_html_end(html, stream, GTK_HTML_STREAM_OK);
 	gtk_html_set_editable(html, was_editable);
-	if (anchor)
+	if (anchor || settings.special_anchor)
 		gtk_html_jump_to_anchor(html, (settings.special_anchor
 					       ? settings.special_anchor
 					       : anchor));
