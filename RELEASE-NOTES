@@ -21,10 +21,15 @@ years old!), Fedora < 10 (F13 is about to be released), Ubuntu < 9.04
 (10.04 is about to be released).  For other Linux versions, this
 generally corresponds to gtkhtml3 older than 2.14.
 
-Small features: Support for footnotes containing intra-verse anchors
-(e.g. "Gen1:2#n12"); editor support for links in prayerlist/journal
-modules and personal commentaries providing navigation either directly
-("sword://" URLs) or via verse list machinery (bug #2936311, below).
+Small bugfixes and features: Navigation support for footnotes
+containing intra-verse anchors (e.g. "Gen1:2#n12"); editor support for
+links in prayerlist/journal modules and personal commentaries
+providing navigation either directly ("sword://" URLs) or via verse
+list machinery; fully-supported word processor copy/paste; improved
+Portuguese and Chinese translations; universal synchronization with
+detached windows was fixed; smallcaps "LORD" is now pronounced
+correctly in read-aloud; lack of settings file won't crash Xiphos; on
+genbook bookmark click, ensure its pane comes to the front.
 
 Bug reports addressed since 3.1.2:
 2915026  Right to Left Languages - Display
@@ -40,6 +45,7 @@ Bug reports addressed since 3.1.2:
 2956797  Xiphos crashes when trying to edit
 2958644  Nautilus?  -  Xiphos doesn't show bible text
 2936311  Add Link action not able to use bible:// for verse links
+2972686  Arabic is not right-aligned
 
 Feature requests closed:
 2781509  Export->Copy HTML doesn't work properly
