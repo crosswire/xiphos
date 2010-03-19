@@ -1220,7 +1220,7 @@ HtmlOutput(char *text,
 	/* use anchor if asked, but if so, special anchor takes priority. */
 #ifdef USE_GTKMOZEMBED
 	gecko_html_close(html);
-	if (anchor)
+	if (anchor || settings.special_anchor)
 		gecko_html_jump_to_anchor(html, (settings.special_anchor
 						 ? settings.special_anchor
 						 : anchor));
