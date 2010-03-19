@@ -23,6 +23,8 @@
 #include <config.h>
 #endif
 
+#include <sys/types.h>
+#include <sys/stat.h>
 #include <libxml/parser.h>
 
 #include "main/lists.h"
@@ -1164,12 +1166,31 @@ int xml_parse_settings_file(char *file_name)
  *   void
  */
 
-void xml_save_settings_doc(char *file_name)
+void xml_save_settings_doc(char *name)
 {
-	//const xmlChar *file;
+	int retval;
+	struct stat buf;
+	char *backup_name = g_strdup_printf("%s.SAVE", name);
 
-	//file = (const xmlChar *) file_name;
-	xmlSaveFormatFile(file_name, xml_settings_doc,1);
+	/* preserve a good backup if possible. */
+	unlink(backup_name);
+	rename(name, backup_name);
+	g_free(backup_name);
+
+	/* save the new one. */
+	xmlSaveFormatFile(name, xml_settings_doc,1);
+
+	/* did it save properly? */
+	if (((retval = stat(name, &buf)) < 0) ||
+	    ((retval == 0) && (buf.st_size == 0))) {
+		char *msg = g_strdup_printf(_("Save of settings failed! stat %d, size %d\n%s"),
+					    retval, buf.st_size,
+					    _("Attempting to revert to previous save."));
+		unlink(name);
+		rename(backup_name, name);
+		gui_generic_warning(msg);
+		g_free(msg);
+	}
 }
 
 
