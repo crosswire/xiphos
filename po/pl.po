@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-07 12:54+0000\n"
+"POT-Creation-Date: 2010-03-20 17:10+0000\n"
 "PO-Revision-Date: 2010-01-15 23:55+0000\n"
 "Last-Translator: Dmitrijs Ledkovs <dmitrij.ledkov@gmail.com>\n"
 "Language-Team: Polish <pl@li.org>\n"
@@ -139,15 +139,15 @@ msgstr "Jeśli nie zapiszesz, zmiany zostaną trwale utracone."
 msgid "File"
 msgstr "Plik"
 
-#: ../src/editor/slib-editor.c:1360
+#: ../src/editor/slib-editor.c:1358
 msgid "StudyPad"
 msgstr "StudyPad"
 
-#: ../src/editor/slib-editor.c:1374
+#: ../src/editor/slib-editor.c:1372
 msgid "Note Editor"
 msgstr "Edytor notek"
 
-#: ../src/editor/slib-editor.c:1388
+#: ../src/editor/slib-editor.c:1386
 msgid "Prayer List/Journal Editor"
 msgstr "Lista modlitw/Edytor dziennika"
 
@@ -329,7 +329,7 @@ msgstr "Etykieta: "
 msgid "Search result: %s"
 msgstr "Wynik wyszukiwania: %s"
 
-#: ../src/gnome2/bookmarks_treeview.c:948 ../src/gnome2/sidebar.c:1385
+#: ../src/gnome2/bookmarks_treeview.c:948 ../src/gnome2/sidebar.c:1377
 msgid "Bookmarks"
 msgstr "Zakładki"
 
@@ -358,7 +358,7 @@ msgid "Close _without Saving"
 msgstr "Zamknij _bez zapisywania"
 
 #: ../src/gnome2/export_bookmarks.c:189 ../src/gnome2/export_bookmarks.c:248
-#: ../src/gnome2/sidebar.c:1401
+#: ../src/gnome2/sidebar.c:1393
 #, c-format
 msgid "Verse List"
 msgstr "Lista Wierszy"
@@ -508,8 +508,8 @@ msgstr "Xiphos - Oprogramowanie do Badania Biblii"
 msgid "Open a new tab"
 msgstr "Otwórz nową kartę"
 
-#: ../src/gnome2/main_window.c:916 ../src/gnome2/sidebar.c:623
-#: ../src/gnome2/sidebar.c:629 ../src/main/sidebar.cc:666
+#: ../src/gnome2/main_window.c:916 ../src/gnome2/sidebar.c:621
+#: ../src/gnome2/sidebar.c:627 ../src/main/sidebar.cc:666
 #: ../src/main/sidebar.cc:1015 ../src/main/sidebar.cc:1016
 #: ../src/main/sidebar.cc:1017
 msgid "Standard View"
@@ -618,7 +618,7 @@ msgstr "Przygotowanie do instalacji"
 msgid "Installing"
 msgstr "Instalacja"
 
-#: ../src/gnome2/mod_mgr.c:178 ../src/gnome2/mod_mgr.c:2958
+#: ../src/gnome2/mod_mgr.c:178 ../src/gnome2/mod_mgr.c:2948
 #: ../ui/module-manager.glade.h:18
 msgid "Install"
 msgstr "Instaluj"
@@ -736,7 +736,7 @@ msgstr "Rozmiar"
 msgid "Description"
 msgstr "Opis"
 
-#: ../src/gnome2/mod_mgr.c:730
+#: ../src/gnome2/mod_mgr.c:728
 #, c-format
 msgid ""
 "`mkdir %s' failed:\n"
@@ -745,33 +745,33 @@ msgstr ""
 "'mkdir %s' zawiódł:\n"
 "%s."
 
-#: ../src/gnome2/mod_mgr.c:753
+#: ../src/gnome2/mod_mgr.c:751
 msgid " archived in: \n"
 msgstr " zarchiwizowano w: \n"
 
-#: ../src/gnome2/mod_mgr.c:809
+#: ../src/gnome2/mod_mgr.c:806
 msgid "Journals and prayer lists cannot be indexed."
 msgstr "Dzienniki i listy modlitw  nie mogą być zaindeksowane."
 
-#: ../src/gnome2/mod_mgr.c:827
+#: ../src/gnome2/mod_mgr.c:824
 #, c-format
 msgid "%s failed"
 msgstr "%s zawiódł"
 
-#: ../src/gnome2/mod_mgr.c:830 ../src/gnome2/mod_mgr.c:1556
+#: ../src/gnome2/mod_mgr.c:827 ../src/gnome2/mod_mgr.c:1550
 msgid "Finished"
 msgstr "Ukończono"
 
-#: ../src/gnome2/mod_mgr.c:997 ../src/gnome2/mod_mgr.c:999
-#: ../src/gnome2/mod_mgr.c:1101 ../src/gnome2/mod_mgr.c:1136
-#: ../src/gnome2/mod_mgr.c:1138 ../src/gnome2/utilities.c:431
-#: ../src/gnome2/utilities.c:496 ../src/gnome2/utilities.c:498
-#: ../src/gnome2/utilities.c:982 ../src/main/sidebar.cc:852
+#: ../src/gnome2/mod_mgr.c:994 ../src/gnome2/mod_mgr.c:996
+#: ../src/gnome2/mod_mgr.c:1098 ../src/gnome2/mod_mgr.c:1133
+#: ../src/gnome2/mod_mgr.c:1135 ../src/gnome2/utilities.c:453
+#: ../src/gnome2/utilities.c:518 ../src/gnome2/utilities.c:520
+#: ../src/gnome2/utilities.c:1004 ../src/main/sidebar.cc:852
 #: ../src/main/sidebar.cc:924 ../src/main/sidebar.cc:926
 msgid "Unknown"
 msgstr "Nieznane"
 
-#: ../src/gnome2/mod_mgr.c:1295
+#: ../src/gnome2/mod_mgr.c:1292
 #, c-format
 msgid ""
 "Repository:\n"
@@ -780,7 +780,7 @@ msgstr ""
 "Repozytorium:\n"
 "%s"
 
-#: ../src/gnome2/mod_mgr.c:1307
+#: ../src/gnome2/mod_mgr.c:1304
 msgid ""
 "Categorized by\n"
 "Module Type"
@@ -788,44 +788,44 @@ msgstr ""
 "Skategoryzowano ze względu na\n"
 "Typ Modułu"
 
-#: ../src/gnome2/mod_mgr.c:1312 ../src/gnome2/utilities.c:557
+#: ../src/gnome2/mod_mgr.c:1309 ../src/gnome2/utilities.c:579
 #: ../src/main/sidebar.cc:999 ../src/main/sidebar.cc:1001
 msgid "Biblical Texts"
 msgstr "Teksty Biblijne"
 
-#: ../src/gnome2/mod_mgr.c:1316 ../src/gnome2/utilities.c:561
+#: ../src/gnome2/mod_mgr.c:1313 ../src/gnome2/utilities.c:583
 #: ../src/main/sidebar.cc:678 ../src/main/sidebar.cc:1024
 #: ../src/main/sidebar.cc:1026 ../ui/prefs.glade.h:33
 msgid "Commentaries"
 msgstr "Komentarze"
 
-#: ../src/gnome2/mod_mgr.c:1320 ../src/gnome2/utilities.c:565
+#: ../src/gnome2/mod_mgr.c:1317 ../src/gnome2/utilities.c:587
 #: ../src/main/sidebar.cc:1033 ../src/main/sidebar.cc:1035
 msgid "Dictionaries"
 msgstr "Słowniki"
 
-#: ../src/gnome2/mod_mgr.c:1324 ../src/gnome2/utilities.c:569
+#: ../src/gnome2/mod_mgr.c:1321 ../src/gnome2/utilities.c:591
 #: ../src/main/sidebar.cc:1042 ../src/main/sidebar.cc:1044
 msgid "Daily Devotionals"
 msgstr "Codzienne Nabożeństwa"
 
-#: ../src/gnome2/mod_mgr.c:1328 ../src/gnome2/utilities.c:573
+#: ../src/gnome2/mod_mgr.c:1325 ../src/gnome2/utilities.c:595
 #: ../src/main/sidebar.cc:688 ../src/main/sidebar.cc:1051
 #: ../src/main/sidebar.cc:1053
 msgid "General Books"
 msgstr "Księgi Powszechne"
 
-#: ../src/gnome2/mod_mgr.c:1332 ../src/gnome2/utilities.c:577
+#: ../src/gnome2/mod_mgr.c:1329 ../src/gnome2/utilities.c:599
 #: ../src/main/sidebar.cc:1060 ../src/main/sidebar.cc:1062
 msgid "Maps"
 msgstr "Mapy"
 
-#: ../src/gnome2/mod_mgr.c:1336 ../src/gnome2/utilities.c:581
+#: ../src/gnome2/mod_mgr.c:1333 ../src/gnome2/utilities.c:603
 #: ../src/main/sidebar.cc:1069 ../src/main/sidebar.cc:1071
 msgid "Images"
 msgstr "Obrazy"
 
-#: ../src/gnome2/mod_mgr.c:1344
+#: ../src/gnome2/mod_mgr.c:1341
 msgid ""
 "Categorized by\n"
 "Availability"
@@ -833,95 +833,95 @@ msgstr ""
 "Skategoryzowano ze względu na:\n"
 "Dostępność"
 
-#: ../src/gnome2/mod_mgr.c:1349
+#: ../src/gnome2/mod_mgr.c:1346
 msgid "Updates"
 msgstr "Aktualizacje"
 
-#: ../src/gnome2/mod_mgr.c:1353
+#: ../src/gnome2/mod_mgr.c:1350
 msgid "Uninstalled"
 msgstr "Odinstalowano"
 
-#: ../src/gnome2/mod_mgr.c:1357 ../src/gnome2/sidebar.c:639
-#: ../src/gnome2/utilities.c:586 ../src/main/prayerlists.cc:241
+#: ../src/gnome2/mod_mgr.c:1354 ../src/gnome2/sidebar.c:637
+#: ../src/gnome2/utilities.c:608 ../src/main/prayerlists.cc:241
 #: ../src/main/sidebar.cc:1079 ../src/main/sidebar.cc:1081
 msgid "Prayer List/Journal"
 msgstr "Lista modlitw/Dziennik"
 
-#: ../src/gnome2/mod_mgr.c:1539
+#: ../src/gnome2/mod_mgr.c:1534
 msgid "Refreshing from remote source"
 msgstr "Odświeżanie ze zdalnego źródła"
 
-#: ../src/gnome2/mod_mgr.c:1550
+#: ../src/gnome2/mod_mgr.c:1544
 msgid "Remote source not found"
 msgstr "Zdalne źródło nie znalezione"
 
-#: ../src/gnome2/mod_mgr.c:1664
+#: ../src/gnome2/mod_mgr.c:1658
 msgid "Configure"
 msgstr "Konfiguruj"
 
-#: ../src/gnome2/mod_mgr.c:1695
+#: ../src/gnome2/mod_mgr.c:1689
 msgid "Type"
 msgstr "Typ"
 
-#: ../src/gnome2/mod_mgr.c:1702
+#: ../src/gnome2/mod_mgr.c:1696
 msgid "Caption"
 msgstr "Nagłówek"
 
-#: ../src/gnome2/mod_mgr.c:1710
+#: ../src/gnome2/mod_mgr.c:1704
 msgid "Source"
 msgstr "Źródło"
 
-#: ../src/gnome2/mod_mgr.c:1718
+#: ../src/gnome2/mod_mgr.c:1712
 msgid "Directory"
 msgstr "Katalog"
 
-#: ../src/gnome2/mod_mgr.c:1726
+#: ../src/gnome2/mod_mgr.c:1720
 msgid "User"
 msgstr "Użytkownik"
 
-#: ../src/gnome2/mod_mgr.c:1734
+#: ../src/gnome2/mod_mgr.c:1728
 msgid "Password"
 msgstr "Hasło"
 
-#: ../src/gnome2/mod_mgr.c:1742
+#: ../src/gnome2/mod_mgr.c:1736
 msgid "UID"
 msgstr "UID"
 
-#: ../src/gnome2/mod_mgr.c:1759
+#: ../src/gnome2/mod_mgr.c:1753
 msgid "Module Sources"
 msgstr "Źródła Modułów"
 
-#: ../src/gnome2/mod_mgr.c:1762
+#: ../src/gnome2/mod_mgr.c:1756
 msgid "Add/Remove"
 msgstr "Dodaj/Usuń"
 
-#: ../src/gnome2/mod_mgr.c:1764
+#: ../src/gnome2/mod_mgr.c:1758
 msgid "Choose"
 msgstr "Wybierz"
 
-#: ../src/gnome2/mod_mgr.c:1768 ../src/gnome2/preferences_dialog.c:1794
-#: ../src/gnome2/sidebar.c:1409
+#: ../src/gnome2/mod_mgr.c:1762 ../src/gnome2/preferences_dialog.c:1794
+#: ../src/gnome2/sidebar.c:1401
 msgid "Modules"
 msgstr "Moduły"
 
-#: ../src/gnome2/mod_mgr.c:1770
+#: ../src/gnome2/mod_mgr.c:1764
 msgid "Install/Update"
 msgstr "Zainstaluj/Aktualizuj"
 
-#: ../src/gnome2/mod_mgr.c:1772
+#: ../src/gnome2/mod_mgr.c:1766
 msgid "Maintenance"
 msgstr "Konserwacja"
 
-#: ../src/gnome2/mod_mgr.c:1993
+#: ../src/gnome2/mod_mgr.c:1987
 msgid "Please Refresh"
 msgstr "Proszę odświeżyć"
 
-#: ../src/gnome2/mod_mgr.c:1994
+#: ../src/gnome2/mod_mgr.c:1988
 msgid "Your module list is not up to date!"
 msgstr "Twoja lista modułów nie jest aktualna!"
 
 #. Zero Bibles is just not workable in Xiphos.
-#: ../src/gnome2/mod_mgr.c:2276
+#: ../src/gnome2/mod_mgr.c:2269
 msgid ""
 "You have uninstalled your last Bible.\n"
 "Xiphos requires at least one."
@@ -929,7 +929,7 @@ msgstr ""
 "Usunąłeś poprzednią Biblię.\n"
 "Xiphos wymaga co najmniej jednej."
 
-#: ../src/gnome2/mod_mgr.c:2282
+#: ../src/gnome2/mod_mgr.c:2275
 msgid ""
 "There are still no Bibles installed.\n"
 "Xiphos cannot continue without one."
@@ -937,52 +937,52 @@ msgstr ""
 "Nadal brak zainstalowanej Biblii.\n"
 "Xiphos nie może bez niej kontynuować."
 
-#: ../src/gnome2/mod_mgr.c:2347
+#: ../src/gnome2/mod_mgr.c:2340
 msgid "Standard remote sources have been loaded."
 msgstr "Stanrardowe źródła zdalne zostały załadowane."
 
-#: ../src/gnome2/mod_mgr.c:2353
+#: ../src/gnome2/mod_mgr.c:2346
 msgid "Could not load standard sources from CrossWire."
 msgstr "Nie można było załadować standardowych źródeł z CrossWire."
 
-#: ../src/gnome2/mod_mgr.c:2504 ../src/gnome2/mod_mgr.c:2753
+#: ../src/gnome2/mod_mgr.c:2495 ../src/gnome2/mod_mgr.c:2743
 msgid "Remove the selected source"
 msgstr "Usuń wybrane źródło"
 
-#: ../src/gnome2/mod_mgr.c:2564
+#: ../src/gnome2/mod_mgr.c:2555
 msgid "Enter a remote source"
 msgstr "Wprowadź źródło zdalne"
 
-#: ../src/gnome2/mod_mgr.c:2568
+#: ../src/gnome2/mod_mgr.c:2559
 msgid "Caption:"
 msgstr "Podpis:"
 
-#: ../src/gnome2/mod_mgr.c:2569
+#: ../src/gnome2/mod_mgr.c:2560
 msgid "Type:"
 msgstr "Typ:"
 
-#: ../src/gnome2/mod_mgr.c:2570
+#: ../src/gnome2/mod_mgr.c:2561
 msgid "Host:"
 msgstr "Host:"
 
-#: ../src/gnome2/mod_mgr.c:2571
+#: ../src/gnome2/mod_mgr.c:2562
 msgid "Directory:"
 msgstr "Katalog:"
 
-#: ../src/gnome2/mod_mgr.c:2573
+#: ../src/gnome2/mod_mgr.c:2564
 msgid "User (optional):"
 msgstr "Użytkownik (opcjonalnie):"
 
-#: ../src/gnome2/mod_mgr.c:2574
+#: ../src/gnome2/mod_mgr.c:2565
 msgid "Password (optional):"
 msgstr "Hasło (opcjonalne):"
 
 #. this can happen at most once
-#: ../src/gnome2/mod_mgr.c:2602
+#: ../src/gnome2/mod_mgr.c:2593
 msgid "A source by that name already exists."
 msgstr "Źródło o tej nazwie już istnieje."
 
-#: ../src/gnome2/mod_mgr.c:2750
+#: ../src/gnome2/mod_mgr.c:2740
 msgid "Delete a remote source"
 msgstr "Usuń zdalne źródło"
 
@@ -1001,7 +1001,7 @@ msgstr "Usuń zdalne źródło"
 #. * Return value
 #. *   void
 #.
-#: ../src/gnome2/mod_mgr.c:3236
+#: ../src/gnome2/mod_mgr.c:3226
 msgid ""
 "<b>Welcome to the Module Manager.</b>\n"
 "\n"
@@ -1072,7 +1072,8 @@ msgstr "Idź do wewnątrz, do pierwszej pod-sekcji"
 #: ../src/gnome2/navbar_versekey_dialog.c:860
 #: ../src/gnome2/navbar_versekey_editor.c:868
 #: ../src/gnome2/navbar_versekey_parallel.c:806
-msgid "Synchronize this window from main window"
+#, fuzzy
+msgid "Synchronize this window's scrolling with the main window"
 msgstr "Synchronizuj to okno z głównego okna"
 
 #: ../src/gnome2/parallel_dialog.c:328 ../src/gnome2/preferences_dialog.c:1800
@@ -1112,8 +1113,8 @@ msgstr "Zmień równoległe 4"
 msgid "Change parallel 5"
 msgstr "Zmień równoległe 5"
 
-#: ../src/gnome2/parallel_view.c:469 ../src/gnome2/sidebar.c:622
-#: ../src/gnome2/sidebar.c:628 ../src/gnome2/tabbed_browser.c:258
+#: ../src/gnome2/parallel_view.c:469 ../src/gnome2/sidebar.c:620
+#: ../src/gnome2/sidebar.c:626 ../src/gnome2/tabbed_browser.c:257
 #: ../src/main/sidebar.cc:646 ../src/main/sidebar.cc:1007
 #: ../src/main/sidebar.cc:1008 ../src/main/sidebar.cc:1009
 msgid "Parallel View"
@@ -1192,23 +1193,23 @@ msgstr " Moduł"
 msgid "found in "
 msgstr "znaleniono w "
 
-#: ../src/gnome2/search_dialog.c:527
+#: ../src/gnome2/search_dialog.c:525
 msgid "Clear List?"
 msgstr "Wyczyścić listę?"
 
-#: ../src/gnome2/search_dialog.c:528
+#: ../src/gnome2/search_dialog.c:526
 msgid "Are you sure you want to clear the module list?"
 msgstr "Czy jesteś pewny, że chcesz wyczyścić listę modułów?"
 
-#: ../src/gnome2/search_dialog.c:708
+#: ../src/gnome2/search_dialog.c:706
 msgid "The last module list may not be deleted"
 msgstr "Ostatni moduł nie może zostać usunięty."
 
-#: ../src/gnome2/search_dialog.c:726
+#: ../src/gnome2/search_dialog.c:724
 msgid "Delete list?"
 msgstr "Usunąć listę?"
 
-#: ../src/gnome2/search_dialog.c:727
+#: ../src/gnome2/search_dialog.c:725
 msgid "Are you sure you want to delete:"
 msgstr "Czy jesteś pewien, że chcesz usunąć:"
 
@@ -1276,7 +1277,7 @@ msgstr "Mniejszy"
 msgid "Upper"
 msgstr "Wyżej"
 
-#: ../src/gnome2/sidebar.c:1393
+#: ../src/gnome2/sidebar.c:1385
 msgid "Search"
 msgstr "Szukaj"
 
@@ -1379,7 +1380,7 @@ msgstr ""
 msgid "Morphology"
 msgstr "Morfologia"
 
-#: ../src/main/module_dialogs.cc:1081 ../src/main/url.cc:526
+#: ../src/main/module_dialogs.cc:1083 ../src/main/url.cc:526
 msgid "Back to "
 msgstr "Powrót do "
 
@@ -1793,7 +1794,7 @@ msgid ""
 "4. Click `install'.\n"
 "Close the Module Manager when you are done.\n"
 "\n"
-"Warning: If you live in a country with persecution, use with care.\n"
+"Warning: If you live in a persecuted country, use with care.\n"
 "\n"
 "May Xiphos invoke the Module Manager so that you may install a Bible?"
 msgstr ""
@@ -1814,11 +1815,11 @@ msgstr ""
 "\n"
 "Czy Xiphos może wywołać Menedżer Modułów, byś mógł zainstalować Biblię?"
 
-#: ../src/main/settings.c:105
+#: ../src/main/settings.c:107
 msgid "$HOME is not set!"
 msgstr "$HOME nie jest ustawiony!"
 
-#: ../src/main/settings.c:120
+#: ../src/main/settings.c:122
 #, c-format
 msgid ""
 "Xiphos can not create  .xiphos:\n"
@@ -1831,12 +1832,22 @@ msgstr ""
 "\n"
 "Xiphos nie może kontynuować."
 
-#: ../src/main/settings.c:133 ../src/main/settings.c:142
-#: ../src/main/settings.c:151
+#: ../src/main/settings.c:135 ../src/main/settings.c:144
+#: ../src/main/settings.c:153
 msgid "can not create "
 msgstr "nie można utworzyć "
 
-#: ../src/main/settings.c:194
+#: ../src/main/settings.c:183
+msgid ""
+"Empty settings file -- backup recovery attempted.\n"
+"Some information may have been lost."
+msgstr ""
+
+#: ../src/main/settings.c:185
+msgid "Empty settings file -- no backup?!? Information lost!"
+msgstr ""
+
+#: ../src/main/settings.c:214
 msgid ""
 "There are still no Bibles installed.\n"
 "Evidently, you declined to install any.\n"
@@ -1852,11 +1863,11 @@ msgstr ""
 "Xiphos nie może kontynuować,\n"
 "i teraz zakończy działanie."
 
-#: ../src/main/settings.c:198
+#: ../src/main/settings.c:218
 msgid "Bible module installation complete."
 msgstr "Instalacja modułu Biblii zakończona."
 
-#: ../src/main/settings.c:201
+#: ../src/main/settings.c:221
 msgid ""
 "Without any Bible modules to display,\n"
 "Xiphos cannot proceed,\n"
@@ -1940,78 +1951,89 @@ msgstr "Błąd Wyświetlania:\n"
 msgid "Show %s in main window"
 msgstr "Pokaż %s w głównym oknie"
 
-#: ../src/main/xml.c:80 ../src/main/xml.c:464
+#: ../src/main/xml.c:82 ../src/main/xml.c:466
 #, c-format
 msgid "Document not created successfully. \n"
 msgstr "Dokument nie utworzony pomyślnie. \n"
 
-#: ../src/main/xml.c:89
+#: ../src/main/xml.c:91
 msgid "Personal"
 msgstr "Osobiste"
 
-#: ../src/main/xml.c:90
+#: ../src/main/xml.c:92
 msgid "What must I do to be saved?"
 msgstr "Co muszę zrobić, by być uratowanym?"
 
-#: ../src/main/xml.c:92 ../src/main/xml.c:93
+#: ../src/main/xml.c:94 ../src/main/xml.c:95
 msgid "Acts 16:31"
 msgstr "Dziejów 16:31"
 
-#: ../src/main/xml.c:97 ../src/main/xml.c:98
+#: ../src/main/xml.c:99 ../src/main/xml.c:100
 msgid "Eph 2:8,9"
 msgstr "Efezjan 2:8,9"
 
-#: ../src/main/xml.c:102 ../src/main/xml.c:103
+#: ../src/main/xml.c:104 ../src/main/xml.c:105
 msgid "Romans 1:16"
 msgstr "Rzymian 1:16"
 
-#: ../src/main/xml.c:106
+#: ../src/main/xml.c:108
 msgid "What is the Gospel?"
 msgstr "Czym jest Gospel?"
 
-#: ../src/main/xml.c:108 ../src/main/xml.c:109
+#: ../src/main/xml.c:110 ../src/main/xml.c:111
 msgid "1 Cor 15:1-4"
 msgstr "1 Koryntian 15:1-4"
 
-#: ../src/main/xml.c:413 ../src/main/xml.c:1144
+#: ../src/main/xml.c:415 ../src/main/xml.c:1146
 #, c-format
 msgid "Document not parsed successfully. \n"
 msgstr "Dokument nie przeanalizowany pomyślnie. \n"
 
-#: ../src/main/xml.c:419 ../src/main/xml.c:747 ../src/main/xml.c:1025
-#: ../src/main/xml.c:1204
+#: ../src/main/xml.c:421 ../src/main/xml.c:749 ../src/main/xml.c:1027
+#: ../src/main/xml.c:1225
 #, c-format
 msgid "empty document \n"
 msgstr "pusty dokument \n"
 
-#: ../src/main/xml.c:425
+#: ../src/main/xml.c:427
 #, c-format
 msgid "wrong type, root node != SwordBookmarks\n"
 msgstr "zły typ, węzeł root !=ZakładkiSwork\n"
 
-#: ../src/main/xml.c:476
+#: ../src/main/xml.c:478
 msgid "Old Testament"
 msgstr "Stary Testament"
 
-#: ../src/main/xml.c:477
+#: ../src/main/xml.c:479
 msgid "Gen - Mal"
 msgstr "Gen - Mal"
 
-#: ../src/main/xml.c:482
+#: ../src/main/xml.c:484
 msgid "New Testament"
 msgstr "Nowy Testament"
 
-#: ../src/main/xml.c:483
+#: ../src/main/xml.c:485
 msgid "Mat - Rev"
 msgstr ""
 
-#: ../src/main/xml.c:489
+#: ../src/main/xml.c:491
 msgid "Sample Module List"
 msgstr "Lista Modułów Próbkowych"
 
-#: ../src/main/xml.c:753 ../src/main/xml.c:1031
+#: ../src/main/xml.c:755 ../src/main/xml.c:1033
 #, c-format
 msgid "wrong type, root node != %s\n"
+msgstr ""
+
+#: ../src/main/xml.c:1186
+#, c-format
+msgid ""
+"Save of settings failed! stat %d, size %d\n"
+"%s"
+msgstr ""
+
+#: ../src/main/xml.c:1188
+msgid "Attempting to revert to previous save."
 msgstr ""
 
 #: ../ui/bookmarks.glade.h:1
@@ -2282,16 +2304,15 @@ msgstr "<b>Sword</b>"
 
 #: ../ui/module-manager.glade.h:7
 #, fuzzy
-msgid ""
-"<b>WARNING:</b> If you live in a country with persecution, use with care."
+msgid "<b>WARNING:</b> If you live in a persecuted country use with care."
 msgstr ""
 "<b>OSTRZEŻENIE:</b> Jeśli żyjesz w prześladowanym kraju, używaj ostrożnie."
 
 #: ../ui/module-manager.glade.h:8
 #, fuzzy
 msgid ""
-"<b>Warning:</b> If you live in a country with persecution and do not wish to "
-"risk detection, you should NOT use the remote installation feature! "
+"<b>Warning:</b> If you live in a persecuted country and do not wish to risk "
+"detection you should NOT use  the remote installation feature! "
 msgstr ""
 "<b>Ostrzeżenie:</b> Jeśli żyjesz w prześladowanym kraju, i nie chesz "
 "ryzykować wykrycia, NIE powinieneś używać opcji zdalnej instalacji! "
