@@ -20,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 3.1.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-20 17:10+0000\n"
-"PO-Revision-Date: 2010-03-17 13:33+0100\n"
+"POT-Creation-Date: 2010-03-20 19:40+0100\n"
+"PO-Revision-Date: 2010-03-20 19:40+0100\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: emacs + po-mode <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -1857,10 +1857,13 @@ msgid ""
 "Empty settings file -- backup recovery attempted.\n"
 "Some information may have been lost."
 msgstr ""
+"Fichier de configuration vide -- Essai de restauration.\n"
+"Des informations ont pu être perdues."
 
 #: ../src/main/settings.c:185
 msgid "Empty settings file -- no backup?!? Information lost!"
 msgstr ""
+"Fichier de configuration vide -- pas de sauvegarde?!? Informations perdues!"
 
 #: ../src/main/settings.c:214
 msgid ""
@@ -2048,10 +2051,12 @@ msgid ""
 "Save of settings failed! stat %d, size %d\n"
 "%s"
 msgstr ""
+"La sauvegarde de la configuration a échouée! stat %d, taille %d\n"
+"%s"
 
 #: ../src/main/xml.c:1188
 msgid "Attempting to revert to previous save."
-msgstr ""
+msgstr "Tentative de retour à la sauvegarde précédente."
 
 #: ../ui/bookmarks.glade.h:1
 msgid "Add Bookmark"
