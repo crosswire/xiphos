@@ -185,7 +185,7 @@ def exec_htmlhelpc(self):
     lst = [lst]
     ret = self.exec_command(*lst, cwd=cwd)
 
-    return ret
+    return not ret
 
 
 Task.simple_task_type('xml2po', '${XML2PO} -o ${TGT} ${XML2PO_FLAGS} ${SRC}', color='BLUE')
