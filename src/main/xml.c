@@ -1184,7 +1184,7 @@ void xml_save_settings_doc(char *name)
 	if (((retval = stat(name, &buf)) < 0) ||
 	    ((retval == 0) && (buf.st_size == 0))) {
 		char *msg = g_strdup_printf(_("Save of settings failed! stat %d, size %d\n%s"),
-					    retval, buf.st_size,
+					    retval, (int)buf.st_size,
 					    _("Attempting to revert to previous save."));
 		unlink(name);
 		rename(backup_name, name);
