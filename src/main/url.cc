@@ -776,7 +776,8 @@ gint sword_uri(const gchar * url, gboolean clicked)
 		tmpkey = work_buf[MODULE];
 	} else
 		tmpkey = work_buf[KEY];
-	if ((settings.special_anchor = strchr(tmpkey, '#')))
+	if ((settings.special_anchor = strchr(tmpkey, '#')) ||
+	    (settings.special_anchor = strchr(tmpkey, '!')))
 		*(settings.special_anchor++) = '\0';
 
 	GS_message(("work_buf: %s, %s",
