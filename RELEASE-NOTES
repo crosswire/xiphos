@@ -4,7 +4,7 @@ XIPHOS RELEASE NOTES
 ____________________
 
 Release 3.1.3
-20 Mar 2010
+22 Mar 2010
 
 This is an urgent bugfix release, largely due to compatibility needs
 with regard to library packages that have been, or are soon to be,
@@ -45,6 +45,7 @@ Bug reports addressed since 3.1.2:
 2956797  Xiphos crashes when trying to edit
 2958644  Nautilus?  -  Xiphos doesn't show bible text
 2936311  Add Link action not able to use bible:// for verse links
+2961704  crash detected in xiphos-3.1.2 module manager
 2972686  Arabic is not right-aligned
 
 Feature requests closed:
