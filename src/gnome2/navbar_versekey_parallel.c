@@ -280,13 +280,23 @@ static void on_entry_activate(GtkEntry * entry, gpointer user_data)
 	const gchar *buf = gtk_entry_get_text(entry);
 	if (buf == NULL)
 		return;
+	/* handle potential subsection anchor */
+	if ((settings.special_anchor = strchr(buf, '#')) ||	/* thml */
+	    (settings.special_anchor = strchr(buf, '!')))	/* osisref */
+		*settings.special_anchor = '\0';
 	settings.cvparallel = (gchar*)main_get_valid_key((gchar*)buf);
+	if (settings.special_anchor)
+		*settings.special_anchor = '#';			/* put it back. */
 	if (settings.cvparallel == NULL)
 		return;
 	main_navbar_versekey_set(navbar_parallel, settings.cvparallel);
 	main_update_parallel_page_detached();
 	if (sync_on) {
-		const gchar *main_window_url = g_strdup_printf("sword:///%s", settings.cvparallel);
+		const gchar *main_window_url = g_strdup_printf("sword:///%s%s",
+							       settings.cvparallel,
+							       (settings.special_anchor
+								? settings.special_anchor
+								: ""));
 		sword_uri(main_window_url, TRUE);
 		g_free((gchar*)main_window_url);
 	}
