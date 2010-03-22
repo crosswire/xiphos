@@ -1436,6 +1436,10 @@ gint main_dialogs_url_handler(DIALOG_DATA * t, const gchar * url, gboolean click
 
 	if (strstr(url, "sword://") ||
 	    strstr(url, "bible://")) {
+		if ((settings.special_anchor = strchr((gchar*)url, '#')) ||	/* thml */
+		    (settings.special_anchor = strchr((gchar*)url, '!')))	/* osisref */
+			*(settings.special_anchor++) = '\0';
+
 		GString *url_clean = hex_decode(url);
 		GS_message(("url_clean = %s", url_clean->str));
 
