@@ -16,7 +16,7 @@ import waffles.misc
 import waffles.gnome as gnome
 
 # the following two variables are used by the target "waf dist"
-VERSION='3.1.2'
+VERSION='3.1.3'
 APPNAME='xiphos'
 PACKAGE='xiphos'
 
