@@ -409,10 +409,18 @@ static void on_entry_activate(GtkEntry * entry, EDITOR * editor)
 	const gchar *buf = gtk_entry_get_text(entry);
 	if (buf == NULL)
 		return;
+	/* handle potential subsection anchor */
+	if ((settings.special_anchor = strchr(buf, '#')) ||	/* thml */
+	    (settings.special_anchor = strchr(buf, '!')))	/* osisref */
+		*settings.special_anchor = '\0';
 	const gchar *gkey = main_get_valid_key((gchar*)buf);
+	if (settings.special_anchor)
+		*settings.special_anchor = '#';			/* put it back. */
 	if (gkey == NULL)
 		return;
-	gchar *url = g_strdup_printf("sword:///%s", gkey);
+	gchar *url = g_strdup_printf("sword:///%s%s", gkey, (settings.special_anchor
+							     ? settings.special_anchor
+							     : ""));
 
 	editor->navbar.module_name = g_string_assign(editor->navbar.module_name,settings.MainWindowModule);
 	main_navbar_versekey_set(editor->navbar, gkey);

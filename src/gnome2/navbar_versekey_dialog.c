@@ -425,10 +425,18 @@ static void on_entry_activate(GtkEntry * entry, DIALOG_DATA *dialog)
 	const gchar *buf = gtk_entry_get_text(entry);
 	if (buf == NULL)
 		return;
+	/* handle potential subsection anchor */
+	if ((settings.special_anchor = strchr(buf, '#')) ||	/* thml */
+	    (settings.special_anchor = strchr(buf, '!')))	/* osisref */
+		*settings.special_anchor = '\0';
 	const gchar *gkey = main_get_valid_key((gchar*)buf);
+	if (settings.special_anchor)
+		*settings.special_anchor = '#';			/* put it back. */
 	if (gkey == NULL)
 		return;
-	gchar *url = g_strdup_printf("sword:///%s", gkey);
+	gchar *url = g_strdup_printf("sword:///%s%s", gkey, (settings.special_anchor
+							     ? settings.special_anchor
+							     : ""));
 
 	dialog->navbar.module_name = g_string_assign(dialog->navbar.module_name, dialog->mod_name);
 	main_navbar_versekey_set(dialog->navbar, gkey);
