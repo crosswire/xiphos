@@ -23,6 +23,7 @@
 #include <config.h>
 #endif
 
+#include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <libxml/parser.h>
@@ -31,6 +32,7 @@
 #include "main/settings.h"
 #include "main/sword.h"
 #include "main/xml.h"
+#include "gui/dialog.h"
 
 struct _bookmark_data {
 	gchar *caption;
