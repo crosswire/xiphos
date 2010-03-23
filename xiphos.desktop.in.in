@@ -6,5 +6,5 @@ TryExec=xiphos
 Icon=xiphos
 Terminal=false
 Type=Application
-Categories=Education
+Categories=Education;
 StartupNotify=true
