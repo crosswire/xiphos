@@ -286,6 +286,11 @@ PrintListener::SetPrintSettings (GeckoPrintInfo *settings,
       break;
       /* FIXME: we need some custom ranges here, "Selection" and
        * "Focused Frame" */
+
+    /* keep compiler happy about unhandled cases */
+    case GTK_PRINT_PAGES_SELECTION:
+      abort();
+      break;
     }
   } else {
     target->SetPrintOptions (nsIPrintSettings::kPrintEvenPages, PR_TRUE);

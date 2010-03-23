@@ -601,7 +601,6 @@ static gint show_ref(const gchar * module, const gchar * list, gboolean clicked)
 static int show_module_and_key(const char * module, const char * key,
 					const char * stype, gboolean clicked)
 {
-	gchar *tmpkey = NULL;
 	gint mod_type;
 
 	if (module && (strlen((char*)module) < 3) &&
