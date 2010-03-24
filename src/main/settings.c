@@ -115,7 +115,7 @@ int settings_init(int argc, char **argv, int new_configs, int new_bookmarks)
 	sprintf(settings.gSwordDir, "%s/%s", settings.homedir, GS_DIR);
 
 	/* if gSwordDir does not exist, create it. */
-	if (access(settings.gSwordDir, F_OK) == -1) {
+	if (g_access(settings.gSwordDir, F_OK) == -1) {
 		if ((Mkdir(settings.gSwordDir, S_IRWXU)) != 0) {
 			char msg[300];
 			gui_init(argc, argv);
@@ -129,7 +129,7 @@ int settings_init(int argc, char **argv, int new_configs, int new_bookmarks)
 
 	/* if .sword does not exist create it */
 	sword_dir = g_strdup_printf("%s/%s", settings.homedir, DOTSWORD);
-	if (access(sword_dir, F_OK) == -1) {
+	if (g_access(sword_dir, F_OK) == -1) {
 		if ((Mkdir(sword_dir, S_IRWXU)) != 0) {
 			gui_init(argc, argv);
 			gui_generic_warning(_("can not create " DOTSWORD));
@@ -138,7 +138,7 @@ int settings_init(int argc, char **argv, int new_configs, int new_bookmarks)
 	g_free(sword_dir);
 	/* if .sword/mods.d does not exist create it */
 	sword_dir = g_strdup_printf("%s/%s", settings.homedir, DOTSWORD "/mods.d");
-	if (access(sword_dir, F_OK) == -1) {
+	if (g_access(sword_dir, F_OK) == -1) {
 		if ((Mkdir(sword_dir, S_IRWXU)) != 0) {
 			gui_init(argc, argv);
 			gui_generic_warning(_("can not create " DOTSWORD "/mods.d"));
@@ -147,7 +147,7 @@ int settings_init(int argc, char **argv, int new_configs, int new_bookmarks)
 	g_free(sword_dir);
 	/* if .sword/modules does not exist create it */
 	sword_dir = g_strdup_printf("%s/%s", settings.homedir, DOTSWORD "/modules");
-	if (access(sword_dir, F_OK) == -1) {
+	if (g_access(sword_dir, F_OK) == -1) {
 		if ((Mkdir(sword_dir, S_IRWXU)) != 0) {
 			gui_init(argc, argv);
 			gui_generic_warning(_("can not create " DOTSWORD "/modules"));
@@ -188,7 +188,7 @@ int settings_init(int argc, char **argv, int new_configs, int new_bookmarks)
 
 	/* if settings.xml does not exist create it */
 	if (buf_says_empty ||
-	    (access(settings.fnconfigure, F_OK) == -1) ||
+	    (g_access(settings.fnconfigure, F_OK) == -1) ||
 	    new_configs) {
 		/* must be first run */
 		GS_print((buf_says_empty
@@ -230,7 +230,7 @@ int settings_init(int argc, char **argv, int new_configs, int new_bookmarks)
 		"template.pad");
 
 	/* if template.pad does not exist create it */
-	if ((access(tmp, F_OK) == -1)) {
+	if ((g_access(tmp, F_OK) == -1)) {
 		g_file_set_contents(tmp, " ", strlen(" "), NULL);
 	}
 
@@ -242,7 +242,7 @@ int settings_init(int argc, char **argv, int new_configs, int new_bookmarks)
 		"template.pad");
 
 	/* if template.pad does not exist create it */
-	if ((access(tmp, F_OK) == -1)) {
+	if ((g_access(tmp, F_OK) == -1)) {
 		g_file_set_contents(tmp, " ", strlen(" "), NULL);
 	}
 
@@ -308,7 +308,7 @@ int init_bookmarks(int new_bookmarks)
 	sprintf(settings.swbmDir, "%s/%s", settings.gSwordDir, "bookmarks");
 
 	/* if .xiphos-2.0/bookmarks does not exist create it */
-	if (access(settings.swbmDir, F_OK) == -1) {
+	if (g_access(settings.swbmDir, F_OK) == -1) {
 		if ((Mkdir(settings.swbmDir, S_IRWXU)) == -1) {
 			g_warning("can't create bookmarks dir");
 			return 0;
@@ -319,7 +319,7 @@ int init_bookmarks(int new_bookmarks)
 	removed = g_new(char, strlen(settings.swbmDir) +
 				 strlen("/removed") + 2);
 	sprintf(removed, "%s/%s", settings.swbmDir, "removed");
-	if (access(removed, F_OK) == -1) {
+	if (g_access(removed, F_OK) == -1) {
 		if ((Mkdir(removed, S_IRWXU)) == -1) {
 			g_warning("can't create removed dir");
 			//return 0;
@@ -334,7 +334,7 @@ int init_bookmarks(int new_bookmarks)
 			 strlen("/bookmarks.xml") + 2);
 	sprintf(file_buf, "%s/bookmarks.xml", settings.swbmDir);
 
-	if (access(file_buf, F_OK) == 0) {
+	if (g_access(file_buf, F_OK) == 0) {
 		settings.load_xml_bookmarks = TRUE;
 	}
 	g_free(file_buf);
@@ -352,7 +352,7 @@ int init_bookmarks(int new_bookmarks)
 			 2);
 	sprintf(file_buf, "%s/.kde/share/apps/bibletime/bookmarks.xml",
 		settings.homedir);
-	if (access(file_buf, F_OK) == 0) {
+	if (g_access(file_buf, F_OK) == 0) {
 		settings.have_bibletime = TRUE;
 	}
 
