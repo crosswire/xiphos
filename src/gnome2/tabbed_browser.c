@@ -356,16 +356,20 @@ void gui_save_tabs(const gchar *filename)
 	if (NULL == filename)
 		filename = default_tab_filename;
 
-	tabs_dir = g_strdup_printf("%s/tabs/",settings.gSwordDir);
-
-	if (g_access(tabs_dir, F_OK) == -1) {
-		if ((g_mkdir(tabs_dir, S_IRWXU)) == -1) {
-			gui_generic_warning("Can't create tabs dir.");
-			return;
+	if (g_access(filename, F_OK) == 0) {
+		/* we're done, just copy for local use that can be free'd */
+		file = g_strdup(filename);
+	} else {
+		tabs_dir = g_strdup_printf("%s/tabs/",settings.gSwordDir);
+		if (g_access(tabs_dir, F_OK) == -1) {
+			if ((g_mkdir(tabs_dir, S_IRWXU)) == -1) {
+				gui_generic_warning(_("Can't create tabs dir."));
+				return;
+			}
 		}
+		file = g_strdup_printf("%s%s",tabs_dir,filename);
+		g_free(tabs_dir);
 	}
-	file = g_strdup_printf("%s%s",tabs_dir,filename);
-	g_free(tabs_dir);
 	//xml_filename = (const xmlChar *) file;
 
 	xml_doc = xmlNewDoc((const xmlChar *) "1.0");
@@ -544,14 +548,18 @@ void gui_load_tabs(const gchar *filename)
 	}
 	else
 	{
-		tabs_dir = g_strdup_printf("%s/tabs/",settings.gSwordDir);
-		if (g_access(tabs_dir, F_OK) == -1) {
-			GS_message(("Creating new tabs directory\n"));
-			gui_save_tabs (filename);
-			//return;
+		if (g_access(filename, F_OK) == 0) {
+			/* we're done, just copy for local use that can be free'd */
+			file = g_strdup(filename);
+		} else {
+			tabs_dir = g_strdup_printf("%s/tabs/",settings.gSwordDir);
+			if (g_access(tabs_dir, F_OK) == -1) {
+				GS_message(("Creating new tabs directory\n"));
+				gui_save_tabs(filename);
+			}
+			file = g_strdup_printf("%s%s",tabs_dir,filename);
+			g_free(tabs_dir);
 		}
-		file = g_strdup_printf("%s%s",tabs_dir,filename);
-		g_free(tabs_dir);
 
 	    	/* we need this for first time non tabbed browsing */
 	    	if (!settings.browsing && g_access(file, F_OK) == -1) {
@@ -1456,7 +1464,7 @@ void on_notebook_main_new_tab_clicked(GtkButton *button, gpointer user_data)
  * Return value
  *   void
  */
-void gui_notebook_main_setup(int tabs)
+void gui_notebook_main_setup(int tabs, const char *tabsfile)
 {
 	if (stop_refresh)
 		return;
@@ -1465,7 +1473,7 @@ void gui_notebook_main_setup(int tabs)
 	cur_passage_tab = NULL;
 	passage_list = NULL;
 
-	gui_load_tabs(tabs ? default_tab_filename : no_tab_filename);
+	gui_load_tabs(tabsfile ? tabsfile : (tabs ? default_tab_filename : no_tab_filename));
 
 	g_signal_connect(GTK_OBJECT(widgets.notebook_main),
 			   "switch_page",
