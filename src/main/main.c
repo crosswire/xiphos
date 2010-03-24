@@ -24,6 +24,8 @@
 #endif
 
 
+#include <fcntl.h>
+#include <unistd.h>
 #include <string.h>
 #include <glib.h>
 
@@ -72,6 +74,7 @@ int main(int argc, char *argv[])
 	int newconfigs = FALSE;
 	int newbookmarks = FALSE;
 	int have_sword_url = FALSE;
+	int have_tab_list = FALSE;
 	gint base_step = 0; //needed for splash
 	GTimer *total;
 	double d;
@@ -135,9 +138,13 @@ int main(int argc, char *argv[])
 			newconfigs = TRUE;
 			newbookmarks = TRUE;
 		}
-		/*
-		 * this arg is a sword uri
-		 */
+
+		/* this arg is a tab list */
+		if (g_access(argv[1], F_OK) == 0) {
+			have_tab_list = TRUE;
+		}
+
+		/* this arg is a sword uri */
 		if ((!strncmp(argv[1], "sword:/", 7)) ||
 		    (!strncmp(argv[1], "bible:/", 7)) ||
 		    (strstr(argv[1], "studypad"))) {
@@ -181,7 +188,7 @@ int main(int argc, char *argv[])
 	/* need to get rid of wrongly-formatted annotation labels. */
 	xml_convert_to_osisref();
 
-	frontend_display();
+	frontend_display(have_tab_list ? argv[1] : NULL);
 
 	if (have_sword_url) {
 		if (!strncmp(argv[1], "sword:/", 7)) {
@@ -195,8 +202,6 @@ int main(int argc, char *argv[])
 		main_url_handler(argv[1], TRUE);
 	}
 
-	/*gtk_notebook_set_current_page(GTK_NOTEBOOK
-					(widgets.notebook_comm_book), 0);*/
 	g_timer_stop(total);
 	d = g_timer_elapsed(total, NULL);
 #ifdef DEBUG
