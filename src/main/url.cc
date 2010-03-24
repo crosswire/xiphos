@@ -36,6 +36,7 @@
 #include <swmodule.h>
 
 #include <gtk/gtk.h>
+#include <glib/gstdio.h>
 
 #include "editor/slib-editor.h"
 
