@@ -708,6 +708,9 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 	case XK_F3: // F3 search
 		if (state == 0)
 			main_open_search_dialog();
+		else if (state == GDK_CONTROL_MASK)
+			gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.
+								   notebook_sidebar), 2);
 		break;
 	case XK_F4: // F4 module manager
 		if (state == 0)
