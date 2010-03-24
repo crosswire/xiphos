@@ -47,7 +47,6 @@
 #include "gui/shortcutbar_main.h"
 #include "gui/shortcutbar_dialog.h"
 #include "gui/sidebar.h"
-//#include "gui/toolbar_nav.h"
 #include "gui/utilities.h"
 #include "gui/bibletext.h"
 #include "gui/parallel_view.h"
@@ -70,6 +69,12 @@
 #include "editor/slib-editor.h"
 
 #include "gui/debug_glib_null.h"
+
+/* X keyboard #definitions, to handle shortcuts */
+/* we must define the categories of #definitions we need. */
+#define XK_MISCELLANY
+#define XK_LATIN1
+#include <X11/keysymdef.h>
 
 WIDGETS widgets;
 
@@ -563,28 +568,37 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 	/* these are the mods we actually use for global keys, we always only check for these set */
 	guint state = event->state & (GDK_SHIFT_MASK  | GDK_CONTROL_MASK | GDK_MOD1_MASK | GDK_MOD4_MASK );
 
-	switch (event->hardware_keycode) {
-	case GS_KEY_SHIFT: /* shift keys - we need this for locking strongs (and other stuff) while moving mouse */
-	case GS_KEY_SHIFT_R: /* to previewer */
+	switch (event->keyval) {
+	case XK_Shift_L:	/* shift keys - we need this for locking strongs (and */
+	case XK_Shift_R:	/* other stuff) while moving mouse to previewer */
 		shift_key_pressed = TRUE;
-	case GS_KEY_D: // Alt-D  dictionary entry
+		/* no break? hm... */
+
+	case XK_b: // Alt-B  bookmark
+		if (state == GDK_MOD1_MASK) {
+			gchar *label = g_strdup_printf("%s, %s",
+						       settings.currentverse,
+						       settings.MainWindowModule);
+			gui_bookmark_dialog(label,
+					    settings.MainWindowModule,
+					    settings.currentverse);
+			g_free(label);
+		}
+		break;
+
+	case XK_c: // Alt-C  commentary pane
+		if (state == GDK_MOD1_MASK) {
+			gtk_widget_grab_focus(navbar_versekey.lookup_entry);
+			gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),0);
+		}
+		break;
+
+	case XK_d: // Alt-D  dictionary entry
 		if (state == GDK_MOD1_MASK)
 			gtk_widget_grab_focus(widgets.entry_dict);
 		break;
 
-	case GS_KEY_G: // Alt-G  genbook entry
-		if (state == GDK_MOD1_MASK) {
-			gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),1);
-			gtk_widget_grab_focus(navbar_book.lookup_entry);
-		}
-		break;
-
-	case GS_KEY_L: // Ctrl-L  verse entry
-		if (state == GDK_CONTROL_MASK)
-			gtk_widget_grab_focus(navbar_versekey.lookup_entry);
-		break;
-
-	case GS_KEY_F: // Ctrl-F  find text
+	case XK_f: // Ctrl-F  find text
 		if (state == GDK_CONTROL_MASK) {
 			if (settings.showtexts) {
 				gui_find_dlg(widgets.html_text,
@@ -609,33 +623,43 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 		}
 		break;
 
-	case GS_KEY_C: // Alt-C  commentary pane
+	case XK_g: // Alt-G  genbook entry
 		if (state == GDK_MOD1_MASK) {
+			gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),1);
+			gtk_widget_grab_focus(navbar_book.lookup_entry);
+		}
+		break;
+
+	case XK_j: // J    "next verse"
+		if (state == 0)
+			access_on_down_eventbox_button_release_event(VERSE_BUTTON);
+		break;
+
+	case XK_k: // K    "previous verse"
+		if (state == 0)
+			access_on_up_eventbox_button_release_event(VERSE_BUTTON);
+		break;
+
+	case XK_l: // Ctrl-L  verse entry
+		if (state == GDK_CONTROL_MASK)
 			gtk_widget_grab_focus(navbar_versekey.lookup_entry);
-			gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),0);
-		}
 		break;
 
-	case GS_KEY_B: // Alt-B  bookmark
-		if (state == GDK_MOD1_MASK) {
-			gchar *label = g_strdup_printf("%s, %s",
-						       settings.currentverse,
-						       settings.MainWindowModule);
-			gui_bookmark_dialog(label,
-					    settings.MainWindowModule,
-					    settings.currentverse);
-			g_free(label);
-		}
+	case XK_n: // N    "next"
+	case XK_N:
+		if (state == GDK_CONTROL_MASK)		// Ctrl-N verse
+			access_on_down_eventbox_button_release_event
+			    (VERSE_BUTTON);
+		else if (state == 0)			// n chapter
+			access_on_down_eventbox_button_release_event
+			    (CHAPTER_BUTTON);
+		else if (state == GDK_SHIFT_MASK)	// N book
+			access_on_down_eventbox_button_release_event
+			    (BOOK_BUTTON);
 		break;
 
-	case GS_KEY_Z: // Alt-Z  open personal commentary
-		if (state == GDK_MOD1_MASK)
-			access_to_edit_percomm();
-		break;
-
-	// future reference: 97 = Home; 103 = End; 99 = PageUp; 105 = PageDown (Linux)
-
-	case GS_KEY_P: // P    "previous" or "parallel"
+	case XK_p: // P    "previous" or "parallel"
+	case XK_P:
 		if (state == GDK_CONTROL_MASK)		// Ctrl-P verse
 			access_on_up_eventbox_button_release_event
 			    (VERSE_BUTTON);
@@ -649,58 +673,43 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 			on_undockInt_activate(NULL);
 		break;
 
-	case GS_KEY_Q: // quit
+	case XK_q: // quit
 		if (state == GDK_CONTROL_MASK)		// Ctrl-Q quit
 			delete_event (NULL, NULL, NULL);
 		break;
-	case GS_KEY_T: // open a new tab
+
+	case XK_t: // open a new tab
 		if (state == GDK_CONTROL_MASK)
 			on_notebook_main_new_tab_clicked(NULL, NULL);
 		break;
-	case GS_KEY_J: // J    "next verse"
-		access_on_down_eventbox_button_release_event
-			(VERSE_BUTTON);
-		break;
-	case GS_KEY_K: // K    "previous verse"
-		access_on_up_eventbox_button_release_event
-			(VERSE_BUTTON);
-		break;
-	case GS_KEY_N: // N    "next"
-		if (state == GDK_CONTROL_MASK)		// Ctrl-N verse
-			access_on_down_eventbox_button_release_event
-			    (VERSE_BUTTON);
-		else if (state == 0)			// n chapter
-			access_on_down_eventbox_button_release_event
-			    (CHAPTER_BUTTON);
-		else if (state == GDK_SHIFT_MASK)	// N book
-			access_on_down_eventbox_button_release_event
-			    (BOOK_BUTTON);
+
+	case XK_z: // Alt-Z  open personal commentary
+		if (state == GDK_MOD1_MASK)
+			access_to_edit_percomm();
 		break;
 
-	case GS_KEY_PLUS : // Ctrl-Plus  Increase base font size
-	case GS_FREAK_PLUS:	// freakish european keycode
+	case XK_plus : // Ctrl-Plus  Increase base font size
 		if (state == (GDK_CONTROL_MASK|GDK_SHIFT_MASK))
 			new_base_font_size(TRUE);
 		break;
 
-	case GS_KEY_MINUS: // Ctrl-Minus  Decrease base font size
-	case GS_FREAK_MINUS:	// freakish european keycode
+	case XK_minus: // Ctrl-Minus  Decrease base font size
 		if (state == GDK_CONTROL_MASK)
 			new_base_font_size(FALSE);
 		break;
-	case GS_KEY_F1: // F1 help
+	case XK_F1: // F1 help
 		if (state == 0)
 			on_help_contents_activate(NULL, NULL);
 		break;
-	case GS_KEY_F2: // F2 preferences
+	case XK_F2: // F2 preferences
 		if (state == 0)
 			on_preferences_activate(NULL, NULL);
 		break;
-	case GS_KEY_F3: // F3 search
+	case XK_F3: // F3 search
 		if (state == 0)
 			main_open_search_dialog();
 		break;
-	case GS_KEY_F4: // F4 module manager
+	case XK_F4: // F4 module manager
 		if (state == 0)
 			on_module_manager_activate (NULL, NULL);
 		else if (state == GDK_CONTROL_MASK)
@@ -709,13 +718,13 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 					       ((PASSAGE_TAB_INFO*)cur_passage_tab)->
 					       page_widget));
 		break;
-	case GS_KEY_F10: // F10 bible module right click
+	case XK_F10: // Shift-F10 bible module right click
 		if (state == GDK_SHIFT_MASK)
 			gui_menu_popup(settings.MainWindowModule, NULL);
 		break;
 	}
-	GS_message(("on_vbox1_key_press_event\nkeycode: %d, state: %d",
-		    event->hardware_keycode, state));
+	GS_message(("on_vbox1_key_press_event\nkeycode: %d, keysym: %0x, state: %d",
+		    event->hardware_keycode, event->keyval, state));
 	return FALSE;
 }
 
@@ -724,13 +733,13 @@ gboolean on_vbox1_key_release_event(GtkWidget * widget,
                                         GdkEventKey * event,
                                         gpointer user_data)
 {
-        switch (event->hardware_keycode) {
-		case GS_KEY_SHIFT:
-		case GS_KEY_SHIFT_R:
+        switch (event->keyval) {
+		case XK_Shift_L:
+		case XK_Shift_R:
 			shift_key_pressed = FALSE;
 		break;
 	}
-  return FALSE;
+	return FALSE;
 }
 
 /******************************************************************************
