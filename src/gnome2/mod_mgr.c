@@ -735,7 +735,7 @@ remove_install_modules(GList * modules,
 			zipfile = g_new(char, strlen(dir) + 100); // excess
 			sprintf(zipfile, "%s/%s.zip", dir, buf);
 			datapath = main_get_mod_config_entry(buf, "DataPath");
-			if (access(datapath, F_OK) == -1)
+			if (g_access(datapath, F_OK) == -1)
 			    *(strrchr(datapath, '/')) = '\0';
 
 			conf_file = main_get_mod_config_file
@@ -3019,7 +3019,7 @@ setup_ui_labels()
 	g_free(str);
 
 	gtk_label_set_text(GTK_LABEL(label_system), settings.path_to_mods);
-	if (access(settings.path_to_mods, W_OK) == -1) {
+	if (g_access(settings.path_to_mods, W_OK) == -1) {
 		GS_print(("%s is write protected\n",
 			  (settings.path_to_mods
 			   ? settings.path_to_mods
