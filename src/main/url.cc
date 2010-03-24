@@ -170,7 +170,7 @@ static gint show_separate_image(const gchar * filename, gboolean clicked)
 		int i;
 
 		for (i = 0; display_progs[i]; i++) {
-			if (access(display_progs[i], X_OK) == 0)
+			if (g_access(display_progs[i], X_OK) == 0)
 				break;
 		}
 		if (display_progs[i] == NULL) {
