@@ -137,7 +137,7 @@ void frontend_init(void)
  */
 
 
-void frontend_display(void)
+void frontend_display(const char *tabs)
 {
 	GS_print(("%s\n", "Displaying Xiphos"));
 	gui_show_main_window();
@@ -178,7 +178,7 @@ void frontend_display(void)
 #endif
 	// setup passage notebook
 //	if (settings.browsing) {
-	gui_notebook_main_setup (settings.browsing);
+	gui_notebook_main_setup (settings.browsing, tabs);
 /*	} else {
 		url = g_strdup_printf("sword://%s/%s",settings.DictWindowModule,
 						      settings.dictkey);

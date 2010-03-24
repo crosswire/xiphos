@@ -86,7 +86,7 @@ void gui_update_tab_struct(const gchar * text_mod,
 void gui_close_all_tabs(void);
 void gui_open_tabs(void);
 
-void gui_notebook_main_setup(int tabs);
+void gui_notebook_main_setup(int tabs, const char *tabsfile);
 void gui_notebook_main_shutdown(int tabs);
 /*void gui_notebook_main_switch_page(GtkNotebook * notebook,
 					GtkNotebookPage * page,
