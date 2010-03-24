@@ -255,16 +255,8 @@ def configure(conf):
         else:
             env['MOZILLA_DISTDIR'] = '%s/../..' % env['PKG_CONFIG_LIBDIR']
 
-    # appropriate cflags
-    env.append_value('CXXFLAGS', env['CXXFLAGS_%s' % opt.debug_level.upper()])
-    env.append_value('CCFLAGS', env['CCFLAGS_%s' % opt.debug_level.upper()])
-
     if env['IS_WIN32']:
         dfn('WIN32', 1)
-
-    if opt.delint:
-        env.append_value('CXXFLAGS', env['CXXFLAGS_DELINT'])
-        env.append_value('CCFLAGS', env['CCFLAGS_DELINT'])
 
     # gtkhtml
     if opt.gtkhtml:
@@ -448,7 +440,11 @@ def configure(conf):
     #dfn('__cplusplus', 1)
 
     # let compiler know that we have 'config.h'
-    
+
+    # appropriate cflags
+    env.append_value('CXXFLAGS', env['CXXFLAGS_%s' % opt.debug_level.upper()])
+    env.append_value('CCFLAGS', env['CCFLAGS_%s' % opt.debug_level.upper()])
+
     # portable adding define, should work gcc and msvc
     env.append_value('CXXFLAGS', env['CXXDEFINES_ST'] % 'HAVE_CONFIG_H')
     env.append_value('CCFLAGS', env['CCDEFINES_ST'] % 'HAVE_CONFIG_H')
