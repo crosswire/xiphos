@@ -445,6 +445,10 @@ def configure(conf):
     env.append_value('CXXFLAGS', env['CXXFLAGS_%s' % opt.debug_level.upper()])
     env.append_value('CCFLAGS', env['CCFLAGS_%s' % opt.debug_level.upper()])
 
+    if opt.delint:
+        env.append_value('CXXFLAGS', env['CXXFLAGS_DELINT'])
+        env.append_value('CCFLAGS', env['CCFLAGS_DELINT'])
+
     # portable adding define, should work gcc and msvc
     env.append_value('CXXFLAGS', env['CXXDEFINES_ST'] % 'HAVE_CONFIG_H')
     env.append_value('CCFLAGS', env['CCDEFINES_ST'] % 'HAVE_CONFIG_H')
