@@ -1,6 +1,7 @@
 2010-03-24  karl <charcoal@users.sf.net>
 
 	* fix #2889661 replace keycode interpretation with keysyms.
+	* feat.req #2873363 Shortcut/hotkey for simple/sidebar searches.
 
 2010-03-22  karl <charcoal@users.sf.net>
 
