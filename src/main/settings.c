@@ -714,8 +714,8 @@ void load_settings_structure(void)
 	if (xml_get_value("misc", "show_side_preview"))
 		settings.show_previewer_in_sidebar = atol(xml_get_value("misc", "show_side_preview"));
 	else {
-		xml_add_new_item_to_section("misc", "show_side_preview", "0");
-		settings.show_previewer_in_sidebar = 0;
+		xml_add_new_item_to_section("misc", "show_side_preview", "1");
+		settings.show_previewer_in_sidebar = 1;
 	}
 
 	if (xml_get_value("misc", "showparatab"))
