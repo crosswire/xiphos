@@ -1978,10 +1978,10 @@ DialogChapDisp::Display(SWModule &imodule)
 
 	file = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
 	style = get_conf_file_item(file, ModuleName, "style");
-	if ((style) && strcmp(style, "verse"))
-		versestyle = FALSE;
-	else
+	if ((style) && !strcmp(style, "verse"))
 		versestyle = TRUE;
+	else
+		versestyle = FALSE;
 	g_free(style);
 	g_free(file);
 

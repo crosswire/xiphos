@@ -1129,10 +1129,10 @@ void main_display_bible(const char * mod_name, const char * key)
 
 	file = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
 	style = get_conf_file_item(file, mod_name, "style");
-	if ((style) && strcmp(style,"verse"))
-		settings.versestyle = FALSE;
-	else
+	if ((style) && !strcmp(style,"verse"))
 		settings.versestyle = TRUE;
+	else
+		settings.versestyle = FALSE;
 	g_free(style);
 	g_free(file);
 
