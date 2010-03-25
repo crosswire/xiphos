@@ -20,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 3.1.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-20 19:40+0100\n"
-"PO-Revision-Date: 2010-03-20 19:40+0100\n"
+"POT-Creation-Date: 2010-03-25 10:49+0100\n"
+"PO-Revision-Date: 2010-03-25 10:50+0100\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: emacs + po-mode <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -106,7 +106,7 @@ msgid "Delete current note"
 msgstr "Supprime la note en cours"
 
 #: ../src/editor/slib-editor.c:778 ../ui/editor_note.xml.h:14
-#: ../ui/editor_studypad.xml.h:20 ../ui/xi-menus.glade.h:106
+#: ../ui/editor_studypad.xml.h:20 ../ui/xi-menus.glade.h:104
 msgid "_File"
 msgstr "_Fichier"
 
@@ -122,7 +122,7 @@ msgstr "Source _HTML"
 msgid "_Plain Source"
 msgstr "Source _texte"
 
-#: ../src/editor/slib-editor.c:854 ../ui/xi-menus.glade.h:121
+#: ../src/editor/slib-editor.c:854 ../ui/xi-menus.glade.h:119
 msgid "_View"
 msgstr "_Affichage"
 
@@ -519,30 +519,30 @@ msgstr ""
 msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
 msgstr "BUG! Xiphos va s'arrêter sur une erreur « STRING »."
 
-#: ../src/gnome2/main_window.c:783
+#: ../src/gnome2/main_window.c:795
 msgid "Xiphos - Bible Study Software"
 msgstr "Xiphos - Logiciel d'étude biblique"
 
-#: ../src/gnome2/main_window.c:838
+#: ../src/gnome2/main_window.c:850
 msgid "Open a new tab"
 msgstr "Ouvrir un nouvel onglet"
 
-#: ../src/gnome2/main_window.c:916 ../src/gnome2/sidebar.c:621
+#: ../src/gnome2/main_window.c:928 ../src/gnome2/sidebar.c:621
 #: ../src/gnome2/sidebar.c:627 ../src/main/sidebar.cc:666
 #: ../src/main/sidebar.cc:1015 ../src/main/sidebar.cc:1016
 #: ../src/main/sidebar.cc:1017
 msgid "Standard View"
 msgstr "Vue simple"
 
-#: ../src/gnome2/main_window.c:997
+#: ../src/gnome2/main_window.c:1009
 msgid "Commentary View"
 msgstr "Commentaire"
 
-#: ../src/gnome2/main_window.c:1013
+#: ../src/gnome2/main_window.c:1025
 msgid "Book View"
 msgstr "Livre"
 
-#: ../src/gnome2/main_window.c:1038
+#: ../src/gnome2/main_window.c:1050
 msgid "Welcome to Xiphos"
 msgstr "Bienvenue dans Xiphos"
 
@@ -1087,9 +1087,9 @@ msgstr "Passage suivant"
 msgid "Go inward, to the first subsection"
 msgstr "Descendre d'un niveau dans le sommaire du livre"
 
-#: ../src/gnome2/navbar_versekey_dialog.c:860
-#: ../src/gnome2/navbar_versekey_editor.c:868
-#: ../src/gnome2/navbar_versekey_parallel.c:806
+#: ../src/gnome2/navbar_versekey_dialog.c:868
+#: ../src/gnome2/navbar_versekey_editor.c:876
+#: ../src/gnome2/navbar_versekey_parallel.c:816
 msgid "Synchronize this window's scrolling with the main window"
 msgstr "Synchronise le défilement de cette fenêtre avec la fenêtre principale"
 
@@ -1306,6 +1306,10 @@ msgstr "Barre latérale"
 msgid "Powered by the SWORD Project"
 msgstr "Xiphos utilise l'architecture logicielle du Projet SWORD"
 
+#: ../src/gnome2/tabbed_browser.c:366
+msgid "Can't create tabs dir."
+msgstr "Impossible de créer le répertoire tabs."
+
 #: ../src/gnome2/treekey-editor.c:133 ../src/gnome2/treekey-editor.c:192
 #: ../src/gnome2/treekey-editor.c:278
 msgid "Prayer List/Journal Item"
@@ -1346,27 +1350,27 @@ msgstr ""
 msgid "Chapter"
 msgstr "Chapitre"
 
-#: ../src/main/main.c:119
+#: ../src/main/main.c:122
 msgid "Xiphos does not understand more than one argument."
 msgstr "Xiphos n'accepte pas plus d'un argument."
 
-#: ../src/main/main.c:161
+#: ../src/main/main.c:168
 msgid "Initiating Gecko"
 msgstr "Initialisation de Gecko"
 
-#: ../src/main/main.c:167
+#: ../src/main/main.c:174
 msgid "Building Interface"
 msgstr "Construction de l'interface"
 
-#: ../src/main/main.c:171
+#: ../src/main/main.c:178
 msgid "Starting Sword"
 msgstr "Démarrage de Sword"
 
-#: ../src/main/main.c:175
+#: ../src/main/main.c:182
 msgid "Loading Settings"
 msgstr "Chargement des préférences"
 
-#: ../src/main/main.c:179
+#: ../src/main/main.c:186
 msgid "Displaying Xiphos"
 msgstr "Affichage de Xiphos"
 
@@ -1397,11 +1401,11 @@ msgstr "Strongs"
 msgid "Morphology"
 msgstr "Étiquette morphologique"
 
-#: ../src/main/module_dialogs.cc:1083 ../src/main/url.cc:526
+#: ../src/main/module_dialogs.cc:1083 ../src/main/url.cc:527
 msgid "Back to "
 msgstr "Revenir à "
 
-#: ../src/main/parallel_view.cc:404 ../ui/xi-menus.glade.h:90
+#: ../src/main/parallel_view.cc:404 ../ui/xi-menus.glade.h:88
 msgid "Strong's Numbers"
 msgstr "Nombres de Strong"
 
@@ -1443,11 +1447,11 @@ msgstr "En-têtes"
 msgid "Morpheme Segmentation"
 msgstr "Segmentation de morphème"
 
-#: ../src/main/parallel_view.cc:504 ../ui/xi-menus.glade.h:97
+#: ../src/main/parallel_view.cc:504 ../ui/xi-menus.glade.h:95
 msgid "Words of Christ in Red"
 msgstr "Paroles de Christ en rouge"
 
-#: ../src/main/parallel_view.cc:514 ../ui/xi-menus.glade.h:92
+#: ../src/main/parallel_view.cc:514 ../ui/xi-menus.glade.h:90
 msgid "Transliteration"
 msgstr "Translittération"
 
@@ -1459,7 +1463,7 @@ msgstr "Variantes du texte"
 msgid "Primary Reading"
 msgstr "Lectures principales"
 
-#: ../src/main/parallel_view.cc:541 ../ui/xi-menus.glade.h:85
+#: ../src/main/parallel_view.cc:541 ../ui/xi-menus.glade.h:83
 msgid "Secondary Reading"
 msgstr "Lectures secondaires"
 
@@ -1953,99 +1957,99 @@ msgstr ""
 msgid "Clear History"
 msgstr "Effacer l'historique"
 
-#: ../src/main/url.cc:97
+#: ../src/main/url.cc:98
 msgid "URL not found:"
 msgstr "URL non trouvée :"
 
-#: ../src/main/url.cc:187
+#: ../src/main/url.cc:188
 #, c-format
 msgid "Xiphos could not execute %s"
 msgstr "Xiphos n'a pas pu exécuter %s"
 
-#: ../src/main/url.cc:195
+#: ../src/main/url.cc:196
 msgid "Viewer error:\n"
 msgstr "Erreur d'aperçu:\n"
 
-#: ../src/main/url.cc:268
+#: ../src/main/url.cc:269
 #, c-format
 msgid "Show %s in main window"
 msgstr "Affiche %s dans la fenêtre principale"
 
-#: ../src/main/xml.c:82 ../src/main/xml.c:466
+#: ../src/main/xml.c:84 ../src/main/xml.c:468
 #, c-format
 msgid "Document not created successfully. \n"
 msgstr "Erreur de création du document. \n"
 
-#: ../src/main/xml.c:91
+#: ../src/main/xml.c:93
 msgid "Personal"
 msgstr "Notes personnelles"
 
-#: ../src/main/xml.c:92
+#: ../src/main/xml.c:94
 msgid "What must I do to be saved?"
 msgstr "Comment être sauvé?"
 
-#: ../src/main/xml.c:94 ../src/main/xml.c:95
+#: ../src/main/xml.c:96 ../src/main/xml.c:97
 msgid "Acts 16:31"
 msgstr "Act 16:31"
 
-#: ../src/main/xml.c:99 ../src/main/xml.c:100
+#: ../src/main/xml.c:101 ../src/main/xml.c:102
 msgid "Eph 2:8,9"
 msgstr "Éph 2:8,9"
 
-#: ../src/main/xml.c:104 ../src/main/xml.c:105
+#: ../src/main/xml.c:106 ../src/main/xml.c:107
 msgid "Romans 1:16"
 msgstr "Romains 1:16"
 
-#: ../src/main/xml.c:108
+#: ../src/main/xml.c:110
 msgid "What is the Gospel?"
 msgstr "Qu'est-ce que l'Évangile?"
 
-#: ../src/main/xml.c:110 ../src/main/xml.c:111
+#: ../src/main/xml.c:112 ../src/main/xml.c:113
 msgid "1 Cor 15:1-4"
 msgstr "1 Cor 15:1-4"
 
-#: ../src/main/xml.c:415 ../src/main/xml.c:1146
+#: ../src/main/xml.c:417 ../src/main/xml.c:1148
 #, c-format
 msgid "Document not parsed successfully. \n"
 msgstr "Erreur de lecture du document. \n"
 
-#: ../src/main/xml.c:421 ../src/main/xml.c:749 ../src/main/xml.c:1027
-#: ../src/main/xml.c:1225
+#: ../src/main/xml.c:423 ../src/main/xml.c:751 ../src/main/xml.c:1029
+#: ../src/main/xml.c:1227
 #, c-format
 msgid "empty document \n"
 msgstr "Document vide \n"
 
-#: ../src/main/xml.c:427
+#: ../src/main/xml.c:429
 #, c-format
 msgid "wrong type, root node != SwordBookmarks\n"
 msgstr "Erreur de type, root node != SwordBookmarks\n"
 
-#: ../src/main/xml.c:478
+#: ../src/main/xml.c:480
 msgid "Old Testament"
 msgstr "Ancien Testament"
 
-#: ../src/main/xml.c:479
+#: ../src/main/xml.c:481
 msgid "Gen - Mal"
 msgstr "Ge - Mal"
 
-#: ../src/main/xml.c:484
+#: ../src/main/xml.c:486
 msgid "New Testament"
 msgstr "Nouveau Testament"
 
-#: ../src/main/xml.c:485
+#: ../src/main/xml.c:487
 msgid "Mat - Rev"
 msgstr "Mt - Ap"
 
-#: ../src/main/xml.c:491
+#: ../src/main/xml.c:493
 msgid "Sample Module List"
 msgstr "Exemple de liste de modules"
 
-#: ../src/main/xml.c:755 ../src/main/xml.c:1033
+#: ../src/main/xml.c:757 ../src/main/xml.c:1035
 #, c-format
 msgid "wrong type, root node != %s\n"
 msgstr "Erreur de type, root node != %s\n"
 
-#: ../src/main/xml.c:1186
+#: ../src/main/xml.c:1188
 #, c-format
 msgid ""
 "Save of settings failed! stat %d, size %d\n"
@@ -2054,7 +2058,7 @@ msgstr ""
 "La sauvegarde de la configuration a échouée! stat %d, taille %d\n"
 "%s"
 
-#: ../src/main/xml.c:1188
+#: ../src/main/xml.c:1190
 msgid "Attempting to revert to previous save."
 msgstr "Tentative de retour à la sauvegarde précédente."
 
@@ -3443,156 +3447,148 @@ msgid "Respect Font Faces"
 msgstr "Respect des polices"
 
 #: ../ui/xi-menus.glade.h:78
-msgid "Restore Folder"
-msgstr "Restaurer le dossier"
-
-#: ../ui/xi-menus.glade.h:79
-msgid "Restore saved folder"
-msgstr "Restaure un dossier sauvegardé"
-
-#: ../ui/xi-menus.glade.h:80
 msgid "Save list as a series of bookmarks"
 msgstr "Enregistre la liste dans une série de signets"
 
-#: ../ui/xi-menus.glade.h:81
+#: ../ui/xi-menus.glade.h:79
 msgid "Save list as a single bookmark"
 msgstr "Enregistre la liste sous un seul signet"
 
-#: ../ui/xi-menus.glade.h:82
+#: ../ui/xi-menus.glade.h:80
 msgid "Save these results as a series of bookmarks in their own folder"
 msgstr ""
 "Enregistre ces résultats sous une série de signets dans leur propre dossier"
 
-#: ../ui/xi-menus.glade.h:83
+#: ../ui/xi-menus.glade.h:81
 msgid "Save these results as a single bookmark"
 msgstr "Enregistre ces résultats sous un seul signet"
 
-#: ../ui/xi-menus.glade.h:84
+#: ../ui/xi-menus.glade.h:82
 msgid "Scripture Cross-references"
 msgstr "Références croisées de l'Écriture"
 
-#: ../ui/xi-menus.glade.h:86
+#: ../ui/xi-menus.glade.h:84
 msgid "Show Parallel View in a _Tab"
 msgstr "Vue parallèle dans un ongle_t"
 
-#: ../ui/xi-menus.glade.h:87
+#: ../ui/xi-menus.glade.h:85
 msgid "Show Previe_wer in the Sidebar"
 msgstr "Aperçu dans le volet _latéral"
 
-#: ../ui/xi-menus.glade.h:88
+#: ../ui/xi-menus.glade.h:86
 msgid "Show Verse _Numbers"
 msgstr "Affiche les numéros de verset"
 
-#: ../ui/xi-menus.glade.h:89
+#: ../ui/xi-menus.glade.h:87
 msgid "Simple"
 msgstr "Liste simple"
 
-#: ../ui/xi-menus.glade.h:91
+#: ../ui/xi-menus.glade.h:89
 msgid "Subject"
 msgstr "Liste ordonnée par sujet"
 
-#: ../ui/xi-menus.glade.h:93
+#: ../ui/xi-menus.glade.h:91
 msgid "Unlock This Module"
 msgstr "Déverrouiller ce module"
 
 # src/gs_preferences_dlg.c
-#: ../ui/xi-menus.glade.h:94
+#: ../ui/xi-menus.glade.h:92
 msgid "Use Current Dictionary"
 msgstr "Utiliser le dictionnaire en cours"
 
-#: ../ui/xi-menus.glade.h:95
+#: ../ui/xi-menus.glade.h:93
 msgid "Use module manager to install and remove Sword modules"
 msgstr "Installe ou supprime des modules du Projet SWORD"
 
-#: ../ui/xi-menus.glade.h:96
+#: ../ui/xi-menus.glade.h:94
 msgid "Variants"
 msgstr "Variantes"
 
-#: ../ui/xi-menus.glade.h:98
+#: ../ui/xi-menus.glade.h:96
 msgid "_About The SWORD Project"
 msgstr "_À propos du Projet SWORD"
 
-#: ../ui/xi-menus.glade.h:99
+#: ../ui/xi-menus.glade.h:97
 msgid "_Advanced Search"
 msgstr "Recherche avancée.."
 
-#: ../ui/xi-menus.glade.h:100
+#: ../ui/xi-menus.glade.h:98
 msgid "_Attach/Detach Sidebar"
 msgstr "Attacher/Détacher le volet latéral"
 
-#: ../ui/xi-menus.glade.h:101
+#: ../ui/xi-menus.glade.h:99
 msgid "_Bible"
 msgstr "Texte _biblique"
 
-#: ../ui/xi-menus.glade.h:102
+#: ../ui/xi-menus.glade.h:100
 msgid "_Commentary/Book"
 msgstr "_Commentaire/Livre"
 
-#: ../ui/xi-menus.glade.h:103
+#: ../ui/xi-menus.glade.h:101
 msgid "_Contents"
 msgstr "Sommaire"
 
-#: ../ui/xi-menus.glade.h:104
+#: ../ui/xi-menus.glade.h:102
 msgid "_Edit"
 msgstr "_Édition"
 
-#: ../ui/xi-menus.glade.h:105
+#: ../ui/xi-menus.glade.h:103
 msgid "_Edit Item"
 msgstr "Éditer l'élément"
 
-#: ../ui/xi-menus.glade.h:107
+#: ../ui/xi-menus.glade.h:105
 msgid "_Help"
 msgstr "_Aide"
 
-#: ../ui/xi-menus.glade.h:108
+#: ../ui/xi-menus.glade.h:106
 msgid "_Highlight Current Verse"
 msgstr "_Verset en cours surligné"
 
-#: ../ui/xi-menus.glade.h:109
+#: ../ui/xi-menus.glade.h:107
 msgid "_Live Chat"
 msgstr "Chat en _ligne"
 
-#: ../ui/xi-menus.glade.h:110
+#: ../ui/xi-menus.glade.h:108
 msgid "_Mailing List"
 msgstr "Liste de diffusion"
 
-#: ../ui/xi-menus.glade.h:111
+#: ../ui/xi-menus.glade.h:109
 msgid "_Module Manager"
 msgstr "Gérer les modules"
 
-#: ../ui/xi-menus.glade.h:112
+#: ../ui/xi-menus.glade.h:110
 msgid "_Open Session"
 msgstr "Ouvrir une session"
 
-#: ../ui/xi-menus.glade.h:113
+#: ../ui/xi-menus.glade.h:111
 msgid "_Preferences"
 msgstr "_Préférences"
 
-#: ../ui/xi-menus.glade.h:114
+#: ../ui/xi-menus.glade.h:112
 msgid "_Preview"
 msgstr "_Aperçu"
 
-#: ../ui/xi-menus.glade.h:115
+#: ../ui/xi-menus.glade.h:113
 msgid "_Read Aloud"
 msgstr "Synthèse vocale"
 
-#: ../ui/xi-menus.glade.h:116
+#: ../ui/xi-menus.glade.h:114
 msgid "_Report Bug"
 msgstr "_Signaler un bogue"
 
-#: ../ui/xi-menus.glade.h:117
+#: ../ui/xi-menus.glade.h:115
 msgid "_Save Session"
 msgstr "Enregistrer la session"
 
-#: ../ui/xi-menus.glade.h:118
+#: ../ui/xi-menus.glade.h:116
 msgid "_Search"
 msgstr "_Rechercher"
 
-#: ../ui/xi-menus.glade.h:119
+#: ../ui/xi-menus.glade.h:117
 msgid "_Show/Hide Attached Sidebar"
 msgstr "_Afficher/Cacher le volet latéral"
 
-#: ../ui/xi-menus.glade.h:120
+#: ../ui/xi-menus.glade.h:118
 msgid "_Verse Per Line"
 msgstr "_Verset par ligne"
 
@@ -3635,6 +3631,12 @@ msgstr "Aide à l'étude de la Bible"
 #: ../xiphos.desktop.in.in.h:2
 msgid "Xiphos Bible Guide"
 msgstr "Guide de la Bible Xiphos"
+
+#~ msgid "Restore Folder"
+#~ msgstr "Restaurer le dossier"
+
+#~ msgid "Restore saved folder"
+#~ msgstr "Restaure un dossier sauvegardé"
 
 #~ msgid "About the SWORD Project"
 #~ msgstr "À propos du Projet SWORD"
