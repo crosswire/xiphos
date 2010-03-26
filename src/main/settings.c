@@ -348,9 +348,9 @@ int init_bookmarks(int new_bookmarks)
 	settings.have_bibletime = FALSE;
 	file_buf = g_new(char, strlen(settings.homedir) +
 			 strlen
-			 ("/.kde/share/apps/bibletime/bookmarks.xml") +
+			 ("/.bibletime/bookmarks.xml") +
 			 2);
-	sprintf(file_buf, "%s/.kde/share/apps/bibletime/bookmarks.xml",
+	sprintf(file_buf, "%s/.bibletime/bookmarks.xml",
 		settings.homedir);
 	if (g_access(file_buf, F_OK) == 0) {
 		settings.have_bibletime = TRUE;
