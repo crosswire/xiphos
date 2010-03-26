@@ -115,7 +115,7 @@ gboolean main_export_current_adv_search (GString * str, gboolean html, gboolean 
 
 	tmp = g_list_first(list_for_bookmarking);
 	if (html)
-		str = g_string_append(str, "<html><body>");
+		str = g_string_append(str, "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" /></head><body>");
 	while (tmp) {
 		verses = (GList*) tmp->data;
 
