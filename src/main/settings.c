@@ -346,12 +346,8 @@ int init_bookmarks(int new_bookmarks)
 
 	/* check for Bibletime bookmarks */
 	settings.have_bibletime = FALSE;
-	file_buf = g_new(char, strlen(settings.homedir) +
-			 strlen
-			 ("/.bibletime/bookmarks.xml") +
-			 2);
-	sprintf(file_buf, "%s/.bibletime/bookmarks.xml",
-		settings.homedir);
+	file_buf = g_strdup_printf("%s/%s", settings.homedir,
+				   ".bibletime/bookmarks.xml");
 	if (g_access(file_buf, F_OK) == 0) {
 		settings.have_bibletime = TRUE;
 	}
