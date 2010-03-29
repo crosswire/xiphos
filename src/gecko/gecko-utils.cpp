@@ -265,7 +265,7 @@ gecko_init (void)
 
 	gtk_moz_embed_push_startup ();
 
-#ifdef USE_GTKUPRINT
+#ifdef HAVE_GTKUPRINT
 	gecko_register_printing ();
 #endif
 	//	nsresult rv;

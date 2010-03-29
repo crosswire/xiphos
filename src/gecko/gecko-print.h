@@ -28,7 +28,7 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#ifdef USE_GTKUPRINT
+#ifdef HAVE_GTKUPRINT
 /* Needed to fill the struct */
 #include <gtk/gtkprinter.h>
 #include <gtk/gtkprintsettings.h>

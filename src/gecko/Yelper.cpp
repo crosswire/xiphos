@@ -400,7 +400,7 @@ gint Yelper::ProcessKeyReleaseEvent(GtkMozEmbed *embed, gpointer dom_event)
 	return NS_OK;
 }
 
-#ifdef USE_GTKUPRINT
+#ifdef HAVE_GTKUPRINT
 nsresult
 Yelper::Print (GeckoPrintInfo *print_info, PRBool preview, int *prev_pages)
 {
