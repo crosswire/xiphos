@@ -586,7 +586,7 @@ void gecko_html_select_none(GeckoHtml * html)
 	html->priv->yelper->DoCommand("cmd_selectNone");
 }
 
-#ifdef USE_GTKUPRINT
+#ifdef HAVE_GTKUPRINT
 void
 gecko_html_print(GeckoHtml * html, GeckoPrintInfo * info, gboolean preview,
 		 gint * npages)
@@ -619,7 +619,7 @@ void
 gecko_html_print_document(GtkWindow * window, gchar * mod_name,
 			  DIALOG_DATA * dialog)
 {
-#ifdef USE_GTKUPRINT
+#ifdef HAVE_GTKUPRINT
 	GtkWidget *gtk_win;
 	GeckoHtml *html;
 	GtkWidget *vbox = gtk_vbox_new(FALSE, FALSE);

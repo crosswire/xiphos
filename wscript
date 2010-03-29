@@ -337,10 +337,7 @@ def configure(conf):
     ## Other
     conf.check_pkg('libxml-2.0', '2.0.0', True, var='XML')
 
-    conf.check_pkg('gtk+-unix-print-2.0', '2.0.0', var='UPRINT')
-    if env['HAVE_UPRINT']:
-        dfn('USE_GTKUPRINT', 1)
-
+    conf.check_pkg('gtk+-unix-print-2.0', '2.0.0', var='GTKUPRINT')
     ## Sword
     conf.check_pkg('sword', '1.5.11', True, var='SWORD')
 
