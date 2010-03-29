@@ -24,7 +24,7 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#ifdef USE_GTKUPRINT
+#ifdef HAVE_GTKUPRINT
 
 #include <nsIPrintingPromptService.h>
 #include <nsIPrintProgressParams.h>

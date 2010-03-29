@@ -29,7 +29,7 @@
 #include <nsCOMPtr.h>
 #include <nsIDOMNode.h>
 
-#ifdef USE_GTKUPRINT
+#ifdef HAVE_GTKUPRINT
 #include "gecko/gecko-print.h"
 #endif
 #include "main/module_dialogs.h"
@@ -63,7 +63,7 @@ public:
 	gint ProcessKeyDownEvent(GtkMozEmbed *embed, gpointer dom_event);
 	gint ProcessKeyReleaseEvent(GtkMozEmbed *embed, gpointer dom_event);
 	void SetRTL();
-#ifdef USE_GTKUPRINT
+#ifdef HAVE_GTKUPRINT
 	nsresult Print (GeckoPrintInfo *print_info, PRBool preview,
 			gint *prev_pages);
 #endif

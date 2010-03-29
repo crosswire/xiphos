@@ -23,7 +23,7 @@
 #include <mozilla-config.h>
 #include "config.h"
 
-#ifdef USE_GTKUPRINT
+#ifdef HAVE_GTKUPRINT
 #include <stdlib.h>
 #include <unistd.h>
 

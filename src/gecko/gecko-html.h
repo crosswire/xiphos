@@ -111,7 +111,7 @@ void            gecko_html_paste(GeckoHtml * html);
 void            gecko_html_select_all     (GeckoHtml    *html);
 void            gecko_html_select_none(GeckoHtml * html);
 
-#ifdef USE_GTKUPRINT
+#ifdef HAVE_GTKUPRINT
 void            gecko_html_print          (GeckoHtml    *html,
 					  GeckoPrintInfo *info,
 					  gboolean preview,
