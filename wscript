@@ -361,10 +361,11 @@ def configure(conf):
     if not env['ENABLE_GTKHTML']:
         if not env["IS_WIN32"]:
 
-            conf.check_cfg (package='libxul-embedding',
+            conf.check_cfg (package='',
                             uselib_store='GECKO',
-                            args='--define-variable=includetype=unstable --cflags --libs',
-                            atleast_version='1.9.0')
+                            args='"libxul-embedding >= 1.9.0" --define-variable=includetype=unstable "nspr" --cflags --libs',
+                            msg='checking for libxul-embedding')
+
             conf.define('GECKO_HOME', conf.get_pkgvar('libxul-embedding', 'sdkdir'))
         else:
                     d = env['MOZILLA_DISTDIR']
