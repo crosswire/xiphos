@@ -1207,10 +1207,8 @@ G_MODULE_EXPORT void on_rename_perscomm_activate (GtkMenuItem * menuitem, gpoint
 		goto out1;
 	}
 
-	sworddir = g_new(char, strlen(settings.homedir) + 8);
-	sprintf(sworddir, "%s/" DOTSWORD, settings.homedir);
-	modsdir  = g_new(char, strlen(sworddir) + 8);
-	sprintf(modsdir,  "%s/mods.d", sworddir);
+	sworddir = g_strdup_printf("%s/" DOTSWORD, settings.homedir);
+	modsdir  = g_strdup_printf("%s/mods.d", sworddir);
 
 	conf_old =
 	    main_get_mod_config_file(settings.CommWindowModule, sworddir);
