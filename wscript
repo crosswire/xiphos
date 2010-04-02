@@ -339,12 +339,7 @@ def configure(conf):
 
     conf.check_pkg('gtk+-unix-print-2.0', '2.0.0', var='GTKUPRINT')
     ## Sword
-    conf.check_pkg('sword', '1.5.11', True, var='SWORD')
-
-    conf.check_pkgver_msg('sword', '1.5.11.99', var='MULTIVERSE',
-            msg='Checking for sword multiverse')
-    if env['HAVE_MULTIVERSE']:
-        dfn('SWORD_MULTIVERSE', 1)
+    conf.check_pkg('sword', '1.6.1', True, var='SWORD')
 
 
     #here gtkhtml
