@@ -712,8 +712,7 @@ remove_install_modules(GList * modules,
 
 		if (activity == ARCHIVE) {
 			GString *cmd = g_string_new(NULL);
-			gchar *dir = g_new(char, strlen(settings.homedir) +
-					   strlen(ZIP_DIR) + 2);
+			gchar *dir;
 			gchar *zipfile;
 			char *datapath, *conf_file;
 
@@ -721,7 +720,7 @@ remove_install_modules(GList * modules,
 				  (destination
 				   ? destination
 				   : settings.path_to_mods)));
-			sprintf(dir, "%s/%s", settings.homedir, ZIP_DIR);
+			dir = g_strdup_printf("%s/%s", settings.homedir, ZIP_DIR);
 			if ((g_access(dir, F_OK) == -1) &&
 			    (g_mkdir(dir, S_IRWXU) != 0)) {
 				char msg[300];
@@ -732,8 +731,7 @@ remove_install_modules(GList * modules,
 				return;
 			}
 
-			zipfile = g_new(char, strlen(dir) + 100); // excess
-			sprintf(zipfile, "%s/%s.zip", dir, buf);
+			zipfile = g_strdup_printf("%s/%s.zip", dir, buf);
 			datapath = main_get_mod_config_entry(buf, "DataPath");
 			if (g_access(datapath, F_OK) == -1)
 			    *(strrchr(datapath, '/')) = '\0';

@@ -110,9 +110,7 @@ int settings_init(int argc, char **argv, int new_configs, int new_bookmarks)
 	}
 
 	/* set gSwordDir to $home + .xiphos */
-	settings.gSwordDir = g_new(char, strlen(settings.homedir) +
-				   strlen(GS_DIR) + 2);
-	sprintf(settings.gSwordDir, "%s/%s", settings.homedir, GS_DIR);
+	settings.gSwordDir = g_strdup_printf("%s/%s", settings.homedir, GS_DIR);
 
 	/* if gSwordDir does not exist, create it. */
 	if (g_access(settings.gSwordDir, F_OK) == -1) {
@@ -224,27 +222,11 @@ int settings_init(int argc, char **argv, int new_configs, int new_bookmarks)
 	}
 
 	/* check for template.pad file for studypad */
-	tmp = g_new(char, strlen(settings.gSwordDir) +
-				     strlen("template.pad") + 2);
-	sprintf(tmp, "%s/%s", settings.gSwordDir,
-		"template.pad");
-
-	/* if template.pad does not exist create it */
+	tmp = g_strdup_printf("%s/%s", settings.gSwordDir, "template.pad");
 	if ((g_access(tmp, F_OK) == -1)) {
-		g_file_set_contents(tmp, " ", strlen(" "), NULL);
+		g_file_set_contents(tmp, " ", 1, NULL);
 	}
-
-	/* check for template.pad file for studypad */
-	/* set fnconfigure to gSwordDir and settings.xml */
-	tmp = g_new(char, strlen(settings.gSwordDir) +
-				     strlen("template.pad") + 2);
-	sprintf(tmp, "%s/%s", settings.gSwordDir,
-		"template.pad");
-
-	/* if template.pad does not exist create it */
-	if ((g_access(tmp, F_OK) == -1)) {
-		g_file_set_contents(tmp, " ", strlen(" "), NULL);
-	}
+	g_free(tmp);
 
 	load_settings_structure();
 
@@ -303,9 +285,7 @@ int init_bookmarks(int new_bookmarks)
 	settings.load_xml_bookmarks = FALSE;
 
 	/* set bookmarks dir to settings.gSwordDir + /bookmarks */
-	settings.swbmDir = g_new(char, strlen(settings.gSwordDir) +
-				 strlen("/bookmarks") + 2);
-	sprintf(settings.swbmDir, "%s/%s", settings.gSwordDir, "bookmarks");
+	settings.swbmDir = g_strdup_printf("%s/%s", settings.gSwordDir, "bookmarks");
 
 	/* if .xiphos-2.0/bookmarks does not exist create it */
 	if (g_access(settings.swbmDir, F_OK) == -1) {
@@ -316,9 +296,7 @@ int init_bookmarks(int new_bookmarks)
 	}
 
 	/* set removed dir to settings.swbmDir + /removed */
-	removed = g_new(char, strlen(settings.swbmDir) +
-				 strlen("/removed") + 2);
-	sprintf(removed, "%s/%s", settings.swbmDir, "removed");
+	removed = g_strdup_printf("%s/%s", settings.swbmDir, "removed");
 	if (g_access(removed, F_OK) == -1) {
 		if ((Mkdir(removed, S_IRWXU)) == -1) {
 			g_warning("can't create removed dir");
@@ -330,9 +308,7 @@ int init_bookmarks(int new_bookmarks)
 		xml_new_bookmark_file();
 
 	/* check for xml bookmarks */
-	file_buf = g_new(char, strlen(settings.swbmDir) +
-			 strlen("/bookmarks.xml") + 2);
-	sprintf(file_buf, "%s/bookmarks.xml", settings.swbmDir);
+	file_buf = g_strdup_printf("%s/bookmarks.xml", settings.swbmDir);
 
 	if (g_access(file_buf, F_OK) == 0) {
 		settings.load_xml_bookmarks = TRUE;
