@@ -1208,13 +1208,7 @@ static void int_display(SWBuf& text, gchar *key, char *mod_name[])
 	vkey.AutoNormalize(1);
 	vkey = key;
 
-#ifdef SWORD_MULTIVERSE
 	xverses = (vkey.getVerseMax());
-#else
-	xverses = (vkey.books[vkey.Testament()-1]
-				 [vkey.Book()-1].
-				 versemax[vkey.Chapter()-1]);
-#endif
 
 	// quick cache of fonts.  (mod_name was passed in.)
 	file = g_strdup_printf("%s/fonts.conf", settings.gSwordDir);

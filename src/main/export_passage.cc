@@ -93,12 +93,7 @@ static void clipboardreq_get (GtkClipboard *clipboard,
 int main_get_max_verses (void)
 {
 	VerseKey key = settings.currentverse;
-#ifdef SWORD_MULTIVERSE
 	return (key.getVerseMax());
-#else
-	return (key.books[key.Testament()-1] [key.Book()-1].
-				 versemax[key.Chapter()-1]);
-#endif
 }
 
 int main_get_current_verse (void)
