@@ -107,6 +107,7 @@ void  gui_sync_module_treeview(gint direction)
 }
 
 
+#ifdef USE_TREEVIEW_PATH
 /******************************************************************************
  * Name
  *   gui_save_treeview_path_string
@@ -122,15 +123,12 @@ void  gui_sync_module_treeview(gint direction)
  * Return value
  *   void
  */
-#ifdef USE_TREEVIEW_PATH
 void gui_save_treeview_path_string (const gchar * path_str, const gchar * book_name)
 {
-	gchar file[250];
-
-	sprintf(file, "%s/book_path.conf", settings.gSwordDir);
+	gchar *file = g_strdup_printf("%s/book_path.conf", settings.gSwordDir);
 	save_conf_file_item(file, book_name, "PATH", path_str);
-	GS_message (("\n\nPATH: %s\n\n", path_str));
-	g_free ((gchar*)path_str);
+	GS_message (("book %s, path %s, file %s\n", book_name, path_str, file));
+	g_free(file);
 }
 
 

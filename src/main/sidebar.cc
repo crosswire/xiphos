@@ -633,9 +633,7 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 	gchar *mod = NULL;
 	gchar *key = NULL;
 	GtkTreePath *path;
-	/*  *** until after 3.1 ***
 	gchar *path_str = NULL;
-	*/
 
 	static int old_page = 0;
 
@@ -782,12 +780,13 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 					     selected, mod, atol(key));
 		}
 
-		/*  *** until after 3.1 ***
+#ifdef USE_TREEVIEW_PATH
 		path_str = gtk_tree_path_to_string (path);
-		//GS_message (("path: %s", path_str));
+		GS_message (("path: %s", path_str));
 		gui_save_treeview_path_string (path_str, mod);
 		g_free (path_str);
-		*/
+#endif
+
 		gtk_tree_view_expand_row(GTK_TREE_VIEW
 					 (sidebar.module_list), path,
 					 FALSE);
