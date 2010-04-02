@@ -411,16 +411,12 @@ GList *backend_module_mgr_list_remote_sources(void)
 	const gchar *envhomedir = g_getenv(HOMEVAR);
 	SWBuf baseDir = (envhomedir) ? envhomedir : ".";
 	baseDir += "/" DOTSWORD "/InstallMgr";
-#ifdef SWORD_MULTIVERSE
 	InstallMgr *inst_mgr = new InstallMgr(baseDir,
 					      (StatusReporter *)0,
 					      (SWBuf)"ftp",
 					      (SWBuf)"xiphos@xiphos.org"
 					      );
 	inst_mgr->setUserDisclaimerConfirmed(true);
-#else
-	InstallMgr *inst_mgr = new InstallMgr(baseDir);
-#endif
 
 	for (InstallSourceMap::iterator it =
 	     inst_mgr->sources.begin();
@@ -430,15 +426,9 @@ GList *backend_module_mgr_list_remote_sources(void)
 		mms->type = g_strdup(it->second->type);
 		mms->source = g_strdup(it->second->source);
 		mms->directory = g_strdup(it->second->directory);
-#ifdef SWORD_MULTIVERSE
 		mms->user = g_strdup(it->second->u);
 		mms->pass = g_strdup(it->second->p);
 		mms->uid = g_strdup(it->second->uid);
-#else
-		mms->user = g_strdup("");
-		mms->pass = g_strdup("");
-		mms->uid = g_strdup("");
-#endif
 		retval = g_list_append(retval, (MOD_MGR_SOURCE *) mms);
 	}
 	delete inst_mgr;
@@ -488,15 +478,9 @@ GList *backend_module_mgr_list_local_sources(void)
 			mms->type = is->type;
 			mms->source = is->source;
 			mms->directory = is->directory;
-#ifdef SWORD_MULTIVERSE
 			mms->user = is->u;
 			mms->pass = is->p;
 			mms->uid = is->uid;
-#else
-			mms->user = g_strdup("");
-			mms->pass = g_strdup("");
-			mms->uid = g_strdup("");
-#endif
 			retval = g_list_append(retval,(MOD_MGR_SOURCE*) mms);
 			sourceBegin++;
 		}
@@ -582,7 +566,6 @@ void backend_init_module_mgr_config(void)
 int
 backend_init_module_mgr_config_extras()
 {
-#ifdef SWORD_MULTIVERSE
 	bool needNewInstallMgr = (installMgr == NULL);
 	int retval;
 
@@ -596,30 +579,6 @@ backend_init_module_mgr_config_extras()
 		backend_shut_down_module_mgr();
 	}
 	return retval;
-#else
-	// also the beta repo.
-	backend_module_mgr_add_source("FTPSource",
-				      "FTP",
-				      "CrossWire Beta",
-				      "www.crosswire.org",
-				      "/pub/sword/betaraw",
-				      NULL, NULL, NULL);
-	// new concept: we are our own first-class source.
-	backend_module_mgr_add_source("FTPSource",
-				      "FTP",
-				      "Xiphos",
-				      "ftp.xiphos.org",
-				      ".",
-				      NULL, NULL, NULL);
-	// NET @ bible.org.
-	backend_module_mgr_add_source("FTPSource",
-				      "FTP",
-				      "Bible.org",
-				      "ftp.bible.org",
-				      "/sword",
-				      NULL, NULL, NULL);
-	return 0;
-#endif /* !SWORD_MULTIVERSE */
 }
 
 /******************************************************************************
@@ -671,9 +630,7 @@ void backend_module_mgr_clear_config(void)
 
 void backend_module_mgr_reread_config(void)
 {
-#ifdef SWORD_MULTIVERSE
 	installMgr->readInstallConf();
-#endif
 }
 
 
@@ -720,11 +677,9 @@ void backend_module_mgr_add_source(const char * vtype,
 	is.caption = caption;
 	is.source = source;
 	is.directory = directory;
-#ifdef SWORD_MULTIVERSE
 	is.u = user;
 	is.p = pass;
 	is.uid = uid;
-#endif
 	config.Sections["Sources"].insert(ConfigEntMap::value_type(vtype,
 		is.getConfEnt().c_str()));
 	config.Save();
@@ -784,16 +739,11 @@ void backend_init_module_mgr(const char *dir,
 
 	if (installMgr)
 		delete installMgr;
-#ifdef SWORD_MULTIVERSE
 	installMgr = new InstallMgr(baseDir,
 				    statusReporter,
 				    (SWBuf)"ftp",
 				    (SWBuf)"xiphos@xiphos.org");
 	installMgr->setUserDisclaimerConfirmed(true);
-#else
-	installMgr = new InstallMgr(baseDir, statusReporter);
-#endif
-
 }
 
 /******************************************************************************

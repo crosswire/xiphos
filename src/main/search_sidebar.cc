@@ -350,13 +350,9 @@ void main_search_sidebar_fill_bounds_combos(void)
 
 	if (backendSearch->module_has_testament(module_name, 1)) {
 		while (i < key.BMAX[0]) {
-#ifdef SWORD_MULTIVERSE
 			key.Testament(1);
 			key.Book(i+1);
 			book = strdup((const char *) key.getBookName());
-#else
-			book = strdup((const char *) key.books[0][i].name);
-#endif
 			gtk_combo_box_append_text(GTK_COMBO_BOX(ss.entryUpper), book);
 			gtk_combo_box_append_text(GTK_COMBO_BOX(ss.entryLower), book);
 			++i;
@@ -367,13 +363,9 @@ void main_search_sidebar_fill_bounds_combos(void)
 	i = 0;
 	if (backendSearch->module_has_testament(module_name, 2)) {
 		while (i < key.BMAX[1]) {
-#ifdef SWORD_MULTIVERSE
 			key.Testament(2);
 			key.Book(i+1);
 			book = strdup((const char *) key.getBookName());
-#else
-			book = strdup((const char *) key.books[1][i].name);
-#endif
 			gtk_combo_box_append_text(GTK_COMBO_BOX(ss.entryUpper), book);
 			gtk_combo_box_append_text(GTK_COMBO_BOX(ss.entryLower), book);
 			++i;

@@ -1,3 +1,7 @@
+2010-04-01  karl <charcoal@users.sf.net>
+
+	* removed all #ifdef SWORD_MULTIVERSE.
+
 2010-03-26  karl <charcoal@users.sf.net>
 
 	* fix #2977026 Search export to html should set content type to UTF-8.
