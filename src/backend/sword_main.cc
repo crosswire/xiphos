@@ -390,11 +390,7 @@ char *BackEnd::key_get_book(const char *key)
 	vkey.AutoNormalize(1);
 	vkey = key;
 
-#ifdef SWORD_MULTIVERSE
 	return strdup((char*)vkey.getBookName());
-#else
-	return strdup((char*)vkey.books[vkey.Testament() - 1][vkey.Book() -1].name);
-#endif
 }
 
 
@@ -420,13 +416,7 @@ unsigned int BackEnd::key_chapter_count(const char *key)
 	vkey.AutoNormalize(1);
 	vkey = key;
 
-#ifdef SWORD_MULTIVERSE
 	return (vkey.getChapterMax());
-#else
-	char testament = vkey.Testament() ;
-	char book = vkey.Book();
-	return (vkey.books[testament-1][book-1].chapmax);
-#endif
 }
 
 
@@ -436,14 +426,7 @@ unsigned int BackEnd::key_verse_count(const char *key)
 	vkey.AutoNormalize(1);
 	vkey = key;
 
-#ifdef SWORD_MULTIVERSE
 	return (vkey.getVerseMax());
-#else
-	char testament = vkey.Testament() ;
-	char book = vkey.Book();
-	int chapter = vkey.Chapter();
-	return (vkey.books[testament-1][book-1].versemax[chapter-1]);
-#endif
 }
 
 
