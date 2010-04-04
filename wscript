@@ -3,36 +3,26 @@
 
 import os, os.path
 import intltool
-
-
-# waf imports
+import string
 import Utils
 import Options
 import ccroot
+import preproc
+preproc.go_absolute=1
+preproc.strict_quotes=0
 
-
-# custom imports
 import waffles.misc
 import waffles.gnome as gnome
 
-# the following two variables are used by the target "waf dist"
+
 VERSION='3.1.3'
 APPNAME='xiphos'
 PACKAGE='xiphos'
-
-
-
-# these variables are mandatory ('/' are converted automatically)
 srcdir = '.'
 blddir = 'build'
 
-# dir where waf will search custom (additional) files
 _tooldir = './waffles/'
-
-_prefix = '/usr/local'
-
 ROOTDIR_WIN32 = 'C:\msys'
-
 _headers = '''
 dlfcn.h
 inttypes.h
@@ -49,12 +39,8 @@ sys/select.h
 sys/socket.h
 winsock.h
 '''.split()
-
 def set_options(opt):
 
-
-    # options provided by the modules
-    #opt.tool_options('g++ gcc gnome intltool glib2')
     opt.tool_options('g++ gcc')
 
     opt.add_option('--enable-gtkhtml', action='store_true', default=False,
@@ -167,7 +153,6 @@ def configure(conf):
     ## temporary HACKS for win32
     if env['IS_WIN32']:
         env['PREFIX'] = conf.escpath(os.path.abspath('win32/binaries/Xiphos'))
-    ##
 
     if env['IS_WIN32']:
         env['ROOTDIR'] = ROOTDIR_WIN32
@@ -178,7 +163,7 @@ def configure(conf):
         conf.check_tool('cross_linux_win32', tooldir=_tooldir)
 
     conf.check_tool('gnu_dirs misc')
-    conf.check_tool('intltool') # check for locale.h included
+    conf.check_tool('intltool')
 
     opt = Options.options
     env['DISABLE_HELP'] = opt.disable_help
@@ -314,41 +299,47 @@ def configure(conf):
     define('PACKAGE_PIXMAPS_DIR', conf.escpath(sub('${DATAROOTDIR}/pixmaps/${PACKAGE}', env)))
     define('PACKAGE_SOURCE_DIR', conf.escpath(os.path.abspath(srcdir))) # foder where was wscript executed
 
-    # pkg-config
+    common_libs = string.join('''
+    "gtk+-2.0 >= 2.14"
+    "libglade-2.0"
+    "gmodule-2.0"
+    "glib-2.0"
+    "libgsf-1 >= 1.14"
+    "libxml-2.0"
+    "libgtkhtml-3.14 >= 3.23"
+    "gtkhtml-editor"
+    --cflags --libs'''
+    .split()," ")
+
     conf.check_cfg(atleast_pkgconfig_version='0.9.0')
+    conf.check_cfg(msg="Checking for GNOME related libs",
+                   package='',
+                   args=common_libs,
+                   uselib_store='GNOME',
+                   mandatory=True)
 
-    # GTK+
-    #check_pkg(conf, 'gtk+-x11-2.0', '2.0.0', var='LIBGTK_X11_2_0')
-    #if not env['HAVE_LIBGTK_X11_2_0']:
-    #    check_pkg(conf, 'gtk+-x11-2.0', '2.0.0', True, var='LIBGTK_WIN32_2_0')
-    conf.check_pkg('gtk+-2.0', '2.14', True, var='GTK')
-    # glade
-    conf.check_pkg('libglade-2.0', '2.0.0', var='GLADE')
-        
-    conf.check_pkg('gmodule-2.0', '2.0.0', True, var='GMODULEEXP')
-    conf.check_pkg('glib-2.0', '2.0.0', True, 'GLIB')
+    env.append_value('ALL_LIBS', 'GNOME')
 
-    ## gfs
-    conf.check_pkg('libgsf-1', '1.14', True, var='GFS')
+    conf.check_cfg(package="gtk+-unix-print-2.0",
+                   uselib_stor='GTKUPRINT')
 
-    #check_pkg(conf, 'libgnomeprintui-2.2', '2.2', True, var='GNOMEPRINTUI')
-    #check_pkg(conf, 'libgnomeprint-2.2', '2.2', True, var='GNOMEPRINT')
+    env.append_value('ALL_LIBS', 'GTKUPRINT')
 
-    ## Other
-    conf.check_pkg('libxml-2.0', '2.0.0', True, var='XML')
+    conf.check_cfg(package='sword',
+                   args='"sword >= 1.6.1" --cflags --libs',
+                   uselib_store='SWORD',
+                   mandatory=True)
+    env.append_value('ALL_LIBS', 'SWORD')
 
-    conf.check_pkg('gtk+-unix-print-2.0', '2.0.0', var='GTKUPRINT')
-    ## Sword
-    conf.check_pkg('sword', '1.6.1', True, var='SWORD')
-
-
-    #here gtkhtml
-    conf.check_pkg('libgtkhtml-3.14', version='3.23', mandatory=True, var='GTKHTML')
-
-    if conf.env['HAVE_GTKHTML']:
-	conf.define('USE_GTKHTML3_14', 1)
-
-    conf.check_pkg('gtkhtml-editor', mandatory=True)
+    conf.check_cfg(package="gtk+-2.0",
+                   atleast_version = "2.16",
+                   uselib_store="GTK_216")
+    conf.check_cfg(package="gtk+-2.0",
+                   atleast_version = "2.18",
+                   uselib_store="GTK_218")
+    conf.check_cfg(package="gtk+-2.0",
+                   atleast_version = "2.20",
+                   uselib_store="GTK_220")
 
     ######################
     ### gecko (xulrunner) for html rendering
@@ -361,7 +352,10 @@ def configure(conf):
                             args='"libxul-embedding >= 1.9.0" --define-variable=includetype=unstable "nspr" --cflags --libs',
                             msg='checking for libxul-embedding')
 
-            conf.define('GECKO_HOME', conf.get_pkgvar('libxul-embedding', 'sdkdir'))
+            conf.define('GECKO_HOME', conf.check_cfg(package='libxul-embedding',
+                                                     args='--variable=sdkdir',
+                                                     okmsg=waffles.misc.myokmsg,
+                                                     msg="Checking for libxul sdkdir").strip())
         else:
                     d = env['MOZILLA_DISTDIR']
                     conf.define['CPPPATH_GECKO'] = ['%s/sdk/include' % d,
@@ -379,23 +373,10 @@ def configure(conf):
         conf.define('USE_GTKMOZEMBED', 1)
 
 
-    ######################
 
-
-    # TODO: maybe the following checks should be in a more generic module.
-
-    #always defined to indicate that i18n is enabled */
     dfn('ENABLE_NLS', 1)
-
-    # TODO
-    #Define to 1 if you have the `bind_textdomain_codeset' function.
     dfn('HAVE_BIND_TEXTDOMAIN_CODESET', 1)
-
-
-    # TODO
-    #Define if the GNU gettext() function is already present or preinstalled.
     dfn('HAVE_GETTEXT', 1)
-    #Define to 1 if you have the `dcgettext' function.
     dfn('HAVE_DCGETTEXT', 1)
 
 
@@ -418,22 +399,6 @@ def configure(conf):
     # Define to 1 if you can safely include both <sys/time.h> and <time.h>. */
     dfn('TIME_WITH_SYS_TIME', 1)
 
-
-            # TODO: how to detect these values? is it possible to detect them?
-
-    # TODO: not necessary SELECT* defines?
-    # Define to the type of arg 1 for `select'. */
-    #dfn('SELECT_TYPE_ARG1', 'int', quote=0) # dont add quotes around 'int'
-    # Define to the type of args 2, 3 and 4 for `select'. */
-    #dfn('SELECT_TYPE_ARG234', '(fd_set *)', quote=0)
-    # Define to the type of arg 5 for `select'. */
-    #dfn('SELECT_TYPE_ARG5', '(struct timeval *)', quote=0)
-
-
-    #dfn('__cplusplus', 1)
-
-    # let compiler know that we have 'config.h'
-
     # appropriate cflags
     env.append_value('CXXFLAGS', env['CXXFLAGS_%s' % opt.debug_level.upper()])
     env.append_value('CCFLAGS', env['CCFLAGS_%s' % opt.debug_level.upper()])
@@ -452,6 +417,9 @@ def configure(conf):
     env.append_value('CXXFLAGS', env['CXXFLAGS_SAFE'])
 
 def build(bld):
+    from waffles.hashing import GetHashofDirs
+
+    bld.env.CXXDEPS_SWORD = GetHashofDirs(bld.env.CPPPATH_SWORD)
 
     env = bld.env
     opt = Options.options
@@ -516,12 +484,6 @@ def build(bld):
 
     if bld.env['INTLTOOL']:
         bld.add_subdirs('po')
-
-    #if env['HAVE_GTKSHARP'] and env['MCS']:
-        #bld.add_subdirs('sharp')
-
-    #if env['SGML2MAN']:
-    #	bld.add_subdirs('man')
 
     def post(ctx):
         if bld.env['POST_INSTALL']:
