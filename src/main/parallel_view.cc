@@ -935,6 +935,7 @@ void main_update_parallel_page(void)
 				sprintf(tmpBuf,
 					"<font face=\"%s\"size=\"%s\">",
 					mf->old_font, mf->old_font_size);
+			free_font(mf);
 
 			gtk_html_write(GTK_HTML(html), htmlstream,
 				       tmpBuf, strlen(tmpBuf));
