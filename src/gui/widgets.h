@@ -28,8 +28,8 @@ extern "C" {
         typedef struct _app_widgets WIDGETS;
         struct  _app_widgets {
                 GtkWidget
-                *app,  /* main form */
-*appbar, /* gtk status/progress bar */
+		        *app,  /* main form */
+                        *appbar, /* gtk status/progress bar */
                         *vboxMain, /*  */
                         *page, /*  */
                         *epaned, /* sidebar bar and main panel */
@@ -56,7 +56,7 @@ extern "C" {
                         *vbox_text,  /* vbox for  */
                         *box_dict,
                         *vbox_previewer,
-                //previewer,
+		//*previewer,
                         *parallel_tab, /*  */
 
                 /* dock/undock stuff */
@@ -93,7 +93,7 @@ extern "C" {
                         *cb_books,
 
                 /* textview widget */
-                //textview,
+		//*textview,
                 /* listview widget */
                         *listview_dict,
                         *store,
@@ -115,16 +115,21 @@ extern "C" {
                         *side_preview_item,
                         *viewcomms_item, /* widget to access toggle menu - for showcommss */
                         *viewdicts_item, /* widget to access toggle menu - for showdicts */
-                        *versestyle_item,       /* widget to access toggle menu - for versestyle */
+                        *versestyle_item,	/* widget to access toggle menu - for versestyle */
                         *linkedtabs_item,	/* widget to access toggle menu - for linkedtabs */
                         *showversenum_item,	/* widget to access toggle menu - for showversenum */
                         *readaloud_item,	/* widget to access toggle menu - for reading out loud */
                         *versehighlight_item,	/* widget to access toggle menu - for verse highlight */
                         *doublespace_item,	/* widget to access toggle menu - for doublespace */
                         *button_dict_book,      /* main toolbar togglebutton */
-                //*button_parallel_view,  /* main toolbar togglebutton */
+                //		*button_parallel_view,  /* main toolbar togglebutton */
                         *button_new_tab,	/* creates a new passage tab */
                         *hboxtb;		/* container for browsing notebook and button */
+
+                GtkActionGroup
+                        *app_actions,
+                        *view_actions;
+                GtkUIManager *main_menu;
         };
         extern WIDGETS widgets;
 

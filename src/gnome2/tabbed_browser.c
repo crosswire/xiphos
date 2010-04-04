@@ -159,18 +159,18 @@ void gui_recompute_view_menu_choices(void)
 {
 	change_tabs_no_redisplay = TRUE;
 
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.viewtexts_item),
-				       settings.showtexts);
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.viewcomms_item),
-				       settings.showcomms);
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.viewdicts_item),
-				       settings.showdicts);
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.viewpreview_item),
-				       settings.showpreview);
+//	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+//				       (widgets.viewtexts_item),
+//				       settings.showtexts);
+//	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+//				       (widgets.viewcomms_item),
+//				       settings.showcomms);
+//	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+//				       (widgets.viewdicts_item),
+//				       settings.showdicts);
+//	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+//				       (widgets.viewpreview_item),
+//				       settings.showpreview);
 
 	change_tabs_no_redisplay = FALSE;
 }
@@ -1433,11 +1433,11 @@ void gui_close_passage_tab(gint pagenum)
 	if (pt->showparallel) {
 		gtk_widget_hide(pt->paratab);
 		gui_destroy_parallel_tab();
-		settings.showparatab = FALSE;
-		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.parallel_tab_item),
-				       settings.showparatab);
-	}
+                if (settings.showparatab) {
+                        settings.showparatab = FALSE;
+                        gtk_toggle_action_toggled(GTK_TOGGLE_ACTION (gtk_action_group_get_action(widgets.view_actions, "ShowParallelViewTab")));
+                }
+        }
 	g_free(pt);
 	//cur_passage_tab = NULL;
 	removed_page = pagenum;

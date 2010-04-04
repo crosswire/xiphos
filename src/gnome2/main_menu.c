@@ -61,11 +61,12 @@
 //global function to handle gtk_uri calls
 void
 link_uri_hook(GtkLinkButton *button,
-	      const gchar *link,
-	      gpointer user_data)
+              const gchar *link,
+              gpointer user_data)
 {
-	xiphos_open_default(link);
+        xiphos_open_default(link);
 }
+
 
 /******************************************************************************
  * Name
@@ -86,25 +87,25 @@ link_uri_hook(GtkLinkButton *button,
 G_MODULE_EXPORT void
 on_help_contents_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	GError *error = NULL;
+        GError *error = NULL;
 #ifdef WIN32
-	const char *lang = g_getenv("LANG");
-	gchar *help_file = g_win32_get_package_installation_directory_of_module(NULL);
-	help_file = g_strconcat(help_file, "\0", NULL);
-	if (!strncmp(lang, "fr", 2))
-		help_file = g_build_filename(help_file, "share", "help", "xiphos_fr.chm", NULL);
-	else if (!strncmp(lang, "fa", 2))
-		help_file = g_build_filename(help_file, "share", "help", "xiphos_fa.chm", NULL);
-	else
-		help_file = g_build_filename(help_file, "share", "help", "xiphos.chm", NULL);
-	xiphos_open_default(help_file);
-	g_free(help_file);
+        const char *lang = g_getenv("LANG");
+        gchar *help_file = g_win32_get_package_installation_directory_of_module(NULL);
+        help_file = g_strconcat(help_file, "\0", NULL);
+        if (!strncmp(lang, "fr", 2))
+                help_file = g_build_filename(help_file, "share", "help", "xiphos_fr.chm", NULL);
+        else if (!strncmp(lang, "fa", 2))
+                help_file = g_build_filename(help_file, "share", "help", "xiphos_fa.chm", NULL);
+        else
+                help_file = g_build_filename(help_file, "share", "help", "xiphos.chm", NULL);
+        xiphos_open_default(help_file);
+        g_free(help_file);
 #else
-	gtk_show_uri (NULL, "ghelp:xiphos", gtk_get_current_event_time(), &error);
-	if (error != NULL) {
-		GS_warning(("%s", error->message));
-		g_error_free(error);
-	}
+        gtk_show_uri (NULL, "ghelp:xiphos", gtk_get_current_event_time(), &error);
+        if (error != NULL) {
+                GS_warning(("%s", error->message));
+                g_error_free(error);
+        }
 
 #endif /* WIN32 */
 }
@@ -128,7 +129,7 @@ on_help_contents_activate(GtkMenuItem * menuitem, gpointer user_data)
 G_MODULE_EXPORT void
 on_mailing_list_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	xiphos_open_default("https://lists.sourceforge.net/lists/listinfo/gnomesword-users/");
+        xiphos_open_default("https://lists.sourceforge.net/lists/listinfo/gnomesword-users/");
 }
 
 
@@ -151,15 +152,15 @@ on_mailing_list_activate(GtkMenuItem * menuitem, gpointer user_data)
 G_MODULE_EXPORT void
 on_live_chat_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	gchar *user = g_strdup_printf("%s", g_get_user_name()), *s, *url;
-	for (s = strchr(user, ' '); s; s = strchr(s, ' '))
-		*s = '_';
-	url = g_strdup_printf(
-	    "http://webchat.freenode.net/?nick=%s|xiphos&channels=xiphos&prompt=1",
-	    user);
-	xiphos_open_default(url);
-	g_free(url);
-	g_free(user);
+        gchar *user = g_strdup_printf("%s", g_get_user_name()), *s, *url;
+        for (s = strchr(user, ' '); s; s = strchr(s, ' '))
+                *s = '_';
+        url = g_strdup_printf(
+            "http://webchat.freenode.net/?nick=%s|xiphos&channels=xiphos&prompt=1",
+            user);
+        xiphos_open_default(url);
+        g_free(url);
+        g_free(user);
 }
 
 /******************************************************************************
@@ -181,7 +182,7 @@ on_live_chat_activate(GtkMenuItem * menuitem, gpointer user_data)
 G_MODULE_EXPORT void
 on_report_bug_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	xiphos_open_default(PACKAGE_BUGREPORT);
+        xiphos_open_default(PACKAGE_BUGREPORT);
 }
 
 
@@ -204,10 +205,10 @@ on_report_bug_activate(GtkMenuItem * menuitem, gpointer user_data)
 G_MODULE_EXPORT void
 on_about_the_sword_project_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	GtkWidget *dlg;
+        GtkWidget *dlg;
 
-	dlg = gui_create_about_sword();
-	gtk_widget_show(dlg);
+        dlg = gui_create_about_sword();
+        gtk_widget_show(dlg);
 }
 
 /******************************************************************************
@@ -229,10 +230,10 @@ on_about_the_sword_project_activate(GtkMenuItem * menuitem, gpointer user_data)
 G_MODULE_EXPORT void
 on_about_translation_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	GtkWidget *dlg;
+        GtkWidget *dlg;
 
-	dlg = gui_create_about_trans();
-	gtk_widget_show(dlg);
+        dlg = gui_create_about_trans();
+        gtk_widget_show(dlg);
 }
 
 /******************************************************************************
@@ -254,7 +255,7 @@ on_about_translation_activate(GtkMenuItem * menuitem, gpointer user_data)
 G_MODULE_EXPORT void
 on_daily_devotion_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	main_display_devotional();
+        main_display_devotional();
 }
 
 /******************************************************************************
@@ -275,7 +276,7 @@ on_daily_devotion_activate(GtkMenuItem * menuitem, gpointer user_data)
 G_MODULE_EXPORT void
 on_preferences_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	gui_setup_preferences_dialog();
+        gui_setup_preferences_dialog();
 }
 
 /******************************************************************************
@@ -295,233 +296,162 @@ on_preferences_activate(GtkMenuItem * menuitem, gpointer user_data)
  */
 G_MODULE_EXPORT void on_search_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	if (!settings.showshortcutbar)
-		gui_sidebar_showhide();
-	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_sidebar),2);
+        if (!settings.showshortcutbar)
+                gui_sidebar_showhide();
+        gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_sidebar),2);
 }
 
 /******************************************************************************
- * Name
- *  on_verse_style_activate
- *
  * Synopsis
  *   #include "gui/main_menu.h"
- *
- *   void on_verse_style_activate(GtkMenuItem *menuitem, gpointer user_data)
- *
  * Description
  *   toggle between verse and paragraph style
- *
- * Return value
- *   void
  */
-
 extern gboolean style_display;
 
 G_MODULE_EXPORT void
-on_verse_style_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
+on_verse_style_activate(GtkToggleAction * action, gpointer user_data)
 {
-	if (style_display) {
-		gchar *file = g_strdup_printf("%s/modops.conf",
-					      settings.gSwordDir);
-		gchar *url = g_strdup_printf("sword://%s/%s",
-					     settings.MainWindowModule,
-					     settings.currentverse);
-		/* remember our choice for the next program startup */
-		settings.versestyle = menuitem->active;
-		save_conf_file_item(file, settings.MainWindowModule, "style",
-				    (menuitem->active
-				     ? "verse"
-				     : "paragraph"));
-		if (settings.havebible) {
-			main_url_handler(url, TRUE);
-		}
-		g_free(url);
-		g_free(file);
-	}
+        if (style_display) {
+                gchar *file = g_strdup_printf("%s/modops.conf",
+                                              settings.gSwordDir);
+                gchar *url = g_strdup_printf("sword://%s/%s",
+                                             settings.MainWindowModule,
+                                             settings.currentverse);
+                /* remember our choice for the next program startup */
+                settings.versestyle = gtk_toggle_action_get_active(action);
+                save_conf_file_item(file, settings.MainWindowModule, "style",
+                                    (settings.versestyle
+                                     ? "verse"
+                                     : "paragraph"));
+                if (settings.havebible) {
+                        main_url_handler(url, TRUE);
+                }
+                g_free(url);
+                g_free(file);
+        }
 }
 
 /******************************************************************************
- * Name
- *  on_linked_tabs_activate
- *
  * Synopsis
  *   #include "gui/main_menu.h"
- *
- *   void on_linked_tabs_activate(GtkMenuItem *menuitem, gpointer user_data)
- *
  * Description
  *   toggle linking tabs together.
- *
- * Return value
- *   void
  */
 G_MODULE_EXPORT void
-on_linked_tabs_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
+on_linked_tabs_activate(GtkToggleAction * action, gpointer user_data)
 {
-	settings.linkedtabs = menuitem->active;
-	xml_set_value("Xiphos", "misc", "pinnedtabs",
-		      (settings.linkedtabs ? "1" : "0"));
-	if (settings.showparatab)
-		gui_force_parallel_tab_sync();
+        settings.linkedtabs = gtk_toggle_action_get_active(action);
+        xml_set_value("Xiphos", "misc", "pinnedtabs",
+                      (settings.linkedtabs ? "1" : "0"));
+        if (settings.showparatab)
+                gui_force_parallel_tab_sync();
 }
 
 /******************************************************************************
- * Name
- *  on_read_aloud_activate
- *
  * Synopsis
  *   #include "gui/main_menu.h"
- *
- *   void on_read_aloud_activate(GtkMenuItem *menuitem, gpointer user_data)
- *
  * Description
  *   toggle reading scripture out loud.
- *
- * Return value
- *   void
  */
 G_MODULE_EXPORT void
-on_read_aloud_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
+on_read_aloud_activate(GtkToggleAction * action, gpointer user_data)
 {
-	settings.readaloud = menuitem->active;
-	xml_set_value("Xiphos", "misc", "readaloud",
-		      (settings.readaloud ? "1" : "0"));
-	if (settings.readaloud)
-		main_display_bible(NULL, settings.currentverse);
+        settings.readaloud = gtk_toggle_action_get_active (action);
+        xml_set_value("Xiphos", "misc", "readaloud",
+                      (settings.readaloud ? "1" : "0"));
+        if (settings.readaloud)
+                main_display_bible(NULL, settings.currentverse);
 }
 
 /******************************************************************************
- * Name
- *  on_show_verse_numbers_activate
- *
  * Synopsis
  *   #include "gui/main_menu.h"
- *
- *   void on_show_verse_numbers_activate(GtkMenuItem *menuitem, gpointer user_data)
- *
  * Description
  *   toggle showing verse numbers together.
- *
- * Return value
- *   void
  */
 G_MODULE_EXPORT void
-on_show_verse_numbers_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
+on_show_verse_numbers_activate(GtkToggleAction * action, gpointer user_data)
 {
-	settings.showversenum = menuitem->active;
-	xml_set_value("Xiphos", "misc", "showversenum",
-		      (settings.showversenum ? "1" : "0"));
-	main_display_bible(NULL, settings.currentverse);
+        settings.showversenum = gtk_toggle_action_get_active(action);
+        xml_set_value("Xiphos", "misc", "showversenum",
+                      (settings.showversenum ? "1" : "0"));
+        main_display_bible(NULL, settings.currentverse);
 }
 
 /******************************************************************************
- * Name
- *  on_versehighlight_activate
- *
  * Synopsis
  *   #include "gui/main_menu.h"
- *
- *   void on_versehighlight_activate(GtkMenuItem *menuitem, gpointer user_data)
- *
  * Description
  *   toggle special current verse highlight.
- *
- * Return value
- *   void
  */
 G_MODULE_EXPORT void
-on_versehighlight_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
+on_versehighlight_activate(GtkToggleAction * action, gpointer user_data)
 {
-	settings.versehighlight = menuitem->active;
-	xml_set_value("Xiphos", "misc", "versehighlight",
-		      (settings.versehighlight ? "1" : "0"));
-	main_display_bible(NULL, settings.currentverse);
+        settings.versehighlight = gtk_toggle_action_get_active(action);
+        xml_set_value("Xiphos", "misc", "versehighlight",
+                      (settings.versehighlight ? "1" : "0"));
+        main_display_bible(NULL, settings.currentverse);
 }
 
 /******************************************************************************
- * Name
- *  gui_parallel_tab_activate
- *
  * Synopsis
  *   #include "gui/main_menu.h"
- *
- *   void gui_parallel_tab_activate(GtkMenuItem *menuitem, gpointer user_data)
- *
  * Description
  *   toggle special current verse highlight.
- *
- * Return value
- *   void
  */
 G_MODULE_EXPORT void
-gui_parallel_tab_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
+gui_parallel_tab_activate(GtkToggleAction * action, gpointer user_data)
 {
-	if (!settings.browsing) return;
-	if (!settings.showparatab && !menuitem->active) {
-		xml_set_value("Xiphos", "misc", "showparatab", "0");
-		return;
-	}
+        if (!settings.browsing) return;
 
-	settings.showparatab = menuitem->active;
-	xml_set_value("Xiphos", "misc", "showparatab",
-		      (settings.showparatab ? "1" : "0"));
-	if (settings.showparatab) {
-		gui_open_parallel_view_in_new_tab();
-		gui_force_parallel_tab_sync();
-	} else
-		gui_close_passage_tab  (gtk_notebook_page_num (
-					GTK_NOTEBOOK (widgets.notebook_main),
-					widgets.parallel_tab));
+        if (!settings.showparatab && !(gtk_toggle_action_get_active(action))) {
+                xml_set_value("Xiphos", "misc", "showparatab", "0");
+                return;
+        }
+
+        settings.showparatab = gtk_toggle_action_get_active(action);
+        xml_set_value("Xiphos", "misc", "showparatab",
+                      (settings.showparatab ? "1" : "0"));
+        if (settings.showparatab) {
+                gui_open_parallel_view_in_new_tab();
+                gui_force_parallel_tab_sync();
+        } else
+                gui_close_passage_tab  (gtk_notebook_page_num (
+                                        GTK_NOTEBOOK (widgets.notebook_main),
+                                        widgets.parallel_tab));
 }
 
 /******************************************************************************
- * Name
- *  on_side_preview_activate
- *
  * Synopsis
  *   #include "gui/main_menu.h"
- *
  *   void on_side_preview_activate(GtkMenuItem *menuitem, gpointer user_data)
- *
  * Description
  *   toggle special previewer in sidebar.
- *
- * Return value
- *   void
  */
 G_MODULE_EXPORT void
-on_side_preview_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
+on_side_preview_activate(GtkToggleAction * action, gpointer user_data)
 {
-	settings.show_previewer_in_sidebar = menuitem->active;
-	xml_set_value("Xiphos", "misc", "show_side_preview",
-		      (settings.show_previewer_in_sidebar ? "1" : "0"));
-	gui_show_previewer_in_sidebar(settings.show_previewer_in_sidebar);
+        settings.show_previewer_in_sidebar = gtk_toggle_action_get_active(action);
+        xml_set_value("Xiphos", "misc", "show_side_preview",
+                      (settings.show_previewer_in_sidebar ? "1" : "0"));
+        gui_show_previewer_in_sidebar(settings.show_previewer_in_sidebar);
 }
 
 /******************************************************************************
- * Name
- *   on_double_space_text_activate
- *
  * Synopsis
  *   #include "gui/main_menu.h"
- *
- *   void on_double_space_text_activate(GtkMenuItem *menuitem, gpointer user_data)
- *
  * Description
  *   toggle double-spacing of text.
- *
- * Return value
- *   void
  */
 G_MODULE_EXPORT void
-on_double_space_text_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
+on_double_space_text_activate(GtkToggleAction * action, gpointer user_data)
 {
-	settings.doublespace = menuitem->active;
-	xml_set_value("Xiphos", "misc", "doublespace",
-		      (settings.doublespace ? "1" : "0"));
-	//main_display_bible(NULL, settings.currentverse);
-	main_refresh_all();
+        settings.doublespace = gtk_toggle_action_get_active (action);
+        xml_set_value("Xiphos", "misc", "doublespace",
+                      (settings.doublespace ? "1" : "0"));
+        //main_display_bible(NULL, settings.currentverse);
+        main_refresh_all();
 }
 
 /******************************************************************************
@@ -544,12 +474,12 @@ on_double_space_text_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 G_MODULE_EXPORT void
 on_quit_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	shutdown_frontend();
-	/* shutdown the sword stuff */
-	main_shutdown_backend();
-	gtk_main_quit();
-	gtk_widget_destroy(widgets.app);
-	exit(0);
+        shutdown_frontend();
+        /* shutdown the sword stuff */
+        main_shutdown_backend();
+        gtk_main_quit();
+        gtk_widget_destroy(widgets.app);
+        exit(0);
 }
 
 
@@ -572,10 +502,10 @@ on_quit_activate(GtkMenuItem * menuitem, gpointer user_data)
 G_MODULE_EXPORT void
 on_about_xiphos_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	GtkWidget *AboutBox;
+        GtkWidget *AboutBox;
 
-	AboutBox = gui_create_about_xiphos();
-	gtk_widget_show(AboutBox);
+        AboutBox = gui_create_about_xiphos();
+        gtk_widget_show(AboutBox);
 }
 
 
@@ -597,36 +527,36 @@ on_about_xiphos_activate(GtkMenuItem * menuitem, gpointer user_data)
 G_MODULE_EXPORT void
 on_save_session_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	GtkWidget *dialog;
-	gchar *tabs_dir;
+        GtkWidget *dialog;
+        gchar *tabs_dir;
 
-	tabs_dir = g_strdup_printf("%s/tabs/",settings.gSwordDir);
+        tabs_dir = g_strdup_printf("%s/tabs/",settings.gSwordDir);
 
-	if (g_access(tabs_dir, F_OK) == -1) {
-		if ((g_mkdir(tabs_dir, S_IRWXU)) == -1) {
-			fprintf(stderr, "can't create tabs dir");
-			return;
-		}
-	}
+        if (g_access(tabs_dir, F_OK) == -1) {
+                if ((g_mkdir(tabs_dir, S_IRWXU)) == -1) {
+                        fprintf(stderr, "can't create tabs dir");
+                        return;
+                }
+        }
 
-	dialog = gtk_file_chooser_dialog_new ("Save Session",
-				      NULL,
-				      GTK_FILE_CHOOSER_ACTION_SAVE,
-				      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-				      GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT,
-				      NULL);
-	gtk_file_chooser_set_current_folder((GtkFileChooser*)dialog, tabs_dir);
-	if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT)
-  	{
-    		char *filename;
+        dialog = gtk_file_chooser_dialog_new ("Save Session",
+                                      NULL,
+                                      GTK_FILE_CHOOSER_ACTION_SAVE,
+                                      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+                                      GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT,
+                                      NULL);
+        gtk_file_chooser_set_current_folder((GtkFileChooser*)dialog, tabs_dir);
+        if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT)
+        {
+                char *filename;
 
-		filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
-		filename = g_path_get_basename(filename);
-		gui_save_tabs(filename);
-		g_free (filename);
-	}
+                filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
+                filename = g_path_get_basename(filename);
+                gui_save_tabs(filename);
+                g_free (filename);
+        }
 
-	gtk_widget_destroy (dialog);
+        gtk_widget_destroy (dialog);
 }
 
 
@@ -647,30 +577,30 @@ on_save_session_activate(GtkMenuItem * menuitem, gpointer user_data)
 static void
 redisplay_to_realign()
 {
-	static int realign_busy = FALSE;
+        static int realign_busy = FALSE;
 
-	if (realign_busy || change_tabs_no_redisplay)
-		return;
-	realign_busy = TRUE;
+        if (realign_busy || change_tabs_no_redisplay)
+                return;
+        realign_busy = TRUE;
 
-	/* first realize the pane size updates. */
-	sync_windows();
+        /* first realize the pane size updates. */
+        sync_windows();
 
-	/* then just redisplay everything as-is. */
-	gchar *url = g_strdup_printf("sword://%s/%s",
-				     settings.MainWindowModule,
-				     settings.currentverse);
-	main_url_handler(url, TRUE);
-	g_free(url);
-	if (settings.DictWindowModule) {
-		url = g_strdup_printf("sword://%s/%s",
-				      settings.DictWindowModule,
-				      settings.dictkey);
-		main_url_handler(url, TRUE);
-		g_free(url);
-	}
+        /* then just redisplay everything as-is. */
+        gchar *url = g_strdup_printf("sword://%s/%s",
+                                     settings.MainWindowModule,
+                                     settings.currentverse);
+        main_url_handler(url, TRUE);
+        g_free(url);
+        if (settings.DictWindowModule) {
+                url = g_strdup_printf("sword://%s/%s",
+                                      settings.DictWindowModule,
+                                      settings.dictkey);
+                main_url_handler(url, TRUE);
+                g_free(url);
+        }
 
-	realign_busy = FALSE;
+        realign_busy = FALSE;
 }
 
 /******************************************************************************
@@ -691,115 +621,89 @@ redisplay_to_realign()
 G_MODULE_EXPORT void
 on_open_session_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	GtkWidget *dialog;
-	gchar *tabs_dir;
+        GtkWidget *dialog;
+        gchar *tabs_dir;
 
-	tabs_dir = g_strdup_printf("%s/tabs/",settings.gSwordDir);
+        tabs_dir = g_strdup_printf("%s/tabs/",settings.gSwordDir);
 
-	if (g_access(tabs_dir, F_OK) == -1) {
-		if ((g_mkdir(tabs_dir, S_IRWXU)) == -1) {
-			fprintf(stderr, "can't create tabs dir");
-			return;
-		}
-	}
+        if (g_access(tabs_dir, F_OK) == -1) {
+                if ((g_mkdir(tabs_dir, S_IRWXU)) == -1) {
+                        fprintf(stderr, "can't create tabs dir");
+                        return;
+                }
+        }
 
-	dialog = gtk_file_chooser_dialog_new ("Open Session",
-				      NULL,
-				      GTK_FILE_CHOOSER_ACTION_OPEN,
-				      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-				      GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
-				      NULL);
-	gtk_file_chooser_set_current_folder((GtkFileChooser*)dialog, tabs_dir);
-	if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT)
-  	{
-    		char *filename;
+        dialog = gtk_file_chooser_dialog_new ("Open Session",
+                                      NULL,
+                                      GTK_FILE_CHOOSER_ACTION_OPEN,
+                                      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+                                      GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+                                      NULL);
+        gtk_file_chooser_set_current_folder((GtkFileChooser*)dialog, tabs_dir);
+        if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT)
+        {
+                char *filename;
 
-		filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
-		filename = g_path_get_basename(filename);
-		gui_close_all_tabs();
-		gui_load_tabs(filename);
-		redisplay_to_realign();
-		g_free (filename);
-	}
+                filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
+                filename = g_path_get_basename(filename);
+                gui_close_all_tabs();
+                gui_load_tabs(filename);
+                redisplay_to_realign();
+                g_free (filename);
+        }
 
-	gtk_widget_destroy (dialog);
+        gtk_widget_destroy (dialog);
 }
 
-/******************************************************************************
- * Name
- *  on_show_bible_text_activate
- *
+/***
  * Synopsis
  *   #include "gui/main_menu.h"
- *
- *   void on_show_bible_text_activate(GtkMenuItem * menuitem, gpointer user_data)
- *
  * Description
  *    toggle Bibletext window
- *
- * Return value
- *   void
  */
 G_MODULE_EXPORT void
-on_show_bible_text_activate(GtkMenuItem * menuitem, gpointer user_data)
+on_show_bible_text_activate(GtkToggleAction * action, gpointer user_data)
 {
-	gui_show_hide_texts(GTK_CHECK_MENU_ITEM(menuitem)->active);
-	redisplay_to_realign();
+        gui_show_hide_texts(gtk_toggle_action_get_active (action));
+        redisplay_to_realign();
 }
 
 
 G_MODULE_EXPORT void
-on_preview_activate(GtkMenuItem * menuitem, gpointer user_data)
+on_preview_activate(GtkToggleAction *action, gpointer user_data)
 {
-	gui_show_hide_preview(GTK_CHECK_MENU_ITEM(menuitem)->active);
-	redisplay_to_realign();
+        gui_show_hide_preview(gtk_toggle_action_get_active(action));
+        redisplay_to_realign();
 }
 
 
 /******************************************************************************
- * Name
- *  on_show_commentary_activate
- *
  * Synopsis
  *   #include "gui/main_menu.h"
- *
- *   void on_show_commentary_activate(GtkMenuItem * menuitem, gpointer user_data)
- *
  * Description
  *    toggle commentary window *** we need to change the name of this
  *    function because there no longer an upper_workbook
- *
- * Return value
- *   void
  */
 G_MODULE_EXPORT void
-on_show_commentary_activate(GtkMenuItem * menuitem, gpointer user_data)
+on_show_commentary_activate(GtkToggleAction *action, gpointer user_data)
 {
-	gui_show_hide_comms(GTK_CHECK_MENU_ITEM(menuitem)->active);
-	redisplay_to_realign();
+        gui_show_hide_comms(gtk_toggle_action_get_active (action));
+        redisplay_to_realign();
 }
 
 
 /******************************************************************************
- * Name
- *   on_show_dictionary_lexicon_activate
- *
  * Synopsis
  *   #include "gui/main_menu.h"
  *
- *   void on_show_dictionary_lexicon_activate(GtkMenuItem * menuitem, gpointer user_data)
- *
  * Description
  *    toggle lower_workbook view (on or off)
- *
- * Return value
- *   void
  */
 G_MODULE_EXPORT void
-on_show_dictionary_lexicon_activate(GtkMenuItem * menuitem, gpointer user_data)
+on_show_dictionary_lexicon_activate(GtkToggleAction * action, gpointer user_data)
 {
-	gui_show_hide_dicts(GTK_CHECK_MENU_ITEM(menuitem)->active);
-	redisplay_to_realign();
+        gui_show_hide_dicts(gtk_toggle_action_get_active(action));
+        redisplay_to_realign();
 }
 
 
@@ -821,7 +725,7 @@ on_show_dictionary_lexicon_activate(GtkMenuItem * menuitem, gpointer user_data)
 G_MODULE_EXPORT void
 on_module_manager_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	gui_open_mod_mgr();
+        gui_open_mod_mgr();
 }
 
 /******************************************************************************
@@ -843,112 +747,219 @@ on_module_manager_activate(GtkMenuItem * menuitem, gpointer user_data)
 G_MODULE_EXPORT void
 on_open_studypad_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	editor_create_new(settings.studypadfilename, NULL, FALSE);
+        editor_create_new(settings.studypadfilename, NULL, FALSE);
 }
 
 
 G_MODULE_EXPORT void
 on_advanced_search_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	main_open_search_dialog ();
+        main_open_search_dialog ();
 }
 
 
 G_MODULE_EXPORT void
 on_attach_detach_sidebar_activate(GtkMenuItem *menuitem, gpointer user_data)
 {
-	gui_attach_detach_sidebar ();
+        gui_attach_detach_sidebar ();
 }
 
 
 G_MODULE_EXPORT void
 on_sidebar_showhide_activate(GtkMenuItem *menuitem, gpointer user_data)
 {
-	gui_sidebar_showhide ();
+        gui_sidebar_showhide ();
 }
 
 
-GtkWidget *gui_create_main_menu(void)
+GtkWidget *gui_create_main_menu(GtkWidget * main_window)
 {
-	gchar *glade_file;
-	GladeXML *gxml;
- //   	const gchar *mname = NULL;
+        GtkActionGroup * action_group = gtk_action_group_new("MainMenuActions");
+        gchar * fname = gui_get_system_data_file("main-menus-new.ui");
+        GError *error;
 
-	glade_file = gui_general_user_file ("xi-menus.glade", FALSE);
-	g_return_val_if_fail (glade_file != NULL, NULL);
+        widgets.app_actions = gtk_action_group_new("AppActions");
+        widgets.view_actions = gtk_action_group_new("ViewActions");
+        widgets.main_menu = gtk_ui_manager_new();
 
-	gxml = glade_xml_new (glade_file, "menu_main", NULL);
+        GtkActionEntry app_entries[] = {
+                { "OpenStudypad", NULL,
+                  N_("Open Study_pad"), NULL, NULL,
+                  G_CALLBACK (on_open_studypad_activate) },
+                { "OpenSession", GTK_STOCK_OPEN,
+                  N_("_Open Session"), NULL, NULL,
+                  G_CALLBACK (on_open_session_activate) },
+                { "SaveSession", GTK_STOCK_SAVE,
+                  N_("_Save Session"), NULL, NULL,
+                  G_CALLBACK (on_save_session_activate) },
+                { "Quit", GTK_STOCK_QUIT,
+                  NULL, NULL, NULL,
+                  G_CALLBACK (on_quit_activate) },
+                { "Search", GTK_STOCK_FIND,
+                  N_("_Search"), "", NULL,
+                  G_CALLBACK (on_search_activate) },
+                { "AdvancedSearch", GTK_STOCK_FIND,
+                  N_("_Advaned Search"), "F3", NULL,
+                  G_CALLBACK (on_advanced_search_activate) },
+                { "Preferences", GTK_STOCK_PREFERENCES,
+                  NULL, "F2", NULL,
+                  G_CALLBACK (on_preferences_activate) },
+                { "ModuleManager", GTK_STOCK_PREFERENCES,
+                  N_("_Module Manager"), "F4",
+                  N_("Use module manager to install and remove Sword modules"),
+                  G_CALLBACK (on_module_manager_activate) },
+                { "Help", GTK_STOCK_HELP,
+                  N_("_Contents"), "F1", NULL,
+                  G_CALLBACK (on_help_contents_activate) },
+                { "MailingList", NULL,
+                  N_("_Mailing List"), NULL, NULL,
+                  G_CALLBACK (on_mailing_list_activate) },
+                { "LiveChat", NULL,
+                  N_("_Live Chat"), NULL, NULL,
+                  G_CALLBACK (on_live_chat_activate) },
+                { "ReportBug", GTK_STOCK_DIALOG_ERROR,
+                  N_("_Report Bug"), NULL, NULL,
+                  G_CALLBACK (on_report_bug_activate) },
+                { "AboutTranslation", NULL,
+                  N_("About _Translation"), NULL, NULL,
+                  G_CALLBACK (on_about_translation_activate) },
+                { "AboutSword", NULL,
+                  N_("_About The SWORD Project"), NULL, NULL,
+                  G_CALLBACK (on_about_the_sword_project_activate) },
+                { "AboutXiphos", NULL,
+                  N_("About _Xiphos"), NULL, NULL,
+                  G_CALLBACK (on_about_xiphos_activate) },
+                { "AttachDetachSidebar", NULL,
+                  N_("_Attach/Detach Sidebar"), NULL, NULL,
+                  G_CALLBACK (on_attach_detach_sidebar_activate) },
+                { "ShowHideSidebar", NULL,
+                  N_("_Show/Hide Attached Sidebar"), NULL, NULL,
+                  G_CALLBACK (on_sidebar_showhide_activate) },
+                { "DailyDevotion", NULL,
+                  N_("Preview _Daily Devotion"), NULL, NULL,
+                  G_CALLBACK (on_daily_devotion_activate) }
+        };
 
-	g_free (glade_file);
-	g_return_val_if_fail (gxml != NULL, NULL);
+        gtk_action_group_add_actions (widgets.app_actions, app_entries,
+                                      G_N_ELEMENTS(app_entries), NULL);
 
-	GtkWidget *menu 	= glade_xml_get_widget (gxml, "menu_main");
+        GtkActionEntry local_entries[] = {
+                { "FileMenu", NULL, N_("_File") },
+                { "EditMenu", NULL, N_("_Edit") },
+                { "ViewMenu", NULL, N_("_View") },
+                { "HelpMenu", NULL, N_("_Help") },
 
-	widgets.viewtexts_item = glade_xml_get_widget (gxml, "show_bible_text");
-	widgets.viewpreview_item = glade_xml_get_widget (gxml, "preview");
-	widgets.viewcomms_item = glade_xml_get_widget (gxml, "commentary");
-	widgets.viewdicts_item = glade_xml_get_widget (gxml, "show_dictionary_lexicon");
-	widgets.versestyle_item = glade_xml_get_widget (gxml, "verse_per_line");
-	widgets.linkedtabs_item = glade_xml_get_widget (gxml, "link_tabs");
-	widgets.readaloud_item = glade_xml_get_widget (gxml, "read_aloud");
-	widgets.showversenum_item = glade_xml_get_widget (gxml, "show_verse_numbers");
-	widgets.versehighlight_item = glade_xml_get_widget (gxml, "highlight_current_verse");
-	widgets.parallel_tab_item = glade_xml_get_widget (gxml, "show_parallel_view_in_a_tab");
-	widgets.side_preview_item = glade_xml_get_widget (gxml, "show_previewer_in_sidebar");
+        };
 
-	widgets.doublespace_item = glade_xml_get_widget (gxml, "double_space_text");
+        gtk_action_group_add_actions (action_group, local_entries,
+                                      G_N_ELEMENTS(local_entries), NULL);
+
+
+        GtkToggleActionEntry t_entries[] = {
+                { "BibleText", NULL,
+                  N_("_Bible"), NULL, NULL,
+                  G_CALLBACK (on_show_bible_text_activate),
+                  FALSE },
+                { "Preview", NULL,
+                  N_("_Preview"), NULL, NULL,
+                  G_CALLBACK (on_preview_activate),
+                  FALSE },
+                { "Commentary", NULL,
+                  N_("_Commentary/Book"), NULL, NULL,
+                  G_CALLBACK (on_show_commentary_activate),
+                  FALSE },
+                { "Dictionary", NULL,
+                  N_("Dictionar_y"), NULL, NULL,
+                  G_CALLBACK (on_show_dictionary_lexicon_activate),
+                  FALSE },
+                { "VersePerLine", NULL,
+                  N_("_Verse Per Line"), NULL, NULL,
+                  G_CALLBACK (on_verse_style_activate),
+                  FALSE },
+                { "LinkTabs", NULL,
+                  N_("L_ink Tabs"), NULL, NULL,
+                  G_CALLBACK (on_linked_tabs_activate),
+                  FALSE },
+                { "ReadAloud", NULL,
+                  N_("_Read Aloud"), NULL, NULL,
+                  G_CALLBACK (on_read_aloud_activate),
+                  FALSE },
+                { "ShowVerseNumbers", NULL,
+                  N_("Show Verse _Numbers"), NULL, NULL,
+                  G_CALLBACK (on_show_verse_numbers_activate),
+                  FALSE },
+                { "HighlightCurrentVerse", NULL,
+                  N_("_Highlight Current Verse"), NULL, NULL,
+                  G_CALLBACK (on_versehighlight_activate),
+                  FALSE },
+                { "DoubleSpaceText", NULL,
+                  N_("D_ouble-Space Text"), NULL, NULL,
+                  G_CALLBACK (on_double_space_text_activate),
+                  FALSE },
+                { "ShowParallelViewTab", NULL,
+                  N_("Show Parallel View in a  _Tab"), NULL, NULL,
+                  G_CALLBACK(gui_parallel_tab_activate),
+                  FALSE },
+                { "ShowPreviewerSidebar", NULL,
+                  N_("Show Previe_wer in the Sidebar"), NULL, NULL,
+                  G_CALLBACK (on_side_preview_activate),
+                  FALSE },
+        };
+
+        /* map tab's show state into view menu. */
+        t_entries[0].is_active = (gboolean) settings.showtexts;
+        t_entries[1].is_active = (gboolean) settings.showpreview;
+        t_entries[2].is_active = (gboolean) settings.showcomms;
+        t_entries[3].is_active = (gboolean) settings.showdicts;
+        t_entries[4].is_active = (gboolean) settings.versestyle;
+        t_entries[5].is_active = (gboolean) settings.linkedtabs;
+        t_entries[6].is_active = (gboolean) settings.readaloud;
+        t_entries[7].is_active = (gboolean) settings.showversenum;
+        t_entries[8].is_active = (gboolean) settings.versehighlight;
+        t_entries[9].is_active = (gboolean) settings.doublespace;
+        t_entries[10].is_active = (gboolean) settings.showparatab;
+        t_entries[11].is_active = (gboolean) settings.show_previewer_in_sidebar;
+
+        gtk_action_group_add_toggle_actions (widgets.view_actions, t_entries,
+                                             G_N_ELEMENTS(t_entries), NULL);
+
+        gtk_ui_manager_insert_action_group (widgets.main_menu, widgets.app_actions, 0);
+        gtk_ui_manager_insert_action_group (widgets.main_menu, action_group, 0);
+        gtk_ui_manager_insert_action_group (widgets.main_menu, widgets.view_actions, 0);
+
+        /* Read in the UI from our XML file */
+        error = NULL;
+        gtk_ui_manager_add_ui_from_file (widgets.main_menu, fname, &error);
+
+        if (error)
+        {
+                g_message ("building menus failed: %s", error->message);
+                g_error_free (error);
+        }
+        g_free(fname);
+
+
+        widgets.viewtexts_item = gtk_ui_manager_get_widget(widgets.main_menu, "/ViewMenu/BibleText");
+        widgets.viewpreview_item = gtk_ui_manager_get_widget (widgets.main_menu, "/MainMenu/ViewMenu/Preview");
+        widgets.viewcomms_item = gtk_ui_manager_get_widget (widgets.main_menu, "/MainMenu/ViewMenu/Commentary");
+        widgets.viewdicts_item = gtk_ui_manager_get_widget (widgets.main_menu, "/MainMenu/ViewMenu/Dictionary");
+        widgets.versestyle_item = gtk_ui_manager_get_widget (widgets.main_menu, "/MainMenu/ViewMenu/VersePerLine");
+        widgets.linkedtabs_item = gtk_ui_manager_get_widget (widgets.main_menu, "/MainMenu/ViewMenu/LinkTabs");
+        widgets.readaloud_item = gtk_ui_manager_get_widget (widgets.main_menu, "/MainMenu/ViewMenu/ReadAloud");
+        widgets.showversenum_item = gtk_ui_manager_get_widget (widgets.main_menu, "/MainMenu/ViewMenu/ShowVerseNumbers");
+        widgets.versehighlight_item = gtk_ui_manager_get_widget (widgets.main_menu, "/MainMenu/ViewMenu/HighlightCurrentVerse");
+        widgets.parallel_tab_item = gtk_ui_manager_get_widget (widgets.main_menu, "/MainMenu/ViewMenu/ShowParallelViewTab");
+        widgets.side_preview_item = gtk_ui_manager_get_widget (widgets.main_menu, "/MainMenu/ViewMenu/ShowPreviewerSidebar");
+        widgets.doublespace_item = gtk_ui_manager_get_widget (widgets.main_menu, "/MainMenu/ViewMenu/DoubleSpaceText");
+
 #ifndef USE_GTKMOZEMBED
-	gtk_widget_hide(widgets.doublespace_item);
+        gtk_widget_hide(widgets.doublespace_item);
 #endif /* !USE_GTKMOZEMBED */
 
-	/* map tab's show state into view menu. */
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.viewtexts_item),
-				       settings.showtexts);
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.viewcomms_item),
-				       settings.showcomms);
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.viewdicts_item),
-				       settings.showdicts);
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.viewpreview_item),
-				       settings.showpreview);
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.parallel_tab_item),
-				       settings.showparatab);
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.side_preview_item),
-				       settings.show_previewer_in_sidebar);
+        //set up global function to handle all link buttons
+        gtk_link_button_set_uri_hook (link_uri_hook, NULL, NULL);
+        gtk_window_add_accel_group (GTK_WINDOW (main_window),
+                                    gtk_ui_manager_get_accel_group (widgets.main_menu));
 
-	/* update other status toys */
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.versestyle_item),
-				       settings.versestyle);
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.linkedtabs_item),
-				       settings.linkedtabs);
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.readaloud_item),
-				       settings.readaloud);
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.showversenum_item),
-				       settings.showversenum);
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.versehighlight_item),
-				       settings.versehighlight);
-#ifdef USE_GTKMOZEMBED
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.doublespace_item),
-				       settings.doublespace);
-#endif /* USE_GTKMOZEMBED */
-
-    	/* connect signals and data */
-	glade_xml_signal_autoconnect_full
-		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);
-
-	//set up global function to handle all link buttons
-	gtk_link_button_set_uri_hook (link_uri_hook, NULL, NULL);
-
-	return menu;
+        return gtk_ui_manager_get_widget (widgets.main_menu, "/MainMenu");
 }

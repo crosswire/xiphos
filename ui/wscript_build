@@ -3,6 +3,7 @@
 
 bld.install_files('${PACKAGE_DATA_DIR}', '*.png')
 bld.install_files('${PACKAGE_DATA_DIR}', '*.glade')
+bld.install_files('${PACKAGE_DATA_DIR}', '*.ui')
 bld.install_files('${PACKAGE_DATA_DIR}', """
 languages
 editor_studypad.xml

@@ -1455,4 +1455,35 @@ void xiphos_create_archive(gchar* conf_file, gchar* datapath, gchar *zip,
 
 }
 
+
+gchar * gui_get_system_data_file (const gchar * fname)
+{
+	gchar** dir_collection;
+	guint dir_collection_length;
+	guint dir_i;
+	gchar * full_fname;
+
+	dir_collection = g_strdupv ((gchar **) g_get_system_data_dirs ());
+	dir_collection_length = g_strv_length (dir_collection);
+		
+	for (dir_i = 0; dir_i < dir_collection_length; dir_i++) {
+		full_fname = g_build_filename (dir_collection[dir_i], PACKAGE, fname, NULL);
+		if (g_file_test (full_fname, G_FILE_TEST_EXISTS)) {
+			return full_fname;
+		}
+		
+	}
+
+#ifdef DEBUG
+	GS_message(("MAINTAINER_MODE"));
+	/* generally only developers have any use for these */
+	full_fname = g_build_filename(PACKAGE_SOURCE_DIR, "ui", fname, NULL);
+	if (g_file_test (full_fname, G_FILE_TEST_EXISTS)) {
+		return full_fname;
+	}
+#endif
+	return NULL;
+}
+
+
 /******   end of file   ******/

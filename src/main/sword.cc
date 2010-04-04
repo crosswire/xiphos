@@ -1127,20 +1127,19 @@ void main_display_bible(const char * mod_name, const char * key)
 
 	settings.whichwindow = MAIN_TEXT_WINDOW;
 
-	file = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
-	style = get_conf_file_item(file, mod_name, "style");
-	if ((style) && !strcmp(style,"verse"))
-		settings.versestyle = TRUE;
-	else
-		settings.versestyle = FALSE;
-	g_free(style);
-	g_free(file);
+        file = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
+        style = get_conf_file_item(file, mod_name, "style");
+        if ((style) && !strcmp(style,"verse") && (!settings.versestyle)) {
+                style_display = FALSE;
+                gtk_toggle_action_toggled(
+                        GTK_TOGGLE_ACTION (
+                                gtk_action_group_get_action(
+                                        widgets.view_actions, "VersePerLine")));
+                style_display = TRUE;
+        }
 
-	style_display = FALSE;
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.versestyle_item),
-				       settings.versestyle);
-	style_display = TRUE;
+        g_free(style);
+        g_free(file);
 
 	if (backend->module_has_testament(mod_name,
 				backend->get_key_testament(key))) {
