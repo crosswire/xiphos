@@ -142,18 +142,18 @@ void frontend_display(const char *tabs)
 	GS_print(("%s\n", "Displaying Xiphos"));
 	gui_show_main_window();
 
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.viewtexts_item),
-				       settings.showtexts);
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.viewcomms_item),
-				       settings.showcomms);
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.viewdicts_item),
-				       settings.showdicts);
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.viewpreview_item),
-				       settings.showpreview);
+//	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+//				       (widgets.viewtexts_item),
+//				       settings.showtexts);
+//	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+//				       (widgets.viewcomms_item),
+//				       settings.showcomms);
+//	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+//				       (widgets.viewdicts_item),
+//				       settings.showdicts);
+//	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+//				       (widgets.viewpreview_item),
+//				       settings.showpreview);
 	gui_show_hide_preview(settings.showpreview);
 	gui_show_hide_texts(settings.showtexts);
 	gui_show_hide_dicts(settings.showdicts);
@@ -199,9 +199,9 @@ void frontend_display(const char *tabs)
 	} */
 	/* must be set after tab stuff is done */
 
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.parallel_tab_item),
-				       settings.showparatab);
+//	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+//				       (widgets.parallel_tab_item),
+//				       settings.showparatab);
 	g_signal_connect(GTK_OBJECT(widgets.parallel_tab_item),
 			   "toggled",
 			   G_CALLBACK(gui_parallel_tab_activate),

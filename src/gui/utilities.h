@@ -114,6 +114,7 @@ enum {
 #define	LANGSET_COUNT	200
 
 void language_init(void);
+gchar * gui_get_system_data_file (const gchar * fname);
 
 #ifdef __cplusplus
 }

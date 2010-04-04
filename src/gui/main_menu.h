@@ -26,9 +26,8 @@
 extern "C" {
 #endif
 
-
-GtkWidget * gui_create_main_menu(void);
-void gui_parallel_tab_activate(GtkCheckMenuItem * menuitem, gpointer user_data);
+GtkWidget *gui_create_main_menu(GtkWidget * main_window);
+void gui_parallel_tab_activate(GtkToggleAction * action, gpointer user_data);
 void on_module_manager_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_preferences_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_help_contents_activate(GtkMenuItem * menuitem, gpointer user_data);
@@ -39,21 +38,21 @@ void on_about_the_sword_project_activate(GtkMenuItem * menuitem, gpointer user_d
 void on_about_translation_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_daily_devotion_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_search_activate(GtkMenuItem * menuitem, gpointer user_data);
-void on_verse_style_activate(GtkCheckMenuItem * menuitem, gpointer user_data);
-void on_linked_tabs_activate(GtkCheckMenuItem * menuitem, gpointer user_data);
-void on_read_aloud_activate(GtkCheckMenuItem * menuitem, gpointer user_data);
-void on_show_verse_numbers_activate(GtkCheckMenuItem * menuitem, gpointer user_data);
-void on_versehighlight_activate(GtkCheckMenuItem * menuitem, gpointer user_data);
-void on_side_preview_activate(GtkCheckMenuItem * menuitem, gpointer user_data);
-void on_double_space_text_activate(GtkCheckMenuItem * menuitem, gpointer user_data);
+void on_verse_style_activate(GtkToggleAction * action, gpointer user_data);
+void on_linked_tabs_activate(GtkToggleAction * action, gpointer user_data);
+void on_read_aloud_activate(GtkToggleAction * action, gpointer user_data);
+void on_show_verse_numbers_activate(GtkToggleAction * action, gpointer user_data);
+void on_versehighlight_activate(GtkToggleAction * action, gpointer user_data);
+void on_side_preview_activate(GtkToggleAction * action, gpointer user_data);
+void on_double_space_text_activate(GtkToggleAction * action, gpointer user_data);
 void on_quit_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_about_xiphos_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_save_session_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_open_session_activate(GtkMenuItem * menuitem, gpointer user_data);
-void on_show_bible_text_activate(GtkMenuItem * menuitem, gpointer user_data);
-void on_preview_activate(GtkMenuItem * menuitem, gpointer user_data);
-void on_show_commentary_activate(GtkMenuItem * menuitem, gpointer user_data);
-void on_show_dictionary_lexicon_activate(GtkMenuItem * menuitem, gpointer user_data);
+void on_show_bible_text_activate(GtkToggleAction * action, gpointer user_data);
+void on_preview_activate(GtkToggleAction *action, gpointer user_data);
+void on_show_commentary_activate(GtkToggleAction * action, gpointer user_data);
+void on_show_dictionary_lexicon_activate(GtkToggleAction * action, gpointer user_data);
 void on_open_studypad_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_advanced_search_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_attach_detach_sidebar_activate(GtkMenuItem *menuitem, gpointer user_data);

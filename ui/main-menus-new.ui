@@ -1,0 +1,51 @@
+<!--*- mode: xml -*-->
+<ui>
+  <menubar name="MainMenu">
+    <menu action="FileMenu">
+      <menuitem action="OpenStudypad" />
+      <separator/>
+      <menuitem action="OpenSession" />
+      <menuitem action="SaveSession" />
+      <separator/>
+      <menuitem action="Quit" />
+    </menu>
+    <menu action="EditMenu" >
+      <menuitem action="Search" />
+      <menuitem action="AdvancedSearch" />
+      <separator/>
+      <menuitem action="Preferences" />
+      <menuitem action="ModuleManager" />
+    </menu>
+    <menu action="ViewMenu" >
+      <menuitem action="DailyDevotion" />
+      <separator/>
+      <menuitem action="BibleText" />
+      <menuitem action="Preview" />
+      <menuitem action="Commentary" />
+      <menuitem action="Dictionary" />
+      <separator/>
+      <menuitem action="VersePerLine" />
+      <menuitem action="LinkTabs" />
+      <menuitem action="ReadAloud" />
+      <menuitem action="ShowVerseNumbers" />
+      <menuitem action="HighlightCurrentVerse" />
+      <menuitem action="DoubleSpaceText" />
+      <separator/>
+      <menuitem action="AttachDetachSidebar" />
+      <menuitem action="ShowHideSidebar" />
+      <menuitem action="ShowParallelViewTab" />
+      <menuitem action="ShowPreviewerSidebar" />
+    </menu>
+    <menu action="HelpMenu" >
+      <menuitem action="Help" />
+      <menuitem action="MailingList" />
+      <separator/>
+      <menuitem action="LiveChat" />
+      <menuitem action="ReportBug" />
+      <separator/>
+      <menuitem action="AboutTranslation" />
+      <menuitem action="AboutSword" />
+      <menuitem action="AboutXiphos" />
+    </menu>
+  </menubar>
+</ui>

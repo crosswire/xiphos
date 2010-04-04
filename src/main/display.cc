@@ -1245,10 +1245,12 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 				char msg[256];
 				sprintf(msg, "ReadAloud disabled:\nsocket failed, %s",
 					strerror(errno));
-				settings.readaloud = 0;
-				gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-							       (widgets.readaloud_item),
-							       settings.readaloud);
+
+                                if (settings.readaloud) {
+                                        settings.readaloud = 0;
+                                        gtk_toggle_action_toggled(GTK_TOGGLE_ACTION (gtk_action_group_get_action(widgets.view_actions, "ReadAloud")));
+                                }
+
 				gui_generic_warning(msg);
 				return;
 			}
@@ -1274,10 +1276,10 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 						"TTS \"festival\" not started -- perhaps not installed",
 						"TTS connect failed", strerror(errno));
 					StopFestival(&tts_socket);
-					settings.readaloud = 0;
-					gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-								       (widgets.readaloud_item),
-								       settings.readaloud);
+                                        if (settings.readaloud) {
+                                                settings.readaloud = 0;
+                                                gtk_toggle_action_toggled(GTK_TOGGLE_ACTION (gtk_action_group_get_action(widgets.view_actions, "ReadAloud")));
+                                        }
 					gui_generic_warning(msg);
 					return;
 				}
@@ -1417,10 +1419,10 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 			sprintf(msg, "TTS disappeared?\nTTS write failed: %s",
 				strerror(errno));
 			StopFestival(&tts_socket);
-			settings.readaloud = 0;
-			gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-						       (widgets.readaloud_item),
-						       settings.readaloud);
+                        if (settings.readaloud) {
+                                settings.readaloud = 0;
+                                gtk_toggle_action_toggled(GTK_TOGGLE_ACTION (gtk_action_group_get_action(widgets.view_actions, "ReadAloud")));
+                        }
 			gui_generic_warning(msg);
 		}
 

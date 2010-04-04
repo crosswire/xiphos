@@ -697,30 +697,6 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 		if (state == GDK_CONTROL_MASK)
 			new_base_font_size(FALSE);
 		break;
-	case XK_F1: // F1 help
-		if (state == 0)
-			on_help_contents_activate(NULL, NULL);
-		break;
-	case XK_F2: // F2 preferences
-		if (state == 0)
-			on_preferences_activate(NULL, NULL);
-		break;
-	case XK_F3: // F3 search
-		if (state == 0)
-			main_open_search_dialog();
-		else if (state == GDK_CONTROL_MASK)
-			gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.
-								   notebook_sidebar), 2);
-		break;
-	case XK_F4: // F4 module manager
-		if (state == 0)
-			on_module_manager_activate (NULL, NULL);
-		else if (state == GDK_CONTROL_MASK)
-			gui_close_passage_tab(gtk_notebook_page_num
-					      (GTK_NOTEBOOK(widgets.notebook_main),
-					       ((PASSAGE_TAB_INFO*)cur_passage_tab)->
-					       page_widget));
-		break;
 	case XK_F10: // Shift-F10 bible module right click
 		if (state == GDK_SHIFT_MASK)
 			gui_menu_popup(settings.MainWindowModule, NULL);
@@ -809,7 +785,7 @@ void create_mainwindow(void)
 	gtk_widget_show(vbox_gs);
 	gtk_container_add (GTK_CONTAINER (widgets.app), vbox_gs);
 
-	menu = gui_create_main_menu ();
+	menu = gui_create_main_menu (widgets.app);
 
 	gtk_box_pack_start(GTK_BOX(vbox_gs), menu, FALSE, TRUE, 0);
 
