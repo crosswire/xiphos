@@ -704,15 +704,11 @@ void main_update_parallel_page(void)
 {
 	gchar tmpBuf[256];
 	const gchar *rowcolor;
-	gchar *font_size_tmp = NULL, *font_size = NULL;
-	gchar *utf8str, *mod_name, *font_name = NULL;
-	gint utf8len, i, j;
-	gboolean use_gtkhtml_font;
+	gchar *utf8str, *mod_name;
+	gint i, j;
 	gboolean is_rtol = FALSE;
-	gchar *buf;
-	gchar *file = NULL;
-	gchar *data = NULL;
-
+	gchar *data = NULL, *newdata = NULL;
+	MOD_FONT *mf;
 
 	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.html_parallel))) return ;
 	GeckoHtml *html = GECKO_HTML(widgets.html_parallel);
@@ -726,86 +722,34 @@ void main_update_parallel_page(void)
 			settings.bible_bg_color,
 			settings.bible_text_color, settings.link_color);
 
-		utf8len = strlen(tmpBuf);
-		if (utf8len) {
-			data = g_strconcat(tmpBuf,NULL);
-		}
+		data = g_strdup(tmpBuf);
 
 		for (i = 0, j = 0; i < 5; i++) {
 			mod_name = NULL;
 			switch (i) {
 			case 0:
-				if (parallel1)
-					mod_name =
-					    settings.parallel1Module;
-				else
-					mod_name = NULL;
+				mod_name = (parallel1 ? settings.parallel1Module : NULL);
 				break;
 			case 1:
-				if (parallel2)
-					mod_name =
-					    settings.parallel2Module;
-				else
-					mod_name = NULL;
+				mod_name = (parallel2 ? settings.parallel2Module : NULL);
 				break;
 			case 2:
-				if (parallel3)
-					mod_name =
-					    settings.parallel3Module;
-				else
-					mod_name = NULL;
+				mod_name = (parallel3 ? settings.parallel3Module : NULL);
 				break;
 			case 3:
-				if (parallel4)
-					mod_name =
-					    settings.parallel4Module;
-				else
-					mod_name = NULL;
+				mod_name = (parallel4 ? settings.parallel4Module : NULL);
 				break;
 			case 4:
-				if (parallel5)
-					mod_name =
-					    settings.parallel5Module;
-				else
-					mod_name = NULL;
+				mod_name = (parallel5 ? settings.parallel5Module : NULL);
 				break;
 			}
-			GS_message(("mod_name = %s",mod_name));
 			if (!mod_name)
 				continue;
+			GS_message(("mod_name = %s",mod_name));
+			mf = get_font(mod_name);
 
 			++j;
 			is_rtol = main_is_mod_rtol(mod_name);
-
-			file = g_strdup_printf("%s/fonts.conf", settings.gSwordDir);
-			font_name = get_conf_file_item(file, mod_name, "Font");
-			if (!font_name || !strcmp(font_name, "none")) {
-				font_name =
-				    main_get_mod_config_entry(mod_name, "Font");
-				if (!font_name)
-					font_name = g_strdup("none");
-			}
-			if (strlen(font_name) < 2) {
-				use_gtkhtml_font = TRUE;
-			} else {
-				if (!strncmp(font_name, "none", 4)) {
-					use_gtkhtml_font = TRUE;
-				} else {
-					use_gtkhtml_font = FALSE;
-				}
-			}
-
-			font_size_tmp = get_conf_file_item(file, mod_name, "Fontsize");
-			g_free(file);
-			if (!font_size_tmp) {
-				font_size_tmp =
-				    main_get_mod_config_entry(mod_name, "Fontsize");
-			}
-
-			font_size =
-			    g_strdup_printf("%+d",
-					    (font_size_tmp ? atoi(font_size_tmp) : 0)
-					     + settings.base_font_size);
 
 			if (j == 0 || j == 2 || j == 4)
 				rowcolor = "#F1F1F1";
@@ -819,10 +763,9 @@ void main_update_parallel_page(void)
 					settings.verse_num_font_size + settings.base_font_size,
 					settings.currentverse);
 
-				utf8len = strlen(tmpBuf);
-				if (utf8len) {
-					data = g_strconcat(data, tmpBuf, NULL);
-				}
+				newdata = g_strconcat(data, tmpBuf, NULL);
+				g_free(data);
+				data = newdata;
 			}
 
 			sprintf(tmpBuf,
@@ -834,78 +777,56 @@ void main_update_parallel_page(void)
 				settings.verse_num_font_size + settings.base_font_size,
 				mod_name);
 
-			utf8len = strlen(tmpBuf);
-			if (utf8len) {
-					data = g_strconcat(data, tmpBuf, NULL);
-			}
+			newdata = g_strconcat(data, tmpBuf, NULL);
+			g_free(data);
+			data = newdata;
 
-			if (use_gtkhtml_font)
+			if ((strlen(mf->old_font) < 2) ||
+			    !strncmp(mf->old_font, "none", 4))
 				sprintf(tmpBuf, "<font size=\"%s\">",
-					font_size);
+					mf->old_font_size);
 			else
 				sprintf(tmpBuf,
 					"<font face=\"%s\" size=\"%s\">",
-					font_name, font_size);
+					mf->old_font, mf->old_font_size);
+			free_font(mf);
 
+			newdata = g_strconcat(data, tmpBuf, NULL);
+			g_free(data);
+			data = newdata;
 
-			utf8len = strlen(tmpBuf);
-			if (utf8len) {
-				data = g_strconcat(data, tmpBuf, NULL);
-			}
+			if (is_rtol)
+				data = g_strconcat(data, "<br><div align=right>", NULL);
 
-			utf8str =
-			    backend_p->get_render_text(mod_name,
-							settings.
-							currentverse);
-			if (is_rtol) {
-				buf = g_strdup_printf(
-					"%s","<br><DIV ALIGN=right>");
-				if (strlen(buf)) {
-					data = g_strconcat(data, buf, NULL);
-					free(buf);
-				}
-			}
+			utf8str = backend_p->get_render_text(mod_name,
+							     settings.currentverse);
 			if (strlen(utf8str)) {
-				data = g_strconcat(data, utf8str, NULL);
+				newdata = g_strconcat(data, utf8str, NULL);
+				g_free(data);
+				data = newdata;
 				free(utf8str);
 			}
 
-			if (is_rtol) {
-				buf = g_strdup_printf(
-					"%s","</DIV><br>");
-				if (strlen(buf)) {
-					data = g_strconcat(data, buf, NULL);
-					free(buf);
-				}
-			}
+			if (is_rtol)
+				data = g_strconcat(data, "</div><br>", NULL);
+
 			sprintf(tmpBuf,
 				"</font><small>[<a href=\"xiphos.url?action=showParallel&"
 				"type=swap&value=%s\">%s</a>]</small></td></tr>",
 				mod_name,_("view context"));
 
-			utf8len = strlen(tmpBuf);
-			if (utf8len) {
-				data = g_strconcat(data, tmpBuf, NULL);
-			}
+			newdata = g_strconcat(data, tmpBuf, NULL);
+			g_free(data);
+			data = newdata;
 		}
 
-		sprintf(tmpBuf, "</table></body></html>");
-
-		utf8len = strlen(tmpBuf);
-		if (utf8len) {
-			data = g_strconcat(data, tmpBuf, NULL);
-			gecko_html_write(html,data,-1);
-		}
+		newdata = g_strconcat(data, "</table></body></html>", NULL);
+		g_free(data);
+		data = newdata;
+		gecko_html_write(html, data, -1);
 	}
 	gecko_html_close(html);
-	if (data)
-		g_free(data);
-	if (font_name)
-		free(font_name);
-	if (font_size)
-		free(font_size);
-	if (font_size_tmp)
-		free(font_size_tmp);
+	g_free(data);
 }
 
 #else
@@ -928,13 +849,11 @@ void main_update_parallel_page(void)
 void main_update_parallel_page(void)
 {
 	gchar tmpBuf[256], *rowcolor;
-	gchar *font_size_tmp = NULL, *font_size = NULL;
-	gchar *utf8str, *mod_name, *font_name = NULL;
-	gint utf8len, i, j;
-	gboolean was_editable, use_gtkhtml_font;
+	gchar *utf8str, *mod_name, *buf;
+	gint i, j;
+	gboolean was_editable;
 	gboolean is_rtol = FALSE;
-	gchar *buf;
-	gchar *file = NULL;
+	MOD_FONT *mf;
 
 	settings.cvparallel = settings.currentverse;
 
@@ -944,100 +863,41 @@ void main_update_parallel_page(void)
 		was_editable = gtk_html_get_editable(html);
 		if (was_editable)
 			gtk_html_set_editable(html, FALSE);
-		htmlstream =
-		    gtk_html_begin_content(html,
-					   (gchar *)"text/html; charset=utf-8");
+		htmlstream = gtk_html_begin_content(html,
+						    (gchar *)"text/html; charset=utf-8");
 		sprintf(tmpBuf,
 			"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table>",
 			settings.bible_bg_color,
 			settings.bible_text_color, settings.link_color);
-		/*utf8str =
-		    e_utf8_from_gtk_string(widgets.html_parallel,
-					   tmpBuf);*/
-		utf8len = strlen(tmpBuf);
-		if (utf8len) {
-			gtk_html_write(GTK_HTML(html), htmlstream,
-				       tmpBuf, utf8len);
-		}
+		gtk_html_write(GTK_HTML(html), htmlstream,
+			       tmpBuf, strlen(tmpBuf));
 
 		for (i = 0, j = 0; i < 5; i++) {
 			mod_name = NULL;
 			switch (i) {
 			case 0:
-				if (parallel1)
-					mod_name =
-					    settings.parallel1Module;
-				else
-					mod_name = NULL;
+				mod_name = (parallel1 ? settings.parallel1Module : NULL);
 				break;
 			case 1:
-				if (parallel2)
-					mod_name =
-					    settings.parallel2Module;
-				else
-					mod_name = NULL;
+				mod_name = (parallel2 ? settings.parallel2Module : NULL);
 				break;
 			case 2:
-				if (parallel3)
-					mod_name =
-					    settings.parallel3Module;
-				else
-					mod_name = NULL;
+				mod_name = (parallel3 ? settings.parallel3Module : NULL);
 				break;
 			case 3:
-				if (parallel4)
-					mod_name =
-					    settings.parallel4Module;
-				else
-					mod_name = NULL;
+				mod_name = (parallel4 ? settings.parallel4Module : NULL);
 				break;
 			case 4:
-				if (parallel5)
-					mod_name =
-					    settings.parallel5Module;
-				else
-					mod_name = NULL;
+				mod_name = (parallel5 ? settings.parallel5Module : NULL);
 				break;
 			}
 			if (!mod_name)
 				continue;
 			GS_message(("mod_name = %s", mod_name));
+			mf = get_font(mod_name);
 
 			++j;
 			is_rtol = main_is_mod_rtol(mod_name);
-			//font_name = get_module_font_name(mod_name);
-			file = g_strdup_printf("%s/fonts.conf", settings.gSwordDir);
-			font_name = get_conf_file_item(file, mod_name, "Font");
-			if (!font_name || !strcmp(font_name, "none")) {
-				font_name =
-				    main_get_mod_config_entry(mod_name, "Font");
-				if (!font_name)
-					font_name = g_strdup("none");
-			}
-			if (strlen(font_name) < 2) {
-				use_gtkhtml_font = TRUE;
-				GS_message(("use_gtkhtml_font = TRUE"));
-			} else {
-				if (!strncmp(font_name, "none", 4)) {
-					use_gtkhtml_font = TRUE;
-					GS_message(("use_gtkhtml_font = TRUE"));
-				} else {
-					use_gtkhtml_font = FALSE;
-					GS_message(("use_gtkhtml_font = FALSE"));
-				}
-			}
-
-			font_size_tmp = get_conf_file_item(file, mod_name, "Fontsize");
-			g_free(file);
-			if (!font_size_tmp) {
-				font_size_tmp =
-				    main_get_mod_config_entry(mod_name, "Fontsize");
-			}
-
-			font_size =
-			    g_strdup_printf("%+d",
-					    (font_size_tmp ? atoi(font_size_tmp) : 0)
-					     + settings.base_font_size);
 
 			if (j == 0 || j == 2 || j == 4)
 				rowcolor = (gchar *)"#F1F1F1";
@@ -1051,13 +911,8 @@ void main_update_parallel_page(void)
 					settings.verse_num_font_size + settings.base_font_size,
 					settings.currentverse);
 
-				utf8len = strlen(tmpBuf);
-				if (utf8len) {
-					gtk_html_write(GTK_HTML(html),
-						       htmlstream,
-						       tmpBuf,
-						       utf8len);
-				}
+				gtk_html_write(GTK_HTML(html), htmlstream,
+					       tmpBuf, strlen(tmpBuf));
 			}
 
 			sprintf(tmpBuf,
@@ -1069,94 +924,49 @@ void main_update_parallel_page(void)
 				settings.verse_num_font_size + settings.base_font_size,
 				mod_name);
 
-			utf8len = strlen(tmpBuf);
-			if (utf8len) {
-				gtk_html_write(GTK_HTML(html),
-					       htmlstream, tmpBuf,
-					       utf8len);
-			}
+			gtk_html_write(GTK_HTML(html), htmlstream,
+				       tmpBuf, strlen(tmpBuf));
 
-			if (use_gtkhtml_font)
+			if ((strlen(mf->old_font) < 2) ||
+			    !strncmp(mf->old_font, "none", 4))
 				sprintf(tmpBuf, "<font size=\"%s\">",
-					font_size);
+					mf->old_font);
 			else
 				sprintf(tmpBuf,
 					"<font face=\"%s\"size=\"%s\">",
-					font_name, font_size);
+					mf->old_font, mf->old_font_size);
 
-
-			utf8len = strlen(tmpBuf);
-			if (utf8len) {
-				gtk_html_write(GTK_HTML(html),
-					       htmlstream, tmpBuf,
-					       utf8len);
-			}
-
-			utf8str =
-			    backend_p->get_render_text(mod_name,
-							settings.
-							currentverse);
-/*#ifdef  DEBUG
-			if (!strcmp(mod_name,"KJV2006"))
-				g_message("\nmod: %s\nRAW: %s\nRENDERED: %s", mod_name,
-						backend_p->get_raw_text(mod_name,
-								settings.currentverse),utf8str);
-#endif
-*/
-			if (is_rtol) {
-				buf = g_strdup_printf(
-					"%s","<br><DIV ALIGN=right>");
-				if (strlen(buf)) {
-					gtk_html_write(GTK_HTML(html),
-						       htmlstream, buf,
-						       strlen(buf));
-					free(buf);
-				}
-			}
-			if (strlen(utf8str)) {
-				gtk_html_write(GTK_HTML(html),
-					       htmlstream, utf8str,
-					       strlen(utf8str));
-				free(utf8str);
-			}
+			gtk_html_write(GTK_HTML(html), htmlstream,
+				       tmpBuf, strlen(tmpBuf));
 
 			if (is_rtol) {
-				buf = g_strdup_printf(
-					"%s","</DIV><br>");
-				if (strlen(buf)) {
-					gtk_html_write(GTK_HTML(html),
-						       htmlstream, buf,
-						       strlen(buf));
-					free(buf);
-				}
+				buf = (gchar*) "<br><div align=right>";
+				gtk_html_write(GTK_HTML(html), htmlstream,
+					       buf, strlen(buf));
+			}
+
+			utf8str = backend_p->get_render_text(mod_name, settings.currentverse);
+			gtk_html_write(GTK_HTML(html), htmlstream,
+				       utf8str, strlen(utf8str));
+			free(utf8str);
+
+			if (is_rtol) {
+				buf = (gchar*) "</div><br>";
+				gtk_html_write(GTK_HTML(html), htmlstream,
+					       buf, strlen(buf));
 			}
 			sprintf(tmpBuf,
 				"</font><small>[<a href=\"xiphos.url?action=showParallel&"
 				"type=swap&value=%s\">%s</a>]</small></td></tr>",
 				mod_name,_("view context"));
 
-			utf8len = strlen(tmpBuf);
-			if (utf8len) {
-				gtk_html_write(GTK_HTML(html),
-					       htmlstream, tmpBuf,
-					       utf8len);
-			}
-			if (font_name)
-				free(font_name);
-			if (font_size)
-				free(font_size);
-			if (font_size_tmp)
-				free(font_size_tmp);
-
-		}
-
-		sprintf(tmpBuf, "</table></body></html>");
-
-		utf8len = strlen(tmpBuf);
-		if (utf8len) {
 			gtk_html_write(GTK_HTML(html), htmlstream,
-				       tmpBuf, utf8len);
+				       tmpBuf, strlen(tmpBuf));
 		}
+
+		buf = (gchar*) "</table></body></html>";
+		gtk_html_write(GTK_HTML(html), htmlstream,
+			       tmpBuf, strlen(buf));
 
 		gtk_html_end(GTK_HTML(html), htmlstream, status1);
 		gtk_html_set_editable(html, was_editable);

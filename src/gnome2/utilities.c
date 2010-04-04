@@ -796,12 +796,9 @@ void free_font(MOD_FONT *mf)
 	if (mf->old_font) g_free(mf->old_font);
 	if (mf->old_gdk_font) g_free(mf->old_gdk_font);
 	if (mf->old_font_size) g_free(mf->old_font_size);
-	//mf->new_font = NULL;
-	//mf->new_gdk_font = NULL;
-	//mf->new_font_size = NULL;
-	//mf->no_font = 0;
 	g_free(mf);
 }
+
 /******************************************************************************
  * Name
  *   remove_linefeeds
