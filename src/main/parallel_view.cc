@@ -996,22 +996,19 @@ static void int_display(SWBuf& text, gchar *key, char *mod_name[])
 	gchar  	*utf8str,
 		*textColor,
 		*tmpkey,
-		tmpbuf[256],
-		*use_font_size[5],
-		*font_size_tmp[5],
-		*use_font_name[5];
+		tmpbuf[256];
 	const gchar *bgColor;
 	gchar str[500];
 	gboolean evenRow = FALSE;
 	gboolean is_rtol = FALSE;
-	gchar *file = NULL;
 	gint cur_verse, cur_chapter, i = 1, j;
 	char *cur_book;
 	gboolean is_module[5] = { FALSE, FALSE, FALSE, FALSE, FALSE };
+	MOD_FONT *mf[5] = { NULL, NULL, NULL, NULL, NULL };
 
 	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.notebook_bible_parallel))) return;
 
-	// need #verses to process in this book.
+	// need #verses to process in this chapter.
 	VerseKey vkey;
 	int xverses;
 
@@ -1021,7 +1018,6 @@ static void int_display(SWBuf& text, gchar *key, char *mod_name[])
 	xverses = (vkey.getVerseMax());
 
 	// quick cache of fonts.  (mod_name was passed in.)
-	file = g_strdup_printf("%s/fonts.conf", settings.gSwordDir);
 	for (j = 0; j < 5; ++j) {
 		// determine module presence just once each for this routine.
 		is_module[j] = (mod_name[j] &&
@@ -1029,31 +1025,9 @@ static void int_display(SWBuf& text, gchar *key, char *mod_name[])
 				backend->is_module(mod_name[j]));
 
 		// collect decorations.
-		font_size_tmp[j] = get_conf_file_item(file, mod_name[j], "Fontsize");
-		if ((font_size_tmp[j] == NULL) ||
-		    !strcmp(font_size_tmp[j], "+0")) {
-			g_free(font_size_tmp[j]);
-			font_size_tmp[j] =
-			    main_get_mod_config_entry(mod_name[j], "Fontsize");
-			if ((font_size_tmp[j] == NULL) || (*font_size_tmp[j] == '\0'))
-				font_size_tmp[j] = g_strdup("+0");
-		}
-
-		use_font_size[j] =
-		    g_strdup_printf("%+d",
-				    (font_size_tmp[j] ? atoi(font_size_tmp[j]) : 0)
-				    + settings.base_font_size);
-
-		use_font_name[j] = get_conf_file_item(file, mod_name[j], "Font");
-		if ((use_font_name[j] == NULL) ||
-		    !strcmp(use_font_name[j], "none")) {
-			use_font_name[j] =
-			    main_get_mod_config_entry(mod_name[j], "Font");
-			if (!use_font_name[j])
-				use_font_name[j] = g_strdup("none");
-		}
+		if (is_module[j])
+			mf[j] = get_font(mod_name[j]);
 	}
-	g_free(file);
 
 	bgColor = "#f1f1f1";
 
@@ -1090,35 +1064,32 @@ static void int_display(SWBuf& text, gchar *key, char *mod_name[])
 
 			char *num = main_format_number(i);
 			snprintf(str, 499,
-				"<td width=\"20%%\" bgcolor=\"%s\">"
-				"<a href=\"xiphos.url?action=showParallel&"
-				"type=verse&value=%s\" name=\"%d\">"
-				"<font color=\"%s\">%s. </font></a>"
-				"<font face=\"%s\" size=\"%s\" color=\"%s\">",
-				bgColor,
-				main_url_encode(tmpkey),
-				i,
-				settings.bible_verse_num_color,
-				num,
-				use_font_name[j],
-				use_font_size[j],
-				textColor);
+				 "<td width=\"20%%\" bgcolor=\"%s\">"
+				 "<a href=\"xiphos.url?action=showParallel&"
+				 "type=verse&value=%s\" name=\"%d\">"
+				 "<font color=\"%s\">%s. </font></a>"
+				 "<font face=\"%s\" size=\"%s\" color=\"%s\">",
+				 bgColor,
+				 main_url_encode(tmpkey),
+				 i,
+				 settings.bible_verse_num_color,
+				 num,
+				 mf[j]->old_font,
+				 mf[j]->old_font_size,
+				 textColor);
 			g_free(num);
 			text += str;
 
 			if (is_module[j]) {
 				if (is_rtol)
-					text += "<br><DIV ALIGN=right>";
+					text += "<br><div align=right>";
 
-				utf8str = backend_p->get_render_text
-				    (mod_name[j], tmpkey);
-				if (strlen(utf8str)) {
-					text += utf8str;
-					free(utf8str);
-				}
+				utf8str = backend_p->get_render_text(mod_name[j], tmpkey);
+				text += utf8str;
+				free(utf8str);
 
 				if (is_rtol)
-					text += "</DIV>";
+					text += "</div>";
 			}
 
 			text += "</font></td>";
@@ -1127,11 +1098,8 @@ static void int_display(SWBuf& text, gchar *key, char *mod_name[])
 		text += "</tr>";
 	}
 
-	for (j = 0; j < 5; ++j) {
-		g_free(use_font_size[j]);
-		g_free(font_size_tmp[j]);
-		g_free(use_font_name[j]);
-	}
+	for (j = 0; j < 5; ++j)
+		free_font(mf[j]);
 	g_free(tmpkey);
 	g_free(cur_book);
 }
