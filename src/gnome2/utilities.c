@@ -710,19 +710,13 @@ void gui_load_module_tree(GtkWidget * tree)
 MOD_FONT *get_font(gchar * mod_name)
 {
 	MOD_FONT *mf;
-	gchar file[250];
+	static gchar *file = NULL;
 
-	sprintf(file, "%s/fonts.conf", settings.gSwordDir);
+	if (file == NULL)
+		file = g_strdup_printf("%s/fonts.conf", settings.gSwordDir); /* not freed */
 
-	mf = g_new(MOD_FONT, 1);
+	mf = g_new0(MOD_FONT, 1);
 	mf->mod_name = mod_name;
-	mf->old_font = NULL;
-	mf->old_gdk_font = NULL;
-	mf->old_font_size = NULL;
-	mf->new_font = NULL;
-	mf->new_gdk_font = NULL;
-	mf->new_font_size = NULL;
-	mf->no_font = 0;
 
 	mf->old_font = get_conf_file_item(file, mod_name, "Font");
 	mf->old_gdk_font = get_conf_file_item(file, mod_name, "GdkFont");
@@ -732,43 +726,49 @@ MOD_FONT *get_font(gchar * mod_name)
 	    !strcmp(mf->old_font, "none")) {
 		/* in absence of selected font, module can name its preference */
 		gchar *preferred_font = main_get_mod_config_entry(mod_name, "Font");
+		gchar *preferred_font_size = main_get_mod_config_entry(mod_name, "Fontsize");
 
-		if (mf->old_font)
-			g_free(mf->old_font);
-		if (preferred_font && (*preferred_font != '\0')) {
+		/* in absence of module preference, user can specify language pref */
+		gchar *lang = main_get_mod_config_entry(mod_name, "Lang");
+		gchar *lang_lang = g_strdup_printf("Language:%s",
+						   (lang ? lang : ""));
+		gchar *lang_font = get_conf_file_item(file, lang_lang, "Font");
+		gchar *lang_size = get_conf_file_item(file, lang_lang, "Fontsize");
+
+		g_free(mf->old_font);
+
+		if (preferred_font && (*preferred_font != '\0'))
 			mf->old_font = preferred_font;
-		} else {
+		else {
+			g_free(preferred_font);
 			/* next try: fallback to per-language choice */
-			gchar *lang = main_get_mod_config_entry(mod_name, "Lang");
-			gchar *lang_lang = g_strdup_printf("Language:%s",
-							   (lang ? lang : ""));
-			gchar *lang_font = get_conf_file_item(file, lang_lang, "Font");
-
 			if (lang_font && (*lang_font != '\0'))
 				mf->old_font = lang_font;
 			else {
 				/* nothing ever specified: utter default */
-				if (lang_font) g_free(lang_font);
+				g_free(lang_font);
 				mf->old_font = g_strdup("none");
 			}
-
-			g_free(lang_lang);
-			if (lang) g_free(lang);
 		}
-	}
 
-	if ((mf->old_font_size == NULL) ||
-	    !strcmp(mf->old_font_size, "+0")) {
-		gchar *preferred_font_size =
-		    main_get_mod_config_entry(mod_name, "Fontsize");
-
-		if (mf->old_font_size)
+		if ((mf->old_font_size == NULL) ||
+		    !strcmp(mf->old_font_size, "+0")) {
 			g_free(mf->old_font_size);
-		if (preferred_font_size && (*preferred_font_size != '\0')) {
-			mf->old_font_size = g_strdup(preferred_font_size);
-		} else {
-			mf->old_font_size = g_strdup("+0");
+
+			if (preferred_font_size && (*preferred_font_size != '\0'))
+				mf->old_font_size = preferred_font_size;
+			else {
+				g_free(preferred_font_size);
+				if (lang_size && (*lang_size != '\0'))
+					mf->old_font_size = lang_size;
+				else {
+					g_free(lang_size);
+					mf->old_font_size = g_strdup("+0");
+				}
+			}
 		}
+
+		g_free(lang);
 	}
 
 	return mf;
