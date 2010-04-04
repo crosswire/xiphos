@@ -727,17 +727,33 @@ MOD_FONT *get_font(gchar * mod_name)
 	mf->old_font = get_conf_file_item(file, mod_name, "Font");
 	mf->old_gdk_font = get_conf_file_item(file, mod_name, "GdkFont");
 	mf->old_font_size = get_conf_file_item(file, mod_name, "Fontsize");
+
 	if ((mf->old_font == NULL) ||
 	    !strcmp(mf->old_font, "none")) {
-		gchar *preferred_font =
-		    main_get_mod_config_entry(mod_name, "Font");
+		/* in absence of selected font, module can name its preference */
+		gchar *preferred_font = main_get_mod_config_entry(mod_name, "Font");
 
 		if (mf->old_font)
 			g_free(mf->old_font);
 		if (preferred_font && (*preferred_font != '\0')) {
-			mf->old_font = g_strdup(preferred_font);
+			mf->old_font = preferred_font;
 		} else {
-			mf->old_font = g_strdup("none");
+			/* next try: fallback to per-language choice */
+			gchar *lang = main_get_mod_config_entry(mod_name, "Lang");
+			gchar *lang_lang = g_strdup_printf("Language:%s",
+							   (lang ? lang : ""));
+			gchar *lang_font = get_conf_file_item(file, lang_lang, "Font");
+
+			if (lang_font && (*lang_font != '\0'))
+				mf->old_font = lang_font;
+			else {
+				/* nothing ever specified: utter default */
+				if (lang_font) g_free(lang_font);
+				mf->old_font = g_strdup("none");
+			}
+
+			g_free(lang_lang);
+			if (lang) g_free(lang);
 		}
 	}
 
@@ -1174,6 +1190,9 @@ pixbuf_finder(const char *image, int size, GError **error)
 //
 // utility function to write out HTML.
 //
+#ifdef min
+#undef min
+#endif
 #define min(x,y)	((x) < (y) ? (x) : (y))
 
 void
