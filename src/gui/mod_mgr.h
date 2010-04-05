@@ -43,6 +43,7 @@ void on_archive_clicked(GtkButton * button, gpointer  user_data);
 void on_index_clicked(GtkButton * button, gpointer  user_data);
 void on_delete_index_clicked(GtkButton * button, gpointer  user_data);
 void on_load_sources_clicked(GtkButton * button, gpointer  user_data);
+void on_intro_clicked(GtkButton * button, gpointer  user_data);
 void on_cancel_clicked(GtkButton * button, gpointer  user_data);
 void on_mod_mgr_response(GtkDialog * dialog, gint response_id, gpointer user_data);
 void on_button5_clicked(GtkButton * button, gpointer user_data);
