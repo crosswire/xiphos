@@ -1637,7 +1637,7 @@ on_combobox16_changed(GtkComboBox * combobox,
 	if (!clear) {
 		/* something new was chosen:
 		   move forward to and isolate "(xx_YY)" locale spec. */
-		buf = strchr(buf, '(') + 1;
+		buf = strrchr(buf, '(') + 1;
 		*strchr(buf, ')') = '\0';
 	}
 
@@ -1685,7 +1685,7 @@ on_combobox17_changed(GtkComboBox * combobox,
 	if (!buf || !strcmp(buf, _("-- Select --")))	/* see fill_combobox */
 		return;
 
-	buf = strchr(buf, '(') + 1;
+	buf = strrchr(buf, '(') + 1;
 	*strchr(buf, ')') = '\0';
 
 	mod_name = g_strdup_printf("Language:%s", buf);
