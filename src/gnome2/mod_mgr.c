@@ -62,6 +62,7 @@
 #define GTK_RESPONSE_FASTMOD 305
 #define GTK_RESPONSE_DELFAST 306
 #define GTK_RESPONSE_SOURCES 307
+#define GTK_RESPONSE_INTRO   308
 /* see these codes' use in ui/module-manager.glade. */
 
 /* activity codes */
@@ -123,6 +124,7 @@ static GtkWidget *button_arch;
 static GtkWidget *button_idx;
 static GtkWidget *button_delidx;
 static GtkWidget *button_sources;
+static GtkWidget *button_intro;
 static GtkWidget *label_home;
 static GtkWidget *label_system;
 //static GtkWidget *progressbar;
@@ -2344,6 +2346,27 @@ on_load_sources_clicked(GtkButton * button, gpointer  user_data)
 		gui_generic_warning(_("Could not load standard sources from CrossWire."));
 }
 
+#define	MOD_INTRO	\
+_("<b>Welcome to the Module Manager.</b>\n\nThis is Xiphos' mechanism to get new and updated content.\nIt appears you have never been here before, so please take a moment to look it over.\n(You will see this information box just once.)\n\nModules come from different <u>repositories</u>.  <b>Module Sources: Add/Remove</b> will show you what repositories are currently known.\n\n<b>Module Sources: Choose</b> is for deciding from where modules should come, that is, from which repository Xiphos should obtain them, as well as where they should be placed on your system. Set <i>Install Source</i> and <i>Install Destination</i>, then click <i>Refresh</i>.\n\n<b>Modules: Install/Update</b> is for selecting and obtaining modules after choosing source and destination.\n\n<b>Modules: Maintenance</b> is for archive and index creation.\n\nSee section 5 of our manual for Module Manager detail, or ask for help via Live Chat, or (if no one is responsive in chat) send mail to our users' mailing list.\n")
+
+void
+on_intro_clicked(GtkButton * button, gpointer  user_data)
+{
+	GtkWidget *dialog;
+	dialog = gtk_message_dialog_new_with_markup
+	    (NULL,	/* no need for a parent window */
+	     GTK_DIALOG_DESTROY_WITH_PARENT,
+	     GTK_MESSAGE_INFO,
+	     GTK_BUTTONS_OK,
+	     MOD_INTRO);
+	g_signal_connect_swapped (dialog, "response",
+				  G_CALLBACK (gtk_widget_destroy),
+				  dialog);
+	gtk_widget_show(dialog);
+	settings.mod_mgr_intro = 1;
+	xml_set_value("Xiphos", "modmgr", "mod_mgr_intro", "1");
+}
+
 void
 on_cancel_clicked(GtkButton * button, gpointer  user_data)
 {
@@ -2401,6 +2424,9 @@ on_mod_mgr_response(GtkDialog * dialog,
 		break;
 	case GTK_RESPONSE_SOURCES:
 		on_load_sources_clicked(NULL, NULL);
+		break;
+	case GTK_RESPONSE_INTRO:
+		on_intro_clicked(NULL, NULL);
 		break;
 	}
 }
@@ -2970,6 +2996,12 @@ setup_dialog_action_area(GtkDialog * dialog)
 	gtk_box_pack_start(GTK_BOX(dialog_action_area1),button_sources,FALSE, FALSE,0);
 	g_signal_connect(button_sources, "clicked", G_CALLBACK(on_load_sources_clicked), NULL);
 
+	/* view intro */
+	button_intro =  gtk_button_new_from_stock ("gtk-about");
+	gtk_widget_show (button_intro);
+	gtk_box_pack_start(GTK_BOX(dialog_action_area1),button_intro,FALSE, FALSE,0);
+	g_signal_connect(button_sources, "clicked", G_CALLBACK(on_intro_clicked), NULL);
+
 	/* cancel */
 	button_cancel =  gtk_button_new_from_stock ("gtk-cancel");
 	gtk_box_pack_start(GTK_BOX(dialog_action_area1),button_cancel,FALSE, FALSE,0);
@@ -3113,6 +3145,7 @@ create_module_manager_dialog(gboolean first_run)
 		button_idx = glade_xml_get_widget (gxml, "button14"); /* index */
 		button_delidx = glade_xml_get_widget (gxml, "button15"); /* delete index */
 		button_sources = glade_xml_get_widget (gxml, "button0"); /* load sources */
+		button_intro = glade_xml_get_widget (gxml, "button16"); /* view intro */
 	}
 
 	g_signal_connect(dialog, "response",
@@ -3218,9 +3251,6 @@ create_module_manager_dialog(gboolean first_run)
  *   void
  */
 
-#define	MOD_INTRO	\
-_("<b>Welcome to the Module Manager.</b>\n\nThis is Xiphos' mechanism to get new and updated content.\nIt appears you have never been here before, so please take a moment to look it over.\n(You will see this information box just once.)\n\nModules come from different <u>repositories</u>.  <b>Module Sources: Add/Remove</b> will show you what repositories are currently known.\n\n<b>Module Sources: Choose</b> is for deciding from where modules should come, that is, from which repository Xiphos should obtain them, as well as where they should be placed on your system. Set <i>Install Source</i> and <i>Install Destination</i>, then click <i>Refresh</i>.\n\n<b>Modules: Install/Update</b> is for selecting and obtaining modules after choosing source and destination.\n\n<b>Modules: Maintenance</b> is for archive and index creation.\n\nSee section 5 of our manual for Module Manager detail, or ask for help via Live Chat, or (if no one is responsive in chat) send mail to our users' mailing list.\n")
-
 void gui_open_mod_mgr(void)
 {
 	if (!is_running) {
@@ -3229,21 +3259,8 @@ void gui_open_mod_mgr(void)
 		dlg = create_module_manager_dialog(FALSE);
 		set_window_icon(GTK_WINDOW(dlg));
 		is_running = TRUE;
-		if (!settings.mod_mgr_intro) {
-			GtkWidget *dialog;
-			dialog = gtk_message_dialog_new_with_markup
-			    (GTK_WINDOW(widgets.app),
-			     GTK_DIALOG_DESTROY_WITH_PARENT,
-			     GTK_MESSAGE_INFO,
-			     GTK_BUTTONS_OK,
-			     MOD_INTRO);
-			g_signal_connect_swapped (dialog, "response",
-						  G_CALLBACK (gtk_widget_destroy),
-						  dialog);
-			gtk_widget_show(dialog);
-			settings.mod_mgr_intro = 1;
-			xml_set_value("Xiphos", "modmgr", "mod_mgr_intro", "1");
-		}
+		if (!settings.mod_mgr_intro)
+			on_intro_clicked(NULL, NULL);
 	} else
 		gdk_window_raise(GTK_WIDGET(dialog)->window);
 }
