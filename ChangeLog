@@ -1,3 +1,7 @@
+2010-04-05  karl <charcoal@users.sf.net>
+
+	* made mod.mgr intro viewable on demand. also mod.mgr hotkeys.
+
 2010-04-03  karl <charcoal@users.sf.net>
 
 	* implemented usage side of per-language preferred font.
