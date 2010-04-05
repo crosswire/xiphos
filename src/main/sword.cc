@@ -598,6 +598,11 @@ const char *main_get_language_map(const char *language) {
 	return languageMap[language].c_str();
 }
 
+char **main_get_module_language_list(void)
+{
+	return backend->get_module_language_list();
+}
+
 
 /******************************************************************************
  * Name
