@@ -156,6 +156,7 @@
                                 <property name="receives_default">False</property>
                                 <property name="title" translatable="yes">Select background color</property>
                                 <property name="color">#ffffffffffff</property>
+                                <signal name="realize" handler="setup_color_pickers"/>
                                 <signal name="color_set" handler="on_colorbutton_color_set"/>
                               </object>
                               <packing>
@@ -188,6 +189,7 @@
                                 <property name="receives_default">False</property>
                                 <property name="title" translatable="yes">Select foreground color</property>
                                 <property name="color">#000000000000</property>
+                                <signal name="realize" handler="setup_color_pickers"/>
                                 <signal name="color_set" handler="on_colorbutoon_color_set"/>
                               </object>
                               <packing>
@@ -220,6 +222,7 @@
                                 <property name="receives_default">False</property>
                                 <property name="title" translatable="yes">Select current verse color</property>
                                 <property name="color">#333397976666</property>
+                                <signal name="realize" handler="setup_color_pickers"/>
                                 <signal name="color_set" handler="on_colorbutoon_color_set"/>
                               </object>
                               <packing>
@@ -252,6 +255,7 @@
                                 <property name="receives_default">False</property>
                                 <property name="title" translatable="yes">Select verse number color</property>
                                 <property name="color">#00000000cfcf</property>
+                                <signal name="realize" handler="setup_color_pickers"/>
                                 <signal name="color_set" handler="on_colorbutoon_color_set"/>
                               </object>
                               <packing>
@@ -284,6 +288,7 @@
                                 <property name="receives_default">False</property>
                                 <property name="title" translatable="yes" context="Preferences dialog -&gt; colors." comments="Links as in HTML links like on a website.">Select links color</property>
                                 <property name="color">#878787878787</property>
+                                <signal name="realize" handler="setup_color_pickers"/>
                                 <signal name="color_set" handler="on_colorbutoon_color_set"/>
                               </object>
                               <packing>
@@ -316,6 +321,7 @@
                                 <property name="receives_default">False</property>
                                 <property name="title" translatable="yes">Select highlight foreground color</property>
                                 <property name="color">#ffffffff0000</property>
+                                <signal name="realize" handler="setup_color_pickers"/>
                                 <signal name="color_set" handler="on_colorbutoon_color_set"/>
                               </object>
                               <packing>
@@ -348,6 +354,7 @@
                                 <property name="receives_default">False</property>
                                 <property name="title" translatable="yes">Select highlight background color</property>
                                 <property name="color">#060606068080</property>
+                                <signal name="realize" handler="setup_color_pickers"/>
                                 <signal name="color_set" handler="on_colorbutoon_color_set"/>
                               </object>
                               <packing>
@@ -630,19 +637,6 @@
                             <property name="expand">False</property>
                             <property name="fill">False</property>
                             <property name="position">3</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkCheckButton" id="checkbutton_paratab">
-                            <property name="label" translatable="yes">Parallel View in a tab</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">False</property>
-                            <property name="use_underline">True</property>
-                            <property name="draw_indicator">True</property>
-                          </object>
-                          <packing>
-                            <property name="position">4</property>
                           </packing>
                         </child>
                       </object>
