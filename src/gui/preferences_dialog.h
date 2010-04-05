@@ -59,6 +59,7 @@ void on_combobox13_changed(GtkComboBox * combobox, gpointer user_data);
 void on_combobox14_changed(GtkComboBox * combobox, gpointer user_data);
 void on_combobox15_changed(GtkComboBox * combobox, gpointer user_data);
 void on_combobox16_changed(GtkComboBox * combobox, gpointer user_data);
+void on_combobox17_changed(GtkComboBox * combobox, gpointer user_data);
 void on_colorbutton1_color_set(GtkColorButton *colorbutton, gpointer user_data);
 void on_colorbutton2_color_set(GtkColorButton * colorbutton, gpointer user_data);
 void on_colorbutton3_color_set(GtkColorButton * colorbutton, gpointer user_data);
@@ -68,6 +69,8 @@ void on_colorbutton5_color_set(GtkColorButton * colorbutton, gpointer user_data)
 void on_dialog_prefs_response(GtkDialog * dialog, gint response_id, gpointer user_data);
 
 void gui_setup_preferences_dialog(void);
+void setup_locale_combobox(void);
+void setup_font_prefs_combobox(void);
 
 void on_colorbutton6_color_set(GtkColorButton * colorbutton, gpointer user_data);
 void on_colorbutton7_color_set(GtkColorButton * colorbutton, gpointer user_data);
