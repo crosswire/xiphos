@@ -2268,6 +2268,7 @@ setup_font_prefs_combobox(void)
 	for (chase = list; chase; chase = g_list_next(chase))
 		g_free(chase->data);
 	g_list_free(list);
+	g_strfreev(language_list);
 
 	g_signal_connect(combo.font_prefs, "changed",
 			 G_CALLBACK(on_combobox17_changed), NULL);
