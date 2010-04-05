@@ -149,22 +149,10 @@ static COLOR_PICKERS color_picker;
 static CHECK_BUTTONS check_button;
 
 
-/******************************************************************************
- * Name
- *  string_is_color
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   	gint string_is_color(gchar * color)
- *
+/**
  * Description
  *    this code is from bluefish-0.6
- *
- * Return value
- *   gint
  */
-
 static gint
 string_is_color(gchar * color)
 {
@@ -199,22 +187,9 @@ string_is_color(gchar * color)
 }
 
 
-/******************************************************************************
- * Name
- *  gdkcolor_to_hex
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   gchar *gdkcolor_to_hex(gdouble * color, gint websafe)
- *
- * Description
+/*
  *    this code is from bluefish-1.0.2
- *
- * Return value
- *   gchar *
  */
-
 static gchar *
 gdkcolor_to_hex(GdkColor color,
 		gint websafe)
@@ -283,37 +258,7 @@ on_checkbutton1_toggled(GtkToggleButton * togglebutton,
 			gpointer user_data)
 {
 	gui_tabs_on_off (togglebutton->active);
-/*	if (togglebutton->active) {
-		xml_set_value("Xiphos", "tabs", "browsing", "1");
-		settings.browsing = TRUE;
-		gui_open_tabs();
-		gtk_widget_show(widgets.hboxtb);
-	} else {
-		xml_set_value("Xiphos", "tabs", "browsing", "0");
-		gtk_widget_hide(widgets.hboxtb);
-		settings.browsing = FALSE;
-		gui_close_all_tabs();
-	}
-	settings.browsing = atoi(xml_get_value("tabs", "browsing"));
-	*/
 }
-
-/******************************************************************************
- * Name
- *   on_checkbutton2_toggled
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_checkbutton2_toggled(GtkToggleButton * togglebutton, gpointer user_data)
- *
- * Description
- *
- *
- *
- * Return value
- *   void
- */
 
 void
 on_checkbutton2_toggled(GtkToggleButton * togglebutton,
@@ -329,23 +274,6 @@ on_checkbutton2_toggled(GtkToggleButton * togglebutton,
 	gui_show_hide_texts(togglebutton->active);
 }
 
-/******************************************************************************
- * Name
- *   on_checkbutton3_toggled
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_checkbutton3_toggled(GtkToggleButton * togglebutton, gpointer user_data)
- *
- * Description
- *
- *
- *
- * Return value
- *   void
- */
-
 void
 on_checkbutton3_toggled(GtkToggleButton * togglebutton,
 			gpointer user_data)
@@ -359,23 +287,6 @@ on_checkbutton3_toggled(GtkToggleButton * togglebutton,
 	    settings.showcomms;
 	gui_show_hide_comms(togglebutton->active);
 }
-
-/******************************************************************************
- * Name
- *   on_checkbutton9_toggled
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_checkbutton9_toggled(GtkToggleButton * togglebutton, gpointer user_data)
- *
- * Description
- *
- *
- *
- * Return value
- *   void
- */
 
 void
 on_checkbutton9_toggled(GtkToggleButton * togglebutton,
@@ -391,23 +302,6 @@ on_checkbutton9_toggled(GtkToggleButton * togglebutton,
 	gui_show_hide_preview(togglebutton->active);
 }
 
-/******************************************************************************
- * Name
- *   on_checkbutton4_toggled
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_checkbutton4_toggled(GtkToggleButton * togglebutton, gpointer user_data)
- *
- * Description
- *
- *
- *
- * Return value
- *   void
- */
-
 void
 on_checkbutton4_toggled(GtkToggleButton *togglebutton,
 			gpointer user_data)
@@ -421,23 +315,6 @@ on_checkbutton4_toggled(GtkToggleButton *togglebutton,
 	    settings.showdicts;
 	gui_show_hide_dicts(togglebutton->active);
 }
-
-/******************************************************************************
- * Name
- *   on_checkbutton5_toggled
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_checkbutton5_toggled(GtkToggleButton * togglebutton, gpointer user_data)
- *
- * Description
- *
- *
- *
- * Return value
- *   void
- */
 
 extern gboolean style_display;
 
@@ -454,22 +331,6 @@ on_checkbutton5_toggled(GtkToggleButton * togglebutton,
 			       (widgets.versestyle_item),
 			       settings.versestyle);
 }
-/******************************************************************************
- * Name
- *   on_checkbutton10_toggled
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_checkbutton10_toggled(GtkToggleButton * togglebutton, gpointer user_data)
- *
- * Description
- *
- *
- *
- * Return value
- *   void
- */
 
 void
 on_checkbutton10_toggled(GtkToggleButton * togglebutton,
@@ -482,24 +343,6 @@ on_checkbutton10_toggled(GtkToggleButton * togglebutton,
 			       (widgets.linkedtabs_item),
 			       settings.linkedtabs);
 }
-
-
-/******************************************************************************
- * Name
- *   on_checkbutton_showparatab_toggled
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_checkbutton_showparatab_toggled(GtkToggleButton * togglebutton, gpointer user_data)
- *
- * Description
- *
- *
- *
- * Return value
- *   void
- */
 
 static void
 on_checkbutton_showparatab_toggled(GtkToggleButton * togglebutton,
@@ -515,24 +358,6 @@ on_checkbutton_showparatab_toggled(GtkToggleButton * togglebutton,
 
 }
 
-
-/******************************************************************************
- * Name
- *   on_checkbutton11_toggled
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_checkbutton11_toggled(GtkToggleButton * togglebutton, gpointer user_data)
- *
- * Description
- *
- *
- *
- * Return value
- *   void
- */
-
 void
 on_checkbutton11_toggled(GtkToggleButton * togglebutton,
 			 gpointer user_data)
@@ -544,24 +369,6 @@ on_checkbutton11_toggled(GtkToggleButton * togglebutton,
 			       (widgets.readaloud_item),
 			       settings.readaloud);
 }
-
-
-/******************************************************************************
- * Name
- *   on_checkbutton12_toggled
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_checkbutton12_toggled(GtkToggleButton * togglebutton, gpointer user_data)
- *
- * Description
- *
- *
- *
- * Return value
- *   void
- */
 
 void
 on_checkbutton12_toggled(GtkToggleButton * togglebutton,
@@ -576,24 +383,6 @@ on_checkbutton12_toggled(GtkToggleButton * togglebutton,
 			       settings.showversenum);
 }
 
-
-/******************************************************************************
- * Name
- *   on_checkbutton6_toggled
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_checkbutton6_toggled(GtkToggleButton * togglebutton, gpointer user_data)
- *
- * Description
- *
- *
- *
- * Return value
- *   void
- */
-
 void
 on_checkbutton6_toggled(GtkToggleButton * togglebutton,
 			gpointer user_data)
@@ -602,24 +391,6 @@ on_checkbutton6_toggled(GtkToggleButton * togglebutton,
 		      (togglebutton->active ? "1" : "0"));
 	settings.useDefaultDict = togglebutton->active;
 }
-
-
-/******************************************************************************
- * Name
- *   on_checkbutton7_toggled
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_checkbutton7_toggled(GtkToggleButton * togglebutton, gpointer user_data)
- *
- * Description
- *
- *
- *
- * Return value
- *   void
- */
 
 void
 on_checkbutton7_toggled(GtkToggleButton * togglebutton,
@@ -630,24 +401,6 @@ on_checkbutton7_toggled(GtkToggleButton * togglebutton,
 	settings.showdevotional = togglebutton->active;
 }
 
-
-/******************************************************************************
- * Name
- *   on_checkbutton8_toggled
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_checkbutton8_toggled(GtkToggleButton * togglebutton, gpointer user_data)
- *
- * Description
- *
- *
- *
- * Return value
- *   void
- */
-
 void
 on_checkbutton8_toggled(GtkToggleButton * togglebutton,
 			gpointer user_data)
@@ -656,24 +409,6 @@ on_checkbutton8_toggled(GtkToggleButton * togglebutton,
 		      (togglebutton->active ? "1" : "0"));
 	settings.showsplash = togglebutton->active;
 }
-
-
-/******************************************************************************
- * Name
- *   on_checkbutton_scroll_toggled
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_checkbutton_scroll_toggled(GtkToggleButton * togglebutton, gpointer user_data)
- *
- * Description
- *
- *
- *
- * Return value
- *   void
- */
 
 void
 on_checkbutton_scroll_toggled(GtkToggleButton * togglebutton,
@@ -684,23 +419,6 @@ on_checkbutton_scroll_toggled(GtkToggleButton * togglebutton,
 	settings.chapter_scroll = togglebutton->active;
 }
 
-/******************************************************************************
- * Name
- *   on_checkbutton_imageresize_toggled
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_checkbutton_imageresize_toggled(GtkToggleButton * togglebutton, gpointer user_data)
- *
- * Description
- *
- *
- *
- * Return value
- *   void
- */
-
 void
 on_checkbutton_imageresize_toggled(GtkToggleButton * togglebutton,
 				   gpointer user_data)
@@ -709,23 +427,6 @@ on_checkbutton_imageresize_toggled(GtkToggleButton * togglebutton,
 		      (togglebutton->active ? "1" : "0"));
 	settings.imageresize =  togglebutton->active;
 }
-
-/******************************************************************************
- * Name
- *   on_checkbutton_versehighlight_toggled
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_checkbutton_versehighlight_toggled(GtkToggleButton * togglebutton, gpointer user_data)
- *
- * Description
- *
- *
- *
- * Return value
- *   void
- */
 
 void
 on_checkbutton_versehighlight_toggled(GtkToggleButton * togglebutton,
@@ -740,22 +441,6 @@ on_checkbutton_versehighlight_toggled(GtkToggleButton * togglebutton,
 	main_display_bible(settings.MainWindowModule, settings.currentverse);
 }
 
-/******************************************************************************
- * Name
- *   on_checkbutton_doublespace_toggled
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_checkbutton_doublespace_toggled(GtkToggleButton * togglebutton, gpointer user_data)
- *
- * Description
- *
- *
- * Return value
- *   void
- */
-
 void
 on_checkbutton_doublespace_toggled(GtkToggleButton * togglebutton,
 				   gpointer user_data)
@@ -767,24 +452,6 @@ on_checkbutton_doublespace_toggled(GtkToggleButton * togglebutton,
 			       (widgets.doublespace_item),
 			       settings.doublespace);
 }
-
-
-/******************************************************************************
- * Name
- *   on_checkbutton_prayerlist_toggled
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_checkbutton_prayerlist_toggled(GtkToggleButton * togglebutton, gpointer user_data)
- *
- * Description
- *
- *
- *
- * Return value
- *   void
- */
 
 void
 on_checkbutton_prayerlist_toggled(GtkToggleButton * togglebutton,
@@ -799,24 +466,6 @@ on_checkbutton_prayerlist_toggled(GtkToggleButton * togglebutton,
 	main_load_module_tree(sidebar.module_list);
 }
 
-
-/******************************************************************************
- * Name
- *   on_folder_changed
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_folder_changed(GtkFileChooser * filechooser, gpointer user_data)
- *
- * Description
- *
- *
- *
- * Return value
- *   void
- */
-
 void
 on_folder_changed(GtkFileChooser * filechooser,
 		  gpointer user_data)
@@ -829,21 +478,10 @@ on_folder_changed(GtkFileChooser * filechooser,
 }
 
 
-/******************************************************************************
- * Name
- *   on_combobox1_changed
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_combobox1_changed(GtkEditable * editable, gpointer user_data)
- *
+/*
  * Description
  *   combobox1 (verse number size)
  *   has changed - update Biblical text pane
- *
- * Return value
- *  void
  */
 
 void
@@ -870,21 +508,10 @@ on_combobox1_changed(GtkComboBox * combobox,
 }
 
 
-/******************************************************************************
- * Name
- *   on_basecombobox1_changed
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_basecombobox1_changed(GtkEditable * editable, gpointer user_data)
- *
+/*
  * Description
  *   combobox1 (base font size)
  *   has changed - update Biblical text pane
- *
- * Return value
- *  void
  */
 
 void
@@ -917,21 +544,10 @@ on_basecombobox1_changed(GtkComboBox * combobox,
 }
 
 
-/******************************************************************************
- * Name
- *   on_combobox2_changed
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_combobox2_changed(GtkEditable * editable, gpointer user_data)
- *
+/*
  * Description
  *   combobox2 (Biblical text module) or combobox3 (Commentary module),
  *   has changed - update Biblical text and Commentary panes
- *
- * Return value
- *  void
  */
 
 void
@@ -955,21 +571,10 @@ on_combobox2_changed(GtkComboBox * combobox,
 }
 
 
-/******************************************************************************
- * Name
- *   on_combobox4_changed
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_combobox4_changed(GtkEditable * editable, gpointer user_data)
- *
+/*
  * Description
  *   combobox4 (Dictionary module),
  *   has changed - update dictionary pane
- *
- * Return value
- *  void
  */
 
 void
@@ -993,21 +598,9 @@ on_combobox4_changed(GtkComboBox * combobox,
 }
 
 
-/******************************************************************************
- * Name
- *   on_combobox5_changed
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_combobox5_changed(GtkEditable * editable, gpointer user_data)
- *
- * Description
+/*
  *   combobox5 (default dictionary module),
  *   has changed - update settings
- *
- * Return value
- *  void
  */
 
 void
@@ -1028,21 +621,9 @@ on_combobox5_changed(GtkComboBox * combobox,
 }
 
 
-/******************************************************************************
- * Name
- *   on_combobox6_changed
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_combobox6_changed(GtkEditable * editable, gpointer user_data)
- *
- * Description
+/*
  *   combobox6 (Personal comments module),
  *   has changed - update settings
- *
- * Return value
- *  void
  */
 
 void
@@ -1063,21 +644,8 @@ on_combobox6_changed(GtkComboBox * combobox,
 }
 
 
-/******************************************************************************
- * Name
- *   on_combobox7_changed
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_combobox7_changed(GtkEditable * editable, gpointer user_data)
- *
- * Description
- *
+/*
  *   has changed - update parallel pane
- *
- * Return value
- *  void
  */
 
 void
@@ -1096,21 +664,8 @@ on_combobox7_changed(GtkComboBox * combobox,
 }
 
 
-/******************************************************************************
- * Name
- *   on_combobox8_changed
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_combobox8_changed(GtkEditable * editable, gpointer user_data)
- *
- * Description
- *
+/*
  *   has changed - update parallel pane
- *
- * Return value
- *  void
  */
 
 void
@@ -1128,21 +683,8 @@ on_combobox8_changed(GtkComboBox * combobox,
 	g_free(buf);
 }
 
-/******************************************************************************
- * Name
- *   on_combobox9_changed
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_combobox9_changed(GtkEditable * editable, gpointer user_data)
- *
- * Description
- *
+/*
  *   has changed - update parallel pane
- *
- * Return value
- *  void
  */
 
 void
@@ -1161,21 +703,8 @@ on_combobox9_changed(GtkComboBox * combobox,
 }
 
 
-/******************************************************************************
- * Name
- *   on_combobox10_changed
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_combobox10_changed(GtkEditable * editable, gpointer user_data)
- *
- * Description
- *
+/*
  *   has changed - update parallel pane
- *
- * Return value
- *  void
  */
 
 void
@@ -1193,21 +722,8 @@ on_combobox10_changed(GtkComboBox * combobox,
 	g_free(buf);
 }
 
-/******************************************************************************
- * Name
- *   on_combobox11_changed
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_combobox11_changed(GtkEditable * editable, gpointer user_data)
- *
- * Description
- *
+/*
  *   has changed - update parallel pane
- *
- * Return value
- *  void
  */
 
 void
@@ -1226,21 +742,9 @@ on_combobox11_changed(GtkComboBox * combobox,
 }
 
 
-/******************************************************************************
- * Name
- *   on_combobox12_changed
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_combobox12_changed(GtkEditable * editable, gpointer user_data)
- *
- * Description
+/*
  *   combobox12 (Daily Devotional module),
  *   has changed - update settings
- *
- * Return value
- *  void
  */
 
 void
@@ -1261,21 +765,10 @@ on_combobox12_changed(GtkComboBox * combobox,
 }
 
 
-/******************************************************************************
- * Name
- *   on_combobox13_changed
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_combobox13_changed(GtkEditable * editable, gpointer user_data)
- *
+/*
  * Description
  *   combobox13 (Hebrew lex module),
  *   has changed - update settings
- *
- * Return value
- *  void
  */
 
 void
@@ -1296,21 +789,10 @@ on_combobox13_changed(GtkComboBox * combobox,
 }
 
 
-/******************************************************************************
- * Name
- *   on_combobox14_changed
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_combobox14_changed(GtkEditable * editable, gpointer user_data)
- *
+/*
  * Description
  *   combobox14 (Greek lex module),
  *   has changed - update settings
- *
- * Return value
- *  void
  */
 
 void
@@ -1331,21 +813,9 @@ on_combobox14_changed(GtkComboBox * combobox,
 }
 
 
-/******************************************************************************
- * Name
- *   on_combobox15_changed
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_combobox15_changed(GtkEditable * editable, gpointer user_data)
- *
- * Description
+/*
  *   combobox4 (Book module),
  *   has changed - update book pane
- *
- * Return value
- *  void
  */
 
 void
@@ -1368,21 +838,9 @@ on_combobox15_changed(GtkComboBox * combobox,
 }
 
 
-/******************************************************************************
- * Name
- *   on_combobox16_changed
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_combobox16_changed(GtkEditable * editable, gpointer user_data)
- *
- * Description
+/*
  *   combobox16 (special locale),
  *   has changed - update settings
- *
- * Return value
- *  void
  */
 
 void
@@ -1403,7 +861,7 @@ on_combobox16_changed(GtkComboBox * combobox,
 	if (!clear) {
 		/* something new was chosen:
 		   move forward to and isolate "(xx_YY)" locale spec. */
-		buf = strchr(buf, '(') + 1;
+		buf = strrchr(buf, '(') + 1;
 		*strchr(buf, ')') = '\0';
 	}
 
@@ -1421,20 +879,8 @@ on_combobox16_changed(GtkComboBox * combobox,
 }
 
 
-/******************************************************************************
- * Name
- *   on_combobox17_changed
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_combobox17_changed(GtkEditable * editable, gpointer user_data)
- *
- * Description
+/*
  *   combobox17 (language font preferences) => make a font selection.
- *
- * Return value
- *  void
  */
 
 void
@@ -1451,30 +897,13 @@ on_combobox17_changed(GtkComboBox * combobox,
 	if (!buf || !strcmp(buf, _("-- Select --")))	/* see fill_combobox */
 		return;
 
-	buf = strchr(buf, '(') + 1;
+	buf = strrchr(buf, '(') + 1;
 	*strchr(buf, ')') = '\0';
 
 	mod_name = g_strdup_printf("Language:%s", buf);
 	gui_set_module_font(mod_name);
 	g_free(mod_name);
 }
-
-
-/******************************************************************************
- * Name
- *   add_columns
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void add_columns(GtkWidget * listview)
- *
- * Description
- *
- *
- * Return value
- *   void
- */
 
 static void
 add_columns(GtkWidget * treeview)
@@ -1491,24 +920,6 @@ add_columns(GtkWidget * treeview)
 	gtk_tree_view_append_column(GTK_TREE_VIEW(treeview), column);
 }
 
-
-/******************************************************************************
- * Name
- *   tree_selection_changed
- *
- * Synopsis
- *   #include "gui/.h"
- *
- *   void tree_selection_changed(GtkTreeSelection * selection,
- *		      GtkWidget * tree_widget)
- *
- * Description
- *
- *
- * Return value
- *   void
- */
-
 static void
 tree_selection_changed(GtkTreeSelection * selection,
 		       gpointer data)
@@ -1524,24 +935,6 @@ tree_selection_changed(GtkTreeSelection * selection,
 	gtk_tree_model_get(model, &selected, 1, &page, -1);
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook), page);
 }
-
-
-/******************************************************************************
- * Name
- *   on_dialog_prefs_response
- *
- * Synopsis
- *   #include "gui/.h"
- *
- *   void on_dialog_prefs_response(GtkDialog * dialog, gint response_id,
-					gpointer user_data)
- *
- * Description
- *
- *
- * Return value
- *   void
- */
 
 void
 on_dialog_prefs_response(GtkDialog * dialog,
@@ -1563,7 +956,6 @@ create_model(void)
 	GtkTreeIter child_iter;
 
 	model = gtk_tree_store_new(2, G_TYPE_STRING, G_TYPE_INT);
-	//model = gtk_tree_store_new(2, G_TYPE_STRING, G_TYPE_INT);
 
 	gtk_tree_store_append(model, &iter, NULL);
 	gtk_tree_store_set(model, &iter, 0, _("Fonts"), -1);
@@ -1581,9 +973,6 @@ create_model(void)
 	gtk_tree_store_append(model, &child_iter, &iter);
 	gtk_tree_store_set(model, &child_iter, 0, _("Tabs and Panes"), 1,
 			   3, -1);
-
-/*	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, "Panes", 1, 3, -1);*/
 
 	gtk_tree_store_append(model, &child_iter, &iter);
 	gtk_tree_store_set(model, &child_iter, 0, _("Options"), 1, 4, -1);
@@ -1604,103 +993,62 @@ create_model(void)
 	return GTK_TREE_MODEL(model);
 }
 
-
-
-/******************************************************************************
- * Name
- *   setup_color_pickers
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void setup_color_pickers(void)
- *
- * Description
- *
- *
- * Return value
- *   void
- */
-
-static void
-setup_color_pickers(void)
+G_MODULE_EXPORT void
+setup_color_pickers (GtkWidget *widget, gpointer user_data)
 {
 	GdkColor color;
-	if (string_is_color(settings.bible_bg_color)) {
-		gdk_color_parse(settings.bible_bg_color, &color);
-		gtk_color_button_set_color(
-				GTK_COLOR_BUTTON(color_picker.text_background),
-                                &color);
-	} else {
-		gdk_color_parse("#FFFFFF", &color);
-		gtk_color_button_set_color(
-				GTK_COLOR_BUTTON(color_picker.text_background),
-                                &color);
-	}
 
-	if (string_is_color(settings.bible_text_color)) {
-		gdk_color_parse(settings.bible_text_color, &color);
-		gtk_color_button_set_color(GTK_COLOR_BUTTON(color_picker.text),
-                                        &color);
-	} else {
-		gdk_color_parse("#000000", &color);
-		gtk_color_button_set_color(GTK_COLOR_BUTTON(color_picker.text),
-                                        &color);
-	}
-
-	if (string_is_color(settings.currentverse_color)) {
-		gdk_color_parse(settings.currentverse_color, &color);
-		gtk_color_button_set_color(
-			GTK_COLOR_BUTTON(color_picker.text_current_verse),
-                                        &color);
-	} else {
-		gdk_color_parse("#339766", &color);
-		gtk_color_button_set_color(
-			GTK_COLOR_BUTTON(color_picker.text_current_verse),
-                                        &color);
-	}
-
-	if (string_is_color(settings.bible_verse_num_color)) {
-		gdk_color_parse(settings.bible_verse_num_color, &color);
-		gtk_color_button_set_color(
-			GTK_COLOR_BUTTON(color_picker.verse_numbers),
-                                        &color);
-	} else {
-		gdk_color_parse("#0000CF", &color);
-		gtk_color_button_set_color(
-			GTK_COLOR_BUTTON(color_picker.verse_numbers),
-                                        &color);
-	}
-
-	if (string_is_color(settings.link_color)) {
-		gdk_color_parse(settings.link_color, &color);
-		gtk_color_button_set_color(
-			GTK_COLOR_BUTTON(color_picker.href_links),
-                                        &color);
-	} else {
-		gdk_color_parse("#878787", &color);
-		gtk_color_button_set_color(
-			GTK_COLOR_BUTTON(color_picker.href_links),
-                                        &color);
-	}
-
-	// contrasty highlighting -- foreground.
-	if (string_is_color(settings.highlight_fg))
-		gdk_color_parse(settings.highlight_fg, &color);
-	else
-		gdk_color_parse("#FFFF00", &color);
-	gtk_color_button_set_color(
-		GTK_COLOR_BUTTON(color_picker.highlight_fg),
-				&color);
-
-	// contrasty highlighting -- background.
-	if (string_is_color(settings.highlight_bg))
-		gdk_color_parse(settings.highlight_bg, &color);
-	else
-		gdk_color_parse("#060680", &color);
-	gtk_color_button_set_color(
-		GTK_COLOR_BUTTON(color_picker.highlight_bg),
-				&color);
+        switch (gtk_widget_get_name (widget)) {
+        case 'background':
+                if (string_is_color(settings.bible_bg_color)) {
+                        gdk_color_parse(settings.bible_bg_color, &color);
+                        gtk_color_button_set_color(GTK_COLOR_BUTTON(widget),
+                                                   &color);
+                }
+                break;
+        case 'text_fg':
+                if (string_is_color(settings.bible_text_color)) {
+                        gdk_color_parse(settings.bible_text_color, &color);
+                        gtk_color_button_set_color(GTK_COLOR_BUTTON(widget),
+                                                   &color);
+                }
+                break;
+        case 'currentverse':
+                if (string_is_color(settings.currentverse_color)) {
+                        gdk_color_parse(settings.currentverse_color, &color);
+                        gtk_color_button_set_color(GTK_COLOR_BUTTON(widget),
+                                                   &color);
+                }
+                break;
+        case 'versenum':
+                if (string_is_color(settings.bible_verse_num_color)) {
+                        gdk_color_parse(settings.bible_verse_num_color, &color);
+                        gtk_color_button_set_color(GTK_COLOR_BUTTON(widget),
+                                                   &color);
+                }
+                break;
+        case 'link':
+                if (string_is_color(settings.link_color)) {
+                        gdk_color_parse(settings.link_color, &color);
+                        gtk_color_button_set_color(GTK_COLOR_BUTTON(widget),
+                                                   &color);
+                }
+                break;
+        case 'highlight_fg':
+                if (string_is_color(settings.highlight_fg)) {
+                        gdk_color_parse(settings.highlight_fg, &color);
+                        gtk_color_button_set_color(GTK_COLOR_BUTTON(widget),
+                                                   &color);
+                }
+                break;
+        case 'highlight_bg':
+                if (string_is_color(settings.highlight_bg)) {
+                        gdk_color_parse(settings.highlight_bg, &color);
+                        gtk_color_button_set_color(GTK_COLOR_BUTTON(widget),
+                                                   &color);
+                }
+                break;
+        }
 }
 
 
@@ -2054,63 +1402,10 @@ create_preferences_dialog(void)
 	GtkWidget *chooser;
 	gint index = 0;
 
-
-	/* lookup the root widget */
-	dialog_prefs = glade_xml_get_widget (gxml, "dialog_prefs");
-	g_signal_connect(dialog_prefs, "response",
-			 G_CALLBACK(on_dialog_prefs_response), NULL);
-/*	g_signal_connect(, "",
-			 G_CALLBACK(), NULL);
-*/
-	/* color pickers */
-	color_picker.text_background = glade_xml_get_widget (gxml, "colorbutton1");
-	g_signal_connect(color_picker.text_background, "color_set",
-			 G_CALLBACK(on_colorbutton1_color_set), NULL);
-	color_picker.text = glade_xml_get_widget (gxml, "colorbutton2");
-	g_signal_connect(color_picker.text, "color_set",
-			 G_CALLBACK(on_colorbutton2_color_set), NULL);
-	color_picker.text_current_verse = glade_xml_get_widget (gxml, "colorbutton3");
-	g_signal_connect(color_picker.text_current_verse, "color_set",
-			 G_CALLBACK(on_colorbutton3_color_set), NULL);
-	color_picker.verse_numbers = glade_xml_get_widget (gxml, "colorbutton4");
-	g_signal_connect(color_picker.verse_numbers, "color_set",
-			 G_CALLBACK(on_colorbutton4_color_set), NULL);
-	color_picker.href_links = glade_xml_get_widget (gxml, "colorbutton5");
-	g_signal_connect(color_picker.href_links, "color_set",
-			 G_CALLBACK(on_colorbutton5_color_set), NULL);
-	color_picker.highlight_fg = glade_xml_get_widget (gxml, "colorbutton6");
-	g_signal_connect(color_picker.highlight_fg, "color_set",
-			 G_CALLBACK(on_colorbutton6_color_set), NULL);
-	color_picker.highlight_bg = glade_xml_get_widget (gxml, "colorbutton7");
-	g_signal_connect(color_picker.highlight_bg, "color_set",
-			 G_CALLBACK(on_colorbutton7_color_set), NULL);
-
-	setup_color_pickers();
-	/* check buttons */
-	check_button.enable_tabbed_browsing = glade_xml_get_widget(gxml, "checkbutton1");
-	check_button.show_bible_pane = glade_xml_get_widget(gxml,"checkbutton2");
-	check_button.show_preview_pane = glade_xml_get_widget(gxml, "checkbutton9");
-	check_button.show_commentary_pane = glade_xml_get_widget(gxml, "checkbutton3");
-	check_button.show_dictionary_pane = glade_xml_get_widget(gxml, "checkbutton4");
-	check_button.use_verse_style = glade_xml_get_widget(gxml, "checkbutton5");
-	check_button.use_linked_tabs = glade_xml_get_widget(gxml, "checkbutton10");
-	check_button.readaloud = glade_xml_get_widget(gxml, "checkbutton11");
-	check_button.show_verse_num = glade_xml_get_widget(gxml, "checkbutton12");
-	check_button.use_default_dictionary = glade_xml_get_widget(gxml, "checkbutton6");
-	check_button.show_devotion = glade_xml_get_widget(gxml, "checkbutton7");
-	check_button.show_splash_screen = glade_xml_get_widget(gxml, "checkbutton8");
-	check_button.use_chapter_scroll = glade_xml_get_widget(gxml, "checkbutton_scroll");
 #ifdef USE_GTKMOZEMBED
 	gtk_widget_hide(check_button.use_chapter_scroll);
 #endif
-	check_button.use_imageresize = glade_xml_get_widget(gxml, "checkbutton_imageresize");
-	check_button.versehighlight = glade_xml_get_widget(gxml, "checkbutton_versehighlight");
-	check_button.doublespace = glade_xml_get_widget(gxml, "checkbutton_doublespace");
-	check_button.prayerlist = glade_xml_get_widget(gxml, "checkbutton_prayerlist");
-
-	check_button.show_paratab = glade_xml_get_widget(gxml, "checkbutton_paratab");
-
-	gtk_widget_hide(check_button.show_paratab);
+	gtk_widget_hide(check_button.show_paratab); // why?
 
 	setup_check_buttons();
 
@@ -2178,21 +1473,10 @@ create_preferences_dialog(void)
 }
 
 
-/******************************************************************************
- * Name
- *   gui_setup_preferences_dialog
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void gui_setup_preferences_dialog(void)
- *
+/*
  * Description
  *   get module list and setup preferences dialog call
  *   gui_create_preferences_dialog() to create dialog
- *
- * Return value
- *   void
  */
 
 void
