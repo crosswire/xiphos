@@ -1,6 +1,8 @@
 2010-04-03  karl <charcoal@users.sf.net>
 
-	* implemented usage side of per-language preferred font (need selector).
+	* implemented usage side of per-language preferred font.
+	* implemented font picker for per-language preference.
+	* improved special locale selector so multis work (pt_PT + pt_BR).
 
 2010-04-01  karl <charcoal@users.sf.net>
 

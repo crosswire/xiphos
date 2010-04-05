@@ -120,6 +120,7 @@ void main_flush_widgets_content(void);
 gboolean main_is_Bible_key(gchar *key);
 const char* main_get_osisref_from_key(const char *module, const char *key);
 const char *main_get_language_map(const char *language);
+char **main_get_module_language_list(void);
 void main_init_language_map(void);
 
 #ifdef __cplusplus

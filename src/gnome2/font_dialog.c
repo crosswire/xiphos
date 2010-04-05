@@ -95,13 +95,14 @@ static gchar *get_html_font_name(gchar * fontname)
 
 static void ok_clicked(GtkButton * button,  gpointer data)
 {
-	gchar file[250];
+	static gchar *file = NULL;
 	gchar *new_font = NULL;
 	gchar *font_name = NULL;
 
 	GS_message(("ok_clicked: %s",
 		    (mf->new_gdk_font ? mf->new_gdk_font : "-none-")));
-	sprintf(file, "%s/fonts.conf", settings.gSwordDir);
+	if (file == NULL)
+		file = g_strdup_printf("%s/fonts.conf", settings.gSwordDir);
 
 	if (!mf->no_font) {
 		if (new_font_set) {
@@ -118,15 +119,15 @@ static void ok_clicked(GtkButton * button,  gpointer data)
 		mf->new_gdk_font = "none";
 	}
 
-	mf->new_font_size =
-	    gtk_entry_get_text(GTK_ENTRY(combo_entry_size));
+	mf->new_font_size = gtk_entry_get_text(GTK_ENTRY(combo_entry_size));
 
 	save_conf_file_item(file, mf->mod_name, "Font", mf->new_font);
 	save_conf_file_item(file, mf->mod_name, "GdkFont", mf->new_gdk_font);
 	save_conf_file_item(file, mf->mod_name, "Fontsize", mf->new_font_size);
 
 	//evidently new_gdk_font is never set on Windows
-	GS_message (("\n\nFont: %s\nGdkFont: %s\nFontsize: %s\n\n", (mf->new_font ? mf->new_font : "-none-"),
+	GS_message (("\nFont: %s\nGdkFont: %s\nFontsize: %s\n",
+		     (mf->new_font ? mf->new_font : "-none-"),
 		     (mf->new_gdk_font ? mf->new_gdk_font : "-none-"),
 		     (mf->new_font_size ? mf->new_font_size : "-none-")));
 
@@ -179,6 +180,7 @@ static void cancel_clicked(GtkButton * button,  gpointer data)
 static void dialog_destroy(GtkObject * object,  gpointer data)
 {
 	free_font(mf);
+	mf = NULL;
 	new_font_set = 0;
 	gtk_main_quit();
 
