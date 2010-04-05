@@ -219,6 +219,9 @@ gdkcolor_to_hex(GdkColor color,
 {
 	gchar *tmpstr;
 
+        tmpstr = gdk_color_to_string(color);
+        GS_message(("Gdk returns %s",tmpstr));
+
 	tmpstr = g_malloc(8*sizeof(char));
 	if (websafe) {
 		g_snprintf (tmpstr, 8,"#%.2X%.2X%.2X",
@@ -231,7 +234,7 @@ gdkcolor_to_hex(GdkColor color,
 					color.green/256,
 					color.blue/256);
 	}
-	GS_message(("%s",tmpstr));
+        GS_message(("But we use %s",tmpstr));
 	return tmpstr;
 }
 
@@ -252,263 +255,26 @@ apply_color_settings(void)
 		main_update_parallel_page();
 }
 
-
-/******************************************************************************
- * Name
- *   on_colorbutton1_color_set
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_colorbutton1_color_set(GtkColorButton  * colorbutton,
- *							gpointer user_data)
- *
- * Description
- *
- *
- *
- * Return value
- *   void
- */
-
 void
-on_colorbutton1_color_set(GtkColorButton  * colorbutton,
+on_colorbutton_color_set(GtkColorButton  * colorbutton,
 			  gpointer user_data)
 {
 	gchar *buf = NULL;
- 	GdkColor color;
+        gchar *title = NULL;
+        GdkColor color;
 
 	gtk_color_button_get_color(colorbutton, &color);
+        title = gtk_widget_get_name(colorbutton);
 	buf = gdkcolor_to_hex(color,1);
-	xml_set_value("Xiphos", "HTMLcolors", "background", buf);
-	settings.bible_bg_color = xml_get_value("HTMLcolors", "background");
+
+        xml_set_value("Xiphos", "HTMLcolors", title, buf);
+        settings.bible_bg_color = xml_get_value("HTMLcolors", title);
 	if (buf)
 		g_free(buf);
-	apply_color_settings();
+        if (title)
+                g_free(title);
+        apply_color_settings();
 }
-
-/******************************************************************************
- * Name
- *   on_colorbutton2_color_set
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_colorbutton2_color_set(GtkColorButton  * colorbutton,
- *							gpointer user_data)
- *
- * Description
- *
- *
- *
- * Return value
- *   void
- */
-
-void
-on_colorbutton2_color_set(GtkColorButton * colorbutton,
-			  gpointer user_data)
-{
-	gchar *buf2 = NULL;
- 	GdkColor color;
-
-	gtk_color_button_get_color(colorbutton, &color);
-	buf2 = gdkcolor_to_hex(color,1);
-	xml_set_value("Xiphos", "HTMLcolors", "text_fg", buf2);
-	settings.bible_text_color = xml_get_value("HTMLcolors", "text_fg");
-	if (buf2)
-		g_free(buf2);
-	apply_color_settings();
-}
-
-/******************************************************************************
- * Name
- *   on_colorbutton3_color_set
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_colorbutton3_color_set(GtkColorButton  * colorbutton,
- *							gpointer user_data)
- *
- * Description
- *
- *
- *
- * Return value
- *   void
- */
-
-void
-on_colorbutton3_color_set(GtkColorButton * colorbutton,
-			  gpointer user_data)
-{
-	gchar *buf2 = NULL;
- 	GdkColor color;
-
-	gtk_color_button_get_color(colorbutton, &color);
-	buf2 = gdkcolor_to_hex(color,1);
-	xml_set_value("Xiphos", "HTMLcolors", "currentverse", buf2);
-	settings.currentverse_color =
-		xml_get_value("HTMLcolors", "currentverse");
-	if (buf2)
-		g_free(buf2);
-	apply_color_settings();
-}
-
-/******************************************************************************
- * Name
- *   on_colorbutton4_color_set
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_colorbutton4_color_set(GtkColorButton  * colorbutton,
- *							gpointer user_data)
- *
- * Description
- *
- *
- *
- * Return value
- *   void
- */
-
-void
-on_colorbutton4_color_set(GtkColorButton * colorbutton,
-			  gpointer user_data)
-{
-	gchar *buf2 = NULL;
- 	GdkColor color;
-
-	gtk_color_button_get_color(colorbutton, &color);
-	buf2 = gdkcolor_to_hex(color,1);
-	xml_set_value("Xiphos", "HTMLcolors", "versenum", buf2);
-	settings.bible_verse_num_color =
-		xml_get_value("HTMLcolors", "versenum");
-	if (buf2)
-		g_free(buf2);
-	apply_color_settings();
-}
-
-/******************************************************************************
- * Name
- *   on_colorbutton5_color_set
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_colorbutton5_color_set(GtkColorButton  * colorbutton,
- *							gpointer user_data)
- *
- * Description
- *
- *
- *
- * Return value
- *   void
- */
-
-void
-on_colorbutton5_color_set(GtkColorButton * colorbutton,
-			  gpointer user_data)
-{
-	gchar *buf2 = NULL;
- 	GdkColor color;
-
-	gtk_color_button_get_color(colorbutton, &color);
-	buf2 = gdkcolor_to_hex(color,1);
-	xml_set_value("Xiphos", "HTMLcolors", "link", buf2);
-	settings.link_color = xml_get_value("HTMLcolors", "link");
-	if (buf2)
-		g_free(buf2);
-	apply_color_settings();
-}
-
-/******************************************************************************
- * Name
- *   on_colorbutton6_color_set
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_colorbutton6_color_set(GtkColorButton  * colorbutton,
- *							gpointer user_data)
- *
- * Description
- *
- *
- *
- * Return value
- *   void
- */
-
-void
-on_colorbutton6_color_set(GtkColorButton * colorbutton,
-			  gpointer user_data)
-{
-	gchar *buf2 = NULL;
- 	GdkColor color;
-
-	gtk_color_button_get_color(colorbutton, &color);
-	buf2 = gdkcolor_to_hex(color,1);
-	xml_set_value("Xiphos", "HTMLcolors", "highlight_fg", buf2);
-	settings.highlight_fg = xml_get_value("HTMLcolors", "highlight_fg");
-	if (buf2)
-		g_free(buf2);
-	apply_color_settings();
-}
-
-/******************************************************************************
- * Name
- *   on_colorbutton7_color_set
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_colorbutton7_color_set(GtkColorButton  * colorbutton,
- *							gpointer user_data)
- *
- * Description
- *
- *
- *
- * Return value
- *   void
- */
-
-void
-on_colorbutton7_color_set(GtkColorButton * colorbutton,
-			  gpointer user_data)
-{
-	gchar *buf2 = NULL;
- 	GdkColor color;
-
-	gtk_color_button_get_color(colorbutton, &color);
-	buf2 = gdkcolor_to_hex(color,1);
-	xml_set_value("Xiphos", "HTMLcolors", "highlight_bg", buf2);
-	settings.highlight_bg = xml_get_value("HTMLcolors", "highlight_bg");
-	if (buf2)
-		g_free(buf2);
-	apply_color_settings();
-}
-
-/******************************************************************************
- * Name
- *   on_checkbutton1_toggled
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_checkbutton1_toggled(GtkToggleButton * togglebutton, gpointer user_data)
- *
- * Description
- *
- *
- *
- * Return value
- *   void
- */
 
 void
 on_checkbutton1_toggled(GtkToggleButton * togglebutton,
