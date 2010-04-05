@@ -22,6 +22,8 @@
 #include <config.h>
 #endif
 
+#include <set>
+
 #include <swmgr.h>
 #include <swmodule.h>
 #include <localemgr.h>
@@ -467,12 +469,34 @@ void BackEnd::delete_entry(void)
 const char *BackEnd::module_get_language(const char *module_name)
 {
 	ModMap::iterator it;
-	//-- iterate through the modules until we find modName
 	it = main_mgr->Modules.find(module_name);
-	//-- if we find the module
 	if (it != main_mgr->Modules.end())
 		return main_get_language_map((*it).second->Lang());
 	return "unknown";
+}
+
+
+char **BackEnd::get_module_language_list(void)
+{
+	char **retval;
+	int i;
+
+	std::set < SWBuf > module_languages;
+	std::set < SWBuf > ::iterator  ml_it;
+
+	// create a set of unique language names in use by modules.
+	ModMap::iterator it;
+	for (it = main_mgr->Modules.begin(); it != main_mgr->Modules.end(); it++)
+		module_languages.insert((*it).second->Lang());
+
+	// construct a list of char* from the uniquified set.
+	retval = g_new0(char *, module_languages.size() + 1);
+	for (i = 0, ml_it = module_languages.begin();
+	     ml_it != module_languages.end();
+	     ++i, ++ml_it) {
+	    retval[i] = g_strdup(ml_it->c_str());
+	}
+	return retval;
 }
 
 
