@@ -533,28 +533,6 @@ GS_DIALOG *gui_new_dialog(void)
 {
 	standard_info = g_new0(GS_DIALOG, 1);
 
-	standard_info->stock_icon = NULL;
-	standard_info->dialog = NULL;
-	standard_info->title = NULL;
-	standard_info->text1 = NULL;
-	standard_info->text2 = NULL;
-	standard_info->text3 = NULL;
-	standard_info->text4 = NULL;
-	standard_info->text5 = NULL;
-	standard_info->text6 = NULL;
-	standard_info->label_top = NULL;
-	standard_info->label_middle = NULL;
-	standard_info->label1 = NULL;
-	standard_info->label2 = NULL;
-	standard_info->label3 = NULL;
-	standard_info->label4 = NULL;
-	standard_info->label5 = NULL;
-	standard_info->label6 = NULL;
-	standard_info->label_bottom = NULL;
-	standard_info->ok = FALSE;
-	standard_info->cancel = FALSE;
-	standard_info->yes = FALSE;
-	standard_info->no = FALSE;
 	/* set entrys to null */
 	entry1 = NULL;
 	entry2 = NULL;
