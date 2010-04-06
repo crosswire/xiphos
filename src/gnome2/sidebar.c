@@ -73,7 +73,6 @@ static GtkWidget *button_search;
 static GtkWidget *button_v_lists;
 static GtkWidget *button_modules;
 static gchar *buf_module;
-static gchar *buf_caption;
 GList *list_of_verses;
 GtkListStore *model_verselist;
 gboolean is_search_result;
@@ -633,10 +632,7 @@ static gboolean on_modules_list_button_release(GtkWidget *widget,
 			return FALSE;
 		}
 	    	if (caption && (!g_utf8_collate(caption, _("Prayer List/Journal")))) {
-			buf_caption = caption;
-			gtk_menu_popup(GTK_MENU(sidebar.menu_prayerlist),
-				       NULL, NULL, NULL, NULL,
-				       0, gtk_get_current_event_time());
+			gui_menu_prayerlist_popup(NULL, NULL);
 			g_free(mod);
 			return FALSE;
 		}
@@ -1087,6 +1083,13 @@ GtkWidget *create_menu_prayerlist_mod(void)
 	return menu;
 }
 
+void gui_menu_prayerlist_popup(GtkMenuItem *menuitem, gpointer user_data)
+{
+	gtk_menu_popup(GTK_MENU(sidebar.menu_prayerlist),
+		       NULL, NULL, NULL, NULL,
+		       0, gtk_get_current_event_time());
+}
+
 static void tree_selection_changed_cb(GtkTreeSelection * selection,
 				      gpointer data)
 {
@@ -1276,7 +1279,6 @@ void gui_show_previewer_in_sidebar(gint choice)
 	main_set_previewer_widget(choice);
 	main_init_previewer();
 }
-
 
 /******************************************************************************
  * Name
