@@ -696,7 +696,7 @@ remove_install_modules(GList * modules,
 	sync_windows();
 	gtk_widget_queue_draw(dialog);
 	gtk_widget_hide(button_close);
-	gtk_widget_hide(button_close);
+	gtk_widget_hide(button_refresh);
 	gtk_widget_hide(button_install);
 	gtk_widget_hide(button_remove);
 	gtk_widget_hide(button_arch);
@@ -842,7 +842,7 @@ remove_install_modules(GList * modules,
 	gtk_widget_show(button_close);
 	switch (current_page) {
 		case 3:
-			if (need_update) gtk_widget_show(button_close);
+			if (need_update) gtk_widget_show(button_refresh);
 			gtk_widget_show(button_install);
 			gtk_widget_hide(button_arch);
 			gtk_widget_hide(button_idx);
@@ -1555,7 +1555,7 @@ response_refresh(void)
 	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar_refresh), 0);
 	if (!need_update) {
 		gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook1), 3);
-		gtk_widget_hide(button_close);
+		gtk_widget_hide(button_refresh);
 		gtk_widget_show(button_install);
 		gtk_widget_hide(button_remove);
 		gtk_widget_hide(button_arch);
@@ -2047,7 +2047,7 @@ on_radiobutton2_toggled(GtkToggleButton * togglebutton,
 			gpointer user_data)
 {
 	if (togglebutton->active) {
-		gtk_widget_show(button_close);
+		gtk_widget_show(button_refresh);
 		if (remote_source)
 		        g_free(remote_source);
 		remote_source = g_strdup(gtk_combo_box_get_active_text(
@@ -2055,7 +2055,7 @@ on_radiobutton2_toggled(GtkToggleButton * togglebutton,
 		xml_set_value("Xiphos", "modmgr", "mod_mgr_source", "1");
 
 	} else {
-		gtk_widget_hide(button_close);
+		gtk_widget_hide(button_refresh);
 		gtk_widget_hide(progressbar_refresh);
 		xml_set_value("Xiphos", "modmgr", "mod_mgr_source", "0");
 	}
@@ -2574,7 +2574,7 @@ on_button_add_remote_clicked(GtkButton * button,
 	str = g_string_new(NULL);
 
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radiobutton2),TRUE);
-	gtk_widget_hide(button_close);
+	gtk_widget_hide(button_refresh);
 
 	GtkTreeModel *model =
 	    gtk_tree_view_get_model(GTK_TREE_VIEW(treeview_remote));
@@ -2698,7 +2698,7 @@ on_button_add_remote_clicked(GtkButton * button,
 	mod_mgr_init(destination, FALSE, TRUE);
 
 out:
-	gtk_widget_show(button_close);
+	gtk_widget_show(button_refresh);
 	working = FALSE;
 }
 
@@ -2836,7 +2836,7 @@ on_treeview1_button_release_event(GtkWidget * widget,
 						      (notebook1), sel);
 			switch (sel) {
 			case 1:
-				gtk_widget_hide(button_close);
+				gtk_widget_hide(button_refresh);
 				gtk_widget_hide(button_install);
 				gtk_widget_hide(button_remove);
 				gtk_widget_hide(button_arch);
@@ -2850,9 +2850,9 @@ on_treeview1_button_release_event(GtkWidget * widget,
 			case 2:
 				if (GTK_TOGGLE_BUTTON(radiobutton2)->
 				    active)
-					gtk_widget_show(button_close);
+					gtk_widget_show(button_refresh);
 				else
-					gtk_widget_hide(button_close);
+					gtk_widget_hide(button_refresh);
 				gtk_widget_hide(button_install);
 				gtk_widget_hide(button_remove);
 				gtk_widget_hide(button_arch);
@@ -2863,9 +2863,9 @@ on_treeview1_button_release_event(GtkWidget * widget,
 			case 3:
 				if (GTK_TOGGLE_BUTTON(radiobutton2)->
 				    active)
-					gtk_widget_show(button_close);
+					gtk_widget_show(button_refresh);
 				else
-					gtk_widget_hide(button_close);
+					gtk_widget_hide(button_refresh);
 				gtk_widget_show(button_install);
 				gtk_widget_hide(button_remove);
 				gtk_widget_hide(button_arch);
@@ -2879,7 +2879,7 @@ on_treeview1_button_release_event(GtkWidget * widget,
 				gtk_widget_show(button_idx);
 				gtk_widget_show(button_delidx);
 				gtk_widget_hide(button_load_sources);
-				gtk_widget_hide(button_close);
+				gtk_widget_hide(button_refresh);
 				gtk_widget_hide(button_install);
 				break;
 			}
@@ -3147,6 +3147,8 @@ create_module_manager_dialog(gboolean first_run)
                     NULL);
 	if (first_run)
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radiobutton2),TRUE);
+
+	gtk_widget_hide(button_refresh);
 
 	return dialog;
 }
