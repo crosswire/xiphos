@@ -43,6 +43,7 @@ void on_close_activate (GtkMenuItem *menuitem, gpointer user_data);
 void on_popup_copy_activate (GtkMenuItem *menuitem, gpointer user_data);
 void on_popup_find_activate (GtkMenuItem *menuitem, gpointer user_data);
 void on_popup_font_activate (GtkMenuItem * menuitem, gpointer user_data);
+void on_verse_per_line_activate (GtkCheckMenuItem * menuitem, gpointer user_data);
 void on_words_of_christ_in_red_activate (GtkCheckMenuItem * menuitem, gpointer user_data);
 void on_strong_s_numbers_activate (GtkCheckMenuItem * menuitem, gpointer user_data);
 void on_morphological_tags_activate (GtkCheckMenuItem * menuitem, gpointer user_data);

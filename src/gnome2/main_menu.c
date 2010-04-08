@@ -302,47 +302,6 @@ G_MODULE_EXPORT void on_search_activate(GtkMenuItem * menuitem, gpointer user_da
 
 /******************************************************************************
  * Name
- *  on_verse_style_activate
- *
- * Synopsis
- *   #include "gui/main_menu.h"
- *
- *   void on_verse_style_activate(GtkMenuItem *menuitem, gpointer user_data)
- *
- * Description
- *   toggle between verse and paragraph style
- *
- * Return value
- *   void
- */
-
-extern gboolean style_display;
-
-G_MODULE_EXPORT void
-on_verse_style_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
-{
-	if (style_display) {
-		gchar *file = g_strdup_printf("%s/modops.conf",
-					      settings.gSwordDir);
-		gchar *url = g_strdup_printf("sword://%s/%s",
-					     settings.MainWindowModule,
-					     settings.currentverse);
-		/* remember our choice for the next program startup */
-		settings.versestyle = menuitem->active;
-		save_conf_file_item(file, settings.MainWindowModule, "style",
-				    (menuitem->active
-				     ? "verse"
-				     : "paragraph"));
-		if (settings.havebible) {
-			main_url_handler(url, TRUE);
-		}
-		g_free(url);
-		g_free(file);
-	}
-}
-
-/******************************************************************************
- * Name
  *  on_linked_tabs_activate
  *
  * Synopsis
@@ -863,7 +822,6 @@ GtkWidget *gui_create_main_menu(void)
 	widgets.viewpreview_item = glade_xml_get_widget (gxml, "preview");
 	widgets.viewcomms_item = glade_xml_get_widget (gxml, "commentary");
 	widgets.viewdicts_item = glade_xml_get_widget (gxml, "show_dictionary_lexicon");
-	widgets.versestyle_item = glade_xml_get_widget (gxml, "verse_per_line");
 	widgets.linkedtabs_item = glade_xml_get_widget (gxml, "link_tabs");
 	widgets.readaloud_item = glade_xml_get_widget (gxml, "read_aloud");
 	widgets.showversenum_item = glade_xml_get_widget (gxml, "show_verse_numbers");
@@ -892,9 +850,6 @@ GtkWidget *gui_create_main_menu(void)
 				       settings.show_previewer_in_sidebar);
 
 	/* update other status toys */
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.versestyle_item),
-				       settings.versestyle);
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.linkedtabs_item),
 				       settings.linkedtabs);

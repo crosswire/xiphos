@@ -115,7 +115,6 @@ extern "C" {
                         *side_preview_item,
                         *viewcomms_item, /* widget to access toggle menu - for showcommss */
                         *viewdicts_item, /* widget to access toggle menu - for showdicts */
-                        *versestyle_item,       /* widget to access toggle menu - for versestyle */
                         *linkedtabs_item,	/* widget to access toggle menu - for linkedtabs */
                         *showversenum_item,	/* widget to access toggle menu - for showversenum */
                         *readaloud_item,	/* widget to access toggle menu - for reading out loud */
