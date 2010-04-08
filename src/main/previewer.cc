@@ -59,8 +59,7 @@ extern "C" {
 #include "gui/debug_glib_null.h"
 
 //#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
-#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><STYLE type=\"text/css\"><!-- A { text-decoration:none } %s --></STYLE></head>"
-#define DOUBLE_SPACE " * { line-height: 2em ! important; }"
+#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><STYLE type=\"text/css\"><!-- A { text-decoration:none } --></STYLE></head>"
 
 using namespace std;
 
@@ -119,7 +118,6 @@ void main_init_previewer(void)
 	g_string_printf(tmp_str,
 			HTML_START
 			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
-			"",
 			settings.bible_bg_color, settings.bible_text_color,
 			settings.link_color);
 
@@ -256,7 +254,6 @@ void main_information_viewer(const gchar * mod_name, const gchar * text, const g
 	g_string_printf(tmp_str,
 			HTML_START
 			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
-			(settings.doublespace ? DOUBLE_SPACE : ""),
 			settings.bible_bg_color, settings.bible_text_color,
 			settings.link_color);
 
@@ -307,10 +304,10 @@ void main_information_viewer(const gchar * mod_name, const gchar * text, const g
 		str = g_string_append(str, tmp_str->str);
 		g_string_printf(tmp_str,
 				"<font face=\"%s\" size=\"%+d\">",
-				((mf->old_font) ? mf->old_font : "none"),
-				((mf->old_font_size)
-			        ? atoi(mf->old_font_size) + settings.base_font_size
-			        : settings.base_font_size));
+				(mf->old_font ? mf->old_font : "none"),
+				(mf->old_font_size
+				 ? atoi(mf->old_font_size) + settings.base_font_size
+				 : settings.base_font_size) - 1);
 		str = g_string_append(str, tmp_str->str);
 		str = g_string_append(str, text);
 
@@ -325,10 +322,10 @@ void main_information_viewer(const gchar * mod_name, const gchar * text, const g
 	} else {
 		g_string_printf(tmp_str,
 				"<font face=\"%s\" size=\"%+d\">",
-				((mf->old_font) ? mf->old_font : "none"),
-				((mf->old_font_size)
-			        ? atoi(mf->old_font_size) + settings.base_font_size
-			        : settings.base_font_size));
+				(mf->old_font ? mf->old_font : "none"),
+				(mf->old_font_size
+				 ? atoi(mf->old_font_size) + settings.base_font_size
+				 : settings.base_font_size) - 1);
 		str = g_string_append(str, tmp_str->str);
 		str = g_string_append(str, text);
 
@@ -552,7 +549,6 @@ void main_entry_display(gpointer data, gchar * mod_name,
 	g_string_printf(tmp_str,
 			HTML_START
 			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
-			(settings.doublespace ? DOUBLE_SPACE : ""),
 			settings.bible_bg_color, settings.bible_text_color,
 			settings.link_color);
 
@@ -560,10 +556,10 @@ void main_entry_display(gpointer data, gchar * mod_name,
 
 	g_string_printf(tmp_str,
 			"<font face=\"%s\" size=\"%+d\">",
-			((mf->old_font) ? mf->old_font : "none"),
-			((mf->old_font_size)
-			? atoi(mf->old_font_size) + settings.base_font_size
-			: settings.base_font_size));
+			(mf->old_font ? mf->old_font : "none"),
+			(mf->old_font_size
+			 ? atoi(mf->old_font_size) + settings.base_font_size
+			 : settings.base_font_size) - 1);
 	str = g_string_append(str, tmp_str->str);
 
 	/* show key in html widget  */

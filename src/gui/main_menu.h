@@ -45,7 +45,6 @@ void on_read_aloud_activate(GtkCheckMenuItem * menuitem, gpointer user_data);
 void on_show_verse_numbers_activate(GtkCheckMenuItem * menuitem, gpointer user_data);
 void on_versehighlight_activate(GtkCheckMenuItem * menuitem, gpointer user_data);
 void on_side_preview_activate(GtkCheckMenuItem * menuitem, gpointer user_data);
-void on_double_space_text_activate(GtkCheckMenuItem * menuitem, gpointer user_data);
 void on_quit_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_about_xiphos_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_save_session_activate(GtkMenuItem * menuitem, gpointer user_data);

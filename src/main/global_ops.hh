@@ -46,6 +46,7 @@ struct  _global_ops {
 	gboolean variants_all;
 	gboolean transliteration;
 	gboolean commentary_by_chapter;
+	gboolean doublespace;
 	gint module_type;
 	gint image_content;
 	gint respect_font_faces;
