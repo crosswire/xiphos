@@ -3215,7 +3215,7 @@ create_module_manager_dialog(gboolean first_run)
 	g_signal_connect(notebook1, "switch_page",
 			 G_CALLBACK(on_notebook1_switch_page), NULL);
 	if (first_run)
-		gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook1),2);
+		gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook1),0);
 
 	/* labels */
 	label_home = glade_xml_get_widget (gxml, "label_home");
