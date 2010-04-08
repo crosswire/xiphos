@@ -41,6 +41,7 @@ void on_install_clicked(GtkButton * button, gpointer  user_data);
 void on_remove_clicked(GtkButton * button, gpointer  user_data);
 void on_archive_clicked(GtkButton * button, gpointer  user_data);
 void on_index_clicked(GtkButton * button, gpointer  user_data);
+void on_local_clicked(GtkButton * button, gpointer  user_data);
 void on_delete_index_clicked(GtkButton * button, gpointer  user_data);
 void on_load_sources_clicked(GtkButton * button, gpointer  user_data);
 void on_intro_clicked(GtkButton * button, gpointer  user_data);
