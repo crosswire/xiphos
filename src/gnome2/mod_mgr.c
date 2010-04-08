@@ -120,7 +120,7 @@ static GtkWidget *button_cancel;
 static GtkWidget *button1;
 static GtkWidget *button2;
 static GtkWidget *button3;
-static GtkWidget *button_local;
+//static GtkWidget *button_local;
 static GtkWidget *button_arch;
 static GtkWidget *button_idx;
 static GtkWidget *button_delidx;
@@ -2045,8 +2045,8 @@ on_radiobutton2_toggled(GtkToggleButton * togglebutton,
 {
 	if (togglebutton->active) {
 		gtk_widget_show(button1);
-		if (first_time_user) 
-			gtk_widget_hide(button_local);
+		/*if (first_time_user) 
+			gtk_widget_hide(button_local);*/
 		if (remote_source)
 		        g_free(remote_source);
 		remote_source = g_strdup(gtk_combo_box_get_active_text(
@@ -2055,8 +2055,8 @@ on_radiobutton2_toggled(GtkToggleButton * togglebutton,
 
 	} else {
 		gtk_widget_hide(button1);
-		if (first_time_user) 
-			gtk_widget_show(button_local);
+		/*if (first_time_user) 
+			gtk_widget_show(button_local);*/
 		if (remote_source)
 		gtk_widget_hide(progressbar_refresh);
 		xml_set_value("Xiphos", "modmgr", "mod_mgr_source", "0");
@@ -2312,8 +2312,8 @@ on_local_clicked(GtkButton * button, gpointer  user_data)
 {
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook1),3);
 	gtk_widget_hide(button1);
-	if (first_time_user)
-		gtk_widget_hide(button_local);
+	/*if (first_time_user)
+		gtk_widget_hide(button_local);*/
 	gtk_widget_show(button2);
 	gtk_widget_hide(button3);
 	gtk_widget_hide(button_arch);
@@ -2973,9 +2973,9 @@ setup_dialog_action_area(GtkDialog * dialog)
 	g_signal_connect(button1, "clicked", G_CALLBACK(on_refresh_clicked), NULL);
 
 	/* local install */
-	button_local = gtk_button_new_with_label (_("Local Install"));  
+	/*button_local = gtk_button_new_with_label (_("Local Install"));  
 	gtk_box_pack_start(GTK_BOX(dialog_action_area1),button_local,FALSE, FALSE,0);
-	g_signal_connect(button_local, "clicked", G_CALLBACK(on_local_clicked), NULL);
+	g_signal_connect(button_local, "clicked", G_CALLBACK(on_local_clicked), NULL);*/
 
 
 	/* install */
@@ -3260,7 +3260,8 @@ create_module_manager_dialog(gboolean first_run)
                     NULL);
 	if (first_run)
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radiobutton2),TRUE);
-
+		
+	gtk_widget_hide(button1);
 	return dialog;
 }
 
