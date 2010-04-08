@@ -566,6 +566,43 @@ G_MODULE_EXPORT void on_popup_font_activate (GtkMenuItem * menuitem, gpointer us
  *
  */
 
+G_MODULE_EXPORT void on_verse_per_line_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
+{
+	gchar *file = g_strdup_printf("%s/modops.conf",
+				      settings.gSwordDir);
+	gchar *url = g_strdup_printf("sword://%s/%s",
+				     settings.MainWindowModule,
+				     settings.currentverse);
+
+	settings.versestyle = menuitem->active;
+	save_conf_file_item(file, settings.MainWindowModule, "style",
+			    (menuitem->active
+			     ? "verse"
+			     : "paragraph"));
+	if (settings.havebible) {
+		main_url_handler(url, TRUE);
+	}
+	g_free(url);
+	g_free(file);
+}
+
+
+/******************************************************************************
+ * Name
+ *
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *
+ *
+ * Description
+ *
+ *
+ * Return value
+ *
+ */
+
 G_MODULE_EXPORT void on_words_of_christ_in_red_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
    	_global_option_main_pane((GtkMenuItem*)menuitem,
@@ -1428,6 +1465,14 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 		ops = main_new_globals((gchar*) mod_name, 0);
 
 
+    	item = glade_xml_get_widget (gxml, "verse_per_line");
+    	gtk_widget_hide (item);
+
+	if (mod_name && (main_get_mod_type((gchar*)mod_name) == TEXT_TYPE)) {
+	    	gtk_widget_show (item);
+		GTK_CHECK_MENU_ITEM (item)->active = settings.versestyle;
+	}
+
     	item = glade_xml_get_widget (gxml, "words_of_christ_in_red");
     	gtk_widget_hide (item);
 
@@ -1559,12 +1604,7 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 	}
 
     	item = glade_xml_get_widget (gxml, "doublespace");
-    	gtk_widget_hide (item);
-
-	if (ops->doublespace != -1) {
-		gtk_widget_show(item);
-		GTK_CHECK_MENU_ITEM (item)->active = ops->doublespace;
-	}
+	GTK_CHECK_MENU_ITEM (item)->active = ops->doublespace;
 
 	g_free(ops);
 

@@ -2,6 +2,7 @@
 
 	* feat.req #1994953 Fine tune display settings - make doublespace
 	  a per-module option, and step down previewer font size 1 notch.
+	* move Verse Per Line from main menu and prefs to context menu only.
 
 2010-04-05  karl <charcoal@users.sf.net>
 

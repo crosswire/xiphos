@@ -36,7 +36,6 @@ void on_checkbutton1_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 void on_checkbutton2_toggled(GtkToggleButton * togglebutton, gpointer user_data);
 void on_checkbutton3_toggled(GtkToggleButton * togglebutton, gpointer user_data);
 void on_checkbutton4_toggled(GtkToggleButton * togglebutton, gpointer user_data);
-void on_checkbutton5_toggled(GtkToggleButton * togglebutton, gpointer user_data);
 void on_checkbutton6_toggled(GtkToggleButton * togglebutton, gpointer user_data);
 void on_checkbutton7_toggled(GtkToggleButton * togglebutton, gpointer user_data);
 void on_checkbutton8_toggled(GtkToggleButton * togglebutton, gpointer user_data);

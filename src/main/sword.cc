@@ -89,7 +89,6 @@ extern GtkWidget *spb_verse;
 extern GtkWidget *cbe_freeform_lookup;
 extern gboolean shift_key_pressed;
 
-gboolean style_display = TRUE;
 char *sword_locale = NULL;
 gboolean companion_activity = FALSE;
 
@@ -1140,12 +1139,6 @@ void main_display_bible(const char * mod_name, const char * key)
 		settings.versestyle = FALSE;
 	g_free(style);
 	g_free(file);
-
-	style_display = FALSE;
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.versestyle_item),
-				       settings.versestyle);
-	style_display = TRUE;
 
 	if (backend->module_has_testament(mod_name,
 				backend->get_key_testament(key))) {
