@@ -57,7 +57,7 @@
  */
 #define GS_DIR ".xiphos"
 
-#define GS_NET_PERMISSION	_("Welcome to Xiphos.\n\nThere are no Bible modules installed. In order to initialize, Xiphos needs you to install at least one Bible.\n\nWith your permission, Xiphos will invoke the Module Manager so that you may install from Crosswire:\n1. Configure remote install.\n2. Connect.\n3. Select a Bible text of your language preference.\n4. Click `install'.\nClose the Module Manager when you are done.\n\nWarning: If you live in a persecuted country, use with care.\n\nMay Xiphos invoke the Module Manager so that you may install a Bible?")
+#define GS_NET_PERMISSION	_("<b>Welcome to Xiphos.</b>\n\nThere are no Bibles installed. In order to initialize, Xiphos needs at least one Bible module.\n\nWith your permission, Xiphos will open the Module Manager so that you may install one or more Bibles from either a local module set (cdrom, flash drive) or over the network from CrossWire Bible Society.\n\n<u>For local install:</u>\n- In <i>Module Sources: Add/Remove</i>, add a new local folder name where modules can be found.\n  (This is where folders exist named <i>mods.d</i> and <i>modules</i>.)\n- In <i>Module Sources: Choose</i>, click the \"Local\" button, and select your folder from the pulldown.\n\n<u>For network install from CrossWire:</u>\n- In <i>Module Sources: Choose</i>, click the \"Remote\" button and select CrossWire from the pulldown.\n- Click the \"Refresh\" button at the bottom.\n\n<u>In either case:</u>\n- In <i>Modules: Install/Update</i>, select Bibles of your preference.\n- Click \"Install\".\n- Close the Module Manager when you are done.\n\n<u>Warning</u>: If you live in a persecuted country, use with care.\n\nMay Xiphos open the Module Manager so that you may install a Bible?")
 
 /******************************************************************************
  * globals
@@ -203,7 +203,7 @@ int settings_init(int argc, char **argv, int new_configs, int new_bookmarks)
 	/* ensure that the user has a bible with which to work */
 	if (settings.havebible == 0) {
 		gui_init(argc, argv);
-		if (gui_yes_no_dialog(GS_NET_PERMISSION, NULL)) {
+		if (gui_yes_no_dialog(GS_NET_PERMISSION, GTK_STOCK_ABOUT)) {
 			main_shutdown_list();
 			gui_open_mod_mgr_initial_run();
 			main_init_lists();
