@@ -120,6 +120,7 @@ static GtkWidget *button_cancel;
 static GtkWidget *button1;
 static GtkWidget *button2;
 static GtkWidget *button3;
+static GtkWidget *button_local;
 static GtkWidget *button_arch;
 static GtkWidget *button_idx;
 static GtkWidget *button_delidx;
@@ -2044,6 +2045,8 @@ on_radiobutton2_toggled(GtkToggleButton * togglebutton,
 {
 	if (togglebutton->active) {
 		gtk_widget_show(button1);
+		if (first_time_user) 
+			gtk_widget_hide(button_local);
 		if (remote_source)
 		        g_free(remote_source);
 		remote_source = g_strdup(gtk_combo_box_get_active_text(
@@ -2052,6 +2055,9 @@ on_radiobutton2_toggled(GtkToggleButton * togglebutton,
 
 	} else {
 		gtk_widget_hide(button1);
+		if (first_time_user) 
+			gtk_widget_show(button_local);
+		if (remote_source)
 		gtk_widget_hide(progressbar_refresh);
 		xml_set_value("Xiphos", "modmgr", "mod_mgr_source", "0");
 	}
@@ -2299,6 +2305,21 @@ void
 on_refresh_clicked(GtkButton * button, gpointer  user_data)
 {
 	response_refresh();
+}
+
+void
+on_local_clicked(GtkButton * button, gpointer  user_data)
+{
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook1),3);
+	gtk_widget_hide(button1);
+	if (first_time_user)
+		gtk_widget_hide(button_local);
+	gtk_widget_show(button2);
+	gtk_widget_hide(button3);
+	gtk_widget_hide(button_arch);
+	gtk_widget_hide(button_idx);
+	gtk_widget_hide(button_delidx);
+	gtk_widget_hide(button_sources);
 }
 
 void
@@ -2951,6 +2972,12 @@ setup_dialog_action_area(GtkDialog * dialog)
 	gtk_box_pack_start(GTK_BOX(dialog_action_area1),button1,FALSE, FALSE,0);
 	g_signal_connect(button1, "clicked", G_CALLBACK(on_refresh_clicked), NULL);
 
+	/* local install */
+	button_local = gtk_button_new_with_label (_("Local Install"));  
+	gtk_box_pack_start(GTK_BOX(dialog_action_area1),button_local,FALSE, FALSE,0);
+	g_signal_connect(button_local, "clicked", G_CALLBACK(on_local_clicked), NULL);
+
+
 	/* install */
 	button2 = gtk_button_new ();
 	gtk_box_pack_start(GTK_BOX(dialog_action_area1),button2,FALSE, FALSE,0);
@@ -3001,7 +3028,7 @@ setup_dialog_action_area(GtkDialog * dialog)
 	button_intro =  gtk_button_new_from_stock ("gtk-about");
 	gtk_widget_show (button_intro);
 	gtk_box_pack_start(GTK_BOX(dialog_action_area1),button_intro,FALSE, FALSE,0);
-	g_signal_connect(button_sources, "clicked", G_CALLBACK(on_intro_clicked), NULL);
+	g_signal_connect(button_intro, "clicked", G_CALLBACK(on_intro_clicked), NULL);
 
 	/* cancel */
 	button_cancel =  gtk_button_new_from_stock ("gtk-cancel");
@@ -3130,7 +3157,7 @@ create_module_manager_dialog(gboolean first_run)
 		gtk_widget_show(dialog_vbox);
 		gtk_box_pack_start(GTK_BOX(dialog_vbox),hpaned, TRUE, TRUE, 6);
 		widget = glade_xml_get_widget (gxml, "scrolledwindow1");		
-		gtk_widget_hide(widget);
+		//gtk_widget_hide(widget);
 		/* setup dialog action area */
 		setup_dialog_action_area(GTK_DIALOG (dialog));
 	} else {
@@ -3149,8 +3176,10 @@ create_module_manager_dialog(gboolean first_run)
 		button_intro = glade_xml_get_widget (gxml, "button16"); /* view intro */
 	}
 
+	//if(!first_time_user)
 	g_signal_connect(dialog, "response",
 			 G_CALLBACK(on_mod_mgr_response), NULL);
+	
 	g_signal_connect(dialog, "destroy",
 			 G_CALLBACK(on_dialog_destroy), NULL);
 
@@ -3186,7 +3215,7 @@ create_module_manager_dialog(gboolean first_run)
 	g_signal_connect(notebook1, "switch_page",
 			 G_CALLBACK(on_notebook1_switch_page), NULL);
 	if (first_run)
-		gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook1),1);
+		gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook1),2);
 
 	/* labels */
 	label_home = glade_xml_get_widget (gxml, "label_home");
@@ -3291,7 +3320,7 @@ void gui_open_mod_mgr_initial_run(void)
 	/* this change is to accommodate feature request #2832230  
 	 "No option for local install on fresh install" */
 	/* dlg = create_module_manager_dialog(TRUE); */
-	dlg = create_module_manager_dialog(FALSE); 
+	dlg = create_module_manager_dialog(TRUE); 
 	set_window_icon(GTK_WINDOW(dlg));
 	gtk_dialog_run((GtkDialog *) dlg);
 	gtk_widget_destroy(dlg);
