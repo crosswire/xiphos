@@ -1091,6 +1091,16 @@
 	      <signal name="activate" handler="on_commentary_by_chapter_activate" last_modification_time="Sat, 28 Feb 2009 20:09:05 GMT"/>
 	    </widget>
 	  </child>
+
+	  <child>
+	    <widget class="GtkCheckMenuItem" id="doublespace">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">Doublespace</property>
+	      <property name="use_underline">True</property>
+	      <property name="active">False</property>
+	      <signal name="activate" handler="on_doublespace_activate" last_modification_time="Sat, 28 Feb 2009 20:09:05 GMT"/>
+	    </widget>
+	  </child>
 	</widget>
       </child>
     </widget>

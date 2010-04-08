@@ -111,7 +111,6 @@ struct _preferences_check_buttons {
 	GtkWidget *readaloud;
 	GtkWidget *show_verse_num;
 	GtkWidget *versehighlight;
-	GtkWidget *doublespace;
 	GtkWidget *show_splash_screen;
 	GtkWidget *prayerlist;
 
@@ -973,35 +972,6 @@ on_checkbutton_versehighlight_toggled(GtkToggleButton * togglebutton,
 			       settings.versehighlight);
 	main_display_bible(settings.MainWindowModule, settings.currentverse);
 }
-
-/******************************************************************************
- * Name
- *   on_checkbutton_doublespace_toggled
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_checkbutton_doublespace_toggled(GtkToggleButton * togglebutton, gpointer user_data)
- *
- * Description
- *
- *
- * Return value
- *   void
- */
-
-void
-on_checkbutton_doublespace_toggled(GtkToggleButton * togglebutton,
-				   gpointer user_data)
-{
-	xml_set_value("Xiphos", "misc", "doublespace",
-		      (togglebutton->active ? "1" : "0"));
-	settings.doublespace = togglebutton->active;
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-			       (widgets.doublespace_item),
-			       settings.doublespace);
-}
-
 
 /******************************************************************************
  * Name
@@ -1985,14 +1955,6 @@ setup_check_buttons(void)
 				     (check_button.show_paratab),
 				     settings.showparatab);
 
-#if 0
-#ifdef USE_GTKMOZEMBED
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-				     (check_button.doublespace),
-				     settings.doublespace);
-#endif /* USE_GTKMOZEMBED */
-#endif /* 0 */
-
 	g_signal_connect(check_button.enable_tabbed_browsing, "toggled",
 			 G_CALLBACK(on_checkbutton1_toggled), NULL);
 	g_signal_connect(check_button.use_verse_style, "toggled",
@@ -2021,13 +1983,6 @@ setup_check_buttons(void)
 			 G_CALLBACK(on_checkbutton_prayerlist_toggled), NULL);
 	g_signal_connect(check_button.show_paratab, "toggled",
 			 G_CALLBACK(on_checkbutton_showparatab_toggled), NULL);
-
-#if 0
-#ifdef USE_GTKMOZEMBED
-	g_signal_connect(check_button.doublespace, "toggled",
-			 G_CALLBACK(on_checkbutton_doublespace_toggled), NULL);
-#endif /* USE_GTKMOZEMBED */
-#endif /* 0 */
 }
 
 /*
@@ -2364,7 +2319,6 @@ create_preferences_dialog(void)
 #endif
 	check_button.use_imageresize = glade_xml_get_widget(gxml, "checkbutton_imageresize");
 	check_button.versehighlight = glade_xml_get_widget(gxml, "checkbutton_versehighlight");
-	check_button.doublespace = glade_xml_get_widget(gxml, "checkbutton_doublespace");
 	check_button.prayerlist = glade_xml_get_widget(gxml, "checkbutton_prayerlist");
 
 	check_button.show_paratab = glade_xml_get_widget(gxml, "checkbutton_paratab");

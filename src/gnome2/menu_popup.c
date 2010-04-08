@@ -833,6 +833,28 @@ G_MODULE_EXPORT void on_commentary_by_chapter_activate (GtkCheckMenuItem * menui
  *
  */
 
+G_MODULE_EXPORT void on_doublespace_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
+{
+   	_global_option_main_pane((GtkMenuItem*)menuitem, "Doublespace"); /* string not seen by user */
+}
+
+
+/******************************************************************************
+ * Name
+ *
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *
+ *
+ * Description
+ *
+ *
+ * Return value
+ *
+ */
+
 G_MODULE_EXPORT void on_primary_reading_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
 	gchar *key = NULL;
@@ -1534,6 +1556,14 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
     	if (main_get_mod_type((gchar*) (is_dialog ? d->mod_name : mod_name)) == COMMENTARY_TYPE) {
     		gtk_widget_show (item);
    		GTK_CHECK_MENU_ITEM (item)->active = ops->commentary_by_chapter;
+	}
+
+    	item = glade_xml_get_widget (gxml, "doublespace");
+    	gtk_widget_hide (item);
+
+	if (ops->doublespace != -1) {
+		gtk_widget_show(item);
+		GTK_CHECK_MENU_ITEM (item)->active = ops->doublespace;
 	}
 
 	g_free(ops);

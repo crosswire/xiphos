@@ -939,7 +939,7 @@ GTKEntryDisp::Display(SWModule &imodule)
 			       ? CSS_BLOCK_BOTH
 			       : (strongs_or_morph		// either
 				  ? CSS_BLOCK_ONE
-				  : (settings.doublespace	// neither
+				  : (ops->doublespace		// neither
 				     ? DOUBLE_SPACE
 				     : ""))),
 			      settings.bible_bg_color,
@@ -1586,7 +1586,7 @@ GTKChapDisp::Display(SWModule &imodule)
 			     ? CSS_BLOCK_BOTH
 			     : (strongs_or_morph	// either
 				? CSS_BLOCK_ONE
-				: (settings.doublespace	// neither
+				: (ops->doublespace	// neither
 				   ? DOUBLE_SPACE
 				   : ""))),
 			    settings.bible_bg_color,
@@ -1877,7 +1877,7 @@ DialogEntryDisp::Display(SWModule &imodule)
 			      "<font color=\"%s\">"
 			      "<a href=\"xiphos.url?action=showModInfo&value=%s&module=%s\">"
 			      "[*%s*]</a></font><br>",
-			      (settings.doublespace ? DOUBLE_SPACE : ""),
+			      (ops->doublespace ? DOUBLE_SPACE : ""),
 			      settings.bible_bg_color,
 			      settings.bible_text_color,
 			      settings.link_color,
@@ -2012,7 +2012,7 @@ DialogChapDisp::Display(SWModule &imodule)
 			       ? CSS_BLOCK_BOTH
 			       : (strongs_or_morph
 				  ? CSS_BLOCK_ONE
-				  : (settings.doublespace
+				  : (ops->doublespace
 				     ? DOUBLE_SPACE
 				     : ""))),
 			      settings.bible_bg_color,
@@ -2233,7 +2233,7 @@ GTKPrintEntryDisp::Display(SWModule &imodule)
 			      "<font color=\"%s\">"
 			      "<a href=\"xiphos.url?action=showModInfo&value=%s&module=%s\">"
 			      "[*%s*]</a></font>[%s]<br>",
-			      (settings.doublespace ? DOUBLE_SPACE : ""),
+			      (ops->doublespace ? DOUBLE_SPACE : ""),
 			      settings.bible_bg_color,
 			      settings.bible_text_color,
 			      settings.link_color,
@@ -2299,7 +2299,7 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 	buf=g_strdup_printf(HTML_START
 			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
 			      "<font face=\"%s\" size=\"%+d\">",
-			      (settings.doublespace ? DOUBLE_SPACE : ""),
+			      (ops->doublespace ? DOUBLE_SPACE : ""),
 			      settings.bible_bg_color,
 			      settings.bible_text_color,
 			      settings.link_color,

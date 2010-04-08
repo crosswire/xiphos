@@ -323,5 +323,8 @@ GLOBAL_OPS *main_new_globals(gchar * mod_name, int dialog)
 	ops->commentary_by_chapter =
 	    gui_of2tf(module_options[mod_name]["Commentary by Chapter"].c_str());
 
+	ops->doublespace =
+	    gui_of2tf(module_options[mod_name]["Doublespace"].c_str());
+
 	return ops;
 }

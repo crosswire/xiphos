@@ -68,6 +68,7 @@ namespace ModuleCache {
 	static const int VariantsSecondary  = (1<<14);
 	static const int Transliteration    = (1<<15);
 	static const int CommentaryChapter  = (1<<16);
+	static const int Doublespace        = (1<<17);
 
 	class CacheVerse {
 	public:
