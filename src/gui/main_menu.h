@@ -39,7 +39,6 @@ void on_about_the_sword_project_activate(GtkMenuItem * menuitem, gpointer user_d
 void on_about_translation_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_daily_devotion_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_search_activate(GtkMenuItem * menuitem, gpointer user_data);
-void on_verse_style_activate(GtkCheckMenuItem * menuitem, gpointer user_data);
 void on_linked_tabs_activate(GtkCheckMenuItem * menuitem, gpointer user_data);
 void on_read_aloud_activate(GtkCheckMenuItem * menuitem, gpointer user_data);
 void on_show_verse_numbers_activate(GtkCheckMenuItem * menuitem, gpointer user_data);

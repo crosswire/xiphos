@@ -104,7 +104,6 @@ struct _preferences_check_buttons {
 	GtkWidget *show_book_tabs;
 
 	GtkWidget *use_default_dictionary;
-	GtkWidget *use_verse_style;
 	GtkWidget *use_linked_tabs;
 	GtkWidget *use_chapter_scroll;
 	GtkWidget *use_imageresize;
@@ -655,38 +654,6 @@ on_checkbutton4_toggled(GtkToggleButton *togglebutton,
 	gui_show_hide_dicts(togglebutton->active);
 }
 
-/******************************************************************************
- * Name
- *   on_checkbutton5_toggled
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_checkbutton5_toggled(GtkToggleButton * togglebutton, gpointer user_data)
- *
- * Description
- *
- *
- *
- * Return value
- *   void
- */
-
-extern gboolean style_display;
-
-void
-on_checkbutton5_toggled(GtkToggleButton * togglebutton,
-			gpointer user_data)
-{
-	xml_set_value("Xiphos", "misc", "versestyle",
-		      (togglebutton->active ? "1" : "0"));
-	settings.versestyle = togglebutton->active;
-
-	style_display = TRUE;
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-			       (widgets.versestyle_item),
-			       settings.versestyle);
-}
 /******************************************************************************
  * Name
  *   on_checkbutton10_toggled
@@ -1915,9 +1882,6 @@ setup_check_buttons(void)
 				     (check_button.enable_tabbed_browsing),
 				     settings.browsing);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-				     (check_button.use_verse_style),
-				     settings.versestyle);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.show_bible_pane),
 				     settings.showtexts);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
@@ -1957,8 +1921,6 @@ setup_check_buttons(void)
 
 	g_signal_connect(check_button.enable_tabbed_browsing, "toggled",
 			 G_CALLBACK(on_checkbutton1_toggled), NULL);
-	g_signal_connect(check_button.use_verse_style, "toggled",
-			 G_CALLBACK(on_checkbutton5_toggled), NULL);
 	g_signal_connect(check_button.show_bible_pane, "toggled",
 			 G_CALLBACK(on_checkbutton2_toggled), NULL);
 	g_signal_connect(check_button.show_preview_pane, "toggled",
@@ -2306,7 +2268,6 @@ create_preferences_dialog(void)
 	check_button.show_preview_pane = glade_xml_get_widget(gxml, "checkbutton9");
 	check_button.show_commentary_pane = glade_xml_get_widget(gxml, "checkbutton3");
 	check_button.show_dictionary_pane = glade_xml_get_widget(gxml, "checkbutton4");
-	check_button.use_verse_style = glade_xml_get_widget(gxml, "checkbutton5");
 	check_button.use_linked_tabs = glade_xml_get_widget(gxml, "checkbutton10");
 	check_button.readaloud = glade_xml_get_widget(gxml, "checkbutton11");
 	check_button.show_verse_num = glade_xml_get_widget(gxml, "checkbutton12");
