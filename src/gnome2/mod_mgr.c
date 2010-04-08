@@ -1592,42 +1592,6 @@ check_sync_repos(void)
 
 /******************************************************************************
  * Name
- *   response_close
- *
- * Synopsis
- *   #include "gui/mod_mgr.h"
- *
- *   void response_close(void)
- *
- * Description
- *
- *
- * Return value
- *   void
- */
-
-static void
-response_close(void)
-{
-	GString *str = g_string_new(NULL);
-
-	gtk_widget_destroy(GTK_WIDGET(dialog));
-
-	g_string_printf(str, "%s/dirlist", settings.homedir);
-	if (mod_mgr_check_for_file(str->str))
-		unlink(str->str);
-	g_string_free(str,TRUE);
-
-	is_running = FALSE;
-	check_sync_repos();
-	if (first_time_user)
-		gtk_main_quit();
-}
-
-
-
-/******************************************************************************
- * Name
  *   add_columns_to_first
  *
  * Synopsis
@@ -2230,6 +2194,7 @@ static void
 on_dialog_destroy(GtkObject * object, gpointer user_data)
 {
 	GList *tmp;
+	gchar *str;
 
 	if (working) return;
 	working = TRUE;
@@ -2246,6 +2211,12 @@ on_dialog_destroy(GtkObject * object, gpointer user_data)
 		main_update_module_lists();
 		main_load_module_tree(sidebar.module_list);
 	}
+
+	/* little bits of nonsense left behind by the engine. */
+	str = g_strdup_printf("%s/dirlist", settings.homedir);
+	if (mod_mgr_check_for_file(str))
+		unlink(str);
+	g_free(str);
 
 	check_sync_repos();
 
@@ -2290,6 +2261,31 @@ on_dialog_destroy(GtkObject * object, gpointer user_data)
 			main_display_book((char *)tmp->data, "/");	/* blank key */
 	}
 }
+
+
+/******************************************************************************
+ * Name
+ *   response_close
+ *
+ * Synopsis
+ *   #include "gui/mod_mgr.h"
+ *
+ *   void response_close(void)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   void
+ */
+
+static void
+response_close(void)
+{
+	gtk_widget_destroy(GTK_WIDGET(dialog));
+	on_dialog_destroy(NULL, NULL);
+}
+
 
 /*
  * click callbacks, most using a wrapper.
@@ -2948,7 +2944,6 @@ setup_dialog_action_area(GtkDialog * dialog)
 	g_signal_connect(button_intro, "clicked", G_CALLBACK(on_intro_clicked), NULL);
 	g_signal_connect(button_cancel, "clicked", G_CALLBACK(on_cancel_clicked), NULL);
 
-	gtk_widget_hide(button_intro);
 	gtk_widget_show(button_close);
 	on_intro_clicked(NULL, NULL);
 }
