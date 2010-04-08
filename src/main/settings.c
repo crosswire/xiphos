@@ -732,13 +732,6 @@ void load_settings_structure(void)
 		settings.versehighlight = 0;
 	}
 
-	if ((buf = xml_get_value("misc", "doublespace")))
-		settings.doublespace = atoi(buf);
-	else {
-		xml_add_new_item_to_section("misc", "doublespace", "0");
-		settings.doublespace = 0;
-	}
-
 	if ((buf = xml_get_value("misc", "chapter-scroll"))) {
 		settings.chapter_scroll = atoi(buf);
 	} else {

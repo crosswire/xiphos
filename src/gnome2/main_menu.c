@@ -501,31 +501,6 @@ on_side_preview_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 
 /******************************************************************************
  * Name
- *   on_double_space_text_activate
- *
- * Synopsis
- *   #include "gui/main_menu.h"
- *
- *   void on_double_space_text_activate(GtkMenuItem *menuitem, gpointer user_data)
- *
- * Description
- *   toggle double-spacing of text.
- *
- * Return value
- *   void
- */
-G_MODULE_EXPORT void
-on_double_space_text_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
-{
-	settings.doublespace = menuitem->active;
-	xml_set_value("Xiphos", "misc", "doublespace",
-		      (settings.doublespace ? "1" : "0"));
-	//main_display_bible(NULL, settings.currentverse);
-	main_refresh_all();
-}
-
-/******************************************************************************
- * Name
  *  on_quit_activate
  *
  * Synopsis
@@ -896,11 +871,6 @@ GtkWidget *gui_create_main_menu(void)
 	widgets.parallel_tab_item = glade_xml_get_widget (gxml, "show_parallel_view_in_a_tab");
 	widgets.side_preview_item = glade_xml_get_widget (gxml, "show_previewer_in_sidebar");
 
-	widgets.doublespace_item = glade_xml_get_widget (gxml, "double_space_text");
-#ifndef USE_GTKMOZEMBED
-	gtk_widget_hide(widgets.doublespace_item);
-#endif /* !USE_GTKMOZEMBED */
-
 	/* map tab's show state into view menu. */
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.viewtexts_item),
@@ -937,12 +907,6 @@ GtkWidget *gui_create_main_menu(void)
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.versehighlight_item),
 				       settings.versehighlight);
-#ifdef USE_GTKMOZEMBED
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.doublespace_item),
-				       settings.doublespace);
-#endif /* USE_GTKMOZEMBED */
-
     	/* connect signals and data */
 	glade_xml_signal_autoconnect_full
 		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);
