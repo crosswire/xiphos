@@ -41,16 +41,15 @@ void on_install_clicked(GtkButton * button, gpointer  user_data);
 void on_remove_clicked(GtkButton * button, gpointer  user_data);
 void on_archive_clicked(GtkButton * button, gpointer  user_data);
 void on_index_clicked(GtkButton * button, gpointer  user_data);
-void on_local_clicked(GtkButton * button, gpointer  user_data);
 void on_delete_index_clicked(GtkButton * button, gpointer  user_data);
 void on_load_sources_clicked(GtkButton * button, gpointer  user_data);
 void on_intro_clicked(GtkButton * button, gpointer  user_data);
 void on_cancel_clicked(GtkButton * button, gpointer  user_data);
 void on_mod_mgr_response(GtkDialog * dialog, gint response_id, gpointer user_data);
-void on_button5_clicked(GtkButton * button, gpointer user_data);
-void on_button6_clicked(GtkButton * button, gpointer user_data);
-void on_button7_clicked(GtkButton * button, gpointer user_data);
-void on_button8_clicked(GtkButton * button, gpointer user_data);
+void on_button_add_local_clicked(GtkButton * button, gpointer user_data);
+void on_button_remove_local_clicked(GtkButton * button, gpointer user_data);
+void on_button_add_remote_clicked(GtkButton * button, gpointer user_data);
+void on_button_remove_remote_clicked(GtkButton * button, gpointer user_data);
 gboolean on_treeview1_button_release_event(GtkWidget * widget, GdkEventButton * event, gpointer user_data);
 
 #ifdef __cplusplus
