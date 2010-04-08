@@ -149,7 +149,6 @@ static const gchar *source;
 static const gchar *destination;
 static gboolean have_configs;
 static gboolean have_changes;
-static gboolean need_update;
 static gint current_page;
 static GdkPixbuf *INSTALLED;
 static GdkPixbuf *FASTICON;
@@ -842,7 +841,7 @@ remove_install_modules(GList * modules,
 	gtk_widget_show(button_close);
 	switch (current_page) {
 		case 3:
-			if (need_update) gtk_widget_show(button_refresh);
+			gtk_widget_show(button_refresh);
 			gtk_widget_show(button_install);
 			gtk_widget_hide(button_arch);
 			gtk_widget_hide(button_idx);
@@ -1553,16 +1552,6 @@ response_refresh(void)
 	load_module_tree(GTK_TREE_VIEW(treeview), TRUE);
 	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh), _("Finished"));
 	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar_refresh), 0);
-	if (!need_update) {
-		gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook1), 3);
-		gtk_widget_hide(button_refresh);
-		gtk_widget_show(button_install);
-		gtk_widget_hide(button_remove);
-		gtk_widget_hide(button_arch);
-		gtk_widget_hide(button_idx);
-		gtk_widget_hide(button_delidx);
-		gtk_widget_hide(button_load_sources);
-	}
 
 	working = FALSE;
 }
@@ -1620,17 +1609,19 @@ check_sync_repos(void)
 static void
 response_close(void)
 {
-	if (need_update) {
-		GString *str = g_string_new(NULL);
+	GString *str = g_string_new(NULL);
 
-		gtk_widget_destroy(GTK_WIDGET(dialog));
-		g_string_printf(str, "%s/dirlist", settings.homedir);
-		if (mod_mgr_check_for_file(str->str))
-			unlink(str->str);
-		g_string_free(str,TRUE);
-	}
+	gtk_widget_destroy(GTK_WIDGET(dialog));
+
+	g_string_printf(str, "%s/dirlist", settings.homedir);
+	if (mod_mgr_check_for_file(str->str))
+		unlink(str->str);
+	g_string_free(str,TRUE);
+
 	is_running = FALSE;
 	check_sync_repos();
+	if (first_time_user)
+		gtk_main_quit();
 }
 
 
@@ -2251,7 +2242,7 @@ on_dialog_destroy(GtkObject * object, gpointer user_data)
 
 	mod_mgr_shut_down();
 	sync_windows();
-	if (have_changes && need_update) {
+	if (have_changes && !first_time_user) {
 		main_update_module_lists();
 		main_load_module_tree(sidebar.module_list);
 	}
@@ -2260,7 +2251,11 @@ on_dialog_destroy(GtkObject * object, gpointer user_data)
 
 	working = FALSE;
 	is_running = FALSE;
-	if (first_time_user) return;	/* no deeper analysis, first time around. */
+	if (first_time_user) {
+		/* no deeper analysis, first time around. */
+		gtk_main_quit();
+		return;
+	}
 
 	/*
 	 * if we uninstalled a current module, substitute a live one
@@ -2942,6 +2937,7 @@ setup_dialog_action_area(GtkDialog * dialog)
 	/*
 	 * response buttons
 	 */
+	g_signal_connect(button_close, "clicked", G_CALLBACK(response_close), NULL);
 	g_signal_connect(button_refresh, "clicked", G_CALLBACK(on_refresh_clicked), NULL);
 	g_signal_connect(button_install, "clicked", G_CALLBACK(on_install_clicked), NULL);
 	g_signal_connect(button_remove, "clicked", G_CALLBACK(on_remove_clicked), NULL);
@@ -3174,7 +3170,6 @@ void gui_open_mod_mgr(void)
 {
 	if (!is_running) {
 		GtkWidget *dlg;
-		need_update = TRUE;
 		dlg = create_module_manager_dialog(FALSE);
 		set_window_icon(GTK_WINDOW(dlg));
 		is_running = TRUE;
@@ -3204,12 +3199,10 @@ void gui_open_mod_mgr(void)
 void gui_open_mod_mgr_initial_run(void)
 {
 	GtkWidget *dlg;
-	need_update = FALSE;
 	first_time_user = TRUE;
 	dlg = create_module_manager_dialog(TRUE);
 	set_window_icon(GTK_WINDOW(dlg));
-	gtk_dialog_run((GtkDialog *) dlg);
-	gtk_widget_destroy(dlg);
+	gtk_main();
 	first_time_user = FALSE;
 }
 
