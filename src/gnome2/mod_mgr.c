@@ -2375,6 +2375,7 @@ on_cancel_clicked(GtkButton * button, gpointer  user_data)
 }
 
 
+
 /******************************************************************************
  * Name
  *   on_mod_mgr_response
@@ -2938,7 +2939,7 @@ setup_dialog_action_area(GtkDialog * dialog)
 
 	/*
 	 * response buttons
-	 */
+	 */	
 	/* close */
 	button_close = gtk_button_new_from_stock ("gtk-close");
 	gtk_widget_show (button_close);
@@ -3128,7 +3129,7 @@ create_module_manager_dialog(gboolean first_run)
 		dialog_vbox = GTK_DIALOG(dialog)->vbox;
 		gtk_widget_show(dialog_vbox);
 		gtk_box_pack_start(GTK_BOX(dialog_vbox),hpaned, TRUE, TRUE, 6);
-		widget = glade_xml_get_widget (gxml, "scrolledwindow1");
+		widget = glade_xml_get_widget (gxml, "scrolledwindow1");		
 		gtk_widget_hide(widget);
 		/* setup dialog action area */
 		setup_dialog_action_area(GTK_DIALOG (dialog));
@@ -3287,7 +3288,10 @@ void gui_open_mod_mgr_initial_run(void)
 	GtkWidget *dlg;
 	need_update = FALSE;
 	first_time_user = TRUE;
-	dlg = create_module_manager_dialog(TRUE);
+	/* this change is to accommodate feature request #2832230  
+	 "No option for local install on fresh install" */
+	/* dlg = create_module_manager_dialog(TRUE); */
+	dlg = create_module_manager_dialog(FALSE); 
 	set_window_icon(GTK_WINDOW(dlg));
 	gtk_dialog_run((GtkDialog *) dlg);
 	gtk_widget_destroy(dlg);
