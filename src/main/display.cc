@@ -516,10 +516,17 @@ block_dump(SWBuf& rendered,
 		s = strstr(s, "&gt;");
 		*s = *(s+1) = *(s+2) = *(s+3) = ' ';
 #endif /* USE_GTKMOZEMBED */
+
+		// gross hack needed to handle new class="..." in sword -r2512.
+		if ((s = (char*)strstr(*strongs, " class=\"strongs\">"))) {
+			memcpy(s, ">                ", 17);
+			if ((s = (char*)strstr(s, " class=\"strongs\">")))
+				memcpy(s, ">                ", 17);
+		}
 	} else
 		slen = 0;
 	if (*morph) {
-		s = s0 = (char*)strstr(*morph, "\">") + 2;
+		s = s0 = (char*)g_strrstr(*morph, "\">") + 2;
 		t = strchr(s, '<');
 		for (/* */; s < t; ++s)
 			if (isupper(*s))
@@ -537,6 +544,13 @@ block_dump(SWBuf& rendered,
 		s = strrchr(s, ')');
 		*s = ' ';
 #endif /* USE_GTKMOZEMBED */
+
+		// gross hack needed to handle new class="..." in sword -r2512.
+		if ((s = (char*)strstr(*morph, " class=\"morph\">"))) {
+			memcpy(s, ">              ", 15);
+			if ((s = (char*)strstr(s, " class=\"morph\">")))
+				memcpy(s, ">              ", 15);
+		}
 	} else
 		mlen = 0;
 	min_length = 2 + max(slen, mlen);
@@ -666,7 +680,10 @@ block_render_secondary(const char *text,
 				// strongs: "<em>&lt;...&gt;</em>"
 				// morph:   "<em>(...)</em>"
 				// if Sword ever changes this, we're dead.
-				if (*(s+11) == '(') {
+				const char *u = s+11;
+				while ((*u != '(') && (*u != '&'))
+					++u;	// it has to be one or the other.
+				if (*u == '(') {
 					if (morph) {
 						block_dump(rendered, &word, &strongs, &morph);
 						word = g_strdup(EMPTY_WORD);
