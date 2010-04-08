@@ -36,7 +36,7 @@
 	  <property name="layout_style">GTK_BUTTONBOX_END</property>
 
 	  <child>
-	    <widget class="GtkButton" id="button16">
+	    <widget class="GtkButton" id="button_view_intro">
 	      <property name="visible">True</property>
 	      <property name="can_default">True</property>
 	      <property name="can_focus">True</property>
@@ -49,7 +49,7 @@
 	  </child>
 
 	  <child>
-	    <widget class="GtkButton" id="button0">
+	    <widget class="GtkButton" id="button_load_sources">
 	      <property name="can_default">True</property>
 	      <property name="can_focus">True</property>
 	      <property name="label" translatable="yes">_Load Standard</property>
@@ -61,7 +61,7 @@
 	  </child>
 
 	  <child>
-	    <widget class="GtkButton" id="button2">
+	    <widget class="GtkButton" id="button_refresh">
 	      <property name="can_default">True</property>
 	      <property name="can_focus">True</property>
 	      <property name="label">gtk-refresh</property>
@@ -73,7 +73,7 @@
 	  </child>
 
 	  <child>
-	    <widget class="GtkButton" id="button3">
+	    <widget class="GtkButton" id="button_install">
 	      <property name="can_default">True</property>
 	      <property name="can_focus">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
@@ -147,7 +147,7 @@
 	  </child>
 
 	  <child>
-	    <widget class="GtkButton" id="button9">
+	    <widget class="GtkButton" id="button_remove">
 	      <property name="can_default">True</property>
 	      <property name="can_focus">True</property>
 	      <property name="label">gtk-remove</property>
@@ -159,7 +159,7 @@
 	  </child>
 
 	  <child>
-	    <widget class="GtkButton" id="button13">
+	    <widget class="GtkButton" id="button_archive">
 	      <property name="can_default">True</property>
 	      <property name="can_focus">True</property>
 	      <property name="label" translatable="yes">_Archive</property>
@@ -171,7 +171,7 @@
 	  </child>
 
 	  <child>
-	    <widget class="GtkButton" id="button14">
+	    <widget class="GtkButton" id="button_index">
 	      <property name="can_default">True</property>
 	      <property name="can_focus">True</property>
 	      <property name="label" translatable="yes">_Index</property>
@@ -183,7 +183,7 @@
 	  </child>
 
 	  <child>
-	    <widget class="GtkButton" id="button15">
+	    <widget class="GtkButton" id="button_delete_index">
 	      <property name="can_default">True</property>
 	      <property name="can_focus">True</property>
 	      <property name="label" translatable="yes">_Delete Index</property>
@@ -195,7 +195,7 @@
 	  </child>
 
 	  <child>
-	    <widget class="GtkButton" id="button1">
+	    <widget class="GtkButton" id="button_close">
 	      <property name="visible">True</property>
 	      <property name="can_default">True</property>
 	      <property name="can_focus">True</property>
@@ -208,7 +208,7 @@
 	  </child>
 
 	  <child>
-	    <widget class="GtkButton" id="button12">
+	    <widget class="GtkButton" id="button_cancel">
 	      <property name="can_default">True</property>
 	      <property name="can_focus">True</property>
 	      <property name="label">gtk-cancel</property>
@@ -592,7 +592,7 @@
 			      <property name="spacing">6</property>
 
 			      <child>
-				<widget class="GtkButton" id="button5">
+				<widget class="GtkButton" id="button_add_local">
 				  <property name="visible">True</property>
 				  <property name="can_focus">True</property>
 				  <property name="label">gtk-add</property>
@@ -608,7 +608,7 @@
 			      </child>
 
 			      <child>
-				<widget class="GtkButton" id="button6">
+				<widget class="GtkButton" id="button_remove_local">
 				  <property name="visible">True</property>
 				  <property name="can_focus">True</property>
 				  <property name="label">gtk-remove</property>
@@ -719,7 +719,7 @@
 			      <property name="spacing">6</property>
 
 			      <child>
-				<widget class="GtkButton" id="button7">
+				<widget class="GtkButton" id="button_add_remote">
 				  <property name="visible">True</property>
 				  <property name="can_focus">True</property>
 				  <property name="label">gtk-add</property>
@@ -735,7 +735,7 @@
 			      </child>
 
 			      <child>
-				<widget class="GtkButton" id="button8">
+				<widget class="GtkButton" id="button_remove_remote">
 				  <property name="visible">True</property>
 				  <property name="can_focus">True</property>
 				  <property name="label">gtk-remove</property>
