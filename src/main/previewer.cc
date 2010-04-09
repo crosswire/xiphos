@@ -253,38 +253,43 @@ void main_information_viewer(const gchar * mod_name, const gchar * text, const g
 
 	g_string_printf(tmp_str,
 			HTML_START
-			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
+			"<font face=\"%s\" size=\"%+d\">",
 			settings.bible_bg_color, settings.bible_text_color,
-			settings.link_color);
+			settings.link_color,
+			(mf->old_font ? mf->old_font : "none"),
+			(mf->old_font_size
+			 ? atoi(mf->old_font_size) + settings.base_font_size
+			 : settings.base_font_size) - 1);
 
 	str = g_string_new(tmp_str->str);
 
 	if (type) {
-		if (!strcmp(type, "n")) {
+		if (*type == 'n') {
 			g_string_printf(tmp_str,
 					"<font color=\"grey\">%s<HR></font><br>",
 					_("Footnote"));
 			str = g_string_append(str, tmp_str->str);
 		}
-		if (!strcmp(type, "u")) {
+		else if (*type == 'u') {
 			g_string_printf(tmp_str,
 					"<font color=\"grey\">%s: %s<HR></font><br>",
 					_("User Annotation"), key);
 			str = g_string_append(str, tmp_str->str);
 		}
-		if (!strcmp(type, "x")) {
+		else if (*type == 'x') {
 			g_string_printf(tmp_str,
 					"<font color=\"grey\">%s<HR></font><br>",
 					_("Cross Reference"));
 			str = g_string_append(str, tmp_str->str);
 		}
-		if (!strcmp(action, "showStrongs")) {	//&& !strcmp(type,"Greek")
+		else if (!strcmp(action, "showStrongs")) {	//&& !strcmp(type,"Greek")
 			g_string_printf(tmp_str,
 					"<font color=\"grey\">%s: %s<HR></font><br>",
 					_("Strongs"), key);
 			str = g_string_append(str, tmp_str->str);
 		}
-		if (!strcmp(action, "showMorph")) {	//&& !strcmp(type,"Greek")
+		else if (!strcmp(action, "showMorph")) {	//&& !strcmp(type,"Greek")
 			g_string_printf(tmp_str,
 					"<font color=\"grey\">%s: %s<HR></font><br>",
 					_("Morphology"), key);
@@ -302,13 +307,6 @@ void main_information_viewer(const gchar * mod_name, const gchar * text, const g
 				"<font color=\"grey\">%s: %s<HR></font>",
 				_("Strongs"), key);
 		str = g_string_append(str, tmp_str->str);
-		g_string_printf(tmp_str,
-				"<font face=\"%s\" size=\"%+d\">",
-				(mf->old_font ? mf->old_font : "none"),
-				(mf->old_font_size
-				 ? atoi(mf->old_font_size) + settings.base_font_size
-				 : settings.base_font_size) - 1);
-		str = g_string_append(str, tmp_str->str);
 		str = g_string_append(str, text);
 
 		g_string_printf(tmp_str,
@@ -316,22 +314,11 @@ void main_information_viewer(const gchar * mod_name, const gchar * text, const g
 				_("Morphology"), morph);
 		str = g_string_append(str, tmp_str->str);
 		str = g_string_append(str, morph_text);
-		g_string_printf(tmp_str, " %s<br>",
-				"</font></body></html>");
-		str = g_string_append(str, tmp_str->str);
 	} else {
-		g_string_printf(tmp_str,
-				"<font face=\"%s\" size=\"%+d\">",
-				(mf->old_font ? mf->old_font : "none"),
-				(mf->old_font_size
-				 ? atoi(mf->old_font_size) + settings.base_font_size
-				 : settings.base_font_size) - 1);
-		str = g_string_append(str, tmp_str->str);
 		str = g_string_append(str, text);
-
-		g_string_printf(tmp_str, " %s", "</font></body></html>");
-		str = g_string_append(str, tmp_str->str);
 	}
+
+	str = g_string_append(str, "</font></body></html>");
 
 #ifdef USE_GTKMOZEMBED
 	if (str->len) {
