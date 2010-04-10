@@ -58,46 +58,6 @@ static gint cell_height;
 
 /******************************************************************************
  * Name
- *
- *
- * Synopsis
- *   #include "gui/dictlex_dialog.h"
- *
- *   void  gui_on_lookup_dictlex_dialog_selection
-		(GtkMenuItem * menuitem, gchar * dict_mod_description)
- *
- * Description
- *   lookup seledtion in a dict/lex module
- *
- * Return value
- *   void
- */
-
-void gui_lookup_dictlex_dialog_selection(GtkMenuItem *menuitem,
-					 gchar *dict_mod_description)
-{
-/*	gchar *dict_key;
-	gchar *mod_name = NULL;
-
-	mod_name = main_module_name_from_description(dict_mod_description);
-	if (!mod_name)
-		return;
-
-	dict_key = gui_get_word_or_selection(cur_dlg->html, FALSE);
-	if (dict_key) {
-		if (settings.inViewer)
-			main_sidebar_display_dictlex(mod_name,
-						      dict_key);
-		if (settings.inDictpane)
-			main_display_dictionary(mod_name, dict_key);
-		g_free(dict_key);
-	}
-	if (mod_name) g_free(mod_name);
-*/
-}
-
-/******************************************************************************
- * Name
  *   list_selection_changed
  *
  * Synopsis

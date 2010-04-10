@@ -1688,7 +1688,6 @@ void main_open_search_dialog(void)
 		/* add one to module count */
 		++search1.module_count;
 
-		search1.show_in_main = FALSE;
 		is_running = TRUE;
 	} else
 		gdk_window_raise(GTK_WIDGET(search1.dialog)->window);

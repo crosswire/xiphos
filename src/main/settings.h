@@ -49,7 +49,7 @@ struct _settings {
 		comm_key[80],		/*  */
 	        *cvparallel,		/* current verse for detached parallel */
 		*percomverse,		/* current verse for personal comments */
-	        *dictkey,		/* dictionary key to use at program startup - the one we shut down with */
+	        *dictkey,		/* dictionary key to use at program startup */
 	        *studypadfilename,	/* name of file in studypad when we closed */
 		*studypaddir,		/* directory for studypad files */
 		groupName[50],		/* shortcut bar group name (viewer, verse list) */
@@ -57,7 +57,7 @@ struct _settings {
 		findText[256],		/* string used by find dialog */
 		*spell_language,
 
-	/* fonts, font colors and font sizes */
+	/* fonts names/colors/sizes */
 	        *bible_text_color,	/* color for text */
 	        *bible_bg_color,	/* color for background */
 	        *currentverse_color,	/* color for current verse */
@@ -138,13 +138,9 @@ struct _settings {
                 show_previewer_in_sidebar, /* show previewer in sidebar if true */
 		showbookeditor,
 		displaySearchResults, /* are we displaying search results in chap display */
-		showinmain, /* when verse list item clicked show in main form if true */
 		havethayer, /* for greek morph tags */
 		havebdb, /* for hebrew morph tags */
-//		inViewer, /* display dict/lex in viewer when word or link clicked */
-//		inDictpane, /* display dict/lex in Dict/Lex pane when word or link clicked */
 		useDefaultDict,
-//		strip_words_in_red,
 		browsing, /* true for tabbed browsing */
 
 		/** if items are docked **/
@@ -160,10 +156,7 @@ struct _settings {
 		modifiedGBS, /* book entry modified */
 		modifiedPC, /* personal note modified */
 		modifiedSP, /* studypad file modified */
-//		use_studypad, /* use studypad */
-//		use_studypad_dialog, /* display studypad in a dialog */
 		studypad_dialog_exist, /* studypad dialog has been created */
-//		use_percomm_dialog, /* display personal comments editor in a dialog */
 		percomm_dialog_exist, /* percomm dialog has been created */
 
 		/** do we have these modules **/

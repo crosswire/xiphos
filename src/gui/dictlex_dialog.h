@@ -29,8 +29,6 @@ extern "C" {
 #include "main/module_dialogs.h"
 
 void gui_create_dictlex_dialog(DIALOG_DATA *dlg);
-void gui_lookup_dictlex_dialog_selection
-    (GtkMenuItem * menuitem, gchar * dict_mod_description);
 void on_btnSyncDL_clicked(GtkButton * button, DIALOG_DATA * d);
 
 #ifdef __cplusplus
