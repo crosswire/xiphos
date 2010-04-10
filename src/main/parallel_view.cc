@@ -800,12 +800,12 @@ void main_update_parallel_page(void)
 
 			utf8str = backend_p->get_render_text(mod_name,
 							     settings.currentverse);
-			if (strlen(utf8str)) {
+			if (utf8str) {
 				newdata = g_strconcat(data, utf8str, NULL);
 				g_free(data);
 				data = newdata;
-				free(utf8str);
 			}
+			g_free(utf8str);
 
 			if (is_rtol)
 				data = g_strconcat(data, "</div><br>", NULL);
@@ -947,9 +947,10 @@ void main_update_parallel_page(void)
 			}
 
 			utf8str = backend_p->get_render_text(mod_name, settings.currentverse);
-			gtk_html_write(GTK_HTML(html), htmlstream,
-				       utf8str, strlen(utf8str));
-			free(utf8str);
+			if (utf8str)
+				gtk_html_write(GTK_HTML(html), htmlstream,
+					       utf8str, strlen(utf8str));
+			g_free(utf8str);
 
 			if (is_rtol) {
 				buf = (gchar*) "</div><br>";
@@ -1063,31 +1064,32 @@ static void int_display(SWBuf& text, gchar *key, char *mod_name[])
 		for (j = 0; j < 5; j++) {
 			is_rtol = main_is_mod_rtol(mod_name[j]);
 
-			char *num = main_format_number(i);
-			snprintf(str, 499,
-				 "<td width=\"20%%\" bgcolor=\"%s\">"
-				 "<a href=\"xiphos.url?action=showParallel&"
-				 "type=verse&value=%s\" name=\"%d\">"
-				 "<font color=\"%s\">%s. </font></a>"
-				 "<font face=\"%s\" size=\"%s\" color=\"%s\">",
-				 bgColor,
-				 main_url_encode(tmpkey),
-				 i,
-				 settings.bible_verse_num_color,
-				 num,
-				 mf[j]->old_font,
-				 mf[j]->old_font_size,
-				 textColor);
-			g_free(num);
-			text += str;
-
 			if (is_module[j]) {
+				char *num = main_format_number(i);
+				snprintf(str, 499,
+					 "<td width=\"20%%\" bgcolor=\"%s\">"
+					 "<a href=\"xiphos.url?action=showParallel&"
+					 "type=verse&value=%s\" name=\"%d\">"
+					 "<font color=\"%s\">%s. </font></a>"
+					 "<font face=\"%s\" size=\"%s\" color=\"%s\">",
+					 bgColor,
+					 main_url_encode(tmpkey),
+					 i,
+					 settings.bible_verse_num_color,
+					 num,
+					 mf[j]->old_font,
+					 mf[j]->old_font_size,
+					 textColor);
+				g_free(num);
+				text += str;
+
 				if (is_rtol)
 					text += "<br><div align=right>";
 
 				utf8str = backend_p->get_render_text(mod_name[j], tmpkey);
-				text += utf8str;
-				free(utf8str);
+				if (utf8str)
+					text += utf8str;
+				g_free(utf8str);
 
 				if (is_rtol)
 					text += "</div>";
@@ -1100,7 +1102,8 @@ static void int_display(SWBuf& text, gchar *key, char *mod_name[])
 	}
 
 	for (j = 0; j < 5; ++j)
-		free_font(mf[j]);
+		if (is_module[j])
+			free_font(mf[j]);
 	g_free(tmpkey);
 	g_free(cur_book);
 }
