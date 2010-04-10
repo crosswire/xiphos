@@ -692,7 +692,6 @@ remove_install_modules(GList * modules,
 	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh),
 				  gettext (verbs[activity][PHRASE_PREPARE]));
 	gtk_widget_show(progressbar_refresh);
-	sync_windows();
 	gtk_widget_queue_draw(dialog);
 	gtk_widget_hide(button_close);
 	gtk_widget_hide(button_refresh);
@@ -703,7 +702,6 @@ remove_install_modules(GList * modules,
 	gtk_widget_hide(button_delidx);
 	gtk_widget_hide(button_load_sources);
 	gtk_widget_show(button_cancel);
-	sync_windows();
 
 	tmp = modules;
 	while (tmp) {
@@ -714,6 +712,7 @@ remove_install_modules(GList * modules,
 		gtk_progress_bar_set_text(GTK_PROGRESS_BAR
 					  (progressbar_refresh),
 					  mods->str);
+		sync_windows();
 
 		if (activity == ARCHIVE) {
 			GString *cmd = g_string_new(NULL);
@@ -791,8 +790,6 @@ remove_install_modules(GList * modules,
 
 			// annihilate cache of removed module.
 			ModuleCacheErase((const char *)buf);
-
-			sync_windows();
 		}
 
 		if (activity == INSTALL) {
@@ -822,7 +819,8 @@ remove_install_modules(GList * modules,
 		tmp = g_list_next(tmp);
 	}
 	have_changes = TRUE;
-	g_list_free(tmp);
+	g_list_free(modules);
+
 	if (failed) {
 		g_string_printf(mods, _("%s failed"),
 				gettext(verbs[activity][PHRASE_COMPLETE]));
@@ -856,6 +854,7 @@ remove_install_modules(GList * modules,
 			gtk_widget_hide(button_load_sources);
 		break;
 	}
+	sync_windows();
 }
 
 
