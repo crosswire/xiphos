@@ -97,8 +97,6 @@ struct _search_dialog1 {
 	gint range_rows;
 	gint list_rows;
 
-	gboolean show_in_main;
-
 	gchar *search_mod;
 };
 extern SEARCH_DIALOG1 search1;
