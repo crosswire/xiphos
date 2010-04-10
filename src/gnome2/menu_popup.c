@@ -1605,9 +1605,11 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 
     	item = glade_xml_get_widget (gxml, "doublespace");
 	GTK_CHECK_MENU_ITEM (item)->active = ops->doublespace;
+#ifndef USE_GTKMOZEMBED
+    	gtk_widget_hide (item);
+#endif
 
 	g_free(ops);
-
 }
 
 /******************************************************************************
