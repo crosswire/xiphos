@@ -293,30 +293,6 @@ void on_button_begin_search(GtkButton * button, gpointer user_data)
 
 /******************************************************************************
  * Name
- *   on_togglebutton_show_main
- *
- * Synopsis
- *   #include "gui/search_dialog.h"
- *
- *   void on_togglebutton_show_main(GtkToggleButton * togglebutton,
- *						    gpointer user_data)
- *
- * Description
- *
- *
- * Return value
- *   void
- */
-
-void on_togglebutton_show_main(GtkToggleButton * togglebutton,
-			       gpointer user_data)
-{
-	search1.show_in_main = togglebutton->active;
-}
-
-
-/******************************************************************************
- * Name
  *   list_name_changed
  *
  * Synopsis
@@ -1647,10 +1623,6 @@ void _create_search_dialog(void)
 	g_signal_connect(toolbutton13, "clicked",
 			 G_CALLBACK(button_export), NULL);
 
-	search1.togglebutton_show_main =
-	    glade_xml_get_widget(gxml, "toggletoolbutton1");
-	g_signal_connect(search1.togglebutton_show_main, "toggled",
-			 G_CALLBACK(on_togglebutton_show_main), NULL);
 	search1.combo_list =
 	    glade_xml_get_widget(gxml, "comboboxentry2");
 	_setup_combobox(GTK_COMBO_BOX(search1.combo_list));
