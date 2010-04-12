@@ -230,9 +230,7 @@ int settings_init(int argc, char **argv, int new_configs, int new_bookmarks)
 
 	load_settings_structure();
 
-	/*
-	 * if the user had forced a locale, we must set it now.
-	 */
+	/* if the user had forced a locale, we must set it now. */
 	if (settings.special_locale && strcmp(settings.special_locale, NONE)) {
 		g_setenv("LANG", settings.special_locale, TRUE);
 		gchar *test = setlocale(LC_ALL, settings.special_locale);
@@ -356,7 +354,7 @@ int init_bookmarks(int new_bookmarks)
 
 void load_settings_structure(void)
 {
-	char *buf = NULL;
+	char *buf = NULL, *parallels;
 
 	settings.gs_version = VERSION;
 	if ((settings.MainWindowModule = xml_get_value("modules", "bible")) == NULL) {
@@ -365,11 +363,39 @@ void load_settings_structure(void)
 	}
 	settings.CommWindowModule = xml_get_value("modules", "comm");
 	settings.DictWindowModule = xml_get_value("modules", "dict");
-	settings.parallel1Module = xml_get_value("modules", "int1");
-	settings.parallel2Module = xml_get_value("modules", "int2");
-	settings.parallel3Module = xml_get_value("modules", "int3");
-	settings.parallel4Module = xml_get_value("modules", "int4");
-	settings.parallel5Module = xml_get_value("modules", "int5");
+
+	parallels = xml_get_value("modules", "parallels");
+	/* if no parallels are known, convert old fixed parallel set */
+	if (!parallels || (*parallels == '\0')) {
+		char intN[] = "intN", *oldparallel, i, *newhold;
+
+		g_free(parallels);	/* in case it was real but empty */
+		parallels = g_strdup("");
+		for (i = '1'; i <= '5'; ++i) {	/* the old set */
+			intN[3] = i;
+			oldparallel = xml_get_value("modules", intN);
+			if (oldparallel && *oldparallel) {
+				newhold = g_strconcat(parallels, oldparallel,
+						      ",", NULL);
+				g_free(parallels);
+				parallels = newhold;
+				g_free(oldparallel);
+				xml_remove_node("modules", intN, NULL); /* ? */
+			}
+		}
+
+		/* trim off the last comma */
+		if (*parallels) {
+			*(parallels + strlen(parallels) - 1) = '\0';
+			xml_set_new_element("modules", "parallels", parallels);
+		}
+	}
+	if (parallels && *parallels)
+		settings.parallel_list = g_strsplit(parallels, ",", -1);
+	else
+		settings.parallel_list = NULL;
+	g_free(parallels);
+
 	settings.personalcommentsmod = xml_get_value("modules", "percomm");
 	settings.devotionalmod = xml_get_value("modules", "devotional");
 	settings.book_mod = xml_get_value("modules", "book");
@@ -432,15 +458,7 @@ void load_settings_structure(void)
 		xml_add_new_item_to_section("modmgr", "mod_mgr_remote_source_index", "0");
 		settings.mod_mgr_remote_source_index = 0;
 	}
-	if ((buf = xml_get_value("modmgr", "mod_mgr_intro")))
-		settings.mod_mgr_intro = atoi(buf);
-	else {
-		xml_add_new_item_to_section("modmgr", "mod_mgr_intro", "0");
-		settings.mod_mgr_intro = 0;
-	}
-
 	/* end mod mgr stuff */
-
 
 	settings.currentverse = xml_get_value("keys", "verse");
 	settings.dictkey = xml_get_value("keys", "dictionary");
@@ -561,7 +579,6 @@ void load_settings_structure(void)
 	}
 
 	/*  parallel ops  */
-
 	if ((buf = xml_get_value("parallel", "Strong_s_Numbers")))
 		settings.parallel_strongs = atoi(buf);
 	else {

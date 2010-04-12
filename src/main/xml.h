@@ -41,6 +41,7 @@ char *xml_get_list_from_label(const char * section, const char * item, const cha
 int xml_set_section_ptr(const char * section);
 void xml_set_list_item(const char * section, const char * item, const char * label,
 				const char * value);
+void xml_set_new_element(const char *section, const char *item, const char *content);
 int xml_next_item(void);
 char *xml_get_label(void);
 char *xml_get_list(void);

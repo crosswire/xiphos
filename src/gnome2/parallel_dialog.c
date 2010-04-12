@@ -209,7 +209,6 @@ static void on_dlgparallel_destroy(GtkObject * object,
 
 static void sync_with_main(void)
 {
-	//GS_message((xml_get_value("keys", "verse")));
 	gchar *buf = NULL;
 
 	buf = (gchar*)main_url_encode (settings.currentverse);
@@ -324,6 +323,7 @@ GtkWidget *create_parallel_dialog(void)
 	GtkWidget *scrolled_window;
 #endif
 	gchar title[256];
+	gint modidx;
 
 	sprintf(title,"%s - %s", settings.program_title, _("Parallel"));
 
@@ -357,30 +357,22 @@ GtkWidget *create_parallel_dialog(void)
 	gtk_box_pack_start (GTK_BOX (vboxInt), box_parallel_labels, FALSE, TRUE, 0);
 	gtk_container_set_border_width (GTK_CONTAINER (box_parallel_labels), 2);
 
-	plabels.label_1 = gtk_label_new (" ");
-	gtk_widget_show (plabels.label_1);
-	gtk_box_pack_start (GTK_BOX (box_parallel_labels), plabels.label_1, FALSE, FALSE, 0);
-	gtk_label_set_use_markup (GTK_LABEL (plabels.label_1), TRUE);
+	if (settings.parallel_list) {
+		GtkWidget *plabel;
+		gchar *label;
+		for (modidx = 0; settings.parallel_list[modidx]; ++modidx) {
+			plabel = gtk_label_new(NULL);
+			gtk_widget_show(plabel);
+			gtk_box_pack_start(GTK_BOX (box_parallel_labels), plabel, FALSE, FALSE, 0);
+			gtk_label_set_use_markup(GTK_LABEL(plabel), TRUE);
 
-	plabels.label_2 = gtk_label_new (" ");
-	gtk_widget_show (plabels.label_2);
-	gtk_box_pack_start (GTK_BOX (box_parallel_labels), plabels.label_2, FALSE, FALSE, 0);
-	gtk_label_set_use_markup (GTK_LABEL (plabels.label_2), TRUE);
-
-	plabels.label_3 = gtk_label_new (" ");
-	gtk_widget_show (plabels.label_3);
-	gtk_box_pack_start (GTK_BOX (box_parallel_labels), plabels.label_3, FALSE, FALSE, 0);
-	gtk_label_set_use_markup (GTK_LABEL (plabels.label_3), TRUE);
-
-	plabels.label_4 = gtk_label_new (" ");
-	gtk_widget_show (plabels.label_4);
-	gtk_box_pack_start (GTK_BOX (box_parallel_labels), plabels.label_4, FALSE, FALSE, 0);
-	gtk_label_set_use_markup (GTK_LABEL (plabels.label_4), TRUE);
-
-	plabels.label_5 = gtk_label_new (" ");
-	gtk_widget_show (plabels.label_5);
-	gtk_box_pack_start (GTK_BOX (box_parallel_labels), plabels.label_5, FALSE, FALSE, 0);
-	gtk_label_set_use_markup (GTK_LABEL (plabels.label_5), TRUE);
+			label = g_strdup_printf("<span color='%s' weight='bold'>%s</span>",
+						settings.bible_verse_num_color,
+						settings.parallel_list[modidx]);
+			gtk_label_set_markup(GTK_LABEL(plabel), label);
+			g_free(label);
+		}
+	}
 
 #ifdef USE_GTKMOZEMBED
 	frame = gtk_frame_new(NULL);

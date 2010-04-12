@@ -222,34 +222,12 @@ static void dialog_url(GtkHTML *html,
 				++url_buf;	/* remove T */
 				if (*url_buf == 'G') {
 					++url_buf;	/* remove G */
-					if (settings.havethayer) {
-						buf1 = g_strdup(url);
-						show_in_statusbar(vt->
-								  statusbar,
-								  buf1,
-								  "Thayer");
-						g_free(buf1);
-						return;
-					}
-
-					else
-						return;
+					return;
 				}
 
 				if (*url_buf == 'H') {
 					++url_buf;	/* remove H */
-					if (settings.havebdb) {
-						buf1 = g_strdup(url);
-						show_in_statusbar(vt->
-								  statusbar,
-								  buf1,
-								  "BDB");
-						g_free(buf1);
-						return;
-					}
-
-					else
-						return;
+					return;
 				}
 			}
 
@@ -257,18 +235,8 @@ static void dialog_url(GtkHTML *html,
 				++url_buf;	/* remove G */
 				buf1 = g_strdup(url_buf);
 				if (atoi(buf1) > 5624) {
-					if (settings.havethayer) {
-						show_in_statusbar(vt->
-								  statusbar,
-								  buf1,
-								  "Thayer");
-						g_free(buf1);
-						return;
-					} else
-						return;
-
+					return;
 				}
-
 				else {
 					show_in_statusbar(vt->statusbar,
 							  buf1,
@@ -283,19 +251,8 @@ static void dialog_url(GtkHTML *html,
 				++url_buf;	/* remove H */
 				buf1 = g_strdup(url);
 				if (atoi(buf1) > 8674) {
-					if (settings.havebdb) {
-						show_in_statusbar(vt->
-								  statusbar,
-								  buf1,
-								  "BDB");
-						g_free(buf1);
-						return;
-					}
-
-					else
-						return;
+					return;
 				}
-
 				else {
 					show_in_statusbar(vt->statusbar,
 							  buf1,

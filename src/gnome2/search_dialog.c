@@ -318,17 +318,13 @@ void list_name_changed(GtkEditable * editable, gpointer user_data)
 	GtkTreeSelection *selection;
 	GtkTreeIter selected;
 
-	model =
-	    gtk_tree_view_get_model(GTK_TREE_VIEW
-				    (search1.module_lists));
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(search1.module_lists));
 	list_store = GTK_LIST_STORE(model);
 	selection = gtk_tree_view_get_selection
 	    (GTK_TREE_VIEW(search1.module_lists));
 
-	if (!gtk_tree_selection_get_selected
-	    (selection, NULL, &selected))
+	if (!gtk_tree_selection_get_selected(selection, NULL, &selected))
 		return;
-
 
 	text = gtk_entry_get_text(GTK_ENTRY(editable));
 	gtk_list_store_set(list_store, &selected, 0, text, -1);
@@ -361,9 +357,7 @@ void range_name_changed(GtkEditable * editable, gpointer user_data)
 	GtkTreeSelection *selection;
 	GtkTreeIter selected;
 
-	model =
-	    gtk_tree_view_get_model(GTK_TREE_VIEW
-				    (search1.list_range_name));
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(search1.list_range_name));
 	list_store = GTK_LIST_STORE(model);
 	selection = gtk_tree_view_get_selection
 	    (GTK_TREE_VIEW(search1.list_range_name));
@@ -372,13 +366,8 @@ void range_name_changed(GtkEditable * editable, gpointer user_data)
 	    (selection, NULL, &selected))
 		return;
 
-
 	text = gtk_entry_get_text(GTK_ENTRY(editable));
 	gtk_list_store_set(list_store, &selected, 0, text, -1);
-/*
-	gtk_clist_set_text((GtkCList *) search1.list_range_name,
-			   search1.custom_range_row, 0, text);
-	*/
 }
 
 
@@ -435,10 +424,7 @@ void new_modlist(GtkButton * button, gpointer user_data)
 	selection = gtk_tree_view_get_selection
 	    (GTK_TREE_VIEW(search1.module_lists));
 
-
-	model =
-	    gtk_tree_view_get_model(GTK_TREE_VIEW
-				    (search1.listview_modules));
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(search1.listview_modules));
 	list_store = GTK_LIST_STORE(model);
 
 	model2 =
@@ -449,7 +435,7 @@ void new_modlist(GtkButton * button, gpointer user_data)
 	{
 		// must encode locale-sensitively
 		char *num = main_format_number(search1.list_rows);
-		sprintf(buf, "New List %s", num);
+		sprintf(buf, _("New List %s"), num);
 		g_free(num);
 	}
 
@@ -460,9 +446,6 @@ void new_modlist(GtkButton * button, gpointer user_data)
 	gtk_list_store_set(list_store2, &iter, 0, buf, -1);
 	path = gtk_tree_model_get_path(model2, &iter);
 	gtk_tree_selection_select_path(selection, path);
-	/*search1.custom_list_row = gtk_clist_append((GtkCList *) search1.
-	   module_lists, text); */
-	//search1.list_rows = search1.custom_list_row;
 	gtk_entry_set_text(GTK_ENTRY(search1.entry_list_name), buf);
 	gtk_tree_path_free(path);
 }
@@ -492,10 +475,8 @@ void clear_modules(GtkButton * button, gpointer user_data)
 	GtkTreeIter selected;
 	gchar *str;
 
-	selection = gtk_tree_view_get_selection
-			(GTK_TREE_VIEW(search1.module_lists));
-	model =
-	    gtk_tree_view_get_model(GTK_TREE_VIEW(search1.listview_modules));
+	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(search1.module_lists));
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(search1.listview_modules));
 	list_store = GTK_LIST_STORE(model);
 
 	str = g_strdup_printf("<span weight=\"bold\">%s</span>\n\n%s",
@@ -505,8 +486,7 @@ void clear_modules(GtkButton * button, gpointer user_data)
 	if (gui_yes_no_dialog(str, GTK_STOCK_DIALOG_WARNING)) {
 		gtk_list_store_clear(list_store);
 
-		model =
-		    gtk_tree_view_get_model(GTK_TREE_VIEW(search1.module_lists));
+		model = gtk_tree_view_get_model(GTK_TREE_VIEW(search1.module_lists));
 		list_store = GTK_LIST_STORE(model);
 		if (gtk_tree_selection_get_selected(selection, NULL, &selected))
 		    gtk_list_store_set(list_store, &selected, 1, "", -1);
@@ -938,8 +918,7 @@ static void _modules_lists_changed(GtkTreeSelection *
 	gchar *mod = NULL;
 	GtkTreeIter selected;
 
-	GtkTreeModel *model =
-	    gtk_tree_view_get_model(GTK_TREE_VIEW(tree_widget));
+	GtkTreeModel *model = gtk_tree_view_get_model(GTK_TREE_VIEW(tree_widget));
 
 	if (!gtk_tree_selection_get_selected(selection, NULL, &selected))
 		return;
@@ -1139,8 +1118,7 @@ void _setup_combobox(GtkComboBox * combo)
 
 	store = gtk_list_store_new(1, G_TYPE_STRING);
 	gtk_combo_box_set_model(combo, GTK_TREE_MODEL(store));
-	gtk_combo_box_entry_set_text_column(GTK_COMBO_BOX_ENTRY(combo),
-					    0);
+	gtk_combo_box_entry_set_text_column(GTK_COMBO_BOX_ENTRY(combo), 0);
 }
 
 
@@ -1167,16 +1145,12 @@ void _setup_listviews(GtkWidget * listview, GCallback callback)
 	GObject *selection;
 
 	model = gtk_list_store_new(2, G_TYPE_STRING, G_TYPE_STRING);
-	gtk_tree_view_set_model(GTK_TREE_VIEW(listview),
-				GTK_TREE_MODEL(model));
+	gtk_tree_view_set_model(GTK_TREE_VIEW(listview), GTK_TREE_MODEL(model));
 	_add_two_text_columns(GTK_TREE_VIEW(listview));
 	if (!callback)
 		return;
-	selection =
-	    G_OBJECT(gtk_tree_view_get_selection
-		     (GTK_TREE_VIEW(listview)));
-	g_signal_connect(selection, "changed", G_CALLBACK(callback),
-			 NULL);
+	selection = G_OBJECT(gtk_tree_view_get_selection(GTK_TREE_VIEW(listview)));
+	g_signal_connect(selection, "changed", G_CALLBACK(callback), NULL);
 
 }
 
@@ -1187,8 +1161,7 @@ void _setup_listviews2(GtkWidget * listview, GCallback callback)
 	GObject *selection;
 
 	model = gtk_list_store_new(2, G_TYPE_STRING, G_TYPE_STRING);
-	gtk_tree_view_set_model(GTK_TREE_VIEW(listview),
-				GTK_TREE_MODEL(model));
+	gtk_tree_view_set_model(GTK_TREE_VIEW(listview), GTK_TREE_MODEL(model));
 	_add_two_text_columns(GTK_TREE_VIEW(listview));
 	if (!callback)
 		return;
@@ -1198,12 +1171,7 @@ void _setup_listviews2(GtkWidget * listview, GCallback callback)
 	g_signal_connect((gpointer) listview,
 				"button_release_event",
 				G_CALLBACK(callback), NULL);
-	selection =
-	    G_OBJECT(gtk_tree_view_get_selection
-		     (GTK_TREE_VIEW(listview)));
-	/*g_signal_connect((gpointer) listview,
-				"key_press_event",
-				G_CALLBACK(tree_key_press_cb), NULL);*/
+	selection = G_OBJECT(gtk_tree_view_get_selection(GTK_TREE_VIEW(listview)));
 	g_signal_connect(selection, "changed", G_CALLBACK(selection_verselist_changed),
 			 NULL);
 
@@ -1242,9 +1210,7 @@ void _setup_treeview(GtkWidget * treeview)
 	gtk_tree_view_append_column(GTK_TREE_VIEW(treeview), column);
 	gui_load_module_tree(treeview);
 
-	selection =
-	    G_OBJECT(gtk_tree_view_get_selection
-		     (GTK_TREE_VIEW(treeview)));
+	selection = G_OBJECT(gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview)));
 	g_signal_connect(selection, "changed",
 			 G_CALLBACK(mod_selection_changed), treeview);
 
@@ -1252,7 +1218,6 @@ void _setup_treeview(GtkWidget * treeview)
 			       "button_release_event",
 			       G_CALLBACK(button_release_event),
 			       GINT_TO_POINTER(0));
-
 }
 
 
@@ -1345,8 +1310,7 @@ void _create_mod_sel_dialog(void)
 	search1.mod_sel_dialog = glade_xml_get_widget(gxml2, "dialog2");
 	g_signal_connect((gpointer)search1.mod_sel_dialog, "response",
 			 G_CALLBACK(_on_dialog2_response), NULL);
-	search1.mod_sel_dlg_treeview =
-	    glade_xml_get_widget(gxml2, "treeview8");
+	search1.mod_sel_dlg_treeview = glade_xml_get_widget(gxml2, "treeview8");
 	_setup_treeview2(search1.mod_sel_dlg_treeview);
 	gtk_widget_hide(search1.mod_sel_dialog);
 
