@@ -61,7 +61,6 @@ GtkWidget *sbIntChapter;
 GtkWidget *sbIntVerse;
 GtkWidget *entryIntLookup;
 
-PARA_LABELS plabels;
 extern gboolean sync_on;
 /******************************************************************************
  * static
@@ -347,8 +346,8 @@ GtkWidget *_create_parallel_tab(void)
 #else
 	GtkWidget *scrolled_window;
 #endif
+	gint modidx;
 
-    	//plabels = g_new0(PARA_LABELS,1);
 	gtk_notebook_set_show_tabs (GTK_NOTEBOOK(widgets.notebook_bible_parallel),
                                              FALSE);
 	gtk_notebook_set_current_page (GTK_NOTEBOOK(widgets.notebook_bible_parallel),
@@ -372,30 +371,22 @@ GtkWidget *_create_parallel_tab(void)
 	gtk_box_pack_start (GTK_BOX (parallel_vbox), box_parallel_labels, FALSE, TRUE, 0);
 	gtk_container_set_border_width (GTK_CONTAINER (box_parallel_labels), 2);
 
-	plabels.label_1 = gtk_label_new (" ");
-	gtk_widget_show (plabels.label_1);
-	gtk_box_pack_start (GTK_BOX (box_parallel_labels), plabels.label_1, FALSE, FALSE, 0);
-	gtk_label_set_use_markup (GTK_LABEL (plabels.label_1), TRUE);
+	if (settings.parallel_list) {
+		GtkWidget *plabel;
+		gchar *label;
+		for (modidx = 0; settings.parallel_list[modidx]; ++modidx) {
+			plabel = gtk_label_new(NULL);
+			gtk_widget_show(plabel);
+			gtk_box_pack_start(GTK_BOX (box_parallel_labels), plabel, FALSE, FALSE, 0);
+			gtk_label_set_use_markup(GTK_LABEL(plabel), TRUE);
 
-	plabels.label_2 = gtk_label_new (" ");
-	gtk_widget_show (plabels.label_2);
-	gtk_box_pack_start (GTK_BOX (box_parallel_labels), plabels.label_2, FALSE, FALSE, 0);
-	gtk_label_set_use_markup (GTK_LABEL (plabels.label_2), TRUE);
-
-	plabels.label_3 = gtk_label_new (" ");
-	gtk_widget_show (plabels.label_3);
-	gtk_box_pack_start (GTK_BOX (box_parallel_labels), plabels.label_3, FALSE, FALSE, 0);
-	gtk_label_set_use_markup (GTK_LABEL (plabels.label_3), TRUE);
-
-	plabels.label_4 = gtk_label_new (" ");
-	gtk_widget_show (plabels.label_4);
-	gtk_box_pack_start (GTK_BOX (box_parallel_labels), plabels.label_4, FALSE, FALSE, 0);
-	gtk_label_set_use_markup (GTK_LABEL (plabels.label_4), TRUE);
-
-	plabels.label_5 = gtk_label_new (" ");
-	gtk_widget_show (plabels.label_5);
-	gtk_box_pack_start (GTK_BOX (box_parallel_labels), plabels.label_5, FALSE, FALSE, 0);
-	gtk_label_set_use_markup (GTK_LABEL (plabels.label_5), TRUE);
+			label = g_strdup_printf("<span color='%s' weight='bold'>%s</span>",
+						settings.bible_verse_num_color,
+						settings.parallel_list[modidx]);
+			gtk_label_set_markup(GTK_LABEL(plabel), label);
+			g_free(label);
+		}
+	}
 
 #ifdef USE_GTKMOZEMBED
 	frame = gtk_frame_new(NULL);
@@ -407,7 +398,7 @@ GtkWidget *_create_parallel_tab(void)
 	gtk_widget_show (eventbox);
 	gtk_container_add(GTK_CONTAINER(frame), eventbox);
 
-	widgets.html_parallel_dialog = GTK_WIDGET(gecko_html_new(NULL, FALSE, PARALLEL_TYPE)); //embed_new(PARALLEL_TYPE); //gtk_moz_embed_new();
+	widgets.html_parallel_dialog = GTK_WIDGET(gecko_html_new(NULL, FALSE, PARALLEL_TYPE));
 	gtk_widget_show(widgets.html_parallel_dialog);
 	gtk_container_add(GTK_CONTAINER(eventbox),
 			  widgets.html_parallel_dialog);

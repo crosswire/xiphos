@@ -90,7 +90,6 @@ static void on_dialog_destroy(GtkObject *object,
 	if (!dialog_freed)
 		main_free_on_destroy(d);
 	dialog_freed = FALSE;
-	settings.percomm_dialog_exist = FALSE;
 }
 
 

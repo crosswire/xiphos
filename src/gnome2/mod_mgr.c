@@ -2357,8 +2357,6 @@ on_intro_clicked(GtkButton * button, gpointer  user_data)
 				  G_CALLBACK (gtk_widget_destroy),
 				  dialog);
 	gtk_widget_show(dialog);
-	settings.mod_mgr_intro = 1;
-	xml_set_value("Xiphos", "modmgr", "mod_mgr_intro", "1");
 }
 
 void
@@ -3167,8 +3165,6 @@ void gui_open_mod_mgr(void)
 		dlg = create_module_manager_dialog(FALSE);
 		set_window_icon(GTK_WINDOW(dlg));
 		is_running = TRUE;
-		if (!settings.mod_mgr_intro)
-			on_intro_clicked(NULL, NULL);
 	} else
 		gdk_window_raise(GTK_WIDGET(dialog)->window);
 }

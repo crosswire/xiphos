@@ -96,12 +96,7 @@ static
 void do_exit(EDITOR * e)
 {
 	GS_message(("do_exit"));
-//	GS_message((((char*)e->filename ? e->filename : "no filename")));
-//	GS_message(((char*)e->module ? e->module : "no module"));
-//	GS_message(((char*)e->key ? e->key : "no key"));
 
-	if (e->studypad)
-		settings.studypad_dialog_exist = FALSE;
 	if (e->filename) {
 		g_free(e->filename);
 	}
@@ -1361,7 +1356,6 @@ gint _create_new(const gchar * filename, const gchar * key, gint editor_type)
 			editor->filename = g_strdup(filename);
 			_load_file(editor, g_strdup(filename));
 		}
-		settings.studypad_dialog_exist = TRUE;
 		break;
 	case NOTE_EDITOR:
 		editor->studypad = FALSE;

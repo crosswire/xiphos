@@ -500,9 +500,6 @@ int xml_create_settings_file(char *path)
 
 	section_node = xmlNewChild(root_node, NULL,
 				   (const xmlChar *) "editor", NULL);
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "UsePercommDialog", (const xmlChar *) "1");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "UseStudyPad", (const xmlChar *) "1");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "UseStudypadDialog", (const xmlChar *) "1");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *) "spell_language", (const xmlChar *) "unknown");
 
 	section_node = xmlNewChild(root_node, NULL, (const xmlChar *) "locale", NULL);
@@ -513,7 +510,6 @@ int xml_create_settings_file(char *path)
 	xmlNewTextChild(section_node, NULL, (const xmlChar *) "mod_mgr_destination", (const xmlChar *) "0");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *) "mod_mgr_local_source_index", (const xmlChar *) "0");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *) "mod_mgr_remote_source_index", (const xmlChar *) "0");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "mod_mgr_intro", (const xmlChar *) "0");
 
 	section_node = xmlNewChild(root_node, NULL, (const xmlChar *) "fontsize", NULL);
 	xmlNewTextChild(section_node, NULL, (const xmlChar *) "versenum", (const xmlChar *) "+0");
@@ -521,14 +517,14 @@ int xml_create_settings_file(char *path)
 
 
 	section_node = xmlNewChild(root_node, NULL, (const xmlChar *) "HTMLcolors", NULL);
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "background", (const xmlChar *) "#FFFFFF");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "text_fg", (const xmlChar *) "#000000");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "versenum",(const xmlChar *)  "#0000CF");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "currentverse", (const xmlChar *) "#339766");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "link", (const xmlChar *) "#878787");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "found", (const xmlChar *) "#D02898");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "highlight_fg", (const xmlChar *)"#FFFF00");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *) "highlight_bg", (const xmlChar *)"#060680");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *) "background", (const xmlChar *) "#FFFFFF");	/* white */
+	xmlNewTextChild(section_node, NULL, (const xmlChar *) "text_fg", (const xmlChar *) "#000000");		/* black */
+	xmlNewTextChild(section_node, NULL, (const xmlChar *) "versenum",(const xmlChar *)  "#0000CF");		/* blue */
+	xmlNewTextChild(section_node, NULL, (const xmlChar *) "currentverse", (const xmlChar *) "#339766");	/* green */
+	xmlNewTextChild(section_node, NULL, (const xmlChar *) "link", (const xmlChar *) "#878787");		/* grey */
+	xmlNewTextChild(section_node, NULL, (const xmlChar *) "found", (const xmlChar *) "#D02898");		/* ? */
+	xmlNewTextChild(section_node, NULL, (const xmlChar *) "highlight_fg", (const xmlChar *)"#FFFF00");	/* yellow */
+	xmlNewTextChild(section_node, NULL, (const xmlChar *) "highlight_bg", (const xmlChar *)"#060680");	/* navy */
 
 
 	section_node =
@@ -610,32 +606,18 @@ int xml_create_settings_file(char *path)
 		xmlNewTextChild(section_node, NULL, (const xmlChar *)"dict", (const xmlChar *)(gchar*)tmp->data);
 	else
 		xmlNewTextChild(section_node, NULL, (const xmlChar *)"dict", NULL);
+
 	tmp = get_list(TEXT_LIST);
-	if (tmp)
-		xmlNewTextChild(section_node, NULL, (const xmlChar *)"int1", (const xmlChar *)(gchar*)tmp->data);
+	if (tmp)			/* default parallels list set to 1 bible. */
+		xmlNewTextChild(section_node, NULL, (const xmlChar *)"parallels", (const xmlChar *)(gchar*)tmp->data);
 	else
-		xmlNewTextChild(section_node, NULL, (const xmlChar *)"int1", NULL);
-	if ((tmp = g_list_next(tmp)) != NULL)
-		xmlNewTextChild(section_node, NULL, (const xmlChar *)"int2",(const xmlChar *)(gchar*)tmp->data);
-	else
-		xmlNewTextChild(section_node, NULL, (const xmlChar *)"int2", NULL);
-	if ((tmp = g_list_next(tmp)) != NULL)
-		xmlNewTextChild(section_node, NULL, (const xmlChar *)"int3", (const xmlChar *)(gchar*)tmp->data);
-	else
-		xmlNewTextChild(section_node, NULL, (const xmlChar *)"int3", NULL);
-	if ((tmp = g_list_next(tmp)) != NULL)
-		xmlNewTextChild(section_node, NULL, (const xmlChar *)"int4", (const xmlChar *)(gchar*)tmp->data);
-	else
-		xmlNewTextChild(section_node, NULL, (const xmlChar *)"int4", NULL);
-	if ((tmp = g_list_next(tmp)) != NULL)
-		xmlNewTextChild(section_node, NULL, (const xmlChar *)"int5", (const xmlChar *)(gchar*)tmp->data);
-	else
-		xmlNewTextChild(section_node, NULL, (const xmlChar *)"int5", NULL);
-	tmp = get_list(TEXT_LIST);
+		xmlNewTextChild(section_node, NULL, (const xmlChar *)"parallels", NULL);
+
 	if (tmp)
 		xmlNewTextChild(section_node, NULL, (const xmlChar *)"bible", (const xmlChar *)(gchar*)tmp->data);
 	else
 		xmlNewTextChild(section_node, NULL, (const xmlChar *)"bible", NULL);
+
 	tmp = get_list(PERCOMM_LIST);
 	if (tmp)
 		xmlNewTextChild(section_node, NULL, (const xmlChar *)"percomm", (const xmlChar *)(gchar*)tmp->data);
@@ -799,6 +781,11 @@ static xmlNodePtr xml_find_item(xmlNodePtr parent, const char *item,
 
 	while (cur != NULL) {
 		if (!xmlStrcmp(cur->name, (const xmlChar *) item)) {
+			/* no label means any (i.e. first) element matches */
+			if (!label)
+				return cur;
+
+			/* otherwise we must find the label match. */
 			prop_label = xmlGetProp(cur, (const xmlChar *)"label");
 			if (!xmlStrcmp
 			    (prop_label, (const xmlChar *) label)) {
@@ -901,6 +888,37 @@ void xml_set_list_item(const char *section, const char *item, const char *label,
 			xmlNewProp(new, (const xmlChar *)"list", (const xmlChar *) value);
 		}
 	}
+}
+
+/******************************************************************************
+ * Name
+ *   xml_set_list_item
+ *
+ * Synopsis
+ *   #include "main/xml.h"
+ *
+ *   void xml_set_list_item(char * section, char * item, char * label,
+ *				char * value)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   void
+ */
+
+void xml_set_new_element(const char *section, const char *item, const char *content)
+{
+	xmlNodePtr cur = NULL;
+	xmlNodePtr new = NULL;
+
+	if ((cur = xml_find_section("Xiphos", section)) == NULL) {
+		xmlNodePtr root_node = xmlDocGetRootElement(xml_settings_doc);
+		cur = xmlNewChild(root_node, NULL, (const xmlChar *) section, NULL);
+	}
+
+	if (cur)
+		new = xmlNewChild(cur, NULL, (const xmlChar *) item, (const xmlChar *) content);
 }
 
 /******************************************************************************
@@ -1179,7 +1197,7 @@ void xml_save_settings_doc(char *name)
 	g_free(backup_name);
 
 	/* save the new one. */
-	xmlSaveFormatFile(name, xml_settings_doc,1);
+	xmlSaveFormatFile(name, xml_settings_doc, 1);
 
 	/* did it save properly? */
 	if (((retval = stat(name, &buf)) < 0) ||

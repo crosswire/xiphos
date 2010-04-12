@@ -932,9 +932,9 @@ GTKEntryDisp::Display(SWModule &imodule)
 	buf = g_strdup_printf(HTML_START
 			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
 			      "<font face=\"%s\" size=\"%+d\">"
-			      "<font color=\"%s\">"
 			      "<a href=\"xiphos.url?action=showModInfo&value=%s&module=%s\">"
-			      "[*%s*]</a></font><br>",
+			      "<font color=\"%s\">"
+			      "[*%s*]</font></a><br>",
 			      (strongs_and_morph		// both
 			       ? CSS_BLOCK_BOTH
 			       : (strongs_or_morph		// either
@@ -949,9 +949,9 @@ GTKEntryDisp::Display(SWModule &imodule)
 			      ((mf->old_font_size)
 			       ? atoi(mf->old_font_size) + settings.base_font_size
 			       : settings.base_font_size),
-			      settings.bible_verse_num_color,
 			      imodule.Description(),
 			      imodule.Name(),
+			      settings.bible_verse_num_color,
 			      imodule.Name());
 	swbuf.append(buf);
 	g_free(buf);

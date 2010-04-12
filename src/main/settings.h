@@ -34,11 +34,7 @@ struct _settings {
 		*MainWindowModule,	/* module to open at program startup  */
 		*CommWindowModule,	/* module to open at program startup  */
 		*DictWindowModule,	/* module to open at program startup  */
-	        *parallel1Module,	/* 5 parallel passage modules  */
-	        *parallel2Module,	/*   */
-	        *parallel3Module,	/*   */
-	        *parallel4Module,	/*   */
-	        *parallel5Module,	/*   */
+		**parallel_list,	/* strsplit result from xml parallels */
 	        *personalcommentsmod,	/* module to open at program startup  */
 		sb_search_mod[80], 	/* module for sidebar search */
 	        *devotionalmod, 	/* module for devotional */
@@ -77,7 +73,7 @@ struct _settings {
 		verse_num_font_size,
 		base_font_size,
       		sidebar_width,
-		verselist_toppane_height, //height of the top pane in the search results window
+		verselist_toppane_height, /* height of the top pane in the search results window */
 		upperpane_hight,
 		biblepane_width,
 		biblepane_hight,
@@ -85,79 +81,65 @@ struct _settings {
 		sidebar_notebook_hight,
 		gs_width,
 		gs_hight,
-		searchbargroup,      //-- number of search group in shortcut bar
+		searchbargroup,		  /* number of search group in shortcut bar */
 		searchType,
-		whichwindow,      	/* which of the main form html windows is active */
-		intCurVerse,    /* detached parallel current verse */
-		parallel_page,   /* parallel workbook page number */
-		tab_page,   /* studypad workbook page number */
-		percomm_page;   /* percomm editor workbook page number */
+		whichwindow,		  /* which of the main form html windows is active */
+		intCurVerse,		  /* detached parallel current verse */
+		parallel_page,		  /* parallel workbook page number */
+		tab_page,		  /* studypad workbook page number */
+		percomm_page;		  /* percomm editor workbook page number */
 
 	int
-		strongs,	//-- toogle button and check menu state
-		parallel_strongs, //-- check menu state parallel mods
-		parallel_headings, //-- check menu state parallel mods
-		parallel_crossref, //-- check menu state parallel mods
-		parallel_lemmas, //-- check menu state parallel mods
-		parallel_morphs, //-- check menu state parallel mods
-		parallel_segmentation, //-- check menu state parallel mods
-		parallel_red_words, //-- check menu state parallel mods
-		parallel_transliteration, //-- check menu state parallel mods
-		parallel_variants_primary, //-- check menu state parallel mods
-		parallel_variants_secondary, //-- check menu state parallel mods
-		parallel_variants_all, //-- check menu state parallel mods
-		parallel_hebrewpoints, //-- check menu state parallel mods
-		parallel_cantillationmarks, //-- check menu state parallel mods
-	        parallel_footnotes, //-- check menu state parallel mods
-		parallel_greekaccents, //-- check menu state parallel mods
-	        versestyle, /* use verse style if true or paragraph style if not */
-	        linkedtabs, /* all tabs are linked together, moving in concert */
-	        showversenum, /* display verse numbers in text (default on) */
-	        readaloud, /* pass text through (existing) "festival -server" */
-	        versehighlight, /* do special fg/bg for current verse */
-	        parallelpage, /* display parallel page */
-	        autosavepersonalcomments, /* auto save personal notes */
-	        formatpercom, /* use html to format personal notes */
-	        showshortcutbar, /* display shortcut bar if true */
-	        showsidebar, /* display sidebar bar if true */
-		showfavoritesgroup, /* display shortcut bar group if true */
-	        showtextgroup, /* display shortcut bar group if true */
-	        showcomgroup, /* display shortcut bar group if true */
-	        showdictgroup, /* display shortcut bar group if true */
-	        showbookgroup, /* display shortcut bar group if true */
-	        showbookmarksgroup, /* display shortcut bar group if true */
-	        showhistorygroup, /* display shortcut bar group if true */
-		showsplash, /* show splash on program start if true */
-		showdevotional, /* show devotional on program start if true */
-		text_tool, /* show toolbar in text window if true  */
-                showtexts, /* show bible texts if true  */
-                showpreview, /* show preview pane if true  */
-                showcomms, /* show commentaries if true  */
-                showdicts, /* show dictionaries/lexicons if true */
-                showparatab, /* show parallel view in a tab if true */
-                show_previewer_in_sidebar, /* show previewer in sidebar if true */
+		strongs,			/* toogle button and check menu state */
+		parallel_strongs,		/* check menu state parallel mods */
+		parallel_headings,		/* check menu state parallel mods */
+		parallel_crossref,		/* check menu state parallel mods */
+		parallel_lemmas,		/* check menu state parallel mods */
+		parallel_morphs,		/* check menu state parallel mods */
+		parallel_segmentation,		/* check menu state parallel mods */
+		parallel_red_words,		/* check menu state parallel mods */
+		parallel_transliteration,	/* check menu state parallel mods */
+		parallel_variants_primary,	/* check menu state parallel mods */
+		parallel_variants_secondary,	/* check menu state parallel mods */
+		parallel_variants_all,		/* check menu state parallel mods */
+		parallel_hebrewpoints,		/* check menu state parallel mods */
+		parallel_cantillationmarks,	/* check menu state parallel mods */
+	        parallel_footnotes,		/* check menu state parallel mods */
+		parallel_greekaccents,		/* check menu state parallel mods */
+	        versestyle,			/* verse if true, paragraph if not */
+	        linkedtabs,			/* tabs linked together, move in concert */
+	        showversenum,			/* display verse numbers in text (default on) */
+	        readaloud,			/* pass text through (existing) "festival -server" */
+	        versehighlight,			/* do special fg/bg for current verse */
+	        parallelpage,			/* display parallel page */
+	        autosavepersonalcomments,	/* auto save personal notes */
+	        formatpercom,			/* use html to format personal notes */
+	        showshortcutbar,		/* display shortcut bar if true */
+	        showsidebar,			/* display sidebar bar if true */
+		showfavoritesgroup,		/* display shortcut bar group if true */
+	        showtextgroup,			/* display shortcut bar group if true */
+	        showcomgroup,			/* display shortcut bar group if true */
+	        showdictgroup,			/* display shortcut bar group if true */
+	        showbookgroup,			/* display shortcut bar group if true */
+	        showbookmarksgroup,		/* display shortcut bar group if true */
+	        showhistorygroup,		/* display shortcut bar group if true */
+		showsplash,			/* show splash on program start if true */
+		showdevotional,			/* show devotional on program start if true */
+		text_tool,			/* show toolbar in text window if true  */
+                showtexts,			/* show bible texts if true  */
+                showpreview,			/* show preview pane if true  */
+                showcomms,			/* show commentaries if true  */
+                showdicts,			/* show dictionaries/lexicons if true */
+                showparatab,			/* show parallel view in a tab if true */
+                show_previewer_in_sidebar,	/* show previewer in sidebar if true */
 		showbookeditor,
-		displaySearchResults, /* are we displaying search results in chap display */
-		havethayer, /* for greek morph tags */
-		havebdb, /* for hebrew morph tags */
+		displaySearchResults,		/* are we displaying search results in chap display */
 		useDefaultDict,
-		browsing, /* true for tabbed browsing */
+		browsing,			/* true for tabbed browsing */
 
 		/** if items are docked **/
-		docked, /* true when sidebar is docked */
-		dockedInt, /* true when parallel page is docked */
-
-		/**  find dialogs info  **/
-		finddialog, /* if finddialog open (showing) */
-
-		/** editors **/
-		editnote, /* true when percom html widget is in edit mode */
-		editgbs, /* true when gbs html widget is in edit mode */
-		modifiedGBS, /* book entry modified */
-		modifiedPC, /* personal note modified */
-		modifiedSP, /* studypad file modified */
-		studypad_dialog_exist, /* studypad dialog has been created */
-		percomm_dialog_exist, /* percomm dialog has been created */
+		docked,				/* true when sidebar is docked */
+		dockedInt,			/* true when parallel page is docked */
 
 		/** do we have these modules **/
 		havebible,
@@ -170,13 +152,12 @@ struct _settings {
 		addhistoryitem;
 
 
-
 	/* gbs */
-	char *book_mod;	/* module to open at program startup  */
+	char *book_mod;				/* module to open at program startup  */
 	char *book_key;    /*  */
 	unsigned long book_offset;
 
-	int comm_showing;	/* whether comm or book is visible */
+	int comm_showing;			/* whether comm or book is visible */
 
 	/* store program title */
 	char program_title[256];
@@ -239,8 +220,6 @@ struct _settings {
 	/* mod mgr destination  */
 	int mod_mgr_destination; /* if = 0 destination is .sword
 				    else sword directory  */
-	/* has user seen the quick intro? */
-	int mod_mgr_intro; /* 0 = hasn't seen explanatoin, 1 = has */
 
 	/* if true use prayerlist */
 	int prayerlist;
