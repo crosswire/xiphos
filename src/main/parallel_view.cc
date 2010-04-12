@@ -73,11 +73,6 @@ extern GtkWidget *entryIntLookup;
 static GtkHTMLStreamStatus status1;
 static GtkHTMLStream *htmlstream;
 #endif
-static gboolean parallel1;
-static gboolean parallel2;
-static gboolean parallel3;
-static gboolean parallel4;
-static gboolean parallel5;
 
 BackEnd *backend_p;
 
@@ -579,109 +574,10 @@ void main_load_g_ops_parallel(GtkWidget *menu)
 
 void main_check_parallel_modules(void)
 {
-	if (settings.parallel1Module)
-		parallel1 =
-		    main_is_module(settings.parallel1Module);
-	else
-		parallel1 = FALSE;
-
-	if (settings.parallel2Module)
-		parallel2 =
-		    main_is_module(settings.parallel2Module);
-	else
-		parallel2 = FALSE;
-
-	if (settings.parallel3Module)
-		parallel3 =
-		    main_is_module(settings.parallel3Module);
-	else
-		parallel3 = FALSE;
-
-	if (settings.parallel4Module)
-		parallel4 =
-		    main_is_module(settings.parallel4Module);
-	else
-		parallel4 = FALSE;
-
-	if (settings.parallel5Module)
-		parallel5 =
-		    main_is_module(settings.parallel5Module);
-	else
-		parallel5 = FALSE;
-
+	/* i don't know what it's good for, but we'll keep it for now. */
+	return;
 }
 
-
-/******************************************************************************
- * Name
- *   gui_change_int1_mod
- *
- * Synopsis
- *   #include "main/parallel_view.h
- *
- *   void gui_changeint1_mod(gchar * mod_name)
- *
- * Description
- *
- *
- * Return value
- *   void
- */
-
-void main_change_parallel_module(GSParallel parallel, gchar * mod_name)
-{
-	if (!mod_name)
-		return;
-	switch (parallel) {
-	case PARALLEL1:
-		xml_set_value("Xiphos", "modules", "int1",
-			      mod_name);
-		settings.parallel1Module =
-		    xml_get_value("modules", "int1");
-		parallel1 =
-		    main_is_module(settings.parallel1Module);
-		break;
-	case PARALLEL2:
-		xml_set_value("Xiphos", "modules", "int2",
-			      mod_name);
-		settings.parallel2Module =
-		    xml_get_value("modules", "int2");
-		parallel2 =
-		    main_is_module(settings.parallel2Module);
-		break;
-	case PARALLEL3:
-		xml_set_value("Xiphos", "modules", "int3",
-			      mod_name);
-		settings.parallel3Module =
-		    xml_get_value("modules", "int3");
-		parallel3 =
-		    main_is_module(settings.parallel3Module);
-		break;
-	case PARALLEL4:
-		xml_set_value("Xiphos", "modules", "int4",
-			      mod_name);
-		settings.parallel4Module =
-		    xml_get_value("modules", "int4");
-		parallel4 =
-		    main_is_module(settings.parallel4Module);
-		break;
-	case PARALLEL5:
-		xml_set_value("Xiphos", "modules", "int5",
-			      mod_name);
-		settings.parallel5Module =
-		    xml_get_value("modules", "int5");
-		parallel5 =
-		    main_is_module(settings.parallel5Module);
-		break;
-	default:
-		return;
-		break;
-	}
-	if (settings.dockedInt)
-		main_update_parallel_page();
-	else
-		main_update_parallel_page_detached();
-}
 
 #ifdef USE_GTKMOZEMBED
 /******************************************************************************
@@ -705,9 +601,9 @@ void main_update_parallel_page(void)
 	gchar tmpBuf[256];
 	const gchar *rowcolor;
 	gchar *utf8str, *mod_name;
-	gint i, j;
+	gint modidx;
 	gboolean is_rtol = FALSE;
-	gchar *data = NULL, *newdata = NULL;
+	GString *data;
 	MOD_FONT *mf;
 
 	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.html_parallel))) return ;
@@ -716,56 +612,33 @@ void main_update_parallel_page(void)
 
 	settings.cvparallel = settings.currentverse;
 
-	if (settings.havebible) {
-		sprintf(tmpBuf, HTML_START
-			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table>",
-			settings.bible_bg_color,
-			settings.bible_text_color, settings.link_color);
+	sprintf(tmpBuf, HTML_START
+		"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table>",
+		settings.bible_bg_color,
+		settings.bible_text_color, settings.link_color);
+	data = g_string_new(tmpBuf);
 
-		data = g_strdup(tmpBuf);
-
-		for (i = 0, j = 0; i < 5; i++) {
-			mod_name = NULL;
-			switch (i) {
-			case 0:
-				mod_name = (parallel1 ? settings.parallel1Module : NULL);
-				break;
-			case 1:
-				mod_name = (parallel2 ? settings.parallel2Module : NULL);
-				break;
-			case 2:
-				mod_name = (parallel3 ? settings.parallel3Module : NULL);
-				break;
-			case 3:
-				mod_name = (parallel4 ? settings.parallel4Module : NULL);
-				break;
-			case 4:
-				mod_name = (parallel5 ? settings.parallel5Module : NULL);
-				break;
-			}
-			if (!mod_name)
-				continue;
-			GS_message(("mod_name = %s",mod_name));
+	if (settings.parallel_list) {
+		for (modidx = 0;
+		     (mod_name = settings.parallel_list[modidx]);
+		     modidx++) {
+			GS_message(("mod_name = <%s>",mod_name));
 			mf = get_font(mod_name);
 
-			++j;
 			is_rtol = main_is_mod_rtol(mod_name);
 
-			if (j == 0 || j == 2 || j == 4)
+			if (modidx % 2 == 1)	/* alternating background color */
 				rowcolor = "#F1F1F1";
 			else
 				rowcolor = settings.bible_bg_color;
 
-			if (j == 0) {
+			if (modidx == 0) {
 				sprintf(tmpBuf,
 					"<tr><td><i><font color=\"%s\" size=\"%d\">[%s]</font></i></td></tr>",
 					settings.bible_verse_num_color,
 					settings.verse_num_font_size + settings.base_font_size,
 					settings.currentverse);
-
-				newdata = g_strconcat(data, tmpBuf, NULL);
-				g_free(data);
-				data = newdata;
+				g_string_append(data, tmpBuf);
 			}
 
 			sprintf(tmpBuf,
@@ -776,10 +649,7 @@ void main_update_parallel_page(void)
 				settings.bible_verse_num_color,
 				settings.verse_num_font_size + settings.base_font_size,
 				mod_name);
-
-			newdata = g_strconcat(data, tmpBuf, NULL);
-			g_free(data);
-			data = newdata;
+			g_string_append(data, tmpBuf);
 
 			if ((strlen(mf->old_font) < 2) ||
 			    !strncmp(mf->old_font, "none", 4))
@@ -790,43 +660,32 @@ void main_update_parallel_page(void)
 					"<font face=\"%s\" size=\"%s\">",
 					mf->old_font, mf->old_font_size);
 			free_font(mf);
-
-			newdata = g_strconcat(data, tmpBuf, NULL);
-			g_free(data);
-			data = newdata;
+			g_string_append(data, tmpBuf);
 
 			if (is_rtol)
-				data = g_strconcat(data, "<br><div align=right>", NULL);
+				g_string_append(data, "<br><div align=right>");
 
-			utf8str = backend_p->get_render_text(mod_name,
-							     settings.currentverse);
+			utf8str = backend_p->get_render_text(mod_name, settings.currentverse);
 			if (utf8str) {
-				newdata = g_strconcat(data, utf8str, NULL);
-				g_free(data);
-				data = newdata;
+				g_string_append(data, utf8str);
+				g_free(utf8str);
 			}
-			g_free(utf8str);
 
 			if (is_rtol)
-				data = g_strconcat(data, "</div><br>", NULL);
+				g_string_append(data, "</div><br>");
 
 			sprintf(tmpBuf,
 				"</font><small>[<a href=\"xiphos.url?action=showParallel&"
 				"type=swap&value=%s\">%s</a>]</small></td></tr>",
 				mod_name,_("view context"));
-
-			newdata = g_strconcat(data, tmpBuf, NULL);
-			g_free(data);
-			data = newdata;
+			g_string_append(data, tmpBuf);
 		}
-
-		newdata = g_strconcat(data, "</table></body></html>", NULL);
-		g_free(data);
-		data = newdata;
-		gecko_html_write(html, data, -1);
 	}
+
+	g_string_append(data, "</table></body></html>");
+	gecko_html_write(html, data->str, -1);
 	gecko_html_close(html);
-	g_free(data);
+	g_string_free(data, TRUE);
 }
 
 #else
@@ -850,69 +709,46 @@ void main_update_parallel_page(void)
 {
 	gchar tmpBuf[256], *rowcolor;
 	gchar *utf8str, *mod_name, *buf;
-	gint i, j;
+	gint modidx;
 	gboolean was_editable;
 	gboolean is_rtol = FALSE;
 	MOD_FONT *mf;
 
 	settings.cvparallel = settings.currentverse;
 
-	if (settings.havebible) {
-		/* setup gtkhtml widget */
-		GtkHTML *html = GTK_HTML(widgets.html_parallel);
-		was_editable = gtk_html_get_editable(html);
-		if (was_editable)
-			gtk_html_set_editable(html, FALSE);
-		htmlstream = gtk_html_begin_content(html,
-						    (gchar *)"text/html; charset=utf-8");
-		sprintf(tmpBuf,
-			"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table>",
-			settings.bible_bg_color,
-			settings.bible_text_color, settings.link_color);
-		gtk_html_write(GTK_HTML(html), htmlstream,
-			       tmpBuf, strlen(tmpBuf));
+	/* setup gtkhtml widget */
+	GtkHTML *html = GTK_HTML(widgets.html_parallel);
+	was_editable = gtk_html_get_editable(html);
+	if (was_editable)
+	    gtk_html_set_editable(html, FALSE);
+	htmlstream = gtk_html_begin_content(html, (gchar *)"text/html; charset=utf-8");
+	sprintf(tmpBuf,
+		"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table>",
+		settings.bible_bg_color,
+		settings.bible_text_color, settings.link_color);
+	gtk_html_write(GTK_HTML(html), htmlstream, tmpBuf, strlen(tmpBuf));
 
-		for (i = 0, j = 0; i < 5; i++) {
-			mod_name = NULL;
-			switch (i) {
-			case 0:
-				mod_name = (parallel1 ? settings.parallel1Module : NULL);
-				break;
-			case 1:
-				mod_name = (parallel2 ? settings.parallel2Module : NULL);
-				break;
-			case 2:
-				mod_name = (parallel3 ? settings.parallel3Module : NULL);
-				break;
-			case 3:
-				mod_name = (parallel4 ? settings.parallel4Module : NULL);
-				break;
-			case 4:
-				mod_name = (parallel5 ? settings.parallel5Module : NULL);
-				break;
-			}
-			if (!mod_name)
-				continue;
-			GS_message(("mod_name = %s", mod_name));
+	if (settings.parallel_list) {
+		for (modidx = 0;
+		     (mod_name = settings.parallel_list[modidx]);
+		     modidx++) {
+			GS_message(("mod_name = <%s>", mod_name));
 			mf = get_font(mod_name);
 
-			++j;
 			is_rtol = main_is_mod_rtol(mod_name);
 
-			if (j == 0 || j == 2 || j == 4)
+			if (modidx % 2 == 1)	/* alternating background color */
 				rowcolor = (gchar *)"#F1F1F1";
 			else
 				rowcolor = settings.bible_bg_color;
 
-			if (j == 0) {
+			if (modidx == 0) {
 				sprintf(tmpBuf,
 					"<tr><td><i><font color=\"%s\" size=\"%d\">[%s]</font></i></td></tr>",
 					settings.bible_verse_num_color,
 					settings.verse_num_font_size + settings.base_font_size,
 					settings.currentverse);
-
-				gtk_html_write(GTK_HTML(html), htmlstream,
-					       tmpBuf, strlen(tmpBuf));
+				gtk_html_write(GTK_HTML(html), htmlstream, tmpBuf, strlen(tmpBuf));
 			}
 
 			sprintf(tmpBuf,
@@ -923,9 +759,7 @@ void main_update_parallel_page(void)
 				settings.bible_verse_num_color,
 				settings.verse_num_font_size + settings.base_font_size,
 				mod_name);
-
-			gtk_html_write(GTK_HTML(html), htmlstream,
-				       tmpBuf, strlen(tmpBuf));
+			gtk_html_write(GTK_HTML(html), htmlstream, tmpBuf, strlen(tmpBuf));
 
 			if ((strlen(mf->old_font) < 2) ||
 			    !strncmp(mf->old_font, "none", 4))
@@ -936,9 +770,7 @@ void main_update_parallel_page(void)
 					"<font face=\"%s\"size=\"%s\">",
 					mf->old_font, mf->old_font_size);
 			free_font(mf);
-
-			gtk_html_write(GTK_HTML(html), htmlstream,
-				       tmpBuf, strlen(tmpBuf));
+			gtk_html_write(GTK_HTML(html), htmlstream, tmpBuf, strlen(tmpBuf));
 
 			if (is_rtol) {
 				buf = (gchar*) "<br><div align=right>";
@@ -947,44 +779,41 @@ void main_update_parallel_page(void)
 			}
 
 			utf8str = backend_p->get_render_text(mod_name, settings.currentverse);
-			if (utf8str)
-				gtk_html_write(GTK_HTML(html), htmlstream,
-					       utf8str, strlen(utf8str));
-			g_free(utf8str);
+			if (utf8str) {
+				gtk_html_write(GTK_HTML(html), htmlstream, utf8str, strlen(utf8str));
+				g_free(utf8str);
+			}
 
 			if (is_rtol) {
 				buf = (gchar*) "</div><br>";
-				gtk_html_write(GTK_HTML(html), htmlstream,
-					       buf, strlen(buf));
+				gtk_html_write(GTK_HTML(html), htmlstream, buf, strlen(buf));
 			}
+
 			sprintf(tmpBuf,
 				"</font><small>[<a href=\"xiphos.url?action=showParallel&"
 				"type=swap&value=%s\">%s</a>]</small></td></tr>",
 				mod_name,_("view context"));
 
-			gtk_html_write(GTK_HTML(html), htmlstream,
-				       tmpBuf, strlen(tmpBuf));
+			gtk_html_write(GTK_HTML(html), htmlstream, tmpBuf, strlen(tmpBuf));
 		}
-
-		buf = (gchar*) "</table></body></html>";
-		gtk_html_write(GTK_HTML(html), htmlstream,
-			       tmpBuf, strlen(buf));
-
-		gtk_html_end(GTK_HTML(html), htmlstream, status1);
-		gtk_html_set_editable(html, was_editable);
 	}
+
+	buf = (gchar*) "</table></body></html>";
+	gtk_html_write(GTK_HTML(html), htmlstream, buf, strlen(buf));
+	gtk_html_end(GTK_HTML(html), htmlstream, status1);
+	gtk_html_set_editable(html, was_editable);
 }
 
 #endif
 
 /******************************************************************************
  * Name
- *   int_display
+ *   interpolate_parallel_display
  *
  * Synopsis
  *   #include "main/parallel_view.h
  *
- *   void int_display(SWBuf& text, gchar *key, char *mod_name[])
+ *   void interpolate_parallel_display(SWBuf& text, gchar *key)
  *
  * Description
  *   carry out the hard work of getting verses for parallel display.
@@ -993,7 +822,7 @@ void main_update_parallel_page(void)
  *   void
  */
 
-static void int_display(SWBuf& text, gchar *key, char *mod_name[])
+static void interpolate_parallel_display(SWBuf& text, gchar *key, gint parallel_count, gint fraction)
 {
 	gchar  	*utf8str,
 		*textColor,
@@ -1001,14 +830,27 @@ static void int_display(SWBuf& text, gchar *key, char *mod_name[])
 		tmpbuf[256];
 	const gchar *bgColor;
 	gchar str[500];
-	gboolean evenRow = FALSE;
-	gboolean is_rtol = FALSE;
-	gint cur_verse, cur_chapter, i = 1, j;
+	gint cur_verse, cur_chapter, verse, modidx;
 	char *cur_book;
-	gboolean is_module[5] = { FALSE, FALSE, FALSE, FALSE, FALSE };
-	MOD_FONT *mf[5] = { NULL, NULL, NULL, NULL, NULL };
+	MOD_FONT **mf;
+	gboolean *is_rtol, *is_module;
 
 	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.notebook_bible_parallel))) return;
+
+	is_module = g_new(gboolean, parallel_count);
+	is_rtol   = g_new(gboolean, parallel_count);
+	mf        = g_new(MOD_FONT *, parallel_count);
+
+	// quick cache of fonts/rtol info.
+	for (modidx = 0; modidx < parallel_count; ++modidx) {
+		// determine module presence once each.
+		is_module[modidx] = backend->is_module(settings.parallel_list[modidx]);
+
+		if (is_module[modidx]) {
+			is_rtol[modidx] = main_is_mod_rtol(settings.parallel_list[modidx]);
+			mf[modidx] = get_font(settings.parallel_list[modidx]);
+		}
+	}
 
 	// need #verses to process in this chapter.
 	VerseKey vkey;
@@ -1016,82 +858,66 @@ static void int_display(SWBuf& text, gchar *key, char *mod_name[])
 
 	vkey.AutoNormalize(1);
 	vkey = key;
-
 	xverses = (vkey.getVerseMax());
-
-	// quick cache of fonts.  (mod_name was passed in.)
-	for (j = 0; j < 5; ++j) {
-		// determine module presence just once each for this routine.
-		is_module[j] = (mod_name[j] &&
-				*(mod_name[j]) &&
-				backend->is_module(mod_name[j]));
-
-		// collect decorations.
-		if (is_module[j])
-			mf[j] = get_font(mod_name[j]);
-	}
-
-	bgColor = "#f1f1f1";
 
 	tmpkey = backend_p->get_valid_key(key);
 	cur_verse = backend_p->key_get_verse(tmpkey);
-	settings.intCurVerse = cur_verse;
 	cur_chapter = backend_p->key_get_chapter(tmpkey);
 	cur_book = backend_p->key_get_book(tmpkey);
+	settings.intCurVerse = cur_verse;
 
-	for (i = 1; i <= xverses; ++i) {
-		snprintf(tmpbuf, 255, "%s %d:%d", cur_book, cur_chapter, i);
+	for (verse = 1; verse <= xverses; ++verse) {
+		snprintf(tmpbuf, 255, "%s %d:%d", cur_book, cur_chapter, verse);
 		free(tmpkey);
 		tmpkey = backend_p->get_valid_key(tmpbuf);
 
 		text += "<tr valign=\"top\">";
 
 		// mark current verse properly.
-		if (i == cur_verse)
+		if (verse == cur_verse)
 			textColor = settings.currentverse_color;
 		else
 			textColor = settings.bible_text_color;
 
 		// alternate background colors.
-		if (evenRow) {
-			evenRow = FALSE;
+		if (verse % 2 == 0)
 			bgColor = "#f1f1f1";
-		} else {
-			evenRow = TRUE;
+		else
 			bgColor = settings.bible_bg_color;
-		}
 
-		for (j = 0; j < 5; j++) {
-			is_rtol = main_is_mod_rtol(mod_name[j]);
-
-			if (is_module[j]) {
-				char *num = main_format_number(i);
+		for (modidx = 0; modidx < parallel_count; modidx++) {
+			if (is_module[modidx]) {
+				const gchar *newurl = main_url_encode(tmpkey);
+				gchar *num = main_format_number(verse);
 				snprintf(str, 499,
-					 "<td width=\"20%%\" bgcolor=\"%s\">"
+					 "<td width=\"%d%%\" bgcolor=\"%s\">"
 					 "<a href=\"xiphos.url?action=showParallel&"
 					 "type=verse&value=%s\" name=\"%d\">"
 					 "<font color=\"%s\">%s. </font></a>"
 					 "<font face=\"%s\" size=\"%s\" color=\"%s\">",
+					 fraction,
 					 bgColor,
-					 main_url_encode(tmpkey),
-					 i,
+					 newurl,
+					 verse,
 					 settings.bible_verse_num_color,
 					 num,
-					 mf[j]->old_font,
-					 mf[j]->old_font_size,
+					 mf[modidx]->old_font,
+					 mf[modidx]->old_font_size,
 					 textColor);
+				g_free((gchar*)newurl);
 				g_free(num);
 				text += str;
 
-				if (is_rtol)
+				if (is_rtol[modidx])
 					text += "<br><div align=right>";
 
-				utf8str = backend_p->get_render_text(mod_name[j], tmpkey);
-				if (utf8str)
+				utf8str = backend_p->get_render_text(settings.parallel_list[modidx], tmpkey);
+				if (utf8str) {
 					text += utf8str;
-				g_free(utf8str);
+					g_free(utf8str);
+				}
 
-				if (is_rtol)
+				if (is_rtol[modidx])
 					text += "</div>";
 			}
 
@@ -1100,12 +926,16 @@ static void int_display(SWBuf& text, gchar *key, char *mod_name[])
 
 		text += "</tr>";
 	}
-
-	for (j = 0; j < 5; ++j)
-		if (is_module[j])
-			free_font(mf[j]);
 	g_free(tmpkey);
 	g_free(cur_book);
+
+	/* clear bookkeeping data */
+	for (modidx = 0; modidx < parallel_count; ++modidx)
+		if (is_module[modidx])
+			free_font(mf[modidx]);
+	g_free(mf);
+	g_free(is_rtol);
+	g_free(is_module);
 }
 
 
@@ -1128,35 +958,22 @@ static void int_display(SWBuf& text, gchar *key, char *mod_name[])
 void main_update_parallel_page_detached(void)
 {
 	SWBuf text("");
-	gchar buf[500], *mod_name[5];
-	gint j;
-	gchar space[2];  //there is surely a better way?
-	space[0] = ' ';
-	space[1] = '\0';
-	mod_name[0] = (parallel1 ? settings.parallel1Module : space);
-	mod_name[1] = (parallel2 ? settings.parallel2Module : space);
-	mod_name[2] = (parallel3 ? settings.parallel3Module : space);
-	mod_name[3] = (parallel4 ? settings.parallel4Module : space);
-	mod_name[4] = (parallel5 ? settings.parallel5Module : space);
-
-    	snprintf(buf, 499, "<span color='blue' weight='bold'>%s</span>", mod_name[0]);
-    	gtk_label_set_markup(GTK_LABEL(plabels.label_1), buf);
-
-    	snprintf(buf, 499, "<span color='blue' weight='bold'>%s</span>", mod_name[1]);
-    	gtk_label_set_markup(GTK_LABEL(plabels.label_2), buf);
-
-    	snprintf(buf, 499, "<span color='blue' weight='bold'>%s</span>", mod_name[2]);
-    	gtk_label_set_markup(GTK_LABEL(plabels.label_3), buf);
-
-    	snprintf(buf, 499, "<span color='blue' weight='bold'>%s</span>", mod_name[3]);
-    	gtk_label_set_markup(GTK_LABEL(plabels.label_4), buf);
-
-    	snprintf(buf, 499, "<span color='blue' weight='bold'>%s</span>", mod_name[4]);
-    	gtk_label_set_markup(GTK_LABEL(plabels.label_5), buf);
+	gchar buf[500];
+	gint modidx, parallel_count, fraction;
 
 #ifdef USE_GTKMOZEMBED
 	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.html_parallel_dialog))) return;
 #endif
+
+	/* how big a pile of parallels have we got? */
+	if (settings.parallel_list == NULL)
+		return;
+	for (parallel_count = 0; settings.parallel_list[parallel_count]; ++parallel_count)
+		/* just count non-null string ptrs */;
+
+	/* get the per-column percentage width. */
+	/* 2 => 50, 5 => 20, 10 => 10. */
+	fraction = 100/parallel_count;
 
 	snprintf(buf, 499, HTML_START
 		"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table align=\"left\" valign=\"top\"><tr valign=\"top\" >",
@@ -1164,17 +981,18 @@ void main_update_parallel_page_detached(void)
 		settings.link_color);
 	text += buf;
 
-	for (j = 0; j < 5; ++j){
+	for (modidx = 0; settings.parallel_list[modidx]; ++modidx) {
 		snprintf(buf, 499,
-			"<td valign=\"top\" width=\"20%%\" bgcolor=\"#f1f1f1\"><font color=\"%s\" size=\"%+d\"><b>%s</b></td>",
-			settings.bible_verse_num_color,
-			settings.verse_num_font_size + settings.base_font_size,
-			mod_name[j]);
+			 "<td valign=\"top\" width=\"%d%%\" bgcolor=\"#f1f1f1\"><font color=\"%s\" size=\"%+d\"><b>%s</b></font></td>",
+			 fraction,
+			 settings.bible_verse_num_color,
+			 settings.verse_num_font_size + settings.base_font_size,
+			 settings.parallel_list[modidx]);
 		text += buf;
 	}
 
 	text += "</tr>";
-	int_display(text, settings.cvparallel, mod_name);
+	interpolate_parallel_display(text, settings.cvparallel, parallel_count, fraction);
 	text += "</table></body></html>";
 
 	snprintf(buf, 499, "%d", ((settings.intCurVerse > 1)
@@ -1202,23 +1020,6 @@ void main_update_parallel_page_detached(void)
 
 void main_swap_parallel_with_main(char *intmod)
 {
-#if 0
-	if ((settings.parallel5Module) && !strcmp(settings.parallel5Module, intmod)) {
-		settings.parallel5Module = xml_get_value("modules", "bible");
-	}
-	if ((settings.parallel4Module) && !strcmp(settings.parallel4Module, intmod)) {
-		settings.parallel4Module = xml_get_value("modules", "bible");
-	}
-	if ((settings.parallel3Module) && !strcmp(settings.parallel3Module, intmod)) {
-		settings.parallel3Module = xml_get_value("modules", "bible");
-	}
-	if ((settings.parallel2Module) && !strcmp(settings.parallel2Module, intmod)) {
-		settings.parallel2Module = xml_get_value("modules", "bible");
-	}
-	if ((settings.parallel1Module) && !strcmp(settings.parallel1Module, intmod)) {
-		settings.parallel1Module = xml_get_value("modules", "bible");
-	}
-#endif
 	main_display_bible(intmod, settings.currentverse);
 	main_update_parallel_page();
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_bible_parallel),

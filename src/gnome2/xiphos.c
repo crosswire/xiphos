@@ -96,8 +96,6 @@ void frontend_init(void)
 	GS_print(("%s\n", "Initiating Xiphos"));
 	settings.comm_showing = TRUE;
 	settings.displaySearchResults = FALSE;
-	settings.havethayer = main_is_module("Thayer");
-	settings.havebdb = main_is_module("BDB");
 
 	/*
 	 *  setup sidebar

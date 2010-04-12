@@ -1,3 +1,7 @@
+2010-04-12  karl <charcoal@users.sf.net>
+
+	* feat.req #2928849 support arbitrary # of parallel texts.
+
 2010-04-08  karl <charcoal@users.sf.net>
 
 	* feat.req #1994953 Fine tune display settings - make doublespace
