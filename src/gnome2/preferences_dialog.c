@@ -1743,7 +1743,7 @@ create_model(void)
 	gtk_tree_store_set(model, &child_iter, 0, _("Color"), 1, 1, -1);
 
 	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, _("Sizes"), 1, 2, -1);
+	gtk_tree_store_set(model, &child_iter, 0, _("Sizes and Faces"), 1, 2, -1);
 
 
 	gtk_tree_store_append(model, &iter, NULL);
