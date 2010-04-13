@@ -610,8 +610,8 @@ void load_settings_structure(void)
 	if ((buf = xml_get_value("parallel", "Footnotes")))
 		settings.parallel_footnotes = atoi(buf);
 	else {
-		xml_add_new_item_to_section("parallel", "Footnotes", "0");
-		settings.parallel_footnotes = 0;
+		xml_add_new_item_to_section("parallel", "Footnotes", "1");
+		settings.parallel_footnotes = 1;
 	}
 
 	if ((buf = xml_get_value("parallel", "Cross-references")))
@@ -631,8 +631,8 @@ void load_settings_structure(void)
 	if ((buf = xml_get_value("parallel", "Words_of_Christ_in_Red")))
 		settings.parallel_red_words = atoi(buf);
 	else {
-		xml_add_new_item_to_section("parallel", "Words_of_Christ_in_Red", "0");
-		settings.parallel_red_words = 0;
+		xml_add_new_item_to_section("parallel", "Words_of_Christ_in_Red", "1");
+		settings.parallel_red_words = 1;
 	}
 
 	if ((buf = xml_get_value("parallel", "Morpheme_Segmentation")))
@@ -645,8 +645,8 @@ void load_settings_structure(void)
 	if ((buf = xml_get_value("parallel", "Headings")))
 		settings.parallel_headings = atoi(buf);
 	else {
-		xml_add_new_item_to_section("parallel", "Headings", "0");
-		settings.parallel_headings = 0;
+		xml_add_new_item_to_section("parallel", "Headings", "1");
+		settings.parallel_headings = 1;
 	}
 
 	if ((buf = xml_get_value("parallel", "Lemmas")))
