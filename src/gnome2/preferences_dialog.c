@@ -241,7 +241,6 @@ gdkcolor_to_hex(GdkColor color,
 					color.green/256,
 					color.blue/256);
 	}
-	GS_message(("%s",tmpstr));
 	return tmpstr;
 }
 
@@ -1005,7 +1004,6 @@ on_folder_changed(GtkFileChooser * filechooser,
 	gchar *directory = gtk_file_chooser_get_current_folder(filechooser);
 	xml_set_value("Xiphos", "studypad", "directory", directory);
 	settings.studypaddir = xml_get_value("studypad", "directory");
-	GS_message(("on__folder_changed to %s", directory));
 	g_free(directory);
 }
 
@@ -1590,12 +1588,12 @@ on_dialog_prefs_response(GtkDialog * dialog,
 			 gint response_id,
 			 gpointer user_data)
 {
-	GS_message(("on_dialog_prefs_response, %d", response_id));
 	if (response_id == GTK_RESPONSE_CLOSE) {
 		xml_save_settings_doc(settings.fnconfigure);
 		gtk_widget_destroy(GTK_WIDGET(dialog));
 		gtk_widget_destroy(GTK_WIDGET(parallel_select.dialog));
 	}
+	main_update_parallel_page();
 }
 
 
@@ -1607,7 +1605,6 @@ create_model(void)
 	GtkTreeIter child_iter;
 
 	model = gtk_tree_store_new(2, G_TYPE_STRING, G_TYPE_INT);
-	//model = gtk_tree_store_new(2, G_TYPE_STRING, G_TYPE_INT);
 
 	gtk_tree_store_append(model, &iter, NULL);
 	gtk_tree_store_set(model, &iter, 0, _("Fonts"), -1);
@@ -2096,6 +2093,9 @@ void ps_setup_listview()
 	GtkListStore *model;
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
+	GtkTreeIter iter;
+	GtkTreeModel *model_t;
+	GtkListStore *list_store;
 	int i;
 
 	model = gtk_list_store_new(2, G_TYPE_STRING, G_TYPE_STRING);
@@ -2110,6 +2110,63 @@ void ps_setup_listview()
 		gtk_tree_view_append_column(GTK_TREE_VIEW(parallel_select.listview), column);
 	}
 	gtk_tree_view_column_set_sort_column_id(column, 0);
+
+	model_t = gtk_tree_view_get_model(GTK_TREE_VIEW(parallel_select.listview));
+	list_store = GTK_LIST_STORE(model_t);
+	gtk_list_store_clear(list_store);
+
+	if (settings.parallel_list) {
+		for (i = 0; settings.parallel_list[i]; ++i) {
+			gtk_list_store_append(list_store, &iter);
+			gtk_list_store_set(list_store, &iter,
+					   0, main_get_module_description
+						(settings.parallel_list[i]),
+					   1, (gchar *)settings.parallel_list[i],
+					   -1);
+		}
+	}
+}
+
+/******************************************************************************
+ * Name
+ *   modules_lists_changed
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *   void modules_lists_changed(GtkTreeSelection * selection,
+ *		     					 gpointer data)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   void
+ */
+
+static gchar *module_selected = NULL;
+
+static void modules_lists_changed(GtkTreeSelection * selection,
+				  GtkTreeView * tree_widget)
+{
+	gchar *mod = NULL;
+	GtkTreeIter selected;
+	GtkTreeModel *model = gtk_tree_view_get_model(GTK_TREE_VIEW(tree_widget));
+
+	if (!gtk_tree_selection_get_selected(selection, NULL, &selected))
+		return;
+	if (gtk_tree_model_iter_has_child(model, &selected)) {
+		g_free(module_selected);
+		module_selected = NULL;
+		return;
+	}
+
+	gtk_tree_model_get(model, &selected, 0, &mod, -1);
+	if (mod) {
+		g_free(module_selected);
+		module_selected = mod;
+	}
+
 }
 
 /******************************************************************************
@@ -2147,14 +2204,56 @@ void ps_setup_treeview(GtkWidget * treeview)
 	selection = G_OBJECT(gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview)));
 	g_signal_connect_after(G_OBJECT(treeview), "button_release_event",
 			       G_CALLBACK(button_release_event), GINT_TO_POINTER(0));
+	g_signal_connect(selection, "changed", G_CALLBACK(modules_lists_changed), treeview);
+}
+
+
+static void on_mod_sel_add_clicked(GtkWidget * button, gchar * user_data)
+{
+	GtkTreeModel *model;
+	GtkListStore *list_store;
+	GtkTreeIter iter;
+	char *parallels = g_strdup(""), *newhold;
+	int count;
+
+	if (!module_selected)
+		return;
+
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(parallel_select.listview));
+	list_store = GTK_LIST_STORE(model);
+
+	gtk_list_store_append(list_store, &iter);
+	gtk_list_store_set(list_store, &iter,
+			   0, main_get_module_description(module_selected),
+			   1, module_selected,
+			   -1);
+
+	if (settings.parallel_list == NULL) {
+		settings.parallel_list = g_strsplit(module_selected, ",", -1);
+	} else {
+		for (count = 0; settings.parallel_list[count]; ++count)
+			; /* count up the set */
+		settings.parallel_list = g_renew(gchar *, settings.parallel_list, count + 2);
+		settings.parallel_list[count] = g_strdup(module_selected);	/* new element */
+		settings.parallel_list[count+1] = NULL;
+	}
+
+	for (count = 0; settings.parallel_list[count]; ++count) {
+		newhold = g_strconcat(parallels, settings.parallel_list[count], ",", NULL);
+		g_free(parallels);
+		parallels = newhold;
+	}
+
+	if (*parallels) {
+		*(parallels + strlen(parallels) - 1) = '\0';	/* end comma */
+		xml_set_value("Xiphos", "modules", "parallels", parallels);
+	}
+	g_free(parallels);
 }
 
 static void on_mod_sel_close_clicked(void)
 {
-}
-
-static void on_mod_sel_add_clicked(void)
-{
+	gtk_widget_destroy(GTK_WIDGET(parallel_select.mod_sel_dialog));
 }
 
 /******************************************************************************
@@ -2235,8 +2334,6 @@ void ps_button_cut(GtkButton * button, gpointer user_data)
 	GtkTreeIter selected;
 	gchar *str;
 
-	GS_message(("button cut"));
-
 	model = gtk_tree_view_get_model(GTK_TREE_VIEW(parallel_select.listview));
 	list_store = GTK_LIST_STORE(model);
 	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(parallel_select.listview));
@@ -2281,12 +2378,11 @@ void ps_button_add(GtkButton * button, gpointer user_data)
 
 	glade_file = gui_general_user_file("prefs.glade", FALSE);
 	g_return_if_fail(glade_file != NULL);
-	GS_message(("%s",glade_file));
 
 	gxml = glade_xml_new(glade_file, "mod_sel_dialog", NULL);
 	parallel_select.mod_sel_dialog = glade_xml_get_widget(gxml, "mod_sel_dialog");
-	parallel_select.mod_sel_close  = glade_xml_get_widget(gxml, "mod_sel_close");
-	parallel_select.mod_sel_add    = glade_xml_get_widget(gxml, "mod_sel_add");
+	parallel_select.mod_sel_close  = glade_xml_get_widget(gxml, "mod_sel_button_close");
+	parallel_select.mod_sel_add    = glade_xml_get_widget(gxml, "mod_sel_button_add");
 
 	g_signal_connect((gpointer)parallel_select.mod_sel_close, "clicked",
 			 G_CALLBACK(on_mod_sel_close_clicked), NULL);

@@ -616,7 +616,7 @@ void gui_load_module_tree(GtkWidget * tree, gboolean limited)
 			   text, commentary, map, image,
 			   devotional, dictionary, book,
 			   NULL, NULL,
-			   language_add_folders);
+			   language_add_folders, limited);
 
 	tmp2 = tmp;
 	while (tmp2 != NULL) {
@@ -1063,7 +1063,8 @@ language_make_list(GList *modlist,
 		   GtkTreeIter book,
 		   GtkTreeIter *update,
 		   GtkTreeIter *uninstalled,
-		   void (*add)(GtkTreeModel *, GtkTreeIter, gchar **))
+		   void (*add)(GtkTreeModel *, GtkTreeIter, gchar **),
+		   gboolean limited)
 {
 	MOD_MGR *info;
 	int i;
@@ -1120,21 +1121,23 @@ language_make_list(GList *modlist,
 	       language_get_type(LANGSET_BIBLE));
 	(*add)(GTK_TREE_MODEL(store), commentary,
 	       language_get_type(LANGSET_COMMENTARY));
-	(*add)(GTK_TREE_MODEL(store), map,
-	       language_get_type(LANGSET_MAP));
-	(*add)(GTK_TREE_MODEL(store), image,
-	       language_get_type(LANGSET_IMAGE));
-	(*add)(GTK_TREE_MODEL(store), devotional,
-	       language_get_type(LANGSET_DEVOTIONAL));
-	(*add)(GTK_TREE_MODEL(store), dictionary,
-	       language_get_type(LANGSET_DICTIONARY));
-	(*add)(GTK_TREE_MODEL(store), book,
-	       language_get_type(LANGSET_GENBOOK));
-	if ((update != NULL) && (uninstalled != NULL)) {
-		(*add)(GTK_TREE_MODEL(store), *update,
-		       language_get_type(LANGSET_UPDATE));
-		(*add)(GTK_TREE_MODEL(store), *uninstalled,
-		       language_get_type(LANGSET_UNINSTALLED));
+	if (!limited) {
+		(*add)(GTK_TREE_MODEL(store), map,
+		       language_get_type(LANGSET_MAP));
+		(*add)(GTK_TREE_MODEL(store), image,
+		       language_get_type(LANGSET_IMAGE));
+		(*add)(GTK_TREE_MODEL(store), devotional,
+		       language_get_type(LANGSET_DEVOTIONAL));
+		(*add)(GTK_TREE_MODEL(store), dictionary,
+		       language_get_type(LANGSET_DICTIONARY));
+		(*add)(GTK_TREE_MODEL(store), book,
+		       language_get_type(LANGSET_GENBOOK));
+		if ((update != NULL) && (uninstalled != NULL)) {
+			(*add)(GTK_TREE_MODEL(store), *update,
+			       language_get_type(LANGSET_UPDATE));
+			(*add)(GTK_TREE_MODEL(store), *uninstalled,
+			       language_get_type(LANGSET_UNINSTALLED));
+		}
 	}
 }
 

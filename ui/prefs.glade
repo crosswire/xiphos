@@ -2102,7 +2102,7 @@
   <property name="visible">False</property>
   <property name="title" translatable="yes">Parallel Select</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
-  <property name="window_position">GTK_WIN_POS_CENTER</property>
+  <property name="window_position">GTK_WIN_POS_NONE</property>
   <property name="modal">False</property>
   <property name="default_width">500</property>
   <property name="default_height">300</property>
@@ -2311,7 +2311,7 @@
   <property name="visible">False</property>
   <property name="title" translatable="yes">Module Selection</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
-  <property name="window_position">GTK_WIN_POS_CENTER</property>
+  <property name="window_position">GTK_WIN_POS_NONE</property>
   <property name="modal">True</property>
   <property name="default_width">222</property>
   <property name="default_height">300</property>
