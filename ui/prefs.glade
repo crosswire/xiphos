@@ -64,7 +64,7 @@
 
 	  <child>
 	    <widget class="GtkScrolledWindow" id="scrolledwindow">
-	      <property name="width_request">155</property>
+	      <property name="width_request">165</property>
 	      <property name="visible">True</property>
 	      <property name="can_focus">True</property>
 	      <property name="hscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
