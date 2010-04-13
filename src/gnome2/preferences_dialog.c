@@ -52,7 +52,6 @@
 #include "main/lists.h"
 #include "main/mod_mgr.h"
 #include "main/parallel_view.h"
-#include "main/search_dialog.h"
 #include "main/settings.h"
 #include "main/sidebar.h"
 #include "main/xml.h"
@@ -2251,8 +2250,8 @@ void ps_button_cut(GtkButton * button, gpointer user_data)
 
 	if (gui_yes_no_dialog(str, (char *)GTK_STOCK_DIALOG_WARNING)) {
 		gtk_list_store_remove(list_store, &selected);
-		mods = main_get_current_list(GTK_TREE_VIEW(parallel_select.listview));
-		mod_list = main_get_modlist_string(mods);
+		mods = get_current_list(GTK_TREE_VIEW(parallel_select.listview));
+		mod_list = get_modlist_string(mods);
 		if (settings.parallel_list)
 			g_strfreev(settings.parallel_list);
 		settings.parallel_list = g_strsplit(mod_list, ",", -1);

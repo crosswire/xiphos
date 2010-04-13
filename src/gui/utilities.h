@@ -77,6 +77,9 @@ void language_make_list(GList *modlist,
 			GtkTreeIter *uninstalled,
 			void (*add)(GtkTreeModel *, GtkTreeIter, gchar **));
 
+GList *get_current_list(GtkTreeView *treeview);
+gchar *get_modlist_string(GList * mods);
+
 char *image_locator(const char *image);
 GtkWidget *pixmap_finder(char *image);
 GdkPixbuf *pixbuf_finder(const char *image, int size, GError **error);

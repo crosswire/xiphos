@@ -1138,6 +1138,81 @@ language_make_list(GList *modlist,
 	}
 }
 
+/******************************************************************************
+ * Name
+ *
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *
+ *
+ * Description
+ *
+ *
+ * Return value
+ *
+ */
+
+gchar *get_modlist_string(GList * mods)
+{
+	gchar *rv;
+	GString *str = g_string_new("");
+	GList *orig_mods = mods;
+
+	while (mods != NULL) {
+		str = g_string_append(str, (gchar *) mods->data);
+		g_free(mods->data);
+		mods = g_list_next(mods);
+		if (mods != NULL)
+			str = g_string_append_c(str, ',');
+	}
+	g_list_free(orig_mods);
+
+	rv = g_strdup(str->str);
+	g_string_free(str, TRUE);
+	return rv;
+}
+
+
+
+/******************************************************************************
+ * Name
+ *   get_current_list
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *   GList *get_current_list(GtkTreeView *treeview)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   GList *
+ */
+
+GList *get_current_list(GtkTreeView *treeview)
+{
+	GList *items = NULL;
+	gchar *buf;
+	GtkTreeModel *model;
+	GtkTreeIter iter;
+
+	model = gtk_tree_view_get_model(treeview);
+	if (gtk_tree_model_get_iter_first(model, &iter)) {
+		do {
+			gtk_tree_model_get(model, &iter, 1, &buf, -1);
+			items =
+			    g_list_append(items,
+					  (gchar *) g_strdup(buf));
+
+		} while (gtk_tree_model_iter_next(model, &iter));
+	}
+	return items;
+}
+
+
 /*
  * caller must free the returned string.
  */
