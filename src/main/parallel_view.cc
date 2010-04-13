@@ -487,7 +487,11 @@ void main_load_g_ops_parallel(GtkWidget *menu)
 
 
 	item = gtk_check_menu_item_new_with_label(_("Morpheme Segmentation"));
+#if 0
 	gtk_widget_show(item);
+#else
+	gtk_widget_hide(item);
+#endif
 	gtk_container_add(GTK_CONTAINER(menu), item);
 
 	GTK_CHECK_MENU_ITEM(item)->active = settings.parallel_segmentation;

@@ -323,7 +323,6 @@ GtkWidget *create_parallel_dialog(void)
 	GtkWidget *scrolled_window;
 #endif
 	gchar title[256];
-	gint modidx;
 
 	sprintf(title,"%s - %s", settings.program_title, _("Parallel"));
 
@@ -357,9 +356,12 @@ GtkWidget *create_parallel_dialog(void)
 	gtk_box_pack_start (GTK_BOX (vboxInt), box_parallel_labels, FALSE, TRUE, 0);
 	gtk_container_set_border_width (GTK_CONTAINER (box_parallel_labels), 2);
 
+#if 0
 	if (settings.parallel_list) {
 		GtkWidget *plabel;
 		gchar *label;
+		gint modidx;
+
 		for (modidx = 0; settings.parallel_list[modidx]; ++modidx) {
 			plabel = gtk_label_new(NULL);
 			gtk_widget_show(plabel);
@@ -373,6 +375,7 @@ GtkWidget *create_parallel_dialog(void)
 			g_free(label);
 		}
 	}
+#endif /* 0 */
 
 #ifdef USE_GTKMOZEMBED
 	frame = gtk_frame_new(NULL);
@@ -384,7 +387,7 @@ GtkWidget *create_parallel_dialog(void)
 	gtk_widget_show (eventbox);
 	gtk_container_add(GTK_CONTAINER(frame), eventbox);
 
-	widgets.html_parallel_dialog = GTK_WIDGET(gecko_html_new(NULL, FALSE, PARALLEL_TYPE)); //embed_new(PARALLEL_TYPE); //gtk_moz_embed_new();
+	widgets.html_parallel_dialog = GTK_WIDGET(gecko_html_new(NULL, FALSE, PARALLEL_TYPE));
 	gtk_widget_show(widgets.html_parallel_dialog);
 	gtk_container_add(GTK_CONTAINER(eventbox),
 			  widgets.html_parallel_dialog);

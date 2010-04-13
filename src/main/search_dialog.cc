@@ -747,24 +747,24 @@ void main_add_mod_to_list(GtkWidget * tree_widget, gchar * mod_name)
 	list_store = GTK_LIST_STORE(model_mods);
 	mod_description = backendSearch->module_description(mod_name);
 
-			gtk_list_store_append(list_store, &iter);
-			gtk_list_store_set(list_store, &iter,
-					   0, mod_description,
-					   1, mod_name, -1);
-			mods = get_current_list(GTK_TREE_VIEW(search1.listview_modules));
-			mod_list = get_modlist_string(mods);
+	gtk_list_store_append(list_store, &iter);
+	gtk_list_store_set(list_store, &iter,
+			   0, mod_description,
+			   1, mod_name, -1);
+	mods = get_current_list(GTK_TREE_VIEW(search1.listview_modules));
+	mod_list = get_modlist_string(mods);
 
-			if (mod_list) {
-				gtk_tree_selection_get_selected
-	   			       (selection_modules_lists, NULL,
-					          &selected_modules_lists);
+	if (mod_list) {
+		gtk_tree_selection_get_selected
+  			       (selection_modules_lists, NULL,
+			          &selected_modules_lists);
 
-				gtk_list_store_set(store_modules_lists,
-						   &selected_modules_lists,
-						   1, mod_list, -1);
-				g_free(mod_list);
-			}
-			++search1.module_count;
+		gtk_list_store_set(store_modules_lists,
+				   &selected_modules_lists,
+				   1, mod_list, -1);
+		g_free(mod_list);
+	}
+	++search1.module_count;
 }
 
 
@@ -997,7 +997,7 @@ void main_selection_modules_lists_changed(GtkTreeSelection *
 					    selection, gpointer data)
 {
 	gchar *name, *modules;
-	GList *tmp = NULL;
+	GList *tmp = NULL, *tmp2;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 	GtkListStore *list_store;
@@ -1024,7 +1024,7 @@ void main_selection_modules_lists_changed(GtkTreeSelection *
 				      (GTK_ENTRY
 				       (search1.entry_list_name)));
 
-	tmp = g_list_first(tmp);
+	tmp = tmp2 = g_list_first(tmp);
 	while (tmp != NULL) {
 		gtk_list_store_append(list_store, &iter);
 		gtk_list_store_set(list_store, &iter,
@@ -1035,13 +1035,12 @@ void main_selection_modules_lists_changed(GtkTreeSelection *
 		g_free((gchar *) tmp->data);
 		tmp = g_list_next(tmp);
 	}
-	g_list_free(tmp);
+	g_list_free(tmp2);
 
 	if (!GTK_TOGGLE_BUTTON(search1.rb_current_module)->active)
 		main_add_modlist_to_label();
 	g_free(name);
 	g_free(modules);
-
 }
 
 

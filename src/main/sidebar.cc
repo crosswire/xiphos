@@ -1077,7 +1077,7 @@ void main_load_module_tree(GtkWidget * tree)
 			   text, commentary, map, image,
 			   devotional, dictionary, book,
 			   NULL, NULL,
-			   language_add_folders);
+			   language_add_folders, FALSE);
 
 	// fast-n-loose w/known string values to avoid pointless strcmp costs.
 	// TEXT_MODS => 'B' ("Biblical Texts")

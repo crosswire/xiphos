@@ -875,23 +875,20 @@ static void _modules_lists_changed(GtkTreeSelection *
 {
 	gchar *mod = NULL;
 	GtkTreeIter selected;
-
 	GtkTreeModel *model = gtk_tree_view_get_model(GTK_TREE_VIEW(tree_widget));
 
 	if (!gtk_tree_selection_get_selected(selection, NULL, &selected))
 		return;
 	if (gtk_tree_model_iter_has_child(model, &selected)) {
-
-		if (module_selected) g_free(module_selected);
+		g_free(module_selected);
 		module_selected = NULL;
 		return;
 	}
+
 	gtk_tree_model_get(model, &selected, 0, &mod, -1);
 	if (mod) {
-
-		if (module_selected) g_free(module_selected);
-		module_selected = g_strdup(mod);
-		g_free(mod);
+		g_free(module_selected);
+		module_selected = mod;
 	}
 
 }
@@ -1195,12 +1192,8 @@ void _setup_treeview2(GtkWidget * treeview)
 	gtk_tree_view_column_set_sort_column_id(column, 0);
 	gui_load_module_tree(treeview, FALSE);
 
-	selection =
-	   G_OBJECT(gtk_tree_view_get_selection
-	   (GTK_TREE_VIEW(treeview)));
-	   g_signal_connect(selection, "changed",
-	   G_CALLBACK(_modules_lists_changed), treeview);
-
+	selection = G_OBJECT(gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview)));
+	g_signal_connect(selection, "changed", G_CALLBACK(_modules_lists_changed), treeview);
 }
 
 
