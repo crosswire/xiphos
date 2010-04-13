@@ -703,8 +703,8 @@ void main_delete_module(GtkTreeView *treeview)
 	if (gui_yes_no_dialog(str, (char *)GTK_STOCK_DIALOG_WARNING)) {
 		gtk_list_store_remove(list_store, &selected);
 
-		mods = main_get_current_list(treeview);
-		mod_list = main_get_modlist_string(mods);
+		mods = get_current_list(treeview);
+		mod_list = get_modlist_string(mods);
 
 		selection = gtk_tree_view_get_selection
 		    (GTK_TREE_VIEW(search1.module_lists));
@@ -751,8 +751,8 @@ void main_add_mod_to_list(GtkWidget * tree_widget, gchar * mod_name)
 			gtk_list_store_set(list_store, &iter,
 					   0, mod_description,
 					   1, mod_name, -1);
-			mods = main_get_current_list(GTK_TREE_VIEW(search1.listview_modules));
-			mod_list = main_get_modlist_string(mods);
+			mods = get_current_list(GTK_TREE_VIEW(search1.listview_modules));
+			mod_list = get_modlist_string(mods);
 
 			if (mod_list) {
 				gtk_tree_selection_get_selected
@@ -836,8 +836,8 @@ void main_mod_selection_changed(GtkTreeSelection * selection,
 			gtk_list_store_set(list_store, &iter,
 					   0, mod_description,
 					   1, mod, -1);
-			mods = main_get_current_list(GTK_TREE_VIEW(search1.listview_modules));
-			mod_list = main_get_modlist_string(mods);
+			mods = get_current_list(GTK_TREE_VIEW(search1.listview_modules));
+			mod_list = get_modlist_string(mods);
 
 			if (mod_list) {
 				gtk_tree_selection_get_selected
@@ -1047,44 +1047,6 @@ void main_selection_modules_lists_changed(GtkTreeSelection *
 
 /******************************************************************************
  * Name
- *
- *
- * Synopsis
- *   #include "gui/search_dialog.h"
- *
- *
- *
- * Description
- *
- *
- * Return value
- *
- */
-
-gchar *main_get_modlist_string(GList * mods)
-{
-	gchar *rv;
-	GString *str = g_string_new("");
-	GList *orig_mods = mods;
-
-	while (mods != NULL) {
-		str = g_string_append(str, (gchar *) mods->data);
-		g_free(mods->data);
-		mods = g_list_next(mods);
-		if (mods != NULL)
-			str = g_string_append_c(str, ',');
-	}
-	g_list_free(orig_mods);
-
-	rv = g_strdup(str->str);
-	g_string_free(str, TRUE);
-	return rv;
-}
-
-
-
-/******************************************************************************
- * Name
  *   add_modlist_to_label
  *
  * Synopsis
@@ -1104,8 +1066,8 @@ void main_add_modlist_to_label(void)
 	GList *mods = NULL;
 	gchar *mod_list, *str;
 
-	mods = main_get_current_list(GTK_TREE_VIEW(search1.listview_modules));
-	mod_list = main_get_modlist_string(mods);
+	mods = get_current_list(GTK_TREE_VIEW(search1.listview_modules));
+	mod_list = get_modlist_string(mods);
 	if (strlen(mod_list) > 60)
 		str = g_strdup_printf("<b>%s</b>%60.60s...",
 				      Q_("Search: "), mod_list);
@@ -1130,7 +1092,7 @@ void main_comboboxentry2_changed(GtkComboBox * combobox, gpointer user_data)
 		return;
 	name = gtk_entry_get_text(GTK_ENTRY(GTK_BIN(combobox)->child));
 	mod_list = get_custom_list_from_name(name);
-	mod_list_str = main_get_modlist_string(mod_list);
+	mod_list_str = get_modlist_string(mod_list);
 	if (strlen(mod_list_str) > 60)
 		str = g_strdup_printf("<b>%s</b>%60.60s...",
 				      Q_("Search: "), mod_list_str);
@@ -1202,44 +1164,6 @@ static GList *get_current_search_mod(void)
 	    g_list_append(items, (gchar *) g_strdup(search1.search_mod));
 	return items;
 }
-
-
-/******************************************************************************
- * Name
- *   main_get_current_list
- *
- * Synopsis
- *   #include "gui/search_dialog.h"
- *
- *   GList *main_get_current_list(GtkTreeView *treeview)
- *
- * Description
- *
- *
- * Return value
- *   GList *
- */
-
-GList *main_get_current_list(GtkTreeView *treeview)
-{
-	GList *items = NULL;
-	gchar *buf;
-	GtkTreeModel *model;
-	GtkTreeIter iter;
-
-	model = gtk_tree_view_get_model(treeview);
-	if (gtk_tree_model_get_iter_first(model, &iter)) {
-		do {
-			gtk_tree_model_get(model, &iter, 1, &buf, -1);
-			items =
-			    g_list_append(items,
-					  (gchar *) g_strdup(buf));
-
-		} while (gtk_tree_model_iter_next(model, &iter));
-	}
-	return items;
-}
-
 
 
 /******************************************************************************
@@ -1501,7 +1425,7 @@ void main_do_dialog_search(void)
 				GTK_BIN(search1.combo_list)->child));
 		search_mods = get_custom_list_from_name(name);
 	} else if (GTK_TOGGLE_BUTTON(search1.rb_mod_list)->active) {
-		search_mods = main_get_current_list(GTK_TREE_VIEW(search1.listview_modules));
+		search_mods = get_current_list(GTK_TREE_VIEW(search1.listview_modules));
 	} else
 		search_mods = get_current_search_mod();
 	search_mods = g_list_first(search_mods);
