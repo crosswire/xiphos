@@ -556,7 +556,7 @@ static void add_module_to_language_folder(GtkTreeModel * model,
  *   void
  */
 
-void gui_load_module_tree(GtkWidget * tree)
+void gui_load_module_tree(GtkWidget * tree, gboolean limited)
 {
 	GtkTreeStore *store;
 	GtkTreeIter text;
@@ -582,30 +582,32 @@ void gui_load_module_tree(GtkWidget * tree)
 	gtk_tree_store_append(store, &commentary, NULL);
 	gtk_tree_store_set(store, &commentary, 0, _("Commentaries"), -1);
 
-	/*  Dictionaries folders */
-	gtk_tree_store_append(store, &dictionary, NULL);
-	gtk_tree_store_set(store, &dictionary, 0, _("Dictionaries"), -1);
+	if (!limited) {
+		/*  Dictionaries folders */
+		gtk_tree_store_append(store, &dictionary, NULL);
+		gtk_tree_store_set(store, &dictionary, 0, _("Dictionaries"), -1);
 
-	/*  Devotionals folders */
-	gtk_tree_store_append(store, &devotional, NULL);
-	gtk_tree_store_set(store, &devotional, 0, _("Daily Devotionals"), -1);
+		/*  Devotionals folders */
+		gtk_tree_store_append(store, &devotional, NULL);
+		gtk_tree_store_set(store, &devotional, 0, _("Daily Devotionals"), -1);
 
-	/*  General Books folders */
-	gtk_tree_store_append(store, &book, NULL);
-	gtk_tree_store_set(store, &book, 0, _("General Books"), -1);
+		/*  General Books folders */
+		gtk_tree_store_append(store, &book, NULL);
+		gtk_tree_store_set(store, &book, 0, _("General Books"), -1);
 
-	/*  Maps folders */
-	gtk_tree_store_append(store, &map, NULL);
-	gtk_tree_store_set(store, &map, 0, _("Maps"), -1);
+		/*  Maps folders */
+		gtk_tree_store_append(store, &map, NULL);
+		gtk_tree_store_set(store, &map, 0, _("Maps"), -1);
 
-	/*  Images folders */
-	gtk_tree_store_append(store, &image, NULL);
-	gtk_tree_store_set(store, &image, 0, _("Images"), -1);
+		/*  Images folders */
+		gtk_tree_store_append(store, &image, NULL);
+		gtk_tree_store_set(store, &image, 0, _("Images"), -1);
 
-	/*  Prayer lists folder */
-	if (settings.prayerlist) {
-		gtk_tree_store_append(store, &prayerlist, NULL);
-		gtk_tree_store_set(store, &prayerlist, 0, _("Prayer List/Journal"), -1);
+		/*  Prayer lists folder */
+		if (settings.prayerlist) {
+			gtk_tree_store_append(store, &prayerlist, NULL);
+			gtk_tree_store_set(store, &prayerlist, 0, _("Prayer List/Journal"), -1);
+		}
 	}
 
 	tmp = mod_mgr_list_local_modules(settings.path_to_mods, TRUE);
@@ -620,7 +622,7 @@ void gui_load_module_tree(GtkWidget * tree)
 	while (tmp2 != NULL) {
 		info = (MOD_MGR *) tmp2->data;
 
-		// see comment on similar code in src/main/sidebar.cc.
+		/* see comment on similar code in src/main/sidebar.cc. */
 
 		if (info->type[0] == 'B') {
 			add_module_to_language_folder(GTK_TREE_MODEL(store),
@@ -632,37 +634,39 @@ void gui_load_module_tree(GtkWidget * tree)
 						      commentary, info->language,
 						      info->name);
 		}
-		else if (info->is_maps) {
-			add_module_to_language_folder(GTK_TREE_MODEL(store),
-						      map, info->language,
-						      info->name);
-		}
-		else if (info->is_images) {
-			add_module_to_language_folder(GTK_TREE_MODEL(store),
-						      image, info->language,
-						      info->name);
-		}
-		else if (info->is_devotional) {
-			add_module_to_language_folder(GTK_TREE_MODEL(store),
-						      devotional, info->language,
-						      info->name);
-		}
-		else if (info->type[0] == 'L') {
-			add_module_to_language_folder(GTK_TREE_MODEL(store),
-						      dictionary, info->language,
-						      info->name);
-		}
-		else if (info->type[0] == 'G') {
-			gchar *gstype = main_get_mod_config_entry(info->name, "GSType");
-			if ((gstype == NULL) || strcmp(gstype, "PrayerList")) {
+		else if (!limited) {
+			if (info->is_maps) {
 				add_module_to_language_folder(GTK_TREE_MODEL(store),
-							      book, info->language,
+							      map, info->language,
 							      info->name);
 			}
-		}
-		else {
-			GS_warning(("mod `%s' unknown type `%s'",
-				    info->name, info->type));
+			else if (info->is_images) {
+			    add_module_to_language_folder(GTK_TREE_MODEL(store),
+							  image, info->language,
+							  info->name);
+			}
+			else if (info->is_devotional) {
+				add_module_to_language_folder(GTK_TREE_MODEL(store),
+							      devotional, info->language,
+							      info->name);
+			}
+			else if (info->type[0] == 'L') {
+				add_module_to_language_folder(GTK_TREE_MODEL(store),
+							      dictionary, info->language,
+							      info->name);
+			}
+			else if (info->type[0] == 'G') {
+				gchar *gstype = main_get_mod_config_entry(info->name, "GSType");
+				if ((gstype == NULL) || strcmp(gstype, "PrayerList")) {
+					add_module_to_language_folder(GTK_TREE_MODEL(store),
+								      book, info->language,
+								      info->name);
+				}
+			}
+			else {
+				GS_warning(("mod `%s' unknown type `%s'",
+					    info->name, info->type));
+			}
 		}
 
 		g_free(info->name);
@@ -676,7 +680,7 @@ void gui_load_module_tree(GtkWidget * tree)
 	g_list_free(tmp);
 
 	/* prayer list folders */
-	if (settings.prayerlist) {
+	if (!limited && settings.prayerlist) {
 		tmp = get_list(PRAYER_LIST);
 		while (tmp != NULL) {
 			add_module_to_prayerlist_folder(GTK_TREE_MODEL(store),
