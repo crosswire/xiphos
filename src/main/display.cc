@@ -932,9 +932,9 @@ GTKEntryDisp::Display(SWModule &imodule)
 	buf = g_strdup_printf(HTML_START
 			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
 			      "<font face=\"%s\" size=\"%+d\">"
-			      "<a href=\"xiphos.url?action=showModInfo&value=%s&module=%s\">"
+			      "[<a href=\"xiphos.url?action=showModInfo&value=%s&module=%s\">"
 			      "<font color=\"%s\">"
-			      "[*%s*]</font></a><br>",
+			      "*%s*</font></a>]<br>",
 			      (strongs_and_morph		// both
 			       ? CSS_BLOCK_BOTH
 			       : (strongs_or_morph		// either
