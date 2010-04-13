@@ -95,8 +95,6 @@ handle_error (GError **error)
 static
 void do_exit(EDITOR * e)
 {
-	GS_message(("do_exit"));
-
 	if (e->filename) {
 		g_free(e->filename);
 	}
@@ -108,7 +106,6 @@ void do_exit(EDITOR * e)
 	}
 	if (e->window)
 		gtk_widget_destroy(e->window);
-		//GS_message(("e->widow still exist!"));
 	g_free(e);
 }
 
@@ -466,7 +463,6 @@ save_dialog (GtkhtmlEditor *editor, EDITOR * e)
 
 		new_filename = gtk_file_chooser_get_filename (
 			GTK_FILE_CHOOSER (dialog));
-		//GS_message (("\nnew_filename: %s\n",new_filename));
 		gtkhtml_editor_set_filename (editor, new_filename);
 
 		if (e->filename)
@@ -1086,7 +1082,6 @@ gboolean editor_is_dirty(EDITOR * e)
 void editor_save_book(EDITOR * e)
 {
 	if (editor_is_dirty(e)) {
-		GS_message(("editor_is_dirty"));
 		_save_book(e);
 	}
 }
@@ -1192,7 +1187,6 @@ editor_load_note(EDITOR * e, const gchar * module_name,
 	title = g_strdup_printf("%s - %s", e->module, e->key);
 	text = main_get_raw_text((gchar *) e->module, (gchar *) e->key);
 	if (strlen(text)) {
-		//GS_message(("\n\n\neditor_load_note:\n%s\n\n\n", text));
 		gtkhtml_editor_set_text_html (GTKHTML_EDITOR(e->window),
 					      text,
 					      strlen(text));

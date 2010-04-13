@@ -75,7 +75,8 @@ void language_make_list(GList *modlist,
 			GtkTreeIter book,
 			GtkTreeIter *update,
 			GtkTreeIter *uninstalled,
-			void (*add)(GtkTreeModel *, GtkTreeIter, gchar **));
+			void (*add)(GtkTreeModel *, GtkTreeIter, gchar **),
+			gboolean limited);
 
 GList *get_current_list(GtkTreeView *treeview);
 gchar *get_modlist_string(GList * mods);

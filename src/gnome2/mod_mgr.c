@@ -1362,7 +1362,7 @@ load_module_tree(GtkTreeView * treeview,
 			   devotional, dictionary, book,
 			   ((install && !first_time_user) ? &update : NULL),
 			   ((install && !first_time_user) ? &uninstalled : NULL),
-			   language_add_folders);
+			   language_add_folders, FALSE);
 
 	tmp2 = tmp;
 	while (tmp2) {

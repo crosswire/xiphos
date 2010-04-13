@@ -346,8 +346,6 @@ GtkWidget *_create_parallel_tab(void)
 #else
 	GtkWidget *scrolled_window;
 #endif
-	gint modidx;
-
 	gtk_notebook_set_show_tabs (GTK_NOTEBOOK(widgets.notebook_bible_parallel),
                                              FALSE);
 	gtk_notebook_set_current_page (GTK_NOTEBOOK(widgets.notebook_bible_parallel),
@@ -371,9 +369,12 @@ GtkWidget *_create_parallel_tab(void)
 	gtk_box_pack_start (GTK_BOX (parallel_vbox), box_parallel_labels, FALSE, TRUE, 0);
 	gtk_container_set_border_width (GTK_CONTAINER (box_parallel_labels), 2);
 
+#if 0
 	if (settings.parallel_list) {
 		GtkWidget *plabel;
 		gchar *label;
+		gint modidx;
+
 		for (modidx = 0; settings.parallel_list[modidx]; ++modidx) {
 			plabel = gtk_label_new(NULL);
 			gtk_widget_show(plabel);
@@ -387,6 +388,7 @@ GtkWidget *_create_parallel_tab(void)
 			g_free(label);
 		}
 	}
+#endif /* 0 */
 
 #ifdef USE_GTKMOZEMBED
 	frame = gtk_frame_new(NULL);
