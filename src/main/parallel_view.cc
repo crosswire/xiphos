@@ -972,8 +972,8 @@ void main_update_parallel_page_detached(void)
 		/* just count non-null string ptrs */;
 
 	/* get the per-column percentage width. */
-	/* 2 => 50, 5 => 20, 10 => 10. */
-	fraction = 100/parallel_count;
+	/* 2 => 50, 4 => 25, 5 => 20, 10 => 10, ... */
+	fraction = (parallel_count ? (100/parallel_count) : 100);
 
 	snprintf(buf, 499, HTML_START
 		"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table align=\"left\" valign=\"top\"><tr valign=\"top\" >",

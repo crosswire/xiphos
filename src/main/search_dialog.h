@@ -28,7 +28,6 @@ extern "C" {
 
 gboolean main_export_current_adv_search (GString * str, gboolean html, gboolean with_scripture);
 void main_save_current_adv_search_as_bookmarks (void);
-void main_drag_drop_display_in_main(const char * uri);
 void main_add_mod_to_list(GtkWidget * tree_widget, gchar * mod_name);
 void main_finds_verselist_selection_changed(GtkTreeSelection * selection, GtkTreeModel * model, gboolean is_double_click);
 void main_selection_modules_lists_changed(GtkTreeSelection * selection, gpointer data);
@@ -48,6 +47,8 @@ void main_do_dialog_search(void);
 void main_open_search_dialog(void);
 void main_close_search_dialog(void);
 char *main_get_search_rendered_text(char *module_name, char *key);
+GList *main_get_current_list(GtkTreeView *treeview);
+gchar *main_get_modlist_string(GList * mods);
 
 #ifdef __cplusplus
 }

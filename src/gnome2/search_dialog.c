@@ -74,14 +74,10 @@
 SEARCH_DIALOG1 search1;
 
 static gboolean _preview_on;
-static gboolean _in_url;
 static gchar *module_selected;
 gchar *verse_selected;
 
 GtkWidget *remember_search;	/* needed to change button in search stop */
-
-extern int drag_module_type;
-
 
 /* click on treeview folder to expand or collapse it */
 static gboolean button_release_event(GtkWidget * widget,
@@ -124,8 +120,7 @@ void on_comboboxentry2_changed(GtkComboBox * combobox,
  * Synopsis
  *   #include "gui/search_dialog.h"
  *
- *   void button_clean(GtkButton * button,
- *						gpointer user_data)
+ *   void button_clean(GtkButton * button, gpointer user_data)
  *
  * Description
  *   user pressed clear button - clears search results page
@@ -143,24 +138,20 @@ void button_clean(GtkButton * button, gpointer user_data)
 #endif
 
 	GS_message(("button_clean"));
-	model =
-	    gtk_tree_view_get_model(GTK_TREE_VIEW
-				    (search1.listview_results));
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(search1.listview_results));
 	list_store = GTK_LIST_STORE(model);
 	gtk_list_store_clear(list_store);
 
-	model =
-	    gtk_tree_view_get_model(GTK_TREE_VIEW
-				    (search1.listview_verses));
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(search1.listview_verses));
 	list_store = GTK_LIST_STORE(model);
 	gtk_list_store_clear(list_store);
 
 #ifdef USE_GTKMOZEMBED
-	html_text=g_string_new(HTML_START);
+	html_text = g_string_new(HTML_START);
 	g_string_append(html_text," ");
 	g_string_append(html_text,"</html>");
-	gecko_html_open_stream(GECKO_HTML(search1.preview_html),"text/html");
-	gecko_html_write(GECKO_HTML(search1.preview_html),html_text->str,html_text->len);
+	gecko_html_open_stream(GECKO_HTML(search1.preview_html), "text/html");
+	gecko_html_write(GECKO_HTML(search1.preview_html), html_text->str, html_text->len);
 	gecko_html_close(GECKO_HTML(search1.preview_html));
 	g_string_free(html_text,TRUE);
 #else
@@ -221,8 +212,7 @@ void button_export(GtkButton * button, gpointer user_data)
  * Synopsis
  *   #include "gui/search_dialog.h"
  *
- *   void on_destroy(GtkWidget * dialog,
- *				    gpointer user_data)
+ *   void on_destroy(GtkWidget * dialog, gpointer user_data)
  *
  * Description
  *   destroy the search dialog
@@ -421,15 +411,12 @@ void new_modlist(GtkButton * button, gpointer user_data)
 	GtkTreeSelection *selection;
 	GtkTreePath *path;
 
-	selection = gtk_tree_view_get_selection
-	    (GTK_TREE_VIEW(search1.module_lists));
+	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(search1.module_lists));
 
 	model = gtk_tree_view_get_model(GTK_TREE_VIEW(search1.listview_modules));
 	list_store = GTK_LIST_STORE(model);
 
-	model2 =
-	    gtk_tree_view_get_model(GTK_TREE_VIEW
-				    (search1.module_lists));
+	model2 = gtk_tree_view_get_model(GTK_TREE_VIEW(search1.module_lists));
 	list_store2 = GTK_LIST_STORE(model2);
 
 	{
@@ -475,21 +462,20 @@ void clear_modules(GtkButton * button, gpointer user_data)
 	GtkTreeIter selected;
 	gchar *str;
 
-	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(search1.module_lists));
-	model = gtk_tree_view_get_model(GTK_TREE_VIEW(search1.listview_modules));
-	list_store = GTK_LIST_STORE(model);
-
 	str = g_strdup_printf("<span weight=\"bold\">%s</span>\n\n%s",
 			      _("Clear List?"),
 			      _("Are you sure you want to clear the module list?"));
 
 	if (gui_yes_no_dialog(str, GTK_STOCK_DIALOG_WARNING)) {
+		model = gtk_tree_view_get_model(GTK_TREE_VIEW(search1.listview_modules));
+		list_store = GTK_LIST_STORE(model);
 		gtk_list_store_clear(list_store);
 
 		model = gtk_tree_view_get_model(GTK_TREE_VIEW(search1.module_lists));
 		list_store = GTK_LIST_STORE(model);
+		selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(search1.module_lists));
 		if (gtk_tree_selection_get_selected(selection, NULL, &selected))
-		    gtk_list_store_set(list_store, &selected, 1, "", -1);
+			gtk_list_store_set(list_store, &selected, 1, "", -1);
 	}
 	g_free(str);
 }
@@ -791,34 +777,6 @@ void current_module_toggled(GtkToggleButton * togglebutton,
 	}
 }
 
-
-
-/******************************************************************************
- * Name
- *
- *
- * Synopsis
- *   #include "gui/search_dialog.h"
- *
- *
- *
- * Description
- *
- *
- * Return value
- *
- */
-
-gboolean _on_button_release_event(GtkWidget * widget,
-				  GdkEventButton * event, gpointer data)
-{
-	if (_in_url)
-		return FALSE;
-
-	if (GPOINTER_TO_INT(data))
-		_preview_on = TRUE;
-	return FALSE;
-}
 
 
 /******************************************************************************
@@ -1208,7 +1166,7 @@ void _setup_treeview(GtkWidget * treeview)
 							  0, NULL);
 	gtk_tree_view_column_set_sort_column_id(column, 0);
 	gtk_tree_view_append_column(GTK_TREE_VIEW(treeview), column);
-	gui_load_module_tree(treeview);
+	gui_load_module_tree(treeview, FALSE);
 
 	selection = G_OBJECT(gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview)));
 	g_signal_connect(selection, "changed",
@@ -1233,9 +1191,9 @@ void _setup_treeview2(GtkWidget * treeview)
 							  renderer,
 							  "text",
 							  0, NULL);
-	gtk_tree_view_column_set_sort_column_id(column, 0);
 	gtk_tree_view_append_column(GTK_TREE_VIEW(treeview), column);
-	gui_load_module_tree(treeview);
+	gtk_tree_view_column_set_sort_column_id(column, 0);
+	gui_load_module_tree(treeview, FALSE);
 
 	selection =
 	   G_OBJECT(gtk_tree_view_get_selection

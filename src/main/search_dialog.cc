@@ -72,16 +72,12 @@ static BackEnd *backendSearch = NULL;
 
 static gboolean is_running = FALSE;
 extern int search_dialog;
-static GList *get_current_list(void);
-static gchar *get_modlist_string(GList * mods);
 static GList *get_custom_list_from_name(const gchar * label);
 static void add_ranges(void);
 static void add_modlist(void);
 
 gboolean terminate_search;	// also accessed from search_dialog.c.
 gboolean search_active;		// also accessed from search_dialog.c.
-
-int drag_module_type;
 
 static GList *list_of_finds;
 static GList *list_for_bookmarking = NULL;
@@ -707,8 +703,8 @@ void main_delete_module(GtkTreeView *treeview)
 	if (gui_yes_no_dialog(str, (char *)GTK_STOCK_DIALOG_WARNING)) {
 		gtk_list_store_remove(list_store, &selected);
 
-		mods = get_current_list();
-		mod_list = get_modlist_string(mods);
+		mods = main_get_current_list(treeview);
+		mod_list = main_get_modlist_string(mods);
 
 		selection = gtk_tree_view_get_selection
 		    (GTK_TREE_VIEW(search1.module_lists));
@@ -741,15 +737,13 @@ void main_add_mod_to_list(GtkWidget * tree_widget, gchar * mod_name)
 	GList *mods = NULL;
 	GtkTreeSelection *selection_modules_lists;
 
-	model_modules_lists =
-	    gtk_tree_view_get_model(GTK_TREE_VIEW(search1.module_lists));
+	model_modules_lists = gtk_tree_view_get_model(GTK_TREE_VIEW(search1.module_lists));
 	store_modules_lists = GTK_LIST_STORE(model_modules_lists);
 
 	selection_modules_lists = gtk_tree_view_get_selection
 	    (GTK_TREE_VIEW(search1.module_lists));
 
-	model_mods =
-	    gtk_tree_view_get_model(GTK_TREE_VIEW(tree_widget));
+	model_mods = gtk_tree_view_get_model(GTK_TREE_VIEW(tree_widget));
 	list_store = GTK_LIST_STORE(model_mods);
 	mod_description = backendSearch->module_description(mod_name);
 
@@ -757,8 +751,8 @@ void main_add_mod_to_list(GtkWidget * tree_widget, gchar * mod_name)
 			gtk_list_store_set(list_store, &iter,
 					   0, mod_description,
 					   1, mod_name, -1);
-			mods = get_current_list();
-			mod_list = get_modlist_string(mods);
+			mods = main_get_current_list(GTK_TREE_VIEW(search1.listview_modules));
+			mod_list = main_get_modlist_string(mods);
 
 			if (mod_list) {
 				gtk_tree_selection_get_selected
@@ -771,13 +765,6 @@ void main_add_mod_to_list(GtkWidget * tree_widget, gchar * mod_name)
 				g_free(mod_list);
 			}
 			++search1.module_count;
-}
-
-void main_drag_drop_display_in_main(const char * uri)
-{
-#if 0
-	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),
-#endif /* 0 */
 }
 
 
@@ -849,8 +836,8 @@ void main_mod_selection_changed(GtkTreeSelection * selection,
 			gtk_list_store_set(list_store, &iter,
 					   0, mod_description,
 					   1, mod, -1);
-			mods = get_current_list();
-			mod_list = get_modlist_string(mods);
+			mods = main_get_current_list(GTK_TREE_VIEW(search1.listview_modules));
+			mod_list = main_get_modlist_string(mods);
 
 			if (mod_list) {
 				gtk_tree_selection_get_selected
@@ -958,13 +945,6 @@ void main_finds_verselist_selection_changed(GtkTreeSelection * selection,
 
 	if (verse_selected)
 		g_free(verse_selected);
-	drag_module_type = backendSearch->module_type(module);
-	if (drag_module_type == TEXT_TYPE) {
-		// now find verse spec's `:'; then SPC to end key.
-		buf = strchr(buf+1, ':');
-		buf = strchr(buf, ' ');
-		*buf = '\0';
-	}
 	const gchar *temp_key = main_url_encode(key);
 	verse_selected = g_strdup_printf("sword://%s/%s", module, temp_key);
 	if (is_double_click)
@@ -1081,20 +1061,21 @@ void main_selection_modules_lists_changed(GtkTreeSelection *
  *
  */
 
-gchar *get_modlist_string(GList * mods)
+gchar *main_get_modlist_string(GList * mods)
 {
 	gchar *rv;
-	GString *str;
-
-	str = g_string_new("");
+	GString *str = g_string_new("");
+	GList *orig_mods = mods;
 
 	while (mods != NULL) {
 		str = g_string_append(str, (gchar *) mods->data);
+		g_free(mods->data);
 		mods = g_list_next(mods);
 		if (mods != NULL)
 			str = g_string_append_c(str, ',');
 	}
-	g_list_free(mods);
+	g_list_free(orig_mods);
+
 	rv = g_strdup(str->str);
 	g_string_free(str, TRUE);
 	return rv;
@@ -1123,8 +1104,8 @@ void main_add_modlist_to_label(void)
 	GList *mods = NULL;
 	gchar *mod_list, *str;
 
-	mods = get_current_list();
-	mod_list = get_modlist_string(mods);
+	mods = main_get_current_list(GTK_TREE_VIEW(search1.listview_modules));
+	mod_list = main_get_modlist_string(mods);
 	if (strlen(mod_list) > 60)
 		str = g_strdup_printf("<b>%s</b>%60.60s...",
 				      Q_("Search: "), mod_list);
@@ -1149,7 +1130,7 @@ void main_comboboxentry2_changed(GtkComboBox * combobox, gpointer user_data)
 		return;
 	name = gtk_entry_get_text(GTK_ENTRY(GTK_BIN(combobox)->child));
 	mod_list = get_custom_list_from_name(name);
-	mod_list_str = get_modlist_string(mod_list);
+	mod_list_str = main_get_modlist_string(mod_list);
 	if (strlen(mod_list_str) > 60)
 		str = g_strdup_printf("<b>%s</b>%60.60s...",
 				      Q_("Search: "), mod_list_str);
@@ -1225,12 +1206,12 @@ static GList *get_current_search_mod(void)
 
 /******************************************************************************
  * Name
- *   get_current_list
+ *   main_get_current_list
  *
  * Synopsis
  *   #include "gui/search_dialog.h"
  *
- *   GList *get_current_list(void)
+ *   GList *main_get_current_list(GtkTreeView *treeview)
  *
  * Description
  *
@@ -1239,16 +1220,14 @@ static GList *get_current_search_mod(void)
  *   GList *
  */
 
-static GList *get_current_list(void)
+GList *main_get_current_list(GtkTreeView *treeview)
 {
 	GList *items = NULL;
 	gchar *buf;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 
-	model =
-	    gtk_tree_view_get_model(GTK_TREE_VIEW
-				    (search1.listview_modules));
+	model = gtk_tree_view_get_model(treeview);
 	if (gtk_tree_model_get_iter_first(model, &iter)) {
 		do {
 			gtk_tree_model_get(model, &iter, 1, &buf, -1);
@@ -1522,7 +1501,7 @@ void main_do_dialog_search(void)
 				GTK_BIN(search1.combo_list)->child));
 		search_mods = get_custom_list_from_name(name);
 	} else if (GTK_TOGGLE_BUTTON(search1.rb_mod_list)->active) {
-		search_mods = get_current_list();
+		search_mods = main_get_current_list(GTK_TREE_VIEW(search1.listview_modules));
 	} else
 		search_mods = get_current_search_mod();
 	search_mods = g_list_first(search_mods);
