@@ -740,7 +740,7 @@
 		      <child>
 			<widget class="GtkLabel" id="label41">
 			  <property name="visible">True</property>
-			  <property name="label" translatable="yes">Language font preferences</property>
+			  <property name="label" translatable="yes">Font preferences, per language</property>
 			  <property name="use_underline">False</property>
 			  <property name="use_markup">True</property>
 			  <property name="justify">GTK_JUSTIFY_LEFT</property>
