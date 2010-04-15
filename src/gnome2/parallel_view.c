@@ -116,7 +116,6 @@ void gui_popup_menu_parallel(void)
 	GtkWidget *module_options;
 	GtkWidget *separator;
 	GtkWidget *module_options_menu;
-	GtkWidget *picker;
 
 	menu = gtk_menu_new();
 	g_object_set_data(G_OBJECT(menu), "pmInt", menu);
@@ -142,16 +141,6 @@ void gui_popup_menu_parallel(void)
 	gtk_widget_show(separator);
 	gtk_container_add(GTK_CONTAINER(menu), separator);
 	gtk_widget_set_sensitive(separator, FALSE);
-
-	picker = gtk_menu_item_new_with_label(_("Choose Bibles"));
-#if 0
-	gtk_widget_show(picker);
-#else
-	gtk_widget_hide(picker);	/* hm, not right now */
-#endif
-	gtk_container_add(GTK_CONTAINER(menu), picker);
-	g_signal_connect(GTK_OBJECT(picker), "activate",
-			 G_CALLBACK(on_parallel_select_clicked), NULL);
 
 	if (!settings.showparatab) {
 		if (undockInt) {

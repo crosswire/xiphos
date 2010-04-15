@@ -65,8 +65,6 @@ void on_colorbutton3_color_set(GtkColorButton * colorbutton, gpointer user_data)
 void on_colorbutton4_color_set(GtkColorButton * colorbutton, gpointer user_data);
 void on_colorbutton5_color_set(GtkColorButton * colorbutton, gpointer user_data);
 
-void on_parallel_select_clicked(GtkButton * button, gpointer user_data);
-
 void on_dialog_prefs_response(GtkDialog * dialog, gint response_id, gpointer user_data);
 
 void gui_setup_preferences_dialog(void);
