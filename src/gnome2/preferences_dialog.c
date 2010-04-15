@@ -117,8 +117,6 @@ struct _preferences_check_buttons {
 	GtkWidget *show_in_dictionary;
 	GtkWidget *show_devotion;
 	GtkWidget *show_paratab;
-
-	GtkWidget *parallel_select_button;
 };
 
 typedef struct _preferences_buttons BUTTONS;
@@ -128,12 +126,9 @@ struct _preferences_buttons {
 
 typedef struct _parallel_select PARALLEL_SELECT;
 struct _parallel_select {
-	GtkWidget *dialog;
-	GtkWidget *close;
 	GtkWidget *button_clear;
 	GtkWidget *button_cut;
 	GtkWidget *button_add;
-	GtkWidget *window;
 	GtkWidget *listview;
 	GtkWidget *mod_sel_dialog;
 	GtkWidget *mod_sel_close;
@@ -1478,30 +1473,6 @@ on_combobox17_changed(GtkComboBox * combobox,
 
 /******************************************************************************
  * Name
- *   on_parallel_select_clicked
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_parallel_select_clicked(GtkButton * combobox, gpointer user_data)
- *
- * Description
- *   bring up parallel bible selector.
- *
- * Return value
- *  void
- */
-
-void
-on_parallel_select_clicked(GtkButton * button,
-			   gpointer user_data)
-{
-	gtk_widget_show(parallel_select.dialog);
-}
-
-
-/******************************************************************************
- * Name
  *   add_columns
  *
  * Synopsis
@@ -1591,7 +1562,6 @@ on_dialog_prefs_response(GtkDialog * dialog,
 	if (response_id == GTK_RESPONSE_CLOSE) {
 		xml_save_settings_doc(settings.fnconfigure);
 		gtk_widget_destroy(GTK_WIDGET(dialog));
-		gtk_widget_destroy(GTK_WIDGET(parallel_select.dialog));
 	}
 	main_update_parallel_page();
 }
@@ -1620,11 +1590,7 @@ create_model(void)
 	gtk_tree_store_set(model, &iter, 0, _("General"), -1);
 
 	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, _("Tabs and Panes"), 1,
-			   3, -1);
-
-/*	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, "Panes", 1, 3, -1);*/
+	gtk_tree_store_set(model, &child_iter, 0, _("Tabs and Panes"), 1, 3, -1);
 
 	gtk_tree_store_append(model, &child_iter, &iter);
 	gtk_tree_store_set(model, &child_iter, 0, _("Options"), 1, 4, -1);
@@ -1637,7 +1603,10 @@ create_model(void)
 	gtk_tree_store_set(model, &child_iter, 0, _("Main"), 1, 5, -1);
 
 	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, _("Special"), 1, 6, -1);
+	gtk_tree_store_set(model, &child_iter, 0, _("Parallel"), 1, 6, -1);
+
+	gtk_tree_store_append(model, &child_iter, &iter);
+	gtk_tree_store_set(model, &child_iter, 0, _("Special"), 1, 7, -1);
 
 	return GTK_TREE_MODEL(model);
 }
@@ -2166,7 +2135,6 @@ static void modules_lists_changed(GtkTreeSelection * selection,
 		g_free(module_selected);
 		module_selected = mod;
 	}
-
 }
 
 /******************************************************************************
@@ -2254,25 +2222,6 @@ static void on_mod_sel_add_clicked(GtkWidget * button, gchar * user_data)
 static void on_mod_sel_close_clicked(void)
 {
 	gtk_widget_destroy(GTK_WIDGET(parallel_select.mod_sel_dialog));
-}
-
-/******************************************************************************
- * Name
- *   ps_close
- *
- * Synopsis
- *	ps_close(GtkButton * button, gpointer user_data)
- *
- * Description
- *   handle close button (parallel select)
- *
- * Return value
- *   void
- */
-void ps_close(GtkButton * button, gpointer user_data)
-{
-	/* updates happen on the fly.  we just need to hide this. */
-	gtk_widget_hide(parallel_select.dialog);
 }
 
 /******************************************************************************
@@ -2554,21 +2503,11 @@ create_preferences_dialog(void)
 	/*
 	 * parallel select dialog: chooser and button connectivity
 	 */
-	check_button.parallel_select_button = glade_xml_get_widget(gxml, "button_parallel_select");
-	g_signal_connect(check_button.parallel_select_button, "clicked",
-			 G_CALLBACK(on_parallel_select_clicked), NULL);
-
-	parallel_select.dialog = glade_xml_get_widget(gxml, "parallel_select");
-	gtk_widget_hide(parallel_select.dialog);
-	parallel_select.close        = glade_xml_get_widget(gxml, "ps_close");
 	parallel_select.button_clear = glade_xml_get_widget(gxml, "ps_toolbutton_clear");
 	parallel_select.button_cut   = glade_xml_get_widget(gxml, "ps_toolbutton_cut");
 	parallel_select.button_add   = glade_xml_get_widget(gxml, "ps_toolbutton_add");
-	parallel_select.window       = glade_xml_get_widget(gxml, "ps_window");
 	parallel_select.listview     = glade_xml_get_widget(gxml, "ps_listview");
 
-	g_signal_connect(parallel_select.close, "clicked",
-			 G_CALLBACK(ps_close), NULL);
 	g_signal_connect(parallel_select.button_clear, "clicked",
 			 G_CALLBACK(ps_button_clear), NULL);
 	g_signal_connect(parallel_select.button_cut, "clicked",
