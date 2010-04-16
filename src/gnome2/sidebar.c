@@ -1245,7 +1245,6 @@ static gboolean paned_button_release_event(GtkWidget * widget,
 	panesize = gtk_paned_get_position(GTK_PANED(widget));
 
 	if (panesize > 15) {
-		GS_warning(("paned_sidebar = %d",panesize));
 		settings.sidebar_notebook_hight = panesize;
 		sprintf(layout, "%d", settings.sidebar_notebook_hight);
 		xml_set_value("Xiphos", "layout",
