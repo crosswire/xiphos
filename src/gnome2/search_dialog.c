@@ -262,22 +262,16 @@ void _on_destroy(GtkWidget * dialog, gpointer user_data)
 void on_button_begin_search(GtkButton * button, gpointer user_data)
 {
 	if (search_active) {
-		gchar *label = g_strdup("gtk-find");
 		terminate_search = TRUE;
-		gtk_button_set_label((GtkButton *)remember_search, label);
+		gtk_button_set_label((GtkButton *)remember_search, "gtk-find");
 		gtk_button_set_use_stock((GtkButton *)remember_search, TRUE);
-		g_free(label);
 		sync_windows();
 	} else {
-		gchar *label = g_strdup("gtk-stop");
-		gtk_button_set_label((GtkButton *)remember_search, label);
+		gtk_button_set_label((GtkButton *)remember_search, "gtk-stop");
 		gtk_button_set_use_stock((GtkButton *)remember_search, TRUE);
-		g_free(label);
 		main_do_dialog_search();
-		label = g_strdup("gtk-find");
-		gtk_button_set_label((GtkButton *)remember_search, label);
+		gtk_button_set_label((GtkButton *)remember_search, "gtk-find");
 		gtk_button_set_use_stock((GtkButton *)remember_search, TRUE);
-		g_free(label);
 	}
 }
 
