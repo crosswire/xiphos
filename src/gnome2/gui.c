@@ -103,10 +103,10 @@ void gui_main(void)
 #define	GS_GCONF_SUCCESS	_("Xiphos has successfully set itself\nas the handler of sword:// and bible:// URLs.\n\nYou may wish to run the program \"gconf-editor\"\nto examine keys under /desktop/gnome/url-handlers,\nif you need to change these.")
 
 char *gconf_keys[GS_GCONF_MAX][2] = {
-    { "/desktop/gnome/url-handlers/bible/command",        "xiphos \"%s\"" },
+    { "/desktop/gnome/url-handlers/bible/command",        "xiphos-nav \"%s\"" },
     { "/desktop/gnome/url-handlers/bible/enabled",        (char *) 1 },
     { "/desktop/gnome/url-handlers/bible/needs_terminal", (char *) 0 },
-    { "/desktop/gnome/url-handlers/sword/command",        "xiphos \"%s\"" },
+    { "/desktop/gnome/url-handlers/sword/command",        "xiphos-nav \"%s\"" },
     { "/desktop/gnome/url-handlers/sword/enabled",        (char *) 1 },
     { "/desktop/gnome/url-handlers/sword/needs_terminal", (char *) 0 }
 };
@@ -131,7 +131,7 @@ void gconf_setup()
 	 */
 	if ((((str = gconf_client_get_string(client, gconf_keys[0][0],
 					    NULL)) == NULL) ||
-	     (strncmp(str, "gnomesword", 10) == 0))
+	     (strncmp(str, "xiphos ", 7) == 0))
 #ifdef DEBUG
 	    && gui_yes_no_dialog(GS_GCONF_PERMISSION, NULL)
 #endif /* DEBUG */
