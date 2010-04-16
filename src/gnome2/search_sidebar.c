@@ -65,19 +65,14 @@ static void on_search_button_clicked(GtkButton * button, gpointer user_data)
 {
 	if (search_active) {
 		terminate_search = TRUE;
-		const gchar *label;
-		label = g_strdup("gtk-find");
-		gtk_button_set_label((GtkButton *)remember_search, label);
+		gtk_button_set_label((GtkButton *)remember_search, "gtk-find");
 		gtk_button_set_use_stock((GtkButton *)remember_search, TRUE);
 		sync_windows();
 	} else {
-		const gchar *label;
-		label = g_strdup("gtk-stop");
-		gtk_button_set_label((GtkButton *)remember_search, label);
+		gtk_button_set_label((GtkButton *)remember_search, "gtk-stop");
 		gtk_button_set_use_stock((GtkButton *)remember_search, TRUE);
 		main_do_sidebar_search(user_data);
-		label = g_strdup("gtk-find");
-		gtk_button_set_label((GtkButton *)remember_search, label);
+		gtk_button_set_label((GtkButton *)remember_search, "gtk-find");
 		gtk_button_set_use_stock((GtkButton *)remember_search, TRUE);
 	}
 }
