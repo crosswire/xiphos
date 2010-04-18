@@ -57,6 +57,8 @@ extern "C" {
 #include "gui/xiphos.h"
 #include "gui/sidebar.h"
 #include "gui/utilities.h"
+#include "gui/cipher_key_dialog.h"
+#include "gui/main_menu.h"
 
 #include "main/display.hh"
 #include "main/lists.h"
@@ -68,8 +70,9 @@ extern "C" {
 #include "main/sword.h"
 #include "main/url.hh"
 #include "main/xml.h"
-
 #include "main/parallel_view.h"
+#include "main/modulecache.hh"
+
 #include "backend/sword_main.hh"
 #include "backend/gs_stringmgr.h"
 
@@ -172,9 +175,9 @@ void main_chapter_heading(char * mod_name)
  *   void
  */
 
-void main_save_note(	const gchar * module_name,
-			const gchar * key_str,
-			const gchar * note_str )
+void main_save_note(const gchar * module_name,
+		    const gchar * key_str,
+		    const gchar * note_str)
 {
 	// Massage encoded spaces ("%20") back to real spaces.
 	// This is a sick. unreliable hack that should be removed
@@ -214,7 +217,8 @@ void main_save_note(	const gchar * module_name,
  *   void
  */
 
-void main_delete_note(	const gchar * module_name, const gchar * key_str)
+void main_delete_note(const gchar * module_name,
+		      const gchar * key_str)
 {
 	backend->set_module_key(module_name, key_str);
 	GS_message(("note module %s\nnote key %s\n",
@@ -244,7 +248,7 @@ void main_delete_note(	const gchar * module_name, const gchar * key_str)
  *   void
  */
 
-void main_set_module_unlocked(char * mod_name, char * key)
+void main_set_module_unlocked(const char * mod_name, char * key)
 {
 	SWMgr *mgr = backend->get_mgr();
 	mgr->setCipherKey(mod_name, key);
@@ -267,9 +271,9 @@ void main_set_module_unlocked(char * mod_name, char * key)
  *   void
  */
 
-void main_save_module_key(char * mod_name, char * key)
+void main_save_module_key(const char * mod_name, char * key)
 {
-	backend->save_module_key(mod_name, key);
+	backend->save_module_key((char *) mod_name, key);
 }
 
 
@@ -755,6 +759,8 @@ void main_dictionary_entry_changed(char * mod_name)
 	xml_set_value("Xiphos", "keys", "dictionary", key);
 	settings.dictkey = xml_get_value("keys", "dictionary");
 
+	main_check_unlock(mod_name, TRUE);
+
 	backend->set_module_key(mod_name, key);
 	backend->display_mod->Display();
 
@@ -813,6 +819,8 @@ GtkWidget *main_dictionary_drop_down_new(char * mod_name, char * old_key)
 
 	xml_set_value("Xiphos", "keys", "dictionary", key);
 	settings.dictkey = xml_get_value("keys", "dictionary");
+
+	main_check_unlock(mod_name, TRUE);
 
 	backend->set_module_key(mod_name, key);
 	backend->display_mod->Display();
@@ -882,12 +890,13 @@ void main_dictionary_button_clicked(gint direction)
 	g_free(key);
 }
 
-void main_display_book(const char * mod_name, const char * key)     //, unsigned long offset)
+void main_display_book(const char * mod_name,
+		       const char * key)
 {
 	if (!settings.havebook || !mod_name)
 		return;
 
-	if (key == NULL)  // && offset == -1)
+	if (key == NULL)
 		key = "0";
 
 	GS_message(("main_display_book\nmod_name: %s\nkey: %s", mod_name, key));
@@ -921,6 +930,8 @@ void main_display_book(const char * mod_name, const char * key)     //, unsigned
 		backend->set_treekey(settings.book_offset);
 	}
 
+	main_check_unlock(mod_name, TRUE);
+
 	backend->display_mod->Display();
 	main_setup_navbar_book(settings.book_mod, settings.book_offset);
 	//if (settings.browsing)
@@ -937,7 +948,8 @@ void main_display_book(const char * mod_name, const char * key)     //, unsigned
 				      settings.showdicts);
 }
 
-void main_display_commentary(const char * mod_name, const char * key)
+void main_display_commentary(const char * mod_name,
+			     const char * key)
 {
 	if (!settings.havecomm || !settings.comm_showing)
 		return;
@@ -977,6 +989,8 @@ void main_display_commentary(const char * mod_name, const char * key)
 		if (companion) g_free(companion);
 	}
 
+	main_check_unlock(mod_name, TRUE);
+
 	backend->set_module_key(mod_name, key);
 	backend->display_mod->Display();
 
@@ -994,7 +1008,8 @@ void main_display_commentary(const char * mod_name, const char * key)
 				      settings.showdicts);
 }
 
-void main_display_dictionary(const char * mod_name, const char * key)
+void main_display_dictionary(const char * mod_name,
+			     const char * key)
 {
 	const gchar *old_key;
 
@@ -1064,7 +1079,8 @@ void main_display_dictionary(const char * mod_name, const char * key)
 }
 
 
-void main_display_bible(const char * mod_name, const char * key)
+void main_display_bible(const char * mod_name,
+			const char * key)
 {
 	gchar *file = NULL;
 	gchar *style = NULL;
@@ -1139,6 +1155,8 @@ void main_display_bible(const char * mod_name, const char * key)
 		settings.versestyle = FALSE;
 	g_free(style);
 	g_free(file);
+
+	main_check_unlock(mod_name, TRUE);
 
 	if (backend->module_has_testament(mod_name,
 				backend->get_key_testament(key))) {
@@ -1455,7 +1473,46 @@ int main_is_mod_rtol(const char * module_name)
 
 int main_has_cipher_tag(char *mod_name)
 {
-	return (backend->get_config_entry(mod_name, (char *)"CipherKey") != NULL);
+	gchar *cipherkey = backend->get_config_entry(mod_name, (char *)"CipherKey");
+	int retval = (cipherkey != NULL);
+	g_free(cipherkey);
+	return retval;
+}
+
+
+/******************************************************************************
+ * Name
+ *  main_check_unlock
+ *
+ * Synopsis
+ *   #include "main/.h"
+ *
+ *   int main_check_unlock(const char *mod_name)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   int
+ */
+
+void main_check_unlock(const char *mod_name, gboolean conditional)
+{
+	gchar *cipher_old, *cipher_key;
+
+	cipher_old = main_get_mod_config_entry(mod_name, "CipherKey");
+
+	/* if forced by the unlock dialog, or it's present but empty... */
+	if (!conditional ||					
+	    ((cipher_old != NULL) && (*cipher_old == '\0'))) {
+		cipher_key = gui_add_cipher_key(mod_name, cipher_old);
+		if (cipher_key) {
+			ModuleCacheErase(mod_name);
+			redisplay_to_realign();
+			g_free(cipher_key);
+		}
+	}
+	g_free(cipher_old);
 }
 
 

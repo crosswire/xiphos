@@ -1,3 +1,8 @@
+2010-04-17  karl <charcoal@users.sf.net>
+
+	* add auto-unlock offer on locked module with no key.
+	* revamp a bunch of code consequent to this.
+
 2010-04-12  karl <charcoal@users.sf.net>
 
 	* feat.req #2928849 support arbitrary # of parallel texts.

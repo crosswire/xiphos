@@ -356,6 +356,8 @@ void main_create_pixbufs(void)
 }
 
 
+#ifdef ALLOW_BIBLE_NAVIGATION_FROM_SIDEBAR_TREE
+
 /******************************************************************************
  * Name
  *  main_add_verses_to_chapter
@@ -372,7 +374,6 @@ void main_create_pixbufs(void)
  * Return value
  *   void
  */
-#if 0
 static void add_verses_to_chapter(GtkTreeModel * model,
 				  GtkTreeIter iter, const gchar * key)
 {
@@ -417,7 +418,6 @@ static void add_verses_to_chapter(GtkTreeModel * model,
 	}
 	g_strfreev(work_buf);
 }
-
 
 
 /******************************************************************************
@@ -558,7 +558,7 @@ static void add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
 		}
 	}
 }
-#endif
+#endif /* ALLOW_BIBLE_NAVIGATION_FROM_SIDEBAR_TREE */
 
 #ifdef USE_TREEVIEW_PATH
 gboolean main_expand_treeview_to_path (GtkTreeModel *model, GtkTreeIter iter)
@@ -632,9 +632,10 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 			   &mod, 4, &key, -1);
 	if (!cap)
 		return;
+
 	if (!g_utf8_collate(cap, _("Parallel View"))) {
 		if (settings.dockedInt) {
-			gtk_notebook_set_current_page (GTK_NOTEBOOK
+			gtk_notebook_set_current_page(GTK_NOTEBOOK
 					      (widgets.
 					       notebook_bible_parallel),
 					      1);
@@ -649,7 +650,6 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 				GTK_NOTEBOOK (widgets.notebook_main),
 				widgets.parallel_tab));
 		}
-
 	}
 
 	if (!g_utf8_collate(cap, _("Standard View"))) {
@@ -695,7 +695,9 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 					       notebook_bible_parallel),
 					      0);
 		// MainWindowModule is set in main_bible_display(), not here.
-		/*if (!gtk_tree_model_iter_has_child
+
+#ifdef ALLOW_BIBLE_NAVIGATION_FROM_SIDEBAR_TREE
+		if (!gtk_tree_model_iter_has_child
 		    (GTK_TREE_MODEL(model), &selected)
 		    && !key)
 			add_books_to_bible(model, selected, mod);
@@ -707,7 +709,7 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 		    (GTK_TREE_MODEL(model), &selected)
 		    && strstr(key, "chapter:"))
 			add_verses_to_chapter(model, selected, key);
-		*/
+#endif
 
 		if (!GTK_CHECK_MENU_ITEM(widgets.viewtexts_item)->active) {
 			GTK_CHECK_MENU_ITEM(widgets.viewtexts_item)->active = 1;
@@ -719,8 +721,8 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 			main_url_handler(key, TRUE);
 		else
 			main_display_bible(mod, settings.currentverse);
-
 		break;
+
 	case COMMENTARY_TYPE:
 	case PERCOM_TYPE:
 		gtk_notebook_set_current_page(GTK_NOTEBOOK
@@ -734,18 +736,18 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 			on_show_commentary_activate
 			    (GTK_MENU_ITEM(widgets.viewcomms_item), NULL);
 		}
-
 		main_display_commentary(mod, settings.currentverse);
 		break;
+
 	case DICTIONARY_TYPE:
 		if (!GTK_CHECK_MENU_ITEM(widgets.viewdicts_item)->active) {
 			GTK_CHECK_MENU_ITEM(widgets.viewdicts_item)->active = 1;
 			on_show_dictionary_lexicon_activate
 			    (GTK_MENU_ITEM(widgets.viewcomms_item), NULL);
 		}
-
 		main_display_dictionary(mod, settings.dictkey);
 		break;
+
 	case BOOK_TYPE:
 	case PRAYERLIST_TYPE:
 		GS_message(("key %s", (key ? key : "-null-")));
@@ -759,16 +761,12 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 		if (!gtk_tree_model_iter_has_child
 		    (GTK_TREE_MODEL(model), &selected)
 		    && !key) {
-			add_children_to_tree(model,
-					     selected,
-					     mod,
-					     0);
+			add_children_to_tree(model, selected, mod, 0);
 		}
 		if (!gtk_tree_model_iter_has_child
 		    (GTK_TREE_MODEL(model), &selected)
 		    && backend->treekey_has_children(key ? atoi(key) : 0)) {
-			add_children_to_tree(model,
-					     selected, mod, atol(key));
+			add_children_to_tree(model, selected, mod, atol(key));
 		}
 
 #ifdef USE_TREEVIEW_PATH
@@ -794,14 +792,9 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 		main_setup_navbar_book(mod, (key ? atoi(key) : 0));
 		break;
 	}
-	if (cap)
-		g_free(cap);
-	if (mod)
-		g_free(mod);
-	if (key)
-		g_free(key);
-
-
+	g_free(cap);
+	g_free(mod);
+	g_free(key);
 }
 
 

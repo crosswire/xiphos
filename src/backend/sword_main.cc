@@ -258,9 +258,8 @@ int BackEnd::has_global_option(char * module_name, char * option)
 {
 	SWModule *mod;
 	ModMap::iterator it;
-	//-- iterate through the modules until we find modName
+
 	it = main_mgr->Modules.find(module_name);
-	//-- if we find the module
 	if (it != main_mgr->Modules.end()) {
 		mod = (*it).second;
 		return mod->getConfig().has("GlobalOptionFilter", option);
@@ -274,12 +273,10 @@ char *BackEnd::get_config_entry(char * module_name, char * entry)
 		return NULL;
 	SWModule *mod;
 	ModMap::iterator it;
-	//-- iterate through the modules until we find modName
+
 	it = main_mgr->Modules.find(module_name);
-	//-- if we find the module
 	if (it != main_mgr->Modules.end()) {
 		mod = (*it).second;
-		//GS_message(("get_config_entry: %s",mod->getConfigEntry(entry)));
 		return g_strdup((char *) mod->getConfigEntry(entry));
 	} else
 		return NULL;
@@ -304,9 +301,8 @@ char *BackEnd::get_render_text(const char *module_name, const char *key)
 {
 	SWModule *mod;
 	ModMap::iterator it;
-	//-- iterate through the modules until we find modName
+
 	it = main_mgr->Modules.find(module_name);
-	//-- if we find the module
 	if (it != main_mgr->Modules.end()) {
 		mod = (*it).second;
 		mod->setKey(key);
@@ -319,9 +315,8 @@ char *BackEnd::get_raw_text(const char *module_name, const char *key)
 {
 	SWModule *mod;
 	ModMap::iterator it;
-	//-- iterate through the modules until we find modName
+
 	it = main_mgr->Modules.find(module_name);
-	//-- if we find the module
 	if (it != main_mgr->Modules.end()) {
 		mod = (*it).second;
 		mod->setKey(key);
@@ -334,9 +329,8 @@ char *BackEnd::render_this_text(const char * module_name, const char * text)
 {
 	SWModule *mod;
 	ModMap::iterator it;
-	//-- iterate through the modules until we find modName
+
 	it = main_mgr->Modules.find(module_name);
-	//-- if we find the module
 	if (it != main_mgr->Modules.end()) {
 		mod = (*it).second;
 		return strdup((char *) mod->RenderText(text));
@@ -348,9 +342,8 @@ char *BackEnd::get_strip_text_from_string(const char * module_name, const char *
 {
 	SWModule *mod;
 	ModMap::iterator it;
-	//-- iterate through the modules until we find modName
+
 	it = main_mgr->Modules.find(module_name);
-	//-- if we find the module
 	if (it != main_mgr->Modules.end()) {
 		mod = (*it).second;
 		return strdup((char *) mod->StripText(string));
@@ -361,9 +354,8 @@ char *BackEnd::get_strip_text(const char *module_name, const char *key)
 {
 	SWModule *mod;
 	ModMap::iterator it;
-	//-- iterate through the modules until we find modName
+
 	it = main_mgr->Modules.find(module_name);
-	//-- if we find the module
 	if (it != main_mgr->Modules.end()) {
 		mod = (*it).second;
 		mod->setKey(key);
@@ -517,9 +509,8 @@ int BackEnd::module_type(const char *mod_name)
 	ModMap::iterator it;
 	if ((!mod_name) || (strlen(mod_name) < 2))
 		return -1;
-	//-- iterate through the modules until we find modName
+
 	it = main_mgr->Modules.find(mod_name);
-	//-- if we find the module
 	if (it != main_mgr->Modules.end()) {
 
 		if (!strcmp((*it).second->Type(), TEXT_MODS)) {
@@ -552,9 +543,8 @@ char *BackEnd::module_description(char *mod_name)
 
 	if ((!mod_name) || (strlen(mod_name) < 2))
 		return NULL;
-	//-- iterate through the modules until we find modName
+
 	it = main_mgr->Modules.find(mod_name);
-	//-- if we find the module
 	if (it != main_mgr->Modules.end()) {
 		return (*it).second->Description();
 	}
@@ -689,7 +679,6 @@ int BackEnd::set_module_key(const char *module_name, const char *key)
 	display_mod = main_mgr->Modules[module_name];
 
 	if (display_mod) {
-		GS_message((f_message,878,"key",key));
 		display_mod->setKey(key);
 		return 1;
 	}
@@ -758,9 +747,8 @@ unsigned long BackEnd::get_treekey_offset_from_key(const char * module_name, con
         SWModule *mod;
 	ModMap::iterator it;
 	unsigned long retval = 0;
-	//-- iterate through the modules until we find modName
+
 	it = main_mgr->Modules.find(module_name);
-	//-- if we find the module
 	if (it != main_mgr->Modules.end()) {
 		mod = (*it).second;
 		TreeKeyIdx *tree_key_idx = (TreeKeyIdx *) mod->CreateKey();
@@ -816,7 +804,6 @@ char *BackEnd::treekey_get_local_name(unsigned long offset)
 {
         if (tree_key) {
                 tree_key->setOffset(offset);
-                //-- returned value must be freed by calling function
                 return strdup((char *) tree_key->getLocalName());
         }
         return NULL;
