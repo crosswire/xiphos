@@ -14,8 +14,18 @@ preproc.strict_quotes=0
 import waffles.misc
 import waffles.gnome as gnome
 
+bzrrevno = '$CurRevno$'
+bzrrevid = '$CurRevid$'
 
-VERSION='3.1.3'
+VERSION='3.1.3dev'
+
+if VERSION.find('dev') != -1 and len(bzrrevno.split()) > 1:
+        VERSION = '+'.join((VERSION,
+                            'bzr' + bzrrevno.split()[1]))
+        if bzrrevid.split()[1].find('svn') != -1:
+                VERSION = '+'.join((VERSION,
+                                    'svn' + bzrrevid.split()[1].split(':')[-1]))
+
 APPNAME='xiphos'
 PACKAGE='xiphos'
 srcdir = '.'
