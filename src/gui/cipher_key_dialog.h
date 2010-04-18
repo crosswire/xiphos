@@ -26,7 +26,7 @@
 extern "C" {
 #endif
 
-gchar * gui_add_cipher_key(gchar *mod_name, gchar *cipher_old);
+gchar * gui_add_cipher_key(const char *mod_name, gchar *cipher_old);
 
 #ifdef __cplusplus
 }
