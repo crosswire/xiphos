@@ -1266,13 +1266,13 @@ void main_display_devotional(void)
 
 
 	text = backend->get_render_text(settings.devotionalmod, buf);
-//	g_message("modname: %s\nloctime: %s\ntext: %s",settings.devotionalmod, buf, text);
+	
 	if (text) {
 		main_entry_display(settings.show_previewer_in_sidebar
 				     ? sidebar.html_viewer_widget
 				     : widgets.html_previewer_text,
 			      settings.devotionalmod, text, buf, TRUE);
-		free(text);
+		g_free(text);
 	}
 }
 
@@ -1480,6 +1480,9 @@ int main_has_cipher_tag(char *mod_name)
 }
 
 
+#define	CIPHER_INTRO	\
+_("<b>Locked Module.</b>\n\n<u>You are opening a module which requires a <i>key</i>.</u>\n\nThe module is locked, meaning that the content is encrypted by its publisher, and you must enter its key in order for the content to become useful.  This key should have been received by you on the web page which confirmed your purchase, or perhaps sent via email after purchase.\n\nPlease enter the key in the dialog. ")
+
 /******************************************************************************
  * Name
  *  main_check_unlock
@@ -1505,6 +1508,21 @@ void main_check_unlock(const char *mod_name, gboolean conditional)
 	/* if forced by the unlock dialog, or it's present but empty... */
 	if (!conditional ||					
 	    ((cipher_old != NULL) && (*cipher_old == '\0'))) {
+
+		if (conditional) {
+			GtkWidget *dialog;
+			dialog = gtk_message_dialog_new_with_markup
+			    (NULL,	/* no need for a parent window */
+			     GTK_DIALOG_DESTROY_WITH_PARENT,
+			     GTK_MESSAGE_INFO,
+			     GTK_BUTTONS_OK,
+			     CIPHER_INTRO);
+			g_signal_connect_swapped (dialog, "response",
+						  G_CALLBACK (gtk_widget_destroy),
+						  dialog);
+			gtk_widget_show(dialog);
+		}
+
 		cipher_key = gui_add_cipher_key(mod_name, cipher_old);
 		if (cipher_key) {
 			ModuleCacheErase(mod_name);
