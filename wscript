@@ -270,7 +270,6 @@ def configure(conf):
         conf.check_tool('dbus', tooldir=_tooldir)
         conf.check_tool('glib2')
 
-
     ### App info, paths
     define = conf.define
     sub = Utils.subst_vars
@@ -438,6 +437,14 @@ def build(bld):
             bld.add_subdirs('src/geckowin')
         else:
             bld.add_subdirs('src/gecko')
+
+    if env['HAVE_DBUS']:
+        import shutil
+        bld.add_subdirs('src/examples')
+        # this seems bad, but I don't know how to do it otherwise
+        shutil.copy('src/gnome2/ipc-interface.xml', 'src/examples')
+        shutil.copy('src/gnome2/marshal.list', 'src/examples')
+
 
     bld.install_files('${PACKAGE_DOC_DIR}', """
         README
