@@ -578,7 +578,7 @@ on_save_session_activate(GtkMenuItem * menuitem, gpointer user_data)
  * Return value
  *   void
  */
-static void
+void
 redisplay_to_realign()
 {
 	static int realign_busy = FALSE;

@@ -1056,23 +1056,8 @@ G_MODULE_EXPORT void on_respect_font_faces_activate (GtkCheckMenuItem * menuitem
 
 G_MODULE_EXPORT void on_unlock_this_module_activate (GtkMenuItem * menuitem, gpointer user_data)
 {
-	gchar *cipher_key;
-	gchar *cipher_old;
-    	gchar *key = NULL;
-
     	if (is_dialog) return;
-
-	cipher_old = main_get_mod_config_entry (menu_mod_name, "CipherKey");
-	cipher_key = gui_add_cipher_key (menu_mod_name, cipher_old);
-	if (cipher_key) {
-	    	if ((key = _get_key(menu_mod_name))) {
-			main_display_bible (menu_mod_name, key);
-			g_free (key);
-		}
-		g_free (cipher_key);
-	}
-	if (cipher_old)
-		g_free (cipher_old);
+	main_check_unlock(menu_mod_name, FALSE);
 }
 
 
@@ -1713,7 +1698,7 @@ static void _lookup_selection(GtkMenuItem *menuitem,
  */
 
 static
-GtkWidget * _create_popup_menu ( const gchar * mod_name, DIALOG_DATA * d)
+GtkWidget * _create_popup_menu (const gchar * mod_name, DIALOG_DATA * d)
 {
 	gchar *glade_file;
 	GladeXML *gxml;
@@ -1774,7 +1759,8 @@ GtkWidget * _create_popup_menu ( const gchar * mod_name, DIALOG_DATA * d)
     		gui_add_mods_2_gtk_menu (_get_type_mod_list (), open_sub,
 				(GCallback) on_view_mod_activate);
 
-	    	if (main_has_cipher_tag((gchar*) mod_name)) /* only unlock from main window */
+		/* unlock from main window only */
+	    	if (main_has_cipher_tag((gchar*) mod_name))
 			gtk_widget_show(unlock);
 	}
 
