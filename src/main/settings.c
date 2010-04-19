@@ -749,6 +749,13 @@ void load_settings_structure(void)
 		settings.versehighlight = 0;
 	}
 
+	if ((buf = xml_get_value("misc", "annotatehighlight")))
+		settings.annotate_highlight = atoi(buf);
+	else {
+		xml_add_new_item_to_section("misc", "annotatehighlight", "1");
+		settings.annotate_highlight = 1;
+	}
+
 	if ((buf = xml_get_value("misc", "chapter-scroll"))) {
 		settings.chapter_scroll = atoi(buf);
 	} else {

@@ -1642,12 +1642,16 @@ GTKChapDisp::Display(SWModule &imodule)
 			cVerse.InvalidateHeader();
 
 		// special contrasty highlighting
-		if (((e = marked_cache_check(key->Verse()))) ||
-		    ((key->Verse() == curVerse) && settings.versehighlight)) {
+		if (((e = marked_cache_check(key->Verse())) &&
+		     settings.annotate_highlight) ||
+		    ((key->Verse() == curVerse) &&
+		     settings.versehighlight)) {
 			buf = g_strdup_printf(
 			    "<table bgcolor=\"%s\"><tr><td>"
 			    "<font face=\"%s\" size=\"%+d\">",
-			    (e ? settings.highlight_fg : settings.highlight_bg),
+			    ((settings.annotate_highlight && e)
+			     ? settings.highlight_fg
+			     : settings.highlight_bg),
 			    ((mf->old_font) ? mf->old_font : ""),
 			    ((mf->old_font_size)
 			     ? atoi(mf->old_font_size) + settings.base_font_size
@@ -1664,8 +1668,11 @@ GTKChapDisp::Display(SWModule &imodule)
 			key->Verse(),
 			(char*)key->getText(),
 			settings.verse_num_font_size + settings.base_font_size,
-			(((settings.versehighlight && (key->Verse() == curVerse)) || e)
-			 ? (e ? settings.highlight_bg : settings.highlight_fg)
+			(((settings.versehighlight && (key->Verse() == curVerse)) ||
+			  (e && settings.annotate_highlight))
+			 ? ((e && settings.annotate_highlight)
+			    ? settings.highlight_bg
+			    : settings.highlight_fg)
 			 : settings.bible_verse_num_color),
 			num);
 		g_free(num);
@@ -1676,8 +1683,8 @@ GTKChapDisp::Display(SWModule &imodule)
 		if (e) {
 			buf = g_strdup_printf("<span class=\"word\">"
 					      "<a href=\"xiphos.url?action=showUserNote&"
-					      "module=%s&passage=%s&value=%s\"><small><sup>*u</sup>"
-					      "</small></a></span> ",
+					      "module=%s&passage=%s&value=%s\"><small>"
+					      "<sup>*u</sup></small></a></span> ",
 					      settings.MainWindowModule,
 			                      (char*)key->getShortText(),
 					      e->annotation->str);
@@ -1685,10 +1692,13 @@ GTKChapDisp::Display(SWModule &imodule)
 			g_free(buf);
 		}
 
-		if ((key->Verse() == curVerse) || e) {
+		if ((key->Verse() == curVerse) || (e && settings.annotate_highlight)) {
 			buf = g_strdup_printf("<font color=\"%s\">",
-					      ((settings.versehighlight || e)
-					       ? (e ? settings.highlight_bg : settings.highlight_fg)
+					      ((settings.versehighlight ||
+						(e && settings.annotate_highlight))
+					       ? ((e && settings.annotate_highlight)
+						  ? settings.highlight_bg
+						  : settings.highlight_fg)
 					       : settings.currentverse_color));
 			swbuf.append(buf);
 			g_free(buf);
@@ -1702,8 +1712,9 @@ GTKChapDisp::Display(SWModule &imodule)
 		// correct a highlight glitch: in poetry verses which end in
 		// a forced line break, we must remove the break to prevent
 		// the enclosing <table> from producing a double break.
-		if (settings.versehighlight &&		// doing <table> h/l.
-		    !settings.versestyle &&		// paragraph format.
+		if ((settings.versehighlight ||
+		     (e && settings.annotate_highlight)) &&	// doing <table> h/l.
+		    !settings.versestyle &&			// paragraph format.
 		    (key->Verse() == curVerse)) {
 			GString *text = g_string_new(NULL);
 
@@ -1739,13 +1750,14 @@ GTKChapDisp::Display(SWModule &imodule)
 				newparagraph = FALSE;
 			}
 			if ((key->Verse() != curVerse) ||
-			    !settings.versehighlight)
+			    (!settings.versehighlight &&
+			     (!e || !settings.annotate_highlight)))
 				swbuf.append("<br>");
 		}
 
 		// special contrasty highlighting
 		if (((key->Verse() == curVerse) && settings.versehighlight) ||
-		    e)
+		    (e && settings.annotate_highlight))
 			swbuf.append("</font></td></tr></table>");
 	}
 
@@ -2065,12 +2077,15 @@ DialogChapDisp::Display(SWModule &imodule)
 			cVerse.InvalidateHeader();
 
 		// special contrasty highlighting
-		if (((e = marked_cache_check(key->Verse()))) ||
+		if (((e = marked_cache_check(key->Verse())) &&
+		     settings.annotate_highlight) ||
 		    ((key->Verse() == curVerse) && settings.versehighlight)) {
 			buf = g_strdup_printf(
 			    "<table bgcolor=\"%s\"><tr><td>"
 			    "<font face=\"%s\" size=\"%+d\">",
-			    (e ? settings.highlight_fg : settings.highlight_bg),
+			    ((settings.annotate_highlight && e)
+			     ? settings.highlight_fg
+			     : settings.highlight_bg),
 			    ((mf->old_font) ? mf->old_font : ""),
 			    ((mf->old_font_size)
 			     ? atoi(mf->old_font_size) + settings.base_font_size
@@ -2087,8 +2102,11 @@ DialogChapDisp::Display(SWModule &imodule)
 			key->Verse(),
 			(char*)key->getText(),
 			settings.verse_num_font_size + settings.base_font_size,
-			(((settings.versehighlight && (key->Verse() == curVerse)) || e)
-			 ? (e ? settings.highlight_bg : settings.highlight_fg)
+			(((settings.versehighlight && (key->Verse() == curVerse)) ||
+			  (e && settings.annotate_highlight))
+			 ? ((e && settings.annotate_highlight)
+			    ? settings.highlight_bg
+			    : settings.highlight_fg)
 			 : settings.bible_verse_num_color),
 			num);
 		g_free(num);
@@ -2099,18 +2117,22 @@ DialogChapDisp::Display(SWModule &imodule)
 		if (e) {
 			buf = g_strdup_printf("<span class=\"word\">"
 					      "<a href=\"xiphos.url?action=showUserNote&"
-					      "module=%s&value=%s\"><small><sup>*u</sup>"
-					      "</small></a></span> ",
-					      settings.MainWindowModule,
+					      "module=%s&passage=%s&value=%s\">"
+					      "<small><sup>*u</sup></small></a></span> ",
+/*xxx*/					      settings.MainWindowModule,
+			                      (char*)key->getShortText(),
 					      e->annotation->str);
 			swbuf.append(buf);
 			g_free(buf);
 		}
 
-		if ((key->Verse() == curVerse) || e) {
+		if ((key->Verse() == curVerse) || (e && settings.annotate_highlight)) {
 			buf = g_strdup_printf("<font color=\"%s\">",
-					      ((settings.versehighlight || e)
-					       ? (e ? settings.highlight_bg : settings.highlight_fg)
+					      ((settings.versehighlight ||
+						(e && settings.annotate_highlight))
+					       ? ((e && settings.annotate_highlight)
+						  ? settings.highlight_bg
+						  : settings.highlight_fg)
 					       : settings.currentverse_color));
 			swbuf.append(buf);
 			g_free(buf);
@@ -2122,8 +2144,9 @@ DialogChapDisp::Display(SWModule &imodule)
 		}
 
 		// same forced line break glitch in highlighted current verse.
-		if (settings.versehighlight &&		// doing <table> h/l.
-		    !versestyle &&			// paragraph format.
+		if ((settings.versehighlight ||
+		     (e && settings.annotate_highlight)) &&	// doing <table> h/l.
+		    !versestyle &&				// paragraph format.
 		    (key->Verse() == curVerse)) {
 			GString *text = g_string_new(NULL);
 
@@ -2159,13 +2182,14 @@ DialogChapDisp::Display(SWModule &imodule)
 				newparagraph = FALSE;
 			}
 			if ((key->Verse() != curVerse) ||
-			    !settings.versehighlight)
+			    (!settings.versehighlight &&
+			     (!e || !settings.annotate_highlight)))
 				swbuf.append("<br>");
 		}
 
 		// special contrasty highlighting
 		if (((key->Verse() == curVerse) && settings.versehighlight) ||
-		    e)
+		    (e && settings.annotate_highlight))
 			swbuf.append("</font></td></tr></table>");
 	}
 

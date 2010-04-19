@@ -1224,7 +1224,7 @@
 		      <child>
 			<widget class="GtkCheckButton" id="checkbutton_imageresize">
 			  <property name="visible">True</property>
-			  <property name="tooltip" translatable="yes">Automatically resize commentary, book, and dictionary image content to fit subwindow</property>
+			  <property name="tooltip" translatable="yes">Automatically resize image content to fit the pane</property>
 			  <property name="can_focus">True</property>
 			  <property name="label" translatable="yes">Resize images</property>
 			  <property name="use_underline">True</property>
@@ -1258,6 +1258,29 @@
 			  <property name="draw_indicator">True</property>
 			  <accessibility>
 			    <atkproperty name="AtkObject::accessible_name" translatable="yes">Highlight current verse check box</atkproperty>
+			  </accessibility>
+			</widget>
+			<packing>
+			  <property name="padding">0</property>
+			  <property name="expand">False</property>
+			  <property name="fill">False</property>
+			</packing>
+		      </child>
+
+		      <child>
+			<widget class="GtkCheckButton" id="checkbutton_annotate_highlight">
+			  <property name="visible">True</property>
+			  <property name="tooltip" translatable="yes">Use inverted highlight on user-annotated verses</property>
+			  <property name="can_focus">True</property>
+			  <property name="label" translatable="yes">Highlight user annotations</property>
+			  <property name="use_underline">True</property>
+			  <property name="relief">GTK_RELIEF_NORMAL</property>
+			  <property name="focus_on_click">True</property>
+			  <property name="active">True</property>
+			  <property name="inconsistent">False</property>
+			  <property name="draw_indicator">True</property>
+			  <accessibility>
+			    <atkproperty name="AtkObject::accessible_name" translatable="yes">Highlight user annotations check box</atkproperty>
 			  </accessibility>
 			</widget>
 			<packing>
