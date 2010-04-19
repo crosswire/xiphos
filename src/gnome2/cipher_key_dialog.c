@@ -53,14 +53,12 @@
 
 gchar *gui_add_cipher_key(const char *mod_name, gchar *cipher_old)
 {
-	gchar *retval = NULL, *top;
-	gint test;
+	gchar *retval = NULL;
 	GS_DIALOG *info;
 
 	info = gui_new_dialog();
 	info->stock_icon = GTK_STOCK_DIALOG_WARNING;
-	top = g_strdup_printf("%s for module %s", _("Cipher Key"), mod_name);
-	info->label_top = top;
+	info->label_top = g_strdup_printf("%s for module %s", _("Cipher Key"), mod_name);
 	info->label_middle = _("for:");
 	info->label_bottom = (char*)mod_name;
 	info->text1 = g_strdup(cipher_old);
@@ -68,13 +66,13 @@ gchar *gui_add_cipher_key(const char *mod_name, gchar *cipher_old)
 	info->ok = TRUE;
 	info->cancel = TRUE;
 	/*** open dialog ***/
-	if ((test = gui_gs_dialog(info)) == GS_OK) {
+	if (gui_gs_dialog(info) == GS_OK) {
 		main_set_module_unlocked(mod_name, info->text1);
 		main_save_module_key(mod_name, info->text1);
 		main_update_module_lists();
 		retval = g_strdup(info->text1);
 	}
-	g_free(top);
+	g_free(info->label_top);
 	g_free(info->text1);
 	g_free(info);
 	return retval;
