@@ -999,7 +999,6 @@ void gui_set_named_tab_label(const gchar * key, PASSAGE_TAB_INFO *pt, gboolean u
 	str = pick_tab_label(pt);
 
 	gtk_label_set_text(pt->tab_label, str->str);
-	GS_message(("label = %s", str->str));
 	gtk_notebook_set_menu_label_text(
 		GTK_NOTEBOOK(widgets.notebook_main),
 		pt->page_widget, str->str);

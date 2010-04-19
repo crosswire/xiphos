@@ -626,7 +626,6 @@ void main_update_parallel_page(void)
 		for (modidx = 0;
 		     (mod_name = settings.parallel_list[modidx]);
 		     modidx++) {
-			GS_message(("mod_name = <%s>",mod_name));
 			mf = get_font(mod_name);
 
 			is_rtol = main_is_mod_rtol(mod_name);
@@ -736,7 +735,6 @@ void main_update_parallel_page(void)
 		for (modidx = 0;
 		     (mod_name = settings.parallel_list[modidx]);
 		     modidx++) {
-			GS_message(("mod_name = <%s>", mod_name));
 			mf = get_font(mod_name);
 
 			is_rtol = main_is_mod_rtol(mod_name);
