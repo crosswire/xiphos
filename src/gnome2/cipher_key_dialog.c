@@ -58,7 +58,7 @@ gchar *gui_add_cipher_key(const char *mod_name, gchar *cipher_old)
 
 	info = gui_new_dialog();
 	info->stock_icon = GTK_STOCK_DIALOG_WARNING;
-	info->label_top = g_strdup_printf("%s for module %s", _("Cipher Key"), mod_name);
+	info->label_top = g_strdup_printf(_("Cipher key for module %s"), mod_name);
 	info->label_middle = _("for:");
 	info->label_bottom = (char*)mod_name;
 	info->text1 = g_strdup(cipher_old);
