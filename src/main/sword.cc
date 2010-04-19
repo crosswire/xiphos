@@ -1481,7 +1481,7 @@ int main_has_cipher_tag(char *mod_name)
 
 
 #define	CIPHER_INTRO	\
-_("<b>Locked Module.</b>\n\n<u>You are opening a module which requires a <i>key</i>.</u>\n\nThe module is locked, meaning that the content is encrypted by its publisher, and you must enter its key in order for the content to become useful.  This key should have been received by you on the web page which confirmed your purchase, or perhaps sent via email after purchase.\n\nPlease enter the key in the dialog. ")
+_("<b>Locked Module.</b>\n\n<u>You are opening a module which requires a <i>key</i>.</u>\n\nThe module is locked, meaning that the content is encrypted by its publisher, and you must enter its key in order for the content to become useful.  This key should have been received by you on the web page which confirmed your purchase, or perhaps sent via email after purchase.\n\nPlease enter the key in the dialog.")
 
 /******************************************************************************
  * Name
@@ -1505,7 +1505,7 @@ void main_check_unlock(const char *mod_name, gboolean conditional)
 
 	cipher_old = main_get_mod_config_entry(mod_name, "CipherKey");
 
-	/* if forced by the unlock dialog, or it's present but empty... */
+	/* if forced by the unlock menu item, or it's present but empty... */
 	if (!conditional ||					
 	    ((cipher_old != NULL) && (*cipher_old == '\0'))) {
 
@@ -1517,9 +1517,9 @@ void main_check_unlock(const char *mod_name, gboolean conditional)
 			     GTK_MESSAGE_INFO,
 			     GTK_BUTTONS_OK,
 			     CIPHER_INTRO);
-			g_signal_connect_swapped (dialog, "response",
-						  G_CALLBACK (gtk_widget_destroy),
-						  dialog);
+			g_signal_connect_swapped(dialog, "response",
+						 G_CALLBACK(gtk_widget_destroy),
+						 dialog);
 			gtk_widget_show(dialog);
 		}
 
