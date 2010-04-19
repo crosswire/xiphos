@@ -1,3 +1,7 @@
+2010-04-19  karl <charcoal@users.sf.net>
+
+	* add prefs item: highlight user annotations, when marking *u?
+
 2010-04-17  karl <charcoal@users.sf.net>
 
 	* add auto-unlock offer on locked module with no key.

@@ -111,6 +111,7 @@ struct _settings {
 	        showversenum,			/* display verse numbers in text (default on) */
 	        readaloud,			/* pass text through (existing) "festival -server" */
 	        versehighlight,			/* do special fg/bg for current verse */
+	        annotate_highlight,		/* do special bg/fg for user annotations */
 	        parallelpage,			/* display parallel page */
 	        autosavepersonalcomments,	/* auto save personal notes */
 	        formatpercom,			/* use html to format personal notes */
