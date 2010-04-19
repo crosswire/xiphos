@@ -124,8 +124,7 @@ void main_init_previewer(void)
 	str = g_string_new(tmp_str->str);
 	buf = _("Previewer");
 	g_string_printf(tmp_str,
-			"<b>%s</b><br><font color=\"grey\">"
-			"<HR></font><br>", buf);
+			"<b>%s</b><hr>", buf);
 	str = g_string_append(str, tmp_str->str);
 
 	g_string_printf(tmp_str, " %s", "</font></body></html>");
@@ -189,13 +188,8 @@ void main_clear_viewer(void)
 			settings.link_color);
 
 	str = g_string_new(tmp_str->str);
-	buf = _("Previewer");
 	g_string_printf(tmp_str,
-			"<b>%s</b><br><font color=\"grey\">"
-			"<HR></font><br>", buf);
-	str = g_string_append(str, tmp_str->str);
-
-	g_string_printf(tmp_str, " %s", "</font></body></html>");
+			"<b>%s</b><hr></body></html>", _("Previewer"));
 	str = g_string_append(str, tmp_str->str);
 
 #ifdef USE_GTKMOZEMBED
@@ -267,50 +261,50 @@ void main_information_viewer(const gchar * mod_name, const gchar * text, const g
 	if (type) {
 		if (*type == 'n') {
 			g_string_printf(tmp_str,
-					"<font color=\"grey\">%s<HR></font><br>",
+					"<font color=\"grey\">%s</font><hr>",
 					_("Footnote"));
 			str = g_string_append(str, tmp_str->str);
 		}
 		else if (*type == 'u') {
 			g_string_printf(tmp_str,
-					"<font color=\"grey\">%s: %s<HR></font><br>",
+					"<font color=\"grey\">%s: %s</font><hr>",
 					_("User Annotation"), key);
 			str = g_string_append(str, tmp_str->str);
 		}
 		else if (*type == 'x') {
 			g_string_printf(tmp_str,
-					"<font color=\"grey\">%s<HR></font><br>",
+					"<font color=\"grey\">%s</font><hr>",
 					_("Cross Reference"));
 			str = g_string_append(str, tmp_str->str);
 		}
-		else if (!strcmp(action, "showStrongs")) {	//&& !strcmp(type,"Greek")
+		else if (!strcmp(action, "showStrongs")) {
 			g_string_printf(tmp_str,
-					"<font color=\"grey\">%s: %s<HR></font><br>",
+					"<font color=\"grey\">%s: %s</font><hr>",
 					_("Strongs"), key);
 			str = g_string_append(str, tmp_str->str);
 		}
-		else if (!strcmp(action, "showMorph")) {	//&& !strcmp(type,"Greek")
+		else if (!strcmp(action, "showMorph")) {
 			g_string_printf(tmp_str,
-					"<font color=\"grey\">%s: %s<HR></font><br>",
+					"<font color=\"grey\">%s: %s</font><hr>",
 					_("Morphology"), key);
 			str = g_string_append(str, tmp_str->str);
 		}
 	} else {
 		g_string_printf(tmp_str,
-				"<font color=\"grey\">%s: %s<HR></font><br>",
+				"<font color=\"grey\">%s: %s</font><hr>",
 				mod_name, key);
 		str = g_string_append(str, tmp_str->str);
 	}
 
-	if (action && (!strcmp(action, "showStrongsMorph"))) {	//&& !strcmp(type,"Greek")
+	if (action && (!strcmp(action, "showStrongsMorph"))) {
 		g_string_printf(tmp_str,
-				"<font color=\"grey\">%s: %s<HR></font>",
+				"<font color=\"grey\">%s: %s</font><hr>",
 				_("Strongs"), key);
 		str = g_string_append(str, tmp_str->str);
 		str = g_string_append(str, text);
 
 		g_string_printf(tmp_str,
-				"<font color=\"grey\"><br><br>%s: %s<HR></font>",
+				"<font color=\"grey\"><br><br>%s: %s</font><hr>",
 				_("Morphology"), morph);
 		str = g_string_append(str, tmp_str->str);
 		str = g_string_append(str, morph_text);
