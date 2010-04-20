@@ -49,7 +49,6 @@
 
     ; Paths with application files for installer
     !define PATH_CORE "..\binaries\Xiphos"
-    !define PATH_W2K "..\binaries\win2k"
     !define PATH_IMG "pixmaps"
     !define PATH_FONT "..\fonts"
 
@@ -297,22 +296,6 @@ Section $(CORE_SEC_TITLE) SecCore
 
         File /r "${CORE_F}"
 
-        ;; Install special files for Windows 2000
-        
-        ; detected Windows version
-        Push $R0 # read w2k version
-        Push $R1
-        ReadRegStr $R0 ${WINVER_REG_ROOT} "${WINVER_REG_KEY}" CurrentVersion
-        StrCpy $R1 $R0 3
-
-        ; if is win2k
-        StrCmp $R1 "${WINVER_IS_W2K}" label_win2k label_not_win2k
-        label_win2k:
-            ; overwrite files with w2k specific
-            File /r "${W2K_F}"
-
-        label_not_win2k:
-        
     !insertmacro UNINSTALL.LOG_CLOSE_INSTALL
 
     ; Shared folder for Sword modules must exist
