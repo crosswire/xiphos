@@ -26,7 +26,7 @@
 cd ..
 
 # configure and build xiphos
-./waf configure --enable-gtkhtml --disable-console --debug-level='optimized' --without-gnome --disable-dbus
+./waf configure --enable-gtkhtml --disable-console --debug-level='optimized' --disable-dbus
 ./waf
 ./waf install
 
@@ -34,7 +34,7 @@ cd ..
 outdir=win32/binaries/Xiphos/bin/
 origdir=/usr/local/bin/
 
-for f in libsword-1-6-0-r2494.dll imp2ld.exe addld.exe mod2zmod.exe imp2gbs.exe xml2gbs.exe installmgr.exe imp2vs.exe vpl2mod.exe mkfastmod.exe mod2vpl.exe vs2osisreftxt.exe vs2osisreftxt.exe tei2mod.exe osis2mod.exe mod2osis.exe mod2imp.exe diatheke.exe uconv.exe icuin40.dll icuuc40.dll libgtkhtml-3.14-19.dll libgtkhtml-editor-0.dll
+for f in libsword-1-6-0-r2494.dll imp2ld.exe addld.exe mod2zmod.exe imp2gbs.exe xml2gbs.exe installmgr.exe imp2vs.exe vpl2mod.exe mkfastmod.exe mod2vpl.exe vs2osisreftxt.exe vs2osisreftxt.exe tei2mod.exe osis2mod.exe mod2osis.exe mod2imp.exe diatheke.exe uconv.exe icuin40.dll icuuc40.dll
 do
     cp $origdir$f $outdir$f
     strip $outdir$f
@@ -52,7 +52,7 @@ cp messages.mo ../binaries/Xiphos/share/locale/fa/LC_MESSAGES/gtk20.mo
 
 # make installer
 cd ../nsis
-#makensis installer.nsi
+makensis installer.nsi
 
 
 
