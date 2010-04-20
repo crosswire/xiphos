@@ -27,7 +27,8 @@
 ;--------------------------------
 ; Unicode NSIS note:
 
-    ; every source file for Unicode NSIS needs to be in UTF-16LE
+    ; every source file for Unicode NSIS needs to be in UTF-8 (Unicode NSIS >= 2.42)
+    ; or in UTF-16LE otherwise
     ; doesn't support win9x
 
 ;--------------------------------
@@ -55,7 +56,7 @@
     ; Folder in ALLUSERSAPPS/Application Data/ for Sword files
     ; the string 'Application Data' maybe also localized in
     ; different Win32 versions.
-    ; e.g. in Czech Windows it is 'Data aplikacÃ­'
+    ; e.g. in Czech Windows it is 'Data aplikací'
     !define INSTPATH_SWORD "Sword"
 
     ; Files
@@ -84,13 +85,6 @@
     !define SWURL_REG_KEY "sword"
     !define SWURL_REG_KEY_ICON "${SWURL_REG_KEY}\DefaultIcon"
     !define SWURL_REG_KEY_COMMAND "${SWURL_REG_KEY}\shell\open\command"
-
-    ; Windows version detection
-    ; http://nsis.sourceforge.net/Windows_Version_Detection
-    !define WINVER_REG_ROOT "HKLM" # HKEY_LOCAL_MACHINE
-    !define WINVER_REG_KEY "SOFTWARE\Microsoft\Windows NT\CurrentVersion"
-    !define WINVER_IS_W2K "5.0"
-    !define W2K_F "${PATH_W2K}\*.*"
 
 
 ;--------------------------------
