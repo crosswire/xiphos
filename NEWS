@@ -1,5 +1,3 @@
-
-
 2010-03-22  - 3.1.3.  better settings save and failure-to-save logic, editor
 	      link dialog navigation selector, correct L<spaces>ORD in read
 	      aloud, fixed universal sync, compatibility with xulrunner
