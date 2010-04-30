@@ -1001,6 +1001,10 @@ on_checkbutton_prayerlist_toggled(GtkToggleButton * togglebutton,
 	settings.prayerlist = togglebutton->active;
 
 	/* update module list to show choice */
+	if (settings.prayerlist)
+		gtk_widget_show(widgets.new_journal_item);
+	else
+		gtk_widget_hide(widgets.new_journal_item);
 	main_update_module_lists();
 	main_load_module_tree(sidebar.module_list);
 }
