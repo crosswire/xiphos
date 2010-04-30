@@ -829,6 +829,8 @@ GtkWidget *gui_create_main_menu(void)
 	widgets.parallel_tab_item = glade_xml_get_widget (gxml, "show_parallel_view_in_a_tab");
 	widgets.side_preview_item = glade_xml_get_widget (gxml, "show_previewer_in_sidebar");
 
+	widgets.new_journal_item = glade_xml_get_widget (gxml, "newjournal");
+
 	/* map tab's show state into view menu. */
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.viewtexts_item),
@@ -868,6 +870,11 @@ GtkWidget *gui_create_main_menu(void)
 
 	//set up global function to handle all link buttons
 	gtk_link_button_set_uri_hook (link_uri_hook, NULL, NULL);
+
+	if (settings.prayerlist)
+		gtk_widget_show(widgets.new_journal_item);
+	else
+		gtk_widget_hide(widgets.new_journal_item);
 
 	return menu;
 }
