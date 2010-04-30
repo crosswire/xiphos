@@ -42,6 +42,7 @@
 #include "gui/commentary.h"
 #include "gui/dictlex.h"
 #include "gui/parallel_view.h"
+#include "gui/main_menu.h"
 #include "gui/main_window.h"
 #include "gui/sidebar.h"
 #include "gui/tabbed_browser.h"
@@ -1502,6 +1503,7 @@ on_combobox17_changed(GtkComboBox * combobox,
 
 	mod_name = g_strdup_printf("Language:%s", buf);
 	gui_set_module_font(mod_name);
+	redisplay_to_realign();
 	g_free(mod_name);
 }
 
