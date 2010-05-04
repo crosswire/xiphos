@@ -400,7 +400,7 @@ static void sync_with_main (GtkToggleButton * button, gpointer data)
 		buf = (gchar*)main_url_encode(settings.currentverse);
 		if (buf && (strlen(buf) > 3)) {
 			url =
-			    g_strdup_printf("xiphos.url?action=showParallel&"
+			    g_strdup_printf("passagestudy.jsp?action=showParallel&"
 						"type=verse&value=%s",
 						buf); // xml_get_value("keys", "verse")));
 			main_url_handler(url, TRUE);

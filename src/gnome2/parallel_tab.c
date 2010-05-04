@@ -180,7 +180,7 @@ static void sync_with_main(const gchar * key)
 	GS_message(("%s",buf));
 	if (buf && (strlen(buf) > 3)) {
 		url =
-		    g_strdup_printf("xiphos.url?action=showParallel&"
+		    g_strdup_printf("passagestudy.jsp?action=showParallel&"
 					"type=verse&value=%s",
 					buf);
 
