@@ -645,7 +645,7 @@ void main_update_parallel_page(void)
 			}
 
 			sprintf(tmpBuf,
-				"<tr bgcolor=\"%s\"><td><b><a href=\"xiphos.url?action=showModInfo&value=%s&module=%s\"><font color=\"%s\" size=\"%+d\"> [%s]</font></a></b>",
+				"<tr bgcolor=\"%s\"><td><b><a href=\"passagestudy.jsp?action=showModInfo&value=%s&module=%s\"><font color=\"%s\" size=\"%+d\"> [%s]</font></a></b>",
 				rowcolor,
 				main_get_module_description(mod_name),
 				mod_name,
@@ -678,7 +678,7 @@ void main_update_parallel_page(void)
 				g_string_append(data, "</div><br>");
 
 			sprintf(tmpBuf,
-				"</font><small>[<a href=\"xiphos.url?action=showParallel&"
+				"</font><small>[<a href=\"passagestudy.jsp?action=showParallel&"
 				"type=swap&value=%s\">%s</a>]</small></td></tr>",
 				mod_name,_("view context"));
 			g_string_append(data, tmpBuf);
@@ -754,7 +754,7 @@ void main_update_parallel_page(void)
 			}
 
 			sprintf(tmpBuf,
-				"<tr bgcolor=\"%s\"><td><b><a href=\"xiphos.url?action=showModInfo&value=%s&module=%s\"><font color=\"%s\" size=\"%+d\"> [%s]</font></a></b>",
+				"<tr bgcolor=\"%s\"><td><b><a href=\"passagestudy.jsp?action=showModInfo&value=%s&module=%s\"><font color=\"%s\" size=\"%+d\"> [%s]</font></a></b>",
 				rowcolor,
 				main_get_module_description(mod_name),
 				mod_name,
@@ -792,7 +792,7 @@ void main_update_parallel_page(void)
 			}
 
 			sprintf(tmpBuf,
-				"</font><small>[<a href=\"xiphos.url?action=showParallel&"
+				"</font><small>[<a href=\"passagestudy.jsp?action=showParallel&"
 				"type=swap&value=%s\">%s</a>]</small></td></tr>",
 				mod_name,_("view context"));
 
@@ -893,7 +893,7 @@ static void interpolate_parallel_display(SWBuf& text, gchar *key, gint parallel_
 				gchar *num = main_format_number(verse);
 				snprintf(str, 499,
 					 "<td width=\"%d%%\" bgcolor=\"%s\">"
-					 "<a href=\"xiphos.url?action=showParallel&"
+					 "<a href=\"passagestudy.jsp?action=showParallel&"
 					 "type=verse&value=%s\" name=\"%d\">"
 					 "<font color=\"%s\">%s. </font></a>"
 					 "<font face=\"%s\" size=\"%s\" color=\"%s\">",

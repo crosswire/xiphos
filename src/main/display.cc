@@ -932,7 +932,7 @@ GTKEntryDisp::Display(SWModule &imodule)
 	buf = g_strdup_printf(HTML_START
 			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
 			      "<font face=\"%s\" size=\"%+d\">"
-			      "[<a href=\"xiphos.url?action=showModInfo&value=%s&module=%s\">"
+			      "[<a href=\"passagestudy.jsp?action=showModInfo&value=%s&module=%s\">"
 			      "<font color=\"%s\">"
 			      "*%s*</font></a>]<br>",
 			      (strongs_and_morph		// both
@@ -1682,7 +1682,7 @@ GTKChapDisp::Display(SWModule &imodule)
 		// insert the userfootnote reference
 		if (e) {
 			buf = g_strdup_printf("<span class=\"word\">"
-					      "<a href=\"xiphos.url?action=showUserNote&"
+					      "<a href=\"passagestudy.jsp?action=showUserNote&"
 					      "module=%s&passage=%s&value=%s\"><small>"
 					      "<sup>*u</sup></small></a></span> ",
 					      settings.MainWindowModule,
@@ -1887,7 +1887,7 @@ DialogEntryDisp::Display(SWModule &imodule)
 			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
 			      "<font face=\"%s\" size=\"%+d\">"
 			      "<font color=\"%s\">"
-			      "<a href=\"xiphos.url?action=showModInfo&value=%s&module=%s\">"
+			      "<a href=\"passagestudy.jsp?action=showModInfo&value=%s&module=%s\">"
 			      "[*%s*]</a></font><br>",
 			      (ops->doublespace ? DOUBLE_SPACE : ""),
 			      settings.bible_bg_color,
@@ -2116,7 +2116,7 @@ DialogChapDisp::Display(SWModule &imodule)
 		// insert the userfootnote reference
 		if (e) {
 			buf = g_strdup_printf("<span class=\"word\">"
-					      "<a href=\"xiphos.url?action=showUserNote&"
+					      "<a href=\"passagestudy.jsp?action=showUserNote&"
 					      "module=%s&passage=%s&value=%s\">"
 					      "<small><sup>*u</sup></small></a></span> ",
 /*xxx*/					      settings.MainWindowModule,
@@ -2255,7 +2255,7 @@ GTKPrintEntryDisp::Display(SWModule &imodule)
 			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
 			      "<font face=\"%s\" size=\"%+d\">"
 			      "<font color=\"%s\">"
-			      "<a href=\"xiphos.url?action=showModInfo&value=%s&module=%s\">"
+			      "<a href=\"passagestudy.jsp?action=showModInfo&value=%s&module=%s\">"
 			      "[*%s*]</a></font>[%s]<br>",
 			      (ops->doublespace ? DOUBLE_SPACE : ""),
 			      settings.bible_bg_color,

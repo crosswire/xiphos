@@ -290,7 +290,7 @@ G_MODULE_EXPORT void on_dialog_activate(GtkMenuItem * menuitem, gpointer user_da
 			return;
 		}
 
-		url = g_strdup_printf("xiphos.url?action=showBookmark&"
+		url = g_strdup_printf("passagestudy.jsp?action=showBookmark&"
 					"type=%s&value=%s&module=%s",
 					"newDialog",
 					main_url_encode(key),
@@ -810,7 +810,7 @@ G_MODULE_EXPORT void on_open_in_tab_activate(GtkMenuItem * menuitem, gpointer us
 				   3, &key,
 				   4, &module,
 			           -1);
-	url = g_strdup_printf("xiphos.url?action=showBookmark&"
+	url = g_strdup_printf("passagestudy.jsp?action=showBookmark&"
 					"type=%s&value=%s&module=%s",
 					"newTab",
 					main_url_encode(key),

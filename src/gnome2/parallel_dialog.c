@@ -215,7 +215,7 @@ static void sync_with_main(void)
 
 	if (buf && (strlen(buf) > 3)) {
 		gchar *url =
-		    g_strdup_printf ("xiphos.url?action=showParallel&"
+		    g_strdup_printf ("passagestudy.jsp?action=showParallel&"
 					"type=verse&value=%s",
 					buf);
 		main_url_handler (url, TRUE);

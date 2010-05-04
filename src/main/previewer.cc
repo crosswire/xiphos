@@ -555,7 +555,7 @@ void main_entry_display(gpointer data, gchar * mod_name,
 					mod_name, key);
 		} else {
 			g_string_printf(tmp_str,
-					"<a href=\"xiphos.url?action=showModInfo&value=%s&module=%s\">"
+					"<a href=\"passagestudy.jsp?action=showModInfo&value=%s&module=%s\">"
 					"<font color=\"%s\">[%s]</a></font>[%s] ",
 					backend->
 					module_description(mod_name),
