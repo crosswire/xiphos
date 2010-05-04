@@ -85,7 +85,7 @@ void button_ok_clicked_cb(GtkObject *object, EDITOR *e)
 			  ((type == -1) ||
 			   (type == TEXT_TYPE) ||
 			   (type == COMMENTARY_TYPE)))
-			 ? "<a href=\"xiphos.url?action=showRef&type=scripRef&module=%s&value=%s\">%s</a>"
+			 ? "<a href=\"passagestudy.jsp?action=showRef&type=scripRef&module=%s&value=%s\">%s</a>"
 			 : "<a href=\"sword://%s/%s\">%s</a>"),
 			(encoded_mod   ? encoded_mod   : ""),
 			(encoded_verse ? encoded_verse : ""),

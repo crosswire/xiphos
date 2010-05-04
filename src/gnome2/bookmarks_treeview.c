@@ -874,7 +874,7 @@ static gboolean button_release_event(GtkWidget * widget,
 			if (!strcmp(module,"studypad"))
 				url =
 				    g_strdup_printf
-				    ("xiphos.url?action=showStudypad&"
+				    ("passagestudy.jsp?action=showStudypad&"
 				     "type=9&value=%s&module=%s",
 				     main_url_encode(key),
 				     main_url_encode(module));
@@ -882,7 +882,7 @@ static gboolean button_release_event(GtkWidget * widget,
 			else
 				url =
 				    g_strdup_printf
-				    ("xiphos.url?action=showBookmark&"
+				    ("passagestudy.jsp?action=showBookmark&"
 				     "type=%s&value=%s&module=%s",
 				     (button_one) ? "currentTab" : "newTab",
 				     main_url_encode(key),

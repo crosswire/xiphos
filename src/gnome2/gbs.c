@@ -150,7 +150,7 @@ static gboolean on_book_button_release_event(GtkWidget * widget,
 				key = g_strdelimit(key, "*", ' ');
 				key = g_strstrip(key);
 				url = g_strdup_printf(
-					"xiphos.url?action=showModInfo&value=1&module=%s",
+					"passagestudy.jsp?action=showModInfo&value=1&module=%s",
 					key);
 				main_url_handler(url,TRUE);
 				g_free((gchar*)url);
