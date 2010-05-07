@@ -41,6 +41,7 @@
 	      <property name="can_default">True</property>
 	      <property name="can_focus">True</property>
 	      <property name="label" translatable="yes">_View Intro</property>
+	      <property name="tooltip" translatable="yes">Open a brief introductory explanation of how the Module Manager works.</property>
 	      <property name="use_stock">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
 	      <property name="focus_on_click">True</property>
@@ -53,6 +54,7 @@
 	      <property name="can_default">True</property>
 	      <property name="can_focus">True</property>
 	      <property name="label" translatable="yes">_Load Standard</property>
+	      <property name="tooltip" translatable="yes">Load and synchronize the standard set of known repositories, as maintained at crosswire.org, with your current remote sources.</property>
 	      <property name="use_stock">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
 	      <property name="focus_on_click">True</property>
@@ -65,6 +67,7 @@
 	      <property name="can_default">True</property>
 	      <property name="can_focus">True</property>
 	      <property name="label">gtk-refresh</property>
+	      <property name="tooltip" translatable="yes">Refresh Xiphos' knowledge of what modules are available at the selected remote repository</property>
 	      <property name="use_stock">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
 	      <property name="focus_on_click">True</property>
@@ -119,6 +122,7 @@
 			<widget class="GtkLabel" id="label13">
 			  <property name="visible">True</property>
 			  <property name="label" translatable="yes">_Install</property>
+			  <property name="tooltip" translatable="yes">Install or update the selected modules</property>
 			  <property name="use_underline">True</property>
 			  <property name="use_markup">False</property>
 			  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -151,6 +155,7 @@
 	      <property name="can_default">True</property>
 	      <property name="can_focus">True</property>
 	      <property name="label">gtk-remove</property>
+	      <property name="tooltip" translatable="yes">Remove the selected modules from your system</property>
 	      <property name="use_stock">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
 	      <property name="focus_on_click">True</property>
@@ -163,6 +168,7 @@
 	      <property name="can_default">True</property>
 	      <property name="can_focus">True</property>
 	      <property name="label" translatable="yes">_Archive</property>
+	      <property name="tooltip" translatable="yes">Create a zip archive of the selected modules.</property>
 	      <property name="use_stock">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
 	      <property name="focus_on_click">True</property>
@@ -175,6 +181,7 @@
 	      <property name="can_default">True</property>
 	      <property name="can_focus">True</property>
 	      <property name="label" translatable="yes">_Index</property>
+	      <property name="tooltip" translatable="yes">Build an index of the selected modules, for optimized ("lucene") searching.</property>
 	      <property name="use_stock">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
 	      <property name="focus_on_click">True</property>
@@ -187,6 +194,7 @@
 	      <property name="can_default">True</property>
 	      <property name="can_focus">True</property>
 	      <property name="label" translatable="yes">_Delete Index</property>
+	      <property name="tooltip" translatable="yes">Delete the fast-search index of the selected modules.</property>
 	      <property name="use_stock">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
 	      <property name="focus_on_click">True</property>
@@ -596,6 +604,7 @@
 				  <property name="visible">True</property>
 				  <property name="can_focus">True</property>
 				  <property name="label">gtk-add</property>
+	                          <property name="tooltip" translatable="yes">Add a local folder as an install source.  Such a folder contains subfolders "mods.d" and "modules".</property>
 				  <property name="use_stock">True</property>
 				  <property name="relief">GTK_RELIEF_NORMAL</property>
 				  <property name="focus_on_click">True</property>
@@ -612,6 +621,7 @@
 				  <property name="visible">True</property>
 				  <property name="can_focus">True</property>
 				  <property name="label">gtk-remove</property>
+	                          <property name="tooltip" translatable="yes">Remove one of your local folders as an install source.</property>
 				  <property name="use_stock">True</property>
 				  <property name="relief">GTK_RELIEF_NORMAL</property>
 				  <property name="focus_on_click">True</property>
@@ -723,6 +733,7 @@
 				  <property name="visible">True</property>
 				  <property name="can_focus">True</property>
 				  <property name="label">gtk-add</property>
+	                          <property name="tooltip" translatable="yes">Add a custom remote install source. You must know its hostname and the folder where its repository lives.</property>
 				  <property name="use_stock">True</property>
 				  <property name="relief">GTK_RELIEF_NORMAL</property>
 				  <property name="focus_on_click">True</property>
@@ -739,6 +750,7 @@
 				  <property name="visible">True</property>
 				  <property name="can_focus">True</property>
 				  <property name="label">gtk-remove</property>
+	                          <property name="tooltip" translatable="yes">Remove a remote install source.</property>
 				  <property name="use_stock">True</property>
 				  <property name="relief">GTK_RELIEF_NORMAL</property>
 				  <property name="focus_on_click">True</property>
