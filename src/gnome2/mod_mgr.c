@@ -1967,6 +1967,7 @@ on_notebook1_switch_page(GtkNotebook * notebook,
 			// local = FALSE;
 		}
 		mod_mgr_shut_down();
+		main_update_module_lists();
 		mod_mgr_init(destination, FALSE, TRUE);
 		load_module_tree(GTK_TREE_VIEW(treeview2), FALSE);
 		break;

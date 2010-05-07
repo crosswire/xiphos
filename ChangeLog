@@ -1,3 +1,11 @@
+2010-05-07  karl <charcoal@users.sf.net>
+
+	* make newly-installed modules able to be indexed immediately.
+
+2010-04-30  karl <charcoal@users.sf.net>
+
+	* make File menu New PL/J item sensitive to PL/J enable.
+
 2010-04-19  karl <charcoal@users.sf.net>
 
 	* add prefs item: highlight user annotations, when marking *u?
