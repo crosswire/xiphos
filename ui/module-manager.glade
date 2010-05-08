@@ -604,7 +604,7 @@
 				  <property name="visible">True</property>
 				  <property name="can_focus">True</property>
 				  <property name="label">gtk-add</property>
-	                          <property name="tooltip" translatable="yes">Add a local folder as an install source.  Such a folder contains subfolders "mods.d" and "modules".</property>
+	                          <property name="tooltip" translatable="yes">Add a local folder as an install source, typically on a cdrom or flash drive.  Such a folder contains subfolders "mods.d" and "modules".</property>
 				  <property name="use_stock">True</property>
 				  <property name="relief">GTK_RELIEF_NORMAL</property>
 				  <property name="focus_on_click">True</property>
