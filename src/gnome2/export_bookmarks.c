@@ -90,12 +90,15 @@ void gui_set_html_item (GString * str,
 	gchar *buf = NULL;
 
 	if (with_scripture) {
+		gint modtype;
+
 		if (strlen(module) < 2)
 			mod_tmp = get_module(key);
 		else
 			mod_tmp = g_strdup(module);
 
-		if (main_get_mod_type(mod_tmp) == TEXT_TYPE) {
+		if (((modtype = main_get_mod_type(mod_tmp)) == TEXT_TYPE) ||
+		    (modtype == COMMENTARY_TYPE)) {
 			text = main_get_rendered_text(mod_tmp, key);
 			scripture = g_strdup_printf("<li>%s</li>", text);
 			g_free(text);
@@ -250,7 +253,7 @@ static gboolean _save_verselist_2_html(BK_EXPORT *data)
 
 		switch (data->type) {
 		case HTML:
-			buf = g_strdup_printf("<html><body><ul><b>%s</b>",name->str);
+			buf = g_strdup_printf("<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" /></head><body><ul><b>%s</b>",name->str);
 			break;
 		case PLAIN:
 			buf = g_strdup_printf("%s\n",name->str);
@@ -488,7 +491,7 @@ static void _save_iter(GtkTreeIter * iter, BK_EXPORT *data)
 		if (gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model),iter)) {
 			switch (data->type) {
 			case HTML:
-				g_string_printf(str, "<html><body><ul><b>%s</b>", caption);
+				g_string_printf(str, "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" /></head><body><ul><b>%s</b>", caption);
 				break;
 			case PLAIN:
 				g_string_printf(str, "%s\n\n", caption);
