@@ -107,7 +107,10 @@ void frontend_init(void)
 	 */
 	if (settings.havebible) {
 		main_check_parallel_modules();
-		main_init_parallel_view();
+		main_init_parallel_view();	
+		gui_create_parallel_page();
+		gtk_widget_realize(widgets.html_parallel);	
+		main_set_parallel_options_at_start();
 	}
 
 	settings.paratab_showing = FALSE;

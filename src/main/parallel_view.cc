@@ -1101,9 +1101,6 @@ void main_load_menu_form_mod_list(GtkWidget * pmInt, gchar * label,
 void main_init_parallel_view(void)
 {
 	backend_p = new BackEnd();
-	gui_create_parallel_page();
-	gtk_widget_realize(widgets.html_parallel);
-	main_set_parallel_options_at_start();
 }
 
 
