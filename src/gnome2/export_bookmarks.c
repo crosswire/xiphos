@@ -110,7 +110,7 @@ void gui_set_html_item (GString * str,
 	else
 		scripture = g_strdup ("");
 
-	buf = g_strdup_printf("<li>%s<ul><li>%s %s</li>%s</ul></li>",
+	buf = g_strdup_printf("<li>%s<ul><li>%s %s</li>%s</ul><br/></li>",
 	    			description,
 	    			module,
 	    			key,
@@ -134,12 +134,15 @@ void gui_set_plain_text_item (GString * str,
 	gchar *buf = NULL;
 
 	if (with_scripture) {
+		gint modtype;
+
 		if (strlen(module) < 2)
 			mod_tmp = get_module(key);
 		else
 			mod_tmp = g_strdup(module);
 
-		if (main_get_mod_type(mod_tmp) == TEXT_TYPE)
+		if (((modtype = main_get_mod_type(mod_tmp)) == TEXT_TYPE) ||
+		    (modtype == COMMENTARY_TYPE))
 				scripture = main_get_striptext (mod_tmp, (gchar*) key);
 
 		if (mod_tmp)
@@ -148,7 +151,7 @@ void gui_set_plain_text_item (GString * str,
 	else
 		scripture = g_strdup ("");
 
-	buf = g_strdup_printf("\t%s\n\t\t%s %s\n\t\t%s\n",
+	buf = g_strdup_printf("\t%s\n\t\t%s %s\n\t\t%s\n\n",
 	    			description,
 	    			module,
 	    			key,
@@ -253,10 +256,10 @@ static gboolean _save_verselist_2_html(BK_EXPORT *data)
 
 		switch (data->type) {
 		case HTML:
-			buf = g_strdup_printf("<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" /></head><body><ul><b>%s</b>",name->str);
+			buf = g_strdup_printf("<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" /></head><body><ul><b>%s</b><br/><br/>",name->str);
 			break;
 		case PLAIN:
-			buf = g_strdup_printf("%s\n",name->str);
+			buf = g_strdup_printf("%s\n\n",name->str);
 			break;
 		}
 		g_string_append(str,buf);
@@ -491,10 +494,10 @@ static void _save_iter(GtkTreeIter * iter, BK_EXPORT *data)
 		if (gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model),iter)) {
 			switch (data->type) {
 			case HTML:
-				g_string_printf(str, "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" /></head><body><ul><b>%s</b>", caption);
+				g_string_printf(str, "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" /></head><body><ul><b>%s</b><br/><br/>", caption);
 				break;
 			case PLAIN:
-				g_string_printf(str, "%s\n\n", caption);
+				g_string_printf(str, "%s\n\n\n", caption);
 				break;
 			}
 
