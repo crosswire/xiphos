@@ -356,6 +356,7 @@ def configure(conf):
     if not env['ENABLE_GTKHTML']:
         if not env["IS_WIN32"]:
 
+            conf.check_cfg (package='nspr', uselib_store='NSPR')    
             conf.check_cfg (package='',
                             uselib_store='GECKO',
                             args='"libxul-embedding >= 1.9.0" --define-variable=includetype=unstable "nspr" --cflags --libs',
@@ -378,6 +379,7 @@ def configure(conf):
                     conf.define['LIBPATH_GECKO'] = ['%s/sdk/lib' % d]
                     conf.define['LIB_GECKO'] = ['xpcomglue_s', 'xpcom', 'xul', 'nspr4']
 
+        env.append_value('ALL_LIBS', 'NSPR')
         env.append_value('ALL_LIBS', 'GECKO')
         conf.define('USE_GTKMOZEMBED', 1)
 
