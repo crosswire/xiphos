@@ -193,34 +193,43 @@ static void add_item_to_tree(GtkTreeIter *iter,GtkTreeIter *parent,
  */
 
 G_MODULE_EXPORT void bibletime_bookmarks_activate(GtkMenuItem * menuitem,
-				  gpointer user_data)
+						  gpointer user_data)
 {
 	GtkTreeIter iter;
 	GtkTreeIter parent;
-	GString *str;
-	const xmlChar *file;
-	//gchar *text[3];
+	gchar *fname;
+	GtkWidget *dialog;
 
 	if (!gtk_tree_model_get_iter_first(GTK_TREE_MODEL(model),&parent))
 		return;
 
-	str = g_string_new(settings.swbmDir);
-	g_string_printf(str, "%s/%s", settings.homedir,
-			 ".bibletime/bookmarks.xml");
+	dialog = gtk_file_chooser_dialog_new(_("Specify bookmarks file"),
+					     GTK_WINDOW(widgets.app),
+					     GTK_FILE_CHOOSER_ACTION_OPEN,
+					     GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+					     GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+					     NULL);
+	fname = g_strdup_printf("%s/%s", settings.homedir, ".bibletime/bookmarks.xml");
+	gtk_file_chooser_set_filename(GTK_FILE_CHOOSER(dialog), fname);
+	g_free(fname);
 
-	file = (const xmlChar *) str->str;
+	if (gtk_dialog_run(GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT)
+	{
+		gtk_tree_store_append(GTK_TREE_STORE(model), &iter,
+				      &parent);
+		gtk_tree_store_set(GTK_TREE_STORE(model), &iter,
+				   COL_OPEN_PIXBUF, bm_pixbufs->pixbuf_opened,
+				   COL_CLOSED_PIXBUF, bm_pixbufs->pixbuf_closed,
+				   COL_CAPTION, "Imported",
+				   COL_KEY, NULL,
+				   COL_MODULE, NULL,
+				   -1);
 
-	gtk_tree_store_append(GTK_TREE_STORE(model), &iter,
-			      &parent);
-	gtk_tree_store_set(GTK_TREE_STORE(model), &iter,
-			   COL_OPEN_PIXBUF, bm_pixbufs->pixbuf_opened,
-			   COL_CLOSED_PIXBUF, bm_pixbufs->pixbuf_closed,
-			   COL_CAPTION, "BibleTime",
-			   COL_KEY, NULL,
-			   COL_MODULE, NULL,
-			   -1);
-	gui_parse_bookmarks(bookmark_tree, file, &iter);
-	g_string_free(str, TRUE);
+		fname = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
+		gui_parse_bookmarks(bookmark_tree, (const xmlChar *)fname, &iter);
+		g_free(fname);
+	}
+	gtk_widget_destroy (dialog);
 }
 
 
@@ -854,19 +863,18 @@ void gui_create_bookmark_menu(void)
 
 	 menu.menu = glade_xml_get_widget (gxml, "menu_bookmark");
 
-	menu.in_tab = glade_xml_get_widget (gxml, "open_in_new_tab");  // pmBookmarkTree_uiinfo[0].widget;
-	menu.in_dialog = glade_xml_get_widget (gxml, "open_in_a_dialog");  // pmBookmarkTree_uiinfo[1].widget;
-	menu.new = glade_xml_get_widget (gxml, "new_folder");  // pmBookmarkTree_uiinfo[2].widget;
-	menu.insert = glade_xml_get_widget (gxml, "insert_bookmark");  // pmBookmarkTree_uiinfo[3].widget;
-	menu.edit = glade_xml_get_widget (gxml, "edit_item");  // pmBookmarkTree_uiinfo[4].widget;
-	menu.delete = glade_xml_get_widget (gxml, "delete_item");  // pmBookmarkTree_uiinfo[5].widget;
+	menu.in_tab = glade_xml_get_widget (gxml, "open_in_new_tab");
+	menu.in_dialog = glade_xml_get_widget (gxml, "open_in_a_dialog");
+	menu.new = glade_xml_get_widget (gxml, "new_folder");
+	menu.insert = glade_xml_get_widget (gxml, "insert_bookmark");
+	menu.edit = glade_xml_get_widget (gxml, "edit_item");
+	menu.delete = glade_xml_get_widget (gxml, "delete_item");
 
-	menu.reorder = glade_xml_get_widget (gxml, "allow_reordering");  // pmBookmarkTree_uiinfo[10].widget;
+	menu.reorder = glade_xml_get_widget (gxml, "allow_reordering");
 
-	menu.bibletime = glade_xml_get_widget (gxml, "import_bibletime_bookmarks1");  // pmBookmarkTree_uiinfo[12].widget;
-	//menu.rr_submenu = glade_xml_get_widget (gxml, "remove_restore");  // pmBookmarkTree_uiinfo[13].widget;
+	menu.bibletime = glade_xml_get_widget (gxml, "import_bibletime_bookmarks1");
 
-	menu.remove = glade_xml_get_widget (gxml, "remove_folder");  // rr_menu_uiinfo[0].widget;
+	menu.remove = glade_xml_get_widget (gxml, "remove_folder");
 
 	gtk_widget_set_sensitive(menu.in_tab, FALSE);
 	gtk_widget_set_sensitive(menu.in_dialog, FALSE);
@@ -876,7 +884,6 @@ void gui_create_bookmark_menu(void)
 	gtk_widget_set_sensitive(menu.delete, FALSE);
 	gtk_widget_set_sensitive(menu.bibletime, settings.have_bibletime);
 
-	//gtk_widget_set_sensitive(menu.rr_submenu, FALSE);
 	gtk_widget_set_sensitive(menu.remove, TRUE);
 	gtk_widget_set_sensitive(menu.restore, TRUE);
 	//gtk_widget_hide(menu.remove);

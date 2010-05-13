@@ -531,7 +531,7 @@ static void load_xml_bookmarks(GtkTreeView * tree, GtkTreeIter * iter)
 	GString *str;
 	const xmlChar *file;
 
-	str = g_string_new(settings.swbmDir);
+	str = g_string_new(NULL);
 	g_string_printf(str, "%s/bookmarks.xml", settings.swbmDir);
 	file = (const xmlChar *) str->str;
 	gui_parse_bookmarks(tree, file, iter);
