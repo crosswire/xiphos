@@ -882,7 +882,7 @@ void gui_create_bookmark_menu(void)
 	gtk_widget_set_sensitive(menu.insert, FALSE);
 	gtk_widget_set_sensitive(menu.edit, FALSE);
 	gtk_widget_set_sensitive(menu.delete, FALSE);
-	gtk_widget_set_sensitive(menu.bibletime, settings.have_bibletime);
+	gtk_widget_set_sensitive(menu.bibletime, TRUE);
 
 	gtk_widget_set_sensitive(menu.remove, TRUE);
 	gtk_widget_set_sensitive(menu.restore, TRUE);

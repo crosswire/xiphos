@@ -823,8 +823,7 @@ static gboolean button_release_event(GtkWidget * widget,
 			gtk_widget_set_sensitive(menu.remove, TRUE);
 		}
 
-		gtk_widget_set_sensitive(menu.bibletime,
-					 settings.have_bibletime);
+		gtk_widget_set_sensitive(menu.bibletime, TRUE);
 		gtk_widget_set_sensitive(menu.edit, TRUE);
 		gtk_widget_set_sensitive(menu.delete, TRUE);
 		is_selected = TRUE;
@@ -854,15 +853,13 @@ static gboolean button_release_event(GtkWidget * widget,
 			gtk_widget_set_sensitive(menu.insert, FALSE);
 			gtk_widget_set_sensitive(menu.edit, FALSE);
 			gtk_widget_set_sensitive(menu.delete, FALSE);
-			gtk_widget_set_sensitive(menu.bibletime, FALSE);
+			gtk_widget_set_sensitive(menu.bibletime, TRUE);
 			gtk_widget_set_sensitive(menu.remove, FALSE);
 			//gtk_widget_set_sensitive(menu.remove, FALSE);
 			//gtk_widget_set_sensitive(menu.restore, FALSE);
 			return TRUE;
 		} else {
-			gtk_widget_set_sensitive(menu.bibletime,
-						 settings.
-						 have_bibletime);
+			gtk_widget_set_sensitive(menu.bibletime, TRUE);
 			return FALSE;
 		}
 		break;
