@@ -1553,8 +1553,8 @@
   <child>
     <widget class="GtkImageMenuItem" id="import_bibletime_bookmarks1">
       <property name="visible">True</property>
-      <property name="tooltip" translatable="yes">Load Bookmarks from Bibletime</property>
-      <property name="label" translatable="yes">Import Bibletime Bookmarks</property>
+      <property name="tooltip" translatable="yes">Load other bookmarks file (default: from BibleTime)</property>
+      <property name="label" translatable="yes">Import Bookmarks</property>
       <property name="use_underline">True</property>
       <signal name="activate" handler="bibletime_bookmarks_activate" last_modification_time="Tue, 07 Apr 2009 23:56:38 GMT"/>
 
