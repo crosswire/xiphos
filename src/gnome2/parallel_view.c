@@ -261,6 +261,9 @@ void gui_create_parallel_page(void)
 			 "button_release_event",
 			 G_CALLBACK (_popupmenu_requested_cb),
 			 NULL);
+	g_signal_connect(GTK_OBJECT(widgets.html_parallel),
+			 "url_requested",
+			 G_CALLBACK(url_requested), NULL);
 #endif
 
 	label = gtk_label_new(_("Parallel View"));
