@@ -1,3 +1,8 @@
+2010-05-16  karl <charcoal@users.sf.net>
+
+	* make <img> work in gtkhtml3 parallel windows by connecting
+	  "url_requested" signal.
+
 2010-05-13  karl <charcoal@users.sf.net>
 
 	* generalize bookmark import (default still bibletime).
