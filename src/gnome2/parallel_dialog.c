@@ -414,6 +414,9 @@ GtkWidget *create_parallel_dialog(void)
 			 "button_release_event",
 			 G_CALLBACK (_popupmenu_requested_cb),
 			 NULL);
+	g_signal_connect(GTK_OBJECT(widgets.html_parallel_dialog),
+			 "url_requested",
+			 G_CALLBACK(url_requested), NULL);
 #endif
 	dialog_action_area25 =
 	    GTK_DIALOG(dialog_parallel)->action_area;
