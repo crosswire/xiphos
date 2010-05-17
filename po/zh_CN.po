@@ -1,198 +1,197 @@
-# Nederlandse vertaling voor Xiphos
-# Copyright (C) 2006 Gertjan Francke
-# This file is distributed under the same license as the Xiphos package.
-# Gertjan Francke <gwfrancke@users.sf.net> 2003
-#
+# Chinese (Simplified) translation for xiphos
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the xiphos package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Xiphos 0.0.1\n"
+"Project-Id-Version: xiphos\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-05-17 03:35+0100\n"
-"PO-Revision-Date: 2010-03-20 18:23+0000\n"
-"Last-Translator: Karl Kleinpaste <Unknown>\n"
-"Language-Team: Xiphos-developers <xiphos-developers@lists>\n"
+"PO-Revision-Date: 2010-04-18 16:00+0000\n"
+"Last-Translator: Daniel Tao <danieltaoys@gmail.com>\n"
+"Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-21 04:49+0000\n"
+"X-Launchpad-Export-Date: 2010-04-19 03:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../src/backend/sword_main.cc:1077
 msgid "Configuration not found"
-msgstr "Configuratie niet gevonden"
+msgstr "配置未找到"
 
 #: ../src/editor/slib-editor.c:224 ../src/gnome2/html.c:634
 #, c-format
 msgid "Page %d of %d"
-msgstr "Pagina %d van %d"
+msgstr "第 %d 页，共 %d 页"
 
 #: ../src/editor/slib-editor.c:391 ../src/editor/slib-editor.c:438
 msgid "Save As"
-msgstr "Opslaan als"
+msgstr "另存为"
 
 #: ../src/editor/slib-editor.c:409 ../src/editor/slib-editor.c:456
 #: ../src/editor/slib-editor.c:623
 msgid "Untitled document"
-msgstr "Niet-opgeslagen document"
+msgstr "无标题文档"
 
 #: ../src/editor/slib-editor.c:648
 msgid "Are you sure you want to delete the note for"
-msgstr "Weet u zeker dat u de notitie wilt verwijderen voor"
+msgstr "你是否要删除相关笔记"
 
 #: ../src/editor/slib-editor.c:691
 msgid "HTML Output"
-msgstr "HTML-weergave"
+msgstr "HTML 输出"
 
 #: ../src/editor/slib-editor.c:698
 msgid "HTML Source"
-msgstr "HTML code"
+msgstr "HTML 源"
 
 #: ../src/editor/slib-editor.c:705
 msgid "Plain Source"
-msgstr "Platte tekst"
+msgstr "原始代码"
 
 #: ../src/editor/slib-editor.c:715 ../ui/editor_note.xml.h:15
 #: ../ui/editor_studypad.xml.h:21
 msgid "_Print..."
-msgstr "_Printen..."
+msgstr "打印(_P)..."
 
 #: ../src/editor/slib-editor.c:722 ../ui/editor_note.xml.h:9
 #: ../ui/editor_studypad.xml.h:14
 msgid "Print Pre_view"
-msgstr "Afdruk_voorbeeld"
+msgstr "打印预览(_v)"
 
 #: ../src/editor/slib-editor.c:729
 msgid "_Quit"
-msgstr "Afsluiten"
+msgstr "退出(_Q)"
 
 #: ../src/editor/slib-editor.c:736
 msgid "_Open"
-msgstr "_Openen"
+msgstr "打开(_O)"
 
 #: ../src/editor/slib-editor.c:743
 msgid "_Save"
-msgstr "Op_slaan"
+msgstr "保存(_S)"
 
 #: ../src/editor/slib-editor.c:750
 msgid "Save _As..."
-msgstr "Bestand opslaan _als..."
+msgstr "另存为(_A)..."
 
 #: ../src/editor/slib-editor.c:756
 msgid "New"
-msgstr "Nieuw"
+msgstr "新建"
 
 #: ../src/editor/slib-editor.c:758
 msgid "Open new document"
-msgstr "Open nieuw document"
+msgstr "打开新文档"
 
 #: ../src/editor/slib-editor.c:762
 msgid "Delete"
-msgstr "Wissen"
+msgstr "删除"
 
 #: ../src/editor/slib-editor.c:764
 msgid "Delete current note"
-msgstr "Verwijderen huidige notitie"
+msgstr "删除当前笔记"
 
 #: ../src/editor/slib-editor.c:769 ../ui/editor_note.xml.h:14
 #: ../ui/editor_studypad.xml.h:20 ../ui/xi-menus.glade.h:105
 msgid "_File"
-msgstr "_Bestand"
+msgstr "文件(_F)"
 
 #: ../src/editor/slib-editor.c:824
 msgid "HTML _Output"
-msgstr "HTML _Output"
+msgstr "HTML 输出(_O)"
 
 #: ../src/editor/slib-editor.c:831
 msgid "_HTML Source"
-msgstr "_HTML broncode"
+msgstr "HTML 源代码(_H)"
 
 #: ../src/editor/slib-editor.c:838
 msgid "_Plain Source"
-msgstr "_Platte tekst"
+msgstr "纯源代码(_P)"
 
 #: ../src/editor/slib-editor.c:845 ../ui/xi-menus.glade.h:120
 msgid "_View"
-msgstr "Beel_d"
+msgstr "查看 (_V)"
 
 #: ../src/editor/slib-editor.c:856 ../ui/editor_note.xml.h:11
 #: ../ui/editor_studypad.xml.h:16
 msgid "Save"
-msgstr "Opslaan"
+msgstr "保存"
 
 #: ../src/editor/slib-editor.c:867 ../src/editor/slib-editor.c:874
 msgid "Insert Link"
-msgstr "Verwijzing toevoegen"
+msgstr "插入链接"
 
 #: ../src/editor/slib-editor.c:1256 ../src/editor/slib-editor.c:1293
 msgid "Save the changes to document"
-msgstr "Wijzigingen opslaan"
+msgstr "保存修改内容"
 
 #: ../src/editor/slib-editor.c:1257 ../src/editor/slib-editor.c:1294
 msgid "before closing?"
-msgstr "voor afsluiten?"
+msgstr "在关闭之前"
 
 #: ../src/editor/slib-editor.c:1264 ../src/editor/slib-editor.c:1301
 msgid "If you don't save, changes will be permanently lost."
-msgstr "Wijzigingen gaan verloren als u niet opslaat."
+msgstr "如果您不保存，变更将永久丢失。"
 
 #: ../src/editor/slib-editor.c:1292 ../ui/xi-menus.glade.h:39
 msgid "File"
-msgstr "Bestand"
+msgstr "文件"
 
 #: ../src/editor/slib-editor.c:1347
 msgid "StudyPad"
-msgstr "Notitieblok"
+msgstr "研修笔记"
 
 #: ../src/editor/slib-editor.c:1360
 msgid "Note Editor"
-msgstr "Notitieblok"
+msgstr "笔记编辑器"
 
 #: ../src/editor/slib-editor.c:1374
 msgid "Prayer List/Journal Editor"
-msgstr "Gebedslijst/Berichten-editor"
+msgstr "祈祷名单/笔记编辑器"
 
 #: ../src/gecko/gecko-html.cpp:177 ../src/gnome2/html.c:163
 msgid "Unlock "
-msgstr "Slot openen "
+msgstr "解锁 "
 
 #: ../src/gecko/gecko-print.c:172
 msgid "Preparing to print"
-msgstr "Afdrukken wordt voorbereid"
+msgstr "正在准备打印"
 
 #: ../src/gecko/gecko-print.c:266
 msgid "Printing is not supported on this printer"
-msgstr "Printen op deze printer wordt niet ondersteund"
+msgstr "此打印机上目前尚不支持打印"
 
 #: ../src/gecko/gecko-print.c:269
 #, c-format
 msgid "Printer %s does not support PostScript printing."
-msgstr "Printer %s ondersteund geen PostScript-printen."
+msgstr "打印机 %s 并不支持 PostScript 打印。"
 
 #: ../src/gecko/gecko-print.c:342 ../src/gecko/gecko-print.c:370
 msgid "Printing"
-msgstr "Bezig met afdrukken"
+msgstr "正在打印"
 
 #: ../src/gecko/gecko-print.c:372
 msgid "Waiting to print"
-msgstr "Bezig met wachten totdat er afgedrukt kan worden"
+msgstr "等候打印"
 
 #: ../src/gecko/gecko-print.c:584
 msgid "An error occurred while printing"
-msgstr "Fout tijdens afdrukken"
+msgstr "打印时发生了一个错误"
 
 #: ../src/gecko/gecko-print.c:588
 #, c-format
 msgid "It was not possible to print your document: %s"
-msgstr "Afdrukken van document %s is mislukt."
+msgstr "无法打印您的文档：%s"
 
 #: ../src/gnome2/about_modules.c:195
 msgid "About Sword Module"
-msgstr "Module over SWORD"
+msgstr "关于 Sword 模块"
 
 #: ../src/gnome2/about_modules.c:389 ../src/gnome2/mod_mgr.c:256
 msgid "The module has no About information."
-msgstr "De module heeft geen \"Over\" informatie"
+msgstr "模块不包含关于信息。"
 
 #: ../src/gnome2/about_sword.c:81
 msgid ""
@@ -205,10 +204,13 @@ msgid ""
 "\n"
 " Books can be downloaded from the SWORD Project."
 msgstr ""
+"The SWORD Project 是一个不断努力创建上帝和研修祂话语的软件包。The SWORD "
+"Project 软件框架允许您容易地研修圣经文本、注释、词典和字典的应用。很多应用软"
+"件都使用这一框架。已安装的一套书籍可在所有前端使用此框架的软件共享。"
 
 #: ../src/gnome2/about_sword.c:105
 msgid "The SWORD Project"
-msgstr "Het SWORD-project"
+msgstr ""
 
 #: ../src/gnome2/about_trans.c:84
 msgid ""
@@ -219,26 +221,24 @@ msgid ""
 "other languages. If you are able to translate for us, please see the link "
 "below, contact us, and get involved with our efforts."
 msgstr ""
-"Bevalt Xiphos u als bijbelstudiehulp? Wilt u dat het programma ook uw taal "
-"ondersteund? U kunt ook een bijdrage leveren.Wij zijn altijd op zoek naar "
-"nieuwe vertalingen van Xiphos. Als u daarvoor de tijd heeft, klik dan op de "
-"link hieronder voor meer informatie."
+"你喜欢使用Xiphos研究圣经吗？你想看到它的显示使用您的母语是什么？你可以翻译"
+"Xiphos！"
 
 #: ../src/gnome2/about_trans.c:98
 msgid "About Xiphos Translation"
-msgstr "Xiphos vertaling"
+msgstr "关于 Xiphos 翻译"
 
 #: ../src/gnome2/about_trans.c:140
 msgid "See TRANSLATION-HOWTO in Xiphos source"
-msgstr "Lees de TRANSLATION HOWTO in de broncode van Xiphos"
+msgstr "请参考 Xiphos 资源中的 翻译指南"
 
 #: ../src/gnome2/about_trans.c:146
 msgid "Xiphos development"
-msgstr "Xiphos ontwikkeling"
+msgstr "Xiphos 开发项目"
 
 #: ../src/gnome2/about_xiphos.c:130
 msgid "Copyright 2000-2009 The Xiphos Development Team"
-msgstr "Auteursrecht 2000-2008 Het ontwikkelteam van Xiphos"
+msgstr "版权所有 2000-2009 Xiphos 开发项目组"
 
 #: ../src/gnome2/about_xiphos.c:133
 msgid ""
@@ -248,14 +248,14 @@ msgid ""
 "We would like to thank Troy Griffitts and all the other folks who have given "
 "us The SWORD Project."
 msgstr ""
-"(voorheen bekend als GnomeSword)\n"
-"Mogelijk gemaakt voor het SWORD-project.\n"
-"We willen Troy Griffitts en vele anderen bedanken voor hun bijdrage aan "
-"SWORD."
+"(与 GnomeSword 齐名)\n"
+"\n"
+"Powered by The SWORD Project.\n"
+"我们感谢 Troy Griffitts 和所有在 The SWORD Project 奉献的朋友。"
 
 #: ../src/gnome2/bibletext_dialog.c:315
 msgid "Go to "
-msgstr "Ga naar "
+msgstr "转到 "
 
 #. info->stock_icon = GTK_STOCK_OPEN;
 #: ../src/gnome2/bookmark_dialog.c:171 ../src/gnome2/bookmarks_menu.c:363
@@ -263,162 +263,162 @@ msgstr "Ga naar "
 #: ../src/gnome2/bookmarks_treeview.c:134 ../ui/editor_studypad.xml.h:2
 #: ../ui/xi-menus.glade.h:13
 msgid "Bookmark"
-msgstr "Bladwijzer"
+msgstr "书签"
 
 #: ../src/gnome2/bookmark_dialog.c:173 ../src/gnome2/bookmarks_menu.c:758
 #: ../src/gnome2/bookmarks_treeview.c:135
 msgid "Enter Folder Name"
-msgstr "Mapnaam invoeren"
+msgstr "输入文件夹名称"
 
 #: ../src/gnome2/bookmark_dialog.c:175 ../src/gnome2/bookmarks_menu.c:760
 msgid "Folder Name"
-msgstr "Mapnaam"
+msgstr "文件夹名称"
 
 #: ../src/gnome2/bookmark_dialog.c:176 ../src/gnome2/bookmarks_menu.c:761
 #: ../src/gnome2/bookmarks_treeview.c:137
 msgid "Folder: "
-msgstr "Map: "
+msgstr "文件夹： "
 
 #: ../src/gnome2/bookmarks_menu.c:206
 #, fuzzy
 msgid "Specify bookmarks file"
-msgstr "Bladwijzeritem bewerken"
+msgstr "编辑书签"
 
 #: ../src/gnome2/bookmarks_menu.c:349 ../ui/xi-menus.glade.h:32
 msgid "Edit"
-msgstr "Bewerken"
+msgstr "编辑"
 
 #: ../src/gnome2/bookmarks_menu.c:366
 msgid "Folder name: "
-msgstr "Mapnaam: "
+msgstr "文件夹名称: "
 
 #: ../src/gnome2/bookmarks_menu.c:369
 msgid "Bookmark name: "
-msgstr "Bladwijzernaam: "
+msgstr "书签名称 "
 
 #: ../src/gnome2/bookmarks_menu.c:372 ../src/gnome2/bookmarks_menu.c:666
 msgid "Verse: "
-msgstr "Vers: "
+msgstr "经文 "
 
 #: ../src/gnome2/bookmarks_menu.c:373 ../src/gnome2/bookmarks_menu.c:667
 msgid "Module: "
-msgstr "Module: "
+msgstr "模块: "
 
 #: ../src/gnome2/bookmarks_menu.c:495
 msgid "Remove the selected folder"
-msgstr "Geselecteerde map verwijderen"
+msgstr "移除选择的文件夹"
 
 #: ../src/gnome2/bookmarks_menu.c:497
 msgid "(and all its contents)?"
-msgstr "(en de gehele inhoud)?"
+msgstr "(和所有的内容)？"
 
 #: ../src/gnome2/bookmarks_menu.c:500
 msgid "Remove the selected bookmark"
-msgstr "Geselecteerde bladwijzer verwijderen"
+msgstr "删除选中的书签"
 
 #: ../src/gnome2/bookmarks_menu.c:659
 msgid "Add"
-msgstr "Toevoegen"
+msgstr "添加"
 
 #: ../src/gnome2/bookmarks_menu.c:665
 msgid "Label: "
-msgstr "Label: "
+msgstr "标签： "
 
 #: ../src/gnome2/bookmarks_treeview.c:108 ../src/gnome2/export_bookmarks.c:193
 #: ../src/gnome2/export_bookmarks.c:252
 #, c-format
 msgid "Search result: %s"
-msgstr "Zoekresultaat: %s"
+msgstr ""
 
 #: ../src/gnome2/bookmarks_treeview.c:945 ../src/gnome2/sidebar.c:1376
 msgid "Bookmarks"
-msgstr "Bladwijzers"
+msgstr "书签"
 
 #: ../src/gnome2/cipher_key_dialog.c:61
-#, fuzzy, c-format
+#, c-format
 msgid "Cipher key for module %s"
-msgstr "Bezig met zoeken naar SWORD-modules"
+msgstr ""
 
 #: ../src/gnome2/cipher_key_dialog.c:62
 msgid "for:"
-msgstr "voor:"
+msgstr "授予:"
 
 #: ../src/gnome2/cipher_key_dialog.c:65
 #, fuzzy
 msgid "Enter Key: "
-msgstr "Geef sleutelcode: "
+msgstr "输入密码钥匙 "
 
 #: ../src/gnome2/dialog.c:264
 msgid "Close without Saving"
-msgstr "Sluiten zonder opslaan"
+msgstr "关闭而不保存"
 
 #: ../src/gnome2/dialog.c:573
 msgid "Xiphos:"
-msgstr "Xiphos:"
+msgstr "Xiphos"
 
 #: ../src/gnome2/dialog.c:674
 msgid "Close _without Saving"
-msgstr "Sluiten _zonder opslaan"
+msgstr "关闭而不保存(_W)"
 
 #: ../src/gnome2/export_bookmarks.c:195 ../src/gnome2/export_bookmarks.c:254
 #: ../src/gnome2/sidebar.c:1392
 #, c-format
 msgid "Verse List"
-msgstr "Verslijst"
+msgstr "经文列表"
 
 #: ../src/gnome2/export_bookmarks.c:689
 msgid "VerseList"
-msgstr ""
+msgstr "经文列表"
 
 #: ../src/gnome2/export_bookmarks.c:694
 msgid "SearchResults"
-msgstr ""
+msgstr "搜索结果"
 
 #: ../src/gnome2/export_dialog.c:267 ../ui/export-dialog.glade.h:20
 msgid "Please check copyright before exporting!"
-msgstr "Controleer de auteursrechten voordat u exporteert!"
+msgstr "请在导出文件之前检查是否有版权保护"
 
 #: ../src/gnome2/find_dialog.c:204 ../src/gnome2/find_dialog.c:373
 msgid "Find"
-msgstr "Zoeken"
+msgstr "查找"
 
 #: ../src/gnome2/find_dialog.c:222
 msgid "Enter Word or Phrase"
-msgstr "Geef een woord of een zin"
+msgstr "输入词语或短语"
 
 #: ../src/gnome2/find_dialog.c:238 ../src/gnome2/search_sidebar.c:297
 #: ../ui/search-dialog.glade.h:59
 msgid "Match case"
-msgstr "Hoofdlettergevoelig"
+msgstr "区分大小写"
 
 #: ../src/gnome2/find_dialog.c:245
 msgid "Search backwards"
-msgstr "Terugwaarts zoeken"
+msgstr "向后搜索"
 
 #: ../src/gnome2/find_dialog.c:254 ../src/gnome2/search_sidebar.c:262
 #: ../ui/search-dialog.glade.h:76
 msgid "Regular expression"
-msgstr "Reguliere expressie"
+msgstr "正则表达式"
 
 #: ../src/gnome2/find_dialog.c:295
 msgid "Find Next"
-msgstr "Volgende zoeken"
+msgstr "查找下一个"
 
 #: ../src/gnome2/font_dialog.c:304
 msgid "Set Module Font"
-msgstr "Lettertype voor module"
+msgstr "设置模块字体"
 
 #: ../src/gnome2/font_dialog.c:334
 msgid "Change font for"
-msgstr "Wijzig lettertype van"
+msgstr "变更字体为"
 
 #: ../src/gnome2/font_dialog.c:338
 msgid "Module"
-msgstr "Module"
+msgstr "模块"
 
 #: ../src/gnome2/font_dialog.c:342
 msgid "Current font: "
-msgstr "Huidige lettertype: "
+msgstr "当前字体: "
 
 #: ../src/gnome2/font_dialog.c:374
 msgid "+0"
@@ -426,7 +426,7 @@ msgstr "+0"
 
 #: ../src/gnome2/font_dialog.c:378
 msgid "Use the default font for this module"
-msgstr "Gebruik het standaardlettertype voor deze module"
+msgstr "在此模块上使用默认字体"
 
 #. *****************************************************************************
 #. * Name
@@ -455,11 +455,12 @@ msgid ""
 "Would you like Xiphos to set itself as the\n"
 "program to handle these references?"
 msgstr ""
-"URL-verwijzingen als \"sword://\"(net zoals http) kunnenworden gebruikt door "
-"programma's om bijbelverwijzingente openen. Wilt u dat Xiphos als standaard "
-"programma op uw systeem wordt ingesteld?\n"
+"URL 协议关联使用 \"sword://\"(类似网页协议\n"
+"关联)能够用于程序的经文引用功能。您的\n"
+"系统当前没有程序关联到此开头的协议。\n"
 "\n"
-"Momenteel is er geen programma gekoppeld aan dit typeverwijzing."
+"你希望Xiphos将其设置为以此开头协议的\n"
+"默认关联的程序吗？"
 
 #: ../src/gnome2/gui.c:103
 msgid ""
@@ -470,12 +471,11 @@ msgid ""
 "to examine keys under /desktop/gnome/url-handlers,\n"
 "if you need to change these."
 msgstr ""
-"Xiphos is nu het standaardprogramma\n"
-"voor URLs als sword:// en bible://.\n"
+"Xiphos 已经成功地将其设置为\n"
+"sword://和bible://地址的默认关联。\n"
 "\n"
-"Met het programma \"gconf-editor\" kunt u dit\n"
-"m.b.v. de sleutels onder /desktop/gnome/url-handlers\n"
-"wijzigen."
+"如果需要的话，您可能需要运行“gconf-editor”检查\n"
+"位于 /desktop/gnome/url-handles的相关键值。"
 
 #: ../src/gnome2/gui.c:157
 #, c-format
@@ -483,47 +483,47 @@ msgid ""
 "Xiphos failed to complete handler init for key #%d:\n"
 "%s"
 msgstr ""
-"Het instellen van de standaardtoewijzing voor de toets #%d:\n"
-"%s is mislukt"
+"Xiphos未完成处理程序初始化键 #%d\n"
+"%s"
 
 #: ../src/gnome2/gui.c:203
 msgid "BUG! Xiphos is about to crash due to a \"STRDUP\" error."
-msgstr "BUG! Xiphos punt staat te crashen als gevolg van een \"STRDUP\" error."
+msgstr "囧！Xiphos由于“STRDUP”错误而崩溃。"
 
 #: ../src/gnome2/gui.c:204 ../src/gnome2/gui.c:239
 msgid "Please report this error to the Xiphos team with:"
-msgstr "Meld deze fout aan de xiphos team met:"
+msgstr "请向Xiphos小组报告这个错误:"
 
 #: ../src/gnome2/gui.c:238
 msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
-msgstr "BUG! Xiphos punt staat te crashen als gevolg van een \"STRING\" error."
+msgstr "囧！Xiphos由于“STRING”错误而崩溃。"
 
 #: ../src/gnome2/main_window.c:795
 msgid "Xiphos - Bible Study Software"
-msgstr "Xiphos - Bijbelstudieprogramma"
+msgstr "Xiphos - 圣经研修软件"
 
 #: ../src/gnome2/main_window.c:850
 msgid "Open a new tab"
-msgstr "Nieuw tabblad openen"
+msgstr "在新标签页中打开"
 
 #: ../src/gnome2/main_window.c:928 ../src/gnome2/sidebar.c:618
 #: ../src/gnome2/sidebar.c:624 ../src/main/sidebar.cc:655
 #: ../src/main/sidebar.cc:998 ../src/main/sidebar.cc:999
 #: ../src/main/sidebar.cc:1000
 msgid "Standard View"
-msgstr "Standaardweergave"
+msgstr "标准试图"
 
 #: ../src/gnome2/main_window.c:1009
 msgid "Commentary View"
-msgstr "Commentaar"
+msgstr "注释视图"
 
 #: ../src/gnome2/main_window.c:1025
 msgid "Book View"
-msgstr "Boek"
+msgstr "书卷视图"
 
 #: ../src/gnome2/main_window.c:1050
 msgid "Welcome to Xiphos"
-msgstr "Welkom op Xiphos"
+msgstr "欢迎使用 Xiphos"
 
 #: ../src/gnome2/menu_popup.c:1208
 msgid ""
@@ -536,38 +536,39 @@ msgid ""
 "Therefore, personal commentary renaming is\n"
 "not available in the Windows environment."
 msgstr ""
-"Hernoemen is niet mogelijk in Windows.\n"
+"在 Windows 中重命名不可用。\n"
 "\n"
-"Xiphos wordt beperkt door Windows'\n"
-"bestandssysteem. Daardoor is het niet mogelijk\n"
-"om geopende bestanden te hernoemen,\n"
-"zoals de inhoud van dit commentaar."
+"Xiphos 由于 Windows 文件系统的限制，\n"
+"因为它不允许将正在使用的文件改名，\n"
+"比如当前文档的注释。\n"
+"因此，个人注释的重新命名将无法在\n"
+"Windows环境中使用。"
 
 #: ../src/gnome2/menu_popup.c:1227
 msgid "Rename Commentary"
-msgstr "Commentaar hernoemen"
+msgstr "重命名注释"
 
 #: ../src/gnome2/menu_popup.c:1230
 msgid "Choose Commentary Name"
-msgstr "Commentaarnaam kiezen"
+msgstr "选择注释名称"
 
 #: ../src/gnome2/menu_popup.c:1232
 msgid "New Name"
-msgstr "Nieuwe naam"
+msgstr "新名称"
 
 #: ../src/gnome2/menu_popup.c:1233 ../src/gnome2/treekey-editor.c:135
 #: ../src/gnome2/treekey-editor.c:194 ../src/gnome2/treekey-editor.c:280
 #: ../src/main/prayerlists.cc:243
 msgid "Name: "
-msgstr "Naam: "
+msgstr "名称: "
 
 #: ../src/gnome2/menu_popup.c:1243 ../src/main/prayerlists.cc:257
 msgid "Module names must contain [A-Za-z0-9_] only."
-msgstr "Modulenamen kunnen alleen letters en getallen.bevatten."
+msgstr "模块名称只能包含英文字母和数字。"
 
 #: ../src/gnome2/menu_popup.c:1250 ../src/main/prayerlists.cc:264
 msgid "Xiphos already knows a module by that name."
-msgstr "Xiphos kent al een module met die naam."
+msgstr "Xiphos 已经知道一个该名称的模块。"
 
 #: ../src/gnome2/menu_popup.c:1291
 #, c-format
@@ -575,7 +576,7 @@ msgid ""
 "Failed to create new configuration:\n"
 "%s"
 msgstr ""
-"Maken van een nieuwe configuratie is mislukt:\n"
+"创建新配置时失败:\n"
 "%s"
 
 #: ../src/gnome2/menu_popup.c:1300
@@ -583,154 +584,148 @@ msgid ""
 "Configuration build error:\n"
 "\n"
 msgstr ""
-"Fout bij het aanmaken van de configuratie:\n"
+"创建配置错误:\n"
 "\n"
 
 #: ../src/gnome2/mod_mgr.c:174
 msgid "Remove these modules?"
-msgstr "Verwijder deze modules?"
+msgstr "是否移除这些模块"
 
 #: ../src/gnome2/mod_mgr.c:175
 msgid "Preparing to remove"
-msgstr "Verwijderen wordt voorbereid"
+msgstr "正在准备移除"
 
 #: ../src/gnome2/mod_mgr.c:176
 msgid "Removing"
-msgstr "Verwijderen"
+msgstr "正在移除中"
 
 #: ../src/gnome2/mod_mgr.c:177 ../ui/xi-menus.glade.h:73
 msgid "Remove"
-msgstr "Verwijder"
+msgstr "移除"
 
 #: ../src/gnome2/mod_mgr.c:180
 msgid "Install these modules?"
-msgstr "Installeer deze modules?"
+msgstr "是否安装这些模块"
 
 #: ../src/gnome2/mod_mgr.c:181
 msgid "Preparing to install"
-msgstr "Installatie wordt voorbereid"
+msgstr "正在准备安装"
 
 #: ../src/gnome2/mod_mgr.c:182
 msgid "Installing"
-msgstr "Installeren"
+msgstr "正在安装"
 
 #: ../src/gnome2/mod_mgr.c:183
 msgid "Install"
-msgstr "Installeer"
+msgstr "安装"
 
 #: ../src/gnome2/mod_mgr.c:186
 msgid "Archive these modules?"
-msgstr "Archief deze modules?"
+msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:187
 msgid "Preparing to archive"
-msgstr "Back-up wordt voorbereid"
+msgstr "正在准备存档"
 
 #: ../src/gnome2/mod_mgr.c:188
 msgid "Archiving"
-msgstr "Bezig met maken back-up"
+msgstr "正在存档"
 
 #: ../src/gnome2/mod_mgr.c:189
 msgid "Archive"
-msgstr "Back-up maken"
+msgstr "存档"
 
 #: ../src/gnome2/mod_mgr.c:192
 msgid ""
 "Build fast-search index for these\n"
 "modules (may take minutes/module)?"
 msgstr ""
-"Bouw fast-index voor deze\n"
-"modules (kan minuten duren/module)?"
+"是否为这些模块建立快速索引\n"
+"(可能会持续一会儿)？"
 
 #: ../src/gnome2/mod_mgr.c:193
 msgid "Preparing to index"
-msgstr "Indexeren wordt voorbereid"
+msgstr "正在准备建立索引"
 
 #: ../src/gnome2/mod_mgr.c:194
 msgid "Indexing"
-msgstr "Indexeren"
+msgstr "正在索引"
 
 #: ../src/gnome2/mod_mgr.c:195
 msgid "Index"
-msgstr "Zoekindex maken"
+msgstr "索引"
 
 #: ../src/gnome2/mod_mgr.c:198
 msgid "Delete fast-search index for these modules?"
-msgstr "Verwijder fast-search-index voor deze modules?"
+msgstr "是否删除这些模块的快速索引记录？"
 
 #: ../src/gnome2/mod_mgr.c:199
 msgid "Preparing to delete index"
-msgstr "Verwijderen index wordt voorbereid"
+msgstr "正在准备删除索引记录"
 
 #: ../src/gnome2/mod_mgr.c:200
 msgid "Deleting index"
-msgstr "Index wordt verwijderd"
+msgstr "正在删除索引记录"
 
 #: ../src/gnome2/mod_mgr.c:201
 msgid "Deletion"
-msgstr "Verwijderen"
+msgstr "删除"
 
 #: ../src/gnome2/mod_mgr.c:426
 msgid "Module Name"
-msgstr "Modulenaam"
+msgstr "模块名称"
 
 #: ../src/gnome2/mod_mgr.c:447
 msgid "A checkmark means this module is already installed"
-msgstr "Het markeringssymbool betekent dat deze module al geïnstalleerd is."
+msgstr "带对钩的标记表示这个模块已经安装"
 
 #: ../src/gnome2/mod_mgr.c:469
 msgid "Click the box to work on this module"
-msgstr "Klik op het vakje om te werken aan deze module"
+msgstr "单击方框开始启用这个模块"
 
 #: ../src/gnome2/mod_mgr.c:470
 msgid "Click the box to select this module for install/update"
-msgstr ""
-"Klik op het vakje te selecteren voor deze module te installeren/updaten"
+msgstr "单击方框选择安装/更新的模块"
 
 #: ../src/gnome2/mod_mgr.c:489
 msgid "Installed"
-msgstr "Geïnstalleerd"
+msgstr "已安装"
 
 #: ../src/gnome2/mod_mgr.c:499
 msgid ""
 "The index icon means you have built an optimized ('lucene') index for this "
 "module for fast searching (see the Maintenance pane for this function)"
 msgstr ""
-"De index-pictogram betekent dat je een geoptimaliseerd ('Lucene') index "
-"gebouwd voor deze module voor snel zoeken (zie de Maintenance paneel voor "
-"deze functie)"
+"索引图标表示您已经为这个模块的快速搜索建立了一个('lucene')优化索引(请参见此功"
+"能维护窗格)"
 
 #: ../src/gnome2/mod_mgr.c:517
 msgid ""
 "The lock icon means this module is encrypted, and requires that you purchase "
 "an unlock key from the content owner"
-msgstr ""
-"Het slot pictogram betekent deze module is gecodeerd, en vereist dat u koopt "
-"een unlock sleutel van de eigenaar van de inhoud"
+msgstr "锁形图标表示这个模块被加密，您需要向内容所有者购买一个解锁密码键"
 
 #: ../src/gnome2/mod_mgr.c:534 ../ui/xi-menus.glade.h:1
 msgid "About"
-msgstr "In_fo"
+msgstr "关于"
 
 #: ../src/gnome2/mod_mgr.c:554
 msgid ""
 "The refresh icon means the Installed module is older than the newer "
 "Available module: You should update the module"
-msgstr ""
-"Het vernieuwen icoon betekent dat de geïnstalleerde module is ouder dan de "
-"nieuwere Beschikbaar module: U moet de module update"
+msgstr "更新图标表示已安装的模块要比可更新的模块要旧:我们推荐您更新模块"
 
 #: ../src/gnome2/mod_mgr.c:566
 msgid "Available"
-msgstr "Beschikbaar"
+msgstr "可用"
 
 #: ../src/gnome2/mod_mgr.c:575
 msgid "Size"
-msgstr "Grootte"
+msgstr "大小"
 
 #: ../src/gnome2/mod_mgr.c:584
 msgid "Description"
-msgstr "Beschrijving"
+msgstr "说明"
 
 #: ../src/gnome2/mod_mgr.c:731
 #, c-format
@@ -738,25 +733,25 @@ msgid ""
 "`mkdir %s' failed:\n"
 "%s."
 msgstr ""
-"`mkdir %s' is mislukt:\n"
-"%s."
+"mkdir %s' 失败:\n"
+"%s。"
 
 #: ../src/gnome2/mod_mgr.c:753
 msgid " archived in: \n"
-msgstr " gearchiveerd in: \n"
+msgstr " 存档于: \n"
 
 #: ../src/gnome2/mod_mgr.c:806
 msgid "Journals and prayer lists cannot be indexed."
-msgstr "Berichten en gebedslijsten kunnen niet geïndexeerd worden."
+msgstr "周记和祈祷名单不能被索引。"
 
 #: ../src/gnome2/mod_mgr.c:825
 #, c-format
 msgid "%s failed"
-msgstr "%s is mislukt"
+msgstr "%s 失败"
 
 #: ../src/gnome2/mod_mgr.c:828 ../src/gnome2/mod_mgr.c:1552
 msgid "Finished"
-msgstr "Voltooid"
+msgstr "已完成"
 
 #: ../src/gnome2/mod_mgr.c:996 ../src/gnome2/mod_mgr.c:998
 #: ../src/gnome2/mod_mgr.c:1100 ../src/gnome2/mod_mgr.c:1135
@@ -765,7 +760,7 @@ msgstr "Voltooid"
 #: ../src/gnome2/utilities.c:1021 ../src/main/sidebar.cc:835
 #: ../src/main/sidebar.cc:907 ../src/main/sidebar.cc:909
 msgid "Unknown"
-msgstr "Onbekend"
+msgstr "未知"
 
 #: ../src/gnome2/mod_mgr.c:1294
 #, c-format
@@ -773,148 +768,144 @@ msgid ""
 "Repository:\n"
 "%s"
 msgstr ""
-"Bron:\n"
+"知识库:\n"
 "%s"
 
 #: ../src/gnome2/mod_mgr.c:1306
 msgid ""
 "Categorized by\n"
 "Module Type"
-msgstr ""
-"Gesorteerd bij\n"
-"moduletype"
+msgstr "按模块类型分类。"
 
 #: ../src/gnome2/mod_mgr.c:1311 ../src/gnome2/utilities.c:579
 #: ../src/main/sidebar.cc:982 ../src/main/sidebar.cc:984
 msgid "Biblical Texts"
-msgstr "Bijbelvertalingen"
+msgstr "圣经文本"
 
 #: ../src/gnome2/mod_mgr.c:1315 ../src/gnome2/utilities.c:583
 #: ../src/main/sidebar.cc:667 ../src/main/sidebar.cc:1007
 #: ../src/main/sidebar.cc:1009 ../ui/prefs.glade.h:36
 msgid "Commentaries"
-msgstr "Commentaren"
+msgstr "注释"
 
 #: ../src/gnome2/mod_mgr.c:1319 ../src/gnome2/utilities.c:588
 #: ../src/main/sidebar.cc:1016 ../src/main/sidebar.cc:1018
 msgid "Dictionaries"
-msgstr "Woordenboeken"
+msgstr "词典"
 
 #: ../src/gnome2/mod_mgr.c:1323 ../src/gnome2/utilities.c:592
 #: ../src/main/sidebar.cc:1025 ../src/main/sidebar.cc:1027
 msgid "Daily Devotionals"
-msgstr "Dagboeken"
+msgstr "每日灵修"
 
 #: ../src/gnome2/mod_mgr.c:1327 ../src/gnome2/utilities.c:596
 #: ../src/main/sidebar.cc:677 ../src/main/sidebar.cc:1034
 #: ../src/main/sidebar.cc:1036
 msgid "General Books"
-msgstr "Boeken"
+msgstr "普通书卷"
 
 #: ../src/gnome2/mod_mgr.c:1331 ../src/gnome2/utilities.c:600
 #: ../src/main/sidebar.cc:1043 ../src/main/sidebar.cc:1045
 msgid "Maps"
-msgstr "Landkaarten"
+msgstr "地图"
 
 #: ../src/gnome2/mod_mgr.c:1335 ../src/gnome2/utilities.c:604
 #: ../src/main/sidebar.cc:1052 ../src/main/sidebar.cc:1054
 msgid "Images"
-msgstr "Illustraties"
+msgstr "图片"
 
 #: ../src/gnome2/mod_mgr.c:1343
 msgid ""
 "Categorized by\n"
 "Availability"
-msgstr ""
-"Gecategoriseerd bij\n"
-"beschikbaarheid"
+msgstr "按可用性分类。"
 
 #: ../src/gnome2/mod_mgr.c:1348
 msgid "Updates"
-msgstr "Updates"
+msgstr "更新"
 
 #: ../src/gnome2/mod_mgr.c:1352
 msgid "Uninstalled"
-msgstr "Niet geïnstalleerd"
+msgstr "没有安装"
 
 #: ../src/gnome2/mod_mgr.c:1356 ../src/gnome2/sidebar.c:634
 #: ../src/gnome2/utilities.c:609 ../src/main/prayerlists.cc:241
 #: ../src/main/sidebar.cc:1062 ../src/main/sidebar.cc:1064
 msgid "Prayer List/Journal"
-msgstr "Gebedslijst/Bericht"
+msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:1536
 msgid "Refreshing from remote source"
-msgstr "Verfrissend afgelegen bron"
+msgstr "更新远程数据源"
 
 #: ../src/gnome2/mod_mgr.c:1546
 msgid "Remote source not found"
-msgstr "Remote source not found"
+msgstr "远程数据源未找到"
 
 #: ../src/gnome2/mod_mgr.c:1616
 msgid "Configure"
-msgstr "Configureren"
+msgstr "设置"
 
 #: ../src/gnome2/mod_mgr.c:1647
 msgid "Type"
-msgstr "Type"
+msgstr "类型"
 
 #: ../src/gnome2/mod_mgr.c:1654
 msgid "Caption"
-msgstr "Titel"
+msgstr "标题"
 
 #: ../src/gnome2/mod_mgr.c:1662
 msgid "Source"
-msgstr "Bron"
+msgstr "数据源"
 
 #: ../src/gnome2/mod_mgr.c:1670
 msgid "Directory"
-msgstr "Map"
+msgstr "目录"
 
 #: ../src/gnome2/mod_mgr.c:1678
 msgid "User"
-msgstr "Gebruiker"
+msgstr "用户"
 
 #: ../src/gnome2/mod_mgr.c:1686
 msgid "Password"
-msgstr "Wachtwoord"
+msgstr "密码"
 
 #: ../src/gnome2/mod_mgr.c:1694
 msgid "UID"
-msgstr "UID"
+msgstr "用户 ID"
 
 #: ../src/gnome2/mod_mgr.c:1711
 msgid "Module Sources"
-msgstr "Module Bronnen"
+msgstr "模块数据源"
 
 #: ../src/gnome2/mod_mgr.c:1714
 msgid "Add/Remove"
-msgstr "Toevoegen/Verwijderen"
+msgstr "添加/删除"
 
 #: ../src/gnome2/mod_mgr.c:1716
 msgid "Choose"
-msgstr "Kiezen"
+msgstr "选择"
 
 #: ../src/gnome2/mod_mgr.c:1720 ../src/gnome2/preferences_dialog.c:1637
 #: ../src/gnome2/sidebar.c:1400
 msgid "Modules"
-msgstr "Modules"
+msgstr "模块"
 
 #: ../src/gnome2/mod_mgr.c:1722
 msgid "Install/Update"
-msgstr "Installeren/Bijwerken"
+msgstr "安转个/更新"
 
 #: ../src/gnome2/mod_mgr.c:1724
 msgid "Maintenance"
-msgstr "Onderhoud"
+msgstr "维护"
 
 #: ../src/gnome2/mod_mgr.c:1945
 msgid "Please Refresh"
-msgstr "Verversen alstublieft"
+msgstr "请更新"
 
 #: ../src/gnome2/mod_mgr.c:1946
 msgid "Your module list is not up to date!"
-msgstr "Uw modelelijst is niet actueel!"
+msgstr "您的模块清单不是最新的！"
 
 #. Zero Bibles is just not workable in Xiphos.
 #: ../src/gnome2/mod_mgr.c:2239
@@ -922,24 +913,24 @@ msgid ""
 "You have uninstalled your last Bible.\n"
 "Xiphos requires at least one."
 msgstr ""
-"U hebt verwijderd uw laatste Bijbel.\n"
-"Xiphos vereist ten minste een."
+"您刚刚删除了您的最后一本圣经。\n"
+"Xiphos 需要至少安装一本。"
 
 #: ../src/gnome2/mod_mgr.c:2245
 msgid ""
 "There are still no Bibles installed.\n"
 "Xiphos cannot continue without one."
 msgstr ""
-"Er zijn nog geen bijbels geïnstalleerd.\n"
-"Xiphos kan niet doorgaan zonder een."
+"您仍然未安装任何圣经。\n"
+"Xiphos 由于缺少必要的书籍数据无法继续运行。"
 
 #: ../src/gnome2/mod_mgr.c:2335
 msgid "Standard remote sources have been loaded."
-msgstr "Standaard afstandsbediening bronnen zijn geladen."
+msgstr "标准数据源已经载入。"
 
 #: ../src/gnome2/mod_mgr.c:2341
 msgid "Could not load standard sources from CrossWire."
-msgstr "Kan niet laden standaard bronnen van CrossWire."
+msgstr "不能从 CrossWire 载入标准数据源。"
 
 #: ../src/gnome2/mod_mgr.c:2345
 #, fuzzy
@@ -966,112 +957,107 @@ msgid ""
 "Live Chat, or (if no one is responsive in chat) send mail to our users' "
 "mailing list.\n"
 msgstr ""
-"<b>Welkom op de Module Manager.</b>\n"
+"<b>欢迎使用组件管理器。</b>\n"
 "\n"
-"Dit mechanisme xiphos 'om nieuwe en bijgewerkte inhoud te krijgen.\n"
-"Het lijkt u hier nog nooit geweest, dus neem een moment om te kijken over.\n"
-"(U ziet deze informatie doos maar een keer.)\n"
+"这是 Xiphos 的一种获得新书卷和更新内容的机制。\n"
+"看来你从来没有来过这里，所以请花一点时间看看吧。\n"
+"(您只会在首次使用本程序时看到这个信息。)\n"
 "\n"
-"Modules komen uit verschillende <u>repositories</u>. <b>Module Bronnen: "
-"Toevoegen/Verwijderen</b> zal u tonen wat repositories momenteel bekend "
-"zijn.\n"
+"组件来自不同的 <u>资料库</u>。  <b>组件数据源: 添加/删除</b> 会告诉你什么是目"
+"前已知的资料库。\n"
 "\n"
-"<b> Module Bronnen: Kies </b> is voor de besluitvorming van waar modules "
-"moeten komen, dat wil zeggen, van waaruit menu xiphos hen zou verkrijgen, "
-"alsmede waar ze zouden moeten worden geplaatst op uw systeem. Stel <i> "
-"Install Source</i> en <i>Installeren Bestemming</i> en klik <i>Vernieuwen</"
-"i>.\n"
+"<b>组件数据源: 选择</b> 负责决定应该从那里选择模块，也就是从哪个仓库 Xiphos应"
+"该包含他们，以及他们应该在您的系统的哪个目录。设置 <i>安装数据源</i> 和 <i>安"
+"装目标目录</i>, 然后单击 <i>刷新</i>.\n"
 "\n"
-"<b>Modules: Install/Update</b> is voor de selectie en het verkrijgen van "
-"modules na het kiezen van de bron en bestemming.\n"
+"<b>组件: 安装/更新</b> 是选择和选择数据源和目标获取组件。\n"
 "\n"
-"<b>Modules: Onderhoud</b> is voor het archief en de index van de schepping.\n"
+"<b>组件: 维护</b> 为存档和索引创建。\n"
 "\n"
-"Zie punt 5 van onze handleiding voor Module Manager detail, of om hulp te "
-"vragen via Live Chat, of (als niemand reageert in chat) stuur mail naar "
-"mailing onze gebruikers 'lijst.\n"
+"参见第5节的单元管理的细节，或通过在线聊天，或者（如果没有人在聊天响应）求助邮"
+"件发送到用户的邮件列表。\n"
 
 #: ../src/gnome2/mod_mgr.c:2512 ../src/gnome2/mod_mgr.c:2758
 msgid "Remove the selected source"
-msgstr "Geselecteerde bron verwijderen"
+msgstr "删除选择的数据源"
 
 #: ../src/gnome2/mod_mgr.c:2572
 msgid "Enter a remote source"
-msgstr "Externe bron invoeren"
+msgstr "请输入一个远程数据源"
 
 #: ../src/gnome2/mod_mgr.c:2576
 msgid "Caption:"
-msgstr "Titel:"
+msgstr "标题："
 
 #: ../src/gnome2/mod_mgr.c:2577
 msgid "Type:"
-msgstr "Type:"
+msgstr "类型："
 
 #: ../src/gnome2/mod_mgr.c:2578
 msgid "Host:"
-msgstr "Host:"
+msgstr "主机名："
 
 #: ../src/gnome2/mod_mgr.c:2579
 msgid "Directory:"
-msgstr "Map:"
+msgstr "目录:"
 
 #: ../src/gnome2/mod_mgr.c:2580
 msgid "User (optional):"
-msgstr "Gebruiker (optioneel):"
+msgstr "用户名(选填):"
 
 #: ../src/gnome2/mod_mgr.c:2581
 msgid "Password (optional):"
-msgstr "Wachtwoord (optioneel):"
+msgstr "密码(选填):"
 
 #. this can happen at most once
 #: ../src/gnome2/mod_mgr.c:2608
 msgid "A source by that name already exists."
-msgstr "Een bron met die naam bestaat al."
+msgstr "已存在同名数据源。"
 
 #: ../src/gnome2/mod_mgr.c:2755
 msgid "Delete a remote source"
-msgstr "Verwijder een externe bron"
+msgstr "删除一个数据源"
 
 #: ../src/gnome2/navbar_book.c:358 ../src/gnome2/navbar_book_dialog.c:299
 msgid "Go outward, to the section containing this one"
-msgstr "Ga naar buiten, naar de sectie die deze bevat."
+msgstr ""
 
 #: ../src/gnome2/navbar_book.c:373 ../src/gnome2/navbar_book_dialog.c:314
 msgid "Go to previous item"
-msgstr "Vorig item"
+msgstr "到上一处"
 
 #: ../src/gnome2/navbar_book.c:387 ../src/gnome2/navbar_book_dialog.c:328
 msgid "Go to next item"
-msgstr "Volgend item"
+msgstr "到下一处"
 
 #: ../src/gnome2/navbar_book.c:401 ../src/gnome2/navbar_book_dialog.c:342
 msgid "Go inward, to the first subsection"
-msgstr "Ga naar binnen, naar de eerste subsectie"
+msgstr ""
 
 #: ../src/gnome2/navbar_versekey_dialog.c:868
 #: ../src/gnome2/navbar_versekey_editor.c:876
 #: ../src/gnome2/navbar_versekey_parallel.c:816
 msgid "Synchronize this window's scrolling with the main window"
-msgstr ""
+msgstr "同步这个窗口与主窗口一起滚动"
 
 #: ../src/gnome2/parallel_dialog.c:327 ../src/gnome2/preferences_dialog.c:1643
 msgid "Parallel"
-msgstr "Parallel"
+msgstr "类似"
 
 #: ../src/gnome2/parallel_view.c:124
 msgid "Detach/Attach"
-msgstr "Koppel/Ontkoppel"
+msgstr "卸载/安装"
 
 #: ../src/gnome2/parallel_view.c:130 ../ui/xi-menus.glade.h:53
 msgid "Module Options"
-msgstr "Moduleopties"
+msgstr "模块选项"
 
 #: ../src/gnome2/parallel_view.c:269 ../src/gnome2/sidebar.c:617
 #: ../src/gnome2/sidebar.c:623 ../src/gnome2/tabbed_browser.c:257
 #: ../src/main/sidebar.cc:636 ../src/main/sidebar.cc:990
 #: ../src/main/sidebar.cc:991 ../src/main/sidebar.cc:992
 msgid "Parallel View"
-msgstr "Parallelweergave"
+msgstr "类似视图"
 
 #: ../src/gnome2/preferences_dialog.c:1158
 #: ../src/gnome2/preferences_dialog.c:1196
@@ -1085,172 +1071,172 @@ msgstr "Parallelweergave"
 #: ../src/gnome2/preferences_dialog.c:1498
 #: ../src/gnome2/preferences_dialog.c:1881
 msgid "-- Select --"
-msgstr "-- Selecteer --"
+msgstr "-- 选择 --"
 
 #: ../src/gnome2/preferences_dialog.c:1460
 msgid "Locale will take effect after restart."
-msgstr "Locale wordt van kracht na herstarten."
+msgstr "重新启动后本地化设置才能生效。"
 
 #: ../src/gnome2/preferences_dialog.c:1535 ../ui/prefs.glade.h:75
 msgid "Preferences"
-msgstr "Voorkeuren"
+msgstr "首选项"
 
 #: ../src/gnome2/preferences_dialog.c:1617
 msgid "Fonts"
-msgstr "Lettertypes"
+msgstr "字体"
 
 #: ../src/gnome2/preferences_dialog.c:1620
 msgid "Color"
-msgstr "Kleur"
+msgstr "颜色"
 
 #: ../src/gnome2/preferences_dialog.c:1623
 #, fuzzy
 msgid "Sizes and Faces"
-msgstr "Tabbladen en panelen"
+msgstr "标签和窗格"
 
 #: ../src/gnome2/preferences_dialog.c:1627
 msgid "General"
-msgstr "Algemeen"
+msgstr "常规"
 
 #: ../src/gnome2/preferences_dialog.c:1630 ../ui/prefs.glade.h:89
 msgid "Tabs and Panes"
-msgstr "Tabbladen en panelen"
+msgstr "标签和窗格"
 
 #: ../src/gnome2/preferences_dialog.c:1633
 msgid "Options"
-msgstr "Opties"
+msgstr "选项"
 
 #: ../src/gnome2/preferences_dialog.c:1640
 msgid "Main"
-msgstr "Hoofdscherm"
+msgstr "主窗口"
 
 #: ../src/gnome2/preferences_dialog.c:1646
 msgid "Special"
-msgstr "Geavanceerd"
+msgstr "指定"
 
 #: ../src/gnome2/preferences_dialog.c:2290 ../src/gnome2/search_dialog.c:460
 msgid "Clear List?"
-msgstr "Lijst wissen?"
+msgstr "是否清除？"
 
 #: ../src/gnome2/preferences_dialog.c:2291 ../src/gnome2/search_dialog.c:461
 msgid "Are you sure you want to clear the module list?"
-msgstr "Weet u zeker dat u de module lijst wilt wissen?"
+msgstr "你确定要清除模块列列表？"
 
 #: ../src/gnome2/preferences_dialog.c:2336 ../src/main/search_dialog.cc:700
 msgid "Remove Module?"
-msgstr "Module verwijderen?"
+msgstr "移除模块"
 
 #: ../src/gnome2/preferences_dialog.c:2337 ../src/main/search_dialog.cc:701
 msgid "Are you sure you want to remove the selected module?"
-msgstr "Weet u zeker dat u de selecteerde module wilt wissen?"
+msgstr "你确定是否要移除所选择的模块吗？"
 
 #: ../src/gnome2/search_dialog.c:68 ../src/main/search_dialog.cc:66
 #: ../src/main/search_sidebar.cc:61
 msgid "Searching the "
-msgstr "Zoek in "
+msgstr "搜索 "
 
 #: ../src/gnome2/search_dialog.c:69 ../src/main/search_dialog.cc:67
 #: ../src/main/search_sidebar.cc:62
 msgid " Module"
-msgstr " Module"
+msgstr " 模块"
 
 #: ../src/gnome2/search_dialog.c:70 ../src/main/search_dialog.cc:68
 #: ../src/main/search_sidebar.cc:63
 msgid "found in "
-msgstr "gevonden in "
+msgstr "查找位于 "
 
 #: ../src/gnome2/search_dialog.c:419
-#, fuzzy, c-format
+#, c-format
 msgid "New List %s"
-msgstr "Lijst opslaan"
+msgstr ""
 
 #: ../src/gnome2/search_dialog.c:643
 msgid "The last module list may not be deleted"
-msgstr "De laatste module lijst mag niet worden verwijderd."
+msgstr "最后的模块列表也许不会被删除"
 
 #: ../src/gnome2/search_dialog.c:661
 msgid "Delete list?"
-msgstr "Lijst verwijderen?"
+msgstr "要删除列表吗？"
 
 #: ../src/gnome2/search_dialog.c:662
 msgid "Are you sure you want to delete:"
-msgstr "Weet u zeker dat u het volgende wilt verwijderen:"
+msgstr "你确定要删除:"
 
 #: ../src/gnome2/search_sidebar.c:184
 msgid ""
 "This is an inclusive (\"AND\") search:\n"
 "Find matches showing all words."
 msgstr ""
-"Inclusief (\"AND\") zoeken:\n"
-"Een resultaat bevat alle woorden."
+"这是一个包含 (\\\"AND\\\") 搜索:\n"
+"查找并匹配显示所有的单词。"
 
 #: ../src/gnome2/search_sidebar.c:200
 msgid "Search Module"
-msgstr "Module zoeken"
+msgstr "搜索模块"
 
 #: ../src/gnome2/search_sidebar.c:214
 msgid "Bible"
-msgstr "Bijbel"
+msgstr "圣经"
 
 #: ../src/gnome2/search_sidebar.c:223 ../ui/prefs.glade.h:38
 msgid "Commentary"
-msgstr "Commentaar"
+msgstr "注释"
 
 #: ../src/gnome2/search_sidebar.c:237
 msgid "Search Type"
-msgstr "Zoektype"
+msgstr "搜索类型"
 
 #: ../src/gnome2/search_sidebar.c:251 ../ui/search-dialog.glade.h:66
 msgid "Multi word"
-msgstr "Meerdere woorden"
+msgstr "复杂词汇"
 
 #: ../src/gnome2/search_sidebar.c:270 ../ui/search-dialog.glade.h:44
 msgid "Exact phrase"
-msgstr "Exacte zin"
+msgstr "精确短语"
 
 #: ../src/gnome2/search_sidebar.c:284
 msgid "Search Options"
-msgstr "Zoekopties"
+msgstr "搜索选项"
 
 #: ../src/gnome2/search_sidebar.c:312
 msgid "Search Scope"
-msgstr "Zoekruimte"
+msgstr "搜索范围"
 
 #: ../src/gnome2/search_sidebar.c:325
 msgid "No scope"
-msgstr "Overal zoeken"
+msgstr "没有范围"
 
 #: ../src/gnome2/search_sidebar.c:335
 msgid "Use bounds"
-msgstr "Grenzen gebruiken"
+msgstr ""
 
 #: ../src/gnome2/search_sidebar.c:344
 msgid "Last search"
-msgstr "Laatste zoekactie"
+msgstr "上次搜索"
 
 #: ../src/gnome2/search_sidebar.c:359
 msgid "Bounds"
-msgstr "Grenzen"
+msgstr "范围限制"
 
 #: ../src/gnome2/search_sidebar.c:373
 msgid "Lower"
-msgstr "Onder"
+msgstr "小写"
 
 #: ../src/gnome2/search_sidebar.c:380
 msgid "Upper"
-msgstr "Boven"
+msgstr "大写"
 
 #: ../src/gnome2/sidebar.c:1384
 msgid "Search"
-msgstr "Zoeken"
+msgstr "搜索"
 
 #: ../src/gnome2/sidebar_dialog.c:139 ../src/gnome2/sidebar_dialog.c:148
 msgid "Sidebar"
-msgstr "Zijbalk"
+msgstr "侧边栏"
 
 #: ../src/gnome2/splash.c:396
 msgid "Powered by the SWORD Project"
-msgstr "Mede mogelijk gemaakt door het SWORD-project"
+msgstr ""
 
 #: ../src/gnome2/tabbed_browser.c:366
 msgid "Can't create tabs dir."
@@ -1259,16 +1245,16 @@ msgstr ""
 #: ../src/gnome2/treekey-editor.c:133 ../src/gnome2/treekey-editor.c:192
 #: ../src/gnome2/treekey-editor.c:278
 msgid "Prayer List/Journal Item"
-msgstr "Gebedspunt/Bericht"
+msgstr "祷告名单/日记 项目"
 
 #: ../src/gnome2/treekey-editor.c:134 ../src/gnome2/treekey-editor.c:193
 #: ../src/gnome2/treekey-editor.c:279
 msgid "New name"
-msgstr "Nieuwe naam"
+msgstr "新名称"
 
 #: ../src/gnome2/treekey-editor.c:249
 msgid "Remove the selected item"
-msgstr "Geselecteerde item verwijderen"
+msgstr "移除所选项目"
 
 #: ../src/main/display.cc:259
 #, c-format
@@ -1276,8 +1262,8 @@ msgid ""
 "Improperly encoded personal annotation label:\n"
 "'%s'"
 msgstr ""
-"Onjuist gecodeerde persoonlijke annotatie label:\n"
-"'%s'"
+"个人注释标签非法:\n"
+"‘%s'"
 
 #: ../src/main/display.cc:386
 msgid ""
@@ -1286,234 +1272,234 @@ msgid ""
 "(Or possibly the image is of type other than bmp/gif/jpg/png.)\n"
 "Xiphos cannot resize images to fit window."
 msgstr ""
-"De grootte van een illustratie kon niet worden vastgesteld.\n"
-"Is ImageMagick geïnstalleerd?\n"
-"(Mogelijks is het bestandstype iets anders dan bm/gif/jpg/png.)\n"
-"Xiphos kan illustraties niet aanpassen aan de schermgrootte."
+"一张图片文件尺寸无法确定。\n"
+"ImageMagick的 'identify' 没有安装吗？\n"
+"(或者可能是其他如 bmp/gif/jpg/png 类型的图像。)\n"
+"Xiphos 无法将图像调整为窗口大小。"
 
 #: ../src/main/display.cc:1059 ../src/main/display.cc:1111
 #: ../src/main/display.cc:1188 ../ui/export-dialog.glade.h:7
 msgid "Chapter"
-msgstr "Hoofdstuk"
+msgstr "章"
 
 #: ../src/main/main.c:122
 msgid "Xiphos does not understand more than one argument."
-msgstr "Xiphos ondersteund niet meer dan één argument."
+msgstr "Xiphos 无法理解多于一个参数的指令。"
 
 #: ../src/main/main.c:168
 msgid "Initiating Gecko"
-msgstr "Initialiseren van Gecko"
+msgstr "正在初始化 Gecko 引擎"
 
 #: ../src/main/main.c:174
 msgid "Building Interface"
-msgstr "Interface wordt opgebouwd"
+msgstr "正在构建人机界面"
 
 #: ../src/main/main.c:178
 msgid "Starting Sword"
-msgstr "Sword wordt gestart"
+msgstr "正在启动 Sword"
 
 #: ../src/main/main.c:182
 msgid "Loading Settings"
-msgstr "Instellingen worden geladen"
+msgstr "正在加载设置"
 
 #: ../src/main/main.c:186
 msgid "Displaying Xiphos"
-msgstr "Opbouwen interface"
+msgstr "正在显示 Xiphos  界面"
 
 #: ../src/main/module_dialogs.cc:227 ../src/main/previewer.cc:125
 #: ../src/main/previewer.cc:192 ../ui/prefs.glade.h:76
 msgid "Previewer"
-msgstr "Voorbeeldweergave"
+msgstr "预览器"
 
 #: ../src/main/module_dialogs.cc:292 ../src/main/module_dialogs.cc:416
 #: ../src/main/previewer.cc:265
 msgid "Footnote"
-msgstr "Voetnoot"
+msgstr "脚注"
 
 #: ../src/main/module_dialogs.cc:298 ../src/main/module_dialogs.cc:421
 #: ../src/main/previewer.cc:277
 msgid "Cross Reference"
-msgstr "Kruisverwijzing"
+msgstr "互相对照"
 
 #: ../src/main/module_dialogs.cc:304 ../src/main/module_dialogs.cc:318
 #: ../src/main/module_dialogs.cc:426 ../src/main/module_dialogs.cc:438
 #: ../src/main/previewer.cc:283 ../src/main/previewer.cc:302
 msgid "Strongs"
-msgstr "Strongs"
+msgstr "突出显示"
 
 #: ../src/main/module_dialogs.cc:310 ../src/main/module_dialogs.cc:329
 #: ../src/main/module_dialogs.cc:431 ../src/main/module_dialogs.cc:448
 #: ../src/main/previewer.cc:289 ../src/main/previewer.cc:308
 msgid "Morphology"
-msgstr "Morfologie"
+msgstr ""
 
 #: ../src/main/module_dialogs.cc:1083 ../src/main/url.cc:527
 msgid "Back to "
-msgstr "Terug naar "
+msgstr "回到 "
 
 #: ../src/main/parallel_view.cc:399 ../ui/xi-menus.glade.h:88
 msgid "Strong's Numbers"
-msgstr "Strongs getallen"
+msgstr "突出数字"
 
 #: ../src/main/parallel_view.cc:409 ../ui/search-dialog.glade.h:52
 #: ../ui/xi-menus.glade.h:40
 msgid "Footnotes"
-msgstr "Voetnoten"
+msgstr "脚注注释"
 
 #: ../src/main/parallel_view.cc:419 ../ui/search-dialog.glade.h:64
 #: ../ui/xi-menus.glade.h:55
 msgid "Morphological Tags"
-msgstr "Morfologische Markeringen"
+msgstr ""
 
 #: ../src/main/parallel_view.cc:429 ../ui/xi-menus.glade.h:44
 msgid "Hebrew Vowel Points"
-msgstr "Hebreeuwse Klinkertekens"
+msgstr "希伯来文元音点"
 
 #: ../src/main/parallel_view.cc:439 ../ui/xi-menus.glade.h:43
 msgid "Hebrew Cantillation"
-msgstr "Hebreeuwse Cantillation"
+msgstr "希伯来吟唱"
 
 #: ../src/main/parallel_view.cc:449 ../ui/xi-menus.glade.h:41
 msgid "Greek Accents"
-msgstr "Griekse Leestekens"
+msgstr "希腊口音"
 
 #: ../src/main/parallel_view.cc:459
 msgid "Cross-references"
-msgstr "Kruisverwijzingen"
+msgstr "交叉引用"
 
 #: ../src/main/parallel_view.cc:469 ../ui/xi-menus.glade.h:50
 msgid "Lemmas"
-msgstr "Lemmas"
+msgstr "引理"
 
 #: ../src/main/parallel_view.cc:479 ../ui/xi-menus.glade.h:42
 msgid "Headings"
-msgstr "Rubrieken"
+msgstr "标题"
 
 #: ../src/main/parallel_view.cc:489
 msgid "Morpheme Segmentation"
-msgstr "Morfeem Segmentatie"
+msgstr ""
 
 #: ../src/main/parallel_view.cc:503 ../ui/xi-menus.glade.h:96
 msgid "Words of Christ in Red"
-msgstr "Uitspraken van Jezus rood weergeven"
+msgstr "基督的话语用红字显示"
 
 #: ../src/main/parallel_view.cc:513 ../ui/xi-menus.glade.h:90
 msgid "Transliteration"
-msgstr "Transliteration"
+msgstr "音译"
 
 #: ../src/main/parallel_view.cc:523
 msgid "Textual Variants"
-msgstr "Tekstuele Varianten"
+msgstr "原文变体"
 
 #: ../src/main/parallel_view.cc:531 ../ui/xi-menus.glade.h:71
 msgid "Primary Reading"
-msgstr "Primaire Lezing"
+msgstr "初次阅读"
 
 #: ../src/main/parallel_view.cc:540 ../ui/xi-menus.glade.h:83
 msgid "Secondary Reading"
-msgstr "Secundaire Lezing"
+msgstr "第二遍阅读"
 
 #: ../src/main/parallel_view.cc:549 ../ui/xi-menus.glade.h:9
 msgid "All Readings"
-msgstr "Alle lezingen"
+msgstr "所有的阅读"
 
 #: ../src/main/parallel_view.cc:683 ../src/main/parallel_view.cc:797
 msgid "view context"
-msgstr "context bekijken"
+msgstr "视图上下文"
 
 #: ../src/main/prayerlists.cc:74
 msgid "January"
-msgstr "Januari"
+msgstr "一月"
 
 #: ../src/main/prayerlists.cc:75
 msgid "February"
-msgstr "Februari"
+msgstr "二月"
 
 #: ../src/main/prayerlists.cc:76
 msgid "March"
-msgstr "Maart"
+msgstr "三月"
 
 #: ../src/main/prayerlists.cc:77
 msgid "April"
-msgstr "April"
+msgstr "四月"
 
 #: ../src/main/prayerlists.cc:78
 msgid "May"
-msgstr "Mei"
+msgstr "五月"
 
 #: ../src/main/prayerlists.cc:79
 msgid "June"
-msgstr "Juni"
+msgstr "六月"
 
 #: ../src/main/prayerlists.cc:80
 msgid "July"
-msgstr "Juli"
+msgstr "七月"
 
 #: ../src/main/prayerlists.cc:81
 msgid "August"
-msgstr "Augustus"
+msgstr "八月"
 
 #: ../src/main/prayerlists.cc:82
 msgid "September"
-msgstr "September"
+msgstr "九月"
 
 #: ../src/main/prayerlists.cc:83
 msgid "October"
-msgstr "October"
+msgstr "十月"
 
 #: ../src/main/prayerlists.cc:84
 msgid "November"
-msgstr "November"
+msgstr "十一月"
 
 #: ../src/main/prayerlists.cc:85
 msgid "December"
-msgstr "December"
+msgstr "十二月"
 
 #: ../src/main/prayerlists.cc:124 ../src/main/sword_treekey.cc:332
 msgid "Growth"
-msgstr "Groei"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:125 ../src/main/sword_treekey.cc:333
 msgid "<b>For Growth</b><br>"
-msgstr "<b>Voor groei</b><br>"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:126 ../src/main/prayerlists.cc:383
 #: ../src/main/sword_treekey.cc:334
 msgid "Salvation"
-msgstr "Verlossing"
+msgstr "救恩"
 
 #: ../src/main/prayerlists.cc:127 ../src/main/sword_treekey.cc:335
 msgid "<b>For Salvation</b><br>"
-msgstr "<b>Voor verlossing</b><br>"
+msgstr "<b>给与救恩</b>"
 
 #: ../src/main/prayerlists.cc:128 ../src/main/prayerlists.cc:387
 #: ../src/main/sword_treekey.cc:336
 msgid "Health"
-msgstr "Gezondheid"
+msgstr "健康"
 
 #: ../src/main/prayerlists.cc:129 ../src/main/sword_treekey.cc:337
 msgid "<b>For Health</b><br>"
-msgstr "<b>Voor gezondheid</b><br>"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:130
 msgid "Misc"
-msgstr "Overig"
+msgstr "杂项"
 
 #: ../src/main/prayerlists.cc:131 ../src/main/sword_treekey.cc:339
 msgid "<b>Miscellaneous</b><br>"
-msgstr "<b>Overig</b><br>"
+msgstr "<b>杂项</b><br>"
 
 #: ../src/main/prayerlists.cc:139
 msgid "Point x"
-msgstr "Punt x"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:140
 msgid "<b>(x)</b><br>"
-msgstr "<b>(x)</b><br>"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:141
 msgid "Point y"
-msgstr "Punt y"
+msgstr "y 点"
 
 #: ../src/main/prayerlists.cc:142
 msgid "<b>(y)</b><br>"
@@ -1521,7 +1507,7 @@ msgstr "<b>(y)</b><br>"
 
 #: ../src/main/prayerlists.cc:143
 msgid "Point z"
-msgstr "Punt z"
+msgstr "z 点"
 
 #: ../src/main/prayerlists.cc:144
 msgid "<b>(z)</b><br>"
@@ -1529,43 +1515,43 @@ msgstr "<b>(z)</b><br>"
 
 #: ../src/main/prayerlists.cc:152
 msgid "Minor Topic 1"
-msgstr "Deelonderwerp 1"
+msgstr "次要主题 1"
 
 #: ../src/main/prayerlists.cc:153
 msgid "<b>Subtopic 1</b><br>"
-msgstr "<b>Deelonderwerp 1</b><br>"
+msgstr "<b>次要主题 1</b><br>"
 
 #: ../src/main/prayerlists.cc:155
 msgid "Minor Topic 2"
-msgstr "Deelonderwerp 2"
+msgstr "次要主题 2"
 
 #: ../src/main/prayerlists.cc:156
 msgid "<b>Subtopic 2</b><br>"
-msgstr "<b>Deelonderwerp 2</b><br>"
+msgstr "<b>主题 2</b>"
 
 #: ../src/main/prayerlists.cc:158
 msgid "Minor Topic 3"
-msgstr "Deelonderwerp 3"
+msgstr "副题 3"
 
 #: ../src/main/prayerlists.cc:159
 msgid "<b>Subtopic 3</b><br>"
-msgstr "<b>Deelonderwerp 3</b><br>"
+msgstr "<b>小标题 3</b><br>"
 
 #: ../src/main/prayerlists.cc:161
 msgid "Minor Topic 4"
-msgstr "Deelonderwerp 4"
+msgstr "副题 4"
 
 #: ../src/main/prayerlists.cc:162
 msgid "<b>Subtopic 4</b><br>"
-msgstr "<b>Deelonderwerp 4</b><br>"
+msgstr "<b>小标题 4</b><br>"
 
 #: ../src/main/prayerlists.cc:242
 msgid "Name for new prayer list or journal"
-msgstr "Naam voor gebedslijst of bericht"
+msgstr "新的祈祷名单或者日记的名称"
 
 #: ../src/main/prayerlists.cc:273
 msgid "Xiphos finds that prayer list already."
-msgstr "Xiphos heeft al zo'n gebedslijst."
+msgstr "Xiphos 认为那个名字重名"
 
 #: ../src/main/prayerlists.cc:286
 #, c-format
@@ -1573,127 +1559,123 @@ msgid ""
 "Xiphos cannot create module's path:\n"
 "%s"
 msgstr ""
-"Xiphos kunt geen pad module:\n"
+"Xiphos 不能创建模块的路径:\n"
 "%s"
 
 #: ../src/main/prayerlists.cc:326
 msgid "A basic prayer list. \\par\\par Module created by Xiphos."
-msgstr ""
-"Een standaard gebedslijst. \\par\\par Module is aangemaakt door Xiphos."
+msgstr "Xiphos 在.\\par\\par 中创建了一个基本列表"
 
 #: ../src/main/prayerlists.cc:327
 msgid "BasicPrayerList"
-msgstr "BasicPrayerList"
+msgstr "基本祈祷列表"
 
 #: ../src/main/prayerlists.cc:341
 msgid "MyPrayerList"
-msgstr "MijnGebedslijst"
+msgstr "我的祈祷列表"
 
 #: ../src/main/prayerlists.cc:342
 msgid ""
 "<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</"
 "b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"
 msgstr ""
-"<b>Personen:</b><br>Bob<br>Sam<br>Sue<br><br><b>Kerk:</"
-"b><br>Veiligheid<br>Eenheid<br>Bijbels voor zendelingen<br><br><br>"
+"<b>人名:</b><br>鲍勃<br>萨姆<br>苏<br><br><b>地点:</b><br>座位<br>友谊<br>圣"
+"经传教士<br><br><br>"
 
 #: ../src/main/prayerlists.cc:368
 msgid "A subject-based prayer list. \\par\\par Module created by Xiphos."
-msgstr "Een gebedslijst op onderwerp. \\par\\par Module aangemaakt met Xiphos."
+msgstr "Xiphos 在.\\par\\par 目录建立了一个基本主题祈祷列表。"
 
 #: ../src/main/prayerlists.cc:369
 msgid "SubjectPrayerList"
-msgstr "OnderwerpPrayerList"
+msgstr "主题祈祷列表"
 
 #: ../src/main/prayerlists.cc:384
 msgid "Bob<br>Sam<br>Sue<br>John<br>"
-msgstr "Bob<br>Sam<br>Sue<br>John<br>"
+msgstr ""
 
 #: ../src/main/prayerlists.cc:385
 msgid "Spiritual Growth"
-msgstr "Geestelijke groei"
+msgstr "属灵成长"
 
 #: ../src/main/prayerlists.cc:386
 msgid "Mike<br>Steve<br>"
-msgstr "Mike<br>Steve<br>"
+msgstr "麦克<br>史蒂夫<br>"
 
 #: ../src/main/prayerlists.cc:388
 msgid "Sue<br>John<br>"
-msgstr "Sue<br>John<br>"
+msgstr "苏<br>约翰<br>"
 
 #: ../src/main/prayerlists.cc:414
 msgid "A monthly prayer list. \\par\\par Module created by Xiphos."
 msgstr ""
-"Een maandelijkse gebedslijst. \\par\\par Module is aangemaakt bij Xiphos."
 
 #: ../src/main/prayerlists.cc:415
 msgid "MonthlyPrayerList"
-msgstr "MaandelijksPrayerList"
+msgstr "每月祈祷列表"
 
 #: ../src/main/prayerlists.cc:466
 msgid "A daily journal. \\par\\par Module created by Xiphos."
-msgstr "Een dagelijks bericht. \\par\\par Module is aangemaakt door Xiphos."
+msgstr "Xiphos 在.\\par\\par 创建了一个日记"
 
 #: ../src/main/prayerlists.cc:467
 msgid "DailyJournal"
-msgstr "DailyJournal"
+msgstr "日记"
 
 #: ../src/main/prayerlists.cc:531
 msgid "An outlined topic (e.g. sermon). \\par\\par Module created by Xiphos."
-msgstr ""
-"Een uitgelijnd onderwerp(e.g. preek). \\par\\par Module aangemaakt met "
-"Xiphos."
+msgstr "Xiphos 在.\\par\\par 目录中建立了一个专题概述(例如：撒母耳记 sermon)"
 
 #: ../src/main/prayerlists.cc:532
 msgid "OutlinedTopic"
-msgstr "GeschetstTopic"
+msgstr "专题概述"
 
 #: ../src/main/prayerlists.cc:546
 msgid "Major Topic A"
-msgstr "Hoofdonderwerp A"
+msgstr "主题 A"
 
 #: ../src/main/prayerlists.cc:547
 msgid "<b>Major Topic A</b><br>"
-msgstr "<b>Hoofdondewerp A</b><br>"
+msgstr "<b>主题 A</b><br>"
 
 #: ../src/main/prayerlists.cc:549
 msgid "Major Topic B"
-msgstr "Hoofdonderwerp B"
+msgstr "主题 B"
 
 #: ../src/main/prayerlists.cc:550
 msgid "<b>Major Topic B</b><br>"
-msgstr "<b>Hoofdondewerp B</b><br>"
+msgstr "<b>主题 B</b><br>"
 
 #: ../src/main/prayerlists.cc:552
 msgid "Major Topic C"
-msgstr "Hoofdonderwerp C"
+msgstr "主题 C"
 
 #: ../src/main/prayerlists.cc:553
 msgid "<b>Major Topic C</b><br>"
-msgstr "<b>Hoofdondewerp C</b><br>"
+msgstr "<b>主题 C</b><br>"
 
 #: ../src/main/previewer.cc:271
 msgid "User Annotation"
-msgstr "Gebruiker Annotatie"
+msgstr "用户注解"
 
 #: ../src/main/search_dialog.cc:208
 #, c-format
 msgid "Search result %s: %s"
-msgstr "Zoekresultaat %s: %s"
+msgstr "搜索 %s 的结果: %s"
 
 #: ../src/main/search_dialog.cc:440
 msgid "Delete Range?"
-msgstr "Reeks verwijderen?"
+msgstr "删除范围吗？"
 
 #: ../src/main/search_dialog.cc:441
 msgid "Are you sure you want to delete this range?"
-msgstr "Wilt u deze reeks echt verwijderen?"
+msgstr "你确定是否要删除这个范围？"
 
 #: ../src/main/search_dialog.cc:655 ../src/main/search_dialog.cc:1072
 #: ../src/main/search_dialog.cc:1075 ../src/main/search_dialog.cc:1097
 #: ../src/main/search_dialog.cc:1100
 msgid "Search: "
-msgstr "Zoeken in: "
+msgstr "搜索： "
 
 #: ../src/main/search_dialog.cc:1458
 #, c-format
@@ -1703,17 +1685,17 @@ msgid ""
 "%s"
 msgstr ""
 "%s:\n"
-"Deze module is niet geïnstalleerd.\n"
+"没有这样的模块被安装。\n"
 "%s"
 
 #: ../src/main/search_dialog.cc:1460
 msgid "Please adjust the module list."
-msgstr "Pas de modulelijst aan."
+msgstr "请调整模块列表。"
 
 #: ../src/main/search_dialog.cc:1476
 #, c-format
 msgid "No fast-search index exists for %s.%s%s"
-msgstr "Geen snelle-index bestaat voor %s.%s%s"
+msgstr "%s 不存在快速搜索索引记录。%s%s"
 
 #: ../src/main/search_dialog.cc:1478
 msgid ""
@@ -1721,7 +1703,7 @@ msgid ""
 "Search on this module is now `multi word'."
 msgstr ""
 "\n"
-"Zoek op deze module is nu `multi woord '."
+"现正在'多字'模块中搜索。."
 
 #: ../src/main/search_dialog.cc:1479
 msgid ""
@@ -1729,15 +1711,15 @@ msgid ""
 "See the Module Manager, Maintenance pane."
 msgstr ""
 "\n"
-"Zie module Manager, Maintenance ruit."
+"请参见模块管理器，维护窗格。"
 
 #: ../src/main/search_dialog.cc:1542
 msgid "Search finished"
-msgstr "Zoeken voltooid"
+msgstr "搜索已完成"
 
 #: ../src/main/search_sidebar.cc:100
 msgid "matches"
-msgstr "resultaten"
+msgstr "符合"
 
 #: ../src/main/settings.c:60
 msgid ""
@@ -1774,7 +1756,7 @@ msgstr ""
 
 #: ../src/main/settings.c:107
 msgid "$HOME is not set!"
-msgstr "$HOME is niet ingesteld!"
+msgstr "$HOME 未指定！"
 
 #: ../src/main/settings.c:120
 #, c-format
@@ -1784,24 +1766,27 @@ msgid ""
 "\n"
 "Xiphos cannot continue."
 msgstr ""
-"Xiphos kan .xiphos niet aanmaken:%s\n"
+"Xiphos 不能创建 .xiphos 文件在下列目录:\n"
+"%s\n"
 "\n"
-"Xiphos zal worden afgesloten."
+"Xiphos 无法继续执行。"
 
 #: ../src/main/settings.c:133 ../src/main/settings.c:142
 #: ../src/main/settings.c:151
 msgid "can not create "
-msgstr "aanmaken niet gelukt van "
+msgstr "无法创建 "
 
 #: ../src/main/settings.c:181
 msgid ""
 "Empty settings file -- backup recovery attempted.\n"
 "Some information may have been lost."
 msgstr ""
+"空白的设置文件 -- 已尝试恢复备份。\n"
+"一些信息可能会丢失。"
 
 #: ../src/main/settings.c:183
 msgid "Empty settings file -- no backup?!? Information lost!"
-msgstr ""
+msgstr "空白的设置文件 -- 没有备份吗？！？信息已丢失！"
 
 #: ../src/main/settings.c:212
 msgid ""
@@ -1812,14 +1797,16 @@ msgid ""
 "Xiphos cannot proceed,\n"
 "and will now exit."
 msgstr ""
-"Er zijn nog steeds geen Bijbel-\n"
-"modules geïnstalleerd, omdat u\n"
-"dit blijkbaar weigerde.\n"
-"Zonder een Bijbelmodule"
+"目前没有任何圣经被安装。\n"
+"显然，你拒绝了任何安装请求。\n"
+"\n"
+"由于没有任何圣经组件显示，\n"
+"Xiphos 将不能继续运行，\n"
+"程序将被迫退出。"
 
 #: ../src/main/settings.c:216
 msgid "Bible module installation complete."
-msgstr "Installatie van Bijbelmodules is voltooid."
+msgstr "圣经模块安装完成。"
 
 #: ../src/main/settings.c:219
 msgid ""
@@ -1827,61 +1814,59 @@ msgid ""
 "Xiphos cannot proceed,\n"
 "and will now exit."
 msgstr ""
-"Zonder een geïnstalleerde Bijbelmodule\n"
-"kan Xiphos niet worden gestart\n"
-"en zal daarom nu afsluiten."
+"由于没有任何圣经组件显示，\n"
+"Xiphos 将不能继续运行，\n"
+"程序将被迫退出。"
 
 #: ../src/main/sidebar.cc:400
 msgid "verse"
-msgstr "vers"
+msgstr "经文"
 
 #: ../src/main/sidebar.cc:461
 msgid "chapter"
-msgstr "hoofdstuk"
+msgstr "章"
 
 #: ../src/main/sword.cc:540
 msgid ""
 "Xiphos's file for language\n"
 "abbreviations is missing."
 msgstr ""
-"Xiphos's bestand voor taal\n"
-"afkortingen is niet gevonden."
+"Xiphos 的语言缩写文件\n"
+"已经丢失。"
 
 #: ../src/main/sword.cc:547
 msgid ""
 "Xiphos's language abbreviation\n"
 "file cannot be opened."
 msgstr ""
-"Xiphos's taalafkortingen bestand\n"
-"kan niet worden geopend."
+"Xiphos的语言缩写\n"
+"文件无法打开。"
 
 #: ../src/main/sword.cc:560
 msgid ""
 "Xiphos cannot allocate space\n"
 "for language abbreviations."
-msgstr ""
-"Xiphos niet toewijzen ruimte\n"
-"voor taal afkortingen."
+msgstr "Xiphos 不能分配语言缩写空间。"
 
 #: ../src/main/sword.cc:567
 msgid ""
 "Xiphos cannot read the\n"
 "language abbreviation file."
 msgstr ""
-"Xiphos kan niet lezen\n"
-"taal afkorting bestand."
+"Xiphos 不能够读取语言\n"
+"缩写文件。"
 
 #: ../src/main/sword.cc:650
 msgid "No matching locale found for"
-msgstr "Geen overeenkomende locale gevonden voor"
+msgstr "未找到符合本地化语言设置"
 
 #: ../src/main/sword.cc:652
 msgid "Book names and menus may not be translated"
-msgstr "Boek namen en menu's mogen niet worden vertaald"
+msgstr "书卷名称和菜单可能没有被翻译"
 
 #: ../src/main/sword.cc:1248
 msgid "Daily devotional was requested, but there are none installed."
-msgstr "Dagboeken werd opgevraagd, maar zijn niet geïnstalleerd."
+msgstr "请求每日灵修模块，但是好像未安装。"
 
 #: ../src/main/sword.cc:1484
 msgid ""
@@ -1899,99 +1884,99 @@ msgstr ""
 
 #: ../src/main/tab_history.c:219
 msgid "Clear History"
-msgstr "Geschiedenis wissen"
+msgstr "清空历史"
 
 #: ../src/main/url.cc:98
 msgid "URL not found:"
-msgstr "URL niet gevonden:"
+msgstr "URL地址没有找到:"
 
 #: ../src/main/url.cc:188
 #, c-format
 msgid "Xiphos could not execute %s"
-msgstr "Xiphos kon %s niet uitvoeren"
+msgstr "Xiphos 无法执行 %s"
 
 #: ../src/main/url.cc:196
 msgid "Viewer error:\n"
-msgstr "Viewer fout:\n"
+msgstr "查看器错误:\n"
 
 #: ../src/main/url.cc:269
 #, c-format
 msgid "Show %s in main window"
-msgstr "%s in hoofdscherm tonen"
+msgstr "在主窗口中显示 %s"
 
 #: ../src/main/xml.c:84 ../src/main/xml.c:468
 #, c-format
 msgid "Document not created successfully. \n"
-msgstr "Aanmaken document is mislukt. \n"
+msgstr "文档未成功创建。 \n"
 
 #: ../src/main/xml.c:93
 msgid "Personal"
-msgstr "Persoonlijk"
+msgstr "个人"
 
 #: ../src/main/xml.c:94
 msgid "What must I do to be saved?"
-msgstr "Wat moet ik doen om gered te worden?"
+msgstr "我怎样做才能拯救自己？"
 
 #: ../src/main/xml.c:96 ../src/main/xml.c:97
 msgid "Acts 16:31"
-msgstr "Handelingen 16:31"
+msgstr "使徒行传 16:31"
 
 #: ../src/main/xml.c:101 ../src/main/xml.c:102
 msgid "Eph 2:8,9"
-msgstr "Eph 2:8,9"
+msgstr "以弗所书 2:8,9"
 
 #: ../src/main/xml.c:106 ../src/main/xml.c:107
 msgid "Romans 1:16"
-msgstr "Romeinen 1:16"
+msgstr "罗马书 1:16"
 
 #: ../src/main/xml.c:110
 msgid "What is the Gospel?"
-msgstr "Wat is het Evangelie?"
+msgstr "福音是什么？"
 
 #: ../src/main/xml.c:112 ../src/main/xml.c:113
 msgid "1 Cor 15:1-4"
-msgstr "1 Kor 15:1-4"
+msgstr "格林多前书 15:1-4"
 
 #: ../src/main/xml.c:417 ../src/main/xml.c:1166
 #, c-format
 msgid "Document not parsed successfully. \n"
-msgstr "Document kon niet worden gelezen. \n"
+msgstr "文档未解析成功。 \n"
 
 #: ../src/main/xml.c:423 ../src/main/xml.c:733 ../src/main/xml.c:1047
 #: ../src/main/xml.c:1245
 #, c-format
 msgid "empty document \n"
-msgstr "leeg document \n"
+msgstr "空白文档 \n"
 
 #: ../src/main/xml.c:429
 #, c-format
 msgid "wrong type, root node != SwordBookmarks\n"
-msgstr "verkeerd type, sleutelnode != SwordBookmarks\n"
+msgstr "错误类型，根节点 != SwordBookmarks\n"
 
 #: ../src/main/xml.c:480
 msgid "Old Testament"
-msgstr "Oude Testament"
+msgstr "旧约全书"
 
 #: ../src/main/xml.c:481
 msgid "Gen - Mal"
-msgstr "Genesis - Maleachi"
+msgstr "创世纪 - 马拉基书"
 
 #: ../src/main/xml.c:486
 msgid "New Testament"
-msgstr "Nieuwe Testament"
+msgstr "新约全书"
 
 #: ../src/main/xml.c:487
 msgid "Mat - Rev"
-msgstr "Matth. - Openbaring"
+msgstr "马太福音 - 启示录"
 
 #: ../src/main/xml.c:493
 msgid "Sample Module List"
-msgstr "Voorbeeld modulelijst"
+msgstr "示例模块列表"
 
 #: ../src/main/xml.c:739 ../src/main/xml.c:1053
 #, c-format
 msgid "wrong type, root node != %s\n"
-msgstr "verkeerd type, sleutelnode != %s\n"
+msgstr "错误类型，根节点 != %s\n"
 
 #: ../src/main/xml.c:1206
 #, c-format
@@ -1999,151 +1984,153 @@ msgid ""
 "Save of settings failed! stat %d, size %d\n"
 "%s"
 msgstr ""
+"保存设置失败！ 状态 %d，文件大小 %d\n"
+"%s"
 
 #: ../src/main/xml.c:1208
 msgid "Attempting to revert to previous save."
-msgstr ""
+msgstr "正在试图恢复到上次的保存状态。"
 
 #: ../ui/bookmarks.glade.h:1
 msgid "Add Bookmark"
-msgstr "Bladwijzer toevoegen"
+msgstr "添加书签"
 
 #: ../ui/bookmarks.glade.h:2 ../ui/markverse.glade.h:1
 msgid "Bookmark Dialog"
-msgstr "Bladwijzervenster"
+msgstr "书签对话框"
 
 #: ../ui/bookmarks.glade.h:3
 msgid "Bookmark Folder Treeview"
-msgstr "Bladwijzermap Treeview"
+msgstr "书签文件夹树形视图"
 
 #: ../ui/bookmarks.glade.h:4 ../ui/markverse.glade.h:2
 msgid "Cancel Bookmark"
-msgstr "Bladwijzer verwijderen"
+msgstr "撤销书签"
 
 #: ../ui/bookmarks.glade.h:5 ../ui/markverse.glade.h:3
 msgid "Create new folder"
-msgstr "Map aanmaken"
+msgstr "新建文件夹"
 
 #: ../ui/bookmarks.glade.h:6
 msgid "Label Entry"
-msgstr "Label Entry"
+msgstr "标签空白"
 
 #: ../ui/bookmarks.glade.h:7
 msgid "Label:"
-msgstr "Label:"
+msgstr "标签："
 
 #: ../ui/bookmarks.glade.h:8 ../ui/markverse.glade.h:6
 msgid "Module Entry"
-msgstr "Module Entry"
+msgstr "模块空白"
 
 #: ../ui/bookmarks.glade.h:9 ../ui/markverse.glade.h:7
 msgid "Module:"
-msgstr "Module:"
+msgstr "模块："
 
 #: ../ui/bookmarks.glade.h:10
 msgid "New ..."
-msgstr "Nieuw ..."
+msgstr "新建..."
 
 #: ../ui/bookmarks.glade.h:11 ../ui/markverse.glade.h:8
 #: ../ui/xi-menus.glade.h:56
 msgid "New Folder"
-msgstr "Nieuwe map"
+msgstr "新建文件夹"
 
 #: ../ui/bookmarks.glade.h:12 ../ui/markverse.glade.h:10
 msgid "Verse Entry"
-msgstr "Vers Entry"
+msgstr "经文条目"
 
 #: ../ui/bookmarks.glade.h:13 ../ui/markverse.glade.h:11
 msgid "Verse:"
-msgstr "Vers:"
+msgstr "经文:"
 
 #: ../ui/editor_note.xml.h:1
 msgid "Delete the current note"
-msgstr "Huidige notitie verwijderen"
+msgstr "删除当前笔记"
 
 #: ../ui/editor_note.xml.h:2 ../ui/editor_studypad.xml.h:4
 msgid "E_xit"
-msgstr "Afsluiten"
+msgstr "退出(_X)"
 
 #: ../ui/editor_note.xml.h:3 ../ui/editor_studypad.xml.h:5
 msgid "Exit"
-msgstr "Afsluiten"
+msgstr "退出"
 
 #: ../ui/editor_note.xml.h:4 ../ui/editor_studypad.xml.h:6
 msgid "Exit the program"
-msgstr "Het programma afsluiten"
+msgstr "退出程序"
 
 #: ../ui/editor_note.xml.h:5 ../ui/editor_studypad.xml.h:7
 msgid "For_mat"
-msgstr "Op_maak"
+msgstr "格式(_M)"
 
 #: ../ui/editor_note.xml.h:6 ../ui/editor_studypad.xml.h:8
 msgid "HTML Format switch"
-msgstr "HTML-opmaak wisselaar"
+msgstr "HTML 格式切换"
 
 #: ../ui/editor_note.xml.h:7 ../ui/editor_studypad.xml.h:9
 msgid "HTML mode"
-msgstr "HTML weergave"
+msgstr "HTML 模式"
 
 #: ../ui/editor_note.xml.h:8
 msgid "Preview the note to be printed"
-msgstr "Afdrukvoorbeeld van de notitie"
+msgstr "笔记打印前预览"
 
 #: ../ui/editor_note.xml.h:10
 msgid "Print this note"
-msgstr "Notitie afdrukken"
+msgstr "打印这个笔记"
 
 #: ../ui/editor_note.xml.h:12
 msgid "Save the current note"
-msgstr "Notitie opslaan"
+msgstr "保存当前笔记"
 
 #: ../ui/editor_note.xml.h:13
 msgid "_Delete Personal Comment"
-msgstr "Verwij_der Persoonlijk Commentaar"
+msgstr "删除个人注释(_D)"
 
 #: ../ui/editor_note.xml.h:16
 msgid "_Save (Personal Comment)"
-msgstr "_Opslaan (Persoonlijk Commentaar)"
+msgstr ""
 
 #: ../ui/editor_studypad.xml.h:1
 msgid "Add this file to your bookmarks"
-msgstr "Dit bestand aan uw bladwijzers toevoegen"
+msgstr "增加此文件到书签"
 
 #: ../ui/editor_studypad.xml.h:3
 msgid "Create a new document"
-msgstr "Maak een nieuw document"
+msgstr "创建一个新文档"
 
 #: ../ui/editor_studypad.xml.h:10
 msgid "New Document"
-msgstr "Nieuw document"
+msgstr "新建文档"
 
 #: ../ui/editor_studypad.xml.h:11
 msgid "Open"
-msgstr "Openen"
+msgstr "打开"
 
 #: ../ui/editor_studypad.xml.h:12
 msgid "Open a file in Studypad"
-msgstr "Bestand openen in het notitieblok"
+msgstr "在学习笔记中打开"
 
 #: ../ui/editor_studypad.xml.h:13
 msgid "Preview the document to be printed"
-msgstr "Afdrukvoorbeeld"
+msgstr "预览将要打印的文件"
 
 #: ../ui/editor_studypad.xml.h:15
 msgid "Print this document"
-msgstr "Huidig document afdrukken"
+msgstr "打印此文档"
 
 #: ../ui/editor_studypad.xml.h:17
 msgid "Save AS"
-msgstr "Opslaan als"
+msgstr "另存为"
 
 #: ../ui/editor_studypad.xml.h:18
 msgid "Save the current file"
-msgstr "Huidig bestand opslaan"
+msgstr "保存当前文件"
 
 #: ../ui/editor_studypad.xml.h:19
 msgid "Save the current file as"
-msgstr "Huidig bestand opslaan als"
+msgstr "保存当前文件为"
 
 #: ../ui/export-dialog.glade.h:1
 msgid ": "
@@ -2151,51 +2138,51 @@ msgstr ": "
 
 #: ../ui/export-dialog.glade.h:2
 msgid "<b>Copy</b>"
-msgstr "<b>Kopiëren</b>"
+msgstr "<b>复制</b>"
 
 #: ../ui/export-dialog.glade.h:3
 msgid "<b>Export</b>"
-msgstr "<b>Exporteren</b>"
+msgstr "<b>导出</b>"
 
 #: ../ui/export-dialog.glade.h:4
 msgid "<b>Format</b>"
-msgstr "<b>Formaat</b>"
+msgstr "<b>格式</b>"
 
 #: ../ui/export-dialog.glade.h:5 ../ui/prefs.glade.h:26
 msgid "Book"
-msgstr "Boek"
+msgstr "书卷"
 
 #: ../ui/export-dialog.glade.h:6
 msgid "Book Radio Button"
-msgstr "Book radio button"
+msgstr "书卷单选按钮"
 
 #: ../ui/export-dialog.glade.h:8
 msgid "Chapter Radio Button"
-msgstr "Show romanizationHoofdstuk keuzerondje"
+msgstr "章节单选按钮"
 
 #: ../ui/export-dialog.glade.h:9 ../ui/xi-menus.glade.h:18
 msgid "Copy/Export Passage"
-msgstr "Copy/Export Passage"
+msgstr "复制/导出 段落"
 
 #: ../ui/export-dialog.glade.h:10
 msgid "Export Passage Cancel"
-msgstr "Export Passage Annuleren"
+msgstr "撤销导出段落"
 
 #: ../ui/export-dialog.glade.h:11
 msgid "Export Passage OK"
-msgstr "Export Passage OK"
+msgstr "导出段落完毕"
 
 #: ../ui/export-dialog.glade.h:12
 msgid "Export complete book"
-msgstr "Volledig boek exporteren"
+msgstr "导出整卷书籍"
 
 #: ../ui/export-dialog.glade.h:13
 msgid "Export complete chapter"
-msgstr "Volledig hoofdstuk exporteren"
+msgstr "导出整个章节"
 
 #: ../ui/export-dialog.glade.h:14
 msgid "Export single verse"
-msgstr "Enkel vers exporteren"
+msgstr ""
 
 #: ../ui/export-dialog.glade.h:15
 msgid "HTML"
@@ -2203,67 +2190,67 @@ msgstr "HTML"
 
 #: ../ui/export-dialog.glade.h:16
 msgid "HTML Radio Button"
-msgstr "HTML Radio Button"
+msgstr "HTML 单选按钮"
 
 #: ../ui/export-dialog.glade.h:17
 msgid "Key"
-msgstr "Sleutel"
+msgstr "解锁密钥"
 
 #: ../ui/export-dialog.glade.h:18
 msgid "Plain Text"
-msgstr "Tekst"
+msgstr "纯文本"
 
 #: ../ui/export-dialog.glade.h:19
 msgid "Plain Text Radio Button"
-msgstr "Plain Text Radio Button"
+msgstr "纯文本单选按钮"
 
 #: ../ui/export-dialog.glade.h:21
 msgid "Save Export As"
-msgstr "Export opslaan als"
+msgstr "保存导出为"
 
 #: ../ui/export-dialog.glade.h:22
 msgid "Verse"
-msgstr "Vers"
+msgstr "经文"
 
 #: ../ui/export-dialog.glade.h:23
 msgid "Verse Radio Button"
-msgstr "Vers Radio Button"
+msgstr "经文单选按钮"
 
 #: ../ui/export-dialog.glade.h:24
 msgid "Verse range"
-msgstr "Vers Range"
+msgstr "经文范围"
 
 #: ../ui/export-dialog.glade.h:25
 msgid "Version"
-msgstr "Versie"
+msgstr "版本"
 
 #: ../ui/markverse.glade.h:4
 msgid "Mark"
-msgstr "Merken"
+msgstr "标记"
 
 #: ../ui/markverse.glade.h:5
 msgid "Mark/Unmark Verse"
-msgstr "Mark/Deselect Vers"
+msgstr "标记/取消标记 经文"
 
 #: ../ui/markverse.glade.h:9
 msgid "Unmark"
-msgstr "Deselect"
+msgstr "取消标记"
 
 #: ../ui/module-manager.glade.h:1
 msgid "<b>Add and Remove Sources</b>"
-msgstr "<b>Externe bronnen toevoegen en verwijderen</b>"
+msgstr "<b>添加和删除数据源</b>"
 
 #: ../ui/module-manager.glade.h:2
 msgid "<b>Install Destination</b>"
-msgstr "<b>Installatiedoelmap</b>"
+msgstr "<b>安装目标</b>"
 
 #: ../ui/module-manager.glade.h:3
 msgid "<b>Install Source</b>"
-msgstr "<b>Installatiebron</b>"
+msgstr "<b>安装数据源</b>"
 
 #: ../ui/module-manager.glade.h:4
 msgid "<b>Module Manager</b>"
-msgstr "<b>Modulebeheer</b>"
+msgstr "<b>模块管理器</b>"
 
 #. do not translate <b> and </b> they are html formating
 #: ../ui/module-manager.glade.h:6
@@ -2272,25 +2259,21 @@ msgstr "<b>Sword</b>"
 
 #: ../ui/module-manager.glade.h:7
 msgid "<b>WARNING:</b> If you live in a persecuted country use with care."
-msgstr ""
-"<b>WAARSCHUWING:</b> Wees voorzichtig als u in een land leeft waar u wordt "
-"vervolgd."
+msgstr "<b>警告:</b> 如果您居住在受迫害的国家请谨慎使用。"
 
 #: ../ui/module-manager.glade.h:8
 msgid ""
 "<b>Warning:</b> If you live in a persecuted country and do not wish to risk "
 "detection you should NOT use  the remote installation feature! "
-msgstr ""
-"<b>WAARSCHUWING:</b> Als u wordt vervolgd en niet wilt worden opgemerkt, "
-"gebruik dan geen externe bronnen! "
+msgstr "<b>警告:</b> 如果你居住在受迫害国家请不要冒险使用远程安装数据功能！ "
 
 #: ../ui/module-manager.glade.h:9
 msgid "<i>Personal area, for your use only:</i>"
-msgstr "<i>Persoonlijk map, alleen voor eigen gebruik:</li>"
+msgstr "<i>用户数据，为您专用:</i>"
 
 #: ../ui/module-manager.glade.h:10
 msgid "<i>System area, for all users:</i>"
-msgstr "<i>Gedeelde map, voor alle gebruikers:</i>"
+msgstr "<i>系统数据，所有用户:</i>"
 
 #: ../ui/module-manager.glade.h:11
 msgid ""
@@ -2311,34 +2294,34 @@ msgstr ""
 
 #: ../ui/module-manager.glade.h:14
 msgid "Continue"
-msgstr "Doorgaan"
+msgstr "继续"
 
 #: ../ui/module-manager.glade.h:15
 #, fuzzy
 msgid "Create a zip archive of the selected modules."
-msgstr "Weet u zeker dat u de selecteerde module wilt wissen?"
+msgstr "你确定是否要移除所选择的模块吗？"
 
 #: ../ui/module-manager.glade.h:16
 msgid "Current Remote Sources"
-msgstr "Huidige externe bronnen"
+msgstr "当前远程数据源"
 
 #: ../ui/module-manager.glade.h:17
 msgid "Current local sources"
-msgstr "Huidige lokale bronnen"
+msgstr "当前本地数据源"
 
 #: ../ui/module-manager.glade.h:18
 #, fuzzy
 msgid "Delete the fast-search index of the selected modules."
-msgstr "Verwijder fast-search-index voor deze modules?"
+msgstr "是否删除这些模块的快速索引记录？"
 
 #: ../ui/module-manager.glade.h:19
 msgid "Home dir"
-msgstr "Persoonlijke map"
+msgstr "主目录"
 
 #: ../ui/module-manager.glade.h:20
 #, fuzzy
 msgid "Install or update the selected modules"
-msgstr "Installeer deze modules?"
+msgstr "是否安装这些模块"
 
 #: ../ui/module-manager.glade.h:21
 msgid ""
@@ -2348,15 +2331,15 @@ msgstr ""
 
 #: ../ui/module-manager.glade.h:22
 msgid "Local"
-msgstr "Lokaal"
+msgstr "本地"
 
 #: ../ui/module-manager.glade.h:23
 msgid "Local Install Folder"
-msgstr "Lokale installatiemap"
+msgstr "本地安装目录"
 
 #: ../ui/module-manager.glade.h:24
 msgid "Module Manager"
-msgstr "Modulebeheer"
+msgstr "模块管理程序"
 
 #: ../ui/module-manager.glade.h:25
 msgid "Open a brief introductory explanation of how the Module Manager works."
@@ -2370,12 +2353,12 @@ msgstr ""
 
 #: ../ui/module-manager.glade.h:27
 msgid "Remote"
-msgstr "Extern"
+msgstr "远程"
 
 #: ../ui/module-manager.glade.h:28
 #, fuzzy
 msgid "Remove a remote install source."
-msgstr "Verwijder een externe bron"
+msgstr "删除一个数据源"
 
 #: ../ui/module-manager.glade.h:29
 msgid "Remove one of your local folders as an install source."
@@ -2384,41 +2367,41 @@ msgstr ""
 #: ../ui/module-manager.glade.h:30
 #, fuzzy
 msgid "Remove the selected modules from your system"
-msgstr "Geselecteerde modules uit lijst verwijderen"
+msgstr "从列表中移除选择的模块"
 
 #: ../ui/module-manager.glade.h:31
 msgid "Sword sys dir"
-msgstr "SWORD systeemmap"
+msgstr "Sword 系统目录"
 
 #: ../ui/module-manager.glade.h:32
 #, fuzzy
 msgid "_Archive"
-msgstr "Back-up maken"
+msgstr "存档"
 
 #: ../ui/module-manager.glade.h:33
 #, fuzzy
 msgid "_Delete Index"
-msgstr "Zoekindex verwijderen"
+msgstr "删除索引"
 
 #: ../ui/module-manager.glade.h:34
 #, fuzzy
 msgid "_Index"
-msgstr "Zoekindex maken"
+msgstr "索引"
 
 #: ../ui/module-manager.glade.h:35
 #, fuzzy
 msgid "_Install"
-msgstr "Installeer"
+msgstr "安装"
 
 #: ../ui/module-manager.glade.h:36
 #, fuzzy
 msgid "_Load Standard"
-msgstr "Load Standard"
+msgstr "已载入标准"
 
 #: ../ui/module-manager.glade.h:37
 #, fuzzy
 msgid "_View Intro"
-msgstr "Beel_d"
+msgstr "查看 (_V)"
 
 #: ../ui/navbar_versekey.glade.h:1
 msgid "1"
@@ -2426,31 +2409,31 @@ msgstr "1"
 
 #: ../ui/navbar_versekey.glade.h:2
 msgid "<b>Revelation of John</b>"
-msgstr "<b>Openbaringen van Johannes</b>"
+msgstr "<b>约翰的启示</b>"
 
 #: ../ui/navbar_versekey.glade.h:3
 msgid "Book Selector Button"
-msgstr "Boek Selector Button"
+msgstr "书卷选择按钮"
 
 #: ../ui/navbar_versekey.glade.h:4
 msgid "Choose book to display"
-msgstr "Kies een boek om weer te geven"
+msgstr "选择要显示的书卷"
 
 #: ../ui/navbar_versekey.glade.h:5
 msgid "Drop down history list"
-msgstr "Vervolgkeuzelijst geschiedenis lijst"
+msgstr "历史下拉列表"
 
 #: ../ui/navbar_versekey.glade.h:6
 msgid "Reference Entry"
-msgstr "Referentie Entry"
+msgstr "参考条目"
 
 #: ../ui/navbar_versekey.glade.h:7
 msgid "Toggle Chapter Button"
-msgstr "Hoofdstuk Toggle Button"
+msgstr "章节切换按钮"
 
 #: ../ui/navbar_versekey.glade.h:8
 msgid "Toggle Verse Button"
-msgstr "Vers Toggle Button"
+msgstr "经文切换按钮"
 
 #: ../ui/prefs.glade.h:1
 msgid ""
@@ -2474,164 +2457,164 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:9
 msgid "<b>Font Colors</b>"
-msgstr "<b>Lettertypekleur<b>"
+msgstr "<b>字体颜色</b>"
 
 #: ../ui/prefs.glade.h:10
 msgid "<b>Font Sizes</b>"
-msgstr "<b>Lettertypegroottes<b>"
+msgstr "<b>字体大小</b>"
 
 #: ../ui/prefs.glade.h:11
 msgid "<b>General</b>"
-msgstr "<b>Algemeen</b>"
+msgstr "<b>常规</b>"
 
 #: ../ui/prefs.glade.h:12
 msgid "<b>Main Window Modules</b>"
-msgstr "<b>Algemeen Modulescherm</b>"
+msgstr "<b>主要窗口模块</b>"
 
 #: ../ui/prefs.glade.h:13 ../ui/search-dialog.glade.h:5
 msgid "<b>Modules</b>"
-msgstr "<b>Modules</b>"
+msgstr "<b>模块</b>"
 
 #: ../ui/prefs.glade.h:14
 msgid "<b>Show</b>"
-msgstr "<b>Toon</b>"
+msgstr "<b>显示</b>"
 
 #: ../ui/prefs.glade.h:15
 msgid "<b>Special Purpose Modules</b>"
-msgstr "<b>Overige Modules</b>"
+msgstr "<b>专用模块</b>"
 
 #: ../ui/prefs.glade.h:16
 msgid "<b>StudyPad default directory</b>"
-msgstr "<b>Standaardmap notitieblok</b>"
+msgstr "<b>研修笔记(StudyPad)的默认目录</b>"
 
 #: ../ui/prefs.glade.h:17
 msgid "<b>Tabs</b>"
-msgstr "<b>Tabbladen</b>"
+msgstr "标签页"
 
 #: ../ui/prefs.glade.h:18 ../ui/search-dialog.glade.h:15
 msgid "Add Modules"
-msgstr "Modules toevoegen"
+msgstr "添加模块"
 
 #: ../ui/prefs.glade.h:19
 msgid "Apply high-contrast highlight to current verse"
-msgstr "Hoog contrast toepassen op het huidige vers"
+msgstr "应用高对比度突出显示当前经文"
 
 #: ../ui/prefs.glade.h:20
 #, fuzzy
 msgid "Automatically resize image content to fit the pane"
-msgstr "Commentaar, boek en woordenboek automatisch passend maken aan venster"
+msgstr "自动调整注解，书卷，字典和图像内容的大小，以适应子窗口"
 
 #: ../ui/prefs.glade.h:21
 msgid "Background"
-msgstr "Achtergrond"
+msgstr "背景"
 
 #: ../ui/prefs.glade.h:22
 msgid "Base font size"
-msgstr "Base lettergrootte"
+msgstr "基本文字大小"
 
 #: ../ui/prefs.glade.h:23
 msgid "Bible Texts"
-msgstr "Bijbelteksten"
+msgstr "圣经文本"
 
 #: ../ui/prefs.glade.h:24
 msgid "Bible Texts Checkbox"
-msgstr "Bijbelteksten selectievakje"
+msgstr "圣经文本复选框"
 
 #: ../ui/prefs.glade.h:25
 msgid "Biblical Text"
-msgstr "Bijbelse tekst"
+msgstr "圣经文本"
 
 #: ../ui/prefs.glade.h:27
 msgid "Change Biblical Text Combo"
-msgstr "Verander bijbelse tekst Combo"
+msgstr "修改圣经文本组合框"
 
 #: ../ui/prefs.glade.h:28
 msgid "Change Book Combo"
-msgstr "Verander Boek Combo"
+msgstr "修改书卷组合框"
 
 #: ../ui/prefs.glade.h:29
 msgid "Change Commentary Combo"
-msgstr "Verander Commentary Combo"
+msgstr "修改注释组合框"
 
 #: ../ui/prefs.glade.h:30
 msgid "Change Default Dictionary Combo"
-msgstr "Verander Standaard Woordenboek Combo"
+msgstr "修改默认目录组合框"
 
 #: ../ui/prefs.glade.h:31
 msgid "Change Dictionary Combo"
-msgstr "Verander Woordenboek Combo"
+msgstr "修改目录组合框"
 
 #: ../ui/prefs.glade.h:32
 msgid "Change Personal Notes Combo"
-msgstr "Verander Persoonlijke notities Combo"
+msgstr "修改个人笔记组合框"
 
 #: ../ui/prefs.glade.h:33
 msgid "Choose to enable Prayer lists "
-msgstr "Gebedspunten tonen "
+msgstr "选择启用祈祷名单 "
 
 #: ../ui/prefs.glade.h:34 ../ui/search-dialog.glade.h:21
 msgid "Clear Modules from List Button"
-msgstr "Duidelijke Modules uit lijst Button"
+msgstr "从列表模块清除按钮"
 
 #: ../ui/prefs.glade.h:35 ../ui/search-dialog.glade.h:22
 msgid "Clear all modules from the list"
-msgstr "Verwijder alle modules uit de lijst"
+msgstr "清除所有模块的列表"
 
 #: ../ui/prefs.glade.h:37
 msgid "Commentaries Checkbox"
-msgstr "Commentaren Checkbox"
+msgstr "注释复选框"
 
 #: ../ui/prefs.glade.h:39
 msgid "Cover"
-msgstr "Omslag"
+msgstr "封面"
 
 #: ../ui/prefs.glade.h:40
 msgid "Current Verse"
-msgstr "Huidig vers"
+msgstr "当前经文"
 
 #: ../ui/prefs.glade.h:41
 msgid "Daily Devotional"
-msgstr "Dagboek"
+msgstr "每日灵修"
 
 #: ../ui/prefs.glade.h:42
 msgid "Daily Devotional Combo"
-msgstr "Daily Devotional Checkbox"
+msgstr "每日灵修组合框"
 
 #: ../ui/prefs.glade.h:43
 msgid "Default Dictionary"
-msgstr "Standaard woordenboek"
+msgstr "默认目录"
 
 #: ../ui/prefs.glade.h:44 ../ui/search-dialog.glade.h:39
 msgid "Delete Selected Module From List Button"
-msgstr "Geselecteerde module uit knop Lijst"
+msgstr "从列表中删除选择的模块"
 
 #: ../ui/prefs.glade.h:45
 msgid "Dictionary"
-msgstr "Woordenboek"
+msgstr "字典"
 
 #: ../ui/prefs.glade.h:46
 msgid "Dictionary/Lexicon"
-msgstr "Woordenboek/Lexicon"
+msgstr "字典/词典"
 
 #: ../ui/prefs.glade.h:47
 msgid "Dictionary/Lexicon Checkbox"
-msgstr "Woordenboek/Lexicon selectievakje"
+msgstr "字典/词典 复选框"
 
 #: ../ui/prefs.glade.h:48
 msgid "Enable Prayer Lists"
-msgstr "Gebedslijst inschakelen"
+msgstr "启用祈祷名单"
 
 #: ../ui/prefs.glade.h:49
 msgid "Enable Prayer Lists Checkbox"
-msgstr "Enable Gebed Lijsten selectievakje"
+msgstr "启用祈祷名单复选框"
 
 #: ../ui/prefs.glade.h:50
 msgid "Font Colors"
-msgstr "Lettertypekleuren"
+msgstr "字体颜色"
 
 #: ../ui/prefs.glade.h:51
 msgid "Font Misc"
-msgstr "Overige lettertype instellingen"
+msgstr "字体杂项"
 
 #: ../ui/prefs.glade.h:52
 msgid "Font preferences, per language"
@@ -2639,340 +2622,340 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:53
 msgid "Foreground"
-msgstr "Voorgrond"
+msgstr "前景色"
 
 #: ../ui/prefs.glade.h:54
 msgid "General Misc"
-msgstr "Algemene instellingen"
+msgstr "普通杂项"
 
 #: ../ui/prefs.glade.h:55
 msgid "Greek Lexicon"
-msgstr "Grieks Lexicon"
+msgstr "希腊词典"
 
 #: ../ui/prefs.glade.h:56
 msgid "Greek Lexicon Combo"
-msgstr "Grieks Lexicon Combo"
+msgstr "希腊词典 组合框"
 
 #: ../ui/prefs.glade.h:57
 msgid "Hebrew Lexicon"
-msgstr "Hebreeuws Lexicon"
+msgstr "希伯来词典"
 
 #: ../ui/prefs.glade.h:58
 msgid "Hebrew Lexicon Combo"
-msgstr "Hebreeuws Lexicon Combo"
+msgstr "希伯来词典组合框"
 
 #: ../ui/prefs.glade.h:59
 msgid "Highlight Background"
-msgstr "Achtergrond benadrukken"
+msgstr "高亮背景"
 
 #: ../ui/prefs.glade.h:60
 msgid "Highlight Foreground"
-msgstr "Voorgrond benadrukken"
+msgstr "高亮前景"
 
 #: ../ui/prefs.glade.h:61
 msgid "Highlight current verse"
-msgstr "Huidig vers benadrukken"
+msgstr "高亮突出当前经文"
 
 #: ../ui/prefs.glade.h:62
 msgid "Highlight current verse check box"
-msgstr "Markeer huidige vers selectievakje"
+msgstr "高亮突出当前经文复选框"
 
 #: ../ui/prefs.glade.h:63
 #, fuzzy
 msgid "Highlight user annotations"
-msgstr "Gebruiker Annotatie"
+msgstr "用户注解"
 
 #: ../ui/prefs.glade.h:64
 #, fuzzy
 msgid "Highlight user annotations check box"
-msgstr "Markeer huidige vers selectievakje"
+msgstr "高亮突出当前经文复选框"
 
 #: ../ui/prefs.glade.h:65
 #, fuzzy
 msgid "Language Font Combo"
-msgstr "Verander Boek Combo"
+msgstr "修改书卷组合框"
 
 #: ../ui/prefs.glade.h:66
 msgid "Links"
-msgstr "Verwijzingen"
+msgstr "链接"
 
 #: ../ui/prefs.glade.h:67 ../ui/search-dialog.glade.h:61
 msgid "Module Selection"
-msgstr "Moduleselectie"
+msgstr "模块选择"
 
 #: ../ui/prefs.glade.h:68
 msgid "Modules Main"
-msgstr "Modules"
+msgstr "主模块"
 
 #: ../ui/prefs.glade.h:69
 msgid "Modules Misc"
-msgstr "Modules overig"
+msgstr "模块杂项"
 
 #: ../ui/prefs.glade.h:70
 msgid "Modules Parallel"
-msgstr "Modules in parallelweergave"
+msgstr "类似模块"
 
 #: ../ui/prefs.glade.h:71 ../ui/search-dialog.glade.h:70
 msgid "Open Selection Dialog Button"
-msgstr "Open Selectie Dialog Button"
+msgstr "打开选择对画框 按钮"
 
 #: ../ui/prefs.glade.h:72
 #, fuzzy
 msgid "Open a dialog to select modules"
-msgstr "Open een venster om modules te selecteren"
+msgstr "打开一个对话框以选择模块添加到列表"
 
 #: ../ui/prefs.glade.h:73
 msgid "Parallel View in a tab"
-msgstr "Parallel Bekijk in een tabblad"
+msgstr "在标签页中的类似视图"
 
 #: ../ui/prefs.glade.h:74
 msgid "Personal Notes"
-msgstr "Persoonlijke aantekeningen"
+msgstr "个人笔记"
 
 #: ../ui/prefs.glade.h:77
 msgid "Previewer Checkbox"
-msgstr "Previewer selectievakje"
+msgstr "预览器 复选框"
 
 #: ../ui/prefs.glade.h:78 ../ui/search-dialog.glade.h:78
 msgid "Remove the selected module from the list"
-msgstr "Geselecteerde modules uit lijst verwijderen"
+msgstr "从列表中移除选择的模块"
 
 #: ../ui/prefs.glade.h:79
 msgid "Resize images"
-msgstr "Illustratiegrootte wijzigen"
+msgstr "重置图像尺寸"
 
 #: ../ui/prefs.glade.h:80
 msgid "Resize images checkbox"
-msgstr "Resize images selectievakje"
+msgstr "重置图像尺寸 复选框"
 
 #: ../ui/prefs.glade.h:81
 msgid "Scroll to Previous/Next Chapter"
-msgstr "Ga naar het vorige/volgende hoofdstuk"
+msgstr "滚动到上一章/下一章"
 
 #: ../ui/prefs.glade.h:82
 msgid "Scroll to Previous/Next Chapter Checkbox"
-msgstr "Ga naar vorige/volgende hoofdstuk selectievakje"
+msgstr "滚动到上一章/下一章 复选框"
 
 #: ../ui/prefs.glade.h:83
 msgid "Select A Directory"
-msgstr "Map kiezen"
+msgstr "请选择一个目录"
 
 #: ../ui/prefs.glade.h:84
 msgid "Show Daily Devotion at start up"
-msgstr "Dagboek tonen bij opstarten"
+msgstr "启动时显示每日灵修"
 
 #: ../ui/prefs.glade.h:85
 msgid "Show splash screen at start up"
-msgstr "Opstartscherm tonen bij opstarten"
+msgstr "启动时显示初始画面"
 
 #: ../ui/prefs.glade.h:86
 msgid "Special Locale (requires restart)"
-msgstr "Speciale Locale (opnieuw opstarten vereist)"
+msgstr "指定本地化语言(需要重启)"
 
 #: ../ui/prefs.glade.h:87
 msgid "Special Locale Combo"
-msgstr "Speciale Locale Combo"
+msgstr "指定本地化语言组合框"
 
 #: ../ui/prefs.glade.h:88
 msgid "StudyPad default directory combo"
-msgstr "StudiePad standaard directory combo"
+msgstr "学习笔记(StudyPad) 默认目录 组合框"
 
 #: ../ui/prefs.glade.h:90
 msgid "Use Bible Text scroll bar to scroll to previous or next chapter"
-msgstr "Gebruik de schuifbalk om naar het vorige of volgende hoofdstuk te gaan"
+msgstr "圣经文本使用滚动条滚动到上一章节或下一章节"
 
 #: ../ui/prefs.glade.h:91
 msgid "Use default Dictionary"
-msgstr "Gebruik standaard woordenboek"
+msgstr "使用默认目录"
 
 #: ../ui/prefs.glade.h:92
 msgid "Use default Dictionary Checkbox"
-msgstr "Gebruik standaard woordenboek selectievakje"
+msgstr "使用默认目录 复选框"
 
 #: ../ui/prefs.glade.h:93
 #, fuzzy
 msgid "Use inverted highlight on user-annotated verses"
-msgstr "Hoog contrast toepassen op het huidige vers"
+msgstr "应用高对比度突出显示当前经文"
 
 #: ../ui/prefs.glade.h:94
 msgid "Use tabbed browsing"
-msgstr "Gebruik tabbladen"
+msgstr "使用标签模式浏览"
 
 #: ../ui/prefs.glade.h:95
 msgid "Use tabbed browsing Checkbox"
-msgstr "Gebruik browsen met tabbladen selectievakje"
+msgstr "使用标签模式浏览 复选框"
 
 #: ../ui/prefs.glade.h:96
 msgid "Verse Number"
-msgstr "Vers nummer"
+msgstr "经文小节号码"
 
 #: ../ui/prefs.glade.h:97
 msgid "Verse number size"
-msgstr "Vers lettergrootte"
+msgstr "经文小节号码大小"
 
 #: ../ui/search-dialog.glade.h:1
 msgid "<b>Attribute</b>"
-msgstr "<b>Eigenschappen</b>"
+msgstr "<b>属性</b>"
 
 #: ../ui/search-dialog.glade.h:2
 msgid "<b>Found</b>"
-msgstr "<b>Gevonden</b>"
+msgstr "<b>已找到</b>"
 
 #: ../ui/search-dialog.glade.h:3
 msgid "<b>List Name</b>"
-msgstr "<b>Lijstnaam</b>"
+msgstr "<b>列表名字</b>"
 
 #: ../ui/search-dialog.glade.h:4
 msgid "<b>Module Lists</b>"
-msgstr "<b>Modulelijsten</b>"
+msgstr "<b>模块列表</b>"
 
 #: ../ui/search-dialog.glade.h:6
 msgid "<b>Options</b>"
-msgstr "<b>Opties</b>"
+msgstr "<b>选项</b>"
 
 #: ../ui/search-dialog.glade.h:7
 msgid "<b>Preview</b>"
-msgstr "<b>Voorbeeld</b>"
+msgstr "<b>预览</b>"
 
 #: ../ui/search-dialog.glade.h:8
 msgid "<b>Range Definition</b>"
-msgstr "<b>Reeksdefinitie</b>"
+msgstr "<b>范围定义</b>"
 
 #: ../ui/search-dialog.glade.h:9
 msgid "<b>Range Name</b>"
-msgstr "<b>Reeksnaam</b>"
+msgstr "<b>范围名字</b>"
 
 #: ../ui/search-dialog.glade.h:10
 msgid "<b>Ranges</b>"
-msgstr "<b>Reeksen</b>"
+msgstr "<b>范围</b>"
 
 #: ../ui/search-dialog.glade.h:11
 msgid "<b>Results Display Options</b>"
-msgstr "<b>Resultaatscherm eigenschappen</b>"
+msgstr "<b>搜索结果显示选项</b>"
 
 #: ../ui/search-dialog.glade.h:12
 msgid "<b>Scope</b>"
-msgstr "<b>Zoekgebied</b>"
+msgstr "<b>范围</b>"
 
 #: ../ui/search-dialog.glade.h:13
 msgid "<b>Search Results</b>"
-msgstr "<b>Zoekresultaten</b>"
+msgstr "<b>搜索结果</b>"
 
 #: ../ui/search-dialog.glade.h:14
 msgid "<b>Search Type</b>"
-msgstr "<b>Zoektype</b>"
+msgstr "<b>搜索类型</b>"
 
 #: ../ui/search-dialog.glade.h:16
 msgid "Advanced Search"
-msgstr "Geavanceerd zoeken"
+msgstr "高级搜索"
 
 #: ../ui/search-dialog.glade.h:17
 msgid "Attribute Search"
-msgstr "Zoekattributen"
+msgstr "属性搜索"
 
 #: ../ui/search-dialog.glade.h:18
 msgid "Attributes"
-msgstr "Attributen"
+msgstr "属性"
 
 #: ../ui/search-dialog.glade.h:19
 msgid "Attributes radiobutton"
-msgstr "Attributen keuzerondje"
+msgstr "属性单选按钮"
 
 #: ../ui/search-dialog.glade.h:20
 msgid "Clear Custom Module List Button"
-msgstr "Wissen Aangepaste Module knop Lijst"
+msgstr "清除自定义模块列表按钮"
 
 #: ../ui/search-dialog.glade.h:23
 msgid "Clear lists for new search"
-msgstr "Lijst wissen voor nieuwe zoekopdracht"
+msgstr "从新的搜索中清除列表"
 
 #: ../ui/search-dialog.glade.h:24
 msgid "Create a new module list"
-msgstr "Nieuwe modulelijst maken"
+msgstr "创建一个新的模块列表"
 
 #: ../ui/search-dialog.glade.h:25
 msgid "Create new custom range"
-msgstr "Aangepaste reeks maken"
+msgstr "创建一个新的自定义范围"
 
 #: ../ui/search-dialog.glade.h:26
 msgid "Current results"
-msgstr "Huidige resultaten"
+msgstr "当前结果"
 
 #: ../ui/search-dialog.glade.h:27
 msgid "Current results radiobutton"
-msgstr "Huidige resultaten Button"
+msgstr "当前结果 单选框"
 
 #: ../ui/search-dialog.glade.h:28
 msgid "Custom Module List Combo"
-msgstr "Aangepast Module Lijst Combo"
+msgstr "自定义模块列表 组合框"
 
 #: ../ui/search-dialog.glade.h:29
 msgid "Custom Module List Name Entry"
-msgstr "Aangepast Module Naam Entry List"
+msgstr "自定义模块列表名称条目"
 
 #: ../ui/search-dialog.glade.h:30
 msgid "Custom Module Lists"
-msgstr "Aangepaste modulelijsten"
+msgstr "自定义模块列表"
 
 #: ../ui/search-dialog.glade.h:31
 msgid "Custom Range Preview"
-msgstr "Aangepast Range Preview"
+msgstr "自定义范围预览"
 
 #: ../ui/search-dialog.glade.h:32
 msgid "Custom Range Selector Combo"
-msgstr "Aangepast Range Selector Combo"
+msgstr "自定义范围预览 组合框"
 
 #: ../ui/search-dialog.glade.h:33
 msgid "Custom Verse Ranges"
-msgstr "Aangepaste versreeksen"
+msgstr "自定义经文范围"
 
 #: ../ui/search-dialog.glade.h:34
 msgid "Custom module list"
-msgstr "Aangepaste modulelijst"
+msgstr "自定义模块列表"
 
 #: ../ui/search-dialog.glade.h:35
 msgid "Custom module list radiobutton"
-msgstr "Aangepaste module lijst keuzerondje"
+msgstr "自定义模块列表 单选框"
 
 #: ../ui/search-dialog.glade.h:36
 msgid "Custom verse range"
-msgstr "Aangepaste versreeks"
+msgstr "自定义经文范围"
 
 #: ../ui/search-dialog.glade.h:37
 msgid "Custom verse range radiobutton"
-msgstr "Aangepaste vers assortiment keuzerondje"
+msgstr "自定义经文范围 单选框"
 
 #: ../ui/search-dialog.glade.h:38
 msgid "Delete Range Button"
-msgstr "Verwijderen bereik keuzerondje"
+msgstr "删除范围按钮"
 
 #: ../ui/search-dialog.glade.h:40
 msgid "Delete selected range"
-msgstr "Geselecteerde reeks verwijderen"
+msgstr "删除选择的范围"
 
 #: ../ui/search-dialog.glade.h:41
 msgid "Delete the selected list"
-msgstr "Verwijder de geselecteerde lijst"
+msgstr "删除选择的列表"
 
 #: ../ui/search-dialog.glade.h:42
 msgid "Entire module"
-msgstr "Gehele module"
+msgstr "整个模块"
 
 #: ../ui/search-dialog.glade.h:43
 msgid "Entire module radiobutton"
-msgstr "Hele module keuzerondje"
+msgstr "整个模块 单选按钮"
 
 #: ../ui/search-dialog.glade.h:45
 msgid "Exact phrase radiobutton"
-msgstr "Exacte zin keuzerondje"
+msgstr "精确短语 单选按钮"
 
 #: ../ui/search-dialog.glade.h:46
 msgid "Export"
-msgstr "Exporteer"
+msgstr "导出"
 
 #: ../ui/search-dialog.glade.h:47
 msgid "Export current search results"
-msgstr "Export huidige zoekresultaten"
+msgstr "导出当前搜索结果"
 
 #: ../ui/search-dialog.glade.h:48
 msgid ""
@@ -2980,679 +2963,678 @@ msgid ""
 "Indexes must have been built beforehand:\n"
 "See Module Manager's maintenance functions"
 msgstr ""
-"Snelle, geoptimaliseerde zoekmethode\n"
-"Indexen moeten vooraf worden gecreëerd:\n"
-"Zie de onderhoudsfuncties in het modulebeheer"
+"快速，强劲功能，基于索引的搜索\n"
+"索引记录必须事先建立：\n"
+"请参见模块管理的维护功能"
 
 #: ../ui/search-dialog.glade.h:51
 msgid "Find Button"
-msgstr "Zoek Knop"
+msgstr "查找按钮"
 
 #: ../ui/search-dialog.glade.h:53
 msgid "Footnotes radiobutton"
-msgstr "Voetnoten keuzerondje"
+msgstr "脚注 单选按钮"
 
 #: ../ui/search-dialog.glade.h:54
 msgid "In modules that have Footnotes"
-msgstr "In modules met voetnoten"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:55
 msgid "In modules that have Morphological Tags"
-msgstr "In modules met morfologische markeringen"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:56
 msgid "In modules that have Strong's Numbers"
-msgstr "in modules met Strongs-getallen"
+msgstr "在模块中有突出数码"
 
 #: ../ui/search-dialog.glade.h:57
 msgid "Main Search Entry"
-msgstr "Main Zoeken Entry"
+msgstr "主要搜索条目"
 
 #: ../ui/search-dialog.glade.h:58
 msgid "Make selections on the Attribute Search tab"
-msgstr "Maak een selectie in het tabblad zoekattributen"
+msgstr "在属性搜索选项卡中选择"
 
 #: ../ui/search-dialog.glade.h:60
 msgid "Match case checkbox"
-msgstr "Hoofdlettergevoelig selectievakje"
+msgstr "匹配大小写复选框"
 
 #: ../ui/search-dialog.glade.h:62
 msgid "Module list"
-msgstr "Modulelijst"
+msgstr "模块列表"
 
 #: ../ui/search-dialog.glade.h:63
 msgid "Module list radiobutton"
-msgstr "Module lijst keuzerondje"
+msgstr "模块列表 单选按钮"
 
 #: ../ui/search-dialog.glade.h:65
 msgid "Morphological Tags radiobutton"
-msgstr "Morfologische Tags keuzerondje"
+msgstr "形态标签 单选按钮"
 
 #: ../ui/search-dialog.glade.h:67
 msgid "Multi word radiobutton"
-msgstr "Multi woord keuzerondje"
+msgstr "多词组 单选按钮"
 
 #: ../ui/search-dialog.glade.h:68
 msgid "New Custom Module List Button"
-msgstr "New Custom Module Lijst keuzerondje"
+msgstr "新自定义模块列表 按钮"
 
 #: ../ui/search-dialog.glade.h:69
 msgid "New Range Button"
-msgstr "Nieuw Range Button"
+msgstr "新范围 按钮"
 
 #: ../ui/search-dialog.glade.h:71
 msgid "Open a dialog to select modules to add to the list"
-msgstr "Open een venster om modules te selecteren"
+msgstr "打开一个对话框以选择模块添加到列表"
 
 #: ../ui/search-dialog.glade.h:72
 msgid "Optimized (\"Lucene\")"
-msgstr "Snelzoeken met behulp van de zoekindex"
+msgstr "已优化(\"Lucene\")"
 
 #: ../ui/search-dialog.glade.h:73
 msgid "Optimized (\"Lucene\") radiobutton"
-msgstr "Geoptimaliseerd (\"Lucene\") radiobutton"
+msgstr "已优化(\"Lucene\") 单选按钮"
 
 #: ../ui/search-dialog.glade.h:74
 msgid "Range Definition Entry"
-msgstr "Range Definitie Entry"
+msgstr "范围定义条目"
 
 #: ../ui/search-dialog.glade.h:75
 msgid "Range Name Entry"
-msgstr "Range Naam Entry"
+msgstr "范围名称条目"
 
 #: ../ui/search-dialog.glade.h:77
 msgid "Regular expression radiobutton"
-msgstr "Reguliere expressie keuzerondje"
+msgstr "正则表达式 单选按钮"
 
 #: ../ui/search-dialog.glade.h:79
 msgid "Result Summary Table"
-msgstr "Uitslag overzichtstabel"
+msgstr "结果摘要总表"
 
 #: ../ui/search-dialog.glade.h:80
 msgid "Result Summary Window"
-msgstr "Uitslag samenvatting venster"
+msgstr "结果摘要窗口"
 
 #: ../ui/search-dialog.glade.h:81
 msgid "Results"
-msgstr "Resultaten"
+msgstr "结果"
 
 #: ../ui/search-dialog.glade.h:82
 msgid "Save Custom Module List Button"
-msgstr "Sla aangepaste Module knop Lijst"
+msgstr "保存自定义模块列表 按钮"
 
 #: ../ui/search-dialog.glade.h:83
 msgid "Save Range Button"
-msgstr "Opslaan Range Button"
+msgstr "保存范围 按钮"
 
 #: ../ui/search-dialog.glade.h:84
 msgid "Save custom range"
-msgstr "Aangepaste reeks opslaan"
+msgstr "保存自定义范围"
 
 #: ../ui/search-dialog.glade.h:85
 msgid "Save search results as bookmarks"
-msgstr "Zoekresultaten als bladwijzers opslaan"
+msgstr "保存搜索结果为书签"
 
 #: ../ui/search-dialog.glade.h:86
 msgid "Save the module list"
-msgstr "Modulelijst opslaan"
+msgstr "保存模块列表"
 
 #: ../ui/search-dialog.glade.h:87
 msgid "Search  Criteria"
-msgstr "Zoekcriteria"
+msgstr "搜索标准"
 
 #: ../ui/search-dialog.glade.h:88
 msgid "Search Criteria Treeview"
-msgstr "Zoekcriteria Treeview"
+msgstr "搜索标准树形视图"
 
 #: ../ui/search-dialog.glade.h:89
 msgid "Search entire module"
-msgstr "Gehele module doorzoeken"
+msgstr "搜索整个模块"
 
 #: ../ui/search-dialog.glade.h:90
 msgid "Search for Morphological tags"
-msgstr "Zoek naar morfologische markeringen"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:91
 msgid "Search for Strongs Numbers like G4442 or H1121"
-msgstr "Zoek naar Strongs-getallen zoals G4442 of H1121"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:92
 msgid "Search in footnotes"
-msgstr "Zoeken in voetnoten"
+msgstr "在脚注中搜索"
 
 #: ../ui/search-dialog.glade.h:93
 msgid "Show Footnotes"
-msgstr "Voetnoten tonen"
+msgstr "显示脚注"
 
 #: ../ui/search-dialog.glade.h:94
 msgid "Show Footnotes checkbox"
-msgstr "Toon Voetnoten selectievakje"
+msgstr "显示脚注 单选按钮"
 
 #: ../ui/search-dialog.glade.h:95
 msgid "Show Morphological Tags"
-msgstr "Morfologische markeringen tonen"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:96
 msgid "Show Morphological Tags checkbox"
-msgstr "Toon Morfologische Tags selectievakje"
+msgstr ""
 
 #: ../ui/search-dialog.glade.h:97
 msgid "Show Strong's Numbers"
-msgstr "Toon Strongsgetallen"
+msgstr "显示突出数码"
 
 #: ../ui/search-dialog.glade.h:98
 msgid "Show Strong's Numbers checkbox"
-msgstr "Toon Strong's Numbers selectievakje"
+msgstr "显示突出数码 单选按钮"
 
 #: ../ui/search-dialog.glade.h:99
 msgid "Show in main window"
-msgstr "Hoofdscherm tonen"
+msgstr "在主窗口中显示"
 
 #: ../ui/search-dialog.glade.h:100
 msgid "Single module"
-msgstr "Enkele module"
+msgstr "单个模块"
 
 #: ../ui/search-dialog.glade.h:101
 msgid "Single module radiobutton"
-msgstr "Enkele module keuzerondje"
+msgstr "单个模块 单选按钮"
 
 #: ../ui/search-dialog.glade.h:102
 msgid "Start/stop searching"
-msgstr "Start/Stop zoeken"
+msgstr "开始/停止 搜索"
 
 #: ../ui/search-dialog.glade.h:103
 msgid "Strongs Numbers"
-msgstr "Strongs-getallen"
+msgstr "突出数码"
 
 #: ../ui/search-dialog.glade.h:104
 msgid "Strongs Numbers radiobutton"
-msgstr "Strong nummers keuzerondje"
+msgstr "突出数码 单选按钮"
 
 #: ../ui/search-dialog.glade.h:105
 msgid "Use a custom module list for the search"
-msgstr "Gebruik een aangepaste modulelijst voor het zoeken"
+msgstr "为搜索启用自定义模块列表"
 
 #: ../ui/search-dialog.glade.h:106
 msgid "Use a custom range for the scope of the search"
-msgstr "Een aangepaste reeks als zoekruimte gebruiken"
+msgstr "为搜索指定自定义的搜索范围"
 
 #: ../ui/search-dialog.glade.h:107
 msgid "Use a single module for the search"
-msgstr "Zoek binnen een enkele module"
+msgstr "使用单个搜索模块"
 
 #: ../ui/search-dialog.glade.h:108
 msgid "Use the current module list for the search"
-msgstr "Gebruik de huidige lijst met modules om te zoeken"
+msgstr "为搜索使用的当前模块列表"
 
 #: ../ui/search-dialog.glade.h:109
 msgid "Use the results of the last search as the scope of the search"
-msgstr "Beperk de zoekruimte tot de laatste zoekresultaten"
+msgstr "为搜索使用上次的搜索结果"
 
 #: ../ui/search-dialog.glade.h:110
 msgid "e.g. Matt-John;Rev4"
-msgstr "bijv. Matt-John;Rev4"
+msgstr "示例 太-约；Rev4"
 
 #: ../ui/search-dialog.glade.h:111
 msgid "for "
-msgstr "Tekst bevat "
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:2
 msgid "About _Translation"
-msgstr "Vertaling"
+msgstr "关于翻译工作(_T)"
 
 #: ../ui/xi-menus.glade.h:3
 msgid "About _Xiphos"
-msgstr "Over _Xiphos"
+msgstr "关于 Xiphos(_X)"
 
 #: ../ui/xi-menus.glade.h:4
 msgid "Add Item"
-msgstr "Add Item"
+msgstr "添加项目"
 
 #: ../ui/xi-menus.glade.h:5
 msgid "Add Sub-Item"
-msgstr "Voeg Sub-item"
+msgstr "添加子项目"
 
 #: ../ui/xi-menus.glade.h:6
 msgid "Add a sub-item"
-msgstr "Voeg een sub-item"
+msgstr "添加一个子项目"
 
 #: ../ui/xi-menus.glade.h:7
 msgid "Add an item"
-msgstr "Item toevoegen"
+msgstr "添加一个项目"
 
 #: ../ui/xi-menus.glade.h:8
 msgid "Add new folder to selected folder"
-msgstr "Nieuwe map toevoegen aan de geselecteerde map"
+msgstr "在选择的目录中新建一个文件夹"
 
 #: ../ui/xi-menus.glade.h:10
 msgid "Allow Reordering"
-msgstr "Herschikken toestaan"
+msgstr "允许重排"
 
 #: ../ui/xi-menus.glade.h:11
 msgid "Allow items to be moved from one folder to another"
-msgstr "Items tussen mappen verplaatsen toestaan"
+msgstr "允许项目从一个文件夹被移动到另一个文件夹"
 
 #: ../ui/xi-menus.glade.h:12
 msgid "Annotate Verse"
-msgstr "Commenteren Vers"
+msgstr "注释经文"
 
 #: ../ui/xi-menus.glade.h:14
 msgid "Browse in BibleMap.org"
-msgstr "Bladeren in BibleMap.org"
+msgstr "在  BibleMap.org 中浏览"
 
 #: ../ui/xi-menus.glade.h:15
 msgid "Collapse All"
-msgstr "Alles inklappen"
+msgstr "收起全部"
 
 #: ../ui/xi-menus.glade.h:16
 msgid "Collapse all Bookmarks groups"
-msgstr "Alle referenties inklappen"
+msgstr "收起全部标签组"
 
 #: ../ui/xi-menus.glade.h:17
 msgid "Commentary by Chapter"
-msgstr "Commentaar per hoofdstuk"
+msgstr "按章注解"
 
 #: ../ui/xi-menus.glade.h:19
 msgid "Create a new daily journal"
-msgstr "Maak een nieuwe dagelijkse journaal"
+msgstr "创建一个新的日记"
 
 #: ../ui/xi-menus.glade.h:20
 msgid "Create a new monthly journal"
-msgstr "Maak een nieuw maandblad"
+msgstr "创建一个新的月记(月刊)"
 
 #: ../ui/xi-menus.glade.h:21
 msgid "Create a new outlined topic"
-msgstr "Maak een nieuw onderwerp geschetste"
+msgstr "创建一个新的专题"
 
 #: ../ui/xi-menus.glade.h:22
 msgid "Create a new simple prayer list"
-msgstr "Een eenvoudige gebedslijst maken"
+msgstr "创建一个新的简易祈祷名单"
 
 #: ../ui/xi-menus.glade.h:23
 msgid "Create a new subject prayer list"
-msgstr "Maak een nieuw onderwerp gebed lijst"
+msgstr "创建一个新的次要祈祷名单"
 
 #: ../ui/xi-menus.glade.h:24
 msgid "Daily"
-msgstr "Dagelijks"
+msgstr "每天"
 
 #: ../ui/xi-menus.glade.h:25
 msgid "Delete Item"
-msgstr "Item verwijderen"
+msgstr "删除项目"
 
 #: ../ui/xi-menus.glade.h:26
 msgid "Delete item"
-msgstr "Item verwijderen"
+msgstr "删除项目"
 
 #: ../ui/xi-menus.glade.h:27
 msgid "Dictionar_y"
-msgstr "Woordenboek"
+msgstr "字典(_y)"
 
 #: ../ui/xi-menus.glade.h:28
 msgid "Display Book Heading"
-msgstr "Toon boektitel"
+msgstr "显示书卷标题"
 
 #: ../ui/xi-menus.glade.h:29
 msgid "Display Chapter Heading"
-msgstr "Toon hoofdstuktitel"
+msgstr "显示章节标题"
 
 #: ../ui/xi-menus.glade.h:30
 #, fuzzy
 msgid "Doublespace"
-msgstr "Dubbele spatiëring"
+msgstr "双空格文本(_o)"
 
 #: ../ui/xi-menus.glade.h:31
 msgid "Dump Pers.Comm."
-msgstr "Persoonlijk commentaar verwijderen."
+msgstr "转储Pers.Comm。"
 
 #: ../ui/xi-menus.glade.h:33
 msgid "Edit bookmark item"
-msgstr "Bladwijzeritem bewerken"
+msgstr "编辑书签"
 
 #: ../ui/xi-menus.glade.h:34
 msgid "Edit this item"
-msgstr "Item bewerken"
+msgstr "编辑此项"
 
 #: ../ui/xi-menus.glade.h:35
 msgid "Expand All"
-msgstr "Alles uitklappen"
+msgstr "全部展开"
 
 #: ../ui/xi-menus.glade.h:36
 msgid "Expand all Bookmarks groups"
-msgstr "Alle bladwijzergroepen uitklappen"
+msgstr "展开全部书签组"
 
 #: ../ui/xi-menus.glade.h:37
 msgid "Export Folder"
-msgstr "Export Folder"
+msgstr "导出到文件夹"
 
 #: ../ui/xi-menus.glade.h:38
 msgid "Export List"
-msgstr "Ausfuhrliste"
+msgstr "导出列表"
 
 #: ../ui/xi-menus.glade.h:45
 msgid "Image Content"
-msgstr "Illustratie Inhoud"
+msgstr "图像内容"
 
 #: ../ui/xi-menus.glade.h:46
 #, fuzzy
 msgid "Import Bookmarks"
-msgstr "Bladwijzer toevoegen"
+msgstr "插入书签"
 
 #: ../ui/xi-menus.glade.h:47
 msgid "Insert Bookmark"
-msgstr "Bladwijzer toevoegen"
+msgstr "插入书签"
 
 #: ../ui/xi-menus.glade.h:48
 msgid "Insert new bookmark here"
-msgstr "Bladwijzer hier toevoegen"
+msgstr "在此插入新书签"
 
 #: ../ui/xi-menus.glade.h:49
 msgid "L_ink Tabs"
-msgstr "Tabs synchron_iseren"
+msgstr "链接标签"
 
 #: ../ui/xi-menus.glade.h:51
 #, fuzzy
 msgid "Load other bookmarks file (default: from BibleTime)"
-msgstr "Bladwijzers van Bibletime laden"
+msgstr "从 Bibletime 载入标签"
 
 #: ../ui/xi-menus.glade.h:52
 msgid "Lookup Selection"
-msgstr "Selectie bekijken"
+msgstr "查找选择"
 
 #: ../ui/xi-menus.glade.h:54
 msgid "Monthly"
-msgstr "Maandelijks"
+msgstr "按月"
 
 #: ../ui/xi-menus.glade.h:57
 msgid "Note"
-msgstr "Notitie"
+msgstr "注解"
 
 #: ../ui/xi-menus.glade.h:58
 msgid "Open Module"
-msgstr "Module openen"
+msgstr "打开模块"
 
 #: ../ui/xi-menus.glade.h:59
 msgid "Open Study_pad"
-msgstr "Open StudyPad"
+msgstr "打开 研修笔记(_p) Study pad"
 
 #: ../ui/xi-menus.glade.h:60
 msgid "Open in a dialog"
-msgstr "Open in een venster"
+msgstr "在对话框中打开"
 
 #: ../ui/xi-menus.glade.h:61
 msgid "Open in a separate window"
-msgstr "Openen in een nieuw scherm"
+msgstr "在一个单独的窗口中打开"
 
 #: ../ui/xi-menus.glade.h:62
 msgid "Open in editor"
-msgstr "In editor openen"
+msgstr "在编辑器中打开"
 
 #: ../ui/xi-menus.glade.h:63
 msgid "Open in new tab"
-msgstr "Openen in nieuw tabblad"
+msgstr "在一个新的标签页中打开"
 
 #: ../ui/xi-menus.glade.h:64
 msgid ""
 "Open selected module in a\n"
 "\tseparate ['dialog'] window"
 msgstr ""
-"Open geselecteerde module in een\n"
-"\t aparte [ 'dialoog'] venster"
+"分开的['dialog']窗口中\n"
+"打开选定的模块"
 
 #: ../ui/xi-menus.glade.h:66
 msgid "Open selected module in a new tab"
-msgstr "Geselecteerde module in een nieuw tabblad openen"
+msgstr "在新的标签页中打开选择的模块"
 
 #: ../ui/xi-menus.glade.h:67
 msgid "Open this bookmark in a dialog"
-msgstr "Open deze bladwijzer in een venster"
+msgstr "在对话框中打开此书签"
 
 #: ../ui/xi-menus.glade.h:68
 msgid "Open this bookmark in a new tab"
-msgstr "Open deze bladwijzer in een nieuw tabblad"
+msgstr "在新标签页中打开此书签"
 
 #: ../ui/xi-menus.glade.h:69
 msgid "Outlined"
-msgstr "Outlined"
+msgstr "概述"
 
 #: ../ui/xi-menus.glade.h:70
 msgid "Preview _Daily Devotion"
-msgstr ""
+msgstr "预览每日奉献(_D)"
 
 #: ../ui/xi-menus.glade.h:72
 msgid "Read Selection Aloud"
-msgstr "Selectie hardop voorlezen"
+msgstr "阅读选择性朗读"
 
 #: ../ui/xi-menus.glade.h:74
 msgid "Remove folder and save it"
-msgstr "Map verwijderen en opslaan"
+msgstr "移除文件夹并保存"
 
 #: ../ui/xi-menus.glade.h:75
 msgid "Remove this item"
-msgstr "Item verwijderen"
+msgstr "移除此项"
 
 #: ../ui/xi-menus.glade.h:76
 msgid "Rename Pers.Comm."
-msgstr "Persoonlijk commentaar hernoemen."
+msgstr "重命名 Pers.Comm。"
 
 #: ../ui/xi-menus.glade.h:77
 msgid "Respect Font Faces"
-msgstr "Letterbeeld behouden"
+msgstr "重置文字界面"
 
 #: ../ui/xi-menus.glade.h:78
 msgid "Save list as a series of bookmarks"
-msgstr "Lijst opslaan als een reeks van bladwijzers"
+msgstr "将列表全部保存为系列书签"
 
 #: ../ui/xi-menus.glade.h:79
 msgid "Save list as a single bookmark"
-msgstr "Lijst opslaan als een bladwijzer"
+msgstr "将列表全部保存为单个书签"
 
 #: ../ui/xi-menus.glade.h:80
 msgid "Save these results as a series of bookmarks in their own folder"
-msgstr "Sla deze resultaten als een reeks van bladwizjers in hun eigen map"
+msgstr "将这些结果保存为一个系列书签并为其创建各自的文件夹"
 
 #: ../ui/xi-menus.glade.h:81
 msgid "Save these results as a single bookmark"
-msgstr "Sla deze resultaten als een bladwijzer"
+msgstr "将这些结果保存为一个单个书签"
 
 #: ../ui/xi-menus.glade.h:82
 msgid "Scripture Cross-references"
-msgstr "Kruisverwijzingen"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:84
 msgid "Show Parallel View in a _Tab"
-msgstr "Toon Parallel Bekijk in een Tab"
+msgstr "在标签页中显示类似视图(_T)"
 
 #: ../ui/xi-menus.glade.h:85
 msgid "Show Previe_wer in the Sidebar"
-msgstr "Toon Previewer in de zijbalk"
+msgstr "在边栏中显示预览器"
 
 #: ../ui/xi-menus.glade.h:86
 msgid "Show Verse _Numbers"
-msgstr "Versnummers tonen"
+msgstr "显示经文前的数码(_N)"
 
 #: ../ui/xi-menus.glade.h:87
 msgid "Simple"
-msgstr "Eenvoudig"
+msgstr "简洁"
 
 #: ../ui/xi-menus.glade.h:89
 msgid "Subject"
-msgstr "Onderwerp"
+msgstr "题目"
 
 #: ../ui/xi-menus.glade.h:91
 msgid "Unlock This Module"
-msgstr "Open deze module"
+msgstr "解锁此模块"
 
 #: ../ui/xi-menus.glade.h:92
 msgid "Use Current Dictionary"
-msgstr "Gebruik huidig woordenboek"
+msgstr "使用当前字典"
 
 #: ../ui/xi-menus.glade.h:93
 msgid "Use module manager to install and remove Sword modules"
-msgstr ""
-"Gebruik het Modulebeheer om SWORD-modules te installeren of te verwijderen"
+msgstr "用模块管理器安装或删除 Sword 模块"
 
 #: ../ui/xi-menus.glade.h:94
 msgid "Variants"
-msgstr "Varianten"
+msgstr "变体"
 
 #: ../ui/xi-menus.glade.h:95
 #, fuzzy
 msgid "Verse Per Line"
-msgstr "Eén vers per regel"
+msgstr "使用每行显示一节经文模式"
 
 #: ../ui/xi-menus.glade.h:97
 msgid "_About The SWORD Project"
-msgstr "Over The SWORD Project"
+msgstr "关于 The SWORD Project(_A)"
 
 #: ../ui/xi-menus.glade.h:98
 msgid "_Advanced Search"
-msgstr "_Geavanceerd zoeken"
+msgstr "高级搜索(_A)"
 
 #: ../ui/xi-menus.glade.h:99
 msgid "_Attach/Detach Sidebar"
-msgstr "Zijbalk koppelen/ontkoppelen"
+msgstr "吸附/分离边栏(_A)"
 
 #: ../ui/xi-menus.glade.h:100
 msgid "_Bible"
-msgstr "Bijbel"
+msgstr "圣经(_B)"
 
 #: ../ui/xi-menus.glade.h:101
 msgid "_Commentary/Book"
-msgstr "Commentaar/boeken"
+msgstr "评述/书卷(_C)"
 
 #: ../ui/xi-menus.glade.h:102
 msgid "_Contents"
-msgstr "Inhoud"
+msgstr "内容(_C)"
 
 #: ../ui/xi-menus.glade.h:103
 msgid "_Edit"
-msgstr "B_ewerken"
+msgstr "编辑(_E)"
 
 #: ../ui/xi-menus.glade.h:104
 msgid "_Edit Item"
-msgstr "It_em bewerken"
+msgstr "编辑项目(_E)"
 
 #: ../ui/xi-menus.glade.h:106
 msgid "_Help"
-msgstr "_Hulp"
+msgstr "帮助(_H)"
 
 #: ../ui/xi-menus.glade.h:107
 msgid "_Highlight Current Verse"
-msgstr "Geselecteerde vers benadrukken"
+msgstr "高亮显示当前经文(_H)"
 
 #: ../ui/xi-menus.glade.h:108
 msgid "_Live Chat"
-msgstr "_Live chat"
+msgstr "实时聊天(_L)"
 
 #: ../ui/xi-menus.glade.h:109
 msgid "_Mailing List"
-msgstr "E-maillijst"
+msgstr "邮件列表(_M)"
 
 #: ../ui/xi-menus.glade.h:110
 msgid "_Module Manager"
-msgstr "Modulebeheer"
+msgstr "模块管理器(_M)"
 
 #: ../ui/xi-menus.glade.h:111
 #, fuzzy
 msgid "_New Prayerlist/Journal"
-msgstr "Gebedslijst/Bericht"
+msgstr "祷告名单/日记 项目"
 
 #: ../ui/xi-menus.glade.h:112
 msgid "_Open Session"
-msgstr "Sessie _openen"
+msgstr "打开讲义(_O)"
 
 #: ../ui/xi-menus.glade.h:113
 msgid "_Preferences"
-msgstr "Voorkeuren"
+msgstr "首选项 (_P)"
 
 #: ../ui/xi-menus.glade.h:114
 msgid "_Preview"
-msgstr "Afdrukvoorbeeld"
+msgstr "预览(_P)"
 
 #: ../ui/xi-menus.glade.h:115
 msgid "_Read Aloud"
-msgstr "Ha_rdop voorlezen"
+msgstr "朗读(_R)"
 
 #: ../ui/xi-menus.glade.h:116
 msgid "_Report Bug"
-msgstr "Fout rapporteren"
+msgstr "报告 Bug(_R)"
 
 #: ../ui/xi-menus.glade.h:117
 msgid "_Save Session"
-msgstr "Sessie op_slaan"
+msgstr "保存讲义(_S)"
 
 #: ../ui/xi-menus.glade.h:118
 msgid "_Search"
-msgstr "_Zoeken"
+msgstr "搜索 (_S)"
 
 #: ../ui/xi-menus.glade.h:119
 msgid "_Show/Hide Attached Sidebar"
-msgstr "Show/Hide Bijgevoegde Sidebar"
+msgstr "显示/隐藏附加侧边栏(_S)"
 
 #: ../ui/xi-export-bookmarks.glade.h:1
 msgid "<b>Export to:</b>"
-msgstr ""
+msgstr "<b>导出到:</b>"
 
 #: ../ui/xi-export-bookmarks.glade.h:2
 msgid "Export Bookmark Folder"
-msgstr ""
+msgstr "导出书签文件夹"
 
 #: ../ui/xi-export-bookmarks.glade.h:3
 msgid "Html"
-msgstr ""
+msgstr "Html"
 
 #: ../ui/xi-export-bookmarks.glade.h:4
 msgid "Include Bible text"
-msgstr ""
+msgstr "包含圣经文本"
 
 #: ../ui/xi-export-bookmarks.glade.h:5
 msgid "Plain text"
-msgstr ""
+msgstr "纯文本"
 
 #: ../ui/xi-export-bookmarks.glade.h:6
 msgid "Xiphos bookmarks"
-msgstr ""
+msgstr "Xiphos 书签"
 
 #: ../ui/xi-export-bookmarks.glade.h:7
 msgid "gtk-cancel"
-msgstr ""
+msgstr "gtk-取消"
 
 #: ../ui/xi-export-bookmarks.glade.h:8
 msgid "gtk-ok"
-msgstr ""
+msgstr "gtk-确定"
 
 #: ../xiphos.desktop.in.in.h:1
 msgid "Study the Bible"
-msgstr "Onderzoek de Bijbel"
+msgstr "学习圣经"
 
 #: ../xiphos.desktop.in.in.h:2
 msgid "Xiphos Bible Guide"
-msgstr "Xiphos Bijbelgids"
+msgstr "Xiphos 圣经指导"
 
 #~ msgid "Cipher Key?"
-#~ msgstr "Sleutelcode?"
+#~ msgstr "密码钥匙"
 
 #~ msgid "Copy"
-#~ msgstr "Kopieëren"
+#~ msgstr "复制"
 
 #~ msgid "Change parallel 1"
-#~ msgstr "Wijzig parallel 1"
+#~ msgstr "变更 相关 1"
 
 #~ msgid "Change parallel 2"
-#~ msgstr "Wijzig parallel 2"
+#~ msgstr "变更 相关 2"
 
 #~ msgid "Change parallel 3"
-#~ msgstr "Wijzig parallel 3"
+#~ msgstr "变更 相关 3"
 
 #~ msgid "Change parallel 4"
-#~ msgstr "Wijzig parallel 4"
+#~ msgstr "变更 相关 4"
 
 #~ msgid "Change parallel 5"
-#~ msgstr "Wijzig parallel 5"
+#~ msgstr "变更 相关 5"
 
 #~ msgid "Sizes"
-#~ msgstr "Groottes"
+#~ msgstr "大小"
 
 #~ msgid ""
 #~ "Welcome to Xiphos.\n"
@@ -3672,1201 +3654,62 @@ msgstr "Xiphos Bijbelgids"
 #~ "\n"
 #~ "May Xiphos invoke the Module Manager so that you may install a Bible?"
 #~ msgstr ""
-#~ "Welkom bij Xiphos.\n"
+#~ "欢迎使用 Xiphos.\n"
 #~ "\n"
-#~ "Er zijn geen Bijbelmodules geinstalleerd. Xiphos heeft minimaal een "
-#~ "Bijbelmodule nodig, om te kunnen starten.\n"
+#~ "现在未安装圣经书卷。为了初始化，Xiphos必须要求您至少安装一种语言的圣经。\n"
 #~ "\n"
-#~ "Met uw toestemming wordt het Modulebeheer gestart, zodat u modules kunt "
-#~ "installeren vanaf Crosswire:\n"
-#~ "1. Configureer installatie vanaf een andere lokatie\n"
-#~ "2. Maak een verbinding.\n"
-#~ "3. Selecteer een Bijbelmodule naar keuze.\n"
-#~ "4. Kies 'Installeren'.\n"
-#~ "Sluit het Modulebeheer als u klaar bent.\n"
+#~ "有了您的许可，Xiphos将调用组件管理，使您可以安装来自Crosswire的文件:\n"
+#~ "1. 配置远程安装。\n"
+#~ "2. 联网。\n"
+#~ "3. 选择一本适合您阅读的圣经。\n"
+#~ "4. 单击“安装”。\n"
+#~ "当您完成上述操作时请关闭组件管理。\n"
 #~ "\n"
-#~ "Waarschuwing: Wees voorzichtig met het gebruik als u in uw land wordt "
-#~ "vervolgd.\n"
+#~ "警告:如果您居住在受迫害的国家，请小心使用。\n"
 #~ "\n"
-#~ "Modulebeheer opstarten om een Bijbelmodule te installeren?"
+#~ "是否允许 Xiphos 启动组件管理器以帮助您安装一本圣经？"
 
 #~ msgid "<b>Parallel View</b>"
-#~ msgstr "<b>Parallelweergave</b>"
+#~ msgstr "<b>类似经文视图</b>"
 
 #~ msgid "Parallel 1"
-#~ msgstr "Parallel 1"
+#~ msgstr "类似 1"
 
 #~ msgid "Parallel 1 Combo"
-#~ msgstr "Parallel 1 Combo"
+#~ msgstr "类似 1 组合框"
 
 #~ msgid "Parallel 2"
-#~ msgstr "Parallel 2"
+#~ msgstr "类似 2"
 
 #~ msgid "Parallel 2 Combo"
-#~ msgstr "Parallel 2 Combo"
+#~ msgstr "类似 2 组合框"
 
 #~ msgid "Parallel 3"
-#~ msgstr "Parallel 3"
+#~ msgstr "类似 3"
 
 #~ msgid "Parallel 3 Combo"
-#~ msgstr "Parallel 3 Combo"
+#~ msgstr "类似 3 组合框"
 
 #~ msgid "Parallel 4"
-#~ msgstr "Parallel 4"
+#~ msgstr "类似 4"
 
 #~ msgid "Parallel 4 Combo"
-#~ msgstr "\""
+#~ msgstr "类似 4 组合框"
 
 #~ msgid "Parallel 5"
-#~ msgstr "Parallel 5"
+#~ msgstr "类似 5"
 
 #~ msgid "Parallel 5 Combo"
-#~ msgstr "Parallel 5 Combo"
-
-#~ msgid "Use Verse Per Line"
-#~ msgstr "Eénregelige verzen"
+#~ msgstr "类似 5 组合框"
 
 #~ msgid "Use Verse Per Line Checkbox"
-#~ msgstr "Gebruik Vers Per Line selectievakje"
+#~ msgstr "使用每行显示一节经文模式 复选框"
 
 #~ msgid "Import Bibletime Bookmarks"
-#~ msgstr "Bibletime-bladwijzers importeren"
+#~ msgstr "导入 Bibletime 书签"
 
 #~ msgid "Restore Folder"
-#~ msgstr "Map herstellen"
+#~ msgstr "重置文件夹"
 
 #~ msgid "Restore saved folder"
-#~ msgstr "Herstel opgeslagen map"
-
-#~ msgid "About the SWORD Project"
-#~ msgstr "Over het SWORD-project"
-
-#~ msgid "Sword Version"
-#~ msgstr "SWORD-versie"
-
-#~ msgid "Books can be downloaded from the SWORD Project"
-#~ msgstr ""
-#~ "Boeken kunnen worden gedownload van de website van het SWORD-project"
-
-#~ msgid "Move backwards through history"
-#~ msgstr "Schuif terugwaarts in de geschiedenis"
-
-#~ msgid "Move foward through history"
-#~ msgstr "Schuif voorwaarts in de geschiedenis"
-
-#~ msgid "Select a Book of the Bible"
-#~ msgstr "Selecteer een bijbelboek"
-
-#~ msgid "Change Chapter"
-#~ msgstr "Hoofdstuk wijzigen"
-
-#~ msgid "Change Verse"
-#~ msgstr "Vers wijzigen"
-
-#~ msgid "Enter a Verse reference in Book 1:1 format and press Return"
-#~ msgstr "Geef een versreferentie in Boek 1:1 formaat en druk op Enter"
-
-#~ msgid "Install these modules:"
-#~ msgstr "Deze modules installeren:"
-
-#~ msgid "Remove these modules:"
-#~ msgstr "Deze modules verwijderen:"
-
-#~ msgid "Archive these modules:"
-#~ msgstr "Back-up maken van:"
-
-#~ msgid ""
-#~ "Build fast-search index for these\n"
-#~ "modules (may take minutes/module):"
-#~ msgstr ""
-#~ "Snelzoek-index voor deze modules maken\n"
-#~ "(duurt enkele minuten):"
-
-#~ msgid "Delete fast-search index for these modules:"
-#~ msgstr "Snelzoek-index van deze modules verwijderen:"
-
-#~ msgid "Xiphos could not execute archiver"
-#~ msgstr "Xiphos kon het backupbeheer niet starten"
-
-#~ msgid ""
-#~ " archival result:\n"
-#~ "\n"
-#~ msgstr ""
-#~ " archiveer resultaat:\n"
-#~ "\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "Archive in "
-#~ msgstr ""
-#~ "\n"
-#~ "Back-up in "
-
-#~ msgid "Refreshing remote"
-#~ msgstr "Bezig met zoeken naar updates"
-
-#~ msgid "Remote not found"
-#~ msgstr "Externe bron niet gevonden"
-
-#~ msgid "Sources"
-#~ msgstr "Bronnen"
-
-#~ msgid "Open in a new tab"
-#~ msgstr "In een nieuw tabblad openen"
-
-#~ msgid "Open selected module in a separate ['dialog'] window"
-#~ msgstr "Geselecteerde module in een dialoogvenster openen"
-
-#~ msgid "View information about the selected dialog"
-#~ msgstr "Informatie over het geselecteerde dialoogvenster tonen"
-
-#~ msgid "Create a new prayer list"
-#~ msgstr "Een nieuwe gebedslijst maken"
-
-#~ msgid "Daily Journal"
-#~ msgstr "Dagelijkse berichten"
-
-#~ msgid "Outlined Topic"
-#~ msgstr "Uitgelijnd onderwerp"
-
-#~ msgid "Open selected module in a dialog"
-#~ msgstr "Geselecteerde module in een dialoogvenster openen"
-
-#~ msgid "Text"
-#~ msgstr "Tekst"
-
-#~ msgid "Text to render"
-#~ msgstr "Te genereren tekst"
-
-#~ msgid "Add Child"
-#~ msgstr "Kind toevoegen"
-
-#~ msgid "Add Sibling"
-#~ msgstr "Element toevoegen"
-
-#~ msgid "Eph 2:8"
-#~ msgstr "Ef 2:8"
-
-#~ msgid "H_istory/<Separator>"
-#~ msgstr "_Geschiedenis<Separator>"
-
-#~ msgid "H_istory/C_lear"
-#~ msgstr "_Geschiedenis/_Wissen"
-
-#~ msgid "Xiphos has renamed .xiphos-2.0 to .xiphos"
-#~ msgstr "Xiphos heeft .xiphos-2.0 hernoemd naar .xiphos"
-
-#~ msgid ""
-#~ "Xiphos can not rename  .xiphos-2.0 to .xiphos:\n"
-#~ "%s\n"
-#~ "\n"
-#~ "Xiphos cannot continue."
-#~ msgstr ""
-#~ "Xiphos kan .xiphos-2.0 niet hernoemen naar .xiphos:\n"
-#~ "%s\n"
-#~ "\n"
-#~ "Xiphos zal worden afgesloten."
-
-#~ msgid "Open the file in Studypad"
-#~ msgstr "Bestand openen in het notitieblok"
-
-#~ msgid "Base text size"
-#~ msgstr "Standaard lettertypegrootte"
-
-#~ msgid "Dictionary/_Lexicon"
-#~ msgstr "Woordenboek/_Lexicon"
-
-#~ msgid "Remove - Restore"
-#~ msgstr "Verwijderen - Herstellen"
-
-#~ msgid "Remove Folder"
-#~ msgstr "Map verwijderen"
-
-#~ msgid "_Commentary"
-#~ msgstr "_Commentaar"
-
-#~ msgid "_Show/Hide Sidebar"
-#~ msgstr "Zijbalk tonen/verbergen"
-
-#~ msgid "Open StudyPad File"
-#~ msgstr "Open notitieblokbestand"
-
-#~ msgid "Save StudyPad File"
-#~ msgstr "Notitieblokbestand opslaan"
-
-#~ msgid "item1"
-#~ msgstr "item1"
-
-#~ msgid "item2"
-#~ msgstr "item2"
-
-#~ msgid "_Module Options"
-#~ msgstr "_Moduleopties"
-
-#~ msgid "Sync with main"
-#~ msgstr "Synchroniseer met main"
-
-#~ msgid "Stay in sync"
-#~ msgstr "Synchroon houden"
-
-#~ msgid "Print"
-#~ msgstr "Afdrukken"
-
-#~ msgid "Print Preview"
-#~ msgstr "Afdrukvoorbeeld"
-
-#~ msgid "Failed to print the document"
-#~ msgstr "Afdrukken is mislukt"
-
-#~ msgid "_Modules"
-#~ msgstr "_Modules"
-
-#~ msgid "_Bookmarks"
-#~ msgstr "_Bladwijzers"
-
-#~ msgid "Verse _List"
-#~ msgstr "Vers_lijst"
-
-#~ msgid "%s not found"
-#~ msgstr "%s is niet gevonden"
-
-#~ msgid "has been modified. Do you wish to save it?"
-#~ msgstr "is gewijzigd. Wijzigingen opslaan?"
-
-#~ msgid "not loaded"
-#~ msgstr "niet geladen"
-
-#~ msgid "Open the StudyPad editor"
-#~ msgstr "Notitieblok-editor openen"
-
-#~ msgid "Open a saved session"
-#~ msgstr "Open een opgeslagen sessie"
-
-#~ msgid "Save the current session to a file"
-#~ msgstr "Huidige sessie als bestand opslaan"
-
-#~ msgid "_Copy"
-#~ msgstr "Kopiëren"
-
-#~ msgid "Copy highlighted text from main window"
-#~ msgstr "Geselecteerde tekst van hoofdscherm kopiëren"
-
-#~ msgid "Search using the shortcut bar"
-#~ msgstr "Zoek met behulp van de snelkoppelingen balk"
-
-#~ msgid "Advanced search using the search dialog"
-#~ msgstr "Geavanceerd zoeken met het zoekvenster"
-
-#~ msgid "Set user preferences"
-#~ msgstr "Gebruikersinstellingen"
-
-#~ msgid "C_lear"
-#~ msgstr "_Wissen"
-
-#~ msgid "Clear history list"
-#~ msgstr "Geschiedenis wissen"
-
-#~ msgid "Show the Daily Devotion for today"
-#~ msgstr "Dagboek van vandaag tonen"
-
-#~ msgid "Show or hide Bible texts window"
-#~ msgstr "Bijbeltekstenscherm tonen of verbergen"
-
-#~ msgid "Show or hide Preview window"
-#~ msgstr "Toon of verberg Voorbeeldscherm"
-
-#~ msgid "Show or hide commentaries"
-#~ msgstr "Toon of verberg commentaren"
-
-#~ msgid "Show or hide - dictionaries and lexicons"
-#~ msgstr "Toon of verberg - woordenboeken en lexicons"
-
-#~ msgid "Open the Xiphos manual"
-#~ msgstr "Xiphos's gebruikershandleiding openen"
-
-#~ msgid "Sign up for the users' mailing list"
-#~ msgstr "Meld je aan voor de gebruikers e-maillijst"
-
-#~ msgid "Chat with other users and developers"
-#~ msgstr "Chat met andere gebruikers en ontwikkelaars"
-
-#~ msgid "Report bug to SourceForge"
-#~ msgstr "Meld een fout bij SourceForge"
-
-#~ msgid "Translating Xiphos to other languages"
-#~ msgstr "Xiphos vertalen"
-
-#~ msgid "More information about the SWORD Project"
-#~ msgstr "Meer informatie over het SWORD-project"
-
-#~ msgid "About this application"
-#~ msgstr "Over deze toepassing"
-
-#~ msgid "Hi_story"
-#~ msgstr "_Geschiedenis"
-
-#~ msgid "1 Cor 15:1"
-#~ msgstr "1 Kor 15:1"
-
-#~ msgid "Name for new prayer list"
-#~ msgstr "Gebedslijst naam"
-
-#~ msgid "can not create path\n"
-#~ msgstr "Aanmaken pad mislukt\n"
-
-#~ msgid "Prayer list already exist\n"
-#~ msgstr "Gebedslijst bestaat altijd\n"
-
-#~ msgid "\\par\\par My prayer list \\par\\par Module created in Xiphos"
-#~ msgstr "\\par\\par Mijn gebedslijst \\par\\par Module aangemaakt met Xiphos"
-
-#~ msgid "+5"
-#~ msgstr "+5"
-
-#~ msgid "+4"
-#~ msgstr "+4"
-
-#~ msgid "+3"
-#~ msgstr "+3"
-
-#~ msgid "+2"
-#~ msgstr "+2"
-
-#~ msgid "+1"
-#~ msgstr "+1"
-
-#~ msgid "-1"
-#~ msgstr "-1"
-
-#~ msgid "-2"
-#~ msgstr "-2"
-
-#~ msgid "-3"
-#~ msgstr "-3"
-
-#~ msgid "Starting"
-#~ msgstr "Bezig met starten"
-
-#~ msgid "Building Xiphos interface"
-#~ msgstr "Bezig met opbouwen Xiphos interface"
-
-#~ msgid "Initiating Xiphos"
-#~ msgstr "Initialiseren Xiphos"
-
-#~ msgid "done"
-#~ msgstr "klaar"
-
-#~ msgid "Xiphos is shutdown"
-#~ msgstr "Xiphos wordt afgesloten"
-
-#~ msgid "Initiating SWORD"
-#~ msgstr "Bezig met initialiseren van Xiphos"
-
-#~ msgid "path to sword"
-#~ msgstr "pad naar sword"
-
-#~ msgid "System locale is"
-#~ msgstr "Systeem lokalisatie is"
-
-#~ msgid "SWORD locale is"
-#~ msgstr "SWORD lokalisatie is"
-
-#~ msgid "SWORD is shutdown"
-#~ msgstr "SWORD wordt afgesloten"
-
-#~ msgid "Number of Text modules"
-#~ msgstr "Aantal bijbelvertalingmodules"
-
-#~ msgid "Number of Commentary modules"
-#~ msgstr "Aantal commentaarmodules"
-
-#~ msgid "Number of Dict/lex modules"
-#~ msgstr "Aantal woordenboek/lexiconmodules"
-
-#~ msgid "Number of Book modules"
-#~ msgstr "Aantal boekmodules"
-
-#~ msgid "Number of Devotion modules"
-#~ msgstr "Aantal dagboekmodules"
-
-#~ msgid "Number of Prayer modules"
-#~ msgstr "Aantal gebedsmodules"
-
-#~ msgid ""
-#~ "\n"
-#~ "First Run: need to create settings!\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Eerste start: configuratie vereist!\n"
-
-#~ msgid "can not create  .sword"
-#~ msgstr "Kan .sword niet aanmaken"
-
-#~ msgid "can not create  .sword/mods.d"
-#~ msgstr "Kan .sword/mods.d niet aanmaken"
-
-#~ msgid "can not create  .sword/modules"
-#~ msgstr "Kan .sword/modules niet aanmaken"
-
-#~ msgid "Select Local Source"
-#~ msgstr "Selecteer een lokale bron"
-
-#~ msgid "It will be lost permanently!"
-#~ msgstr "Het gaat definitief verloren!"
-
-#~ msgid "Open file..."
-#~ msgstr "Bestand openen..."
-
-#~ msgid "Save file as..."
-#~ msgstr "Bestand opslaan als..."
-
-#~ msgid "Open in dialog"
-#~ msgstr "In een dialoogvenster openen"
-
-#~ msgid ""
-#~ "For multi-word search, use\n"
-#~ "+FirstWord +SecondWord"
-#~ msgstr ""
-#~ "Gebruik bij meerdere zoekwoorden het plus-teken:\n"
-#~ "+EersteWoord + TweedeWoord"
-
-#~ msgid "_About the SWORD Project ..."
-#~ msgstr "Over het SWORD-project ..."
-
-#~ msgid "Select the modules you want"
-#~ msgstr "Selecteer de gewenste modules"
-
-#~ msgid ""
-#~ "There is currently no program set as your\n"
-#~ "handler for \"sword://\" and similar URLs.\n"
-#~ "Would you like Xiphos to install itself\n"
-#~ "as the program to handle these URLs?"
-#~ msgstr ""
-#~ "Er is geen standardprogramma voor\n"
-#~ "\"sword://\" and gelijkwaardige URLs.\n"
-#~ "Wilt u dat Xiphos wordt ingesteld\n"
-#~ "als standaardprogramma voor deze URLs?"
-
-#~ msgid "<b>Font Miscellaneous</b>"
-#~ msgstr "<b>Overige Lettertypeinstellingen</b>"
-
-#~ msgid "Afrikaans"
-#~ msgstr "Afrikaans"
-
-#~ msgid "English, Old (ca.450-1100)"
-#~ msgstr "Oud Engels (ca.450-1100)"
-
-#~ msgid "Arabic"
-#~ msgstr "Arabisch"
-
-#~ msgid "Azerbaijani"
-#~ msgstr "Azerbeidzjaans"
-
-#~ msgid "Belarusian"
-#~ msgstr "Wit-Russisch"
-
-#~ msgid "Bulgarian"
-#~ msgstr "Bulgaars"
-
-#~ msgid "Breton"
-#~ msgstr "Bretons"
-
-#~ msgid "Bosnian"
-#~ msgstr "Bosnisch"
-
-#~ msgid "Catalan"
-#~ msgstr "Catalaans"
-
-#~ msgid "Cebuano"
-#~ msgstr "Cebuano"
-
-#~ msgid "Coptic"
-#~ msgstr "Koptisch"
-
-#~ msgid "Czech"
-#~ msgstr "Tsjechisch"
-
-#~ msgid "Church Slavic"
-#~ msgstr "Oudkerkslavisch"
-
-#~ msgid "Welsh"
-#~ msgstr "Wels"
-
-#~ msgid "Danish"
-#~ msgstr "Deens"
-
-#~ msgid "German"
-#~ msgstr "Duits"
-
-#~ msgid "Greek, Modern (1453-)"
-#~ msgstr "Modern Grieks (1453-)"
-
-#~ msgid "English"
-#~ msgstr "Engels"
-
-#~ msgid "American English"
-#~ msgstr "Amerikaans Engels"
-
-#~ msgid "English, Middle (1100-1500)"
-#~ msgstr "Midden Engels (1100-1500)"
-
-#~ msgid "Esperanto"
-#~ msgstr "Esperanto"
-
-#~ msgid "Spanish"
-#~ msgstr "Spaans"
-
-#~ msgid "Estonian"
-#~ msgstr "Estisch"
-
-#~ msgid "Basque"
-#~ msgstr "Baskisch"
-
-#~ msgid "Finnish"
-#~ msgstr "Fins"
-
-#~ msgid "French"
-#~ msgstr "Frans"
-
-#~ msgid "Frisian"
-#~ msgstr "Fries"
-
-#~ msgid "Irish"
-#~ msgstr "Iers"
-
-#~ msgid "Gaelic (Scots)"
-#~ msgstr "Schots-Gaelisch"
-
-#~ msgid "Manx"
-#~ msgstr "Manx-Gaelisch"
-
-#~ msgid "Greek, Ancient (to 1453)"
-#~ msgstr "Oud Grieks (tot 1453)"
-
-#~ msgid "Hebrew"
-#~ msgstr "Hebreeuws"
-
-#~ msgid "Hawaiian"
-#~ msgstr "Hawaiiaans"
-
-#~ msgid "Croatian"
-#~ msgstr "Kroatisch"
-
-#~ msgid "Hungarian"
-#~ msgstr "Hongaars"
-
-#~ msgid "Armenian"
-#~ msgstr "Armeens"
-
-#~ msgid "Klingon"
-#~ msgstr "Klingon"
-
-#~ msgid "Icelandic"
-#~ msgstr "IJslands"
-
-#~ msgid "Italian"
-#~ msgstr "Italiaans"
-
-#~ msgid "Japanese"
-#~ msgstr "Japans"
-
-#~ msgid "Georgian"
-#~ msgstr "Georgisch"
-
-#~ msgid "Korean"
-#~ msgstr "Koreaans"
-
-#~ msgid "Kurdish"
-#~ msgstr "Koerdisch"
-
-#~ msgid "Kirghiz"
-#~ msgstr "Kirgizisch"
-
-#~ msgid "Latin"
-#~ msgstr "Latijn"
-
-#~ msgid "Lithuanian"
-#~ msgstr "Litouws"
-
-#~ msgid "Latvian"
-#~ msgstr "Lets"
-
-#~ msgid "Maori"
-#~ msgstr "Maori"
-
-#~ msgid "Macedonian"
-#~ msgstr "Macedonisch"
-
-#~ msgid "Maltese"
-#~ msgstr "Maltees"
-
-#~ msgid "Low German; Low Saxon"
-#~ msgstr "Nederduits"
-
-#~ msgid "Dutch"
-#~ msgstr "Nederlands"
-
-#~ msgid "Norwegian"
-#~ msgstr "Noors"
-
-#~ msgid "Papiamento"
-#~ msgstr "Papiamentu"
-
-#~ msgid "Polish"
-#~ msgstr "Pools"
-
-#~ msgid "Portuguese"
-#~ msgstr "Portugees"
-
-#~ msgid "Romanian"
-#~ msgstr "Roemeens"
-
-#~ msgid "Russian"
-#~ msgstr "Russisch"
-
-#~ msgid "Scots"
-#~ msgstr "Schots"
-
-#~ msgid "Slovak"
-#~ msgstr "Slowaaks"
-
-#~ msgid "Slovenian"
-#~ msgstr "Sloveens"
-
-#~ msgid "Somali"
-#~ msgstr "Somalisch"
-
-#~ msgid "Albanian"
-#~ msgstr "Albanees"
-
-#~ msgid "Swedish"
-#~ msgstr "Zweeds"
-
-#~ msgid "Swahili"
-#~ msgstr "Swahili"
-
-#~ msgid "Syriac"
-#~ msgstr "Syrisch"
-
-#~ msgid "Tamil"
-#~ msgstr "Tamil"
-
-#~ msgid "Thai"
-#~ msgstr "Thais"
-
-#~ msgid "Tagalog"
-#~ msgstr "Tagalog"
-
-#~ msgid "Tswana"
-#~ msgstr "Tswana"
-
-#~ msgid "Turkish"
-#~ msgstr "Turks"
-
-#~ msgid "Tahitian"
-#~ msgstr "Tahitisch"
-
-#~ msgid "Ukrainian"
-#~ msgstr "Oekraiens"
-
-#~ msgid "Vietnamese"
-#~ msgstr "Vietnamees"
-
-#~ msgid "Xhosa"
-#~ msgstr "Xhosa"
-
-#~ msgid "Bavarian"
-#~ msgstr "Beiers"
-
-#~ msgid "Alemannisch"
-#~ msgstr "Alemannisch"
-
-#~ msgid "Haitian Creole French"
-#~ msgstr "Kreyol"
-
-#~ msgid "Itz"
-#~ msgstr "Itza"
-
-#~ msgid "Shuar"
-#~ msgstr "Shuar"
-
-#~ msgid "Kekchi"
-#~ msgstr "Kekchi"
-
-#~ msgid "Lombard"
-#~ msgstr "Lombardisch"
-
-#~ msgid "Tok Pisin"
-#~ msgstr "Tok Pisin"
-
-#~ msgid "Uma"
-#~ msgstr "Uma"
-
-#~ msgid "Romani, Vlax"
-#~ msgstr "Romani, Vlax"
-
-#~ msgid "Sango"
-#~ msgstr "Sango"
-
-#~ msgid "Sranan"
-#~ msgstr "Sranan"
-
-#~ msgid "Chinese"
-#~ msgstr "Chinees"
-
-#~ msgid "Zulu"
-#~ msgstr "Zoeloe"
-
-#~ msgid "found in"
-#~ msgstr "gevonden in"
-
-#~ msgid "The"
-#~ msgstr "De"
-
-#~ msgid "module is locked."
-#~ msgstr "modules is vergrendeld."
-
-#~ msgid "module has been unlocked."
-#~ msgstr "module is beschikbaar."
-
-#~ msgid "If you have the cipher key you can"
-#~ msgstr "Als u de decodeersleutel heeft kunt u"
-
-#~ msgid "click here"
-#~ msgstr "hier klikken"
-
-#~ msgid "to unlock the module"
-#~ msgstr "Ontgrendel deze module"
-
-#~ msgid "You will need to restart Xiphos after you unlock it."
-#~ msgstr "U moet Xiphos herstarten na het ontgrendelen."
-
-#~ msgid "You need to restart Xiphos to view it"
-#~ msgstr "U moet Xiphos herstarten om het te bekijken"
-
-#~ msgid "Show Tabs"
-#~ msgstr "Tabbladen tonen"
-
-#~ msgid "Go to %s"
-#~ msgstr "Ga naar %s"
-
-#~ msgid "Do you wish to set preferences now?"
-#~ msgstr "Wilt u nu instellingen wijzigen?"
-
-#~ msgid "Old"
-#~ msgstr "Oud"
-
-#~ msgid "Remove/Archive"
-#~ msgstr "Verwijderen/Archiveer"
-
-#~ msgid "URL:"
-#~ msgstr "URL:"
-
-#~ msgid "Go to parent"
-#~ msgstr "Ga naar bovenliggende"
-
-#~ msgid "Go to first child"
-#~ msgstr "Ga naar het eerste"
-
-#~ msgid "Save (PersistFile)"
-#~ msgstr "Opslaan (PersistFile)"
-
-#~ msgid "Remove failed"
-#~ msgstr "Verwijderen is mislukt"
-
-#~ msgid "-untitled-"
-#~ msgstr "-naamloos-"
-
-#~ msgid "Add reference Link"
-#~ msgstr "Referentieverwijzing toevoegen"
-
-#~ msgid "Link text: "
-#~ msgstr "Verwijzing tekst "
-
-#~ msgid "Cut"
-#~ msgstr "Knippen"
-
-#~ msgid "Paste"
-#~ msgstr "Plakken"
-
-#~ msgid "Spell Check"
-#~ msgstr "Spellingscontrole"
-
-#~ msgid "Undo"
-#~ msgstr "Ongedaan maken"
-
-#~ msgid "Replace"
-#~ msgstr "Vervangen"
-
-#~ msgid "Link..."
-#~ msgstr "Verwijzing..."
-
-#~ msgid "Link"
-#~ msgstr "Verwijzing"
-
-#~ msgid "Paragraph"
-#~ msgstr "Paragraaf"
-
-#~ msgid "Page"
-#~ msgstr "Pagina"
-
-#~ msgid "Rule"
-#~ msgstr "Regel"
-
-#~ msgid "Cell"
-#~ msgstr "Cel"
-
-#~ msgid "Paste Quotation"
-#~ msgstr "Citaat plakken"
-
-#~ msgid "Remove Link"
-#~ msgstr "Verwijzing verwijderen"
-
-#~ msgid "Style"
-#~ msgstr "Stijl"
-
-#~ msgid "Text Style..."
-#~ msgstr "Tekstopmaak"
-
-#~ msgid "Paragraph Style..."
-#~ msgstr "Paragraafopmaak"
-
-#~ msgid "Link Style..."
-#~ msgstr "Verwijzingopmaak"
-
-#~ msgid "Rule Style..."
-#~ msgstr "Regelopmaak"
-
-#~ msgid "Image Style..."
-#~ msgstr "Illustratieopmaak"
-
-#~ msgid "Cell Style..."
-#~ msgstr "Celopmaak"
-
-#~ msgid "Table Style..."
-#~ msgstr "Tabelopmaak"
-
-#~ msgid "Page Style..."
-#~ msgstr "Paginaopmaak"
-
-#~ msgid "Table insert"
-#~ msgstr "Tabel invoegen"
-
-#~ msgid "Row above"
-#~ msgstr "Rij omhoog"
-
-#~ msgid "Row below"
-#~ msgstr "Rij beneden"
-
-#~ msgid "Column before"
-#~ msgstr "Kolom voor"
-
-#~ msgid "Column after"
-#~ msgstr "Kolom na"
-
-#~ msgid "Table delete"
-#~ msgstr "Tabel verwijderen"
-
-#~ msgid "Row"
-#~ msgstr "Rij"
-
-#~ msgid "Column"
-#~ msgstr "Kolom"
-
-#~ msgid "Check Word Spelling..."
-#~ msgstr "Spellingcontrole"
-
-#~ msgid "Add Word to"
-#~ msgstr "Woord toevoegen aan"
-
-#~ msgid "Add Word to Dictionary"
-#~ msgstr "Woord toevoegen aan Woordenboek"
-
-#~ msgid "Ignore Misspelled Word"
-#~ msgstr "Spelfout negeren"
-
-#~ msgid "Input Methods"
-#~ msgstr "Invoermethoden"
-
-#~ msgid "Replace confirmation"
-#~ msgstr "Vervangen bevestigen"
-
-#~ msgid "Replace _All"
-#~ msgstr "_Alles vervangen"
-
-#~ msgid "_Next"
-#~ msgstr "_Volgende"
-
-#~ msgid "_Replace"
-#~ msgstr "_Vervangen"
-
-#~ msgid "Search _backward"
-#~ msgstr "Terugwaarts _zoeken"
-
-#~ msgid "Case _sensitive"
-#~ msgstr "Hoofdletter _gevoelig"
-
-#~ msgid "Replace:"
-#~ msgstr "Vervangen:"
-
-#~ msgid "With:"
-#~ msgstr "Met:"
-
-#~ msgid "_Backward"
-#~ msgstr "_Terugwaarts"
-
-#~ msgid "_Regular Expression"
-#~ msgstr "_Reguliere expressie"
-
-#~ msgid "No misspelled word found"
-#~ msgstr "Geen spelfouten gevonden"
-
-#~ msgid "Spell checker"
-#~ msgstr "Spellingcontrole"
-
-#~ msgid "Current _Languages"
-#~ msgstr "Huidige _talen"
-
-#~ msgid "Insert"
-#~ msgstr "Toevoegen"
-
-#~ msgid "Delete Note?"
-#~ msgstr "Notitie verwijderen?"
-
-#~ msgid "Create a new file"
-#~ msgstr "Nieuw bestand"
-
-#~ msgid "Print window contents"
-#~ msgstr "Scherm afdrukken"
-
-#~ msgid "Find in this note"
-#~ msgstr "Zoek in notitie"
-
-#~ msgid "Find and Replace"
-#~ msgstr "Zoeken en vervangen"
-
-#~ msgid "Insert image at cursor"
-#~ msgstr "Illustratie toevoegen op cursor"
-
-#~ msgid "Insert link"
-#~ msgstr "Verwijzing invoegen"
-
-#~ msgid "Insert link at cursor"
-#~ msgstr "Verwijzing invoegen op cursor"
-
-#~ msgid "Insert rule"
-#~ msgstr "Regel invoegen"
-
-#~ msgid "Insert rule at cursor"
-#~ msgstr "Regel invoegen op cursor"
-
-#~ msgid "Insert table"
-#~ msgstr "Tabel invoegen"
-
-#~ msgid "Insert table at cursor"
-#~ msgstr "Tabel invoegen op cursor"
-
-#~ msgid "Check spelling in this note"
-#~ msgstr "Spelling controleren van deze notitie"
-
-#~ msgid "Preformat"
-#~ msgstr "Maak vooraf op"
-
-#~ msgid "Bulleted List"
-#~ msgstr "Ongenummerde lijst"
-
-#~ msgid "Numbered List"
-#~ msgstr "Genummerde lijst"
-
-#~ msgid "Alphabetical List"
-#~ msgstr "Alfabetische lijst"
-
-#~ msgid "Header 1"
-#~ msgstr "Kop 1"
-
-#~ msgid "Header 2"
-#~ msgstr "Kop 2"
-
-#~ msgid "Header 3"
-#~ msgstr "Kop 3"
-
-#~ msgid "Header 4"
-#~ msgstr "Kop 4"
-
-#~ msgid "Header 5"
-#~ msgstr "Kop 5"
-
-#~ msgid "Header 6"
-#~ msgstr "Kop 6"
-
-#~ msgid "Address"
-#~ msgstr "Adres"
-
-#~ msgid "Automatic"
-#~ msgstr "Automatisch"
-
-#~ msgid "Left align"
-#~ msgstr "Links uitlijnen"
-
-#~ msgid "Center"
-#~ msgstr "Centreer"
-
-#~ msgid "Right align"
-#~ msgstr "Rechts uitlijnen"
-
-#~ msgid "Typewriter"
-#~ msgstr "Typemachine"
-
-#~ msgid "Bold"
-#~ msgstr "Vet"
-
-#~ msgid "Makes the text bold"
-#~ msgstr "Maakt de tekst vet"
-
-#~ msgid "Makes the text italic"
-#~ msgstr "Tekst cursiveren"
-
-#~ msgid "Underline"
-#~ msgstr "Onderstrepen"
-
-#~ msgid "Underlines the text"
-#~ msgstr "Tekst onderstrepen"
-
-#~ msgid "Strikeout"
-#~ msgstr "Doorhalen"
-
-#~ msgid "Strikes out the text"
-#~ msgstr "Tekst doorhalen"
-
-#~ msgid "Unindent"
-#~ msgstr "Inspringen kleiner maken"
-
-#~ msgid "Indents the paragraphs less"
-#~ msgstr "De paragraaf minder inspringen"
-
-#~ msgid "Indents the paragraphs more"
-#~ msgstr "De paragraaf verder inspringen"
-
-#~ msgid "Save Note"
-#~ msgstr "Notitie opslaan"
-
-#~ msgid "Delete Note"
-#~ msgstr "Notitie verwijderen"
-
-#~ msgid "Genesis"
-#~ msgstr "Genesis"
-
-#~ msgid "Setup"
-#~ msgstr "Installatie"
-
-#~ msgid "Xiphos Configuration - Page 1 of 5"
-#~ msgstr "Xiphos Configuratie - Pagina 1 of 5"
-
-#~ msgid ""
-#~ "Since this is the first time you have run Xiphos, this assistant will "
-#~ "guide you through the initial setup by asking a few simple questions.\n"
-#~ "\n"
-#~ "Once you have completed these steps, you can always change the settings "
-#~ "later by using the Preferences dialog."
-#~ msgstr ""
-#~ "Omdat dit de eerste keer dat u Xiphos gebruikt zal deze assistent u door "
-#~ "de initiële configuratie leiden met behulp van eenvoudige vragen.Als u "
-#~ "klaar bent, kunt u de configuratie altijd wijzigen met het venster "
-#~ "Voorkeuren."
-
-#~ msgid "Xiphos Configuration - Page 2 of 5"
-#~ msgstr "Xiphos Configuratie - Pagina 2 of 5"
-
-#~ msgid "These values have been detected automatically"
-#~ msgstr "Deze gegevens zijn automatisch gedetecteerd"
-
-#~ msgid "Your home directory:"
-#~ msgstr "Uw persoonlijke map"
-
-#~ msgid "Sword"
-#~ msgstr "Sword"
-
-#~ msgid "SWORD version"
-#~ msgstr "Sword-versie"
-
-#~ msgid "SWORD Directory:"
-#~ msgstr "SWORD-map"
-
-#~ msgid "Number of Bible text modules:"
-#~ msgstr "Aantal Bijbel-modules"
-
-#~ msgid "Number of Commentary modules:"
-#~ msgstr "Aantal Commentaar-modules"
-
-#~ msgid "Number of Dictionary/Lexicon modules:"
-#~ msgstr "Aantal Woordenboek/Lexicon-modules"
-
-#~ msgid "Xiphos Configuration - Page 3 of 5"
-#~ msgstr "Xiphos Configuratie - Pagina 3 of 5"
-
-#~ msgid "Settings to use when Xiphos starts"
-#~ msgstr "Opstartinstellingen van Xiphos"
-
-#~ msgid "Show Bible tabs"
-#~ msgstr "Toon Bijbeltabbladen"
-
-#~ msgid "Show Bible window"
-#~ msgstr "Toon Bijbelscherm"
-
-#~ msgid "Show upper workbook"
-#~ msgstr "Toon upper workbook"
-
-#~ msgid "Show Dictionary/Lexicon tabs"
-#~ msgstr "Toon Woordeboek/Lexicon tabbladen"
-
-#~ msgid "Show lower workbook"
-#~ msgstr "Toon lager werkboek"
-
-#~ msgid "Show book tabs"
-#~ msgstr "Toon tabbladen met boeken"
-
-#~ msgid "Xiphos Configuration - Page 4 of 5"
-#~ msgstr "Xiphos Configuratie - Pagina 4 of 5"
-
-#~ msgid "Text Module       "
-#~ msgstr "Tekstmodule       "
-
-#~ msgid "Generic book"
-#~ msgstr "Algemeen boek"
-
-#~ msgid ""
-#~ "Which Greek Lexicon to display in Dictionary/Lexicon Window when a link "
-#~ "or word is clicked"
-#~ msgstr ""
-#~ "Het Griekse lexicon dat wordt getoond in het Woordenboek/Lexicon scherm "
-#~ "als er op een verwijzing of een woord wordt geklikt"
-
-#~ msgid ""
-#~ "Which Hebrew Lexicon to display in Dictionary/Lexicon Window when a link "
-#~ "or word is clicked"
-#~ msgstr ""
-#~ "Het Hebreeuwse lexicon dat wordt getoond in het Woordenboek/Lexicon "
-#~ "scherm als er op een verwijzing of een woord wordt geklikt"
-
-#~ msgid "Xiphos Configuration - Page 5 of 5"
-#~ msgstr "Xiphos Configuratie - Pagina 5 van 5"
-
-#~ msgid ""
-#~ "Thank you for using Xiphos.\n"
-#~ "\n"
-#~ "Click Apply to close this dialog and run Xiphos."
-#~ msgstr ""
-#~ "Bedankt voor het gebruiken van Xiphos.\n"
-#~ "Klik Toepassen om dit scherm te sluiten en Xiphos te starten"
-
-#~ msgid "Greed Lexicon"
-#~ msgstr "Grieks lexicon"
-
-#~ msgid "Include Footnotes"
-#~ msgstr "Inclusief voetnoten"
-
-#~ msgid "Include Morphological Tags"
-#~ msgstr "Morphologischetags invoegen"
-
-#~ msgid "Include Strong's Numbers"
-#~ msgstr "Strongs getallen invoegen"
+#~ msgstr "重置已保存的文件夹"
