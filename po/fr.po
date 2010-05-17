@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 3.1.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-30 21:05+0200\n"
+"POT-Creation-Date: 2010-05-17 03:35+0100\n"
 "PO-Revision-Date: 2010-04-30 21:19+0200\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: emacs + po-mode <gnomefr@traduc.org>\n"
@@ -283,74 +283,79 @@ msgid "Go to "
 msgstr "Aller à "
 
 #. info->stock_icon = GTK_STOCK_OPEN;
-#: ../src/gnome2/bookmark_dialog.c:171 ../src/gnome2/bookmarks_menu.c:354
-#: ../src/gnome2/bookmarks_menu.c:649 ../src/gnome2/bookmarks_menu.c:747
+#: ../src/gnome2/bookmark_dialog.c:171 ../src/gnome2/bookmarks_menu.c:363
+#: ../src/gnome2/bookmarks_menu.c:658 ../src/gnome2/bookmarks_menu.c:756
 #: ../src/gnome2/bookmarks_treeview.c:134 ../ui/editor_studypad.xml.h:2
 #: ../ui/xi-menus.glade.h:13
 msgid "Bookmark"
 msgstr "Signet"
 
-#: ../src/gnome2/bookmark_dialog.c:173 ../src/gnome2/bookmarks_menu.c:749
+#: ../src/gnome2/bookmark_dialog.c:173 ../src/gnome2/bookmarks_menu.c:758
 #: ../src/gnome2/bookmarks_treeview.c:135
 msgid "Enter Folder Name"
 msgstr "Saisir le nom du dossier"
 
-#: ../src/gnome2/bookmark_dialog.c:175 ../src/gnome2/bookmarks_menu.c:751
+#: ../src/gnome2/bookmark_dialog.c:175 ../src/gnome2/bookmarks_menu.c:760
 msgid "Folder Name"
 msgstr "Nom du dossier"
 
-#: ../src/gnome2/bookmark_dialog.c:176 ../src/gnome2/bookmarks_menu.c:752
+#: ../src/gnome2/bookmark_dialog.c:176 ../src/gnome2/bookmarks_menu.c:761
 #: ../src/gnome2/bookmarks_treeview.c:137
 msgid "Folder: "
 msgstr "Dossier : "
 
-#: ../src/gnome2/bookmarks_menu.c:340 ../ui/xi-menus.glade.h:32
+#: ../src/gnome2/bookmarks_menu.c:206
+#, fuzzy
+msgid "Specify bookmarks file"
+msgstr "Édite ce signet"
+
+#: ../src/gnome2/bookmarks_menu.c:349 ../ui/xi-menus.glade.h:32
 msgid "Edit"
 msgstr "Édition"
 
-#: ../src/gnome2/bookmarks_menu.c:357
+#: ../src/gnome2/bookmarks_menu.c:366
 msgid "Folder name: "
 msgstr "Nom du dossier : "
 
-#: ../src/gnome2/bookmarks_menu.c:360
+#: ../src/gnome2/bookmarks_menu.c:369
 msgid "Bookmark name: "
 msgstr "Nom du signet : "
 
-#: ../src/gnome2/bookmarks_menu.c:363 ../src/gnome2/bookmarks_menu.c:657
+#: ../src/gnome2/bookmarks_menu.c:372 ../src/gnome2/bookmarks_menu.c:666
 msgid "Verse: "
 msgstr "Verset : "
 
-#: ../src/gnome2/bookmarks_menu.c:364 ../src/gnome2/bookmarks_menu.c:658
+#: ../src/gnome2/bookmarks_menu.c:373 ../src/gnome2/bookmarks_menu.c:667
 msgid "Module: "
 msgstr "Module : "
 
-#: ../src/gnome2/bookmarks_menu.c:486
+#: ../src/gnome2/bookmarks_menu.c:495
 msgid "Remove the selected folder"
 msgstr "Supprimer le dossier sélectionné"
 
-#: ../src/gnome2/bookmarks_menu.c:488
+#: ../src/gnome2/bookmarks_menu.c:497
 msgid "(and all its contents)?"
 msgstr "(et tout son contenu)?"
 
-#: ../src/gnome2/bookmarks_menu.c:491
+#: ../src/gnome2/bookmarks_menu.c:500
 msgid "Remove the selected bookmark"
 msgstr "Supprimer le signet"
 
-#: ../src/gnome2/bookmarks_menu.c:650
+#: ../src/gnome2/bookmarks_menu.c:659
 msgid "Add"
 msgstr "Ajouter"
 
-#: ../src/gnome2/bookmarks_menu.c:656
+#: ../src/gnome2/bookmarks_menu.c:665
 msgid "Label: "
 msgstr "Étiquette : "
 
-#: ../src/gnome2/bookmarks_treeview.c:108 ../src/gnome2/export_bookmarks.c:187
-#: ../src/gnome2/export_bookmarks.c:246
+#: ../src/gnome2/bookmarks_treeview.c:108 ../src/gnome2/export_bookmarks.c:193
+#: ../src/gnome2/export_bookmarks.c:252
 #, c-format
 msgid "Search result: %s"
 msgstr "Résultat de la requête : %s"
 
-#: ../src/gnome2/bookmarks_treeview.c:948 ../src/gnome2/sidebar.c:1376
+#: ../src/gnome2/bookmarks_treeview.c:945 ../src/gnome2/sidebar.c:1376
 msgid "Bookmarks"
 msgstr "Signets"
 
@@ -379,17 +384,17 @@ msgstr "Xiphos :"
 msgid "Close _without Saving"
 msgstr "Ferme sans enregistrer"
 
-#: ../src/gnome2/export_bookmarks.c:189 ../src/gnome2/export_bookmarks.c:248
+#: ../src/gnome2/export_bookmarks.c:195 ../src/gnome2/export_bookmarks.c:254
 #: ../src/gnome2/sidebar.c:1392
 #, c-format
 msgid "Verse List"
 msgstr "_Versets"
 
-#: ../src/gnome2/export_bookmarks.c:683
+#: ../src/gnome2/export_bookmarks.c:689
 msgid "VerseList"
 msgstr "Liste de versets"
 
-#: ../src/gnome2/export_bookmarks.c:688
+#: ../src/gnome2/export_bookmarks.c:694
 msgid "SearchResults"
 msgstr "Résultat de la requête"
 
@@ -940,7 +945,7 @@ msgid "Your module list is not up to date!"
 msgstr "La liste des modules n'est pas à jour!"
 
 #. Zero Bibles is just not workable in Xiphos.
-#: ../src/gnome2/mod_mgr.c:2238
+#: ../src/gnome2/mod_mgr.c:2239
 msgid ""
 "You have uninstalled your last Bible.\n"
 "Xiphos requires at least one."
@@ -948,7 +953,7 @@ msgstr ""
 "Vous avez désinstallé votre dernière Bible.\n"
 "Xiphos requiert au minimum une."
 
-#: ../src/gnome2/mod_mgr.c:2244
+#: ../src/gnome2/mod_mgr.c:2245
 msgid ""
 "There are still no Bibles installed.\n"
 "Xiphos cannot continue without one."
@@ -956,15 +961,15 @@ msgstr ""
 "Toujours aucune Bible installée.\n"
 "Xiphos ne peut pas continuer sans."
 
-#: ../src/gnome2/mod_mgr.c:2334
+#: ../src/gnome2/mod_mgr.c:2335
 msgid "Standard remote sources have been loaded."
 msgstr "Les dépôts distants standards ont été chargés."
 
-#: ../src/gnome2/mod_mgr.c:2340
+#: ../src/gnome2/mod_mgr.c:2341
 msgid "Could not load standard sources from CrossWire."
 msgstr "Impossible de charger les dépôts standards depuis CrossWire."
 
-#: ../src/gnome2/mod_mgr.c:2344
+#: ../src/gnome2/mod_mgr.c:2345
 msgid ""
 "<b>Welcome to the Module Manager.</b>\n"
 "\n"
@@ -1012,45 +1017,45 @@ msgstr ""
 "Pour plus d'informations sur le gestionnaire de modules, voir la section 5 "
 "du manuel d'aide. \n"
 
-#: ../src/gnome2/mod_mgr.c:2511 ../src/gnome2/mod_mgr.c:2757
+#: ../src/gnome2/mod_mgr.c:2512 ../src/gnome2/mod_mgr.c:2758
 msgid "Remove the selected source"
 msgstr "Supprime le dépôt sélectionné"
 
-#: ../src/gnome2/mod_mgr.c:2571
+#: ../src/gnome2/mod_mgr.c:2572
 msgid "Enter a remote source"
 msgstr "Ajouter un dépôt distant"
 
-#: ../src/gnome2/mod_mgr.c:2575
+#: ../src/gnome2/mod_mgr.c:2576
 msgid "Caption:"
 msgstr "Libellé :"
 
-#: ../src/gnome2/mod_mgr.c:2576
+#: ../src/gnome2/mod_mgr.c:2577
 msgid "Type:"
 msgstr "Type :"
 
-#: ../src/gnome2/mod_mgr.c:2577
+#: ../src/gnome2/mod_mgr.c:2578
 msgid "Host:"
 msgstr "Serveur :"
 
 # src/gs_preferences_dlg.c
-#: ../src/gnome2/mod_mgr.c:2578
+#: ../src/gnome2/mod_mgr.c:2579
 msgid "Directory:"
 msgstr "Répertoire :"
 
-#: ../src/gnome2/mod_mgr.c:2579
+#: ../src/gnome2/mod_mgr.c:2580
 msgid "User (optional):"
 msgstr "Identifiant (optionnel) :"
 
-#: ../src/gnome2/mod_mgr.c:2580
+#: ../src/gnome2/mod_mgr.c:2581
 msgid "Password (optional):"
 msgstr "Password (optional):(optionnel) :"
 
 #. this can happen at most once
-#: ../src/gnome2/mod_mgr.c:2607
+#: ../src/gnome2/mod_mgr.c:2608
 msgid "A source by that name already exists."
 msgstr "Un dépôt du même nom existe déjà"
 
-#: ../src/gnome2/mod_mgr.c:2754
+#: ../src/gnome2/mod_mgr.c:2755
 msgid "Delete a remote source"
 msgstr "Supprimer un dépôt distant"
 
@@ -1088,7 +1093,7 @@ msgstr "Détacher/Attacher"
 msgid "Module Options"
 msgstr "Options du module"
 
-#: ../src/gnome2/parallel_view.c:266 ../src/gnome2/sidebar.c:617
+#: ../src/gnome2/parallel_view.c:269 ../src/gnome2/sidebar.c:617
 #: ../src/gnome2/sidebar.c:623 ../src/gnome2/tabbed_browser.c:257
 #: ../src/main/sidebar.cc:636 ../src/main/sidebar.cc:990
 #: ../src/main/sidebar.cc:991 ../src/main/sidebar.cc:992
@@ -2364,62 +2369,124 @@ msgid "<i>System area, for all users:</i>"
 msgstr "<i>Espace système, pour tous les utilisateurs</i>"
 
 #: ../ui/module-manager.glade.h:11
+msgid ""
+"Add a custom remote install source. You must know its hostname and the "
+"folder where its repository lives."
+msgstr ""
+
+#: ../ui/module-manager.glade.h:12
+msgid ""
+"Add a local folder as an install source, typically on a cdrom or flash "
+"drive.  Such a folder contains subfolders \"mods.d\" and \"modules\"."
+msgstr ""
+
+#: ../ui/module-manager.glade.h:13
+msgid ""
+"Build an index of the selected modules, for optimized (\"lucene\") searching."
+msgstr ""
+
+#: ../ui/module-manager.glade.h:14
 msgid "Continue"
 msgstr "Continuer"
 
-#: ../ui/module-manager.glade.h:12
+#: ../ui/module-manager.glade.h:15
+#, fuzzy
+msgid "Create a zip archive of the selected modules."
+msgstr "Ouvre une fenêtre de sélection des modules"
+
+#: ../ui/module-manager.glade.h:16
 msgid "Current Remote Sources"
 msgstr "Dépôts distants"
 
-#: ../ui/module-manager.glade.h:13
+#: ../ui/module-manager.glade.h:17
 msgid "Current local sources"
 msgstr "Dépôts locaux"
 
-#: ../ui/module-manager.glade.h:14
+#: ../ui/module-manager.glade.h:18
+#, fuzzy
+msgid "Delete the fast-search index of the selected modules."
+msgstr "Supprimer l'index de recherche rapide pour les modules suivants ?"
+
+#: ../ui/module-manager.glade.h:19
 msgid "Home dir"
 msgstr "Dossier personnel"
 
-#: ../ui/module-manager.glade.h:15
+#: ../ui/module-manager.glade.h:20
+#, fuzzy
+msgid "Install or update the selected modules"
+msgstr "Installer ces modules ?"
+
+#: ../ui/module-manager.glade.h:21
+msgid ""
+"Load and synchronize the standard set of known repositories, as maintained "
+"at crosswire.org, with your current remote sources."
+msgstr ""
+
+#: ../ui/module-manager.glade.h:22
 msgid "Local"
 msgstr "Dépôt local"
 
-#: ../ui/module-manager.glade.h:16
+#: ../ui/module-manager.glade.h:23
 msgid "Local Install Folder"
 msgstr "Répertoire local d'installation"
 
-#: ../ui/module-manager.glade.h:17
+#: ../ui/module-manager.glade.h:24
 msgid "Module Manager"
 msgstr "Gérer les modules"
 
-#: ../ui/module-manager.glade.h:18
+#: ../ui/module-manager.glade.h:25
+msgid "Open a brief introductory explanation of how the Module Manager works."
+msgstr ""
+
+#: ../ui/module-manager.glade.h:26
+msgid ""
+"Refresh Xiphos' knowledge of what modules are available at the selected "
+"remote repository"
+msgstr ""
+
+#: ../ui/module-manager.glade.h:27
 msgid "Remote"
 msgstr "Dépôt distant"
 
-#: ../ui/module-manager.glade.h:19
+#: ../ui/module-manager.glade.h:28
+#, fuzzy
+msgid "Remove a remote install source."
+msgstr "Supprimer un dépôt distant"
+
+#: ../ui/module-manager.glade.h:29
+msgid "Remove one of your local folders as an install source."
+msgstr ""
+
+#: ../ui/module-manager.glade.h:30
+#, fuzzy
+msgid "Remove the selected modules from your system"
+msgstr "Supprime le module sélectionné de la liste"
+
+#: ../ui/module-manager.glade.h:31
 msgid "Sword sys dir"
 msgstr "Rép Sword-sys"
 
-#: ../ui/module-manager.glade.h:20
+#: ../ui/module-manager.glade.h:32
 msgid "_Archive"
 msgstr "_Archive"
 
-#: ../ui/module-manager.glade.h:21
+#: ../ui/module-manager.glade.h:33
 msgid "_Delete Index"
 msgstr "_Supprime l'index"
 
-#: ../ui/module-manager.glade.h:22
+#: ../ui/module-manager.glade.h:34
 msgid "_Index"
 msgstr "_Indexer"
 
-#: ../ui/module-manager.glade.h:23
+#: ../ui/module-manager.glade.h:35
 msgid "_Install"
 msgstr "_Installer"
 
-#: ../ui/module-manager.glade.h:24
+#: ../ui/module-manager.glade.h:36
 msgid "_Load Standard"
 msgstr "_Charger défaut"
 
-#: ../ui/module-manager.glade.h:25
+#: ../ui/module-manager.glade.h:37
 msgid "_View Intro"
 msgstr "_Voir l'intro"
 
@@ -2522,7 +2589,8 @@ msgstr "Applique des couleurs différentes au verset en cours"
 
 #: ../ui/prefs.glade.h:20
 msgid "Automatically resize image content to fit the pane"
-msgstr "Réduit automatiquement les images et les adapte à la taille de la fenêtre"
+msgstr ""
+"Réduit automatiquement les images et les adapte à la taille de la fenêtre"
 
 #: ../ui/prefs.glade.h:21
 msgid "Background"
@@ -3343,8 +3411,9 @@ msgid "Image Content"
 msgstr "Afficher les images"
 
 #: ../ui/xi-menus.glade.h:46
-msgid "Import Bibletime Bookmarks"
-msgstr "Importer les signets de Bibletime"
+#, fuzzy
+msgid "Import Bookmarks"
+msgstr "Insérer un signet"
 
 #: ../ui/xi-menus.glade.h:47
 msgid "Insert Bookmark"
@@ -3359,7 +3428,8 @@ msgid "L_ink Tabs"
 msgstr "Onglets liés"
 
 #: ../ui/xi-menus.glade.h:51
-msgid "Load Bookmarks from Bibletime"
+#, fuzzy
+msgid "Load other bookmarks file (default: from BibleTime)"
 msgstr "Charge les signets de Bibletime"
 
 #: ../ui/xi-menus.glade.h:52
@@ -3635,6 +3705,9 @@ msgstr "Aide à l'étude de la Bible"
 #: ../xiphos.desktop.in.in.h:2
 msgid "Xiphos Bible Guide"
 msgstr "Guide de la Bible Xiphos"
+
+#~ msgid "Import Bibletime Bookmarks"
+#~ msgstr "Importer les signets de Bibletime"
 
 #~ msgid "Cipher Key?"
 #~ msgstr "Clé de déverrouillage?"
