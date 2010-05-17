@@ -7,149 +7,149 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-20 17:10+0000\n"
-"PO-Revision-Date: 2009-12-21 22:25+0300\n"
-"Last-Translator: Konstantin Maslyuk <kalemas@mail.ru>\n"
+"POT-Creation-Date: 2010-05-17 03:35+0100\n"
+"PO-Revision-Date: 2010-03-12 17:32+0000\n"
+"Last-Translator: Евгений xGHPro Сысманов <xghpro@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-12-11 04:39+0000\n"
+"X-Launchpad-Export-Date: 2010-03-21 04:50+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 
-#: ../src/backend/sword_main.cc:1083
+#: ../src/backend/sword_main.cc:1077
 msgid "Configuration not found"
 msgstr "Конфигурация не найдена"
 
-#: ../src/editor/slib-editor.c:232 ../src/gnome2/html.c:634
+#: ../src/editor/slib-editor.c:224 ../src/gnome2/html.c:634
 #, c-format
 msgid "Page %d of %d"
 msgstr "Страница %d из %d"
 
-#: ../src/editor/slib-editor.c:399 ../src/editor/slib-editor.c:446
+#: ../src/editor/slib-editor.c:391 ../src/editor/slib-editor.c:438
 msgid "Save As"
 msgstr "Сохранить Как"
 
-#: ../src/editor/slib-editor.c:417 ../src/editor/slib-editor.c:464
-#: ../src/editor/slib-editor.c:632
+#: ../src/editor/slib-editor.c:409 ../src/editor/slib-editor.c:456
+#: ../src/editor/slib-editor.c:623
 msgid "Untitled document"
 msgstr "Безымянный документ"
 
-#: ../src/editor/slib-editor.c:657
+#: ../src/editor/slib-editor.c:648
 msgid "Are you sure you want to delete the note for"
 msgstr "Вы уверены что хотите удалить заметку для"
 
-#: ../src/editor/slib-editor.c:700
+#: ../src/editor/slib-editor.c:691
 msgid "HTML Output"
 msgstr "Результат в HTML"
 
-#: ../src/editor/slib-editor.c:707
+#: ../src/editor/slib-editor.c:698
 msgid "HTML Source"
 msgstr "Исходный текст в HTML"
 
-#: ../src/editor/slib-editor.c:714
+#: ../src/editor/slib-editor.c:705
 msgid "Plain Source"
 msgstr "Простой исходный текст"
 
-#: ../src/editor/slib-editor.c:724 ../ui/editor_note.xml.h:15
+#: ../src/editor/slib-editor.c:715 ../ui/editor_note.xml.h:15
 #: ../ui/editor_studypad.xml.h:21
 msgid "_Print..."
 msgstr "_Печать..."
 
-#: ../src/editor/slib-editor.c:731 ../ui/editor_note.xml.h:9
+#: ../src/editor/slib-editor.c:722 ../ui/editor_note.xml.h:9
 #: ../ui/editor_studypad.xml.h:14
 msgid "Print Pre_view"
 msgstr "П_редпросмотр Печати"
 
-#: ../src/editor/slib-editor.c:738
+#: ../src/editor/slib-editor.c:729
 msgid "_Quit"
 msgstr "_Выход"
 
-#: ../src/editor/slib-editor.c:745
+#: ../src/editor/slib-editor.c:736
 msgid "_Open"
 msgstr "_Открыть"
 
-#: ../src/editor/slib-editor.c:752
+#: ../src/editor/slib-editor.c:743
 msgid "_Save"
 msgstr "_Сохранить"
 
-#: ../src/editor/slib-editor.c:759
+#: ../src/editor/slib-editor.c:750
 msgid "Save _As..."
 msgstr "Сохранить _Как..."
 
-#: ../src/editor/slib-editor.c:765
+#: ../src/editor/slib-editor.c:756
 msgid "New"
 msgstr "Новый"
 
-#: ../src/editor/slib-editor.c:767
+#: ../src/editor/slib-editor.c:758
 msgid "Open new document"
 msgstr "Открыть новый документ"
 
-#: ../src/editor/slib-editor.c:771
+#: ../src/editor/slib-editor.c:762
 msgid "Delete"
 msgstr "Удалить"
 
-#: ../src/editor/slib-editor.c:773
+#: ../src/editor/slib-editor.c:764
 msgid "Delete current note"
 msgstr "Удалить текущую заметку"
 
-#: ../src/editor/slib-editor.c:778 ../ui/editor_note.xml.h:14
-#: ../ui/editor_studypad.xml.h:20 ../ui/xi-menus.glade.h:106
+#: ../src/editor/slib-editor.c:769 ../ui/editor_note.xml.h:14
+#: ../ui/editor_studypad.xml.h:20 ../ui/xi-menus.glade.h:105
 msgid "_File"
 msgstr "_Файл"
 
-#: ../src/editor/slib-editor.c:833
+#: ../src/editor/slib-editor.c:824
 msgid "HTML _Output"
 msgstr "_Результат в HTML"
 
-#: ../src/editor/slib-editor.c:840
+#: ../src/editor/slib-editor.c:831
 msgid "_HTML Source"
 msgstr "_Исходный текст в HTML"
 
-#: ../src/editor/slib-editor.c:847
+#: ../src/editor/slib-editor.c:838
 msgid "_Plain Source"
 msgstr "_Простой исходный текст"
 
-#: ../src/editor/slib-editor.c:854 ../ui/xi-menus.glade.h:121
+#: ../src/editor/slib-editor.c:845 ../ui/xi-menus.glade.h:120
 msgid "_View"
 msgstr "_Вид"
 
-#: ../src/editor/slib-editor.c:865 ../ui/editor_note.xml.h:11
+#: ../src/editor/slib-editor.c:856 ../ui/editor_note.xml.h:11
 #: ../ui/editor_studypad.xml.h:16
 msgid "Save"
 msgstr "Сохранить"
 
-#: ../src/editor/slib-editor.c:876 ../src/editor/slib-editor.c:883
+#: ../src/editor/slib-editor.c:867 ../src/editor/slib-editor.c:874
 msgid "Insert Link"
 msgstr "Вставить Связь"
 
-#: ../src/editor/slib-editor.c:1267 ../src/editor/slib-editor.c:1304
+#: ../src/editor/slib-editor.c:1256 ../src/editor/slib-editor.c:1293
 msgid "Save the changes to document"
 msgstr "Сохранить изменения в документе"
 
-#: ../src/editor/slib-editor.c:1268 ../src/editor/slib-editor.c:1305
+#: ../src/editor/slib-editor.c:1257 ../src/editor/slib-editor.c:1294
 msgid "before closing?"
 msgstr "перед закрытием?"
 
-#: ../src/editor/slib-editor.c:1275 ../src/editor/slib-editor.c:1312
+#: ../src/editor/slib-editor.c:1264 ../src/editor/slib-editor.c:1301
 msgid "If you don't save, changes will be permanently lost."
 msgstr "Если вы не сохраните, изменения будут потеряны."
 
-#: ../src/editor/slib-editor.c:1303 ../ui/xi-menus.glade.h:39
+#: ../src/editor/slib-editor.c:1292 ../ui/xi-menus.glade.h:39
 msgid "File"
 msgstr "Файл"
 
-#: ../src/editor/slib-editor.c:1358
+#: ../src/editor/slib-editor.c:1347
 msgid "StudyPad"
 msgstr "StudyPad"
 
-#: ../src/editor/slib-editor.c:1372
+#: ../src/editor/slib-editor.c:1360
 msgid "Note Editor"
 msgstr "Редактор Заметок"
 
-#: ../src/editor/slib-editor.c:1386
+#: ../src/editor/slib-editor.c:1374
 msgid "Prayer List/Journal Editor"
 msgstr "Молитвенный Список/Редактор Журнала"
 
@@ -191,12 +191,11 @@ msgstr "Не удалось распечатать документ: %s"
 msgid "About Sword Module"
 msgstr "О Модуле Sword"
 
-#: ../src/gnome2/about_modules.c:389 ../src/gnome2/mod_mgr.c:251
+#: ../src/gnome2/about_modules.c:389 ../src/gnome2/mod_mgr.c:256
 msgid "The module has no About information."
 msgstr "Данный модуль не содержит информации о себе."
 
 #: ../src/gnome2/about_sword.c:81
-#, fuzzy
 msgid ""
 "The SWORD Project is an effort to create an ever-expanding software package "
 "for research and study of God and His Word. The SWORD Project framework "
@@ -207,13 +206,6 @@ msgid ""
 "\n"
 " Books can be downloaded from the SWORD Project."
 msgstr ""
-"Проект SWORD - это попытка создания всеобъемлющей программы для исследования "
-"и познания Бога и Его Слова. Структура проекта SWORD позволяет легко "
-"обращаться и изучать тексты Библии, комментарии, лексиконы, словари, и "
-"другие книги.\n"
-"Кроме того модули, установленные на вашем компьютере, можно использовать в "
-"любом из множества приложений созданных для всех популярных настольных и "
-"мобильных платформ."
 
 #: ../src/gnome2/about_sword.c:105
 msgid "The SWORD Project"
@@ -264,121 +256,126 @@ msgstr ""
 "Мы хотим поблагодарить Troy Griffitts и других ребят, давших нам Проект "
 "SWORD."
 
-#: ../src/gnome2/bibletext_dialog.c:358
+#: ../src/gnome2/bibletext_dialog.c:315
 msgid "Go to "
 msgstr "Перейти "
 
 #. info->stock_icon = GTK_STOCK_OPEN;
-#: ../src/gnome2/bookmark_dialog.c:171 ../src/gnome2/bookmarks_menu.c:354
-#: ../src/gnome2/bookmarks_menu.c:649 ../src/gnome2/bookmarks_menu.c:747
+#: ../src/gnome2/bookmark_dialog.c:171 ../src/gnome2/bookmarks_menu.c:363
+#: ../src/gnome2/bookmarks_menu.c:658 ../src/gnome2/bookmarks_menu.c:756
 #: ../src/gnome2/bookmarks_treeview.c:134 ../ui/editor_studypad.xml.h:2
 #: ../ui/xi-menus.glade.h:13
 msgid "Bookmark"
 msgstr "Закладка"
 
-#: ../src/gnome2/bookmark_dialog.c:173 ../src/gnome2/bookmarks_menu.c:749
+#: ../src/gnome2/bookmark_dialog.c:173 ../src/gnome2/bookmarks_menu.c:758
 #: ../src/gnome2/bookmarks_treeview.c:135
 msgid "Enter Folder Name"
 msgstr "Введите Название Папки"
 
-#: ../src/gnome2/bookmark_dialog.c:175 ../src/gnome2/bookmarks_menu.c:751
+#: ../src/gnome2/bookmark_dialog.c:175 ../src/gnome2/bookmarks_menu.c:760
 msgid "Folder Name"
 msgstr "Имя Папки"
 
-#: ../src/gnome2/bookmark_dialog.c:176 ../src/gnome2/bookmarks_menu.c:752
+#: ../src/gnome2/bookmark_dialog.c:176 ../src/gnome2/bookmarks_menu.c:761
 #: ../src/gnome2/bookmarks_treeview.c:137
 msgid "Folder: "
 msgstr "Папка: "
 
-#: ../src/gnome2/bookmarks_menu.c:340 ../ui/xi-menus.glade.h:32
+#: ../src/gnome2/bookmarks_menu.c:206
+#, fuzzy
+msgid "Specify bookmarks file"
+msgstr "Редактировать пункт закладки"
+
+#: ../src/gnome2/bookmarks_menu.c:349 ../ui/xi-menus.glade.h:32
 msgid "Edit"
 msgstr "Редактирование"
 
-#: ../src/gnome2/bookmarks_menu.c:357
+#: ../src/gnome2/bookmarks_menu.c:366
 msgid "Folder name: "
 msgstr "Имя Папки: "
 
-#: ../src/gnome2/bookmarks_menu.c:360
+#: ../src/gnome2/bookmarks_menu.c:369
 msgid "Bookmark name: "
 msgstr "Имя Закладки: "
 
-#: ../src/gnome2/bookmarks_menu.c:363 ../src/gnome2/bookmarks_menu.c:657
+#: ../src/gnome2/bookmarks_menu.c:372 ../src/gnome2/bookmarks_menu.c:666
 msgid "Verse: "
 msgstr "Стих: "
 
-#: ../src/gnome2/bookmarks_menu.c:364 ../src/gnome2/bookmarks_menu.c:658
+#: ../src/gnome2/bookmarks_menu.c:373 ../src/gnome2/bookmarks_menu.c:667
 msgid "Module: "
 msgstr "Модуль: "
 
-#: ../src/gnome2/bookmarks_menu.c:486
+#: ../src/gnome2/bookmarks_menu.c:495
 msgid "Remove the selected folder"
 msgstr "Удалить выбранную папку"
 
-#: ../src/gnome2/bookmarks_menu.c:488
+#: ../src/gnome2/bookmarks_menu.c:497
 msgid "(and all its contents)?"
 msgstr "(и все содержимое)?"
 
-#: ../src/gnome2/bookmarks_menu.c:491
+#: ../src/gnome2/bookmarks_menu.c:500
 msgid "Remove the selected bookmark"
 msgstr "Удалить выбранную закладку?"
 
-#: ../src/gnome2/bookmarks_menu.c:650
+#: ../src/gnome2/bookmarks_menu.c:659
 msgid "Add"
 msgstr "Добавить"
 
-#: ../src/gnome2/bookmarks_menu.c:656
+#: ../src/gnome2/bookmarks_menu.c:665
 msgid "Label: "
 msgstr "Метка: "
 
-#: ../src/gnome2/bookmarks_treeview.c:108 ../src/gnome2/export_bookmarks.c:187
-#: ../src/gnome2/export_bookmarks.c:246
+#: ../src/gnome2/bookmarks_treeview.c:108 ../src/gnome2/export_bookmarks.c:193
+#: ../src/gnome2/export_bookmarks.c:252
 #, c-format
 msgid "Search result: %s"
 msgstr "Результат поиска: %s"
 
-#: ../src/gnome2/bookmarks_treeview.c:948 ../src/gnome2/sidebar.c:1377
+#: ../src/gnome2/bookmarks_treeview.c:945 ../src/gnome2/sidebar.c:1376
 msgid "Bookmarks"
 msgstr "Закладки"
 
-#: ../src/gnome2/cipher_key_dialog.c:62
-msgid "Cipher Key?"
-msgstr "Шифровой Ключ?"
+#: ../src/gnome2/cipher_key_dialog.c:61
+#, c-format
+msgid "Cipher key for module %s"
+msgstr ""
 
-#: ../src/gnome2/cipher_key_dialog.c:63
+#: ../src/gnome2/cipher_key_dialog.c:62
 msgid "for:"
 msgstr "для:"
 
-#: ../src/gnome2/cipher_key_dialog.c:66
-msgid "Enter Cipher Key: "
+#: ../src/gnome2/cipher_key_dialog.c:65
+#, fuzzy
+msgid "Enter Key: "
 msgstr "Введите Шифровой Ключ: "
 
-#: ../src/gnome2/dialog.c:265
+#: ../src/gnome2/dialog.c:264
 msgid "Close without Saving"
 msgstr "Закрыть без Сохранения"
 
-#: ../src/gnome2/dialog.c:596
+#: ../src/gnome2/dialog.c:573
 msgid "Xiphos:"
 msgstr "Xiphos:"
 
-#: ../src/gnome2/dialog.c:697
+#: ../src/gnome2/dialog.c:674
 msgid "Close _without Saving"
 msgstr "Закрыть _без Сохранения"
 
-#: ../src/gnome2/export_bookmarks.c:189 ../src/gnome2/export_bookmarks.c:248
-#: ../src/gnome2/sidebar.c:1393
+#: ../src/gnome2/export_bookmarks.c:195 ../src/gnome2/export_bookmarks.c:254
+#: ../src/gnome2/sidebar.c:1392
 #, c-format
 msgid "Verse List"
 msgstr "Список Стихов"
 
-#: ../src/gnome2/export_bookmarks.c:683
-#, fuzzy
+#: ../src/gnome2/export_bookmarks.c:689
 msgid "VerseList"
-msgstr "Список Стихов"
+msgstr ""
 
-#: ../src/gnome2/export_bookmarks.c:688
-#, fuzzy
+#: ../src/gnome2/export_bookmarks.c:694
 msgid "SearchResults"
-msgstr "Результат поиска: %s"
+msgstr ""
 
 #: ../src/gnome2/export_dialog.c:267 ../ui/export-dialog.glade.h:20
 msgid "Please check copyright before exporting!"
@@ -392,7 +389,7 @@ msgstr "Найти"
 msgid "Enter Word or Phrase"
 msgstr "Введите Слово или Фразу"
 
-#: ../src/gnome2/find_dialog.c:238 ../src/gnome2/search_sidebar.c:302
+#: ../src/gnome2/find_dialog.c:238 ../src/gnome2/search_sidebar.c:297
 #: ../ui/search-dialog.glade.h:59
 msgid "Match case"
 msgstr "Соответствие регистру"
@@ -401,7 +398,7 @@ msgstr "Соответствие регистру"
 msgid "Search backwards"
 msgstr "Поиск назад"
 
-#: ../src/gnome2/find_dialog.c:254 ../src/gnome2/search_sidebar.c:267
+#: ../src/gnome2/find_dialog.c:254 ../src/gnome2/search_sidebar.c:262
 #: ../ui/search-dialog.glade.h:76
 msgid "Regular expression"
 msgstr "Регулярное выражение"
@@ -410,27 +407,27 @@ msgstr "Регулярное выражение"
 msgid "Find Next"
 msgstr "Найти Следующий"
 
-#: ../src/gnome2/font_dialog.c:302
+#: ../src/gnome2/font_dialog.c:304
 msgid "Set Module Font"
 msgstr "Выбрать Шрифт Модуля"
 
-#: ../src/gnome2/font_dialog.c:332
+#: ../src/gnome2/font_dialog.c:334
 msgid "Change font for"
 msgstr "Изменить шрифт для"
 
-#: ../src/gnome2/font_dialog.c:336
+#: ../src/gnome2/font_dialog.c:338
 msgid "Module"
 msgstr "Модуль"
 
-#: ../src/gnome2/font_dialog.c:340
+#: ../src/gnome2/font_dialog.c:342
 msgid "Current font: "
 msgstr "Текущий шрифт: "
 
-#: ../src/gnome2/font_dialog.c:372
+#: ../src/gnome2/font_dialog.c:374
 msgid "+0"
 msgstr "+0"
 
-#: ../src/gnome2/font_dialog.c:376
+#: ../src/gnome2/font_dialog.c:378
 msgid "Use the default font for this module"
 msgstr "Использовать для этого модуля шрифт по-умолчанию"
 
@@ -505,34 +502,34 @@ msgstr "Пожалуйста сообщите об этой ошибке ком�
 msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
 msgstr "BUG! Xiphos завершит работу из-зи ошибки \"STRING\"."
 
-#: ../src/gnome2/main_window.c:783
+#: ../src/gnome2/main_window.c:795
 msgid "Xiphos - Bible Study Software"
 msgstr "Xiphos - Программа для изучения Библии"
 
-#: ../src/gnome2/main_window.c:838
+#: ../src/gnome2/main_window.c:850
 msgid "Open a new tab"
 msgstr "Открыть новую вкладку"
 
-#: ../src/gnome2/main_window.c:916 ../src/gnome2/sidebar.c:621
-#: ../src/gnome2/sidebar.c:627 ../src/main/sidebar.cc:666
-#: ../src/main/sidebar.cc:1015 ../src/main/sidebar.cc:1016
-#: ../src/main/sidebar.cc:1017
+#: ../src/gnome2/main_window.c:928 ../src/gnome2/sidebar.c:618
+#: ../src/gnome2/sidebar.c:624 ../src/main/sidebar.cc:655
+#: ../src/main/sidebar.cc:998 ../src/main/sidebar.cc:999
+#: ../src/main/sidebar.cc:1000
 msgid "Standard View"
 msgstr "Стандартный Вид"
 
-#: ../src/gnome2/main_window.c:997
+#: ../src/gnome2/main_window.c:1009
 msgid "Commentary View"
 msgstr "Вид Комментария"
 
-#: ../src/gnome2/main_window.c:1013
+#: ../src/gnome2/main_window.c:1025
 msgid "Book View"
 msgstr "Вид Книги"
 
-#: ../src/gnome2/main_window.c:1038
+#: ../src/gnome2/main_window.c:1050
 msgid "Welcome to Xiphos"
 msgstr "Добро пожаловать в Xiphos"
 
-#: ../src/gnome2/menu_popup.c:1164
+#: ../src/gnome2/menu_popup.c:1208
 msgid ""
 "Renaming is not available in Windows.\n"
 "\n"
@@ -552,33 +549,33 @@ msgstr ""
 "Следовательно, переименовывание личных комментариев\n"
 "не доступно в окружении Windows."
 
-#: ../src/gnome2/menu_popup.c:1183
+#: ../src/gnome2/menu_popup.c:1227
 msgid "Rename Commentary"
 msgstr "Переименовать Комментарий"
 
-#: ../src/gnome2/menu_popup.c:1186
+#: ../src/gnome2/menu_popup.c:1230
 msgid "Choose Commentary Name"
 msgstr "Выберите Имя Комментария"
 
-#: ../src/gnome2/menu_popup.c:1188
+#: ../src/gnome2/menu_popup.c:1232
 msgid "New Name"
 msgstr "Новое Имя"
 
-#: ../src/gnome2/menu_popup.c:1189 ../src/gnome2/treekey-editor.c:135
+#: ../src/gnome2/menu_popup.c:1233 ../src/gnome2/treekey-editor.c:135
 #: ../src/gnome2/treekey-editor.c:194 ../src/gnome2/treekey-editor.c:280
 #: ../src/main/prayerlists.cc:243
 msgid "Name: "
 msgstr "Имя: "
 
-#: ../src/gnome2/menu_popup.c:1199 ../src/main/prayerlists.cc:257
+#: ../src/gnome2/menu_popup.c:1243 ../src/main/prayerlists.cc:257
 msgid "Module names must contain [A-Za-z0-9_] only."
 msgstr "Имена модулей могут состоять только из символов  [A-Za-z0-9_]."
 
-#: ../src/gnome2/menu_popup.c:1206 ../src/main/prayerlists.cc:264
+#: ../src/gnome2/menu_popup.c:1250 ../src/main/prayerlists.cc:264
 msgid "Xiphos already knows a module by that name."
 msgstr "Xiphos уже известен модуль с таким именем."
 
-#: ../src/gnome2/menu_popup.c:1249
+#: ../src/gnome2/menu_popup.c:1291
 #, c-format
 msgid ""
 "Failed to create new configuration:\n"
@@ -587,7 +584,7 @@ msgstr ""
 "Не удалось создать новую конфигурацию:\n"
 "%s"
 
-#: ../src/gnome2/menu_popup.c:1258
+#: ../src/gnome2/menu_popup.c:1300
 msgid ""
 "Configuration build error:\n"
 "\n"
@@ -595,56 +592,55 @@ msgstr ""
 "Ошибка создания конфигурации:\n"
 "\n"
 
-#: ../src/gnome2/mod_mgr.c:169
+#: ../src/gnome2/mod_mgr.c:174
 msgid "Remove these modules?"
 msgstr "Удалить эти модули?"
 
-#: ../src/gnome2/mod_mgr.c:170
+#: ../src/gnome2/mod_mgr.c:175
 msgid "Preparing to remove"
 msgstr "Подготовка к удалению"
 
-#: ../src/gnome2/mod_mgr.c:171
+#: ../src/gnome2/mod_mgr.c:176
 msgid "Removing"
 msgstr "Удаление"
 
-#: ../src/gnome2/mod_mgr.c:172 ../ui/xi-menus.glade.h:73
+#: ../src/gnome2/mod_mgr.c:177 ../ui/xi-menus.glade.h:73
 msgid "Remove"
 msgstr "Удалить"
 
-#: ../src/gnome2/mod_mgr.c:175
+#: ../src/gnome2/mod_mgr.c:180
 msgid "Install these modules?"
 msgstr "Установить эти модули?"
 
-#: ../src/gnome2/mod_mgr.c:176
+#: ../src/gnome2/mod_mgr.c:181
 msgid "Preparing to install"
 msgstr "Подготовка к установке"
 
-#: ../src/gnome2/mod_mgr.c:177
+#: ../src/gnome2/mod_mgr.c:182
 msgid "Installing"
 msgstr "Установка"
 
-#: ../src/gnome2/mod_mgr.c:178 ../src/gnome2/mod_mgr.c:2948
-#: ../ui/module-manager.glade.h:18
+#: ../src/gnome2/mod_mgr.c:183
 msgid "Install"
 msgstr "Установить"
 
-#: ../src/gnome2/mod_mgr.c:181
+#: ../src/gnome2/mod_mgr.c:186
 msgid "Archive these modules?"
 msgstr "Архивировать эти модули?"
 
-#: ../src/gnome2/mod_mgr.c:182
+#: ../src/gnome2/mod_mgr.c:187
 msgid "Preparing to archive"
 msgstr "Подготовка к архивированию"
 
-#: ../src/gnome2/mod_mgr.c:183
+#: ../src/gnome2/mod_mgr.c:188
 msgid "Archiving"
 msgstr "Архивация"
 
-#: ../src/gnome2/mod_mgr.c:184 ../ui/module-manager.glade.h:11
+#: ../src/gnome2/mod_mgr.c:189
 msgid "Archive"
 msgstr "Архивировать"
 
-#: ../src/gnome2/mod_mgr.c:187
+#: ../src/gnome2/mod_mgr.c:192
 msgid ""
 "Build fast-search index for these\n"
 "modules (may take minutes/module)?"
@@ -652,55 +648,55 @@ msgstr ""
 "Создать базу индексов для быстрого поиска для этих \n"
 "модулей (может занять несколько минут/модуль):"
 
-#: ../src/gnome2/mod_mgr.c:188
+#: ../src/gnome2/mod_mgr.c:193
 msgid "Preparing to index"
 msgstr "Подготовка к индексации"
 
-#: ../src/gnome2/mod_mgr.c:189
+#: ../src/gnome2/mod_mgr.c:194
 msgid "Indexing"
 msgstr "Индексация"
 
-#: ../src/gnome2/mod_mgr.c:190 ../ui/module-manager.glade.h:17
+#: ../src/gnome2/mod_mgr.c:195
 msgid "Index"
 msgstr "Индексировать"
 
-#: ../src/gnome2/mod_mgr.c:193
+#: ../src/gnome2/mod_mgr.c:198
 msgid "Delete fast-search index for these modules?"
 msgstr "Удалить базы индексов для быстрого поиска для этих модулей?"
 
-#: ../src/gnome2/mod_mgr.c:194
+#: ../src/gnome2/mod_mgr.c:199
 msgid "Preparing to delete index"
 msgstr "Подготовкка к удаленю индексов"
 
-#: ../src/gnome2/mod_mgr.c:195
+#: ../src/gnome2/mod_mgr.c:200
 msgid "Deleting index"
 msgstr "Удаление индексации"
 
-#: ../src/gnome2/mod_mgr.c:196
+#: ../src/gnome2/mod_mgr.c:201
 msgid "Deletion"
 msgstr "Удаление"
 
-#: ../src/gnome2/mod_mgr.c:421
+#: ../src/gnome2/mod_mgr.c:426
 msgid "Module Name"
 msgstr "Имя Модуля"
 
-#: ../src/gnome2/mod_mgr.c:442
+#: ../src/gnome2/mod_mgr.c:447
 msgid "A checkmark means this module is already installed"
 msgstr "Отметка означает, что модуль уже установлен"
 
-#: ../src/gnome2/mod_mgr.c:464
+#: ../src/gnome2/mod_mgr.c:469
 msgid "Click the box to work on this module"
 msgstr "Нажми на отметку, чтобы работать с данным модулем"
 
-#: ../src/gnome2/mod_mgr.c:465
+#: ../src/gnome2/mod_mgr.c:470
 msgid "Click the box to select this module for install/update"
 msgstr "Нажми на отметку, чтобы установить/обновить этот модуль"
 
-#: ../src/gnome2/mod_mgr.c:484
+#: ../src/gnome2/mod_mgr.c:489
 msgid "Installed"
 msgstr "Установленное"
 
-#: ../src/gnome2/mod_mgr.c:494
+#: ../src/gnome2/mod_mgr.c:499
 msgid ""
 "The index icon means you have built an optimized ('lucene') index for this "
 "module for fast searching (see the Maintenance pane for this function)"
@@ -708,7 +704,7 @@ msgstr ""
 "Эта иконка означает, что для данного модуля база индексов ('lucene') уже "
 "создана. База индексов необходима для быстрого оптимизированного поиска."
 
-#: ../src/gnome2/mod_mgr.c:512
+#: ../src/gnome2/mod_mgr.c:517
 msgid ""
 "The lock icon means this module is encrypted, and requires that you purchase "
 "an unlock key from the content owner"
@@ -716,11 +712,11 @@ msgstr ""
 "Блокирующая иконка означает что этот модуль зашифрован, необходимо заказать "
 "ключ у владельца"
 
-#: ../src/gnome2/mod_mgr.c:529 ../ui/xi-menus.glade.h:1
+#: ../src/gnome2/mod_mgr.c:534 ../ui/xi-menus.glade.h:1
 msgid "About"
 msgstr "О модуле..."
 
-#: ../src/gnome2/mod_mgr.c:549
+#: ../src/gnome2/mod_mgr.c:554
 msgid ""
 "The refresh icon means the Installed module is older than the newer "
 "Available module: You should update the module"
@@ -728,19 +724,19 @@ msgstr ""
 "Иконка обновления означает что установленный модуль старее чем доступный: "
 "необходимо обновить модуль"
 
-#: ../src/gnome2/mod_mgr.c:561
+#: ../src/gnome2/mod_mgr.c:566
 msgid "Available"
 msgstr "Доступно"
 
-#: ../src/gnome2/mod_mgr.c:570
+#: ../src/gnome2/mod_mgr.c:575
 msgid "Size"
 msgstr "Размер"
 
-#: ../src/gnome2/mod_mgr.c:579
+#: ../src/gnome2/mod_mgr.c:584
 msgid "Description"
 msgstr "Описание"
 
-#: ../src/gnome2/mod_mgr.c:728
+#: ../src/gnome2/mod_mgr.c:731
 #, c-format
 msgid ""
 "`mkdir %s' failed:\n"
@@ -749,7 +745,7 @@ msgstr ""
 "`не удалось mkdir %s':\n"
 "%s."
 
-#: ../src/gnome2/mod_mgr.c:751
+#: ../src/gnome2/mod_mgr.c:753
 msgid " archived in: \n"
 msgstr " архивация за : \n"
 
@@ -757,25 +753,25 @@ msgstr " архивация за : \n"
 msgid "Journals and prayer lists cannot be indexed."
 msgstr "Журналы и списки молитв не могут быть проиндексированы"
 
-#: ../src/gnome2/mod_mgr.c:824
+#: ../src/gnome2/mod_mgr.c:825
 #, c-format
 msgid "%s failed"
 msgstr "%s провалилось"
 
-#: ../src/gnome2/mod_mgr.c:827 ../src/gnome2/mod_mgr.c:1550
+#: ../src/gnome2/mod_mgr.c:828 ../src/gnome2/mod_mgr.c:1552
 msgid "Finished"
 msgstr "Закончено"
 
-#: ../src/gnome2/mod_mgr.c:994 ../src/gnome2/mod_mgr.c:996
-#: ../src/gnome2/mod_mgr.c:1098 ../src/gnome2/mod_mgr.c:1133
-#: ../src/gnome2/mod_mgr.c:1135 ../src/gnome2/utilities.c:453
+#: ../src/gnome2/mod_mgr.c:996 ../src/gnome2/mod_mgr.c:998
+#: ../src/gnome2/mod_mgr.c:1100 ../src/gnome2/mod_mgr.c:1135
+#: ../src/gnome2/mod_mgr.c:1137 ../src/gnome2/utilities.c:453
 #: ../src/gnome2/utilities.c:518 ../src/gnome2/utilities.c:520
-#: ../src/gnome2/utilities.c:1004 ../src/main/sidebar.cc:852
-#: ../src/main/sidebar.cc:924 ../src/main/sidebar.cc:926
+#: ../src/gnome2/utilities.c:1021 ../src/main/sidebar.cc:835
+#: ../src/main/sidebar.cc:907 ../src/main/sidebar.cc:909
 msgid "Unknown"
 msgstr "Неизвестно"
 
-#: ../src/gnome2/mod_mgr.c:1292
+#: ../src/gnome2/mod_mgr.c:1294
 #, c-format
 msgid ""
 "Repository:\n"
@@ -784,7 +780,7 @@ msgstr ""
 "Репозиторий:\n"
 "%s"
 
-#: ../src/gnome2/mod_mgr.c:1304
+#: ../src/gnome2/mod_mgr.c:1306
 msgid ""
 "Categorized by\n"
 "Module Type"
@@ -792,44 +788,44 @@ msgstr ""
 "Категоризованно по\n"
 "Типу Модуля"
 
-#: ../src/gnome2/mod_mgr.c:1309 ../src/gnome2/utilities.c:579
-#: ../src/main/sidebar.cc:999 ../src/main/sidebar.cc:1001
+#: ../src/gnome2/mod_mgr.c:1311 ../src/gnome2/utilities.c:579
+#: ../src/main/sidebar.cc:982 ../src/main/sidebar.cc:984
 msgid "Biblical Texts"
 msgstr "Библейские Тексты"
 
-#: ../src/gnome2/mod_mgr.c:1313 ../src/gnome2/utilities.c:583
-#: ../src/main/sidebar.cc:678 ../src/main/sidebar.cc:1024
-#: ../src/main/sidebar.cc:1026 ../ui/prefs.glade.h:33
+#: ../src/gnome2/mod_mgr.c:1315 ../src/gnome2/utilities.c:583
+#: ../src/main/sidebar.cc:667 ../src/main/sidebar.cc:1007
+#: ../src/main/sidebar.cc:1009 ../ui/prefs.glade.h:36
 msgid "Commentaries"
 msgstr "Комментарии"
 
-#: ../src/gnome2/mod_mgr.c:1317 ../src/gnome2/utilities.c:587
-#: ../src/main/sidebar.cc:1033 ../src/main/sidebar.cc:1035
+#: ../src/gnome2/mod_mgr.c:1319 ../src/gnome2/utilities.c:588
+#: ../src/main/sidebar.cc:1016 ../src/main/sidebar.cc:1018
 msgid "Dictionaries"
 msgstr "Словари"
 
-#: ../src/gnome2/mod_mgr.c:1321 ../src/gnome2/utilities.c:591
-#: ../src/main/sidebar.cc:1042 ../src/main/sidebar.cc:1044
+#: ../src/gnome2/mod_mgr.c:1323 ../src/gnome2/utilities.c:592
+#: ../src/main/sidebar.cc:1025 ../src/main/sidebar.cc:1027
 msgid "Daily Devotionals"
 msgstr "Стих Дня"
 
-#: ../src/gnome2/mod_mgr.c:1325 ../src/gnome2/utilities.c:595
-#: ../src/main/sidebar.cc:688 ../src/main/sidebar.cc:1051
-#: ../src/main/sidebar.cc:1053
+#: ../src/gnome2/mod_mgr.c:1327 ../src/gnome2/utilities.c:596
+#: ../src/main/sidebar.cc:677 ../src/main/sidebar.cc:1034
+#: ../src/main/sidebar.cc:1036
 msgid "General Books"
 msgstr "Книги"
 
-#: ../src/gnome2/mod_mgr.c:1329 ../src/gnome2/utilities.c:599
-#: ../src/main/sidebar.cc:1060 ../src/main/sidebar.cc:1062
+#: ../src/gnome2/mod_mgr.c:1331 ../src/gnome2/utilities.c:600
+#: ../src/main/sidebar.cc:1043 ../src/main/sidebar.cc:1045
 msgid "Maps"
 msgstr "Карты"
 
-#: ../src/gnome2/mod_mgr.c:1333 ../src/gnome2/utilities.c:603
-#: ../src/main/sidebar.cc:1069 ../src/main/sidebar.cc:1071
+#: ../src/gnome2/mod_mgr.c:1335 ../src/gnome2/utilities.c:604
+#: ../src/main/sidebar.cc:1052 ../src/main/sidebar.cc:1054
 msgid "Images"
 msgstr "Изображения"
 
-#: ../src/gnome2/mod_mgr.c:1341
+#: ../src/gnome2/mod_mgr.c:1343
 msgid ""
 "Categorized by\n"
 "Availability"
@@ -837,95 +833,95 @@ msgstr ""
 "Категоризованно по\n"
 "Доступности"
 
-#: ../src/gnome2/mod_mgr.c:1346
+#: ../src/gnome2/mod_mgr.c:1348
 msgid "Updates"
 msgstr "Обновления"
 
-#: ../src/gnome2/mod_mgr.c:1350
+#: ../src/gnome2/mod_mgr.c:1352
 msgid "Uninstalled"
 msgstr "Удаленные"
 
-#: ../src/gnome2/mod_mgr.c:1354 ../src/gnome2/sidebar.c:637
-#: ../src/gnome2/utilities.c:608 ../src/main/prayerlists.cc:241
-#: ../src/main/sidebar.cc:1079 ../src/main/sidebar.cc:1081
+#: ../src/gnome2/mod_mgr.c:1356 ../src/gnome2/sidebar.c:634
+#: ../src/gnome2/utilities.c:609 ../src/main/prayerlists.cc:241
+#: ../src/main/sidebar.cc:1062 ../src/main/sidebar.cc:1064
 msgid "Prayer List/Journal"
 msgstr "Молитвенные Списки"
 
-#: ../src/gnome2/mod_mgr.c:1534
+#: ../src/gnome2/mod_mgr.c:1536
 msgid "Refreshing from remote source"
 msgstr "Обновление из удаленного источника"
 
-#: ../src/gnome2/mod_mgr.c:1544
+#: ../src/gnome2/mod_mgr.c:1546
 msgid "Remote source not found"
 msgstr "Удаленный источник не найден"
 
-#: ../src/gnome2/mod_mgr.c:1658
+#: ../src/gnome2/mod_mgr.c:1616
 msgid "Configure"
 msgstr "Настроить"
 
-#: ../src/gnome2/mod_mgr.c:1689
+#: ../src/gnome2/mod_mgr.c:1647
 msgid "Type"
 msgstr "Тип"
 
-#: ../src/gnome2/mod_mgr.c:1696
+#: ../src/gnome2/mod_mgr.c:1654
 msgid "Caption"
 msgstr "Заголовок"
 
-#: ../src/gnome2/mod_mgr.c:1704
+#: ../src/gnome2/mod_mgr.c:1662
 msgid "Source"
 msgstr "Источник"
 
-#: ../src/gnome2/mod_mgr.c:1712
+#: ../src/gnome2/mod_mgr.c:1670
 msgid "Directory"
 msgstr "Каталог"
 
-#: ../src/gnome2/mod_mgr.c:1720
+#: ../src/gnome2/mod_mgr.c:1678
 msgid "User"
 msgstr "Пользователь"
 
-#: ../src/gnome2/mod_mgr.c:1728
+#: ../src/gnome2/mod_mgr.c:1686
 msgid "Password"
 msgstr "Пароль"
 
-#: ../src/gnome2/mod_mgr.c:1736
+#: ../src/gnome2/mod_mgr.c:1694
 msgid "UID"
 msgstr "UID"
 
-#: ../src/gnome2/mod_mgr.c:1753
+#: ../src/gnome2/mod_mgr.c:1711
 msgid "Module Sources"
 msgstr "Источники Модулей"
 
-#: ../src/gnome2/mod_mgr.c:1756
+#: ../src/gnome2/mod_mgr.c:1714
 msgid "Add/Remove"
 msgstr "Добавить/Удалить"
 
-#: ../src/gnome2/mod_mgr.c:1758
+#: ../src/gnome2/mod_mgr.c:1716
 msgid "Choose"
 msgstr "Установки"
 
-#: ../src/gnome2/mod_mgr.c:1762 ../src/gnome2/preferences_dialog.c:1794
-#: ../src/gnome2/sidebar.c:1401
+#: ../src/gnome2/mod_mgr.c:1720 ../src/gnome2/preferences_dialog.c:1637
+#: ../src/gnome2/sidebar.c:1400
 msgid "Modules"
 msgstr "Модули"
 
-#: ../src/gnome2/mod_mgr.c:1764
+#: ../src/gnome2/mod_mgr.c:1722
 msgid "Install/Update"
 msgstr "Установить/Обновить"
 
-#: ../src/gnome2/mod_mgr.c:1766
+#: ../src/gnome2/mod_mgr.c:1724
 msgid "Maintenance"
 msgstr "Обслуживание"
 
-#: ../src/gnome2/mod_mgr.c:1987
+#: ../src/gnome2/mod_mgr.c:1945
 msgid "Please Refresh"
 msgstr "Пожалуйста Обновите"
 
-#: ../src/gnome2/mod_mgr.c:1988
+#: ../src/gnome2/mod_mgr.c:1946
 msgid "Your module list is not up to date!"
 msgstr "Ваш список модулей не обновлен!"
 
 #. Zero Bibles is just not workable in Xiphos.
-#: ../src/gnome2/mod_mgr.c:2269
+#: ../src/gnome2/mod_mgr.c:2239
 msgid ""
 "You have uninstalled your last Bible.\n"
 "Xiphos requires at least one."
@@ -933,7 +929,7 @@ msgstr ""
 "Вы удалили вашу последнюю Библию.\n"
 "Xiphos нужна хотябы одна."
 
-#: ../src/gnome2/mod_mgr.c:2275
+#: ../src/gnome2/mod_mgr.c:2245
 msgid ""
 "There are still no Bibles installed.\n"
 "Xiphos cannot continue without one."
@@ -941,80 +937,23 @@ msgstr ""
 "По-прежнему ни одной Библии не установлено.\n"
 "Без нее Xiphos не может работать."
 
-#: ../src/gnome2/mod_mgr.c:2340
+#: ../src/gnome2/mod_mgr.c:2335
 msgid "Standard remote sources have been loaded."
 msgstr "Стандартные источники были загруженны."
 
-#: ../src/gnome2/mod_mgr.c:2346
+#: ../src/gnome2/mod_mgr.c:2341
 msgid "Could not load standard sources from CrossWire."
 msgstr ""
 "Не могу загрузить стандартные источники\n"
 "с сайта CrossWire."
 
-#: ../src/gnome2/mod_mgr.c:2495 ../src/gnome2/mod_mgr.c:2743
-msgid "Remove the selected source"
-msgstr "Удалить выбранный источник"
-
-#: ../src/gnome2/mod_mgr.c:2555
-msgid "Enter a remote source"
-msgstr "Настройка Удаленного Источника:"
-
-#: ../src/gnome2/mod_mgr.c:2559
-msgid "Caption:"
-msgstr "Заголовок:"
-
-#: ../src/gnome2/mod_mgr.c:2560
-msgid "Type:"
-msgstr "Тип:"
-
-#: ../src/gnome2/mod_mgr.c:2561
-msgid "Host:"
-msgstr "Хост:"
-
-#: ../src/gnome2/mod_mgr.c:2562
-msgid "Directory:"
-msgstr "Каталог:"
-
-#: ../src/gnome2/mod_mgr.c:2564
-msgid "User (optional):"
-msgstr "Пользователь (опционально):"
-
-#: ../src/gnome2/mod_mgr.c:2565
-msgid "Password (optional):"
-msgstr "Пароль (опционально):"
-
-#. this can happen at most once
-#: ../src/gnome2/mod_mgr.c:2593
-msgid "A source by that name already exists."
-msgstr "Источник с таким именем уже существует."
-
-#: ../src/gnome2/mod_mgr.c:2740
-msgid "Delete a remote source"
-msgstr "Удалить удаленный источник"
-
-#. *****************************************************************************
-#. * Name
-#. *   gui_open_mod_mgr
-#. *
-#. * Synopsis
-#. *   #include "gui/mod_mgr.h"
-#. *
-#. *   void gui_open_mod_mgr(void)
-#. *
-#. * Description
-#. *
-#. *
-#. * Return value
-#. *   void
-#.
-#: ../src/gnome2/mod_mgr.c:3226
+#: ../src/gnome2/mod_mgr.c:2345
+#, fuzzy
 msgid ""
 "<b>Welcome to the Module Manager.</b>\n"
 "\n"
 "This is Xiphos' mechanism to get new and updated content.\n"
-"It appears you have never been here before, so please take a moment to look "
-"it over.\n"
-"(You will see this information box just once.)\n"
+"If you have never been here before, please take a moment to look it over.\n"
 "\n"
 "Modules come from different <u>repositories</u>.  <b>Module Sources: Add/"
 "Remove</b> will show you what repositories are currently known.\n"
@@ -1057,6 +996,47 @@ msgstr ""
 "Live Chat, или (если никто не отвечает в чате) пошли электронное письмо в "
 "наш список рассылки пользователей.\n"
 
+#: ../src/gnome2/mod_mgr.c:2512 ../src/gnome2/mod_mgr.c:2758
+msgid "Remove the selected source"
+msgstr "Удалить выбранный источник"
+
+#: ../src/gnome2/mod_mgr.c:2572
+msgid "Enter a remote source"
+msgstr "Настройка Удаленного Источника:"
+
+#: ../src/gnome2/mod_mgr.c:2576
+msgid "Caption:"
+msgstr "Заголовок:"
+
+#: ../src/gnome2/mod_mgr.c:2577
+msgid "Type:"
+msgstr "Тип:"
+
+#: ../src/gnome2/mod_mgr.c:2578
+msgid "Host:"
+msgstr "Хост:"
+
+#: ../src/gnome2/mod_mgr.c:2579
+msgid "Directory:"
+msgstr "Каталог:"
+
+#: ../src/gnome2/mod_mgr.c:2580
+msgid "User (optional):"
+msgstr "Пользователь (опционально):"
+
+#: ../src/gnome2/mod_mgr.c:2581
+msgid "Password (optional):"
+msgstr "Пароль (опционально):"
+
+#. this can happen at most once
+#: ../src/gnome2/mod_mgr.c:2608
+msgid "A source by that name already exists."
+msgstr "Источник с таким именем уже существует."
+
+#: ../src/gnome2/mod_mgr.c:2755
+msgid "Delete a remote source"
+msgstr "Удалить удаленный источник"
+
 #: ../src/gnome2/navbar_book.c:358 ../src/gnome2/navbar_book_dialog.c:299
 msgid "Go outward, to the section containing this one"
 msgstr "Перейти наружу, к выделению, состоящему из данного"
@@ -1073,114 +1053,101 @@ msgstr "Перейти к следующему пункту"
 msgid "Go inward, to the first subsection"
 msgstr "Перейти внутрь, к подвыделению"
 
-#: ../src/gnome2/navbar_versekey_dialog.c:860
-#: ../src/gnome2/navbar_versekey_editor.c:868
-#: ../src/gnome2/navbar_versekey_parallel.c:806
-#, fuzzy
+#: ../src/gnome2/navbar_versekey_dialog.c:868
+#: ../src/gnome2/navbar_versekey_editor.c:876
+#: ../src/gnome2/navbar_versekey_parallel.c:816
 msgid "Synchronize this window's scrolling with the main window"
-msgstr "Синхронизировать это окно с главным"
+msgstr ""
 
-#: ../src/gnome2/parallel_dialog.c:328 ../src/gnome2/preferences_dialog.c:1800
+#: ../src/gnome2/parallel_dialog.c:327 ../src/gnome2/preferences_dialog.c:1643
 msgid "Parallel"
 msgstr "Параллель"
 
-#: ../src/gnome2/parallel_view.c:273
-msgid "Copy"
-msgstr "Копия"
-
-#: ../src/gnome2/parallel_view.c:283
+#: ../src/gnome2/parallel_view.c:124
 msgid "Detach/Attach"
 msgstr "Разъединить/Соединить"
 
-#: ../src/gnome2/parallel_view.c:289 ../ui/xi-menus.glade.h:53
+#: ../src/gnome2/parallel_view.c:130 ../ui/xi-menus.glade.h:53
 msgid "Module Options"
 msgstr "Опции Модуля"
 
-#. build change parallel modules submenu
-#: ../src/gnome2/parallel_view.c:304
-msgid "Change parallel 1"
-msgstr "Изменить Параллель 1"
-
-#: ../src/gnome2/parallel_view.c:306
-msgid "Change parallel 2"
-msgstr "Изменить Параллель 2"
-
-#: ../src/gnome2/parallel_view.c:308
-msgid "Change parallel 3"
-msgstr "Изменить Параллель 3"
-
-#: ../src/gnome2/parallel_view.c:310
-msgid "Change parallel 4"
-msgstr "Изменить Параллель 4"
-
-#: ../src/gnome2/parallel_view.c:312
-msgid "Change parallel 5"
-msgstr "Изменить Параллель 5"
-
-#: ../src/gnome2/parallel_view.c:469 ../src/gnome2/sidebar.c:620
-#: ../src/gnome2/sidebar.c:626 ../src/gnome2/tabbed_browser.c:257
-#: ../src/main/sidebar.cc:646 ../src/main/sidebar.cc:1007
-#: ../src/main/sidebar.cc:1008 ../src/main/sidebar.cc:1009
+#: ../src/gnome2/parallel_view.c:269 ../src/gnome2/sidebar.c:617
+#: ../src/gnome2/sidebar.c:623 ../src/gnome2/tabbed_browser.c:257
+#: ../src/main/sidebar.cc:636 ../src/main/sidebar.cc:990
+#: ../src/main/sidebar.cc:991 ../src/main/sidebar.cc:992
 msgid "Parallel View"
 msgstr "Параллельный Вид"
 
-#: ../src/gnome2/preferences_dialog.c:1180
-#: ../src/gnome2/preferences_dialog.c:1218
-#: ../src/gnome2/preferences_dialog.c:1255
-#: ../src/gnome2/preferences_dialog.c:1290
-#: ../src/gnome2/preferences_dialog.c:1324
-#: ../src/gnome2/preferences_dialog.c:1357
-#: ../src/gnome2/preferences_dialog.c:1389
-#: ../src/gnome2/preferences_dialog.c:1422
-#: ../src/gnome2/preferences_dialog.c:1454
-#: ../src/gnome2/preferences_dialog.c:1488
-#: ../src/gnome2/preferences_dialog.c:1523
-#: ../src/gnome2/preferences_dialog.c:1558
-#: ../src/gnome2/preferences_dialog.c:1594
-#: ../src/gnome2/preferences_dialog.c:1632
-#: ../src/gnome2/preferences_dialog.c:2053
+#: ../src/gnome2/preferences_dialog.c:1158
+#: ../src/gnome2/preferences_dialog.c:1196
+#: ../src/gnome2/preferences_dialog.c:1233
+#: ../src/gnome2/preferences_dialog.c:1268
+#: ../src/gnome2/preferences_dialog.c:1303
+#: ../src/gnome2/preferences_dialog.c:1338
+#: ../src/gnome2/preferences_dialog.c:1373
+#: ../src/gnome2/preferences_dialog.c:1409
+#: ../src/gnome2/preferences_dialog.c:1446
+#: ../src/gnome2/preferences_dialog.c:1498
+#: ../src/gnome2/preferences_dialog.c:1881
 msgid "-- Select --"
 msgstr "-- Выбрать --"
 
-#: ../src/gnome2/preferences_dialog.c:1653
+#: ../src/gnome2/preferences_dialog.c:1460
 msgid "Locale will take effect after restart."
 msgstr "Параметры языка вступят в силу после перезапуска."
 
-#: ../src/gnome2/preferences_dialog.c:1688 ../ui/prefs.glade.h:74
+#: ../src/gnome2/preferences_dialog.c:1535 ../ui/prefs.glade.h:75
 msgid "Preferences"
 msgstr "Настройки"
 
-#: ../src/gnome2/preferences_dialog.c:1770
+#: ../src/gnome2/preferences_dialog.c:1617
 msgid "Fonts"
 msgstr "Шрифты"
 
-#: ../src/gnome2/preferences_dialog.c:1773
+#: ../src/gnome2/preferences_dialog.c:1620
 msgid "Color"
 msgstr "Цвет"
 
-#: ../src/gnome2/preferences_dialog.c:1776
-msgid "Sizes"
-msgstr "Размеры"
+#: ../src/gnome2/preferences_dialog.c:1623
+#, fuzzy
+msgid "Sizes and Faces"
+msgstr "Вкладки и Панели"
 
-#: ../src/gnome2/preferences_dialog.c:1780
+#: ../src/gnome2/preferences_dialog.c:1627
 msgid "General"
 msgstr "Общие"
 
-#: ../src/gnome2/preferences_dialog.c:1783 ../ui/prefs.glade.h:87
+#: ../src/gnome2/preferences_dialog.c:1630 ../ui/prefs.glade.h:89
 msgid "Tabs and Panes"
 msgstr "Вкладки и Панели"
 
-#: ../src/gnome2/preferences_dialog.c:1790
+#: ../src/gnome2/preferences_dialog.c:1633
 msgid "Options"
 msgstr "Опции"
 
-#: ../src/gnome2/preferences_dialog.c:1797
+#: ../src/gnome2/preferences_dialog.c:1640
 msgid "Main"
 msgstr "Основное"
 
-#: ../src/gnome2/preferences_dialog.c:1803
+#: ../src/gnome2/preferences_dialog.c:1646
 msgid "Special"
 msgstr "Специальные"
+
+#: ../src/gnome2/preferences_dialog.c:2290 ../src/gnome2/search_dialog.c:460
+msgid "Clear List?"
+msgstr "Очистить Список?"
+
+#: ../src/gnome2/preferences_dialog.c:2291 ../src/gnome2/search_dialog.c:461
+msgid "Are you sure you want to clear the module list?"
+msgstr "Вы уверены что хотите очистить список модулей?"
+
+#: ../src/gnome2/preferences_dialog.c:2336 ../src/main/search_dialog.cc:700
+msgid "Remove Module?"
+msgstr "Удалить Модуль?"
+
+#: ../src/gnome2/preferences_dialog.c:2337 ../src/main/search_dialog.cc:701
+msgid "Are you sure you want to remove the selected module?"
+msgstr "Вы уверены, что хотите удалить выбранный модуль?"
 
 #: ../src/gnome2/search_dialog.c:68 ../src/main/search_dialog.cc:66
 #: ../src/main/search_sidebar.cc:61
@@ -1197,27 +1164,24 @@ msgstr " Модуль"
 msgid "found in "
 msgstr "найдено в "
 
-#: ../src/gnome2/search_dialog.c:525
-msgid "Clear List?"
-msgstr "Очистить Список?"
+#: ../src/gnome2/search_dialog.c:419
+#, c-format
+msgid "New List %s"
+msgstr ""
 
-#: ../src/gnome2/search_dialog.c:526
-msgid "Are you sure you want to clear the module list?"
-msgstr "Вы уверены что хотите очистить список модулей?"
-
-#: ../src/gnome2/search_dialog.c:706
+#: ../src/gnome2/search_dialog.c:643
 msgid "The last module list may not be deleted"
 msgstr "Последний список модулей не может быть удален"
 
-#: ../src/gnome2/search_dialog.c:724
+#: ../src/gnome2/search_dialog.c:661
 msgid "Delete list?"
 msgstr "Удалить Список?"
 
-#: ../src/gnome2/search_dialog.c:725
+#: ../src/gnome2/search_dialog.c:662
 msgid "Are you sure you want to delete:"
 msgstr "Вы уверены что хотите удалить:"
 
-#: ../src/gnome2/search_sidebar.c:189
+#: ../src/gnome2/search_sidebar.c:184
 msgid ""
 "This is an inclusive (\"AND\") search:\n"
 "Find matches showing all words."
@@ -1225,63 +1189,63 @@ msgstr ""
 "Это включающий (\"AND\") поиск:\n"
 "Находит совпадения по всем словам."
 
-#: ../src/gnome2/search_sidebar.c:205
+#: ../src/gnome2/search_sidebar.c:200
 msgid "Search Module"
 msgstr "Поиск по Модулю"
 
-#: ../src/gnome2/search_sidebar.c:219
+#: ../src/gnome2/search_sidebar.c:214
 msgid "Bible"
 msgstr "Библия"
 
-#: ../src/gnome2/search_sidebar.c:228 ../ui/prefs.glade.h:35
+#: ../src/gnome2/search_sidebar.c:223 ../ui/prefs.glade.h:38
 msgid "Commentary"
 msgstr "Комментарий"
 
-#: ../src/gnome2/search_sidebar.c:242
+#: ../src/gnome2/search_sidebar.c:237
 msgid "Search Type"
 msgstr "Тип Поиска"
 
-#: ../src/gnome2/search_sidebar.c:256 ../ui/search-dialog.glade.h:66
+#: ../src/gnome2/search_sidebar.c:251 ../ui/search-dialog.glade.h:66
 msgid "Multi word"
 msgstr "Свободная форма"
 
-#: ../src/gnome2/search_sidebar.c:275 ../ui/search-dialog.glade.h:44
+#: ../src/gnome2/search_sidebar.c:270 ../ui/search-dialog.glade.h:44
 msgid "Exact phrase"
 msgstr "Точная фраза"
 
-#: ../src/gnome2/search_sidebar.c:289
+#: ../src/gnome2/search_sidebar.c:284
 msgid "Search Options"
 msgstr "Опции Поиска"
 
-#: ../src/gnome2/search_sidebar.c:317
+#: ../src/gnome2/search_sidebar.c:312
 msgid "Search Scope"
 msgstr "Диапазон Поиска"
 
-#: ../src/gnome2/search_sidebar.c:330
+#: ../src/gnome2/search_sidebar.c:325
 msgid "No scope"
 msgstr "Нет Диапазона"
 
-#: ../src/gnome2/search_sidebar.c:340
+#: ../src/gnome2/search_sidebar.c:335
 msgid "Use bounds"
 msgstr "Задать Диапазон"
 
-#: ../src/gnome2/search_sidebar.c:349
+#: ../src/gnome2/search_sidebar.c:344
 msgid "Last search"
 msgstr "Последний поиск"
 
-#: ../src/gnome2/search_sidebar.c:364
+#: ../src/gnome2/search_sidebar.c:359
 msgid "Bounds"
 msgstr "Границы"
 
-#: ../src/gnome2/search_sidebar.c:378
+#: ../src/gnome2/search_sidebar.c:373
 msgid "Lower"
 msgstr "Нижняя"
 
-#: ../src/gnome2/search_sidebar.c:385
+#: ../src/gnome2/search_sidebar.c:380
 msgid "Upper"
 msgstr "Верхняя"
 
-#: ../src/gnome2/sidebar.c:1385
+#: ../src/gnome2/sidebar.c:1384
 msgid "Search"
 msgstr "Поиск"
 
@@ -1292,6 +1256,10 @@ msgstr "Боковая Панель"
 #: ../src/gnome2/splash.c:396
 msgid "Powered by the SWORD Project"
 msgstr "Основано на Проекте SWORD"
+
+#: ../src/gnome2/tabbed_browser.c:366
+msgid "Can't create tabs dir."
+msgstr ""
 
 #: ../src/gnome2/treekey-editor.c:133 ../src/gnome2/treekey-editor.c:192
 #: ../src/gnome2/treekey-editor.c:278
@@ -1328,133 +1296,133 @@ msgstr ""
 "(или, возможно, изображение не bmp/gif/jpg/png.)\n"
 "Xiphos не может изменить размер чтобы подогнать окно."
 
-#: ../src/main/display.cc:1042 ../src/main/display.cc:1094
-#: ../src/main/display.cc:1171 ../ui/export-dialog.glade.h:7
+#: ../src/main/display.cc:1059 ../src/main/display.cc:1111
+#: ../src/main/display.cc:1188 ../ui/export-dialog.glade.h:7
 msgid "Chapter"
 msgstr "Глава"
 
-#: ../src/main/main.c:119
+#: ../src/main/main.c:122
 msgid "Xiphos does not understand more than one argument."
 msgstr "Xiphos не понимает более одного аргумента."
 
-#: ../src/main/main.c:161
+#: ../src/main/main.c:168
 msgid "Initiating Gecko"
 msgstr "Запуск Gecko"
 
-#: ../src/main/main.c:167
+#: ../src/main/main.c:174
 msgid "Building Interface"
 msgstr "Создание Интерфейса"
 
-#: ../src/main/main.c:171
+#: ../src/main/main.c:178
 msgid "Starting Sword"
 msgstr "Запускается Sword"
 
-#: ../src/main/main.c:175
+#: ../src/main/main.c:182
 msgid "Loading Settings"
 msgstr "Загрузка Настроек"
 
-#: ../src/main/main.c:179
+#: ../src/main/main.c:186
 msgid "Displaying Xiphos"
 msgstr "Интерфейс Xiphos"
 
-#: ../src/main/module_dialogs.cc:227 ../src/main/previewer.cc:127
-#: ../src/main/previewer.cc:194 ../ui/prefs.glade.h:75
+#: ../src/main/module_dialogs.cc:227 ../src/main/previewer.cc:125
+#: ../src/main/previewer.cc:192 ../ui/prefs.glade.h:76
 msgid "Previewer"
 msgstr "Предпросмотр"
 
 #: ../src/main/module_dialogs.cc:292 ../src/main/module_dialogs.cc:416
-#: ../src/main/previewer.cc:269
+#: ../src/main/previewer.cc:265
 msgid "Footnote"
 msgstr "Сноска"
 
 #: ../src/main/module_dialogs.cc:298 ../src/main/module_dialogs.cc:421
-#: ../src/main/previewer.cc:281
+#: ../src/main/previewer.cc:277
 msgid "Cross Reference"
 msgstr "Параллельные Места"
 
 #: ../src/main/module_dialogs.cc:304 ../src/main/module_dialogs.cc:318
 #: ../src/main/module_dialogs.cc:426 ../src/main/module_dialogs.cc:438
-#: ../src/main/previewer.cc:287 ../src/main/previewer.cc:306
+#: ../src/main/previewer.cc:283 ../src/main/previewer.cc:302
 msgid "Strongs"
 msgstr "Стронги"
 
 #: ../src/main/module_dialogs.cc:310 ../src/main/module_dialogs.cc:329
 #: ../src/main/module_dialogs.cc:431 ../src/main/module_dialogs.cc:448
-#: ../src/main/previewer.cc:293 ../src/main/previewer.cc:319
+#: ../src/main/previewer.cc:289 ../src/main/previewer.cc:308
 msgid "Morphology"
 msgstr "Морфология"
 
-#: ../src/main/module_dialogs.cc:1083 ../src/main/url.cc:526
+#: ../src/main/module_dialogs.cc:1083 ../src/main/url.cc:527
 msgid "Back to "
 msgstr "Назад к "
 
-#: ../src/main/parallel_view.cc:404 ../ui/xi-menus.glade.h:90
+#: ../src/main/parallel_view.cc:399 ../ui/xi-menus.glade.h:88
 msgid "Strong's Numbers"
 msgstr "Номера Стронга"
 
-#: ../src/main/parallel_view.cc:414 ../ui/search-dialog.glade.h:52
+#: ../src/main/parallel_view.cc:409 ../ui/search-dialog.glade.h:52
 #: ../ui/xi-menus.glade.h:40
 msgid "Footnotes"
 msgstr "Сноски"
 
-#: ../src/main/parallel_view.cc:424 ../ui/search-dialog.glade.h:64
+#: ../src/main/parallel_view.cc:419 ../ui/search-dialog.glade.h:64
 #: ../ui/xi-menus.glade.h:55
 msgid "Morphological Tags"
 msgstr "Морфологические тэги"
 
-#: ../src/main/parallel_view.cc:434 ../ui/xi-menus.glade.h:44
+#: ../src/main/parallel_view.cc:429 ../ui/xi-menus.glade.h:44
 msgid "Hebrew Vowel Points"
 msgstr "Пункты Гласных Иврита"
 
-#: ../src/main/parallel_view.cc:444 ../ui/xi-menus.glade.h:43
+#: ../src/main/parallel_view.cc:439 ../ui/xi-menus.glade.h:43
 msgid "Hebrew Cantillation"
 msgstr "Повествование как в Иврите"
 
-#: ../src/main/parallel_view.cc:454 ../ui/xi-menus.glade.h:41
+#: ../src/main/parallel_view.cc:449 ../ui/xi-menus.glade.h:41
 msgid "Greek Accents"
 msgstr "Греческие Ударения"
 
-#: ../src/main/parallel_view.cc:464
+#: ../src/main/parallel_view.cc:459
 msgid "Cross-references"
 msgstr "Параллельные места"
 
-#: ../src/main/parallel_view.cc:474 ../ui/xi-menus.glade.h:50
+#: ../src/main/parallel_view.cc:469 ../ui/xi-menus.glade.h:50
 msgid "Lemmas"
 msgstr "Леммы"
 
-#: ../src/main/parallel_view.cc:484 ../ui/xi-menus.glade.h:42
+#: ../src/main/parallel_view.cc:479 ../ui/xi-menus.glade.h:42
 msgid "Headings"
 msgstr "Заглавия"
 
-#: ../src/main/parallel_view.cc:494
+#: ../src/main/parallel_view.cc:489
 msgid "Morpheme Segmentation"
 msgstr "Сегментация по Морфемам"
 
-#: ../src/main/parallel_view.cc:504 ../ui/xi-menus.glade.h:97
+#: ../src/main/parallel_view.cc:503 ../ui/xi-menus.glade.h:96
 msgid "Words of Christ in Red"
 msgstr "Слова Христа Красным"
 
-#: ../src/main/parallel_view.cc:514 ../ui/xi-menus.glade.h:92
+#: ../src/main/parallel_view.cc:513 ../ui/xi-menus.glade.h:90
 msgid "Transliteration"
 msgstr "Транслитерация"
 
-#: ../src/main/parallel_view.cc:524
+#: ../src/main/parallel_view.cc:523
 msgid "Textual Variants"
 msgstr "Текстовые Варианты"
 
-#: ../src/main/parallel_view.cc:532 ../ui/xi-menus.glade.h:71
+#: ../src/main/parallel_view.cc:531 ../ui/xi-menus.glade.h:71
 msgid "Primary Reading"
 msgstr "Основное Чтение"
 
-#: ../src/main/parallel_view.cc:541 ../ui/xi-menus.glade.h:85
+#: ../src/main/parallel_view.cc:540 ../ui/xi-menus.glade.h:83
 msgid "Secondary Reading"
 msgstr "Побочное Чтение"
 
-#: ../src/main/parallel_view.cc:550 ../ui/xi-menus.glade.h:9
+#: ../src/main/parallel_view.cc:549 ../ui/xi-menus.glade.h:9
 msgid "All Readings"
 msgstr "Все Чтения"
 
-#: ../src/main/parallel_view.cc:884 ../src/main/parallel_view.cc:1136
+#: ../src/main/parallel_view.cc:683 ../src/main/parallel_view.cc:797
 msgid "view context"
 msgstr "видовой контекст"
 
@@ -1706,38 +1674,30 @@ msgstr "Главная Тема В"
 msgid "<b>Major Topic C</b><br>"
 msgstr "<b>Главная Тема В</b><br>"
 
-#: ../src/main/previewer.cc:275
+#: ../src/main/previewer.cc:271
 msgid "User Annotation"
 msgstr "Пользователькое Примечание"
 
-#: ../src/main/search_dialog.cc:212
+#: ../src/main/search_dialog.cc:208
 #, c-format
 msgid "Search result %s: %s"
 msgstr "Результаты поиска %s: %s"
 
-#: ../src/main/search_dialog.cc:444
+#: ../src/main/search_dialog.cc:440
 msgid "Delete Range?"
 msgstr "Удалить диапазон?"
 
-#: ../src/main/search_dialog.cc:445
+#: ../src/main/search_dialog.cc:441
 msgid "Are you sure you want to delete this range?"
 msgstr "Вы уверены, что хотите удалить этот диапазон?"
 
-#: ../src/main/search_dialog.cc:659 ../src/main/search_dialog.cc:1130
-#: ../src/main/search_dialog.cc:1133 ../src/main/search_dialog.cc:1155
-#: ../src/main/search_dialog.cc:1158
+#: ../src/main/search_dialog.cc:655 ../src/main/search_dialog.cc:1072
+#: ../src/main/search_dialog.cc:1075 ../src/main/search_dialog.cc:1097
+#: ../src/main/search_dialog.cc:1100
 msgid "Search: "
 msgstr "Поиск: "
 
-#: ../src/main/search_dialog.cc:704
-msgid "Remove Module?"
-msgstr "Удалить Модуль?"
-
-#: ../src/main/search_dialog.cc:705
-msgid "Are you sure you want to remove the selected module?"
-msgstr "Вы уверены, что хотите удалить выбранный модуль?"
-
-#: ../src/main/search_dialog.cc:1560
+#: ../src/main/search_dialog.cc:1458
 #, c-format
 msgid ""
 "%s:\n"
@@ -1748,16 +1708,16 @@ msgstr ""
 "Такого модуля не установлено.\n"
 "%s"
 
-#: ../src/main/search_dialog.cc:1562
+#: ../src/main/search_dialog.cc:1460
 msgid "Please adjust the module list."
 msgstr "Пожалуйста подгоните список модулей."
 
-#: ../src/main/search_dialog.cc:1578
+#: ../src/main/search_dialog.cc:1476
 #, c-format
 msgid "No fast-search index exists for %s.%s%s"
 msgstr "Нет базы индексов для модуля %s.%s%s"
 
-#: ../src/main/search_dialog.cc:1580
+#: ../src/main/search_dialog.cc:1478
 msgid ""
 "\n"
 "Search on this module is now `multi word'."
@@ -1765,7 +1725,7 @@ msgstr ""
 "\n"
 "Поиск в режиме `Свободная форма'."
 
-#: ../src/main/search_dialog.cc:1581
+#: ../src/main/search_dialog.cc:1479
 msgid ""
 "\n"
 "See the Module Manager, Maintenance pane."
@@ -1773,7 +1733,7 @@ msgstr ""
 "\n"
 "Посмотри Мэнеджер Модулей, пункт Обслуживание."
 
-#: ../src/main/search_dialog.cc:1644
+#: ../src/main/search_dialog.cc:1542
 msgid "Search finished"
 msgstr "Поиск закончен"
 
@@ -1783,47 +1743,42 @@ msgstr "совпадает"
 
 #: ../src/main/settings.c:60
 msgid ""
-"Welcome to Xiphos.\n"
+"<b>Welcome to Xiphos.</b>\n"
 "\n"
-"There are no Bible modules installed. In order to initialize, Xiphos needs "
-"you to install at least one Bible.\n"
+"There are no Bibles installed. In order to initialize, Xiphos needs at least "
+"one Bible module.\n"
 "\n"
-"With your permission, Xiphos will invoke the Module Manager so that you may "
-"install from Crosswire:\n"
-"1. Configure remote install.\n"
-"2. Connect.\n"
-"3. Select a Bible text of your language preference.\n"
-"4. Click `install'.\n"
-"Close the Module Manager when you are done.\n"
+"With your permission, Xiphos will open the Module Manager so that you may "
+"install one or more Bibles from either a local module set (cdrom, flash "
+"drive) or over the network from CrossWire Bible Society.\n"
 "\n"
-"Warning: If you live in a persecuted country, use with care.\n"
+"<u>For local install:</u>\n"
+"- In <i>Module Sources: Add/Remove</i>, add a new local folder name where "
+"modules can be found.\n"
+"  (This is where folders exist named <i>mods.d</i> and <i>modules</i>.)\n"
+"- In <i>Module Sources: Choose</i>, click the \"Local\" button, and select "
+"your folder from the pulldown.\n"
 "\n"
-"May Xiphos invoke the Module Manager so that you may install a Bible?"
+"<u>For network install from CrossWire:</u>\n"
+"- In <i>Module Sources: Choose</i>, click the \"Remote\" button and select "
+"CrossWire from the pulldown.\n"
+"- Click the \"Refresh\" button at the bottom.\n"
+"\n"
+"<u>In either case:</u>\n"
+"- In <i>Modules: Install/Update</i>, select Bibles of your preference.\n"
+"- Click \"Install\".\n"
+"- Close the Module Manager when you are done.\n"
+"\n"
+"<u>Warning</u>: If you live in a persecuted country, use with care.\n"
+"\n"
+"May Xiphos open the Module Manager so that you may install a Bible?"
 msgstr ""
-"Добро пожаловать в Xiphos.\n"
-"\n"
-"Ни одной Библии не установлено. Для начала, Xiphos нужен хотябы один модуль "
-"Библии.\n"
-"\n"
-"С вашего разрешения, Xiphos запустит Менеджер Модулей и вы сможете "
-"установливать модули из репозитория Crosswire:\n"
-"1. Настройте параметры Источников.\n"
-"2. Подключитесь.\n"
-"3. Выберите подходяций Библейский текст.\n"
-"4. Нажмите `Установить'.\n"
-"Закройте Менеджер Модуль когда вы закончите.\n"
-"\n"
-"Предупрежение: Используйте с осторожностью в странах преследующих за Слово "
-"Божие.\n"
-"\n"
-"Можно ли запустить Менеджер Модулей, для того чтобы вы могли устанавливать "
-"модули?"
 
 #: ../src/main/settings.c:107
 msgid "$HOME is not set!"
 msgstr "$HOME не настроена!"
 
-#: ../src/main/settings.c:122
+#: ../src/main/settings.c:120
 #, c-format
 msgid ""
 "Xiphos can not create  .xiphos:\n"
@@ -1836,22 +1791,22 @@ msgstr ""
 "\n"
 "Xiphos не может продолжить."
 
-#: ../src/main/settings.c:135 ../src/main/settings.c:144
-#: ../src/main/settings.c:153
+#: ../src/main/settings.c:133 ../src/main/settings.c:142
+#: ../src/main/settings.c:151
 msgid "can not create "
 msgstr "не может быть создано "
 
-#: ../src/main/settings.c:183
+#: ../src/main/settings.c:181
 msgid ""
 "Empty settings file -- backup recovery attempted.\n"
 "Some information may have been lost."
 msgstr ""
 
-#: ../src/main/settings.c:185
+#: ../src/main/settings.c:183
 msgid "Empty settings file -- no backup?!? Information lost!"
 msgstr ""
 
-#: ../src/main/settings.c:214
+#: ../src/main/settings.c:212
 msgid ""
 "There are still no Bibles installed.\n"
 "Evidently, you declined to install any.\n"
@@ -1867,11 +1822,11 @@ msgstr ""
 "хотя бы, одного модуля Библии,\n"
 "и заканчивает работу."
 
-#: ../src/main/settings.c:218
+#: ../src/main/settings.c:216
 msgid "Bible module installation complete."
 msgstr "Установка модуля Библии выполнена."
 
-#: ../src/main/settings.c:221
+#: ../src/main/settings.c:219
 msgid ""
 "Without any Bible modules to display,\n"
 "Xiphos cannot proceed,\n"
@@ -1881,7 +1836,7 @@ msgstr ""
 "хотя бы, одного модуля Библии,\n"
 "и заканчивает работу."
 
-#: ../src/main/sidebar.cc:399
+#: ../src/main/sidebar.cc:400
 msgid "verse"
 msgstr "стих"
 
@@ -1889,7 +1844,7 @@ msgstr "стих"
 msgid "chapter"
 msgstr "глава"
 
-#: ../src/main/sword.cc:537
+#: ../src/main/sword.cc:540
 msgid ""
 "Xiphos's file for language\n"
 "abbreviations is missing."
@@ -1897,7 +1852,7 @@ msgstr ""
 "Файл Xiphos'а для языковых\n"
 "аббревиатур потерян."
 
-#: ../src/main/sword.cc:544
+#: ../src/main/sword.cc:547
 msgid ""
 "Xiphos's language abbreviation\n"
 "file cannot be opened."
@@ -1905,7 +1860,7 @@ msgstr ""
 "Файл языковых аббревиатур Xiphos'а\n"
 "не может быть открыт."
 
-#: ../src/main/sword.cc:557
+#: ../src/main/sword.cc:560
 msgid ""
 "Xiphos cannot allocate space\n"
 "for language abbreviations."
@@ -1913,7 +1868,7 @@ msgstr ""
 "Xiphos не может выделить место\n"
 "для языковых аббревиатур."
 
-#: ../src/main/sword.cc:564
+#: ../src/main/sword.cc:567
 msgid ""
 "Xiphos cannot read the\n"
 "language abbreviation file."
@@ -1921,122 +1876,136 @@ msgstr ""
 "Xiphos не может прочитать\n"
 "файл языковых аббревиатур."
 
-#: ../src/main/sword.cc:642
+#: ../src/main/sword.cc:650
 msgid "No matching locale found for"
 msgstr "Не найдено подходящей локали для"
 
-#: ../src/main/sword.cc:644
+#: ../src/main/sword.cc:652
 msgid "Book names and menus may not be translated"
 msgstr "Названия книг и меню могут быть не переведены"
 
-#: ../src/main/sword.cc:1232
+#: ../src/main/sword.cc:1248
 msgid "Daily devotional was requested, but there are none installed."
 msgstr "Не установлено ни одного модуля необходимого типа."
+
+#: ../src/main/sword.cc:1484
+msgid ""
+"<b>Locked Module.</b>\n"
+"\n"
+"<u>You are opening a module which requires a <i>key</i>.</u>\n"
+"\n"
+"The module is locked, meaning that the content is encrypted by its "
+"publisher, and you must enter its key in order for the content to become "
+"useful.  This key should have been received by you on the web page which "
+"confirmed your purchase, or perhaps sent via email after purchase.\n"
+"\n"
+"Please enter the key in the dialog."
+msgstr ""
 
 #: ../src/main/tab_history.c:219
 msgid "Clear History"
 msgstr "Очистить Историю"
 
-#: ../src/main/url.cc:97
+#: ../src/main/url.cc:98
 msgid "URL not found:"
 msgstr "URL не найден:"
 
-#: ../src/main/url.cc:187
+#: ../src/main/url.cc:188
 #, c-format
 msgid "Xiphos could not execute %s"
 msgstr "Xiphos не может выполнить %s"
 
-#: ../src/main/url.cc:195
+#: ../src/main/url.cc:196
 msgid "Viewer error:\n"
 msgstr "Ошибка Просмоторщика:\n"
 
-#: ../src/main/url.cc:268
+#: ../src/main/url.cc:269
 #, c-format
 msgid "Show %s in main window"
 msgstr "Показать %s в главном окне"
 
-#: ../src/main/xml.c:82 ../src/main/xml.c:466
+#: ../src/main/xml.c:84 ../src/main/xml.c:468
 #, c-format
 msgid "Document not created successfully. \n"
 msgstr "Документ не создан. \n"
 
-#: ../src/main/xml.c:91
+#: ../src/main/xml.c:93
 msgid "Personal"
 msgstr "Личное"
 
-#: ../src/main/xml.c:92
+#: ../src/main/xml.c:94
 msgid "What must I do to be saved?"
 msgstr "Что Я должен делать, чтобы спастись?"
 
-#: ../src/main/xml.c:94 ../src/main/xml.c:95
+#: ../src/main/xml.c:96 ../src/main/xml.c:97
 msgid "Acts 16:31"
 msgstr "Деяния 16:31"
 
-#: ../src/main/xml.c:99 ../src/main/xml.c:100
+#: ../src/main/xml.c:101 ../src/main/xml.c:102
 msgid "Eph 2:8,9"
 msgstr "Еф 2:8,9"
 
-#: ../src/main/xml.c:104 ../src/main/xml.c:105
+#: ../src/main/xml.c:106 ../src/main/xml.c:107
 msgid "Romans 1:16"
 msgstr "Римлянам 1:16"
 
-#: ../src/main/xml.c:108
+#: ../src/main/xml.c:110
 msgid "What is the Gospel?"
 msgstr "Что такое Проповедь Евангелия?"
 
-#: ../src/main/xml.c:110 ../src/main/xml.c:111
+#: ../src/main/xml.c:112 ../src/main/xml.c:113
 msgid "1 Cor 15:1-4"
 msgstr "1 Кор 15:1-4"
 
-#: ../src/main/xml.c:415 ../src/main/xml.c:1146
+#: ../src/main/xml.c:417 ../src/main/xml.c:1166
 #, c-format
 msgid "Document not parsed successfully. \n"
 msgstr "Документ не обработан. \n"
 
-#: ../src/main/xml.c:421 ../src/main/xml.c:749 ../src/main/xml.c:1027
-#: ../src/main/xml.c:1225
+#: ../src/main/xml.c:423 ../src/main/xml.c:733 ../src/main/xml.c:1047
+#: ../src/main/xml.c:1245
 #, c-format
 msgid "empty document \n"
 msgstr "пустой документ \n"
 
-#: ../src/main/xml.c:427
+#: ../src/main/xml.c:429
 #, c-format
 msgid "wrong type, root node != SwordBookmarks\n"
 msgstr "не правильный тип, корневой объект != SwordBookmarks\n"
 
-#: ../src/main/xml.c:478
+#: ../src/main/xml.c:480
 msgid "Old Testament"
 msgstr "Ветхий Завет"
 
-#: ../src/main/xml.c:479
+#: ../src/main/xml.c:481
 msgid "Gen - Mal"
 msgstr "Быт - Мал"
 
-#: ../src/main/xml.c:484
+#: ../src/main/xml.c:486
 msgid "New Testament"
 msgstr "Новый Завет"
 
-#: ../src/main/xml.c:485
+#: ../src/main/xml.c:487
 msgid "Mat - Rev"
 msgstr "Мф - Откр"
 
-#: ../src/main/xml.c:491
+#: ../src/main/xml.c:493
 msgid "Sample Module List"
 msgstr "Простой Список Модулей"
 
-#: ../src/main/xml.c:755 ../src/main/xml.c:1033
+#: ../src/main/xml.c:739 ../src/main/xml.c:1053
 #, c-format
 msgid "wrong type, root node != %s\n"
 msgstr "неверный тип, root node != %s\n"
 
-#: ../src/main/xml.c:1186
+#: ../src/main/xml.c:1206
 #, c-format
 msgid ""
 "Save of settings failed! stat %d, size %d\n"
 "%s"
 msgstr ""
 
-#: ../src/main/xml.c:1188
+#: ../src/main/xml.c:1208
 msgid "Attempting to revert to previous save."
 msgstr ""
 
@@ -2197,7 +2166,7 @@ msgstr "<b>Экспорт</b>"
 msgid "<b>Format</b>"
 msgstr "<b>Формат</b>"
 
-#: ../ui/export-dialog.glade.h:5 ../ui/prefs.glade.h:25
+#: ../ui/export-dialog.glade.h:5 ../ui/prefs.glade.h:26
 msgid "Book"
 msgstr "Книга"
 
@@ -2329,49 +2298,133 @@ msgstr "<i>Личная зона, только для вашего исполь�
 msgid "<i>System area, for all users:</i>"
 msgstr "<i>Системная зона, для всех пользователей:</i>"
 
+#: ../ui/module-manager.glade.h:11
+msgid ""
+"Add a custom remote install source. You must know its hostname and the "
+"folder where its repository lives."
+msgstr ""
+
 #: ../ui/module-manager.glade.h:12
+msgid ""
+"Add a local folder as an install source, typically on a cdrom or flash "
+"drive.  Such a folder contains subfolders \"mods.d\" and \"modules\"."
+msgstr ""
+
+#: ../ui/module-manager.glade.h:13
+msgid ""
+"Build an index of the selected modules, for optimized (\"lucene\") searching."
+msgstr ""
+
+#: ../ui/module-manager.glade.h:14
 msgid "Continue"
 msgstr "Продолжить"
 
-#: ../ui/module-manager.glade.h:13
+#: ../ui/module-manager.glade.h:15
+#, fuzzy
+msgid "Create a zip archive of the selected modules."
+msgstr "Вы уверены, что хотите удалить выбранный модуль?"
+
+#: ../ui/module-manager.glade.h:16
 msgid "Current Remote Sources"
 msgstr "Текущий удаленный источник:"
 
-#: ../ui/module-manager.glade.h:14
+#: ../ui/module-manager.glade.h:17
 msgid "Current local sources"
 msgstr "Текущий локальный источник:"
 
-#: ../ui/module-manager.glade.h:15
-msgid "Delete Index"
-msgstr "Удалить индекс"
+#: ../ui/module-manager.glade.h:18
+#, fuzzy
+msgid "Delete the fast-search index of the selected modules."
+msgstr "Удалить базы индексов для быстрого поиска для этих модулей?"
 
-#: ../ui/module-manager.glade.h:16
+#: ../ui/module-manager.glade.h:19
 msgid "Home dir"
 msgstr "Домашняя папка"
 
-#: ../ui/module-manager.glade.h:19
-msgid "Load Standard"
-msgstr "Загрузить Стандарт"
-
 #: ../ui/module-manager.glade.h:20
+#, fuzzy
+msgid "Install or update the selected modules"
+msgstr "Установить эти модули?"
+
+#: ../ui/module-manager.glade.h:21
+msgid ""
+"Load and synchronize the standard set of known repositories, as maintained "
+"at crosswire.org, with your current remote sources."
+msgstr ""
+
+#: ../ui/module-manager.glade.h:22
 msgid "Local"
 msgstr "Локально"
 
-#: ../ui/module-manager.glade.h:21
+#: ../ui/module-manager.glade.h:23
 msgid "Local Install Folder"
 msgstr "Локальная Папку Установки"
 
-#: ../ui/module-manager.glade.h:22
+#: ../ui/module-manager.glade.h:24
 msgid "Module Manager"
 msgstr "Менеджер Модулей"
 
-#: ../ui/module-manager.glade.h:23
+#: ../ui/module-manager.glade.h:25
+msgid "Open a brief introductory explanation of how the Module Manager works."
+msgstr ""
+
+#: ../ui/module-manager.glade.h:26
+msgid ""
+"Refresh Xiphos' knowledge of what modules are available at the selected "
+"remote repository"
+msgstr ""
+
+#: ../ui/module-manager.glade.h:27
 msgid "Remote"
 msgstr "Удаленно"
 
-#: ../ui/module-manager.glade.h:24
+#: ../ui/module-manager.glade.h:28
+#, fuzzy
+msgid "Remove a remote install source."
+msgstr "Удалить удаленный источник"
+
+#: ../ui/module-manager.glade.h:29
+msgid "Remove one of your local folders as an install source."
+msgstr ""
+
+#: ../ui/module-manager.glade.h:30
+#, fuzzy
+msgid "Remove the selected modules from your system"
+msgstr "Удалить выбранный модуль из списка"
+
+#: ../ui/module-manager.glade.h:31
 msgid "Sword sys dir"
 msgstr "Системная папка Sword"
+
+#: ../ui/module-manager.glade.h:32
+#, fuzzy
+msgid "_Archive"
+msgstr "Архивировать"
+
+#: ../ui/module-manager.glade.h:33
+#, fuzzy
+msgid "_Delete Index"
+msgstr "Удалить индекс"
+
+#: ../ui/module-manager.glade.h:34
+#, fuzzy
+msgid "_Index"
+msgstr "Индексировать"
+
+#: ../ui/module-manager.glade.h:35
+#, fuzzy
+msgid "_Install"
+msgstr "Установить"
+
+#: ../ui/module-manager.glade.h:36
+#, fuzzy
+msgid "_Load Standard"
+msgstr "Загрузить Стандарт"
+
+#: ../ui/module-manager.glade.h:37
+#, fuzzy
+msgid "_View Intro"
+msgstr "_Вид"
 
 #: ../ui/navbar_versekey.glade.h:1
 msgid "1"
@@ -2441,9 +2494,9 @@ msgstr "<b>Общие</b>"
 msgid "<b>Main Window Modules</b>"
 msgstr "<b>Окно Модуля</b>"
 
-#: ../ui/prefs.glade.h:13
-msgid "<b>Parallel View</b>"
-msgstr "<b>Параллельный Вид</b>"
+#: ../ui/prefs.glade.h:13 ../ui/search-dialog.glade.h:5
+msgid "<b>Modules</b>"
+msgstr "<b>Модули</b>"
 
 #: ../ui/prefs.glade.h:14
 msgid "<b>Show</b>"
@@ -2461,279 +2514,282 @@ msgstr "<b>Пака для StudyPad по-умолчанию</b>"
 msgid "<b>Tabs</b>"
 msgstr "<b>Вкладки</b>"
 
-#: ../ui/prefs.glade.h:18
+#: ../ui/prefs.glade.h:18 ../ui/search-dialog.glade.h:15
+msgid "Add Modules"
+msgstr "Добавить Модули"
+
+#: ../ui/prefs.glade.h:19
 msgid "Apply high-contrast highlight to current verse"
 msgstr "Применять высоко-контрастную цветовую схему для текущего стиха"
 
-#: ../ui/prefs.glade.h:19
-msgid ""
-"Automatically resize commentary, book, and dictionary image content to fit "
-"subwindow"
+#: ../ui/prefs.glade.h:20
+#, fuzzy
+msgid "Automatically resize image content to fit the pane"
 msgstr ""
 "Автоматически подгонять размер изображений в комментариях, книгах, и "
 "словарях к  размеру под-окна"
 
-#: ../ui/prefs.glade.h:20
+#: ../ui/prefs.glade.h:21
 msgid "Background"
 msgstr "Фон"
 
-#: ../ui/prefs.glade.h:21
+#: ../ui/prefs.glade.h:22
 msgid "Base font size"
 msgstr "Базовый размер шрифта"
 
-#: ../ui/prefs.glade.h:22
+#: ../ui/prefs.glade.h:23
 msgid "Bible Texts"
 msgstr "Текст Библии"
 
-#: ../ui/prefs.glade.h:23
+#: ../ui/prefs.glade.h:24
 msgid "Bible Texts Checkbox"
 msgstr "Флажок Текста Библии"
 
-#: ../ui/prefs.glade.h:24
+#: ../ui/prefs.glade.h:25
 msgid "Biblical Text"
 msgstr "Библейский Текст"
 
-#: ../ui/prefs.glade.h:26
+#: ../ui/prefs.glade.h:27
 msgid "Change Biblical Text Combo"
 msgstr "Изменить Комбо Библейского Текста"
 
-#: ../ui/prefs.glade.h:27
+#: ../ui/prefs.glade.h:28
 msgid "Change Book Combo"
 msgstr "Изменить Комбо Книги"
 
-#: ../ui/prefs.glade.h:28
+#: ../ui/prefs.glade.h:29
 msgid "Change Commentary Combo"
 msgstr "Изменить Комбо Комментария"
 
-#: ../ui/prefs.glade.h:29
+#: ../ui/prefs.glade.h:30
 msgid "Change Default Dictionary Combo"
 msgstr "Изменить Комбо Словаря По-умолчанию"
 
-#: ../ui/prefs.glade.h:30
+#: ../ui/prefs.glade.h:31
 msgid "Change Dictionary Combo"
 msgstr "Изменить Комбо Словаря"
 
-#: ../ui/prefs.glade.h:31
+#: ../ui/prefs.glade.h:32
 msgid "Change Personal Notes Combo"
 msgstr "Изменить Комбо Личных Комментариев"
 
-#: ../ui/prefs.glade.h:32
+#: ../ui/prefs.glade.h:33
 msgid "Choose to enable Prayer lists "
 msgstr "Выберите чтобы показать Молитвенные Списки на Боковой Панели "
 
-#: ../ui/prefs.glade.h:34
+#: ../ui/prefs.glade.h:34 ../ui/search-dialog.glade.h:21
+msgid "Clear Modules from List Button"
+msgstr "Кнопка Очистки Модулей из Списка"
+
+#: ../ui/prefs.glade.h:35 ../ui/search-dialog.glade.h:22
+msgid "Clear all modules from the list"
+msgstr "Очистить все модули из списка"
+
+#: ../ui/prefs.glade.h:37
 msgid "Commentaries Checkbox"
 msgstr "Флажок Комментариев"
 
-#: ../ui/prefs.glade.h:36
+#: ../ui/prefs.glade.h:39
 msgid "Cover"
 msgstr "Обертка"
 
-#: ../ui/prefs.glade.h:37
+#: ../ui/prefs.glade.h:40
 msgid "Current Verse"
 msgstr "Текущий Стих"
 
-#: ../ui/prefs.glade.h:38
+#: ../ui/prefs.glade.h:41
 msgid "Daily Devotional"
 msgstr "Стих Дня"
 
-#: ../ui/prefs.glade.h:39
+#: ../ui/prefs.glade.h:42
 msgid "Daily Devotional Combo"
 msgstr "Комбо Стих Дня"
 
-#: ../ui/prefs.glade.h:40
+#: ../ui/prefs.glade.h:43
 msgid "Default Dictionary"
 msgstr "Словарь По-умолчанию"
 
-#: ../ui/prefs.glade.h:41
+#: ../ui/prefs.glade.h:44 ../ui/search-dialog.glade.h:39
+msgid "Delete Selected Module From List Button"
+msgstr "Кнопка Удаления Выбранного Модуля из Списка"
+
+#: ../ui/prefs.glade.h:45
 msgid "Dictionary"
 msgstr "Словарь"
 
-#: ../ui/prefs.glade.h:42
+#: ../ui/prefs.glade.h:46
 msgid "Dictionary/Lexicon"
 msgstr "Словарь/Лексикон"
 
-#: ../ui/prefs.glade.h:43
+#: ../ui/prefs.glade.h:47
 msgid "Dictionary/Lexicon Checkbox"
 msgstr "Флажок Словаря/Лексикона"
 
-#: ../ui/prefs.glade.h:44
+#: ../ui/prefs.glade.h:48
 msgid "Enable Prayer Lists"
 msgstr "Включить Молитвенные Списки"
 
-#: ../ui/prefs.glade.h:45
+#: ../ui/prefs.glade.h:49
 msgid "Enable Prayer Lists Checkbox"
 msgstr "Флажок Включения Молитвенных Списков"
 
-#: ../ui/prefs.glade.h:46
+#: ../ui/prefs.glade.h:50
 msgid "Font Colors"
 msgstr "Цвета Шрифтов"
 
-#: ../ui/prefs.glade.h:47
+#: ../ui/prefs.glade.h:51
 msgid "Font Misc"
 msgstr "Шрифт для Разного"
 
-#: ../ui/prefs.glade.h:48
+#: ../ui/prefs.glade.h:52
+msgid "Font preferences, per language"
+msgstr ""
+
+#: ../ui/prefs.glade.h:53
 msgid "Foreground"
 msgstr "Передний План"
 
-#: ../ui/prefs.glade.h:49
+#: ../ui/prefs.glade.h:54
 msgid "General Misc"
 msgstr "Общее Разное"
 
-#: ../ui/prefs.glade.h:50
+#: ../ui/prefs.glade.h:55
 msgid "Greek Lexicon"
 msgstr "Греческий Лексикон"
 
-#: ../ui/prefs.glade.h:51
+#: ../ui/prefs.glade.h:56
 msgid "Greek Lexicon Combo"
 msgstr "Комбо Греческого Лексикона"
 
-#: ../ui/prefs.glade.h:52
+#: ../ui/prefs.glade.h:57
 msgid "Hebrew Lexicon"
 msgstr "Еврейский Лексикон"
 
-#: ../ui/prefs.glade.h:53
+#: ../ui/prefs.glade.h:58
 msgid "Hebrew Lexicon Combo"
 msgstr "Комбо Еврейского Лексикона"
 
-#: ../ui/prefs.glade.h:54
+#: ../ui/prefs.glade.h:59
 msgid "Highlight Background"
 msgstr "Подсветить Фон"
 
-#: ../ui/prefs.glade.h:55
+#: ../ui/prefs.glade.h:60
 msgid "Highlight Foreground"
 msgstr "Подсветить Передний План"
 
-#: ../ui/prefs.glade.h:56
+#: ../ui/prefs.glade.h:61
 msgid "Highlight current verse"
 msgstr "Подсветить текущий стих"
 
-#: ../ui/prefs.glade.h:57
+#: ../ui/prefs.glade.h:62
 msgid "Highlight current verse check box"
 msgstr "Флажок подсветки текущего стиха"
 
-#: ../ui/prefs.glade.h:58
+#: ../ui/prefs.glade.h:63
+#, fuzzy
+msgid "Highlight user annotations"
+msgstr "Пользователькое Примечание"
+
+#: ../ui/prefs.glade.h:64
+#, fuzzy
+msgid "Highlight user annotations check box"
+msgstr "Флажок подсветки текущего стиха"
+
+#: ../ui/prefs.glade.h:65
+#, fuzzy
+msgid "Language Font Combo"
+msgstr "Изменить Комбо Книги"
+
+#: ../ui/prefs.glade.h:66
 msgid "Links"
 msgstr "Ссылки"
 
-#: ../ui/prefs.glade.h:59
+#: ../ui/prefs.glade.h:67 ../ui/search-dialog.glade.h:61
+msgid "Module Selection"
+msgstr "Выбор Модуля"
+
+#: ../ui/prefs.glade.h:68
 msgid "Modules Main"
 msgstr "Модули Главное"
 
-#: ../ui/prefs.glade.h:60
+#: ../ui/prefs.glade.h:69
 msgid "Modules Misc"
 msgstr "Модули Разное"
 
-#: ../ui/prefs.glade.h:61
+#: ../ui/prefs.glade.h:70
 msgid "Modules Parallel"
 msgstr "Модули Параллельное"
 
-#: ../ui/prefs.glade.h:62
-msgid "Parallel 1"
-msgstr "Параллель 1"
-
-#: ../ui/prefs.glade.h:63
-msgid "Parallel 1 Combo"
-msgstr "Параллель 1 Комбо"
-
-#: ../ui/prefs.glade.h:64
-msgid "Parallel 2"
-msgstr "Параллель 2"
-
-#: ../ui/prefs.glade.h:65
-msgid "Parallel 2 Combo"
-msgstr "Параллель 2 Комбо"
-
-#: ../ui/prefs.glade.h:66
-msgid "Parallel 3"
-msgstr "Параллель 3"
-
-#: ../ui/prefs.glade.h:67
-msgid "Parallel 3 Combo"
-msgstr "Параллель 3 Комбо"
-
-#: ../ui/prefs.glade.h:68
-msgid "Parallel 4"
-msgstr "Параллель 4"
-
-#: ../ui/prefs.glade.h:69
-msgid "Parallel 4 Combo"
-msgstr "Параллель 4 Комбо"
-
-#: ../ui/prefs.glade.h:70
-msgid "Parallel 5"
-msgstr "Параллель 5"
-
-#: ../ui/prefs.glade.h:71
-msgid "Parallel 5 Combo"
-msgstr "Параллель 5 Комбо"
+#: ../ui/prefs.glade.h:71 ../ui/search-dialog.glade.h:70
+msgid "Open Selection Dialog Button"
+msgstr "Кнопка Открытия Диалога Выбора"
 
 #: ../ui/prefs.glade.h:72
+#, fuzzy
+msgid "Open a dialog to select modules"
+msgstr "Открыть диалог выбора модулей, чтобы добавить из в список"
+
+#: ../ui/prefs.glade.h:73
 msgid "Parallel View in a tab"
 msgstr "Параллельный Вид во вкладке"
 
-#: ../ui/prefs.glade.h:73
+#: ../ui/prefs.glade.h:74
 msgid "Personal Notes"
 msgstr "Личные Заметки"
 
-#: ../ui/prefs.glade.h:76
+#: ../ui/prefs.glade.h:77
 msgid "Previewer Checkbox"
 msgstr "Флажок Предпросмотра"
 
-#: ../ui/prefs.glade.h:77
+#: ../ui/prefs.glade.h:78 ../ui/search-dialog.glade.h:78
+msgid "Remove the selected module from the list"
+msgstr "Удалить выбранный модуль из списка"
+
+#: ../ui/prefs.glade.h:79
 msgid "Resize images"
 msgstr "Изменять Размер Изображений"
 
-#: ../ui/prefs.glade.h:78
+#: ../ui/prefs.glade.h:80
 msgid "Resize images checkbox"
 msgstr "Флажок Изменения Размера Изображений"
 
-#: ../ui/prefs.glade.h:79
+#: ../ui/prefs.glade.h:81
 msgid "Scroll to Previous/Next Chapter"
 msgstr "Листать к Предыдущей/Следующие Главе"
 
-#: ../ui/prefs.glade.h:80
+#: ../ui/prefs.glade.h:82
 msgid "Scroll to Previous/Next Chapter Checkbox"
 msgstr "Флажок Листания к Предыдущей/Следующие Главе"
 
-#: ../ui/prefs.glade.h:81
+#: ../ui/prefs.glade.h:83
 msgid "Select A Directory"
 msgstr "Выбрать Директорию"
 
-#: ../ui/prefs.glade.h:82
+#: ../ui/prefs.glade.h:84
 msgid "Show Daily Devotion at start up"
 msgstr "Показывать Стих Дня при загрузке"
 
-#: ../ui/prefs.glade.h:83
+#: ../ui/prefs.glade.h:85
 msgid "Show splash screen at start up"
 msgstr "Показывать стартовый экран при загрузке"
 
-#: ../ui/prefs.glade.h:84
+#: ../ui/prefs.glade.h:86
 msgid "Special Locale (requires restart)"
 msgstr "Настройка языка (перезапуск)"
 
-#: ../ui/prefs.glade.h:85
+#: ../ui/prefs.glade.h:87
 msgid "Special Locale Combo"
 msgstr "Комбо Специальной Локали"
 
-#: ../ui/prefs.glade.h:86
+#: ../ui/prefs.glade.h:88
 msgid "StudyPad default directory combo"
 msgstr "Комбо директории StudyPad по-умолчанию"
 
-#: ../ui/prefs.glade.h:88
+#: ../ui/prefs.glade.h:90
 msgid "Use Bible Text scroll bar to scroll to previous or next chapter"
 msgstr ""
 "Использовать скрол-бар Текста Библии чтобы листать к предыдущей или "
 "следующей главе"
-
-#: ../ui/prefs.glade.h:89
-msgid "Use Verse Per Line"
-msgstr "Стих на Строку"
-
-#: ../ui/prefs.glade.h:90
-msgid "Use Verse Per Line Checkbox"
-msgstr "Флажок Использования Стих на Строку"
 
 #: ../ui/prefs.glade.h:91
 msgid "Use default Dictionary"
@@ -2744,18 +2800,23 @@ msgid "Use default Dictionary Checkbox"
 msgstr "Флажок Использования Словаря по-умолчанию"
 
 #: ../ui/prefs.glade.h:93
+#, fuzzy
+msgid "Use inverted highlight on user-annotated verses"
+msgstr "Применять высоко-контрастную цветовую схему для текущего стиха"
+
+#: ../ui/prefs.glade.h:94
 msgid "Use tabbed browsing"
 msgstr "Использовать Просмотр по вкладкам"
 
-#: ../ui/prefs.glade.h:94
+#: ../ui/prefs.glade.h:95
 msgid "Use tabbed browsing Checkbox"
 msgstr "Флажок Использования Просмотра по вкладкам"
 
-#: ../ui/prefs.glade.h:95
+#: ../ui/prefs.glade.h:96
 msgid "Verse Number"
 msgstr "Номер Стиха"
 
-#: ../ui/prefs.glade.h:96
+#: ../ui/prefs.glade.h:97
 msgid "Verse number size"
 msgstr "Размер номеров стиха"
 
@@ -2774,10 +2835,6 @@ msgstr "<b>Имя Списка</b>"
 #: ../ui/search-dialog.glade.h:4
 msgid "<b>Module Lists</b>"
 msgstr "<b>Список Модулей</b>"
-
-#: ../ui/search-dialog.glade.h:5
-msgid "<b>Modules</b>"
-msgstr "<b>Модули</b>"
 
 #: ../ui/search-dialog.glade.h:6
 msgid "<b>Options</b>"
@@ -2815,10 +2872,6 @@ msgstr "<b>Результаты Поиска</b>"
 msgid "<b>Search Type</b>"
 msgstr "<b>Тип Поиска</b>"
 
-#: ../ui/search-dialog.glade.h:15
-msgid "Add Modules"
-msgstr "Добавить Модули"
-
 #: ../ui/search-dialog.glade.h:16
 msgid "Advanced Search"
 msgstr "Продвинутый Поиск"
@@ -2838,14 +2891,6 @@ msgstr "Флажок Свойств"
 #: ../ui/search-dialog.glade.h:20
 msgid "Clear Custom Module List Button"
 msgstr "Очистить Произвольный Список Модулей"
-
-#: ../ui/search-dialog.glade.h:21
-msgid "Clear Modules from List Button"
-msgstr "Кнопка Очистки Модулей из Списка"
-
-#: ../ui/search-dialog.glade.h:22
-msgid "Clear all modules from the list"
-msgstr "Очистить все модули из списка"
 
 #: ../ui/search-dialog.glade.h:23
 msgid "Clear lists for new search"
@@ -2910,10 +2955,6 @@ msgstr "Переключатель произвольного диапазона
 #: ../ui/search-dialog.glade.h:38
 msgid "Delete Range Button"
 msgstr "Кнопка Удаления Диапазона"
-
-#: ../ui/search-dialog.glade.h:39
-msgid "Delete Selected Module From List Button"
-msgstr "Кнопка Удаления Выбранного Модуля из Списка"
 
 #: ../ui/search-dialog.glade.h:40
 msgid "Delete selected range"
@@ -2984,10 +3025,6 @@ msgstr "Использовать выбранные аттрибуты с вкл
 msgid "Match case checkbox"
 msgstr "Флажок Совпадения Регистра"
 
-#: ../ui/search-dialog.glade.h:61
-msgid "Module Selection"
-msgstr "Выбор Модуля"
-
 #: ../ui/search-dialog.glade.h:62
 msgid "Module list"
 msgstr "Список Модулей"
@@ -3012,10 +3049,6 @@ msgstr "Кнопка Нового Произвольного Списка Мод
 msgid "New Range Button"
 msgstr "Кнопка Нового Диапазона"
 
-#: ../ui/search-dialog.glade.h:70
-msgid "Open Selection Dialog Button"
-msgstr "Кнопка Открытия Диалога Выбора"
-
 #: ../ui/search-dialog.glade.h:71
 msgid "Open a dialog to select modules to add to the list"
 msgstr "Открыть диалог выбора модулей, чтобы добавить из в список"
@@ -3039,10 +3072,6 @@ msgstr "Пункт Имени Диапазона"
 #: ../ui/search-dialog.glade.h:77
 msgid "Regular expression radiobutton"
 msgstr "Переключатель Регулярных Выражений"
-
-#: ../ui/search-dialog.glade.h:78
-msgid "Remove the selected module from the list"
-msgstr "Удалить выбранный модуль из списка"
 
 #: ../ui/search-dialog.glade.h:79
 msgid "Result Summary Table"
@@ -3253,32 +3282,33 @@ msgid "Create a new subject prayer list"
 msgstr "Создать новый предметный молитвенный список"
 
 #: ../ui/xi-menus.glade.h:24
-msgid "D_ouble-Space Text"
-msgstr "Двойной интервал для текста"
-
-#: ../ui/xi-menus.glade.h:25
 msgid "Daily"
 msgstr "Ежедневно"
 
-#: ../ui/xi-menus.glade.h:26
+#: ../ui/xi-menus.glade.h:25
 msgid "Delete Item"
 msgstr "Удалить Пункт"
 
-#: ../ui/xi-menus.glade.h:27
+#: ../ui/xi-menus.glade.h:26
 msgid "Delete item"
 msgstr "Удалить пункт"
 
-#: ../ui/xi-menus.glade.h:28
+#: ../ui/xi-menus.glade.h:27
 msgid "Dictionar_y"
 msgstr "_Словарь"
 
-#: ../ui/xi-menus.glade.h:29
+#: ../ui/xi-menus.glade.h:28
 msgid "Display Book Heading"
 msgstr "Показывать Вступление к Книгам"
 
-#: ../ui/xi-menus.glade.h:30
+#: ../ui/xi-menus.glade.h:29
 msgid "Display Chapter Heading"
 msgstr "Показывать Вступление к Главам"
+
+#: ../ui/xi-menus.glade.h:30
+#, fuzzy
+msgid "Doublespace"
+msgstr "Двойной интервал для текста"
 
 #: ../ui/xi-menus.glade.h:31
 msgid "Dump Pers.Comm."
@@ -3313,8 +3343,9 @@ msgid "Image Content"
 msgstr "Содержимое Изображения"
 
 #: ../ui/xi-menus.glade.h:46
-msgid "Import Bibletime Bookmarks"
-msgstr "Импортировать Закладки из Bibletime"
+#, fuzzy
+msgid "Import Bookmarks"
+msgstr "Вставить Закладку"
 
 #: ../ui/xi-menus.glade.h:47
 msgid "Insert Bookmark"
@@ -3329,7 +3360,8 @@ msgid "L_ink Tabs"
 msgstr "С_вязать Вкладки"
 
 #: ../ui/xi-menus.glade.h:51
-msgid "Load Bookmarks from Bibletime"
+#, fuzzy
+msgid "Load other bookmarks file (default: from BibleTime)"
 msgstr "Загрузить Закладки из Bibletime"
 
 #: ../ui/xi-menus.glade.h:52
@@ -3393,9 +3425,8 @@ msgid "Outlined"
 msgstr "Тематический"
 
 #: ../ui/xi-menus.glade.h:70
-#, fuzzy
 msgid "Preview _Daily Devotion"
-msgstr "Стих Д_ня"
+msgstr "Предварительноый просмотр Daily Devotion"
 
 #: ../ui/xi-menus.glade.h:72
 msgid "Read Selection Aloud"
@@ -3418,120 +3449,122 @@ msgid "Respect Font Faces"
 msgstr "Сохранять Начертания Шрифтов"
 
 #: ../ui/xi-menus.glade.h:78
-msgid "Restore Folder"
-msgstr "Восстановить Папку"
-
-#: ../ui/xi-menus.glade.h:79
-msgid "Restore saved folder"
-msgstr "Восстановить сохраненную папку"
-
-#: ../ui/xi-menus.glade.h:80
 msgid "Save list as a series of bookmarks"
 msgstr "Сохранить лист как серию закладок"
 
-#: ../ui/xi-menus.glade.h:81
+#: ../ui/xi-menus.glade.h:79
 msgid "Save list as a single bookmark"
 msgstr "Сохранить лист как одну закладку"
 
-#: ../ui/xi-menus.glade.h:82
+#: ../ui/xi-menus.glade.h:80
 msgid "Save these results as a series of bookmarks in their own folder"
 msgstr "Сохранить эти результаты как серию закладок в их собственной папке"
 
-#: ../ui/xi-menus.glade.h:83
+#: ../ui/xi-menus.glade.h:81
 msgid "Save these results as a single bookmark"
 msgstr "Сохранить эти результаты как одну закладку"
 
-#: ../ui/xi-menus.glade.h:84
+#: ../ui/xi-menus.glade.h:82
 msgid "Scripture Cross-references"
 msgstr "Параллельные места писания"
 
-#: ../ui/xi-menus.glade.h:86
+#: ../ui/xi-menus.glade.h:84
 msgid "Show Parallel View in a _Tab"
 msgstr "Параллельный Просмотр во _Вкладке"
 
-#: ../ui/xi-menus.glade.h:87
+#: ../ui/xi-menus.glade.h:85
 msgid "Show Previe_wer in the Sidebar"
 msgstr "Предпросм_отр в Боковой Панели"
 
-#: ../ui/xi-menus.glade.h:88
+#: ../ui/xi-menus.glade.h:86
 msgid "Show Verse _Numbers"
 msgstr "Показать _Номера Стихов"
 
-#: ../ui/xi-menus.glade.h:89
+#: ../ui/xi-menus.glade.h:87
 msgid "Simple"
 msgstr "Простой"
 
-#: ../ui/xi-menus.glade.h:91
+#: ../ui/xi-menus.glade.h:89
 msgid "Subject"
 msgstr "Предмет"
 
-#: ../ui/xi-menus.glade.h:93
+#: ../ui/xi-menus.glade.h:91
 msgid "Unlock This Module"
 msgstr "Разблокировать Этот Модуль"
 
-#: ../ui/xi-menus.glade.h:94
+#: ../ui/xi-menus.glade.h:92
 msgid "Use Current Dictionary"
 msgstr "Использовать Текущий Словарь"
 
-#: ../ui/xi-menus.glade.h:95
+#: ../ui/xi-menus.glade.h:93
 msgid "Use module manager to install and remove Sword modules"
 msgstr "Использовать менеджер модулей для установки и удаления модулей Sword"
 
-#: ../ui/xi-menus.glade.h:96
+#: ../ui/xi-menus.glade.h:94
 msgid "Variants"
 msgstr "Варианты"
 
-#: ../ui/xi-menus.glade.h:98
+#: ../ui/xi-menus.glade.h:95
+#, fuzzy
+msgid "Verse Per Line"
+msgstr "Стихов на С_троку"
+
+#: ../ui/xi-menus.glade.h:97
 msgid "_About The SWORD Project"
 msgstr "О П_роекту SWORD"
 
-#: ../ui/xi-menus.glade.h:99
+#: ../ui/xi-menus.glade.h:98
 msgid "_Advanced Search"
 msgstr "П_родвинутый Поиск"
 
-#: ../ui/xi-menus.glade.h:100
+#: ../ui/xi-menus.glade.h:99
 msgid "_Attach/Detach Sidebar"
 msgstr "Плавающая Боковая Панель"
 
-#: ../ui/xi-menus.glade.h:101
+#: ../ui/xi-menus.glade.h:100
 msgid "_Bible"
 msgstr "_Библия"
 
-#: ../ui/xi-menus.glade.h:102
+#: ../ui/xi-menus.glade.h:101
 msgid "_Commentary/Book"
 msgstr "_Комментарий / Книга"
 
-#: ../ui/xi-menus.glade.h:103
+#: ../ui/xi-menus.glade.h:102
 msgid "_Contents"
 msgstr "_Содержание"
 
-#: ../ui/xi-menus.glade.h:104
+#: ../ui/xi-menus.glade.h:103
 msgid "_Edit"
 msgstr "_Инструменты"
 
-#: ../ui/xi-menus.glade.h:105
+#: ../ui/xi-menus.glade.h:104
 msgid "_Edit Item"
 msgstr "_Редактировать"
 
-#: ../ui/xi-menus.glade.h:107
+#: ../ui/xi-menus.glade.h:106
 msgid "_Help"
 msgstr "_Помощь"
 
-#: ../ui/xi-menus.glade.h:108
+#: ../ui/xi-menus.glade.h:107
 msgid "_Highlight Current Verse"
 msgstr "Подс_ветить Текущий Стих"
 
-#: ../ui/xi-menus.glade.h:109
+#: ../ui/xi-menus.glade.h:108
 msgid "_Live Chat"
 msgstr "_Живой Чат"
 
-#: ../ui/xi-menus.glade.h:110
+#: ../ui/xi-menus.glade.h:109
 msgid "_Mailing List"
 msgstr "Список _Рассылки"
 
-#: ../ui/xi-menus.glade.h:111
+#: ../ui/xi-menus.glade.h:110
 msgid "_Module Manager"
 msgstr "_Менеджер Модулей"
+
+#: ../ui/xi-menus.glade.h:111
+#, fuzzy
+msgid "_New Prayerlist/Journal"
+msgstr "Молитвенные Списки"
 
 #: ../ui/xi-menus.glade.h:112
 msgid "_Open Session"
@@ -3565,38 +3598,29 @@ msgstr "_Поиск"
 msgid "_Show/Hide Attached Sidebar"
 msgstr "_Отображение Боковой Панели"
 
-#: ../ui/xi-menus.glade.h:120
-msgid "_Verse Per Line"
-msgstr "Стихов на С_троку"
-
 #: ../ui/xi-export-bookmarks.glade.h:1
-#, fuzzy
 msgid "<b>Export to:</b>"
-msgstr "<b>Экспорт</b>"
+msgstr ""
 
 #: ../ui/xi-export-bookmarks.glade.h:2
-#, fuzzy
 msgid "Export Bookmark Folder"
-msgstr "Восстановить Папку Закладок"
+msgstr ""
 
 #: ../ui/xi-export-bookmarks.glade.h:3
 msgid "Html"
 msgstr ""
 
 #: ../ui/xi-export-bookmarks.glade.h:4
-#, fuzzy
 msgid "Include Bible text"
-msgstr "Текст Библии"
+msgstr ""
 
 #: ../ui/xi-export-bookmarks.glade.h:5
-#, fuzzy
 msgid "Plain text"
-msgstr "Простой Текст"
+msgstr ""
 
 #: ../ui/xi-export-bookmarks.glade.h:6
-#, fuzzy
 msgid "Xiphos bookmarks"
-msgstr "Закладки"
+msgstr ""
 
 #: ../ui/xi-export-bookmarks.glade.h:7
 msgid "gtk-cancel"
@@ -3614,6 +3638,115 @@ msgstr "Изучать Библию"
 msgid "Xiphos Bible Guide"
 msgstr "Путеводитель по Библии Xiphos"
 
+#~ msgid "Cipher Key?"
+#~ msgstr "Шифровой Ключ?"
+
+#~ msgid "Copy"
+#~ msgstr "Копия"
+
+#~ msgid "Change parallel 1"
+#~ msgstr "Изменить Параллель 1"
+
+#~ msgid "Change parallel 2"
+#~ msgstr "Изменить Параллель 2"
+
+#~ msgid "Change parallel 3"
+#~ msgstr "Изменить Параллель 3"
+
+#~ msgid "Change parallel 4"
+#~ msgstr "Изменить Параллель 4"
+
+#~ msgid "Change parallel 5"
+#~ msgstr "Изменить Параллель 5"
+
+#~ msgid "Sizes"
+#~ msgstr "Размеры"
+
+#~ msgid ""
+#~ "Welcome to Xiphos.\n"
+#~ "\n"
+#~ "There are no Bible modules installed. In order to initialize, Xiphos "
+#~ "needs you to install at least one Bible.\n"
+#~ "\n"
+#~ "With your permission, Xiphos will invoke the Module Manager so that you "
+#~ "may install from Crosswire:\n"
+#~ "1. Configure remote install.\n"
+#~ "2. Connect.\n"
+#~ "3. Select a Bible text of your language preference.\n"
+#~ "4. Click `install'.\n"
+#~ "Close the Module Manager when you are done.\n"
+#~ "\n"
+#~ "Warning: If you live in a persecuted country, use with care.\n"
+#~ "\n"
+#~ "May Xiphos invoke the Module Manager so that you may install a Bible?"
+#~ msgstr ""
+#~ "Добро пожаловать в Xiphos.\n"
+#~ "\n"
+#~ "Ни одной Библии не установлено. Для начала, Xiphos нужен хотябы один "
+#~ "модуль Библии.\n"
+#~ "\n"
+#~ "С вашего разрешения, Xiphos запустит Менеджер Модулей и вы сможете "
+#~ "установливать модули из репозитория Crosswire:\n"
+#~ "1. Настройте параметры Источников.\n"
+#~ "2. Подключитесь.\n"
+#~ "3. Выберите подходяций Библейский текст.\n"
+#~ "4. Нажмите `Установить'.\n"
+#~ "Закройте Менеджер Модуль когда вы закончите.\n"
+#~ "\n"
+#~ "Предупрежение: Используйте с осторожностью в странах преследующих за "
+#~ "Слово Божие.\n"
+#~ "\n"
+#~ "Можно ли запустить Менеджер Модулей, для того чтобы вы могли "
+#~ "устанавливать модули?"
+
+#~ msgid "<b>Parallel View</b>"
+#~ msgstr "<b>Параллельный Вид</b>"
+
+#~ msgid "Parallel 1"
+#~ msgstr "Параллель 1"
+
+#~ msgid "Parallel 1 Combo"
+#~ msgstr "Параллель 1 Комбо"
+
+#~ msgid "Parallel 2"
+#~ msgstr "Параллель 2"
+
+#~ msgid "Parallel 2 Combo"
+#~ msgstr "Параллель 2 Комбо"
+
+#~ msgid "Parallel 3"
+#~ msgstr "Параллель 3"
+
+#~ msgid "Parallel 3 Combo"
+#~ msgstr "Параллель 3 Комбо"
+
+#~ msgid "Parallel 4"
+#~ msgstr "Параллель 4"
+
+#~ msgid "Parallel 4 Combo"
+#~ msgstr "Параллель 4 Комбо"
+
+#~ msgid "Parallel 5"
+#~ msgstr "Параллель 5"
+
+#~ msgid "Parallel 5 Combo"
+#~ msgstr "Параллель 5 Комбо"
+
+#~ msgid "Use Verse Per Line"
+#~ msgstr "Стих на Строку"
+
+#~ msgid "Use Verse Per Line Checkbox"
+#~ msgstr "Флажок Использования Стих на Строку"
+
+#~ msgid "Import Bibletime Bookmarks"
+#~ msgstr "Импортировать Закладки из Bibletime"
+
+#~ msgid "Restore Folder"
+#~ msgstr "Восстановить Папку"
+
+#~ msgid "Restore saved folder"
+#~ msgstr "Восстановить сохраненную папку"
+
 #~ msgid "About the SWORD Project"
 #~ msgstr "О Проекте SWORD"
 
@@ -3622,9 +3755,6 @@ msgstr "Путеводитель по Библии Xiphos"
 
 #~ msgid "Books can be downloaded from the SWORD Project"
 #~ msgstr "Модули могут быть загружены с сайта:"
-
-#~ msgid "Open the file in Studypad"
-#~ msgstr "Открыть файл в StudyPad"
 
 #~ msgid "Xiphos could not execute archiver"
 #~ msgstr "Xiphos не может выполнить архивацию"
@@ -3687,6 +3817,9 @@ msgstr "Путеводитель по Библии Xiphos"
 
 #~ msgid "H_istory/C_lear"
 #~ msgstr "И_стория/О_чистить"
+
+#~ msgid "Open the file in Studypad"
+#~ msgstr "Открыть файл в StudyPad"
 
 #~ msgid "Remove - Restore"
 #~ msgstr "Удалить - Восстановить"
