@@ -806,8 +806,8 @@ CacheHeader(ModuleCache::CacheVerse& cVerse,
 		CleanupContent(text, ops, mod.Name());
 
 		cVerse.AppendHeader(text);
-		g_free((gchar *)text);
-		// g_free(preverse2); // does RenderText's result need free()?
+		g_free(text);
+		// g_free((gchar *)preverse2);
 		g_free((gchar *)preverse);
 		++x;
 		sprintf(heading, "%d", x);
