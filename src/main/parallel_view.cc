@@ -583,6 +583,29 @@ void main_check_parallel_modules(void)
 }
 
 
+void get_heading(SWBuf &text, BackEnd *p, gint modidx)
+{
+	const gchar *preverse, *preverse2, *buf;
+	gchar heading[8];
+
+	int x = 0;
+	sprintf(heading, "%d", x);
+	while ((preverse = p->get_entry_attribute("Heading", "Preverse",
+						  heading)) != NULL) {
+		preverse2 = p->render_this_text(
+			       settings.parallel_list[modidx], preverse);
+		buf = g_strdup_printf("<br><b>%s</b><br><br>", preverse2);
+
+		text += buf;
+
+		g_free((gchar *)preverse2); 
+		g_free((gchar *)preverse);
+		g_free((gchar *)buf);
+		++x;
+		sprintf(heading, "%d", x);
+	}
+}
+
 #ifdef USE_GTKMOZEMBED
 /******************************************************************************
  * Name
@@ -609,6 +632,7 @@ void main_update_parallel_page(void)
 	gboolean is_rtol = FALSE;
 	GString *data;
 	MOD_FONT *mf;
+	SWBuf text;
 
 	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.html_parallel))) return ;
 	GeckoHtml *html = GECKO_HTML(widgets.html_parallel);
@@ -668,6 +692,11 @@ void main_update_parallel_page(void)
 			if (is_rtol)
 				g_string_append(data, "<br><div align=right>");
 
+			backend_p->set_module_key(settings.parallel_list[modidx], settings.cvparallel);
+			text = "";
+			get_heading(text, backend_p, modidx);
+			g_string_append(data, text.c_str());
+
 			utf8str = backend_p->get_render_text(mod_name, settings.currentverse);
 			if (utf8str) {
 				g_string_append(data, utf8str);
@@ -716,6 +745,7 @@ void main_update_parallel_page(void)
 	gboolean was_editable;
 	gboolean is_rtol = FALSE;
 	MOD_FONT *mf;
+	SWBuf text;
 
 	settings.cvparallel = settings.currentverse;
 
@@ -780,6 +810,11 @@ void main_update_parallel_page(void)
 					       buf, strlen(buf));
 			}
 
+			backend_p->set_module_key(settings.parallel_list[modidx], settings.cvparallel);
+			text = "";
+			get_heading(text, backend_p, modidx);
+			gtk_html_write(GTK_HTML(html), htmlstream, text.c_str(), strlen(text.c_str()));
+
 			utf8str = backend_p->get_render_text(mod_name, settings.currentverse);
 			if (utf8str) {
 				gtk_html_write(GTK_HTML(html), htmlstream, utf8str, strlen(utf8str));
@@ -831,11 +866,9 @@ static void interpolate_parallel_display(SWBuf& text, gchar *key, gint parallel_
 		*tmpkey,
 		tmpbuf[256];
 	const gchar *bgColor;
-	const gchar *preverse, *preverse2, *buf;
 	gchar str[500];
 	gint cur_verse, cur_chapter, verse, modidx;
 	char *cur_book;
-	gchar heading[8];
 	MOD_FONT **mf;
 	gboolean *is_rtol, *is_module;
 
@@ -877,7 +910,6 @@ static void interpolate_parallel_display(SWBuf& text, gchar *key, gint parallel_
 
 		text += "<tr valign=\"top\">";
 
-		
 		// mark current verse properly.
 		if (verse == cur_verse)
 			textColor = settings.currentverse_color;
@@ -914,30 +946,11 @@ static void interpolate_parallel_display(SWBuf& text, gchar *key, gint parallel_
 				g_free(num);
 				text += str;
 
-				/**** heading stuff ****/
-				backend_p->set_module_key(settings.parallel_list[modidx], tmpkey);
-				int x = 0;
-				sprintf(heading, "%d", x);
-				while ((preverse = backend_p->get_entry_attribute("Heading", "Preverse",
-										heading)) != NULL) {
-					preverse2 = backend_p->render_this_text(
-							      settings.parallel_list[modidx], preverse);
-					buf = g_strdup_printf("<br><b>%s</b><br><br>", preverse2);
-					
-					text += buf;;						
-
-					g_free((gchar *)preverse2); 
-					g_free((gchar *)preverse);
-					g_free((gchar *)buf);
-					++x;
-					sprintf(heading, "%d", x);
-				}
-				/**** end heading stuff ****/
-
 				if (is_rtol[modidx])
 					text += "<br><div align=right>";
-				
-				
+
+				backend_p->set_module_key(settings.parallel_list[modidx], tmpkey);
+				get_heading(text, backend_p, modidx);
 
 				utf8str = backend_p->get_render_text(settings.parallel_list[modidx], tmpkey);
 				if (utf8str) {
