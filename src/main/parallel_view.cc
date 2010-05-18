@@ -831,9 +831,11 @@ static void interpolate_parallel_display(SWBuf& text, gchar *key, gint parallel_
 		*tmpkey,
 		tmpbuf[256];
 	const gchar *bgColor;
+	const gchar *preverse, *preverse2, *buf;
 	gchar str[500];
 	gint cur_verse, cur_chapter, verse, modidx;
 	char *cur_book;
+	gchar heading[8];
 	MOD_FONT **mf;
 	gboolean *is_rtol, *is_module;
 
@@ -875,6 +877,7 @@ static void interpolate_parallel_display(SWBuf& text, gchar *key, gint parallel_
 
 		text += "<tr valign=\"top\">";
 
+		
 		// mark current verse properly.
 		if (verse == cur_verse)
 			textColor = settings.currentverse_color;
@@ -888,7 +891,8 @@ static void interpolate_parallel_display(SWBuf& text, gchar *key, gint parallel_
 			bgColor = settings.bible_bg_color;
 
 		for (modidx = 0; modidx < parallel_count; modidx++) {
-			if (is_module[modidx]) {
+			if (is_module[modidx]) {		
+				
 				const gchar *newurl = main_url_encode(tmpkey);
 				gchar *num = main_format_number(verse);
 				snprintf(str, 499,
@@ -910,8 +914,30 @@ static void interpolate_parallel_display(SWBuf& text, gchar *key, gint parallel_
 				g_free(num);
 				text += str;
 
+				/**** heading stuff ****/
+				backend_p->set_module_key(settings.parallel_list[modidx], tmpkey);
+				int x = 0;
+				sprintf(heading, "%d", x);
+				while ((preverse = backend_p->get_entry_attribute("Heading", "Preverse",
+										heading)) != NULL) {
+					preverse2 = backend_p->render_this_text(
+							      settings.parallel_list[modidx], preverse);
+					buf = g_strdup_printf("<br><b>%s</b><br><br>", preverse2);
+					
+					text += buf;;						
+
+					g_free((gchar *)preverse2); 
+					g_free((gchar *)preverse);
+					g_free((gchar *)buf);
+					++x;
+					sprintf(heading, "%d", x);
+				}
+				/**** end heading stuff ****/
+
 				if (is_rtol[modidx])
 					text += "<br><div align=right>";
+				
+				
 
 				utf8str = backend_p->get_render_text(settings.parallel_list[modidx], tmpkey);
 				if (utf8str) {
