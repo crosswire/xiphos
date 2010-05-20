@@ -134,6 +134,7 @@ struct _settings {
                 showparatab,			/* show parallel view in a tab if true */
                 show_previewer_in_sidebar,	/* show previewer in sidebar if true */
 		showbookeditor,
+		xrefs_in_verse_list,		/* as opposed to old use of previewer */
 		displaySearchResults,		/* are we displaying search results in chap display */
 		useDefaultDict,
 		browsing,			/* true for tabbed browsing */

@@ -585,6 +585,7 @@ int xml_create_settings_file(char *path)
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"readaloud", (const xmlChar *)"0");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"versehighlight", (const xmlChar *)"0");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"annotatehighlight", (const xmlChar *)"1");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"xrefsinverselist", (const xmlChar *)"1");
 
 	section_node = xmlNewChild(root_node, NULL, (const xmlChar *)"modules", NULL);
 	tmp = get_list(GBS_LIST);
