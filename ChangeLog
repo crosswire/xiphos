@@ -1,3 +1,7 @@
+2010-05-20  karl <charcoal@users.sf.net>
+
+	* create option for bible xrefs to use verse list or previewer.
+
 2010-05-16  karl <charcoal@users.sf.net>
 
 	* make <img> work in gtkhtml3 parallel windows by connecting

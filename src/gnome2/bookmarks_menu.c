@@ -885,7 +885,6 @@ void gui_create_bookmark_menu(void)
 	gtk_widget_set_sensitive(menu.bibletime, TRUE);
 
 	gtk_widget_set_sensitive(menu.remove, TRUE);
-	gtk_widget_set_sensitive(menu.restore, TRUE);
 	//gtk_widget_hide(menu.remove);
 
     	/* connect signals and data */

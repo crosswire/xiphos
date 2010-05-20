@@ -424,8 +424,7 @@ static gint show_note(const gchar * module, const gchar * passage,
 	gchar *buf = NULL;
 	gchar *work_buf = NULL;
 	GString *str = g_string_new(NULL);
-	GList *tmp = NULL;
-	RESULTS *list_item;
+	GList *vlist = NULL, *chaser = NULL;
 
 	if (!in_url)
 		return 1;
@@ -487,50 +486,40 @@ static gint show_note(const gchar * module, const gchar * passage,
 		tmpbuf = backend->get_entry_attribute("Footnote",
 						      (gchar*)svalue,
 						      "refList");
-		list_of_verses = g_list_first(list_of_verses);
-		if (list_of_verses) {
-			GList *chaser = list_of_verses;
-			while (chaser) {
-				list_item = (RESULTS*)chaser->data;
-				g_free(list_item->module);
-				g_free(list_item->key);
-				g_free(list_item);
+		if (settings.xrefs_in_verse_list) {
+			main_display_verse_list_in_sidebar(settings.
+							   currentverse,
+							   (gchar*)module,
+							   tmpbuf);
+			g_free(tmpbuf);
+		} else {
+			vlist = chaser = backend->parse_verse_list(tmpbuf, settings.currentverse);
+			while (chaser != NULL) {
+				buf = g_strdup_printf(
+				    "<a href=\"sword://%s/%s\">"
+				    "<font color=\"%s\">%s,</font></a><br>",
+				    (gchar*)module,
+				    (const char *) chaser->data,
+				    settings.bible_text_color,
+				    (const char *) chaser->data);
+				str = g_string_append(str, buf);
+				g_free(buf);
+				g_free((char *)chaser->data);
 				chaser = g_list_next(chaser);
 			}
-			g_list_free(list_of_verses);
-			list_of_verses = NULL;
-		}
+			g_list_free(vlist);
+			g_free(tmpbuf);
 
-		tmp = backend->parse_verse_list(tmpbuf, settings.currentverse);
-		while (tmp != NULL) {
-			buf = g_strdup_printf(
-				"<a href=\"sword://%s/%s\">"
-				"<font color=\"%s\">%s,</font></a><br>",
-				(gchar*)module,
-				(const char *) tmp->data,
-				settings.bible_text_color,
-				(const char *) tmp->data);
-			str = g_string_append(str,buf);
-			if (buf) g_free(buf);
-			buf = NULL;
-			//++i;
-			g_free((char *) tmp->data);
-			tmp = g_list_next(tmp);
-		}
-		g_list_free(tmp);
+			buf = g_strdup_printf("<a href=\"sword://%s/%s\">"
+					      "<font color=\"%s\">%s%s</font></a><br>",
+					      (gchar*)module,
+					      settings.currentverse,
+					      settings.bible_text_color,
+					      _("Back to "),
+					      settings.currentverse);
+			str = g_string_append(str, buf);
+			g_free(buf);
 
-		buf = g_strdup_printf("<a href=\"sword://%s/%s\">"
-				      "<font color=\"%s\">%s%s</font></a><br>",
-				      (gchar*)module,
-				      settings.currentverse,
-				      settings.bible_text_color,
-				      _("Back to "),
-				      settings.currentverse);
-		str = g_string_append(str,buf);
-		if (buf) g_free(buf);
-
-		if (tmpbuf) g_free(tmpbuf);
-		if (str) {
 			main_information_viewer((gchar*)module,
 						str->str,
 						(gchar*)svalue,
@@ -545,7 +534,7 @@ static gint show_note(const gchar * module, const gchar * passage,
 		vkey->AutoNormalize(oldAutoNorm);
 	if (work_buf)
 		g_free(work_buf);
-	g_string_free(str, 1);
+	g_string_free(str, TRUE);
 	return 1;
 }
 
@@ -960,7 +949,9 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 
 			// need localized key, not the osisref that we've got.
 			ModMap::iterator it = backend->get_mgr()->Modules.find
-						((module && *module) ? module : "KJV");
+						((module && *module)
+						 ? module
+						 : settings.MainWindowModule);
 			SWModule *m = (*it).second;
 			VerseKey *vk = (VerseKey *)m->getKey();
 			*vk = passage;
@@ -980,9 +971,6 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 			module = g_strdup(m_url.getParameterValue("module"));
 			if (!strcmp(stype, "scripRef"))
 				show_ref(module, svalue, clicked);
-			if (!strcmp(stype, "swordURL")) {
-				// do nothing?
-			}
 			if (module) g_free(module);
 		}
 
