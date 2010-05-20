@@ -107,6 +107,7 @@ struct _preferences_check_buttons {
 	GtkWidget *show_verse_num;
 	GtkWidget *versehighlight;
 	GtkWidget *annotate_highlight;
+	GtkWidget *xrefs_in_verse_list;
 	GtkWidget *show_splash_screen;
 	GtkWidget *prayerlist;
 
@@ -956,8 +957,7 @@ on_checkbutton_versehighlight_toggled(GtkToggleButton * togglebutton,
  *   void on_checkbutton_annotate_highlight_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *
  * Description
- *
- *
+ *   En/disable yellow highlight on user's verse annotations.
  *
  * Return value
  *   void
@@ -970,10 +970,32 @@ on_checkbutton_annotate_highlight_toggled(GtkToggleButton * togglebutton,
 	xml_set_value("Xiphos", "misc", "annotatehighlight",
 		      (togglebutton->active ? "1" : "0"));
 	settings.annotate_highlight = togglebutton->active;
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-			       (widgets.annotate_highlight_item),
-			       settings.annotate_highlight);
 	main_display_bible(settings.MainWindowModule, settings.currentverse);
+}
+
+/******************************************************************************
+ * Name
+ *   on_checkbutton_xrefs_in_verse_list_toggled
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_checkbutton_xrefs_in_verse_list_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+ *
+ * Description
+ *   En/disable use of verse list for Bible cross-refs.
+ *
+ * Return value
+ *   void
+ */
+
+void
+on_checkbutton_xrefs_in_verse_list_toggled(GtkToggleButton * togglebutton,
+					   gpointer user_data)
+{
+	xml_set_value("Xiphos", "misc", "xrefsinverselist",
+		      (togglebutton->active ? "1" : "0"));
+	settings.xrefs_in_verse_list = togglebutton->active;
 }
 
 /******************************************************************************
@@ -1788,6 +1810,9 @@ setup_check_buttons(void)
 				     (check_button.annotate_highlight),
 				     settings.annotate_highlight);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+				     (check_button.xrefs_in_verse_list),
+				     settings.xrefs_in_verse_list);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.prayerlist),
 				     settings.prayerlist);
 
@@ -1819,6 +1844,8 @@ setup_check_buttons(void)
 			 G_CALLBACK(on_checkbutton_versehighlight_toggled), NULL);
 	g_signal_connect(check_button.annotate_highlight, "toggled",
 			 G_CALLBACK(on_checkbutton_annotate_highlight_toggled), NULL);
+	g_signal_connect(check_button.xrefs_in_verse_list, "toggled",
+			 G_CALLBACK(on_checkbutton_xrefs_in_verse_list_toggled), NULL);
 	g_signal_connect(check_button.prayerlist, "toggled",
 			 G_CALLBACK(on_checkbutton_prayerlist_toggled), NULL);
 	g_signal_connect(check_button.show_paratab, "toggled",
@@ -2478,6 +2505,7 @@ create_preferences_dialog(void)
 	check_button.use_imageresize = glade_xml_get_widget(gxml, "checkbutton_imageresize");
 	check_button.versehighlight = glade_xml_get_widget(gxml, "checkbutton_versehighlight");
 	check_button.annotate_highlight = glade_xml_get_widget(gxml, "checkbutton_annotate_highlight");
+	check_button.xrefs_in_verse_list = glade_xml_get_widget(gxml, "checkbutton_xrefs_in_verse_list");
 	check_button.prayerlist = glade_xml_get_widget(gxml, "checkbutton_prayerlist");
 
 	check_button.show_paratab = glade_xml_get_widget(gxml, "checkbutton_paratab");

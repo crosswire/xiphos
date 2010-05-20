@@ -1291,6 +1291,29 @@
 		      </child>
 
 		      <child>
+			<widget class="GtkCheckButton" id="checkbutton_xrefs_in_verse_list">
+			  <property name="visible">True</property>
+			  <property name="tooltip" translatable="yes">Use the verse list for Bible cross-references instead of the previewer</property>
+			  <property name="can_focus">True</property>
+			  <property name="label" translatable="yes">Cross-references in verse list</property>
+			  <property name="use_underline">True</property>
+			  <property name="relief">GTK_RELIEF_NORMAL</property>
+			  <property name="focus_on_click">True</property>
+			  <property name="active">True</property>
+			  <property name="inconsistent">False</property>
+			  <property name="draw_indicator">True</property>
+			  <accessibility>
+			    <atkproperty name="AtkObject::accessible_name" translatable="yes">Xrefs in verse list check box</atkproperty>
+			  </accessibility>
+			</widget>
+			<packing>
+			  <property name="padding">0</property>
+			  <property name="expand">False</property>
+			  <property name="fill">False</property>
+			</packing>
+		      </child>
+
+		      <child>
 			<widget class="GtkCheckButton" id="checkbutton_prayerlist">
 			  <property name="visible">True</property>
 			  <property name="tooltip" translatable="yes">Choose to enable Prayer lists </property>

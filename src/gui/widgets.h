@@ -116,6 +116,7 @@ extern "C" {
                 *readaloud_item,
                 *versehighlight_item,
                 *annotate_highlight_item,
+                *xrefs_in_verse_list_item,
                 *new_journal_item,
                 *button_dict_book,
 
