@@ -1443,6 +1443,7 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 {
 	GtkWidget * item;
 	GLOBAL_OPS *ops = NULL;
+	gint modtype = main_get_mod_type((gchar*) (is_dialog ? d->mod_name : mod_name));
 
 	if (is_dialog)
 		ops = main_new_globals((gchar*) mod_name, 1);
@@ -1453,7 +1454,7 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
     	item = glade_xml_get_widget (gxml, "verse_per_line");
     	gtk_widget_hide (item);
 
-	if (mod_name && (main_get_mod_type((gchar*)mod_name) == TEXT_TYPE)) {
+	if (mod_name && (modtype == TEXT_TYPE)) {
 	    	gtk_widget_show (item);
 		GTK_CHECK_MENU_ITEM (item)->active = settings.versestyle;
 	}
@@ -1583,7 +1584,7 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
     	item = glade_xml_get_widget (gxml, "commentary_by_chapter");
     	gtk_widget_hide (item);
 
-    	if (main_get_mod_type((gchar*) (is_dialog ? d->mod_name : mod_name)) == COMMENTARY_TYPE) {
+    	if ((modtype == COMMENTARY_TYPE) || (modtype == PERCOM_TYPE)) {
     		gtk_widget_show (item);
    		GTK_CHECK_MENU_ITEM (item)->active = ops->commentary_by_chapter;
 	}
