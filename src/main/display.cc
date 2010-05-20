@@ -870,9 +870,15 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule)
 
 		// use the module cache rather than re-accessing Sword.
 		if (!cVerse.CacheIsValid(cache_flags)) {
-			rework = (strongs_or_morph
-				  ? block_render(imodule.RenderText())
-				  : imodule.RenderText());
+			if ((backend->module_type(imodule.Name()) == PERCOM_TYPE) ||
+			    (backend->module_type(imodule.Name()) == PRAYERLIST_TYPE))
+				rework = (strongs_or_morph
+					  ? block_render(imodule.getRawEntry())
+					  : imodule.getRawEntry());
+			else
+				rework = (strongs_or_morph
+					  ? block_render(imodule.RenderText())
+					  : imodule.RenderText());
 			CleanupContent(rework, ops, imodule.Name());
 			cVerse.SetText(rework, cache_flags);
 		} else
