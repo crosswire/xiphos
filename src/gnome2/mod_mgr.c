@@ -454,6 +454,11 @@ remove_install_modules(GList * modules,
 			xiphos_create_archive(conf_file, datapath, zipfile,
 					      destination ?
 					      destination : settings.path_to_mods);
+			g_string_append(cmd, buf);
+			g_string_append(cmd, _(" archival result:\n\n"));
+			g_string_append(cmd, _("\nArchive in "));
+			g_string_append(cmd, zipfile);
+			gui_generic_warning(cmd->str);
 			g_free(conf_file);
 			g_free(datapath);
 			g_free(zipfile);
