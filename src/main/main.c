@@ -84,7 +84,7 @@ int main(int argc, char *argv[])
 	 * to determine where we are (we can't depend on argv).
 	 */
 	gchar *bin_dir = xiphos_win32_get_subdir("bin");
-	g_chdir (install_dir);
+	g_chdir (bin_dir);
 	
 	/* add this directory to $PATH for other stuff, e.g. zip */
 	g_setenv("PATH", g_strdup_printf("%s;%s", install_dir,
