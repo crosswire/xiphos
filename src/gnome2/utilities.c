@@ -786,43 +786,6 @@ gchar * remove_linefeeds(gchar * buf)
 		
 }
 
-
-/******************************************************************************
- * Name
- *   gui_add_item2gnome_menu
- *
- * Synopsis
- *   #include "gui/utilities.h
- *
- *   void gui_add_item2gnome_menu(GtkWidget * MainFrm, gchar * itemname, 
- *	gchar * itemdata, gchar * menuname, GCallback mycallback)
- *
- * Description
- *   adds an item to the main menu bar
- *
- * Return value
- *   void
- */
-
-void gui_add_item2gnome_menu(GtkWidget * MainFrm, gchar * itemname, 
-	gchar * itemdata, gchar * menuname, GCallback mycallback)
-{
-	GnomeUIInfo *menuitem;
-
-	menuitem = g_new(GnomeUIInfo, 2);
-	menuitem->type = GNOME_APP_UI_ITEM;
-	menuitem->moreinfo = (gpointer) mycallback;
-	menuitem->user_data = itemdata;
-	menuitem->label = itemname;
-	menuitem->pixmap_type = GNOME_APP_PIXMAP_STOCK;
-	menuitem->pixmap_info = GNOME_STOCK_BOOK_OPEN;
-	menuitem->accelerator_key = 0;
-	menuitem[1].type = GNOME_APP_UI_ENDOFINFO;
-	gnome_app_insert_menus_with_data(GNOME_APP(MainFrm), menuname,
-					 menuitem, NULL);
-}
-
-
 /******************************************************************************
  * Name
  *   gui_add_separator2menu
@@ -851,53 +814,6 @@ void gui_add_separator2menu(GtkWidget * MainFrm, gchar * subtreelabel)
 					 bookmarkitem, NULL);
 	//g_free(bookmarkitem); 
 }
-
-
-/******************************************************************************
- * Name
- *   
- *
- * Synopsis
- *   #include "gui/utilities.h
- *
- *   void add_mods_to_menus(GList * modlist, gchar * menu,
- *				GCallback callback) 
- *
- * Description
- *   add a list of modules to a menu
- *
- * Return value
- *   void
- */
-
-void gui_add_mods_to_menus(GList * modlist, gchar * menu,
-				GCallback callback) 
-{	
-	gchar	
-		view_remember_last_item[80];
-	//gint	i = 0;
-	GList 	*tmp = NULL;
-
-	sprintf(view_remember_last_item,"%s", menu);
-	
-	
-	tmp = modlist;
-	while (tmp != NULL) {	
-		gui_add_item2gnome_menu(widgets.app, 
-			(gchar *) tmp->data, 
-			(gchar *) tmp->data,
-			view_remember_last_item, 
-			callback);
-		/* remember last item - so next item will be placed below it */
-		sprintf(view_remember_last_item,"%s%s", 
-				menu, 
-				(gchar *) tmp->data);	
-		//++i;
-		tmp = g_list_next(tmp);	
-	}
-	g_list_free(modlist);
-}			
-
 
 /******************************************************************************
  * Name
