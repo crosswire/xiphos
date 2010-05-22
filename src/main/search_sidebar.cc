@@ -35,14 +35,14 @@ extern "C" {
 #ifdef __cplusplus
 }
 #endif
-	
+
 
 #include "main/search_dialog.h"
 #include "main/search_sidebar.h"
 #include "main/settings.h"
 #include "main/sword.h"
 #include "main/xml.h"
- 
+
 #include "gui/search_dialog.h"
 #include "gui/search_sidebar.h"
 #include "gui/sidebar.h"
@@ -60,7 +60,7 @@ extern "C" {
 
 #define SEARCHING N_("Searching the ")
 #define SMODULE N_(" Module")
-#define FINDS N_("found in ")		
+#define FINDS N_("found in ")
 #define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
 
 static BackEnd *backendSearch;
@@ -78,7 +78,7 @@ int search_dialog;
  * Synopsis
  *   #include "sidebar_search.h"
  *
- *   void fill_search_results_list(int finds) 
+ *   void fill_search_results_list(int finds)
  *
  * Description
  *   display a list of keys found during search
@@ -96,7 +96,7 @@ static void fill_search_results_list(int finds)
 	GtkListStore *list_store;
 	GtkTreeIter iter;
 	GtkTreeSelection *selection;
-	GtkTreePath *path;	
+	GtkTreePath *path;
 	gchar *buf1 = _("matches");
 	RESULTS *list_item;
 	gchar *num;
@@ -105,7 +105,7 @@ static void fill_search_results_list(int finds)
 		main_init_sidebar_search_backend();
 
 	is_search_result = TRUE;
-	
+
 	if (list_of_verses) {
 		GList *chaser = list_of_verses;
 		while (chaser) {
@@ -133,7 +133,7 @@ static void fill_search_results_list(int finds)
 		list_item = g_new(RESULTS,1);
 		list_item->module = g_strdup(settings.sb_search_mod);
 		list_item->key = g_strdup(tmpbuf);
-		list_of_verses = g_list_append(list_of_verses, 
+		list_of_verses = g_list_append(list_of_verses,
 					       (RESULTS *) list_item);
 	}
 
@@ -146,17 +146,17 @@ static void fill_search_results_list(int finds)
 	gui_set_statusbar (buf);
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_sidebar),3);
 	/* cleanup progress bar */
-	gtk_progress_bar_update(GTK_PROGRESS_BAR(ss.progressbar_search),
+	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(ss.progressbar_search),
 				0.0);
-	/* display first item in list by selection row*/	
-	if(!gtk_tree_model_get_iter_first(model,&iter))
+	/* display first item in list by selection row*/
+	if (!gtk_tree_model_get_iter_first(model,&iter))
 		return;
-	
+
 	gtk_widget_set_sensitive(sidebar.menu_item_save_search,TRUE);
-	path = gtk_tree_model_get_path(model,&iter);				
+	path = gtk_tree_model_get_path(model,&iter);
 	gtk_tree_selection_select_path(selection,
 				       path);
-	gtk_tree_path_free(path);	 
+	gtk_tree_path_free(path);
 	gui_verselist_button_release_event(NULL,NULL,NULL);
 	return;
 }
@@ -173,7 +173,7 @@ GList* get_list_of_references()
 		tmp = g_list_next(tmp);
 	}
 	return g_list_first(references);
-}	
+}
 #endif
 
 /******************************************************************************
@@ -195,26 +195,26 @@ void main_do_sidebar_search(gpointer user_data)
 	GString *new_search = g_string_new(NULL);
 	gint search_params, finds;
 	const char *search_string = NULL;
-	char *search_module;	
+	char *search_module;
 
 	if (!backendSearch)
 		main_init_sidebar_search_backend();
-	
+
 	gtk_widget_set_sensitive(sidebar.menu_item_save_search,FALSE);
 	search_dialog = FALSE;
 	search_string = gtk_entry_get_text(GTK_ENTRY(ss.entrySearch));
-	
-	if(strlen(search_string) < 1) 
+
+	if (strlen(search_string) < 1)
 		return;
-	
+
 	if (GTK_TOGGLE_BUTTON(ss.radiobutton_search_text)->active) {
 		strcpy(settings.sb_search_mod,
 		       settings.MainWindowModule);
 	}
 	else if (GTK_TOGGLE_BUTTON(ss.radiobutton_search_comm)->active) {
 		strcpy(settings.sb_search_mod,settings.CommWindowModule);
-	} 	
-	
+	}
+
 	search_module = settings.sb_search_mod;
 
 	backendSearch->clear_scope();
@@ -237,7 +237,7 @@ void main_do_sidebar_search(gpointer user_data)
 
 	snprintf(settings.searchText, 255, "%s", search_string);
 
-	settings.searchType = 
+	settings.searchType =
 		GTK_TOGGLE_BUTTON(ss.rbRegExp)->active ? 0 :
 	    	GTK_TOGGLE_BUTTON(ss.rbPhraseSearch)->active ? -1 : -2;
 
@@ -272,7 +272,7 @@ void main_do_sidebar_search(gpointer user_data)
 	mgr->setGlobalOption("Hebrew Vowel Points", "Off");
 	mgr->setGlobalOption("Arabic Vowel Points", "Off");
 
-	finds = backendSearch->do_module_search(search_module, 
+	finds = backendSearch->do_module_search(search_module,
 						mgr->getModule(search_module)->
 						     StripText(search_string),
 						settings.searchType,
@@ -292,14 +292,14 @@ void main_do_sidebar_search(gpointer user_data)
 					    &finds, NULL);
 	}
 #endif
-	
+
 }
 
 void main_sidebar_perscomm_dump(void)
 {
 	if (!backendSearch)
 		main_init_sidebar_search_backend();
-	
+
 	strcpy(settings.sb_search_mod,settings.MainWindowModule);
 	backendSearch->clear_scope();
 	backendSearch->clear_search_list();
@@ -327,7 +327,7 @@ void main_delete_sidebar_search_backend(void)
 
 void main_search_sidebar_fill_bounds_combos(void)
 {
-	VerseKey key; 
+	VerseKey key;
 	char *book = NULL;
 	char *module_name;
 	int i = 0;
@@ -340,40 +340,32 @@ void main_search_sidebar_fill_bounds_combos(void)
 	module_name = g_strdup(settings.MainWindowModule);
 
 	testaments = backendSearch->module_get_testaments(module_name);
-	
+
 	GtkTreeModel* upper_model = gtk_combo_box_get_model(
 			GTK_COMBO_BOX(ss.entryUpper));
 	gtk_list_store_clear(GTK_LIST_STORE(upper_model));
 	GtkTreeModel* lower_model = gtk_combo_box_get_model(
 			GTK_COMBO_BOX(ss.entryLower));
 	gtk_list_store_clear(GTK_LIST_STORE(lower_model));
-	
+
 	if (backendSearch->module_has_testament(module_name, 1)) {
-		while(i < key.BMAX[0]) { 			
-#ifdef SWORD_MULTIVERSE
+		while (i < key.BMAX[0]) {
 			key.Testament(1);
 			key.Book(i+1);
 			book = strdup((const char *) key.getBookName());
-#else
-			book = strdup((const char *) key.books[0][i].name);
-#endif
 			gtk_combo_box_append_text(GTK_COMBO_BOX(ss.entryUpper), book);
 			gtk_combo_box_append_text(GTK_COMBO_BOX(ss.entryLower), book);
 			++i;
 			g_free(book);
 		}
 	}
-	
+
 	i = 0;
 	if (backendSearch->module_has_testament(module_name, 2)) {
-		while(i < key.BMAX[1]) {			
-#ifdef SWORD_MULTIVERSE
+		while (i < key.BMAX[1]) {
 			key.Testament(2);
 			key.Book(i+1);
 			book = strdup((const char *) key.getBookName());
-#else
-			book = strdup((const char *) key.books[1][i].name);
-#endif
 			gtk_combo_box_append_text(GTK_COMBO_BOX(ss.entryUpper), book);
 			gtk_combo_box_append_text(GTK_COMBO_BOX(ss.entryLower), book);
 			++i;
@@ -381,7 +373,7 @@ void main_search_sidebar_fill_bounds_combos(void)
 		}
 	}
 	gtk_combo_box_set_active(GTK_COMBO_BOX(ss.entryLower),0);
-	gtk_combo_box_set_active(GTK_COMBO_BOX(ss.entryUpper),65);	
+	gtk_combo_box_set_active(GTK_COMBO_BOX(ss.entryUpper),65);
 }
 
 
@@ -392,14 +384,14 @@ void main_search_sidebar_fill_bounds_combos(void)
  * Synopsis
  *   #include "main/search.h"
  *
- *   void search_percent_update(char percent, void *userData)	
+ *   void search_percent_update(char percent, void *userData)
  *
  * Description
  *    updates the progress bar during shortcut bar search
  *
  * Return value
  *   void
- */ 
+ */
 
 void main_sidebar_search_percent_update(char percent, void *userData)
 {
@@ -409,19 +401,18 @@ void main_sidebar_search_percent_update(char percent, void *userData)
 	static char printed = 0;
 	if (!backendSearch)
 		main_init_sidebar_search_backend();
-	
+
 	if (terminate_search) {
 		backendSearch->terminate_search();
 	} else {
 		while ((((float) percent) / 100) * maxHashes > printed) {
 		    sprintf(buf, "%f", (((float) percent) / 100));
 		    num = (float) percent / 100;
-		    gtk_progress_bar_update((GtkProgressBar *)
+		    gtk_progress_bar_set_fraction((GtkProgressBar *)
 					    ss.progressbar_search, num);
 		    printed++;
 		}
 	}
-	while (gtk_events_pending())
-		gtk_main_iteration();
+	sync_windows();
 	printed = 0;
 }

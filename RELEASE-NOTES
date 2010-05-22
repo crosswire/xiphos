@@ -3,6 +3,234 @@ ____________________
 XIPHOS RELEASE NOTES
 ____________________
 
+Release 3.1.3
+22 Mar 2010
+
+This is an urgent bugfix release, largely due to compatibility needs
+with regard to library packages that have been, or are soon to be,
+released in environments we support.
+
+Notably: [1] Upcoming xulrunner 1.9.2 in Linux had a conflict with
+respect to Nautilus file browser windows during module manager use;
+[2] The new version of the ftp access library, curl v7.20, had
+conflicts with the underlying Sword library ("the engine").
+
+We also addressed a number of other, less critical bugs, and have
+formally dropped support for these old environments: Windows 2000 (10+
+years old!), Fedora < 10 (F13 is about to be released), Ubuntu < 9.04
+(10.04 is about to be released).  For other Linux versions, this
+generally corresponds to gtkhtml3 older than 2.14.
+
+Small bugfixes and features: Navigation support for footnotes
+containing intra-verse anchors (e.g. "Gen1:2#n12"); editor support for
+links in prayerlist/journal modules and personal commentaries
+providing navigation either directly ("sword://" URLs) or via verse
+list machinery; fully-supported word processor copy/paste; improved
+Portuguese and Chinese translations; universal synchronization with
+detached windows was fixed; smallcaps "LORD" is now pronounced
+correctly in read-aloud; lack of settings file won't crash Xiphos; on
+genbook bookmark click, ensure its pane comes to the front.
+
+Bug reports addressed since 3.1.2:
+2915026  Right to Left Languages - Display
+2915912  RToL toolbar number order
+2918463  crash detected in Fedora 12 xiphos-3.1.1
+2924074  verse selection causes scroll-to-top
+2928849  Parallel views (reset) problem
+2936311  Add Link action not able to use bible:// for verse links
+2941678  Book name up arrow
+2941684  Small caps in "LORD"
+2943173  freeaddrinfo (win2k compatibility - dropped)
+2951941  Turkish Ubuntu blocks display of Old Testament books
+2956797  Xiphos crashes when trying to edit
+2958644  Nautilus?  -  Xiphos doesn't show bible text
+2936311  Add Link action not able to use bible:// for verse links
+2961704  crash detected in xiphos-3.1.2 module manager
+2972686  Arabic is not right-aligned
+
+Feature requests closed:
+2781509  Export->Copy HTML doesn't work properly
+2791414  Parallel View tab should behave like a real tab
+2791621  Biblical resource in seperate window: synchronize from/with?
+2795762  Reference bar: Choosing a book name
+2799867  Increase reducing of window sizes
+2893826  Versification in the Psalms
+2902403  How to install for other than listed OS
+2907492  Interlinear commentary
+2925935  One Year Daily reading Schedule
+2928388  personal note deletion
+2932551  Shortcut Keys
+________________________________________________________________
+
+Release 3.1.2
+24 Dec 2009
+
+Merry Christmas from the Xiphos development team.
+
+This version of Xiphos is the final intermediate release prior to the
+larger features planned for the forthcoming 3.2.  This release
+contains several interesting new features and enhancements, and (as
+always) a number of bugfixes.
+
+New features
+
+ 1. We have implemented a Xiphos-internal interface language selector,
+    via Preferences -> General -> Options.  This makes unnecessary
+    most previous uses of difficult-to-understand environment
+    variables to control the desired language choice.  Choosing a new
+    language requires a restart of Xiphos.
+
+ 2. Bookmarks are exportable.  Select XML, HTML, or plaintext.  For
+    the latter two, select whether to include the text referenced.
+
+ 3. The StudyPad and personal commentary editor has gained a Link
+    dialog, by which to arrange for verse reference linkage.
+
+ 4. Xiphos' main window navigation can be sampled and driven via
+    external programs such as Bibledit, notably in support of Bible
+    translators' work.  (For developers, this uses the dbus feature.
+    A test program to exercise this feature can be found in
+    src/examples/ipc_client.py.)
+
+ 5. The Module Manager has a first-time-user introductory dialog,
+    to offer brief explanation of its several parts.  All users, even
+    long-time users, will get it exactly once.
+
+ 6. CrossWire's module repository is forced as "current" after use of
+    the Load Standard button, which updates Xiphos' sense of which
+    repositories are officially recognized by CrossWire.
+
+ 7. Universal synchronization has been implemented between the main
+    window and all detached windows, including embedded parallel tab.
+    Navigating in any synchronized window makes all synchronized
+    windows follow.
+
+ 8. The verse number color selector has been resurrected, erroneously
+    removed in the early days of GnomeSword 2.2(!).  (Why did we do
+    that?  Nobody remembers.)
+
+ 9. New interface translations: Russian, Romanian, Spanish, Chinese.
+    (The last of these has been mechanically generated and is very,
+    very rough at this time -- it will need human attention to gain
+    acceptable quality.)
+
+10. New icons for module lists; RtoL icons for use in Hebrew and Farsi.
+
+Enhancements to existing behavior
+
+ 1. The Help->Chat interface has been improved by offering a default
+    IRC nickname based on the user's login name.
+
+ 2. Huge improvements have been made to startup, search, and module
+    manager setup times, due to internal refactoring of the usage of
+    the Sword library.
+
+ 3. Icons have been added to all dialogs which lacked them.
+
+ 4. Hebrew searches have been improved.
+
+ 5. The verse annotation feature localizes verse references.
+
+ 6. The main window title follows currently-open modules better.
+
+ 7. Sidebar search has had improvements and fixes.
+
+ 8. Internal improvements for poorly-marked-up module content,
+    including crash avoidance.  Some module content is really
+    dangerously bad.
+
+ 9. Improved passage export and printing.
+
+10. Much work has been done for Windows with regard to our better
+    display engine, but it is still not complete, and not present in
+    today's Windows build for public distribution.  To be done in 3.2.
+
+11. Devotionals have been removed from Lookup Selection lists on the
+    right-click context menu.
+
+12. All locale-selection logic has been completely reworked.
+
+13. Cosmetic improvements have been made to Module Manager's and main
+    window's menus.
+
+14. The Enter key is recognized for completion in bookmarks and user
+    annotations.
+
+15. Module archival in Module Manager no longer requires external
+    program support.
+
+16. Many dependencies on GNOME libraries have been removed.  We are
+    intending to completely de-GNOME Xiphos, in favor of reliance on
+    GTK support alone.
+
+Problems resolved
+
+ 1. An error in use of FTP repository registration was fixed.
+
+ 2. When doing searches, both sidebar and advanced, the "purplify"
+    word-match facility has been rewritten from the ground up, and
+    correctly identifies your search keywords.
+
+ 3. Tab names do not show the commentary when the general book is
+    displayed instead.
+
+ 4. A focus-and-select bug was fixed, when deleting one interface tab.
+
+ 5. Corrections were made to text justification handling for RtoL
+    (right-to-left) languages (Hebrew, Farsi).
+
+ 6. Minor adjustments to display have been made due to subtle
+    differences in text markup variety (ThML -vs- OSIS).
+
+ 7. A crash induced by dictionary usage with none installed was fixed.
+
+Improvements and helps for developers
+
+    - Function prototypes are enforced.
+    - The debug build of Xiphos includes substantial null pointer
+      detection in the use of certain common string functions.
+    - The ImageMagick dependency is gone, replaced with GTK functions.
+    - --enable-silent-rules leads to far less chatty output during
+      build.  Get noisy output temporarily with "V=1 make".
+    - File, URL, and Help invocations are now very general and use
+      uniform underlying library support.
+    - XPCOM_GLUE dependency errors have been fixed.
+    - Timers have been implemented to show SWMgr creation delays.
+    - Many, many updates to the build system and the Windows installer.
+
+Bug reports addressed since 3.1.1:
+2908987  crash detected in xiphos-3.1.1-1.fc12
+2896427  Isa 49:6 in HunKar text
+2893828  Malachi 4:6 in Aleppo text
+2878951  KJV Stongs lexicon stops at 5624 (ophelimos)
+2873367  Advanced Search results: Hotkey(s) to display Preview
+2873362  Hotkey for activating simple searches not working
+2872186  missing verses
+2862814  Crash when compiled against xulrunner 1.9.1.3
+2858494  Bible Window Does Not Automatically Display Selected Verse
+2852779  delete source button enlarge sources list in twice
+2849730  Lucene Text Fields search not working
+2849693  Parallel view tab does not honour link tabs setting
+2848320  Preview: Symboles for Footnotes
+2844863  Lucene Search: Not finding all results
+2841441  per verse annotation - localized reference
+
+New feature requests pending:
+2907492  Interlinear commentary
+2902403  How to install for other than listed OS
+2901374  Need for Serbian translation
+2893826  Versification in the Psalms
+2890364  Don't need to see strongs numbers, morphology
+2873364  Highlight also upper case words
+2873363  Shortcut/hotkey for simple/sidebar searches
+2836740  Additional versification systems
+
+Feature requests closed:
+2871373  Increase number of texts in parallel view
+2840134  Hide Verse Numbers in Copy/Export
+2824127  Sidebar search: Regular expression?
+________________________________________________________________
+
 Release 3.1.1
 09 Aug 2009
 

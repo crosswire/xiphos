@@ -1,10 +1,34 @@
 #!/usr/bin/make -f
+#Ubuntu doesn't have dh_xulrunner yet
+xul:=$(shell which dh_xulrunner)
+qul:=$(shell which dh_quilt_patch)
+waf:=$(filter 1.% ,$(shell ./waf --version))
+
+ifneq ($(qul),)
+args:=quilt
+else
+include /usr/share/quilt/quilt.make
+clean: unpatch
+build: $(QUILT_STAMPFN)
+endif
+ifneq ($(xul),)
+args:=$(args),xulrunner
+endif
+ifneq ($(args),)
+with=--with $(args)
+endif
+ifeq ($(waf),1.5.15)
+system=waf_src
+else
+system=autoconf
+endif
+
 %:
-	dh $@
-build:
-	dh build --before dh_auto_configure
-	./autogen.sh --prefix=/usr --enable-silent-rules
-	dh_auto_build
-	dh build --after dh_auto_test
-binary: build
-	dh binary --after dh_auto_test
+	PERLLIB=debian dh --parallel $(with) --buildsystem=$(system) $@
+override_dh_install:
+	PERLLIB=debian dh_install --list-missing
+override_dh_clean:
+	dh_clean
+	rm -rf .waf*
+# because check target is broken
+override_dh_auto_test:

@@ -75,16 +75,16 @@ NS_IMETHODIMP WindowCreator::CreateChromeWindow(nsIWebBrowserChrome
 }
 
 NS_IMETHODIMP WindowCreator::CreateChromeWindow2(
-        nsIWebBrowserChrome *parent, PRUint32 chromeFlags, 
+        nsIWebBrowserChrome *parent, PRUint32 chromeFlags,
         PRUint32 contextFlags, nsIURI *uri, PRBool *cancel,
         nsIWebBrowserChrome **_retval)
 {
     nsCAutoString specString;
-    if((chromeFlags & nsIWebBrowserChrome::CHROME_OPENAS_CHROME) == 0) {
-        if(uri) {
+    if ((chromeFlags & nsIWebBrowserChrome::CHROME_OPENAS_CHROME) == 0) {
+        if (uri) {
             uri->GetSpec(specString);
 	    //createChromeWindow(parent, chromeFlags);
-            //if(mWindowCallback) {
+            //if (mWindowCallback) {
             //    mWindowCallback((char*)specString.get(), mWindowCallbackData);
             //}
         } else {

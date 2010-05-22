@@ -10,14 +10,12 @@
   <!ENTITY studypad SYSTEM "studypad.xml">
   <!ENTITY personal SYSTEM "personal.xml">
   <!ENTITY journals SYSTEM "journals.xml">
-  <!ENTITY authors SYSTEM "authors.xml">
   <!ENTITY legal SYSTEM "legal.xml">
-  <!ENTITY license SYSTEM "license.xml">
   <!ENTITY onlinehelp SYSTEM "onlinehelp.xml">
   <!ENTITY originallanguage SYSTEM "originallanguage.xml">
 
-  <!ENTITY appversion "3.1.1">
-  <!ENTITY manrevision "3.1.1">
+  <!ENTITY appversion "3.1.3">
+  <!ENTITY manrevision "3.1.3">
   <!ENTITY date "11 May 2009">
   <!ENTITY app "<application>Xiphos</application>">
   <!ENTITY appname "Xiphos">
@@ -78,6 +76,22 @@ Template last modified Apr 11, 2002
       <publishername>The Xiphos Team</publishername>
     </publisher>
 
+     <legalnotice>
+       <title>Feedback</title>
+	<para>
+    	For more information on <application>Xiphos</application>, please visit
+    	the project website at <ulink type="http"
+    	url="http://xiphos.org">http://xiphos.org</ulink>.
+	</para>
+
+	 <para>To report a bug or make a suggestion regarding the &appname;
+	   application or this manual, Use
+	   the <ulink url="http://sourceforge.net/tracker/?group_id=5528">
+	   Tracker on SourceForge</ulink> or the mailing
+	   lists <email>gnomesword-developers@lists.sourceforge.net</email>
+	 </para>
+    </legalnotice>
+    
     &legal;
     <!-- This file  contains link to license for the documentation (GNU FDL), and
     other legal stuff such as "NO WARRANTY" statement. Please do not change
@@ -148,7 +162,7 @@ Template last modified Apr 11, 2002
     </releaseinfo>
      <revhistory> 
 	<revision> 
-          <revnumber>Xiphos Manual V3.1.1</revnumber> 
+          <revnumber>Xiphos Manual V3.1.3</revnumber> 
           <date>August 2009</date> 
           <revdescription> 
              <para role="author">The Xiphos Team</para>
@@ -156,14 +170,6 @@ Template last modified Apr 11, 2002
           </revdescription> 
         </revision>
      </revhistory> 
-     <legalnotice>
-      <title>Feedback</title>
-      <para>To report a bug or make a suggestion regarding the &appname; application or
-      this manual, Use the <ulink url="http://sourceforge.net/tracker/?group_id=5528">
-      Tracker on SourceForge</ulink> or the mailing lists.
-      </para>
-      <!-- Translators may also add here feedback address for translations -->
-    </legalnotice>
 
     <keywordset>
       <keyword>gnome</keyword>
@@ -260,18 +266,6 @@ Template last modified Apr 11, 2002
   <sect1 id="originallanguage">
      <title>Original Language Research</title>
      &originallanguage;
-  </sect1>
-
-  <!-- Authors -->
-  <sect1 id="authors">
-    <title>Authors</title>
-    &authors;
-  </sect1>
-
-  <!-- License -->
-  <sect1 id="license">
-    <title>License</title>
-    &license;
   </sect1>
 
 </article>

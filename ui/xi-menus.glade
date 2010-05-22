@@ -116,6 +116,33 @@
 		    </widget>
 		  </child>
 
+ 		  <child>
+		    <widget class="GtkImageMenuItem" id="newjournal">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">_New Prayerlist/Journal</property>
+		      <property name="use_underline">True</property>
+		      <signal name="activate" handler="gui_menu_prayerlist_popup" last_modification_time="Fri, 06 Mar 2009 17:09:25 GMT"/>
+
+		      <child internal-child="image">
+			<widget class="GtkImage" id="image1485">
+			  <property name="visible">True</property>
+			  <property name="stock">gtk-new</property>
+			  <property name="icon_size">1</property>
+			  <property name="xalign">0.5</property>
+			  <property name="yalign">0.5</property>
+			  <property name="xpad">0</property>
+			  <property name="ypad">0</property>
+			</widget>
+		      </child>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkSeparatorMenuItem" id="separatormenuitem2">
+		      <property name="visible">True</property>
+		    </widget>
+		  </child>
+
 		  <child>
 		    <widget class="GtkImageMenuItem" id="quit">
 		      <property name="visible">True</property>
@@ -248,7 +275,7 @@
 		  <child>
 		    <widget class="GtkMenuItem" id="daily_devotion">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">_Daily Devotion</property>
+		      <property name="label" translatable="yes">Preview _Daily Devotion</property>
 		      <property name="use_underline">True</property>
 		      <signal name="activate" handler="on_daily_devotion_activate" last_modification_time="Fri, 06 Mar 2009 18:27:19 GMT"/>
 		    </widget>
@@ -307,16 +334,6 @@
 		  </child>
 
 		  <child>
-		    <widget class="GtkCheckMenuItem" id="verse_per_line">
-		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">_Verse Per Line</property>
-		      <property name="use_underline">True</property>
-		      <property name="active">False</property>
-		      <signal name="activate" handler="on_verse_style_activate" last_modification_time="Sat, 07 Mar 2009 01:21:14 GMT"/>
-		    </widget>
-		  </child>
-
-		  <child>
 		    <widget class="GtkCheckMenuItem" id="link_tabs">
 		      <property name="visible">True</property>
 		      <property name="label" translatable="yes">L_ink Tabs</property>
@@ -353,16 +370,6 @@
 		      <property name="use_underline">True</property>
 		      <property name="active">False</property>
 		      <signal name="activate" handler="on_versehighlight_activate" last_modification_time="Sat, 07 Mar 2009 01:19:13 GMT"/>
-		    </widget>
-		  </child>
-
-		  <child>
-		    <widget class="GtkCheckMenuItem" id="double_space_text">
-		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">D_ouble-Space Text</property>
-		      <property name="use_underline">True</property>
-		      <property name="active">False</property>
-		      <signal name="activate" handler="on_double_space_text_activate" last_modification_time="Sat, 07 Mar 2009 00:22:15 GMT"/>
 		    </widget>
 		  </child>
 
@@ -883,6 +890,16 @@
 	  </child>
 
 	  <child>
+	    <widget class="GtkCheckMenuItem" id="verse_per_line">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">Verse Per Line</property>
+	      <property name="use_underline">True</property>
+	      <property name="active">False</property>
+	      <signal name="activate" handler="on_verse_per_line_activate" last_modification_time="Thu, 26 Feb 2009 16:37:43 GMT"/>
+	    </widget>
+	  </child>
+
+	  <child>
 	    <widget class="GtkCheckMenuItem" id="words_of_christ_in_red">
 	      <property name="visible">True</property>
 	      <property name="label" translatable="yes">Words of Christ in Red</property>
@@ -1062,6 +1079,16 @@
 	      <property name="use_underline">True</property>
 	      <property name="active">False</property>
 	      <signal name="activate" handler="on_commentary_by_chapter_activate" last_modification_time="Sat, 28 Feb 2009 20:09:05 GMT"/>
+	    </widget>
+	  </child>
+
+	  <child>
+	    <widget class="GtkCheckMenuItem" id="doublespace">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">Doublespace</property>
+	      <property name="use_underline">True</property>
+	      <property name="active">False</property>
+	      <signal name="activate" handler="on_doublespace_activate" last_modification_time="Sat, 28 Feb 2009 20:09:05 GMT"/>
 	    </widget>
 	  </child>
 	</widget>
@@ -1526,8 +1553,8 @@
   <child>
     <widget class="GtkImageMenuItem" id="import_bibletime_bookmarks1">
       <property name="visible">True</property>
-      <property name="tooltip" translatable="yes">Load Bookmarks from Bibletime</property>
-      <property name="label" translatable="yes">Import Bibletime Bookmarks</property>
+      <property name="tooltip" translatable="yes">Load other bookmarks file (default: from BibleTime)</property>
+      <property name="label" translatable="yes">Import Bookmarks</property>
       <property name="use_underline">True</property>
       <signal name="activate" handler="bibletime_bookmarks_activate" last_modification_time="Tue, 07 Apr 2009 23:56:38 GMT"/>
 
@@ -1557,28 +1584,6 @@
 	<widget class="GtkImage" id="image1478">
 	  <property name="visible">True</property>
 	  <property name="stock">gtk-goto-bottom</property>
-	  <property name="icon_size">1</property>
-	  <property name="xalign">0.5</property>
-	  <property name="yalign">0.5</property>
-	  <property name="xpad">0</property>
-	  <property name="ypad">0</property>
-	</widget>
-      </child>
-    </widget>
-  </child>
-
-  <child>
-    <widget class="GtkImageMenuItem" id="restore_folder">
-      <property name="visible">True</property>
-      <property name="tooltip" translatable="yes">Restore saved folder</property>
-      <property name="label" translatable="yes">Restore Folder</property>
-      <property name="use_underline">True</property>
-      <signal name="activate" handler="on_restore_folder_activate" last_modification_time="Tue, 07 Apr 2009 23:56:38 GMT"/>
-
-      <child internal-child="image">
-	<widget class="GtkImage" id="image1479">
-	  <property name="visible">True</property>
-	  <property name="stock">gtk-goto-top</property>
 	  <property name="icon_size">1</property>
 	  <property name="xalign">0.5</property>
 	  <property name="yalign">0.5</property>

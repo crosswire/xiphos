@@ -42,6 +42,7 @@
 #include "gui/xiphos.h"
 #include "gui/widgets.h"
 #include "gui/tabbed_browser.h"
+#include "gui/preferences_dialog.h"
 
 #include "main/parallel_view.h"
 #include "main/global_ops.hh"
@@ -108,177 +109,17 @@ void on_paratab_activate(GtkMenuItem * menuitem)
 
 
 
-/******************************************************************************
- * Name
- *   on_changeint1mod_activate
- *
- * Synopsis
- *   #include "gui/parallel.h
- *
- *   void on_changeint1mod_activate(GtkMenuItem * menuitem,
- *			       gpointer user_data)
- *
- * Description
- *
- *
- * Return value
- *   void
- */
-
-void on_changeint1mod_activate(GtkMenuItem * menuitem,
-				      gpointer user_data)
-{
-	
-	gchar *mod_name = NULL;
-//	GS_message(("mod_name",(gchar *) user_data));
-	mod_name = main_module_name_from_description((gchar *) user_data);
-	
-	if(!mod_name) 
-		return;
-	main_change_parallel_module(PARALLEL1, mod_name);
-}
-
-
-
-
-/******************************************************************************
- * Name
- *   on_changeint2mod_activate
- *
- * Synopsis
- *   #include "gui/parallel.h
- *
- *   void on_changeint2mod_activate(GtkMenuItem * menuitem,
- *			       gpointer user_data)
- *
- * Description
- *
- *
- * Return value
- *   void
- */
-
-static void on_changeint2mod_activate(GtkMenuItem * menuitem,
-				      gpointer user_data)
-{
-	gchar *mod_name = NULL;
-
-	mod_name = main_module_name_from_description((gchar *) user_data);
-	if(!mod_name) 
-		return;
-	main_change_parallel_module(PARALLEL2, mod_name);
-}
-
-
-/******************************************************************************
- * Name
- *   on_changeint3mod_activate
- *
- * Synopsis
- *   #include "gui/parallel.h
- *
- *   void on_changeint3mod_activate(GtkMenuItem * menuitem,
-			       gpointer user_data)
- *
- * Description
- *
- *
- * Return value
- *   void
- */
-
-static void on_changeint3mod_activate(GtkMenuItem * menuitem,
-				      gpointer user_data)
-{
-	gchar *mod_name = NULL;
-
-	mod_name = main_module_name_from_description((gchar *) user_data);
-	if(!mod_name) 
-		return;
-	main_change_parallel_module(PARALLEL3, mod_name);
-}
-
-
-/******************************************************************************
- * Name
- *   on_changeint4mod_activate
- *
- * Synopsis
- *   #include "gui/parallel.h
- *
- *   void on_changeint4mod_activate(GtkMenuItem * menuitem,
- *			       gpointer user_data)
- *
- * Description
- *
- *
- * Return value
- *   void
- */
-
-static void on_changeint4mod_activate(GtkMenuItem * menuitem,
-				      gpointer user_data)
-{
-	gchar *mod_name = NULL;
-
-	mod_name = main_module_name_from_description((gchar *) user_data);
-	if(!mod_name) 
-		return;
-	main_change_parallel_module(PARALLEL4, mod_name);
-}
-
-
-/******************************************************************************
- * Name
- *   on_changeint5mod_activate
- *
- * Synopsis
- *   #include "gui/parallel.h
- *
- *   void on_changeint5mod_activate(GtkMenuItem * menuitem,
-			       gpointer user_data)
- *
- * Description
- *
- *
- * Return value
- *   void
- */
-
-static void on_changeint5mod_activate(GtkMenuItem * menuitem,
-				      gpointer user_data)
-{
-	gchar *mod_name = NULL;
-
-	mod_name = main_module_name_from_description((gchar *) user_data);
-
-	if (!mod_name) 
-		return;
-	main_change_parallel_module(PARALLEL5, mod_name);
-}
-
-
 void gui_popup_menu_parallel(void)
-{	
+{
 	GtkWidget *menu;
-	GtkWidget *copy7;
 	GtkWidget *undockInt = NULL;
 	GtkWidget *module_options;
-	GtkWidget *separator2;
+	GtkWidget *separator;
 	GtkWidget *module_options_menu;
-	
+
 	menu = gtk_menu_new();
-	gtk_object_set_data(GTK_OBJECT(menu), "pmInt", menu);
+	g_object_set_data(G_OBJECT(menu), "pmInt", menu);
 
-	copy7 = gtk_menu_item_new_with_label(_("Copy"));
-	gtk_widget_hide(copy7);
-	gtk_container_add(GTK_CONTAINER(menu), copy7);
-
-	separator2 = gtk_menu_item_new();
-	gtk_widget_hide(separator2);
-	gtk_container_add(GTK_CONTAINER(menu), separator2);
-	gtk_widget_set_sensitive(separator2, FALSE);
-	
 	if (!settings.showparatab) {
 		undockInt = gtk_menu_item_new_with_label(_("Detach/Attach"));
 		gtk_widget_show(undockInt);
@@ -293,29 +134,14 @@ void gui_popup_menu_parallel(void)
 	module_options_menu = gtk_menu_new();
 	gtk_menu_item_set_submenu(GTK_MENU_ITEM(module_options),
 				  module_options_menu);
-				  
+
 	main_load_g_ops_parallel(module_options_menu);
 
-	separator2 = gtk_menu_item_new();
-	gtk_widget_show(separator2);
-	gtk_container_add(GTK_CONTAINER(menu), separator2);
-	gtk_widget_set_sensitive(separator2, FALSE);
-	/* build change parallel modules submenu */
-	main_load_menu_form_mod_list(menu, _("Change parallel 1"),			       
-				     G_CALLBACK(on_changeint1mod_activate));
-	main_load_menu_form_mod_list(menu, _("Change parallel 2"),
-				     G_CALLBACK(on_changeint2mod_activate));
-	main_load_menu_form_mod_list(menu, _("Change parallel 3"),
-				     G_CALLBACK(on_changeint3mod_activate));
-	main_load_menu_form_mod_list(menu, _("Change parallel 4"),
-				     G_CALLBACK(on_changeint4mod_activate));
-	main_load_menu_form_mod_list(menu, _("Change parallel 5"),
-				     G_CALLBACK(on_changeint5mod_activate));
+	separator = gtk_menu_item_new();
+	gtk_widget_show(separator);
+	gtk_container_add(GTK_CONTAINER(menu), separator);
+	gtk_widget_set_sensitive(separator, FALSE);
 
-/*	g_signal_connect(GTK_OBJECT(copy7), "activate",
-			   G_CALLBACK(gui_copyhtml_activate),
-			   NULL);*/
-	
 	if (!settings.showparatab) {
 		if (undockInt) {
 			g_signal_connect(GTK_OBJECT(undockInt), "activate",
@@ -325,47 +151,18 @@ void gui_popup_menu_parallel(void)
 			GS_warning(("undockInt is NULL?"));
 		}
 	}
-	
+
 	gtk_menu_popup((GtkMenu*)menu, NULL, NULL, NULL, NULL, 0,
 		       gtk_get_current_event_time());
 }
 
 
 static gboolean
-on_enter_notify_event        (GtkWidget       *widget,
-                                        GdkEventCrossing *event,
-                                        gpointer         user_data)
+on_enter_notify_event(GtkWidget       *widget,
+		      GdkEventCrossing *event,
+		      gpointer         user_data)
 {
 	gtk_widget_grab_focus (widgets.html_parallel);
-	//settings.whichwindow = MAIN_TEXT_WINDOW;
-	//gui_change_window_title(settings.MainWindowModule);
-  	return FALSE;
-}
-
-static gboolean on_key_press_event           (GtkWidget       *widget,
-                                        GdkEventKey     *event,
-                                        gpointer         user_data)
-{
-	switch(event->hardware_keycode) {
-		case 50:
-		case 62:
-			shift_key_pressed = TRUE;
-		break;
-	}
-  	return FALSE;
-}
-
-
-static gboolean on_key_release_event         (GtkWidget       *widget,
-                                        GdkEventKey     *event,
-                                        gpointer         user_data)
-{
-	switch(event->hardware_keycode) {
-		case 50:
-		case 62:
-			shift_key_pressed = FALSE;
-		break;
-	}
   	return FALSE;
 }
 
@@ -402,7 +199,7 @@ _popupmenu_requested_cb(GtkHTML *html,
  *   void gui_create_parallel_page(guint page_num)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
@@ -418,7 +215,7 @@ void gui_create_parallel_page(void)
 #endif
 
 	/*
-	 * parallel page 
+	 * parallel page
 	 */
 	settings.dockedInt = TRUE;
 #ifdef USE_GTKMOZEMBED
@@ -464,6 +261,9 @@ void gui_create_parallel_page(void)
 			 "button_release_event",
 			 G_CALLBACK (_popupmenu_requested_cb),
 			 NULL);
+	g_signal_connect(GTK_OBJECT(widgets.html_parallel),
+			 "url_requested",
+			 G_CALLBACK(url_requested), NULL);
 #endif
 
 	label = gtk_label_new(_("Parallel View"));
@@ -477,11 +277,5 @@ void gui_create_parallel_page(void)
 
 	g_signal_connect ((gpointer) widgets.html_parallel, "enter_notify_event",
 		    G_CALLBACK (on_enter_notify_event),
-		    NULL);
-	g_signal_connect ((gpointer) widgets.html_parallel, "key_press_event",
-		    G_CALLBACK (on_key_press_event),
-		    NULL);
-	g_signal_connect ((gpointer) widgets.html_parallel, "key_release_event",
-		    G_CALLBACK (on_key_release_event),
 		    NULL);
 }

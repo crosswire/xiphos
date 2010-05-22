@@ -24,7 +24,7 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#ifdef USE_GTKUPRINT
+#ifdef HAVE_GTKUPRINT
 
 #include <nsIPrintingPromptService.h>
 #include <nsIPrintProgressParams.h>
@@ -71,8 +71,8 @@ public:
 
   NS_DECL_ISUPPORTS
   NS_DECL_NSIWEBPROGRESSLISTENER
-    
-    static nsresult SetPrintSettings (GeckoPrintInfo *settings, PRBool preview, 
+
+    static nsresult SetPrintSettings (GeckoPrintInfo *settings, PRBool preview,
 				      nsIPrintSettings *target);
 
 protected:

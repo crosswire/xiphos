@@ -1,6 +1,6 @@
 /*
  * Xiphos Bible Study Tool
- * export_bookmarks.h -  
+ * export_bookmarks.h -
  *
  * Copyright (C) 2003-2009 Xiphos Developer Team
  *
@@ -25,7 +25,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-	
+
 struct _export_bookmarks {
 	gboolean as_bookmarks;
 	gboolean as_html;
@@ -51,14 +51,14 @@ enum {
 	ADV_SEARCH_RESULTS_EXPORT
 };
 
-void gui_set_html_item (GString * str,  
+void gui_set_html_item (GString * str,
 			const gchar * description,
-			const gchar * module, 
+			const gchar * module,
 			const gchar * key,
 			gboolean with_scripture);
-void gui_set_plain_text_item (GString * str, 
+void gui_set_plain_text_item (GString * str,
 			const gchar * description,
-			const gchar * module, 
+			const gchar * module,
 			const gchar * key,
 			gboolean with_scripture);
 void gui_export_bookmarks_dialog(gint is_verselist, GList * verses);

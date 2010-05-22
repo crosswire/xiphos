@@ -18,7 +18,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  */
- 
+
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
 #endif
@@ -52,11 +52,7 @@
 #include "gui/tabbed_browser.h"
 #include "gui/widgets.h"
 
-#ifdef USE_GTKHTML3_14_23
 #include "editor/slib-editor.h"
-#else
-#include "editor/bonobo-editor.h"
-#endif
 
 #include "main/settings.h"
 #include "main/lists.h"
@@ -92,7 +88,7 @@ void access_to_edit_percomm()
 	gchar *personal = "Personal";
 	if (!main_is_module(personal))
 		return;
-	
+
 	editor_create_new (personal,(gchar *) settings.currentverse,NOTE_EDITOR);
 }
 
@@ -124,7 +120,7 @@ static gboolean on_comm_button_press_event(GtkWidget * widget,
 		break;
 	case 2:
 		break;
-	case 3:		
+	case 3:
     		gui_menu_popup (settings.CommWindowModule, NULL);
 		break;
 	}
@@ -155,15 +151,15 @@ static gboolean on_comm_button_release_event(GtkWidget * widget,
 					GdkEventButton * event,
 					gpointer data)
 {
-//#ifdef GTKHTML	
+//#ifdef GTKHTML
 	gchar *key;
 	const gchar *url;
-	
+
 	settings.whichwindow = COMMENTARY_WINDOW;
 
 	switch (event->button) {
 	case 1:
-		if (in_url) 
+		if (in_url)
 			break;
 		key = gui_button_press_lookup(widgets.html_comm);
 		if (key) {
@@ -171,7 +167,7 @@ static gboolean on_comm_button_release_event(GtkWidget * widget,
 				key = g_strdelimit(key, "*", ' ');
 				key = g_strstrip(key);
 				url = g_strdup_printf(
-					"xiphos.url?action=showModInfo&value=1&module=%s",
+					"passagestudy.jsp?action=showModInfo&value=1&module=%s",
 					key);
 				main_url_handler(url,TRUE);
 				g_free((gchar*)url);
@@ -196,11 +192,11 @@ static gboolean on_comm_button_release_event(GtkWidget * widget,
 	case 2:
 		if (!in_url)
 			break;
-			
-		url = gtk_html_get_url_at (GTK_HTML(widgets.html_comm),		
+
+		url = gtk_html_get_url_at (GTK_HTML(widgets.html_comm),
 								event->x,
 								event->y);
-			
+
 		if (url) {
 			if (strstr(url,"sword://")) {
 				gchar **work_buf = g_strsplit (url,"/",4);
@@ -236,7 +232,7 @@ static void
 _popupmenu_requested_cb (GeckoHtml *html,
 			     gchar *uri,
 			     gpointer user_data)
-{	
+{
     	gui_menu_popup (settings.CommWindowModule, NULL);
 }
 #endif
@@ -251,7 +247,7 @@ _popupmenu_requested_cb (GeckoHtml *html,
  *   GtkWidget *gui_create_commentary_pane(void)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   GtkWidget*
@@ -260,15 +256,15 @@ _popupmenu_requested_cb (GeckoHtml *html,
 GtkWidget *gui_create_commentary_pane(void)
 {
 	GtkWidget *box_comm;
-#ifdef USE_GTKMOZEMBED	
+#ifdef USE_GTKMOZEMBED
 	GtkWidget *eventbox1;
 #else
 	GtkWidget *scrolledwindow;
 #endif
 	box_comm = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(box_comm);
-    
-#ifdef USE_GTKMOZEMBED	
+
+#ifdef USE_GTKMOZEMBED
 	eventbox1 = gtk_event_box_new ();
 	gtk_widget_show (eventbox1);
 	gtk_box_pack_start(GTK_BOX(box_comm),
@@ -278,7 +274,7 @@ GtkWidget *gui_create_commentary_pane(void)
 	gtk_widget_show(widgets.html_comm);
 	gtk_container_add(GTK_CONTAINER(eventbox1),
 			 widgets.html_comm);
-	
+
 	g_signal_connect((gpointer)widgets.html_comm,
 		      "popupmenu_requested",
 		      G_CALLBACK (_popupmenu_requested_cb),

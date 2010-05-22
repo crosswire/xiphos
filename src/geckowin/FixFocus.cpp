@@ -46,7 +46,7 @@
 /*
  * Override the Window proc for top-level GTK windows that contain an embedded
  * XULRunnerBrowser.  This is needed because GTK's focus model is much
- * different than XULRunner's.  
+ * different than XULRunner's.
  */
 LRESULT CALLBACK ToplevelFocusHackWndProc(HWND hwnd, UINT uMsg, WPARAM wParam,
         LPARAM lParam)
@@ -54,15 +54,15 @@ LRESULT CALLBACK ToplevelFocusHackWndProc(HWND hwnd, UINT uMsg, WPARAM wParam,
     GdkWindow* window = gdk_window_lookup((GdkNativeWindow)hwnd);
     WNDPROC old_window_proc = (WNDPROC)GetProp(hwnd,
             "ToplevelFocusHackOldProc");
-    if(!window) {
-        if(!old_window_proc) {
+    if (!window) {
+        if (!old_window_proc) {
             return DefWindowProc(hwnd, uMsg, wParam, lParam);
         } else {
             return CallWindowProc(old_window_proc, hwnd, uMsg, wParam, lParam);
         }
     }
 
-    switch(uMsg) {
+    switch (uMsg) {
         case WM_MOUSEACTIVATE:
             // Mouse click on a non-browser widget.  Ensure that the top-level
             // window has the keyboard focus.
@@ -75,7 +75,7 @@ LRESULT CALLBACK ToplevelFocusHackWndProc(HWND hwnd, UINT uMsg, WPARAM wParam,
             // GTK's toplevel window is losing focus to a child window.
             // This is probably a XULRunner window.  Handle the event so that
             // the window doesn't think it's lost focus.
-            if(wParam && IsChild(hwnd, (HWND)wParam)) {
+            if (wParam && IsChild(hwnd, (HWND)wParam)) {
                 return 0;
             }
             break;
@@ -96,10 +96,10 @@ LRESULT CALLBACK BrowserFocusHackWndProc(HWND hwnd, UINT uMsg, WPARAM wParam,
     HWND parent;
     WNDPROC old_window_proc  = (WNDPROC)GetProp(hwnd,
             "BrowserFocusHackOldProc");
-    if(!old_window_proc) {
+    if (!old_window_proc) {
         return DefWindowProc(hwnd, uMsg, wParam, lParam);
     }
-    switch(uMsg) {
+    switch (uMsg) {
         case WM_MOUSEACTIVATE:
             // The user clicked on a xulrunner browser.  Have the GTK widget
             // grab focus.
@@ -110,10 +110,10 @@ LRESULT CALLBACK BrowserFocusHackWndProc(HWND hwnd, UINT uMsg, WPARAM wParam,
             parent = GetParent(hwnd);
             GdkWindow* window;
             window = gdk_window_lookup((GdkNativeWindow)parent);
-            if(window) {
+            if (window) {
                 GtkWidget* browser_widget;
                 gdk_window_get_user_data(window, (gpointer*)&browser_widget);
-                if(browser_widget) {
+                if (browser_widget) {
                     gtk_widget_grab_focus(browser_widget);
                 }
             }
@@ -131,7 +131,7 @@ LRESULT CALLBACK BrowserFocusHackWndProc(HWND hwnd, UINT uMsg, WPARAM wParam,
 static void install_toplevel_focus_fix(HWND hwnd)
 {
     HWND root_window = GetAncestor(hwnd, GA_ROOT);
-    if(GetProp(root_window, "ToplevelFocusHackOldProc") != NULL) {
+    if (GetProp(root_window, "ToplevelFocusHackOldProc") != NULL) {
         /* We already installed the fix, maybe there are 2 browser's
          * embedded? */
         return;

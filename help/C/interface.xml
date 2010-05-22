@@ -697,14 +697,67 @@
 	<sect2 id="xiphos-shortcut">
 		<title>Keyboard Shortcuts</title>
 		<para>
-		Several keyboard shortcuts exist in <application>Xiphos</application>:
+		Several keyboard shortcuts exist in <application>Xiphos</application>, listed below in rough functional groupings.
+		</para>
+		<para>
+		Window selection/opening and navbar selection:
 		</para>
 		<itemizedlist>
-		       <listitem>
+			<listitem>
 				<para>
-					<guibutton>F1</guibutton>: opens this manual.
+					<guibutton>Ctrl-L</guibutton> focuses and selects the main verse navbar text.  You can then immediately type
+					in new verse selection text.  Be aware that, as is the case with most Sword applications,
+					<application>Xiphos</application> understands many abbreviations: "G" is adequate to specify Genesis,
+					for example, and any book name by itself implies 1:1.
 				</para>
 			</listitem>
+			<listitem>
+				<para>
+					<guibutton>Alt-C</guibutton> brings the Commentary View forward when previously obscured by the Book View.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<guibutton>Alt-G</guibutton> is the opposite of Alt-C, focusing on the general book.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<guibutton>Alt-D</guibutton> focuses on the dictionary navbar text.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<guibutton>Ctrl-t</guibutton> opens a new tab.
+				</para>
+			</listitem>
+		       <listitem>
+				<para>
+					<guibutton>F1</guibutton> opens this manual.
+				</para>
+			</listitem>
+		</itemizedlist>
+		<para>
+		Verse navigation and Bible features:
+		</para>
+		<itemizedlist>
+			<listitem>
+				<para><guibutton>Ctrl-p/Ctrl-n</guibutton>: Verse previous/next. Also <guibutton>k/j</guibutton>.</para>
+			</listitem>
+			<listitem>
+				<para><guibutton>p/n</guibutton>: Chapter previous/next.</para>
+			</listitem>
+			<listitem>
+				<para><guibutton>P/N</guibutton>: Book previous/next.</para>
+			</listitem>
+			<listitem>
+				<para><guibutton>Shift-F10</guibutton> brings up the context menu for the Bible pane.</para>
+			</listitem>
+		</itemizedlist>
+		<para>
+		Opening special windows:
+		</para>
+		<itemizedlist>
 			<listitem>
 				<para>
 					<guibutton>F2</guibutton>: opens the <guibutton>Preferences</guibutton> dialog.
@@ -722,37 +775,14 @@
 			</listitem>
 			<listitem>
 				<para>
-					<guibutton>Ctrl-L</guibutton> focuses and selects the main verse navbar text.  You can then immediately type
-					in new verse selection text.  Be aware that, as is the case with most Sword applications,
-					<application>Xiphos</application> understands many abbreviations: "G" is adequate to specify Genesis,
-					for example, and any book name by itself implies 1:1.
+					<guibutton>Alt-B</guibutton> opens a bookmark dialog on the current verse.
 				</para>
 			</listitem>
 			<listitem>
 				<para>
 					<guibutton>Ctrl-F</guibutton> opens the "Find" dialog.  The subwindow to which it applies depends on which
 					of them are visible: The Bible is first preference, then the commentary or general book, then the
-					dictionary.  So a tab can be dedicated to just a genbook, and Ctrl-F will perform "Find" within that pane.
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<guibutton>Alt-C</guibutton> brings the Commentary View forward when previously obscured by the Book View.
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<guibutton>Alt-G</guibutton> is the opposite of Alt-C, focusing on the general book.
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<guibutton>Alt-B</guibutton> opens a bookmark dialog on the current verse.
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<guibutton>Alt-D</guibutton> focuses on the dictionary navbar text.
+					dictionary.  So a tab can be dedicated to just a book, and Ctrl-F will perform "Find" within that pane.
 				</para>
 			</listitem>
 			<listitem>
@@ -762,38 +792,24 @@
 			</listitem>
 			<listitem>
 				<para>
-					<guibutton>Alt-Z</guibutton> opens the personal commentary editor.
+					<guibutton>Alt-Z</guibutton> opens editor on the personal commentary named Personal.
 				</para>
 			</listitem>
+		</itemizedlist>
+		<para>
+		Font size control:
+		</para>
+		<itemizedlist>
 			<listitem>
 				<para>
 					<guibutton>Ctrl-Plus/Ctrl-Minus</guibutton> increases/decreases the base font size.
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-				Location bar navigation:
-				<itemizedlist>
-					<listitem>
-						<para><guibutton>Ctrl-p/Ctrl-n</guibutton>: Verse
-					previous/next.</para>
-					</listitem>
-					<listitem>
-						<para><guibutton>p/n</guibutton>: Chapter
-					previous/next.</para>
-					</listitem>
-					<listitem>
-						<para><guibutton>P/N</guibutton>: Book
-					previous/next.</para>
-					</listitem>
-				</itemizedlist>
 				</para>
 			</listitem>
 		</itemizedlist>
 	</sect2>
 
 	<sect2 id="xiphos-differences">
-		<title>Version Differences in <application>Xiphos</application>'s Display</title>
+		<title>Version Differences in <application>Xiphos</application>' Display</title>
 		<para>
 		The <application>Xiphos</application> interface has evolved over time, and there are two display libraries with which
 		<application>Xiphos</application> can be built.  The older, less featureful version is called "gtkhtml3", and the newer,

@@ -1,6 +1,6 @@
 /*
  * Xiphos Bible Study Tool
- * export_dialog.c - 
+ * export_dialog.c -
  *
  * Copyright (C) 2008-2009 Xiphos Developer Team
  *
@@ -80,7 +80,7 @@ EXPORT_DATA edata;
  *					    GtkFileChooser * filesel)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
@@ -91,12 +91,12 @@ void on_filechooserdialog_response(GtkDialog * fdialog,
 					    gint response_id,
 					    GtkFileChooser * filesel)
 {
-	
+
 	switch (response_id) {
 	case GTK_RESPONSE_OK:
 		edata.filename = g_strdup(gtk_file_chooser_get_filename(filesel));
-		
-		if(d.format)
+
+		if (d.format)
 			main_export_html(edata);
 		else
 			main_export_plain(edata);
@@ -132,20 +132,20 @@ void _get_export_filename(void)
 	GladeXML *gxml;
 	GtkWidget *fdialog;
 	filename = NULL;
-	
+
 	glade_file = gui_general_user_file("export-dialog.glade", FALSE);
 	g_return_if_fail(glade_file != NULL);
 	GS_message(("%s",glade_file));
 
 	/* build the widget */
 	gxml = glade_xml_new(glade_file, "filechooserdialog1", NULL);
-	
-	fdialog =  glade_xml_get_widget (gxml, "filechooserdialog1");	
-	g_signal_connect(fdialog, 
+
+	fdialog =  glade_xml_get_widget (gxml, "filechooserdialog1");
+	g_signal_connect(fdialog,
 			 "response",
-			 G_CALLBACK(on_filechooserdialog_response), 
-			 (GtkFileChooser *)fdialog);	
-	
+			 G_CALLBACK(on_filechooserdialog_response),
+			 (GtkFileChooser *)fdialog);
+
 }
 
 /******************************************************************************
@@ -155,12 +155,12 @@ void _get_export_filename(void)
  * Synopsis
  *   #include "gui/export_dialog.h"
  *
- *   void on_dialog_export_passage_response(GtkDialog * dialog, 
- *						gint response_id, 
+ *   void on_dialog_export_passage_response(GtkDialog * dialog,
+ *						gint response_id,
  *						gpointer user_data)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
@@ -171,26 +171,26 @@ void on_dialog_export_passage_response(GtkDialog * dialog,
 			 		gpointer user_data)
 {
 	switch (response_id) {
-	case GTK_RESPONSE_CANCEL:		
-		gtk_widget_destroy(GTK_WIDGET(dialog));	
+	case GTK_RESPONSE_CANCEL:
+		gtk_widget_destroy(GTK_WIDGET(dialog));
 		break;
 	case GTK_RESPONSE_OK:
 		if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(d.rb_html)))
 			d.format = 1;
 		else
 			d.format = 0;
-			
-		edata.passage_type = 
+
+		edata.passage_type =
 			gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(d.rb_book)) ? BOOK
 			 : gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(d.rb_chapter)) ? CHAPTER
 			 : gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(d.rb_verse)) ? VERSE
 			 : VERSE_RANGE;
-		
+
 		if (edata.passage_type == VERSE_RANGE) {
-			edata.start_verse = 
+			edata.start_verse =
 				gtk_spin_button_get_value_as_int (
 				    GTK_SPIN_BUTTON (d.sb_start_verse));
-			edata.end_verse = 
+			edata.end_verse =
 				gtk_spin_button_get_value_as_int (
 				    GTK_SPIN_BUTTON (d.sb_end_verse));
 			if (edata.end_verse < edata.start_verse) {
@@ -203,17 +203,17 @@ void on_dialog_export_passage_response(GtkDialog * dialog,
 			edata.start_verse = 0 ;
 			edata.end_verse = 0;
 		}
-			
+
 		if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(d.rb_export)))
 			_get_export_filename();
-		else {	
+		else {
 			edata.filename = NULL;
-			if(d.format)
+			if (d.format)
 				main_export_html(edata);
 			else
 				main_export_plain(edata);
 		}
-			
+
 		gtk_widget_destroy(GTK_WIDGET(dialog));
 		break;
 	}
@@ -230,7 +230,7 @@ void on_dialog_export_passage_response(GtkDialog * dialog,
  *  gint _check_for_distribution_license(gchar * mod_name)
  *
  * Description
- *   checks the module's conf file for DistributionLicense entry - if the 
+ *   checks the module's conf file for DistributionLicense entry - if the
  *   entry does not exist or contains the word 'copyright' a warning
  *   dialog is called - this needs lots of work --FIXME--
  *
@@ -242,13 +242,13 @@ gint _check_for_distribution_license(gchar * mod_name)
 {
 	gchar *distributionlicense;
 	gchar *conf_file;
-	
+
 	conf_file = g_strdup_printf("%s/" DOTSWORD "/mods.d/%s.conf",
 				    settings.homedir,
 				    g_utf8_strdown(mod_name,
                                     -1));
-		
-	if(g_file_test(conf_file,G_FILE_TEST_EXISTS))
+
+	if (g_file_test(conf_file,G_FILE_TEST_EXISTS))
 		distributionlicense = get_conf_file_item(
 							 conf_file,
 							 mod_name,
@@ -259,18 +259,18 @@ gint _check_for_distribution_license(gchar * mod_name)
 				 		"DistributionLicense");
 	g_free(conf_file);
 	GS_message(("DistributionLicense: %s",distributionlicense));
-		
-	if(!distributionlicense || (distributionlicense && 
-				          g_strstr_len(distributionlicense, 
-					  strlen(distributionlicense), 
+
+	if (!distributionlicense || (distributionlicense &&
+				          g_strstr_len(distributionlicense,
+					  strlen(distributionlicense),
 					  "Copyrighted"))) {
 		gui_generic_warning(_("Please check copyright before exporting!"));
 		return 1;
 	}
-	
-	return 0;	
-}			     
-			     
+
+	return 0;
+}
+
 
 static
 void on_rb_multi_verse_toggled (GtkToggleButton *togglebutton,
@@ -279,10 +279,10 @@ void on_rb_multi_verse_toggled (GtkToggleButton *togglebutton,
 	if (togglebutton->active) {
 		gtk_widget_set_sensitive (d.sb_start_verse, TRUE);
 		gtk_widget_set_sensitive (d.sb_end_verse, TRUE);
-		
+
 	} else {
 		gtk_widget_set_sensitive (d.sb_start_verse, FALSE);
-		gtk_widget_set_sensitive (d.sb_end_verse, FALSE);		
+		gtk_widget_set_sensitive (d.sb_end_verse, FALSE);
 	}
 }
 
@@ -309,21 +309,21 @@ void gui_export_dialog(void)
 	GladeXML *gxml;
 	gint dist_license, curVerse;
 	gdouble max;
-	
-	
+
+
 	dist_license = _check_for_distribution_license(settings.MainWindowModule);
-	
+
 	glade_file = gui_general_user_file("export-dialog.glade", FALSE);
 	g_return_if_fail(glade_file != NULL);
 	GS_message(("%s",glade_file));
 
 	/* build the widget */
 	gxml = glade_xml_new(glade_file, "dialog_export_passage", NULL);
-	
-	dialog =  glade_xml_get_widget (gxml, "dialog_export_passage");	
+
+	dialog =  glade_xml_get_widget (gxml, "dialog_export_passage");
 	g_signal_connect(dialog, "response",
 			 G_CALLBACK(on_dialog_export_passage_response), NULL);
-	
+
 	d.rb_book = glade_xml_get_widget(gxml, "radiobutton1");
 	d.rb_chapter = glade_xml_get_widget(gxml, "radiobutton2");
 	d.rb_verse = glade_xml_get_widget(gxml, "radiobutton3");
@@ -337,36 +337,36 @@ void gui_export_dialog(void)
 	d.sb_start_verse = glade_xml_get_widget(gxml, "sb_start_verse");
 	d.sb_end_verse = glade_xml_get_widget(gxml, "sb_end_verse");
 	d.warning_label = glade_xml_get_widget(gxml, "hbox2");
-	
+
 	max = main_get_max_verses ();
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (d.sb_start_verse), 
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (d.sb_start_verse),
 				   1, max);
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (d.sb_end_verse), 
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (d.sb_end_verse),
 				   1, max);
 	curVerse = main_get_current_verse();
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON (d.sb_start_verse), 
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (d.sb_start_verse),
 				   curVerse);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON (d.sb_end_verse), 
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (d.sb_end_verse),
 				   curVerse);
 	gtk_widget_set_sensitive (d.sb_start_verse, FALSE);
 	gtk_widget_set_sensitive (d.sb_end_verse, FALSE);
 
-	
-	if(dist_license) {
+
+	if (dist_license) {
 		gtk_widget_show(d.warning_label);
 		gtk_widget_hide(d.rb_book);
 	} else {
 		gtk_widget_hide(d.warning_label);
 		gtk_widget_show(d.rb_book);
 	}
-	
-	gtk_label_set_text (GTK_LABEL(d.lb_version), settings.MainWindowModule);	
+
+	gtk_label_set_text (GTK_LABEL(d.lb_version), settings.MainWindowModule);
 	gtk_label_set_text (GTK_LABEL(d.lb_key), settings.currentverse);
-	
+
 	g_signal_connect ((gpointer) d.rb_multi_verse, "toggled",
 		    G_CALLBACK (on_rb_multi_verse_toggled),
 		    NULL);
 
-	
+
 }
 //#endif

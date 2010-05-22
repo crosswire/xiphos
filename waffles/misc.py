@@ -1,7 +1,8 @@
+from Configure import conf
+
 """
 General useful functions
 """
-
 def myokmsg(kw):
     """
     some customization for displaying pkg-config values on the line with ok msg
@@ -13,77 +14,75 @@ def myokmsg(kw):
 
 # pkgconfig utils
 
+@conf
+def check_pkg(self, name, version='', mandatory=False, var=None):
+    """
+    Check package version and its cflags/libs
+    """
+    if not var:
+        var = name.split ('-')[0].upper ()
 
-def get_pkgvar(conf, pkg, var):
+    # for cross-compilation it is necessary to prepend custom
+    # prefix for include paths
+    if self.env['IS_CROSS_WIN32']:
+        self.check_cfg (package=name, uselib_store=var, args='--cflags --libs --define-variable=prefix=%s'%self.env['PKG_CONFIG_PREFIX'],
+            atleast_version=version, mandatory=mandatory)
+    else:
+        self.check_cfg (package=name, uselib_store=var, args='--cflags --libs',
+            atleast_version=version, mandatory=mandatory)
+
+    # make available libs to all source files
+    #(compile code with cflags from pkgconf e.g. -fshort-wchar, -mms-bitfields)
+    self.env.append_value('ALL_LIBS', var)
+
+@conf
+def check_pkg_msg(self, name, version='', mandatory=False, var=None, msg=''):
+    """
+    Check package version and its cflags/libs
+    """
+    if not var:
+        var = name.split ('-')[0].upper ()
+    self.check_cfg (package=name, uselib_store=var, args='--cflags --libs',
+        atleast_version=version, mandatory=mandatory, msg=msg)
+
+    # make available libs to all source files
+    #(compile code with cflags from pkgconf e.g. -fshort-wchar, -mms-bitfields)
+    self.env.append_value('ALL_LIBS', var)
+
+@conf
+def get_pkgvar(self, pkg, var):
     """
     Read a variable from package using pkg-config
     """
 
     # for cross-compilation it is necessary to prepend custom
     # prefix for include paths
-    if conf.env['IS_CROSS_WIN32']:
-        ret = conf.check_cfg(package=pkg, args='--variable=%s --define-variable=prefix=%s'%(var, conf.env['PKG_CONFIG_PREFIX'] ), okmsg=myokmsg,
+    if self.env['IS_CROSS_WIN32']:
+        ret = self.check_cfg(package=pkg, args='--variable=%s --define-variable=prefix=%s'%(var, self.env['PKG_CONFIG_PREFIX'] ), okmsg=myokmsg,
                 msg='Checking for var %s in %s' % (var, pkg)).strip()
     else:
-        ret = conf.check_cfg(package=pkg, args='--variable=%s' % var, okmsg=myokmsg,
+        ret = self.check_cfg(package=pkg, args='--variable=%s' % var, okmsg=myokmsg,
                 msg='Checking for var %s in %s' % (var, pkg)).strip()
     return ret
 
-
-def check_pkg(conf, name, version='', mandatory=False, var=None):
-    """
-    Check package version and its cflags/libs
-    """
-    if not var:
-        var = name.split ('-')[0].upper ()
-
-    # for cross-compilation it is necessary to prepend custom
-    # prefix for include paths
-    if conf.env['IS_CROSS_WIN32']:
-        conf.check_cfg (package=name, uselib_store=var, args='--cflags --libs --define-variable=prefix=%s'%conf.env['PKG_CONFIG_PREFIX'],
-            atleast_version=version, mandatory=mandatory)
-    else:
-        conf.check_cfg (package=name, uselib_store=var, args='--cflags --libs',
-            atleast_version=version, mandatory=mandatory)
-
-    # make available libs to all source files
-    #(compile code with cflags from pkgconf e.g. -fshort-wchar, -mms-bitfields)
-    conf.env.append_value('ALL_LIBS', var)
-
-
-def check_pkg_msg(conf, name, version='', mandatory=False, var=None, msg=''):
-    """
-    Check package version and its cflags/libs
-    """
-    if not var:
-        var = name.split ('-')[0].upper ()
-    conf.check_cfg (package=name, uselib_store=var, args='--cflags --libs',
-        atleast_version=version, mandatory=mandatory, msg=msg)
-
-    # make available libs to all source files
-    #(compile code with cflags from pkgconf e.g. -fshort-wchar, -mms-bitfields)
-    conf.env.append_value('ALL_LIBS', var)
-
-
-
-
-def check_pkgver(conf, name, version='', mandatory=False, var=None):
+@conf
+def check_pkgver(self, name, version='', mandatory=False, var=None):
     """
     Check package version without cflags/libs
     """
     if not var:
         var = name.split ('-')[0].upper ()
-    conf.check_cfg (package=name, uselib_store=var,
+    self.check_cfg (package=name, uselib_store=var,
         atleast_version=version, mandatory=mandatory)
 
-
-def check_pkgver_msg(conf, name, version='', mandatory=False, var=None, msg=''):
+@conf
+def check_pkgver_msg(self, name, version='', mandatory=False, var=None, msg=''):
     """
     Check package version without cflags/libs
     """
     if not var:
         var = name.split ('-')[0].upper ()
-    conf.check_cfg (package=name, uselib_store=var,
+    self.check_cfg (package=name, uselib_store=var,
         atleast_version=version, mandatory=mandatory, msg=msg)
 
 
@@ -94,7 +93,8 @@ def escape(string):
     """
     return string.decode('string-escape')
 
-def escpath(path):
+@conf
+def escpath(self, path):
     """
     Escape path - useful in win32
     """

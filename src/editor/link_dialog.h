@@ -18,7 +18,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  */
- 
+
 #ifndef _LINK_DIALOG_H
 #define _LINK_DIALOG_H
 
@@ -27,11 +27,11 @@ extern "C"
 {
 #endif
 
-#include <config.h>	
+#include <config.h>
 
 #include "editor/slib-editor.h"
-	
- 
+
+
 void editor_link_dialog (EDITOR *e);
 void entry_verse_changed_cb(GtkObject *object, EDITOR *e);
 void button_ok_clicked_cb(GtkObject *object, EDITOR *e);
@@ -43,4 +43,4 @@ void button_cancel_clicked_cb(GtkObject *object, gpointer user_data);
 }
 #endif
 
-#endif /* _LINK_DIALOG_H */	
+#endif /* _LINK_DIALOG_H */

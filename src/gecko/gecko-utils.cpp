@@ -38,10 +38,8 @@
 # undef NS_EXPORT_
 #endif
 
-#ifdef HAVE_GECKO_1_9
 #ifdef XPCOM_GLUE
 #include <gtkmozembed_glue.cpp>
-#endif
 #endif
 
 #include <gtkmozembed.h>
@@ -185,17 +183,17 @@ gecko_set_font (GeckoFontType font_type, const gchar *fontname)
 	switch (font_type) {
 	case GECKO_FONT_VARIABLE:
 		for (i = 0; i < G_N_ELEMENTS (font_languages); ++i) {
-			g_snprintf (pref, sizeof (pref), 
+			g_snprintf (pref, sizeof (pref),
 				    "font.name.variable.%s",
 				    font_languages[i]);
 			gecko_prefs_set_string (pref, name);
-			
-			g_snprintf (pref, sizeof (pref), 
+
+			g_snprintf (pref, sizeof (pref),
 				    "font.size.variable.%s",
 				    font_languages[i]);
 			gecko_prefs_set_int (pref, size);
-			
-			g_snprintf (pref, sizeof (pref), 
+
+			g_snprintf (pref, sizeof (pref),
 				    "font.minimum-size.%s",
 				    font_languages[i]);
 			gecko_prefs_set_int (pref, 8);
@@ -203,39 +201,43 @@ gecko_set_font (GeckoFontType font_type, const gchar *fontname)
 		break;
 	case GECKO_FONT_FIXED:
 		for (i = 0; i < G_N_ELEMENTS (font_languages); ++i) {
-			g_snprintf (pref, sizeof (pref), 
+			g_snprintf (pref, sizeof (pref),
 				    "font.name.fixed.%s",
 				    font_languages[i]);
 			gecko_prefs_set_string (pref, name);
-			
-			g_snprintf (pref, sizeof (pref), 
+
+			g_snprintf (pref, sizeof (pref),
 				    "font.size.fixed.%s",
 				    font_languages[i]);
 			gecko_prefs_set_int (pref, size);
 		}
-		
+
 		break;
 	default:
 		break;
 	}
 
 	g_free (name);
-}		   
+}
 
 extern "C" gboolean
 gecko_init (void)
 {
     	GError *err = NULL;
 	gchar *fontname = NULL;
-#ifdef HAVE_GECKO_1_9
 	NS_LogInit ();
-#endif
 
 	nsresult rv;
 #ifdef XPCOM_GLUE
+	//needs to be tested on lower gecko versions
+	//I have really no clue what this ranges mean but if xulrunner is
+	//outside of this range we get coredumps =( so here is a bold assumption
+	//that we will be able to work with any future xulrunner.
+#define UPPER_RANGE "1.9.99"
+#define LOWER_RANGE "1.9.0"
 	static const GREVersionRange greVersion = {
-		"1.9a", PR_TRUE,
-		"2", PR_TRUE
+		LOWER_RANGE, PR_TRUE,
+		UPPER_RANGE, PR_TRUE
 	};
 	char xpcomLocation[PATH_MAX];
 	rv = GRE_GetGREPathWithProperties(&greVersion, 1, nsnull, 0, xpcomLocation, sizeof (xpcomLocation));
@@ -258,16 +260,12 @@ gecko_init (void)
 	gtk_moz_embed_set_path(xpcomLocation);
 
 #else
-#ifdef HAVE_GECKO_1_9
 	gtk_moz_embed_set_path (GECKO_HOME);
-#else
-	gtk_moz_embed_set_comp_path (GECKO_HOME);
-#endif
 #endif // XPCOM_GLUE
 
 	gtk_moz_embed_push_startup ();
 
-#ifdef USE_GTKUPRINT
+#ifdef HAVE_GTKUPRINT
 	gecko_register_printing ();
 #endif
 	//	nsresult rv;
@@ -276,16 +274,16 @@ gecko_init (void)
 
 	rv = CallQueryInterface (prefService, &gPrefBranch);
 	NS_ENSURE_SUCCESS (rv, FALSE);
-	
+
     	gconf_client = gconf_client_get_default ();
     	fontname = gconf_client_get_string (gconf_client, KEY_GNOME_VARIABLE_FONT, &err);
-	if(fontname) {
+	if (fontname) {
 		GS_message(("var fontname %s",fontname));
 		gecko_set_font (GECKO_FONT_VARIABLE, fontname);
 		g_free(fontname);
 	}
     	fontname = gconf_client_get_string (gconf_client, KEY_GNOME_FIXED_FONT, &err);
-	if(fontname) {
+	if (fontname) {
 		GS_message(("fixed fontname %s",fontname));
 		gecko_set_font (GECKO_FONT_FIXED, fontname);
 		g_free(fontname);
@@ -302,7 +300,5 @@ gecko_shutdown (void)
 
 	gtk_moz_embed_pop_startup ();
 
-#ifdef HAVE_GECKO_1_9
         NS_LogTerm ();
-#endif
 }
