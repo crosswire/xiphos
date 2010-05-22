@@ -30,6 +30,9 @@ libgecko_a_CPPFLAGS = \
     -DGECKO_HOME=
 endif
 
+libgecko_a_CPPFLAGS += $(DISABLE_DEPRECATED)
+
+
 if HAVE_GECKO_1_9
 else
 if HAVE_GECKO_1_8_1
