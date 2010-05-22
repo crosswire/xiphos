@@ -1,3 +1,8 @@
+2009-12-14 simon<DrMeers@users.sourceforge.net>
+
+	* fixed tab bug -- closing tab B focused tab A, but cur_passage_tab
+	  got set to tab C! 
+
 2009-12-04 simon<DrMeers@users.sourceforge.net>
 
 	* fixed window title bug -- changing modules in the sidebar treeview
