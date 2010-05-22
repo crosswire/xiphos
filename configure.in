@@ -104,19 +104,19 @@ AS_IF([test "x$have_editor" = "xyes"],
 	    AC_SUBST(BONOBO_IDL_INCLUDES, ["-I`$PKG_CONFIG --variable=idldir libbonobo-2.0` -I`$PKG_CONFIG --variable=idldir bonobo-activation-2.0`"])])
 ])
 
-AC_MSG_CHECKING([whether to use oldgnome])
-AC_ARG_WITH([gnome], AS_HELP_STRING([--with-oldgnome], [Compile using libgnome]))
+AC_MSG_CHECKING([for gtk+-2.14])
+AC_ARG_WITH([gnome], AS_HELP_STRING([--with-gtk214], [Compile using gtk+-2.14 or better]))
 
-AS_IF([test "x$with_oldgnome" != "xyes"],[
-	   PKG_CHECK_EXISTS(gtk+-2.0 >= 2.14, [have_newgtk="yes"], [have_newgtk="no"])],
-	   [have_newgtk="no"]) 
+AS_IF([test "x$with_gtk214" != "xno"],[
+	   PKG_CHECK_EXISTS(gtk+-2.0 >= 2.14, [have_gtk214="yes"], [have_gtk214="no"])],
+	   [have_gtk214="no"])
 
-AS_IF([test "x$have_newgtk" = "xyes"],
-      [AC_DEFINE(WITHOUT_GNOME, 1, [Not using libgnomeui])
-      		AC_MSG_RESULT([no])],
-      [AS_IF([test "x$with_oldgnome" = "xyes"],
+AS_IF([test "x$have_gtk214" = "xyes"],
+      [AC_DEFINE(HAVE_GTK214, 1, [We have gnome-2.14 hence we can use modern API])
+      		AC_MSG_RESULT([yes])],
+      [AS_IF([test "x$with_gtk214" = "xno"],
              [REQUIRED_LIBS="$REQUIRED_LIBS libgnomeui-2.0"
-	     AC_MSG_RESULT([yes])])
+	     AC_MSG_RESULT([no])])
       ])
 
 PKG_CHECK_MODULES(XIPHOS, "$REQUIRED_LIBS")
