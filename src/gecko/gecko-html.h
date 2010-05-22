@@ -30,10 +30,10 @@
 G_BEGIN_DECLS
 
 #define GECKO_TYPE_HTML         (gecko_html_get_type ())
-#define GECKO_HTML(o)           (GTK_CHECK_CAST ((o), GECKO_TYPE_HTML, GeckoHtml))
-#define GECKO_HTML_CLASS(k)     (GTK_CHECK_FOR_CAST((k), GECKO_TYPE_HTML, GeckoHtmlClass))
-#define GECKO_IS_HTML(o)        (GTK_CHECK_TYPE ((o), GECKO_TYPE_HTML))
-#define GECKO_IS_HTML_CLASS(k)  (GTK_CHECK_CLASS_TYPE ((k), GECKO_TYPE_HTML))
+#define GECKO_HTML(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), GECKO_TYPE_HTML, GeckoHtml))
+#define GECKO_HTML_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST ((k), GECKO_TYPE_HTML, GeckoHtmlClass))
+#define GECKO_IS_HTML(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), GECKO_TYPE_HTML))
+#define GECKO_IS_HTML_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), GECKO_TYPE_HTML))
 #define GECKO_HTML_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), GECKO_TYPE_HTML, GeckoHtmlClass))
 
 typedef struct _GeckoHtml        GeckoHtml;
