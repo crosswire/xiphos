@@ -29,10 +29,10 @@
 #include <string.h>
 #include <assert.h>
 
-#ifndef WITHOUT_GNOME
-#include <gnome.h>
-#else
+#ifdef HAVE_GTK214
 #include <gtk/gtk.h>
+#else
+#include <gnome.h>
 #endif
 
 #include "gui/utilities.h"
@@ -1257,8 +1257,9 @@ gboolean xiphos_open_default (const gchar *file)
 	
 #else
 	GError *error = NULL;
-#ifndef WITHOUT_GNOME
-	if (gnome_url_show(file, &error) == FALSE){
+#ifdef HAVE_GTK214
+	gtk_show_uri (NULL, file, gtk_get_current_event_time(), &error);
+	if (error != NULL) {
 		GS_warning(("%s", error->message));
 		g_error_free (error);
 		return FALSE;
@@ -1266,8 +1267,7 @@ gboolean xiphos_open_default (const gchar *file)
 	else
 		return TRUE;
 #else
-	gtk_show_uri (NULL, file, gtk_get_current_event_time(), &error);
-	if (error != NULL) {
+	if (gnome_url_show(file, &error) == FALSE){
 		GS_warning(("%s", error->message));
 		g_error_free (error);
 		return FALSE;
