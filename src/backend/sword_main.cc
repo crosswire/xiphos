@@ -67,11 +67,10 @@ BackEnd::BackEnd()
 	t = g_timer_new();
 
 	main_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
-//	display_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
 
 	g_timer_stop(t);
 	d = g_timer_elapsed(t, NULL);
-	GS_message(("create main_mgr and display_mgr time is %f", d));
+	GS_message(("create main_mgr time is %f", d));
 
 	display_mod = NULL;
 	tree_key = NULL;
@@ -89,10 +88,7 @@ BackEnd::~BackEnd()
 {
 	if(main_mgr)
 		delete main_mgr;
-//	if(main_mgr)
-//		delete main_mgr;
 	main_mgr = 0;
-//	display_mgr = 0;
 	if (commDisplay)
 		delete commDisplay;
 	if (bookDisplay)

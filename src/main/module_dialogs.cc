@@ -138,7 +138,7 @@ void main_dialogs_book_heading(DIALOG_DATA * d)
 {	
 	VerseKey *vkey;		
 	BackEnd* be = (BackEnd*)d->backend;
-	SWMgr *mgr = be->get_display_mgr();
+	SWMgr *mgr = be->get_mgr();
 	
 	be->display_mod = mgr->Modules[d->mod_name];
 	GS_message(("%s",(char*)be->display_mod->RenderText()));
@@ -171,7 +171,7 @@ void main_dialogs_chapter_heading(DIALOG_DATA * d)
 {	
 	VerseKey *vkey;	
 	BackEnd* be = (BackEnd*)d->backend;
-	SWMgr *mgr = be->get_display_mgr();
+	SWMgr *mgr = be->get_mgr();
 	
 	be->display_mod = mgr->Modules[d->mod_name];
 	backend->display_mod->setKey(d->key);
@@ -1546,7 +1546,7 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 		time_t curtime;
 		struct tm *loctime;
 		char *feature;
-		if ((feature = (char *)be->get_main_mgr()->
+		if ((feature = (char *)be->get_mgr()->
 					getModule(mod_name)->
 					getConfigEntry("Feature")) &&
 		    !strcmp(feature, "DailyDevotion")) {

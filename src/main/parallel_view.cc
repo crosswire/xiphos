@@ -111,7 +111,7 @@ static const gchar *tf2of(int true_false)
 static void set_global_option(char * option, gboolean choice)
 {
 	const char *on_off = tf2of(choice);
-	SWMgr *mgr = backend_p->get_display_mgr();
+	SWMgr *mgr = backend_p->get_mgr();
 	char *buf= g_strdup (option);
 
 //	GS_message (("option://%s\n\n",option));
@@ -130,7 +130,7 @@ static void set_global_textual_reading (const char * option, int choice)
 {
 	//gboolean primary = 0, secondary = 0, all = 0;
 	char *buf= g_strdup (option);
-	SWMgr *mgr = backend_p->get_display_mgr();
+	SWMgr *mgr = backend_p->get_mgr();
 	
 	xml_set_value("Xiphos", 
 		      "parallel", 
@@ -349,7 +349,7 @@ void main_set_parallel_module_global_options(GtkCheckMenuItem * menuitem,
 void main_set_parallel_options_at_start(void)
 {
 	char *value;
-	SWMgr *mgr = backend_p->get_display_mgr();
+	SWMgr *mgr = backend_p->get_mgr();
 
 	GList *tmp = backend->get_module_options();
 	while (tmp) {
