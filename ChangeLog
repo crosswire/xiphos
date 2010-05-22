@@ -1,3 +1,9 @@
+2009-11-28 matthew<ransom1982@users.sourceforge.net>
+
+	* added code to use libgsf to archive files
+	* small improvements to Windows file finding
+	* module manager optimizations
+	
 2009-11-18 terry <tbiggs@users.sourceforge.net>
 
 	*added search results and verse lists to exporter
