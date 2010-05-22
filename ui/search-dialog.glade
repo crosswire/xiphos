@@ -966,6 +966,24 @@ See Module Manager's maintenance functions</property>
 		      </child>
 
 		      <child>
+			<widget class="GtkToolButton" id="toolbutton_export">
+			  <property name="visible">True</property>
+			  <property name="tooltip" translatable="yes">Export current search results</property>
+			  <property name="label" translatable="yes">Export</property>
+			  <property name="use_underline">True</property>
+			  <property name="stock_id">gtk-goto-bottom</property>
+			  <property name="visible_horizontal">True</property>
+			  <property name="visible_vertical">True</property>
+			  <property name="is_important">False</property>
+			  <signal name="clicked" handler="on_toolbutton_export_clicked" last_modification_time="Tue, 17 Nov 2009 19:08:43 GMT"/>
+			</widget>
+			<packing>
+			  <property name="expand">False</property>
+			  <property name="homogeneous">True</property>
+			</packing>
+		      </child>
+
+		      <child>
 			<widget class="GtkToolButton" id="toolbutton2">
 			  <property name="visible">True</property>
 			  <property name="tooltip" translatable="yes">Clear lists for new search</property>
