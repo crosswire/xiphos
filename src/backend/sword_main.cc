@@ -26,6 +26,7 @@
 #include <swmodule.h>
 #include <localemgr.h>
 #include <swversion.h>
+#include <filemgr.h>
 
 #include <markupfiltmgr.h>
 #include <swlocale.h>
@@ -61,8 +62,16 @@ static const char *f_message = "backend/sword_main.cc line #%d \"%s\" = %s";
 
 BackEnd::BackEnd()
 {
+	GTimer *t;
+	double d;
+	t = g_timer_new();
+
 	main_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
 	display_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
+
+	g_timer_stop(t);
+	d = g_timer_elapsed(t, NULL);
+	GS_message(("create main_mgr and display_mgr time is %f", d));
 
 	display_mod = NULL;
 	tree_key = NULL;

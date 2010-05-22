@@ -65,7 +65,7 @@ int main_module_mgr_delete_index_mod(char * module_name)
 void main_update_module_lists(void)
 {
 	main_shutdown_list();
-	delete backend;		
+	delete backend;
 	backend = new BackEnd();
 	backend->init_SWORD(0);
 	main_init_lists();

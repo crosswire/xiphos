@@ -759,6 +759,10 @@ void backend_init_module_mgr(const char *dir,
 	//                then "as sent" ([a] total list or [b] per-area list)
 	//		  else "false for local install" (always per-area)
 
+	GTimer *t;
+	double d;
+	t = g_timer_new();
+	
 	if (regular) {		// use main (regular) swmgr.
 		if (mgr)
 			delete mgr;
@@ -768,7 +772,10 @@ void backend_init_module_mgr(const char *dir,
 			delete list_mgr;
 		list_mgr = new SWMgr(dir, true, 0, false, false);
 	}
-
+	g_timer_stop(t);
+	d = g_timer_elapsed(t, NULL);
+	GS_message(("create SWMgr time is %f", d));
+	
 	const gchar *envhomedir = g_getenv(HOMEVAR);
 	SWBuf baseDir = (envhomedir) ? envhomedir : ".";
 	baseDir += "/" DOTSWORD "/InstallMgr";
@@ -786,6 +793,7 @@ void backend_init_module_mgr(const char *dir,
 #else
 	installMgr = new InstallMgr(baseDir, statusReporter);
 #endif
+
 }
 
 /******************************************************************************
