@@ -85,6 +85,9 @@ GdkPixbuf *pixbuf_finder(char *image, GError **error);
 void HtmlOutput(char *text, GtkWidget *gtkText, MOD_FONT *mf, char *anchor);
 void set_window_icon(GtkWindow *window);
 gboolean xiphos_open_default(const gchar *file);
+#ifdef WIN32
+gchar* xiphos_win32_get_subdir(const gchar *subdir);
+#endif
 void utilities_parse_treeview(xmlNodePtr parent, 
                               GtkTreeIter * tree_parent, 
                               GtkTreeStore *model);
