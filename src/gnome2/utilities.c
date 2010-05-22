@@ -284,6 +284,7 @@ gchar * gui_general_user_file (const char *fname, gboolean critical)
 	gchar *alternative[10];
 	gchar *file;
 	gint i;
+	gchar *share_dir;
 	
 	/* create cache hash table if it doesnt already exist */
 	if (already_found == NULL)
@@ -307,7 +308,7 @@ gchar * gui_general_user_file (const char *fname, gboolean critical)
 	}
 
 	/* try the default */
-	file = g_build_filename(getenv(HOMEVAR), ".xiphos", fname, NULL);
+	file = g_build_filename(g_getenv(HOMEVAR), ".xiphos", fname, NULL);
 	
 	/* success? */
 	if (g_file_test (file, G_FILE_TEST_EXISTS))
@@ -330,8 +331,14 @@ gchar * gui_general_user_file (const char *fname, gboolean critical)
 	alternative[i++] = g_build_filename("..", "ui", fname, NULL);
 	alternative[i++] = g_build_filename("..", "..", "ui", fname, NULL);
 #endif
+#ifdef WIN32
+	share_dir = g_win32_get_package_installation_directory_of_module(NULL);
+	share_dir = g_strconcat(share_dir, "\0", NULL);
+	share_dir = g_build_filename (share_dir, "share", "xiphos", fname, NULL);
+	alternative[i++] = share_dir;
+#else
 	alternative[i++] = g_build_filename("..", "share", "xiphos", fname, NULL);
-	/* above line for WIN32, mostly. */
+#endif
 	alternative[i++] = g_build_filename(SHARE_DIR, fname, NULL);
 	alternative[i++] = NULL;  /* NULL terminator needed */
 	
