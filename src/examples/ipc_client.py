@@ -40,7 +40,7 @@ class ControlXiphos:
 
     def receive_navigation(self, reference):
         self.label_ref.set_text(reference)
-        
+
     def navigate_xiphos(self, widget, data=None):
         self.proxy.setCurrentReference('sword://' + self.entry.get_text())
 
@@ -71,15 +71,15 @@ class ControlXiphos:
         self.vbox = gtk.VBox()
         self.window.add(self.vbox)
         self.vbox.show()
-        
+
         self.hbox = gtk.HBox()
         self.vbox.pack_start(self.hbox)
         self.hbox.show()
-        
+
         self.entry = gtk.Entry()
         self.hbox.pack_start(self.entry)
         self.entry.show()
-        
+
         self.button = gtk.Button("Navigate Xiphos")
         self.button.connect("clicked", self.navigate_xiphos, None)
         self.hbox.pack_end(self.button)
@@ -104,7 +104,7 @@ class ControlXiphos:
         self.scrollbox = gtk.ScrolledWindow()
         self.hbox_res.pack_end(self.scrollbox)
         self.scrollbox.show()
-        
+
         self.results_tree = gtk.TreeView()
         self.results_tree.set_size_request(-1, 200)
 
@@ -117,7 +117,7 @@ class ControlXiphos:
 
         self.scrollbox.add(self.results_tree)
         self.results_tree.show()
-        
+
         self.window.show()
 
     def main(self):

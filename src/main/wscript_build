@@ -1,0 +1,14 @@
+#!/usr/bin/env python
+# encoding: utf8
+
+lib = bld.new_task_gen(
+    features='cxx cc',
+    includes='. ../.. ../../src %s' % bld.env['GECKO_INCLUDE'], # ../../ for config.h
+    target='main',
+    #uselib='GLIB GNOMEUI SWORD GTKMOZEMBED GTKMOZEMBED_UNSTABLE GECKONSS GECKONSPR GTKHTML UPRINT MAGICK',
+    #uselib_local='backend gecko editor',
+    uselib= bld.env['ALL_LIBS'],
+)
+
+lib.find_sources_in_dirs('.')
+

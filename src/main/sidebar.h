@@ -26,7 +26,7 @@ extern "C" {
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-	
+
 #include <gtk/gtk.h>
 
 typedef struct {
@@ -41,8 +41,8 @@ gboolean main_expand_treeview_to_path (GtkTreeModel *model, GtkTreeIter iter);
 #endif
 
 void main_open_bookmark_in_new_tab(gchar * mod_name, gchar * key);
-void main_display_verse_list_in_sidebar(gchar * key, gchar * module_name, 
-						gchar * verse_list);	
+void main_display_verse_list_in_sidebar(gchar * key, gchar * module_name,
+						gchar * verse_list);
 void main_create_pixbufs(void);
 void main_load_module_tree(GtkWidget * tree);
 void main_add_mod_tree_columns(GtkTreeView * tree);

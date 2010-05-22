@@ -18,7 +18,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  */
- 
+
 #ifndef __parallel_TAB_H__
 #define __parallel_TAB_H__
 
@@ -34,7 +34,7 @@ void gui_force_parallel_tab_sync(void);
 void gui_destroy_parallel_tab(void);
 void gui_parallel_close_tab(GtkButton * button, gpointer user_data);
 GtkWidget *_create_parallel_tab(void);
-	
+
 #ifdef __cplusplus
 }
 #endif

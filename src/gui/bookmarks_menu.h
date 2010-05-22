@@ -1,6 +1,6 @@
 /*
  * Xiphos Bible Study Tool
- * bookmarks_menu.h - gui for bookmarks 
+ * bookmarks_menu.h - gui for bookmarks
  *
  * Copyright (C) 2003-2009 Xiphos Developer Team
  *
@@ -40,7 +40,6 @@ struct _bookmark_menu {
 	GtkWidget *bibletime;
 	GtkWidget *rr_submenu;
 	GtkWidget *remove;
-	GtkWidget *restore;
 };
 typedef struct _bookmark_menu BOOKMARK_MENU;
 extern BOOKMARK_MENU menu;
@@ -57,9 +56,6 @@ void on_allow_reordering_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_dialog_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_export_folder_activate(GtkMenuItem * menuitem, gpointer user_data);
-void restore_ok(GtkButton * button, GtkWidget * filesel);
-void restore_cancel(GtkButton * button, GtkWidget * dlg);
-void on_restore_folder_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_delete_item_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_expand_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_collapse_activate(GtkMenuItem * menuitem, gpointer user_data);

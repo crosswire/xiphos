@@ -27,8 +27,8 @@ extern "C" {
 #endif
 
 extern GtkWidget *dialog_display_info;
-	
-void gui_display_text_information(gchar * information);	
+
+void gui_display_text_information(gchar * information);
 void gui_display_mod_and_key(const gchar * mod_name, const gchar * key);
 GtkWidget *gui_create_display_informtion_dialog(void);
 

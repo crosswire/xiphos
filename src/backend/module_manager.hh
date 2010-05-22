@@ -1,7 +1,7 @@
 /*
  * Xiphos Bible Study Tool
  * module_manager.hh
- * 
+ *
  * Copyright (C) 2000-2009 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -37,7 +37,7 @@ class GSStatusReporter : public StatusReporter {
 	virtual void preStatus(long totalBytes, long completedBytes, const char *message);
 };
 
-class ModuleManager {	
+class ModuleManager {
 	SWMgr *mgr;
 	SWMgr *list_mgr;
 	InstallMgr *installMgr;
@@ -45,11 +45,11 @@ class ModuleManager {
 	ModMap::iterator end;
 	GSStatusReporter *statusReporter;
 	SWBuf baseDir;
-public:	
+public:
 	ModuleManager();
 	~ModuleManager();
-	void init_ModuleManager(void);	
-	
+	void init_ModuleManager(void);
+
 };
 
 
@@ -80,12 +80,12 @@ void backend_shut_down_module_mgr(void);
 void backend_terminate_module_mgr(void);
 void backend_init_module_mgr_config(void);
 int backend_init_module_mgr_config_extras(void);
-void backend_module_mgr_clear_config(void);	
+void backend_module_mgr_clear_config(void);
 void backend_module_mgr_reread_config(void);
-void backend_module_mgr_add_source(const char * vtype, 
-				   const char * type, 
-				   const char * caption, 
-				   const char * source, 
+void backend_module_mgr_add_source(const char * vtype,
+				   const char * type,
+				   const char * caption,
+				   const char * source,
 				   const char * directory,
 				   const char * user,
 				   const char * pass,

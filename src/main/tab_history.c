@@ -52,8 +52,8 @@
  * Synopsis
  *   #include "main/tab_history.h"
  *
- *   void on_menu_historyitem_activate(GtkMenuItem * menuitem, 
- *						gpointer user_data)	
+ *   void on_menu_historyitem_activate(GtkMenuItem * menuitem,
+ *						gpointer user_data)
  *
  * Description
  *   change text module to chosen histor item
@@ -76,10 +76,10 @@ on_menu_historyitem_activate(GtkMenuItem * menuitem,
  * Synopsis
  *   #include "main/tab_history.h"
  *
- *   void main_clear_tab_history(void)	
+ *   void main_clear_tab_history(void)
  *
  * Description
- *    
+ *
  *
  * Return value
  *   void
@@ -92,11 +92,11 @@ void main_clear_tab_history(void)
 	//gui_remove_menu_items(_("H_istory/<Separator>"),
 	//		      tab->history_items + 1);
 	//gui_add_separator2menu(widgets.app, _("H_istory/C_lear"));
-	
+
 	/* set sensitivity of history buttons */
 	gtk_widget_set_sensitive(BUTTON_BACK, FALSE);
 	gtk_widget_set_sensitive(BUTTON_FORW, FALSE);
-	
+
 	tab->history_items = 0;
 	tab->current_history_item = 0;
 	tab->first_back_click = TRUE;
@@ -110,10 +110,10 @@ void main_clear_tab_history(void)
  * Synopsis
  *   #include "main/tab_history.h"
  *
- *   void main_update_tab_history_menu(gpointer data)	
+ *   void main_update_tab_history_menu(gpointer data)
  *
  * Description
- *    
+ *
  *
  * Return value
  *   void
@@ -139,7 +139,7 @@ void main_update_tab_history_menu(gpointer data)
  * Synopsis
  *   #include "main/tab_history.h"
  *
- *   void main_add_tab_history_item(gpointer data)	
+ *   void main_add_tab_history_item(gpointer data)
  *
  * Description
  *    add an item to the history menu
@@ -151,8 +151,8 @@ void main_add_tab_history_item(gpointer data)
 {
 	gint i;
 	PASSAGE_TAB_INFO *tab = (PASSAGE_TAB_INFO*) data;
-	
-	/* check to see if item is already in list  
+
+	/* check to see if item is already in list
 	   if so do nothing except set button sensitivity */
 	for (i = 0; i < tab->history_items; ++i) {
 		if (!strcmp(tab->history_list[i].verseref, tab->text_commentary_key)) {
@@ -164,12 +164,12 @@ void main_add_tab_history_item(gpointer data)
 
 	/* if we have hit max length, dispose of oldest */
 	if (tab->history_items == TABHISTORYLENGTH) {
-		for (i = 0; i < (TABHISTORYLENGTH - 1); ++i) { 
+		for (i = 0; i < (TABHISTORYLENGTH - 1); ++i) {
 			tab->history_list[i] = tab->history_list[i + 1];
 		}
 		--tab->history_items;
 	}
-	
+
 	/* add item to history menu */
 	strcpy(tab->history_list[tab->history_items].verseref, tab->text_commentary_key);
 	if (tab->text_mod)
@@ -192,7 +192,7 @@ void main_add_tab_history_item(gpointer data)
  *   #include ".h"
  *
  *   void on_clear_activate(GtkMenuItem * menuitem,
- *						gpointer user_data)	
+ *						gpointer user_data)
  *
  * Description
  *   remove all items from history list by calling
@@ -208,12 +208,12 @@ void on_clear_activate(GtkMenuItem * menuitem, gpointer user_data)
 }
 
 GtkWidget *main_versekey_drop_down_new(gpointer data)
-{	
+{
 	gint i;
 	GtkWidget *menu;
 	GtkWidget *item;
 	PASSAGE_TAB_INFO *tab = NULL;
-    	
+
 	tab = (PASSAGE_TAB_INFO*) data;
 	menu = gtk_menu_new();
 	item = gtk_menu_item_new_with_label(_("Clear History"));
@@ -221,17 +221,17 @@ GtkWidget *main_versekey_drop_down_new(gpointer data)
 		g_signal_connect(GTK_OBJECT(item), "activate",
 				   G_CALLBACK
 				   (on_clear_activate),
-				   NULL);		
-		gtk_container_add(GTK_CONTAINER(menu), item); 
+				   NULL);
+		gtk_container_add(GTK_CONTAINER(menu), item);
 
 	for (i = 0; i < tab->history_items; ++i) {
 		item = gtk_menu_item_new_with_label(tab->history_list[i].verseref);
-		gtk_widget_show(item);	
+		gtk_widget_show(item);
 		gtk_container_add(GTK_CONTAINER(menu), item);
 		g_signal_connect(GTK_OBJECT(item), "activate",
 				   G_CALLBACK
 				   (on_menu_historyitem_activate),
-				   GINT_TO_POINTER(i));	
+				   GINT_TO_POINTER(i));
 		if (!strcmp(tab->history_list[i].verseref, tab->text_commentary_key))
 			gtk_widget_set_sensitive(item,FALSE);
 	}
@@ -246,10 +246,10 @@ GtkWidget *main_versekey_drop_down_new(gpointer data)
  * Synopsis
  *   #include "main/tab_history.h"
  *
- *   void main_change_verse_tab_history(gint historynum)	
+ *   void main_change_verse_tab_history(gint historynum)
  *
  * Description
- *    
+ *
  *
  * Return value
  *   void
@@ -264,7 +264,7 @@ void main_change_verse_tab_history(gint historynum)
 	settings.addhistoryitem = tab->first_back_click;
 
 	GS_print(("commod = %s\n",tab->history_list[historynum].commod));
-	GS_print(("textmod = %s\n",tab->history_list[historynum].textmod));	
+	GS_print(("textmod = %s\n",tab->history_list[historynum].textmod));
 
 	key = main_update_nav_controls(tab->history_list[historynum].verseref);
 	main_display_commentary(tab->history_list[historynum].commod, key);
@@ -284,7 +284,7 @@ void main_change_verse_tab_history(gint historynum)
  *   void main_navigate_tab_history(gint direction)
  *
  * Description
- *    
+ *
  *
  * Return value
  *   void
@@ -308,7 +308,7 @@ void main_navigate_tab_history(gint direction)
 			    (tab->current_history_item > 0))
 				--tab->current_history_item;
 #endif
-			
+
 			main_change_verse_tab_history(tab->current_history_item);
 			tab->first_back_click = FALSE;
 		}

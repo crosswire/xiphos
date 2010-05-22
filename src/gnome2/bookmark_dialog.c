@@ -69,7 +69,7 @@ void on_buffer_changed (GtkTextBuffer *textbuffer, gpointer user_data)
                                          &end,
                                          FALSE);
 	GS_message (("note: %s", note));
-	
+
 
 }
 
@@ -83,20 +83,20 @@ void on_buffer_changed (GtkTextBuffer *textbuffer, gpointer user_data)
  *   void add_bookmark_button(void)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
  */
- 
-static 
+
+static
 void add_bookmark_button(void)
 {
 	GtkTreeIter selected;
 	GtkTreeIter iter;
 	BOOKMARK_DATA *data;
 	GtkTreeSelection *selection;
-	
+
 	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview));
 	if (!gtk_tree_selection_get_selected(selection, NULL, &selected))
 		return;
@@ -108,13 +108,13 @@ void add_bookmark_button(void)
 						(entry_key)));
 	data->module = g_strdup((gchar *)gtk_entry_get_text(GTK_ENTRY
 						   (entry_module)));
-	
-	if(!strcmp(data->module,"studypad"))
+
+	if (!strcmp(data->module,"studypad"))
 		data->module_desc = "studypad";
 	else
 		data->module_desc =
 		    	main_get_module_description(data->module);
-	
+
 	data->description = g_strdup((gchar *)gtk_entry_get_text
 				     (GTK_ENTRY(entry_label)));
 
@@ -134,20 +134,20 @@ void add_bookmark_button(void)
 
 /******************************************************************************
  * Name
- *   
+ *
  *
  * Synopsis
  *   #include "gui/bookmark_dialog.h"
  *
- *   
+ *
  *
  * Description
- *   
+ *
  *
  * Return value
- *   
+ *
  */
- 
+
 static void add_folder_button(void)
 {
 	GtkTreeIter selected;
@@ -208,22 +208,22 @@ static void add_folder_button(void)
 
 /******************************************************************************
  * Name
- *   
+ *
  *
  * Synopsis
  *   #include "gui/bookmark_dialog.h"
  *
- *   
+ *
  *
  * Description
- *   
+ *
  *
  * Return value
- *   
+ *
  */
- 
-void on_dialog_response(GtkDialog * dialog, 
-			gint response_id, 
+
+void on_dialog_response(GtkDialog * dialog,
+			gint response_id,
 			gpointer user_data)
 {
 	switch (response_id) {
@@ -255,7 +255,7 @@ void on_dialog_response(GtkDialog * dialog,
  * Return value
  *   void
  */
- 
+
 void on_dialog_enter(void)
 {
 	on_dialog_response(GTK_DIALOG(bookmark_dialog),
@@ -276,9 +276,9 @@ void on_dialog_enter(void)
  * Return value
  *   void
  */
- 
-void on_mark_verse_response(GtkDialog * dialog, 
-			    gint response_id, 
+
+void on_mark_verse_response(GtkDialog * dialog,
+			    gint response_id,
 			    gpointer user_data)
 {
 	gchar reference[100], *module, *key;
@@ -330,7 +330,7 @@ void on_mark_verse_response(GtkDialog * dialog,
  * Return value
  *   void
  */
- 
+
 void on_mark_verse_enter(void)
 {
 	on_mark_verse_response(GTK_DIALOG(mark_verse_dialog),
@@ -340,20 +340,20 @@ void on_mark_verse_enter(void)
 
 /******************************************************************************
  * Name
- *   
+ *
  *
  * Synopsis
  *   #include "gui/bookmark_dialog.h"
  *
- *   
+ *
  *
  * Description
- *   
+ *
  *
  * Return value
- *   
+ *
  */
- 
+
 gboolean on_treeview_button_release_event(GtkWidget       *widget,
                                  	  GdkEventButton  *event,
                                  	  gpointer        user_data)
@@ -366,7 +366,7 @@ gboolean on_treeview_button_release_event(GtkWidget       *widget,
 	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(widget));
 	if (gtk_tree_selection_get_selected(selection, &gmodel, &selected)) {
 		gtk_tree_model_get(gmodel, &selected, 3, &key, -1);
-		if (!gtk_tree_model_iter_has_child(gmodel, &selected) 
+		if (!gtk_tree_model_iter_has_child(gmodel, &selected)
 				&& key != NULL) {
 			gtk_widget_set_sensitive(button_new_folder, FALSE);
 			gtk_widget_set_sensitive(button_add_bookmark, FALSE);
@@ -383,27 +383,27 @@ gboolean on_treeview_button_release_event(GtkWidget       *widget,
 
 /******************************************************************************
  * Name
- *   
+ *
  *
  * Synopsis
  *   #include "gui/bookmark_dialog.h"
  *
- *   
+ *
  *
  * Description
- *   
+ *
  *
  * Return value
- *   
+ *
  */
- 
+
 static void setup_treeview(void)
-{	
+{
 	GtkTreePath *path;
 	GtkTreeIter iter;
 	GtkTreeSelection *selection = NULL;
-	
-	gtk_tree_view_set_model(GTK_TREE_VIEW(treeview),GTK_TREE_MODEL(model));	
+
+	gtk_tree_view_set_model(GTK_TREE_VIEW(treeview),GTK_TREE_MODEL(model));
 	gui_add_columns(GTK_TREE_VIEW(treeview));
 	gtk_tree_model_get_iter_first(GTK_TREE_MODEL(model), &iter);
 	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview));
@@ -416,22 +416,22 @@ static void setup_treeview(void)
 
 /******************************************************************************
  * Name
- *   
+ *
  *
  * Synopsis
  *   #include "gui/bookmark_dialog.h"
  *
- *   
+ *
  *
  * Description
- *   
+ *
  *
  * Return value
- *   
+ *
  */
- 
-static GtkWidget *_create_bookmark_dialog(gchar * label, 
-					  gchar * module, 
+
+static GtkWidget *_create_bookmark_dialog(gchar * label,
+					  gchar * module,
 					  gchar * key)
 {
 	GladeXML *gxml;
@@ -440,7 +440,7 @@ static GtkWidget *_create_bookmark_dialog(gchar * label,
 	glade_file = gui_general_user_file ("bookmarks.glade", TRUE);
 	g_return_val_if_fail(glade_file != NULL, NULL);
 	GS_message(("%s",glade_file));
-	
+
 	/* build the widget */
 	gxml = glade_xml_new (glade_file, NULL, NULL);
 	g_free (glade_file);
@@ -450,13 +450,13 @@ static GtkWidget *_create_bookmark_dialog(gchar * label,
 	bookmark_dialog = glade_xml_get_widget (gxml, "dialog");
 	g_signal_connect(bookmark_dialog, "response",
 			 G_CALLBACK(on_dialog_response), NULL);
-	
+
 	/* treeview */
 	treeview = glade_xml_get_widget (gxml, "treeview");
 	setup_treeview();
 	g_signal_connect(treeview, "button-release-event",
 			 G_CALLBACK(on_treeview_button_release_event), NULL);
-	/* entrys */	
+	/* entrys */
 	entry_label = glade_xml_get_widget (gxml, "entry1");
 	entry_key = glade_xml_get_widget (gxml, "entry2");
 	entry_module = glade_xml_get_widget (gxml, "entry3");
@@ -473,7 +473,7 @@ static GtkWidget *_create_bookmark_dialog(gchar * label,
 	/* dialog buttons */
 	button_new_folder = glade_xml_get_widget (gxml, "button1");
 	button_add_bookmark = glade_xml_get_widget (gxml, "button3");
-	
+
 	return bookmark_dialog;
 }
 
@@ -491,13 +491,13 @@ static GtkWidget *_create_bookmark_dialog(gchar * label,
  * Return value
  *   void
  */
- 
-static GtkWidget *_create_mark_verse_dialog(gchar * module, 
+
+static GtkWidget *_create_mark_verse_dialog(gchar * module,
 					    gchar * key)
 {
 	GladeXML *gxml;
 	gchar *glade_file;
-	GtkWidget *sw;	
+	GtkWidget *sw;
 	gchar osisreference[100];
 	gchar *old_note = NULL;
 
@@ -505,11 +505,11 @@ static GtkWidget *_create_mark_verse_dialog(gchar * module,
 		   main_get_osisref_from_key((const char *)module,
 					     (const char *)key));
 	note = NULL;
-	
+
 	glade_file = gui_general_user_file("markverse.glade", TRUE);
 	g_return_val_if_fail(glade_file != NULL, NULL);
 	GS_message(("%s",glade_file));
-	
+
 	/* build the widget */
 	gxml = glade_xml_new(glade_file, NULL, NULL);
 	g_free(glade_file);
@@ -519,11 +519,11 @@ static GtkWidget *_create_mark_verse_dialog(gchar * module,
 	mark_verse_dialog = glade_xml_get_widget(gxml, "dialog");
 	gtk_window_set_default_size (GTK_WINDOW (mark_verse_dialog),
                                    300, 350);
-	
+
 	g_signal_connect(mark_verse_dialog, "response",
 			 G_CALLBACK(on_mark_verse_response), NULL);
-	
-	/* entrys */	
+
+	/* entrys */
 	entry_key = glade_xml_get_widget(gxml, "entry2");
 	entry_module = glade_xml_get_widget(gxml, "entry3");
 	textview = glade_xml_get_widget(gxml, "textview");
@@ -531,7 +531,7 @@ static GtkWidget *_create_mark_verse_dialog(gchar * module,
 	gtk_entry_set_text(GTK_ENTRY(entry_key), key);
 	gtk_entry_set_text(GTK_ENTRY(entry_module), module);
 	sw = glade_xml_get_widget(gxml, "scrolledwindow1");
-	
+
 	gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (textview), GTK_WRAP_WORD);
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
 				      GTK_POLICY_AUTOMATIC,
@@ -562,13 +562,13 @@ static GtkWidget *_create_mark_verse_dialog(gchar * module,
  *   void gui_bookmark_dialog(gchar * label, gchar * module_name, gchar * key)
  *
  * Description
- *   calls _create_bookmark_dialog() and use gtk_dialog_run() 
+ *   calls _create_bookmark_dialog() and use gtk_dialog_run()
  *   to make it modal (needed for saving multiple search results)
  *
  * Return value
  *   void
  */
- 
+
 void gui_bookmark_dialog(gchar * label, gchar * module_name, gchar * key)
 {
 	GtkWidget *dialog = _create_bookmark_dialog(label, module_name, key);
@@ -591,7 +591,7 @@ void gui_bookmark_dialog(gchar * label, gchar * module_name, gchar * key)
  * Return value
  *   void
  */
- 
+
 void gui_mark_verse_dialog(gchar * module_name, gchar * key)
 {
 	GtkWidget *dialog = _create_mark_verse_dialog(module_name, key);

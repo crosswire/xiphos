@@ -80,48 +80,48 @@ extern gboolean isrunningSD;	/* is the view dictionary dialog runing */
  * Synopsis
  *   #include "gui/dictlex.h"
  *
- *   void gui_get_clipboard_text_for_lookup (GtkClipboard *clipboard, 
- *					     const gchar *text, 
+ *   void gui_get_clipboard_text_for_lookup (GtkClipboard *clipboard,
+ *					     const gchar *text,
  *					     gpointer data)
  *
  * Description
  *    an ugly hack to get the selection from gecko on a dbl click
  *    and display text in dictionary pane using default dictionary if set or
- *    current dictionary - this called by gecko/Yelper.cpp 
+ *    current dictionary - this called by gecko/Yelper.cpp
  *    Yelper::ProcessMouseDblClickEvent (void* aEvent)
  *
  * Return value
  *   void
  */
 
-void gui_get_clipboard_text_for_lookup (GtkClipboard *clipboard, 
-					const gchar *text, 
+void gui_get_clipboard_text_for_lookup (GtkClipboard *clipboard,
+					const gchar *text,
 					gpointer data)
 {
 	char *key = NULL;
 	gchar *dict = NULL;
 	int len = 0;
-	
-	if(text == NULL) return;
+
+	if (text == NULL) return;
 	GS_message(("src/gnome2/dictlex.c: text =>%s<",text));
-	
+
 	key = g_strdelimit((char*)text, "&.,\"<>;:?", ' ');
 	key = g_strstrip((char*)key);
 	len = strlen(key);
-	
+
 	if (key[len - 1] == 's' || key[len - 1] == 'd')
 		key[len - 1] = '\0';
 	if (key[len - 1] == 'h' && key[len - 2] == 't'
 	    && key[len - 3] == 'e')
 		key[len - 3] = '\0';
-	
+
 	if (settings.useDefaultDict)
 		dict = g_strdup(settings.DefaultDict);
 	else
 		dict = g_strdup(settings.DictWindowModule);
-	
+
 	main_display_dictionary(dict, key);
-	
+
 	if (dict)
 		g_free(dict);
 }
@@ -142,7 +142,7 @@ static void set_label(gchar * mod_name)
  *   #include "_dictlex.h"
  *
  *   void on_entryDictLookup_changed(GtkEditable * editable,
-						       DL_DATA * d)	
+						       DL_DATA * d)
  *
  * Description
  *    look up text in dictionary entry widget
@@ -168,7 +168,7 @@ void on_entryDictLookup_changed(GtkEditable * editable, gpointer data)
  *   void gui_display_dictlex(gchar * key)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
@@ -187,7 +187,7 @@ void gui_display_dictlex(gchar * key)
  * Synopsis
  *   #include "_dictlex.h"
  *
- *   void gui_set_dictlex_mod_and_key(gchar *mod, gchar *key)	
+ *   void gui_set_dictlex_mod_and_key(gchar *mod, gchar *key)
  *
  * Description
  *   sets the dictionary module and key.  Primarily added for use in tabbed browsing
@@ -223,10 +223,10 @@ void gui_set_dictlex_mod_and_key(gchar * mod_name, gchar * key)
  *   #include "gui/dictlex.h"
  *
  *   gint html_button_pressed(GtkWidget * html, GdkEventButton * event,
- *					GSHTMLEditorControlData * d)	
+ *					GSHTMLEditorControlData * d)
  *
  * Description
- *    mouse button pressed in dictionary / lexicon 
+ *    mouse button pressed in dictionary / lexicon
  *
  * Return value
  *   gint
@@ -245,8 +245,8 @@ static gint html_button_pressed(GtkWidget * html,
 
 		break;
 	case 2:
-		/* 
-		 * pass this for pasting 
+		/*
+		 * pass this for pasting
 		 */
 		break;
 	case 3:
@@ -273,10 +273,10 @@ static gint html_button_pressed(GtkWidget * html,
  *   #include "gui/dictlex.h"
  *
  *   gint html_button_released(GtkWidget * html, GdkEventButton * event,
- *					GSHTMLEditorControlData * d)	
+ *					GSHTMLEditorControlData * d)
  *
  * Description
- *    mouse button released in dictionary / lexicon 
+ *    mouse button released in dictionary / lexicon
  *
  * Return value
  *   gint
@@ -291,7 +291,7 @@ static gint html_button_released(GtkWidget * html,
 	gchar *key;
 	const gchar *url;
 #endif
-	
+
 	settings.whichwindow = DICTIONARY_WINDOW;
 
 	//gui_change_window_title(settings.DictWindowModule);
@@ -299,7 +299,7 @@ static gint html_button_released(GtkWidget * html,
 #ifdef GTKHTML
 	switch (event->button) {
 	case 1:
-		if (in_url) 
+		if (in_url)
 			break;
 		key = gui_button_press_lookup(widgets.html_dict);
 		if (key) {
@@ -307,7 +307,7 @@ static gint html_button_released(GtkWidget * html,
 				key = g_strdelimit(key, "*", ' ');
 				key = g_strstrip(key);
 				url = g_strdup_printf(
-					"xiphos.url?action=showModInfo&value=1&module=%s",
+					"passagestudy.jsp?action=showModInfo&value=1&module=%s",
 					key);
 				main_url_handler(url,TRUE);
 				g_free((gchar*)url);
@@ -331,7 +331,7 @@ static gint html_button_released(GtkWidget * html,
  *   #include "gui/dictlex.h"
  *
  *   gint list_button_released(GtkWidget * html, GdkEventButton * event,
- *					GSHTMLEditorControlData * d)	
+ *					GSHTMLEditorControlData * d)
  *
  * Description
  *    mouse button released in key list
@@ -404,12 +404,12 @@ static void add_columns(GtkTreeView * treeview)
 void dict_key_entry_changed(GtkEntry * entry, gpointer data)
 {
 	gchar *buf = NULL;
-	
+
 	buf = (gchar*)gtk_entry_get_text(entry);
 	GS_message(("dict_key_entry_changed: %s",buf));
 	if (strlen(buf) < 2 )
 		return;
-	
+
 	main_display_dictionary(settings.DictWindowModule, buf);
 	//gtk_widget_grab_focus(widgets.entry_dict);
 }
@@ -445,44 +445,44 @@ void button_forward_clicked(GtkButton * button, gpointer user_data)
 static void menu_deactivate_callback (GtkWidget *widget, gpointer user_data)
 {
 	GtkWidget *menu_button;
-	
+
 	menu_button = GTK_WIDGET (user_data);
-		
+
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (menu_button), FALSE);
 }
 
 
 /******************************************************************************
  * Name
- *   
+ *
  *
  * Synopsis
  *   #include "gui/.h"
  *
- *   
+ *
  *
  * Description
  *
  *
  * Return value
- *   
+ *
  */
 
-static void menu_position_under (GtkMenu *menu, 
-		     int *x, 
+static void menu_position_under (GtkMenu *menu,
+		     int *x,
 		     int *y,
 		     gboolean *push_in,
 		     gpointer user_data)
 {
 	GtkWidget *widget;
-	
+
 	g_return_if_fail (GTK_IS_BUTTON (user_data));
 	g_return_if_fail (GTK_WIDGET_NO_WINDOW (user_data));
 
 	widget = GTK_WIDGET (user_data);
-	
+
 	gdk_window_get_origin (widget->window, x, y);
-	
+
 	*x += widget->allocation.x;
 	*y += widget->allocation.y + widget->allocation.height;
 
@@ -519,16 +519,16 @@ static gboolean select_button_press_callback (GtkWidget *widget,
 
 	GtkWidget *menu = main_dictionary_drop_down_new(settings.DictWindowModule,
 						settings.dictkey);
-	
+
 	g_signal_connect (menu, "deactivate",
 			  G_CALLBACK (menu_deactivate_callback),
 			  widget);
 	if ((event->type == GDK_BUTTON_PRESS) && event->button == 1) {
 		gtk_widget_grab_focus (widget);
-		
+
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
 		gtk_menu_popup (GTK_MENU (menu),
-				NULL, NULL, menu_position_under, widget, 
+				NULL, NULL, menu_position_under, widget,
 				event->button, event->time);
 
 		return TRUE;
@@ -540,9 +540,9 @@ static void
 _popupmenu_requested_cb (GeckoHtml *html,
 			     gchar *uri,
 			     gpointer user_data)
-{	
+{
 	gui_menu_popup (settings.DictWindowModule, NULL);
-	//gui_create_pm_dictionary(); 
+	//gui_create_pm_dictionary();
 }
 #endif
 
@@ -565,7 +565,7 @@ GtkWidget *gui_create_dictionary_pane(void)
 //	GtkWidget *label205;
 #ifdef USE_GTKMOZEMBED
 	GtkWidget *frame;
-	GtkWidget *eventbox;	
+	GtkWidget *eventbox;
 #else
 	GtkWidget *scrolledwindow;
 #endif
@@ -574,7 +574,7 @@ GtkWidget *gui_create_dictionary_pane(void)
 
 	box_dict = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(box_dict);
-	
+
 	gtk_container_set_border_width (GTK_CONTAINER (box_dict), 1);
 
 	hbox2 = gtk_hbox_new(FALSE, 0);
@@ -584,8 +584,8 @@ GtkWidget *gui_create_dictionary_pane(void)
   	widgets.entry_dict = gtk_entry_new ();
   	gtk_widget_show (widgets.entry_dict);
 	gtk_box_pack_start(GTK_BOX(hbox2), widgets.entry_dict, TRUE, TRUE, 0);
-	
-		   
+
+
   	dict_drop_down = gtk_toggle_button_new ();
  	 gtk_widget_show (dict_drop_down);
 	gtk_box_pack_start(GTK_BOX(hbox2), dict_drop_down, FALSE, TRUE, 0);
@@ -593,7 +593,7 @@ GtkWidget *gui_create_dictionary_pane(void)
   	arrow1 = gtk_arrow_new (GTK_ARROW_DOWN, GTK_SHADOW_OUT);
   	gtk_widget_show (arrow1);
   	gtk_container_add (GTK_CONTAINER (dict_drop_down), arrow1);
-	
+
 	button10 = gtk_button_new();
 	gtk_widget_show(button10);
 	gtk_box_pack_start(GTK_BOX(hbox2), button10, FALSE, FALSE, 0);
@@ -602,7 +602,7 @@ GtkWidget *gui_create_dictionary_pane(void)
 	image1 = gtk_image_new_from_stock(GTK_STOCK_GO_UP, GTK_ICON_SIZE_BUTTON);
 	gtk_widget_show(image1);
 	gtk_container_add(GTK_CONTAINER(button10), image1);
-	
+
 	button11 = gtk_button_new();
 	gtk_widget_show(button11);
 	gtk_box_pack_start(GTK_BOX(hbox2), button11, FALSE, FALSE, 0);
@@ -617,11 +617,11 @@ GtkWidget *gui_create_dictionary_pane(void)
 	gtk_frame_set_shadow_type(GTK_FRAME(frame), settings.shadow_type);
 	gtk_box_pack_start(GTK_BOX(box_dict), frame, TRUE, TRUE, 0);
 	gtk_widget_show(frame);
-	
+
 	eventbox = gtk_event_box_new ();
 	gtk_container_add(GTK_CONTAINER(frame), eventbox);
 	gtk_widget_show (eventbox);
-	
+
 	widgets.html_dict = GTK_WIDGET(gecko_html_new(NULL, FALSE, DICTIONARY_TYPE));
 	gtk_widget_show(widgets.html_dict);
 	gtk_container_add(GTK_CONTAINER(eventbox),
@@ -662,14 +662,14 @@ GtkWidget *gui_create_dictionary_pane(void)
 	g_signal_connect(GTK_OBJECT(widgets.html_dict), "link_clicked",
 			 G_CALLBACK(gui_link_clicked), NULL);
 #endif
- 
-	g_signal_connect (dict_drop_down, 
+
+	g_signal_connect (dict_drop_down,
 			  "button_press_event",
 			  G_CALLBACK (select_button_press_callback),
 			  NULL);
 	g_signal_connect(G_OBJECT(widgets.entry_dict), "activate",
 			 G_CALLBACK(dict_key_entry_changed), NULL);
-			 
+
 	g_signal_connect ((gpointer) button10, "clicked",
 		    G_CALLBACK (button_back_clicked),
 		    NULL);
