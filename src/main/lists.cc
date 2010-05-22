@@ -30,7 +30,6 @@
 #include "main/sword.h"
 #include "main/settings.h"
 #include "main/xml.h"
-
 #include "backend/sword_main.hh"
 
 
