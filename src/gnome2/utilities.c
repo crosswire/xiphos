@@ -1310,6 +1310,15 @@ gboolean xiphos_open_default (const gchar *file)
 #endif
 }
 
+/**
+ * xiphos_win32_get_subdir
+ * @subdir: a #gchar, the name of the subdir desired
+ *
+ * get the full path of the subdir; for instance, 'bin'
+ * would return something like C:/Program Files/Crosswire/Xiphos/bin
+ *
+ * Since 3.1.2
+ */
 #ifdef WIN32
 gchar* xiphos_win32_get_subdir(const gchar *subdir)
 {
@@ -1320,6 +1329,16 @@ gchar* xiphos_win32_get_subdir(const gchar *subdir)
 }
 #endif
 
+/**
+ * archive_addfile
+ * @output: a #GsfOutfile, the parent of the desired child
+ * @file: a #gchar, the on disk path of the file to add
+ * @name: a #gchar, the name (without path) of the file to add
+ *
+ * add a single file to the #GsfOutfile
+ *
+ * Since 3.1.2
+ */
 void archive_addfile(GsfOutfile *output, const gchar *file, const gchar *name)
 {
 	GsfInput *inputchild = NULL;
@@ -1333,6 +1352,17 @@ void archive_addfile(GsfOutfile *output, const gchar *file, const gchar *name)
 	g_object_unref(outputchild);
 }
 
+/**
+ * archive_adddir
+ * @output: a #GsfOutfile, the parent of the desired child
+ * @path: a #gchar, the on disk path of the desired child directory
+ * @name: a #gchar, the name (without path) of the desired child dir
+ *
+ * add a child directory and all subdirs and files to the GsfOutfile;
+ * recursive
+ *
+ * Since 3.1.2
+ */
 void archive_adddir(GsfOutfile *output, gchar *path, const gchar *name)
 {
 	GDir *dir;
@@ -1352,6 +1382,18 @@ void archive_adddir(GsfOutfile *output, gchar *path, const gchar *name)
 	g_dir_close(dir);
 }
 
+
+/**
+ * xiphos_create_archive
+ * @conf_file: a #gchar with the location of the module's .conf
+ * @datapath: a #gchar with the location of the module's data
+ * @zip: a #gchar with the name of the zip file
+ * @destination: #gchar with the location to store the zip
+ *
+ * archive the specified module in the specified location
+ *
+ * Since 3.1.2
+ */
 void xiphos_create_archive(gchar* conf_file, gchar* datapath, gchar *zip,
 			   const gchar *destination)
 {
@@ -1364,41 +1406,41 @@ void xiphos_create_archive(gchar* conf_file, gchar* datapath, gchar *zip,
 	int i;
 	gsf_init();
 	
-	//the module dir is the last part of the path
+	/* the module dir is the last part of the path */
 	path = g_strsplit(datapath, "/", -1);
 	moddirname = g_strdup(path[g_strv_length(path) - 1]);
 
-	//create a relative path without preceding "."
-	//or the trailing dir name
+	/* create a relative path without preceding "." */
+	/* or the trailing dir name */
 	modpath = g_string_new(NULL);
 	for (i = 1; i <= (g_strv_length(path) - 2); i++)
 	{
 		modpath = g_string_append(modpath, path[i]);
-		if (i < g_strv_length(path) -2) //avoid a trailing /
+		if (i < g_strv_length(path) -2) /* avoid a trailing / */
 			modpath = g_string_append(modpath, "/");
 	}
 	
-	//open zip file for writing
+	/* open zip file for writing */
 	output = gsf_output_stdio_new(zip, NULL);
 	outputfile = gsf_outfile_zip_new(output, NULL);
 
-	//add the module directory
+	/* add the module directory */
 	tmp = GSF_OUTFILE(gsf_outfile_new_child(outputfile, modpath->str, TRUE));
 
-	//add all data files
+	/* add all data files */
 	archive_adddir(tmp,
 		       g_build_filename(destination, datapath, NULL),
 		       moddirname);
 	gsf_output_close(GSF_OUTPUT(tmp));
 	g_object_unref(tmp);
 
-	//add conf file
+	/* add conf file */
 	tmp = GSF_OUTFILE(gsf_outfile_new_child(outputfile, "mods.d", TRUE));
 	archive_addfile(tmp,
 			g_build_filename(destination, "mods.d", conf_file, NULL),
 			conf_file);
 
-	//cleanup
+	/* cleanup */
 	gsf_output_close(GSF_OUTPUT(outputfile));
 	gsf_output_close(output);
 	g_object_unref(tmp);
