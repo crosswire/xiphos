@@ -4,6 +4,7 @@ src/backend/gs_stringmgr.cpp
 src/backend/module_manager.cc
 src/backend/sword_main.cc
 ## Editor Source files
+src/editor/bonobo-editor.c
 src/editor/slib-editor.c
 ## Gecko Source files
 src/gecko/gecko-html.cpp
@@ -28,7 +29,6 @@ src/gnome2/dictlex.c
 src/gnome2/dictlex_dialog.c
 src/gnome2/display_info.c
 src/gnome2/dummy.cpp
-src/gnome2/export_bookmarks.c
 src/gnome2/export_dialog.c
 src/gnome2/find_dialog.c
 src/gnome2/font_dialog.c
@@ -90,6 +90,7 @@ ui/bookmarks.glade
 ui/editor_link_dialog.xml
 ui/editor_note.xml
 ui/editor_studypad.xml
+ui/editor.xml
 ui/export-dialog.glade
 ui/markverse.glade
 ui/module-manager.glade
@@ -97,6 +98,5 @@ ui/navbar_versekey.glade
 ui/prefs.glade
 ui/search-dialog.glade
 ui/xi-menus.glade
-ui/xi-export-bookmarks.glade
 ## application files
 xiphos.desktop.in.in

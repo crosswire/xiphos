@@ -131,7 +131,7 @@ void main_open_bookmark_in_new_tab(gchar * mod_name, gchar * key)
  * Return value
  *   void
  */
-
+  
 void main_display_verse_list_in_sidebar(gchar * key,
 					gchar * module_name,
 					gchar * verse_list)
@@ -146,7 +146,7 @@ void main_display_verse_list_in_sidebar(gchar * key,
 	RESULTS *list_item;
 
 	is_search_result = FALSE;
-
+	
 	GS_warning(("verse_list = %s",verse_list));
 	list_of_verses = g_list_first(list_of_verses);
 	if (list_of_verses) {
@@ -183,13 +183,13 @@ void main_display_verse_list_in_sidebar(gchar * key,
 		gtk_list_store_set(list_store, &iter, 0,
 				   (const char *) tmp->data, -1);
 		++i;
-
+		
 		list_item = g_new(RESULTS,1);
 		list_item->module = g_strdup(module_name);
 		list_item->key = g_strdup((const char *) tmp->data);
-		list_of_verses = g_list_append(list_of_verses,
+		list_of_verses = g_list_append(list_of_verses, 
 					       (RESULTS *) list_item);
-
+		
 		tmp = g_list_next(tmp);
 	}
 
@@ -244,11 +244,11 @@ static void add_children_to_tree(GtkTreeModel * model, GtkTreeIter iter,
 	GS_message(("%s",backend->display_mod->Name()));
 	if (backend->treekey_first_child(offset)) {
 		GS_message(("treekey_first_child1 %s",mod_name));
-
+		
 		offset = backend->get_treekey_offset();
-
+		
 		GS_message(("offset: %ld",offset));
-
+		
 		sprintf(buf, "%lu", offset);
 		tmpbuf = backend->treekey_get_local_name(offset);
 		gtk_tree_store_append(GTK_TREE_STORE(model),
@@ -318,7 +318,7 @@ static void add_children_to_tree(GtkTreeModel * model, GtkTreeIter iter,
  * Synopsis
  *   #include "main/sidebar.h"
  *
- *   void main_create_pixbufs(void)
+ *   void main_create_pixbufs(void)	
  *
  * Description
  *
@@ -330,24 +330,24 @@ static void add_children_to_tree(GtkTreeModel * model, GtkTreeIter iter,
 void main_create_pixbufs(void)
 {
 	GtkTextDirection dir = gtk_widget_get_direction (GTK_WIDGET(widgets.app));
-
+	
 	pixbufs = g_new0(TreePixbufs, 1);
 
 	if (dir == GTK_TEXT_DIR_LTR) {
 		pixbufs->pixbuf_closed =
 			pixbuf_finder("book_closed.png", 16, NULL);
-
+		
 		pixbufs->pixbuf_opened =
 			pixbuf_finder("book_open.png", 16, NULL);
 	}
 	else {
 		pixbufs->pixbuf_closed =
 			pixbuf_finder("book_closed_rtol.png", 16, NULL);
-
+		
 		pixbufs->pixbuf_opened =
 			pixbuf_finder("book_open_rtol.png", 16, NULL);
 	}
-
+		
 
 	pixbufs->pixbuf_helpdoc =
 	    gtk_widget_render_icon(widgets.app,
@@ -355,8 +355,6 @@ void main_create_pixbufs(void)
 				   GTK_ICON_SIZE_MENU, NULL);
 }
 
-
-#ifdef ALLOW_BIBLE_NAVIGATION_FROM_SIDEBAR_TREE
 
 /******************************************************************************
  * Name
@@ -366,7 +364,7 @@ void main_create_pixbufs(void)
  *   #include "main/sidebar.h"
  *
  *   void main_add_verses_to_chapter(GtkTreeModel * model, GtkTreeIter iter,
- *				const gchar * key)
+ *				const gchar * key)	
  *
  * Description
  *
@@ -374,6 +372,7 @@ void main_create_pixbufs(void)
  * Return value
  *   void
  */
+#if 0
 static void add_verses_to_chapter(GtkTreeModel * model,
 				  GtkTreeIter iter, const gchar * key)
 {
@@ -420,6 +419,7 @@ static void add_verses_to_chapter(GtkTreeModel * model,
 }
 
 
+
 /******************************************************************************
  * Name
  *  main_add_chapters_to_book
@@ -428,7 +428,7 @@ static void add_verses_to_chapter(GtkTreeModel * model,
  *   #include "main/sidebar.h"
  *
  *   void main_add_chapters_to_book(GtkTreeModel * model, GtkTreeIter iter,
-				const gchar * key)
+				const gchar * key)	
  *
  * Description
  *
@@ -489,7 +489,7 @@ static void add_chapters_to_book(GtkTreeModel * model, GtkTreeIter iter,
  *   #include "main/sidebar.h"
  *
  *   void main_add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
- *				const gchar * mod_name)
+ *				const gchar * mod_name)	
  *
  * Description
  *
@@ -510,9 +510,13 @@ static void add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
 			   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened, -1);
 	if (backend->module_has_testament(mod_name, 1)) {
 		while (j < key.BMAX[0]) {
+#ifdef SWORD_MULTIVERSE
 			key.Testament(1);
 			key.Book(j+1);
 			buf = strdup((gchar *) key.getBookName());
+#else
+			buf = strdup((gchar *) key.books[0][j].name);
+#endif
 			gchar *key = g_strdup_printf("book://%s/%s 1:1",
 						     mod_name, buf);
 			gtk_tree_store_append(GTK_TREE_STORE(model),
@@ -535,9 +539,13 @@ static void add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
 	j = 0;
 	if (backend->module_has_testament(mod_name, 2)) {
 		while (j < key.BMAX[1]) {
+#ifdef SWORD_MULTIVERSE
 			key.Testament(2);
 			key.Book(j+1);
 			buf = strdup((gchar *) key.getBookName());
+#else
+			buf = strdup((gchar *) key.books[1][j].name);
+#endif
 			gchar *key = g_strdup_printf("book://%s/%s 1:1",
 						     mod_name, buf);
 			gtk_tree_store_append(GTK_TREE_STORE(model),
@@ -558,21 +566,21 @@ static void add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
 		}
 	}
 }
-#endif /* ALLOW_BIBLE_NAVIGATION_FROM_SIDEBAR_TREE */
+#endif
 
 #ifdef USE_TREEVIEW_PATH
 gboolean main_expand_treeview_to_path (GtkTreeModel *model, GtkTreeIter iter)
-{
+{	
 	//gchar *cap = NULL;
 	gchar *mod = NULL;
 	gchar *key = NULL;
 	//GtkTreePath *path;
 	//gchar *path_str = NULL;
-
+	
 	//static int old_page = 0;
 
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 3, &mod, 4, &key, -1);
-
+	
 	//backend->set_module(mod);
 	//backend->set_treekey(key ? atoi(key) : 0);
 	//path = gtk_tree_model_get_path(model, &iter);
@@ -590,7 +598,7 @@ gboolean main_expand_treeview_to_path (GtkTreeModel *model, GtkTreeIter iter)
 		add_children_to_tree(model,
 				     iter, mod, atol(key));
 	}
-
+		
 	/*gtk_tree_view_expand_row(GTK_TREE_VIEW
 				 (sidebar.module_list), path,
 				 FALSE);*/
@@ -625,45 +633,48 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 	gchar *mod = NULL;
 	gchar *key = NULL;
 	GtkTreePath *path;
-
+	/*  *** until after 3.1 ***
+	gchar *path_str = NULL;
+	*/
+	
 	static int old_page = 0;
 
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &selected, 2, &cap, 3,
 			   &mod, 4, &key, -1);
 	if (!cap)
 		return;
-
 	if (!g_utf8_collate(cap, _("Parallel View"))) {
-		if (settings.dockedInt) {
-			gtk_notebook_set_current_page(GTK_NOTEBOOK
+		if(settings.dockedInt) {
+			gtk_notebook_set_current_page (GTK_NOTEBOOK
 					      (widgets.
 					       notebook_bible_parallel),
 					      1);
 		}
-		if (settings.showparatab) {
+		if(settings.showparatab) {
 			old_page = gtk_notebook_get_current_page(
 					GTK_NOTEBOOK(widgets.notebook_main));
-
+		
 			gtk_notebook_set_current_page (
-				GTK_NOTEBOOK(widgets.notebook_main),
+				GTK_NOTEBOOK(widgets.notebook_main), 
 				gtk_notebook_page_num (
 				GTK_NOTEBOOK (widgets.notebook_main),
 				widgets.parallel_tab));
 		}
+		
 	}
 
 	if (!g_utf8_collate(cap, _("Standard View"))) {
 		gtk_notebook_set_current_page (
-				GTK_NOTEBOOK(widgets.notebook_main),
+				GTK_NOTEBOOK(widgets.notebook_main), 
 				old_page);
 		gtk_notebook_set_current_page (GTK_NOTEBOOK
 				(widgets.notebook_bible_parallel),
 				0);
 	}
 	/* let's not do anything else if the parallel tab is showing */
-	if (settings.paratab_showing)
+	if(settings.paratab_showing)
 		return;
-
+	
 	if (!g_utf8_collate(cap, _("Commentaries"))) {
 		if (!settings.comm_showing) {
 			settings.comm_showing = TRUE;
@@ -695,9 +706,7 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 					       notebook_bible_parallel),
 					      0);
 		// MainWindowModule is set in main_bible_display(), not here.
-
-#ifdef ALLOW_BIBLE_NAVIGATION_FROM_SIDEBAR_TREE
-		if (!gtk_tree_model_iter_has_child
+		/*if (!gtk_tree_model_iter_has_child
 		    (GTK_TREE_MODEL(model), &selected)
 		    && !key)
 			add_books_to_bible(model, selected, mod);
@@ -709,7 +718,7 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 		    (GTK_TREE_MODEL(model), &selected)
 		    && strstr(key, "chapter:"))
 			add_verses_to_chapter(model, selected, key);
-#endif
+		*/
 
 		if (!GTK_CHECK_MENU_ITEM(widgets.viewtexts_item)->active) {
 			GTK_CHECK_MENU_ITEM(widgets.viewtexts_item)->active = 1;
@@ -719,10 +728,10 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 
 		if (key)
 			main_url_handler(key, TRUE);
-		else
+		else 
 			main_display_bible(mod, settings.currentverse);
-		break;
 
+		break;
 	case COMMENTARY_TYPE:
 	case PERCOM_TYPE:
 		gtk_notebook_set_current_page(GTK_NOTEBOOK
@@ -736,18 +745,18 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 			on_show_commentary_activate
 			    (GTK_MENU_ITEM(widgets.viewcomms_item), NULL);
 		}
+
 		main_display_commentary(mod, settings.currentverse);
 		break;
-
 	case DICTIONARY_TYPE:
 		if (!GTK_CHECK_MENU_ITEM(widgets.viewdicts_item)->active) {
 			GTK_CHECK_MENU_ITEM(widgets.viewdicts_item)->active = 1;
 			on_show_dictionary_lexicon_activate
 			    (GTK_MENU_ITEM(widgets.viewcomms_item), NULL);
 		}
+
 		main_display_dictionary(mod, settings.dictkey);
 		break;
-
 	case BOOK_TYPE:
 	case PRAYERLIST_TYPE:
 		GS_message(("key %s", (key ? key : "-null-")));
@@ -761,21 +770,24 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 		if (!gtk_tree_model_iter_has_child
 		    (GTK_TREE_MODEL(model), &selected)
 		    && !key) {
-			add_children_to_tree(model, selected, mod, 0);
+			add_children_to_tree(model,
+					     selected,
+					     mod,
+					     0);
 		}
 		if (!gtk_tree_model_iter_has_child
 		    (GTK_TREE_MODEL(model), &selected)
 		    && backend->treekey_has_children(key ? atoi(key) : 0)) {
-			add_children_to_tree(model, selected, mod, atol(key));
+			add_children_to_tree(model,
+					     selected, mod, atol(key));
 		}
-
-#ifdef USE_TREEVIEW_PATH
-		gchar *path_str = gtk_tree_path_to_string (path);
-		GS_message (("path: %s", path_str));
+		
+		/*  *** until after 3.1 ***	
+		path_str = gtk_tree_path_to_string (path);
+		//GS_message (("path: %s", path_str));
 		gui_save_treeview_path_string (path_str, mod);
 		g_free (path_str);
-#endif /* USE_TREEVIEW_PATH */
-
+		*/
 		gtk_tree_view_expand_row(GTK_TREE_VIEW
 					 (sidebar.module_list), path,
 					 FALSE);
@@ -792,9 +804,14 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 		main_setup_navbar_book(mod, (key ? atoi(key) : 0));
 		break;
 	}
-	g_free(cap);
-	g_free(mod);
-	g_free(key);
+	if (cap)
+		g_free(cap);
+	if (mod)
+		g_free(mod);
+	if (key)
+		g_free(key);
+
+
 }
 
 
@@ -857,9 +874,9 @@ static void add_module_to_prayerlist_folder(GtkTreeModel * model,
 					  GtkTreeIter iter,
 					  gchar * module_name)
 {
-
+	
 	GtkTreeIter child_iter;
-
+	
 	gtk_tree_store_append(GTK_TREE_STORE(model),
 			      &child_iter, &iter);
 	gtk_tree_store_set(GTK_TREE_STORE(model),
@@ -1070,7 +1087,7 @@ void main_load_module_tree(GtkWidget * tree)
 			   text, commentary, map, image,
 			   devotional, dictionary, book,
 			   NULL, NULL,
-			   language_add_folders, FALSE);
+			   language_add_folders);
 
 	// fast-n-loose w/known string values to avoid pointless strcmp costs.
 	// TEXT_MODS => 'B' ("Biblical Texts")
@@ -1160,7 +1177,7 @@ void main_load_module_tree(GtkWidget * tree)
  * Synopsis
  *   #include "main/sidebar.h"
  *
- *   void main_add_mod_tree_columns(GtkTreeView * tree)
+ *   void main_add_mod_tree_columns(GtkTreeView * tree)	
  *
  * Description
  *

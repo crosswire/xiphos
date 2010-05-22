@@ -1,6 +1,6 @@
 /*
  * Xiphos Bible Study Tool
- * prayer_list.c -
+ * prayer_list.c - 
  *
  * Copyright (C) 2007-2009 Xiphos Developer Team
  *
@@ -26,7 +26,11 @@
 
 #include <glade/glade-xml.h>
 
+#ifdef USE_GTKHTML3_14_23
 #include "editor/slib-editor.h"
+#else
+#include "editor/bonobo-editor.h"
+#endif
 
 #include "gui/treekey-editor.h"
 #include "gui/dialog.h"
@@ -70,9 +74,9 @@ static GtkWidget *menu;
 INFO *
 _get_info (GtkWidget * tree)
 {
-	GtkTreeSelection *selection = NULL;
+	GtkTreeSelection *selection = NULL;	
 	GtkTreeView *t = GTK_TREE_VIEW(tree);
-
+	
 	INFO *info = g_new0 (INFO, 1);
 
 	selection = gtk_tree_view_get_selection(t);
@@ -89,34 +93,34 @@ _get_info (GtkWidget * tree)
 static void _button_one(EDITOR * e)
 {
 	INFO *info;
-
+	
 	editor_save_book(e);
-
+	
 	info = _get_info (e->treeview);
-
-	if (atol(info->offset) == 0)
+	
+	if(atol(info->offset) == 0) 
 		gtk_widget_set_sensitive(e->html_widget,FALSE);
 	else
 		gtk_widget_set_sensitive(e->html_widget,TRUE);
-
-	if (e->module)
+		
+	if(e->module)
 		g_free(e->module);
 	e->module = g_strdup(info->book);
-
-	if (e->key)
+		
+	if(e->key)
 		g_free(e->key);
 	e->key = g_strdup(info->offset);
 	editor_load_book(e);
-
+	
 	g_free(info->book);
 	g_free(info->local_name);
 	g_free(info->offset);
-	g_free(info);
+	g_free(info);	
 }
 
 G_MODULE_EXPORT void
 on_add_sibling_activate (GtkMenuItem * menuitem, gpointer user_data)
-{
+{	
 	INFO *info;
 	char *buf = NULL;
 	unsigned long l_offset = 0;
@@ -125,9 +129,9 @@ on_add_sibling_activate (GtkMenuItem * menuitem, gpointer user_data)
 	gint test;
 	GS_DIALOG *d;
 	GtkTreeIter sibling;
-
-	info = _get_info (tree);
-
+	
+	info = _get_info (tree);	
+	
 	d = gui_new_dialog ();
 	d->stock_icon = GTK_STOCK_DIALOG_QUESTION;
 	d->title = _("Prayer List/Journal Item");
@@ -136,17 +140,17 @@ on_add_sibling_activate (GtkMenuItem * menuitem, gpointer user_data)
 	d->text1 = g_strdup (info->local_name);
 	d->ok = TRUE;
 	d->cancel = TRUE;
-
+	
 	test = gui_gs_dialog (d);
 	if (test == GS_OK) {
-		l_offset = main_treekey_append_sibling(info->book,
-					    d->text1,
+		l_offset = main_treekey_append_sibling(info->book, 
+					    d->text1, 
 					    info->offset);
-		if (l_offset) {
+		if(l_offset) {
 			buf = g_strdup_printf("%ld",l_offset);
-			gtk_tree_store_insert_after(GTK_TREE_STORE(info->model),
-						&sibling,
-						NULL,
+			gtk_tree_store_insert_after(GTK_TREE_STORE(info->model), 
+						&sibling, 
+						NULL, 
 						&info->iter);
 			gtk_tree_store_set(GTK_TREE_STORE(info->model),
 					&sibling,
@@ -156,7 +160,7 @@ on_add_sibling_activate (GtkMenuItem * menuitem, gpointer user_data)
 					COL_MODULE, info->book,
 					COL_OFFSET, buf,
 					-1);
-			if (e->key)
+			if(e->key)
 				g_free(e->key);
 			e->key = g_strdup(buf);
 			editor_load_book(e);
@@ -175,7 +179,7 @@ on_add_sibling_activate (GtkMenuItem * menuitem, gpointer user_data)
 
 G_MODULE_EXPORT void
 on_add_child_activate (GtkMenuItem * menuitem, gpointer user_data)
-{
+{	
 	INFO *info;
 	char *buf = NULL;
 	unsigned long l_offset = 0;
@@ -184,9 +188,9 @@ on_add_child_activate (GtkMenuItem * menuitem, gpointer user_data)
 	gint test;
 	GS_DIALOG *d;
 	GtkTreeIter child;
-
-	info = _get_info (tree);
-
+	
+	info = _get_info (tree);	
+	
 	d = gui_new_dialog ();
 	d->stock_icon = GTK_STOCK_DIALOG_QUESTION;
 	d->title = _("Prayer List/Journal Item");
@@ -195,21 +199,21 @@ on_add_child_activate (GtkMenuItem * menuitem, gpointer user_data)
 	d->text1 = g_strdup (info->local_name);
 	d->ok = TRUE;
 	d->cancel = TRUE;
-
+	
 	test = gui_gs_dialog (d);
 	if (test == GS_OK) {
-		l_offset = main_treekey_append_child(info->book,
-					    d->text1,
+		l_offset = main_treekey_append_child(info->book, 
+					    d->text1, 
 					    info->offset);
-		if (l_offset) {
+		if(l_offset) {
 			gtk_tree_store_set(GTK_TREE_STORE(info->model), /* change treenode pixbuf from leaf to branch */
 					&info->iter,
 			    		COL_OPEN_PIXBUF, pixbufs->pixbuf_closed,
 			    		COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
 					-1);
 			buf = g_strdup_printf("%ld",l_offset);
-			gtk_tree_store_append (GTK_TREE_STORE (info->model),
-						&child,
+			gtk_tree_store_append (GTK_TREE_STORE (info->model), 
+						&child, 
 						&info->iter);
 			gtk_tree_store_set(GTK_TREE_STORE(info->model),
 					&child,
@@ -219,14 +223,14 @@ on_add_child_activate (GtkMenuItem * menuitem, gpointer user_data)
 					COL_MODULE, info->book,
 					COL_OFFSET, buf,
 					-1);
-			if (e->key)
+			if(e->key)
 				g_free(e->key);
 			e->key = g_strdup(buf);
 			editor_load_book(e);
 			g_free(buf);
 		}
 	}
-
+	
 	g_free(info->book);
 	g_free(info->local_name);
 	g_free(info->offset);
@@ -243,7 +247,7 @@ on_remove_activate (GtkMenuItem * menuitem, gpointer user_data)
 	EDITOR * editor = (EDITOR*) user_data;
 	GtkWidget *tree = GTK_WIDGET (editor->treeview);
 	gchar *str;
-
+	
 	info = _get_info (tree);
 	str = g_strdup_printf("<span weight=\"bold\">%s</span>\n\n%s/%s",
 			      _("Remove the selected item"),
@@ -253,7 +257,7 @@ on_remove_activate (GtkMenuItem * menuitem, gpointer user_data)
 		gtk_tree_store_remove(GTK_TREE_STORE(info->model), &info->iter);
 		main_treekey_remove (info->book, info->local_name, info->offset);
 	}
-
+	
 	g_free(info->book);
 	g_free(info->local_name);
 	g_free(info->offset);
@@ -270,9 +274,9 @@ on_edit_activate2 (GtkMenuItem * menuitem, gpointer user_data)
 	GtkWidget *tree = GTK_WIDGET (editor->treeview);
 	gint test;
 	GS_DIALOG *d;
-
-	info = _get_info (tree);
-
+	
+	info = _get_info (tree);	
+	
 	d = gui_new_dialog ();
 	d->stock_icon = GTK_STOCK_DIALOG_QUESTION;
 	d->title = _("Prayer List/Journal Item");
@@ -281,18 +285,18 @@ on_edit_activate2 (GtkMenuItem * menuitem, gpointer user_data)
 	d->text1 = g_strdup (info->local_name);
 	d->ok = TRUE;
 	d->cancel = TRUE;
-
+	
 	test = gui_gs_dialog (d);
 	if (test == GS_OK) {
-		main_treekey_set_local_name(info->book,
-					    d->text1,
+		main_treekey_set_local_name(info->book, 
+					    d->text1, 
 					    info->offset);
 		gtk_tree_store_set(GTK_TREE_STORE(info->model),
-				&info->iter,
-				COL_CAPTION, (gchar *) d->text1,
+				&info->iter, 
+				COL_CAPTION, (gchar *) d->text1, 
 				-1);
 	}
-
+	
 	g_free(info->book);
 	g_free(info->local_name);
 	g_free(info->offset);
@@ -307,20 +311,20 @@ create_edit_tree_menu (EDITOR * editor)
 	GtkWidget *menu;
 	gchar *glade_file;
 	GladeXML *gxml;
-
+	
 	glade_file = gui_general_user_file ("xi-menus.glade", FALSE);
 	g_return_val_if_fail ((glade_file != NULL), NULL);
-
+	
 	gxml = glade_xml_new (glade_file, "menu_edit_tree", NULL);
-
+		
 	g_free (glade_file);
 	g_return_val_if_fail ((gxml != NULL), NULL);
-
+	
 	menu = glade_xml_get_widget (gxml, "menu_edit_tree");
     	/* connect signals and data */
 	glade_xml_signal_autoconnect_full
 		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, editor);
-
+	
 	return menu;
 }
 
@@ -333,30 +337,30 @@ static gboolean on_button_release(GtkWidget *widget,
 	GtkTreeModel *model;
 	GtkTreePath *path;
 	gint depth = 0;
-
+	
 	switch (event->button) {
 	case 1:
 		_button_one(editor);
 		break;
 
 	case 2:
-
+		
 		break;
 
 	case 3:
 		selection =
 		    gtk_tree_view_get_selection(GTK_TREE_VIEW(widget));
-		gtk_tree_selection_get_selected(selection, &model, &selected);
+		gtk_tree_selection_get_selected(selection, &model, &selected);		
 		path = gtk_tree_model_get_path(model, &selected);
 		depth = gtk_tree_path_get_depth (path);
-
+		
 		if (depth > 1)
 			gtk_menu_popup(GTK_MENU(menu),
 				       NULL, NULL, NULL, NULL,
 				       0, gtk_get_current_event_time());
 
 		gtk_tree_path_free(path);
-		return FALSE;
+		return FALSE;		
 	}
 	return FALSE;
 }

@@ -124,19 +124,19 @@ static void html_link_message(GtkMozEmbed * embed)
 	gchar *url = gtk_moz_embed_get_link_message(embed);
 	GeckoHtml *html = GECKO_HTML(embed);
 	GeckoHtmlPriv *priv = GECKO_HTML_GET_PRIVATE(html);
-
-
+	    
+	
 	GS_message(("html_link_message: url = %s",url));
-
+	
 	if (shift_key_pressed)
 		return;
-
+	
 	if (!strlen(url)) { //* moved out of url - clear appbar - info viewer*
 		gui_set_statusbar ("");
 		in_url = FALSE;
-		//*if (GPOINTER_TO_INT(data) == TEXT_TYPE)
+		//*if(GPOINTER_TO_INT(data) == TEXT_TYPE)
 		//	main_clear_viewer();*
-	} else {
+	} else {		
 		GString *url_clean = g_string_new(NULL);
 		const gchar *url_chase;
 		int i = 0;
@@ -182,12 +182,12 @@ static void html_link_message(GtkMozEmbed * embed)
 }
 
 
-static
+static 
 gint html_dom_mouse_over(GtkMozEmbed * embed, gpointer dom_event)
 {
 	GeckoHtml *html = GECKO_HTML(embed);
 	GeckoHtmlPriv *priv = GECKO_HTML_GET_PRIVATE(html);
-	return html->priv->yelper->ProcessMouseOver(dom_event,
+	return html->priv->yelper->ProcessMouseOver(dom_event, 
 						    priv->pane,
 						    priv->is_dialog,
 						    priv->dialog);
@@ -199,9 +199,9 @@ gint html_dom_mouse_out(GtkMozEmbed * embed, gpointer dom_event)
 {
 	GeckoHtml *html = GECKO_HTML(embed);
 	GeckoHtmlPriv *priv = GECKO_HTML_GET_PRIVATE(html);
-	if (priv->pane == VIEWER_TYPE)
+	if(priv->pane == VIEWER_TYPE)
 		shift_key_pressed = FALSE;
-	return 1;
+	return 1; 
 }
 
 static
@@ -220,10 +220,6 @@ gint html_dom_key_up(GtkMozEmbed * embed, gpointer dom_event)
 static gint html_open_uri(GtkMozEmbed * embed, const gchar * uri)
 {
 	g_return_val_if_fail(uri != NULL, FALSE);
-
-	//for xulrunner 1.9.2
-	if (g_str_equal (uri, "file:///"))
-	    return FALSE;
 
 	GeckoHtml *html = GECKO_HTML(embed);
 	GeckoHtmlPriv *priv = GECKO_HTML_GET_PRIVATE(html);
@@ -252,16 +248,16 @@ static gint html_open_uri(GtkMozEmbed * embed, const gchar * uri)
 		}
 		uri = tmpstr->str;
 	}
-
+	
 	// prefixable link
-	if (priv->pane == DIALOG_COMMENTARY_TYPE) {
+	if(priv->pane == DIALOG_COMMENTARY_TYPE) { 
 		strcpy(book, priv->dialog->key);
 		*(strrchr(book, ' ')) = '\0';
-
+		
 		if ((buf = strstr((char*)uri, "&value="))) {
 			buf += 7;
 			place = buf;
-
+	
 			while (*buf && isdigit(*buf))
 				buf++;
 			if ((*buf == ':') || strncmp(buf, "%3A", 3) == 0) {
@@ -272,11 +268,11 @@ static gint html_open_uri(GtkMozEmbed * embed, const gchar * uri)
 				uri = tmpbuf;
 			}
 		}
-
+		
 	}
-
+	
 	GS_message(("uri: %s", uri));
-	if (priv->is_dialog)
+	if(priv->is_dialog)
 		main_dialogs_url_handler(priv->dialog, uri, TRUE);
 	else
 		main_url_handler(uri, TRUE);
@@ -360,29 +356,29 @@ static void html_class_init(GeckoHtmlClass * klass)
 	moz_embed_class->dom_mouse_out = html_dom_mouse_out;
 	//moz_embed_class->dom_mouse_click = html_dom_mouse_click;
 	moz_embed_class->dom_mouse_dbl_click = html_dom_mouse_dbl_click;
-	moz_embed_class->open_uri = html_open_uri;
+	moz_embed_class->open_uri = html_open_uri;  
 	moz_embed_class->dom_key_down = html_dom_key_down;
 	moz_embed_class->dom_key_up = html_dom_key_up;
 	klass->font_handler = 0;
 	klass->color_handler = 0;
 	klass->a11y_handler = 0;
 
-/*	signals[URI_SELECTED] = g_signal_new("uri_selected", G_TYPE_FROM_CLASS(klass),
-			     G_SIGNAL_RUN_LAST,
-			     G_STRUCT_OFFSET(GeckoHtmlClass, uri_selected),
-			     NULL, NULL,
+/*	signals[URI_SELECTED] = g_signal_new("uri_selected", G_TYPE_FROM_CLASS(klass), 
+			     G_SIGNAL_RUN_LAST, 
+			     G_STRUCT_OFFSET(GeckoHtmlClass, uri_selected), 
+			     NULL, NULL, 
 			     NULL,	//gs_marshal_VOID__POINTER_BOOLEAN,
 			     G_TYPE_NONE,
 			     2, G_TYPE_POINTER,
 			     G_TYPE_BOOLEAN);
 */
 /*
-	signals[FRAME_SELECTED] = g_signal_new("frame_selected",
-			       G_TYPE_FROM_CLASS(klass),
-			       G_SIGNAL_RUN_LAST,
-			       G_STRUCT_OFFSET(GeckoHtmlClass, frame_selected),
-			       g_signal_accumulator_true_handled,
-			       NULL,
+	signals[FRAME_SELECTED] = g_signal_new("frame_selected", 
+			       G_TYPE_FROM_CLASS(klass), 
+			       G_SIGNAL_RUN_LAST, 
+			       G_STRUCT_OFFSET(GeckoHtmlClass, frame_selected), 
+			       g_signal_accumulator_true_handled, 
+			       NULL, 
 			       NULL,	//gs_marshal_BOOLEAN__POINTER_BOOLEAN,
 			       G_TYPE_BOOLEAN,
 			       2, G_TYPE_POINTER,
@@ -444,7 +440,7 @@ GeckoHtml *gecko_html_new(DIALOG_DATA * dialog, gboolean is_dialog, gint pane)
 	priv->pane = pane;
 	priv->is_dialog = is_dialog;
 	priv->dialog = dialog;
-
+	
 	//make scrollbar appear on the left for RTL locales
 	GtkTextDirection dir = gtk_widget_get_direction(GTK_WIDGET (html));
 	if (dir == GTK_TEXT_DIR_RTL)
@@ -531,7 +527,7 @@ void gecko_html_close(GeckoHtml * html)
 
 void gecko_html_render_data(GeckoHtml *html, const char *data, guint32 len)
 {
-	gtk_moz_embed_render_data(GTK_MOZ_EMBED(html), data, len,
+	gtk_moz_embed_render_data(GTK_MOZ_EMBED(html), data, len, 
 				  "file:///sword", "text/html");
 }
 
@@ -586,7 +582,7 @@ void gecko_html_select_none(GeckoHtml * html)
 	html->priv->yelper->DoCommand("cmd_selectNone");
 }
 
-#ifdef HAVE_GTKUPRINT
+#ifdef USE_GTKUPRINT
 void
 gecko_html_print(GeckoHtml * html, GeckoPrintInfo * info, gboolean preview,
 		 gint * npages)
@@ -619,25 +615,25 @@ void
 gecko_html_print_document(GtkWindow * window, gchar * mod_name,
 			  DIALOG_DATA * dialog)
 {
-#ifdef HAVE_GTKUPRINT
+#ifdef USE_GTKUPRINT	
 	GtkWidget *gtk_win;
 	GeckoHtml *html;
 	GtkWidget *vbox = gtk_vbox_new(FALSE, FALSE);
     	SWDisplay *old_display = 0;
 	SWDisplay *swdisplay = 0;
 	SWMgr *mgr;
-	if (dialog) {
+	if(dialog) {
 		BackEnd *be = (BackEnd *)dialog->backend;
 		mgr = be->get_mgr();
 	}
-	else
+	else 
 		mgr = backend->get_mgr();
-
+	
 	SWModule *mod = mgr->Modules[mod_name];
-
+	
 	if (!mod)
 		return;
-
+    
 	gtk_win = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	html = gecko_html_new(NULL,FALSE,8);
 	gtk_container_add(GTK_CONTAINER(gtk_win), GTK_WIDGET(vbox));
@@ -646,19 +642,19 @@ gecko_html_print_document(GtkWindow * window, gchar * mod_name,
 	gtk_widget_show(vbox);
 	gtk_widget_show(GTK_WIDGET(html));
 	gtk_widget_hide(gtk_win);
-
+    
 	old_display = mod->getDisplay();
-
+    
 	if (!strcmp(mod->Type(), TEXT_MODS))
 		swdisplay = new GTKPrintChapDisp(GTK_WIDGET(html), backend);
-	else
+	else 
 		swdisplay = new GTKPrintEntryDisp(GTK_WIDGET(html), backend);
-
+	
 	mod->setDisplay(swdisplay);
 	mod->Display();
 
 	gecko_print_run(window, html, gtk_win, vbox);
-
+    
     	mod->setDisplay(old_display);
 	if (swdisplay)
 		delete swdisplay;

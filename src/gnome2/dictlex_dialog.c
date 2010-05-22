@@ -58,6 +58,46 @@ static gint cell_height;
 
 /******************************************************************************
  * Name
+ *  
+ *
+ * Synopsis
+ *   #include "gui/dictlex_dialog.h"
+ *
+ *   void  gui_on_lookup_dictlex_dialog_selection
+		(GtkMenuItem * menuitem, gchar * dict_mod_description)	
+ *
+ * Description
+ *   lookup seledtion in a dict/lex module
+ *
+ * Return value
+ *   void
+ */
+
+void gui_lookup_dictlex_dialog_selection(GtkMenuItem *menuitem,
+					 gchar *dict_mod_description)
+{
+/*	gchar *dict_key;
+	gchar *mod_name = NULL;
+
+	mod_name = main_module_name_from_description(dict_mod_description);
+	if (!mod_name) 
+		return;
+
+	dict_key = gui_get_word_or_selection(cur_dlg->html, FALSE);
+	if (dict_key) {
+		if (settings.inViewer)
+			main_sidebar_display_dictlex(mod_name,
+						      dict_key);
+		if (settings.inDictpane)
+			main_display_dictionary(mod_name, dict_key);
+		g_free(dict_key);
+	}
+	if (mod_name) g_free(mod_name);
+*/
+}
+
+/******************************************************************************
+ * Name
  *   list_selection_changed
  *
  * Synopsis
@@ -67,7 +107,7 @@ static gint cell_height;
  *		      GtkWidget * tree_widget)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   void
@@ -100,7 +140,7 @@ static void list_selection_changed(GtkTreeSelection *selection,
  *   #include "gui/dictionary_dialog.h"
  *
  *   gint html_button_pressed(GtkWidget * html, GdkEventButton * event,
- *					VIEW_COMM * vc)
+ *					VIEW_COMM * vc)	
  *
  * Description
  *    mouse button pressed in window - used to set cur_vc to the current
@@ -121,7 +161,7 @@ static gint button_press_event(GtkWidget *html,
 
 /******************************************************************************
  * Name
- *  dialog_set_focus
+ *  dialog_set_focus 
  *
  * Synopsis
  *   #include "dictlex_dialog.h"
@@ -130,7 +170,7 @@ static gint button_press_event(GtkWidget *html,
                                         DL_DATA * dlg)
  *
  * Description
- *
+ *    
  *
  * Return value
  *   void
@@ -154,7 +194,7 @@ static void dialog_set_focus(GtkWindow *window,
  *   void dialog_destroy(GtkObject *object, DL_DATA * dlg)
  *
  * Description
- *
+ *    
  *
  * Return value
  *   void
@@ -176,7 +216,7 @@ static void dialog_destroy(GtkObject *object,
  *   #include "gui/dictlex.h"
  *
  *   gint list_button_released(GtkWidget * html, GdkEventButton * event,
- *					GSHTMLEditorControlData * d)
+ *					GSHTMLEditorControlData * d)	
  *
  * Description
  *    mouse button released in key list
@@ -236,7 +276,7 @@ static void add_columns(GtkTreeView *treeview)
  * Synopsis
  *   #include "gui/dictlex.h"
  *
- *   void on_btnSyncDL_clicked(GtkButton * button, DL_DATA * d)
+ *   void on_btnSyncDL_clicked(GtkButton * button, DL_DATA * d)	
  *
  * Description
  *    sync current module with current key
@@ -255,15 +295,15 @@ void on_btnSyncDL_clicked(GtkButton * button, DIALOG_DATA * d)
 
 /******************************************************************************
  * Name
- *
+ *  
  *
  * Synopsis
  *   #include "gui/dictlex.h"
  *
- *
+ *   	
  *
  * Description
- *
+ *    
  *
  * Return value
  *   void
@@ -273,7 +313,7 @@ static void entry_changed(GtkEditable *editable,
 			  DIALOG_DATA *d)
 {
 	gchar *key = NULL;
-
+	
 	if (d->key)
 		g_free(d->key);
 
@@ -326,7 +366,7 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 //	GtkWidget *label205;
 	GtkWidget *frameDictHTML;
 #ifdef USE_GTKMOZEMBED
-	GtkWidget *eventbox;
+	GtkWidget *eventbox;	
 #else
 	GtkWidget *scrolledwindowDictHTML;
 #endif /* !USE_GTKMOZEMBED */
@@ -336,8 +376,8 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 
 	dlg->dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 
-	g_object_set_data(G_OBJECT(dlg->dialog), "dlg->dialog",
-			  dlg->dialog);
+	gtk_object_set_data(GTK_OBJECT(dlg->dialog), "dlg->dialog",
+			    dlg->dialog);
 	gtk_window_set_title(GTK_WINDOW(dlg->dialog),
 			     main_get_module_description(dlg->
 							 mod_name));
@@ -367,7 +407,7 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 	gtk_widget_show(hbox_toolbar);
 	gtk_box_pack_start(GTK_BOX(vbox56), hbox_toolbar, FALSE, TRUE,
 			   0);
-
+			   
 	btnSyncDL = gtk_button_new();
 	gtk_widget_show(btnSyncDL);
 	gtk_box_pack_start(GTK_BOX(hbox_toolbar), btnSyncDL, FALSE,
@@ -383,14 +423,14 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 	gtk_widget_show(dlg->entry);
 	gtk_box_pack_start(GTK_BOX(hbox_toolbar), dlg->entry, TRUE,
 			   TRUE, 0);
-
-
+	
+	
 	/* create tree model */
 	model = gtk_list_store_new(1, G_TYPE_STRING);
 
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
-
+	
 	gtk_box_pack_start(GTK_BOX(vbox56), scrolledwindow, TRUE,
 			   TRUE, 0);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
@@ -421,11 +461,11 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 
 #ifdef USE_GTKMOZEMBED
 	gtk_frame_set_shadow_type(GTK_FRAME(frameDictHTML), GTK_SHADOW_IN);
-
+	
 	eventbox = gtk_event_box_new();
 	gtk_widget_show(eventbox);
 	gtk_container_add(GTK_CONTAINER(frameDictHTML), eventbox);
-
+	
 	dlg->html = GTK_WIDGET(gecko_html_new((DIALOG_DATA*) dlg,TRUE,DIALOG_DICTIONARY_TYPE));
 	gtk_container_add(GTK_CONTAINER(eventbox), dlg->html);
 	gtk_widget_show(dlg->html);
@@ -452,7 +492,7 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 	gtk_container_add(GTK_CONTAINER(scrolledwindowDictHTML),
 			  dlg->html);
 	gtk_html_load_empty(GTK_HTML(dlg->html));
-
+	
 	g_signal_connect(GTK_OBJECT(dlg->html),
 			 "url_requested",
 			 G_CALLBACK(url_requested), NULL);

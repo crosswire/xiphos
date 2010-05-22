@@ -20,7 +20,7 @@
  */
 
 #ifndef __ABOUT_SWORD_H_
-#define __ABOUT_SWORD_H_
+#define __ABOUT_SWORD_H_ 
 
 #ifdef __cplusplus
 extern "C" {
@@ -29,7 +29,7 @@ extern "C" {
 #include <gtk/gtk.h>
 
 GtkWidget *gui_create_about_sword(void);
-
+ 
 #ifdef __cplusplus
 }
 #endif

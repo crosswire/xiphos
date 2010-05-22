@@ -38,7 +38,7 @@
 #include "gui/debug_glib_null.h"
 
 static GtkWidget* create_sidebar_dialog(void);
-static GtkWidget * vbox_dock;
+static GtkWidget * vbox_dock; 
 
 /******************************************************************************
  * Name
@@ -46,15 +46,15 @@ static GtkWidget * vbox_dock;
  *
  * Synopsis
  *   #include "sidebar_dialog.h"
- *
+ *   
  *   void gui_attach_detach_sidebar(void)
  *
  * Description
  *   dock/undock shortcut bar
- *
+ *   
  *
  * Return value
- *
+ *   
  */
 
 void gui_attach_detach_sidebar(void)
@@ -72,7 +72,7 @@ void gui_attach_detach_sidebar(void)
 				       biblepanesize);*/
 		gtk_widget_show_all(widgets.dock_sb);
 		//gtk_widget_show();
-
+		
 	} else {
 		settings.docked = TRUE;
 		biblepanesize =
@@ -93,13 +93,13 @@ void gui_attach_detach_sidebar(void)
  *
  * Synopsis
  *   #include "sidebar_dialog.h"
- *
+ *   
  *   void on_dialog_destroy(GtkObject *object, gpointer user_data)
  *
  * Description
- *   send the sidebar back to the main window before we
+ *   send the sidebar back to the main window before we 
  *   destroy the dialog
- *
+ *   
  *
  * Return value
  *   void
@@ -118,12 +118,12 @@ static void on_dialog_destroy(GtkObject *object, gpointer user_data)
  *
  * Synopsis
  *   #include "sidebar_dialog.h"
- *
+ *   
  *   GtkWidget*  create_sidebar_dialog(void)
  *
  * Description
  *   create dialog to hold the sidebar when detached
- *
+ *   
  *
  * Return value
  *   GtkWidget*
@@ -131,14 +131,14 @@ static void on_dialog_destroy(GtkObject *object, gpointer user_data)
 
 GtkWidget* create_sidebar_dialog(void)
 {
-	GtkWidget *dlgDock;
+	GtkWidget *dlgDock; 
 	gchar *title;
 
 	dlgDock = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-	g_object_set_data(G_OBJECT(dlgDock), "dlgDock", dlgDock);
+	gtk_object_set_data(GTK_OBJECT(dlgDock), "dlgDock", dlgDock);
 	gtk_window_set_title(GTK_WINDOW(dlgDock), _("Sidebar"));
 	gtk_window_set_resizable(GTK_WINDOW(dlgDock), TRUE);
-	gtk_widget_set_size_request(dlgDock, settings.sidebar_width,
+	gtk_widget_set_usize(dlgDock, settings.sidebar_width,
 			     settings.gs_hight);
 
 	vbox_dock = gtk_vbox_new(FALSE, 0);

@@ -58,7 +58,7 @@ public:
 	NS_DECL_ISUPPORTS
 	NS_DECL_NSIDOMEVENTLISTENER
 
-
+	
  private:
 	nsresult KeyDown(nsIDOMEvent* aDOMEvent);
 	nsresult KeyUp(nsIDOMEvent* aDOMEvent);

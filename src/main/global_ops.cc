@@ -1,6 +1,6 @@
 /*
  * Xiphos Bible Study Tool
- * mod_global_ops.c - setup for SWORD global options and
+ * mod_global_ops.c - setup for SWORD global options and 
  *                    a few of our own in the gui
  *
  * Copyright (C) 2000-2009 Xiphos Developer Team
@@ -94,7 +94,7 @@ static void _set_global_textual(int manager,
  *   #include "main/global_ops.h"
  *
  *   int main_save_module_options(char * mod_name, char * option,
- *				    int choice)
+ *				    int choice)	
  *
  * Description
  *
@@ -110,15 +110,15 @@ int main_save_module_options(const char *mod_name,
 {
 	gchar *buf = NULL;
 #if 0
-    	if (dialog)
+    	if (dialog)	
 		buf = g_strdup_printf("%s/modops-dialog.conf", settings.gSwordDir);
 	else
 #endif
 		buf = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
 	SWConfig module_options(buf);
-
+	
 	module_options.Load();
-	g_free(buf);
+	g_free(buf);	
 
 	module_options[mod_name][option] = (choice ? "On" : "Off");
 
@@ -147,7 +147,7 @@ void main_dialog_set_global_options(gpointer backend,
 				    GLOBAL_OPS * ops)
 {
 	BackEnd* b = (BackEnd*)backend;
-
+	
 	_set_dialog_global_option(b, "Strong's Numbers",
 				 ops->strongs);
 	_set_dialog_global_option(b, "Morphological Tags",
@@ -168,13 +168,13 @@ void main_dialog_set_global_options(gpointer backend,
 				 ops->headings);
 	_set_dialog_global_option(b, "Words of Christ in Red",
 				 ops->words_in_red);
-
+	
 	_set_dialog_global_textual(b, "Transliteration",
 				  (ops->transliteration
 				   ? "Latin" : "Off"));
 
 	if (ops->variants_primary)
-		_set_dialog_global_textual(b, "Textual Variants",
+		_set_dialog_global_textual(b, "Textual Variants", 
 					  "Primary Reading");
 	else if (ops->variants_secondary)
 		_set_dialog_global_textual(b, "Textual Variants",
@@ -192,7 +192,7 @@ void main_dialog_set_global_options(gpointer backend,
  * Synopsis
  *   #include "gui/mod_global_ops.h"
  *
- *   void main_set_global_options(GLOBAL_OPS * ops)
+ *   void main_set_global_options(GLOBAL_OPS * ops)	
  *
  * Description
  *   set module global options
@@ -229,7 +229,7 @@ void main_set_global_options(GLOBAL_OPS * ops)
 			    ? "Latin" : "Off"));
 
 	if (ops->variants_primary)
-		_set_global_textual(ops->module_type, "Textual Variants",
+		_set_global_textual(ops->module_type, "Textual Variants", 
 				   "Primary Reading");
 	else if (ops->variants_secondary)
 		_set_global_textual(ops->module_type, "Textual Variants",
@@ -260,7 +260,7 @@ GLOBAL_OPS *main_new_globals(gchar * mod_name, int dialog)
 {
 	GLOBAL_OPS *ops;
 	gchar *buf = NULL;
-
+    	
 #if 0
 	if (dialog)
 		buf = g_strdup_printf("%s/modops-dialog.conf", settings.gSwordDir);
@@ -268,9 +268,9 @@ GLOBAL_OPS *main_new_globals(gchar * mod_name, int dialog)
 #endif
 		buf = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
 	SWConfig module_options(buf);
-
+	
 	module_options.Load();
-	g_free(buf);
+	g_free(buf);	
 
 	ops = g_new0(GLOBAL_OPS, 1);
 	ops->module_type = 0;
@@ -322,9 +322,6 @@ GLOBAL_OPS *main_new_globals(gchar * mod_name, int dialog)
 
 	ops->commentary_by_chapter =
 	    gui_of2tf(module_options[mod_name]["Commentary by Chapter"].c_str());
-
-	ops->doublespace =
-	    gui_of2tf(module_options[mod_name]["Doublespace"].c_str());
 
 	return ops;
 }

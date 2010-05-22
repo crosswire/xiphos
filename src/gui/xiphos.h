@@ -1,6 +1,6 @@
 /*
  * Xiphos Bible Study Tool
- * xiphos.h -
+ * xiphos.h - 
  *
  * Copyright (C) 2000-2009 Xiphos Developer Team
  *
@@ -26,8 +26,8 @@
 extern "C" {
 #endif
 
-
-#define MAIN_TEXT_WINDOW 0
+	
+#define MAIN_TEXT_WINDOW 0 
 #define parallel_WINDOW 1
 #define COMMENTARY_WINDOW 2
 #define DICTIONARY_WINDOW 3
@@ -38,11 +38,11 @@ extern "C" {
 #define COMMENTARY_DIALOG 8
 #define DICTIONARY_DIALOG 9
 #define BOOK_DIALOG 10
-
+    
 /*** function prototypes ***/
 
 void frontend_init(void);
-void frontend_display(const char *);
+void frontend_display(void);
 void shutdown_frontend(void);
 
 #ifdef __cplusplus

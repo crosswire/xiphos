@@ -1,6 +1,6 @@
 /*
  * Xiphos Bible Study Tool
- * previewer.cc -
+ * previewer.cc - 
  *
  * Copyright (C) 2000-2009 Xiphos Developer Team
  *
@@ -59,7 +59,8 @@ extern "C" {
 #include "gui/debug_glib_null.h"
 
 //#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
-#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><STYLE type=\"text/css\"><!-- A { text-decoration:none } --></STYLE></head>"
+#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><STYLE type=\"text/css\"><!-- A { text-decoration:none } %s --></STYLE></head>"
+#define DOUBLE_SPACE " * { line-height: 2em ! important; }"
 
 using namespace std;
 
@@ -67,7 +68,7 @@ static GtkWidget *previewer_html_widget;
 
 void main_set_previewer_widget(int in_sidebar)
 {
-    if (in_sidebar)
+    if(in_sidebar)
     	previewer_html_widget = sidebar.html_viewer_widget;
     else
 	previewer_html_widget = widgets.html_previewer_text;
@@ -75,7 +76,7 @@ void main_set_previewer_widget(int in_sidebar)
 
 GtkWidget *main_get_previewer_widget(void)
 {
-	return 	settings.show_previewer_in_sidebar
+	return 	settings.show_previewer_in_sidebar 
 		? sidebar.html_viewer_widget
 		: widgets.html_previewer_text;
 }
@@ -94,7 +95,7 @@ GtkWidget *main_get_previewer_widget(void)
  *
  * Return value
  *   void
- */
+ */ 
 
 void main_init_previewer(void)
 {
@@ -109,22 +110,24 @@ void main_init_previewer(void)
 	gecko_html_open_stream(html, "text/html");
 #else
 	/* setup gtkhtml widget */
-	GtkHTML *html = GTK_HTML(previewer_html_widget);
+	GtkHTML *html = GTK_HTML(previewer_html_widget);	
 	gboolean was_editable = gtk_html_get_editable(html);
-
+	
 	if (was_editable)
 		gtk_html_set_editable(html, FALSE);
 #endif
 	g_string_printf(tmp_str,
 			HTML_START
 			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+			"",			
 			settings.bible_bg_color, settings.bible_text_color,
 			settings.link_color);
 
 	str = g_string_new(tmp_str->str);
 	buf = _("Previewer");
 	g_string_printf(tmp_str,
-			"<b>%s</b><hr>", buf);
+			"<b>%s</b><br><font color=\"grey\">"
+			"<HR></font><br>", buf);
 	str = g_string_append(str, tmp_str->str);
 
 	g_string_printf(tmp_str, " %s", "</font></body></html>");
@@ -158,7 +161,7 @@ void main_init_previewer(void)
  *
  * Return value
  *   void
- */
+ */ 
 
 void main_clear_viewer(void)
 {
@@ -174,22 +177,27 @@ void main_clear_viewer(void)
 	gecko_html_open_stream(html, "text/html");
 #else
 	/* setup gtkhtml widget */
-	GtkHTML *html = GTK_HTML(previewer_html_widget);
+	GtkHTML *html = GTK_HTML(previewer_html_widget);	
 	gboolean was_editable = gtk_html_get_editable(html);
-
+	
 	if (was_editable)
 		gtk_html_set_editable(html, FALSE);
 #endif
 	g_string_printf(tmp_str,
 			HTML_START
 			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
-			"",
+			"",			
 			settings.bible_bg_color, settings.bible_text_color,
 			settings.link_color);
 
 	str = g_string_new(tmp_str->str);
+	buf = _("Previewer");
 	g_string_printf(tmp_str,
-			"<b>%s</b><hr></body></html>", _("Previewer"));
+			"<b>%s</b><br><font color=\"grey\">"
+			"<HR></font><br>", buf);
+	str = g_string_append(str, tmp_str->str);
+
+	g_string_printf(tmp_str, " %s", "</font></body></html>");
 	str = g_string_append(str, tmp_str->str);
 
 #ifdef USE_GTKMOZEMBED
@@ -214,7 +222,7 @@ void main_clear_viewer(void)
  * Synopsis
  *   #include "main/previewer.h"
  *
- *   void main_information_viewer(GtkWidget * html_widget, gchar * mod_name,
+ *   void main_information_viewer(GtkWidget * html_widget, gchar * mod_name, 
  *		    gchar * text, gchar *key, gchar * type)
  *
  * Description
@@ -247,72 +255,86 @@ void main_information_viewer(const gchar * mod_name, const gchar * text, const g
 
 	g_string_printf(tmp_str,
 			HTML_START
-			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
-			"<font face=\"%s\" size=\"%+d\">",
+			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+			(settings.doublespace ? DOUBLE_SPACE : ""),	
 			settings.bible_bg_color, settings.bible_text_color,
-			settings.link_color,
-			(mf->old_font ? mf->old_font : "none"),
-			(mf->old_font_size
-			 ? atoi(mf->old_font_size) + settings.base_font_size
-			 : settings.base_font_size) - 1);
+			settings.link_color);
 
 	str = g_string_new(tmp_str->str);
-
+	
 	if (type) {
-		if (*type == 'n') {
+		if (!strcmp(type, "n")) {
 			g_string_printf(tmp_str,
-					"<font color=\"grey\">%s</font><hr>",
+					"<font color=\"grey\">%s<HR></font><br>",
 					_("Footnote"));
 			str = g_string_append(str, tmp_str->str);
 		}
-		else if (*type == 'u') {
+		if (!strcmp(type, "u")) {
 			g_string_printf(tmp_str,
-					"<font color=\"grey\">%s: %s</font><hr>",
+					"<font color=\"grey\">%s: %s<HR></font><br>",
 					_("User Annotation"), key);
 			str = g_string_append(str, tmp_str->str);
 		}
-		else if (*type == 'x') {
+		if (!strcmp(type, "x")) {
 			g_string_printf(tmp_str,
-					"<font color=\"grey\">%s</font><hr>",
+					"<font color=\"grey\">%s<HR></font><br>",
 					_("Cross Reference"));
 			str = g_string_append(str, tmp_str->str);
 		}
-		else if (!strcmp(action, "showStrongs")) {
+		if (!strcmp(action, "showStrongs")) {	//&& !strcmp(type,"Greek")
 			g_string_printf(tmp_str,
-					"<font color=\"grey\">%s: %s</font><hr>",
+					"<font color=\"grey\">%s: %s<HR></font><br>",
 					_("Strongs"), key);
 			str = g_string_append(str, tmp_str->str);
 		}
-		else if (!strcmp(action, "showMorph")) {
+		if (!strcmp(action, "showMorph")) {	//&& !strcmp(type,"Greek")
 			g_string_printf(tmp_str,
-					"<font color=\"grey\">%s: %s</font><hr>",
+					"<font color=\"grey\">%s: %s<HR></font><br>",
 					_("Morphology"), key);
 			str = g_string_append(str, tmp_str->str);
 		}
 	} else {
 		g_string_printf(tmp_str,
-				"<font color=\"grey\">%s: %s</font><hr>",
+				"<font color=\"grey\">%s: %s<HR></font><br>",
 				mod_name, key);
 		str = g_string_append(str, tmp_str->str);
 	}
 
-	if (action && (!strcmp(action, "showStrongsMorph"))) {
+	if (action && (!strcmp(action, "showStrongsMorph"))) {	//&& !strcmp(type,"Greek")
 		g_string_printf(tmp_str,
-				"<font color=\"grey\">%s: %s</font><hr>",
+				"<font color=\"grey\">%s: %s<HR></font>",
 				_("Strongs"), key);
+		str = g_string_append(str, tmp_str->str);
+		g_string_printf(tmp_str,
+				"<font face=\"%s\" size=\"%+d\">",
+				((mf->old_font) ? mf->old_font : "none"),
+				((mf->old_font_size)
+			        ? atoi(mf->old_font_size) + settings.base_font_size
+			        : settings.base_font_size));
 		str = g_string_append(str, tmp_str->str);
 		str = g_string_append(str, text);
 
 		g_string_printf(tmp_str,
-				"<font color=\"grey\"><br><br>%s: %s</font><hr>",
+				"<font color=\"grey\"><br><br>%s: %s<HR></font>",
 				_("Morphology"), morph);
 		str = g_string_append(str, tmp_str->str);
 		str = g_string_append(str, morph_text);
+		g_string_printf(tmp_str, " %s<br>",
+				"</font></body></html>");
+		str = g_string_append(str, tmp_str->str);
 	} else {
+		g_string_printf(tmp_str,
+				"<font face=\"%s\" size=\"%+d\">",
+				((mf->old_font) ? mf->old_font : "none"),
+				((mf->old_font_size)
+			        ? atoi(mf->old_font_size) + settings.base_font_size
+			        : settings.base_font_size));
+		str = g_string_append(str, tmp_str->str);
 		str = g_string_append(str, text);
-	}
 
-	str = g_string_append(str, "</font></body></html>");
+		g_string_printf(tmp_str, " %s", "</font></body></html>");
+		str = g_string_append(str, tmp_str->str);
+	}
 
 #ifdef USE_GTKMOZEMBED
 	if (str->len) {
@@ -344,7 +366,7 @@ void main_information_viewer(const gchar * mod_name, const gchar * text, const g
  * Synopsis
  *   #include "main/previewer.h"
  *
- *   void mark_search_words(GString *str, gboolean eliminate)
+ *   void mark_search_words(GString *str, gboolean eliminate)	
  *
  * Description
  *    purplifies search terms in results.
@@ -530,6 +552,7 @@ void main_entry_display(gpointer data, gchar * mod_name,
 	g_string_printf(tmp_str,
 			HTML_START
 			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+			(settings.doublespace ? DOUBLE_SPACE : ""),	
 			settings.bible_bg_color, settings.bible_text_color,
 			settings.link_color);
 
@@ -537,10 +560,10 @@ void main_entry_display(gpointer data, gchar * mod_name,
 
 	g_string_printf(tmp_str,
 			"<font face=\"%s\" size=\"%+d\">",
-			(mf->old_font ? mf->old_font : "none"),
-			(mf->old_font_size
-			 ? atoi(mf->old_font_size) + settings.base_font_size
-			 : settings.base_font_size) - 1);
+			((mf->old_font) ? mf->old_font : "none"),
+			((mf->old_font_size)
+			? atoi(mf->old_font_size) + settings.base_font_size
+			: settings.base_font_size));
 	str = g_string_append(str, tmp_str->str);
 
 	/* show key in html widget  */
@@ -555,7 +578,7 @@ void main_entry_display(gpointer data, gchar * mod_name,
 					mod_name, key);
 		} else {
 			g_string_printf(tmp_str,
-					"<a href=\"passagestudy.jsp?action=showModInfo&value=%s&module=%s\">"
+					"<a href=\"xiphos.url?action=showModInfo&value=%s&module=%s\">"
 					"<font color=\"%s\">[%s]</a></font>[%s] ",
 					backend->
 					module_description(mod_name),

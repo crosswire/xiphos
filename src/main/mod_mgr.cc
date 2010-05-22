@@ -1,6 +1,6 @@
 /*
  * Xiphos Bible Study Tool
- * mod_mgr.c
+ * mod_mgr.c 
  *
  * Copyright (C) 2000-2009 Xiphos Developer Team
  *
@@ -48,20 +48,20 @@ int main_module_mgr_delete_index_mod(char * module_name)
 
 /******************************************************************************
  * Name
- *
+ *   
  *
  * Synopsis
  *   #include "main/mod_mgr.hh"
  *
- *
+ *   
  *
  * Description
- *
+ *   
  *
  * Return value
  *   void
  */
-
+ 
 void main_update_module_lists(void)
 {
 	main_shutdown_list();
@@ -82,7 +82,7 @@ void main_update_module_lists(void)
  *   void update_install_status(long total, long done, const char *message)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   void
@@ -106,7 +106,7 @@ void update_install_status(long total,
  *   void update_install_progress(double fraction)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   void
@@ -125,7 +125,7 @@ void main_index_percent_update(char percent,
 	float num;
 	char buf[80];
 	static char printed = 0;
-
+	
 	/* update search dialog progress */
 	while ((((float) percent) / 100) * maxHashes > printed) {
 		sprintf(buf, "%f", (((float) percent) / 100));
@@ -146,7 +146,7 @@ void main_index_percent_update(char percent,
  *   GList *mod_mgr_list_remote_sources(void)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   GList *
@@ -168,7 +168,7 @@ GList *mod_mgr_list_remote_sources(void)
  *   GList *mod_mgr_list_local_sources(void)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   GList *
@@ -190,7 +190,7 @@ GList *mod_mgr_list_local_sources(void)
  *   int mod_mgr_uninstall(const char *mod_name)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   int
@@ -204,7 +204,7 @@ int mod_mgr_uninstall(const char *dir, const char *mod_name)
 
 /******************************************************************************
  * Name
- *  mod_mgr_remote_install
+ *  mod_mgr_remote_install 
  *
  * Synopsis
  *   #include "main/mod_mgr.hh"
@@ -212,7 +212,7 @@ int mod_mgr_uninstall(const char *dir, const char *mod_name)
  *   int mod_mgr_remote_install(const char *source_name, const char *mod_name)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   int
@@ -236,7 +236,7 @@ int mod_mgr_remote_install(const char *dir,
  *   int mod_mgr_local_install_module(const char *destdir, const char *srcdir, const char *mod_name)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   int
@@ -260,7 +260,7 @@ int mod_mgr_local_install_module(const char *destdir,
  *   GList *mod_mgr_list_local_modules(const char *dir)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   GList *
@@ -269,13 +269,13 @@ int mod_mgr_local_install_module(const char *destdir,
 GList *mod_mgr_list_local_modules(const char *dir,
 				  gboolean augment)
 {
-	GList *list = NULL;
+	GList *list = NULL;	
 	MOD_MGR *mod_info;
-
+	
 	backend_init_module_mgr(dir, augment, augment);
 
 	backend_module_mgr_list_local_modules_init(!augment);
-	while ((mod_info = backend_module_mgr_get_next_module()) != NULL) {
+	while((mod_info = backend_module_mgr_get_next_module()) != NULL) {
 		list = g_list_append(list, (MOD_MGR*) mod_info);
 	}
 	return list;
@@ -292,7 +292,7 @@ GList *mod_mgr_list_local_modules(const char *dir,
  *   GList *mod_mgr_remote_list_modules(const char *source_name)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   GList *
@@ -300,11 +300,11 @@ GList *mod_mgr_list_local_modules(const char *dir,
 
 GList *mod_mgr_remote_list_modules(const char *source_name)
 {
-	GList *list = NULL;
+	GList *list = NULL;	
 	MOD_MGR *mod_info;
-
+	
 	backend_module_mgr_remote_list_modules_init(source_name);
-	while ((mod_info = backend_module_mgr_get_next_module()) != NULL) {
+	while((mod_info = backend_module_mgr_get_next_module()) != NULL) {
 		list = g_list_append(list, (MOD_MGR*) mod_info);
 	}
 	return list;
@@ -321,7 +321,7 @@ GList *mod_mgr_remote_list_modules(const char *source_name)
  *   int mod_mgr_refresh_remote_source(const char *source_name)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   int
@@ -343,7 +343,7 @@ int mod_mgr_refresh_remote_source(const char *source_name)
  *   void mod_mgr_init_config()
  *
  * Description
- *
+ *   
  *
  * Return value
  *   void
@@ -369,19 +369,19 @@ void mod_mgr_reread_config(void)
 	backend_module_mgr_reread_config();
 }
 
-void mod_mgr_add_source(const char * vtype,
-			const char * type,
-			const char * caption,
-			const char * source,
+void mod_mgr_add_source(const char * vtype, 
+			const char * type, 
+			const char * caption, 
+			const char * source, 
 			const char * directory,
 			const char * user,
 			const char * pass,
 			const char * uid)
 {
-	backend_module_mgr_add_source(vtype,
-				      type,
-				      caption,
-				      source,
+	backend_module_mgr_add_source(vtype, 
+				      type, 
+				      caption, 
+				      source, 
 				      directory,
 				      user,
 				      pass,
@@ -399,7 +399,7 @@ void mod_mgr_add_source(const char * vtype,
  *   void mod_mgr_init(const char *dir, gboolean augment)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   void
@@ -422,7 +422,7 @@ void mod_mgr_init(const char *dir,
  *   void mod_mgr_terminate(void)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   void
@@ -444,7 +444,7 @@ void mod_mgr_terminate(void)
  *   void mod_mgr_shut_down(void)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   void

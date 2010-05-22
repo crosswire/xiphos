@@ -1,6 +1,6 @@
 /*
  * Xiphos Bible Study Tool
- * dialog.h -
+ * dialog.h - 
  *
  * Copyright (C) 2000-2009 Xiphos Developer Team
  *
@@ -32,23 +32,23 @@ extern "C" {
 #define GS_NO 1
 #define GS_OK 2
 #define GS_CANCEL 3
-
+	
 typedef struct _gs_dialog GS_DIALOG;
 struct _gs_dialog {
-
+	
 	GtkWidget *dialog;
-
+	
 	gchar *stock_icon;
-
+	
 	gchar *title;
-
+	
 	gchar *text1;
 	gchar *text2;
 	gchar *text3;
 	gchar *text4;
 	gchar *text5;
 	gchar *text6;
-
+	
 	gchar *label_top;
 	gchar *label_middle;
 	gchar *label1;
@@ -58,7 +58,7 @@ struct _gs_dialog {
 	gchar *label5;
 	gchar *label6;
 	gchar *label_bottom;
-
+	
 	gboolean no_save;
 	gboolean save;
 	gboolean ok;

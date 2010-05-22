@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
- *
+ * 
  * Contains code from Evolution as written by Ettore Perazzoli.
  */
 
@@ -38,12 +38,12 @@
 /* FIXME: clean up below */
 
 #define E_TYPE_SPLASH			(e_splash_get_type ())
-#define E_SPLASH(obj)			(G_TYPE_CHECK_INSTANCE_CAST ((obj), \
+#define E_SPLASH(obj)			(GTK_CHECK_CAST ((obj), \
                                               E_TYPE_SPLASH, ESplash))
-#define E_SPLASH_CLASS(klass)		(G_TYPE_CHECK_CLASS_CAST ((klass), \
+#define E_SPLASH_CLASS(klass)		(GTK_CHECK_CLASS_CAST ((klass), \
                                               E_TYPE_SPLASH, ESplashClass))
-#define E_IS_SPLASH(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), E_TYPE_SPLASH))
-#define E_IS_SPLASH_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((obj), \
+#define E_IS_SPLASH(obj)		(GTK_CHECK_TYPE ((obj), E_TYPE_SPLASH))
+#define E_IS_SPLASH_CLASS(klass)	(GTK_CHECK_CLASS_TYPE ((obj), \
 					      E_TYPE_SPLASH))
 
 typedef struct _ESplash ESplash;
@@ -60,7 +60,7 @@ struct _ESplashClass {
 	GtkWindowClass parent_class;
 };
 
-GType      e_splash_get_type            (void);
+GtkType    e_splash_get_type            (void);
 void       e_splash_construct           (ESplash * splash,
 					 GdkPixbuf * splash_image);
 GtkWidget *e_splash_new                 (void);
@@ -152,14 +152,14 @@ static Icon *icon_new(ESplash * splash, GdkPixbuf * image_pixbuf)
 			 GDK_INTERP_HYPER);
 
 	icon->dark_pixbuf = create_darkened_pixbuf(icon->light_pixbuf);
-
+	
 	return icon;
 }
 
 static void icon_free(Icon * icon)
 {
-	g_object_unref(icon->dark_pixbuf);
-	g_object_unref(icon->light_pixbuf);
+	gdk_pixbuf_unref(icon->dark_pixbuf);
+	gdk_pixbuf_unref(icon->light_pixbuf);
 
 	g_free(icon);
 }
@@ -181,7 +181,7 @@ static void layout_icons(ESplash * splash)
 
 	x = (x_step - ICON_SIZE) / 2.0;
 	y = ICON_Y;
-
+	
 	/* for all icons, determine their x,y locations
 	   and store them in the icon struct */
 	for (p = priv->icons; p != NULL; p = p->next) {
@@ -233,7 +233,7 @@ static void impl_destroy(GtkObject * object)
 	priv = splash->priv;
 
 	if (priv->splash_image_pixbuf != NULL)
-		g_object_unref(priv->splash_image_pixbuf);
+		gdk_pixbuf_unref(priv->splash_image_pixbuf);
 
 	for (p = priv->icons; p != NULL; p = p->next) {
 		Icon *icon;
@@ -245,7 +245,7 @@ static void impl_destroy(GtkObject * object)
 	g_list_free(priv->icons);
 
 	if (priv->layout_idle_id != 0)
-		g_source_remove(priv->layout_idle_id);
+		gtk_idle_remove(priv->layout_idle_id);
 
 	g_free(priv);
 }
@@ -257,7 +257,7 @@ static void class_init(ESplashClass * klass)
 	object_class = GTK_OBJECT_CLASS(klass);
 	object_class->destroy = impl_destroy;
 
-	parent_class = g_type_class_ref(gtk_window_get_type());
+	parent_class = gtk_type_class(gtk_window_get_type());
 }
 
 static void init(ESplash * splash)
@@ -287,10 +287,10 @@ button_press_event(GtkWidget * widget, GdkEventButton * event,
 
 /**
  * expose_event_callback
- * @widget: The canvas #GtkWidget
+ * @widget: The canvas #GtkWidget 
  * @event: #GdkEventExpose
  * @data: #gpointer which holds the ESplashPrivate struct
- *
+ * 
  * this function is called every time the splash screen is redrawn
  * it draws the main image and each icon every time
  **/
@@ -338,7 +338,7 @@ expose_event_callback (GtkWidget *widget, GdkEventExpose *event, gpointer data)
  * e_splash_construct:
  * @splash: A pointer to an ESplash widget
  * @splash_image_pixbuf: The pixbuf for the image to appear in the splash dialog
- *
+ * 
  * Construct @splash with @splash_image_pixbuf as the splash image.
  **/
 void
@@ -354,11 +354,11 @@ e_splash_construct(ESplash * splash, GdkPixbuf * splash_image_pixbuf)
 
 	priv = splash->priv;
 
-	priv->splash_image_pixbuf = g_object_ref(splash_image_pixbuf);
+	priv->splash_image_pixbuf = gdk_pixbuf_ref(splash_image_pixbuf);
 
 	canvas = gtk_drawing_area_new();
 	priv->canvas = GTK_DRAWING_AREA(canvas);
-
+	
 	image_width = gdk_pixbuf_get_width(splash_image_pixbuf);
 	image_height = gdk_pixbuf_get_height(splash_image_pixbuf);
 
@@ -366,7 +366,7 @@ e_splash_construct(ESplash * splash, GdkPixbuf * splash_image_pixbuf)
 
 	g_signal_connect (G_OBJECT (canvas), "expose_event",
 			  G_CALLBACK (expose_event_callback), priv);
-
+	
 	gtk_widget_show(canvas);
 
 	frame = gtk_frame_new(NULL);
@@ -376,20 +376,20 @@ e_splash_construct(ESplash * splash, GdkPixbuf * splash_image_pixbuf)
 	gtk_container_add(GTK_CONTAINER(splash), frame);
 
 	vbox = gtk_vbox_new(FALSE,2);
-	gtk_widget_show(vbox);
+	gtk_widget_show(vbox);	
 	gtk_container_add(GTK_CONTAINER(frame), vbox);
-
+	
 	gtk_box_pack_start((GtkBox *)vbox, canvas,TRUE,TRUE,0);
-
+	
 	priv->progressbar = (GtkProgressBar*)gtk_progress_bar_new();
 	gtk_widget_show(GTK_WIDGET(priv->progressbar));
-	gtk_box_pack_start((GtkBox *)vbox, GTK_WIDGET(priv->progressbar),FALSE,TRUE,0);
-
+	gtk_box_pack_start((GtkBox *)vbox, GTK_WIDGET(priv->progressbar),FALSE,TRUE,0);	
+	
 	g_signal_connect(GTK_OBJECT(splash), "button-press-event",
 			 G_CALLBACK(button_press_event), splash);
 
 	gtk_window_set_decorated(GTK_WINDOW(splash), FALSE);
-	gtk_window_set_position(GTK_WINDOW(splash), GTK_WIN_POS_CENTER);
+	gtk_window_set_position(GTK_WINDOW(splash), GTK_WIN_POS_CENTER); 
 	gtk_window_set_resizable(GTK_WINDOW(splash), FALSE);
 	gtk_window_set_default_size(GTK_WINDOW(splash), image_width,
 				    image_height+20);
@@ -400,7 +400,7 @@ e_splash_construct(ESplash * splash, GdkPixbuf * splash_image_pixbuf)
  * e_splash_new:
  *
  * Create a new ESplash widget.
- *
+ * 
  * Return value: A pointer to the newly created ESplash widget.
  **/
 GtkWidget *e_splash_new(void)
@@ -424,7 +424,7 @@ GtkWidget *e_splash_new(void)
 	new = g_object_new(e_splash_get_type(), NULL);
 	e_splash_construct(new, splash_image_pixbuf);
 
-	g_object_unref(splash_image_pixbuf);
+	gdk_pixbuf_unref(splash_image_pixbuf);
 
 	return GTK_WIDGET(new);
 }
@@ -433,9 +433,9 @@ GtkWidget *e_splash_new(void)
  * e_splash_add_icon:
  * @splash: A pointer to an ESplash widget
  * @icon_pixbuf: Pixbuf for the icon to be added
- *
+ * 
  * Add @icon_pixbuf to the @splash.
- *
+ * 
  * Return value: The total number of icons in the splash after the new icon has
  * been added.
  **/
@@ -459,8 +459,8 @@ int e_splash_add_icon(ESplash * splash, GdkPixbuf * icon_pixbuf)
 	icon->y = ICON_Y;
 
 	GtkTextDirection dir = gtk_widget_get_direction(GTK_WIDGET (splash));
-
-	if (dir == GTK_TEXT_DIR_LTR)
+	
+	if(dir == GTK_TEXT_DIR_LTR)
 		priv->icons = g_list_append(priv->icons, icon);
 	else
 		priv->icons = g_list_prepend(priv->icons, icon);
@@ -477,7 +477,7 @@ int e_splash_add_icon(ESplash * splash, GdkPixbuf * icon_pixbuf)
  * @splash: A pointer to an ESplash widget
  * @num: Number of the icon whose highlight state must be changed
  * @highlight: Whether the icon must be highlit or not
- *
+ * 
  * Change the highlight state of the @num-th icon.
  **/
 void
@@ -534,9 +534,9 @@ void gui_splash_init()
 
 		gtk_widget_show(splash);
 		set_window_icon(GTK_WINDOW(splash));
-		g_object_ref(G_OBJECT(splash));
-
-
+		gtk_object_ref(GTK_OBJECT(splash));
+		
+		
 #ifdef USE_GTKMOZEMBED
 		icons = g_list_append(icons, "mozilla-icon.png");
 #endif
@@ -544,7 +544,7 @@ void gui_splash_init()
 		icons = g_list_append(icons, "sword.png");
 		icons = g_list_append(icons, "gnome-session.png");
 		icons = g_list_append(icons, "gs2-48x48.png");
-
+		
 		while (icons != NULL)
 		{
 			icon_pixbuf = pixbuf_finder(icons->data, 0, &error);
@@ -554,18 +554,21 @@ void gui_splash_init()
 				error = NULL;
 				/* this is ugly but better than a crash */
 				settings.showsplash = 0;
-				g_object_unref(splash);
+				gtk_widget_unref(splash);
 				gtk_widget_destroy(splash);
 				return;
 			}
 			e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
-			g_object_unref(icon_pixbuf);
+			gdk_pixbuf_unref(icon_pixbuf);
 			icons = g_list_next(icons);
 		}
 
 		g_list_free(icons);
 	}
-	sync_windows();
+	while (gtk_events_pending()) {
+			gtk_main_iteration();
+		}
+
 }
 
 
@@ -581,15 +584,20 @@ void gui_splash_step(gchar *text, gdouble progress, gint step)
 					      progress);
 		e_splash_set_icon_highlight(E_SPLASH(splash), step, TRUE);
 
-		sync_windows();
+		while (gtk_events_pending()) {
+			gtk_main_iteration();
+		}
 	}
 }
 
 gboolean gui_splash_done()
 {
 	if (settings.showsplash) {
-		sync_windows();
-		g_object_unref(splash);
+
+		while (gtk_events_pending()) {
+			gtk_main_iteration();
+		}
+		gtk_widget_unref(splash);
 		gtk_widget_destroy(splash);
 	}
 	return FALSE;

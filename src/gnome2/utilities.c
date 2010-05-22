@@ -29,7 +29,11 @@
 #include <string.h>
 #include <assert.h>
 
+#ifndef WITHOUT_GNOME
+#include <gnome.h>
+#else
 #include <gtk/gtk.h>
+#endif
 
 #include "gui/utilities.h"
 #include "gui/preferences_dialog.h"
@@ -76,41 +80,15 @@
 
 /******************************************************************************
  * Name
- *   sync_windows
- *
- * Synopsis
- *   void sync_windows()
- *
- * Description
- *   forces GTK window updates iff the block flag is unset.
- *   this flag is only checked here; set/unset by others.
- *
- * Return value
- *   void
- */
-
-gint stop_window_sync = 0;
-
-void
-sync_windows()
-{
-	if (stop_window_sync == 0) {
-		while (gtk_events_pending())
-			gtk_main_iteration();
-	}
-}
-
-/******************************************************************************
- * Name
  *  utilities_parse_treeview
  *
  * Synopsis
  *   #include "gui/bookmarks_menu.h"
  *
- *   void utilities_parse_treeview(xmlNodePtr parent, GtkTreeIter * tree_parent)
+ *   void utilities_parse_treeview(xmlNodePtr parent, GtkTreeIter * tree_parent)	
  *
  * Description
- *
+ *    
  *
  * Return value
  *   void
@@ -125,38 +103,38 @@ void utilities_parse_treeview(xmlNodePtr parent, GtkTreeIter * tree_parent, GtkT
 	gchar *module = NULL;
 	gchar *mod_desc = NULL;
 	gchar *description = NULL;
-
+	
 	gtk_tree_model_iter_children(GTK_TREE_MODEL(model), &child,
                                              tree_parent);
-
+	
 	do {
 		gtk_tree_model_get(GTK_TREE_MODEL(model), &child,
-			   		2, &caption,
-					3, &key,
-					4, &module,
-					5, &mod_desc,
+			   		2, &caption, 
+					3, &key, 
+					4, &module, 
+					5, &mod_desc, 
 					6, &description,
 					-1);
-		if (gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model),
+		if(gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model), 
 							&child)) {
-			cur_node = xml_add_folder_to_parent(parent,
+			cur_node = xml_add_folder_to_parent(parent, 
 							caption);
 			utilities_parse_treeview(cur_node, &child, model);
-
+						     
 		}
-		else
-			xml_add_bookmark_to_parent(parent,
+		else 
+			xml_add_bookmark_to_parent(parent, 
 						description,
 						key,
 						module,
 						mod_desc);
-
+		
 		g_free(caption);
 		g_free(key);
-		g_free(module);
+		g_free(module);	
 		g_free(mod_desc);
 		g_free(description);
-	} while (gtk_tree_model_iter_next(GTK_TREE_MODEL(model), &child));
+	} while(gtk_tree_model_iter_next(GTK_TREE_MODEL(model), &child));
 }
 
 
@@ -181,7 +159,9 @@ void gui_reassign_strdup(gchar **where, gchar *what)
 void gui_set_progressbar_text(GtkWidget * pb, gchar * text)
 {
 	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(pb), text);
-	sync_windows();
+	while (gtk_events_pending()) {
+		gtk_main_iteration();
+	}  
 }
 
 void gui_set_statusbar (const gchar * message)
@@ -191,19 +171,21 @@ void gui_set_statusbar (const gchar * message)
 	context_id =
 		gtk_statusbar_get_context_id (GTK_STATUSBAR (widgets.appbar),
                                        		message);
-
+	
 	context_id =
 		gtk_statusbar_push (GTK_STATUSBAR(widgets.appbar),
                                     context_id,
                                     message);
 	GS_message (("context_id: %d\nmessage: %s",context_id,message));
-
+	
 }
 
 void gui_set_progressbar_fraction(GtkWidget * pb, gdouble fraction)
 {
 	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(pb), fraction);
-	sync_windows();
+	while (gtk_events_pending()) {
+		gtk_main_iteration();
+	}  
 }
 
 
@@ -215,13 +197,13 @@ void gui_set_combo_index(GtkWidget * combo, gint index)
 
 void gui_clear_combo(GtkWidget * combo)
 {
-	GtkTreeModel* model = gtk_combo_box_get_model(GTK_COMBO_BOX(combo));
+	GtkTreeModel* model = gtk_combo_box_get_model(GTK_COMBO_BOX(combo));	
 	gtk_list_store_clear(GTK_LIST_STORE(model));
 }
 
 void gui_add_item_to_combo(GtkWidget * combo, gchar * item)
 {
-	GtkTreeIter iter;
+	GtkTreeIter iter;	
 	GtkTreeModel* model = gtk_combo_box_get_model(GTK_COMBO_BOX(combo));
 	gtk_list_store_append(GTK_LIST_STORE(model), &iter);
 	gtk_list_store_set(GTK_LIST_STORE(model), &iter, 0, (gchar*)item, -1);
@@ -229,10 +211,10 @@ void gui_add_item_to_combo(GtkWidget * combo, gchar * item)
 
 
 /*
- * taken from galeon
+ * taken from galeon 
  * glade_signal_connect_func: used by glade_xml_signal_autoconnect_full
  */
-void gui_glade_signal_connect_func (const gchar *cb_name, GObject *obj,
+void gui_glade_signal_connect_func (const gchar *cb_name, GObject *obj, 
 			   const gchar *signal_name, const gchar *signal_data,
 			   GObject *conn_obj, gboolean conn_after,
 			   gpointer user_data)
@@ -250,7 +232,7 @@ void gui_glade_signal_connect_func (const gchar *cb_name, GObject *obj,
 
 	/*g_print( "glade_signal_connect_func: cb_name = '%s', signal_name = '%s', signal_data = '%s'\n",
 	  cb_name, signal_name, signal_data ); */
-
+	
 	if (g_module_symbol (mod_self, cb_name, &handler_func))
 	{
 		/* found callback */
@@ -259,14 +241,14 @@ void gui_glade_signal_connect_func (const gchar *cb_name, GObject *obj,
 			if (conn_after)
 			{
 				g_signal_connect_object
-                                        (obj, signal_name,
+                                        (obj, signal_name, 
                                          handler_func, conn_obj,
                                          G_CONNECT_AFTER);
 			}
 			else
 			{
 				g_signal_connect_object
-                                        (obj, signal_name,
+                                        (obj, signal_name, 
                                          handler_func, conn_obj,
                                          G_CONNECT_SWAPPED);
 			}
@@ -275,19 +257,19 @@ void gui_glade_signal_connect_func (const gchar *cb_name, GObject *obj,
 		{
 			/* no conn_obj; use standard connect */
 			gpointer data = NULL;
-
+			
 			data = user_data;
-
+			
 			if (conn_after)
 			{
 				g_signal_connect_after
-					(obj, signal_name,
+					(obj, signal_name, 
 					 handler_func, data);
 			}
 			else
 			{
 				g_signal_connect
-					(obj, signal_name,
+					(obj, signal_name, 
 					 handler_func, data);
 			}
 		}
@@ -313,7 +295,7 @@ gchar * gui_general_user_file (const char *fname, gboolean critical)
 	gchar *alternative[10];
 	gchar *file;
 	gint i;
-
+	
 	/* create cache hash table if it doesnt already exist */
 	if (already_found == NULL)
 	{
@@ -337,12 +319,12 @@ gchar * gui_general_user_file (const char *fname, gboolean critical)
 
 	/* try the default */
 	file = g_build_filename(g_getenv(HOMEVAR), ".xiphos", fname, NULL);
-
+	
 	/* success? */
 	if (g_file_test (file, G_FILE_TEST_EXISTS))
 	{
 		/* add it to the set of found files */
-		g_hash_table_insert (already_found, g_strdup (fname),
+		g_hash_table_insert (already_found, g_strdup (fname), 
 				     g_strdup (file));
 		return file;
 	}
@@ -367,13 +349,13 @@ gchar * gui_general_user_file (const char *fname, gboolean critical)
 #endif
 	alternative[i++] = g_build_filename(SHARE_DIR, fname, NULL);
 	alternative[i++] = NULL;  /* NULL terminator needed */
-
+	
 	/* select one of the alternatives */
 	file = NULL;
-
+	
 	for (i = 0; alternative[i] != NULL; i++)
 	{
-		if (file == NULL &&  g_file_test (alternative[i], G_FILE_TEST_EXISTS))
+		if (file == NULL &&  g_file_test (alternative[i], G_FILE_TEST_EXISTS)) 
 		{
 			file = alternative[i];
 		}
@@ -402,7 +384,7 @@ gchar * gui_general_user_file (const char *fname, gboolean critical)
 		}
 
 		/* add it to the set of found files */
-		g_hash_table_insert (already_found, g_strdup (fname),
+		g_hash_table_insert (already_found, g_strdup (fname), 
 				     g_strdup (file));
 	}
 	/* if nothing then theres an error */
@@ -445,8 +427,8 @@ language_add_folders(GtkTreeModel * model,
 	(void) gtk_tree_model_iter_children(model, &iter_iter, &iter);
 	for (j = 0; languages[j]; ++j) {
 		gtk_tree_store_append(GTK_TREE_STORE(model), &child_iter, &iter);
-		gtk_tree_store_set(GTK_TREE_STORE(model),
-				   &child_iter,
+		gtk_tree_store_set(GTK_TREE_STORE(model), 
+				   &child_iter, 
 				   0,
 				   ((g_utf8_validate(languages[j], -1, NULL))
 				    ? languages[j]
@@ -467,7 +449,7 @@ language_add_folders(GtkTreeModel * model,
  *		      GtkTreeIter iter, gchar * module_name)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   void
@@ -476,9 +458,9 @@ static void add_module_to_prayerlist_folder(GtkTreeModel * model,
 					  GtkTreeIter iter,
 					  gchar * module_name)
 {
-
+	
 	GtkTreeIter child_iter;
-
+	
 	gtk_tree_store_append(GTK_TREE_STORE(model),
 			      &child_iter, &iter);
 	gtk_tree_store_set(GTK_TREE_STORE(model), &child_iter,
@@ -497,7 +479,7 @@ static void add_module_to_prayerlist_folder(GtkTreeModel * model,
  *		      GtkTreeIter iter, gchar * language, gchar * module_name)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   void
@@ -529,8 +511,8 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 			gtk_tree_store_append(GTK_TREE_STORE(model),
 					      &child_iter, &iter_iter);
 			gtk_tree_store_set(GTK_TREE_STORE(model),
-					   &child_iter,
-					   0, (gchar *) module_name,
+					   &child_iter, 
+					   0, (gchar *) module_name, 
 					   -1);
 			g_free(str_data);
 			return;
@@ -550,13 +532,13 @@ static void add_module_to_language_folder(GtkTreeModel * model,
  *   void load_module_tree(GtkWidget * tree)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   void
  */
 
-void gui_load_module_tree(GtkWidget * tree, gboolean limited)
+void gui_load_module_tree(GtkWidget * tree)
 {
 	GtkTreeStore *store;
 	GtkTreeIter text;
@@ -573,7 +555,7 @@ void gui_load_module_tree(GtkWidget * tree, gboolean limited)
 
 	store = gtk_tree_store_new(1, G_TYPE_STRING);
 	gtk_tree_store_clear(store);
-
+	
 	/*  Biblical Texts folders */
 	gtk_tree_store_append(store, &text, NULL);
 	gtk_tree_store_set(store, &text, 0, _("Biblical Texts"), -1);
@@ -582,32 +564,30 @@ void gui_load_module_tree(GtkWidget * tree, gboolean limited)
 	gtk_tree_store_append(store, &commentary, NULL);
 	gtk_tree_store_set(store, &commentary, 0, _("Commentaries"), -1);
 
-	if (!limited) {
-		/*  Dictionaries folders */
-		gtk_tree_store_append(store, &dictionary, NULL);
-		gtk_tree_store_set(store, &dictionary, 0, _("Dictionaries"), -1);
+	/*  Dictionaries folders */
+	gtk_tree_store_append(store, &dictionary, NULL);
+	gtk_tree_store_set(store, &dictionary, 0, _("Dictionaries"), -1);
 
-		/*  Devotionals folders */
-		gtk_tree_store_append(store, &devotional, NULL);
-		gtk_tree_store_set(store, &devotional, 0, _("Daily Devotionals"), -1);
+	/*  Devotionals folders */
+	gtk_tree_store_append(store, &devotional, NULL);
+	gtk_tree_store_set(store, &devotional, 0, _("Daily Devotionals"), -1);
 
-		/*  General Books folders */
-		gtk_tree_store_append(store, &book, NULL);
-		gtk_tree_store_set(store, &book, 0, _("General Books"), -1);
+	/*  General Books folders */
+	gtk_tree_store_append(store, &book, NULL);
+	gtk_tree_store_set(store, &book, 0, _("General Books"), -1);
 
-		/*  Maps folders */
-		gtk_tree_store_append(store, &map, NULL);
-		gtk_tree_store_set(store, &map, 0, _("Maps"), -1);
+	/*  Maps folders */
+	gtk_tree_store_append(store, &map, NULL);
+	gtk_tree_store_set(store, &map, 0, _("Maps"), -1);
 
-		/*  Images folders */
-		gtk_tree_store_append(store, &image, NULL);
-		gtk_tree_store_set(store, &image, 0, _("Images"), -1);
+	/*  Images folders */
+	gtk_tree_store_append(store, &image, NULL);
+	gtk_tree_store_set(store, &image, 0, _("Images"), -1);
 
-		/*  Prayer lists folder */
-		if (settings.prayerlist) {
-			gtk_tree_store_append(store, &prayerlist, NULL);
-			gtk_tree_store_set(store, &prayerlist, 0, _("Prayer List/Journal"), -1);
-		}
+	/*  Prayer lists folder */
+	if(settings.prayerlist) {
+		gtk_tree_store_append(store, &prayerlist, NULL);
+		gtk_tree_store_set(store, &prayerlist, 0, _("Prayer List/Journal"), -1);
 	}
 
 	tmp = mod_mgr_list_local_modules(settings.path_to_mods, TRUE);
@@ -616,13 +596,13 @@ void gui_load_module_tree(GtkWidget * tree, gboolean limited)
 			   text, commentary, map, image,
 			   devotional, dictionary, book,
 			   NULL, NULL,
-			   language_add_folders, limited);
+			   language_add_folders);
 
 	tmp2 = tmp;
 	while (tmp2 != NULL) {
 		info = (MOD_MGR *) tmp2->data;
 
-		/* see comment on similar code in src/main/sidebar.cc. */
+		// see comment on similar code in src/main/sidebar.cc.
 
 		if (info->type[0] == 'B') {
 			add_module_to_language_folder(GTK_TREE_MODEL(store),
@@ -634,39 +614,37 @@ void gui_load_module_tree(GtkWidget * tree, gboolean limited)
 						      commentary, info->language,
 						      info->name);
 		}
-		else if (!limited) {
-			if (info->is_maps) {
+		else if (info->is_maps) {
+			add_module_to_language_folder(GTK_TREE_MODEL(store),
+						      map, info->language,
+						      info->name);
+		}
+		else if (info->is_images) {
+			add_module_to_language_folder(GTK_TREE_MODEL(store),
+						      image, info->language,
+						      info->name);
+		}
+		else if (info->is_devotional) {
+			add_module_to_language_folder(GTK_TREE_MODEL(store),
+						      devotional, info->language,
+						      info->name);
+		}
+		else if (info->type[0] == 'L') {
+			add_module_to_language_folder(GTK_TREE_MODEL(store),
+						      dictionary, info->language,
+						      info->name);
+		}
+		else if (info->type[0] == 'G') {
+			gchar *gstype = main_get_mod_config_entry(info->name, "GSType");
+			if ((gstype == NULL) || strcmp(gstype, "PrayerList")) {
 				add_module_to_language_folder(GTK_TREE_MODEL(store),
-							      map, info->language,
+							      book, info->language,
 							      info->name);
 			}
-			else if (info->is_images) {
-			    add_module_to_language_folder(GTK_TREE_MODEL(store),
-							  image, info->language,
-							  info->name);
-			}
-			else if (info->is_devotional) {
-				add_module_to_language_folder(GTK_TREE_MODEL(store),
-							      devotional, info->language,
-							      info->name);
-			}
-			else if (info->type[0] == 'L') {
-				add_module_to_language_folder(GTK_TREE_MODEL(store),
-							      dictionary, info->language,
-							      info->name);
-			}
-			else if (info->type[0] == 'G') {
-				gchar *gstype = main_get_mod_config_entry(info->name, "GSType");
-				if ((gstype == NULL) || strcmp(gstype, "PrayerList")) {
-					add_module_to_language_folder(GTK_TREE_MODEL(store),
-								      book, info->language,
-								      info->name);
-				}
-			}
-			else {
-				GS_warning(("mod `%s' unknown type `%s'",
-					    info->name, info->type));
-			}
+		}
+		else {
+			GS_warning(("mod `%s' unknown type `%s'",
+				    info->name, info->type));
 		}
 
 		g_free(info->name);
@@ -680,7 +658,7 @@ void gui_load_module_tree(GtkWidget * tree, gboolean limited)
 	g_list_free(tmp);
 
 	/* prayer list folders */
-	if (!limited && settings.prayerlist) {
+	if(settings.prayerlist) {
 		tmp = get_list(PRAYER_LIST);
 		while (tmp != NULL) {
 			add_module_to_prayerlist_folder(GTK_TREE_MODEL(store),
@@ -702,10 +680,10 @@ void gui_load_module_tree(GtkWidget * tree, gboolean limited)
  * Synopsis
  *   #include ".h"
  *
- *   MOD_FONT * get_font(gchar *mod_name)
+ *   MOD_FONT * get_font(gchar *mod_name)	
  *
  * Description
- *
+ *   
  *
  * Return value
  *   void
@@ -714,81 +692,65 @@ void gui_load_module_tree(GtkWidget * tree, gboolean limited)
 MOD_FONT *get_font(gchar * mod_name)
 {
 	MOD_FONT *mf;
-	static gchar *file = NULL;
+	gchar file[250];
 
-	if (file == NULL)
-		file = g_strdup_printf("%s/fonts.conf", settings.gSwordDir); /* not freed */
+	sprintf(file, "%s/fonts.conf", settings.gSwordDir);
 
-	mf = g_new0(MOD_FONT, 1);
+	mf = g_new(MOD_FONT, 1);
 	mf->mod_name = mod_name;
-
+	mf->old_font = NULL;
+	mf->old_gdk_font = NULL;
+	mf->old_font_size = NULL;
+	mf->new_font = NULL;
+	mf->new_gdk_font = NULL;
+	mf->new_font_size = NULL;
+	mf->no_font = 0;
+	
 	mf->old_font = get_conf_file_item(file, mod_name, "Font");
 	mf->old_gdk_font = get_conf_file_item(file, mod_name, "GdkFont");
 	mf->old_font_size = get_conf_file_item(file, mod_name, "Fontsize");
-
 	if ((mf->old_font == NULL) ||
 	    !strcmp(mf->old_font, "none")) {
-		/* in absence of selected font, module can name its preference */
-		gchar *preferred_font = main_get_mod_config_entry(mod_name, "Font");
-		gchar *preferred_font_size = main_get_mod_config_entry(mod_name, "Fontsize");
+		gchar *preferred_font =
+		    main_get_mod_config_entry(mod_name, "Font");
 
-		/* in absence of module preference, user can specify language pref */
-		gchar *lang = main_get_mod_config_entry(mod_name, "Lang");
-		gchar *lang_lang = g_strdup_printf("Language:%s",
-						   (lang ? lang : ""));
-		gchar *lang_font = get_conf_file_item(file, lang_lang, "Font");
-		gchar *lang_size = get_conf_file_item(file, lang_lang, "Fontsize");
-
-		g_free(mf->old_font);
-
-		if (preferred_font && (*preferred_font != '\0'))
-			mf->old_font = preferred_font;
-		else {
-			g_free(preferred_font);
-			/* next try: fallback to per-language choice */
-			if (lang_font && (*lang_font != '\0'))
-				mf->old_font = lang_font;
-			else {
-				/* nothing ever specified: utter default */
-				g_free(lang_font);
-				mf->old_font = g_strdup("none");
-			}
+		if (mf->old_font)
+			g_free(mf->old_font);
+		if (preferred_font && (*preferred_font != '\0')) {
+			mf->old_font = g_strdup(preferred_font);
+		} else {
+			mf->old_font = g_strdup("none");
 		}
-
-		if ((mf->old_font_size == NULL) ||
-		    !strcmp(mf->old_font_size, "+0")) {
-			g_free(mf->old_font_size);
-
-			if (preferred_font_size && (*preferred_font_size != '\0'))
-				mf->old_font_size = preferred_font_size;
-			else {
-				g_free(preferred_font_size);
-				if (lang_size && (*lang_size != '\0'))
-					mf->old_font_size = lang_size;
-				else {
-					g_free(lang_size);
-					mf->old_font_size = g_strdup("+0");
-				}
-			}
-		}
-
-		g_free(lang);
 	}
 
+	if ((mf->old_font_size == NULL) ||
+	    !strcmp(mf->old_font_size, "+0")) {
+		gchar *preferred_font_size =
+		    main_get_mod_config_entry(mod_name, "Fontsize");
+
+		if (mf->old_font_size)
+			g_free(mf->old_font_size);
+		if (preferred_font_size && (*preferred_font_size != '\0')) {
+			mf->old_font_size = g_strdup(preferred_font_size);
+		} else {
+			mf->old_font_size = g_strdup("+0");
+		}
+	}
+	
 	return mf;
 }
 
 /******************************************************************************
  * Name
- *
+ *  
  *
  * Synopsis
  *   #include ".h"
  *
- *
+ *   	
  *
  * Description
- *
+ *   
  *
  * Return value
  *   void
@@ -796,13 +758,16 @@ MOD_FONT *get_font(gchar * mod_name)
 
 void free_font(MOD_FONT *mf)
 {
-
-	if (mf->old_font) g_free(mf->old_font);
-	if (mf->old_gdk_font) g_free(mf->old_gdk_font);
-	if (mf->old_font_size) g_free(mf->old_font_size);
+	
+	if(mf->old_font) g_free(mf->old_font);
+	if(mf->old_gdk_font) g_free(mf->old_gdk_font);
+	if(mf->old_font_size) g_free(mf->old_font_size);
+	//mf->new_font = NULL;
+	//mf->new_gdk_font = NULL;
+	//mf->new_font_size = NULL;
+	//mf->no_font = 0;
 	g_free(mf);
 }
-
 /******************************************************************************
  * Name
  *   remove_linefeeds
@@ -816,17 +781,17 @@ void free_font(MOD_FONT *mf)
  *   remove line feeds so we can display string in appbar
  *
  * Return value
- *   gchar *
+ *   gchar * 
  */
-
+ 
 gchar * remove_linefeeds(gchar * buf)
-{
+{	
 	gchar * key = NULL;
-
+	
 	key = g_strdelimit(buf, "\n", ' ');
-
+	
 	return (key ? g_strdup(key) : NULL);
-
+		
 }
 
 /******************************************************************************
@@ -840,7 +805,7 @@ gchar * remove_linefeeds(gchar * buf)
 				GCallback callback)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   void
@@ -851,21 +816,21 @@ void gui_add_mods_2_gtk_menu(gint mod_type, GtkWidget * menu,
 {
 	GList 	*tmp = NULL;
 	GtkWidget * item;
-
+	
     	if (mod_type == -1) return;
-
+    
 	tmp = get_list(mod_type);
-	while (tmp != NULL) {
+	while (tmp != NULL) {	
 		item =
 		    gtk_menu_item_new_with_label((gchar *) tmp->data);
 		gtk_widget_show(item);
 		g_signal_connect(GTK_OBJECT(item), "activate",
 				   G_CALLBACK
 				   (callback),
-				   (gchar *) tmp->data);
-		gtk_container_add(GTK_CONTAINER(menu), item);
-		tmp = g_list_next(tmp);
-	}
+				   (gchar *) tmp->data);		
+		gtk_container_add(GTK_CONTAINER(menu), item); 
+		tmp = g_list_next(tmp);	
+	}	
 }
 
 /******************************************************************************
@@ -883,7 +848,7 @@ void gui_add_mods_2_gtk_menu(gint mod_type, GtkWidget * menu,
  *   A numeric character reference (NCR) is a common markup construct used in html
  *   pages. It consists of a short sequence of characters that represent a single
  *   character from the Universal Character Set (UCS) of Unicode.
- *
+ *   
  *   NCR markup : &#<unicode-value>;  ex: &#233;
  *
  * Return value
@@ -908,7 +873,7 @@ ncr_to_utf8(gchar * text)
 		unicode = 0;
 		for (ncr = ncr + 2;			// just past "&#"
 		     (*ncr != '\0') && (*ncr >= '0') && (*ncr <='9');
-		     ncr++)
+		     ncr++) 
 			unicode = (unicode * 10) + ((*ncr) - '0');
 
 		// converts unicode char to utf8
@@ -942,7 +907,7 @@ void reading_selector(char *modname,
 	gchar *url;
 	gboolean primary = 0, secondary = 0, all = 0;
     	gboolean is_dialog = (dialog ? 1 : 0);
-
+    
 	switch ((int) GPOINTER_TO_INT(user_data))
 	{
 	case 0:
@@ -967,9 +932,9 @@ void reading_selector(char *modname,
 	main_save_module_options(modname, "All Readings", all, is_dialog);
 	if (is_dialog)
 		main_dialogs_url_handler(dialog, url, TRUE);
-	else
+	else 	    
 		main_url_handler(url, TRUE);
-
+			      
 	g_free(url);
 }
 
@@ -1063,8 +1028,7 @@ language_make_list(GList *modlist,
 		   GtkTreeIter book,
 		   GtkTreeIter *update,
 		   GtkTreeIter *uninstalled,
-		   void (*add)(GtkTreeModel *, GtkTreeIter, gchar **),
-		   gboolean limited)
+		   void (*add)(GtkTreeModel *, GtkTreeIter, gchar **))
 {
 	MOD_MGR *info;
 	int i;
@@ -1074,7 +1038,7 @@ language_make_list(GList *modlist,
 	/* append */
 	while (modlist != NULL) {
 		info = (MOD_MGR *) modlist->data;
-
+ 
 		/* mod.mgr: special extra lists */
 		if ((update != NULL) && (uninstalled != NULL)) {
 			if (!info->installed) {
@@ -1121,100 +1085,23 @@ language_make_list(GList *modlist,
 	       language_get_type(LANGSET_BIBLE));
 	(*add)(GTK_TREE_MODEL(store), commentary,
 	       language_get_type(LANGSET_COMMENTARY));
-	if (!limited) {
-		(*add)(GTK_TREE_MODEL(store), map,
-		       language_get_type(LANGSET_MAP));
-		(*add)(GTK_TREE_MODEL(store), image,
-		       language_get_type(LANGSET_IMAGE));
-		(*add)(GTK_TREE_MODEL(store), devotional,
-		       language_get_type(LANGSET_DEVOTIONAL));
-		(*add)(GTK_TREE_MODEL(store), dictionary,
-		       language_get_type(LANGSET_DICTIONARY));
-		(*add)(GTK_TREE_MODEL(store), book,
-		       language_get_type(LANGSET_GENBOOK));
-		if ((update != NULL) && (uninstalled != NULL)) {
-			(*add)(GTK_TREE_MODEL(store), *update,
-			       language_get_type(LANGSET_UPDATE));
-			(*add)(GTK_TREE_MODEL(store), *uninstalled,
-			       language_get_type(LANGSET_UNINSTALLED));
-		}
+	(*add)(GTK_TREE_MODEL(store), map,
+	       language_get_type(LANGSET_MAP));
+	(*add)(GTK_TREE_MODEL(store), image,
+	       language_get_type(LANGSET_IMAGE));
+	(*add)(GTK_TREE_MODEL(store), devotional,
+	       language_get_type(LANGSET_DEVOTIONAL));
+	(*add)(GTK_TREE_MODEL(store), dictionary,
+	       language_get_type(LANGSET_DICTIONARY));
+	(*add)(GTK_TREE_MODEL(store), book,
+	       language_get_type(LANGSET_GENBOOK));
+	if ((update != NULL) && (uninstalled != NULL)) {
+		(*add)(GTK_TREE_MODEL(store), *update,
+		       language_get_type(LANGSET_UPDATE));
+		(*add)(GTK_TREE_MODEL(store), *uninstalled,
+		       language_get_type(LANGSET_UNINSTALLED));
 	}
 }
-
-/******************************************************************************
- * Name
- *
- *
- * Synopsis
- *   #include "gui/search_dialog.h"
- *
- *
- *
- * Description
- *
- *
- * Return value
- *
- */
-
-gchar *get_modlist_string(GList * mods)
-{
-	gchar *rv;
-	GString *str = g_string_new("");
-	GList *orig_mods = mods;
-
-	while (mods != NULL) {
-		str = g_string_append(str, (gchar *) mods->data);
-		g_free(mods->data);
-		mods = g_list_next(mods);
-		if (mods != NULL)
-			str = g_string_append_c(str, ',');
-	}
-	g_list_free(orig_mods);
-
-	rv = g_strdup(str->str);
-	g_string_free(str, TRUE);
-	return rv;
-}
-
-
-
-/******************************************************************************
- * Name
- *   get_current_list
- *
- * Synopsis
- *   #include "gui/search_dialog.h"
- *
- *   GList *get_current_list(GtkTreeView *treeview)
- *
- * Description
- *
- *
- * Return value
- *   GList *
- */
-
-GList *get_current_list(GtkTreeView *treeview)
-{
-	GList *items = NULL;
-	gchar *buf;
-	GtkTreeModel *model;
-	GtkTreeIter iter;
-
-	model = gtk_tree_view_get_model(treeview);
-	if (gtk_tree_model_get_iter_first(model, &iter)) {
-		do {
-			gtk_tree_model_get(model, &iter, 1, &buf, -1);
-			items =
-			    g_list_append(items,
-					  (gchar *) g_strdup(buf));
-
-		} while (gtk_tree_model_iter_next(model, &iter));
-	}
-	return items;
-}
-
 
 /*
  * caller must free the returned string.
@@ -1269,9 +1156,6 @@ pixbuf_finder(const char *image, int size, GError **error)
 //
 // utility function to write out HTML.
 //
-#ifdef min
-#undef min
-#endif
 #define min(x,y)	((x) < (y) ? (x) : (y))
 
 void
@@ -1287,14 +1171,13 @@ HtmlOutput(char *text,
 	gecko_html_open_stream(html,"text/html");
 #else
 	GtkHTML *html = GTK_HTML(gtkText);
-	PangoContext* pc = gtk_widget_get_pango_context(gtkText);
+	PangoContext* pc = gtk_widget_create_pango_context(gtkText);
 	PangoFontDescription *desc = pango_context_get_font_description(pc);
-
 	pango_font_description_set_family(
 	    desc, ((mf && mf->old_font) ? mf->old_font : "Serif"));
 	gtk_widget_modify_font(gtkText, desc);
-
 	GtkHTMLStream *stream = gtk_html_begin(html);
+	//GtkHTMLStreamStatus status;
 	gboolean was_editable = gtk_html_get_editable(html);
 	if (was_editable)
 		gtk_html_set_editable(html, FALSE);
@@ -1315,25 +1198,17 @@ HtmlOutput(char *text,
 		len -= write_size;
 	}
 
-	/* use anchor if asked, but if so, special anchor takes priority. */
 #ifdef USE_GTKMOZEMBED
 	gecko_html_close(html);
-	if (anchor || settings.special_anchor)
-		gecko_html_jump_to_anchor(html, (settings.special_anchor
-						 ? settings.special_anchor
-						 : anchor));
+	if (anchor)
+		gecko_html_jump_to_anchor(html, anchor);
 #else
 	gtk_html_end(html, stream, GTK_HTML_STREAM_OK);
 	gtk_html_set_editable(html, was_editable);
-	if (anchor || settings.special_anchor)
-		gtk_html_jump_to_anchor(html, (settings.special_anchor
-					       ? settings.special_anchor
-					       : anchor));
+	if (anchor)
+		gtk_html_jump_to_anchor(html, anchor);
 	gtk_html_flush(html);
 #endif
-
-	/* the special anchor gets exactly one use. */
-	settings.special_anchor = NULL;
 }
 
 void set_window_icon (GtkWindow *window)
@@ -1366,7 +1241,7 @@ void set_window_icon (GtkWindow *window)
  *  or gtk implementations on Windows)
  *  on *nix, it uses gnome_url_show; in the future, this could be changed
  *  to gtk_show_uri as gnome_url_show is deprecated
- *
+ * 
  * Return value
  *   void
  */
@@ -1379,9 +1254,18 @@ gboolean xiphos_open_default (const gchar *file)
 	GS_message(("opening file %ls", w_file));
 	rt = (gint)ShellExecuteW(NULL, L"open", w_file, NULL, NULL, SW_SHOWDEFAULT);
 	return rt > 32;
-
+	
 #else
 	GError *error = NULL;
+#ifndef WITHOUT_GNOME
+	if (gnome_url_show(file, &error) == FALSE){
+		GS_warning(("%s", error->message));
+		g_error_free (error);
+		return FALSE;
+	}
+	else
+		return TRUE;
+#else
 	gtk_show_uri (NULL, file, gtk_get_current_event_time(), &error);
 	if (error != NULL) {
 		GS_warning(("%s", error->message));
@@ -1390,6 +1274,7 @@ gboolean xiphos_open_default (const gchar *file)
 	}
 	else
 		return TRUE;
+#endif
 #endif
 }
 
@@ -1488,7 +1373,7 @@ void xiphos_create_archive(gchar* conf_file, gchar* datapath, gchar *zip,
 	GString *modpath;
 	int i;
 	gsf_init();
-
+	
 	/* the module dir is the last part of the path */
 	path = g_strsplit(datapath, "/", -1);
 	moddirname = g_strdup(path[g_strv_length(path) - 1]);
@@ -1502,7 +1387,7 @@ void xiphos_create_archive(gchar* conf_file, gchar* datapath, gchar *zip,
 		if (i < g_strv_length(path) -2) /* avoid a trailing / */
 			modpath = g_string_append(modpath, "/");
 	}
-
+	
 	/* open zip file for writing */
 	output = gsf_output_stdio_new(zip, NULL);
 	outputfile = gsf_outfile_zip_new(output, NULL);
@@ -1531,7 +1416,7 @@ void xiphos_create_archive(gchar* conf_file, gchar* datapath, gchar *zip,
 	g_object_unref(output);
 	g_strfreev(path);
 	g_free(moddirname);
-
+	
 }
-
+		
 /******   end of file   ******/

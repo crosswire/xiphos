@@ -90,10 +90,10 @@ GList *get_list(gint type)
 
 
 void main_init_lists(void)
-{
+{	
 	gboolean start_backend = FALSE;
 	mod_lists = &mods;
-
+	
 	/* set glist to null */
 	mods.biblemods = NULL;
 	mods.commentarymods = NULL;
@@ -117,7 +117,7 @@ void main_init_lists(void)
 	settings.havebook = FALSE;
 	settings.havepercomm = FALSE;
 	settings.haveprayerlist = FALSE;
-
+	
 	if (backend) {
 		mods.options = backend->get_module_options();
 	} else {
@@ -131,7 +131,7 @@ void main_init_lists(void)
 	}
 
 	settings.havebible = g_list_length(mods.biblemods);
-
+	
 	settings.havecomm = g_list_length(mods.commentarymods);
 
 	settings.havedict = g_list_length(mods.dictionarymods);
@@ -139,10 +139,10 @@ void main_init_lists(void)
 	settings.havebook = g_list_length(mods.bookmods);
 
 	settings.havepercomm = g_list_length(mods.percommods);
-
+	
 	settings.haveprayerlist = g_list_length(mods.prayermods);
-
-	if (g_list_length(mods.devotionmods)== 1) {
+	
+	if(g_list_length(mods.devotionmods)== 1) {		
 		xml_set_value("Xiphos", "modules", "devotional",(char*)mods.devotionmods->data );
 		settings.devotionalmod = xml_get_value("modules", "devotional");
 	}
@@ -161,8 +161,8 @@ void main_init_lists(void)
 void main_shutdown_list(void)
 {
 	/* free lists */
-	if (!mod_lists) return;
-
+	if(!mod_lists) return;
+		
 	while (mod_lists->options != NULL) {
 		g_free((char *) mod_lists->options->data);
 		mod_lists->options = g_list_next(mod_lists->options);

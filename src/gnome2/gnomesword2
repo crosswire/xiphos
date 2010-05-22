@@ -1,0 +1,19 @@
+#!/bin/bash
+#
+# The old name of our program and package is gnomesword2.
+# This name has been retired, but for a few releases, we will continue to
+# install a small nothingness which simply informs the user of this fact.
+#
+M='"gnomesword2" has been renamed "xiphos".
+See menu: Applications -> Accessories -> Xiphos Bible Guide.'
+#
+shopt -s execfail
+exec xmessage -buttons "=OK=" -default "=OK=" -center "$M" 2>/dev/null
+#
+# If xmessage wasn't available, all we can do now is echo on stdout.
+# Considering that there is no way to find gnomesword2 on the menus,
+# that should be OK -- generally speaking, the user had to type it.
+#
+echo "$M"
+#
+exit 1

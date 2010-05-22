@@ -54,7 +54,7 @@ static MOD_FONT * mf;
  *   gchar *get_html_font_name(gchar *fontname)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   void
@@ -87,7 +87,7 @@ static gchar *get_html_font_name(gchar * fontname)
  *   void ok_clicked(GtkButton * button, MOD_FONT * mf)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   void
@@ -95,17 +95,16 @@ static gchar *get_html_font_name(gchar * fontname)
 
 static void ok_clicked(GtkButton * button,  gpointer data)
 {
-	static gchar *file = NULL;
+	gchar file[250];
 	gchar *new_font = NULL;
 	gchar *font_name = NULL;
 
 	GS_message(("ok_clicked: %s",
 		    (mf->new_gdk_font ? mf->new_gdk_font : "-none-")));
-	if (file == NULL)
-		file = g_strdup_printf("%s/fonts.conf", settings.gSwordDir);
-
-	if (!mf->no_font) {
-		if (new_font_set) {
+	sprintf(file, "%s/fonts.conf", settings.gSwordDir);
+	
+	if (!mf->no_font) { 
+		if(new_font_set) {
 			new_font = g_strdup(mf->new_gdk_font);
 			font_name = get_html_font_name(new_font);
 			mf->new_font = font_name;
@@ -118,24 +117,24 @@ static void ok_clicked(GtkButton * button,  gpointer data)
 		mf->new_font = "none";
 		mf->new_gdk_font = "none";
 	}
-
-	mf->new_font_size = gtk_entry_get_text(GTK_ENTRY(combo_entry_size));
+	
+	mf->new_font_size =
+	    gtk_entry_get_text(GTK_ENTRY(combo_entry_size));
 
 	save_conf_file_item(file, mf->mod_name, "Font", mf->new_font);
 	save_conf_file_item(file, mf->mod_name, "GdkFont", mf->new_gdk_font);
 	save_conf_file_item(file, mf->mod_name, "Fontsize", mf->new_font_size);
-
+	
 	//evidently new_gdk_font is never set on Windows
-	GS_message (("\nFont: %s\nGdkFont: %s\nFontsize: %s\n",
-		     (mf->new_font ? mf->new_font : "-none-"),
-		     (mf->new_gdk_font ? mf->new_gdk_font : "-none-"),
+	GS_message (("\n\nFont: %s\nGdkFont: %s\nFontsize: %s\n\n", (mf->new_font ? mf->new_font : "-none-"),
+		     (mf->new_gdk_font ? mf->new_gdk_font : "-none-"), 
 		     (mf->new_font_size ? mf->new_font_size : "-none-")));
 
 	gtk_widget_destroy(dlg);
 	if (font_name)
 		g_free(font_name);
 	if (new_font)
-		g_free(new_font);
+		g_free(new_font); 
 }
 
 
@@ -149,7 +148,7 @@ static void ok_clicked(GtkButton * button,  gpointer data)
  *   oid cancel_clicked(GtkButton * button, MOD_FONT * mf)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   void
@@ -171,7 +170,7 @@ static void cancel_clicked(GtkButton * button,  gpointer data)
  *   void dialog_destroy(GtkObject * object, MOD_FONT * mf)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   void
@@ -180,7 +179,6 @@ static void cancel_clicked(GtkButton * button,  gpointer data)
 static void dialog_destroy(GtkObject * object,  gpointer data)
 {
 	free_font(mf);
-	mf = NULL;
 	new_font_set = 0;
 	gtk_main_quit();
 
@@ -200,7 +198,7 @@ static void dialog_destroy(GtkObject * object,  gpointer data)
  * Description
  *   the gnomefontpicker gave us a gdkfont
  *   the gtkfontbutton gives up a fontname plus size 'Sans 14'
- *   get_html_font_name () deals with that now.
+ *   get_html_font_name () deals with that now. 
  *   mf->new_gdk_font is now in the form 'Sans 14'
  *
  * Return value
@@ -230,7 +228,7 @@ static void font_set(GtkFontButton * button,
  *			    MOD_FONT * mf)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   void
@@ -254,7 +252,7 @@ static void no_font_toggled(GtkToggleButton * togglebutton,
  *   void size_changed(GtkEditable * editable, gpointer user_data)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   void
@@ -276,7 +274,7 @@ static void size_changed(GtkEditable * editable, gpointer user_data)
  *   GtkWidget *create_dialog_mod_font(MOD_FONT * mf)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   GtkWidget *
@@ -296,9 +294,10 @@ static GtkWidget *create_dialog_mod_font()
 	GtkWidget *dialog_action_area21;
 	GtkWidget *hbuttonbox1;
 	GtkWidget *button_cancel;
+	GList *combo_size_items = NULL;
 
 	dialog_mod_font = gtk_dialog_new();
-	g_object_set_data(G_OBJECT(dialog_mod_font),
+	gtk_object_set_data(GTK_OBJECT(dialog_mod_font),
 			    "dialog_mod_font", dialog_mod_font);
 	gtk_window_set_title(GTK_WINDOW(dialog_mod_font),
 			     _("Set Module Font"));
@@ -308,8 +307,8 @@ static GtkWidget *create_dialog_mod_font()
 	gtk_window_set_resizable(GTK_WINDOW(dialog_mod_font), TRUE);
 
 	dialog_vbox21 = GTK_DIALOG(dialog_mod_font)->vbox;
-	g_object_set_data(G_OBJECT(dialog_mod_font),
-			  "dialog_vbox21", dialog_vbox21);
+	gtk_object_set_data(GTK_OBJECT(dialog_mod_font),
+			    "dialog_vbox21", dialog_vbox21);
 	gtk_widget_show(dialog_vbox21);
 
 	vbox56 = gtk_vbox_new(FALSE, 0);
@@ -349,7 +348,7 @@ static GtkWidget *create_dialog_mod_font()
 	gtk_widget_show(hbox_picker);
 	gtk_box_pack_start(GTK_BOX(vbox56), hbox_picker, FALSE, FALSE,
 			   0);
-
+	
 	font_button =  gtk_font_button_new ();
 	gtk_widget_show(font_button);
 	gtk_box_pack_start(GTK_BOX(hbox_picker), font_button, FALSE,
@@ -357,21 +356,26 @@ static GtkWidget *create_dialog_mod_font()
 	gtk_widget_set_size_request(font_button, 240, -1);
 	gtk_font_button_set_show_size ((GtkFontButton *)font_button, FALSE);
 
-	combo_size = gtk_combo_box_entry_new_text ();
+	combo_size = gtk_combo_new();
 	gtk_widget_show(combo_size);
 	gtk_box_pack_start(GTK_BOX(hbox_picker), combo_size, TRUE, TRUE,
 			   0);
-	gtk_combo_box_append_text(GTK_COMBO_BOX (combo_size), "+5");
-	gtk_combo_box_append_text(GTK_COMBO_BOX (combo_size), "+4");
-	gtk_combo_box_append_text(GTK_COMBO_BOX (combo_size), "+3");
-	gtk_combo_box_append_text(GTK_COMBO_BOX (combo_size), "+2");
-	gtk_combo_box_append_text(GTK_COMBO_BOX (combo_size), "+1");
-	gtk_combo_box_append_text(GTK_COMBO_BOX (combo_size), "+0");
-	gtk_combo_box_append_text(GTK_COMBO_BOX (combo_size), "-1");
-	gtk_combo_box_append_text(GTK_COMBO_BOX (combo_size), "-2");
-	gtk_combo_box_append_text(GTK_COMBO_BOX (combo_size), "-3");
-	combo_entry_size = (GTK_WIDGET (GTK_BIN (combo_size) -> child));
-	gtk_entry_set_text(GTK_ENTRY (GTK_BIN (combo_size) -> child), _("+0"));
+	combo_size_items = g_list_append(combo_size_items, (gpointer) "+5");
+	combo_size_items = g_list_append(combo_size_items, (gpointer) "+4");
+	combo_size_items = g_list_append(combo_size_items, (gpointer) "+3");
+	combo_size_items = g_list_append(combo_size_items, (gpointer) "+2");
+	combo_size_items = g_list_append(combo_size_items, (gpointer) "+1");
+	combo_size_items = g_list_append(combo_size_items, (gpointer) "+0");
+	combo_size_items = g_list_append(combo_size_items, (gpointer) "-1");
+	combo_size_items = g_list_append(combo_size_items, (gpointer) "-2");
+	combo_size_items = g_list_append(combo_size_items, (gpointer) "-3");
+	gtk_combo_set_popdown_strings(GTK_COMBO(combo_size),
+				      combo_size_items);
+	g_list_free(combo_size_items);
+
+	combo_entry_size = GTK_COMBO(combo_size)->entry;
+	gtk_widget_show(combo_entry_size);
+	gtk_entry_set_text(GTK_ENTRY(combo_entry_size), _("+0"));
 
 	checkbutton_no_font =
 	    gtk_check_button_new_with_label(_
@@ -384,9 +388,9 @@ static GtkWidget *create_dialog_mod_font()
 			   FALSE, 0);
 
 	dialog_action_area21 = GTK_DIALOG(dialog_mod_font)->action_area;
-	g_object_set_data(G_OBJECT(dialog_mod_font),
-			  "dialog_action_area21",
-			  dialog_action_area21);
+	gtk_object_set_data(GTK_OBJECT(dialog_mod_font),
+			    "dialog_action_area21",
+			    dialog_action_area21);
 	gtk_widget_show(dialog_action_area21);
 	gtk_container_set_border_width(GTK_CONTAINER
 				       (dialog_action_area21), 10);
@@ -418,7 +422,7 @@ static GtkWidget *create_dialog_mod_font()
 			 G_CALLBACK(ok_clicked), mf);
 	g_signal_connect(GTK_OBJECT(button_cancel), "clicked",
 			 G_CALLBACK(cancel_clicked), mf);
-	g_signal_connect(GTK_OBJECT(combo_size), "changed",
+	g_signal_connect(GTK_OBJECT(combo_entry_size), "changed",
 			 G_CALLBACK(size_changed), NULL);
 
 	return dialog_mod_font;
@@ -436,7 +440,7 @@ static GtkWidget *create_dialog_mod_font()
  *   void gui_set_module_font(gchar * mod_name)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   void
@@ -456,7 +460,7 @@ void gui_set_module_font(gchar * mod_name)
 
 	gtk_label_set_text(GTK_LABEL(label_mod), mf->mod_name);
 	gtk_label_set_text(GTK_LABEL(label_current_font), mf->old_font);
-	if (mf->old_font) {
+	if (mf->old_font) {		
 		str = g_strdup_printf("%s, 12", mf->old_font);
 		gtk_font_button_set_font_name ((GtkFontButton *)font_button,
                                                          str);

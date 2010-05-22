@@ -1,6 +1,6 @@
 /*
  * Xiphos Bible Study Tool
- * modulecache.cc -
+ * modulecache.cc - 
  *
  * Copyright (C) 2007-2009 Xiphos Developer Team
  *
@@ -59,7 +59,6 @@ ConstructFlags(GLOBAL_OPS *ops)
 	flags |= (ops->variants_secondary    ? VariantsSecondary : 0);
 	flags |= (ops->transliteration       ? Transliteration : 0);
 	flags |= (ops->commentary_by_chapter ? CommentaryChapter : 0);
-	flags |= (ops->doublespace           ? Doublespace : 0);
 	return flags;
 }
 

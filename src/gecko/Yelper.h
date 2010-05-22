@@ -29,7 +29,7 @@
 #include <nsCOMPtr.h>
 #include <nsIDOMNode.h>
 
-#ifdef HAVE_GTKUPRINT
+#ifdef USE_GTKUPRINT
 #include "gecko/gecko-print.h"
 #endif
 #include "main/module_dialogs.h"
@@ -55,7 +55,7 @@ public:
 	PRBool Find (const gchar *aSearchString);
 	PRBool FindAgain (PRBool aForward);
 	void SetSelectionAttention (PRBool aSelectionAttention);
-        gint ProcessMouseOver (void* aEvent, gint pane,
+        gint ProcessMouseOver (void* aEvent, gint pane,  
 			       gboolean is_dialog, DIALOG_DATA * d);
 	gint ProcessMouseDblClickEvent (void* aEvent);
 	gint ProcessMouseUpEvent (void* aEvent);
@@ -63,7 +63,7 @@ public:
 	gint ProcessKeyDownEvent(GtkMozEmbed *embed, gpointer dom_event);
 	gint ProcessKeyReleaseEvent(GtkMozEmbed *embed, gpointer dom_event);
 	void SetRTL();
-#ifdef HAVE_GTKUPRINT
+#ifdef USE_GTKUPRINT
 	nsresult Print (GeckoPrintInfo *print_info, PRBool preview,
 			gint *prev_pages);
 #endif

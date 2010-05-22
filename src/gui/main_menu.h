@@ -39,15 +39,16 @@ void on_about_the_sword_project_activate(GtkMenuItem * menuitem, gpointer user_d
 void on_about_translation_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_daily_devotion_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_search_activate(GtkMenuItem * menuitem, gpointer user_data);
+void on_verse_style_activate(GtkCheckMenuItem * menuitem, gpointer user_data);
 void on_linked_tabs_activate(GtkCheckMenuItem * menuitem, gpointer user_data);
 void on_read_aloud_activate(GtkCheckMenuItem * menuitem, gpointer user_data);
 void on_show_verse_numbers_activate(GtkCheckMenuItem * menuitem, gpointer user_data);
 void on_versehighlight_activate(GtkCheckMenuItem * menuitem, gpointer user_data);
 void on_side_preview_activate(GtkCheckMenuItem * menuitem, gpointer user_data);
+void on_double_space_text_activate(GtkCheckMenuItem * menuitem, gpointer user_data);
 void on_quit_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_about_xiphos_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_save_session_activate(GtkMenuItem * menuitem, gpointer user_data);
-void redisplay_to_realign(void);
 void on_open_session_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_show_bible_text_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_preview_activate(GtkMenuItem * menuitem, gpointer user_data);

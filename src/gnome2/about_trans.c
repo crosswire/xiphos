@@ -92,16 +92,16 @@ gui_create_about_trans(void)
 	      );
 
 	dialog_about_trans = gtk_dialog_new();
-	g_object_set_data(G_OBJECT(dialog_about_trans),
-			  "dialog_about_trans", dialog_about_trans);
+	gtk_object_set_data(GTK_OBJECT(dialog_about_trans),
+			    "dialog_about_trans", dialog_about_trans);
 	gtk_window_set_title(GTK_WINDOW(dialog_about_trans),
 			     _("About Xiphos Translation"));
 	set_window_icon (GTK_WINDOW(dialog_about_trans));
         gtk_window_set_resizable(GTK_WINDOW(dialog_about_trans), FALSE);
 
 	dialog_vbox = GTK_DIALOG(dialog_about_trans)->vbox;
-	g_object_set_data(G_OBJECT(dialog_about_trans),
-			  "dialog_vbox", dialog_vbox);
+	gtk_object_set_data(GTK_OBJECT(dialog_about_trans),
+			    "dialog_vbox", dialog_vbox);
 	gtk_widget_show(dialog_vbox);
 
 	vbox = gtk_vbox_new(FALSE, 0);
@@ -140,7 +140,7 @@ gui_create_about_trans(void)
 			  ("See TRANSLATION-HOWTO in Xiphos source"));
 	gtk_widget_show(label);
 	gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, FALSE, 0);
-	gtk_widget_set_size_request(label, -2, 24);
+	gtk_widget_set_usize(label, -2, 24);
 
 	href =  gtk_link_button_new_with_label ("http://xiphos.org/development/",
 			   _("Xiphos development"));
@@ -149,7 +149,7 @@ gui_create_about_trans(void)
 
 	dialog_action_area =
 	    GTK_DIALOG(dialog_about_trans)->action_area;
-	g_object_set_data(G_OBJECT(dialog_about_trans),
+	gtk_object_set_data(GTK_OBJECT(dialog_about_trans),
 			    "dialog_action_area",
 			    dialog_action_area);
 	gtk_widget_show(dialog_action_area);

@@ -1,6 +1,6 @@
 /*
  * Xiphos Bible Study Tool
- * modulecache.hh -
+ * modulecache.hh - 
  *
  * Copyright (C) 2007-2009 Xiphos Developer Team
  *
@@ -51,24 +51,23 @@ namespace ModuleCache {
 
 	// bitwise cache type indicators:
 	// if flags change (=> new display choice), text becomes invalid.
-	static const int Footnotes          = (1<<0);
-	static const int GreekAccents       = (1<<1);
-	static const int Headings           = (1<<2);
-	static const int HebrewCantillation = (1<<3);
-	static const int HebrewVowels       = (1<<4);
-	static const int Lemmas             = (1<<5);
-	static const int Morphology         = (1<<6);
-	static const int RedWordsOfChrist   = (1<<7);
-	static const int StrongsNumbers     = (1<<8);
-	static const int Xrefs              = (1<<9);
-	static const int Images             = (1<<10);
-	static const int RespectFontFaces   = (1<<11);
-	static const int VariantsAll        = (1<<12);
-	static const int VariantsPrimary    = (1<<13);
-	static const int VariantsSecondary  = (1<<14);
-	static const int Transliteration    = (1<<15);
-	static const int CommentaryChapter  = (1<<16);
-	static const int Doublespace        = (1<<17);
+	static const int Footnotes          = 0x0001;
+	static const int GreekAccents       = 0x0002;
+	static const int Headings           = 0x0004;
+	static const int HebrewCantillation = 0x0008;
+	static const int HebrewVowels       = 0x0010;
+	static const int Lemmas             = 0x0020;
+	static const int Morphology         = 0x0040;
+	static const int RedWordsOfChrist   = 0x0080;
+	static const int StrongsNumbers     = 0x0100;
+	static const int Xrefs              = 0x0200;
+	static const int Images             = 0x0400;
+	static const int RespectFontFaces   = 0x0800;
+	static const int VariantsAll        = 0x1000;
+	static const int VariantsPrimary    = 0x2000;
+	static const int VariantsSecondary  = 0x4000;
+	static const int Transliteration    = 0x8000;
+	static const int CommentaryChapter  =0x10000;
 
 	class CacheVerse {
 	public:

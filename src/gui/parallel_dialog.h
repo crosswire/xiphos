@@ -18,7 +18,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-
+ 
 #ifndef __parallel_DIALOG_H__
 #define __parallel_DIALOG_H__
 
@@ -31,7 +31,7 @@ void gui_btnDockInt_clicked(GtkButton *button, gpointer user_data);
 GtkWidget *gui_create_parallel_dialog(void);
 void gui_set_parallel_navbar(const char * key);
 void gui_keep_parallel_dialog_in_sync(void);
-
+	
 #ifdef __cplusplus
 }
 #endif

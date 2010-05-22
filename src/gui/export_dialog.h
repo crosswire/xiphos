@@ -1,6 +1,6 @@
 /*
  * Xiphos Bible Study Tool
- * export_dialog.h -
+ * export_dialog.h - 
  *
  * Copyright (C) 2007-2009 Xiphos Developer Team
  *
@@ -24,8 +24,8 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
-
+#endif	
+	
 gchar *gui_get_export_filename(void);
 void gui_export_dialog(void);
 void _get_export_filename(void);
@@ -35,5 +35,5 @@ gint _check_for_distribution_license(gchar * mod_name);
 #ifdef __cplusplus
 }
 #endif
-
+	
 #endif /* _EXPORT_DIALOG_H_ */
