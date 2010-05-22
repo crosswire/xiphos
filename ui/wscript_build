@@ -1,0 +1,11 @@
+#! /usr/bin/env python
+# encoding: utf-8
+
+bld.install_files('${PACKAGE_DATA_DIR}', '*.png')
+bld.install_files('${PACKAGE_DATA_DIR}', '*.glade')
+bld.install_files('${PACKAGE_DATA_DIR}', """
+languages
+editor_studypad.xml
+editor_note.xml
+editor_link_dialog.xml
+""")

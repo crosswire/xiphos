@@ -24,6 +24,8 @@
 #endif
 
 
+#include <fcntl.h>
+#include <unistd.h>
 #include <string.h>
 #include <glib.h>
 
@@ -51,13 +53,13 @@
 #include "gui/debug_glib_null.h"
 
 #include <glib/gstdio.h>
- 
+
 /******************************************************************************
  * Name
  *   main
  *
  * Synopsis
- *   
+ *
  *   int main(int argc, char *argv[])
  *
  * Description
@@ -72,6 +74,7 @@ int main(int argc, char *argv[])
 	int newconfigs = FALSE;
 	int newbookmarks = FALSE;
 	int have_sword_url = FALSE;
+	int have_tab_list = FALSE;
 	gint base_step = 0; //needed for splash
 	GTimer *total;
 	double d;
@@ -89,7 +92,7 @@ int main(int argc, char *argv[])
 	 */
 	gchar *bin_dir = xiphos_win32_get_subdir("bin");
 	g_chdir (bin_dir);
-	
+
 	/* add this directory to $PATH for other stuff, e.g. zip */
 	g_setenv("PATH", g_strdup_printf("%s;%s", bin_dir,
 					        g_getenv("PATH")),
@@ -97,7 +100,7 @@ int main(int argc, char *argv[])
 
 	/* This will not overwrite SWORD_PATH in case it has
 	   been set by some other program or set manually. In the case that
-	   it hasn't been set, it is set to the localized equivalent of 
+	   it hasn't been set, it is set to the localized equivalent of
 	   C:/Documents and Settings/All Users/Application Data/Sword */
 	const gchar * const * strings;
 	strings = g_get_system_data_dirs();
@@ -135,9 +138,13 @@ int main(int argc, char *argv[])
 			newconfigs = TRUE;
 			newbookmarks = TRUE;
 		}
-		/*
-		 * this arg is a sword uri
-		 */
+
+		/* this arg is a tab list */
+		if (g_access(argv[1], F_OK) == 0) {
+			have_tab_list = TRUE;
+		}
+
+		/* this arg is a sword uri */
 		if ((!strncmp(argv[1], "sword:/", 7)) ||
 		    (!strncmp(argv[1], "bible:/", 7)) ||
 		    (strstr(argv[1], "studypad"))) {
@@ -147,9 +154,9 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	/* 
+	/*
 	 * check for directories and files
-	 */   
+	 */
     	settings_init(argc, argv, newconfigs, newbookmarks);
 
 	gui_init(argc, argv);
@@ -157,32 +164,32 @@ int main(int argc, char *argv[])
 	gui_splash_init();
 
 #ifdef USE_GTKMOZEMBED
-	
+
 	gui_splash_step(_("Initiating Gecko"), 0.0, 0);
-	
+
 	gecko_html_initialize();
-	
+
 	base_step = 1;
 #endif
 	gui_splash_step(_("Building Interface"), 0.2, 0 + base_step);
 
 	create_mainwindow();
-	
+
 	gui_splash_step(_("Starting Sword"), 0.5, 1 + base_step);
 
 	main_init_backend();
-		
+
 	gui_splash_step(_("Loading Settings"), 0.8, 2 + base_step);
 
 	frontend_init();
-		
+
 	gui_splash_step(_("Displaying Xiphos"), 1.0, 3 + base_step);
-	
+
 	/* need to get rid of wrongly-formatted annotation labels. */
 	xml_convert_to_osisref();
-	
-	frontend_display();
-		
+
+	frontend_display(have_tab_list ? argv[1] : NULL);
+
 	if (have_sword_url) {
 		if (!strncmp(argv[1], "sword:/", 7)) {
 			char *key = strchr(argv[1]+8, '/');
@@ -195,8 +202,6 @@ int main(int argc, char *argv[])
 		main_url_handler(argv[1], TRUE);
 	}
 
-	/*gtk_notebook_set_current_page(GTK_NOTEBOOK
-					(widgets.notebook_comm_book), 0);*/
 	g_timer_stop(total);
 	d = g_timer_elapsed(total, NULL);
 #ifdef DEBUG

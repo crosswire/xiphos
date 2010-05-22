@@ -38,11 +38,7 @@
 #include "gui/html.h"
 #endif
 
-#ifdef USE_GTKHTML3_14_23
 #include "editor/slib-editor.h"
-#else
-#include "editor/bonobo-editor.h"
-#endif
 
 #include "gui/bookmark_dialog.h"
 #include "gui/bookmarks_treeview.h"
@@ -91,13 +87,13 @@
  * Return value
  *   gboolean
  */
-#ifndef USE_GTKMOZEMBED	
+#ifndef USE_GTKMOZEMBED
 static gboolean on_book_button_press_event(GtkWidget * widget,
 					GdkEventButton * event,
 					gpointer data)
 {
 	if (!settings.havebook)
-		return FALSE;	
+		return FALSE;
 	switch (event->button) {
 	case 1:
 		break;
@@ -138,15 +134,15 @@ static gboolean on_book_button_release_event(GtkWidget * widget,
 	gchar *key;
 	const gchar *url;
 #endif /*GTKHTML */
-	
+
 	if (!settings.havebook)
 		return FALSE;
 	settings.whichwindow = BOOK_WINDOW;
-	
+
 #ifdef GTKHTML
 	switch (event->button) {
 	case 1:
-		if (in_url) 
+		if (in_url)
 			break;
 		key = gui_button_press_lookup(widgets.html_book);
 		if (key) {
@@ -154,7 +150,7 @@ static gboolean on_book_button_release_event(GtkWidget * widget,
 				key = g_strdelimit(key, "*", ' ');
 				key = g_strstrip(key);
 				url = g_strdup_printf(
-					"xiphos.url?action=showModInfo&value=1&module=%s",
+					"passagestudy.jsp?action=showModInfo&value=1&module=%s",
 					key);
 				main_url_handler(url,TRUE);
 				g_free((gchar*)url);
@@ -168,7 +164,7 @@ static gboolean on_book_button_release_event(GtkWidget * widget,
 					     DefaultDict);
 			else
 				dict = g_strdup(settings.DictWindowModule);
-			
+
 			main_display_dictionary(dict, key);
 			g_free(key);
 			if (dict)
@@ -178,7 +174,7 @@ static gboolean on_book_button_release_event(GtkWidget * widget,
 	case 2:
 		if (!in_url)
 			break;
-		url = gtk_html_get_url_at (GTK_HTML(widgets.html_text),		
+		url = gtk_html_get_url_at (GTK_HTML(widgets.html_text),
 								event->x,
 								event->y);
 		if (url && (strstr(url,"sword://"))) {
@@ -202,7 +198,7 @@ static gboolean on_book_button_release_event(GtkWidget * widget,
  * Synopsis
  *   #include "gbs.h"
  *
- *   void gui_set_gbs_frame_label(void)	
+ *   void gui_set_gbs_frame_label(void)
  *
  * Description
  *   sets gbs label to module name
@@ -230,7 +226,7 @@ static void set_gbs_label(gchar * mod_name)
  *   void gui_set_book_page_and_key(gint page_num, gchar * key)
  *
  * Description
- *    
+ *
  *
  * Return value
  *   void
@@ -244,15 +240,15 @@ void gui_set_book_mod_and_key(gchar * mod_name, gchar * key)
 
 /******************************************************************************
  * Name
- *  
+ *
  *
  * Synopsis
  *   #include ".h"
  *
- *   	
+ *
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
@@ -260,7 +256,7 @@ void gui_set_book_mod_and_key(gchar * mod_name, gchar * key)
 
 void gui_update_gbs_global_ops(gchar * option, gboolean choice)
 {
-	/*save_module_options(cur_t->mod_name, option, 
+	/*save_module_options(cur_t->mod_name, option,
 				    choice);*/
 	//gbs_display(cur_g, tree_level);
 }
@@ -271,7 +267,7 @@ static void
 _popupmenu_requested_cb (GeckoHtml *html,
 			     gchar *uri,
 			     gpointer user_data)
-{	
+{
 	gui_menu_popup (settings.book_mod, NULL);
 }
 #endif
@@ -286,7 +282,7 @@ _popupmenu_requested_cb (GeckoHtml *html,
  *   GtkWidget *gui_create_book_pane(void)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   GtkWidget*
@@ -295,20 +291,20 @@ _popupmenu_requested_cb (GeckoHtml *html,
 GtkWidget *gui_create_book_pane(void)
 {
 	GtkWidget *box;
-#ifdef USE_GTKMOZEMBED	
+#ifdef USE_GTKMOZEMBED
 	GtkWidget *eventbox;
 #else
 	GtkWidget *scrolledwindow;
-#endif /* USE_GTKMOZEMBED */	
+#endif /* USE_GTKMOZEMBED */
 	GtkWidget *navbar;
-	
+
 	box = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(box);
 
 	navbar = gui_navbar_book_new();
 	gtk_box_pack_start(GTK_BOX(box), navbar, FALSE, FALSE, 0);
 
-#ifdef USE_GTKMOZEMBED	
+#ifdef USE_GTKMOZEMBED
 	eventbox = gtk_event_box_new ();
 	gtk_widget_show (eventbox);
 	gtk_box_pack_start(GTK_BOX(box), eventbox, TRUE, TRUE, 0);
@@ -316,7 +312,7 @@ GtkWidget *gui_create_book_pane(void)
 	gtk_widget_show(widgets.html_book);
 	gtk_container_add(GTK_CONTAINER(eventbox),
 			 widgets.html_book);
-	
+
 	g_signal_connect((gpointer)widgets.html_book,
 		      "popupmenu_requested",
 		      G_CALLBACK (_popupmenu_requested_cb),

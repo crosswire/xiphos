@@ -1,10 +1,17 @@
 
-Currently we're using gnome-vfs version 14 (no openssl)[http://ftp.gnome.org/pub/gnome/binaries/win32/gnome-vfs/2.14/gnome-vfs-2.14.2-no-openssl.zip]  because that's the latest version that works on w2k
+Currently we're using gnome-vfs version 14 (no
+openssl)[http://ftp.gnome.org/pub/gnome/binaries/win32/gnome-vfs/2.14/gnome-vfs-2.14.2-no-openssl.zip]
+because that's the latest version that works on w2k
 
-Cannot change the verion of gconfd used or the associated dll's because images stop working in the menus (this is ridiculous). We need to get rid of the gconf dependency.
+Cannot change the verion of gconfd used or the associated dll's because images
+stop working in the menus (this is ridiculous). We need to get rid of the gconf
+dependency.
 
 The sword that I modified is at http://code.google.com/p/xiphos-sword/.
 
-I am using tdragon's mingw distro along with msys 1.0.11. He has binaries for gcc/g++ 4.3.3. I got the SJLJ Unwinding versions. Site is http://www.tdragon.net/recentgcc.
+I am using tdragon's mingw distro along with msys 1.0.11. He has binaries for
+gcc/g++ 4.3.3. I got the SJLJ Unwinding versions. Site is
+http://www.tdragon.net/recentgcc.
 
-Currently I'm building icu, curl, imagemagick, clucene, and sword, in addition to xiphos.
+Currently I'm building icu, curl, imagemagick, clucene, and sword, in addition
+to xiphos.

@@ -18,7 +18,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  */
- 
+
 #ifndef _PRAYERLISTS_H
 #define _PRAYERLISTS_H
 
@@ -27,7 +27,7 @@ extern "C"
 {
 #endif
 
-gboolean main_prayerlist_basic_create(void); 
+gboolean main_prayerlist_basic_create(void);
 gboolean main_prayerlist_subject_create(void);
 gboolean main_prayerlist_monthly_create(void);
 gboolean main_prayerlist_journal_create(void);

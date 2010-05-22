@@ -22,6 +22,7 @@
     !insertmacro MUI_LANGUAGE "Portuguese" ; pt, pt_PT
     !insertmacro MUI_LANGUAGE "Romanian" ; ro
     !insertmacro MUI_LANGUAGE "Russian" ; ru
+    !insertmacro MUI_LANGUAGE "SimpChinese" ; zh
     !insertmacro MUI_LANGUAGE "Slovak" ; sk
     !insertmacro MUI_LANGUAGE "Swedish" ; sv_SE
     ;!insertmacro MUI_LANGUAGE "Ukrainian" ; uk
@@ -47,6 +48,7 @@
     !include "${LANG_DIR}\ru.nsh"
     !include "${LANG_DIR}\sk.nsh"
     !include "${LANG_DIR}\sv_SE.nsh"
+    !include "${LANG_DIR}\zh.nsh"
 
 !macroend
 
@@ -77,6 +79,7 @@
     ;!define LIC_FILE_AFRIKAANS "${LANG_DIR}\gpl-2.0_en.txt"
     ;!define LIC_FILE_BULGARIAN "${LANG_DIR}\gpl-2.0_en.txt"
     !define LIC_FILE_HEBREW "${LANG_DIR}\gpl-2.0_en.txt"
+    !define LIC_FILE_SIMPCHINESE "${LANG_DIR}\gpl-2.0_en.txt"
 
     LicenseLangString LICENSE_FILE ${LANG_ENGLISH} "${LIC_FILE_ENGLISH}"
     ;LicenseLangString LICENSE_FILE ${LANG_BULGARIAN} "${LIC_FILE_BULGARIAN}"
@@ -94,6 +97,7 @@
     LicenseLangString LICENSE_FILE ${LANG_PORTUGUESE} "${LIC_FILE_PORTUGUESE}"
     LicenseLangString LICENSE_FILE ${LANG_ROMANIAN} "${LIC_FILE_ROMANIAN}"
     LicenseLangString LICENSE_FILE ${LANG_RUSSIAN} "${LIC_FILE_RUSSIAN}"
+    LicenseLangString LICENSE_FILE ${LANG_SIMPCHINESE} "${LIC_FILE_SIMPCHINESE}"
     LicenseLangString LICENSE_FILE ${LANG_SLOVAK} "${LIC_FILE_SLOVAK}"
     LicenseLangString LICENSE_FILE ${LANG_SWEDISH} "${LIC_FILE_SWEDISH}"
     ;LicenseLangString LICENSE_FILE ${LANG_UKRAINIAN} "${LIC_FILE_UKRAINIAN}"
@@ -119,6 +123,7 @@
     ReserveFile "${LANG_DIR}\ro.nsh"
     ReserveFile "${LANG_DIR}\ru.nsh"
     ReserveFile "${LANG_DIR}\sv_SE.nsh"
+    ReserveFile "${LANG_DIR}\zh.nsh"
 
     ReserveFile "${LIC_FILE_ENGLISH}"
     ; ReserveFile "${LIC_FILE_BULGARIAN}"
@@ -136,6 +141,7 @@
     ReserveFile "${LIC_FILE_PORTUGUESE}"
     ReserveFile "${LIC_FILE_ROMANIAN}"
     ReserveFile "${LIC_FILE_RUSSIAN}"
+    ; ReserveFile "${LIC_FILE_SIMPCHINESE}"
     ReserveFile "${LIC_FILE_SLOVAK}"
     ReserveFile "${LIC_FILE_SWEDISH}"
     ; ReserveFile "${LIC_FILE_UKRAINIAN}"

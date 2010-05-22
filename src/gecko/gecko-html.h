@@ -13,7 +13,7 @@
  * General Public License for more details.
  *
  * You should have received a copy of the GNU General Public
- * License along with this program; if not, write to the Free Software 
+ * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  *
  * Author: Mikael Hallendal <micke@imendio.com>
@@ -30,10 +30,10 @@
 G_BEGIN_DECLS
 
 #define GECKO_TYPE_HTML         (gecko_html_get_type ())
-#define GECKO_HTML(o)           (GTK_CHECK_CAST ((o), GECKO_TYPE_HTML, GeckoHtml))
-#define GECKO_HTML_CLASS(k)     (GTK_CHECK_FOR_CAST((k), GECKO_TYPE_HTML, GeckoHtmlClass))
-#define GECKO_IS_HTML(o)        (GTK_CHECK_TYPE ((o), GECKO_TYPE_HTML))
-#define GECKO_IS_HTML_CLASS(k)  (GTK_CHECK_CLASS_TYPE ((k), GECKO_TYPE_HTML))
+#define GECKO_HTML(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), GECKO_TYPE_HTML, GeckoHtml))
+#define GECKO_HTML_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST ((k), GECKO_TYPE_HTML, GeckoHtmlClass))
+#define GECKO_IS_HTML(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), GECKO_TYPE_HTML))
+#define GECKO_IS_HTML_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), GECKO_TYPE_HTML))
 #define GECKO_HTML_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), GECKO_TYPE_HTML, GeckoHtmlClass))
 
 typedef struct _GeckoHtml        GeckoHtml;
@@ -68,8 +68,8 @@ struct _GeckoHtmlClass {
 };
 
 GType           gecko_html_get_type       (void);
-GeckoHtml *     gecko_html_new            (DIALOG_DATA * dialog, 
-					   gboolean is_dialog, 
+GeckoHtml *     gecko_html_new            (DIALOG_DATA * dialog,
+					   gboolean is_dialog,
 					   gint pane);
 
 void            gecko_html_set_base_uri   (GeckoHtml    *html,
@@ -79,13 +79,13 @@ void            gecko_html_open_stream    (GeckoHtml    *html,
 void            gecko_html_write          (GeckoHtml    *html,
 					  const gchar *data,
 					  gint         len);
-void            gecko_html_printf         (GeckoHtml    *html, 
-					  char        *format, 
+void            gecko_html_printf         (GeckoHtml    *html,
+					  char        *format,
 					  ...) G_GNUC_PRINTF (2,3);
 void            gecko_html_close          (GeckoHtml    *html);
 
-void            gecko_html_render_data    (GeckoHtml *html, 
-					   const char *data, 
+void            gecko_html_render_data    (GeckoHtml *html,
+					   const char *data,
 					   guint32 len);
 
 void            gecko_html_frames         (GeckoHtml    *html,
@@ -94,7 +94,7 @@ void            gecko_html_frames         (GeckoHtml    *html,
 gboolean        gecko_html_find           (GeckoHtml    *html,
 					  const gchar *str);
 
-gboolean	gecko_html_find_again	 (GeckoHtml    *html,					  
+gboolean	gecko_html_find_again	 (GeckoHtml    *html,
 					  gboolean     forward);
 
 void		gecko_html_set_find_props (GeckoHtml    *html,
@@ -111,20 +111,20 @@ void            gecko_html_paste(GeckoHtml * html);
 void            gecko_html_select_all     (GeckoHtml    *html);
 void            gecko_html_select_none(GeckoHtml * html);
 
-#ifdef USE_GTKUPRINT
+#ifdef HAVE_GTKUPRINT
 void            gecko_html_print          (GeckoHtml    *html,
 					  GeckoPrintInfo *info,
 					  gboolean preview,
 					  gint *npages);
-#endif					  
+#endif
 void            gecko_html_preview_end    (GeckoHtml    *html);
 void            gecko_html_preview_navigate (GeckoHtml *html,
 					    gint page_no);
 gboolean        gecko_html_initialize     (void);
-void            gecko_html_shutdown       (void); 
+void            gecko_html_shutdown       (void);
 
-void            gecko_html_print_document (GtkWindow * window, 
-					   gchar * mod_name, 
+void            gecko_html_print_document (GtkWindow * window,
+					   gchar * mod_name,
 					   DIALOG_DATA * dialog);
 G_END_DECLS
 

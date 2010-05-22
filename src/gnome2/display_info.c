@@ -50,15 +50,15 @@ static GtkWidget *html_widget;
 
 /******************************************************************************
  * Name
- *   
+ *
  *
  * Synopsis
  *   #include "display_info.h"
  *
- *   	
+ *
  *
  * Description
- *    
+ *
  *
  * Return value
  *   void
@@ -71,10 +71,10 @@ void gui_display_mod_and_key(const gchar * mod_name, const gchar * key)
 	text = main_get_rendered_text(mod_name, key);
 	GS_message(("%s",text));
 	if (text) {
-		main_entry_display(html_widget, 
-				   (gchar*)mod_name, 
-				   text, 
-				   (gchar*)key, 
+		main_entry_display(html_widget,
+				   (gchar*)mod_name,
+				   text,
+				   (gchar*)key,
 				   TRUE);
 		g_free(text);
 	}
@@ -83,15 +83,15 @@ void gui_display_mod_and_key(const gchar * mod_name, const gchar * key)
 
 /******************************************************************************
  * Name
- *   
+ *
  *
  * Synopsis
  *   #include "display_info.h"
  *
- *   	
+ *
  *
  * Description
- *    
+ *
  *
  * Return value
  *   void
@@ -107,7 +107,7 @@ void gui_display_text_information(gchar * information)
 	gboolean was_editable = gtk_html_get_editable(GTK_HTML(html_widget));
 	if (was_editable)
 		gtk_html_set_editable(GTK_HTML(html_widget), FALSE);
-	
+
 	gtk_html_load_from_string(GTK_HTML(html_widget),information,strlen(information));
 	gtk_html_set_editable(GTK_HTML(html_widget), was_editable);
 #endif
@@ -120,8 +120,8 @@ void gui_display_text_information(gchar * information)
  * Synopsis
  *   #include "_display_info.h"
  *
- *   void on_dlgInformation_destroy(GtkObject * object, 
- *						gpointer user_data)	
+ *   void on_dlgInformation_destroy(GtkObject * object,
+ *						gpointer user_data)
  *
  * Description
  *    shut it down
@@ -143,10 +143,10 @@ static void on_dlgInformation_destroy(GtkObject * object,
  * Synopsis
  *   #include "_display_info.h"
  *
- *   void on_btnInfoOK_clicked(GtkButton * button, gpointer user_data)	
+ *   void on_btnInfoOK_clicked(GtkButton * button, gpointer user_data)
  *
  * Description
- *    
+ *
  *
  * Return value
  *   void
@@ -164,10 +164,10 @@ static void button_close_clicked(GtkButton * button, gpointer user_data)
  * Synopsis
  *   #include "_display_info.h"
  *
- *   GtkWidget *gui_create_display_informtion_dialog(void)	
+ *   GtkWidget *gui_create_display_informtion_dialog(void)
  *
  * Description
- *    create information dialog 
+ *    create information dialog
  *
  * Return value
  *   GtkWidget *
@@ -175,7 +175,7 @@ static void button_close_clicked(GtkButton * button, gpointer user_data)
 
 GtkWidget *gui_create_display_informtion_dialog(void)
 {
-	
+
 	GtkWidget *dialog_vbox23;
 	GtkWidget *hbox;
 #ifndef USE_GTKMOZEMBED
@@ -189,9 +189,9 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 	dialog_display_info = gtk_dialog_new();
 	gtk_container_set_border_width(GTK_CONTAINER(dialog_display_info),
 				       6);
-	gtk_object_set_data(GTK_OBJECT(dialog_display_info),
-			    "dialog_display_info",
-			    dialog_display_info);
+	g_object_set_data(G_OBJECT(dialog_display_info),
+			  "dialog_display_info",
+			  dialog_display_info);
 	gtk_window_set_title(GTK_WINDOW(dialog_display_info),
 			     " ");
 	GTK_WINDOW(dialog_display_info)->type =
@@ -203,8 +203,8 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 	gtk_dialog_set_has_separator(GTK_DIALOG(dialog_display_info), FALSE);
 
 	dialog_vbox23 = GTK_DIALOG(dialog_display_info)->vbox;
-	gtk_object_set_data(GTK_OBJECT(dialog_display_info),
-			    "dialog_vbox23", dialog_vbox23);
+	g_object_set_data(G_OBJECT(dialog_display_info),
+			  "dialog_vbox23", dialog_vbox23);
 	gtk_widget_show(dialog_vbox23);
 
 
@@ -212,7 +212,7 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 	gtk_widget_show(hbox);
 	gtk_box_pack_start(GTK_BOX(dialog_vbox23), hbox, TRUE, TRUE, 0);
 	gtk_container_set_border_width(GTK_CONTAINER(hbox), 6);
-	
+
 	image = gtk_image_new_from_stock(GTK_STOCK_DIALOG_INFO,
 					     GTK_ICON_SIZE_DIALOG);
 	gtk_widget_show(image);
@@ -224,7 +224,7 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 	gtk_widget_show(html_widget);
 	gtk_box_pack_start(GTK_BOX(hbox), html_widget, TRUE, TRUE, 0);
 #else
-	
+
 	scrolledwindow70 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow70);
 	gtk_box_pack_start(GTK_BOX(hbox), scrolledwindow70, TRUE, TRUE,
@@ -241,9 +241,9 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 
 	dialog_action_area23 =
 	    GTK_DIALOG(dialog_display_info)->action_area;
-	gtk_object_set_data(GTK_OBJECT(dialog_display_info),
-			    "dialog_action_area23",
-			    dialog_action_area23);
+	g_object_set_data(G_OBJECT(dialog_display_info),
+			  "dialog_action_area23",
+			  dialog_action_area23);
 	gtk_widget_show(dialog_action_area23);
 	gtk_container_set_border_width(GTK_CONTAINER
 				       (dialog_action_area23), 10);
@@ -256,7 +256,7 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 				  GTK_BUTTONBOX_END);
 
 	button_close = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
-	
+
 	gtk_widget_show(button_close);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox2), button_close);
 	GTK_WIDGET_SET_FLAGS(button_close, GTK_CAN_DEFAULT);

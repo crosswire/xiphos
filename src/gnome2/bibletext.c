@@ -43,7 +43,7 @@
 #include "gui/bookmark_dialog.h"
 #include "gui/bookmarks_treeview.h"
 #include "gui/export_dialog.h"
-#include "gui/shortcutbar_main.h" 
+#include "gui/shortcutbar_main.h"
 #include "gui/sidebar.h"
 #include "gui/cipher_key_dialog.h"
 #include "gui/main_menu.h"
@@ -80,7 +80,7 @@ GtkAdjustment* adjustment;
  *
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
@@ -89,7 +89,7 @@ GtkAdjustment* adjustment;
 void gui_popup_pm_text(void)
 {
     gui_menu_popup (settings.MainWindowModule,
-			NULL);	
+			NULL);
 }
 
 
@@ -98,9 +98,9 @@ static void
 _popupmenu_requested_cb (GeckoHtml *html,
 			     gchar *uri,
 			     gpointer user_data)
-{	
+{
     gui_menu_popup (settings.MainWindowModule,
-			NULL);	
+			NULL);
 	//gui_popup_pm_text();
 }
 #endif
@@ -200,11 +200,11 @@ static gboolean on_text_button_release_event(GtkWidget * widget,
 		}
 		if (!in_url)
 			break;
-			
-		url = gtk_html_get_url_at (GTK_HTML(widgets.html_text),		
+
+		url = gtk_html_get_url_at (GTK_HTML(widgets.html_text),
 								event->x,
 								event->y);
-			
+
 		if (strstr(url,"sword://")) {
 			gchar **work_buf = g_strsplit (url,"/",4);
 			gui_open_passage_in_new_tab(work_buf[3]);
@@ -245,7 +245,7 @@ static gboolean on_key_press_event           (GtkWidget       *widget,
 		g_message("GDK_MODIFIER_MASK");
 	g_message("state: %d",event->state);
 #endif
-	switch(event->hardware_keycode) {
+	switch (event->hardware_keycode) {
 		case 50:
 		case 62:
 			shift_key_pressed = TRUE;
@@ -269,7 +269,7 @@ static gboolean on_key_release_event         (GtkWidget       *widget,
 	if (event->state == GDK_MOD1_MASK)
 		g_message("GDK_MOD1_MASK");
 #endif
-	switch(event->hardware_keycode) {
+	switch (event->hardware_keycode) {
 		case 50:
 		case 62:
 			shift_key_pressed = FALSE;
@@ -283,7 +283,7 @@ static gboolean on_key_release_event         (GtkWidget       *widget,
 extern NAVBAR_VERSEKEY navbar_versekey;
 
 static
-void adj_changed(GtkAdjustment * adjustment1, gpointer user_data) 
+void adj_changed(GtkAdjustment * adjustment1, gpointer user_data)
 
 {
 	static int scroll = 1;
@@ -312,7 +312,7 @@ void adj_changed(GtkAdjustment * adjustment1, gpointer user_data)
  *   GtkWidget *gui_create_bible_pane(void)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   GtkWidget*
@@ -337,21 +337,21 @@ GtkWidget *gui_create_bible_pane(void)
 	gtk_box_pack_start(GTK_BOX(vbox),
 			   eventbox1, TRUE,
 			   TRUE, 0);
-	widgets.html_text = GTK_WIDGET(gecko_html_new(NULL, FALSE, TEXT_TYPE)); 
+	widgets.html_text = GTK_WIDGET(gecko_html_new(NULL, FALSE, TEXT_TYPE));
 	gtk_widget_show(widgets.html_text);
 	gtk_container_add(GTK_CONTAINER(eventbox1),
 			  widgets.html_text);
-		
+
 	g_signal_connect((gpointer)widgets.html_text,
 		      "popupmenu_requested",
 		      G_CALLBACK (_popupmenu_requested_cb),
 		      NULL);
-#else	
-	
+#else
+
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
 	gtk_box_pack_start(GTK_BOX(vbox),
-			   scrolledwindow, 
+			   scrolledwindow,
 	                   TRUE,
 			   TRUE, 0);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
@@ -367,13 +367,13 @@ GtkWidget *gui_create_bible_pane(void)
 	gtk_widget_show(widgets.html_text);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
 			  widgets.html_text);
-			  
+
 	g_signal_connect(GTK_OBJECT(widgets.html_text), "link_clicked",
 				G_CALLBACK(gui_link_clicked),
 				NULL);
 	g_signal_connect(GTK_OBJECT(widgets.html_text), "on_url",
 				G_CALLBACK(gui_url),
-				GINT_TO_POINTER(TEXT_TYPE));		    
+				GINT_TO_POINTER(TEXT_TYPE));
 	g_signal_connect(GTK_OBJECT(widgets.html_text),"button_release_event",
 				G_CALLBACK(on_text_button_release_event),
 				NULL);
@@ -382,12 +382,12 @@ GtkWidget *gui_create_bible_pane(void)
 				NULL);
 	g_signal_connect(GTK_OBJECT(widgets.html_text), "enter_notify_event",
 		    		G_CALLBACK (on_enter_notify_event),
-		       		NULL);			   
+		       		NULL);
 	g_signal_connect(GTK_OBJECT(widgets.html_text),
 			 "url_requested",
 			 G_CALLBACK(url_requested), NULL);
-#endif			 
+#endif
 
-	return 	vbox;			   
-	
+	return 	vbox;
+
 }

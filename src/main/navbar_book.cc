@@ -58,11 +58,11 @@ static
 int check_for_parent(char *book, unsigned long offset)
 {
 	unsigned long offset_save;
-	
+
 	offset_save = offset;
 	backend->set_module(book);
 	backend->set_treekey(offset);
-	
+
 	if (backend->treekey_parent(offset)) {
 		backend->set_treekey(offset_save);
 		return 1;
@@ -117,7 +117,7 @@ int check_for_prev_sib(char *book, unsigned long offset)
  *   check to see if there is another sibling after the current one
  *
  * Return value
- *  int  
+ *  int
  */
 
 static
@@ -265,7 +265,7 @@ void main_navbar_book_next(void)
 	char *tmpbuf = NULL;
 	unsigned long offset;
 	//const gchar *path;
-	
+
 	/*gchar *buf = g_strrstr_len (path,
                                     sizeof (path),
                                     ":");*/
@@ -290,19 +290,19 @@ void main_navbar_book_next(void)
  *
  * Synopsis
  *   #include "main/navbar_book.h"
- *   
- *   void  main_navbar_book_entry_activate (const gchar* entry_text) 
+ *
+ *   void  main_navbar_book_entry_activate (const gchar* entry_text)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
  */
 
-void  main_navbar_book_entry_activate (const gchar* entry_text) 
+void  main_navbar_book_entry_activate (const gchar* entry_text)
 {
-	main_display_book(settings.book_mod, entry_text);	
+	main_display_book(settings.book_mod, entry_text);
 }
 
 
@@ -312,12 +312,12 @@ void  main_navbar_book_entry_activate (const gchar* entry_text)
  *
  * Synopsis
  *   #include "main/navbar_book.h"
- *   
+ *
  *   void on_menu_select(GtkMenuItem * menuitem, gpointer user_data)
  *
  * Description
  *   user clicked on an item in the drop down list - send the book offset
- *   stored in user_data to main_display_book to show 
+ *   stored in user_data to main_display_book to show
  *
  * Return value
  *   void
@@ -397,9 +397,9 @@ GtkWidget *main_book_drop_down_new(void)
  *
  * Synopsis
  *   #include "main/navbar_book.h"
- *   
+ *
  *   void main_setup_navbar_book(gchar * book_name, unsigned long offset)
- *   
+ *
  *
  * Description
  *   set  sensitive state of navbar buttons and set the entry to current book key
@@ -414,7 +414,7 @@ void main_setup_navbar_book(gchar * book_name, unsigned long offset)
 	GS_message(("offset: %ld",offset));
 	backend->set_module(book_name);
 	backend->set_treekey(offset);
-		
+
 	tmpbuf = backend->get_key_from_offset(offset);
 	gtk_entry_set_text(GTK_ENTRY(navbar_book.lookup_entry), tmpbuf);
 	gtk_widget_set_tooltip_text(navbar_book.lookup_entry, tmpbuf);

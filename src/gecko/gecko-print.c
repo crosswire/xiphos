@@ -24,7 +24,7 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#ifdef USE_GTKUPRINT
+#ifdef HAVE_GTKUPRINT
 #include <unistd.h>
 #include <sys/stat.h>
 #include <gtk/gtk.h>
@@ -39,10 +39,10 @@
 
 static GtkPrintSettings * gecko_print_load_config_from_file ( void );
 static void               gecko_print_save_config_to_file   (GtkPrintSettings *config);
-static void               cancel_print_cb                  (GtkDialog *dialog, 
-							    gint arg1, 
+static void               cancel_print_cb                  (GtkDialog *dialog,
+							    gint arg1,
 							    GeckoPrintInfo *info);
-static void               parent_destroyed_cb              (GtkWindow *window, 
+static void               parent_destroyed_cb              (GtkWindow *window,
 							    GeckoPrintInfo *info);
 static gboolean           print_jobs_run                   ( void );
 void                      print_present_config_dialog      (GeckoPrintInfo *info);
@@ -77,11 +77,11 @@ static GSList * current_jobs = NULL;
 static gboolean currently_running = FALSE;
 
 void
-gecko_print_run (GtkWindow *window, gpointer html, gpointer fake_win, 
+gecko_print_run (GtkWindow *window, gpointer html, gpointer fake_win,
 		gpointer content_box)
 {
     GeckoPrintInfo *info;
-    
+
     info = gecko_print_get_print_info ();
     info->owner = window;
     info->html_frame = html;
@@ -90,7 +90,7 @@ gecko_print_run (GtkWindow *window, gpointer html, gpointer fake_win,
     info->previewed = FALSE;
 
     print_present_config_dialog (info);
-    
+
 }
 
 void
@@ -99,16 +99,16 @@ print_present_config_dialog (GeckoPrintInfo *info)
     int ret;
 
     if (!info->print_dialog) {
-	info->print_dialog = gtk_print_unix_dialog_new ("Print Dialog", 
+	info->print_dialog = gtk_print_unix_dialog_new ("Print Dialog",
 							GTK_WINDOW (info->owner));
 	gtk_print_unix_dialog_set_settings (
-				  GTK_PRINT_UNIX_DIALOG (info->print_dialog), 
+				  GTK_PRINT_UNIX_DIALOG (info->print_dialog),
 				  info->config);
 	gtk_print_unix_dialog_set_page_setup (
 					GTK_PRINT_UNIX_DIALOG (info->print_dialog),
 					info->setup);
 	gtk_print_unix_dialog_set_manual_capabilities (
-				       GTK_PRINT_UNIX_DIALOG (info->print_dialog), 
+				       GTK_PRINT_UNIX_DIALOG (info->print_dialog),
 				       GTK_PRINT_CAPABILITY_PAGE_SET |
 				       GTK_PRINT_CAPABILITY_COPIES   |
 				       GTK_PRINT_CAPABILITY_COLLATE  |
@@ -118,21 +118,21 @@ print_present_config_dialog (GeckoPrintInfo *info)
 				       GTK_PRINT_CAPABILITY_PREVIEW);
     }
     while (1) {
-	
+
 	ret = gtk_dialog_run (GTK_DIALOG (info->print_dialog));
-	info->config = 
+	info->config =
 	   gtk_print_unix_dialog_get_settings (
 				   GTK_PRINT_UNIX_DIALOG (info->print_dialog));
-	info->setup = 
-	    gtk_print_unix_dialog_get_page_setup (GTK_PRINT_UNIX_DIALOG 
+	info->setup =
+	    gtk_print_unix_dialog_get_page_setup (GTK_PRINT_UNIX_DIALOG
 						  (info->print_dialog));
-	info->printer = 
-	    gtk_print_unix_dialog_get_selected_printer (GTK_PRINT_UNIX_DIALOG 
+	info->printer =
+	    gtk_print_unix_dialog_get_selected_printer (GTK_PRINT_UNIX_DIALOG
 							(info->print_dialog));
 	g_object_ref (info->printer);
 	if (ret != GTK_RESPONSE_OK)
 	    break;
-	if (gecko_print_verify_postscript (info->printer, info->print_dialog)) 
+	if (gecko_print_verify_postscript (info->printer, info->print_dialog))
 	    break;
 
     }
@@ -149,7 +149,7 @@ print_present_config_dialog (GeckoPrintInfo *info)
     gecko_print_save_config_to_file (info->config);
     gecko_print_present_status_dialog (info->owner, info);
     info->cancel_print_id = g_signal_connect (info->owner, "destroy",
-					      G_CALLBACK (parent_destroyed_cb), 
+					      G_CALLBACK (parent_destroyed_cb),
 					      info);
 
 
@@ -163,7 +163,7 @@ print_present_config_dialog (GeckoPrintInfo *info)
 
 }
 
-static gboolean 
+static gboolean
 print_jobs_run ()
 {
     GeckoPrintInfo * info = current_jobs->data;
@@ -176,14 +176,14 @@ print_jobs_run ()
     return FALSE;
 }
 
-static GtkPrintSettings * 
+static GtkPrintSettings *
 gecko_print_load_config_from_file ()
 {
     GtkPrintSettings *settings;
 
     settings = gtk_print_settings_new ();
-    
-    // * TODO: Load settings from a file somehow 
+
+    // * TODO: Load settings from a file somehow
     return settings;
 }
 
@@ -224,14 +224,14 @@ gecko_print_info_free (GeckoPrintInfo *info)
 	}
 	g_free (info);
     }
-    
+
 }
 
 GeckoPrintInfo *
 gecko_print_get_print_info ()
 {
   GeckoPrintInfo *info;
-  
+
   info = g_new0 (GeckoPrintInfo, 1);
 
   info->config = gecko_print_load_config_from_file ();
@@ -268,11 +268,11 @@ gecko_print_verify_postscript (GtkPrinter *printer, GtkWidget *print_dialog)
 	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
 						  _("Printer %s does not"
 						    " support PostScript "
-						    "printing."), 
+						    "printing."),
 						  gtk_printer_get_description (printer));
 	  gtk_dialog_run (GTK_DIALOG (dialog));
 	  gtk_widget_destroy (GTK_WIDGET (dialog));
-	  
+
 	  return FALSE;
     }
 
@@ -283,10 +283,10 @@ static gboolean
 print_idle_cb (GeckoPrintInfo *info)
 {
     GtkPrintJob *job;
-    
-    if (g_file_test (info->tempfile, G_FILE_TEST_EXISTS) == FALSE) 
+
+    if (g_file_test (info->tempfile, G_FILE_TEST_EXISTS) == FALSE)
 	return FALSE;
-    job = gtk_print_job_new (gtk_window_get_title (GTK_WINDOW (info->owner)), 
+    job = gtk_print_job_new (gtk_window_get_title (GTK_WINDOW (info->owner)),
 			     info->printer,
 			     info->config, info->setup);
     gtk_print_job_set_source_file (job, info->tempfile, NULL);
@@ -297,7 +297,7 @@ print_idle_cb (GeckoPrintInfo *info)
 
 }
 
-static void  
+static void
 parent_destroyed_cb (GtkWindow *window, GeckoPrintInfo *info)
 {
     current_jobs = g_slist_remove (current_jobs, info);
@@ -330,7 +330,7 @@ cancel_print_cb (GtkDialog *dialog, gint arg1, GeckoPrintInfo *info)
     }
 }
 
-void 
+void
 gecko_print_moz_finished (GeckoPrintInfo *info)
 {
     info->moz_finished = TRUE;
@@ -340,13 +340,13 @@ gecko_print_moz_finished (GeckoPrintInfo *info)
     if (!info->cancelled) {
 	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (info->dialog),
 						  _("Printing"));
-	
+
 	info->print_idle_id = g_idle_add ((GSourceFunc) print_idle_cb,
 				  info);
 
     } else {
 	if (g_slist_length (current_jobs) == 0) {
-	    currently_running = FALSE; 
+	    currently_running = FALSE;
 	} else {
 	    g_idle_add ((GSourceFunc) print_jobs_run,
 			NULL);
@@ -361,8 +361,8 @@ gecko_print_present_status_dialog (GtkWindow *window, GeckoPrintInfo *info)
 {
     if (info->dialog != NULL)
 	return;
-    
-    info->dialog = gtk_message_dialog_new_with_markup (GTK_WINDOW (window), 
+
+    info->dialog = gtk_message_dialog_new_with_markup (GTK_WINDOW (window),
 						       GTK_DIALOG_DESTROY_WITH_PARENT,
 						       GTK_MESSAGE_INFO,
 						       GTK_BUTTONS_CANCEL,
@@ -383,7 +383,7 @@ gecko_print_present_status_dialog (GtkWindow *window, GeckoPrintInfo *info)
     gtk_window_present (GTK_WINDOW (info->dialog));
 }
 
-void 
+void
 gecko_print_cancel (GeckoPrintInfo *info)
 {
     cancel_print_cb (NULL, 0, info);
@@ -408,7 +408,7 @@ gecko_print_update_progress (GeckoPrintInfo *info, gdouble percentage)
 	percentage = 1.0;
     else if (percentage <0.0)
 	percentage = 0.0;
-    gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (temp->progress), 
+    gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (temp->progress),
 				   percentage);
 
 }
@@ -424,7 +424,7 @@ gecko_print_preview (GeckoPrintInfo *info)
 	GtkWidget *box;
 	info->previewed = TRUE;
 	box = gtk_toolbar_new ();
-	
+
 	gtk_box_pack_start (GTK_BOX (info->content_box), box, FALSE, FALSE, 0);
 	info->GoFirst = GTK_WIDGET (gtk_tool_button_new_from_stock (GTK_STOCK_GOTO_FIRST));
 	gtk_container_add (GTK_CONTAINER (box), info->GoFirst);
@@ -432,35 +432,35 @@ gecko_print_preview (GeckoPrintInfo *info)
 			  G_CALLBACK (preview_go_first),
 			  info);
 	gtk_widget_show (info->GoFirst);
-	
+
 	info->GoBack = GTK_WIDGET (gtk_tool_button_new_from_stock (GTK_STOCK_GO_BACK));
 	gtk_container_add (GTK_CONTAINER (box), info->GoBack);
 	g_signal_connect (info->GoBack, "clicked",
 			  G_CALLBACK (preview_go_back),
 			  info);
 	gtk_widget_show (info->GoBack);
-	
+
 	info->GoForward = GTK_WIDGET (gtk_tool_button_new_from_stock (GTK_STOCK_GO_FORWARD));
 	gtk_container_add (GTK_CONTAINER (box), info->GoForward);
 	g_signal_connect (info->GoForward, "clicked",
 			  G_CALLBACK (preview_go_forward),
 			  info);
 	gtk_widget_show (info->GoForward);
-	
+
 	info->GoLast = GTK_WIDGET (gtk_tool_button_new_from_stock (GTK_STOCK_GOTO_LAST));
 	gtk_container_add (GTK_CONTAINER (box), info->GoLast);
 	g_signal_connect (info->GoLast, "clicked",
 			  G_CALLBACK (preview_go_last),
 			  info);
 	gtk_widget_show (info->GoLast);
-	
+
 	info->Close = GTK_WIDGET (gtk_tool_button_new_from_stock (GTK_STOCK_CLOSE));
 	gtk_container_add (GTK_CONTAINER (box), info->Close);
 	g_signal_connect (info->Close, "clicked",
 			  G_CALLBACK (preview_close),
 			  info);
 	gtk_widget_show (info->Close);
-	
+
 	gtk_widget_show (box);
     }
     gtk_window_set_modal (GTK_WINDOW (info->fake_win), TRUE);
@@ -476,7 +476,7 @@ gecko_print_preview (GeckoPrintInfo *info)
     g_signal_connect (info->fake_win, "delete-event",
 		      G_CALLBACK (print_preview_finished_cb),
 		      info);
-    
+
     /* Set the preview window to the same size as the real window */
     gtk_window_get_size (GTK_WINDOW (info->owner), &width, &height);
     gtk_window_resize (GTK_WINDOW (info->fake_win), width, height);
@@ -547,7 +547,7 @@ preview_go_last (GtkToolButton *b, GeckoPrintInfo *info)
 {
     info->currentpage=info->npages;
     gecko_html_preview_navigate (info->html_frame, info->currentpage);
-    
+
     /* Reset sensitives */
     gtk_widget_set_sensitive (info->GoBack, TRUE);
     gtk_widget_set_sensitive (info->GoFirst, TRUE);
@@ -556,7 +556,7 @@ preview_go_last (GtkToolButton *b, GeckoPrintInfo *info)
 
 }
 
-void 
+void
 preview_close (GtkToolButton *b, GeckoPrintInfo *info)
 {
     print_preview_finished_cb (NULL, NULL, info);
@@ -592,13 +592,13 @@ gecko_finish_printing (GtkPrintJob *job, GeckoPrintInfo *info, GError *error)
 	gtk_widget_hide (dialog);
 	gtk_widget_destroy (dialog);
     }
-    
+
     gecko_print_info_free (info);
-    
+
     if (g_slist_length (current_jobs) > 0)
 	g_idle_add ((GSourceFunc) print_jobs_run, NULL);
     else
 	currently_running = FALSE;
-    
+
 }
 #endif

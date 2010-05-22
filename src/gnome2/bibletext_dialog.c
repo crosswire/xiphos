@@ -222,34 +222,12 @@ static void dialog_url(GtkHTML *html,
 				++url_buf;	/* remove T */
 				if (*url_buf == 'G') {
 					++url_buf;	/* remove G */
-					if (settings.havethayer) {
-						buf1 = g_strdup(url);
-						show_in_statusbar(vt->
-								  statusbar,
-								  buf1,
-								  "Thayer");
-						g_free(buf1);
-						return;
-					}
-
-					else
-						return;
+					return;
 				}
 
 				if (*url_buf == 'H') {
 					++url_buf;	/* remove H */
-					if (settings.havebdb) {
-						buf1 = g_strdup(url);
-						show_in_statusbar(vt->
-								  statusbar,
-								  buf1,
-								  "BDB");
-						g_free(buf1);
-						return;
-					}
-
-					else
-						return;
+					return;
 				}
 			}
 
@@ -257,18 +235,8 @@ static void dialog_url(GtkHTML *html,
 				++url_buf;	/* remove G */
 				buf1 = g_strdup(url_buf);
 				if (atoi(buf1) > 5624) {
-					if (settings.havethayer) {
-						show_in_statusbar(vt->
-								  statusbar,
-								  buf1,
-								  "Thayer");
-						g_free(buf1);
-						return;
-					} else
-						return;
-
+					return;
 				}
-
 				else {
 					show_in_statusbar(vt->statusbar,
 							  buf1,
@@ -283,19 +251,8 @@ static void dialog_url(GtkHTML *html,
 				++url_buf;	/* remove H */
 				buf1 = g_strdup(url);
 				if (atoi(buf1) > 8674) {
-					if (settings.havebdb) {
-						show_in_statusbar(vt->
-								  statusbar,
-								  buf1,
-								  "BDB");
-						g_free(buf1);
-						return;
-					}
-
-					else
-						return;
+					return;
 				}
-
 				else {
 					show_in_statusbar(vt->statusbar,
 							  buf1,
@@ -581,8 +538,8 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 
 	vt->dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 
-	gtk_object_set_data(GTK_OBJECT(vt->dialog), "dlg->dialog",
-			    vt->dialog);
+	g_object_set_data(G_OBJECT(vt->dialog), "dlg->dialog",
+			  vt->dialog);
 	gtk_window_set_title(GTK_WINDOW(vt->dialog),
 			     main_get_module_description(vt->mod_name));
 	gtk_window_set_default_size(GTK_WINDOW(vt->dialog), 200, 200);
@@ -608,11 +565,11 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 
 #ifdef USE_GTKMOZEMBED
 	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
-	
+
 	eventbox = gtk_event_box_new();
 	gtk_widget_show(eventbox);
 	gtk_container_add(GTK_CONTAINER(frame), eventbox);
-	
+
 	vt->html = GTK_WIDGET(gecko_html_new(vt, TRUE, DIALOG_TEXT_TYPE));
 	gtk_widget_show(vt->html);
 	gtk_container_add(GTK_CONTAINER(eventbox), vt->html);
@@ -626,7 +583,7 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 	gtk_paned_add2((GtkPaned *)paned,frame);
 	gtk_widget_set_size_request(frame, -1, 100);
 	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
-	
+
 	eventbox = gtk_event_box_new();
 	gtk_widget_show(eventbox);
 	gtk_container_add(GTK_CONTAINER(frame), eventbox);
@@ -670,7 +627,7 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 			   G_CALLBACK
 			   (url_requested),
 			   (DIALOG_DATA *) vt);
-	
+
 
 	frame = gtk_frame_new(NULL);
 	gtk_widget_show(frame);

@@ -25,7 +25,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#include <gtk/gtk.h>	
+#include <gtk/gtk.h>
 
 
 typedef struct _search_dialog1 SEARCH_DIALOG1;
@@ -97,8 +97,6 @@ struct _search_dialog1 {
 	gint range_rows;
 	gint list_rows;
 
-	gboolean show_in_main;
-
 	gchar *search_mod;
 };
 extern SEARCH_DIALOG1 search1;
@@ -128,7 +126,6 @@ void delete_list(GtkButton * button, gpointer user_data);
 void scope_toggled(GtkToggleButton * togglebutton, gpointer user_data);
 void mod_list_toggled(GtkToggleButton * togglebutton, gpointer user_data);
 void current_module_toggled(GtkToggleButton * togglebutton, gpointer user_data);
-gboolean _on_button_release_event(GtkWidget * widget, GdkEventButton * event, gpointer data);
 void on_closebutton2_clicked(GtkButton * button, gpointer user_data);
 void _on_dialog2_response(GtkDialog * dialog, gint response_id, gpointer user_data);
 void on_toolbutton12_clicked(GtkToolButton * toolbutton, gpointer user_data);

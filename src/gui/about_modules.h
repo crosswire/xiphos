@@ -27,7 +27,7 @@ extern "C" {
 #endif
 
 #include <gtk/gtk.h>
-	
+
 void gui_display_about_module_dialog(gchar * modname);
 void gui_core_display_about_dialog(gchar *desc,
 				   gchar *abouttext,

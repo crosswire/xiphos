@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<ui>
+  <menubar name="menubar_main">
+    <menu action="menuFile">
+      <menuitem action="new" />
+      <menuitem action="open" />
+      <menuitem action="save" />
+      <menuitem action="print" />
+    </menu>
+    <menu action="menuEdit">
+      <menuitem action="cut" />
+      <menuitem action="copy" />
+      <menuitem action="paste" />
+    </menu>
+    <menu action="menuInsert">
+      <menuitem action="insertimage" />
+    </menu>
+    <menu action="menuFormat">
+      <menuitem action="bold" />
+      <menuitem action="italic" />
+      <menuitem action="underline" />
+      <menuitem action="strikethrough" />
+      <separator />
+      <menuitem action="font" />
+      <menuitem action="color" />
+      <separator />
+      <menuitem action="justifyleft" />
+      <menuitem action="justifyright" />
+      <menuitem action="justifycenter" />
+      <menuitem action="justifyfull" />
+      <separator />
+      <menuitem action="indent" />
+      <menuitem action="outdent" />
+    </menu>
+  </menubar>
+  <toolbar name="toolbar_main">
+    <toolitem action="new" />
+    <toolitem action="open" />
+    <toolitem action="save" />
+    <toolitem action="print" />
+    <separator />
+    <toolitem action="undo" />
+    <toolitem action="redo" />
+    <separator />
+    <toolitem action="cut" />
+    <toolitem action="copy" />
+    <toolitem action="paste" />
+  </toolbar>
+  <toolbar name="toolbar_format">
+    <toolitem action="bold" />
+    <toolitem action="italic" />
+    <toolitem action="underline" />
+    <toolitem action="strikethrough" />
+    <separator />
+    <toolitem action="font" />
+    <toolitem action="color" />
+    <separator />
+    <toolitem action="justifyleft" />
+    <toolitem action="justifyright" />
+    <toolitem action="justifycenter" />
+    <toolitem action="justifyfull" />
+    <separator />
+    <toolitem action="indent" />
+    <toolitem action="outdent" />
+    <separator />
+    <toolitem action="insertimage" />
+    <toolitem action="insertlink" />
+  </toolbar>
+</ui>

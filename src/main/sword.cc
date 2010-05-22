@@ -1,6 +1,6 @@
 /*
  * Xiphos Bible Study Tool
- * sword.cc - glue 
+ * sword.cc - glue
  *
  * Copyright (C) 2000-2009 Xiphos Developer Team
  *
@@ -57,6 +57,8 @@ extern "C" {
 #include "gui/xiphos.h"
 #include "gui/sidebar.h"
 #include "gui/utilities.h"
+#include "gui/cipher_key_dialog.h"
+#include "gui/main_menu.h"
 
 #include "main/display.hh"
 #include "main/lists.h"
@@ -68,8 +70,9 @@ extern "C" {
 #include "main/sword.h"
 #include "main/url.hh"
 #include "main/xml.h"
- 
 #include "main/parallel_view.h"
+#include "main/modulecache.hh"
+
 #include "backend/sword_main.hh"
 #include "backend/gs_stringmgr.h"
 
@@ -79,8 +82,8 @@ extern "C" {
 #include "gui/ipc.h"
 #endif
 
-using namespace sword; 
-	
+using namespace sword;
+
 #define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
 
 extern GtkWidget *cbe_book;
@@ -89,7 +92,6 @@ extern GtkWidget *spb_verse;
 extern GtkWidget *cbe_freeform_lookup;
 extern gboolean shift_key_pressed;
 
-gboolean style_display = TRUE;
 char *sword_locale = NULL;
 gboolean companion_activity = FALSE;
 
@@ -103,19 +105,19 @@ gboolean companion_activity = FALSE;
  *   void main_book_heading(char * mod_name)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
  */
 
 void main_book_heading(char * mod_name)
-{	
-	VerseKey *vkey;	
+{
+	VerseKey *vkey;
 	SWMgr *mgr = backend->get_mgr();
-	
+
 	backend->display_mod = mgr->Modules[mod_name];
-	vkey = (VerseKey*)(SWKey*)(*backend->display_mod);	
+	vkey = (VerseKey*)(SWKey*)(*backend->display_mod);
 	vkey->Headings(1);
 	vkey->AutoNormalize(0);
 	vkey->Verse(0);
@@ -134,20 +136,20 @@ void main_book_heading(char * mod_name)
  *   void main_chapter_heading(char * mod_name)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
  */
 
 void main_chapter_heading(char * mod_name)
-{	
-	VerseKey *vkey;	
+{
+	VerseKey *vkey;
 	SWMgr *mgr = backend->get_mgr();
-	
+
 	backend->display_mod = mgr->Modules[mod_name];
 	backend->display_mod->setKey(settings.currentverse);
-	vkey = (VerseKey*)(SWKey*)(*backend->display_mod);	
+	vkey = (VerseKey*)(SWKey*)(*backend->display_mod);
 	vkey->Headings(1);
 	vkey->AutoNormalize(0);
 	vkey->Verse(0);
@@ -162,20 +164,20 @@ void main_chapter_heading(char * mod_name)
  * Synopsis
  *   #include "main/sword.h"
  *
- *   void main_save_note(const gchar * module_name, 
- *				          const gchar * key_str , 
- *				          const gchar * note_str )	
+ *   void main_save_note(const gchar * module_name,
+ *				          const gchar * key_str ,
+ *				          const gchar * note_str )
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
  */
 
-void main_save_note(	const gchar * module_name, 
-			const gchar * key_str, 
-			const gchar * note_str )
+void main_save_note(const gchar * module_name,
+		    const gchar * key_str,
+		    const gchar * note_str)
 {
 	// Massage encoded spaces ("%20") back to real spaces.
 	// This is a sick. unreliable hack that should be removed
@@ -193,8 +195,8 @@ void main_save_note(	const gchar * module_name,
 		    key_str,
 		    note_str));
 	backend->save_note_entry(module_name, key_str, note_str);
-	
-	if ((!strcmp(settings.CommWindowModule, module_name)) &&  
+
+	if ((!strcmp(settings.CommWindowModule, module_name)) &&
 	    (!strcmp(settings.currentverse, key_str)))
 		main_display_commentary(module_name, key_str);
 }
@@ -206,49 +208,50 @@ void main_save_note(	const gchar * module_name,
  * Synopsis
  *   #include "main/sword.h"
  *
- *   void main_delete_note(DIALOG_DATA * d)	
+ *   void main_delete_note(DIALOG_DATA * d)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
  */
 
-void main_delete_note(	const gchar * module_name, const gchar * key_str)
+void main_delete_note(const gchar * module_name,
+		      const gchar * key_str)
 {
 	backend->set_module_key(module_name, key_str);
 	GS_message(("note module %s\nnote key %s\n",
 		    module_name,
 		    key_str));
 	backend->delete_entry();
-	
-	if ((!strcmp(settings.CommWindowModule,module_name)) &&  
+
+	if ((!strcmp(settings.CommWindowModule,module_name)) &&
 	    (!strcmp(settings.currentverse, key_str)))
 		main_display_commentary(module_name, key_str);
 }
 
-	
+
 /******************************************************************************
  * Name
  *  set_module_unlocked
  *
  * Synopsis
  *   #include "bibletext.h"
- *   
- *   void set_module_unlocked(char *mod_name, char *key)	
+ *
+ *   void set_module_unlocked(char *mod_name, char *key)
  *
  * Description
- *   unlocks locked module - 
+ *   unlocks locked module -
  *
  * Return value
  *   void
  */
 
-void main_set_module_unlocked(char * mod_name, char * key)
+void main_set_module_unlocked(const char * mod_name, char * key)
 {
 	SWMgr *mgr = backend->get_mgr();
-	mgr->setCipherKey(mod_name, key);	
+	mgr->setCipherKey(mod_name, key);
 }
 
 
@@ -259,18 +262,18 @@ void main_set_module_unlocked(char * mod_name, char * key)
  * Synopsis
  *   #include "main/configs.h"
  *
- *   void main_save_module_key(gchar * mod_name, gchar * key)	
+ *   void main_save_module_key(gchar * mod_name, gchar * key)
  *
  * Description
  *    to unlock locked modules
  *
  * Return value
  *   void
- */ 
+ */
 
-void main_save_module_key(char * mod_name, char * key)
+void main_save_module_key(const char * mod_name, char * key)
 {
-	backend->save_module_key(mod_name, key);
+	backend->save_module_key((char *) mod_name, key);
 }
 
 
@@ -281,10 +284,10 @@ void main_save_module_key(char * mod_name, char * key)
  * Synopsis
  *   #include "toolbar_nav.h"
  *
- *   gchar *main_update_nav_controls(const gchar * key)	
+ *   gchar *main_update_nav_controls(const gchar * key)
  *
  * Description
- *   updates the nav toolbar controls 
+ *   updates the nav toolbar controls
  *
  * Return value
  *   gchar *
@@ -293,19 +296,19 @@ void main_save_module_key(char * mod_name, char * key)
 gchar *main_update_nav_controls(const gchar * key)
 {
 	char *val_key = backend->get_valid_key(key);
-	
-	/* 
-	 *  remember verse 
+
+	/*
+	 *  remember verse
 	 */
 	xml_set_value("Xiphos", "keys", "verse", val_key);
 	settings.currentverse = xml_get_value("keys", "verse");
-	
+
 	settings.apply_change = FALSE;
-	
+
 	navbar_versekey.module_name = g_string_assign(navbar_versekey.module_name,settings.MainWindowModule);
 	navbar_versekey.key = g_string_assign(navbar_versekey.key,val_key);
 	main_navbar_versekey_set(navbar_versekey, val_key);
-	
+
 	settings.apply_change = TRUE;
 
 #ifdef HAVE_DBUS
@@ -324,7 +327,7 @@ gchar *main_update_nav_controls(const gchar * key)
  * Synopsis
  *   #include "main/module.h"
  *
- *   char *get_module_key(void)	
+ *   char *get_module_key(void)
  *
  * Description
  *    returns module key
@@ -362,7 +365,7 @@ char *main_get_active_pane_key(void)
  * Synopsis
  *   #include "main/module.h"
  *
- *   char *get_module_name(void)	
+ *   char *get_module_name(void)
  *
  * Description
  *    returns module name
@@ -401,14 +404,14 @@ char *main_get_active_pane_module(void)
  * Synopsis
  *   #include ".h"
  *
- *   void module_name_from_description(gchar *mod_name, gchar *description)	
+ *   void module_name_from_description(gchar *mod_name, gchar *description)
  *
  * Description
- *    
+ *
  *
  * Return value
  *   void
- */ 
+ */
 
 char *main_module_name_from_description(char *description)
 {
@@ -422,14 +425,14 @@ char *main_module_name_from_description(char *description)
  * Synopsis
  *   #include "sword.h"
  *
- *   const char *main_get_sword_version(void)	
+ *   const char *main_get_sword_version(void)
  *
  * Description
- *    
+ *
  *
  * Return value
  *   const char *
- */ 
+ */
 
 const char *main_get_sword_version(void)
 {
@@ -440,15 +443,15 @@ const char *main_get_sword_version(void)
 
 /******************************************************************************
  * Name
- *   
+ *
  *
  * Synopsis
  *   #include "main/.h"
  *
- *   
+ *
  *
  * Description
- *   
+ *
  *
  * Return value
  *   char*
@@ -467,16 +470,16 @@ char *main_get_treekey_local_name(unsigned long offset)
  * Synopsis
  *   #include "sword.h"
  *
- *   char *get_search_results_text(char * mod_name, char * key)	
+ *   char *get_search_results_text(char * mod_name, char * key)
  *
  * Description
- *    
+ *
  *
  * Return value
  *   char *
  */
- 
-char *main_get_search_results_text(char * mod_name, char * key)	
+
+char *main_get_search_results_text(char * mod_name, char * key)
 {
 	return g_strdup(backend->get_render_text((char *)mod_name,(char *)key));
 }
@@ -497,7 +500,7 @@ char *main_get_search_results_text(char * mod_name, char * key)
  *
  * Return value
  *   gchar *
- */ 
+ */
 
 char *main_get_path_to_mods(void)
 {
@@ -520,7 +523,7 @@ char *main_get_path_to_mods(void)
  *
  * Return value
  *   void
- */ 
+ */
 
 typedef std::map < SWBuf, SWBuf > ModLanguageMap;
 ModLanguageMap languageMap;
@@ -531,7 +534,7 @@ void main_init_language_map() {
 	gchar *s, *end, *abbrev, *name, *newline;
 	gchar *mapspace;
 	size_t length;
-	
+
 	if ((language_file = gui_general_user_file("languages", FALSE)) == NULL) {
 		gui_generic_warning
 		    (_("Xiphos's file for language\nabbreviations is missing."));
@@ -598,6 +601,11 @@ const char *main_get_language_map(const char *language) {
 	return languageMap[language].c_str();
 }
 
+char **main_get_module_language_list(void)
+{
+	return backend->get_module_language_list();
+}
+
 
 /******************************************************************************
  * Name
@@ -606,7 +614,7 @@ const char *main_get_language_map(const char *language) {
  * Synopsis
  *   #include "main/sword.h"
  *
- *   char *set_sword_locale(const char *sys_locale)	
+ *   char *set_sword_locale(const char *sys_locale)
  *
  * Description
  *   set sword's idea of the locale in which the user operates
@@ -655,10 +663,10 @@ char *set_sword_locale(const char *sys_locale)
  * Synopsis
  *   #include "main/sword.h"
  *
- *   void main_init_backend(void)	
+ *   void main_init_backend(void)
  *
  * Description
- *   start sword 
+ *   start sword
  *
  * Return value
  *   void
@@ -667,7 +675,7 @@ char *set_sword_locale(const char *sys_locale)
 void main_init_backend(void)
 {
 	StringMgr::setSystemStringMgr( new GS_StringMgr() );
-	
+
 	const char *lang = getenv("LANG");
 	if (!lang) lang = "C";
 	sword_locale = set_sword_locale(lang);
@@ -694,7 +702,7 @@ void main_init_backend(void)
  * Synopsis
  *   #include "sword.h"
  *
- *   void shutdown_sword(void)	
+ *   void shutdown_sword(void)
  *
  * Description
  *   close down sword by deleting backend;
@@ -708,10 +716,10 @@ void main_shutdown_backend(void)
 	if (sword_locale)
 		free((char*)sword_locale);
 	sword_locale = NULL;
-	if (backend) 
-	        delete backend; 
+	if (backend)
+	        delete backend;
 	backend = NULL;
-		
+
 	GS_print(("%s\n", "SWORD is shutdown"));
 }
 
@@ -732,31 +740,33 @@ void main_shutdown_backend(void)
  */
 
 void main_dictionary_entry_changed(char * mod_name)
-{	
+{
 	gchar *key = NULL;
 
-	if (!mod_name) 
+	if (!mod_name)
 		return;
 	if (strcmp(settings.DictWindowModule, mod_name)) {
 		xml_set_value("Xiphos", "modules", "dict", mod_name);
 		settings.DictWindowModule = xml_get_value("modules", "dict");
-	}	
+	}
 
 	key = g_strdup((gchar*)gtk_entry_get_text(GTK_ENTRY(widgets.entry_dict)));
-	
+
 	backend->set_module_key(mod_name, key);
 	g_free(key);
 	key = backend->get_module_key();
 
 	xml_set_value("Xiphos", "keys", "dictionary", key);
 	settings.dictkey = xml_get_value("keys", "dictionary");
-	
+
+	main_check_unlock(mod_name, TRUE);
+
 	backend->set_module_key(mod_name, key);
 	backend->display_mod->Display();
-	
+
 	gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), key);
 	g_free(key);
-} 
+}
 
 
 
@@ -768,12 +778,12 @@ static void dict_key_list_select(GtkMenuItem * menuitem, gpointer user_data)
 
 /******************************************************************************
  * Name
- *   
+ *
  *
  * Synopsis
  *   #include "main/sword.h"
  *
- *   
+ *
  *
  * Description
  *   text in the dictionary entry has changed and the entry activated
@@ -783,15 +793,15 @@ static void dict_key_list_select(GtkMenuItem * menuitem, gpointer user_data)
  */
 
 GtkWidget *main_dictionary_drop_down_new(char * mod_name, char * old_key)
-{	
+{
 	gint count = 9, i;
 	gchar *new_key;
 	gchar *key = NULL;
 	GtkWidget *menu;
 	GtkWidget * item;
-	
+
 	menu = gtk_menu_new();
-	
+
 	if (!settings.havedict || !mod_name)
 		return NULL;
 	if (strcmp(settings.DictWindowModule,mod_name)) {
@@ -799,28 +809,30 @@ GtkWidget *main_dictionary_drop_down_new(char * mod_name, char * old_key)
 					mod_name);
 		settings.DictWindowModule = xml_get_value(
 					"modules", "dict");
-	}	
+	}
 	key = g_strdup((gchar*)gtk_entry_get_text(GTK_ENTRY(widgets.entry_dict)));
-	
+
 	GS_message(("\nold_key: %s\nkey: %s",old_key,key));
 	backend->set_module_key(mod_name, key);
 	g_free(key);
 	key = backend->get_module_key();
-	
+
 	xml_set_value("Xiphos", "keys", "dictionary", key);
 	settings.dictkey = xml_get_value("keys", "dictionary");
-	
+
+	main_check_unlock(mod_name, TRUE);
+
 	backend->set_module_key(mod_name, key);
 	backend->display_mod->Display();
-	
+
 	new_key = g_strdup((char*)backend->display_mod->KeyText());
-	
+
 	for (i = 0; i < (count / 2)+1; i++) {
 		(*backend->display_mod)--;
 	}
 
 	for (i = 0; i < count; i++) {
-		free(new_key);			
+		free(new_key);
 		(*backend->display_mod)++;
 		new_key = g_strdup((char*)backend->display_mod->KeyText());
 		/* add menu item */
@@ -829,14 +841,14 @@ GtkWidget *main_dictionary_drop_down_new(char * mod_name, char * old_key)
 		gtk_widget_show(item);
 		g_signal_connect(GTK_OBJECT(item), "activate",
 				   G_CALLBACK(dict_key_list_select),
-				   g_strdup(new_key));		
-		gtk_container_add(GTK_CONTAINER(menu), item); 
+				   g_strdup(new_key));
+		gtk_container_add(GTK_CONTAINER(menu), item);
 	}
-	
+
 	free(new_key);
 	g_free(key);
 	return menu;
-} 
+}
 
 /******************************************************************************
  * Name
@@ -860,30 +872,31 @@ GtkWidget *main_dictionary_drop_down_new(char * mod_name, char * old_key)
 
 
 void main_dictionary_button_clicked(gint direction)
-{	
+{
 	gchar *key = NULL;
-	
+
 	if (!settings.havedict || !settings.DictWindowModule)
 		return;
-		
-	backend->set_module_key(settings.DictWindowModule, 
+
+	backend->set_module_key(settings.DictWindowModule,
 				settings.dictkey);
 	if (direction == 0)
 		(*backend->display_mod)--;
 	else
 		(*backend->display_mod)++;
-	key = g_strdup((char*)backend->display_mod->KeyText());	
+	key = g_strdup((char*)backend->display_mod->KeyText());
 	gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), key);
 	gtk_widget_activate(widgets.entry_dict);
 	g_free(key);
 }
 
-void main_display_book(const char * mod_name, const char * key)     //, unsigned long offset)
+void main_display_book(const char * mod_name,
+		       const char * key)
 {
 	if (!settings.havebook || !mod_name)
 		return;
-	
-	if (key == NULL)  // && offset == -1)
+
+	if (key == NULL)
 		key = "0";
 
 	GS_message(("main_display_book\nmod_name: %s\nkey: %s", mod_name, key));
@@ -913,10 +926,12 @@ void main_display_book(const char * mod_name, const char * key)     //, unsigned
 		settings.book_key = xml_get_value("keys", "book");
 		xml_set_value("Xiphos", "keys", "offset", key);
 
-		backend->set_module(mod_name);	
+		backend->set_module(mod_name);
 		backend->set_treekey(settings.book_offset);
 	}
-	
+
+	main_check_unlock(mod_name, TRUE);
+
 	backend->display_mod->Display();
 	main_setup_navbar_book(settings.book_mod, settings.book_offset);
 	//if (settings.browsing)
@@ -933,24 +948,25 @@ void main_display_book(const char * mod_name, const char * key)     //, unsigned
 				      settings.showdicts);
 }
 
-void main_display_commentary(const char * mod_name, const char * key)
-{	
+void main_display_commentary(const char * mod_name,
+			     const char * key)
+{
 	if (!settings.havecomm || !settings.comm_showing)
 		return;
-	
+
 	if (!mod_name)
 		mod_name = ((settings.browsing && (cur_passage_tab != NULL))
 			    ? g_strdup(cur_passage_tab->commentary_mod)
 			    : xml_get_value("modules", "comm"));
-	
+
 	if (!mod_name || !backend->is_module(mod_name))
 		return;
 	if (!settings.CommWindowModule)
 		settings.CommWindowModule = g_strdup((gchar*)mod_name);
-	
+
 	settings.comm_showing = TRUE;
 	settings.whichwindow = COMMENTARY_WINDOW;
-						
+
 	if (strcmp(settings.CommWindowModule, mod_name)) {
 		xml_set_value("Xiphos", "modules", "comm", mod_name);
 		gui_reassign_strdup(&settings.CommWindowModule, (gchar *)mod_name);
@@ -972,10 +988,12 @@ void main_display_commentary(const char * mod_name, const char * key)
 		}
 		if (companion) g_free(companion);
 	}
-	
+
+	main_check_unlock(mod_name, TRUE);
+
 	backend->set_module_key(mod_name, key);
 	backend->display_mod->Display();
-	
+
 	//if (settings.browsing)
 		gui_update_tab_struct(NULL,
 				      mod_name,
@@ -990,7 +1008,8 @@ void main_display_commentary(const char * mod_name, const char * key)
 				      settings.showdicts);
 }
 
-void main_display_dictionary(const char * mod_name, const char * key)
+void main_display_dictionary(const char * mod_name,
+			     const char * key)
 {
 	const gchar *old_key;
 
@@ -1034,7 +1053,7 @@ void main_display_dictionary(const char * mod_name, const char * key)
 		xml_set_value("Xiphos", "modules", "dict", mod_name);
 		gui_reassign_strdup(&settings.DictWindowModule, (gchar *)mod_name);
 	}
-	
+
 	 // old_key is uppercase
  	key = g_utf8_strup(key, -1);
 	old_key = gtk_entry_get_text(GTK_ENTRY(widgets.entry_dict));
@@ -1044,7 +1063,7 @@ void main_display_dictionary(const char * mod_name, const char * key)
 		gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), key);
 		gtk_widget_activate(widgets.entry_dict);
 	}
-	
+
 	//if (settings.browsing)
 		gui_update_tab_struct(NULL,
 				      NULL,
@@ -1060,31 +1079,32 @@ void main_display_dictionary(const char * mod_name, const char * key)
 }
 
 
-void main_display_bible(const char * mod_name, const char * key)
+void main_display_bible(const char * mod_name,
+			const char * key)
 {
 	gchar *file = NULL;
 	gchar *style = NULL;
 	gchar *val_key = NULL;
-	
+
 #ifndef USE_GTKMOZEMBED
 	extern guint scroll_adj_signal;
 	extern GtkAdjustment* adjustment;
-	
-	/* keeps us out of a crash causing loop */	
+
+	/* keeps us out of a crash causing loop */
 	g_signal_handler_block(adjustment, scroll_adj_signal);
-#endif	
+#endif
 	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.html_text))) return;
 	if (!mod_name)
 		mod_name = ((settings.browsing && (cur_passage_tab != NULL))
 			    ? g_strdup(cur_passage_tab->text_mod)
-			    : xml_get_value("modules", "bible"));	
-	
-	
+			    : xml_get_value("modules", "bible"));
+
+
 	if (!settings.havebible || !mod_name)
 		return;
 	if (!backend->is_module(mod_name))
 		return;
-	
+
 	if (!settings.MainWindowModule)
 		settings.MainWindowModule = g_strdup((gchar*)mod_name);
 
@@ -1094,7 +1114,7 @@ void main_display_bible(const char * mod_name, const char * key)
 		settings.currentverse = xml_get_value(
 					"keys", "verse");
 	}
-	
+
 	if (strcmp(settings.MainWindowModule, mod_name)) {
 		xml_set_value("Xiphos", "modules", "bible", mod_name);
 		gui_reassign_strdup(&settings.MainWindowModule, (gchar *)mod_name);
@@ -1115,33 +1135,29 @@ void main_display_bible(const char * mod_name, const char * key)
 			companion_activity = FALSE;
 		}
 		if (companion) g_free(companion);
-		
+
 		navbar_versekey.module_name = g_string_assign(navbar_versekey.module_name,
 							      settings.MainWindowModule);
-		
+
 		navbar_versekey.key = g_string_assign(navbar_versekey.key,
 						      settings.currentverse);
-		
+
 		main_search_sidebar_fill_bounds_combos();
 	}
-	
+
 	settings.whichwindow = MAIN_TEXT_WINDOW;
-	
+
 	file = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
 	style = get_conf_file_item(file, mod_name, "style");
-	if ((style) && strcmp(style,"verse"))
-		settings.versestyle = FALSE;
-	else	
+	if ((style) && !strcmp(style,"verse"))
 		settings.versestyle = TRUE;
+	else
+		settings.versestyle = FALSE;
 	g_free(style);
 	g_free(file);
-	
-	style_display = FALSE;
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.versestyle_item),
-				       settings.versestyle);
-	style_display = TRUE;
-	
+
+	main_check_unlock(mod_name, TRUE);
+
 	if (backend->module_has_testament(mod_name,
 				backend->get_key_testament(key))) {
 			backend->set_module_key(mod_name, key);
@@ -1151,13 +1167,13 @@ void main_display_bible(const char * mod_name, const char * key)
 			val_key = main_update_nav_controls("Matthew 1:1");
 		else
 			val_key = main_update_nav_controls("Genesis 1:1");
-		
+
 		backend->set_module_key(mod_name, val_key);
 		backend->display_mod->Display();
-		g_free(val_key);			
+		g_free(val_key);
 	}
-	
-	GS_message(("mod_name = %s",mod_name));	
+
+	GS_message(("mod_name = %s",mod_name));
 	//if (settings.browsing) {
 		gui_update_tab_struct(mod_name,
 				      NULL,
@@ -1179,10 +1195,10 @@ void main_display_bible(const char * mod_name, const char * key)
 	/*
 	 * change parallel verses
 	 */
-	if (settings.dockedInt) 
+	if (settings.dockedInt)
 		main_update_parallel_page();
 	else {
-		if(settings.showparatab)
+		if (settings.showparatab)
 			gui_keep_parallel_tab_in_sync();
 		else
 			gui_keep_parallel_dialog_in_sync();
@@ -1247,29 +1263,29 @@ void main_display_devotional(void)
 	 * Print it out in a nice format.
 	 */
 	strftime(buf, 10, "%m.%d", loctime);
-	
-	
+
+
 	text = backend->get_render_text(settings.devotionalmod, buf);
-//	g_message("modname: %s\nloctime: %s\ntext: %s",settings.devotionalmod, buf, text);
+	
 	if (text) {
-		main_entry_display(settings.show_previewer_in_sidebar 
+		main_entry_display(settings.show_previewer_in_sidebar
 				     ? sidebar.html_viewer_widget
 				     : widgets.html_previewer_text,
 			      settings.devotionalmod, text, buf, TRUE);
-		free(text);
+		g_free(text);
 	}
 }
 
 void main_refresh_all(void)
-{ 
+{
 	main_display_bible(settings.MainWindowModule, settings.currentverse);
 	main_display_commentary(settings.CommWindowModule, settings.currentverse);
-	main_display_book(settings.book_mod, settings.book_key);	
+	main_display_book(settings.book_mod, settings.book_key);
 	main_display_dictionary(settings.DictWindowModule, settings.dictkey);
 }
-    
+
 void main_setup_displays(void)
-{ 
+{
 	backend->textDisplay = new GTKChapDisp(widgets.html_text,backend);
 	backend->commDisplay = new GTKEntryDisp(widgets.html_comm,backend);
 	backend->bookDisplay = new GTKEntryDisp(widgets.html_book,backend);
@@ -1319,7 +1335,7 @@ gint main_check_for_global_option(gchar * mod_name, gchar * option)
  * Return value
  *   int
  */
- 
+
 int main_is_module(char * mod_name)
 {
 	return backend->is_module(mod_name);
@@ -1378,14 +1394,14 @@ int main_optimal_search(char *mod_name)
  * Synopsis
  *   #include "main/module.h"
  *
- *   gchar *get_mod_about_info(char * mod_name)	
+ *   gchar *get_mod_about_info(char * mod_name)
  *
  * Description
- *    
+ *
  *
  * Return value
  *   gchar *
- */ 
+ */
 
 char *main_get_mod_about_info(char * mod_name)
 {
@@ -1449,15 +1465,72 @@ int main_is_mod_rtol(const char * module_name)
  *   int main_has_cipher_tag(char *mod_name)
  *
  * Description
- *    
+ *
  *
  * Return value
  *   int
- */ 
+ */
 
 int main_has_cipher_tag(char *mod_name)
 {
-	return (backend->get_config_entry(mod_name, (char *)"CipherKey") != NULL);
+	gchar *cipherkey = backend->get_config_entry(mod_name, (char *)"CipherKey");
+	int retval = (cipherkey != NULL);
+	g_free(cipherkey);
+	return retval;
+}
+
+
+#define	CIPHER_INTRO	\
+_("<b>Locked Module.</b>\n\n<u>You are opening a module which requires a <i>key</i>.</u>\n\nThe module is locked, meaning that the content is encrypted by its publisher, and you must enter its key in order for the content to become useful.  This key should have been received by you on the web page which confirmed your purchase, or perhaps sent via email after purchase.\n\nPlease enter the key in the dialog.")
+
+/******************************************************************************
+ * Name
+ *  main_check_unlock
+ *
+ * Synopsis
+ *   #include "main/.h"
+ *
+ *   int main_check_unlock(const char *mod_name)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   int
+ */
+
+void main_check_unlock(const char *mod_name, gboolean conditional)
+{
+	gchar *cipher_old, *cipher_key;
+
+	cipher_old = main_get_mod_config_entry(mod_name, "CipherKey");
+
+	/* if forced by the unlock menu item, or it's present but empty... */
+	if (!conditional ||					
+	    ((cipher_old != NULL) && (*cipher_old == '\0'))) {
+
+		if (conditional) {
+			GtkWidget *dialog;
+			dialog = gtk_message_dialog_new_with_markup
+			    (NULL,	/* no need for a parent window */
+			     GTK_DIALOG_DESTROY_WITH_PARENT,
+			     GTK_MESSAGE_INFO,
+			     GTK_BUTTONS_OK,
+			     CIPHER_INTRO);
+			g_signal_connect_swapped(dialog, "response",
+						 G_CALLBACK(gtk_widget_destroy),
+						 dialog);
+			gtk_widget_show(dialog);
+		}
+
+		cipher_key = gui_add_cipher_key(mod_name, cipher_old);
+		if (cipher_key) {
+			ModuleCacheErase(mod_name);
+			redisplay_to_realign();
+			g_free(cipher_key);
+		}
+	}
+	g_free(cipher_old);
 }
 
 
@@ -1468,10 +1541,10 @@ int main_has_cipher_tag(char *mod_name)
  * Synopsis
  *   #include "main/sword.h"
  *
- *   char *main_get_striptext(char *module_name, char *key)	
+ *   char *main_get_striptext(char *module_name, char *key)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   char *
@@ -1490,10 +1563,10 @@ char *main_get_striptext(char *module_name, char *key)
  * Synopsis
  *   #include "main/sword.h"
  *
- *   char *main_get_striptext(char *module_name, char *key)	
+ *   char *main_get_striptext(char *module_name, char *key)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   char *
@@ -1511,10 +1584,10 @@ char *main_get_striptext_from_string(char *module_name, char *string)
  * Synopsis
  *   #include "main/sword.h"
  *
- *   char *main_get_rendered_text(char *module_name, char *key)	
+ *   char *main_get_rendered_text(char *module_name, char *key)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   char *
@@ -1533,10 +1606,10 @@ char *main_get_rendered_text(const char *module_name, const char *key)
  * Synopsis
  *   #include "main/sword.h"
  *
- *   char *main_get_raw_text(char *module_name, char *key)	
+ *   char *main_get_raw_text(char *module_name, char *key)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   char *
@@ -1554,10 +1627,10 @@ char *main_get_raw_text(char *module_name, char *key)
  * Synopsis
  *   #include "main/sword.h"
  *
- *   char *main_get_raw_text(char *module_name, char *key)	
+ *   char *main_get_raw_text(char *module_name, char *key)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   char *
@@ -1578,15 +1651,15 @@ char *main_get_book_key_from_offset(unsigned long offset)
  *   int main_get_mod_type(char * mod_name)
  *
  * Description
- *    
+ *
  *
  * Return value
  *   int
- */ 
+ */
 
 int main_get_mod_type(char * mod_name)
 {
-	
+
 	return backend->module_type(mod_name);
 }
 
@@ -1598,14 +1671,14 @@ int main_get_mod_type(char * mod_name)
  * Synopsis
  *   #include "main/module.h"
  *
- *   gchar *main_get_module_description(gchar * module_name)	
+ *   gchar *main_get_module_description(gchar * module_name)
  *
  * Description
- *    
+ *
  *
  * Return value
  *   gchar *
- */ 
+ */
 
 char *main_get_module_description(char * module_name)
 {
@@ -1618,7 +1691,7 @@ char *main_get_module_description(char * module_name)
  *
  * Synopsis
  *   #include "main/sword.h"
- *   char *main_format_number(int x)	
+ *   char *main_format_number(int x)
  *
  * Description
  *   returns a digit string in either "latinate arabic" (normal) or
@@ -1628,7 +1701,7 @@ char *main_get_module_description(char * module_name)
  *
  * Return value
  *   char *
- */ 
+ */
 
 int re_encode_digits = FALSE;
 
@@ -1669,7 +1742,7 @@ main_format_number(int x)
  *
  * Return value
  *   int
- */ 
+ */
 
 int
 main_deformat_number(char *digitstring)
@@ -1705,7 +1778,7 @@ main_deformat_number(char *digitstring)
  *
  * Return value
  *   int
- */ 
+ */
 static char blank_html_content[] = "<html><head></head><body> </body></html>";
 
 void main_flush_widgets_content(void)
@@ -1733,7 +1806,7 @@ void main_flush_widgets_content(void)
  *
  * Return value
  *   gboolean
- */ 
+ */
 gboolean main_is_Bible_key(gchar *key)
 {
 	return (gboolean)(backend->is_Bible_key(key, settings.currentverse) != 0);
@@ -1752,7 +1825,7 @@ gboolean main_is_Bible_key(gchar *key)
  *
  * Return value
  *   const char *
- */ 
+ */
 const char *
 main_get_osisref_from_key(const char *module, const char *key)
 {

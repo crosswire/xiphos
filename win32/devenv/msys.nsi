@@ -31,7 +31,7 @@
     !define APP_NAME "Xiphos Development Environment"
     !define INSTALLER_NAME "xiphos_devenv"
     !define APP_BINARY_NAME "xiphos.exe"
-    !define APP_VERS "1.2"
+    !define APP_VERS "1.3"
     !define APP_EDITION "win32"
     !define APP_URL "http://xiphos.org"
     !define MSYS_NAME "msys"
@@ -50,8 +50,9 @@
     !define INST_PYTHON "python-2.6.2.msi"
     !define INST_LIBXML2 "libxml2-python-2.7.3.win32-py2.6.exe"
     !define INST_PERL "strawberry-perl-5.8.9.2.msi"
-    !define INST_NSISU "nsis-2.42.6-Unicode-setup.exe"
+    !define INST_NSISU "nsis-2.45.1-Unicode-setup.exe"
     !define INST_MSHELP "htmlhelp.exe"
+    !define INST_BZR "bzr-2.0.3-2-setup.exe"
 
     ; Files
     !define FILES_MSYS "${PATH_MSYS}\*.*"
@@ -60,6 +61,7 @@
     !define FILES_LIBXML2 "${PATH_CORE}\${INST_LIBXML2}"
     !define FILES_PERL "${PATH_CORE}\${INST_PERL}"
     !define FILES_NSISU "${PATH_CORE}\${INST_NSISU}"
+    !define FILES_BZR "${PATH_CORE}\${INST_BZR}"
     !define URL_MSHELP "http://go.microsoft.com/fwlink/?LinkId=14188"
 
     ; Folders with binaries for PATH
@@ -222,7 +224,7 @@ SectionEnd
 ; Installation of other installers will be silent (default options)
 ; system PATH is also set
 
-Section "Python 2.6" Sec01
+Section "Python 2.6.2" Sec01
     SetOutPath '$TEMP'
     File '${FILES_PYTHON}'
     ; MSI installer
@@ -230,14 +232,14 @@ Section "Python 2.6" Sec01
     ${EnvVarUpdate} $0 "PATH" "A" "HKLM" "${BIN_PYTHON}"
 SectionEnd
 
-Section "libxml2 (bindings for Python)" Sec02
+Section "libxml2 2.7.3 (bindings for Python)" Sec02
     SetOutPath '$TEMP'
     File '${FILES_LIBXML2}'
     ; FIXME unknown installer type, SILENT installation doesn't work
     ExecWait '"$TEMP\${INST_LIBXML2}" ALLUSERS=1'
 SectionEnd
 
-Section "Perl 5.8" Sec03
+Section "Perl 5.8.9.2 (strawberry)" Sec03
     SetOutPath '$TEMP'
     File '${FILES_PERL}'
     ; MSI installer
@@ -245,7 +247,7 @@ Section "Perl 5.8" Sec03
     ${EnvVarUpdate} $0 "PATH" "A" "HKLM" "${BIN_PERL}"
 SectionEnd
 
-Section "NSIS (for creating installers)" Sec04
+Section "NSIS 2.45.1 (for creating installers)" Sec04
     SetOutPath '$TEMP'
     File '${FILES_NSISU}'
     ; NSIS installer
@@ -253,7 +255,14 @@ Section "NSIS (for creating installers)" Sec04
     ${EnvVarUpdate} $0 "PATH" "A" "HKLM" "${BIN_NSISU}"
 SectionEnd
 
-Section "MS Help Compiler (EULA will be accepted)" Sec05
+Section "Bazaar 2.0.3 (version control system)" Sec05
+    SetOutPath '$TEMP'
+    File '${FILES_BZR}'
+    ; Inno Setup installer
+    ExecWait '"$TEMP\${INST_BZR}" /SILENT ALLUSERS=1'
+SectionEnd
+
+Section "MS Help Compiler (EULA will be accepted)" Sec06
     ; download installer to TMP folder
     ; It is not legal to include MS Help Compiler directly to installer
     NSISdl::download '${URL_MSHELP}' '$TEMP\${INST_MSHELP}' 
