@@ -256,7 +256,7 @@ marked_cache_fill(gchar *modname, gchar *key)
 	return;
 
 fail:
-	err = g_strdup_printf(_("Improperly encoded personal annotation label:\n'%s'"),
+	err = g_strdup_printf(_("Improperly encoded personal annotation label:\n'%s'"), 
 			      mhold);
 	gui_generic_warning(err);
 	g_free(err);
@@ -516,17 +516,10 @@ block_dump(SWBuf& rendered,
 		s = strstr(s, "&gt;");
 		*s = *(s+1) = *(s+2) = *(s+3) = ' ';
 #endif /* USE_GTKMOZEMBED */
-
-		// gross hack needed to handle new class="..." in sword -r2512.
-		if ((s = (char*)strstr(*strongs, " class=\"strongs\">"))) {
-			memcpy(s, ">                ", 17);
-			if ((s = (char*)strstr(s, " class=\"strongs\">")))
-				memcpy(s, ">                ", 17);
-		}
 	} else
 		slen = 0;
 	if (*morph) {
-		s = s0 = (char*)g_strrstr(*morph, "\">") + 2;
+		s = s0 = (char*)strstr(*morph, "\">") + 2;
 		t = strchr(s, '<');
 		for (/* */; s < t; ++s)
 			if (isupper(*s))
@@ -544,13 +537,6 @@ block_dump(SWBuf& rendered,
 		s = strrchr(s, ')');
 		*s = ' ';
 #endif /* USE_GTKMOZEMBED */
-
-		// gross hack needed to handle new class="..." in sword -r2512.
-		if ((s = (char*)strstr(*morph, " class=\"morph\">"))) {
-			memcpy(s, ">              ", 15);
-			if ((s = (char*)strstr(s, " class=\"morph\">")))
-				memcpy(s, ">              ", 15);
-		}
 	} else
 		mlen = 0;
 	min_length = 2 + max(slen, mlen);
@@ -680,10 +666,7 @@ block_render_secondary(const char *text,
 				// strongs: "<em>&lt;...&gt;</em>"
 				// morph:   "<em>(...)</em>"
 				// if Sword ever changes this, we're dead.
-				const char *u = s+11;
-				while ((*u != '(') && (*u != '&'))
-					++u;	// it has to be one or the other.
-				if (*u == '(') {
+				if (*(s+11) == '(') {
 					if (morph) {
 						block_dump(rendered, &word, &strongs, &morph);
 						word = g_strdup(EMPTY_WORD);
@@ -806,8 +789,8 @@ CacheHeader(ModuleCache::CacheVerse& cVerse,
 		CleanupContent(text, ops, mod.Name());
 
 		cVerse.AppendHeader(text);
-		g_free(text);
-		// g_free((gchar *)preverse2);
+		g_free((gchar *)text);
+		// g_free(preverse2); // does RenderText's result need free()?
 		g_free((gchar *)preverse);
 		++x;
 		sprintf(heading, "%d", x);
@@ -855,6 +838,9 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule)
 	if (strongs_and_morph)
 		set_morph_order(imodule);
 
+	if (is_rtol && !ops->transliteration)
+		swbuf.append("<div align=right>");
+
 	for (key->Verse(1);
 	     (key->Book()    == curBook)    &&
 	     (key->Chapter() == curChapter) &&
@@ -870,15 +856,9 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule)
 
 		// use the module cache rather than re-accessing Sword.
 		if (!cVerse.CacheIsValid(cache_flags)) {
-			if ((backend->module_type(imodule.Name()) == PERCOM_TYPE) ||
-			    (backend->module_type(imodule.Name()) == PRAYERLIST_TYPE))
-				rework = (strongs_or_morph
-					  ? block_render(imodule.getRawEntry())
-					  : imodule.getRawEntry());
-			else
-				rework = (strongs_or_morph
-					  ? block_render(imodule.RenderText())
-					  : imodule.RenderText());
+			rework = (strongs_or_morph
+				  ? block_render(imodule.RenderText())
+				  : imodule.RenderText());
 			CleanupContent(rework, ops, imodule.Name());
 			cVerse.SetText(rework, cache_flags);
 		} else
@@ -893,7 +873,9 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule)
 			     : rework /* left as-is */);
 	}
 
-	swbuf.append("</div></font></body></html>");
+	if (is_rtol && !ops->transliteration)
+		swbuf.append("</div>");
+	swbuf.append("</font></body></html>");
 
 	buf = g_strdup_printf("%d", curVerse);
 	HtmlOutput((char *)swbuf.c_str(), gtkText, mf, buf);
@@ -938,14 +920,14 @@ GTKEntryDisp::Display(SWModule &imodule)
 	buf = g_strdup_printf(HTML_START
 			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
 			      "<font face=\"%s\" size=\"%+d\">"
-			      "[<a href=\"passagestudy.jsp?action=showModInfo&value=%s&module=%s\">"
 			      "<font color=\"%s\">"
-			      "*%s*</font></a>]<br>",
+			      "<a href=\"xiphos.url?action=showModInfo&value=%s&module=%s\">"
+			      "[*%s*]</a></font><br>",
 			      (strongs_and_morph		// both
 			       ? CSS_BLOCK_BOTH
 			       : (strongs_or_morph		// either
 				  ? CSS_BLOCK_ONE
-				  : (ops->doublespace		// neither
+				  : (settings.doublespace	// neither
 				     ? DOUBLE_SPACE
 				     : ""))),
 			      settings.bible_bg_color,
@@ -955,17 +937,13 @@ GTKEntryDisp::Display(SWModule &imodule)
 			      ((mf->old_font_size)
 			       ? atoi(mf->old_font_size) + settings.base_font_size
 			       : settings.base_font_size),
+			      settings.bible_verse_num_color,
 			      imodule.Description(),
 			      imodule.Name(),
-			      settings.bible_verse_num_color,
 			      imodule.Name());
 	swbuf.append(buf);
 	g_free(buf);
 
-	swbuf.appendFormatted("<div dir=%s>",
-			      ((is_rtol && !ops->transliteration)
-			       ? "rtl"
-			       : "ltr"));
 	//
 	// the rest of this routine is irrelevant if we are
 	// instead heading off to show a whole chapter
@@ -1024,7 +1002,7 @@ GTKEntryDisp::Display(SWModule &imodule)
 					   GDK_WINDOW(gtkText->window))
 		     : rework /* left as-is */);
 
-	swbuf.append("</div></font></body></html>");
+	swbuf.append("</font></body></html>");
 
 	HtmlOutput((char *)swbuf.c_str(), gtkText, mf, NULL);
 
@@ -1087,10 +1065,8 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 
 		utf8_key = strdup((char*)key->getText());
 
-		swbuf.appendFormatted("<div dir=%s>",
-				      ((is_rtol && !ops->transliteration)
-				       ? "rtl"
-				       : "ltr"));
+		if (is_rtol && !ops->transliteration)
+			swbuf.append("<div align=right>");
 
 		num = main_format_number(key->Verse());
 		buf=g_strdup_printf(settings.showversenum
@@ -1119,12 +1095,13 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 		swbuf.append(buf);
 		g_free(buf);
 
-		swbuf.append("</div>");
+		if (is_rtol && !ops->transliteration)
+			swbuf.append("</div>");
 
 	}
 
 	imodule++;
-
+	
 	if (!ops->headings)
 		return;
 
@@ -1198,10 +1175,8 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 
 		utf8_key = strdup((char*)key->getText());
 
-		swbuf.appendFormatted("<div dir=%s>",
-				      ((is_rtol && !ops->transliteration)
-				       ? "rtl"
-				       : "ltr"));
+		if (is_rtol && !ops->transliteration)
+			swbuf.append("<div align=right>");
 
 		num = main_format_number(key->Verse());
 		buf=g_strdup_printf(settings.showversenum
@@ -1235,7 +1210,8 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 					: (const char *)imodule),
 				       cache_flags);
 		swbuf.append(cVerse.GetText());
-		swbuf.append("</div>");
+		if (is_rtol && !ops->transliteration)
+			swbuf.append("</div>");
 	}
 }
 
@@ -1409,32 +1385,9 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 			*s = ' ';
 		// in case it isn't obvious, i'd really like a  standard
 		// function that walks a string for multiple individual chars.
-
-		// walk the string, looking for dislocated "LORD" as "L<spaces>ORD".
-		// this occurs in "smallcaps" use in many bibles.
-		for (s = strchr(text->str, 'L'); s; s = strchr(s+1, 'L')) {
-			gchar *begin = s++;
-			while (*s == ' ')
-				++s;
-			if (!strncmp(s, "ORD", 3)) {
-				*begin = ' ';
-				*(s-1) = 'L';
-			}
-		}
-		// same song, second verse: G<spaces>OD.
-		for (s = strchr(text->str, 'G'); s; s = strchr(s+1, 'G')) {
-			gchar *begin = s++;
-			while (*s == ' ')
-				++s;
-			if (!strncmp(s, "OD", 2)) {
-				*begin = ' ';
-				*(s-1) = 'G';
-			}
-		}
-
 		GS_message(("ReadAloud: clean: %s\n", text->str));
 		// scribble clean text to the socket.
-		if (FestivalSpeak(text->str, strlen(text->str), tts_socket) == false)
+		if (FestivalSpeak(text->str, strlen(text->str), tts_socket) == false) 
 		{
 			char msg[256];
 			sprintf(msg, "TTS disappeared?\nTTS write failed: %s",
@@ -1592,7 +1545,7 @@ GTKChapDisp::Display(SWModule &imodule)
 			     ? CSS_BLOCK_BOTH
 			     : (strongs_or_morph	// either
 				? CSS_BLOCK_ONE
-				: (ops->doublespace	// neither
+				: (settings.doublespace	// neither
 				   ? DOUBLE_SPACE
 				   : ""))),
 			    settings.bible_bg_color,
@@ -1605,10 +1558,8 @@ GTKChapDisp::Display(SWModule &imodule)
 	swbuf.append(buf);
 	g_free(buf);
 
-	swbuf.appendFormatted("<div dir=%s>",
-			      ((is_rtol && !ops->transliteration)
-			       ? "rtl"
-			       : "ltr"));
+	if (is_rtol && !ops->transliteration)
+		swbuf.append("<div align=right>");
 
 	main_set_global_options(ops);
 	getVerseBefore(imodule);
@@ -1648,16 +1599,12 @@ GTKChapDisp::Display(SWModule &imodule)
 			cVerse.InvalidateHeader();
 
 		// special contrasty highlighting
-		if (((e = marked_cache_check(key->Verse())) &&
-		     settings.annotate_highlight) ||
-		    ((key->Verse() == curVerse) &&
-		     settings.versehighlight)) {
+		if (((e = marked_cache_check(key->Verse()))) ||
+		    ((key->Verse() == curVerse) && settings.versehighlight)) {
 			buf = g_strdup_printf(
 			    "<table bgcolor=\"%s\"><tr><td>"
 			    "<font face=\"%s\" size=\"%+d\">",
-			    ((settings.annotate_highlight && e)
-			     ? settings.highlight_fg
-			     : settings.highlight_bg),
+			    (e ? settings.highlight_fg : settings.highlight_bg),
 			    ((mf->old_font) ? mf->old_font : ""),
 			    ((mf->old_font_size)
 			     ? atoi(mf->old_font_size) + settings.base_font_size
@@ -1674,11 +1621,8 @@ GTKChapDisp::Display(SWModule &imodule)
 			key->Verse(),
 			(char*)key->getText(),
 			settings.verse_num_font_size + settings.base_font_size,
-			(((settings.versehighlight && (key->Verse() == curVerse)) ||
-			  (e && settings.annotate_highlight))
-			 ? ((e && settings.annotate_highlight)
-			    ? settings.highlight_bg
-			    : settings.highlight_fg)
+			(((settings.versehighlight && (key->Verse() == curVerse)) || e)
+			 ? (e ? settings.highlight_bg : settings.highlight_fg)
 			 : settings.bible_verse_num_color),
 			num);
 		g_free(num);
@@ -1688,9 +1632,9 @@ GTKChapDisp::Display(SWModule &imodule)
 		// insert the userfootnote reference
 		if (e) {
 			buf = g_strdup_printf("<span class=\"word\">"
-					      "<a href=\"passagestudy.jsp?action=showUserNote&"
-					      "module=%s&passage=%s&value=%s\"><small>"
-					      "<sup>*u</sup></small></a></span> ",
+					      "<a href=\"xiphos.url?action=showUserNote&"
+					      "module=%s&passage=%s&value=%s\"><small><sup>*u</sup>"
+					      "</small></a></span> ",
 					      settings.MainWindowModule,
 			                      (char*)key->getShortText(),
 					      e->annotation->str);
@@ -1698,13 +1642,10 @@ GTKChapDisp::Display(SWModule &imodule)
 			g_free(buf);
 		}
 
-		if ((key->Verse() == curVerse) || (e && settings.annotate_highlight)) {
+		if ((key->Verse() == curVerse) || e) {
 			buf = g_strdup_printf("<font color=\"%s\">",
-					      ((settings.versehighlight ||
-						(e && settings.annotate_highlight))
-					       ? ((e && settings.annotate_highlight)
-						  ? settings.highlight_bg
-						  : settings.highlight_fg)
+					      ((settings.versehighlight || e)
+					       ? (e ? settings.highlight_bg : settings.highlight_fg)
 					       : settings.currentverse_color));
 			swbuf.append(buf);
 			g_free(buf);
@@ -1718,9 +1659,8 @@ GTKChapDisp::Display(SWModule &imodule)
 		// correct a highlight glitch: in poetry verses which end in
 		// a forced line break, we must remove the break to prevent
 		// the enclosing <table> from producing a double break.
-		if ((settings.versehighlight ||
-		     (e && settings.annotate_highlight)) &&	// doing <table> h/l.
-		    !settings.versestyle &&			// paragraph format.
+		if (settings.versehighlight &&		// doing <table> h/l.
+		    !settings.versestyle &&		// paragraph format.
 		    (key->Verse() == curVerse)) {
 			GString *text = g_string_new(NULL);
 
@@ -1756,14 +1696,13 @@ GTKChapDisp::Display(SWModule &imodule)
 				newparagraph = FALSE;
 			}
 			if ((key->Verse() != curVerse) ||
-			    (!settings.versehighlight &&
-			     (!e || !settings.annotate_highlight)))
+			    !settings.versehighlight)
 				swbuf.append("<br>");
 		}
 
 		// special contrasty highlighting
 		if (((key->Verse() == curVerse) && settings.versehighlight) ||
-		    (e && settings.annotate_highlight))
+		    e)
 			swbuf.append("</font></td></tr></table>");
 	}
 
@@ -1775,7 +1714,9 @@ GTKChapDisp::Display(SWModule &imodule)
 	key->Chapter(curChapter);
 	key->Verse(curVerse);
 
-	swbuf.append("</div></font></body></html>");
+	if (is_rtol && !ops->transliteration)
+		swbuf.append("</div>");
+	swbuf.append("</font></body></html>");
 
 #ifdef USE_GTKMOZEMBED
 	if (strongs_and_morph)
@@ -1826,10 +1767,8 @@ DialogEntryDisp::DisplayByChapter(SWModule &imodule)
 	if (strongs_and_morph)
 		set_morph_order(imodule);
 
-	swbuf.appendFormatted("<div dir=%s>",
-			      ((is_rtol && !ops->transliteration)
-			       ? "rtl"
-			       : "ltr"));
+	if (is_rtol && !ops->transliteration)
+		swbuf.append("<div align=right>");
 
 	for (key->Verse(1);
 	     (key->Book()    == curBook)    &&
@@ -1863,7 +1802,9 @@ DialogEntryDisp::DisplayByChapter(SWModule &imodule)
 			     : rework /* left as-is */);
 	}
 
-	swbuf.append("</div></font></body></html>");
+	if (is_rtol && !ops->transliteration)
+		swbuf.append("</div>");
+	swbuf.append("</font></body></html>");
 
 	buf = g_strdup_printf("%d", curVerse);
 	HtmlOutput((char *)swbuf.c_str(), gtkText, mf, buf);
@@ -1893,9 +1834,9 @@ DialogEntryDisp::Display(SWModule &imodule)
 			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
 			      "<font face=\"%s\" size=\"%+d\">"
 			      "<font color=\"%s\">"
-			      "<a href=\"passagestudy.jsp?action=showModInfo&value=%s&module=%s\">"
+			      "<a href=\"xiphos.url?action=showModInfo&value=%s&module=%s\">"
 			      "[*%s*]</a></font><br>",
-			      (ops->doublespace ? DOUBLE_SPACE : ""),
+			      (settings.doublespace ? DOUBLE_SPACE : ""),
 			      settings.bible_bg_color,
 			      settings.bible_text_color,
 			      settings.link_color,
@@ -1982,7 +1923,7 @@ DialogChapDisp::Display(SWModule &imodule)
 	char *ModuleName = imodule.Name();
 	ops = main_new_globals(ModuleName, 1);
 	cache_flags = ConstructFlags(ops);
-
+    
 	is_rtol = main_is_mod_rtol(ModuleName);
 	mf = get_font(ModuleName);
 
@@ -2013,10 +1954,10 @@ DialogChapDisp::Display(SWModule &imodule)
 
 	file = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
 	style = get_conf_file_item(file, ModuleName, "style");
-	if ((style) && !strcmp(style, "verse"))
-		versestyle = TRUE;
-	else
+	if ((style) && strcmp(style, "verse"))
 		versestyle = FALSE;
+	else
+		versestyle = TRUE;
 	g_free(style);
 	g_free(file);
 
@@ -2030,7 +1971,7 @@ DialogChapDisp::Display(SWModule &imodule)
 			       ? CSS_BLOCK_BOTH
 			       : (strongs_or_morph
 				  ? CSS_BLOCK_ONE
-				  : (ops->doublespace
+				  : (settings.doublespace
 				     ? DOUBLE_SPACE
 				     : ""))),
 			      settings.bible_bg_color,
@@ -2043,10 +1984,8 @@ DialogChapDisp::Display(SWModule &imodule)
 	swbuf.append(buf);
 	g_free(buf);
 
-	swbuf.appendFormatted("<div dir=%s>",
-			      ((is_rtol && !ops->transliteration)
-			       ? "rtl"
-			       : "ltr"));
+	if (is_rtol && !ops->transliteration)
+		swbuf.append("<div align=right>");
 
 	for (key->Verse(1);
 	     (key->Book() == curBook) &&
@@ -2083,15 +2022,12 @@ DialogChapDisp::Display(SWModule &imodule)
 			cVerse.InvalidateHeader();
 
 		// special contrasty highlighting
-		if (((e = marked_cache_check(key->Verse())) &&
-		     settings.annotate_highlight) ||
+		if (((e = marked_cache_check(key->Verse()))) ||
 		    ((key->Verse() == curVerse) && settings.versehighlight)) {
 			buf = g_strdup_printf(
 			    "<table bgcolor=\"%s\"><tr><td>"
 			    "<font face=\"%s\" size=\"%+d\">",
-			    ((settings.annotate_highlight && e)
-			     ? settings.highlight_fg
-			     : settings.highlight_bg),
+			    (e ? settings.highlight_fg : settings.highlight_bg),
 			    ((mf->old_font) ? mf->old_font : ""),
 			    ((mf->old_font_size)
 			     ? atoi(mf->old_font_size) + settings.base_font_size
@@ -2108,11 +2044,8 @@ DialogChapDisp::Display(SWModule &imodule)
 			key->Verse(),
 			(char*)key->getText(),
 			settings.verse_num_font_size + settings.base_font_size,
-			(((settings.versehighlight && (key->Verse() == curVerse)) ||
-			  (e && settings.annotate_highlight))
-			 ? ((e && settings.annotate_highlight)
-			    ? settings.highlight_bg
-			    : settings.highlight_fg)
+			(((settings.versehighlight && (key->Verse() == curVerse)) || e)
+			 ? (e ? settings.highlight_bg : settings.highlight_fg)
 			 : settings.bible_verse_num_color),
 			num);
 		g_free(num);
@@ -2122,23 +2055,19 @@ DialogChapDisp::Display(SWModule &imodule)
 		// insert the userfootnote reference
 		if (e) {
 			buf = g_strdup_printf("<span class=\"word\">"
-					      "<a href=\"passagestudy.jsp?action=showUserNote&"
-					      "module=%s&passage=%s&value=%s\">"
-					      "<small><sup>*u</sup></small></a></span> ",
-/*xxx*/					      settings.MainWindowModule,
-			                      (char*)key->getShortText(),
+					      "<a href=\"xiphos.url?action=showUserNote&"
+					      "module=%s&value=%s\"><small><sup>*u</sup>"
+					      "</small></a></span> ",
+					      settings.MainWindowModule,
 					      e->annotation->str);
 			swbuf.append(buf);
 			g_free(buf);
 		}
 
-		if ((key->Verse() == curVerse) || (e && settings.annotate_highlight)) {
+		if ((key->Verse() == curVerse) || e) {
 			buf = g_strdup_printf("<font color=\"%s\">",
-					      ((settings.versehighlight ||
-						(e && settings.annotate_highlight))
-					       ? ((e && settings.annotate_highlight)
-						  ? settings.highlight_bg
-						  : settings.highlight_fg)
+					      ((settings.versehighlight || e)
+					       ? (e ? settings.highlight_bg : settings.highlight_fg)
 					       : settings.currentverse_color));
 			swbuf.append(buf);
 			g_free(buf);
@@ -2150,9 +2079,8 @@ DialogChapDisp::Display(SWModule &imodule)
 		}
 
 		// same forced line break glitch in highlighted current verse.
-		if ((settings.versehighlight ||
-		     (e && settings.annotate_highlight)) &&	// doing <table> h/l.
-		    !versestyle &&				// paragraph format.
+		if (settings.versehighlight &&		// doing <table> h/l.
+		    !versestyle &&			// paragraph format.
 		    (key->Verse() == curVerse)) {
 			GString *text = g_string_new(NULL);
 
@@ -2188,14 +2116,13 @@ DialogChapDisp::Display(SWModule &imodule)
 				newparagraph = FALSE;
 			}
 			if ((key->Verse() != curVerse) ||
-			    (!settings.versehighlight &&
-			     (!e || !settings.annotate_highlight)))
+			    !settings.versehighlight)
 				swbuf.append("<br>");
 		}
 
 		// special contrasty highlighting
 		if (((key->Verse() == curVerse) && settings.versehighlight) ||
-		    (e && settings.annotate_highlight))
+		    e)
 			swbuf.append("</font></td></tr></table>");
 	}
 
@@ -2205,7 +2132,9 @@ DialogChapDisp::Display(SWModule &imodule)
 	key->Chapter(curChapter);
 	key->Verse(curVerse);
 
-	swbuf.append("</div></font></body></html>");
+	if (is_rtol && !ops->transliteration)
+		swbuf.append("</div>");
+	swbuf.append("</font></body></html>");
 
 #ifdef USE_GTKMOZEMBED
 	if (strongs_and_morph)
@@ -2261,9 +2190,9 @@ GTKPrintEntryDisp::Display(SWModule &imodule)
 			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
 			      "<font face=\"%s\" size=\"%+d\">"
 			      "<font color=\"%s\">"
-			      "<a href=\"passagestudy.jsp?action=showModInfo&value=%s&module=%s\">"
+			      "<a href=\"xiphos.url?action=showModInfo&value=%s&module=%s\">"
 			      "[*%s*]</a></font>[%s]<br>",
-			      (ops->doublespace ? DOUBLE_SPACE : ""),
+			      (settings.doublespace ? DOUBLE_SPACE : ""),
 			      settings.bible_bg_color,
 			      settings.bible_text_color,
 			      settings.link_color,
@@ -2329,7 +2258,7 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 	buf=g_strdup_printf(HTML_START
 			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
 			      "<font face=\"%s\" size=\"%+d\">",
-			      (ops->doublespace ? DOUBLE_SPACE : ""),
+			      (settings.doublespace ? DOUBLE_SPACE : ""),
 			      settings.bible_bg_color,
 			      settings.bible_text_color,
 			      settings.link_color,
@@ -2340,10 +2269,8 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 	swbuf.append(buf);
 	g_free(buf);
 
-	swbuf.appendFormatted("<div dir=%s>",
-			      ((is_rtol && !ops->transliteration)
-			       ? "rtl"
-			       : "ltr"));
+	if (is_rtol && !ops->transliteration)
+		swbuf.append("<div ALIGN=right>");
 
 	gecko_html_write(html,swbuf.c_str(),swbuf.length());
 
@@ -2419,7 +2346,10 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 	key->Chapter(curChapter);
 	key->Verse(curVerse);
 
-	swbuf.append("</div></font></body></html>");
+	if (is_rtol && !ops->transliteration)
+		swbuf.append("</div></font></body></html>");
+	else
+		swbuf.append("</font></body></html>");
 
 	if (swbuf.length())
 		gecko_html_write(html,swbuf.c_str(),swbuf.length());

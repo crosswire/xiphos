@@ -24,8 +24,8 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
-
+#endif	
+	
 typedef struct _sidebar_search SIDESEARCH;
 struct _sidebar_search {
 	GtkWidget *rrbUseBounds;
@@ -45,7 +45,7 @@ struct _sidebar_search {
  	GtkWidget *radiobutton_search_comm;
 };
 extern SIDESEARCH ss;
-
+	
 void gui_search_update_sidebar(char percent, void *userData);
 void gui_create_search_sidebar(void);
 

@@ -23,7 +23,6 @@
 #include <config.h>
 #endif
 
-#include <glib.h>
 #include <gtk/gtk.h>
 #include <libxml/parser.h>
 //#include <gal/shortcut-bar/e-shortcut-bar.h>
@@ -149,17 +148,17 @@ void gui_verselist_to_bookmarks(GList * verses, gint save_as_single)
 				   bm_pixbufs->pixbuf_opened,
 				   COL_CLOSED_PIXBUF,
 				   bm_pixbufs->pixbuf_closed,
-				   COL_CAPTION, info->text1,
-				   COL_KEY, NULL,
-				   COL_MODULE, NULL,
+				   COL_CAPTION, info->text1, 
+				   COL_KEY, NULL, 
+				   COL_MODULE, NULL, 
 				   -1);
-//              set_results_position((char) 1); // TOP
+//              set_results_position((char) 1); // TOP 
 		str = g_string_new(" ");
 		while (verses) {
 			list_item = (RESULTS *) verses->data;
 			module_name = list_item->module;
 			tmpbuf = list_item->key;
-			g_string_printf(str, "%s, %s", tmpbuf,
+			g_string_sprintf(str, "%s, %s", tmpbuf,
 					 module_name);
 			GS_message(("bookmark: %s",str->str));
 			gtk_tree_store_append(GTK_TREE_STORE(model),
@@ -169,8 +168,8 @@ void gui_verselist_to_bookmarks(GList * verses, gint save_as_single)
 					   bm_pixbufs->pixbuf_helpdoc,
 					   COL_CLOSED_PIXBUF, NULL,
 					   COL_CAPTION, str->str,
-					   COL_KEY, tmpbuf,
-					   COL_MODULE, module_name,
+					   COL_KEY, tmpbuf, 
+					   COL_MODULE, module_name, 
 					   -1);
 			verses = g_list_next(verses);
 		}
@@ -192,7 +191,7 @@ void gui_verselist_to_bookmarks(GList * verses, gint save_as_single)
  *   void gui_save_old_bookmarks_to_new(GtkMenuItem * menuitem, gpointer user_data)
  *
  * Description
- *   save bookmark tree
+ *   save bookmark tree 
  *
  * Return value
  *   void
@@ -218,7 +217,7 @@ void gui_save_old_bookmarks_to_new(GNode * gnode)
  *   void get_xml_folder_data(xmlNodePtr cur, BOOKMARK_DATA * data)
  *
  * Description
- *    get date from xml bookmark folder and put into
+ *    get date from xml bookmark folder and put into 
  *    BOOKMARK_DATA structure
  *
  * Return value
@@ -248,7 +247,7 @@ static void get_xml_folder_data(xmlNodePtr cur, BOOKMARK_DATA * data)
  * Synopsis
  *   #include "gui/bookmarks_treeview.h"
  *
- *   void get_xml_bookmark_data(xmlNodePtr cur, BOOKMARK_DATA * data)
+ *   void get_xml_bookmark_data(xmlNodePtr cur, BOOKMARK_DATA * data)	
  *
  * Description
  *    get date from xml bookmark and put into BOOKMARK_DATA structure
@@ -270,7 +269,7 @@ static void get_xml_bookmark_data(xmlNodePtr cur, BOOKMARK_DATA * data)
 	data->closed = NULL;
 	mod1 = xmlGetProp(cur, (const xmlChar *)"modulename");
 	key = xmlGetProp(cur, (const xmlChar *)"key");
-	//caption = xmlGetProp(cur, "caption");
+	//caption = xmlGetProp(cur, "caption"); 
 	mod_desc = xmlGetProp(cur, (const xmlChar *)"moduledescription");
 	description = xmlGetProp(cur, (const xmlChar *)"description");
 	caption = xmlGetProp(cur, (const xmlChar *)"description");
@@ -328,8 +327,8 @@ static void free_bookmark_data(BOOKMARK_DATA * data)
  * Synopsis
  *   #include "gui/bookmarks_treeview.h"
  *
- *   GtkCTreeNode *gui_add_node_to_ctree(GtkCTree * ctree,
- *			GtkCTreeNode *node, BOOKMARK_DATA * data)
+ *   GtkCTreeNode *gui_add_node_to_ctree(GtkCTree * ctree, 
+ *			GtkCTreeNode *node, BOOKMARK_DATA * data)	
  *
  * Description
  *    actually add the GtkCTreeNode to the bookmark ctree
@@ -361,7 +360,7 @@ void gui_add_item_to_tree(GtkTreeIter * iter, GtkTreeIter * parent,
  *   #include "gui/bookmarks_treeview.h"
  *
  *   void add_node(xmlDocPtr doc, xmlNodePtr cur, GtkCTree * ctree,
-						GtkCTreeNode *node)
+						GtkCTreeNode *node)	
  *
  * Description
  *    parse the xml bookmarks and add to bookmark ctree
@@ -404,7 +403,7 @@ static void add_node(xmlNodePtr cur, GtkTreeIter * parent)
  * Synopsis
  *   #include "gui/bookmarks_treeview.h"
  *
- *   void gui_parse_bookmarks(GtkCTree * ctree)
+ *   void gui_parse_bookmarks(GtkCTree * ctree)	
  *
  * Description
  *    load a xml bookmark file
@@ -517,10 +516,10 @@ void gui_load_removed(const xmlChar * file)
  * Synopsis
  *   #include "gui/bookmarks_treeview.h"
  *
- *   void load_xml_bookmarks(GtkCTree * ctree)
+ *   void load_xml_bookmarks(GtkCTree * ctree)	
  *
  * Description
- *
+ *    
  *
  * Return value
  *   void
@@ -531,8 +530,8 @@ static void load_xml_bookmarks(GtkTreeView * tree, GtkTreeIter * iter)
 	GString *str;
 	const xmlChar *file;
 
-	str = g_string_new(NULL);
-	g_string_printf(str, "%s/bookmarks.xml", settings.swbmDir);
+	str = g_string_new(settings.swbmDir);
+	g_string_sprintf(str, "%s/bookmarks.xml", settings.swbmDir);
 	file = (const xmlChar *) str->str;
 	gui_parse_bookmarks(tree, file, iter);
 	g_string_free(str, TRUE);
@@ -550,7 +549,7 @@ static void load_xml_bookmarks(GtkTreeView * tree, GtkTreeIter * iter)
  *                             GtkTreeIter *arg2, gpointer user_data)
  *
  * Description
- *
+ *    
  *
  * Return value
  *   void
@@ -570,11 +569,11 @@ static void row_changed(GtkTreeModel * treemodel, GtkTreePath * arg1,
  * Synopsis
  *   #include "gui/bookmarks_treeview.h"
  *
- *   void row_deleted(GtkTreeModel * treemodel, GtkTreePath * arg1,
+ *   void row_deleted(GtkTreeModel * treemodel, GtkTreePath * arg1, 
  *							gpointer user_data)
  *
  * Description
- *
+ *    
  *
  * Return value
  *   void
@@ -598,7 +597,7 @@ static void row_deleted(GtkTreeModel * treemodel, GtkTreePath * arg1,
  *   void create_pixbufs(void)
  *
  * Description
- *
+ *    
  *
  * Return value
  *   void
@@ -611,30 +610,26 @@ static void create_pixbufs(void)
 	bm_pixbufs = g_new0(BookMarksPixbufs, 1);
 
 	if (dir == GTK_TEXT_DIR_LTR) {
-		/* leave this for if we make custom reversable icons
-		  if (!bm_pixbufs->pixbuf_closed)
-			bm_pixbufs->pixbuf_closed =
+		if (!bm_pixbufs->pixbuf_closed)
+			pixbufs->pixbuf_closed =
 				pixbuf_finder("book_closed.png", 16, NULL);
-		*/
-
-		bm_pixbufs->pixbuf_opened =
+		
+		pixbufs->pixbuf_opened =
 			pixbuf_finder("book_open.png", 16, NULL);
 	}
 	else {
-		/* leave this for if we make custom reversable icons
-		  if (!bm_pixbufs->pixbuf_closed)
-			bm_pixbufs->pixbuf_closed =
+		if (!bm_pixbufs->pixbuf_closed)
+			pixbufs->pixbuf_closed =
 				pixbuf_finder("book_closed_rtol.png", 16, NULL);
-		*/
-
-		bm_pixbufs->pixbuf_opened =
+		
+		pixbufs->pixbuf_opened =
 			pixbuf_finder("book_open_rtol.png", 16, NULL);
 	}
 
 	bm_pixbufs->pixbuf_closed =
 		pixbuf_finder("epiphany-bookmarks.png", 0, NULL);
 
-
+	
 	bm_pixbufs->pixbuf_helpdoc =
 		pixbuf_finder("epiphany-bookmark-page.png", 0, NULL);
 
@@ -655,7 +650,7 @@ static void create_pixbufs(void)
  *   void add_columns(GtkTreeView * tree)
  *
  * Description
- *
+ *    
  *
  * Return value
  *   void
@@ -731,9 +726,9 @@ void gui_add_columns(GtkTreeView * tree)
  *
  *   GtkTreeModel *create_model(void)
  *
- *
+ * 
  * Description
- *
+ *    
  *
  * Return value
  *   GtkTreeModel *
@@ -765,7 +760,7 @@ static GtkTreeModel *create_model(void)
  *
  * Description
  *   catch button 3 and select the row the pointer is over
- *   but does not display the bookmark
+ *   but does not display the bookmark 
  *
  * Return value
  *   void
@@ -805,17 +800,17 @@ static gboolean button_release_event(GtkWidget * widget,
 			gtk_widget_set_sensitive(menu.insert, FALSE);
 			gtk_widget_set_sensitive(menu.remove, FALSE);
 		} else {
-			/* click on treeview folder to expand or collapse it */
+			/* click on treeview folder to expand or collapse it */			
 			path = gtk_tree_model_get_path(
 					GTK_TREE_MODEL (model), &selected);
 			if (gtk_tree_view_row_expanded (bookmark_tree, path))
-			       gtk_tree_view_collapse_row (bookmark_tree,
+			       gtk_tree_view_collapse_row (bookmark_tree, 
 							   path);
 			else
-			       gtk_tree_view_expand_row (bookmark_tree,
+			       gtk_tree_view_expand_row (bookmark_tree, 
 							 path, FALSE);
 			gtk_tree_path_free ( path );
-
+			
 			gtk_widget_set_sensitive(menu.in_tab, FALSE);
 			gtk_widget_set_sensitive(menu.in_dialog, FALSE);
 			gtk_widget_set_sensitive(menu.new, TRUE);
@@ -823,7 +818,8 @@ static gboolean button_release_event(GtkWidget * widget,
 			gtk_widget_set_sensitive(menu.remove, TRUE);
 		}
 
-		gtk_widget_set_sensitive(menu.bibletime, TRUE);
+		gtk_widget_set_sensitive(menu.bibletime,
+					 settings.have_bibletime);
 		gtk_widget_set_sensitive(menu.edit, TRUE);
 		gtk_widget_set_sensitive(menu.delete, TRUE);
 		is_selected = TRUE;
@@ -842,10 +838,10 @@ static gboolean button_release_event(GtkWidget * widget,
 		gtk_menu_popup(GTK_MENU(menu.menu),
 			       NULL, NULL, NULL, NULL,
 			       event->button, event->time);
-
-		if (!settings.browsing)
+		
+		if(!settings.browsing)  
 			gtk_widget_hide(menu.in_tab);
-
+		
 		if (GTK_CHECK_MENU_ITEM(menu.reorder)->active) {
 			gtk_widget_set_sensitive(menu.in_tab, FALSE);
 			gtk_widget_set_sensitive(menu.in_dialog, FALSE);
@@ -853,12 +849,15 @@ static gboolean button_release_event(GtkWidget * widget,
 			gtk_widget_set_sensitive(menu.insert, FALSE);
 			gtk_widget_set_sensitive(menu.edit, FALSE);
 			gtk_widget_set_sensitive(menu.delete, FALSE);
-			gtk_widget_set_sensitive(menu.bibletime, TRUE);
+			gtk_widget_set_sensitive(menu.bibletime, FALSE);
 			gtk_widget_set_sensitive(menu.remove, FALSE);
 			//gtk_widget_set_sensitive(menu.remove, FALSE);
+			//gtk_widget_set_sensitive(menu.restore, FALSE);
 			return TRUE;
 		} else {
-			gtk_widget_set_sensitive(menu.bibletime, TRUE);
+			gtk_widget_set_sensitive(menu.bibletime,
+						 settings.
+						 have_bibletime);
 			return FALSE;
 		}
 		break;
@@ -866,19 +865,19 @@ static gboolean button_release_event(GtkWidget * widget,
 	}
 	if (is_selected) {
 		if (!gtk_tree_model_iter_has_child
-		    (GTK_TREE_MODEL(model), &selected) && key != NULL) {
-			if (!strcmp(module,"studypad"))
+		    (GTK_TREE_MODEL(model), &selected) && key != NULL) {			
+			if(!strcmp(module,"studypad"))
 				url =
 				    g_strdup_printf
-				    ("passagestudy.jsp?action=showStudypad&"
+				    ("xiphos.url?action=showStudypad&"
 				     "type=9&value=%s&module=%s",
 				     main_url_encode(key),
 				     main_url_encode(module));
-
+				
 			else
 				url =
 				    g_strdup_printf
-				    ("passagestudy.jsp?action=showBookmark&"
+				    ("xiphos.url?action=showBookmark&"
 				     "type=%s&value=%s&module=%s",
 				     (button_one) ? "currentTab" : "newTab",
 				     main_url_encode(key),
@@ -919,7 +918,7 @@ g_message("on_treeview_modules_drag_drop");
  *   GtkWidget *gui_create_bookmark_tree(void)
  *
  * Description
- *
+ *    
  *
  * Return value
  *   GtkWidget*
@@ -946,7 +945,7 @@ GtkWidget *gui_create_bookmark_tree(void)
 
 	load_xml_bookmarks(GTK_TREE_VIEW(tree), &iter);
 	/*g_signal_connect(G_OBJECT(tree),
-	   "row-collapsed",
+	   "row-collapsed", 
 	   G_CALLBACK(expand_release_cursor_row),
 	   NULL); */
 	/*

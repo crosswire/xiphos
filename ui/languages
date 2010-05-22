@@ -65,8 +65,8 @@ ceb	Sinugboanong Binisaya
 ch	Chamoru
 # Corsican
 co	Corsu
-# Coptic
-cop	ⲙⲛⲧⲣⲙⲛⲕⲏⲙⲉ
+# Coptic (missing font: untranslated) ⲙⲛⲧⲣⲙⲛⲕⲏⲙⲉ
+cop	Coptic
 # Czech
 cs	Česky
 # Church Slavic
@@ -210,8 +210,8 @@ mr	मराठी
 ms	Bahasa Melayu
 # Maltese
 mt	Malti
-# Burmese (Myanmar)
-my	မြန်မာစာ
+# Burmese (missing font: untranslated) မြန်မာစာ
+my	Burmese
 # Nauruan
 na	Dorerin Naoero
 # correct: Norwegian Bokmål
@@ -2727,8 +2727,7 @@ hii	Hinduri
 hij	Hijuk
 hik	Seit-Kaitetu
 hil	Hiligaynon
-# Hindi
-hin	हिन्दी
+hin	Hindi
 hio	Tsoa
 hir	Himarimã
 hit	Hittite
@@ -3163,8 +3162,7 @@ kaj	Jju
 kak	Kayapa Kallahan
 kal	Kalaallisut
 kam	Kamba (Kenya)
-# Kannada
-kan	ಕನ್ನಡ
+kan	Kannada
 kao	Xaasongaxango
 kap	Bezhta
 kaq	Capanahua
@@ -4150,8 +4148,7 @@ mah	Marshallese
 mai	Maithili
 maj	Jalapa De Díaz Mazatec
 mak	Makasar
-# Malayalam
-mal	മലയാളം
+mal	Malayalam
 mam	Northern Mam
 man	Mandingo
 maq	Chiquihuitlán Mazatec
@@ -6511,8 +6508,7 @@ tah	Tahitian
 taj	Eastern Tamang
 tak	Tala
 tal	Tal
-# Tamil
-tam	தமிழ்
+tam	Tamil
 tan	Tangale
 tao	Yami
 tap	Taabwa
@@ -6605,8 +6601,7 @@ teg	Teke-Tege
 teh	Tehuelche
 tei	Torricelli
 tek	Ibali Teke
-# Telugu
-tel	తెలుగు
+tel	Telugu
 tem	Timne
 ten	Tama (Colombia)
 teo	Teso

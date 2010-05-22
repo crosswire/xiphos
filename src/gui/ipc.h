@@ -67,7 +67,7 @@ struct _IpcObjectClass {
 
 GType ipc_object_get_type(void);
 
-gboolean ipc_object_search_performed (IpcObject* obj,
+gboolean ipc_object_search_performed (IpcObject* obj, 
 				      const gchar* search_term,
 				      const int* hits,
 				      GError** error);

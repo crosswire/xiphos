@@ -1,6 +1,6 @@
 /*
  * Xiphos Bible Study Tool
- * treekey-editor.h -
+ * treekey-editor.h - 
  *
  * Copyright (C) 2007-2009 Xiphos Developer Team
  *
@@ -18,7 +18,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-
+ 
 #ifndef _TREEKEY_EDITOR_H
 #define _TREEKEY_EDITOR_H
 

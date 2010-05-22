@@ -1,7 +1,7 @@
 /*
  * Xiphos Bible Study Tool
- * link_dialog.c - dialog for inserting a link
- *
+ * link_dialog.c - dialog for inserting a link 
+ * 
  * Copyright (C) 2005-2009 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -19,9 +19,10 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-
+ 
 #include <config.h>
-
+ 
+#ifdef USE_GTKHTML3_14_23
 
 #include <gtk/gtk.h>
 #include <sys/types.h>
@@ -30,7 +31,7 @@
 #include <editor/gtkhtml-editor.h>
 #include <gtkhtml/gtkhtml-stream.h>
 
-
+ 
 
 #include "editor/slib-editor.h"
 #include "editor/link_dialog.h"
@@ -46,16 +47,17 @@ static GtkWidget *window;
 static GtkWidget *entry_module;
 static GtkWidget *entry_verse;
 static GtkWidget *entry_text;
-static GtkWidget *linkage_verse_list;
 
 
 G_MODULE_EXPORT
 void entry_verse_changed_cb(GtkObject *object, EDITOR *e)
 {
+
 	const gchar *verse_str = NULL;
 
 	verse_str = gtk_entry_get_text (GTK_ENTRY (object));
 	gtk_entry_set_text(GTK_ENTRY (entry_text),verse_str);
+
 }
 
 G_MODULE_EXPORT
@@ -74,23 +76,24 @@ void button_ok_clicked_cb(GtkObject *object, EDITOR *e)
 	text_str = gtk_entry_get_text (GTK_ENTRY (entry_text));
 
 	type = main_get_mod_type((gchar*)mod_str);
-
+	
 	if (mod_str)
 		encoded_mod = main_url_encode(mod_str);
-	if (verse_str)
-		encoded_verse = main_url_encode(verse_str);
+	encoded_verse = main_url_encode(verse_str);
 
-	g_string_printf(str,
-			(((GTK_TOGGLE_BUTTON(linkage_verse_list)->active) &&
-			  ((type == -1) ||
-			   (type == TEXT_TYPE) ||
-			   (type == COMMENTARY_TYPE)))
-			 ? "<a href=\"passagestudy.jsp?action=showRef&type=scripRef&module=%s&value=%s\">%s</a>"
-			 : "<a href=\"sword://%s/%s\">%s</a>"),
-			(encoded_mod   ? encoded_mod   : ""),
-			(encoded_verse ? encoded_verse : ""),
-			(text_str      ? text_str      : ""));
-
+	switch (type) {
+		case -1:
+		case TEXT_TYPE:
+			g_string_printf(str,"<a href=\"xiphos.url?action=showRef&type=scripRef&value=%s&module=%s\">%s</a>", encoded_verse, encoded_mod, text_str);
+			break;
+		case COMMENTARY_TYPE:
+		case DICTIONARY_TYPE:
+		case BOOK_TYPE:
+		case PRAYERLIST_TYPE:
+			g_string_printf(str,"<a href=\"sword://%s/%s\">%s</a>", encoded_mod, encoded_verse, text_str);
+			break;
+	}
+	
 	GS_message (("link: %s", str->str));
 	gtkhtml_editor_insert_html (GTKHTML_EDITOR (e->window), str->str);
 	g_string_free (str, TRUE);
@@ -111,21 +114,16 @@ void button_test_clicked_cb(GtkObject *object, gpointer user_data)
 
 	mod_str = gtk_entry_get_text (GTK_ENTRY (entry_module));
 	verse_str = gtk_entry_get_text (GTK_ENTRY (entry_verse));
-
-	if (mod_str)
-		encoded_mod = main_url_encode(mod_str);
-	if (verse_str)
-		encoded_verse = main_url_encode(verse_str);
-
-	g_string_printf(str,
-			"passagestudy.jsp?action=showRef&type=scripRef&module=%s&value=%s",
-			(encoded_mod   ? encoded_mod   : ""),
-			(encoded_verse ? encoded_verse : ""));
+	
+	encoded_mod = main_url_encode(mod_str);
+	encoded_verse = main_url_encode(verse_str);
+	 
+	g_string_printf(str,"passagestudy.jsp?action=showRef&type=scripRef&value=%s&module=%s", encoded_verse, encoded_mod);
 	GS_message (("link: %s", str->str));
 	main_url_handler(str->str, TRUE);
 	g_string_free (str, TRUE);
 	g_free((gchar*)encoded_mod);
-	g_free((gchar*)encoded_verse);
+	g_free((gchar*)encoded_verse);       
 }
 
 G_MODULE_EXPORT
@@ -134,30 +132,33 @@ void button_cancel_clicked_cb(GtkObject *object, gpointer user_data)
         gtk_widget_destroy(GTK_WIDGET(window));
 }
 
+
 void
 editor_link_dialog (EDITOR *e)
 {
+	
         GtkBuilder *builder;
 	gchar *gbuilder_file;
-
+	
 	GtkHTML  *html = gtkhtml_editor_get_html (GTKHTML_EDITOR(e->window));
 	if (html->pointer_url)  /* are we in a link */
 		return;		/* if so don't do anything */
-
+        
         builder = gtk_builder_new ();
 	gbuilder_file = gui_general_user_file ("editor_link_dialog.xml", FALSE);
         gtk_builder_add_from_file (builder, gbuilder_file, NULL);
-
+ 
         window = GTK_WIDGET (gtk_builder_get_object (builder, "dialog1"));
 	set_window_icon (GTK_WINDOW(window));
-        gtk_builder_connect_signals (builder,(EDITOR*) e);
+        gtk_builder_connect_signals (builder,(EDITOR*) e); 
 
-	entry_module       = GTK_WIDGET (gtk_builder_get_object (builder, "entry_module"));
-	entry_verse        = GTK_WIDGET (gtk_builder_get_object (builder, "entry_verse"));
-	entry_text         = GTK_WIDGET (gtk_builder_get_object (builder, "entry_text"));
-	linkage_verse_list = GTK_WIDGET (gtk_builder_get_object (builder, "radio_verse_list"));
-
-        g_object_unref (G_OBJECT (builder));
-        gtk_widget_show (window);
+	entry_module = GTK_WIDGET (gtk_builder_get_object (builder, "entry_module"));
+	entry_verse = GTK_WIDGET (gtk_builder_get_object (builder, "entry_verse"));
+	entry_text = GTK_WIDGET (gtk_builder_get_object (builder, "entry_text"));
+	
+        g_object_unref (G_OBJECT (builder));        
+        gtk_widget_show (window); 
 }
 /************* end link dialog ****************/
+
+#endif /* USE_GTKHTML3_14_23 */

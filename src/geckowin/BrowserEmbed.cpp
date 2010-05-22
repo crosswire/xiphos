@@ -224,7 +224,7 @@ nsresult BrowserEmbed::resize(int x, int y, int width, int height)
 {
     nsCOMPtr<nsIBaseWindow>browserBaseWindow(
             do_QueryInterface(mWebBrowser));
-    if (!browserBaseWindow) return NS_ERROR_FAILURE;
+    if(!browserBaseWindow) return NS_ERROR_FAILURE;
     return browserBaseWindow->SetPositionAndSize(x, y, width, height,
             PR_TRUE);
 }
@@ -234,7 +234,7 @@ nsresult BrowserEmbed::focus()
 {
     nsCOMPtr<nsIWebBrowserFocus> browserFocus(
             do_GetInterface(mWebBrowser));
-    if (!browserFocus) return NS_ERROR_FAILURE;
+    if(!browserFocus) return NS_ERROR_FAILURE;
     return browserFocus->Activate();
 }
 
@@ -397,13 +397,13 @@ NS_IMETHODIMP BrowserEmbed::ExitModalEventLoop(nsresult aStatus)
 //*****************************************************************************   
 NS_IMETHODIMP BrowserEmbed::FocusNextElement()
 {
-    if (mFocusCallback) mFocusCallback(PR_TRUE, mFocusCallbackData);
+    if(mFocusCallback) mFocusCallback(PR_TRUE, mFocusCallbackData);
     return NS_OK;
 }
 
 NS_IMETHODIMP BrowserEmbed::FocusPrevElement()
 {
-    if (mFocusCallback) mFocusCallback(PR_FALSE, mFocusCallbackData);
+    if(mFocusCallback) mFocusCallback(PR_FALSE, mFocusCallbackData);
     return NS_OK;
 }
 
@@ -559,11 +559,11 @@ NS_IMETHODIMP BrowserEmbed::SetParentContentListener(nsIURIContentListener * aPa
 /* void onStateChange (in nsIWebProgress aWebProgress, in nsIRequest aRequest, in unsigned long aStateFlags, in nsresult aStatus); */
 NS_IMETHODIMP BrowserEmbed::OnStateChange(nsIWebProgress *aWebProgress, nsIRequest *aRequest, PRUint32 aStateFlags, nsresult aStatus)
 {
-    if ((aStateFlags & nsIWebProgressListener::STATE_IS_NETWORK) &&
+    if((aStateFlags & nsIWebProgressListener::STATE_IS_NETWORK) &&
             mNetworkCallback) {
-        if (aStateFlags & nsIWebProgressListener::STATE_START) {
+        if(aStateFlags & nsIWebProgressListener::STATE_START) {
             mNetworkCallback(PR_TRUE, mNetworkCallbackData);
-        } else if (aStateFlags & nsIWebProgressListener::STATE_STOP) {
+        } else if(aStateFlags & nsIWebProgressListener::STATE_STOP) {
             mNetworkCallback(PR_FALSE, mNetworkCallbackData);
         }
     }
@@ -642,6 +642,14 @@ BrowserEmbed::ProcessMouseDblClickEvent (void* aEvent)
 	nsCOMPtr<nsIDOMMouseEvent> event (do_QueryInterface (domEvent));
 	if (!event) return 0;
 	
+#ifdef DEBUG
+#ifndef HAVE_GECKO_1_9
+	domEvent->GetType(aType);
+	gchar mybuf[80];
+	aType.ToCString( mybuf, 79);
+	g_warning("domEvent->GetType: %s",mybuf);
+#endif
+#endif
 	gtk_editable_delete_text((GtkEditable *)widgets.entry_dict,0,-1);
 	
 	DoCommand("cmd_copy");
@@ -668,13 +676,13 @@ BrowserEmbed::ProcessMouseEvent (void* aEvent)
 	
 	GS_message(("mouse button: %d",button));	
 	
-	if (button == 1) shift_key_pressed = TRUE; 
+	if(button == 1) shift_key_pressed = TRUE; 
 	
 	/* Mozilla uses 2 as its right mouse button code */
 	if (button != 2) return 0;	
 
 	GS_message(("g_signal_emit_by_name"));
-	if (mWebBrowser)
+	if(mWebBrowser)
 		g_signal_emit_by_name (mWebBrowser, "popupmenu_requested", NULL);  //,
 			        // NS_ConvertUTF16toUTF8 (href).get());
 	return 1;	
@@ -703,7 +711,9 @@ BrowserEmbed::ProcessMouseOver (void* aEvent, int pane,
 				gboolean is_dialog, DIALOG_DATA *dialog)
 {
   GS_message(("in mouse over"));
+#ifdef HAVE_GECKO_1_9
 	extern gboolean in_url;
+#endif
 	PRBool aShiftKey;
 
 	nsIDOMMouseEvent *event = (nsIDOMMouseEvent*) aEvent;
@@ -714,10 +724,12 @@ BrowserEmbed::ProcessMouseOver (void* aEvent, int pane,
 		return FALSE;
 	if (pane == VIEWER_TYPE)
 		return FALSE;
+#ifdef HAVE_GECKO_1_9
 	if (in_url) {
 		in_url = FALSE;
 		return FALSE;
 	}
+#endif
 	main_clear_viewer();
 	return FALSE;
 }
@@ -882,7 +894,7 @@ BrowserEmbed::GetListener(void)
 	nsCOMPtr<nsPIDOMWindow> piWin;
 	GetPIDOMWindow(getter_AddRefs(piWin));
 
-	if (!piWin)
+	if(!piWin)
 		return;
 	GS_message(("in get listener"));
 	mEventTarget = do_QueryInterface(piWin->GetChromeEventHandler());
@@ -928,7 +940,16 @@ BrowserEmbed::FindAgain (PRBool aForward)
 	
 	nsresult rv;
 	PRUint16 found = nsITypeAheadFind::FIND_NOTFOUND;
+#ifdef HAVE_GECKO_1_9
 	rv = mFinder->FindAgain (!aForward, PR_FALSE, &found);
+#else
+	if (aForward) {
+		rv = mFinder->FindNext (&found);
+	}
+	else {
+		rv = mFinder->FindPrevious (&found);
+	}
+#endif
 
 	return NS_SUCCEEDED (rv) && (found == nsITypeAheadFind::FIND_FOUND
 				     || found == nsITypeAheadFind::FIND_WRAPPED);
@@ -952,7 +973,9 @@ BrowserEmbed::SetSelectionAttention (PRBool aAttention)
 		display = nsISelectionController::SELECTION_ON;
 	}
 
+#ifdef HAVE_GECKO_1_9
 	mFinder->SetSelectionModeAndRepaint (display);
+#endif
 	nsresult rv;
 	nsCOMPtr<nsIDocShell> shell (do_GetInterface (mWebBrowser, &rv));
 

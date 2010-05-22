@@ -24,7 +24,7 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
+#endif	
 
 typedef struct _shortcutbar_viewer SB_VIEWER;
 struct _shortcutbar_viewer {
@@ -43,7 +43,7 @@ extern SB_VIEWER *sv;
 void gui_display_devotional(void);
 void gui_show_sb_verseList(void);
 gboolean gui_display_dictlex_in_viewer(char *modName, char *key);
-void gui_display_verse_list(gchar * key, gchar *module_name,
+void gui_display_verse_list(gchar * key, gchar *module_name, 
 						gchar *verse_list);
 GtkWidget * gui_create_shortcutbar_viewer(GtkWidget *vp);
 

@@ -3,7 +3,7 @@
 
 
 #define E_MAKE_TYPE(l,str,t,ci,i,parent) \
-GType l##_get_type(void)\
+GtkType l##_get_type(void)\
 {\
 	static GType type = 0;				\
 	if (!type){					\

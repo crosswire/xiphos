@@ -1,7 +1,7 @@
 /*
  * Xiphos Bible Study Tool
  * mod_mgr.h
- *
+ * 
  * Copyright (C) 2000-2009 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -24,7 +24,7 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
+#endif	
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -87,10 +87,10 @@ void mod_mgr_init_config(void);
 int mod_mgr_init_config_extras(void);
 void mod_mgr_clear_config(void);
 void mod_mgr_reread_config(void);
-void mod_mgr_add_source(const char * vtype,
-			const char * type,
-			const char * caption,
-			const char * source,
+void mod_mgr_add_source(const char * vtype, 
+			const char * type, 
+			const char * caption, 
+			const char * source, 
 			const char * directory,
 			const char * user,
 			const char * pass,

@@ -18,7 +18,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-
+ 
 #ifndef __HTML_H_
 #define __HTML_H_
 
@@ -30,7 +30,7 @@ extern "C" {
 
 extern gboolean in_url;
 
-void url_requested (GtkHTML *html, const gchar *url, GtkHTMLStream *handle);
+void url_requested (GtkHTML *html, const gchar *url, GtkHTMLStream *handle);	
 void gui_url(GtkHTML * html, const gchar * url, gpointer data);
 void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data);
 void gui_prefixable_link_clicked(GtkHTML * html, const gchar * url, gpointer data, const gchar *book);

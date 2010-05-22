@@ -27,8 +27,7 @@
 ;--------------------------------
 ; Unicode NSIS note:
 
-    ; every source file for Unicode NSIS needs to be in UTF-8 (Unicode NSIS >= 2.42)
-    ; or in UTF-16LE otherwise
+    ; every source file for Unicode NSIS needs to be in UTF-16LE
     ; doesn't support win9x
 
 ;--------------------------------
@@ -44,19 +43,20 @@
     !define APP_NAME "Xiphos"
     !define INSTALLER_NAME "xiphos"
     !define APP_BINARY_NAME "xiphos.exe"
-    !define APP_VERS "3.1.3"
+    !define APP_VERS "3.1.2"
     !define APP_EDITION "win32"
     !define APP_URL "http://xiphos.org"
 
     ; Paths with application files for installer
     !define PATH_CORE "..\binaries\Xiphos"
+    !define PATH_W2K "..\binaries\win2k"
     !define PATH_IMG "pixmaps"
     !define PATH_FONT "..\fonts"
 
     ; Folder in ALLUSERSAPPS/Application Data/ for Sword files
     ; the string 'Application Data' maybe also localized in
     ; different Win32 versions.
-    ; e.g. in Czech Windows it is 'Data aplikací'
+    ; e.g. in Czech Windows it is 'Data aplikacÃ­'
     !define INSTPATH_SWORD "Sword"
 
     ; Files
@@ -85,6 +85,13 @@
     !define SWURL_REG_KEY "sword"
     !define SWURL_REG_KEY_ICON "${SWURL_REG_KEY}\DefaultIcon"
     !define SWURL_REG_KEY_COMMAND "${SWURL_REG_KEY}\shell\open\command"
+
+    ; Windows version detection
+    ; http://nsis.sourceforge.net/Windows_Version_Detection
+    !define WINVER_REG_ROOT "HKLM" # HKEY_LOCAL_MACHINE
+    !define WINVER_REG_KEY "SOFTWARE\Microsoft\Windows NT\CurrentVersion"
+    !define WINVER_IS_W2K "5.0"
+    !define W2K_F "${PATH_W2K}\*.*"
 
 
 ;--------------------------------
@@ -290,6 +297,22 @@ Section $(CORE_SEC_TITLE) SecCore
 
         File /r "${CORE_F}"
 
+        ;; Install special files for Windows 2000
+        
+        ; detected Windows version
+        Push $R0 # read w2k version
+        Push $R1
+        ReadRegStr $R0 ${WINVER_REG_ROOT} "${WINVER_REG_KEY}" CurrentVersion
+        StrCpy $R1 $R0 3
+
+        ; if is win2k
+        StrCmp $R1 "${WINVER_IS_W2K}" label_win2k label_not_win2k
+        label_win2k:
+            ; overwrite files with w2k specific
+            File /r "${W2K_F}"
+
+        label_not_win2k:
+        
     !insertmacro UNINSTALL.LOG_CLOSE_INSTALL
 
     ; Shared folder for Sword modules must exist

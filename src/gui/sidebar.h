@@ -29,7 +29,7 @@ extern "C" {
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-
+	
 typedef struct _sidebar SIDEBAR;
 struct _sidebar {
 	GtkWidget *module_list;
@@ -93,7 +93,6 @@ void on_outlined_topic_activate(GtkMenuItem *menuitem, gpointer user_data);
 GtkWidget *create_menu_prayerlist(void);
 void on_edit_activate(GtkMenuItem *menuitem, gpointer user_data);
 GtkWidget *create_menu_prayerlist_mod(void);
-void gui_menu_prayerlist_popup(GtkMenuItem *menuitem, gpointer user_data);
 
 #ifdef __cplusplus
 }

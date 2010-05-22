@@ -25,7 +25,12 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+#ifdef HAVE_GECKO_1_9
 #include <nsStringAPI.h>
+#else
+#define MOZILLA_INTERNAL_API
+#include <nsString.h>
+#endif
 
 #ifdef NS_HIDDEN
 # undef NS_HIDDEN
@@ -60,9 +65,17 @@
 #include <nsIWebBrowserPrint.h>
 #include <nsIWebBrowserSetup.h>
 #include <nsServiceManagerUtils.h>
-#include <nsIPresShell.h>
+#include <nsIPresShell.h> 
 #include <nsIDOMNamedNodeMap.h>
 //#include <nsIFrame.h>
+
+#ifndef HAVE_GECKO_1_9
+#include <nsIDocShell.h>
+#include <nsIDocShellTreeItem.h>
+#include <nsISelectionDisplay.h>
+#include <nsISimpleEnumerator.h>
+#include <nsITypeAheadFind.h>
+#endif /* !HAVE_GECKO_1_9 */
 
 #include "gecko/gecko-services.h"
 
@@ -127,6 +140,12 @@ Yelper::Init ()
 	rv = mFinder->Init (docShell);
 	NS_ENSURE_SUCCESS (rv, rv);
 
+#ifdef HAVE_GECKO_1_9
+//	mFinder->SetSelectionModeAndRepaint (nsISelectionController::SELECTION_ON);
+#else
+	mFinder->SetFocusLinks (PR_TRUE);
+#endif
+
 	mInitialised = PR_TRUE;
 
 	nsCOMPtr<nsIPrefService> prefService = do_GetService (NS_PREFSERVICE_CONTRACTID);
@@ -163,9 +182,9 @@ void Yelper::JumpToAnchor(const char *anchor)
 {
 	nsAutoString aAnchorName;
 	nsresult rv, result;
-
+	
 	aAnchorName.Assign(NS_ConvertUTF8toUTF16(anchor));
-
+	
 	nsCOMPtr<nsIDocShell> docShell (do_GetInterface (mWebBrowser, &rv));
 
 	if ( !docShell  ) {
@@ -176,11 +195,11 @@ void Yelper::JumpToAnchor(const char *anchor)
 
 	nsCOMPtr<nsIPresShell> presShell;
 	result = docShell->GetPresShell(getter_AddRefs(presShell));
-	if (!NS_SUCCEEDED(result) || (!presShell))
+	if (!NS_SUCCEEDED(result) || (!presShell)) 
 		return;
-
+		
 	presShell->GoToAnchor(aAnchorName, 1);
-
+	
 }
 void
 Yelper::SetFindProperties (const char *aSearchString,
@@ -206,11 +225,17 @@ Yelper::Find (const char *aSearchString)
 
 	nsresult rv;
 	PRUint16 found = nsITypeAheadFind::FIND_NOTFOUND;
-
+	
+#ifdef HAVE_GECKO_1_9
 	rv = mFinder->Find (NS_ConvertUTF8toUTF16 (aSearchString),
 			    PR_FALSE ,//  links only? *
 			    //mHasFocus,
 			    &found);
+#else
+	rv = mFinder->Find (NS_ConvertUTF8toUTF16 (aSearchString),
+			    PR_FALSE, //  links only? *
+			    &found);
+#endif
 
 	return NS_SUCCEEDED (rv) && (found == nsITypeAheadFind::FIND_FOUND || found == nsITypeAheadFind::FIND_WRAPPED);
 }
@@ -224,8 +249,16 @@ Yelper::FindAgain (PRBool aForward)
 
 	nsresult rv;
 	PRUint16 found = nsITypeAheadFind::FIND_NOTFOUND;
-
+#ifdef HAVE_GECKO_1_9
 	rv = mFinder->FindAgain (!aForward, mHasFocus, &found);
+#else
+	if (aForward) {
+		rv = mFinder->FindNext (&found);
+	}
+	else {
+		rv = mFinder->FindPrevious (&found);
+	}
+#endif /* HAVE_GECKO_1_9 */
 
 	return NS_SUCCEEDED (rv) && (found == nsITypeAheadFind::FIND_FOUND || found == nsITypeAheadFind::FIND_WRAPPED);
 }
@@ -235,9 +268,9 @@ Yelper::SetSelectionAttention (PRBool aAttention)
 {
 #if 0
 	if (aAttention == mSelectionAttention) return;
-
+	
 	mSelectionAttention = aAttention;
-
+	
 	NS_ENSURE_TRUE (mFinder, );
 
 	PRInt16 display;
@@ -248,14 +281,16 @@ Yelper::SetSelectionAttention (PRBool aAttention)
 		display = nsISelectionController::SELECTION_ON;
 	}
 
+#ifdef HAVE_GECKO_1_9
 	mFinder->SetSelectionModeAndRepaint (display);
+#else
 	nsresult rv;
 	nsCOMPtr<nsIDocShell> shell (do_GetInterface (mWebBrowser, &rv));
 	/* It's okay for this to fail, if the tab is closing, or if
 	* we weren't attached to any tab yet
 	*/
 	if (NS_FAILED (rv) || !shell) return;
-
+	
 	nsCOMPtr<nsISimpleEnumerator> enumerator;
 	rv = shell->GetDocShellEnumerator (nsIDocShellTreeItem::typeContent,
 					   nsIDocShell::ENUMERATE_FORWARDS,
@@ -267,45 +302,141 @@ Yelper::SetSelectionAttention (PRBool aAttention)
 		nsCOMPtr<nsISupports> element;
 		enumerator->GetNext (getter_AddRefs (element));
 		if (!element) continue;
-
+	
 		nsCOMPtr<nsISelectionDisplay> sd (do_GetInterface (element));
 		if (!sd) continue;
-
+	
 		nsCOMPtr<nsISelectionController> controller (do_QueryInterface (sd));
 		if (!controller) continue;
-
+	
 		controller->SetDisplaySelection (display);
 	}
+#endif /* HAVE_GECKO_1_9 */
 #endif /* 0 */
 }
 
 // Nautilus CREDITS here
-
+ 
 gint
-Yelper::ProcessMouseOver (void* aEvent, int pane,
+Yelper::ProcessMouseOver (void* aEvent, int pane, 
 			  gboolean is_dialog, DIALOG_DATA * dialog)
 {
+#ifdef HAVE_GECKO_1_9
 	extern gboolean in_url;
+#endif
 	PRBool aShiftKey;
 
 	//GS_message(("mouse over pane: %d",pane));
-	nsIDOMMouseEvent *event = (nsIDOMMouseEvent*) aEvent;
+	nsIDOMMouseEvent *event = (nsIDOMMouseEvent*) aEvent;	
 	//DIALOG_DATA *dialog = (DIALOG_DATA *)data;
 	event->GetShiftKey(&aShiftKey);
-	if (aShiftKey)  {
+	if(aShiftKey)  {    
 	       return 1;
 	}
-	if (shift_key_pressed)
+	if(shift_key_pressed)
 		return FALSE;
-	if (pane == VIEWER_TYPE)
+	if(pane == VIEWER_TYPE)
 		return FALSE;
-	if (in_url) {
+#ifdef HAVE_GECKO_1_9
+	if(in_url) {
 		in_url = FALSE;
 		return FALSE;
 	}
+#endif
 	main_clear_viewer();
-	return FALSE;
+	/*
+	nsCOMPtr<nsIDOMNSEvent> nsEvent = do_QueryInterface(event, &result);
+	if (NS_FAILED(result) || !nsEvent) {
+		
+		GS_message(("nsEvent failed %d",NS_ERROR_FAILURE));
+		return NS_ERROR_FAILURE;
+	}
+
+	nsCOMPtr<nsIDOMEventTarget> OriginalTarget;
+	result = nsEvent->GetOriginalTarget(getter_AddRefs(OriginalTarget));
+	if (NS_FAILED(result) || !OriginalTarget) {
+		
+		GS_message(("OriginalTarget failed %d",NS_ERROR_FAILURE));
+		return NS_ERROR_FAILURE;
+	}
+
+	nsCOMPtr<nsIDOMNode> OriginalNode = do_QueryInterface(OriginalTarget);
+	if (!OriginalNode) {
+		
+		GS_message(("OriginalNode failed %d",NS_ERROR_FAILURE));
+		return NS_ERROR_FAILURE;
+	}
+	
+	nsAutoString node_name;
+	OriginalNode->GetNodeName(node_name);
+	//gchar mybuf[80];
+	//node_name.ToCString( mybuf, 12);
+	//g_message("node name: %s", mybuf);
+	if(node_name.EqualsIgnoreCase("a")) {
+		PRBool _retval;
+		OriginalNode->HasAttributes(&_retval);
+		if(_retval) {
+			gchar *tmp = GetAttribute(OriginalNode,"href");
+			if (tmp && strlen(tmp)) {
+				GString *url_clean = g_string_new(NULL);
+				const gchar *url_chase;
+				int i = 0;
+				for (url_chase = tmp; *url_chase; ++url_chase) {
+					switch (*url_chase) {
+					case '/':
+						if(i > 2)
+							g_string_append(url_clean, "%2F");
+						else
+							g_string_append_c(url_clean, *url_chase);
+						++i;
+						break;
+					default:
+							g_string_append_c(url_clean, *url_chase);
+						break;
+					}
+				}
+				if(is_dialog) 
+					main_dialogs_url_handler(dialog, url_clean->str, FALSE);
+				else 
+					main_url_handler(url_clean->str, FALSE);
+				g_string_free(url_clean, TRUE);	
+				g_free(tmp);
+			}
+		}
+	}*/
+	return FALSE;	
 }
+/*
+void get_clipboard_text (GtkClipboard *clipboard, const gchar *text, gpointer data)
+{
+	char *key = NULL;
+	gchar *dict = NULL;
+	int len = 0;
+	//GS_message(("\nget_clipboard_text:\ntext = %s",text));
+	GS_message(("src/gecko/Yelper.cpp: text =>%s<",text));
+	if(text == NULL) return;
+	key = g_strdelimit((char*)text, "&.,\"<>;:?", ' ');
+	key = g_strstrip((char*)key);
+	len = strlen(key);
+	
+	if (key[len - 1] == 's' || key[len - 1] == 'd')
+		key[len - 1] = '\0';
+	if (key[len - 1] == 'h' && key[len - 2] == 't'
+	    && key[len - 3] == 'e')
+		key[len - 3] = '\0';
+	
+	if ((gchar*)settings.useDefaultDict)
+		dict = g_strdup(settings.DefaultDict);
+	else
+		dict = g_strdup(settings.DictWindowModule);
+	
+	main_display_dictionary(dict, key);
+	
+	
+	if (dict)
+		g_free(dict);
+}
+*/
 
 gint Yelper::ProcessMouseDblClickEvent (void* aEvent)
 {
@@ -316,68 +447,103 @@ gint Yelper::ProcessMouseDblClickEvent (void* aEvent)
 	nsIDOMEvent *domEvent = static_cast<nsIDOMEvent*>(aEvent);
 	nsCOMPtr<nsIDOMMouseEvent> event (do_QueryInterface (domEvent));
 	if (!event) return 0;
-
+	
   /**
      * Returns the whole selection into a plain text string.
      */
   /* wstring toString (); */
  // NS_SCRIPTABLE NS_IMETHOD ToString(PRUnichar **_retval) = 0;
-
+	
+#ifdef DEBUG
+#ifndef HAVE_GECKO_1_9
+	domEvent->GetType(aType);
+	gchar mybuf[80];
+	aType.ToCString( mybuf, 79);
+	g_warning("domEvent->GetType: %s",mybuf);
+#endif
+#endif
 	gtk_editable_delete_text((GtkEditable *)widgets.entry_dict,0,-1);
-
+	
 	DoCommand("cmd_copy");
-
+	
 	GtkClipboard *clipboard = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
-
+	
 	gtk_clipboard_request_text (clipboard,
-				    gui_get_clipboard_text_for_lookup,
+				    gui_get_clipboard_text_for_lookup, 
 				    NULL);
+	
+	
+	//gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
+	//gtk_widget_activate(widgets.entry_dict);
+	
+	//rv = mDOMWindow->GetSelection(getter_AddRefs(oSelection));
+	//rv = oSelection->ToString(selText);
+	//g_message("\nselText: %s\nlength: %d", (char*)selText,strlen((char*)selText));
 	return 1;
 }
 
 gint
 Yelper::ProcessMouseUpEvent (void* aEvent)
-{
+{	
 	g_return_val_if_fail(aEvent != NULL,0);
-
+	
 	nsIDOMEvent *domEvent = static_cast<nsIDOMEvent*>(aEvent);
 	nsCOMPtr<nsIDOMMouseEvent> event (do_QueryInterface (domEvent));
 	if (!event) return 0;
-
+		
+#ifdef DEBUG
+/*	nsAutoString aType;
+	domEvent->GetType(aType);
+	gchar mybuf[80];
+	aType.nsCString(mybuf);
+	GS_message(("domEvent->GetType: %s",mybuf));*/
+#endif
+	
+	
 	PRUint16 button = 2;
 	event->GetButton (&button);
 
-	if (button == 1)
-	        shift_key_pressed = FALSE;
-
-
-	return 0;
+	//GS_message(("mouse button up: %d",button));
+	if(button == 1)	       
+	        shift_key_pressed = FALSE; 
+	
+	
+	return 0;	
 }
 
 gint
 Yelper::ProcessMouseEvent (void* aEvent)
-{
+{	
 	g_return_val_if_fail(aEvent != NULL,0);
-
+	
 	nsIDOMEvent *domEvent = static_cast<nsIDOMEvent*>(aEvent);
 	nsCOMPtr<nsIDOMMouseEvent> event (do_QueryInterface (domEvent));
 	if (!event) return 0;
-
+	
+	
+#ifndef DEBUG
+/*	nsAutoString aType;	
+	domEvent->GetType(aType);
+	gchar mybuf[80];
+	aType.ToCString( mybuf, 79);
+	GS_message(("domEvent->GetType: %s",mybuf));*/
+#endif	
+	
 	PRUint16 button = 2;
 	event->GetButton (&button);
-
-	GS_message(("mouse button: %d",button));
-
-	if (button == 1) shift_key_pressed = TRUE;
-
+	
+	GS_message(("mouse button: %d",button));	
+	
+	if(button == 1) shift_key_pressed = TRUE; 
+	
 	/* Mozilla uses 2 as its right mouse button code */
-	if (button != 2) return 0;
+	if (button != 2) return 0;	
 
 	GS_message(("g_signal_emit_by_name"));
-	if (mEmbed)
+	if(mEmbed)
 		g_signal_emit_by_name (mEmbed, "popupmenu_requested", NULL);  //,
 			        // NS_ConvertUTF16toUTF8 (href).get());
-	return 1;
+	return 1;	
 }
 
 gint Yelper::ProcessKeyDownEvent(GtkMozEmbed *embed, gpointer dom_event)
@@ -389,37 +555,37 @@ gint Yelper::ProcessKeyDownEvent(GtkMozEmbed *embed, gpointer dom_event)
 	rv = event->GetKeyCode(&keyCode);
 	if (NS_FAILED(rv)) return rv;
 	//g_message("keycode: %d",keyCode);
-
+	
 	return NS_OK;
-}
+}	
 
 gint Yelper::ProcessKeyReleaseEvent(GtkMozEmbed *embed, gpointer dom_event)
 {
 	GS_message(("Yelper::ProcessKeyReleaseEvent"));
 	shift_key_pressed = FALSE;
-	return NS_OK;
+	return NS_OK;	
 }
 
-#ifdef HAVE_GTKUPRINT
-nsresult
+#ifdef USE_GTKUPRINT
+nsresult 
 Yelper::Print (GeckoPrintInfo *print_info, PRBool preview, int *prev_pages)
 {
 	nsresult rv;
-
+	
 	nsCOMPtr<nsIWebBrowserPrint> print(do_GetInterface (mWebBrowser, &rv));
 	NS_ENSURE_SUCCESS (rv, rv);
-
+	
 	nsCOMPtr<nsIPrintSettings> settings;
-
+	
 	rv = print->GetGlobalPrintSettings (getter_AddRefs (settings));
 	NS_ENSURE_SUCCESS (rv, rv);
-
+	
 	rv = PrintListener::SetPrintSettings (print_info, preview, settings);
-
+	
 	NS_ENSURE_SUCCESS (rv, rv);
-
+	
 	nsCOMPtr<PrintListener> listener = new PrintListener (print_info, print);
-
+	
 	if (!preview){
 		GS_message(("Yelper::Print4"));
 		rv = print->Print (settings, listener);
@@ -431,7 +597,7 @@ Yelper::Print (GeckoPrintInfo *print_info, PRBool preview, int *prev_pages)
 	}
 	GS_message(("Yelper::Print6"));
 	return rv;
-
+	
 }
 #endif
 
@@ -441,17 +607,17 @@ Yelper::PrintPreviewNavigate (int page_no)
 	nsresult rv;
 	nsCOMPtr<nsIWebBrowserPrint> print(do_GetInterface (mWebBrowser, &rv));
 	NS_ENSURE_SUCCESS (rv, rv);
-
+	
 	return print->PrintPreviewNavigate (0, page_no);
 }
 
-nsresult
+nsresult 
 Yelper::PrintPreviewEnd ()
 {
 	nsresult rv;
 	nsCOMPtr<nsIWebBrowserPrint> print(do_GetInterface (mWebBrowser, &rv));
 	NS_ENSURE_SUCCESS (rv, rv);
-
+	
 	return print->ExitPrintPreview ();
 
 }
@@ -461,7 +627,7 @@ void
 Yelper::SetRTL()
 {
 	nsresult rv;
-	nsCOMPtr<nsIPrefService> prefService =
+	nsCOMPtr<nsIPrefService> prefService = 
 		do_GetService (NS_PREFSERVICE_CONTRACTID);
 	nsCOMPtr<nsIPrefBranch> pref;
 	prefService->GetBranch("", getter_AddRefs(pref));

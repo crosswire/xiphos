@@ -25,22 +25,45 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+	
+typedef enum
+{
+	PARALLEL1,
+	PARALLEL2,
+	PARALLEL3,
+	PARALLEL4,
+	PARALLEL5
+	
+}GSParallel;
+
+
+typedef struct _para_labels PARA_LABELS;
+struct _para_labels {
+	GtkWidget *label_1;
+	GtkWidget *label_2;
+	GtkWidget *label_3;
+	GtkWidget *label_4;
+	GtkWidget *label_5;
+};
+extern PARA_LABELS plabels;
+
 
 gchar *main_parallel_change_verse(void);
 void main_load_g_ops_parallel(GtkWidget *menu);
 void main_set_parallel_options_at_start(void);
 void main_load_menu_form_mod_list(GtkWidget * pmInt, gchar * label,
 				   GCallback mycallback);
-void main_check_parallel_modules(void);
+void main_change_parallel_module(GSParallel parallel, gchar * mod_name);	
+void main_check_parallel_modules(void);	
 void main_set_parallel_options_at_start(void);
 void main_update_parallel_page(void);
 void main_update_parallel_page_detached(void);
 void main_swap_parallel_with_main(char *intmod);
 
-void main_init_parallel_view (void);
+void main_init_parallel_view(void);
 void main_delete_parallel_view(void);
 
-
+	
 #ifdef __cplusplus
 }
 #endif

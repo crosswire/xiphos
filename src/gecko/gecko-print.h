@@ -13,7 +13,7 @@
  * General Public License for more details.
  *
  * You should have received a copy of the GNU General Public
- * License along with this program; if not, write to the Free Software
+ * License along with this program; if not, write to the Free Software 
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  *
  * Author: Don Scorgie <DonScorgie@Blueyonder.co.uk>
@@ -28,7 +28,7 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#ifdef HAVE_GTKUPRINT
+#ifdef USE_GTKUPRINT
 /* Needed to fill the struct */
 #include <gtk/gtkprinter.h>
 #include <gtk/gtkprintsettings.h>
@@ -52,7 +52,7 @@ typedef struct _GeckoPrintInfo
     gboolean moz_finished;
     gboolean started;
     gboolean previewed;
-
+    
     char *header_left_string;
     char *header_center_string;
     char *header_right_string;
@@ -78,7 +78,7 @@ typedef struct _GeckoPrintInfo
 
 } GeckoPrintInfo;
 
-void          gecko_print_run               (GtkWindow *window,
+void          gecko_print_run               (GtkWindow *window, 
 					    gpointer html,
 					    gpointer fake_win,
 					    gpointer content_box);

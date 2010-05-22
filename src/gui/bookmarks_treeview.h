@@ -1,6 +1,6 @@
 /*
  * Xiphos Bible Study Tool
- * bookmarks_treeview.h - gui for bookmarks
+ * bookmarks_treeview.h - gui for bookmarks 
  *
  * Copyright (C) 2003-2009 Xiphos Developer Team
  *
@@ -65,7 +65,7 @@ void gui_load_removed(const xmlChar * file);
 void gui_add_columns(GtkTreeView * tree);
 void gui_add_item_to_tree(GtkTreeIter * iter, GtkTreeIter * parent,
 			     BOOKMARK_DATA * data);
-void gui_verselist_to_bookmarks(GList * verses, gint save_as_single);
+void gui_verselist_to_bookmarks(GList * verses, gint save_as_single);	
 GtkWidget *gui_create_bookmark_tree(void);
 void gui_parse_bookmarks(GtkTreeView *tree, const xmlChar * file,
 			    GtkTreeIter *parent);

@@ -1,0 +1,15 @@
+#!/usr/bin/env python
+# encoding: utf8
+
+def build(bld):
+
+    lib = bld.new_task_gen(
+        features='cxx cc',
+        includes = '. ../.. ../../src',
+        target='backend',
+        #uselib='GLIB GNOMEUI SWORD',
+        uselib= bld.env['ALL_LIBS'],
+    )
+
+    lib.find_sources_in_dirs('.')
+        

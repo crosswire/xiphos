@@ -18,7 +18,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-
+ 
 #ifndef _NAVBAR_H
 #define _NAVBAR_H
 
@@ -29,9 +29,9 @@ extern "C"
 #endif
 
 #include <config.h>
-
+	
 typedef struct _navbar NAVBAR;
-struct _navbar {
+struct _navbar {	
 	GtkWidget *button_back;
 	GtkWidget *button_forward;
 	GtkWidget *comboboxentry_book;

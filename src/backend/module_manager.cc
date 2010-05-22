@@ -1,6 +1,6 @@
 /*
  * Xiphos Bible Study Tool
- * module_manager.cc
+ * module_manager.cc 
  *
  * Copyright (C) 2000-2009 Xiphos Developer Team
  *
@@ -45,7 +45,7 @@
 
 #include "gui/debug_glib_null.h"
 
-#ifdef DEBUG
+#ifdef DEBUG 
 static const gchar *f_message = "backend/module_manager.cc line #%d \"%s\" = %s\n";
 #endif
 using namespace sword;
@@ -66,18 +66,18 @@ static ModMap::iterator end;
  * Synopsis
  *   #include "backend/module_manager.hh"
  *
- *   void StatusReporter::preStatus(long totalBytes, long completedBytes,
+ *   void StatusReporter::preStatus(long totalBytes, long completedBytes, 
  *				   const char *message)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   void
  */
 
 void GSStatusReporter::preStatus(long totalBytes,
-				 long completedBytes,
+				 long completedBytes, 
 				 const char *message)
 {
 	GS_print((f_message,83,"message",message));
@@ -94,38 +94,38 @@ void GSStatusReporter::preStatus(long totalBytes,
  *   void StatusReporter::statusUpdate(double dltotal, double dlnow)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   void
  */
 
 void GSStatusReporter::statusUpdate(double dltotal,
-				    double dlnow)
+				    double dlnow) 
 {
 	if (!dltotal)
-		return;
+		return;	
 	double filefraction  = (dlnow / dltotal);
 	update_install_progress(filefraction);
 }
 
 
-ModuleManager::ModuleManager() {
+ModuleManager::ModuleManager() {	
 	const gchar *envhomedir = g_getenv(HOMEVAR);
 	baseDir = (envhomedir) ? envhomedir : ".";
 	baseDir += "/" DOTSWORD "/InstallMgr";
 	statusReporter = new GSStatusReporter();
 }
-
+ 
 ModuleManager::~ModuleManager() {
-
+	
 }
 
 char *backend_mod_mgr_get_config_entry(char *module_name,
 				       const char *entry) {
 	SWModule *mod;
 	ModMap::iterator it;	//-- iteratior
-	//-- iterate through the modules until we find modName
+	//-- iterate through the modules until we find modName  
 	it = mgr->Modules.find(module_name);
 	//-- if we find the module
 	if (it != mgr->Modules.end()) {
@@ -153,7 +153,7 @@ int backend_mod_mgr_is_module(const char *mod_name) {
  *   GList *backend_module_mgr_get_next_module()
  *
  * Description
- *
+ *   
  *
  * Return value
  *   MOD_MGR *
@@ -163,7 +163,7 @@ MOD_MGR *backend_module_mgr_get_next_module(void)
 {
 	MOD_MGR *mod_info = NULL;
 	SWModule *module;
-
+	
 	if (it != end) {
 		module = it->second;
 		mod_info = g_new(MOD_MGR, 1);
@@ -209,12 +209,12 @@ MOD_MGR *backend_module_mgr_get_next_module(void)
 			mod_info->installed =
 			    backend_mod_mgr_is_module(name);
 			mod_info->description = module->Description();
-			mod_info->locked =
+			mod_info->locked = 
 			    ((module->getConfigEntry("CipherKey")) ? 1 : 0);
-			it++;
+			it++;	
 			return (MOD_MGR *) mod_info;
 		}
-	}
+	} 
 	return NULL;
 }
 
@@ -229,7 +229,7 @@ MOD_MGR *backend_module_mgr_get_next_module(void)
  *   GList *backend_module_mgr_remote_list_modules(const char *sourceName)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   GList *
@@ -259,7 +259,7 @@ void backend_module_mgr_remote_list_modules_init(const char *sourceName)
  *   GList *backend_module_mgr_list_local_modules(const char *dir)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   GList *
@@ -288,7 +288,7 @@ void backend_module_mgr_list_local_modules_init(bool for_install)
 
  *
  * Description
- *
+ *   
  *
  * Return value
  *   int
@@ -304,7 +304,7 @@ int backend_uninstall_module(const char *dir,
 		tmp_mgr = new SWMgr(dir);
 	else
 		tmp_mgr = new SWMgr();
-
+	
 	ModMap::iterator it = tmp_mgr->Modules.find(modName);
 	if (it == tmp_mgr->Modules.end()) {
 		printf("Couldn't find module [%s] to remove\n",
@@ -329,7 +329,7 @@ int backend_uninstall_module(const char *dir,
 
  *
  * Description
- *
+ *   
  *
  * Return value
  *   int
@@ -372,7 +372,7 @@ int backend_remote_install_module(const char *destdir,
  *   int backend_local_install_module(const char *destdir, const char *srcdir, const char *mod_name)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   int
@@ -398,7 +398,7 @@ int backend_local_install_module(const char *destdir,
  *   GList *backend_module_mgr_list_remote_sources(void)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   GList *
@@ -411,13 +411,17 @@ GList *backend_module_mgr_list_remote_sources(void)
 	const gchar *envhomedir = g_getenv(HOMEVAR);
 	SWBuf baseDir = (envhomedir) ? envhomedir : ".";
 	baseDir += "/" DOTSWORD "/InstallMgr";
+#ifdef SWORD_MULTIVERSE
 	InstallMgr *inst_mgr = new InstallMgr(baseDir,
 					      (StatusReporter *)0,
 					      (SWBuf)"ftp",
 					      (SWBuf)"xiphos@xiphos.org"
 					      );
 	inst_mgr->setUserDisclaimerConfirmed(true);
-
+#else
+	InstallMgr *inst_mgr = new InstallMgr(baseDir);
+#endif
+	
 	for (InstallSourceMap::iterator it =
 	     inst_mgr->sources.begin();
 	     it != inst_mgr->sources.end(); it++) {
@@ -426,9 +430,15 @@ GList *backend_module_mgr_list_remote_sources(void)
 		mms->type = g_strdup(it->second->type);
 		mms->source = g_strdup(it->second->source);
 		mms->directory = g_strdup(it->second->directory);
+#ifdef SWORD_MULTIVERSE
 		mms->user = g_strdup(it->second->u);
 		mms->pass = g_strdup(it->second->p);
 		mms->uid = g_strdup(it->second->uid);
+#else
+		mms->user = g_strdup("");
+		mms->pass = g_strdup("");
+		mms->uid = g_strdup("");
+#endif
 		retval = g_list_append(retval, (MOD_MGR_SOURCE *) mms);
 	}
 	delete inst_mgr;
@@ -446,7 +456,7 @@ GList *backend_module_mgr_list_remote_sources(void)
  *   GList *backend_module_mgr_list_local_sources(void)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   GList *
@@ -455,16 +465,16 @@ GList *backend_module_mgr_list_remote_sources(void)
 GList *backend_module_mgr_list_local_sources(void)
 {
 	MOD_MGR_SOURCE *mms;
-	GList *retval = NULL;
+	GList *retval = NULL;	
 	const gchar *envhomedir = g_getenv(HOMEVAR);
 	SWBuf confPath = (envhomedir) ? envhomedir : ".";
 	confPath += "/" DOTSWORD "/InstallMgr/InstallMgr.conf";
 	SWConfig *installConf= new SWConfig(confPath.c_str());
-
+	
 	SectionMap::iterator sourcesSection;
 	ConfigEntMap::iterator sourceBegin;
 	ConfigEntMap::iterator sourceEnd;
-
+	
 	sourcesSection = installConf->Sections.find("Sources");
 	if (sourcesSection != installConf->Sections.end()) {
 		sourceBegin = sourcesSection->second.lower_bound("DIRSource");
@@ -472,15 +482,21 @@ GList *backend_module_mgr_list_local_sources(void)
 
 		while (sourceBegin != sourceEnd) {
 			mms = g_new(MOD_MGR_SOURCE, 1);
-			InstallSource *is = new InstallSource("DIR",
+			InstallSource *is = new InstallSource("DIR", 
 					sourceBegin->second.c_str());
 			mms->caption = is->caption;
 			mms->type = is->type;
 			mms->source = is->source;
 			mms->directory = is->directory;
+#ifdef SWORD_MULTIVERSE
 			mms->user = is->u;
 			mms->pass = is->p;
 			mms->uid = is->uid;
+#else
+			mms->user = g_strdup("");
+			mms->pass = g_strdup("");
+			mms->uid = g_strdup("");
+#endif
 			retval = g_list_append(retval,(MOD_MGR_SOURCE*) mms);
 			sourceBegin++;
 		}
@@ -500,7 +516,7 @@ GList *backend_module_mgr_list_local_sources(void)
  *   int backend_module_mgr_refresh_remote_source(const char *sourceName)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   int
@@ -529,7 +545,7 @@ int backend_module_mgr_refresh_remote_source(const char *sourceName)
  *   void backend_init_module_mgr_config(void)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   void
@@ -537,7 +553,7 @@ int backend_module_mgr_refresh_remote_source(const char *sourceName)
 
 void backend_init_module_mgr_config(void)
 {
-
+	
 	const gchar *envhomedir = g_getenv(HOMEVAR);
 	SWBuf confPath = (envhomedir) ? envhomedir : ".";
 	confPath += "/" DOTSWORD "/InstallMgr/InstallMgr.conf";
@@ -559,13 +575,14 @@ void backend_init_module_mgr_config(void)
 	is_local.caption = "cdrom";
 	is_local.source = "[local]";
 	is_local.directory = "/mnt/cdrom";
-	config["Sources"]["DIRSource"] = is_local.getConfEnt();
+	config["Sources"]["DIRSource"] = is_local.getConfEnt();	
 	config.Save();
 }
 
 int
 backend_init_module_mgr_config_extras()
 {
+#ifdef SWORD_MULTIVERSE
 	bool needNewInstallMgr = (installMgr == NULL);
 	int retval;
 
@@ -579,6 +596,30 @@ backend_init_module_mgr_config_extras()
 		backend_shut_down_module_mgr();
 	}
 	return retval;
+#else
+	// also the beta repo.
+	backend_module_mgr_add_source("FTPSource",
+				      "FTP",
+				      "CrossWire Beta",
+				      "www.crosswire.org",
+				      "/pub/sword/betaraw",
+				      NULL, NULL, NULL);
+	// new concept: we are our own first-class source.
+	backend_module_mgr_add_source("FTPSource",
+				      "FTP",
+				      "Xiphos",
+				      "ftp.xiphos.org",
+				      ".",
+				      NULL, NULL, NULL);
+	// NET @ bible.org.
+	backend_module_mgr_add_source("FTPSource",
+				      "FTP",
+				      "Bible.org",
+				      "ftp.bible.org",
+				      "/sword",
+				      NULL, NULL, NULL);
+	return 0;
+#endif /* !SWORD_MULTIVERSE */
 }
 
 /******************************************************************************
@@ -591,7 +632,7 @@ backend_init_module_mgr_config_extras()
  *   void backend_module_mgr_clear_config(void)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   void
@@ -630,7 +671,9 @@ void backend_module_mgr_clear_config(void)
 
 void backend_module_mgr_reread_config(void)
 {
+#ifdef SWORD_MULTIVERSE
 	installMgr->readInstallConf();
+#endif
 }
 
 
@@ -651,7 +694,7 @@ void backend_module_mgr_reread_config(void)
  *				   const char * uid)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   void
@@ -670,18 +713,20 @@ void backend_module_mgr_add_source(const char * vtype,
 	SWBuf confPath = (envhomedir) ? envhomedir : ".";
 	confPath += "/" DOTSWORD "/InstallMgr/InstallMgr.conf";
 	FileMgr::createParent(confPath.c_str());
-
+	
 	SWConfig config(confPath.c_str());
 
 	InstallSource is(type);
 	is.caption = caption;
 	is.source = source;
 	is.directory = directory;
+#ifdef SWORD_MULTIVERSE
 	is.u = user;
 	is.p = pass;
 	is.uid = uid;
-	config.Sections["Sources"].insert(ConfigEntMap::value_type(vtype,
-		is.getConfEnt().c_str()));
+#endif
+	config.Sections["Sources"].insert(ConfigEntMap::value_type(vtype, 
+		is.getConfEnt().c_str()));	
 	config.Save();
 }
 
@@ -695,7 +740,7 @@ void backend_module_mgr_add_source(const char * vtype,
  *   void backend_init_module_mgr(const char *dir, gboolean augment)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   void
@@ -717,7 +762,7 @@ void backend_init_module_mgr(const char *dir,
 	GTimer *t;
 	double d;
 	t = g_timer_new();
-
+	
 	if (regular) {		// use main (regular) swmgr.
 		if (mgr)
 			delete mgr;
@@ -730,7 +775,7 @@ void backend_init_module_mgr(const char *dir,
 	g_timer_stop(t);
 	d = g_timer_elapsed(t, NULL);
 	GS_message(("create SWMgr time is %f", d));
-
+	
 	const gchar *envhomedir = g_getenv(HOMEVAR);
 	SWBuf baseDir = (envhomedir) ? envhomedir : ".";
 	baseDir += "/" DOTSWORD "/InstallMgr";
@@ -739,11 +784,16 @@ void backend_init_module_mgr(const char *dir,
 
 	if (installMgr)
 		delete installMgr;
+#ifdef SWORD_MULTIVERSE
 	installMgr = new InstallMgr(baseDir,
 				    statusReporter,
 				    (SWBuf)"ftp",
 				    (SWBuf)"xiphos@xiphos.org");
 	installMgr->setUserDisclaimerConfirmed(true);
+#else
+	installMgr = new InstallMgr(baseDir, statusReporter);
+#endif
+
 }
 
 /******************************************************************************
@@ -756,7 +806,7 @@ void backend_init_module_mgr(const char *dir,
  *   void backend_terminate_module_mgr(void)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   void
@@ -777,7 +827,7 @@ void backend_terminate_module_mgr(void)
  *   void backend_shut_down_module_mgr(void)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   void
@@ -789,6 +839,6 @@ void backend_shut_down_module_mgr(void)
 	installMgr = NULL;
 	delete mgr;
 	mgr = NULL;
-        delete list_mgr;
+        delete list_mgr; 
 	list_mgr = NULL;
 }
