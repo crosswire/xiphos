@@ -59,7 +59,7 @@ GECKO_DEFINES
 AM_CONDITIONAL([HAVE_GECKO],[test "$gecko_cv_have_gecko" = "yes"])
 
 
-REQUIRED_LIBS="glib-2.0 gtk+-2.0 libgnomeui-2.0 libxml-2.0 libglade-2.0 libgtkhtml-3.14 sword dbus-1 dbus-glib-1"
+REQUIRED_LIBS="glib-2.0 gtk+-2.0 libgnomeui-2.0 libxml-2.0 libglade-2.0 libgtkhtml-3.14 sword dbus-1 dbus-glib-1 libgsf-1"
 
 AC_DEFINE(HAVE_DBUS, 1, [Define to enable dbus])
 

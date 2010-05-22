@@ -423,7 +423,6 @@ remove_install_modules(GList * modules,
 					   strlen(ZIP_DIR) + 2);
 			gchar *zipfile;
 			char *datapath, *conf_file;
-			FILE *result;
 
 			GS_print(("archive %s in %s\n", buf,
 				  (destination
@@ -451,34 +450,12 @@ remove_install_modules(GList * modules,
 						   ? destination
 						   : settings.path_to_mods));
 			g_remove(zipfile);
-			g_string_printf(cmd,
-				"( cd \"%s\" && zip -r \"%s\" \"mods.d/%s\" \"%s\" ) 2>&1",
-				(destination
-				 ? destination
-				 : settings.path_to_mods),
-				zipfile,
-				conf_file,
-				datapath);
+
+			xiphos_create_archive(conf_file, datapath, zipfile,
+					      destination ?
+					      destination : settings.path_to_mods);
 			g_free(conf_file);
 			g_free(datapath);
-			
-			if ((result = popen(cmd->str, "r")) == NULL) {
-				gui_generic_warning
-				    (_("Xiphos could not execute archiver"));
-			} else {
-				gchar output[258];
-				g_string_truncate(cmd, 0);
-				g_string_append(cmd, buf);
-				g_string_append(cmd, _(" archival result:\n\n"));
-				while (fgets(output, 256, result) != NULL)
-					g_string_append(cmd, output);
-				pclose(result);
-				g_string_append(cmd, _("\nArchive in "));
-				g_string_append(cmd, zipfile);
-				gui_generic_warning(cmd->str);
-				while (gtk_events_pending())
-					gtk_main_iteration();
-			}
 			g_free(zipfile);
 			g_free(dir);
 			g_string_free(cmd, TRUE);
