@@ -30,7 +30,7 @@ extern "C" {
 #include "main/tab_history.h"
 
 #define	TABHISTORYLENGTH	25
-
+	
 struct _passage_tab_info {
 	GtkWidget *page_widget;
 	GtkLabel *tab_label;
@@ -72,11 +72,11 @@ void gui_open_module_in_new_tab(gchar *module);
 void gui_open_passage_in_new_tab(gchar *key);
 void gui_open_parallel_view_in_new_tab(void);
 void gui_close_passage_tab(gint pagenum);
-void gui_update_tab_struct(const gchar * text_mod,
-			   const gchar * commentary_mod,
-			   const gchar * dictlex_mod,
-			   const gchar * book_mod,
-			   const gchar * dictlex_key,
+void gui_update_tab_struct(const gchar * text_mod, 
+			   const gchar * commentary_mod, 
+			   const gchar * dictlex_mod, 
+			   const gchar * book_mod, 
+			   const gchar * dictlex_key, 
 			   const gchar * book_offset,
 			   gboolean comm_showing,
 			   gboolean showtexts,
@@ -86,7 +86,7 @@ void gui_update_tab_struct(const gchar * text_mod,
 void gui_close_all_tabs(void);
 void gui_open_tabs(void);
 
-void gui_notebook_main_setup(int tabs, const char *tabsfile);
+void gui_notebook_main_setup(int tabs);
 void gui_notebook_main_shutdown(int tabs);
 /*void gui_notebook_main_switch_page(GtkNotebook * notebook,
 					GtkNotebookPage * page,

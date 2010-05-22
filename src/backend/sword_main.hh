@@ -1,6 +1,6 @@
 /*
  * Xiphos Bible Study Tool
- * sword_main.hh -
+ * sword_main.hh - 
  *
  * Copyright (C) 2000-2009 Xiphos Developer Team
  *
@@ -34,7 +34,7 @@
 using std::map;
 using std::list;
 using namespace sword;
-
+	
 class BackEnd {
 	SWMgr *main_mgr;
 	//TreeKeyIdx *tree_key;
@@ -47,21 +47,21 @@ class BackEnd {
 	SWModule *search_mod;
 	//SWFilter *thml2osis;
 	//SWFilter *osis2html;
-
-public:
+	
+public:	
 	TreeKeyIdx *tree_key;
 	SWModule *display_mod;
-
-	const char *version;
-	SWDisplay *commDisplay;
-	SWDisplay *bookDisplay;
+		
+	const char *version;	
+	SWDisplay *commDisplay;	
+	SWDisplay *bookDisplay;	
 	SWDisplay *dictDisplay;
 	SWDisplay *textDisplay;
 	SWDisplay *RTOLDisplay;
-	SWDisplay *entryDisplay;
-	SWDisplay *chapDisplay;
+	SWDisplay *entryDisplay;		
+	SWDisplay *chapDisplay;			
 	SWDisplay *dialogRTOLDisplay;
-	SWDisplay *verselistDisplay;
+	SWDisplay *verselistDisplay;		
 	SWDisplay *viewerDisplay;
 
 	BackEnd();
@@ -86,8 +86,8 @@ public:
 	int key_get_verse(const char *key);
 	unsigned int key_chapter_count(const char *key);
 	unsigned int key_verse_count(const char *key);
-
-
+	
+	
 	char *get_module_key(void);
 	void save_entry(const char * entry);
 	void save_note_entry(const char * module, const char * key, const char * entry);
@@ -98,17 +98,16 @@ public:
 	int is_module(const char *mod_name);
 	int set_module(const char *module_name);
 	char *navigate_module(int direction);
-
+	
 	int module_type(const char *mod_name);
 	char *module_description(char *mod_name);
 	char *module_name_from_description(char *description);
 	const char *module_get_language(const char *module_name);
-	char **get_module_language_list(void);
 	int module_has_testament(const char * module_name,  int testament);
 	int module_get_testaments(const char * module_name);
-
+	
 	char *get_entry_attribute(const char *level1, const char *level2, const char *level3);
-
+	
 	char *get_key_from_offset(unsigned long offset);
 	void set_treekey(unsigned long offset);
 	unsigned long get_treekey_offset(void);
@@ -132,10 +131,10 @@ public:
 	int check_for_optimal_search(char * module_name);
 	int do_module_index(char *module_name);
 	int do_module_delete_index(char *module_name);
-	int do_module_search(char *module_name, const char *search_string,
+	int do_module_search(char *module_name, const char *search_string, 
 				int search_type, int search_params, int is_dialog);
 	void terminate_search();
-
+	
 	char *get_conf_file_item(const char * file, const char * mod_name, const char * item);
 	void save_conf_file_item(const char * file, const char * mod_name, const char * item, const char * value);
 	void save_module_key(char *mod_name, char *key);

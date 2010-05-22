@@ -30,7 +30,7 @@ bool init_xulrunner(const char* xul_dir, const char* app_dir)
     nsresult rv;
 
     char xpcom_dll[_MAX_PATH ];
-    if (strlen(xul_dir) >= _MAX_PATH) {
+    if(strlen(xul_dir) >= _MAX_PATH) {
       return false;
     }
     strcpy(xpcom_dll, xul_dir);

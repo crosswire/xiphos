@@ -18,7 +18,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-
+ 
 #ifndef  _NAVBAR_VERSEKEY_H_
 #define _NAVBAR_VERSEKEY_H_
 
@@ -26,7 +26,7 @@
 extern "C"
 {
 #endif
-
+	
 enum  {
 	BOOK_BUTTON,
 	CHAPTER_BUTTON,
@@ -41,20 +41,20 @@ enum {
 };
 
 typedef struct _navbar_versekey NAVBAR_VERSEKEY;
-struct _navbar_versekey {
+struct _navbar_versekey {	
 	GtkWidget *navbar;
 	GtkWidget *button_sync;
 	GtkWidget *button_history_back;
 	GtkWidget *button_history_next;
-	GtkWidget *button_history_menu;
-
+	GtkWidget *button_history_menu;	
+	
 	GtkWidget *button_book_up;
 	GtkWidget *button_book_down;
 	GtkWidget *button_chapter_up;
 	GtkWidget *button_chapter_down;
 	GtkWidget *button_verse_up;
 	GtkWidget *button_verse_down;
-
+	
 	GtkWidget *arrow_book_up_box;
 	GtkWidget *arrow_book_up;
 	GtkWidget *arrow_book_down_box;
@@ -67,7 +67,7 @@ struct _navbar_versekey {
 	GtkWidget *arrow_verse_up;
 	GtkWidget *arrow_verse_down_box;
 	GtkWidget *arrow_verse_down;
-
+	
 	GtkWidget *button_book_menu;
 	GtkWidget *button_chapter_menu;
 	GtkWidget *button_verse_menu;
@@ -77,29 +77,29 @@ struct _navbar_versekey {
 	GtkWidget *book_menu;
 	GtkWidget *chapter_menu;
 	GtkWidget *verse_menu;
-
+	
 	GtkWidget *lookup_entry;
-  	//GtkTooltips *tooltips;
+  	//GtkTooltips *tooltips;	
 	GString *key;
 	gchar *book;
 	GString *module_name;
 	gboolean dialog;
 	//gint testaments;
-	gint type;
+	gint type;	
 };
 extern NAVBAR_VERSEKEY navbar_versekey;
 extern NAVBAR_VERSEKEY navbar_parallel;
 
 const char *main_get_valid_key(char * key);
-GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar,
+GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar, 
 						gint nb_type,
 						gpointer dialog,
 						gpointer editor);
-GtkWidget *main_versekey_drop_down_verse_menu(NAVBAR_VERSEKEY navbar,
+GtkWidget *main_versekey_drop_down_verse_menu(NAVBAR_VERSEKEY navbar, 
 						gint nb_type,
 						gpointer dialog,
 						gpointer editor);
-GtkWidget *main_versekey_drop_down_chapter_menu(NAVBAR_VERSEKEY navbar,
+GtkWidget *main_versekey_drop_down_chapter_menu(NAVBAR_VERSEKEY navbar, 
 						gint nb_type,
 						gpointer dialog,
 						gpointer editor);

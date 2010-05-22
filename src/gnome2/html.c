@@ -60,6 +60,7 @@ static GtkHTMLStreamStatus status1;
 gboolean in_url;
 
 
+#ifdef USE_GTKHTML3_14_23
 static void
 handle_error (GError **error)
 {
@@ -68,6 +69,7 @@ handle_error (GError **error)
 		g_clear_error (error);
 	}
 }
+#endif
 
 
 /******************************************************************************
@@ -77,7 +79,7 @@ handle_error (GError **error)
  * Synopsis
  *   #include "gui/html.h"
  *
- *   void url_requested (GtkHTML *html, const gchar *url,
+ *   void url_requested (GtkHTML *html, const gchar *url, 
  *					GtkHTMLStream *handle)
  *
  * Description
@@ -142,10 +144,10 @@ extern gboolean shift_key_pressed;
 void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 {
 	gchar buf[500];
-
-	if (shift_key_pressed)
+	
+	if(shift_key_pressed)
 		return;
-
+	
 	if (url == NULL) { /* moved out of url - clear appbar - info viewer*/
 		gui_set_statusbar ("");
 		in_url = FALSE;
@@ -155,7 +157,7 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 		in_url = TRUE;	/* we need this for html_button_released */
 		if (main_url_handler(url, FALSE))
 			return;
-
+		
 		if (*url == 'I') {
 			return;
 		} else if (*url == 'U') {
@@ -163,7 +165,7 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 			sprintf(buf, "%s %s", _("Unlock "), url);
 		} else /* any other link */
 			sprintf(buf, "%s", "");
-
+		
 		gui_set_statusbar (buf);
 	}
 }
@@ -187,10 +189,10 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 
 void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 {
-
-	if (main_url_handler(url, TRUE))
+	
+	if(main_url_handler(url, TRUE))
 		return;
-
+	
 	if (*url == '@') {
 		++url;
 		main_swap_parallel_with_main((gchar *) url);
@@ -226,7 +228,7 @@ void gui_prefixable_link_clicked(GtkHTML * html,
 {
 	gchar *buf, *place;
 	gchar tmpbuf[1023];
-
+	
 	if ((buf = strstr(url, "&value="))) {
 		buf += 7;
 		place = buf;
@@ -243,7 +245,7 @@ void gui_prefixable_link_clicked(GtkHTML * html,
 	}
 	if (main_url_handler(url, TRUE))
 		return;
-
+	
 	if (*url == '@') {
 		++url;
 		main_swap_parallel_with_main((gchar *) url);
@@ -266,7 +268,7 @@ void gui_prefixable_link_clicked(GtkHTML * html,
  *   html_widget - (GtkHTML widget) to copy from
  *
  * Return value
- *
+ *   
  */
 
 void gui_copy_html(GtkWidget * html_widget)
@@ -289,7 +291,7 @@ void gui_copy_html(GtkWidget * html_widget)
  *
  * Description
  *   copy menu item clicked in any html window
- *   user_data - window (GtkHTML widget) to copy from
+ *   user_data - window (GtkHTML widget) to copy from   
  *
  * Return value
  *   void
@@ -356,7 +358,7 @@ gchar *gui_get_word_or_selection(GtkWidget * html_widget, gboolean word)
 	html = GTK_HTML(html_widget);
 	if (word)
 		gtk_html_select_word(html);
-
+	
 	key = gtk_html_get_selection_html (html, &len);
 	if (key && *key) {
 		for (s = strchr(key, '<'); s; s = strchr(s, '<')) {
@@ -378,7 +380,7 @@ gchar *gui_get_word_or_selection(GtkWidget * html_widget, gboolean word)
 		}
 		key = g_strdelimit(key, ".,\"<>;:?", ' ');
 		key = g_strstrip(key);
-
+	
 		GS_message(("gui_get_word key: %s", key));
 		buf = g_strdup(key);
 		return buf; /* must be freed by calling function */
@@ -402,7 +404,7 @@ out:
  *   lookup word in dict/lex module
  *
  * Return value
- *   gchar *   must be freed by calling function
+ *   gchar *   must be freed by calling function 
  */
 
 gchar *gui_button_press_lookup(GtkWidget * html_widget)
@@ -422,12 +424,12 @@ gchar *gui_button_press_lookup(GtkWidget * html_widget)
 		}
 		//converts encoding from ncr to utf8
 		key = ncr_to_utf8(key);
-
-		buf = main_get_striptext_from_string(settings.MainWindowModule,
-						key);
-
+		
+		buf = main_get_striptext_from_string(settings.MainWindowModule, 
+						key);	
+		
 		GS_message(("src/gnome2/html.c: buf=>%s<",buf));
-		if (buf == NULL) return NULL;
+		if(buf == NULL) return NULL;
 		key = g_strdelimit(buf, "&.,\"<>;:?", ' ');
 		key = g_strstrip(key);
 		len = strlen(key);
@@ -490,7 +492,7 @@ void gui_begin_html(GtkWidget * html_widget, gboolean isutf8)
  *   void gui_end_html(GtkWidget * html)
  *
  * Description
- *
+ *   
  *
  * Return value
  *   void
@@ -526,6 +528,7 @@ void gui_display_html(GtkWidget * html, const gchar * txt, gint lentxt)
 }
 
 
+#ifdef USE_GTKHTML3_14_23
 static gint
 _calc_header_height (GtkHTML *html, GtkPrintOperation *operation,
                          GtkPrintContext *context)
@@ -547,7 +550,7 @@ _calc_header_height (GtkHTML *html, GtkPrintOperation *operation,
 
 	pango_font_description_free (desc);
 	g_object_unref (pango_context);
-
+	
 	return header_height;
 }
 
@@ -656,6 +659,7 @@ _draw_footer (GtkHTML *html, GtkPrintOperation *operation,
 
 	g_free (text);
 }
+#endif
 
 /******************************************************************************
  * Name
@@ -675,45 +679,48 @@ _draw_footer (GtkHTML *html, GtkPrintOperation *operation,
 
 void gui_html_print(GtkWidget * htmlwidget, gboolean preview, const gchar * mod_name)
 {
+#ifdef USE_GTKHTML3_14_23
+	
 	GtkPrintOperation *operation;
 	GtkPrintSettings *psettings;
 	GtkPageSetup *setup;
 	GtkPrintOperationResult result;
 	GError *error = NULL;
 	GtkPrintOperationAction action;
-
-	if (preview)
+	
+	if(preview)
 		action = GTK_PRINT_OPERATION_ACTION_PREVIEW;
 	else
 		action = GTK_PRINT_OPERATION_ACTION_PRINT_DIALOG;
-
+	
 	operation = gtk_print_operation_new ();
 	psettings = gtk_print_settings_new ();
-
+	
 	psettings = gtk_print_operation_get_print_settings (operation);
-
+	
 	setup = gtk_page_setup_new ();
 	gtk_page_setup_set_top_margin(setup, 30, GTK_UNIT_PIXEL);
 	gtk_page_setup_set_left_margin(setup, 50, GTK_UNIT_PIXEL);
-
+	
 #ifdef WIN32
 	gtk_print_operation_set_unit(operation, GTK_UNIT_POINTS);
 #endif
-
-
+	
+		
 	gtk_print_operation_set_default_page_setup(operation, setup);
-
-	result = gtk_html_print_operation_run (GTK_HTML(htmlwidget),
-					       operation,
+	
+	result = gtk_html_print_operation_run (GTK_HTML(htmlwidget), 
+					       operation, 
 					       action,
-					       NULL, //GTK_WINDOW (e->window),
+					       NULL, //GTK_WINDOW (e->window), 
 					       (GtkHTMLPrintCalcHeight) _calc_header_height, /* GtkHTMLPrintCalcHeight  calc_header_height*/
-					       (GtkHTMLPrintCalcHeight) _calc_footer_height, /* GtkHTMLPrintCalcHeight  calc_footer_height*/
-					       (GtkHTMLPrintDrawFunc) _draw_header, /* GtkHTMLPrintDrawFunc draw_header */
+					       (GtkHTMLPrintCalcHeight) _calc_footer_height, /* GtkHTMLPrintCalcHeight  calc_footer_height*/ 
+					       (GtkHTMLPrintDrawFunc) _draw_header, /* GtkHTMLPrintDrawFunc draw_header */ 
 					       (GtkHTMLPrintDrawFunc) _draw_footer, /* GtkHTMLPrintDrawFunc draw_footer */
-					       (gchar*)mod_name, //e, /* gpointer user_data */
+					       (gchar*)mod_name, //e, /* gpointer user_data */ 
 					       &error);
 
 	g_object_unref (operation);
 	handle_error (&error);
+#endif
 }

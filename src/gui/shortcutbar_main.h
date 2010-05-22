@@ -36,8 +36,8 @@ struct  _shortcut_item {
 void showSBGroup(gint groupnum);
 void changegroupnameSB(gchar * groupName, gint groupNum);
 gint gui_get_num_shortcut_items(gint group_num);
-void gui_get_shortcut_item_info(gint group_num, gint item_num,
-			gchar **item_url, gchar **item_name);
+void gui_get_shortcut_item_info(gint group_num, gint item_num, 
+			gchar **item_url, gchar **item_name);	
 void gui_setup_shortcut_bar(void);
 void gui_update_shortcut_bar(void);
 void gui_shortcutbar_showhide(void);

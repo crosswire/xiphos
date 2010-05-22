@@ -1,6 +1,6 @@
 /*
  * Xiphos Bible Study Tool
- * find_dialog.c
+ * find_dialog.c 
  *
  * Copyright (C) 2000-2009 Xiphos Developer Team
  *
@@ -66,7 +66,7 @@ static FIND_DIALOG *dialog;
  *   void dialog_destroy(GtkObject *object, gpointer data)
  *
  * Description
- *
+ *    
  *
  * Return value
  *   void
@@ -87,10 +87,10 @@ static void dialog_destroy(GtkObject * object, gpointer data)
  * Synopsis
  *   #include ".h"
  *
- *   void find_clicked(GtkButton * button, FIND_DIALOG * d)
+ *   void find_clicked(GtkButton * button, FIND_DIALOG * d)	
  *
  * Description
- *
+ *    
  *
  * Return value
  *   void
@@ -119,10 +119,10 @@ static void find_clicked(GtkButton * button, FIND_DIALOG * d)
  * Synopsis
  *   #include ".h"
  *
- *   void next_clicked(GtkButton * button, FIND_DIALOG * d)
+ *   void next_clicked(GtkButton * button, FIND_DIALOG * d)	
  *
  * Description
- *
+ *    
  *
  * Return value
  *   void
@@ -146,10 +146,10 @@ static void next_clicked(GtkButton * button, FIND_DIALOG * d)
  * Synopsis
  *   #include ".h"
  *
- *   void close_clicked(GtkButton * button, FIND_DIALOG * d)
+ *   void close_clicked(GtkButton * button, FIND_DIALOG * d)	
  *
  * Description
- *
+ *    
  *
  * Return value
  *   void
@@ -168,10 +168,10 @@ static void close_clicked(GtkButton * button, FIND_DIALOG * d)
  * Synopsis
  *   #include ".h"
  *
- *   void create_find_dialog(GtkWidget * htmlwidget)
+ *   void create_find_dialog(GtkWidget * htmlwidget)	
  *
  * Description
- *
+ *    
  *
  * Return value
  *   void
@@ -199,8 +199,8 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 
 
 	dialog->dialog = gtk_dialog_new();
-	g_object_set_data(G_OBJECT(dialog->dialog),
-			  "dialog->dialog", dialog->dialog);
+	gtk_object_set_data(GTK_OBJECT(dialog->dialog),
+			    "dialog->dialog", dialog->dialog);
 	gtk_window_set_title(GTK_WINDOW(dialog->dialog), _("Find"));
 	GTK_WINDOW(dialog->dialog)->type = GTK_WINDOW_TOPLEVEL;
 	/*gtk_window_set_policy(GTK_WINDOW(dialog->dialog), TRUE, TRUE,
@@ -210,8 +210,8 @@ static void create_find_dialog(GtkWidget * htmlwidget)
   	gtk_dialog_set_has_separator (GTK_DIALOG (dialog->dialog), FALSE);
 
 	dialog_vbox29 = GTK_DIALOG(dialog->dialog)->vbox;
-	g_object_set_data(G_OBJECT(dialog->dialog), "dialog_vbox29",
-			  dialog_vbox29);
+	gtk_object_set_data(GTK_OBJECT(dialog->dialog), "dialog_vbox29",
+			    dialog_vbox29);
 	gtk_widget_show(dialog_vbox29);
 
 	vbox45 = gtk_vbox_new(FALSE, 12);
@@ -258,9 +258,9 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 #endif /* !USE_GTKMOZEMBED */
 
 	dialog_action_area29 = GTK_DIALOG(dialog->dialog)->action_area;
-	g_object_set_data(G_OBJECT(dialog->dialog),
-			  "dialog_action_area29",
-			  dialog_action_area29);
+	gtk_object_set_data(GTK_OBJECT(dialog->dialog),
+			    "dialog_action_area29",
+			    dialog_action_area29);
 	gtk_widget_show(dialog_action_area29);
 	gtk_container_set_border_width(GTK_CONTAINER
 				       (dialog_action_area29), 10);
@@ -327,7 +327,7 @@ static void create_find_dialog(GtkWidget * htmlwidget)
  *   void find_dialog(GtkWidget * htmlwidget, const gchar * title)
  *
  * Description
- *
+ *    
  *
  * Return value
  *   void
@@ -356,10 +356,10 @@ static void find_dialog(GtkWidget * htmlwidget, const gchar * title)
  *   #include ".h"
  *
  *   void gui_find_dlg(GtkWidget * htmlwidget, gchar * mod_name,
- *		  gboolean regular, gchar * text)
+ *		  gboolean regular, gchar * text)	
  *
  * Description
- *
+ *    
  *
  * Return value
  *   void

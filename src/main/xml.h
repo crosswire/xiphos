@@ -1,6 +1,6 @@
 /*
  * Xiphos Bible Study Tool
- * xml.h -
+ * xml.h - 
  *
  * Copyright (C) 2000-2009 Xiphos Developer Team
  *
@@ -28,9 +28,9 @@ extern "C" {
 #include <libxml/parser.h>
 
 void xml_add_new_section_to_settings_doc(char * section);
-void xml_new_bookmark_file(void);
-xmlNodePtr xml_add_folder_to_parent(xmlNodePtr parent, gchar * caption);
-void xml_add_bookmark_to_parent(xmlNodePtr parent, gchar * caption,
+void xml_new_bookmark_file(void);	
+xmlNodePtr xml_add_folder_to_parent(xmlNodePtr parent, gchar * caption);	
+void xml_add_bookmark_to_parent(xmlNodePtr parent, gchar * caption, 
 			gchar * key, gchar * module, gchar * mod_desc);
 void xml_save_gnode_to_bookmarks(GNode * gnode, gchar * file_buf);
 void xml_write_bookmark_doc(const xmlChar * xml_filename);
@@ -39,9 +39,8 @@ void xml_free_bookmark_doc(void);
 xmlNodePtr xml_load_bookmark_file(const xmlChar * bookmark_file);
 char *xml_get_list_from_label(const char * section, const char * item, const char * label);
 int xml_set_section_ptr(const char * section);
-void xml_set_list_item(const char * section, const char * item, const char * label,
+void xml_set_list_item(const char * section, const char * item, const char * label, 
 				const char * value);
-void xml_set_new_element(const char *section, const char *item, const char *content);
 int xml_next_item(void);
 char *xml_get_label(void);
 char *xml_get_list(void);

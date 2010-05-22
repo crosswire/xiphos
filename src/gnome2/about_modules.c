@@ -102,9 +102,9 @@ create_menu1(void)
 	gtk_widget_show(item);
 	g_signal_connect(GTK_OBJECT(item), "clicked",
 			   G_CALLBACK  (on_copy_activate),
-			  NULL);
-	gtk_container_add(GTK_CONTAINER(menu), item);
-
+			  NULL);		
+	gtk_container_add(GTK_CONTAINER(menu), item); 
+	
 	gtk_menu_set_accel_group (GTK_MENU (menu), accel_group);
 	gtk_menu_popup((GtkMenu*)menu, NULL, NULL, NULL, NULL, 2,
 					gtk_get_current_event_time());
@@ -189,8 +189,8 @@ gui_create_about_modules(void)
 	GtkWidget *button;
 
 	dialog_about_mods = gtk_dialog_new();
-	g_object_set_data(G_OBJECT(dialog_about_mods),
-			  "dialog_about_mods", dialog_about_mods);
+	gtk_object_set_data(GTK_OBJECT(dialog_about_mods),
+			    "dialog_about_mods", dialog_about_mods);
 	gtk_window_set_title(GTK_WINDOW(dialog_about_mods),
 			     _("About Sword Module"));
 	gtk_window_set_default_size(GTK_WINDOW(dialog_about_mods), 324,
@@ -198,8 +198,8 @@ gui_create_about_modules(void)
 	gtk_window_set_resizable(GTK_WINDOW(dialog_about_mods), TRUE);
 
 	dialog_vbox28 = GTK_DIALOG(dialog_about_mods)->vbox;
-	g_object_set_data(G_OBJECT(dialog_about_mods),
-			  "dialog_vbox28", dialog_vbox28);
+	gtk_object_set_data(GTK_OBJECT(dialog_about_mods),
+			    "dialog_vbox28", dialog_vbox28);
 	gtk_widget_show(dialog_vbox28);
 
 	vbox25 = gtk_vbox_new(FALSE, 0);
@@ -232,7 +232,7 @@ gui_create_about_modules(void)
 	scrolledwindow30 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow30);
 	gtk_container_add(GTK_CONTAINER(frame73), scrolledwindow30);
-	gtk_widget_set_size_request(scrolledwindow30, 304, 183);
+	gtk_widget_set_usize(scrolledwindow30, 304, 183);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow30),
 				       GTK_POLICY_NEVER,
@@ -249,9 +249,9 @@ gui_create_about_modules(void)
 #endif
 	dialog_action_area28 =
 	    GTK_DIALOG(dialog_about_mods)->action_area;
-	g_object_set_data(G_OBJECT(dialog_about_mods),
-			  "dialog_action_area28",
-			  dialog_action_area28);
+	gtk_object_set_data(GTK_OBJECT(dialog_about_mods),
+			    "dialog_action_area28",
+			    dialog_action_area28);
 	gtk_widget_show(dialog_action_area28);
 	gtk_container_set_border_width(GTK_CONTAINER
 				       (dialog_action_area28), 10);

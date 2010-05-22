@@ -18,7 +18,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-
+ 
 #ifndef _NAVBAR_BOOK_H
 #define _NAVBAR_BOOK_H
 
@@ -27,7 +27,7 @@ extern "C"
 {
 #endif
 typedef struct _navbar_book NAVBAR_BOOK;
-struct _navbar_book {
+struct _navbar_book {	
 	GtkWidget *button_up;
 	GtkWidget *button_down;
 	GtkWidget *button_left;
@@ -35,8 +35,9 @@ struct _navbar_book {
 	GtkWidget *button_list;
 	GtkWidget *menu;
 	GtkWidget *lookup_entry;
+  	GtkTooltips *tooltips;	
 	gchar *key;
-	gchar *book_name;
+	gchar *book_name;	
 };
 extern NAVBAR_BOOK navbar_book;
 

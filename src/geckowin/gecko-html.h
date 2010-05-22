@@ -13,7 +13,7 @@
  * General Public License for more details.
  *
  * You should have received a copy of the GNU General Public
- * License along with this program; if not, write to the Free Software
+ * License along with this program; if not, write to the Free Software 
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  *
  * Author: Mikael Hallendal <micke@imendio.com>
@@ -85,8 +85,8 @@ struct _GeckoHtmlClass {
 };
 
 GType           gecko_html_get_type       (void);
-GeckoHtml *     gecko_html_new            (DIALOG_DATA * dialog,
-					   gboolean is_dialog,
+GeckoHtml *     gecko_html_new            (DIALOG_DATA * dialog, 
+					   gboolean is_dialog, 
 					   gint pane);
 void gecko_html_set_parent(GtkWidget *widget, GtkWidget *owner);
 
@@ -97,8 +97,8 @@ void            gecko_html_open_stream    (GeckoHtml    *html,
 void            gecko_html_write          (GeckoHtml    *html,
 					  const gchar *data,
 					  gint         len);
-void            gecko_html_printf         (GeckoHtml    *html,
-					  char        *format,
+void            gecko_html_printf         (GeckoHtml    *html, 
+					  char        *format, 
 					  ...) G_GNUC_PRINTF (2,3);
 void            gecko_html_close          (GeckoHtml    *html);
 
@@ -112,7 +112,7 @@ void            gecko_html_frames         (GeckoHtml    *html,
 gboolean        gecko_html_find           (GeckoHtml    *html,
 					  const gchar *str);
 
-gboolean	gecko_html_find_again	 (GeckoHtml    *html,
+gboolean	gecko_html_find_again	 (GeckoHtml    *html,					  
 					  gboolean     forward);
 
 void		gecko_html_set_find_props (GeckoHtml    *html,
@@ -133,10 +133,10 @@ void            gecko_html_preview_end    (GeckoHtml    *html);
 void            gecko_html_preview_navigate (GeckoHtml *html,
 					    gint page_no);
 gboolean        gecko_html_initialize     (void);
-void            gecko_html_shutdown       (void);
+void            gecko_html_shutdown       (void); 
 
-void            gecko_html_print_document (GtkWindow * window,
-					   gchar * mod_name,
+void            gecko_html_print_document (GtkWindow * window, 
+					   gchar * mod_name, 
 					   DIALOG_DATA * dialog);
 
 void gecko_html_emit_link_message(GeckoHtml *html);

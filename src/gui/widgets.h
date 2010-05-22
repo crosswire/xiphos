@@ -1,6 +1,6 @@
 /*
  * Xiphos Bible Study Tool
- * widgets.h -
+ * widgets.h - 
  *
  * Copyright (C) 2000-2009 Xiphos Developer Team
  *
@@ -25,105 +25,108 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-        typedef struct _app_widgets WIDGETS;
-        struct  _app_widgets {
-                GtkWidget
-                *app,  /* main form */
-*appbar, /* gtk status/progress bar */
-                *vboxMain, /*  */
-                *page, /*  */
-                *epaned,		/* sidebar bar and main panel */
-                *paned_sidebar,		/*pane to show previewer in sidebar bar */
-                *box_side_preview,	/* box for packing previewer in side bar */
-                *vpaned,		/* bible/previewer paned */
-                *vpaned2,		/* commentary/dictionary paned */
-                *hpaned,		/* bible/commentary paned */
-                *bible_info_paned,	/* shortcut bar and main panle */
-                *shortcutbar,		/* the shortcut bar widget */
-                *bookmark_tree,		/* bookmarks tree */
-                *ctree_widget_books,	/* books tree */
-                *workbook_lower,	/* notebook - dict/lex,	gbs, and interlinear */
-                *notebook_gbs,		/* notebook - gbs */
-                *notebook_dict,		/* notebook - dict/lex */
-                *box_comm,		/* notebook - commentaries */
-                *notebook_bible_parallel,/* notebook -  */
-                *notebook_text,		/* notebook - bible texts */
-                *notebook_percomm,	/* notebook - personal comments */
-                *notebook_sidebar,	/* notebook - sidebar */
-                *notebook_comm_book,
-                *notebook_main,		/* main notebook to have multiple passages open at once */
-                *vbox_text,		/* vbox for bible + simple parallel */
-                *box_dict,
-                *vbox_previewer,
-                *parallel_tab,
-
-                /* dock/undock stuff */
-                *dock_sb,		/* dock for shortcut bar */
-                *frame_parallel,	/* frame for interlinear html  */
-
-                /* editor_dialog */
-                *studypad_dialog,
-
-                /* entry widgets */
-                *entry_dict,
-
-                /* toolbars */
-                *toolbar_comments,
-                *toolbar_studypad,
-
-                /* html widgets */
-                *eventbox1,
-                *html_search_report,	/* html widget for serch report shortcut bar */
-                *html_parallel,		/* parallel html widget */
-                *html_parallel_dialog,	/* undocked parallel html widget */
-                *html_text,		/* texts html widget */
-                *html_comm,		/* html commentary widget */
-                *html_percomm,		/* html personal commentary widget */
-                *html_dict,		/* html dictionary widget */
-                *html_book,		/* gbs html widget */
-                *html_studypad,		/* studypad html widget */
-                *html_previewer,	/* to display information (ie strongs) at
-					   bottom of text pane */
-                *html_previewer_text,
-                *html_previewer_sidebar,
-
-                /* book of the Bible combo */
-                *cb_books,
-
-                 /* listview widget */
-                *listview_dict,
-                *store,
-
-                /* label widgets */
-                *label_comm,
-                *label_dict,
-
-                /* comboboxentry widgets */
-                *comboboxentry_dict,
-
-                /* popup menu submenu widgets */
-                *add_bookmark_submenu,
-
-                /* popup menu item widgets */
-                *viewtexts_item,
-                *viewpreview_item,
-                *parallel_tab_item,
-                *side_preview_item,
-                *viewcomms_item,
-                *viewdicts_item,
-                *linkedtabs_item,
-                *showversenum_item,
-                *readaloud_item,
-                *versehighlight_item,
-                *annotate_highlight_item,
-                *xrefs_in_verse_list_item,
-                *new_journal_item,
-                *button_dict_book,
-
-                *button_new_tab,	/* creates a new passage tab */
-                *hboxtb;		/* container for browsing notebook and button */
-        };
-        extern WIDGETS widgets;
+typedef struct _app_widgets WIDGETS;
+struct  _app_widgets {
+	GtkWidget
+		*app,  /* main form */
+		*appbar, /* gtk status/progress bar */
+		*vboxMain, /*  */
+		*page, /*  */
+		*epaned, /* sidebar bar and main panel */
+		*paned_sidebar, /*pane to show previewer in sidebar bar */
+		*box_side_preview, /* box for packing previewer in side bar */
+		*vpaned, /* bible/previewer paned */
+		*vpaned2, /* commentary/dictionary paned */
+		*hpaned, /* bible/commentary paned */
+		*bible_info_paned, /* shortcut bar and main panle */
+		*shortcutbar,  /* the shortcut bar widget */
+		*bookmark_tree, /* bookmarks tree */
+		*ctree_widget_books, /* books tree */
+		*workbook_lower, /* notebook - dict/lex, gbs, and interlinear */
+		*notebook_gbs, /* notebook - gbs */
+		*notebook_dict,  /* notebook - dict/lex */
+		*box_comm,  /* notebook - commentaries */
+		*notebook_bible_parallel,  /* notebook -  */
+		*notebook_text,  /* notebook - bible texts */
+		*notebook_percomm,  /* notebook - personal comments */
+		*notebook_sidebar,  /* notebook - sidebar */
+		*notebook_comm_book,
+		*notebook_main,	/* main notebook to have multiple passages open at once */
+		*vbox_percomm,  /* vbox for personal comments notebook */
+		*vbox_text,  /* vbox for  */
+		*box_dict,
+		*vbox_previewer,
+		//*previewer,
+		*parallel_tab, /*  */
+	    
+	/* dock/undock stuff */
+		*dock_sb, /* dock for shortcut bar */
+		*frame_parallel, /* frame for interlinear html  */ 
+	
+	/* editor_dialog */
+		*studypad_dialog,
+		
+	/* entry widgets */
+		*entry_dict,
+	
+	/* toolbars */
+		*toolbar_comments,
+		*toolbar_studypad,
+	
+	/* html widgets */
+		*eventbox1,	
+		*html_search_report,  /* html widget for serch report shortcut bar */
+		*html_parallel, /* parallel html widget */
+		*html_parallel_dialog, /* undocked parallel html widget */
+		*html_text, /* texts html widget */
+		*html_comm, /* html commentary widget */
+		*html_percomm, /* html personal commentary widget */
+		*html_dict, /* html dictionary widget */
+		*html_book, /* gbs html widget */
+		*html_studypad, /* studypad html widget */
+		*html_previewer, /* to display information (ie strongs) at  
+                                     bottom of text pane */
+		*html_previewer_text,
+		*html_previewer_sidebar,
+				     
+	/* book of the Bible combo */
+		*cb_books,
+		
+	/* textview widget */
+		//*textview,
+	/* listview widget */
+		*listview_dict,
+		*store,
+		
+	/* label widgets */
+		*label_comm,
+		*label_dict,
+		
+	/* comboboxentry widgets */
+		*comboboxentry_dict,
+		
+	/* popup menu submenu widgets */	
+		*add_bookmark_submenu,
+		
+	/* popup menu item widgets */
+                *viewtexts_item, /* widget to access toggle menu - for showtexts */
+		*viewpreview_item,
+		*parallel_tab_item, 
+		*side_preview_item,
+                *viewcomms_item, /* widget to access toggle menu - for showcommss */
+                *viewdicts_item, /* widget to access toggle menu - for showdicts */
+		*versestyle_item,	/* widget to access toggle menu - for versestyle */
+		*linkedtabs_item,	/* widget to access toggle menu - for linkedtabs */
+		*showversenum_item,	/* widget to access toggle menu - for showversenum */
+		*readaloud_item,	/* widget to access toggle menu - for reading out loud */
+		*versehighlight_item,	/* widget to access toggle menu - for verse highlight */
+		*doublespace_item,	/* widget to access toggle menu - for doublespace */
+		*button_dict_book,      /* main toolbar togglebutton */
+//		*button_parallel_view,  /* main toolbar togglebutton */
+		*button_new_tab,	/* creates a new passage tab */
+		*hboxtb;		/* container for browsing notebook and button */
+};
+extern WIDGETS widgets;	
 
 #ifdef __cplusplus
 }

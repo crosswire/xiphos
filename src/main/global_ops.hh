@@ -18,16 +18,16 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-
-
+ 
+ 
 #ifndef ___MOD_GLOBAL_OPS_H_
 #define ___MOD_GLOBAL_OPS_H_
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-
+	
+ 
 typedef struct _global_ops GLOBAL_OPS;
 #include "main/module_dialogs.h"
 struct  _global_ops {
@@ -46,11 +46,10 @@ struct  _global_ops {
 	gboolean variants_all;
 	gboolean transliteration;
 	gboolean commentary_by_chapter;
-	gboolean doublespace;
 	gint module_type;
 	gint image_content;
 	gint respect_font_faces;
-
+    
 	gboolean dialog;
 };
 

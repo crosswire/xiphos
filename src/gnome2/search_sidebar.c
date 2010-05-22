@@ -31,7 +31,6 @@
 //#include "gui/html.h"
 #include "gui/xiphos.h"
 #include "gui/widgets.h"
-#include "gui/utilities.h"
 
 #include "main/search_dialog.h"
 #include "main/search_sidebar.h"
@@ -65,18 +64,24 @@ static void on_search_button_clicked(GtkButton * button, gpointer user_data)
 {
 	if (search_active) {
 		terminate_search = TRUE;
-		gtk_button_set_label((GtkButton *)remember_search, "gtk-find");
+		const gchar *label;
+		label = g_strdup("gtk-find");
+		gtk_button_set_label((GtkButton *)remember_search, label);
 		gtk_button_set_use_stock((GtkButton *)remember_search, TRUE);
-		sync_windows();
+		while (gtk_events_pending())
+			gtk_main_iteration();
 	} else {
-		gtk_button_set_label((GtkButton *)remember_search, "gtk-stop");
+		const gchar *label;
+		label = g_strdup("gtk-stop");
+		gtk_button_set_label((GtkButton *)remember_search, label);
 		gtk_button_set_use_stock((GtkButton *)remember_search, TRUE);
 		main_do_sidebar_search(user_data);
-		gtk_button_set_label((GtkButton *)remember_search, "gtk-find");
+		label = g_strdup("gtk-find");
+		gtk_button_set_label((GtkButton *)remember_search, label);
 		gtk_button_set_use_stock((GtkButton *)remember_search, TRUE);
 	}
 }
-
+ 
 
 /******************************************************************************
  * Name
@@ -86,7 +91,7 @@ static void on_search_button_clicked(GtkButton * button, gpointer user_data)
  *   #include "gui/shortcutbar_search.h"
  *
  *   void on_rrbUseBounds_toggled(GtkToggleButton * togglebutton,
- *						gpointer user_data)
+ *						gpointer user_data)	
  *
  * Description
  *   a toggle button has changed
@@ -110,12 +115,12 @@ static void on_rrbUseBounds_toggled(GtkToggleButton * togglebutton,
 
 /******************************************************************************
  * Name
- *   gui_create_shortcutbar_search
+ *   gui_create_shortcutbar_search 
  *
  * Synopsis
  *   #include "shortcutbar_search.h"
  *
- *   void gui_create_shortcutbar_search(GtkWidget * vp)
+ *   void gui_create_shortcutbar_search(GtkWidget * vp)	
  *
  * Description
  *   create search group of shortcut bar
@@ -144,7 +149,7 @@ void gui_create_search_sidebar(void)
 	//GtkListStore *store;
 
 	//ss = &sss;
-
+	
 	scrolledwindow_search = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow_search);
 	gtk_container_add(GTK_CONTAINER(widgets.notebook_sidebar),
@@ -162,11 +167,11 @@ void gui_create_search_sidebar(void)
 	gtk_widget_show(viewport_search);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow_search),
 			  viewport_search);
-
+			  
 	vbox1 = gtk_vbox_new(FALSE, 4);
 	gtk_widget_show(vbox1);
 	gtk_container_add(GTK_CONTAINER(viewport_search), vbox1);
-
+	
 	vbox5 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox5);
 	gtk_box_pack_start(GTK_BOX(vbox1), vbox5, FALSE, TRUE,
@@ -175,8 +180,8 @@ void gui_create_search_sidebar(void)
 	ss.entrySearch = gtk_entry_new();
 	gtk_widget_show(ss.entrySearch);
 	gtk_box_pack_start(GTK_BOX(vbox5), ss.entrySearch, TRUE, TRUE, 0);
-	gtk_widget_set_size_request(ss.entrySearch, 130, -1);;
-
+	gtk_widget_set_size_request(ss.entrySearch, 130, -1);;	
+	
 	remember_search = gtk_button_new_from_stock(GTK_STOCK_FIND);
 	gtk_widget_show (remember_search);
 	gtk_box_pack_start(GTK_BOX(vbox5), remember_search, TRUE, FALSE, 0);
@@ -194,8 +199,8 @@ void gui_create_search_sidebar(void)
 			   0);
 	gtk_container_set_border_width (GTK_CONTAINER (ss.frame_module), 2);
 	gtk_frame_set_shadow_type(GTK_FRAME(ss.frame_module),GTK_SHADOW_NONE);
-
-	label1 = gtk_label_new(NULL);
+	
+	label1 = gtk_label_new(NULL); 
 
 	header = g_strdup_printf("<span weight=\"bold\">%s</span>",_("Search Module"));
   	gtk_label_set_markup(GTK_LABEL(label1), header);
@@ -204,7 +209,7 @@ void gui_create_search_sidebar(void)
 	gtk_widget_show(label1);
 	gtk_frame_set_label_widget      (GTK_FRAME(ss.frame_module),
                                              label1);
-
+					     
 	vbox90 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox90);
 	gtk_container_add(GTK_CONTAINER(ss.frame_module), vbox90);
@@ -225,19 +230,19 @@ void gui_create_search_sidebar(void)
 	gtk_widget_set_size_request(ss.radiobutton_search_comm, -1, 20);
 	gtk_box_pack_start(GTK_BOX(vbox90), ss.radiobutton_search_comm,
 			   FALSE, FALSE, 0);
-
+			   
 	frame2 = gtk_frame_new(NULL);
 	gtk_widget_show(frame2);
 	gtk_box_pack_start(GTK_BOX(vbox1), frame2, FALSE, TRUE, 0);
 	gtk_container_set_border_width (GTK_CONTAINER (frame2), 2);
 	gtk_frame_set_shadow_type(GTK_FRAME(frame2),GTK_SHADOW_NONE);
-
+	
 	label1 = gtk_label_new(NULL);
 
 	header = g_strdup_printf("<span weight=\"bold\">%s</span>",_("Search Type"));
   	gtk_label_set_markup(GTK_LABEL(label1), header);
 	g_free(header);
-
+	
 	gtk_widget_show(label1);
 	gtk_frame_set_label_widget(GTK_FRAME(frame2), label1);
 
@@ -278,13 +283,13 @@ void gui_create_search_sidebar(void)
 	gtk_box_pack_start(GTK_BOX(vbox1), frame3, FALSE, TRUE, 0);
 	gtk_container_set_border_width (GTK_CONTAINER (frame3), 2);
 	gtk_frame_set_shadow_type(GTK_FRAME(frame3),GTK_SHADOW_NONE);
-
-	label1 = gtk_label_new(NULL);
-
+	
+	label1 = gtk_label_new(NULL); 
+	
 	header = g_strdup_printf("<span weight=\"bold\">%s</span>",_("Search Options"));
   	gtk_label_set_markup(GTK_LABEL(label1), header);
 	g_free(header);
-
+	
 	gtk_widget_show(label1);
 	gtk_frame_set_label_widget(GTK_FRAME(frame3), label1);
 
@@ -306,8 +311,8 @@ void gui_create_search_sidebar(void)
 	gtk_box_pack_start(GTK_BOX(vbox1), frame4, FALSE, TRUE, 0);
 	gtk_container_set_border_width (GTK_CONTAINER (frame4), 2);
 	gtk_frame_set_shadow_type(GTK_FRAME(frame4),GTK_SHADOW_NONE);
-
-	label1 = gtk_label_new(NULL);
+	
+	label1 = gtk_label_new(NULL); 
 
 	header = g_strdup_printf("<span weight=\"bold\">%s</span>",_("Search Scope"));
   	gtk_label_set_markup(GTK_LABEL(label1), header);
@@ -353,8 +358,8 @@ void gui_create_search_sidebar(void)
 	gtk_container_set_border_width (GTK_CONTAINER (ss.frame5), 2);
 	gtk_widget_hide(ss.frame5);
 	gtk_frame_set_shadow_type(GTK_FRAME(ss.frame5),GTK_SHADOW_NONE);
-
-	label1 = gtk_label_new(NULL);
+	
+	label1 = gtk_label_new(NULL); 
 
 	header = g_strdup_printf("<span weight=\"bold\">%s</span>",_("Bounds"));
   	gtk_label_set_markup(GTK_LABEL(label1), header);
@@ -399,7 +404,7 @@ void gui_create_search_sidebar(void)
 			 (GtkAttachOptions) (0), 0, 0);
 	gtk_widget_set_size_request(ss.entryUpper, 114, 22);
 //	gtk_entry_set_text(GTK_ENTRY(ss.entryUpper), _("Revelation"));
-
+	
 
 	g_signal_connect(GTK_OBJECT(ss.rrbUseBounds),
 			 "toggled",
@@ -407,7 +412,7 @@ void gui_create_search_sidebar(void)
 			 NULL);
 	g_signal_connect(GTK_OBJECT(remember_search), "clicked",
 			 G_CALLBACK(on_search_button_clicked), NULL);
-
+			   
 	g_signal_connect(GTK_OBJECT(ss.entrySearch), "activate",
 			 G_CALLBACK(on_search_button_clicked), NULL);
 }

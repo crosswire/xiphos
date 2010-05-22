@@ -28,7 +28,11 @@
 #include <ctype.h>
 #include <time.h>
 
+#ifdef USE_GTKHTML3_14_23
 #include "editor/slib-editor.h"
+#else
+#include "editor/bonobo-editor.h"
+#endif
 
 #include "gui/xiphos.h"
 #include "gui/bookmarks_treeview.h"
@@ -51,7 +55,6 @@
 #include "gui/mod_mgr.h"
 #include "gui/tabbed_browser.h"
 #include "gui/bookmarks_menu.h"
-#include "gui/utilities.h"
 
 #include "main/sword_treekey.h"
 #include "main/navbar_book.h"
@@ -96,25 +99,24 @@ void frontend_init(void)
 	GS_print(("%s\n", "Initiating Xiphos"));
 	settings.comm_showing = TRUE;
 	settings.displaySearchResults = FALSE;
-
+	settings.havethayer = main_is_module("Thayer");
+	settings.havebdb = main_is_module("BDB");
+	
 	/*
 	 *  setup sidebar
 	 */
 	gui_create_sidebar(widgets.epaned);
-
+	
 	/*
 	 *  parallel stuff
-	 */
+	 */	
 	if (settings.havebible) {
 		main_check_parallel_modules();
-		main_init_parallel_view();	
-		gui_create_parallel_page();
-		gtk_widget_realize(widgets.html_parallel);	
-		main_set_parallel_options_at_start();
+		main_init_parallel_view();
 	}
-
+	
 	settings.paratab_showing = FALSE;
-
+	
 	main_dialogs_setup();
 
 	gui_set_sidebar_program_start();
@@ -138,11 +140,11 @@ void frontend_init(void)
  */
 
 
-void frontend_display(const char *tabs)
+void frontend_display(void)
 {
 	GS_print(("%s\n", "Displaying Xiphos"));
 	gui_show_main_window();
-
+	
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.viewtexts_item),
 				       settings.showtexts);
@@ -159,7 +161,7 @@ void frontend_display(const char *tabs)
 	gui_show_hide_texts(settings.showtexts);
 	gui_show_hide_dicts(settings.showdicts);
 	gui_show_hide_comms(settings.showcomms);
-
+	
 	/*
 	 * a little paranoia:
 	 * clamp geometry values to a reasonable bound.
@@ -172,26 +174,28 @@ void frontend_display(const char *tabs)
 		settings.app_y = 0;
 
  	gtk_window_move(GTK_WINDOW(widgets.app),settings.app_x,settings.app_y);
-
-#ifdef USE_GTKMOZEMBED
-	/* gecko  needs the widgets to be visible before writing */
-	sync_windows();
+	
+#ifdef USE_GTKMOZEMBED	/* gecko  needs the widgets to be visible before
+	                   writing */
+	while (gtk_events_pending()) {
+		gtk_main_iteration();
+	}
 #endif
 	// setup passage notebook
-//	if (settings.browsing) {
-	gui_notebook_main_setup (settings.browsing, tabs);
-/*	} else {
+//	if(settings.browsing) {
+	gui_notebook_main_setup (settings.browsing);
+/*	} else {	
 		url = g_strdup_printf("sword://%s/%s",settings.DictWindowModule,
 						      settings.dictkey);
 		main_url_handler(url);
-		g_free(url);
-
+		g_free(url);	
+		
 		gtk_widget_realize(widgets.html_book);
 		url = g_strdup_printf("sword://%s/%d",settings.book_mod,
 						      settings.book_offset);
 		main_url_handler(url);
 		g_free(url);
-
+		
 		settings.addhistoryitem = FALSE;
 		url = g_strdup_printf("sword://%s/%s",settings.MainWindowModule,
 						      settings.currentverse);
@@ -209,15 +213,15 @@ void frontend_display(const char *tabs)
 			   NULL	);
 	gui_show_previewer_in_sidebar(settings.show_previewer_in_sidebar);
 
-
-	if (settings.showdevotional)
+		
+	if (settings.showdevotional) 
 		main_display_devotional();
-	else
+	else 
 		main_init_previewer();
 	gtk_widget_grab_focus (sidebar.module_list);
-
+	
 	GS_print(("%s\n\n", "done"));
-}
+} 
 
 
 /******************************************************************************
@@ -237,7 +241,7 @@ void frontend_display(const char *tabs)
  */
 
 void shutdown_frontend(void)
-{
+{		
 	RESULTS *list_item;
 	if(pixbufs->pixbuf_closed)
 		g_object_unref(pixbufs->pixbuf_closed);
@@ -245,7 +249,7 @@ void shutdown_frontend(void)
 		g_object_unref(pixbufs->pixbuf_opened);
 	if(pixbufs->pixbuf_helpdoc)
 		g_object_unref(pixbufs->pixbuf_helpdoc);
-
+	
 	/* free verse list used for saving search results */
 	if (list_of_verses) {
 		GList *chaser = list_of_verses;
@@ -264,12 +268,13 @@ void shutdown_frontend(void)
 
 	/* if study pad file has changed since last save */
 
+	editor_close_all();
 
 	xml_save_settings_doc(settings.fnconfigure);
 	xml_free_settings_doc();
 
 	main_shutdown_list();
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_GTKMOZEMBED	
 	gecko_html_shutdown();
 #endif
 //	if(settings.browsing)
@@ -280,13 +285,13 @@ void shutdown_frontend(void)
 	g_free(settings.shortcutbarDir);
 	g_free(settings.fnconfigure);
 	g_free(settings.swbmDir);
-
+	
 	main_dialogs_shutdown();
 	main_delete_sidebar_search_backend();
 	main_delete_parallel_view();
-
+	
 	g_string_free(navbar_versekey.module_name,TRUE);
 	g_string_free(navbar_versekey.key,TRUE);
-
+	
 	GS_print(("\n%s\n", "Xiphos is shutdown"));
 }

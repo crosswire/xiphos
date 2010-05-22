@@ -1,6 +1,6 @@
 /*
  * Xiphos Bible Study Tool
- * configs.c -
+ * configs.c - 
  *
  * Copyright (C) 2000-2009 Xiphos Developer Team
  *
@@ -18,7 +18,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-
+ 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -31,19 +31,19 @@
 
 /******************************************************************************
  * Name
- *
+ *  
  *
  * Synopsis
  *   #include "main/configs.h"
  *
- *
+ *   
  *
  * Description
- *
+ *    
  *
  * Return value
- *
- */
+ *   
+ */ 
 
 char *get_conf_file_item(const char * file, const char * mod_name, const char * item)
 {
@@ -62,11 +62,11 @@ char *get_conf_file_item(const char * file, const char * mod_name, const char * 
  *			char * value)
  *
  * Description
- *
+ *    
  *
  * Return value
  *   void
- */
+ */ 
 
 void save_conf_file_item(const char * file, const char * mod_name, const char * item,
 			const char * value)
@@ -82,14 +82,14 @@ void save_conf_file_item(const char * file, const char * mod_name, const char * 
  * Synopsis
  *   #include "main/configs.h"
  *
- *   void save_module_key(gchar * mod_name, gchar * key)
+ *   void save_module_key(gchar * mod_name, gchar * key)	
  *
  * Description
  *    to unlock locked modules
  *
  * Return value
  *   void
- */
+ */ 
 
 void save_module_key(char * mod_name, char * key)
 {

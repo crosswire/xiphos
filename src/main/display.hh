@@ -1,6 +1,6 @@
 /*
  * Xiphos Bible Study Tool
- * display.hh -
+ * display.hh - 
  *
  * Copyright (C) 2000-2009 Xiphos Developer Team
  *
@@ -39,9 +39,9 @@ extern "C" {
 using namespace sword;
 
 class GTKEntryDisp : public SWDisplay {
-public:
+public:	
 	GTKEntryDisp(GtkWidget *_gtkText,
-		     BackEnd *_be)
+		     BackEnd *_be) 
 	    : gtkText(_gtkText),
 	      be(_be),
 	      swbuf(""),
@@ -127,7 +127,7 @@ public:
 
 
 class GTKPrintEntryDisp : public SWDisplay {
-public:
+public:	
 	GTKPrintEntryDisp(GtkWidget *_gtkText,
 			  BackEnd   *_be)
 	    : gtkText(_gtkText),

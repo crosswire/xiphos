@@ -143,18 +143,18 @@ static void html_link_message(GeckoHtml * embed)
 	GeckoHtml *html = GECKO_HTML(embed);
 	GeckoHtmlPriv *priv = GECKO_HTML_GET_PRIVATE(html);
 	gchar *url = priv->embed->GetLinkMessage();
-
+	
 	GS_message(("html_link_message: url = %s",url));
-
+	
 	if (shift_key_pressed)
 		return;
-
+	
 	if (!strlen(url)) { //* moved out of url - clear appbar - info viewer*
 		gui_set_statusbar ("");
 		in_url = FALSE;
-		//*if (GPOINTER_TO_INT(data) == TEXT_TYPE)
+		//*if(GPOINTER_TO_INT(data) == TEXT_TYPE)
 		//	main_clear_viewer();*
-	} else {
+	} else {		
 		GString *url_clean = g_string_new(NULL);
 		const gchar *url_chase;
 		int i = 0;
@@ -200,12 +200,12 @@ static void html_link_message(GeckoHtml * embed)
 }
 
 
-static
+static 
 gint html_dom_mouse_over(GeckoHtml * embed, gpointer dom_event)
 {
 	GeckoHtml *html = GECKO_HTML(embed);
 	GeckoHtmlPriv *priv = GECKO_HTML_GET_PRIVATE(html);
-	return priv->embed->ProcessMouseOver(dom_event,
+	return priv->embed->ProcessMouseOver(dom_event, 
 					     priv->pane,
 					     priv->is_dialog,
 					     priv->dialog);
@@ -217,9 +217,9 @@ gint html_dom_mouse_out(GeckoHtml * embed, gpointer dom_event)
 {
 	GeckoHtml *html = GECKO_HTML(embed);
 	GeckoHtmlPriv *priv = GECKO_HTML_GET_PRIVATE(html);
-	if (priv->pane == VIEWER_TYPE)
+	if(priv->pane == VIEWER_TYPE)
 		shift_key_pressed = FALSE;
-	return 1;
+	return 1; 
 }
 
 static
@@ -267,16 +267,16 @@ static gint html_open_uri(GeckoHtml * embed, const gchar * uri)
 		}
 		uri = tmpstr->str;
 	}
-
+	
 	// prefixable link
-	if (priv->pane == DIALOG_COMMENTARY_TYPE) {
+	if(priv->pane == DIALOG_COMMENTARY_TYPE) { 
 		strcpy(book, priv->dialog->key);
 		*(strrchr(book, ' ')) = '\0';
-
+		
 		if ((buf = strstr((char*)uri, "&value="))) {
 			buf += 7;
 			place = buf;
-
+	
 			while (*buf && isdigit(*buf))
 				buf++;
 			if ((*buf == ':') || strncmp(buf, "%3A", 3) == 0) {
@@ -287,11 +287,11 @@ static gint html_open_uri(GeckoHtml * embed, const gchar * uri)
 				uri = tmpbuf;
 			}
 		}
-
+		
 	}
-
+	
 	GS_message(("uri: %s", uri));
-	if (priv->is_dialog)
+	if(priv->is_dialog)
 		main_dialogs_url_handler(priv->dialog, uri, TRUE);
 	else
 		main_url_handler(uri, TRUE);
@@ -329,12 +329,12 @@ static void html_realize(GtkWidget * widget)
 	attributes.colormap = gtk_widget_get_colormap (widget);
 
 	attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP;
-
+	
 	widget->window = gdk_window_new(
 		gtk_widget_get_parent_window(widget),
 		& attributes, attributes_mask
 		);
-
+	
 	gdk_window_set_user_data(widget->window, html);
 
 	widget->style = gtk_style_attach(widget->style, widget->window);
@@ -382,7 +382,7 @@ static void html_init(GeckoHtml * html)
 	priv->base_uri = NULL;
 	priv->anchor = NULL;
 	priv->timeout = 0;
-
+	
 	priv->embed = new BrowserEmbed();
 	klass = GECKO_HTML_GET_CLASS(html);
 }
@@ -415,7 +415,7 @@ static void html_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 {
     GeckoHtml *html;
     html = GECKO_HTML(widget);
-
+   
     widget->allocation = *allocation;
 
     if (GTK_WIDGET_REALIZED(widget))
@@ -462,7 +462,7 @@ static void html_class_init(GeckoHtmlClass * klass)
 			 gtk_marshal_NONE__NONE,
 			 G_TYPE_NONE, 0);
 
-	signals[HTML_TITLE] =
+	signals[HTML_TITLE] = 
 	    g_signal_new("html_title",
 			 G_TYPE_FROM_CLASS(klass),
 			 G_SIGNAL_RUN_FIRST,
@@ -471,7 +471,7 @@ static void html_class_init(GeckoHtmlClass * klass)
 			 gtk_marshal_NONE__NONE,
 			 G_TYPE_NONE, 0);
 
-	signals[HTML_OPEN_URI] =
+	signals[HTML_OPEN_URI] = 
 	    g_signal_new("html_open_uri",
 			 G_TYPE_FROM_CLASS(klass),
 			 G_SIGNAL_RUN_LAST,
@@ -479,8 +479,8 @@ static void html_class_init(GeckoHtmlClass * klass)
 			 NULL, NULL,
 			 gtk_marshal_VOID__STRING,
 			 G_TYPE_BOOLEAN, 1, G_TYPE_CHAR);
-
-	signals[HTML_DOM_KEY_DOWN] =
+	
+	signals[HTML_DOM_KEY_DOWN] = 
 	    g_signal_new("html_dom_key_down",
 			 G_TYPE_FROM_CLASS(klass),
 			 G_SIGNAL_RUN_LAST,
@@ -488,7 +488,7 @@ static void html_class_init(GeckoHtmlClass * klass)
 			 NULL, NULL,
 			 gtk_marshal_BOOL__POINTER,
 			 G_TYPE_BOOLEAN, 1, G_TYPE_POINTER);
-
+	
 	signals[HTML_DOM_KEY_UP] =
 	    g_signal_new("html_dom_key_up",
 			 G_TYPE_FROM_CLASS(klass),
@@ -498,7 +498,7 @@ static void html_class_init(GeckoHtmlClass * klass)
 			 gtk_marshal_BOOL__POINTER,
 			 G_TYPE_BOOLEAN, 1, G_TYPE_POINTER);
 
-	signals[HTML_DOM_MOUSE_DOWN] =
+	signals[HTML_DOM_MOUSE_DOWN] = 
 	    g_signal_new("html_dom_mouse_down",
 			 G_TYPE_FROM_CLASS(klass),
 			 G_SIGNAL_RUN_LAST,
@@ -506,8 +506,8 @@ static void html_class_init(GeckoHtmlClass * klass)
 			 NULL, NULL,
 			 gtk_marshal_BOOL__POINTER,
 			 G_TYPE_BOOLEAN, 1, G_TYPE_POINTER);
-
-	signals[HTML_DOM_MOUSE_UP] =
+	
+	signals[HTML_DOM_MOUSE_UP] = 
 	    g_signal_new("html_dom_mouse_up",
 			 G_TYPE_FROM_CLASS(klass),
 			 G_SIGNAL_RUN_LAST,
@@ -525,7 +525,7 @@ static void html_class_init(GeckoHtmlClass * klass)
 			 gtk_marshal_BOOL__POINTER,
 			 G_TYPE_BOOLEAN, 1, G_TYPE_POINTER);
 
-	signals[HTML_DOM_MOUSE_OVER] =
+	signals[HTML_DOM_MOUSE_OVER] = 
 	    g_signal_new("html_dom_mouse_over",
 			 G_TYPE_FROM_CLASS(klass),
 			 G_SIGNAL_RUN_LAST,
@@ -534,7 +534,7 @@ static void html_class_init(GeckoHtmlClass * klass)
 			 gtk_marshal_BOOL__POINTER,
 			 G_TYPE_BOOLEAN, 1, G_TYPE_POINTER);
 
-	signals[HTML_DOM_MOUSE_OUT] =
+	signals[HTML_DOM_MOUSE_OUT] = 
 	    g_signal_new("html_dom_mouse_out",
 			 G_TYPE_FROM_CLASS(klass),
 			 G_SIGNAL_RUN_LAST,
@@ -543,7 +543,7 @@ static void html_class_init(GeckoHtmlClass * klass)
 			 gtk_marshal_BOOL__POINTER,
 			 G_TYPE_BOOLEAN, 1, G_TYPE_POINTER);
 
-
+			 
 	signals[TITLE_CHANGED] =
 		g_signal_new("title_changed",
 			     G_TYPE_FROM_CLASS(klass),
@@ -600,7 +600,7 @@ GeckoHtml *gecko_html_new(DIALOG_DATA * dialog, gboolean is_dialog, gint pane)
 	priv->pane = pane;
 	priv->is_dialog = is_dialog;
 	priv->dialog = dialog;
-
+	
 	//make scrollbar appear on the left for RTL locales
 	GtkTextDirection dir = gtk_widget_get_direction(GTK_WIDGET (html));
 	if (dir == GTK_TEXT_DIR_RTL)
@@ -684,7 +684,7 @@ void gecko_html_close(GeckoHtml * html)
 	priv = html->priv;
 
 	priv->embed->CloseStream();
-
+	
 	//going to test to see if this is still needed
 /*	html->priv->timeout = g_timeout_add(2000,
 					    (GSourceFunc) timeout_update_gok,
@@ -752,7 +752,7 @@ void gecko_html_select_none(GeckoHtml * html)
 	html->priv->embed->DoCommand("cmd_selectNone");
 }
 
-#ifdef HAVE_GTKUPRINT
+#ifdef USE_GTKUPRINT
 void
 gecko_html_print(GeckoHtml * html, GeckoPrintInfo * info, gboolean preview,
 		 gint * npages)
@@ -778,7 +778,7 @@ gboolean gecko_html_initialize(void)
 	xul_dir = g_strconcat (xul_dir, "\0", NULL);
 	xul_dir = g_build_filename (xul_dir, "bin\0");
 	GS_message((xul_dir));
-	init_xulrunner (xul_dir, xul_dir);
+	init_xulrunner (xul_dir, xul_dir);	
 	creator = new WindowCreator();
 	creator->install();
 
@@ -795,25 +795,25 @@ void
 gecko_html_print_document(GtkWindow * window, gchar * mod_name,
 			  DIALOG_DATA * dialog)
 {
-#ifdef HAVE_GTKUPRINT
+#ifdef USE_GTKUPRINT	
 	GtkWidget *gtk_win;
 	GeckoHtml *html;
 	GtkWidget *vbox = gtk_vbox_new(FALSE, FALSE);
     	SWDisplay *old_display = 0;
 	SWDisplay *swdisplay = 0;
 	SWMgr *mgr;
-	if (dialog) {
+	if(dialog) {
 		BackEnd *be = (BackEnd *)dialog->backend;
 		mgr = be->get_mgr();
 	}
-	else
+	else 
 		mgr = backend->get_mgr();
-
+	
 	SWModule *mod = mgr->Modules[mod_name];
-
+	
 	if (!mod)
 		return;
-
+    
 	gtk_win = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	html = gecko_html_new(NULL,FALSE,8);
 	gtk_container_add(GTK_CONTAINER(gtk_win), GTK_WIDGET(vbox));
@@ -822,19 +822,19 @@ gecko_html_print_document(GtkWindow * window, gchar * mod_name,
 	gtk_widget_show(vbox);
 	gtk_widget_show(GTK_WIDGET(html));
 	gtk_widget_hide(gtk_win);
-
+    
 	old_display = mod->getDisplay();
-
+    
 	if (!strcmp(mod->Type(), TEXT_MODS))
 		swdisplay = new GTKPrintChapDisp(GTK_WIDGET(html), backend);
-	else
+	else 
 		swdisplay = new GTKPrintEntryDisp(GTK_WIDGET(html), backend);
-
+	
 	mod->setDisplay(swdisplay);
 	mod->Display();
 
 	gecko_print_run(window, html, gtk_win, vbox);
-
+    
     	mod->setDisplay(old_display);
 	if (swdisplay)
 		delete swdisplay;
@@ -885,16 +885,16 @@ gboolean gecko_html_emit_uri_open(GeckoHtml *html, const gchar *uri)
 		}
 		uri = tmpstr->str;
 	}
-
+	
 	// prefixable link
-	if (priv->pane == DIALOG_COMMENTARY_TYPE) {
+	if(priv->pane == DIALOG_COMMENTARY_TYPE) { 
 		strcpy(book, priv->dialog->key);
 		*(strrchr(book, ' ')) = '\0';
-
+		
 		if ((buf = strstr((char*)uri, "&value="))) {
 			buf += 7;
 			place = buf;
-
+	
 			while (*buf && isdigit(*buf))
 				buf++;
 			if ((*buf == ':') || strncmp(buf, "%3A", 3) == 0) {
@@ -905,11 +905,11 @@ gboolean gecko_html_emit_uri_open(GeckoHtml *html, const gchar *uri)
 				uri = tmpbuf;
 			}
 		}
-
+		
 	}
-
+	
 	GS_message(("uri: %s", uri));
-	if (priv->is_dialog)
+	if(priv->is_dialog)
 		main_dialogs_url_handler(priv->dialog, uri, TRUE);
 	else
 		main_url_handler(uri, TRUE);

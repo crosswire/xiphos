@@ -74,8 +74,8 @@ DIALOG_DATA *cur_d;
  * Synopsis
  *   #include "commentary_dialog.h"
  *
- *   void on_dialog_destroy(GtkObject * object,
- *						DIALOG_DATA * d)
+ *   void on_dialog_destroy(GtkObject * object, 
+ *						DIALOG_DATA * d)	
  *
  * Description
  *   shut down the View Commentay Dialog
@@ -90,6 +90,7 @@ static void on_dialog_destroy(GtkObject *object,
 	if (!dialog_freed)
 		main_free_on_destroy(d);
 	dialog_freed = FALSE;
+	settings.percomm_dialog_exist = FALSE;
 }
 
 
@@ -100,10 +101,10 @@ static void on_dialog_destroy(GtkObject *object,
  * Synopsis
  *   #include "commentary_dialog.h"
  *
- *   void gui_close_comm_dialog(DIALOG_DATA * d)
+ *   void gui_close_comm_dialog(DIALOG_DATA * d)	
  *
  * Description
- *
+ *   
  *
  * Return value
  *   void
@@ -126,10 +127,10 @@ void gui_close_comm_dialog(DIALOG_DATA * d)
  *   #include "commentary_dialog.h"
  *
  *   gboolean on_dialog_motion_notify_event(GtkWidget *widget,
-                      GdkEventMotion  *event, DIALOG_DATA * d)
+                      GdkEventMotion  *event, DIALOG_DATA * d)	
  *
  * Description
- *
+ *   
  *
  * Return value
  *   gboolean
@@ -153,10 +154,10 @@ static gboolean on_dialog_motion_notify_event(GtkWidget *widget,
  * Synopsis
  *   #include "commentary_dialog.h"
  *
- *   void dialog_url(GtkHTML * html, const gchar * url, DIALOG_DATA * d)
+ *   void dialog_url(GtkHTML * html, const gchar * url, DIALOG_DATA * d)	
  *
  * Description
- *
+ *   
  *
  * Return value
  *   void
@@ -177,7 +178,7 @@ static void dialog_url(GtkHTML *html,
  *   #include "gui/commentary_dialog.h"
  *
  *   gint html_button_pressed(GtkWidget * html, GdkEventButton * event,
- *					DIALOG_DATA * d)
+ *					DIALOG_DATA * d)	
  *
  * Description
  *    mouse button pressed in window - used to set cur_d to the current
@@ -213,7 +214,7 @@ static gint button_press_event(GtkWidget *html,
  * Synopsis
  *   #include ".h"
  *
- *   void commentary_prefixable_link(void)
+ *   void commentary_prefixable_link(void)	
  *
  * Description
  *    front-end-ish handler for xref clicks, to supply book name to prefix.
@@ -243,7 +244,7 @@ void commentary_prefixable_link(GtkHTML *html,
  * Synopsis
  *   #include "gui/commentary_dialog.h"
  *
- *   void sync_with_main(DIALOG_DATA * d)
+ *   void sync_with_main(DIALOG_DATA * d)	
  *
  * Descriptiond->navbar.lookup_entry
  *   bring the the View Commentay Dialog module into sync with main window
@@ -269,10 +270,10 @@ static void sync_with_main(DIALOG_DATA *d)
  * Synopsis
  *   #include ".h"
  *
- *   GtkWidget *create_nav_toolbar(void)
+ *   GtkWidget *create_nav_toolbar(void)	
  *
  * Description
- *    create navigation toolbar and
+ *    create navigation toolbar and 
  *
  * Return value
  *   void
@@ -289,9 +290,9 @@ static void
 _popupmenu_requested_cb (GeckoHtml *html,
 			 gchar *uri,
 			 DIALOG_DATA *d)
-{
+{	
     	gui_menu_popup (NULL, d);
-	//gui_commentary_dialog_create_menu(d);
+	//gui_commentary_dialog_create_menu(d); 
 }
 #endif /* USE_GTKMOZEMBED */
 
@@ -302,7 +303,7 @@ _popupmenu_requested_cb (GeckoHtml *html,
  * Synopsis
  *   #include "commentary_dialog.h"
  *
- *   void gui_create_commentary_dialog(void)
+ *   void gui_create_commentary_dialog(void)	
  *
  * Description
  *   create a Commentary Dialog
@@ -323,12 +324,12 @@ void gui_create_commentary_dialog(DIALOG_DATA *d,
 #else
 	GtkWidget *scrolledwindow38;
 #endif
-
+	
 	cur_d = d;
 	d->dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 
-	g_object_set_data(G_OBJECT(d->dialog), "d->dialog",
-			  d->dialog);
+	gtk_object_set_data(GTK_OBJECT(d->dialog), "d->dialog",
+			    d->dialog);
 	gtk_window_set_title(GTK_WINDOW(d->dialog),
 			     main_get_module_description(d->mod_name));
 	//gtk_window_set_default_size(GTK_WINDOW(d->dialog), 462, 280);
@@ -358,15 +359,15 @@ void gui_create_commentary_dialog(DIALOG_DATA *d,
 	gtk_box_pack_start(GTK_BOX(vbox30), frame19, TRUE, TRUE, 0);
 	gtk_frame_set_shadow_type(GTK_FRAME(frame19), GTK_SHADOW_IN);
 
-#ifdef USE_GTKMOZEMBED
-
+#ifdef USE_GTKMOZEMBED	
+	
 	eventbox = gtk_event_box_new();
 	gtk_widget_show(eventbox);
 	gtk_container_add(GTK_CONTAINER(frame19), eventbox);
-
+	
 	d->html = GTK_WIDGET(gecko_html_new(((DIALOG_DATA*) d),TRUE,DIALOG_COMMENTARY_TYPE));
 	gtk_container_add(GTK_CONTAINER(eventbox), d->html);
-	gtk_widget_show(d->html);
+	gtk_widget_show(d->html);	
 	g_signal_connect((gpointer)d->html,
 		      "popupmenu_requested",
 		      G_CALLBACK (_popupmenu_requested_cb),
@@ -388,12 +389,12 @@ void gui_create_commentary_dialog(DIALOG_DATA *d,
 			  d->html);
 	gtk_html_load_empty(GTK_HTML(d->html));
 
-#ifndef USE_GTKMOZEMBED
+#ifndef USE_GTKMOZEMBED	
 	g_signal_connect(GTK_OBJECT(d->html),
 			 "link_clicked",
 			 G_CALLBACK(commentary_prefixable_link), d);
-#endif
-
+#endif	
+	
 	g_signal_connect(GTK_OBJECT(d->html), "on_url",
 			 G_CALLBACK(dialog_url), d);
 	g_signal_connect(GTK_OBJECT(d->html),

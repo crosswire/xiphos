@@ -27,29 +27,29 @@ extern "C" {
 #endif
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
-
-#include "main/configs.h"
-
+	
+#include "main/configs.h"	
+	
 /*** these defs need to be seen by gui and backend ***/
-
+	
 /* module types */
-#define TEXT_TYPE 0
-#define COMMENTARY_TYPE 1
+#define TEXT_TYPE 0 
+#define COMMENTARY_TYPE 1 
 #define DICTIONARY_TYPE 2
 #define BOOK_TYPE 3
 #define PERCOM_TYPE 4
-
+	
 #define PARALLEL_TYPE 5
 #define VIEWER_TYPE 6
 #define SB_VIEWER_TYPE 13
-
+	
 #define DIALOG_TEXT_TYPE 7
-#define DIALOG_COMMENTARY_TYPE 8
+#define DIALOG_COMMENTARY_TYPE 8 
 #define DIALOG_DICTIONARY_TYPE 9
 #define DIALOG_BOOK_TYPE 10
 #define DIALOG_SEARCH_PREVIEW_TYPE 11
 #define	PRAYERLIST_TYPE 12
-
+       
 /* these strings are not seen by users */
 /* they are returned by Sword in module->Type() */
 #define TEXT_MODS "Biblical Texts"
@@ -57,7 +57,7 @@ extern "C" {
 #define DICT_MODS "Lexicons / Dictionaries"
 #define BOOK_MODS "Generic Books"
 
-#define UTF_8 "UTF-8"
+#define UTF_8 "UTF-8" 
 extern char *OLD_CODESET;
 extern char *sword_locale;
 extern int re_encode_digits;
@@ -68,16 +68,16 @@ extern gboolean companion_activity;
 
 void main_book_heading(char * mod_name);
 void main_chapter_heading(char * mod_name);
-void main_delete_note(	const gchar * module_name,
+void main_delete_note(	const gchar * module_name, 
 								const gchar * key_str);
-void main_save_note(const gchar * module_name, const gchar * key_str,
+void main_save_note(const gchar * module_name, const gchar * key_str, 
 				               const gchar * note_str );
 GtkWidget *main_dictionary_drop_down_new(char * mod_name, char * old_key);
 char *main_get_path_to_mods(void);
 const char *main_get_sword_version(void);
 void main_shutdown_backend(void);
-void main_set_module_unlocked(const char * mod_name, char * key);
-void main_save_module_key(const char * mod_name, char * key);
+void main_set_module_unlocked(char * mod_name, char * key);
+void main_save_module_key(char * mod_name, char * key);
 gchar *main_update_nav_controls(const gchar * key);
 char *main_get_active_pane_key(void);
 char *main_get_active_pane_module(void);
@@ -97,7 +97,6 @@ void main_dictionary_button_clicked(gint direction);
 const char *main_get_module_language(const char *module_name);
 int main_check_for_global_option(char * mod_name, char * option);
 int main_has_cipher_tag(char *mod_name);
-void main_check_unlock(const char *mod_name, gboolean conditional);
 int main_is_module(char * mod_name);
 int main_has_search_framework(char *mod_name);
 int main_optimal_search(char *mod_name);
@@ -121,7 +120,6 @@ void main_flush_widgets_content(void);
 gboolean main_is_Bible_key(gchar *key);
 const char* main_get_osisref_from_key(const char *module, const char *key);
 const char *main_get_language_map(const char *language);
-char **main_get_module_language_list(void);
 void main_init_language_map(void);
 
 #ifdef __cplusplus

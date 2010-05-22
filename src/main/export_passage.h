@@ -1,6 +1,6 @@
 /*
  * Xiphos Bible Study Tool
- * export_passage.h -
+ * export_passage.h - 
  *
  * Copyright (C) 2007-2009 Xiphos Developer Team
  *
@@ -25,7 +25,7 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
+#endif	
 
 typedef struct _export_data EXPORT_DATA;
 struct _export_data {

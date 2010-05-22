@@ -268,7 +268,7 @@ prayerlist_fundamentals(gchar *summary,
 	// path creation based on name selection.
 	g_string_printf(path, "%s/" DOTSWORD "/modules/genbook/rawgenbook/%s",
 			settings.homedir, info->text1);
-	if (g_access(path->str, F_OK) == 0) {
+	if (access(path->str, F_OK) == 0) {
 		gui_generic_warning
 		    (_("Xiphos finds that prayer list already."));
 		goto out;

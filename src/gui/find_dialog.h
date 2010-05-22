@@ -1,6 +1,6 @@
 /*
  * Xiphos Bible Study Tool
- * find_dialog.h -
+ * find_dialog.h - 
  *
  * Copyright (C) 2000-2009 Xiphos Developer Team
  *
@@ -24,7 +24,7 @@
 
 #include <gtk/gtk.h>
 
-void gui_find_dlg(GtkWidget *htmlwidget, gchar *mod_name,
+void gui_find_dlg(GtkWidget *htmlwidget, gchar *mod_name, 
 		  gboolean regular, gchar *text);
 
 #endif

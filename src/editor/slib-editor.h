@@ -18,7 +18,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-
+ 
 #ifndef _SLIB_EDITOR_H
 #define _SLIB_EDITOR_H
 
@@ -30,7 +30,9 @@ extern "C"
 #include <config.h>
 
 #include <gtk/gtk.h>
-
+	
+#ifdef USE_GTKHTML3_14_23
+	
 #include "main/navbar_versekey.h"
 
 typedef struct _editor EDITOR;
@@ -43,7 +45,7 @@ struct _editor {
 	GtkWidget *statusbar;
 
 	NAVBAR_VERSEKEY navbar;
-
+	
 	gint type;
 
 	gboolean studypad;
@@ -53,7 +55,7 @@ struct _editor {
 	gchar *filename;
 	gchar *module;
 	gchar *key;
-};
+};	
 
 enum {
 	STUDYPAD_EDITOR,
@@ -66,7 +68,9 @@ enum {
 void button_test_clicked_cb(GtkObject *object, gpointer user_data);
 void button_ok_clicked_cb(GtkObject *object, gpointer user_data);
 void button_cancel_clicked_cb(GtkObject *object, gpointer user_data);*/
+void editor_sync_toggled(GtkToggleButton * button, EDITOR * e);
 void editor_sync_with_main(void);
+gboolean editor_close_all(void);
 void editor_load_note(EDITOR * e, const gchar * module_name, const gchar * key);
 void editor_load_book(EDITOR * e);
 gint editor_create_new(const gchar * filename, const gchar * key, gint note);
@@ -74,6 +78,7 @@ void editor_save_book(EDITOR * e);
 void editor_maybe_save_all(void);
 GtkWidget * editor_new (const gchar * title, EDITOR *e);
 
+#endif /* USE_GTKHTML3_14_23 */
 
 #ifdef __cplusplus
 }

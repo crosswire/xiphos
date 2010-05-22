@@ -1,3 +1,4 @@
+
 [Desktop Entry]
 _Name=Xiphos Bible Guide
 _Comment=Study the Bible
@@ -5,6 +6,8 @@ Exec=@xiphos_exec@
 TryExec=xiphos
 Icon=xiphos
 Terminal=false
+X-MultipleArgs=false
 Type=Application
-Categories=Education;
+Categories=Utility;X-Red-Hat-Extra;
 StartupNotify=true
+X-Desktop-File-Install-Version=0.15

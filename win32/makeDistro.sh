@@ -26,7 +26,7 @@
 cd ..
 
 # configure and build xiphos
-./waf configure --enable-gtkhtml --disable-console --debug-level='optimized' --disable-dbus
+./waf configure --enable-gtkhtml --disable-console --debug-level='optimized'
 ./waf
 ./waf install
 
@@ -34,7 +34,7 @@ cd ..
 outdir=win32/binaries/Xiphos/bin/
 origdir=/usr/local/bin/
 
-for f in libsword-1-6-0-r2494.dll imp2ld.exe addld.exe mod2zmod.exe imp2gbs.exe xml2gbs.exe installmgr.exe imp2vs.exe vpl2mod.exe mkfastmod.exe mod2vpl.exe vs2osisreftxt.exe tei2mod.exe osis2mod.exe mod2osis.exe mod2imp.exe diatheke.exe uconv.exe icuin40.dll icuuc40.dll
+for f in libsword-1-6-0.dll imp2ld.exe addld.exe mod2zmod.exe imp2gbs.exe xml2gbs.exe installmgr.exe imp2vs.exe vpl2mod.exe mkfastmod.exe mod2vpl.exe vs2osisreftxt.exe vs2osisreftxt.exe tei2mod.exe osis2mod.exe mod2osis.exe mod2imp.exe diatheke.exe uconv.exe icuin40.dll icuuc40.dll
 do
     cp $origdir$f $outdir$f
     strip $outdir$f
@@ -42,16 +42,10 @@ done
 
 strip $outdir"xiphos.exe"
 
-cp -r /usr/local/share/sword/locales.d $outdir"../share/sword/"
-
-# update gtk+ mo files
-
-cd win32/po
-for f in `ls *.po`; do msgfmt $f; done
-cp messages.mo ../binaries/Xiphos/share/locale/fa/LC_MESSAGES/gtk20.mo
+cp -r /usr/local/share/sword/locales.d $outdir"../share/sword/locales.d"
 
 # make installer
-cd ../nsis
+cd win32/nsis
 makensis installer.nsi
 
 
