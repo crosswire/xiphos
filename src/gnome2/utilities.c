@@ -284,7 +284,6 @@ gchar * gui_general_user_file (const char *fname, gboolean critical)
 	gchar *alternative[10];
 	gchar *file;
 	gint i;
-	gchar *share_dir;
 	
 	/* create cache hash table if it doesnt already exist */
 	if (already_found == NULL)
@@ -332,10 +331,8 @@ gchar * gui_general_user_file (const char *fname, gboolean critical)
 	alternative[i++] = g_build_filename("..", "..", "ui", fname, NULL);
 #endif
 #ifdef WIN32
-	share_dir = g_win32_get_package_installation_directory_of_module(NULL);
-	share_dir = g_strconcat(share_dir, "\0", NULL);
-	share_dir = g_build_filename (share_dir, "share", "xiphos", fname, NULL);
-	alternative[i++] = share_dir;
+	alternative[i++] = g_build_filename(xiphos_win32_get_subdir("share"),
+					    "xiphos", fname, NULL);
 #else
 	alternative[i++] = g_build_filename("..", "share", "xiphos", fname, NULL);
 #endif
@@ -1155,8 +1152,7 @@ image_locator(char *image)
 #ifndef WIN32
 	return g_strdup_printf("%s/%s", PACKAGE_PIXMAPS_DIR, image);
 #else
-	gchar d[PATH_MAX+2];
-	return g_build_filename(getcwd(d, PATH_MAX), "..", "share",
+	return g_build_filename(xiphos_win32_get_subdir("share"),
 				"pixmaps", "xiphos", image, NULL);
 #endif /* WIN32 */
 }
@@ -1305,5 +1301,15 @@ gboolean xiphos_open_default (const gchar *file)
 		return TRUE;
 #endif
 }
+
+#ifdef WIN32
+gchar* xiphos_win32_get_subdir(const gchar *subdir)
+{
+	gchar *ret_dir = g_win32_get_package_installation_directory_of_module(NULL);
+	ret_dir = g_strconcat(ret_dir, "\0", NULL);
+	ret_dir = g_build_filename(ret_dir, subdir, NULL);
+	return ret_dir;
+}
+#endif
 
 /******   end of file   ******/
