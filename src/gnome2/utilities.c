@@ -63,6 +63,14 @@
 #include <gtkhtml/htmltypes.h>
 #endif /* USE_GTKMOZEMBED */
 
+#include <gsf/gsf-utils.h>
+#include <gsf/gsf-outfile-zip.h>
+#include <gsf/gsf-output-stdio.h>
+#include <gsf/gsf-output.h>
+#include <gsf/gsf-input.h>
+#include <gsf/gsf-outfile.h>
+#include <gsf/gsf-input-stdio.h>
+
 #include "gui/debug_glib_null.h"
 
 
@@ -1312,4 +1320,93 @@ gchar* xiphos_win32_get_subdir(const gchar *subdir)
 }
 #endif
 
+void archive_addfile(GsfOutfile *output, const gchar *file, const gchar *name)
+{
+	GsfInput *inputchild = NULL;
+	GsfOutput *outputchild = NULL;
+
+	inputchild = GSF_INPUT(gsf_input_stdio_new(file, NULL));
+	outputchild = gsf_outfile_new_child(output, name, FALSE);
+	gsf_input_copy(inputchild, outputchild);
+	gsf_output_close(outputchild);
+	g_object_unref(inputchild);
+	g_object_unref(outputchild);
+}
+
+void archive_adddir(GsfOutfile *output, gchar *path, const gchar *name)
+{
+	GDir *dir;
+	const gchar *file;
+	gchar *complete_file;
+	GsfOutfile *child;
+
+	child = GSF_OUTFILE(gsf_outfile_new_child(output, name, TRUE));
+	dir = g_dir_open(path, 0, NULL);
+	while ((file = g_dir_read_name(dir))) {
+		complete_file = g_build_filename(path, file, NULL);
+		if (g_file_test(complete_file, G_FILE_TEST_IS_DIR))
+			archive_adddir(GSF_OUTFILE(child), complete_file, file);
+		else
+			archive_addfile(GSF_OUTFILE(child), complete_file, file);
+	}
+	g_dir_close(dir);
+}
+
+void xiphos_create_archive(gchar* conf_file, gchar* datapath, gchar *zip,
+			   const gchar *destination)
+{
+	gsf_init();
+	GsfOutfile *outputfile;
+	GsfOutput *output;
+	GsfOutfile *tmp;
+	gchar** path;
+	gchar* moddirname;
+	GString *modpath;
+	int i;
+	
+	//the module dir is the last part of the path
+	path = g_strsplit(datapath, "/", -1);
+	moddirname = g_strdup(path[g_strv_length(path) - 1]);
+
+	//create a relative path without preceding "."
+	//or the trailing dir name
+	modpath = g_string_new(NULL);
+	for (i = 1; i <= (g_strv_length(path) - 2); i++)
+	{
+		modpath = g_string_append(modpath, path[i]);
+		if (i < g_strv_length(path) -2)
+			modpath = g_string_append(modpath, "/");
+	}
+	
+	//open files
+	output = gsf_output_stdio_new(zip, NULL);
+	outputfile = gsf_outfile_zip_new(output, NULL);
+
+	//add the module directory
+	tmp = GSF_OUTFILE(gsf_outfile_new_child(outputfile, modpath->str, TRUE));
+
+	//add all data files
+	archive_adddir(tmp,
+		       g_build_filename(destination, datapath, NULL),
+		       moddirname);
+	gsf_output_close(GSF_OUTPUT(tmp));
+	g_object_unref(tmp);
+
+	//add conf file
+	tmp = GSF_OUTFILE(gsf_outfile_new_child(outputfile, "mods.d", TRUE));
+	archive_addfile(tmp,
+			g_build_filename(destination, "mods.d", conf_file, NULL),
+			conf_file);
+
+	//cleanup
+	gsf_output_close(GSF_OUTPUT(outputfile));
+	gsf_output_close(output);
+	g_object_unref(tmp);
+	g_object_unref(outputfile);
+	g_object_unref(output);
+	g_strfreev(path);
+	g_free(moddirname);
+	
+}
+		
 /******   end of file   ******/

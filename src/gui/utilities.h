@@ -30,6 +30,7 @@ extern "C" {
 #include <libxml/parser.h>
 #include "main/configs.h"
 #include "main/module_dialogs.h"
+#include <gsf/gsf-outfile.h>
 
 gint gui_of2tf(const gchar * on_off);
 gchar *gui_tf2of(gint true_false);
@@ -85,6 +86,13 @@ GdkPixbuf *pixbuf_finder(char *image, GError **error);
 void HtmlOutput(char *text, GtkWidget *gtkText, MOD_FONT *mf, char *anchor);
 void set_window_icon(GtkWindow *window);
 gboolean xiphos_open_default(const gchar *file);
+	
+void archive_addfile(GsfOutfile *output, const gchar *file, const gchar *name);
+void archive_adddir(GsfOutfile *output, gchar *path, const gchar *name);
+void xiphos_create_archive(gchar* conf_file, gchar* datapath, gchar *zip,
+			   const gchar *destination);
+	
+
 #ifdef WIN32
 gchar* xiphos_win32_get_subdir(const gchar *subdir);
 #endif
