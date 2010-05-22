@@ -1355,7 +1355,6 @@ void archive_adddir(GsfOutfile *output, gchar *path, const gchar *name)
 void xiphos_create_archive(gchar* conf_file, gchar* datapath, gchar *zip,
 			   const gchar *destination)
 {
-	gsf_init();
 	GsfOutfile *outputfile;
 	GsfOutput *output;
 	GsfOutfile *tmp;
@@ -1363,6 +1362,7 @@ void xiphos_create_archive(gchar* conf_file, gchar* datapath, gchar *zip,
 	gchar* moddirname;
 	GString *modpath;
 	int i;
+	gsf_init();
 	
 	//the module dir is the last part of the path
 	path = g_strsplit(datapath, "/", -1);
@@ -1374,11 +1374,11 @@ void xiphos_create_archive(gchar* conf_file, gchar* datapath, gchar *zip,
 	for (i = 1; i <= (g_strv_length(path) - 2); i++)
 	{
 		modpath = g_string_append(modpath, path[i]);
-		if (i < g_strv_length(path) -2)
+		if (i < g_strv_length(path) -2) //avoid a trailing /
 			modpath = g_string_append(modpath, "/");
 	}
 	
-	//open files
+	//open zip file for writing
 	output = gsf_output_stdio_new(zip, NULL);
 	outputfile = gsf_outfile_zip_new(output, NULL);
 
