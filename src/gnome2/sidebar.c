@@ -36,6 +36,7 @@
 
 #include "gui/sidebar.h"
 #include "gui/bookmarks_treeview.h"
+#include "gui/export_bookmarks.h"
 #include "gui/utilities.h"
 #include "gui/about_modules.h"
 #include "gui/main_window.h"
@@ -79,13 +80,14 @@ static GtkWidget *button_modules;
 static gchar *buf_module;
 static gchar *buf_caption;
 GList *list_of_verses;
-
+GtkListStore *model_verselist;
+gboolean is_search_result;
 
 extern gboolean shift_key_pressed;
 
 
 static void create_menu_modules(void);
-
+void on_export_verselist_activate (GtkMenuItem * menuitem, gpointer user_data);
 
 
 /******************************************************************************
@@ -923,6 +925,12 @@ on_save_list_as_a_series_of_bookmarks_activate (GtkMenuItem * menuitem,
 }
 
 
+G_MODULE_EXPORT void
+on_export_verselist_activate (GtkMenuItem * menuitem,
+                                        gpointer user_data)
+{
+	gui_export_bookmarks_dialog((is_search_result?SEARCH_RESULTS_EXPORT:VERSE_LIST_EXPORT), list_of_verses);
+}
 
 /******************************************************************************
  * Name
@@ -1266,7 +1274,6 @@ static gboolean tree_key_press_cb(GtkWidget * widget,
 static void create_search_results_page(GtkWidget * notebook)
 {
 	GtkWidget *scrolledwindow3;
-	GtkListStore *model;
 	GtkTreeSelection *selection;
 	sidebar.menu_item_save_search = create_results_menu();
 
@@ -1280,9 +1287,9 @@ static void create_search_results_page(GtkWidget * notebook)
 					    settings.shadow_type);
 
 	/* create list model */
-	model = gtk_list_store_new(1, G_TYPE_STRING);
+	model_verselist = gtk_list_store_new(1, G_TYPE_STRING);
 
-	sidebar.results_list = gtk_tree_view_new_with_model(GTK_TREE_MODEL(model));
+	sidebar.results_list = gtk_tree_view_new_with_model(GTK_TREE_MODEL(model_verselist));
 	gtk_widget_show(sidebar.results_list);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow3), sidebar.results_list);
 	gtk_tree_view_set_rules_hint(GTK_TREE_VIEW(sidebar.results_list), TRUE);
@@ -1292,9 +1299,7 @@ static void create_search_results_page(GtkWidget * notebook)
 
 	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(sidebar.results_list));
 
-	//gnome_popup_menu_attach(menu, sidebar.results_list, NULL);
-	//gnome_app_install_menu_hints(GNOME_APP(widgets.app), results_menu_uiinfo);
-	//gtk_menu_attach_to_widget ((GtkMenu*)menu, sidebar.results_list,NULL);	
+		
 	g_signal_connect((gpointer) sidebar.results_list,
 			 "key_press_event",
 			 G_CALLBACK(tree_key_press_cb), NULL);

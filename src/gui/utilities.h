@@ -98,7 +98,7 @@ gchar* xiphos_win32_get_subdir(const gchar *subdir);
 #endif
 void utilities_parse_treeview(xmlNodePtr parent, 
                               GtkTreeIter * tree_parent, 
-                              GtkTreeStore *model);
+                              GtkTreeModel *model);
 
 enum {
 	LANGSET_BIBLE,

@@ -20,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 3.1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-11 21:37+0100\n"
-"PO-Revision-Date: 2009-11-11 21:38+0100\n"
+"POT-Creation-Date: 2009-11-24 19:00+0100\n"
+"PO-Revision-Date: 2009-11-24 19:02+0100\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: emacs + po-mode <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -141,7 +141,7 @@ msgstr "Supprime la note en cours"
 
 #: ../src/editor/slib-editor.c:782 ../ui/editor_note.xml.h:14
 #: ../ui/editor_studypad.xml.h:20 ../ui/editor.xml.h:13
-#: ../ui/xi-menus.glade.h:84
+#: ../ui/xi-menus.glade.h:85
 msgid "_File"
 msgstr "_Fichier"
 
@@ -157,7 +157,7 @@ msgstr "Source _HTML"
 msgid "_Plain Source"
 msgstr "Source _texte"
 
-#: ../src/editor/slib-editor.c:858 ../ui/xi-menus.glade.h:99
+#: ../src/editor/slib-editor.c:858 ../ui/xi-menus.glade.h:100
 msgid "_View"
 msgstr "_Affichage"
 
@@ -299,69 +299,69 @@ msgid "Go to "
 msgstr "Aller à"
 
 #. info->stock_icon = GTK_STOCK_OPEN;
-#: ../src/gnome2/bookmark_dialog.c:171 ../src/gnome2/bookmarks_menu.c:360
-#: ../src/gnome2/bookmarks_menu.c:767 ../src/gnome2/bookmarks_menu.c:865
+#: ../src/gnome2/bookmark_dialog.c:171 ../src/gnome2/bookmarks_menu.c:358
+#: ../src/gnome2/bookmarks_menu.c:765 ../src/gnome2/bookmarks_menu.c:863
 #: ../src/gnome2/bookmarks_treeview.c:133 ../ui/editor_studypad.xml.h:2
 #: ../ui/xi-menus.glade.h:9
 msgid "Bookmark"
 msgstr "Signet"
 
-#: ../src/gnome2/bookmark_dialog.c:173 ../src/gnome2/bookmarks_menu.c:867
+#: ../src/gnome2/bookmark_dialog.c:173 ../src/gnome2/bookmarks_menu.c:865
 #: ../src/gnome2/bookmarks_treeview.c:134
 msgid "Enter Folder Name"
 msgstr "Saisir le nom du dossier"
 
-#: ../src/gnome2/bookmark_dialog.c:175 ../src/gnome2/bookmarks_menu.c:869
+#: ../src/gnome2/bookmark_dialog.c:175 ../src/gnome2/bookmarks_menu.c:867
 msgid "Folder Name"
 msgstr "Nom du dossier"
 
-#: ../src/gnome2/bookmark_dialog.c:176 ../src/gnome2/bookmarks_menu.c:870
+#: ../src/gnome2/bookmark_dialog.c:176 ../src/gnome2/bookmarks_menu.c:868
 #: ../src/gnome2/bookmarks_treeview.c:136
 msgid "Folder: "
 msgstr "Dossier :"
 
-#: ../src/gnome2/bookmarks_menu.c:346 ../src/gnome2/treekey-editor.c:324
+#: ../src/gnome2/bookmarks_menu.c:344 ../src/gnome2/treekey-editor.c:324
 #: ../ui/xi-menus.glade.h:22
 msgid "Edit"
 msgstr "Édition"
 
-#: ../src/gnome2/bookmarks_menu.c:363
+#: ../src/gnome2/bookmarks_menu.c:361
 msgid "Folder name: "
 msgstr "Nom du dossier : "
 
-#: ../src/gnome2/bookmarks_menu.c:366
+#: ../src/gnome2/bookmarks_menu.c:364
 msgid "Bookmark name: "
 msgstr "Nom du signet : "
 
-#: ../src/gnome2/bookmarks_menu.c:369 ../src/gnome2/bookmarks_menu.c:775
+#: ../src/gnome2/bookmarks_menu.c:367 ../src/gnome2/bookmarks_menu.c:773
 msgid "Verse: "
 msgstr "Verset : "
 
-#: ../src/gnome2/bookmarks_menu.c:370 ../src/gnome2/bookmarks_menu.c:776
+#: ../src/gnome2/bookmarks_menu.c:368 ../src/gnome2/bookmarks_menu.c:774
 msgid "Module: "
 msgstr "Module : "
 
-#: ../src/gnome2/bookmarks_menu.c:535
+#: ../src/gnome2/bookmarks_menu.c:533
 msgid "Restore Bookmark Folder"
 msgstr "Restaurer le dossier des signets"
 
-#: ../src/gnome2/bookmarks_menu.c:604
+#: ../src/gnome2/bookmarks_menu.c:602
 msgid "Remove the selected folder"
 msgstr "Supprimer le dossier sélectionné"
 
-#: ../src/gnome2/bookmarks_menu.c:606
+#: ../src/gnome2/bookmarks_menu.c:604
 msgid "(and all its contents)?"
 msgstr "(et tout son contenu)?"
 
-#: ../src/gnome2/bookmarks_menu.c:609
+#: ../src/gnome2/bookmarks_menu.c:607
 msgid "Remove the selected bookmark"
 msgstr "Supprimer le signet"
 
-#: ../src/gnome2/bookmarks_menu.c:768
+#: ../src/gnome2/bookmarks_menu.c:766
 msgid "Add"
 msgstr "Ajouter"
 
-#: ../src/gnome2/bookmarks_menu.c:774
+#: ../src/gnome2/bookmarks_menu.c:772
 msgid "Label: "
 msgstr "Étiquette :"
 
@@ -370,7 +370,7 @@ msgstr "Étiquette :"
 msgid "Search result: %s"
 msgstr "Résultat de la requête : %s"
 
-#: ../src/gnome2/bookmarks_treeview.c:934 ../src/gnome2/sidebar.c:1472
+#: ../src/gnome2/bookmarks_treeview.c:934 ../src/gnome2/sidebar.c:1477
 msgid "Bookmarks"
 msgstr "Signets"
 
@@ -411,7 +411,7 @@ msgid "Enter Word or Phrase"
 msgstr "Entrez un mot ou une phrase"
 
 #: ../src/gnome2/find_dialog.c:238 ../src/gnome2/search_sidebar.c:305
-#: ../ui/search-dialog.glade.h:57
+#: ../ui/search-dialog.glade.h:59
 msgid "Match case"
 msgstr "Respecter la casse"
 
@@ -420,7 +420,7 @@ msgid "Search backwards"
 msgstr "Rechercher en arrière"
 
 #: ../src/gnome2/find_dialog.c:254 ../src/gnome2/search_sidebar.c:270
-#: ../ui/search-dialog.glade.h:74
+#: ../ui/search-dialog.glade.h:76
 msgid "Regular expression"
 msgstr "Expression rationnelle"
 
@@ -533,10 +533,10 @@ msgstr "Xiphos - Logiciel d'étude biblique"
 msgid "Open a new tab"
 msgstr "Ouvrir un nouvel onglet"
 
-#: ../src/gnome2/main_window.c:923 ../src/gnome2/sidebar.c:626
-#: ../src/gnome2/sidebar.c:632 ../src/main/sidebar.cc:646
-#: ../src/main/sidebar.cc:995 ../src/main/sidebar.cc:996
-#: ../src/main/sidebar.cc:997
+#: ../src/gnome2/main_window.c:923 ../src/gnome2/sidebar.c:628
+#: ../src/gnome2/sidebar.c:634 ../src/main/sidebar.cc:655
+#: ../src/main/sidebar.cc:1004 ../src/main/sidebar.cc:1005
+#: ../src/main/sidebar.cc:1006
 msgid "Standard View"
 msgstr "Vue simple"
 
@@ -743,10 +743,10 @@ msgstr "Terminé"
 
 #: ../src/gnome2/mod_mgr.c:733 ../src/gnome2/mod_mgr.c:735
 #: ../src/gnome2/mod_mgr.c:837 ../src/gnome2/mod_mgr.c:872
-#: ../src/gnome2/mod_mgr.c:874 ../src/gnome2/utilities.c:420
-#: ../src/gnome2/utilities.c:485 ../src/gnome2/utilities.c:487
-#: ../src/gnome2/utilities.c:1106 ../src/main/sidebar.cc:832
-#: ../src/main/sidebar.cc:904 ../src/main/sidebar.cc:906
+#: ../src/gnome2/mod_mgr.c:874 ../src/gnome2/utilities.c:419
+#: ../src/gnome2/utilities.c:484 ../src/gnome2/utilities.c:486
+#: ../src/gnome2/utilities.c:1105 ../src/main/sidebar.cc:841
+#: ../src/main/sidebar.cc:913 ../src/main/sidebar.cc:915
 msgid "Unknown"
 msgstr "Inconnu"
 
@@ -767,40 +767,40 @@ msgstr ""
 "Modules classés\n"
 "par type"
 
-#: ../src/gnome2/mod_mgr.c:1053 ../src/gnome2/utilities.c:546
-#: ../src/main/sidebar.cc:979 ../src/main/sidebar.cc:981
+#: ../src/gnome2/mod_mgr.c:1053 ../src/gnome2/utilities.c:545
+#: ../src/main/sidebar.cc:988 ../src/main/sidebar.cc:990
 msgid "Biblical Texts"
 msgstr "Textes bibliques"
 
-#: ../src/gnome2/mod_mgr.c:1057 ../src/gnome2/utilities.c:550
-#: ../src/main/sidebar.cc:658 ../src/main/sidebar.cc:1004
-#: ../src/main/sidebar.cc:1006 ../ui/prefs.glade.h:33
+#: ../src/gnome2/mod_mgr.c:1057 ../src/gnome2/utilities.c:549
+#: ../src/main/sidebar.cc:667 ../src/main/sidebar.cc:1013
+#: ../src/main/sidebar.cc:1015 ../ui/prefs.glade.h:33
 msgid "Commentaries"
 msgstr "Commentaires"
 
-#: ../src/gnome2/mod_mgr.c:1061 ../src/gnome2/utilities.c:554
-#: ../src/main/sidebar.cc:1013 ../src/main/sidebar.cc:1015
+#: ../src/gnome2/mod_mgr.c:1061 ../src/gnome2/utilities.c:553
+#: ../src/main/sidebar.cc:1022 ../src/main/sidebar.cc:1024
 msgid "Dictionaries"
 msgstr "Dictionnaires"
 
-#: ../src/gnome2/mod_mgr.c:1065 ../src/gnome2/utilities.c:558
-#: ../src/main/sidebar.cc:1022 ../src/main/sidebar.cc:1024
+#: ../src/gnome2/mod_mgr.c:1065 ../src/gnome2/utilities.c:557
+#: ../src/main/sidebar.cc:1031 ../src/main/sidebar.cc:1033
 msgid "Daily Devotionals"
 msgstr "Calendriers bibliques"
 
-#: ../src/gnome2/mod_mgr.c:1069 ../src/gnome2/utilities.c:562
-#: ../src/main/sidebar.cc:668 ../src/main/sidebar.cc:1031
-#: ../src/main/sidebar.cc:1033
+#: ../src/gnome2/mod_mgr.c:1069 ../src/gnome2/utilities.c:561
+#: ../src/main/sidebar.cc:677 ../src/main/sidebar.cc:1040
+#: ../src/main/sidebar.cc:1042
 msgid "General Books"
 msgstr "Livres"
 
-#: ../src/gnome2/mod_mgr.c:1073 ../src/gnome2/utilities.c:566
-#: ../src/main/sidebar.cc:1040 ../src/main/sidebar.cc:1042
+#: ../src/gnome2/mod_mgr.c:1073 ../src/gnome2/utilities.c:565
+#: ../src/main/sidebar.cc:1049 ../src/main/sidebar.cc:1051
 msgid "Maps"
 msgstr "Cartes"
 
-#: ../src/gnome2/mod_mgr.c:1077 ../src/gnome2/utilities.c:570
-#: ../src/main/sidebar.cc:1049 ../src/main/sidebar.cc:1051
+#: ../src/gnome2/mod_mgr.c:1077 ../src/gnome2/utilities.c:569
+#: ../src/main/sidebar.cc:1058 ../src/main/sidebar.cc:1060
 msgid "Images"
 msgstr "Images"
 
@@ -820,9 +820,9 @@ msgstr "Mise à jour disponible"
 msgid "Uninstalled"
 msgstr "Non installé"
 
-#: ../src/gnome2/mod_mgr.c:1098 ../src/gnome2/sidebar.c:642
-#: ../src/gnome2/utilities.c:575 ../src/main/prayerlists.cc:240
-#: ../src/main/sidebar.cc:1059 ../src/main/sidebar.cc:1061
+#: ../src/gnome2/mod_mgr.c:1098 ../src/gnome2/sidebar.c:644
+#: ../src/gnome2/utilities.c:574 ../src/main/prayerlists.cc:240
+#: ../src/main/sidebar.cc:1068 ../src/main/sidebar.cc:1070
 msgid "Prayer List/Journal"
 msgstr "Liste de prières / Journal"
 
@@ -872,8 +872,8 @@ msgstr ""
 "de déverrouillage auprès de l'éditeur du document"
 
 #. 2
-#: ../src/gnome2/mod_mgr.c:1557 ../src/gnome2/sidebar.c:980
-#: ../src/gnome2/sidebar.c:1148 ../ui/xi-menus.glade.h:1
+#: ../src/gnome2/mod_mgr.c:1557 ../src/gnome2/sidebar.c:988
+#: ../src/gnome2/sidebar.c:1156 ../ui/xi-menus.glade.h:1
 msgid "About"
 msgstr "À propos"
 
@@ -943,7 +943,7 @@ msgid "Choose"
 msgstr "Choisir"
 
 #: ../src/gnome2/mod_mgr.c:1743 ../src/gnome2/preferences_dialog.c:1780
-#: ../src/gnome2/sidebar.c:1496
+#: ../src/gnome2/sidebar.c:1501
 msgid "Modules"
 msgstr "Modules"
 
@@ -1137,10 +1137,10 @@ msgstr "Changer parallèle 4"
 msgid "Change parallel 5"
 msgstr "Changer parallèle 5"
 
-#: ../src/gnome2/parallel_view.c:471 ../src/gnome2/sidebar.c:625
-#: ../src/gnome2/sidebar.c:631 ../src/gnome2/tabbed_browser.c:259
-#: ../src/main/sidebar.cc:626 ../src/main/sidebar.cc:987
-#: ../src/main/sidebar.cc:988 ../src/main/sidebar.cc:989
+#: ../src/gnome2/parallel_view.c:471 ../src/gnome2/sidebar.c:627
+#: ../src/gnome2/sidebar.c:633 ../src/gnome2/tabbed_browser.c:259
+#: ../src/main/sidebar.cc:635 ../src/main/sidebar.cc:996
+#: ../src/main/sidebar.cc:997 ../src/main/sidebar.cc:998
 msgid "Parallel View"
 msgstr "Vue parallèle"
 
@@ -1218,38 +1218,38 @@ msgstr "Base"
 msgid "Special"
 msgstr "Spécial"
 
-#: ../src/gnome2/search_dialog.c:67 ../src/main/search_dialog.cc:65
+#: ../src/gnome2/search_dialog.c:68 ../src/main/search_dialog.cc:66
 #: ../src/main/search_sidebar.cc:61
 msgid "Searching the "
 msgstr "Recherche dans "
 
-#: ../src/gnome2/search_dialog.c:68 ../src/main/search_dialog.cc:66
+#: ../src/gnome2/search_dialog.c:69 ../src/main/search_dialog.cc:67
 #: ../src/main/search_sidebar.cc:62
 msgid " Module"
 msgstr " Module"
 
-#: ../src/gnome2/search_dialog.c:69 ../src/main/search_dialog.cc:67
+#: ../src/gnome2/search_dialog.c:70 ../src/main/search_dialog.cc:68
 #: ../src/main/search_sidebar.cc:63
 msgid "found in "
 msgstr "dans "
 
-#: ../src/gnome2/search_dialog.c:504
+#: ../src/gnome2/search_dialog.c:527
 msgid "Clear List?"
 msgstr "Effacer la liste?"
 
-#: ../src/gnome2/search_dialog.c:505
+#: ../src/gnome2/search_dialog.c:528
 msgid "Are you sure you want to clear the module list?"
 msgstr "Êtes-vous certain d'effacer la liste des modules?"
 
-#: ../src/gnome2/search_dialog.c:685
+#: ../src/gnome2/search_dialog.c:708
 msgid "The last module list may not be deleted"
 msgstr "Le dernier module de la liste ne peut être supprimé"
 
-#: ../src/gnome2/search_dialog.c:703
+#: ../src/gnome2/search_dialog.c:726
 msgid "Delete list?"
 msgstr "Supprimer la liste?"
 
-#: ../src/gnome2/search_dialog.c:704
+#: ../src/gnome2/search_dialog.c:727
 msgid "Are you sure you want to delete:"
 msgstr "Êtes-vous certain de vouloir supprimer :"
 
@@ -1277,7 +1277,7 @@ msgstr "Commentaire"
 msgid "Search Type"
 msgstr "Type de requête"
 
-#: ../src/gnome2/search_sidebar.c:259 ../ui/search-dialog.glade.h:64
+#: ../src/gnome2/search_sidebar.c:259 ../ui/search-dialog.glade.h:66
 msgid "Multi word"
 msgstr "Mots multiples"
 
@@ -1318,70 +1318,70 @@ msgid "Upper"
 msgstr "Haute"
 
 #. 0
-#: ../src/gnome2/sidebar.c:968 ../src/gnome2/sidebar.c:1136
+#: ../src/gnome2/sidebar.c:976 ../src/gnome2/sidebar.c:1144
 msgid "Open in a new tab"
 msgstr "Ouvrir dans un nouvel onglet"
 
-#: ../src/gnome2/sidebar.c:969 ../src/gnome2/sidebar.c:1137
+#: ../src/gnome2/sidebar.c:977 ../src/gnome2/sidebar.c:1145
 msgid "Open selected module in a new tab"
 msgstr "Ouvrir le module sélectionné dans un nouvel onglet"
 
 #. 1
-#: ../src/gnome2/sidebar.c:974
+#: ../src/gnome2/sidebar.c:982
 msgid "Open in a separate window"
 msgstr "Ouvrir dans une fenêtre séparée"
 
-#: ../src/gnome2/sidebar.c:975
+#: ../src/gnome2/sidebar.c:983
 msgid "Open selected module in a separate ['dialog'] window"
 msgstr "Ouvrir le module sélectionné dans une nouvelle fenêtre"
 
-#: ../src/gnome2/sidebar.c:981 ../src/gnome2/sidebar.c:1149
+#: ../src/gnome2/sidebar.c:989 ../src/gnome2/sidebar.c:1157
 msgid "View information about the selected dialog"
 msgstr "Information à propos du module sélectionné"
 
-#: ../src/gnome2/sidebar.c:1072
+#: ../src/gnome2/sidebar.c:1080
 msgid "Simple"
 msgstr "Liste simple"
 
-#: ../src/gnome2/sidebar.c:1073
+#: ../src/gnome2/sidebar.c:1081
 msgid "Create a new simple prayer list"
 msgstr "Crée une nouvelle liste de prières"
 
-#: ../src/gnome2/sidebar.c:1079
+#: ../src/gnome2/sidebar.c:1087
 msgid "Subject"
 msgstr "Liste ordonnée par sujet"
 
-#: ../src/gnome2/sidebar.c:1086
+#: ../src/gnome2/sidebar.c:1094
 msgid "Monthly"
 msgstr "Journal mensuel"
 
-#: ../src/gnome2/sidebar.c:1087 ../src/gnome2/sidebar.c:1094
-#: ../src/gnome2/sidebar.c:1101
+#: ../src/gnome2/sidebar.c:1095 ../src/gnome2/sidebar.c:1102
+#: ../src/gnome2/sidebar.c:1109
 msgid "Create a new prayer list"
 msgstr "Crée une nouvelle liste de prières"
 
-#: ../src/gnome2/sidebar.c:1093
+#: ../src/gnome2/sidebar.c:1101
 msgid "Daily Journal"
 msgstr "Journal quotidien"
 
-#: ../src/gnome2/sidebar.c:1100
+#: ../src/gnome2/sidebar.c:1108
 msgid "Outlined Topic"
 msgstr "Note structurée"
 
 #. 1
-#: ../src/gnome2/sidebar.c:1142 ../ui/xi-menus.glade.h:49
+#: ../src/gnome2/sidebar.c:1150 ../ui/xi-menus.glade.h:49
 msgid "Open in editor"
 msgstr "Ouvrir dans l'éditeur"
 
-#: ../src/gnome2/sidebar.c:1143
+#: ../src/gnome2/sidebar.c:1151
 msgid "Open selected module in a dialog"
 msgstr "Ouvrir le module sélectionné dans une nouvelle fenêtre"
 
-#: ../src/gnome2/sidebar.c:1480
+#: ../src/gnome2/sidebar.c:1485
 msgid "Search"
 msgstr "Rechercher"
 
-#: ../src/gnome2/sidebar.c:1488
+#: ../src/gnome2/sidebar.c:1493
 msgid "Verse List"
 msgstr "_Versets"
 
@@ -1509,16 +1509,16 @@ msgstr "Étiquette morphologique"
 msgid "Back to "
 msgstr "Revenir à "
 
-#: ../src/main/parallel_view.cc:404 ../ui/xi-menus.glade.h:68
+#: ../src/main/parallel_view.cc:404 ../ui/xi-menus.glade.h:69
 msgid "Strong's Numbers"
 msgstr "Nombres de Strong"
 
-#: ../src/main/parallel_view.cc:414 ../ui/search-dialog.glade.h:50
+#: ../src/main/parallel_view.cc:414 ../ui/search-dialog.glade.h:52
 #: ../ui/xi-menus.glade.h:29
 msgid "Footnotes"
 msgstr "Notes de bas de page"
 
-#: ../src/main/parallel_view.cc:424 ../ui/search-dialog.glade.h:62
+#: ../src/main/parallel_view.cc:424 ../ui/search-dialog.glade.h:64
 #: ../ui/xi-menus.glade.h:43
 msgid "Morphological Tags"
 msgstr "Étiquettes morphologiques"
@@ -1551,11 +1551,11 @@ msgstr "En-têtes"
 msgid "Morpheme Segmentation"
 msgstr "Segmentation de morphème"
 
-#: ../src/main/parallel_view.cc:504 ../ui/xi-menus.glade.h:74
+#: ../src/main/parallel_view.cc:504 ../ui/xi-menus.glade.h:75
 msgid "Words of Christ in Red"
 msgstr "Paroles de Christ en rouge"
 
-#: ../src/main/parallel_view.cc:514 ../ui/xi-menus.glade.h:69
+#: ../src/main/parallel_view.cc:514 ../ui/xi-menus.glade.h:70
 msgid "Transliteration"
 msgstr "Translittération"
 
@@ -1567,7 +1567,7 @@ msgstr "Variantes du texte"
 msgid "Primary Reading"
 msgstr "Lectures principales"
 
-#: ../src/main/parallel_view.cc:541 ../ui/xi-menus.glade.h:64
+#: ../src/main/parallel_view.cc:541 ../ui/xi-menus.glade.h:65
 msgid "Secondary Reading"
 msgstr "Lectures secondaires"
 
@@ -1832,34 +1832,34 @@ msgstr "<b>Sujet majeur C</b><br>"
 msgid "User Annotation"
 msgstr "Annotation personnelle de"
 
-#: ../src/main/search_dialog.cc:134
+#: ../src/main/search_dialog.cc:212
 #, c-format
 msgid "Search result %s: %s"
 msgstr "Résultat de la requête %s : %s"
 
-#: ../src/main/search_dialog.cc:366
+#: ../src/main/search_dialog.cc:444
 msgid "Delete Range?"
 msgstr "Supprimer la plage?"
 
-#: ../src/main/search_dialog.cc:367
+#: ../src/main/search_dialog.cc:445
 msgid "Are you sure you want to delete this range?"
 msgstr "Êtes-vous certain de supprimer cette plage?"
 
-#: ../src/main/search_dialog.cc:581 ../src/main/search_dialog.cc:1052
-#: ../src/main/search_dialog.cc:1055 ../src/main/search_dialog.cc:1077
-#: ../src/main/search_dialog.cc:1080
+#: ../src/main/search_dialog.cc:659 ../src/main/search_dialog.cc:1130
+#: ../src/main/search_dialog.cc:1133 ../src/main/search_dialog.cc:1155
+#: ../src/main/search_dialog.cc:1158
 msgid "Search: "
 msgstr "Dans : "
 
-#: ../src/main/search_dialog.cc:626
+#: ../src/main/search_dialog.cc:704
 msgid "Remove Module?"
 msgstr "Enlever les modules?"
 
-#: ../src/main/search_dialog.cc:627
+#: ../src/main/search_dialog.cc:705
 msgid "Are you sure you want to remove the selected module?"
 msgstr "Êtes-vous certain de vouloir supprimer le module sélectionné?"
 
-#: ../src/main/search_dialog.cc:1482
+#: ../src/main/search_dialog.cc:1560
 #, c-format
 msgid ""
 "%s:\n"
@@ -1870,16 +1870,16 @@ msgstr ""
 "Module non installé.\n"
 "%s"
 
-#: ../src/main/search_dialog.cc:1484
+#: ../src/main/search_dialog.cc:1562
 msgid "Please adjust the module list."
 msgstr "La liste de modules est à régénérer"
 
-#: ../src/main/search_dialog.cc:1500
+#: ../src/main/search_dialog.cc:1578
 #, c-format
 msgid "No fast-search index exists for %s.%s%s"
 msgstr "Aucun index de recherche rapide n'existe pour %s %s%s"
 
-#: ../src/main/search_dialog.cc:1502
+#: ../src/main/search_dialog.cc:1580
 msgid ""
 "\n"
 "Search on this module is now `multi word'."
@@ -1887,7 +1887,7 @@ msgstr ""
 "\n"
 "Les requêtes sur ce module sont maintenant 'multi-mots'"
 
-#: ../src/main/search_dialog.cc:1503
+#: ../src/main/search_dialog.cc:1581
 msgid ""
 "\n"
 "See the Module Manager, Maintenance pane."
@@ -1895,7 +1895,7 @@ msgstr ""
 "\n"
 "Voir le Gestionnaire de modules, onglet Maintenance"
 
-#: ../src/main/search_dialog.cc:1566
+#: ../src/main/search_dialog.cc:1644
 msgid "Search finished"
 msgstr "Recherche terminée "
 
@@ -1992,11 +1992,11 @@ msgstr ""
 "Xiphos ne peut fonctionner\n"
 "et va maintenant se terminer."
 
-#: ../src/main/sidebar.cc:379
+#: ../src/main/sidebar.cc:388
 msgid "verse"
 msgstr "verset"
 
-#: ../src/main/sidebar.cc:441
+#: ../src/main/sidebar.cc:450
 msgid "chapter"
 msgstr "chapitre"
 
@@ -3059,6 +3059,14 @@ msgid "Exact phrase radiobutton"
 msgstr "Bouton radio Phrase exacte"
 
 #: ../ui/search-dialog.glade.h:46
+msgid "Export"
+msgstr "Exporter"
+
+#: ../ui/search-dialog.glade.h:47
+msgid "Export current search results"
+msgstr "Exporte les résultats de la requête courante"
+
+#: ../ui/search-dialog.glade.h:48
 msgid ""
 "Fast, featureful, index-based search\n"
 "Indexes must have been built beforehand:\n"
@@ -3068,231 +3076,231 @@ msgstr ""
 "Les index doivent être préalablement construits.\n"
 "Voir l'onglet Gérer du gestionnaire de modules."
 
-#: ../ui/search-dialog.glade.h:49
+#: ../ui/search-dialog.glade.h:51
 msgid "Find Button"
 msgstr "Bouton Rechercher"
 
-#: ../ui/search-dialog.glade.h:51
+#: ../ui/search-dialog.glade.h:53
 msgid "Footnotes radiobutton"
 msgstr "Bouton radio Notes de bas de page"
 
-#: ../ui/search-dialog.glade.h:52
+#: ../ui/search-dialog.glade.h:54
 msgid "In modules that have Footnotes"
 msgstr "Inclut les notes de bas de page dans l'affichage des versets "
 
-#: ../ui/search-dialog.glade.h:53
+#: ../ui/search-dialog.glade.h:55
 msgid "In modules that have Morphological Tags"
 msgstr "Inclut les étiquettes morphologiques dans l'affichage des versets"
 
-#: ../ui/search-dialog.glade.h:54
+#: ../ui/search-dialog.glade.h:56
 msgid "In modules that have Strong's Numbers"
 msgstr "Inclut les nombres de Strong dans l'affichage des versets"
 
-#: ../ui/search-dialog.glade.h:55
+#: ../ui/search-dialog.glade.h:57
 msgid "Main Search Entry"
 msgstr "Entrée Recherche principale"
 
-#: ../ui/search-dialog.glade.h:56
+#: ../ui/search-dialog.glade.h:58
 msgid "Make selections on the Attribute Search tab"
 msgstr ""
 "Recherche sur les nombres de Strong \n"
 "Plus d'options dans l'onglet Attributs"
 
-#: ../ui/search-dialog.glade.h:58
+#: ../ui/search-dialog.glade.h:60
 msgid "Match case checkbox"
 msgstr "Case à cocher Respecter la casse"
 
-#: ../ui/search-dialog.glade.h:59
+#: ../ui/search-dialog.glade.h:61
 msgid "Module Selection"
 msgstr "Sélection de module"
 
-#: ../ui/search-dialog.glade.h:60
+#: ../ui/search-dialog.glade.h:62
 msgid "Module list"
 msgstr "Plusieurs modules"
 
-#: ../ui/search-dialog.glade.h:61
+#: ../ui/search-dialog.glade.h:63
 msgid "Module list radiobutton"
 msgstr "Radio bouton Liste de modules"
 
-#: ../ui/search-dialog.glade.h:63
+#: ../ui/search-dialog.glade.h:65
 msgid "Morphological Tags radiobutton"
 msgstr "Bouton radio Étiquettes morphologiques"
 
-#: ../ui/search-dialog.glade.h:65
+#: ../ui/search-dialog.glade.h:67
 msgid "Multi word radiobutton"
 msgstr "Bouton radio Mots multiples"
 
-#: ../ui/search-dialog.glade.h:66
+#: ../ui/search-dialog.glade.h:68
 msgid "New Custom Module List Button"
 msgstr "Bouton Nouvelle liste de modules"
 
-#: ../ui/search-dialog.glade.h:67
+#: ../ui/search-dialog.glade.h:69
 msgid "New Range Button"
 msgstr "Bouton Nouvelle plage personnalisée"
 
-#: ../ui/search-dialog.glade.h:68
+#: ../ui/search-dialog.glade.h:70
 msgid "Open Selection Dialog Button"
 msgstr "Bouton Ouvrir la boite de sélection"
 
-#: ../ui/search-dialog.glade.h:69
+#: ../ui/search-dialog.glade.h:71
 msgid "Open a dialog to select modules to add to the list"
 msgstr "Sélectionne les modules à ajouter à la liste"
 
-#: ../ui/search-dialog.glade.h:70
+#: ../ui/search-dialog.glade.h:72
 msgid "Optimized (\"Lucene\")"
 msgstr "Optimisée Lucene"
 
-#: ../ui/search-dialog.glade.h:71
+#: ../ui/search-dialog.glade.h:73
 msgid "Optimized (\"Lucene\") radiobutton"
 msgstr "Bouton radio Optimisée Lucene"
 
-#: ../ui/search-dialog.glade.h:72
+#: ../ui/search-dialog.glade.h:74
 msgid "Range Definition Entry"
 msgstr "Entrée Limites de la plage"
 
-#: ../ui/search-dialog.glade.h:73
+#: ../ui/search-dialog.glade.h:75
 msgid "Range Name Entry"
 msgstr "Entrée Nom de la plage"
 
-#: ../ui/search-dialog.glade.h:75
+#: ../ui/search-dialog.glade.h:77
 msgid "Regular expression radiobutton"
 msgstr "Bouton radio Expression rationnelle"
 
-#: ../ui/search-dialog.glade.h:76
+#: ../ui/search-dialog.glade.h:78
 msgid "Remove the selected module from the list"
 msgstr "Supprime le module sélectionné de la liste"
 
-#: ../ui/search-dialog.glade.h:77
+#: ../ui/search-dialog.glade.h:79
 msgid "Result Summary Table"
 msgstr "Table Récapitulatif des résultats"
 
-#: ../ui/search-dialog.glade.h:78
+#: ../ui/search-dialog.glade.h:80
 msgid "Result Summary Window"
 msgstr "Fenêtre Récapitulatif des résultats"
 
-#: ../ui/search-dialog.glade.h:79
+#: ../ui/search-dialog.glade.h:81
 msgid "Results"
 msgstr "Résultats"
 
-#: ../ui/search-dialog.glade.h:80
+#: ../ui/search-dialog.glade.h:82
 msgid "Save Custom Module List Button"
 msgstr "Bouton Enregistrer la liste de modules"
 
-#: ../ui/search-dialog.glade.h:81
+#: ../ui/search-dialog.glade.h:83
 msgid "Save Range Button"
 msgstr "Bouton Enregistrer plage personnalisée"
 
-#: ../ui/search-dialog.glade.h:82
+#: ../ui/search-dialog.glade.h:84
 msgid "Save custom range"
 msgstr "Enregistre la plage de versets"
 
-#: ../ui/search-dialog.glade.h:83
+#: ../ui/search-dialog.glade.h:85
 msgid "Save search results as bookmarks"
 msgstr "Enregistre les résultats de la recherche comme signets"
 
-#: ../ui/search-dialog.glade.h:84
+#: ../ui/search-dialog.glade.h:86
 msgid "Save the module list"
 msgstr "Enregistre la liste de modules"
 
-#: ../ui/search-dialog.glade.h:85
+#: ../ui/search-dialog.glade.h:87
 msgid "Search  Criteria"
 msgstr "Critères"
 
-#: ../ui/search-dialog.glade.h:86
+#: ../ui/search-dialog.glade.h:88
 msgid "Search Criteria Treeview"
 msgstr "Arborescence Critères de recherche"
 
-#: ../ui/search-dialog.glade.h:87
+#: ../ui/search-dialog.glade.h:89
 msgid "Search entire module"
 msgstr "La requête s'exécute sur tous les versets"
 
-#: ../ui/search-dialog.glade.h:88
+#: ../ui/search-dialog.glade.h:90
 msgid "Search for Morphological tags"
 msgstr "Recherche d'étiquettes morphologiques"
 
-#: ../ui/search-dialog.glade.h:89
+#: ../ui/search-dialog.glade.h:91
 msgid "Search for Strongs Numbers like G4442 or H1121"
 msgstr "Recherche de nombres de Strong de type G4442 ou H1121"
 
-#: ../ui/search-dialog.glade.h:90
+#: ../ui/search-dialog.glade.h:92
 msgid "Search in footnotes"
 msgstr "Recherche de notes de bas de page"
 
-#: ../ui/search-dialog.glade.h:91
+#: ../ui/search-dialog.glade.h:93
 msgid "Show Footnotes"
 msgstr "Avec notes de bas de page"
 
-#: ../ui/search-dialog.glade.h:92
+#: ../ui/search-dialog.glade.h:94
 msgid "Show Footnotes checkbox"
 msgstr "Case à cocher Afficher les notes de bas de page"
 
-#: ../ui/search-dialog.glade.h:93
+#: ../ui/search-dialog.glade.h:95
 msgid "Show Morphological Tags"
 msgstr "Avec étiquettes morphologiques"
 
-#: ../ui/search-dialog.glade.h:94
+#: ../ui/search-dialog.glade.h:96
 msgid "Show Morphological Tags checkbox"
 msgstr "Case à cocher Afficher les étiquettes morphologiques"
 
-#: ../ui/search-dialog.glade.h:95
+#: ../ui/search-dialog.glade.h:97
 msgid "Show Strong's Numbers"
 msgstr "Avec nombres de Strong"
 
-#: ../ui/search-dialog.glade.h:96
+#: ../ui/search-dialog.glade.h:98
 msgid "Show Strong's Numbers checkbox"
 msgstr "Case à cocher Afficher les nombres de Strong"
 
-#: ../ui/search-dialog.glade.h:97
+#: ../ui/search-dialog.glade.h:99
 msgid "Show in main window"
 msgstr "Affiche le résultat dans la fenêtre principale"
 
-#: ../ui/search-dialog.glade.h:98
+#: ../ui/search-dialog.glade.h:100
 msgid "Single module"
 msgstr "Module unique"
 
-#: ../ui/search-dialog.glade.h:99
+#: ../ui/search-dialog.glade.h:101
 msgid "Single module radiobutton"
 msgstr "Bouton radio Module unique"
 
-#: ../ui/search-dialog.glade.h:100
+#: ../ui/search-dialog.glade.h:102
 msgid "Start/stop searching"
 msgstr "Démarre/stoppe la requête"
 
-#: ../ui/search-dialog.glade.h:101
+#: ../ui/search-dialog.glade.h:103
 msgid "Strongs Numbers"
 msgstr "Nombres de Strong"
 
-#: ../ui/search-dialog.glade.h:102
+#: ../ui/search-dialog.glade.h:104
 msgid "Strongs Numbers radiobutton"
 msgstr "Bouton radio Nombres de Strong"
 
-#: ../ui/search-dialog.glade.h:103
+#: ../ui/search-dialog.glade.h:105
 msgid "Use a custom module list for the search"
 msgstr "La requête s'exécute dans une liste de modules prédéfinie"
 
-#: ../ui/search-dialog.glade.h:104
+#: ../ui/search-dialog.glade.h:106
 msgid "Use a custom range for the scope of the search"
 msgstr "La requête s'exécute sur une plage prédéfinie de versets"
 
-#: ../ui/search-dialog.glade.h:105
+#: ../ui/search-dialog.glade.h:107
 msgid "Use a single module for the search"
 msgstr "La requête s'exécute sur  un seul module"
 
-#: ../ui/search-dialog.glade.h:106
+#: ../ui/search-dialog.glade.h:108
 msgid "Use the current module list for the search"
 msgstr "La requête s'exécute sur plusieurs modules"
 
-#: ../ui/search-dialog.glade.h:107
+#: ../ui/search-dialog.glade.h:109
 msgid "Use the results of the last search as the scope of the search"
 msgstr ""
 "La requête s'exécute uniquement sur les versets retournés lors de la requête "
 "précédente"
 
-#: ../ui/search-dialog.glade.h:108
+#: ../ui/search-dialog.glade.h:110
 msgid "e.g. Matt-John;Rev4"
 msgstr "ex Mat-Jean; Ap4"
 
-#: ../ui/search-dialog.glade.h:109
+#: ../ui/search-dialog.glade.h:111
 msgid "for "
 msgstr "Expression"
 
@@ -3381,8 +3389,8 @@ msgid "Export Folder"
 msgstr "Exporter le dossier"
 
 #: ../ui/xi-menus.glade.h:27
-msgid "Export folder and save it"
-msgstr "Exporter le dossier et le sauvegarder"
+msgid "Export List"
+msgstr "Exporter la liste"
 
 #: ../ui/xi-menus.glade.h:34
 msgid "Image Content"
@@ -3445,160 +3453,164 @@ msgid "Read Selection Aloud"
 msgstr "Synthèse vocale du texte sélectionné"
 
 #: ../ui/xi-menus.glade.h:55
+msgid "Remove folder and save it"
+msgstr "Supprimer le dossier et le sauvegarder"
+
+#: ../ui/xi-menus.glade.h:56
 msgid "Rename Pers.Comm."
 msgstr "Renommer ce commentaire"
 
-#: ../ui/xi-menus.glade.h:56
+#: ../ui/xi-menus.glade.h:57
 msgid "Respect Font Faces"
 msgstr "Respect des polices"
 
-#: ../ui/xi-menus.glade.h:57
+#: ../ui/xi-menus.glade.h:58
 msgid "Restore Folder"
 msgstr "Restaurer le dossier"
 
-#: ../ui/xi-menus.glade.h:58
+#: ../ui/xi-menus.glade.h:59
 msgid "Restore saved folder"
 msgstr "Restaure un dossier sauvegardé"
 
-#: ../ui/xi-menus.glade.h:59
+#: ../ui/xi-menus.glade.h:60
 msgid "Save list as a series of bookmarks"
 msgstr "Enregistre la liste dans une série de signets"
 
-#: ../ui/xi-menus.glade.h:60
+#: ../ui/xi-menus.glade.h:61
 msgid "Save list as a single bookmark"
 msgstr "Enregistre la liste sous un seul signet"
 
-#: ../ui/xi-menus.glade.h:61
+#: ../ui/xi-menus.glade.h:62
 msgid "Save these results as a series of bookmarks in their own folder"
 msgstr ""
 "Enregistre ces résultats sous une série de signets dans leur propre dossier"
 
-#: ../ui/xi-menus.glade.h:62
+#: ../ui/xi-menus.glade.h:63
 msgid "Save these results as a single bookmark"
 msgstr "Enregistre ces résultats sous un seul signet"
 
-#: ../ui/xi-menus.glade.h:63
+#: ../ui/xi-menus.glade.h:64
 msgid "Scripture Cross-references"
 msgstr "Références croisées de l'Écriture"
 
-#: ../ui/xi-menus.glade.h:65
+#: ../ui/xi-menus.glade.h:66
 msgid "Show Parallel View in a _Tab"
 msgstr "Vue parallèle dans un ongle_t"
 
-#: ../ui/xi-menus.glade.h:66
+#: ../ui/xi-menus.glade.h:67
 msgid "Show Previe_wer in the Sidebar"
 msgstr "Aperçu dans le volet _latéral"
 
-#: ../ui/xi-menus.glade.h:67
+#: ../ui/xi-menus.glade.h:68
 msgid "Show Verse _Numbers"
 msgstr "Affiche les numéros de verset"
 
-#: ../ui/xi-menus.glade.h:70
+#: ../ui/xi-menus.glade.h:71
 msgid "Unlock This Module"
 msgstr "Déverrouiller ce module"
 
 # src/gs_preferences_dlg.c
-#: ../ui/xi-menus.glade.h:71
+#: ../ui/xi-menus.glade.h:72
 msgid "Use Current Dictionary"
 msgstr "Utiliser le dictionnaire en cours"
 
-#: ../ui/xi-menus.glade.h:72
+#: ../ui/xi-menus.glade.h:73
 msgid "Use module manager to install and remove Sword modules"
 msgstr "Installe ou supprime des modules du Projet SWORD"
 
-#: ../ui/xi-menus.glade.h:73
+#: ../ui/xi-menus.glade.h:74
 msgid "Variants"
 msgstr "Variantes"
 
-#: ../ui/xi-menus.glade.h:75
+#: ../ui/xi-menus.glade.h:76
 msgid "_About The SWORD Project"
 msgstr "_À propos du Projet SWORD"
 
-#: ../ui/xi-menus.glade.h:76
+#: ../ui/xi-menus.glade.h:77
 msgid "_Advanced Search"
 msgstr "Recherche avancée.."
 
-#: ../ui/xi-menus.glade.h:77
+#: ../ui/xi-menus.glade.h:78
 msgid "_Attach/Detach Sidebar"
 msgstr "Attacher/Détacher le volet latéral"
 
-#: ../ui/xi-menus.glade.h:78
+#: ../ui/xi-menus.glade.h:79
 msgid "_Bible"
 msgstr "Texte _biblique"
 
-#: ../ui/xi-menus.glade.h:79
+#: ../ui/xi-menus.glade.h:80
 msgid "_Commentary/Book"
 msgstr "_Commentaire/Livre"
 
-#: ../ui/xi-menus.glade.h:80
+#: ../ui/xi-menus.glade.h:81
 msgid "_Contents"
 msgstr "Sommaire"
 
-#: ../ui/xi-menus.glade.h:81
+#: ../ui/xi-menus.glade.h:82
 msgid "_Daily Devotion"
 msgstr "Calendrier biblique"
 
-#: ../ui/xi-menus.glade.h:82
+#: ../ui/xi-menus.glade.h:83
 msgid "_Edit"
 msgstr "_Édition"
 
-#: ../ui/xi-menus.glade.h:83
+#: ../ui/xi-menus.glade.h:84
 msgid "_Edit Item"
 msgstr "Éditer l'élément"
 
-#: ../ui/xi-menus.glade.h:85
+#: ../ui/xi-menus.glade.h:86
 msgid "_Help"
 msgstr "_Aide"
 
-#: ../ui/xi-menus.glade.h:86
+#: ../ui/xi-menus.glade.h:87
 msgid "_Highlight Current Verse"
 msgstr "_Verset en cours surligné"
 
-#: ../ui/xi-menus.glade.h:87
+#: ../ui/xi-menus.glade.h:88
 msgid "_Live Chat"
 msgstr "Chat en _ligne"
 
-#: ../ui/xi-menus.glade.h:88
+#: ../ui/xi-menus.glade.h:89
 msgid "_Mailing List"
 msgstr "Liste de diffusion"
 
-#: ../ui/xi-menus.glade.h:89
+#: ../ui/xi-menus.glade.h:90
 msgid "_Module Manager"
 msgstr "Gérer les modules"
 
-#: ../ui/xi-menus.glade.h:90
+#: ../ui/xi-menus.glade.h:91
 msgid "_Open Session"
 msgstr "Ouvrir une session"
 
-#: ../ui/xi-menus.glade.h:91
+#: ../ui/xi-menus.glade.h:92
 msgid "_Preferences"
 msgstr "_Préférences"
 
-#: ../ui/xi-menus.glade.h:92
+#: ../ui/xi-menus.glade.h:93
 msgid "_Preview"
 msgstr "_Aperçu"
 
-#: ../ui/xi-menus.glade.h:93
+#: ../ui/xi-menus.glade.h:94
 msgid "_Read Aloud"
 msgstr "Synthèse vocale"
 
-#: ../ui/xi-menus.glade.h:94
+#: ../ui/xi-menus.glade.h:95
 msgid "_Report Bug"
 msgstr "_Signaler un bogue"
 
-#: ../ui/xi-menus.glade.h:95
+#: ../ui/xi-menus.glade.h:96
 msgid "_Save Session"
 msgstr "Enregistrer la session"
 
-#: ../ui/xi-menus.glade.h:96
+#: ../ui/xi-menus.glade.h:97
 msgid "_Search"
 msgstr "_Rechercher"
 
-#: ../ui/xi-menus.glade.h:97
+#: ../ui/xi-menus.glade.h:98
 msgid "_Show/Hide Attached Sidebar"
 msgstr "_Afficher/Cacher le volet latéral"
 
-#: ../ui/xi-menus.glade.h:98
+#: ../ui/xi-menus.glade.h:99
 msgid "_Verse Per Line"
 msgstr "_Verset par ligne"
 
