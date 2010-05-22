@@ -32,6 +32,7 @@
 #include "gui/splash.h"
 #include "gui/tabbed_browser.h"
 #include "gui/xiphos.h"
+#include "gui/utilities.h"
 //#include "gui/widgets.h"
 
 #include "main/sword.h"
@@ -82,9 +83,7 @@ int main(int argc, char *argv[])
 	 * gspawn happy.  Glib provides this nice function for us
 	 * to determine where we are (we can't depend on argv).
 	 */
-	gchar *install_dir = g_win32_get_package_installation_directory_of_module(NULL);
-	install_dir = g_strconcat(install_dir, "\0", NULL);
-	install_dir = g_build_filename (install_dir, "bin\0");
+	gchar *bin_dir = xiphos_win32_get_subdir("bin");
 	g_chdir (install_dir);
 	
 	/* add this directory to $PATH for other stuff, e.g. zip */
