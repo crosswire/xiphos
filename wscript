@@ -394,6 +394,9 @@ def configure(conf):
     check_pkg(conf, 'glib-2.0', '2.0.0', True, 'GLIB')
     check_pkg(conf, 'libgnomeui-2.0', '2.0.0', True, var='GNOMEUI')
 
+    ## gfs
+    check_pkg(conf, 'libgsf-1', '1.14', True, 'GFS')
+
     #check_pkg(conf, 'libgnomeprintui-2.2', '2.2', True, var='GNOMEPRINTUI')
     #check_pkg(conf, 'libgnomeprint-2.2', '2.2', True, var='GNOMEPRINT')
 
