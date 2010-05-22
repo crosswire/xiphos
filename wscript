@@ -401,7 +401,7 @@ def configure(conf):
     if not opt.without_gnome:
         check_pkg(conf, 'libgnomeui-2.0', '2.0.0', True, var='GNOMEUI')
     else:
-        dfn('WITHOUT_GNOME', 1)
+        dfn('HAVE_GTK214', 1)
 
     ## gfs
     check_pkg(conf, 'libgsf-1', '1.14', True, 'GFS')

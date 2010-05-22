@@ -23,11 +23,11 @@
 #include <config.h>
 #endif
 
-#ifndef WITHOUT_GNOME
-#include <gnome.h>
-#else
+#ifdef HAVE_GTK214
 #include <gtk/gtk.h>
 #include <unistd.h>
+#else
+#include <gnome.h>
 #endif
 
 #include <glade/glade-xml.h>
@@ -106,19 +106,19 @@ on_help_contents_activate(GtkMenuItem * menuitem, gpointer user_data)
 	xiphos_open_default(help_file);
 	g_free(help_file);
 #else
-#ifndef WITHOUT_GNOME
-	if (gnome_help_display((const gchar*)"xiphos.xml", 
-			       NULL, &error) == FALSE) {
-		GS_warning(("%s",error->message));
-		g_error_free(error);        
-	}
-#else
+#ifdef HAVE_GTK214
 	gtk_show_uri (NULL, "ghelp:xiphos", gtk_get_current_event_time(), &error);
 	if (error != NULL) {
 		GS_warning(("%s", error->message));
 		g_error_free(error);
 	}
-#endif /* WITHOUT_GNOME */
+#else
+	if (gnome_help_display((const gchar*)"xiphos.xml", 
+			       NULL, &error) == FALSE) {
+		GS_warning(("%s",error->message));
+		g_error_free(error);        
+	}
+#endif /* HAVE_GTK214 */
 
 #endif /* WIN32 */
 }
