@@ -626,10 +626,10 @@ gecko_html_print_document(GtkWindow * window, gchar * mod_name,
 	SWMgr *mgr;
 	if(dialog) {
 		BackEnd *be = (BackEnd *)dialog->backend;
-		mgr = be->get_display_mgr();
+		mgr = be->get_mgr();
 	}
 	else 
-		mgr = backend->get_display_mgr();
+		mgr = backend->get_mgr();
 	
 	SWModule *mod = mgr->Modules[mod_name];
 	

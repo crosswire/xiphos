@@ -261,7 +261,7 @@ void main_do_sidebar_search(gpointer user_data)
 	search_active = TRUE;
 
 	// must ensure that no accents or vowel points are enabled.
-	SWMgr *mgr = backendSearch->get_main_mgr();
+	SWMgr *mgr = backendSearch->get_mgr();
 	mgr->setGlobalOption("Greek Accents", "Off");
 	mgr->setGlobalOption("Hebrew Vowel Points", "Off");
 	mgr->setGlobalOption("Arabic Vowel Points", "Off");

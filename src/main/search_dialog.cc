@@ -305,7 +305,7 @@ void main_range_text_changed(GtkEditable * editable)
 static void set_search_global_option(const gchar * option, gboolean choice)
 {	
 	const char *on_off;
-	SWMgr *mgr = backendSearch->get_display_mgr();
+	SWMgr *mgr = backendSearch->get_mgr();
 
 	if (choice) {
 		on_off = "On";
@@ -1542,7 +1542,7 @@ void main_do_dialog_search(void)
 	search_active = TRUE;
 
 	// must ensure that no accents or vowel points are enabled.
-	SWMgr *mgr = backendSearch->get_main_mgr();
+	SWMgr *mgr = backendSearch->get_mgr();
 	mgr->setGlobalOption("Greek Accents", "Off");
 	mgr->setGlobalOption("Hebrew Vowel Points", "Off");
 	mgr->setGlobalOption("Arabic Vowel Points", "Off");

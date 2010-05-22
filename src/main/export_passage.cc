@@ -73,7 +73,7 @@ static void _save(char *filename, char* text,int len)
 static void _export_book(char *filename, int type)
 {
 	GString *str = g_string_new(NULL);
-	SWMgr *mgr = backend->get_main_mgr();
+	SWMgr *mgr = backend->get_mgr();
 	SWModule *mod = mgr->Modules[settings.MainWindowModule];
 	mod->setKey(settings.currentverse);
 	VerseKey *key = (VerseKey *)(SWKey *)(*mod);
@@ -138,7 +138,7 @@ static void _export_chapter(char *filename, int type)
 {
 	GString *str = g_string_new(NULL);
 	char* book;
-	SWMgr *mgr = backend->get_main_mgr();
+	SWMgr *mgr = backend->get_mgr();
 	SWModule *mod = mgr->Modules[settings.MainWindowModule];
 	mod->setKey(settings.currentverse);
 	VerseKey *key = (VerseKey *)(SWKey *)(*mod);
@@ -196,7 +196,7 @@ static void _export_verse(char *filename, int type)
 {
 	GString *str = g_string_new(NULL);
 	char* book;
-	SWMgr *mgr = backend->get_main_mgr();
+	SWMgr *mgr = backend->get_mgr();
 	SWModule *mod = mgr->Modules[settings.MainWindowModule];
 	mod->setKey(settings.currentverse);
 	VerseKey *key = (VerseKey *)(SWKey *)(*mod);
@@ -237,7 +237,7 @@ static void _export_verse_range (EXPORT_DATA data, int type)
 {
 	GString *str = g_string_new(NULL);
 	char* book;
-	SWMgr *mgr = backend->get_main_mgr();
+	SWMgr *mgr = backend->get_mgr();
 	SWModule *mod = mgr->Modules[settings.MainWindowModule];
 	mod->setKey(settings.currentverse);
 	VerseKey *key = (VerseKey *)(SWKey *)(*mod);
