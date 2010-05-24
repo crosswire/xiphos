@@ -166,7 +166,8 @@ def configure(conf):
 
     if env['IS_WIN32']:
         env['ROOTDIR'] = ROOTDIR_WIN32
-    
+
+    conf.check_tool('nothreads', tooldir=_tooldir)
     conf.check_tool('g++ gcc')
     # cross compiler
     if env['IS_CROSS_WIN32']:
