@@ -1300,6 +1300,33 @@ HtmlOutput(char *text,
 		gtk_html_set_editable(html, FALSE);
 #endif
 
+#ifdef USE_GTKMOZEMBED
+	// EVIL EVIL EVIL EVIL.
+	// crazy nonsense with xulrunner 1.9.2.3, failure to jump to anchor.
+	// force the issue by stuffing a javascript snippet inside <head></head>.
+	// there are forms of evil so dark that they should not be contemplated.
+	if (anchor || settings.special_anchor) {
+		gchar *buf;
+
+		// first, scribble out everything up to the closing </head>.
+		buf = strstr(text, "</head>");	// yes, lowercase.
+		assert(buf != NULL);	// don't be so stupid as not to include <head></head>.
+		offset = buf - text;
+		gecko_html_write(html, text, offset);
+		len -= offset;
+
+		// now write the javascript snippet.
+		buf = g_strdup_printf(
+		    "<script type=\"text/javascript\" language=\"javascript\">"
+		    " window.onload = function () { window.location.hash = \"%s\"; }"
+		    " </script>", (settings.special_anchor
+				   ? settings.special_anchor
+				   : anchor));
+		gecko_html_write(html, buf, strlen(buf));
+		g_free(buf);
+	}
+#endif /* USE_GTKMOZEMBED */
+
 	// html widgets are uptight about being handed
 	// huge quantities of text -- producer/consumer problem,
 	// and we mustn't overload the receiver.  10k chunks.

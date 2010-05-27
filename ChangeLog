@@ -1,3 +1,7 @@
+2010-05-27  karl <charcoal@users.sf.net>
+
+	* fix #2997121 xulrunner failure to jump to anchor.
+
 2010-05-20  karl <charcoal@users.sf.net>
 
 	* create option for bible xrefs to use verse list or previewer.
