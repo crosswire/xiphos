@@ -646,10 +646,9 @@ char *set_sword_locale(const char *sys_locale)
 	}
 
 	// either we were given a null sys_locale, or it didn't match anything.
-	char *err = g_strdup_printf("%s `%s'.\n%s.",
-				    _("No matching locale found for"),
+	char *err = g_strdup_printf(_("No matching locale found for `%s'.\n%s"),
 				    sys_locale,
-				    _("Book names and menus may not be translated"));
+				    _("Book names and menus may not be translated."));
 	gui_generic_warning(err);
 	g_free(err);
 	return NULL;
