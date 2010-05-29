@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: Xiphos 3.1.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-05-17 03:35+0100\n"
-"PO-Revision-Date: 2010-04-30 21:19+0200\n"
+"PO-Revision-Date: 2010-05-29 12:07+0200\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: emacs + po-mode <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -305,9 +305,8 @@ msgid "Folder: "
 msgstr "Dossier : "
 
 #: ../src/gnome2/bookmarks_menu.c:206
-#, fuzzy
 msgid "Specify bookmarks file"
-msgstr "Édite ce signet"
+msgstr "Spécifie le fichier des signets"
 
 #: ../src/gnome2/bookmarks_menu.c:349 ../ui/xi-menus.glade.h:32
 msgid "Edit"
@@ -2372,27 +2371,26 @@ msgstr "<i>Espace système, pour tous les utilisateurs</i>"
 msgid ""
 "Add a custom remote install source. You must know its hostname and the "
 "folder where its repository lives."
-msgstr ""
+msgstr "Ajoute un dépot d'installation à distance personnalisé. Il est nécessaire de connaître au préalable le nom de domaine et le répertoire de stockage."
 
 #: ../ui/module-manager.glade.h:12
 msgid ""
 "Add a local folder as an install source, typically on a cdrom or flash "
 "drive.  Such a folder contains subfolders \"mods.d\" and \"modules\"."
-msgstr ""
+msgstr "Ajoute un répertoire local en tant que source d'installation, généralement sur un CD-ROM ou en flash. Un tel répertoire contient les sous-dossiers « mods.d » et « modules »."
 
 #: ../ui/module-manager.glade.h:13
 msgid ""
 "Build an index of the selected modules, for optimized (\"lucene\") searching."
-msgstr ""
+msgstr "Construit un index des modules sélectionnés, pour une recherche optimisée (« lucène »)."
 
 #: ../ui/module-manager.glade.h:14
 msgid "Continue"
 msgstr "Continuer"
 
 #: ../ui/module-manager.glade.h:15
-#, fuzzy
 msgid "Create a zip archive of the selected modules."
-msgstr "Ouvre une fenêtre de sélection des modules"
+msgstr "Crée une archive zip des modules sélectionnés."
 
 #: ../ui/module-manager.glade.h:16
 msgid "Current Remote Sources"
@@ -2403,24 +2401,24 @@ msgid "Current local sources"
 msgstr "Dépôts locaux"
 
 #: ../ui/module-manager.glade.h:18
-#, fuzzy
 msgid "Delete the fast-search index of the selected modules."
-msgstr "Supprimer l'index de recherche rapide pour les modules suivants ?"
+msgstr "Supprime l'index de recherche rapide des modules sélectionnés."
 
 #: ../ui/module-manager.glade.h:19
 msgid "Home dir"
 msgstr "Dossier personnel"
 
 #: ../ui/module-manager.glade.h:20
-#, fuzzy
 msgid "Install or update the selected modules"
-msgstr "Installer ces modules ?"
+msgstr "Installer ou mettre à jour les modules sélectionnés"
 
 #: ../ui/module-manager.glade.h:21
 msgid ""
 "Load and synchronize the standard set of known repositories, as maintained "
 "at crosswire.org, with your current remote sources."
 msgstr ""
+"Charge et synchronise l'ensemble standard des dépots référencés, tel que \"\n"
+"\"maintenu à crosswire.org, avec vos dépots actuels."
 
 #: ../ui/module-manager.glade.h:22
 msgid "Local"
@@ -2436,31 +2434,29 @@ msgstr "Gérer les modules"
 
 #: ../ui/module-manager.glade.h:25
 msgid "Open a brief introductory explanation of how the Module Manager works."
-msgstr ""
+msgstr "Ouvre une brève explication en introduction sur la façon dont le gestionnaire de modules fonctionne."
 
 #: ../ui/module-manager.glade.h:26
 msgid ""
 "Refresh Xiphos' knowledge of what modules are available at the selected "
 "remote repository"
-msgstr ""
+msgstr "Actualise l'information dans « Xiphos » à propos des modules disponibles dans les dépôts."
 
 #: ../ui/module-manager.glade.h:27
 msgid "Remote"
 msgstr "Dépôt distant"
 
 #: ../ui/module-manager.glade.h:28
-#, fuzzy
 msgid "Remove a remote install source."
 msgstr "Supprimer un dépôt distant"
 
 #: ../ui/module-manager.glade.h:29
 msgid "Remove one of your local folders as an install source."
-msgstr ""
+msgstr "Supprime un répertoire local en tant que dépot."
 
 #: ../ui/module-manager.glade.h:30
-#, fuzzy
 msgid "Remove the selected modules from your system"
-msgstr "Supprime le module sélectionné de la liste"
+msgstr "Supprime les module sélectionnés de votre système"
 
 #: ../ui/module-manager.glade.h:31
 msgid "Sword sys dir"
@@ -3411,9 +3407,8 @@ msgid "Image Content"
 msgstr "Afficher les images"
 
 #: ../ui/xi-menus.glade.h:46
-#, fuzzy
 msgid "Import Bookmarks"
-msgstr "Insérer un signet"
+msgstr "Importe les signets"
 
 #: ../ui/xi-menus.glade.h:47
 msgid "Insert Bookmark"
@@ -3428,9 +3423,8 @@ msgid "L_ink Tabs"
 msgstr "Onglets liés"
 
 #: ../ui/xi-menus.glade.h:51
-#, fuzzy
 msgid "Load other bookmarks file (default: from BibleTime)"
-msgstr "Charge les signets de Bibletime"
+msgstr "Importe un autre fichier de signets (par défaut: de Bibletime)"
 
 #: ../ui/xi-menus.glade.h:52
 msgid "Lookup Selection"
