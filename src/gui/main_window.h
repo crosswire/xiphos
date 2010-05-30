@@ -48,17 +48,6 @@ struct  _tab_page {
 
 	// ***** backend  *****
 	gpointer backend;
-	// **** modules *****
-	gchar *mod_text;
-	gchar *mod_comm;
-	gchar *mod_dict;
-	gchar *mod_book;
-	// **** parallel modules *****
-	gchar *mod_par1;
-	gchar *mod_par2;
-	gchar *mod_par3;
-	gchar *mod_par4;
-	gchar *mod_par5;
 	// ***** keys *****
 	gchar *text_comm_key;
 	gchar *dict_key;

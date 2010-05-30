@@ -1,3 +1,7 @@
+2010-05-30  karl <charcoal@users.sf.net>
+
+	* fix #2849660 prevent crash by insisting on minimum pane sizes.
+
 2010-05-27  karl <charcoal@users.sf.net>
 
 	* fix #2997121 xulrunner failure to jump to anchor.
