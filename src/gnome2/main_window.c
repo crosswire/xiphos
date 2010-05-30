@@ -882,11 +882,13 @@ void create_mainwindow(void)
 /**widgets.vpaned********/
 	widgets.vpaned = gtk_vpaned_new();
 	gtk_widget_show(widgets.vpaned);
-	gtk_paned_pack1(GTK_PANED(widgets.hpaned), widgets.vpaned, TRUE, TRUE);
+	gtk_widget_set_size_request(widgets.vpaned, 50, -1);
+	gtk_paned_pack1(GTK_PANED(widgets.hpaned), widgets.vpaned, TRUE, FALSE);
 
 	widgets.vpaned2 = gtk_vpaned_new();
 	gtk_widget_show(widgets.vpaned2);
-	gtk_paned_pack2(GTK_PANED(widgets.hpaned), widgets.vpaned2, TRUE, TRUE);
+	gtk_widget_set_size_request(widgets.vpaned2, 50, -1);
+	gtk_paned_pack2(GTK_PANED(widgets.hpaned), widgets.vpaned2, TRUE, FALSE);
 
 /**widgets.hpaned********/
 	widgets.vbox_text = gtk_vbox_new(FALSE, 0);
