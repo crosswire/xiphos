@@ -2348,7 +2348,7 @@ on_load_sources_clicked(GtkButton * button, gpointer  user_data)
 _("<b>Welcome to the Module Manager.</b>\n\nThis is Xiphos' mechanism to get new and updated content.\nIf you have never been here before, please take a moment to look it over.\n\nModules come from different <u>repositories</u>.  <b>Module Sources: Add/Remove</b> will show you what repositories are currently known.\n\n<b>Module Sources: Choose</b> is for deciding from where modules should come, that is, from which repository Xiphos should obtain them, as well as where they should be placed on your system. Set <i>Install Source</i> and <i>Install Destination</i>, then click <i>Refresh</i>.\n\n<b>Modules: Install/Update</b> is for selecting and obtaining modules after choosing source and destination.\n\n<b>Modules: Maintenance</b> is for archive and index creation.\n\nSee section 5 of our manual for Module Manager detail, or ask for help via Live Chat, or (if no one is responsive in chat) send mail to our users' mailing list.\n")
 
 void
-on_intro_clicked(GtkButton * button, gpointer  user_data)
+on_mod_mgr_intro_clicked(GtkButton * button, gpointer  user_data)
 {
 	GtkWidget *dialog;
 	dialog = gtk_message_dialog_new_with_markup
@@ -2422,7 +2422,7 @@ on_mod_mgr_response(GtkDialog * dialog,
 		on_load_sources_clicked(NULL, NULL);
 		break;
 	case GTK_RESPONSE_INTRO:
-		on_intro_clicked(NULL, NULL);
+		on_mod_mgr_intro_clicked(NULL, NULL);
 		break;
 	}
 }
@@ -2942,11 +2942,11 @@ setup_dialog_action_area(GtkDialog * dialog)
 	g_signal_connect(button_idx, "clicked", G_CALLBACK(on_index_clicked), NULL);
 	g_signal_connect(button_delidx, "clicked", G_CALLBACK(on_delete_index_clicked), NULL);
 	g_signal_connect(button_load_sources, "clicked", G_CALLBACK(on_load_sources_clicked), NULL);
-	g_signal_connect(button_intro, "clicked", G_CALLBACK(on_intro_clicked), NULL);
+	g_signal_connect(button_intro, "clicked", G_CALLBACK(on_mod_mgr_intro_clicked), NULL);
 	g_signal_connect(button_cancel, "clicked", G_CALLBACK(on_cancel_clicked), NULL);
 
 	gtk_widget_show(button_close);
-	on_intro_clicked(NULL, NULL);
+	on_mod_mgr_intro_clicked(NULL, NULL);
 }
 
 static void

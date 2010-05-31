@@ -714,7 +714,7 @@ void scope_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *   #include "gui/search_dialog.h"
  *
  *   void mod_list_toggled(GtkToggleButton *togglebutton,
-						gpointer user_data)
+ *			   gpointer user_data)
  *
  * Description
  *
@@ -734,10 +734,134 @@ void mod_list_toggled(GtkToggleButton * togglebutton,
 		gtk_widget_set_sensitive(search1.combo_list,TRUE);
 	else
 		gtk_widget_set_sensitive(search1.combo_list,FALSE);
-
-
 }
 
+
+/******************************************************************************
+ * Name
+ *   optimized_toggled
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *   void optimized_toggled(GtkToggleButton *togglebutton,
+ *			    gpointer user_data)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   void
+ */
+
+void optimized_toggled(GtkToggleButton * togglebutton,
+		      gpointer user_data)
+{
+	if (togglebutton->active)
+		gtk_widget_show(search1.button_intro_lucene);
+	else
+		gtk_widget_hide(search1.button_intro_lucene);
+}
+
+
+/******************************************************************************
+ * Name
+ *   on_lucene_intro_clicked
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *   void on_lucene_intro_clicked(GtkToggleButton *button,
+ *				  gpointer user_data)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   void
+ */
+
+#define	LUCENE_INTRO	\
+_("<b>Syntax overview for optimized \"lucene\" searches</b>\nSearch for verses that contain...\n\nloved one\n\t \"loved\" or \"one\"\n\tThis is the same as searching for loved OR one\n\"loved one\"\n\tThe phrase \"loved one\"\nlove*\n\tA word starting with \"love\"\n\t(love OR loves OR loved OR etc...)\nloved AND one\n\tThe word \"loved\" and the word \"one\"\n\t&amp;&amp; can be used in place of AND\n+loved one\n\tVerses that <b>must</b> contain \"loved\" and <b>may</b> contain \"one\"\nloved NOT one\n\t\"loved\" but not \"one\"\n(loved one) AND God\n\t\"loved\" or \"one\" and \"God\"\nlemma:G2316\n\tSearch for the Strong's Greek (\"G\") word number 2316.\n\tAlso, select Strong's display on the <i>Attribute Search</i> tab.\n\nFor complete details, search the web for \"lucene search syntax\".")
+
+void
+on_lucene_intro_clicked(GtkButton * button, gpointer user_data)
+{
+	GtkWidget *dialog;
+	dialog = gtk_message_dialog_new_with_markup
+	    (NULL,	/* no need for a parent window */
+	     GTK_DIALOG_DESTROY_WITH_PARENT,
+	     GTK_MESSAGE_INFO,
+	     GTK_BUTTONS_OK,
+	     LUCENE_INTRO);
+	g_signal_connect_swapped (dialog, "response",
+				  G_CALLBACK (gtk_widget_destroy),
+				  dialog);
+	gtk_widget_show(dialog);
+}
+
+/******************************************************************************
+ * Name
+ *   attributes_toggled
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *   void attributes_toggled(GtkToggleButton *togglebutton,
+ *			     gpointer user_data)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   void
+ */
+
+void attributes_toggled(GtkToggleButton * togglebutton,
+		      gpointer user_data)
+{
+	if (togglebutton->active)
+		gtk_widget_show(search1.button_intro_attributes);
+	else
+		gtk_widget_hide(search1.button_intro_attributes);
+}
+
+
+/******************************************************************************
+ * Name
+ *   on_attributes_intro_clicked
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *   void on_attributes_intro_clicked(GtkToggleButton *button,
+ *				  gpointer user_data)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   void
+ */
+
+#define	ATTRIBUTES_INTRO	\
+_("<b>Attribute-based searches</b>\nSearches for content contained in markup outside the main text. Attributes are footnotes, Strong's numbers, and morphological symbols.\n\nBe aware that most such searches can now be done faster via optimized \"lucene\" searches using keyword qualifiers.\n\nTo use attribute searches, you must select the appropriate button on the <i>Attribute Search</i> tab.\n* Footnote text is searched just like regular text.\n* Strong's words are specified as a prefix letter H or G (Hebrew or Greek) and the numeric word identifier, e.g. G2316 to find \"θεός\" (\"God\").\n* Morphological tags are identified literally, e.g. N-ASF for \"noun, accusative singular feminine\" -- see the Robinson module for details.")
+
+void
+on_attributes_intro_clicked(GtkButton * button, gpointer user_data)
+{
+	GtkWidget *dialog;
+	dialog = gtk_message_dialog_new_with_markup
+	    (NULL,	/* no need for a parent window */
+	     GTK_DIALOG_DESTROY_WITH_PARENT,
+	     GTK_MESSAGE_INFO,
+	     GTK_BUTTONS_OK,
+	     ATTRIBUTES_INTRO);
+	g_signal_connect_swapped (dialog, "response",
+				  G_CALLBACK (gtk_widget_destroy),
+				  dialog);
+	gtk_widget_show(dialog);
+}
 
 /******************************************************************************
  * Name
@@ -1465,14 +1589,31 @@ void _create_search_dialog(void)
 	search1.rb_custom_list = glade_xml_get_widget(gxml, "radiobutton6");
 	g_signal_connect(search1.rb_custom_list, "toggled",
 			 G_CALLBACK(mod_list_toggled), NULL);
-	/*  */
+
+	/* search type selection */
 	search1.rb_words        = glade_xml_get_widget(gxml, "radiobutton9");
 	search1.rb_regexp       = glade_xml_get_widget(gxml, "radiobutton10");
 	search1.rb_exact_phrase = glade_xml_get_widget(gxml, "radiobutton11");
+
 	search1.rb_optimized    = glade_xml_get_widget(gxml, "radiobutton16");
+	g_signal_connect(search1.rb_optimized, "toggled",
+			 G_CALLBACK(optimized_toggled), NULL);
+
+	search1.button_intro_lucene = glade_xml_get_widget(gxml, "button_intro_lucene");
+	g_signal_connect(search1.button_intro_lucene, "clicked",
+			 G_CALLBACK(on_lucene_intro_clicked), NULL);
+	gtk_widget_hide(search1.button_intro_lucene);
+
+	search1.rb_attributes = glade_xml_get_widget(gxml, "radiobutton12");
+	g_signal_connect(search1.rb_attributes, "toggled",
+			 G_CALLBACK(attributes_toggled), NULL);
+
+	search1.button_intro_attributes = glade_xml_get_widget(gxml, "button_intro_attributes");
+	g_signal_connect(search1.button_intro_attributes, "clicked",
+			 G_CALLBACK(on_attributes_intro_clicked), NULL);
+	gtk_widget_hide(search1.button_intro_attributes);
 
 	/* attributes radio buttons */
-	search1.rb_attributes = glade_xml_get_widget(gxml, "radiobutton12");
 	search1.rb_strongs    = glade_xml_get_widget(gxml, "radiobutton13");
 	search1.rb_morphs     = glade_xml_get_widget(gxml, "radiobutton15");
 	search1.rb_footnotes  = glade_xml_get_widget(gxml, "radiobutton14");
