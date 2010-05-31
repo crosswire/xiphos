@@ -1,3 +1,7 @@
+2010-05-31  karl <charcoal@users.sf.net>
+
+	* add intro dialogs for lucene and attribute choices in Adv.Search.
+
 2010-05-30  karl <charcoal@users.sf.net>
 
 	* fix #2849660 prevent crash by insisting on minimum pane sizes.
