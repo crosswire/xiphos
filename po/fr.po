@@ -20,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 3.1.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-31 23:18+0200\n"
-"PO-Revision-Date: 2010-05-31 23:13+0200\n"
+"POT-Creation-Date: 2010-06-01 23:04+0200\n"
+"PO-Revision-Date: 2010-06-01 23:47+0200\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: emacs + po-mode <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -534,8 +534,8 @@ msgstr "Ouvrir un nouvel onglet"
 
 #: ../src/gnome2/main_window.c:930 ../src/gnome2/sidebar.c:618
 #: ../src/gnome2/sidebar.c:624 ../src/main/sidebar.cc:655
-#: ../src/main/sidebar.cc:998 ../src/main/sidebar.cc:999
-#: ../src/main/sidebar.cc:1000
+#: ../src/main/sidebar.cc:999 ../src/main/sidebar.cc:1000
+#: ../src/main/sidebar.cc:1001
 msgid "Standard View"
 msgstr "Vue simple"
 
@@ -665,9 +665,7 @@ msgstr "Archiver"
 msgid ""
 "Build fast-search index for these\n"
 "modules (may take minutes/module)?"
-msgstr ""
-"Construire un index de recherche rapide pour les modules suivants (dure un "
-"certain temps) ?"
+msgstr "Construire un index de recherche optimisée pour les modules suivants (dure un certain temps) ?"
 
 #: ../src/gnome2/mod_mgr.c:193
 msgid "Preparing to index"
@@ -683,7 +681,7 @@ msgstr "Indexer"
 
 #: ../src/gnome2/mod_mgr.c:198
 msgid "Delete fast-search index for these modules?"
-msgstr "Supprimer l'index de recherche rapide pour les modules suivants ?"
+msgstr "Supprimer l'index de recherche optimisée pour les modules suivants ?"
 
 #: ../src/gnome2/mod_mgr.c:199
 msgid "Preparing to delete index"
@@ -711,8 +709,7 @@ msgstr "Cocher la case pour travailler avec ce module"
 
 #: ../src/gnome2/mod_mgr.c:470
 msgid "Click the box to select this module for install/update"
-msgstr ""
-"Cocher la case pour sélectionner ce module à installer ou à mettre à jour"
+msgstr "Cocher la case pour sélectionner ce module à installer ou à mettre à jour"
 
 #: ../src/gnome2/mod_mgr.c:489
 msgid "Installed"
@@ -780,7 +777,7 @@ msgstr "Les listes de prières et journaux ne peuvent pas être indexés."
 msgid "%s failed"
 msgstr "%s a échoué"
 
-#: ../src/gnome2/mod_mgr.c:831 ../src/gnome2/mod_mgr.c:1555
+#: ../src/gnome2/mod_mgr.c:831 ../src/gnome2/mod_mgr.c:1566
 msgid "Finished"
 msgstr "Terminé"
 
@@ -788,12 +785,12 @@ msgstr "Terminé"
 #: ../src/gnome2/mod_mgr.c:1103 ../src/gnome2/mod_mgr.c:1138
 #: ../src/gnome2/mod_mgr.c:1140 ../src/gnome2/utilities.c:453
 #: ../src/gnome2/utilities.c:518 ../src/gnome2/utilities.c:520
-#: ../src/gnome2/utilities.c:1021 ../src/main/sidebar.cc:835
+#: ../src/gnome2/utilities.c:1031 ../src/main/sidebar.cc:835
 #: ../src/main/sidebar.cc:907 ../src/main/sidebar.cc:909
 msgid "Unknown"
 msgstr "Inconnu"
 
-#: ../src/gnome2/mod_mgr.c:1297
+#: ../src/gnome2/mod_mgr.c:1298
 #, c-format
 msgid ""
 "Repository:\n"
@@ -802,7 +799,7 @@ msgstr ""
 "Dépôt :\n"
 "%s"
 
-#: ../src/gnome2/mod_mgr.c:1309
+#: ../src/gnome2/mod_mgr.c:1310
 msgid ""
 "Categorized by\n"
 "Module Type"
@@ -810,44 +807,49 @@ msgstr ""
 "Modules classés\n"
 "par type"
 
-#: ../src/gnome2/mod_mgr.c:1314 ../src/gnome2/utilities.c:579
-#: ../src/main/sidebar.cc:982 ../src/main/sidebar.cc:984
+#: ../src/gnome2/mod_mgr.c:1315 ../src/gnome2/utilities.c:580
+#: ../src/main/sidebar.cc:983 ../src/main/sidebar.cc:985
 msgid "Biblical Texts"
 msgstr "Textes bibliques"
 
-#: ../src/gnome2/mod_mgr.c:1318 ../src/gnome2/utilities.c:583
-#: ../src/main/sidebar.cc:667 ../src/main/sidebar.cc:1007
-#: ../src/main/sidebar.cc:1009 ../ui/prefs.glade.h:36
+#: ../src/gnome2/mod_mgr.c:1319 ../src/gnome2/utilities.c:584
+#: ../src/main/sidebar.cc:667 ../src/main/sidebar.cc:1008
+#: ../src/main/sidebar.cc:1010 ../ui/prefs.glade.h:36
 msgid "Commentaries"
 msgstr "Commentaires"
 
-#: ../src/gnome2/mod_mgr.c:1322 ../src/gnome2/utilities.c:588
-#: ../src/main/sidebar.cc:1016 ../src/main/sidebar.cc:1018
+#: ../src/gnome2/mod_mgr.c:1323 ../src/gnome2/utilities.c:589
+#: ../src/main/sidebar.cc:1017 ../src/main/sidebar.cc:1019
 msgid "Dictionaries"
 msgstr "Dictionnaires"
 
-#: ../src/gnome2/mod_mgr.c:1326 ../src/gnome2/utilities.c:592
-#: ../src/main/sidebar.cc:1025 ../src/main/sidebar.cc:1027
+#: ../src/gnome2/mod_mgr.c:1327 ../src/gnome2/utilities.c:593
+#: ../src/main/sidebar.cc:1026 ../src/main/sidebar.cc:1028
 msgid "Daily Devotionals"
 msgstr "Calendriers bibliques"
 
-#: ../src/gnome2/mod_mgr.c:1330 ../src/gnome2/utilities.c:596
-#: ../src/main/sidebar.cc:677 ../src/main/sidebar.cc:1034
-#: ../src/main/sidebar.cc:1036
+#: ../src/gnome2/mod_mgr.c:1331 ../src/gnome2/utilities.c:597
+#: ../src/main/sidebar.cc:677 ../src/main/sidebar.cc:1035
+#: ../src/main/sidebar.cc:1037
 msgid "General Books"
 msgstr "Livres"
 
-#: ../src/gnome2/mod_mgr.c:1334 ../src/gnome2/utilities.c:600
-#: ../src/main/sidebar.cc:1043 ../src/main/sidebar.cc:1045
+#: ../src/gnome2/mod_mgr.c:1335 ../src/gnome2/utilities.c:601
+#: ../src/main/sidebar.cc:1044 ../src/main/sidebar.cc:1046
 msgid "Maps"
 msgstr "Cartes"
 
-#: ../src/gnome2/mod_mgr.c:1338 ../src/gnome2/utilities.c:604
-#: ../src/main/sidebar.cc:1052 ../src/main/sidebar.cc:1054
+#: ../src/gnome2/mod_mgr.c:1339 ../src/gnome2/utilities.c:605
+#: ../src/main/sidebar.cc:1053 ../src/main/sidebar.cc:1055
 msgid "Images"
 msgstr "Images"
 
-#: ../src/gnome2/mod_mgr.c:1346
+#: ../src/gnome2/mod_mgr.c:1343 ../src/gnome2/utilities.c:609
+#: ../src/main/sidebar.cc:1062 ../src/main/sidebar.cc:1064
+msgid "Cult/Unorthodox"
+msgstr "Hétérodoxie"
+
+#: ../src/gnome2/mod_mgr.c:1351
 msgid ""
 "Categorized by\n"
 "Availability"
@@ -855,96 +857,96 @@ msgstr ""
 "Modules classés\n"
 "par disponibilité"
 
-#: ../src/gnome2/mod_mgr.c:1351
+#: ../src/gnome2/mod_mgr.c:1356
 msgid "Updates"
 msgstr "Mise à jour disponible"
 
-#: ../src/gnome2/mod_mgr.c:1355
+#: ../src/gnome2/mod_mgr.c:1360
 msgid "Uninstalled"
 msgstr "Non installé"
 
-#: ../src/gnome2/mod_mgr.c:1359 ../src/gnome2/sidebar.c:634
-#: ../src/gnome2/utilities.c:609 ../src/main/prayerlists.cc:241
-#: ../src/main/sidebar.cc:1062 ../src/main/sidebar.cc:1064
+#: ../src/gnome2/mod_mgr.c:1364 ../src/gnome2/sidebar.c:634
+#: ../src/gnome2/utilities.c:614 ../src/main/prayerlists.cc:241
+#: ../src/main/sidebar.cc:1072 ../src/main/sidebar.cc:1074
 msgid "Prayer List/Journal"
 msgstr "Liste de prières / Journal"
 
-#: ../src/gnome2/mod_mgr.c:1539
+#: ../src/gnome2/mod_mgr.c:1550
 msgid "Refreshing from remote source"
 msgstr "Rafraîchissement en cours"
 
-#: ../src/gnome2/mod_mgr.c:1549
+#: ../src/gnome2/mod_mgr.c:1560
 msgid "Remote source not found"
 msgstr "Serveur non trouvé"
 
-#: ../src/gnome2/mod_mgr.c:1619
+#: ../src/gnome2/mod_mgr.c:1630
 msgid "Configure"
 msgstr "Configurer"
 
-#: ../src/gnome2/mod_mgr.c:1650
+#: ../src/gnome2/mod_mgr.c:1661
 msgid "Type"
 msgstr "Type"
 
-#: ../src/gnome2/mod_mgr.c:1657
+#: ../src/gnome2/mod_mgr.c:1668
 msgid "Caption"
 msgstr "Libellé"
 
-#: ../src/gnome2/mod_mgr.c:1665
+#: ../src/gnome2/mod_mgr.c:1676
 msgid "Source"
 msgstr "Source"
 
 # src/gs_preferences_dlg.c
-#: ../src/gnome2/mod_mgr.c:1673
+#: ../src/gnome2/mod_mgr.c:1684
 msgid "Directory"
 msgstr "Répertoire"
 
-#: ../src/gnome2/mod_mgr.c:1681
+#: ../src/gnome2/mod_mgr.c:1692
 msgid "User"
 msgstr "Identifiant"
 
-#: ../src/gnome2/mod_mgr.c:1689
+#: ../src/gnome2/mod_mgr.c:1700
 msgid "Password"
 msgstr "Mot de passe"
 
-#: ../src/gnome2/mod_mgr.c:1697
+#: ../src/gnome2/mod_mgr.c:1708
 msgid "UID"
 msgstr "UID"
 
-#: ../src/gnome2/mod_mgr.c:1714
+#: ../src/gnome2/mod_mgr.c:1725
 msgid "Module Sources"
 msgstr "Dépots"
 
-#: ../src/gnome2/mod_mgr.c:1717
+#: ../src/gnome2/mod_mgr.c:1728
 msgid "Add/Remove"
 msgstr "Ajouter/Supprimer"
 
-#: ../src/gnome2/mod_mgr.c:1719
+#: ../src/gnome2/mod_mgr.c:1730
 msgid "Choose"
 msgstr "Sélection"
 
-#: ../src/gnome2/mod_mgr.c:1723 ../src/gnome2/preferences_dialog.c:1659
+#: ../src/gnome2/mod_mgr.c:1734 ../src/gnome2/preferences_dialog.c:1659
 #: ../src/gnome2/sidebar.c:1400
 msgid "Modules"
 msgstr "Modules"
 
-#: ../src/gnome2/mod_mgr.c:1725
+#: ../src/gnome2/mod_mgr.c:1736
 msgid "Install/Update"
 msgstr "Installer"
 
-#: ../src/gnome2/mod_mgr.c:1727
+#: ../src/gnome2/mod_mgr.c:1738
 msgid "Maintenance"
 msgstr "Maintenance"
 
-#: ../src/gnome2/mod_mgr.c:1948
+#: ../src/gnome2/mod_mgr.c:1959
 msgid "Please Refresh"
 msgstr "Rafraîchir"
 
-#: ../src/gnome2/mod_mgr.c:1949
+#: ../src/gnome2/mod_mgr.c:1960
 msgid "Your module list is not up to date!"
 msgstr "La liste des modules n'est pas à jour!"
 
 #. Zero Bibles is just not workable in Xiphos.
-#: ../src/gnome2/mod_mgr.c:2242
+#: ../src/gnome2/mod_mgr.c:2253
 msgid ""
 "You have uninstalled your last Bible.\n"
 "Xiphos requires at least one."
@@ -952,7 +954,7 @@ msgstr ""
 "Vous avez désinstallé votre dernière Bible.\n"
 "Xiphos requiert au minimum une."
 
-#: ../src/gnome2/mod_mgr.c:2248
+#: ../src/gnome2/mod_mgr.c:2259
 msgid ""
 "There are still no Bibles installed.\n"
 "Xiphos cannot continue without one."
@@ -960,15 +962,17 @@ msgstr ""
 "Toujours aucune Bible installée.\n"
 "Xiphos ne peut pas continuer sans."
 
-#: ../src/gnome2/mod_mgr.c:2338
+#: ../src/gnome2/mod_mgr.c:2349
 msgid "Standard remote sources have been loaded."
-msgstr "Les dépôts distants standards ont été chargés."
+msgstr ""
+"Les dépôts distants standards\n"
+"ont été chargés."
 
-#: ../src/gnome2/mod_mgr.c:2344
+#: ../src/gnome2/mod_mgr.c:2355
 msgid "Could not load standard sources from CrossWire."
 msgstr "Impossible de charger les dépôts standards depuis CrossWire."
 
-#: ../src/gnome2/mod_mgr.c:2348
+#: ../src/gnome2/mod_mgr.c:2359
 msgid ""
 "<b>Welcome to the Module Manager.</b>\n"
 "\n"
@@ -994,67 +998,60 @@ msgid ""
 msgstr ""
 "<b>Bienvenue dans le Gestionnaire de modules</b>\n"
 "\n"
-"C'est le mécanisme utilisé par Xiphos pour obtenir et mettre à jour les "
-"contenus.\n"
-"Il ressort qu'il n'a jamais été utilisé, arrêtez-vous donc un petit moment "
-"pour le connaître.\n"
+"Il constitue le mécanisme utilisé par Xiphos pour obtenir et mettre à jour les contenus.\n"
+"Si vous ne l'avez pas encore utilisé, arrêtez-vous donc un petit moment pour le connaître.\n"
 " \n"
-"Les modules proviennent de différents <u>dépots</u>.  <b>Dépots : Ajouter/"
-"Supprimer</b> indique quels dépots sont actuellement répertoriés.\n"
+"Les modules proviennent de différents <u>dépots</u>.  \n"
 "\n"
-"<b>Dépots : Sélection</b> permet de décider d'où les modules doivent "
-"provenir, c'est-à-dire de quel dépot Xiphos doit les obtenir, et aussi à "
-"quel endroit ils doivent être placés sur le système. Sélectionnez <i>Source "
-"des dépots</i> et <i>Dossier d'installation</i>, puis ensuite <i>Actualiser</"
-"i>.\n"
+"<b>Dépots : Ajouter/Supprimer</b> indique quels dépots sont actuellement enregistrés.\n"
 "\n"
-"<b>Modules : Installer</b> permet de sélectionner et d'obtenir des modules "
-"après avoir choisi la source et le dossier d'installation.\n"
+"<b>Dépots : Sélection</b> permet de décider d'où les modules doivent provenir, c'est-à-dire de quel dépot Xiphos doit les obtenir, et aussi à quel endroit ils doivent être placés sur le système. Sélectionnez <i>Source des dépots</i> et <i>Dossier d'installation</i>, puis ensuite <i>Actualiser</i>.\n"
+"\n"
+"<b>Modules : Installer</b> permet de sélectionner et d'obtenir des modules après avoir choisi la source et le dossier d'installation.\n"
 "\n"
 "<b>Modules : Maintenance</b> sert à l'archivage et la création d'index.\n"
 "\n"
-"Pour plus d'informations sur le gestionnaire de modules, voir la section 5 "
-"du manuel d'aide. \n"
+"Pour plus d'informations sur le gestionnaire de modules, voir la section 5 du manuel d'aide. \n"
 
-#: ../src/gnome2/mod_mgr.c:2515 ../src/gnome2/mod_mgr.c:2761
+#: ../src/gnome2/mod_mgr.c:2526 ../src/gnome2/mod_mgr.c:2772
 msgid "Remove the selected source"
 msgstr "Supprime le dépôt sélectionné"
 
-#: ../src/gnome2/mod_mgr.c:2575
+#: ../src/gnome2/mod_mgr.c:2586
 msgid "Enter a remote source"
 msgstr "Ajouter un dépôt distant"
 
-#: ../src/gnome2/mod_mgr.c:2579
+#: ../src/gnome2/mod_mgr.c:2590
 msgid "Caption:"
 msgstr "Libellé :"
 
-#: ../src/gnome2/mod_mgr.c:2580
+#: ../src/gnome2/mod_mgr.c:2591
 msgid "Type:"
 msgstr "Type :"
 
-#: ../src/gnome2/mod_mgr.c:2581
+#: ../src/gnome2/mod_mgr.c:2592
 msgid "Host:"
 msgstr "Serveur :"
 
 # src/gs_preferences_dlg.c
-#: ../src/gnome2/mod_mgr.c:2582
+#: ../src/gnome2/mod_mgr.c:2593
 msgid "Directory:"
 msgstr "Répertoire :"
 
-#: ../src/gnome2/mod_mgr.c:2583
+#: ../src/gnome2/mod_mgr.c:2594
 msgid "User (optional):"
 msgstr "Identifiant (optionnel) :"
 
-#: ../src/gnome2/mod_mgr.c:2584
+#: ../src/gnome2/mod_mgr.c:2595
 msgid "Password (optional):"
 msgstr "Password (optional):(optionnel) :"
 
 #. this can happen at most once
-#: ../src/gnome2/mod_mgr.c:2611
+#: ../src/gnome2/mod_mgr.c:2622
 msgid "A source by that name already exists."
 msgstr "Un dépôt du même nom existe déjà"
 
-#: ../src/gnome2/mod_mgr.c:2758
+#: ../src/gnome2/mod_mgr.c:2769
 msgid "Delete a remote source"
 msgstr "Supprimer un dépôt distant"
 
@@ -1094,8 +1091,8 @@ msgstr "Options du module"
 
 #: ../src/gnome2/parallel_view.c:269 ../src/gnome2/sidebar.c:617
 #: ../src/gnome2/sidebar.c:623 ../src/gnome2/tabbed_browser.c:257
-#: ../src/main/sidebar.cc:636 ../src/main/sidebar.cc:990
-#: ../src/main/sidebar.cc:991 ../src/main/sidebar.cc:992
+#: ../src/main/sidebar.cc:636 ../src/main/sidebar.cc:991
+#: ../src/main/sidebar.cc:992 ../src/main/sidebar.cc:993
 msgid "Parallel View"
 msgstr "Vue parallèle"
 
@@ -1250,28 +1247,30 @@ msgstr ""
 "\n"
 "est amour\n"
 "\t« est » ou « amour »\n"
-"\tC'est la même chose que la recherche de « est » OR amour\n"
+"\tUne requête équivalente est : est OR amour \n"
 "\"est amour\"\n"
 "\tLa phrase « est amour »\n"
 "amour*\n"
 "\tUn mot commençant par « amour »\n"
-"\t(amour OR amours OR amour-là OR etc...)\n"
+"\t(amour ou amours ou amour-là ou etc...)\n"
 "est AND amour\n"
 "\tLe mot « est » et le mot « amour »\n"
 "\t&amp;&amp; peuvent être utilisés à la place de AND\n"
 "est +amour\n"
-"\tVersets qui <b>doivent</ b> contenir « amour » et <b>peut-être</ b> "
-"contenir « est »\n"
+"\tVersets qui <b>doivent</b> contenir « amour » et \n"
+"\t<b>peut-être</b> contenir « est »\n"
 "est NOT amour\n"
 "\t« est » mais pas « amour »\n"
 "(est amour) AND Dieu\n"
 "\t« est » ou « amour » et « Dieu »\n"
 "lemma:G2316\n"
-"\tRecherche de nombre de Strong grec (« G »), de numéro de mot 2316.\n"
-"\tSélectionner aussi l'affichage « Avec nombres de Strong » dans l'onglet "
-"« Attributs »\n"
+"\tRecherche du nombre de Strong grec (« G »), \n"
+"\tde numéro de mot 2316.\n"
+"\tSélectionner aussi l'affichage « Avec nombres \n"
+"\tde Strong » dans l'onglet « Attributs »\n"
 "\n"
-"Pour plus d'amples détails, rechercher sur le web « Syntaxe de Lucene »."
+"Pour plus d'amples détails, rechercher sur Internet : « Syntaxe requête "
+"Lucene »."
 
 #. *****************************************************************************
 #. * Name
@@ -1307,27 +1306,25 @@ msgid ""
 "accusative singular feminine\" -- see the Robinson module for details."
 msgstr ""
 "<b>Recherches basées sur les attributs</b>\n"
-"Elles servent à rechercher du contenu figurant en dehors du texte principal. "
-"Les attributs\n"
-"sont les notes de bas de pages, les nombres de Strong, les symboles "
-"morphologiques.\n"
+"\n"
+"Elles s'appliquent aux recherches de contenu figurant en dehors du texte "
+"principal. \n"
+"Les attributs incluent les notes de bas de pages, les nombres de Strong, les "
+"symboles morphologiques.\n"
 "\n"
 "Noter que la plupart de ces requêtes peuvent maintenant être effectuées plus "
-"rapidement par\n"
-"l'intermédiaire des recherches optimisées « Lucene », à l'aide des mots-clés "
-"appropriés.\n"
+"rapidement par l'intermédiaire des recherches optimisées « Lucene », à l'aide "
+"des mots-clés appropriés.\n"
 "\n"
-"Pour utiliser les recherches sur attribut, sélectionner le bouton approprié "
-"dans l'onglet\n"
-"<i>Attributs</ i>.\n"
+"Pour utiliser les recherches sur attributs, sélectionner le bouton approprié "
+"dans l'onglet <i>Attributs</i>.\n"
 "* Les notes de bas de page sont recherchées comme du texte normal\n"
-"* Les nombres de Strong sont spécifiés par une lettre préfixe H ou G "
-"(Hébreou ou Grec)\n"
-"suivie du numéro d'identification du mot, ex G2316 pour trouver "
+"* Les nombres de Strong sont spécifiés par une lettre préfixe H ou G (Hébreu "
+"ou Grec) suivie du numéro d'identification du mot, ex G2316 pour trouver "
 "« θεός » (Dieu).\n"
 "* Les étiquettes morphologiques sont indiquées littéralement ex N-ASF pour "
-"« nom,\n"
-"accusatif singulier féminin » - voir le module Robinson pour plus de détails."
+"« nom, accusatif singulier féminin » - voir le module Robinson pour plus de "
+"détails."
 
 #: ../src/gnome2/search_sidebar.c:184
 msgid ""
@@ -1862,7 +1859,7 @@ msgstr "La liste de modules est à régénérer"
 #: ../src/main/search_dialog.cc:1476
 #, c-format
 msgid "No fast-search index exists for %s.%s%s"
-msgstr "Aucun index de recherche rapide n'existe pour %s %s%s"
+msgstr "Aucun index de recherche optimisée n'existe pour %s %s%s"
 
 #: ../src/main/search_dialog.cc:1478
 msgid ""
@@ -2543,7 +2540,7 @@ msgstr "Dépôts locaux"
 
 #: ../ui/module-manager.glade.h:18
 msgid "Delete the fast-search index of the selected modules."
-msgstr "Supprime l'index de recherche rapide des modules sélectionnés."
+msgstr "Supprime l'index de recherche optimisée des modules sélectionnés."
 
 #: ../ui/module-manager.glade.h:19
 msgid "Home dir"
@@ -2557,9 +2554,7 @@ msgstr "Installer ou mettre à jour les modules sélectionnés"
 msgid ""
 "Load and synchronize the standard set of known repositories, as maintained "
 "at crosswire.org, with your current remote sources."
-msgstr ""
-"Charge et synchronise l'ensemble standard des dépots référencés, tel que \"\n"
-"\"maintenu à crosswire.org, avec vos dépots actuels."
+msgstr "Charge et synchronise l'ensemble type de dépots référencés, maintenu à crosswire.org, avec vos dépots actuels."
 
 #: ../ui/module-manager.glade.h:22
 msgid "Local"
@@ -2575,17 +2570,13 @@ msgstr "Gérer les modules"
 
 #: ../ui/module-manager.glade.h:25
 msgid "Open a brief introductory explanation of how the Module Manager works."
-msgstr ""
-"Ouvre une brève explication en introduction sur la façon dont le "
-"gestionnaire de modules fonctionne."
+msgstr "Ouvre une brève explication introduisant la façon dont le gestionnaire de modules fonctionne."
 
 #: ../ui/module-manager.glade.h:26
 msgid ""
 "Refresh Xiphos' knowledge of what modules are available at the selected "
 "remote repository"
-msgstr ""
-"Actualise l'information dans « Xiphos » à propos des modules disponibles dans "
-"les dépôts."
+msgstr "Actualise l'information dans « Xiphos » au sujet des modules disponibles dans les dépôts."
 
 #: ../ui/module-manager.glade.h:27
 msgid "Remote"
@@ -2601,7 +2592,7 @@ msgstr "Supprime un répertoire local en tant que dépot."
 
 #: ../ui/module-manager.glade.h:30
 msgid "Remove the selected modules from your system"
-msgstr "Supprime les module sélectionnés de votre système"
+msgstr "Supprime les modules sélectionnés de votre système"
 
 #: ../ui/module-manager.glade.h:31
 msgid "Sword sys dir"
@@ -2800,7 +2791,7 @@ msgstr "Accueil"
 
 #: ../ui/prefs.glade.h:40
 msgid "Cross-references in verse list"
-msgstr "Références croisées dans la liste de versets"
+msgstr "Références croisées en liste de versets"
 
 #: ../ui/prefs.glade.h:41
 msgid "Current Verse"
@@ -3209,7 +3200,7 @@ msgid ""
 "Indexes must have been built beforehand:\n"
 "See Module Manager's maintenance functions"
 msgstr ""
-"Recherche rapide basée sur les index\n"
+"Recherche optimisée basée sur les index\n"
 "Les index doivent être préalablement construits.\n"
 "Voir l'onglet Gérer du gestionnaire de modules."
 
@@ -3436,11 +3427,11 @@ msgstr ""
 
 #: ../ui/search-dialog.glade.h:112
 msgid "_Attribute Search"
-msgstr "Recherche sur les _attributs"
+msgstr "Recherche sur _attributs"
 
 #: ../ui/search-dialog.glade.h:113
 msgid "_Lucene Search Syntax"
-msgstr "Syntaxe de recherche Lucene"
+msgstr "Syntaxe recherche Lucene"
 
 #: ../ui/search-dialog.glade.h:114
 msgid "e.g. Matt-John;Rev4"
