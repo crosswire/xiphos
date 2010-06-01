@@ -203,6 +203,9 @@ MOD_MGR *backend_module_mgr_get_next_module(void)
 			char *category = (char *)module->getConfigEntry("Category");
 			mod_info->is_maps   = (category && !strcmp(category, "Maps"));
 			mod_info->is_images = (category && !strcmp(category, "Images"));
+			mod_info->is_cult =
+			    (category &&
+			     !strcmp(category, "Cults / Unorthodox / Questionable Material"));
 
 			mod_info->old_version =
 			    backend_mod_mgr_get_config_entry(name, "Version");
