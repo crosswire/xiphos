@@ -961,6 +961,7 @@ void main_load_module_tree(GtkWidget * tree)
 	GtkTreeIter book;
 	GtkTreeIter map;
 	GtkTreeIter image;
+	GtkTreeIter cult;
 	GtkTreeIter prayerlist;
 	GtkTreeIter child_iter;
 	GList *tmp = NULL;
@@ -1053,6 +1054,15 @@ void main_load_module_tree(GtkWidget * tree)
 			   COL_MODULE, NULL,
 			   COL_OFFSET, _("Images"), -1);
 
+	/*  Cult/Unorthodox/Questionable folders */
+	gtk_tree_store_append(store, &cult, NULL);
+	gtk_tree_store_set(store, &cult,
+			   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
+			   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
+			   COL_CAPTION, _("Cult/Unorthodox"),
+			   COL_MODULE, NULL,
+			   COL_OFFSET, _("Cult/Unorthodox"), -1);
+
 	/*  Prayer lists folder */
 	if (settings.prayerlist) {
 		gtk_tree_store_append(store, &prayerlist, NULL);
@@ -1068,7 +1078,7 @@ void main_load_module_tree(GtkWidget * tree)
 
 	language_make_list(tmp, store,
 			   text, commentary, map, image,
-			   devotional, dictionary, book,
+			   devotional, dictionary, book, cult,
 			   NULL, NULL,
 			   language_add_folders, FALSE);
 
@@ -1085,7 +1095,12 @@ void main_load_module_tree(GtkWidget * tree)
 	while (tmp2 != NULL) {
 		info = (MOD_MGR *) tmp2->data;
 
-		if (info->type[0] == 'B') {
+		if (info->is_cult) {
+			add_module_to_language_folder(GTK_TREE_MODEL(store),
+						      cult, info->language,
+						      info->name);
+		}
+		else if (info->type[0] == 'B') {
 			add_module_to_language_folder(GTK_TREE_MODEL(store),
 						      text, info->language,
 						      info->name);

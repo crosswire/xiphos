@@ -1229,6 +1229,7 @@ load_module_tree(GtkTreeView * treeview,
 	GtkTreeIter book;
 	GtkTreeIter map;
 	GtkTreeIter image;
+	GtkTreeIter cult;
 	GtkTreeIter separator;
 	GtkTreeIter update;
 	GtkTreeIter uninstalled;
@@ -1337,6 +1338,10 @@ load_module_tree(GtkTreeView * treeview,
 	gtk_tree_store_append(store, &image, NULL);
 	gtk_tree_store_set(store, &image, 0, _("Images"), -1);
 
+	/*  add Cult folder */
+	gtk_tree_store_append(store, &cult, NULL);
+	gtk_tree_store_set(store, &cult, 0, _("Cult/Unorthodox"), -1);
+
 	if (install && !first_time_user) {
 		gtk_tree_store_append(store, &separator, NULL);
 		gtk_tree_store_set(store, &separator, 0, "------------------------", -1);
@@ -1362,7 +1367,7 @@ load_module_tree(GtkTreeView * treeview,
 
 	language_make_list(tmp, store,
 			   text, commentary, map, image,
-			   devotional, dictionary, book,
+			   devotional, dictionary, book, cult,
 			   ((install && !first_time_user) ? &update : NULL),
 			   ((install && !first_time_user) ? &uninstalled : NULL),
 			   language_add_folders, FALSE);
@@ -1392,7 +1397,13 @@ load_module_tree(GtkTreeView * treeview,
 
 		// see comment on similar code in src/main/sidebar.cc.
 
-		if (info->type[0] == 'B') {
+		if (info->is_cult) {
+			add_module_to_language_folder(treeview,
+						      GTK_TREE_MODEL
+						      (store), cult,
+						      info, install);
+		}
+		else if (info->type[0] == 'B') {
 			add_module_to_language_folder(treeview,
 						      GTK_TREE_MODEL
 						      (store), text,
