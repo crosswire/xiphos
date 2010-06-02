@@ -629,12 +629,12 @@ void gui_load_module_tree(GtkWidget * tree, gboolean limited)
 
 		/* see comment on similar code in src/main/sidebar.cc. */
 
-		if (info->type[0] == 'B') {
+		if ((info->type[0] == 'B') && !info->is_cult) {
 			add_module_to_language_folder(GTK_TREE_MODEL(store),
 						      text, info->language,
 						      info->name);
 		}
-		else if (info->type[0] == 'C') {
+		else if ((info->type[0] == 'C') && !info->is_cult) {
 			add_module_to_language_folder(GTK_TREE_MODEL(store),
 						      commentary, info->language,
 						      info->name);
