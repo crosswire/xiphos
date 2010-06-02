@@ -1230,6 +1230,7 @@ load_module_tree(GtkTreeView * treeview,
 	GtkTreeIter map;
 	GtkTreeIter image;
 	GtkTreeIter cult;
+	GtkTreeIter glossary;
 	GtkTreeIter separator;
 	GtkTreeIter update;
 	GtkTreeIter uninstalled;
@@ -1322,6 +1323,10 @@ load_module_tree(GtkTreeView * treeview,
 	gtk_tree_store_append(store, &dictionary, NULL);
 	gtk_tree_store_set(store, &dictionary, 0, _("Dictionaries"), -1);
 
+	/*  add Glossaries folder */
+	gtk_tree_store_append(store, &glossary, NULL);
+	gtk_tree_store_set(store, &glossary, 0, _("Glossaries"), -1);
+
 	/*  add Devotionals folder */
 	gtk_tree_store_append(store, &devotional, NULL);
 	gtk_tree_store_set(store, &devotional, 0, _("Daily Devotionals"), -1);
@@ -1367,7 +1372,7 @@ load_module_tree(GtkTreeView * treeview,
 
 	language_make_list(tmp, store,
 			   text, commentary, map, image,
-			   devotional, dictionary, book, cult,
+			   devotional, dictionary, glossary, book, cult,
 			   ((install && !first_time_user) ? &update : NULL),
 			   ((install && !first_time_user) ? &uninstalled : NULL),
 			   language_add_folders, FALSE);
@@ -1431,6 +1436,12 @@ load_module_tree(GtkTreeView * treeview,
 			add_module_to_language_folder(treeview,
 						      GTK_TREE_MODEL
 						      (store), devotional,
+						      info, install);
+		}
+		else if (info->is_glossary) {
+			add_module_to_language_folder(treeview,
+						      GTK_TREE_MODEL
+						      (store), glossary,
 						      info, install);
 		}
 		else if (info->type[0] == 'L') {

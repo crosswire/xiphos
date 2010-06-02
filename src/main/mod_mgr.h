@@ -44,6 +44,7 @@ struct  _mm {
 	int is_devotional;
 	int is_maps;
 	int is_images;
+	int is_glossary;
 	int is_cult;
 	int locked;
 	char *installsize;
