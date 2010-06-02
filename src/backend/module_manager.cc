@@ -201,8 +201,9 @@ MOD_MGR *backend_module_mgr_get_next_module(void)
 			mod_info->is_devotional = (feature && !strcmp(feature, "DailyDevotion"));
 
 			char *category = (char *)module->getConfigEntry("Category");
-			mod_info->is_maps   = (category && !strcmp(category, "Maps"));
-			mod_info->is_images = (category && !strcmp(category, "Images"));
+			mod_info->is_maps     = (category && !strcmp(category, "Maps"));
+			mod_info->is_images   = (category && !strcmp(category, "Images"));
+			mod_info->is_glossary = (category && !strcmp(category, "Glossaries"));
 			mod_info->is_cult =
 			    (category &&
 			     !strcmp(category, "Cults / Unorthodox / Questionable Material"));
