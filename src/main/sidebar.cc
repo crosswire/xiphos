@@ -957,6 +957,7 @@ void main_load_module_tree(GtkWidget * tree)
 	GtkTreeIter text;
 	GtkTreeIter commentary;
 	GtkTreeIter dictionary;
+	GtkTreeIter glossary;
 	GtkTreeIter devotional;
 	GtkTreeIter book;
 	GtkTreeIter map;
@@ -1018,6 +1019,15 @@ void main_load_module_tree(GtkWidget * tree)
 			   COL_MODULE, NULL,
 			   COL_OFFSET, _("Dictionaries"), -1);
 
+	/*  Glossaries folders */
+	gtk_tree_store_append(store, &glossary, NULL);
+	gtk_tree_store_set(store, &glossary,
+			   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
+			   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
+			   COL_CAPTION, _("Glossaries"),
+			   COL_MODULE, NULL,
+			   COL_OFFSET, _("Glossaries"), -1);
+
 	/*  Devotionals folders */
 	gtk_tree_store_append(store, &devotional, NULL);
 	gtk_tree_store_set(store, &devotional,
@@ -1078,7 +1088,7 @@ void main_load_module_tree(GtkWidget * tree)
 
 	language_make_list(tmp, store,
 			   text, commentary, map, image,
-			   devotional, dictionary, book, cult,
+			   devotional, dictionary, glossary, book, cult,
 			   NULL, NULL,
 			   language_add_folders, FALSE);
 
@@ -1123,6 +1133,11 @@ void main_load_module_tree(GtkWidget * tree)
 		else if (info->is_devotional) {
 			add_module_to_language_folder(GTK_TREE_MODEL(store),
 						      devotional, info->language,
+						      info->name);
+		}
+		else if (info->is_glossary) {
+			add_module_to_language_folder(GTK_TREE_MODEL(store),
+						      glossary, info->language,
 						      info->name);
 		}
 		else if (info->type[0] == 'L') {

@@ -562,6 +562,7 @@ void gui_load_module_tree(GtkWidget * tree, gboolean limited)
 	GtkTreeIter text;
 	GtkTreeIter commentary;
 	GtkTreeIter dictionary;
+	GtkTreeIter glossary;
 	GtkTreeIter devotional;
 	GtkTreeIter book;
 	GtkTreeIter map;
@@ -587,6 +588,10 @@ void gui_load_module_tree(GtkWidget * tree, gboolean limited)
 		/*  Dictionaries folders */
 		gtk_tree_store_append(store, &dictionary, NULL);
 		gtk_tree_store_set(store, &dictionary, 0, _("Dictionaries"), -1);
+
+		/*  Glossaries folders */
+		gtk_tree_store_append(store, &glossary, NULL);
+		gtk_tree_store_set(store, &glossary, 0, _("Glossaries"), -1);
 
 		/*  Devotionals folders */
 		gtk_tree_store_append(store, &devotional, NULL);
@@ -619,7 +624,7 @@ void gui_load_module_tree(GtkWidget * tree, gboolean limited)
 
 	language_make_list(tmp, store,
 			   text, commentary, map, image,
-			   devotional, dictionary, book, cult,
+			   devotional, dictionary, glossary, book, cult,
 			   NULL, NULL,
 			   language_add_folders, limited);
 
@@ -658,6 +663,11 @@ void gui_load_module_tree(GtkWidget * tree, gboolean limited)
 			else if (info->is_devotional) {
 				add_module_to_language_folder(GTK_TREE_MODEL(store),
 							      devotional, info->language,
+							      info->name);
+			}
+			else if (info->is_glossary) {
+				add_module_to_language_folder(GTK_TREE_MODEL(store),
+							      glossary, info->language,
 							      info->name);
 			}
 			else if (info->type[0] == 'L') {
@@ -1070,6 +1080,7 @@ language_make_list(GList *modlist,
 		   GtkTreeIter image,
 		   GtkTreeIter devotional,
 		   GtkTreeIter dictionary,
+		   GtkTreeIter glossary,
 		   GtkTreeIter book,
 		   GtkTreeIter cult,
 		   GtkTreeIter *update,
@@ -1112,6 +1123,8 @@ language_make_list(GList *modlist,
 			language_add(info->language, LANGSET_IMAGE);
 		else if (info->is_devotional)
 			language_add(info->language, LANGSET_DEVOTIONAL);
+		else if (info->is_glossary)
+			language_add(info->language, LANGSET_GLOSSARY);
 		else if (info->type[0] == 'L')
 			language_add(info->language, LANGSET_DICTIONARY);
 		else if ((info->type[0] == 'G') &&
@@ -1143,6 +1156,8 @@ language_make_list(GList *modlist,
 		       language_get_type(LANGSET_CULT));
 		(*add)(GTK_TREE_MODEL(store), devotional,
 		       language_get_type(LANGSET_DEVOTIONAL));
+		(*add)(GTK_TREE_MODEL(store), glossary,
+		       language_get_type(LANGSET_GLOSSARY));
 		(*add)(GTK_TREE_MODEL(store), dictionary,
 		       language_get_type(LANGSET_DICTIONARY));
 		(*add)(GTK_TREE_MODEL(store), book,
