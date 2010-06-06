@@ -28,7 +28,7 @@
 #ifdef WIN32
 #include "geckowin/gecko-html.h"
 #else
-#include "gecko/gecko-html.h"
+#include "webkit/wk-html.h"
 #endif
 #else
 #include <gtkhtml/gtkhtml.h>
@@ -500,7 +500,7 @@ static gboolean on_button_release_event(GtkWidget *widget,
 
 #ifdef USE_GTKMOZEMBED
 static void
-_popupmenu_requested_cb (GeckoHtml *html,
+_popupmenu_requested_cb (WkHtml *html,
 			 gchar *uri,
 			 gpointer user_data)
 {
@@ -569,8 +569,8 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 	eventbox = gtk_event_box_new();
 	gtk_widget_show(eventbox);
 	gtk_container_add(GTK_CONTAINER(frame), eventbox);
+	vt->html = GTK_WIDGET(wk_html_new());
 
-	vt->html = GTK_WIDGET(gecko_html_new(vt, TRUE, DIALOG_TEXT_TYPE));
 	gtk_widget_show(vt->html);
 	gtk_container_add(GTK_CONTAINER(eventbox), vt->html);
 	g_signal_connect((gpointer)vt->html,
@@ -588,7 +588,7 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 	gtk_widget_show(eventbox);
 	gtk_container_add(GTK_CONTAINER(frame), eventbox);
 
-	vt->previewer = GTK_WIDGET(gecko_html_new(vt, TRUE, VIEWER_TYPE));
+	vt->previewer = GTK_WIDGET(wk_html_new());
 	gtk_widget_show(vt->previewer);
 	gtk_container_add(GTK_CONTAINER(eventbox), vt->previewer);
 #else

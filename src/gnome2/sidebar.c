@@ -50,7 +50,7 @@
 #ifdef WIN32
 #include "geckowin/gecko-html.h"
 #else
-#include "gecko/gecko-html.h"
+#include "webkit/wk-html.h"
 #endif
 #endif
 
@@ -1339,8 +1339,8 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	eventbox = gtk_event_box_new();
 	gtk_widget_show(eventbox);
 	gtk_container_add(GTK_CONTAINER(frame), eventbox);
-
-	sidebar.html_viewer_widget = GTK_WIDGET(gecko_html_new(NULL, FALSE, SB_VIEWER_TYPE));//embed_new(VIEWER_TYPE);
+	
+	sidebar.html_viewer_widget = GTK_WIDGET(wk_html_new());//embed_new(VIEWER_TYPE);
 	gtk_container_add(GTK_CONTAINER(eventbox), sidebar.html_viewer_widget);
 #else
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);

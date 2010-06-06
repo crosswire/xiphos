@@ -68,7 +68,7 @@
 #ifdef WIN32
 #include "geckowin/gecko-html.h"
 #else
-#include "gecko/gecko-html.h"
+#include "webkit/wk-html.h"
 #endif
 #endif
 
@@ -269,8 +269,8 @@ void shutdown_frontend(void)
 	xml_free_settings_doc();
 
 	main_shutdown_list();
-#ifdef USE_GTKMOZEMBED
-	gecko_html_shutdown();
+#ifdef USE_GTKMOZEMBED	
+	wk_html_shutdown();
 #endif
 //	if(settings.browsing)
 	gui_notebook_main_shutdown (settings.browsing);

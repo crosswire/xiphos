@@ -45,7 +45,7 @@
 #ifdef WIN32
 #include "geckowin/gecko-html.h"
 #else
-#include "gecko/gecko-html.h"
+#include "webkit/wk-html.h"
 #endif
 #endif
 //#include "backend/sword.h"
@@ -165,9 +165,9 @@ int main(int argc, char *argv[])
 
 #ifdef USE_GTKMOZEMBED
 
-	gui_splash_step(_("Initiating Gecko"), 0.0, 0);
-
-	gecko_html_initialize();
+	gui_splash_step(_("Initiating Webkit"), 0.0, 0);
+	
+	wk_html_initialize();
 
 	base_step = 1;
 #endif

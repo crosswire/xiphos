@@ -29,7 +29,7 @@
 #ifdef WIN32
 #include "geckowin/gecko-html.h"
 #else
-#include "gecko/gecko-html.h"
+#include "webkit/wk-html.h"
 #endif
 #else
 #include <gtkhtml/gtkhtml.h>
@@ -94,14 +94,14 @@ void gui_popup_pm_text(void)
 
 
 #ifdef USE_GTKMOZEMBED
-static void
-_popupmenu_requested_cb (GeckoHtml *html,
-			     gchar *uri,
+static gboolean
+_popupmenu_requested_cb (WkHtml *html,
+			 GdkEventButton *event,
 			     gpointer user_data)
 {
     gui_menu_popup (settings.MainWindowModule,
 			NULL);
-	//gui_popup_pm_text();
+    return TRUE;
 }
 #endif
 
@@ -321,33 +321,10 @@ void adj_changed(GtkAdjustment * adjustment1, gpointer user_data)
 GtkWidget *gui_create_bible_pane(void)
 {
 	GtkWidget *vbox;
-#ifdef USE_GTKMOZEMBED
-	GtkWidget *eventbox1;
-#else
 	GtkWidget *scrolledwindow;
-#endif
 
 	vbox = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox);
-
-#ifdef USE_GTKMOZEMBED
-
-	eventbox1 = gtk_event_box_new();
-	gtk_widget_show(eventbox1);
-	gtk_box_pack_start(GTK_BOX(vbox),
-			   eventbox1, TRUE,
-			   TRUE, 0);
-	widgets.html_text = GTK_WIDGET(gecko_html_new(NULL, FALSE, TEXT_TYPE));
-	gtk_widget_show(widgets.html_text);
-	gtk_container_add(GTK_CONTAINER(eventbox1),
-			  widgets.html_text);
-
-	g_signal_connect((gpointer)widgets.html_text,
-		      "popupmenu_requested",
-		      G_CALLBACK (_popupmenu_requested_cb),
-		      NULL);
-#else
-
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
 	gtk_box_pack_start(GTK_BOX(vbox),
@@ -358,11 +335,25 @@ GtkWidget *gui_create_bible_pane(void)
 				       (scrolledwindow),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
-	adjustment = gtk_scrolled_window_get_vadjustment
-                                            (GTK_SCROLLED_WINDOW(scrolledwindow));
+
+
+#ifdef USE_GTKMOZEMBED
+
+	widgets.html_text = GTK_WIDGET(wk_html_new());
+	gtk_widget_show(widgets.html_text);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow),
+			  widgets.html_text);
+			
+	g_signal_connect((gpointer)widgets.html_text,
+		      "popupmenu_requested",
+		      G_CALLBACK (_popupmenu_requested_cb),
+		      NULL);
+#else	
+		adjustment = gtk_scrolled_window_get_vadjustment
+		(GTK_SCROLLED_WINDOW(scrolledwindow));
 	scroll_adj_signal = g_signal_connect(GTK_OBJECT(adjustment), "value-changed",
-				G_CALLBACK(adj_changed),
-				NULL);
+					     G_CALLBACK(adj_changed),
+					     NULL);
 	widgets.html_text = gtk_html_new();
 	gtk_widget_show(widgets.html_text);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),

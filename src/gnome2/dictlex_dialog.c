@@ -28,7 +28,7 @@
 #ifdef WIN32
 #include "geckowin/gecko-html.h"
 #else
-#include "gecko/gecko-html.h"
+#include "webkit/wk-html.h"
 #endif
 #else
 #include <gtkhtml/gtkhtml.h>
@@ -285,7 +285,7 @@ static void entry_changed(GtkEditable *editable,
 
 #ifdef USE_GTKMOZEMBED
 static void
-_popupmenu_requested_cb (GeckoHtml *html,
+_popupmenu_requested_cb (WkHtml *html,
 			     gchar *uri,
 			     DIALOG_DATA * d)
 {
@@ -426,7 +426,8 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 	gtk_widget_show(eventbox);
 	gtk_container_add(GTK_CONTAINER(frameDictHTML), eventbox);
 
-	dlg->html = GTK_WIDGET(gecko_html_new((DIALOG_DATA*) dlg,TRUE,DIALOG_DICTIONARY_TYPE));
+	dlg->html = GTK_WIDGET(wk_html_new());
+
 	gtk_container_add(GTK_CONTAINER(eventbox), dlg->html);
 	gtk_widget_show(dlg->html);
 	g_signal_connect((gpointer)dlg->html,

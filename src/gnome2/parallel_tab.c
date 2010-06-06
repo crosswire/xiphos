@@ -29,7 +29,7 @@
 #ifdef WIN32
 #include "geckowin/gecko-html.h"
 #else
-#include "gecko/gecko-html.h"
+#include "webkit/wk-html.h"
 #endif
 #else
 #include <gtkhtml/gtkhtml.h>
@@ -73,7 +73,7 @@ static void sync_with_main(const gchar * key);
 
 #ifdef USE_GTKMOZEMBED
 static void
-_popupmenu_requested_cb(GeckoHtml *html,
+_popupmenu_requested_cb(WkHtml *html,
 			gchar *uri,
 			gpointer user_data)
 {
@@ -400,8 +400,9 @@ GtkWidget *_create_parallel_tab(void)
 	gtk_widget_show (eventbox);
 	gtk_container_add(GTK_CONTAINER(frame), eventbox);
 
-	widgets.html_parallel_dialog = GTK_WIDGET(gecko_html_new(NULL, FALSE, PARALLEL_TYPE));
+	widgets.html_parallel_dialog = GTK_WIDGET(wk_html_new()); //embed_new(PARALLEL_TYPE); //gtk_moz_embed_new();
 	gtk_widget_show(widgets.html_parallel_dialog);
+
 	gtk_container_add(GTK_CONTAINER(eventbox),
 			  widgets.html_parallel_dialog);
 	g_signal_connect((gpointer)widgets.html_parallel_dialog,

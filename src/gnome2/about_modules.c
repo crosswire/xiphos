@@ -29,7 +29,7 @@
 #ifdef WIN32
 #include "geckowin/gecko-html.h"
 #else
-#include "gecko/gecko-html.h"
+#include "webkit/wk-html.h"
 #endif
 #else
 #include <gtkhtml/gtkhtml.h>
@@ -81,7 +81,7 @@ on_copy_activate(GtkMenuItem * menuitem,
 {
 	GS_message(("on_copy_activate"));
 #ifdef USE_GTKMOZEMBED
-	gecko_html_copy_selection(GECKO_HTML(text_html));
+	wk_html_copy_selection(WK_HTML(text_html));
 #else
 	gui_copy_html(text_html);
 #endif
@@ -148,7 +148,7 @@ on_button_release_event(GtkWidget * widget,
 
 #ifdef USE_GTKMOZEMBED
 static void
-_popupmenu_requested_cb(GeckoHtml *html,
+_popupmenu_requested_cb(WkHtml *html,
 			gchar *uri,
 			gpointer user_data)
 {
@@ -219,7 +219,7 @@ gui_create_about_modules(void)
 	gtk_widget_show(frame73);
 	gtk_box_pack_start(GTK_BOX(vbox25), frame73, TRUE, TRUE, 0);
 #ifdef USE_GTKMOZEMBED
-	text_html = GTK_WIDGET(gecko_html_new(NULL, FALSE, 12));
+	text_html = GTK_WIDGET(wk_html_new());
 	gtk_widget_show(text_html);
 	gtk_container_add(GTK_CONTAINER(frame73), text_html);
 	//gtk_widget_set_sensitive(text_html,FALSE);

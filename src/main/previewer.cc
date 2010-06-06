@@ -33,7 +33,7 @@
 #ifdef WIN32
 #include "geckowin/gecko-html.h"
 #else
-#include "gecko/gecko-html.h"
+#include "webkit/wk-html.h"
 #endif
 #endif
 
@@ -105,8 +105,8 @@ void main_init_previewer(void)
 #ifdef USE_GTKMOZEMBED
 	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(previewer_html_widget)))
 		return;
-	GeckoHtml *html = GECKO_HTML(previewer_html_widget);
-	gecko_html_open_stream(html, "text/html");
+	WkHtml *html = WK_HTML(previewer_html_widget);
+	wk_html_open_stream(html, "text/html");
 #else
 	/* setup gtkhtml widget */
 	GtkHTML *html = GTK_HTML(previewer_html_widget);
@@ -132,8 +132,8 @@ void main_init_previewer(void)
 
 #ifdef USE_GTKMOZEMBED
 	if (str->len)
-		gecko_html_write(html, str->str, str->len);
-	gecko_html_close(html);
+		wk_html_write(html, str->str, str->len);
+	wk_html_close(html);
 #else
 	if (str->len)
 		gtk_html_load_from_string(html, str->str, str->len);
@@ -170,8 +170,8 @@ void main_clear_viewer(void)
 #ifdef USE_GTKMOZEMBED
 	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(previewer_html_widget)))
 		return;
-	GeckoHtml *html = GECKO_HTML(previewer_html_widget);
-	gecko_html_open_stream(html, "text/html");
+	WkHtml *html = WK_HTML(previewer_html_widget);
+	wk_html_open_stream(html, "text/html");
 #else
 	/* setup gtkhtml widget */
 	GtkHTML *html = GTK_HTML(previewer_html_widget);
@@ -194,8 +194,8 @@ void main_clear_viewer(void)
 
 #ifdef USE_GTKMOZEMBED
 	if (str->len)
-		gecko_html_write(html, str->str, str->len);
-	gecko_html_close(html);
+		wk_html_write(html, str->str, str->len);
+	wk_html_close(html);
 #else
 	if (str->len)
 		gtk_html_load_from_string(html, str->str, str->len);
@@ -234,8 +234,8 @@ void main_information_viewer(const gchar * mod_name, const gchar * text, const g
 #ifdef USE_GTKMOZEMBED
 	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(previewer_html_widget)))
 		return;
-	GeckoHtml *html = GECKO_HTML(previewer_html_widget);
-	gecko_html_open_stream(html, "text/html");
+	WkHtml *html = WK_HTML(previewer_html_widget);
+	wk_html_open_stream(html, "text/html");
 #else
 	GtkHTML *html = GTK_HTML(previewer_html_widget);
 	PangoContext* pc = gtk_widget_create_pango_context(GTK_WIDGET(html));
@@ -321,12 +321,12 @@ void main_information_viewer(const gchar * mod_name, const gchar * text, const g
 
 		while (len > 0) {
 			write_size = min(10000, len);
-			gecko_html_write(html, str->str+offset, write_size);
+			wk_html_write(html, str->str+offset, write_size);
 			offset += write_size;
 			len -= write_size;
 		}
 	}
-	gecko_html_close(html);
+	wk_html_close(html);
 #else
 	if (str->len)
 		gtk_html_load_from_string(html, str->str, str->len);
@@ -511,8 +511,8 @@ void main_entry_display(gpointer data, gchar * mod_name,
 #ifdef USE_GTKMOZEMBED
 	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(html_widget)))
 		return;
-	GeckoHtml *html = GECKO_HTML(html_widget);
-	gecko_html_open_stream(html, "text/html");
+	WkHtml *html = WK_HTML(html_widget);
+	wk_html_open_stream(html, "text/html");
 #else
 	gboolean was_editable = FALSE;
 	GtkHTML *html = GTK_HTML(html_widget);
@@ -580,8 +580,8 @@ void main_entry_display(gpointer data, gchar * mod_name,
 
 #ifdef USE_GTKMOZEMBED
 	if (str->len)
-		gecko_html_write(html, str->str, str->len);
-	gecko_html_close(html);
+		wk_html_write(html, str->str, str->len);
+	wk_html_close(html);
 #else
 	if (str->len)
 		gtk_html_load_from_string(html, str->str, str->len);
