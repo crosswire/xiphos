@@ -56,7 +56,7 @@
 #ifdef WIN32
 #include "geckowin/gecko-html.h"
 #else
-#include "gecko/gecko-html.h"
+#include "webkit/wk-html.h"
 #endif /* WIN32 */
 #else
 #include <gtkhtml/gtkhtml.h>
@@ -1313,8 +1313,8 @@ HtmlOutput(char *text,
 	int len = strlen(text), offset = 0, write_size;
 
 #ifdef USE_GTKMOZEMBED
-	GeckoHtml *html = GECKO_HTML(gtkText);
-	gecko_html_open_stream(html,"text/html");
+	WkHtml *html = WK_HTML(gtkText);
+	wk_html_open_stream(html,"text/html");
 #else
 	GtkHTML *html = GTK_HTML(gtkText);
 	PangoContext* pc = gtk_widget_get_pango_context(gtkText);
@@ -1329,7 +1329,7 @@ HtmlOutput(char *text,
 	if (was_editable)
 		gtk_html_set_editable(html, FALSE);
 #endif
-
+	
 #ifdef USE_GTKMOZEMBED
 	// EVIL EVIL EVIL EVIL.
 	// crazy nonsense with xulrunner 1.9.2.3, failure to jump to anchor.
@@ -1342,8 +1342,8 @@ HtmlOutput(char *text,
 		buf = strstr(text, "</head>");	// yes, lowercase.
 		assert(buf != NULL);	// don't be so stupid as not to include <head></head>.
 		offset = buf - text;
-		gecko_html_write(html, text, offset);
-		len -= offset;
+//		wk_html_write(html, text, offset);
+//		len -= offset;
 
 		// now write the javascript snippet.
 		buf = g_strdup_printf(
@@ -1352,11 +1352,11 @@ HtmlOutput(char *text,
 		    " </script>", (settings.special_anchor
 				   ? settings.special_anchor
 				   : anchor));
-		gecko_html_write(html, buf, strlen(buf));
+		wk_html_write(html, buf, strlen(buf));
 		g_free(buf);
 	}
 #endif /* USE_GTKMOZEMBED */
-
+	
 	// html widgets are uptight about being handed
 	// huge quantities of text -- producer/consumer problem,
 	// and we mustn't overload the receiver.  10k chunks.
@@ -1364,7 +1364,7 @@ HtmlOutput(char *text,
 	while (len > 0) {
 		write_size = min(10000, len);
 #ifdef USE_GTKMOZEMBED
-		gecko_html_write(html, text+offset, write_size);
+		wk_html_write(html, text+offset, write_size);
 #else
 		gtk_html_write(html, stream, text+offset, write_size);
 #endif
@@ -1372,13 +1372,11 @@ HtmlOutput(char *text,
 		len -= write_size;
 	}
 
-	/* use anchor if asked, but if so, special anchor takes priority. */
 #ifdef USE_GTKMOZEMBED
-	gecko_html_close(html);
-	if (anchor || settings.special_anchor)
-		gecko_html_jump_to_anchor(html, (settings.special_anchor
-						 ? settings.special_anchor
-						 : anchor));
+	wk_html_close(html);
+	if (anchor)
+		wk_html_jump_to_anchor(html, anchor);
+
 #else
 	gtk_html_end(html, stream, GTK_HTML_STREAM_OK);
 	gtk_html_set_editable(html, was_editable);

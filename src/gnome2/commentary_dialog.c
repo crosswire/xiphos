@@ -28,7 +28,7 @@
 #ifdef WIN32
 #include "geckowin/gecko-html.h"
 #else
-#include "gecko/gecko-html.h"
+#include "webkit/wk-html.h"
 #endif
 #else
 #include <gtkhtml/gtkhtml.h>
@@ -286,7 +286,7 @@ static GtkWidget *create_nav_toolbar(DIALOG_DATA *d)
 
 #ifdef USE_GTKMOZEMBED
 static void
-_popupmenu_requested_cb (GeckoHtml *html,
+_popupmenu_requested_cb (WkHtml *html,
 			 gchar *uri,
 			 DIALOG_DATA *d)
 {
@@ -364,7 +364,8 @@ void gui_create_commentary_dialog(DIALOG_DATA *d,
 	gtk_widget_show(eventbox);
 	gtk_container_add(GTK_CONTAINER(frame19), eventbox);
 
-	d->html = GTK_WIDGET(gecko_html_new(((DIALOG_DATA*) d),TRUE,DIALOG_COMMENTARY_TYPE));
+	d->html = GTK_WIDGET(wk_html_new());
+
 	gtk_container_add(GTK_CONTAINER(eventbox), d->html);
 	gtk_widget_show(d->html);
 	g_signal_connect((gpointer)d->html,

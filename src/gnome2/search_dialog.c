@@ -30,7 +30,7 @@
 #ifdef WIN32
 #include "geckowin/gecko-html.h"
 #else
-#include "gecko/gecko-html.h"
+#include "webkit/wk-html.h"
 #endif
 #else
 #include <gtkhtml/gtkhtml.h>
@@ -149,10 +149,11 @@ void button_clean(GtkButton * button, gpointer user_data)
 #ifdef USE_GTKMOZEMBED
 	html_text = g_string_new(HTML_START);
 	g_string_append(html_text," ");
-	g_string_append(html_text,"</html>");
-	gecko_html_open_stream(GECKO_HTML(search1.preview_html), "text/html");
-	gecko_html_write(GECKO_HTML(search1.preview_html), html_text->str, html_text->len);
-	gecko_html_close(GECKO_HTML(search1.preview_html));
+
+	g_string_append(html_text,"</html>");	
+	wk_html_open_stream(WK_HTML(search1.preview_html),"text/html");
+	wk_html_write(WK_HTML(search1.preview_html),html_text->str,html_text->len);
+	wk_html_close(WK_HTML(search1.preview_html));
 	g_string_free(html_text,TRUE);
 #else
 	gtk_html_load_from_string(GTK_HTML(search1.preview_html),
@@ -1431,7 +1432,7 @@ static
 void _add_html_widget(GtkWidget * vbox)
 {
 #ifdef USE_GTKMOZEMBED
-	search1.preview_html = GTK_WIDGET(gecko_html_new(NULL, FALSE, DIALOG_SEARCH_PREVIEW_TYPE));
+	search1.preview_html = GTK_WIDGET(wk_html_new());
 	gtk_box_pack_start(GTK_BOX(vbox), search1.preview_html, TRUE, TRUE, 0);
 #else
 	GtkWidget *scrolledwindow = gtk_scrolled_window_new(NULL, NULL);

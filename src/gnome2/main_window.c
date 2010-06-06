@@ -29,7 +29,7 @@
 #ifdef WIN32
 #include "geckowin/gecko-html.h"
 #else
-#include "gecko/gecko-html.h"
+#include "webkit/wk-html.h"
 #endif
 #else
 #include <gtkhtml/gtkhtml.h>
@@ -959,7 +959,7 @@ void create_mainwindow(void)
 	gtk_container_add(GTK_CONTAINER(frame), eventbox);
 
 	widgets.html_previewer_text
-			= GTK_WIDGET ( gecko_html_new( NULL, FALSE, VIEWER_TYPE));
+			= GTK_WIDGET ( wk_html_new());
 	gtk_container_add(GTK_CONTAINER(eventbox), widgets.html_previewer_text);
 #else
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);

@@ -40,7 +40,6 @@
 
 #include "gui/debug_glib_null.h"
 
-
 SIDESEARCH ss;
 
 GtkWidget *remember_search;	/* needed to change button in search stop */
@@ -74,6 +73,7 @@ static void on_search_button_clicked(GtkButton * button, gpointer user_data)
 		main_do_sidebar_search(user_data);
 		gtk_button_set_label((GtkButton *)remember_search, "gtk-find");
 		gtk_button_set_use_stock((GtkButton *)remember_search, TRUE);
+
 	}
 }
 

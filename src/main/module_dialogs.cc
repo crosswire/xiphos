@@ -32,7 +32,7 @@
 #ifdef WIN32
 #include "geckowin/gecko-html.h"
 #else
-#include "gecko/gecko-html.h"
+#include "webkit/wk-html.h"
 #endif
 #else
 #ifdef __cplusplus
@@ -207,8 +207,8 @@ void main_dialogs_clear_viewer(DIALOG_DATA *d)
 	const char *buf;
 
 #ifdef USE_GTKMOZEMBED
-	GeckoHtml *new_browser = GECKO_HTML(d->previewer);
-#else
+	WkHtml *new_browser = WK_HTML(d->previewer);
+#else	
 	gboolean was_editable = FALSE;
 
 	/* setup gtkhtml widget */
@@ -234,7 +234,7 @@ void main_dialogs_clear_viewer(DIALOG_DATA *d)
 
 #ifdef USE_GTKMOZEMBED
 	if (str->len)
-		gecko_html_render_data(new_browser, str->str, str->len);
+		wk_html_render_data(new_browser, str->str, str->len);
 
 #else
 	if (str->len)
@@ -273,8 +273,8 @@ void main_dialogs_information_viewer(DIALOG_DATA * d, gchar * mod_name,
 	GString *str;
 	MOD_FONT *mf = get_font(mod_name);
 #ifdef USE_GTKMOZEMBED
-	GeckoHtml *new_browser = GECKO_HTML(sidebar.html_viewer_widget);
-#else
+	WkHtml *new_browser = WK_HTML(sidebar.html_viewer_widget);
+#else	
 	GtkHTML *html = GTK_HTML(sidebar.html_viewer_widget);
 #endif
 
@@ -348,10 +348,7 @@ void main_dialogs_information_viewer(DIALOG_DATA * d, gchar * mod_name,
 
 #ifdef USE_GTKMOZEMBED
 	if (str->len)
-		gecko_html_render_data(new_browser, str->str, str->len);
-#else
-	if (str->len)
-		gtk_html_load_from_string(html,str->str,str->len);
+		wk_html_render_data(new_browser, str->str, str->len);
 	//gtk_html_set_editable(html, was_editable);
 #endif
 /*	if (str->len) {
@@ -398,11 +395,11 @@ void main_dialog_information_viewer(const gchar * mod_name, const gchar * text,
 		return;
 
 #ifdef USE_GTKMOZEMBED
-	GeckoHtml *html= GECKO_HTML(d->previewer);
-#else
-	GtkHTML *html= GTK_HTML(d->previewer);
-#endif
-
+	WkHtml *html= WK_HTML(d->previewer);
+#else	
+	GtkHTML *html= GTK_HTML(d->previewer);	
+#endif	
+		
 	g_string_printf(tmp_str,
 		HTML_START
 		"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
@@ -466,10 +463,11 @@ void main_dialog_information_viewer(const gchar * mod_name, const gchar * text,
 	}
 
 #ifdef USE_GTKMOZEMBED
-	if (str->len) {
-		gecko_html_open_stream(html,"text/html");
-		gecko_html_write(html, str->str, str->len);
-		gecko_html_close(html);
+
+	if (str->len) {		
+		wk_html_open_stream(html,"text/html");
+		wk_html_write(html, str->str, str->len);
+		wk_html_close(html);
 	}
 #else
 	if (str->len)

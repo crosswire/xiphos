@@ -28,7 +28,7 @@
 #ifdef WIN32
 #include "geckowin/gecko-html.h"
 #else
-#include "gecko/gecko-html.h"
+#include "webkit/wk-html.h"
 #endif
 #else
 #include <gtkhtml/gtkhtml.h>
@@ -100,9 +100,9 @@ void gui_display_mod_and_key(const gchar * mod_name, const gchar * key)
 void gui_display_text_information(gchar * information)
 {
 #ifdef USE_GTKMOZEMBED
-	gecko_html_open_stream(GECKO_HTML(html_widget), "text/html");
-	gecko_html_write(GECKO_HTML(html_widget),information,strlen(information));
-	gecko_html_close(GECKO_HTML(html_widget));
+	wk_html_open_stream(WK_HTML(html_widget), "text/html");
+	wk_html_write(WK_HTML(html_widget),information,strlen(information));
+	wk_html_close(WK_HTML(html_widget));
 #else
 	gboolean was_editable = gtk_html_get_editable(GTK_HTML(html_widget));
 	if (was_editable)
@@ -220,7 +220,7 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 			   0);
 	gtk_misc_set_alignment(GTK_MISC(image), 0.5, 0);
 #ifdef USE_GTKMOZEMBED
-	html_widget = GTK_WIDGET(gecko_html_new(NULL,FALSE,30));//gtk_html_new();
+	html_widget = GTK_WIDGET(wk_html_new());//gtk_html_new();
 	gtk_widget_show(html_widget);
 	gtk_box_pack_start(GTK_BOX(hbox), html_widget, TRUE, TRUE, 0);
 #else

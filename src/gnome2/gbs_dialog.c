@@ -29,7 +29,7 @@
 #ifdef WIN32
 #include "geckowin/gecko-html.h"
 #else
-#include "gecko/gecko-html.h"
+#include "webkit/wk-html.h"
 #endif
 #else
 #include <gtkhtml/gtkhtml.h>
@@ -301,7 +301,7 @@ static void add_columns(GtkTreeView *tree)
 
 #ifdef USE_GTKMOZEMBED
 static void
-_popupmenu_requested_cb (GeckoHtml *html,
+_popupmenu_requested_cb (WkHtml *html,
 			 gchar *uri,
 			 DIALOG_DATA *d)
 {
@@ -397,8 +397,9 @@ void gui_create_gbs_dialog(DIALOG_DATA *dlg)
 	eventbox = gtk_event_box_new();
 	gtk_widget_show(eventbox);
 	gtk_container_add(GTK_CONTAINER(frame), eventbox);
+	
+	dlg->html = GTK_WIDGET(wk_html_new());
 
-	dlg->html = GTK_WIDGET(gecko_html_new(((DIALOG_DATA*) dlg),TRUE,DIALOG_BOOK_TYPE));
 	gtk_container_add(GTK_CONTAINER(eventbox), dlg->html);
 	gtk_widget_show(dlg->html);
 	g_signal_connect((gpointer)dlg->html,

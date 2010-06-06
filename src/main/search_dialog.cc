@@ -30,7 +30,7 @@
 #ifdef WIN32
 #include "geckowin/gecko-html.h"
 #else
-#include "gecko/gecko-html.h"
+#include "webkit/wk-html.h"
 #endif
 #else
 #ifdef __cplusplus
@@ -957,11 +957,11 @@ void main_finds_verselist_selection_changed(GtkTreeSelection * selection,
 #ifdef USE_GTKMOZEMBED
 	GString *html_text = g_string_new(HTML_START);
 	g_string_append(html_text, text_str->str);
-	g_string_append(html_text, "</html>");
-	gecko_html_open_stream(GECKO_HTML(search1.preview_html), "text/html");
-	gecko_html_write(GECKO_HTML(search1.preview_html),
+	g_string_append(html_text, "</html>");	
+	wk_html_open_stream(WK_HTML(search1.preview_html), "text/html");
+	wk_html_write(WK_HTML(search1.preview_html),
 			 html_text->str, html_text->len);
-	gecko_html_close(GECKO_HTML(search1.preview_html));
+	wk_html_close(WK_HTML(search1.preview_html));
 	g_string_free(html_text, TRUE);
 #else
 	gtk_html_load_from_string(GTK_HTML(search1.preview_html),

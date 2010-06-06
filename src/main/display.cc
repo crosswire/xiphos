@@ -65,7 +65,7 @@
 #ifdef WIN32
 #include "geckowin/gecko-html.h"
 #else
-#include "gecko/gecko-html.h"
+#include "webkit/wk-html.h"
 #endif /* WIN32 */
 #else
 #ifdef __cplusplus
@@ -2239,8 +2239,8 @@ GTKPrintEntryDisp::Display(SWModule &imodule)
 	MOD_FONT *mf = get_font(imodule.Name());
 
 	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(gtkText))) return 0;
-	GeckoHtml *html = GECKO_HTML(gtkText);
-	gecko_html_open_stream(html,"text/html");
+	WkHtml *html = WK_HTML(gtkText);
+	wk_html_open_stream(html,"text/html");
 
 	GLOBAL_OPS * ops = main_new_globals(imodule.Name(),0);
 
@@ -2283,8 +2283,8 @@ GTKPrintEntryDisp::Display(SWModule &imodule)
 	swbuf.append("</font></body></html>");
 
 	if (swbuf.length())
-		gecko_html_write(html,swbuf.c_str(),swbuf.length());
-	gecko_html_close(html);
+		wk_html_write(html,swbuf.c_str(),swbuf.length());
+	wk_html_close(html);
 	free_font(mf);
 	g_free(ops);
 	if (keytext)
@@ -2316,8 +2316,8 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 	mf = get_font(imodule.Name());
 
 	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(gtkText))) return 0;
-	GeckoHtml *html = GECKO_HTML(gtkText);
-	gecko_html_open_stream(html,"text/html");
+	WkHtml *html = WK_HTML(gtkText);
+	wk_html_open_stream(html,"text/html");
 
 	if (!strcmp(imodule.Name(), "KJV"))
 		paragraphMark = "&para;&nbsp;";
@@ -2345,12 +2345,12 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 			       ? "rtl"
 			       : "ltr"));
 
-	gecko_html_write(html,swbuf.c_str(),swbuf.length());
+	wk_html_write(html,swbuf.c_str(),swbuf.length());
 
 	swbuf = "";
 	main_set_global_options(ops);
 
-	gecko_html_write(html,swbuf.c_str(),swbuf.length());
+	wk_html_write(html,swbuf.c_str(),swbuf.length());
 
 	swbuf = "";
 
@@ -2407,7 +2407,7 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 
 		g_free(buf);
 
-		gecko_html_write(html,swbuf.c_str(),swbuf.length());
+		wk_html_write(html,swbuf.c_str(),swbuf.length());
 
 		swbuf = "";
 	}
@@ -2422,11 +2422,11 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 	swbuf.append("</div></font></body></html>");
 
 	if (swbuf.length())
-		gecko_html_write(html,swbuf.c_str(),swbuf.length());
-	gecko_html_close(html);
+		wk_html_write(html,swbuf.c_str(),swbuf.length());
+	wk_html_close(html);
 	if (curVerse > 2) {
 		buf = g_strdup_printf("%d", curVerse - 2);
-		gecko_html_jump_to_anchor (html,buf);
+		wk_html_jump_to_anchor (html,buf);
 		g_free(buf);
 	}
 
