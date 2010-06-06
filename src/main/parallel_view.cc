@@ -29,7 +29,7 @@
 #ifdef WIN32
 #include "geckowin/gecko-html.h"
 #else
-#include "gecko/gecko-html.h"
+#include "webkit/wk-html.h"
 #endif
 #else
 #ifdef __cplusplus
@@ -628,6 +628,7 @@ void main_update_parallel_page(void)
 	gchar tmpBuf[256];
 	const gchar *rowcolor;
 	gchar *utf8str, *mod_name;
+	gint utf8len;
 	gint modidx;
 	gboolean is_rtol = FALSE;
 	GString *data;
@@ -635,9 +636,9 @@ void main_update_parallel_page(void)
 	SWBuf text;
 
 	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.html_parallel))) return ;
-	GeckoHtml *html = GECKO_HTML(widgets.html_parallel);
-	gecko_html_open_stream(html,"text/html");
-
+	WkHtml *html = WK_HTML(widgets.html_parallel);
+	wk_html_open_stream(html,"text/html");
+	
 	settings.cvparallel = settings.currentverse;
 
 	sprintf(tmpBuf, HTML_START
@@ -712,12 +713,16 @@ void main_update_parallel_page(void)
 				mod_name,_("view context"));
 			g_string_append(data, tmpBuf);
 		}
-	}
 
-	g_string_append(data, "</table></body></html>");
-	gecko_html_write(html, data->str, -1);
-	gecko_html_close(html);
-	g_string_free(data, TRUE);
+		sprintf(tmpBuf, "</table></body></html>");
+
+		utf8len = strlen(tmpBuf);
+		if (utf8len) {
+			data = g_string_append(data, tmpBuf);	
+			wk_html_write(html, data->str, -1);
+		}	
+	}
+	wk_html_close(html);
 }
 
 #else

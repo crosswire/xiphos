@@ -31,7 +31,7 @@
 #ifdef WIN32
 #include "geckowin/gecko-html.h"
 #else
-#include "gecko/gecko-html.h"
+#include "webkit/wk-html.h"
 #endif
 #else
 #include <gtkhtml/gtkhtml.h>
@@ -229,7 +229,7 @@ static gboolean on_enter_notify_event(GtkWidget * widget,
 
 
 static void
-_popupmenu_requested_cb (GeckoHtml *html,
+_popupmenu_requested_cb (WkHtml *html,
 			     gchar *uri,
 			     gpointer user_data)
 {
@@ -270,7 +270,7 @@ GtkWidget *gui_create_commentary_pane(void)
 	gtk_box_pack_start(GTK_BOX(box_comm),
 			   eventbox1, TRUE,
 			   TRUE, 0);
-	widgets.html_comm = GTK_WIDGET(gecko_html_new(NULL, FALSE, COMMENTARY_TYPE));
+	widgets.html_comm = GTK_WIDGET(wk_html_new());
 	gtk_widget_show(widgets.html_comm);
 	gtk_container_add(GTK_CONTAINER(eventbox1),
 			 widgets.html_comm);

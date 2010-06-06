@@ -15,7 +15,7 @@ sub = Utils.subst_vars
 # use GECKO as html engine
 objects = 'backend editor main'
 if not bld.env['ENABLE_GTKHTML']:
-    objects += ' %s' % 'gecko'
+    objects += ' %s' % 'webkit'
 
 # GTKHTML
 gtkhtml = 'GTKHTML'

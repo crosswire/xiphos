@@ -29,7 +29,7 @@
 #ifdef WIN32
 #include "geckowin/gecko-html.h"
 #else
-#include "gecko/gecko-html.h"
+#include "webkit/wk-html.h"
 #endif
 #else
 #include <gtkhtml/gtkhtml.h>
@@ -85,9 +85,9 @@ extern gboolean isrunningSD;	/* is the view dictionary dialog runing */
  *					     gpointer data)
  *
  * Description
- *    an ugly hack to get the selection from gecko on a dbl click
+ *    an ugly hack to get the selection from wk on a dbl click
  *    and display text in dictionary pane using default dictionary if set or
- *    current dictionary - this called by gecko/Yelper.cpp
+ *    current dictionary - this called by wk/Yelper.cpp 
  *    Yelper::ProcessMouseDblClickEvent (void* aEvent)
  *
  * Return value
@@ -537,7 +537,7 @@ static gboolean select_button_press_callback (GtkWidget *widget,
 }
 #ifdef USE_GTKMOZEMBED
 static void
-_popupmenu_requested_cb (GeckoHtml *html,
+_popupmenu_requested_cb (WkHtml *html,
 			     gchar *uri,
 			     gpointer user_data)
 {
@@ -621,8 +621,7 @@ GtkWidget *gui_create_dictionary_pane(void)
 	eventbox = gtk_event_box_new ();
 	gtk_container_add(GTK_CONTAINER(frame), eventbox);
 	gtk_widget_show (eventbox);
-
-	widgets.html_dict = GTK_WIDGET(gecko_html_new(NULL, FALSE, DICTIONARY_TYPE));
+	widgets.html_dict = GTK_WIDGET(wk_html_new());
 	gtk_widget_show(widgets.html_dict);
 	gtk_container_add(GTK_CONTAINER(eventbox),
 			 widgets.html_dict);

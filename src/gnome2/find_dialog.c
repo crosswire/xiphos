@@ -34,7 +34,7 @@
 #ifdef WIN32
 #include "geckowin/gecko-html.h"
 #else
-#include "gecko/gecko-html.h"
+#include "webkit/wk-html.h"
 #endif
 #endif
 
@@ -107,7 +107,7 @@ static void find_clicked(GtkButton * button, FIND_DIALOG * d)
 			       GTK_TOGGLE_BUTTON(d->backward)->active == 0,
 			       d->regular);
 #else
-	gecko_html_find((void *)d->htmlwidget, text);
+	wk_html_find((void *)d->htmlwidget, text);
 #endif /* !USE_GTKMOZEMBED */
 }
 
@@ -133,7 +133,7 @@ static void next_clicked(GtkButton * button, FIND_DIALOG * d)
 #ifndef USE_GTKMOZEMBED
 	gtk_html_engine_search_next(GTK_HTML(d->htmlwidget));
 #else
-	gecko_html_find_again((void *)d->htmlwidget,
+	wk_html_find_again((void *)d->htmlwidget,
 			      GTK_TOGGLE_BUTTON(d->backward)->active == 0);
 #endif /* !USE_GTKMOZEMBED */
 }

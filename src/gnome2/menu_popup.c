@@ -34,7 +34,7 @@
 #ifdef WIN32
 #include "geckowin/gecko-html.h"
 #else
-#include "gecko/gecko-html.h"
+#include "webkit/wk-html.h"
 #endif
 #else
 #include <gtkhtml/gtkhtml.h>
@@ -404,19 +404,19 @@ G_MODULE_EXPORT void on_popup_print_activate           (GtkMenuItem     *menuite
 {
 	if (is_dialog) {
 #ifdef USE_GTKMOZEMBED
-		gecko_html_print_document (GTK_WINDOW (widgets.app),
-					   dialog->mod_name,
-					   dialog);
-
+//		wk_html_print_document (GTK_WINDOW (widgets.app), 
+//					   dialog->mod_name, 
+//					   dialog);
+	
 #else
 		gui_html_print (dialog->html, FALSE, dialog->mod_name);
 #endif
 	} else {
 #ifdef USE_GTKMOZEMBED
-		gecko_html_print_document (GTK_WINDOW (widgets.app),
-					   menu_mod_name,
-					   NULL);
-
+//		wk_html_print_document (GTK_WINDOW (widgets.app), 
+//					   menu_mod_name, 
+//					   NULL);
+	
 #else
 		gui_html_print (_get_html(), FALSE, menu_mod_name);
 #endif
@@ -468,13 +468,13 @@ G_MODULE_EXPORT void on_popup_copy_activate            (GtkMenuItem     *menuite
 {
 	if (is_dialog) {
 #ifdef USE_GTKMOZEMBED
-	gecko_html_copy_selection (GECKO_HTML (dialog->html));
+	wk_html_copy_selection (WK_HTML (dialog->html));
 #else
 	gui_copy_html (dialog->html);
 #endif
 	} else {
 #ifdef USE_GTKMOZEMBED
-	gecko_html_copy_selection (GECKO_HTML (_get_html ()));
+	wk_html_copy_selection (WK_HTML (_get_html ()));
 #else
 	gui_copy_html (_get_html ());
 #endif
@@ -1130,7 +1130,7 @@ G_MODULE_EXPORT void on_display_chapter_heading_activate (GtkMenuItem * menuitem
 G_MODULE_EXPORT void on_use_current_dictionary_activate (GtkMenuItem * menuitem, gpointer user_data)
 {
 #ifdef USE_GTKMOZEMBED
-	gecko_html_copy_selection(GECKO_HTML(_get_html()));
+	wk_html_copy_selection(WK_HTML(_get_html()));
 	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
 	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
 	gtk_widget_activate(widgets.entry_dict);
@@ -1164,7 +1164,7 @@ G_MODULE_EXPORT void on_lookup_google_activate (GtkMenuItem * menuitem, gpointer
 	gchar *dict_key, *showstr;
 
 #ifdef USE_GTKMOZEMBED
-	gecko_html_copy_selection(GECKO_HTML(_get_html()));
+	wk_html_copy_selection(WK_HTML(_get_html()));
 	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
 	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
 	dict_key = g_strdup(gtk_editable_get_chars(
@@ -1375,7 +1375,7 @@ G_MODULE_EXPORT void on_read_selection_aloud_activate (GtkMenuItem * menuitem, g
 	int len;
 	GtkWidget *html_widget = _get_html();
 #ifdef USE_GTKMOZEMBED
-	gecko_html_copy_selection(GECKO_HTML(html_widget));
+	wk_html_copy_selection(WK_HTML(html_widget));
 	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
 	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
 	dict_key =
@@ -1661,7 +1661,7 @@ static void _lookup_selection(GtkMenuItem *menuitem,
     	if (!html) return;
 	mod_name = main_module_name_from_description (dict_mod_description);
 #ifdef USE_GTKMOZEMBED
-	gecko_html_copy_selection (GECKO_HTML(html));
+	wk_html_copy_selection (WK_HTML(html));
 	gtk_editable_select_region ((GtkEditable *)widgets.entry_dict,0,-1);
 	gtk_editable_paste_clipboard ((GtkEditable *)widgets.entry_dict);
 	gtk_widget_activate (widgets.entry_dict);
