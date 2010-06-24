@@ -775,7 +775,11 @@ gint sword_uri(const gchar * url, gboolean clicked)
 
 	if (tmpkey && strpbrk(tmpkey, "-;,")) {	// >1 verse marked
 		main_display_verse_list_in_sidebar
-		    (settings.currentverse, work_buf[MODULE], tmpkey);
+		    (settings.currentverse,
+		     (work_buf[MODULE] && *work_buf[MODULE]
+		      ? work_buf[MODULE]
+		      : settings.MainWindowModule),
+		     tmpkey);
 		handling_uri = FALSE;
 		return 1;
 	}
