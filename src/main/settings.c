@@ -55,9 +55,7 @@
 /******************************************************************************
  * defines
  */
-#define GS_DIR ".xiphos"
-
-#define GS_NET_PERMISSION	_("<b>Welcome to Xiphos.</b>\n\nThere are no Bibles installed. In order to initialize, Xiphos needs at least one Bible module.\n\nWith your permission, Xiphos will open the Module Manager so that you may install one or more Bibles from either a local module set (cdrom, flash drive) or over the network from CrossWire Bible Society.\n\n<u>For local install:</u>\n- In <i>Module Sources: Add/Remove</i>, add a new local folder name where modules can be found.\n  (This is where folders exist named <i>mods.d</i> and <i>modules</i>.)\n- In <i>Module Sources: Choose</i>, click the \"Local\" button, and select your folder from the pulldown.\n\n<u>For network install from CrossWire:</u>\n- In <i>Module Sources: Choose</i>, click the \"Remote\" button and select CrossWire from the pulldown.\n- Click the \"Refresh\" button at the bottom.\n\n<u>In either case:</u>\n- In <i>Modules: Install/Update</i>, select Bibles of your preference.\n- Click \"Install\".\n- Close the Module Manager when you are done.\n\n<u>Warning</u>: If you live in a persecuted country, use with care.\n\nMay Xiphos open the Module Manager so that you may install a Bible?")
+#define XI_DIR ".xiphos"
 
 /******************************************************************************
  * globals
@@ -110,7 +108,7 @@ int settings_init(int argc, char **argv, int new_configs, int new_bookmarks)
 	}
 
 	/* set gSwordDir to $home + .xiphos */
-	settings.gSwordDir = g_strdup_printf("%s/%s", settings.homedir, GS_DIR);
+	settings.gSwordDir = g_strdup_printf("%s/%s", settings.homedir, XI_DIR);
 
 	/* if gSwordDir does not exist, create it. */
 	if (g_access(settings.gSwordDir, F_OK) == -1) {
@@ -203,22 +201,15 @@ int settings_init(int argc, char **argv, int new_configs, int new_bookmarks)
 	/* ensure that the user has a bible with which to work */
 	if (settings.havebible == 0) {
 		gui_init(argc, argv);
-		if (gui_yes_no_dialog(GS_NET_PERMISSION, GTK_STOCK_ABOUT)) {
-			main_shutdown_list();
-			gui_open_mod_mgr_initial_run();
-			main_init_lists();
-			if (settings.havebible == 0) {
-				gui_generic_warning
-				    (_("There are still no Bibles installed.\nEvidently, you declined to install any.\n\nWithout any Bible modules to display,\nXiphos cannot proceed,\nand will now exit."));
-				exit(1);
-			} else
-				gui_generic_warning
-				    (_("Bible module installation complete."));
-		} else {
+		main_shutdown_list();
+		gui_open_mod_mgr_initial_run();
+		main_init_lists();
+		if (settings.havebible == 0) {
 			gui_generic_warning
-			    (_("Without any Bible modules to display,\nXiphos cannot proceed,\nand will now exit."));
+			    (_("There are no Bibles installed.\nEvidently, you declined to install any.\n\nWithout any Bible modules to display,\nXiphos cannot proceed,\nand will now exit."));
 			exit(1);
 		}
+		gui_generic_warning(_("Bible module installation complete."));
 	}
 
 	/* check for template.pad file for studypad */

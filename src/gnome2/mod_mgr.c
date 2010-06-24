@@ -55,6 +55,15 @@
 
 #include <glib/gstdio.h>
 
+/******************************************************************************
+ * defines
+ */
+#define	XI_GENERAL_INTRO	\
+_("<b>Overview of the Module Manager.</b>\n\nThis is Xiphos' mechanism to get new and updated content.\nIf you have never been here before, please take a moment to look it over.\n\nModules come from different <u>repositories</u>.  <b>Module Sources: Add/Remove</b> will show you what repositories are currently known.\n\n<b>Module Sources: Choose</b> is for deciding from where modules should come, that is, from which repository Xiphos should obtain them, as well as where they should be placed on your system. Set <i>Install Source</i> and <i>Install Destination</i>, then click <i>Refresh</i>.\n\n<b>Modules: Install/Update</b> is for selecting and obtaining modules after choosing source and destination.\n\n<b>Modules: Maintenance</b> is for archive and index creation.\n\nSee section 5 of our manual for Module Manager detail, or ask for help via Live Chat, or (if no one is responsive in chat) send mail to our users' mailing list.\n")
+
+#define XI_FIRST_INSTALL	\
+_("<b>Welcome to Xiphos.</b>\n\nThere are no Bibles installed. In order to initialize, Xiphos needs at least one Bible module. To facilitate this, the Module Manager has been opened so that you may install one or more Bibles, either from a local module set (cdrom, flash drive) or over the network from CrossWire Bible Society. Please refer to these step-by-step instructions, and to the general module manager overview that has also been opened.\n\n<u>For local install:</u>\n- In <i>Module Sources: Add/Remove</i>, add a new local folder name where modules can be found.\n  (This is where folders exist named <i>mods.d</i> and <i>modules</i>.)\n- In <i>Module Sources: Choose</i>, click the \"Local\" button, and select your folder from the pulldown.\n\n<u>For network install from CrossWire:</u>\n- In <i>Module Sources: Choose</i>, click the \"Remote\" button and select CrossWire from the pulldown.\n- Click the \"Refresh\" button at the bottom.\n\n<u>In either case:</u>\n- In <i>Modules: Install/Update</i>, select Bibles and other modules of your preference.\n- Click \"Install\".\n- Close the Module Manager when you are done.\n\n<u>Warning</u>: If you live in a persecuted country, use with care.\n\nBoth this step-by-step instruction dialog and the general introduction dialog may be closed at any time.")
+
 #define GTK_RESPONSE_REFRESH 301
 #define GTK_RESPONSE_REMOVE  302
 #define GTK_RESPONSE_INSTALL 303
@@ -2366,11 +2375,8 @@ on_load_sources_clicked(GtkButton * button, gpointer  user_data)
 		gui_generic_warning(_("Could not load standard sources from CrossWire."));
 }
 
-#define	MOD_INTRO	\
-_("<b>Welcome to the Module Manager.</b>\n\nThis is Xiphos' mechanism to get new and updated content.\nIf you have never been here before, please take a moment to look it over.\n\nModules come from different <u>repositories</u>.  <b>Module Sources: Add/Remove</b> will show you what repositories are currently known.\n\n<b>Module Sources: Choose</b> is for deciding from where modules should come, that is, from which repository Xiphos should obtain them, as well as where they should be placed on your system. Set <i>Install Source</i> and <i>Install Destination</i>, then click <i>Refresh</i>.\n\n<b>Modules: Install/Update</b> is for selecting and obtaining modules after choosing source and destination.\n\n<b>Modules: Maintenance</b> is for archive and index creation.\n\nSee section 5 of our manual for Module Manager detail, or ask for help via Live Chat, or (if no one is responsive in chat) send mail to our users' mailing list.\n")
-
 void
-on_mod_mgr_intro_clicked(GtkButton * button, gpointer  user_data)
+on_mod_mgr_intro_clicked(GtkButton * button, gpointer user_data)
 {
 	GtkWidget *dialog;
 	dialog = gtk_message_dialog_new_with_markup
@@ -2378,7 +2384,7 @@ on_mod_mgr_intro_clicked(GtkButton * button, gpointer  user_data)
 	     GTK_DIALOG_DESTROY_WITH_PARENT,
 	     GTK_MESSAGE_INFO,
 	     GTK_BUTTONS_OK,
-	     MOD_INTRO);
+	     (user_data ? XI_FIRST_INSTALL : XI_GENERAL_INTRO));
 	g_signal_connect_swapped (dialog, "response",
 				  G_CALLBACK (gtk_widget_destroy),
 				  dialog);
@@ -2969,6 +2975,9 @@ setup_dialog_action_area(GtkDialog * dialog)
 
 	gtk_widget_show(button_close);
 	on_mod_mgr_intro_clicked(NULL, NULL);
+	sync_windows();
+	sleep(1);
+	on_mod_mgr_intro_clicked(NULL, (gpointer) 1);
 }
 
 static void
