@@ -2976,7 +2976,6 @@ setup_dialog_action_area(GtkDialog * dialog)
 	gtk_widget_show(button_close);
 	on_mod_mgr_intro_clicked(NULL, NULL);
 	sync_windows();
-	g_usleep(G_USEC_PER_SEC);	/* 1sec */
 	on_mod_mgr_intro_clicked(NULL, (gpointer) 1);
 }
 
