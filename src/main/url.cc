@@ -773,6 +773,17 @@ gint sword_uri(const gchar * url, gboolean clicked)
 		    work_buf[MODULE],
 		    (work_buf[KEY] ? work_buf[KEY] : "-null-")));
 
+	if (tmpkey && strpbrk(tmpkey, "-;,")) {	// >1 verse marked
+		main_display_verse_list_in_sidebar
+		    (settings.currentverse,
+		     (work_buf[MODULE] && *work_buf[MODULE]
+		      ? work_buf[MODULE]
+		      : settings.MainWindowModule),
+		     tmpkey);
+		handling_uri = FALSE;
+		return 1;
+	}
+
 	verse_count = 1; //backend->is_Bible_key(mykey, settings.currentverse);
 	if (backend->is_module(work_buf[MODULE])) {
 		mod_type = backend->module_type(work_buf[MODULE]);
