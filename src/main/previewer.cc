@@ -358,7 +358,7 @@ void mark_search_words(GString * str)
 {
 	gchar *tmpbuf, *buf, *searchbuf;
 	gint len_overall, len_word, len_tail, len_prefix;
-	gchar closestr[40], openstr[40];
+	gchar closestr[40], openstr[80];
 
 	/* regular expression search results         **fixme** */
 	if ((settings.searchType == 0) ||
@@ -366,10 +366,16 @@ void mark_search_words(GString * str)
 		return;
 	}
 	GS_message(("%s",settings.searchText));
-	/* close tags */
-	sprintf(closestr, "</b></font>");
-	/* open tags */
+	/* open and close tags */
+#ifdef USE_GTKMOZEMBED
+	sprintf(openstr,
+		"<span style=\"background-color: %s; color: %s\">",
+		settings.highlight_fg, settings.highlight_bg);
+	sprintf(closestr, "</span>");
+#else
 	sprintf(openstr, "<font color=\"%s\"><b>", settings.found_color);
+	sprintf(closestr, "</b></font>");
+#endif /* !USE_GTKMOZEMBED */
 	searchbuf = g_utf8_casefold(g_strdup(settings.searchText),-1);
 	if (g_str_has_prefix(searchbuf, "\"")) {
 		searchbuf = g_strdelimit(searchbuf, "\"", ' ');
