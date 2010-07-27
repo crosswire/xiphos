@@ -45,9 +45,6 @@
 
 #include "gui/debug_glib_null.h"
 
-#ifdef DEBUG
-static const gchar *f_message = "backend/module_manager.cc line #%d \"%s\" = %s\n";
-#endif
 using namespace sword;
 using std::cout;
 using std::cin;
