@@ -369,9 +369,9 @@ void mark_search_words(GString * str)
 	/* open and close tags */
 #ifdef USE_GTKMOZEMBED
 	sprintf(openstr,
-		"<table bgcolor=\"%s\"><tr><td><font color=\"#FFFFFF\"><b>",
-		settings.found_color);
-	sprintf(closestr, "</b></font></td></tr></table>");
+		"<span style=\"background-color: %s; color: %s\">",
+		settings.highlight_fg, settings.highlight_bg);
+	sprintf(closestr, "</span>");
 #else
 	sprintf(openstr, "<font color=\"%s\"><b>", settings.found_color);
 	sprintf(closestr, "</b></font>");
