@@ -59,6 +59,11 @@ static InstallMgr *installMgr = NULL;
 static ModMap::iterator it;
 static ModMap::iterator end;
 
+// separate iterator/end pair for listing sources' modules.
+// avoids being overused by other areas of mod.mgr use.
+static ModMap::iterator list_it;
+static ModMap::iterator list_end;
+
 /******************************************************************************
  * Name
  *   preStatus
@@ -80,7 +85,6 @@ void GSStatusReporter::preStatus(long totalBytes,
 				 long completedBytes,
 				 const char *message)
 {
-	GS_print((f_message,83,"message",message));
 	update_install_status(totalBytes, completedBytes, message);
 }
 
@@ -164,8 +168,8 @@ MOD_MGR *backend_module_mgr_get_next_module(void)
 	MOD_MGR *mod_info = NULL;
 	SWModule *module;
 
-	if (it != end) {
-		module = it->second;
+	if (list_it != list_end) {
+		module = list_it->second;
 		mod_info = g_new(MOD_MGR, 1);
 		gchar *name = module->Name();
 
@@ -215,7 +219,7 @@ MOD_MGR *backend_module_mgr_get_next_module(void)
 			mod_info->description = module->Description();
 			mod_info->locked =
 			    ((module->getConfigEntry("CipherKey")) ? 1 : 0);
-			it++;
+			list_it++;
 			return (MOD_MGR *) mod_info;
 		}
 	}
@@ -248,8 +252,8 @@ void backend_module_mgr_remote_list_modules_init(const char *sourceName)
 			sourceName);
 		backend_shut_down_module_mgr();
 	}
-	it = source->second->getMgr()->Modules.begin();
-	end = source->second->getMgr()->Modules.end();
+	list_it = source->second->getMgr()->Modules.begin();
+	list_end = source->second->getMgr()->Modules.end();
 }
 
 
@@ -272,12 +276,12 @@ void backend_module_mgr_remote_list_modules_init(const char *sourceName)
 void backend_module_mgr_list_local_modules_init(bool for_install)
 {
         if (for_install){
-                it = list_mgr->Modules.begin();
-                end = list_mgr->Modules.end();
+                list_it = list_mgr->Modules.begin();
+                list_end = list_mgr->Modules.end();
         }
         else{
-                it = mgr->Modules.begin();
-                end = mgr->Modules.end();
+                list_it = mgr->Modules.begin();
+                list_end = mgr->Modules.end();
         }
 }
 
