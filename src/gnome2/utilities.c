@@ -373,7 +373,7 @@ gchar * gui_general_user_file (const char *fname, gboolean critical)
 
 	for (i = 0; alternative[i] != NULL; i++)
 	{
-		if (file == NULL &&  g_file_test (alternative[i], G_FILE_TEST_EXISTS))
+		if (file == NULL &&  g_file_test (alternative[i], G_FILE_TEST_IS_REGULAR))
 		{
 			file = alternative[i];
 		}
