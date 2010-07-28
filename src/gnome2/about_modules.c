@@ -211,7 +211,7 @@ gui_create_about_modules(void)
 	gtk_widget_show(hbox21);
 	gtk_box_pack_start(GTK_BOX(vbox25), hbox21, FALSE, TRUE, 0);
 
-	pixmap = pixmap_finder("sword3.png");
+	pixmap = pixmap_finder("sword.png");
 	gtk_widget_show(pixmap);
 	gtk_box_pack_start(GTK_BOX(hbox21), pixmap, TRUE, TRUE, 0);
 
