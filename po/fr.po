@@ -20,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 3.1.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-24 14:24+0200\n"
-"PO-Revision-Date: 2010-07-24 14:28+0200\n"
+"POT-Creation-Date: 2010-07-28 09:42+0200\n"
+"PO-Revision-Date: 2010-07-28 09:46+0200\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: emacs + po-mode <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -29,7 +29,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 
-#: ../src/backend/sword_main.cc:1077
+#: ../src/backend/sword_main.cc:732
+msgid ""
+"Xiphos failure: \"can't happen\", display_mod: null\n"
+"Please report this. sword_main.cc:set_treekey\n"
+"What were you doing when this occurred?"
+msgstr ""
+"Erreur Xiphos: \"can't happen\", display_mod: null\n"
+"Merci de signaler: sword_main.cc:set_treekey\n"
+"et quelle opération faisiez-vous lorsque c'est arrivé."
+
+#: ../src/backend/sword_main.cc:1083
 msgid "Configuration not found"
 msgstr "Configuration non trouvée"
 
