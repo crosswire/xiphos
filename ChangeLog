@@ -1,3 +1,8 @@
+2010-08-03  karl <charcoal@users.sf.net>
+
+	* add counting of footnote *n markers.
+	* for mozembed, replace <table> with <span> for verse highlight.
+
 2010-07-27  karl <charcoal@users.sf.net>
 
 	* fix #3022383 mod.mgr crash by creating 2nd iterator/end pair.
