@@ -109,6 +109,8 @@ MC marked_cache;
 gchar *marked_cache_modname = NULL, *marked_cache_book = NULL;
 int marked_cache_chapter = -1;
 
+int footnote;
+
 #define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><STYLE type=\"text/css\"><!-- A { text-decoration:none } %s --></STYLE></head>"
 
 // CSS style blocks to control blocked strongs+morph output
@@ -758,25 +760,35 @@ block_render(const char *text)
 //
 // in-place removal of inconvenient-to-the-user content.
 //
-void
-CleanupContent(const char *text,
+GString *
+CleanupContent(GString *text,
 	       GLOBAL_OPS *ops,
 	       char *name)
 {
 	if (ops->image_content == 0)
-		ClearImages((gchar *)text);
+		ClearImages((gchar *)text->str);
 	else if ((ops->image_content == -1) &&	// "unknown"
-		 (strcasestr(text, "<img ") != NULL)) {
+		 (strcasestr(text->str, "<img ") != NULL)) {
 		ops->image_content = 1;		// now known.
 		main_save_module_options(name, "Image Content", 1, ops->dialog);
 	}
 	if (ops->respect_font_faces == 0)
-		ClearFontFaces((gchar *)text);
+		ClearFontFaces((gchar *)text->str);
 	else if ((ops->respect_font_faces == -1) &&	// "unknown"
-		 (strcasestr(text, "<font face=\"Galax") != NULL)) {
+		 (strcasestr(text->str, "<font face=\"Galax") != NULL)) {
 		ops->respect_font_faces = 1;	// now known.
 		main_save_module_options(name, "Respect Font Faces", 1, ops->dialog);
 	}
+
+	gchar value[6];
+	gchar *s = text->str;
+
+	while ((s = strstr(s, "*n"))) {
+		g_snprintf(value, 5, "%d", ++footnote);
+		text = g_string_insert(text, s-(text->str)+2, value);
+		++s;
+	}
+	return text;
 }
 
 //
@@ -790,7 +802,7 @@ CacheHeader(ModuleCache::CacheVerse& cVerse,
 	int x = 0;
 	gchar heading[8];
 	const gchar *preverse, *preverse2;
-	gchar *text;
+	GString *text = g_string_new("");
 
 	cVerse.SetHeader("");
 
@@ -798,15 +810,16 @@ CacheHeader(ModuleCache::CacheVerse& cVerse,
 	while ((preverse = be->get_entry_attribute("Heading", "Preverse",
 							heading)) != NULL) {
 		preverse2 = mod.RenderText(preverse);
-		text = g_strdup_printf("<br><b>%s</b><br><br>",
-				       (((ops->strongs || ops->lemmas) ||
-					ops->morphs)
-					? block_render(preverse2)
-					: preverse2));
-		CleanupContent(text, ops, mod.Name());
+		g_string_printf(text,
+				"<br><b>%s</b><br><br>",
+				(((ops->strongs || ops->lemmas) ||
+				  ops->morphs)
+				 ? block_render(preverse2)
+				 : preverse2));
+		text = CleanupContent(text, ops, mod.Name());
 
-		cVerse.AppendHeader(text);
-		g_free(text);
+		cVerse.AppendHeader(text->str);
+		g_string_free(text, TRUE);
 		// g_free((gchar *)preverse2);
 		g_free((gchar *)preverse);
 		++x;
@@ -840,7 +853,8 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule)
 	int curBook = key->Book();
 	gchar *buf;
 	char *ModuleName = imodule.Name();
-	const char *rework;	// for image size analysis rework.
+	GString *rework;			// for image size analysis rework.
+	footnote = 0;
 
 	// we come into this routine with swbuf init'd with
 	// boilerplate html startup, plus ops and mf ready.
@@ -872,25 +886,25 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule)
 		if (!cVerse.CacheIsValid(cache_flags)) {
 			if ((backend->module_type(imodule.Name()) == PERCOM_TYPE) ||
 			    (backend->module_type(imodule.Name()) == PRAYERLIST_TYPE))
-				rework = (strongs_or_morph
-					  ? block_render(imodule.getRawEntry())
-					  : imodule.getRawEntry());
+				rework = g_string_new(strongs_or_morph
+						      ? block_render(imodule.getRawEntry())
+						      : imodule.getRawEntry());
 			else
-				rework = (strongs_or_morph
-					  ? block_render(imodule.RenderText())
-					  : imodule.RenderText());
-			CleanupContent(rework, ops, imodule.Name());
-			cVerse.SetText(rework, cache_flags);
+				rework = g_string_new(strongs_or_morph
+						      ? block_render(imodule.RenderText())
+						      : imodule.RenderText());
+			rework = CleanupContent(rework, ops, imodule.Name());
+			cVerse.SetText(rework->str, cache_flags);
 		} else
-			rework = cVerse.GetText();
+			rework = g_string_new(cVerse.GetText());
 		buf = g_strdup_printf("<p /><a name=\"%d\"> </a>",
 				      key->Verse());
 		swbuf.append(buf);
 		g_free(buf);
 		swbuf.append(settings.imageresize
-			     ? AnalyzeForImageSize(rework,
+			     ? AnalyzeForImageSize(rework->str,
 						   GDK_WINDOW(gtkText->window))
-			     : rework /* left as-is */);
+			     : rework->str /* left as-is */);
 	}
 
 	swbuf.append("</div></font></body></html>");
@@ -920,10 +934,11 @@ GTKEntryDisp::Display(SWModule &imodule)
 	gchar *buf;
 	mf = get_font(imodule.Name());
 	swbuf = "";
+	footnote = 0;
 
 	ops = main_new_globals(imodule.Name(),0);
 
-	const char *rework;	// for image size analysis rework.
+	GString *rework;			// for image size analysis rework.
 
 	(const char *)imodule;	// snap to entry
 	main_set_global_options(ops);
@@ -997,32 +1012,32 @@ GTKEntryDisp::Display(SWModule &imodule)
 
 		// use the module cache rather than re-accessing Sword.
 		if (!cVerse.CacheIsValid(cache_flags)) {
-			rework = (strongs_or_morph
-				  ? block_render(imodule.RenderText())
-				  : imodule.RenderText());
-			CleanupContent(rework, ops, imodule.Name());
-			cVerse.SetText(rework, cache_flags);
+			rework = g_string_new(strongs_or_morph
+					      ? block_render(imodule.RenderText())
+					      : imodule.RenderText());
+			rework = CleanupContent(rework, ops, imodule.Name());
+			cVerse.SetText(rework->str, cache_flags);
 		} else
-			rework = cVerse.GetText();
+			rework = g_string_new(cVerse.GetText());
 
 	} else {
 
 		if ((backend->module_type(imodule.Name()) == PERCOM_TYPE) ||
 		    (backend->module_type(imodule.Name()) == PRAYERLIST_TYPE))
-			rework = (strongs_or_morph
-				  ? block_render(imodule.getRawEntry())
-				  : imodule.getRawEntry());
+			rework = g_string_new(strongs_or_morph
+					      ? block_render(imodule.getRawEntry())
+					      : imodule.getRawEntry());
 		else
-			rework = (strongs_or_morph
-				  ? block_render(imodule.RenderText())
-				  : imodule.RenderText());
-		CleanupContent(rework, ops, imodule.Name());
+			rework = g_string_new(strongs_or_morph
+					      ? block_render(imodule.RenderText())
+					      : imodule.RenderText());
+		rework = CleanupContent(rework, ops, imodule.Name());
 	}
 
 	swbuf.append(settings.imageresize
-		     ? AnalyzeForImageSize(rework,
+		     ? AnalyzeForImageSize(rework->str,
 					   GDK_WINDOW(gtkText->window))
-		     : rework /* left as-is */);
+		     : rework->str /* left as-is */);
 
 	swbuf.append("</div></font></body></html>");
 
@@ -1047,7 +1062,9 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 	int chapter = key->Chapter();
 	int curBook = key->Book();
 	int curTest = key->Testament();
+#if 0
 	const char *ModuleName = imodule.Name();
+#endif
 
 	key->Verse(1);
 	imodule--;
@@ -1072,6 +1089,7 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 		if (strongs_and_morph)
 			set_morph_order(imodule);
 
+#if 0		// with footnote counting, we no longer cache before/after verses.
 		ModuleCache::CacheVerse& cVerse = ModuleMap
 		    [ModuleName]
 		    [key->Testament()]
@@ -1084,6 +1102,11 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 					? block_render((const char *)imodule)
 					: (const char *)imodule),
 				       cache_flags);
+#else
+		const gchar *text = (strongs_or_morph
+				     ? block_render((const char *)imodule)
+				     : (const char *)imodule);
+#endif /* !0 */
 
 		utf8_key = strdup((char*)key->getText());
 
@@ -1111,7 +1134,11 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 		num = main_format_number(chapter);
 		buf=g_strdup_printf(
 				"%s%s<br><hr><div style=\"text-align: center\"><b>%s %s</b></div>",
+#if 0
 				cVerse.GetText(),
+#else
+				text,
+#endif
 				// extra break when excess strongs/morph space.
 				(strongs_or_morph ? "<br>" : ""),
 				_("Chapter"), num);
@@ -1142,6 +1169,7 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 		key->Chapter(i*chapter);
 		key->Verse(0);
 
+#if 0		// with footnote counting, we no longer cache before/after verses.
 		ModuleCache::CacheVerse& cVerse = ModuleMap
 		    [ModuleName]
 		    [key->Testament()]
@@ -1155,6 +1183,11 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 					: (const char *)imodule),
 				       cache_flags);
 		buf=g_strdup_printf("%s<br />", cVerse.GetText());
+#else
+		buf=g_strdup_printf("%s<br />", (strongs_or_morph
+						 ? block_render((const char *)imodule)
+						 : (const char *)imodule));
+#endif /* !0 */
 		swbuf.append(buf);
 		g_free(buf);
 	}
@@ -1172,7 +1205,9 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 {
 	gchar *utf8_key;
 	gchar *buf;
+#if 0
 	const char *ModuleName = imodule.Name();
+#endif
 	sword::VerseKey *key = (VerseKey *)(SWKey *)imodule;
 
 	imodule++;
@@ -1222,6 +1257,7 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 		if (strongs_and_morph)
 			set_morph_order(imodule);
 
+#if 0		// with footnote counting, we no longer cache before/after verses.
 		ModuleCache::CacheVerse& cVerse = ModuleMap
 		    [ModuleName]
 		    [key->Testament()]
@@ -1235,6 +1271,11 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 					: (const char *)imodule),
 				       cache_flags);
 		swbuf.append(cVerse.GetText());
+#else
+		swbuf.append((strongs_or_morph
+			      ? block_render((const char *)imodule)
+			      : (const char *)imodule));
+#endif /* !0 */
 		swbuf.append("</div>");
 	}
 }
@@ -1547,12 +1588,11 @@ GTKChapDisp::Display(SWModule &imodule)
 	char *num;
 	const gchar *paragraphMark = NULL;
 	gboolean newparagraph = FALSE;
-	const char *rework;	// for image size analysis rework.
-	marked_element *e = NULL;
-
+	GString *rework;			// for image size analysis rework.
 	char *ModuleName = imodule.Name();
 	ops = main_new_globals(ModuleName, 0);
 	cache_flags = ConstructFlags(ops);
+	marked_element *e = NULL;
 
 	is_rtol = main_is_mod_rtol(ModuleName);
 	mf = get_font(ModuleName);
@@ -1583,6 +1623,7 @@ GTKChapDisp::Display(SWModule &imodule)
 		paragraphMark = "";
 
 	swbuf = "";
+	footnote = 0;
 
 	buf=g_strdup_printf(HTML_START
 			    "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
@@ -1628,13 +1669,13 @@ GTKChapDisp::Display(SWModule &imodule)
 
 		// use the module cache rather than re-accessing Sword.
 		if (!cVerse.CacheIsValid(cache_flags)) {
-			rework = (strongs_or_morph
-				  ? block_render(imodule.RenderText())
-				  : imodule.RenderText());
-			CleanupContent(rework, ops, imodule.Name());
-			cVerse.SetText(rework, cache_flags);
-		}
-		rework = cVerse.GetText();
+			rework = g_string_new(strongs_or_morph
+					      ? block_render(imodule.RenderText())
+					      : imodule.RenderText());
+			rework = CleanupContent(rework, ops, imodule.Name());
+			cVerse.SetText(rework->str, cache_flags);
+		} else
+			rework = g_string_new(cVerse.GetText());
 
 		if (!cVerse.HeaderIsValid())
 			CacheHeader(cVerse, imodule, ops, be);
@@ -1653,7 +1694,11 @@ GTKChapDisp::Display(SWModule &imodule)
 		    ((key->Verse() == curVerse) &&
 		     settings.versehighlight)) {
 			buf = g_strdup_printf(
+#ifdef USE_GTKMOZEMBED
+			    "<span style=\"background-color: %s\">"
+#else
 			    "<table bgcolor=\"%s\"><tr><td>"
+#endif
 			    "<font face=\"%s\" size=\"%+d\">",
 			    ((settings.annotate_highlight && e)
 			     ? settings.highlight_fg
@@ -1715,6 +1760,7 @@ GTKChapDisp::Display(SWModule &imodule)
 			swbuf.append(paragraphMark);;
 		}
 
+#ifndef USE_GTKMOZEMBED
 		// correct a highlight glitch: in poetry verses which end in
 		// a forced line break, we must remove the break to prevent
 		// the enclosing <table> from producing a double break.
@@ -1724,7 +1770,7 @@ GTKChapDisp::Display(SWModule &imodule)
 		    (key->Verse() == curVerse)) {
 			GString *text = g_string_new(NULL);
 
-			g_string_printf(text, "%s", rework);
+			g_string_printf(text, "%s", rework->str);
 			if (!strcmp(text->str + text->len - 6, "<br />")) {
 				text->len -= 6;
 				*(text->str + text->len) = '\0';
@@ -1739,18 +1785,19 @@ GTKChapDisp::Display(SWModule &imodule)
 				     : text->str /* left as-is */);
 			g_string_free(text, TRUE);
 		} else
+#endif /* USE_GTKMOZEMBED */
 			swbuf.append(settings.imageresize
-				     ? AnalyzeForImageSize(rework,
+				     ? AnalyzeForImageSize(rework->str,
 							   GDK_WINDOW(gtkText->window))
-				     : rework /* left as-is */);
+				     : rework->str /* left as-is */);
 
 		if (key->Verse() == curVerse) {
 			swbuf.append("</font>");
-			ReadAloud(curVerse, rework);
+			ReadAloud(curVerse, rework->str);
 		}
 
 		if (settings.versestyle) {
-			if (strstr(rework, "<!p>")) {
+			if (strstr(rework->str, "<!p>")) {
 				newparagraph = TRUE;
 			} else {
 				newparagraph = FALSE;
@@ -1764,7 +1811,11 @@ GTKChapDisp::Display(SWModule &imodule)
 		// special contrasty highlighting
 		if (((key->Verse() == curVerse) && settings.versehighlight) ||
 		    (e && settings.annotate_highlight))
+#ifdef USE_GTKMOZEMBED
+			swbuf.append("</font></span>");
+#else
 			swbuf.append("</font></td></tr></table>");
+#endif
 	}
 
 	getVerseAfter(imodule);
@@ -1811,7 +1862,8 @@ DialogEntryDisp::DisplayByChapter(SWModule &imodule)
 	int curBook = key->Book();
 	gchar *buf;
 	char *ModuleName = imodule.Name();
-	const char *rework;	// for image size analysis rework.
+	GString *rework;			// for image size analysis rework.
+	footnote = 0;
 
 	// we come into this routine with swbuf init'd with
 	// boilerplate html startup, plus ops and mf ready.
@@ -1846,21 +1898,21 @@ DialogEntryDisp::DisplayByChapter(SWModule &imodule)
 
 		// use the module cache rather than re-accessing Sword.
 		if (!cVerse.CacheIsValid(cache_flags)) {
-			rework = (strongs_or_morph
-				  ? block_render(imodule.RenderText())
-				  : imodule.RenderText());
-			CleanupContent(rework, ops, imodule.Name());
-			cVerse.SetText(rework, cache_flags);
+			rework = g_string_new(strongs_or_morph
+					      ? block_render(imodule.RenderText())
+					      : imodule.RenderText());
+			rework = CleanupContent(rework, ops, imodule.Name());
+			cVerse.SetText(rework->str, cache_flags);
 		} else
-			rework = cVerse.GetText();
+			rework = g_string_new(cVerse.GetText());
 		buf = g_strdup_printf("<p /><a name=\"%d\"> </a>",
 				      key->Verse());
 		swbuf.append(buf);
 		g_free(buf);
 		swbuf.append(settings.imageresize
-			     ? AnalyzeForImageSize(rework,
+			     ? AnalyzeForImageSize(rework->str,
 						   GDK_WINDOW(gtkText->window))
-			     : rework /* left as-is */);
+			     : rework->str /* left as-is */);
 	}
 
 	swbuf.append("</div></font></body></html>");
@@ -1884,7 +1936,8 @@ DialogEntryDisp::Display(SWModule &imodule)
 	mf = get_font(imodule.Name());
 	ops = main_new_globals(imodule.Name(),1);
 	main_dialog_set_global_options((BackEnd*)be, ops);
-	const char *rework;	// for image size analysis rework.
+	GString *rework;			// for image size analysis rework.
+	footnote = 0;
 
 	(const char *)imodule;	// snap to entry
 	//main_set_global_options(ops);
@@ -1931,26 +1984,26 @@ DialogEntryDisp::Display(SWModule &imodule)
 
 		// use the module cache rather than re-accessing Sword.
 		if (!cVerse.CacheIsValid(cache_flags)) {
-			rework = (const char *)imodule;
-			CleanupContent(rework, ops, imodule.Name());
-			cVerse.SetText(rework, cache_flags);
+			rework = g_string_new((const char *)imodule);
+			rework = CleanupContent(rework, ops, imodule.Name());
+			cVerse.SetText(rework->str, cache_flags);
 		} else
-			rework = cVerse.GetText();
+			rework = g_string_new(cVerse.GetText());
 
 	} else {
 
 		if ((be->module_type(imodule.Name()) == PERCOM_TYPE) ||
 		    (be->module_type(imodule.Name()) == PRAYERLIST_TYPE))
-			rework = imodule.getRawEntry();
+			rework = g_string_new(imodule.getRawEntry());
 		else
-			rework = (const char *)imodule;
-		CleanupContent(rework, ops, imodule.Name());
+			rework = g_string_new((const char *)imodule);
+		rework = CleanupContent(rework, ops, imodule.Name());
 	}
 
 	swbuf.append(settings.imageresize
-		     ? AnalyzeForImageSize(rework,
+		     ? AnalyzeForImageSize(rework->str,
 					   GDK_WINDOW(gtkText->window))
-		     : rework /* left as-is */);
+		     : rework->str /* left as-is */);
 
 	swbuf.append("</font></body></html>");
 
@@ -1976,7 +2029,7 @@ DialogChapDisp::Display(SWModule &imodule)
 	char *num;
 	const gchar *paragraphMark = NULL;
 	gboolean newparagraph = FALSE;
-	const char *rework;	// for image size analysis rework.
+	GString *rework;			// for image size analysis rework.
 	marked_element *e = NULL;
 
 	char *ModuleName = imodule.Name();
@@ -2023,6 +2076,7 @@ DialogChapDisp::Display(SWModule &imodule)
 	main_dialog_set_global_options((BackEnd*)be, ops);
 
 	swbuf = "";
+	footnote = 0;
 	buf = g_strdup_printf(HTML_START
 			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
 			      "<font face=\"%s\" size=\"%+d\">",
@@ -2063,13 +2117,13 @@ DialogChapDisp::Display(SWModule &imodule)
 
 		// use the module cache rather than re-accessing Sword.
 		if (!cVerse.CacheIsValid(cache_flags)) {
-			rework = (strongs_or_morph
-				  ? block_render(imodule.RenderText())
-				  : imodule.RenderText());
-			CleanupContent(rework, ops, imodule.Name());
-			cVerse.SetText(rework, cache_flags);
-		}
-		rework = cVerse.GetText();
+			rework = g_string_new(strongs_or_morph
+					      ? block_render(imodule.RenderText())
+					      : imodule.RenderText());
+			rework = CleanupContent(rework, ops, imodule.Name());
+			cVerse.SetText(rework->str, cache_flags);
+		} else
+			rework = g_string_new(cVerse.GetText());
 
 		if (!cVerse.HeaderIsValid())
 			CacheHeader(cVerse, imodule, ops, be);
@@ -2087,7 +2141,11 @@ DialogChapDisp::Display(SWModule &imodule)
 		     settings.annotate_highlight) ||
 		    ((key->Verse() == curVerse) && settings.versehighlight)) {
 			buf = g_strdup_printf(
+#ifdef USE_GTKMOZEMBED
+			    "<span style=\"background-color: %s\">"
+#else
 			    "<table bgcolor=\"%s\"><tr><td>"
+#endif
 			    "<font face=\"%s\" size=\"%+d\">",
 			    ((settings.annotate_highlight && e)
 			     ? settings.highlight_fg
@@ -2149,6 +2207,7 @@ DialogChapDisp::Display(SWModule &imodule)
 			swbuf.append(paragraphMark);;
 		}
 
+#ifndef USE_GTKMOZEMBED
 		// same forced line break glitch in highlighted current verse.
 		if ((settings.versehighlight ||
 		     (e && settings.annotate_highlight)) &&	// doing <table> h/l.
@@ -2156,7 +2215,7 @@ DialogChapDisp::Display(SWModule &imodule)
 		    (key->Verse() == curVerse)) {
 			GString *text = g_string_new(NULL);
 
-			g_string_printf(text, "%s", rework);
+			g_string_printf(text, "%s", rework->str);
 			if (!strcmp(text->str + text->len - 6, "<br />")) {
 				text->len -= 6;
 				*(text->str + text->len) = '\0';
@@ -2171,10 +2230,11 @@ DialogChapDisp::Display(SWModule &imodule)
 				     : text->str /* left as-is */);
 			g_string_free(text, TRUE);
 		} else
+#endif /* USE_GTKMOZEMBED */
 			swbuf.append(settings.imageresize
-				     ? AnalyzeForImageSize(rework,
+				     ? AnalyzeForImageSize(rework->str,
 							   GDK_WINDOW(gtkText->window))
-				     : rework /* left as-is */);
+				     : rework->str /* left as-is */);
 
 		if (key->Verse() == curVerse) {
 			swbuf.append("</font>");
@@ -2196,7 +2256,11 @@ DialogChapDisp::Display(SWModule &imodule)
 		// special contrasty highlighting
 		if (((key->Verse() == curVerse) && settings.versehighlight) ||
 		    (e && settings.annotate_highlight))
+#ifdef USE_GTKMOZEMBED
+			swbuf.append("</font></span>");
+#else
 			swbuf.append("</font></td></tr></table>");
+#endif
 	}
 
 	// Reset the Bible location before GTK gets access:
