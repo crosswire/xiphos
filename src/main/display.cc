@@ -1431,6 +1431,7 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 		for (s = strstr(text->str, "*n"); s; s = strstr(s, "*n")) {
 			*(s++) = ' ';
 			*(s++) = ' ';
+			while (isdigit(*s)) *(s++) = ' ';
 		}
 		for (s = strstr(text->str, "*u"); s; s = strstr(s, "*u")) {
 			*(s++) = ' ';
