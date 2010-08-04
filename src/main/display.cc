@@ -1449,6 +1449,7 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 		for (s = strstr(text->str, "*x"); s; s = strstr(s, "*x")) {
 			*(s++) = ' ';
 			*(s++) = ' ';
+			while (isdigit(*s)) *(s++) = ' ';
 		}
 
 		// festival *pronounces* brackets and asterisks -- idiots.
