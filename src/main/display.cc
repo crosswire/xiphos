@@ -119,14 +119,14 @@ int footnote;
 // specification which overlays both on top of one another.
 #define CSS_BLOCK_BOTH \
 " *        { line-height: 3.8em; }" \
-" .word    { position: relative; top: -1.1em; left: 0 }" \
-" .strongs { position: absolute; top:  0.1em; left: 0; z-index: 2; height: 1em }" \
-" .morph   { position: absolute; top:  1.1em; left: 0; z-index: 1 }"
+" .word    { position: relative; top:  0.0em; left: 0 }" \
+" .strongs { position: absolute; top:  0.3em; left: 0; z-index: 2; height: 1em }" \
+" .morph   { position: absolute; top:  1.2em; left: 0; z-index: 1 }"
 #define CSS_BLOCK_ONE \
 " *        { line-height: 2.7em; }" \
-" .word    { position: relative; top: -0.7em; left: 0 }" \
-" .strongs { position: absolute; top:  0.9em; left: 0 }" \
-" .morph   { position: absolute; top:  0.9em; left: 0 }"
+" .word    { position: relative; top:  0.0em; left: 0 }" \
+" .strongs { position: absolute; top:  0.8em; left: 0 }" \
+" .morph   { position: absolute; top:  0.8em; left: 0 }"
 
 #define DOUBLE_SPACE " * { line-height: 2em ! important; }"
 
