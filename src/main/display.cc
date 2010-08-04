@@ -1224,7 +1224,7 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 		buf=g_strdup_printf(
 			"%s<hr><div style=\"text-align: center\"><p><b>%s</b></p></div>",
 			// extra break when excess strongs/morph space.
-			(strongs_or_morph ? "<br>" : ""),
+			(strongs_or_morph ? "<br><br>" : ""),
 			imodule.Description());
 		swbuf.append(buf);
 		g_free(buf);
@@ -1234,7 +1234,7 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 
 		buf=g_strdup_printf(
 			"%s<hr><div style=\"text-align: center\"><b>%s %s</b></div>",
-			(strongs_or_morph ? "<br>" : ""),
+			(strongs_or_morph ? "<br><br>" : ""),
 			_("Chapter"), num);
 		swbuf.append(buf);
 		g_free(buf);
