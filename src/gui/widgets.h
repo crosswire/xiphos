@@ -85,7 +85,6 @@ extern "C" {
                 *html_previewer,	/* to display information (ie strongs) at
 					   bottom of text pane */
                 *html_previewer_text,
-                *html_previewer_sidebar,
 
                 /* book of the Bible combo */
                 *cb_books,

@@ -533,6 +533,7 @@ static void on_search_activate(GtkToggleButton * button,
 	if (button->active) {
 		gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.
 							   notebook_sidebar), 2);
+		gtk_widget_grab_focus(ss.entrySearch);
 	}
 }
 
