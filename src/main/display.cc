@@ -109,7 +109,7 @@ MC marked_cache;
 gchar *marked_cache_modname = NULL, *marked_cache_book = NULL;
 int marked_cache_chapter = -1;
 
-int footnote;
+int footnote, xref;
 
 #define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><STYLE type=\"text/css\"><!-- A { text-decoration:none } %s --></STYLE></head>"
 
@@ -788,6 +788,12 @@ CleanupContent(GString *text,
 		text = g_string_insert(text, s-(text->str)+2, value);
 		++s;
 	}
+	s = text->str;
+	while ((s = strstr(s, "*x"))) {
+		g_snprintf(value, 5, "%d", ++xref);
+		text = g_string_insert(text, s-(text->str)+2, value);
+		++s;
+	}
 	return text;
 }
 
@@ -854,7 +860,7 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule)
 	gchar *buf;
 	char *ModuleName = imodule.Name();
 	GString *rework;			// for image size analysis rework.
-	footnote = 0;
+	footnote = xref = 0;
 
 	// we come into this routine with swbuf init'd with
 	// boilerplate html startup, plus ops and mf ready.
@@ -934,7 +940,7 @@ GTKEntryDisp::Display(SWModule &imodule)
 	gchar *buf;
 	mf = get_font(imodule.Name());
 	swbuf = "";
-	footnote = 0;
+	footnote = xref = 0;
 
 	ops = main_new_globals(imodule.Name(),0);
 
@@ -1624,7 +1630,7 @@ GTKChapDisp::Display(SWModule &imodule)
 		paragraphMark = "";
 
 	swbuf = "";
-	footnote = 0;
+	footnote = xref = 0;
 
 	buf=g_strdup_printf(HTML_START
 			    "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
@@ -1864,7 +1870,7 @@ DialogEntryDisp::DisplayByChapter(SWModule &imodule)
 	gchar *buf;
 	char *ModuleName = imodule.Name();
 	GString *rework;			// for image size analysis rework.
-	footnote = 0;
+	footnote = xref = 0;
 
 	// we come into this routine with swbuf init'd with
 	// boilerplate html startup, plus ops and mf ready.
@@ -1938,7 +1944,7 @@ DialogEntryDisp::Display(SWModule &imodule)
 	ops = main_new_globals(imodule.Name(),1);
 	main_dialog_set_global_options((BackEnd*)be, ops);
 	GString *rework;			// for image size analysis rework.
-	footnote = 0;
+	footnote = xref = 0;
 
 	(const char *)imodule;	// snap to entry
 	//main_set_global_options(ops);
@@ -2077,7 +2083,7 @@ DialogChapDisp::Display(SWModule &imodule)
 	main_dialog_set_global_options((BackEnd*)be, ops);
 
 	swbuf = "";
-	footnote = 0;
+	footnote = xref = 0;
 	buf = g_strdup_printf(HTML_START
 			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
 			      "<font face=\"%s\" size=\"%+d\">",
