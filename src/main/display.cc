@@ -780,19 +780,22 @@ CleanupContent(GString *text,
 		main_save_module_options(name, "Respect Font Faces", 1, ops->dialog);
 	}
 
+	gint pos;
 	gchar value[6];
 	gchar *s = text->str;
 
 	while ((s = strstr(s, "*n"))) {
 		g_snprintf(value, 5, "%d", ++footnote);
-		text = g_string_insert(text, s-(text->str)+2, value);
-		++s;
+		pos = s-(text->str)+2;
+		text = g_string_insert(text, pos, value);
+		s = text->str + pos + 1;
 	}
 	s = text->str;
 	while ((s = strstr(s, "*x"))) {
 		g_snprintf(value, 5, "%d", ++xref);
-		text = g_string_insert(text, s-(text->str)+2, value);
-		++s;
+		pos = s-(text->str)+2;
+		text = g_string_insert(text, pos, value);
+		s = text->str + pos + 1;
 	}
 	return text;
 }
