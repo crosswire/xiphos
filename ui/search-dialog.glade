@@ -668,6 +668,7 @@
 					  <property name="active">False</property>
 					  <property name="inconsistent">False</property>
 					  <property name="draw_indicator">True</property>
+					  <property name="group">radiobutton16</property>
 					  <accessibility>
 					    <atkproperty name="AtkObject::accessible_name" translatable="yes">Multi word radiobutton</atkproperty>
 					  </accessibility>
@@ -693,7 +694,6 @@ See Module Manager's maintenance functions</property>
 					  <property name="active">False</property>
 					  <property name="inconsistent">False</property>
 					  <property name="draw_indicator">True</property>
-					  <property name="group">radiobutton9</property>
 					  <accessibility>
 					    <atkproperty name="AtkObject::accessible_name" translatable="yes">Optimized (&quot;Lucene&quot;) radiobutton</atkproperty>
 					  </accessibility>
@@ -716,7 +716,7 @@ See Module Manager's maintenance functions</property>
 					  <property name="active">False</property>
 					  <property name="inconsistent">False</property>
 					  <property name="draw_indicator">True</property>
-					  <property name="group">radiobutton9</property>
+					  <property name="group">radiobutton16</property>
 					  <accessibility>
 					    <atkproperty name="AtkObject::accessible_name" translatable="yes">Regular expression radiobutton</atkproperty>
 					  </accessibility>
@@ -739,7 +739,7 @@ See Module Manager's maintenance functions</property>
 					  <property name="active">False</property>
 					  <property name="inconsistent">False</property>
 					  <property name="draw_indicator">True</property>
-					  <property name="group">radiobutton9</property>
+					  <property name="group">radiobutton16</property>
 					  <accessibility>
 					    <atkproperty name="AtkObject::accessible_name" translatable="yes">Exact phrase radiobutton</atkproperty>
 					  </accessibility>
@@ -763,7 +763,7 @@ See Module Manager's maintenance functions</property>
 					  <property name="active">False</property>
 					  <property name="inconsistent">False</property>
 					  <property name="draw_indicator">True</property>
-					  <property name="group">radiobutton9</property>
+					  <property name="group">radiobutton16</property>
 					  <accessibility>
 					    <atkproperty name="AtkObject::accessible_name" translatable="yes">Attributes radiobutton</atkproperty>
 					  </accessibility>
