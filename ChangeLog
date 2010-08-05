@@ -1,3 +1,9 @@
+2010-08-04  karl <charcoal@users.sf.net>
+
+	* fix 2 heinous "interrupted search" bugs in adv.search.
+	* reformat an ugly multi-?: conditional for readability.
+	* set optimized/lucene search as default.
+
 2010-08-03  karl <charcoal@users.sf.net>
 
 	* add counting of footnote *n markers.

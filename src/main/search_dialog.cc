@@ -1294,10 +1294,10 @@ char *main_get_search_rendered_text(char *module_name, char *key)
 static
 void _clear_find_lists(void)
 {
-	GList *tmp = NULL;
-	gchar *tmp_buf = NULL;
+	GList *tmp, *base;
+	gchar *tmp_buf;
 
-	list_of_finds = g_list_first(list_of_finds);
+	base = list_of_finds = g_list_first(list_of_finds);
 	while (list_of_finds) {
 		tmp = (GList*) list_of_finds->data;
 		while (tmp) {
@@ -1306,10 +1306,12 @@ void _clear_find_lists(void)
 			if (tmp_buf) g_free(tmp_buf);
 			tmp = g_list_next(tmp);
 		}
+		if (list_of_finds->data)
+			g_list_free((GList*)list_of_finds->data);
 		list_of_finds = g_list_next(list_of_finds);
 	}
-	if (list_of_finds)
-		g_list_free(list_of_finds);
+	if (base)
+		g_list_free(base);
 	list_of_finds = NULL;
 }
 
@@ -1386,10 +1388,15 @@ void main_do_dialog_search(void)
 
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(search1.notebook), 1);
 	search_type =
-	    GTK_TOGGLE_BUTTON(search1.rb_regexp)->active ? 0 :
-	    GTK_TOGGLE_BUTTON(search1.rb_exact_phrase)->active ? -1 :
-	    GTK_TOGGLE_BUTTON(search1.rb_words)->active ? -2 :
-	    GTK_TOGGLE_BUTTON(search1.rb_optimized)->active ? -4 : -3;
+	    (GTK_TOGGLE_BUTTON(search1.rb_regexp)->active
+	     ? 0
+	     : (GTK_TOGGLE_BUTTON(search1.rb_exact_phrase)->active
+		? -1
+		: (GTK_TOGGLE_BUTTON(search1.rb_words)->active
+		   ? -2
+		   : (GTK_TOGGLE_BUTTON(search1.rb_optimized)->active
+		      ? -4
+		      : -3 /* fallthrough to attribute */ ))));
 	GS_message(("search_type = %d", search_type));
 
 	search_params =
@@ -1629,7 +1636,7 @@ void main_dialog_search_percent_update(char percent, void *userData)
 	if (terminate_search) {
 		backendSearch->terminate_search();
 		// this is WAY WRONG but at least it cleans up the dying window. */
-		_clear_find_lists();
+		// _clear_find_lists();  why would i have ever done this here?  oy.
 		is_running = FALSE;
 	} else {
 		/* update search dialog progress */
