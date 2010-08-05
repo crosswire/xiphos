@@ -1679,6 +1679,17 @@ GTKChapDisp::Display(SWModule &imodule)
 		    [key->Verse()];
 
 		// use the module cache rather than re-accessing Sword.
+		if (cache_flags & ModuleCache::Headings) {
+			if (!cVerse.HeaderIsValid())
+				CacheHeader(cVerse, imodule, ops, be);
+
+			swbuf.append(settings.imageresize
+				     ? AnalyzeForImageSize(cVerse.GetHeader(),
+							   GDK_WINDOW(gtkText->window))
+				     : cVerse.GetHeader() /* left as-is */);
+		} else
+			cVerse.InvalidateHeader();
+
 		if (!cVerse.CacheIsValid(cache_flags)) {
 			rework = g_string_new(strongs_or_morph
 					      ? block_render(imodule.RenderText())
@@ -1687,17 +1698,6 @@ GTKChapDisp::Display(SWModule &imodule)
 			cVerse.SetText(rework->str, cache_flags);
 		} else
 			rework = g_string_new(cVerse.GetText());
-
-		if (!cVerse.HeaderIsValid())
-			CacheHeader(cVerse, imodule, ops, be);
-
-		if (cache_flags & ModuleCache::Headings)
-			swbuf.append(settings.imageresize
-				     ? AnalyzeForImageSize(cVerse.GetHeader(),
-							   GDK_WINDOW(gtkText->window))
-				     : cVerse.GetHeader() /* left as-is */);
-		else
-			cVerse.InvalidateHeader();
 
 		// special contrasty highlighting
 		if (((e = marked_cache_check(key->Verse())) &&
