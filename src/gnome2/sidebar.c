@@ -1304,7 +1304,7 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	GtkWidget *title_label = NULL;
 #ifdef USE_GTKMOZEMBED
 	GtkWidget *frame;
-	GtkWidget *eventbox;
+	//GtkWidget *eventbox;
 #else
 	GtkWidget *scrolledwindow;
 #endif
@@ -1337,12 +1337,12 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 			   	0);
 
 
-	eventbox = gtk_event_box_new();
-	gtk_widget_show(eventbox);
-	gtk_container_add(GTK_CONTAINER(frame), eventbox);
-	
-	sidebar.html_viewer_widget = GTK_WIDGET(wk_html_new());//embed_new(VIEWER_TYPE);
-	gtk_container_add(GTK_CONTAINER(eventbox), sidebar.html_viewer_widget);
+	sidebar.html_viewer_eventbox = gtk_event_box_new();
+	gtk_widget_show(sidebar.html_viewer_eventbox);
+	gtk_container_add(GTK_CONTAINER(frame), sidebar.html_viewer_eventbox);
+
+	sidebar.html_viewer_widget = GTK_WIDGET(wk_html_new());
+	gtk_container_add(GTK_CONTAINER(sidebar.html_viewer_eventbox), sidebar.html_viewer_widget);
 #else
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
