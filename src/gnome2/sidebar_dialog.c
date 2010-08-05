@@ -33,10 +33,19 @@
 #include "gui/xiphos.h"
 #include "gui/widgets.h"
 
+#include "main/previewer.h"
 #include "main/settings.h"
 #include "main/sword.h"
 
 #include "gui/debug_glib_null.h"
+
+#ifdef USE_GTKMOZEMBED
+#ifdef WIN32
+#include "geckowin/gecko-html.h"
+#else
+#include "gecko/gecko-html.h"
+#endif
+#endif
 
 static GtkWidget* create_sidebar_dialog(void);
 static GtkWidget * vbox_dock;
