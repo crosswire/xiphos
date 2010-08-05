@@ -34,6 +34,7 @@
 #include "gui/widgets.h"
 
 #include "main/settings.h"
+#include "main/sword.h"
 
 #include "gui/debug_glib_null.h"
 
@@ -70,8 +71,17 @@ void gui_attach_detach_sidebar(void)
 		gtk_paned_set_position(GTK_PANED(widgets.epaned), 0);
 		/*gtk_paned_set_position(GTK_PANED(widgets.hpaned),
 				       biblepanesize);*/
+		
+		/* ugly fix until someone can make mozembed work with 'gtk_widget_reparent()' */
+#ifdef USE_GTKMOZEMBED
+		gtk_widget_destroy(sidebar.html_viewer_widget);
+		sidebar.html_viewer_widget = GTK_WIDGET(gecko_html_new(NULL, FALSE, SB_VIEWER_TYPE));
+		gtk_container_add(GTK_CONTAINER(sidebar.html_viewer_eventbox), sidebar.html_viewer_widget);
+#endif
+		/* */
+		
 		gtk_widget_show_all(widgets.dock_sb);
-		//gtk_widget_show();
+		gtk_widget_show(sidebar.html_viewer_widget);
 
 	} else {
 		settings.docked = TRUE;
@@ -83,8 +93,20 @@ void gui_attach_detach_sidebar(void)
 				       biblepanesize);
 		gtk_widget_reparent(widgets.shortcutbar,
 				    widgets.epaned);
+		
+		/* ugly fix until someone can make mozembed work with 'gtk_widget_reparent()' */
+#ifdef USE_GTKMOZEMBED
+		gtk_widget_destroy(sidebar.html_viewer_widget);
+		sidebar.html_viewer_widget = GTK_WIDGET(gecko_html_new(NULL, FALSE, SB_VIEWER_TYPE));
+		gtk_container_add(GTK_CONTAINER(sidebar.html_viewer_eventbox), sidebar.html_viewer_widget);
+#endif
+		gtk_widget_show(sidebar.html_viewer_widget);
+		/*  */
+		
 		gtk_widget_destroy(widgets.dock_sb);
 	}
+	main_set_previewer_widget(TRUE);
+	main_init_previewer();
 }
 
 /******************************************************************************

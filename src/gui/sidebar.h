@@ -36,12 +36,13 @@ struct _sidebar {
 	GtkWidget *menu_modules;
 	GtkWidget *menu_prayerlist;
 	GtkWidget *menu_prayerlist_mod;
-	GtkWidget *results_list,
-		*notebook,
-		*tbtn_view_main,
-		*btn_save,
-		*htmlshow,
-		*html_widget;
+	GtkWidget *results_list;
+	GtkWidget *notebook;
+	GtkWidget *tbtn_view_main;
+	GtkWidget *btn_save;
+	GtkWidget *htmlshow;
+	GtkWidget *html_widget;
+	GtkWidget *html_viewer_eventbox;
 	GtkWidget *html_viewer_widget;
 	GtkWidget *optionmenu1;
 	GtkWidget *menu_item_save_search;
