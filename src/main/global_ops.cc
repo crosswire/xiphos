@@ -164,8 +164,9 @@ void main_dialog_set_global_options(gpointer backend,
 				 ops->hebrewpoints);
 	_set_dialog_global_option(b, "Hebrew Cantillation",
 				 ops->hebrewcant);
-	_set_dialog_global_option(b, "Headings",
-				 ops->headings);
+	// always turn on headings in the engine (and later cache them).
+	// whether we display them or not is another matter (display.cc).
+	_set_dialog_global_option(b, "Headings", 1);
 	_set_dialog_global_option(b, "Words of Christ in Red",
 				 ops->words_in_red);
 
@@ -219,8 +220,9 @@ void main_set_global_options(GLOBAL_OPS * ops)
 			  ops->hebrewpoints);
 	_set_global_option(ops->module_type, "Hebrew Cantillation",
 			  ops->hebrewcant);
-	_set_global_option(ops->module_type, "Headings",
-			  ops->headings);
+	// always turn on headings in the engine (and later cache them).
+	// whether we display them or not is another matter (display.cc).
+	_set_global_option(ops->module_type, "Headings", 1);
 	_set_global_option(ops->module_type, "Words of Christ in Red",
 			  ops->words_in_red);
 
