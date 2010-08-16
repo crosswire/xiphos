@@ -365,7 +365,7 @@ static gint show_strongs(const gchar * stype, const gchar * svalue,
 
 	}*/
 
-	if (!strcmp(settings.MainWindowModule,"NASB")) {
+	if (!strncmp(settings.MainWindowModule, "NASB", 4)) {
 		if (!strcmp(stype,"Greek"))
 			modbuf = "NASGreek";
 		else
