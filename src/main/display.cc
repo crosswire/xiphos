@@ -62,18 +62,6 @@
 # ifdef PACKAGE_VERSION
 #  undef PACKAGE_VERSION
 # endif
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "gecko/gecko-html.h"
-#endif /* WIN32 */
-#else
-#ifdef __cplusplus
-extern "C" {
-#include <gtkhtml/gtkhtml.h>
-#include <gtkhtml/htmltypes.h>
-}
-#endif /* __cplusplus */
 #endif /* USE_GTKMOZEMBED */
 
 #include "main/display.hh"
