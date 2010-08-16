@@ -64,6 +64,12 @@ void on_colorbutton2_color_set(GtkColorButton * colorbutton, gpointer user_data)
 void on_colorbutton3_color_set(GtkColorButton * colorbutton, gpointer user_data);
 void on_colorbutton4_color_set(GtkColorButton * colorbutton, gpointer user_data);
 void on_colorbutton5_color_set(GtkColorButton * colorbutton, gpointer user_data);
+void on_colorbutton6_color_set(GtkColorButton * colorbutton, gpointer user_data);
+void on_colorbutton7_color_set(GtkColorButton * colorbutton, gpointer user_data);
+void setup_color_pickers(void);
+void apply_color_settings(void);
+void invert_colors(char **color1, char *label1, char **color2, char *label2);
+void on_invert(GtkWidget * button, gchar * user_data);
 
 void on_dialog_prefs_response(GtkDialog * dialog, gint response_id, gpointer user_data);
 
@@ -71,8 +77,6 @@ void gui_setup_preferences_dialog(void);
 void setup_locale_combobox(void);
 void setup_font_prefs_combobox(void);
 
-void on_colorbutton6_color_set(GtkColorButton * colorbutton, gpointer user_data);
-void on_colorbutton7_color_set(GtkColorButton * colorbutton, gpointer user_data);
 void on_checkbutton10_toggled(GtkToggleButton * togglebutton, gpointer user_data);
 void on_checkbutton11_toggled(GtkToggleButton * togglebutton, gpointer user_data);
 void on_checkbutton12_toggled(GtkToggleButton * togglebutton, gpointer user_data);

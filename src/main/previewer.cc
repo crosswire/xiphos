@@ -29,14 +29,6 @@
 #include <stringmgr.h>
 #include <localemgr.h>
 
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "gecko/gecko-html.h"
-#endif
-#endif
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -58,8 +50,7 @@ extern "C" {
 
 #include "gui/debug_glib_null.h"
 
-//#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
-#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><STYLE type=\"text/css\"><!-- A { text-decoration:none } --></STYLE></head>"
+#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><style type=\"text/css\"><!-- A { text-decoration:none } --></style></head>"
 
 using namespace std;
 
@@ -98,49 +89,18 @@ GtkWidget *main_get_previewer_widget(void)
 
 void main_init_previewer(void)
 {
-	GString *tmp_str = g_string_new(NULL);
-	GString *str;
-	gchar *buf;
+	GString *str = g_string_new(NULL);
+	gchar *buf = _("Previewer");
 
-#ifdef USE_GTKMOZEMBED
-	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(previewer_html_widget)))
-		return;
-	GeckoHtml *html = GECKO_HTML(previewer_html_widget);
-	gecko_html_open_stream(html, "text/html");
-#else
-	/* setup gtkhtml widget */
-	GtkHTML *html = GTK_HTML(previewer_html_widget);
-	gboolean was_editable = gtk_html_get_editable(html);
-
-	if (was_editable)
-		gtk_html_set_editable(html, FALSE);
-#endif
-	g_string_printf(tmp_str,
+	g_string_printf(str,
 			HTML_START
-			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
+			"<font color=\"grey\" size=\"-1\"><b>%s</b></font><hr></body></html>",
 			settings.bible_bg_color, settings.bible_text_color,
-			settings.link_color);
-
-	str = g_string_new(tmp_str->str);
-	buf = _("Previewer");
-	g_string_printf(tmp_str,
-			"<b>%s</b><hr>", buf);
-	str = g_string_append(str, tmp_str->str);
-
-	g_string_printf(tmp_str, " %s", "</font></body></html>");
-	str = g_string_append(str, tmp_str->str);
-
-#ifdef USE_GTKMOZEMBED
-	if (str->len)
-		gecko_html_write(html, str->str, str->len);
-	gecko_html_close(html);
-#else
-	if (str->len)
-		gtk_html_load_from_string(html, str->str, str->len);
-	gtk_html_set_editable(html, was_editable);
-#endif
+			settings.link_color,
+			buf);
+	HtmlOutput(str->str, previewer_html_widget, NULL, NULL);
 	g_string_free(str, TRUE);
-	g_string_free(tmp_str, TRUE);
 }
 
 
@@ -163,46 +123,10 @@ void main_init_previewer(void)
 void main_clear_viewer(void)
 {
 #ifdef USE_PREVIEWER_AUTOCLEAR
-	GString *tmp_str = g_string_new(NULL);
-	GString *str;
-	gchar *buf;
-
-#ifdef USE_GTKMOZEMBED
-	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(previewer_html_widget)))
+	if (!previewer_html_widget ||
+	    !GTK_WIDGET_REALIZED(GTK_WIDGET(previewer_html_widget)))
 		return;
-	GeckoHtml *html = GECKO_HTML(previewer_html_widget);
-	gecko_html_open_stream(html, "text/html");
-#else
-	/* setup gtkhtml widget */
-	GtkHTML *html = GTK_HTML(previewer_html_widget);
-	gboolean was_editable = gtk_html_get_editable(html);
-
-	if (was_editable)
-		gtk_html_set_editable(html, FALSE);
-#endif
-	g_string_printf(tmp_str,
-			HTML_START
-			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
-			"",
-			settings.bible_bg_color, settings.bible_text_color,
-			settings.link_color);
-
-	str = g_string_new(tmp_str->str);
-	g_string_printf(tmp_str,
-			"<b>%s</b><hr></body></html>", _("Previewer"));
-	str = g_string_append(str, tmp_str->str);
-
-#ifdef USE_GTKMOZEMBED
-	if (str->len)
-		gecko_html_write(html, str->str, str->len);
-	gecko_html_close(html);
-#else
-	if (str->len)
-		gtk_html_load_from_string(html, str->str, str->len);
-	gtk_html_set_editable(html, was_editable);
-#endif
-	g_string_free(str, TRUE);
-	g_string_free(tmp_str, TRUE);
+	main_init_previewer();
 #endif /* USE_PREVIEWER_AUTOCLEAR */
 }
 
@@ -224,26 +148,17 @@ void main_clear_viewer(void)
  *   void
  */
 
-void main_information_viewer(const gchar * mod_name, const gchar * text, const gchar * key,
-			     const gchar * action, const gchar * type,
-			     const gchar * morph_text, const gchar * morph)
+void main_information_viewer(const gchar * mod_name,
+			     const gchar * text,
+			     const gchar * key,
+			     const gchar * action,
+			     const gchar * type,
+			     const gchar * morph_text,
+			     const gchar * morph)
 {
 	GString *tmp_str = g_string_new(NULL);
 	GString *str;
 	MOD_FONT *mf = get_font((gchar*)mod_name);
-#ifdef USE_GTKMOZEMBED
-	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(previewer_html_widget)))
-		return;
-	GeckoHtml *html = GECKO_HTML(previewer_html_widget);
-	gecko_html_open_stream(html, "text/html");
-#else
-	GtkHTML *html = GTK_HTML(previewer_html_widget);
-	PangoContext* pc = gtk_widget_create_pango_context(GTK_WIDGET(html));
-	PangoFontDescription *desc = pango_context_get_font_description(pc);
-	pango_font_description_set_family(
-	    desc, ((mf->old_font) ? mf->old_font : "Serif"));
-	gtk_widget_modify_font(GTK_WIDGET(html), desc);
-#endif
 
 	g_string_printf(tmp_str,
 			HTML_START
@@ -267,7 +182,7 @@ void main_information_viewer(const gchar * mod_name, const gchar * text, const g
 		}
 		else if (*type == 'u') {
 			g_string_printf(tmp_str,
-					"<font color=\"grey\">%s: %s</font><hr>",
+					"<font color=\"grey\">%s:<br/>%s</font><hr>",
 					_("User Annotation"), key);
 			str = g_string_append(str, tmp_str->str);
 		}
@@ -314,23 +229,7 @@ void main_information_viewer(const gchar * mod_name, const gchar * text, const g
 
 	str = g_string_append(str, "</font></body></html>");
 
-#ifdef USE_GTKMOZEMBED
-	if (str->len) {
-		// manage too-large text blobs (e.g. NaveLinked "GOD, CREATOR").
-		int len = str->len, offset = 0, write_size;
-
-		while (len > 0) {
-			write_size = min(10000, len);
-			gecko_html_write(html, str->str+offset, write_size);
-			offset += write_size;
-			len -= write_size;
-		}
-	}
-	gecko_html_close(html);
-#else
-	if (str->len)
-		gtk_html_load_from_string(html, str->str, str->len);
-#endif
+	HtmlOutput(str->str, previewer_html_widget, mf, NULL);
 	free_font(mf);
 	g_string_free(str, TRUE);
 	g_string_free(tmp_str, TRUE);
@@ -344,11 +243,10 @@ void main_information_viewer(const gchar * mod_name, const gchar * text, const g
  * Synopsis
  *   #include "main/previewer.h"
  *
- *   void mark_search_words(GString *str, gboolean eliminate)
+ *   void mark_search_words(GString *str)
  *
  * Description
- *    purplifies search terms in results.
- *    "eliminate" indicates whether to eliminate internal markup.
+ *    highlights ("purplifies," formerly) search terms in results.
  *
  * Return value
  *   void
@@ -514,25 +412,7 @@ void main_entry_display(gpointer data, gchar * mod_name,
 	GString *str;
 	GString *search_str;
 	MOD_FONT *mf = get_font(mod_name);
-#ifdef USE_GTKMOZEMBED
-	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(html_widget)))
-		return;
-	GeckoHtml *html = GECKO_HTML(html_widget);
-	gecko_html_open_stream(html, "text/html");
-#else
-	gboolean was_editable = FALSE;
-	GtkHTML *html = GTK_HTML(html_widget);
-	PangoContext* pc = gtk_widget_create_pango_context(html_widget);
-	PangoFontDescription *desc = pango_context_get_font_description(pc);
-	pango_font_description_set_family(
-	    desc, ((mf->old_font) ? mf->old_font : "Serif"));
-	gtk_widget_modify_font(html_widget, desc);
 
-	/* setup gtkhtml widget */
-	was_editable = gtk_html_get_editable(html);
-	if (was_editable)
-		gtk_html_set_editable(html, FALSE);
-#endif
 	g_string_printf(tmp_str,
 			HTML_START
 			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
@@ -583,16 +463,7 @@ void main_entry_display(gpointer data, gchar * mod_name,
 	g_string_printf(tmp_str, " %s", "</font></body></html>");
 	str = g_string_append(str, tmp_str->str);
 
-#ifdef USE_GTKMOZEMBED
-	if (str->len)
-		gecko_html_write(html, str->str, str->len);
-	gecko_html_close(html);
-#else
-	if (str->len)
-		gtk_html_load_from_string(html, str->str, str->len);
-	gtk_html_set_editable(html, was_editable);
-#endif
-
+	HtmlOutput(str->str, html_widget, mf, NULL);
 	free_font(mf);
 	g_string_free(str, TRUE);
 	g_string_free(tmp_str, TRUE);

@@ -52,6 +52,7 @@
 #include "main/sword.h"
 #include "main/lists.h"
 #include "main/mod_mgr.h"
+#include "main/previewer.h"
 #include "main/parallel_view.h"
 #include "main/settings.h"
 #include "main/sidebar.h"
@@ -87,6 +88,8 @@ struct _preferences_color_pickers {
 	GtkWidget *href_links;
 	GtkWidget *highlight_fg;
 	GtkWidget *highlight_bg;
+	GtkWidget *invert_normal;
+	GtkWidget *invert_highlight;
 };
 
 typedef struct _preferences_check_buttons CHECK_BUTTONS;
@@ -243,22 +246,79 @@ gdkcolor_to_hex(GdkColor color,
 }
 
 
-static void
+void
 apply_color_settings(void)
 {
-	if (settings.havebible)
-	      main_display_bible(settings.MainWindowModule,
-      			settings.currentverse);
-	if (settings.havecomm)
-		main_display_commentary(settings.CommWindowModule,
-			settings.currentverse);
-	if (settings.havedict)
-		main_display_dictionary(settings.DictWindowModule,
-			settings.dictkey);
-	if (settings.havebible)
+	if (settings.havebible) {
+		main_display_bible(settings.MainWindowModule, settings.currentverse);
 		main_update_parallel_page();
+	}
+	if (settings.havecomm)
+		main_display_commentary(settings.CommWindowModule, settings.currentverse);
+	if (settings.havebook)
+		main_display_book(settings.book_mod, settings.book_key);
+	if (settings.havedict)
+		main_display_dictionary(settings.DictWindowModule, settings.dictkey);
+	main_init_previewer();
 }
 
+
+/******************************************************************************
+ * Name
+ *   invert_colors
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void invert_colors(char **color1, char *label1,
+		        char **color2, char *label2)
+ *
+ * Description
+ *   parameterized color selector inversion.  called from on_invert().
+ *
+ * Return value
+ *   void
+ */
+
+void invert_colors(char **color1, char *label1,
+		   char **color2, char *label2)
+{
+	char *hold = *color1;
+	*color1 = *color2;
+	*color2 = hold;
+
+	xml_set_value("Xiphos", "HTMLcolors", label1, *color1);
+	xml_set_value("Xiphos", "HTMLcolors", label2, *color2);
+
+	setup_color_pickers();
+	apply_color_settings();
+}
+
+/******************************************************************************
+ * Name
+ *   on_invert
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_invert(GtkWidget *button, gchar *user_data)
+ *
+ * Description
+ *   invokes swap of normal or highlight foreground/background
+ *
+ * Return value
+ *   void
+ */
+
+void on_invert(GtkWidget * button, gchar * user_data)
+{
+    if (user_data)
+	invert_colors(&settings.bible_bg_color, "background",
+		      &settings.bible_text_color, "text_fg");
+    else
+	invert_colors(&settings.highlight_fg, "highlight_fg",
+		      &settings.highlight_bg, "highlight_bg");
+}
 
 /******************************************************************************
  * Name
@@ -1688,7 +1748,7 @@ create_model(void)
  *   void
  */
 
-static void
+void
 setup_color_pickers(void)
 {
 	GdkColor color;
@@ -2484,8 +2544,16 @@ create_preferences_dialog(void)
 	color_picker.highlight_bg = glade_xml_get_widget (gxml, "colorbutton7");
 	g_signal_connect(color_picker.highlight_bg, "color_set",
 			 G_CALLBACK(on_colorbutton7_color_set), NULL);
-
 	setup_color_pickers();
+
+	/* color inverters */
+	color_picker.invert_normal = glade_xml_get_widget (gxml, "invert_normal");
+	g_signal_connect((gpointer)color_picker.invert_normal, "clicked",
+			 G_CALLBACK(on_invert), (void*)1);
+	color_picker.invert_highlight = glade_xml_get_widget (gxml, "invert_highlight");
+	g_signal_connect((gpointer)color_picker.invert_highlight, "clicked",
+			 G_CALLBACK(on_invert), (void*)0);
+
 	/* check buttons */
 	check_button.enable_tabbed_browsing = glade_xml_get_widget(gxml, "checkbutton1");
 	check_button.show_bible_pane = glade_xml_get_widget(gxml,"checkbutton2");

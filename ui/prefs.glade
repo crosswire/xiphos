@@ -542,6 +542,90 @@
 			  <property name="fill">True</property>
 			</packing>
 		      </child>
+
+		      <child>
+			<widget class="GtkHBox" id="hbox29">
+			  <property name="visible">True</property>
+			  <property name="homogeneous">True</property>
+			  <property name="spacing">0</property>
+
+			  <child>
+			    <widget class="GtkLabel" id="label42">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">Invert color pairs</property>
+			      <property name="use_underline">False</property>
+			      <property name="use_markup">False</property>
+			      <property name="justify">GTK_JUSTIFY_LEFT</property>
+			      <property name="wrap">False</property>
+			      <property name="selectable">False</property>
+			      <property name="xalign">0.0900000035763</property>
+			      <property name="yalign">0.5</property>
+			      <property name="xpad">0</property>
+			      <property name="ypad">0</property>
+			      <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			      <property name="width_chars">-1</property>
+			      <property name="single_line_mode">False</property>
+			      <property name="angle">0</property>
+			    </widget>
+			    <packing>
+			      <property name="padding">0</property>
+			      <property name="expand">True</property>
+			      <property name="fill">True</property>
+			    </packing>
+			  </child>
+
+			  <child>
+			    <widget class="GtkHBox" id="hbox29a">
+			      <property name="visible">True</property>
+			      <property name="homogeneous">True</property>
+			      <property name="spacing">0</property>
+
+			      <child>
+				<widget class="GtkButton" id="invert_normal">
+				  <property name="visible">True</property>
+				  <property name="can_default">True</property>
+				  <property name="can_focus">True</property>
+				  <property name="label" translatable="yes">Normal Text</property>
+				  <property name="use_stock">False</property>
+				  <property name="relief">GTK_RELIEF_NORMAL</property>
+				  <property name="focus_on_click">True</property>
+				  <property name="response_id">-8</property>
+				</widget>
+				<packing>
+				  <property name="padding">0</property>
+				  <property name="expand">True</property>
+				  <property name="fill">True</property>
+				</packing>
+			      </child>
+
+			      <child>
+				<widget class="GtkButton" id="invert_highlight">
+				  <property name="visible">True</property>
+				  <property name="can_default">True</property>
+				  <property name="can_focus">True</property>
+				  <property name="label" translatable="yes">Highlight</property>
+				  <property name="use_stock">False</property>
+				  <property name="relief">GTK_RELIEF_NORMAL</property>
+				  <property name="focus_on_click">True</property>
+				  <property name="response_id">-9</property>
+				</widget>
+				<packing>
+				  <property name="padding">0</property>
+				  <property name="expand">True</property>
+				  <property name="fill">True</property>
+				</packing>
+			      </child>
+
+			    </widget>
+			  </child>
+			</widget>
+			<packing>
+			  <property name="padding">0</property>
+			  <property name="expand">True</property>
+			  <property name="fill">True</property>
+			</packing>
+		      </child>
+
 		    </widget>
 		    <packing>
 		      <property name="padding">0</property>
@@ -622,6 +706,7 @@
 			<widget class="GtkLabel" id="baselabel16">
 			  <property name="visible">True</property>
 			  <property name="label" translatable="yes">Base font size</property>
+			  <property name="tooltip" translatable="yes">All displayed font sizes are relative to this choice</property>
 			  <property name="use_underline">False</property>
 			  <property name="use_markup">False</property>
 			  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -682,6 +767,7 @@
 			<widget class="GtkLabel" id="label16">
 			  <property name="visible">True</property>
 			  <property name="label" translatable="yes">Verse number size</property>
+			  <property name="tooltip" translatable="yes">Commonly -1, to make verse numbers less obtrusive</property>
 			  <property name="use_underline">False</property>
 			  <property name="use_markup">False</property>
 			  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -732,7 +818,7 @@
 		  </child>
 
 		  <child>
-		    <widget class="GtkHBox" id="hbox30">
+		    <widget class="GtkHBox" id="hbox31">
 		      <property name="visible">True</property>
 		      <property name="homogeneous">True</property>
 		      <property name="spacing">0</property>
@@ -741,6 +827,7 @@
 			<widget class="GtkLabel" id="label41">
 			  <property name="visible">True</property>
 			  <property name="label" translatable="yes">Font preferences, per language</property>
+			  <property name="tooltip" translatable="yes">Name and size choice for any module in a given language; still overridden by a specific choice on a particular module</property>
 			  <property name="use_underline">False</property>
 			  <property name="use_markup">True</property>
 			  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -853,6 +940,7 @@
 		      <property name="visible">True</property>
 		      <property name="can_focus">True</property>
 		      <property name="label" translatable="yes">Use tabbed browsing</property>
+		      <property name="tooltip" translatable="yes">Single selection of Bible+commentary+book+dictionary, or many sets of such selections in a tabbed interface</property>
 		      <property name="use_underline">True</property>
 		      <property name="relief">GTK_RELIEF_NORMAL</property>
 		      <property name="focus_on_click">True</property>
@@ -1085,7 +1173,7 @@
 		      <property name="spacing">2</property>
 
 		      <child>
-			<widget class="GtkHBox" id="hbox29">
+			<widget class="GtkHBox" id="hbox30">
 			  <property name="visible">True</property>
 			  <property name="homogeneous">True</property>
 			  <property name="spacing">0</property>
@@ -1094,6 +1182,7 @@
 			    <widget class="GtkLabel" id="label40">
 			      <property name="visible">True</property>
 			      <property name="label" translatable="yes">Special Locale (requires restart)</property>
+			      <property name="tooltip" translatable="yes">Select a particular language for interface display, other than your usual setting</property>
 			      <property name="use_underline">False</property>
 			      <property name="use_markup">True</property>
 			      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -1143,6 +1232,7 @@
 			  <property name="visible">True</property>
 			  <property name="can_focus">True</property>
 			  <property name="label" translatable="yes">Use default Dictionary</property>
+			  <property name="tooltip" translatable="yes">Make double-click of a word always use default dictionary instead of dictionary currently displayed</property>
 			  <property name="use_underline">True</property>
 			  <property name="relief">GTK_RELIEF_NORMAL</property>
 			  <property name="focus_on_click">True</property>
@@ -1165,6 +1255,7 @@
 			  <property name="visible">True</property>
 			  <property name="can_focus">True</property>
 			  <property name="label" translatable="yes">Show Daily Devotion at start up</property>
+			  <property name="tooltip" translatable="yes">If you have set a preferred daily devotion module, its entry for today will be shown at startup.</property>
 			  <property name="use_underline">True</property>
 			  <property name="relief">GTK_RELIEF_NORMAL</property>
 			  <property name="focus_on_click">True</property>
@@ -1201,9 +1292,9 @@
 		      <child>
 			<widget class="GtkCheckButton" id="checkbutton_scroll">
 			  <property name="visible">True</property>
-			  <property name="tooltip" translatable="yes">Use Bible Text scroll bar to scroll to previous or next chapter</property>
 			  <property name="can_focus">True</property>
 			  <property name="label" translatable="yes">Scroll to Previous/Next Chapter</property>
+			  <property name="tooltip" translatable="yes">Use Bible Text scroll bar to scroll to previous or next chapter</property>
 			  <property name="use_underline">True</property>
 			  <property name="relief">GTK_RELIEF_NORMAL</property>
 			  <property name="focus_on_click">True</property>
@@ -1224,9 +1315,9 @@
 		      <child>
 			<widget class="GtkCheckButton" id="checkbutton_imageresize">
 			  <property name="visible">True</property>
-			  <property name="tooltip" translatable="yes">Automatically resize image content to fit the pane</property>
 			  <property name="can_focus">True</property>
 			  <property name="label" translatable="yes">Resize images</property>
+			  <property name="tooltip" translatable="yes">Automatically resize image content to fit the pane</property>
 			  <property name="use_underline">True</property>
 			  <property name="relief">GTK_RELIEF_NORMAL</property>
 			  <property name="focus_on_click">True</property>
@@ -1247,9 +1338,9 @@
 		      <child>
 			<widget class="GtkCheckButton" id="checkbutton_versehighlight">
 			  <property name="visible">True</property>
-			  <property name="tooltip" translatable="yes">Apply high-contrast highlight to current verse</property>
 			  <property name="can_focus">True</property>
 			  <property name="label" translatable="yes">Highlight current verse</property>
+			  <property name="tooltip" translatable="yes">Apply high-contrast highlight to current verse - see color pickers</property>
 			  <property name="use_underline">True</property>
 			  <property name="relief">GTK_RELIEF_NORMAL</property>
 			  <property name="focus_on_click">True</property>
@@ -1270,9 +1361,9 @@
 		      <child>
 			<widget class="GtkCheckButton" id="checkbutton_annotate_highlight">
 			  <property name="visible">True</property>
-			  <property name="tooltip" translatable="yes">Use inverted highlight on user-annotated verses</property>
 			  <property name="can_focus">True</property>
 			  <property name="label" translatable="yes">Highlight user annotations</property>
+			  <property name="tooltip" translatable="yes">Use inverted highlight on user-annotated verses</property>
 			  <property name="use_underline">True</property>
 			  <property name="relief">GTK_RELIEF_NORMAL</property>
 			  <property name="focus_on_click">True</property>
@@ -1293,9 +1384,9 @@
 		      <child>
 			<widget class="GtkCheckButton" id="checkbutton_xrefs_in_verse_list">
 			  <property name="visible">True</property>
-			  <property name="tooltip" translatable="yes">Use the verse list for Bible cross-references instead of the previewer</property>
 			  <property name="can_focus">True</property>
 			  <property name="label" translatable="yes">Cross-references in verse list</property>
+			  <property name="tooltip" translatable="yes">Use the verse list for Bible cross-references instead of the previewer</property>
 			  <property name="use_underline">True</property>
 			  <property name="relief">GTK_RELIEF_NORMAL</property>
 			  <property name="focus_on_click">True</property>
@@ -1316,9 +1407,9 @@
 		      <child>
 			<widget class="GtkCheckButton" id="checkbutton_prayerlist">
 			  <property name="visible">True</property>
-			  <property name="tooltip" translatable="yes">Choose to enable Prayer lists </property>
 			  <property name="can_focus">True</property>
 			  <property name="label" translatable="yes">Enable Prayer Lists</property>
+			  <property name="tooltip" translatable="yes">Make journals/prayer lists available</property>
 			  <property name="use_underline">True</property>
 			  <property name="relief">GTK_RELIEF_NORMAL</property>
 			  <property name="focus_on_click">True</property>
@@ -2301,7 +2392,7 @@
 	      <property name="use_stock">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
 	      <property name="focus_on_click">True</property>
-	      <property name="response_id">-7</property>
+	      <property name="response_id">-10</property>
 	    </widget>
 	  </child>
 
@@ -2314,7 +2405,7 @@
 	      <property name="use_stock">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
 	      <property name="focus_on_click">True</property>
-	      <property name="response_id">-10</property>
+	      <property name="response_id">-11</property>
 	    </widget>
 	  </child>
 	</widget>

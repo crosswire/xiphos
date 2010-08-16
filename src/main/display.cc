@@ -828,12 +828,12 @@ CacheHeader(ModuleCache::CacheVerse& cVerse,
 		text = CleanupContent(text, ops, mod.Name());
 
 		cVerse.AppendHeader(text->str);
-		g_string_free(text, TRUE);
 		// g_free((gchar *)preverse2);
 		g_free((gchar *)preverse);
 		++x;
 		sprintf(heading, "%d", x);
 	}
+	g_string_free(text, TRUE);
 }
 
 void
