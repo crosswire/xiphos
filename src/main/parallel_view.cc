@@ -59,7 +59,7 @@ extern "C" {
 
 #include "gui/debug_glib_null.h"
 
-#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><STYLE type=\"text/css\"><!--A { text-decoration:none }--></STYLE></head>"
+#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><style type=\"text/css\"><!--A { text-decoration:none }--></style></head>"
 
 extern GtkWidget *entrycbIntBook;
 extern GtkWidget *sbIntChapter;
@@ -69,10 +69,6 @@ extern GtkWidget *entryIntLookup;
 /******************************************************************************
  * static
  */
-#ifndef USE_GTKMOZEMBED
-static GtkHTMLStreamStatus status1;
-static GtkHTMLStream *htmlstream;
-#endif
 
 BackEnd *backend_p;
 
@@ -606,7 +602,6 @@ void get_heading(SWBuf &text, BackEnd *p, gint modidx)
 	}
 }
 
-#ifdef USE_GTKMOZEMBED
 /******************************************************************************
  * Name
  *   gui_update_parallel_page
@@ -633,10 +628,6 @@ void main_update_parallel_page(void)
 	GString *data;
 	MOD_FONT *mf;
 	SWBuf text;
-
-	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.html_parallel))) return ;
-	GeckoHtml *html = GECKO_HTML(widgets.html_parallel);
-	gecko_html_open_stream(html,"text/html");
 
 	settings.cvparallel = settings.currentverse;
 
@@ -715,133 +706,9 @@ void main_update_parallel_page(void)
 	}
 
 	g_string_append(data, "</table></body></html>");
-	gecko_html_write(html, data->str, -1);
-	gecko_html_close(html);
+	HtmlOutput(data->str, widgets.html_parallel, NULL, NULL);
 	g_string_free(data, TRUE);
 }
-
-#else
-/******************************************************************************
- * Name
- *   gui_update_parallel_page
- *
- * Synopsis
- *   #include "main/parallel_view.h
- *
- *   void gui_update_parallel_page(void)
- *
- * Description
- *
- *
- * Return value
- *   void
- */
-
-void main_update_parallel_page(void)
-{
-	gchar tmpBuf[256], *rowcolor;
-	gchar *utf8str, *mod_name, *buf;
-	gint modidx;
-	gboolean was_editable;
-	gboolean is_rtol = FALSE;
-	MOD_FONT *mf;
-	SWBuf text;
-
-	settings.cvparallel = settings.currentverse;
-
-	/* setup gtkhtml widget */
-	GtkHTML *html = GTK_HTML(widgets.html_parallel);
-	was_editable = gtk_html_get_editable(html);
-	if (was_editable)
-	    gtk_html_set_editable(html, FALSE);
-	htmlstream = gtk_html_begin_content(html, (gchar *)"text/html; charset=utf-8");
-	sprintf(tmpBuf,
-		"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table>",
-		settings.bible_bg_color,
-		settings.bible_text_color, settings.link_color);
-	gtk_html_write(GTK_HTML(html), htmlstream, tmpBuf, strlen(tmpBuf));
-
-	if (settings.parallel_list) {
-		for (modidx = 0;
-		     (mod_name = settings.parallel_list[modidx]);
-		     modidx++) {
-			mf = get_font(mod_name);
-
-			is_rtol = main_is_mod_rtol(mod_name);
-
-			if (modidx % 2 == 1)	/* alternating background color */
-				rowcolor = (gchar *)"#F1F1F1";
-			else
-				rowcolor = settings.bible_bg_color;
-
-			if (modidx == 0) {
-				sprintf(tmpBuf,
-					"<tr><td><i><font color=\"%s\" size=\"%d\">[%s]</font></i></td></tr>",
-					settings.bible_verse_num_color,
-					settings.verse_num_font_size + settings.base_font_size,
-					settings.currentverse);
-				gtk_html_write(GTK_HTML(html), htmlstream, tmpBuf, strlen(tmpBuf));
-			}
-
-			sprintf(tmpBuf,
-				"<tr bgcolor=\"%s\"><td><b><a href=\"passagestudy.jsp?action=showModInfo&value=%s&module=%s\"><font color=\"%s\" size=\"%+d\"> [%s]</font></a></b>",
-				rowcolor,
-				main_get_module_description(mod_name),
-				mod_name,
-				settings.bible_verse_num_color,
-				settings.verse_num_font_size + settings.base_font_size,
-				mod_name);
-			gtk_html_write(GTK_HTML(html), htmlstream, tmpBuf, strlen(tmpBuf));
-
-			if ((strlen(mf->old_font) < 2) ||
-			    !strncmp(mf->old_font, "none", 4))
-				sprintf(tmpBuf, "<font size=\"%s\">",
-					mf->old_font);
-			else
-				sprintf(tmpBuf,
-					"<font face=\"%s\"size=\"%s\">",
-					mf->old_font, mf->old_font_size);
-			free_font(mf);
-			gtk_html_write(GTK_HTML(html), htmlstream, tmpBuf, strlen(tmpBuf));
-
-			if (is_rtol) {
-				buf = (gchar*) "<br><div align=right>";
-				gtk_html_write(GTK_HTML(html), htmlstream,
-					       buf, strlen(buf));
-			}
-
-			backend_p->set_module_key(settings.parallel_list[modidx], settings.cvparallel);
-			text = "";
-			get_heading(text, backend_p, modidx);
-			gtk_html_write(GTK_HTML(html), htmlstream, text.c_str(), strlen(text.c_str()));
-
-			utf8str = backend_p->get_render_text(mod_name, settings.currentverse);
-			if (utf8str) {
-				gtk_html_write(GTK_HTML(html), htmlstream, utf8str, strlen(utf8str));
-				g_free(utf8str);
-			}
-
-			if (is_rtol) {
-				buf = (gchar*) "</div><br>";
-				gtk_html_write(GTK_HTML(html), htmlstream, buf, strlen(buf));
-			}
-
-			sprintf(tmpBuf,
-				"</font><small>[<a href=\"passagestudy.jsp?action=showParallel&"
-				"type=swap&value=%s\">%s</a>]</small></td></tr>",
-				mod_name,_("view context"));
-
-			gtk_html_write(GTK_HTML(html), htmlstream, tmpBuf, strlen(tmpBuf));
-		}
-	}
-
-	buf = (gchar*) "</table></body></html>";
-	gtk_html_write(GTK_HTML(html), htmlstream, buf, strlen(buf));
-	gtk_html_end(GTK_HTML(html), htmlstream, status1);
-	gtk_html_set_editable(html, was_editable);
-}
-
-#endif
 
 /******************************************************************************
  * Name
