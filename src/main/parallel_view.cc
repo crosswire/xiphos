@@ -25,21 +25,6 @@
 
 #include <gtk/gtk.h>
 
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "gecko/gecko-html.h"
-#endif
-#else
-#ifdef __cplusplus
-extern "C" {
-#include <gtkhtml/gtkhtml.h>
-}
-#endif  /* __cplusplus */
-#include "gui/html.h"
-#endif  /* USE_GTKMOZEMBED */
-
 #include "backend/sword_main.hh"
 
 #include "gui/parallel_view.h"
