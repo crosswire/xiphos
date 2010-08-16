@@ -28,23 +28,6 @@
 #include <swmodule.h>
 #include <url.h>
 
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "webkit/wk-html.h"
-#endif
-#else
-#ifdef __cplusplus
-extern "C" {
-#endif
-#include <gtkhtml/gtkhtml.h>
-#include "gui/html.h"
-#ifdef __cplusplus
-}
-#endif
-#endif
-
 #include <string.h>
 
 #include "gui/bibletext_dialog.h"
@@ -202,48 +185,18 @@ void main_dialogs_chapter_heading(DIALOG_DATA * d)
 
 void main_dialogs_clear_viewer(DIALOG_DATA *d)
 {
-	GString *tmp_str = g_string_new(NULL);
-	GString *str;
-	const char *buf;
+	GString *str = g_string_new(NULL);
+	const char *buf = N_("Previewer");
 
-#ifdef USE_GTKMOZEMBED
-	WkHtml *new_browser = WK_HTML(d->previewer);
-#else	
-	gboolean was_editable = FALSE;
+	g_string_printf(str,
+			HTML_START
+			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
+			"<b><font color=\"grey\" size=\"-1\">%s</font></b><hr></body></html>",
+			settings.bible_bg_color, settings.bible_text_color,
+			settings.link_color, buf);
 
-	/* setup gtkhtml widget */
-	GtkHTML *html = GTK_HTML(d->previewer);
-	was_editable = gtk_html_get_editable(html);
-	if (was_editable)
-		gtk_html_set_editable(html, FALSE);
-#endif
-	g_string_printf(tmp_str,
-		HTML_START
-		"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
-		settings.bible_bg_color, settings.bible_text_color,
-		settings.link_color);
-
-	str = g_string_new(tmp_str->str);
-	buf = N_("Previewer");
-	g_string_printf(tmp_str,
-	"<b>%s</b><br><font color=\"grey\">" "<HR></font><br>", buf);
-	str = g_string_append(str, tmp_str->str);
-
-	g_string_printf(tmp_str, " %s", "</font></body></html>");
-	str = g_string_append(str, tmp_str->str);
-
-#ifdef USE_GTKMOZEMBED
-	if (str->len)
-		wk_html_render_data(new_browser, str->str, str->len);
-
-#else
-	if (str->len)
-		gtk_html_load_from_string(html,str->str,str->len);
-	gtk_html_set_editable(html, was_editable);
-#endif
-	//free_font(mf);
+	HtmlOutput(str->str, d->previewer, NULL, NULL);
 	g_string_free(str, TRUE);
-	g_string_free(tmp_str, TRUE);
 }
 
 
@@ -272,11 +225,6 @@ void main_dialogs_information_viewer(DIALOG_DATA * d, gchar * mod_name,
 	GString *tmp_str = g_string_new(NULL);
 	GString *str;
 	MOD_FONT *mf = get_font(mod_name);
-#ifdef USE_GTKMOZEMBED
-	WkHtml *new_browser = WK_HTML(sidebar.html_viewer_widget);
-#else	
-	GtkHTML *html = GTK_HTML(sidebar.html_viewer_widget);
-#endif
 
 	g_string_printf(tmp_str,
 		HTML_START
@@ -346,15 +294,7 @@ void main_dialogs_information_viewer(DIALOG_DATA * d, gchar * mod_name,
 
 	}
 
-#ifdef USE_GTKMOZEMBED
-	if (str->len)
-		wk_html_render_data(new_browser, str->str, str->len);
-	//gtk_html_set_editable(html, was_editable);
-#endif
-/*	if (str->len) {
-		gtk_html_load_from_string(html,str->str,str->len);
-	}
-*/
+	HtmlOutput(str->str, sidebar.html_viewer_widget, NULL, NULL);
 	free_font(mf);
 	g_string_free(str, TRUE);
 	g_string_free(tmp_str, TRUE);
@@ -382,10 +322,14 @@ void main_dialogs_information_viewer(DIALOG_DATA * d, gchar * mod_name,
  *   void
  */
 
-void main_dialog_information_viewer(const gchar * mod_name, const gchar * text,
-									const gchar * key, const gchar * action,
-									const gchar * type, const gchar * morph_text,
-									const gchar * morph, DIALOG_DATA * d)
+void main_dialog_information_viewer(const gchar * mod_name,
+				    const gchar * text,
+				    const gchar * key,
+				    const gchar * action,
+				    const gchar * type,
+				    const gchar * morph_text,
+				    const gchar * morph,
+				    DIALOG_DATA * d)
 {
 	GString *tmp_str = g_string_new(NULL);
 	GString *str;
@@ -394,12 +338,6 @@ void main_dialog_information_viewer(const gchar * mod_name, const gchar * text,
 	if (!d->previewer)
 		return;
 
-#ifdef USE_GTKMOZEMBED
-	WkHtml *html= WK_HTML(d->previewer);
-#else	
-	GtkHTML *html= GTK_HTML(d->previewer);	
-#endif	
-		
 	g_string_printf(tmp_str,
 		HTML_START
 		"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
@@ -462,19 +400,7 @@ void main_dialog_information_viewer(const gchar * mod_name, const gchar * text,
 
 	}
 
-#ifdef USE_GTKMOZEMBED
-
-	if (str->len) {		
-		wk_html_open_stream(html,"text/html");
-		wk_html_write(html, str->str, str->len);
-		wk_html_close(html);
-	}
-#else
-	if (str->len)
-		gtk_html_load_from_string(html,str->str,str->len);
-#endif
-
-
+	HtmlOutput(str->str, d->previewer, NULL, NULL);
 	free_font(mf);
 	g_string_free(str, TRUE);
 	g_string_free(tmp_str, TRUE);
