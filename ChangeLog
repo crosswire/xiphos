@@ -1,3 +1,11 @@
+2010-08-14  karl <charcoal@users.sf.net>
+
+	* be less sensitive about NASB for Heb/Grk lexicon choice ("NASBnew").
+	* fix string free bug in header note caching.
+	* clean up previewer.cc: use of HtmlOutput, restructure, fix comments.
+	* add Preferences color pair inversion, main/highlight text.
+	* more & better tooltips in Preferences.
+
 2010-08-10  karl <charcoal@users.sf.net>
 
 	* keep note/xref count accurate => engine always generates headings.
