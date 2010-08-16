@@ -2313,10 +2313,6 @@ GTKPrintEntryDisp::Display(SWModule &imodule)
 	gint mod_type;
 	MOD_FONT *mf = get_font(imodule.Name());
 
-	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(gtkText))) return 0;
-	GeckoHtml *html = GECKO_HTML(gtkText);
-	gecko_html_open_stream(html,"text/html");
-
 	GLOBAL_OPS * ops = main_new_globals(imodule.Name(),0);
 
 	(const char *)imodule;	// snap to entry
@@ -2357,9 +2353,7 @@ GTKPrintEntryDisp::Display(SWModule &imodule)
 	swbuf.append((const char *)imodule);
 	swbuf.append("</font></body></html>");
 
-	if (swbuf.length())
-		gecko_html_write(html,swbuf.c_str(),swbuf.length());
-	gecko_html_close(html);
+	HtmlOutput((char *)swbuf.c_str(), gtkText, mf, NULL);
 	free_font(mf);
 	g_free(ops);
 	if (keytext)
@@ -2390,10 +2384,6 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 	gboolean newparagraph = FALSE;
 	mf = get_font(imodule.Name());
 
-	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(gtkText))) return 0;
-	GeckoHtml *html = GECKO_HTML(gtkText);
-	gecko_html_open_stream(html,"text/html");
-
 	if (!strcmp(imodule.Name(), "KJV"))
 		paragraphMark = "&para;&nbsp;";
 	else
@@ -2420,14 +2410,7 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 			       ? "rtl"
 			       : "ltr"));
 
-	gecko_html_write(html,swbuf.c_str(),swbuf.length());
-
-	swbuf = "";
 	main_set_global_options(ops);
-
-	gecko_html_write(html,swbuf.c_str(),swbuf.length());
-
-	swbuf = "";
 
 	for (key->Verse(1);
 	     key->Book() == curBook && key->Chapter() == curChapter && !imodule.Error();
@@ -2481,12 +2464,7 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 		}
 
 		g_free(buf);
-
-		gecko_html_write(html,swbuf.c_str(),swbuf.length());
-
-		swbuf = "";
 	}
-	swbuf = "";
 
 	// Reset the Bible location before GTK gets access:
 	// Mouse activity destroys this key, so we must be finished with it.
@@ -2496,14 +2474,7 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 
 	swbuf.append("</div></font></body></html>");
 
-	if (swbuf.length())
-		gecko_html_write(html,swbuf.c_str(),swbuf.length());
-	gecko_html_close(html);
-	if (curVerse > 2) {
-		buf = g_strdup_printf("%d", curVerse - 2);
-		gecko_html_jump_to_anchor (html,buf);
-		g_free(buf);
-	}
+	HtmlOutput((char *)swbuf.c_str(), gtkText, mf, NULL);
 
 	free_font(mf);
 	g_free(ops);
