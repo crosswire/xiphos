@@ -30,6 +30,8 @@
 #include <ctype.h>
 #include <assert.h>
 
+#include <gdk-pixbuf/gdk-pixbuf.h>
+
 #ifndef WIN32
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -1893,6 +1895,154 @@ FestivalSpeak(gchar *text, int length, int tts_socket)
 		return FALSE;
 #endif
 	return TRUE;
+}
+
+#ifndef HAVE_STRCASESTR
+/*
+ * strcasestr() turns out to be nonstandard extension, but we need it.
+ */
+char *
+strcasestr(const char *haystack, const char *needle)
+{
+	char *lower_haystack = g_strdup(haystack);
+	char *lower_needle = g_strdup(needle);
+	char *s;
+
+	for (s = lower_haystack; *s; ++s)
+		if (isupper(*s))
+			*s = tolower(*s);
+	for (s = lower_needle; *s; ++s)
+		if (isupper(*s))
+			*s = tolower(*s);
+
+	s = strstr(lower_haystack, lower_needle);
+	if (s)
+		s = (char *)haystack + (s - lower_haystack);
+
+	g_free(lower_haystack);
+	g_free(lower_needle);
+	return s;
+}
+#endif /* !HAVE_STRCASESTR */
+
+int
+ImageDimensions(const char *path, int *x, int *y)
+{
+
+	if (gdk_pixbuf_get_file_info (path, x, y))
+		return 0;
+	else
+		return -1;
+}
+
+#define	IMGSRC_STRING	"<img src=\""
+#define	IMGSRC_LENGTH	10		// strlen(IMGSRC_STRING)
+const char *strcasestr(const char *haystack, const char *needle);
+
+const char *
+AnalyzeForImageSize(const char *origtext,
+		    GdkWindow *window)
+{
+	static GString *resized;
+	static gint resized_init = FALSE;
+
+	const char *trail;	// "trail" trails behind ...
+	char *path;		// ... the current "path".
+	char *end;		// "end" is the path's end.
+	char buf[32];		// for preparing new width+height spec.
+	gint image_x, image_y, window_x, window_y = -999;
+	int image_retval;
+	gboolean no_warning_yet = TRUE;
+
+	if (!resized_init) {
+		resized = g_string_new("");
+		resized_init = TRUE;
+	}
+
+	// performance tweak:
+	// image content is by no means common. therefore, spend an extra
+	// search call to determine whether any of the rest is needed,
+	// most especially to stop copying large blocks of text w/no images.
+	if ((path = (char *)strcasestr(origtext, IMGSRC_STRING)) == NULL)
+		return origtext;
+
+	for (resized = g_string_assign(resized, ""), trail = origtext
+		 /* and path was initialized just above */ ;
+	     path;
+	     path = (char *)strcasestr(path, IMGSRC_STRING)) {
+
+		if (window_y == -999) {
+			/* we have images, but we don't know bounds yet */
+
+			gdk_drawable_get_size(window, &window_x, &window_y);
+			if ((window_x > 200) || (window_y > 200)) {
+				window_x -= 23;
+				window_y -= 23;
+			} else {
+				window_x = (window_x * 93)/100;
+				window_y = (window_y * 93)/100;
+			}
+		}
+
+		/* add the working segment, with annotation added */
+		/* to keep us from matching IMGSRC_STRING again. */
+		path += IMGSRC_LENGTH;
+                resized = g_string_append_len(resized, trail, path-trail-5);
+                resized = g_string_append(resized, "resized=\"yes\" ");
+                resized = g_string_append_len(resized, path-5, 5);
+
+		// some modules play fast-n-loose with proper file spec.
+		if (strncmp(path, "file://", 7) == 0) {
+			path += 7;
+			resized = g_string_append(resized, "file://");
+		} else if (strncmp(path, "file:", 5) == 0) {
+			path += 5;
+			resized = g_string_append(resized, "file:");
+		} else
+			continue;	// no file spec there -- odd.
+
+		// getting this far means we have a valid img src and file.
+		// find closing '"' to determine pathname end.
+		if ((end = strchr(path, '"')) == 0)
+			continue;
+
+		*end = '\0';
+		resized = g_string_append(resized, path);
+		image_retval = ImageDimensions(path, &image_x, &image_y);
+		*end = '"';
+
+		resized = g_string_append_c(resized, '"');
+		path = end+1;
+		trail = path;
+
+		if (image_retval != 0) {
+			if (no_warning_yet) {
+				gui_generic_warning(
+				    _("An image file's size could not be determined.\n"
+				      "Xiphos cannot resize images to fit window."));
+				// settings.imageresize = 0;
+				no_warning_yet = FALSE;
+			}
+			continue;
+		}
+
+		// knowing image size & window size, adjust to fit.
+		if (image_x > window_x) {
+			float proportion = (float)window_x / (float)image_x;
+			image_x = window_x;
+			image_y = (int)((float)image_y * proportion);
+		}
+		if (image_y > window_y) {
+			float proportion = (float)window_y / (float)image_y;
+			image_y = window_y;
+			image_x = (int)((float)image_x * proportion);
+		}
+		sprintf(buf, " width=\"%d\" height=\"%d\"", image_x, image_y);
+		resized = g_string_append(resized, buf);
+        }
+
+	resized = g_string_append(resized, trail);	// remainder of text appended.
+	return resized->str;
 }
 
 /******   end of file   ******/
