@@ -27,7 +27,16 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <string.h>
+#include <ctype.h>
 #include <assert.h>
+
+#ifndef WIN32
+#include <sys/socket.h>
+#include <netinet/in.h>
+#else
+#include <winsock2.h>
+#endif /* !WIN32 */
+#include <errno.h>
 
 #include <gtk/gtk.h>
 
@@ -1589,6 +1598,301 @@ void xiphos_create_archive(gchar* conf_file, gchar* datapath, gchar *zip,
 	g_strfreev(path);
 	g_free(moddirname);
 
+}
+
+//
+// Read aloud some text, i.e. the current verse.
+// Text is cleaned of '"', <tokens>, "&symbols;", and *n/*x strings,
+// then scribbled out the local static socket with (SayText "...").
+// Non-zero verse param is prefixed onto supplied text.
+//
+
+#ifndef INVALID_SOCKET
+# define INVALID_SOCKET -1
+#endif
+
+void
+ReadAloud(unsigned int verse, const char *suppliedtext)
+{
+	static int tts_socket = INVALID_SOCKET;	// no initial connection.
+	static int use_counter = -2;	// to shortcircuit early uses.
+
+	if (settings.readaloud ||       // read anything, or
+	    (verse == 0)) {		// read what's handed us.
+		gchar *s, *t;
+
+		// setup for communication.
+		if (tts_socket < 0) {
+			struct sockaddr_in service;
+
+			if ((tts_socket = socket (AF_INET, SOCK_STREAM, 0)) < 0) {
+				char msg[256];
+				sprintf(msg, "ReadAloud disabled:\nsocket failed, %s",
+					strerror(errno));
+				settings.readaloud = 0;
+				gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+							       (widgets.readaloud_item),
+							       settings.readaloud);
+				gui_generic_warning(msg);
+				return;
+			}
+
+			// festival's port (1314) on localhost (127.0.0.1).
+			memset(&service, 0, sizeof service);
+			service.sin_family = AF_INET;
+			service.sin_port = htons(1314);
+			service.sin_addr.s_addr = htonl(0x7f000001);
+			if (connect(tts_socket, (const struct sockaddr *)&service,
+				    sizeof(service)) != 0) {
+				StartFestival();
+#ifdef WIN32
+				Sleep(2); // give festival a moment to init.
+#else
+				sleep(2); // give festival a moment to init.
+#endif
+				if (connect(tts_socket, (const struct sockaddr *)&service,
+					    sizeof(service)) != 0) {
+					// it still didn't work -- missing.
+					char msg[256];
+					sprintf(msg, "%s\n%s, %s",
+						"TTS \"festival\" not started -- perhaps not installed",
+						"TTS connect failed", strerror(errno));
+					StopFestival(&tts_socket);
+					settings.readaloud = 0;
+					gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+								       (widgets.readaloud_item),
+								       settings.readaloud);
+					gui_generic_warning(msg);
+					return;
+				}
+			}
+		}
+
+		// avoid speaking the first *2* times.
+		// (2 Display() calls are made during startup.)
+		// though speaking may be intended, startup speech is annoying.
+		if (verse && (++use_counter < 1))
+			return;
+
+		GString *text = g_string_new(NULL);
+		if (verse != 0)
+			g_string_printf(text, "%d. ...  %s", verse, suppliedtext);
+			// use of ". ..." is to induce proper pauses.
+		else
+			g_string_printf(text, "%s", suppliedtext);
+		GS_message(("ReadAloud: dirty: %s\n", text->str));
+
+		// clean: no <span> surrounding strongs/morph.
+		// i wish there was a regexp form of strstr().
+		for (s = strstr(text->str, "<span class=\"strongs\">");
+		     s;
+		     s = strstr(s, "<span class=\"strongs\">")) {
+			if ((t = strstr(s, "</span>"))) {
+				t += 6;
+				while (s <= t)
+					*(s++) = ' ';
+			} else {
+				GS_message(("ReadAloud: Unmatched <span strong></span> in %s\n", s));
+				goto out;
+			}
+		}
+		for (s = strstr(text->str, "<span class=\"morph\">");
+		     s;
+		     s = strstr(s, "<span class=\"morph\">")) {
+			if ((t = strstr(s, "</span>"))) {
+				t += 6;
+				while (s <= t)
+					*(s++) = ' ';
+			} else {
+				GS_message(("ReadAloud: Unmatched <span morph></span> in %s\n", s));
+				goto out;
+			}
+		}
+
+		// clean: no quotes (conflict w/festival syntax).
+		for (s = strchr(text->str, '"'); s; s = strchr(s, '"'))
+			*s = ' ';
+
+		// clean: no <tokens>.
+		for (s = strchr(text->str, '<'); s; s = strchr(s, '<')) {
+			if ((t = strchr(s, '>'))) {
+				while (s <= t)
+					*(s++) = ' ';
+			} else {
+				GS_message(("ReadAloud: Unmatched <> in %s\n", s));
+				goto out;
+			}
+		}
+
+		// clean: no &lt;...&gt; sequences.  (Strong's ref, "<1234>".)
+		for (s = strstr(text->str, "&lt;"); s; s = strstr(s, "&lt;")) {
+			if ((t = strstr(s, "&gt;"))) {
+				t += 3;
+				while (s <= t)
+					*(s++) = ' ';
+			} else {
+				GS_message(("ReadAloud: Unmatched &lt;&gt; in %s\n", s));
+				goto out;
+			}
+		}
+
+		// clean: no other &symbols;.
+		for (s = strchr(text->str, '&'); s; s = strchr(s, '&')) {
+			if ((t = strchr(s, ';'))) {
+				while (s <= t)
+					*(s++) = ' ';
+			} else {
+				GS_message(("ReadAloud: Incomplete &xxx; in %s\n", s));
+				goto out;
+			}
+		}
+
+		// clean: no note/xref strings.
+		for (s = strstr(text->str, "*n"); s; s = strstr(s, "*n")) {
+			*(s++) = ' ';
+			*(s++) = ' ';
+			while (isdigit(*s)) *(s++) = ' ';
+		}
+		for (s = strstr(text->str, "*u"); s; s = strstr(s, "*u")) {
+			*(s++) = ' ';
+			*(s++) = ' ';
+		}
+		for (s = strstr(text->str, "*x"); s; s = strstr(s, "*x")) {
+			*(s++) = ' ';
+			*(s++) = ' ';
+			while (isdigit(*s)) *(s++) = ' ';
+		}
+
+		// festival *pronounces* brackets and asterisks -- idiots.
+		for (s = strchr(text->str, '['); s; s = strchr(s, '['))
+			*s = ' ';
+		for (s = strchr(text->str, ']'); s; s = strchr(s, ']'))
+			*s = ' ';
+		for (s = strchr(text->str, '*'); s; s = strchr(s, '*'))
+			*s = ' ';
+		// in case it isn't obvious, i'd really like a  standard
+		// function that walks a string for multiple individual chars.
+
+		// walk the string, looking for dislocated "LORD" as "L<spaces>ORD".
+		// this occurs in "smallcaps" use in many bibles.
+		for (s = strchr(text->str, 'L'); s; s = strchr(s+1, 'L')) {
+			gchar *begin = s++;
+			while (*s == ' ')
+				++s;
+			if (!strncmp(s, "ORD", 3)) {
+				*begin = ' ';
+				*(s-1) = 'L';
+			}
+		}
+		// same song, second verse: G<spaces>OD.
+		for (s = strchr(text->str, 'G'); s; s = strchr(s+1, 'G')) {
+			gchar *begin = s++;
+			while (*s == ' ')
+				++s;
+			if (!strncmp(s, "OD", 2)) {
+				*begin = ' ';
+				*(s-1) = 'G';
+			}
+		}
+
+		GS_message(("ReadAloud: clean: %s\n", text->str));
+		// scribble clean text to the socket.
+		if (FestivalSpeak(text->str, strlen(text->str), tts_socket) == FALSE)
+		{
+			char msg[256];
+			sprintf(msg, "TTS disappeared?\nTTS write failed: %s",
+				strerror(errno));
+			StopFestival(&tts_socket);
+			settings.readaloud = 0;
+			gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+						       (widgets.readaloud_item),
+						       settings.readaloud);
+			gui_generic_warning(msg);
+		}
+
+	out:
+		g_string_free(text, TRUE);
+		return;
+
+	} else {
+
+		// Reading aloud is disabled.
+		// If we had been reading, shut it down.
+		if (tts_socket >= 0) {
+			StopFestival(&tts_socket);
+		}
+		use_counter++;
+		return;
+	}
+}
+
+//
+// starts festival in a async process
+//
+void
+StartFestival(void)
+{
+#ifdef WIN32
+	//on windows, we will ship festival directly under Xiphos
+	gchar *festival_args[5];
+        gchar *festival_com = g_win32_get_package_installation_directory_of_module(NULL);
+	festival_com = g_strconcat(festival_com, "\0", NULL);
+	gchar *festival_lib = g_build_filename(festival_com, "festival\\lib\0");
+	festival_com = g_build_filename(festival_com, "festival\\festival.exe\0");
+	festival_args[0] = festival_com;
+	festival_args[1] = g_strdup("--libdir");
+	festival_args[2] = festival_lib;
+	festival_args[3] = g_strdup("--server");
+	festival_args[4] = NULL;
+#else
+	gchar *festival_args[3];
+	festival_args[0] = g_strdup("festival");
+	festival_args[1] = g_strdup("--server");
+	festival_args[2] = NULL;
+#endif
+	g_spawn_async ( NULL,
+			festival_args,
+			NULL,
+			G_SPAWN_SEARCH_PATH,
+			NULL,
+			NULL,
+			NULL,
+			NULL);
+}
+
+//
+// shuts down Festival
+//
+void
+StopFestival(int *tts_socket)
+{
+#ifdef WIN32
+	closesocket(*tts_socket);
+#else
+	shutdown(*tts_socket, SHUT_RDWR);
+	close(*tts_socket);
+#endif
+	*tts_socket = INVALID_SOCKET;
+}
+
+//
+// tells Festival to say the given text
+//
+gboolean
+FestivalSpeak(gchar *text, int length, int tts_socket)
+{
+#ifdef WIN32
+	if ((send(tts_socket, "(SayText \"", 10, MSG_DONTROUTE) == INVALID_SOCKET)  ||
+	    (send(tts_socket, text, length, MSG_DONTROUTE) == INVALID_SOCKET) ||
+	    (send(tts_socket, "\")\r\n", 4, MSG_DONTROUTE) == INVALID_SOCKET ))
+		return FALSE;
+#else
+	if ((write(tts_socket, "(SayText \"", 10) < 0)  ||
+	    (write(tts_socket, text, length ) < 0) ||
+	    (write(tts_socket, "\")\r\n", 4) < 0))
+		return FALSE;
+#endif
+	return TRUE;
 }
 
 /******   end of file   ******/
