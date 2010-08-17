@@ -1,3 +1,7 @@
+2010-08-17  karl <charcoal@users.sf.net>
+
+	* move ReadAloud and related functions to src/gnome2/utilities.c.
+
 2010-08-14  karl <charcoal@users.sf.net>
 
 	* be less sensitive about NASB for Heb/Grk lexicon choice ("NASBnew").
