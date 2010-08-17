@@ -1900,7 +1900,7 @@ FestivalSpeak(gchar *text, int length, int tts_socket)
 /*
  * strcasestr() turns out to be nonstandard extension, but we need it.
  */
-char *
+const char *
 strcasestr(const char *haystack, const char *needle)
 {
 	char *lower_haystack = g_strdup(haystack);
