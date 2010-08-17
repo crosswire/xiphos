@@ -32,14 +32,6 @@
 
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
-#ifndef WIN32
-#include <sys/socket.h>
-#include <netinet/in.h>
-#else
-#include <winsock2.h>
-#endif /* !WIN32 */
-#include <errno.h>
-
 #include <gtk/gtk.h>
 
 #include "gui/utilities.h"
@@ -61,7 +53,12 @@
 #undef DATADIR
 #include <windows.h>
 #include <shellapi.h>
-#endif /* WIN32 */
+#include <winsock2.h>
+#else
+#include <sys/socket.h>
+#include <netinet/in.h>
+#endif /* !WIN32 */
+#include <errno.h>
 
 #ifdef USE_GTKMOZEMBED
 #ifdef WIN32
