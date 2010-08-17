@@ -96,6 +96,10 @@ void archive_adddir(GsfOutfile *output, gchar *path, const gchar *name);
 void xiphos_create_archive(gchar* conf_file, gchar* datapath, gchar *zip,
 			   const gchar *destination);
 
+void ReadAloud(unsigned int verse, const char *suppliedtext);
+void StartFestival(void);
+void StopFestival(int *tts_socket);
+gboolean FestivalSpeak(gchar *text, int length, int tts_socket);
 
 #ifdef WIN32
 gchar* xiphos_win32_get_subdir(const gchar *subdir);
