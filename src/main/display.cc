@@ -24,7 +24,6 @@
 #endif
 
 #include <glib.h>
-#include <gdk-pixbuf/gdk-pixbuf.h>
 
 #include <osishtmlhref.h>
 #include <osisvariants.h>
@@ -112,16 +111,6 @@ int footnote, xref;
 
 using namespace sword;
 using namespace std;
-
-int
-ImageDimensions(const char *path, int *x, int *y)
-{
-
-	if (gdk_pixbuf_get_file_info (path, x, y))
-		return 0;
-	else
-		return -1;
-}
 
 //
 // user annotation cache filling.
@@ -256,139 +245,6 @@ marked_cache_check(int thisVerse)
 	if (it != marked_cache.end())
 		return (*it).second;
 	return NULL;
-}
-
-#ifndef HAVE_STRCASESTR
-/*
- * strcasestr() turns out to be nonstandard extension, but we need it.
- */
-char *
-strcasestr(const char *haystack, const char *needle)
-{
-	char *lower_haystack = g_strdup(haystack);
-	char *lower_needle = g_strdup(needle);
-	char *s;
-
-	for (s = lower_haystack; *s; ++s)
-		if (isupper(*s))
-			*s = tolower(*s);
-	for (s = lower_needle; *s; ++s)
-		if (isupper(*s))
-			*s = tolower(*s);
-
-	s = strstr(lower_haystack, lower_needle);
-	if (s)
-		s = (char *)haystack + (s - lower_haystack);
-
-	g_free(lower_haystack);
-	g_free(lower_needle);
-	return s;
-}
-#endif /* !HAVE_STRCASESTR */
-
-#define	IMGSRC_LENGTH	10	// strlen('<img src="')
-
-const char *
-AnalyzeForImageSize(const char *origtext,
-		    GdkWindow *window)
-{
-	static SWBuf resized;
-	SWBuf text;
-
-	const char *trail;	// "trail" trails behind ...
-	char *path;		// ... the current "path".
-	char *end, save;	// "end" is the path's end.
-	char buf[32];		// for preparing new width+height spec.
-	gint image_x, image_y, window_x, window_y = -999;
-	int image_retval;
-	bool no_warning_yet = true;
-
-	// performance tweak:
-	// image content is by no means common. therefore, spend an extra
-	// search call to determine whether any of the rest is needed,
-	// most especially to stop copying large blocks of text w/no images.
-	if (strcasestr(origtext, "<img src=\"") == NULL)
-		return origtext;
-
-	text = origtext;
-	resized = "";
-	trail = text;
-
-	for (path = (char*)strcasestr(text, "<img src=\"");
-	     path;
-	     path = strcasestr(path, "<img src=\"")) {
-
-		if (window_y == -999) {
-			/* we have images, but we don't know bounds yet */
-
-			gdk_drawable_get_size(window, &window_x, &window_y);
-			if ((window_x > 200) || (window_y > 200)) {
-				window_x -= 23;
-				window_y -= 23;
-			} else {
-				window_x = (window_x * 93)/100;
-				window_y = (window_y * 93)/100;
-			}
-		}
-
-		path += IMGSRC_LENGTH;
-		save = *path;
-		*path = '\0';
-                resized += trail;
-		*path = save;
-		trail = path;
-
-		// some play fast-n-loose with proper file spec.
-		if (strncmp(path, "file://", 7) == 0) {
-			path += 7;
-			resized += "file://";
-		} else if (strncmp(path, "file:", 5) == 0) {
-			path += 5;
-			resized += "file:";
-		} else
-			continue;	// no file spec there -- odd.
-
-		// getting this far means we have a valid img src and file.
-		// find closing '"' to determine pathname end.
-		if ((end = strchr(path, '"')) == 0)
-			continue;
-
-		*end = '\0';
-		resized += path;
-		image_retval = ImageDimensions(path, &image_x, &image_y);
-
-		*end = '"';
-		resized += "\"";
-		path = end+1;
-		trail = path;
-
-		if (image_retval != 0) {
-			if (no_warning_yet) {
-				gui_generic_warning(
-				    _("An image file's size could not be determined.\nIs ImageMagick's 'identify' not installed?\n(Or possibly the image is of type other than bmp/gif/jpg/png.)\nXiphos cannot resize images to fit window."));
-				// settings.imageresize = 0;
-				no_warning_yet = false;
-			}
-			continue;
-		}
-
-		// knowing image size & window size, adjust to fit.
-		if (image_x > window_x) {
-			float proportion = (float)window_x / (float)image_x;
-			image_x = window_x;
-			image_y = (int)((float)image_y * proportion);
-		}
-		if (image_y > window_y) {
-			float proportion = (float)window_y / (float)image_y;
-			image_y = window_y;
-			image_x = (int)((float)image_x * proportion);
-		}
-		sprintf(buf, " WIDTH=%d HEIGHT=%d", image_x, image_y);
-		resized += buf;
-        }
-
-	resized += trail;	// remainder of text appended.
-	return resized.c_str();
 }
 
 //

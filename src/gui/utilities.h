@@ -101,6 +101,12 @@ void StartFestival(void);
 void StopFestival(int *tts_socket);
 gboolean FestivalSpeak(gchar *text, int length, int tts_socket);
 
+#ifndef HAVE_STRCASESTR
+const char *strcasestr(const char *haystack, const char *needle);
+#endif
+int ImageDimensions(const char *path, int *x, int *y);
+const char *AnalyzeForImageSize(const char *origtext, GdkWindow *window);
+
 #ifdef WIN32
 gchar* xiphos_win32_get_subdir(const gchar *subdir);
 #endif
