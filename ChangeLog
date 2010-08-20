@@ -1,6 +1,7 @@
 2010-08-20  karl <charcoal@users.sf.net>
 
-	* remember&restore detached parallel window existence+placement+geometry.
+	* restore detached parallel window existence+placement+geometry.
+	* make Strong's lemma:Gxyz references get highlighted in preview.
 
 2010-08-17  karl <charcoal@users.sf.net>
 
