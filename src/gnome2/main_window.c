@@ -437,7 +437,7 @@ static gboolean epaned_button_release_event(GtkWidget * widget,
  *				   gpointer user_data)
  *
  * Description
- *
+ *   remember placement+size of main window.
  *
  * Return value
  *   gboolean
@@ -791,7 +791,7 @@ void create_mainwindow(void)
 
 	widgets.studypad_dialog = NULL;
 
-	widgets.app = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+	widgets.app = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_window_set_title (GTK_WINDOW (widgets.app), _("Xiphos - Bible Study Software"));
 
 	g_object_set_data(G_OBJECT(widgets.app),

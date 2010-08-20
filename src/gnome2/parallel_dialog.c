@@ -64,6 +64,8 @@ GtkWidget *entryIntLookup;
 /******************************************************************************
  * static
  */
+static GtkWidget *dialog_parallel;
+
 static GtkWidget *parallel_UnDock_Dialog;
 static GtkWidget *vboxInt;
 static gboolean ApplyChangeBook;
@@ -188,6 +190,9 @@ static void on_dlgparallel_destroy(GtkObject * object,
 					1);
 	settings.dockedInt = TRUE;
 	main_update_parallel_page();
+
+	settings.parallelpage = 0;
+	xml_set_value("Xiphos", "layout", "parallelopen", "0");
 }
 
 
@@ -292,6 +297,57 @@ static GtkWidget *create_nav_toolbar(void)
 
 /******************************************************************************
  * Name
+ *   on_parallel_configure_event
+ *
+ * Synopsis
+ *   #include "gui/main_window.h"
+ *
+ *   gboolean on_parallel_configure_event(GtkWidget * widget,
+ *				   GdkEventConfigure * event,
+ *				   gpointer user_data)
+ *
+ * Description
+ *   remember placement+size of parallel window.
+ *   cloned from on_configure_event
+ *
+ * Return value
+ *   gboolean
+ */
+
+static gboolean on_parallel_configure_event(GtkWidget * widget,
+					    GdkEventConfigure * event,
+					    gpointer user_data)
+{
+	gchar layout[80];
+	gint x;
+	gint y;
+
+ 	gdk_window_get_root_origin(
+	    GDK_WINDOW(dialog_parallel->window), &x, &y);
+
+	settings.parallel_width  = event->width;
+	settings.parallel_height = event->height;
+	settings.parallel_x = x;
+	settings.parallel_y = y;
+
+	sprintf(layout, "%d", settings.parallel_width);
+	xml_set_value("Xiphos", "layout", "parallel_width", layout);
+
+	sprintf(layout, "%d", settings.parallel_height);
+	xml_set_value("Xiphos", "layout", "parallel_height", layout);
+
+	sprintf(layout, "%d", settings.parallel_x);
+	xml_set_value("Xiphos", "layout", "parallel_x", layout);
+
+	sprintf(layout, "%d", settings.parallel_y);
+	xml_set_value("Xiphos", "layout", "parallel_y", layout);
+	xml_save_settings_doc(settings.fnconfigure);
+
+	return FALSE;
+}
+
+/******************************************************************************
+ * Name
  *   create_parallel_dialog
  *
  * Synopsis
@@ -309,7 +365,6 @@ static GtkWidget *create_nav_toolbar(void)
 static
 GtkWidget *create_parallel_dialog(void)
 {
-	GtkWidget *dialog_parallel;
   	GtkWidget *box_parallel_labels;
 	GtkWidget *dialog_vbox25;
 	GtkWidget *toolbar29;
@@ -327,12 +382,13 @@ GtkWidget *create_parallel_dialog(void)
 	sprintf(title,"%s - %s", settings.program_title, _("Parallel"));
 
 	dialog_parallel = gtk_dialog_new();
+	gtk_window_set_title(GTK_WINDOW(dialog_parallel), title);
+
 	g_object_set_data(G_OBJECT(dialog_parallel),
 			  "dialog_parallel", dialog_parallel);
-	gtk_window_set_title(GTK_WINDOW(dialog_parallel),
-			     title);
-	gtk_window_set_default_size(GTK_WINDOW(dialog_parallel), 657,
-				    361);
+	gtk_window_set_default_size(GTK_WINDOW(dialog_parallel),
+				    settings.parallel_width,
+				    settings.parallel_height);
 	gtk_window_set_resizable(GTK_WINDOW(dialog_parallel), TRUE);
 
 	dialog_vbox25 = GTK_DIALOG(dialog_parallel)->vbox;
@@ -447,7 +503,28 @@ GtkWidget *create_parallel_dialog(void)
 			   G_CALLBACK(gui_btnDockInt_clicked),
 			   NULL);
 
-	set_window_icon (GTK_WINDOW(dialog_parallel));
+	g_signal_connect((gpointer) dialog_parallel, 
+			 "configure_event",
+			 G_CALLBACK(on_parallel_configure_event), NULL);
+
+	settings.parallelpage = 1;
+	xml_set_value("Xiphos", "layout", "parallelopen", "1");
+
+	set_window_icon(GTK_WINDOW(dialog_parallel));
+
+	/*
+	 * (from xiphos.c)
+	 * a little paranoia:
+	 * clamp geometry values to a reasonable bound.
+	 * sometimes xiphos gets insane reconfig events as it dies,
+	 * especially if it's due to just shutting linux down.
+	 */
+	if ((settings.parallel_x < 0) || (settings.parallel_x > 2000))
+		settings.parallel_x = 0;
+	if ((settings.parallel_y < 0) || (settings.parallel_y > 2000))
+		settings.parallel_y = 0;
+
+ 	gtk_window_move(GTK_WINDOW(dialog_parallel),settings.parallel_x,settings.parallel_y);
 
 	return dialog_parallel;
 }
