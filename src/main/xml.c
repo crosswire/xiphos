@@ -552,6 +552,13 @@ int xml_create_settings_file(char *path)
 	xmlNewTextChild(section_node, NULL,(const xmlChar *) "width", (const xmlChar *)"640");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"app_x", (const xmlChar *)"40");
 	xmlNewTextChild(section_node, NULL,(const xmlChar *) "app_y", (const xmlChar *)"40");
+
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"parallelopen", (const xmlChar *)"0");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"parallel_height", (const xmlChar *)"361");
+	xmlNewTextChild(section_node, NULL,(const xmlChar *) "parallel_width", (const xmlChar *)"657");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"parallel_x", (const xmlChar *)"200");
+	xmlNewTextChild(section_node, NULL,(const xmlChar *) "parallel_y", (const xmlChar *)"200");
+
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"textpane", (const xmlChar *)"240");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"shortcutbar", (const xmlChar *)"158");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"uperpane", (const xmlChar *)"210");

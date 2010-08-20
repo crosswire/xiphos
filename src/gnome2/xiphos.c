@@ -209,6 +209,8 @@ void frontend_display(const char *tabs)
 			   NULL	);
 	gui_show_previewer_in_sidebar(settings.show_previewer_in_sidebar);
 
+	if (settings.parallelpage)
+		on_undockInt_activate(NULL);
 
 	if (settings.showdevotional)
 		main_display_devotional();
@@ -269,7 +271,7 @@ void shutdown_frontend(void)
 	xml_free_settings_doc();
 
 	main_shutdown_list();
-#ifdef USE_GTKMOZEMBED	
+#ifdef USE_GTKMOZEMBED
 	wk_html_shutdown();
 #endif
 //	if(settings.browsing)
