@@ -449,8 +449,8 @@ void load_settings_structure(void)
 		xml_add_new_item_to_section("modmgr", "mod_mgr_remote_source_index", "0");
 		settings.mod_mgr_remote_source_index = 0;
 	}
-	/* end mod mgr stuff */
 
+	/* current verse & keys */
 	settings.currentverse = xml_get_value("keys", "verse");
 	settings.dictkey = xml_get_value("keys", "dictionary");
 
@@ -474,6 +474,7 @@ void load_settings_structure(void)
 		settings.tab_page = 0;
 	}
 
+	/* layout */
 	settings.sidebar_width = atoi((buf = xml_get_value("layout", "shortcutbar"))
 				      ? buf : "100");
 	if ((buf = xml_get_value("layout", "vltoppaneheight")))
@@ -488,9 +489,42 @@ void load_settings_structure(void)
 		xml_add_new_item_to_section("layout", "sidebar_notebook_hight", "300");
 		settings.sidebar_notebook_hight = 250;
 	}
-	settings.gs_hight = atoi((buf = xml_get_value("layout", "hight")) ? buf : "500");
-	settings.gs_width = atoi((buf = xml_get_value("layout", "width")) ? buf : "500");
 
+	/* whether to open the parallel page at startup */
+	if ((buf = xml_get_value("layout", "parallelopen")))
+		settings.parallelpage = atoi(buf);
+	else {
+		xml_add_new_item_to_section("layout", "parallelopen", "0");
+		settings.parallelpage = 0;
+	}
+
+	/* main and parallel window geometry */
+	if ((buf = xml_get_value("layout", "hight")))
+		settings.gs_hight = atoi(buf);
+	else {
+		xml_add_new_item_to_section("layout", "hight", "500");
+		settings.gs_hight = 500;
+	}
+	if ((buf = xml_get_value("layout", "width")))
+		settings.gs_width = atoi(buf);
+	else{
+		xml_add_new_item_to_section("layout", "width", "500");
+		settings.gs_width = 500;
+	}
+	if ((buf = xml_get_value("layout", "parallel_height")))
+		settings.parallel_height = atoi(buf);
+	else {
+		xml_add_new_item_to_section("layout", "parallel_height", "361");
+		settings.parallel_height = 361;
+	}
+	if ((buf = xml_get_value("layout", "parallel_width")))
+		settings.parallel_width = atoi(buf);
+	else{
+		xml_add_new_item_to_section("layout", "parallel_width", "500");
+		settings.parallel_width = 657;
+	}
+
+	/* main window placement */
 	if ((buf = xml_get_value("layout", "app_x")))
 		settings.app_x = atoi(buf);
 	else {
@@ -502,6 +536,20 @@ void load_settings_structure(void)
 	else{
 		xml_add_new_item_to_section("layout", "app_y", "40");
 		settings.app_y = 40;
+	}
+
+	/* parallel window placement */
+	if ((buf = xml_get_value("layout", "parallel_x")))
+		settings.parallel_x = atoi(buf);
+	else {
+		xml_add_new_item_to_section("layout", "parallel_x", "200");
+		settings.parallel_x = 40;
+	}
+	if ((buf = xml_get_value("layout", "parallel_y")))
+		settings.parallel_y = atoi(buf);
+	else{
+		xml_add_new_item_to_section("layout", "parallel_y", "200");
+		settings.parallel_y = 40;
 	}
 
 	settings.biblepane_width = atoi((buf = xml_get_value("layout", "textpane"))
@@ -523,6 +571,7 @@ void load_settings_structure(void)
 		settings.commpane_hight = 240;
 	}
 
+	/* font sizes */
 	if ((buf = xml_get_value("fontsize", "versenum"))) {
 		settings.verse_num_font_size_str = buf;
 		settings.verse_num_font_size = atoi(buf);
@@ -546,6 +595,7 @@ void load_settings_structure(void)
 #endif /* WIN32 */
 	}
 
+	/* colors */
 	settings.bible_text_color = xml_get_value("HTMLcolors", "text_fg");
 	settings.bible_bg_color =
 	    xml_get_value("HTMLcolors", "background");
@@ -674,10 +724,6 @@ void load_settings_structure(void)
 		xml_add_new_item_to_section("parallel", "Greek_Accents", "1");
 		settings.parallel_greekaccents = 1;
 	}
-
-	if ((buf = xml_get_value("parallel", "parallel")))
-		settings.parallelpage = atoi(buf);
-
 
 	/*  Misc stuff  */
 
