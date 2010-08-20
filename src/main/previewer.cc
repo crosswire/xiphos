@@ -289,10 +289,12 @@ void mark_search_words(GString * str)
 		gint count = 0, i = 0;
 
 		list = NULL;
-		/* seperate the search words and add them to a glist */
+		/* separate the search words and add them to a glist */
 		if ((token = strtok(searchbuf, " ")) != NULL) {
 			if (!isalnum(*token) && isalnum(*(token+1)))
-				token++;
+				token++;	// skip leading punctuation.
+			if (!strncmp(token, "lemma:", 6))
+				token += 7;	// skip the H/G qualifier.
 			list = g_list_append(list, token);
 			++count;
 			while ((token = strtok(NULL, " ")) != NULL) {
