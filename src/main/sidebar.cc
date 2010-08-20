@@ -137,7 +137,6 @@ void main_display_verse_list_in_sidebar(gchar * key,
 					gchar * verse_list)
 {
 	GList *tmp = NULL;
-	gint i = 0;
 	GtkTreeModel *model;
 	GtkListStore *list_store;
 	GtkTreeSelection *selection;
@@ -172,25 +171,35 @@ void main_display_verse_list_in_sidebar(gchar * key,
 
 	strcpy(sidebar.mod_name, module_name);
 
-	if (verse_list[0] == 'S' && verse_list[1] == 'e'
-	    && verse_list[2] == 'e') {
+	if (!strncmp(verse_list, "See ", 4))
 		verse_list += 4;
-	}
-	i = 0;
-	tmp = backend->parse_verse_list(verse_list, key);
-	while (tmp != NULL) {
-		gtk_list_store_append(list_store, &iter);
-		gtk_list_store_set(list_store, &iter, 0,
-				   (const char *) tmp->data, -1);
-		++i;
+	
+	if ((*verse_list != '/') &&
+	    ((tmp = backend->parse_verse_list(verse_list, key)) != NULL)) {
+		// normal verse list.
+		while (tmp != NULL) {
+			gtk_list_store_append(list_store, &iter);
+			gtk_list_store_set(list_store, &iter, 0,
+					   (const char *) tmp->data, -1);
 
-		list_item = g_new(RESULTS,1);
+			list_item = g_new(RESULTS, 1);
+			list_item->module = g_strdup(module_name);
+			list_item->key = g_strdup((const char *) tmp->data);
+			list_of_verses = g_list_append(list_of_verses,
+						       (RESULTS *) list_item);
+
+			tmp = g_list_next(tmp);
+		}
+	} else {
+		// not normal verse list.  probably a genbook or dict key.
+		gtk_list_store_append(list_store, &iter);
+		gtk_list_store_set(list_store, &iter, 0, verse_list, -1);
+
+		list_item = g_new(RESULTS, 1);
 		list_item->module = g_strdup(module_name);
-		list_item->key = g_strdup((const char *) tmp->data);
+		list_item->key = g_strdup((const char *) verse_list);
 		list_of_verses = g_list_append(list_of_verses,
 					       (RESULTS *) list_item);
-
-		tmp = g_list_next(tmp);
 	}
 
 	selection = gtk_tree_view_get_selection

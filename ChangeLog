@@ -2,6 +2,7 @@
 
 	* restore detached parallel window existence+placement+geometry.
 	* make Strong's lemma:Gxyz references get highlighted in preview.
+	* provide for non-verse list key references in PL/J linkages.
 
 2010-08-17  karl <charcoal@users.sf.net>
 
