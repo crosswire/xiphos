@@ -81,6 +81,8 @@ struct _settings {
 		sidebar_notebook_hight,
 		gs_width,
 		gs_hight,
+		parallel_height,
+		parallel_width,
 		searchbargroup,		  /* number of search group in shortcut bar */
 		searchType,
 		whichwindow,		  /* which of the main form html windows is active */
@@ -112,7 +114,7 @@ struct _settings {
 	        readaloud,			/* pass text through (existing) "festival -server" */
 	        versehighlight,			/* do special fg/bg for current verse */
 	        annotate_highlight,		/* do special bg/fg for user annotations */
-	        parallelpage,			/* display parallel page */
+	        parallelpage,			/* display detached parallel page */
 	        autosavepersonalcomments,	/* auto save personal notes */
 	        formatpercom,			/* use html to format personal notes */
 	        showshortcutbar,		/* display shortcut bar if true */
@@ -195,8 +197,8 @@ struct _settings {
 	int cell_height;
 
 	/* window location at close */
-	int app_x;
-	int app_y;
+	int app_x, app_y;
+	int parallel_x, parallel_y;
 
 	/* there is no settings.xml file */
 	int first_run;

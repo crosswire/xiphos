@@ -209,6 +209,8 @@ void frontend_display(const char *tabs)
 			   NULL	);
 	gui_show_previewer_in_sidebar(settings.show_previewer_in_sidebar);
 
+	if (settings.parallelpage)
+		on_undockInt_activate(NULL);
 
 	if (settings.showdevotional)
 		main_display_devotional();
