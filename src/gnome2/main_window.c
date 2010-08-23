@@ -250,9 +250,9 @@ void gui_set_bible_comm_layout(void)
 	gtk_paned_set_position(GTK_PANED(widgets.hpaned),
 				       settings.biblepane_width);
 	gtk_paned_set_position(GTK_PANED(widgets.vpaned),
-				       settings.biblepane_hight);
+				       settings.biblepane_height);
 	gtk_paned_set_position(GTK_PANED(widgets.vpaned2),
-				       settings.commpane_hight);
+				       settings.commpane_height);
 
 	if ((settings.showcomms == TRUE)  ||  (settings.showdicts == TRUE)) {
 		gtk_widget_show(widgets.vpaned2);
@@ -265,13 +265,13 @@ void gui_set_bible_comm_layout(void)
 
 	gtk_paned_set_position(GTK_PANED(widgets.vpaned2),
 			       (settings.showcomms
-				? settings.commpane_hight
+				? settings.commpane_height
 				: 0));
 
 	gtk_paned_set_position(GTK_PANED(widgets.vpaned2),
 			       (settings.showdicts
-				? settings.commpane_hight
-				: settings.gs_hight));
+				? settings.commpane_height
+				: settings.gs_height));
 
 	if ((settings.showcomms == FALSE)  && (settings.showdicts == FALSE)) {
 		gtk_widget_hide(widgets.vpaned2);
@@ -402,16 +402,16 @@ static gboolean epaned_button_release_event(GtkWidget * widget,
 				      "shortcutbar", layout);
 		}
 		if (!strcmp((gchar *) user_data, "vpaned")) {
-			settings.biblepane_hight = panesize;
-			sprintf(layout, "%d", settings.biblepane_hight);
+			settings.biblepane_height = panesize;
+			sprintf(layout, "%d", settings.biblepane_height);
 			xml_set_value("Xiphos", "layout",
-				      "biblehight", layout);
+				      "bibleheight", layout);
 		}
 		if (!strcmp((gchar *) user_data, "vpaned2")) {
-			settings.commpane_hight = panesize;
-			sprintf(layout, "%d", settings.commpane_hight);
+			settings.commpane_height = panesize;
+			sprintf(layout, "%d", settings.commpane_height);
 			xml_set_value("Xiphos", "layout",
-				      "commentaryhight", layout);
+				      "commentaryheight", layout);
 		}
 		if (!strcmp((gchar *) user_data, "hpaned1")) {
 			settings.biblepane_width = panesize;
@@ -454,15 +454,15 @@ static gboolean on_configure_event(GtkWidget * widget,
  	gdk_window_get_root_origin(GDK_WINDOW(widgets.app->window), &x, &y);
 
 	settings.gs_width = event->width;
-	settings.gs_hight = event->height;
+	settings.gs_height = event->height;
 	settings.app_x = x;
 	settings.app_y = y;
 
 	sprintf(layout, "%d", settings.gs_width);
 	xml_set_value("Xiphos", "layout", "width", layout);
 
-	sprintf(layout, "%d", settings.gs_hight);
-	xml_set_value("Xiphos", "layout", "hight", layout);
+	sprintf(layout, "%d", settings.gs_height);
+	xml_set_value("Xiphos", "layout", "height", layout);
 
 	sprintf(layout, "%d", settings.app_x);
 	xml_set_value("Xiphos", "layout", "app_x", layout);
@@ -1095,7 +1095,7 @@ void create_mainwindow(void)
 
 	gtk_window_set_default_size((GtkWindow *)widgets.app,
                                              settings.gs_width,
-                                             settings.gs_hight);
+                                             settings.gs_height);
 	main_window_created = TRUE;
 }
 
