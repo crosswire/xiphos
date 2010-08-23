@@ -170,7 +170,7 @@ GtkWidget* create_sidebar_dialog(void)
 	gtk_window_set_title(GTK_WINDOW(dlgDock), _("Sidebar"));
 	gtk_window_set_resizable(GTK_WINDOW(dlgDock), TRUE);
 	gtk_widget_set_size_request(dlgDock, settings.sidebar_width,
-			     settings.gs_hight);
+			     settings.gs_height);
 
 	vbox_dock = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox_dock);
