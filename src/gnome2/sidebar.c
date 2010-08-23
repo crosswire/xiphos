@@ -403,9 +403,6 @@ void gui_set_sidebar_program_start(void)
 		gtk_paned_set_position(GTK_PANED(widgets.epaned), 1);
 	}
 
-	/* set hight of bible and commentary pane */
-	//gtk_paned_set_position(GTK_PANED(widgets.vpaned),settings.upperpane_hight);
-
 	/* set width of bible pane */
 	//gtk_paned_set_position(GTK_PANED(widgets.hpaned), settings.biblepane_width);
 
@@ -1246,10 +1243,10 @@ static gboolean paned_button_release_event(GtkWidget * widget,
 	panesize = gtk_paned_get_position(GTK_PANED(widget));
 
 	if (panesize > 15) {
-		settings.sidebar_notebook_hight = panesize;
-		sprintf(layout, "%d", settings.sidebar_notebook_hight);
+		settings.sidebar_notebook_height = panesize;
+		sprintf(layout, "%d", settings.sidebar_notebook_height);
 		xml_set_value("Xiphos", "layout",
-			      "sidebar_notebook_hight", layout);
+			      "sidebar_notebook_height", layout);
 	}
 	return FALSE;
 }
@@ -1265,7 +1262,7 @@ void gui_show_previewer_in_sidebar(gint choice)
 #endif
 		gtk_widget_hide(widgets.vbox_previewer);
 		gtk_paned_set_position(GTK_PANED(widgets.paned_sidebar),
-				       settings.sidebar_notebook_hight);
+				       settings.sidebar_notebook_height);
 	} else {
 #ifdef USE_GTKMOZEMBED
 		gtk_widget_show (widgets.vbox_previewer);
@@ -1274,7 +1271,7 @@ void gui_show_previewer_in_sidebar(gint choice)
 #endif
 		gtk_widget_hide(widgets.box_side_preview);
 		gtk_paned_set_position(GTK_PANED(widgets.vpaned),
-				       settings.biblepane_hight);
+				       settings.biblepane_height);
 	}
 	main_set_previewer_widget(choice);
 	main_init_previewer();

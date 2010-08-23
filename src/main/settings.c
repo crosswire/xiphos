@@ -483,11 +483,16 @@ void load_settings_structure(void)
 		xml_add_new_item_to_section("layout", "vltoppaneheight", "210");
 		settings.verselist_toppane_height = 210;
 	}
-	if ((buf = xml_get_value("layout", "sidebar_notebook_hight")))
-		settings.sidebar_notebook_hight = atoi(buf);
+	if ((buf = xml_get_value("layout", "sidebar_notebook_height")))
+		settings.sidebar_notebook_height = atoi(buf);
 	else {
-		xml_add_new_item_to_section("layout", "sidebar_notebook_hight", "300");
-		settings.sidebar_notebook_hight = 250;
+		if ((buf = xml_get_value("layout", "sidebar_notebook_hight")))	/* backward compatible */
+			settings.sidebar_notebook_height = atoi(buf);
+		else
+			settings.sidebar_notebook_height = 250;
+		buf = g_strdup_printf("%d", settings.sidebar_notebook_height);
+		xml_add_new_item_to_section("layout", "sidebar_notebook_height", buf);
+		g_free(buf);
 	}
 
 	/* whether to open the parallel page at startup */
@@ -499,11 +504,16 @@ void load_settings_structure(void)
 	}
 
 	/* main and parallel window geometry */
-	if ((buf = xml_get_value("layout", "hight")))
-		settings.gs_hight = atoi(buf);
+	if ((buf = xml_get_value("layout", "height")))
+		settings.gs_height = atoi(buf);
 	else {
-		xml_add_new_item_to_section("layout", "hight", "500");
-		settings.gs_hight = 500;
+		if ((buf = xml_get_value("layout", "hight")))	/* backward compatible */
+			settings.gs_height = atoi(buf);
+		else
+			settings.gs_height = 500;
+		buf = g_strdup_printf("%d", settings.gs_height);
+		xml_add_new_item_to_section("layout", "height", buf);
+		g_free(buf);
 	}
 	if ((buf = xml_get_value("layout", "width")))
 		settings.gs_width = atoi(buf);
@@ -554,21 +564,29 @@ void load_settings_structure(void)
 
 	settings.biblepane_width = atoi((buf = xml_get_value("layout", "textpane"))
 					? buf : "0");
-	settings.upperpane_hight = atoi((buf = xml_get_value("layout", "uperpane"))
-					? buf : "0");
 
-	if ((buf = xml_get_value("layout", "biblehight")))
-		settings.biblepane_hight = atoi(buf);
+	if ((buf = xml_get_value("layout", "bibleheight")))
+		settings.biblepane_height = atoi(buf);
 	else {
-		xml_add_new_item_to_section("layout", "biblehight", "340");
-		settings.biblepane_hight = 250;
+		if ((buf = xml_get_value("layout", "biblehight")))	/* backward compatible */
+			settings.biblepane_height = atoi(buf);
+		else
+			settings.biblepane_height = 250;
+		buf = g_strdup_printf("%d", settings.biblepane_height);
+		xml_add_new_item_to_section("layout", "bibleheight", buf);
+		g_free(buf);
 	}
 
-	if ((buf = xml_get_value("layout", "commentaryhight")))
-		settings.commpane_hight = atoi(buf);
+	if ((buf = xml_get_value("layout", "commentaryheight")))
+		settings.commpane_height = atoi(buf);
 	else {
-		xml_add_new_item_to_section("layout", "commentaryhight", "240");
-		settings.commpane_hight = 240;
+		if ((buf = xml_get_value("layout", "commentaryhight")))	/* backward compatible */
+			settings.commpane_height = atoi(buf);
+		else
+			settings.commpane_height = 240;
+		buf = g_strdup_printf("%d", settings.commpane_height);
+		xml_add_new_item_to_section("layout", "commentaryheight", buf);
+		g_free(buf);
 	}
 
 	/* font sizes */

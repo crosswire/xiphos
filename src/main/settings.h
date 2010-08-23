@@ -74,13 +74,12 @@ struct _settings {
 		base_font_size,
       		sidebar_width,
 		verselist_toppane_height, /* height of the top pane in the search results window */
-		upperpane_hight,
 		biblepane_width,
-		biblepane_hight,
-		commpane_hight,
-		sidebar_notebook_hight,
+		biblepane_height,
+		commpane_height,
+		sidebar_notebook_height,
 		gs_width,
-		gs_hight,
+		gs_height,
 		parallel_height,
 		parallel_width,
 		searchbargroup,		  /* number of search group in shortcut bar */

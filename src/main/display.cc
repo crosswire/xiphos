@@ -1159,7 +1159,7 @@ GTKChapDisp::Display(SWModule &imodule)
 
 	// when strongs/morph are on, the anchor boundary must be smaller.
 	// or if main window is too small to keep curverse in-pane.
-	gint display_boundary = ((settings.gs_hight < 500) ? 0 : (strongs_or_morph ? 1 : 2));
+	gint display_boundary = ((settings.gs_height < 500) ? 0 : (strongs_or_morph ? 1 : 2));
 
 	// if we are no longer where annotations were current, re-load.
 	if (strcasecmp(ModuleName,
