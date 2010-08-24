@@ -197,7 +197,7 @@ gui_create_about_modules(void)
 				    304);
 	gtk_window_set_resizable(GTK_WINDOW(dialog_about_mods), TRUE);
 
-	dialog_vbox28 = GTK_DIALOG(dialog_about_mods)->vbox;
+	dialog_vbox28 = gtk_dialog_get_content_area(GTK_DIALOG(dialog_about_mods));
 	g_object_set_data(G_OBJECT(dialog_about_mods),
 			  "dialog_vbox28", dialog_vbox28);
 	gtk_widget_show(dialog_vbox28);
@@ -248,7 +248,7 @@ gui_create_about_modules(void)
 				NULL);
 #endif
 	dialog_action_area28 =
-	    GTK_DIALOG(dialog_about_mods)->action_area;
+                gtk_dialog_get_action_area(GTK_DIALOG(dialog_about_mods));
 	g_object_set_data(G_OBJECT(dialog_about_mods),
 			  "dialog_action_area28",
 			  dialog_action_area28);
@@ -266,8 +266,11 @@ gui_create_about_modules(void)
 	button = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
 	gtk_widget_show(button);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox7), button);
+#ifdef HAVE_GTK_218
+        gtk_widget_set_can_default(button, TRUE);
+#else
 	GTK_WIDGET_SET_FLAGS(button, GTK_CAN_DEFAULT);
-
+#endif
 	g_signal_connect(GTK_OBJECT(button), "clicked",
 			   G_CALLBACK(about_modules_ok), NULL);
 	return dialog_about_mods;
