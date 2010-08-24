@@ -416,7 +416,7 @@ void gui_commentary_dialog_sync_toggled(GtkToggleButton * button,
 {
 	if (d == NULL)
 		d = cur_d;
-	if (button->active) {
+	if (gtk_toggle_button_get_active(button)) {
 		sync_with_main(d);
 		d->sync = TRUE;
 	} else

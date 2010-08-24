@@ -309,7 +309,18 @@ def configure(conf):
     define('PACKAGE_PIXMAPS_DIR', conf.escpath(sub('${DATAROOTDIR}/pixmaps/${PACKAGE}', env)))
     define('PACKAGE_SOURCE_DIR', conf.escpath(os.path.abspath(srcdir))) # foder where was wscript executed
 
-    common_libs = string.join('''
+
+    if conf.check_cfg(modversion='gtkhtml-editor-3.14',
+                      msg='Is post GNOME3 gtkhtml-editor available?',
+                      okmsg='Deffinatly',
+                      errmsg='Probably, not'
+                      ):
+            editor='"gtkhtml-editor-3.14"'
+    else:
+            editor='"gtkhtml-editor"'
+
+    common_libs = string.join(
+    [editor] + '''
     "gtk+-2.0 >= 2.14"
     "libglade-2.0"
     "gmodule-2.0"
@@ -317,7 +328,6 @@ def configure(conf):
     "libgsf-1 >= 1.14"
     "libxml-2.0"
     "libgtkhtml-3.14 >= 3.23"
-    "gtkhtml-editor"
     "webkit-1.0"
     --cflags --libs'''
     .split()," ")
