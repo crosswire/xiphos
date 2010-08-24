@@ -99,7 +99,7 @@ gui_create_about_trans(void)
 	set_window_icon (GTK_WINDOW(dialog_about_trans));
         gtk_window_set_resizable(GTK_WINDOW(dialog_about_trans), FALSE);
 
-	dialog_vbox = GTK_DIALOG(dialog_about_trans)->vbox;
+	dialog_vbox = gtk_dialog_get_content_area(GTK_DIALOG(dialog_about_trans));
 	g_object_set_data(G_OBJECT(dialog_about_trans),
 			  "dialog_vbox", dialog_vbox);
 	gtk_widget_show(dialog_vbox);
@@ -148,7 +148,7 @@ gui_create_about_trans(void)
 	gtk_box_pack_start(GTK_BOX(vbox), href, FALSE, FALSE, 0);
 
 	dialog_action_area =
-	    GTK_DIALOG(dialog_about_trans)->action_area;
+                gtk_dialog_get_action_area(GTK_DIALOG(dialog_about_trans));
 	g_object_set_data(G_OBJECT(dialog_about_trans),
 			    "dialog_action_area",
 			    dialog_action_area);
@@ -166,8 +166,11 @@ gui_create_about_trans(void)
 	button = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
 	gtk_widget_show(button);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox), button);
+#ifdef HAVE_GTK_218
+        gtk_widget_set_can_default(button, TRUE);
+#else
 	GTK_WIDGET_SET_FLAGS(button, GTK_CAN_DEFAULT);
-
+#endif
 	g_signal_connect(GTK_OBJECT(button), "clicked",
 			   G_CALLBACK(about_trans_ok), NULL);
 	return dialog_about_trans;

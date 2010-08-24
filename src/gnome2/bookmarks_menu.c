@@ -253,8 +253,8 @@ G_MODULE_EXPORT void bibletime_bookmarks_activate(GtkMenuItem * menuitem,
 G_MODULE_EXPORT void on_allow_reordering_activate(GtkMenuItem * menuitem,
 				  gpointer user_data)
 {
-	 gtk_tree_view_set_reorderable(bookmark_tree,
-                           GTK_CHECK_MENU_ITEM(menuitem)->active);
+    gtk_tree_view_set_reorderable(bookmark_tree,
+        gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(menuitem)));
 }
 
 /******************************************************************************

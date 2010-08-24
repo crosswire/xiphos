@@ -367,7 +367,7 @@ void gui_bible_dialog_sync_toggled(GtkToggleButton *button,
 {
 	if (c == NULL)
 		c = cur_vt;
-	if (button->active) {
+	if (gtk_toggle_button_get_active(button)) {
 		sync_with_main(c);
 		c->sync = TRUE;
 	} else
