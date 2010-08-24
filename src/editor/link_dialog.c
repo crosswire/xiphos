@@ -81,7 +81,7 @@ void button_ok_clicked_cb(GtkObject *object, EDITOR *e)
 		encoded_verse = main_url_encode(verse_str);
 
 	g_string_printf(str,
-			(((GTK_TOGGLE_BUTTON(linkage_verse_list)->active) &&
+			(((gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(linkage_verse_list))) &&
 			  ((type == -1) ||
 			   (type == TEXT_TYPE) ||
 			   (type == COMMENTARY_TYPE)))

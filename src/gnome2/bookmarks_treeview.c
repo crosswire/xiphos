@@ -846,7 +846,7 @@ static gboolean button_release_event(GtkWidget * widget,
 		if (!settings.browsing)
 			gtk_widget_hide(menu.in_tab);
 
-		if (GTK_CHECK_MENU_ITEM(menu.reorder)->active) {
+		if (gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(menu.reorder))) {
 			gtk_widget_set_sensitive(menu.in_tab, FALSE);
 			gtk_widget_set_sensitive(menu.in_dialog, FALSE);
 			gtk_widget_set_sensitive(menu.new, FALSE);
