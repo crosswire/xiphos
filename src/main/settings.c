@@ -486,9 +486,10 @@ void load_settings_structure(void)
 	if ((buf = xml_get_value("layout", "sidebar_notebook_height")))
 		settings.sidebar_notebook_height = atoi(buf);
 	else {
-		if ((buf = xml_get_value("layout", "sidebar_notebook_hight")))	/* backward compatible */
+		if ((buf = xml_get_value("layout", "sidebar_notebook_hight"))) { /* backward compatible */
 			settings.sidebar_notebook_height = atoi(buf);
-		else
+			xml_remove_node("layout", "sidebar_notebook_hight", 0);
+		} else
 			settings.sidebar_notebook_height = 250;
 		buf = g_strdup_printf("%d", settings.sidebar_notebook_height);
 		xml_add_new_item_to_section("layout", "sidebar_notebook_height", buf);
@@ -507,9 +508,10 @@ void load_settings_structure(void)
 	if ((buf = xml_get_value("layout", "height")))
 		settings.gs_height = atoi(buf);
 	else {
-		if ((buf = xml_get_value("layout", "hight")))	/* backward compatible */
+		if ((buf = xml_get_value("layout", "hight"))) {	/* backward compatible */
 			settings.gs_height = atoi(buf);
-		else
+			xml_remove_node("layout", "hight", 0);
+		} else
 			settings.gs_height = 500;
 		buf = g_strdup_printf("%d", settings.gs_height);
 		xml_add_new_item_to_section("layout", "height", buf);
@@ -568,9 +570,10 @@ void load_settings_structure(void)
 	if ((buf = xml_get_value("layout", "bibleheight")))
 		settings.biblepane_height = atoi(buf);
 	else {
-		if ((buf = xml_get_value("layout", "biblehight")))	/* backward compatible */
+		if ((buf = xml_get_value("layout", "biblehight"))) {	/* backward compatible */
 			settings.biblepane_height = atoi(buf);
-		else
+			xml_remove_node("layout", "biblehight", 0);
+		} else
 			settings.biblepane_height = 250;
 		buf = g_strdup_printf("%d", settings.biblepane_height);
 		xml_add_new_item_to_section("layout", "bibleheight", buf);
@@ -580,9 +583,10 @@ void load_settings_structure(void)
 	if ((buf = xml_get_value("layout", "commentaryheight")))
 		settings.commpane_height = atoi(buf);
 	else {
-		if ((buf = xml_get_value("layout", "commentaryhight")))	/* backward compatible */
+		if ((buf = xml_get_value("layout", "commentaryhight"))) { /* backward compatible */
 			settings.commpane_height = atoi(buf);
-		else
+			xml_remove_node("layout", "commentaryhight", 0);
+		} else
 			settings.commpane_height = 240;
 		buf = g_strdup_printf("%d", settings.commpane_height);
 		xml_add_new_item_to_section("layout", "commentaryheight", buf);
