@@ -521,7 +521,7 @@ view_source_dialog (GtkhtmlEditor *editor,
 	gtk_scrolled_window_set_shadow_type (
 		GTK_SCROLLED_WINDOW (scrolled_window), GTK_SHADOW_IN);
 	gtk_box_pack_start (
-		GTK_BOX (GTK_DIALOG (dialog)->vbox),
+		GTK_BOX (gtk_dialog_get_content_area(GTK_DIALOG (dialog))),
 		scrolled_window, TRUE, TRUE, 0);
 
 	gtk_container_set_border_width (GTK_CONTAINER (dialog), 6);
@@ -1448,7 +1448,7 @@ gint editor_create_new(const gchar * filename, const gchar * key, gint editor_ty
 					g_free(e->filename);
 				e->filename = g_strdup(filename);
 				gtk_widget_show(e->window);
-				gdk_window_raise(GTK_WIDGET(e->window)->window);
+				gdk_window_raise(gtk_widget_get_parent_window(GTK_WIDGET(e->window)));
 
 				_load_file(e, g_strdup(filename));
 				return 1;
@@ -1464,7 +1464,7 @@ gint editor_create_new(const gchar * filename, const gchar * key, gint editor_ty
 				g_free(e->key);
 			e->key = g_strdup(key);
 			gtk_widget_show(e->window);
-			gdk_window_raise(GTK_WIDGET(e->window)->window);
+			gdk_window_raise(gtk_widget_get_parent_window(GTK_WIDGET(e->window)));
 
 			editor_load_note(e, NULL, NULL);
 
@@ -1480,7 +1480,7 @@ gint editor_create_new(const gchar * filename, const gchar * key, gint editor_ty
 				g_free(e->key);
 			e->key = g_strdup(key);
 			gtk_widget_show(e->window);
-			gdk_window_raise(GTK_WIDGET(e->window)->window);
+			gdk_window_raise(gtk_widget_get_parent_window(GTK_WIDGET(e->window)));
 
 			editor_load_book(e);
 

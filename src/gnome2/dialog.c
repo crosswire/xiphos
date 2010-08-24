@@ -186,7 +186,7 @@ static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 	//gtk_window_set_resizable(GTK_WINDOW(dialog_alert), FALSE);
 	gtk_dialog_set_has_separator(GTK_DIALOG(dialog_alert), FALSE);
 
-	dialog_vbox2 = GTK_DIALOG(dialog_alert)->vbox;
+	dialog_vbox2 = gtk_dialog_get_content_area(GTK_DIALOG(dialog_alert));
 	gtk_widget_show(dialog_vbox2);
 
 	hbox3 = gtk_hbox_new(FALSE, 12);
@@ -237,7 +237,7 @@ static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 		gtk_misc_set_alignment(GTK_MISC(label10), 0, 0.5);
 	}
 
-	dialog_action_area2 = GTK_DIALOG(dialog_alert)->action_area;
+	dialog_action_area2 = gtk_dialog_get_action_area(GTK_DIALOG(dialog_alert));
 	gtk_widget_show(dialog_action_area2);
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area2),
 				  GTK_BUTTONBOX_END);
@@ -312,7 +312,7 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 	gtk_window_set_resizable(GTK_WINDOW(dialog_request), FALSE);
 	gtk_dialog_set_has_separator(GTK_DIALOG(dialog_request), FALSE);
 
-	dialog_vbox3 = GTK_DIALOG(dialog_request)->vbox;
+	dialog_vbox3 = gtk_dialog_get_content_area(GTK_DIALOG(dialog_request));
 	gtk_widget_show(dialog_vbox3);
 
 	hbox4 = gtk_hbox_new(FALSE, 12);
@@ -486,7 +486,7 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 				 G_CALLBACK(on_dialog_enter), info);
 	}
 
-	dialog_action_area3 = GTK_DIALOG(dialog_request)->action_area;
+	dialog_action_area3 = gtk_dialog_get_action_area(GTK_DIALOG(dialog_request));
 	gtk_widget_show(dialog_action_area3);
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area3),
 				  GTK_BUTTONBOX_END);
