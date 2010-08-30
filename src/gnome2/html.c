@@ -35,7 +35,6 @@
 #include "gui/html.h"
 #include "gui/xiphos.h"
 #include "gui/sidebar.h"
-#include "gui/shortcutbar_main.h"
 #include "gui/parallel_view.h"
 #include "gui/utilities.h"
 #include "gui/about_modules.h"
