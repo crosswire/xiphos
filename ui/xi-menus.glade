@@ -73,6 +73,7 @@
 		      <property name="visible">True</property>
 		      <property name="label" translatable="yes">_Open Session</property>
 		      <property name="use_underline">True</property>
+		      <property name="tooltip" translatable="yes">Open a saved tab settings collection</property>
 		      <signal name="activate" handler="on_open_session_activate" last_modification_time="Fri, 06 Mar 2009 17:09:25 GMT"/>
 
 		      <child internal-child="image">
@@ -94,6 +95,7 @@
 		      <property name="visible">True</property>
 		      <property name="label" translatable="yes">_Save Session</property>
 		      <property name="use_underline">True</property>
+		      <property name="tooltip" translatable="yes">Save this collection of tab settings</property>
 		      <signal name="activate" handler="on_save_session_activate" last_modification_time="Fri, 06 Mar 2009 17:09:25 GMT"/>
 
 		      <child internal-child="image">
@@ -121,6 +123,7 @@
 		      <property name="visible">True</property>
 		      <property name="label" translatable="yes">_New Prayerlist/Journal</property>
 		      <property name="use_underline">True</property>
+		      <property name="tooltip" translatable="yes">Create a new journal or prayerlist from a template</property>
 		      <signal name="activate" handler="gui_menu_prayerlist_popup" last_modification_time="Fri, 06 Mar 2009 17:09:25 GMT"/>
 
 		      <child internal-child="image">
@@ -170,6 +173,7 @@
 		      <property name="visible">True</property>
 		      <property name="label" translatable="yes">_Search</property>
 		      <property name="use_underline">True</property>
+		      <property name="tooltip" translatable="yes">Bring the simple sidebar search forward</property>
 		      <signal name="activate" handler="on_search_activate" last_modification_time="Fri, 06 Mar 2009 19:07:48 GMT"/>
 
 		      <child internal-child="image">
@@ -191,6 +195,7 @@
 		      <property name="visible">True</property>
 		      <property name="label" translatable="yes">_Advanced Search</property>
 		      <property name="use_underline">True</property>
+		      <property name="tooltip" translatable="yes">Open the advanced search dialog, to run complex queries</property>
 		      <signal name="activate" handler="on_advanced_search_activate" last_modification_time="Fri, 06 Mar 2009 19:07:48 GMT"/>
 		      <accelerator key="F3" modifiers="0" signal="activate"/>
 
@@ -277,6 +282,7 @@
 		      <property name="visible">True</property>
 		      <property name="label" translatable="yes">Preview _Daily Devotion</property>
 		      <property name="use_underline">True</property>
+		      <property name="tooltip" translatable="yes">Show today's entry from your selected daily devotional in the previewer</property>
 		      <signal name="activate" handler="on_daily_devotion_activate" last_modification_time="Fri, 06 Mar 2009 18:27:19 GMT"/>
 		    </widget>
 		  </child>
@@ -337,6 +343,7 @@
 		    <widget class="GtkCheckMenuItem" id="link_tabs">
 		      <property name="visible">True</property>
 		      <property name="label" translatable="yes">L_ink Tabs</property>
+		      <property name="tooltip" translatable="yes">Make all tabs' Bibles navigate together</property>
 		      <property name="use_underline">True</property>
 		      <property name="active">False</property>
 		      <signal name="activate" handler="on_linked_tabs_activate" last_modification_time="Sat, 07 Mar 2009 01:20:22 GMT"/>
@@ -349,6 +356,7 @@
 		      <property name="label" translatable="yes">_Read Aloud</property>
 		      <property name="use_underline">True</property>
 		      <property name="active">False</property>
+		      <property name="tooltip" translatable="yes">Turn on text-to-speech reading of Bible verses as they are selected</property>
 		      <signal name="activate" handler="on_read_aloud_activate" last_modification_time="Fri, 06 Mar 2009 18:38:01 GMT"/>
 		    </widget>
 		  </child>
@@ -359,6 +367,7 @@
 		      <property name="label" translatable="yes">Show Verse _Numbers</property>
 		      <property name="use_underline">True</property>
 		      <property name="active">False</property>
+		      <property name="tooltip" translatable="yes">Display verse numbers in the text</property>
 		      <signal name="activate" handler="on_show_verse_numbers_activate" last_modification_time="Fri, 06 Mar 2009 19:31:17 GMT"/>
 		    </widget>
 		  </child>
@@ -369,6 +378,7 @@
 		      <property name="label" translatable="yes">_Highlight Current Verse</property>
 		      <property name="use_underline">True</property>
 		      <property name="active">False</property>
+		      <property name="tooltip" translatable="yes">Apply a high-contrast highlight to the current verse</property>
 		      <signal name="activate" handler="on_versehighlight_activate" last_modification_time="Sat, 07 Mar 2009 01:19:13 GMT"/>
 		    </widget>
 		  </child>
@@ -384,6 +394,7 @@
 		      <property name="visible">True</property>
 		      <property name="label" translatable="yes">_Attach/Detach Sidebar</property>
 		      <property name="use_underline">True</property>
+		      <property name="tooltip" translatable="yes">Operate the sidebar as a separate window</property>
 		      <signal name="activate" handler="on_attach_detach_sidebar_activate" last_modification_time="Sat, 07 Mar 2009 00:36:34 GMT"/>
 		    </widget>
 		  </child>
@@ -393,6 +404,7 @@
 		      <property name="visible">True</property>
 		      <property name="label" translatable="yes">_Show/Hide Attached Sidebar</property>
 		      <property name="use_underline">True</property>
+		      <property name="tooltip" translatable="yes">Remove the sidebar entirely from view</property>
 		      <signal name="activate" handler="on_sidebar_showhide_activate" last_modification_time="Sat, 07 Mar 2009 00:37:01 GMT"/>
 		    </widget>
 		  </child>
@@ -403,6 +415,7 @@
 		      <property name="label" translatable="yes">Show Parallel View in a _Tab</property>
 		      <property name="use_underline">True</property>
 		      <property name="active">False</property>
+		      <property name="tooltip" translatable="yes">Provide the full-chapter parallel Bible window as another tab</property>
 		    </widget>
 		  </child>
 
@@ -412,6 +425,7 @@
 		      <property name="label" translatable="yes">Show Previe_wer in the Sidebar</property>
 		      <property name="use_underline">True</property>
 		      <property name="active">False</property>
+		      <property name="tooltip" translatable="yes">Select Previewer position between sidebar or beneath Bible</property>
 		      <signal name="activate" handler="on_side_preview_activate" last_modification_time="Sat, 07 Mar 2009 00:32:40 GMT"/>
 		    </widget>
 		  </child>
@@ -434,6 +448,7 @@
 		      <property name="visible">True</property>
 		      <property name="label" translatable="yes">_Contents</property>
 		      <property name="use_underline">True</property>
+		      <property name="tooltip" translatable="yes">Open the help viewer on the Xiphos manual</property>
 		      <signal name="activate" handler="on_help_contents_activate" last_modification_time="Sat, 07 Mar 2009 00:31:04 GMT"/>
 		      <accelerator key="F1" modifiers="0" signal="activate"/>
 
@@ -456,6 +471,7 @@
 		      <property name="visible">True</property>
 		      <property name="label" translatable="yes">_Mailing List</property>
 		      <property name="use_underline">True</property>
+		      <property name="tooltip" translatable="yes">Open a browser on the users' mailing list webpage</property>
 		      <signal name="activate" handler="on_mailing_list_activate" last_modification_time="Fri, 06 Mar 2009 19:25:51 GMT"/>
 
 		      <child internal-child="image">
@@ -476,6 +492,7 @@
 		      <property name="visible">True</property>
 		      <property name="label" translatable="yes">_Live Chat</property>
 		      <property name="use_underline">True</property>
+		      <property name="tooltip" translatable="yes">Open a browser on an interface to live IRC chat</property>
 		      <signal name="activate" handler="on_live_chat_activate" last_modification_time="Fri, 06 Mar 2009 19:26:24 GMT"/>
 
 		      <child internal-child="image">
@@ -496,6 +513,7 @@
 		      <property name="visible">True</property>
 		      <property name="label" translatable="yes">_Report Bug</property>
 		      <property name="use_underline">True</property>
+		      <property name="tooltip" translatable="yes">Open a browser on our bug tracker</property>
 		      <signal name="activate" handler="on_report_bug_activate" last_modification_time="Fri, 06 Mar 2009 19:26:54 GMT"/>
 
 		      <child internal-child="image">
@@ -523,6 +541,7 @@
 		      <property name="visible">True</property>
 		      <property name="label" translatable="yes">About _Translation</property>
 		      <property name="use_underline">True</property>
+		      <property name="tooltip" translatable="yes">Learn about translating the Xiphos interface to other languages</property>
 		      <signal name="activate" handler="on_about_translation_activate" last_modification_time="Sat, 07 Mar 2009 00:29:29 GMT"/>
 
 		      <child internal-child="image">
@@ -549,6 +568,7 @@
 		      <property name="visible">True</property>
 		      <property name="label" translatable="yes">_About The SWORD Project</property>
 		      <property name="use_underline">True</property>
+		      <property name="tooltip" translatable="yes">Learn about The Sword Project, of which Xiphos is one application</property>
 		      <signal name="activate" handler="on_about_the_sword_project_activate" last_modification_time="Fri, 06 Mar 2009 19:29:06 GMT"/>
 
 		      <child internal-child="image">
@@ -569,6 +589,7 @@
 		      <property name="visible">True</property>
 		      <property name="label" translatable="yes">About _Xiphos</property>
 		      <property name="use_underline">True</property>
+		      <property name="tooltip" translatable="yes">Learn about Xiphos</property>
 		      <signal name="activate" handler="on_about_xiphos_activate" last_modification_time="Fri, 06 Mar 2009 21:58:19 GMT"/>
 
 		      <child internal-child="image">
