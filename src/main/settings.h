@@ -118,13 +118,7 @@ struct _settings {
 	        formatpercom,			/* use html to format personal notes */
 	        showshortcutbar,		/* display shortcut bar if true */
 	        showsidebar,			/* display sidebar bar if true */
-		showfavoritesgroup,		/* display shortcut bar group if true */
-	        showtextgroup,			/* display shortcut bar group if true */
-	        showcomgroup,			/* display shortcut bar group if true */
-	        showdictgroup,			/* display shortcut bar group if true */
-	        showbookgroup,			/* display shortcut bar group if true */
-	        showbookmarksgroup,		/* display shortcut bar group if true */
-	        showhistorygroup,		/* display shortcut bar group if true */
+
 		showsplash,			/* show splash on program start if true */
 		showdevotional,			/* show devotional on program start if true */
 		text_tool,			/* show toolbar in text window if true  */
