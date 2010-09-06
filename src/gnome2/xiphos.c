@@ -279,7 +279,6 @@ void shutdown_frontend(void)
 
 	/* free dir and file stuff */
 	g_free(settings.gSwordDir);
-	g_free(settings.shortcutbarDir);
 	g_free(settings.fnconfigure);
 	g_free(settings.swbmDir);
 

@@ -44,8 +44,6 @@
 #include "gui/xiphos.h"
 #include "gui/main_window.h"
 #include "gui/main_menu.h"
-#include "gui/shortcutbar_main.h"
-#include "gui/shortcutbar_dialog.h"
 #include "gui/sidebar.h"
 #include "gui/utilities.h"
 #include "gui/bibletext.h"
