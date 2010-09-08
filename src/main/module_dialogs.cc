@@ -191,7 +191,7 @@ void main_dialogs_clear_viewer(DIALOG_DATA *d)
 	g_string_printf(str,
 			HTML_START
 			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
-			"<b><font color=\"grey\" size=\"-1\">%s</font></b><hr></body></html>",
+			"<b><font color=\"grey\" size=\"-1\">%s</font></b><hr/></body></html>",
 			settings.bible_bg_color, settings.bible_text_color,
 			settings.link_color, buf);
 
@@ -236,25 +236,25 @@ void main_dialogs_information_viewer(DIALOG_DATA * d, gchar * mod_name,
 	if (type) {
 		if (!strcmp(type,"n")) {
 			g_string_printf(tmp_str,
-				"<font color=\"grey\">%s<HR></font><br>",
+				"<font color=\"grey\">%s<hr/></font><br/>",
 					_("Footnote"));
 			str = g_string_append(str, tmp_str->str);
 		}
 		if (!strcmp(type,"x")) {
 			g_string_printf(tmp_str,
-				"<font color=\"grey\">%s<HR></font><br>",
+				"<font color=\"grey\">%s<hr/></font><br/>",
 					_("Cross Reference"));
 			str = g_string_append(str, tmp_str->str);
 		}
 		if (!strcmp(action ,"showStrongs")) {  //&& !strcmp(type,"Greek")
 			g_string_printf(tmp_str,
-				"<font color=\"grey\">%s: %s<HR></font><br>",
+				"<font color=\"grey\">%s: %s<hr/></font><br/>",
 					_("Strongs"),key);
 			str = g_string_append(str, tmp_str->str);
 		}
 		if (!strcmp(action ,"showMorph")) {  //&& !strcmp(type,"Greek")
 			g_string_printf(tmp_str,
-				"<font color=\"grey\">%s: %s<HR></font><br>",
+				"<font color=\"grey\">%s: %s<hr/></font><br/>",
 					_("Morphology"),key);
 			str = g_string_append(str, tmp_str->str);
 		}
@@ -262,7 +262,7 @@ void main_dialogs_information_viewer(DIALOG_DATA * d, gchar * mod_name,
 
 	if (!strcmp(action ,"showStrongsMorph")) {  //&& !strcmp(type,"Greek")
 		g_string_printf(tmp_str,
-			"<font color=\"grey\">%s: %s<HR></font><br>",
+			"<font color=\"grey\">%s: %s<hr/></font><br/>",
 				_("Strongs"),key);
 		str = g_string_append(str, tmp_str->str);
 		g_string_printf(tmp_str,
@@ -273,11 +273,11 @@ void main_dialogs_information_viewer(DIALOG_DATA * d, gchar * mod_name,
 		str = g_string_append(str, text);
 
 		g_string_printf(tmp_str,
-			"<font color=\"grey\"><br><br>%s: %s<HR></font><br>",
+			"<font color=\"grey\"><br/><br/>%s: %s<hr/></font><br/>",
 					_("Morphology"),morph);
 		str = g_string_append(str, tmp_str->str);
 		str = g_string_append(str, morph_text);
-		g_string_printf(tmp_str, " %s<br>", "</font></body></html>");
+		g_string_printf(tmp_str, " %s<br/>", "</font></body></html>");
 		str = g_string_append(str, tmp_str->str);
 
 
@@ -347,29 +347,29 @@ void main_dialog_information_viewer(const gchar * mod_name,
 	str = g_string_new(tmp_str->str);
 	if (type) {
 		if (!strcmp(type,"n")) {
-			g_string_printf(tmp_str,"<font color=\"grey\">%s<HR></font><br>",
+			g_string_printf(tmp_str,"<font color=\"grey\">%s<hr/></font><br/>",
 					_("Footnote"));
 			str = g_string_append(str, tmp_str->str);
 		}
 		if (!strcmp(type,"x")) {
-			g_string_printf(tmp_str,"<font color=\"grey\">%s<HR></font><br>",
+			g_string_printf(tmp_str,"<font color=\"grey\">%s<hr/></font><br/>",
 					_("Cross Reference"));
 			str = g_string_append(str, tmp_str->str);
 		}
 		if (!strcmp(action ,"showStrongs")) {  //&& !strcmp(type,"Greek")
-			g_string_printf(tmp_str,"<font color=\"grey\">%s: %s<HR></font><br>",
+			g_string_printf(tmp_str,"<font color=\"grey\">%s: %s<hr/></font><br/>",
 					_("Strongs"),key);
 			str = g_string_append(str, tmp_str->str);
 		}
 		if (!strcmp(action ,"showMorph")) {  //&& !strcmp(type,"Greek")
-			g_string_printf(tmp_str,"<font color=\"grey\">%s: %s<HR></font><br>",
+			g_string_printf(tmp_str,"<font color=\"grey\">%s: %s<hr/></font><br/>",
 					_("Morphology"),key);
 			str = g_string_append(str, tmp_str->str);
 		}
 	}
 
 	if (!strcmp(action ,"showStrongsMorph")) {  //&& !strcmp(type,"Greek")
-		g_string_printf(tmp_str,"<font color=\"grey\">%s: %s<HR></font><br>",
+		g_string_printf(tmp_str,"<font color=\"grey\">%s: %s<hr/></font><br/>",
 				_("Strongs"),key);
 		str = g_string_append(str, tmp_str->str);
 		g_string_printf(tmp_str,
@@ -379,11 +379,11 @@ void main_dialog_information_viewer(const gchar * mod_name,
 		str = g_string_append(str, tmp_str->str);
 		str = g_string_append(str, text);
 
-		g_string_printf(tmp_str,"<font color=\"grey\"><br><br>%s: %s<HR></font><br>",
+		g_string_printf(tmp_str,"<font color=\"grey\"><br/><br/>%s: %s<hr/></font><br/>",
 					_("Morphology"),morph);
 		str = g_string_append(str, tmp_str->str);
 		str = g_string_append(str, morph_text);
-		g_string_printf(tmp_str, " %s<br>", "</font></body></html>");
+		g_string_printf(tmp_str, " %s<br/>", "</font></body></html>");
 		str = g_string_append(str, tmp_str->str);
 
 
@@ -984,7 +984,7 @@ static gint show_note(DIALOG_DATA * d,const gchar * module, const gchar * passag
 		while (tmp != NULL) {
 			buf = g_strdup_printf(
 				"<a href=\"sword://%s/%s\">"
-				"<font color=\"%s\">%s,</font></a><br>",
+				"<font color=\"%s\">%s,</font></a><br/>",
 				(gchar*)module,
 				(const char *) tmp->data,
 				settings.bible_text_color,
@@ -1000,7 +1000,7 @@ static gint show_note(DIALOG_DATA * d,const gchar * module, const gchar * passag
 
 		buf = g_strdup_printf(
 				"<a href=\"sword://%s/%s\">"
-				"<font color=\"%s\">%s%s</font></a><br>",
+				"<font color=\"%s\">%s%s</font></a><br/>",
 				(gchar*)module,
 				d->key,
 				settings.bible_text_color,

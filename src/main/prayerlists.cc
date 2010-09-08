@@ -122,13 +122,13 @@ static void
 add_prayer_list_sections (RawGenBook * book, TreeKeyIdx * treeKey)
 {
 	appendChild(treeKey, _("Growth"));
-	setEntryText(book, _("<b>For Growth</b><br>"));
+	setEntryText(book, _("<b>For Growth</b><br/>"));
 	appendSibling(treeKey, _("Salvation"));
-	setEntryText(book, _("<b>For Salvation</b><br>"));
+	setEntryText(book, _("<b>For Salvation</b><br/>"));
 	appendSibling(treeKey, _("Health"));
-	setEntryText(book, _("<b>For Health</b><br>"));
+	setEntryText(book, _("<b>For Health</b><br/>"));
 	appendSibling(treeKey, _("Misc"));
-	setEntryText(book, _("<b>Miscellaneous</b><br>"));
+	setEntryText(book, _("<b>Miscellaneous</b><br/>"));
 
 	treeKey->parent();
 }
@@ -137,11 +137,11 @@ static void
 add_outline_subsections (RawGenBook * book, TreeKeyIdx * treeKey)
 {
 	appendChild(treeKey, _("Point x"));
-	setEntryText(book, _("<b>(x)</b><br>"));
+	setEntryText(book, _("<b>(x)</b><br/>"));
 	appendSibling(treeKey, _("Point y"));
-	setEntryText(book, _("<b>(y)</b><br>"));
+	setEntryText(book, _("<b>(y)</b><br/>"));
 	appendSibling(treeKey, _("Point z"));
-	setEntryText(book, _("<b>(z)</b><br>"));
+	setEntryText(book, _("<b>(z)</b><br/>"));
 
 	treeKey->parent();
 }
@@ -150,16 +150,16 @@ static void
 add_outline_sections (RawGenBook * book, TreeKeyIdx * treeKey)
 {
 	appendChild(treeKey, _("Minor Topic 1"));
-	setEntryText(book, _("<b>Subtopic 1</b><br>"));
+	setEntryText(book, _("<b>Subtopic 1</b><br/>"));
 	add_outline_subsections(book, treeKey);
 	appendSibling(treeKey, _("Minor Topic 2"));
-	setEntryText(book, _("<b>Subtopic 2</b><br>"));
+	setEntryText(book, _("<b>Subtopic 2</b><br/>"));
 	add_outline_subsections(book, treeKey);
 	appendSibling(treeKey, _("Minor Topic 3"));
-	setEntryText(book, _("<b>Subtopic 3</b><br>"));
+	setEntryText(book, _("<b>Subtopic 3</b><br/>"));
 	add_outline_subsections(book, treeKey);
 	appendSibling(treeKey, _("Minor Topic 4"));
-	setEntryText(book, _("<b>Subtopic 4</b><br>"));
+	setEntryText(book, _("<b>Subtopic 4</b><br/>"));
 	add_outline_subsections(book, treeKey);
 
 	treeKey->parent();
@@ -339,7 +339,7 @@ main_prayerlist_basic_create(void)
 	TreeKeyIdx *treeKey = (TreeKeyIdx *) (SWKey *) (*book);
 
 	appendChild(treeKey, _("MyPrayerList"));
-	setEntryText(book, _("<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"));
+	setEntryText(book, _("<b>People:</b><br/>Bob<br/>Sam<br/>Sue<br/><br/><b>Church:</b><br/>pews<br/>fellowship<br/>Bibles for missionaries<br/><br/><br/>"));
 
 	delete treeKey;
 	return TRUE;
@@ -381,11 +381,11 @@ main_prayerlist_subject_create(void)
 	TreeKeyIdx *treeKey = (TreeKeyIdx *) (SWKey *) (*book);
 
 	appendChild(treeKey, _("Salvation"));
-	setEntryText(book, _("Bob<br>Sam<br>Sue<br>John<br>"));
+	setEntryText(book, _("Bob<br/>Sam<br/>Sue<br/>John<br/>"));
 	appendSibling(treeKey, _("Spiritual Growth"));
-	setEntryText(book, _("Mike<br>Steve<br>"));
+	setEntryText(book, _("Mike<br/>Steve<br/>"));
 	appendSibling(treeKey, _("Health"));
-	setEntryText(book, _("Sue<br>John<br>"));
+	setEntryText(book, _("Sue<br/>John<br/>"));
 
 	delete treeKey;
 	return TRUE;
@@ -430,7 +430,7 @@ main_prayerlist_monthly_create(void)
 	{
 		char monthnum[4], monthstring[32];
 		snprintf(monthnum, 3, "%02d", month+1);
-		snprintf(monthstring, 31, "<b>%s</b><br>", _(pl_months[month]));
+		snprintf(monthstring, 31, "<b>%s</b><br/>", _(pl_months[month]));
 
 		if (month == 0)
 			appendChild(treeKey, monthnum);
@@ -482,7 +482,7 @@ main_prayerlist_journal_create(void)
 	{
 		char monthnum[4], monthstring[32];
 		snprintf(monthnum, 3, "%02d", month+1);
-		snprintf(monthstring, 31, "<b>%s</b><br>", _(pl_months[month]));
+		snprintf(monthstring, 31, "<b>%s</b><br/>", _(pl_months[month]));
 
 		if (month == 0)
 			appendChild(treeKey, monthnum);
@@ -493,7 +493,7 @@ main_prayerlist_journal_create(void)
 		for (int day = 0; day < pl_month_days[month]; ++day) {
 			char daynum[4], monthday[32];
 			snprintf(daynum, 3, "%02d", day+1);
-			snprintf(monthday, 31, "<b>%s %d</b><br>", _(pl_months[month]), day+1);
+			snprintf(monthday, 31, "<b>%s %d</b><br/>", _(pl_months[month]), day+1);
 
 			if (day == 0)
 				appendChild(treeKey, daynum);
@@ -544,13 +544,13 @@ main_prayerlist_outlined_topic_create(void)
 	TreeKeyIdx *treeKey = (TreeKeyIdx *) (SWKey *) (*book);
 
 	appendChild(treeKey, _("Major Topic A"));
-	setEntryText(book, _("<b>Major Topic A</b><br>"));
+	setEntryText(book, _("<b>Major Topic A</b><br/>"));
 	add_outline_sections(book, treeKey);
 	appendSibling(treeKey, _("Major Topic B"));
-	setEntryText(book, _("<b>Major Topic B</b><br>"));
+	setEntryText(book, _("<b>Major Topic B</b><br/>"));
 	add_outline_sections(book, treeKey);
 	appendSibling(treeKey, _("Major Topic C"));
-	setEntryText(book, _("<b>Major Topic C</b><br>"));
+	setEntryText(book, _("<b>Major Topic C</b><br/>"));
 	add_outline_sections(book, treeKey);
 
 	delete treeKey;

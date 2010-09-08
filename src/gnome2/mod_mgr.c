@@ -1017,7 +1017,7 @@ add_module_to_language_folder(GtkTreeView * tree,
 		gchar *str_data;
 
 		/*gtk_tooltip_set_markup ( tooltip,
-                                         "<b>a little</b><br>tooltip");*/
+                                         "<b>a little</b><br/>tooltip");*/
 		gtk_tree_model_get(model, &iter_iter, COLUMN_NAME,
 				   &str_data, -1);
 		if (!strcmp(info->language, str_data)) {
