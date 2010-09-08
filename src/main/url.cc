@@ -497,7 +497,7 @@ static gint show_note(const gchar * module, const gchar * passage,
 			while (chaser != NULL) {
 				buf = g_strdup_printf(
 				    "<a href=\"sword://%s/%s\">"
-				    "<font color=\"%s\">%s,</font></a><br>",
+				    "<font color=\"%s\">%s,</font></a><br/>",
 				    (gchar*)module,
 				    (const char *) chaser->data,
 				    settings.bible_text_color,
@@ -511,7 +511,7 @@ static gint show_note(const gchar * module, const gchar * passage,
 			g_free(tmpbuf);
 
 			buf = g_strdup_printf("<a href=\"sword://%s/%s\">"
-					      "<font color=\"%s\">%s%s</font></a><br>",
+					      "<font color=\"%s\">%s%s</font></a><br/>",
 					      (gchar*)module,
 					      settings.currentverse,
 					      settings.bible_text_color,
