@@ -656,7 +656,7 @@ CacheHeader(ModuleCache::CacheVerse& cVerse,
 							heading)) != NULL) {
 		preverse2 = mod.RenderText(preverse);
 		g_string_printf(text,
-				"<br><b>%s</b><br><br>",
+				"<br/><b>%s</b><br/><br/>",
 				(((ops->strongs || ops->lemmas) ||
 				  ops->morphs)
 				 ? block_render(preverse2)
@@ -800,7 +800,7 @@ GTKEntryDisp::Display(SWModule &imodule)
 			      "<font face=\"%s\" size=\"%+d\">"
 			      "[<a href=\"passagestudy.jsp?action=showModInfo&value=%s&module=%s\">"
 			      "<font color=\"%s\">"
-			      "*%s*</font></a>]<br>",
+			      "*%s*</font></a>]<br/>",
 			      (strongs_and_morph		// both
 			       ? CSS_BLOCK_BOTH
 			       : (strongs_or_morph		// either
@@ -978,14 +978,14 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 
 		num = main_format_number(chapter);
 		buf=g_strdup_printf(
-				"%s%s<br><hr><div style=\"text-align: center\"><b>%s %s</b></div>",
+				"%s%s<br/><hr/><div style=\"text-align: center\"><b>%s %s</b></div>",
 #if 0
 				cVerse.GetText(),
 #else
 				text,
 #endif
 				// extra break when excess strongs/morph space.
-				(strongs_or_morph ? "<br>" : ""),
+				(strongs_or_morph ? "<br/>" : ""),
 				_("Chapter"), num);
 		g_free(num);
 		swbuf.append(buf);
@@ -1058,9 +1058,9 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 	imodule++;
 	if (imodule.Error()) {
 		buf=g_strdup_printf(
-			"%s<hr><div style=\"text-align: center\"><p><b>%s</b></p></div>",
+			"%s<hr/><div style=\"text-align: center\"><p><b>%s</b></p></div>",
 			// extra break when excess strongs/morph space.
-			(strongs_or_morph ? "<br><br>" : ""),
+			(strongs_or_morph ? "<br/><br/>" : ""),
 			imodule.Description());
 		swbuf.append(buf);
 		g_free(buf);
@@ -1069,8 +1069,8 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 		char *num = main_format_number(key->Chapter());
 
 		buf=g_strdup_printf(
-			"%s<hr><div style=\"text-align: center\"><b>%s %s</b></div>",
-			(strongs_or_morph ? "<br><br>" : ""),
+			"%s<hr/><div style=\"text-align: center\"><b>%s %s</b></div>",
+			(strongs_or_morph ? "<br/><br/>" : ""),
 			_("Chapter"), num);
 		swbuf.append(buf);
 		g_free(buf);
@@ -1326,7 +1326,7 @@ GTKChapDisp::Display(SWModule &imodule)
 				text->len -= 6;
 				*(text->str + text->len) = '\0';
 			}
-			else if (!strcmp(text->str + text->len - 4, "<br>")) {
+			else if (!strcmp(text->str + text->len - 4, "<br/>")) {
 				text->len -= 4;
 				*(text->str + text->len) = '\0';
 			}
@@ -1356,7 +1356,7 @@ GTKChapDisp::Display(SWModule &imodule)
 			if ((key->Verse() != curVerse) ||
 			    (!settings.versehighlight &&
 			     (!e || !settings.annotate_highlight)))
-				swbuf.append("<br>");
+				swbuf.append("<br/>");
 		}
 
 		// special contrasty highlighting
@@ -1498,7 +1498,7 @@ DialogEntryDisp::Display(SWModule &imodule)
 			      "<font face=\"%s\" size=\"%+d\">"
 			      "<font color=\"%s\">"
 			      "<a href=\"passagestudy.jsp?action=showModInfo&value=%s&module=%s\">"
-			      "[*%s*]</a></font><br>",
+			      "[*%s*]</a></font><br/>",
 			      (ops->doublespace ? DOUBLE_SPACE : ""),
 			      settings.bible_bg_color,
 			      settings.bible_text_color,
@@ -1771,7 +1771,7 @@ DialogChapDisp::Display(SWModule &imodule)
 				text->len -= 6;
 				*(text->str + text->len) = '\0';
 			}
-			else if (!strcmp(text->str + text->len - 4, "<br>")) {
+			else if (!strcmp(text->str + text->len - 4, "<br/>")) {
 				text->len -= 4;
 				*(text->str + text->len) = '\0';
 			}
@@ -1801,7 +1801,7 @@ DialogChapDisp::Display(SWModule &imodule)
 			if ((key->Verse() != curVerse) ||
 			    (!settings.versehighlight &&
 			     (!e || !settings.annotate_highlight)))
-				swbuf.append("<br>");
+				swbuf.append("<br/>");
 		}
 
 		// special contrasty highlighting
@@ -1873,7 +1873,7 @@ GTKPrintEntryDisp::Display(SWModule &imodule)
 			      "<font face=\"%s\" size=\"%+d\">"
 			      "<font color=\"%s\">"
 			      "<a href=\"passagestudy.jsp?action=showModInfo&value=%s&module=%s\">"
-			      "[*%s*]</a></font>[%s]<br>",
+			      "[*%s*]</a></font>[%s]<br/>",
 			      (ops->doublespace ? DOUBLE_SPACE : ""),
 			      settings.bible_bg_color,
 			      settings.bible_text_color,
@@ -1961,7 +1961,7 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 			= backend->get_entry_attribute("Heading", "Preverse",
 						       heading)) != NULL) {
 			const char *preverse2 = imodule.RenderText(preverse);
-			buf=g_strdup_printf("<br><b>%s</b><br><br>", preverse2);
+			buf=g_strdup_printf("<br/><b>%s</b><br/><br/>", preverse2);
 			swbuf.append(buf);
 			g_free(buf);
 			g_free(preverse);
@@ -2000,7 +2000,7 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 			} else {
 				newparagraph = FALSE;
 			}
-			swbuf.append("<br>");
+			swbuf.append("<br/>");
 		}
 
 		g_free(buf);
