@@ -575,7 +575,7 @@ void get_heading(SWBuf &text, BackEnd *p, gint modidx)
 						  heading)) != NULL) {
 		preverse2 = p->render_this_text(
 			       settings.parallel_list[modidx], preverse);
-		buf = g_strdup_printf("<br><b>%s</b><br><br>", preverse2);
+		buf = g_strdup_printf("<br/><b>%s</b><br/><br/>", preverse2);
 
 		text += buf;
 
@@ -666,7 +666,7 @@ void main_update_parallel_page(void)
 			g_string_append(data, tmpBuf);
 
 			if (is_rtol)
-				g_string_append(data, "<br><div align=right>");
+				g_string_append(data, "<br/><div align=right>");
 
 			backend_p->set_module_key(settings.parallel_list[modidx], settings.cvparallel);
 			text = "";
@@ -680,7 +680,7 @@ void main_update_parallel_page(void)
 			}
 
 			if (is_rtol)
-				g_string_append(data, "</div><br>");
+				g_string_append(data, "</div><br/>");
 
 			sprintf(tmpBuf,
 				"</font><small>[<a href=\"passagestudy.jsp?action=showParallel&"
@@ -799,7 +799,7 @@ static void interpolate_parallel_display(SWBuf& text, gchar *key, gint parallel_
 				text += str;
 
 				if (is_rtol[modidx])
-					text += "<br><div align=right>";
+					text += "<br/><div align=right>";
 
 				backend_p->set_module_key(settings.parallel_list[modidx], tmpkey);
 				get_heading(text, backend_p, modidx);

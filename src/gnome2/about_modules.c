@@ -320,7 +320,7 @@ about_module_display(GString * str,
 			if ((text[1] == 'p') &&
 			    (text[2] == 'a') &&
 			    (text[3] == 'r')) {
-				str = g_string_append(str, (tooltip ? "\n" : "<br>\n"));
+				str = g_string_append(str, (tooltip ? "\n" : "<br/>\n"));
 				text += 3;
 				continue;
 			}
@@ -379,9 +379,9 @@ gui_core_display_about_dialog(gchar * desc,
 	static const char *html_end = "</body></html>";
 
 	g_string_printf(description,
-			"<center><font color=\"#000fcf\"><b>%s</b></font><hr>%s %s</center><br>",
+			"<center><font color=\"#000fcf\"><b>%s</b></font><hr/>%s %s</center><br/>",
 			(desc ? desc : "No module present"),
-			(version ? "<br>Sword module version" : ""),
+			(version ? "<br/>Sword module version" : ""),
 			(version ? version : ""));
 	aboutbox = gui_create_about_modules();
 	gtk_widget_show(aboutbox);
