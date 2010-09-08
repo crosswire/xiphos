@@ -324,19 +324,3 @@ void main_load_book_tree_in_editor (GtkTreeView * treeview, char *book)
 	gtk_tree_store_append (GTK_TREE_STORE (store), &parent, NULL);
 	load_treeview (store, &parent, root);
 }
-
-
-
-void add_prayer_list_sections (RawGenBook * book, TreeKeyIdx * treeKey)
-{
-	appendChild (treeKey, _("Growth"));
-	setEntryText (book, _("<b>For Growth</b><br>"));
-	appendSibbling (treeKey, _("Salvation"));
-	setEntryText (book, _("<b>For Salvation</b><br>"));
-	appendSibbling (treeKey, _("Health"));
-	setEntryText (book, _("<b>For Health</b><br>"));
-	appendSibbling (treeKey, "Misc");
-	setEntryText (book, _("<b>Miscellaneous</b><br>"));
-
-	treeKey->parent ();
-}
