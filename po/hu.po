@@ -7,10 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-17 03:35+0100\n"
+"POT-Creation-Date: 2010-09-20 20:42+0100\n"
 "PO-Revision-Date: 2010-09-15 13:02+0000\n"
 "Last-Translator: Dmitrijs Ledkovs <Unknown>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
+"Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,11 +20,18 @@ msgstr ""
 "X-Poedit-Country: HUNGARY\n"
 "X-Poedit-Language: Hungarian\n"
 
-#: ../src/backend/sword_main.cc:1077
+#: ../src/backend/sword_main.cc:732
+msgid ""
+"Xiphos failure: \"can't happen\", display_mod: null\n"
+"Please report this. sword_main.cc:set_treekey\n"
+"What were you doing when this occurred?"
+msgstr ""
+
+#: ../src/backend/sword_main.cc:1083
 msgid "Configuration not found"
 msgstr "Konfiguráció nem található"
 
-#: ../src/editor/slib-editor.c:224 ../src/gnome2/html.c:634
+#: ../src/editor/slib-editor.c:224 ../src/gnome2/html.c:633
 #, c-format
 msgid "Page %d of %d"
 msgstr "%d/%d oldal"
@@ -96,7 +104,7 @@ msgid "Delete current note"
 msgstr "Aktuális jegyzet törlése"
 
 #: ../src/editor/slib-editor.c:769 ../ui/editor_note.xml.h:14
-#: ../ui/editor_studypad.xml.h:20 ../ui/xi-menus.glade.h:105
+#: ../ui/editor_studypad.xml.h:20 ../ui/xi-menus.glade.h:126
 msgid "_File"
 msgstr "_Fájl"
 
@@ -112,7 +120,7 @@ msgstr "HTML-_forrás"
 msgid "_Plain Source"
 msgstr "_Egyszerű forrás"
 
-#: ../src/editor/slib-editor.c:845 ../ui/xi-menus.glade.h:120
+#: ../src/editor/slib-editor.c:845 ../ui/xi-menus.glade.h:141
 msgid "_View"
 msgstr "Né_zet"
 
@@ -137,7 +145,7 @@ msgstr "bezárás előtt?"
 msgid "If you don't save, changes will be permanently lost."
 msgstr "Ha nem ment, akkor a változtatások véglegesen elvesznek."
 
-#: ../src/editor/slib-editor.c:1292 ../ui/xi-menus.glade.h:39
+#: ../src/editor/slib-editor.c:1292 ../ui/xi-menus.glade.h:43
 msgid "File"
 msgstr "Fájl"
 
@@ -153,7 +161,7 @@ msgstr "Jegyzet szerkesztő"
 msgid "Prayer List/Journal Editor"
 msgstr "Imalista szerkesztő"
 
-#: ../src/gecko/gecko-html.cpp:177 ../src/gnome2/html.c:163
+#: ../src/gecko/gecko-html.cpp:177 ../src/gnome2/html.c:162
 msgid "Unlock "
 msgstr "Felold "
 
@@ -191,7 +199,7 @@ msgstr "Nem volt lehetséges a dokumentum nyomtatása: %s"
 msgid "About Sword Module"
 msgstr "A Sword modulról"
 
-#: ../src/gnome2/about_modules.c:389 ../src/gnome2/mod_mgr.c:256
+#: ../src/gnome2/about_modules.c:392 ../src/gnome2/mod_mgr.c:265
 msgid "The module has no About information."
 msgstr "A modul nem rendelkezik Infó leírással"
 
@@ -275,7 +283,7 @@ msgstr "Ugrás "
 #: ../src/gnome2/bookmark_dialog.c:171 ../src/gnome2/bookmarks_menu.c:363
 #: ../src/gnome2/bookmarks_menu.c:658 ../src/gnome2/bookmarks_menu.c:756
 #: ../src/gnome2/bookmarks_treeview.c:134 ../ui/editor_studypad.xml.h:2
-#: ../ui/xi-menus.glade.h:13
+#: ../ui/xi-menus.glade.h:14
 msgid "Bookmark"
 msgstr "Könyvjelző"
 
@@ -297,7 +305,7 @@ msgstr "Mappa: "
 msgid "Specify bookmarks file"
 msgstr "Könyvjelző fájl megadása"
 
-#: ../src/gnome2/bookmarks_menu.c:349 ../ui/xi-menus.glade.h:32
+#: ../src/gnome2/bookmarks_menu.c:349 ../ui/xi-menus.glade.h:36
 msgid "Edit"
 msgstr "Szerkeszt"
 
@@ -343,7 +351,7 @@ msgstr "Címke: "
 msgid "Search result: %s"
 msgstr "Keresés eredménye: %s"
 
-#: ../src/gnome2/bookmarks_treeview.c:945 ../src/gnome2/sidebar.c:1376
+#: ../src/gnome2/bookmarks_treeview.c:944 ../src/gnome2/sidebar.c:1374
 msgid "Bookmarks"
 msgstr "Könyvjelzők"
 
@@ -373,7 +381,7 @@ msgid "Close _without Saving"
 msgstr "Bezár mentés _nélkül"
 
 #: ../src/gnome2/export_bookmarks.c:195 ../src/gnome2/export_bookmarks.c:254
-#: ../src/gnome2/sidebar.c:1392
+#: ../src/gnome2/sidebar.c:1390
 #, c-format
 msgid "Verse List"
 msgstr "Vers lista"
@@ -408,7 +416,7 @@ msgid "Search backwards"
 msgstr "Keresés visszafelé"
 
 #: ../src/gnome2/find_dialog.c:254 ../src/gnome2/search_sidebar.c:262
-#: ../ui/search-dialog.glade.h:76
+#: ../ui/search-dialog.glade.h:78
 msgid "Regular expression"
 msgstr "Reguláris kifejezés"
 
@@ -456,7 +464,7 @@ msgstr "Az alap betűkészlet használata ehhez a modulhoz"
 #. *
 #. * Return value
 #. *   void
-#. 
+#.
 #: ../src/gnome2/gui.c:101
 msgid ""
 "URL references using \"sword://\" (similar to web page\n"
@@ -514,18 +522,18 @@ msgstr "Kérem jelentse ezt a hibát a Xiphos csapatnak:"
 msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
 msgstr "HIBA! Xiphos is about to crash due to a \"STRING\" error."
 
-#: ../src/gnome2/main_window.c:795
+#: ../src/gnome2/main_window.c:793
 msgid "Xiphos - Bible Study Software"
 msgstr "Xiphos - Biblia tanulmányozó alkalmazás"
 
-#: ../src/gnome2/main_window.c:850
+#: ../src/gnome2/main_window.c:848
 msgid "Open a new tab"
 msgstr "Új fül megnyitása"
 
-#: ../src/gnome2/main_window.c:928 ../src/gnome2/sidebar.c:618
-#: ../src/gnome2/sidebar.c:624 ../src/main/sidebar.cc:655
-#: ../src/main/sidebar.cc:998 ../src/main/sidebar.cc:999
-#: ../src/main/sidebar.cc:1000
+#: ../src/gnome2/main_window.c:928 ../src/gnome2/sidebar.c:616
+#: ../src/gnome2/sidebar.c:622 ../src/main/sidebar.cc:664
+#: ../src/main/sidebar.cc:1009 ../src/main/sidebar.cc:1010
+#: ../src/main/sidebar.cc:1011
 msgid "Standard View"
 msgstr "Normál nézet"
 
@@ -604,370 +612,19 @@ msgstr ""
 "%s\n"
 "\n"
 
-#: ../src/gnome2/mod_mgr.c:174
-msgid "Remove these modules?"
-msgstr "El kívánja távolítani ezeket a modulokat?"
-
-#: ../src/gnome2/mod_mgr.c:175
-msgid "Preparing to remove"
-msgstr "Előkészítés eltávolításhoz"
-
-#: ../src/gnome2/mod_mgr.c:176
-msgid "Removing"
-msgstr "Eltávolítás"
-
-#: ../src/gnome2/mod_mgr.c:177 ../ui/xi-menus.glade.h:73
-msgid "Remove"
-msgstr "Eltávolít"
-
-#: ../src/gnome2/mod_mgr.c:180
-msgid "Install these modules?"
-msgstr "Telepíteni kívánja ezeket a modulokat?"
-
-#: ../src/gnome2/mod_mgr.c:181
-msgid "Preparing to install"
-msgstr "Előkészítés a telepítéshez"
-
-#: ../src/gnome2/mod_mgr.c:182
-msgid "Installing"
-msgstr "Telepítés"
-
-#: ../src/gnome2/mod_mgr.c:183
-msgid "Install"
-msgstr "Telepít"
-
-#: ../src/gnome2/mod_mgr.c:186
-msgid "Archive these modules?"
-msgstr "Archiválni kívánja ezeket a modulokat?"
-
-#: ../src/gnome2/mod_mgr.c:187
-msgid "Preparing to archive"
-msgstr "Archiválás előkészítése"
-
-#: ../src/gnome2/mod_mgr.c:188
-msgid "Archiving"
-msgstr "Archiválás"
-
-#: ../src/gnome2/mod_mgr.c:189
-msgid "Archive"
-msgstr "Archivum"
-
-#: ../src/gnome2/mod_mgr.c:192
+#. *****************************************************************************
+#. * defines
+#.
+#: ../src/gnome2/mod_mgr.c:62
+#, fuzzy
 msgid ""
-"Build fast-search index for these\n"
-"modules (may take minutes/module)?"
-msgstr ""
-"Készüljön gyors-keresés index ezekhez\n"
-"a modulokhoz (modulonként több percet is igénybe vehet)?"
-
-#: ../src/gnome2/mod_mgr.c:193
-msgid "Preparing to index"
-msgstr "Indexelés előkészítése"
-
-#: ../src/gnome2/mod_mgr.c:194
-msgid "Indexing"
-msgstr "Indexelés"
-
-#: ../src/gnome2/mod_mgr.c:195
-msgid "Index"
-msgstr "Index"
-
-#: ../src/gnome2/mod_mgr.c:198
-msgid "Delete fast-search index for these modules?"
-msgstr "Biztosan törli ezeknek a moduloknak a gyors-keresés indexeit?"
-
-#: ../src/gnome2/mod_mgr.c:199
-msgid "Preparing to delete index"
-msgstr "Index törlésének előkészítése"
-
-#: ../src/gnome2/mod_mgr.c:200
-msgid "Deleting index"
-msgstr "Index törlése"
-
-#: ../src/gnome2/mod_mgr.c:201
-msgid "Deletion"
-msgstr "Törlés"
-
-#: ../src/gnome2/mod_mgr.c:426
-msgid "Module Name"
-msgstr "Modul neve"
-
-#: ../src/gnome2/mod_mgr.c:447
-msgid "A checkmark means this module is already installed"
-msgstr "A megjelölés azt jelenti, hogy ez a modul már telepítve van"
-
-#: ../src/gnome2/mod_mgr.c:469
-msgid "Click the box to work on this module"
-msgstr "Pipálja be a négyzetet, ha ezzel a modullal kíván dolgozni."
-
-#: ../src/gnome2/mod_mgr.c:470
-msgid "Click the box to select this module for install/update"
-msgstr ""
-"Jelölje be a négyzetet, ha telepíteni/frissíteni szeretné ezt a modult"
-
-#: ../src/gnome2/mod_mgr.c:489
-msgid "Installed"
-msgstr "Telepített"
-
-#: ../src/gnome2/mod_mgr.c:499
-msgid ""
-"The index icon means you have built an optimized ('lucene') index for this "
-"module for fast searching (see the Maintenance pane for this function)"
-msgstr ""
-"Az index ikon azt jelenti, hogy a gyors keresés érdekében optimizált "
-"('lucene') indexelés készült az adott modulhoz (több információt erről a "
-"funkcióról a karbantartó panelen talál)"
-
-#: ../src/gnome2/mod_mgr.c:517
-msgid ""
-"The lock icon means this module is encrypted, and requires that you purchase "
-"an unlock key from the content owner"
-msgstr ""
-"A lakat ikon azt jelenti, hogy az adott modul titkosított. Regisztrációs "
-"kulcsot a tulajdonostól vásárolhat."
-
-#: ../src/gnome2/mod_mgr.c:534 ../ui/xi-menus.glade.h:1
-msgid "About"
-msgstr "Névjegy"
-
-#: ../src/gnome2/mod_mgr.c:554
-msgid ""
-"The refresh icon means the Installed module is older than the newer "
-"Available module: You should update the module"
-msgstr ""
-"A frissítés ikon azt jelenti, hogy a telepített modul régebbi, mint az "
-"elérhető újabb modul. Frissítenie kellene a modult"
-
-#: ../src/gnome2/mod_mgr.c:566
-msgid "Available"
-msgstr "Elérhető"
-
-#: ../src/gnome2/mod_mgr.c:575
-msgid "Size"
-msgstr "Méret"
-
-#: ../src/gnome2/mod_mgr.c:584
-msgid "Description"
-msgstr "Leírás"
-
-#: ../src/gnome2/mod_mgr.c:731
-#, c-format
-msgid ""
-"`mkdir %s' failed:\n"
-"%s."
-msgstr ""
-"`mkdir %s' sikertelen:\n"
-"%s."
-
-#: ../src/gnome2/mod_mgr.c:753
-msgid " archived in: \n"
-msgstr " archiválva: \n"
-
-#: ../src/gnome2/mod_mgr.c:806
-msgid "Journals and prayer lists cannot be indexed."
-msgstr "Naplót és imalistát nem lehet indexelni."
-
-#: ../src/gnome2/mod_mgr.c:825
-#, c-format
-msgid "%s failed"
-msgstr "%s sikertelen"
-
-#: ../src/gnome2/mod_mgr.c:828 ../src/gnome2/mod_mgr.c:1552
-msgid "Finished"
-msgstr "Befejezve"
-
-#: ../src/gnome2/mod_mgr.c:996 ../src/gnome2/mod_mgr.c:998
-#: ../src/gnome2/mod_mgr.c:1100 ../src/gnome2/mod_mgr.c:1135
-#: ../src/gnome2/mod_mgr.c:1137 ../src/gnome2/utilities.c:453
-#: ../src/gnome2/utilities.c:518 ../src/gnome2/utilities.c:520
-#: ../src/gnome2/utilities.c:1021 ../src/main/sidebar.cc:835
-#: ../src/main/sidebar.cc:907 ../src/main/sidebar.cc:909
-msgid "Unknown"
-msgstr "Ismeretlen"
-
-#: ../src/gnome2/mod_mgr.c:1294
-#, c-format
-msgid ""
-"Repository:\n"
-"%s"
-msgstr ""
-"Tárhely:\n"
-"%s"
-
-#: ../src/gnome2/mod_mgr.c:1306
-msgid ""
-"Categorized by\n"
-"Module Type"
-msgstr ""
-"Modulok típusai\n"
-"szerint kategorizálva"
-
-#: ../src/gnome2/mod_mgr.c:1311 ../src/gnome2/utilities.c:579
-#: ../src/main/sidebar.cc:982 ../src/main/sidebar.cc:984
-msgid "Biblical Texts"
-msgstr "Bibliai szövegek"
-
-#: ../src/gnome2/mod_mgr.c:1315 ../src/gnome2/utilities.c:583
-#: ../src/main/sidebar.cc:667 ../src/main/sidebar.cc:1007
-#: ../src/main/sidebar.cc:1009 ../ui/prefs.glade.h:36
-msgid "Commentaries"
-msgstr "Magyarázatok"
-
-#: ../src/gnome2/mod_mgr.c:1319 ../src/gnome2/utilities.c:588
-#: ../src/main/sidebar.cc:1016 ../src/main/sidebar.cc:1018
-msgid "Dictionaries"
-msgstr "Szótárak"
-
-#: ../src/gnome2/mod_mgr.c:1323 ../src/gnome2/utilities.c:592
-#: ../src/main/sidebar.cc:1025 ../src/main/sidebar.cc:1027
-msgid "Daily Devotionals"
-msgstr "Napi áhitatok"
-
-#: ../src/gnome2/mod_mgr.c:1327 ../src/gnome2/utilities.c:596
-#: ../src/main/sidebar.cc:677 ../src/main/sidebar.cc:1034
-#: ../src/main/sidebar.cc:1036
-msgid "General Books"
-msgstr "Általános könyvek"
-
-#: ../src/gnome2/mod_mgr.c:1331 ../src/gnome2/utilities.c:600
-#: ../src/main/sidebar.cc:1043 ../src/main/sidebar.cc:1045
-msgid "Maps"
-msgstr "Térképek"
-
-#: ../src/gnome2/mod_mgr.c:1335 ../src/gnome2/utilities.c:604
-#: ../src/main/sidebar.cc:1052 ../src/main/sidebar.cc:1054
-msgid "Images"
-msgstr "Képek"
-
-#: ../src/gnome2/mod_mgr.c:1343
-msgid ""
-"Categorized by\n"
-"Availability"
-msgstr ""
-"Kategorizálva\n"
-"elérhetőség alapján"
-
-#: ../src/gnome2/mod_mgr.c:1348
-msgid "Updates"
-msgstr "Frissítések"
-
-#: ../src/gnome2/mod_mgr.c:1352
-msgid "Uninstalled"
-msgstr "Eltávolítva"
-
-#: ../src/gnome2/mod_mgr.c:1356 ../src/gnome2/sidebar.c:634
-#: ../src/gnome2/utilities.c:609 ../src/main/prayerlists.cc:241
-#: ../src/main/sidebar.cc:1062 ../src/main/sidebar.cc:1064
-msgid "Prayer List/Journal"
-msgstr "Imalista/Napló"
-
-#: ../src/gnome2/mod_mgr.c:1536
-msgid "Refreshing from remote source"
-msgstr "Frissítés távoli forrásból"
-
-#: ../src/gnome2/mod_mgr.c:1546
-msgid "Remote source not found"
-msgstr "Távoli forrás nem található"
-
-#: ../src/gnome2/mod_mgr.c:1616
-msgid "Configure"
-msgstr "Konfigurál"
-
-#: ../src/gnome2/mod_mgr.c:1647
-msgid "Type"
-msgstr "Típus"
-
-#: ../src/gnome2/mod_mgr.c:1654
-msgid "Caption"
-msgstr "Fejezet"
-
-#: ../src/gnome2/mod_mgr.c:1662
-msgid "Source"
-msgstr "Forrás"
-
-#: ../src/gnome2/mod_mgr.c:1670
-msgid "Directory"
-msgstr "Könyvtár"
-
-#: ../src/gnome2/mod_mgr.c:1678
-msgid "User"
-msgstr "Felhasználó"
-
-#: ../src/gnome2/mod_mgr.c:1686
-msgid "Password"
-msgstr "Jelszó"
-
-#: ../src/gnome2/mod_mgr.c:1694
-msgid "UID"
-msgstr "UID"
-
-#: ../src/gnome2/mod_mgr.c:1711
-msgid "Module Sources"
-msgstr "Modul források"
-
-#: ../src/gnome2/mod_mgr.c:1714
-msgid "Add/Remove"
-msgstr "Hozzáad/eltávolít"
-
-#: ../src/gnome2/mod_mgr.c:1716
-msgid "Choose"
-msgstr "Kiválaszt"
-
-#: ../src/gnome2/mod_mgr.c:1720 ../src/gnome2/preferences_dialog.c:1637
-#: ../src/gnome2/sidebar.c:1400
-msgid "Modules"
-msgstr "Modulok"
-
-#: ../src/gnome2/mod_mgr.c:1722
-msgid "Install/Update"
-msgstr "Telepít/Frissít"
-
-#: ../src/gnome2/mod_mgr.c:1724
-msgid "Maintenance"
-msgstr "Karbantartás"
-
-#: ../src/gnome2/mod_mgr.c:1945
-msgid "Please Refresh"
-msgstr "Kérem frissítsen"
-
-#: ../src/gnome2/mod_mgr.c:1946
-msgid "Your module list is not up to date!"
-msgstr "A modul-lista napra kész!"
-
-#. Zero Bibles is just not workable in Xiphos.
-#: ../src/gnome2/mod_mgr.c:2239
-msgid ""
-"You have uninstalled your last Bible.\n"
-"Xiphos requires at least one."
-msgstr ""
-"Eltávolította az utolsó Bibliát.\n"
-"Xiphosnak minimum egyre szüksége van."
-
-#: ../src/gnome2/mod_mgr.c:2245
-msgid ""
-"There are still no Bibles installed.\n"
-"Xiphos cannot continue without one."
-msgstr ""
-"Még nincsenek Bibliák telepítve.\n"
-"Xiphos nem futhat egy nélkül sem."
-
-#: ../src/gnome2/mod_mgr.c:2335
-msgid "Standard remote sources have been loaded."
-msgstr "Alap távoli forrás betöltve."
-
-#: ../src/gnome2/mod_mgr.c:2341
-msgid "Could not load standard sources from CrossWire."
-msgstr "Alap források betöltése nem sikerült a CrossWire oldaláról."
-
-#: ../src/gnome2/mod_mgr.c:2345
-msgid ""
-"<b>Welcome to the Module Manager.</b>\n"
+"<b>Overview of the Module Manager.</b>\n"
 "\n"
 "This is Xiphos' mechanism to get new and updated content.\n"
 "If you have never been here before, please take a moment to look it over.\n"
 "\n"
-"Modules come from different <u>repositories</u>.  <b>Module Sources: "
-"Add/Remove</b> will show you what repositories are currently known.\n"
+"Modules come from different <u>repositories</u>.  <b>Module Sources: Add/"
+"Remove</b> will show you what repositories are currently known.\n"
 "\n"
 "<b>Module Sources: Choose</b> is for deciding from where modules should "
 "come, that is, from which repository Xiphos should obtain them, as well as "
@@ -989,8 +646,8 @@ msgstr ""
 "érhessen el.\n"
 "Ha még soha nem járt itt, akkor kérem nézze meg egy pillanatra.\n"
 "\n"
-"Moduluk különböző <u>tárhelyekről</u> származnak. <b>Modul források: "
-"Hozzáad/Eltávolít</b> megjeleníti, hogy mely tárhelyek ismertek éppen.\n"
+"Moduluk különböző <u>tárhelyekről</u> származnak. <b>Modul források: Hozzáad/"
+"Eltávolít</b> megjeleníti, hogy mely tárhelyek ismertek éppen.\n"
 "\n"
 "<b>Modul források: Választ</b> segítségével azt határozhatja meg, hogy "
 "melyik modul honnan származzon, vagyos melyik tárhelyről töltse le a Xiphos "
@@ -1008,44 +665,476 @@ msgstr ""
 "kérhet segítséget chat beszélgetésen, vagy (ha senki sem készséges a chat-"
 "en) küldjön e-mailt a felhasználói levelező listánkra.\n"
 
-#: ../src/gnome2/mod_mgr.c:2512 ../src/gnome2/mod_mgr.c:2758
+#: ../src/gnome2/mod_mgr.c:65
+#, fuzzy
+msgid ""
+"<b>Welcome to Xiphos.</b>\n"
+"\n"
+"There are no Bibles installed. In order to initialize, Xiphos needs at least "
+"one Bible module. To facilitate this, the Module Manager has been opened so "
+"that you may install one or more Bibles, either from a local module set "
+"(cdrom, flash drive) or over the network from CrossWire Bible Society. "
+"Please refer to these step-by-step instructions, and to the general module "
+"manager overview that has also been opened.\n"
+"\n"
+"<u>For local install:</u>\n"
+"- In <i>Module Sources: Add/Remove</i>, add a new local folder name where "
+"modules can be found.\n"
+"  (This is where folders exist named <i>mods.d</i> and <i>modules</i>.)\n"
+"- In <i>Module Sources: Choose</i>, click the \"Local\" button, and select "
+"your folder from the pulldown.\n"
+"\n"
+"<u>For network install from CrossWire:</u>\n"
+"- In <i>Module Sources: Choose</i>, click the \"Remote\" button and select "
+"CrossWire from the pulldown.\n"
+"- Click the \"Refresh\" button at the bottom.\n"
+"\n"
+"<u>In either case:</u>\n"
+"- In <i>Modules: Install/Update</i>, select Bibles and other modules of your "
+"preference.\n"
+"- Click \"Install\".\n"
+"- Close the Module Manager when you are done.\n"
+"\n"
+"<u>Warning</u>: If you live in a persecuted country, use with care.\n"
+"\n"
+"Both this step-by-step instruction dialog and the general introduction "
+"dialog may be closed at any time."
+msgstr ""
+"<b>Üdvözli Önt a Xiphos.</b>\n"
+"\n"
+"Nincsenek Bibliák telepítve. Xiphos inicializálásához legalább egy Biblia-"
+"modul szükséges.\n"
+"\n"
+"Hozzájárulásával Xiphos megnyitja a modulkezelőt, és így egy vagy több "
+"Bibliát is telepíthet vagy egy lokális modul-csomagból (CD vagy pendrive) "
+"vagy az interneten keresztül a CrossWire Bibliatársulat adatbázisából.\n"
+"\n"
+"<u>A helyi telepítéshez:</u>\n"
+"- <i>Modul források: Hozzáadás/Eltávolítás</i>, egy új helyi mappa "
+"hozzáadása, ahol modulok találhatóak.\n"
+"  (Olyan mappák, amelyekben <i>mods.d</i> és <i>modules</i> nevű mappák "
+"találhatóak.)\n"
+"- <i>Modul források: Kiválaszt</i>, klikkeljen a \"Helyi\" gombra, és "
+"válassza ki a mappát a legördülő menüből.\n"
+"\n"
+"<u>Hálózati telepítéshez a CrossWire tárhelyről:</u>\n"
+"- <i>Modul források: Kiválaszt</i>, klikkeljen a \"Remote\" gombra, és "
+"válassza ki CrossWire tárhelyet a legördülő menüből.\n"
+"- Alul klikkeljen a \"Frissítés\" gombra.\n"
+"\n"
+"<u>Más esetekben:</u>\n"
+"- <i>Modulok: Telepítés/Frissítés</i>, válasszon ki Bibliákat kedve "
+"szerint.\n"
+"- Klikkeljen a \"Telepítés\" gombra.\n"
+"- Zárja be a modulkezelő ablakot, ha végzett.\n"
+"\n"
+"<u>Figyelem</u>: Ha Ön olyan országban él, ahol kereszt(y)én(y) üldözés van, "
+"akkor körültekintően használja.\n"
+"\n"
+"Megnyissa Xiphos a modulkezelőt, hogy Bibliákat telepíthessen?"
+
+#: ../src/gnome2/mod_mgr.c:183
+msgid "Remove these modules?"
+msgstr "El kívánja távolítani ezeket a modulokat?"
+
+#: ../src/gnome2/mod_mgr.c:184
+msgid "Preparing to remove"
+msgstr "Előkészítés eltávolításhoz"
+
+#: ../src/gnome2/mod_mgr.c:185
+msgid "Removing"
+msgstr "Eltávolítás"
+
+#: ../src/gnome2/mod_mgr.c:186 ../ui/xi-menus.glade.h:89
+msgid "Remove"
+msgstr "Eltávolít"
+
+#: ../src/gnome2/mod_mgr.c:189
+msgid "Install these modules?"
+msgstr "Telepíteni kívánja ezeket a modulokat?"
+
+#: ../src/gnome2/mod_mgr.c:190
+msgid "Preparing to install"
+msgstr "Előkészítés a telepítéshez"
+
+#: ../src/gnome2/mod_mgr.c:191
+msgid "Installing"
+msgstr "Telepítés"
+
+#: ../src/gnome2/mod_mgr.c:192
+msgid "Install"
+msgstr "Telepít"
+
+#: ../src/gnome2/mod_mgr.c:195
+msgid "Archive these modules?"
+msgstr "Archiválni kívánja ezeket a modulokat?"
+
+#: ../src/gnome2/mod_mgr.c:196
+msgid "Preparing to archive"
+msgstr "Archiválás előkészítése"
+
+#: ../src/gnome2/mod_mgr.c:197
+msgid "Archiving"
+msgstr "Archiválás"
+
+#: ../src/gnome2/mod_mgr.c:198
+msgid "Archive"
+msgstr "Archivum"
+
+#: ../src/gnome2/mod_mgr.c:201
+msgid ""
+"Build fast-search index for these\n"
+"modules (may take minutes/module)?"
+msgstr ""
+"Készüljön gyors-keresés index ezekhez\n"
+"a modulokhoz (modulonként több percet is igénybe vehet)?"
+
+#: ../src/gnome2/mod_mgr.c:202
+msgid "Preparing to index"
+msgstr "Indexelés előkészítése"
+
+#: ../src/gnome2/mod_mgr.c:203
+msgid "Indexing"
+msgstr "Indexelés"
+
+#: ../src/gnome2/mod_mgr.c:204
+msgid "Index"
+msgstr "Index"
+
+#: ../src/gnome2/mod_mgr.c:207
+msgid "Delete fast-search index for these modules?"
+msgstr "Biztosan törli ezeknek a moduloknak a gyors-keresés indexeit?"
+
+#: ../src/gnome2/mod_mgr.c:208
+msgid "Preparing to delete index"
+msgstr "Index törlésének előkészítése"
+
+#: ../src/gnome2/mod_mgr.c:209
+msgid "Deleting index"
+msgstr "Index törlése"
+
+#: ../src/gnome2/mod_mgr.c:210
+msgid "Deletion"
+msgstr "Törlés"
+
+#: ../src/gnome2/mod_mgr.c:435
+msgid "Module Name"
+msgstr "Modul neve"
+
+#: ../src/gnome2/mod_mgr.c:456
+msgid "A checkmark means this module is already installed"
+msgstr "A megjelölés azt jelenti, hogy ez a modul már telepítve van"
+
+#: ../src/gnome2/mod_mgr.c:478
+msgid "Click the box to work on this module"
+msgstr "Pipálja be a négyzetet, ha ezzel a modullal kíván dolgozni."
+
+#: ../src/gnome2/mod_mgr.c:479
+msgid "Click the box to select this module for install/update"
+msgstr "Jelölje be a négyzetet, ha telepíteni/frissíteni szeretné ezt a modult"
+
+#: ../src/gnome2/mod_mgr.c:498
+msgid "Installed"
+msgstr "Telepített"
+
+#: ../src/gnome2/mod_mgr.c:508
+msgid ""
+"The index icon means you have built an optimized ('lucene') index for this "
+"module for fast searching (see the Maintenance pane for this function)"
+msgstr ""
+"Az index ikon azt jelenti, hogy a gyors keresés érdekében optimizált "
+"('lucene') indexelés készült az adott modulhoz (több információt erről a "
+"funkcióról a karbantartó panelen talál)"
+
+#: ../src/gnome2/mod_mgr.c:526
+msgid ""
+"The lock icon means this module is encrypted, and requires that you purchase "
+"an unlock key from the content owner"
+msgstr ""
+"A lakat ikon azt jelenti, hogy az adott modul titkosított. Regisztrációs "
+"kulcsot a tulajdonostól vásárolhat."
+
+#: ../src/gnome2/mod_mgr.c:543 ../ui/xi-menus.glade.h:1
+msgid "About"
+msgstr "Névjegy"
+
+#: ../src/gnome2/mod_mgr.c:563
+msgid ""
+"The refresh icon means the Installed module is older than the newer "
+"Available module: You should update the module"
+msgstr ""
+"A frissítés ikon azt jelenti, hogy a telepített modul régebbi, mint az "
+"elérhető újabb modul. Frissítenie kellene a modult"
+
+#: ../src/gnome2/mod_mgr.c:575
+msgid "Available"
+msgstr "Elérhető"
+
+#: ../src/gnome2/mod_mgr.c:584
+msgid "Size"
+msgstr "Méret"
+
+#: ../src/gnome2/mod_mgr.c:593
+msgid "Description"
+msgstr "Leírás"
+
+#: ../src/gnome2/mod_mgr.c:740
+#, c-format
+msgid ""
+"`mkdir %s' failed:\n"
+"%s."
+msgstr ""
+"`mkdir %s' sikertelen:\n"
+"%s."
+
+#: ../src/gnome2/mod_mgr.c:762
+msgid " archived in: \n"
+msgstr " archiválva: \n"
+
+#: ../src/gnome2/mod_mgr.c:817
+msgid "Journals and prayer lists cannot be indexed."
+msgstr "Naplót és imalistát nem lehet indexelni."
+
+#: ../src/gnome2/mod_mgr.c:837
+#, c-format
+msgid "%s failed"
+msgstr "%s sikertelen"
+
+#: ../src/gnome2/mod_mgr.c:840 ../src/gnome2/mod_mgr.c:1586
+msgid "Finished"
+msgstr "Befejezve"
+
+#: ../src/gnome2/mod_mgr.c:1008 ../src/gnome2/mod_mgr.c:1010
+#: ../src/gnome2/mod_mgr.c:1112 ../src/gnome2/mod_mgr.c:1147
+#: ../src/gnome2/mod_mgr.c:1149 ../src/gnome2/utilities.c:461
+#: ../src/gnome2/utilities.c:526 ../src/gnome2/utilities.c:528
+#: ../src/gnome2/utilities.c:1049 ../src/main/sidebar.cc:844
+#: ../src/main/sidebar.cc:916 ../src/main/sidebar.cc:918
+msgid "Unknown"
+msgstr "Ismeretlen"
+
+#: ../src/gnome2/mod_mgr.c:1308
+#, c-format
+msgid ""
+"Repository:\n"
+"%s"
+msgstr ""
+"Tárhely:\n"
+"%s"
+
+#: ../src/gnome2/mod_mgr.c:1320
+msgid ""
+"Categorized by\n"
+"Module Type"
+msgstr ""
+"Modulok típusai\n"
+"szerint kategorizálva"
+
+#: ../src/gnome2/mod_mgr.c:1325 ../src/gnome2/utilities.c:589
+#: ../src/main/sidebar.cc:993 ../src/main/sidebar.cc:995
+msgid "Biblical Texts"
+msgstr "Bibliai szövegek"
+
+#: ../src/gnome2/mod_mgr.c:1329 ../src/gnome2/utilities.c:593
+#: ../src/main/sidebar.cc:676 ../src/main/sidebar.cc:1018
+#: ../src/main/sidebar.cc:1020 ../ui/prefs.glade.h:36
+msgid "Commentaries"
+msgstr "Magyarázatok"
+
+#: ../src/gnome2/mod_mgr.c:1333 ../src/gnome2/utilities.c:598
+#: ../src/main/sidebar.cc:1027 ../src/main/sidebar.cc:1029
+msgid "Dictionaries"
+msgstr "Szótárak"
+
+#: ../src/gnome2/mod_mgr.c:1337 ../src/gnome2/utilities.c:602
+#: ../src/main/sidebar.cc:1036 ../src/main/sidebar.cc:1038
+msgid "Glossaries"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:1341 ../src/gnome2/utilities.c:606
+#: ../src/main/sidebar.cc:1045 ../src/main/sidebar.cc:1047
+msgid "Daily Devotionals"
+msgstr "Napi áhitatok"
+
+#: ../src/gnome2/mod_mgr.c:1345 ../src/gnome2/utilities.c:610
+#: ../src/main/sidebar.cc:686 ../src/main/sidebar.cc:1054
+#: ../src/main/sidebar.cc:1056
+msgid "General Books"
+msgstr "Általános könyvek"
+
+#: ../src/gnome2/mod_mgr.c:1349 ../src/gnome2/utilities.c:614
+#: ../src/main/sidebar.cc:1063 ../src/main/sidebar.cc:1065
+msgid "Maps"
+msgstr "Térképek"
+
+#: ../src/gnome2/mod_mgr.c:1353 ../src/gnome2/utilities.c:618
+#: ../src/main/sidebar.cc:1072 ../src/main/sidebar.cc:1074
+msgid "Images"
+msgstr "Képek"
+
+#: ../src/gnome2/mod_mgr.c:1357 ../src/gnome2/utilities.c:622
+#: ../src/main/sidebar.cc:1081 ../src/main/sidebar.cc:1083
+msgid "Cult/Unorthodox"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:1365
+msgid ""
+"Categorized by\n"
+"Availability"
+msgstr ""
+"Kategorizálva\n"
+"elérhetőség alapján"
+
+#: ../src/gnome2/mod_mgr.c:1370
+msgid "Updates"
+msgstr "Frissítések"
+
+#: ../src/gnome2/mod_mgr.c:1374
+msgid "Uninstalled"
+msgstr "Eltávolítva"
+
+#: ../src/gnome2/mod_mgr.c:1378 ../src/gnome2/sidebar.c:632
+#: ../src/gnome2/utilities.c:627 ../src/main/prayerlists.cc:241
+#: ../src/main/sidebar.cc:1091 ../src/main/sidebar.cc:1093
+msgid "Prayer List/Journal"
+msgstr "Imalista/Napló"
+
+#: ../src/gnome2/mod_mgr.c:1570
+msgid "Refreshing from remote source"
+msgstr "Frissítés távoli forrásból"
+
+#: ../src/gnome2/mod_mgr.c:1580
+msgid "Remote source not found"
+msgstr "Távoli forrás nem található"
+
+#: ../src/gnome2/mod_mgr.c:1650
+msgid "Configure"
+msgstr "Konfigurál"
+
+#: ../src/gnome2/mod_mgr.c:1681
+msgid "Type"
+msgstr "Típus"
+
+#: ../src/gnome2/mod_mgr.c:1688
+msgid "Caption"
+msgstr "Fejezet"
+
+#: ../src/gnome2/mod_mgr.c:1696
+msgid "Source"
+msgstr "Forrás"
+
+#: ../src/gnome2/mod_mgr.c:1704
+msgid "Directory"
+msgstr "Könyvtár"
+
+#: ../src/gnome2/mod_mgr.c:1712
+msgid "User"
+msgstr "Felhasználó"
+
+#: ../src/gnome2/mod_mgr.c:1720
+msgid "Password"
+msgstr "Jelszó"
+
+#: ../src/gnome2/mod_mgr.c:1728
+msgid "UID"
+msgstr "UID"
+
+#: ../src/gnome2/mod_mgr.c:1745
+msgid "Module Sources"
+msgstr "Modul források"
+
+#: ../src/gnome2/mod_mgr.c:1748
+msgid "Add/Remove"
+msgstr "Hozzáad/eltávolít"
+
+#: ../src/gnome2/mod_mgr.c:1750
+msgid "Choose"
+msgstr "Kiválaszt"
+
+#: ../src/gnome2/mod_mgr.c:1754 ../src/gnome2/preferences_dialog.c:1719
+#: ../src/gnome2/sidebar.c:1398
+msgid "Modules"
+msgstr "Modulok"
+
+#: ../src/gnome2/mod_mgr.c:1756
+msgid "Install/Update"
+msgstr "Telepít/Frissít"
+
+#: ../src/gnome2/mod_mgr.c:1758
+msgid "Maintenance"
+msgstr "Karbantartás"
+
+#: ../src/gnome2/mod_mgr.c:1979
+msgid "Please Refresh"
+msgstr "Kérem frissítsen"
+
+#: ../src/gnome2/mod_mgr.c:1980
+msgid "Your module list is not up to date!"
+msgstr "A modul-lista napra kész!"
+
+#. Zero Bibles is just not workable in Xiphos.
+#: ../src/gnome2/mod_mgr.c:2273
+msgid ""
+"You have uninstalled your last Bible.\n"
+"Xiphos requires at least one."
+msgstr ""
+"Eltávolította az utolsó Bibliát.\n"
+"Xiphosnak minimum egyre szüksége van."
+
+#: ../src/gnome2/mod_mgr.c:2279
+msgid ""
+"There are still no Bibles installed.\n"
+"Xiphos cannot continue without one."
+msgstr ""
+"Még nincsenek Bibliák telepítve.\n"
+"Xiphos nem futhat egy nélkül sem."
+
+#: ../src/gnome2/mod_mgr.c:2369
+msgid "Standard remote sources have been loaded."
+msgstr "Alap távoli forrás betöltve."
+
+#: ../src/gnome2/mod_mgr.c:2375
+msgid "Could not load standard sources from CrossWire."
+msgstr "Alap források betöltése nem sikerült a CrossWire oldaláról."
+
+#: ../src/gnome2/mod_mgr.c:2543 ../src/gnome2/mod_mgr.c:2789
 msgid "Remove the selected source"
 msgstr "A kiválasztott forrás eltávolítása"
 
-#: ../src/gnome2/mod_mgr.c:2572
+#: ../src/gnome2/mod_mgr.c:2603
 msgid "Enter a remote source"
 msgstr "Távoli forrás megadása"
 
-#: ../src/gnome2/mod_mgr.c:2576
+#: ../src/gnome2/mod_mgr.c:2607
 msgid "Caption:"
 msgstr "Fejezet:"
 
-#: ../src/gnome2/mod_mgr.c:2577
+#: ../src/gnome2/mod_mgr.c:2608
 msgid "Type:"
 msgstr "Típus:"
 
-#: ../src/gnome2/mod_mgr.c:2578
+#: ../src/gnome2/mod_mgr.c:2609
 msgid "Host:"
 msgstr "Kiszolgáló:"
 
-#: ../src/gnome2/mod_mgr.c:2579
+#: ../src/gnome2/mod_mgr.c:2610
 msgid "Directory:"
 msgstr "Könyvtár:"
 
-#: ../src/gnome2/mod_mgr.c:2580
+#: ../src/gnome2/mod_mgr.c:2611
 msgid "User (optional):"
 msgstr "Felhasználó (opcionális):"
 
-#: ../src/gnome2/mod_mgr.c:2581
+#: ../src/gnome2/mod_mgr.c:2612
 msgid "Password (optional):"
 msgstr "Jelszó (opcionális):"
 
 #. this can happen at most once
-#: ../src/gnome2/mod_mgr.c:2608
+#: ../src/gnome2/mod_mgr.c:2639
 msgid "A source by that name already exists."
 msgstr "Forrás ilyen névvel már létezik."
 
-#: ../src/gnome2/mod_mgr.c:2755
+#: ../src/gnome2/mod_mgr.c:2786
 msgid "Delete a remote source"
 msgstr "Távoli forrás törlése"
 
@@ -1071,7 +1160,7 @@ msgstr "Ugrás belülre az első alfejezethez"
 msgid "Synchronize this window's scrolling with the main window"
 msgstr "Ennek az ablaknak a görgetését szinkronizálja a fő ablakkal"
 
-#: ../src/gnome2/parallel_dialog.c:327 ../src/gnome2/preferences_dialog.c:1643
+#: ../src/gnome2/parallel_dialog.c:382 ../src/gnome2/preferences_dialog.c:1725
 msgid "Parallel"
 msgstr "Párhuzamos"
 
@@ -1079,84 +1168,84 @@ msgstr "Párhuzamos"
 msgid "Detach/Attach"
 msgstr "Leválaszt/hozzácsatol"
 
-#: ../src/gnome2/parallel_view.c:130 ../ui/xi-menus.glade.h:53
+#: ../src/gnome2/parallel_view.c:130 ../ui/xi-menus.glade.h:61
 msgid "Module Options"
 msgstr "Modul beállítások"
 
-#: ../src/gnome2/parallel_view.c:269 ../src/gnome2/sidebar.c:617
-#: ../src/gnome2/sidebar.c:623 ../src/gnome2/tabbed_browser.c:257
-#: ../src/main/sidebar.cc:636 ../src/main/sidebar.cc:990
-#: ../src/main/sidebar.cc:991 ../src/main/sidebar.cc:992
+#: ../src/gnome2/parallel_view.c:269 ../src/gnome2/sidebar.c:615
+#: ../src/gnome2/sidebar.c:621 ../src/gnome2/tabbed_browser.c:255
+#: ../src/main/sidebar.cc:645 ../src/main/sidebar.cc:1001
+#: ../src/main/sidebar.cc:1002 ../src/main/sidebar.cc:1003
 msgid "Parallel View"
 msgstr "Párhuzamos nézet"
 
-#: ../src/gnome2/preferences_dialog.c:1158
-#: ../src/gnome2/preferences_dialog.c:1196
-#: ../src/gnome2/preferences_dialog.c:1233
-#: ../src/gnome2/preferences_dialog.c:1268
-#: ../src/gnome2/preferences_dialog.c:1303
-#: ../src/gnome2/preferences_dialog.c:1338
-#: ../src/gnome2/preferences_dialog.c:1373
-#: ../src/gnome2/preferences_dialog.c:1409
-#: ../src/gnome2/preferences_dialog.c:1446
-#: ../src/gnome2/preferences_dialog.c:1498
-#: ../src/gnome2/preferences_dialog.c:1881
+#: ../src/gnome2/preferences_dialog.c:1240
+#: ../src/gnome2/preferences_dialog.c:1278
+#: ../src/gnome2/preferences_dialog.c:1315
+#: ../src/gnome2/preferences_dialog.c:1350
+#: ../src/gnome2/preferences_dialog.c:1385
+#: ../src/gnome2/preferences_dialog.c:1420
+#: ../src/gnome2/preferences_dialog.c:1455
+#: ../src/gnome2/preferences_dialog.c:1491
+#: ../src/gnome2/preferences_dialog.c:1528
+#: ../src/gnome2/preferences_dialog.c:1580
+#: ../src/gnome2/preferences_dialog.c:1968
 msgid "-- Select --"
 msgstr "-- Kiválaszt --"
 
-#: ../src/gnome2/preferences_dialog.c:1460
+#: ../src/gnome2/preferences_dialog.c:1542
 msgid "Locale will take effect after restart."
 msgstr "A módosítás az alkalmazás újraindítása után lép érvénybe"
 
-#: ../src/gnome2/preferences_dialog.c:1535 ../ui/prefs.glade.h:75
+#: ../src/gnome2/preferences_dialog.c:1617 ../ui/prefs.glade.h:84
 msgid "Preferences"
 msgstr "Beállítások"
 
-#: ../src/gnome2/preferences_dialog.c:1617
+#: ../src/gnome2/preferences_dialog.c:1699
 msgid "Fonts"
 msgstr "Betűkészlet"
 
-#: ../src/gnome2/preferences_dialog.c:1620
+#: ../src/gnome2/preferences_dialog.c:1702
 msgid "Color"
 msgstr "Szín"
 
-#: ../src/gnome2/preferences_dialog.c:1623
+#: ../src/gnome2/preferences_dialog.c:1705
 msgid "Sizes and Faces"
 msgstr "Méret és típus"
 
-#: ../src/gnome2/preferences_dialog.c:1627
+#: ../src/gnome2/preferences_dialog.c:1709
 msgid "General"
 msgstr "Általános"
 
-#: ../src/gnome2/preferences_dialog.c:1630 ../ui/prefs.glade.h:89
+#: ../src/gnome2/preferences_dialog.c:1712 ../ui/prefs.glade.h:100
 msgid "Tabs and Panes"
 msgstr "Fülek és panelek"
 
-#: ../src/gnome2/preferences_dialog.c:1633
+#: ../src/gnome2/preferences_dialog.c:1715
 msgid "Options"
 msgstr "Opciók"
 
-#: ../src/gnome2/preferences_dialog.c:1640
+#: ../src/gnome2/preferences_dialog.c:1722
 msgid "Main"
 msgstr "Főmenü"
 
-#: ../src/gnome2/preferences_dialog.c:1646
+#: ../src/gnome2/preferences_dialog.c:1728
 msgid "Special"
 msgstr "Speciális"
 
-#: ../src/gnome2/preferences_dialog.c:2290 ../src/gnome2/search_dialog.c:460
+#: ../src/gnome2/preferences_dialog.c:2377 ../src/gnome2/search_dialog.c:460
 msgid "Clear List?"
 msgstr "Lista törlése?"
 
-#: ../src/gnome2/preferences_dialog.c:2291 ../src/gnome2/search_dialog.c:461
+#: ../src/gnome2/preferences_dialog.c:2378 ../src/gnome2/search_dialog.c:461
 msgid "Are you sure you want to clear the module list?"
 msgstr "Biztos benne, hogy törli a modul-listát?"
 
-#: ../src/gnome2/preferences_dialog.c:2336 ../src/main/search_dialog.cc:700
+#: ../src/gnome2/preferences_dialog.c:2423 ../src/main/search_dialog.cc:700
 msgid "Remove Module?"
 msgstr "Modul eltávolítása?"
 
-#: ../src/gnome2/preferences_dialog.c:2337 ../src/main/search_dialog.cc:701
+#: ../src/gnome2/preferences_dialog.c:2424 ../src/main/search_dialog.cc:701
 msgid "Are you sure you want to remove the selected module?"
 msgstr "Biztos benne, hogy el akarja távolítani a kiválasztott modult?"
 
@@ -1191,6 +1280,85 @@ msgstr "Lista törlése?"
 #: ../src/gnome2/search_dialog.c:662
 msgid "Are you sure you want to delete:"
 msgstr "Biztos benne, hogy törölni kívánja:"
+
+#. *****************************************************************************
+#. * Name
+#. *   on_lucene_intro_clicked
+#. *
+#. * Synopsis
+#. *   #include "gui/search_dialog.h"
+#. *
+#. *   void on_lucene_intro_clicked(GtkToggleButton *button,
+#. *				  gpointer user_data)
+#. *
+#. * Description
+#. *
+#. *
+#. * Return value
+#. *   void
+#.
+#: ../src/gnome2/search_dialog.c:785
+msgid ""
+"<b>Syntax overview for optimized \"lucene\" searches</b>\n"
+"Search for verses that contain...\n"
+"\n"
+"loved one\n"
+"\t \"loved\" or \"one\"\n"
+"\tThis is the same as searching for loved OR one\n"
+"\"loved one\"\n"
+"\tThe phrase \"loved one\"\n"
+"love*\n"
+"\tA word starting with \"love\"\n"
+"\t(love OR loves OR loved OR etc...)\n"
+"loved AND one\n"
+"\tThe word \"loved\" and the word \"one\"\n"
+"\t&amp;&amp; can be used in place of AND\n"
+"+loved one\n"
+"\tVerses that <b>must</b> contain \"loved\" and <b>may</b> contain \"one\"\n"
+"loved NOT one\n"
+"\t\"loved\" but not \"one\"\n"
+"(loved one) AND God\n"
+"\t\"loved\" or \"one\" and \"God\"\n"
+"lemma:G2316\n"
+"\tSearch for the Strong's Greek (\"G\") word number 2316.\n"
+"\tAlso, select Strong's display on the <i>Attribute Search</i> tab.\n"
+"\n"
+"For complete details, search the web for \"lucene search syntax\"."
+msgstr ""
+
+#. *****************************************************************************
+#. * Name
+#. *   on_attributes_intro_clicked
+#. *
+#. * Synopsis
+#. *   #include "gui/search_dialog.h"
+#. *
+#. *   void on_attributes_intro_clicked(GtkToggleButton *button,
+#. *				  gpointer user_data)
+#. *
+#. * Description
+#. *
+#. *
+#. * Return value
+#. *   void
+#.
+#: ../src/gnome2/search_dialog.c:848
+msgid ""
+"<b>Attribute-based searches</b>\n"
+"Searches for content contained in markup outside the main text. Attributes "
+"are footnotes, Strong's numbers, and morphological symbols.\n"
+"\n"
+"Be aware that most such searches can now be done faster via optimized "
+"\"lucene\" searches using keyword qualifiers.\n"
+"\n"
+"To use attribute searches, you must select the appropriate button on the "
+"<i>Attribute Search</i> tab.\n"
+"* Footnote text is searched just like regular text.\n"
+"* Strong's words are specified as a prefix letter H or G (Hebrew or Greek) "
+"and the numeric word identifier, e.g. G2316 to find \"θεός\" (\"God\").\n"
+"* Morphological tags are identified literally, e.g. N-ASF for \"noun, "
+"accusative singular feminine\" -- see the Robinson module for details."
+msgstr ""
 
 #: ../src/gnome2/search_sidebar.c:184
 msgid ""
@@ -1256,11 +1424,11 @@ msgstr "Alsó"
 msgid "Upper"
 msgstr "Felső"
 
-#: ../src/gnome2/sidebar.c:1384
+#: ../src/gnome2/sidebar.c:1382
 msgid "Search"
 msgstr "Keresés"
 
-#: ../src/gnome2/sidebar_dialog.c:139 ../src/gnome2/sidebar_dialog.c:148
+#: ../src/gnome2/sidebar_dialog.c:170 ../src/gnome2/sidebar_dialog.c:179
 msgid "Sidebar"
 msgstr "Oldalpanel"
 
@@ -1268,7 +1436,7 @@ msgstr "Oldalpanel"
 msgid "Powered by the SWORD Project"
 msgstr "Támogatja a SWORD projekt"
 
-#: ../src/gnome2/tabbed_browser.c:366
+#: ../src/gnome2/tabbed_browser.c:364
 msgid "Can't create tabs dir."
 msgstr "A lap-könyvtárat nem sikerült létrehozni."
 
@@ -1286,7 +1454,18 @@ msgstr "Új név"
 msgid "Remove the selected item"
 msgstr "Kiválasztott elem törlése"
 
-#: ../src/main/display.cc:259
+#: ../src/gnome2/utilities.c:2018
+#, fuzzy
+msgid ""
+"An image file's size could not be determined.\n"
+"Xiphos cannot resize images to fit window."
+msgstr ""
+"Egy képfájl méretének meghatározása nem sikerült.\n"
+"ImageMagick telepítve van?\n"
+"(Vagy lehetséges, hogy a képnek más formátuma van, mint bmp/gif/png.)\n"
+"Xiphos nem tudta átméretezni a képet, hogy az betöltse az ablakot."
+
+#: ../src/main/display.cc:230
 #, c-format
 msgid ""
 "Improperly encoded personal annotation label:\n"
@@ -1295,20 +1474,8 @@ msgstr ""
 "Helytelenül kódolt személyes megjegyzés cimke:\n"
 "'%s'"
 
-#: ../src/main/display.cc:386
-msgid ""
-"An image file's size could not be determined.\n"
-"Is ImageMagick's 'identify' not installed?\n"
-"(Or possibly the image is of type other than bmp/gif/jpg/png.)\n"
-"Xiphos cannot resize images to fit window."
-msgstr ""
-"Egy képfájl méretének meghatározása nem sikerült.\n"
-"ImageMagick telepítve van?\n"
-"(Vagy lehetséges, hogy a képnek más formátuma van, mint bmp/gif/png.)\n"
-"Xiphos nem tudta átméretezni a képet, hogy az betöltse az ablakot."
-
-#: ../src/main/display.cc:1059 ../src/main/display.cc:1111
-#: ../src/main/display.cc:1188 ../ui/export-dialog.glade.h:7
+#: ../src/main/display.cc:927 ../src/main/display.cc:989
+#: ../src/main/display.cc:1074 ../ui/export-dialog.glade.h:7
 msgid "Chapter"
 msgstr "Fejezet"
 
@@ -1336,104 +1503,104 @@ msgstr "Beállítások betöltése"
 msgid "Displaying Xiphos"
 msgstr "Xiphos megjelenítése"
 
-#: ../src/main/module_dialogs.cc:227 ../src/main/previewer.cc:125
-#: ../src/main/previewer.cc:192 ../ui/prefs.glade.h:76
+#: ../src/main/module_dialogs.cc:189 ../src/main/previewer.cc:93
+#: ../ui/prefs.glade.h:85
 msgid "Previewer"
 msgstr "Előnézeti ablak"
 
-#: ../src/main/module_dialogs.cc:292 ../src/main/module_dialogs.cc:416
-#: ../src/main/previewer.cc:265
+#: ../src/main/module_dialogs.cc:240 ../src/main/module_dialogs.cc:351
+#: ../src/main/previewer.cc:180
 msgid "Footnote"
 msgstr "Lábjegyzet"
 
-#: ../src/main/module_dialogs.cc:298 ../src/main/module_dialogs.cc:421
-#: ../src/main/previewer.cc:277
+#: ../src/main/module_dialogs.cc:246 ../src/main/module_dialogs.cc:356
+#: ../src/main/previewer.cc:192
 msgid "Cross Reference"
 msgstr "Utalás"
 
-#: ../src/main/module_dialogs.cc:304 ../src/main/module_dialogs.cc:318
-#: ../src/main/module_dialogs.cc:426 ../src/main/module_dialogs.cc:438
-#: ../src/main/previewer.cc:283 ../src/main/previewer.cc:302
+#: ../src/main/module_dialogs.cc:252 ../src/main/module_dialogs.cc:266
+#: ../src/main/module_dialogs.cc:361 ../src/main/module_dialogs.cc:373
+#: ../src/main/previewer.cc:198 ../src/main/previewer.cc:217
 msgid "Strongs"
 msgstr "Strong"
 
-#: ../src/main/module_dialogs.cc:310 ../src/main/module_dialogs.cc:329
-#: ../src/main/module_dialogs.cc:431 ../src/main/module_dialogs.cc:448
-#: ../src/main/previewer.cc:289 ../src/main/previewer.cc:308
+#: ../src/main/module_dialogs.cc:258 ../src/main/module_dialogs.cc:277
+#: ../src/main/module_dialogs.cc:366 ../src/main/module_dialogs.cc:383
+#: ../src/main/previewer.cc:204 ../src/main/previewer.cc:223
 msgid "Morphology"
 msgstr "Nyelvtan"
 
-#: ../src/main/module_dialogs.cc:1083 ../src/main/url.cc:527
+#: ../src/main/module_dialogs.cc:1007 ../src/main/url.cc:518
 msgid "Back to "
 msgstr "Vissza ide: "
 
-#: ../src/main/parallel_view.cc:399 ../ui/xi-menus.glade.h:88
+#: ../src/main/parallel_view.cc:380 ../ui/xi-menus.glade.h:108
 msgid "Strong's Numbers"
 msgstr "Strong féle számozás"
 
-#: ../src/main/parallel_view.cc:409 ../ui/search-dialog.glade.h:52
-#: ../ui/xi-menus.glade.h:40
+#: ../src/main/parallel_view.cc:390 ../ui/search-dialog.glade.h:52
+#: ../ui/xi-menus.glade.h:44
 msgid "Footnotes"
 msgstr "Lábjegyzetek"
 
-#: ../src/main/parallel_view.cc:419 ../ui/search-dialog.glade.h:64
-#: ../ui/xi-menus.glade.h:55
+#: ../src/main/parallel_view.cc:400 ../ui/search-dialog.glade.h:64
+#: ../ui/xi-menus.glade.h:63
 msgid "Morphological Tags"
 msgstr "Nyelvtani elemek"
 
-#: ../src/main/parallel_view.cc:429 ../ui/xi-menus.glade.h:44
+#: ../src/main/parallel_view.cc:410 ../ui/xi-menus.glade.h:48
 msgid "Hebrew Vowel Points"
 msgstr "Héber punktálás"
 
-#: ../src/main/parallel_view.cc:439 ../ui/xi-menus.glade.h:43
+#: ../src/main/parallel_view.cc:420 ../ui/xi-menus.glade.h:47
 msgid "Hebrew Cantillation"
 msgstr "Héber recitáció"
 
-#: ../src/main/parallel_view.cc:449 ../ui/xi-menus.glade.h:41
+#: ../src/main/parallel_view.cc:430 ../ui/xi-menus.glade.h:45
 msgid "Greek Accents"
 msgstr "Görög ékezetek"
 
-#: ../src/main/parallel_view.cc:459
+#: ../src/main/parallel_view.cc:440
 msgid "Cross-references"
 msgstr "Utalások"
 
-#: ../src/main/parallel_view.cc:469 ../ui/xi-menus.glade.h:50
+#: ../src/main/parallel_view.cc:450 ../ui/xi-menus.glade.h:57
 msgid "Lemmas"
 msgstr "Segédletek"
 
-#: ../src/main/parallel_view.cc:479 ../ui/xi-menus.glade.h:42
+#: ../src/main/parallel_view.cc:460 ../ui/xi-menus.glade.h:46
 msgid "Headings"
 msgstr "Fejlécek"
 
-#: ../src/main/parallel_view.cc:489
+#: ../src/main/parallel_view.cc:470
 msgid "Morpheme Segmentation"
 msgstr "Morféma részekre osztása"
 
-#: ../src/main/parallel_view.cc:503 ../ui/xi-menus.glade.h:96
+#: ../src/main/parallel_view.cc:484 ../ui/xi-menus.glade.h:117
 msgid "Words of Christ in Red"
 msgstr "Jézus szavai pirossal"
 
-#: ../src/main/parallel_view.cc:513 ../ui/xi-menus.glade.h:90
+#: ../src/main/parallel_view.cc:494 ../ui/xi-menus.glade.h:110
 msgid "Transliteration"
 msgstr "Átirat"
 
-#: ../src/main/parallel_view.cc:523
+#: ../src/main/parallel_view.cc:504
 msgid "Textual Variants"
 msgstr "Szövegvariánsok"
 
-#: ../src/main/parallel_view.cc:531 ../ui/xi-menus.glade.h:71
+#: ../src/main/parallel_view.cc:512 ../ui/xi-menus.glade.h:86
 msgid "Primary Reading"
 msgstr "Elsődleges olvasat"
 
-#: ../src/main/parallel_view.cc:540 ../ui/xi-menus.glade.h:83
+#: ../src/main/parallel_view.cc:521 ../ui/xi-menus.glade.h:101
 msgid "Secondary Reading"
 msgstr "Másodlagos olvasat"
 
-#: ../src/main/parallel_view.cc:549 ../ui/xi-menus.glade.h:9
+#: ../src/main/parallel_view.cc:530 ../ui/xi-menus.glade.h:9
 msgid "All Readings"
 msgstr "Az összes olvasat"
 
-#: ../src/main/parallel_view.cc:683 ../src/main/parallel_view.cc:797
+#: ../src/main/parallel_view.cc:688
 msgid "view context"
 msgstr "tartalom megjelenítése"
 
@@ -1485,38 +1652,40 @@ msgstr "november"
 msgid "December"
 msgstr "december"
 
-#: ../src/main/prayerlists.cc:124 ../src/main/sword_treekey.cc:332
+#: ../src/main/prayerlists.cc:124
 msgid "Growth"
 msgstr "Növekedés"
 
-#: ../src/main/prayerlists.cc:125 ../src/main/sword_treekey.cc:333
-msgid "<b>For Growth</b><br>"
+#: ../src/main/prayerlists.cc:125
+#, fuzzy
+msgid "<b>For Growth</b><br/>"
 msgstr "<b>A növekedésért</b><br>"
 
 #: ../src/main/prayerlists.cc:126 ../src/main/prayerlists.cc:383
-#: ../src/main/sword_treekey.cc:334
 msgid "Salvation"
 msgstr "Üdvösség"
 
-#: ../src/main/prayerlists.cc:127 ../src/main/sword_treekey.cc:335
-msgid "<b>For Salvation</b><br>"
+#: ../src/main/prayerlists.cc:127
+#, fuzzy
+msgid "<b>For Salvation</b><br/>"
 msgstr "<b>Az üdvösségért</b><br>"
 
 #: ../src/main/prayerlists.cc:128 ../src/main/prayerlists.cc:387
-#: ../src/main/sword_treekey.cc:336
 msgid "Health"
 msgstr "Egészség"
 
-#: ../src/main/prayerlists.cc:129 ../src/main/sword_treekey.cc:337
-msgid "<b>For Health</b><br>"
+#: ../src/main/prayerlists.cc:129
+#, fuzzy
+msgid "<b>For Health</b><br/>"
 msgstr "<b>Az egészségért</b><br>"
 
 #: ../src/main/prayerlists.cc:130
 msgid "Misc"
 msgstr "Egyebek"
 
-#: ../src/main/prayerlists.cc:131 ../src/main/sword_treekey.cc:339
-msgid "<b>Miscellaneous</b><br>"
+#: ../src/main/prayerlists.cc:131
+#, fuzzy
+msgid "<b>Miscellaneous</b><br/>"
 msgstr "<b>Vegyes</b><br>"
 
 #: ../src/main/prayerlists.cc:139
@@ -1524,7 +1693,8 @@ msgid "Point x"
 msgstr "Point x"
 
 #: ../src/main/prayerlists.cc:140
-msgid "<b>(x)</b><br>"
+#, fuzzy
+msgid "<b>(x)</b><br/>"
 msgstr "<b>(x)</b><br>"
 
 #: ../src/main/prayerlists.cc:141
@@ -1532,7 +1702,8 @@ msgid "Point y"
 msgstr "Point y"
 
 #: ../src/main/prayerlists.cc:142
-msgid "<b>(y)</b><br>"
+#, fuzzy
+msgid "<b>(y)</b><br/>"
 msgstr "<b>(y)</b><br>"
 
 #: ../src/main/prayerlists.cc:143
@@ -1540,7 +1711,8 @@ msgid "Point z"
 msgstr "Point z"
 
 #: ../src/main/prayerlists.cc:144
-msgid "<b>(z)</b><br>"
+#, fuzzy
+msgid "<b>(z)</b><br/>"
 msgstr "<b>(z)</b><br>"
 
 #: ../src/main/prayerlists.cc:152
@@ -1548,7 +1720,8 @@ msgid "Minor Topic 1"
 msgstr "Kis téma 1"
 
 #: ../src/main/prayerlists.cc:153
-msgid "<b>Subtopic 1</b><br>"
+#, fuzzy
+msgid "<b>Subtopic 1</b><br/>"
 msgstr "<b>Altéma 1</b><br>"
 
 #: ../src/main/prayerlists.cc:155
@@ -1556,7 +1729,8 @@ msgid "Minor Topic 2"
 msgstr "Kis téma 2"
 
 #: ../src/main/prayerlists.cc:156
-msgid "<b>Subtopic 2</b><br>"
+#, fuzzy
+msgid "<b>Subtopic 2</b><br/>"
 msgstr "<b>Altéma 2</b><br>"
 
 #: ../src/main/prayerlists.cc:158
@@ -1564,7 +1738,8 @@ msgid "Minor Topic 3"
 msgstr "Kis téma 3"
 
 #: ../src/main/prayerlists.cc:159
-msgid "<b>Subtopic 3</b><br>"
+#, fuzzy
+msgid "<b>Subtopic 3</b><br/>"
 msgstr "<b>Altéma 3</b><br>"
 
 #: ../src/main/prayerlists.cc:161
@@ -1572,7 +1747,8 @@ msgid "Minor Topic 4"
 msgstr "Kis téma 4"
 
 #: ../src/main/prayerlists.cc:162
-msgid "<b>Subtopic 4</b><br>"
+#, fuzzy
+msgid "<b>Subtopic 4</b><br/>"
 msgstr "<b>Altéma 4</b><br>"
 
 #: ../src/main/prayerlists.cc:242
@@ -1605,12 +1781,13 @@ msgid "MyPrayerList"
 msgstr "Imalistám"
 
 #: ../src/main/prayerlists.cc:342
+#, fuzzy
 msgid ""
-"<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</b><br>pews<br>fellowsh"
-"ip<br>Bibles for missionaries<br><br><br>"
+"<b>People:</b><br/>Bob<br/>Sam<br/>Sue<br/><br/><b>Church:</b><br/>pews<br/"
+">fellowship<br/>Bibles for missionaries<br/><br/><br/>"
 msgstr ""
-"<b>Emberek:</b><br>Tamás<br>Sándor<br>Zsuzsi<br><br><b>Templom:</b><br>padok<"
-"br>társaság<br>Biblia a misszionáriusoknak<br><br><br>"
+"<b>Emberek:</b><br>Tamás<br>Sándor<br>Zsuzsi<br><br><b>Templom:</"
+"b><br>padok<br>társaság<br>Biblia a misszionáriusoknak<br><br><br>"
 
 #: ../src/main/prayerlists.cc:368
 msgid "A subject-based prayer list. \\par\\par Module created by Xiphos."
@@ -1621,7 +1798,8 @@ msgid "SubjectPrayerList"
 msgstr "SubjectPrayerList"
 
 #: ../src/main/prayerlists.cc:384
-msgid "Bob<br>Sam<br>Sue<br>John<br>"
+#, fuzzy
+msgid "Bob<br/>Sam<br/>Sue<br/>John<br/>"
 msgstr "Tamás<br>Sándor<br>Zsuzsi<br>János<br>"
 
 #: ../src/main/prayerlists.cc:385
@@ -1629,11 +1807,13 @@ msgid "Spiritual Growth"
 msgstr "Lelki növekedés"
 
 #: ../src/main/prayerlists.cc:386
-msgid "Mike<br>Steve<br>"
+#, fuzzy
+msgid "Mike<br/>Steve<br/>"
 msgstr "Miklós<br>Elemér<br>"
 
 #: ../src/main/prayerlists.cc:388
-msgid "Sue<br>John<br>"
+#, fuzzy
+msgid "Sue<br/>John<br/>"
 msgstr "Zsuzsi<br>János<br>"
 
 #: ../src/main/prayerlists.cc:414
@@ -1666,7 +1846,8 @@ msgid "Major Topic A"
 msgstr "A. fő téma"
 
 #: ../src/main/prayerlists.cc:547
-msgid "<b>Major Topic A</b><br>"
+#, fuzzy
+msgid "<b>Major Topic A</b><br/>"
 msgstr "<b>A. fő téma</b><br>"
 
 #: ../src/main/prayerlists.cc:549
@@ -1674,7 +1855,8 @@ msgid "Major Topic B"
 msgstr "Fő téma 2"
 
 #: ../src/main/prayerlists.cc:550
-msgid "<b>Major Topic B</b><br>"
+#, fuzzy
+msgid "<b>Major Topic B</b><br/>"
 msgstr "<b>B. fő téma</b><br>"
 
 #: ../src/main/prayerlists.cc:552
@@ -1682,10 +1864,11 @@ msgid "Major Topic C"
 msgstr "Fő téma 3"
 
 #: ../src/main/prayerlists.cc:553
-msgid "<b>Major Topic C</b><br>"
+#, fuzzy
+msgid "<b>Major Topic C</b><br/>"
 msgstr "<b>C. fő téma</b><br>"
 
-#: ../src/main/previewer.cc:271
+#: ../src/main/previewer.cc:186
 msgid "User Annotation"
 msgstr "Felhasználói jegyzetek"
 
@@ -1708,7 +1891,7 @@ msgstr "Biztosan töröli ezt a tartományt?"
 msgid "Search: "
 msgstr "Keresés: "
 
-#: ../src/main/search_dialog.cc:1458
+#: ../src/main/search_dialog.cc:1465
 #, c-format
 msgid ""
 "%s:\n"
@@ -1719,16 +1902,16 @@ msgstr ""
 "Nincs ilyen modul telepítve.\n"
 "%s"
 
-#: ../src/main/search_dialog.cc:1460
+#: ../src/main/search_dialog.cc:1467
 msgid "Please adjust the module list."
 msgstr "Kérem állítsa be a modul-listát."
 
-#: ../src/main/search_dialog.cc:1476
+#: ../src/main/search_dialog.cc:1483
 #, c-format
 msgid "No fast-search index exists for %s.%s%s"
 msgstr "Ehhez nem létezik gyors kereső-index: %s.%s%s"
 
-#: ../src/main/search_dialog.cc:1478
+#: ../src/main/search_dialog.cc:1485
 msgid ""
 "\n"
 "Search on this module is now `multi word'."
@@ -1736,7 +1919,7 @@ msgstr ""
 "\n"
 "Keresés módja ezen a modulon most már 'több szavas'."
 
-#: ../src/main/search_dialog.cc:1479
+#: ../src/main/search_dialog.cc:1486
 msgid ""
 "\n"
 "See the Module Manager, Maintenance pane."
@@ -1744,7 +1927,7 @@ msgstr ""
 "\n"
 "Lásd modulkezelő, karbantartó panel."
 
-#: ../src/main/search_dialog.cc:1542
+#: ../src/main/search_dialog.cc:1549
 msgid "Search finished"
 msgstr "Keresés befejezve"
 
@@ -1752,76 +1935,11 @@ msgstr "Keresés befejezve"
 msgid "matches"
 msgstr "találatok"
 
-#: ../src/main/settings.c:60
-msgid ""
-"<b>Welcome to Xiphos.</b>\n"
-"\n"
-"There are no Bibles installed. In order to initialize, Xiphos needs at least "
-"one Bible module.\n"
-"\n"
-"With your permission, Xiphos will open the Module Manager so that you may "
-"install one or more Bibles from either a local module set (cdrom, flash "
-"drive) or over the network from CrossWire Bible Society.\n"
-"\n"
-"<u>For local install:</u>\n"
-"- In <i>Module Sources: Add/Remove</i>, add a new local folder name where "
-"modules can be found.\n"
-"  (This is where folders exist named <i>mods.d</i> and <i>modules</i>.)\n"
-"- In <i>Module Sources: Choose</i>, click the \"Local\" button, and select "
-"your folder from the pulldown.\n"
-"\n"
-"<u>For network install from CrossWire:</u>\n"
-"- In <i>Module Sources: Choose</i>, click the \"Remote\" button and select "
-"CrossWire from the pulldown.\n"
-"- Click the \"Refresh\" button at the bottom.\n"
-"\n"
-"<u>In either case:</u>\n"
-"- In <i>Modules: Install/Update</i>, select Bibles of your preference.\n"
-"- Click \"Install\".\n"
-"- Close the Module Manager when you are done.\n"
-"\n"
-"<u>Warning</u>: If you live in a persecuted country, use with care.\n"
-"\n"
-"May Xiphos open the Module Manager so that you may install a Bible?"
-msgstr ""
-"<b>Üdvözli Önt a Xiphos.</b>\n"
-"\n"
-"Nincsenek Bibliák telepítve. Xiphos inicializálásához legalább egy Biblia-"
-"modul szükséges.\n"
-"\n"
-"Hozzájárulásával Xiphos megnyitja a modulkezelőt, és így egy vagy több "
-"Bibliát is telepíthet vagy egy lokális modul-csomagból (CD vagy pendrive) "
-"vagy az interneten keresztül a CrossWire Bibliatársulat adatbázisából.\n"
-"\n"
-"<u>A helyi telepítéshez:</u>\n"
-"- <i>Modul források: Hozzáadás/Eltávolítás</i>, egy új helyi mappa "
-"hozzáadása, ahol modulok találhatóak.\n"
-"  (Olyan mappák, amelyekben <i>mods.d</i> és <i>modules</i> nevű mappák "
-"találhatóak.)\n"
-"- <i>Modul források: Kiválaszt</i>, klikkeljen a \"Helyi\" gombra, és "
-"válassza ki a mappát a legördülő menüből.\n"
-"\n"
-"<u>Hálózati telepítéshez a CrossWire tárhelyről:</u>\n"
-"- <i>Modul források: Kiválaszt</i>, klikkeljen a \"Remote\" gombra, és "
-"válassza ki CrossWire tárhelyet a legördülő menüből.\n"
-"- Alul klikkeljen a \"Frissítés\" gombra.\n"
-"\n"
-"<u>Más esetekben:</u>\n"
-"- <i>Modulok: Telepítés/Frissítés</i>, válasszon ki Bibliákat kedve "
-"szerint.\n"
-"- Klikkeljen a \"Telepítés\" gombra.\n"
-"- Zárja be a modulkezelő ablakot, ha végzett.\n"
-"\n"
-"<u>Figyelem</u>: Ha Ön olyan országban él, ahol kereszt(y)én(y) üldözés van, "
-"akkor körültekintően használja.\n"
-"\n"
-"Megnyissa Xiphos a modulkezelőt, hogy Bibliákat telepíthessen?"
-
-#: ../src/main/settings.c:107
+#: ../src/main/settings.c:105
 msgid "$HOME is not set!"
 msgstr "$HOME nincs megadva!"
 
-#: ../src/main/settings.c:120
+#: ../src/main/settings.c:118
 #, c-format
 msgid ""
 "Xiphos can not create  .xiphos:\n"
@@ -1834,12 +1952,12 @@ msgstr ""
 "\n"
 "Xiphos futása leáll."
 
-#: ../src/main/settings.c:133 ../src/main/settings.c:142
-#: ../src/main/settings.c:151
+#: ../src/main/settings.c:131 ../src/main/settings.c:140
+#: ../src/main/settings.c:149
 msgid "can not create "
 msgstr "nem tudja létrehozni "
 
-#: ../src/main/settings.c:181
+#: ../src/main/settings.c:179
 msgid ""
 "Empty settings file -- backup recovery attempted.\n"
 "Some information may have been lost."
@@ -1847,14 +1965,15 @@ msgstr ""
 "A beállítások fájl üres -- az alkalmazás megkísérli a visszaállítást.\n"
 "Számos adat elveszhetett."
 
-#: ../src/main/settings.c:183
+#: ../src/main/settings.c:181
 msgid "Empty settings file -- no backup?!? Information lost!"
 msgstr ""
 "A beállítások fájl üres -- nincs biztonsági másolat?!? Ez bizony adatvesztés!"
 
-#: ../src/main/settings.c:212
+#: ../src/main/settings.c:209
+#, fuzzy
 msgid ""
-"There are still no Bibles installed.\n"
+"There are no Bibles installed.\n"
 "Evidently, you declined to install any.\n"
 "\n"
 "Without any Bible modules to display,\n"
@@ -1868,25 +1987,15 @@ msgstr ""
 "Xiphos nem futtatható,\n"
 "ezért az alkalmazás leáll."
 
-#: ../src/main/settings.c:216
+#: ../src/main/settings.c:212
 msgid "Bible module installation complete."
 msgstr "Bibliai modul telepítése befejeződött."
 
-#: ../src/main/settings.c:219
-msgid ""
-"Without any Bible modules to display,\n"
-"Xiphos cannot proceed,\n"
-"and will now exit."
-msgstr ""
-"Telepített Biblia modulok nélkül\n"
-"Xiphos nem futtatható,\n"
-"ezért az alkalmazás leáll."
-
-#: ../src/main/sidebar.cc:400
+#: ../src/main/sidebar.cc:409
 msgid "verse"
 msgstr "vers"
 
-#: ../src/main/sidebar.cc:461
+#: ../src/main/sidebar.cc:470
 msgid "chapter"
 msgstr "fejezet"
 
@@ -1922,19 +2031,24 @@ msgstr ""
 "Xiphos nem tudja olvasni a nyelvi rövidítéseket\n"
 "tartalmazó fájlt."
 
-#: ../src/main/sword.cc:650
-msgid "No matching locale found for"
+#. either we were given a null sys_locale, or it didn't match anything.
+#: ../src/main/sword.cc:649
+#, fuzzy, c-format
+msgid ""
+"No matching locale found for `%s'.\n"
+"%s"
 msgstr "A keresett nyelvterület nem található"
 
-#: ../src/main/sword.cc:652
-msgid "Book names and menus may not be translated"
+#: ../src/main/sword.cc:651
+#, fuzzy
+msgid "Book names and menus may not be translated."
 msgstr "Könyvnevek és menük valószínüleg nincsenek lefordítva"
 
-#: ../src/main/sword.cc:1248
+#: ../src/main/sword.cc:1247
 msgid "Daily devotional was requested, but there are none installed."
 msgstr "Napi áhítat megnyitása sikertelen, mivel egy sincs telepítve."
 
-#: ../src/main/sword.cc:1484
+#: ../src/main/sword.cc:1483
 msgid ""
 "<b>Locked Module.</b>\n"
 "\n"
@@ -2014,13 +2128,13 @@ msgstr "Mi az Evangélium?"
 msgid "1 Cor 15:1-4"
 msgstr "1 Korintus 15:1-4"
 
-#: ../src/main/xml.c:417 ../src/main/xml.c:1166
+#: ../src/main/xml.c:417 ../src/main/xml.c:1174
 #, c-format
 msgid "Document not parsed successfully. \n"
 msgstr "Dokumentum feldolgozása sikertelen! \n"
 
-#: ../src/main/xml.c:423 ../src/main/xml.c:733 ../src/main/xml.c:1047
-#: ../src/main/xml.c:1245
+#: ../src/main/xml.c:423 ../src/main/xml.c:741 ../src/main/xml.c:1055
+#: ../src/main/xml.c:1253
 #, c-format
 msgid "empty document \n"
 msgstr "üres dokumentum \n"
@@ -2050,12 +2164,12 @@ msgstr "Mt - Jel"
 msgid "Sample Module List"
 msgstr "Minta modul lista"
 
-#: ../src/main/xml.c:739 ../src/main/xml.c:1053
+#: ../src/main/xml.c:747 ../src/main/xml.c:1061
 #, c-format
 msgid "wrong type, root node != %s\n"
 msgstr "wrong type, root node != %s\n"
 
-#: ../src/main/xml.c:1206
+#: ../src/main/xml.c:1214
 #, c-format
 msgid ""
 "Save of settings failed! stat %d, size %d\n"
@@ -2064,7 +2178,7 @@ msgstr ""
 "Beállítások mentése nem sikerült! stat %d, size %d\n"
 "%s"
 
-#: ../src/main/xml.c:1208
+#: ../src/main/xml.c:1216
 msgid "Attempting to revert to previous save."
 msgstr "Az alkalmazás megkísérli a korábbi mentést visszaállítani."
 
@@ -2109,7 +2223,7 @@ msgid "New ..."
 msgstr "Új ..."
 
 #: ../ui/bookmarks.glade.h:11 ../ui/markverse.glade.h:8
-#: ../ui/xi-menus.glade.h:56
+#: ../ui/xi-menus.glade.h:64
 msgid "New Folder"
 msgstr "Új mappa"
 
@@ -2225,7 +2339,7 @@ msgstr "<b>Exportálás</b>"
 msgid "<b>Format</b>"
 msgstr "<b>Formátum</b>"
 
-#: ../ui/export-dialog.glade.h:5 ../ui/prefs.glade.h:26
+#: ../ui/export-dialog.glade.h:5 ../ui/prefs.glade.h:27
 msgid "Book"
 msgstr "Könyv"
 
@@ -2237,7 +2351,7 @@ msgstr "Book Radio Button"
 msgid "Chapter Radio Button"
 msgstr "Chapter Radio Button"
 
-#: ../ui/export-dialog.glade.h:9 ../ui/xi-menus.glade.h:18
+#: ../ui/export-dialog.glade.h:9 ../ui/xi-menus.glade.h:20
 msgid "Copy/Export Passage"
 msgstr "Szakasz másolása/exportálása"
 
@@ -2345,9 +2459,9 @@ msgid ""
 "<b>Warning:</b> If you live in a persecuted country and do not wish to risk "
 "detection you should NOT use  the remote installation feature! "
 msgstr ""
-"<b>FIGYELMEZTETÉS:</b> amennyiben Ön olyan országban él, ahol "
-"kereszt(y)én(y) üldözés van, és nem akarja, hogy felfedezzék, akkor NE "
-"használja a távoli telepítés opciót. "
+"<b>FIGYELMEZTETÉS:</b> amennyiben Ön olyan országban él, ahol kereszt(y)én"
+"(y) üldözés van, és nem akarja, hogy felfedezzék, akkor NE használja a "
+"távoli telepítés opciót. "
 
 #: ../ui/module-manager.glade.h:9
 msgid "<i>Personal area, for your use only:</i>"
@@ -2430,10 +2544,8 @@ msgid "Module Manager"
 msgstr "Modulkezelő"
 
 #: ../ui/module-manager.glade.h:25
-msgid ""
-"Open a brief introductory explanation of how the Module Manager works."
-msgstr ""
-"A modulkezelő működéséről szóló rövid bevezető magyarázat megnyitása."
+msgid "Open a brief introductory explanation of how the Module Manager works."
+msgstr "A modulkezelő működéséről szóló rövid bevezető magyarázat megnyitása."
 
 #: ../ui/module-manager.glade.h:26
 msgid ""
@@ -2580,60 +2692,61 @@ msgid "Add Modules"
 msgstr "Modul hozzáadása"
 
 #: ../ui/prefs.glade.h:19
-msgid "Apply high-contrast highlight to current verse"
-msgstr "Nagy kontrasztú kiemelés alkalmazása az aktuális versre"
+msgid "All displayed font sizes are relative to this choice"
+msgstr ""
 
 #: ../ui/prefs.glade.h:20
+#, fuzzy
+msgid "Apply high-contrast highlight to current verse - see color pickers"
+msgstr "Nagy kontrasztú kiemelés alkalmazása az aktuális versre"
+
+#: ../ui/prefs.glade.h:21
 msgid "Automatically resize image content to fit the pane"
 msgstr "Képi tartalom autómatikus átméretezése, hogy illeszkedjen az ablakba"
 
-#: ../ui/prefs.glade.h:21
+#: ../ui/prefs.glade.h:22
 msgid "Background"
 msgstr "Háttér"
 
-#: ../ui/prefs.glade.h:22
+#: ../ui/prefs.glade.h:23
 msgid "Base font size"
 msgstr "Alap betűméret"
 
-#: ../ui/prefs.glade.h:23
+#: ../ui/prefs.glade.h:24
 msgid "Bible Texts"
 msgstr "Biblia szövegek"
 
-#: ../ui/prefs.glade.h:24
+#: ../ui/prefs.glade.h:25
 msgid "Bible Texts Checkbox"
 msgstr "Bible Texts Checkbox"
 
-#: ../ui/prefs.glade.h:25
+#: ../ui/prefs.glade.h:26
 msgid "Biblical Text"
 msgstr "Bibliai szöveg"
 
-#: ../ui/prefs.glade.h:27
+#: ../ui/prefs.glade.h:28
 msgid "Change Biblical Text Combo"
 msgstr "Change Biblical Text Combo"
 
-#: ../ui/prefs.glade.h:28
+#: ../ui/prefs.glade.h:29
 msgid "Change Book Combo"
 msgstr "Change Book Combo"
 
-#: ../ui/prefs.glade.h:29
+#: ../ui/prefs.glade.h:30
 msgid "Change Commentary Combo"
 msgstr "Change Commentary Combo"
 
-#: ../ui/prefs.glade.h:30
+#: ../ui/prefs.glade.h:31
 msgid "Change Default Dictionary Combo"
 msgstr "Change Default Dictionary Combo"
 
-#: ../ui/prefs.glade.h:31
+#: ../ui/prefs.glade.h:32
 msgid "Change Dictionary Combo"
 msgstr "Change Dictionary Combo"
 
-#: ../ui/prefs.glade.h:32
+#: ../ui/prefs.glade.h:33
 msgid "Change Personal Notes Combo"
 msgstr "Change Personal Notes Combo"
-
-#: ../ui/prefs.glade.h:33
-msgid "Choose to enable Prayer lists "
-msgstr "Jelölje be az imalista engedélyezéséhez "
 
 #: ../ui/prefs.glade.h:34 ../ui/search-dialog.glade.h:21
 msgid "Clear Modules from List Button"
@@ -2648,231 +2761,296 @@ msgid "Commentaries Checkbox"
 msgstr "Commentaries Checkbox"
 
 #: ../ui/prefs.glade.h:39
+msgid "Commonly -1, to make verse numbers less obtrusive"
+msgstr ""
+
+#: ../ui/prefs.glade.h:40
 msgid "Cover"
 msgstr "Borító"
 
-#: ../ui/prefs.glade.h:40
+#: ../ui/prefs.glade.h:41
+#, fuzzy
+msgid "Cross-references in verse list"
+msgstr "Utalások"
+
+#: ../ui/prefs.glade.h:42
 msgid "Current Verse"
 msgstr "Aktuális vers"
 
-#: ../ui/prefs.glade.h:41
+#: ../ui/prefs.glade.h:43
 msgid "Daily Devotional"
 msgstr "Napi áhítat"
 
-#: ../ui/prefs.glade.h:42
+#: ../ui/prefs.glade.h:44
 msgid "Daily Devotional Combo"
 msgstr "Daily Devotional Combo"
 
-#: ../ui/prefs.glade.h:43
+#: ../ui/prefs.glade.h:45
 msgid "Default Dictionary"
 msgstr "Alap szótár"
 
-#: ../ui/prefs.glade.h:44 ../ui/search-dialog.glade.h:39
+#: ../ui/prefs.glade.h:46 ../ui/search-dialog.glade.h:39
 msgid "Delete Selected Module From List Button"
 msgstr "Delete Selected Module From List Button"
 
-#: ../ui/prefs.glade.h:45
+#: ../ui/prefs.glade.h:47
 msgid "Dictionary"
 msgstr "Szótár"
 
-#: ../ui/prefs.glade.h:46
+#: ../ui/prefs.glade.h:48
 msgid "Dictionary/Lexicon"
 msgstr "Szótár/Lexikon"
 
-#: ../ui/prefs.glade.h:47
+#: ../ui/prefs.glade.h:49
 msgid "Dictionary/Lexicon Checkbox"
 msgstr "Dictionary/Lexicon Checkbox"
 
-#: ../ui/prefs.glade.h:48
+#: ../ui/prefs.glade.h:50
 msgid "Enable Prayer Lists"
 msgstr "Imalista engedélyezése"
 
-#: ../ui/prefs.glade.h:49
+#: ../ui/prefs.glade.h:51
 msgid "Enable Prayer Lists Checkbox"
 msgstr "Enable Prayer Lists Checkbox"
 
-#: ../ui/prefs.glade.h:50
+#: ../ui/prefs.glade.h:52
 msgid "Font Colors"
 msgstr "Betűszín"
 
-#: ../ui/prefs.glade.h:51
+#: ../ui/prefs.glade.h:53
 msgid "Font Misc"
 msgstr "Betűkészlet egyéb"
 
-#: ../ui/prefs.glade.h:52
+#: ../ui/prefs.glade.h:54
 msgid "Font preferences, per language"
 msgstr "Nyelvenkénti betűtípus"
 
-#: ../ui/prefs.glade.h:53
+#: ../ui/prefs.glade.h:55
 msgid "Foreground"
 msgstr "Előtér"
 
-#: ../ui/prefs.glade.h:54
+#: ../ui/prefs.glade.h:56
 msgid "General Misc"
 msgstr "Általános egyéb"
 
-#: ../ui/prefs.glade.h:55
+#: ../ui/prefs.glade.h:57
 msgid "Greek Lexicon"
 msgstr "Görög lexikon"
 
-#: ../ui/prefs.glade.h:56
+#: ../ui/prefs.glade.h:58
 msgid "Greek Lexicon Combo"
 msgstr "Greek Lexicon Combo"
 
-#: ../ui/prefs.glade.h:57
+#: ../ui/prefs.glade.h:59
 msgid "Hebrew Lexicon"
 msgstr "Héber lexikon"
 
-#: ../ui/prefs.glade.h:58
+#: ../ui/prefs.glade.h:60
 msgid "Hebrew Lexicon Combo"
 msgstr "Hebrew Lexicon Combo"
 
-#: ../ui/prefs.glade.h:59
+#: ../ui/prefs.glade.h:61
+#, fuzzy
+msgid "Highlight"
+msgstr "Kiemelés háttere"
+
+#: ../ui/prefs.glade.h:62
 msgid "Highlight Background"
 msgstr "Kiemelés háttere"
 
-#: ../ui/prefs.glade.h:60
+#: ../ui/prefs.glade.h:63
 msgid "Highlight Foreground"
 msgstr "Kiemelés előtere"
 
-#: ../ui/prefs.glade.h:61
+#: ../ui/prefs.glade.h:64
 msgid "Highlight current verse"
 msgstr "Aktuális vers kiemelése"
 
-#: ../ui/prefs.glade.h:62
+#: ../ui/prefs.glade.h:65
 msgid "Highlight current verse check box"
 msgstr "Highlight current verse check box"
 
-#: ../ui/prefs.glade.h:63
+#: ../ui/prefs.glade.h:66
 msgid "Highlight user annotations"
 msgstr "Felhasználói jegyzet kiemelése"
 
-#: ../ui/prefs.glade.h:64
+#: ../ui/prefs.glade.h:67
 msgid "Highlight user annotations check box"
 msgstr "Highlight user annotations check box"
 
-#: ../ui/prefs.glade.h:65
+#: ../ui/prefs.glade.h:68
+msgid ""
+"If you have set a preferred daily devotion module, its entry for today will "
+"be shown at startup."
+msgstr ""
+
+#: ../ui/prefs.glade.h:69
+#, fuzzy
+msgid "Invert color pairs"
+msgstr "Könyvjelző beillesztése"
+
+#: ../ui/prefs.glade.h:70
 msgid "Language Font Combo"
 msgstr "Language Font Combo"
 
-#: ../ui/prefs.glade.h:66
+#: ../ui/prefs.glade.h:71
 msgid "Links"
 msgstr "Linkek"
 
-#: ../ui/prefs.glade.h:67 ../ui/search-dialog.glade.h:61
+#: ../ui/prefs.glade.h:72
+msgid ""
+"Make double-click of a word always use default dictionary instead of "
+"dictionary currently displayed"
+msgstr ""
+
+#: ../ui/prefs.glade.h:73
+msgid "Make journals/prayer lists available"
+msgstr ""
+
+#: ../ui/prefs.glade.h:74 ../ui/search-dialog.glade.h:61
 msgid "Module Selection"
 msgstr "Modul kiválasztása"
 
-#: ../ui/prefs.glade.h:68
+#: ../ui/prefs.glade.h:75
 msgid "Modules Main"
 msgstr "Fő modulok"
 
-#: ../ui/prefs.glade.h:69
+#: ../ui/prefs.glade.h:76
 msgid "Modules Misc"
 msgstr "Modulok egyéb"
 
-#: ../ui/prefs.glade.h:70
+#: ../ui/prefs.glade.h:77
 msgid "Modules Parallel"
 msgstr "Modulok párhuzamos"
 
-#: ../ui/prefs.glade.h:71 ../ui/search-dialog.glade.h:70
+#: ../ui/prefs.glade.h:78
+msgid ""
+"Name and size choice for any module in a given language; still overridden by "
+"a specific choice on a particular module"
+msgstr ""
+
+#: ../ui/prefs.glade.h:79
+msgid "Normal Text"
+msgstr ""
+
+#: ../ui/prefs.glade.h:80 ../ui/search-dialog.glade.h:70
 msgid "Open Selection Dialog Button"
 msgstr "Open Selection Dialog Button"
 
-#: ../ui/prefs.glade.h:72
+#: ../ui/prefs.glade.h:81
 msgid "Open a dialog to select modules"
 msgstr "Dialógus ablak megjelenítése a modulok kiválasztásához"
 
-#: ../ui/prefs.glade.h:73
+#: ../ui/prefs.glade.h:82
 msgid "Parallel View in a tab"
 msgstr "Párhuzamos nézet fülön"
 
-#: ../ui/prefs.glade.h:74
+#: ../ui/prefs.glade.h:83
 msgid "Personal Notes"
 msgstr "Személyes jegyzetek"
 
-#: ../ui/prefs.glade.h:77
+#: ../ui/prefs.glade.h:86
 msgid "Previewer Checkbox"
 msgstr "Previewer Checkbox"
 
-#: ../ui/prefs.glade.h:78 ../ui/search-dialog.glade.h:78
+#: ../ui/prefs.glade.h:87 ../ui/search-dialog.glade.h:80
 msgid "Remove the selected module from the list"
 msgstr "A kiválasztott modul eltávolítása a listából"
 
-#: ../ui/prefs.glade.h:79
+#: ../ui/prefs.glade.h:88
 msgid "Resize images"
 msgstr "Kép átméretezése"
 
-#: ../ui/prefs.glade.h:80
+#: ../ui/prefs.glade.h:89
 msgid "Resize images checkbox"
 msgstr "Resize images checkbox"
 
-#: ../ui/prefs.glade.h:81
+#: ../ui/prefs.glade.h:90
 msgid "Scroll to Previous/Next Chapter"
 msgstr "Görgetés a következő/előző fejezethez"
 
-#: ../ui/prefs.glade.h:82
+#: ../ui/prefs.glade.h:91
 msgid "Scroll to Previous/Next Chapter Checkbox"
 msgstr "Scroll to Previous/Next Chapter Checkbox"
 
-#: ../ui/prefs.glade.h:83
+#: ../ui/prefs.glade.h:92
 msgid "Select A Directory"
 msgstr "Könyvtár kiválasztása"
 
-#: ../ui/prefs.glade.h:84
+#: ../ui/prefs.glade.h:93
+msgid ""
+"Select a particular language for interface display, other than your usual "
+"setting"
+msgstr ""
+
+#: ../ui/prefs.glade.h:94
 msgid "Show Daily Devotion at start up"
 msgstr "Napi áhítat megjelenítése indításkor"
 
-#: ../ui/prefs.glade.h:85
+#: ../ui/prefs.glade.h:95
 msgid "Show splash screen at start up"
 msgstr "Indítóképernyő megjelenítése indításkor"
 
-#: ../ui/prefs.glade.h:86
+#: ../ui/prefs.glade.h:96
+msgid ""
+"Single selection of Bible+commentary+book+dictionary, or many sets of such "
+"selections in a tabbed interface"
+msgstr ""
+
+#: ../ui/prefs.glade.h:97
 msgid "Special Locale (requires restart)"
 msgstr "Speciális nyelvterület (újraindítást igényel)"
 
-#: ../ui/prefs.glade.h:87
+#: ../ui/prefs.glade.h:98
 msgid "Special Locale Combo"
 msgstr "Special Locale Combo"
 
-#: ../ui/prefs.glade.h:88
+#: ../ui/prefs.glade.h:99
 msgid "StudyPad default directory combo"
 msgstr "StudyPad default directory combo"
 
-#: ../ui/prefs.glade.h:90
+#: ../ui/prefs.glade.h:101
 msgid "Use Bible Text scroll bar to scroll to previous or next chapter"
 msgstr ""
 "Használja a bibliai szöveg görgetősávját, hogy a szöveget az előző vagy a "
 "következő fejezethez görgesse"
 
-#: ../ui/prefs.glade.h:91
+#: ../ui/prefs.glade.h:102
 msgid "Use default Dictionary"
 msgstr "Alap szótár használata"
 
-#: ../ui/prefs.glade.h:92
+#: ../ui/prefs.glade.h:103
 msgid "Use default Dictionary Checkbox"
 msgstr "Use default Dictionary Checkbox"
 
-#: ../ui/prefs.glade.h:93
+#: ../ui/prefs.glade.h:104
 msgid "Use inverted highlight on user-annotated verses"
-msgstr ""
-"Invertált kiemelés használata a felhasználó által megjelült versekhez"
+msgstr "Invertált kiemelés használata a felhasználó által megjelült versekhez"
 
-#: ../ui/prefs.glade.h:94
+#: ../ui/prefs.glade.h:105
 msgid "Use tabbed browsing"
 msgstr "Böngészés lapok segítségével"
 
-#: ../ui/prefs.glade.h:95
+#: ../ui/prefs.glade.h:106
 msgid "Use tabbed browsing Checkbox"
 msgstr "Use tabbed browsing Checkbox"
 
-#: ../ui/prefs.glade.h:96
+#: ../ui/prefs.glade.h:107
+msgid "Use the verse list for Bible cross-references instead of the previewer"
+msgstr ""
+
+#: ../ui/prefs.glade.h:108
 msgid "Verse Number"
 msgstr "Vers számozás"
 
-#: ../ui/prefs.glade.h:97
+#: ../ui/prefs.glade.h:109
 msgid "Verse number size"
 msgstr "Vers számozás mérete"
+
+#: ../ui/prefs.glade.h:110
+#, fuzzy
+msgid "Xrefs in verse list check box"
+msgstr "Resize images checkbox"
 
 #: ../ui/search-dialog.glade.h:1
 msgid "<b>Attribute</b>"
@@ -3105,161 +3283,183 @@ msgid "New Range Button"
 msgstr "New Range Button"
 
 #: ../ui/search-dialog.glade.h:71
+#, fuzzy
+msgid "Open a brief explanation of attribute-based searches."
+msgstr "A modulkezelő működéséről szóló rövid bevezető magyarázat megnyitása."
+
+#: ../ui/search-dialog.glade.h:72
+#, fuzzy
+msgid ""
+"Open a brief explanation of the syntax used for optimized \"lucene\" "
+"searches."
+msgstr ""
+"A kiválasztott modulokról készüljön indexelés az optimalizált (\"lucene\") "
+"kereséshez."
+
+#: ../ui/search-dialog.glade.h:73
 msgid "Open a dialog to select modules to add to the list"
 msgstr ""
 "Dialógus ablak megnyitása a modulok kiválasztásához és a listához való "
 "hozzáadáshoz"
 
-#: ../ui/search-dialog.glade.h:72
+#: ../ui/search-dialog.glade.h:74
 msgid "Optimized (\"Lucene\")"
 msgstr "Optimizált (\"Lucene\")"
 
-#: ../ui/search-dialog.glade.h:73
+#: ../ui/search-dialog.glade.h:75
 msgid "Optimized (\"Lucene\") radiobutton"
 msgstr "Optimized (\"Lucene\") radiobutton"
 
-#: ../ui/search-dialog.glade.h:74
+#: ../ui/search-dialog.glade.h:76
 msgid "Range Definition Entry"
 msgstr "Range Definition Entry"
 
-#: ../ui/search-dialog.glade.h:75
+#: ../ui/search-dialog.glade.h:77
 msgid "Range Name Entry"
 msgstr "Range Name Entry"
 
-#: ../ui/search-dialog.glade.h:77
+#: ../ui/search-dialog.glade.h:79
 msgid "Regular expression radiobutton"
 msgstr "Regular expression radiobutton"
 
-#: ../ui/search-dialog.glade.h:79
+#: ../ui/search-dialog.glade.h:81
 msgid "Result Summary Table"
 msgstr "Keresési eredmény táblázat"
 
-#: ../ui/search-dialog.glade.h:80
+#: ../ui/search-dialog.glade.h:82
 msgid "Result Summary Window"
 msgstr "Keresési eredmény ablak"
 
-#: ../ui/search-dialog.glade.h:81
+#: ../ui/search-dialog.glade.h:83
 msgid "Results"
 msgstr "Eredmény"
 
-#: ../ui/search-dialog.glade.h:82
+#: ../ui/search-dialog.glade.h:84
 msgid "Save Custom Module List Button"
 msgstr "Save Custom Module List Button"
 
-#: ../ui/search-dialog.glade.h:83
+#: ../ui/search-dialog.glade.h:85
 msgid "Save Range Button"
 msgstr "Save Range Button"
 
-#: ../ui/search-dialog.glade.h:84
+#: ../ui/search-dialog.glade.h:86
 msgid "Save custom range"
 msgstr "Alap tartomány mentése"
 
-#: ../ui/search-dialog.glade.h:85
+#: ../ui/search-dialog.glade.h:87
 msgid "Save search results as bookmarks"
 msgstr "Keresési eredmény elmentése könyvjelzőként"
 
-#: ../ui/search-dialog.glade.h:86
+#: ../ui/search-dialog.glade.h:88
 msgid "Save the module list"
 msgstr "Modul-lista mentése"
 
-#: ../ui/search-dialog.glade.h:87
+#: ../ui/search-dialog.glade.h:89
 msgid "Search  Criteria"
 msgstr "Keresési kritérium"
 
-#: ../ui/search-dialog.glade.h:88
+#: ../ui/search-dialog.glade.h:90
 msgid "Search Criteria Treeview"
 msgstr "Search Criteria Treeview"
 
-#: ../ui/search-dialog.glade.h:89
+#: ../ui/search-dialog.glade.h:91
 msgid "Search entire module"
 msgstr "Egész modulos keresés"
 
-#: ../ui/search-dialog.glade.h:90
+#: ../ui/search-dialog.glade.h:92
 msgid "Search for Morphological tags"
 msgstr "Keresés a nyelvtani elemekben"
 
-#: ../ui/search-dialog.glade.h:91
+#: ../ui/search-dialog.glade.h:93
 msgid "Search for Strongs Numbers like G4442 or H1121"
 msgstr "Strong féle számozás keresése, mint G4442 vagy H1121"
 
-#: ../ui/search-dialog.glade.h:92
+#: ../ui/search-dialog.glade.h:94
 msgid "Search in footnotes"
 msgstr "Keresés a lábjegyzetekben"
 
-#: ../ui/search-dialog.glade.h:93
+#: ../ui/search-dialog.glade.h:95
 msgid "Show Footnotes"
 msgstr "Lábjegyzet megjelenítése"
 
-#: ../ui/search-dialog.glade.h:94
+#: ../ui/search-dialog.glade.h:96
 msgid "Show Footnotes checkbox"
 msgstr "Show Footnotes checkbox"
 
-#: ../ui/search-dialog.glade.h:95
+#: ../ui/search-dialog.glade.h:97
 msgid "Show Morphological Tags"
 msgstr "Nyelvtani elemek megjelenítése"
 
-#: ../ui/search-dialog.glade.h:96
+#: ../ui/search-dialog.glade.h:98
 msgid "Show Morphological Tags checkbox"
 msgstr "Show Morphological Tags checkbox"
 
-#: ../ui/search-dialog.glade.h:97
+#: ../ui/search-dialog.glade.h:99
 msgid "Show Strong's Numbers"
 msgstr "Strong féle számozás megjelenítése"
 
-#: ../ui/search-dialog.glade.h:98
+#: ../ui/search-dialog.glade.h:100
 msgid "Show Strong's Numbers checkbox"
 msgstr "Show Strong's Numbers checkbox"
 
-#: ../ui/search-dialog.glade.h:99
+#: ../ui/search-dialog.glade.h:101
 msgid "Show in main window"
 msgstr "Megjelenítés a főablakban"
 
-#: ../ui/search-dialog.glade.h:100
+#: ../ui/search-dialog.glade.h:102
 msgid "Single module"
 msgstr "Egyetlen modul"
 
-#: ../ui/search-dialog.glade.h:101
+#: ../ui/search-dialog.glade.h:103
 msgid "Single module radiobutton"
 msgstr "Single module radiobutton"
 
-#: ../ui/search-dialog.glade.h:102
+#: ../ui/search-dialog.glade.h:104
 msgid "Start/stop searching"
 msgstr "Keresés indítása/leállítása"
 
-#: ../ui/search-dialog.glade.h:103
+#: ../ui/search-dialog.glade.h:105
 msgid "Strongs Numbers"
 msgstr "Strong féle számozás"
 
-#: ../ui/search-dialog.glade.h:104
+#: ../ui/search-dialog.glade.h:106
 msgid "Strongs Numbers radiobutton"
 msgstr "Strongs Numbers radiobutton"
 
-#: ../ui/search-dialog.glade.h:105
+#: ../ui/search-dialog.glade.h:107
 msgid "Use a custom module list for the search"
 msgstr "Alap modul-lista használata a kereséshez"
 
-#: ../ui/search-dialog.glade.h:106
+#: ../ui/search-dialog.glade.h:108
 msgid "Use a custom range for the scope of the search"
 msgstr "Saját keresési tartomány használata a kereséshez"
 
-#: ../ui/search-dialog.glade.h:107
+#: ../ui/search-dialog.glade.h:109
 msgid "Use a single module for the search"
 msgstr "Egyetlen modul használata a kereséshez"
 
-#: ../ui/search-dialog.glade.h:108
+#: ../ui/search-dialog.glade.h:110
 msgid "Use the current module list for the search"
 msgstr "Az aktuális modul használata a kereséshez"
 
-#: ../ui/search-dialog.glade.h:109
+#: ../ui/search-dialog.glade.h:111
 msgid "Use the results of the last search as the scope of the search"
-msgstr ""
-"Az utolsó keresés eredményeit, mint tartományt használja a kereséshez"
+msgstr "Az utolsó keresés eredményeit, mint tartományt használja a kereséshez"
 
-#: ../ui/search-dialog.glade.h:110
+#: ../ui/search-dialog.glade.h:112
+#, fuzzy
+msgid "_Attribute Search"
+msgstr "Attribútumos keresés"
+
+#: ../ui/search-dialog.glade.h:113
+msgid "_Lucene Search Syntax"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:114
 msgid "e.g. Matt-John;Rev4"
 msgstr "pl. Matt-John;Rev4"
 
-#: ../ui/search-dialog.glade.h:111
+#: ../ui/search-dialog.glade.h:115
 msgid "for "
 msgstr "amit keres: "
 
@@ -3303,160 +3503,210 @@ msgstr "Elemek egyik mappából a másik mappába mozgatásának engedélyezése
 msgid "Annotate Verse"
 msgstr "Jegyzet hozzáfűzése a vershez"
 
-#: ../ui/xi-menus.glade.h:14
+#: ../ui/xi-menus.glade.h:13
+#, fuzzy
+msgid "Apply a high-contrast highlight to the current verse"
+msgstr "Nagy kontrasztú kiemelés alkalmazása az aktuális versre"
+
+#: ../ui/xi-menus.glade.h:15
+msgid "Bring the simple sidebar search forward"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:16
 msgid "Browse in BibleMap.org"
 msgstr "BibleMap.org böngészése"
 
-#: ../ui/xi-menus.glade.h:15
+#: ../ui/xi-menus.glade.h:17
 msgid "Collapse All"
 msgstr "Mindent összezár"
 
-#: ../ui/xi-menus.glade.h:16
+#: ../ui/xi-menus.glade.h:18
 msgid "Collapse all Bookmarks groups"
 msgstr "Minden könyvjelző-csoport összezárása"
 
-#: ../ui/xi-menus.glade.h:17
+#: ../ui/xi-menus.glade.h:19
 msgid "Commentary by Chapter"
 msgstr "Fejezetenkénti kommentár"
 
-#: ../ui/xi-menus.glade.h:19
+#: ../ui/xi-menus.glade.h:21
 msgid "Create a new daily journal"
 msgstr "Napi napló létrehozása"
 
-#: ../ui/xi-menus.glade.h:20
-msgid "Create a new monthly journal"
-msgstr "Havi napló létrehozása"
-
-#: ../ui/xi-menus.glade.h:21
-msgid "Create a new outlined topic"
-msgstr "Egy új vázlatos téma létrehozása"
-
 #: ../ui/xi-menus.glade.h:22
-msgid "Create a new simple prayer list"
+#, fuzzy
+msgid "Create a new journal or prayerlist from a template"
 msgstr "Egy új egyszerű imalista létrehozása"
 
 #: ../ui/xi-menus.glade.h:23
+msgid "Create a new monthly journal"
+msgstr "Havi napló létrehozása"
+
+#: ../ui/xi-menus.glade.h:24
+msgid "Create a new outlined topic"
+msgstr "Egy új vázlatos téma létrehozása"
+
+#: ../ui/xi-menus.glade.h:25
+msgid "Create a new simple prayer list"
+msgstr "Egy új egyszerű imalista létrehozása"
+
+#: ../ui/xi-menus.glade.h:26
 msgid "Create a new subject prayer list"
 msgstr "Egy új téma alapú imalista létrehozása"
 
-#: ../ui/xi-menus.glade.h:24
+#: ../ui/xi-menus.glade.h:27
 msgid "Daily"
 msgstr "napi"
 
-#: ../ui/xi-menus.glade.h:25
+#: ../ui/xi-menus.glade.h:28
 msgid "Delete Item"
 msgstr "Elem törlése"
 
-#: ../ui/xi-menus.glade.h:26
+#: ../ui/xi-menus.glade.h:29
 msgid "Delete item"
 msgstr "Elem törlése"
 
-#: ../ui/xi-menus.glade.h:27
+#: ../ui/xi-menus.glade.h:30
 msgid "Dictionar_y"
 msgstr "S_zótár"
 
-#: ../ui/xi-menus.glade.h:28
+#: ../ui/xi-menus.glade.h:31
 msgid "Display Book Heading"
 msgstr "Könyv fejlécének megjelenítése"
 
-#: ../ui/xi-menus.glade.h:29
+#: ../ui/xi-menus.glade.h:32
 msgid "Display Chapter Heading"
 msgstr "Fejezet fejlécének megjelenítése"
 
-#: ../ui/xi-menus.glade.h:30
+#: ../ui/xi-menus.glade.h:33
+msgid "Display verse numbers in the text"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:34
 msgid "Doublespace"
 msgstr "Kétszeres sorköz"
 
-#: ../ui/xi-menus.glade.h:31
+#: ../ui/xi-menus.glade.h:35
 msgid "Dump Pers.Comm."
 msgstr "Személyes megjegyzések kiiratása"
 
-#: ../ui/xi-menus.glade.h:33
+#: ../ui/xi-menus.glade.h:37
 msgid "Edit bookmark item"
 msgstr "Könyvjelzői elem szerkesztése"
 
-#: ../ui/xi-menus.glade.h:34
+#: ../ui/xi-menus.glade.h:38
 msgid "Edit this item"
 msgstr "Elem szerkesztése"
 
-#: ../ui/xi-menus.glade.h:35
+#: ../ui/xi-menus.glade.h:39
 msgid "Expand All"
 msgstr "Mindent kibont"
 
-#: ../ui/xi-menus.glade.h:36
+#: ../ui/xi-menus.glade.h:40
 msgid "Expand all Bookmarks groups"
 msgstr "Az összes könyvjelző-csoport kibontása"
 
-#: ../ui/xi-menus.glade.h:37
+#: ../ui/xi-menus.glade.h:41
 msgid "Export Folder"
 msgstr "Mappa exportálása"
 
-#: ../ui/xi-menus.glade.h:38
+#: ../ui/xi-menus.glade.h:42
 msgid "Export List"
 msgstr "Lista exportálása"
 
-#: ../ui/xi-menus.glade.h:45
+#: ../ui/xi-menus.glade.h:49
 msgid "Image Content"
 msgstr "Kép tartalom"
 
-#: ../ui/xi-menus.glade.h:46
+#: ../ui/xi-menus.glade.h:50
 msgid "Import Bookmarks"
 msgstr "Könyvjelzők importálása"
 
-#: ../ui/xi-menus.glade.h:47
+#: ../ui/xi-menus.glade.h:51
 msgid "Insert Bookmark"
 msgstr "Könyvjelző beillesztése"
 
-#: ../ui/xi-menus.glade.h:48
+#: ../ui/xi-menus.glade.h:52
 msgid "Insert new bookmark here"
 msgstr "Új könyvjelző beszúrása ide"
 
-#: ../ui/xi-menus.glade.h:49
+#: ../ui/xi-menus.glade.h:53
 msgid "L_ink Tabs"
 msgstr "Fülek l_inkelése"
 
-#: ../ui/xi-menus.glade.h:51
-msgid "Load other bookmarks file (default: from BibleTime)"
+#: ../ui/xi-menus.glade.h:54
+msgid "Learn about The Sword Project, of which Xiphos is one application"
 msgstr ""
-"Más könyvjelző fájl betöltése (alap beállítás.: BibleTime programból)"
 
-#: ../ui/xi-menus.glade.h:52
+#: ../ui/xi-menus.glade.h:55
+#, fuzzy
+msgid "Learn about Xiphos"
+msgstr "A Xiphos névjegye"
+
+#: ../ui/xi-menus.glade.h:56
+msgid "Learn about translating the Xiphos interface to other languages"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:58
+msgid "Load other bookmarks file (default: from BibleTime)"
+msgstr "Más könyvjelző fájl betöltése (alap beállítás.: BibleTime programból)"
+
+#: ../ui/xi-menus.glade.h:59
 msgid "Lookup Selection"
 msgstr "Kiválasztás keresése"
 
-#: ../ui/xi-menus.glade.h:54
+#: ../ui/xi-menus.glade.h:60
+msgid "Make all tabs' Bibles navigate together"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:62
 msgid "Monthly"
 msgstr "Havi"
 
-#: ../ui/xi-menus.glade.h:57
+#: ../ui/xi-menus.glade.h:65
 msgid "Note"
 msgstr "Megjegyzés"
 
-#: ../ui/xi-menus.glade.h:58
+#: ../ui/xi-menus.glade.h:66
 msgid "Open Module"
 msgstr "Modul megnyitása"
 
-#: ../ui/xi-menus.glade.h:59
+#: ../ui/xi-menus.glade.h:67
 msgid "Open Study_pad"
 msgstr "_Tanulótömb megnyitása"
 
-#: ../ui/xi-menus.glade.h:60
+#: ../ui/xi-menus.glade.h:68
+msgid "Open a browser on an interface to live IRC chat"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:69
+msgid "Open a browser on our bug tracker"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:70
+msgid "Open a browser on the users' mailing list webpage"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:71
+msgid "Open a saved tab settings collection"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:72
 msgid "Open in a dialog"
 msgstr "Megnyitás dialógusablakban"
 
-#: ../ui/xi-menus.glade.h:61
+#: ../ui/xi-menus.glade.h:73
 msgid "Open in a separate window"
 msgstr "Megnyitás külön ablakban"
 
-#: ../ui/xi-menus.glade.h:62
+#: ../ui/xi-menus.glade.h:74
 msgid "Open in editor"
 msgstr "Megnyitás szövefszerkesztőben"
 
-#: ../ui/xi-menus.glade.h:63
+#: ../ui/xi-menus.glade.h:75
 msgid "Open in new tab"
 msgstr "Megjelenítés új lapon"
 
-#: ../ui/xi-menus.glade.h:64
+#: ../ui/xi-menus.glade.h:76
 msgid ""
 "Open selected module in a\n"
 "\tseparate ['dialog'] window"
@@ -3464,192 +3714,230 @@ msgstr ""
 "Kiválasztott modul megjelenítése\n"
 "\tkülön ['dialog'] ablakban"
 
-#: ../ui/xi-menus.glade.h:66
+#: ../ui/xi-menus.glade.h:78
 msgid "Open selected module in a new tab"
 msgstr "Kiválasztott modul megnyitása új lapon"
 
-#: ../ui/xi-menus.glade.h:67
+#: ../ui/xi-menus.glade.h:79
+msgid "Open the advanced search dialog, to run complex queries"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:80
+msgid "Open the help viewer on the Xiphos manual"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:81
 msgid "Open this bookmark in a dialog"
 msgstr "Könyvjelző megnyitása új dialógus ablakban"
 
-#: ../ui/xi-menus.glade.h:68
+#: ../ui/xi-menus.glade.h:82
 msgid "Open this bookmark in a new tab"
 msgstr "Könyvjelző megjelenítése új lapon"
 
-#: ../ui/xi-menus.glade.h:69
+#: ../ui/xi-menus.glade.h:83
+#, fuzzy
+msgid "Operate the sidebar as a separate window"
+msgstr "Megnyitás külön ablakban"
+
+#: ../ui/xi-menus.glade.h:84
 msgid "Outlined"
 msgstr "Vázlatos"
 
-#: ../ui/xi-menus.glade.h:70
+#: ../ui/xi-menus.glade.h:85
 msgid "Preview _Daily Devotion"
 msgstr "_Napi áhítat előnézete"
 
-#: ../ui/xi-menus.glade.h:72
+#: ../ui/xi-menus.glade.h:87
+msgid "Provide the full-chapter parallel Bible window as another tab"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:88
 msgid "Read Selection Aloud"
 msgstr "Kiválasztás hangos felolvasása"
 
-#: ../ui/xi-menus.glade.h:74
+#: ../ui/xi-menus.glade.h:90
 msgid "Remove folder and save it"
 msgstr "Mappa eltávolítása és mentése"
 
-#: ../ui/xi-menus.glade.h:75
+#: ../ui/xi-menus.glade.h:91
+#, fuzzy
+msgid "Remove the sidebar entirely from view"
+msgstr "A kiválasztott mappa eltávolítása"
+
+#: ../ui/xi-menus.glade.h:92
 msgid "Remove this item"
 msgstr "Elem eltávolítása"
 
-#: ../ui/xi-menus.glade.h:76
+#: ../ui/xi-menus.glade.h:93
 msgid "Rename Pers.Comm."
 msgstr "Személyes megjegyzés átnevezése"
 
-#: ../ui/xi-menus.glade.h:77
+#: ../ui/xi-menus.glade.h:94
 msgid "Respect Font Faces"
 msgstr "Betűkészlet figyelembe vétele"
 
-#: ../ui/xi-menus.glade.h:78
+#: ../ui/xi-menus.glade.h:95
 msgid "Save list as a series of bookmarks"
 msgstr "Lista elmentése könyvjelzőkként"
 
-#: ../ui/xi-menus.glade.h:79
+#: ../ui/xi-menus.glade.h:96
 msgid "Save list as a single bookmark"
 msgstr "Lista elmentése könyvjelzőként"
 
-#: ../ui/xi-menus.glade.h:80
+#: ../ui/xi-menus.glade.h:97
 msgid "Save these results as a series of bookmarks in their own folder"
 msgstr "Ezen eredmények elmentése könyvjelzőkként a mappájukba"
 
-#: ../ui/xi-menus.glade.h:81
+#: ../ui/xi-menus.glade.h:98
 msgid "Save these results as a single bookmark"
 msgstr "Ezen eredmények elmentése könyvjelzőként"
 
-#: ../ui/xi-menus.glade.h:82
+#: ../ui/xi-menus.glade.h:99
+msgid "Save this collection of tab settings"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:100
 msgid "Scripture Cross-references"
 msgstr "Bibliai utalások"
 
-#: ../ui/xi-menus.glade.h:84
+#: ../ui/xi-menus.glade.h:102
+msgid "Select Previewer position between sidebar or beneath Bible"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:103
 msgid "Show Parallel View in a _Tab"
 msgstr "Párhuzamos nézet megjelenítése új lapon"
 
-#: ../ui/xi-menus.glade.h:85
+#: ../ui/xi-menus.glade.h:104
 msgid "Show Previe_wer in the Sidebar"
 msgstr "Előnézeti ablak megjelenítése az oldalpanelen"
 
-#: ../ui/xi-menus.glade.h:86
+#: ../ui/xi-menus.glade.h:105
 msgid "Show Verse _Numbers"
 msgstr "Versszámozás megjelenítése"
 
-#: ../ui/xi-menus.glade.h:87
+#: ../ui/xi-menus.glade.h:106
+msgid "Show today's entry from your selected daily devotional in the previewer"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:107
 msgid "Simple"
 msgstr "Egyszerű"
 
-#: ../ui/xi-menus.glade.h:89
+#: ../ui/xi-menus.glade.h:109
 msgid "Subject"
 msgstr "Tárgy"
 
-#: ../ui/xi-menus.glade.h:91
+#: ../ui/xi-menus.glade.h:111
+msgid "Turn on text-to-speech reading of Bible verses as they are selected"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:112
 msgid "Unlock This Module"
 msgstr "Modul feloldása"
 
-#: ../ui/xi-menus.glade.h:92
+#: ../ui/xi-menus.glade.h:113
 msgid "Use Current Dictionary"
 msgstr "Aktuális szótár kasználata"
 
-#: ../ui/xi-menus.glade.h:93
+#: ../ui/xi-menus.glade.h:114
 msgid "Use module manager to install and remove Sword modules"
 msgstr ""
 "Használja a modulkezelőt Sword modulok telepítéséhez és eltávolításához"
 
-#: ../ui/xi-menus.glade.h:94
+#: ../ui/xi-menus.glade.h:115
 msgid "Variants"
 msgstr "Variánsok"
 
-#: ../ui/xi-menus.glade.h:95
+#: ../ui/xi-menus.glade.h:116
 msgid "Verse Per Line"
 msgstr "Versek soronként"
 
-#: ../ui/xi-menus.glade.h:97
+#: ../ui/xi-menus.glade.h:118
 msgid "_About The SWORD Project"
 msgstr "_A SWORD(kard) projekt névjegye"
 
-#: ../ui/xi-menus.glade.h:98
+#: ../ui/xi-menus.glade.h:119
 msgid "_Advanced Search"
 msgstr "Össz_etett keresés"
 
-#: ../ui/xi-menus.glade.h:99
+#: ../ui/xi-menus.glade.h:120
 msgid "_Attach/Detach Sidebar"
 msgstr "_Oldalpanel le/felcsatolása"
 
-#: ../ui/xi-menus.glade.h:100
+#: ../ui/xi-menus.glade.h:121
 msgid "_Bible"
 msgstr "_Biblia"
 
-#: ../ui/xi-menus.glade.h:101
+#: ../ui/xi-menus.glade.h:122
 msgid "_Commentary/Book"
 msgstr "_Magyarázat/Könyv"
 
-#: ../ui/xi-menus.glade.h:102
+#: ../ui/xi-menus.glade.h:123
 msgid "_Contents"
 msgstr "_Tartalom"
 
-#: ../ui/xi-menus.glade.h:103
+#: ../ui/xi-menus.glade.h:124
 msgid "_Edit"
 msgstr "Szerkesz_t"
 
-#: ../ui/xi-menus.glade.h:104
+#: ../ui/xi-menus.glade.h:125
 msgid "_Edit Item"
 msgstr "_Elem szerkesztése"
 
-#: ../ui/xi-menus.glade.h:106
+#: ../ui/xi-menus.glade.h:127
 msgid "_Help"
 msgstr "_Segítség"
 
-#: ../ui/xi-menus.glade.h:107
+#: ../ui/xi-menus.glade.h:128
 msgid "_Highlight Current Verse"
 msgstr "_Aktuális vers kiemelése"
 
-#: ../ui/xi-menus.glade.h:108
+#: ../ui/xi-menus.glade.h:129
 msgid "_Live Chat"
 msgstr "Élő _beszélgetés"
 
-#: ../ui/xi-menus.glade.h:109
+#: ../ui/xi-menus.glade.h:130
 msgid "_Mailing List"
 msgstr "_Levelezőlista"
 
-#: ../ui/xi-menus.glade.h:110
+#: ../ui/xi-menus.glade.h:131
 msgid "_Module Manager"
 msgstr "_Modulkezelő"
 
-#: ../ui/xi-menus.glade.h:111
+#: ../ui/xi-menus.glade.h:132
 msgid "_New Prayerlist/Journal"
 msgstr "_Új imalista/napló"
 
-#: ../ui/xi-menus.glade.h:112
+#: ../ui/xi-menus.glade.h:133
 msgid "_Open Session"
 msgstr "Munkamenet _megnyitása"
 
-#: ../ui/xi-menus.glade.h:113
+#: ../ui/xi-menus.glade.h:134
 msgid "_Preferences"
 msgstr "_Beállítások"
 
-#: ../ui/xi-menus.glade.h:114
+#: ../ui/xi-menus.glade.h:135
 msgid "_Preview"
 msgstr "_Előnézet"
 
-#: ../ui/xi-menus.glade.h:115
+#: ../ui/xi-menus.glade.h:136
 msgid "_Read Aloud"
 msgstr "_Felolvas"
 
-#: ../ui/xi-menus.glade.h:116
+#: ../ui/xi-menus.glade.h:137
 msgid "_Report Bug"
 msgstr "_Hibajelentés"
 
-#: ../ui/xi-menus.glade.h:117
+#: ../ui/xi-menus.glade.h:138
 msgid "_Save Session"
 msgstr "Munkamenet menté_se"
 
-#: ../ui/xi-menus.glade.h:118
+#: ../ui/xi-menus.glade.h:139
 msgid "_Search"
 msgstr "Kere_sés"
 
-#: ../ui/xi-menus.glade.h:119
+#: ../ui/xi-menus.glade.h:140
 msgid "_Show/Hide Attached Sidebar"
 msgstr "Oldalpanel megjelenítése/eltüntetése"
 
@@ -3692,6 +3980,18 @@ msgstr "A Biblia tanulmányozása"
 #: ../xiphos.desktop.in.in.h:2
 msgid "Xiphos Bible Guide"
 msgstr "Xiphos bibliaútmutató"
+
+#~ msgid ""
+#~ "Without any Bible modules to display,\n"
+#~ "Xiphos cannot proceed,\n"
+#~ "and will now exit."
+#~ msgstr ""
+#~ "Telepített Biblia modulok nélkül\n"
+#~ "Xiphos nem futtatható,\n"
+#~ "ezért az alkalmazás leáll."
+
+#~ msgid "Choose to enable Prayer lists "
+#~ msgstr "Jelölje be az imalista engedélyezéséhez "
 
 #~ msgid "Copy"
 #~ msgstr "Másol"
