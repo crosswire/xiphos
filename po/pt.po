@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Xiphos\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-09-20 20:42+0100\n"
-"PO-Revision-Date: 2010-09-20 22:57+0100\n"
+"PO-Revision-Date: 2010-09-20 23:09+0100\n"
 "Last-Translator: Ari Constâncio <ari.constancio@gmail.com>\n"
 "Language-Team: Xiphos Project\n"
 "Language: \n"
@@ -2891,11 +2891,11 @@ msgstr "Módulos Paralelo"
 msgid ""
 "Name and size choice for any module in a given language; still overridden by "
 "a specific choice on a particular module"
-msgstr ""
+msgstr "Escolha de nome e tamanho para qualquer módulo numa linguagem; suplantado por uma escolha específica num dado módulo"
 
 #: ../ui/prefs.glade.h:79
 msgid "Normal Text"
-msgstr ""
+msgstr "Texto Normal"
 
 #: ../ui/prefs.glade.h:80 ../ui/search-dialog.glade.h:70
 msgid "Open Selection Dialog Button"
@@ -2945,7 +2945,7 @@ msgstr "Seleccionar um directório"
 msgid ""
 "Select a particular language for interface display, other than your usual "
 "setting"
-msgstr ""
+msgstr "Seleccionar uma dada linguagem para a interface, além da definição habitual"
 
 #: ../ui/prefs.glade.h:94
 msgid "Show Daily Devotion at start up"
@@ -2959,7 +2959,7 @@ msgstr "Mostrar janela splash no arranque"
 msgid ""
 "Single selection of Bible+commentary+book+dictionary, or many sets of such "
 "selections in a tabbed interface"
-msgstr ""
+msgstr "Selecção simples de Bíblia+comentário+livro+dicionário, ou vários conjuntos dessas selecções numa interface com abas"
 
 #: ../ui/prefs.glade.h:97
 msgid "Special Locale (requires restart)"
@@ -3001,7 +3001,7 @@ msgstr "Visto para Usar exploração com abas"
 
 #: ../ui/prefs.glade.h:107
 msgid "Use the verse list for Bible cross-references instead of the previewer"
-msgstr ""
+msgstr "Usar a lista de versículos para referências bíblicas cruzadas ao invés do previewer"
 
 #: ../ui/prefs.glade.h:108
 msgid "Verse Number"
@@ -3413,7 +3413,7 @@ msgstr "Pesquisa de _Atributos"
 
 #: ../ui/search-dialog.glade.h:113
 msgid "_Lucene Search Syntax"
-msgstr ""
+msgstr "Sintaxe de pesquisa _Lucene"
 
 #: ../ui/search-dialog.glade.h:114
 msgid "e.g. Matt-John;Rev4"
@@ -3537,7 +3537,7 @@ msgstr "Mostrar Caebeçalho de Capítulo"
 
 #: ../ui/xi-menus.glade.h:33
 msgid "Display verse numbers in the text"
-msgstr ""
+msgstr "Mostrar números de versículo no texto"
 
 #: ../ui/xi-menus.glade.h:34
 msgid "Doublespace"
@@ -3593,7 +3593,7 @@ msgstr "L_igar Abas"
 
 #: ../ui/xi-menus.glade.h:54
 msgid "Learn about The Sword Project, of which Xiphos is one application"
-msgstr ""
+msgstr "Aprender sobre o Projecto Sword, do qual Xiphos é uma aplicação"
 
 #: ../ui/xi-menus.glade.h:55
 msgid "Learn about Xiphos"
@@ -3633,11 +3633,11 @@ msgstr "Abrir Study_Pad"
 
 #: ../ui/xi-menus.glade.h:68
 msgid "Open a browser on an interface to live IRC chat"
-msgstr ""
+msgstr "Abrir um browser numa interface com chat IRC ao vivo"
 
 #: ../ui/xi-menus.glade.h:69
 msgid "Open a browser on our bug tracker"
-msgstr ""
+msgstr "Abrir um browser no nosso bug tracker"
 
 #: ../ui/xi-menus.glade.h:70
 msgid "Open a browser on the users' mailing list webpage"
@@ -3677,7 +3677,7 @@ msgstr "Abrir módulo seleccionado numa nova aba"
 
 #: ../ui/xi-menus.glade.h:79
 msgid "Open the advanced search dialog, to run complex queries"
-msgstr ""
+msgstr "Abrir o diálogo de pesquisa avançada, para correr queries complexas"
 
 #: ../ui/xi-menus.glade.h:80
 msgid "Open the help viewer on the Xiphos manual"
@@ -3705,7 +3705,7 @@ msgstr "Pré-visualizar _Devocional Diário"
 
 #: ../ui/xi-menus.glade.h:87
 msgid "Provide the full-chapter parallel Bible window as another tab"
-msgstr ""
+msgstr "Fornecer a janela de capítulo completo da Bíblia paralela noutra aba"
 
 #: ../ui/xi-menus.glade.h:88
 msgid "Read Selection Aloud"
@@ -3785,7 +3785,7 @@ msgstr "Assunto"
 
 #: ../ui/xi-menus.glade.h:111
 msgid "Turn on text-to-speech reading of Bible verses as they are selected"
-msgstr ""
+msgstr "Activar leitura de texto-para-voz de versículos bíblicos quando são seleccionados"
 
 #: ../ui/xi-menus.glade.h:112
 msgid "Unlock This Module"
