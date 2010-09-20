@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: xiphos\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-05-17 03:35+0100\n"
-"PO-Revision-Date: 2010-03-20 18:33+0000\n"
-"Last-Translator: Teylo Laundos Aguiar <teylo.aguiar@gmail.com>\n"
+"PO-Revision-Date: 2010-05-28 02:08+0000\n"
+"Last-Translator: Douglas Santos <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-21 04:51+0000\n"
+"X-Launchpad-Export-Date: 2010-09-20 05:58+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../src/backend/sword_main.cc:1077
@@ -54,12 +54,12 @@ msgstr "Código-fonte simples"
 #: ../src/editor/slib-editor.c:715 ../ui/editor_note.xml.h:15
 #: ../ui/editor_studypad.xml.h:21
 msgid "_Print..."
-msgstr "Im_primir..."
+msgstr "_Imprimir..."
 
 #: ../src/editor/slib-editor.c:722 ../ui/editor_note.xml.h:9
 #: ../ui/editor_studypad.xml.h:14
 msgid "Print Pre_view"
-msgstr "Visuali_zar Impressão"
+msgstr "_Visualizar Impressão"
 
 #: ../src/editor/slib-editor.c:729
 msgid "_Quit"
@@ -141,7 +141,7 @@ msgstr "Arquivo"
 
 #: ../src/editor/slib-editor.c:1347
 msgid "StudyPad"
-msgstr "StudyPad"
+msgstr "Bloco de Estudo"
 
 #: ../src/editor/slib-editor.c:1360
 msgid "Note Editor"
@@ -204,6 +204,12 @@ msgid ""
 "\n"
 " Books can be downloaded from the SWORD Project."
 msgstr ""
+"O Projecto SWORD é uma iniciativa para criar um pacote de software "
+"expansível para pesquisa e estudo de Deus e da Sua Palavra. A Plataforma do "
+"Projecto SWORD permite fácil manipulação de textos Bíblicos, comentários, "
+"léxicos, dicionários e outros livros. Várias interfaces são construídas com "
+"base nesta plataforma. Um conjunto de módulos instalados pode ser partilhado "
+"entre quaisquer dessas interfaces."
 
 #: ../src/gnome2/about_sword.c:105
 msgid "The SWORD Project"
@@ -283,7 +289,7 @@ msgstr "Pasta "
 
 #: ../src/gnome2/bookmarks_menu.c:206
 msgid "Specify bookmarks file"
-msgstr ""
+msgstr "Especifique o arquivo de favoritos"
 
 #: ../src/gnome2/bookmarks_menu.c:349 ../ui/xi-menus.glade.h:32
 msgid "Edit"
@@ -333,7 +339,7 @@ msgstr "Resultado da pesquisa: %s"
 
 #: ../src/gnome2/bookmarks_treeview.c:945 ../src/gnome2/sidebar.c:1376
 msgid "Bookmarks"
-msgstr "Bookmarks"
+msgstr "Favoritos"
 
 #: ../src/gnome2/cipher_key_dialog.c:61
 #, c-format
@@ -345,9 +351,8 @@ msgid "for:"
 msgstr "para:"
 
 #: ../src/gnome2/cipher_key_dialog.c:65
-#, fuzzy
 msgid "Enter Key: "
-msgstr "Introduza a chave cifrada: "
+msgstr "Informe a chave: "
 
 #: ../src/gnome2/dialog.c:264
 msgid "Close without Saving"
@@ -365,15 +370,15 @@ msgstr "Fechar _sem Salvar"
 #: ../src/gnome2/sidebar.c:1392
 #, c-format
 msgid "Verse List"
-msgstr ""
+msgstr "Lista de Versículos"
 
 #: ../src/gnome2/export_bookmarks.c:689
 msgid "VerseList"
-msgstr ""
+msgstr "ListadeVersículo"
 
 #: ../src/gnome2/export_bookmarks.c:694
 msgid "SearchResults"
-msgstr ""
+msgstr "ResultadosDaPesquisa"
 
 #: ../src/gnome2/export_dialog.c:267 ../ui/export-dialog.glade.h:20
 msgid "Please check copyright before exporting!"
@@ -445,7 +450,7 @@ msgstr "Usar a fonte padrão para este módulo"
 #. *
 #. * Return value
 #. *   void
-#.
+#. 
 #: ../src/gnome2/gui.c:101
 msgid ""
 "URL references using \"sword://\" (similar to web page\n"
@@ -825,13 +830,13 @@ msgstr "Dicionários"
 #: ../src/gnome2/mod_mgr.c:1323 ../src/gnome2/utilities.c:592
 #: ../src/main/sidebar.cc:1025 ../src/main/sidebar.cc:1027
 msgid "Daily Devotionals"
-msgstr ""
+msgstr "Devocionais Diários"
 
 #: ../src/gnome2/mod_mgr.c:1327 ../src/gnome2/utilities.c:596
 #: ../src/main/sidebar.cc:677 ../src/main/sidebar.cc:1034
 #: ../src/main/sidebar.cc:1036
 msgid "General Books"
-msgstr ""
+msgstr "Livros Gerais"
 
 #: ../src/gnome2/mod_mgr.c:1331 ../src/gnome2/utilities.c:600
 #: ../src/main/sidebar.cc:1043 ../src/main/sidebar.cc:1045
@@ -848,6 +853,8 @@ msgid ""
 "Categorized by\n"
 "Availability"
 msgstr ""
+"Categorizados por\n"
+"Disponibilidade"
 
 #: ../src/gnome2/mod_mgr.c:1348
 msgid "Updates"
@@ -855,21 +862,21 @@ msgstr "Atualizações"
 
 #: ../src/gnome2/mod_mgr.c:1352
 msgid "Uninstalled"
-msgstr ""
+msgstr "Desinstalado"
 
 #: ../src/gnome2/mod_mgr.c:1356 ../src/gnome2/sidebar.c:634
 #: ../src/gnome2/utilities.c:609 ../src/main/prayerlists.cc:241
 #: ../src/main/sidebar.cc:1062 ../src/main/sidebar.cc:1064
 msgid "Prayer List/Journal"
-msgstr ""
+msgstr "Lista/Diário de Oração"
 
 #: ../src/gnome2/mod_mgr.c:1536
 msgid "Refreshing from remote source"
-msgstr ""
+msgstr "Atualizando a partir de fonte remota"
 
 #: ../src/gnome2/mod_mgr.c:1546
 msgid "Remote source not found"
-msgstr ""
+msgstr "Fonte remota não encontrada"
 
 #: ../src/gnome2/mod_mgr.c:1616
 msgid "Configure"
@@ -877,43 +884,43 @@ msgstr "Configurar"
 
 #: ../src/gnome2/mod_mgr.c:1647
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #: ../src/gnome2/mod_mgr.c:1654
 msgid "Caption"
-msgstr ""
+msgstr "Subtítulo"
 
 #: ../src/gnome2/mod_mgr.c:1662
 msgid "Source"
-msgstr ""
+msgstr "Fonte"
 
 #: ../src/gnome2/mod_mgr.c:1670
 msgid "Directory"
-msgstr ""
+msgstr "Diretório"
 
 #: ../src/gnome2/mod_mgr.c:1678
 msgid "User"
-msgstr ""
+msgstr "Usuário"
 
 #: ../src/gnome2/mod_mgr.c:1686
 msgid "Password"
-msgstr ""
+msgstr "Senha"
 
 #: ../src/gnome2/mod_mgr.c:1694
 msgid "UID"
-msgstr ""
+msgstr "UID"
 
 #: ../src/gnome2/mod_mgr.c:1711
 msgid "Module Sources"
-msgstr ""
+msgstr "Módulos Fontes"
 
 #: ../src/gnome2/mod_mgr.c:1714
 msgid "Add/Remove"
-msgstr ""
+msgstr "Adicionar/Remover"
 
 #: ../src/gnome2/mod_mgr.c:1716
 msgid "Choose"
-msgstr ""
+msgstr "Escolher"
 
 #: ../src/gnome2/mod_mgr.c:1720 ../src/gnome2/preferences_dialog.c:1637
 #: ../src/gnome2/sidebar.c:1400
@@ -922,19 +929,19 @@ msgstr "Módulos"
 
 #: ../src/gnome2/mod_mgr.c:1722
 msgid "Install/Update"
-msgstr "Instalar/atualizar"
+msgstr "Inslatar/Atualizar"
 
 #: ../src/gnome2/mod_mgr.c:1724
 msgid "Maintenance"
-msgstr ""
+msgstr "Manutenção"
 
 #: ../src/gnome2/mod_mgr.c:1945
 msgid "Please Refresh"
-msgstr ""
+msgstr "Por favor Recarregue"
 
 #: ../src/gnome2/mod_mgr.c:1946
 msgid "Your module list is not up to date!"
-msgstr ""
+msgstr "Sua lista de módulo não está atualizada!"
 
 #. Zero Bibles is just not workable in Xiphos.
 #: ../src/gnome2/mod_mgr.c:2239
@@ -942,20 +949,24 @@ msgid ""
 "You have uninstalled your last Bible.\n"
 "Xiphos requires at least one."
 msgstr ""
+"Você desinstalou sua última Bíblia.\n"
+"Xiphos exige pelo menos uma."
 
 #: ../src/gnome2/mod_mgr.c:2245
 msgid ""
 "There are still no Bibles installed.\n"
 "Xiphos cannot continue without one."
 msgstr ""
+"Ainda não existem Bíblias instaladas.\n"
+"Xiphos não pode continuar sem uma."
 
 #: ../src/gnome2/mod_mgr.c:2335
 msgid "Standard remote sources have been loaded."
-msgstr ""
+msgstr "Padrão fontes remotas foi carregado"
 
 #: ../src/gnome2/mod_mgr.c:2341
 msgid "Could not load standard sources from CrossWire."
-msgstr ""
+msgstr "Não foi possível carregar padrão de fontes da CrossWire."
 
 #: ../src/gnome2/mod_mgr.c:2345
 msgid ""
@@ -964,8 +975,8 @@ msgid ""
 "This is Xiphos' mechanism to get new and updated content.\n"
 "If you have never been here before, please take a moment to look it over.\n"
 "\n"
-"Modules come from different <u>repositories</u>.  <b>Module Sources: Add/"
-"Remove</b> will show you what repositories are currently known.\n"
+"Modules come from different <u>repositories</u>.  <b>Module Sources: "
+"Add/Remove</b> will show you what repositories are currently known.\n"
 "\n"
 "<b>Module Sources: Choose</b> is for deciding from where modules should "
 "come, that is, from which repository Xiphos should obtain them, as well as "
@@ -981,88 +992,111 @@ msgid ""
 "Live Chat, or (if no one is responsive in chat) send mail to our users' "
 "mailing list.\n"
 msgstr ""
+"<b> Bem-vindo ao Module Manager. </b>\n"
+"\n"
+"Este é o mecanismo Xiphos para obter conteúdos novos e atualizados.\n"
+"Se você nunca esteve aqui antes, por favor, dedique um tempo para dar uma "
+"olhada.\n"
+"\n"
+"Os módulos vêm de diferentes <u>repositórios</u>. <b>Módulos Fonte: "
+"Adicionar/Remover</b> mostrará quais repositórios são conhecidas "
+"atualmente.\n"
+"\n"
+"<b>Módulos Fonte: Escolha</b> é para decidir de onde os módulos devem vir, "
+"isto é, a partir de qual repositório Xiphos deverá obtê-los, bem como onde "
+"devem ser colocados em seu sistema. Definir <i>Fonte da Instalação</i> e "
+"<i>Instalar Destino da instalação</i>, então clique<i>Recarregar</i>.\n"
+"\n"
+"<b>Módulos: Instalar/Atualizar</b> é para selecionar e obter os módulos "
+"depois de escolher a origem e destino.\n"
+"\n"
+"<b>Módulos: Manutenção</b> é para arquivar e criação de índice\n"
+"\n"
+"Consulte a sessão 5 do nosso manual para detalhes do Gerenciador de Módulo "
+"ou peça ajuda via Chat, ou (se ninguém responde no Chat), envie um e-mail "
+"para a nossa lista de e-mail de usuários.\n"
 
 #: ../src/gnome2/mod_mgr.c:2512 ../src/gnome2/mod_mgr.c:2758
 msgid "Remove the selected source"
-msgstr ""
+msgstr "Remover a fonte selecionada"
 
 #: ../src/gnome2/mod_mgr.c:2572
 msgid "Enter a remote source"
-msgstr ""
+msgstr "Entre com uma fonte remota"
 
 #: ../src/gnome2/mod_mgr.c:2576
 msgid "Caption:"
-msgstr ""
+msgstr "Título:"
 
 #: ../src/gnome2/mod_mgr.c:2577
 msgid "Type:"
-msgstr ""
+msgstr "Tipo:"
 
 #: ../src/gnome2/mod_mgr.c:2578
 msgid "Host:"
-msgstr ""
+msgstr "Host:"
 
 #: ../src/gnome2/mod_mgr.c:2579
 msgid "Directory:"
-msgstr ""
+msgstr "Diretório:"
 
 #: ../src/gnome2/mod_mgr.c:2580
 msgid "User (optional):"
-msgstr ""
+msgstr "Usuário (opcional)"
 
 #: ../src/gnome2/mod_mgr.c:2581
 msgid "Password (optional):"
-msgstr ""
+msgstr "Senha (opcional)"
 
 #. this can happen at most once
 #: ../src/gnome2/mod_mgr.c:2608
 msgid "A source by that name already exists."
-msgstr ""
+msgstr "Uma fonte com esse nome já existe"
 
 #: ../src/gnome2/mod_mgr.c:2755
 msgid "Delete a remote source"
-msgstr ""
+msgstr "Excluir uma fonte remota"
 
 #: ../src/gnome2/navbar_book.c:358 ../src/gnome2/navbar_book_dialog.c:299
 msgid "Go outward, to the section containing this one"
-msgstr ""
+msgstr "Vá até a sessão que contem isso"
 
 #: ../src/gnome2/navbar_book.c:373 ../src/gnome2/navbar_book_dialog.c:314
 msgid "Go to previous item"
-msgstr ""
+msgstr "Volte ao item anterior"
 
 #: ../src/gnome2/navbar_book.c:387 ../src/gnome2/navbar_book_dialog.c:328
 msgid "Go to next item"
-msgstr ""
+msgstr "Vá para o próximo item"
 
 #: ../src/gnome2/navbar_book.c:401 ../src/gnome2/navbar_book_dialog.c:342
 msgid "Go inward, to the first subsection"
-msgstr ""
+msgstr "Dentro, na primeira sub sessão"
 
 #: ../src/gnome2/navbar_versekey_dialog.c:868
 #: ../src/gnome2/navbar_versekey_editor.c:876
 #: ../src/gnome2/navbar_versekey_parallel.c:816
 msgid "Synchronize this window's scrolling with the main window"
-msgstr ""
+msgstr "Sincronizar rolagem desta janela com janela principal"
 
 #: ../src/gnome2/parallel_dialog.c:327 ../src/gnome2/preferences_dialog.c:1643
 msgid "Parallel"
-msgstr ""
+msgstr "Paralelo"
 
 #: ../src/gnome2/parallel_view.c:124
 msgid "Detach/Attach"
-msgstr ""
+msgstr "Desanexado/Anexado"
 
 #: ../src/gnome2/parallel_view.c:130 ../ui/xi-menus.glade.h:53
 msgid "Module Options"
-msgstr ""
+msgstr "Opções do Módulo"
 
 #: ../src/gnome2/parallel_view.c:269 ../src/gnome2/sidebar.c:617
 #: ../src/gnome2/sidebar.c:623 ../src/gnome2/tabbed_browser.c:257
 #: ../src/main/sidebar.cc:636 ../src/main/sidebar.cc:990
 #: ../src/main/sidebar.cc:991 ../src/main/sidebar.cc:992
 msgid "Parallel View"
-msgstr ""
+msgstr "Visualização Paralela"
 
 #: ../src/gnome2/preferences_dialog.c:1158
 #: ../src/gnome2/preferences_dialog.c:1196
@@ -1076,15 +1110,15 @@ msgstr ""
 #: ../src/gnome2/preferences_dialog.c:1498
 #: ../src/gnome2/preferences_dialog.c:1881
 msgid "-- Select --"
-msgstr ""
+msgstr "--Selecione--"
 
 #: ../src/gnome2/preferences_dialog.c:1460
 msgid "Locale will take effect after restart."
-msgstr ""
+msgstr "Locale terá efeito após a reinicialização"
 
 #: ../src/gnome2/preferences_dialog.c:1535 ../ui/prefs.glade.h:75
 msgid "Preferences"
-msgstr ""
+msgstr "Preferências"
 
 #: ../src/gnome2/preferences_dialog.c:1617
 msgid "Fonts"
@@ -1092,11 +1126,11 @@ msgstr ""
 
 #: ../src/gnome2/preferences_dialog.c:1620
 msgid "Color"
-msgstr ""
+msgstr "Cor"
 
 #: ../src/gnome2/preferences_dialog.c:1623
 msgid "Sizes and Faces"
-msgstr ""
+msgstr "Tamanho e Superficie"
 
 #: ../src/gnome2/preferences_dialog.c:1627
 msgid "General"
@@ -1570,8 +1604,8 @@ msgstr ""
 
 #: ../src/main/prayerlists.cc:342
 msgid ""
-"<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</"
-"b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"
+"<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</b><br>pews<br>fellowsh"
+"ip<br>Bibles for missionaries<br><br><br>"
 msgstr ""
 
 #: ../src/main/prayerlists.cc:368
@@ -2259,9 +2293,8 @@ msgid "Continue"
 msgstr ""
 
 #: ../ui/module-manager.glade.h:15
-#, fuzzy
 msgid "Create a zip archive of the selected modules."
-msgstr "Excluir índice de pesquisa rápida para estes módulos?"
+msgstr ""
 
 #: ../ui/module-manager.glade.h:16
 msgid "Current Remote Sources"
@@ -2272,18 +2305,16 @@ msgid "Current local sources"
 msgstr ""
 
 #: ../ui/module-manager.glade.h:18
-#, fuzzy
 msgid "Delete the fast-search index of the selected modules."
-msgstr "Excluir índice de pesquisa rápida para estes módulos?"
+msgstr ""
 
 #: ../ui/module-manager.glade.h:19
 msgid "Home dir"
 msgstr ""
 
 #: ../ui/module-manager.glade.h:20
-#, fuzzy
 msgid "Install or update the selected modules"
-msgstr "Instalar estes módulos?"
+msgstr ""
 
 #: ../ui/module-manager.glade.h:21
 msgid ""
@@ -2304,7 +2335,8 @@ msgid "Module Manager"
 msgstr ""
 
 #: ../ui/module-manager.glade.h:25
-msgid "Open a brief introductory explanation of how the Module Manager works."
+msgid ""
+"Open a brief introductory explanation of how the Module Manager works."
 msgstr ""
 
 #: ../ui/module-manager.glade.h:26
@@ -2326,42 +2358,36 @@ msgid "Remove one of your local folders as an install source."
 msgstr ""
 
 #: ../ui/module-manager.glade.h:30
-#, fuzzy
 msgid "Remove the selected modules from your system"
-msgstr "Remover a pasta selecionada"
+msgstr ""
 
 #: ../ui/module-manager.glade.h:31
 msgid "Sword sys dir"
 msgstr ""
 
 #: ../ui/module-manager.glade.h:32
-#, fuzzy
 msgid "_Archive"
-msgstr "Arquivo"
+msgstr ""
 
 #: ../ui/module-manager.glade.h:33
-#, fuzzy
 msgid "_Delete Index"
-msgstr "Excluindo índice"
+msgstr ""
 
 #: ../ui/module-manager.glade.h:34
-#, fuzzy
 msgid "_Index"
-msgstr "Índice"
+msgstr ""
 
 #: ../ui/module-manager.glade.h:35
-#, fuzzy
 msgid "_Install"
-msgstr "Instalar"
+msgstr ""
 
 #: ../ui/module-manager.glade.h:36
 msgid "_Load Standard"
 msgstr ""
 
 #: ../ui/module-manager.glade.h:37
-#, fuzzy
 msgid "_View Intro"
-msgstr "_Ver"
+msgstr ""
 
 #: ../ui/navbar_versekey.glade.h:1
 msgid "1"
@@ -3259,9 +3285,8 @@ msgid "Image Content"
 msgstr ""
 
 #: ../ui/xi-menus.glade.h:46
-#, fuzzy
 msgid "Import Bookmarks"
-msgstr "Bookmarks"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:47
 msgid "Insert Bookmark"
@@ -3418,9 +3443,8 @@ msgid "Variants"
 msgstr ""
 
 #: ../ui/xi-menus.glade.h:95
-#, fuzzy
 msgid "Verse Per Line"
-msgstr "_Versículo Por Linha"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:97
 msgid "_About The SWORD Project"
@@ -3475,9 +3499,8 @@ msgid "_Module Manager"
 msgstr ""
 
 #: ../ui/xi-menus.glade.h:111
-#, fuzzy
 msgid "_New Prayerlist/Journal"
-msgstr "Lista de Oração/Diário"
+msgstr ""
 
 #: ../ui/xi-menus.glade.h:112
 msgid "_Open Session"
@@ -3537,11 +3560,11 @@ msgstr ""
 
 #: ../ui/xi-export-bookmarks.glade.h:7
 msgid "gtk-cancel"
-msgstr ""
+msgstr "Cancelar GTK"
 
 #: ../ui/xi-export-bookmarks.glade.h:8
 msgid "gtk-ok"
-msgstr ""
+msgstr "Ok GTK"
 
 #: ../xiphos.desktop.in.in.h:1
 msgid "Study the Bible"
@@ -3551,9 +3574,6 @@ msgstr "Estude a Bíblia"
 msgid "Xiphos Bible Guide"
 msgstr "Guia Bíblico Xiphos"
 
-#~ msgid "Cipher Key?"
-#~ msgstr "Chave de Codificação?"
-
 #~ msgid "Books can be downloaded from the SWORD Project"
 #~ msgstr "Livros podem ser baixados do Projeto SWORD"
 
@@ -3562,3 +3582,6 @@ msgstr "Guia Bíblico Xiphos"
 
 #~ msgid "About the SWORD Project"
 #~ msgstr "Sobre o Projeto SWORD"
+
+#~ msgid "Cipher Key?"
+#~ msgstr "Chave de Codificação?"

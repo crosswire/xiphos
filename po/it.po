@@ -1,4 +1,4 @@
-# Japanese translation for xiphos
+# Italian translation for xiphos
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the xiphos package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
@@ -6,11 +6,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xiphos\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-05-17 03:35+0100\n"
-"PO-Revision-Date: 2010-05-17 03:32+0000\n"
-"Last-Translator: Kunio Nakamaru <n_e_o_m@hotmail.com>\n"
-"Language-Team: Japanese <ja@li.org>\n"
+"PO-Revision-Date: 2010-07-04 23:06+0000\n"
+"Last-Translator: Stemby <carlo.stemberger@gmail.com>\n"
+"Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,179 +19,179 @@ msgstr ""
 
 #: ../src/backend/sword_main.cc:1077
 msgid "Configuration not found"
-msgstr "設定が見つかりませんでした。"
+msgstr "Configurazione non trovata"
 
 #: ../src/editor/slib-editor.c:224 ../src/gnome2/html.c:634
 #, c-format
 msgid "Page %d of %d"
-msgstr "ページ %d / %d"
+msgstr "Pagina %d di %d"
 
 #: ../src/editor/slib-editor.c:391 ../src/editor/slib-editor.c:438
 msgid "Save As"
-msgstr "名前を付けて保存"
+msgstr "Salva con nome"
 
 #: ../src/editor/slib-editor.c:409 ../src/editor/slib-editor.c:456
 #: ../src/editor/slib-editor.c:623
 msgid "Untitled document"
-msgstr "タイトルなしのドキュメント"
+msgstr "Documento senza nome"
 
 #: ../src/editor/slib-editor.c:648
 msgid "Are you sure you want to delete the note for"
-msgstr "以下のメモを削除しますがよろしいですか？"
+msgstr "Sei sicuro di voler cancellare la nota per"
 
 #: ../src/editor/slib-editor.c:691
 msgid "HTML Output"
-msgstr "HTML の出力"
+msgstr "Output HTML"
 
 #: ../src/editor/slib-editor.c:698
 msgid "HTML Source"
-msgstr "HTML のソース(_S)"
+msgstr "Sorgente HTML"
 
 #: ../src/editor/slib-editor.c:705
 msgid "Plain Source"
-msgstr "通常のソース"
+msgstr ""
 
 #: ../src/editor/slib-editor.c:715 ../ui/editor_note.xml.h:15
 #: ../ui/editor_studypad.xml.h:21
 msgid "_Print..."
-msgstr "印刷(_P)..."
+msgstr "_Stampa..."
 
 #: ../src/editor/slib-editor.c:722 ../ui/editor_note.xml.h:9
 #: ../ui/editor_studypad.xml.h:14
 msgid "Print Pre_view"
-msgstr "印刷プレビュー(_V)"
+msgstr ""
 
 #: ../src/editor/slib-editor.c:729
 msgid "_Quit"
-msgstr "終了する(_Q)"
+msgstr "_Esci"
 
 #: ../src/editor/slib-editor.c:736
 msgid "_Open"
-msgstr "開く(_O)"
+msgstr "_Apri"
 
 #: ../src/editor/slib-editor.c:743
 msgid "_Save"
-msgstr "保存(_S)"
+msgstr "_Salva"
 
 #: ../src/editor/slib-editor.c:750
 msgid "Save _As..."
-msgstr "名前を付けて保存(_A)..."
+msgstr "Sa_lva come..."
 
 #: ../src/editor/slib-editor.c:756
 msgid "New"
-msgstr "新規作成"
+msgstr "Nuovo"
 
 #: ../src/editor/slib-editor.c:758
 msgid "Open new document"
-msgstr "新しい文書を開く"
+msgstr "Apri nuovo documento"
 
 #: ../src/editor/slib-editor.c:762
 msgid "Delete"
-msgstr "削除する"
+msgstr "Elimina"
 
 #: ../src/editor/slib-editor.c:764
 msgid "Delete current note"
-msgstr "現在のメモを削除"
+msgstr "Cancella la nota corrente"
 
 #: ../src/editor/slib-editor.c:769 ../ui/editor_note.xml.h:14
 #: ../ui/editor_studypad.xml.h:20 ../ui/xi-menus.glade.h:105
 msgid "_File"
-msgstr "ファイル(_F)"
+msgstr "_File"
 
 #: ../src/editor/slib-editor.c:824
 msgid "HTML _Output"
-msgstr "HTML の出力(_O)"
+msgstr "_Output HTML"
 
 #: ../src/editor/slib-editor.c:831
 msgid "_HTML Source"
-msgstr "HTML のソース(_H)"
+msgstr "Sorgente _HTML"
 
 #: ../src/editor/slib-editor.c:838
 msgid "_Plain Source"
-msgstr "通常のソース(_P)"
+msgstr ""
 
 #: ../src/editor/slib-editor.c:845 ../ui/xi-menus.glade.h:120
 msgid "_View"
-msgstr "表示(_V)"
+msgstr "_Visualizza"
 
 #: ../src/editor/slib-editor.c:856 ../ui/editor_note.xml.h:11
 #: ../ui/editor_studypad.xml.h:16
 msgid "Save"
-msgstr "保存する"
+msgstr "Salva"
 
 #: ../src/editor/slib-editor.c:867 ../src/editor/slib-editor.c:874
 msgid "Insert Link"
-msgstr "リンクの挿入"
+msgstr "Inserisci collegamento"
 
 #: ../src/editor/slib-editor.c:1256 ../src/editor/slib-editor.c:1293
 msgid "Save the changes to document"
-msgstr "文書の変更を保存"
+msgstr "Salvare le modifiche al documento"
 
 #: ../src/editor/slib-editor.c:1257 ../src/editor/slib-editor.c:1294
 msgid "before closing?"
-msgstr "閉じる前に？"
+msgstr "prima di chiudere?"
 
 #: ../src/editor/slib-editor.c:1264 ../src/editor/slib-editor.c:1301
 msgid "If you don't save, changes will be permanently lost."
-msgstr "保存しない場合、変更は失われます。"
+msgstr "Se non si salva, le modifiche andranno perse per sempre."
 
 #: ../src/editor/slib-editor.c:1292 ../ui/xi-menus.glade.h:39
 msgid "File"
-msgstr "ファイル(&F)"
+msgstr "File"
 
 #: ../src/editor/slib-editor.c:1347
 msgid "StudyPad"
-msgstr "StudyPad"
+msgstr ""
 
 #: ../src/editor/slib-editor.c:1360
 msgid "Note Editor"
-msgstr "メモ編集ツール"
+msgstr "Editor delle note"
 
 #: ../src/editor/slib-editor.c:1374
 msgid "Prayer List/Journal Editor"
-msgstr "祈り帳/日記編集ツール"
+msgstr ""
 
 #: ../src/gecko/gecko-html.cpp:177 ../src/gnome2/html.c:163
 msgid "Unlock "
-msgstr "開錠 "
+msgstr "Digitare la chiave di sblocco "
 
 #: ../src/gecko/gecko-print.c:172
 msgid "Preparing to print"
-msgstr "印刷する準備をしています"
+msgstr "Preparazione per la stampa"
 
 #: ../src/gecko/gecko-print.c:266
 msgid "Printing is not supported on this printer"
-msgstr "このプリンタでは印刷をサポートしていません"
+msgstr "La stampa non è supportata su questa stampante"
 
 #: ../src/gecko/gecko-print.c:269
 #, c-format
 msgid "Printer %s does not support PostScript printing."
-msgstr "プリンター%sでは、PostScript印刷がサポートされていません。"
+msgstr "La stampante %s non supporta la stampa PostScript."
 
 #: ../src/gecko/gecko-print.c:342 ../src/gecko/gecko-print.c:370
 msgid "Printing"
-msgstr "印刷しています"
+msgstr "Stampa"
 
 #: ../src/gecko/gecko-print.c:372
 msgid "Waiting to print"
-msgstr "印刷待ち"
+msgstr "Stampa in attesa"
 
 #: ../src/gecko/gecko-print.c:584
 msgid "An error occurred while printing"
-msgstr "印刷する際にエラーが発生しました"
+msgstr "Si è verificato un errore durante la stampa"
 
 #: ../src/gecko/gecko-print.c:588
 #, c-format
 msgid "It was not possible to print your document: %s"
-msgstr "ドキュメントを印刷できませんでした: %s"
+msgstr "Non è stato possibile stampare il documento: %s"
 
 #: ../src/gnome2/about_modules.c:195
 msgid "About Sword Module"
-msgstr "Sword拡張データについて"
+msgstr ""
 
 #: ../src/gnome2/about_modules.c:389 ../src/gnome2/mod_mgr.c:256
 msgid "The module has no About information."
-msgstr "拡張データ情報がありません。"
+msgstr ""
 
 #: ../src/gnome2/about_sword.c:81
 msgid ""
@@ -204,13 +204,6 @@ msgid ""
 "\n"
 " Books can be downloaded from the SWORD Project."
 msgstr ""
-"The Sword "
-"Projectは、神とその御言葉の研究と学習のためのソフトウェア郡の開発に尽力を注ぎ、そのソフトウェアの数は常に増え続けています。The Sword "
-"Projectフレームワークは、聖書、注解書、辞書、辞典などその他の関係書物の学習に容易く用いる事が出来ます。たくさんのフロントエンドアプリケーションがこ"
-"のフレームワークの上に開発されてきました。これらの書物データは、このフレームワーク上で作られたフロントエンドアプリケーションによって共通化されているため、"
-"それらすべてで同じデータを用いることが出来ます。\n"
-"\n"
-"これらの書物データは、Sword Projectからダウンロードする事ができます。"
 
 #: ../src/gnome2/about_sword.c:105
 msgid "The SWORD Project"
@@ -225,22 +218,18 @@ msgid ""
 "other languages. If you are able to translate for us, please see the link "
 "below, contact us, and get involved with our efforts."
 msgstr ""
-"Xiphosを聖書学習ツールとしてお気に召しましたでしょうか？\n"
-"翻訳には満足されていますか？あなたも翻訳に貢献する事が可能です。\n"
-"\n"
-"私たちは、常に様々な言語に翻訳するボランティアを募集しています。もし、ほかの言語に訳してくださる方がいらしたら、どうぞご連絡ください。"
 
 #: ../src/gnome2/about_trans.c:98
 msgid "About Xiphos Translation"
-msgstr "Xiphosの翻訳について"
+msgstr ""
 
 #: ../src/gnome2/about_trans.c:140
 msgid "See TRANSLATION-HOWTO in Xiphos source"
-msgstr "Xiphosソースコードの翻訳HowToを参照ください"
+msgstr ""
 
 #: ../src/gnome2/about_trans.c:146
 msgid "Xiphos development"
-msgstr "Xiphos開発"
+msgstr ""
 
 #: ../src/gnome2/about_xiphos.c:130
 msgid "Copyright 2000-2009 The Xiphos Development Team"
@@ -254,10 +243,6 @@ msgid ""
 "We would like to thank Troy Griffitts and all the other folks who have given "
 "us The SWORD Project."
 msgstr ""
-"(GnomeSwordと呼ばれていました)\n"
-"\n"
-"Powered by The SWORD Project.\n"
-"The SWORD Projectを世に出したTroy Griffittsと関係者に感謝します。"
 
 #: ../src/gnome2/bibletext_dialog.c:315
 msgid "Go to "
@@ -269,21 +254,21 @@ msgstr ""
 #: ../src/gnome2/bookmarks_treeview.c:134 ../ui/editor_studypad.xml.h:2
 #: ../ui/xi-menus.glade.h:13
 msgid "Bookmark"
-msgstr "ブックマーク"
+msgstr ""
 
 #: ../src/gnome2/bookmark_dialog.c:173 ../src/gnome2/bookmarks_menu.c:758
 #: ../src/gnome2/bookmarks_treeview.c:135
 msgid "Enter Folder Name"
-msgstr "フォルダ名入力"
+msgstr ""
 
 #: ../src/gnome2/bookmark_dialog.c:175 ../src/gnome2/bookmarks_menu.c:760
 msgid "Folder Name"
-msgstr "フォルダ名"
+msgstr ""
 
 #: ../src/gnome2/bookmark_dialog.c:176 ../src/gnome2/bookmarks_menu.c:761
 #: ../src/gnome2/bookmarks_treeview.c:137
 msgid "Folder: "
-msgstr "フォルダ: "
+msgstr ""
 
 #: ../src/gnome2/bookmarks_menu.c:206
 msgid "Specify bookmarks file"
@@ -291,43 +276,43 @@ msgstr ""
 
 #: ../src/gnome2/bookmarks_menu.c:349 ../ui/xi-menus.glade.h:32
 msgid "Edit"
-msgstr "編集"
+msgstr ""
 
 #: ../src/gnome2/bookmarks_menu.c:366
 msgid "Folder name: "
-msgstr "フォルダ名 "
+msgstr ""
 
 #: ../src/gnome2/bookmarks_menu.c:369
 msgid "Bookmark name: "
-msgstr "ブックマーク名 "
+msgstr ""
 
 #: ../src/gnome2/bookmarks_menu.c:372 ../src/gnome2/bookmarks_menu.c:666
 msgid "Verse: "
-msgstr "節 "
+msgstr ""
 
 #: ../src/gnome2/bookmarks_menu.c:373 ../src/gnome2/bookmarks_menu.c:667
 msgid "Module: "
-msgstr "拡張データ "
+msgstr ""
 
 #: ../src/gnome2/bookmarks_menu.c:495
 msgid "Remove the selected folder"
-msgstr "選択されたフォルダを削除"
+msgstr ""
 
 #: ../src/gnome2/bookmarks_menu.c:497
 msgid "(and all its contents)?"
-msgstr "(中身すべて削除されます)"
+msgstr ""
 
 #: ../src/gnome2/bookmarks_menu.c:500
 msgid "Remove the selected bookmark"
-msgstr "選択されているブックマークを削除"
+msgstr ""
 
 #: ../src/gnome2/bookmarks_menu.c:659
 msgid "Add"
-msgstr "追加"
+msgstr ""
 
 #: ../src/gnome2/bookmarks_menu.c:665
 msgid "Label: "
-msgstr "ラベル: "
+msgstr ""
 
 #: ../src/gnome2/bookmarks_treeview.c:108 ../src/gnome2/export_bookmarks.c:193
 #: ../src/gnome2/export_bookmarks.c:252
@@ -337,7 +322,7 @@ msgstr ""
 
 #: ../src/gnome2/bookmarks_treeview.c:945 ../src/gnome2/sidebar.c:1376
 msgid "Bookmarks"
-msgstr "ブックマーク"
+msgstr ""
 
 #: ../src/gnome2/cipher_key_dialog.c:61
 #, c-format
@@ -354,7 +339,7 @@ msgstr ""
 
 #: ../src/gnome2/dialog.c:264
 msgid "Close without Saving"
-msgstr "保存せずに閉じる"
+msgstr ""
 
 #: ../src/gnome2/dialog.c:573
 msgid "Xiphos:"
@@ -362,67 +347,67 @@ msgstr ""
 
 #: ../src/gnome2/dialog.c:674
 msgid "Close _without Saving"
-msgstr "保存せずに閉じる(_W)"
+msgstr ""
 
 #: ../src/gnome2/export_bookmarks.c:195 ../src/gnome2/export_bookmarks.c:254
 #: ../src/gnome2/sidebar.c:1392
 #, c-format
 msgid "Verse List"
-msgstr "節一覧"
+msgstr ""
 
 #: ../src/gnome2/export_bookmarks.c:689
 msgid "VerseList"
-msgstr "節一覧"
+msgstr ""
 
 #: ../src/gnome2/export_bookmarks.c:694
 msgid "SearchResults"
-msgstr "検索結果"
+msgstr ""
 
 #: ../src/gnome2/export_dialog.c:267 ../ui/export-dialog.glade.h:20
 msgid "Please check copyright before exporting!"
-msgstr "エキスポートする前に著作権を確認下さい！"
+msgstr ""
 
 #: ../src/gnome2/find_dialog.c:204 ../src/gnome2/find_dialog.c:373
 msgid "Find"
-msgstr "検索"
+msgstr ""
 
 #: ../src/gnome2/find_dialog.c:222
 msgid "Enter Word or Phrase"
-msgstr "単語又文章を入力下さい"
+msgstr ""
 
 #: ../src/gnome2/find_dialog.c:238 ../src/gnome2/search_sidebar.c:297
 #: ../ui/search-dialog.glade.h:59
 msgid "Match case"
-msgstr "大文字と小文字を区別する"
+msgstr ""
 
 #: ../src/gnome2/find_dialog.c:245
 msgid "Search backwards"
-msgstr "上方を検索します"
+msgstr ""
 
 #: ../src/gnome2/find_dialog.c:254 ../src/gnome2/search_sidebar.c:262
 #: ../ui/search-dialog.glade.h:76
 msgid "Regular expression"
-msgstr "正規表現"
+msgstr ""
 
 #: ../src/gnome2/find_dialog.c:295
 msgid "Find Next"
-msgstr "次を検索"
+msgstr ""
 
 #: ../src/gnome2/font_dialog.c:304
 msgid "Set Module Font"
-msgstr "拡張データフォント設定"
+msgstr ""
 
 #: ../src/gnome2/font_dialog.c:334
 msgid "Change font for"
-msgstr "フォントの変更"
+msgstr ""
 
 #: ../src/gnome2/font_dialog.c:338
 msgid "Module"
-msgstr "拡張データ"
+msgstr ""
 
 #: ../src/gnome2/font_dialog.c:342
 msgid "Current font: "
-msgstr "現在のフォント "
+msgstr ""
 
 #: ../src/gnome2/font_dialog.c:374
 msgid "+0"
@@ -430,7 +415,7 @@ msgstr ""
 
 #: ../src/gnome2/font_dialog.c:378
 msgid "Use the default font for this module"
-msgstr "この拡張データにおいては、既定のフォントを使う"
+msgstr ""
 
 #. *****************************************************************************
 #. * Name
@@ -491,26 +476,26 @@ msgstr ""
 
 #: ../src/gnome2/main_window.c:795
 msgid "Xiphos - Bible Study Software"
-msgstr "Xiphos - 聖書学習ソフトウェア"
+msgstr ""
 
 #: ../src/gnome2/main_window.c:850
 msgid "Open a new tab"
-msgstr "新しいタブを開く"
+msgstr ""
 
 #: ../src/gnome2/main_window.c:928 ../src/gnome2/sidebar.c:618
 #: ../src/gnome2/sidebar.c:624 ../src/main/sidebar.cc:655
 #: ../src/main/sidebar.cc:998 ../src/main/sidebar.cc:999
 #: ../src/main/sidebar.cc:1000
 msgid "Standard View"
-msgstr "基本ビュー"
+msgstr ""
 
 #: ../src/gnome2/main_window.c:1009
 msgid "Commentary View"
-msgstr "注解書ビュー"
+msgstr ""
 
 #: ../src/gnome2/main_window.c:1025
 msgid "Book View"
-msgstr "ブックビュー"
+msgstr ""
 
 #: ../src/gnome2/main_window.c:1050
 msgid "Welcome to Xiphos"
@@ -530,29 +515,29 @@ msgstr ""
 
 #: ../src/gnome2/menu_popup.c:1227
 msgid "Rename Commentary"
-msgstr "注解書名を変更"
+msgstr ""
 
 #: ../src/gnome2/menu_popup.c:1230
 msgid "Choose Commentary Name"
-msgstr "注解書名を入力下さい"
+msgstr ""
 
 #: ../src/gnome2/menu_popup.c:1232
 msgid "New Name"
-msgstr "新しい名前"
+msgstr ""
 
 #: ../src/gnome2/menu_popup.c:1233 ../src/gnome2/treekey-editor.c:135
 #: ../src/gnome2/treekey-editor.c:194 ../src/gnome2/treekey-editor.c:280
 #: ../src/main/prayerlists.cc:243
 msgid "Name: "
-msgstr "名前: "
+msgstr ""
 
 #: ../src/gnome2/menu_popup.c:1243 ../src/main/prayerlists.cc:257
 msgid "Module names must contain [A-Za-z0-9_] only."
-msgstr "拡張データ名は、特殊文字を含まない英数字である必要があります。"
+msgstr ""
 
 #: ../src/gnome2/menu_popup.c:1250 ../src/main/prayerlists.cc:264
 msgid "Xiphos already knows a module by that name."
-msgstr "その名前の拡張データは、すでに存在します。"
+msgstr ""
 
 #: ../src/gnome2/menu_popup.c:1291
 #, c-format
@@ -566,98 +551,96 @@ msgid ""
 "Configuration build error:\n"
 "\n"
 msgstr ""
-"設定構築エラー:\n"
-"\n"
 
 #: ../src/gnome2/mod_mgr.c:174
 msgid "Remove these modules?"
-msgstr "これらの拡張データを除外しますか？"
+msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:175
 msgid "Preparing to remove"
-msgstr "除外準備中"
+msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:176
 msgid "Removing"
-msgstr "除外中"
+msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:177 ../ui/xi-menus.glade.h:73
 msgid "Remove"
-msgstr "削除"
+msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:180
 msgid "Install these modules?"
-msgstr "これらの拡張データをインストールしますか？"
+msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:181
 msgid "Preparing to install"
-msgstr "インストール準備中"
+msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:182
 msgid "Installing"
-msgstr "インストールしています"
+msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:183
 msgid "Install"
-msgstr "インストール"
+msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:186
 msgid "Archive these modules?"
-msgstr "これらの拡張データをアーカイブ化しますか？"
+msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:187
 msgid "Preparing to archive"
-msgstr "アーカイブ準備中"
+msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:188
 msgid "Archiving"
-msgstr "アーカイブ中"
+msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:189
 msgid "Archive"
-msgstr "アーカイブ"
+msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:192
 msgid ""
 "Build fast-search index for these\n"
 "modules (may take minutes/module)?"
-msgstr "これらの拡張データに高速検索用の索引を構築しますか？"
+msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:193
 msgid "Preparing to index"
-msgstr "索引構築準備中"
+msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:194
 msgid "Indexing"
-msgstr "索引構築中"
+msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:195
 msgid "Index"
-msgstr "索引"
+msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:198
 msgid "Delete fast-search index for these modules?"
-msgstr "これらの拡張データの高速検索用の索引を削除しますか？"
+msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:199
 msgid "Preparing to delete index"
-msgstr "索引削除準備中"
+msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:200
 msgid "Deleting index"
-msgstr "索引削除中"
+msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:201
 msgid "Deletion"
-msgstr "削除"
+msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:426
 msgid "Module Name"
-msgstr "拡張データ名"
+msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:447
 msgid "A checkmark means this module is already installed"
-msgstr "チェックされている拡張データは、インストール済みです"
+msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:469
 msgid "Click the box to work on this module"
@@ -669,7 +652,7 @@ msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:489
 msgid "Installed"
-msgstr "インストール済"
+msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:499
 msgid ""
@@ -685,7 +668,7 @@ msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:534 ../ui/xi-menus.glade.h:1
 msgid "About"
-msgstr "ソフトウェア情報"
+msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:554
 msgid ""
