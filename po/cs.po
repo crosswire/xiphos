@@ -47,13 +47,13 @@ msgstr ""
 "Project-Id-Version: Xiphos 3.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-05-17 03:35+0100\n"
-"PO-Revision-Date: 2009-12-12 09:19+0000\n"
-"Last-Translator: Dmitrijs Ledkovs <dmitrij.ledkov@gmail.com>\n"
+"PO-Revision-Date: 2010-09-12 15:00+0000\n"
+"Last-Translator: Konki <pavel.konkol@seznam.cz>\n"
 "Language-Team: Xiphos Translation Team\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-21 04:49+0000\n"
+"X-Launchpad-Export-Date: 2010-09-20 05:57+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "X-Poedit-Language: Czech\n"
@@ -245,6 +245,13 @@ msgid ""
 "\n"
 " Books can be downloaded from the SWORD Project."
 msgstr ""
+"The SWORD Project je snaha o vytvoření programového vybavení pro zkoumání a "
+"studium Boha a Jeho Slova. Programové vybavení SWORD Project dovoluje "
+"jednoduché používání a studium Biblických textů, komentářů, slovníků a "
+"dalších knih. Hodně aplikací využívá toto programové vybavení. Nainstalované "
+"knihy lze sdílet mezi více aplikacemi využívající toto programové vybavení.\n"
+"\n"
+" Knihy je možno stáhnout ze stránek SWORD Project."
 
 #: ../src/gnome2/about_sword.c:105
 msgid "The SWORD Project"
@@ -323,9 +330,8 @@ msgid "Folder: "
 msgstr "Složka: "
 
 #: ../src/gnome2/bookmarks_menu.c:206
-#, fuzzy
 msgid "Specify bookmarks file"
-msgstr "Upravit položku v záložkách"
+msgstr "Určit soubor se záložkami"
 
 #: ../src/gnome2/bookmarks_menu.c:349 ../ui/xi-menus.glade.h:32
 msgid "Edit"
@@ -378,18 +384,17 @@ msgid "Bookmarks"
 msgstr "Záložky"
 
 #: ../src/gnome2/cipher_key_dialog.c:61
-#, fuzzy, c-format
+#, c-format
 msgid "Cipher key for module %s"
-msgstr "Kontrola SWORD modulů"
+msgstr "Šifrovací klíč pro modul %s"
 
 #: ../src/gnome2/cipher_key_dialog.c:62
 msgid "for:"
 msgstr "pro:"
 
 #: ../src/gnome2/cipher_key_dialog.c:65
-#, fuzzy
 msgid "Enter Key: "
-msgstr "Vložte šifrovací klíč "
+msgstr "Vložit klíč: "
 
 #: ../src/gnome2/dialog.c:264
 msgid "Close without Saving"
@@ -411,11 +416,11 @@ msgstr "Verše"
 
 #: ../src/gnome2/export_bookmarks.c:689
 msgid "VerseList"
-msgstr ""
+msgstr "Obrátit list"
 
 #: ../src/gnome2/export_bookmarks.c:694
 msgid "SearchResults"
-msgstr ""
+msgstr "Výsledky vyhledávání"
 
 #: ../src/gnome2/export_dialog.c:267 ../ui/export-dialog.glade.h:20
 msgid "Please check copyright before exporting!"
@@ -487,7 +492,7 @@ msgstr "Použít výchozí písmo pro modul"
 #. *
 #. * Return value
 #. *   void
-#.
+#. 
 #: ../src/gnome2/gui.c:101
 msgid ""
 "URL references using \"sword://\" (similar to web page\n"
@@ -987,15 +992,14 @@ msgid "Could not load standard sources from CrossWire."
 msgstr "Nedaří se načít standardní zdroje z CrossWire."
 
 #: ../src/gnome2/mod_mgr.c:2345
-#, fuzzy
 msgid ""
 "<b>Welcome to the Module Manager.</b>\n"
 "\n"
 "This is Xiphos' mechanism to get new and updated content.\n"
 "If you have never been here before, please take a moment to look it over.\n"
 "\n"
-"Modules come from different <u>repositories</u>.  <b>Module Sources: Add/"
-"Remove</b> will show you what repositories are currently known.\n"
+"Modules come from different <u>repositories</u>.  <b>Module Sources: "
+"Add/Remove</b> will show you what repositories are currently known.\n"
 "\n"
 "<b>Module Sources: Choose</b> is for deciding from where modules should "
 "come, that is, from which repository Xiphos should obtain them, as well as "
@@ -1013,28 +1017,25 @@ msgid ""
 msgstr ""
 "<b>Správce modulů Vás vítá.</b>\n"
 "\n"
-"Tohle je způsob, kterým aplikace Xiphos získává nový a aktualizuje obsah..\n"
+"Toto je způsob, kterým aplikace Xiphos získává a aktualizuje svůj obsah.\n"
+"Pokud jste tady poprvé, vyhraďte si prosím čas na prohlédnutí.\n"
 "\n"
-"Vypadá to, že tu jste poprvé. Prosím udělejte si čas na přečtení "
-"následujících věcí.\n"
-"(Toto informační okno se zobrazí jen jednou.)\n"
+"Moduly se stahují z různých <u>úložišť</u>.  V <b>Zdroje modulů: "
+"Přidat/Odstranit</b> si lze nechat zobrazit seznam dostupných úložišť.\n"
 "\n"
-"Moduly pochází z různých <u>míst</u>.  <b>Zdroje modulů: Přidat/Odstranit</"
-"b> zobrazuje známá umístění modulů.\n"
+"V <b>Zdroje modulů: Vybrat</b> je možné určit, z kterého úložište se mají "
+"získávat moduly. Také je možné určit, kde v systému budou moduly uloženy. "
+"Nastavte <i>Zdroj instalace</i> a <i>Umístění instalace</i>, poté klepněte "
+"na <i>Obnovit</i>.\n"
 "\n"
-"<b>Zdroje modulů: Vybrat</b> je k určení, kam mají moduly přijít. To "
-"znamená, odkud moduly stahovat a také kam je ukládat v systému. Nastavte "
-"<i>Install Source</i> a <i>Install Destination</i>, poté klepněte na "
-"<i>Refresh</i>.\n"
+"<b>Moduly: Přidat/Aktualizovat</b> je určeno pro výběr a získání modulů po "
+"výberu zdroje a cílového umístění modulů.\n"
 "\n"
-"<b>Moduly: Přidat/Aktualizovat</b> se používá po výběru zdroje a  cíle pro "
-"výběr a stažení modulů.\n"
+"<b>Moduly: Udržování</b> se používá  pro archivaci a vytváření indexů.\n"
 "\n"
-"<b>Moduly: Udržování</b> se používá pro archivaci a tvorby rejstříku.\n"
-"\n"
-"Podrobnosti o Správci modulů najdete v nápovědě, v sekci 5. Také můžete "
-"využít Online komunikace nebo (pokud se stane, že nikdo neodpoví) poslat "
-"mail do naší mailové konference pro uživatele.\n"
+"Podrobnější informace o Správci modulů lze nalézt v manuálu v sekci 5. Nebo "
+"je možno využít Online komunikaci k požádání o pomoc či (když online nikdo "
+"neodpovídá) zaslat e-mail do uživatelské emailové skupiny.\n"
 
 #: ../src/gnome2/mod_mgr.c:2512 ../src/gnome2/mod_mgr.c:2758
 msgid "Remove the selected source"
@@ -1097,7 +1098,7 @@ msgstr "Jít dovnitř, na první podsekci"
 #: ../src/gnome2/navbar_versekey_editor.c:876
 #: ../src/gnome2/navbar_versekey_parallel.c:816
 msgid "Synchronize this window's scrolling with the main window"
-msgstr ""
+msgstr "Synchronizovat rolování okna s hlavním oknem"
 
 #: ../src/gnome2/parallel_dialog.c:327 ../src/gnome2/preferences_dialog.c:1643
 msgid "Parallel"
@@ -1149,9 +1150,8 @@ msgid "Color"
 msgstr "Barva"
 
 #: ../src/gnome2/preferences_dialog.c:1623
-#, fuzzy
 msgid "Sizes and Faces"
-msgstr "Panely a pole"
+msgstr "Velikosti a Vzhled"
 
 #: ../src/gnome2/preferences_dialog.c:1627
 msgid "General"
@@ -1205,9 +1205,9 @@ msgid "found in "
 msgstr "nalezeno v "
 
 #: ../src/gnome2/search_dialog.c:419
-#, fuzzy, c-format
+#, c-format
 msgid "New List %s"
-msgstr "Uložit seznam"
+msgstr "Nový seznam %s"
 
 #: ../src/gnome2/search_dialog.c:643
 msgid "The last module list may not be deleted"
@@ -1299,7 +1299,7 @@ msgstr "Powered by the SWORD Project"
 
 #: ../src/gnome2/tabbed_browser.c:366
 msgid "Can't create tabs dir."
-msgstr ""
+msgstr "Nelze vytvořit složku pro záložky."
 
 #: ../src/gnome2/treekey-editor.c:133 ../src/gnome2/treekey-editor.c:192
 #: ../src/gnome2/treekey-editor.c:278
@@ -1635,11 +1635,11 @@ msgstr "MujModlitebniSeznam"
 
 #: ../src/main/prayerlists.cc:342
 msgid ""
-"<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</"
-"b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"
+"<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</b><br>pews<br>fellowsh"
+"ip<br>Bibles for missionaries<br><br><br>"
 msgstr ""
-"<b>Lidé:</b><br>Bob<br>Sam<br>Sue<br><br><b>Sbor:</"
-"b><br>lavice<br>společenství<br>Bible pro misionáře<br><br><br>"
+"<b>Lidé:</b><br>Bob<br>Sam<br>Sue<br><br><b>Sbor:</b><br>lavice<br>společenst"
+"ví<br>Bible pro misionáře<br><br><br>"
 
 #: ../src/main/prayerlists.cc:368
 msgid "A subject-based prayer list. \\par\\par Module created by Xiphos."
@@ -1812,6 +1812,37 @@ msgid ""
 "\n"
 "May Xiphos open the Module Manager so that you may install a Bible?"
 msgstr ""
+"<b>Aplikace Xiphos Vás vítá.</b>\n"
+"\n"
+"Nejsou přidány žádné Bible. Pro správnou funkčnost je nutno přidat alespoň "
+"jeden modul s Biblí.\n"
+"\n"
+"Aplikace Xiphos s Vaším svolením otevře Správce modulů, aby bylo možno "
+"přidat jeden nebo více modulů s Biblemi. Bible je možné přidat z lokálních "
+"umístění (cdrom, flash disk) nebo Internetu, ze stránek biblické společnosti "
+"CrossWire.\n"
+"\n"
+"<u>Místní instalace:</u>\n"
+"- V <i>Zdroje modulů: Přidat/Odstranit</i> zadejte jméno místní složky, kde "
+"lze nalézt moduly.\n"
+"  (Jedná se o složku, ve které jsou složky jako <i>mods.d</i> a "
+"<i>modules</i>.)\n"
+"- V <i>Zdroje modulů: Vybrat</i>, klepněte na tlačítko \"Místní\" a vyberte "
+"složku v rozbalovacím menu.\n"
+"\n"
+"<u>Síťová instalace ze stránek CrossWire:</u>\n"
+"- V <i>Zdroje modulů: Vybrat</i>, klepněte na tlačítko \"Vzdálený\" a "
+"vyberte CrossWire v rozbalovacím menu.\n"
+"- Ve spod klepněte na tlačítko \"Obnovit\".\n"
+"\n"
+"<u>V obou případech:</u>\n"
+"- V <i>Moduly: Přidat/Aktualizovat</i>, vyberte požadované Bible.\n"
+"- Klepněte na \"Přidat\".\n"
+"- Zavřete Správce modulů, až skončíte.\n"
+"\n"
+"<u>Varování</u>: Pokud nežijete ve svobodné zemi, používejte obezřetně.\n"
+"\n"
+"Smí aplikace Xiphos otevřít správce modulů, aby bylo možné přidat Bible?"
 
 #: ../src/main/settings.c:107
 msgid "$HOME is not set!"
@@ -1840,10 +1871,12 @@ msgid ""
 "Empty settings file -- backup recovery attempted.\n"
 "Some information may have been lost."
 msgstr ""
+"Prázdný soubor s nastavením -- pokus o obnovu ze zálohy.\n"
+"Mohlo dojít ke ztrátě některých informací."
 
 #: ../src/main/settings.c:183
 msgid "Empty settings file -- no backup?!? Information lost!"
-msgstr ""
+msgstr "Prázdný soubor s nastavením -- žádná záloha?!? Ztráta informací!"
 
 #: ../src/main/settings.c:212
 msgid ""
@@ -1940,6 +1973,16 @@ msgid ""
 "\n"
 "Please enter the key in the dialog."
 msgstr ""
+"<b>Zamknutý modul.</b>\n"
+"\n"
+"<u>Otevíráte modul, který vyžaduje <i>klíč</i>.</u>\n"
+"\n"
+"Zamčení znamená, že vydavatel modulu zašifroval obsah modulu.  Pro "
+"zpřístupnění obsahu modulu je nutno vložit klíč. Tento klíč jste měli "
+"obdržet na webové stránce, která potvrzovala Váše zakoupení modulu. Nebo Vám "
+"měl být klíč zaslán emailem po Vašem nákupu.\n"
+"\n"
+"Klíč prosím zadejte do dialogového okna."
 
 #: ../src/main/tab_history.c:219
 msgid "Clear History"
@@ -2043,10 +2086,12 @@ msgid ""
 "Save of settings failed! stat %d, size %d\n"
 "%s"
 msgstr ""
+"Uložení nastavení selhalo! stat %d, velikost %d\n"
+"%s"
 
 #: ../src/main/xml.c:1208
 msgid "Attempting to revert to previous save."
-msgstr ""
+msgstr "Pokus o návrat k předchozímu uložení."
 
 #: ../ui/bookmarks.glade.h:1
 msgid "Add Bookmark"
@@ -2341,26 +2386,31 @@ msgid ""
 "Add a custom remote install source. You must know its hostname and the "
 "folder where its repository lives."
 msgstr ""
+"Přidat vlastní vzdálený zdroj pro instalaci. Je nutno znát jméno vzdáleného "
+"stroje a složku, kde jsou moduly uloženy."
 
 #: ../ui/module-manager.glade.h:12
 msgid ""
 "Add a local folder as an install source, typically on a cdrom or flash "
 "drive.  Such a folder contains subfolders \"mods.d\" and \"modules\"."
 msgstr ""
+"Přidat místní složku jako zdroj pro přidání modulů. Může se jednat o cdrom "
+"nebo flash disk. Taková složka obsahuje podsložky \"mods.d\" and \"modules\"."
 
 #: ../ui/module-manager.glade.h:13
 msgid ""
 "Build an index of the selected modules, for optimized (\"lucene\") searching."
 msgstr ""
+"Vytvořit indexy k vybraným modulům pro optimalizované (\"lucene\") "
+"vyhledávání."
 
 #: ../ui/module-manager.glade.h:14
 msgid "Continue"
 msgstr "Pokračovat"
 
 #: ../ui/module-manager.glade.h:15
-#, fuzzy
 msgid "Create a zip archive of the selected modules."
-msgstr "Jste si jist, že chcete smazat vybraný modul?"
+msgstr "Vytvořit zip archiv z vybraných modulů."
 
 #: ../ui/module-manager.glade.h:16
 msgid "Current Remote Sources"
@@ -2371,24 +2421,24 @@ msgid "Current local sources"
 msgstr "Současné lokální zdroje"
 
 #: ../ui/module-manager.glade.h:18
-#, fuzzy
 msgid "Delete the fast-search index of the selected modules."
-msgstr "Smazat rejstřík pro rychlé vyhledávání u následujících modulů?"
+msgstr "Smazat u vybraných modulů index pro rychlé vyhledávání."
 
 #: ../ui/module-manager.glade.h:19
 msgid "Home dir"
 msgstr "Domovský adresář"
 
 #: ../ui/module-manager.glade.h:20
-#, fuzzy
 msgid "Install or update the selected modules"
-msgstr "Přidat následujících moduly?"
+msgstr "Instalovat nebo aktualizovat vybrané moduly"
 
 #: ../ui/module-manager.glade.h:21
 msgid ""
 "Load and synchronize the standard set of known repositories, as maintained "
 "at crosswire.org, with your current remote sources."
 msgstr ""
+"Načíst seznam standardních úložišt a seznam synchronizovat se současnými "
+"vzdálenými zdroji. Seznam standardních úložišť je spravován na crosswire.org."
 
 #: ../ui/module-manager.glade.h:22
 msgid "Local"
@@ -2403,66 +2453,61 @@ msgid "Module Manager"
 msgstr "Správce modulů"
 
 #: ../ui/module-manager.glade.h:25
-msgid "Open a brief introductory explanation of how the Module Manager works."
+msgid ""
+"Open a brief introductory explanation of how the Module Manager works."
 msgstr ""
+"Otevřít stručné úvodní vysvětlení, jak se pracuje se Správcem modulů."
 
 #: ../ui/module-manager.glade.h:26
 msgid ""
 "Refresh Xiphos' knowledge of what modules are available at the selected "
 "remote repository"
 msgstr ""
+"Obnovit informace o tom, které moduly jsou dostupné ze vzdáleného zdroje"
 
 #: ../ui/module-manager.glade.h:27
 msgid "Remote"
 msgstr "Vzdálený"
 
 #: ../ui/module-manager.glade.h:28
-#, fuzzy
 msgid "Remove a remote install source."
-msgstr "Smazat vzdálený zdroj"
+msgstr "Odstranit zdroj pro vzdálenou instalaci."
 
 #: ../ui/module-manager.glade.h:29
 msgid "Remove one of your local folders as an install source."
-msgstr ""
+msgstr "Odstranit místní složku ze zdrojů instalace."
 
 #: ../ui/module-manager.glade.h:30
-#, fuzzy
 msgid "Remove the selected modules from your system"
-msgstr "Odstranit vybraný modul ze seznamu"
+msgstr "Odstranit vybrané moduly ze systému."
 
 #: ../ui/module-manager.glade.h:31
 msgid "Sword sys dir"
 msgstr "Systémový adresář pro Sword"
 
 #: ../ui/module-manager.glade.h:32
-#, fuzzy
 msgid "_Archive"
-msgstr "Zabalit"
+msgstr "_Archiv"
 
 #: ../ui/module-manager.glade.h:33
-#, fuzzy
 msgid "_Delete Index"
-msgstr "Odstranit rejstřík"
+msgstr "_Odstranit Index"
 
 #: ../ui/module-manager.glade.h:34
-#, fuzzy
 msgid "_Index"
-msgstr "Rejstřík"
+msgstr "_Index"
 
 #: ../ui/module-manager.glade.h:35
-#, fuzzy
 msgid "_Install"
-msgstr "Přidat"
+msgstr "_Instalovat"
 
 #: ../ui/module-manager.glade.h:36
-#, fuzzy
 msgid "_Load Standard"
-msgstr "Načíst standardní"
+msgstr "_Načíst standardní"
 
 #: ../ui/module-manager.glade.h:37
-#, fuzzy
 msgid "_View Intro"
-msgstr "_Zobrazit"
+msgstr "_Zobrazit úvodní informace"
 
 #: ../ui/navbar_versekey.glade.h:1
 msgid "1"
@@ -2561,11 +2606,8 @@ msgid "Apply high-contrast highlight to current verse"
 msgstr "Použít zvýšený kontrast pro zvýraznění aktuálního verše"
 
 #: ../ui/prefs.glade.h:20
-#, fuzzy
 msgid "Automatically resize image content to fit the pane"
-msgstr ""
-"Automaticky přizpůsobit velikost podoken u komentářů, knih a slovníků pro "
-"vyplnění hlavního okna."
+msgstr "Automaticky změnit velikost obrázku, aby se vešel do panelu."
 
 #: ../ui/prefs.glade.h:21
 msgid "Background"
@@ -2681,7 +2723,7 @@ msgstr "Písmo - různé"
 
 #: ../ui/prefs.glade.h:52
 msgid "Font preferences, per language"
-msgstr ""
+msgstr "Nastavení písma, pro daný jazyk"
 
 #: ../ui/prefs.glade.h:53
 msgid "Foreground"
@@ -2724,19 +2766,16 @@ msgid "Highlight current verse check box"
 msgstr "Zaškrtávací pole Zvýraznit aktuální verš"
 
 #: ../ui/prefs.glade.h:63
-#, fuzzy
 msgid "Highlight user annotations"
-msgstr "Komentáře uživatele"
+msgstr "Zvýraznit anotace uživatelů"
 
 #: ../ui/prefs.glade.h:64
-#, fuzzy
 msgid "Highlight user annotations check box"
-msgstr "Zaškrtávací pole Zvýraznit aktuální verš"
+msgstr ""
 
 #: ../ui/prefs.glade.h:65
-#, fuzzy
 msgid "Language Font Combo"
-msgstr "Roletové menu Změnit knihu"
+msgstr ""
 
 #: ../ui/prefs.glade.h:66
 msgid "Links"
@@ -2763,9 +2802,8 @@ msgid "Open Selection Dialog Button"
 msgstr "Tlačítko Otevřít dialog pro výběr"
 
 #: ../ui/prefs.glade.h:72
-#, fuzzy
 msgid "Open a dialog to select modules"
-msgstr "Otevřít okno pro přidání vybraného modulu do seznamu"
+msgstr "Otevřít dialog pro výběr modulů"
 
 #: ../ui/prefs.glade.h:73
 msgid "Parallel View in a tab"
@@ -2838,9 +2876,8 @@ msgid "Use default Dictionary Checkbox"
 msgstr "Zaškrtávací pole Použít výchozí slovník"
 
 #: ../ui/prefs.glade.h:93
-#, fuzzy
 msgid "Use inverted highlight on user-annotated verses"
-msgstr "Použít zvýšený kontrast pro zvýraznění aktuálního verše"
+msgstr "Použít obrácené zvýraznění na verše s uživatelskými anotacemi"
 
 #: ../ui/prefs.glade.h:94
 msgid "Use tabbed browsing"
@@ -3345,9 +3382,8 @@ msgid "Display Chapter Heading"
 msgstr "Zobraz nadpis kapitoly"
 
 #: ../ui/xi-menus.glade.h:30
-#, fuzzy
 msgid "Doublespace"
-msgstr "Větší _odřádkování textu"
+msgstr "Dvojitá mezera"
 
 #: ../ui/xi-menus.glade.h:31
 msgid "Dump Pers.Comm."
@@ -3382,9 +3418,8 @@ msgid "Image Content"
 msgstr "Obsah obrazu"
 
 #: ../ui/xi-menus.glade.h:46
-#, fuzzy
 msgid "Import Bookmarks"
-msgstr "Vložit záložku"
+msgstr "Importovat záložky"
 
 #: ../ui/xi-menus.glade.h:47
 msgid "Insert Bookmark"
@@ -3399,9 +3434,8 @@ msgid "L_ink Tabs"
 msgstr "Stejný _verš v panelech"
 
 #: ../ui/xi-menus.glade.h:51
-#, fuzzy
 msgid "Load other bookmarks file (default: from BibleTime)"
-msgstr "Načíst záložky z programu Bibletime"
+msgstr "Načíst jiný soubor se záložkami (výchozí: z BibleTime)"
 
 #: ../ui/xi-menus.glade.h:52
 msgid "Lookup Selection"
@@ -3465,7 +3499,7 @@ msgstr "Souhrnný"
 
 #: ../ui/xi-menus.glade.h:70
 msgid "Preview _Daily Devotion"
-msgstr ""
+msgstr "Náhled _Dnešní čtení"
 
 #: ../ui/xi-menus.glade.h:72
 msgid "Read Selection Aloud"
@@ -3544,9 +3578,8 @@ msgid "Variants"
 msgstr "Varianty"
 
 #: ../ui/xi-menus.glade.h:95
-#, fuzzy
 msgid "Verse Per Line"
-msgstr "_Jeden verš na řádek"
+msgstr "Verš na řádek"
 
 #: ../ui/xi-menus.glade.h:97
 msgid "_About The SWORD Project"
@@ -3601,9 +3634,8 @@ msgid "_Module Manager"
 msgstr "_Správce modulů"
 
 #: ../ui/xi-menus.glade.h:111
-#, fuzzy
 msgid "_New Prayerlist/Journal"
-msgstr "Modlitební seznam/Žurnál"
+msgstr "_Nový modlitební seznam/deník"
 
 #: ../ui/xi-menus.glade.h:112
 msgid "_Open Session"
@@ -3639,35 +3671,35 @@ msgstr "_Zobrazit/Skrýt postranní lištu"
 
 #: ../ui/xi-export-bookmarks.glade.h:1
 msgid "<b>Export to:</b>"
-msgstr ""
+msgstr "<b>Exportovat do:</b>"
 
 #: ../ui/xi-export-bookmarks.glade.h:2
 msgid "Export Bookmark Folder"
-msgstr ""
+msgstr "Exportovat složku s poznámkama"
 
 #: ../ui/xi-export-bookmarks.glade.h:3
 msgid "Html"
-msgstr ""
+msgstr "Html"
 
 #: ../ui/xi-export-bookmarks.glade.h:4
 msgid "Include Bible text"
-msgstr ""
+msgstr "Zahrnout text z Bible"
 
 #: ../ui/xi-export-bookmarks.glade.h:5
 msgid "Plain text"
-msgstr ""
+msgstr "Prostý text"
 
 #: ../ui/xi-export-bookmarks.glade.h:6
 msgid "Xiphos bookmarks"
-msgstr ""
+msgstr "Xiphos záložky"
 
 #: ../ui/xi-export-bookmarks.glade.h:7
 msgid "gtk-cancel"
-msgstr ""
+msgstr "gtk-cancel"
 
 #: ../ui/xi-export-bookmarks.glade.h:8
 msgid "gtk-ok"
-msgstr ""
+msgstr "gtk-ok"
 
 #: ../xiphos.desktop.in.in.h:1
 msgid "Study the Bible"
@@ -3677,8 +3709,37 @@ msgstr "Studium Bible"
 msgid "Xiphos Bible Guide"
 msgstr "Xiphos Průvodce Biblí"
 
+#~ msgid "About the SWORD Project"
+#~ msgstr "O aplikaci SWORD Project"
+
+#~ msgid "Sword Version"
+#~ msgstr "Verze Sword"
+
+#~ msgid "Books can be downloaded from the SWORD Project"
+#~ msgstr "Knihy lze stáhnout ze stránek aplikace SWORD Project"
+
 #~ msgid "Cipher Key?"
 #~ msgstr "Šifrovací klíč?"
+
+#~ msgid "Xiphos could not execute archiver"
+#~ msgstr "Xiphos nemůže spustit archivátor"
+
+#~ msgid ""
+#~ " archival result:\n"
+#~ "\n"
+#~ msgstr ""
+#~ " výsledek vytváření archivu:\n"
+#~ "\n"
+
+#~ msgid ""
+#~ "\n"
+#~ "Archive in "
+#~ msgstr ""
+#~ "\n"
+#~ "Archivovat do "
+
+#~ msgid "Sources"
+#~ msgstr "Zdroje"
 
 #~ msgid "Copy"
 #~ msgstr "Kopírovat"
@@ -3698,17 +3759,56 @@ msgstr "Xiphos Průvodce Biblí"
 #~ msgid "Change parallel 5"
 #~ msgstr "Změnit souběžně 5"
 
+#~ msgid "Text"
+#~ msgstr "Text"
+
+#~ msgid "Text to render"
+#~ msgstr "Text k vykreslení"
+
+#~ msgid "Pixbuf Object"
+#~ msgstr "Pixbuf objekt"
+
+#~ msgid "The pixbuf to render."
+#~ msgstr "Poskytnutý pixbuf."
+
 #~ msgid "Sizes"
 #~ msgstr "Velikosti"
+
+#~ msgid "Open in a new tab"
+#~ msgstr "Otevřít v novém panelu"
+
+#~ msgid "Open selected module in a separate ['dialog'] window"
+#~ msgstr "Otevřít vybraný modul v samostatném dialogovém okně"
+
+#~ msgid "View information about the selected dialog"
+#~ msgstr "Zobrazit informace o vybraném dialogovém okně"
+
+#~ msgid "Create a new prayer list"
+#~ msgstr "Vytvořit nový modlitební seznam"
+
+#~ msgid "Daily Journal"
+#~ msgstr "Deník"
+
+#~ msgid "Outlined Topic"
+#~ msgstr "Navržené téma"
+
+#~ msgid "Open selected module in a dialog"
+#~ msgstr "Otevřít vybraný modul v dialogovém okně"
+
+#~ msgid "Add Child"
+#~ msgstr "Přidat potomka"
+
+#~ msgid "Add Sibling"
+#~ msgstr "Přidat souseda"
 
 #~ msgid ""
 #~ "Welcome to Xiphos.\n"
 #~ "\n"
-#~ "There are no Bible modules installed. In order to initialize, Xiphos "
-#~ "needs you to install at least one Bible.\n"
+#~ "There are no Bible modules installed. In order to initialize, Xiphos needs "
+#~ "you to install at least one Bible.\n"
 #~ "\n"
-#~ "With your permission, Xiphos will invoke the Module Manager so that you "
-#~ "may install from Crosswire:\n"
+#~ "With your permission, Xiphos will invoke the Module Manager so that you may "
+#~ "install from Crosswire:\n"
 #~ "1. Configure remote install.\n"
 #~ "2. Connect.\n"
 #~ "3. Select a Bible text of your language preference.\n"
@@ -3735,6 +3835,29 @@ msgstr "Xiphos Průvodce Biblí"
 #~ "Varování: Pokud nežijete ve svobodné zemi, používejte obezřetně.\n"
 #~ "\n"
 #~ "Smí Xiphos spustit Správce modulů, aby jste mohl přidat Bible?"
+
+#~ msgid "Xiphos has renamed .xiphos-2.0 to .xiphos"
+#~ msgstr "Xiphos přejmenoval .xiphos-2.0 na .xiphos"
+
+#~ msgid ""
+#~ "Xiphos can not rename  .xiphos-2.0 to .xiphos:\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Xiphos cannot continue."
+#~ msgstr ""
+#~ "Xiphos nemůže přejmenovat  .xiphos-2.0 na .xiphos:\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Xiphos nemůže pokračovat."
+
+#~ msgid "H_istory/<Separator>"
+#~ msgstr "H_istorie/<Separator>"
+
+#~ msgid "H_istory/C_lear"
+#~ msgstr "H_istorie/V_yčistit"
+
+#~ msgid "Open the file in Studypad"
+#~ msgstr "Otevřít soubor v Poznámkovém bloku"
 
 #~ msgid "<b>Parallel View</b>"
 #~ msgstr "<b>Souběžný pohled</b>"
@@ -3778,108 +3901,17 @@ msgstr "Xiphos Průvodce Biblí"
 #~ msgid "Import Bibletime Bookmarks"
 #~ msgstr "Import záložek z Bibletime"
 
-#~ msgid "Restore Folder"
-#~ msgstr "Obnovit složku"
-
-#~ msgid "Restore saved folder"
-#~ msgstr "Obnovit uloženou složku"
-
-#~ msgid "About the SWORD Project"
-#~ msgstr "O aplikaci SWORD Project"
-
-#~ msgid "Sword Version"
-#~ msgstr "Verze Sword"
-
-#~ msgid "Books can be downloaded from the SWORD Project"
-#~ msgstr "Knihy lze stáhnout ze stránek aplikace SWORD Project"
-
-#~ msgid "Xiphos could not execute archiver"
-#~ msgstr "Xiphos nemůže spustit archivátor"
-
-#~ msgid ""
-#~ " archival result:\n"
-#~ "\n"
-#~ msgstr ""
-#~ " výsledek vytváření archivu:\n"
-#~ "\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "Archive in "
-#~ msgstr ""
-#~ "\n"
-#~ "Archivovat do "
-
-#~ msgid "Sources"
-#~ msgstr "Zdroje"
-
-#~ msgid "Text"
-#~ msgstr "Text"
-
-#~ msgid "Text to render"
-#~ msgstr "Text k vykreslení"
-
-#~ msgid "Pixbuf Object"
-#~ msgstr "Pixbuf objekt"
-
-#~ msgid "The pixbuf to render."
-#~ msgstr "Poskytnutý pixbuf."
-
-#~ msgid "Open in a new tab"
-#~ msgstr "Otevřít v novém panelu"
-
-#~ msgid "Open selected module in a separate ['dialog'] window"
-#~ msgstr "Otevřít vybraný modul v samostatném dialogovém okně"
-
-#~ msgid "View information about the selected dialog"
-#~ msgstr "Zobrazit informace o vybraném dialogovém okně"
-
-#~ msgid "Create a new prayer list"
-#~ msgstr "Vytvořit nový modlitební seznam"
-
-#~ msgid "Daily Journal"
-#~ msgstr "Deník"
-
-#~ msgid "Outlined Topic"
-#~ msgstr "Navržené téma"
-
-#~ msgid "Open selected module in a dialog"
-#~ msgstr "Otevřít vybraný modul v dialogovém okně"
-
-#~ msgid "Add Child"
-#~ msgstr "Přidat potomka"
-
-#~ msgid "Add Sibling"
-#~ msgstr "Přidat souseda"
-
-#~ msgid "Xiphos has renamed .xiphos-2.0 to .xiphos"
-#~ msgstr "Xiphos přejmenoval .xiphos-2.0 na .xiphos"
-
-#~ msgid ""
-#~ "Xiphos can not rename  .xiphos-2.0 to .xiphos:\n"
-#~ "%s\n"
-#~ "\n"
-#~ "Xiphos cannot continue."
-#~ msgstr ""
-#~ "Xiphos nemůže přejmenovat  .xiphos-2.0 na .xiphos:\n"
-#~ "%s\n"
-#~ "\n"
-#~ "Xiphos nemůže pokračovat."
-
-#~ msgid "H_istory/<Separator>"
-#~ msgstr "H_istorie/<Separator>"
-
-#~ msgid "H_istory/C_lear"
-#~ msgstr "H_istorie/V_yčistit"
-
-#~ msgid "Open the file in Studypad"
-#~ msgstr "Otevřít soubor v Poznámkovém bloku"
-
 #~ msgid "Remove - Restore"
 #~ msgstr "Odstranit - Obnovit"
 
 #~ msgid "Remove Folder"
 #~ msgstr "Odstranit složku"
+
+#~ msgid "Restore Folder"
+#~ msgstr "Obnovit složku"
+
+#~ msgid "Restore saved folder"
+#~ msgstr "Obnovit uloženou složku"
 
 #~ msgid "_Show/Hide Sidebar"
 #~ msgstr "_Zobrazit/Skrýt postranní lištu"
