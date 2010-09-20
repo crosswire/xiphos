@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: 3.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-09-20 20:42+0100\n"
-"PO-Revision-Date: 2010-03-20 18:33+0000\n"
+"PO-Revision-Date: 2010-09-20 23:11+0100\n"
 "Last-Translator: refdoc <refdoc@gmx.net>\n"
 "Language-Team: English/GB <en@li.org>\n"
 "Language: \n"
@@ -2507,17 +2507,14 @@ msgid "_Archive"
 msgstr "بایگانی کن"
 
 #: ../ui/module-manager.glade.h:33
-#, fuzzy
 msgid "_Delete Index"
 msgstr "حذف ایندکس"
 
 #: ../ui/module-manager.glade.h:34
-#, fuzzy
 msgid "_Index"
 msgstr "_ایندکس"
 
 #: ../ui/module-manager.glade.h:35
-#, fuzzy
 msgid "_Install"
 msgstr "نصب کن"
 
@@ -3514,7 +3511,6 @@ msgid "Display verse numbers in the text"
 msgstr ""
 
 #: ../ui/xi-menus.glade.h:34
-#, fuzzy
 msgid "Doublespace"
 msgstr "متن را دوبرابر فاصله بده"
 
@@ -3572,7 +3568,6 @@ msgid "Learn about The Sword Project, of which Xiphos is one application"
 msgstr ""
 
 #: ../ui/xi-menus.glade.h:55
-#, fuzzy
 msgid "Learn about Xiphos"
 msgstr "دربارۀ زیفوس"
 
@@ -3785,7 +3780,6 @@ msgid "Variants"
 msgstr "مغایرت‏ها"
 
 #: ../ui/xi-menus.glade.h:116
-#, fuzzy
 msgid "Verse Per Line"
 msgstr "_یک آیه در هر خط"
 
@@ -3842,7 +3836,6 @@ msgid "_Module Manager"
 msgstr "_مدیر مدول‏ها"
 
 #: ../ui/xi-menus.glade.h:132
-#, fuzzy
 msgid "_New Prayerlist/Journal"
 msgstr "لیست دعا/نوشتار روزانه"
 
