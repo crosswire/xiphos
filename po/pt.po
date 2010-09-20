@@ -7,10 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-17 16:38+0100\n"
-"PO-Revision-Date: 2010-09-17 16:56+0100\n"
+"POT-Creation-Date: 2010-09-20 20:42+0100\n"
+"PO-Revision-Date: 2010-09-20 23:09+0100\n"
 "Last-Translator: Ari Constâncio <ari.constancio@gmail.com>\n"
 "Language-Team: Xiphos Project\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,6 +24,9 @@ msgid ""
 "Please report this. sword_main.cc:set_treekey\n"
 "What were you doing when this occurred?"
 msgstr ""
+"Falha de Xiphos: \"não pode acontecer\", display_mod: null\n"
+"Reporte por favor. sword_main.cc:set_treekey\n"
+"O que estava fazendo quando isto sucedeu?"
 
 #: ../src/backend/sword_main.cc:1083
 msgid "Configuration not found"
@@ -497,8 +501,8 @@ msgid ""
 "Xiphos failed to complete handler init for key #%d:\n"
 "%s"
 msgstr ""
-"Xiphos não conseguiu completar a inicialização do handler para a chave #%"
-"d: \n"
+"Xiphos não conseguiu completar a inicialização do handler para a chave #"
+"%d: \n"
 "%s"
 
 #: ../src/gnome2/gui.c:203
@@ -634,15 +638,23 @@ msgstr ""
 "Este é o mecanismo de Xiphos para obter conteúdo novo e actualizado.\n"
 "Aparentemente, nunca esteve aqui. Por isso, gaste um momento para analisar.\n"
 "\n"
-"Os módulos vêm de diferentes <u>repositórios</u>. <b>Fontes de Módulos: Adicionar/Remover</b> mostra quais os repositórios conhecidos presentemente.\n"
+"Os módulos vêm de diferentes <u>repositórios</u>. <b>Fontes de Módulos: "
+"Adicionar/Remover</b> mostra quais os repositórios conhecidos "
+"presentemente.\n"
 "\n"
-"<b>Fontes de Módulos: Escolher</b> permite decidir de onde devem vir os módulos (isto é, de que repositório Xiphos deve obtê-los), bem como onde guardá-los no sistema. Active <i>Fonte de Instalação</i> e <i>Destino de Instalação</i>, e clique <i>Actualizar</i>.\n"
+"<b>Fontes de Módulos: Escolher</b> permite decidir de onde devem vir os "
+"módulos (isto é, de que repositório Xiphos deve obtê-los), bem como onde "
+"guardá-los no sistema. Active <i>Fonte de Instalação</i> e <i>Destino de "
+"Instalação</i>, e clique <i>Actualizar</i>.\n"
 "\n"
-"<b>Módulos: Instalar/Actualizar</b> permite seleccionar e obter módulos depois de escolher a fonte e o destino.\n"
+"<b>Módulos: Instalar/Actualizar</b> permite seleccionar e obter módulos "
+"depois de escolher a fonte e o destino.\n"
 "\n"
 "<b>Módulos: Manutenção</b> é para criação de arquivo e índices.\n"
 "\n"
-"Veja a Secção 5 do nosso manual para detalhes sobre o Gestor de Módulos, ou peça ajuda através do Chat, ou ainda (se não obtiver resposta no Chat) envie mail para a nossa lista de utilizadores.\n"
+"Veja a Secção 5 do nosso manual para detalhes sobre o Gestor de Módulos, ou "
+"peça ajuda através do Chat, ou ainda (se não obtiver resposta no Chat) envie "
+"mail para a nossa lista de utilizadores.\n"
 
 #: ../src/gnome2/mod_mgr.c:65
 msgid ""
@@ -680,27 +692,36 @@ msgid ""
 msgstr ""
 "<b>Benvindo a Xiphos.</b>\n"
 "\n"
-"Não há Bíblias instaladas. Para inicializar, Xiphos precisa no mínimo de um módulo de Bíblia.\n"
-"Para isso, Xiphos lançou o Gestor de Módulos para instalar uma ou mais Bíblias de um conjunto local (cdrom, drive flash) ou pela rede da CrossWire Bible Society.\n"
-"Veja por favor as instruções passo-a-passo e a vista geral sobre o Gestor de Módulos.\n"
+"Não há Bíblias instaladas. Para inicializar, Xiphos precisa no mínimo de um "
+"módulo de Bíblia.\n"
+"Para isso, Xiphos lançou o Gestor de Módulos para instalar uma ou mais "
+"Bíblias de um conjunto local (cdrom, drive flash) ou pela rede da CrossWire "
+"Bible Society.\n"
+"Veja por favor as instruções passo-a-passo e a vista geral sobre o Gestor de "
+"Módulos.\n"
 "\n"
 "<u>Para instalação local:</u>\n"
-"- Em <i>Fontes de Módulos: Adicionar/Remover</i>, adicione uma nova pasta local para localizar módulos.\n"
+"- Em <i>Fontes de Módulos: Adicionar/Remover</i>, adicione uma nova pasta "
+"local para localizar módulos.\n"
 "  (Haverá aí pastas designadas <i>mods.d</i> e <i>modules</i>.)\n"
-"- Em <i>Fontes de Módulos: Escolher</i>, clique no botão \"Local\" e seleccione a sua pasta.\n"
+"- Em <i>Fontes de Módulos: Escolher</i>, clique no botão \"Local\" e "
+"seleccione a sua pasta.\n"
 "\n"
 "<u>Para instalação via rede de Crosswire:</u>\n"
-"- Em <i>Fontes de Módulos: Escolher</i>, clique no botão \"Remoto\" e seleccione Crosswire.\n"
+"- Em <i>Fontes de Módulos: Escolher</i>, clique no botão \"Remoto\" e "
+"seleccione Crosswire.\n"
 "- Clique no botão \"Actualizar\" ao fundo.\n"
 "\n"
 "<u>Em qualquer dos casos:</u>\n"
-" - Em <i>Módulos: Instalar/Actualizar</i>, escolha Bíblias da sua preferência.\n"
+" - Em <i>Módulos: Instalar/Actualizar</i>, escolha Bíblias da sua "
+"preferência.\n"
 " - Clique \"Instalar\".\n"
 " - Feche o Gestor de Módulos quando terminar.\n"
 "\n"
 "<u>Aviso</u>: Use com cuidado, se estiver num país com perseguições.\n"
 "\n"
-"As instruções passo-a-passo e a vista geral sobre o Gestor de Módulos podem ser fechadas em qualquer momento."
+"As instruções passo-a-passo e a vista geral sobre o Gestor de Módulos podem "
+"ser fechadas em qualquer momento."
 
 #: ../src/gnome2/mod_mgr.c:183
 msgid "Remove these modules?"
@@ -918,7 +939,7 @@ msgstr "Dicionários"
 #: ../src/gnome2/mod_mgr.c:1337 ../src/gnome2/utilities.c:602
 #: ../src/main/sidebar.cc:1036 ../src/main/sidebar.cc:1038
 msgid "Glossaries"
-msgstr ""
+msgstr "Glossários"
 
 #: ../src/gnome2/mod_mgr.c:1341 ../src/gnome2/utilities.c:606
 #: ../src/main/sidebar.cc:1045 ../src/main/sidebar.cc:1047
@@ -944,7 +965,7 @@ msgstr "Imagens"
 #: ../src/gnome2/mod_mgr.c:1357 ../src/gnome2/utilities.c:622
 #: ../src/main/sidebar.cc:1081 ../src/main/sidebar.cc:1083
 msgid "Cult/Unorthodox"
-msgstr ""
+msgstr "Culto/Não ortodoxo"
 
 #: ../src/gnome2/mod_mgr.c:1365
 msgid ""
@@ -1739,7 +1760,9 @@ msgstr "Minha Lista de Oração"
 msgid ""
 "<b>People:</b><br/>Bob<br/>Sam<br/>Sue<br/><br/><b>Church:</b><br/>pews<br/"
 ">fellowship<br/>Bibles for missionaries<br/><br/><br/>"
-msgstr "<b>Pessoas:</b><br/>Bob<br/>Sam<br/>Sue<br/><br/><b>Igreja:</b><br/>bancos<br/>congregação<br/>Bíblias para missionários<br/><br/><br/>"
+msgstr ""
+"<b>Pessoas:</b><br/>Bob<br/>Sam<br/>Sue<br/><br/><b>Igreja:</b><br/"
+">bancos<br/>congregação<br/>Bíblias para missionários<br/><br/><br/>"
 
 #: ../src/main/prayerlists.cc:368
 msgid "A subject-based prayer list. \\par\\par Module created by Xiphos."
@@ -2636,11 +2659,12 @@ msgstr "Adicionar Módulos"
 
 #: ../ui/prefs.glade.h:19
 msgid "All displayed font sizes are relative to this choice"
-msgstr ""
+msgstr "Todos os tamanhos de fonte visível são relativos a esta escolha"
 
 #: ../ui/prefs.glade.h:20
 msgid "Apply high-contrast highlight to current verse - see color pickers"
-msgstr "Assinalar o versículo corrente com alto contraste - veja escolha de cores"
+msgstr ""
+"Assinalar o versículo corrente com alto contraste - veja escolha de cores"
 
 #: ../ui/prefs.glade.h:21
 msgid "Automatically resize image content to fit the pane"
@@ -2705,7 +2729,7 @@ msgstr "Visto de Comentários"
 
 #: ../ui/prefs.glade.h:39
 msgid "Commonly -1, to make verse numbers less obtrusive"
-msgstr ""
+msgstr "Normalmente -1, para tornar números de versículo menos intrusivos"
 
 #: ../ui/prefs.glade.h:40
 msgid "Cover"
@@ -2823,7 +2847,7 @@ msgstr "Visto para realçar notas do utilizador"
 msgid ""
 "If you have set a preferred daily devotion module, its entry for today will "
 "be shown at startup."
-msgstr ""
+msgstr "Se tiver definido um módulo de devocional diário preferido, a sua entrada para hoje aparecerá no arranque."
 
 #: ../ui/prefs.glade.h:69
 msgid "Invert color pairs"
@@ -2841,11 +2865,11 @@ msgstr "Ligações"
 msgid ""
 "Make double-click of a word always use default dictionary instead of "
 "dictionary currently displayed"
-msgstr ""
+msgstr "Tornar o duplo clique de uma palavra abrir o dicionário por omissão em vez do dicionário corrente"
 
 #: ../ui/prefs.glade.h:73
 msgid "Make journals/prayer lists available"
-msgstr ""
+msgstr "Disponibilizar listas de oração/diários"
 
 #: ../ui/prefs.glade.h:74 ../ui/search-dialog.glade.h:61
 msgid "Module Selection"
@@ -2867,11 +2891,11 @@ msgstr "Módulos Paralelo"
 msgid ""
 "Name and size choice for any module in a given language; still overridden by "
 "a specific choice on a particular module"
-msgstr ""
+msgstr "Escolha de nome e tamanho para qualquer módulo numa linguagem; suplantado por uma escolha específica num dado módulo"
 
 #: ../ui/prefs.glade.h:79
 msgid "Normal Text"
-msgstr ""
+msgstr "Texto Normal"
 
 #: ../ui/prefs.glade.h:80 ../ui/search-dialog.glade.h:70
 msgid "Open Selection Dialog Button"
@@ -2921,7 +2945,7 @@ msgstr "Seleccionar um directório"
 msgid ""
 "Select a particular language for interface display, other than your usual "
 "setting"
-msgstr ""
+msgstr "Seleccionar uma dada linguagem para a interface, além da definição habitual"
 
 #: ../ui/prefs.glade.h:94
 msgid "Show Daily Devotion at start up"
@@ -2935,7 +2959,7 @@ msgstr "Mostrar janela splash no arranque"
 msgid ""
 "Single selection of Bible+commentary+book+dictionary, or many sets of such "
 "selections in a tabbed interface"
-msgstr ""
+msgstr "Selecção simples de Bíblia+comentário+livro+dicionário, ou vários conjuntos dessas selecções numa interface com abas"
 
 #: ../ui/prefs.glade.h:97
 msgid "Special Locale (requires restart)"
@@ -2977,7 +3001,7 @@ msgstr "Visto para Usar exploração com abas"
 
 #: ../ui/prefs.glade.h:107
 msgid "Use the verse list for Bible cross-references instead of the previewer"
-msgstr ""
+msgstr "Usar a lista de versículos para referências bíblicas cruzadas ao invés do previewer"
 
 #: ../ui/prefs.glade.h:108
 msgid "Verse Number"
@@ -3223,13 +3247,17 @@ msgstr "Botão de Nova Extensão"
 
 #: ../ui/search-dialog.glade.h:71
 msgid "Open a brief explanation of attribute-based searches."
-msgstr "Abrir uma breve explicação introdutória sobre pesquisas com base em atributos."
+msgstr ""
+"Abrir uma breve explicação introdutória sobre pesquisas com base em "
+"atributos."
 
 #: ../ui/search-dialog.glade.h:72
 msgid ""
 "Open a brief explanation of the syntax used for optimized \"lucene\" "
 "searches."
-msgstr "Abrir uma breve explicação introdutória sobre a sintaxe usada na pesquisa optimizada (\"lucene\")."
+msgstr ""
+"Abrir uma breve explicação introdutória sobre a sintaxe usada na pesquisa "
+"optimizada (\"lucene\")."
 
 #: ../ui/search-dialog.glade.h:73
 msgid "Open a dialog to select modules to add to the list"
@@ -3385,7 +3413,7 @@ msgstr "Pesquisa de _Atributos"
 
 #: ../ui/search-dialog.glade.h:113
 msgid "_Lucene Search Syntax"
-msgstr ""
+msgstr "Sintaxe de pesquisa _Lucene"
 
 #: ../ui/search-dialog.glade.h:114
 msgid "e.g. Matt-John;Rev4"
@@ -3509,7 +3537,7 @@ msgstr "Mostrar Caebeçalho de Capítulo"
 
 #: ../ui/xi-menus.glade.h:33
 msgid "Display verse numbers in the text"
-msgstr ""
+msgstr "Mostrar números de versículo no texto"
 
 #: ../ui/xi-menus.glade.h:34
 msgid "Doublespace"
@@ -3565,7 +3593,7 @@ msgstr "L_igar Abas"
 
 #: ../ui/xi-menus.glade.h:54
 msgid "Learn about The Sword Project, of which Xiphos is one application"
-msgstr ""
+msgstr "Aprender sobre o Projecto Sword, do qual Xiphos é uma aplicação"
 
 #: ../ui/xi-menus.glade.h:55
 msgid "Learn about Xiphos"
@@ -3605,11 +3633,11 @@ msgstr "Abrir Study_Pad"
 
 #: ../ui/xi-menus.glade.h:68
 msgid "Open a browser on an interface to live IRC chat"
-msgstr ""
+msgstr "Abrir um browser numa interface com chat IRC ao vivo"
 
 #: ../ui/xi-menus.glade.h:69
 msgid "Open a browser on our bug tracker"
-msgstr ""
+msgstr "Abrir um browser no nosso bug tracker"
 
 #: ../ui/xi-menus.glade.h:70
 msgid "Open a browser on the users' mailing list webpage"
@@ -3649,7 +3677,7 @@ msgstr "Abrir módulo seleccionado numa nova aba"
 
 #: ../ui/xi-menus.glade.h:79
 msgid "Open the advanced search dialog, to run complex queries"
-msgstr ""
+msgstr "Abrir o diálogo de pesquisa avançada, para correr queries complexas"
 
 #: ../ui/xi-menus.glade.h:80
 msgid "Open the help viewer on the Xiphos manual"
@@ -3677,7 +3705,7 @@ msgstr "Pré-visualizar _Devocional Diário"
 
 #: ../ui/xi-menus.glade.h:87
 msgid "Provide the full-chapter parallel Bible window as another tab"
-msgstr ""
+msgstr "Fornecer a janela de capítulo completo da Bíblia paralela noutra aba"
 
 #: ../ui/xi-menus.glade.h:88
 msgid "Read Selection Aloud"
@@ -3757,7 +3785,7 @@ msgstr "Assunto"
 
 #: ../ui/xi-menus.glade.h:111
 msgid "Turn on text-to-speech reading of Bible verses as they are selected"
-msgstr ""
+msgstr "Activar leitura de texto-para-voz de versículos bíblicos quando são seleccionados"
 
 #: ../ui/xi-menus.glade.h:112
 msgid "Unlock This Module"
