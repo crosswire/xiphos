@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Xiphos\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-09-22 20:56+0100\n"
-"PO-Revision-Date: 2010-09-22 20:57+0100\n"
+"PO-Revision-Date: 2010-09-22 23:18+0100\n"
 "Last-Translator: Ari Constâncio <ari.constancio@gmail.com>\n"
 "Language-Team: Xiphos Project\n"
 "MIME-Version: 1.0\n"
@@ -3867,8 +3867,9 @@ msgid "Verse Per Line"
 msgstr "Versículo por linha"
 
 #: ../ui/xi-menus.glade.h:118
+#, fuzzy
 msgid "_About The SWORD Project"
-msgstr "_Sobre O Projecto SWORD"
+msgstr "_Sobre o Projecto SWORD"
 
 #: ../ui/xi-menus.glade.h:119
 msgid "_Advanced Search"
