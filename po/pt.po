@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-22 09:44+0100\n"
-"PO-Revision-Date: 2010-09-22 11:44+0100\n"
+"POT-Creation-Date: 2010-09-22 20:56+0100\n"
+"PO-Revision-Date: 2010-09-22 20:57+0100\n"
 "Last-Translator: Ari Constâncio <ari.constancio@gmail.com>\n"
 "Language-Team: Xiphos Project\n"
 "MIME-Version: 1.0\n"
@@ -1329,14 +1329,16 @@ msgstr ""
 "      A palavra \"loved\" e a palavra \"one\"\n"
 "      &amp;&amp; pode ser usado em vez de AND\n"
 "+loved one\n"
-"       Versículos que <b>devem</b> conter \"loved\" e <b>podem</b> conter \"one\"\n"
+"       Versículos que <b>devem</b> conter \"loved\" e <b>podem</b> conter "
+"\"one\"\n"
 "loved NOT one\n"
 "      \"loved\" mas não \"one\"\n"
 "(loved one) AND God\n"
 "       \"loved\" ou \"one\" e \"God\"\n"
 "lemma:G2316\n"
 "        Procura a palavra número 2316 do Strong's Greek (\"G\").\n"
-"        Também selecciona a vista de Strong's na aba <i>Pesquisar Atributo</i>.\n"
+"        Também selecciona a vista de Strong's na aba <i>Pesquisar Atributo</"
+"i>.\n"
 "\n"
 "Para detalhes completos, pesquise na web por \"lucene search syntax\"."
 
@@ -1374,14 +1376,22 @@ msgid ""
 "accusative singular feminine\" -- see the Robinson module for details."
 msgstr ""
 "<b>Pesquisas baseadas em atributos</b>\n"
-"Pesquisas de conteúdo inserido em markup fora do texto principal. Atributos são notas de rodapé, números de Strong e símbolos morfológicos.\n"
+"Pesquisas de conteúdo inserido em markup fora do texto principal. Atributos "
+"são notas de rodapé, números de Strong e símbolos morfológicos.\n"
 "\n"
-"Saiba que grande parte destas pesquisas pode ser feita mais rapidamente através de pesquisas optimizadas \"lucene\" usando qualificadores de palavra-chave.\n"
+"Saiba que grande parte destas pesquisas pode ser feita mais rapidamente "
+"através de pesquisas optimizadas \"lucene\" usando qualificadores de palavra-"
+"chave.\n"
 "\n"
-"Para usar pesquisas com atributos, deve seleccionar o botão apropriado na aba <i>Pesquisa por Atributo</i>.\n"
+"Para usar pesquisas com atributos, deve seleccionar o botão apropriado na "
+"aba <i>Pesquisa por Atributo</i>.\n"
 "* Texto de nota de rodapé é pesquisado tal como o texto regular.\n"
-"* Palavras de Strong são especificados com uma letra de prefixo H ou G (Hebraico ou Grego) e o identificador numérico, p.ex. G2316 para encontrar \\\"θεός\\\" (\\\"Deus\").\n"
-"* Etiquetas morfológicas são identificadas literalmente, p.ex. N-ASF para \"nome, aucsativo singular feminino\" -- veja o módulo de Robinson para detalhes."
+"* Palavras de Strong são especificados com uma letra de prefixo H ou G "
+"(Hebraico ou Grego) e o identificador numérico, p.ex. G2316 para encontrar \\"
+"\"θεός\\\" (\\\"Deus\").\n"
+"* Etiquetas morfológicas são identificadas literalmente, p.ex. N-ASF para "
+"\"nome, aucsativo singular feminino\" -- veja o módulo de Robinson para "
+"detalhes."
 
 #: ../src/gnome2/search_sidebar.c:184
 msgid ""
@@ -3043,7 +3053,9 @@ msgstr "Visto para Usar exploração com abas"
 
 #: ../ui/prefs.glade.h:107
 msgid "Use the verse list for Bible cross-references instead of the previewer"
-msgstr "Usar a lista de versículos para referências bíblicas cruzadas ao invés do pré-visualizador"
+msgstr ""
+"Usar a lista de versículos para referências bíblicas cruzadas ao invés do "
+"pré-visualizador"
 
 #: ../ui/prefs.glade.h:108
 msgid "Verse Number"
@@ -3799,7 +3811,9 @@ msgstr "Referências Cruzadas da Escritura"
 
 #: ../ui/xi-menus.glade.h:102
 msgid "Select Previewer position between sidebar or beneath Bible"
-msgstr "Seleccionar posição do pré-visualizador entre barra lateral ou por baixo da Bíblia"
+msgstr ""
+"Seleccionar posição do pré-visualizador entre barra lateral ou por baixo da "
+"Bíblia"
 
 #: ../ui/xi-menus.glade.h:103
 msgid "Show Parallel View in a _Tab"
@@ -3815,7 +3829,8 @@ msgstr "Mostrar _Números de Versículos"
 
 #: ../ui/xi-menus.glade.h:106
 msgid "Show today's entry from your selected daily devotional in the previewer"
-msgstr "Mostrar entrada de hoje do devocional diário escolhido no pré-visualizador"
+msgstr ""
+"Mostrar entrada de hoje do devocional diário escolhido no pré-visualizador"
 
 #: ../ui/xi-menus.glade.h:107
 msgid "Simple"
@@ -3893,7 +3908,7 @@ msgstr "_Assinalar Versículo Corrente"
 
 #: ../ui/xi-menus.glade.h:129
 msgid "_Live Chat"
-msgstr "_Chat ao vivo"
+msgstr "Chat ao _vivo"
 
 #: ../ui/xi-menus.glade.h:130
 msgid "_Mailing List"
