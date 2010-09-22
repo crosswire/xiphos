@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Xiphos\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-09-22 09:44+0100\n"
-"PO-Revision-Date: 2010-09-22 10:05+0100\n"
+"PO-Revision-Date: 2010-09-22 11:44+0100\n"
 "Last-Translator: Ari Constâncio <ari.constancio@gmail.com>\n"
 "Language-Team: Xiphos Project\n"
 "MIME-Version: 1.0\n"
@@ -2306,7 +2306,7 @@ msgstr "Abrir ficheiro no StudyPad"
 
 #: ../ui/editor_studypad.xml.h:13
 msgid "Preview the document to be printed"
-msgstr "Pré-visualizar o documento a ser imprimido"
+msgstr "Pré-visualizar o documento a ser impresso"
 
 #: ../ui/editor_studypad.xml.h:15
 msgid "Print this document"
@@ -3043,9 +3043,7 @@ msgstr "Visto para Usar exploração com abas"
 
 #: ../ui/prefs.glade.h:107
 msgid "Use the verse list for Bible cross-references instead of the previewer"
-msgstr ""
-"Usar a lista de versículos para referências bíblicas cruzadas ao invés do "
-"previewer"
+msgstr "Usar a lista de versículos para referências bíblicas cruzadas ao invés do pré-visualizador"
 
 #: ../ui/prefs.glade.h:108
 msgid "Verse Number"
@@ -3801,7 +3799,7 @@ msgstr "Referências Cruzadas da Escritura"
 
 #: ../ui/xi-menus.glade.h:102
 msgid "Select Previewer position between sidebar or beneath Bible"
-msgstr "Seleccionar posição do Previewer entre barra lateral ou por baixo da Bíblia"
+msgstr "Seleccionar posição do pré-visualizador entre barra lateral ou por baixo da Bíblia"
 
 #: ../ui/xi-menus.glade.h:103
 msgid "Show Parallel View in a _Tab"
@@ -3817,7 +3815,7 @@ msgstr "Mostrar _Números de Versículos"
 
 #: ../ui/xi-menus.glade.h:106
 msgid "Show today's entry from your selected daily devotional in the previewer"
-msgstr "Mostrar entrada de hoje do devocional diário escolhido< no previewer"
+msgstr "Mostrar entrada de hoje do devocional diário escolhido no pré-visualizador"
 
 #: ../ui/xi-menus.glade.h:107
 msgid "Simple"
