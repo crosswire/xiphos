@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * search_dialog.h - gui for searching Sword modules
  *
- * Copyright (C) 2000-2009 Xiphos Developer Team
+ * Copyright (C) 2000-2010 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
