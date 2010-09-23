@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * sword_treekey.cc - treekey stuff for book editor
  *
- * Copyright (C) 2008-2009 Xiphos Developer Team
+ * Copyright (C) 2008-2010 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
