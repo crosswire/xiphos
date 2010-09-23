@@ -3,7 +3,7 @@
  * this file is here to force xiphos to be linked using g++
  * DO NOT REMOVE IT
  *
- * Copyright (C) 2000-2009 Xiphos Developer Team
+ * Copyright (C) 2000-2010 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
