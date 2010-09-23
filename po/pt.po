@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-20 20:42+0100\n"
-"PO-Revision-Date: 2010-09-20 23:09+0100\n"
+"POT-Creation-Date: 2010-09-22 20:56+0100\n"
+"PO-Revision-Date: 2010-09-22 23:18+0100\n"
 "Last-Translator: Ari Constâncio <ari.constancio@gmail.com>\n"
 "Language-Team: Xiphos Project\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "X-Launchpad-Export-Date: 2010-03-21 04:50+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
@@ -501,8 +501,8 @@ msgid ""
 "Xiphos failed to complete handler init for key #%d:\n"
 "%s"
 msgstr ""
-"Xiphos não conseguiu completar a inicialização do handler para a chave #"
-"%d: \n"
+"Xiphos não conseguiu completar a inicialização do handler para a chave #%"
+"d: \n"
 "%s"
 
 #: ../src/gnome2/gui.c:203
@@ -1315,6 +1315,32 @@ msgid ""
 "\n"
 "For complete details, search the web for \"lucene search syntax\"."
 msgstr ""
+"Pesquisar versículos que contêm...\n"
+"\n"
+"loved one\n"
+"       \"loved\" ou \"one\"\n"
+"      É o mesmo que pesquisar loved OR one\n"
+"      \"loved one\"\n"
+"      A frase \"loved one\"\n"
+"love*\n"
+"        Uma palavra que começa por \"love\"\n"
+"        (love OR loves OR loved OR etc...)\n"
+"loved AND one\n"
+"      A palavra \"loved\" e a palavra \"one\"\n"
+"      &amp;&amp; pode ser usado em vez de AND\n"
+"+loved one\n"
+"       Versículos que <b>devem</b> conter \"loved\" e <b>podem</b> conter "
+"\"one\"\n"
+"loved NOT one\n"
+"      \"loved\" mas não \"one\"\n"
+"(loved one) AND God\n"
+"       \"loved\" ou \"one\" e \"God\"\n"
+"lemma:G2316\n"
+"        Procura a palavra número 2316 do Strong's Greek (\"G\").\n"
+"        Também selecciona a vista de Strong's na aba <i>Pesquisar Atributo</"
+"i>.\n"
+"\n"
+"Para detalhes completos, pesquise na web por \"lucene search syntax\"."
 
 #. *****************************************************************************
 #. * Name
@@ -1349,6 +1375,23 @@ msgid ""
 "* Morphological tags are identified literally, e.g. N-ASF for \"noun, "
 "accusative singular feminine\" -- see the Robinson module for details."
 msgstr ""
+"<b>Pesquisas baseadas em atributos</b>\n"
+"Pesquisas de conteúdo inserido em markup fora do texto principal. Atributos "
+"são notas de rodapé, números de Strong e símbolos morfológicos.\n"
+"\n"
+"Saiba que grande parte destas pesquisas pode ser feita mais rapidamente "
+"através de pesquisas optimizadas \"lucene\" usando qualificadores de palavra-"
+"chave.\n"
+"\n"
+"Para usar pesquisas com atributos, deve seleccionar o botão apropriado na "
+"aba <i>Pesquisa por Atributo</i>.\n"
+"* Texto de nota de rodapé é pesquisado tal como o texto regular.\n"
+"* Palavras de Strong são especificados com uma letra de prefixo H ou G "
+"(Hebraico ou Grego) e o identificador numérico, p.ex. G2316 para encontrar \\"
+"\"θεός\\\" (\\\"Deus\").\n"
+"* Etiquetas morfológicas são identificadas literalmente, p.ex. N-ASF para "
+"\"nome, aucsativo singular feminino\" -- veja o módulo de Robinson para "
+"detalhes."
 
 #: ../src/gnome2/search_sidebar.c:184
 msgid ""
@@ -2273,7 +2316,7 @@ msgstr "Abrir ficheiro no StudyPad"
 
 #: ../ui/editor_studypad.xml.h:13
 msgid "Preview the document to be printed"
-msgstr "Pré-visualizar o documento a ser imprimido"
+msgstr "Pré-visualizar o documento a ser impresso"
 
 #: ../ui/editor_studypad.xml.h:15
 msgid "Print this document"
@@ -2847,7 +2890,9 @@ msgstr "Visto para realçar notas do utilizador"
 msgid ""
 "If you have set a preferred daily devotion module, its entry for today will "
 "be shown at startup."
-msgstr "Se tiver definido um módulo de devocional diário preferido, a sua entrada para hoje aparecerá no arranque."
+msgstr ""
+"Se tiver definido um módulo de devocional diário preferido, a sua entrada "
+"para hoje aparecerá no arranque."
 
 #: ../ui/prefs.glade.h:69
 msgid "Invert color pairs"
@@ -2865,7 +2910,9 @@ msgstr "Ligações"
 msgid ""
 "Make double-click of a word always use default dictionary instead of "
 "dictionary currently displayed"
-msgstr "Tornar o duplo clique de uma palavra abrir o dicionário por omissão em vez do dicionário corrente"
+msgstr ""
+"Tornar o duplo clique de uma palavra abrir o dicionário por omissão em vez "
+"do dicionário corrente"
 
 #: ../ui/prefs.glade.h:73
 msgid "Make journals/prayer lists available"
@@ -2891,7 +2938,9 @@ msgstr "Módulos Paralelo"
 msgid ""
 "Name and size choice for any module in a given language; still overridden by "
 "a specific choice on a particular module"
-msgstr "Escolha de nome e tamanho para qualquer módulo numa linguagem; suplantado por uma escolha específica num dado módulo"
+msgstr ""
+"Escolha de nome e tamanho para qualquer módulo numa linguagem; suplantado "
+"por uma escolha específica num dado módulo"
 
 #: ../ui/prefs.glade.h:79
 msgid "Normal Text"
@@ -2945,7 +2994,8 @@ msgstr "Seleccionar um directório"
 msgid ""
 "Select a particular language for interface display, other than your usual "
 "setting"
-msgstr "Seleccionar uma dada linguagem para a interface, além da definição habitual"
+msgstr ""
+"Seleccionar uma dada linguagem para a interface, além da definição habitual"
 
 #: ../ui/prefs.glade.h:94
 msgid "Show Daily Devotion at start up"
@@ -2959,7 +3009,9 @@ msgstr "Mostrar janela splash no arranque"
 msgid ""
 "Single selection of Bible+commentary+book+dictionary, or many sets of such "
 "selections in a tabbed interface"
-msgstr "Selecção simples de Bíblia+comentário+livro+dicionário, ou vários conjuntos dessas selecções numa interface com abas"
+msgstr ""
+"Selecção simples de Bíblia+comentário+livro+dicionário, ou vários conjuntos "
+"dessas selecções numa interface com abas"
 
 #: ../ui/prefs.glade.h:97
 msgid "Special Locale (requires restart)"
@@ -3001,7 +3053,9 @@ msgstr "Visto para Usar exploração com abas"
 
 #: ../ui/prefs.glade.h:107
 msgid "Use the verse list for Bible cross-references instead of the previewer"
-msgstr "Usar a lista de versículos para referências bíblicas cruzadas ao invés do previewer"
+msgstr ""
+"Usar a lista de versículos para referências bíblicas cruzadas ao invés do "
+"pré-visualizador"
 
 #: ../ui/prefs.glade.h:108
 msgid "Verse Number"
@@ -3469,7 +3523,7 @@ msgstr "Assinalar o versículo corrente com alto contraste"
 
 #: ../ui/xi-menus.glade.h:15
 msgid "Bring the simple sidebar search forward"
-msgstr ""
+msgstr "Trazer à frente a barra de pesquisa simples"
 
 #: ../ui/xi-menus.glade.h:16
 msgid "Browse in BibleMap.org"
@@ -3613,7 +3667,7 @@ msgstr "Selecção de Procura"
 
 #: ../ui/xi-menus.glade.h:60
 msgid "Make all tabs' Bibles navigate together"
-msgstr ""
+msgstr "Forçar navegação conjunta de todas as Bíblias das abas"
 
 #: ../ui/xi-menus.glade.h:62
 msgid "Monthly"
@@ -3758,6 +3812,8 @@ msgstr "Referências Cruzadas da Escritura"
 #: ../ui/xi-menus.glade.h:102
 msgid "Select Previewer position between sidebar or beneath Bible"
 msgstr ""
+"Seleccionar posição do pré-visualizador entre barra lateral ou por baixo da "
+"Bíblia"
 
 #: ../ui/xi-menus.glade.h:103
 msgid "Show Parallel View in a _Tab"
@@ -3774,6 +3830,7 @@ msgstr "Mostrar _Números de Versículos"
 #: ../ui/xi-menus.glade.h:106
 msgid "Show today's entry from your selected daily devotional in the previewer"
 msgstr ""
+"Mostrar entrada de hoje do devocional diário escolhido no pré-visualizador"
 
 #: ../ui/xi-menus.glade.h:107
 msgid "Simple"
@@ -3785,7 +3842,9 @@ msgstr "Assunto"
 
 #: ../ui/xi-menus.glade.h:111
 msgid "Turn on text-to-speech reading of Bible verses as they are selected"
-msgstr "Activar leitura de texto-para-voz de versículos bíblicos quando são seleccionados"
+msgstr ""
+"Activar leitura de texto-para-voz de versículos bíblicos quando são "
+"seleccionados"
 
 #: ../ui/xi-menus.glade.h:112
 msgid "Unlock This Module"
@@ -3808,8 +3867,9 @@ msgid "Verse Per Line"
 msgstr "Versículo por linha"
 
 #: ../ui/xi-menus.glade.h:118
+#, fuzzy
 msgid "_About The SWORD Project"
-msgstr "_Sobre O Projecto SWORD"
+msgstr "_Sobre o Projecto SWORD"
 
 #: ../ui/xi-menus.glade.h:119
 msgid "_Advanced Search"
@@ -3849,7 +3909,7 @@ msgstr "_Assinalar Versículo Corrente"
 
 #: ../ui/xi-menus.glade.h:129
 msgid "_Live Chat"
-msgstr "_Chat ao vivo"
+msgstr "Chat ao _vivo"
 
 #: ../ui/xi-menus.glade.h:130
 msgid "_Mailing List"

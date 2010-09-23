@@ -246,7 +246,7 @@ msgstr "Xiphos 开发项目"
 
 #: ../src/gnome2/about_xiphos.c:130
 msgid "Copyright 2000-2009 The Xiphos Development Team"
-msgstr "版权所有 2000-2009 Xiphos 开发项目组"
+msgstr "版权所有 2000-2010 Xiphos 开发项目组"
 
 #: ../src/gnome2/about_xiphos.c:133
 msgid ""

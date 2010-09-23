@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * search_sidebar.h - glue
  *
- * Copyright (C) 2004-2009 Xiphos Developer Team
+ * Copyright (C) 2004-2010 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
