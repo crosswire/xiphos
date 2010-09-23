@@ -249,7 +249,7 @@ msgstr "Xiphos vývoj"
 
 #: ../src/gnome2/about_xiphos.c:130
 msgid "Copyright 2000-2009 The Xiphos Development Team"
-msgstr "Copyright 2000-2009 Xiphos Vývojový Tím"
+msgstr "Copyright 2000-2010 Xiphos Vývojový Tím"
 
 #: ../src/gnome2/about_xiphos.c:133
 msgid ""
