@@ -4,7 +4,7 @@
 
 !macro LINGUAS_USE
 
-    ; Unmaintained Xiphos translations are disabled
+    ; Unmaintained or less than 50% Xiphos translations are disabled
 
     !insertmacro MUI_LANGUAGE "English" ;first language is the default
     ;!insertmacro MUI_LANGUAGE "Bulgarian" ; bg
@@ -17,8 +17,10 @@
     !insertmacro MUI_LANGUAGE "Finnish" ; fi
     !insertmacro MUI_LANGUAGE "French" ; fr
     !insertmacro MUI_LANGUAGE "Hebrew" ; he_IL
+    !insertmacro MUI_LANGUAGE "Hungarian" ; hu
     !insertmacro MUI_LANGUAGE "Norwegian" ; nb_NO
     !insertmacro MUI_LANGUAGE "Dutch" ; nl
+    !insertmacro MUI_LANGUAGE "Polish" ; pl
     !insertmacro MUI_LANGUAGE "Portuguese" ; pt, pt_PT
     !insertmacro MUI_LANGUAGE "Romanian" ; ro
     !insertmacro MUI_LANGUAGE "Russian" ; ru
@@ -79,6 +81,8 @@
     ;!define LIC_FILE_AFRIKAANS "${LANG_DIR}\gpl-2.0_en.txt"
     ;!define LIC_FILE_BULGARIAN "${LANG_DIR}\gpl-2.0_en.txt"
     !define LIC_FILE_HEBREW "${LANG_DIR}\gpl-2.0_en.txt"
+    !define LIC_FILE_HUNGARIAN "${LANG_DIR}\gpl-2.0_en.txt"
+    !define LIC_FILE_POLISH "${LANG_DIR}\gpl-2.0_en.txt"
     !define LIC_FILE_SIMPCHINESE "${LANG_DIR}\gpl-2.0_en.txt"
 
     LicenseLangString LICENSE_FILE ${LANG_ENGLISH} "${LIC_FILE_ENGLISH}"
@@ -92,8 +96,10 @@
     LicenseLangString LICENSE_FILE ${LANG_FINNISH} "${LIC_FILE_FINNISH}"
     LicenseLangString LICENSE_FILE ${LANG_FRENCH} "${LIC_FILE_FRENCH}"
     LicenseLangString LICENSE_FILE ${LANG_HEBREW} "${LIC_FILE_HEBREW}"
+    LicenseLangString LICENSE_FILE ${LANG_HUNGARIAN} "${LIC_FILE_HUNGARIAN}"
     LicenseLangString LICENSE_FILE ${LANG_NORWEGIAN} "${LIC_FILE_NORWEGIAN}"
     LicenseLangString LICENSE_FILE ${LANG_DUTCH} "${LIC_FILE_DUTCH}"
+    LicenseLangString LICENSE_FILE ${LANG_POLISH} "${LIC_FILE_POLISH}"
     LicenseLangString LICENSE_FILE ${LANG_PORTUGUESE} "${LIC_FILE_PORTUGUESE}"
     LicenseLangString LICENSE_FILE ${LANG_ROMANIAN} "${LIC_FILE_ROMANIAN}"
     LicenseLangString LICENSE_FILE ${LANG_RUSSIAN} "${LIC_FILE_RUSSIAN}"
