@@ -22,7 +22,7 @@ def init_xml_doc(self):
     if self.env['IS_WIN32']:
         self.default_install_path = '${PREFIX}/share/help'
         self.env['HTMLHELP_XSL'] = os.path.normpath(os.path.join(
-                self.env['ROOTDIR'], '/home/matthew/source/docbook-xsl-1.75.2/htmlhelp/htmlhelp.xsl'))
+            self.env['ROOTDIR'], self.env['ROOTDIR'], 'share/docbook/htmlhelp/htmlhelp.xsl'))
     else:
         self.default_install_path = '${PREFIX}/share/gnome/help/xiphos'
 
