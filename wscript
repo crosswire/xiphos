@@ -161,8 +161,8 @@ def configure(conf):
         env['IS_LINUX'] = True
 
     ## temporary HACKS for win32
-    if env['IS_WIN32']:
-        env['PREFIX'] = conf.escpath(os.path.abspath('win32/binaries/Xiphos'))
+    #if env['IS_WIN32']:
+    #    env['PREFIX'] = conf.escpath(os.path.abspath('win32/binaries/Xiphos'))
 
     if env['IS_WIN32']:
         env['ROOTDIR'] = ROOTDIR_WIN32
@@ -172,7 +172,7 @@ def configure(conf):
     # cross compiler
     if env['IS_CROSS_WIN32']:
         conf.check_tool('cross_linux_win32', tooldir=_tooldir)
-
+  
     conf.check_tool('gnu_dirs misc')
     conf.check_tool('intltool')
 
@@ -239,10 +239,10 @@ def configure(conf):
     env = conf.env
 
 
-    if env['IS_CROSS_WIN32']:
+    #if env['IS_CROSS_WIN32']:
         # allows to use linux pkg-config for cross-compilation
-        os.environ['PKG_CONFIG_LIBDIR'] = opt.pkg_conf_libdir
-        env['PKG_CONFIG_PREFIX'] = opt.pkg_conf_prefix
+        #os.environ['PKG_CONFIG_LIBDIR'] = opt.pkg_conf_libdir
+        #env['PKG_CONFIG_PREFIX'] = opt.pkg_conf_prefix
 
     # mozilla distdir mandatory for win32 for using libxul
     if env['IS_WIN32']:
@@ -266,7 +266,7 @@ def configure(conf):
 
     # strip xiphos binary
     if env['IS_CROSS_WIN32']:
-        env['STRIP'] = conf.find_program('i686-mingw32-strip', mandatory=True)
+        env['STRIP'] = conf.find_program('i686-pc-mingw32-strip', mandatory=True)
     else:
         env['STRIP'] = conf.find_program('strip', mandatory=True)
 
