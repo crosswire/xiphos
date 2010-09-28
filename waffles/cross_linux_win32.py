@@ -11,7 +11,7 @@ from Configure import conftest
 def find_mingw_cc(conf):
 	v = conf.env
 	v['CC'] = None
-	cc = conf.find_program('i686-mingw32-gcc', var='CC')
+	cc = conf.find_program('i686-pc-mingw32-gcc', var='CC')
 	if not cc: cc = conf.find_program('mingw32-cc', var='CC')
 	if not cc: cc = conf.find_program('i586-mingw32msvc-gcc', var='CC')
 	if not cc: cc = conf.find_program('i586-mingw32msvc-cc', var='CC')
@@ -29,7 +29,7 @@ def find_mingw_cc(conf):
 def find_mingw_ar(conf):
 	v = conf.env
 	v['AR'] = None
-	ar = conf.find_program('i686-mingw32-ar', var='AR')
+	ar = conf.find_program('i686-pc-mingw32-ar', var='AR')
 	if not ar: ar = conf.find_program('i586-mingw32msvc-ar', var='AR')
 	if not ar: conf.fatal('mingw32-ar was not found')
 	try:
@@ -43,7 +43,7 @@ def find_mingw_ar(conf):
 def find_mingw_ranlib(conf):
 	v = conf.env
 	v['RANLIB'] = None
-	ranlib = conf.find_program('i686-mingw32-ranlib', var='RANLIB')
+	ranlib = conf.find_program('i686-pc-mingw32-ranlib', var='RANLIB')
 	if not ranlib: ranlib = conf.find_program('i586-mingw32msvc-ranlib', var='RANLIB')
 	if not ranlib: conf.fatal('mingw32-ranlib was not found')
 	try:
@@ -58,7 +58,7 @@ def find_mingw_ranlib(conf):
 def find_mingw_cxx_cpp(conf):
 	v = conf.env
 	v['CXX'] = None
-	cxx = conf.find_program('i686-mingw32-g++', var='CXX')
+	cxx = conf.find_program('i686-pc-mingw32-g++', var='CXX')
 	if not cxx: cxx = conf.find_program('mingw32-c++', var='CXX')
 	if not cxx: cxx = conf.find_program('i586-mingw32msvc-g++', var='CXX')
 	if not cxx: cxx = conf.find_program('i586-mingw32msvc-c++', var='CXX')
@@ -88,7 +88,7 @@ def mingw_flags(conf):
 def mingw_libpath(conf):
 	# We must add the library and includes paths of Windows libs
 	msvc_path = conf.env['MSVC_LIBPATH'] or os.environ.get('MSVC_LIBPATH', '')
-	if not os.path.isdir(msvc_path): msvc_path = '/usr/i686-mingw32'
+	if not os.path.isdir(msvc_path): msvc_path = '/usr/i686-pc-mingw32'
 	if not os.path.isdir(msvc_path): msvc_path = '/usr/mingw32'
 	if not os.path.isdir(msvc_path): msvc_path = '/usr/i586-mingw32msvc'
 	if not os.path.isdir(msvc_path):
