@@ -1,0 +1,3844 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-09-20 20:42+0100\n"
+"PO-Revision-Date: 2010-09-30 00:09+0100\n"
+"Last-Translator: Peter von Kaehne <refdoc@crosswire.org>\n"
+"Language-Team: LANGUAGE <support@crosswire.org>\n"
+"Language: Arabic\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../src/backend/sword_main.cc:732
+msgid ""
+"Xiphos failure: \"can't happen\", display_mod: null\n"
+"Please report this. sword_main.cc:set_treekey\n"
+"What were you doing when this occurred?"
+msgstr "Xiphos الفشل : \"لا يمكن أن يحدث\" ، display_mod : فارغة الرجاء الإبلاغ عن هذا. sword_main.cc : set_treekey ماذا كنت تفعل عندما حدث هذا؟"
+
+#: ../src/backend/sword_main.cc:1083
+msgid "Configuration not found"
+msgstr "التكوين لم يتم العثور على"
+
+#: ../src/editor/slib-editor.c:224
+#: ../src/gnome2/html.c:633
+#, c-format
+msgid "Page %d of %d"
+msgstr "د من الصفحة %d %d"
+
+#: ../src/editor/slib-editor.c:391
+#: ../src/editor/slib-editor.c:438
+msgid "Save As"
+msgstr "حفظ باسم"
+
+#: ../src/editor/slib-editor.c:409
+#: ../src/editor/slib-editor.c:456
+#: ../src/editor/slib-editor.c:623
+msgid "Untitled document"
+msgstr "بدون عنوان الوثيقة"
+
+#: ../src/editor/slib-editor.c:648
+msgid "Are you sure you want to delete the note for"
+msgstr "هل أنت متأكد أنك تريد حذف ملاحظة للحصول على"
+
+#: ../src/editor/slib-editor.c:691
+msgid "HTML Output"
+msgstr "أتش تي أم أل الإخراج"
+
+#: ../src/editor/slib-editor.c:698
+msgid "HTML Source"
+msgstr "أتش تي أم أل المصدر"
+
+#: ../src/editor/slib-editor.c:705
+msgid "Plain Source"
+msgstr "سهل المصدر"
+
+#: ../src/editor/slib-editor.c:715
+#: ../ui/editor_note.xml.h:15
+#: ../ui/editor_studypad.xml.h:21
+msgid "_Print..."
+msgstr "_Print..."
+
+#: ../src/editor/slib-editor.c:722
+#: ../ui/editor_note.xml.h:9
+#: ../ui/editor_studypad.xml.h:14
+msgid "Print Pre_view"
+msgstr "طباعة Pre_view"
+
+#: ../src/editor/slib-editor.c:729
+msgid "_Quit"
+msgstr "_Quit"
+
+#: ../src/editor/slib-editor.c:736
+msgid "_Open"
+msgstr "ا _ فتح"
+
+#: ../src/editor/slib-editor.c:743
+msgid "_Save"
+msgstr "_Save"
+
+#: ../src/editor/slib-editor.c:750
+msgid "Save _As..."
+msgstr "_As حفظ..."
+
+#: ../src/editor/slib-editor.c:756
+msgid "New"
+msgstr "جديد"
+
+#: ../src/editor/slib-editor.c:758
+msgid "Open new document"
+msgstr "فتح وثيقة جديدة"
+
+#: ../src/editor/slib-editor.c:762
+msgid "Delete"
+msgstr "حذف"
+
+#: ../src/editor/slib-editor.c:764
+msgid "Delete current note"
+msgstr "ملاحظة حذف الحالي"
+
+#: ../src/editor/slib-editor.c:769
+#: ../ui/editor_note.xml.h:14
+#: ../ui/editor_studypad.xml.h:20
+#: ../ui/xi-menus.glade.h:126
+msgid "_File"
+msgstr "_file"
+
+#: ../src/editor/slib-editor.c:824
+msgid "HTML _Output"
+msgstr "أتش تي أم أل _Output"
+
+#: ../src/editor/slib-editor.c:831
+msgid "_HTML Source"
+msgstr "_HTML المصدر"
+
+#: ../src/editor/slib-editor.c:838
+msgid "_Plain Source"
+msgstr "_Plain المصدر"
+
+#: ../src/editor/slib-editor.c:845
+#: ../ui/xi-menus.glade.h:141
+msgid "_View"
+msgstr "_View"
+
+#: ../src/editor/slib-editor.c:856
+#: ../ui/editor_note.xml.h:11
+#: ../ui/editor_studypad.xml.h:16
+msgid "Save"
+msgstr "حفظ"
+
+#: ../src/editor/slib-editor.c:867
+#: ../src/editor/slib-editor.c:874
+msgid "Insert Link"
+msgstr "إدراج ارتباط"
+
+#: ../src/editor/slib-editor.c:1256
+#: ../src/editor/slib-editor.c:1293
+msgid "Save the changes to document"
+msgstr "حفظ التغييرات إلى المستند"
+
+#: ../src/editor/slib-editor.c:1257
+#: ../src/editor/slib-editor.c:1294
+msgid "before closing?"
+msgstr "قبل أن يغلق؟"
+
+#: ../src/editor/slib-editor.c:1264
+#: ../src/editor/slib-editor.c:1301
+msgid "If you don't save, changes will be permanently lost."
+msgstr "إذا لم يكن لحفظ ، سيتم فقدان التغييرات بشكل دائم."
+
+#: ../src/editor/slib-editor.c:1292
+#: ../ui/xi-menus.glade.h:43
+msgid "File"
+msgstr "ملف"
+
+#: ../src/editor/slib-editor.c:1347
+msgid "StudyPad"
+msgstr "StudyPad"
+
+#: ../src/editor/slib-editor.c:1360
+msgid "Note Editor"
+msgstr "ملاحظة المحرر"
+
+#: ../src/editor/slib-editor.c:1374
+msgid "Prayer List/Journal Editor"
+msgstr "قائمة الصلاة / محرر مجلة"
+
+#: ../src/gecko/gecko-html.cpp:177
+#: ../src/gnome2/html.c:162
+msgid "Unlock "
+msgstr "فتح"
+
+#: ../src/gecko/gecko-print.c:172
+msgid "Preparing to print"
+msgstr "التحضير للطباعة"
+
+#: ../src/gecko/gecko-print.c:266
+msgid "Printing is not supported on this printer"
+msgstr "غير معتمد الطباعة على هذه الطابعة"
+
+#: ../src/gecko/gecko-print.c:269
+#, c-format
+msgid "Printer %s does not support PostScript printing."
+msgstr "الطابعة%s لا يدعم بوستسكريبت الطباعة."
+
+#: ../src/gecko/gecko-print.c:342
+#: ../src/gecko/gecko-print.c:370
+msgid "Printing"
+msgstr "الطبعة"
+
+#: ../src/gecko/gecko-print.c:372
+msgid "Waiting to print"
+msgstr "في انتظار طباعة"
+
+#: ../src/gecko/gecko-print.c:584
+msgid "An error occurred while printing"
+msgstr "حدث خطأ أثناء الطباعة"
+
+#: ../src/gecko/gecko-print.c:588
+#, c-format
+msgid "It was not possible to print your document: %s"
+msgstr "ولم يكن من الممكن لطباعة المستند : %s"
+
+#: ../src/gnome2/about_modules.c:195
+msgid "About Sword Module"
+msgstr "حول وحدة السيف"
+
+#: ../src/gnome2/about_modules.c:392
+#: ../src/gnome2/mod_mgr.c:265
+msgid "The module has no About information."
+msgstr "وحدة لا يوجد لديه حول المعلومات."
+
+#: ../src/gnome2/about_sword.c:81
+msgid ""
+"The SWORD Project is an effort to create an ever-expanding software package for research and study of God and His Word. The SWORD Project framework allows easy use and study of Bible texts, commentaries, lexicons, dictionaries, and other books. Many frontends are built using this framework. An installed set of books may be shared among all frontends using the framework.\n"
+"\n"
+" Books can be downloaded from the SWORD Project."
+msgstr "مشروع السيف محاولة لإنشاء حزمة البرامج الآخذة في التوسع للبحث والدراسة من الله وكلمته. في إطار مشروع السيف يسمح سهلة الاستخدام ودراسة نصوص الكتاب المقدس ، وتعليقات ، والمعاجم والقواميس ، وغيرها من الكتب. يتم بناؤها باستخدام العديد من الواجهات هذا الإطار. من كتب قد تكون مشتركة إن تثبيت تعيين بين جميع الواجهات باستخدام الإطار. التحميل كتب يمكن من مشروع السيف."
+
+#: ../src/gnome2/about_sword.c:105
+msgid "The SWORD Project"
+msgstr "السيف المشروع"
+
+#: ../src/gnome2/about_trans.c:84
+msgid ""
+"Do you like using Xiphos to study the Bible? Would you like to see its display using your native language? You could translate Xiphos! \n"
+"\n"
+"We are always looking for contributions of new translations of Xiphos into other languages. If you are able to translate for us, please see the link below, contact us, and get involved with our efforts."
+msgstr "هل تحب استخدام Xiphos لدراسة الكتاب المقدس؟ هل تريد أن ترى شاشته باستخدام لغتك الأم؟ هل يمكن ترجمة Xiphos! نحن نبحث دائما عن مساهمات جديدة من Xiphos ترجمة إلى لغات أخرى. إذا كنت قادرا على ترجمة بالنسبة لنا ، يرجى الاطلاع على الرابط أدناه ، الاتصال بنا ، والتورط مع جهودنا."
+
+#: ../src/gnome2/about_trans.c:98
+msgid "About Xiphos Translation"
+msgstr "حول الترجمة Xiphos"
+
+#: ../src/gnome2/about_trans.c:140
+msgid "See TRANSLATION-HOWTO in Xiphos source"
+msgstr "انظر الترجمة ، كوميديا في Xiphos مصدر"
+
+#: ../src/gnome2/about_trans.c:146
+msgid "Xiphos development"
+msgstr "Xiphos التنمية"
+
+#: ../src/gnome2/about_xiphos.c:130
+msgid "Copyright 2000-2009 The Xiphos Development Team"
+msgstr "حقوق الطبع والنشر 2000-2009 فريق التطوير Xiphos"
+
+#: ../src/gnome2/about_xiphos.c:133
+msgid ""
+"(formerly known as GnomeSword)\n"
+"\n"
+"Powered by The SWORD Project.\n"
+"We would like to thank Troy Griffitts and all the other folks who have given us The SWORD Project."
+msgstr "(المعروف سابقا باسم GnomeSword) بدعم من مشروع السيف. ونود أن نشكر تروي Griffitts وجميع الناس الآخرين الذين قدموا لنا مشروع السيف."
+
+#: ../src/gnome2/bibletext_dialog.c:315
+msgid "Go to "
+msgstr "الذهاب إلى"
+
+#. info->stock_icon = GTK_STOCK_OPEN;
+#: ../src/gnome2/bookmark_dialog.c:171
+#: ../src/gnome2/bookmarks_menu.c:363
+#: ../src/gnome2/bookmarks_menu.c:658
+#: ../src/gnome2/bookmarks_menu.c:756
+#: ../src/gnome2/bookmarks_treeview.c:134
+#: ../ui/editor_studypad.xml.h:2
+#: ../ui/xi-menus.glade.h:14
+msgid "Bookmark"
+msgstr "المرجعية"
+
+#: ../src/gnome2/bookmark_dialog.c:173
+#: ../src/gnome2/bookmarks_menu.c:758
+#: ../src/gnome2/bookmarks_treeview.c:135
+msgid "Enter Folder Name"
+msgstr "أدخل اسم المجلد"
+
+#: ../src/gnome2/bookmark_dialog.c:175
+#: ../src/gnome2/bookmarks_menu.c:760
+msgid "Folder Name"
+msgstr "اسم المجلد"
+
+#: ../src/gnome2/bookmark_dialog.c:176
+#: ../src/gnome2/bookmarks_menu.c:761
+#: ../src/gnome2/bookmarks_treeview.c:137
+msgid "Folder: "
+msgstr "المجلد :"
+
+#: ../src/gnome2/bookmarks_menu.c:206
+msgid "Specify bookmarks file"
+msgstr "العلامات حدد الملف"
+
+#: ../src/gnome2/bookmarks_menu.c:349
+#: ../ui/xi-menus.glade.h:36
+msgid "Edit"
+msgstr "تحرير"
+
+#: ../src/gnome2/bookmarks_menu.c:366
+msgid "Folder name: "
+msgstr "اسم المجلد :"
+
+#: ../src/gnome2/bookmarks_menu.c:369
+msgid "Bookmark name: "
+msgstr "المرجعية الاسم :"
+
+#: ../src/gnome2/bookmarks_menu.c:372
+#: ../src/gnome2/bookmarks_menu.c:666
+msgid "Verse: "
+msgstr "الآية :"
+
+#: ../src/gnome2/bookmarks_menu.c:373
+#: ../src/gnome2/bookmarks_menu.c:667
+msgid "Module: "
+msgstr "الوحدة :"
+
+#: ../src/gnome2/bookmarks_menu.c:495
+msgid "Remove the selected folder"
+msgstr "إزالة المجلد المحدد"
+
+#: ../src/gnome2/bookmarks_menu.c:497
+msgid "(and all its contents)?"
+msgstr "(وجميع محتوياته؟"
+
+#: ../src/gnome2/bookmarks_menu.c:500
+msgid "Remove the selected bookmark"
+msgstr "إزالة العلامة المحددة"
+
+#: ../src/gnome2/bookmarks_menu.c:659
+msgid "Add"
+msgstr "أضف"
+
+#: ../src/gnome2/bookmarks_menu.c:665
+msgid "Label: "
+msgstr "الشركة المنتجة :"
+
+#: ../src/gnome2/bookmarks_treeview.c:108
+#: ../src/gnome2/export_bookmarks.c:193
+#: ../src/gnome2/export_bookmarks.c:252
+#, c-format
+msgid "Search result: %s"
+msgstr "نتيجة بحث : %s"
+
+#: ../src/gnome2/bookmarks_treeview.c:944
+#: ../src/gnome2/sidebar.c:1374
+msgid "Bookmarks"
+msgstr "العلامات"
+
+#: ../src/gnome2/cipher_key_dialog.c:61
+#, c-format
+msgid "Cipher key for module %s"
+msgstr "الشفرات الرئيسية ليالي الوحدة %s "
+
+#: ../src/gnome2/cipher_key_dialog.c:62
+msgid "for:"
+msgstr "ل :"
+
+#: ../src/gnome2/cipher_key_dialog.c:65
+msgid "Enter Key: "
+msgstr "مفتاح الدخول :"
+
+#: ../src/gnome2/dialog.c:264
+msgid "Close without Saving"
+msgstr "إغلاق بدون الحفظ"
+
+#: ../src/gnome2/dialog.c:573
+msgid "Xiphos:"
+msgstr "Xiphos :"
+
+#: ../src/gnome2/dialog.c:674
+msgid "Close _without Saving"
+msgstr "إغلاق _without إنقاذ"
+
+#: ../src/gnome2/export_bookmarks.c:195
+#: ../src/gnome2/export_bookmarks.c:254
+#: ../src/gnome2/sidebar.c:1390
+#, c-format
+msgid "Verse List"
+msgstr "الآية قائمة"
+
+#: ../src/gnome2/export_bookmarks.c:689
+msgid "VerseList"
+msgstr "VerseList"
+
+#: ../src/gnome2/export_bookmarks.c:694
+msgid "SearchResults"
+msgstr "SearchResults"
+
+#: ../src/gnome2/export_dialog.c:267
+#: ../ui/export-dialog.glade.h:20
+msgid "Please check copyright before exporting!"
+msgstr "يرجى التحقق من حقوق التأليف والنشر قبل تصدير!"
+
+#: ../src/gnome2/find_dialog.c:204
+#: ../src/gnome2/find_dialog.c:373
+msgid "Find"
+msgstr "البحث"
+
+#: ../src/gnome2/find_dialog.c:222
+msgid "Enter Word or Phrase"
+msgstr "أدخل كلمة أو عبارة"
+
+#: ../src/gnome2/find_dialog.c:238
+#: ../src/gnome2/search_sidebar.c:297
+#: ../ui/search-dialog.glade.h:59
+msgid "Match case"
+msgstr "حالة المباراة"
+
+#: ../src/gnome2/find_dialog.c:245
+msgid "Search backwards"
+msgstr "البحث الى الوراء"
+
+#: ../src/gnome2/find_dialog.c:254
+#: ../src/gnome2/search_sidebar.c:262
+#: ../ui/search-dialog.glade.h:78
+msgid "Regular expression"
+msgstr "التعبير العادية"
+
+#: ../src/gnome2/find_dialog.c:295
+msgid "Find Next"
+msgstr "بحث عن التالي"
+
+#: ../src/gnome2/font_dialog.c:304
+msgid "Set Module Font"
+msgstr "مجموعة الخط الوحدة"
+
+#: ../src/gnome2/font_dialog.c:334
+msgid "Change font for"
+msgstr "تغيير الخط"
+
+#: ../src/gnome2/font_dialog.c:338
+msgid "Module"
+msgstr "وحدة"
+
+#: ../src/gnome2/font_dialog.c:342
+msgid "Current font: "
+msgstr "الخط الحالي :"
+
+#: ../src/gnome2/font_dialog.c:374
+msgid "+0"
+msgstr "+0"
+
+#: ../src/gnome2/font_dialog.c:378
+msgid "Use the default font for this module"
+msgstr "استخدام الخط الافتراضي لهذه الوحدة"
+
+#. *****************************************************************************
+#. * Name
+#. *    gconf_setup
+#. *
+#. * Synopsis
+#. *   #include "main/settings.h"
+#. *
+#. *   void gconf_setup()
+#. *
+#. * Description
+#. *   verifies and initializes the GConf subsystem, so that "sword://" and
+#. *   similar can be handled by url-comprehending programs such as browsers.
+#. *   dialogs for permission/success/failure => conditional on debug build.
+#. *
+#. * Return value
+#. *   void
+#.
+#: ../src/gnome2/gui.c:101
+msgid ""
+"URL references using \"sword://\" (similar to web page\n"
+"references) can be used by programs to look up\n"
+"scripture references. Your system currently has no\n"
+"program set to handle these references.\n"
+"\n"
+"Would you like Xiphos to set itself as the\n"
+"program to handle these references?"
+msgstr "المراجع باستخدام عنوان \"بحد السيف : / /\" صفحة ويب يمكن أن تكون مراجع) المستخدمة (على غرار برامج للبحث عن مراجع الكتاب المقدس. النظام الخاص بك ليس لديها حاليا مجموعة برنامج للتعامل مع هذه المراجع. هل تريد Xiphos لتعيين نفسها على أنها برنامج للتعامل مع هذه المراجع؟"
+
+#: ../src/gnome2/gui.c:103
+msgid ""
+"Xiphos has successfully set itself\n"
+"as the handler of sword:// and bible:// URLs.\n"
+"\n"
+"You may wish to run the program \"gconf-editor\"\n"
+"to examine keys under /desktop/gnome/url-handlers,\n"
+"if you need to change these."
+msgstr "وقد نجحت مجموعة Xiphos نفسها معالج من السيف : / / والكتاب المقدس : / / عناوين التغيير. قد ترغب في تشغيل برنامج \"جيكونف المحرر\" لدراسة تحت مفاتيح / سطح المكتب / جنوم / رابط ، معالجات ، إذا كنت بحاجة إلى هذه."
+
+#: ../src/gnome2/gui.c:157
+#, c-format
+msgid ""
+"Xiphos failed to complete handler init for key #%d:\n"
+"%s"
+msgstr ""
+"فشل Xiphos لاستكمال التهيئة معالج # %d:\n"
+"%s"
+
+#: ../src/gnome2/gui.c:203
+msgid "BUG! Xiphos is about to crash due to a \"STRDUP\" error."
+msgstr "علة! Xiphos على وشك أن تحطم بسبب خطأ \"STRDUP\"."
+
+#: ../src/gnome2/gui.c:204
+#: ../src/gnome2/gui.c:239
+msgid "Please report this error to the Xiphos team with:"
+msgstr "الرجاء الإبلاغ عن هذا الخطأ لفريق Xiphos مع :"
+
+#: ../src/gnome2/gui.c:238
+msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
+msgstr "علة! Xiphos على وشك أن تحطم نتيجة لخطأ في \"السلسلة\"."
+
+#: ../src/gnome2/main_window.c:793
+msgid "Xiphos - Bible Study Software"
+msgstr "Xiphos -- دراسة الكتاب المقدس البرمجيات"
+
+#: ../src/gnome2/main_window.c:848
+msgid "Open a new tab"
+msgstr "فتح علامة تبويب جديدة"
+
+#: ../src/gnome2/main_window.c:928
+#: ../src/gnome2/sidebar.c:616
+#: ../src/gnome2/sidebar.c:622
+#: ../src/main/sidebar.cc:664
+#: ../src/main/sidebar.cc:1009
+#: ../src/main/sidebar.cc:1010
+#: ../src/main/sidebar.cc:1011
+msgid "Standard View"
+msgstr "عرض قياسي"
+
+#: ../src/gnome2/main_window.c:1009
+msgid "Commentary View"
+msgstr "تعليق الصورة"
+
+#: ../src/gnome2/main_window.c:1025
+msgid "Book View"
+msgstr "عرض كتاب"
+
+#: ../src/gnome2/main_window.c:1050
+msgid "Welcome to Xiphos"
+msgstr "مرحبا بكم في Xiphos"
+
+#: ../src/gnome2/menu_popup.c:1208
+msgid ""
+"Renaming is not available in Windows.\n"
+"\n"
+"Xiphos is limited by Windows' filesystem,\n"
+"because it disallows the renaming of filename\n"
+"components of currently-open files,\n"
+"such as the contents of this commentary.\n"
+"Therefore, personal commentary renaming is\n"
+"not available in the Windows environment."
+msgstr "إعادة تسمية غير متوفر في ويندوز. محدودة Xiphos هو ل &#39;ويندوز نظام الملفات ، لأنه يرفض إعادة تسمية اسم الملف عناصر فتح الملفات حاليا ، مثل محتويات هذا التعليق ، وبالتالي إعادة تسمية الشخصية التعليق غير متوفر في بيئة ويندوز."
+
+#: ../src/gnome2/menu_popup.c:1227
+msgid "Rename Commentary"
+msgstr "إعادة تسمية التعليق"
+
+#: ../src/gnome2/menu_popup.c:1230
+msgid "Choose Commentary Name"
+msgstr "اختيار اسم التعليق"
+
+#: ../src/gnome2/menu_popup.c:1232
+msgid "New Name"
+msgstr "اسم جديد"
+
+#: ../src/gnome2/menu_popup.c:1233
+#: ../src/gnome2/treekey-editor.c:135
+#: ../src/gnome2/treekey-editor.c:194
+#: ../src/gnome2/treekey-editor.c:280
+#: ../src/main/prayerlists.cc:243
+msgid "Name: "
+msgstr "الاسم :"
+
+#: ../src/gnome2/menu_popup.c:1243
+#: ../src/main/prayerlists.cc:257
+msgid "Module names must contain [A-Za-z0-9_] only."
+msgstr "يجب أن تكون أسماء وحدة نمطية تحتوي على [ألف زا - z0 - 9_] فقط."
+
+#: ../src/gnome2/menu_popup.c:1250
+#: ../src/main/prayerlists.cc:264
+msgid "Xiphos already knows a module by that name."
+msgstr "Xiphos يعرف بالفعل وحدة بهذا الاسم."
+
+#: ../src/gnome2/menu_popup.c:1291
+#, c-format
+msgid ""
+"Failed to create new configuration:\n"
+"%s"
+msgstr ""
+"فشلت في خلق التكوين الجديد : \n"
+"%s"
+
+#: ../src/gnome2/menu_popup.c:1300
+msgid ""
+"Configuration build error:\n"
+"\n"
+msgstr ""
+"التكوين بناء الخطأ :\n"
+"\n"
+
+#. *****************************************************************************
+#. * defines
+#.
+#: ../src/gnome2/mod_mgr.c:62
+msgid ""
+"<b>Overview of the Module Manager.</b>\n"
+"\n"
+"This is Xiphos' mechanism to get new and updated content.\n"
+"If you have never been here before, please take a moment to look it over.\n"
+"\n"
+"Modules come from different <u>repositories</u>.  <b>Module Sources: Add/Remove</b> will show you what repositories are currently known.\n"
+"\n"
+"<b>Module Sources: Choose</b> is for deciding from where modules should come, that is, from which repository Xiphos should obtain them, as well as where they should be placed on your system. Set <i>Install Source</i> and <i>Install Destination</i>, then click <i>Refresh</i>.\n"
+"\n"
+"<b>Modules: Install/Update</b> is for selecting and obtaining modules after choosing source and destination.\n"
+"\n"
+"<b>Modules: Maintenance</b> is for archive and index creation.\n"
+"\n"
+"See section 5 of our manual for Module Manager detail, or ask for help via Live Chat, or (if no one is responsive in chat) send mail to our users' mailing list.\n"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:65
+msgid ""
+"<b>Welcome to Xiphos.</b>\n"
+"\n"
+"There are no Bibles installed. In order to initialize, Xiphos needs at least one Bible module. To facilitate this, the Module Manager has been opened so that you may install one or more Bibles, either from a local module set (cdrom, flash drive) or over the network from CrossWire Bible Society. Please refer to these step-by-step instructions, and to the general module manager overview that has also been opened.\n"
+"\n"
+"<u>For local install:</u>\n"
+"- In <i>Module Sources: Add/Remove</i>, add a new local folder name where modules can be found.\n"
+"  (This is where folders exist named <i>mods.d</i> and <i>modules</i>.)\n"
+"- In <i>Module Sources: Choose</i>, click the \"Local\" button, and select your folder from the pulldown.\n"
+"\n"
+"<u>For network install from CrossWire:</u>\n"
+"- In <i>Module Sources: Choose</i>, click the \"Remote\" button and select CrossWire from the pulldown.\n"
+"- Click the \"Refresh\" button at the bottom.\n"
+"\n"
+"<u>In either case:</u>\n"
+"- In <i>Modules: Install/Update</i>, select Bibles and other modules of your preference.\n"
+"- Click \"Install\".\n"
+"- Close the Module Manager when you are done.\n"
+"\n"
+"<u>Warning</u>: If you live in a persecuted country, use with care.\n"
+"\n"
+"Both this step-by-step instruction dialog and the general introduction dialog may be closed at any time."
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:183
+msgid "Remove these modules?"
+msgstr "إزالة هذه الوحدات؟"
+
+#: ../src/gnome2/mod_mgr.c:184
+msgid "Preparing to remove"
+msgstr "تستعد لازالة"
+
+#: ../src/gnome2/mod_mgr.c:185
+msgid "Removing"
+msgstr "إزالة"
+
+#: ../src/gnome2/mod_mgr.c:186
+#: ../ui/xi-menus.glade.h:89
+msgid "Remove"
+msgstr "إزالة"
+
+#: ../src/gnome2/mod_mgr.c:189
+msgid "Install these modules?"
+msgstr "تثبيت هذه الوحدات؟"
+
+#: ../src/gnome2/mod_mgr.c:190
+msgid "Preparing to install"
+msgstr "التحضير لتثبيت"
+
+#: ../src/gnome2/mod_mgr.c:191
+msgid "Installing"
+msgstr "تثبيت"
+
+#: ../src/gnome2/mod_mgr.c:192
+msgid "Install"
+msgstr "تثبيت"
+
+#: ../src/gnome2/mod_mgr.c:195
+msgid "Archive these modules?"
+msgstr "الأرشيف هذه الوحدات؟"
+
+#: ../src/gnome2/mod_mgr.c:196
+msgid "Preparing to archive"
+msgstr "تستعد لالأرشيف"
+
+#: ../src/gnome2/mod_mgr.c:197
+msgid "Archiving"
+msgstr "أرشفة"
+
+#: ../src/gnome2/mod_mgr.c:198
+msgid "Archive"
+msgstr "الأرشيف"
+
+#: ../src/gnome2/mod_mgr.c:201
+msgid ""
+"Build fast-search index for these\n"
+"modules (may take minutes/module)?"
+msgstr "بناء فهرس البحث السريع لهذه الوحدات (قد يستغرق دقائق / وحدة)؟"
+
+#: ../src/gnome2/mod_mgr.c:202
+msgid "Preparing to index"
+msgstr "تستعد للمؤشر"
+
+#: ../src/gnome2/mod_mgr.c:203
+msgid "Indexing"
+msgstr "فهرسة"
+
+#: ../src/gnome2/mod_mgr.c:204
+msgid "Index"
+msgstr "مؤشر"
+
+#: ../src/gnome2/mod_mgr.c:207
+msgid "Delete fast-search index for these modules?"
+msgstr "حذف سريع في البحث عن الرقم القياسي لهذه الوحدات؟"
+
+#: ../src/gnome2/mod_mgr.c:208
+msgid "Preparing to delete index"
+msgstr "تستعد لحذف فهرس"
+
+#: ../src/gnome2/mod_mgr.c:209
+msgid "Deleting index"
+msgstr "حذف فهرس"
+
+#: ../src/gnome2/mod_mgr.c:210
+msgid "Deletion"
+msgstr "شطب"
+
+#: ../src/gnome2/mod_mgr.c:435
+msgid "Module Name"
+msgstr "اسم الوحدة"
+
+#: ../src/gnome2/mod_mgr.c:456
+msgid "A checkmark means this module is already installed"
+msgstr "على تحديد وسائل تم بالفعل تثبيت هذه الوحدة"
+
+#: ../src/gnome2/mod_mgr.c:478
+msgid "Click the box to work on this module"
+msgstr "انقر فوق مربع للعمل في هذه الوحدة"
+
+#: ../src/gnome2/mod_mgr.c:479
+msgid "Click the box to select this module for install/update"
+msgstr "انقر فوق المربع لتحديد هذه الوحدة من أجل تثبيت / تحديث"
+
+#: ../src/gnome2/mod_mgr.c:498
+msgid "Installed"
+msgstr "تثبيت"
+
+#: ../src/gnome2/mod_mgr.c:508
+msgid "The index icon means you have built an optimized ('lucene') index for this module for fast searching (see the Maintenance pane for this function)"
+msgstr "رمز مؤشر يعني أنك قد بنيت فهرس الأمثل (&#39;وسين&#39;) لهذه الوحدة من أجل البحث السريع (انظر الجزء الصيانة لهذه المهمة)"
+
+#: ../src/gnome2/mod_mgr.c:526
+msgid "The lock icon means this module is encrypted, and requires that you purchase an unlock key from the content owner"
+msgstr "رمز القفل وسائل هذه الوحدة مشفرة ، ويتطلب أن تقوم بشراء فتح المفتاح من مالك المحتوى"
+
+#: ../src/gnome2/mod_mgr.c:543
+#: ../ui/xi-menus.glade.h:1
+msgid "About"
+msgstr "حول"
+
+#: ../src/gnome2/mod_mgr.c:563
+msgid "The refresh icon means the Installed module is older than the newer Available module: You should update the module"
+msgstr "رمز التحديث يعني وحدة المثبت أقدم من وحدة الأحدث المتوفرة : يجب عليك تحديث وحدة"
+
+#: ../src/gnome2/mod_mgr.c:575
+msgid "Available"
+msgstr "متاح"
+
+#: ../src/gnome2/mod_mgr.c:584
+msgid "Size"
+msgstr "حجم"
+
+#: ../src/gnome2/mod_mgr.c:593
+msgid "Description"
+msgstr "الوصف"
+
+#: ../src/gnome2/mod_mgr.c:740
+#, c-format
+msgid ""
+"`mkdir %s' failed:\n"
+"%s."
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:762
+msgid " archived in: \n"
+msgstr "المؤرشفة في :\n"
+
+#: ../src/gnome2/mod_mgr.c:817
+msgid "Journals and prayer lists cannot be indexed."
+msgstr "لا يمكن المجلات وقوائم الصلاة وفهرستها."
+
+#: ../src/gnome2/mod_mgr.c:837
+#, c-format
+msgid "%s failed"
+msgstr "%s فشلت"
+
+#: ../src/gnome2/mod_mgr.c:840
+#: ../src/gnome2/mod_mgr.c:1586
+msgid "Finished"
+msgstr "انتهى"
+
+#: ../src/gnome2/mod_mgr.c:1008
+#: ../src/gnome2/mod_mgr.c:1010
+#: ../src/gnome2/mod_mgr.c:1112
+#: ../src/gnome2/mod_mgr.c:1147
+#: ../src/gnome2/mod_mgr.c:1149
+#: ../src/gnome2/utilities.c:461
+#: ../src/gnome2/utilities.c:526
+#: ../src/gnome2/utilities.c:528
+#: ../src/gnome2/utilities.c:1049
+#: ../src/main/sidebar.cc:844
+#: ../src/main/sidebar.cc:916
+#: ../src/main/sidebar.cc:918
+msgid "Unknown"
+msgstr "غير معروف"
+
+#: ../src/gnome2/mod_mgr.c:1308
+#, c-format
+msgid ""
+"Repository:\n"
+"%s"
+msgstr ""
+"مستودع : \n"
+"%s"
+
+#: ../src/gnome2/mod_mgr.c:1320
+msgid ""
+"Categorized by\n"
+"Module Type"
+msgstr "مصنفة حسب نوع الوحدة"
+
+#: ../src/gnome2/mod_mgr.c:1325
+#: ../src/gnome2/utilities.c:589
+#: ../src/main/sidebar.cc:993
+#: ../src/main/sidebar.cc:995
+msgid "Biblical Texts"
+msgstr "نصوص الكتاب المقدس"
+
+#: ../src/gnome2/mod_mgr.c:1329
+#: ../src/gnome2/utilities.c:593
+#: ../src/main/sidebar.cc:676
+#: ../src/main/sidebar.cc:1018
+#: ../src/main/sidebar.cc:1020
+#: ../ui/prefs.glade.h:36
+msgid "Commentaries"
+msgstr "التعليقات"
+
+#: ../src/gnome2/mod_mgr.c:1333
+#: ../src/gnome2/utilities.c:598
+#: ../src/main/sidebar.cc:1027
+#: ../src/main/sidebar.cc:1029
+msgid "Dictionaries"
+msgstr "القواميس"
+
+#: ../src/gnome2/mod_mgr.c:1337
+#: ../src/gnome2/utilities.c:602
+#: ../src/main/sidebar.cc:1036
+#: ../src/main/sidebar.cc:1038
+msgid "Glossaries"
+msgstr "المسارد"
+
+#: ../src/gnome2/mod_mgr.c:1341
+#: ../src/gnome2/utilities.c:606
+#: ../src/main/sidebar.cc:1045
+#: ../src/main/sidebar.cc:1047
+msgid "Daily Devotionals"
+msgstr "يوميا دفوأيشنلس"
+
+#: ../src/gnome2/mod_mgr.c:1345
+#: ../src/gnome2/utilities.c:610
+#: ../src/main/sidebar.cc:686
+#: ../src/main/sidebar.cc:1054
+#: ../src/main/sidebar.cc:1056
+msgid "General Books"
+msgstr "كتب عامة"
+
+#: ../src/gnome2/mod_mgr.c:1349
+#: ../src/gnome2/utilities.c:614
+#: ../src/main/sidebar.cc:1063
+#: ../src/main/sidebar.cc:1065
+msgid "Maps"
+msgstr "خرائط"
+
+#: ../src/gnome2/mod_mgr.c:1353
+#: ../src/gnome2/utilities.c:618
+#: ../src/main/sidebar.cc:1072
+#: ../src/main/sidebar.cc:1074
+msgid "Images"
+msgstr "الصور"
+
+#: ../src/gnome2/mod_mgr.c:1357
+#: ../src/gnome2/utilities.c:622
+#: ../src/main/sidebar.cc:1081
+#: ../src/main/sidebar.cc:1083
+msgid "Cult/Unorthodox"
+msgstr "عبادة / غير تقليدي"
+
+#: ../src/gnome2/mod_mgr.c:1365
+msgid ""
+"Categorized by\n"
+"Availability"
+msgstr "مصنفة حسب توفر"
+
+#: ../src/gnome2/mod_mgr.c:1370
+msgid "Updates"
+msgstr "تحديثات"
+
+#: ../src/gnome2/mod_mgr.c:1374
+msgid "Uninstalled"
+msgstr "إلغاء"
+
+#: ../src/gnome2/mod_mgr.c:1378
+#: ../src/gnome2/sidebar.c:632
+#: ../src/gnome2/utilities.c:627
+#: ../src/main/prayerlists.cc:241
+#: ../src/main/sidebar.cc:1091
+#: ../src/main/sidebar.cc:1093
+msgid "Prayer List/Journal"
+msgstr "قائمة الصلاة / مجلة"
+
+#: ../src/gnome2/mod_mgr.c:1570
+msgid "Refreshing from remote source"
+msgstr "منعش من مصدر بعيد"
+
+#: ../src/gnome2/mod_mgr.c:1580
+msgid "Remote source not found"
+msgstr "لم يتم العثور على مصدر البعيد"
+
+#: ../src/gnome2/mod_mgr.c:1650
+msgid "Configure"
+msgstr "تكوين"
+
+#: ../src/gnome2/mod_mgr.c:1681
+msgid "Type"
+msgstr "نوع"
+
+#: ../src/gnome2/mod_mgr.c:1688
+msgid "Caption"
+msgstr "شرح"
+
+#: ../src/gnome2/mod_mgr.c:1696
+msgid "Source"
+msgstr "مصدر"
+
+#: ../src/gnome2/mod_mgr.c:1704
+msgid "Directory"
+msgstr "الدليل"
+
+#: ../src/gnome2/mod_mgr.c:1712
+msgid "User"
+msgstr "المستخدم"
+
+#: ../src/gnome2/mod_mgr.c:1720
+msgid "Password"
+msgstr "كلمة السر"
+
+#: ../src/gnome2/mod_mgr.c:1728
+msgid "UID"
+msgstr "الأوصاف الفريدة"
+
+#: ../src/gnome2/mod_mgr.c:1745
+msgid "Module Sources"
+msgstr "مصادر الوحدة"
+
+#: ../src/gnome2/mod_mgr.c:1748
+msgid "Add/Remove"
+msgstr "إضافة / إزالة"
+
+#: ../src/gnome2/mod_mgr.c:1750
+msgid "Choose"
+msgstr "اختر"
+
+#: ../src/gnome2/mod_mgr.c:1754
+#: ../src/gnome2/preferences_dialog.c:1719
+#: ../src/gnome2/sidebar.c:1398
+msgid "Modules"
+msgstr "وحدات"
+
+#: ../src/gnome2/mod_mgr.c:1756
+msgid "Install/Update"
+msgstr "تثبيت / تحديث"
+
+#: ../src/gnome2/mod_mgr.c:1758
+msgid "Maintenance"
+msgstr "الصيانة"
+
+#: ../src/gnome2/mod_mgr.c:1979
+msgid "Please Refresh"
+msgstr "يرجى تحديث"
+
+#: ../src/gnome2/mod_mgr.c:1980
+msgid "Your module list is not up to date!"
+msgstr "قائمة الوحدة النمطية الخاص بك لا يصل حتى الآن!"
+
+#. Zero Bibles is just not workable in Xiphos.
+#: ../src/gnome2/mod_mgr.c:2273
+msgid ""
+"You have uninstalled your last Bible.\n"
+"Xiphos requires at least one."
+msgstr "إلغاء لديك الخاص بالموقع الكتاب المقدس. Xiphos يتطلب واحد على الأقل."
+
+#: ../src/gnome2/mod_mgr.c:2279
+msgid ""
+"There are still no Bibles installed.\n"
+"Xiphos cannot continue without one."
+msgstr "لا توجد حتى الآن تثبيت الاناجيل. Xiphos لا يمكن ان يستمر من دون واحدة."
+
+#: ../src/gnome2/mod_mgr.c:2369
+msgid "Standard remote sources have been loaded."
+msgstr "تم تحميلها المصادر الاعتيادية البعيدة."
+
+#: ../src/gnome2/mod_mgr.c:2375
+msgid "Could not load standard sources from CrossWire."
+msgstr "لا يمكن تحميل المصادر القياسية من CrossWire."
+
+#: ../src/gnome2/mod_mgr.c:2543
+#: ../src/gnome2/mod_mgr.c:2789
+msgid "Remove the selected source"
+msgstr "إزالة مصدر مختارة"
+
+#: ../src/gnome2/mod_mgr.c:2603
+msgid "Enter a remote source"
+msgstr "أدخل مصدر بعيد"
+
+#: ../src/gnome2/mod_mgr.c:2607
+msgid "Caption:"
+msgstr "التعليق :"
+
+#: ../src/gnome2/mod_mgr.c:2608
+msgid "Type:"
+msgstr "النوع :"
+
+#: ../src/gnome2/mod_mgr.c:2609
+msgid "Host:"
+msgstr "المضيف :"
+
+#: ../src/gnome2/mod_mgr.c:2610
+msgid "Directory:"
+msgstr "الدليل :"
+
+#: ../src/gnome2/mod_mgr.c:2611
+msgid "User (optional):"
+msgstr "المستخدم (اختياري) :"
+
+#: ../src/gnome2/mod_mgr.c:2612
+msgid "Password (optional):"
+msgstr "كلمة السر (اختياري) :"
+
+#. this can happen at most once
+#: ../src/gnome2/mod_mgr.c:2639
+msgid "A source by that name already exists."
+msgstr "مصدر هذا الاسم موجود مسبقا."
+
+#: ../src/gnome2/mod_mgr.c:2786
+msgid "Delete a remote source"
+msgstr "حذف مصدر بعيد"
+
+#: ../src/gnome2/navbar_book.c:358
+#: ../src/gnome2/navbar_book_dialog.c:299
+msgid "Go outward, to the section containing this one"
+msgstr "الذهاب إلى الخارج ، إلى المقطع تحتوي على هذا واحد"
+
+#: ../src/gnome2/navbar_book.c:373
+#: ../src/gnome2/navbar_book_dialog.c:314
+msgid "Go to previous item"
+msgstr "الذهاب إلى العنصر السابق"
+
+#: ../src/gnome2/navbar_book.c:387
+#: ../src/gnome2/navbar_book_dialog.c:328
+msgid "Go to next item"
+msgstr "الذهاب إلى البند التالي"
+
+#: ../src/gnome2/navbar_book.c:401
+#: ../src/gnome2/navbar_book_dialog.c:342
+msgid "Go inward, to the first subsection"
+msgstr "الذهاب إلى الداخل ، إلى الفرع الأول"
+
+#: ../src/gnome2/navbar_versekey_dialog.c:868
+#: ../src/gnome2/navbar_versekey_editor.c:876
+#: ../src/gnome2/navbar_versekey_parallel.c:816
+msgid "Synchronize this window's scrolling with the main window"
+msgstr "تزامن هذا الإطار في التمرير مع النافذة الرئيسية"
+
+#: ../src/gnome2/parallel_dialog.c:382
+#: ../src/gnome2/preferences_dialog.c:1725
+msgid "Parallel"
+msgstr "مواز"
+
+#: ../src/gnome2/parallel_view.c:124
+msgid "Detach/Attach"
+msgstr "فصل / إرفاق"
+
+#: ../src/gnome2/parallel_view.c:130
+#: ../ui/xi-menus.glade.h:61
+msgid "Module Options"
+msgstr "خيارات الوحدة"
+
+#: ../src/gnome2/parallel_view.c:269
+#: ../src/gnome2/sidebar.c:615
+#: ../src/gnome2/sidebar.c:621
+#: ../src/gnome2/tabbed_browser.c:255
+#: ../src/main/sidebar.cc:645
+#: ../src/main/sidebar.cc:1001
+#: ../src/main/sidebar.cc:1002
+#: ../src/main/sidebar.cc:1003
+msgid "Parallel View"
+msgstr "عرض مواز"
+
+#: ../src/gnome2/preferences_dialog.c:1240
+#: ../src/gnome2/preferences_dialog.c:1278
+#: ../src/gnome2/preferences_dialog.c:1315
+#: ../src/gnome2/preferences_dialog.c:1350
+#: ../src/gnome2/preferences_dialog.c:1385
+#: ../src/gnome2/preferences_dialog.c:1420
+#: ../src/gnome2/preferences_dialog.c:1455
+#: ../src/gnome2/preferences_dialog.c:1491
+#: ../src/gnome2/preferences_dialog.c:1528
+#: ../src/gnome2/preferences_dialog.c:1580
+#: ../src/gnome2/preferences_dialog.c:1968
+msgid "-- Select --"
+msgstr "-- اختر --"
+
+#: ../src/gnome2/preferences_dialog.c:1542
+msgid "Locale will take effect after restart."
+msgstr "واللغة نافذة المفعول بعد إعادة التشغيل."
+
+#: ../src/gnome2/preferences_dialog.c:1617
+#: ../ui/prefs.glade.h:84
+msgid "Preferences"
+msgstr "تفضيلات"
+
+#: ../src/gnome2/preferences_dialog.c:1699
+msgid "Fonts"
+msgstr "حرة"
+
+#: ../src/gnome2/preferences_dialog.c:1702
+msgid "Color"
+msgstr "اللون"
+
+#: ../src/gnome2/preferences_dialog.c:1705
+msgid "Sizes and Faces"
+msgstr "الأحجام وجوه"
+
+#: ../src/gnome2/preferences_dialog.c:1709
+msgid "General"
+msgstr "العام"
+
+#: ../src/gnome2/preferences_dialog.c:1712
+#: ../ui/prefs.glade.h:100
+msgid "Tabs and Panes"
+msgstr "علامات التبويب والألواح"
+
+#: ../src/gnome2/preferences_dialog.c:1715
+msgid "Options"
+msgstr "خيارات"
+
+#: ../src/gnome2/preferences_dialog.c:1722
+msgid "Main"
+msgstr "الرئيسية"
+
+#: ../src/gnome2/preferences_dialog.c:1728
+msgid "Special"
+msgstr "خاص"
+
+#: ../src/gnome2/preferences_dialog.c:2377
+#: ../src/gnome2/search_dialog.c:460
+msgid "Clear List?"
+msgstr "قائمة واضحة؟"
+
+#: ../src/gnome2/preferences_dialog.c:2378
+#: ../src/gnome2/search_dialog.c:461
+msgid "Are you sure you want to clear the module list?"
+msgstr "هل أنت متأكد أنك تريد مسح قائمة وحدة؟"
+
+#: ../src/gnome2/preferences_dialog.c:2423
+#: ../src/main/search_dialog.cc:700
+msgid "Remove Module?"
+msgstr "إزالة وحدة؟"
+
+#: ../src/gnome2/preferences_dialog.c:2424
+#: ../src/main/search_dialog.cc:701
+msgid "Are you sure you want to remove the selected module?"
+msgstr "هل أنت متأكد أنك تريد إزالة الوحدة المختارة؟"
+
+#: ../src/gnome2/search_dialog.c:68
+#: ../src/main/search_dialog.cc:66
+#: ../src/main/search_sidebar.cc:61
+msgid "Searching the "
+msgstr "البحث في"
+
+#: ../src/gnome2/search_dialog.c:69
+#: ../src/main/search_dialog.cc:67
+#: ../src/main/search_sidebar.cc:62
+msgid " Module"
+msgstr "وحدة"
+
+#: ../src/gnome2/search_dialog.c:70
+#: ../src/main/search_dialog.cc:68
+#: ../src/main/search_sidebar.cc:63
+msgid "found in "
+msgstr "وجدت في"
+
+#: ../src/gnome2/search_dialog.c:419
+#, c-format
+msgid "New List %s"
+msgstr "قائمة جديدة %s"
+
+#: ../src/gnome2/search_dialog.c:643
+msgid "The last module list may not be deleted"
+msgstr "قد لا يكون وحدة قائمة الماضي حذف"
+
+#: ../src/gnome2/search_dialog.c:661
+msgid "Delete list?"
+msgstr "حذف القائمة؟"
+
+#: ../src/gnome2/search_dialog.c:662
+msgid "Are you sure you want to delete:"
+msgstr "هل أنت متأكد أنك تريد حذف :"
+
+#. *****************************************************************************
+#. * Name
+#. *   on_lucene_intro_clicked
+#. *
+#. * Synopsis
+#. *   #include "gui/search_dialog.h"
+#. *
+#. *   void on_lucene_intro_clicked(GtkToggleButton *button,
+#. *				  gpointer user_data)
+#. *
+#. * Description
+#. *
+#. *
+#. * Return value
+#. *   void
+#.
+#: ../src/gnome2/search_dialog.c:785
+msgid ""
+"<b>Syntax overview for optimized \"lucene\" searches</b>\n"
+"Search for verses that contain...\n"
+"\n"
+"loved one\n"
+"	 \"loved\" or \"one\"\n"
+"	This is the same as searching for loved OR one\n"
+"\"loved one\"\n"
+"	The phrase \"loved one\"\n"
+"love*\n"
+"	A word starting with \"love\"\n"
+"	(love OR loves OR loved OR etc...)\n"
+"loved AND one\n"
+"	The word \"loved\" and the word \"one\"\n"
+"	&amp;&amp; can be used in place of AND\n"
+"+loved one\n"
+"	Verses that <b>must</b> contain \"loved\" and <b>may</b> contain \"one\"\n"
+"loved NOT one\n"
+"	\"loved\" but not \"one\"\n"
+"(loved one) AND God\n"
+"	\"loved\" or \"one\" and \"God\"\n"
+"lemma:G2316\n"
+"	Search for the Strong's Greek (\"G\") word number 2316.\n"
+"	Also, select Strong's display on the <i>Attribute Search</i> tab.\n"
+"\n"
+"For complete details, search the web for \"lucene search syntax\"."
+msgstr "<b>نظرة عامة على النحو الأمثل لوسين \"عمليات البحث\"</b> البحث عن الآيات التي تحتوي على... أحب واحدة : \"أحب\" أو \"واحد\" وهذا هو نفس محبوبا أو البحث عن واحد \"بعزيز\" عبارة \"بعزيز\" * الحب كلمة بدءا مع \"الحب\" (أو الحب أو يحب محبوبا أو الخ..) أحب واحد وكلمة \"أحب\" وكلمة \"واحد\" & & يمكن استخدامها في مكان واحد و + أحب الآيات التي <b>يجب</b> أن تحتوي على \"أحب\" ، <b>وربما</b> تحتوي على \"واحد\" أحب ليست واحدة : \"أحب\" ولكن ليس \"واحد\" (أحب واحد) والله : \"أحب\" أو \"واحد\" و \"الله\" المأخوذ : البحث عن اليونانية (ع \") الكلمة رقم 2316\" قوي. G2316 أيضا ، حدد لعرض قوي في التبويب <i>سمة البحث.</i> للحصول على تفاصيل كاملة ، والبحث في الإنترنت عن \"بناء جملة البحث وسين\"."
+
+#. *****************************************************************************
+#. * Name
+#. *   on_attributes_intro_clicked
+#. *
+#. * Synopsis
+#. *   #include "gui/search_dialog.h"
+#. *
+#. *   void on_attributes_intro_clicked(GtkToggleButton *button,
+#. *				  gpointer user_data)
+#. *
+#. * Description
+#. *
+#. *
+#. * Return value
+#. *   void
+#.
+#: ../src/gnome2/search_dialog.c:848
+msgid ""
+"<b>Attribute-based searches</b>\n"
+"Searches for content contained in markup outside the main text. Attributes are footnotes, Strong's numbers, and morphological symbols.\n"
+"\n"
+"Be aware that most such searches can now be done faster via optimized \"lucene\" searches using keyword qualifiers.\n"
+"\n"
+"To use attribute searches, you must select the appropriate button on the <i>Attribute Search</i> tab.\n"
+"* Footnote text is searched just like regular text.\n"
+"* Strong's words are specified as a prefix letter H or G (Hebrew or Greek) and the numeric word identifier, e.g. G2316 to find \"θεός\" (\"God\").\n"
+"* Morphological tags are identified literally, e.g. N-ASF for \"noun, accusative singular feminine\" -- see the Robinson module for details."
+msgstr "<b>المستندة إلى البحث سمة</b> مقترحة للمحتوى الواردة في توصيف خارج النص الرئيسي. سمات والحواشي ، وأرقام قوية ، والرموز الشكلية. كن على علم أنه يمكن الآن البحث الأكثر شيوعا فى مثل هذه ينبغي القيام به \"وسين\" أسرع عن طريق تحسين عمليات البحث باستخدام تصفيات الكلمة الرئيسية لاستخدام عمليات التفتيش السمة ، يجب عليك تحديد الزر المناسب على علامة التبويب <i>بحث سمة</i> * حاشية النص تفتيش مثلما نص عادي * قوي في الكلمات هي على النحو المحدد لحاء حرف بادئة أو زاي (العبرية أو اليونانية) ، وكلمة معرف رقمي ، على سبيل المثال G2316 للعثور على \"θεός\" (\"الله\"). * التي تم تحديدها هي المورفولوجية به حرفيا ، على سبيل المثال ن محامون بلا حدود عن \"الاسم ، النصب المفرد المؤنث\" -- انظر وحدة روبنسون للحصول على تفاصيل."
+
+#: ../src/gnome2/search_sidebar.c:184
+msgid ""
+"This is an inclusive (\"AND\") search:\n"
+"Find matches showing all words."
+msgstr "هذا هو شاملة (\"و\") البحث : البحث عن مباريات عرض جميع الكلمات."
+
+#: ../src/gnome2/search_sidebar.c:200
+msgid "Search Module"
+msgstr "نموذج البحث"
+
+#: ../src/gnome2/search_sidebar.c:214
+msgid "Bible"
+msgstr "الكتاب المقدس"
+
+#: ../src/gnome2/search_sidebar.c:223
+#: ../ui/prefs.glade.h:38
+msgid "Commentary"
+msgstr "تعليق"
+
+#: ../src/gnome2/search_sidebar.c:237
+msgid "Search Type"
+msgstr "نوع البحث"
+
+#: ../src/gnome2/search_sidebar.c:251
+#: ../ui/search-dialog.glade.h:66
+msgid "Multi word"
+msgstr "كلمة متعددة"
+
+#: ../src/gnome2/search_sidebar.c:270
+#: ../ui/search-dialog.glade.h:44
+msgid "Exact phrase"
+msgstr "بالضبط مثل العبارة"
+
+#: ../src/gnome2/search_sidebar.c:284
+msgid "Search Options"
+msgstr "خيارات البحث"
+
+#: ../src/gnome2/search_sidebar.c:312
+msgid "Search Scope"
+msgstr "نطاق البحث"
+
+#: ../src/gnome2/search_sidebar.c:325
+msgid "No scope"
+msgstr "لا مجال"
+
+#: ../src/gnome2/search_sidebar.c:335
+msgid "Use bounds"
+msgstr "استخدام حدود"
+
+#: ../src/gnome2/search_sidebar.c:344
+msgid "Last search"
+msgstr "البحث بالموقع"
+
+#: ../src/gnome2/search_sidebar.c:359
+msgid "Bounds"
+msgstr "حدود"
+
+#: ../src/gnome2/search_sidebar.c:373
+msgid "Lower"
+msgstr "انخفاض"
+
+#: ../src/gnome2/search_sidebar.c:380
+msgid "Upper"
+msgstr "أعلى"
+
+#: ../src/gnome2/sidebar.c:1382
+msgid "Search"
+msgstr "البحث"
+
+#: ../src/gnome2/sidebar_dialog.c:170
+#: ../src/gnome2/sidebar_dialog.c:179
+msgid "Sidebar"
+msgstr "الشريط الجانبي"
+
+#: ../src/gnome2/splash.c:396
+msgid "Powered by the SWORD Project"
+msgstr "بدعم من مشروع السيف"
+
+#: ../src/gnome2/tabbed_browser.c:364
+msgid "Can't create tabs dir."
+msgstr "لا يمكن إنشاء علامات دير."
+
+#: ../src/gnome2/treekey-editor.c:133
+#: ../src/gnome2/treekey-editor.c:192
+#: ../src/gnome2/treekey-editor.c:278
+msgid "Prayer List/Journal Item"
+msgstr "قائمة الصلاة / البند مجلة"
+
+#: ../src/gnome2/treekey-editor.c:134
+#: ../src/gnome2/treekey-editor.c:193
+#: ../src/gnome2/treekey-editor.c:279
+msgid "New name"
+msgstr "اسم جديد"
+
+#: ../src/gnome2/treekey-editor.c:249
+msgid "Remove the selected item"
+msgstr "إزالة العنصر المحدد"
+
+#: ../src/gnome2/utilities.c:2018
+msgid ""
+"An image file's size could not be determined.\n"
+"Xiphos cannot resize images to fit window."
+msgstr "لا يمكن ان حجم ملف صورة يتم تحديدها بعد. Xiphos لا يمكن تغيير حجم الصور لتناسب النافذة."
+
+#: ../src/main/display.cc:230
+#, c-format
+msgid ""
+"Improperly encoded personal annotation label:\n"
+"'%s'"
+msgstr ""
+"ترميز غير صحيح تسمية الشخصية الشرح : \n"
+"%s"
+
+#: ../src/main/display.cc:927
+#: ../src/main/display.cc:989
+#: ../src/main/display.cc:1074
+#: ../ui/export-dialog.glade.h:7
+msgid "Chapter"
+msgstr "الفصل"
+
+#: ../src/main/main.c:122
+msgid "Xiphos does not understand more than one argument."
+msgstr "Xiphos لا يفهم أكثر من وسيطة واحدة."
+
+#: ../src/main/main.c:168
+msgid "Initiating Gecko"
+msgstr "بدء أبو بريص"
+
+#: ../src/main/main.c:174
+msgid "Building Interface"
+msgstr "بناء واجهة"
+
+#: ../src/main/main.c:178
+msgid "Starting Sword"
+msgstr "بدءا السيف"
+
+#: ../src/main/main.c:182
+msgid "Loading Settings"
+msgstr "تحميل إعدادات"
+
+#: ../src/main/main.c:186
+msgid "Displaying Xiphos"
+msgstr "عرض Xiphos"
+
+#: ../src/main/module_dialogs.cc:189
+#: ../src/main/previewer.cc:93
+#: ../ui/prefs.glade.h:85
+msgid "Previewer"
+msgstr "المعاين"
+
+#: ../src/main/module_dialogs.cc:240
+#: ../src/main/module_dialogs.cc:351
+#: ../src/main/previewer.cc:180
+msgid "Footnote"
+msgstr "حاشية"
+
+#: ../src/main/module_dialogs.cc:246
+#: ../src/main/module_dialogs.cc:356
+#: ../src/main/previewer.cc:192
+msgid "Cross Reference"
+msgstr "الصليب المرجعي"
+
+#: ../src/main/module_dialogs.cc:252
+#: ../src/main/module_dialogs.cc:266
+#: ../src/main/module_dialogs.cc:361
+#: ../src/main/module_dialogs.cc:373
+#: ../src/main/previewer.cc:198
+#: ../src/main/previewer.cc:217
+msgid "Strongs"
+msgstr "Strongs"
+
+#: ../src/main/module_dialogs.cc:258
+#: ../src/main/module_dialogs.cc:277
+#: ../src/main/module_dialogs.cc:366
+#: ../src/main/module_dialogs.cc:383
+#: ../src/main/previewer.cc:204
+#: ../src/main/previewer.cc:223
+msgid "Morphology"
+msgstr "مورفولوجيا"
+
+#: ../src/main/module_dialogs.cc:1007
+#: ../src/main/url.cc:518
+msgid "Back to "
+msgstr "العودة إلى"
+
+#: ../src/main/parallel_view.cc:380
+#: ../ui/xi-menus.glade.h:108
+msgid "Strong's Numbers"
+msgstr "قوية وأرقام"
+
+#: ../src/main/parallel_view.cc:390
+#: ../ui/search-dialog.glade.h:52
+#: ../ui/xi-menus.glade.h:44
+msgid "Footnotes"
+msgstr "الحواشي"
+
+#: ../src/main/parallel_view.cc:400
+#: ../ui/search-dialog.glade.h:64
+#: ../ui/xi-menus.glade.h:63
+msgid "Morphological Tags"
+msgstr "العلامات المورفولوجية"
+
+#: ../src/main/parallel_view.cc:410
+#: ../ui/xi-menus.glade.h:48
+msgid "Hebrew Vowel Points"
+msgstr "نقاط العبرية حرف العلة"
+
+#: ../src/main/parallel_view.cc:420
+#: ../ui/xi-menus.glade.h:47
+msgid "Hebrew Cantillation"
+msgstr "العبرية Cantillation"
+
+#: ../src/main/parallel_view.cc:430
+#: ../ui/xi-menus.glade.h:45
+msgid "Greek Accents"
+msgstr "اليونانية اللكنات"
+
+#: ../src/main/parallel_view.cc:440
+msgid "Cross-references"
+msgstr "إحالات"
+
+#: ../src/main/parallel_view.cc:450
+#: ../ui/xi-menus.glade.h:57
+msgid "Lemmas"
+msgstr "Lemmas"
+
+#: ../src/main/parallel_view.cc:460
+#: ../ui/xi-menus.glade.h:46
+msgid "Headings"
+msgstr "العناوين"
+
+#: ../src/main/parallel_view.cc:470
+msgid "Morpheme Segmentation"
+msgstr "Morpheme الإنقسام"
+
+#: ../src/main/parallel_view.cc:484
+#: ../ui/xi-menus.glade.h:117
+msgid "Words of Christ in Red"
+msgstr "كلام المسيح في الأحمر"
+
+#: ../src/main/parallel_view.cc:494
+#: ../ui/xi-menus.glade.h:110
+msgid "Transliteration"
+msgstr "الحروف"
+
+#: ../src/main/parallel_view.cc:504
+msgid "Textual Variants"
+msgstr "المتغيرات النصية"
+
+#: ../src/main/parallel_view.cc:512
+#: ../ui/xi-menus.glade.h:86
+msgid "Primary Reading"
+msgstr "القراءة الأولية"
+
+#: ../src/main/parallel_view.cc:521
+#: ../ui/xi-menus.glade.h:101
+msgid "Secondary Reading"
+msgstr "الثانوية القراءة"
+
+#: ../src/main/parallel_view.cc:530
+#: ../ui/xi-menus.glade.h:9
+msgid "All Readings"
+msgstr "جميع قراءات"
+
+#: ../src/main/parallel_view.cc:688
+msgid "view context"
+msgstr "عرض السياق"
+
+#: ../src/main/prayerlists.cc:74
+msgid "January"
+msgstr "كانون الثاني / يناير"
+
+#: ../src/main/prayerlists.cc:75
+msgid "February"
+msgstr "شباط / فبراير"
+
+#: ../src/main/prayerlists.cc:76
+msgid "March"
+msgstr "آذار / مارس"
+
+#: ../src/main/prayerlists.cc:77
+msgid "April"
+msgstr "نيسان / أبريل"
+
+#: ../src/main/prayerlists.cc:78
+msgid "May"
+msgstr "قد"
+
+#: ../src/main/prayerlists.cc:79
+msgid "June"
+msgstr "حزيران / يونيو"
+
+#: ../src/main/prayerlists.cc:80
+msgid "July"
+msgstr "تموز / يوليو"
+
+#: ../src/main/prayerlists.cc:81
+msgid "August"
+msgstr "آب / أغسطس"
+
+#: ../src/main/prayerlists.cc:82
+msgid "September"
+msgstr "أيلول / سبتمبر"
+
+#: ../src/main/prayerlists.cc:83
+msgid "October"
+msgstr "تشرين الأول / أكتوبر"
+
+#: ../src/main/prayerlists.cc:84
+msgid "November"
+msgstr "تشرين الثاني / نوفمبر"
+
+#: ../src/main/prayerlists.cc:85
+msgid "December"
+msgstr "كانون الأول / ديسمبر"
+
+#: ../src/main/prayerlists.cc:124
+msgid "Growth"
+msgstr "النمو"
+
+#: ../src/main/prayerlists.cc:125
+msgid "<b>For Growth</b><br/>"
+msgstr "<b>من أجل تحقيق النمو</b> <br/>"
+
+#: ../src/main/prayerlists.cc:126
+#: ../src/main/prayerlists.cc:383
+msgid "Salvation"
+msgstr "خلاص"
+
+#: ../src/main/prayerlists.cc:127
+msgid "<b>For Salvation</b><br/>"
+msgstr "<b>للإنقاذ</b> <br/>"
+
+#: ../src/main/prayerlists.cc:128
+#: ../src/main/prayerlists.cc:387
+msgid "Health"
+msgstr "الصحة"
+
+#: ../src/main/prayerlists.cc:129
+msgid "<b>For Health</b><br/>"
+msgstr "<b>للصحة</b> <br/>"
+
+#: ../src/main/prayerlists.cc:130
+msgid "Misc"
+msgstr "متفرقات"
+
+#: ../src/main/prayerlists.cc:131
+msgid "<b>Miscellaneous</b><br/>"
+msgstr "<b>متفرقات</b> <br/>"
+
+#: ../src/main/prayerlists.cc:139
+msgid "Point x"
+msgstr "نقطة العاشر"
+
+#: ../src/main/prayerlists.cc:140
+msgid "<b>(x)</b><br/>"
+msgstr "<b>(خ)</b> <br/>"
+
+#: ../src/main/prayerlists.cc:141
+msgid "Point y"
+msgstr "ذ نقطة"
+
+#: ../src/main/prayerlists.cc:142
+msgid "<b>(y)</b><br/>"
+msgstr "<b>(ذ)</b> <br/>"
+
+#: ../src/main/prayerlists.cc:143
+msgid "Point z"
+msgstr "نقطة ض"
+
+#: ../src/main/prayerlists.cc:144
+msgid "<b>(z)</b><br/>"
+msgstr "<b>(ض)</b> <br/>"
+
+#: ../src/main/prayerlists.cc:152
+msgid "Minor Topic 1"
+msgstr "طفيفة المواضيع 1"
+
+#: ../src/main/prayerlists.cc:153
+msgid "<b>Subtopic 1</b><br/>"
+msgstr "<b>الموضوع الفرعي 1</b> <br/>"
+
+#: ../src/main/prayerlists.cc:155
+msgid "Minor Topic 2"
+msgstr "القاصر الموضوع 2"
+
+#: ../src/main/prayerlists.cc:156
+msgid "<b>Subtopic 2</b><br/>"
+msgstr "<b>الموضوع الفرعي 2</b> <br/>"
+
+#: ../src/main/prayerlists.cc:158
+msgid "Minor Topic 3"
+msgstr "القاصر الموضوع 3"
+
+#: ../src/main/prayerlists.cc:159
+msgid "<b>Subtopic 3</b><br/>"
+msgstr "<b>الموضوع الفرعي 3</b> <br/>"
+
+#: ../src/main/prayerlists.cc:161
+msgid "Minor Topic 4"
+msgstr "القاصر الموضوع 4"
+
+#: ../src/main/prayerlists.cc:162
+msgid "<b>Subtopic 4</b><br/>"
+msgstr "<b>الموضوع الفرعي 4</b> <br/>"
+
+#: ../src/main/prayerlists.cc:242
+msgid "Name for new prayer list or journal"
+msgstr "اسم القائمة الجديدة لصلاة أو مجلة"
+
+#: ../src/main/prayerlists.cc:273
+msgid "Xiphos finds that prayer list already."
+msgstr "Xiphos يرى أن الصلاة القائمة بالفعل."
+
+#: ../src/main/prayerlists.cc:286
+#, c-format
+msgid ""
+"Xiphos cannot create module's path:\n"
+"%s"
+msgstr ""
+"يمكن Xiphos لم يخلق لمسار الوحدة\n"
+"%s"
+
+#: ../src/main/prayerlists.cc:326
+msgid "A basic prayer list. \\par\\par Module created by Xiphos."
+msgstr "قائمة الصلاة الأساسية.\\par \\par الوحدة التي أنشأتها Xiphos."
+
+#: ../src/main/prayerlists.cc:327
+msgid "BasicPrayerList"
+msgstr "BasicPrayerList"
+
+#: ../src/main/prayerlists.cc:341
+msgid "MyPrayerList"
+msgstr "MyPrayerList"
+
+#: ../src/main/prayerlists.cc:342
+msgid "<b>People:</b><br/>Bob<br/>Sam<br/>Sue<br/><br/><b>Church:</b><br/>pews<br/>fellowship<br/>Bibles for missionaries<br/><br/><br/>"
+msgstr "<b>الناس :</b> <br/> بوب <br/> سام <br/> سو <br/><br/> <b>الكنيسة :</b> <br/> المقصورات <br/> زمالة <br/> الاناجيل عن المبشرين <br/><br/><br/>"
+
+#: ../src/main/prayerlists.cc:368
+msgid "A subject-based prayer list. \\par\\par Module created by Xiphos."
+msgstr "الصلاة قائمة على أساس الموضوع.\\par\\par الوحدة التي أنشأتها Xiphos."
+
+#: ../src/main/prayerlists.cc:369
+msgid "SubjectPrayerList"
+msgstr "SubjectPrayerList"
+
+#: ../src/main/prayerlists.cc:384
+msgid "Bob<br/>Sam<br/>Sue<br/>John<br/>"
+msgstr "بوب <br/> سام <br/> سو <br/> جون <br/>"
+
+#: ../src/main/prayerlists.cc:385
+msgid "Spiritual Growth"
+msgstr "النمو الروحي"
+
+#: ../src/main/prayerlists.cc:386
+msgid "Mike<br/>Steve<br/>"
+msgstr "مايك <br/> ستيف <br/>"
+
+#: ../src/main/prayerlists.cc:388
+msgid "Sue<br/>John<br/>"
+msgstr "سو <br/> جون <br/>"
+
+#: ../src/main/prayerlists.cc:414
+msgid "A monthly prayer list. \\par\\par Module created by Xiphos."
+msgstr "قائمة الصلاة شهريا. \\par\\par الوحدة التي أنشأتها Xiphos."
+
+#: ../src/main/prayerlists.cc:415
+msgid "MonthlyPrayerList"
+msgstr "MonthlyPrayerList"
+
+#: ../src/main/prayerlists.cc:466
+msgid "A daily journal. \\par\\par Module created by Xiphos."
+msgstr "اليومية. \\par\\par الوحدة التي أنشأتها Xiphos."
+
+#: ../src/main/prayerlists.cc:467
+msgid "DailyJournal"
+msgstr "DailyJournal"
+
+#: ../src/main/prayerlists.cc:531
+msgid "An outlined topic (e.g. sermon). \\par\\par Module created by Xiphos."
+msgstr "موضوعا المبين (خطبة مثلا). \\par\\par الوحدة التي أنشأتها Xiphos."
+
+#: ../src/main/prayerlists.cc:532
+msgid "OutlinedTopic"
+msgstr "OutlinedTopic"
+
+#: ../src/main/prayerlists.cc:546
+msgid "Major Topic A"
+msgstr "المواضيع الرئيسية و"
+
+#: ../src/main/prayerlists.cc:547
+msgid "<b>Major Topic A</b><br/>"
+msgstr "<b>المواضيع الرئيسية و</b> <br/>"
+
+#: ../src/main/prayerlists.cc:549
+msgid "Major Topic B"
+msgstr "المواضيع الرئيسية باء"
+
+#: ../src/main/prayerlists.cc:550
+msgid "<b>Major Topic B</b><br/>"
+msgstr "<b>المواضيع الرئيسية باء</b> <br/>"
+
+#: ../src/main/prayerlists.cc:552
+msgid "Major Topic C"
+msgstr "المواضيع الرئيسية جيم"
+
+#: ../src/main/prayerlists.cc:553
+msgid "<b>Major Topic C</b><br/>"
+msgstr "<b>المواضيع الرئيسية جيم</b> <br/>"
+
+#: ../src/main/previewer.cc:186
+msgid "User Annotation"
+msgstr "مستخدم التعليق"
+
+#: ../src/main/search_dialog.cc:208
+#, c-format
+msgid "Search result %s: %s"
+msgstr "%s نتيجة البحث : %s"
+
+#: ../src/main/search_dialog.cc:440
+msgid "Delete Range?"
+msgstr "حذف النطاق؟"
+
+#: ../src/main/search_dialog.cc:441
+msgid "Are you sure you want to delete this range?"
+msgstr "هل أنت متأكد أنك تريد حذف هذا النطاق؟"
+
+#: ../src/main/search_dialog.cc:655
+#: ../src/main/search_dialog.cc:1072
+#: ../src/main/search_dialog.cc:1075
+#: ../src/main/search_dialog.cc:1097
+#: ../src/main/search_dialog.cc:1100
+msgid "Search: "
+msgstr "البحث :"
+
+#: ../src/main/search_dialog.cc:1465
+#, c-format
+msgid ""
+"%s:\n"
+"No such module is installed.\n"
+"%s"
+msgstr ""
+"%s:\n"
+" : تثبيت وحدة ، هي ليست\n"
+"%s"
+
+#: ../src/main/search_dialog.cc:1467
+msgid "Please adjust the module list."
+msgstr "الرجاء ضبط قائمة الوحدات."
+
+#: ../src/main/search_dialog.cc:1483
+#, c-format
+msgid "No fast-search index exists for %s.%s%s"
+msgstr "لا مؤشر سريع البحث وجود ل %s%s%s"
+
+#: ../src/main/search_dialog.cc:1485
+msgid ""
+"\n"
+"Search on this module is now `multi word'."
+msgstr ""
+"\n"
+"بحث في هذا النموذج هو الآن `كلمة متعددة."
+
+#: ../src/main/search_dialog.cc:1486
+msgid ""
+"\n"
+"See the Module Manager, Maintenance pane."
+msgstr ""
+"\n"
+"راجع مدير وحدة ، صيانة جزء."
+
+#: ../src/main/search_dialog.cc:1549
+msgid "Search finished"
+msgstr "الانتهاء من البحث"
+
+#: ../src/main/search_sidebar.cc:100
+msgid "matches"
+msgstr "المباريات"
+
+#: ../src/main/settings.c:105
+msgid "$HOME is not set!"
+msgstr "لم يتم تعيين المنزل $!"
+
+#: ../src/main/settings.c:118
+#, c-format
+msgid ""
+"Xiphos can not create  .xiphos:\n"
+"%s\n"
+"\n"
+"Xiphos cannot continue."
+msgstr ""
+
+#: ../src/main/settings.c:131
+#: ../src/main/settings.c:140
+#: ../src/main/settings.c:149
+msgid "can not create "
+msgstr "لا يمكن إنشاء"
+
+#: ../src/main/settings.c:179
+msgid ""
+"Empty settings file -- backup recovery attempted.\n"
+"Some information may have been lost."
+msgstr "قد تكون معلومات ملف إعدادات فارغ فقد حاول -- استرداد بعض النسخ الاحتياطي."
+
+#: ../src/main/settings.c:181
+msgid "Empty settings file -- no backup?!? Information lost!"
+msgstr "إعدادات ملف فارغ -- أي النسخ الاحتياطي؟!؟ فقدان المعلومات!"
+
+#: ../src/main/settings.c:209
+msgid ""
+"There are no Bibles installed.\n"
+"Evidently, you declined to install any.\n"
+"\n"
+"Without any Bible modules to display,\n"
+"Xiphos cannot proceed,\n"
+"and will now exit."
+msgstr ""
+
+#: ../src/main/settings.c:212
+msgid "Bible module installation complete."
+msgstr "الكتاب المقدس تركيب وحدة كاملة."
+
+#: ../src/main/sidebar.cc:409
+msgid "verse"
+msgstr "آية"
+
+#: ../src/main/sidebar.cc:470
+msgid "chapter"
+msgstr "الفصل"
+
+#: ../src/main/sword.cc:540
+msgid ""
+"Xiphos's file for language\n"
+"abbreviations is missing."
+msgstr "في ملف Xiphos للغة الاختصارات مفقود."
+
+#: ../src/main/sword.cc:547
+msgid ""
+"Xiphos's language abbreviation\n"
+"file cannot be opened."
+msgstr "اختصار الملف لا يمكن للغة Xiphos يمكن فتح."
+
+#: ../src/main/sword.cc:560
+msgid ""
+"Xiphos cannot allocate space\n"
+"for language abbreviations."
+msgstr "لا يمكن Xiphos تخصيص مساحة للغة الاختصارات."
+
+#: ../src/main/sword.cc:567
+msgid ""
+"Xiphos cannot read the\n"
+"language abbreviation file."
+msgstr "لا يمكن Xiphos قراءة الملف اختصار اللغة."
+
+#. either we were given a null sys_locale, or it didn't match anything.
+#: ../src/main/sword.cc:649
+#, c-format
+msgid ""
+"No matching locale found for `%s'.\n"
+"%s"
+msgstr ""
+"وجدت مطابقة للغة لا سيصدره '%s'.\n"
+"%s"
+
+#: ../src/main/sword.cc:651
+msgid "Book names and menus may not be translated."
+msgstr "قد لا أسماء الكتاب والقوائم يمكن ترجمتها."
+
+#: ../src/main/sword.cc:1247
+msgid "Daily devotional was requested, but there are none installed."
+msgstr "وطلب اليومية تعبدي ، ولكن هناك شيء مثبت."
+
+#: ../src/main/sword.cc:1483
+msgid ""
+"<b>Locked Module.</b>\n"
+"\n"
+"<u>You are opening a module which requires a <i>key</i>.</u>\n"
+"\n"
+"The module is locked, meaning that the content is encrypted by its publisher, and you must enter its key in order for the content to become useful.  This key should have been received by you on the web page which confirmed your purchase, or perhaps sent via email after purchase.\n"
+"\n"
+"Please enter the key in the dialog."
+msgstr "<b>تأمين وحدة نمطية.</b> <u>أنت تفتح وحدة نمطية الذي يتطلب <i>مفتاح.</i></u> مؤمن وحدة ، وهذا يعني أن المحتوى المشفرة بواسطة الناشر لها ، ويجب عليك إدخال المفتاح لكي المحتوى لتصبح مفيدة. وقد تم هذا المفتاح يجب أن تلقى من قبلك في صفحة الويب التي أكدت الشراء ، أو ربما ترسل عبر البريد الإلكتروني بعد شراء الرجاء إدخال المفتاح في الحوار."
+
+#: ../src/main/tab_history.c:219
+msgid "Clear History"
+msgstr "مسح المحفوظات"
+
+#: ../src/main/url.cc:98
+msgid "URL not found:"
+msgstr "لم يتم العثور على عنوان الموقع :"
+
+#: ../src/main/url.cc:188
+#, c-format
+msgid "Xiphos could not execute %s"
+msgstr "Xiphos تعذر تنفيذ %s."
+
+#: ../src/main/url.cc:196
+msgid "Viewer error:\n"
+msgstr "عارض الخطأ \n"
+
+#: ../src/main/url.cc:269
+#, c-format
+msgid "Show %s in main window"
+msgstr "إظهار %s الإطار الرئيسي ليالي"
+
+#: ../src/main/xml.c:84
+#: ../src/main/xml.c:468
+#, c-format
+msgid "Document not created successfully. \n"
+msgstr "لا مستند تم إنشاؤه بنجاح.\n"
+
+#: ../src/main/xml.c:93
+msgid "Personal"
+msgstr "الشخصية"
+
+#: ../src/main/xml.c:94
+msgid "What must I do to be saved?"
+msgstr "ماذا يجب أن أفعل لكي أخلص؟"
+
+#: ../src/main/xml.c:96
+#: ../src/main/xml.c:97
+msgid "Acts 16:31"
+msgstr "أعمال 16:31"
+
+#: ../src/main/xml.c:101
+#: ../src/main/xml.c:102
+msgid "Eph 2:8,9"
+msgstr "أف 2:8،9"
+
+#: ../src/main/xml.c:106
+#: ../src/main/xml.c:107
+msgid "Romans 1:16"
+msgstr "رومية 1:16"
+
+#: ../src/main/xml.c:110
+msgid "What is the Gospel?"
+msgstr "ما هو الإنجيل؟"
+
+#: ../src/main/xml.c:112
+#: ../src/main/xml.c:113
+msgid "1 Cor 15:1-4"
+msgstr "1 كو 15:1-4"
+
+#: ../src/main/xml.c:417
+#: ../src/main/xml.c:1174
+#, c-format
+msgid "Document not parsed successfully. \n"
+msgstr "تحليل الوثيقة لا بنجاح.\n"
+
+#: ../src/main/xml.c:423
+#: ../src/main/xml.c:741
+#: ../src/main/xml.c:1055
+#: ../src/main/xml.c:1253
+#, c-format
+msgid "empty document \n"
+msgstr "وثيقة فارغة\n"
+
+#: ../src/main/xml.c:429
+#, c-format
+msgid "wrong type, root node != SwordBookmarks\n"
+msgstr ""
+
+#: ../src/main/xml.c:480
+msgid "Old Testament"
+msgstr "العهد القديم"
+
+#: ../src/main/xml.c:481
+msgid "Gen - Mal"
+msgstr "الجنرال -- المال"
+
+#: ../src/main/xml.c:486
+msgid "New Testament"
+msgstr "العهد الجديد"
+
+#: ../src/main/xml.c:487
+msgid "Mat - Rev"
+msgstr "حصيرة -- القس"
+
+#: ../src/main/xml.c:493
+msgid "Sample Module List"
+msgstr "عينة قائمة الوحدات"
+
+#: ../src/main/xml.c:747
+#: ../src/main/xml.c:1061
+#, c-format
+msgid "wrong type, root node != %s\n"
+msgstr "نوع الخطأ ، والعقدة الجذر! = %s\n"
+
+#: ../src/main/xml.c:1214
+#, c-format
+msgid ""
+"Save of settings failed! stat %d, size %d\n"
+"%s"
+msgstr ""
+
+#: ../src/main/xml.c:1216
+msgid "Attempting to revert to previous save."
+msgstr "تحاول العودة الى انقاذ السابقة."
+
+#: ../ui/bookmarks.glade.h:1
+msgid "Add Bookmark"
+msgstr "إضافة إشارة مرجعية"
+
+#: ../ui/bookmarks.glade.h:2
+#: ../ui/markverse.glade.h:1
+msgid "Bookmark Dialog"
+msgstr "المرجعية حوار"
+
+#: ../ui/bookmarks.glade.h:3
+msgid "Bookmark Folder Treeview"
+msgstr "المرجعية مجلد تريفيف"
+
+#: ../ui/bookmarks.glade.h:4
+#: ../ui/markverse.glade.h:2
+msgid "Cancel Bookmark"
+msgstr "إلغاء المرجعية"
+
+#: ../ui/bookmarks.glade.h:5
+#: ../ui/markverse.glade.h:3
+msgid "Create new folder"
+msgstr "إنشاء مجلد جديد"
+
+#: ../ui/bookmarks.glade.h:6
+msgid "Label Entry"
+msgstr "تسمية الدخول"
+
+#: ../ui/bookmarks.glade.h:7
+msgid "Label:"
+msgstr "الشركة المنتجة :"
+
+#: ../ui/bookmarks.glade.h:8
+#: ../ui/markverse.glade.h:6
+msgid "Module Entry"
+msgstr "وحدة الدخول"
+
+#: ../ui/bookmarks.glade.h:9
+#: ../ui/markverse.glade.h:7
+msgid "Module:"
+msgstr "الوحدة :"
+
+#: ../ui/bookmarks.glade.h:10
+msgid "New ..."
+msgstr "جديد..."
+
+#: ../ui/bookmarks.glade.h:11
+#: ../ui/markverse.glade.h:8
+#: ../ui/xi-menus.glade.h:64
+msgid "New Folder"
+msgstr "مجلد جديد"
+
+#: ../ui/bookmarks.glade.h:12
+#: ../ui/markverse.glade.h:10
+msgid "Verse Entry"
+msgstr "الآية الدخول"
+
+#: ../ui/bookmarks.glade.h:13
+#: ../ui/markverse.glade.h:11
+msgid "Verse:"
+msgstr "الآية :"
+
+#: ../ui/editor_note.xml.h:1
+msgid "Delete the current note"
+msgstr "حذف الملاحظة الحالية"
+
+#: ../ui/editor_note.xml.h:2
+#: ../ui/editor_studypad.xml.h:4
+msgid "E_xit"
+msgstr "E_xit"
+
+#: ../ui/editor_note.xml.h:3
+#: ../ui/editor_studypad.xml.h:5
+msgid "Exit"
+msgstr "خروج"
+
+#: ../ui/editor_note.xml.h:4
+#: ../ui/editor_studypad.xml.h:6
+msgid "Exit the program"
+msgstr "إنهاء البرنامج"
+
+#: ../ui/editor_note.xml.h:5
+#: ../ui/editor_studypad.xml.h:7
+msgid "For_mat"
+msgstr "For_mat"
+
+#: ../ui/editor_note.xml.h:6
+#: ../ui/editor_studypad.xml.h:8
+msgid "HTML Format switch"
+msgstr "أتش تي أم أل تنسيق التبديل"
+
+#: ../ui/editor_note.xml.h:7
+#: ../ui/editor_studypad.xml.h:9
+msgid "HTML mode"
+msgstr "أتش تي أم أل النمط"
+
+#: ../ui/editor_note.xml.h:8
+msgid "Preview the note to be printed"
+msgstr "التي سيتم طباعتها معاينة ملاحظة"
+
+#: ../ui/editor_note.xml.h:10
+msgid "Print this note"
+msgstr "طباعة هذه المذكرة"
+
+#: ../ui/editor_note.xml.h:12
+msgid "Save the current note"
+msgstr "حفظ المذكرة الحالية"
+
+#: ../ui/editor_note.xml.h:13
+msgid "_Delete Personal Comment"
+msgstr "_Delete التعليق الشخصية"
+
+#: ../ui/editor_note.xml.h:16
+msgid "_Save (Personal Comment)"
+msgstr "_Save (تعليق شخصي)"
+
+#: ../ui/editor_studypad.xml.h:1
+msgid "Add this file to your bookmarks"
+msgstr "أضف هذا الملف إلى قائمة العناوين"
+
+#: ../ui/editor_studypad.xml.h:3
+msgid "Create a new document"
+msgstr "إنشاء مستند جديد"
+
+#: ../ui/editor_studypad.xml.h:10
+msgid "New Document"
+msgstr "مستند جديد"
+
+#: ../ui/editor_studypad.xml.h:11
+msgid "Open"
+msgstr "فتح"
+
+#: ../ui/editor_studypad.xml.h:12
+msgid "Open a file in Studypad"
+msgstr "فتح ملف في Studypad"
+
+#: ../ui/editor_studypad.xml.h:13
+msgid "Preview the document to be printed"
+msgstr "التي سيتم طباعتها معاينة الوثيقة"
+
+#: ../ui/editor_studypad.xml.h:15
+msgid "Print this document"
+msgstr "طباعة هذه الوثيقة"
+
+#: ../ui/editor_studypad.xml.h:17
+msgid "Save AS"
+msgstr "حفظ باسم"
+
+#: ../ui/editor_studypad.xml.h:18
+msgid "Save the current file"
+msgstr "حفظ الملف الحالي"
+
+#: ../ui/editor_studypad.xml.h:19
+msgid "Save the current file as"
+msgstr "حفظ الملف الحالي"
+
+#: ../ui/export-dialog.glade.h:1
+msgid ": "
+msgstr ":"
+
+#: ../ui/export-dialog.glade.h:2
+msgid "<b>Copy</b>"
+msgstr "<b>نسخة</b>"
+
+#: ../ui/export-dialog.glade.h:3
+msgid "<b>Export</b>"
+msgstr "<b>تصدير</b>"
+
+#: ../ui/export-dialog.glade.h:4
+msgid "<b>Format</b>"
+msgstr "<b>تنسيق</b>"
+
+#: ../ui/export-dialog.glade.h:5
+#: ../ui/prefs.glade.h:27
+msgid "Book"
+msgstr "كتاب"
+
+#: ../ui/export-dialog.glade.h:6
+msgid "Book Radio Button"
+msgstr "كتاب زر الراديو"
+
+#: ../ui/export-dialog.glade.h:8
+msgid "Chapter Radio Button"
+msgstr "الفصل زر الراديو"
+
+#: ../ui/export-dialog.glade.h:9
+#: ../ui/xi-menus.glade.h:20
+msgid "Copy/Export Passage"
+msgstr "نسخة ممر للتصدير /"
+
+#: ../ui/export-dialog.glade.h:10
+msgid "Export Passage Cancel"
+msgstr "تصدير ممر إلغاء"
+
+#: ../ui/export-dialog.glade.h:11
+msgid "Export Passage OK"
+msgstr "تصدير ممر موافق"
+
+#: ../ui/export-dialog.glade.h:12
+msgid "Export complete book"
+msgstr "تصدير الكتاب كاملة"
+
+#: ../ui/export-dialog.glade.h:13
+msgid "Export complete chapter"
+msgstr "تصدير الفصل الكامل"
+
+#: ../ui/export-dialog.glade.h:14
+msgid "Export single verse"
+msgstr "تصدير آية واحدة"
+
+#: ../ui/export-dialog.glade.h:15
+msgid "HTML"
+msgstr "أتش تي أم أل"
+
+#: ../ui/export-dialog.glade.h:16
+msgid "HTML Radio Button"
+msgstr "أتش تي أم أل زر الراديو"
+
+#: ../ui/export-dialog.glade.h:17
+msgid "Key"
+msgstr "الرئيسية"
+
+#: ../ui/export-dialog.glade.h:18
+msgid "Plain Text"
+msgstr "نص عادي"
+
+#: ../ui/export-dialog.glade.h:19
+msgid "Plain Text Radio Button"
+msgstr "راديو عادي نص الزر"
+
+#: ../ui/export-dialog.glade.h:21
+msgid "Save Export As"
+msgstr "حفظ وتصدير"
+
+#: ../ui/export-dialog.glade.h:22
+msgid "Verse"
+msgstr "آية"
+
+#: ../ui/export-dialog.glade.h:23
+msgid "Verse Radio Button"
+msgstr "الآية زر الراديو"
+
+#: ../ui/export-dialog.glade.h:24
+msgid "Verse range"
+msgstr "الآية مجموعة"
+
+#: ../ui/export-dialog.glade.h:25
+msgid "Version"
+msgstr "الإصدار"
+
+#: ../ui/markverse.glade.h:4
+msgid "Mark"
+msgstr "مارك"
+
+#: ../ui/markverse.glade.h:5
+msgid "Mark/Unmark Verse"
+msgstr "العلامة آية عدم تحديد /"
+
+#: ../ui/markverse.glade.h:9
+msgid "Unmark"
+msgstr "عدم تحديد"
+
+#: ../ui/module-manager.glade.h:1
+msgid "<b>Add and Remove Sources</b>"
+msgstr "<b>إضافة وإزالة مصادر</b>"
+
+#: ../ui/module-manager.glade.h:2
+msgid "<b>Install Destination</b>"
+msgstr "<b>تثبيت الوجهة</b>"
+
+#: ../ui/module-manager.glade.h:3
+msgid "<b>Install Source</b>"
+msgstr "<b>تثبيت المصدر</b>"
+
+#: ../ui/module-manager.glade.h:4
+msgid "<b>Module Manager</b>"
+msgstr "<b>مدير وحدة</b>"
+
+#. do not translate <b> and </b> they are html formating
+#: ../ui/module-manager.glade.h:6
+msgid "<b>Sword</b>"
+msgstr "<b>سيف</b>"
+
+#: ../ui/module-manager.glade.h:7
+msgid "<b>WARNING:</b> If you live in a persecuted country use with care."
+msgstr "<b>تحذير :</b> إذا كنت تعيش في بلد يضطهد استخدام بعناية."
+
+#: ../ui/module-manager.glade.h:8
+msgid "<b>Warning:</b> If you live in a persecuted country and do not wish to risk detection you should NOT use  the remote installation feature! "
+msgstr "<b>تحذير :</b> إذا كنت تعيش في بلد واضطهاد لا ترغب في الكشف عن المخاطر الذي تستخدمه ليس الميزة التثبيت عن بعد!"
+
+#: ../ui/module-manager.glade.h:9
+msgid "<i>Personal area, for your use only:</i>"
+msgstr "<i>الشخصية المنطقة ، للاستخدام الخاص فقط :</i>"
+
+#: ../ui/module-manager.glade.h:10
+msgid "<i>System area, for all users:</i>"
+msgstr "<i>نظام المناطق ، لكافة المستخدمين :</i>"
+
+#: ../ui/module-manager.glade.h:11
+msgid "Add a custom remote install source. You must know its hostname and the folder where its repository lives."
+msgstr "أضف مخصص مصدر تثبيت البعيد. يجب أن تعرف اسم المضيف ، والمجلد حيث يعيشون على المخزون."
+
+#: ../ui/module-manager.glade.h:12
+msgid "Add a local folder as an install source, typically on a cdrom or flash drive.  Such a folder contains subfolders \"mods.d\" and \"modules\"."
+msgstr "إضافة مجلد المحلية كمصدر للتثبيت ، وعادة على محرك قرص مدمج أو فلاش. هذا المجلد يحتوي على مجلدات فرعية \"mods.d\" و \"الوحدات\"."
+
+#: ../ui/module-manager.glade.h:13
+msgid "Build an index of the selected modules, for optimized (\"lucene\") searching."
+msgstr "بناء فهرس من وحدات مختارة ، الأمثل ل(\"وسين\") البحث."
+
+#: ../ui/module-manager.glade.h:14
+msgid "Continue"
+msgstr "مواصلة"
+
+#: ../ui/module-manager.glade.h:15
+msgid "Create a zip archive of the selected modules."
+msgstr "إنشاء أرشيف مضغوط من وحدات مختارة."
+
+#: ../ui/module-manager.glade.h:16
+msgid "Current Remote Sources"
+msgstr "مصادر التيار البعيد"
+
+#: ../ui/module-manager.glade.h:17
+msgid "Current local sources"
+msgstr "المحلية المصادر الحالية"
+
+#: ../ui/module-manager.glade.h:18
+msgid "Delete the fast-search index of the selected modules."
+msgstr "حذف فهرس البحث السريع من وحدات مختارة."
+
+#: ../ui/module-manager.glade.h:19
+msgid "Home dir"
+msgstr "الصفحة الرئيسية دير"
+
+#: ../ui/module-manager.glade.h:20
+msgid "Install or update the selected modules"
+msgstr "تثبيت أو تحديث وحدات مختارة"
+
+#: ../ui/module-manager.glade.h:21
+msgid "Load and synchronize the standard set of known repositories, as maintained at crosswire.org, with your current remote sources."
+msgstr "تحميل ومزامنة مجموعة قياسية من المستودعات المعروفة ، كما حافظت على crosswire.org ، مع مصادر البريد البعيد الحالي."
+
+#: ../ui/module-manager.glade.h:22
+msgid "Local"
+msgstr "المحلية"
+
+#: ../ui/module-manager.glade.h:23
+msgid "Local Install Folder"
+msgstr "المحلية تثبيت مجلد"
+
+#: ../ui/module-manager.glade.h:24
+msgid "Module Manager"
+msgstr "مدير وحدة"
+
+#: ../ui/module-manager.glade.h:25
+msgid "Open a brief introductory explanation of how the Module Manager works."
+msgstr "فتح شرحا موجزا عن كيفية استهلالي مدير وحدة الأعمال."
+
+#: ../ui/module-manager.glade.h:26
+msgid "Refresh Xiphos' knowledge of what modules are available at the selected remote repository"
+msgstr "تحديث Xiphos &#39;معرفة ما تتوفر وحدات مختارة في مستودع بعيد"
+
+#: ../ui/module-manager.glade.h:27
+msgid "Remote"
+msgstr "بعيد"
+
+#: ../ui/module-manager.glade.h:28
+msgid "Remove a remote install source."
+msgstr "إزالة مصدر تثبيت البعيد."
+
+#: ../ui/module-manager.glade.h:29
+msgid "Remove one of your local folders as an install source."
+msgstr "إزالة واحد من المجلدات المحلية كمصدر تثبيت."
+
+#: ../ui/module-manager.glade.h:30
+msgid "Remove the selected modules from your system"
+msgstr "إزالة وحدات مختارة من النظام الخاص بك"
+
+#: ../ui/module-manager.glade.h:31
+msgid "Sword sys dir"
+msgstr "سيف دير تميز الكلية"
+
+#: ../ui/module-manager.glade.h:32
+msgid "_Archive"
+msgstr "_Archive"
+
+#: ../ui/module-manager.glade.h:33
+msgid "_Delete Index"
+msgstr "مؤشر _Delete"
+
+#: ../ui/module-manager.glade.h:34
+msgid "_Index"
+msgstr "_Index"
+
+#: ../ui/module-manager.glade.h:35
+msgid "_Install"
+msgstr "_Install"
+
+#: ../ui/module-manager.glade.h:36
+msgid "_Load Standard"
+msgstr "_Load قياسي"
+
+#: ../ui/module-manager.glade.h:37
+msgid "_View Intro"
+msgstr "_View مقدمة"
+
+#: ../ui/navbar_versekey.glade.h:1
+msgid "1"
+msgstr "1"
+
+#: ../ui/navbar_versekey.glade.h:2
+msgid "<b>Revelation of John</b>"
+msgstr "<b>الوحي من جون</b>"
+
+#: ../ui/navbar_versekey.glade.h:3
+msgid "Book Selector Button"
+msgstr "كتاب محدد زر"
+
+#: ../ui/navbar_versekey.glade.h:4
+msgid "Choose book to display"
+msgstr "اختيار الكتاب لعرض"
+
+#: ../ui/navbar_versekey.glade.h:5
+msgid "Drop down history list"
+msgstr "قطرة إلى أسفل قائمة التاريخ"
+
+#: ../ui/navbar_versekey.glade.h:6
+msgid "Reference Entry"
+msgstr "إشارة الدخول"
+
+#: ../ui/navbar_versekey.glade.h:7
+msgid "Toggle Chapter Button"
+msgstr "تبديل الفصل زر"
+
+#: ../ui/navbar_versekey.glade.h:8
+msgid "Toggle Verse Button"
+msgstr "تبديل الآية زر"
+
+#: ../ui/prefs.glade.h:1
+msgid ""
+"-2\n"
+"-1\n"
+"+0\n"
+"+1\n"
+"+2\n"
+"+3\n"
+"+4\n"
+"+5"
+msgstr "-2 -1 +0 +1 +2 +3 +4 +5"
+
+#: ../ui/prefs.glade.h:9
+msgid "<b>Font Colors</b>"
+msgstr "<b>الخط الألوان</b>"
+
+#: ../ui/prefs.glade.h:10
+msgid "<b>Font Sizes</b>"
+msgstr "<b>أحجام الخط</b>"
+
+#: ../ui/prefs.glade.h:11
+msgid "<b>General</b>"
+msgstr "<b>العام</b>"
+
+#: ../ui/prefs.glade.h:12
+msgid "<b>Main Window Modules</b>"
+msgstr "<b>نافذة الوحدات الرئيسية</b>"
+
+#: ../ui/prefs.glade.h:13
+#: ../ui/search-dialog.glade.h:5
+msgid "<b>Modules</b>"
+msgstr "<b>وحدات</b>"
+
+#: ../ui/prefs.glade.h:14
+msgid "<b>Show</b>"
+msgstr "<b>عرض</b>"
+
+#: ../ui/prefs.glade.h:15
+msgid "<b>Special Purpose Modules</b>"
+msgstr "<b>وحدات للاستعمالات الخاصة</b>"
+
+#: ../ui/prefs.glade.h:16
+msgid "<b>StudyPad default directory</b>"
+msgstr "<b>StudyPad الدليل الافتراضي</b>"
+
+#: ../ui/prefs.glade.h:17
+msgid "<b>Tabs</b>"
+msgstr "<b>علامات</b>"
+
+#: ../ui/prefs.glade.h:18
+#: ../ui/search-dialog.glade.h:15
+msgid "Add Modules"
+msgstr "إضافة وحدات"
+
+#: ../ui/prefs.glade.h:19
+msgid "All displayed font sizes are relative to this choice"
+msgstr "جميع أحجام الخطوط المعروضة النسبية لهذا الاختيار"
+
+#: ../ui/prefs.glade.h:20
+msgid "Apply high-contrast highlight to current verse - see color pickers"
+msgstr "تطبيق عالية التباين تسليط الضوء على الآية الحالية -- انظر جامعي اللون"
+
+#: ../ui/prefs.glade.h:21
+msgid "Automatically resize image content to fit the pane"
+msgstr "تغيير حجم الصور تلقائيا لتتناسب مع محتوى جزء"
+
+#: ../ui/prefs.glade.h:22
+msgid "Background"
+msgstr "الخلفية"
+
+#: ../ui/prefs.glade.h:23
+msgid "Base font size"
+msgstr "قاعدة حجم الخط"
+
+#: ../ui/prefs.glade.h:24
+msgid "Bible Texts"
+msgstr "نصوص الكتاب المقدس"
+
+#: ../ui/prefs.glade.h:25
+msgid "Bible Texts Checkbox"
+msgstr "نصوص الكتاب المقدس خانة"
+
+#: ../ui/prefs.glade.h:26
+msgid "Biblical Text"
+msgstr "نص الكتاب المقدس"
+
+#: ../ui/prefs.glade.h:28
+msgid "Change Biblical Text Combo"
+msgstr "تغيير النص الانجيلي كومبو"
+
+#: ../ui/prefs.glade.h:29
+msgid "Change Book Combo"
+msgstr "تغيير كتاب كومبو"
+
+#: ../ui/prefs.glade.h:30
+msgid "Change Commentary Combo"
+msgstr "تغيير التعليق كومبو"
+
+#: ../ui/prefs.glade.h:31
+msgid "Change Default Dictionary Combo"
+msgstr "تغيير القاموس الافتراضي كومبو"
+
+#: ../ui/prefs.glade.h:32
+msgid "Change Dictionary Combo"
+msgstr "تغيير قاموس كومبو"
+
+#: ../ui/prefs.glade.h:33
+msgid "Change Personal Notes Combo"
+msgstr "تغيير الملاحظات الشخصية كومبو"
+
+#: ../ui/prefs.glade.h:34
+#: ../ui/search-dialog.glade.h:21
+msgid "Clear Modules from List Button"
+msgstr "واضحة وحدات من قائمة زر"
+
+#: ../ui/prefs.glade.h:35
+#: ../ui/search-dialog.glade.h:22
+msgid "Clear all modules from the list"
+msgstr "واضح من جميع وحدات قائمة"
+
+#: ../ui/prefs.glade.h:37
+msgid "Commentaries Checkbox"
+msgstr "التعليقات خانة"
+
+#: ../ui/prefs.glade.h:39
+msgid "Commonly -1, to make verse numbers less obtrusive"
+msgstr "عادة -1 ، لجعل الأرقام الآية أقل فظاظة"
+
+#: ../ui/prefs.glade.h:40
+msgid "Cover"
+msgstr "تغطية"
+
+#: ../ui/prefs.glade.h:41
+msgid "Cross-references in verse list"
+msgstr "إحالات في قائمة الآية"
+
+#: ../ui/prefs.glade.h:42
+msgid "Current Verse"
+msgstr "الآية الحالية"
+
+#: ../ui/prefs.glade.h:43
+msgid "Daily Devotional"
+msgstr "صحيفة عبادي"
+
+#: ../ui/prefs.glade.h:44
+msgid "Daily Devotional Combo"
+msgstr "يوميا عبادي كومبو"
+
+#: ../ui/prefs.glade.h:45
+msgid "Default Dictionary"
+msgstr "القاموس الافتراضي"
+
+#: ../ui/prefs.glade.h:46
+#: ../ui/search-dialog.glade.h:39
+msgid "Delete Selected Module From List Button"
+msgstr "حذف وحدة مختارة من قائمة زر"
+
+#: ../ui/prefs.glade.h:47
+msgid "Dictionary"
+msgstr "القاموس"
+
+#: ../ui/prefs.glade.h:48
+msgid "Dictionary/Lexicon"
+msgstr "قاموس / معجم"
+
+#: ../ui/prefs.glade.h:49
+msgid "Dictionary/Lexicon Checkbox"
+msgstr "معجم القاموس خانة /"
+
+#: ../ui/prefs.glade.h:50
+msgid "Enable Prayer Lists"
+msgstr "قوائم تمكين الصلاة"
+
+#: ../ui/prefs.glade.h:51
+msgid "Enable Prayer Lists Checkbox"
+msgstr "قوائم الصلاة تمكين خانة"
+
+#: ../ui/prefs.glade.h:52
+msgid "Font Colors"
+msgstr "الخط الألوان"
+
+#: ../ui/prefs.glade.h:53
+msgid "Font Misc"
+msgstr "الخط متفرقات"
+
+#: ../ui/prefs.glade.h:54
+msgid "Font preferences, per language"
+msgstr "تفضيلات الخط ، لكل لغة"
+
+#: ../ui/prefs.glade.h:55
+msgid "Foreground"
+msgstr "المقدمة"
+
+#: ../ui/prefs.glade.h:56
+msgid "General Misc"
+msgstr "متفرقات عامة"
+
+#: ../ui/prefs.glade.h:57
+msgid "Greek Lexicon"
+msgstr "معجم اليونانية"
+
+#: ../ui/prefs.glade.h:58
+msgid "Greek Lexicon Combo"
+msgstr "معجم اليونانية كومبو"
+
+#: ../ui/prefs.glade.h:59
+msgid "Hebrew Lexicon"
+msgstr "معجم العبرية"
+
+#: ../ui/prefs.glade.h:60
+msgid "Hebrew Lexicon Combo"
+msgstr "معجم العبرية كومبو"
+
+#: ../ui/prefs.glade.h:61
+msgid "Highlight"
+msgstr "تسليط الضوء"
+
+#: ../ui/prefs.glade.h:62
+msgid "Highlight Background"
+msgstr "تسليط الضوء على الخلفية"
+
+#: ../ui/prefs.glade.h:63
+msgid "Highlight Foreground"
+msgstr "تسليط الضوء على المقدمة"
+
+#: ../ui/prefs.glade.h:64
+msgid "Highlight current verse"
+msgstr "تسليط الضوء على الآية الحالية"
+
+#: ../ui/prefs.glade.h:65
+msgid "Highlight current verse check box"
+msgstr "تسليط الضوء على الاختيار الآية الحالية مربع"
+
+#: ../ui/prefs.glade.h:66
+msgid "Highlight user annotations"
+msgstr "الشروح تمييز المستخدم"
+
+#: ../ui/prefs.glade.h:67
+msgid "Highlight user annotations check box"
+msgstr "الشروح المستخدم تمييز خانة"
+
+#: ../ui/prefs.glade.h:68
+msgid "If you have set a preferred daily devotion module, its entry for today will be shown at startup."
+msgstr "إذا كان لديك مجموعة مفضل التفاني وحدة يوميا ، سيظهر دخولها لهذا اليوم عند بدء التشغيل."
+
+#: ../ui/prefs.glade.h:69
+msgid "Invert color pairs"
+msgstr "أزواج عكس اللون"
+
+#: ../ui/prefs.glade.h:70
+msgid "Language Font Combo"
+msgstr "لغة الخط كومبو"
+
+#: ../ui/prefs.glade.h:71
+msgid "Links"
+msgstr "الروابط"
+
+#: ../ui/prefs.glade.h:72
+msgid "Make double-click of a word always use default dictionary instead of dictionary currently displayed"
+msgstr "جعل الافتراضي انقر نقرا مزدوجا فوق الكلمة دائما استخدام القاموس بدلا من القاموس المعروضة حاليا"
+
+#: ../ui/prefs.glade.h:73
+msgid "Make journals/prayer lists available"
+msgstr "جعل المجلات / قوائم صلاة متاحة"
+
+#: ../ui/prefs.glade.h:74
+#: ../ui/search-dialog.glade.h:61
+msgid "Module Selection"
+msgstr "اختيار وحدة"
+
+#: ../ui/prefs.glade.h:75
+msgid "Modules Main"
+msgstr "الوحدات الرئيسية"
+
+#: ../ui/prefs.glade.h:76
+msgid "Modules Misc"
+msgstr "وحدات متفرقات"
+
+#: ../ui/prefs.glade.h:77
+msgid "Modules Parallel"
+msgstr "وحدات متوازية"
+
+#: ../ui/prefs.glade.h:78
+msgid "Name and size choice for any module in a given language; still overridden by a specific choice on a particular module"
+msgstr "اسم وحجم الاختيار لأية وحدة نمطية في لغة معينة ؛ تجاوز لا يزال خيار محدد على وحدة نمطية معينة"
+
+#: ../ui/prefs.glade.h:79
+msgid "Normal Text"
+msgstr "نص عادي"
+
+#: ../ui/prefs.glade.h:80
+#: ../ui/search-dialog.glade.h:70
+msgid "Open Selection Dialog Button"
+msgstr "اختيار زر فتح حوار"
+
+#: ../ui/prefs.glade.h:81
+msgid "Open a dialog to select modules"
+msgstr "فتح الحوار لتحديد وحدات"
+
+#: ../ui/prefs.glade.h:82
+msgid "Parallel View in a tab"
+msgstr "مواز عرض في التبويب"
+
+#: ../ui/prefs.glade.h:83
+msgid "Personal Notes"
+msgstr "ملاحظات شخصية"
+
+#: ../ui/prefs.glade.h:86
+msgid "Previewer Checkbox"
+msgstr "المعاين خانة"
+
+#: ../ui/prefs.glade.h:87
+#: ../ui/search-dialog.glade.h:80
+msgid "Remove the selected module from the list"
+msgstr "إزالة وحدة مختارة من قائمة"
+
+#: ../ui/prefs.glade.h:88
+msgid "Resize images"
+msgstr "تغيير حجم الصور"
+
+#: ../ui/prefs.glade.h:89
+msgid "Resize images checkbox"
+msgstr "تغيير حجم الصور مربع"
+
+#: ../ui/prefs.glade.h:90
+msgid "Scroll to Previous/Next Chapter"
+msgstr "انتقل إلى الفصل السابق / التالي"
+
+#: ../ui/prefs.glade.h:91
+msgid "Scroll to Previous/Next Chapter Checkbox"
+msgstr "انتقل إلى السابق / خانة الفصل التالي"
+
+#: ../ui/prefs.glade.h:92
+msgid "Select A Directory"
+msgstr "تحديد دليل"
+
+#: ../ui/prefs.glade.h:93
+msgid "Select a particular language for interface display, other than your usual setting"
+msgstr "اختر لغة معينة للعرض واجهة ، وغيرها من الإعداد المعتاد"
+
+#: ../ui/prefs.glade.h:94
+msgid "Show Daily Devotion at start up"
+msgstr "ديلي شو تفانيه في البدء"
+
+#: ../ui/prefs.glade.h:95
+msgid "Show splash screen at start up"
+msgstr "تظهر شاشة البداية في البدء"
+
+#: ../ui/prefs.glade.h:96
+msgid "Single selection of Bible+commentary+book+dictionary, or many sets of such selections in a tabbed interface"
+msgstr "اختيار واحدة من الكتاب المقدس + + التعليق كتابه + القاموس ، أو مجموعات كثيرة من هذه التحديدات في واجهة تفاعلية"
+
+#: ../ui/prefs.glade.h:97
+msgid "Special Locale (requires restart)"
+msgstr "اللغة الخاصة (يتطلب إعادة التشغيل)"
+
+#: ../ui/prefs.glade.h:98
+msgid "Special Locale Combo"
+msgstr "لغة خاصة كومبو"
+
+#: ../ui/prefs.glade.h:99
+msgid "StudyPad default directory combo"
+msgstr "StudyPad الدليل الافتراضي التحرير والسرد"
+
+#: ../ui/prefs.glade.h:101
+msgid "Use Bible Text scroll bar to scroll to previous or next chapter"
+msgstr "نص الكتاب المقدس استخدام شريط التمرير للانتقال إلى الفصل التالي أو السابق"
+
+#: ../ui/prefs.glade.h:102
+msgid "Use default Dictionary"
+msgstr "استخدام القاموس الافتراضي"
+
+#: ../ui/prefs.glade.h:103
+msgid "Use default Dictionary Checkbox"
+msgstr "استخدام القاموس الافتراضي خانة"
+
+#: ../ui/prefs.glade.h:104
+msgid "Use inverted highlight on user-annotated verses"
+msgstr "استخدام الضوء المعكوس على الآيات المستخدم المشروح"
+
+#: ../ui/prefs.glade.h:105
+msgid "Use tabbed browsing"
+msgstr "استخدام الاستعراض المبوب"
+
+#: ../ui/prefs.glade.h:106
+msgid "Use tabbed browsing Checkbox"
+msgstr "استخدام الاستعراض المبوب خانة"
+
+#: ../ui/prefs.glade.h:107
+msgid "Use the verse list for Bible cross-references instead of the previewer"
+msgstr "استخدم قائمة الآية لمراجع الكتاب المقدس الصليب بدلا من المشاهد في"
+
+#: ../ui/prefs.glade.h:108
+msgid "Verse Number"
+msgstr "الآية رقم"
+
+#: ../ui/prefs.glade.h:109
+msgid "Verse number size"
+msgstr "الآية رقم حجم"
+
+#: ../ui/prefs.glade.h:110
+msgid "Xrefs in verse list check box"
+msgstr "Xrefs في قائمة الآية خانة الاختيار"
+
+#: ../ui/search-dialog.glade.h:1
+msgid "<b>Attribute</b>"
+msgstr "<b>السمة</b>"
+
+#: ../ui/search-dialog.glade.h:2
+msgid "<b>Found</b>"
+msgstr "<b>وجدت</b>"
+
+#: ../ui/search-dialog.glade.h:3
+msgid "<b>List Name</b>"
+msgstr "<b>اسم قائمة</b>"
+
+#: ../ui/search-dialog.glade.h:4
+msgid "<b>Module Lists</b>"
+msgstr "<b>قوائم وحدة</b>"
+
+#: ../ui/search-dialog.glade.h:6
+msgid "<b>Options</b>"
+msgstr "<b>خيارات</b>"
+
+#: ../ui/search-dialog.glade.h:7
+msgid "<b>Preview</b>"
+msgstr "<b>معاينة</b>"
+
+#: ../ui/search-dialog.glade.h:8
+msgid "<b>Range Definition</b>"
+msgstr "<b>مجموعة تعريف</b>"
+
+#: ../ui/search-dialog.glade.h:9
+msgid "<b>Range Name</b>"
+msgstr "<b>اسم النطاق</b>"
+
+#: ../ui/search-dialog.glade.h:10
+msgid "<b>Ranges</b>"
+msgstr "<b>نطاقات</b>"
+
+#: ../ui/search-dialog.glade.h:11
+msgid "<b>Results Display Options</b>"
+msgstr "<b>عرض النتائج خيارات</b>"
+
+#: ../ui/search-dialog.glade.h:12
+msgid "<b>Scope</b>"
+msgstr "<b>نطاق</b>"
+
+#: ../ui/search-dialog.glade.h:13
+msgid "<b>Search Results</b>"
+msgstr "<b>نتائج البحث</b>"
+
+#: ../ui/search-dialog.glade.h:14
+msgid "<b>Search Type</b>"
+msgstr "<b>نوع البحث</b>"
+
+#: ../ui/search-dialog.glade.h:16
+msgid "Advanced Search"
+msgstr "بحث متقدم"
+
+#: ../ui/search-dialog.glade.h:17
+msgid "Attribute Search"
+msgstr "السمة البحث"
+
+#: ../ui/search-dialog.glade.h:18
+msgid "Attributes"
+msgstr "سمات"
+
+#: ../ui/search-dialog.glade.h:19
+msgid "Attributes radiobutton"
+msgstr "سمات زر راديو"
+
+#: ../ui/search-dialog.glade.h:20
+msgid "Clear Custom Module List Button"
+msgstr "واضحة قائمة الوحدات زر مخصص"
+
+#: ../ui/search-dialog.glade.h:23
+msgid "Clear lists for new search"
+msgstr "قوائم واضحة للبحث جديد"
+
+#: ../ui/search-dialog.glade.h:24
+msgid "Create a new module list"
+msgstr "إنشاء قائمة جديدة وحدة"
+
+#: ../ui/search-dialog.glade.h:25
+msgid "Create new custom range"
+msgstr "إنشاء مجموعة مخصصة جديدة"
+
+#: ../ui/search-dialog.glade.h:26
+msgid "Current results"
+msgstr "النتائج الحالية"
+
+#: ../ui/search-dialog.glade.h:27
+msgid "Current results radiobutton"
+msgstr "النتائج الحالية زر راديو"
+
+#: ../ui/search-dialog.glade.h:28
+msgid "Custom Module List Combo"
+msgstr "قائمة مخصصة كومبو وحدة"
+
+#: ../ui/search-dialog.glade.h:29
+msgid "Custom Module List Name Entry"
+msgstr "عرف اسم قائمة الوحدات الدخول"
+
+#: ../ui/search-dialog.glade.h:30
+msgid "Custom Module Lists"
+msgstr "قوائم مخصصة الوحدة"
+
+#: ../ui/search-dialog.glade.h:31
+msgid "Custom Range Preview"
+msgstr "مخصص المدى معاينة"
+
+#: ../ui/search-dialog.glade.h:32
+msgid "Custom Range Selector Combo"
+msgstr "مخصص محدد المدى كومبو"
+
+#: ../ui/search-dialog.glade.h:33
+msgid "Custom Verse Ranges"
+msgstr "نطاقات مخصصة الآية"
+
+#: ../ui/search-dialog.glade.h:34
+msgid "Custom module list"
+msgstr "العرف قائمة الوحدة"
+
+#: ../ui/search-dialog.glade.h:35
+msgid "Custom module list radiobutton"
+msgstr "قائمة وحدة مخصصة زر راديو"
+
+#: ../ui/search-dialog.glade.h:36
+msgid "Custom verse range"
+msgstr "الآية مجموعة مخصصة"
+
+#: ../ui/search-dialog.glade.h:37
+msgid "Custom verse range radiobutton"
+msgstr "مجموعة مخصصة الآية زر راديو"
+
+#: ../ui/search-dialog.glade.h:38
+msgid "Delete Range Button"
+msgstr "مجموعة حذف زر"
+
+#: ../ui/search-dialog.glade.h:40
+msgid "Delete selected range"
+msgstr "حذف مجموعة مختارة"
+
+#: ../ui/search-dialog.glade.h:41
+msgid "Delete the selected list"
+msgstr "حذف قائمة مختارة"
+
+#: ../ui/search-dialog.glade.h:42
+msgid "Entire module"
+msgstr "كله وحدة"
+
+#: ../ui/search-dialog.glade.h:43
+msgid "Entire module radiobutton"
+msgstr "كامل زر راديو وحدة"
+
+#: ../ui/search-dialog.glade.h:45
+msgid "Exact phrase radiobutton"
+msgstr "العبارة بالضبط زر راديو"
+
+#: ../ui/search-dialog.glade.h:46
+msgid "Export"
+msgstr "تصدير"
+
+#: ../ui/search-dialog.glade.h:47
+msgid "Export current search results"
+msgstr "نتائج البحث التصدير الحالية"
+
+#: ../ui/search-dialog.glade.h:48
+msgid ""
+"Fast, featureful, index-based search\n"
+"Indexes must have been built beforehand:\n"
+"See Module Manager's maintenance functions"
+msgstr "سريع featureful المستندة يجب أن يكون قد فهارس البحث ، مؤشر بنيت قبل : مدير الصيانة في وظائف وحدة انظر"
+
+#: ../ui/search-dialog.glade.h:51
+msgid "Find Button"
+msgstr "زر البحث"
+
+#: ../ui/search-dialog.glade.h:53
+msgid "Footnotes radiobutton"
+msgstr "الحواشي زر راديو"
+
+#: ../ui/search-dialog.glade.h:54
+msgid "In modules that have Footnotes"
+msgstr "في الوحدات النمطية التي الحواشي"
+
+#: ../ui/search-dialog.glade.h:55
+msgid "In modules that have Morphological Tags"
+msgstr "في الوحدات النمطية التي المورفولوجية العلامات"
+
+#: ../ui/search-dialog.glade.h:56
+msgid "In modules that have Strong's Numbers"
+msgstr "في الوحدات النمطية التي لديها أرقام سترونغ"
+
+#: ../ui/search-dialog.glade.h:57
+msgid "Main Search Entry"
+msgstr "الرئيسية بحث دخول"
+
+#: ../ui/search-dialog.glade.h:58
+msgid "Make selections on the Attribute Search tab"
+msgstr "الاختيارات على علامة التبويب بحث سمة"
+
+#: ../ui/search-dialog.glade.h:60
+msgid "Match case checkbox"
+msgstr "المباراة حالة الاختيار"
+
+#: ../ui/search-dialog.glade.h:62
+msgid "Module list"
+msgstr "وحدة قائمة"
+
+#: ../ui/search-dialog.glade.h:63
+msgid "Module list radiobutton"
+msgstr "وحدة قائمة زر راديو"
+
+#: ../ui/search-dialog.glade.h:65
+msgid "Morphological Tags radiobutton"
+msgstr "المورفولوجية العلامات زر راديو"
+
+#: ../ui/search-dialog.glade.h:67
+msgid "Multi word radiobutton"
+msgstr "كلمة متعددة زر راديو"
+
+#: ../ui/search-dialog.glade.h:68
+msgid "New Custom Module List Button"
+msgstr "جديدة قائمة الوحدات زر مخصص"
+
+#: ../ui/search-dialog.glade.h:69
+msgid "New Range Button"
+msgstr "مجموعة جديدة زر"
+
+#: ../ui/search-dialog.glade.h:71
+msgid "Open a brief explanation of attribute-based searches."
+msgstr "فتح شرحا موجزا لعمليات البحث على أساس السمة."
+
+#: ../ui/search-dialog.glade.h:72
+msgid "Open a brief explanation of the syntax used for optimized \"lucene\" searches."
+msgstr "فتح شرحا موجزا للاستخدام الأمثل لبناء الجملة التفتيش \"وسين\"."
+
+#: ../ui/search-dialog.glade.h:73
+msgid "Open a dialog to select modules to add to the list"
+msgstr "فتح الحوار لتحديد وحدات لتضاف إلى قائمة"
+
+#: ../ui/search-dialog.glade.h:74
+msgid "Optimized (\"Lucene\")"
+msgstr "الأمثل (\"وسين\")"
+
+#: ../ui/search-dialog.glade.h:75
+msgid "Optimized (\"Lucene\") radiobutton"
+msgstr "الأمثل (\"وسين\") زر راديو"
+
+#: ../ui/search-dialog.glade.h:76
+msgid "Range Definition Entry"
+msgstr "دخول مجموعة تعريف"
+
+#: ../ui/search-dialog.glade.h:77
+msgid "Range Name Entry"
+msgstr "اسم إدخال مجموعة"
+
+#: ../ui/search-dialog.glade.h:79
+msgid "Regular expression radiobutton"
+msgstr "التعبير العادية زر راديو"
+
+#: ../ui/search-dialog.glade.h:81
+msgid "Result Summary Table"
+msgstr "نتيجة موجز الجدول"
+
+#: ../ui/search-dialog.glade.h:82
+msgid "Result Summary Window"
+msgstr "نتيجة موجز نافذة"
+
+#: ../ui/search-dialog.glade.h:83
+msgid "Results"
+msgstr "النتائج"
+
+#: ../ui/search-dialog.glade.h:84
+msgid "Save Custom Module List Button"
+msgstr "حفظ زر مخصص قائمة الوحدات"
+
+#: ../ui/search-dialog.glade.h:85
+msgid "Save Range Button"
+msgstr "حفظ المدى زر"
+
+#: ../ui/search-dialog.glade.h:86
+msgid "Save custom range"
+msgstr "انقاذ مجموعة مخصصة"
+
+#: ../ui/search-dialog.glade.h:87
+msgid "Save search results as bookmarks"
+msgstr "حفظ نتائج البحث كعلامات"
+
+#: ../ui/search-dialog.glade.h:88
+msgid "Save the module list"
+msgstr "حفظ قائمة الوحدة"
+
+#: ../ui/search-dialog.glade.h:89
+msgid "Search  Criteria"
+msgstr "معايير البحث"
+
+#: ../ui/search-dialog.glade.h:90
+msgid "Search Criteria Treeview"
+msgstr "معايير البحث تريفيف"
+
+#: ../ui/search-dialog.glade.h:91
+msgid "Search entire module"
+msgstr "كله وحدة البحث"
+
+#: ../ui/search-dialog.glade.h:92
+msgid "Search for Morphological tags"
+msgstr "البحث عن العلامات المورفولوجية"
+
+#: ../ui/search-dialog.glade.h:93
+msgid "Search for Strongs Numbers like G4442 or H1121"
+msgstr "البحث عن أرقام أو Strongs مثل G4442 H1121"
+
+#: ../ui/search-dialog.glade.h:94
+msgid "Search in footnotes"
+msgstr "البحث في الحواشي"
+
+#: ../ui/search-dialog.glade.h:95
+msgid "Show Footnotes"
+msgstr "وتظهر الحواشي"
+
+#: ../ui/search-dialog.glade.h:96
+msgid "Show Footnotes checkbox"
+msgstr "وتظهر الحواشي مربع"
+
+#: ../ui/search-dialog.glade.h:97
+msgid "Show Morphological Tags"
+msgstr "به إظهار المورفولوجية"
+
+#: ../ui/search-dialog.glade.h:98
+msgid "Show Morphological Tags checkbox"
+msgstr "تظهر خانة الاختيار العلامات المورفولوجية"
+
+#: ../ui/search-dialog.glade.h:99
+msgid "Show Strong's Numbers"
+msgstr "عرض قوي وأرقام"
+
+#: ../ui/search-dialog.glade.h:100
+msgid "Show Strong's Numbers checkbox"
+msgstr "عرض قوي للأرقام الاختيار"
+
+#: ../ui/search-dialog.glade.h:101
+msgid "Show in main window"
+msgstr "وتظهر في النافذة الرئيسية"
+
+#: ../ui/search-dialog.glade.h:102
+msgid "Single module"
+msgstr "وحدة واحدة"
+
+#: ../ui/search-dialog.glade.h:103
+msgid "Single module radiobutton"
+msgstr "وحدة واحدة زر راديو"
+
+#: ../ui/search-dialog.glade.h:104
+msgid "Start/stop searching"
+msgstr "بدء / توقف البحث"
+
+#: ../ui/search-dialog.glade.h:105
+msgid "Strongs Numbers"
+msgstr "Strongs أرقام"
+
+#: ../ui/search-dialog.glade.h:106
+msgid "Strongs Numbers radiobutton"
+msgstr "Strongs أرقام زر راديو"
+
+#: ../ui/search-dialog.glade.h:107
+msgid "Use a custom module list for the search"
+msgstr "استخدام قائمة مخصصة وحدة للبحث"
+
+#: ../ui/search-dialog.glade.h:108
+msgid "Use a custom range for the scope of the search"
+msgstr "استخدام مجموعة مخصصة للنطاق البحث"
+
+#: ../ui/search-dialog.glade.h:109
+msgid "Use a single module for the search"
+msgstr "استخدام وحدة نمطية واحدة للبحث"
+
+#: ../ui/search-dialog.glade.h:110
+msgid "Use the current module list for the search"
+msgstr "استخدام القائمة الحالية وحدة للبحث"
+
+#: ../ui/search-dialog.glade.h:111
+msgid "Use the results of the last search as the scope of the search"
+msgstr "استخدام نتائج البحث الأخير في نطاق البحث"
+
+#: ../ui/search-dialog.glade.h:112
+msgid "_Attribute Search"
+msgstr "_Attribute البحث"
+
+#: ../ui/search-dialog.glade.h:113
+msgid "_Lucene Search Syntax"
+msgstr "_Lucene البحث اللغوي"
+
+#: ../ui/search-dialog.glade.h:114
+msgid "e.g. Matt-John;Rev4"
+msgstr "على سبيل المثال مات جون ؛ Rev4"
+
+#: ../ui/search-dialog.glade.h:115
+msgid "for "
+msgstr "ل"
+
+#: ../ui/xi-menus.glade.h:2
+msgid "About _Translation"
+msgstr "حول _Translation"
+
+#: ../ui/xi-menus.glade.h:3
+msgid "About _Xiphos"
+msgstr "حول _Xiphos"
+
+#: ../ui/xi-menus.glade.h:4
+msgid "Add Item"
+msgstr "إضافة عنصر"
+
+#: ../ui/xi-menus.glade.h:5
+msgid "Add Sub-Item"
+msgstr "إضافة البند الفرعي"
+
+#: ../ui/xi-menus.glade.h:6
+msgid "Add a sub-item"
+msgstr "إضافة البند الفرعي"
+
+#: ../ui/xi-menus.glade.h:7
+msgid "Add an item"
+msgstr "إضافة عنصر"
+
+#: ../ui/xi-menus.glade.h:8
+msgid "Add new folder to selected folder"
+msgstr "إضافة مجلد جديد إلى المجلد المحدد"
+
+#: ../ui/xi-menus.glade.h:10
+msgid "Allow Reordering"
+msgstr "تتيح إعادة ترتيب"
+
+#: ../ui/xi-menus.glade.h:11
+msgid "Allow items to be moved from one folder to another"
+msgstr "يمكن نقلها السماح للعناصر من مجلد واحد إلى آخر"
+
+#: ../ui/xi-menus.glade.h:12
+msgid "Annotate Verse"
+msgstr "تعليم الآية"
+
+#: ../ui/xi-menus.glade.h:13
+msgid "Apply a high-contrast highlight to the current verse"
+msgstr "تسليط الضوء على تطبيق عالية على النقيض من الآية الحالية"
+
+#: ../ui/xi-menus.glade.h:15
+msgid "Bring the simple sidebar search forward"
+msgstr "جعل البحث الشريط الجانبي بسيطة إلى الأمام"
+
+#: ../ui/xi-menus.glade.h:16
+msgid "Browse in BibleMap.org"
+msgstr "استعراض في BibleMap.org"
+
+#: ../ui/xi-menus.glade.h:17
+msgid "Collapse All"
+msgstr "طي الكل"
+
+#: ../ui/xi-menus.glade.h:18
+msgid "Collapse all Bookmarks groups"
+msgstr "انهيار جميع المجموعات المرجعية"
+
+#: ../ui/xi-menus.glade.h:19
+msgid "Commentary by Chapter"
+msgstr "التعليق من الفصل"
+
+#: ../ui/xi-menus.glade.h:21
+msgid "Create a new daily journal"
+msgstr "إنشاء مجلة جديدة كل يوم"
+
+#: ../ui/xi-menus.glade.h:22
+msgid "Create a new journal or prayerlist from a template"
+msgstr "إنشاء مجلة جديدة أو prayerlist من قالب"
+
+#: ../ui/xi-menus.glade.h:23
+msgid "Create a new monthly journal"
+msgstr "إنشاء مجلة شهرية جديدة"
+
+#: ../ui/xi-menus.glade.h:24
+msgid "Create a new outlined topic"
+msgstr "إنشاء موضوع جديد المبينة"
+
+#: ../ui/xi-menus.glade.h:25
+msgid "Create a new simple prayer list"
+msgstr "إنشاء قائمة جديدة صلاة بسيطة"
+
+#: ../ui/xi-menus.glade.h:26
+msgid "Create a new subject prayer list"
+msgstr "إنشاء قائمة جديدة موضوع الصلاة"
+
+#: ../ui/xi-menus.glade.h:27
+msgid "Daily"
+msgstr "يوميا"
+
+#: ../ui/xi-menus.glade.h:28
+msgid "Delete Item"
+msgstr "حذف البند"
+
+#: ../ui/xi-menus.glade.h:29
+msgid "Delete item"
+msgstr "حذف البند"
+
+#: ../ui/xi-menus.glade.h:30
+msgid "Dictionar_y"
+msgstr "Dictionar_y"
+
+#: ../ui/xi-menus.glade.h:31
+msgid "Display Book Heading"
+msgstr "عرض كتاب عنوان"
+
+#: ../ui/xi-menus.glade.h:32
+msgid "Display Chapter Heading"
+msgstr "عرض عنوان الفصل"
+
+#: ../ui/xi-menus.glade.h:33
+msgid "Display verse numbers in the text"
+msgstr "أرقام الآية العرض في النص"
+
+#: ../ui/xi-menus.glade.h:34
+msgid "Doublespace"
+msgstr "Doublespace"
+
+#: ../ui/xi-menus.glade.h:35
+msgid "Dump Pers.Comm."
+msgstr "تفريغ Pers.Comm."
+
+#: ../ui/xi-menus.glade.h:37
+msgid "Edit bookmark item"
+msgstr "تحرير المرجعية البند"
+
+#: ../ui/xi-menus.glade.h:38
+msgid "Edit this item"
+msgstr "تحرير هذا البند"
+
+#: ../ui/xi-menus.glade.h:39
+msgid "Expand All"
+msgstr "توسيع الكل"
+
+#: ../ui/xi-menus.glade.h:40
+msgid "Expand all Bookmarks groups"
+msgstr "توسيع جميع المجموعات المرجعية"
+
+#: ../ui/xi-menus.glade.h:41
+msgid "Export Folder"
+msgstr "تصدير مجلد"
+
+#: ../ui/xi-menus.glade.h:42
+msgid "Export List"
+msgstr "تصدير قائمة"
+
+#: ../ui/xi-menus.glade.h:49
+msgid "Image Content"
+msgstr "صورة المحتوى"
+
+#: ../ui/xi-menus.glade.h:50
+msgid "Import Bookmarks"
+msgstr "استيراد الإشارات المرجعية"
+
+#: ../ui/xi-menus.glade.h:51
+msgid "Insert Bookmark"
+msgstr "إدراج إشارة مرجعية"
+
+#: ../ui/xi-menus.glade.h:52
+msgid "Insert new bookmark here"
+msgstr "تضاف علامة جديدة هنا"
+
+#: ../ui/xi-menus.glade.h:53
+msgid "L_ink Tabs"
+msgstr "L_ink علامات الجدولة"
+
+#: ../ui/xi-menus.glade.h:54
+msgid "Learn about The Sword Project, of which Xiphos is one application"
+msgstr "تعرف على مشروع السيف ، الذي هو واحد التطبيق Xiphos"
+
+#: ../ui/xi-menus.glade.h:55
+msgid "Learn about Xiphos"
+msgstr "معرفة Xiphos"
+
+#: ../ui/xi-menus.glade.h:56
+msgid "Learn about translating the Xiphos interface to other languages"
+msgstr "تعلم ترجمة عن واجهة Xiphos إلى لغات أخرى"
+
+#: ../ui/xi-menus.glade.h:58
+msgid "Load other bookmarks file (default: from BibleTime)"
+msgstr "تحميل الملف الإشارات الأخرى (الافتراضي : من BibleTime)"
+
+#: ../ui/xi-menus.glade.h:59
+msgid "Lookup Selection"
+msgstr "بحث التحديد"
+
+#: ../ui/xi-menus.glade.h:60
+msgid "Make all tabs' Bibles navigate together"
+msgstr "الاناجيل جعل كافة علامات التبويب &#39;التنقل معا"
+
+#: ../ui/xi-menus.glade.h:62
+msgid "Monthly"
+msgstr "شهريا"
+
+#: ../ui/xi-menus.glade.h:65
+msgid "Note"
+msgstr "ملاحظة"
+
+#: ../ui/xi-menus.glade.h:66
+msgid "Open Module"
+msgstr "فتح وحدة نمطية"
+
+#: ../ui/xi-menus.glade.h:67
+msgid "Open Study_pad"
+msgstr "فتح Study_pad"
+
+#: ../ui/xi-menus.glade.h:68
+msgid "Open a browser on an interface to live IRC chat"
+msgstr "افتح مستعرض على واجهة للعيش الايرسي دردشة"
+
+#: ../ui/xi-menus.glade.h:69
+msgid "Open a browser on our bug tracker"
+msgstr "فتح مستعرض على تعقب الشوائب"
+
+#: ../ui/xi-menus.glade.h:70
+msgid "Open a browser on the users' mailing list webpage"
+msgstr "فتح المستعرض على المستخدمين صفحة ويب قائمة بريدية"
+
+#: ../ui/xi-menus.glade.h:71
+msgid "Open a saved tab settings collection"
+msgstr "فتح حفظ جمع التبويب إعدادات"
+
+#: ../ui/xi-menus.glade.h:72
+msgid "Open in a dialog"
+msgstr "فتح في الحوار"
+
+#: ../ui/xi-menus.glade.h:73
+msgid "Open in a separate window"
+msgstr "فتح في إطار منفصل"
+
+#: ../ui/xi-menus.glade.h:74
+msgid "Open in editor"
+msgstr "فتح في محرر"
+
+#: ../ui/xi-menus.glade.h:75
+msgid "Open in new tab"
+msgstr "فتح في علامة تبويب جديدة"
+
+#: ../ui/xi-menus.glade.h:76
+msgid ""
+"Open selected module in a\n"
+"	separate ['dialog'] window"
+msgstr "فتح وحدة مختارة في] نافذة منفصلة [&#39;الحوار&#39; أ"
+
+#: ../ui/xi-menus.glade.h:78
+msgid "Open selected module in a new tab"
+msgstr "فتح وحدة مختارة في علامة تبويب جديدة"
+
+#: ../ui/xi-menus.glade.h:79
+msgid "Open the advanced search dialog, to run complex queries"
+msgstr "فتح مربع الحوار بحث متقدم ، لتشغيل استعلامات معقدة"
+
+#: ../ui/xi-menus.glade.h:80
+msgid "Open the help viewer on the Xiphos manual"
+msgstr "فتح عارض تعليمات في دليل Xiphos"
+
+#: ../ui/xi-menus.glade.h:81
+msgid "Open this bookmark in a dialog"
+msgstr "فتح هذا مرجعية في الحوار"
+
+#: ../ui/xi-menus.glade.h:82
+msgid "Open this bookmark in a new tab"
+msgstr "فتح هذه الإشارة المرجعية في علامة تبويب جديدة"
+
+#: ../ui/xi-menus.glade.h:83
+msgid "Operate the sidebar as a separate window"
+msgstr "تشغيل الشريط الجانبي كإطار منفصل"
+
+#: ../ui/xi-menus.glade.h:84
+msgid "Outlined"
+msgstr "أوجز"
+
+#: ../ui/xi-menus.glade.h:85
+msgid "Preview _Daily Devotion"
+msgstr "معاينة الولاء _Daily"
+
+#: ../ui/xi-menus.glade.h:87
+msgid "Provide the full-chapter parallel Bible window as another tab"
+msgstr "توفير كامل الفصل إطار الكتاب المقدس كما مواز آخر التبويب"
+
+#: ../ui/xi-menus.glade.h:88
+msgid "Read Selection Aloud"
+msgstr "قراءة بصوت عال التحديد"
+
+#: ../ui/xi-menus.glade.h:90
+msgid "Remove folder and save it"
+msgstr "إزالة مجلد وحفظه"
+
+#: ../ui/xi-menus.glade.h:91
+msgid "Remove the sidebar entirely from view"
+msgstr "إزالة الشريط الجانبي بالكامل من رأي"
+
+#: ../ui/xi-menus.glade.h:92
+msgid "Remove this item"
+msgstr "إزالة هذا البند"
+
+#: ../ui/xi-menus.glade.h:93
+msgid "Rename Pers.Comm."
+msgstr "إعادة تسمية Pers.Comm."
+
+#: ../ui/xi-menus.glade.h:94
+msgid "Respect Font Faces"
+msgstr "احترام الخط وجوه"
+
+#: ../ui/xi-menus.glade.h:95
+msgid "Save list as a series of bookmarks"
+msgstr "حفظ قائمة على شكل سلسلة من العلامات"
+
+#: ../ui/xi-menus.glade.h:96
+msgid "Save list as a single bookmark"
+msgstr "حفظ كعلامة قائمة واحدة"
+
+#: ../ui/xi-menus.glade.h:97
+msgid "Save these results as a series of bookmarks in their own folder"
+msgstr "حفظ هذه النتائج على شكل سلسلة من العلامات الموجودة في مجلد الخاصة"
+
+#: ../ui/xi-menus.glade.h:98
+msgid "Save these results as a single bookmark"
+msgstr "حفظ هذه النتائج كعلامة واحدة"
+
+#: ../ui/xi-menus.glade.h:99
+msgid "Save this collection of tab settings"
+msgstr "حفظ هذه المجموعة من التبويب إعدادات"
+
+#: ../ui/xi-menus.glade.h:100
+msgid "Scripture Cross-references"
+msgstr "الكتاب المقدس عبر المراجع"
+
+#: ../ui/xi-menus.glade.h:102
+msgid "Select Previewer position between sidebar or beneath Bible"
+msgstr "حدد موقف المشاهد بين الشريط الجانبي أو تحت الكتاب المقدس"
+
+#: ../ui/xi-menus.glade.h:103
+msgid "Show Parallel View in a _Tab"
+msgstr "تظهر الصورة وبالتوازي في _Tab"
+
+#: ../ui/xi-menus.glade.h:104
+msgid "Show Previe_wer in the Sidebar"
+msgstr "وتظهر في الشريط الجانبي Previe_wer"
+
+#: ../ui/xi-menus.glade.h:105
+msgid "Show Verse _Numbers"
+msgstr "_Numbers إظهار الآية"
+
+#: ../ui/xi-menus.glade.h:106
+msgid "Show today's entry from your selected daily devotional in the previewer"
+msgstr "عرض اليوم من دخول عبادي مختارة اليومية في المعاين"
+
+#: ../ui/xi-menus.glade.h:107
+msgid "Simple"
+msgstr "بسيطة"
+
+#: ../ui/xi-menus.glade.h:109
+msgid "Subject"
+msgstr "الموضوع"
+
+#: ../ui/xi-menus.glade.h:111
+msgid "Turn on text-to-speech reading of Bible verses as they are selected"
+msgstr "بدوره على قراءة النص إلى كلام من آيات الكتاب المقدس كما هي مختارة"
+
+#: ../ui/xi-menus.glade.h:112
+msgid "Unlock This Module"
+msgstr "فتح هذه الوحدة"
+
+#: ../ui/xi-menus.glade.h:113
+msgid "Use Current Dictionary"
+msgstr "قاموس الاستخدام الحالي"
+
+#: ../ui/xi-menus.glade.h:114
+msgid "Use module manager to install and remove Sword modules"
+msgstr "استخدام إدارة وحدة لتركيب وحدات إزالة السيف"
+
+#: ../ui/xi-menus.glade.h:115
+msgid "Variants"
+msgstr "المتغيرات"
+
+#: ../ui/xi-menus.glade.h:116
+msgid "Verse Per Line"
+msgstr "الآية لكل خط"
+
+#: ../ui/xi-menus.glade.h:118
+msgid "_About The SWORD Project"
+msgstr "_about مشروع السيف"
+
+#: ../ui/xi-menus.glade.h:119
+msgid "_Advanced Search"
+msgstr "_Advanced البحث"
+
+#: ../ui/xi-menus.glade.h:120
+msgid "_Attach/Detach Sidebar"
+msgstr "_Attach / فصل الشريط الجانبي"
+
+#: ../ui/xi-menus.glade.h:121
+msgid "_Bible"
+msgstr "_Bible"
+
+#: ../ui/xi-menus.glade.h:122
+msgid "_Commentary/Book"
+msgstr "_Commentary / كتاب"
+
+#: ../ui/xi-menus.glade.h:123
+msgid "_Contents"
+msgstr "_Contents"
+
+#: ../ui/xi-menus.glade.h:124
+msgid "_Edit"
+msgstr "_Edit"
+
+#: ../ui/xi-menus.glade.h:125
+msgid "_Edit Item"
+msgstr "_Edit السلعة"
+
+#: ../ui/xi-menus.glade.h:127
+msgid "_Help"
+msgstr "_Help"
+
+#: ../ui/xi-menus.glade.h:128
+msgid "_Highlight Current Verse"
+msgstr "_Highlight الآية الحالي"
+
+#: ../ui/xi-menus.glade.h:129
+msgid "_Live Chat"
+msgstr "_Live دردشة"
+
+#: ../ui/xi-menus.glade.h:130
+msgid "_Mailing List"
+msgstr "_Mailing قائمة"
+
+#: ../ui/xi-menus.glade.h:131
+msgid "_Module Manager"
+msgstr "مدير _Module"
+
+#: ../ui/xi-menus.glade.h:132
+msgid "_New Prayerlist/Journal"
+msgstr "_new Prayerlist / مجلة"
+
+#: ../ui/xi-menus.glade.h:133
+msgid "_Open Session"
+msgstr "ا _ فتح الدورة"
+
+#: ../ui/xi-menus.glade.h:134
+msgid "_Preferences"
+msgstr "_Preferences"
+
+#: ../ui/xi-menus.glade.h:135
+msgid "_Preview"
+msgstr "_Preview"
+
+#: ../ui/xi-menus.glade.h:136
+msgid "_Read Aloud"
+msgstr "_Read الاود"
+
+#: ../ui/xi-menus.glade.h:137
+msgid "_Report Bug"
+msgstr "_Report الشوائب"
+
+#: ../ui/xi-menus.glade.h:138
+msgid "_Save Session"
+msgstr "_Save الدورة"
+
+#: ../ui/xi-menus.glade.h:139
+msgid "_Search"
+msgstr "_Search"
+
+#: ../ui/xi-menus.glade.h:140
+msgid "_Show/Hide Attached Sidebar"
+msgstr "_Show / إخفاء الشريط الجانبي المرفقة"
+
+#: ../ui/xi-export-bookmarks.glade.h:1
+msgid "<b>Export to:</b>"
+msgstr "<b>تصدير الى :</b>"
+
+#: ../ui/xi-export-bookmarks.glade.h:2
+msgid "Export Bookmark Folder"
+msgstr "تصدير مجلد الإشارات"
+
+#: ../ui/xi-export-bookmarks.glade.h:3
+msgid "Html"
+msgstr "أتش تي أم أل"
+
+#: ../ui/xi-export-bookmarks.glade.h:4
+msgid "Include Bible text"
+msgstr "وتشمل نص الكتاب المقدس"
+
+#: ../ui/xi-export-bookmarks.glade.h:5
+msgid "Plain text"
+msgstr "نص عادي"
+
+#: ../ui/xi-export-bookmarks.glade.h:6
+msgid "Xiphos bookmarks"
+msgstr "العلامات Xiphos"
+
+#: ../ui/xi-export-bookmarks.glade.h:7
+msgid "gtk-cancel"
+msgstr "جتك - إلغاء"
+
+#: ../ui/xi-export-bookmarks.glade.h:8
+msgid "gtk-ok"
+msgstr "جتك اوك"
+
+#: ../xiphos.desktop.in.in.h:1
+msgid "Study the Bible"
+msgstr "دراسة الكتاب المقدس"
+
+#: ../xiphos.desktop.in.in.h:2
+msgid "Xiphos Bible Guide"
+msgstr "Xiphos دليل الكتاب المقدس"
+
