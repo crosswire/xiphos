@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: 3.1.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-09-20 20:42+0100\n"
-"PO-Revision-Date: 2010-09-30 00:09+0100\n"
+"PO-Revision-Date: 2010-09-30 00:47+0100\n"
 "Last-Translator: Peter von Kaehne <refdoc@crosswire.org>\n"
-"Language-Team: Arabic <support@crosswire.org>\n"
-"Language: Arabic\n"
+"Language-Team: Turkish <support@crosswire.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -21,56 +21,56 @@ msgid ""
 "Xiphos failure: \"can't happen\", display_mod: null\n"
 "Please report this. sword_main.cc:set_treekey\n"
 "What were you doing when this occurred?"
-msgstr "Xiphos الفشل : \"لا يمكن أن يحدث\" ، display_mod : فارغة الرجاء الإبلاغ عن هذا. sword_main.cc : set_treekey ماذا كنت تفعل عندما حدث هذا؟"
+msgstr "Xiphos hatası: bildiriniz null Bu, display_mod \"olmaz. sword_main.cc: oluştu set_treekey Bu ne zaman yapıyordun sen?"
 
 #: ../src/backend/sword_main.cc:1083
 msgid "Configuration not found"
-msgstr "التكوين لم يتم العثور على"
+msgstr "Yapılandırması bulunamadı"
 
 #: ../src/editor/slib-editor.c:224
 #: ../src/gnome2/html.c:633
 #, c-format
 msgid "Page %d of %d"
-msgstr "د من الصفحة %d %d"
+msgstr "Sayfa %d /%d"
 
 #: ../src/editor/slib-editor.c:391
 #: ../src/editor/slib-editor.c:438
 msgid "Save As"
-msgstr "حفظ باسم"
+msgstr "Olarak kaydet"
 
 #: ../src/editor/slib-editor.c:409
 #: ../src/editor/slib-editor.c:456
 #: ../src/editor/slib-editor.c:623
 msgid "Untitled document"
-msgstr "بدون عنوان الوثيقة"
+msgstr "belge Untitled"
 
 #: ../src/editor/slib-editor.c:648
 msgid "Are you sure you want to delete the note for"
-msgstr "هل أنت متأكد أنك تريد حذف ملاحظة للحصول على"
+msgstr "Emin misiniz sizin için notu silmek istiyorum"
 
 #: ../src/editor/slib-editor.c:691
 msgid "HTML Output"
-msgstr "أتش تي أم أل الإخراج"
+msgstr "HTML Çıktı"
 
 #: ../src/editor/slib-editor.c:698
 msgid "HTML Source"
-msgstr "أتش تي أم أل المصدر"
+msgstr "HTML Kaynak"
 
 #: ../src/editor/slib-editor.c:705
 msgid "Plain Source"
-msgstr "سهل المصدر"
+msgstr "Düz Kaynak"
 
 #: ../src/editor/slib-editor.c:715
 #: ../ui/editor_note.xml.h:15
 #: ../ui/editor_studypad.xml.h:21
 msgid "_Print..."
-msgstr "_Print..."
+msgstr "_Print ..."
 
 #: ../src/editor/slib-editor.c:722
 #: ../ui/editor_note.xml.h:9
 #: ../ui/editor_studypad.xml.h:14
 msgid "Print Pre_view"
-msgstr "طباعة Pre_view"
+msgstr "Baskı Pre_view"
 
 #: ../src/editor/slib-editor.c:729
 msgid "_Quit"
@@ -78,7 +78,7 @@ msgstr "_Quit"
 
 #: ../src/editor/slib-editor.c:736
 msgid "_Open"
-msgstr "ا _ فتح"
+msgstr "_Open"
 
 #: ../src/editor/slib-editor.c:743
 msgid "_Save"
@@ -86,23 +86,23 @@ msgstr "_Save"
 
 #: ../src/editor/slib-editor.c:750
 msgid "Save _As..."
-msgstr "_As حفظ..."
+msgstr "Kaydetmek _As ..."
 
 #: ../src/editor/slib-editor.c:756
 msgid "New"
-msgstr "جديد"
+msgstr "Yeni"
 
 #: ../src/editor/slib-editor.c:758
 msgid "Open new document"
-msgstr "فتح وثيقة جديدة"
+msgstr "Yeni belge"
 
 #: ../src/editor/slib-editor.c:762
 msgid "Delete"
-msgstr "حذف"
+msgstr "Silmek"
 
 #: ../src/editor/slib-editor.c:764
 msgid "Delete current note"
-msgstr "ملاحظة حذف الحالي"
+msgstr "Silmek geçerli not"
 
 #: ../src/editor/slib-editor.c:769
 #: ../ui/editor_note.xml.h:14
@@ -113,15 +113,15 @@ msgstr "_file"
 
 #: ../src/editor/slib-editor.c:824
 msgid "HTML _Output"
-msgstr "أتش تي أم أل _Output"
+msgstr "HTML _Output"
 
 #: ../src/editor/slib-editor.c:831
 msgid "_HTML Source"
-msgstr "_HTML المصدر"
+msgstr "_HTML Kaynak"
 
 #: ../src/editor/slib-editor.c:838
 msgid "_Plain Source"
-msgstr "_Plain المصدر"
+msgstr "_Plain Kaynak"
 
 #: ../src/editor/slib-editor.c:845
 #: ../ui/xi-menus.glade.h:141
@@ -132,32 +132,32 @@ msgstr "_View"
 #: ../ui/editor_note.xml.h:11
 #: ../ui/editor_studypad.xml.h:16
 msgid "Save"
-msgstr "حفظ"
+msgstr "Kaydetmek"
 
 #: ../src/editor/slib-editor.c:867
 #: ../src/editor/slib-editor.c:874
 msgid "Insert Link"
-msgstr "إدراج ارتباط"
+msgstr "Bağlantı Ekle"
 
 #: ../src/editor/slib-editor.c:1256
 #: ../src/editor/slib-editor.c:1293
 msgid "Save the changes to document"
-msgstr "حفظ التغييرات إلى المستند"
+msgstr "Değişiklikleri belge kaydet"
 
 #: ../src/editor/slib-editor.c:1257
 #: ../src/editor/slib-editor.c:1294
 msgid "before closing?"
-msgstr "قبل أن يغلق؟"
+msgstr "kapatmadan önce?"
 
 #: ../src/editor/slib-editor.c:1264
 #: ../src/editor/slib-editor.c:1301
 msgid "If you don't save, changes will be permanently lost."
-msgstr "إذا لم يكن لحفظ ، سيتم فقدان التغييرات بشكل دائم."
+msgstr "kaydetmek istemiyorsanız, değişiklikler kalıcı olarak kaybolur."
 
 #: ../src/editor/slib-editor.c:1292
 #: ../ui/xi-menus.glade.h:43
 msgid "File"
-msgstr "ملف"
+msgstr "Dosya"
 
 #: ../src/editor/slib-editor.c:1347
 msgid "StudyPad"
@@ -165,90 +165,90 @@ msgstr "StudyPad"
 
 #: ../src/editor/slib-editor.c:1360
 msgid "Note Editor"
-msgstr "ملاحظة المحرر"
+msgstr "Editör notu"
 
 #: ../src/editor/slib-editor.c:1374
 msgid "Prayer List/Journal Editor"
-msgstr "قائمة الصلاة / محرر مجلة"
+msgstr "Dua Listesi / Dergi Editörü"
 
 #: ../src/gecko/gecko-html.cpp:177
 #: ../src/gnome2/html.c:162
 msgid "Unlock "
-msgstr "فتح"
+msgstr "Kilidini açmak"
 
 #: ../src/gecko/gecko-print.c:172
 msgid "Preparing to print"
-msgstr "التحضير للطباعة"
+msgstr "yazdırmak için hazırlanıyor"
 
 #: ../src/gecko/gecko-print.c:266
 msgid "Printing is not supported on this printer"
-msgstr "غير معتمد الطباعة على هذه الطابعة"
+msgstr "Baskı bu yazıcı desteklenmez"
 
 #: ../src/gecko/gecko-print.c:269
 #, c-format
 msgid "Printer %s does not support PostScript printing."
-msgstr "الطابعة%s لا يدعم بوستسكريبت الطباعة."
+msgstr "Yazıcı%s PostScript yazdırma desteği yok."
 
 #: ../src/gecko/gecko-print.c:342
 #: ../src/gecko/gecko-print.c:370
 msgid "Printing"
-msgstr "الطبعة"
+msgstr "Baskı"
 
 #: ../src/gecko/gecko-print.c:372
 msgid "Waiting to print"
-msgstr "في انتظار طباعة"
+msgstr "yazdırmak için bekliyorum"
 
 #: ../src/gecko/gecko-print.c:584
 msgid "An error occurred while printing"
-msgstr "حدث خطأ أثناء الطباعة"
+msgstr "Bir hata baskı oluştu"
 
 #: ../src/gecko/gecko-print.c:588
 #, c-format
 msgid "It was not possible to print your document: %s"
-msgstr "ولم يكن من الممكن لطباعة المستند : %s"
+msgstr "Bu belgenizi yazdırmak mümkün değildi: %s"
 
 #: ../src/gnome2/about_modules.c:195
 msgid "About Sword Module"
-msgstr "حول وحدة السيف"
+msgstr "Kılıç Modül Hakkında"
 
 #: ../src/gnome2/about_modules.c:392
 #: ../src/gnome2/mod_mgr.c:265
 msgid "The module has no About information."
-msgstr "وحدة لا يوجد لديه حول المعلومات."
+msgstr "Modül bilgi hakkında hiçbir bulunmuyor."
 
 #: ../src/gnome2/about_sword.c:81
 msgid ""
 "The SWORD Project is an effort to create an ever-expanding software package for research and study of God and His Word. The SWORD Project framework allows easy use and study of Bible texts, commentaries, lexicons, dictionaries, and other books. Many frontends are built using this framework. An installed set of books may be shared among all frontends using the framework.\n"
 "\n"
 " Books can be downloaded from the SWORD Project."
-msgstr "مشروع السيف محاولة لإنشاء حزمة البرامج الآخذة في التوسع للبحث والدراسة من الله وكلمته. في إطار مشروع السيف يسمح سهلة الاستخدام ودراسة نصوص الكتاب المقدس ، وتعليقات ، والمعاجم والقواميس ، وغيرها من الكتب. يتم بناؤها باستخدام العديد من الواجهات هذا الإطار. من كتب قد تكون مشتركة إن تثبيت تعيين بين جميع الواجهات باستخدام الإطار. التحميل كتب يمكن من مشروع السيف."
+msgstr "SWORD Proje araştırma ve Tanrı&#39;nın çalışma ve Sözü&#39;ne için giderek genişleyen yazılım paketi oluşturmak için bir çabadır. SWORD Projesi çerçevesinde kullanımı kolay ve İncil metinleri, yorumlar, lexicons, sözlük çalışması, ve diğer kitaplar sağlar. Birçok önyüz Bu çerçevede kullanılarak inşa edilir. dizi kitap yüklü bir çerçeve kullanarak önyüz tüm arasında ortak olabilir. Kitap Projesi SWORD dan olabilir indirilebilir."
 
 #: ../src/gnome2/about_sword.c:105
 msgid "The SWORD Project"
-msgstr "السيف المشروع"
+msgstr "SWORD Projesi"
 
 #: ../src/gnome2/about_trans.c:84
 msgid ""
 "Do you like using Xiphos to study the Bible? Would you like to see its display using your native language? You could translate Xiphos! \n"
 "\n"
 "We are always looking for contributions of new translations of Xiphos into other languages. If you are able to translate for us, please see the link below, contact us, and get involved with our efforts."
-msgstr "هل تحب استخدام Xiphos لدراسة الكتاب المقدس؟ هل تريد أن ترى شاشته باستخدام لغتك الأم؟ هل يمكن ترجمة Xiphos! نحن نبحث دائما عن مساهمات جديدة من Xiphos ترجمة إلى لغات أخرى. إذا كنت قادرا على ترجمة بالنسبة لنا ، يرجى الاطلاع على الرابط أدناه ، الاتصال بنا ، والتورط مع جهودنا."
+msgstr "İncil çalışma Xiphos kullanarak sever misiniz? Eğer anadil kullanarak kendi ekran görmek ister misiniz? Eğer Xiphos çevirmek olabilir! Biz dilde diğer içine Xiphos yeni çeviriler katkılarını her zaman arıyoruz. Eğer bizim için çevirmek için aşağıdaki linke bakınız lütfen bize ulaşın ve çabalarımız ile yer almak edebiliyoruz."
 
 #: ../src/gnome2/about_trans.c:98
 msgid "About Xiphos Translation"
-msgstr "حول الترجمة Xiphos"
+msgstr "Xiphos Çeviri Hakkında"
 
 #: ../src/gnome2/about_trans.c:140
 msgid "See TRANSLATION-HOWTO in Xiphos source"
-msgstr "انظر الترجمة ، كوميديا في Xiphos مصدر"
+msgstr "Xiphos Bkz TERCÜME-HOWTO kaynak"
 
 #: ../src/gnome2/about_trans.c:146
 msgid "Xiphos development"
-msgstr "Xiphos التنمية"
+msgstr "Xiphos gelişme"
 
 #: ../src/gnome2/about_xiphos.c:130
 msgid "Copyright 2000-2009 The Xiphos Development Team"
-msgstr "حقوق الطبع والنشر 2000-2009 فريق التطوير Xiphos"
+msgstr "Telif hakkı 2000-2009 Xiphos Geliştirme Ekibi"
 
 #: ../src/gnome2/about_xiphos.c:133
 msgid ""
@@ -256,11 +256,11 @@ msgid ""
 "\n"
 "Powered by The SWORD Project.\n"
 "We would like to thank Troy Griffitts and all the other folks who have given us The SWORD Project."
-msgstr "(المعروف سابقا باسم GnomeSword) بدعم من مشروع السيف. ونود أن نشكر تروي Griffitts وجميع الناس الآخرين الذين قدموا لنا مشروع السيف."
+msgstr "(Eski Gnomesword&#39;a olarak da bilinir) Projesi SWORD Powered by. Biz istiyorsunuz Projesi SWORD gibi teşekkür sahip verilmiş bize Troy millet diğer Griffitts ve tüm."
 
 #: ../src/gnome2/bibletext_dialog.c:315
 msgid "Go to "
-msgstr "الذهاب إلى"
+msgstr "git"
 
 #. info->stock_icon = GTK_STOCK_OPEN;
 #: ../src/gnome2/bookmark_dialog.c:171
@@ -271,115 +271,115 @@ msgstr "الذهاب إلى"
 #: ../ui/editor_studypad.xml.h:2
 #: ../ui/xi-menus.glade.h:14
 msgid "Bookmark"
-msgstr "المرجعية"
+msgstr "Imi"
 
 #: ../src/gnome2/bookmark_dialog.c:173
 #: ../src/gnome2/bookmarks_menu.c:758
 #: ../src/gnome2/bookmarks_treeview.c:135
 msgid "Enter Folder Name"
-msgstr "أدخل اسم المجلد"
+msgstr "Klasör Adı girin"
 
 #: ../src/gnome2/bookmark_dialog.c:175
 #: ../src/gnome2/bookmarks_menu.c:760
 msgid "Folder Name"
-msgstr "اسم المجلد"
+msgstr "Klasör Adı"
 
 #: ../src/gnome2/bookmark_dialog.c:176
 #: ../src/gnome2/bookmarks_menu.c:761
 #: ../src/gnome2/bookmarks_treeview.c:137
 msgid "Folder: "
-msgstr "المجلد :"
+msgstr "Klasör:"
 
 #: ../src/gnome2/bookmarks_menu.c:206
 msgid "Specify bookmarks file"
-msgstr "العلامات حدد الملف"
+msgstr "Belirtmek imleri dosyası"
 
 #: ../src/gnome2/bookmarks_menu.c:349
 #: ../ui/xi-menus.glade.h:36
 msgid "Edit"
-msgstr "تحرير"
+msgstr "Düzenlemek"
 
 #: ../src/gnome2/bookmarks_menu.c:366
 msgid "Folder name: "
-msgstr "اسم المجلد :"
+msgstr "Klasör adı:"
 
 #: ../src/gnome2/bookmarks_menu.c:369
 msgid "Bookmark name: "
-msgstr "المرجعية الاسم :"
+msgstr "Işareti adı:"
 
 #: ../src/gnome2/bookmarks_menu.c:372
 #: ../src/gnome2/bookmarks_menu.c:666
 msgid "Verse: "
-msgstr "الآية :"
+msgstr "Ayet:"
 
 #: ../src/gnome2/bookmarks_menu.c:373
 #: ../src/gnome2/bookmarks_menu.c:667
 msgid "Module: "
-msgstr "الوحدة :"
+msgstr "Modülü:"
 
 #: ../src/gnome2/bookmarks_menu.c:495
 msgid "Remove the selected folder"
-msgstr "إزالة المجلد المحدد"
+msgstr "Seçilen klasör kaldırma"
 
 #: ../src/gnome2/bookmarks_menu.c:497
 msgid "(and all its contents)?"
-msgstr "(وجميع محتوياته؟"
+msgstr "(Ve tüm içeriği)?"
 
 #: ../src/gnome2/bookmarks_menu.c:500
 msgid "Remove the selected bookmark"
-msgstr "إزالة العلامة المحددة"
+msgstr "seçili yer imini kaldır"
 
 #: ../src/gnome2/bookmarks_menu.c:659
 msgid "Add"
-msgstr "أضف"
+msgstr "Eklemek"
 
 #: ../src/gnome2/bookmarks_menu.c:665
 msgid "Label: "
-msgstr "الشركة المنتجة :"
+msgstr "Etiket:"
 
 #: ../src/gnome2/bookmarks_treeview.c:108
 #: ../src/gnome2/export_bookmarks.c:193
 #: ../src/gnome2/export_bookmarks.c:252
 #, c-format
 msgid "Search result: %s"
-msgstr "نتيجة بحث : %s"
+msgstr "Arama sonucu:%s"
 
 #: ../src/gnome2/bookmarks_treeview.c:944
 #: ../src/gnome2/sidebar.c:1374
 msgid "Bookmarks"
-msgstr "العلامات"
+msgstr "Imleri"
 
 #: ../src/gnome2/cipher_key_dialog.c:61
 #, c-format
 msgid "Cipher key for module %s"
-msgstr "الشفرات الرئيسية ليالي الوحدة %s "
+msgstr "modül için %s Cipher anahtar sözcükler"
 
 #: ../src/gnome2/cipher_key_dialog.c:62
 msgid "for:"
-msgstr "ل :"
+msgstr "için:"
 
 #: ../src/gnome2/cipher_key_dialog.c:65
 msgid "Enter Key: "
-msgstr "مفتاح الدخول :"
+msgstr "Enter tuşu:"
 
 #: ../src/gnome2/dialog.c:264
 msgid "Close without Saving"
-msgstr "إغلاق بدون الحفظ"
+msgstr "Yakın Tasarruf olmadan"
 
 #: ../src/gnome2/dialog.c:573
 msgid "Xiphos:"
-msgstr "Xiphos :"
+msgstr "Xiphos:"
 
 #: ../src/gnome2/dialog.c:674
 msgid "Close _without Saving"
-msgstr "إغلاق _without إنقاذ"
+msgstr "Yakın Tasarruf _without"
 
 #: ../src/gnome2/export_bookmarks.c:195
 #: ../src/gnome2/export_bookmarks.c:254
 #: ../src/gnome2/sidebar.c:1390
 #, c-format
 msgid "Verse List"
-msgstr "الآية قائمة"
+msgstr "Ayet Listesi"
 
 #: ../src/gnome2/export_bookmarks.c:689
 msgid "VerseList"
@@ -387,57 +387,57 @@ msgstr "VerseList"
 
 #: ../src/gnome2/export_bookmarks.c:694
 msgid "SearchResults"
-msgstr "SearchResults"
+msgstr "Arama sonuçları"
 
 #: ../src/gnome2/export_dialog.c:267
 #: ../ui/export-dialog.glade.h:20
 msgid "Please check copyright before exporting!"
-msgstr "يرجى التحقق من حقوق التأليف والنشر قبل تصدير!"
+msgstr "ihracat öncesi telif kontrol edin!"
 
 #: ../src/gnome2/find_dialog.c:204
 #: ../src/gnome2/find_dialog.c:373
 msgid "Find"
-msgstr "البحث"
+msgstr "Bulmak"
 
 #: ../src/gnome2/find_dialog.c:222
 msgid "Enter Word or Phrase"
-msgstr "أدخل كلمة أو عبارة"
+msgstr "Kelime ya da cümle girin"
 
 #: ../src/gnome2/find_dialog.c:238
 #: ../src/gnome2/search_sidebar.c:297
 #: ../ui/search-dialog.glade.h:59
 msgid "Match case"
-msgstr "حالة المباراة"
+msgstr "Maç durumda"
 
 #: ../src/gnome2/find_dialog.c:245
 msgid "Search backwards"
-msgstr "البحث الى الوراء"
+msgstr "Arama geriye"
 
 #: ../src/gnome2/find_dialog.c:254
 #: ../src/gnome2/search_sidebar.c:262
 #: ../ui/search-dialog.glade.h:78
 msgid "Regular expression"
-msgstr "التعبير العادية"
+msgstr "Düzenli ifade"
 
 #: ../src/gnome2/find_dialog.c:295
 msgid "Find Next"
-msgstr "بحث عن التالي"
+msgstr "Sonrakini bul"
 
 #: ../src/gnome2/font_dialog.c:304
 msgid "Set Module Font"
-msgstr "مجموعة الخط الوحدة"
+msgstr "Set Modülü Yazı"
 
 #: ../src/gnome2/font_dialog.c:334
 msgid "Change font for"
-msgstr "تغيير الخط"
+msgstr "için yazı tipini değiştirme"
 
 #: ../src/gnome2/font_dialog.c:338
 msgid "Module"
-msgstr "وحدة"
+msgstr "Modül"
 
 #: ../src/gnome2/font_dialog.c:342
 msgid "Current font: "
-msgstr "الخط الحالي :"
+msgstr "Geçerli yazı tipi:"
 
 #: ../src/gnome2/font_dialog.c:374
 msgid "+0"
@@ -445,7 +445,7 @@ msgstr "+0"
 
 #: ../src/gnome2/font_dialog.c:378
 msgid "Use the default font for this module"
-msgstr "استخدام الخط الافتراضي لهذه الوحدة"
+msgstr "Bu modül için varsayılan yazı tipi kullanın"
 
 #. *****************************************************************************
 #. * Name
@@ -473,7 +473,7 @@ msgid ""
 "\n"
 "Would you like Xiphos to set itself as the\n"
 "program to handle these references?"
-msgstr "المراجع باستخدام عنوان \"بحد السيف : / /\" صفحة ويب يمكن أن تكون مراجع) المستخدمة (على غرار برامج للبحث عن مراجع الكتاب المقدس. النظام الخاص بك ليس لديها حاليا مجموعة برنامج للتعامل مع هذه المراجع. هل تريد Xiphos لتعيين نفسها على أنها برنامج للتعامل مع هذه المراجع؟"
+msgstr "kutsal referansları kadar kullanılabilir olmasını programlara bakın: benzer (/ / \"ile olabilir) başvurular sayfa web kılıç\" kullanarak URL referanslar. Sistem şu anda başvuruları ele bunlara set programı vardır hayır. Referansları misiniz bunlar işlemek için programın kendisi gibi ayarlamak ister Xiphos?"
 
 #: ../src/gnome2/gui.c:103
 msgid ""
@@ -483,7 +483,7 @@ msgid ""
 "You may wish to run the program \"gconf-editor\"\n"
 "to examine keys under /desktop/gnome/url-handlers,\n"
 "if you need to change these."
-msgstr "وقد نجحت مجموعة Xiphos نفسها معالج من السيف : / / والكتاب المقدس : / / عناوين التغيير. قد ترغب في تشغيل برنامج \"جيكونف المحرر\" لدراسة تحت مفاتيح / سطح المكتب / جنوم / رابط ، معالجات ، إذا كنت بحاجة إلى هذه."
+msgstr "Xiphos kılıç olan bir eylemci kendini olarak ayarlamak başarıyla: / / ve İncil: / / URL değiştirin. Gerekiyor eğer / gnome / url-eylemcileri, masaüstü / gconf \"programı anahtarları altında-editor\" incelemek için çalıştırmak Sen isteyebilirsiniz Bu."
 
 #: ../src/gnome2/gui.c:157
 #, c-format
@@ -491,29 +491,27 @@ msgid ""
 "Xiphos failed to complete handler init for key #%d:\n"
 "%s"
 msgstr ""
-"فشل Xiphos لاستكمال التهيئة معالج # %d:\n"
-"%s"
 
 #: ../src/gnome2/gui.c:203
 msgid "BUG! Xiphos is about to crash due to a \"STRDUP\" error."
-msgstr "علة! Xiphos على وشك أن تحطم بسبب خطأ \"STRDUP\"."
+msgstr "HATA! Xiphos hakkında bir \"STRDUP\" hatası nedeniyle kaza etmektir."
 
 #: ../src/gnome2/gui.c:204
 #: ../src/gnome2/gui.c:239
 msgid "Please report this error to the Xiphos team with:"
-msgstr "الرجاء الإبلاغ عن هذا الخطأ لفريق Xiphos مع :"
+msgstr "ile Xiphos ekibine Lütfen bu hatayı bildirin:"
 
 #: ../src/gnome2/gui.c:238
 msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
-msgstr "علة! Xiphos على وشك أن تحطم نتيجة لخطأ في \"السلسلة\"."
+msgstr "HATA! Xiphos hakkında \"STRING\" hatası nedeniyle kaza etmektir."
 
 #: ../src/gnome2/main_window.c:793
 msgid "Xiphos - Bible Study Software"
-msgstr "Xiphos -- دراسة الكتاب المقدس البرمجيات"
+msgstr "Xiphos - İncil Çalışması Yazılım"
 
 #: ../src/gnome2/main_window.c:848
 msgid "Open a new tab"
-msgstr "فتح علامة تبويب جديدة"
+msgstr "yeni bir sekme açma"
 
 #: ../src/gnome2/main_window.c:928
 #: ../src/gnome2/sidebar.c:616
@@ -523,19 +521,19 @@ msgstr "فتح علامة تبويب جديدة"
 #: ../src/main/sidebar.cc:1010
 #: ../src/main/sidebar.cc:1011
 msgid "Standard View"
-msgstr "عرض قياسي"
+msgstr "Standart Profil"
 
 #: ../src/gnome2/main_window.c:1009
 msgid "Commentary View"
-msgstr "تعليق الصورة"
+msgstr "Yorum Profili"
 
 #: ../src/gnome2/main_window.c:1025
 msgid "Book View"
-msgstr "عرض كتاب"
+msgstr "Kitap Profili"
 
 #: ../src/gnome2/main_window.c:1050
 msgid "Welcome to Xiphos"
-msgstr "مرحبا بكم في Xiphos"
+msgstr "Hoşgeldin Xiphos için"
 
 #: ../src/gnome2/menu_popup.c:1208
 msgid ""
@@ -547,19 +545,19 @@ msgid ""
 "such as the contents of this commentary.\n"
 "Therefore, personal commentary renaming is\n"
 "not available in the Windows environment."
-msgstr "إعادة تسمية غير متوفر في ويندوز. محدودة Xiphos هو ل &#39;ويندوز نظام الملفات ، لأنه يرفض إعادة تسمية اسم الملف عناصر فتح الملفات حاليا ، مثل محتويات هذا التعليق ، وبالتالي إعادة تسمية الشخصية التعليق غير متوفر في بيئة ويندوز."
+msgstr "ortamı Windows mevcuttur Xiphos yeniden adlandırma. Windows&#39;ta değil kullanılamaz adlandırma bir yorum, kişisel nedenle. yorum bu gibi içeriklerin resimler, açık şu bileşenlerin sınırlı Windows &#39;dosya sistemi, dosya isimlerinin değiştirilmesi çünkü izin vermez."
 
 #: ../src/gnome2/menu_popup.c:1227
 msgid "Rename Commentary"
-msgstr "إعادة تسمية التعليق"
+msgstr "Adlandırmak Yorum"
 
 #: ../src/gnome2/menu_popup.c:1230
 msgid "Choose Commentary Name"
-msgstr "اختيار اسم التعليق"
+msgstr "Seçim Commentary Adı"
 
 #: ../src/gnome2/menu_popup.c:1232
 msgid "New Name"
-msgstr "اسم جديد"
+msgstr "Yeni Adı"
 
 #: ../src/gnome2/menu_popup.c:1233
 #: ../src/gnome2/treekey-editor.c:135
@@ -567,33 +565,31 @@ msgstr "اسم جديد"
 #: ../src/gnome2/treekey-editor.c:280
 #: ../src/main/prayerlists.cc:243
 msgid "Name: "
-msgstr "الاسم :"
+msgstr "Adı:"
 
 #: ../src/gnome2/menu_popup.c:1243
 #: ../src/main/prayerlists.cc:257
 msgid "Module names must contain [A-Za-z0-9_] only."
-msgstr "يجب أن تكون أسماء وحدة نمطية تحتوي على [ألف زا - z0 - 9_] فقط."
+msgstr "Modül adları yalnızca [A-Za-z0-9_] içermelidir."
 
 #: ../src/gnome2/menu_popup.c:1250
 #: ../src/main/prayerlists.cc:264
 msgid "Xiphos already knows a module by that name."
-msgstr "Xiphos يعرف بالفعل وحدة بهذا الاسم."
+msgstr "Xiphos zaten bu isimde bir modül biliyor."
 
 #: ../src/gnome2/menu_popup.c:1291
 #, c-format
 msgid ""
 "Failed to create new configuration:\n"
 "%s"
-msgstr ""
-"فشلت في خلق التكوين الجديد : \n"
-"%s"
+msgstr "yapılandırma, yeni oluşturmak alınamadı:%s"
 
 #: ../src/gnome2/menu_popup.c:1300
 msgid ""
 "Configuration build error:\n"
 "\n"
 msgstr ""
-"التكوين بناء الخطأ :\n"
+"Yapılandırma hatası kurmak:\n"
 "\n"
 
 #. *****************************************************************************
@@ -640,139 +636,139 @@ msgid ""
 "<u>Warning</u>: If you live in a persecuted country, use with care.\n"
 "\n"
 "Both this step-by-step instruction dialog and the general introduction dialog may be closed at any time."
-msgstr ""
+msgstr "<b>Hoşgeldin Xiphos için.</b> İncil yüklenir yoktur. başlatmak için, Xiphos en az bir İncil modül ihtiyacı var. Bunu kolaylaştırmak için, Modül Yöneticisi yerel bir modül kümesi (CD, flash sürücü) veya CrossWire Bible Society ağ üzerinden ya, bir veya birden fazla İncil kurabilir böylece açıldı. açılmış ayrıca genel modül yöneticisi bakış vardır ve, adım talimatlar Lütfen adım bakın bunlara - <u>yerel. yüklemek için:</u> <i>Kaynaklar</i> yılında <i>Modülü:</i> bulundu <i>Ekle / Kaldır</i> olmak klasör adını modülleri olabilir, eklemek yerel yeni bir (. Bu <i>modül</i> ve bir <i>mods.d</i> adında mevcut olduğu <i>klasörleri.) Modülü</i> - In <i>Kaynaklar seçin,</i> düğmesine tıklayın \"Yerel\" ve <u>gelen ağ kurmak için</u> açılan. <i>seçin</i> sizin seçmek Klasör <u>CrossWire:</u> tıklayın <i>-: Kaynakları Modülü</i> basıp CrossWire dan açılan. düğmesine Uzak \"\" - alt Yenile \"düğmesine at\" ı tıklayın - <u>ya. In case:</u> <i>Modüller In: / Update</i> seçeneğini İncil ve diğer tercih. senin modülleri <i>yükleyin</i> - \"Click\" Install -. yapılır sen Yöneticisi kapatın Modülü:. <u>Uyarı</u> önem veriyorsanız ile zulüm canlı bir kullanmak, ülke zaman. Hem bu adım giriş-adım öğretim iletişim ve genel bir kapatılmaya iletişim olabilir."
 
 #: ../src/gnome2/mod_mgr.c:183
 msgid "Remove these modules?"
-msgstr "إزالة هذه الوحدات؟"
+msgstr "Bu modüllerin kaldırılsın mı?"
 
 #: ../src/gnome2/mod_mgr.c:184
 msgid "Preparing to remove"
-msgstr "تستعد لازالة"
+msgstr "kaldırmak için hazırlanıyor"
 
 #: ../src/gnome2/mod_mgr.c:185
 msgid "Removing"
-msgstr "إزالة"
+msgstr "Çıkarmadan"
 
 #: ../src/gnome2/mod_mgr.c:186
 #: ../ui/xi-menus.glade.h:89
 msgid "Remove"
-msgstr "إزالة"
+msgstr "Kaldırmak"
 
 #: ../src/gnome2/mod_mgr.c:189
 msgid "Install these modules?"
-msgstr "تثبيت هذه الوحدات؟"
+msgstr "Bu modüllerin kurulsun mu?"
 
 #: ../src/gnome2/mod_mgr.c:190
 msgid "Preparing to install"
-msgstr "التحضير لتثبيت"
+msgstr "yüklemek için hazırlanıyor"
 
 #: ../src/gnome2/mod_mgr.c:191
 msgid "Installing"
-msgstr "تثبيت"
+msgstr "Yükleme"
 
 #: ../src/gnome2/mod_mgr.c:192
 msgid "Install"
-msgstr "تثبيت"
+msgstr "Yüklemek"
 
 #: ../src/gnome2/mod_mgr.c:195
 msgid "Archive these modules?"
-msgstr "الأرشيف هذه الوحدات؟"
+msgstr "Arşiv bu modülleri?"
 
 #: ../src/gnome2/mod_mgr.c:196
 msgid "Preparing to archive"
-msgstr "تستعد لالأرشيف"
+msgstr "arşiv için hazırlanıyor"
 
 #: ../src/gnome2/mod_mgr.c:197
 msgid "Archiving"
-msgstr "أرشفة"
+msgstr "Arşivleme"
 
 #: ../src/gnome2/mod_mgr.c:198
 msgid "Archive"
-msgstr "الأرشيف"
+msgstr "Arşiv"
 
 #: ../src/gnome2/mod_mgr.c:201
 msgid ""
 "Build fast-search index for these\n"
 "modules (may take minutes/module)?"
-msgstr "بناء فهرس البحث السريع لهذه الوحدات (قد يستغرق دقائق / وحدة)؟"
+msgstr "arama indeksi için bu modüllerin-Build hızlı (modül / dakika sürebilir)?"
 
 #: ../src/gnome2/mod_mgr.c:202
 msgid "Preparing to index"
-msgstr "تستعد للمؤشر"
+msgstr "endeks hazırlanıyor"
 
 #: ../src/gnome2/mod_mgr.c:203
 msgid "Indexing"
-msgstr "فهرسة"
+msgstr "Endeksleme"
 
 #: ../src/gnome2/mod_mgr.c:204
 msgid "Index"
-msgstr "مؤشر"
+msgstr "Indeks"
 
 #: ../src/gnome2/mod_mgr.c:207
 msgid "Delete fast-search index for these modules?"
-msgstr "حذف سريع في البحث عن الرقم القياسي لهذه الوحدات؟"
+msgstr "Bu modüller için silme hızlı arama indeksi?"
 
 #: ../src/gnome2/mod_mgr.c:208
 msgid "Preparing to delete index"
-msgstr "تستعد لحذف فهرس"
+msgstr "dizini silmek için hazırlanıyor"
 
 #: ../src/gnome2/mod_mgr.c:209
 msgid "Deleting index"
-msgstr "حذف فهرس"
+msgstr "indeks silme"
 
 #: ../src/gnome2/mod_mgr.c:210
 msgid "Deletion"
-msgstr "شطب"
+msgstr "Silme"
 
 #: ../src/gnome2/mod_mgr.c:435
 msgid "Module Name"
-msgstr "اسم الوحدة"
+msgstr "Modül Adı"
 
 #: ../src/gnome2/mod_mgr.c:456
 msgid "A checkmark means this module is already installed"
-msgstr "على تحديد وسائل تم بالفعل تثبيت هذه الوحدة"
+msgstr "Bir onay işareti bu modül zaten yüklü olduğu anlamına gelir"
 
 #: ../src/gnome2/mod_mgr.c:478
 msgid "Click the box to work on this module"
-msgstr "انقر فوق مربع للعمل في هذه الوحدة"
+msgstr "kutusunda bu modül üzerinde çalışmak için tıklayın"
 
 #: ../src/gnome2/mod_mgr.c:479
 msgid "Click the box to select this module for install/update"
-msgstr "انقر فوق المربع لتحديد هذه الوحدة من أجل تثبيت / تحديث"
+msgstr "install / güncelleme için bu modülü seçmek için kutuyu tıklayın"
 
 #: ../src/gnome2/mod_mgr.c:498
 msgid "Installed"
-msgstr "تثبيت"
+msgstr "Yüklü"
 
 #: ../src/gnome2/mod_mgr.c:508
 msgid "The index icon means you have built an optimized ('lucene') index for this module for fast searching (see the Maintenance pane for this function)"
-msgstr "رمز مؤشر يعني أنك قد بنيت فهرس الأمثل (&#39;وسين&#39;) لهذه الوحدة من أجل البحث السريع (انظر الجزء الصيانة لهذه المهمة)"
+msgstr "Endeks simge (bu işlev için Bakım bölmesinde bakınız) arama hızlı bu modül için bir (&#39;Lucene&#39;) optimize endeksi inşa demektir"
 
 #: ../src/gnome2/mod_mgr.c:526
 msgid "The lock icon means this module is encrypted, and requires that you purchase an unlock key from the content owner"
-msgstr "رمز القفل وسائل هذه الوحدة مشفرة ، ويتطلب أن تقوم بشراء فتح المفتاح من مالك المحتوى"
+msgstr "Kilit simgesi, bu modül şifreli olduğu anlamına gelir ve bir içerik sahibinden anahtar kilidini satın gerektirir"
 
 #: ../src/gnome2/mod_mgr.c:543
 #: ../ui/xi-menus.glade.h:1
 msgid "About"
-msgstr "حول"
+msgstr "Hakkında"
 
 #: ../src/gnome2/mod_mgr.c:563
 msgid "The refresh icon means the Installed module is older than the newer Available module: You should update the module"
-msgstr "رمز التحديث يعني وحدة المثبت أقدم من وحدة الأحدث المتوفرة : يجب عليك تحديث وحدة"
+msgstr "Yenileme simgesi Yüklü modül yeni Mevcut modül daha büyük olduğu anlamına gelir: güncellemeniz gerekir modülü"
 
 #: ../src/gnome2/mod_mgr.c:575
 msgid "Available"
-msgstr "متاح"
+msgstr "Mevcut"
 
 #: ../src/gnome2/mod_mgr.c:584
 msgid "Size"
-msgstr "حجم"
+msgstr "Boyut"
 
 #: ../src/gnome2/mod_mgr.c:593
 msgid "Description"
-msgstr "الوصف"
+msgstr "Açıklama"
 
 #: ../src/gnome2/mod_mgr.c:740
 #, c-format
@@ -780,24 +776,26 @@ msgid ""
 "`mkdir %s' failed:\n"
 "%s."
 msgstr ""
+"`mkdir %s' başarısız oldu:\n"
+"%s."
 
 #: ../src/gnome2/mod_mgr.c:762
 msgid " archived in: \n"
-msgstr "المؤرشفة في :\n"
+msgstr "arşivlenir:\n"
 
 #: ../src/gnome2/mod_mgr.c:817
 msgid "Journals and prayer lists cannot be indexed."
-msgstr "لا يمكن المجلات وقوائم الصلاة وفهرستها."
+msgstr "Dergi ve dua listeleri endeksli olamaz."
 
 #: ../src/gnome2/mod_mgr.c:837
 #, c-format
 msgid "%s failed"
-msgstr "%s فشلت"
+msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:840
 #: ../src/gnome2/mod_mgr.c:1586
 msgid "Finished"
-msgstr "انتهى"
+msgstr "Bitmiş"
 
 #: ../src/gnome2/mod_mgr.c:1008
 #: ../src/gnome2/mod_mgr.c:1010
@@ -812,29 +810,27 @@ msgstr "انتهى"
 #: ../src/main/sidebar.cc:916
 #: ../src/main/sidebar.cc:918
 msgid "Unknown"
-msgstr "غير معروف"
+msgstr "Bilinmeyen"
 
 #: ../src/gnome2/mod_mgr.c:1308
 #, c-format
 msgid ""
 "Repository:\n"
 "%s"
-msgstr ""
-"مستودع : \n"
-"%s"
+msgstr "Depo:%s"
 
 #: ../src/gnome2/mod_mgr.c:1320
 msgid ""
 "Categorized by\n"
 "Module Type"
-msgstr "مصنفة حسب نوع الوحدة"
+msgstr "Türü Modülü Categorized tarafından"
 
 #: ../src/gnome2/mod_mgr.c:1325
 #: ../src/gnome2/utilities.c:589
 #: ../src/main/sidebar.cc:993
 #: ../src/main/sidebar.cc:995
 msgid "Biblical Texts"
-msgstr "نصوص الكتاب المقدس"
+msgstr "İncille Metinler"
 
 #: ../src/gnome2/mod_mgr.c:1329
 #: ../src/gnome2/utilities.c:593
@@ -843,28 +839,28 @@ msgstr "نصوص الكتاب المقدس"
 #: ../src/main/sidebar.cc:1020
 #: ../ui/prefs.glade.h:36
 msgid "Commentaries"
-msgstr "التعليقات"
+msgstr "Yorumlar"
 
 #: ../src/gnome2/mod_mgr.c:1333
 #: ../src/gnome2/utilities.c:598
 #: ../src/main/sidebar.cc:1027
 #: ../src/main/sidebar.cc:1029
 msgid "Dictionaries"
-msgstr "القواميس"
+msgstr "Sözlükler"
 
 #: ../src/gnome2/mod_mgr.c:1337
 #: ../src/gnome2/utilities.c:602
 #: ../src/main/sidebar.cc:1036
 #: ../src/main/sidebar.cc:1038
 msgid "Glossaries"
-msgstr "المسارد"
+msgstr "Sözlükler"
 
 #: ../src/gnome2/mod_mgr.c:1341
 #: ../src/gnome2/utilities.c:606
 #: ../src/main/sidebar.cc:1045
 #: ../src/main/sidebar.cc:1047
 msgid "Daily Devotionals"
-msgstr "يوميا دفوأيشنلس"
+msgstr "Günlük devotionals"
 
 #: ../src/gnome2/mod_mgr.c:1345
 #: ../src/gnome2/utilities.c:610
@@ -872,42 +868,42 @@ msgstr "يوميا دفوأيشنلس"
 #: ../src/main/sidebar.cc:1054
 #: ../src/main/sidebar.cc:1056
 msgid "General Books"
-msgstr "كتب عامة"
+msgstr "Genel Kitaplar"
 
 #: ../src/gnome2/mod_mgr.c:1349
 #: ../src/gnome2/utilities.c:614
 #: ../src/main/sidebar.cc:1063
 #: ../src/main/sidebar.cc:1065
 msgid "Maps"
-msgstr "خرائط"
+msgstr "Haritaları"
 
 #: ../src/gnome2/mod_mgr.c:1353
 #: ../src/gnome2/utilities.c:618
 #: ../src/main/sidebar.cc:1072
 #: ../src/main/sidebar.cc:1074
 msgid "Images"
-msgstr "الصور"
+msgstr "Görüntüler"
 
 #: ../src/gnome2/mod_mgr.c:1357
 #: ../src/gnome2/utilities.c:622
 #: ../src/main/sidebar.cc:1081
 #: ../src/main/sidebar.cc:1083
 msgid "Cult/Unorthodox"
-msgstr "عبادة / غير تقليدي"
+msgstr "Kült / Ortodoks Olmayan"
 
 #: ../src/gnome2/mod_mgr.c:1365
 msgid ""
 "Categorized by\n"
 "Availability"
-msgstr "مصنفة حسب توفر"
+msgstr "Durumu ile Categorized"
 
 #: ../src/gnome2/mod_mgr.c:1370
 msgid "Updates"
-msgstr "تحديثات"
+msgstr "Güncellemeleri"
 
 #: ../src/gnome2/mod_mgr.c:1374
 msgid "Uninstalled"
-msgstr "إلغاء"
+msgstr "Kaldırıldı"
 
 #: ../src/gnome2/mod_mgr.c:1378
 #: ../src/gnome2/sidebar.c:632
@@ -916,184 +912,184 @@ msgstr "إلغاء"
 #: ../src/main/sidebar.cc:1091
 #: ../src/main/sidebar.cc:1093
 msgid "Prayer List/Journal"
-msgstr "قائمة الصلاة / مجلة"
+msgstr "Dua Listesi / Dergi"
 
 #: ../src/gnome2/mod_mgr.c:1570
 msgid "Refreshing from remote source"
-msgstr "منعش من مصدر بعيد"
+msgstr "Uzak bir kaynaktan Yenileniyor"
 
 #: ../src/gnome2/mod_mgr.c:1580
 msgid "Remote source not found"
-msgstr "لم يتم العثور على مصدر البعيد"
+msgstr "Uzaktan kaynak bulunamadı"
 
 #: ../src/gnome2/mod_mgr.c:1650
 msgid "Configure"
-msgstr "تكوين"
+msgstr "Yapılandırmak"
 
 #: ../src/gnome2/mod_mgr.c:1681
 msgid "Type"
-msgstr "نوع"
+msgstr "Türü"
 
 #: ../src/gnome2/mod_mgr.c:1688
 msgid "Caption"
-msgstr "شرح"
+msgstr "Başlık"
 
 #: ../src/gnome2/mod_mgr.c:1696
 msgid "Source"
-msgstr "مصدر"
+msgstr "Kaynak"
 
 #: ../src/gnome2/mod_mgr.c:1704
 msgid "Directory"
-msgstr "الدليل"
+msgstr "Dizin"
 
 #: ../src/gnome2/mod_mgr.c:1712
 msgid "User"
-msgstr "المستخدم"
+msgstr "Kullanıcı"
 
 #: ../src/gnome2/mod_mgr.c:1720
 msgid "Password"
-msgstr "كلمة السر"
+msgstr "Şifre"
 
 #: ../src/gnome2/mod_mgr.c:1728
 msgid "UID"
-msgstr "الأوصاف الفريدة"
+msgstr "UID"
 
 #: ../src/gnome2/mod_mgr.c:1745
 msgid "Module Sources"
-msgstr "مصادر الوحدة"
+msgstr "Modül Kaynakları"
 
 #: ../src/gnome2/mod_mgr.c:1748
 msgid "Add/Remove"
-msgstr "إضافة / إزالة"
+msgstr "Ekle / Kaldır"
 
 #: ../src/gnome2/mod_mgr.c:1750
 msgid "Choose"
-msgstr "اختر"
+msgstr "Seçmek"
 
 #: ../src/gnome2/mod_mgr.c:1754
 #: ../src/gnome2/preferences_dialog.c:1719
 #: ../src/gnome2/sidebar.c:1398
 msgid "Modules"
-msgstr "وحدات"
+msgstr "Modülleri"
 
 #: ../src/gnome2/mod_mgr.c:1756
 msgid "Install/Update"
-msgstr "تثبيت / تحديث"
+msgstr "Install / Güncelleme"
 
 #: ../src/gnome2/mod_mgr.c:1758
 msgid "Maintenance"
-msgstr "الصيانة"
+msgstr "Bakım"
 
 #: ../src/gnome2/mod_mgr.c:1979
 msgid "Please Refresh"
-msgstr "يرجى تحديث"
+msgstr "Lütfen yenileyin"
 
 #: ../src/gnome2/mod_mgr.c:1980
 msgid "Your module list is not up to date!"
-msgstr "قائمة الوحدة النمطية الخاص بك لا يصل حتى الآن!"
+msgstr "Sizin modül listesi güncel değil!"
 
 #. Zero Bibles is just not workable in Xiphos.
 #: ../src/gnome2/mod_mgr.c:2273
 msgid ""
 "You have uninstalled your last Bible.\n"
 "Xiphos requires at least one."
-msgstr "إلغاء لديك الخاص بالموقع الكتاب المقدس. Xiphos يتطلب واحد على الأقل."
+msgstr "Eğer en az bir şekilde kaldırdınız son İncil de Xiphos. Gerektirir."
 
 #: ../src/gnome2/mod_mgr.c:2279
 msgid ""
 "There are still no Bibles installed.\n"
 "Xiphos cannot continue without one."
-msgstr "لا توجد حتى الآن تثبيت الاناجيل. Xiphos لا يمكن ان يستمر من دون واحدة."
+msgstr "olmadan tek devam edebilirsiniz değil Xiphos vardır. yüklü İncil yok hala."
 
 #: ../src/gnome2/mod_mgr.c:2369
 msgid "Standard remote sources have been loaded."
-msgstr "تم تحميلها المصادر الاعتيادية البعيدة."
+msgstr "Standart uzaktan kaynaklardan yüklenen edilmiştir."
 
 #: ../src/gnome2/mod_mgr.c:2375
 msgid "Could not load standard sources from CrossWire."
-msgstr "لا يمكن تحميل المصادر القياسية من CrossWire."
+msgstr "CrossWire arası standart kaynakları yüklenemedi."
 
 #: ../src/gnome2/mod_mgr.c:2543
 #: ../src/gnome2/mod_mgr.c:2789
 msgid "Remove the selected source"
-msgstr "إزالة مصدر مختارة"
+msgstr "Seçilen kaynak Kaldır"
 
 #: ../src/gnome2/mod_mgr.c:2603
 msgid "Enter a remote source"
-msgstr "أدخل مصدر بعيد"
+msgstr "Uzak bir kaynak girin"
 
 #: ../src/gnome2/mod_mgr.c:2607
 msgid "Caption:"
-msgstr "التعليق :"
+msgstr "Başlık:"
 
 #: ../src/gnome2/mod_mgr.c:2608
 msgid "Type:"
-msgstr "النوع :"
+msgstr "Türü:"
 
 #: ../src/gnome2/mod_mgr.c:2609
 msgid "Host:"
-msgstr "المضيف :"
+msgstr "Host:"
 
 #: ../src/gnome2/mod_mgr.c:2610
 msgid "Directory:"
-msgstr "الدليل :"
+msgstr "Dizin:"
 
 #: ../src/gnome2/mod_mgr.c:2611
 msgid "User (optional):"
-msgstr "المستخدم (اختياري) :"
+msgstr "Kullanıcı (isteğe bağlı):"
 
 #: ../src/gnome2/mod_mgr.c:2612
 msgid "Password (optional):"
-msgstr "كلمة السر (اختياري) :"
+msgstr "Parola (isteğe bağlı):"
 
 #. this can happen at most once
 #: ../src/gnome2/mod_mgr.c:2639
 msgid "A source by that name already exists."
-msgstr "مصدر هذا الاسم موجود مسبقا."
+msgstr "bu isimle bir kaynak zaten var."
 
 #: ../src/gnome2/mod_mgr.c:2786
 msgid "Delete a remote source"
-msgstr "حذف مصدر بعيد"
+msgstr "Silmek uzak bir kaynak"
 
 #: ../src/gnome2/navbar_book.c:358
 #: ../src/gnome2/navbar_book_dialog.c:299
 msgid "Go outward, to the section containing this one"
-msgstr "الذهاب إلى الخارج ، إلى المقطع تحتوي على هذا واحد"
+msgstr "bu içeren bölümüne, dışa git"
 
 #: ../src/gnome2/navbar_book.c:373
 #: ../src/gnome2/navbar_book_dialog.c:314
 msgid "Go to previous item"
-msgstr "الذهاب إلى العنصر السابق"
+msgstr "önceki öğeye gider"
 
 #: ../src/gnome2/navbar_book.c:387
 #: ../src/gnome2/navbar_book_dialog.c:328
 msgid "Go to next item"
-msgstr "الذهاب إلى البند التالي"
+msgstr "Bir sonraki öğeye gider"
 
 #: ../src/gnome2/navbar_book.c:401
 #: ../src/gnome2/navbar_book_dialog.c:342
 msgid "Go inward, to the first subsection"
-msgstr "الذهاب إلى الداخل ، إلى الفرع الأول"
+msgstr "Birinci fıkrada için, dahilde git"
 
 #: ../src/gnome2/navbar_versekey_dialog.c:868
 #: ../src/gnome2/navbar_versekey_editor.c:876
 #: ../src/gnome2/navbar_versekey_parallel.c:816
 msgid "Synchronize this window's scrolling with the main window"
-msgstr "تزامن هذا الإطار في التمرير مع النافذة الرئيسية"
+msgstr "ana penceresi ile senkronize bu pencerenin kaydırma"
 
 #: ../src/gnome2/parallel_dialog.c:382
 #: ../src/gnome2/preferences_dialog.c:1725
 msgid "Parallel"
-msgstr "مواز"
+msgstr "Paralel"
 
 #: ../src/gnome2/parallel_view.c:124
 msgid "Detach/Attach"
-msgstr "فصل / إرفاق"
+msgstr "Ayırmak / takın"
 
 #: ../src/gnome2/parallel_view.c:130
 #: ../ui/xi-menus.glade.h:61
 msgid "Module Options"
-msgstr "خيارات الوحدة"
+msgstr "Modül Seçenekleri"
 
 #: ../src/gnome2/parallel_view.c:269
 #: ../src/gnome2/sidebar.c:615
@@ -1104,7 +1100,7 @@ msgstr "خيارات الوحدة"
 #: ../src/main/sidebar.cc:1002
 #: ../src/main/sidebar.cc:1003
 msgid "Parallel View"
-msgstr "عرض مواز"
+msgstr "Paralel Profili"
 
 #: ../src/gnome2/preferences_dialog.c:1240
 #: ../src/gnome2/preferences_dialog.c:1278
@@ -1118,104 +1114,104 @@ msgstr "عرض مواز"
 #: ../src/gnome2/preferences_dialog.c:1580
 #: ../src/gnome2/preferences_dialog.c:1968
 msgid "-- Select --"
-msgstr "-- اختر --"
+msgstr "- Seçiniz -"
 
 #: ../src/gnome2/preferences_dialog.c:1542
 msgid "Locale will take effect after restart."
-msgstr "واللغة نافذة المفعول بعد إعادة التشغيل."
+msgstr "Yerel yeniden başlattıktan sonra yürürlüğe girecek."
 
 #: ../src/gnome2/preferences_dialog.c:1617
 #: ../ui/prefs.glade.h:84
 msgid "Preferences"
-msgstr "تفضيلات"
+msgstr "Tercihleri"
 
 #: ../src/gnome2/preferences_dialog.c:1699
 msgid "Fonts"
-msgstr "حرة"
+msgstr "Yazı"
 
 #: ../src/gnome2/preferences_dialog.c:1702
 msgid "Color"
-msgstr "اللون"
+msgstr "Renk"
 
 #: ../src/gnome2/preferences_dialog.c:1705
 msgid "Sizes and Faces"
-msgstr "الأحجام وجوه"
+msgstr "Boyutları ve Yüzler"
 
 #: ../src/gnome2/preferences_dialog.c:1709
 msgid "General"
-msgstr "العام"
+msgstr "Genel"
 
 #: ../src/gnome2/preferences_dialog.c:1712
 #: ../ui/prefs.glade.h:100
 msgid "Tabs and Panes"
-msgstr "علامات التبويب والألواح"
+msgstr "Sekmeleri ve Bölmeleri"
 
 #: ../src/gnome2/preferences_dialog.c:1715
 msgid "Options"
-msgstr "خيارات"
+msgstr "Seçenekleri"
 
 #: ../src/gnome2/preferences_dialog.c:1722
 msgid "Main"
-msgstr "الرئيسية"
+msgstr "Ana"
 
 #: ../src/gnome2/preferences_dialog.c:1728
 msgid "Special"
-msgstr "خاص"
+msgstr "Özel"
 
 #: ../src/gnome2/preferences_dialog.c:2377
 #: ../src/gnome2/search_dialog.c:460
 msgid "Clear List?"
-msgstr "قائمة واضحة؟"
+msgstr "Net Listesi?"
 
 #: ../src/gnome2/preferences_dialog.c:2378
 #: ../src/gnome2/search_dialog.c:461
 msgid "Are you sure you want to clear the module list?"
-msgstr "هل أنت متأكد أنك تريد مسح قائمة وحدة؟"
+msgstr "Eğer modül listesini silmek istediğinizden emin misiniz?"
 
 #: ../src/gnome2/preferences_dialog.c:2423
 #: ../src/main/search_dialog.cc:700
 msgid "Remove Module?"
-msgstr "إزالة وحدة؟"
+msgstr "Modül kaldırılsın mı?"
 
 #: ../src/gnome2/preferences_dialog.c:2424
 #: ../src/main/search_dialog.cc:701
 msgid "Are you sure you want to remove the selected module?"
-msgstr "هل أنت متأكد أنك تريد إزالة الوحدة المختارة؟"
+msgstr "Seçili modülü kaldırmak istediğinizden emin misiniz?"
 
 #: ../src/gnome2/search_dialog.c:68
 #: ../src/main/search_dialog.cc:66
 #: ../src/main/search_sidebar.cc:61
 msgid "Searching the "
-msgstr "البحث في"
+msgstr "Arama"
 
 #: ../src/gnome2/search_dialog.c:69
 #: ../src/main/search_dialog.cc:67
 #: ../src/main/search_sidebar.cc:62
 msgid " Module"
-msgstr "وحدة"
+msgstr "Modül"
 
 #: ../src/gnome2/search_dialog.c:70
 #: ../src/main/search_dialog.cc:68
 #: ../src/main/search_sidebar.cc:63
 msgid "found in "
-msgstr "وجدت في"
+msgstr "bulundu"
 
 #: ../src/gnome2/search_dialog.c:419
 #, c-format
 msgid "New List %s"
-msgstr "قائمة جديدة %s"
+msgstr "Yeni Liste%s"
 
 #: ../src/gnome2/search_dialog.c:643
 msgid "The last module list may not be deleted"
-msgstr "قد لا يكون وحدة قائمة الماضي حذف"
+msgstr "Son modül listesi silinemez"
 
 #: ../src/gnome2/search_dialog.c:661
 msgid "Delete list?"
-msgstr "حذف القائمة؟"
+msgstr "Listeyi sil?"
 
 #: ../src/gnome2/search_dialog.c:662
 msgid "Are you sure you want to delete:"
-msgstr "هل أنت متأكد أنك تريد حذف :"
+msgstr "Eğer silmek istediğinizden emin misiniz:"
 
 #. *****************************************************************************
 #. * Name
@@ -1260,7 +1256,7 @@ msgid ""
 "	Also, select Strong's display on the <i>Attribute Search</i> tab.\n"
 "\n"
 "For complete details, search the web for \"lucene search syntax\"."
-msgstr "<b>نظرة عامة على النحو الأمثل لوسين \"عمليات البحث\"</b> البحث عن الآيات التي تحتوي على... أحب واحدة : \"أحب\" أو \"واحد\" وهذا هو نفس محبوبا أو البحث عن واحد \"بعزيز\" عبارة \"بعزيز\" * الحب كلمة بدءا مع \"الحب\" (أو الحب أو يحب محبوبا أو الخ..) أحب واحد وكلمة \"أحب\" وكلمة \"واحد\" & & يمكن استخدامها في مكان واحد و + أحب الآيات التي <b>يجب</b> أن تحتوي على \"أحب\" ، <b>وربما</b> تحتوي على \"واحد\" أحب ليست واحدة : \"أحب\" ولكن ليس \"واحد\" (أحب واحد) والله : \"أحب\" أو \"واحد\" و \"الله\" المأخوذ : البحث عن اليونانية (ع \") الكلمة رقم 2316\" قوي. G2316 أيضا ، حدد لعرض قوي في التبويب <i>سمة البحث.</i> للحصول على تفاصيل كاملة ، والبحث في الإنترنت عن \"بناء جملة البحث وسين\"."
+msgstr "içeren ... o <b>Kullanımı bakış için optimize edilmiş \"ayet arar\" Lucene</b> Arama \"sevilen\" önce \"ya da\" tek \"bir\" sevilen bir VEYA sevdiler Bu aynı arama gibi için ifade * kelime bir başlangıç \"loved\" aşk bir \"ile\" aşk \"& & ve yerler kullanılmasına VE (aşk VEYA seviyor VEYA VE bir akşam OR vs ..) sabah kelime\" bir \"sözcüğü ve\" sabah + ve ekledi \"loved\" içeren Ayetler <b>gereken</b> bir <b>olabilir</b> içeren \"bir\" ama değil bir \"sonra\" önce değil \"bir\" (bir akşam) ve Tanrı \"lemma\" önce \"ya da\" tek \"ve\": 2316. numarası Arama için G Güçlü Yunan (\"\") sözcüğü G2316 Ayrıca sekmesini <i>Özellik Search</i> seçeneğini güçlü ekran. Ayrıntılar için tam, arama sözdizimi \"arama web için\" Lucene."
 
 #. *****************************************************************************
 #. * Name
@@ -1289,169 +1285,167 @@ msgid ""
 "* Footnote text is searched just like regular text.\n"
 "* Strong's words are specified as a prefix letter H or G (Hebrew or Greek) and the numeric word identifier, e.g. G2316 to find \"θεός\" (\"God\").\n"
 "* Morphological tags are identified literally, e.g. N-ASF for \"noun, accusative singular feminine\" -- see the Robinson module for details."
-msgstr "<b>المستندة إلى البحث سمة</b> مقترحة للمحتوى الواردة في توصيف خارج النص الرئيسي. سمات والحواشي ، وأرقام قوية ، والرموز الشكلية. كن على علم أنه يمكن الآن البحث الأكثر شيوعا فى مثل هذه ينبغي القيام به \"وسين\" أسرع عن طريق تحسين عمليات البحث باستخدام تصفيات الكلمة الرئيسية لاستخدام عمليات التفتيش السمة ، يجب عليك تحديد الزر المناسب على علامة التبويب <i>بحث سمة</i> * حاشية النص تفتيش مثلما نص عادي * قوي في الكلمات هي على النحو المحدد لحاء حرف بادئة أو زاي (العبرية أو اليونانية) ، وكلمة معرف رقمي ، على سبيل المثال G2316 للعثور على \"θεός\" (\"الله\"). * التي تم تحديدها هي المورفولوجية به حرفيا ، على سبيل المثال ن محامون بلا حدود عن \"الاسم ، النصب المفرد المؤنث\" -- انظر وحدة روبنسون للحصول على تفاصيل."
+msgstr "<b>bazlı aramalar</b> Aramalar için <b>içerik Öznitelik</b> metin ana dışında bulunan bir biçimlendirme. Nitelikleri sembolleri dipnotlar Güçlü,&#39;s sayılar ve morfolojik. Sekmesini <i>Arama Öznitelik</i> Be farkında olduğunu en düğmesini arar, sen seçmelisiniz uygun öznitelik için kullanın. Şimdi bu tür aramaları olmak yapılır elemeleri anahtar \"kullanarak arama Lucene hızlı üzerinden optimize\". * dipnot metni normal gibi aradı sadece. * \"Tanrı)\" (İbranice veya Yunanca) ve sayısal kelime tanımlayıcı, örneğin G2316 bulmak \"θεός. (Güçlü G veya sözleri vardır belirtilen bir önek harfi H * Morfolojik etiketleri tanımlanır kelimenin tam anlamıyla, \"isim hali dişil tekil\" için N-ASF gibi - Ayrıntılar için Robinson modülü bakın."
 
 #: ../src/gnome2/search_sidebar.c:184
 msgid ""
 "This is an inclusive (\"AND\") search:\n"
 "Find matches showing all words."
-msgstr "هذا هو شاملة (\"و\") البحث : البحث عن مباريات عرض جميع الكلمات."
+msgstr "Bu arama bir kapsayıcı (\"VE\"): Kelimeleri gösteren bul eşleşir."
 
 #: ../src/gnome2/search_sidebar.c:200
 msgid "Search Module"
-msgstr "نموذج البحث"
+msgstr "Arama Modülü"
 
 #: ../src/gnome2/search_sidebar.c:214
 msgid "Bible"
-msgstr "الكتاب المقدس"
+msgstr "İncil"
 
 #: ../src/gnome2/search_sidebar.c:223
 #: ../ui/prefs.glade.h:38
 msgid "Commentary"
-msgstr "تعليق"
+msgstr "Yorum"
 
 #: ../src/gnome2/search_sidebar.c:237
 msgid "Search Type"
-msgstr "نوع البحث"
+msgstr "Arama Türü"
 
 #: ../src/gnome2/search_sidebar.c:251
 #: ../ui/search-dialog.glade.h:66
 msgid "Multi word"
-msgstr "كلمة متعددة"
+msgstr "Çok kelime"
 
 #: ../src/gnome2/search_sidebar.c:270
 #: ../ui/search-dialog.glade.h:44
 msgid "Exact phrase"
-msgstr "بالضبط مثل العبارة"
+msgstr "Tam cümle"
 
 #: ../src/gnome2/search_sidebar.c:284
 msgid "Search Options"
-msgstr "خيارات البحث"
+msgstr "Arama Seçenekleri"
 
 #: ../src/gnome2/search_sidebar.c:312
 msgid "Search Scope"
-msgstr "نطاق البحث"
+msgstr "Arama Kapsam"
 
 #: ../src/gnome2/search_sidebar.c:325
 msgid "No scope"
-msgstr "لا مجال"
+msgstr "Hayır kapsamı"
 
 #: ../src/gnome2/search_sidebar.c:335
 msgid "Use bounds"
-msgstr "استخدام حدود"
+msgstr "Kullanım sınırları"
 
 #: ../src/gnome2/search_sidebar.c:344
 msgid "Last search"
-msgstr "البحث بالموقع"
+msgstr "Son arama"
 
 #: ../src/gnome2/search_sidebar.c:359
 msgid "Bounds"
-msgstr "حدود"
+msgstr "Sınır"
 
 #: ../src/gnome2/search_sidebar.c:373
 msgid "Lower"
-msgstr "انخفاض"
+msgstr "Alt"
 
 #: ../src/gnome2/search_sidebar.c:380
 msgid "Upper"
-msgstr "أعلى"
+msgstr "Üst"
 
 #: ../src/gnome2/sidebar.c:1382
 msgid "Search"
-msgstr "البحث"
+msgstr "Arama"
 
 #: ../src/gnome2/sidebar_dialog.c:170
 #: ../src/gnome2/sidebar_dialog.c:179
 msgid "Sidebar"
-msgstr "الشريط الجانبي"
+msgstr "Sidebar"
 
 #: ../src/gnome2/splash.c:396
 msgid "Powered by the SWORD Project"
-msgstr "بدعم من مشروع السيف"
+msgstr "SWORD Proje Powered by"
 
 #: ../src/gnome2/tabbed_browser.c:364
 msgid "Can't create tabs dir."
-msgstr "لا يمكن إنشاء علامات دير."
+msgstr "sekmeler dir oluşturulamıyor."
 
 #: ../src/gnome2/treekey-editor.c:133
 #: ../src/gnome2/treekey-editor.c:192
 #: ../src/gnome2/treekey-editor.c:278
 msgid "Prayer List/Journal Item"
-msgstr "قائمة الصلاة / البند مجلة"
+msgstr "Dua Listesi / Dergi Öğe"
 
 #: ../src/gnome2/treekey-editor.c:134
 #: ../src/gnome2/treekey-editor.c:193
 #: ../src/gnome2/treekey-editor.c:279
 msgid "New name"
-msgstr "اسم جديد"
+msgstr "Yeni isim"
 
 #: ../src/gnome2/treekey-editor.c:249
 msgid "Remove the selected item"
-msgstr "إزالة العنصر المحدد"
+msgstr "Seçili öğeyi kaldır"
 
 #: ../src/gnome2/utilities.c:2018
 msgid ""
 "An image file's size could not be determined.\n"
 "Xiphos cannot resize images to fit window."
-msgstr "لا يمكن ان حجم ملف صورة يتم تحديدها بعد. Xiphos لا يمكن تغيير حجم الصور لتناسب النافذة."
+msgstr "Bir resim dosyası boyutunu tespit edilemedi. Xiphos penceresine sığacak şekilde yapabilirsiniz resimlerinizin boyutunu değil."
 
 #: ../src/main/display.cc:230
 #, c-format
 msgid ""
 "Improperly encoded personal annotation label:\n"
 "'%s'"
-msgstr ""
-"ترميز غير صحيح تسمية الشخصية الشرح : \n"
-"%s"
+msgstr "Yanlış etiket kodlanmış kişisel açıklama: &#39;%s&#39;"
 
 #: ../src/main/display.cc:927
 #: ../src/main/display.cc:989
 #: ../src/main/display.cc:1074
 #: ../ui/export-dialog.glade.h:7
 msgid "Chapter"
-msgstr "الفصل"
+msgstr "Bölüm"
 
 #: ../src/main/main.c:122
 msgid "Xiphos does not understand more than one argument."
-msgstr "Xiphos لا يفهم أكثر من وسيطة واحدة."
+msgstr "Xiphos birden fazla argüman anlamıyor."
 
 #: ../src/main/main.c:168
 msgid "Initiating Gecko"
-msgstr "بدء أبو بريص"
+msgstr "Başlatılması Gecko"
 
 #: ../src/main/main.c:174
 msgid "Building Interface"
-msgstr "بناء واجهة"
+msgstr "Bina Arayüzü"
 
 #: ../src/main/main.c:178
 msgid "Starting Sword"
-msgstr "بدءا السيف"
+msgstr "Kılıç Başlangıç"
 
 #: ../src/main/main.c:182
 msgid "Loading Settings"
-msgstr "تحميل إعدادات"
+msgstr "Yükleme Ayarlar"
 
 #: ../src/main/main.c:186
 msgid "Displaying Xiphos"
-msgstr "عرض Xiphos"
+msgstr "Gösteren Xiphos"
 
 #: ../src/main/module_dialogs.cc:189
 #: ../src/main/previewer.cc:93
 #: ../ui/prefs.glade.h:85
 msgid "Previewer"
-msgstr "المعاين"
+msgstr "Önizleyicide"
 
 #: ../src/main/module_dialogs.cc:240
 #: ../src/main/module_dialogs.cc:351
 #: ../src/main/previewer.cc:180
 msgid "Footnote"
-msgstr "حاشية"
+msgstr "Dipnot"
 
 #: ../src/main/module_dialogs.cc:246
 #: ../src/main/module_dialogs.cc:356
 #: ../src/main/previewer.cc:192
 msgid "Cross Reference"
-msgstr "الصليب المرجعي"
+msgstr "Çapraz Referans"
 
 #: ../src/main/module_dialogs.cc:252
 #: ../src/main/module_dialogs.cc:266
@@ -1469,48 +1463,48 @@ msgstr "Strongs"
 #: ../src/main/previewer.cc:204
 #: ../src/main/previewer.cc:223
 msgid "Morphology"
-msgstr "مورفولوجيا"
+msgstr "Morfoloji"
 
 #: ../src/main/module_dialogs.cc:1007
 #: ../src/main/url.cc:518
 msgid "Back to "
-msgstr "العودة إلى"
+msgstr "Geri"
 
 #: ../src/main/parallel_view.cc:380
 #: ../ui/xi-menus.glade.h:108
 msgid "Strong's Numbers"
-msgstr "قوية وأرقام"
+msgstr "Güçlü Numaraları"
 
 #: ../src/main/parallel_view.cc:390
 #: ../ui/search-dialog.glade.h:52
 #: ../ui/xi-menus.glade.h:44
 msgid "Footnotes"
-msgstr "الحواشي"
+msgstr "Dipnotlar"
 
 #: ../src/main/parallel_view.cc:400
 #: ../ui/search-dialog.glade.h:64
 #: ../ui/xi-menus.glade.h:63
 msgid "Morphological Tags"
-msgstr "العلامات المورفولوجية"
+msgstr "Morfolojik Etiketler"
 
 #: ../src/main/parallel_view.cc:410
 #: ../ui/xi-menus.glade.h:48
 msgid "Hebrew Vowel Points"
-msgstr "نقاط العبرية حرف العلة"
+msgstr "İbranice Ünlü Noktaları"
 
 #: ../src/main/parallel_view.cc:420
 #: ../ui/xi-menus.glade.h:47
 msgid "Hebrew Cantillation"
-msgstr "العبرية Cantillation"
+msgstr "İbranice Cantillation"
 
 #: ../src/main/parallel_view.cc:430
 #: ../ui/xi-menus.glade.h:45
 msgid "Greek Accents"
-msgstr "اليونانية اللكنات"
+msgstr "Yunan Vurgular"
 
 #: ../src/main/parallel_view.cc:440
 msgid "Cross-references"
-msgstr "إحالات"
+msgstr "Çapraz referans"
 
 #: ../src/main/parallel_view.cc:450
 #: ../ui/xi-menus.glade.h:57
@@ -1520,203 +1514,201 @@ msgstr "Lemmas"
 #: ../src/main/parallel_view.cc:460
 #: ../ui/xi-menus.glade.h:46
 msgid "Headings"
-msgstr "العناوين"
+msgstr "Başlıkları"
 
 #: ../src/main/parallel_view.cc:470
 msgid "Morpheme Segmentation"
-msgstr "Morpheme الإنقسام"
+msgstr "Morfem Segmentasyon"
 
 #: ../src/main/parallel_view.cc:484
 #: ../ui/xi-menus.glade.h:117
 msgid "Words of Christ in Red"
-msgstr "كلام المسيح في الأحمر"
+msgstr "Kırmızı Mesih&#39;in Kelimeler"
 
 #: ../src/main/parallel_view.cc:494
 #: ../ui/xi-menus.glade.h:110
 msgid "Transliteration"
-msgstr "الحروف"
+msgstr "Çevirisi"
 
 #: ../src/main/parallel_view.cc:504
 msgid "Textual Variants"
-msgstr "المتغيرات النصية"
+msgstr "Metinsel Varyantlar"
 
 #: ../src/main/parallel_view.cc:512
 #: ../ui/xi-menus.glade.h:86
 msgid "Primary Reading"
-msgstr "القراءة الأولية"
+msgstr "İlk Okuma"
 
 #: ../src/main/parallel_view.cc:521
 #: ../ui/xi-menus.glade.h:101
 msgid "Secondary Reading"
-msgstr "الثانوية القراءة"
+msgstr "İkinci Okuma"
 
 #: ../src/main/parallel_view.cc:530
 #: ../ui/xi-menus.glade.h:9
 msgid "All Readings"
-msgstr "جميع قراءات"
+msgstr "Tüm Kaynaklar"
 
 #: ../src/main/parallel_view.cc:688
 msgid "view context"
-msgstr "عرض السياق"
+msgstr "görmek bağlamda"
 
 #: ../src/main/prayerlists.cc:74
 msgid "January"
-msgstr "كانون الثاني / يناير"
+msgstr "Ocak"
 
 #: ../src/main/prayerlists.cc:75
 msgid "February"
-msgstr "شباط / فبراير"
+msgstr "Şubat"
 
 #: ../src/main/prayerlists.cc:76
 msgid "March"
-msgstr "آذار / مارس"
+msgstr "Mart"
 
 #: ../src/main/prayerlists.cc:77
 msgid "April"
-msgstr "نيسان / أبريل"
+msgstr "Nisan"
 
 #: ../src/main/prayerlists.cc:78
 msgid "May"
-msgstr "قد"
+msgstr "Mayıs"
 
 #: ../src/main/prayerlists.cc:79
 msgid "June"
-msgstr "حزيران / يونيو"
+msgstr "Haziran"
 
 #: ../src/main/prayerlists.cc:80
 msgid "July"
-msgstr "تموز / يوليو"
+msgstr "Temmuz"
 
 #: ../src/main/prayerlists.cc:81
 msgid "August"
-msgstr "آب / أغسطس"
+msgstr "Ağustos"
 
 #: ../src/main/prayerlists.cc:82
 msgid "September"
-msgstr "أيلول / سبتمبر"
+msgstr "Eylül"
 
 #: ../src/main/prayerlists.cc:83
 msgid "October"
-msgstr "تشرين الأول / أكتوبر"
+msgstr "Ekim"
 
 #: ../src/main/prayerlists.cc:84
 msgid "November"
-msgstr "تشرين الثاني / نوفمبر"
+msgstr "Kasım"
 
 #: ../src/main/prayerlists.cc:85
 msgid "December"
-msgstr "كانون الأول / ديسمبر"
+msgstr "Aralık"
 
 #: ../src/main/prayerlists.cc:124
 msgid "Growth"
-msgstr "النمو"
+msgstr "Büyüme"
 
 #: ../src/main/prayerlists.cc:125
 msgid "<b>For Growth</b><br/>"
-msgstr "<b>من أجل تحقيق النمو</b> <br/>"
+msgstr "<b>Büyüme için</b> <br/>"
 
 #: ../src/main/prayerlists.cc:126
 #: ../src/main/prayerlists.cc:383
 msgid "Salvation"
-msgstr "خلاص"
+msgstr "Kurtuluş"
 
 #: ../src/main/prayerlists.cc:127
 msgid "<b>For Salvation</b><br/>"
-msgstr "<b>للإنقاذ</b> <br/>"
+msgstr "<b>Kurtuluş için</b> <br/>"
 
 #: ../src/main/prayerlists.cc:128
 #: ../src/main/prayerlists.cc:387
 msgid "Health"
-msgstr "الصحة"
+msgstr "Sağlık"
 
 #: ../src/main/prayerlists.cc:129
 msgid "<b>For Health</b><br/>"
-msgstr "<b>للصحة</b> <br/>"
+msgstr "<b>Sağlık için</b> <br/>"
 
 #: ../src/main/prayerlists.cc:130
 msgid "Misc"
-msgstr "متفرقات"
+msgstr "Misc"
 
 #: ../src/main/prayerlists.cc:131
 msgid "<b>Miscellaneous</b><br/>"
-msgstr "<b>متفرقات</b> <br/>"
+msgstr "<b>Çeşitli</b> <br/>"
 
 #: ../src/main/prayerlists.cc:139
 msgid "Point x"
-msgstr "نقطة العاشر"
+msgstr "Noktası x"
 
 #: ../src/main/prayerlists.cc:140
 msgid "<b>(x)</b><br/>"
-msgstr "<b>(خ)</b> <br/>"
+msgstr "<b>(X)</b> <br/>"
 
 #: ../src/main/prayerlists.cc:141
 msgid "Point y"
-msgstr "ذ نقطة"
+msgstr "Nokta y"
 
 #: ../src/main/prayerlists.cc:142
 msgid "<b>(y)</b><br/>"
-msgstr "<b>(ذ)</b> <br/>"
+msgstr "<b>(Y)</b> <br/>"
 
 #: ../src/main/prayerlists.cc:143
 msgid "Point z"
-msgstr "نقطة ض"
+msgstr "Nokta z"
 
 #: ../src/main/prayerlists.cc:144
 msgid "<b>(z)</b><br/>"
-msgstr "<b>(ض)</b> <br/>"
+msgstr "<b>(Z)</b> <br/>"
 
 #: ../src/main/prayerlists.cc:152
 msgid "Minor Topic 1"
-msgstr "طفيفة المواضيع 1"
+msgstr "Minör Konu 1"
 
 #: ../src/main/prayerlists.cc:153
 msgid "<b>Subtopic 1</b><br/>"
-msgstr "<b>الموضوع الفرعي 1</b> <br/>"
+msgstr "<b>Subtopic 1</b> <br/>"
 
 #: ../src/main/prayerlists.cc:155
 msgid "Minor Topic 2"
-msgstr "القاصر الموضوع 2"
+msgstr "Küçük Konu 2"
 
 #: ../src/main/prayerlists.cc:156
 msgid "<b>Subtopic 2</b><br/>"
-msgstr "<b>الموضوع الفرعي 2</b> <br/>"
+msgstr "<b>Subtopic 2</b> <br/>"
 
 #: ../src/main/prayerlists.cc:158
 msgid "Minor Topic 3"
-msgstr "القاصر الموضوع 3"
+msgstr "Küçük Konu 3"
 
 #: ../src/main/prayerlists.cc:159
 msgid "<b>Subtopic 3</b><br/>"
-msgstr "<b>الموضوع الفرعي 3</b> <br/>"
+msgstr "<b>Subtopic 3</b> <br/>"
 
 #: ../src/main/prayerlists.cc:161
 msgid "Minor Topic 4"
-msgstr "القاصر الموضوع 4"
+msgstr "Küçük Konu 4"
 
 #: ../src/main/prayerlists.cc:162
 msgid "<b>Subtopic 4</b><br/>"
-msgstr "<b>الموضوع الفرعي 4</b> <br/>"
+msgstr "<b>Subtopic 4</b> <br/>"
 
 #: ../src/main/prayerlists.cc:242
 msgid "Name for new prayer list or journal"
-msgstr "اسم القائمة الجديدة لصلاة أو مجلة"
+msgstr "yeni dua listesi veya dergi için Ad"
 
 #: ../src/main/prayerlists.cc:273
 msgid "Xiphos finds that prayer list already."
-msgstr "Xiphos يرى أن الصلاة القائمة بالفعل."
+msgstr "Xiphos zaten dua listesi bulur."
 
 #: ../src/main/prayerlists.cc:286
 #, c-format
 msgid ""
 "Xiphos cannot create module's path:\n"
 "%s"
-msgstr ""
-"يمكن Xiphos لم يخلق لمسار الوحدة\n"
-"%s"
+msgstr "Xiphos yolun modülü oluşturamazsınız:%s"
 
 #: ../src/main/prayerlists.cc:326
 msgid "A basic prayer list. \\par\\par Module created by Xiphos."
-msgstr "قائمة الصلاة الأساسية.\\par \\par الوحدة التي أنشأتها Xiphos."
+msgstr "Temel dua listesi. \\par \\par Modülü Xiphos tarafından hazırlandı."
 
 #: ../src/main/prayerlists.cc:327
 msgid "BasicPrayerList"
@@ -1728,11 +1720,11 @@ msgstr "MyPrayerList"
 
 #: ../src/main/prayerlists.cc:342
 msgid "<b>People:</b><br/>Bob<br/>Sam<br/>Sue<br/><br/><b>Church:</b><br/>pews<br/>fellowship<br/>Bibles for missionaries<br/><br/><br/>"
-msgstr "<b>الناس :</b> <br/> بوب <br/> سام <br/> سو <br/><br/> <b>الكنيسة :</b> <br/> المقصورات <br/> زمالة <br/> الاناجيل عن المبشرين <br/><br/><br/>"
+msgstr "<b>Kişi:</b> <br/> Bob <br/> Sam <br/> Dava <br/><br/> <b>Kilise:</b> <br/> pews <br/> arkadaşlık <br/> misyonerler için İncil <br/><br/><br/>"
 
 #: ../src/main/prayerlists.cc:368
 msgid "A subject-based prayer list. \\par\\par Module created by Xiphos."
-msgstr "الصلاة قائمة على أساس الموضوع.\\par\\par الوحدة التي أنشأتها Xiphos."
+msgstr "Bir konu tabanlı dua listesi. \\par \\par Modülü Xiphos tarafından hazırlandı."
 
 #: ../src/main/prayerlists.cc:369
 msgid "SubjectPrayerList"
@@ -1740,23 +1732,23 @@ msgstr "SubjectPrayerList"
 
 #: ../src/main/prayerlists.cc:384
 msgid "Bob<br/>Sam<br/>Sue<br/>John<br/>"
-msgstr "بوب <br/> سام <br/> سو <br/> جون <br/>"
+msgstr "Bob <br/> Sam <br/> Dava <br/> John <br/>"
 
 #: ../src/main/prayerlists.cc:385
 msgid "Spiritual Growth"
-msgstr "النمو الروحي"
+msgstr "Ruhsal Gelişim"
 
 #: ../src/main/prayerlists.cc:386
 msgid "Mike<br/>Steve<br/>"
-msgstr "مايك <br/> ستيف <br/>"
+msgstr "Mikrofon <br/> Steve <br/>"
 
 #: ../src/main/prayerlists.cc:388
 msgid "Sue<br/>John<br/>"
-msgstr "سو <br/> جون <br/>"
+msgstr "Dava <br/> John <br/>"
 
 #: ../src/main/prayerlists.cc:414
 msgid "A monthly prayer list. \\par\\par Module created by Xiphos."
-msgstr "قائمة الصلاة شهريا. \\par\\par الوحدة التي أنشأتها Xiphos."
+msgstr "Bir aylık namaz liste. \\par \\par Modülü Xiphos tarafından hazırlandı."
 
 #: ../src/main/prayerlists.cc:415
 msgid "MonthlyPrayerList"
@@ -1764,7 +1756,7 @@ msgstr "MonthlyPrayerList"
 
 #: ../src/main/prayerlists.cc:466
 msgid "A daily journal. \\par\\par Module created by Xiphos."
-msgstr "اليومية. \\par\\par الوحدة التي أنشأتها Xiphos."
+msgstr "Bir günlük dergi. \\par \\par Modülü Xiphos tarafından hazırlandı."
 
 #: ../src/main/prayerlists.cc:467
 msgid "DailyJournal"
@@ -1772,7 +1764,7 @@ msgstr "DailyJournal"
 
 #: ../src/main/prayerlists.cc:531
 msgid "An outlined topic (e.g. sermon). \\par\\par Module created by Xiphos."
-msgstr "موضوعا المبين (خطبة مثلا). \\par\\par الوحدة التي أنشأتها Xiphos."
+msgstr "Bir özetlenen konu (örneğin vaaz). \\par \\par Modülü Xiphos tarafından hazırlandı."
 
 #: ../src/main/prayerlists.cc:532
 msgid "OutlinedTopic"
@@ -1780,44 +1772,44 @@ msgstr "OutlinedTopic"
 
 #: ../src/main/prayerlists.cc:546
 msgid "Major Topic A"
-msgstr "المواضيع الرئيسية و"
+msgstr "Önemli konu A"
 
 #: ../src/main/prayerlists.cc:547
 msgid "<b>Major Topic A</b><br/>"
-msgstr "<b>المواضيع الرئيسية و</b> <br/>"
+msgstr "<b>Önemli konu A</b> <br/>"
 
 #: ../src/main/prayerlists.cc:549
 msgid "Major Topic B"
-msgstr "المواضيع الرئيسية باء"
+msgstr "Önemli Konu B"
 
 #: ../src/main/prayerlists.cc:550
 msgid "<b>Major Topic B</b><br/>"
-msgstr "<b>المواضيع الرئيسية باء</b> <br/>"
+msgstr "<b>Önemli Konu B</b> <br/>"
 
 #: ../src/main/prayerlists.cc:552
 msgid "Major Topic C"
-msgstr "المواضيع الرئيسية جيم"
+msgstr "Önemli konu C"
 
 #: ../src/main/prayerlists.cc:553
 msgid "<b>Major Topic C</b><br/>"
-msgstr "<b>المواضيع الرئيسية جيم</b> <br/>"
+msgstr "<b>Önemli konu C</b> <br/>"
 
 #: ../src/main/previewer.cc:186
 msgid "User Annotation"
-msgstr "مستخدم التعليق"
+msgstr "Kullanıcı Annotation"
 
 #: ../src/main/search_dialog.cc:208
 #, c-format
 msgid "Search result %s: %s"
-msgstr "%s نتيجة البحث : %s"
+msgstr "Arama sonucu%s:%s"
 
 #: ../src/main/search_dialog.cc:440
 msgid "Delete Range?"
-msgstr "حذف النطاق؟"
+msgstr "Silmek Aralığı?"
 
 #: ../src/main/search_dialog.cc:441
 msgid "Are you sure you want to delete this range?"
-msgstr "هل أنت متأكد أنك تريد حذف هذا النطاق؟"
+msgstr "Eğer bu aralığı silmek istediğinizden emin misiniz?"
 
 #: ../src/main/search_dialog.cc:655
 #: ../src/main/search_dialog.cc:1072
@@ -1825,7 +1817,7 @@ msgstr "هل أنت متأكد أنك تريد حذف هذا النطاق؟"
 #: ../src/main/search_dialog.cc:1097
 #: ../src/main/search_dialog.cc:1100
 msgid "Search: "
-msgstr "البحث :"
+msgstr "Arama:"
 
 #: ../src/main/search_dialog.cc:1465
 #, c-format
@@ -1835,17 +1827,16 @@ msgid ""
 "%s"
 msgstr ""
 "%s:\n"
-" : تثبيت وحدة ، هي ليست\n"
-"%s"
+"Böyle bir modül kurulu var.\b%s"
 
 #: ../src/main/search_dialog.cc:1467
 msgid "Please adjust the module list."
-msgstr "الرجاء ضبط قائمة الوحدات."
+msgstr "modül listesi ayarlayın."
 
 #: ../src/main/search_dialog.cc:1483
 #, c-format
 msgid "No fast-search index exists for %s.%s%s"
-msgstr "لا مؤشر سريع البحث وجود ل %s%s%s"
+msgstr "Hiçbir hızlı arama indeksi%s.%s%s için var"
 
 #: ../src/main/search_dialog.cc:1485
 msgid ""
@@ -1853,7 +1844,7 @@ msgid ""
 "Search on this module is now `multi word'."
 msgstr ""
 "\n"
-"بحث في هذا النموذج هو الآن `كلمة متعددة."
+"Bu modül ara 'çok kelime' şimdi."
 
 #: ../src/main/search_dialog.cc:1486
 msgid ""
@@ -1861,19 +1852,19 @@ msgid ""
 "See the Module Manager, Maintenance pane."
 msgstr ""
 "\n"
-"راجع مدير وحدة ، صيانة جزء."
+"Modül Yöneticisi, Bakım bölmesi bakın."
 
 #: ../src/main/search_dialog.cc:1549
 msgid "Search finished"
-msgstr "الانتهاء من البحث"
+msgstr "Arama bitmiş"
 
 #: ../src/main/search_sidebar.cc:100
 msgid "matches"
-msgstr "المباريات"
+msgstr "maçlar"
 
 #: ../src/main/settings.c:105
 msgid "$HOME is not set!"
-msgstr "لم يتم تعيين المنزل $!"
+msgstr "$ HOME set değil!"
 
 #: ../src/main/settings.c:118
 #, c-format
@@ -1882,23 +1873,23 @@ msgid ""
 "%s\n"
 "\n"
 "Xiphos cannot continue."
-msgstr ""
+msgstr "Xiphos oluşturmak mümkün değil. Xiphos%s Xiphos devam edemiyor."
 
 #: ../src/main/settings.c:131
 #: ../src/main/settings.c:140
 #: ../src/main/settings.c:149
 msgid "can not create "
-msgstr "لا يمكن إنشاء"
+msgstr "oluşturamazsınız"
 
 #: ../src/main/settings.c:179
 msgid ""
 "Empty settings file -- backup recovery attempted.\n"
 "Some information may have been lost."
-msgstr "قد تكون معلومات ملف إعدادات فارغ فقد حاول -- استرداد بعض النسخ الاحتياطي."
+msgstr "Boş ayarları dosyası - yedek kurtarma girişiminde kaybetti. Bazı olabilir bilgi."
 
 #: ../src/main/settings.c:181
 msgid "Empty settings file -- no backup?!? Information lost!"
-msgstr "إعدادات ملف فارغ -- أي النسخ الاحتياطي؟!؟ فقدان المعلومات!"
+msgstr "Boş ayarları dosyası - Hiçbir yedekleme?!? Bilgi kaybettik!"
 
 #: ../src/main/settings.c:209
 msgid ""
@@ -1908,43 +1899,43 @@ msgid ""
 "Without any Bible modules to display,\n"
 "Xiphos cannot proceed,\n"
 "and will now exit."
-msgstr ""
+msgstr "İncil yüklü yoktur. Besbelli, herhangi bir kurulum yapmaktan kaçındı. Çıkmak olmadan herhangi bir anda ve İncil modülleri olabilir Xiphos, görüntülemek için değil, devam edin."
 
 #: ../src/main/settings.c:212
 msgid "Bible module installation complete."
-msgstr "الكتاب المقدس تركيب وحدة كاملة."
+msgstr "İncil modülü kurulumu tamamlayın."
 
 #: ../src/main/sidebar.cc:409
 msgid "verse"
-msgstr "آية"
+msgstr "ayet"
 
 #: ../src/main/sidebar.cc:470
 msgid "chapter"
-msgstr "الفصل"
+msgstr "bölüm"
 
 #: ../src/main/sword.cc:540
 msgid ""
 "Xiphos's file for language\n"
 "abbreviations is missing."
-msgstr "في ملف Xiphos للغة الاختصارات مفقود."
+msgstr "için dil kısaltmalar dosya Xiphos&#39;s eksik."
 
 #: ../src/main/sword.cc:547
 msgid ""
 "Xiphos's language abbreviation\n"
 "file cannot be opened."
-msgstr "اختصار الملف لا يمكن للغة Xiphos يمكن فتح."
+msgstr "Xiphos dil kısaltması dosya açılamaz."
 
 #: ../src/main/sword.cc:560
 msgid ""
 "Xiphos cannot allocate space\n"
 "for language abbreviations."
-msgstr "لا يمكن Xiphos تخصيص مساحة للغة الاختصارات."
+msgstr "Xiphos kısaltmalar dil için yer ayırabilirsiniz değil."
 
 #: ../src/main/sword.cc:567
 msgid ""
 "Xiphos cannot read the\n"
 "language abbreviation file."
-msgstr "لا يمكن Xiphos قراءة الملف اختصار اللغة."
+msgstr "Xiphos dosya kısaltma dili okuyamaz."
 
 #. either we were given a null sys_locale, or it didn't match anything.
 #: ../src/main/sword.cc:649
@@ -1952,17 +1943,15 @@ msgstr "لا يمكن Xiphos قراءة الملف اختصار اللغة."
 msgid ""
 "No matching locale found for `%s'.\n"
 "%s"
-msgstr ""
-"وجدت مطابقة للغة لا سيصدره '%s'.\n"
-"%s"
+msgstr "Eşleşen yerelin bulundu için '%s.'%s"
 
 #: ../src/main/sword.cc:651
 msgid "Book names and menus may not be translated."
-msgstr "قد لا أسماء الكتاب والقوائم يمكن ترجمتها."
+msgstr "Kitap isimleri ve menüler tercüme olmayabilir."
 
 #: ../src/main/sword.cc:1247
 msgid "Daily devotional was requested, but there are none installed."
-msgstr "وطلب اليومية تعبدي ، ولكن هناك شيء مثبت."
+msgstr "Günlük adanmışlık, ama istendi hiçbiri kurulu vardır."
 
 #: ../src/main/sword.cc:1483
 msgid ""
@@ -1973,73 +1962,73 @@ msgid ""
 "The module is locked, meaning that the content is encrypted by its publisher, and you must enter its key in order for the content to become useful.  This key should have been received by you on the web page which confirmed your purchase, or perhaps sent via email after purchase.\n"
 "\n"
 "Please enter the key in the dialog."
-msgstr "<b>تأمين وحدة نمطية.</b> <u>أنت تفتح وحدة نمطية الذي يتطلب <i>مفتاح.</i></u> مؤمن وحدة ، وهذا يعني أن المحتوى المشفرة بواسطة الناشر لها ، ويجب عليك إدخال المفتاح لكي المحتوى لتصبح مفيدة. وقد تم هذا المفتاح يجب أن تلقى من قبلك في صفحة الويب التي أكدت الشراء ، أو ربما ترسل عبر البريد الإلكتروني بعد شراء الرجاء إدخال المفتاح في الحوار."
+msgstr "<b>Kilitli Modülü.</b> <u>You <i>anahtarı</i> gerektirmektedir olan modül açılan bir.</u> Modülü yayıncı onun tarafından şifreli kilitli içerik olduğunu, anlam ve kullanışlı hale içerik için sipariş girmelisiniz önemli olan. Bu anahtar iletişim kilit girin sonra satın alın. Gerektiğini Aldığınız tarafından yeniden yapılandırılan ya da e-posta yoluyla gönderilen belki, ya da satın alma da doğruladı sayfa web."
 
 #: ../src/main/tab_history.c:219
 msgid "Clear History"
-msgstr "مسح المحفوظات"
+msgstr "Geçmişi Temizle"
 
 #: ../src/main/url.cc:98
 msgid "URL not found:"
-msgstr "لم يتم العثور على عنوان الموقع :"
+msgstr "URL bulunamadı:"
 
 #: ../src/main/url.cc:188
 #, c-format
 msgid "Xiphos could not execute %s"
-msgstr "Xiphos تعذر تنفيذ %s."
+msgstr "Yürütmüyor olabilir Xiphos %s"
 
 #: ../src/main/url.cc:196
 msgid "Viewer error:\n"
-msgstr "عارض الخطأ \n"
+msgstr "Görüntüleyici hatası:\n"
 
 #: ../src/main/url.cc:269
 #, c-format
 msgid "Show %s in main window"
-msgstr "إظهار %s الإطار الرئيسي ليالي"
+msgstr "%s ana penceresinde"
 
 #: ../src/main/xml.c:84
 #: ../src/main/xml.c:468
 #, c-format
 msgid "Document not created successfully. \n"
-msgstr "لا مستند تم إنشاؤه بنجاح.\n"
+msgstr "Belge değil başarıyla oluşturuldu.\n"
 
 #: ../src/main/xml.c:93
 msgid "Personal"
-msgstr "الشخصية"
+msgstr "Kişisel"
 
 #: ../src/main/xml.c:94
 msgid "What must I do to be saved?"
-msgstr "ماذا يجب أن أفعل لكي أخلص؟"
+msgstr "Ne kayıtlı olmak için ne yapmalıyız?"
 
 #: ../src/main/xml.c:96
 #: ../src/main/xml.c:97
 msgid "Acts 16:31"
-msgstr "أعمال 16:31"
+msgstr "Eylemler 16:31"
 
 #: ../src/main/xml.c:101
 #: ../src/main/xml.c:102
 msgid "Eph 2:8,9"
-msgstr "أف 2:8،9"
+msgstr "Efesliler 2:8,9"
 
 #: ../src/main/xml.c:106
 #: ../src/main/xml.c:107
 msgid "Romans 1:16"
-msgstr "رومية 1:16"
+msgstr "Romalılar 1:16"
 
 #: ../src/main/xml.c:110
 msgid "What is the Gospel?"
-msgstr "ما هو الإنجيل؟"
+msgstr "Gospel nedir?"
 
 #: ../src/main/xml.c:112
 #: ../src/main/xml.c:113
 msgid "1 Cor 15:1-4"
-msgstr "1 كو 15:1-4"
+msgstr "1 Kor 15:1-4"
 
 #: ../src/main/xml.c:417
 #: ../src/main/xml.c:1174
 #, c-format
 msgid "Document not parsed successfully. \n"
-msgstr "تحليل الوثيقة لا بنجاح.\n"
+msgstr "Belge değil başarıyla çözümlenen.\n"
 
 #: ../src/main/xml.c:423
 #: ../src/main/xml.c:741
@@ -2047,114 +2036,114 @@ msgstr "تحليل الوثيقة لا بنجاح.\n"
 #: ../src/main/xml.c:1253
 #, c-format
 msgid "empty document \n"
-msgstr "وثيقة فارغة\n"
+msgstr "boş belge\n"
 
 #: ../src/main/xml.c:429
 #, c-format
 msgid "wrong type, root node != SwordBookmarks\n"
-msgstr ""
+msgstr "yanlış tipi, kök düğüm! = SwordBookmarks\n"
 
 #: ../src/main/xml.c:480
 msgid "Old Testament"
-msgstr "العهد القديم"
+msgstr "Eski Ahit"
 
 #: ../src/main/xml.c:481
 msgid "Gen - Mal"
-msgstr "الجنرال -- المال"
+msgstr "Gen - Mal"
 
 #: ../src/main/xml.c:486
 msgid "New Testament"
-msgstr "العهد الجديد"
+msgstr "Yeni Ahit"
 
 #: ../src/main/xml.c:487
 msgid "Mat - Rev"
-msgstr "حصيرة -- القس"
+msgstr "Mat - Rev"
 
 #: ../src/main/xml.c:493
 msgid "Sample Module List"
-msgstr "عينة قائمة الوحدات"
+msgstr "Örnek Modül Listesi"
 
 #: ../src/main/xml.c:747
 #: ../src/main/xml.c:1061
 #, c-format
 msgid "wrong type, root node != %s\n"
-msgstr "نوع الخطأ ، والعقدة الجذر! = %s\n"
+msgstr "yanlış tipi, kök düğüm! =%s\n"
 
 #: ../src/main/xml.c:1214
 #, c-format
 msgid ""
 "Save of settings failed! stat %d, size %d\n"
 "%s"
-msgstr ""
+msgstr "ayarları kaydet başarısız! stat% d, boyutu% d%s"
 
 #: ../src/main/xml.c:1216
 msgid "Attempting to revert to previous save."
-msgstr "تحاول العودة الى انقاذ السابقة."
+msgstr "önceki kaydetmek dönmek için çalışılıyor."
 
 #: ../ui/bookmarks.glade.h:1
 msgid "Add Bookmark"
-msgstr "إضافة إشارة مرجعية"
+msgstr "Eklemek Bookmark"
 
 #: ../ui/bookmarks.glade.h:2
 #: ../ui/markverse.glade.h:1
 msgid "Bookmark Dialog"
-msgstr "المرجعية حوار"
+msgstr "Imi Dialog"
 
 #: ../ui/bookmarks.glade.h:3
 msgid "Bookmark Folder Treeview"
-msgstr "المرجعية مجلد تريفيف"
+msgstr "Imi Klasör Treeview"
 
 #: ../ui/bookmarks.glade.h:4
 #: ../ui/markverse.glade.h:2
 msgid "Cancel Bookmark"
-msgstr "إلغاء المرجعية"
+msgstr "Iptal Bookmark"
 
 #: ../ui/bookmarks.glade.h:5
 #: ../ui/markverse.glade.h:3
 msgid "Create new folder"
-msgstr "إنشاء مجلد جديد"
+msgstr "Yeni klasör oluştur"
 
 #: ../ui/bookmarks.glade.h:6
 msgid "Label Entry"
-msgstr "تسمية الدخول"
+msgstr "Etiket Giriş"
 
 #: ../ui/bookmarks.glade.h:7
 msgid "Label:"
-msgstr "الشركة المنتجة :"
+msgstr "Etiket:"
 
 #: ../ui/bookmarks.glade.h:8
 #: ../ui/markverse.glade.h:6
 msgid "Module Entry"
-msgstr "وحدة الدخول"
+msgstr "Modül Giriş"
 
 #: ../ui/bookmarks.glade.h:9
 #: ../ui/markverse.glade.h:7
 msgid "Module:"
-msgstr "الوحدة :"
+msgstr "Modülü:"
 
 #: ../ui/bookmarks.glade.h:10
 msgid "New ..."
-msgstr "جديد..."
+msgstr "Yeni ..."
 
 #: ../ui/bookmarks.glade.h:11
 #: ../ui/markverse.glade.h:8
 #: ../ui/xi-menus.glade.h:64
 msgid "New Folder"
-msgstr "مجلد جديد"
+msgstr "Yeni Klasör"
 
 #: ../ui/bookmarks.glade.h:12
 #: ../ui/markverse.glade.h:10
 msgid "Verse Entry"
-msgstr "الآية الدخول"
+msgstr "Ayet Giriş"
 
 #: ../ui/bookmarks.glade.h:13
 #: ../ui/markverse.glade.h:11
 msgid "Verse:"
-msgstr "الآية :"
+msgstr "Ayet:"
 
 #: ../ui/editor_note.xml.h:1
 msgid "Delete the current note"
-msgstr "حذف الملاحظة الحالية"
+msgstr "Silmek geçerli notu"
 
 #: ../ui/editor_note.xml.h:2
 #: ../ui/editor_studypad.xml.h:4
@@ -2164,12 +2153,12 @@ msgstr "E_xit"
 #: ../ui/editor_note.xml.h:3
 #: ../ui/editor_studypad.xml.h:5
 msgid "Exit"
-msgstr "خروج"
+msgstr "Çıkış"
 
 #: ../ui/editor_note.xml.h:4
 #: ../ui/editor_studypad.xml.h:6
 msgid "Exit the program"
-msgstr "إنهاء البرنامج"
+msgstr "Çıkış programı"
 
 #: ../ui/editor_note.xml.h:5
 #: ../ui/editor_studypad.xml.h:7
@@ -2179,72 +2168,72 @@ msgstr "For_mat"
 #: ../ui/editor_note.xml.h:6
 #: ../ui/editor_studypad.xml.h:8
 msgid "HTML Format switch"
-msgstr "أتش تي أم أل تنسيق التبديل"
+msgstr "HTML Format anahtarı"
 
 #: ../ui/editor_note.xml.h:7
 #: ../ui/editor_studypad.xml.h:9
 msgid "HTML mode"
-msgstr "أتش تي أم أل النمط"
+msgstr "HTML modu"
 
 #: ../ui/editor_note.xml.h:8
 msgid "Preview the note to be printed"
-msgstr "التي سيتم طباعتها معاينة ملاحظة"
+msgstr "Ön dikkat basılacak"
 
 #: ../ui/editor_note.xml.h:10
 msgid "Print this note"
-msgstr "طباعة هذه المذكرة"
+msgstr "Baskı bu notu"
 
 #: ../ui/editor_note.xml.h:12
 msgid "Save the current note"
-msgstr "حفظ المذكرة الحالية"
+msgstr "Geçerli notu kaydedin"
 
 #: ../ui/editor_note.xml.h:13
 msgid "_Delete Personal Comment"
-msgstr "_Delete التعليق الشخصية"
+msgstr "Kişisel Yorum _Delete"
 
 #: ../ui/editor_note.xml.h:16
 msgid "_Save (Personal Comment)"
-msgstr "_Save (تعليق شخصي)"
+msgstr "(Kişisel Yorum) _Save"
 
 #: ../ui/editor_studypad.xml.h:1
 msgid "Add this file to your bookmarks"
-msgstr "أضف هذا الملف إلى قائمة العناوين"
+msgstr "Yer imlerinizi bu dosyayı ekleyin"
 
 #: ../ui/editor_studypad.xml.h:3
 msgid "Create a new document"
-msgstr "إنشاء مستند جديد"
+msgstr "Yeni belge oluşturma"
 
 #: ../ui/editor_studypad.xml.h:10
 msgid "New Document"
-msgstr "مستند جديد"
+msgstr "Yeni Belge"
 
 #: ../ui/editor_studypad.xml.h:11
 msgid "Open"
-msgstr "فتح"
+msgstr "Açık"
 
 #: ../ui/editor_studypad.xml.h:12
 msgid "Open a file in Studypad"
-msgstr "فتح ملف في Studypad"
+msgstr "Studypad bir dosya açın"
 
 #: ../ui/editor_studypad.xml.h:13
 msgid "Preview the document to be printed"
-msgstr "التي سيتم طباعتها معاينة الوثيقة"
+msgstr "Ön belge basılacak"
 
 #: ../ui/editor_studypad.xml.h:15
 msgid "Print this document"
-msgstr "طباعة هذه الوثيقة"
+msgstr "Baskı bu belgenin"
 
 #: ../ui/editor_studypad.xml.h:17
 msgid "Save AS"
-msgstr "حفظ باسم"
+msgstr "Kaydetmek AS"
 
 #: ../ui/editor_studypad.xml.h:18
 msgid "Save the current file"
-msgstr "حفظ الملف الحالي"
+msgstr "Geçerli dosyayı kaydedin"
 
 #: ../ui/editor_studypad.xml.h:19
 msgid "Save the current file as"
-msgstr "حفظ الملف الحالي"
+msgstr "Geçerli dosya olarak kaydetme"
 
 #: ../ui/export-dialog.glade.h:1
 msgid ": "
@@ -2252,226 +2241,226 @@ msgstr ":"
 
 #: ../ui/export-dialog.glade.h:2
 msgid "<b>Copy</b>"
-msgstr "<b>نسخة</b>"
+msgstr "<b>Kopya</b>"
 
 #: ../ui/export-dialog.glade.h:3
 msgid "<b>Export</b>"
-msgstr "<b>تصدير</b>"
+msgstr "<b>Ihracat</b>"
 
 #: ../ui/export-dialog.glade.h:4
 msgid "<b>Format</b>"
-msgstr "<b>تنسيق</b>"
+msgstr "<b>Format</b>"
 
 #: ../ui/export-dialog.glade.h:5
 #: ../ui/prefs.glade.h:27
 msgid "Book"
-msgstr "كتاب"
+msgstr "Kitap"
 
 #: ../ui/export-dialog.glade.h:6
 msgid "Book Radio Button"
-msgstr "كتاب زر الراديو"
+msgstr "Kitap Radyo Düğmesi"
 
 #: ../ui/export-dialog.glade.h:8
 msgid "Chapter Radio Button"
-msgstr "الفصل زر الراديو"
+msgstr "Bölüm Radyo Düğmesi"
 
 #: ../ui/export-dialog.glade.h:9
 #: ../ui/xi-menus.glade.h:20
 msgid "Copy/Export Passage"
-msgstr "نسخة ممر للتصدير /"
+msgstr "Copy / İhracat Passage"
 
 #: ../ui/export-dialog.glade.h:10
 msgid "Export Passage Cancel"
-msgstr "تصدير ممر إلغاء"
+msgstr "Ihracat Passage İptal"
 
 #: ../ui/export-dialog.glade.h:11
 msgid "Export Passage OK"
-msgstr "تصدير ممر موافق"
+msgstr "Tamam İhracat Passage"
 
 #: ../ui/export-dialog.glade.h:12
 msgid "Export complete book"
-msgstr "تصدير الكتاب كاملة"
+msgstr "Ihracat tam kitap"
 
 #: ../ui/export-dialog.glade.h:13
 msgid "Export complete chapter"
-msgstr "تصدير الفصل الكامل"
+msgstr "Ihracat tam bölüm"
 
 #: ../ui/export-dialog.glade.h:14
 msgid "Export single verse"
-msgstr "تصدير آية واحدة"
+msgstr "Ihracat tek ayet"
 
 #: ../ui/export-dialog.glade.h:15
 msgid "HTML"
-msgstr "أتش تي أم أل"
+msgstr "HTML"
 
 #: ../ui/export-dialog.glade.h:16
 msgid "HTML Radio Button"
-msgstr "أتش تي أم أل زر الراديو"
+msgstr "HTML Radyo Düğmesi"
 
 #: ../ui/export-dialog.glade.h:17
 msgid "Key"
-msgstr "الرئيسية"
+msgstr "Anahtar"
 
 #: ../ui/export-dialog.glade.h:18
 msgid "Plain Text"
-msgstr "نص عادي"
+msgstr "Düz Metin"
 
 #: ../ui/export-dialog.glade.h:19
 msgid "Plain Text Radio Button"
-msgstr "راديو عادي نص الزر"
+msgstr "Düz Metin Radyo Düğmesi"
 
 #: ../ui/export-dialog.glade.h:21
 msgid "Save Export As"
-msgstr "حفظ وتصدير"
+msgstr "Kaydetmek İhracat gibi"
 
 #: ../ui/export-dialog.glade.h:22
 msgid "Verse"
-msgstr "آية"
+msgstr "Ayet"
 
 #: ../ui/export-dialog.glade.h:23
 msgid "Verse Radio Button"
-msgstr "الآية زر الراديو"
+msgstr "Ayet Radyo Düğmesi"
 
 #: ../ui/export-dialog.glade.h:24
 msgid "Verse range"
-msgstr "الآية مجموعة"
+msgstr "Ayet aralığı"
 
 #: ../ui/export-dialog.glade.h:25
 msgid "Version"
-msgstr "الإصدار"
+msgstr "Versiyon"
 
 #: ../ui/markverse.glade.h:4
 msgid "Mark"
-msgstr "مارك"
+msgstr "Işaretlemek"
 
 #: ../ui/markverse.glade.h:5
 msgid "Mark/Unmark Verse"
-msgstr "العلامة آية عدم تحديد /"
+msgstr "İşaretle / İş Verse"
 
 #: ../ui/markverse.glade.h:9
 msgid "Unmark"
-msgstr "عدم تحديد"
+msgstr "Işaretini kaldırın"
 
 #: ../ui/module-manager.glade.h:1
 msgid "<b>Add and Remove Sources</b>"
-msgstr "<b>إضافة وإزالة مصادر</b>"
+msgstr "<b>Eklemek ve Kaynaklar Kaldır</b>"
 
 #: ../ui/module-manager.glade.h:2
 msgid "<b>Install Destination</b>"
-msgstr "<b>تثبيت الوجهة</b>"
+msgstr "<b>Yüklemek Hedef</b>"
 
 #: ../ui/module-manager.glade.h:3
 msgid "<b>Install Source</b>"
-msgstr "<b>تثبيت المصدر</b>"
+msgstr "<b>Yükleme Kaynağı</b>"
 
 #: ../ui/module-manager.glade.h:4
 msgid "<b>Module Manager</b>"
-msgstr "<b>مدير وحدة</b>"
+msgstr "<b>Modül Yöneticisi</b>"
 
 #. do not translate <b> and </b> they are html formating
 #: ../ui/module-manager.glade.h:6
 msgid "<b>Sword</b>"
-msgstr "<b>سيف</b>"
+msgstr "<b>Kılıç</b>"
 
 #: ../ui/module-manager.glade.h:7
 msgid "<b>WARNING:</b> If you live in a persecuted country use with care."
-msgstr "<b>تحذير :</b> إذا كنت تعيش في بلد يضطهد استخدام بعناية."
+msgstr "<b>UYARI:</b> bakım Eğer kullanımda bir zulüm ülkede yaşamak sizi."
 
 #: ../ui/module-manager.glade.h:8
 msgid "<b>Warning:</b> If you live in a persecuted country and do not wish to risk detection you should NOT use  the remote installation feature! "
-msgstr "<b>تحذير :</b> إذا كنت تعيش في بلد واضطهاد لا ترغب في الكشف عن المخاطر الذي تستخدمه ليس الميزة التثبيت عن بعد!"
+msgstr "<b>Uyarı:</b> Eğer ülkede zulüm canlı bir sen özellik yükleme uzak kullanırım değil DEĞİL isteyen gerektiğini risk algılama!"
 
 #: ../ui/module-manager.glade.h:9
 msgid "<i>Personal area, for your use only:</i>"
-msgstr "<i>الشخصية المنطقة ، للاستخدام الخاص فقط :</i>"
+msgstr "<i>yalnızca sizin kullanımınız için alan, Kişisel:</i>"
 
 #: ../ui/module-manager.glade.h:10
 msgid "<i>System area, for all users:</i>"
-msgstr "<i>نظام المناطق ، لكافة المستخدمين :</i>"
+msgstr "<i>tüm kullanıcılar için, Sistem alanı:</i>"
 
 #: ../ui/module-manager.glade.h:11
 msgid "Add a custom remote install source. You must know its hostname and the folder where its repository lives."
-msgstr "أضف مخصص مصدر تثبيت البعيد. يجب أن تعرف اسم المضيف ، والمجلد حيث يعيشون على المخزون."
+msgstr "Özel bir uzaktan yükleme kaynak ekleyin. Onun ismi ve klasör onun depo yaşıyor bilmeniz gerekir."
 
 #: ../ui/module-manager.glade.h:12
 msgid "Add a local folder as an install source, typically on a cdrom or flash drive.  Such a folder contains subfolders \"mods.d\" and \"modules\"."
-msgstr "إضافة مجلد المحلية كمصدر للتثبيت ، وعادة على محرك قرص مدمج أو فلاش. هذا المجلد يحتوي على مجلدات فرعية \"mods.d\" و \"الوحدات\"."
+msgstr "bir CD ya da flash sürücüye tipik olarak, bir yükleme kaynağı olarak yerel bir klasör ekleyin. Böyle bir klasöre alt klasörleri ve \"modules\" mods.d \"içeriyor."
 
 #: ../ui/module-manager.glade.h:13
 msgid "Build an index of the selected modules, for optimized (\"lucene\") searching."
-msgstr "بناء فهرس من وحدات مختارة ، الأمثل ل(\"وسين\") البحث."
+msgstr "optimize için seçilen modüllerin Build bir dizin (\"Lucene\") arıyor."
 
 #: ../ui/module-manager.glade.h:14
 msgid "Continue"
-msgstr "مواصلة"
+msgstr "Devam"
 
 #: ../ui/module-manager.glade.h:15
 msgid "Create a zip archive of the selected modules."
-msgstr "إنشاء أرشيف مضغوط من وحدات مختارة."
+msgstr "Seçilen modül bir zip arşivi oluşturun."
 
 #: ../ui/module-manager.glade.h:16
 msgid "Current Remote Sources"
-msgstr "مصادر التيار البعيد"
+msgstr "Geçerli Uzaktan Kaynakları"
 
 #: ../ui/module-manager.glade.h:17
 msgid "Current local sources"
-msgstr "المحلية المصادر الحالية"
+msgstr "Mevcut yerel kaynaklardan"
 
 #: ../ui/module-manager.glade.h:18
 msgid "Delete the fast-search index of the selected modules."
-msgstr "حذف فهرس البحث السريع من وحدات مختارة."
+msgstr "Silmek seçilen modüllerin hızlı arama indeksi."
 
 #: ../ui/module-manager.glade.h:19
 msgid "Home dir"
-msgstr "الصفحة الرئيسية دير"
+msgstr "Ev dir"
 
 #: ../ui/module-manager.glade.h:20
 msgid "Install or update the selected modules"
-msgstr "تثبيت أو تحديث وحدات مختارة"
+msgstr "Yüklemek veya seçilen modülleri güncelleme"
 
 #: ../ui/module-manager.glade.h:21
 msgid "Load and synchronize the standard set of known repositories, as maintained at crosswire.org, with your current remote sources."
-msgstr "تحميل ومزامنة مجموعة قياسية من المستودعات المعروفة ، كما حافظت على crosswire.org ، مع مصادر البريد البعيد الحالي."
+msgstr "Yük ve geçerli uzaktan kaynaklarıyla olarak crosswire.org tutulur bilinen depoları standart, senkronize."
 
 #: ../ui/module-manager.glade.h:22
 msgid "Local"
-msgstr "المحلية"
+msgstr "Yerel"
 
 #: ../ui/module-manager.glade.h:23
 msgid "Local Install Folder"
-msgstr "المحلية تثبيت مجلد"
+msgstr "Yerel Yükleme Klasör"
 
 #: ../ui/module-manager.glade.h:24
 msgid "Module Manager"
-msgstr "مدير وحدة"
+msgstr "Modül Yöneticisi"
 
 #: ../ui/module-manager.glade.h:25
 msgid "Open a brief introductory explanation of how the Module Manager works."
-msgstr "فتح شرحا موجزا عن كيفية استهلالي مدير وحدة الأعمال."
+msgstr "Modül Yöneticisi nasıl çalıştığı hakkında kısa bir tanıtım açıklama açın."
 
 #: ../ui/module-manager.glade.h:26
 msgid "Refresh Xiphos' knowledge of what modules are available at the selected remote repository"
-msgstr "تحديث Xiphos &#39;معرفة ما تتوفر وحدات مختارة في مستودع بعيد"
+msgstr "modülleri mevcuttur ne Yenile Xiphos &#39;bilgi deposu uzaktan seçilen"
 
 #: ../ui/module-manager.glade.h:27
 msgid "Remote"
-msgstr "بعيد"
+msgstr "Uzak"
 
 #: ../ui/module-manager.glade.h:28
 msgid "Remove a remote install source."
-msgstr "إزالة مصدر تثبيت البعيد."
+msgstr "bir uzaktan yükleme kaynağını çıkarın."
 
 #: ../ui/module-manager.glade.h:29
 msgid "Remove one of your local folders as an install source."
-msgstr "إزالة واحد من المجلدات المحلية كمصدر تثبيت."
+msgstr "bir yükleme kaynağı olarak yerel klasörlerden birini çıkarın."
 
 #: ../ui/module-manager.glade.h:30
 msgid "Remove the selected modules from your system"
-msgstr "إزالة وحدات مختارة من النظام الخاص بك"
+msgstr "sisteminizden seçilen modüllerini çıkarın"
 
 #: ../ui/module-manager.glade.h:31
 msgid "Sword sys dir"
-msgstr "سيف دير تميز الكلية"
+msgstr "Kılıç dir sys"
 
 #: ../ui/module-manager.glade.h:32
 msgid "_Archive"
@@ -2479,7 +2468,7 @@ msgstr "_Archive"
 
 #: ../ui/module-manager.glade.h:33
 msgid "_Delete Index"
-msgstr "مؤشر _Delete"
+msgstr "_Delete Endeksi"
 
 #: ../ui/module-manager.glade.h:34
 msgid "_Index"
@@ -2491,11 +2480,11 @@ msgstr "_Install"
 
 #: ../ui/module-manager.glade.h:36
 msgid "_Load Standard"
-msgstr "_Load قياسي"
+msgstr "_Load Standart"
 
 #: ../ui/module-manager.glade.h:37
 msgid "_View Intro"
-msgstr "_View مقدمة"
+msgstr "_View Intro"
 
 #: ../ui/navbar_versekey.glade.h:1
 msgid "1"
@@ -2503,31 +2492,31 @@ msgstr "1"
 
 #: ../ui/navbar_versekey.glade.h:2
 msgid "<b>Revelation of John</b>"
-msgstr "<b>الوحي من جون</b>"
+msgstr "<b>John Vahiy</b>"
 
 #: ../ui/navbar_versekey.glade.h:3
 msgid "Book Selector Button"
-msgstr "كتاب محدد زر"
+msgstr "Kitap Seçici Düğme"
 
 #: ../ui/navbar_versekey.glade.h:4
 msgid "Choose book to display"
-msgstr "اختيار الكتاب لعرض"
+msgstr "görüntülemek için kitap seçin"
 
 #: ../ui/navbar_versekey.glade.h:5
 msgid "Drop down history list"
-msgstr "قطرة إلى أسفل قائمة التاريخ"
+msgstr "Açılır geçmiş listesi"
 
 #: ../ui/navbar_versekey.glade.h:6
 msgid "Reference Entry"
-msgstr "إشارة الدخول"
+msgstr "Referans Giriş"
 
 #: ../ui/navbar_versekey.glade.h:7
 msgid "Toggle Chapter Button"
-msgstr "تبديل الفصل زر"
+msgstr "Geçiş Bölüm Düğme"
 
 #: ../ui/navbar_versekey.glade.h:8
 msgid "Toggle Verse Button"
-msgstr "تبديل الآية زر"
+msgstr "Geçiş Ayet Düğme"
 
 #: ../ui/prefs.glade.h:1
 msgid ""
@@ -2543,894 +2532,894 @@ msgstr "-2 -1 +0 +1 +2 +3 +4 +5"
 
 #: ../ui/prefs.glade.h:9
 msgid "<b>Font Colors</b>"
-msgstr "<b>الخط الألوان</b>"
+msgstr "<b>Font Renkler</b>"
 
 #: ../ui/prefs.glade.h:10
 msgid "<b>Font Sizes</b>"
-msgstr "<b>أحجام الخط</b>"
+msgstr "<b>Font Ölçüler</b>"
 
 #: ../ui/prefs.glade.h:11
 msgid "<b>General</b>"
-msgstr "<b>العام</b>"
+msgstr "<b>Genel</b>"
 
 #: ../ui/prefs.glade.h:12
 msgid "<b>Main Window Modules</b>"
-msgstr "<b>نافذة الوحدات الرئيسية</b>"
+msgstr "<b>Ana Pencere Modülleri</b>"
 
 #: ../ui/prefs.glade.h:13
 #: ../ui/search-dialog.glade.h:5
 msgid "<b>Modules</b>"
-msgstr "<b>وحدات</b>"
+msgstr "<b>Modülleri</b>"
 
 #: ../ui/prefs.glade.h:14
 msgid "<b>Show</b>"
-msgstr "<b>عرض</b>"
+msgstr "<b>Göstermek</b>"
 
 #: ../ui/prefs.glade.h:15
 msgid "<b>Special Purpose Modules</b>"
-msgstr "<b>وحدات للاستعمالات الخاصة</b>"
+msgstr "<b>Özel Amaçlı Modüller</b>"
 
 #: ../ui/prefs.glade.h:16
 msgid "<b>StudyPad default directory</b>"
-msgstr "<b>StudyPad الدليل الافتراضي</b>"
+msgstr "<b>StudyPad varsayılan dizin</b>"
 
 #: ../ui/prefs.glade.h:17
 msgid "<b>Tabs</b>"
-msgstr "<b>علامات</b>"
+msgstr "<b>Sekmeler</b>"
 
 #: ../ui/prefs.glade.h:18
 #: ../ui/search-dialog.glade.h:15
 msgid "Add Modules"
-msgstr "إضافة وحدات"
+msgstr "Eklemek Modülleri"
 
 #: ../ui/prefs.glade.h:19
 msgid "All displayed font sizes are relative to this choice"
-msgstr "جميع أحجام الخطوط المعروضة النسبية لهذا الاختيار"
+msgstr "Görüntülenen tüm font boyutları bu seçimi göredir"
 
 #: ../ui/prefs.glade.h:20
 msgid "Apply high-contrast highlight to current verse - see color pickers"
-msgstr "تطبيق عالية التباين تسليط الضوء على الآية الحالية -- انظر جامعي اللون"
+msgstr "Güncel ayet uygulama yüksek kontrastlı vurgulamak - renk toplayıcılar görmek"
 
 #: ../ui/prefs.glade.h:21
 msgid "Automatically resize image content to fit the pane"
-msgstr "تغيير حجم الصور تلقائيا لتتناسب مع محتوى جزء"
+msgstr "Otomatik bölmesine sığacak şekilde görüntü içeriğini yeniden boyutlandırmak"
 
 #: ../ui/prefs.glade.h:22
 msgid "Background"
-msgstr "الخلفية"
+msgstr "Arka plan"
 
 #: ../ui/prefs.glade.h:23
 msgid "Base font size"
-msgstr "قاعدة حجم الخط"
+msgstr "Baz font boyutu"
 
 #: ../ui/prefs.glade.h:24
 msgid "Bible Texts"
-msgstr "نصوص الكتاب المقدس"
+msgstr "İncil Metinler"
 
 #: ../ui/prefs.glade.h:25
 msgid "Bible Texts Checkbox"
-msgstr "نصوص الكتاب المقدس خانة"
+msgstr "İncil metinleri Checkbox"
 
 #: ../ui/prefs.glade.h:26
 msgid "Biblical Text"
-msgstr "نص الكتاب المقدس"
+msgstr "İncille Metin"
 
 #: ../ui/prefs.glade.h:28
 msgid "Change Biblical Text Combo"
-msgstr "تغيير النص الانجيلي كومبو"
+msgstr "Combo İncil Metin Değişikliği"
 
 #: ../ui/prefs.glade.h:29
 msgid "Change Book Combo"
-msgstr "تغيير كتاب كومبو"
+msgstr "Combo Kitap Değişim"
 
 #: ../ui/prefs.glade.h:30
 msgid "Change Commentary Combo"
-msgstr "تغيير التعليق كومبو"
+msgstr "Combo Yorum değiştir"
 
 #: ../ui/prefs.glade.h:31
 msgid "Change Default Dictionary Combo"
-msgstr "تغيير القاموس الافتراضي كومبو"
+msgstr "Değiştirmek Varsayılan Combo Sözlük"
 
 #: ../ui/prefs.glade.h:32
 msgid "Change Dictionary Combo"
-msgstr "تغيير قاموس كومبو"
+msgstr "Değiştirmek Combo Sözlük"
 
 #: ../ui/prefs.glade.h:33
 msgid "Change Personal Notes Combo"
-msgstr "تغيير الملاحظات الشخصية كومبو"
+msgstr "Kişisel Notlar Combo değiştir"
 
 #: ../ui/prefs.glade.h:34
 #: ../ui/search-dialog.glade.h:21
 msgid "Clear Modules from List Button"
-msgstr "واضحة وحدات من قائمة زر"
+msgstr "Liste Button sil Modülleri"
 
 #: ../ui/prefs.glade.h:35
 #: ../ui/search-dialog.glade.h:22
 msgid "Clear all modules from the list"
-msgstr "واضح من جميع وحدات قائمة"
+msgstr "Net listeden tüm modülleri"
 
 #: ../ui/prefs.glade.h:37
 msgid "Commentaries Checkbox"
-msgstr "التعليقات خانة"
+msgstr "Yorumlar Checkbox"
 
 #: ../ui/prefs.glade.h:39
 msgid "Commonly -1, to make verse numbers less obtrusive"
-msgstr "عادة -1 ، لجعل الأرقام الآية أقل فظاظة"
+msgstr "Genellikle -1, ayet numaraları daha az rahatsız edici yapmak"
 
 #: ../ui/prefs.glade.h:40
 msgid "Cover"
-msgstr "تغطية"
+msgstr "Kapak"
 
 #: ../ui/prefs.glade.h:41
 msgid "Cross-references in verse list"
-msgstr "إحالات في قائمة الآية"
+msgstr "ayet listesinde çapraz referanslar"
 
 #: ../ui/prefs.glade.h:42
 msgid "Current Verse"
-msgstr "الآية الحالية"
+msgstr "Geçerli Ayet"
 
 #: ../ui/prefs.glade.h:43
 msgid "Daily Devotional"
-msgstr "صحيفة عبادي"
+msgstr "Günlük adanmışlık"
 
 #: ../ui/prefs.glade.h:44
 msgid "Daily Devotional Combo"
-msgstr "يوميا عبادي كومبو"
+msgstr "Günlük Combo adanmışlık"
 
 #: ../ui/prefs.glade.h:45
 msgid "Default Dictionary"
-msgstr "القاموس الافتراضي"
+msgstr "Varsayılan Sözlük"
 
 #: ../ui/prefs.glade.h:46
 #: ../ui/search-dialog.glade.h:39
 msgid "Delete Selected Module From List Button"
-msgstr "حذف وحدة مختارة من قائمة زر"
+msgstr "Liste Button From Delete Selected Modülü"
 
 #: ../ui/prefs.glade.h:47
 msgid "Dictionary"
-msgstr "القاموس"
+msgstr "Sözlük"
 
 #: ../ui/prefs.glade.h:48
 msgid "Dictionary/Lexicon"
-msgstr "قاموس / معجم"
+msgstr "Sözlük / Lexicon"
 
 #: ../ui/prefs.glade.h:49
 msgid "Dictionary/Lexicon Checkbox"
-msgstr "معجم القاموس خانة /"
+msgstr "Sözlük / Lexicon Checkbox"
 
 #: ../ui/prefs.glade.h:50
 msgid "Enable Prayer Lists"
-msgstr "قوائم تمكين الصلاة"
+msgstr "Etkinleştirmek Namaz Listeler"
 
 #: ../ui/prefs.glade.h:51
 msgid "Enable Prayer Lists Checkbox"
-msgstr "قوائم الصلاة تمكين خانة"
+msgstr "Etkinleştirmek Namaz Listeler Checkbox"
 
 #: ../ui/prefs.glade.h:52
 msgid "Font Colors"
-msgstr "الخط الألوان"
+msgstr "Font Renkler"
 
 #: ../ui/prefs.glade.h:53
 msgid "Font Misc"
-msgstr "الخط متفرقات"
+msgstr "Font Misc"
 
 #: ../ui/prefs.glade.h:54
 msgid "Font preferences, per language"
-msgstr "تفضيلات الخط ، لكل لغة"
+msgstr "Font tercihleri, dil başına"
 
 #: ../ui/prefs.glade.h:55
 msgid "Foreground"
-msgstr "المقدمة"
+msgstr "Ön plan"
 
 #: ../ui/prefs.glade.h:56
 msgid "General Misc"
-msgstr "متفرقات عامة"
+msgstr "Genel Çeşitli"
 
 #: ../ui/prefs.glade.h:57
 msgid "Greek Lexicon"
-msgstr "معجم اليونانية"
+msgstr "Yunan Lexicon"
 
 #: ../ui/prefs.glade.h:58
 msgid "Greek Lexicon Combo"
-msgstr "معجم اليونانية كومبو"
+msgstr "Lexicon Combo Yunan"
 
 #: ../ui/prefs.glade.h:59
 msgid "Hebrew Lexicon"
-msgstr "معجم العبرية"
+msgstr "İbranice Lexicon"
 
 #: ../ui/prefs.glade.h:60
 msgid "Hebrew Lexicon Combo"
-msgstr "معجم العبرية كومبو"
+msgstr "İbranice Lexicon Combo"
 
 #: ../ui/prefs.glade.h:61
 msgid "Highlight"
-msgstr "تسليط الضوء"
+msgstr "Vurgulamak"
 
 #: ../ui/prefs.glade.h:62
 msgid "Highlight Background"
-msgstr "تسليط الضوء على الخلفية"
+msgstr "Vurgulamak Arkaplan"
 
 #: ../ui/prefs.glade.h:63
 msgid "Highlight Foreground"
-msgstr "تسليط الضوء على المقدمة"
+msgstr "Vurgulamak Önalan"
 
 #: ../ui/prefs.glade.h:64
 msgid "Highlight current verse"
-msgstr "تسليط الضوء على الآية الحالية"
+msgstr "Vurgulamak akım ayet"
 
 #: ../ui/prefs.glade.h:65
 msgid "Highlight current verse check box"
-msgstr "تسليط الضوء على الاختيار الآية الحالية مربع"
+msgstr "Vurgulamak geçerli ayet onay kutusunu"
 
 #: ../ui/prefs.glade.h:66
 msgid "Highlight user annotations"
-msgstr "الشروح تمييز المستخدم"
+msgstr "Vurgulamak kullanıcı açıklamalar"
 
 #: ../ui/prefs.glade.h:67
 msgid "Highlight user annotations check box"
-msgstr "الشروح المستخدم تمييز خانة"
+msgstr "Vurgulamak kullanıcı açıklamalar onay kutusunu"
 
 #: ../ui/prefs.glade.h:68
 msgid "If you have set a preferred daily devotion module, its entry for today will be shown at startup."
-msgstr "إذا كان لديك مجموعة مفضل التفاني وحدة يوميا ، سيظهر دخولها لهذا اليوم عند بدء التشغيل."
+msgstr "Bir tercih edilen günlük bağlılık modülü set varsa, bugün için kendi giriş açılışta gösterilecek."
 
 #: ../ui/prefs.glade.h:69
 msgid "Invert color pairs"
-msgstr "أزواج عكس اللون"
+msgstr "Invert renk çiftleri"
 
 #: ../ui/prefs.glade.h:70
 msgid "Language Font Combo"
-msgstr "لغة الخط كومبو"
+msgstr "Dil Yazı Combo"
 
 #: ../ui/prefs.glade.h:71
 msgid "Links"
-msgstr "الروابط"
+msgstr "Linkler"
 
 #: ../ui/prefs.glade.h:72
 msgid "Make double-click of a word always use default dictionary instead of dictionary currently displayed"
-msgstr "جعل الافتراضي انقر نقرا مزدوجا فوق الكلمة دائما استخدام القاموس بدلا من القاموس المعروضة حاليا"
+msgstr "kullanmak her zaman bir sözcüğün çift tıklatın olun varsayılan anda görüntülenen Sözlük yerine Sözlük"
 
 #: ../ui/prefs.glade.h:73
 msgid "Make journals/prayer lists available"
-msgstr "جعل المجلات / قوائم صلاة متاحة"
+msgstr "mevcut dergilerin / dua listeleri olun"
 
 #: ../ui/prefs.glade.h:74
 #: ../ui/search-dialog.glade.h:61
 msgid "Module Selection"
-msgstr "اختيار وحدة"
+msgstr "Modül Seçimi"
 
 #: ../ui/prefs.glade.h:75
 msgid "Modules Main"
-msgstr "الوحدات الرئيسية"
+msgstr "Modülleri Ana"
 
 #: ../ui/prefs.glade.h:76
 msgid "Modules Misc"
-msgstr "وحدات متفرقات"
+msgstr "Modülleri Misc"
 
 #: ../ui/prefs.glade.h:77
 msgid "Modules Parallel"
-msgstr "وحدات متوازية"
+msgstr "Modülleri Paralel"
 
 #: ../ui/prefs.glade.h:78
 msgid "Name and size choice for any module in a given language; still overridden by a specific choice on a particular module"
-msgstr "اسم وحجم الاختيار لأية وحدة نمطية في لغة معينة ؛ تجاوز لا يزال خيار محدد على وحدة نمطية معينة"
+msgstr "hala belirli bir seçim tarafından geçersiz belli bir modül üzerinde; belirli bir dildeki herhangi bir modül için İsim ve boyut seçenekleri"
 
 #: ../ui/prefs.glade.h:79
 msgid "Normal Text"
-msgstr "نص عادي"
+msgstr "Normal Metin"
 
 #: ../ui/prefs.glade.h:80
 #: ../ui/search-dialog.glade.h:70
 msgid "Open Selection Dialog Button"
-msgstr "اختيار زر فتح حوار"
+msgstr "Açık Seçim Dialog Button"
 
 #: ../ui/prefs.glade.h:81
 msgid "Open a dialog to select modules"
-msgstr "فتح الحوار لتحديد وحدات"
+msgstr "modülleri seçmek için bir iletişim aç"
 
 #: ../ui/prefs.glade.h:82
 msgid "Parallel View in a tab"
-msgstr "مواز عرض في التبويب"
+msgstr "Bir sekmeyi paralel Profili"
 
 #: ../ui/prefs.glade.h:83
 msgid "Personal Notes"
-msgstr "ملاحظات شخصية"
+msgstr "Kişisel Notlar"
 
 #: ../ui/prefs.glade.h:86
 msgid "Previewer Checkbox"
-msgstr "المعاين خانة"
+msgstr "Önizleyicide Checkbox"
 
 #: ../ui/prefs.glade.h:87
 #: ../ui/search-dialog.glade.h:80
 msgid "Remove the selected module from the list"
-msgstr "إزالة وحدة مختارة من قائمة"
+msgstr "Listeden seçilen modülünü çıkarın"
 
 #: ../ui/prefs.glade.h:88
 msgid "Resize images"
-msgstr "تغيير حجم الصور"
+msgstr "Boyutlandırmak görüntüler"
 
 #: ../ui/prefs.glade.h:89
 msgid "Resize images checkbox"
-msgstr "تغيير حجم الصور مربع"
+msgstr "Boyutlandırmak görüntüler onay"
 
 #: ../ui/prefs.glade.h:90
 msgid "Scroll to Previous/Next Chapter"
-msgstr "انتقل إلى الفصل السابق / التالي"
+msgstr "Ilerleyin Önceki / Sonraki Bölüm için"
 
 #: ../ui/prefs.glade.h:91
 msgid "Scroll to Previous/Next Chapter Checkbox"
-msgstr "انتقل إلى السابق / خانة الفصل التالي"
+msgstr "Ilerleyin Önceki / Sonraki Bölüm Onay için"
 
 #: ../ui/prefs.glade.h:92
 msgid "Select A Directory"
-msgstr "تحديد دليل"
+msgstr "Bir Dizin Seçin"
 
 #: ../ui/prefs.glade.h:93
 msgid "Select a particular language for interface display, other than your usual setting"
-msgstr "اختر لغة معينة للعرض واجهة ، وغيرها من الإعداد المعتاد"
+msgstr "Her zamanki ayarından daha arayüzünü görüntülemek için belirli bir dil, diğer Seç"
 
 #: ../ui/prefs.glade.h:94
 msgid "Show Daily Devotion at start up"
-msgstr "ديلي شو تفانيه في البدء"
+msgstr "Gösterisi Günlük Devotion başlatmak"
 
 #: ../ui/prefs.glade.h:95
 msgid "Show splash screen at start up"
-msgstr "تظهر شاشة البداية في البدء"
+msgstr "Gösterisi ekranını başlatmak"
 
 #: ../ui/prefs.glade.h:96
 msgid "Single selection of Bible+commentary+book+dictionary, or many sets of such selections in a tabbed interface"
-msgstr "اختيار واحدة من الكتاب المقدس + + التعليق كتابه + القاموس ، أو مجموعات كثيرة من هذه التحديدات في واجهة تفاعلية"
+msgstr "İncil Tek seçim + yorum + kitap + bir sekmeli arayüzü böyle seçimleri birçok setleri veya sözlük"
 
 #: ../ui/prefs.glade.h:97
 msgid "Special Locale (requires restart)"
-msgstr "اللغة الخاصة (يتطلب إعادة التشغيل)"
+msgstr "Özel Locale (yeniden başlatma gerektirir)"
 
 #: ../ui/prefs.glade.h:98
 msgid "Special Locale Combo"
-msgstr "لغة خاصة كومبو"
+msgstr "Yerel Combo Özel"
 
 #: ../ui/prefs.glade.h:99
 msgid "StudyPad default directory combo"
-msgstr "StudyPad الدليل الافتراضي التحرير والسرد"
+msgstr "StudyPad varsayılan dizin combo"
 
 #: ../ui/prefs.glade.h:101
 msgid "Use Bible Text scroll bar to scroll to previous or next chapter"
-msgstr "نص الكتاب المقدس استخدام شريط التمرير للانتقال إلى الفصل التالي أو السابق"
+msgstr "Kullanım İncil Metin önceki veya sonraki bölüme gitmek için kaydırma çubuğunu"
 
 #: ../ui/prefs.glade.h:102
 msgid "Use default Dictionary"
-msgstr "استخدام القاموس الافتراضي"
+msgstr "Varsayılan Sözlük"
 
 #: ../ui/prefs.glade.h:103
 msgid "Use default Dictionary Checkbox"
-msgstr "استخدام القاموس الافتراضي خانة"
+msgstr "Varsayılan Sözlük Checkbox"
 
 #: ../ui/prefs.glade.h:104
 msgid "Use inverted highlight on user-annotated verses"
-msgstr "استخدام الضوء المعكوس على الآيات المستخدم المشروح"
+msgstr "kullanıcı açıklamalı ayetlere ters vurgulamak kullanın"
 
 #: ../ui/prefs.glade.h:105
 msgid "Use tabbed browsing"
-msgstr "استخدام الاستعراض المبوب"
+msgstr "sekmeli tarama kullanın"
 
 #: ../ui/prefs.glade.h:106
 msgid "Use tabbed browsing Checkbox"
-msgstr "استخدام الاستعراض المبوب خانة"
+msgstr "Kullanım sekmeli tarama Checkbox"
 
 #: ../ui/prefs.glade.h:107
 msgid "Use the verse list for Bible cross-references instead of the previewer"
-msgstr "استخدم قائمة الآية لمراجع الكتاب المقدس الصليب بدلا من المشاهد في"
+msgstr "İncil çapraz referansları için ayet liste yerine önizleyicide kullanın"
 
 #: ../ui/prefs.glade.h:108
 msgid "Verse Number"
-msgstr "الآية رقم"
+msgstr "Ayet sayısı"
 
 #: ../ui/prefs.glade.h:109
 msgid "Verse number size"
-msgstr "الآية رقم حجم"
+msgstr "Ayet sayısı boyutu"
 
 #: ../ui/prefs.glade.h:110
 msgid "Xrefs in verse list check box"
-msgstr "Xrefs في قائمة الآية خانة الاختيار"
+msgstr "ayet liste onay kutusunu Xrefs"
 
 #: ../ui/search-dialog.glade.h:1
 msgid "<b>Attribute</b>"
-msgstr "<b>السمة</b>"
+msgstr "<b>Nitelik</b>"
 
 #: ../ui/search-dialog.glade.h:2
 msgid "<b>Found</b>"
-msgstr "<b>وجدت</b>"
+msgstr "<b>Bulundu</b>"
 
 #: ../ui/search-dialog.glade.h:3
 msgid "<b>List Name</b>"
-msgstr "<b>اسم قائمة</b>"
+msgstr "<b>Liste Adı</b>"
 
 #: ../ui/search-dialog.glade.h:4
 msgid "<b>Module Lists</b>"
-msgstr "<b>قوائم وحدة</b>"
+msgstr "<b>Modül Listeler</b>"
 
 #: ../ui/search-dialog.glade.h:6
 msgid "<b>Options</b>"
-msgstr "<b>خيارات</b>"
+msgstr "<b>Seçenekleri</b>"
 
 #: ../ui/search-dialog.glade.h:7
 msgid "<b>Preview</b>"
-msgstr "<b>معاينة</b>"
+msgstr "<b>Önizleme</b>"
 
 #: ../ui/search-dialog.glade.h:8
 msgid "<b>Range Definition</b>"
-msgstr "<b>مجموعة تعريف</b>"
+msgstr "<b>Aralık tanımı</b>"
 
 #: ../ui/search-dialog.glade.h:9
 msgid "<b>Range Name</b>"
-msgstr "<b>اسم النطاق</b>"
+msgstr "<b>Aralığı Adı</b>"
 
 #: ../ui/search-dialog.glade.h:10
 msgid "<b>Ranges</b>"
-msgstr "<b>نطاقات</b>"
+msgstr "<b>Aralıkları</b>"
 
 #: ../ui/search-dialog.glade.h:11
 msgid "<b>Results Display Options</b>"
-msgstr "<b>عرض النتائج خيارات</b>"
+msgstr "<b>Sonuçlar Görüntü Seçenekleri</b>"
 
 #: ../ui/search-dialog.glade.h:12
 msgid "<b>Scope</b>"
-msgstr "<b>نطاق</b>"
+msgstr "<b>Kapsam</b>"
 
 #: ../ui/search-dialog.glade.h:13
 msgid "<b>Search Results</b>"
-msgstr "<b>نتائج البحث</b>"
+msgstr "<b>Arama Sonuçları</b>"
 
 #: ../ui/search-dialog.glade.h:14
 msgid "<b>Search Type</b>"
-msgstr "<b>نوع البحث</b>"
+msgstr "<b>Arama Türü</b>"
 
 #: ../ui/search-dialog.glade.h:16
 msgid "Advanced Search"
-msgstr "بحث متقدم"
+msgstr "Gelişmiş Arama"
 
 #: ../ui/search-dialog.glade.h:17
 msgid "Attribute Search"
-msgstr "السمة البحث"
+msgstr "Öznitelik Arama"
 
 #: ../ui/search-dialog.glade.h:18
 msgid "Attributes"
-msgstr "سمات"
+msgstr "Öznitelikleri"
 
 #: ../ui/search-dialog.glade.h:19
 msgid "Attributes radiobutton"
-msgstr "سمات زر راديو"
+msgstr "Nitelikleri Radiobuton"
 
 #: ../ui/search-dialog.glade.h:20
 msgid "Clear Custom Module List Button"
-msgstr "واضحة قائمة الوحدات زر مخصص"
+msgstr "Net Özel Modül Listesi Düğme"
 
 #: ../ui/search-dialog.glade.h:23
 msgid "Clear lists for new search"
-msgstr "قوائم واضحة للبحث جديد"
+msgstr "yeni arama için Clear listeleri"
 
 #: ../ui/search-dialog.glade.h:24
 msgid "Create a new module list"
-msgstr "إنشاء قائمة جديدة وحدة"
+msgstr "yeni bir modül liste oluşturma"
 
 #: ../ui/search-dialog.glade.h:25
 msgid "Create new custom range"
-msgstr "إنشاء مجموعة مخصصة جديدة"
+msgstr "Yeni özel aralık oluşturma"
 
 #: ../ui/search-dialog.glade.h:26
 msgid "Current results"
-msgstr "النتائج الحالية"
+msgstr "Geçerli sonuçlar"
 
 #: ../ui/search-dialog.glade.h:27
 msgid "Current results radiobutton"
-msgstr "النتائج الحالية زر راديو"
+msgstr "Geçerli sonuçlar Radiobuton"
 
 #: ../ui/search-dialog.glade.h:28
 msgid "Custom Module List Combo"
-msgstr "قائمة مخصصة كومبو وحدة"
+msgstr "Özel Modül Listesi Combo"
 
 #: ../ui/search-dialog.glade.h:29
 msgid "Custom Module List Name Entry"
-msgstr "عرف اسم قائمة الوحدات الدخول"
+msgstr "Özel Modül Listesi Giriş"
 
 #: ../ui/search-dialog.glade.h:30
 msgid "Custom Module Lists"
-msgstr "قوائم مخصصة الوحدة"
+msgstr "Özel Modülü Listeler"
 
 #: ../ui/search-dialog.glade.h:31
 msgid "Custom Range Preview"
-msgstr "مخصص المدى معاينة"
+msgstr "Özel Aralığı Önizleme"
 
 #: ../ui/search-dialog.glade.h:32
 msgid "Custom Range Selector Combo"
-msgstr "مخصص محدد المدى كومبو"
+msgstr "Özel Aralık Seçici Combo"
 
 #: ../ui/search-dialog.glade.h:33
 msgid "Custom Verse Ranges"
-msgstr "نطاقات مخصصة الآية"
+msgstr "Özel Ayet Aralıkları"
 
 #: ../ui/search-dialog.glade.h:34
 msgid "Custom module list"
-msgstr "العرف قائمة الوحدة"
+msgstr "Özel bir modül listesi"
 
 #: ../ui/search-dialog.glade.h:35
 msgid "Custom module list radiobutton"
-msgstr "قائمة وحدة مخصصة زر راديو"
+msgstr "Özel bir modül listesi Radiobuton"
 
 #: ../ui/search-dialog.glade.h:36
 msgid "Custom verse range"
-msgstr "الآية مجموعة مخصصة"
+msgstr "Özel ayet aralığı"
 
 #: ../ui/search-dialog.glade.h:37
 msgid "Custom verse range radiobutton"
-msgstr "مجموعة مخصصة الآية زر راديو"
+msgstr "Özel ayet aralığı Radiobuton"
 
 #: ../ui/search-dialog.glade.h:38
 msgid "Delete Range Button"
-msgstr "مجموعة حذف زر"
+msgstr "Silmek Aralığı Düğme"
 
 #: ../ui/search-dialog.glade.h:40
 msgid "Delete selected range"
-msgstr "حذف مجموعة مختارة"
+msgstr "Silmek seçilen aralığı"
 
 #: ../ui/search-dialog.glade.h:41
 msgid "Delete the selected list"
-msgstr "حذف قائمة مختارة"
+msgstr "Silmek seçilen liste"
 
 #: ../ui/search-dialog.glade.h:42
 msgid "Entire module"
-msgstr "كله وحدة"
+msgstr "Tüm modül"
 
 #: ../ui/search-dialog.glade.h:43
 msgid "Entire module radiobutton"
-msgstr "كامل زر راديو وحدة"
+msgstr "Tüm modül Radiobuton"
 
 #: ../ui/search-dialog.glade.h:45
 msgid "Exact phrase radiobutton"
-msgstr "العبارة بالضبط زر راديو"
+msgstr "Tam sözcük Radiobuton"
 
 #: ../ui/search-dialog.glade.h:46
 msgid "Export"
-msgstr "تصدير"
+msgstr "Ihracat"
 
 #: ../ui/search-dialog.glade.h:47
 msgid "Export current search results"
-msgstr "نتائج البحث التصدير الحالية"
+msgstr "Ihracat cari arama sonuçları"
 
 #: ../ui/search-dialog.glade.h:48
 msgid ""
 "Fast, featureful, index-based search\n"
 "Indexes must have been built beforehand:\n"
 "See Module Manager's maintenance functions"
-msgstr "سريع featureful المستندة يجب أن يكون قد فهارس البحث ، مؤشر بنيت قبل : مدير الصيانة في وظائف وحدة انظر"
+msgstr "Hızlı, özellikli endeks bazlı arama Endeksleri önceden yapılmış olmalıdır: bak Modülü Yönetici bakım fonksiyonları"
 
 #: ../ui/search-dialog.glade.h:51
 msgid "Find Button"
-msgstr "زر البحث"
+msgstr "Bul düğmesi"
 
 #: ../ui/search-dialog.glade.h:53
 msgid "Footnotes radiobutton"
-msgstr "الحواشي زر راديو"
+msgstr "Dipnotlar Radiobuton"
 
 #: ../ui/search-dialog.glade.h:54
 msgid "In modules that have Footnotes"
-msgstr "في الوحدات النمطية التي الحواشي"
+msgstr "Dipnotları var modüllerde"
 
 #: ../ui/search-dialog.glade.h:55
 msgid "In modules that have Morphological Tags"
-msgstr "في الوحدات النمطية التي المورفولوجية العلامات"
+msgstr "modüllerde bu Morfolojik Etiketler var"
 
 #: ../ui/search-dialog.glade.h:56
 msgid "In modules that have Strong's Numbers"
-msgstr "في الوحدات النمطية التي لديها أرقام سترونغ"
+msgstr "modüllerde o Güçlü Numaraları var"
 
 #: ../ui/search-dialog.glade.h:57
 msgid "Main Search Entry"
-msgstr "الرئيسية بحث دخول"
+msgstr "Ana Arama Giriş"
 
 #: ../ui/search-dialog.glade.h:58
 msgid "Make selections on the Attribute Search tab"
-msgstr "الاختيارات على علامة التبويب بحث سمة"
+msgstr "Nitelik Arama sekmesinde seçimlerinizi yapın"
 
 #: ../ui/search-dialog.glade.h:60
 msgid "Match case checkbox"
-msgstr "المباراة حالة الاختيار"
+msgstr "Maç durumda onay"
 
 #: ../ui/search-dialog.glade.h:62
 msgid "Module list"
-msgstr "وحدة قائمة"
+msgstr "Modül listesi"
 
 #: ../ui/search-dialog.glade.h:63
 msgid "Module list radiobutton"
-msgstr "وحدة قائمة زر راديو"
+msgstr "Modül listesi Radiobuton"
 
 #: ../ui/search-dialog.glade.h:65
 msgid "Morphological Tags radiobutton"
-msgstr "المورفولوجية العلامات زر راديو"
+msgstr "Morfolojik Etiketler Radiobuton"
 
 #: ../ui/search-dialog.glade.h:67
 msgid "Multi word radiobutton"
-msgstr "كلمة متعددة زر راديو"
+msgstr "Çok kelime Radiobuton"
 
 #: ../ui/search-dialog.glade.h:68
 msgid "New Custom Module List Button"
-msgstr "جديدة قائمة الوحدات زر مخصص"
+msgstr "Yeni Özel Modül Listesi Düğme"
 
 #: ../ui/search-dialog.glade.h:69
 msgid "New Range Button"
-msgstr "مجموعة جديدة زر"
+msgstr "Yeni Range Düğme"
 
 #: ../ui/search-dialog.glade.h:71
 msgid "Open a brief explanation of attribute-based searches."
-msgstr "فتح شرحا موجزا لعمليات البحث على أساس السمة."
+msgstr "öznitelik tabanlı araması kısa bir açıklama açın."
 
 #: ../ui/search-dialog.glade.h:72
 msgid "Open a brief explanation of the syntax used for optimized \"lucene\" searches."
-msgstr "فتح شرحا موجزا للاستخدام الأمثل لبناء الجملة التفتيش \"وسين\"."
+msgstr "optimize \"Lucene\" aramaları için kullanılan sözdizimi kısa bir açıklama açın."
 
 #: ../ui/search-dialog.glade.h:73
 msgid "Open a dialog to select modules to add to the list"
-msgstr "فتح الحوار لتحديد وحدات لتضاف إلى قائمة"
+msgstr "listeye eklemek için modüller seçmek için bir iletişim aç"
 
 #: ../ui/search-dialog.glade.h:74
 msgid "Optimized (\"Lucene\")"
-msgstr "الأمثل (\"وسين\")"
+msgstr "Optimize edilmiş (\"Lucene\")"
 
 #: ../ui/search-dialog.glade.h:75
 msgid "Optimized (\"Lucene\") radiobutton"
-msgstr "الأمثل (\"وسين\") زر راديو"
+msgstr "Optimize edilmiş (\"Lucene\") Radiobuton"
 
 #: ../ui/search-dialog.glade.h:76
 msgid "Range Definition Entry"
-msgstr "دخول مجموعة تعريف"
+msgstr "Aralık tanımı Giriş"
 
 #: ../ui/search-dialog.glade.h:77
 msgid "Range Name Entry"
-msgstr "اسم إدخال مجموعة"
+msgstr "Aralığı Adı Giriş"
 
 #: ../ui/search-dialog.glade.h:79
 msgid "Regular expression radiobutton"
-msgstr "التعبير العادية زر راديو"
+msgstr "Düzenli ifade Radiobuton"
 
 #: ../ui/search-dialog.glade.h:81
 msgid "Result Summary Table"
-msgstr "نتيجة موجز الجدول"
+msgstr "Sonuç Özet Tablo"
 
 #: ../ui/search-dialog.glade.h:82
 msgid "Result Summary Window"
-msgstr "نتيجة موجز نافذة"
+msgstr "Sonuç Özet Penceresi"
 
 #: ../ui/search-dialog.glade.h:83
 msgid "Results"
-msgstr "النتائج"
+msgstr "Sonuçlar"
 
 #: ../ui/search-dialog.glade.h:84
 msgid "Save Custom Module List Button"
-msgstr "حفظ زر مخصص قائمة الوحدات"
+msgstr "Özel Modül Listesi Düğme kaydet"
 
 #: ../ui/search-dialog.glade.h:85
 msgid "Save Range Button"
-msgstr "حفظ المدى زر"
+msgstr "Kaydetmek Aralığı Düğme"
 
 #: ../ui/search-dialog.glade.h:86
 msgid "Save custom range"
-msgstr "انقاذ مجموعة مخصصة"
+msgstr "Özel aralık Kaydet"
 
 #: ../ui/search-dialog.glade.h:87
 msgid "Save search results as bookmarks"
-msgstr "حفظ نتائج البحث كعلامات"
+msgstr "imi olarak arama sonuçlarını kaydetme"
 
 #: ../ui/search-dialog.glade.h:88
 msgid "Save the module list"
-msgstr "حفظ قائمة الوحدة"
+msgstr "modül listesini kaydet"
 
 #: ../ui/search-dialog.glade.h:89
 msgid "Search  Criteria"
-msgstr "معايير البحث"
+msgstr "Arama Kriterleri"
 
 #: ../ui/search-dialog.glade.h:90
 msgid "Search Criteria Treeview"
-msgstr "معايير البحث تريفيف"
+msgstr "Arama Kriterleri Treeview"
 
 #: ../ui/search-dialog.glade.h:91
 msgid "Search entire module"
-msgstr "كله وحدة البحث"
+msgstr "Arama tüm modül"
 
 #: ../ui/search-dialog.glade.h:92
 msgid "Search for Morphological tags"
-msgstr "البحث عن العلامات المورفولوجية"
+msgstr "Morfolojik etiketleri ara"
 
 #: ../ui/search-dialog.glade.h:93
 msgid "Search for Strongs Numbers like G4442 or H1121"
-msgstr "البحث عن أرقام أو Strongs مثل G4442 H1121"
+msgstr "G4442 veya H1121 gibi Strongs Numaraları ara"
 
 #: ../ui/search-dialog.glade.h:94
 msgid "Search in footnotes"
-msgstr "البحث في الحواشي"
+msgstr "dipnotlar ara"
 
 #: ../ui/search-dialog.glade.h:95
 msgid "Show Footnotes"
-msgstr "وتظهر الحواشي"
+msgstr "Göstermek Dipnotlar"
 
 #: ../ui/search-dialog.glade.h:96
 msgid "Show Footnotes checkbox"
-msgstr "وتظهر الحواشي مربع"
+msgstr "Göstermek Dipnotlar onay"
 
 #: ../ui/search-dialog.glade.h:97
 msgid "Show Morphological Tags"
-msgstr "به إظهار المورفولوجية"
+msgstr "Göstermek Morfolojik Etiketler"
 
 #: ../ui/search-dialog.glade.h:98
 msgid "Show Morphological Tags checkbox"
-msgstr "تظهر خانة الاختيار العلامات المورفولوجية"
+msgstr "Göstermek Morfolojik Etiketler onay"
 
 #: ../ui/search-dialog.glade.h:99
 msgid "Show Strong's Numbers"
-msgstr "عرض قوي وأرقام"
+msgstr "Göstermek Güçlü Numaraları"
 
 #: ../ui/search-dialog.glade.h:100
 msgid "Show Strong's Numbers checkbox"
-msgstr "عرض قوي للأرقام الاختيار"
+msgstr "Göstermek Güçlü Numaraları onay"
 
 #: ../ui/search-dialog.glade.h:101
 msgid "Show in main window"
-msgstr "وتظهر في النافذة الرئيسية"
+msgstr "ana pencerede göster"
 
 #: ../ui/search-dialog.glade.h:102
 msgid "Single module"
-msgstr "وحدة واحدة"
+msgstr "Tek modül"
 
 #: ../ui/search-dialog.glade.h:103
 msgid "Single module radiobutton"
-msgstr "وحدة واحدة زر راديو"
+msgstr "Tek modül Radiobuton"
 
 #: ../ui/search-dialog.glade.h:104
 msgid "Start/stop searching"
-msgstr "بدء / توقف البحث"
+msgstr "Start / stop arıyor"
 
 #: ../ui/search-dialog.glade.h:105
 msgid "Strongs Numbers"
-msgstr "Strongs أرقام"
+msgstr "Strongs Numaraları"
 
 #: ../ui/search-dialog.glade.h:106
 msgid "Strongs Numbers radiobutton"
-msgstr "Strongs أرقام زر راديو"
+msgstr "Strongs Numaraları Radiobuton"
 
 #: ../ui/search-dialog.glade.h:107
 msgid "Use a custom module list for the search"
-msgstr "استخدام قائمة مخصصة وحدة للبحث"
+msgstr "Arama için özel bir modül listesini kullanın"
 
 #: ../ui/search-dialog.glade.h:108
 msgid "Use a custom range for the scope of the search"
-msgstr "استخدام مجموعة مخصصة للنطاق البحث"
+msgstr "arama kapsamını için özel bir aralığı kullanın"
 
 #: ../ui/search-dialog.glade.h:109
 msgid "Use a single module for the search"
-msgstr "استخدام وحدة نمطية واحدة للبحث"
+msgstr "arama için tek bir modülü kullanın"
 
 #: ../ui/search-dialog.glade.h:110
 msgid "Use the current module list for the search"
-msgstr "استخدام القائمة الحالية وحدة للبحث"
+msgstr "Arama için geçerli modül listesini kullanın"
 
 #: ../ui/search-dialog.glade.h:111
 msgid "Use the results of the last search as the scope of the search"
-msgstr "استخدام نتائج البحث الأخير في نطاق البحث"
+msgstr "arama kapsamını olarak son arama sonuçları kullanın"
 
 #: ../ui/search-dialog.glade.h:112
 msgid "_Attribute Search"
-msgstr "_Attribute البحث"
+msgstr "_Attribute Arama"
 
 #: ../ui/search-dialog.glade.h:113
 msgid "_Lucene Search Syntax"
-msgstr "_Lucene البحث اللغوي"
+msgstr "_Lucene Arama Kullanımı"
 
 #: ../ui/search-dialog.glade.h:114
 msgid "e.g. Matt-John;Rev4"
-msgstr "على سبيل المثال مات جون ؛ Rev4"
+msgstr "örneğin Matt-John; Rev4"
 
 #: ../ui/search-dialog.glade.h:115
 msgid "for "
-msgstr "ل"
+msgstr "için"
 
 #: ../ui/xi-menus.glade.h:2
 msgid "About _Translation"
-msgstr "حول _Translation"
+msgstr "_Translation Hakkında"
 
 #: ../ui/xi-menus.glade.h:3
 msgid "About _Xiphos"
-msgstr "حول _Xiphos"
+msgstr "Hakkında _Xiphos"
 
 #: ../ui/xi-menus.glade.h:4
 msgid "Add Item"
-msgstr "إضافة عنصر"
+msgstr "Öğe ekle"
 
 #: ../ui/xi-menus.glade.h:5
 msgid "Add Sub-Item"
-msgstr "إضافة البند الفرعي"
+msgstr "Alt Öğe Ekle"
 
 #: ../ui/xi-menus.glade.h:6
 msgid "Add a sub-item"
-msgstr "إضافة البند الفرعي"
+msgstr "Eklemek bir alt kalemi"
 
 #: ../ui/xi-menus.glade.h:7
 msgid "Add an item"
-msgstr "إضافة عنصر"
+msgstr "öğe ekleme"
 
 #: ../ui/xi-menus.glade.h:8
 msgid "Add new folder to selected folder"
-msgstr "إضافة مجلد جديد إلى المجلد المحدد"
+msgstr "seçilen klasöre yeni bir klasör ekle"
 
 #: ../ui/xi-menus.glade.h:10
 msgid "Allow Reordering"
-msgstr "تتيح إعادة ترتيب"
+msgstr "Reordering izin ver"
 
 #: ../ui/xi-menus.glade.h:11
 msgid "Allow items to be moved from one folder to another"
-msgstr "يمكن نقلها السماح للعناصر من مجلد واحد إلى آخر"
+msgstr "Izin öğeleri başka bir klasörden diğerine taşınacak"
 
 #: ../ui/xi-menus.glade.h:12
 msgid "Annotate Verse"
-msgstr "تعليم الآية"
+msgstr "Açıklama Ayet"
 
 #: ../ui/xi-menus.glade.h:13
 msgid "Apply a high-contrast highlight to the current verse"
-msgstr "تسليط الضوء على تطبيق عالية على النقيض من الآية الحالية"
+msgstr "Geçerli ayet uygulayın yüksek kontrast vurgulamak"
 
 #: ../ui/xi-menus.glade.h:15
 msgid "Bring the simple sidebar search forward"
-msgstr "جعل البحث الشريط الجانبي بسيطة إلى الأمام"
+msgstr "ileri basit kenar çubuğuna arama getir"
 
 #: ../ui/xi-menus.glade.h:16
 msgid "Browse in BibleMap.org"
-msgstr "استعراض في BibleMap.org"
+msgstr "Göz BibleMap.org içinde"
 
 #: ../ui/xi-menus.glade.h:17
 msgid "Collapse All"
-msgstr "طي الكل"
+msgstr "Çöküşü Tüm"
 
 #: ../ui/xi-menus.glade.h:18
 msgid "Collapse all Bookmarks groups"
-msgstr "انهيار جميع المجموعات المرجعية"
+msgstr "Tümünü daralt imleri gruplar"
 
 #: ../ui/xi-menus.glade.h:19
 msgid "Commentary by Chapter"
-msgstr "التعليق من الفصل"
+msgstr "Bölüm yorumu"
 
 #: ../ui/xi-menus.glade.h:21
 msgid "Create a new daily journal"
-msgstr "إنشاء مجلة جديدة كل يوم"
+msgstr "Yeni bir günlük dergi oluşturma"
 
 #: ../ui/xi-menus.glade.h:22
 msgid "Create a new journal or prayerlist from a template"
-msgstr "إنشاء مجلة جديدة أو prayerlist من قالب"
+msgstr "Bir şablondan yeni bir günlük ya da prayerlist oluşturun"
 
 #: ../ui/xi-menus.glade.h:23
 msgid "Create a new monthly journal"
-msgstr "إنشاء مجلة شهرية جديدة"
+msgstr "yeni bir aylık dergi oluşturma"
 
 #: ../ui/xi-menus.glade.h:24
 msgid "Create a new outlined topic"
-msgstr "إنشاء موضوع جديد المبينة"
+msgstr "Yeni bir özetlenen konu oluşturun"
 
 #: ../ui/xi-menus.glade.h:25
 msgid "Create a new simple prayer list"
-msgstr "إنشاء قائمة جديدة صلاة بسيطة"
+msgstr "Yeni bir basit dua listesi oluşturun"
 
 #: ../ui/xi-menus.glade.h:26
 msgid "Create a new subject prayer list"
-msgstr "إنشاء قائمة جديدة موضوع الصلاة"
+msgstr "yeni bir konu dua listesi oluşturun"
 
 #: ../ui/xi-menus.glade.h:27
 msgid "Daily"
-msgstr "يوميا"
+msgstr "Günlük"
 
 #: ../ui/xi-menus.glade.h:28
 msgid "Delete Item"
-msgstr "حذف البند"
+msgstr "Silmek Öğe"
 
 #: ../ui/xi-menus.glade.h:29
 msgid "Delete item"
-msgstr "حذف البند"
+msgstr "Silmek öğe"
 
 #: ../ui/xi-menus.glade.h:30
 msgid "Dictionar_y"
@@ -3438,293 +3427,293 @@ msgstr "Dictionar_y"
 
 #: ../ui/xi-menus.glade.h:31
 msgid "Display Book Heading"
-msgstr "عرض كتاب عنوان"
+msgstr "Başlığı Ekran Kitap"
 
 #: ../ui/xi-menus.glade.h:32
 msgid "Display Chapter Heading"
-msgstr "عرض عنوان الفصل"
+msgstr "Başlığı Ekran Bölüm"
 
 #: ../ui/xi-menus.glade.h:33
 msgid "Display verse numbers in the text"
-msgstr "أرقام الآية العرض في النص"
+msgstr "metin görüntüleme ayet numaraları"
 
 #: ../ui/xi-menus.glade.h:34
 msgid "Doublespace"
-msgstr "Doublespace"
+msgstr "DoubleSpace"
 
 #: ../ui/xi-menus.glade.h:35
 msgid "Dump Pers.Comm."
-msgstr "تفريغ Pers.Comm."
+msgstr "Dökümü Pers.Comm."
 
 #: ../ui/xi-menus.glade.h:37
 msgid "Edit bookmark item"
-msgstr "تحرير المرجعية البند"
+msgstr "madde imini düzenle"
 
 #: ../ui/xi-menus.glade.h:38
 msgid "Edit this item"
-msgstr "تحرير هذا البند"
+msgstr "Bu öğeyi Düzenle"
 
 #: ../ui/xi-menus.glade.h:39
 msgid "Expand All"
-msgstr "توسيع الكل"
+msgstr "Tümünü Genişlet"
 
 #: ../ui/xi-menus.glade.h:40
 msgid "Expand all Bookmarks groups"
-msgstr "توسيع جميع المجموعات المرجعية"
+msgstr "Genişletmek tüm imleri gruplar"
 
 #: ../ui/xi-menus.glade.h:41
 msgid "Export Folder"
-msgstr "تصدير مجلد"
+msgstr "Ihracat Klasör"
 
 #: ../ui/xi-menus.glade.h:42
 msgid "Export List"
-msgstr "تصدير قائمة"
+msgstr "İhracat Listesi"
 
 #: ../ui/xi-menus.glade.h:49
 msgid "Image Content"
-msgstr "صورة المحتوى"
+msgstr "Görüntü İçerik"
 
 #: ../ui/xi-menus.glade.h:50
 msgid "Import Bookmarks"
-msgstr "استيراد الإشارات المرجعية"
+msgstr "Ithalat imleri"
 
 #: ../ui/xi-menus.glade.h:51
 msgid "Insert Bookmark"
-msgstr "إدراج إشارة مرجعية"
+msgstr "Favori Ekle"
 
 #: ../ui/xi-menus.glade.h:52
 msgid "Insert new bookmark here"
-msgstr "تضاف علامة جديدة هنا"
+msgstr "Buraya ekle yeni yer imi"
 
 #: ../ui/xi-menus.glade.h:53
 msgid "L_ink Tabs"
-msgstr "L_ink علامات الجدولة"
+msgstr "L_ink Sekmeler"
 
 #: ../ui/xi-menus.glade.h:54
 msgid "Learn about The Sword Project, of which Xiphos is one application"
-msgstr "تعرف على مشروع السيف ، الذي هو واحد التطبيق Xiphos"
+msgstr "hangi Xiphos bir uygulamadır Kılıç Projesi hakkında bilgi edinin"
 
 #: ../ui/xi-menus.glade.h:55
 msgid "Learn about Xiphos"
-msgstr "معرفة Xiphos"
+msgstr "Xiphos hakkında bilgi edinin"
 
 #: ../ui/xi-menus.glade.h:56
 msgid "Learn about translating the Xiphos interface to other languages"
-msgstr "تعلم ترجمة عن واجهة Xiphos إلى لغات أخرى"
+msgstr "ilgili diğer dillere Xiphos arayüzü tercüme öğrenin"
 
 #: ../ui/xi-menus.glade.h:58
 msgid "Load other bookmarks file (default: from BibleTime)"
-msgstr "تحميل الملف الإشارات الأخرى (الافتراضي : من BibleTime)"
+msgstr "Yük diğer imleri dosyası (varsayılan: BibleTime itibaren)"
 
 #: ../ui/xi-menus.glade.h:59
 msgid "Lookup Selection"
-msgstr "بحث التحديد"
+msgstr "Arama Seçimi"
 
 #: ../ui/xi-menus.glade.h:60
 msgid "Make all tabs' Bibles navigate together"
-msgstr "الاناجيل جعل كافة علامات التبويب &#39;التنقل معا"
+msgstr "Tüm sekmeleri &#39;İncil birlikte gitmek olun"
 
 #: ../ui/xi-menus.glade.h:62
 msgid "Monthly"
-msgstr "شهريا"
+msgstr "Aylık"
 
 #: ../ui/xi-menus.glade.h:65
 msgid "Note"
-msgstr "ملاحظة"
+msgstr "Dikkat"
 
 #: ../ui/xi-menus.glade.h:66
 msgid "Open Module"
-msgstr "فتح وحدة نمطية"
+msgstr "Açık Modülü"
 
 #: ../ui/xi-menus.glade.h:67
 msgid "Open Study_pad"
-msgstr "فتح Study_pad"
+msgstr "Açık Study_pad"
 
 #: ../ui/xi-menus.glade.h:68
 msgid "Open a browser on an interface to live IRC chat"
-msgstr "افتح مستعرض على واجهة للعيش الايرسي دردشة"
+msgstr "IRC sohbet canlı bir arayüz üzerinde bir tarayıcı açın"
 
 #: ../ui/xi-menus.glade.h:69
 msgid "Open a browser on our bug tracker"
-msgstr "فتح مستعرض على تعقب الشوائب"
+msgstr "Bizim bug tracker bir tarayıcı açın"
 
 #: ../ui/xi-menus.glade.h:70
 msgid "Open a browser on the users' mailing list webpage"
-msgstr "فتح المستعرض على المستخدمين صفحة ويب قائمة بريدية"
+msgstr "Kullanıcıların e-posta listesi web sayfasında bir tarayıcı açın"
 
 #: ../ui/xi-menus.glade.h:71
 msgid "Open a saved tab settings collection"
-msgstr "فتح حفظ جمع التبويب إعدادات"
+msgstr "Kaydedilen bir sekmesi ayarları toplama aç"
 
 #: ../ui/xi-menus.glade.h:72
 msgid "Open in a dialog"
-msgstr "فتح في الحوار"
+msgstr "Bir iletişim aç"
 
 #: ../ui/xi-menus.glade.h:73
 msgid "Open in a separate window"
-msgstr "فتح في إطار منفصل"
+msgstr "ayrı bir pencerede aç"
 
 #: ../ui/xi-menus.glade.h:74
 msgid "Open in editor"
-msgstr "فتح في محرر"
+msgstr "editörü açın"
 
 #: ../ui/xi-menus.glade.h:75
 msgid "Open in new tab"
-msgstr "فتح في علامة تبويب جديدة"
+msgstr "yeni sekmede açma"
 
 #: ../ui/xi-menus.glade.h:76
 msgid ""
 "Open selected module in a\n"
 "	separate ['dialog'] window"
-msgstr "فتح وحدة مختارة في] نافذة منفصلة [&#39;الحوار&#39; أ"
+msgstr "Açık pencere] &#39;Seçilen modülü ayrı bir [&#39; iletişim"
 
 #: ../ui/xi-menus.glade.h:78
 msgid "Open selected module in a new tab"
-msgstr "فتح وحدة مختارة في علامة تبويب جديدة"
+msgstr "Açık yeni bir sekmede modül seçili"
 
 #: ../ui/xi-menus.glade.h:79
 msgid "Open the advanced search dialog, to run complex queries"
-msgstr "فتح مربع الحوار بحث متقدم ، لتشغيل استعلامات معقدة"
+msgstr "Karmaşık sorgular çalıştırmak için, gelişmiş arama iletişim aç"
 
 #: ../ui/xi-menus.glade.h:80
 msgid "Open the help viewer on the Xiphos manual"
-msgstr "فتح عارض تعليمات في دليل Xiphos"
+msgstr "Xiphos kılavuzda yardım görüntüleyici aç"
 
 #: ../ui/xi-menus.glade.h:81
 msgid "Open this bookmark in a dialog"
-msgstr "فتح هذا مرجعية في الحوار"
+msgstr "bir iletişim içinde bu imi aç"
 
 #: ../ui/xi-menus.glade.h:82
 msgid "Open this bookmark in a new tab"
-msgstr "فتح هذه الإشارة المرجعية في علامة تبويب جديدة"
+msgstr "yeni bir sekmede bu imi aç"
 
 #: ../ui/xi-menus.glade.h:83
 msgid "Operate the sidebar as a separate window"
-msgstr "تشغيل الشريط الجانبي كإطار منفصل"
+msgstr "ayrı bir pencere olarak İşlet sidebar"
 
 #: ../ui/xi-menus.glade.h:84
 msgid "Outlined"
-msgstr "أوجز"
+msgstr "Özetlenen"
 
 #: ../ui/xi-menus.glade.h:85
 msgid "Preview _Daily Devotion"
-msgstr "معاينة الولاء _Daily"
+msgstr "Ön _Daily Devotion"
 
 #: ../ui/xi-menus.glade.h:87
 msgid "Provide the full-chapter parallel Bible window as another tab"
-msgstr "توفير كامل الفصل إطار الكتاب المقدس كما مواز آخر التبويب"
+msgstr "Başka bir sekme olarak tam bölüm paralel İncil pencere sağlayın"
 
 #: ../ui/xi-menus.glade.h:88
 msgid "Read Selection Aloud"
-msgstr "قراءة بصوت عال التحديد"
+msgstr "Yüksek sesle okuyun Seçimi"
 
 #: ../ui/xi-menus.glade.h:90
 msgid "Remove folder and save it"
-msgstr "إزالة مجلد وحفظه"
+msgstr "klasöre çıkartın ve kaydedin"
 
 #: ../ui/xi-menus.glade.h:91
 msgid "Remove the sidebar entirely from view"
-msgstr "إزالة الشريط الجانبي بالكامل من رأي"
+msgstr "görünümünden tamamen sidebar Kaldır"
 
 #: ../ui/xi-menus.glade.h:92
 msgid "Remove this item"
-msgstr "إزالة هذا البند"
+msgstr "Bu öğeyi kaldır"
 
 #: ../ui/xi-menus.glade.h:93
 msgid "Rename Pers.Comm."
-msgstr "إعادة تسمية Pers.Comm."
+msgstr "Adlandırmak Pers.Comm."
 
 #: ../ui/xi-menus.glade.h:94
 msgid "Respect Font Faces"
-msgstr "احترام الخط وجوه"
+msgstr "Saygı Yazı Yüzler"
 
 #: ../ui/xi-menus.glade.h:95
 msgid "Save list as a series of bookmarks"
-msgstr "حفظ قائمة على شكل سلسلة من العلامات"
+msgstr "imlerinin bir dizi olarak listesini kaydedin"
 
 #: ../ui/xi-menus.glade.h:96
 msgid "Save list as a single bookmark"
-msgstr "حفظ كعلامة قائمة واحدة"
+msgstr "tek bir yer imi olarak listesini kaydedin"
 
 #: ../ui/xi-menus.glade.h:97
 msgid "Save these results as a series of bookmarks in their own folder"
-msgstr "حفظ هذه النتائج على شكل سلسلة من العلامات الموجودة في مجلد الخاصة"
+msgstr "kendi klasöründe yer imleri bir dizi olarak bu sonuçları kaydet"
 
 #: ../ui/xi-menus.glade.h:98
 msgid "Save these results as a single bookmark"
-msgstr "حفظ هذه النتائج كعلامة واحدة"
+msgstr "tek bir yer imi olarak bu sonuçları kaydet"
 
 #: ../ui/xi-menus.glade.h:99
 msgid "Save this collection of tab settings"
-msgstr "حفظ هذه المجموعة من التبويب إعدادات"
+msgstr "sekmesi ayarları bu koleksiyon kaydet"
 
 #: ../ui/xi-menus.glade.h:100
 msgid "Scripture Cross-references"
-msgstr "الكتاب المقدس عبر المراجع"
+msgstr "Din Çapraz referanslar"
 
 #: ../ui/xi-menus.glade.h:102
 msgid "Select Previewer position between sidebar or beneath Bible"
-msgstr "حدد موقف المشاهد بين الشريط الجانبي أو تحت الكتاب المقدس"
+msgstr "kenar arasında ya da İncil altında seçin önizleyicide pozisyon"
 
 #: ../ui/xi-menus.glade.h:103
 msgid "Show Parallel View in a _Tab"
-msgstr "تظهر الصورة وبالتوازي في _Tab"
+msgstr "Bir _Tab göster Paralel Profili"
 
 #: ../ui/xi-menus.glade.h:104
 msgid "Show Previe_wer in the Sidebar"
-msgstr "وتظهر في الشريط الجانبي Previe_wer"
+msgstr "Kenar çubuğunda gösterin Previe_wer"
 
 #: ../ui/xi-menus.glade.h:105
 msgid "Show Verse _Numbers"
-msgstr "_Numbers إظهار الآية"
+msgstr "Göstermek Ayet _Numbers"
 
 #: ../ui/xi-menus.glade.h:106
 msgid "Show today's entry from your selected daily devotional in the previewer"
-msgstr "عرض اليوم من دخول عبادي مختارة اليومية في المعاين"
+msgstr "Seçtiğiniz günlük önizleyicide adanmışlık Göster&#39;i bugünün giriş"
 
 #: ../ui/xi-menus.glade.h:107
 msgid "Simple"
-msgstr "بسيطة"
+msgstr "Basit"
 
 #: ../ui/xi-menus.glade.h:109
 msgid "Subject"
-msgstr "الموضوع"
+msgstr "Konu"
 
 #: ../ui/xi-menus.glade.h:111
 msgid "Turn on text-to-speech reading of Bible verses as they are selected"
-msgstr "بدوره على قراءة النص إلى كلام من آيات الكتاب المقدس كما هي مختارة"
+msgstr ", seçilen İncil text-to-speech okuma açın ayetler"
 
 #: ../ui/xi-menus.glade.h:112
 msgid "Unlock This Module"
-msgstr "فتح هذه الوحدة"
+msgstr "Kilidini Bu Modülü"
 
 #: ../ui/xi-menus.glade.h:113
 msgid "Use Current Dictionary"
-msgstr "قاموس الاستخدام الحالي"
+msgstr "Kullanmak Şu Sözlük"
 
 #: ../ui/xi-menus.glade.h:114
 msgid "Use module manager to install and remove Sword modules"
-msgstr "استخدام إدارة وحدة لتركيب وحدات إزالة السيف"
+msgstr "yüklemek ve kaldırmak Kılıç modülleri modül yöneticisi kullanın"
 
 #: ../ui/xi-menus.glade.h:115
 msgid "Variants"
-msgstr "المتغيرات"
+msgstr "Türevleri"
 
 #: ../ui/xi-menus.glade.h:116
 msgid "Verse Per Line"
-msgstr "الآية لكل خط"
+msgstr "Ayet Başına Hattı"
 
 #: ../ui/xi-menus.glade.h:118
 msgid "_About The SWORD Project"
-msgstr "_about مشروع السيف"
+msgstr "_About SWORD Projesi"
 
 #: ../ui/xi-menus.glade.h:119
 msgid "_Advanced Search"
-msgstr "_Advanced البحث"
+msgstr "_Advanced Arama"
 
 #: ../ui/xi-menus.glade.h:120
 msgid "_Attach/Detach Sidebar"
-msgstr "_Attach / فصل الشريط الجانبي"
+msgstr "_Attach / Sidebar Detach"
 
 #: ../ui/xi-menus.glade.h:121
 msgid "_Bible"
@@ -3732,7 +3721,7 @@ msgstr "_Bible"
 
 #: ../ui/xi-menus.glade.h:122
 msgid "_Commentary/Book"
-msgstr "_Commentary / كتاب"
+msgstr "_Commentary / Kitap"
 
 #: ../ui/xi-menus.glade.h:123
 msgid "_Contents"
@@ -3744,7 +3733,7 @@ msgstr "_Edit"
 
 #: ../ui/xi-menus.glade.h:125
 msgid "_Edit Item"
-msgstr "_Edit السلعة"
+msgstr "_Edit Öğe"
 
 #: ../ui/xi-menus.glade.h:127
 msgid "_Help"
@@ -3752,27 +3741,27 @@ msgstr "_Help"
 
 #: ../ui/xi-menus.glade.h:128
 msgid "_Highlight Current Verse"
-msgstr "_Highlight الآية الحالي"
+msgstr "Geçerli Ayet _Highlight"
 
 #: ../ui/xi-menus.glade.h:129
 msgid "_Live Chat"
-msgstr "_Live دردشة"
+msgstr "_Live Sohbet"
 
 #: ../ui/xi-menus.glade.h:130
 msgid "_Mailing List"
-msgstr "_Mailing قائمة"
+msgstr "_Mailing Listesi"
 
 #: ../ui/xi-menus.glade.h:131
 msgid "_Module Manager"
-msgstr "مدير _Module"
+msgstr "_Module Müdürü"
 
 #: ../ui/xi-menus.glade.h:132
 msgid "_New Prayerlist/Journal"
-msgstr "_new Prayerlist / مجلة"
+msgstr "Prayerlist / Dergi _new"
 
 #: ../ui/xi-menus.glade.h:133
 msgid "_Open Session"
-msgstr "ا _ فتح الدورة"
+msgstr "_Open Oturum"
 
 #: ../ui/xi-menus.glade.h:134
 msgid "_Preferences"
@@ -3784,61 +3773,61 @@ msgstr "_Preview"
 
 #: ../ui/xi-menus.glade.h:136
 msgid "_Read Aloud"
-msgstr "_Read الاود"
+msgstr "_Read Aloud"
 
 #: ../ui/xi-menus.glade.h:137
 msgid "_Report Bug"
-msgstr "_Report الشوائب"
+msgstr "_Report Bug"
 
 #: ../ui/xi-menus.glade.h:138
 msgid "_Save Session"
-msgstr "_Save الدورة"
+msgstr "_Save Oturum"
 
 #: ../ui/xi-menus.glade.h:139
 msgid "_Search"
-msgstr "_Search"
+msgstr "_search"
 
 #: ../ui/xi-menus.glade.h:140
 msgid "_Show/Hide Attached Sidebar"
-msgstr "_Show / إخفاء الشريط الجانبي المرفقة"
+msgstr "_Show / Ekli Sidebar Gizle"
 
 #: ../ui/xi-export-bookmarks.glade.h:1
 msgid "<b>Export to:</b>"
-msgstr "<b>تصدير الى :</b>"
+msgstr "<b>Ihracat:</b>"
 
 #: ../ui/xi-export-bookmarks.glade.h:2
 msgid "Export Bookmark Folder"
-msgstr "تصدير مجلد الإشارات"
+msgstr "Ihracat yer imlerini"
 
 #: ../ui/xi-export-bookmarks.glade.h:3
 msgid "Html"
-msgstr "أتش تي أم أل"
+msgstr "Html"
 
 #: ../ui/xi-export-bookmarks.glade.h:4
 msgid "Include Bible text"
-msgstr "وتشمل نص الكتاب المقدس"
+msgstr "Içeren İncil metni"
 
 #: ../ui/xi-export-bookmarks.glade.h:5
 msgid "Plain text"
-msgstr "نص عادي"
+msgstr "Düz metin"
 
 #: ../ui/xi-export-bookmarks.glade.h:6
 msgid "Xiphos bookmarks"
-msgstr "العلامات Xiphos"
+msgstr "Xiphos imleri"
 
 #: ../ui/xi-export-bookmarks.glade.h:7
 msgid "gtk-cancel"
-msgstr "جتك - إلغاء"
+msgstr "gtk-iptal"
 
 #: ../ui/xi-export-bookmarks.glade.h:8
 msgid "gtk-ok"
-msgstr "جتك اوك"
+msgstr "gtk-ok"
 
 #: ../xiphos.desktop.in.in.h:1
 msgid "Study the Bible"
-msgstr "دراسة الكتاب المقدس"
+msgstr "Çalışma İncil"
 
 #: ../xiphos.desktop.in.in.h:2
 msgid "Xiphos Bible Guide"
-msgstr "Xiphos دليل الكتاب المقدس"
+msgstr "Xiphos İncil Kılavuzu"
 
