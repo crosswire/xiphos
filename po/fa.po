@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: 3.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-09-20 20:42+0100\n"
-"PO-Revision-Date: 2010-09-29 20:53+0100\n"
+"PO-Revision-Date: 2010-09-29 22:19+0100\n"
 "Last-Translator: Peter von Kaehne <refdoc@crosswire.org>\n"
 "Language-Team: English/GB <en@li.org>\n"
 "Language: \n"
@@ -2495,7 +2495,6 @@ msgid "Current local sources"
 msgstr "منابع محلی فعلی"
 
 #: ../ui/module-manager.glade.h:18
-#, fuzzy
 msgid "Delete the fast-search index of the selected modules."
 msgstr "آیا می‏خواهید که ایندکس جستجوی سریع برای این عناوین حذف گردد؟"
 
@@ -2504,7 +2503,6 @@ msgid "Home dir"
 msgstr "فهرست پرونده‏های محلی"
 
 #: ../ui/module-manager.glade.h:20
-#, fuzzy
 msgid "Install or update the selected modules"
 msgstr "آیا می‏خواهید این عناوین نصب گردند؟"
 
@@ -2545,7 +2543,6 @@ msgid "Remove one of your local folders as an install source."
 msgstr ""
 
 #: ../ui/module-manager.glade.h:30
-#, fuzzy
 msgid "Remove the selected modules from your system"
 msgstr "مدول انتخاب شده را از لیست حذف کن"
 
@@ -3505,7 +3502,6 @@ msgid "Create a new daily journal"
 msgstr "یجاد لیست  دعا روزانه"
 
 #: ../ui/xi-menus.glade.h:22
-#, fuzzy
 msgid "Create a new journal or prayerlist from a template"
 msgstr "ایجاد لیست جدید دعا"
 
@@ -3615,7 +3611,6 @@ msgid "Learn about Xiphos"
 msgstr "دربارۀ زیفوس"
 
 #: ../ui/xi-menus.glade.h:56
-#, fuzzy
 msgid "Learn about translating the Xiphos interface to other languages"
 msgstr "در حال ترجمه زیفوس به دیگر زبانها"
 
