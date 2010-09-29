@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: Xiphos 3.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-09-20 20:42+0100\n"
-"PO-Revision-Date: 2009-12-12 09:20+0000\n"
-"Last-Translator: Dmitrijs Ledkovs <dmitrij.ledkov@gmail.com>\n"
+"PO-Revision-Date: 2010-09-29 21:07+0100\n"
+"Last-Translator: Peter von Kaehne <refdoc@crosswire.org>\n"
 "Language-Team: Gnomesword-developers <gnomesword-developers@lists>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -30,16 +30,19 @@ msgstr ""
 msgid "Configuration not found"
 msgstr "Methu ffeindio’r ffurfweddiad"
 
-#: ../src/editor/slib-editor.c:224 ../src/gnome2/html.c:633
+#: ../src/editor/slib-editor.c:224
+#: ../src/gnome2/html.c:633
 #, c-format
 msgid "Page %d of %d"
 msgstr "Tud %d o %d"
 
-#: ../src/editor/slib-editor.c:391 ../src/editor/slib-editor.c:438
+#: ../src/editor/slib-editor.c:391
+#: ../src/editor/slib-editor.c:438
 msgid "Save As"
 msgstr "Cadw fel"
 
-#: ../src/editor/slib-editor.c:409 ../src/editor/slib-editor.c:456
+#: ../src/editor/slib-editor.c:409
+#: ../src/editor/slib-editor.c:456
 #: ../src/editor/slib-editor.c:623
 msgid "Untitled document"
 msgstr "Dogfen ddi-deitl"
@@ -60,12 +63,14 @@ msgstr "Côd HTML"
 msgid "Plain Source"
 msgstr "Côd plaen"
 
-#: ../src/editor/slib-editor.c:715 ../ui/editor_note.xml.h:15
+#: ../src/editor/slib-editor.c:715
+#: ../ui/editor_note.xml.h:15
 #: ../ui/editor_studypad.xml.h:21
 msgid "_Print..."
 msgstr "_Argraffu..."
 
-#: ../src/editor/slib-editor.c:722 ../ui/editor_note.xml.h:9
+#: ../src/editor/slib-editor.c:722
+#: ../ui/editor_note.xml.h:9
 #: ../ui/editor_studypad.xml.h:14
 msgid "Print Pre_view"
 msgstr "Rhagolwg Argraffu"
@@ -102,8 +107,10 @@ msgstr ""
 msgid "Delete current note"
 msgstr ""
 
-#: ../src/editor/slib-editor.c:769 ../ui/editor_note.xml.h:14
-#: ../ui/editor_studypad.xml.h:20 ../ui/xi-menus.glade.h:126
+#: ../src/editor/slib-editor.c:769
+#: ../ui/editor_note.xml.h:14
+#: ../ui/editor_studypad.xml.h:20
+#: ../ui/xi-menus.glade.h:126
 msgid "_File"
 msgstr "_Ffeil"
 
@@ -119,32 +126,39 @@ msgstr "_Cod HTML"
 msgid "_Plain Source"
 msgstr "_Cod plaen"
 
-#: ../src/editor/slib-editor.c:845 ../ui/xi-menus.glade.h:141
+#: ../src/editor/slib-editor.c:845
+#: ../ui/xi-menus.glade.h:141
 msgid "_View"
 msgstr "_Gweld"
 
-#: ../src/editor/slib-editor.c:856 ../ui/editor_note.xml.h:11
+#: ../src/editor/slib-editor.c:856
+#: ../ui/editor_note.xml.h:11
 #: ../ui/editor_studypad.xml.h:16
 msgid "Save"
 msgstr "Cadw"
 
-#: ../src/editor/slib-editor.c:867 ../src/editor/slib-editor.c:874
+#: ../src/editor/slib-editor.c:867
+#: ../src/editor/slib-editor.c:874
 msgid "Insert Link"
 msgstr "Mewnosod Dolen"
 
-#: ../src/editor/slib-editor.c:1256 ../src/editor/slib-editor.c:1293
+#: ../src/editor/slib-editor.c:1256
+#: ../src/editor/slib-editor.c:1293
 msgid "Save the changes to document"
 msgstr "Cadw’r newidiadau"
 
-#: ../src/editor/slib-editor.c:1257 ../src/editor/slib-editor.c:1294
+#: ../src/editor/slib-editor.c:1257
+#: ../src/editor/slib-editor.c:1294
 msgid "before closing?"
 msgstr "cyn cau?"
 
-#: ../src/editor/slib-editor.c:1264 ../src/editor/slib-editor.c:1301
+#: ../src/editor/slib-editor.c:1264
+#: ../src/editor/slib-editor.c:1301
 msgid "If you don't save, changes will be permanently lost."
 msgstr "Os na gadwch y newidiadau, byddwch yn eu colli’n barhaol."
 
-#: ../src/editor/slib-editor.c:1292 ../ui/xi-menus.glade.h:43
+#: ../src/editor/slib-editor.c:1292
+#: ../ui/xi-menus.glade.h:43
 msgid "File"
 msgstr "Ffeil"
 
@@ -160,7 +174,8 @@ msgstr "Golygydd Nodiadau"
 msgid "Prayer List/Journal Editor"
 msgstr "Golygydd Dyddlyfr/ Rhestr Weddi"
 
-#: ../src/gecko/gecko-html.cpp:177 ../src/gnome2/html.c:162
+#: ../src/gecko/gecko-html.cpp:177
+#: ../src/gnome2/html.c:162
 msgid "Unlock "
 msgstr "Datgloi "
 
@@ -177,7 +192,8 @@ msgstr "Yr argraffydd hwn ddim yn gymwys i argraffu"
 msgid "Printer %s does not support PostScript printing."
 msgstr "%s Argraffydd ddim yn gallu argraffu ôl-nodiadau."
 
-#: ../src/gecko/gecko-print.c:342 ../src/gecko/gecko-print.c:370
+#: ../src/gecko/gecko-print.c:342
+#: ../src/gecko/gecko-print.c:370
 msgid "Printing"
 msgstr "Argraffu"
 
@@ -198,18 +214,14 @@ msgstr "Ni fu’n bosibl argraffu eich dogfen: %s"
 msgid "About Sword Module"
 msgstr "Am y Modiwl SWORD"
 
-#: ../src/gnome2/about_modules.c:392 ../src/gnome2/mod_mgr.c:265
+#: ../src/gnome2/about_modules.c:392
+#: ../src/gnome2/mod_mgr.c:265
 msgid "The module has no About information."
 msgstr "Does gan y modiwl ddim gwybodaeth Amdani"
 
 #: ../src/gnome2/about_sword.c:81
 msgid ""
-"The SWORD Project is an effort to create an ever-expanding software package "
-"for research and study of God and His Word. The SWORD Project framework "
-"allows easy use and study of Bible texts, commentaries, lexicons, "
-"dictionaries, and other books. Many frontends are built using this "
-"framework. An installed set of books may be shared among all frontends using "
-"the framework.\n"
+"The SWORD Project is an effort to create an ever-expanding software package for research and study of God and His Word. The SWORD Project framework allows easy use and study of Bible texts, commentaries, lexicons, dictionaries, and other books. Many frontends are built using this framework. An installed set of books may be shared among all frontends using the framework.\n"
 "\n"
 " Books can be downloaded from the SWORD Project."
 msgstr ""
@@ -220,15 +232,10 @@ msgstr "Prosiect SWORD"
 
 #: ../src/gnome2/about_trans.c:84
 msgid ""
-"Do you like using Xiphos to study the Bible? Would you like to see its "
-"display using your native language? You could translate Xiphos! \n"
+"Do you like using Xiphos to study the Bible? Would you like to see its display using your native language? You could translate Xiphos! \n"
 "\n"
-"We are always looking for contributions of new translations of Xiphos into "
-"other languages. If you are able to translate for us, please see the link "
-"below, contact us, and get involved with our efforts."
-msgstr ""
-"Ydych chi’n defnyddio Xiphos i astudio’r Beibl? Hoffech weld ei ymddangosiad "
-"gan ddefnyddio’ch iaith frodorol? Gallech chi gyfieithu Xiphos!"
+"We are always looking for contributions of new translations of Xiphos into other languages. If you are able to translate for us, please see the link below, contact us, and get involved with our efforts."
+msgstr "Ydych chi’n defnyddio Xiphos i astudio’r Beibl? Hoffech weld ei ymddangosiad gan ddefnyddio’ch iaith frodorol? Gallech chi gyfieithu Xiphos!"
 
 #: ../src/gnome2/about_trans.c:98
 msgid "About Xiphos Translation"
@@ -251,37 +258,41 @@ msgid ""
 "(formerly known as GnomeSword)\n"
 "\n"
 "Powered by The SWORD Project.\n"
-"We would like to thank Troy Griffitts and all the other folks who have given "
-"us The SWORD Project."
+"We would like to thank Troy Griffitts and all the other folks who have given us The SWORD Project."
 msgstr ""
 "(adnabuwyd o'r blaen fel GnomeSword)\n"
 "\n"
 "Gyrrir gan Brosiect SWORD.\n"
-"Carem ddiolch i Troy Griffits a phawb arall sydd wedi rhoi prosiect SWORD i "
-"ni."
+"Carem ddiolch i Troy Griffits a phawb arall sydd wedi rhoi prosiect SWORD i ni."
 
 #: ../src/gnome2/bibletext_dialog.c:315
 msgid "Go to "
 msgstr "Mynd i "
 
 #. info->stock_icon = GTK_STOCK_OPEN;
-#: ../src/gnome2/bookmark_dialog.c:171 ../src/gnome2/bookmarks_menu.c:363
-#: ../src/gnome2/bookmarks_menu.c:658 ../src/gnome2/bookmarks_menu.c:756
-#: ../src/gnome2/bookmarks_treeview.c:134 ../ui/editor_studypad.xml.h:2
+#: ../src/gnome2/bookmark_dialog.c:171
+#: ../src/gnome2/bookmarks_menu.c:363
+#: ../src/gnome2/bookmarks_menu.c:658
+#: ../src/gnome2/bookmarks_menu.c:756
+#: ../src/gnome2/bookmarks_treeview.c:134
+#: ../ui/editor_studypad.xml.h:2
 #: ../ui/xi-menus.glade.h:14
 msgid "Bookmark"
 msgstr "Nod Tudalen"
 
-#: ../src/gnome2/bookmark_dialog.c:173 ../src/gnome2/bookmarks_menu.c:758
+#: ../src/gnome2/bookmark_dialog.c:173
+#: ../src/gnome2/bookmarks_menu.c:758
 #: ../src/gnome2/bookmarks_treeview.c:135
 msgid "Enter Folder Name"
 msgstr "Teipiwch Enw’r Ffolder"
 
-#: ../src/gnome2/bookmark_dialog.c:175 ../src/gnome2/bookmarks_menu.c:760
+#: ../src/gnome2/bookmark_dialog.c:175
+#: ../src/gnome2/bookmarks_menu.c:760
 msgid "Folder Name"
 msgstr "Enw’r Ffolder"
 
-#: ../src/gnome2/bookmark_dialog.c:176 ../src/gnome2/bookmarks_menu.c:761
+#: ../src/gnome2/bookmark_dialog.c:176
+#: ../src/gnome2/bookmarks_menu.c:761
 #: ../src/gnome2/bookmarks_treeview.c:137
 msgid "Folder: "
 msgstr "Ffolder: "
@@ -291,7 +302,8 @@ msgstr "Ffolder: "
 msgid "Specify bookmarks file"
 msgstr "Golygu Eitem Nod Tudalen"
 
-#: ../src/gnome2/bookmarks_menu.c:349 ../ui/xi-menus.glade.h:36
+#: ../src/gnome2/bookmarks_menu.c:349
+#: ../ui/xi-menus.glade.h:36
 msgid "Edit"
 msgstr "Golygu"
 
@@ -303,11 +315,13 @@ msgstr "Enw Ffolder: "
 msgid "Bookmark name: "
 msgstr "Enw Nod Tudalen: "
 
-#: ../src/gnome2/bookmarks_menu.c:372 ../src/gnome2/bookmarks_menu.c:666
+#: ../src/gnome2/bookmarks_menu.c:372
+#: ../src/gnome2/bookmarks_menu.c:666
 msgid "Verse: "
 msgstr "Adnod: "
 
-#: ../src/gnome2/bookmarks_menu.c:373 ../src/gnome2/bookmarks_menu.c:667
+#: ../src/gnome2/bookmarks_menu.c:373
+#: ../src/gnome2/bookmarks_menu.c:667
 msgid "Module: "
 msgstr "Modiwl: "
 
@@ -331,13 +345,15 @@ msgstr "Ychwanegu"
 msgid "Label: "
 msgstr "Label: "
 
-#: ../src/gnome2/bookmarks_treeview.c:108 ../src/gnome2/export_bookmarks.c:193
+#: ../src/gnome2/bookmarks_treeview.c:108
+#: ../src/gnome2/export_bookmarks.c:193
 #: ../src/gnome2/export_bookmarks.c:252
 #, c-format
 msgid "Search result: %s"
 msgstr "Canlyniadau’r Chwiliad: %s"
 
-#: ../src/gnome2/bookmarks_treeview.c:944 ../src/gnome2/sidebar.c:1374
+#: ../src/gnome2/bookmarks_treeview.c:944
+#: ../src/gnome2/sidebar.c:1374
 msgid "Bookmarks"
 msgstr "Nodau Tudalen"
 
@@ -367,7 +383,8 @@ msgstr "Xiphos:"
 msgid "Close _without Saving"
 msgstr "Cau _heb gadw"
 
-#: ../src/gnome2/export_bookmarks.c:195 ../src/gnome2/export_bookmarks.c:254
+#: ../src/gnome2/export_bookmarks.c:195
+#: ../src/gnome2/export_bookmarks.c:254
 #: ../src/gnome2/sidebar.c:1390
 #, c-format
 msgid "Verse List"
@@ -381,11 +398,13 @@ msgstr ""
 msgid "SearchResults"
 msgstr ""
 
-#: ../src/gnome2/export_dialog.c:267 ../ui/export-dialog.glade.h:20
+#: ../src/gnome2/export_dialog.c:267
+#: ../ui/export-dialog.glade.h:20
 msgid "Please check copyright before exporting!"
 msgstr ""
 
-#: ../src/gnome2/find_dialog.c:204 ../src/gnome2/find_dialog.c:373
+#: ../src/gnome2/find_dialog.c:204
+#: ../src/gnome2/find_dialog.c:373
 msgid "Find"
 msgstr "Darganfod"
 
@@ -393,7 +412,8 @@ msgstr "Darganfod"
 msgid "Enter Word or Phrase"
 msgstr "Teipio Gair neu Gymal"
 
-#: ../src/gnome2/find_dialog.c:238 ../src/gnome2/search_sidebar.c:297
+#: ../src/gnome2/find_dialog.c:238
+#: ../src/gnome2/search_sidebar.c:297
 #: ../ui/search-dialog.glade.h:59
 msgid "Match case"
 msgstr "Cydweddu"
@@ -402,7 +422,8 @@ msgstr "Cydweddu"
 msgid "Search backwards"
 msgstr "Chwilio yn ôl"
 
-#: ../src/gnome2/find_dialog.c:254 ../src/gnome2/search_sidebar.c:262
+#: ../src/gnome2/find_dialog.c:254
+#: ../src/gnome2/search_sidebar.c:262
 #: ../ui/search-dialog.glade.h:78
 msgid "Regular expression"
 msgstr "Ymadrodd cyson"
@@ -499,7 +520,8 @@ msgstr ""
 msgid "BUG! Xiphos is about to crash due to a \"STRDUP\" error."
 msgstr ""
 
-#: ../src/gnome2/gui.c:204 ../src/gnome2/gui.c:239
+#: ../src/gnome2/gui.c:204
+#: ../src/gnome2/gui.c:239
 msgid "Please report this error to the Xiphos team with:"
 msgstr ""
 
@@ -515,9 +537,12 @@ msgstr "Xiphos – Meddalwedd Astudio’r Beibl"
 msgid "Open a new tab"
 msgstr "Agor tab newydd"
 
-#: ../src/gnome2/main_window.c:928 ../src/gnome2/sidebar.c:616
-#: ../src/gnome2/sidebar.c:622 ../src/main/sidebar.cc:664
-#: ../src/main/sidebar.cc:1009 ../src/main/sidebar.cc:1010
+#: ../src/gnome2/main_window.c:928
+#: ../src/gnome2/sidebar.c:616
+#: ../src/gnome2/sidebar.c:622
+#: ../src/main/sidebar.cc:664
+#: ../src/main/sidebar.cc:1009
+#: ../src/main/sidebar.cc:1010
 #: ../src/main/sidebar.cc:1011
 msgid "Standard View"
 msgstr "Golwg Safonol"
@@ -566,17 +591,21 @@ msgstr "Dewis enw i’r Esboniad"
 msgid "New Name"
 msgstr "Enw Newydd"
 
-#: ../src/gnome2/menu_popup.c:1233 ../src/gnome2/treekey-editor.c:135
-#: ../src/gnome2/treekey-editor.c:194 ../src/gnome2/treekey-editor.c:280
+#: ../src/gnome2/menu_popup.c:1233
+#: ../src/gnome2/treekey-editor.c:135
+#: ../src/gnome2/treekey-editor.c:194
+#: ../src/gnome2/treekey-editor.c:280
 #: ../src/main/prayerlists.cc:243
 msgid "Name: "
 msgstr "Enw: "
 
-#: ../src/gnome2/menu_popup.c:1243 ../src/main/prayerlists.cc:257
+#: ../src/gnome2/menu_popup.c:1243
+#: ../src/main/prayerlists.cc:257
 msgid "Module names must contain [A-Za-z0-9_] only."
 msgstr "Dylai enwau Modiwlau gynnwys llythrennau a rhifau yn unig."
 
-#: ../src/gnome2/menu_popup.c:1250 ../src/main/prayerlists.cc:264
+#: ../src/gnome2/menu_popup.c:1250
+#: ../src/main/prayerlists.cc:264
 msgid "Xiphos already knows a module by that name."
 msgstr "Mae Xiphos eisoes yn gwybod am Fodiwl gyda’r enw yna."
 
@@ -607,57 +636,40 @@ msgid ""
 "This is Xiphos' mechanism to get new and updated content.\n"
 "If you have never been here before, please take a moment to look it over.\n"
 "\n"
-"Modules come from different <u>repositories</u>.  <b>Module Sources: Add/"
-"Remove</b> will show you what repositories are currently known.\n"
+"Modules come from different <u>repositories</u>.  <b>Module Sources: Add/Remove</b> will show you what repositories are currently known.\n"
 "\n"
-"<b>Module Sources: Choose</b> is for deciding from where modules should "
-"come, that is, from which repository Xiphos should obtain them, as well as "
-"where they should be placed on your system. Set <i>Install Source</i> and "
-"<i>Install Destination</i>, then click <i>Refresh</i>.\n"
+"<b>Module Sources: Choose</b> is for deciding from where modules should come, that is, from which repository Xiphos should obtain them, as well as where they should be placed on your system. Set <i>Install Source</i> and <i>Install Destination</i>, then click <i>Refresh</i>.\n"
 "\n"
-"<b>Modules: Install/Update</b> is for selecting and obtaining modules after "
-"choosing source and destination.\n"
+"<b>Modules: Install/Update</b> is for selecting and obtaining modules after choosing source and destination.\n"
 "\n"
 "<b>Modules: Maintenance</b> is for archive and index creation.\n"
 "\n"
-"See section 5 of our manual for Module Manager detail, or ask for help via "
-"Live Chat, or (if no one is responsive in chat) send mail to our users' "
-"mailing list.\n"
+"See section 5 of our manual for Module Manager detail, or ask for help via Live Chat, or (if no one is responsive in chat) send mail to our users' mailing list.\n"
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:65
 msgid ""
 "<b>Welcome to Xiphos.</b>\n"
 "\n"
-"There are no Bibles installed. In order to initialize, Xiphos needs at least "
-"one Bible module. To facilitate this, the Module Manager has been opened so "
-"that you may install one or more Bibles, either from a local module set "
-"(cdrom, flash drive) or over the network from CrossWire Bible Society. "
-"Please refer to these step-by-step instructions, and to the general module "
-"manager overview that has also been opened.\n"
+"There are no Bibles installed. In order to initialize, Xiphos needs at least one Bible module. To facilitate this, the Module Manager has been opened so that you may install one or more Bibles, either from a local module set (cdrom, flash drive) or over the network from CrossWire Bible Society. Please refer to these step-by-step instructions, and to the general module manager overview that has also been opened.\n"
 "\n"
 "<u>For local install:</u>\n"
-"- In <i>Module Sources: Add/Remove</i>, add a new local folder name where "
-"modules can be found.\n"
+"- In <i>Module Sources: Add/Remove</i>, add a new local folder name where modules can be found.\n"
 "  (This is where folders exist named <i>mods.d</i> and <i>modules</i>.)\n"
-"- In <i>Module Sources: Choose</i>, click the \"Local\" button, and select "
-"your folder from the pulldown.\n"
+"- In <i>Module Sources: Choose</i>, click the \"Local\" button, and select your folder from the pulldown.\n"
 "\n"
 "<u>For network install from CrossWire:</u>\n"
-"- In <i>Module Sources: Choose</i>, click the \"Remote\" button and select "
-"CrossWire from the pulldown.\n"
+"- In <i>Module Sources: Choose</i>, click the \"Remote\" button and select CrossWire from the pulldown.\n"
 "- Click the \"Refresh\" button at the bottom.\n"
 "\n"
 "<u>In either case:</u>\n"
-"- In <i>Modules: Install/Update</i>, select Bibles and other modules of your "
-"preference.\n"
+"- In <i>Modules: Install/Update</i>, select Bibles and other modules of your preference.\n"
 "- Click \"Install\".\n"
 "- Close the Module Manager when you are done.\n"
 "\n"
 "<u>Warning</u>: If you live in a persecuted country, use with care.\n"
 "\n"
-"Both this step-by-step instruction dialog and the general introduction "
-"dialog may be closed at any time."
+"Both this step-by-step instruction dialog and the general introduction dialog may be closed at any time."
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:183
@@ -672,7 +684,8 @@ msgstr "Paratoi i ddileu"
 msgid "Removing"
 msgstr "Dileu"
 
-#: ../src/gnome2/mod_mgr.c:186 ../ui/xi-menus.glade.h:89
+#: ../src/gnome2/mod_mgr.c:186
+#: ../ui/xi-menus.glade.h:89
 msgid "Remove"
 msgstr "Dileu"
 
@@ -763,33 +776,21 @@ msgid "Installed"
 msgstr "Gosodwyd"
 
 #: ../src/gnome2/mod_mgr.c:508
-msgid ""
-"The index icon means you have built an optimized ('lucene') index for this "
-"module for fast searching (see the Maintenance pane for this function)"
-msgstr ""
-"mae eicon y mynegai yn golygu eich bod wedi adeiladu mynegai ('lucene')llawn "
-"wedi ei optimeiddio i'r modiwl hwn ar gyfer chwilio cyflym (gweler y cwarel "
-"Cynnal a Chadw ar gyfe y swyddogaeth yma)"
+msgid "The index icon means you have built an optimized ('lucene') index for this module for fast searching (see the Maintenance pane for this function)"
+msgstr "mae eicon y mynegai yn golygu eich bod wedi adeiladu mynegai ('lucene')llawn wedi ei optimeiddio i'r modiwl hwn ar gyfer chwilio cyflym (gweler y cwarel Cynnal a Chadw ar gyfe y swyddogaeth yma)"
 
 #: ../src/gnome2/mod_mgr.c:526
-msgid ""
-"The lock icon means this module is encrypted, and requires that you purchase "
-"an unlock key from the content owner"
-msgstr ""
-"Mae'r eicon clo yn golygu fod y modiwl hwn wedi ei amgryptio, a bod angen i "
-"chi brynu allwedd gan berchennog y cynnwys"
+msgid "The lock icon means this module is encrypted, and requires that you purchase an unlock key from the content owner"
+msgstr "Mae'r eicon clo yn golygu fod y modiwl hwn wedi ei amgryptio, a bod angen i chi brynu allwedd gan berchennog y cynnwys"
 
-#: ../src/gnome2/mod_mgr.c:543 ../ui/xi-menus.glade.h:1
+#: ../src/gnome2/mod_mgr.c:543
+#: ../ui/xi-menus.glade.h:1
 msgid "About"
 msgstr "Am"
 
 #: ../src/gnome2/mod_mgr.c:563
-msgid ""
-"The refresh icon means the Installed module is older than the newer "
-"Available module: You should update the module"
-msgstr ""
-"Mae'r eicon adnewyddu yn golygu fod y modiwl yn hyn na'r modiwl newydd sydd "
-"ar gael: Mae angen diweddaru'r modiwl"
+msgid "The refresh icon means the Installed module is older than the newer Available module: You should update the module"
+msgstr "Mae'r eicon adnewyddu yn golygu fod y modiwl yn hyn na'r modiwl newydd sydd ar gael: Mae angen diweddaru'r modiwl"
 
 #: ../src/gnome2/mod_mgr.c:575
 msgid "Available"
@@ -825,16 +826,23 @@ msgstr "Ni ellir creu mynegai i Ddyddlyfrau a rhestrau gweddi"
 msgid "%s failed"
 msgstr "%s wedi methu"
 
-#: ../src/gnome2/mod_mgr.c:840 ../src/gnome2/mod_mgr.c:1586
+#: ../src/gnome2/mod_mgr.c:840
+#: ../src/gnome2/mod_mgr.c:1586
 msgid "Finished"
 msgstr "Wedi gorffen"
 
-#: ../src/gnome2/mod_mgr.c:1008 ../src/gnome2/mod_mgr.c:1010
-#: ../src/gnome2/mod_mgr.c:1112 ../src/gnome2/mod_mgr.c:1147
-#: ../src/gnome2/mod_mgr.c:1149 ../src/gnome2/utilities.c:461
-#: ../src/gnome2/utilities.c:526 ../src/gnome2/utilities.c:528
-#: ../src/gnome2/utilities.c:1049 ../src/main/sidebar.cc:844
-#: ../src/main/sidebar.cc:916 ../src/main/sidebar.cc:918
+#: ../src/gnome2/mod_mgr.c:1008
+#: ../src/gnome2/mod_mgr.c:1010
+#: ../src/gnome2/mod_mgr.c:1112
+#: ../src/gnome2/mod_mgr.c:1147
+#: ../src/gnome2/mod_mgr.c:1149
+#: ../src/gnome2/utilities.c:461
+#: ../src/gnome2/utilities.c:526
+#: ../src/gnome2/utilities.c:528
+#: ../src/gnome2/utilities.c:1049
+#: ../src/main/sidebar.cc:844
+#: ../src/main/sidebar.cc:916
+#: ../src/main/sidebar.cc:918
 msgid "Unknown"
 msgstr "Anhysbys"
 
@@ -853,50 +861,69 @@ msgstr ""
 "Dosbarthwyd yn ôl\n"
 "Math o Fodiwl"
 
-#: ../src/gnome2/mod_mgr.c:1325 ../src/gnome2/utilities.c:589
-#: ../src/main/sidebar.cc:993 ../src/main/sidebar.cc:995
+#: ../src/gnome2/mod_mgr.c:1325
+#: ../src/gnome2/utilities.c:589
+#: ../src/main/sidebar.cc:993
+#: ../src/main/sidebar.cc:995
 msgid "Biblical Texts"
 msgstr "Testunau Beiblaidd"
 
-#: ../src/gnome2/mod_mgr.c:1329 ../src/gnome2/utilities.c:593
-#: ../src/main/sidebar.cc:676 ../src/main/sidebar.cc:1018
-#: ../src/main/sidebar.cc:1020 ../ui/prefs.glade.h:36
+#: ../src/gnome2/mod_mgr.c:1329
+#: ../src/gnome2/utilities.c:593
+#: ../src/main/sidebar.cc:676
+#: ../src/main/sidebar.cc:1018
+#: ../src/main/sidebar.cc:1020
+#: ../ui/prefs.glade.h:36
 msgid "Commentaries"
 msgstr "Esboniadau"
 
-#: ../src/gnome2/mod_mgr.c:1333 ../src/gnome2/utilities.c:598
-#: ../src/main/sidebar.cc:1027 ../src/main/sidebar.cc:1029
+#: ../src/gnome2/mod_mgr.c:1333
+#: ../src/gnome2/utilities.c:598
+#: ../src/main/sidebar.cc:1027
+#: ../src/main/sidebar.cc:1029
 msgid "Dictionaries"
 msgstr "Geiriaduron"
 
-#: ../src/gnome2/mod_mgr.c:1337 ../src/gnome2/utilities.c:602
-#: ../src/main/sidebar.cc:1036 ../src/main/sidebar.cc:1038
+#: ../src/gnome2/mod_mgr.c:1337
+#: ../src/gnome2/utilities.c:602
+#: ../src/main/sidebar.cc:1036
+#: ../src/main/sidebar.cc:1038
 msgid "Glossaries"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1341 ../src/gnome2/utilities.c:606
-#: ../src/main/sidebar.cc:1045 ../src/main/sidebar.cc:1047
+#: ../src/gnome2/mod_mgr.c:1341
+#: ../src/gnome2/utilities.c:606
+#: ../src/main/sidebar.cc:1045
+#: ../src/main/sidebar.cc:1047
 msgid "Daily Devotionals"
 msgstr "Defosiwn Dyddiol"
 
-#: ../src/gnome2/mod_mgr.c:1345 ../src/gnome2/utilities.c:610
-#: ../src/main/sidebar.cc:686 ../src/main/sidebar.cc:1054
+#: ../src/gnome2/mod_mgr.c:1345
+#: ../src/gnome2/utilities.c:610
+#: ../src/main/sidebar.cc:686
+#: ../src/main/sidebar.cc:1054
 #: ../src/main/sidebar.cc:1056
 msgid "General Books"
 msgstr "Llyfrau"
 
-#: ../src/gnome2/mod_mgr.c:1349 ../src/gnome2/utilities.c:614
-#: ../src/main/sidebar.cc:1063 ../src/main/sidebar.cc:1065
+#: ../src/gnome2/mod_mgr.c:1349
+#: ../src/gnome2/utilities.c:614
+#: ../src/main/sidebar.cc:1063
+#: ../src/main/sidebar.cc:1065
 msgid "Maps"
 msgstr "Mapiau"
 
-#: ../src/gnome2/mod_mgr.c:1353 ../src/gnome2/utilities.c:618
-#: ../src/main/sidebar.cc:1072 ../src/main/sidebar.cc:1074
+#: ../src/gnome2/mod_mgr.c:1353
+#: ../src/gnome2/utilities.c:618
+#: ../src/main/sidebar.cc:1072
+#: ../src/main/sidebar.cc:1074
 msgid "Images"
 msgstr "Lluniau"
 
-#: ../src/gnome2/mod_mgr.c:1357 ../src/gnome2/utilities.c:622
-#: ../src/main/sidebar.cc:1081 ../src/main/sidebar.cc:1083
+#: ../src/gnome2/mod_mgr.c:1357
+#: ../src/gnome2/utilities.c:622
+#: ../src/main/sidebar.cc:1081
+#: ../src/main/sidebar.cc:1083
 msgid "Cult/Unorthodox"
 msgstr ""
 
@@ -916,9 +943,12 @@ msgstr "Diweddariadau"
 msgid "Uninstalled"
 msgstr "Dadosodwyd"
 
-#: ../src/gnome2/mod_mgr.c:1378 ../src/gnome2/sidebar.c:632
-#: ../src/gnome2/utilities.c:627 ../src/main/prayerlists.cc:241
-#: ../src/main/sidebar.cc:1091 ../src/main/sidebar.cc:1093
+#: ../src/gnome2/mod_mgr.c:1378
+#: ../src/gnome2/sidebar.c:632
+#: ../src/gnome2/utilities.c:627
+#: ../src/main/prayerlists.cc:241
+#: ../src/main/sidebar.cc:1091
+#: ../src/main/sidebar.cc:1093
 msgid "Prayer List/Journal"
 msgstr "Rhestr Weddi/Dyddlyfr"
 
@@ -974,7 +1004,8 @@ msgstr ""
 msgid "Choose"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1754 ../src/gnome2/preferences_dialog.c:1719
+#: ../src/gnome2/mod_mgr.c:1754
+#: ../src/gnome2/preferences_dialog.c:1719
 #: ../src/gnome2/sidebar.c:1398
 msgid "Modules"
 msgstr "Modiwlau"
@@ -1016,7 +1047,8 @@ msgstr ""
 msgid "Could not load standard sources from CrossWire."
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2543 ../src/gnome2/mod_mgr.c:2789
+#: ../src/gnome2/mod_mgr.c:2543
+#: ../src/gnome2/mod_mgr.c:2789
 msgid "Remove the selected source"
 msgstr "Diddymu’r Ffynhonnell ddewiswyd"
 
@@ -1057,19 +1089,23 @@ msgstr "Mae ffynhonell o’r enw hwnnw yn bod eisoes."
 msgid "Delete a remote source"
 msgstr ""
 
-#: ../src/gnome2/navbar_book.c:358 ../src/gnome2/navbar_book_dialog.c:299
+#: ../src/gnome2/navbar_book.c:358
+#: ../src/gnome2/navbar_book_dialog.c:299
 msgid "Go outward, to the section containing this one"
 msgstr "Mynd allan, i’r adran sy’n cynnwys hwn."
 
-#: ../src/gnome2/navbar_book.c:373 ../src/gnome2/navbar_book_dialog.c:314
+#: ../src/gnome2/navbar_book.c:373
+#: ../src/gnome2/navbar_book_dialog.c:314
 msgid "Go to previous item"
 msgstr "I’r eitem flaenorol"
 
-#: ../src/gnome2/navbar_book.c:387 ../src/gnome2/navbar_book_dialog.c:328
+#: ../src/gnome2/navbar_book.c:387
+#: ../src/gnome2/navbar_book_dialog.c:328
 msgid "Go to next item"
 msgstr "I’r eitem nesaf"
 
-#: ../src/gnome2/navbar_book.c:401 ../src/gnome2/navbar_book_dialog.c:342
+#: ../src/gnome2/navbar_book.c:401
+#: ../src/gnome2/navbar_book_dialog.c:342
 msgid "Go inward, to the first subsection"
 msgstr "Mynd i mewn, i’r isadran gyntaf"
 
@@ -1079,7 +1115,8 @@ msgstr "Mynd i mewn, i’r isadran gyntaf"
 msgid "Synchronize this window's scrolling with the main window"
 msgstr ""
 
-#: ../src/gnome2/parallel_dialog.c:382 ../src/gnome2/preferences_dialog.c:1725
+#: ../src/gnome2/parallel_dialog.c:382
+#: ../src/gnome2/preferences_dialog.c:1725
 msgid "Parallel"
 msgstr "Paralel"
 
@@ -1087,14 +1124,19 @@ msgstr "Paralel"
 msgid "Detach/Attach"
 msgstr "Gwahanu/Atodi"
 
-#: ../src/gnome2/parallel_view.c:130 ../ui/xi-menus.glade.h:61
+#: ../src/gnome2/parallel_view.c:130
+#: ../ui/xi-menus.glade.h:61
 msgid "Module Options"
 msgstr "Dewis Modiwl"
 
-#: ../src/gnome2/parallel_view.c:269 ../src/gnome2/sidebar.c:615
-#: ../src/gnome2/sidebar.c:621 ../src/gnome2/tabbed_browser.c:255
-#: ../src/main/sidebar.cc:645 ../src/main/sidebar.cc:1001
-#: ../src/main/sidebar.cc:1002 ../src/main/sidebar.cc:1003
+#: ../src/gnome2/parallel_view.c:269
+#: ../src/gnome2/sidebar.c:615
+#: ../src/gnome2/sidebar.c:621
+#: ../src/gnome2/tabbed_browser.c:255
+#: ../src/main/sidebar.cc:645
+#: ../src/main/sidebar.cc:1001
+#: ../src/main/sidebar.cc:1002
+#: ../src/main/sidebar.cc:1003
 msgid "Parallel View"
 msgstr "Golwg Paralel"
 
@@ -1116,7 +1158,8 @@ msgstr "-- Dewis --"
 msgid "Locale will take effect after restart."
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1617 ../ui/prefs.glade.h:84
+#: ../src/gnome2/preferences_dialog.c:1617
+#: ../ui/prefs.glade.h:84
 msgid "Preferences"
 msgstr "Dewisiadau"
 
@@ -1137,7 +1180,8 @@ msgstr "Tabiau a cwareli"
 msgid "General"
 msgstr "Cyffredinol"
 
-#: ../src/gnome2/preferences_dialog.c:1712 ../ui/prefs.glade.h:100
+#: ../src/gnome2/preferences_dialog.c:1712
+#: ../ui/prefs.glade.h:100
 msgid "Tabs and Panes"
 msgstr "Tabiau a cwareli"
 
@@ -1153,33 +1197,40 @@ msgstr "Prif"
 msgid "Special"
 msgstr "Arbennig"
 
-#: ../src/gnome2/preferences_dialog.c:2377 ../src/gnome2/search_dialog.c:460
+#: ../src/gnome2/preferences_dialog.c:2377
+#: ../src/gnome2/search_dialog.c:460
 msgid "Clear List?"
 msgstr "Clirio Rhestr?"
 
-#: ../src/gnome2/preferences_dialog.c:2378 ../src/gnome2/search_dialog.c:461
+#: ../src/gnome2/preferences_dialog.c:2378
+#: ../src/gnome2/search_dialog.c:461
 msgid "Are you sure you want to clear the module list?"
 msgstr "Ydych chi’n siŵr eich bod am glirio’r rhestr?"
 
-#: ../src/gnome2/preferences_dialog.c:2423 ../src/main/search_dialog.cc:700
+#: ../src/gnome2/preferences_dialog.c:2423
+#: ../src/main/search_dialog.cc:700
 msgid "Remove Module?"
 msgstr "Dileu’r Modiwl?"
 
-#: ../src/gnome2/preferences_dialog.c:2424 ../src/main/search_dialog.cc:701
+#: ../src/gnome2/preferences_dialog.c:2424
+#: ../src/main/search_dialog.cc:701
 msgid "Are you sure you want to remove the selected module?"
 msgstr "Ydych chi’n siwr eich bod am ddileu y modiwl a ddewiswyd?"
 
-#: ../src/gnome2/search_dialog.c:68 ../src/main/search_dialog.cc:66
+#: ../src/gnome2/search_dialog.c:68
+#: ../src/main/search_dialog.cc:66
 #: ../src/main/search_sidebar.cc:61
 msgid "Searching the "
 msgstr "Chwilio’r "
 
-#: ../src/gnome2/search_dialog.c:69 ../src/main/search_dialog.cc:67
+#: ../src/gnome2/search_dialog.c:69
+#: ../src/main/search_dialog.cc:67
 #: ../src/main/search_sidebar.cc:62
 msgid " Module"
 msgstr " Modiwl"
 
-#: ../src/gnome2/search_dialog.c:70 ../src/main/search_dialog.cc:68
+#: ../src/gnome2/search_dialog.c:70
+#: ../src/main/search_dialog.cc:68
 #: ../src/main/search_sidebar.cc:63
 msgid "found in "
 msgstr "darganfuwyd yn "
@@ -1265,19 +1316,14 @@ msgstr ""
 #: ../src/gnome2/search_dialog.c:848
 msgid ""
 "<b>Attribute-based searches</b>\n"
-"Searches for content contained in markup outside the main text. Attributes "
-"are footnotes, Strong's numbers, and morphological symbols.\n"
+"Searches for content contained in markup outside the main text. Attributes are footnotes, Strong's numbers, and morphological symbols.\n"
 "\n"
-"Be aware that most such searches can now be done faster via optimized "
-"\"lucene\" searches using keyword qualifiers.\n"
+"Be aware that most such searches can now be done faster via optimized \"lucene\" searches using keyword qualifiers.\n"
 "\n"
-"To use attribute searches, you must select the appropriate button on the "
-"<i>Attribute Search</i> tab.\n"
+"To use attribute searches, you must select the appropriate button on the <i>Attribute Search</i> tab.\n"
 "* Footnote text is searched just like regular text.\n"
-"* Strong's words are specified as a prefix letter H or G (Hebrew or Greek) "
-"and the numeric word identifier, e.g. G2316 to find \"θεός\" (\"God\").\n"
-"* Morphological tags are identified literally, e.g. N-ASF for \"noun, "
-"accusative singular feminine\" -- see the Robinson module for details."
+"* Strong's words are specified as a prefix letter H or G (Hebrew or Greek) and the numeric word identifier, e.g. G2316 to find \"θεός\" (\"God\").\n"
+"* Morphological tags are identified literally, e.g. N-ASF for \"noun, accusative singular feminine\" -- see the Robinson module for details."
 msgstr ""
 
 #: ../src/gnome2/search_sidebar.c:184
@@ -1296,7 +1342,8 @@ msgstr "Chwilio Modiwl"
 msgid "Bible"
 msgstr "Beibl"
 
-#: ../src/gnome2/search_sidebar.c:223 ../ui/prefs.glade.h:38
+#: ../src/gnome2/search_sidebar.c:223
+#: ../ui/prefs.glade.h:38
 msgid "Commentary"
 msgstr "Esboniad"
 
@@ -1304,11 +1351,13 @@ msgstr "Esboniad"
 msgid "Search Type"
 msgstr "Chwilio Teip"
 
-#: ../src/gnome2/search_sidebar.c:251 ../ui/search-dialog.glade.h:66
+#: ../src/gnome2/search_sidebar.c:251
+#: ../ui/search-dialog.glade.h:66
 msgid "Multi word"
 msgstr "Aml-eiriau"
 
-#: ../src/gnome2/search_sidebar.c:270 ../ui/search-dialog.glade.h:44
+#: ../src/gnome2/search_sidebar.c:270
+#: ../ui/search-dialog.glade.h:44
 msgid "Exact phrase"
 msgstr "Union gymal"
 
@@ -1348,7 +1397,8 @@ msgstr "Uchaf"
 msgid "Search"
 msgstr "Chwilio"
 
-#: ../src/gnome2/sidebar_dialog.c:170 ../src/gnome2/sidebar_dialog.c:179
+#: ../src/gnome2/sidebar_dialog.c:170
+#: ../src/gnome2/sidebar_dialog.c:179
 msgid "Sidebar"
 msgstr "Bar ochr"
 
@@ -1360,12 +1410,14 @@ msgstr "Gyrrir gan Brosiect SWORD"
 msgid "Can't create tabs dir."
 msgstr ""
 
-#: ../src/gnome2/treekey-editor.c:133 ../src/gnome2/treekey-editor.c:192
+#: ../src/gnome2/treekey-editor.c:133
+#: ../src/gnome2/treekey-editor.c:192
 #: ../src/gnome2/treekey-editor.c:278
 msgid "Prayer List/Journal Item"
 msgstr "Eitem Rhestr Weddi/Dyddlyfr"
 
-#: ../src/gnome2/treekey-editor.c:134 ../src/gnome2/treekey-editor.c:193
+#: ../src/gnome2/treekey-editor.c:134
+#: ../src/gnome2/treekey-editor.c:193
 #: ../src/gnome2/treekey-editor.c:279
 msgid "New name"
 msgstr "Enw Newydd"
@@ -1392,8 +1444,10 @@ msgid ""
 "'%s'"
 msgstr ""
 
-#: ../src/main/display.cc:927 ../src/main/display.cc:989
-#: ../src/main/display.cc:1074 ../ui/export-dialog.glade.h:7
+#: ../src/main/display.cc:927
+#: ../src/main/display.cc:989
+#: ../src/main/display.cc:1074
+#: ../ui/export-dialog.glade.h:7
 msgid "Chapter"
 msgstr "Pennod"
 
@@ -1421,60 +1475,76 @@ msgstr "Llwytho Gosodiadau"
 msgid "Displaying Xiphos"
 msgstr "Arddangos Xiphos"
 
-#: ../src/main/module_dialogs.cc:189 ../src/main/previewer.cc:93
+#: ../src/main/module_dialogs.cc:189
+#: ../src/main/previewer.cc:93
 #: ../ui/prefs.glade.h:85
 msgid "Previewer"
 msgstr "Rhagolygwr"
 
-#: ../src/main/module_dialogs.cc:240 ../src/main/module_dialogs.cc:351
+#: ../src/main/module_dialogs.cc:240
+#: ../src/main/module_dialogs.cc:351
 #: ../src/main/previewer.cc:180
 msgid "Footnote"
 msgstr "Troednodyn"
 
-#: ../src/main/module_dialogs.cc:246 ../src/main/module_dialogs.cc:356
+#: ../src/main/module_dialogs.cc:246
+#: ../src/main/module_dialogs.cc:356
 #: ../src/main/previewer.cc:192
 msgid "Cross Reference"
 msgstr "Croesgyfeiriad"
 
-#: ../src/main/module_dialogs.cc:252 ../src/main/module_dialogs.cc:266
-#: ../src/main/module_dialogs.cc:361 ../src/main/module_dialogs.cc:373
-#: ../src/main/previewer.cc:198 ../src/main/previewer.cc:217
+#: ../src/main/module_dialogs.cc:252
+#: ../src/main/module_dialogs.cc:266
+#: ../src/main/module_dialogs.cc:361
+#: ../src/main/module_dialogs.cc:373
+#: ../src/main/previewer.cc:198
+#: ../src/main/previewer.cc:217
 msgid "Strongs"
 msgstr "Strongs"
 
-#: ../src/main/module_dialogs.cc:258 ../src/main/module_dialogs.cc:277
-#: ../src/main/module_dialogs.cc:366 ../src/main/module_dialogs.cc:383
-#: ../src/main/previewer.cc:204 ../src/main/previewer.cc:223
+#: ../src/main/module_dialogs.cc:258
+#: ../src/main/module_dialogs.cc:277
+#: ../src/main/module_dialogs.cc:366
+#: ../src/main/module_dialogs.cc:383
+#: ../src/main/previewer.cc:204
+#: ../src/main/previewer.cc:223
 msgid "Morphology"
 msgstr "Morffoleg"
 
-#: ../src/main/module_dialogs.cc:1007 ../src/main/url.cc:518
+#: ../src/main/module_dialogs.cc:1007
+#: ../src/main/url.cc:518
 msgid "Back to "
 msgstr "Yn ôl i "
 
-#: ../src/main/parallel_view.cc:380 ../ui/xi-menus.glade.h:108
+#: ../src/main/parallel_view.cc:380
+#: ../ui/xi-menus.glade.h:108
 msgid "Strong's Numbers"
 msgstr "Rhifau Strong"
 
-#: ../src/main/parallel_view.cc:390 ../ui/search-dialog.glade.h:52
+#: ../src/main/parallel_view.cc:390
+#: ../ui/search-dialog.glade.h:52
 #: ../ui/xi-menus.glade.h:44
 msgid "Footnotes"
 msgstr "Troednodiadau"
 
-#: ../src/main/parallel_view.cc:400 ../ui/search-dialog.glade.h:64
+#: ../src/main/parallel_view.cc:400
+#: ../ui/search-dialog.glade.h:64
 #: ../ui/xi-menus.glade.h:63
 msgid "Morphological Tags"
 msgstr "Tagiau Morffolegol"
 
-#: ../src/main/parallel_view.cc:410 ../ui/xi-menus.glade.h:48
+#: ../src/main/parallel_view.cc:410
+#: ../ui/xi-menus.glade.h:48
 msgid "Hebrew Vowel Points"
 msgstr "Llafarnodau Hebraeg"
 
-#: ../src/main/parallel_view.cc:420 ../ui/xi-menus.glade.h:47
+#: ../src/main/parallel_view.cc:420
+#: ../ui/xi-menus.glade.h:47
 msgid "Hebrew Cantillation"
 msgstr "Llafarganu Hebraeg"
 
-#: ../src/main/parallel_view.cc:430 ../ui/xi-menus.glade.h:45
+#: ../src/main/parallel_view.cc:430
+#: ../ui/xi-menus.glade.h:45
 msgid "Greek Accents"
 msgstr "Acenion y Roeg"
 
@@ -1482,11 +1552,13 @@ msgstr "Acenion y Roeg"
 msgid "Cross-references"
 msgstr "Croesgyfeiriadau"
 
-#: ../src/main/parallel_view.cc:450 ../ui/xi-menus.glade.h:57
+#: ../src/main/parallel_view.cc:450
+#: ../ui/xi-menus.glade.h:57
 msgid "Lemmas"
 msgstr "Lemata"
 
-#: ../src/main/parallel_view.cc:460 ../ui/xi-menus.glade.h:46
+#: ../src/main/parallel_view.cc:460
+#: ../ui/xi-menus.glade.h:46
 msgid "Headings"
 msgstr "Teitlau"
 
@@ -1494,11 +1566,13 @@ msgstr "Teitlau"
 msgid "Morpheme Segmentation"
 msgstr "Segmentiad Morffemau"
 
-#: ../src/main/parallel_view.cc:484 ../ui/xi-menus.glade.h:117
+#: ../src/main/parallel_view.cc:484
+#: ../ui/xi-menus.glade.h:117
 msgid "Words of Christ in Red"
 msgstr "Geiriau Iesu mewn coch"
 
-#: ../src/main/parallel_view.cc:494 ../ui/xi-menus.glade.h:110
+#: ../src/main/parallel_view.cc:494
+#: ../ui/xi-menus.glade.h:110
 msgid "Transliteration"
 msgstr "Trawslythreniad"
 
@@ -1506,15 +1580,18 @@ msgstr "Trawslythreniad"
 msgid "Textual Variants"
 msgstr "Amrywiadau Testunol"
 
-#: ../src/main/parallel_view.cc:512 ../ui/xi-menus.glade.h:86
+#: ../src/main/parallel_view.cc:512
+#: ../ui/xi-menus.glade.h:86
 msgid "Primary Reading"
 msgstr "Prif Ddarlleniad"
 
-#: ../src/main/parallel_view.cc:521 ../ui/xi-menus.glade.h:101
+#: ../src/main/parallel_view.cc:521
+#: ../ui/xi-menus.glade.h:101
 msgid "Secondary Reading"
 msgstr "Darlleniad eilradd"
 
-#: ../src/main/parallel_view.cc:530 ../ui/xi-menus.glade.h:9
+#: ../src/main/parallel_view.cc:530
+#: ../ui/xi-menus.glade.h:9
 msgid "All Readings"
 msgstr "Pob darlleniad"
 
@@ -1579,7 +1656,8 @@ msgstr "Tyfiant"
 msgid "<b>For Growth</b><br/>"
 msgstr "<b>I Dyfu</b><br>"
 
-#: ../src/main/prayerlists.cc:126 ../src/main/prayerlists.cc:383
+#: ../src/main/prayerlists.cc:126
+#: ../src/main/prayerlists.cc:383
 msgid "Salvation"
 msgstr "Achubiaeth"
 
@@ -1588,7 +1666,8 @@ msgstr "Achubiaeth"
 msgid "<b>For Salvation</b><br/>"
 msgstr "<b>I Achub</b><br>"
 
-#: ../src/main/prayerlists.cc:128 ../src/main/prayerlists.cc:387
+#: ../src/main/prayerlists.cc:128
+#: ../src/main/prayerlists.cc:387
 msgid "Health"
 msgstr "Iechyd"
 
@@ -1611,7 +1690,6 @@ msgid "Point x"
 msgstr "Pwynt x"
 
 #: ../src/main/prayerlists.cc:140
-#, fuzzy
 msgid "<b>(x)</b><br/>"
 msgstr "<b>(x)</b><br>"
 
@@ -1620,7 +1698,6 @@ msgid "Point y"
 msgstr "Pwynt y"
 
 #: ../src/main/prayerlists.cc:142
-#, fuzzy
 msgid "<b>(y)</b><br/>"
 msgstr "<b>(y)</b><br>"
 
@@ -1629,7 +1706,6 @@ msgid "Point z"
 msgstr "Pwynt z"
 
 #: ../src/main/prayerlists.cc:144
-#, fuzzy
 msgid "<b>(z)</b><br/>"
 msgstr "<b>(z)</b><br>"
 
@@ -1638,7 +1714,6 @@ msgid "Minor Topic 1"
 msgstr "Pwnc bach 1"
 
 #: ../src/main/prayerlists.cc:153
-#, fuzzy
 msgid "<b>Subtopic 1</b><br/>"
 msgstr "<b>Is-bwnc 1</b><br>"
 
@@ -1647,7 +1722,6 @@ msgid "Minor Topic 2"
 msgstr "Pwnc bach 2"
 
 #: ../src/main/prayerlists.cc:156
-#, fuzzy
 msgid "<b>Subtopic 2</b><br/>"
 msgstr "<b> Is-bwnc 2</b><br>"
 
@@ -1656,7 +1730,6 @@ msgid "Minor Topic 3"
 msgstr "Pwnc bach 3"
 
 #: ../src/main/prayerlists.cc:159
-#, fuzzy
 msgid "<b>Subtopic 3</b><br/>"
 msgstr "<b> Is-bwnc 3</b><br>"
 
@@ -1665,7 +1738,6 @@ msgid "Minor Topic 4"
 msgstr "Pwnc bach 4"
 
 #: ../src/main/prayerlists.cc:162
-#, fuzzy
 msgid "<b>Subtopic 4</b><br/>"
 msgstr "<b> Is-bwnc 4</b><br>"
 
@@ -1697,13 +1769,8 @@ msgid "MyPrayerList"
 msgstr "FyRhestrWeddi"
 
 #: ../src/main/prayerlists.cc:342
-#, fuzzy
-msgid ""
-"<b>People:</b><br/>Bob<br/>Sam<br/>Sue<br/><br/><b>Church:</b><br/>pews<br/"
-">fellowship<br/>Bibles for missionaries<br/><br/><br/>"
-msgstr ""
-"<b>Pobl:</b><br>Bob<br>Sam<br>Sue<br><br><b>Eglwys:</"
-"b><br>seddi<br>cymdeithas<br>Beiblau i genhadon<br><br><br>"
+msgid "<b>People:</b><br/>Bob<br/>Sam<br/>Sue<br/><br/><b>Church:</b><br/>pews<br/>fellowship<br/>Bibles for missionaries<br/><br/><br/>"
+msgstr "<b>Pobl:</b><br>Bob<br>Sam<br>Sue<br><br><b>Eglwys:</b><br>seddi<br>cymdeithas<br>Beiblau i genhadon<br><br><br>"
 
 #: ../src/main/prayerlists.cc:368
 msgid "A subject-based prayer list. \\par\\par Module created by Xiphos."
@@ -1714,7 +1781,6 @@ msgid "SubjectPrayerList"
 msgstr "RhestrPynciauGweddi"
 
 #: ../src/main/prayerlists.cc:384
-#, fuzzy
 msgid "Bob<br/>Sam<br/>Sue<br/>John<br/>"
 msgstr "Bob<br>Sam<br>Sue<br>John<br>"
 
@@ -1723,12 +1789,10 @@ msgid "Spiritual Growth"
 msgstr "Tyfiant Ysbrydol"
 
 #: ../src/main/prayerlists.cc:386
-#, fuzzy
 msgid "Mike<br/>Steve<br/>"
 msgstr "Mike<br>Steve<br>"
 
 #: ../src/main/prayerlists.cc:388
-#, fuzzy
 msgid "Sue<br/>John<br/>"
 msgstr "Sue<br>John<br>"
 
@@ -1750,8 +1814,7 @@ msgstr "Dyddlyfr"
 
 #: ../src/main/prayerlists.cc:531
 msgid "An outlined topic (e.g. sermon). \\par\\par Module created by Xiphos."
-msgstr ""
-"Amlinelliad o bwnc (e.g. pregeth). \\par\\par Modiwl wedi ei greu gan Xiphos."
+msgstr "Amlinelliad o bwnc (e.g. pregeth). \\par\\par Modiwl wedi ei greu gan Xiphos."
 
 #: ../src/main/prayerlists.cc:532
 msgid "OutlinedTopic"
@@ -1762,7 +1825,6 @@ msgid "Major Topic A"
 msgstr "Prif Bwnc A"
 
 #: ../src/main/prayerlists.cc:547
-#, fuzzy
 msgid "<b>Major Topic A</b><br/>"
 msgstr "<b> Prif Bwnc A</b><br>"
 
@@ -1771,7 +1833,6 @@ msgid "Major Topic B"
 msgstr "Prif Bwnc B"
 
 #: ../src/main/prayerlists.cc:550
-#, fuzzy
 msgid "<b>Major Topic B</b><br/>"
 msgstr "<b> Prif Bwnc B</b><br>"
 
@@ -1780,7 +1841,6 @@ msgid "Major Topic C"
 msgstr "Prif Bwnc C"
 
 #: ../src/main/prayerlists.cc:553
-#, fuzzy
 msgid "<b>Major Topic C</b><br/>"
 msgstr "<b> Prif Bwnc C</b><br>"
 
@@ -1801,8 +1861,10 @@ msgstr "Dileu Amrediad?"
 msgid "Are you sure you want to delete this range?"
 msgstr "Ydych chi’n siwr eich bod am ddileu’r amrediad hwn?"
 
-#: ../src/main/search_dialog.cc:655 ../src/main/search_dialog.cc:1072
-#: ../src/main/search_dialog.cc:1075 ../src/main/search_dialog.cc:1097
+#: ../src/main/search_dialog.cc:655
+#: ../src/main/search_dialog.cc:1072
+#: ../src/main/search_dialog.cc:1075
+#: ../src/main/search_dialog.cc:1097
 #: ../src/main/search_dialog.cc:1100
 msgid "Search: "
 msgstr "Chwilio: "
@@ -1868,7 +1930,8 @@ msgstr ""
 "\n"
 "All Xiphos ddim parhau."
 
-#: ../src/main/settings.c:131 ../src/main/settings.c:140
+#: ../src/main/settings.c:131
+#: ../src/main/settings.c:140
 #: ../src/main/settings.c:149
 msgid "can not create "
 msgstr "methu creu "
@@ -1884,7 +1947,6 @@ msgid "Empty settings file -- no backup?!? Information lost!"
 msgstr ""
 
 #: ../src/main/settings.c:209
-#, fuzzy
 msgid ""
 "There are no Bibles installed.\n"
 "Evidently, you declined to install any.\n"
@@ -1963,10 +2025,7 @@ msgid ""
 "\n"
 "<u>You are opening a module which requires a <i>key</i>.</u>\n"
 "\n"
-"The module is locked, meaning that the content is encrypted by its "
-"publisher, and you must enter its key in order for the content to become "
-"useful.  This key should have been received by you on the web page which "
-"confirmed your purchase, or perhaps sent via email after purchase.\n"
+"The module is locked, meaning that the content is encrypted by its publisher, and you must enter its key in order for the content to become useful.  This key should have been received by you on the web page which confirmed your purchase, or perhaps sent via email after purchase.\n"
 "\n"
 "Please enter the key in the dialog."
 msgstr ""
@@ -1993,7 +2052,8 @@ msgstr "Gwall gweld:\n"
 msgid "Show %s in main window"
 msgstr "Dangos %s yn y prif ffenestr"
 
-#: ../src/main/xml.c:84 ../src/main/xml.c:468
+#: ../src/main/xml.c:84
+#: ../src/main/xml.c:468
 #, c-format
 msgid "Document not created successfully. \n"
 msgstr "Methu creu’r ddogfen. \n"
@@ -2006,15 +2066,18 @@ msgstr "Personol"
 msgid "What must I do to be saved?"
 msgstr "Beth sydd raid i mi ei wneud i gael fy achub?"
 
-#: ../src/main/xml.c:96 ../src/main/xml.c:97
+#: ../src/main/xml.c:96
+#: ../src/main/xml.c:97
 msgid "Acts 16:31"
 msgstr "Actau 16:31"
 
-#: ../src/main/xml.c:101 ../src/main/xml.c:102
+#: ../src/main/xml.c:101
+#: ../src/main/xml.c:102
 msgid "Eph 2:8,9"
 msgstr ""
 
-#: ../src/main/xml.c:106 ../src/main/xml.c:107
+#: ../src/main/xml.c:106
+#: ../src/main/xml.c:107
 msgid "Romans 1:16"
 msgstr "Rhuf 1:16"
 
@@ -2022,16 +2085,20 @@ msgstr "Rhuf 1:16"
 msgid "What is the Gospel?"
 msgstr "Beth ydy’r Efengyl?"
 
-#: ../src/main/xml.c:112 ../src/main/xml.c:113
+#: ../src/main/xml.c:112
+#: ../src/main/xml.c:113
 msgid "1 Cor 15:1-4"
 msgstr "1 Cor 15:1-4"
 
-#: ../src/main/xml.c:417 ../src/main/xml.c:1174
+#: ../src/main/xml.c:417
+#: ../src/main/xml.c:1174
 #, c-format
 msgid "Document not parsed successfully. \n"
 msgstr "Methu dosrannu’r ddogfen. \n"
 
-#: ../src/main/xml.c:423 ../src/main/xml.c:741 ../src/main/xml.c:1055
+#: ../src/main/xml.c:423
+#: ../src/main/xml.c:741
+#: ../src/main/xml.c:1055
 #: ../src/main/xml.c:1253
 #, c-format
 msgid "empty document \n"
@@ -2062,7 +2129,8 @@ msgstr "Math - Dat"
 msgid "Sample Module List"
 msgstr "Sampl o Restr Modiwlau"
 
-#: ../src/main/xml.c:747 ../src/main/xml.c:1061
+#: ../src/main/xml.c:747
+#: ../src/main/xml.c:1061
 #, c-format
 msgid "wrong type, root node != %s\n"
 msgstr "math anghywir, cwgn gwreiddyn != %s\n"
@@ -2082,7 +2150,8 @@ msgstr ""
 msgid "Add Bookmark"
 msgstr "Ychwanegu Nod Llyfr"
 
-#: ../ui/bookmarks.glade.h:2 ../ui/markverse.glade.h:1
+#: ../ui/bookmarks.glade.h:2
+#: ../ui/markverse.glade.h:1
 msgid "Bookmark Dialog"
 msgstr "Deialog Nod Tudalen"
 
@@ -2090,11 +2159,13 @@ msgstr "Deialog Nod Tudalen"
 msgid "Bookmark Folder Treeview"
 msgstr "Canghennau Ffolder Nod Tudalen"
 
-#: ../ui/bookmarks.glade.h:4 ../ui/markverse.glade.h:2
+#: ../ui/bookmarks.glade.h:4
+#: ../ui/markverse.glade.h:2
 msgid "Cancel Bookmark"
 msgstr "Canslo Nod Tudalen"
 
-#: ../ui/bookmarks.glade.h:5 ../ui/markverse.glade.h:3
+#: ../ui/bookmarks.glade.h:5
+#: ../ui/markverse.glade.h:3
 msgid "Create new folder"
 msgstr "Creu Ffolder Newydd"
 
@@ -2106,11 +2177,13 @@ msgstr "Cofnod Label:"
 msgid "Label:"
 msgstr "Label:"
 
-#: ../ui/bookmarks.glade.h:8 ../ui/markverse.glade.h:6
+#: ../ui/bookmarks.glade.h:8
+#: ../ui/markverse.glade.h:6
 msgid "Module Entry"
 msgstr "Cofnod Modiwl:"
 
-#: ../ui/bookmarks.glade.h:9 ../ui/markverse.glade.h:7
+#: ../ui/bookmarks.glade.h:9
+#: ../ui/markverse.glade.h:7
 msgid "Module:"
 msgstr "Modiwl:"
 
@@ -2118,16 +2191,19 @@ msgstr "Modiwl:"
 msgid "New ..."
 msgstr "Newydd ..."
 
-#: ../ui/bookmarks.glade.h:11 ../ui/markverse.glade.h:8
+#: ../ui/bookmarks.glade.h:11
+#: ../ui/markverse.glade.h:8
 #: ../ui/xi-menus.glade.h:64
 msgid "New Folder"
 msgstr "Ffolder Newydd"
 
-#: ../ui/bookmarks.glade.h:12 ../ui/markverse.glade.h:10
+#: ../ui/bookmarks.glade.h:12
+#: ../ui/markverse.glade.h:10
 msgid "Verse Entry"
 msgstr "_Cofnod Adnod"
 
-#: ../ui/bookmarks.glade.h:13 ../ui/markverse.glade.h:11
+#: ../ui/bookmarks.glade.h:13
+#: ../ui/markverse.glade.h:11
 msgid "Verse:"
 msgstr "Adnod:"
 
@@ -2135,27 +2211,33 @@ msgstr "Adnod:"
 msgid "Delete the current note"
 msgstr "Dileu y nodyn cyfredol"
 
-#: ../ui/editor_note.xml.h:2 ../ui/editor_studypad.xml.h:4
+#: ../ui/editor_note.xml.h:2
+#: ../ui/editor_studypad.xml.h:4
 msgid "E_xit"
 msgstr "A_llanu"
 
-#: ../ui/editor_note.xml.h:3 ../ui/editor_studypad.xml.h:5
+#: ../ui/editor_note.xml.h:3
+#: ../ui/editor_studypad.xml.h:5
 msgid "Exit"
 msgstr "Allanu"
 
-#: ../ui/editor_note.xml.h:4 ../ui/editor_studypad.xml.h:6
+#: ../ui/editor_note.xml.h:4
+#: ../ui/editor_studypad.xml.h:6
 msgid "Exit the program"
 msgstr "Allanu’r rhaglen"
 
-#: ../ui/editor_note.xml.h:5 ../ui/editor_studypad.xml.h:7
+#: ../ui/editor_note.xml.h:5
+#: ../ui/editor_studypad.xml.h:7
 msgid "For_mat"
 msgstr "Ffor_madu"
 
-#: ../ui/editor_note.xml.h:6 ../ui/editor_studypad.xml.h:8
+#: ../ui/editor_note.xml.h:6
+#: ../ui/editor_studypad.xml.h:8
 msgid "HTML Format switch"
 msgstr "Switsio Fformadu HTML"
 
-#: ../ui/editor_note.xml.h:7 ../ui/editor_studypad.xml.h:9
+#: ../ui/editor_note.xml.h:7
+#: ../ui/editor_studypad.xml.h:9
 msgid "HTML mode"
 msgstr "modd HTML"
 
@@ -2235,7 +2317,8 @@ msgstr "<b>Allfudo</b>"
 msgid "<b>Format</b>"
 msgstr "<b>Fformadu</b>"
 
-#: ../ui/export-dialog.glade.h:5 ../ui/prefs.glade.h:27
+#: ../ui/export-dialog.glade.h:5
+#: ../ui/prefs.glade.h:27
 msgid "Book"
 msgstr "Llyfr"
 
@@ -2247,7 +2330,8 @@ msgstr "Botwm Dewis Llyfr"
 msgid "Chapter Radio Button"
 msgstr "Botwm Dewis Pennod"
 
-#: ../ui/export-dialog.glade.h:9 ../ui/xi-menus.glade.h:20
+#: ../ui/export-dialog.glade.h:9
+#: ../ui/xi-menus.glade.h:20
 msgid "Copy/Export Passage"
 msgstr "Copio/Allfudo’r darn"
 
@@ -2346,17 +2430,11 @@ msgstr "<b>Sword</b>"
 
 #: ../ui/module-manager.glade.h:7
 msgid "<b>WARNING:</b> If you live in a persecuted country use with care."
-msgstr ""
-"<b>RHYBUDD:</b> Byddwch yn ofalus os ydych yn byw mewn gwlad ble mae "
-"erledigaeth."
+msgstr "<b>RHYBUDD:</b> Byddwch yn ofalus os ydych yn byw mewn gwlad ble mae erledigaeth."
 
 #: ../ui/module-manager.glade.h:8
-msgid ""
-"<b>Warning:</b> If you live in a persecuted country and do not wish to risk "
-"detection you should NOT use  the remote installation feature! "
-msgstr ""
-"<b>RHYBUDD:</b> Os ydych yn byw mewn gwlad ble mae erledigaeth a ddim am "
-"fentro cael eich canfod, NI ddylech ddefnyddio’r nodwedd gosod pell! "
+msgid "<b>Warning:</b> If you live in a persecuted country and do not wish to risk detection you should NOT use  the remote installation feature! "
+msgstr "<b>RHYBUDD:</b> Os ydych yn byw mewn gwlad ble mae erledigaeth a ddim am fentro cael eich canfod, NI ddylech ddefnyddio’r nodwedd gosod pell! "
 
 #: ../ui/module-manager.glade.h:9
 msgid "<i>Personal area, for your use only:</i>"
@@ -2367,20 +2445,15 @@ msgid "<i>System area, for all users:</i>"
 msgstr "<i>Adran y System, at ddefnydd pawb:</i>"
 
 #: ../ui/module-manager.glade.h:11
-msgid ""
-"Add a custom remote install source. You must know its hostname and the "
-"folder where its repository lives."
+msgid "Add a custom remote install source. You must know its hostname and the folder where its repository lives."
 msgstr ""
 
 #: ../ui/module-manager.glade.h:12
-msgid ""
-"Add a local folder as an install source, typically on a cdrom or flash "
-"drive.  Such a folder contains subfolders \"mods.d\" and \"modules\"."
+msgid "Add a local folder as an install source, typically on a cdrom or flash drive.  Such a folder contains subfolders \"mods.d\" and \"modules\"."
 msgstr ""
 
 #: ../ui/module-manager.glade.h:13
-msgid ""
-"Build an index of the selected modules, for optimized (\"lucene\") searching."
+msgid "Build an index of the selected modules, for optimized (\"lucene\") searching."
 msgstr ""
 
 #: ../ui/module-manager.glade.h:14
@@ -2415,9 +2488,7 @@ msgid "Install or update the selected modules"
 msgstr "Gosod y Modiwlau hyn:"
 
 #: ../ui/module-manager.glade.h:21
-msgid ""
-"Load and synchronize the standard set of known repositories, as maintained "
-"at crosswire.org, with your current remote sources."
+msgid "Load and synchronize the standard set of known repositories, as maintained at crosswire.org, with your current remote sources."
 msgstr ""
 
 #: ../ui/module-manager.glade.h:22
@@ -2437,9 +2508,7 @@ msgid "Open a brief introductory explanation of how the Module Manager works."
 msgstr ""
 
 #: ../ui/module-manager.glade.h:26
-msgid ""
-"Refresh Xiphos' knowledge of what modules are available at the selected "
-"remote repository"
+msgid "Refresh Xiphos' knowledge of what modules are available at the selected remote repository"
 msgstr ""
 
 #: ../ui/module-manager.glade.h:27
@@ -2465,17 +2534,14 @@ msgid "Sword sys dir"
 msgstr "cyfeiriadur system SWORD"
 
 #: ../ui/module-manager.glade.h:32
-#, fuzzy
 msgid "_Archive"
-msgstr "Archifo"
+msgstr "_Archifo"
 
 #: ../ui/module-manager.glade.h:33
-#, fuzzy
 msgid "_Delete Index"
-msgstr "Dileu Mynegai"
+msgstr "_Dileu Mynegai"
 
 #: ../ui/module-manager.glade.h:34
-#, fuzzy
 msgid "_Index"
 msgstr "Mynegai"
 
@@ -2561,7 +2627,8 @@ msgstr "<b>Cyffredinol</b>"
 msgid "<b>Main Window Modules</b>"
 msgstr "<b> Prif Fodiwlau’r Ffenestr </b>"
 
-#: ../ui/prefs.glade.h:13 ../ui/search-dialog.glade.h:5
+#: ../ui/prefs.glade.h:13
+#: ../ui/search-dialog.glade.h:5
 msgid "<b>Modules</b>"
 msgstr "<b>Modiwlau</b>"
 
@@ -2581,7 +2648,8 @@ msgstr "<b>Cyfeiriadur diofyn PadAstudio</b>"
 msgid "<b>Tabs</b>"
 msgstr "<b>Tabiau</b>"
 
-#: ../ui/prefs.glade.h:18 ../ui/search-dialog.glade.h:15
+#: ../ui/prefs.glade.h:18
+#: ../ui/search-dialog.glade.h:15
 msgid "Add Modules"
 msgstr "Ychwanegu Modiwlau"
 
@@ -2597,9 +2665,7 @@ msgstr "Dylid amlygu’r adnod bresennol gyda chyferbynedd uchel"
 #: ../ui/prefs.glade.h:21
 #, fuzzy
 msgid "Automatically resize image content to fit the pane"
-msgstr ""
-"Ail feintiwch cynnwys yr esboniad, llyfr a delwedd y geiriadur fel ei bod yn "
-"ffitioisffenestr"
+msgstr "Ail feintiwch cynnwys yr esboniad, llyfr a delwedd y geiriadur fel ei bod yn ffitioisffenestr"
 
 #: ../ui/prefs.glade.h:22
 msgid "Background"
@@ -2645,11 +2711,13 @@ msgstr "Newid Geiriadur"
 msgid "Change Personal Notes Combo"
 msgstr "Newid Nodiadau Personol"
 
-#: ../ui/prefs.glade.h:34 ../ui/search-dialog.glade.h:21
+#: ../ui/prefs.glade.h:34
+#: ../ui/search-dialog.glade.h:21
 msgid "Clear Modules from List Button"
 msgstr "Botwm dileu pob modiwl o’r rhestr"
 
-#: ../ui/prefs.glade.h:35 ../ui/search-dialog.glade.h:22
+#: ../ui/prefs.glade.h:35
+#: ../ui/search-dialog.glade.h:22
 msgid "Clear all modules from the list"
 msgstr "Dileu pob modiwl o’r rhestr"
 
@@ -2686,7 +2754,8 @@ msgstr "Defosiwn Dyddiol"
 msgid "Default Dictionary"
 msgstr "Geiriadur Diofyn"
 
-#: ../ui/prefs.glade.h:46 ../ui/search-dialog.glade.h:39
+#: ../ui/prefs.glade.h:46
+#: ../ui/search-dialog.glade.h:39
 msgid "Delete Selected Module From List Button"
 msgstr ""
 
@@ -2778,9 +2847,7 @@ msgid "Highlight user annotations check box"
 msgstr "Amlygu Bocs Ticio yr Adnod Bresennol"
 
 #: ../ui/prefs.glade.h:68
-msgid ""
-"If you have set a preferred daily devotion module, its entry for today will "
-"be shown at startup."
+msgid "If you have set a preferred daily devotion module, its entry for today will be shown at startup."
 msgstr ""
 
 #: ../ui/prefs.glade.h:69
@@ -2798,16 +2865,15 @@ msgid "Links"
 msgstr "Dolenni"
 
 #: ../ui/prefs.glade.h:72
-msgid ""
-"Make double-click of a word always use default dictionary instead of "
-"dictionary currently displayed"
+msgid "Make double-click of a word always use default dictionary instead of dictionary currently displayed"
 msgstr ""
 
 #: ../ui/prefs.glade.h:73
 msgid "Make journals/prayer lists available"
 msgstr ""
 
-#: ../ui/prefs.glade.h:74 ../ui/search-dialog.glade.h:61
+#: ../ui/prefs.glade.h:74
+#: ../ui/search-dialog.glade.h:61
 msgid "Module Selection"
 msgstr "Dewisiad modiwlau"
 
@@ -2824,16 +2890,15 @@ msgid "Modules Parallel"
 msgstr "Modiwlau Paralel"
 
 #: ../ui/prefs.glade.h:78
-msgid ""
-"Name and size choice for any module in a given language; still overridden by "
-"a specific choice on a particular module"
+msgid "Name and size choice for any module in a given language; still overridden by a specific choice on a particular module"
 msgstr ""
 
 #: ../ui/prefs.glade.h:79
 msgid "Normal Text"
 msgstr ""
 
-#: ../ui/prefs.glade.h:80 ../ui/search-dialog.glade.h:70
+#: ../ui/prefs.glade.h:80
+#: ../ui/search-dialog.glade.h:70
 msgid "Open Selection Dialog Button"
 msgstr "botwm Agor Dewis Deialog"
 
@@ -2854,7 +2919,8 @@ msgstr "Nodiadau Personol"
 msgid "Previewer Checkbox"
 msgstr "Bocs Ticio Rhagolygwr"
 
-#: ../ui/prefs.glade.h:87 ../ui/search-dialog.glade.h:80
+#: ../ui/prefs.glade.h:87
+#: ../ui/search-dialog.glade.h:80
 msgid "Remove the selected module from the list"
 msgstr "Symudwch y modiwl dewisedig o’r rhestr"
 
@@ -2879,9 +2945,7 @@ msgid "Select A Directory"
 msgstr "Dewiswch Gyfeiriadur"
 
 #: ../ui/prefs.glade.h:93
-msgid ""
-"Select a particular language for interface display, other than your usual "
-"setting"
+msgid "Select a particular language for interface display, other than your usual setting"
 msgstr ""
 
 #: ../ui/prefs.glade.h:94
@@ -2893,9 +2957,7 @@ msgid "Show splash screen at start up"
 msgstr "Dangoswch y sgrin sblasio ar y cychwyn"
 
 #: ../ui/prefs.glade.h:96
-msgid ""
-"Single selection of Bible+commentary+book+dictionary, or many sets of such "
-"selections in a tabbed interface"
+msgid "Single selection of Bible+commentary+book+dictionary, or many sets of such selections in a tabbed interface"
 msgstr ""
 
 #: ../ui/prefs.glade.h:97
@@ -2912,9 +2974,7 @@ msgstr "Cyfeiriadur diofyn PadAstudio"
 
 #: ../ui/prefs.glade.h:101
 msgid "Use Bible Text scroll bar to scroll to previous or next chapter"
-msgstr ""
-"Defnyddiwch far sgrolio Testun y Beibl i sgrolio i’r bennod flaenorol/y "
-"bennod nesaf"
+msgstr "Defnyddiwch far sgrolio Testun y Beibl i sgrolio i’r bennod flaenorol/y bennod nesaf"
 
 #: ../ui/prefs.glade.h:102
 msgid "Use default Dictionary"
@@ -3189,9 +3249,7 @@ msgid "Open a brief explanation of attribute-based searches."
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:72
-msgid ""
-"Open a brief explanation of the syntax used for optimized \"lucene\" "
-"searches."
+msgid "Open a brief explanation of the syntax used for optimized \"lucene\" searches."
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:73
@@ -3536,7 +3594,6 @@ msgid "Learn about The Sword Project, of which Xiphos is one application"
 msgstr ""
 
 #: ../ui/xi-menus.glade.h:55
-#, fuzzy
 msgid "Learn about Xiphos"
 msgstr "Am _Xiphos"
 
@@ -3767,7 +3824,7 @@ msgstr "_Atodi/Gwahanu Bar ochr"
 
 #: ../ui/xi-menus.glade.h:121
 msgid "_Bible"
-msgstr ""
+msgstr "_Beibl"
 
 #: ../ui/xi-menus.glade.h:122
 msgid "_Commentary/Book"
@@ -3852,7 +3909,7 @@ msgstr ""
 
 #: ../ui/xi-export-bookmarks.glade.h:3
 msgid "Html"
-msgstr ""
+msgstr "HTML"
 
 #: ../ui/xi-export-bookmarks.glade.h:4
 msgid "Include Bible text"
@@ -3890,34 +3947,24 @@ msgstr "Canllaw Beibl Xiphos"
 #~ "Heb fodiwlau Beibl i’w dangos\n"
 #~ "All Xiphos ddim mynd ymlaen\n"
 #~ "a bydd yn allanu."
-
 #~ msgid "Choose to enable Prayer lists "
 #~ msgstr "Dethol i alluogi rhestrau gweddi "
-
 #~ msgid "Cipher Key?"
 #~ msgstr "Allwedd Seiffr?"
-
 #~ msgid "Copy"
 #~ msgstr "Copio"
-
 #~ msgid "Change parallel 1"
 #~ msgstr "Newid paralel 1"
-
 #~ msgid "Change parallel 2"
 #~ msgstr "Newid paralel 2"
-
 #~ msgid "Change parallel 3"
 #~ msgstr "Newid paralel 3"
-
 #~ msgid "Change parallel 4"
 #~ msgstr "Newid paralel 4"
-
 #~ msgid "Change parallel 5"
 #~ msgstr "Newid paralel 5"
-
 #~ msgid "Sizes"
 #~ msgstr "Maint"
-
 #~ msgid ""
 #~ "Welcome to Xiphos.\n"
 #~ "\n"
@@ -3953,161 +4000,113 @@ msgstr "Canllaw Beibl Xiphos"
 #~ "erledigaeth\n"
 #~ "\n"
 #~ "Gaiff Xiphos ofyn i’r Rheolydd Modiwlau osod  Beibl i chi?"
-
 #~ msgid "<b>Parallel View</b>"
 #~ msgstr "<b>Golwg Paralel</b>"
-
 #~ msgid "Parallel 1"
 #~ msgstr "Paralel 1"
-
 #~ msgid "Parallel 1 Combo"
 #~ msgstr "Paralel 1"
-
 #~ msgid "Parallel 2"
 #~ msgstr "Paralel 2"
-
 #~ msgid "Parallel 2 Combo"
 #~ msgstr "Paralel 2"
-
 #~ msgid "Parallel 3"
 #~ msgstr "Paralel 3"
-
 #~ msgid "Parallel 3 Combo"
 #~ msgstr "Paralel 3"
-
 #~ msgid "Parallel 4"
 #~ msgstr "Paralel 4"
-
 #~ msgid "Parallel 4 Combo"
 #~ msgstr "Paralel 4"
-
 #~ msgid "Parallel 5"
 #~ msgstr "Paralel 5"
-
 #~ msgid "Parallel 5 Combo"
 #~ msgstr "Paralel 5"
-
 #~ msgid "Use Verse Per Line"
 #~ msgstr "Defnyddiwch adnod i bob llinnell"
-
 #~ msgid "Use Verse Per Line Checkbox"
 #~ msgstr "Defnyddio Bocs Ticio Adnod i bob Llinnell"
-
 #~ msgid "Import Bibletime Bookmarks"
 #~ msgstr "Mewnfudo Nodau Tudalen Bibletime"
-
 #~ msgid "Restore Folder"
 #~ msgstr "Adfer Ffolder"
-
 #~ msgid "Restore saved folder"
 #~ msgstr "Adfer y Ffolder Gadwyd"
-
 #~ msgid "About the SWORD Project"
 #~ msgstr "Gwybodaeth am brosiect SWORD"
-
 #~ msgid "Sword Version"
 #~ msgstr "Fersiwn SWORD"
-
 #~ msgid "Books can be downloaded from the SWORD Project"
 #~ msgstr "Gellir lawrlwytho llyfrau o’r Prosiect SWORD"
-
 #~ msgid "Remove these modules:"
 #~ msgstr "Dileu y Modiwlau hyn:"
-
 #~ msgid "Archive these modules:"
 #~ msgstr "Archifo’r Modiwlau hyn:"
-
 #~ msgid ""
 #~ "Build fast-search index for these\n"
 #~ "modules (may take minutes/module):"
 #~ msgstr ""
 #~ "Creu mynegai  chwilio cyflym i’r \n"
 #~ "modiwlau hyn (gall gymryd sawl munud y modiwl):"
-
 #~ msgid "Xiphos could not execute archiver"
 #~ msgstr "Allai Xiphos ddim dechrau’r archifwr"
-
 #~ msgid ""
 #~ " archival result:\n"
 #~ "\n"
 #~ msgstr ""
 #~ " canlyniad archifol:\n"
 #~ "\n"
-
 #~ msgid ""
 #~ "\n"
 #~ "Archive in "
 #~ msgstr ""
 #~ "\n"
 #~ "Archifo yn "
-
 #~ msgid "Refreshing remote"
 #~ msgstr "Adnewyddu’r cyrchiad  pell"
-
 #~ msgid "Remote not found"
 #~ msgstr "Methu canfod cyrchiad pell"
-
 #~ msgid "Sources"
 #~ msgstr "Ffeiliau tarddiad"
-
 #~ msgid "Text"
 #~ msgstr "Testun"
-
 #~ msgid "Text to render"
 #~ msgstr "Testun i’w gyflwyno"
-
 #~ msgid "Pixbuf Object"
 #~ msgstr "Gwrthrych Pixbwf"
-
 #~ msgid "The pixbuf to render."
 #~ msgstr "Y pixbwf i’w gyflwyno."
-
 #~ msgid "Open in a new tab"
 #~ msgstr "Agor mewn  tab newydd"
-
 #~ msgid "Open selected module in a separate ['dialog'] window"
 #~ msgstr "Agor y modiwl ddewiswyd mewn deialog"
-
 #~ msgid "View information about the selected dialog"
 #~ msgstr "Edrych ar y wybodaeth am y deialog ddewiswyd"
-
 #~ msgid "Daily Journal"
 #~ msgstr "Dyddlyfr"
-
 #~ msgid "Outlined Topic"
 #~ msgstr "Pwnc Amlinellwyd"
-
 #~ msgid "Open selected module in a dialog"
 #~ msgstr "Agor y modiwl ddewiswyd mewn deialog"
-
 #~ msgid "Move backwards through history"
 #~ msgstr "Yn ôl drwy'r hanes"
-
 #~ msgid "Move foward through history"
 #~ msgstr "Ymlaen drwy'r hanes"
-
 #~ msgid "Select a Book of the Bible"
 #~ msgstr "Dewis Llyfr o’r Beibl"
-
 #~ msgid "Change Chapter"
 #~ msgstr "Pennod Newydd"
-
 #~ msgid "Change Verse"
 #~ msgstr "Adnod Newydd"
-
 #~ msgid "Enter a Verse reference in Book 1:1 format and press Return"
 #~ msgstr ""
 #~ "Teipiwch gyfeirnod adnod yn y fformat Llyfr 1:1 a phwyso’r Dychwelwr"
-
 #~ msgid "Add Child"
 #~ msgstr "Ychwanegu Plentyn"
-
 #~ msgid "Add Sibling"
 #~ msgstr "Ychwanegu Sibling"
-
 #~ msgid "Xiphos has renamed .xiphos-2.0 to .xiphos"
 #~ msgstr "Mae Xiphos wedi ail-enwi .xiphos-2.0 yn .xiphos"
-
 #~ msgid ""
 #~ "Xiphos can not rename  .xiphos-2.0 to .xiphos:\n"
 #~ "%s\n"
@@ -4118,277 +4117,189 @@ msgstr "Canllaw Beibl Xiphos"
 #~ "%s\n"
 #~ "\n"
 #~ "All Xiphos ddim parhau."
-
 #~ msgid "H_istory/<Separator>"
 #~ msgstr "H_anes/<Separator"
-
 #~ msgid "H_istory/C_lear"
 #~ msgstr "H_anes /C_lirio"
-
 #~ msgid "Eph 2:8"
 #~ msgstr "Eff 2:8"
-
 #~ msgid "Open the file in Studypad"
 #~ msgstr "Agor y ffeil yn PadAstudio"
-
 #~ msgid "Base text size"
 #~ msgstr "Maint ffont y bôn"
-
 #~ msgid "Dictionary/_Lexicon"
 #~ msgstr "Geiriadur/_Geiriadur Groeg"
-
 #~ msgid "Remove - Restore"
 #~ msgstr "Diddymu - Adfer"
-
 #~ msgid "Remove Folder"
 #~ msgstr "Diddymu Ffolder"
-
 #~ msgid "_Bible Text"
 #~ msgstr "_Testun Beiblaidd"
-
 #~ msgid "_Commentary"
 #~ msgstr "_Esboniad"
-
 #~ msgid "_Show/Hide Sidebar"
 #~ msgstr "_Dangos/Cuddio Bar ochr"
-
 #~ msgid "It will be lost permanently!"
 #~ msgstr "Bydd yn cael ei ddileu’n barhaol!"
-
 #~ msgid "Open file..."
 #~ msgstr "Agor ffeil..."
-
 #~ msgid "Save file as..."
 #~ msgstr "Cadw ffeil fel..."
-
 #~ msgid "Open StudyPad File"
 #~ msgstr "Agor ffeil PadAstudio"
-
 #~ msgid "Save StudyPad File"
 #~ msgstr "Cadw ffeil PadAstudio"
-
 #~ msgid "item1"
 #~ msgstr "eitem1"
-
 #~ msgid "item2"
 #~ msgstr "eitem2"
-
 #~ msgid "_Module Options"
 #~ msgstr "_Dewisiadau Modiwl"
-
 #~ msgid "Sync with main"
 #~ msgstr "Cyd-daro gyda’r prif"
-
 #~ msgid "Stay in sync"
 #~ msgstr "Cadw’r cyd-daro"
-
 #~ msgid "GnomeSword:"
 #~ msgstr "GnomeSword:"
-
 #~ msgid "+5"
 #~ msgstr "+5"
-
 #~ msgid "+4"
 #~ msgstr "+4"
-
 #~ msgid "+3"
 #~ msgstr "+3"
-
 #~ msgid "+2"
 #~ msgstr "+2"
-
 #~ msgid "+1"
 #~ msgstr "+1"
-
 #~ msgid "-1"
 #~ msgstr "-1"
-
 #~ msgid "-2"
 #~ msgstr "-2"
-
 #~ msgid "-3"
 #~ msgstr "-3"
-
 #~ msgid "Select Local Source"
 #~ msgstr "Dewiswch Ffynhonnell Leol"
-
 #~ msgid "Print"
 #~ msgstr "Argraffu"
-
 #~ msgid "Print Preview"
 #~ msgstr "Rhagolwg Argraffu"
-
 #~ msgid "Failed to print the document"
 #~ msgstr "Methu argraffu’r ddogfen"
-
 #~ msgid "Starting"
 #~ msgstr "Cychwyn"
-
 #~ msgid "Building Xiphos interface"
 #~ msgstr "Creu rhyngwyneb Xiphos"
-
 #~ msgid "Open in dialog"
 #~ msgstr "Agor mewn deialog"
-
 #~ msgid "_Modules"
 #~ msgstr "_Modiwlau"
-
 #~ msgid "_Bookmarks"
 #~ msgstr "_Nodau Tudalen"
-
 #~ msgid "Verse _List"
 #~ msgstr "Rhestr_Adnodau"
-
 #~ msgid ""
 #~ "For multi-word search, use\n"
 #~ "+FirstWord +SecondWord"
 #~ msgstr ""
 #~ "I chwilio am fwy nag un gair, defnyddiwch:\n"
 #~ "+Gair Cyntaf  + Ail Air"
-
 #~ msgid "%s not found"
 #~ msgstr "%s heb eu darganfod"
-
 #~ msgid "has been modified. Do you wish to save it?"
 #~ msgstr "wedi ei addasu. Ydych chi am ei gadw?"
-
 #~ msgid "not loaded"
 #~ msgstr "heb lwytho"
-
 #~ msgid "Initiating Xiphos"
 #~ msgstr "Dechrau Xiphos"
-
 #~ msgid "done"
 #~ msgstr "gorffenwyd"
-
 #~ msgid "Xiphos is shutdown"
 #~ msgstr "Xiphos wedi cau"
-
 #~ msgid "Open the StudyPad editor"
 #~ msgstr "Agor golygydd y PadAstudio"
-
 #~ msgid "Save the current session to a file"
 #~ msgstr "Cadw’r sesiwn gyfredol mewn ffeil"
-
 #~ msgid "_Copy"
 #~ msgstr "_Copio"
-
 #~ msgid "Copy highlighted text from main window"
 #~ msgstr "Copio’r testun a amlygwyd o’r brif ffenestr"
-
 #~ msgid "Search using the shortcut bar"
 #~ msgstr "Chwilio gyda’r bar llwybr byr"
-
 #~ msgid "Advanced search using the search dialog"
 #~ msgstr "Chwilio manwl yn defnyddio’r deialog chwilio"
-
 #~ msgid "C_lear"
 #~ msgstr "_Clirio"
-
 #~ msgid "Clear history list"
 #~ msgstr "Clirio’r rhestr hanes"
-
 #~ msgid "Show the Daily Devotion for today"
 #~ msgstr "Dangos Defosiwn Dyddiol heddiw"
-
 #~ msgid "Show or hide Bible texts window"
 #~ msgstr "Dangos neu guddio ffenestr testunau Beiblaidd"
-
 #~ msgid "Show or hide Preview window"
 #~ msgstr "Dangos neu guddio ffenestr rhagolwg"
-
 #~ msgid "Show or hide commentaries"
 #~ msgstr "Dangos neu guddio esboniadau"
-
 #~ msgid "Show or hide - dictionaries and lexicons"
 #~ msgstr "Dangos neu guddio – geiriaduron a geiriaduron Groeg"
-
 #~ msgid "_About the SWORD Project ..."
 #~ msgstr "_Am Brosiect SWORD ..."
-
 #~ msgid "More information about the SWORD Project"
 #~ msgstr "Mwy o wybodaeth am Brosiect SWORD"
-
 #~ msgid "About _Xiphos ..."
 #~ msgstr "Am_Xiphos ..."
-
 #~ msgid "About this application"
 #~ msgstr "Am y cymhwysiad  hwn"
-
 #~ msgid "Hi_story"
 #~ msgstr "Hanes"
-
 #~ msgid "Initiating SWORD"
 #~ msgstr "Dechrau SWORD"
-
 #~ msgid "path to sword"
 #~ msgstr "llwybr i sword"
-
 #~ msgid "System locale is"
 #~ msgstr "Lleoliad y System yw"
-
 #~ msgid "SWORD locale is"
 #~ msgstr "Lleoliad SWORD yw"
-
 #~ msgid "SWORD is shutdown"
 #~ msgstr "SWORD wedi diffodd"
-
 #~ msgid "1 Cor 15:1"
 #~ msgstr "1 Cor 15:1"
-
 #~ msgid "Select the modules you want"
 #~ msgstr "Dewiswch eich modiwlau"
-
 #~ msgid "Name for new prayer list"
 #~ msgstr "Enw rhestr weddi newydd"
-
 #~ msgid "Prayer list already exist\n"
 #~ msgstr "Rhestr weddi’n bod eisoes\n"
-
 #~ msgid "\\par\\par My prayer list \\par\\par Module created in Xiphos"
 #~ msgstr ""
 #~ "\\par\\par Fy rhestr weddi \\par\\par Modiwl wedi ei chreu yn Xiphos"
-
 #~ msgid "Number of Text modules"
 #~ msgstr "Nifer y Modiwlau Testun"
-
 #~ msgid "Number of Commentary modules"
 #~ msgstr "Nifer y Modiwlau Esboniad"
-
 #~ msgid "Number of Dict/lex modules"
 #~ msgstr "Nifer y Modiwlau Geiriadur"
-
 #~ msgid "Number of Book modules"
 #~ msgstr "Nifer y modiwlau Llyfr"
-
 #~ msgid "Number of Percomm modules"
 #~ msgstr "Nifer y Modiwlau PerComm"
-
 #~ msgid "Number of Devotion modules"
 #~ msgstr "Nifer y Modiwlau Defosiwn"
-
 #~ msgid "Number of Prayer modules"
 #~ msgstr "Nifer y Modiwlau Gweddi"
-
 #~ msgid "Xiphos has renamed .gnomesword-2.0 to .xiphos"
 #~ msgstr "Mae Xiphos wedi ail-enwi .gnomesword-2.0 yn .xiphos"
-
 #~ msgid "can not create  .sword"
 #~ msgstr "methu creu .sword"
-
 #~ msgid "can not create  .sword/mods.d"
 #~ msgstr "methu creu .sword/mods.d"
-
 #~ msgid "can not create  .sword/modules"
 #~ msgstr "Methu creu .sword/modiwlau"
-
 #~ msgid ""
 #~ "\n"
 #~ "First Run: need to create settings!\n"
 #~ msgstr ""
 #~ "\n"
 #~ "Rhediad Cyntaf: angen creu gosodiadau!\n"
-
 #~ msgid ""
 #~ "There is currently no program set as your\n"
 #~ "handler for \"sword://\" and similar URLs.\n"
@@ -4399,650 +4310,436 @@ msgstr "Canllaw Beibl Xiphos"
 #~ "rheolydd i \"sword://\" ac URLiau tebyg.\n"
 #~ "Hoffech chi i Xiphos osod ei hun\n"
 #~ "fel y rhaglen i reoli’r URLiau hyn?"
-
 #~ msgid "<b>Font Miscellaneous</b>"
 #~ msgstr "<b>Ffont amrywiol</b>"
-
 #~ msgid "Afrikaans"
 #~ msgstr "Afrikaans"
-
 #~ msgid "English, Old (ca.450-1100)"
 #~ msgstr "Hen Saesneg (tua 450-1100)"
-
 #~ msgid "Arabic"
 #~ msgstr "Arabeg"
-
 #~ msgid "Azerbaijani"
 #~ msgstr "Azerbaijani"
-
 #~ msgid "Belarusian"
 #~ msgstr "Belarwsaeg"
-
 #~ msgid "Bulgarian"
 #~ msgstr "Bwlgareg"
-
 #~ msgid "Breton"
 #~ msgstr "Llydaweg"
-
 #~ msgid "Bosnian"
 #~ msgstr "Bosnieg"
-
 #~ msgid "Catalan"
 #~ msgstr "Catalaneg"
-
 #~ msgid "Cebuano"
 #~ msgstr "Cebuano"
-
 #~ msgid "Coptic"
 #~ msgstr "Copteg"
-
 #~ msgid "Czech"
 #~ msgstr "Tsieceg"
-
 #~ msgid "Church Slavic"
 #~ msgstr "Slafeg Eglwysig"
-
 #~ msgid "Welsh"
 #~ msgstr "Cymraeg"
-
 #~ msgid "Danish"
 #~ msgstr "Daneg"
-
 #~ msgid "German"
 #~ msgstr "Almaeneg"
-
 #~ msgid "Greek, Modern (1453-)"
 #~ msgstr "Groeg Modern (1453-)"
-
 #~ msgid "English"
 #~ msgstr "Saesneg"
-
 #~ msgid "American English"
 #~ msgstr "Saesneg Americanaidd"
-
 #~ msgid "English, Middle (1100-1500)"
 #~ msgstr "Saesneg Canol (1100-1500)"
-
 #~ msgid "Esperanto"
 #~ msgstr "Esperanto"
-
 #~ msgid "Spanish"
 #~ msgstr "Sbaeneg"
-
 #~ msgid "Estonian"
 #~ msgstr "Estoneg"
-
 #~ msgid "Basque"
 #~ msgstr "Basgeg"
-
 #~ msgid "Finnish"
 #~ msgstr "Ffineg"
-
 #~ msgid "French"
 #~ msgstr "Ffrangeg"
-
 #~ msgid "Frisian"
 #~ msgstr "Ffriseg"
-
 #~ msgid "Irish"
 #~ msgstr "Gwyddeleg"
-
 #~ msgid "Gaelic (Scots)"
 #~ msgstr "Gaeleg"
-
 #~ msgid "Manx"
 #~ msgstr "Manaweg"
-
 #~ msgid "Greek, Ancient (to 1453)"
 #~ msgstr "Groeg, Hynafol (tot 1453)"
-
 #~ msgid "Hebrew"
 #~ msgstr "Hebraeg"
-
 #~ msgid "Hawaiian"
 #~ msgstr "Hawaieg"
-
 #~ msgid "Croatian"
 #~ msgstr "Croateg"
-
 #~ msgid "Hungarian"
 #~ msgstr "Hwngareg"
-
 #~ msgid "Armenian"
 #~ msgstr "Armeneg"
-
 #~ msgid "Klingon"
 #~ msgstr "Klingon"
-
 #~ msgid "Icelandic"
 #~ msgstr "Islandeg"
-
 #~ msgid "Italian"
 #~ msgstr "Eidaleg"
-
 #~ msgid "Japanese"
 #~ msgstr "Siapanaeg"
-
 #~ msgid "Georgian"
 #~ msgstr "Georgeg"
-
 #~ msgid "Korean"
 #~ msgstr "Coreeg"
-
 #~ msgid "Kurdish"
 #~ msgstr "Cwrdeg"
-
 #~ msgid "Kirghiz"
 #~ msgstr "Cirgiseg"
-
 #~ msgid "Latin"
 #~ msgstr "Lladin"
-
 #~ msgid "Lithuanian"
 #~ msgstr "Lithwaneg"
-
 #~ msgid "Latvian"
 #~ msgstr "Latfieg"
-
 #~ msgid "Maori"
 #~ msgstr "Maori"
-
 #~ msgid "Macedonian"
 #~ msgstr "Macedoneg"
-
 #~ msgid "Maltese"
 #~ msgstr "Malti"
-
 #~ msgid "Low German; Low Saxon"
 #~ msgstr "Isel Almaeneg; Isel Sacsoneg"
-
 #~ msgid "Dutch"
 #~ msgstr "Iseldireg"
-
 #~ msgid "Norwegian"
 #~ msgstr "Norwyeg"
-
 #~ msgid "Papiamento"
 #~ msgstr "Papiamenteg"
-
 #~ msgid "Polish"
 #~ msgstr "Pwyleg"
-
 #~ msgid "Portuguese"
 #~ msgstr "Portiwgaleg"
-
 #~ msgid "Romanian"
 #~ msgstr "Rwmaneg"
-
 #~ msgid "Russian"
 #~ msgstr "Rwseg"
-
 #~ msgid "Scots"
 #~ msgstr "Sgoteg"
-
 #~ msgid "Slovak"
 #~ msgstr "Slofaceg"
-
 #~ msgid "Slovenian"
 #~ msgstr "Slofeneg"
-
 #~ msgid "Somali"
 #~ msgstr "Somalieg"
-
 #~ msgid "Albanian"
 #~ msgstr "Albaneg"
-
 #~ msgid "Swedish"
 #~ msgstr "Swedeg"
-
 #~ msgid "Swahili"
 #~ msgstr "Swahili"
-
 #~ msgid "Syriac"
 #~ msgstr "Syrieg"
-
 #~ msgid "Tamil"
 #~ msgstr "Tamileg"
-
 #~ msgid "Thai"
 #~ msgstr "Siameg"
-
 #~ msgid "Tagalog"
 #~ msgstr "Tagalog"
-
 #~ msgid "Tswana"
 #~ msgstr "Tswana"
-
 #~ msgid "Turkish"
 #~ msgstr "Tyrceg"
-
 #~ msgid "Tahitian"
 #~ msgstr "Tahitieg"
-
 #~ msgid "Ukrainian"
 #~ msgstr "Wcreineg"
-
 #~ msgid "Vietnamese"
 #~ msgstr "Fietnameg"
-
 #~ msgid "Bavarian"
 #~ msgstr "Bafarieg"
-
 #~ msgid "Alemannisch"
 #~ msgstr "Alemanneg"
-
 #~ msgid "Haitian Creole French"
 #~ msgstr "Ffrangeg Creolaidd Haiti"
-
 #~ msgid "Itz"
 #~ msgstr "Itseg"
-
 #~ msgid "Shuar"
 #~ msgstr "Shwareg"
-
 #~ msgid "Kekchi"
 #~ msgstr "Kekchi"
-
 #~ msgid "Lombard"
 #~ msgstr "Lombardeg"
-
 #~ msgid "Tok Pisin"
 #~ msgstr "Toc Pisin"
-
 #~ msgid "Uma"
 #~ msgstr "Wma"
-
 #~ msgid "Romani, Vlax"
 #~ msgstr "Romaneg, Flach"
-
 #~ msgid "Sango"
 #~ msgstr "Sango"
-
 #~ msgid "Sranan"
 #~ msgstr "Sranan"
-
 #~ msgid "Chinese"
 #~ msgstr "Tsieinieg"
-
 #~ msgid "Zulu"
 #~ msgstr "Zwlw"
-
 #~ msgid "found in"
 #~ msgstr "cafwyd yn"
-
 #~ msgid "The"
 #~ msgstr "Y"
-
 #~ msgid "module is locked."
 #~ msgstr "Mae’r modiwl wedi ei gloi."
-
 #~ msgid "module has been unlocked."
 #~ msgstr "Mae’r modiwl wedi ei ddatgloi."
-
 #~ msgid "If you have the cipher key you can"
 #~ msgstr "Gallwch wneud hyn os yw’r allwedd seiffr gennych"
-
 #~ msgid "click here"
 #~ msgstr "cliciwch yma"
-
 #~ msgid "to unlock the module"
 #~ msgstr "i ddatgloi’r modiwl"
-
 #~ msgid "You will need to restart Xiphos after you unlock it."
 #~ msgstr "Bydd angen ichi ail gychwyn Xiphos ar ol ei ddatgloi."
-
 #~ msgid "You need to restart Xiphos to view it"
 #~ msgstr "Bydd angen i chi ail-gychwyn y Xiphos i’w weld"
-
 #~ msgid ""
 #~ "Unlink of old configuration failed:\n"
 #~ "%s"
 #~ msgstr ""
 #~ "Methu dadgysylltu’r hen ffurfweddiad:\n"
 #~ "%s"
-
 #~ msgid "Show Tabs"
 #~ msgstr "Dangos Tabiau"
-
 #~ msgid "Go to %s"
 #~ msgstr "Ewch i %s"
-
 #~ msgid "The Setup Druid was cancelled."
 #~ msgstr "Canslwyd y Gosodiad Druid"
-
 #~ msgid "Do you wish to set preferences now?"
 #~ msgstr "Ydych chi am osod eich dewisiadau nawr?"
-
 #~ msgid "Old"
 #~ msgstr "Hen"
-
 #~ msgid "Remove/Archive"
 #~ msgstr "Symud/Archifo"
-
 #~ msgid "URL:"
 #~ msgstr "URL:"
-
 #~ msgid "Go to parent"
 #~ msgstr "Ewch i’r rhiant"
-
 #~ msgid "Go to first child"
 #~ msgstr "Ewch i’r plentyn cyntaf"
-
 #~ msgid "Save using the PersistStream interface"
 #~ msgstr "Cadwch gan ddefnyddio’r rhyngwyneb PersistStream"
-
 #~ msgid "Open (PersistFile)"
 #~ msgstr "Agorwch (PersistFile)"
-
 #~ msgid "Open using the PersistFile interface"
 #~ msgstr "Agorwch gan ddefnyddio’r rhyngwyneb PersistFile"
-
 #~ msgid "Save (PersistFile)"
 #~ msgstr "Cadwch (PersistFile)"
-
 #~ msgid "Save using the PersistFile interface"
 #~ msgstr "Cadwch gan ddefnyddio’r rhyngwyneb PersitFile"
-
 #~ msgid "Remove failed"
 #~ msgstr "Methu symud"
-
 #~ msgid "-untitled-"
 #~ msgstr "-di-deitl-"
-
 #~ msgid "Add reference Link"
 #~ msgstr "Ychwanegu y ddolen gyfeiriadol"
-
 #~ msgid "Link text: "
 #~ msgstr "Dolennu Testun: "
-
 #~ msgid "Cut"
 #~ msgstr "Torri"
-
 #~ msgid "Paste"
 #~ msgstr "Gludo"
-
 #~ msgid "Spell Check"
 #~ msgstr "Gwirydd Sillafu"
-
 #~ msgid "Undo"
 #~ msgstr "Dadwneud"
-
 #~ msgid "Replace"
 #~ msgstr "Disodli"
-
 #~ msgid "Link..."
 #~ msgstr "Dolen..."
-
 #~ msgid "Link"
 #~ msgstr "Dolen"
-
 #~ msgid "Paragraph"
 #~ msgstr "Paragraff"
-
 #~ msgid "Page"
 #~ msgstr "Tudalen"
-
 #~ msgid "Rule"
 #~ msgstr "Rheol"
-
 #~ msgid "Cell"
 #~ msgstr "Cell"
-
 #~ msgid "Remove Link"
 #~ msgstr "Symud Dolen"
-
 #~ msgid "Style"
 #~ msgstr "Dull"
-
 #~ msgid "Text Style..."
 #~ msgstr "Math o destun"
-
 #~ msgid "Paragraph Style..."
 #~ msgstr "Math o baragraff"
-
 #~ msgid "Link Style..."
 #~ msgstr "Math o ddolen..."
-
 #~ msgid "Rule Style..."
 #~ msgstr "Math o reol..."
-
 #~ msgid "Image Style..."
 #~ msgstr "Math o ddelwedd"
-
 #~ msgid "Cell Style..."
 #~ msgstr "Math o gell..."
-
 #~ msgid "Table Style..."
 #~ msgstr "Math o dabl..."
-
 #~ msgid "Page Style..."
 #~ msgstr "Math o dudalen"
-
 #~ msgid "Table insert"
 #~ msgstr "Mewnosod tabl"
-
 #~ msgid "Row above"
 #~ msgstr "Rhes uwchben"
-
 #~ msgid "Row below"
 #~ msgstr "Rhes islaw"
-
 #~ msgid "Column before"
 #~ msgstr "Colofn flaenorol"
-
 #~ msgid "Column after"
 #~ msgstr "Colofn wedyn"
-
 #~ msgid "Table delete"
 #~ msgstr "Dileu’r tabl"
-
 #~ msgid "Row"
 #~ msgstr "Rhes"
-
 #~ msgid "Column"
 #~ msgstr "Colofn"
-
 #~ msgid "Check Word Spelling..."
 #~ msgstr "Gwirio’r Sillafu"
-
 #~ msgid "Add Word to"
 #~ msgstr "Ychwanegu gair at"
-
 #~ msgid "Add Word to Dictionary"
 #~ msgstr "Ychwanegu gair at y Geiriadur"
-
 #~ msgid "Ignore Misspelled Word"
 #~ msgstr "Anwybyddu gair a gamsillafwyd"
-
 #~ msgid "Input Methods"
 #~ msgstr "Mewnosod dulliau"
-
 #~ msgid "Replace confirmation"
 #~ msgstr "Disodli’r cadarnhad"
-
 #~ msgid "Replace _All"
 #~ msgstr "Disodli’r _Cyfan"
-
 #~ msgid "_Next"
 #~ msgstr "_Nesaf"
-
 #~ msgid "_Replace"
 #~ msgstr "_Disodli"
-
 #~ msgid "Search _backward"
 #~ msgstr "Chwiliwch yn ol"
-
 #~ msgid "Case _sensitive"
 #~ msgstr "Cadw _at faint llythrennau"
-
 #~ msgid "Replace:"
 #~ msgstr "Disodli:"
-
 #~ msgid "With:"
 #~ msgstr "Gyda:"
-
 #~ msgid "_Backward"
 #~ msgstr "_Yn ol"
-
 #~ msgid "_Regular Expression"
 #~ msgstr "_ Ymadrodd rheolaidd"
-
 #~ msgid "No misspelled word found"
 #~ msgstr "Ni chanfuwyd gair a gamsillafwyd"
-
 #~ msgid "Spell checker"
 #~ msgstr "Gwirydd sillafu"
-
 #~ msgid "Current _Languages"
 #~ msgstr "Ieithoedd _cyfredol"
-
 #~ msgid "Insert"
 #~ msgstr "Mewnosod"
-
 #~ msgid "Delete Note?"
 #~ msgstr "Dileu’r nodyn?"
-
 #~ msgid "Create a new file"
 #~ msgstr "Creu ffeil newydd"
-
 #~ msgid "Print window contents"
 #~ msgstr "Argraffu cynnwys y ffenestr"
-
 #~ msgid "Find in this note"
 #~ msgstr "Canfod yn y nodyn hwn"
-
 #~ msgid "Find and Replace"
 #~ msgstr "Canfod a Disodli"
-
 #~ msgid "Insert image at cursor"
 #~ msgstr "Mewnosod delwedd gyda’r cyrchwr"
-
 #~ msgid "Insert link"
 #~ msgstr "Mewnosod dolen"
-
 #~ msgid "Insert link at cursor"
 #~ msgstr "Mewnosod dolen wrth y cyrchwr"
-
 #~ msgid "Insert rule"
 #~ msgstr "Mewnosod rheol"
-
 #~ msgid "Insert rule at cursor"
 #~ msgstr "Mewnosod rheol wrth y cyrchwr"
-
 #~ msgid "Insert table"
 #~ msgstr "Mewnosod tabl"
-
 #~ msgid "Insert table at cursor"
 #~ msgstr "Mewnosod tabl wrth y cyrchwr"
-
 #~ msgid "Check spelling in this note"
 #~ msgstr "Gwiriwch y sillafu yn y nodyn hwn"
-
 #~ msgid "Preformat"
 #~ msgstr "Rhagfformatio"
-
 #~ msgid "Bulleted List"
 #~ msgstr "Rhestr â bwledi"
-
 #~ msgid "Numbered List"
 #~ msgstr "Rhestr â rhifau"
-
 #~ msgid "Alphabetical List"
 #~ msgstr "Rhestr yn nhrefn yr Wyddor"
-
 #~ msgid "Header 1"
 #~ msgstr "Pennawd 1"
-
 #~ msgid "Header 2"
 #~ msgstr "Pennawd 2"
-
 #~ msgid "Header 3"
 #~ msgstr "Pennawd 3"
-
 #~ msgid "Header 4"
 #~ msgstr "Pennawd 4"
-
 #~ msgid "Header 5"
 #~ msgstr "Pennawd 5"
-
 #~ msgid "Header 6"
 #~ msgstr "Pennawd 6"
-
 #~ msgid "Address"
 #~ msgstr "Cyfeiriad"
-
 #~ msgid "Automatic"
 #~ msgstr "Awtomatig"
-
 #~ msgid "Left align"
 #~ msgstr "Alinio i’r chwith"
-
 #~ msgid "Left justifies the paragraphs"
 #~ msgstr "Unioni’r paragraffau ar y chwith"
-
 #~ msgid "Center"
 #~ msgstr "Canoli"
-
 #~ msgid "Center justifies the paragraphs"
 #~ msgstr "Canoli'r paragraffau"
-
 #~ msgid "Right align"
 #~ msgstr "Alinio i’r dde"
-
 #~ msgid "Right justifies the paragraphs"
 #~ msgstr "Unioni’r paragraffau ar y dde"
-
 #~ msgid "Typewriter"
 #~ msgstr "Teipiadur"
-
 #~ msgid "Bold"
 #~ msgstr "Trwm"
-
 #~ msgid "Makes the text bold"
 #~ msgstr "Troi’r testun yn drwm"
-
 #~ msgid "Makes the text italic"
 #~ msgstr "Troi’r testun yn italeg"
-
 #~ msgid "Underline"
 #~ msgstr "Tanlinellu"
-
 #~ msgid "Underlines the text"
 #~ msgstr "Tanlinellu’r testun"
-
 #~ msgid "Strikeout"
 #~ msgstr "Taro"
-
 #~ msgid "Strikes out the text"
 #~ msgstr "Taro’r testun"
-
 #~ msgid "Unindent"
 #~ msgstr "Symud y mewnoliad"
-
 #~ msgid "Indents the paragraphs less"
 #~ msgstr "Mewnoli’r paragraffau’n llai"
-
 #~ msgid "Indents the paragraphs more"
 #~ msgstr "Mewnoli’r paragraffau’n fwy"
-
 #~ msgid "Save Note"
 #~ msgstr "Cadw’r nodyn"
-
 #~ msgid "Delete Note"
 #~ msgstr "Dileu’r nodyn"
-
 #~ msgid "Genesis"
 #~ msgstr "Genesis"
-
 #~ msgid "Welcome To Xiphos"
 #~ msgstr "Croeso i Xiphos"
-
 #~ msgid "Setup"
 #~ msgstr "Llwytho"
-
 #~ msgid "Xiphos Configuration - Page 1 of 5"
 #~ msgstr "Ffurfweddu Xiphos tud 1 o 5"
-
 #~ msgid ""
 #~ "Since this is the first time you have run Xiphos, this assistant will "
 #~ "guide you through the initial setup by asking a few simple questions.\n"
@@ -5054,84 +4751,60 @@ msgstr "Canllaw Beibl Xiphos"
 #~ "arwain i’w osod ar y cychwyn gan ofyn rhai cwestiynau syml ichi Ar ol "
 #~ "ichi gwblhau’r camau hyn gallwch newid y gosodiadau unrhyw bryd  nes "
 #~ "ymlaen gan ddefnyddio’r deialog dewisiadau personol. "
-
 #~ msgid "Xiphos Configuration - Page 2 of 5"
 #~ msgstr "Ffurfweddu Xiphos tud 2 o 5"
-
 #~ msgid "These values have been detected automatically"
 #~ msgstr "Canfuwyd y gwerthoedd hyn yn awtomatig"
-
 #~ msgid "Your home directory:"
 #~ msgstr "Eich cyfeiriadur cartref"
-
 #~ msgid "Sword"
 #~ msgstr "Sword"
-
 #~ msgid "SWORD version"
 #~ msgstr "Fersiwn SWORD"
-
 #~ msgid "SWORD Directory:"
 #~ msgstr "Cyfeiriadur SWORD"
-
 #~ msgid "Number of Bible text modules:"
 #~ msgstr "Nifer o fodiwlau testunau’r Beibl"
-
 #~ msgid "Number of Commentary modules:"
 #~ msgstr "Nifer o fodiwlau Esboniadau"
-
 #~ msgid "Number of Dictionary/Lexicon modules:"
 #~ msgstr "Nifer o fodiwlau Geiriaduron"
-
 #~ msgid "Xiphos Configuration - Page 3 of 5"
 #~ msgstr "Ffurfweddu Xiphos tud 3 o 5"
-
 #~ msgid "Settings to use when Xiphos starts"
 #~ msgstr "Gosodiadau i’w defnyddio pan fydd Xiphos yn cychwyn"
-
 #~ msgid "Show Bible tabs"
 #~ msgstr "Dangos Tabiau Beibl"
-
 #~ msgid "Show Bible window"
 #~ msgstr "Dangos ffenestr y Beibl"
-
 #~ msgid "Show upper workbook"
 #~ msgstr "Dangos y  llyfr gwaith uchaf"
-
 #~ msgid "Show Dictionary/Lexicon tabs"
 #~ msgstr "Dangos Tabiau Geiriaduron"
-
 #~ msgid "Show lower workbook"
 #~ msgstr "Dangos  y llyfr gwaith islaw"
-
 #~ msgid "Show book tabs"
 #~ msgstr "Dangos tabiau llyfrau"
-
 #~ msgid "Xiphos Configuration - Page 4 of 5"
 #~ msgstr "Ffurfweddu Xiphos tud 4 o 5"
-
 #~ msgid "Text Module"
 #~ msgstr "Modiwl Testun"
-
 #~ msgid "Generic book"
 #~ msgstr "Llyfr generig"
-
 #~ msgid ""
 #~ "Which Greek Lexicon to display in Dictionary/Lexicon Window when a link "
 #~ "or word is clicked"
 #~ msgstr ""
 #~ "Pa lexicon Groeg i ddangos yn y Ffenestr Geiriadur/Lexicon pan fydd "
 #~ "dolenneu air yn cael ei glicio"
-
 #~ msgid ""
 #~ "Which Hebrew Lexicon to display in Dictionary/Lexicon Window when a link "
 #~ "or word is clicked"
 #~ msgstr ""
 #~ "Pa lexicon Hebraeg i dangos yn y Ffenestr Geiriadur/Lexicon pan fydd "
 #~ "dolenneu air yn cael ei glicio"
-
 #~ msgid "Xiphos Configuration - Page 5 of 5"
 #~ msgstr "Ffurfweddu Xiphos 5o5"
-
 #~ msgid ""
 #~ "Thank you for using Xiphos.\n"
 #~ "\n"
@@ -5139,15 +4812,12 @@ msgstr "Canllaw Beibl Xiphos"
 #~ msgstr ""
 #~ "Diolch am ddefnyddio Xiphos.\n"
 #~ "Cliciwch Defnyddio i gau’r ddeialog hon"
-
 #~ msgid "Greed Lexicon"
 #~ msgstr "Lexicon Groeg"
-
 #~ msgid "Include Footnotes"
 #~ msgstr "Cynnwys Troednodiadau"
-
 #~ msgid "Include Morphological Tags"
 #~ msgstr "Cynnwys Tagiau Morffologol"
-
 #~ msgid "Include Strong's Numbers"
 #~ msgstr "Cynnwys Rhifau Strong"
+
