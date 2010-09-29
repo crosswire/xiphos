@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: 3.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-09-20 20:42+0100\n"
-"PO-Revision-Date: 2010-09-29 22:19+0100\n"
+"PO-Revision-Date: 2010-09-29 22:47+0100\n"
 "Last-Translator: Peter von Kaehne <refdoc@crosswire.org>\n"
 "Language-Team: English/GB <en@li.org>\n"
 "Language: \n"
@@ -26,7 +26,7 @@ msgid ""
 "Xiphos failure: \"can't happen\", display_mod: null\n"
 "Please report this. sword_main.cc:set_treekey\n"
 "What were you doing when this occurred?"
-msgstr ""
+msgstr "شکست Xiphos : \"نمی تواند اتفاق می افتد\" ، display_mod : تهی لطفا گزارش این. sword_main.cc : set_treekey چه انجام داده باشید در زمانی که این اتفاق افتاد؟"
 
 #: ../src/backend/sword_main.cc:1083
 msgid "Configuration not found"
@@ -226,7 +226,7 @@ msgid ""
 "The SWORD Project is an effort to create an ever-expanding software package for research and study of God and His Word. The SWORD Project framework allows easy use and study of Bible texts, commentaries, lexicons, dictionaries, and other books. Many frontends are built using this framework. An installed set of books may be shared among all frontends using the framework.\n"
 "\n"
 " Books can be downloaded from the SWORD Project."
-msgstr ""
+msgstr "پروژه شمشیر تلاش برای ایجاد همیشه گسترش بسته نرم افزاری برای تحقیق و مطالعه از خدا و کلام او است. شمشیر چارچوب پروژه اجازه می دهد تا استفاده آسان و مطالعه متون کتاب مقدس ، تفسیر ، واژگان ، فرهنگ لغت ، و کتاب دیگر. frontends بسیاری از آنها ساخته شده است با استفاده از این چارچوب. مجموعه ای از کتاب های نصب شده ممکن است مشترک در میان همه frontends با استفاده از چارچوب. کتاب را می توان پروژه های دریافت شده از شمشیر."
 
 #: ../src/gnome2/about_sword.c:105
 msgid "The SWORD Project"
@@ -522,16 +522,16 @@ msgstr ""
 
 #: ../src/gnome2/gui.c:203
 msgid "BUG! Xiphos is about to crash due to a \"STRDUP\" error."
-msgstr ""
+msgstr "اشکال! Xiphos در مورد به علت تصادف به \"STRDUP\" خطا."
 
 #: ../src/gnome2/gui.c:204
 #: ../src/gnome2/gui.c:239
 msgid "Please report this error to the Xiphos team with:"
-msgstr ""
+msgstr "لطفا گزارش این موضوع را به تیم Xiphos با :"
 
 #: ../src/gnome2/gui.c:238
 msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
-msgstr ""
+msgstr "اشکال! Xiphos در مورد به علت تصادف به \"رشته\" خطا."
 
 #: ../src/gnome2/main_window.c:793
 msgid "Xiphos - Bible Study Software"
@@ -681,7 +681,7 @@ msgid ""
 "<u>Warning</u>: If you live in a persecuted country, use with care.\n"
 "\n"
 "Both this step-by-step instruction dialog and the general introduction dialog may be closed at any time."
-msgstr ""
+msgstr "<b>خوش آمدید به Xiphos.</b> نصب شده وجود دارد هیچ Bibles. به منظور مقداردهی اولیه ، Xiphos نیازهای حداقل یک ماژول کتاب مقدس است. برای تسهیل این ، مدیریت ماژول باز شده است به طوری که شما ممکن است یک یا چند Bibles ، نصب یا از یک سری ماژول های محلی (سی دی رام ، درایو فلش) و یا بر روی شبکه از CrossWire کتاب مقدس جامعه. لطفا به این گام به گام دستورالعمل ها ، و به کلی مدیریت ماژول کلی است که نیز باز -- <u>محلی برای نصب :</u> در <i>منابع ماژول : اضافه کردن / حذف</i> ، اضافه کردن یک نام جدید پوشه های محلی که از ماژول ها را می توان یافت (. این جایی است که پوشه ها وجود دارد به نام <i>mods.d</i> و <i>ماژول ها :.)</i> -- در <i>ماژول منابع را انتخاب کنید</i> ، با کلیک بر روی \"محلی\" را فشار دهید ، انتخاب کنید و پوشه خود را از pulldown -- <u>برای نصب از شبکه CrossWire :</u> در <i>منابع ماژول : را انتخاب کنید</i> ، کلیک کنید از راه دور \"را فشار دهید انتخاب کنید و از CrossWire pulldown.\" -- با کلیک بر روی \"تازه\" را کلیک کنید در پایین -- <u>در هر دو صورت :</u> در <i>ماژول : / به روز رسانی</i> ، انتخاب و Bibles دیگر از ماژول های خود را. اولویت <i>نصب</i> -- بر روی دکمه \"نصب\" --. بستن مدیریت ماژول هنگامی که شما انجام می شود : اگر شما <u>اخطار</u> در کشور زندگی می کنند مورد آزار و اذیت ، استفاده با دقت هم هر دو این دستور العمل گام به گام ، با گفتگو و معرفی کلی گفت و گو ممکن است هیچ در بسته می شود."
 
 #: ../src/gnome2/mod_mgr.c:183
 msgid "Remove these modules?"
@@ -1128,7 +1128,7 @@ msgstr "به سمت اولین بخش فرعی به پیش برو"
 #: ../src/gnome2/navbar_versekey_editor.c:876
 #: ../src/gnome2/navbar_versekey_parallel.c:816
 msgid "Synchronize this window's scrolling with the main window"
-msgstr ""
+msgstr "پیمایش همزمان سازی این پنجره را با پنجره اصلی"
 
 #: ../src/gnome2/parallel_dialog.c:382
 #: ../src/gnome2/preferences_dialog.c:1725
@@ -1289,28 +1289,28 @@ msgid ""
 "Search for verses that contain...\n"
 "\n"
 "loved one\n"
-"\t \"loved\" or \"one\"\n"
-"\tThis is the same as searching for loved OR one\n"
+"	 \"loved\" or \"one\"\n"
+"	This is the same as searching for loved OR one\n"
 "\"loved one\"\n"
-"\tThe phrase \"loved one\"\n"
+"	The phrase \"loved one\"\n"
 "love*\n"
-"\tA word starting with \"love\"\n"
-"\t(love OR loves OR loved OR etc...)\n"
+"	A word starting with \"love\"\n"
+"	(love OR loves OR loved OR etc...)\n"
 "loved AND one\n"
-"\tThe word \"loved\" and the word \"one\"\n"
-"\t&amp;&amp; can be used in place of AND\n"
+"	The word \"loved\" and the word \"one\"\n"
+"	&amp;&amp; can be used in place of AND\n"
 "+loved one\n"
-"\tVerses that <b>must</b> contain \"loved\" and <b>may</b> contain \"one\"\n"
+"	Verses that <b>must</b> contain \"loved\" and <b>may</b> contain \"one\"\n"
 "loved NOT one\n"
-"\t\"loved\" but not \"one\"\n"
+"	\"loved\" but not \"one\"\n"
 "(loved one) AND God\n"
-"\t\"loved\" or \"one\" and \"God\"\n"
+"	\"loved\" or \"one\" and \"God\"\n"
 "lemma:G2316\n"
-"\tSearch for the Strong's Greek (\"G\") word number 2316.\n"
-"\tAlso, select Strong's display on the <i>Attribute Search</i> tab.\n"
+"	Search for the Strong's Greek (\"G\") word number 2316.\n"
+"	Also, select Strong's display on the <i>Attribute Search</i> tab.\n"
 "\n"
 "For complete details, search the web for \"lucene search syntax\"."
-msgstr ""
+msgstr "<b>مروری بر نحو برای بهینه سازی \"lucene\" جستجو</b> جستجو برای آیات که شامل... دوست داشتم یک \"دوست\" و یا \"یک\" این همان جستجو برای دوست یا یکی \"یک دوست\" عبارت \"دوست داشتم یک\" * عشق کلمه شروع با \"عشق\" (عشق یا دوست دارد یا دوست یا غیره..) و دوست داشتنی یک کلمه \"عاشق\" و کلمه \"یک\" و و می تواند و مورد استفاده در محل + دوست داشتم یک آیه است که <b>باید</b> باشد \"عاشق\" و <b>ممکن است</b> شامل \"یک\" دوست نه یک \"عاشق\" اما نه \"یک\" (دوست داشتم یک) و خدا \"دوست\" و یا \"یک\" و \"خدا\" لم : جستجو برای قوی است یونانی گ \") واژه شماره 2316\" (. G2316 همچنین ، را انتخاب کنید در صفحه نمایش قوی در سربرگ <i>جستجو صفت.</i> برای کسب اطلاعات کامل ، جستجو در وب برای \"نحو جستجو lucene\"."
 
 #. *****************************************************************************
 #. * Name
@@ -1339,7 +1339,7 @@ msgid ""
 "* Footnote text is searched just like regular text.\n"
 "* Strong's words are specified as a prefix letter H or G (Hebrew or Greek) and the numeric word identifier, e.g. G2316 to find \"θεός\" (\"God\").\n"
 "* Morphological tags are identified literally, e.g. N-ASF for \"noun, accusative singular feminine\" -- see the Robinson module for details."
-msgstr ""
+msgstr "<b>ویژگی های مبتنی بر جستجو</b> جستجو برای محتوای متن موجود در خارج از نشانه گذاری اصلی. صفات هستند زیرنویس ، در شماره های قوی ، و نمادها مورفولوژیکی. آگاه باشید که بیشتر جستجو مانند جاری می تواند انجام شود سریع تر از طریق بهینه سازی شده \"lucene\" جستجو با استفاده از مقدماتی واژه. برای استفاده از جستجوهای صفت ، شما باید برگه انتخاب مناسب دکمه <i>جستجو صفت</i> * متن پانویس است جستجو درست مثل متن های عادی دارد. * در کلمات قوی هستند شناسه مشخص به عنوان پیشوند نامه ارتفاع و یا گرم (به عبری یا یونانی) و عددی کلمه ، به عنوان مثال G2316 برای پیدا کردن \"θεός\" (\"خدا\") * برچسب ها تحلیل لغوی شناسایی می شوند به معنای واقعی کلمه ، به عنوان مثال ازت - ASF برای \"اسم ، حالت مفعولی مفرد زنانه\" -- به ماژول رابینسون برای جزئیات بیشتر."
 
 #: ../src/gnome2/search_sidebar.c:184
 msgid ""
@@ -1423,7 +1423,7 @@ msgstr "حمایت شده توسط پروژۀ سورد"
 
 #: ../src/gnome2/tabbed_browser.c:364
 msgid "Can't create tabs dir."
-msgstr ""
+msgstr "آیا می توانم ایجاد زبانه دیر نیست."
 
 #: ../src/gnome2/treekey-editor.c:133
 #: ../src/gnome2/treekey-editor.c:192
@@ -1956,11 +1956,11 @@ msgstr "طریق قابل ایجاد نیست. "
 msgid ""
 "Empty settings file -- backup recovery attempted.\n"
 "Some information may have been lost."
-msgstr ""
+msgstr "خالی فایل تنظیمات -- بازیابی پشتیبان اقدام از دست داد. بعضی از اطلاعات ممکن است."
 
 #: ../src/main/settings.c:181
 msgid "Empty settings file -- no backup?!? Information lost!"
-msgstr ""
+msgstr "تنظیمات فایل خالی -- بدون پشتیبان؟!؟ اطلاعات از دست رفته!"
 
 #: ../src/main/settings.c:209
 msgid ""
@@ -2034,7 +2034,7 @@ msgstr ""
 
 #: ../src/main/sword.cc:651
 msgid "Book names and menus may not be translated."
-msgstr ""
+msgstr "نام کتاب و منوها را نمی توان ترجمه شده است."
 
 #: ../src/main/sword.cc:1247
 msgid "Daily devotional was requested, but there are none installed."
@@ -2049,7 +2049,7 @@ msgid ""
 "The module is locked, meaning that the content is encrypted by its publisher, and you must enter its key in order for the content to become useful.  This key should have been received by you on the web page which confirmed your purchase, or perhaps sent via email after purchase.\n"
 "\n"
 "Please enter the key in the dialog."
-msgstr ""
+msgstr "<b>موضوع قفل شده ماژول <u>شما</u></b> <u>در حال باز یک ماژول است که نیاز به یک <i>کلید.</i></u> ماژول قفل شده است ، به این معنی که محتوای رمزگذاری شده است توسط ناشر آن ، و شما باید منظور خود را وارد کنید کلیدی را در برای مطالب برای تبدیل شدن مفید است. این کلید باید گفت و گو شده است دریافت شده توسط شما در صفحه وب خود را تایید کرد که خرید ، و یا شاید پس از ارسال از طریق ایمیل خرید لطفا وارد کلیدی در."
 
 #: ../src/main/tab_history.c:219
 msgid "Clear History"
@@ -2162,10 +2162,12 @@ msgid ""
 "Save of settings failed! stat %d, size %d\n"
 "%s"
 msgstr ""
+"ذخیره تنظیمات شکست خورد! آمار %d, %d\n"
+"%s"
 
 #: ../src/main/xml.c:1216
 msgid "Attempting to revert to previous save."
-msgstr ""
+msgstr "تلاش برای برگرداندن به نجات قبلی."
 
 #: ../ui/bookmarks.glade.h:1
 msgid "Add Bookmark"
@@ -2467,15 +2469,15 @@ msgstr "<i>محدودۀ سیستم، برای تمام کاربران:</i>"
 
 #: ../ui/module-manager.glade.h:11
 msgid "Add a custom remote install source. You must know its hostname and the folder where its repository lives."
-msgstr ""
+msgstr "افزودنیهای سفارشی منبع نصب از راه دور. شما باید نام هاست خود و پوشه که در آن زندگی می کند مخزن آن می دانم."
 
 #: ../ui/module-manager.glade.h:12
 msgid "Add a local folder as an install source, typically on a cdrom or flash drive.  Such a folder contains subfolders \"mods.d\" and \"modules\"."
-msgstr ""
+msgstr "اضافه کردن پوشه های محلی به عنوان منبع نصب ، به طور معمول بر روی یک سی دی رام و یا فلش درایو. چنین پوشه حاوی پوشه \"mods.d\" و \"ماژول\" # :."
 
 #: ../ui/module-manager.glade.h:13
 msgid "Build an index of the selected modules, for optimized (\"lucene\") searching."
-msgstr ""
+msgstr "ساخت شاخص از ماژول انتخاب شده ، برای بهینه سازی (\"lucene\") جستجو."
 
 #: ../ui/module-manager.glade.h:14
 msgid "Continue"
@@ -2508,7 +2510,7 @@ msgstr "آیا می‏خواهید این عناوین نصب گردند؟"
 
 #: ../ui/module-manager.glade.h:21
 msgid "Load and synchronize the standard set of known repositories, as maintained at crosswire.org, with your current remote sources."
-msgstr ""
+msgstr "بار و همزمان مجموعه استاندارد از مخازن شناخته می شود ، همان طور که در crosswire.org حفظ ، با منابع موجود خود را از راه دور."
 
 #: ../ui/module-manager.glade.h:22
 msgid "Local"
@@ -2524,11 +2526,11 @@ msgstr "مدیر مدول"
 
 #: ../ui/module-manager.glade.h:25
 msgid "Open a brief introductory explanation of how the Module Manager works."
-msgstr ""
+msgstr "باز توضیح مقدماتی مختصری از نحوه مدیریت ماژول کار می کند."
 
 #: ../ui/module-manager.glade.h:26
 msgid "Refresh Xiphos' knowledge of what modules are available at the selected remote repository"
-msgstr ""
+msgstr "تازه کردن دانش Xiphos &#39;از آنچه ماژول در دسترس هستند در انتخاب مخزن از راه دور"
 
 #: ../ui/module-manager.glade.h:27
 msgid "Remote"
@@ -2540,7 +2542,7 @@ msgstr "منبع راه‏ دور را حذف کنید"
 
 #: ../ui/module-manager.glade.h:29
 msgid "Remove one of your local folders as an install source."
-msgstr ""
+msgstr "گزارش یکی از پوشه های محلی خود را به عنوان منبع نصب."
 
 #: ../ui/module-manager.glade.h:30
 msgid "Remove the selected modules from your system"
@@ -2672,7 +2674,7 @@ msgstr "اضافه کردن مدول‏ها"
 
 #: ../ui/prefs.glade.h:19
 msgid "All displayed font sizes are relative to this choice"
-msgstr ""
+msgstr "نمایش تمام اندازه فونت ها نسبت به این انتخاب"
 
 #: ../ui/prefs.glade.h:20
 #, fuzzy
@@ -2744,7 +2746,7 @@ msgstr "انتخاب کتب تفاسیر"
 
 #: ../ui/prefs.glade.h:39
 msgid "Commonly -1, to make verse numbers less obtrusive"
-msgstr ""
+msgstr "معمولا -1 ، به تعداد آیه کمتر مزاحم"
 
 #: ../ui/prefs.glade.h:40
 msgid "Cover"
@@ -2864,7 +2866,7 @@ msgstr "آیه فعلی را مشخص کن"
 
 #: ../ui/prefs.glade.h:68
 msgid "If you have set a preferred daily devotion module, its entry for today will be shown at startup."
-msgstr ""
+msgstr "اگر شما مجموعه ای ترجیح ماژول روزانه خود گذشتگی ، خود را برای ورود به امروز خواهد بود در راه اندازی نشان داده شده است."
 
 #: ../ui/prefs.glade.h:69
 #, fuzzy
@@ -2882,11 +2884,11 @@ msgstr "پیوندها"
 
 #: ../ui/prefs.glade.h:72
 msgid "Make double-click of a word always use default dictionary instead of dictionary currently displayed"
-msgstr ""
+msgstr "را دوبار کلیک کنید تا یک کلمه همیشه به طور پیش فرض به جای استفاده از فرهنگ لغت فرهنگ لغت در حال حاضر نمایش داده شده"
 
 #: ../ui/prefs.glade.h:73
 msgid "Make journals/prayer lists available"
-msgstr ""
+msgstr "مجلات را تشکیل می دهند / لیست نماز در دسترس"
 
 #: ../ui/prefs.glade.h:74
 #: ../ui/search-dialog.glade.h:61
@@ -2907,11 +2909,11 @@ msgstr "مدولهای موازی"
 
 #: ../ui/prefs.glade.h:78
 msgid "Name and size choice for any module in a given language; still overridden by a specific choice on a particular module"
-msgstr ""
+msgstr "نام و نام خانوادگی و اندازه انتخاب برای هر ماژول در زبان داده ، هنوز لغو های انتخاب خاص در یک ماژول خاص"
 
 #: ../ui/prefs.glade.h:79
 msgid "Normal Text"
-msgstr ""
+msgstr "متن معمولی"
 
 #: ../ui/prefs.glade.h:80
 #: ../ui/search-dialog.glade.h:70
@@ -2962,7 +2964,7 @@ msgstr "انتخاب شاخه"
 
 #: ../ui/prefs.glade.h:93
 msgid "Select a particular language for interface display, other than your usual setting"
-msgstr ""
+msgstr "انتخاب زبان رابط خاص برای نمایش ، به غیر از تنظیمات معمول خود را"
 
 #: ../ui/prefs.glade.h:94
 msgid "Show Daily Devotion at start up"
@@ -2974,7 +2976,7 @@ msgstr "لوگو را در شروع نشان بده"
 
 #: ../ui/prefs.glade.h:96
 msgid "Single selection of Bible+commentary+book+dictionary, or many sets of such selections in a tabbed interface"
-msgstr ""
+msgstr "انتخاب تنها از کتاب مقدس + تفسیر + کتاب + فرهنگ لغت ، و یا مجموعه های بسیاری از جمله انتخاب شده در یک رابط جدولبندیشده"
 
 #: ../ui/prefs.glade.h:97
 msgid "Special Locale (requires restart)"
@@ -3015,7 +3017,7 @@ msgstr "انتخاب گزینۀ جستجوی بخشی"
 
 #: ../ui/prefs.glade.h:107
 msgid "Use the verse list for Bible cross-references instead of the previewer"
-msgstr ""
+msgstr "از لیست آیه برای انجیل متقابل مراجع به جای previewer"
 
 #: ../ui/prefs.glade.h:108
 msgid "Verse Number"
@@ -3262,11 +3264,11 @@ msgstr "دکمۀ محدودۀ جدید"
 
 #: ../ui/search-dialog.glade.h:71
 msgid "Open a brief explanation of attribute-based searches."
-msgstr ""
+msgstr "باز توضیح مختصری از ویژگی های مبتنی بر جستجو."
 
 #: ../ui/search-dialog.glade.h:72
 msgid "Open a brief explanation of the syntax used for optimized \"lucene\" searches."
-msgstr ""
+msgstr "باز توضیح مختصری از گرامر استفاده شده برای بهینه سازی \"lucene\" جستجو."
 
 #: ../ui/search-dialog.glade.h:73
 msgid "Open a dialog to select modules to add to the list"
@@ -3479,7 +3481,7 @@ msgstr "این آیه را قویا مشخص کن"
 
 #: ../ui/xi-menus.glade.h:15
 msgid "Bring the simple sidebar search forward"
-msgstr ""
+msgstr "را بدنبال نوار ساده رو به جلو"
 
 #: ../ui/xi-menus.glade.h:16
 msgid "Browse in BibleMap.org"
@@ -3547,7 +3549,7 @@ msgstr "نمایش تیتر فصل"
 
 #: ../ui/xi-menus.glade.h:33
 msgid "Display verse numbers in the text"
-msgstr ""
+msgstr "تعداد نمایش آیه در متن"
 
 #: ../ui/xi-menus.glade.h:34
 msgid "Doublespace"
@@ -3604,7 +3606,7 @@ msgstr "بخش پیوندگاه"
 
 #: ../ui/xi-menus.glade.h:54
 msgid "Learn about The Sword Project, of which Xiphos is one application"
-msgstr ""
+msgstr "اطلاعات در مورد پروژه شمشیر ، که Xiphos است یک نرم افزار"
 
 #: ../ui/xi-menus.glade.h:55
 msgid "Learn about Xiphos"
@@ -3624,7 +3626,7 @@ msgstr "به گزیده نگاه کن"
 
 #: ../ui/xi-menus.glade.h:60
 msgid "Make all tabs' Bibles navigate together"
-msgstr ""
+msgstr "را Bibles تمام افزودنیهای زبانهها &#39;حرکت به هم"
 
 #: ../ui/xi-menus.glade.h:62
 msgid "Monthly"
@@ -3644,15 +3646,15 @@ msgstr "یادداشت مطالعه‌ را باز کن"
 
 #: ../ui/xi-menus.glade.h:68
 msgid "Open a browser on an interface to live IRC chat"
-msgstr ""
+msgstr "باز کردن مرورگر در رابط کاربری را با زندگی آیآرسی چت"
 
 #: ../ui/xi-menus.glade.h:69
 msgid "Open a browser on our bug tracker"
-msgstr ""
+msgstr "باز کردن مرورگر اشکال در ردگیر ما"
 
 #: ../ui/xi-menus.glade.h:70
 msgid "Open a browser on the users' mailing list webpage"
-msgstr ""
+msgstr "باز در مرورگر کاربران وب لیست پستی"
 
 #: ../ui/xi-menus.glade.h:71
 msgid "Open a saved tab settings collection"
@@ -3677,7 +3679,7 @@ msgstr "در بخشی جدید باز کن"
 #: ../ui/xi-menus.glade.h:76
 msgid ""
 "Open selected module in a\n"
-"\tseparate ['dialog'] window"
+"	separate ['dialog'] window"
 msgstr "عنون باز کن در پنجاره جدید"
 
 #: ../ui/xi-menus.glade.h:78
@@ -3686,7 +3688,7 @@ msgstr "مدول انتخاب شده را در بخشی جدید باز کن"
 
 #: ../ui/xi-menus.glade.h:79
 msgid "Open the advanced search dialog, to run complex queries"
-msgstr ""
+msgstr "باز کردن پنجره جستجوی پیشرفته ، برای اجرای نمایش داده شد پیچیده"
 
 #: ../ui/xi-menus.glade.h:80
 msgid "Open the help viewer on the Xiphos manual"
@@ -3710,11 +3712,11 @@ msgstr "زمینه‌ی"
 
 #: ../ui/xi-menus.glade.h:85
 msgid "Preview _Daily Devotion"
-msgstr ""
+msgstr "صمیمیت پیشنمایش _Daily"
 
 #: ../ui/xi-menus.glade.h:87
 msgid "Provide the full-chapter parallel Bible window as another tab"
-msgstr ""
+msgstr "فراهم می کند که تمام پنجره های موازی فصل کتاب مقدس به عنوان یکی دیگر از تب"
 
 #: ../ui/xi-menus.glade.h:88
 msgid "Read Selection Aloud"
@@ -3758,7 +3760,7 @@ msgstr "این نتایج را بمدول یک علامت در پروندۀ من
 
 #: ../ui/xi-menus.glade.h:99
 msgid "Save this collection of tab settings"
-msgstr ""
+msgstr "ذخیره سازی این مجموعه ای از تنظیمات زبانه"
 
 #: ../ui/xi-menus.glade.h:100
 msgid "Scripture Cross-references"
@@ -3766,7 +3768,7 @@ msgstr "ارجاعات کتاب‏مقدس"
 
 #: ../ui/xi-menus.glade.h:102
 msgid "Select Previewer position between sidebar or beneath Bible"
-msgstr ""
+msgstr "انتخاب موقعیت Previewer بین نوار و یا در زیر کتاب مقدس"
 
 #: ../ui/xi-menus.glade.h:103
 msgid "Show Parallel View in a _Tab"
@@ -3782,7 +3784,7 @@ msgstr "شماره‌های آیات را نشان بده"
 
 #: ../ui/xi-menus.glade.h:106
 msgid "Show today's entry from your selected daily devotional in the previewer"
-msgstr ""
+msgstr "ورود به امروز نشان از انتخاب شما صمیمانه روزانه در previewer"
 
 #: ../ui/xi-menus.glade.h:107
 msgid "Simple"
@@ -3794,7 +3796,7 @@ msgstr "موضوع"
 
 #: ../ui/xi-menus.glade.h:111
 msgid "Turn on text-to-speech reading of Bible verses as they are selected"
-msgstr ""
+msgstr "روشن کردن متن به گفتار خواندن آیات کتاب مقدس از آنها به عنوان انتخاب می شوند"
 
 #: ../ui/xi-menus.glade.h:112
 msgid "Unlock This Module"
@@ -3906,11 +3908,11 @@ msgstr "_ستون جانبی نمایش بده/نده"
 
 #: ../ui/xi-export-bookmarks.glade.h:1
 msgid "<b>Export to:</b>"
-msgstr ""
+msgstr "<b>صادرات به :</b>"
 
 #: ../ui/xi-export-bookmarks.glade.h:2
 msgid "Export Bookmark Folder"
-msgstr ""
+msgstr "صادرات پوشه چوب"
 
 #: ../ui/xi-export-bookmarks.glade.h:3
 msgid "Html"
@@ -3918,15 +3920,15 @@ msgstr "‌HTML"
 
 #: ../ui/xi-export-bookmarks.glade.h:4
 msgid "Include Bible text"
-msgstr ""
+msgstr "شامل متن کتاب مقدس"
 
 #: ../ui/xi-export-bookmarks.glade.h:5
 msgid "Plain text"
-msgstr ""
+msgstr "متن ساده"
 
 #: ../ui/xi-export-bookmarks.glade.h:6
 msgid "Xiphos bookmarks"
-msgstr ""
+msgstr "نشانه Xiphos"
 
 #: ../ui/xi-export-bookmarks.glade.h:7
 msgid "gtk-cancel"
