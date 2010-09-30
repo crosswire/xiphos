@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: Xiphos 3.1.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-09-20 20:42+0100\n"
-"PO-Revision-Date: 2010-09-30 12:29+0200\n"
+"PO-Revision-Date: 2010-09-30 15:22+0200\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: emacs + po-mode <gnomefr@traduc.org>\n"
 "Language: \n"
@@ -1714,11 +1714,11 @@ msgstr "Décembre"
 
 #: ../src/main/prayerlists.cc:124
 msgid "Growth"
-msgstr "Croissance spirituelle"
+msgstr "Croissance"
 
 #: ../src/main/prayerlists.cc:125
 msgid "<b>For Growth</b><br/>"
-msgstr "<b>Pour la croissance spirituelle</b><br/>"
+msgstr "<b>Pour la croissance</b><br/>"
 
 #: ../src/main/prayerlists.cc:126 ../src/main/prayerlists.cc:383
 msgid "Salvation"
@@ -1819,33 +1819,33 @@ msgstr ""
 
 #: ../src/main/prayerlists.cc:326
 msgid "A basic prayer list. \\par\\par Module created by Xiphos."
-msgstr "Une liste simple. \\par\\par Module crée par Xiphos."
+msgstr "Une simple liste de prières. \\par\\par Module crée par Xiphos."
 
 #: ../src/main/prayerlists.cc:327
 msgid "BasicPrayerList"
-msgstr "MaListeDeBase"
+msgstr "MaSimpleListeDePrieres"
 
 #: ../src/main/prayerlists.cc:341
 msgid "MyPrayerList"
-msgstr "MaListe"
+msgstr "MaListeDePrieres"
 
 #: ../src/main/prayerlists.cc:342
 msgid ""
 "<b>People:</b><br/>Bob<br/>Sam<br/>Sue<br/><br/><b>Church:</b><br/>pews<br/"
 ">fellowship<br/>Bibles for missionaries<br/><br/><br/>"
-msgstr "<b>Personnes:</b><br/>Jean<br/>Pierre<br/>Paul<br/><br/><b>Assemblée:</b><br/>Participants<br/>Fonctionnement<br/>Missions<br/><br/><br/>"
+msgstr "<b>Personnes:</b><br/>Personne 1<br/>Personne 2<br/>Personne 3<br/><br/><b>Assemblée:</b><br/>Participants<br/>Fonctionnement<br/>Missions<br/><br/><br/>"
 
 #: ../src/main/prayerlists.cc:368
 msgid "A subject-based prayer list. \\par\\par Module created by Xiphos."
-msgstr "Liste ordonnée par sujets. \\par\\par Module crée par Xiphos."
+msgstr "Liste de prières organisée par sujets. \\par\\par Module crée par Xiphos."
 
 #: ../src/main/prayerlists.cc:369
 msgid "SubjectPrayerList"
-msgstr "MaListeParSujets"
+msgstr "MaListeDePrieresParSujets"
 
 #: ../src/main/prayerlists.cc:384
 msgid "Bob<br/>Sam<br/>Sue<br/>John<br/>"
-msgstr "Jean<br/>Pierre<br/>Paul<br/>Esther<br/>"
+msgstr "Personne 1<br/>Personne 2<br/>Personne 3<br/>Personne 4<br/>"
 
 #: ../src/main/prayerlists.cc:385
 msgid "Spiritual Growth"
@@ -1861,11 +1861,11 @@ msgstr "Personne 1<br/>Personne 2<br/>Personne 3<br/>"
 
 #: ../src/main/prayerlists.cc:414
 msgid "A monthly prayer list. \\par\\par Module created by Xiphos."
-msgstr "Liste mensuelle. \\par\\par Module crée par Xiphos."
+msgstr "Liste de prières mensuelle. \\par\\par Module crée par Xiphos."
 
 #: ../src/main/prayerlists.cc:415
 msgid "MonthlyPrayerList"
-msgstr "MaListeMensuelle"
+msgstr "MaListeDePrieresMensuelle"
 
 #: ../src/main/prayerlists.cc:466
 msgid "A daily journal. \\par\\par Module created by Xiphos."
@@ -1877,11 +1877,11 @@ msgstr "JournalQuotidien"
 
 #: ../src/main/prayerlists.cc:531
 msgid "An outlined topic (e.g. sermon). \\par\\par Module created by Xiphos."
-msgstr "Une note structurée (ex sermon). \\par\\par Module crée par Xiphos."
+msgstr "Thême structuré (ex message). \\par\\par Module crée par Xiphos."
 
 #: ../src/main/prayerlists.cc:532
 msgid "OutlinedTopic"
-msgstr "NoteStructurée"
+msgstr "ThemeStructure"
 
 #: ../src/main/prayerlists.cc:546
 msgid "Major Topic A"
@@ -3568,7 +3568,7 @@ msgstr "Applique un contraste élevé au verset en cours"
 
 #: ../ui/xi-menus.glade.h:15
 msgid "Bring the simple sidebar search forward"
-msgstr "Met en avant la recherche simple du volet latéral"
+msgstr "Place en avant la recherche simple du volet latéral"
 
 #: ../ui/xi-menus.glade.h:16
 msgid "Browse in BibleMap.org"
@@ -3600,19 +3600,19 @@ msgstr "Crée un nouveau journal mensuel"
 
 #: ../ui/xi-menus.glade.h:24
 msgid "Create a new outlined topic"
-msgstr "Crée un nouveau sujet structuré"
+msgstr "Crée un nouveau thême structuré"
 
 #: ../ui/xi-menus.glade.h:25
 msgid "Create a new simple prayer list"
-msgstr "Crée une nouvelle liste de prières"
+msgstr "Crée une nouvelle simple liste de prières"
 
 #: ../ui/xi-menus.glade.h:26
 msgid "Create a new subject prayer list"
-msgstr "Crée un nouveau sujet liste de prières"
+msgstr "Crée une nouvelle liste de prières organisée par sujets"
 
 #: ../ui/xi-menus.glade.h:27
 msgid "Daily"
-msgstr "Quotidien"
+msgstr "Journal quotidien"
 
 #: ../ui/xi-menus.glade.h:28
 msgid "Delete Item"
@@ -3712,11 +3712,11 @@ msgstr "Définition du mot sélectionné"
 
 #: ../ui/xi-menus.glade.h:60
 msgid "Make all tabs' Bibles navigate together"
-msgstr "Fait naviguer tous les onglets Bible simultanément"
+msgstr "Fait naviguer tous les onglets de texte biblique simultanément"
 
 #: ../ui/xi-menus.glade.h:62
 msgid "Monthly"
-msgstr "Journal mensuel"
+msgstr "Liste de prières mensuelle"
 
 #: ../ui/xi-menus.glade.h:65
 msgid "Note"
@@ -3792,11 +3792,11 @@ msgstr "Ouvre ce signet dans un nouvel onglet"
 
 #: ../ui/xi-menus.glade.h:83
 msgid "Operate the sidebar as a separate window"
-msgstr "Utiliser le volet latéral dans une fenêtre séparée"
+msgstr "Positionne le volet latéral dans une fenêtre séparée"
 
 #: ../ui/xi-menus.glade.h:84
 msgid "Outlined"
-msgstr "Structuré"
+msgstr "Thême structuré"
 
 #: ../ui/xi-menus.glade.h:85
 msgid "Preview _Daily Devotion"
@@ -3804,7 +3804,7 @@ msgstr "Aperçu du calendrier biblique"
 
 #: ../ui/xi-menus.glade.h:87
 msgid "Provide the full-chapter parallel Bible window as another tab"
-msgstr ""
+msgstr "Affiche la vue parallèle entre textes bibliques dans un nouvel onglet"
 
 #: ../ui/xi-menus.glade.h:88
 msgid "Read Selection Aloud"
@@ -3849,7 +3849,7 @@ msgstr "Enregistre ces résultats sous un seul signet"
 
 #: ../ui/xi-menus.glade.h:99
 msgid "Save this collection of tab settings"
-msgstr ""
+msgstr "Enregistre cette configuration d'onglets"
 
 #: ../ui/xi-menus.glade.h:100
 msgid "Scripture Cross-references"
@@ -3857,7 +3857,7 @@ msgstr "Références croisées de l'Écriture"
 
 #: ../ui/xi-menus.glade.h:102
 msgid "Select Previewer position between sidebar or beneath Bible"
-msgstr ""
+msgstr "Positionne le volet Aperçu dans le volet latéral ou sous le texte biblique"
 
 #: ../ui/xi-menus.glade.h:103
 msgid "Show Parallel View in a _Tab"
@@ -3873,7 +3873,7 @@ msgstr "Affiche les numéros de verset"
 
 #: ../ui/xi-menus.glade.h:106
 msgid "Show today's entry from your selected daily devotional in the previewer"
-msgstr ""
+msgstr "Affiche le texte d'aujourd'hui du calendrier biblique dans le volet Aperçu"
 
 #: ../ui/xi-menus.glade.h:107
 msgid "Simple"
@@ -3885,7 +3885,7 @@ msgstr "Liste ordonnée par sujet"
 
 #: ../ui/xi-menus.glade.h:111
 msgid "Turn on text-to-speech reading of Bible verses as they are selected"
-msgstr ""
+msgstr "Active la lecture audio par synthèse vocale des textes bibliques lors de leur sélection"
 
 #: ../ui/xi-menus.glade.h:112
 msgid "Unlock This Module"
