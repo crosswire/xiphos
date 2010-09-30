@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: Xiphos 3.1.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-09-20 20:42+0100\n"
-"PO-Revision-Date: 2010-08-24 21:14+0200\n"
+"PO-Revision-Date: 2010-09-30 12:29+0200\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: emacs + po-mode <gnomefr@traduc.org>\n"
 "Language: \n"
@@ -1717,99 +1717,88 @@ msgid "Growth"
 msgstr "Croissance spirituelle"
 
 #: ../src/main/prayerlists.cc:125
-#, fuzzy
 msgid "<b>For Growth</b><br/>"
-msgstr "<b>Pour la croissance spirituelle</b><br>"
+msgstr "<b>Pour la croissance spirituelle</b><br/>"
 
 #: ../src/main/prayerlists.cc:126 ../src/main/prayerlists.cc:383
 msgid "Salvation"
 msgstr "Salut"
 
 #: ../src/main/prayerlists.cc:127
-#, fuzzy
 msgid "<b>For Salvation</b><br/>"
-msgstr "<b>Pour le salut</b><br>"
+msgstr "<b>Pour le salut</b><br/>"
 
 #: ../src/main/prayerlists.cc:128 ../src/main/prayerlists.cc:387
 msgid "Health"
 msgstr "Guérison"
 
 #: ../src/main/prayerlists.cc:129
-#, fuzzy
 msgid "<b>For Health</b><br/>"
-msgstr "<b>Pour la guérison</b><br>"
+msgstr "<b>Pour la guérison</b><br/>"
 
 #: ../src/main/prayerlists.cc:130
 msgid "Misc"
 msgstr "Divers"
 
 #: ../src/main/prayerlists.cc:131
-#, fuzzy
 msgid "<b>Miscellaneous</b><br/>"
-msgstr "<b>Divers</b><br>"
+msgstr "<b>Divers</b><br/>"
 
 #: ../src/main/prayerlists.cc:139
 msgid "Point x"
 msgstr "Point x"
 
 #: ../src/main/prayerlists.cc:140
-#, fuzzy
 msgid "<b>(x)</b><br/>"
-msgstr "<b>(x)</b><br>"
+msgstr "<b>(x)</b><br/>"
 
 #: ../src/main/prayerlists.cc:141
 msgid "Point y"
 msgstr "Point y"
 
 #: ../src/main/prayerlists.cc:142
-#, fuzzy
 msgid "<b>(y)</b><br/>"
-msgstr "<b>(y)</b><br>"
+msgstr "<b>(y)</b><br/>"
 
 #: ../src/main/prayerlists.cc:143
 msgid "Point z"
 msgstr "Point z"
 
 #: ../src/main/prayerlists.cc:144
-#, fuzzy
 msgid "<b>(z)</b><br/>"
-msgstr "<b>(z)</b><br>"
+msgstr "<b>(z)</b><br/>"
 
 #: ../src/main/prayerlists.cc:152
 msgid "Minor Topic 1"
 msgstr "Section 1"
 
 #: ../src/main/prayerlists.cc:153
-#, fuzzy
 msgid "<b>Subtopic 1</b><br/>"
-msgstr "<b>Section 1</b><br>"
+msgstr "<b>Section 1</b><br/>"
 
 #: ../src/main/prayerlists.cc:155
 msgid "Minor Topic 2"
 msgstr "Section 2"
 
 #: ../src/main/prayerlists.cc:156
-#, fuzzy
 msgid "<b>Subtopic 2</b><br/>"
-msgstr "<b>Section 2</b><br>"
+msgstr "<b>Section 2</b><br/>"
 
 #: ../src/main/prayerlists.cc:158
 msgid "Minor Topic 3"
 msgstr "Section 3"
 
 #: ../src/main/prayerlists.cc:159
-#, fuzzy
 msgid "<b>Subtopic 3</b><br/>"
-msgstr "<b>Section 3</b><br>"
+msgstr "<b>Section 3</b><br/>"
 
 #: ../src/main/prayerlists.cc:161
 msgid "Minor Topic 4"
 msgstr "Section 4"
 
 #: ../src/main/prayerlists.cc:162
-#, fuzzy
 msgid "<b>Subtopic 4</b><br/>"
-msgstr "<b>Section 4</b><br>"
+msgstr "<b>Section 4</b><br/>"
 
 #: ../src/main/prayerlists.cc:242
 msgid "Name for new prayer list or journal"
@@ -1841,13 +1830,10 @@ msgid "MyPrayerList"
 msgstr "MaListe"
 
 #: ../src/main/prayerlists.cc:342
-#, fuzzy
 msgid ""
 "<b>People:</b><br/>Bob<br/>Sam<br/>Sue<br/><br/><b>Church:</b><br/>pews<br/"
 ">fellowship<br/>Bibles for missionaries<br/><br/><br/>"
-msgstr ""
-"<b>Personnes:</b><br>Jean<br>Pierre<br>Paul<br><br><b>Assemblée:</"
-"b><br>Participants<br>Fonctionnement<br>Missions<br><br><br>"
+msgstr "<b>Personnes:</b><br/>Jean<br/>Pierre<br/>Paul<br/><br/><b>Assemblée:</b><br/>Participants<br/>Fonctionnement<br/>Missions<br/><br/><br/>"
 
 #: ../src/main/prayerlists.cc:368
 msgid "A subject-based prayer list. \\par\\par Module created by Xiphos."
@@ -1858,23 +1844,20 @@ msgid "SubjectPrayerList"
 msgstr "MaListeParSujets"
 
 #: ../src/main/prayerlists.cc:384
-#, fuzzy
 msgid "Bob<br/>Sam<br/>Sue<br/>John<br/>"
-msgstr "Jean<br>Pierre<br>Paul<br>Esther<br>"
+msgstr "Jean<br/>Pierre<br/>Paul<br/>Esther<br/>"
 
 #: ../src/main/prayerlists.cc:385
 msgid "Spiritual Growth"
 msgstr "Croissance spirituelle"
 
 #: ../src/main/prayerlists.cc:386
-#, fuzzy
 msgid "Mike<br/>Steve<br/>"
-msgstr "Personne 1<br>Personne 2<br>Personne 3<br>"
+msgstr "Personne 1<br/>Personne 2<br/>Personne 3<br/>"
 
 #: ../src/main/prayerlists.cc:388
-#, fuzzy
 msgid "Sue<br/>John<br/>"
-msgstr "Personne 1<br>Personne 2<br>Personne 3<br>"
+msgstr "Personne 1<br/>Personne 2<br/>Personne 3<br/>"
 
 #: ../src/main/prayerlists.cc:414
 msgid "A monthly prayer list. \\par\\par Module created by Xiphos."
@@ -1905,27 +1888,24 @@ msgid "Major Topic A"
 msgstr "Sujet majeur A"
 
 #: ../src/main/prayerlists.cc:547
-#, fuzzy
 msgid "<b>Major Topic A</b><br/>"
-msgstr "<b>Sujet majeur A</b><br>"
+msgstr "<b>Sujet majeur A</b><br/>"
 
 #: ../src/main/prayerlists.cc:549
 msgid "Major Topic B"
 msgstr "Sujet majeur B"
 
 #: ../src/main/prayerlists.cc:550
-#, fuzzy
 msgid "<b>Major Topic B</b><br/>"
-msgstr "<b>Sujet majeur B</b><br>"
+msgstr "<b>Sujet majeur B</b><br/>"
 
 #: ../src/main/prayerlists.cc:552
 msgid "Major Topic C"
 msgstr "Sujet majeur C"
 
 #: ../src/main/prayerlists.cc:553
-#, fuzzy
 msgid "<b>Major Topic C</b><br/>"
-msgstr "<b>Sujet majeur C</b><br>"
+msgstr "<b>Sujet majeur C</b><br/>"
 
 #: ../src/main/previewer.cc:186
 msgid "User Annotation"
@@ -3583,15 +3563,12 @@ msgid "Annotate Verse"
 msgstr "Annoter un verset"
 
 #: ../ui/xi-menus.glade.h:13
-#, fuzzy
 msgid "Apply a high-contrast highlight to the current verse"
-msgstr ""
-"Applique des couleurs différentes au verset en cours - Voir le sélecteur de "
-"couleurs"
+msgstr "Applique un contraste élevé au verset en cours"
 
 #: ../ui/xi-menus.glade.h:15
 msgid "Bring the simple sidebar search forward"
-msgstr ""
+msgstr "Met en avant la recherche simple du volet latéral"
 
 #: ../ui/xi-menus.glade.h:16
 msgid "Browse in BibleMap.org"
@@ -3614,9 +3591,8 @@ msgid "Create a new daily journal"
 msgstr "Crée un nouveau journal quotidien"
 
 #: ../ui/xi-menus.glade.h:22
-#, fuzzy
 msgid "Create a new journal or prayerlist from a template"
-msgstr "Crée une nouvelle liste de prières"
+msgstr "Crée un journal ou une nouvelle liste de prières à partir d'un modèle"
 
 #: ../ui/xi-menus.glade.h:23
 msgid "Create a new monthly journal"
@@ -3660,7 +3636,7 @@ msgstr "Affiche l'entête du chapitre"
 
 #: ../ui/xi-menus.glade.h:33
 msgid "Display verse numbers in the text"
-msgstr ""
+msgstr "Affiche les numéros de verset dans le texte"
 
 #: ../ui/xi-menus.glade.h:34
 msgid "Doublespace"
@@ -3716,17 +3692,15 @@ msgstr "Onglets liés"
 
 #: ../ui/xi-menus.glade.h:54
 msgid "Learn about The Sword Project, of which Xiphos is one application"
-msgstr ""
+msgstr "En savoir plus sur le Projet Sword, dont Xiphos est une application"
 
 #: ../ui/xi-menus.glade.h:55
-#, fuzzy
 msgid "Learn about Xiphos"
-msgstr "À propos de Xiphos"
+msgstr "En savoir plus sur Xiphos"
 
 #: ../ui/xi-menus.glade.h:56
-#, fuzzy
 msgid "Learn about translating the Xiphos interface to other languages"
-msgstr "Traduire Xiphos en d'autres langues"
+msgstr "En savoir plus pour traduire l'interface Xiphos en d'autres langues"
 
 #: ../ui/xi-menus.glade.h:58
 msgid "Load other bookmarks file (default: from BibleTime)"
@@ -3738,7 +3712,7 @@ msgstr "Définition du mot sélectionné"
 
 #: ../ui/xi-menus.glade.h:60
 msgid "Make all tabs' Bibles navigate together"
-msgstr ""
+msgstr "Fait naviguer tous les onglets Bible simultanément"
 
 #: ../ui/xi-menus.glade.h:62
 msgid "Monthly"
@@ -3758,21 +3732,19 @@ msgstr "Ouvrir le bloc-notes"
 
 #: ../ui/xi-menus.glade.h:68
 msgid "Open a browser on an interface to live IRC chat"
-msgstr ""
+msgstr "Ouvrir un navigateur sur une interface web de Chat IRC"
 
 #: ../ui/xi-menus.glade.h:69
 msgid "Open a browser on our bug tracker"
-msgstr ""
+msgstr "Ouvre un navigateur sur le bug tracker"
 
 #: ../ui/xi-menus.glade.h:70
-#, fuzzy
 msgid "Open a browser on the users' mailing list webpage"
-msgstr "S'inscrire à la liste de diffusion des utilisateurs"
+msgstr "Ouvre un navigateur sur la page Web de la liste de diffusion des utilisateurs"
 
 #: ../ui/xi-menus.glade.h:71
-#, fuzzy
 msgid "Open a saved tab settings collection"
-msgstr "Ouvre une session enregistrée"
+msgstr "Ouvre une configuration d'onglets précédemment enregistrée"
 
 #: ../ui/xi-menus.glade.h:72
 msgid "Open in a dialog"
@@ -3804,12 +3776,11 @@ msgstr "Ouvrir le module sélectionné dans un nouvel onglet"
 
 #: ../ui/xi-menus.glade.h:79
 msgid "Open the advanced search dialog, to run complex queries"
-msgstr ""
+msgstr "Ouvre la boîte de dialogue de recherche avancée, pour exécuter des requêtes complexes"
 
 #: ../ui/xi-menus.glade.h:80
-#, fuzzy
 msgid "Open the help viewer on the Xiphos manual"
-msgstr "Ouvre l'aide de Xiphos"
+msgstr "Ouvre le manuel d'aide de Xiphos"
 
 #: ../ui/xi-menus.glade.h:81
 msgid "Open this bookmark in a dialog"
@@ -3820,9 +3791,8 @@ msgid "Open this bookmark in a new tab"
 msgstr "Ouvre ce signet dans un nouvel onglet"
 
 #: ../ui/xi-menus.glade.h:83
-#, fuzzy
 msgid "Operate the sidebar as a separate window"
-msgstr "Ouvrir dans une fenêtre séparée"
+msgstr "Utiliser le volet latéral dans une fenêtre séparée"
 
 #: ../ui/xi-menus.glade.h:84
 msgid "Outlined"
@@ -3845,9 +3815,8 @@ msgid "Remove folder and save it"
 msgstr "Supprimer le dossier et le sauvegarder"
 
 #: ../ui/xi-menus.glade.h:91
-#, fuzzy
 msgid "Remove the sidebar entirely from view"
-msgstr "Supprimer le dossier sélectionné"
+msgstr "Retire entièrement le volet latéral de la fenêtre principale"
 
 #: ../ui/xi-menus.glade.h:92
 msgid "Remove this item"
