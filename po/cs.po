@@ -3,7 +3,7 @@
 # Contributions are welcome.
 # Translation Notes (Any comment welcome)
 # ---------------------------------------
-# SWORD Project             -> SWORD Project
+# SWORD Project             -> Projekt SWORD
 # SWORD Bible Framework     -> SWORD Bible Framework
 # Bookmark                  -> Záložka
 # Morphological Tags        -> Morfologické značky
@@ -40,7 +40,11 @@
 # Framework                 -> programové vybavení
 # Tab                       -> karta
 #
-# Martin Zibricky <matysek03@users.sourceforge.net>, 2008-2009
+# Learn about               -> více informací o
+# Glossaries                -> slovníky
+# Attribute-based search    -> vyhledávání ve vlastnostech
+#
+# Martin Zibricky <matysek03@users.sourceforge.net>, 2008-2010
 #
 #
 msgid ""
