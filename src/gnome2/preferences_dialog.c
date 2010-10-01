@@ -63,11 +63,7 @@
 
 typedef struct _preferences_combo COMBOBOXS;
 struct _preferences_combo {
-	GtkWidget *text_module;	/*  Main Window Module  */
-	GtkWidget *commentary_module;
-	GtkWidget *dictionary_module;
 	GtkWidget *default_dictionary_module;
-	GtkWidget *book_module;
 	GtkWidget *percomm_module;
 	GtkWidget *devotion_module;
 	GtkWidget *greek_lex__module;
@@ -1708,8 +1704,9 @@ create_model(void)
 	gtk_tree_store_append(model, &iter, NULL);
 	gtk_tree_store_set(model, &iter, 0, _("General"), -1);
 
-	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, _("Tabs and Panes"), 1, 3, -1);
+	/* the former element "3" was previously here,
+	   which was for the "tabs and panes," now defunct.
+	   we maintain the numbering because 4 is a fixed ref. */
 
 	gtk_tree_store_append(model, &child_iter, &iter);
 	gtk_tree_store_set(model, &child_iter, 0, _("Options"), 1, 4, -1);
@@ -1718,8 +1715,9 @@ create_model(void)
 	gtk_tree_store_append(model, &iter, NULL);
 	gtk_tree_store_set(model, &iter, 0, _("Modules"), -1);
 
-	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, _("Main"), 1, 5, -1);
+	/* the former element "5" was previously here,
+	   which was for the "main modules," now defunct.
+	   we maintain the numbering because 6 & 7 are fixed refs. */
 
 	gtk_tree_store_append(model, &child_iter, &iter);
 	gtk_tree_store_set(model, &child_iter, 0, _("Parallel"), 1, 6, -1);
@@ -2015,28 +2013,6 @@ static void
 setup_module_comboboxes(void)
 {
 	/*
-	 * Main Window Modules page
-	 */
-	fill_combobox(get_list(TEXT_LIST), GTK_COMBO_BOX(combo.text_module),
-		      settings.MainWindowModule,
-		      NULL, NULL);
-	fill_combobox(get_list(COMM_LIST), GTK_COMBO_BOX(combo.commentary_module),
-		      settings.CommWindowModule,
-		      NULL, NULL);
-	fill_combobox(get_list(DICT_LIST), GTK_COMBO_BOX(combo.dictionary_module),
-		      settings.DictWindowModule,
-		      dict_no_image_map_dd, NULL);
-	fill_combobox(get_list(DICT_LIST), GTK_COMBO_BOX(combo.default_dictionary_module),
-		      settings.DefaultDict,
-		      dict_no_image_map_dd, NULL);
-	fill_combobox(get_list(PERCOMM_LIST), GTK_COMBO_BOX(combo.percomm_module),
-		      settings.personalcommentsmod,
-		      NULL, NULL);
-	fill_combobox(get_list(GBS_LIST), GTK_COMBO_BOX(combo.book_module),
-		      settings.book_mod,
-		      NULL, NULL);
-
-	/*
 	 * Miscellaneous Modules page
 	 */
 	fill_combobox(get_list(DEVOTION_LIST), GTK_COMBO_BOX(combo.devotion_module),
@@ -2048,28 +2024,26 @@ setup_module_comboboxes(void)
 	fill_combobox(get_list(DICT_LIST), GTK_COMBO_BOX(combo.greek_lex__module),
 		      settings.lex_greek,
 		      dict_match_feature, "GreekDef");
+	fill_combobox(get_list(DICT_LIST), GTK_COMBO_BOX(combo.default_dictionary_module),
+		      settings.DefaultDict,
+		      dict_no_image_map_dd, NULL);
+	fill_combobox(get_list(PERCOMM_LIST), GTK_COMBO_BOX(combo.percomm_module),
+		      settings.personalcommentsmod,
+		      NULL, NULL);
 
 	/*
 	 * signal connectivity
 	 */
-	g_signal_connect(combo.text_module, "changed",
-			 G_CALLBACK(on_combobox2_changed), NULL);
-	g_signal_connect(combo.commentary_module, "changed",
-			 G_CALLBACK(on_combobox2_changed), NULL);
-	g_signal_connect(combo.dictionary_module, "changed",
-			 G_CALLBACK(on_combobox4_changed), NULL);
-	g_signal_connect(combo.default_dictionary_module, "changed",
-			 G_CALLBACK(on_combobox5_changed), NULL);
-	g_signal_connect(combo.percomm_module, "changed",
-			 G_CALLBACK(on_combobox6_changed), NULL);
-	g_signal_connect(combo.book_module, "changed",
-			 G_CALLBACK(on_combobox15_changed), NULL);
 	g_signal_connect(combo.devotion_module, "changed",
 			 G_CALLBACK(on_combobox12_changed), NULL);
 	g_signal_connect(combo.hebrew_lex__module, "changed",
 			 G_CALLBACK(on_combobox13_changed), NULL);
 	g_signal_connect(combo.greek_lex__module, "changed",
 			 G_CALLBACK(on_combobox14_changed), NULL);
+	g_signal_connect(combo.default_dictionary_module, "changed",
+			 G_CALLBACK(on_combobox5_changed), NULL);
+	g_signal_connect(combo.percomm_module, "changed",
+			 G_CALLBACK(on_combobox6_changed), NULL);
 }
 
 
@@ -2597,15 +2571,11 @@ create_preferences_dialog(void)
 			 G_CALLBACK(on_basecombobox1_changed), NULL);
 
 	/* module combos */
-	combo.text_module = glade_xml_get_widget (gxml, "combobox2");
-	combo.commentary_module = glade_xml_get_widget (gxml, "combobox3");
-	combo.dictionary_module = glade_xml_get_widget (gxml, "combobox4");
 	combo.default_dictionary_module = glade_xml_get_widget (gxml, "combobox5");
 	combo.percomm_module = glade_xml_get_widget (gxml, "combobox6");
 	combo.devotion_module = glade_xml_get_widget (gxml, "combobox12");
 	combo.hebrew_lex__module = glade_xml_get_widget (gxml, "combobox13");
 	combo.greek_lex__module = glade_xml_get_widget (gxml, "combobox14");
-	combo.book_module = glade_xml_get_widget (gxml, "combobox15");
 	setup_module_comboboxes();
 
 	combo.special_locale = glade_xml_get_widget (gxml, "combobox16");

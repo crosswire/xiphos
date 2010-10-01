@@ -867,11 +867,14 @@ void load_settings_structure(void)
 		settings.prayerlist = 1;
 	}
 
-
+#if 1
+	settings.browsing = 1;	/* unconditional - no longer toggle-able. */
+#else
 	if ((buf = xml_get_value("tabs", "browsing"))) {
 		settings.browsing =  atoi(buf);
 	} else {
 		xml_add_new_item_to_section("tabs","browsing","1");
 		settings.browsing = 1;
 	}
+#endif
 }
