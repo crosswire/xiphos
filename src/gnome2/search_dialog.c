@@ -1602,7 +1602,7 @@ void _create_search_dialog(void)
 	search1.button_intro_lucene = glade_xml_get_widget(gxml, "button_intro_lucene");
 	g_signal_connect(search1.button_intro_lucene, "clicked",
 			 G_CALLBACK(on_lucene_intro_clicked), NULL);
-	gtk_widget_hide(search1.button_intro_lucene);
+	gtk_widget_show(search1.button_intro_lucene);
 
 	search1.rb_attributes = glade_xml_get_widget(gxml, "radiobutton12");
 	g_signal_connect(search1.rb_attributes, "toggled",
