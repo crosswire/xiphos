@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 3.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-02 15:58+0200\n"
-"PO-Revision-Date: 2010-10-02 16:02+0100\n"
+"POT-Creation-Date: 2010-10-02 17:50+0200\n"
+"PO-Revision-Date: 2010-10-02 20:09+0100\n"
 "Last-Translator: Eicke Godehardt <sf at godehardt.org>\n"
 "Language-Team: Xiphos Translation Team <farsi@lists.sharif.edu>\n"
 "MIME-Version: 1.0\n"
@@ -306,9 +306,8 @@ msgid "Folder: "
 msgstr "Ordner: "
 
 #: ../src/gnome2/bookmarks_menu.c:206
-#, fuzzy
 msgid "Specify bookmarks file"
-msgstr "Lesezeichen Eintrag bearbeiten"
+msgstr "Datei für Lesezeichen festlegen"
 
 #: ../src/gnome2/bookmarks_menu.c:349
 #: ../ui/xi-menus.glade.h:36
@@ -366,9 +365,9 @@ msgid "Bookmarks"
 msgstr "Lesezeichen"
 
 #: ../src/gnome2/cipher_key_dialog.c:61
-#, fuzzy, c-format
+#, c-format
 msgid "Cipher key for module %s"
-msgstr "Nach SWORD-Modulen suchen"
+msgstr "Schlüssel für das Modul %s"
 
 #: ../src/gnome2/cipher_key_dialog.c:62
 msgid "for:"
@@ -636,7 +635,6 @@ msgstr ""
 #. * defines
 #.
 #: ../src/gnome2/mod_mgr.c:62
-#, fuzzy
 msgid ""
 "<b>Overview of the Module Manager.</b>\n"
 "\n"
@@ -653,11 +651,10 @@ msgid ""
 "\n"
 "See section 5 of our manual for Module Manager detail, or ask for help via Live Chat, or (if no one is responsive in chat) send mail to our users' mailing list.\n"
 msgstr ""
-"<b>Willkommen beim Module Manager.</b>\n"
+"<b>Überblick über den Modul Manager.</b>\n"
 "\n"
 "Dies ist Xiphos' Mechanismus, um neuen und aktuelleren Inhalt zu bekommen.\n"
-"Dies scheint das erste mal zu sein, das sie ihn benutzen. Bitte schauen sie sich etwas genauer um.\n"
-"(Diese Nachricht wird nur einmal angezeigt.)\n"
+"Dies ist das erste mal, dass sie ihn benutzen. Bitte schauen sie sich ihn etwas genauer an.\n"
 "\n"
 "Module kommen von unterschiedlichen <u>Repositorien</u>.  <b>Modul Quellen: Hinzufügen/Löschen</b> zeigt aktuelle bekannte Repositorien.\n"
 "\n"
@@ -1429,7 +1426,7 @@ msgstr "Benutzt das SWORD-Projekt"
 
 #: ../src/gnome2/tabbed_browser.c:364
 msgid "Can't create tabs dir."
-msgstr ""
+msgstr "Konnte Verzeichnis für Reiter nicht anlegen."
 
 #: ../src/gnome2/treekey-editor.c:133
 #: ../src/gnome2/treekey-editor.c:192
@@ -1964,10 +1961,12 @@ msgid ""
 "Empty settings file -- backup recovery attempted.\n"
 "Some information may have been lost."
 msgstr ""
+"Leere Einstellungsdatei -- Wiederherstellung versucht.\n"
+"Einige Informationen könnten verloren gegangen sein."
 
 #: ../src/main/settings.c:181
 msgid "Empty settings file -- no backup?!? Information lost!"
-msgstr ""
+msgstr "Leere Einstellungsdatei -- kein Backup?!? Informationen sind verloren!"
 
 #: ../src/main/settings.c:209
 msgid ""
@@ -2056,6 +2055,13 @@ msgid ""
 "\n"
 "Please enter the key in the dialog."
 msgstr ""
+"<b>Gesperrtes Modul.</b>\n"
+"\n"
+"<u>Sie öffnen ein Modul, wofür es einen <i>Schlüssel</i> braucht.</u>\n"
+"\n"
+"Das Modul ist gesperrt.  Das bedeutet, das der Herausgeber den Inhalt verschlüsselt hat und Sie erst den entsprechenden Schlüssel eingeben müssen, um es nutzen zu können.  Den Schlüssel sollten Sie auf der Webseite oder in der entsprechenden E-Mail bekommen haben, die den Kauf bestätigt hat.\n"
+"\n"
+"Bitte geben Sie den Schlüssel im Dialog ein."
 
 #: ../src/main/tab_history.c:219
 msgid "Clear History"
@@ -2168,6 +2174,8 @@ msgid ""
 "Save of settings failed! stat %d, size %d\n"
 "%s"
 msgstr ""
+"Speichern der Einstellungen fehlgeschlagen! Stat %d, Größe %d\n"
+"%s"
 
 #: ../src/main/xml.c:1216
 msgid "Attempting to revert to previous save."
