@@ -11,14 +11,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 3.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-20 20:42+0100\n"
-"PO-Revision-Date: 2010-09-29 21:01+0100\n"
-"Last-Translator: Peter von Kaehne <refdoc@crosswire.org>\n"
+"POT-Creation-Date: 2010-10-02 20:10+0200\n"
+"PO-Revision-Date: 2010-10-02 21:51+0100\n"
+"Last-Translator: Eicke Godehardt <sf at godehardt.org>\n"
 "Language-Team: Xiphos Translation Team <farsi@lists.sharif.edu>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "X-Launchpad-Export-Date: 2010-03-21 04:50+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: GERMANY\n"
@@ -258,8 +258,8 @@ msgid "Xiphos development"
 msgstr "Xiphos Entwicklung"
 
 #: ../src/gnome2/about_xiphos.c:130
-msgid "Copyright 2000-2009 The Xiphos Development Team"
-msgstr "Copyright 2000-2008 Das Xiphos Entwickler-Team"
+msgid "Copyright 2000-2010 Xiphos Development Team"
+msgstr "Copyright 2000-2010 Xiphos Entwickler-Team"
 
 #: ../src/gnome2/about_xiphos.c:133
 msgid ""
@@ -306,9 +306,8 @@ msgid "Folder: "
 msgstr "Ordner: "
 
 #: ../src/gnome2/bookmarks_menu.c:206
-#, fuzzy
 msgid "Specify bookmarks file"
-msgstr "Lesezeichen Eintrag bearbeiten"
+msgstr "Datei für Lesezeichen festlegen"
 
 #: ../src/gnome2/bookmarks_menu.c:349
 #: ../ui/xi-menus.glade.h:36
@@ -366,9 +365,9 @@ msgid "Bookmarks"
 msgstr "Lesezeichen"
 
 #: ../src/gnome2/cipher_key_dialog.c:61
-#, fuzzy, c-format
+#, c-format
 msgid "Cipher key for module %s"
-msgstr "Nach SWORD-Modulen suchen"
+msgstr "Schlüssel für das Modul %s"
 
 #: ../src/gnome2/cipher_key_dialog.c:62
 msgid "for:"
@@ -399,11 +398,11 @@ msgstr "Versliste"
 
 #: ../src/gnome2/export_bookmarks.c:689
 msgid "VerseList"
-msgstr ""
+msgstr "VersListe"
 
 #: ../src/gnome2/export_bookmarks.c:694
 msgid "SearchResults"
-msgstr ""
+msgstr "SuchErgebnisse"
 
 #: ../src/gnome2/export_dialog.c:267
 #: ../ui/export-dialog.glade.h:20
@@ -636,7 +635,6 @@ msgstr ""
 #. * defines
 #.
 #: ../src/gnome2/mod_mgr.c:62
-#, fuzzy
 msgid ""
 "<b>Overview of the Module Manager.</b>\n"
 "\n"
@@ -653,11 +651,10 @@ msgid ""
 "\n"
 "See section 5 of our manual for Module Manager detail, or ask for help via Live Chat, or (if no one is responsive in chat) send mail to our users' mailing list.\n"
 msgstr ""
-"<b>Willkommen beim Module Manager.</b>\n"
+"<b>Überblick über den Modul Manager.</b>\n"
 "\n"
 "Dies ist Xiphos' Mechanismus, um neuen und aktuelleren Inhalt zu bekommen.\n"
-"Dies scheint das erste mal zu sein, das sie ihn benutzen. Bitte schauen sie sich etwas genauer um.\n"
-"(Diese Nachricht wird nur einmal angezeigt.)\n"
+"Dies ist das erste mal, dass sie ihn benutzen. Bitte schauen sie sich ihn etwas genauer an.\n"
 "\n"
 "Module kommen von unterschiedlichen <u>Repositorien</u>.  <b>Modul Quellen: Hinzufügen/Löschen</b> zeigt aktuelle bekannte Repositorien.\n"
 "\n"
@@ -915,7 +912,7 @@ msgstr "Wörterbücher"
 #: ../src/main/sidebar.cc:1036
 #: ../src/main/sidebar.cc:1038
 msgid "Glossaries"
-msgstr ""
+msgstr "Glossare"
 
 #: ../src/gnome2/mod_mgr.c:1341
 #: ../src/gnome2/utilities.c:606
@@ -1031,7 +1028,7 @@ msgid "Choose"
 msgstr "Auswählen"
 
 #: ../src/gnome2/mod_mgr.c:1754
-#: ../src/gnome2/preferences_dialog.c:1719
+#: ../src/gnome2/preferences_dialog.c:1716
 #: ../src/gnome2/sidebar.c:1398
 msgid "Modules"
 msgstr "Module"
@@ -1143,10 +1140,10 @@ msgstr "Nach innen, zum ersten Unterabschnitt"
 #: ../src/gnome2/navbar_versekey_editor.c:876
 #: ../src/gnome2/navbar_versekey_parallel.c:816
 msgid "Synchronize this window's scrolling with the main window"
-msgstr ""
+msgstr "Synchronisiere das Scrollen in diesem Fenster mit dem Hauptfenster"
 
 #: ../src/gnome2/parallel_dialog.c:382
-#: ../src/gnome2/preferences_dialog.c:1725
+#: ../src/gnome2/preferences_dialog.c:1723
 msgid "Parallel"
 msgstr "Parallel"
 
@@ -1170,79 +1167,69 @@ msgstr "Moduloptionen"
 msgid "Parallel View"
 msgstr "Parallelansicht"
 
-#: ../src/gnome2/preferences_dialog.c:1240
-#: ../src/gnome2/preferences_dialog.c:1278
-#: ../src/gnome2/preferences_dialog.c:1315
-#: ../src/gnome2/preferences_dialog.c:1350
-#: ../src/gnome2/preferences_dialog.c:1385
-#: ../src/gnome2/preferences_dialog.c:1420
-#: ../src/gnome2/preferences_dialog.c:1455
-#: ../src/gnome2/preferences_dialog.c:1491
-#: ../src/gnome2/preferences_dialog.c:1528
-#: ../src/gnome2/preferences_dialog.c:1580
-#: ../src/gnome2/preferences_dialog.c:1968
+#: ../src/gnome2/preferences_dialog.c:1236
+#: ../src/gnome2/preferences_dialog.c:1274
+#: ../src/gnome2/preferences_dialog.c:1311
+#: ../src/gnome2/preferences_dialog.c:1346
+#: ../src/gnome2/preferences_dialog.c:1381
+#: ../src/gnome2/preferences_dialog.c:1416
+#: ../src/gnome2/preferences_dialog.c:1451
+#: ../src/gnome2/preferences_dialog.c:1487
+#: ../src/gnome2/preferences_dialog.c:1524
+#: ../src/gnome2/preferences_dialog.c:1576
+#: ../src/gnome2/preferences_dialog.c:1966
 msgid "-- Select --"
 msgstr "-- Auswahl --"
 
-#: ../src/gnome2/preferences_dialog.c:1542
+#: ../src/gnome2/preferences_dialog.c:1538
 msgid "Locale will take effect after restart."
 msgstr "Lokalisierung wird nach einem Neustart wirksam."
 
-#: ../src/gnome2/preferences_dialog.c:1617
-#: ../ui/prefs.glade.h:84
+#: ../src/gnome2/preferences_dialog.c:1613
+#: ../ui/prefs.glade.h:83
 msgid "Preferences"
 msgstr "Einstellungen"
 
-#: ../src/gnome2/preferences_dialog.c:1699
+#: ../src/gnome2/preferences_dialog.c:1695
 msgid "Fonts"
 msgstr "Schriften"
 
-#: ../src/gnome2/preferences_dialog.c:1702
+#: ../src/gnome2/preferences_dialog.c:1698
 msgid "Color"
 msgstr "Farben"
 
-#: ../src/gnome2/preferences_dialog.c:1705
-#, fuzzy
+#: ../src/gnome2/preferences_dialog.c:1701
 msgid "Sizes and Faces"
-msgstr "Reiter und Bereiche"
+msgstr "Größen und Ansichten"
 
-#: ../src/gnome2/preferences_dialog.c:1709
+#: ../src/gnome2/preferences_dialog.c:1705
 msgid "General"
 msgstr "Allgemein"
 
 #: ../src/gnome2/preferences_dialog.c:1712
-#: ../ui/prefs.glade.h:100
-msgid "Tabs and Panes"
-msgstr "Reiter und Bereiche"
-
-#: ../src/gnome2/preferences_dialog.c:1715
 msgid "Options"
 msgstr "Einstellungen"
 
-#: ../src/gnome2/preferences_dialog.c:1722
-msgid "Main"
-msgstr "Hauptfenster"
-
-#: ../src/gnome2/preferences_dialog.c:1728
+#: ../src/gnome2/preferences_dialog.c:1726
 msgid "Special"
 msgstr "Spezial"
 
-#: ../src/gnome2/preferences_dialog.c:2377
+#: ../src/gnome2/preferences_dialog.c:2351
 #: ../src/gnome2/search_dialog.c:460
 msgid "Clear List?"
 msgstr "Liste leeren?"
 
-#: ../src/gnome2/preferences_dialog.c:2378
+#: ../src/gnome2/preferences_dialog.c:2352
 #: ../src/gnome2/search_dialog.c:461
 msgid "Are you sure you want to clear the module list?"
 msgstr "Möchten Sie die Modulliste wirklich leeren?"
 
-#: ../src/gnome2/preferences_dialog.c:2423
+#: ../src/gnome2/preferences_dialog.c:2397
 #: ../src/main/search_dialog.cc:700
 msgid "Remove Module?"
 msgstr "Modul entfernen?"
 
-#: ../src/gnome2/preferences_dialog.c:2424
+#: ../src/gnome2/preferences_dialog.c:2398
 #: ../src/main/search_dialog.cc:701
 msgid "Are you sure you want to remove the selected module?"
 msgstr "Wollen Sie das ausgewählte Modul entfernen?"
@@ -1438,7 +1425,7 @@ msgstr "Benutzt das SWORD-Projekt"
 
 #: ../src/gnome2/tabbed_browser.c:364
 msgid "Can't create tabs dir."
-msgstr ""
+msgstr "Konnte Verzeichnis für Reiter nicht anlegen."
 
 #: ../src/gnome2/treekey-editor.c:133
 #: ../src/gnome2/treekey-editor.c:192
@@ -1457,17 +1444,12 @@ msgid "Remove the selected item"
 msgstr "Ausgewählten Eintrag entfernen"
 
 #: ../src/gnome2/utilities.c:2018
-#, fuzzy
 msgid ""
 "An image file's size could not be determined.\n"
 "Xiphos cannot resize images to fit window."
 msgstr ""
 "Eine Bildgröße konnte nicht bestimmt werden.\n"
-"Ist ImageMagicks 'identify' nicht installiert?\n"
-"(Möglicherweise hat das Bild einen anderen Typ als\n"
-"bmp/gif/jpg/png.)\n"
-"Xiphos kann die Bilder nicht an die\n"
-"Fenstergröße anpassen."
+"Xiphos kann Bilder nicht an die Fenstergröße anpassen."
 
 #: ../src/main/display.cc:230
 #, c-format
@@ -1511,7 +1493,7 @@ msgstr "Zeige Xiphos"
 
 #: ../src/main/module_dialogs.cc:189
 #: ../src/main/previewer.cc:93
-#: ../ui/prefs.glade.h:85
+#: ../ui/prefs.glade.h:84
 msgid "Previewer"
 msgstr "Vorschau"
 
@@ -1973,10 +1955,12 @@ msgid ""
 "Empty settings file -- backup recovery attempted.\n"
 "Some information may have been lost."
 msgstr ""
+"Leere Einstellungsdatei -- Wiederherstellung versucht.\n"
+"Einige Informationen könnten verloren gegangen sein."
 
 #: ../src/main/settings.c:181
 msgid "Empty settings file -- no backup?!? Information lost!"
-msgstr ""
+msgstr "Leere Einstellungsdatei -- kein Backup?!? Informationen sind verloren!"
 
 #: ../src/main/settings.c:209
 msgid ""
@@ -2065,6 +2049,13 @@ msgid ""
 "\n"
 "Please enter the key in the dialog."
 msgstr ""
+"<b>Gesperrtes Modul.</b>\n"
+"\n"
+"<u>Sie öffnen ein Modul, wofür es einen <i>Schlüssel</i> braucht.</u>\n"
+"\n"
+"Das Modul ist gesperrt.  Das bedeutet, das der Herausgeber den Inhalt verschlüsselt hat und Sie erst den entsprechenden Schlüssel eingeben müssen, um es nutzen zu können.  Den Schlüssel sollten Sie auf der Webseite oder in der entsprechenden E-Mail bekommen haben, die den Kauf bestätigt hat.\n"
+"\n"
+"Bitte geben Sie den Schlüssel im Dialog ein."
 
 #: ../src/main/tab_history.c:219
 msgid "Clear History"
@@ -2177,6 +2168,8 @@ msgid ""
 "Save of settings failed! stat %d, size %d\n"
 "%s"
 msgstr ""
+"Speichern der Einstellungen fehlgeschlagen! Stat %d, Größe %d\n"
+"%s"
 
 #: ../src/main/xml.c:1216
 msgid "Attempting to revert to previous save."
@@ -2518,9 +2511,8 @@ msgid "Home dir"
 msgstr "Heimverzeichnis"
 
 #: ../ui/module-manager.glade.h:20
-#, fuzzy
 msgid "Install or update the selected modules"
-msgstr "Installiere diese Module?"
+msgstr "Installiere oder aktualisiere ausgewählte Module"
 
 #: ../ui/module-manager.glade.h:21
 msgid "Load and synchronize the standard set of known repositories, as maintained at crosswire.org, with your current remote sources."
@@ -2587,9 +2579,8 @@ msgid "_Load Standard"
 msgstr "_Lade Standard"
 
 #: ../ui/module-manager.glade.h:37
-#, fuzzy
 msgid "_View Intro"
-msgstr "_Betrachter"
+msgstr "_Einführung ansehen"
 
 #: ../ui/navbar_versekey.glade.h:1
 msgid "1"
@@ -2687,17 +2678,15 @@ msgstr "Module hinzufügen"
 
 #: ../ui/prefs.glade.h:19
 msgid "All displayed font sizes are relative to this choice"
-msgstr ""
+msgstr "Alle angezeigten Schriftgrößen sind relativ zu dieser Auswahl"
 
 #: ../ui/prefs.glade.h:20
-#, fuzzy
 msgid "Apply high-contrast highlight to current verse - see color pickers"
-msgstr "Wende kontrastreiche Hervorhebung auf den aktuellen Vers an"
+msgstr "Wende kontrastreiche Hervorhebung auf den aktuellen Vers an - siehe Farbauswähler"
 
 #: ../ui/prefs.glade.h:21
-#, fuzzy
 msgid "Automatically resize image content to fit the pane"
-msgstr "Automatischen Anpassung von Bildern in Kommentar, Buch und Wörterbuch"
+msgstr "Automatischen Anpassung der Bildgröße, um den Ausschnitt zu füllen"
 
 #: ../ui/prefs.glade.h:22
 msgid "Background"
@@ -2759,16 +2748,15 @@ msgstr "Kommentartickbox"
 
 #: ../ui/prefs.glade.h:39
 msgid "Commonly -1, to make verse numbers less obtrusive"
-msgstr ""
+msgstr "Normalerweise -1, damit die Versnummern weniger aufdringlich sind"
 
 #: ../ui/prefs.glade.h:40
 msgid "Cover"
 msgstr "Einband"
 
 #: ../ui/prefs.glade.h:41
-#, fuzzy
 msgid "Cross-references in verse list"
-msgstr "Querverweise"
+msgstr "Querverweise in der Versliste"
 
 #: ../ui/prefs.glade.h:42
 msgid "Current Verse"
@@ -2821,7 +2809,7 @@ msgstr "Schriften"
 
 #: ../ui/prefs.glade.h:54
 msgid "Font preferences, per language"
-msgstr ""
+msgstr "Font Einstellungen, pro Sprache"
 
 #: ../ui/prefs.glade.h:55
 msgid "Foreground"
@@ -2885,9 +2873,8 @@ msgid "Invert color pairs"
 msgstr "Farben invertieren"
 
 #: ../ui/prefs.glade.h:70
-#, fuzzy
 msgid "Language Font Combo"
-msgstr "Ändere Buch Kombinationsfeld"
+msgstr "Sprachen-Schriftart Kombinationsfeld"
 
 #: ../ui/prefs.glade.h:71
 msgid "Links"
@@ -2898,8 +2885,9 @@ msgid "Make double-click of a word always use default dictionary instead of dict
 msgstr ""
 
 #: ../ui/prefs.glade.h:73
+#, fuzzy
 msgid "Make journals/prayer lists available"
-msgstr ""
+msgstr "Mach Tagebuch/Gebetsliste erreichbar"
 
 #: ../ui/prefs.glade.h:74
 #: ../ui/search-dialog.glade.h:61
@@ -2907,138 +2895,137 @@ msgid "Module Selection"
 msgstr "Modulauswahl"
 
 #: ../ui/prefs.glade.h:75
-msgid "Modules Main"
-msgstr "Hauptmodule"
-
-#: ../ui/prefs.glade.h:76
 msgid "Modules Misc"
 msgstr "Verschiedene Module"
 
-#: ../ui/prefs.glade.h:77
+#: ../ui/prefs.glade.h:76
 msgid "Modules Parallel"
 msgstr "Parallelansicht"
 
-#: ../ui/prefs.glade.h:78
+#: ../ui/prefs.glade.h:77
 msgid "Name and size choice for any module in a given language; still overridden by a specific choice on a particular module"
 msgstr ""
 
-#: ../ui/prefs.glade.h:79
+#: ../ui/prefs.glade.h:78
 msgid "Normal Text"
 msgstr "Normaler Text"
 
-#: ../ui/prefs.glade.h:80
+#: ../ui/prefs.glade.h:79
 #: ../ui/search-dialog.glade.h:70
 msgid "Open Selection Dialog Button"
 msgstr "Öffne Auswahldialog Knopf"
 
-#: ../ui/prefs.glade.h:81
-#, fuzzy
+#: ../ui/prefs.glade.h:80
 msgid "Open a dialog to select modules"
-msgstr "Module in einem Dialog zur Liste hinzufügen"
+msgstr "Öffnet einen Dialog, um Module auszuwählen"
 
-#: ../ui/prefs.glade.h:82
+#: ../ui/prefs.glade.h:81
 msgid "Parallel View in a tab"
 msgstr "Parallelansicht in einem Tab"
 
-#: ../ui/prefs.glade.h:83
+#: ../ui/prefs.glade.h:82
 msgid "Personal Notes"
 msgstr "Persönliche Notizen"
 
-#: ../ui/prefs.glade.h:86
+#: ../ui/prefs.glade.h:85
 msgid "Previewer Checkbox"
 msgstr "Vorschau Kontrollkästchen"
 
-#: ../ui/prefs.glade.h:87
+#: ../ui/prefs.glade.h:86
 #: ../ui/search-dialog.glade.h:80
 msgid "Remove the selected module from the list"
 msgstr "Ausgewähltes Modul aus der Liste entfernen"
 
-#: ../ui/prefs.glade.h:88
+#: ../ui/prefs.glade.h:87
 msgid "Resize images"
 msgstr "Bildgröße ändern"
 
-#: ../ui/prefs.glade.h:89
+#: ../ui/prefs.glade.h:88
 msgid "Resize images checkbox"
 msgstr "Bildgröße ändern Kontrollkästchen"
 
-#: ../ui/prefs.glade.h:90
+#: ../ui/prefs.glade.h:89
 msgid "Scroll to Previous/Next Chapter"
 msgstr "Zum vorigen/nächsten Kapitel springen"
 
-#: ../ui/prefs.glade.h:91
+#: ../ui/prefs.glade.h:90
 msgid "Scroll to Previous/Next Chapter Checkbox"
 msgstr "Zum vorigen/nächsten Kapitel springen Kontrollkästchen"
 
-#: ../ui/prefs.glade.h:92
+#: ../ui/prefs.glade.h:91
 msgid "Select A Directory"
 msgstr "Verzeichnis wählen"
 
-#: ../ui/prefs.glade.h:93
+#: ../ui/prefs.glade.h:92
 msgid "Select a particular language for interface display, other than your usual setting"
 msgstr ""
 
-#: ../ui/prefs.glade.h:94
+#: ../ui/prefs.glade.h:93
 msgid "Show Daily Devotion at start up"
 msgstr "Tageslosung beim Starten anzeigen"
 
-#: ../ui/prefs.glade.h:95
+#: ../ui/prefs.glade.h:94
 msgid "Show splash screen at start up"
 msgstr "Startbildschirm anzeigen"
 
-#: ../ui/prefs.glade.h:96
+#: ../ui/prefs.glade.h:95
 msgid "Single selection of Bible+commentary+book+dictionary, or many sets of such selections in a tabbed interface"
 msgstr ""
 
-#: ../ui/prefs.glade.h:97
+#: ../ui/prefs.glade.h:96
 msgid "Special Locale (requires restart)"
 msgstr "Spezielle Lokalisierung (erfordert Neustart)"
 
-#: ../ui/prefs.glade.h:98
+#: ../ui/prefs.glade.h:97
 msgid "Special Locale Combo"
 msgstr "Spezielle Lokalisierungskombination"
 
-#: ../ui/prefs.glade.h:99
+#: ../ui/prefs.glade.h:98
 msgid "StudyPad default directory combo"
 msgstr "Vorgabeverzeichnis für das Notizbuch Kombinationsfeld"
 
-#: ../ui/prefs.glade.h:101
+#: ../ui/prefs.glade.h:99
+msgid "Tabs and Panes"
+msgstr "Reiter und Bereiche"
+
+#: ../ui/prefs.glade.h:100
 msgid "Use Bible Text scroll bar to scroll to previous or next chapter"
 msgstr "Bildlaufleiste des Bibeltextes verwenden, um zum vorigen oder nächsten Kapitel zu springen"
 
-#: ../ui/prefs.glade.h:102
+#: ../ui/prefs.glade.h:101
 msgid "Use default Dictionary"
 msgstr "Vorgabewörterbuch verwenden"
 
-#: ../ui/prefs.glade.h:103
+#: ../ui/prefs.glade.h:102
 msgid "Use default Dictionary Checkbox"
 msgstr "Vorgabewörterbuch verwenden Kontrollkästchen"
 
-#: ../ui/prefs.glade.h:104
+#: ../ui/prefs.glade.h:103
 #, fuzzy
 msgid "Use inverted highlight on user-annotated verses"
 msgstr "Wende kontrastreiche Hervorhebung auf den aktuellen Vers an"
 
-#: ../ui/prefs.glade.h:105
+#: ../ui/prefs.glade.h:104
 msgid "Use tabbed browsing"
 msgstr "Benutze Reiter zur Anzeige"
 
-#: ../ui/prefs.glade.h:106
+#: ../ui/prefs.glade.h:105
 msgid "Use tabbed browsing Checkbox"
 msgstr "Benutze Reiter zur Anzeige Kontrollkästchen"
 
-#: ../ui/prefs.glade.h:107
+#: ../ui/prefs.glade.h:106
 msgid "Use the verse list for Bible cross-references instead of the previewer"
 msgstr ""
 
-#: ../ui/prefs.glade.h:108
+#: ../ui/prefs.glade.h:107
 msgid "Verse Number"
 msgstr "Vers Nummer"
 
-#: ../ui/prefs.glade.h:109
+#: ../ui/prefs.glade.h:108
 msgid "Verse number size"
 msgstr "Größe der Versnummern"
 
-#: ../ui/prefs.glade.h:110
+#: ../ui/prefs.glade.h:109
 #, fuzzy
 msgid "Xrefs in verse list check box"
 msgstr "Bildgröße ändern Kontrollkästchen"
@@ -3430,13 +3417,12 @@ msgid "Use the results of the last search as the scope of the search"
 msgstr "Die Ergebnisse der letzten Suche als neuen Suchbereich verwenden"
 
 #: ../ui/search-dialog.glade.h:112
-#, fuzzy
 msgid "_Attribute Search"
-msgstr "Attribut-Suche"
+msgstr "_Attribut-Suche"
 
 #: ../ui/search-dialog.glade.h:113
 msgid "_Lucene Search Syntax"
-msgstr ""
+msgstr "_Lucene Such-Syntax"
 
 #: ../ui/search-dialog.glade.h:114
 msgid "e.g. Matt-John;Rev4"
@@ -3487,7 +3473,6 @@ msgid "Annotate Verse"
 msgstr "Vers annotieren"
 
 #: ../ui/xi-menus.glade.h:13
-#, fuzzy
 msgid "Apply a high-contrast highlight to the current verse"
 msgstr "Wende kontrastreiche Hervorhebung auf den aktuellen Vers an"
 
@@ -3516,9 +3501,8 @@ msgid "Create a new daily journal"
 msgstr "Erzeuge neues Tagebuch"
 
 #: ../ui/xi-menus.glade.h:22
-#, fuzzy
 msgid "Create a new journal or prayerlist from a template"
-msgstr "Erstelle eine neue Gebetsliste"
+msgstr "Erstelle eines Tagebuch oder eine neue Gebetsliste aus einer Vorlage"
 
 #: ../ui/xi-menus.glade.h:23
 msgid "Create a new monthly journal"
@@ -3562,7 +3546,7 @@ msgstr "Zeige Kapitelüberschrift"
 
 #: ../ui/xi-menus.glade.h:33
 msgid "Display verse numbers in the text"
-msgstr ""
+msgstr "Zeige Versnummern im Text"
 
 #: ../ui/xi-menus.glade.h:34
 msgid "Doublespace"
@@ -3618,7 +3602,7 @@ msgstr "_Reiter verbinden"
 
 #: ../ui/xi-menus.glade.h:54
 msgid "Learn about The Sword Project, of which Xiphos is one application"
-msgstr ""
+msgstr "Lerne mehr über das Sword-Projekt, wovon Xiphos eine Anwendung ist"
 
 #: ../ui/xi-menus.glade.h:55
 msgid "Learn about Xiphos"
@@ -3658,11 +3642,11 @@ msgstr "_Notizbuch öffnen"
 
 #: ../ui/xi-menus.glade.h:68
 msgid "Open a browser on an interface to live IRC chat"
-msgstr ""
+msgstr "Öffne einen Browser mit einer Schnittstelle zum Live IRC Chat"
 
 #: ../ui/xi-menus.glade.h:69
 msgid "Open a browser on our bug tracker"
-msgstr ""
+msgstr "Öffne einen Browser mit unserem Fehler-Verfolger"
 
 #: ../ui/xi-menus.glade.h:70
 msgid "Open a browser on the users' mailing list webpage"
@@ -3702,7 +3686,7 @@ msgstr "Ausgewähltes Modul in neuem Reiter öffnen"
 
 #: ../ui/xi-menus.glade.h:79
 msgid "Open the advanced search dialog, to run complex queries"
-msgstr ""
+msgstr "Öffne den Fortgeschrittenen Such-Dialog, um komplexe Suchen durchzuführen"
 
 #: ../ui/xi-menus.glade.h:80
 msgid "Open the help viewer on the Xiphos manual"
@@ -3741,9 +3725,8 @@ msgid "Remove folder and save it"
 msgstr "Ordner entfernen und speichern"
 
 #: ../ui/xi-menus.glade.h:91
-#, fuzzy
 msgid "Remove the sidebar entirely from view"
-msgstr "Ausgewählten Ordner entfernen"
+msgstr "Entfernt die Seitenleiste komplett aus der Ansicht"
 
 #: ../ui/xi-menus.glade.h:92
 msgid "Remove this item"
@@ -3775,7 +3758,7 @@ msgstr "Speichere diese Ergebnisse als ein einzelnes Lesezeichen"
 
 #: ../ui/xi-menus.glade.h:99
 msgid "Save this collection of tab settings"
-msgstr ""
+msgstr "Speichere diese Sammlung von Reiter-Einstellungen"
 
 #: ../ui/xi-menus.glade.h:100
 msgid "Scripture Cross-references"
@@ -3923,11 +3906,11 @@ msgstr "_Zeige/Verstecke angedockte Seitenleiste"
 
 #: ../ui/xi-export-bookmarks.glade.h:1
 msgid "<b>Export to:</b>"
-msgstr ""
+msgstr "<b>Export nach:</b>"
 
 #: ../ui/xi-export-bookmarks.glade.h:2
 msgid "Export Bookmark Folder"
-msgstr ""
+msgstr "Export Lesezeichen Verzeichnis"
 
 #: ../ui/xi-export-bookmarks.glade.h:3
 msgid "Html"
@@ -3935,23 +3918,23 @@ msgstr "HTML"
 
 #: ../ui/xi-export-bookmarks.glade.h:4
 msgid "Include Bible text"
-msgstr ""
+msgstr "Bibeltexte einschließen"
 
 #: ../ui/xi-export-bookmarks.glade.h:5
 msgid "Plain text"
-msgstr ""
+msgstr "Reiner Text"
 
 #: ../ui/xi-export-bookmarks.glade.h:6
 msgid "Xiphos bookmarks"
-msgstr ""
+msgstr "Xiphos Lesezeichen"
 
 #: ../ui/xi-export-bookmarks.glade.h:7
 msgid "gtk-cancel"
-msgstr ""
+msgstr "gtk-cancel"
 
 #: ../ui/xi-export-bookmarks.glade.h:8
 msgid "gtk-ok"
-msgstr ""
+msgstr "gtk-ok"
 
 #: ../xiphos.desktop.in.in.h:1
 msgid "Study the Bible"
@@ -3961,6 +3944,10 @@ msgstr "Studiere die Bibel"
 msgid "Xiphos Bible Guide"
 msgstr "Xiphos Bibelleitfaden"
 
+#~ msgid "Main"
+#~ msgstr "Hauptfenster"
+#~ msgid "Modules Main"
+#~ msgstr "Hauptmodule"
 #~ msgid ""
 #~ "Without any Bible modules to display,\n"
 #~ "Xiphos cannot proceed,\n"
