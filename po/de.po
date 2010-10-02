@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 3.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-02 17:50+0200\n"
-"PO-Revision-Date: 2010-10-02 20:09+0100\n"
+"POT-Creation-Date: 2010-10-02 20:10+0200\n"
+"PO-Revision-Date: 2010-10-02 21:51+0100\n"
 "Last-Translator: Eicke Godehardt <sf at godehardt.org>\n"
 "Language-Team: Xiphos Translation Team <farsi@lists.sharif.edu>\n"
 "MIME-Version: 1.0\n"
@@ -402,7 +402,7 @@ msgstr "VersListe"
 
 #: ../src/gnome2/export_bookmarks.c:694
 msgid "SearchResults"
-msgstr ""
+msgstr "SuchErgebnisse"
 
 #: ../src/gnome2/export_dialog.c:267
 #: ../ui/export-dialog.glade.h:20
@@ -1140,7 +1140,7 @@ msgstr "Nach innen, zum ersten Unterabschnitt"
 #: ../src/gnome2/navbar_versekey_editor.c:876
 #: ../src/gnome2/navbar_versekey_parallel.c:816
 msgid "Synchronize this window's scrolling with the main window"
-msgstr ""
+msgstr "Synchronisiere das Scrollen in diesem Fenster mit dem Hauptfenster"
 
 #: ../src/gnome2/parallel_dialog.c:382
 #: ../src/gnome2/preferences_dialog.c:1723
@@ -1199,9 +1199,8 @@ msgid "Color"
 msgstr "Farben"
 
 #: ../src/gnome2/preferences_dialog.c:1701
-#, fuzzy
 msgid "Sizes and Faces"
-msgstr "Reiter und Bereiche"
+msgstr "Größen und Ansichten"
 
 #: ../src/gnome2/preferences_dialog.c:1705
 msgid "General"
@@ -1445,17 +1444,12 @@ msgid "Remove the selected item"
 msgstr "Ausgewählten Eintrag entfernen"
 
 #: ../src/gnome2/utilities.c:2018
-#, fuzzy
 msgid ""
 "An image file's size could not be determined.\n"
 "Xiphos cannot resize images to fit window."
 msgstr ""
 "Eine Bildgröße konnte nicht bestimmt werden.\n"
-"Ist ImageMagicks 'identify' nicht installiert?\n"
-"(Möglicherweise hat das Bild einen anderen Typ als\n"
-"bmp/gif/jpg/png.)\n"
-"Xiphos kann die Bilder nicht an die\n"
-"Fenstergröße anpassen."
+"Xiphos kann Bilder nicht an die Fenstergröße anpassen."
 
 #: ../src/main/display.cc:230
 #, c-format
@@ -2517,9 +2511,8 @@ msgid "Home dir"
 msgstr "Heimverzeichnis"
 
 #: ../ui/module-manager.glade.h:20
-#, fuzzy
 msgid "Install or update the selected modules"
-msgstr "Installiere diese Module?"
+msgstr "Installiere oder aktualisiere ausgewählte Module"
 
 #: ../ui/module-manager.glade.h:21
 msgid "Load and synchronize the standard set of known repositories, as maintained at crosswire.org, with your current remote sources."
@@ -2586,9 +2579,8 @@ msgid "_Load Standard"
 msgstr "_Lade Standard"
 
 #: ../ui/module-manager.glade.h:37
-#, fuzzy
 msgid "_View Intro"
-msgstr "_Betrachter"
+msgstr "_Einführung ansehen"
 
 #: ../ui/navbar_versekey.glade.h:1
 msgid "1"
@@ -2686,17 +2678,15 @@ msgstr "Module hinzufügen"
 
 #: ../ui/prefs.glade.h:19
 msgid "All displayed font sizes are relative to this choice"
-msgstr ""
+msgstr "Alle angezeigten Schriftgrößen sind relativ zu dieser Auswahl"
 
 #: ../ui/prefs.glade.h:20
-#, fuzzy
 msgid "Apply high-contrast highlight to current verse - see color pickers"
-msgstr "Wende kontrastreiche Hervorhebung auf den aktuellen Vers an"
+msgstr "Wende kontrastreiche Hervorhebung auf den aktuellen Vers an - siehe Farbauswähler"
 
 #: ../ui/prefs.glade.h:21
-#, fuzzy
 msgid "Automatically resize image content to fit the pane"
-msgstr "Automatischen Anpassung von Bildern in Kommentar, Buch und Wörterbuch"
+msgstr "Automatischen Anpassung der Bildgröße, um den Ausschnitt zu füllen"
 
 #: ../ui/prefs.glade.h:22
 msgid "Background"
@@ -2758,16 +2748,15 @@ msgstr "Kommentartickbox"
 
 #: ../ui/prefs.glade.h:39
 msgid "Commonly -1, to make verse numbers less obtrusive"
-msgstr ""
+msgstr "Normalerweise -1, damit die Versnummern weniger aufdringlich sind"
 
 #: ../ui/prefs.glade.h:40
 msgid "Cover"
 msgstr "Einband"
 
 #: ../ui/prefs.glade.h:41
-#, fuzzy
 msgid "Cross-references in verse list"
-msgstr "Querverweise"
+msgstr "Querverweise in der Versliste"
 
 #: ../ui/prefs.glade.h:42
 msgid "Current Verse"
@@ -2884,9 +2873,8 @@ msgid "Invert color pairs"
 msgstr "Farben invertieren"
 
 #: ../ui/prefs.glade.h:70
-#, fuzzy
 msgid "Language Font Combo"
-msgstr "Ändere Buch Kombinationsfeld"
+msgstr "Sprachen-Schriftart Kombinationsfeld"
 
 #: ../ui/prefs.glade.h:71
 msgid "Links"
@@ -2897,8 +2885,9 @@ msgid "Make double-click of a word always use default dictionary instead of dict
 msgstr ""
 
 #: ../ui/prefs.glade.h:73
+#, fuzzy
 msgid "Make journals/prayer lists available"
-msgstr ""
+msgstr "Mach Tagebuch/Gebetsliste erreichbar"
 
 #: ../ui/prefs.glade.h:74
 #: ../ui/search-dialog.glade.h:61
@@ -2927,9 +2916,8 @@ msgid "Open Selection Dialog Button"
 msgstr "Öffne Auswahldialog Knopf"
 
 #: ../ui/prefs.glade.h:80
-#, fuzzy
 msgid "Open a dialog to select modules"
-msgstr "Module in einem Dialog zur Liste hinzufügen"
+msgstr "Öffnet einen Dialog, um Module auszuwählen"
 
 #: ../ui/prefs.glade.h:81
 msgid "Parallel View in a tab"
@@ -3434,7 +3422,7 @@ msgstr "_Attribut-Suche"
 
 #: ../ui/search-dialog.glade.h:113
 msgid "_Lucene Search Syntax"
-msgstr ""
+msgstr "_Lucene Such-Syntax"
 
 #: ../ui/search-dialog.glade.h:114
 msgid "e.g. Matt-John;Rev4"
@@ -3485,7 +3473,6 @@ msgid "Annotate Verse"
 msgstr "Vers annotieren"
 
 #: ../ui/xi-menus.glade.h:13
-#, fuzzy
 msgid "Apply a high-contrast highlight to the current verse"
 msgstr "Wende kontrastreiche Hervorhebung auf den aktuellen Vers an"
 
@@ -3514,9 +3501,8 @@ msgid "Create a new daily journal"
 msgstr "Erzeuge neues Tagebuch"
 
 #: ../ui/xi-menus.glade.h:22
-#, fuzzy
 msgid "Create a new journal or prayerlist from a template"
-msgstr "Erstelle eine neue Gebetsliste"
+msgstr "Erstelle eines Tagebuch oder eine neue Gebetsliste aus einer Vorlage"
 
 #: ../ui/xi-menus.glade.h:23
 msgid "Create a new monthly journal"
@@ -3560,7 +3546,7 @@ msgstr "Zeige Kapitelüberschrift"
 
 #: ../ui/xi-menus.glade.h:33
 msgid "Display verse numbers in the text"
-msgstr ""
+msgstr "Zeige Versnummern im Text"
 
 #: ../ui/xi-menus.glade.h:34
 msgid "Doublespace"
@@ -3616,7 +3602,7 @@ msgstr "_Reiter verbinden"
 
 #: ../ui/xi-menus.glade.h:54
 msgid "Learn about The Sword Project, of which Xiphos is one application"
-msgstr ""
+msgstr "Lerne mehr über das Sword-Projekt, wovon Xiphos eine Anwendung ist"
 
 #: ../ui/xi-menus.glade.h:55
 msgid "Learn about Xiphos"
@@ -3656,11 +3642,11 @@ msgstr "_Notizbuch öffnen"
 
 #: ../ui/xi-menus.glade.h:68
 msgid "Open a browser on an interface to live IRC chat"
-msgstr ""
+msgstr "Öffne einen Browser mit einer Schnittstelle zum Live IRC Chat"
 
 #: ../ui/xi-menus.glade.h:69
 msgid "Open a browser on our bug tracker"
-msgstr ""
+msgstr "Öffne einen Browser mit unserem Fehler-Verfolger"
 
 #: ../ui/xi-menus.glade.h:70
 msgid "Open a browser on the users' mailing list webpage"
@@ -3700,7 +3686,7 @@ msgstr "Ausgewähltes Modul in neuem Reiter öffnen"
 
 #: ../ui/xi-menus.glade.h:79
 msgid "Open the advanced search dialog, to run complex queries"
-msgstr ""
+msgstr "Öffne den Fortgeschrittenen Such-Dialog, um komplexe Suchen durchzuführen"
 
 #: ../ui/xi-menus.glade.h:80
 msgid "Open the help viewer on the Xiphos manual"
@@ -3739,9 +3725,8 @@ msgid "Remove folder and save it"
 msgstr "Ordner entfernen und speichern"
 
 #: ../ui/xi-menus.glade.h:91
-#, fuzzy
 msgid "Remove the sidebar entirely from view"
-msgstr "Ausgewählten Ordner entfernen"
+msgstr "Entfernt die Seitenleiste komplett aus der Ansicht"
 
 #: ../ui/xi-menus.glade.h:92
 msgid "Remove this item"
@@ -3773,7 +3758,7 @@ msgstr "Speichere diese Ergebnisse als ein einzelnes Lesezeichen"
 
 #: ../ui/xi-menus.glade.h:99
 msgid "Save this collection of tab settings"
-msgstr ""
+msgstr "Speichere diese Sammlung von Reiter-Einstellungen"
 
 #: ../ui/xi-menus.glade.h:100
 msgid "Scripture Cross-references"
@@ -3921,11 +3906,11 @@ msgstr "_Zeige/Verstecke angedockte Seitenleiste"
 
 #: ../ui/xi-export-bookmarks.glade.h:1
 msgid "<b>Export to:</b>"
-msgstr ""
+msgstr "<b>Export nach:</b>"
 
 #: ../ui/xi-export-bookmarks.glade.h:2
 msgid "Export Bookmark Folder"
-msgstr ""
+msgstr "Export Lesezeichen Verzeichnis"
 
 #: ../ui/xi-export-bookmarks.glade.h:3
 msgid "Html"
@@ -3933,23 +3918,23 @@ msgstr "HTML"
 
 #: ../ui/xi-export-bookmarks.glade.h:4
 msgid "Include Bible text"
-msgstr ""
+msgstr "Bibeltexte einschließen"
 
 #: ../ui/xi-export-bookmarks.glade.h:5
 msgid "Plain text"
-msgstr ""
+msgstr "Reiner Text"
 
 #: ../ui/xi-export-bookmarks.glade.h:6
 msgid "Xiphos bookmarks"
-msgstr ""
+msgstr "Xiphos Lesezeichen"
 
 #: ../ui/xi-export-bookmarks.glade.h:7
 msgid "gtk-cancel"
-msgstr ""
+msgstr "gtk-cancel"
 
 #: ../ui/xi-export-bookmarks.glade.h:8
 msgid "gtk-ok"
-msgstr ""
+msgstr "gtk-ok"
 
 #: ../xiphos.desktop.in.in.h:1
 msgid "Study the Bible"
