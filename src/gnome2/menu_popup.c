@@ -1703,7 +1703,10 @@ GtkWidget * _create_popup_menu (const gchar * mod_name, DIALOG_DATA * d)
 {
 	gchar *glade_file;
 	GladeXML *gxml;
-    	const gchar *mname = NULL;
+    	const gchar *mname = (is_dialog ? dialog->mod_name : mod_name);
+
+	if (!mname || !*mname)
+		return NULL;
 
 	glade_file = gui_general_user_file ("xi-menus.glade", FALSE);
 	g_return_val_if_fail ((glade_file != NULL), NULL);
@@ -1748,12 +1751,10 @@ GtkWidget * _create_popup_menu (const gchar * mod_name, DIALOG_DATA * d)
 	gtk_widget_hide (close); /* FIXME: hide until connected to dialog close */
 
     	if (is_dialog) {
-		mname = dialog->mod_name;
 	    	gtk_widget_hide (open);
 	    	gtk_widget_hide (bookmark);
 	    	gtk_widget_hide (export_);
 	} else {
-		mname = mod_name;
 	    	gtk_widget_hide (close);
     		gtk_menu_item_set_submenu (GTK_MENU_ITEM(open),
 				  	open_sub);
@@ -1857,6 +1858,9 @@ void gui_menu_popup (const gchar * mod_name, DIALOG_DATA * d)
 		return;
 
 	menu = _create_popup_menu (mod_name, d);
-	gtk_menu_popup ((GtkMenu*)menu, NULL, NULL, NULL, NULL, 2,
-		     			gtk_get_current_event_time());
+	if (menu)
+		gtk_menu_popup ((GtkMenu*)menu, NULL, NULL, NULL, NULL, 2,
+				gtk_get_current_event_time());
+	else
+		gui_generic_warning(_("No module in this pane."));
 }
