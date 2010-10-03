@@ -2,6 +2,7 @@
 
 	* fix #3077109 sidebar search crash when no commentary available.
 	* fix #3077178 Crash on shutdown when paratab selected
+	* fix #3077179,3077180,3077181 stop empty module crashes
 
 2010-08-21  karl <charcoal@users.sf.net>
 
