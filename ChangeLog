@@ -1,3 +1,7 @@
+2010-10-03  karl <charcoal@users.sf.net>
+
+	* fix #3077109 sidebar search crash when no commentary available.
+
 2010-08-21  karl <charcoal@users.sf.net>
 
 	* correct longstanding misspelling s/hight/height/g throughout.
