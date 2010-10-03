@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 3.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-02 20:10+0200\n"
-"PO-Revision-Date: 2010-10-02 21:51+0100\n"
+"POT-Creation-Date: 2010-10-02 21:51+0200\n"
+"PO-Revision-Date: 2010-10-03 20:48+0100\n"
 "Last-Translator: Eicke Godehardt <sf at godehardt.org>\n"
 "Language-Team: Xiphos Translation Team <farsi@lists.sharif.edu>\n"
 "MIME-Version: 1.0\n"
@@ -30,6 +30,9 @@ msgid ""
 "Please report this. sword_main.cc:set_treekey\n"
 "What were you doing when this occurred?"
 msgstr ""
+"Xiphos Fehler: \"sollte nicht passieren\", display_mod: null\n"
+"Bitte melden Sie dies. sword_main.cc:set_treekey\n"
+"Was haben Sie getan, als das Problem auftrat?"
 
 #: ../src/backend/sword_main.cc:1083
 msgid "Configuration not found"
@@ -948,7 +951,7 @@ msgstr "Bilder"
 #: ../src/main/sidebar.cc:1081
 #: ../src/main/sidebar.cc:1083
 msgid "Cult/Unorthodox"
-msgstr ""
+msgstr "Kult/Unorthodox"
 
 #: ../src/gnome2/mod_mgr.c:1365
 msgid ""
@@ -1457,7 +1460,7 @@ msgid ""
 "Improperly encoded personal annotation label:\n"
 "'%s'"
 msgstr ""
-"Unzulässig kodierte persönliche Annotationsbeschriftung:\n"
+"Unzulässig kodierte persönliche Kommentarbeschriftung:\n"
 "'%s'"
 
 #: ../src/main/display.cc:927
@@ -1860,7 +1863,7 @@ msgstr "<b>Hauptpunkt C</b><br>"
 
 #: ../src/main/previewer.cc:186
 msgid "User Annotation"
-msgstr "Benutzerannotierungen"
+msgstr "Benutzerkommentar"
 
 #: ../src/main/search_dialog.cc:208
 #, c-format
@@ -2173,7 +2176,7 @@ msgstr ""
 
 #: ../src/main/xml.c:1216
 msgid "Attempting to revert to previous save."
-msgstr ""
+msgstr "Versuch, das letzte Speichern rückgängig zu machen."
 
 #: ../ui/bookmarks.glade.h:1
 msgid "Add Bookmark"
@@ -2475,24 +2478,23 @@ msgstr "<i>Systembereich, für alle Benutzer:</i>"
 
 #: ../ui/module-manager.glade.h:11
 msgid "Add a custom remote install source. You must know its hostname and the folder where its repository lives."
-msgstr ""
+msgstr "Hinzufügen einer maßgeschneiderten entfernten Installationsquelle. Sie brauchen dazu den Rechnernamen und das Verzeichnis des Repositories."
 
 #: ../ui/module-manager.glade.h:12
 msgid "Add a local folder as an install source, typically on a cdrom or flash drive.  Such a folder contains subfolders \"mods.d\" and \"modules\"."
-msgstr ""
+msgstr "Hinzufügen eines lokalen Verzeichnisses als Installationsquelle, typischerweise auf einer CD oder einem Stick.  So ein Verzeichnis enthält Unterverzeichnisse \"mods.d\" und \"modules\"."
 
 #: ../ui/module-manager.glade.h:13
 msgid "Build an index of the selected modules, for optimized (\"lucene\") searching."
-msgstr ""
+msgstr "Erstelle einen Index der ausgewählten Module, für optimiertes (\"lucene\") Suchen."
 
 #: ../ui/module-manager.glade.h:14
 msgid "Continue"
 msgstr "Fortfahren"
 
 #: ../ui/module-manager.glade.h:15
-#, fuzzy
 msgid "Create a zip archive of the selected modules."
-msgstr "Wollen Sie das ausgewählte Modul entfernen?"
+msgstr "Erzeuge ein Zip-Archiv der ausgewählten Module?"
 
 #: ../ui/module-manager.glade.h:16
 msgid "Current Remote Sources"
@@ -2516,7 +2518,7 @@ msgstr "Installiere oder aktualisiere ausgewählte Module"
 
 #: ../ui/module-manager.glade.h:21
 msgid "Load and synchronize the standard set of known repositories, as maintained at crosswire.org, with your current remote sources."
-msgstr ""
+msgstr "Lade und synchronisiere die Standardmenge an bekannten Repositorien, wie sie auf crosswire.org gepflegt werden, mit Ihren aktuellen entfernten Quellen."
 
 #: ../ui/module-manager.glade.h:22
 msgid "Local"
@@ -2532,11 +2534,11 @@ msgstr "Modulverwaltung"
 
 #: ../ui/module-manager.glade.h:25
 msgid "Open a brief introductory explanation of how the Module Manager works."
-msgstr ""
+msgstr "Öffne eine kurze einleitende Erklärung, wie der Modul-Manager arbeitet."
 
 #: ../ui/module-manager.glade.h:26
 msgid "Refresh Xiphos' knowledge of what modules are available at the selected remote repository"
-msgstr ""
+msgstr "Aktualisiere Xiphos' Wissen darüber, welche Module in den ausgewählten entfernten Repositorien verfügbar sind"
 
 #: ../ui/module-manager.glade.h:27
 msgid "Remote"
@@ -2548,7 +2550,7 @@ msgstr "Geben sie eine Quelle im Internet an"
 
 #: ../ui/module-manager.glade.h:29
 msgid "Remove one of your local folders as an install source."
-msgstr ""
+msgstr "Entfernt eines Ihrer lokalen Verzeichnisse als Installationsquelle."
 
 #: ../ui/module-manager.glade.h:30
 msgid "Remove the selected modules from your system"
@@ -2857,16 +2859,15 @@ msgstr "Tickbox um aktuellen Vers hervorzuheben"
 
 #: ../ui/prefs.glade.h:66
 msgid "Highlight user annotations"
-msgstr "Benutzerannotierungen hervorheben"
+msgstr "Benutzerkommentar hervorheben"
 
 #: ../ui/prefs.glade.h:67
-#, fuzzy
 msgid "Highlight user annotations check box"
-msgstr "Tickbox um aktuellen Vers hervorzuheben"
+msgstr "Tickbox um Benutzerkommentare hervorzuheben"
 
 #: ../ui/prefs.glade.h:68
 msgid "If you have set a preferred daily devotion module, its entry for today will be shown at startup."
-msgstr ""
+msgstr "Wenn Sie ein bevorzugtes Tageslosungsmodul eingestellt haben, wird der Eintrag beim Starten angezeigt."
 
 #: ../ui/prefs.glade.h:69
 msgid "Invert color pairs"
@@ -2882,12 +2883,11 @@ msgstr "Verweise"
 
 #: ../ui/prefs.glade.h:72
 msgid "Make double-click of a word always use default dictionary instead of dictionary currently displayed"
-msgstr ""
+msgstr "Lässt Doppelklick auf ein Wort immer das Standardwörterbuch verwenden, anstatt das Wörterbuch, welches aktuell angezeigt wird"
 
 #: ../ui/prefs.glade.h:73
-#, fuzzy
 msgid "Make journals/prayer lists available"
-msgstr "Mach Tagebuch/Gebetsliste erreichbar"
+msgstr "Mach Tagebuch/Gebetsliste verfügbar"
 
 #: ../ui/prefs.glade.h:74
 #: ../ui/search-dialog.glade.h:61
@@ -2900,11 +2900,11 @@ msgstr "Verschiedene Module"
 
 #: ../ui/prefs.glade.h:76
 msgid "Modules Parallel"
-msgstr "Parallelansicht"
+msgstr "Module parallel"
 
 #: ../ui/prefs.glade.h:77
 msgid "Name and size choice for any module in a given language; still overridden by a specific choice on a particular module"
-msgstr ""
+msgstr "Name und Größenauswahl aller Module in einer gegebenen Sprache; wird überschrieben von der spezifischen Auswahl zu einem bestimmten Modul"
 
 #: ../ui/prefs.glade.h:78
 msgid "Normal Text"
@@ -2958,7 +2958,7 @@ msgstr "Verzeichnis wählen"
 
 #: ../ui/prefs.glade.h:92
 msgid "Select a particular language for interface display, other than your usual setting"
-msgstr ""
+msgstr "Wähle eine bestimmte Sprache für die Darstellung, anders als Ihre normale Einstellung"
 
 #: ../ui/prefs.glade.h:93
 msgid "Show Daily Devotion at start up"
@@ -2970,7 +2970,7 @@ msgstr "Startbildschirm anzeigen"
 
 #: ../ui/prefs.glade.h:95
 msgid "Single selection of Bible+commentary+book+dictionary, or many sets of such selections in a tabbed interface"
-msgstr ""
+msgstr "Einzelauswahl von Bibel+Kommentar+Buch+Wörterbuch, oder viele solcher Mengen in dem Reiter-Ansicht"
 
 #: ../ui/prefs.glade.h:96
 msgid "Special Locale (requires restart)"
@@ -3001,9 +3001,8 @@ msgid "Use default Dictionary Checkbox"
 msgstr "Vorgabewörterbuch verwenden Kontrollkästchen"
 
 #: ../ui/prefs.glade.h:103
-#, fuzzy
 msgid "Use inverted highlight on user-annotated verses"
-msgstr "Wende kontrastreiche Hervorhebung auf den aktuellen Vers an"
+msgstr "Verwende umgekehrte Hervorhebung für benutzerkommentierte Verse"
 
 #: ../ui/prefs.glade.h:104
 msgid "Use tabbed browsing"
@@ -3015,7 +3014,7 @@ msgstr "Benutze Reiter zur Anzeige Kontrollkästchen"
 
 #: ../ui/prefs.glade.h:106
 msgid "Use the verse list for Bible cross-references instead of the previewer"
-msgstr ""
+msgstr "Benutze die Versliste für die Bibel-Querverweise, anstatt die Vorschau"
 
 #: ../ui/prefs.glade.h:107
 msgid "Verse Number"
@@ -3026,9 +3025,8 @@ msgid "Verse number size"
 msgstr "Größe der Versnummern"
 
 #: ../ui/prefs.glade.h:109
-#, fuzzy
 msgid "Xrefs in verse list check box"
-msgstr "Bildgröße ändern Kontrollkästchen"
+msgstr "Tickbox für Xrefs in den Verslisten"
 
 #: ../ui/search-dialog.glade.h:1
 msgid "<b>Attribute</b>"
@@ -3262,11 +3260,11 @@ msgstr "Neuer Bereich Knopf"
 
 #: ../ui/search-dialog.glade.h:71
 msgid "Open a brief explanation of attribute-based searches."
-msgstr ""
+msgstr "Öffne eine kurze Beschreibung für Merkmal-basierte Suchen."
 
 #: ../ui/search-dialog.glade.h:72
 msgid "Open a brief explanation of the syntax used for optimized \"lucene\" searches."
-msgstr ""
+msgstr "Öffne eine kurze Beschreibung für die Syntax der optimieren \"lucene\"-Suchen."
 
 #: ../ui/search-dialog.glade.h:73
 msgid "Open a dialog to select modules to add to the list"
@@ -3470,7 +3468,7 @@ msgstr "Einträge dürfen in andere Ordner verschoben werden"
 
 #: ../ui/xi-menus.glade.h:12
 msgid "Annotate Verse"
-msgstr "Vers annotieren"
+msgstr "Vers kommentieren"
 
 #: ../ui/xi-menus.glade.h:13
 msgid "Apply a high-contrast highlight to the current verse"
@@ -3478,7 +3476,7 @@ msgstr "Wende kontrastreiche Hervorhebung auf den aktuellen Vers an"
 
 #: ../ui/xi-menus.glade.h:15
 msgid "Bring the simple sidebar search forward"
-msgstr ""
+msgstr "Bringt die einfache Suche in der Seitenleiste nach vorn"
 
 #: ../ui/xi-menus.glade.h:16
 msgid "Browse in BibleMap.org"
@@ -3622,7 +3620,7 @@ msgstr "Auswahl nachschlagen"
 
 #: ../ui/xi-menus.glade.h:60
 msgid "Make all tabs' Bibles navigate together"
-msgstr ""
+msgstr "Lässt alle Bibeln in den Reitern zusammen navigieren"
 
 #: ../ui/xi-menus.glade.h:62
 msgid "Monthly"
@@ -3710,11 +3708,11 @@ msgstr "Skizziert"
 
 #: ../ui/xi-menus.glade.h:85
 msgid "Preview _Daily Devotion"
-msgstr ""
+msgstr "Vorschau auf _Tageslosung"
 
 #: ../ui/xi-menus.glade.h:87
 msgid "Provide the full-chapter parallel Bible window as another tab"
-msgstr ""
+msgstr "Bereitstellen der Parallelansicht der Bibeln für ganze Kapitel als ein weiterer Reiter"
 
 #: ../ui/xi-menus.glade.h:88
 msgid "Read Selection Aloud"
@@ -3766,7 +3764,7 @@ msgstr "Schrift-Querverweise"
 
 #: ../ui/xi-menus.glade.h:102
 msgid "Select Previewer position between sidebar or beneath Bible"
-msgstr ""
+msgstr "Wähle die Position der Vorschau innerhalb der Seitenleiste oder unterhalb der Bibel"
 
 #: ../ui/xi-menus.glade.h:103
 msgid "Show Parallel View in a _Tab"
@@ -3782,7 +3780,7 @@ msgstr "Zeige Vers_nummern"
 
 #: ../ui/xi-menus.glade.h:106
 msgid "Show today's entry from your selected daily devotional in the previewer"
-msgstr ""
+msgstr "Zeigt heutigen Eintrag aus der ausgewählten Tageslosung in der Vorschau"
 
 #: ../ui/xi-menus.glade.h:107
 msgid "Simple"
@@ -3794,7 +3792,7 @@ msgstr "Gegenstand"
 
 #: ../ui/xi-menus.glade.h:111
 msgid "Turn on text-to-speech reading of Bible verses as they are selected"
-msgstr ""
+msgstr "Aktiviere die Text-zu-Sprache Ausgabe der Bibleverse, wenn sie ausgewählt werden"
 
 #: ../ui/xi-menus.glade.h:112
 msgid "Unlock This Module"
