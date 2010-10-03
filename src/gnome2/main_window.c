@@ -361,7 +361,11 @@ static gboolean  delete_event (GtkWidget *widget,
 	/* shutdown the sword stuff */
 	main_shutdown_backend();
 	gtk_main_quit();
+#if 0
+	/* this causes trouble when paratab is active.
+	   and frankly, why do we care?  we're about to exit.  just leave. */
 	gtk_widget_destroy(widgets.app);
+#endif
 	exit(0);
 	return TRUE;
 }
