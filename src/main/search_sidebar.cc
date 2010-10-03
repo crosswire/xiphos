@@ -207,11 +207,17 @@ void main_do_sidebar_search(gpointer user_data)
 	if (strlen(search_string) < 1)
 		return;
 
+	/* text -vs- commentary search selection. */
 	if (GTK_TOGGLE_BUTTON(ss.radiobutton_search_text)->active) {
 		strcpy(settings.sb_search_mod,
 		       settings.MainWindowModule);
 	}
 	else if (GTK_TOGGLE_BUTTON(ss.radiobutton_search_comm)->active) {
+		if (!settings.CommWindowModule ||
+		    (strlen(settings.CommWindowModule) == 0)) {
+			gui_generic_warning(_("There is no commentary module."));
+			return;
+		}
 		strcpy(settings.sb_search_mod,settings.CommWindowModule);
 	}
 
