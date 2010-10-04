@@ -10,7 +10,7 @@
 					<term>Applications menu</term>
 					<listitem>
 						<para>
-						Choose <menuchoice><guisubmenu>Accessories</guisubmenu>
+						Choose <menuchoice><guisubmenu>Education</guisubmenu>
 						<guimenuitem>Xiphos Bible Guide</guimenuitem>
 						</menuchoice>.
 			            </para>
@@ -40,10 +40,10 @@
   	<sect2 id="xiphos-first-start">
   		<title>Starting Xiphos For The First Time</title>
 		<para>
-		When you start <application>Xiphos</application> for the first time, <application>Xiphos</application> creates a
-		default selection of options for display.  Also, if no other Sword application has ever been run, and thus there are no
-		Bible modules installed, then <application>Xiphos</application> asks permission to start the Module Manager so
-		that you can select and install a Bible module in your language preference.
+		When you start <application>Xiphos</application> for the first time, <application>Xiphos</application> creates a default
+		selection of options for display.  Also, if no other Sword application has ever been run, and thus there are no Bible
+		modules installed, then <application>Xiphos</application> starts the Module Manager so that you can select and install a
+		Bible module in your language preference.
 		</para>
 		<figure id="xiphos-start-question">
 			<title>Xiphos Download Question</title>
@@ -59,7 +59,7 @@
     		    </imageobject>
 	    -->
 	    <textobject> 
-	      <phrase>Xiphos Download Question</phrase> 
+	      <phrase>Xiphos Download Instruction</phrase> 
 	    </textobject> 
 	  </mediaobject> 
 	
@@ -178,8 +178,8 @@
 		     </varlistentry>
 			 </variablelist>
 		     <para>
-			When you right-click in the different interface sections, the interface displays a popup menu, which provides access
-			to more module-specific options, including display controls and printing services.
-			</para>
+			When you right-click in the different interface sections, the interface displays a context popup menu, which
+			provides access to more module-specific options, including display controls and printing services.
+		     </para>
 	</sect2>
 
