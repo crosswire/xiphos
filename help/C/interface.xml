@@ -209,9 +209,8 @@
 			</screenshot>
 	    	</figure>
 		<para>
-		Positioned to the right of the Shortcut bar is the Bible text pane. All your different translations
-		will be displayed for full viewing. When starting <application>Xiphos</application> either your default Bible translation or the translation
-		last used will be displayed.
+		Positioned to the right of the Shortcut bar is the Bible text pane. All translations are displayed here.  When starting
+		<application>Xiphos</application>, the translation last used in the leftmost tab will be displayed.
 		</para>
 		
 		<sect3 id="xiphos-bible-open">
@@ -240,12 +239,13 @@
 		<sect3 id="xiphos-bible-parallel">
 			<title>Using the Parallel View Mode</title>
 			<para>
-			A nice function in <application>Xiphos</application> is the ability to view your specified bible text in five parallel
-			translations of your choice. The Parallel View mode can be accessed by selecting <guimenuitem>Parallel View</guimenuitem> just
-			below the <interface>Bible Text Pane</interface>, next to the <guimenuitem>Standard View</guimenuitem> tab. Please note that you
-			can only view one verse at a time. You can change the verse by selecting another verse, chapter, or book at the toolbar. Also note
-			that modules that are Old Testament or New Testament only (eg Westminster Leningrad Codex and Byzantine Majority Text ) will not be able
-			to display books, chapters, or verses that they don't have.  
+			A nice function in <application>Xiphos</application> is the ability to view your specified bible text in several
+			parallel translations of your choice. The Parallel View mode can be accessed by selecting <guimenuitem>Parallel
+			View</guimenuitem> just below the <interface>Bible Text Pane</interface>, next to the <guimenuitem>Standard
+			View</guimenuitem> tab. Please note that you can only view one verse at a time in this mode. You can change the
+			verse by selecting another verse, chapter, or book at the toolbar. Also note that modules that are Old Testament or
+			New Testament only (eg Westminster Leningrad Codex and Byzantine Majority Text) will not be able to display books,
+			chapters, or verses that they don't have.  Modules displayed are selected via the Preferences dialog.
 			</para>
 		<figure id="parallel_figure">
 			<title>Bible textpane - parallel view</title>
@@ -269,7 +269,7 @@
 			<para>
 			Additionally, a separate Parallel View window can be selected from the right click menu with <guimenuitem>Detach/Attach</guimenuitem>.
 			Your Bible pane will return to its normal single text view, and the new Parallel View window will show the complete
-			chapter, in all 5 translations.
+			chapter, showing the same translations.
 			</para>
 		<figure id="parallel_figure_separate">
 			<title>Parallel View - separate window</title>
@@ -447,12 +447,6 @@
 			<itemizedlist>
 				<listitem>	
 					<para>
-					Verse Style - Toggles between Bible text display in separate verses, or in paragraphs instead.
-					This is set on a per-module basis.
-					</para>
-				</listitem>
-				<listitem>	
-					<para>
 					Link Tabs - When more than one tab is open, each one's verse is navigated separately in the disabled
 					case.  If tab linking is enabled, then all tabs navigate together, keeping all translations on the
 					same verse.
@@ -462,8 +456,7 @@
 					<para>
 					Read Aloud - If you enable this, then <application>Xiphos</application> will funnel all selected verses
 					through the <application>festival</application> text-to-speech system.  <application>Festival</application> is
-					a widely-available TTS, often installed by default in Linux distributions. Reading aloud is not currently
-					supported on Windows.
+					a widely-available TTS, often installed by default in Linux distributions.
 					</para>
 					<para>
 					Also, mouse-selected text may be read aloud from Bibles, commentaries, and general books, using the
@@ -490,12 +483,13 @@
 		<sect3 id="xiphos-user-annotation">
 			<title>User Annotation</title>
 			<para>
-			Many users wish to make personal annotations on individual verses, without the need to put a full "personal commentary" module
-			to use.  <application>Xiphos</application> provides this in the right-click context menu in the Bible pane.
-			This brings up a dialog showing the current verse reference and offering a text box into which to enter a brief personal note.
-			Once the user closes the dialog with "Mark," the verse will be displayed in reverse-highlight (default, blue on yellow) and a
-			marker <guibutton>*u</guibutton> will be inserted at the verse's beginning.  This is metaphorically similar for users who mark
-			verses in paper Bibles with a yellow highlighter and write personal notes in the margins.
+			Many users wish to make personal annotations on individual verses, without the need to put a full "personal
+			commentary" module to use.  <application>Xiphos</application> provides this in the right-click context menu in the
+			Bible pane.  This brings up a dialog showing the current verse reference and offering a text box into which to enter
+			a brief personal note.  Once the user closes the dialog with "Annotate Verse," the verse will be displayed in
+			reverse-highlight (default, blue on yellow) and a marker <guibutton>*u</guibutton> will be inserted at the verse's
+			beginning.  This is metaphorically similar for users who mark verses in paper Bibles with a yellow highlighter and
+			write personal notes in the margins.
 			</para>
 			<para>
 			Selecting an already-annotated verse will (in the usual case) bring up the existing content for re-editing.  An
@@ -536,10 +530,10 @@
 			<itemizedlist>
 				<listitem>
 					<para>
-					right-click in the <interface>Bible Text Pane</interface>. In the popup menu, choose <guibutton>Edit</guibutton>-&gt;
-					<guibutton>Find</guibutton>. A separate dialog will appear, which provides text searches. Fill out
-					dialog and click the <guibutton>Find</guibutton> and <guibutton>Find Next</guibutton> buttons.
-					</para>	
+					right-click in the <interface>Bible Text Pane</interface>. In the popup menu, choose
+					<menuchoice><guisubmenu>Edit</guisubmenu><guimenuitem>Find</guimenuitem></menuchoice>. A dialog will
+					appear, which provides text searches. Fill out dialog and click the <guibutton>Find</guibutton> and
+					<guibutton>Find Next</guibutton> buttons.  </para>
 				</listitem>
 			</itemizedlist>
 		</sect3>
@@ -581,6 +575,8 @@
 		Cross-reference indicators <guibutton>*x</guibutton> work much the same way.  Clicking the
 		indicator will send the set of references to the <guibutton>Verse List</guibutton> in the
 		<interface>Sidebar</interface>, where you can click them individually for reading in the Previewer.
+                Alternately, a Preferences selector is available, so that cross-reference lists are sent to the
+                verse list instead.
 		</para>
 		<para>
 		Any verses shown in reverse-highlight have personal annotation associated with them, and such verses will include
@@ -731,11 +727,6 @@
 					<guibutton>Ctrl-t</guibutton> opens a new tab.
 				</para>
 			</listitem>
-		       <listitem>
-				<para>
-					<guibutton>F1</guibutton> opens this manual.
-				</para>
-			</listitem>
 		</itemizedlist>
 		<para>
 		Verse navigation and Bible features:
@@ -758,6 +749,11 @@
 		Opening special windows:
 		</para>
 		<itemizedlist>
+		        <listitem>
+				<para>
+					<guibutton>F1</guibutton> opens this manual.
+				</para>
+			</listitem>
 			<listitem>
 				<para>
 					<guibutton>F2</guibutton>: opens the <guibutton>Preferences</guibutton> dialog.
@@ -847,8 +843,7 @@
 			</listitem>
 			<listitem>
 				<para>
-				Under MozEmbed, double-space display is available using the <guimenuitem>View</guimenuitem> menu, but not
-				under gtkhtml3.
+				Under MozEmbed, double-space display is available using the context menu, but not under gtkhtml3.
 				</para>
 			</listitem>
 			<listitem>

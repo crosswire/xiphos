@@ -3,9 +3,10 @@
 	<sect2 id="xiphos-searchpane">
 		<title>Simple Searches</title>
 		<para>
-		To conduct a quick search within the current Bible or commentary module, the Search Bar in the Sidebar should usually be adequate. Click either
-		in the menu bar <guimenuitem>Edit-&gt;Search</guimenuitem> or in the Sidebar <guimenuitem>Modules-&gt;Search</guimenuitem> to access it.
-		</para> 
+		To conduct a quick search within the current Bible or commentary module, the Search Bar in the Sidebar should usually be
+		adequate. Click either in the menu bar
+		<menuchoice><guisubmenu>Edit</guisubmenu><guimenuitem>Search</guimenuitem></menuchoice> or in the Sidebar
+		<menuchoice><guisubmenu>Modules</guisubmenu><guimenuitem>Search</guimenuitem></menuchoice> to access it.  </para>
 	
 		<figure>
 		<title>The Search Bar</title>
@@ -75,7 +76,7 @@
 			<para>
 			This search uses the optimized search method (see next section) if
 			the module has previously been indexed, and will use AND semantics by default 
-			(verses must contain all words you entered).
+			(matched verses contain all words you entered).
 			</para>
 			</sect3>
 		
@@ -97,7 +98,9 @@
 					<term><guibutton>Multi word</guibutton></term> 
 					<listitem><para>This type will match any verse that has 
 					all the words in the search key, regardless of where 
-					they appear in the verse.</para></listitem>
+					they appear in the verse.  By default, "lucene" fast search
+                                        will be used, with fallback to the slower plain version of
+                                        multi-word search in the absence of an index.</para></listitem>
 				</varlistentry>
 				<varlistentry>
 					<term><guibutton>Regular expression</guibutton></term> 
@@ -202,8 +205,8 @@
 	<sect2 id="xiphos-advanced-search">
 	   <title>Advanced Searches</title> 
 	   <para>
-		More complicated searches might require the use of the advanced search functions, found under <guimenuitem>Edit-&gt;Advanced
-		Search</guimenuitem>.
+		More complicated searches might require the use of the advanced search functions, found under
+		<menuchoice><guisubmenu>Edit</guisubmenu><guimenuitem>Advanced Search</guimenuitem></menuchoice>.
 	   </para>
 	 
 	  <figure>
@@ -235,11 +238,10 @@
 	   </para>
 
 	   <para>
-		The default search is multi-word, a somewhat slow and blunt search through module text.  Also available is an optimized
-		search based on the Lucene indexing and search library. In order to use the optimized search, the index must be constructed
-		beforehand: Please see the preceding section on the Module Manager regarding the Maintenance functions, including indexing. A
-		web search will provide several references to the syntax needed to put to use the power of optimized Lucene search. A few
-		examples follow:
+                The default search uses "lucene" fast searching.  It is an optimized search requiring a pre-built index; see the
+                <guilabel>Module Manager's</guilabel> Maintenance page for index creation.  In the absence of an index, fallback to the
+                slower, plain multi-word search will be done, or can be selected deliberately here.  A web search will provide several
+                references to the syntax needed to put to use the power of optimized Lucene search. A few examples follow:
 	   </para>
 	   
 	   <para>
@@ -285,6 +287,10 @@
 		"lemma:", so to search for Strong's Greek #140, enter "lemma:G140". You must have selected <guibutton>Optimized ("Lucene")</guibutton>
 		for this to work.
 	  </para>
+
+	   <para>
+		Explanations of search syntax are available when either Optimized or Attribute search is selected.
+	   </para>
 
 	   <para>
 		The "Find" button also stops an in-progress search, as its tooltip indicates.
