@@ -20,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 3.1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-01 14:56+0200\n"
-"PO-Revision-Date: 2010-10-01 14:56+0200\n"
+"POT-Creation-Date: 2010-10-04 21:56+0200\n"
+"PO-Revision-Date: 2010-10-04 22:00+0200\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: emacs + po-mode <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -535,30 +535,30 @@ msgstr ""
 msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
 msgstr "BUG! Xiphos va s'arrêter sur une erreur « STRING »."
 
-#: ../src/gnome2/main_window.c:793
+#: ../src/gnome2/main_window.c:797
 msgid "Xiphos - Bible Study Software"
 msgstr "Xiphos - Logiciel d'étude biblique"
 
-#: ../src/gnome2/main_window.c:848
+#: ../src/gnome2/main_window.c:852
 msgid "Open a new tab"
 msgstr "Ouvrir un nouvel onglet"
 
-#: ../src/gnome2/main_window.c:928 ../src/gnome2/sidebar.c:616
+#: ../src/gnome2/main_window.c:932 ../src/gnome2/sidebar.c:616
 #: ../src/gnome2/sidebar.c:622 ../src/main/sidebar.cc:664
 #: ../src/main/sidebar.cc:1009 ../src/main/sidebar.cc:1010
 #: ../src/main/sidebar.cc:1011
 msgid "Standard View"
 msgstr "Vue simple"
 
-#: ../src/gnome2/main_window.c:1009
+#: ../src/gnome2/main_window.c:1013
 msgid "Commentary View"
 msgstr "Commentaire"
 
-#: ../src/gnome2/main_window.c:1025
+#: ../src/gnome2/main_window.c:1029
 msgid "Book View"
 msgstr "Livre"
 
-#: ../src/gnome2/main_window.c:1050
+#: ../src/gnome2/main_window.c:1054
 msgid "Welcome to Xiphos"
 msgstr "Bienvenue dans Xiphos"
 
@@ -623,6 +623,10 @@ msgid ""
 msgstr ""
 "Erreur de configuration\n"
 "\n"
+
+#: ../src/gnome2/menu_popup.c:1865
+msgid "No module in this pane."
+msgstr "Pas de module dans ce volet"
 
 #. *****************************************************************************
 #. * defines
@@ -1969,6 +1973,10 @@ msgstr "Recherche terminée"
 #: ../src/main/search_sidebar.cc:100
 msgid "matches"
 msgstr "réponses"
+
+#: ../src/main/search_sidebar.cc:218
+msgid "There is no commentary module."
+msgstr "Il n'y a pas de module commentaire."
 
 #: ../src/main/settings.c:105
 msgid "$HOME is not set!"
