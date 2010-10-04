@@ -13,7 +13,8 @@
 		<para>
 		To enable prayer list and journal support, see the
 		Preferences dialog as previously described.  There, in
-		<guibutton>General-&gt;Misc</guibutton>, check the
+                <menuchoice><guisubmenu>General</guisubmenu><guimenuitem>
+		Options</guimenuitem></menuchoice>, check the
 		item labeled
 		<guimenuitem>Enable Prayer Lists</guimenuitem>.
 		You will see a new item appear at the bottom of the
