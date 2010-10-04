@@ -3,7 +3,7 @@
     <sect2 id="xiphos-studypad">
 		<title>Using The Studypad</title>
 		<para>
-		The Studypad can be opened by choosing <guibutton>File-&gt;Open Studypad</guibutton>
+		The Studypad can be opened by choosing <menuchoice><guisubmenu>File</guisubmenu><guimenuitem>Open StudyPad</guimenuitem></menuchoice>
 		</para>
 		<para>
 		This is what the Studypad typically looks like:
@@ -49,9 +49,8 @@
 			        	</itemizedlist>
 
 	        <para>
-		In order for spellcheck to be available, one of the languages
-		under <guimenuitem>Edit-&gt;Current Languages</guimenuitem>
-		must be set.
+		In order for spellcheck to be available, one of the languages under
+		<menuchoice><guisubmenu>Edit</guisubmenu><guimenuitem>Current languages</guimenuitem></menuchoice> must be set.
 	        </para>
 
 	</sect2>

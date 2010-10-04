@@ -530,10 +530,10 @@
 			<itemizedlist>
 				<listitem>
 					<para>
-					right-click in the <interface>Bible Text Pane</interface>. In the popup menu, choose <guibutton>Edit</guibutton>-&gt;
-					<guibutton>Find</guibutton>. A separate dialog will appear, which provides text searches. Fill out
-					dialog and click the <guibutton>Find</guibutton> and <guibutton>Find Next</guibutton> buttons.
-					</para>	
+					right-click in the <interface>Bible Text Pane</interface>. In the popup menu, choose
+					<menuchoice><guisubmenu>Edit</guisubmenu><guimenuitem>Find</guimenuitem></menuchoice>. A dialog will
+					appear, which provides text searches. Fill out dialog and click the <guibutton>Find</guibutton> and
+					<guibutton>Find Next</guibutton> buttons.  </para>
 				</listitem>
 			</itemizedlist>
 		</sect3>
