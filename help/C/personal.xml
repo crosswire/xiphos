@@ -4,7 +4,7 @@
 		To build up a personal commentary you will need to install the
 		editable 'Personal' sword module from the English Commentaries
 		section. Right click it and choose
-		<guimenuitem>Edit-&gt;Note-&gt;Personal</guimenuitem>
+		<menuchoice><guisubmenu>Edit</guisubmenu><guisubmenu>Note</guisubmenu><guimenuitem>Personal</guimenuitem></menuchoice>
 		in the menu.
 		</para>
 
@@ -73,8 +73,8 @@
 
 	        <para>
 		In order for spellcheck to be available, one of the languages
-		under <guimenuitem>Edit-&gt;Current Languages</guimenuitem>
-		must be set.
+		under <menuchoice><guisubmenu>Edit</guisubmenu><guimenuitem>Current
+                languages</guimenuitem></menuchoice> must be set.
 	        </para>
 
 	        <para>

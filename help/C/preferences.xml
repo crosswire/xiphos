@@ -50,6 +50,11 @@
                         </screenshot>
 
                 </figure>
+		<para>
+		The <guibutton>Invert color pairs</guibutton> buttons are provided to make it easy, for example, to move the main window
+		into "night mode," with white text on black background.
+		</para>
+
                 </sect3>
 		
 		<sect3 id="font-misc">
@@ -84,40 +89,44 @@
 		The base font size is the size initially chosen for all modules displayed by <application>Xiphos</application>.  The
 		verse number and individual modules' font size choices are relative to the base font size.
 		</para>
+
+		<para>
+                The font name and size used for display is chosen from this order:
+		</para>
+                <itemizedlist>
+                        <listitem>
+                                <para>
+                                The selection made via the context menu for the specific module, under <guimenuitem>Module
+                                Options</guimenuitem>.
+                                </para>
+                        </listitem>
+                        <listitem>
+                                <para>
+                                The per-language selection made under Preferences, here.
+                                </para>
+                        </listitem>
+                        <listitem>
+                                <para>
+                                The module's own default selection, in its configuration file.
+                                </para>
+                        </listitem>
+                        <listitem>
+                                <para>
+                                The application default.
+                                </para>
+                        </listitem>
+                </itemizedlist>
+
 		</sect3>
 	</sect2>
 	
 <!-- General Settings -->
 	<sect2 id="general-settings">
 		<title>General Settings</title>
-		<sect3 id="tab-pane1">
-			<title>Tabs and Pane Settings</title>
-		<figure>
-			<title>Tab and Pane Settings</title>
-	        	<screenshot> 
-	  <mediaobject> 
-	    <imageobject><imagedata
-		fileref="figures/preferences_general-tabs.png" format="PNG" /> 
-	    </imageobject>
-	    <!-- EPS versions of the figures are not required at the moment. -->
-            <!-- 
-		    <imageobject>
-      		<imagedata fileref="figures/preferences_general-tabs.eps" format="EPS"/>
-    		    </imageobject>
-	    -->
-	    <textobject> 
-	      <phrase>Tab and Pane Settings</phrase> 
-	    </textobject> 
-	  </mediaobject> 
-	
-                        </screenshot>
-
-                </figure>
-                </sect3>
 		<sect3 id="tab-pane2">
-			<title>General Preferences and StudyPad directory</title>
+			<title>Locale, General Preferences and StudyPad directory</title>
 		<figure>
-			<title>General Preferences and StudyPad directory</title>
+			<title>Locale, General Preferences and StudyPad directory</title>
 	        	<screenshot> 
 	  <mediaobject> 
 	    <imageobject><imagedata
@@ -138,18 +147,17 @@
 
                 </figure>
 		<para>
+                If you wish <application>Xiphos</application> to display its interface in a language other than the default, you may select
+                one here.  A restart will be required, so that the locale can be initialized.
+		</para>
+		<para>
+                If you enable <guilabel>Default Dictionary</guilabel>, then that named dictionary (see <guimenuitem>Special</guimenuitem>
+                below) module will always be used when double-clicking a word anywhere in <application>Xiphos</application>.
+		</para>
+		<para>
 		Certain dictionary-style modules are <guilabel>Daily Devotionals</guilabel> whose keys are numerically in the form "Month.Day".  If you have
 		such a module installed and it has been selected as your preferred devotional, then you can ask that <application>Xiphos</application>
 		display today's selection during startup.
-		</para>
-		<para>
-		<guilabel>Verse style</guilabel> indicates that each verse should begin on a separate line, or (when disabled) that verses
-		should be allowed to group in paragraphs, according to the Bible module's internal markup.  Not all Bible modules have such
-		markup.
-		</para>
-		<para>
-		With <guilabel>Scroll to Previous/Next Chapter</guilabel> enabled, using the mouse to scroll to the beginning or end of a
-		chapter will cause <application>Xiphos</application> to move automatically to the appropriate chapter.
 		</para>
 		<para>
 		If you enable <guilabel>Resize images</guilabel>, <application>Xiphos</application> will automatically resize image
@@ -160,34 +168,20 @@
 		mere current verse colorization with a high-contrast alternate color scheme on the current verse.  The colors used may be
 		chosen from the color selector pane (see above).
 		</para>
+		<para>
+                <guilabel>Highlight user annotations</guilabel> uses inverted the highlight color choices when marking user-annotated
+                verses.
+		</para>
+		<para>
+                By default, <guilabel>Cross-references</guilabel> go into the Previewer.  Selecting this checkbox puts them into the verse
+                list instead.
+		</para>
                 </sect3>
 	</sect2>
 	
 <!-- Module Settings -->
 	<sect2 id="module-settings">
 		<title>Module Settings</title>
-		<sect3 id="main-modules">
-			<title>Main Module Settings</title>
-		<figure>
-			<title>The Module Preferences Dialog</title>
-	        	<screenshot> 
-	  <mediaobject> 
-	    <imageobject><imagedata
-		fileref="figures/preferences_modules-main.png" format="PNG" />
-	    </imageobject>
-	    <!-- EPS versions of the figures are not required at the moment. -->
-            <!-- 
-		    <imageobject>
-      		<imagedata fileref="figures/preferences_modules-main.eps" format="EPS"/>
-    		    </imageobject>
-	    -->
-	    <textobject> 
-	      <phrase>The Module Preferences Dialog</phrase> 
-	    </textobject> 
-	  </mediaobject>
-                        </screenshot>
-
-                </figure>
 		<figure>
 			<title>Parallel Preferences</title>
 	        	<screenshot> 
@@ -229,6 +223,5 @@
                         </screenshot>
 
                 </figure>
-          	</sect3>
 	</sect2>
 
