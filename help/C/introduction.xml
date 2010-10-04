@@ -3,7 +3,7 @@
      the application is and what it does. -->
  
     <para>&app; is a Bible study and research tool based upon the "SWORD Project" libraries
-    and the GNOME Desktop libraries. You can use &app; to do the following:</para>
+    and the GTK libraries. You can use &app; to do the following:</para>
     <itemizedlist>
        <listitem>
           <para>View your favorite Scripture verse</para>
@@ -46,13 +46,10 @@
       </screenshot>
       </figure>
 
-      <para>"The SWORD Project" is based at 
-      <ulink type="http" url="http://www.crosswire.org">http://www.crosswire.org</ulink>.
-      Other applications under the same banner are <application>The SWORD Project for Windows</application>
-      (aka <application>BibleCS</application> or <application>WinSword</application>),      
-      <application>MacSword</application> for the Macintosh,
-      <application>BibleDesktop</application>, a Java application,
-      and <application>BibleTime</application>, another Linux program.</para>
+      <para>"The SWORD Project" is based at <ulink type="http" url="http://www.crosswire.org">http://www.crosswire.org</ulink>.  Other
+      applications under the same banner are <application>MacSword</application> for the Macintosh, <application>BibleDesktop</application>,
+      a Java application, <application>BibleTime</application> (another Linux program), and <application>The SWORD Project for
+      Windows</application> (aka <application>BibleCS</application> or <application>WinSword</application>).</para>
 
       <para>
       <figure id="main-screenshot">

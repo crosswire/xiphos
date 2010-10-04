@@ -3,6 +3,186 @@ ____________________
 XIPHOS RELEASE NOTES
 ____________________
 
+Release 3.1.4
+04 Oct 2010
+
+As we continue to straggle toward feature parity in Windows, which we
+regret we have still not fully achieved, it became necessary to make a
+fresh release of Xiphos due to a new release of the Sword engine itself.
+We have done a great deal in Xiphos other than in those feature parity
+areas, so this makes for a good release anyhow.
+
+Also, Xiphos is now supported under recent MacOSX.
+
+Many smaller issues that have been waiting for a long time have been
+implemented.  Again, classified as new, enhancements, and fixes.
+
+New features
+
+ 1. For the first-time user, the first modules to be installed in order
+    that Xiphos begin operation can be obtained from local media such as a
+    CDROM or flash drive.  Also, the first-time user is put directly into
+    the Module Manager, with step-by-step instructions displayed there.
+
+ 2. There is an entirely new implementation of the full-chapter parallel
+    window (detached or tabbed).  It handles an arbitrary number of modules,
+    no longer limited to 5, and supports commentaries as well as Bible
+    texts.  Parallel modules are selected exclusively via Preferences.
+
+ 3. User-requested per-language default font choices are available in
+    Preferences.
+
+ 4. User annotations are normally marked with "*u" and reverse-highlighted
+    for high visibility, in the "margin notes plus yellow highlighter"
+    metaphor.  Now in Preferences, the highlight can be turned off.
+
+ 5. New defaults: The previewer will be placed in the sidebar by default
+    for new users, and Bible versification display is now paragraph style, not
+    verse-per-line.  Both behaviors are selectable.  For previewer placement,
+    see the View menu.  For versification display, see the context
+    (right-click) menu.
+
+ 6. Ctrl-F3 raises the search pane of the sidebar, analogous to F3 creating
+    the Advanced Search window.
+
+ 7. When invoking Xiphos from the command line, the user may specify a tabs
+    filename, such as are found in Xiphos' "tabs" directory.
+
+ 8. When invoking Xiphos via a sword:// link, multi-refs are handled in the
+    verse list.  That is, a single link "sword:///Gen.1.1;Rev.1.1" does what
+    you expect, identically as for clicking a multi-ref bookmark.
+
+ 9. The journal/prayerlist creation menu is available on the main File menu.
+
+10. Bookmark file import has been generalized to accept any (correctly
+    formatted) file, and import of BibleTime bookmarks has been fixed.
+
+11. The Module Manager's introductory explanation is viewable on demand via
+    a button always present.
+
+12. Similarly, short introductory descriptions have been added to Advanced
+    Search regarding optimized ("lucene") search syntax and attribute-based
+    search.
+
+13. Two separate module list categories have been created: Glossaries, to
+    distinguish glossaries from real dictionaries; and Cult/Unorthodox, to
+    separate those few very questionable modules from the mainstream lists.
+
+14. Footnote and cross-reference markers (*n, *x) are now numbered, as one
+    would expect in a print publication.
+
+15. In mozembed/xulrunner builds, highlighted verses -- both regular
+    current and user-annotated -- are now colored inline, rather than being
+    blocked apart from surrounding text.
+
+16. In Preferences color selectors, buttons are provided to invert main
+    text and highlighted text selections.
+
+17. The existence, placement, and size of the detached parallel window are
+    remembered.  If it was present when Xiphos last exited, when Xiphos
+    restarts, it will be reconstructed in the same place and size.
+
+Enhancements to existing behavior
+
+ 1. Doublespace has been made module-specific, available on the context menu.
+
+ 2. Verse-per-line, already module-specific, has been moved to the context
+    menu, where it really belonged all along.
+
+ 3. In Preferences, the user may select whether Bibles' cross-reference
+    lists should be displayed in the previewer (as they always have been) or
+    via the verse list machinery.
+
+ 4. The previewer now uses a font that is 1 size smaller than is used in
+    main display, after the fashion of smaller-font footnotes in print
+    publications.
+
+ 5. Bible headings function correctly in all parallel displays.
+
+ 6. Indexing of journals/prayerlists has been enabled.  None of the
+    developers involved can remember why this was disabled to begin with.
+
+ 7. On first use of locked (encrypted) modules, Xiphos automatically
+    requests the unlock code.
+
+ 8. Many manual improvements, including all new screenshots.
+
+ 9. For those users whose desktop environments support user-defined URL
+    handlers (e.g. the GNOME desktop under Linux), opening a sword://
+    reference anywhere will attempt to use an existing Xiphos, and will
+    start a new Xiphos only if one does not yet exist.  In related news,
+    Bible Refalizer, a Firefox plugin for auto-detection of Bible
+    references, knows how to put sword:// URLs to use automaticaly, as of
+    its 0.1.8 release.
+
+10. There are tooltips on all Module Manager buttons.
+
+11. Internally, Xiphos now uses consistent pseudo-URLs to reference other
+    parts of the Sword tool universe.
+
+12. The link dialog for journal/prayer list editing can test non-verse
+    references (i.e. general books and dictionaries).
+
+13. The Preference pages for pane visibility selection and module
+    selection have been removed; they were redundant with visibility
+    selection via the View menu and module selection via the sidebar.
+
+Problems resolved
+
+ 1. Some misbehavior of the newest release of our main display driver has
+    been worked around (also fixed as a patch in 3.1.3).
+
+ 2. Previewer window headings are now consistent.
+
+ 3. Non-U.S. keyboards are correctly interpreted in all cases.
+
+ 4. Freshly-installed modules can be indexed immediately, without closing
+    and re-opening the Module Manager. 
+
+ 5. Images display correctly in all contexts.  Previously, they would not
+    display in parallel windows with the older display driver.
+
+ 6. Commentary-by-chapter has been made available for personal commentaries.
+
+ 7. Minor differences in the engine regarding Strong's and morphology are
+    handled correctly.
+
+ 8. Several bugs related to interrupted searches were fixed.
+
+ 9. Several uses of misspelled "hight" have been replaced.
+
+10. Much cleanup of old, dead code and unused data bits.
+
+Bug reports addressed since 3.1.3:
+2849660  prevent crash by insisting on minimum pane sizes.
+2871689  segfault in parallel settings
+2889661  CTRL+A : quit the program instead of CTRL+Q
+2977026  add html meta utf-8 for exported content.
+2997121  xulrunner 1.9.2.3 fails to jump to anchor
+2998625  Text color problem
+3000552  Xiphos crashes when closing the about window for a module
+3022383  crash in xiphos-3.1.3 module manager
+3022385  crash in xiphos-3.1.3-1.fc12: BackEnd::set_treekey
+3022514  DBD ver. 1.2 not displaying text.
+3027370  Xiphos crashes if current directory contains languages dir
+3077109  crash on commentary search when no commentary available
+3077178  Crash on shutdown when paratab selected
+3077179  crash when choosing 'print' for empty module
+3077180  empty module crash
+3077181  empty dictionary crash
+
+Feature requests closed:
+1994953  doublespace becomes per-module option, previewer font size down 1.
+2053524  Port to Maemo OS2008 (Internet Tablet)
+2582195  Launch a specific session in a terminal: give tabs file as argv[1].
+2717893  [item 1] PL/J menu added to main File menu.
+2796313  Help: 3.8.Keyboard Shortcuts: order by tasks - re-ordered list.
+2832230  local install of 1st modules.
+2889661  hotkey to activate sidebar search.
+2928849  new prefs-based parallel window.
+3011406  "complete" package download
+________________________________________________________________
+
 Release 3.1.3
 22 Mar 2010
 
