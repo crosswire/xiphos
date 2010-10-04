@@ -41,8 +41,6 @@ DOC_FIGURES = '''
     figures/preferences_fonts-color.png
     figures/preferences_fonts-misc.png
     figures/preferences_general-misc.png
-    figures/preferences_general-tabs.png
-    figures/preferences_modules-main.png
     figures/preferences_modules-misc.png
     figures/preferences_modules-parallel.png
     figures/preferences.png
