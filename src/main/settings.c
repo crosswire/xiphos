@@ -37,6 +37,7 @@
 
 #include "gui/bookmarks.h"
 #include "gui/dialog.h"
+#include "gui/gui.h"
 #include "gui/mod_mgr.h"
 #include "gui/utilities.h"
 #include "gui/preferences_dialog.h"
