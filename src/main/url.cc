@@ -426,7 +426,7 @@ static gint show_note(const gchar * module, const gchar * passage,
 	GString *str = g_string_new(NULL);
 	GList *vlist = NULL, *chaser = NULL;
 
-	if (!in_url)
+	if (!in_url || !svalue || !*svalue)
 		return 1;
 
 	if (!backend->is_module((gchar*)module))
