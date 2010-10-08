@@ -7,10 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 3.1.4\n"
 "Report-Msgid-Bugs-To: Dominique Corbex <domcox@users.sourceforge.net>>\n"
-"POT-Creation-Date: 2010-10-04 22:03+0200\n"
-"PO-Revision-Date: 2010-09-30 17:46+0200\n"
+"POT-Creation-Date: 2010-10-08 22:10+0200\n"
+"PO-Revision-Date: 2010-10-08 22:38+0200\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>>\n"
 "Language-Team: emacs + po-mode; French <gnomefr@traduc.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,14 +26,12 @@ msgstr "sword3.png"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:60(None) ../C/xiphos.xml:87(None)
-#, fuzzy
 msgid "@@image: 'figures/interface.png'; md5=87110fb5a2a686a1f9ba07bffd222bc4"
 msgstr "interface_biblepane.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:53(None)
-#, fuzzy
 msgid ""
 "@@image: 'figures/first_start.png'; md5=69d5c34ac05637124bca6036dbda52d8"
 msgstr "first_start.png"
@@ -40,7 +39,6 @@ msgstr "first_start.png"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:18(None) ../C/interface.xml:18(None)
-#, fuzzy
 msgid ""
 "@@image: 'figures/interface_menubar.png'; "
 "md5=cba7b33d2c0dae1ef4e78c7d620df4c0"
@@ -49,7 +47,6 @@ msgstr "interface_menubar.png"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:49(None)
-#, fuzzy
 msgid ""
 "@@image: 'figures/interface_toolbar.png'; "
 "md5=52cab52c7dc5957b5aeaf4b78e2d5bd5"
@@ -58,7 +55,6 @@ msgstr "interface_toolbar.png "
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:148(None)
-#, fuzzy
 msgid ""
 "@@image: 'figures/interface_sidepane.png'; "
 "md5=c6213020499b11181b3f699cab489e70"
@@ -67,7 +63,6 @@ msgstr "interface_sidepane.png"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:173(None)
-#, fuzzy
 msgid ""
 "@@image: 'figures/interface_shortcut.png'; "
 "md5=f5a4af12cd1204c4be2a7f99caf1ca63"
@@ -76,7 +71,6 @@ msgstr "interface_shortcut.png"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:196(None)
-#, fuzzy
 msgid ""
 "@@image: 'figures/interface_biblepane.png'; "
 "md5=831b18b306e9dc42f18d3eafe0b41bd2"
@@ -85,7 +79,6 @@ msgstr "interface_biblepane.png"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:254(None)
-#, fuzzy
 msgid ""
 "@@image: 'figures/interface_parallel.png'; "
 "md5=33d218a70d36b38d6957a0d30e83d552"
@@ -94,7 +87,6 @@ msgstr "interface_parallel.png"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:278(None)
-#, fuzzy
 msgid ""
 "@@image: 'figures/interface_parallel-separate.png'; "
 "md5=5e0ba9862923636786af1002ac87ee65"
@@ -103,7 +95,6 @@ msgstr "interface_parallel-separate.png"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:397(None)
-#, fuzzy
 msgid ""
 "@@image: 'figures/interface_biblepane-options.png'; "
 "md5=fa15074c128f9646e1a540eab3a881b1"
@@ -112,7 +103,6 @@ msgstr "interface_biblepane-options.png"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:423(None)
-#, fuzzy
 msgid ""
 "@@image: 'figures/interface_menubar-view.png'; "
 "md5=f813f0a888e8ee9373e7e81ac14b26c0"
@@ -121,7 +111,6 @@ msgstr "interface_menubar-view.png"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:548(None)
-#, fuzzy
 msgid ""
 "@@image: 'figures/interface_viewer.png'; md5=09cef9f090800bdab9d3fc3675c80039"
 msgstr "interface_viewer.png"
@@ -129,7 +118,6 @@ msgstr "interface_viewer.png"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:599(None)
-#, fuzzy
 msgid ""
 "@@image: 'figures/interface_commentarypane.png'; "
 "md5=ecc5a233e4d12e0900f3aea5f2cb3fb7"
@@ -138,7 +126,6 @@ msgstr "interface_commentarypane.png"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:672(None)
-#, fuzzy
 msgid ""
 "@@image: 'figures/interface_dictionary.png'; "
 "md5=09b3108582dc12c711b2903835511130"
@@ -155,7 +142,6 @@ msgstr "gtkhtml3-vs-mozembed.png"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:12(None) ../C/preferences.xml:12(None)
-#, fuzzy
 msgid ""
 "@@image: 'figures/preferences.png'; md5=c7bb9a6b05ef6c32feda1f4ffc5932a5"
 msgstr "preferences.png"
@@ -163,7 +149,6 @@ msgstr "preferences.png"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:38(None)
-#, fuzzy
 msgid ""
 "@@image: 'figures/preferences_fonts-color.png'; "
 "md5=d021d65ccc8ec6ff8a6ad48fd5f7d25e"
@@ -172,7 +157,6 @@ msgstr "preferences_fonts-color.png"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:67(None)
-#, fuzzy
 msgid ""
 "@@image: 'figures/preferences_fonts-misc.png'; "
 "md5=cef48d9df63f63732f936f279768fb29"
@@ -181,7 +165,6 @@ msgstr "preferences_fonts-misc.png"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:133(None)
-#, fuzzy
 msgid ""
 "@@image: 'figures/preferences_general-misc.png'; "
 "md5=6b9b484d4d8fab875a3e5281be9e708e"
@@ -190,7 +173,6 @@ msgstr "preferences_general-misc.png"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:190(None)
-#, fuzzy
 msgid ""
 "@@image: 'figures/preferences_modules-parallel.png'; "
 "md5=f7b139975d7a2669a4731d35dea09d21"
@@ -199,7 +181,6 @@ msgstr "preferences_modules-parallel.png"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:210(None)
-#, fuzzy
 msgid ""
 "@@image: 'figures/preferences_modules-misc.png'; "
 "md5=908a857bc617d7ebcdc3093c7570ae37"
@@ -208,14 +189,12 @@ msgstr "preferences_modules-misc.png"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:25(None) ../C/modules.xml:25(None)
-#, fuzzy
 msgid "@@image: 'figures/module.png'; md5=8246c23467c9ea773a6f43feda2ab090"
 msgstr "module.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:55(None)
-#, fuzzy
 msgid ""
 "@@image: 'figures/sword_sources.png'; md5=71ff9c116f0d040e1cf5eadf3f9018be"
 msgstr "sword_sources.png"
@@ -223,7 +202,6 @@ msgstr "sword_sources.png"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:88(None)
-#, fuzzy
 msgid ""
 "@@image: 'figures/sword_config.png'; md5=66b413f7914f1551bf4eccf2af445e69"
 msgstr "sword_config.png"
@@ -231,7 +209,6 @@ msgstr "sword_config.png"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:157(None)
-#, fuzzy
 msgid ""
 "@@image: 'figures/sword_install.png'; md5=b713ba642e4d8291152cdce371614d63"
 msgstr "sword_install.png"
@@ -239,7 +216,6 @@ msgstr "sword_install.png"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:200(None)
-#, fuzzy
 msgid ""
 "@@image: 'figures/sword_remove.png'; md5=142b9bfbf44ca85e9b28578a5e4fbc8e"
 msgstr "sword_remove.png"
@@ -247,7 +223,6 @@ msgstr "sword_remove.png"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:16(None) ../C/search.xml:16(None)
-#, fuzzy
 msgid ""
 "@@image: 'figures/interface_searchpane.png'; "
 "md5=d3362fef39bcafeb51013b290a40ba70"
@@ -256,7 +231,6 @@ msgstr "interface_searchpane.png"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:217(None)
-#, fuzzy
 msgid ""
 "@@image: 'figures/search_search.png'; md5=684284bc1674c92a287ce6604da37a28"
 msgstr "search_search.png"
@@ -264,21 +238,18 @@ msgstr "search_search.png"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:16(None) ../C/studypad.xml:16(None)
-#, fuzzy
 msgid "@@image: 'figures/studypad.png'; md5=4e12bccca903cf700e1799d509f995e6"
 msgstr "studypad.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:22(None)
-#, fuzzy
 msgid "@@image: 'figures/personal.png'; md5=8e113d15df0d8fc9b8c17e6189d0d40a"
 msgstr "personal.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:37(None)
-#, fuzzy
 msgid "@@image: 'figures/journal.png'; md5=658993f44714b0be5b2a40a4f4a2bcd2"
 msgstr "journal.png"
 
@@ -513,16 +484,13 @@ msgstr "Introduction"
 #. Use the Introduction section to give a brief overview of what
 #.      the application is and what it does.
 #: ../C/xiphos.xml:5(para)
-#, fuzzy
 msgid ""
 "<application>Xiphos</application> is a Bible study and research tool based "
 "upon the \"SWORD Project\" libraries and the GTK libraries. You can use "
 "<application>Xiphos</application> to do the following:"
 msgstr ""
-"<application>&appname;</application> est un logiciel d'étude biblique "
-"utilisant l'architecture logicielle du Projet&#160;SWORD et l'environnement "
-"de bureau «­­&#160;GNOME&#160;». <application>&appname;</application> permet "
-"d'effectuer les tâches suivantes :"
+"<application>&appname;</application> est un logiciel d'étude biblique basé sur le Projet SWORD \n"
+"et les bibliothèques GTK. <application>&appname;</application> permet d'effectuer les tâches suivantes :"
 
 #: ../C/xiphos.xml:9(para)
 msgid "View your favorite Scripture verse"
@@ -555,16 +523,14 @@ msgid ""
 "interface while providing a powerful tool allowing a personalized Bible "
 "study environment."
 msgstr ""
-"<application>&appname;</application> a pour but de présenter une interface "
-"utilisateur simple, épurée et de fournir à la fois un outil riche, "
-"permettant d'offrir un environnement d'étude biblique personnalisé."
+"<application>&appname;</application> a pour but de fournir, à l'aide d'une interface utilisateur simple, épurée, \n"
+"un outil riche, permettant de disposer d'un environnement personnalisé dédié à l'étude biblique."
 
 #: ../C/xiphos.xml:30(title) ../C/xiphos.xml:43(phrase)
 msgid "The SWORD Project logo"
 msgstr "Le logo du Projet SWORD"
 
 #: ../C/xiphos.xml:49(para)
-#, fuzzy
 msgid ""
 "\"The SWORD Project\" is based at <ulink type=\"http\" url=\"http://www."
 "crosswire.org\">http://www.crosswire.org</ulink>. Other applications under "
@@ -574,14 +540,12 @@ msgid ""
 "<application>The SWORD Project for Windows</application> (aka "
 "<application>BibleCS</application> or <application>WinSword</application>)."
 msgstr ""
-"Le Projet­­&#160;SWORD est hébergé à <ulink type=\"http\" url=\"http://www."
-"crosswire.org\"> http://www.crosswire.org</ulink>. D'autres applications "
-"utilisant l'architecture logicielle du Projet­­&#160;SWORD sont&#160;: "
-"<application>The SWORD Project for Windows</application> "
-"(<application>BibleCS</application> ou <application>WinSword</application>), "
-"<application>MacSword</application> pour Macintosh, "
-"<application>BibleDesktop</application>, une application Java et "
-"<application>BibleTime</application> sous environnement KDE pour Linux."
+"Le Projet SWORD est hébergé à <ulink type=\"http\" url=\"http://www.crosswire.org\"> \n"
+"http://www.crosswire.org</ulink>. D'autres applications sont disponibles sous ce même emblême : \n"
+"<application>MacSword</application> pour Macintosh, \n"
+"<application>BibleDesktop</application>, une application Java,\n"
+"<application>BibleTime</application> (un autre programme Linux), et   \n"
+"<application>The SWORD Project for Windows</application> (<application>BibleCS</application> ou <application>WinSword</application>)."
 
 #: ../C/xiphos.xml:56(title) ../C/xiphos.xml:69(phrase)
 msgid "Xiphos in action"
@@ -623,13 +587,10 @@ msgid "Applications menu"
 msgstr "Menu applications"
 
 #: ../C/xiphos.xml:12(para) ../C/start.xml:12(para)
-#, fuzzy
 msgid ""
 "Choose <menuchoice><guisubmenu>Education</guisubmenu><guimenuitem>Xiphos "
 "Bible Guide</guimenuitem></menuchoice>."
-msgstr ""
-"Sélectionnez <menuchoice><guisubmenu>Accessoires</"
-"guisubmenu><guimenuitem>Xiphos</guimenuitem></menuchoice>."
+msgstr "Sélectionnez <menuchoice><guisubmenu>Éducation</guisubmenu><guimenuitem>Guide de la Bible Xiphos</guimenuitem></menuchoice>."
 
 #: ../C/xiphos.xml:20(term) ../C/start.xml:20(term)
 msgid "Command line"
@@ -658,7 +619,6 @@ msgid "Starting Xiphos For The First Time"
 msgstr "Démarrer Xiphos la première fois"
 
 #: ../C/xiphos.xml:42(para)
-#, fuzzy
 msgid ""
 "When you start <application>Xiphos</application> for the first time, "
 "<application>Xiphos</application> creates a default selection of options for "
@@ -667,12 +627,13 @@ msgid ""
 "starts the Module Manager so that you can select and install a Bible module "
 "in your language preference."
 msgstr ""
-"Au premier démarrage de <application>&appname;</application>, les options "
-"sont initialisées à leurs valeurs par défaut. Par ailleurs, si aucune autre "
-"application Sword n'a jamais été utilisée auparavant, et donc qu'aucun "
-"module Sword n'a été installé, <application>Xiphos</application> demande la "
-"permission de démarrer le gestionnaire de modules afin d'installer un module "
-"de textes bibliques dans la langue souhaitée."
+"Au démarrage de <application>&appname;</application> la première fois, \n"
+"<application>Xiphos</application> crée une configuration par défaut des \n"
+"options d'affichage. De plus, si aucune autre application Sword n'a jamais \n"
+"été utilisée auparavant, et puisque aucun module Sword n'a été installé, \n"
+"<application>Xiphos</application> démarre le gestionnaire de modules afin \n"
+"de permettre de choisir et installer un module de textes bibliques dans la \n"
+"langue souhaitée."
 
 #: ../C/xiphos.xml:49(title)
 msgid "Xiphos Download Question"
@@ -844,16 +805,15 @@ msgstr ""
 "sélectionnés dans le volet des<interface> Textes bibliques</interface>."
 
 #: ../C/xiphos.xml:180(para)
-#, fuzzy
 msgid ""
 "When you right-click in the different interface sections, the interface "
 "displays a context popup menu, which provides access to more module-specific "
 "options, including display controls and printing services."
 msgstr ""
-"Un clic du bouton droit de la souris dans les différents volets de la "
-"fenêtre de <application>&appname;</application> fait apparaître un menu "
-"contextuel permettant d'imprimer ou d'accéder aux options spécifiques du "
-"module concerné."
+"Un clic du bouton droit de la souris dans les différents volets de l'interface \n"
+"de <application>&appname;</application> fait apparaître un menu contextuel, \n"
+"il permet d'accéder aux options spécifiques du module concerné, comprenant les \n"
+"options d'affichage et les services d'impression."
 
 #: ../C/xiphos.xml:219(title)
 msgid "Interface"
@@ -1953,6 +1913,11 @@ msgid ""
 "it easy, for example, to move the main window into \"night mode,\" with "
 "white text on black background."
 msgstr ""
+"Le bouton <guibutton>Inverser les paires de couleurs</guibutton> permet, par "
+"exemple,\n"
+"de mettre la fenêtre principale en «&nbsp;mode nuit&nbsp;», avec un texte en "
+"blanc sur\n"
+"un fond noir."
 
 #: ../C/xiphos.xml:61(title) ../C/xiphos.xml:63(title)
 #: ../C/xiphos.xml:76(phrase)
@@ -1964,8 +1929,8 @@ msgid ""
 "In individual modules' display, the right-click menu's <guimenuitem>Module "
 "Options</guimenuitem> selector provides font name and size selection."
 msgstr ""
-"Dans les modules affichés, faire un clic droit à l'aide du bouton de la "
-"souris. Dans le menu contextuel qui s'affiche, choisir ensuite "
+"Faire un clic droit à l'aide du bouton de la souris dans un des modules "
+"affichés. Dans le menu contextuel qui s'affiche, choisir ensuite "
 "<menuchoice><guimenuitem>Options du module</guimenuitem><guimenuitem>Changer "
 "de police</guimenuitem></menuchoice> pour changer la police ou la taille des "
 "caractères."
@@ -1984,20 +1949,27 @@ msgstr ""
 #: ../C/xiphos.xml:93(para)
 msgid "The font name and size used for display is chosen from this order:"
 msgstr ""
+"Le nom et la taille de police utilisés pour l'affichage sont choisis dans "
+"cet ordre&nbsp;:"
 
 #: ../C/xiphos.xml:98(para)
 msgid ""
 "The selection made via the context menu for the specific module, under "
 "<guimenuitem>Module Options</guimenuitem>."
 msgstr ""
+"La sélection faite via le menu contextuel d'un module spécifique, à l'aide "
+"de \n"
+"<guimenuitem>Options du module</guimenuitem>."
 
 #: ../C/xiphos.xml:104(para)
 msgid "The per-language selection made under Preferences, here."
-msgstr ""
+msgstr "Les préférences de police, par langue, ici dans les préférences."
 
 #: ../C/xiphos.xml:109(para)
 msgid "The module's own default selection, in its configuration file."
 msgstr ""
+"La configuration par défaut du module, définie dans son fichier de "
+"configuration."
 
 #: ../C/xiphos.xml:114(para)
 #, fuzzy
@@ -2023,6 +1995,11 @@ msgid ""
 "language other than the default, you may select one here. A restart will be "
 "required, so that the locale can be initialized."
 msgstr ""
+"Pour afficher l'interface de <application>&appname;</application> dans un "
+"autre langage, \n"
+"définir cette autre langue ici. Un redémarrage sera néanmoins nécessaire, de "
+"sorte que \n"
+"la traduction puisse être initialisée."
 
 #: ../C/xiphos.xml:153(para)
 msgid ""
@@ -2031,6 +2008,12 @@ msgid ""
 "be used when double-clicking a word anywhere in <application>Xiphos</"
 "application>."
 msgstr ""
+"Si un <guilabel>Dictionaire par défaut</guilabel> est activé, ce "
+"dictionnaire \n"
+"(voir <guimenuitem>Spécial</guimenuitem> ci-dessous) sera toujours utilisé \n"
+"lorsqu'un double-click sera exécuté sur n'importe quel mot dans "
+"<application>&appname;\n"
+"</application>."
 
 #: ../C/xiphos.xml:157(para)
 msgid ""
@@ -2077,12 +2060,20 @@ msgid ""
 "<guilabel>Highlight user annotations</guilabel> uses inverted the highlight "
 "color choices when marking user-annotated verses."
 msgstr ""
+"<guilabel>Annotations personnelles surlignées</guilabel> utilise les choix \n"
+"de couleurs du surlignement pour indiquer les versets annotés par "
+"l'utilisateur."
 
 #: ../C/xiphos.xml:175(para)
 msgid ""
 "By default, <guilabel>Cross-references</guilabel> go into the Previewer. "
 "Selecting this checkbox puts them into the verse list instead."
 msgstr ""
+"Par défaut, les <guilabel>Références croisées</guilabel> sont affichées dans "
+"le volet \n"
+"<interface>Aperçu</interface>. Cocher cette option les fait apparaître dans "
+"la liste\n"
+"de versets."
 
 #: ../C/xiphos.xml:184(title)
 msgid "Module Settings"
@@ -2154,6 +2145,8 @@ msgid ""
 "Notice the <guibutton>View Intro</guibutton> button above. You may see an "
 "introductory explanation of Module Manager operation at any time."
 msgstr ""
+"Noter le bouton <guibutton>Voir l'intro</guibutton> ci-dessus. Il affiche \n"
+"une explication introductive au fonctionnement du Gestionnaire de module."
 
 #: ../C/xiphos.xml:47(title)
 msgid "Sword Module Configurations"
@@ -2346,8 +2339,8 @@ msgstr ""
 "plus récente des modules déjà installés, un symbole de rafraîchissement "
 "apparaît entre les deux références de version du module. La taille "
 "approximative du module est affichée à condition que le dépot de modules "
-"fournisse cette information, sinon un point d'interrogation («&#160;?&#160;») "
-"est présenté.."
+"fournisse cette information, sinon un point d'interrogation («&#160;?"
+"&#160;») est présenté.."
 
 #: ../C/xiphos.xml:184(para)
 msgid ""
@@ -2461,11 +2454,10 @@ msgstr ""
 "sword, et se trouve dans votre répertoire personnel (ce n'est pas celui de "
 "<application>&app;</application>) puis de décompresser le fichier zip à cet "
 "endroit. Le fichier de configuration sera placé dans le répertoire «­­&#160;"
-"mods.d&#160;»,et les fichiers de données dans les sous-répertoires de «­­"
-"&#160;modules&#160;». Si vous avez les droits en écriture du répertoire "
-"général de Sword usr/share/sword, vous pouvez aussi décompresser le fichier "
-"zip dans ce répertoire, ce module sera alors accessible à tous les "
-"utilisateurs."
+"mods.d&#160;»,et les fichiers de données dans les sous-répertoires de «­­&#160;"
+"modules&#160;». Si vous avez les droits en écriture du répertoire général de "
+"Sword usr/share/sword, vous pouvez aussi décompresser le fichier zip dans ce "
+"répertoire, ce module sera alors accessible à tous les utilisateurs."
 
 #: ../C/xiphos.xml:250(para)
 msgid ""
@@ -2879,8 +2871,8 @@ msgid ""
 "Multiple Letter Wildcard: to search for \"prophet\" or \"prophesy\" or "
 "\"prophecy\" or \"prophesied\", use this syntax \"prophe*\"."
 msgstr ""
-"Caractère de substitution multiple (&#160;*&#160;) : «&#160;*&#160;» remplace "
-"toute une série de caractères. Ainsi «&#160;<emphasis>proph*</"
+"Caractère de substitution multiple (&#160;*&#160;) : «&#160;*&#160;» "
+"remplace toute une série de caractères. Ainsi «&#160;<emphasis>proph*</"
 "emphasis>&#160;» retrouve «&#160;prophète&#160;», «&#160;prophétiser&#160;», "
 "«&#160;prophétie&#160;» etc.."
 
@@ -2897,7 +2889,8 @@ msgstr ""
 "logique «&#160;<emphasis>AND</emphasis>&#160;» entre les termes. Ainsi pour "
 "retrouver les occurences de «&#160;Isaïe&#160;» ou «&#160;Esaïe&#160;» qui "
 "font mention également de «&#160;prophète&#160;» ou «&#160;prophétie&#160;», "
-"la requête appropriée est «&#160;<emphasis>?saïe AND proph*</emphasis>&#160;»."
+"la requête appropriée est «&#160;<emphasis>?saïe AND proph*</"
+"emphasis>&#160;»."
 
 #: ../C/xiphos.xml:270(para)
 msgid ""
@@ -2911,12 +2904,12 @@ msgstr ""
 "Par défaut, deux plages de versets sont définies, correspondant à l'Ancien "
 "Testament et au Nouveau Testament. D'autres limites peuvent être définies à "
 "volonté par l'utilisateur comme par exemple les «­­&#160;Évangiles&#160;» ou "
-"les «­­&#160;Épîtres de Paul&#160;». Une liste des modules contenant "
-"seulement le premier module de texte biblique installé est définie par "
-"défaut. Si besoin, de nouvelles requêtes peuvent être réalisés sur la plage "
-"des versets obtenu par la requête précédente. Des listes de modules peuvent "
-"être crées en incluant tout module, ce qui permet d'exécuter des requêtes "
-"sur les livres ou les dictionnaires, dans n'importe quelle combinaison."
+"les «­­&#160;Épîtres de Paul&#160;». Une liste des modules contenant seulement "
+"le premier module de texte biblique installé est définie par défaut. Si "
+"besoin, de nouvelles requêtes peuvent être réalisés sur la plage des versets "
+"obtenu par la requête précédente. Des listes de modules peuvent être crées "
+"en incluant tout module, ce qui permet d'exécuter des requêtes sur les "
+"livres ou les dictionnaires, dans n'importe quelle combinaison."
 
 #: ../C/xiphos.xml:277(para)
 msgid ""
@@ -2938,8 +2931,8 @@ msgstr ""
 "l'onglet Attribut, situé à droite des autres onglets. Les références de "
 "Strong  sont identifiées par le nombre de Strong précédé par la lettre H "
 "(Hébreu) ou la lettre G (Grec). Ainsi une requête sur le nombre de Strong "
-"grec n° 140, en utilisant «­­&#160;G140&#160;», retourne  Matthieu 12:18 "
-"comme résultat."
+"grec n° 140, en utilisant «­­&#160;G140&#160;», retourne  Matthieu 12:18 comme "
+"résultat."
 
 #: ../C/xiphos.xml:285(para)
 msgid ""
@@ -2960,6 +2953,8 @@ msgid ""
 "Explanations of search syntax are available when either Optimized or "
 "Attribute search is selected."
 msgstr ""
+"Le bouton <guibutton>Rechercher</guibutton> stoppe aussi une requête en \n"
+"cours d'exécution, comme l'indique l'infobulle."
 
 #: ../C/xiphos.xml:295(para)
 msgid ""
@@ -3030,15 +3025,15 @@ msgstr ""
 "verticale «­­&#160;|&#160;». Alors qu'un motif peut être crée pour rechercher "
 "un mot ou une phrase, un motif simple composé d'un seul mot ne permettra pas "
 "de rechercher seulement ce mot, mais toute séquence de caractères contenant "
-"ce mot. Une recherche du mot «­­&#160;droit&#160;» ne retournera pas "
-"seulement la liste des versets contenant le mot «­­&#160;<emphasis>droit</"
+"ce mot. Une recherche du mot «­­&#160;droit&#160;» ne retournera pas seulement "
+"la liste des versets contenant le mot «­­&#160;<emphasis>droit</"
 "emphasis>&#160;»  mais aussi ceux contenant les mots «­­&#160;"
 "a<emphasis>droit</emphasis>&#160;», «­­&#160;<emphasis>droit</"
 "emphasis>e&#160;». La recherche de «­­&#160;ne pas&#160;» ne retournera pas "
 "les versets contenant les mots «­­&#160;ne&#160;» ET «­­&#160;pas&#160;» mais "
-"les versets contenant la séquence «­­&#160;ne pas&#160;» avec une espace "
-"entre les deux mots. Une recherche de «­­&#160;ne pas&#160;» trouvera aussi "
-"les versets contenant «­­&#160;<emphasis>ne pas</emphasis>se&#160;»."
+"les versets contenant la séquence «­­&#160;ne pas&#160;» avec une espace entre "
+"les deux mots. Une recherche de «­­&#160;ne pas&#160;» trouvera aussi les "
+"versets contenant «­­&#160;<emphasis>ne pas</emphasis>se&#160;»."
 
 #: ../C/xiphos.xml:321(para)
 msgid ""
@@ -3110,9 +3105,9 @@ msgid ""
 "? The question mark matches 0 or 1 character of the preceding: set, "
 "character or indicated character."
 msgstr ""
-"«­­&#160;?&#160;» Le point d'interrogation correspond à aucune ou une "
-"instance de la précédente expression rationnelle. Il est généralement "
-"utilisé pour correspondre à des caractères uniques."
+"«­­&#160;?&#160;» Le point d'interrogation correspond à aucune ou une instance "
+"de la précédente expression rationnelle. Il est généralement utilisé pour "
+"correspondre à des caractères uniques."
 
 #: ../C/xiphos.xml:343(para)
 msgid ""
@@ -3131,8 +3126,8 @@ msgstr ""
 #: ../C/xiphos.xml:346(para)
 msgid "^ A caret beginning a pattern anchors the beginning of a line."
 msgstr ""
-"«­­&#160;^&#160;» La puissance en dehors d'accolades correspond au début "
-"d'une ligne."
+"«­­&#160;^&#160;» La puissance en dehors d'accolades correspond au début d'une "
+"ligne."
 
 #: ../C/xiphos.xml:348(para)
 msgid "$ A dollar at the end of a pattern anchors the end of a line."
@@ -3208,9 +3203,8 @@ msgid ""
 msgstr ""
 "L'astérisque «­­&#160;*&#160;» correspond à toute répétition de caractères "
 "d'une chaîne ou d'une expression rationnelle la précédant, incluant zéro "
-"caractère. Par exemple : «­­&#160;1133*&#160;» correspond à 11 plus un ou "
-"plus de 3 ainsi que d'autres caractères : 113, 1133, 111312 et ainsi de "
-"suite."
+"caractère. Par exemple : «­­&#160;1133*&#160;» correspond à 11 plus un ou plus "
+"de 3 ainsi que d'autres caractères : 113, 1133, 111312 et ainsi de suite."
 
 #: ../C/xiphos.xml:390(title)
 msgid "The Plus Sign"
@@ -3914,14 +3908,14 @@ msgstr ""
 "Une autre façon d'obtenir de l'aide est d'utiliser le chat en ligne. "
 "<application>&appname;</application> a un canal IRC ouvert sur freenode, "
 "#xiphos;. Un moyen simple de se connecter est de sélectionner <ulink url="
-"\"http://webchat.freenode.net/?randomnick=1&amp;channels=xiphos&amp;prompt=1"
-"\">ce lien</ulink>. (Ceci ouvre la fenêtre du navigateur Internet). Ensuite, "
-"saisir un pseudo ou accepter celui par defaut, et sélectionner «&#160;Click "
-"to join chatroom&#160;». Ceci ouvre l'accès au salon où les développeurs et "
-"d'autres utilisateurs sont prêts à discuter des problèmes rencontrés. "
-"Généralement, les réponses aux questions sont immédiates, mais parfois cela "
-"peut prendre quelques minutes voire plus longtemps.<para>[NDT : Le chat en "
-"ligne est en langue anglaise]</para>"
+"\"http://webchat.freenode.net/?randomnick=1&amp;channels=xiphos&amp;"
+"prompt=1\">ce lien</ulink>. (Ceci ouvre la fenêtre du navigateur Internet). "
+"Ensuite, saisir un pseudo ou accepter celui par defaut, et sélectionner "
+"«&#160;Click to join chatroom&#160;». Ceci ouvre l'accès au salon où les "
+"développeurs et d'autres utilisateurs sont prêts à discuter des problèmes "
+"rencontrés. Généralement, les réponses aux questions sont immédiates, mais "
+"parfois cela peut prendre quelques minutes voire plus longtemps.<para>[NDT : "
+"Le chat en ligne est en langue anglaise]</para>"
 
 #: ../C/xiphos.xml:267(title)
 msgid "Original Language Research"
@@ -4071,12 +4065,12 @@ msgstr ""
 "accompagné de «&#160;<emphasis>G</emphasis>&#160;» pour la langue grecque et "
 "«&#160;<emphasis>H</emphasis>&#160;» pour la langue hébraïque. Ainsi pour "
 "rechercher le mot hébreu <emphasis>tsad-deek (6662)</emphasis>, entrer : "
-"«&#160;<emphasis>lemma:G662</emphasis>&#160;». Une fois la recherche terminée "
-"et les résultats affichés, un clic sur un résultat fait afficher le contenu "
-"dans la zone <interface>Aperçu</interface> ainsi que les nombres de Strong "
-"suivant immédiatement les mots associés. Noter que survoler ces nombres avec "
-"la souris fait apparaitre la définition dans le volet <interface>Aperçu</"
-"interface> de la fenêtre principale."
+"«&#160;<emphasis>lemma:G662</emphasis>&#160;». Une fois la recherche "
+"terminée et les résultats affichés, un clic sur un résultat fait afficher le "
+"contenu dans la zone <interface>Aperçu</interface> ainsi que les nombres de "
+"Strong suivant immédiatement les mots associés. Noter que survoler ces "
+"nombres avec la souris fait apparaitre la définition dans le volet "
+"<interface>Aperçu</interface> de la fenêtre principale."
 
 #: ../C/xiphos.xml:86(title)
 msgid "Additional Modules"
@@ -4574,9 +4568,9 @@ msgstr "Accréditions aux traducteurs"
 #~ msgid ""
 #~ "You may modify your copy or copies of the Program or any portion of it, "
 #~ "thus forming a work based on the Program, and copy and distribute such "
-#~ "modifications or work under the terms of <link linkend=\"gpl-2-1"
-#~ "\">Section 1</link> above, provided that you also meet all of these "
-#~ "conditions: <placeholder-1/>"
+#~ "modifications or work under the terms of <link linkend="
+#~ "\"gpl-2-1\">Section 1</link> above, provided that you also meet all of "
+#~ "these conditions: <placeholder-1/>"
 #~ msgstr ""
 #~ "Vous pouvez modifier votre copie ou des copies du Programme ou n'importe "
 #~ "quelle partie de celui-ci, créant ainsi un ouvrage fondé sur le "
@@ -4683,9 +4677,9 @@ msgstr "Accréditions aux traducteurs"
 #~ msgstr ""
 #~ "Vous pouvez copier et distribuer le Programme (ou un ouvrage fondé sur "
 #~ "lui, selon l'<link linkend=\"gpl-2-2\">Article 2</link>) sous forme de "
-#~ "code objet ou d'exécutable, selon les termes des <link linkend=\"gpl-2-1"
-#~ "\">Articles </link>1 et <link linkend=\"gpl-2-2\">2</link> ci-dessus, à "
-#~ "condition que vous accomplissiez l'un des points suivants :"
+#~ "code objet ou d'exécutable, selon les termes des <link linkend="
+#~ "\"gpl-2-1\">Articles </link>1 et <link linkend=\"gpl-2-2\">2</link> ci-"
+#~ "dessus, à condition que vous accomplissiez l'un des points suivants :"
 
 #~ msgid ""
 #~ "The source code for a work means the preferred form of the work for "
