@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: Xiphos 3.1.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-10-04 21:56+0200\n"
-"PO-Revision-Date: 2010-10-04 22:00+0200\n"
+"PO-Revision-Date: 2010-10-08 19:47+0200\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: emacs + po-mode <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -1073,7 +1073,7 @@ msgstr "Modules"
 
 #: ../src/gnome2/mod_mgr.c:1756
 msgid "Install/Update"
-msgstr "Installer"
+msgstr "Installer/Maj"
 
 #: ../src/gnome2/mod_mgr.c:1758
 msgid "Maintenance"
