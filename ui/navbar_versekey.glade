@@ -251,6 +251,7 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">False</property>
+                    <property name="tooltip" translatable="yes">Choose chapter to display</property>
                     <property name="xalign">1</property>
                     <accessibility>
                       <atkproperty name="AtkObject::accessible-name" translatable="yes">Toggle Chapter Button</atkproperty>
@@ -377,6 +378,7 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">False</property>
+                    <property name="tooltip" translatable="yes">Choose Verse to display</property>
                     <accessibility>
                       <atkproperty name="AtkObject::accessible-name" translatable="yes">Toggle Verse Button</atkproperty>
                     </accessibility>
@@ -502,6 +504,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="invisible_char">&#x25CF;</property>
+                <property name="tooltip" translatable="yes">Enter a Verse reference in Book 1:1 format and press Return</property>
                 <accessibility>
                   <atkproperty name="AtkObject::accessible-name" translatable="yes">Reference Entry</atkproperty>
                 </accessibility>
