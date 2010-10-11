@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Xiphos 3.1.4\n"
 "Report-Msgid-Bugs-To: Dominique Corbex <domcox@users.sourceforge.net>>\n"
 "POT-Creation-Date: 2010-10-08 22:10+0200\n"
-"PO-Revision-Date: 2010-10-08 22:38+0200\n"
+"PO-Revision-Date: 2010-10-11 21:02+0200\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>>\n"
 "Language-Team: emacs + po-mode; French <gnomefr@traduc.org>\n"
 "Language: \n"
@@ -630,7 +630,7 @@ msgstr ""
 "Au démarrage de <application>&appname;</application> la première fois, \n"
 "<application>Xiphos</application> crée une configuration par défaut des \n"
 "options d'affichage. De plus, si aucune autre application Sword n'a jamais \n"
-"été utilisée auparavant, et puisque aucun module Sword n'a été installé, \n"
+"été utilisée auparavant, et donc aucun module Sword n'a pu être installé, \n"
 "<application>Xiphos</application> démarre le gestionnaire de modules afin \n"
 "de permettre de choisir et installer un module de textes bibliques dans la \n"
 "langue souhaitée."
@@ -642,11 +642,8 @@ msgstr ""
 "application>"
 
 #: ../C/xiphos.xml:62(phrase)
-#, fuzzy
 msgid "Xiphos Download Instruction"
-msgstr ""
-"Demande de permission de téléchargement par <application>&appname;</"
-"application>"
+msgstr "figures/first-start.png"
 
 #: ../C/xiphos.xml:69(para)
 msgid ""
@@ -987,17 +984,16 @@ msgid "The Bible textpane"
 msgstr "Le volet des textes bibliques"
 
 #: ../C/xiphos.xml:211(para)
-#, fuzzy
 msgid ""
 "Positioned to the right of the Shortcut bar is the Bible text pane. All "
 "translations are displayed here. When starting <application>Xiphos</"
 "application>, the translation last used in the leftmost tab will be "
 "displayed."
 msgstr ""
-"Le volet des<interface> textes bibliques</interface> se trouve à droite du "
-"volet latéral. Les différentes versions de la Bible sont affichées dans "
-"cette zone. Au démarrage de <application>&appname;</application>, la version "
-"utilisée précédemment ou la version définie par défaut est affichée."
+"À droite du volet latéral, se trouve le volet des <interface>textes bibliques</interface>. \n"
+"Les différentes versions de la Bible sont affichées dans cette zone. Au démarrage de \n"
+"<application>&appname;</application>, la version utilisée précédemment dans l'onglet\n"
+"le plus à gauche est affichée."
 
 #: ../C/xiphos.xml:217(title)
 msgid "Opening A Specific Bible Translation"
@@ -1040,7 +1036,6 @@ msgid "Using the Parallel View Mode"
 msgstr "Utilisation du mode Vue parallèle"
 
 #: ../C/xiphos.xml:241(para)
-#, fuzzy
 msgid ""
 "A nice function in <application>Xiphos</application> is the ability to view "
 "your specified bible text in several parallel translations of your choice. "
@@ -1054,36 +1049,33 @@ msgid ""
 "books, chapters, or verses that they don't have. Modules displayed are "
 "selected via the Preferences dialog."
 msgstr ""
-"Une fonction intéressante de <application>&appname;</application> est la "
-"possibilité d'afficher en parallèle le texte de cinq versions différentes de "
-"la Bible. Le mode Vue parallèle est activé en sélectionnant l'onglet "
-"<guimenuitem>Vue parallèle</guimenuitem> situé en-dessous du volet des "
-"<interface>textes bibliques</interface>, à côté de l'onglet <guimenuitem>Vue "
-"standard</guimenuitem>. Il est à noter qu'un seul verset peut être affiché à "
-"la fois. Utiliser les sélecteurs de la barre d'outils pour changer de "
-"verset. Il est à noter également que les modules de texte contenant "
-"seulement le Nouveau Testament ou seulement l'Ancien Testament ne pourront "
-"pas afficher les livres, chapitres, versets qu'ils n'ont pas."
+"Une fonction intéressante de <application>&appname;</application> est la possibilité \n"
+"d'afficher en parallèle plusieurs versions de la Bible. Le mode Vue parallèle est \n"
+"activé en sélectionnant l'onglet <guimenuitem>Vue parallèle</guimenuitem> situé \n"
+"juste en-dessous du volet des <interface>textes bibliques</interface>, à côté de \n"
+"l'onglet <guimenuitem>Vue simple</guimenuitem>. Il est à noter qu'un seul verset \n"
+"est affiché à la fois dans ce mode. Il est possible de changer de verset en utilisant \n"
+"les sélecteurs de la barre d'outils. Notons également que les modules de texte \n"
+"contenant seulement le Nouveau Testament ou seulement l'Ancien Testament n'afficheront \n"
+"pas les livres, chapitres, versets qu'ils ne contiennent pas."
 
 #: ../C/xiphos.xml:251(title) ../C/xiphos.xml:263(phrase)
 msgid "Bible textpane - parallel view"
 msgstr "Volet des textes bibliques, vue parallèle"
 
 #: ../C/xiphos.xml:269(para)
-#, fuzzy
 msgid ""
 "Additionally, a separate Parallel View window can be selected from the right "
 "click menu with <guimenuitem>Detach/Attach</guimenuitem>. Your Bible pane "
 "will return to its normal single text view, and the new Parallel View window "
 "will show the complete chapter, showing the same translations."
 msgstr ""
-"De plus, une fenêtre distincte  peut être ouverte en mode parallèle. Pour "
-"l'ouvrir, faire un clic droit de la souris  sur la  vue parallèle pour faire "
-"apparaître le menu contextuel. Choisir ensuite <guimenuitem>Détacher/"
-"Attacher</guimenuitem>. Le volet des <interface>textes bibliques</interface> "
-"revient alors à la vue standard et une nouvelle fenêtre <interface>Vue "
-"parallèle</interface> s'ouvre affichant le chapitre en cours dans les cinq "
-"versions."
+"En outre, une vue parallèle peut être ouverte dans une fenêtre distincte par \n"
+"appel du menu contextuel au moyen d'un clic droit de la souris sur la \n"
+"vue parallèle, puis par sélection de <guimenuitem>Détacher/Attacher</guimenuitem>. \n"
+"Le volet des <interface>textes bibliques</interface> revient alors à la \n"
+"vue simple et une nouvelle fenêtre <interface>Vue parallèle</interface> \n"
+"s'ouvre affichant le chapitre entier dans les mêmes versions."
 
 #: ../C/xiphos.xml:275(title) ../C/xiphos.xml:287(phrase)
 msgid "Parallel View - separate window"
@@ -1097,9 +1089,7 @@ msgstr "Ouvrir le texte·biblique dans une fenêtre distincte"
 msgid ""
 "In order to view a Bible translation separate from the <application>Xiphos</"
 "application> interface:"
-msgstr ""
-"Pour ouvrir le texte biblique dans une fenêtre séparée de la fenêtre "
-"principale de <application>&appname;</application> :"
+msgstr "Pour ouvrir le texte biblique dans une fenêtre distincte de la fenêtre principale de <application>&appname;</application> :"
 
 #: ../C/xiphos.xml:302(para)
 msgid ""
@@ -1255,19 +1245,12 @@ msgstr ""
 "affichent le même verset."
 
 #: ../C/xiphos.xml:456(para)
-#, fuzzy
 msgid ""
 "Read Aloud - If you enable this, then <application>Xiphos</application> will "
 "funnel all selected verses through the <application>festival</application> "
 "text-to-speech system. <application>Festival</application> is a widely-"
 "available TTS, often installed by default in Linux distributions."
-msgstr ""
-"<guimenuitem>Synthèse vocale</guimenuitem> - Quand cette option est activée, "
-"<application>&appname;</application> lit à voix haute les textes "
-"sélectionnés à l'aide du logiciel de synthèse vocale <application>Festival</"
-"application>. <application>Festival</application> est souvent installé par "
-"défaut dans les distributions Linux. (NDT: En général, les résultats sont "
-"meilleurs en anglais ) Non disponible sous Windows."
+msgstr "<guimenuitem>Synthèse vocale</guimenuitem> - Quand cette option est activée, <application>&appname;</application> lit à voix haute les versets sélectionnés à l'aide du logiciel de synthèse vocale <application>Festival</application>. Le moteur de synthèse vocale <application>Festival</application> est largement utilisé et souvent installé par défaut dans les distributions Linux. (NDT: En général, les résultats sont meilleurs en anglais )."
 
 #: ../C/xiphos.xml:461(para)
 msgid ""
@@ -1306,7 +1289,6 @@ msgid "User Annotation"
 msgstr "Annotation personnelle"
 
 #: ../C/xiphos.xml:485(para)
-#, fuzzy
 msgid ""
 "Many users wish to make personal annotations on individual verses, without "
 "the need to put a full \"personal commentary\" module to use. "
@@ -1319,19 +1301,8 @@ msgid ""
 "metaphorically similar for users who mark verses in paper Bibles with a "
 "yellow highlighter and write personal notes in the margins."
 msgstr ""
-"De nombreux utilisateurs souhaitent ajouter des annotations personnelles à "
-"des versets individuels, sans éprouver pour autant le besoin d'employer un "
-"module complet de commentaire personnel.\n"
-"<application>Xiphos</application> offre accès à cette fonctionnalité par le "
-"menu contextuel du volet biblique obtenu par un clic-droit. Une boite de "
-"dialogue s'affiche indiquant la référence du verset en cours et offrant une "
-"zone de saisie où entrer une brève annotaion personnelle. Dès que "
-"l'utilisateur ferme la boite de dialogue avec <guibutton>Annoter</"
-"guibutton>, le verset est surligné (par défaut bleu sur jaune) et une marque "
-"<guibutton>*u</guibutton> est insérée au début du verset. Ceci est "
-"métaphoriquement similaire aux utilisateurs qui marquent les versets dans "
-"leurs Bibles papier avec un surligneur jaune, et écrivent des notes "
-"personnelles dans les marges. "
+"De nombreux utilisateurs souhaitent ajouter des annotations personnelles à des versets particuliers, sans éprouver pour autant le besoin d'employer un module complet de commentaires personnels.\n"
+"<application>Xiphos</application> offre cette fonctionnalité dans le menu contextuel du volet biblique obtenu par un clic-droit. Une boite de dialogue s'affiche indiquant la référence du verset en cours et offre une zone de saisie où entrer une brève annotation personnelle. Dès que la boite de dialogue est refermée avec <guibutton>Annoter</guibutton>, le verset est surligné (par défaut bleu sur jaune) et une marque <guibutton>*u</guibutton> est insérée au début du verset. Ceci est métaphoriquement similaire aux utilisateurs qui soulignent des versets dans leurs Bibles papier avec un surligneur jaune, et inscrivent des notes personnelles dans la marge."
 
 #: ../C/xiphos.xml:494(para)
 msgid ""
@@ -1350,12 +1321,7 @@ msgid ""
 "verse. However, in this case, re-selecting the annotated verse will not "
 "initialize with the existing content, because the dialog is created based on "
 "the specific module reference."
-msgstr ""
-"Si l'utilisateur retire le nom du module de la référence affichée en haut de "
-"la boite de dialogue, l'annotation s'applique alors à n'importe quel module "
-"Biblique pour le verset sélectionné. Toutefois, dans ce cas, re-sélectionner "
-"le verset annoté ne fait pas afficher le contenu existant, car le contenu "
-"est lié à la référence du module original."
+msgstr "Si l'utilisateur retire le nom du module de la référence affichée en haut de la boite de dialogue, l'annotation s'applique alors à n'importe quel module Biblique pour le verset sélectionné. Toutefois, dans ce cas, une nouvelle sélection du verset annoté ne fait pas afficher le contenu existant, car le contenu est lié à la référence du module original."
 
 #: ../C/xiphos.xml:506(title)
 msgid "Geography Support"
@@ -1403,21 +1369,13 @@ msgid "To find a specific word within a passage:"
 msgstr "Pour rechercher un mot spécifique dans un passage :"
 
 #: ../C/xiphos.xml:532(para)
-#, fuzzy
 msgid ""
 "right-click in the <interface>Bible Text Pane</interface>. In the popup "
 "menu, choose <menuchoice><guisubmenu>Edit</guisubmenu><guimenuitem>Find</"
 "guimenuitem></menuchoice>. A dialog will appear, which provides text "
 "searches. Fill out dialog and click the <guibutton>Find</guibutton> and "
 "<guibutton>Find Next</guibutton> buttons."
-msgstr ""
-"Faire un clic droit à l'aide de la souris dans le volet des "
-"<interface>textes bibliques</interface>. Dans le menu contextuel qui "
-"s'affiche, choisir <menuchoice><guimenuitem>Éditer</"
-"guimenuitem><guimenuitem>Rechercher</guimenuitem></menuchoice>. Une fenêtre "
-"s'ouvre ensuite, permettant la recherche d'un ou plusieurs mots. Saisir le "
-"texte à rechercher, puis ensuite valider à l'aide du bouton "
-"<guibutton>Rechercher</guibutton>."
+msgstr "Faire un clic droit à l'aide de la souris dans le volet des <interface>textes bibliques</interface>. Dans le menu contextuel qui s'affiche, choisir <menuchoice><guimenuitem>Éditer</guimenuitem><guimenuitem>Rechercher</guimenuitem></menuchoice>. Une fenêtre s'ouvre ensuite, permettant la recherche d'un ou plusieurs mots. Saisir le texte à rechercher, puis ensuite valider à l'aide de <guibutton>Rechercher</guibutton> et <guibutton>Rechercher suivant</guibutton>."
 
 #: ../C/xiphos.xml:545(title)
 msgid "PreViewer"
@@ -1443,20 +1401,9 @@ msgid ""
 "anchor the text so that you can scroll it in the Previewer, middle-click the "
 "indicator (or hold down the <guibutton>Shift key</guibutton>) and move to "
 "the Previewer."
-msgstr ""
-"Les notes de bas de page s'affichent dans le volet <interface>Aperçu</"
-"interface> quand un indicateur de type <guimenuitem>*n</guimenuitem> est "
-"survolé par la souris dans un texte biblique; Elles restent visibles jusqu'à "
-"ce que le curseur de la souris survole un autre indicateur. Cependant, dans "
-"certains cas, il peut être souhaitable de figer le texte pour déplacer "
-"ensuite le curseur de la souris dans le volet <interface>Aperçu</interface> "
-"pour sélectionner un lien ou lire une longue note. Dans ce cas, un clic sur "
-"le de bouton du milieu à l'aide de la souris (ou un appui sur la touche "
-"<guibutton>Majuscule</guibutton>) fige l'affichage de la note de bas de page "
-"et permet de se déplacer ensuite dans le volet <interface>aperçu</interface>."
+msgstr "Les notes de bas de page s'affichent dans le volet <interface>Aperçu</interface> quand un indicateur de type <guimenuitem>*n</guimenuitem> est survolé par la souris dans un texte biblique; Elles restent visibles jusqu'à ce que le curseur de la souris survole un autre indicateur. Cependant, dans certains cas, il peut être souhaitable de figer le texte pour déplacer ensuite le curseur de la souris dans le volet <interface>Aperçu</interface> pour sélectionner un lien ou lire une longue note. Dans ce cas, un clic sur le de bouton du milieu à l'aide de la souris (ou un appui sur la touche <guibutton>Majuscule</guibutton>) fige l'affichage de la note de bas de page et permet de se déplacer ensuite dans le volet <interface>Aperçu</interface>."
 
 #: ../C/xiphos.xml:574(para)
-#, fuzzy
 msgid ""
 "Cross-reference indicators <guibutton>*x</guibutton> work much the same way. "
 "Clicking the indicator will send the set of references to the "
@@ -1464,13 +1411,7 @@ msgid ""
 "where you can click them individually for reading in the Previewer. "
 "Alternately, a Preferences selector is available, so that cross-reference "
 "lists are sent to the verse list instead."
-msgstr ""
-"Les références croisées <guimenuitem>*x</guimenuitem> fonctionnent "
-"sensiblement de la même façon. Un clic à l'aide du bouton de la souris sur "
-"l'indicateur <guimenuitem>*x</guimenuitem> provoque l'affichage des "
-"références croisées dans la liste de <guimenuitem>Versets</guimenuitem> du "
-"<interface>volet latéral</interface>, où ensuite sélectionnés un par un, ils "
-"pourront être affichés dans le volet <interface>aperçu</interface>."
+msgstr "Les références croisées <guimenuitem>*x</guimenuitem> fonctionnent sensiblement de la même façon. Un clic à l'aide du bouton de la souris sur l'indicateur <guimenuitem>*x</guimenuitem> provoque l'affichage des références croisées dans la liste de <guimenuitem>Versets</guimenuitem> du <interface>volet latéral</interface>, où ensuite sélectionnés un par un, ils peuvent être lus dans le volet <interface>Aperçu</interface>. Alternativement, une option des Préférences permet que la liste des références croisées soit envoyée directement dans le volet <interface>Aperçu</interface>."
 
 #: ../C/xiphos.xml:581(para)
 msgid ""
@@ -1844,14 +1785,10 @@ msgstr ""
 "Ils ne sont pas soulignés avec «&#160;MozEmbed&#160;»."
 
 #: ../C/xiphos.xml:845(para)
-#, fuzzy
 msgid ""
 "Under MozEmbed, double-space display is available using the context menu, "
 "but not under gtkhtml3."
-msgstr ""
-"Avec «&#160;MozEmbed&#160;», l'affichage en double espacement du texte est "
-"activable à l'aide du menu <guimenuitem>Affichage</guimenuitem>, cette "
-"option est indisponible avec «&#160;gtkhtml3&#160;»."
+msgstr "Avec « MozEmbed », l'affichage en double espacement du texte est activable à l'aide du menu <guimenuitem>Affichage</guimenuitem>, cette option est indisponible avec « gtkhtml »."
 
 #: ../C/xiphos.xml:850(para)
 msgid ""
@@ -1869,11 +1806,7 @@ msgid ""
 "Using the \"About Xiphos\" selection under the <guimenuitem>Help</"
 "guimenuitem> menu, you will see the display library with which "
 "<application>Xiphos</application> was built."
-msgstr ""
-"À l'aide du menu <menuchoice><guimenuitem>Aide</guimenuitem><guimenuitem>À "
-"propos de Xiphos</guimenuitem></menuchoice>, il est possible de connaître la "
-"bibliothèque avec laquelle <application>&appname;</application> a été "
-"construit."
+msgstr "En utilisant le menu <menuchoice><guimenuitem>Aide</guimenuitem><guimenuitem>À propos de Xiphos</guimenuitem></menuchoice>, il est possible de connaître la bibliothèque avec laquelle <application>&appname;</application> a été construit."
 
 #: ../C/xiphos.xml:863(title) ../C/xiphos.xml:870(phrase)
 msgid "Comparison, gtkhtml3 -vs- mozembed"
@@ -1972,18 +1905,16 @@ msgstr ""
 "configuration."
 
 #: ../C/xiphos.xml:114(para)
-#, fuzzy
 msgid "The application default."
-msgstr "Menu applications"
+msgstr "La configuration par défaut de l'application."
 
 #: ../C/xiphos.xml:125(title)
 msgid "General Settings"
 msgstr "Préférences générales"
 
 #: ../C/xiphos.xml:127(title) ../C/xiphos.xml:129(title)
-#, fuzzy
 msgid "Locale, General Preferences and StudyPad directory"
-msgstr "Préférences générales et répertoire du bloc-notes."
+msgstr "Langue, préférences générales et répertoire du bloc-notes."
 
 #: ../C/xiphos.xml:142(phrase)
 msgid "General Preferences and StudyPad directory"
@@ -2100,7 +2031,6 @@ msgid "Introduction To The Module Manager"
 msgstr "Introduction à la gestion des modules"
 
 #: ../C/xiphos.xml:6(para) ../C/modules.xml:6(para)
-#, fuzzy
 msgid ""
 "The \"module\" is the unit of content in <application>Xiphos</application>, "
 "and Sword generally; a Sword module is a resource available for viewing in "
@@ -2115,17 +2045,7 @@ msgid ""
 "Xiphos repository, containing a variety of otherwise-unofficial modules "
 "produced primarily by contributors to <application>Xiphos</application> "
 "itself."
-msgstr ""
-"Le «­­&#160;module&#160;» est un bloc de contenu dans <application>&appname;</"
-"application> et plus généralement dans toute application basée sur Sword. Un "
-"module de Sword est une ressource destinée à être affichée dans une "
-"application Sword. Les modules sont de plusieurs types dont, en premier, les "
-"textes bibliques, puis les commentaires, les dictionnaires et lexiques, les "
-"livres ordinaires, ceux offrant un contenu graphique (Atlas). Ils sont à "
-"installer depuis un dépot local (distribution par CDROM) ou par "
-"téléchargement ftp depuis un dépot distant comme celui de Crosswire, site de "
-"Sword, où tous les modules certiifiés par Crosswire sont disponibles. Des "
-"modules sont également disponibles auprès d'autres sources."
+msgstr "Le « module » est une unité de contenu dans <application>&appname;</application> et plus généralement dans toute application basée sur Sword ; Un module de Sword est une ressource destinée à être vue dans une application Sword. Les modules sont de plusieurs types : les plus importants, les textes bibliques, puis aussi les dictionnaires et lexiques, les commentaires, les livres, ceux-ci pouvant offrir un contenu graphique (Atlas). Ils sont installés depuis un dépot local (généralement sur média amovible, comme une distribution par CDROM) ou par téléchargement ftp depuis un dépot distant comme celui de Crosswire, hébergeur de Sword, où tous les modules certiifiés par Crosswire sont disponibles. Des modules sont également disponibles auprès d'autres sources. En Particulier, le dépot de Xiphos contient un certains nombre de modules non-officiels produits par les contributeurs à <application>&appname;</application>."
 
 #: ../C/xiphos.xml:16(para) ../C/modules.xml:16(para)
 msgid ""
@@ -2178,20 +2098,13 @@ msgstr ""
 "ulink>."
 
 #: ../C/xiphos.xml:75(para)
-#, fuzzy
 msgid ""
 "The list of standard repositories is maintained at CrossWire. Xiphos "
 "normally auto-synchronizes with that list one time, when the user first puts "
 "the Module Manager to use. The list may change, as new repositories come "
 "into existence; occasional re-synchronization with the list is suggested, "
 "which is accomplished by clicking <guibutton>Load Standard</guibutton>."
-msgstr ""
-"La liste des dépots standard est maintenue par Crosswire. Xiphos s'auto-"
-"synchronise une fois avec cette liste, quand l'utilisateur se sert de la "
-"première fois du gestionnaire de modules. La liste peut changer, au fur et à "
-"mesure que de nouveaux dépots viennent à existence; une resynchronisation "
-"occasionnelle avec cette liste est suggérée, ce qui est accompli en cliquant "
-"the <guibutton>Charger standard</guibutton>."
+msgstr "La liste des dépots standard est maintenue par Crosswire. Xiphos s'auto-synchronise normalement une fois avec cette liste, lorsque l'utilisateur se sert de la première fois du gestionnaire de modules. La liste peut changer, au fur et à mesure que de nouveaux dépots viennent à existence; une resynchronisation occasionnelle avec cette liste est suggérée, ce qui est réalisé en cliquant sur <guibutton>Charger standard</guibutton>."
 
 #: ../C/xiphos.xml:82(title) ../C/xiphos.xml:84(title)
 msgid "Sword Module Installations"
@@ -2235,23 +2148,7 @@ msgid ""
 "various Linux distributions. Therefore, at this time there are no ongoing "
 "plans to try to solve this problem, and users are advised to enable write "
 "access to the system area outside Xiphos."
-msgstr ""
-"À moins d'avoir les privilèges du superutilisateur (via su ou sudo), "
-"l'installation n'est possible que dans l'espace personnel, sous le "
-"répertoire ~/.sword.En étant superutilisateur, ou en modifiant les "
-"permissions de l'espace système (généralement : /usr/share/sword), il est "
-"possible d'installer des modules accessibles par tous les utilisateurs.Il a "
-"été fait un certain nombre de demandes pour que soit incorporé à "
-"<application>&appname;</application> un moyen permettant à un utilisateur "
-"ordinaire (non-root) d'obtenir temporairement les droits d'accès à l'espace "
-"système pendant l'installation des modules, puis d'annuler ces droits une "
-"fois l'installation terminée. Étant donné les différentes gestions des "
-"droits du super-utilisateur employées dans l'éventail des distributions "
-"Linux, il est plutôt difficile d'établir un moyen de satisfaire cette "
-"demande. En ce moment, il n'y a aucun projet en cours essayant de résoudre "
-"ce problème, il est donc conseillé aux utilisateurs de gérer les droits "
-"d'accès en écriture à l'emplacement système en dehors de "
-"<application>&appname;</application>."
+msgstr "À moins d'avoir les privilèges du superutilisateur (via su ou sudo), l'installation n'est possible que dans l'espace personnel, sous le répertoire ~/.sword. En étant superutilisateur, ou en modifiant les permissions de l'espace système (généralement : /usr/share/sword), il est possible d'installer des modules accessibles par tous les utilisateurs. Il a été fait un certain nombre de demandes pour que soit incorporé à <application>&appname;</application> un moyen permettant à un utilisateur ordinaire (non-root) d'obtenir temporairement les droits d'accès à l'espace système pendant l'installation des modules, puis d'annuler ces droits une fois l'installation terminée. Étant donné les différentes gestions des droits du super-utilisateur employées dans l'éventail des distributions Linux, il est plutôt difficile d'établir un moyen de satisfaire cette demande. En ce moment, il n'y a aucun projet en cours essayant de résoudre ce problème, il est donc conseillé aux utilisateurs de gérer les droits d'accès en écriture à l'emplacement système en dehors de <application>&appname;</application>."
 
 #: ../C/xiphos.xml:127(title)
 msgid "Windows XP"
@@ -2403,19 +2300,13 @@ msgstr ""
 "les supprimer de façon à pouvoir les réinstaller si besoin est."
 
 #: ../C/xiphos.xml:225(para)
-#, fuzzy
 msgid ""
 "Indexing is provided so that the underlying Sword search support can create "
 "the index needed for the \"lucene\" fast-search functions. If the index is "
 "not created, plain multi-word search will still be available, but it will be "
 "much slower. With the index in place, searches through an entire Bible can "
 "take just a few seconds."
-msgstr ""
-"L'indexation est une opération permettant au moteur Sword d'effectuer des "
-"recherches multi-mots rapides. Si cet index n'existe pas, les opérations de "
-"recherche prennent un certain temps. Avec la mise en place d'un index, la "
-"recherche de type multi-mots sur l'ensemble de la Bible ne dure que quelques "
-"secondes."
+msgstr "L'indexation est une opération permettant au moteur de recherche de Sword de créer un index nécessaire aux recherches rapides de type « Lucène ». Si cet index n'existe pas, les opérations de recherche sont bien plus lentes. Avec un index en place, les requêtes à travers l'ensemble d'une Bible ne durent que quelques secondes."
 
 #: ../C/xiphos.xml:230(para)
 msgid "Indexes may be deleted as well."
@@ -2477,25 +2368,18 @@ msgid "Simple Searches"
 msgstr "Recherche simple"
 
 #: ../C/xiphos.xml:5(para) ../C/search.xml:5(para)
-#, fuzzy
 msgid ""
 "To conduct a quick search within the current Bible or commentary module, the "
 "Search Bar in the Sidebar should usually be adequate. Click either in the "
 "menu bar <menuchoice><guisubmenu>Edit</guisubmenu><guimenuitem>Search</"
 "guimenuitem></menuchoice> or in the Sidebar <menuchoice><guisubmenu>Modules</"
 "guisubmenu><guimenuitem>Search</guimenuitem></menuchoice> to access it."
-msgstr ""
-"Pour rechercher rapidement un mot ou une expression dans un module en cours "
-"d'utilisation, le plus simple est d'utiliser la fonction recherche du volet "
-"latéral. Cette fonction de recherche rapide est activée en sélectionnant  le "
-"menu <menuchoice><guimenuitem>Éditer</guimenuitem><guimenuitem>Rechercher</"
-"guimenuitem></menuchoice> ou le bouton <guibutton>Rechercher</guibutton> du "
-"volet latéral."
+msgstr "Pour effectuer rapidement une recherche dans le module Bible ou commentaire en cours, la recherche rapide du volet latéral devrait être suffisante. Cette fonction est activée en sélectionnant le menu <menuchoice><guimenuitem>Éditer</guimenuitem><guimenuitem>Rechercher</guimenuitem></menuchoice> ou le bouton <guibutton>Rechercher</guibutton> du volet latéral."
 
 #: ../C/xiphos.xml:12(title) ../C/xiphos.xml:25(phrase)
 #: ../C/search.xml:12(title) ../C/search.xml:25(phrase)
 msgid "The Search Bar"
-msgstr "La barre de recherche"
+msgstr "La barre de recherche rapide"
 
 #: ../C/xiphos.xml:32(para) ../C/search.xml:32(para)
 msgid ""
@@ -2553,16 +2437,11 @@ msgstr ""
 "recherche."
 
 #: ../C/xiphos.xml:76(para) ../C/search.xml:76(para)
-#, fuzzy
 msgid ""
 "This search uses the optimized search method (see next section) if the "
 "module has previously been indexed, and will use AND semantics by default "
 "(matched verses contain all words you entered)."
-msgstr ""
-"Cette requête employe la méthode de recherche optimisée (Voir la section "
-"suivante) à la condition que le module concerné ait été précédemment indexé, "
-"et utilisera le ET logique par défaut (les versets doivent contenir tous les "
-"mots saisis)"
+msgstr "Cette requête employe la méthode de recherche optimisée (Voir la section suivante) si le module concerné a été précédemment indexé, et utilise le ET logique par défaut (les versets doivent contenir tous les mots saisis)"
 
 #: ../C/xiphos.xml:85(para) ../C/search.xml:85(para)
 msgid ""
@@ -2590,16 +2469,12 @@ msgid "Multi word"
 msgstr "Mots multiples"
 
 #: ../C/xiphos.xml:99(para) ../C/search.xml:99(para)
-#, fuzzy
 msgid ""
 "This type will match any verse that has all the words in the search key, "
 "regardless of where they appear in the verse. By default, \"lucene\" fast "
 "search will be used, with fallback to the slower plain version of multi-word "
 "search in the absence of an index."
-msgstr ""
-"La requête  recherche n'importe quel verset contenant tous les mots de "
-"l'expression  à rechercher, quelque soit l'ordre dans lequel ils "
-"apparaissent dans le verset."
+msgstr "Ce type  recherche n'importe quel verset contenant tous les mots de l'expression  à rechercher, quelque soit l'ordre dans lequel ils apparaissent dans le verset. Par défaut, la recherche rapide de type « Lucène » est utilisée, avec repli sur la variante de recherche ordinaire « multi-mots » plus lente en l'absence d'un index."
 
 #: ../C/xiphos.xml:106(guibutton) ../C/search.xml:106(guibutton)
 msgid "Regular expression"
@@ -2781,16 +2656,11 @@ msgid "Advanced Searches"
 msgstr "Recherche avancée"
 
 #: ../C/xiphos.xml:207(para)
-#, fuzzy
 msgid ""
 "More complicated searches might require the use of the advanced search "
 "functions, found under <menuchoice><guisubmenu>Edit</"
 "guisubmenu><guimenuitem>Advanced Search</guimenuitem></menuchoice>."
-msgstr ""
-"Des recherches plus élaborées peuvent nécessiter l'utilisation de la "
-"fonction de recherche avancée. La recherche avancée est activée par "
-"l'utilisation du  menu <menuchoice><guimenuitem>Éditer</"
-"guimenuitem><guimenuitem>Recherche avancée</guimenuitem></menuchoice>."
+msgstr "Des recherches plus élaborées peuvent nécessiter l'utilisation des fonctions de recherche avancée, activées par l'utilisation du  menu <menuchoice><guimenuitem>Éditer</guimenuitem><guimenuitem>Recherche avancée</guimenuitem></menuchoice>."
 
 #: ../C/xiphos.xml:213(title)
 msgid "The Advanced Search Dialogue"
@@ -2815,7 +2685,6 @@ msgstr ""
 "références de Strong des dictionnaires grec et hébreu."
 
 #: ../C/xiphos.xml:240(para)
-#, fuzzy
 msgid ""
 "The default search uses \"lucene\" fast searching. It is an optimized search "
 "requiring a pre-built index; see the <guilabel>Module Manager's</guilabel> "
@@ -2824,15 +2693,7 @@ msgid ""
 "deliberately here. A web search will provide several references to the "
 "syntax needed to put to use the power of optimized Lucene search. A few "
 "examples follow:"
-msgstr ""
-"La requête par défaut est de type multi-mots, une recherche quelque peu "
-"lente et rustique. Une requête optimisée basée sur Lucene, un moteur de "
-"recherche libre qui permet d'indexer et de rechercher du texte est également "
-"disponible. Avant d'utiliser les requêtes optimisées, il est cependant "
-"nécessaire d'indexer les modules, comme indiqué dans la section « Gérer les "
-"modules » de ce manuel. Quelques exemples suivent démontrant la puissance "
-"des requêtes optimisées Lucene (Les références de la syntaxe Lucene sont "
-"disponible sur internet) :"
+msgstr "La requête par défaut utilise une méthode de recherche rapide de type « Lucène ». C'est une recherche optimisée nécessitant au préalable la construction d'un index; Voir la page « Maintenance » du <guilabel>Gestionnaire de modules</guilabel> pour la création d'index. En l'absence d'index, le repli se fait sur une recherche multi-mots, quelque peu lente et rustique, ou elle peut être sélectionnée délibérement. Une recherche sur Internet fournira plusieurs références sur la syntaxe nécessaire pour mettre à profit la puissance des requêtes optimisées Lucene. Quelques exemples suivent :"
 
 #: ../C/xiphos.xml:247(para)
 msgid ""
@@ -2952,9 +2813,7 @@ msgstr ""
 msgid ""
 "Explanations of search syntax are available when either Optimized or "
 "Attribute search is selected."
-msgstr ""
-"Le bouton <guibutton>Rechercher</guibutton> stoppe aussi une requête en \n"
-"cours d'exécution, comme l'indique l'infobulle."
+msgstr "Des explications sur la syntaxe de recherche sont disponibles quand soit Optimisée lucène ou Attributs sont sélectionnés."
 
 #: ../C/xiphos.xml:295(para)
 msgid ""
@@ -3464,13 +3323,10 @@ msgid "Using The Studypad"
 msgstr "Usage du bloc-notes :"
 
 #: ../C/xiphos.xml:5(para) ../C/studypad.xml:5(para)
-#, fuzzy
 msgid ""
 "The Studypad can be opened by choosing <menuchoice><guisubmenu>File</"
 "guisubmenu><guimenuitem>Open StudyPad</guimenuitem></menuchoice>"
-msgstr ""
-"Sélectionnez <menuchoice><guisubmenu>Accessoires</"
-"guisubmenu><guimenuitem>Xiphos</guimenuitem></menuchoice>."
+msgstr "Le Bloc-notes peut être ouvert en sélectionnant <menuchoice><guisubmenu>Fichier</guisubmenu><guimenuitem>Ouvrir le bloc-notes</guimenuitem></menuchoice>"
 
 #: ../C/xiphos.xml:8(para) ../C/studypad.xml:8(para)
 msgid "This is what the Studypad typically looks like:"
@@ -3546,15 +3402,11 @@ msgstr "Vérification de l'orthographe"
 
 #: ../C/xiphos.xml:51(para) ../C/xiphos.xml:74(para)
 #: ../C/studypad.xml:51(para)
-#, fuzzy
 msgid ""
 "In order for spellcheck to be available, one of the languages under "
 "<menuchoice><guisubmenu>Edit</guisubmenu><guimenuitem>Current languages</"
 "guimenuitem></menuchoice> must be set."
-msgstr ""
-"Pour activer la vérification orthographique, un des langages du menu "
-"<menuchoice><guisubmenu>Éditer</guisubmenu><guimenuitem>Langues actuelles</"
-"guimenuitem></menuchoice> doit être sélectionné."
+msgstr "Pour que la vérification orthographique fonctionne, une des langues du menu <menuchoice><guisubmenu>Éditer</guisubmenu><guimenuitem>Langues actuelles</guimenuitem></menuchoice> doit être sélectionnée."
 
 #: ../C/xiphos.xml:249(title) ../C/xiphos.xml:31(phrase)
 msgid "The Personal Commentary"
@@ -3562,22 +3414,12 @@ msgstr "Commentaires personnels"
 
 #. Personal Commentary
 #: ../C/xiphos.xml:3(para) ../C/personal.xml:3(para)
-#, fuzzy
 msgid ""
 "To build up a personal commentary you will need to install the editable "
 "'Personal' sword module from the English Commentaries section. Right click "
 "it and choose <menuchoice><guisubmenu>Edit</guisubmenu><guisubmenu>Note</"
 "guisubmenu><guimenuitem>Personal</guimenuitem></menuchoice> in the menu."
-msgstr ""
-"Écrire son propre commentaire personnel nécessite l'utilisation du module "
-"Sword «­­&#160;Personal&#160;». Pour utiliser ce module, sélectionner le "
-"bouton <guibutton>Modules</guibutton> du volet latéral, puis choisir ensuite "
-"<menuchoice><guimenuitem>Commentaires</guimenuitem><guimenuitem>English</"
-"guimenuitem><guimenuitem>+*Personal*+</guimenuitem></menuchoice>. Pour "
-"modifier ses commentaires, faire un clic du bouton droit à l'aide de la "
-"souris sur la fenêtre des commentaires, puis sélectionner "
-"<menuchoice><guimenuitem>Éditer</guimenuitem><guimenuitem>Note</"
-"guimenuitem><guimenuitem>+*Personal*+</guimenuitem></menuchoice>."
+msgstr "Pour construire son propre commentaire personnel, il est nécessaire d'installer le module Sword « Personal », depuis la liste des modules Commentaires en anglais. Ensuite, pour ajouter ses commentaires, appeler le menu contextuel par un clic du bouton droit à l'aide de la souris sur le volet des commentaires, puis sélectionner <menuchoice><guimenuitem>Édition</guimenuitem><guimenuitem>Modifier le commentaire</guimenuitem></menuchoice>."
 
 #: ../C/xiphos.xml:11(para)
 msgid ""
@@ -3713,16 +3555,9 @@ msgid ""
 "lists, they have expanded to include daily journals and topic-outline "
 "content. The user can maintain prayer lists, or prepare sermons, or write "
 "any structured content desired."
-msgstr ""
-"<application>Xiphos</application> accepte la création et l'édition par "
-"l'utilisateur de modules contenant du texte. Originellement conçus pour "
-"l'édition de simples listes de prières, ces modules incluent désormais des "
-"journaux quotidiens et des notes structurées. Il est ainsi possible de tenir "
-"à jour des listes de prières, de préparer des sermons, ou d'écrire n'importe "
-"quel contenu structuré."
+msgstr "<application>Xiphos</application> accepte la création et l'édition par l'utilisateur de modules contenant du texte. Originellement conçus pour l'édition de simples listes de prières, ces modules incluent désormais des journaux quotidiens et des thêmes structurées. Il est ainsi possible de tenir à jour des listes de prières, de préparer des sermons, ou d'écrire n'importe quel contenu structuré."
 
 #: ../C/xiphos.xml:13(para)
-#, fuzzy
 msgid ""
 "To enable prayer list and journal support, see the Preferences dialog as "
 "previously described. There, in <menuchoice><guisubmenu>General</"
@@ -3730,15 +3565,7 @@ msgid ""
 "labeled <guimenuitem>Enable Prayer Lists</guimenuitem>. You will see a new "
 "item appear at the bottom of the sidebar's module list for \"Prayer Lists/"
 "Journals\"."
-msgstr ""
-"Pour activer le support des journaux et listes de prières, ouvrir la boite "
-"de dialogue des <interface>Préférences</interface>. Dans le menu "
-"<menuchoice><guimenuitem>Général</guimenuitem><guimenuitem>Divers</"
-"guimenuitem></menuchoice>, sélectionner l'élément indiquant "
-"<guimenuitem>Activer les listes de prières</guimenuitem>. Une nouvelle "
-"entrée <guimenuitem>Liste de prières&#160;/&#160;Journal</guimenuitem> "
-"apparaît dès cet instant dans la liste de modules du <interface>volet "
-"latéral</interface>."
+msgstr "Pour activer le support des journaux et listes de prières, ouvrir la fenêtre des <interface>Préférences</interface>. Dans le menu <menuchoice><guimenuitem>Général</guimenuitem><guimenuitem>Options</guimenuitem></menuchoice>, sélectionner l'élément indiquant <guimenuitem>Activer les listes de prières</guimenuitem>. Une nouvelle entrée <guimenuitem>Liste de prières / Journal</guimenuitem> apparaît dès cet instant dans la liste de modules du <interface>volet latéral</interface>."
 
 #: ../C/xiphos.xml:24(para)
 msgid ""
@@ -4171,15 +3998,10 @@ msgstr ""
 #. Use the Introduction section to give a brief overview of what
 #.      the application is and what it does.
 #: ../C/introduction.xml:5(para)
-#, fuzzy
 msgid ""
 "is a Bible study and research tool based upon the \"SWORD Project\" "
 "libraries and the GTK libraries. You can use to do the following:"
-msgstr ""
-"est un outil de recherche et d'étude biblique s'appuyant sur les composants "
-"de l'architecture logicielle du Projet SWORD et l'environnement de bureau "
-"GNOME. <application>&appname;</application> offre les fonctionnalités "
-"suivantes :"
+msgstr "est un logiciel d'étude biblique basé sur le Projet SWORD et les bibliothèques GTK. Il permet d'effectuer les tâches suivantes :"
 
 #: ../C/interface.xml:27(phrase)
 msgid "menubar"
