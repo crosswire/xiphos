@@ -20,14 +20,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 3.1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-04 21:56+0200\n"
-"PO-Revision-Date: 2010-10-08 19:47+0200\n"
+"POT-Creation-Date: 2010-10-10 13:07+0200\n"
+"PO-Revision-Date: 2010-10-11 21:00+0200\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: emacs + po-mode <gnomefr@traduc.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 
 #: ../src/backend/sword_main.cc:732
@@ -228,15 +228,18 @@ msgid ""
 "\n"
 " Books can be downloaded from the SWORD Project."
 msgstr ""
-"Le Projet SWORD a pour objectif la création d'un ensemble croissant de "
-"logiciels destinés à l'étude de Dieu et de la Bible.\n"
-"La base logicielle du Projet SWORD donne les moyens d'utiliser et étudier "
-"aisément textes bibliques, commentaires, dictionnaires ou autres documents.\n"
-"De nombreux logiciels utilisateurs sont développés sur cette base. "
-"L'installation d'une sélection de textes est ainsi exploitable par tous ces "
-"logiciels.\n"
+"Le Projet SWORD a pour objectif la création d'un ensemble de logiciels "
+"destinés à l'étude de Dieu et de Sa Parole.\n"
 "\n"
-"Les textes peuvent être téléchargés sur le site du Projet SWORD."
+"La bibliothèque logicielle du Projet SWORD donne les moyens d'utiliser et "
+"étudier aisément textes bibliques, commentaires, dictionnaires ou autres "
+"documents.\n"
+"\n"
+"De nombreux logiciels utilisateurs sont développés sur cette bibliothèque. "
+"L'installation d'une seule collection de textes est ainsi exploitable par "
+"tous ces logiciels.\n"
+"\n"
+"Les textes peuvent être téléchargés depuis le Projet SWORD."
 
 #: ../src/gnome2/about_sword.c:105
 msgid "The SWORD Project"
@@ -285,9 +288,9 @@ msgid ""
 msgstr ""
 "(Anciennement Gnomesword)\n"
 "\n"
-"Xiphos utilise l'architecture logicielle du Projet SWORD.    \n"
-"Tous nos remerciements vont avec plaisir à Troy Griffitts et autres membres "
-"du Projet SWORD."
+"Xiphos est basé sur le Projet SWORD.    \n"
+"Tous nos remerciements vont à Troy Griffitts et toutes\n"
+"les autres personnes qui font vivre le Projet SWORD."
 
 #: ../src/gnome2/bibletext_dialog.c:315
 msgid "Go to "
@@ -491,7 +494,7 @@ msgid ""
 msgstr ""
 "Des adresses URL de type « sword:// » (similaires aux\n"
 "pages web) peuvent être utilisées par d'autres applications\n"
-"pour rechercher une référence biblique. Votre système n'a\n"
+"pour retrouver une référence biblique. Votre système n'a\n"
 "pas de programme configuré pour traiter ces adresses.\n"
 "\n"
 "Voulez-vous que Xiphos soit paramétré comme\n"
@@ -728,8 +731,8 @@ msgstr ""
 "- Dans <i>Dépôts : Ajouter/Supprimer</i>, ajouter le nom du nouveau "
 "répertoire local où se trouvent les modules. (Répertoire contenant les "
 "dossiers nommés <i>mods.d</i> et <i>modules</i>)\n"
-"- Dans <i>Dépôts : Sélection</i>, sélectionner « Dépot local » puis le nom du "
-"répertoire dans le menu déroulant.\n"
+"- Dans <i>Dépôts : Sélection</i>, sélectionner « Dépot local » puis le nom "
+"du répertoire dans le menu déroulant.\n"
 "\n"
 "<u>Installation par Internet :</u>\n"
 "- Dans <i>Dépôts : Sélection</i>, sélectionner « Dépot distant » puis « "
@@ -1158,19 +1161,19 @@ msgstr "Supprimer un dépôt distant"
 
 #: ../src/gnome2/navbar_book.c:358 ../src/gnome2/navbar_book_dialog.c:299
 msgid "Go outward, to the section containing this one"
-msgstr "Remonter d'un niveau dans le sommaire du livre"
+msgstr "Revenir à la section contenant cet élément"
 
 #: ../src/gnome2/navbar_book.c:373 ../src/gnome2/navbar_book_dialog.c:314
 msgid "Go to previous item"
-msgstr "Passage précédent"
+msgstr "Élément précédent"
 
 #: ../src/gnome2/navbar_book.c:387 ../src/gnome2/navbar_book_dialog.c:328
 msgid "Go to next item"
-msgstr "Passage suivant"
+msgstr "Élément suivant"
 
 #: ../src/gnome2/navbar_book.c:401 ../src/gnome2/navbar_book_dialog.c:342
 msgid "Go inward, to the first subsection"
-msgstr "Descendre d'un niveau dans le sommaire du livre"
+msgstr "Aller à la première sous-section"
 
 #: ../src/gnome2/navbar_versekey_dialog.c:868
 #: ../src/gnome2/navbar_versekey_editor.c:876
@@ -1406,8 +1409,8 @@ msgstr ""
 "symboles morphologiques.\n"
 "\n"
 "Noter que la plupart de ces requêtes peuvent maintenant être effectuées plus "
-"rapidement par l'intermédiaire des recherches optimisées « Lucene », à l'aide "
-"des mots-clés appropriés.\n"
+"rapidement par l'intermédiaire des recherches optimisées « Lucene », à "
+"l'aide des mots-clés appropriés.\n"
 "\n"
 "Pour utiliser les recherches sur attributs, sélectionner le bouton approprié "
 "dans l'onglet <i>Attributs</i>.\n"
@@ -1493,7 +1496,7 @@ msgstr "Barre latérale"
 
 #: ../src/gnome2/splash.c:396
 msgid "Powered by the SWORD Project"
-msgstr "Xiphos utilise l'architecture logicielle du Projet SWORD"
+msgstr "Xiphos utilise les logiciels du Projet SWORD"
 
 #: ../src/gnome2/tabbed_browser.c:364
 msgid "Can't create tabs dir."
@@ -1978,11 +1981,11 @@ msgstr "réponses"
 msgid "There is no commentary module."
 msgstr "Il n'y a pas de module commentaire."
 
-#: ../src/main/settings.c:105
+#: ../src/main/settings.c:106
 msgid "$HOME is not set!"
 msgstr "$HOME n'est pas défini!"
 
-#: ../src/main/settings.c:118
+#: ../src/main/settings.c:119
 #, c-format
 msgid ""
 "Xiphos can not create  .xiphos:\n"
@@ -1995,12 +1998,12 @@ msgstr ""
 "\n"
 "Xiphos ne peut s'exécuter normalement."
 
-#: ../src/main/settings.c:131 ../src/main/settings.c:140
-#: ../src/main/settings.c:149
+#: ../src/main/settings.c:132 ../src/main/settings.c:141
+#: ../src/main/settings.c:150
 msgid "can not create "
 msgstr "impossible de créer "
 
-#: ../src/main/settings.c:179
+#: ../src/main/settings.c:180
 msgid ""
 "Empty settings file -- backup recovery attempted.\n"
 "Some information may have been lost."
@@ -2008,12 +2011,12 @@ msgstr ""
 "Fichier de configuration vide -- Essai de restauration.\n"
 "Des informations ont pu être perdues."
 
-#: ../src/main/settings.c:181
+#: ../src/main/settings.c:182
 msgid "Empty settings file -- no backup?!? Information lost!"
 msgstr ""
 "Fichier de configuration vide -- pas de sauvegarde?!? Informations perdues!"
 
-#: ../src/main/settings.c:209
+#: ../src/main/settings.c:210
 msgid ""
 "There are no Bibles installed.\n"
 "Evidently, you declined to install any.\n"
@@ -2031,7 +2034,7 @@ msgstr ""
 "fonctionner, et va maintenant\n"
 "se terminer."
 
-#: ../src/main/settings.c:212
+#: ../src/main/settings.c:213
 msgid "Bible module installation complete."
 msgstr "Installation de module terminée."
 
@@ -2092,8 +2095,9 @@ msgstr "Les noms de livres et les menus ne seront peut-être pas traduits"
 #: ../src/main/sword.cc:1247
 msgid "Daily devotional was requested, but there are none installed."
 msgstr ""
-"Impossible d'afficher le calendrier biblique, aucun module de ce type n'est "
-"installé."
+"Impossible d'afficher le calendrier\n"
+"biblique, aucun module de ce type \n"
+"n'est installé."
 
 #: ../src/main/sword.cc:1483
 msgid ""
@@ -2597,8 +2601,8 @@ msgid ""
 "Refresh Xiphos' knowledge of what modules are available at the selected "
 "remote repository"
 msgstr ""
-"Actualise l'information dans « Xiphos » au sujet des modules disponibles dans "
-"les dépôts."
+"Actualise l'information dans « Xiphos » au sujet des modules disponibles "
+"dans les dépôts."
 
 #: ../ui/module-manager.glade.h:27
 msgid "Remote"
@@ -2657,22 +2661,36 @@ msgid "Book Selector Button"
 msgstr "Bouton Sélection de livre"
 
 #: ../ui/navbar_versekey.glade.h:4
-msgid "Choose book to display"
-msgstr "Choix du livre à afficher"
+msgid "Choose Verse to display"
+msgstr "Sélection du verset à afficher"
 
 #: ../ui/navbar_versekey.glade.h:5
-msgid "Drop down history list"
-msgstr "Déroule l'historique des versets consultés"
+msgid "Choose book to display"
+msgstr "Sélection du livre à afficher"
 
 #: ../ui/navbar_versekey.glade.h:6
+msgid "Choose chapter to display"
+msgstr "Sélection du chapitre à afficher"
+
+#: ../ui/navbar_versekey.glade.h:7
+msgid "Drop down history list"
+msgstr "Historique des versets consultés"
+
+#: ../ui/navbar_versekey.glade.h:8
+msgid "Enter a Verse reference in Book 1:1 format and press Return"
+msgstr ""
+"Saisir une référence au format : Livre 1.1 (ex : Jn 3.16)\n"
+"puis valider par appui sur la touche Entrée"
+
+#: ../ui/navbar_versekey.glade.h:9
 msgid "Reference Entry"
 msgstr "Entrée Référence"
 
-#: ../ui/navbar_versekey.glade.h:7
+#: ../ui/navbar_versekey.glade.h:10
 msgid "Toggle Chapter Button"
 msgstr "Bouton Bascule chapitre"
 
-#: ../ui/navbar_versekey.glade.h:8
+#: ../ui/navbar_versekey.glade.h:11
 msgid "Toggle Verse Button"
 msgstr "Bouton Bascule verset"
 
@@ -2819,7 +2837,7 @@ msgstr "Accueil"
 
 #: ../ui/prefs.glade.h:41
 msgid "Cross-references in verse list"
-msgstr "Références croisées en liste de versets"
+msgstr "Références croisées dans Versets"
 
 #: ../ui/prefs.glade.h:42
 msgid "Current Verse"
@@ -2988,7 +3006,7 @@ msgstr "Bouton Ouvrir la boite de sélection"
 
 #: ../ui/prefs.glade.h:80
 msgid "Open a dialog to select modules"
-msgstr "Ouvre une fenêtre de sélection des modules"
+msgstr "Ouvre la fenêtre de sélection des modules"
 
 #: ../ui/prefs.glade.h:81
 msgid "Parallel View in a tab"
@@ -3277,7 +3295,7 @@ msgstr "Exporter"
 
 #: ../ui/search-dialog.glade.h:47
 msgid "Export current search results"
-msgstr "Exporte les résultats de la requête courante"
+msgstr "Exporte les résultats de la requête"
 
 #: ../ui/search-dialog.glade.h:48
 msgid ""
@@ -3285,8 +3303,8 @@ msgid ""
 "Indexes must have been built beforehand:\n"
 "See Module Manager's maintenance functions"
 msgstr ""
-"Recherche optimisée basée sur les index\n"
-"Les index doivent être préalablement construits.\n"
+"Recherche optimisée basée sur les index,\n"
+"les index doivent être préalablement construits.\n"
 "Voir l'onglet Gérer du gestionnaire de modules."
 
 #: ../ui/search-dialog.glade.h:51
@@ -3299,15 +3317,15 @@ msgstr "Bouton radio Notes de bas de page"
 
 #: ../ui/search-dialog.glade.h:54
 msgid "In modules that have Footnotes"
-msgstr "Dans les modules avec notes de bas de page"
+msgstr "Pour les modules avec notes de bas de page"
 
 #: ../ui/search-dialog.glade.h:55
 msgid "In modules that have Morphological Tags"
-msgstr "Dans les modules avec étiquettes morphologiques"
+msgstr "Pour les modules avec étiquettes morphologiques"
 
 #: ../ui/search-dialog.glade.h:56
 msgid "In modules that have Strong's Numbers"
-msgstr "Dans les modules avec nombres de Strong"
+msgstr "Pour les modules avec nombres de Strong"
 
 #: ../ui/search-dialog.glade.h:57
 msgid "Main Search Entry"
@@ -3410,7 +3428,9 @@ msgstr "Enregistre la plage de versets"
 
 #: ../ui/search-dialog.glade.h:87
 msgid "Save search results as bookmarks"
-msgstr "Enregistre les résultats de la recherche comme signets"
+msgstr ""
+"Enregistre les résultats de la recherche\n"
+"sous forme de signets"
 
 #: ../ui/search-dialog.glade.h:88
 msgid "Save the module list"
@@ -3516,7 +3536,7 @@ msgstr "Recherche sur _attributs"
 
 #: ../ui/search-dialog.glade.h:113
 msgid "_Lucene Search Syntax"
-msgstr "Syntaxe recherche Lucene"
+msgstr "Syntaxe Lucene"
 
 #: ../ui/search-dialog.glade.h:114
 msgid "e.g. Matt-John;Rev4"
@@ -3572,7 +3592,7 @@ msgstr "Applique un contraste élevé au verset en cours"
 
 #: ../ui/xi-menus.glade.h:15
 msgid "Bring the simple sidebar search forward"
-msgstr "Place en avant la recherche simple du volet latéral"
+msgstr "Affiche l'option recherche du volet latéral"
 
 #: ../ui/xi-menus.glade.h:16
 msgid "Browse in BibleMap.org"
@@ -3749,7 +3769,7 @@ msgstr ""
 
 #: ../ui/xi-menus.glade.h:71
 msgid "Open a saved tab settings collection"
-msgstr "Ouvre une configuration d'onglets précédemment enregistrée"
+msgstr "Ouvre une session d'onglets enregistrée"
 
 #: ../ui/xi-menus.glade.h:72
 msgid "Open in a dialog"
@@ -3761,7 +3781,7 @@ msgstr "Ouvrir dans une fenêtre séparée"
 
 #: ../ui/xi-menus.glade.h:74
 msgid "Open in editor"
-msgstr "Ouvrir dans l'éditeur"
+msgstr "Modifier le commentaire"
 
 #: ../ui/xi-menus.glade.h:75
 msgid "Open in new tab"
@@ -3773,7 +3793,7 @@ msgid ""
 "\tseparate ['dialog'] window"
 msgstr ""
 "Ouvrir le module sélectionné dans une\n"
-"nouvelle fenêtre ['dialog']"
+"nouvelle fenêtre"
 
 #: ../ui/xi-menus.glade.h:78
 msgid "Open selected module in a new tab"
@@ -3807,7 +3827,7 @@ msgstr "Thême structuré"
 
 #: ../ui/xi-menus.glade.h:85
 msgid "Preview _Daily Devotion"
-msgstr "Aperçu du calendrier biblique"
+msgstr "Calendrier biblique"
 
 #: ../ui/xi-menus.glade.h:87
 msgid "Provide the full-chapter parallel Bible window as another tab"
@@ -3856,7 +3876,7 @@ msgstr "Enregistre ces résultats sous un seul signet"
 
 #: ../ui/xi-menus.glade.h:99
 msgid "Save this collection of tab settings"
-msgstr "Enregistre cette configuration d'onglets"
+msgstr "Enregistre cette session d'onglets"
 
 #: ../ui/xi-menus.glade.h:100
 msgid "Scripture Cross-references"
@@ -4033,7 +4053,7 @@ msgstr "Signets Xiphos"
 
 #: ../ui/xi-export-bookmarks.glade.h:7
 msgid "gtk-cancel"
-msgstr "gtk-annuler"
+msgstr "Annuler"
 
 #: ../ui/xi-export-bookmarks.glade.h:8
 msgid "gtk-ok"
@@ -4041,7 +4061,7 @@ msgstr "gtk-ok"
 
 #: ../xiphos.desktop.in.in.h:1
 msgid "Study the Bible"
-msgstr "Aide à l'étude de la Bible"
+msgstr "Étudier la Bible avec Xiphos"
 
 #: ../xiphos.desktop.in.in.h:2
 msgid "Xiphos Bible Guide"
@@ -4269,11 +4289,6 @@ msgstr "Guide de la Bible Xiphos"
 
 #~ msgid "Change Chapter"
 #~ msgstr "Change de chapitre"
-
-#~ msgid "Enter a Verse reference in Book 1:1 format and press Return"
-#~ msgstr ""
-#~ "Saisir un verset au format <livre> <chapitre>:<verset>(ex: Jn 3:16) puis "
-#~ "valider par appui sur la touche Entrée"
 
 #~ msgid "Dictionary/_Lexicon"
 #~ msgstr "Dictionnaire/Lexique"
