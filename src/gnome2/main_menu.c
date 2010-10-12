@@ -371,6 +371,7 @@ on_show_verse_numbers_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 	settings.showversenum = menuitem->active;
 	xml_set_value("Xiphos", "misc", "showversenum",
 		      (settings.showversenum ? "1" : "0"));
+	main_display_commentary(NULL, settings.currentverse);
 	main_display_bible(NULL, settings.currentverse);
 }
 
