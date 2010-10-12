@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 3.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-06 23:39+0200\n"
-"PO-Revision-Date: 2010-10-06 23:39+0100\n"
+"POT-Creation-Date: 2010-10-12 20:53+0200\n"
+"PO-Revision-Date: 2010-10-12 20:52+0100\n"
 "Last-Translator: Eicke Godehardt <sf at godehardt.org>\n"
 "Language-Team: Xiphos Translation Team <farsi@lists.sharif.edu>\n"
 "MIME-Version: 1.0\n"
@@ -1508,8 +1508,8 @@ msgstr ""
 "Unzulässig kodierte persönliche Kommentarbeschriftung:\n"
 "'%s'"
 
-#: ../src/main/display.cc:927 ../src/main/display.cc:989
-#: ../src/main/display.cc:1074 ../ui/export-dialog.glade.h:7
+#: ../src/main/display.cc:938 ../src/main/display.cc:998
+#: ../src/main/display.cc:1082 ../ui/export-dialog.glade.h:7
 msgid "Chapter"
 msgstr "Kapitel"
 
@@ -2631,22 +2631,34 @@ msgid "Book Selector Button"
 msgstr "Buchauswahl Knopf"
 
 #: ../ui/navbar_versekey.glade.h:4
+msgid "Choose Verse to display"
+msgstr "Wähle Vers für die Anzeige"
+
+#: ../ui/navbar_versekey.glade.h:5
 msgid "Choose book to display"
 msgstr "Wähle Buch für die Anzeige"
 
-#: ../ui/navbar_versekey.glade.h:5
+#: ../ui/navbar_versekey.glade.h:6
+msgid "Choose chapter to display"
+msgstr "Wähle Kapitel für die Anzeige"
+
+#: ../ui/navbar_versekey.glade.h:7
 msgid "Drop down history list"
 msgstr "Ausklapp-Verlaufsliste"
 
-#: ../ui/navbar_versekey.glade.h:6
+#: ../ui/navbar_versekey.glade.h:8
+msgid "Enter a Verse reference in Book 1:1 format and press Return"
+msgstr "Bitte einen Verse im Format 1:1 eingeben und Enter drücken"
+
+#: ../ui/navbar_versekey.glade.h:9
 msgid "Reference Entry"
 msgstr "Referenz Eingabe"
 
-#: ../ui/navbar_versekey.glade.h:7
+#: ../ui/navbar_versekey.glade.h:10
 msgid "Toggle Chapter Button"
 msgstr "Kapitel umschalten Knopf"
 
-#: ../ui/navbar_versekey.glade.h:8
+#: ../ui/navbar_versekey.glade.h:11
 msgid "Toggle Verse Button"
 msgstr "Vers umschalten Knopf"
 
@@ -4240,9 +4252,6 @@ msgstr "Xiphos Bibelleitfaden"
 
 #~ msgid "Change Chapter"
 #~ msgstr "Kapitel wechseln"
-
-#~ msgid "Enter a Verse reference in Book 1:1 format and press Return"
-#~ msgstr "Bitte einen Verse im Format 1:1 eingeben und Enter drücken"
 
 #~ msgid "Dictionary/_Lexicon"
 #~ msgstr "Wörterbücher/_Lexika"
