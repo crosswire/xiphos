@@ -696,7 +696,7 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule)
 	int curVerse = key->Verse();
 	int curChapter = key->Chapter();
 	int curBook = key->Book();
-	gchar *buf;
+	gchar *buf, *num;
 	char *ModuleName = imodule.Name();
 	GString *rework;			// for image size analysis rework.
 	footnote = xref = 0;
@@ -742,8 +742,20 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule)
 			cVerse.SetText(rework->str, cache_flags);
 		} else
 			rework = g_string_new(cVerse.GetText());
-		buf = g_strdup_printf("<p /><a name=\"%d\"> </a>",
-				      key->Verse());
+
+		// insert verse numbers
+		num = main_format_number(key->Verse());
+		buf = g_strdup_printf(settings.showversenum
+			? "<p/><a name=\"%d\" href=\"sword:///%s\">"
+			  "<font size=\"%+d\" color=\"%s\">%s</font></a><br/>"
+			: "<p/><a name=\"%d\"> </a>",
+			key->Verse(),
+			(char*)key->getText(),
+			settings.verse_num_font_size + settings.base_font_size,
+			settings.bible_verse_num_color,
+			num);
+		g_free(num);
+
 		swbuf.append(buf);
 		g_free(buf);
 		swbuf.append(settings.imageresize
@@ -898,7 +910,6 @@ GTKEntryDisp::Display(SWModule &imodule)
 void
 GTKChapDisp::getVerseBefore(SWModule &imodule)
 {
-	gchar *utf8_key;
 	gchar *buf;
 	char *num;
 
@@ -953,8 +964,6 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 				     : (const char *)imodule);
 #endif /* !0 */
 
-		utf8_key = strdup((char*)key->getText());
-
 		swbuf.appendFormatted("<div dir=%s>",
 				      ((is_rtol && !ops->transliteration)
 				       ? "rtl"
@@ -966,7 +975,7 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 				  "<font size=\"%+d\" color=\"%s\">%s</font></a> "
 				: "&nbsp; <a name=\"%d\"> </a>",
 				0,
-				utf8_key,
+				(char*)key->getText(),
 				((settings.versestyle)
 				 ? settings.verse_num_font_size + settings.base_font_size
 				 : settings.base_font_size - 2),
@@ -1048,7 +1057,6 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 void
 GTKChapDisp::getVerseAfter(SWModule &imodule)
 {
-	gchar *utf8_key;
 	gchar *buf;
 #if 0
 	const char *ModuleName = imodule.Name();
@@ -1076,8 +1084,6 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 		g_free(buf);
 		g_free(num);
 
-		utf8_key = strdup((char*)key->getText());
-
 		swbuf.appendFormatted("<div dir=%s>",
 				      ((is_rtol && !ops->transliteration)
 				       ? "rtl"
@@ -1089,7 +1095,7 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 				  "<font size=\"%+d\" color=\"%s\">%s</font></a> "
 				: "&nbsp; <a name=\"%d\"> </a>",
 				0,
-				utf8_key,
+				(char*)key->getText(),
 				((settings.versestyle)
 				 ? settings.verse_num_font_size + settings.base_font_size
 				 : settings.base_font_size - 2),
@@ -1911,7 +1917,6 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 	int curVerse = key->Verse();
 	int curChapter = key->Chapter();
 	int curBook = key->Book();
-	gchar *utf8_key;
 	gchar *buf;
 	gchar *preverse = NULL;
 	const gchar *paragraphMark = NULL;
@@ -1969,15 +1974,13 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 			sprintf(heading, "%d", x);
 		}
 
-		utf8_key = strdup((char*)key->getText());
-
 		num = main_format_number(key->Verse());
 		buf=g_strdup_printf(settings.showversenum
 			? "&nbsp; <a name=\"%d\" href=\"sword:///%s\">"
 			  "<font size=\"%+d\" color=\"%s\">%s</font></a> "
 			: "&nbsp; <a name=\"%d\"> </a>",
 			key->Verse(),
-			utf8_key,
+			(char*)key->getText(),
 			settings.verse_num_font_size + settings.base_font_size,
 			settings.bible_verse_num_color,
 			num);
