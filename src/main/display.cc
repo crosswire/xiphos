@@ -697,7 +697,7 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule)
 	int curVerse = key->Verse();
 	int curChapter = key->Chapter();
 	int curBook = key->Book();
-	gchar *buf, *num;
+	gchar *buf, *vbuf, *num;
 	char *ModuleName = imodule.Name();
 	GString *rework;			// for image size analysis rework.
 	footnote = xref = 0;
@@ -753,21 +753,23 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule)
 		} else
 			rework = g_string_new(cVerse.GetText());
 
+		swbuf.append("<tr>");
+
 		// insert verse numbers
 		num = main_format_number(key->Verse());
-		buf = g_strdup_printf((settings.showversenum
-				       ? "<tr><td valign=\"top\" align=\"right\">"
-				       "<a name=\"%d\" href=\"sword:///%s\">"
-				       "<font size=\"%+d\" color=\"%s\">%s</font></a></td>"
-				       : "<p/><a name=\"%d\"> </a>"),
-				      key->Verse(),
-				      (char*)key->getText(),
-				      settings.verse_num_font_size + settings.base_font_size,
-				      settings.bible_verse_num_color,
-				      num);
+		vbuf = g_strdup_printf((settings.showversenum
+					? "<td valign=\"top\" align=\"right\">"
+					"<a name=\"%d\" href=\"sword:///%s\">"
+					"<font size=\"%+d\" color=\"%s\">%s</font></a></td>"
+					: "<p/><a name=\"%d\"> </a>"),
+				       key->Verse(),
+				       (char*)key->getText(),
+				       settings.verse_num_font_size + settings.base_font_size,
+				       settings.bible_verse_num_color,
+				       num);
 		g_free(num);
-		swbuf.append(buf);
-		g_free(buf);
+		if (!is_rtol)
+			swbuf.append(vbuf);
 
 		if (settings.showversenum) {
 			buf = g_strdup_printf("<td><font size=\"%+d\">",
@@ -782,12 +784,18 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule)
 						   GDK_WINDOW(gtkText->window))
 			     : rework->str /* left as-is */);
 		if (settings.showversenum)
-			swbuf.append("</font></td></tr>");
+			swbuf.append("</font></td>");
+
+		if (is_rtol)
+			swbuf.append(vbuf);
+		g_free(vbuf);
+
+		swbuf.append("</tr>");
 	}
 
 	// close the table.
 	if (settings.showversenum)
-		swbuf.append("</table</font>");
+		swbuf.append("</table></font>");
 	swbuf.append("</div></font></body></html>");
 
 	buf = g_strdup_printf("%d", curVerse);
