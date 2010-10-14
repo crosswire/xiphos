@@ -691,7 +691,8 @@ set_morph_order(SWModule& imodule)
 char
 GTKEntryDisp::DisplayByChapter(SWModule &imodule)
 {
-       imodule.setSkipConsecutiveLinks(true);
+	imodule.setSkipConsecutiveLinks(true);
+
 	VerseKey *key = (VerseKey *)(SWKey *)imodule;
 	int curVerse = key->Verse();
 	int curChapter = key->Chapter();
@@ -713,6 +714,15 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule)
 			     ops->morphs);
 	if (strongs_and_morph)
 		set_morph_order(imodule);
+
+	// open the table.
+	if (settings.showversenum) {
+		buf = g_strdup_printf("<font face=\"%s\"><table border=\"0\""
+				      " cellpadding=\"5\" cellspacing=\"0\">",
+				      ((mf->old_font) ? mf->old_font : ""));
+		swbuf.append(buf);
+		g_free(buf);
+	}
 
 	for (key->Verse(1);
 	     (key->Book()    == curBook)    &&
@@ -745,25 +755,39 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule)
 
 		// insert verse numbers
 		num = main_format_number(key->Verse());
-		buf = g_strdup_printf(settings.showversenum
-			? "<p/><a name=\"%d\" href=\"sword:///%s\">"
-			  "<font size=\"%+d\" color=\"%s\">%s</font></a><br/>"
-			: "<p/><a name=\"%d\"> </a>",
-			key->Verse(),
-			(char*)key->getText(),
-			settings.verse_num_font_size + settings.base_font_size,
-			settings.bible_verse_num_color,
-			num);
+		buf = g_strdup_printf((settings.showversenum
+				       ? "<tr><td valign=\"top\" align=\"right\">"
+				       "<a name=\"%d\" href=\"sword:///%s\">"
+				       "<font size=\"%+d\" color=\"%s\">%s</font></a></td>"
+				       : "<p/><a name=\"%d\"> </a>"),
+				      key->Verse(),
+				      (char*)key->getText(),
+				      settings.verse_num_font_size + settings.base_font_size,
+				      settings.bible_verse_num_color,
+				      num);
 		g_free(num);
-
 		swbuf.append(buf);
 		g_free(buf);
+
+		if (settings.showversenum) {
+			buf = g_strdup_printf("<td><font size=\"%+d\">",
+					      ((mf->old_font_size)
+					       ? atoi(mf->old_font_size) + settings.base_font_size
+					       : settings.base_font_size));
+			swbuf.append(buf);
+			g_free(buf);
+		}
 		swbuf.append(settings.imageresize
 			     ? AnalyzeForImageSize(rework->str,
 						   GDK_WINDOW(gtkText->window))
 			     : rework->str /* left as-is */);
+		if (settings.showversenum)
+			swbuf.append("</font></td></tr>");
 	}
 
+	// close the table.
+	if (settings.showversenum)
+		swbuf.append("</table</font>");
 	swbuf.append("</div></font></body></html>");
 
 	buf = g_strdup_printf("%d", curVerse);
