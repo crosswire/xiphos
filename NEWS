@@ -1,3 +1,9 @@
+2010-10-15  - 3.1.4.  new det.parallel. first modules installable from local
+              media. per-language font defaults. better sword:// handling.
+	      improved bookmark import. more tooltips (mod.mgr, adv.search).
+	      numbered notes/xrefs. better highlighting. color invert
+	      buttons.
+
 2010-03-22  - 3.1.3.  better settings save and failure-to-save logic, editor
 	      link dialog navigation selector, correct L<spaces>ORD in read
 	      aloud, fixed universal sync, compatibility with xulrunner
