@@ -17,7 +17,7 @@ import waffles.gnome as gnome
 bzrrevno = '$CurRevno$'
 bzrrevid = '$CurRevid$'
 
-VERSION='3.1.3dev'
+VERSION='3.1.4'
 
 if VERSION.find('dev') != -1 and len(bzrrevno.split()) > 1:
         VERSION = '+'.join((VERSION,
