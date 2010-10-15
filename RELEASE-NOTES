@@ -4,15 +4,13 @@ XIPHOS RELEASE NOTES
 ____________________
 
 Release 3.1.4
-04 Oct 2010
+15 Oct 2010
 
 As we continue to straggle toward feature parity in Windows, which we
 regret we have still not fully achieved, it became necessary to make a
 fresh release of Xiphos due to a new release of the Sword engine itself.
 We have done a great deal in Xiphos other than in those feature parity
 areas, so this makes for a good release anyhow.
-
-Also, Xiphos is now supported under recent MacOSX.
 
 Many smaller issues that have been waiting for a long time have been
 implemented.  Again, classified as new, enhancements, and fixes.
@@ -81,6 +79,8 @@ New features
 17. The existence, placement, and size of the detached parallel window are
     remembered.  If it was present when Xiphos last exited, when Xiphos
     restarts, it will be reconstructed in the same place and size.
+
+18. Commentaries in by-chapter mode have verse numbers in a left column.
 
 Enhancements to existing behavior
 
@@ -170,6 +170,8 @@ Bug reports addressed since 3.1.3:
 3077179  crash when choosing 'print' for empty module
 3077180  empty module crash
 3077181  empty dictionary crash
+3082210  Jumps to first verse in chapter
+3084794  xiphos cannot be built against gtkhtml 3.32
 
 Feature requests closed:
 1994953  doublespace becomes per-module option, previewer font size down 1.
