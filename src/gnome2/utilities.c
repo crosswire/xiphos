@@ -1934,7 +1934,9 @@ ImageDimensions(const char *path, int *x, int *y)
 
 #define	IMGSRC_STRING	"<img src=\""
 #define	IMGSRC_LENGTH	10		// strlen(IMGSRC_STRING)
+#ifndef HAVE_STRCASESTR
 const char *strcasestr(const char *haystack, const char *needle);
+#endif
 
 const char *
 AnalyzeForImageSize(const char *origtext,
