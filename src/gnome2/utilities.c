@@ -23,6 +23,8 @@
 #  include <config.h>
 #endif
 
+#define _GNU_SOURCE	1
+
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
