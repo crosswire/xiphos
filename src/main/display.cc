@@ -594,12 +594,13 @@ block_render(const char *text)
 }
 
 //
-// in-place removal of inconvenient-to-the-user content.
+// in-place removal of inconvenient-to-the-user content, and note/xref marking.
 //
 GString *
 CleanupContent(GString *text,
 	       GLOBAL_OPS *ops,
-	       char *name)
+	       char *name,
+	       bool reset = true)
 {
 	if (ops->image_content == 0)
 		ClearImages((gchar *)text->str);
@@ -617,22 +618,63 @@ CleanupContent(GString *text,
 	}
 
 	gint pos;
-	gchar value[6];
-	gchar *s = text->str;
+	gchar value[50], *reported, *notetype, *s = text->str;
 
-	while ((s = strstr(s, "*n"))) {
-		g_snprintf(value, 5, "%d", ++footnote);
-		pos = s-(text->str)+2;
-		text = g_string_insert(text, pos, value);
-		s = text->str + pos + 1;
+	// test for any 'n="X"' content.  if so, use it directly.
+	if ((reported = backend->get_entry_attribute("Footnote", "1", "n"))) {
+		g_free(reported);		// dispose of test junk.
+
+		// operate on notes+xrefs together: both are "Footnote".
+		while ((s = strchr(s, '*'))) {
+			if ((*(s+1) != 'n') && (*(s+1) != 'x')) {
+				s++;		// that's not our marker.
+				continue;
+			}
+
+		again:
+			g_snprintf(value, 5, "%d", ++footnote);
+			if ((reported = backend->get_entry_attribute("Footnote", value, "n"))) {
+
+				notetype = backend->get_entry_attribute("Footnote", value, "type");
+				if (notetype &&
+				    (((*(s+1) == 'n') && !strcmp(notetype, "crossReference")) ||
+				     ((*(s+1) == 'x') && strcmp(notetype, "crossReference")))) {
+					// only 1 of notes & xrefs is active.
+					g_free(notetype);
+					goto again;
+				}
+
+				g_free(notetype);
+				pos = s-(text->str)+2;
+				text = g_string_insert(text, pos, reported);
+				g_free(reported);
+				s = text->str + pos + 1;
+			}
+		}
+
+		// naïveté: if any verse uses 'n=', all do: reset for next verse.
+		if (reset)
+			footnote = 0;
 	}
-	s = text->str;
-	while ((s = strstr(s, "*x"))) {
-		g_snprintf(value, 5, "%d", ++xref);
-		pos = s-(text->str)+2;
-		text = g_string_insert(text, pos, value);
-		s = text->str + pos + 1;
+
+	// otherwise we simply count notes & xrefs through the verse.
+	else {
+		while ((s = strstr(s, "*n"))) {
+			g_snprintf(value, 5, "%d", ++footnote);
+			pos = s-(text->str)+2;
+			text = g_string_insert(text, pos, value);
+			s = text->str + pos + 1;
+		}
+
+		s = text->str;
+		while ((s = strstr(s, "*x"))) {
+			g_snprintf(value, 5, "%d", ++xref);
+			pos = s-(text->str)+2;
+			text = g_string_insert(text, pos, value);
+			s = text->str + pos + 1;
+		}
 	}
+
 	return text;
 }
 
@@ -661,7 +703,7 @@ CacheHeader(ModuleCache::CacheVerse& cVerse,
 				  ops->morphs)
 				 ? block_render(preverse2)
 				 : preverse2));
-		text = CleanupContent(text, ops, mod.Name());
+		text = CleanupContent(text, ops, mod.Name(), false);
 
 		cVerse.AppendHeader(text->str);
 		// g_free((gchar *)preverse2);
