@@ -641,6 +641,7 @@ CleanupContent(GString *text,
 				     ((*(s+1) == 'x') && strcmp(notetype, "crossReference")))) {
 					// only 1 of notes & xrefs is active.
 					g_free(notetype);
+					g_free(reported);
 					goto again;
 				}
 
