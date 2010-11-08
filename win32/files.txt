@@ -1,0 +1,459 @@
+bin/libfreetype-6.dll
+bin/gspawn-win32-helper-console.exe
+bin/gspawn-win32-helper.exe
+bin/libpsiconv-6.dll
+bin/libintl-8.dll
+bin/libjpeg-8.dll
+bin/libatk-1.0-0.dll
+bin/libcairo-2.dll
+bin/libcroco-0.6-3.dll
+bin/libenchant.dll
+bin/libexpat-1.dll
+bin/libfontconfig-1.dll
+bin/libgailutil-18.dll
+bin/libgdk_pixbuf-2.0-0.dll
+bin/libgdk-win32-2.0-0.dll
+bin/libgio-2.0-0.dll
+bin/libglade-2.0-0.dll
+bin/libglib-2.0-0.dll
+bin/libgmodule-2.0-0.dll
+bin/libgobject-2.0-0.dll
+bin/libgsf-1-114.dll
+bin/libgsf-win32-1-114.dll
+bin/libgthread-2.0-0.dll
+bin/libgtk-win32-2.0-0.dll
+bin/libpango-1.0-0.dll
+bin/libpangocairo-1.0-0.dll
+bin/libpangoft2-1.0-0.dll
+bin/libpangowin32-1.0-0.dll
+bin/libpng14-14.dll
+bin/librsvg-2-2.dll
+bin/libtiff-3.dll
+bin/libxml2-2.dll
+# bin/sword.conf
+bin/uconv.exe
+# bin/utils.bat
+bin/xiphos.exe
+bin/zlib1.dll
+bin/libjasper-1.dll
+bin/libpixman-1-0.dll
+bin/bz2-1.dll
+
+d etc/fonts
+etc/fonts/fonts.conf
+d etc/gtk-2.0
+#etc/gtk-2.0/gdk-pixbuf.loaders
+#etc/gtk-2.0/gtk.immodules
+d etc/gtk-2.0/gtkrc
+etc/gtk-2.0/im-multipress.conf
+d etc/pango
+#etc/pango/pango.aliases
+#etc/pango/pango.modules
+d festival
+#festival/festival_client.exe
+#festival/festival.exe
+#festival/lib
+#festival/lib/apml_f2bf0lr.scm
+#festival/lib/apml_kaldurtreeZ.scm
+#festival/lib/apml.scm
+#festival/lib/cart_aux.scm
+#festival/lib/clunits_build.scm
+#festival/lib/clunits.scm
+#festival/lib/cmusphinx2_phones.scm
+#festival/lib/cslush.scm
+#festival/lib/cstr.scm
+#festival/lib/darpa_phones.scm
+#festival/lib/dicts
+#festival/lib/dicts/cmu
+#festival/lib/dicts/cmu/allowables.scm
+#festival/lib/dicts/cmu/cmu2ft
+#festival/lib/dicts/cmu/cmudict-0.4.diff
+#festival/lib/dicts/cmu/cmudict-0.4.out
+#festival/lib/dicts/cmu/cmudict-0.4.scm
+#festival/lib/dicts/cmu/cmudict_extensions.scm
+#festival/lib/dicts/cmu/cmulex.scm
+#festival/lib/dicts/cmu/cmu_lts_rules.scm
+#festival/lib/dicts/cmu/COPYING
+#festival/lib/dicts/cmu/Makefile
+#festival/lib/dicts/COPYING.poslex
+#festival/lib/dicts/wsj.wp39.poslexR
+#festival/lib/dicts/wsj.wp39.tri.ngrambin
+#festival/lib/display.scm
+#festival/lib/duration.scm
+#festival/lib/email-mode.scm
+#festival/lib/engmorph.scm
+#festival/lib/engmorphsyn.scm
+#festival/lib/etc
+#festival/lib/etc/email_filter
+#festival/lib/etc/Makefile
+#festival/lib/etc/VCMakefile
+#festival/lib/f2bdurtreeZ.scm
+#festival/lib/f2bf0lr.scm
+#festival/lib/festdoc.scm
+#festival/lib/festival.el
+#festival/lib/festival.scm
+#festival/lib/festtest.scm
+#festival/lib/fringe.scm
+#festival/lib/gswdurtreeZ.scm
+#festival/lib/holmes_phones.scm
+#festival/lib/hts.scm
+#festival/lib/init.scm
+#festival/lib/intonation.scm
+#festival/lib/java.scm
+#festival/lib/klatt_durs.scm
+#festival/lib/languages.scm
+#festival/lib/lexicons.scm
+#festival/lib/lts_build.scm
+#festival/lib/lts.scm
+#festival/lib/Makefile
+#festival/lib/mbrola.scm
+#festival/lib/mettree.scm
+#festival/lib/module_description.scm
+#festival/lib/mrpa_allophones.scm
+#festival/lib/mrpa_durs.scm
+#festival/lib/mrpa_phones.scm
+#festival/lib/multisyn
+#festival/lib/multisyn/Makefile
+#festival/lib/multisyn/multisyn_pauses.scm
+#festival/lib/multisyn/multisyn.scm
+#festival/lib/multisyn/radio_phones_multisyn.scm
+#festival/lib/multisyn/send_xwaves.scm
+#festival/lib/multisyn/target_cost.scm
+#festival/lib/multisyn/VCMakefile
+#festival/lib/ogimarkup-mode.scm
+#festival/lib/pauses.scm
+#festival/lib/phoneset.scm
+#festival/lib/phrase.scm
+#festival/lib/pos.scm
+#festival/lib/postlex.scm
+#festival/lib/radio_phones.scm
+#festival/lib/sable-latin.ent
+#festival/lib/sable-mode.scm
+#festival/lib/Sable.v0_2.dtd
+#festival/lib/scfg.scm
+#festival/lib/scfg_wsj_wp20.gram
+#festival/lib/sec.B.hept.ngrambin
+#festival/lib/sec.ts20.quad.ngrambin
+#festival/lib/singing-mode.scm
+#festival/lib/Singing.v0_1.dtd
+#festival/lib/siod.scm
+#festival/lib/siteinit.scm
+#festival/lib/soleml-mode.scm
+#festival/lib/speech.properties
+#festival/lib/synthesis.scm
+#festival/lib/tilt.scm
+#festival/lib/tobi_rules.scm
+#festival/lib/tobi.scm
+#festival/lib/tokenpos.scm
+#festival/lib/token.scm
+#festival/lib/tts.scm
+#festival/lib/unilex_phones.scm
+#festival/lib/VCLocalRules
+#festival/lib/VCMakefile
+#festival/lib/voices
+#festival/lib/voices/english
+#festival/lib/voices/english/ked_diphone
+#festival/lib/voices/english/ked_diphone/COPYING
+#festival/lib/voices/english/ked_diphone/festvox
+#festival/lib/voices/english/ked_diphone/festvox/kddurtreeZ.scm
+#festival/lib/voices/english/ked_diphone/festvox/ked_diphone.scm
+#festival/lib/voices/english/ked_diphone/group
+#festival/lib/voices/english/ked_diphone/group/kedlpc16k.group
+#festival/lib/voices.scm
+#festival/lib/web.scm
+d lib
+#lib/charset.alias
+d lib/enchant
+lib/enchant/libenchant_ispell.dll
+lib/enchant/libenchant_myspell.dll
+d lib/gtk-2.0
+d lib/gtk-2.0/2.10.0
+d lib/gtk-2.0/2.10.0/engines
+lib/gtk-2.0/2.10.0/engines/libpixmap.dll
+lib/gtk-2.0/2.10.0/engines/libwimp.dll
+d lib/gtk-2.0/2.10.0/loaders
+#lib/gtk-2.0/2.10.0/loaders/libpixbufloader-ani.dll
+#lib/gtk-2.0/2.10.0/loaders/libpixbufloader-bmp.dll
+#lib/gtk-2.0/2.10.0/loaders/libpixbufloader-gif.dll
+#lib/gtk-2.0/2.10.0/loaders/libpixbufloader-icns.dll
+#lib/gtk-2.0/2.10.0/loaders/libpixbufloader-ico.dll
+#lib/gtk-2.0/2.10.0/loaders/libpixbufloader-jpeg.dll
+#lib/gtk-2.0/2.10.0/loaders/libpixbufloader-pcx.dll
+#lib/gtk-2.0/2.10.0/loaders/libpixbufloader-png.dll
+#lib/gtk-2.0/2.10.0/loaders/libpixbufloader-pnm.dll
+#lib/gtk-2.0/2.10.0/loaders/libpixbufloader-ras.dll
+#lib/gtk-2.0/2.10.0/loaders/libpixbufloader-svg.dll
+#lib/gtk-2.0/2.10.0/loaders/libpixbufloader-tga.dll
+#lib/gtk-2.0/2.10.0/loaders/libpixbufloader-tiff.dll
+#lib/gtk-2.0/2.10.0/loaders/libpixbufloader-wbmp.dll
+#lib/gtk-2.0/2.10.0/loaders/libpixbufloader-xbm.dll
+#lib/gtk-2.0/2.10.0/loaders/libpixbufloader-xpm.dll
+d lib/gtk-2.0/modules
+lib/gtk-2.0/modules/libgail.dll
+d share
+d share/doc
+d share/doc/xiphos
+share/doc/xiphos/AUTHORS
+share/doc/xiphos/ChangeLog
+share/doc/xiphos/COPYING
+share/doc/xiphos/INSTALL
+share/doc/xiphos/NEWS
+share/doc/xiphos/README
+share/doc/xiphos/RELEASE-NOTES
+share/doc/xiphos/TODO
+#share/doc/xiphos/Xiphos.mp3
+share/doc/xiphos/Xiphos.ogg
+d share/enchant
+share/enchant/enchant.ordering
+d share/gtkhtml-3.14
+share/gtkhtml-3.14/gtkhtml-editor-builder.ui
+share/gtkhtml-3.14/gtkhtml-editor-manager.ui
+d share/gtkhtml-3.14/icons
+share/gtkhtml-3.14/icons/bulb.png
+share/gtkhtml-3.14/icons/confidential-stamp.jpg
+share/gtkhtml-3.14/icons/draft-paper.png
+share/gtkhtml-3.14/icons/draft-stamp.jpg
+share/gtkhtml-3.14/icons/empty_image.png
+share/gtkhtml-3.14/icons/flowers.png
+share/gtkhtml-3.14/icons/html-viewer.png
+share/gtkhtml-3.14/icons/info_bulb.png
+share/gtkhtml-3.14/icons/midnight-stars.jpg
+share/gtkhtml-3.14/icons/paper.png
+share/gtkhtml-3.14/icons/rect.png
+share/gtkhtml-3.14/icons/ribbon.jpg
+share/gtkhtml-3.14/icons/rule-blue-center.png
+share/gtkhtml-3.14/icons/rule-blue-left.png
+share/gtkhtml-3.14/icons/rule-blue-right.png
+share/gtkhtml-3.14/icons/rule-yellow-flowers-center.png
+share/gtkhtml-3.14/icons/rule-yellow-flowers-left.png
+share/gtkhtml-3.14/icons/rule-yellow-flowers-right.png
+share/gtkhtml-3.14/icons/texture.png
+share/gtkhtml-3.14/icons/transparent.png
+share/gtkhtml-3.14/keybindingsrc.emacs
+d share/help
+
+#share/help/xiphos.chm
+#share/help/xiphos_fa.chm
+#share/help/xiphos_fr.chm
+
+d share/icons
+d share/icons/gnome
+d share/icons/gnome/16x16
+d share/icons/gnome/16x16/actions
+share/icons/gnome/16x16/actions/insert-image.png
+share/icons/gnome/16x16/actions/insert-link.png
+d share/icons/gnome/16x16/emotes
+share/icons/gnome/16x16/emotes/face-angel.png
+share/icons/gnome/16x16/emotes/face-angry.png
+share/icons/gnome/16x16/emotes/face-cool.png
+share/icons/gnome/16x16/emotes/face-crying.png
+share/icons/gnome/16x16/emotes/face-devilish.png
+share/icons/gnome/16x16/emotes/face-embarrassed.png
+share/icons/gnome/16x16/emotes/face-kiss.png
+share/icons/gnome/16x16/emotes/face-laugh.png
+share/icons/gnome/16x16/emotes/face-monkey.png
+share/icons/gnome/16x16/emotes/face-plain.png
+share/icons/gnome/16x16/emotes/face-raspberry.png
+share/icons/gnome/16x16/emotes/face-sad.png
+share/icons/gnome/16x16/emotes/face-sick.png
+share/icons/gnome/16x16/emotes/face-smile-big.png
+share/icons/gnome/16x16/emotes/face-smile.png
+share/icons/gnome/16x16/emotes/face-smirk.png
+share/icons/gnome/16x16/emotes/face-surprise.png
+share/icons/gnome/16x16/emotes/face-tired.png
+share/icons/gnome/16x16/emotes/face-uncertain.png
+share/icons/gnome/16x16/emotes/face-wink.png
+share/icons/gnome/16x16/emotes/face-worried.png
+d share/icons/gnome/16x16/stock
+d share/icons/gnome/16x16/stock/object
+d share/icons/gnome/16x16/stock/table
+d share/icons/gnome/16x16/stock/text
+
+#may need to find replacements for these
+#share/icons/gnome/16x16/stock/text/stock_text-monospaced.png
+#share/icons/gnome/scalable/actions/insert-link.svg
+#share/icons/gnome/16x16/stock/table/stock_insert-cells.png
+#share/icons/gnome/16x16/stock/table/stock_insert-table.png
+#share/icons/gnome/16x16/stock/object/stock_insert-rule.png
+#share/icons/gnome/scalable/apps/xiphos.svg
+
+share/icons/gnome/index.theme
+d share/icons/gnome/scalable
+d share/icons/gnome/scalable/actions
+d share/icons/gnome/scalable/apps
+
+d share/locale
+d share/locale/cs
+d share/locale/cs/LC_MESSAGES
+share/locale/cs/LC_MESSAGES/gtk20.mo
+share/locale/cs/LC_MESSAGES/xiphos.mo
+d share/locale/cy
+d share/locale/cy/LC_MESSAGES
+share/locale/cy/LC_MESSAGES/gtk20.mo
+share/locale/cy/LC_MESSAGES/xiphos.mo
+d share/locale/da
+d share/locale/da/LC_MESSAGES
+share/locale/da/LC_MESSAGES/xiphos.mo
+d share/locale/de
+d share/locale/de/LC_MESSAGES
+share/locale/de/LC_MESSAGES/gtk20.mo
+share/locale/de/LC_MESSAGES/xiphos.mo
+d share/locale/en_GB
+d share/locale/en_GB/LC_MESSAGES
+share/locale/en_GB/LC_MESSAGES/gtk20.mo
+share/locale/en_GB/LC_MESSAGES/xiphos.mo
+d share/locale/es
+d share/locale/es/LC_MESSAGES
+share/locale/es/LC_MESSAGES/gtk20.mo
+share/locale/es/LC_MESSAGES/xiphos.mo
+d share/locale/fa
+d share/locale/fa/LC_MESSAGES
+share/locale/fa/LC_MESSAGES/gtk20.mo
+share/locale/fa/LC_MESSAGES/xiphos.mo
+d share/locale/fi
+d share/locale/fi/LC_MESSAGES
+share/locale/fi/LC_MESSAGES/gtk20.mo
+share/locale/fi/LC_MESSAGES/xiphos.mo
+d share/locale/fr
+d share/locale/fr/LC_MESSAGES
+share/locale/fr/LC_MESSAGES/xiphos.mo
+d share/locale/he
+d share/locale/he/LC_MESSAGES
+share/locale/he/LC_MESSAGES/xiphos.mo
+d share/locale/he
+d share/locale/he/LC_MESSAGES
+share/locale/he/LC_MESSAGES/gtk20.mo
+share/locale/he/LC_MESSAGES/xiphos.mo
+d share/locale/hu
+d share/locale/hu/LC_MESSAGES
+share/locale/hu/LC_MESSAGES/xiphos.mo
+d share/locale/lv
+d share/locale/lv/LC_MESSAGES
+share/locale/lv/LC_MESSAGES/xiphos.mo
+d share/locale/nb
+d share/locale/nb/LC_MESSAGES
+share/locale/nb/LC_MESSAGES/xiphos.mo
+d share/locale/nb
+d share/locale/nb/LC_MESSAGES
+share/locale/nb/LC_MESSAGES/gtk20.mo
+share/locale/nb/LC_MESSAGES/xiphos.mo
+d share/locale/nl
+d share/locale/nl/LC_MESSAGES
+share/locale/nl/LC_MESSAGES/gtk20.mo
+share/locale/nl/LC_MESSAGES/xiphos.mo
+d share/locale/pl
+d share/locale/pl/LC_MESSAGES
+share/locale/pl/LC_MESSAGES/xiphos.mo
+d share/locale/pt
+d share/locale/pt/LC_MESSAGES
+share/locale/pt/LC_MESSAGES/gtk20.mo
+share/locale/pt/LC_MESSAGES/xiphos.mo
+d share/locale/pt_BR
+d share/locale/pt_BR/LC_MESSAGES
+share/locale/pt_BR/LC_MESSAGES/xiphos.mo
+d share/locale/pt
+d share/locale/pt/LC_MESSAGES
+share/locale/pt/LC_MESSAGES/gtk20.mo
+share/locale/pt/LC_MESSAGES/xiphos.mo
+d share/locale/ro
+d share/locale/ro/LC_MESSAGES
+share/locale/ro/LC_MESSAGES/gtk20.mo
+share/locale/ro/LC_MESSAGES/xiphos.mo
+d share/locale/ru
+d share/locale/ru/LC_MESSAGES
+share/locale/ru/LC_MESSAGES/gtk20.mo
+share/locale/ru/LC_MESSAGES/xiphos.mo
+d share/locale/sk
+d share/locale/sk/LC_MESSAGES
+share/locale/sk/LC_MESSAGES/gtk20.mo
+share/locale/sk/LC_MESSAGES/xiphos.mo
+d share/locale/sl
+d share/locale/sl/LC_MESSAGES
+share/locale/sl/LC_MESSAGES/xiphos.mo
+d share/locale/sv
+d share/locale/sv/LC_MESSAGES
+share/locale/sv/LC_MESSAGES/xiphos.mo
+share/locale/sv/LC_MESSAGES/gtk20.mo
+d share/locale/zh_CN
+d share/locale/zh_CN/LC_MESSAGES
+share/locale/zh_CN/LC_MESSAGES/xiphos.mo
+share/locale/zh_CN/LC_MESSAGES/gtk20.mo
+d share/locale/zh_TW
+d share/locale/zh_TW/LC_MESSAGES
+share/locale/zh_TW/LC_MESSAGES/xiphos.mo
+share/locale/zh_TW/LC_MESSAGES/gtk20.mo
+d share/pixmaps
+d share/pixmaps/xiphos
+share/pixmaps/xiphos/about.png
+share/pixmaps/xiphos/book_closed.png
+share/pixmaps/xiphos/book_closed_rtol.png
+share/pixmaps/xiphos/book_open.png
+share/pixmaps/xiphos/book_open_rtol.png
+share/pixmaps/xiphos/chat_icon-16.png
+share/pixmaps/xiphos/dlg-un-16.png
+share/pixmaps/xiphos/dlg-un.png
+share/pixmaps/xiphos/epiphany-bookmark-page.png
+share/pixmaps/xiphos/epiphany-bookmarks.png
+share/pixmaps/xiphos/epiphany-secure.png
+share/pixmaps/xiphos/epiphany-unsecure.png
+share/pixmaps/xiphos/gnome-session.png
+share/pixmaps/xiphos/gnome-window-manager.png
+share/pixmaps/xiphos/gnome-windows.png
+share/pixmaps/xiphos/gs2-48x48.ico
+share/pixmaps/xiphos/gs2-48x48-old.ico
+share/pixmaps/xiphos/gs2-48x48-old.png
+share/pixmaps/xiphos/gs2-48x48.png
+share/pixmaps/xiphos/gs2.xpm
+share/pixmaps/xiphos/indexed-16.png
+share/pixmaps/xiphos/indexed.png
+share/pixmaps/xiphos/init-settings.png
+share/pixmaps/xiphos/logo.png
+share/pixmaps/xiphos/mailing_list_icon-16.png
+share/pixmaps/xiphos/mozilla-icon.png
+share/pixmaps/xiphos/new_tab_button.png
+share/pixmaps/xiphos/silk-edit-bookmarks.png
+share/pixmaps/xiphos/splash.png
+share/pixmaps/xiphos/sword-big.png
+share/pixmaps/xiphos/sword_icon-16.png
+share/pixmaps/xiphos/sword.png
+share/pixmaps/xiphos/translation_icon-16.png
+share/pixmaps/xiphos/tt.png
+share/pixmaps/xiphos/window-close.png
+share/pixmaps/xiphos/xiphos-x-16.png
+share/pixmaps/xiphos/xiphos.xpm
+d share/sword
+d share/sword/locales.d
+
+d share/xiphos
+share/xiphos/arrow_down_box.png
+share/xiphos/arrow_down.png
+share/xiphos/arrow_up_box.png
+share/xiphos/arrow_up.png
+share/xiphos/bookmarks.glade
+share/xiphos/chat_icon-16.png
+share/xiphos/dlg-un-16.png
+share/xiphos/editor_link_dialog.xml
+share/xiphos/editor_note.xml
+share/xiphos/editor_studypad.xml
+share/xiphos/epiphany-bookmarks.png
+share/xiphos/export-dialog.glade
+share/xiphos/gnome-sound-properties.png
+#share/xiphos/insert-link.svg
+share/xiphos/languages
+share/xiphos/logo.png
+share/xiphos/mailing_list_icon-16.png
+share/xiphos/markverse.glade
+share/xiphos/module-manager.glade
+share/xiphos/navbar_versekey.glade
+share/xiphos/new_tab_button.png
+share/xiphos/prefs.glade
+share/xiphos/search-dialog.glade
+share/xiphos/silk-edit-bookmarks.png
+share/xiphos/sword3.png
+share/xiphos/sword_icon-16.png
+share/xiphos/translation_icon-16.png
+share/xiphos/xi-export-bookmarks.glade
+share/xiphos/xi-menus.glade
+share/xiphos/xiphos-x-16.png
+#Uninstall.dat
+#Uninstall.exe

@@ -328,7 +328,6 @@ def configure(conf):
     "libgsf-1 >= 1.14"
     "libxml-2.0"
     "libgtkhtml-3.14 >= 3.23"
-    "webkit-1.0"
     --cflags --libs'''
     .split()," ")
 
@@ -366,17 +365,37 @@ def configure(conf):
     ### gecko (xulrunner) for html rendering
     # gtkhtml only for editor
     if not env['ENABLE_GTKHTML']:
-        #conf.check_cfg(package='webkit-1.0', uselib_store='WEBKIT')
+        if not env["IS_WIN32"]:
+
+            conf.check_cfg (package='nspr', uselib_store='NSPR')    
+            conf.check_cfg (package='',
+                            uselib_store='GECKO',
+                            args='"libxul-embedding >= 1.9.0" --define-variable=includetype=unstable "nspr" --cflags --libs',
+                            msg='checking for libxul-embedding')
+
+            conf.define('GECKO_HOME', conf.check_cfg(package='libxul-embedding',
+                                                     args='--variable=sdkdir',
+                                                     okmsg=waffles.misc.myokmsg,
+                                                     msg="Checking for libxul sdkdir").strip())
+        else:
+                    d = env['MOZILLA_DISTDIR']
+                    conf.define['CPPPATH_GECKO'] = ['%s/sdk/include' % d,
+                                                '%s/include' % d,
+                                                '%s/include/widget' % d,
+                                                '%s/include/xpcom' % d,
+                                                '%s/include/dom' % d,
+                                                '%s/include/content' % d,
+                                                '%s/include/layout' % d,
+                                                '%s/include/gfx' % d]
+                    conf.define['LIBPATH_GECKO'] = ['%s/sdk/lib' % d]
+                    conf.define['LIB_GECKO'] = ['xpcomglue_s', 'xpcom', 'xul', 'nspr4']
+
+        env.append_value('ALL_LIBS', 'NSPR')
+        env.append_value('ALL_LIBS', 'GECKO')
         conf.define('USE_GTKMOZEMBED', 1)
-        #env.append_value('CCFLAGS', env['GECKO_CCFLAGS'])
-        #env.append_value('CXXFLAGS', env['GECKO_CCFLAGS'])
-	#env.append_value('ALL_LIBS', 'WEBKIT')
-    ######################
 
 
-    # TODO: maybe the following checks should be in a more generic module.
 
-    #always defined to indicate that i18n is enabled */
     dfn('ENABLE_NLS', 1)
     dfn('HAVE_BIND_TEXTDOMAIN_CODESET', 1)
     dfn('HAVE_GETTEXT', 1)
@@ -440,7 +459,10 @@ def build(bld):
         if env["IS_WIN32"]:
             bld.add_subdirs('src/geckowin')
         else:
-            bld.add_subdirs('src/webkit')
+            bld.add_subdirs('src/gecko')
+            
+    if env['IS-WIN32']:
+      bld.add_subdirs('win32/include')
 
     if env['HAVE_DBUS']:
         import shutil
