@@ -15,7 +15,7 @@ sub = Utils.subst_vars
 # use GECKO as html engine
 objects = 'backend editor main'
 if not bld.env['ENABLE_GTKHTML']:
-    objects += ' %s' % 'webkit'
+    objects += ' %s' % 'gecko'
 
 # GTKHTML
 gtkhtml = 'GTKHTML'
@@ -32,7 +32,10 @@ winresource = ''
 staticlib = []
 if env['IS_WIN32']:
     winresource = '../../win32/res/res.rc'
+    x11_include = '../../win32/include'
     # staticlib = 'sword'.split()
+else:
+    x11_include = ' '
 
 # DATADIR direct in config.h - conflict in win32 (mingw)
 defines = sub('''
@@ -54,7 +57,7 @@ loc = bld.new_task_gen(
 
 lib = bld.new_task_gen(
     features = 'cxx cc cprogram',
-    includes = '. ../.. ../../src ../../src/editor %s' % bld.env['GECKO_INCLUDE'], # ../../ for config.h
+    includes = '. ../.. ../../src ../../src/editor %s %s' % (bld.env['GECKO_INCLUDE'], x11_include), # ../../ for config.h
     defines = defines,
     source = '%s' % winresource,
     target = 'xiphos',
