@@ -441,6 +441,9 @@ def build(bld):
             bld.add_subdirs('src/geckowin')
         else:
             bld.add_subdirs('src/webkit')
+            
+    if env['IS-WIN32']:
+      bld.add_subdirs('win32/include')
 
     if env['HAVE_DBUS']:
         import shutil
