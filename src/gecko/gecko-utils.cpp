@@ -233,7 +233,7 @@ gecko_init (void)
 	//I have really no clue what this ranges mean but if xulrunner is
 	//outside of this range we get coredumps =( so here is a bold assumption
 	//that we will be able to work with any future xulrunner.
-#define UPPER_RANGE "1.9.99"
+#define UPPER_RANGE "2.0.99"
 #define LOWER_RANGE "1.9.0"
 	static const GREVersionRange greVersion = {
 		LOWER_RANGE, PR_TRUE,
