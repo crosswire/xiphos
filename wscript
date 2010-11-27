@@ -311,7 +311,7 @@ def configure(conf):
 
 
     if conf.check_cfg(modversion='gtkhtml-editor-3.14',
-                      msg='Is post GNOME3 gtkhtml-editor available?',
+                      msg='Checking for GNOME3 gtkhtml-editor',
                       okmsg='Deffinatly',
                       errmsg='Probably, not'
                       ):
@@ -377,6 +377,20 @@ def configure(conf):
                                                      args='--variable=sdkdir',
                                                      okmsg=waffles.misc.myokmsg,
                                                      msg="Checking for libxul sdkdir").strip())
+            conf.define('GECKO_VER', conf.check_cfg(package='libxul-embedding',
+                                                    args='--modversion',
+                                                     okmsg=waffles.misc.myokmsg,
+                                                    msg="Checking for Gecko GREVersion").strip())
+            if not env['GECKO_VER'][3].isalpha():
+                    conf.define('GECKO_MIN', env['GECKO_VER'][0:5]+'.0')
+                    conf.define('GECKO_MAX', env['GECKO_VER'][0:5]+'.99')
+            else:
+                    conf.define('GECKO_MIN', env['GECKO_VER'][0:4]+'0')
+                    conf.define('GECKO_MAX', env['GECKO_VER'][0:3]+'.0.99')
+
+            conf.check_message("Gecko", "GREVersionMin", 1, env['GECKO_MIN'])
+            conf.check_message("Gecko", "GREVersionMax", 1, env['GECKO_MAX'])
+
         else:
                     d = env['MOZILLA_DISTDIR']
                     conf.define['CPPPATH_GECKO'] = ['%s/sdk/include' % d,
@@ -389,6 +403,10 @@ def configure(conf):
                                                 '%s/include/gfx' % d]
                     conf.define['LIBPATH_GECKO'] = ['%s/sdk/lib' % d]
                     conf.define['LIB_GECKO'] = ['xpcomglue_s', 'xpcom', 'xul', 'nspr4']
+                    # FIXME: how to detect Gecko-ver on Win similar to pkg-config on unix?
+                    conf.define('GECKO_MIN', '1.9.0.0')
+                    conf.define('GECKO_MAX', '2.0.0.*')
+
 
         env.append_value('ALL_LIBS', 'NSPR')
         env.append_value('ALL_LIBS', 'GECKO')

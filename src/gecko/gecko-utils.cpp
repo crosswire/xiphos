@@ -233,11 +233,9 @@ gecko_init (void)
 	//I have really no clue what this ranges mean but if xulrunner is
 	//outside of this range we get coredumps =( so here is a bold assumption
 	//that we will be able to work with any future xulrunner.
-#define UPPER_RANGE "2.0.99"
-#define LOWER_RANGE "1.9.0"
 	static const GREVersionRange greVersion = {
-		LOWER_RANGE, PR_TRUE,
-		UPPER_RANGE, PR_TRUE
+		GECKO_MIN, PR_TRUE,
+		GECKO_MAX, PR_TRUE
 	};
 	char xpcomLocation[PATH_MAX];
 	rv = GRE_GetGREPathWithProperties(&greVersion, 1, nsnull, 0, xpcomLocation, sizeof (xpcomLocation));
