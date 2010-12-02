@@ -311,7 +311,7 @@ def configure(conf):
 
 
     if conf.check_cfg(modversion='gtkhtml-editor-3.14',
-                      msg='Is post GNOME3 gtkhtml-editor available?',
+                      msg='Checking for GNOME3 gtkhtml-editor',
                       okmsg='Deffinatly',
                       errmsg='Probably, not'
                       ):
