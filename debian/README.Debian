@@ -1,7 +1,7 @@
 How to: Rebuild a Xiphos Package
 --------------------------------
 
-Warning: The intended audience is Xiphos developpers. If you
+Warning: The intended audience is Xiphos developers. If you
 are a regular user of Xiphos, please install the binary packages 
 provided by your distribution.
 
@@ -9,22 +9,24 @@ If you have deb-src line enabled for crosswire-ppa or debian testing run:
 
 $ sudo apt-get build-dep xiphos
 
-to install all necessory build dependencies.
+to install all necessary build dependencies.
 
-Additionaly you need the following dev packages installed on your system:
+Additionally you need the following dev packages installed on your system:
 
 [a] build-essential 
-Install  gcc, make and all other needed tools for building
-Xiphos.
+    Installs  gcc, make and all other needed tools for building
+    Xiphos.
 
 [b] devscripts
-package building tools for Debian (install all recommeds)
+    Package building tools for Debian (install all recommeds)
 
-build the package (at the source top-level)
+Build the package (at the source top-level)
+
 $ debuild -us -uc
 
-Now wait for some time as compile procedure going to take 
-its own time. To install the newly-built package, enter:
+Now wait a while, as compiling will take time. 
+To install the newly-built package, enter: 
+
 $ sudo dpkg -i ../xiphos-svn_version-revision_arch.deb
 
- -- Dmitrijs Ledkovs <dmitrij.ledkov@gmail.com>, Thu,  6 Aug 2009 16:26:32 +0300
+ -- Jonathan Marsden <jmarsden@fastmail.fm>, Fri, 12 Nov 2010 18:11:00 -0800

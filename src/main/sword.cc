@@ -120,8 +120,8 @@ void main_book_heading(char * mod_name)
 	vkey = (VerseKey*)(SWKey*)(*backend->display_mod);
 	vkey->Headings(1);
 	vkey->AutoNormalize(0);
-	vkey->Verse(0);
 	vkey->Chapter(0);
+	vkey->Verse(0);
 	backend->display_mod->Display();
 }
 
