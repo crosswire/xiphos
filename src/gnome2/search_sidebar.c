@@ -172,21 +172,32 @@ void gui_create_search_sidebar(void)
 	gtk_box_pack_start(GTK_BOX(vbox1), vbox5, FALSE, TRUE,
 			   0);
 
+	/* text entry */
 	ss.entrySearch = gtk_entry_new();
 	gtk_widget_show(ss.entrySearch);
 	gtk_box_pack_start(GTK_BOX(vbox5), ss.entrySearch, TRUE, TRUE, 0);
 	gtk_widget_set_size_request(ss.entrySearch, 130, -1);;
 
+	/* find button */
 	remember_search = gtk_button_new_from_stock(GTK_STOCK_FIND);
-	gtk_widget_show (remember_search);
+	gtk_widget_show(remember_search);
 	gtk_box_pack_start(GTK_BOX(vbox5), remember_search, TRUE, FALSE, 0);
 	gtk_widget_set_tooltip_text(remember_search,
 			     _("This is an inclusive (\"AND\") search:\nFind matches showing all words."));
-	gtk_button_set_relief (GTK_BUTTON (remember_search), GTK_RELIEF_NONE);
+	gtk_button_set_relief(GTK_BUTTON(remember_search), GTK_RELIEF_HALF);
 
+	/* progress bar */
 	ss.progressbar_search = gtk_progress_bar_new();
 	gtk_widget_show(ss.progressbar_search);
 	gtk_box_pack_start(GTK_BOX(vbox5), ss.progressbar_search, FALSE, TRUE, 0);
+
+	/* button to open advanced search */
+	ss.advanced_search = gtk_button_new_with_mnemonic(_("_Open Advanced Search"));
+	gtk_widget_show(ss.advanced_search);
+	gtk_box_pack_start(GTK_BOX(vbox5), ss.advanced_search, TRUE, FALSE, 0);
+	gtk_widget_set_tooltip_text(ss.advanced_search,
+				    _("Open the separate Advanced Search dialog."));
+	gtk_button_set_relief(GTK_BUTTON(ss.advanced_search), GTK_RELIEF_HALF);
 
 	ss.frame_module = gtk_frame_new(NULL);
 	gtk_widget_show(ss.frame_module);
@@ -410,4 +421,7 @@ void gui_create_search_sidebar(void)
 
 	g_signal_connect(GTK_OBJECT(ss.entrySearch), "activate",
 			 G_CALLBACK(on_search_button_clicked), NULL);
+
+	g_signal_connect(GTK_OBJECT(ss.advanced_search), "clicked",
+			 G_CALLBACK(main_open_search_dialog), NULL);
 }
