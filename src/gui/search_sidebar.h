@@ -30,6 +30,7 @@ typedef struct _sidebar_search SIDESEARCH;
 struct _sidebar_search {
 	GtkWidget *rrbUseBounds;
  	GtkWidget *entrySearch;
+	GtkWidget *advanced_search;
  	GtkWidget *entryLower;
  	GtkWidget *entryUpper;
 	GtkWidget *rbMultiword;
