@@ -6,6 +6,8 @@
 # Xiphos's main source since forever.  more recently, 7700+
 # 3-letter entries were obtained courtesy of the following url:
 #     http://www.sil.org/iso639-3/iso-639-3_20080529.tab
+# more recently, updated url:
+#     http://www.sil.org/iso639-3/iso-639-3_Name_Index_20100707.tab
 # about a dozen are commented out due to repeating entries we
 # already had.
 #
@@ -5925,6 +5927,8 @@ rmm	Roma
 rmn	Balkan Romani
 rmo	Sinte Romani
 rmp	Rempi
+# rmq: dup of rmr. which is normal?
+rmq	Caló
 rmr	Caló
 rms	Romanian Sign Language
 rmt	Domari
