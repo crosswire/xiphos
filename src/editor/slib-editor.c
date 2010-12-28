@@ -1280,6 +1280,7 @@ gint ask_about_saving(EDITOR * e)
 			}
 		}
 		g_free(info);
+                g_free(buf);
 		g_free(buf3);
 		break;
 
