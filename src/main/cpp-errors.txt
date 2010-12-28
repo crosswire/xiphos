@@ -1,0 +1,21 @@
+[./navbar.cc:156]: (error) Mismatching allocation and deallocation: book
+[./navbar.cc:168]: (error) Mismatching allocation and deallocation: book
+[./navbar.cc:176]: (error) Mismatching allocation and deallocation: book
+[./navbar.cc:180]: (error) Mismatching allocation and deallocation: book
+[./navbar.cc:192]: (error) Mismatching allocation and deallocation: book
+[./navbar_versekey.cc:660]: (error) Mismatching allocation and deallocation: book
+[./navbar_versekey.cc:684]: (error) Mismatching allocation and deallocation: book
+[./navbar_versekey.cc:694]: (error) Mismatching allocation and deallocation: book
+[./navbar_versekey.cc:698]: (error) Mismatching allocation and deallocation: book
+[./navbar_versekey.cc:722]: (error) Mismatching allocation and deallocation: book
+[./navbar_versekey.cc:730]: (error) Mismatching allocation and deallocation: current_book
+[./parallel_view.cc:197]: (error) Returning pointer to local array variable
+[./search_sidebar.cc:365]: (error) Mismatching allocation and deallocation: book
+[./search_sidebar.cc:374]: (error) Mismatching allocation and deallocation: book
+[./search_sidebar.cc:378]: (error) Mismatching allocation and deallocation: book
+[./sidebar.cc:540]: (error) Mismatching allocation and deallocation: buf
+[./sidebar.cc:549]: (error) Mismatching allocation and deallocation: buf
+[./sidebar.cc:565]: (error) Mismatching allocation and deallocation: buf
+[./sword.cc:834]: (error) Mismatching allocation and deallocation: new_key
+[./sword.cc:836]: (error) Mismatching allocation and deallocation: new_key
+[./sword.cc:847]: (error) Mismatching allocation and deallocation: new_key
