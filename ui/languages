@@ -1829,7 +1829,8 @@ ctn	Chhintange
 cto	Emberá-Catío
 ctp	Western Highland Chatino
 cts	Northern Catanduanes Bicolano
-ctt	Wayanad Chetti
+# ctt	Wayanad Chetti - unused?
+ctt	Къырымтатар
 ctu	Tumbalá Chol
 ctz	Zacatepec Chatino
 cua	Cua
@@ -3338,7 +3339,8 @@ khf	Khuen
 khg	Khams Tibetan
 khh	Kehu
 khj	Kuturmi
-khk	Halh Mongolian
+# khk	Halh Mongolian - unused?
+khk	Хакас
 khl	Lusi
 khm	Central Khmer
 khn	Khandesi
@@ -6922,7 +6924,8 @@ ttn	Towei
 tto	Lower Ta'oih
 ttp	Tombelala
 ttq	Tawallammat Tamajaq
-ttr	Tera
+# ttr	Tera - unused?
+ttr	Татар
 tts	Northeastern Thai
 ttt	Muslim Tat
 ttu	Torau
