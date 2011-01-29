@@ -689,6 +689,7 @@ void on_add_bookmark_activate(GtkMenuItem * menuitem,
 	g_free(info->text2);
 	g_free(info->text3);
 	g_free(info);
+        g_free(data);
 	g_string_free(str,TRUE);
 }
 

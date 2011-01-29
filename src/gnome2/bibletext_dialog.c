@@ -235,6 +235,7 @@ static void dialog_url(GtkHTML *html,
 				++url_buf;	/* remove G */
 				buf1 = g_strdup(url_buf);
 				if (atoi(buf1) > 5624) {
+                                        g_free(buf1);
 					return;
 				}
 				else {
@@ -251,6 +252,7 @@ static void dialog_url(GtkHTML *html,
 				++url_buf;	/* remove H */
 				buf1 = g_strdup(url);
 				if (atoi(buf1) > 8674) {
+                                        g_free(buf1);
 					return;
 				}
 				else {

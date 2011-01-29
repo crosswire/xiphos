@@ -10,3 +10,20 @@ http://sourceforge.net/tracker/?group_id=5528&atid=355528
 
 For more bug information:
 http://sourceforge.net/tracker/?atid=105528&group_id=5528&func=browse
+
+* Remaining gtk2 deprecated symbols:
+
+GTK_WIDGET_NO_WINDOW
+GTK_WIDGET_REALIZED
+GTK_WIDGET_UNSET_FLAGS
+gtk_combo_box_append_text
+gtk_combo_box_entry_set_text_column
+gtk_combo_box_get_active_text
+gtk_dialog_set_has_separator
+gtk_exit
+gtk_link_button_set_uri_hook
+
+
+* Webkit / Gnome3:
+
+I have yet to see xulrunner build against gnome3.0 =/
