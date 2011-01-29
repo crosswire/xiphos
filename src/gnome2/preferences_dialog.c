@@ -2287,9 +2287,10 @@ static void on_mod_sel_add_clicked(GtkWidget * button, gchar * user_data)
 	char *parallels = g_strdup(""), *newhold;
 	int count;
 
-	if (!module_selected)
-                g_free(parallels);
+	if (!module_selected) {
+		g_free(parallels);
 		return;
+	}
 
 	model = gtk_tree_view_get_model(GTK_TREE_VIEW(parallel_select.listview));
 	list_store = GTK_LIST_STORE(model);
