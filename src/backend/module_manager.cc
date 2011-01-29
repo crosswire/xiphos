@@ -220,6 +220,7 @@ MOD_MGR *backend_module_mgr_get_next_module(void)
 			return (MOD_MGR *) mod_info;
 		}
 	}
+        g_free(mod_info);
 	return NULL;
 }
 

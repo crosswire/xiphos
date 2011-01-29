@@ -20,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 3.1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-10 13:07+0200\n"
-"PO-Revision-Date: 2010-10-11 21:00+0200\n"
+"POT-Creation-Date: 2011-01-23 17:22+0100\n"
+"PO-Revision-Date: 2011-01-23 17:38+0100\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: emacs + po-mode <gnomefr@traduc.org>\n"
 "Language: \n"
@@ -146,32 +146,32 @@ msgstr "Enregistrer"
 msgid "Insert Link"
 msgstr "Insérer un lien"
 
-#: ../src/editor/slib-editor.c:1256 ../src/editor/slib-editor.c:1293
+#: ../src/editor/slib-editor.c:1256 ../src/editor/slib-editor.c:1294
 msgid "Save the changes to document"
 msgstr "Voulez-vous enregistrer les modifications apportées au document"
 
-#: ../src/editor/slib-editor.c:1257 ../src/editor/slib-editor.c:1294
+#: ../src/editor/slib-editor.c:1257 ../src/editor/slib-editor.c:1295
 msgid "before closing?"
 msgstr "avant de fermer?"
 
-#: ../src/editor/slib-editor.c:1264 ../src/editor/slib-editor.c:1301
+#: ../src/editor/slib-editor.c:1264 ../src/editor/slib-editor.c:1302
 msgid "If you don't save, changes will be permanently lost."
 msgstr ""
 "Si vous n'enregistrez pas, les modifications seront définitivement perdues."
 
-#: ../src/editor/slib-editor.c:1292 ../ui/xi-menus.glade.h:43
+#: ../src/editor/slib-editor.c:1293 ../ui/xi-menus.glade.h:43
 msgid "File"
 msgstr "Fichier"
 
-#: ../src/editor/slib-editor.c:1347
+#: ../src/editor/slib-editor.c:1348
 msgid "StudyPad"
 msgstr "Bloc-notes"
 
-#: ../src/editor/slib-editor.c:1360
+#: ../src/editor/slib-editor.c:1361
 msgid "Note Editor"
 msgstr "Éditeur de note"
 
-#: ../src/editor/slib-editor.c:1374
+#: ../src/editor/slib-editor.c:1375
 msgid "Prayer List/Journal Editor"
 msgstr "Éditeur de liste de prières ou de journal"
 
@@ -292,28 +292,28 @@ msgstr ""
 "Tous nos remerciements vont à Troy Griffitts et toutes\n"
 "les autres personnes qui font vivre le Projet SWORD."
 
-#: ../src/gnome2/bibletext_dialog.c:315
+#: ../src/gnome2/bibletext_dialog.c:317
 msgid "Go to "
 msgstr "Aller à "
 
 #. info->stock_icon = GTK_STOCK_OPEN;
 #: ../src/gnome2/bookmark_dialog.c:171 ../src/gnome2/bookmarks_menu.c:363
-#: ../src/gnome2/bookmarks_menu.c:658 ../src/gnome2/bookmarks_menu.c:756
+#: ../src/gnome2/bookmarks_menu.c:658 ../src/gnome2/bookmarks_menu.c:757
 #: ../src/gnome2/bookmarks_treeview.c:134 ../ui/editor_studypad.xml.h:2
 #: ../ui/xi-menus.glade.h:14
 msgid "Bookmark"
 msgstr "Signet"
 
-#: ../src/gnome2/bookmark_dialog.c:173 ../src/gnome2/bookmarks_menu.c:758
+#: ../src/gnome2/bookmark_dialog.c:173 ../src/gnome2/bookmarks_menu.c:759
 #: ../src/gnome2/bookmarks_treeview.c:135
 msgid "Enter Folder Name"
 msgstr "Saisir le nom du dossier"
 
-#: ../src/gnome2/bookmark_dialog.c:175 ../src/gnome2/bookmarks_menu.c:760
+#: ../src/gnome2/bookmark_dialog.c:175 ../src/gnome2/bookmarks_menu.c:761
 msgid "Folder Name"
 msgstr "Nom du dossier"
 
-#: ../src/gnome2/bookmark_dialog.c:176 ../src/gnome2/bookmarks_menu.c:761
+#: ../src/gnome2/bookmark_dialog.c:176 ../src/gnome2/bookmarks_menu.c:762
 #: ../src/gnome2/bookmarks_treeview.c:137
 msgid "Folder: "
 msgstr "Dossier : "
@@ -423,7 +423,7 @@ msgstr "Rechercher..."
 msgid "Enter Word or Phrase"
 msgstr "Entrez un mot ou une phrase"
 
-#: ../src/gnome2/find_dialog.c:238 ../src/gnome2/search_sidebar.c:297
+#: ../src/gnome2/find_dialog.c:238 ../src/gnome2/search_sidebar.c:308
 #: ../ui/search-dialog.glade.h:59
 msgid "Match case"
 msgstr "Respecter la casse"
@@ -432,7 +432,7 @@ msgstr "Respecter la casse"
 msgid "Search backwards"
 msgstr "Rechercher en arrière"
 
-#: ../src/gnome2/find_dialog.c:254 ../src/gnome2/search_sidebar.c:262
+#: ../src/gnome2/find_dialog.c:254 ../src/gnome2/search_sidebar.c:273
 #: ../ui/search-dialog.glade.h:78
 msgid "Regular expression"
 msgstr "Expression rationnelle"
@@ -923,9 +923,9 @@ msgstr "Terminé"
 
 #: ../src/gnome2/mod_mgr.c:1008 ../src/gnome2/mod_mgr.c:1010
 #: ../src/gnome2/mod_mgr.c:1112 ../src/gnome2/mod_mgr.c:1147
-#: ../src/gnome2/mod_mgr.c:1149 ../src/gnome2/utilities.c:461
-#: ../src/gnome2/utilities.c:526 ../src/gnome2/utilities.c:528
-#: ../src/gnome2/utilities.c:1049 ../src/main/sidebar.cc:844
+#: ../src/gnome2/mod_mgr.c:1149 ../src/gnome2/utilities.c:463
+#: ../src/gnome2/utilities.c:528 ../src/gnome2/utilities.c:530
+#: ../src/gnome2/utilities.c:1051 ../src/main/sidebar.cc:844
 #: ../src/main/sidebar.cc:916 ../src/main/sidebar.cc:918
 msgid "Unknown"
 msgstr "Inconnu"
@@ -947,49 +947,49 @@ msgstr ""
 "Modules classés\n"
 "par type"
 
-#: ../src/gnome2/mod_mgr.c:1325 ../src/gnome2/utilities.c:589
+#: ../src/gnome2/mod_mgr.c:1325 ../src/gnome2/utilities.c:591
 #: ../src/main/sidebar.cc:993 ../src/main/sidebar.cc:995
 msgid "Biblical Texts"
 msgstr "Textes bibliques"
 
-#: ../src/gnome2/mod_mgr.c:1329 ../src/gnome2/utilities.c:593
+#: ../src/gnome2/mod_mgr.c:1329 ../src/gnome2/utilities.c:595
 #: ../src/main/sidebar.cc:676 ../src/main/sidebar.cc:1018
 #: ../src/main/sidebar.cc:1020 ../ui/prefs.glade.h:36
 msgid "Commentaries"
 msgstr "Commentaires"
 
-#: ../src/gnome2/mod_mgr.c:1333 ../src/gnome2/utilities.c:598
+#: ../src/gnome2/mod_mgr.c:1333 ../src/gnome2/utilities.c:600
 #: ../src/main/sidebar.cc:1027 ../src/main/sidebar.cc:1029
 msgid "Dictionaries"
 msgstr "Dictionnaires"
 
-#: ../src/gnome2/mod_mgr.c:1337 ../src/gnome2/utilities.c:602
+#: ../src/gnome2/mod_mgr.c:1337 ../src/gnome2/utilities.c:604
 #: ../src/main/sidebar.cc:1036 ../src/main/sidebar.cc:1038
 msgid "Glossaries"
 msgstr "Glossaires"
 
-#: ../src/gnome2/mod_mgr.c:1341 ../src/gnome2/utilities.c:606
+#: ../src/gnome2/mod_mgr.c:1341 ../src/gnome2/utilities.c:608
 #: ../src/main/sidebar.cc:1045 ../src/main/sidebar.cc:1047
 msgid "Daily Devotionals"
 msgstr "Calendriers bibliques"
 
-#: ../src/gnome2/mod_mgr.c:1345 ../src/gnome2/utilities.c:610
+#: ../src/gnome2/mod_mgr.c:1345 ../src/gnome2/utilities.c:612
 #: ../src/main/sidebar.cc:686 ../src/main/sidebar.cc:1054
 #: ../src/main/sidebar.cc:1056
 msgid "General Books"
 msgstr "Livres"
 
-#: ../src/gnome2/mod_mgr.c:1349 ../src/gnome2/utilities.c:614
+#: ../src/gnome2/mod_mgr.c:1349 ../src/gnome2/utilities.c:616
 #: ../src/main/sidebar.cc:1063 ../src/main/sidebar.cc:1065
 msgid "Maps"
 msgstr "Cartes"
 
-#: ../src/gnome2/mod_mgr.c:1353 ../src/gnome2/utilities.c:618
+#: ../src/gnome2/mod_mgr.c:1353 ../src/gnome2/utilities.c:620
 #: ../src/main/sidebar.cc:1072 ../src/main/sidebar.cc:1074
 msgid "Images"
 msgstr "Images"
 
-#: ../src/gnome2/mod_mgr.c:1357 ../src/gnome2/utilities.c:622
+#: ../src/gnome2/mod_mgr.c:1357 ../src/gnome2/utilities.c:624
 #: ../src/main/sidebar.cc:1081 ../src/main/sidebar.cc:1083
 msgid "Cult/Unorthodox"
 msgstr "Hétérodoxie"
@@ -1011,7 +1011,7 @@ msgid "Uninstalled"
 msgstr "Non installé"
 
 #: ../src/gnome2/mod_mgr.c:1378 ../src/gnome2/sidebar.c:632
-#: ../src/gnome2/utilities.c:627 ../src/main/prayerlists.cc:241
+#: ../src/gnome2/utilities.c:629 ../src/main/prayerlists.cc:241
 #: ../src/main/sidebar.cc:1091 ../src/main/sidebar.cc:1093
 msgid "Prayer List/Journal"
 msgstr "Liste de prières / Journal"
@@ -1159,25 +1159,25 @@ msgstr "Un dépôt du même nom existe déjà"
 msgid "Delete a remote source"
 msgstr "Supprimer un dépôt distant"
 
-#: ../src/gnome2/navbar_book.c:358 ../src/gnome2/navbar_book_dialog.c:299
+#: ../src/gnome2/navbar_book.c:362 ../src/gnome2/navbar_book_dialog.c:302
 msgid "Go outward, to the section containing this one"
 msgstr "Revenir à la section contenant cet élément"
 
-#: ../src/gnome2/navbar_book.c:373 ../src/gnome2/navbar_book_dialog.c:314
+#: ../src/gnome2/navbar_book.c:377 ../src/gnome2/navbar_book_dialog.c:317
 msgid "Go to previous item"
 msgstr "Élément précédent"
 
-#: ../src/gnome2/navbar_book.c:387 ../src/gnome2/navbar_book_dialog.c:328
+#: ../src/gnome2/navbar_book.c:391 ../src/gnome2/navbar_book_dialog.c:331
 msgid "Go to next item"
 msgstr "Élément suivant"
 
-#: ../src/gnome2/navbar_book.c:401 ../src/gnome2/navbar_book_dialog.c:342
+#: ../src/gnome2/navbar_book.c:405 ../src/gnome2/navbar_book_dialog.c:345
 msgid "Go inward, to the first subsection"
 msgstr "Aller à la première sous-section"
 
-#: ../src/gnome2/navbar_versekey_dialog.c:868
-#: ../src/gnome2/navbar_versekey_editor.c:876
-#: ../src/gnome2/navbar_versekey_parallel.c:816
+#: ../src/gnome2/navbar_versekey_dialog.c:871
+#: ../src/gnome2/navbar_versekey_editor.c:880
+#: ../src/gnome2/navbar_versekey_parallel.c:820
 msgid "Synchronize this window's scrolling with the main window"
 msgstr "Synchronise le défilement de cette fenêtre avec la fenêtre principale"
 
@@ -1246,19 +1246,19 @@ msgstr "Options"
 msgid "Special"
 msgstr "Spécial"
 
-#: ../src/gnome2/preferences_dialog.c:2351 ../src/gnome2/search_dialog.c:460
+#: ../src/gnome2/preferences_dialog.c:2352 ../src/gnome2/search_dialog.c:460
 msgid "Clear List?"
 msgstr "Effacer la liste?"
 
-#: ../src/gnome2/preferences_dialog.c:2352 ../src/gnome2/search_dialog.c:461
+#: ../src/gnome2/preferences_dialog.c:2353 ../src/gnome2/search_dialog.c:461
 msgid "Are you sure you want to clear the module list?"
 msgstr "Êtes-vous certain d'effacer la liste des modules?"
 
-#: ../src/gnome2/preferences_dialog.c:2397 ../src/main/search_dialog.cc:700
+#: ../src/gnome2/preferences_dialog.c:2398 ../src/main/search_dialog.cc:700
 msgid "Remove Module?"
 msgstr "Enlever les modules?"
 
-#: ../src/gnome2/preferences_dialog.c:2398 ../src/main/search_dialog.cc:701
+#: ../src/gnome2/preferences_dialog.c:2399 ../src/main/search_dialog.cc:701
 msgid "Are you sure you want to remove the selected module?"
 msgstr "Êtes-vous certain de vouloir supprimer le module sélectionné?"
 
@@ -1422,67 +1422,80 @@ msgstr ""
 "« nom, accusatif singulier féminin » - voir le module Robinson pour plus de "
 "détails."
 
-#: ../src/gnome2/search_sidebar.c:184
+#: ../src/gnome2/search_sidebar.c:186
 msgid ""
 "This is an inclusive (\"AND\") search:\n"
 "Find matches showing all words."
 msgstr ""
-"Ceci est une requête inclusive (« AND »)\n"
-"Les mots se trouvent simultanément dans le résultat."
+"Ceci est une requête de type inclusive (« ET »)\n"
+"Les résultats correspondants comprennent tous les mots."
 
-#: ../src/gnome2/search_sidebar.c:200
+#. button to open advanced search
+#: ../src/gnome2/search_sidebar.c:195
+#, fuzzy
+msgid "_Open Advanced Search"
+msgstr "Recherche avancée.."
+
+#: ../src/gnome2/search_sidebar.c:199
+#, fuzzy
+msgid "Open the separate Advanced Search dialog."
+msgstr ""
+"Ouvre la boîte de dialogue de recherche avancée, pour exécuter des requêtes "
+"complexes"
+
+#: ../src/gnome2/search_sidebar.c:211
 msgid "Search Module"
 msgstr "Module"
 
-#: ../src/gnome2/search_sidebar.c:214
+#: ../src/gnome2/search_sidebar.c:225
 msgid "Bible"
 msgstr "Texte biblique"
 
-#: ../src/gnome2/search_sidebar.c:223 ../ui/prefs.glade.h:38
+#: ../src/gnome2/search_sidebar.c:234 ../ui/prefs.glade.h:38
 msgid "Commentary"
 msgstr "Commentaire"
 
-#: ../src/gnome2/search_sidebar.c:237
+#: ../src/gnome2/search_sidebar.c:248
 msgid "Search Type"
 msgstr "Type de requête"
 
-#: ../src/gnome2/search_sidebar.c:251 ../ui/search-dialog.glade.h:66
+#: ../src/gnome2/search_sidebar.c:262 ../ui/search-dialog.glade.h:66
 msgid "Multi word"
 msgstr "Mots multiples"
 
-#: ../src/gnome2/search_sidebar.c:270 ../ui/search-dialog.glade.h:44
+#: ../src/gnome2/search_sidebar.c:281 ../ui/search-dialog.glade.h:44
 msgid "Exact phrase"
 msgstr "Phrase exacte"
 
-#: ../src/gnome2/search_sidebar.c:284
+#: ../src/gnome2/search_sidebar.c:295
 msgid "Search Options"
 msgstr "Options de la requête"
 
-#: ../src/gnome2/search_sidebar.c:312
+#: ../src/gnome2/search_sidebar.c:323
 msgid "Search Scope"
 msgstr "Plage de versets"
 
-#: ../src/gnome2/search_sidebar.c:325
+#: ../src/gnome2/search_sidebar.c:336
 msgid "No scope"
 msgstr "Sans limites"
 
-#: ../src/gnome2/search_sidebar.c:335
+#: ../src/gnome2/search_sidebar.c:346
 msgid "Use bounds"
 msgstr "Avec des limites"
 
-#: ../src/gnome2/search_sidebar.c:344
+#: ../src/gnome2/search_sidebar.c:355
 msgid "Last search"
 msgstr "Dernière requête"
 
-#: ../src/gnome2/search_sidebar.c:359
+#: ../src/gnome2/search_sidebar.c:370
 msgid "Bounds"
 msgstr "Limites de la plage"
 
-#: ../src/gnome2/search_sidebar.c:373
+#: ../src/gnome2/search_sidebar.c:384
 msgid "Lower"
 msgstr "Basse"
 
-#: ../src/gnome2/search_sidebar.c:380
+#: ../src/gnome2/search_sidebar.c:391
 msgid "Upper"
 msgstr "Haute"
 
@@ -1516,7 +1529,7 @@ msgstr "Nouveau nom"
 msgid "Remove the selected item"
 msgstr "Supprimer l'élément sélectionné"
 
-#: ../src/gnome2/utilities.c:2018
+#: ../src/gnome2/utilities.c:2022
 msgid ""
 "An image file's size could not be determined.\n"
 "Xiphos cannot resize images to fit window."
@@ -1533,8 +1546,8 @@ msgstr ""
 "Ce nom d'annotation personnelle est improprement formé :\n"
 "'%s'"
 
-#: ../src/main/display.cc:927 ../src/main/display.cc:989
-#: ../src/main/display.cc:1074 ../ui/export-dialog.glade.h:7
+#: ../src/main/display.cc:1013 ../src/main/display.cc:1073
+#: ../src/main/display.cc:1157 ../ui/export-dialog.glade.h:7
 msgid "Chapter"
 msgstr "Chapitre"
 

@@ -129,6 +129,12 @@ enum {
 	N_LANGSET_MODTYPES
 };
 
+enum {
+	UTIL_COL_CAPTION,
+	UTIL_COL_MODULE,
+	UTIL_N_COLUMNS
+};
+
 #define	LANGSET_COUNT	200
 
 void language_init(void);
