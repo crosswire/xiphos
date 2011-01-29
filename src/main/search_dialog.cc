@@ -83,7 +83,6 @@ static GList *list_of_finds;
 static GList *list_for_bookmarking = NULL;
 
 
-
 /******************************************************************************
  * Name
  *   main_export_current_adv_search
@@ -823,7 +822,7 @@ void main_mod_selection_changed(GtkTreeSelection * selection,
 	if (gtk_tree_model_iter_has_child(model, &selected))
 		return;
 
-	gtk_tree_model_get(model, &selected, 0, &mod, -1);
+	gtk_tree_model_get(model, &selected, UTIL_COL_MODULE, &mod, -1);
 	if (mod) {
 		mod_description =
 			backendSearch->module_description(mod);
@@ -993,8 +992,8 @@ void main_finds_verselist_selection_changed(GtkTreeSelection * selection,
  *   void
  */
 
-void main_selection_modules_lists_changed(GtkTreeSelection *
-					    selection, gpointer data)
+void main_selection_modules_lists_changed(GtkTreeSelection * selection,
+					  gpointer data)
 {
 	gchar *name, *modules;
 	GList *tmp = NULL, *tmp2;
@@ -1611,6 +1610,7 @@ void main_close_search_dialog(void)
 	delete backendSearch;
 	backendSearch = NULL;
 }
+
 /******************************************************************************
  * Name
  *  search_percent_update
