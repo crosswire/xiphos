@@ -242,8 +242,11 @@ void menu_position_under(GtkMenu * menu, int * x, int * y,
 	GtkWidget *widget;
 
 	g_return_if_fail(GTK_IS_BUTTON(user_data));
-	g_return_if_fail(GTK_WIDGET_NO_WINDOW(user_data));
-
+#ifdef HAVE_GTK_220
+        g_return_if_fail (gtk_widget_get_has_window(user_data));
+#else
+	g_return_if_fail (GTK_WIDGET_NO_WINDOW (user_data));
+#endif
 	widget = GTK_WIDGET(user_data);
 
 	gdk_window_get_origin(widget->window, x, y);
