@@ -2233,7 +2233,7 @@ static void modules_lists_changed(GtkTreeSelection * selection,
 		return;
 	}
 
-	gtk_tree_model_get(model, &selected, 0, &mod, -1);
+	gtk_tree_model_get(model, &selected, UTIL_COL_MODULE, &mod, -1);
 	if (mod) {
 		g_free(module_selected);
 		module_selected = mod;
