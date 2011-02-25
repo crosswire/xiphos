@@ -300,6 +300,8 @@ void mark_search_words(GString * str)
 			while ((token = strtok(NULL, " ")) != NULL) {
 				if (!isalnum(*token) && isalnum(*(token+1)))
 					token++;
+				if (!strncmp(token, "lemma:", 6))
+					token += 7;	// skip the H/G qualifier.
 				list = g_list_append(list, token);
 				++count;
 			}
