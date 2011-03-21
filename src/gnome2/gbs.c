@@ -27,16 +27,7 @@
 
 #include <gtk/gtk.h>
 
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "webkit/wk-html.h"
-#endif
-#else
-#include <gtkhtml/gtkhtml.h>
-#include "gui/html.h"
-#endif
+#include "xiphos_html.h"
 
 #include "editor/slib-editor.h"
 
@@ -85,7 +76,7 @@
  * Return value
  *   gboolean
  */
-#ifndef USE_GTKMOZEMBED
+#ifndef USE_XIPHOS_HTML
 static gboolean on_book_button_press_event(GtkWidget * widget,
 					GdkEventButton * event,
 					gpointer data)
@@ -187,7 +178,7 @@ static gboolean on_book_button_release_event(GtkWidget * widget,
 #endif
 	return FALSE;
 }
-#endif /* !USE_GTKMOZEMBED */
+#endif /* !USE_XIPHOS_HTML */
 
 /******************************************************************************
  * Name
@@ -260,9 +251,9 @@ void gui_update_gbs_global_ops(gchar * option, gboolean choice)
 }
 
 
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 static void
-_popupmenu_requested_cb (WkHtml *html,
+_popupmenu_requested_cb (XiphosHtml *html,
 			     gchar *uri,
 			     gpointer user_data)
 {
@@ -289,11 +280,11 @@ _popupmenu_requested_cb (WkHtml *html,
 GtkWidget *gui_create_book_pane(void)
 {
 	GtkWidget *box;
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 	GtkWidget *eventbox;
 #else
 	GtkWidget *scrolledwindow;
-#endif /* USE_GTKMOZEMBED */
+#endif /* USE_XIPHOS_HTML */
 	GtkWidget *navbar;
 
 	box = gtk_vbox_new(FALSE, 0);
@@ -302,11 +293,11 @@ GtkWidget *gui_create_book_pane(void)
 	navbar = gui_navbar_book_new();
 	gtk_box_pack_start(GTK_BOX(box), navbar, FALSE, FALSE, 0);
 
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 	eventbox = gtk_event_box_new ();
 	gtk_widget_show (eventbox);
 	gtk_box_pack_start(GTK_BOX(box), eventbox, TRUE, TRUE, 0);
-	widgets.html_book = GTK_WIDGET(wk_html_new()); //embed_new(BOOK_TYPE);
+	widgets.html_book = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, BOOK_TYPE)); //embed_new(BOOK_TYPE);
 	gtk_widget_show(widgets.html_book);
 	gtk_container_add(GTK_CONTAINER(eventbox),
 			 widgets.html_book);

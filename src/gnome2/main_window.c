@@ -25,16 +25,7 @@
 
 #include <gtk/gtk.h>
 
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "webkit/wk-html.h"
-#endif
-#else
-#include <gtkhtml/gtkhtml.h>
-#include "gui/html.h"
-#endif
+#include "xiphos_html.h"
 #include "main/sword.h"
 #include "main/settings.h"
 #include "main/xml.h"
@@ -771,12 +762,12 @@ void create_mainwindow(void)
 	GtkWidget *hbox25;
 	GtkWidget *tab_button_icon;
 	GtkWidget *label;
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 	GtkWidget *frame;
 	GtkWidget *eventbox;
 #else
 	GtkWidget *scrolledwindow;
-#endif /* USE_GTKMOZEMBED */
+#endif /* USE_XIPHOS_HTML */
 	GtkWidget *box_book;
 	GdkPixbuf* pixbuf;
 	/*
@@ -948,7 +939,7 @@ void create_mainwindow(void)
 
 	gtk_container_set_border_width(GTK_CONTAINER(widgets.vbox_previewer), 2);
 
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 	frame = gtk_frame_new(NULL);
 	gtk_widget_show(frame);
 	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
@@ -961,7 +952,7 @@ void create_mainwindow(void)
 	gtk_container_add(GTK_CONTAINER(frame), eventbox);
 
 	widgets.html_previewer_text
-			= GTK_WIDGET ( wk_html_new());
+			= GTK_WIDGET ( XIPHOS_HTML_NEW( NULL, FALSE, VIEWER_TYPE));
 	gtk_container_add(GTK_CONTAINER(eventbox), widgets.html_previewer_text);
 #else
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);

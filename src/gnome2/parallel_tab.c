@@ -25,16 +25,7 @@
 
 #include <gtk/gtk.h>
 #include <glade/glade-xml.h>
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "webkit/wk-html.h"
-#endif
-#else
-#include <gtkhtml/gtkhtml.h>
-#include "gui/html.h"
-#endif  /* USE_GTKMOZEMBED */
+#include "xiphos_html.h"
 
 #include "gui/parallel_tab.h"
 #include "gui/parallel_view.h"
@@ -71,9 +62,9 @@ NAVBAR_VERSEKEY navbar_parallel;
 static void sync_with_main(const gchar * key);
 
 
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 static void
-_popupmenu_requested_cb(WkHtml *html,
+_popupmenu_requested_cb(XiphosHtml *html,
 			gchar *uri,
 			gpointer user_data)
 {
@@ -245,7 +236,7 @@ static GtkWidget *create_nav_toolbar(void)
 	return gui_navbar_versekey_parallel_new();
 }
 
-#ifndef USE_GTKMOZEMBED
+#ifndef USE_XIPHOS_HTML
 /******************************************************************************
  * Name
  *  on_text_button_press_event
@@ -317,7 +308,7 @@ static gboolean on_text_button_release_event(GtkWidget * widget,
 	}
 	return FALSE;
 }
-#endif /* !USE_GTKMOZEMBED */
+#endif /* !USE_XIPHOS_HTML */
 
 /******************************************************************************
  * Name
@@ -340,7 +331,7 @@ GtkWidget *_create_parallel_tab(void)
 {
 	GtkWidget *toolbar29;
   	GtkWidget *box_parallel_labels;
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 	GtkWidget *eventbox;
 	GtkWidget *frame;
 #else
@@ -390,7 +381,7 @@ GtkWidget *_create_parallel_tab(void)
 	}
 #endif /* 0 */
 
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 	frame = gtk_frame_new(NULL);
 	gtk_widget_show(frame);
 	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
@@ -400,7 +391,7 @@ GtkWidget *_create_parallel_tab(void)
 	gtk_widget_show (eventbox);
 	gtk_container_add(GTK_CONTAINER(frame), eventbox);
 
-	widgets.html_parallel_dialog = GTK_WIDGET(wk_html_new()); //embed_new(PARALLEL_TYPE); //gtk_moz_embed_new();
+	widgets.html_parallel_dialog = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, PARALLEL_TYPE));
 	gtk_widget_show(widgets.html_parallel_dialog);
 
 	gtk_container_add(GTK_CONTAINER(eventbox),

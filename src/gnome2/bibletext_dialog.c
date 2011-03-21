@@ -24,16 +24,7 @@
 #endif
 
 #include <gtk/gtk.h>
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "webkit/wk-html.h"
-#endif
-#else
-#include <gtkhtml/gtkhtml.h>
-#include "gui/html.h"
-#endif
+#include "xiphos_html.h"
 
 #include "gui/bibletext_dialog.h"
 #include "gui/display_info.h"
@@ -67,7 +58,7 @@ static DIALOG_DATA *cur_vt;
  */
 extern gboolean bible_freed;
 
-#ifndef USE_GTKMOZEMBED
+#ifndef USE_XIPHOS_HTML
 /******************************************************************************
  * Name
  *   show_in_statusbar
@@ -106,7 +97,7 @@ static void show_in_statusbar(GtkWidget *statusbar,
 	}
 	g_free(text);
 }
-#endif /* !USE_GTKMOZEMBED */
+#endif /* !USE_XIPHOS_HTML */
 
 
 /******************************************************************************
@@ -126,7 +117,7 @@ static void show_in_statusbar(GtkWidget *statusbar,
  *   void
  */
 
-#ifndef USE_GTKMOZEMBED
+#ifndef USE_XIPHOS_HTML
 static void link_clicked(GtkHTML *html,
 			 const gchar *url,
 			 DIALOG_DATA *vt)
@@ -134,7 +125,7 @@ static void link_clicked(GtkHTML *html,
 	cur_vt = vt;
 	main_dialogs_url_handler(vt, url, TRUE);
 }
-#endif /* !USE_GTKMOZEMBED */
+#endif /* !USE_XIPHOS_HTML */
 
 /******************************************************************************
  * Name
@@ -170,7 +161,7 @@ static gboolean on_dialog_motion_notify_event(GtkWidget *widget,
 }
 
 
-#ifndef USE_GTKMOZEMBED
+#ifndef USE_XIPHOS_HTML
 /******************************************************************************
  * Name
  *   dialog_url
@@ -321,7 +312,7 @@ static void dialog_url(GtkHTML *html,
 	if (url_buf)
 		g_free(url_buf);
 }
-#endif /* !USE_GTKMOZEMBED */
+#endif /* !USE_XIPHOS_HTML */
 
 
 /******************************************************************************
@@ -400,7 +391,7 @@ static GtkWidget *create_nav_toolbar(DIALOG_DATA *c)
 }
 
 
-#ifndef USE_GTKMOZEMBED
+#ifndef USE_XIPHOS_HTML
 
 /******************************************************************************
  * Name
@@ -498,18 +489,18 @@ static gboolean on_button_release_event(GtkWidget *widget,
 	}
 	return FALSE;
 }
-#endif /* !USE_GTKMOZEMBED */
+#endif /* !USE_XIPHOS_HTML */
 
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 static void
-_popupmenu_requested_cb (WkHtml *html,
+  _popupmenu_requested_cb (XiphosHtml *html,
 			 gchar *uri,
 			 gpointer user_data)
 {
 	DIALOG_DATA * d = (DIALOG_DATA *)user_data;
 	gui_text_dialog_create_menu(d);
 }
-#endif /* USE_GTKMOZEMBED */
+#endif /* USE_XIPHOS_HTML */
 
 /******************************************************************************
  * Name
@@ -532,7 +523,7 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 	GtkWidget *vbox33;
 	GtkWidget *paned;
 	GtkWidget *frame;
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 	GtkWidget *eventbox;
 #else
 	GtkWidget *swVText;
@@ -565,13 +556,13 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 	gtk_paned_add1((GtkPaned *)paned,frame);
 	gtk_widget_set_size_request(frame, -1, 200);
 
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
 
 	eventbox = gtk_event_box_new();
 	gtk_widget_show(eventbox);
 	gtk_container_add(GTK_CONTAINER(frame), eventbox);
-	vt->html = GTK_WIDGET(wk_html_new());
+        vt->html = GTK_WIDGET(XIPHOS_HTML_NEW(vt, TRUE, DIALOG_TEXT_TYPE));
 
 	gtk_widget_show(vt->html);
 	gtk_container_add(GTK_CONTAINER(eventbox), vt->html);
@@ -590,7 +581,7 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 	gtk_widget_show(eventbox);
 	gtk_container_add(GTK_CONTAINER(frame), eventbox);
 
-	vt->previewer = GTK_WIDGET(wk_html_new());
+        vt->previewer = GTK_WIDGET(XIPHOS_HTML_NEW(vt, TRUE, VIEWER_TYPE));
 	gtk_widget_show(vt->previewer);
 	gtk_container_add(GTK_CONTAINER(eventbox), vt->previewer);
 #else
@@ -651,7 +642,7 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 
 	g_signal_connect(GTK_OBJECT(vt->previewer), "link_clicked",
 				   G_CALLBACK(link_clicked), vt);
-#endif /* !USE_GTKMOZEMBED */
+#endif /* !USE_XIPHOS_HTML */
 
 	vt->statusbar = gtk_statusbar_new();
 	gtk_widget_show(vt->statusbar);

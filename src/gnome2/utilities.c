@@ -62,16 +62,7 @@
 #endif /* !WIN32 */
 #include <errno.h>
 
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "webkit/wk-html.h"
-#endif /* WIN32 */
-#else
-#include <gtkhtml/gtkhtml.h>
-#include <gtkhtml/htmltypes.h>
-#endif /* USE_GTKMOZEMBED */
+#include "xiphos_html.h"
 
 #include <gsf/gsf-utils.h>
 #include <gsf/gsf-outfile-zip.h>
@@ -1356,9 +1347,9 @@ HtmlOutput(char *text,
 {
 	int len = strlen(text), offset = 0, write_size;
 
-#ifdef USE_GTKMOZEMBED
-	WkHtml *html = WK_HTML(gtkText);
-	wk_html_open_stream(html,"text/html");
+#ifdef USE_XIPHOS_HTML
+	XiphosHtml *html = XIPHOS_HTML(gtkText);
+	XIPHOS_HTML_OPEN_STREAM(html,"text/html");
 #else
 	GtkHTML *html = GTK_HTML(gtkText);
 	PangoContext* pc = gtk_widget_get_pango_context(gtkText);
@@ -1374,7 +1365,7 @@ HtmlOutput(char *text,
 		gtk_html_set_editable(html, FALSE);
 #endif
 
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 	// EVIL EVIL EVIL EVIL.
 	// crazy nonsense with xulrunner 1.9.2.3, failure to jump to anchor.
 	// force the issue by stuffing a javascript snippet inside <head></head>.
@@ -1386,7 +1377,7 @@ HtmlOutput(char *text,
 		buf = strstr(text, "</head>");	// yes, lowercase.
 		assert(buf != NULL);	// don't be so stupid as not to include <head></head>.
 		offset = buf - text;
-		wk_html_write(html, text, offset);
+		XIPHOS_HTML_WRITE(html, text, offset);
 		len -= offset;
 
 		// now write the javascript snippet.
@@ -1396,10 +1387,10 @@ HtmlOutput(char *text,
 		    " </script>", (settings.special_anchor
 				   ? settings.special_anchor
 				   : anchor));
-		wk_html_write(html, buf, strlen(buf));
+		XIPHOS_HTML_WRITE(html, buf, strlen(buf));
 		g_free(buf);
 	}
-#endif /* USE_GTKMOZEMBED */
+#endif /* USE_XIPHOS_HTML */
 
 	// html widgets are uptight about being handed
 	// huge quantities of text -- producer/consumer problem,
@@ -1407,8 +1398,8 @@ HtmlOutput(char *text,
 
 	while (len > 0) {
 		write_size = min(10000, len);
-#ifdef USE_GTKMOZEMBED
-		wk_html_write(html, text+offset, write_size);
+#ifdef USE_XIPHOS_HTML
+		XIPHOS_HTML_WRITE(html, text+offset, write_size);
 #else
 		gtk_html_write(html, stream, text+offset, write_size);
 #endif
@@ -1417,10 +1408,12 @@ HtmlOutput(char *text,
 	}
 
 	/* use anchor if asked, but if so, special anchor takes priority. */
-#ifdef USE_GTKMOZEMBED
-	wk_html_close(html);
-	if (anchor)
-		wk_html_jump_to_anchor(html, anchor);
+#ifdef USE_XIPHOS_HTML
+	XIPHOS_HTML_CLOSE(html);
+	if (anchor || settings.special_anchor)
+		XIPHOS_HTML_JUMP_TO_ANCHOR(html, (settings.special_anchor
+						  ? settings.special_anchor
+						  : anchor));
 
 #else
 	gtk_html_end(html, stream, GTK_HTML_STREAM_OK);

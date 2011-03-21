@@ -26,16 +26,7 @@
 #include <gtk/gtk.h>
 #include <glade/glade-xml.h>
 
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "webkit/wk-html.h"
-#endif
-#else
-#include <gtkhtml/gtkhtml.h>
-#include "gui/html.h"
-#endif
+#include "xiphos_html.h"
 
 #include <regex.h>
 #include <string.h>
@@ -133,7 +124,7 @@ void button_clean(GtkButton * button, gpointer user_data)
 {
 	GtkTreeModel *model;
 	GtkListStore *list_store;
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 	GString *html_text;
 #endif
 
@@ -146,14 +137,14 @@ void button_clean(GtkButton * button, gpointer user_data)
 	list_store = GTK_LIST_STORE(model);
 	gtk_list_store_clear(list_store);
 
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 	html_text = g_string_new(HTML_START);
 	g_string_append(html_text," ");
 
 	g_string_append(html_text,"</html>");	
-	wk_html_open_stream(WK_HTML(search1.preview_html),"text/html");
-	wk_html_write(WK_HTML(search1.preview_html),html_text->str,html_text->len);
-	wk_html_close(WK_HTML(search1.preview_html));
+	XIPHOS_HTML_OPEN_STREAM(search1.preview_html,"text/html");
+	XIPHOS_HTML_WRITE(search1.preview_html,html_text->str,html_text->len);
+	XIPHOS_HTML_CLOSE(search1.preview_html);
 	g_string_free(html_text,TRUE);
 #else
 	gtk_html_load_from_string(GTK_HTML(search1.preview_html),
@@ -1431,8 +1422,8 @@ on_toolbutton12_clicked(GtkToolButton * toolbutton, gpointer user_data)
 static
 void _add_html_widget(GtkWidget * vbox)
 {
-#ifdef USE_GTKMOZEMBED
-	search1.preview_html = GTK_WIDGET(wk_html_new());
+#ifdef USE_XIPHOS_HTML
+	search1.preview_html = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, DIALOG_SEARCH_PREVIEW_TYPE));
 	gtk_box_pack_start(GTK_BOX(vbox), search1.preview_html, TRUE, TRUE, 0);
 #else
 	GtkWidget *scrolledwindow = gtk_scrolled_window_new(NULL, NULL);

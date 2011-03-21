@@ -25,16 +25,7 @@
 
 #include <gtk/gtk.h>
 
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "webkit/wk-html.h"
-#endif
-#else
-#include <gtkhtml/gtkhtml.h>
-#include "gui/html.h"
-#endif
+#include "xiphos_html.h"
 
 
 #include "gui/xiphos.h"
@@ -91,19 +82,31 @@ void gui_popup_pm_text(void)
 }
 
 
-#ifdef USE_GTKMOZEMBED
-static gboolean
-_popupmenu_requested_cb (WkHtml *html,
-			 GdkEventButton *event,
+#ifdef USE_XIPHOS_HTML
+  #ifdef USE_WEBKIT
+    static gboolean
+    _popupmenu_requested_cb (XiphosHtml *html,
+			     GdkEventButton *event,
 			     gpointer user_data)
+  #elif USE_GTKMOZEMBED
+    static void
+    _popupmenu_requested_cb (XiphosHtml *html,
+			     gchar *uri,
+			     gpointer user_data)
+
+  #endif
 {
     gui_menu_popup (settings.MainWindowModule,
 			NULL);
-    return TRUE;
+    #ifdef USE_WEBKIT
+      return TRUE;
+    #elif USE_GTKMOZEMBED
+      gui_popup_pm_text();
+    #endif
 }
 #endif
 
-#ifndef USE_GTKMOZEMBED
+#ifndef USE_XIPHOS_HTML
 /******************************************************************************
  * Name
  *  on_text_button_press_event
@@ -298,7 +301,7 @@ void adj_changed(GtkAdjustment * adjustment1, gpointer user_data)
 	} else 	scroll = 1;
 }
 
-#endif /* !USE_GTKMOZEMBED */
+#endif /* !USE_XIPHOS_HTML */
 
 /******************************************************************************
  * Name
@@ -319,10 +322,33 @@ void adj_changed(GtkAdjustment * adjustment1, gpointer user_data)
 GtkWidget *gui_create_bible_pane(void)
 {
 	GtkWidget *vbox;
+#ifdef USE_XIPHOS_HTML
+	GtkWidget *eventbox1;
+#else
 	GtkWidget *scrolledwindow;
+#endif
 
 	vbox = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox);
+
+#ifdef USE_XIPHOS_HTML
+
+	eventbox1 = gtk_event_box_new();
+	gtk_widget_show(eventbox1);
+	gtk_box_pack_start(GTK_BOX(vbox),
+	                   eventbox1, TRUE,
+	                   TRUE, 0);
+	widgets.html_text = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, TEXT_TYPE));
+	gtk_widget_show(widgets.html_text);
+	gtk_container_add(GTK_CONTAINER(eventbox1),
+	                  widgets.html_text);
+	                  
+	g_signal_connect((gpointer)widgets.html_text,
+	              "popupmenu_requested",
+	              G_CALLBACK (_popupmenu_requested_cb),
+	              NULL);
+#else
+
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
 	gtk_box_pack_start(GTK_BOX(vbox),
@@ -335,23 +361,11 @@ GtkWidget *gui_create_bible_pane(void)
 				       GTK_POLICY_AUTOMATIC);
 
 
-#ifdef USE_GTKMOZEMBED
-
-	widgets.html_text = GTK_WIDGET(wk_html_new());
-	gtk_widget_show(widgets.html_text);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow),
-			  widgets.html_text);
-			
-	g_signal_connect((gpointer)widgets.html_text,
-		      "popupmenu_requested",
-		      G_CALLBACK (_popupmenu_requested_cb),
-		      NULL);
-#else	
-		adjustment = gtk_scrolled_window_get_vadjustment
-		(GTK_SCROLLED_WINDOW(scrolledwindow));
+	adjustment = gtk_scrolled_window_get_vadjustment
+					     (GTK_SCROLLED_WINDOW(scrolledwindow));
 	scroll_adj_signal = g_signal_connect(GTK_OBJECT(adjustment), "value-changed",
-					     G_CALLBACK(adj_changed),
-					     NULL);
+				G_CALLBACK(adj_changed),
+				NULL);
 	widgets.html_text = gtk_html_new();
 	gtk_widget_show(widgets.html_text);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
@@ -370,12 +384,12 @@ GtkWidget *gui_create_bible_pane(void)
 				G_CALLBACK(on_text_button_press_event),
 				NULL);
 	g_signal_connect(GTK_OBJECT(widgets.html_text), "enter_notify_event",
-		    		G_CALLBACK (on_enter_notify_event),
-		       		NULL);
+				G_CALLBACK (on_enter_notify_event),
+				NULL);
 	g_signal_connect(GTK_OBJECT(widgets.html_text),
 			 "url_requested",
 			 G_CALLBACK(url_requested), NULL);
-#endif
+#endif /* USE_XIPHOS_HTML */
 
 	return 	vbox;
 

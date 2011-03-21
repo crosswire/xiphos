@@ -56,6 +56,10 @@ def set_options(opt):
     opt.add_option('--enable-gtkhtml', action='store_true', default=False,
             dest='gtkhtml',
             help='Use gtkhtml instead of gtkmozembed [Default: disabled]')
+            
+    opt.add_option('--enable-webkit', action='store_true', default=False,
+            dest='webkit',
+            help='Use gtk-webkit instead of gtkmozembed or gtkhtml [Default: disabled]')
 
     opt.add_option('--disable-console',
             action='store_true',
@@ -255,7 +259,10 @@ def configure(conf):
         dfn('WIN32', 1)
 
     # gtkhtml
-    if opt.gtkhtml:
+    if opt.webkit:
+	env['ENABLE_WEBKIT'] = True
+	dfn('WEBKIT', 1)
+    elif opt.gtkhtml:
         env['ENABLE_GTKHTML'] = True
         dfn('GTKHTML', 1)
 
@@ -328,9 +335,11 @@ def configure(conf):
     "libgsf-1 >= 1.14"
     "libxml-2.0"
     "libgtkhtml-3.14 >= 3.23"
-    "webkit-1.0"
     --cflags --libs'''
     .split()," ")
+    
+    if env['ENABLE_WEBKIT']:
+	    common_libs += " webkit-1.0"
 
     conf.check_cfg(atleast_pkgconfig_version='0.9.0')
     conf.check_cfg(msg="Checking for GNOME related libs",
@@ -363,20 +372,68 @@ def configure(conf):
                    uselib_store="GTK_220")
 
     ######################
+    ### gtk-webkit for html rendering
+    #
+    if env['ENABLE_WEBKIT']:
+        conf.check_cfg(package='webkit-1.0',
+			uselib_store='WEBKIT',
+			msg='Checking for webkit')
+	env.append_value('ALL_LIBS', 'WEBKIT')
+        conf.define('USE_WEBKIT', 1)
+        #env.append_value('ALL_LIBS', 'WEBKIT')
+    ######################
     ### gecko (xulrunner) for html rendering
     # gtkhtml only for editor
-    if not env['ENABLE_GTKHTML']:
-        #conf.check_cfg(package='webkit-1.0', uselib_store='WEBKIT')
+    elif not env['ENABLE_GTKHTML']:
+        if not env["IS_WIN32"]:
+
+            conf.check_cfg (package='nspr', uselib_store='NSPR')    
+            conf.check_cfg (package='',
+                            uselib_store='GECKO',
+                            args='"libxul-embedding >= 1.9.0" --define-variable=includetype=unstable "nspr" --cflags --libs',
+                            msg='checking for libxul-embedding')
+
+            conf.define('GECKO_HOME', conf.check_cfg(package='libxul-embedding',
+                                                     args='--variable=sdkdir',
+                                                     okmsg=waffles.misc.myokmsg,
+                                                     msg="Checking for libxul sdkdir").strip())
+            conf.define('GECKO_VER', conf.check_cfg(package='libxul-embedding',
+                                                    args='--modversion',
+                                                     okmsg=waffles.misc.myokmsg,
+                                                    msg="Checking for Gecko GREVersion").strip())
+            if not env['GECKO_VER'][3].isalpha():
+                    conf.define('GECKO_MIN', env['GECKO_VER'][0:5]+'.0')
+                    conf.define('GECKO_MAX', env['GECKO_VER'][0:5]+'.99')
+            else:
+                    conf.define('GECKO_MIN', env['GECKO_VER'][0:4]+'0')
+                    conf.define('GECKO_MAX', env['GECKO_VER'][0:3]+'.0.99')
+
+            conf.check_message("Gecko", "GREVersionMin", 1, env['GECKO_MIN'])
+            conf.check_message("Gecko", "GREVersionMax", 1, env['GECKO_MAX'])
+
+        else:
+                    d = env['MOZILLA_DISTDIR']
+                    conf.define['CPPPATH_GECKO'] = ['%s/sdk/include' % d,
+                                                '%s/include' % d,
+                                                '%s/include/widget' % d,
+                                                '%s/include/xpcom' % d,
+                                                '%s/include/dom' % d,
+                                                '%s/include/content' % d,
+                                                '%s/include/layout' % d,
+                                                '%s/include/gfx' % d]
+                    conf.define['LIBPATH_GECKO'] = ['%s/sdk/lib' % d]
+                    conf.define['LIB_GECKO'] = ['xpcomglue_s', 'xpcom', 'xul', 'nspr4']
+                    # FIXME: how to detect Gecko-ver on Win similar to pkg-config on unix?
+                    conf.define('GECKO_MIN', '1.9.0.0')
+                    conf.define('GECKO_MAX', '2.0.0.*')
+
+
+        env.append_value('ALL_LIBS', 'NSPR')
+        env.append_value('ALL_LIBS', 'GECKO')
         conf.define('USE_GTKMOZEMBED', 1)
-        #env.append_value('CCFLAGS', env['GECKO_CCFLAGS'])
-        #env.append_value('CXXFLAGS', env['GECKO_CCFLAGS'])
-	#env.append_value('ALL_LIBS', 'WEBKIT')
-    ######################
 
 
-    # TODO: maybe the following checks should be in a more generic module.
 
-    #always defined to indicate that i18n is enabled */
     dfn('ENABLE_NLS', 1)
     dfn('HAVE_BIND_TEXTDOMAIN_CODESET', 1)
     dfn('HAVE_GETTEXT', 1)
@@ -436,11 +493,13 @@ def build(bld):
         ui
     """)
     # use GECKO
-    if not env['ENABLE_GTKHTML']:
+    if env['ENABLE_WEBKIT']:
+	bld.add_subdirs('src/webkit')
+    elif not env['ENABLE_GTKHTML']:
         if env["IS_WIN32"]:
             bld.add_subdirs('src/geckowin')
         else:
-            bld.add_subdirs('src/webkit')
+            bld.add_subdirs('src/gecko')
             
     if env['IS-WIN32']:
       bld.add_subdirs('win32/include')
