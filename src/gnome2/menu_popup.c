@@ -30,16 +30,7 @@
 #include <unistd.h>
 #include <ctype.h>
 
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "webkit/wk-html.h"
-#endif
-#else
-#include <gtkhtml/gtkhtml.h>
-#include "gui/html.h"
-#endif
+#include "xiphos_html.h"
 
 
 #include "gui/menu_popup.h"
@@ -403,19 +394,19 @@ G_MODULE_EXPORT void on_popup_print_activate           (GtkMenuItem     *menuite
                                         gpointer         user_data)
 {
 	if (is_dialog) {
-#ifdef USE_GTKMOZEMBED
-//		wk_html_print_document (GTK_WINDOW (widgets.app), 
-//					   dialog->mod_name, 
-//					   dialog);
+#ifdef USE_XIPHOS_HTML
+		XIPHOS_HTML_PRINT_DOCUMENT (GTK_WINDOW (widgets.app), 
+					   dialog->mod_name, 
+					   dialog);
 	
 #else
 		gui_html_print (dialog->html, FALSE, dialog->mod_name);
 #endif
 	} else {
-#ifdef USE_GTKMOZEMBED
-//		wk_html_print_document (GTK_WINDOW (widgets.app), 
-//					   menu_mod_name, 
-//					   NULL);
+#ifdef USE_XIPHOS_HTML
+		XIPHOS_HTML_PRINT_DOCUMENT (GTK_WINDOW (widgets.app), 
+					   menu_mod_name, 
+					   NULL);
 	
 #else
 		gui_html_print (_get_html(), FALSE, menu_mod_name);
@@ -467,14 +458,14 @@ G_MODULE_EXPORT void on_popup_copy_activate            (GtkMenuItem     *menuite
                                         gpointer         user_data)
 {
 	if (is_dialog) {
-#ifdef USE_GTKMOZEMBED
-	wk_html_copy_selection (WK_HTML (dialog->html));
+#ifdef USE_XIPHOS_HTML
+	XIPHOS_HTML_COPY_SELECTION (dialog->html);
 #else
 	gui_copy_html (dialog->html);
 #endif
 	} else {
-#ifdef USE_GTKMOZEMBED
-	wk_html_copy_selection (WK_HTML (_get_html ()));
+#ifdef USE_XIPHOS_HTML
+	XIPHOS_HTML_COPY_SELECTION (_get_html ());
 #else
 	gui_copy_html (_get_html ());
 #endif
@@ -1129,8 +1120,8 @@ G_MODULE_EXPORT void on_display_chapter_heading_activate (GtkMenuItem * menuitem
 
 G_MODULE_EXPORT void on_use_current_dictionary_activate (GtkMenuItem * menuitem, gpointer user_data)
 {
-#ifdef USE_GTKMOZEMBED
-	wk_html_copy_selection(WK_HTML(_get_html()));
+#ifdef USE_XIPHOS_HTML
+	XIPHOS_HTML_COPY_SELECTION(_get_html());
 	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
 	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
 	gtk_widget_activate(widgets.entry_dict);
@@ -1163,8 +1154,8 @@ G_MODULE_EXPORT void on_lookup_google_activate (GtkMenuItem * menuitem, gpointer
 {
 	gchar *dict_key, *showstr;
 
-#ifdef USE_GTKMOZEMBED
-	wk_html_copy_selection(WK_HTML(_get_html()));
+#ifdef USE_XIPHOS_HTML
+	XIPHOS_HTML_COPY_SELECTION(_get_html());
 	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
 	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
 	dict_key = g_strdup(gtk_editable_get_chars(
@@ -1374,8 +1365,8 @@ G_MODULE_EXPORT void on_read_selection_aloud_activate (GtkMenuItem * menuitem, g
 	gchar *dict_key;
 	int len;
 	GtkWidget *html_widget = _get_html();
-#ifdef USE_GTKMOZEMBED
-	wk_html_copy_selection(WK_HTML(html_widget));
+#ifdef USE_XIPHOS_HTML
+	XIPHOS_HTML_COPY_SELECTION(html_widget);
 	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
 	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
 	dict_key =
@@ -1385,7 +1376,7 @@ G_MODULE_EXPORT void on_read_selection_aloud_activate (GtkMenuItem * menuitem, g
 #else
 	GtkHTML *html = GTK_HTML(html_widget);
 	dict_key = gtk_html_get_selection_html(html, &len);
-#endif /* !USE_GTKMOZEMBED */
+#endif /* !USE_XIPHOS_HTML */
 
 	if (dict_key && len && *dict_key) {
 		ReadAloud(0, dict_key);
@@ -1591,7 +1582,7 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 
     	item = glade_xml_get_widget (gxml, "doublespace");
 	GTK_CHECK_MENU_ITEM (item)->active = ops->doublespace;
-#ifndef USE_GTKMOZEMBED
+#ifndef USE_XIPHOS_HTML
     	gtk_widget_hide (item);
 #endif
 
@@ -1660,8 +1651,8 @@ static void _lookup_selection(GtkMenuItem *menuitem,
 	GtkWidget *html = _get_html ();
     	if (!html) return;
 	mod_name = main_module_name_from_description (dict_mod_description);
-#ifdef USE_GTKMOZEMBED
-	wk_html_copy_selection (WK_HTML(html));
+#ifdef USE_XIPHOS_HTML
+	XIPHOS_HTML_COPY_SELECTION(html);
 	gtk_editable_select_region ((GtkEditable *)widgets.entry_dict,0,-1);
 	gtk_editable_paste_clipboard ((GtkEditable *)widgets.entry_dict);
 	gtk_widget_activate (widgets.entry_dict);

@@ -27,16 +27,7 @@
 #include <gtk/gtk.h>
 
 
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "webkit/wk-html.h"
-#endif
-#else
-#include <gtkhtml/gtkhtml.h>
-#include "gui/html.h"
-#endif
+#include "xiphos_html.h"
 
 #include "gui/dialog.h"
 #include "gui/commentary.h"
@@ -94,7 +85,7 @@ void access_to_edit_percomm()
 
 
 
-#ifndef USE_GTKMOZEMBED
+#ifndef USE_XIPHOS_HTML
 /******************************************************************************
  * Name
  *  on_comm_button_press_event
@@ -213,9 +204,9 @@ static gboolean on_comm_button_release_event(GtkWidget * widget,
 //#endif /* GTKHTML */
 	return FALSE;
 }
-#endif /* !USE_GTKMOZEMBED */
+#endif /* !USE_XIPHOS_HTML */
 
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 static gboolean on_enter_notify_event(GtkWidget * widget,
 				      GdkEventCrossing * event,
 				      gpointer user_data)
@@ -229,7 +220,7 @@ static gboolean on_enter_notify_event(GtkWidget * widget,
 
 
 static void
-_popupmenu_requested_cb (WkHtml *html,
+_popupmenu_requested_cb (XiphosHtml *html,
 			     gchar *uri,
 			     gpointer user_data)
 {
@@ -256,7 +247,7 @@ _popupmenu_requested_cb (WkHtml *html,
 GtkWidget *gui_create_commentary_pane(void)
 {
 	GtkWidget *box_comm;
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 	GtkWidget *eventbox1;
 #else
 	GtkWidget *scrolledwindow;
@@ -264,13 +255,13 @@ GtkWidget *gui_create_commentary_pane(void)
 	box_comm = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(box_comm);
 
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 	eventbox1 = gtk_event_box_new ();
 	gtk_widget_show (eventbox1);
 	gtk_box_pack_start(GTK_BOX(box_comm),
 			   eventbox1, TRUE,
 			   TRUE, 0);
-	widgets.html_comm = GTK_WIDGET(wk_html_new());
+	widgets.html_comm = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, COMMENTARY_TYPE));
 	gtk_widget_show(widgets.html_comm);
 	gtk_container_add(GTK_CONTAINER(eventbox1),
 			 widgets.html_comm);

@@ -25,16 +25,7 @@
 
 #include <gtk/gtk.h>
 
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "webkit/wk-html.h"
-#endif
-#else
-#include <gtkhtml/gtkhtml.h>
-#include "gui/html.h"
-#endif
+#include "xiphos_html.h"
 
 #include "gui/dictlex.h"
 #include "gui/bookmark_dialog.h"
@@ -83,9 +74,9 @@ extern gboolean isrunningSD;	/* is the view dictionary dialog runing */
  *					     gpointer data)
  *
  * Description
- *    an ugly hack to get the selection from wk on a dbl click
+ *    an ugly hack to get the selection from widget on a dbl click
  *    and display text in dictionary pane using default dictionary if set or
- *    current dictionary - this called by wk/Yelper.cpp 
+ *    current dictionary - this called by (gecko|wk)/Yelper.cpp 
  *    Yelper::ProcessMouseDblClickEvent (void* aEvent)
  *
  * Return value
@@ -230,7 +221,7 @@ void gui_set_dictlex_mod_and_key(gchar * mod_name, gchar * key)
  *   gint
  */
 
-#ifndef USE_GTKMOZEMBED
+#ifndef USE_XIPHOS_HTML
 static gint html_button_pressed(GtkWidget * html,
 				GdkEventButton * event, gpointer data)
 {
@@ -319,7 +310,7 @@ static gint html_button_released(GtkWidget * html,
 	return FALSE;
 }
 
-#endif /* !USE_GTKMOZEMBED */
+#endif /* !USE_XIPHOS_HTML */
 
 /******************************************************************************
  * Name
@@ -536,9 +527,9 @@ static gboolean select_button_press_callback (GtkWidget *widget,
 	}
 	return FALSE;
 }
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 static void
-_popupmenu_requested_cb (WkHtml *html,
+_popupmenu_requested_cb (XiphosHtml *html,
 			     gchar *uri,
 			     gpointer user_data)
 {
@@ -564,7 +555,7 @@ GtkWidget *gui_create_dictionary_pane(void)
 	GtkWidget *dict_drop_down;
 //	GtkWidget *tmp_toolbar_icon;
 //	GtkWidget *label205;
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 	GtkWidget *frame;
 	GtkWidget *eventbox;
 #else
@@ -613,7 +604,7 @@ GtkWidget *gui_create_dictionary_pane(void)
 	gtk_widget_show(image2);
 	gtk_container_add(GTK_CONTAINER(button11), image2);
 
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 	frame = gtk_frame_new(NULL);
 	gtk_frame_set_shadow_type(GTK_FRAME(frame), settings.shadow_type);
 	gtk_box_pack_start(GTK_BOX(box_dict), frame, TRUE, TRUE, 0);
@@ -622,7 +613,7 @@ GtkWidget *gui_create_dictionary_pane(void)
 	eventbox = gtk_event_box_new ();
 	gtk_container_add(GTK_CONTAINER(frame), eventbox);
 	gtk_widget_show (eventbox);
-	widgets.html_dict = GTK_WIDGET(wk_html_new());
+	widgets.html_dict = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, DICTIONARY_TYPE));
 	gtk_widget_show(widgets.html_dict);
 	gtk_container_add(GTK_CONTAINER(eventbox),
 			 widgets.html_dict);

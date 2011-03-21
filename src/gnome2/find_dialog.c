@@ -30,13 +30,7 @@
 #include "gui/find_dialog.h"
 #include "main/settings.h"
 #include "main/sword.h"
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "webkit/wk-html.h"
-#endif
-#endif
+#include "xiphos_html.h"
 
 typedef struct _find_dialog FIND_DIALOG;
 
@@ -101,14 +95,14 @@ static void find_clicked(GtkButton * button, FIND_DIALOG * d)
 	gchar *text = (gchar*)gtk_entry_get_text(GTK_ENTRY(d->entry));
 	sprintf(settings.findText, "%s", text);
 
-#ifndef USE_GTKMOZEMBED
+#ifndef USE_XIPHOS_HTML
 	gtk_html_engine_search(GTK_HTML(d->htmlwidget), text,
 			       GTK_TOGGLE_BUTTON(d->case_sensitive)->active,
 			       GTK_TOGGLE_BUTTON(d->backward)->active == 0,
 			       d->regular);
 #else
-	wk_html_find((void *)d->htmlwidget, text);
-#endif /* !USE_GTKMOZEMBED */
+	XIPHOS_HTML_FIND((void *)d->htmlwidget, text);
+#endif /* !USE_XIPHOS_HTML */
 }
 
 
@@ -130,12 +124,12 @@ static void find_clicked(GtkButton * button, FIND_DIALOG * d)
 
 static void next_clicked(GtkButton * button, FIND_DIALOG * d)
 {
-#ifndef USE_GTKMOZEMBED
+#ifndef USE_XIPHOS_HTML
 	gtk_html_engine_search_next(GTK_HTML(d->htmlwidget));
 #else
-	wk_html_find_again((void *)d->htmlwidget,
+	XIPHOS_HTML_FIND_AGAIN((void *)d->htmlwidget,
 			      GTK_TOGGLE_BUTTON(d->backward)->active == 0);
-#endif /* !USE_GTKMOZEMBED */
+#endif /* !USE_XIPHOS_HTML */
 }
 
 
@@ -233,13 +227,13 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 	gtk_widget_show(hbox66);
 	gtk_box_pack_start(GTK_BOX(vbox45), hbox66, TRUE, TRUE, 0);
 
-#ifndef USE_GTKMOZEMBED
+#ifndef USE_XIPHOS_HTML
 	dialog->case_sensitive =
 	    gtk_check_button_new_with_label(_("Match case"));
 	gtk_widget_show(dialog->case_sensitive);
 	gtk_box_pack_start(GTK_BOX(hbox66), dialog->case_sensitive,
 			   FALSE, FALSE, 0);
-#endif /* !USE_GTKMOZEMBED */
+#endif /* !USE_XIPHOS_HTML */
 
 	dialog->backward =
 	    gtk_check_button_new_with_label(_("Search backwards"));
@@ -249,13 +243,13 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (dialog->backward), FALSE);
 
-#ifndef USE_GTKMOZEMBED
+#ifndef USE_XIPHOS_HTML
 	dialog->regex =
 	    gtk_check_button_new_with_label(_("Regular expression"));
 	gtk_widget_show(dialog->regex);
 	gtk_box_pack_start(GTK_BOX(hbox66), dialog->regex, FALSE, FALSE,
 			   0);
-#endif /* !USE_GTKMOZEMBED */
+#endif /* !USE_XIPHOS_HTML */
 
 	dialog_action_area29 = GTK_DIALOG(dialog->dialog)->action_area;
 	g_object_set_data(G_OBJECT(dialog->dialog),

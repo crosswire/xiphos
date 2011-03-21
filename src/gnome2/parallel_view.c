@@ -25,16 +25,7 @@
 
 #include <gtk/gtk.h>
 
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "webkit/wk-html.h"
-#endif
-#else
-#include <gtkhtml/gtkhtml.h>
-#include "gui/html.h"
-#endif
+#include "xiphos_html.h"
 
 #include "gui/parallel_view.h"
 #include "gui/parallel_dialog.h"
@@ -167,9 +158,9 @@ on_enter_notify_event(GtkWidget       *widget,
 }
 
 
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 static void
-_popupmenu_requested_cb(WkHtml *html,
+_popupmenu_requested_cb(XiphosHtml *html,
 			gchar *uri,
 			gpointer user_data)
 {
@@ -208,7 +199,7 @@ _popupmenu_requested_cb(GtkHTML *html,
 void gui_create_parallel_page(void)
 {
 	GtkWidget *label;
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 	GtkWidget *eventbox;
 #else
 	GtkWidget *scrolled_window;
@@ -218,13 +209,13 @@ void gui_create_parallel_page(void)
 	 * parallel page
 	 */
 	settings.dockedInt = TRUE;
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 	eventbox = gtk_event_box_new ();
 	gtk_widget_show (eventbox);
 	gtk_container_add(GTK_CONTAINER(widgets.notebook_bible_parallel), eventbox);
 
 	widgets.frame_parallel = eventbox;
-	widgets.html_parallel = GTK_WIDGET(wk_html_new()); //embed_new(PARALLEL_TYPE); //gtk_moz_embed_new();
+	widgets.html_parallel = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, PARALLEL_TYPE));
 	gtk_widget_show(widgets.html_parallel);
 	gtk_container_add(GTK_CONTAINER(eventbox),
 			  widgets.html_parallel);
