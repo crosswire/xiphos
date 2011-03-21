@@ -41,13 +41,7 @@
 #include "main/sword.h"
 #include "main/url.hh"
 #include "main/xml.h"
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "webkit/wk-html.h"
-#endif
-#endif
+#include "../gnome2/xiphos_html.h"
 //#include "backend/sword.h"
 
 #include "gui/debug_glib_null.h"
@@ -163,11 +157,11 @@ int main(int argc, char *argv[])
 
 	gui_splash_init();
 
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 
-	gui_splash_step(_("Initiating Webkit"), 0.0, 0);
+	gui_splash_step(_("Initiating HTML"), 0.0, 0);
 	
-	wk_html_initialize();
+	XIPHOS_HTML_INITIALIZE();
 
 	base_step = 1;
 #endif

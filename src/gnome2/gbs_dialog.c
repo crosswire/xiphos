@@ -25,16 +25,7 @@
 
 #include <gtk/gtk.h>
 
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "webkit/wk-html.h"
-#endif
-#else
-#include <gtkhtml/gtkhtml.h>
-#include "gui/html.h"
-#endif
+#include "xiphos_html.h"
 
 #include "gui/gbs_dialog.h"
 #include "gui/navbar_book_dialog.h"
@@ -175,7 +166,7 @@ static void dialog_url(GtkHTML * html, const gchar * url,
  * Return value
  *   void
  */
-#ifndef USE_GTKMOZEMBED
+#ifndef USE_XIPHOS_HTML
 static void link_clicked(GtkButton * button, gpointer user_data)
 {
 
@@ -200,7 +191,7 @@ static void link_clicked(GtkButton * button, gpointer user_data)
  *   void
  */
 
-#ifndef USE_GTKMOZEMBED
+#ifndef USE_XIPHOS_HTML
 static gboolean button_press(GtkWidget *widget,
 			     GdkEventButton *event,
 			     DIALOG_DATA *g)
@@ -210,7 +201,7 @@ static gboolean button_press(GtkWidget *widget,
 		gui_menu_popup (NULL, g);
 	return FALSE;
 }
-#endif /* !USE_GTKMOZEMBED */
+#endif /* !USE_XIPHOS_HTML */
 
 
 /******************************************************************************
@@ -299,9 +290,9 @@ static void add_columns(GtkTreeView *tree)
 	gtk_tree_view_column_set_visible(column,FALSE);
 }
 
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 static void
-_popupmenu_requested_cb (WkHtml *html,
+_popupmenu_requested_cb (XiphosHtml *html,
 			 gchar *uri,
 			 DIALOG_DATA *d)
 {
@@ -334,12 +325,12 @@ void gui_create_gbs_dialog(DIALOG_DATA *dlg)
 //	GtkWidget *label241;
 //	GtkWidget *label242;
 //	GtkWidget *label243;
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 	GtkWidget *frame;
 	GtkWidget *eventbox;
 #else
 	GtkWidget *scrolledwindow_html;
-#endif /* USE_GTKMOZEMBED */
+#endif /* USE_XIPHOS_HTML */
 	GObject *selection;
 
 
@@ -388,7 +379,7 @@ void gui_create_gbs_dialog(DIALOG_DATA *dlg)
 	selection =
 	    G_OBJECT(gtk_tree_view_get_selection(GTK_TREE_VIEW(dlg->tree)));
 
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 	frame = gtk_frame_new(NULL);
 	gtk_widget_show(frame);
 	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
@@ -397,8 +388,7 @@ void gui_create_gbs_dialog(DIALOG_DATA *dlg)
 	eventbox = gtk_event_box_new();
 	gtk_widget_show(eventbox);
 	gtk_container_add(GTK_CONTAINER(frame), eventbox);
-	
-	dlg->html = GTK_WIDGET(wk_html_new());
+	dlg->html = GTK_WIDGET(XIPHOS_HTML_NEW(((DIALOG_DATA*) dlg),TRUE,DIALOG_BOOK_TYPE));
 
 	gtk_container_add(GTK_CONTAINER(eventbox), dlg->html);
 	gtk_widget_show(dlg->html);

@@ -64,13 +64,7 @@
 #include "main/lists.h"
 #include "main/xml.h"
 
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "webkit/wk-html.h"
-#endif
-#endif
+#include "xiphos_html.h"
 
 #include "gui/debug_glib_null.h"
 
@@ -173,7 +167,7 @@ void frontend_display(const char *tabs)
 
  	gtk_window_move(GTK_WINDOW(widgets.app),settings.app_x,settings.app_y);
 
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 	/* gecko  needs the widgets to be visible before writing */
 	sync_windows();
 #endif
@@ -271,8 +265,8 @@ void shutdown_frontend(void)
 	xml_free_settings_doc();
 
 	main_shutdown_list();
-#ifdef USE_GTKMOZEMBED
-	wk_html_shutdown();
+#ifdef USE_XIPHOS_HTML
+	XIPHOS_HTML_SHUTDOWN();
 #endif
 //	if(settings.browsing)
 	gui_notebook_main_shutdown (settings.browsing);

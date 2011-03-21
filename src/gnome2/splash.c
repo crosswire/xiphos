@@ -491,6 +491,7 @@ e_splash_set_icon_highlight(ESplash * splash,
 
 	g_return_if_fail(splash != NULL);
 	g_return_if_fail(E_IS_SPLASH(splash));
+	g_return_if_fail(num < splash->priv->num_icons);
 
 	if (!splash)
 		return;

@@ -26,22 +26,8 @@
 #include <regex.h>
 #include <swbuf.h>
 #include <swmodule.h>
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "webkit/wk-html.h"
-#endif
-#else
-#ifdef __cplusplus
-extern "C" {
-#endif
-#include <gtkhtml/gtkhtml.h>
-#include "gui/html.h"
-#ifdef __cplusplus
-}
-#endif
-#endif
+#define XIPHOS_HTML_EXTERN_C
+#include "../gnome2/xiphos_html.h"
 
 #include "main/previewer.h"
 #include "main/search_dialog.h"
@@ -953,14 +939,14 @@ void main_finds_verselist_selection_changed(GtkTreeSelection * selection,
 	text_str = g_string_new(backendSearch->get_render_text(module,key));
 	mark_search_words(text_str);
 
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 	GString *html_text = g_string_new(HTML_START);
 	g_string_append(html_text, text_str->str);
 	g_string_append(html_text, "</html>");	
-	wk_html_open_stream(WK_HTML(search1.preview_html), "text/html");
-	wk_html_write(WK_HTML(search1.preview_html),
+	XIPHOS_HTML_OPEN_STREAM(search1.preview_html, "text/html");
+	XIPHOS_HTML_WRITE(search1.preview_html,
 			 html_text->str, html_text->len);
-	wk_html_close(WK_HTML(search1.preview_html));
+	XIPHOS_HTML_CLOSE(search1.preview_html);
 	g_string_free(html_text, TRUE);
 #else
 	gtk_html_load_from_string(GTK_HTML(search1.preview_html),

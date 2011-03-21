@@ -24,17 +24,7 @@
 #endif
 
 #include <gtk/gtk.h>
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "webkit/wk-html.h"
-#endif
-#else
-#include <gtkhtml/gtkhtml.h>
-#endif
-
-#include "gui/display_info.h"
+#include "xiphos_html.h"
 
 
 #include "main/previewer.h"
@@ -99,10 +89,10 @@ void gui_display_mod_and_key(const gchar * mod_name, const gchar * key)
 
 void gui_display_text_information(gchar * information)
 {
-#ifdef USE_GTKMOZEMBED
-	wk_html_open_stream(WK_HTML(html_widget), "text/html");
-	wk_html_write(WK_HTML(html_widget),information,strlen(information));
-	wk_html_close(WK_HTML(html_widget));
+#ifdef USE_XIPHOS_HTML
+	XIPHOS_HTML_OPEN_STREAM(html_widget, "text/html");
+	XIPHOS_HTML_WRITE(html_widget,information,strlen(information));
+	XIPHOS_HTML_CLOSE(html_widget);
 #else
 	gboolean was_editable = gtk_html_get_editable(GTK_HTML(html_widget));
 	if (was_editable)
@@ -178,9 +168,9 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 
 	GtkWidget *dialog_vbox23;
 	GtkWidget *hbox;
-#ifndef USE_GTKMOZEMBED
+#ifndef USE_XIPHOS_HTML
 	GtkWidget *scrolledwindow70;
-#endif /* !USE_GTKMOZEMBED */
+#endif /* !USE_XIPHOS_HTML */
 	GtkWidget *dialog_action_area23;
 	GtkWidget *hbuttonbox2;
 	GtkWidget *button_close;
@@ -219,8 +209,8 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 	gtk_box_pack_start(GTK_BOX(hbox), image, FALSE, TRUE,
 			   0);
 	gtk_misc_set_alignment(GTK_MISC(image), 0.5, 0);
-#ifdef USE_GTKMOZEMBED
-	html_widget = GTK_WIDGET(wk_html_new());//gtk_html_new();
+#ifdef USE_XIPHOS_HTML
+	html_widget = GTK_WIDGET(XIPHOS_HTML_NEW(NULL,FALSE,30));//gtk_html_new();
 	gtk_widget_show(html_widget);
 	gtk_box_pack_start(GTK_BOX(hbox), html_widget, TRUE, TRUE, 0);
 #else

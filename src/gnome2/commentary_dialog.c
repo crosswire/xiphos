@@ -24,16 +24,7 @@
 #endif
 
 #include <gtk/gtk.h>
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "webkit/wk-html.h"
-#endif
-#else
-#include <gtkhtml/gtkhtml.h>
-#include "gui/html.h"
-#endif
+#include "xiphos_html.h"
 
 
 #include "gui/commentary_dialog.h"
@@ -54,7 +45,7 @@
 
 #include "gui/debug_glib_null.h"
 
-#ifndef USE_GTKMOZEMBED
+#ifndef USE_XIPHOS_HTML
 void commentary_prefixable_link(GtkHTML *html, const gchar *url, gpointer data);
 #endif
 
@@ -145,7 +136,7 @@ static gboolean on_dialog_motion_notify_event(GtkWidget *widget,
 
 
 
-#ifndef USE_GTKMOZEMBED
+#ifndef USE_XIPHOS_HTML
 /******************************************************************************
  * Name
  *   dialog_url
@@ -233,7 +224,7 @@ void commentary_prefixable_link(GtkHTML *html,
 	*(strrchr(buf, ' ')) = '\0';
 	gui_prefixable_link_clicked(html, url, data, buf);
 }
-#endif /* !USE_GTKMOZEMBED */
+#endif /* !USE_XIPHOS_HTML */
 
 
 /******************************************************************************
@@ -284,16 +275,16 @@ static GtkWidget *create_nav_toolbar(DIALOG_DATA *d)
 	return gui_navbar_versekey_dialog_new(d);
 }
 
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 static void
-_popupmenu_requested_cb (WkHtml *html,
+_popupmenu_requested_cb (XiphosHtml *html,
 			 gchar *uri,
 			 DIALOG_DATA *d)
 {
     	gui_menu_popup (NULL, d);
 	//gui_commentary_dialog_create_menu(d);
 }
-#endif /* USE_GTKMOZEMBED */
+#endif /* USE_XIPHOS_HTML */
 
 /******************************************************************************
  * Name
@@ -318,7 +309,7 @@ void gui_create_commentary_dialog(DIALOG_DATA *d,
 	GtkWidget *vbox_toolbars;
 	GtkWidget *toolbar_nav;
 	GtkWidget *frame19;
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 	GtkWidget *eventbox;
 #else
 	GtkWidget *scrolledwindow38;
@@ -358,13 +349,13 @@ void gui_create_commentary_dialog(DIALOG_DATA *d,
 	gtk_box_pack_start(GTK_BOX(vbox30), frame19, TRUE, TRUE, 0);
 	gtk_frame_set_shadow_type(GTK_FRAME(frame19), GTK_SHADOW_IN);
 
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 
 	eventbox = gtk_event_box_new();
 	gtk_widget_show(eventbox);
 	gtk_container_add(GTK_CONTAINER(frame19), eventbox);
 
-	d->html = GTK_WIDGET(wk_html_new());
+	d->html = GTK_WIDGET(XIPHOS_HTML_NEW(((DIALOG_DATA*) d),TRUE,DIALOG_COMMENTARY_TYPE));
 
 	gtk_container_add(GTK_CONTAINER(eventbox), d->html);
 	gtk_widget_show(d->html);
@@ -389,7 +380,7 @@ void gui_create_commentary_dialog(DIALOG_DATA *d,
 			  d->html);
 	gtk_html_load_empty(GTK_HTML(d->html));
 
-#ifndef USE_GTKMOZEMBED
+#ifndef USE_XIPHOS_HTML
 	g_signal_connect(GTK_OBJECT(d->html),
 			 "link_clicked",
 			 G_CALLBACK(commentary_prefixable_link), d);
@@ -401,7 +392,7 @@ void gui_create_commentary_dialog(DIALOG_DATA *d,
 			 "button_press_event",
 			 G_CALLBACK(button_press_event), d);
 
-#endif  /* !USE_GTKMOZEMBED */
+#endif  /* !USE_XIPHOS_HTML */
 
 	g_signal_connect(GTK_OBJECT(d->dialog), "destroy",
 			 G_CALLBACK(on_dialog_destroy), d);

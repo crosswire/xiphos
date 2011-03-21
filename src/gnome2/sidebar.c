@@ -46,13 +46,7 @@
 #include "gui/tabbed_browser.h"
 #include "gui/search_dialog.h"
 
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "webkit/wk-html.h"
-#endif
-#endif
+#include "xiphos_html.h"
 
 #include "main/sword.h"
 #include "main/settings.h"
@@ -1255,7 +1249,7 @@ void gui_show_previewer_in_sidebar(gint choice)
 {
 	if (choice) {
 		gtk_widget_show(widgets.box_side_preview);
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 		gtk_widget_show (widgets.box_side_preview);
 #else
 		gtk_widget_show_all (widgets.box_side_preview);
@@ -1264,7 +1258,7 @@ void gui_show_previewer_in_sidebar(gint choice)
 		gtk_paned_set_position(GTK_PANED(widgets.paned_sidebar),
 				       settings.sidebar_notebook_height);
 	} else {
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 		gtk_widget_show (widgets.vbox_previewer);
 #else
 		gtk_widget_show_all (widgets.vbox_previewer);
@@ -1299,7 +1293,7 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	GtkWidget *scrolledwindow4;
 	GtkWidget *scrolledwindow_bm;
 	GtkWidget *title_label = NULL;
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 	GtkWidget *frame;
 	//GtkWidget *eventbox;
 #else
@@ -1325,7 +1319,7 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 			(gchar *) "paned_sidebar");
 	widgets.shortcutbar = widgets.paned_sidebar;
 
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 	frame = gtk_frame_new(NULL);
 	gtk_widget_show(frame);
 	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
@@ -1338,7 +1332,7 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	gtk_widget_show(sidebar.html_viewer_eventbox);
 	gtk_container_add(GTK_CONTAINER(frame), sidebar.html_viewer_eventbox);
 
-	sidebar.html_viewer_widget = GTK_WIDGET(wk_html_new());
+	sidebar.html_viewer_widget = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, SB_VIEWER_TYPE));
 	gtk_container_add(GTK_CONTAINER(sidebar.html_viewer_eventbox), sidebar.html_viewer_widget);
 #else
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);

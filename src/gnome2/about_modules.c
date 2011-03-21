@@ -25,16 +25,7 @@
 
 #include <gtk/gtk.h>
 
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "webkit/wk-html.h"
-#endif
-#else
-#include <gtkhtml/gtkhtml.h>
-#include "gui/html.h"
-#endif
+#include "xiphos_html.h"
 
 #include "gui/about_modules.h"
 #include "gui/utilities.h"
@@ -80,8 +71,8 @@ on_copy_activate(GtkMenuItem * menuitem,
 		 gpointer data)
 {
 	GS_message(("on_copy_activate"));
-#ifdef USE_GTKMOZEMBED
-	wk_html_copy_selection(WK_HTML(text_html));
+#ifdef USE_XIPHOS_HTML
+	XIPHOS_HTML_COPY_SELECTION(text_html);
 #else
 	gui_copy_html(text_html);
 #endif
@@ -126,7 +117,7 @@ create_menu1(void)
  * Return value
  *   gboolean
  */
-#ifndef USE_GTKMOZEMBED
+#ifndef USE_XIPHOS_HTML
 static gboolean
 on_button_release_event(GtkWidget * widget,
 			GdkEventButton * event,
@@ -146,9 +137,10 @@ on_button_release_event(GtkWidget * widget,
 }
 #endif /* 0 */
 
-#ifdef USE_GTKMOZEMBED
+
+#ifdef USE_XIPHOS_HTML
 static void
-_popupmenu_requested_cb(WkHtml *html,
+_popupmenu_requested_cb (XiphosHtml *html,
 			gchar *uri,
 			gpointer user_data)
 {
@@ -181,7 +173,7 @@ gui_create_about_modules(void)
 	GtkWidget *hbox21;
 	GtkWidget *pixmap;
 	GtkWidget *frame73;
-#ifndef USE_GTKMOZEMBED
+#ifndef USE_XIPHOS_HTML
 	GtkWidget *scrolledwindow30;
 #endif
 	GtkWidget *dialog_action_area28;
@@ -218,8 +210,8 @@ gui_create_about_modules(void)
 	frame73 = gtk_frame_new(NULL);
 	gtk_widget_show(frame73);
 	gtk_box_pack_start(GTK_BOX(vbox25), frame73, TRUE, TRUE, 0);
-#ifdef USE_GTKMOZEMBED
-	text_html = GTK_WIDGET(wk_html_new());
+#ifdef USE_XIPHOS_HTML
+	text_html = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, 12));
 	gtk_widget_show(text_html);
 	gtk_container_add(GTK_CONTAINER(frame73), text_html);
 	//gtk_widget_set_sensitive(text_html,FALSE);
