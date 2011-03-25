@@ -3251,7 +3251,9 @@ void gui_update_install_status(glong total, glong done,
 {
 	gchar *buf;
 
-	buf = g_strdup_printf("%s: %s",current_mod,message);
+	buf = g_strdup_printf("%s: %s",
+			      (current_mod ? current_mod : _("[no module]")),
+			      message);
 	gui_set_progressbar_text(progressbar_refresh,buf);
 	g_free(buf);
 }
