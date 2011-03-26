@@ -830,6 +830,7 @@ remove_install_modules(GList * modules,
 		g_free(tmp->data);
 		tmp = g_list_next(tmp);
 	}
+	current_mod = NULL;
 	have_changes = TRUE;
 	g_list_free(modules);
 
