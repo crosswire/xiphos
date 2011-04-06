@@ -110,10 +110,14 @@ gui_create_about_xiphos(void)
 
 	snprintf
 	    (versionbuild, 120, "%s-%s", VERSION,
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_WEBKIT  
+	     "webkit"
+#else    
+  #ifdef USE_GTKMOZEMBED
 	     "mozembed"
-#else
+  #else    
 	     "gtkhtml3"
+  #endif
 #endif
 		);
 

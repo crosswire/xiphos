@@ -716,7 +716,7 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 		break;
 	case XK_F10: // Shift-F10 bible module right click
 		if (state == GDK_SHIFT_MASK)
-			gui_menu_popup(settings.MainWindowModule, NULL);
+			gui_menu_popup(NULL, settings.MainWindowModule, NULL); /* FIXME: needs the html widget as first pram */
 		break;
 	}
 	GS_message(("on_vbox1_key_press_event\nkeycode: %d, keysym: %0x, state: %d",

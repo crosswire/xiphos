@@ -281,7 +281,7 @@ _popupmenu_requested_cb (XiphosHtml *html,
 			 gchar *uri,
 			 DIALOG_DATA *d)
 {
-    	gui_menu_popup (NULL, d);
+    	gui_menu_popup (html, cur_d->mod_name, cur_d);
 	//gui_commentary_dialog_create_menu(d);
 }
 #endif /* USE_XIPHOS_HTML */

@@ -54,7 +54,7 @@ enum {
  * static - global to this file only
  */
 //static GList *dialog_list;
-//static DIALOG_DATA *cur_dlg;
+static DIALOG_DATA *cur_dlg;
 //static GtkCTreeNode *rootnode;
 static GtkTreeModel *model;
 //static gint tree_level;
@@ -296,7 +296,7 @@ _popupmenu_requested_cb (XiphosHtml *html,
 			 gchar *uri,
 			 DIALOG_DATA *d)
 {
-	gui_menu_popup (NULL, d);
+	gui_menu_popup (html, cur_dlg->mod_name, cur_dlg);
 }
 #endif
 
@@ -437,7 +437,8 @@ void gui_create_gbs_dialog(DIALOG_DATA *dlg)
 
 	g_signal_connect(GTK_OBJECT(dlg->dialog), "destroy",
 			   G_CALLBACK(dialog_destroy),
-			   (DIALOG_DATA *) dlg);
+			   (DIALOG_DATA *) dlg); 
+	cur_dlg =  dlg;
 }
 
 

@@ -497,8 +497,8 @@ static void
 			 gchar *uri,
 			 gpointer user_data)
 {
-	DIALOG_DATA * d = (DIALOG_DATA *)user_data;
-	gui_text_dialog_create_menu(d);
+	DIALOG_DATA * d = (DIALOG_DATA *)cur_vt;
+	gui_menu_popup (html, d->mod_name, d);  //gui_text_dialog_create_menu(d);
 }
 #endif /* USE_XIPHOS_HTML */
 
@@ -660,10 +660,10 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 			   (on_dialog_motion_notify_event), vt);
 }
 
-
+/*
 void gui_text_dialog_create_menu(DIALOG_DATA * d)
 {
-	gui_menu_popup (NULL, d);
+	gui_menu_popup (NULL, NULL, d);
 }
-
+*/
 /******   end of file   ******/

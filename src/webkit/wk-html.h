@@ -1,7 +1,8 @@
 #ifndef __WK_HTML_H__
 #define __WK_HTML_H__
 
-#include <webkit/webkit.h>
+#include <webkit/webkit.h>  
+#include "main/module_dialogs.h"
 
 G_BEGIN_DECLS
 
@@ -37,7 +38,7 @@ struct _WkHtmlClass {
 };
 
 GType       wk_html_get_type           (void);
-WkHtml *    wk_html_new                (void);
+WkHtml *    wk_html_new                (DIALOG_DATA * dialog, gboolean is_dialog, gint pane);
 void        wk_html_set_base_uri       (WkHtml      *html,
 	                                const gchar *uri);
 void        wk_html_open_stream        (WkHtml      *html,

@@ -257,7 +257,7 @@ _popupmenu_requested_cb (XiphosHtml *html,
 			     gchar *uri,
 			     gpointer user_data)
 {
-	gui_menu_popup (settings.book_mod, NULL);
+	gui_menu_popup (html, settings.book_mod, NULL);
 }
 #endif
 

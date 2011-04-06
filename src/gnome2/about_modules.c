@@ -25,7 +25,7 @@
 
 #include <gtk/gtk.h>
 
-#include "xiphos_html.h"
+#include "gnome2/xiphos_html.h"
 
 #include "gui/about_modules.h"
 #include "gui/utilities.h"

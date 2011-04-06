@@ -5,12 +5,22 @@
 #include <webkit/webkitwebview.h>
 #include <webkit/webkitwebsettings.h>
 
-#include "main/url.hh"
+#include "main/url.hh" 
+#include "main/module_dialogs.h"
 
 #include "wk-html.h"
-#include "marshal.h"
+#include "marshal.h"    
+
+#include "gui/dictlex.h"     
+#include "main/sword.h"
 
 #define WK_HTML_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), WK_TYPE_HTML, WkHtmlPriv))
+        
+extern gboolean shift_key_pressed;
+extern gboolean in_url;
+
+static gchar *x_uri = NULL;
+static gboolean db_click;
 
 struct _WkHtmlPriv {
 	gchar *content;
@@ -20,7 +30,10 @@ struct _WkHtmlPriv {
 	gchar *base_uri;
 	gchar *anchor;
 	gboolean frames_enabled;
-	guint timeout;
+	guint timeout;  
+	gint pane;
+	gboolean is_dialog;  
+	DIALOG_DATA * dialog;
 };
 
 enum {
@@ -32,7 +45,6 @@ enum {
 };
 
 static guint signals[LAST_SIGNAL] = { 0 };
-
 static GObjectClass *parent_class = NULL;
 
 /* static gboolean */
@@ -81,15 +93,57 @@ static GObjectClass *parent_class = NULL;
 /* 	webkit_web_policy_decision_ignore (decision); */
 /* 	return TRUE; */
 /* } */
-
-static gboolean popup_handler (GtkWidget *widget,
+   static gboolean button_release_handler (GtkWidget *widget,
 			       GdkEventButton *event)
-{
-	if (event->button == 3)
-	{
-//		g_signal_emit(widget,
-//			      signals[POPUPMENU_REQUESTED],
-//			      0);
+{  
+	 GtkClipboard * clipboard;    
+         if(event->type ==  GDK_BUTTON_RELEASE && db_click) {
+		GS_message((" button 1 = %s" , "double click!\n"));
+	
+		if(webkit_web_view_has_selection(WEBKIT_WEB_VIEW (widget))) {
+			webkit_web_view_copy_clipboard (WEBKIT_WEB_VIEW (widget));  
+		
+			clipboard = gtk_widget_get_clipboard (widget,
+							       GDK_SELECTION_CLIPBOARD );          
+
+			gtk_clipboard_request_text  (clipboard,
+								 gui_get_clipboard_text_for_lookup,
+								 NULL);
+		}
+	} 
+	return FALSE;
+}
+static gboolean button_press_handler (GtkWidget *widget,
+			       GdkEventButton *event)
+{                  
+	WkHtmlPriv *priv;
+        priv = WK_HTML_GET_PRIVATE (WK_HTML(widget)); 
+	
+	if(event->type ==  GDK_2BUTTON_PRESS && !x_uri) {  
+		db_click = TRUE;
+		return FALSE;
+	}	     
+	db_click = FALSE;
+	
+	if (event->button == 1)	{   
+		//GS_message((" button 1\n uri = %s\n" , webkit_web_view_get_uri (WEBKIT_WEB_VIEW(widget)))); 
+		if (x_uri) {
+		
+			if ( priv->is_dialog ) 
+				main_dialogs_url_handler(priv->dialog, x_uri, TRUE);
+			else
+				main_url_handler(x_uri, TRUE);  
+			return TRUE; 
+		}  
+		return FALSE;
+	}
+	if (event->button == 3)	{
+		g_print ("in button_press_handler button 3\n");
+		g_signal_emit(widget, 
+			signals[POPUPMENU_REQUESTED],
+		      	0,
+		      	priv->dialog,
+		      	FALSE);
 		return TRUE;
 	}
 	return FALSE;
@@ -97,17 +151,37 @@ static gboolean popup_handler (GtkWidget *widget,
 
 static void link_handler (GtkWidget *widget,
 			      gchar     *title,
+                          
 			      gchar     *uri,
 			      gpointer   user_data)
-{
+{                              
+	WkHtmlPriv *priv;	  
+	priv = WK_HTML_GET_PRIVATE (WK_HTML(widget)); 
+	GS_message(("html_link_message: uri = %s",uri));  
+	
+	if (shift_key_pressed)
+		return;
+	
+	if(x_uri) {  
+		g_free(x_uri);
+		x_uri = NULL;
+	}
+	if (uri)
+		x_uri = g_strdup(uri);
+	
 	g_signal_emit(widget,
 		      signals[URI_SELECTED],
 		      0,
 		      uri,
 		      FALSE);
-	if (uri)
-		main_url_handler(uri, FALSE);
-	g_print ("in link_handler\n");
+	if (uri)  {
+		
+		if ( priv->is_dialog ) 
+				main_dialogs_url_handler(priv->dialog, uri, FALSE);
+		else
+			main_url_handler(uri, FALSE);
+	}
+	//g_print ("in link_handler\nuri = %s",uri);
 }
 
 static void
@@ -117,7 +191,10 @@ html_realize (GtkWidget *widget)
 	GTK_WIDGET_CLASS (parent_class)->realize (widget);
 
 	g_signal_connect (G_OBJECT (widget), "button-press-event",
-			  G_CALLBACK (popup_handler),
+			  G_CALLBACK (button_press_handler),
+			  NULL);         
+	g_signal_connect (G_OBJECT (widget), "button-release-event",
+			  G_CALLBACK (button_release_handler),
 			  NULL);
 	g_signal_connect (G_OBJECT (widget), "hovering-over-link",
 			  G_CALLBACK (link_handler),
@@ -207,9 +284,14 @@ html_class_init (WkHtmlClass *klass)
 			      G_STRUCT_OFFSET (WkHtmlClass,
 					       popupmenu_requested),
 			      NULL, NULL,
-			      g_cclosure_marshal_VOID__STRING,
+		               
+			      wk_marshal_VOID__POINTER_BOOLEAN,
 			      G_TYPE_NONE,
-			      1, G_TYPE_STRING);
+			      2, G_TYPE_POINTER, G_TYPE_BOOLEAN);
+			   //   g_cclosure_marshal_VOID__VOID,
+			   //    G_TYPE_NONE,
+			   //    1,G_TYPE_POINTER
+		          //   );
 
 	g_type_class_add_private (klass, sizeof (WkHtmlPriv));
 }
@@ -241,12 +323,16 @@ wk_html_get_type (void)
 }
 
 WkHtml *
-wk_html_new (void)
+wk_html_new (DIALOG_DATA * dialog, gboolean is_dialog, gint pane)
 {
 	WkHtml *html;
 	
 	html = WK_HTML (g_object_new (WK_TYPE_HTML, NULL));
-
+                    
+	WkHtmlPriv *priv = WK_HTML_GET_PRIVATE(html);
+	priv->pane = pane;          
+	priv->is_dialog = is_dialog;
+	priv->dialog = dialog;
 	return html;
 }
 
@@ -396,10 +482,21 @@ wk_html_jump_to_anchor (WkHtml    *html,
 	priv->anchor = g_strdup (anchor);
 }
 
+/*
+void ClipboardTextReceivedFunc (GtkClipboard *clipboard,
+                                                         const gchar *text,
+                                                         gpointer data)
+{
+     
+	GS_message(("clipboard text = %s",text));  
+}
+*/
+
 void
 wk_html_copy_selection (WkHtml *html)
-{
-	webkit_web_view_copy_clipboard (WEBKIT_WEB_VIEW (html));
+{                  
+	if(webkit_web_view_has_selection(WEBKIT_WEB_VIEW (html))) 
+		webkit_web_view_copy_clipboard (WEBKIT_WEB_VIEW (html)); 
 }
 
 void
@@ -410,8 +507,9 @@ wk_html_select_all (WkHtml *html)
 
 void
 wk_html_print (WkHtml *html)
-{
-	webkit_web_view_execute_script (WEBKIT_WEB_VIEW (html), "print();");
+{         
+	webkit_web_frame_print (webkit_web_view_get_main_frame (WEBKIT_WEB_VIEW (html)));
+	//webkit_web_view_execute_script (WEBKIT_WEB_VIEW (html), "print();");
 }
 			
 gboolean
