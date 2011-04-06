@@ -78,6 +78,7 @@ extern gboolean isrunningSD;	/* is the view dictionary dialog runing */
  *    and display text in dictionary pane using default dictionary if set or
  *    current dictionary - this called by (gecko|wk)/Yelper.cpp 
  *    Yelper::ProcessMouseDblClickEvent (void* aEvent)
+ *    also called by wk-html.c   button_press_handler() -- still ugly
  *
  * Return value
  *   void
@@ -533,7 +534,7 @@ _popupmenu_requested_cb (XiphosHtml *html,
 			     gchar *uri,
 			     gpointer user_data)
 {
-	gui_menu_popup (settings.DictWindowModule, NULL);
+	gui_menu_popup (html, settings.DictWindowModule, NULL);
 	//gui_create_pm_dictionary();
 }
 #endif

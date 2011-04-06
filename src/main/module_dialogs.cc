@@ -1370,8 +1370,10 @@ gint main_dialogs_url_handler(DIALOG_DATA * t, const gchar * url, gboolean click
 		retval = sword_uri(t, url_clean->str, clicked);
 		g_string_free(url_clean, TRUE);
 	}
-	if (strstr(url,"passagestudy.jsp") || strstr(url,"xiphos.url"))
+	if (strstr(url,"passagestudy.jsp") || strstr(url,"xiphos.url")) {    
+		handling_url = FALSE;
 		return new_url_handler(t,url,clicked);
+	}
 	/*if (strstr(url,"sword://"))
 		return sword_uri(t, url, clicked);*/
 

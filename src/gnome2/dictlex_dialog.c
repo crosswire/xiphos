@@ -44,7 +44,7 @@ extern gboolean dialog_freed;
  * static - global to this file only
  */
 //static GList *dialog_list;
-//static DIALOG_DATA *cur_dlg;
+static DIALOG_DATA *cur_dlg;
 static gint cell_height;
 
 /******************************************************************************
@@ -280,7 +280,7 @@ _popupmenu_requested_cb (XiphosHtml *html,
 			     gchar *uri,
 			     DIALOG_DATA * d)
 {
-	gui_menu_popup (d->mod_name, d);
+	gui_menu_popup (html, cur_dlg->mod_name, cur_dlg);
 }
 #else
 static void dialog_url(GtkHTML * html, const gchar * url,
@@ -466,6 +466,7 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 	g_signal_connect(G_OBJECT(dlg->listview),
 			 "button_release_event",
 			 G_CALLBACK(list_button_released), dlg);
+	cur_dlg =   dlg;
 }
 
 //******  end of file  ******/

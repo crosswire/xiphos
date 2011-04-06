@@ -29,8 +29,9 @@ extern "C" {
 #include <glade/glade-xml.h>
 
 #include "main/module_dialogs.h"
-
-void gui_menu_popup (const gchar * mod_name,
+//#include "gnome2/xiphos_html.h"
+	
+void gui_menu_popup (XiphosHtml *html, const gchar * mod_name,
 			DIALOG_DATA * d);
 gint _get_type_mod_list (void);
 gchar * _get_key (gchar * mod_name);
