@@ -77,8 +77,8 @@ GtkAdjustment* adjustment;
 
 void gui_popup_pm_text(void)
 {
-    gui_menu_popup (settings.MainWindowModule,
-			NULL);
+   /* gui_menu_popup (settings.MainWindowModule,
+			NULL);*/
 }
 
 
@@ -86,7 +86,7 @@ void gui_popup_pm_text(void)
   #ifdef USE_WEBKIT
     static gboolean
     _popupmenu_requested_cb (XiphosHtml *html,
-			     GdkEventButton *event,
+			    gchar *uri ,
 			     gpointer user_data)
   #elif USE_GTKMOZEMBED
     static void
@@ -96,12 +96,13 @@ void gui_popup_pm_text(void)
 
   #endif
 {
-    gui_menu_popup (settings.MainWindowModule,
-			NULL);
+    gui_menu_popup (html, settings.MainWindowModule,
+			NULL);  
+		g_print ("in _popupmenu_requested_cb\n");
     #ifdef USE_WEBKIT
       return TRUE;
-    #elif USE_GTKMOZEMBED
-      gui_popup_pm_text();
+   // #elif USE_GTKMOZEMBED
+      //gui_popup_pm_text();
     #endif
 }
 #endif

@@ -224,7 +224,8 @@ _popupmenu_requested_cb (XiphosHtml *html,
 			     gchar *uri,
 			     gpointer user_data)
 {
-    	gui_menu_popup (settings.CommWindowModule, NULL);
+	//g_print ("in comm _popupmenu_requested_cb\n");
+    	gui_menu_popup (html, settings.CommWindowModule, NULL);
 }
 #endif
 

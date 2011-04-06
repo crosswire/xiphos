@@ -395,19 +395,25 @@ G_MODULE_EXPORT void on_popup_print_activate           (GtkMenuItem     *menuite
 {
 	if (is_dialog) {
 #ifdef USE_XIPHOS_HTML
-		XIPHOS_HTML_PRINT_DOCUMENT (GTK_WINDOW (widgets.app), 
+  #ifdef USE_WEBKIT	
+		XIPHOS_HTML_PRINT_DOCUMENT ((XiphosHtml*) user_data);   
+  #else 
+		XIPHOS_HTML_PRINT_DOCUMENT ((XiphosHtml*) user_data, 
 					   dialog->mod_name, 
-					   dialog);
-	
+					   dialog);   
+  #endif
 #else
 		gui_html_print (dialog->html, FALSE, dialog->mod_name);
 #endif
 	} else {
-#ifdef USE_XIPHOS_HTML
-		XIPHOS_HTML_PRINT_DOCUMENT (GTK_WINDOW (widgets.app), 
+#ifdef USE_XIPHOS_HTML   
+  #ifdef USE_WEBKIT	
+		XIPHOS_HTML_PRINT_DOCUMENT ((XiphosHtml*) user_data);   
+  #else 
+		XIPHOS_HTML_PRINT_DOCUMENT ((XiphosHtml*) user_data, 
 					   menu_mod_name, 
 					   NULL);
-	
+  #endif	
 #else
 		gui_html_print (_get_html(), FALSE, menu_mod_name);
 #endif
@@ -1690,11 +1696,11 @@ static void _lookup_selection(GtkMenuItem *menuitem,
  */
 
 static
-GtkWidget * _create_popup_menu (const gchar * mod_name, DIALOG_DATA * d)
+GtkWidget * _create_popup_menu (XiphosHtml *html, const gchar * mod_name, DIALOG_DATA * d)
 {
 	gchar *glade_file;
 	GladeXML *gxml;
-    	const gchar *mname = (is_dialog ? dialog->mod_name : mod_name);
+    	const gchar *mname = (is_dialog ? d->mod_name : mod_name);
 
 	if (!mname || !*mname)
 		return NULL;
@@ -1810,7 +1816,7 @@ GtkWidget * _create_popup_menu (const gchar * mod_name, DIALOG_DATA * d)
 				    d);
     	/* connect signals and data */
 	glade_xml_signal_autoconnect_full
-		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);
+		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, html);
 
 	return menu;
 }
@@ -1833,13 +1839,13 @@ GtkWidget * _create_popup_menu (const gchar * mod_name, DIALOG_DATA * d)
  *   void
  */
 
-void gui_menu_popup (const gchar * mod_name, DIALOG_DATA * d)
+void gui_menu_popup (XiphosHtml *html, const gchar * mod_name, DIALOG_DATA * d)
 {
 	GtkWidget *menu;
 
 	if (d) {
 		dialog = d;
-		menu_mod_name = NULL;
+		menu_mod_name = NULL; //(gchar*) mod_name;
 	    	is_dialog = TRUE;
 	} else if (mod_name) {
 		menu_mod_name = (gchar*) mod_name;
@@ -1848,7 +1854,7 @@ void gui_menu_popup (const gchar * mod_name, DIALOG_DATA * d)
 	} else
 		return;
 
-	menu = _create_popup_menu (mod_name, d);
+	menu = _create_popup_menu (html, mod_name, d);
 	if (menu)
 		gtk_menu_popup ((GtkMenu*)menu, NULL, NULL, NULL, NULL, 2,
 				gtk_get_current_event_time());
