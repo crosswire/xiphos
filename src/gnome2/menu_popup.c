@@ -1777,10 +1777,12 @@ GtkWidget * _create_popup_menu (const gchar * mod_name, DIALOG_DATA * d)
 				(GCallback) on_edit_percomm_activate);
 		break;
 	case COMMENTARY_TYPE:
+		gtk_widget_show(export_);
 		gtk_widget_show(book_heading);
 		gtk_widget_show(chapter_heading);
 		break;
 	case PERCOM_TYPE:
+		gtk_widget_show(export_);
    		gtk_widget_show (open_edit);
 		g_signal_connect (GTK_OBJECT(open_edit),
 			 	"activate",
