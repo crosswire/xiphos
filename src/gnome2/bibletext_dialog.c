@@ -24,7 +24,7 @@
 #endif
 
 #include <gtk/gtk.h>
-#include "xiphos_html.h"
+#include "../xiphos_html/xiphos_html.h"
 
 #include "gui/bibletext_dialog.h"
 #include "gui/display_info.h"

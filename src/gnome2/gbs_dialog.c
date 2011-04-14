@@ -25,7 +25,7 @@
 
 #include <gtk/gtk.h>
 
-#include "xiphos_html.h"
+#include "../xiphos_html/xiphos_html.h"
 
 #include "gui/gbs_dialog.h"
 #include "gui/navbar_book_dialog.h"

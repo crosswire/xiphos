@@ -41,7 +41,7 @@
 #include "main/sword.h"
 #include "main/url.hh"
 #include "main/xml.h"
-#include "../gnome2/xiphos_html.h"
+#include "../xiphos_html/xiphos_html.h"
 //#include "backend/sword.h"
 
 #include "gui/debug_glib_null.h"

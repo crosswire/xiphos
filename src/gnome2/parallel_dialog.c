@@ -25,7 +25,7 @@
 
 #include <gtk/gtk.h>
 #include <glade/glade-xml.h>
-#include "xiphos_html.h"
+#include "../xiphos_html/xiphos_html.h"
 
 #include "gui/parallel_dialog.h"
 #include "gui/parallel_view.h"

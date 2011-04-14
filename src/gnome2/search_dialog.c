@@ -26,7 +26,7 @@
 #include <gtk/gtk.h>
 #include <glade/glade-xml.h>
 
-#include "xiphos_html.h"
+#include "../xiphos_html/xiphos_html.h"
 
 #include <regex.h>
 #include <string.h>
