@@ -542,28 +542,14 @@ _popupmenu_requested_cb (XiphosHtml *html,
 GtkWidget *gui_create_dictionary_pane(void)
 {
 	GtkWidget *box_dict;
-//	GtkWidget *hpaned;
-//	GtkWidget *vbox;
 	GtkWidget *hbox2;
 	GtkWidget *button10;
 	GtkWidget *image1;
-//	GtkWidget *comboboxentry1;
 	GtkWidget *button11;
 	GtkWidget *image2;
 	GtkWidget *arrow1;
-//	GtkWidget *frame_entry;
-//	GtkWidget *toolbarDLKey;
 	GtkWidget *dict_drop_down;
-//	GtkWidget *tmp_toolbar_icon;
-//	GtkWidget *label205;
-#ifdef USE_XIPHOS_HTML
-	GtkWidget *frame;
-	GtkWidget *eventbox;
-#else
 	GtkWidget *scrolledwindow;
-#endif
-//	GtkListStore *model;
-//	GtkListStore *store;
 
 	box_dict = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(box_dict);
@@ -605,34 +591,22 @@ GtkWidget *gui_create_dictionary_pane(void)
 	gtk_widget_show(image2);
 	gtk_container_add(GTK_CONTAINER(button11), image2);
 
+	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_show(scrolledwindow);
+	gtk_box_pack_start(GTK_BOX(box_dict), scrolledwindow, TRUE, TRUE, 0);
+	
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow,
+                                             settings.shadow_type);
 #ifdef USE_XIPHOS_HTML
-	frame = gtk_frame_new(NULL);
-	gtk_frame_set_shadow_type(GTK_FRAME(frame), settings.shadow_type);
-	gtk_box_pack_start(GTK_BOX(box_dict), frame, TRUE, TRUE, 0);
-	gtk_widget_show(frame);
-
-	eventbox = gtk_event_box_new ();
-	gtk_container_add(GTK_CONTAINER(frame), eventbox);
-	gtk_widget_show (eventbox);
 	widgets.html_dict = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, DICTIONARY_TYPE));
 	gtk_widget_show(widgets.html_dict);
-	gtk_container_add(GTK_CONTAINER(eventbox),
+	gtk_container_add(GTK_CONTAINER(scrolledwindow),
 			 widgets.html_dict);
 	g_signal_connect((gpointer)widgets.html_dict,
 		      "popupmenu_requested",
 		      G_CALLBACK (_popupmenu_requested_cb),
 		      NULL);
 #else
-	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_show(scrolledwindow);
-	gtk_box_pack_start(GTK_BOX(box_dict), scrolledwindow, TRUE, TRUE, 0);
-
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow),
-				       GTK_POLICY_AUTOMATIC,
-				       GTK_POLICY_AUTOMATIC);
-	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow,
-                                             settings.shadow_type);
 
 	widgets.html_dict = gtk_html_new();
 	gtk_widget_show(widgets.html_dict);

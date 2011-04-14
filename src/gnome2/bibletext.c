@@ -323,25 +323,22 @@ void adj_changed(GtkAdjustment * adjustment1, gpointer user_data)
 GtkWidget *gui_create_bible_pane(void)
 {
 	GtkWidget *vbox;
-#ifdef USE_XIPHOS_HTML
-	GtkWidget *eventbox1;
-#else
 	GtkWidget *scrolledwindow;
-#endif
 
 	vbox = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox);
 
+	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_show(scrolledwindow);
+	gtk_box_pack_start(GTK_BOX(vbox),
+			   scrolledwindow,
+	                   TRUE,
+			   TRUE, 0);
 #ifdef USE_XIPHOS_HTML
 
-	eventbox1 = gtk_event_box_new();
-	gtk_widget_show(eventbox1);
-	gtk_box_pack_start(GTK_BOX(vbox),
-	                   eventbox1, TRUE,
-	                   TRUE, 0);
 	widgets.html_text = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, TEXT_TYPE));
 	gtk_widget_show(widgets.html_text);
-	gtk_container_add(GTK_CONTAINER(eventbox1),
+	gtk_container_add(GTK_CONTAINER(scrolledwindow),
 	                  widgets.html_text);
 	                  
 	g_signal_connect((gpointer)widgets.html_text,
@@ -350,12 +347,6 @@ GtkWidget *gui_create_bible_pane(void)
 	              NULL);
 #else
 
-	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_show(scrolledwindow);
-	gtk_box_pack_start(GTK_BOX(vbox),
-			   scrolledwindow,
-	                   TRUE,
-			   TRUE, 0);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow),
 				       GTK_POLICY_AUTOMATIC,

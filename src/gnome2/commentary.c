@@ -248,39 +248,32 @@ _popupmenu_requested_cb (XiphosHtml *html,
 GtkWidget *gui_create_commentary_pane(void)
 {
 	GtkWidget *box_comm;
-#ifdef USE_XIPHOS_HTML
-	GtkWidget *eventbox1;
-#else
 	GtkWidget *scrolledwindow;
-#endif
+
 	box_comm = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(box_comm);
 
-#ifdef USE_XIPHOS_HTML
-	eventbox1 = gtk_event_box_new ();
-	gtk_widget_show (eventbox1);
+	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_show(scrolledwindow);
 	gtk_box_pack_start(GTK_BOX(box_comm),
-			   eventbox1, TRUE,
+			   scrolledwindow, TRUE,
 			   TRUE, 0);
+#ifdef USE_XIPHOS_HTML
 	widgets.html_comm = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, COMMENTARY_TYPE));
 	gtk_widget_show(widgets.html_comm);
-	gtk_container_add(GTK_CONTAINER(eventbox1),
+	gtk_container_add(GTK_CONTAINER(scrolledwindow),
 			 widgets.html_comm);
 
 	g_signal_connect((gpointer)widgets.html_comm,
 		      "popupmenu_requested",
 		      G_CALLBACK (_popupmenu_requested_cb),
 		      NULL);
-	g_signal_connect ((gpointer) eventbox1, "enter_notify_event",
+	g_signal_connect ((gpointer) scrolledwindow, "enter_notify_event",
 		    G_CALLBACK (on_enter_notify_event),
 		    NULL);
 
 #else
-	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_show(scrolledwindow);
-	gtk_box_pack_start(GTK_BOX(box_comm),
-			   scrolledwindow, TRUE,
-			   TRUE, 0);
+
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow),
 				       GTK_POLICY_AUTOMATIC,

@@ -29,14 +29,14 @@
  * the rendering system.
  */
 #ifdef USE_WEBKIT
-  #include "webkit/wk-html.h"  
+  #include "../webkit/wk-html.h"
   #define USE_XIPHOS_HTML
 #else
   #ifdef USE_GTKMOZEMBED
     #ifdef WIN32
-      #include "geckowin/gecko-html.h"
+      #include "../geckowin/gecko-html.h"
     #else
-      #include "gecko/gecko-html.h"
+      #include "../gecko/gecko-html.h"
     #endif
     #define USE_XIPHOS_HTML
   #else
@@ -46,7 +46,7 @@
       #endif
     #endif
     #include <gtkhtml/gtkhtml.h>
-    #include "gui/html.h"
+    #include "../gui/html.h"
     #ifdef XIPHOS_HTML_EXTERN_C
       #ifdef __cplusplus
         }
@@ -58,16 +58,18 @@
 // Used in places like the ubiquitous _popmenu_requested_cb
 #ifdef USE_WEBKIT
 	typedef WkHtml XiphosHtml;
+	typedef WkHtmlPriv XiphosHtmlPriv;
 #else
   #ifdef USE_GTKMOZEMBED
 	typedef GeckoHtml XiphosHtml;
+	typedef GeckoHtmlPriv XiphosHtmlPriv;
   #endif
 #endif
 
 // Other layers of compatibility - pulled from display_info.c and other places
 #ifdef USE_WEBKIT
 	#define XIPHOS_HTML WK_HTML
-	#define XIPHOS_HTML_NEW(a, b, c) wk_html_new(a, b, c)
+	#define XIPHOS_HTML_NEW(a, b, c) xiphos_html_new(a, b, c)
 	#define XIPHOS_HTML_COPY_SELECTION(text_html) wk_html_copy_selection(WK_HTML(text_html))
 	#define XIPHOS_HTML_OPEN_STREAM(a, b) wk_html_open_stream(WK_HTML(a), b)
 	#define XIPHOS_HTML_WRITE(a, b, c) wk_html_write(WK_HTML(a), b, c)
@@ -78,10 +80,13 @@
 	#define XIPHOS_HTML_PRINT_DOCUMENT(a) wk_html_print(a)// TODO: Implement?
 	#define XIPHOS_HTML_SHUTDOWN wk_html_shutdown
 	#define XIPHOS_HTML_INITIALIZE wk_html_initialize
+	
+	#define XIPHOS_TYPE_HTML WK_TYPE_HTML
+	#define XIPHOS_HTML_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), WK_TYPE_HTML, WkHtmlPriv))
 #else
   #ifdef USE_GTKMOZEMBED
 	#define XIPHOS_HTML GECKO_HTML
-	#define XIPHOS_HTML_NEW(a, b, c) gecko_html_new(a, b, c)
+	#define XIPHOS_HTML_NEW(a, b, c) xiphos_html_new(a, b, c)
 	#define XIPHOS_HTML_COPY_SELECTION(text_html) 	gecko_html_copy_selection(GECKO_HTML(text_html))
 	#define XIPHOS_HTML_OPEN_STREAM(a, b) gecko_html_open_stream(GECKO_HTML(a), b)
 	#define XIPHOS_HTML_WRITE(a, b, c) gecko_html_write(GECKO_HTML(a), b, c)
@@ -92,5 +97,10 @@
 	#define XIPHOS_HTML_PRINT_DOCUMENT(a, b, c) gecko_html_print_document(a, b, c)
 	#define XIPHOS_HTML_SHUTDOWN gecko_html_shutdown
 	#define XIPHOS_HTML_INITIALIZE gecko_html_initialize
+	
+	#define XIPHOS_TYPE_HTML GECKO_TYPE_HTML
+	#define XIPHOS_HTML_GET_PRIVATE GECKO_HTML_GET_PRIVATE
   #endif
 #endif
+
+XiphosHtml *xiphos_html_new(DIALOG_DATA * dialog, gboolean is_dialog, gint pane);
