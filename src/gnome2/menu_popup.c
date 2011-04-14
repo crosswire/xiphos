@@ -30,7 +30,7 @@
 #include <unistd.h>
 #include <ctype.h>
 
-#include "xiphos_html.h"
+#include "../xiphos_html/xiphos_html.h"
 
 
 #include "gui/menu_popup.h"

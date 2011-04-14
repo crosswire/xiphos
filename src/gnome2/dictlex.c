@@ -25,7 +25,7 @@
 
 #include <gtk/gtk.h>
 
-#include "xiphos_html.h"
+#include "../xiphos_html/xiphos_html.h"
 
 #include "gui/dictlex.h"
 #include "gui/bookmark_dialog.h"

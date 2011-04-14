@@ -39,7 +39,7 @@
 
 #include "gui/debug_glib_null.h"
 
-#include "xiphos_html.h"
+#include "../xiphos_html/xiphos_html.h"
 
 static GtkWidget* create_sidebar_dialog(void);
 static GtkWidget * vbox_dock;

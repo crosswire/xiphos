@@ -27,7 +27,7 @@
 #include <swbuf.h>
 #include <swmodule.h>
 #define XIPHOS_HTML_EXTERN_C
-#include "../gnome2/xiphos_html.h"
+#include "../xiphos_html/xiphos_html.h"
 
 #include "main/previewer.h"
 #include "main/search_dialog.h"
