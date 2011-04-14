@@ -22,20 +22,6 @@ extern gboolean in_url;
 static gchar *x_uri = NULL;
 static gboolean db_click;
 
-struct _WkHtmlPriv {
-	gchar *content;
-	gchar *mime;
-	gchar *find_string;
-	gboolean initialised;
-	gchar *base_uri;
-	gchar *anchor;
-	gboolean frames_enabled;
-	guint timeout;  
-	gint pane;
-	gboolean is_dialog;  
-	DIALOG_DATA * dialog;
-};
-
 enum {
 	URI_SELECTED,
 	FRAME_SELECTED,
@@ -320,20 +306,6 @@ wk_html_get_type (void)
     }
 
     return type;
-}
-
-WkHtml *
-wk_html_new (DIALOG_DATA * dialog, gboolean is_dialog, gint pane)
-{
-	WkHtml *html;
-	
-	html = WK_HTML (g_object_new (WK_TYPE_HTML, NULL));
-                    
-	WkHtmlPriv *priv = WK_HTML_GET_PRIVATE(html);
-	priv->pane = pane;          
-	priv->is_dialog = is_dialog;
-	priv->dialog = dialog;
-	return html;
 }
 
 void

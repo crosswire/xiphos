@@ -4,6 +4,8 @@
 #include <webkit/webkit.h>  
 #include "main/module_dialogs.h"
 
+#include "../main/module_dialogs.h"
+
 G_BEGIN_DECLS
 
 #define WK_TYPE_HTML         (wk_html_get_type ())
@@ -20,7 +22,19 @@ struct _WkHtml {
 	WebKitWebView parent;
 	WkHtmlPriv *priv;
 };
-
+struct _WkHtmlPriv {
+	gchar *content;
+	gchar *mime;
+	gchar *find_string;
+	gboolean initialised;
+	gchar *base_uri;
+	gchar *anchor;
+	gboolean frames_enabled;
+	guint timeout;
+	gint pane;
+	gboolean is_dialog;
+	DIALOG_DATA * dialog;
+};
 struct _WkHtmlClass {
 	WebKitWebViewClass parent;
 
