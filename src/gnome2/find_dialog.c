@@ -30,7 +30,7 @@
 #include "gui/find_dialog.h"
 #include "main/settings.h"
 #include "main/sword.h"
-#include "xiphos_html.h"
+#include "../xiphos_html/xiphos_html.h"
 
 typedef struct _find_dialog FIND_DIALOG;
 

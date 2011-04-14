@@ -62,7 +62,7 @@
 #endif /* !WIN32 */
 #include <errno.h>
 
-#include "xiphos_html.h"
+#include "../xiphos_html/xiphos_html.h"
 
 #include <gsf/gsf-utils.h>
 #include <gsf/gsf-outfile-zip.h>

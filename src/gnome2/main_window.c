@@ -25,7 +25,7 @@
 
 #include <gtk/gtk.h>
 
-#include "xiphos_html.h"
+#include "../xiphos_html/xiphos_html.h"
 #include "main/sword.h"
 #include "main/settings.h"
 #include "main/xml.h"
