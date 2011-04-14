@@ -490,6 +490,7 @@ def build(bld):
         src/editor
         src/main
         src/gnome2
+        src/xiphos_html
         ui
     """)
     # use GECKO
