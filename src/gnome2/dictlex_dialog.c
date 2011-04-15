@@ -54,6 +54,7 @@ extern gboolean dialog_freed;
  */
 //static GList *dialog_list;
 //static DIALOG_DATA *cur_dlg;
+
 static gint cell_height;
 
 /******************************************************************************
@@ -151,7 +152,7 @@ static void dialog_set_focus(GtkWindow *window,
  * Synopsis
  *   #include "dictlex_dialog.h"
  *
- *   void dialog_destroy(GtkObject *object, DL_DATA * dlg)
+ *   void dialog_destroy(GObject *object, DL_DATA * dlg)
  *
  * Description
  *
@@ -160,7 +161,7 @@ static void dialog_set_focus(GtkWindow *window,
  *   void
  */
 
-static void dialog_destroy(GtkObject *object,
+static void dialog_destroy(GObject *object,
 			   DIALOG_DATA *dlg)
 {
 	if (!dialog_freed)
@@ -207,7 +208,11 @@ static gint list_button_released(GtkWidget *html,
 static void add_columns(GtkTreeView *treeview)
 {
 	GtkCellRenderer *renderer;
-	GtkTreeViewColumn *column;
+	GtkTreeViewColumn *column; 
+#ifdef USE_GTK_3
+    	GtkRequisition size;  
+#endif
+    
 //	GtkTreeModel *model = gtk_tree_view_get_model(treeview);
 
 	/* column for fixed toggles */
@@ -221,10 +226,18 @@ static void add_columns(GtkTreeView *treeview)
 
 	gtk_tree_view_append_column(treeview, column);
 	/* get cell (row) height */
+#ifdef USE_GTK_3
+ 	gtk_cell_renderer_get_preferred_size (renderer,
+                                              GTK_WIDGET(treeview) ,
+                                              NULL,
+                                              &size);
+    	cell_height = size.height;
+#else
 	gtk_cell_renderer_get_size(renderer,
 				   GTK_WIDGET(treeview),
 				   NULL,
 				   NULL, NULL, NULL, &cell_height);
+#endif
 	settings.cell_height = cell_height;
 }
 
@@ -453,22 +466,22 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 			  dlg->html);
 	gtk_html_load_empty(GTK_HTML(dlg->html));
 
-	g_signal_connect(GTK_OBJECT(dlg->html),
+	g_signal_connect(G_OBJECT(dlg->html),
 			 "url_requested",
 			 G_CALLBACK(url_requested), NULL);
-	g_signal_connect(GTK_OBJECT(dlg->html), "on_url",
+	g_signal_connect(G_OBJECT(dlg->html), "on_url",
 			 G_CALLBACK(dialog_url), dlg);
-	/*g_signal_connect(GTK_OBJECT(dlg->html),
+	/*g_signal_connect(G_OBJECT(dlg->html),
 			 "button_press_event",
 			 G_CALLBACK(button_press_event), dlg);*/
 #endif
-	g_signal_connect(GTK_OBJECT(dlg->dialog), "set_focus",
+	g_signal_connect(G_OBJECT(dlg->dialog), "set_focus",
 			 G_CALLBACK(dialog_set_focus), dlg);
-	g_signal_connect(GTK_OBJECT(dlg->dialog), "destroy",
+	g_signal_connect(G_OBJECT(dlg->dialog), "destroy",
 			 G_CALLBACK(dialog_destroy), dlg);
-	g_signal_connect(GTK_OBJECT(btnSyncDL), "clicked",
+	g_signal_connect(G_OBJECT(btnSyncDL), "clicked",
 			 G_CALLBACK(on_btnSyncDL_clicked), dlg);
-	g_signal_connect(GTK_OBJECT(dlg->entry), "changed",
+	g_signal_connect(G_OBJECT(dlg->entry), "changed",
 			 G_CALLBACK(entry_changed),
 			 (DIALOG_DATA *) dlg);
 	g_signal_connect(G_OBJECT(dlg->listview),

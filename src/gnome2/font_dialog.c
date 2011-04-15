@@ -177,7 +177,7 @@ static void cancel_clicked(GtkButton * button,  gpointer data)
  *   void
  */
 
-static void dialog_destroy(GtkObject * object,  gpointer data)
+static void dialog_destroy(GObject * object,  gpointer data)
 {
 	free_font(mf);
 	mf = NULL;
@@ -239,7 +239,7 @@ static void font_set(GtkFontButton * button,
 static void no_font_toggled(GtkToggleButton * togglebutton,
 			    gpointer data)
 {
-	mf->no_font = togglebutton->active;
+	mf->no_font = gtk_toggle_button_get_active (togglebutton);
 	gtk_widget_set_sensitive(button_ok, TRUE);
 }
 
@@ -302,12 +302,12 @@ static GtkWidget *create_dialog_mod_font()
 			    "dialog_mod_font", dialog_mod_font);
 	gtk_window_set_title(GTK_WINDOW(dialog_mod_font),
 			     _("Set Module Font"));
-	GTK_WINDOW(dialog_mod_font)->type = GTK_WINDOW_TOPLEVEL;
+	//GTK_WINDOW(dialog_mod_font)->type = GTK_WINDOW_TOPLEVEL;  //FIXME: 
 	gtk_window_set_default_size(GTK_WINDOW(dialog_mod_font), 301,
 				    164);
 	gtk_window_set_resizable(GTK_WINDOW(dialog_mod_font), TRUE);
 
-	dialog_vbox21 = GTK_DIALOG(dialog_mod_font)->vbox;
+	dialog_vbox21 = gtk_dialog_get_content_area (GTK_DIALOG(dialog_mod_font));
 	g_object_set_data(G_OBJECT(dialog_mod_font),
 			  "dialog_vbox21", dialog_vbox21);
 	gtk_widget_show(dialog_vbox21);
@@ -355,9 +355,25 @@ static GtkWidget *create_dialog_mod_font()
 	gtk_box_pack_start(GTK_BOX(hbox_picker), font_button, FALSE,
 			   FALSE, 0);
 	gtk_widget_set_size_request(font_button, 240, -1);
-	gtk_font_button_set_show_size ((GtkFontButton *)font_button, FALSE);
-
-	combo_size = gtk_combo_box_entry_new_text ();
+	gtk_font_button_set_show_size ((GtkFontButton *)font_button, FALSE);  
+#ifdef USE_GTK_3
+	combo_size = gtk_combo_box_text_new_with_entry ();
+	gtk_widget_show(combo_size);
+	gtk_box_pack_start(GTK_BOX(hbox_picker), combo_size, TRUE, TRUE,
+			   0);
+	gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo_size), "+5");
+	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT (combo_size), "+4");
+	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT (combo_size), "+3");
+	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT (combo_size), "+2");
+	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT (combo_size), "+1");
+	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT (combo_size), "+0");
+	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT (combo_size), "-1");
+	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT (combo_size), "-2");
+	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT (combo_size), "-3");
+	combo_entry_size = gtk_bin_get_child (GTK_BIN (combo_size));
+	gtk_entry_set_text(GTK_ENTRY (gtk_bin_get_child (GTK_BIN (combo_size))), _("+0"));
+#else
+	 combo_size = gtk_combo_box_entry_new_text ();
 	gtk_widget_show(combo_size);
 	gtk_box_pack_start(GTK_BOX(hbox_picker), combo_size, TRUE, TRUE,
 			   0);
@@ -372,7 +388,7 @@ static GtkWidget *create_dialog_mod_font()
 	gtk_combo_box_append_text(GTK_COMBO_BOX (combo_size), "-3");
 	combo_entry_size = (GTK_WIDGET (GTK_BIN (combo_size) -> child));
 	gtk_entry_set_text(GTK_ENTRY (GTK_BIN (combo_size) -> child), _("+0"));
-
+#endif
 	checkbutton_no_font =
 	    gtk_check_button_new_with_label(_
 					    ("Use the default font for this module"));
@@ -383,7 +399,7 @@ static GtkWidget *create_dialog_mod_font()
 	gtk_box_pack_start(GTK_BOX(vbox56), checkbutton_no_font, FALSE,
 			   FALSE, 0);
 
-	dialog_action_area21 = GTK_DIALOG(dialog_mod_font)->action_area;
+	dialog_action_area21 = gtk_dialog_get_action_area (GTK_DIALOG(dialog_mod_font));
 	g_object_set_data(G_OBJECT(dialog_mod_font),
 			  "dialog_action_area21",
 			  dialog_action_area21);
@@ -401,24 +417,24 @@ static GtkWidget *create_dialog_mod_font()
 	button_cancel = gtk_button_new_from_stock(GTK_STOCK_CANCEL);
 	gtk_widget_show(button_cancel);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox1), button_cancel);
-	GTK_WIDGET_SET_FLAGS(button_cancel, GTK_CAN_DEFAULT);
+	gtk_widget_set_can_default (button_cancel, 1);
 
 	button_ok = gtk_button_new_from_stock(GTK_STOCK_OK);
 	gtk_widget_show(button_ok);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox1), button_ok);
-	GTK_WIDGET_SET_FLAGS(button_ok, GTK_CAN_DEFAULT);
+	gtk_widget_set_can_default (button_ok, 1);
 
-	g_signal_connect(GTK_OBJECT(dialog_mod_font), "destroy",
+	g_signal_connect(G_OBJECT(dialog_mod_font), "destroy",
 			 G_CALLBACK(dialog_destroy), mf);
-	g_signal_connect(GTK_OBJECT(font_button), "font_set",
+	g_signal_connect(G_OBJECT(font_button), "font_set",
 			 G_CALLBACK(font_set), mf);
-	g_signal_connect(GTK_OBJECT(checkbutton_no_font), "toggled",
+	g_signal_connect(G_OBJECT(checkbutton_no_font), "toggled",
 			 G_CALLBACK(no_font_toggled), mf);
-	g_signal_connect(GTK_OBJECT(button_ok), "clicked",
+	g_signal_connect(G_OBJECT(button_ok), "clicked",
 			 G_CALLBACK(ok_clicked), mf);
-	g_signal_connect(GTK_OBJECT(button_cancel), "clicked",
+	g_signal_connect(G_OBJECT(button_cancel), "clicked",
 			 G_CALLBACK(cancel_clicked), mf);
-	g_signal_connect(GTK_OBJECT(combo_size), "changed",
+	g_signal_connect(G_OBJECT(combo_size), "changed",
 			 G_CALLBACK(size_changed), NULL);
 
 	return dialog_mod_font;

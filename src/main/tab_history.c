@@ -218,7 +218,7 @@ GtkWidget *main_versekey_drop_down_new(gpointer data)
 	menu = gtk_menu_new();
 	item = gtk_menu_item_new_with_label(_("Clear History"));
 	gtk_widget_show(item);
-		g_signal_connect(GTK_OBJECT(item), "activate",
+		g_signal_connect(G_OBJECT(item), "activate",
 				   G_CALLBACK
 				   (on_clear_activate),
 				   NULL);
@@ -228,7 +228,7 @@ GtkWidget *main_versekey_drop_down_new(gpointer data)
 		item = gtk_menu_item_new_with_label(tab->history_list[i].verseref);
 		gtk_widget_show(item);
 		gtk_container_add(GTK_CONTAINER(menu), item);
-		g_signal_connect(GTK_OBJECT(item), "activate",
+		g_signal_connect(G_OBJECT(item), "activate",
 				   G_CALLBACK
 				   (on_menu_historyitem_activate),
 				   GINT_TO_POINTER(i));

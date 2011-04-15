@@ -203,7 +203,7 @@ void frontend_display(const char *tabs)
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.parallel_tab_item),
 				       settings.showparatab);
-	g_signal_connect(GTK_OBJECT(widgets.parallel_tab_item),
+	g_signal_connect(G_OBJECT(widgets.parallel_tab_item),
 			   "toggled",
 			   G_CALLBACK(gui_parallel_tab_activate),
 			   NULL	);
