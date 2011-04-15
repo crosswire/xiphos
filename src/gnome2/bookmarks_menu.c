@@ -88,7 +88,7 @@ static void save_treeview_to_xml_bookmarks(GtkTreeIter * iter, gchar * filename)
 	xmlNodePtr root_node = NULL;
 	xmlNodePtr cur_node = NULL;
 	xmlDocPtr root_doc;
-	xmlAttrPtr root_attr;
+//	xmlAttrPtr root_attr;
 	gchar *caption = NULL;
 	gchar *key = NULL;
 	gchar *module = NULL;
@@ -103,7 +103,7 @@ static void save_treeview_to_xml_bookmarks(GtkTreeIter * iter, gchar * filename)
 	if (root_doc != NULL) {
 		root_node = xmlNewNode(NULL, (const xmlChar *)
 				       "SwordBookmarks");
-		root_attr =
+		//root_attr =
 		    xmlNewProp(root_node, (const xmlChar *) "syntaxVersion",
 			       (const xmlChar *) "1");
 		xmlDocSetRootElement(root_doc, root_node);

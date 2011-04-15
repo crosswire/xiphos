@@ -509,8 +509,7 @@ view_source_dialog (GtkhtmlEditor *editor,
 
 	dialog = gtk_dialog_new_with_buttons (
 		title, GTK_WINDOW (editor),
-		GTK_DIALOG_DESTROY_WITH_PARENT |
-		GTK_DIALOG_NO_SEPARATOR,
+		GTK_DIALOG_DESTROY_WITH_PARENT,
 		GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
 		NULL);
 
