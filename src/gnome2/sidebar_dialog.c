@@ -136,7 +136,7 @@ void gui_attach_detach_sidebar(void)
  *   void
  */
 
-static void on_dialog_destroy(GtkObject *object, gpointer user_data)
+static void on_dialog_destroy(GObject *object, gpointer user_data)
 {
 	/* we need the if to prevent a loop */
 	if (!settings.docked)

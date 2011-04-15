@@ -100,7 +100,7 @@ create_menu1(void)
 	item =gtk_image_menu_item_new_from_stock  ("gtk-copy",
                                                         accel_group);
 	gtk_widget_show(item);
-	g_signal_connect(GTK_OBJECT(item), "clicked",
+	g_signal_connect(G_OBJECT(item), "clicked",
 			   G_CALLBACK  (on_copy_activate),
 			  NULL);
 	gtk_container_add(GTK_CONTAINER(menu), item);
@@ -243,7 +243,7 @@ gui_create_about_modules(void)
 	gtk_widget_show(text_html);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow30), text_html);
 
-	g_signal_connect(GTK_OBJECT(text_html),"button_release_event",
+	g_signal_connect(G_OBJECT(text_html),"button_release_event",
 				G_CALLBACK(on_button_release_event),
 				NULL);
 #endif
@@ -271,7 +271,7 @@ gui_create_about_modules(void)
 #else
 	GTK_WIDGET_SET_FLAGS(button, GTK_CAN_DEFAULT);
 #endif
-	g_signal_connect(GTK_OBJECT(button), "clicked",
+	g_signal_connect(G_OBJECT(button), "clicked",
 			   G_CALLBACK(about_modules_ok), NULL);
 	return dialog_about_mods;
 

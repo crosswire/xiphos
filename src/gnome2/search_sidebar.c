@@ -100,7 +100,7 @@ static void on_rrbUseBounds_toggled(GtkToggleButton * togglebutton,
 				    gpointer user_data)
 {
 	main_init_sidebar_search_backend();
-	if (togglebutton->active) {
+	if (gtk_toggle_button_get_active (togglebutton)) {
 		gtk_widget_show(ss.frame5);
 	} else {
 		gtk_widget_hide(ss.frame5);
@@ -394,16 +394,24 @@ void gui_create_search_sidebar(void)
 			 (GtkAttachOptions) (GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
 	gtk_misc_set_alignment(GTK_MISC(label2), 1.0, 0.5);
-
+   
+#ifdef USE_GTK_3
+	ss.entryLower = gtk_combo_box_text_new_with_entry();
+#else	                                                                    
 	ss.entryLower = gtk_combo_box_entry_new_text();
+#endif	
 	gtk_widget_show(ss.entryLower);
 	gtk_table_attach(GTK_TABLE(table1), ss.entryLower, 1, 2, 0, 1,
 			 (GtkAttachOptions) (GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
 	gtk_widget_set_size_request(ss.entryLower, 114, 22);
 //	gtk_entry_set_text(GTK_ENTRY(ss.entryLower), _("Genesis"));
-
-	ss.entryUpper = gtk_combo_box_entry_new_text();
+                           
+#ifdef USE_GTK_3
+	ss.entryUpper = gtk_combo_box_text_new_with_entry();  
+#else
+	ss.entryUpper  = gtk_combo_box_entry_new_text();
+#endif		                                                                    
 	gtk_widget_show(ss.entryUpper);
 	gtk_table_attach(GTK_TABLE(table1), ss.entryUpper, 1, 2, 1, 2,
 			 (GtkAttachOptions) (GTK_FILL),
@@ -412,16 +420,16 @@ void gui_create_search_sidebar(void)
 //	gtk_entry_set_text(GTK_ENTRY(ss.entryUpper), _("Revelation"));
 
 
-	g_signal_connect(GTK_OBJECT(ss.rrbUseBounds),
+	g_signal_connect(G_OBJECT(ss.rrbUseBounds),
 			 "toggled",
 			 G_CALLBACK(on_rrbUseBounds_toggled),
 			 NULL);
-	g_signal_connect(GTK_OBJECT(remember_search), "clicked",
+	g_signal_connect(G_OBJECT(remember_search), "clicked",
 			 G_CALLBACK(on_search_button_clicked), NULL);
 
-	g_signal_connect(GTK_OBJECT(ss.entrySearch), "activate",
+	g_signal_connect(G_OBJECT(ss.entrySearch), "activate",
 			 G_CALLBACK(on_search_button_clicked), NULL);
 
-	g_signal_connect(GTK_OBJECT(ss.advanced_search), "clicked",
+	g_signal_connect(G_OBJECT(ss.advanced_search), "clicked",
 			 G_CALLBACK(main_open_search_dialog), NULL);
 }

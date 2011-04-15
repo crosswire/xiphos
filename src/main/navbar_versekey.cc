@@ -433,7 +433,7 @@ void on_verse_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 void main_navbar_versekey_set(NAVBAR_VERSEKEY navbar, const char * key)
 {
 	char *tmpbuf = NULL;
-	int book;
+	//int book;
 	VerseKey vkey;
 	char *num;
 
@@ -443,11 +443,11 @@ void main_navbar_versekey_set(NAVBAR_VERSEKEY navbar, const char * key)
 	vkey.AutoNormalize(1);
 	vkey = key;
 
-	if ((backend->module_has_testament(navbar.module_name->str, 1))
+	/*if ((backend->module_has_testament(navbar.module_name->str, 1))
 				&& (vkey.Testament() == 2))
 		book = 39 + vkey.Book();
 	else
-		book = vkey.Book();
+		book = vkey.Book();*/
 
 
 	tmpbuf = g_strdup_printf("<b>%s</b>", vkey.getBookName());
@@ -519,7 +519,7 @@ GtkWidget *main_versekey_drop_down_verse_menu(NAVBAR_VERSEKEY navbar,
 			select_item = gtk_menu_item_new_with_label(num);
 			gtk_widget_show(select_item);
 			gtk_menu_shell_append(menu_shell, select_item);
-			g_signal_connect(GTK_OBJECT(select_item), "activate",
+			g_signal_connect(G_OBJECT(select_item), "activate",
 				   G_CALLBACK
 				   (on_verse_menu_select),
 				   GINT_TO_POINTER(i));
@@ -527,7 +527,7 @@ GtkWidget *main_versekey_drop_down_verse_menu(NAVBAR_VERSEKEY navbar,
 			item = gtk_menu_item_new_with_label(num);
 			gtk_widget_show(item);
 			gtk_menu_shell_append(menu_shell, item);
-			g_signal_connect(GTK_OBJECT(item), "activate",
+			g_signal_connect(G_OBJECT(item), "activate",
 				   G_CALLBACK
 				   (on_verse_menu_select),
 				   GINT_TO_POINTER(i));
@@ -586,7 +586,7 @@ GtkWidget *main_versekey_drop_down_chapter_menu(NAVBAR_VERSEKEY navbar,
 			select_item = gtk_menu_item_new_with_label(num);
 			gtk_widget_show(select_item);
 			gtk_menu_shell_append(menu_shell, select_item);
-			g_signal_connect(GTK_OBJECT(select_item), "activate",
+			g_signal_connect(G_OBJECT(select_item), "activate",
 				   G_CALLBACK
 				   (on_chapter_menu_select),
 				   GINT_TO_POINTER(i));
@@ -594,7 +594,7 @@ GtkWidget *main_versekey_drop_down_chapter_menu(NAVBAR_VERSEKEY navbar,
 			item = gtk_menu_item_new_with_label(num);
 			gtk_widget_show(item);
 			gtk_menu_shell_append(menu_shell, item);
-			g_signal_connect(GTK_OBJECT(item), "activate",
+			g_signal_connect(G_OBJECT(item), "activate",
 				   G_CALLBACK
 				   (on_chapter_menu_select),
 				   GINT_TO_POINTER(i));
@@ -667,7 +667,7 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar,
 				select_item = gtk_menu_item_new_with_label(book);
 				gtk_widget_show(select_item);
 				gtk_menu_shell_append(menu_shell, select_item);
-				g_signal_connect(GTK_OBJECT(select_item), "activate",
+				g_signal_connect(G_OBJECT(select_item), "activate",
 					   G_CALLBACK
 					   (on_ot_book_menu_select),
 					   GINT_TO_POINTER(i));
@@ -675,7 +675,7 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar,
 				item = gtk_menu_item_new_with_label(book);
 				gtk_widget_show(item);
 				gtk_menu_shell_append(menu_shell, item);
-				g_signal_connect(GTK_OBJECT(item), "activate",
+				g_signal_connect(G_OBJECT(item), "activate",
 					   G_CALLBACK
 					   (on_ot_book_menu_select),
 					   GINT_TO_POINTER(i));
@@ -705,7 +705,7 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar,
 				select_item = gtk_menu_item_new_with_label(book);
 				gtk_widget_show(select_item);
 				gtk_menu_shell_append(menu_shell, select_item);
-				g_signal_connect(GTK_OBJECT(select_item), "activate",
+				g_signal_connect(G_OBJECT(select_item), "activate",
 					   G_CALLBACK
 					   (on_nt_book_menu_select),
 					   GINT_TO_POINTER(i));
@@ -713,7 +713,7 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar,
 				item = gtk_menu_item_new_with_label(book);
 				gtk_widget_show(item);
 				gtk_menu_shell_append(menu_shell, item);
-				g_signal_connect(GTK_OBJECT(item), "activate",
+				g_signal_connect(G_OBJECT(item), "activate",
 					   G_CALLBACK
 					   (on_nt_book_menu_select),
 					   GINT_TO_POINTER(i));

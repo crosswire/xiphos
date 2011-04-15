@@ -220,7 +220,7 @@ void _global_option_main_pane(GtkMenuItem * menuitem, const gchar * option)
 					     mod,
 					     key);
 		main_save_module_options (mod, (gchar*) option,
-					 GTK_CHECK_MENU_ITEM (menuitem)->active,
+					 gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM (menuitem)),
 					 is_dialog);
 		if (is_dialog) {
 			/* show the change */
@@ -574,9 +574,9 @@ G_MODULE_EXPORT void on_verse_per_line_activate (GtkCheckMenuItem * menuitem, gp
 				     settings.MainWindowModule,
 				     settings.currentverse);
 
-	settings.versestyle = menuitem->active;
+	settings.versestyle = gtk_check_menu_item_get_active (menuitem);
 	save_conf_file_item(file, settings.MainWindowModule, "style",
-			    (menuitem->active
+			    (gtk_check_menu_item_get_active (menuitem)
 			     ? "verse"
 			     : "paragraph"));
 	if (settings.havebible) {
@@ -1456,7 +1456,7 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 
 	if (mod_name && (modtype == TEXT_TYPE)) {
 	    	gtk_widget_show (item);
-		GTK_CHECK_MENU_ITEM (item)->active = settings.versestyle;
+		gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (item), settings.versestyle);
 	}
 
     	item = glade_xml_get_widget (gxml, "words_of_christ_in_red");
@@ -1465,7 +1465,7 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 	if ((main_check_for_global_option ((gchar*) mod_name, "GBFRedLetterWords")) ||
 	    (main_check_for_global_option ((gchar*) mod_name, "OSISRedLetterWords"))) {
 		gtk_widget_show(item);
-		GTK_CHECK_MENU_ITEM(item)->active = ops->words_in_red;
+		gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), ops->words_in_red);
 	}
 
     	item = glade_xml_get_widget (gxml, "strong's_numbers");
@@ -1475,7 +1475,7 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 	    (main_check_for_global_option((gchar*) mod_name, "ThMLStrongs")) ||
 	    (main_check_for_global_option((gchar*) mod_name, "OSISStrongs"))) {
 		gtk_widget_show(item);
-		GTK_CHECK_MENU_ITEM(item)->active = ops->strongs;
+		gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), ops->strongs);
 	}
 
     	item = glade_xml_get_widget (gxml, "morphological_tags");
@@ -1485,7 +1485,7 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 	    main_check_for_global_option((gchar*) mod_name, "ThMLMorph") ||
 	    main_check_for_global_option((gchar*) mod_name, "OSISMorph")) {
 		gtk_widget_show(item);
-		GTK_CHECK_MENU_ITEM(item)->active = ops->morphs;
+		gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), ops->morphs);
 	}
 
     	item = glade_xml_get_widget (gxml, "footnotes");
@@ -1495,7 +1495,7 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 	    main_check_for_global_option((gchar*) mod_name, "ThMLFootnotes") ||
 	    main_check_for_global_option((gchar*) mod_name, "OSISFootnotes")) {
 		gtk_widget_show(item);
-		GTK_CHECK_MENU_ITEM(item)->active = ops->footnotes;
+		gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), ops->footnotes);
 	}
 
     	item = glade_xml_get_widget (gxml, "greek_accents");
@@ -1503,7 +1503,7 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 
 	if (main_check_for_global_option((gchar*) mod_name, "UTF8GreekAccents")) {
 		gtk_widget_show(item);
-		GTK_CHECK_MENU_ITEM(item)->active = ops->greekaccents;
+		gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), ops->greekaccents);
 	}
 
     	item = glade_xml_get_widget (gxml, "lemmas");
@@ -1512,7 +1512,7 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 	if (main_check_for_global_option((gchar*) mod_name, "ThMLLemma") ||
 	    main_check_for_global_option((gchar*) mod_name, "OSISLemma")) {
 		gtk_widget_show(item);
-		GTK_CHECK_MENU_ITEM(item)->active = ops->lemmas;
+		gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), ops->lemmas);
 	}
 
     	item = glade_xml_get_widget (gxml, "scripture_cross-references");
@@ -1521,7 +1521,7 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 	if (main_check_for_global_option((gchar*) mod_name, "ThMLScripref") ||
 	    main_check_for_global_option((gchar*) mod_name, "OSISScripref")) {
 		gtk_widget_show(item);
-		GTK_CHECK_MENU_ITEM(item)->active = ops->scripturerefs;
+		gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), ops->scripturerefs);
 	}
 
     	item = glade_xml_get_widget (gxml, "hebrew_vowel_points");
@@ -1529,7 +1529,7 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 
 	if (main_check_for_global_option((gchar*) mod_name, "UTF8HebrewPoints")) {
 		gtk_widget_show(item);
-		GTK_CHECK_MENU_ITEM(item)->active = ops->hebrewpoints;
+		gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), ops->hebrewpoints);
 	}
 
     	item = glade_xml_get_widget (gxml, "hebrew_cantillation");
@@ -1537,7 +1537,7 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 
 	if (main_check_for_global_option ((gchar*) mod_name, "UTF8Cantillation")) {
 		gtk_widget_show (item);
-		GTK_CHECK_MENU_ITEM (item)->active = ops->hebrewcant;
+		gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (item), ops->hebrewcant);
 	}
 
     	item = glade_xml_get_widget (gxml, "headings");
@@ -1546,11 +1546,11 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 	if (main_check_for_global_option ((gchar*) mod_name, "ThMLHeadings") ||
 	    main_check_for_global_option ((gchar*) mod_name, "OSISHeadings")) {
 		gtk_widget_show (item);
-		GTK_CHECK_MENU_ITEM (item)->active = ops->headings;
+		gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (item), ops->headings);
 	}
 
     	item = glade_xml_get_widget (gxml, "transliteration");
-	GTK_CHECK_MENU_ITEM (item)->active = ops->transliteration;
+	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (item), ops->transliteration);
 
     	item = glade_xml_get_widget (gxml, "variants");
     	gtk_widget_hide (item);
@@ -1558,11 +1558,11 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 	if (main_check_for_global_option ((gchar*) mod_name, "ThMLVariants")) {
 		gtk_widget_show (item);
 		item = glade_xml_get_widget (gxml, "primary_reading");
-			GTK_CHECK_MENU_ITEM(item)->active = ops->variants_primary;
+			gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), ops->variants_primary);
 		item = glade_xml_get_widget (gxml, "secondary_reading");
-			GTK_CHECK_MENU_ITEM(item)->active = ops->variants_secondary;
+			gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), ops->variants_secondary);
 		item = glade_xml_get_widget (gxml, "all_readings");
-			GTK_CHECK_MENU_ITEM (item)->active = ops->variants_all;
+			gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (item), ops->variants_all);
 	}
 
     	item = glade_xml_get_widget (gxml, "image_content");
@@ -1570,7 +1570,7 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 
 	if (ops->image_content != -1) {
 		gtk_widget_show (item);
-		GTK_CHECK_MENU_ITEM (item)->active = ops->image_content;
+		gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (item), ops->image_content);
 	}
 
     	item = glade_xml_get_widget (gxml, "respect_font_faces");
@@ -1578,7 +1578,7 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 
 	if (ops->respect_font_faces != -1) {
 		gtk_widget_show(item);
-		GTK_CHECK_MENU_ITEM (item)->active = ops->respect_font_faces;
+		gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (item), ops->respect_font_faces);
 	}
 
     	item = glade_xml_get_widget (gxml, "commentary_by_chapter");
@@ -1586,11 +1586,11 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 
     	if ((modtype == COMMENTARY_TYPE) || (modtype == PERCOM_TYPE)) {
     		gtk_widget_show (item);
-   		GTK_CHECK_MENU_ITEM (item)->active = ops->commentary_by_chapter;
+   		gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (item), ops->commentary_by_chapter);
 	}
 
     	item = glade_xml_get_widget (gxml, "doublespace");
-	GTK_CHECK_MENU_ITEM (item)->active = ops->doublespace;
+	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (item), ops->doublespace);
 #ifndef USE_GTKMOZEMBED
     	gtk_widget_hide (item);
 #endif
@@ -1784,7 +1784,7 @@ GtkWidget * _create_popup_menu (const gchar * mod_name, DIALOG_DATA * d)
 	case PERCOM_TYPE:
 		gtk_widget_show(export_);
    		gtk_widget_show (open_edit);
-		g_signal_connect (GTK_OBJECT(open_edit),
+		g_signal_connect (G_OBJECT(open_edit),
 			 	"activate",
 			 	G_CALLBACK (on_edit_percomm_activate),
 			 	(gchar*) (is_dialog ? d->mod_name : mod_name));
@@ -1800,7 +1800,7 @@ GtkWidget * _create_popup_menu (const gchar * mod_name, DIALOG_DATA * d)
 		break;
 	case PRAYERLIST_TYPE:
    		gtk_widget_show (open_edit);
-		g_signal_connect (GTK_OBJECT(open_edit),
+		g_signal_connect (G_OBJECT(open_edit),
 			 	"activate",
 			 	G_CALLBACK (on_edit_prayerlist_activate),
 			 	(gchar*) (is_dialog ? d->mod_name : mod_name));

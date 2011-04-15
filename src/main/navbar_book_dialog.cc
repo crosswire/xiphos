@@ -319,7 +319,7 @@ GtkWidget *main_navbar_book_dialog_drop_down_new(gpointer data)
 	tmpbuf = be->treekey_get_local_name(offset);
 	item = gtk_menu_item_new_with_label((gchar *) tmpbuf);
 	gtk_widget_show(item);
-	g_signal_connect(GTK_OBJECT(item), "activate",
+	g_signal_connect(G_OBJECT(item), "activate",
 			 G_CALLBACK(on_menu_select),
 			GINT_TO_POINTER(offset) );
 	gtk_container_add(GTK_CONTAINER(menu), item);
@@ -331,7 +331,7 @@ GtkWidget *main_navbar_book_dialog_drop_down_new(gpointer data)
 		tmpbuf = be->treekey_get_local_name(offset);
 		item = gtk_menu_item_new_with_label((gchar *) tmpbuf);
 		gtk_widget_show(item);
-		g_signal_connect(GTK_OBJECT(item), "activate",
+		g_signal_connect(G_OBJECT(item), "activate",
 				 G_CALLBACK(on_menu_select),
 				 GINT_TO_POINTER(offset));
 		gtk_container_add(GTK_CONTAINER(menu), item);
