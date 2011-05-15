@@ -781,21 +781,22 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule)
 		    [key->Verse()];
 
 		// use the module cache rather than re-accessing Sword.
-		if (!cVerse.CacheIsValid(cache_flags)) {
-			if ((backend->module_type(imodule.Name()) == PERCOM_TYPE) ||
-			    (backend->module_type(imodule.Name()) == PRAYERLIST_TYPE))
+		// but editable personal commentaries don't use the cache.
+		if (!cVerse.CacheIsValid(cache_flags) && 
+		    (backend->module_type(imodule.Name()) != PERCOM_TYPE)) {
+			rework = g_string_new(strongs_or_morph
+					      ? block_render(imodule.RenderText())
+					      : imodule.RenderText());
+			rework = CleanupContent(rework, ops, imodule.Name());
+			cVerse.SetText(rework->str, cache_flags);
+		} else {
+			if (backend->module_type(imodule.Name()) == PERCOM_TYPE)
 				rework = g_string_new(strongs_or_morph
 						      ? block_render(imodule.getRawEntry())
 						      : imodule.getRawEntry());
 			else
-				rework = g_string_new(strongs_or_morph
-						      ? block_render(imodule.RenderText())
-						      : imodule.RenderText());
-			rework = CleanupContent(rework, ops, imodule.Name());
-			cVerse.SetText(rework->str, cache_flags);
-		} else
-			rework = g_string_new(cVerse.GetText());
-
+				rework = g_string_new(cVerse.GetText());
+		}
 		swbuf.append("<tr>");
 
 		// insert verse numbers

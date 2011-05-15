@@ -1,3 +1,7 @@
+2011-05-15  karl <charcoal@users.sf.net>
+
+	* fix #3302627 undo module cache damage to pers.comm. update.
+
 2010-11-06  karl <charcoal@users.sf.net>
 
 	* fix handling of real n="X" content for notes/xrefs.
