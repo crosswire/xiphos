@@ -196,9 +196,7 @@ void main_save_note(const gchar * module_name,
 		    note_str));
 	backend->save_note_entry(module_name, key_str, note_str);
 
-	if ((!strcmp(settings.CommWindowModule, module_name)) &&
-	    (!strcmp(settings.currentverse, key_str)))
-		main_display_commentary(module_name, key_str);
+	main_display_commentary(module_name, settings.currentverse);
 }
 
 /******************************************************************************
