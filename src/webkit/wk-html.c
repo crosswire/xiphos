@@ -137,7 +137,6 @@ static gboolean button_press_handler (GtkWidget *widget,
 
 static void link_handler (GtkWidget *widget,
 			      gchar     *title,
-                          
 			      gchar     *uri,
 			      gpointer   user_data)
 {                              
@@ -152,8 +151,11 @@ static void link_handler (GtkWidget *widget,
 		g_free(x_uri);
 		x_uri = NULL;
 	}
-	if (uri)
+	if (uri) {
 		x_uri = g_strdup(uri);
+		in_url = 1;
+	} else 
+		in_url = 0;
 	
 	g_signal_emit(widget,
 		      signals[URI_SELECTED],
