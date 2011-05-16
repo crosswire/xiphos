@@ -25,7 +25,8 @@
 
 #include <gtk/gtk.h>
 #include "../xiphos_html/xiphos_html.h"
-
+                                  
+#include "gui/display_info.h"
 
 #include "main/previewer.h"
 #include "main/sword.h"
