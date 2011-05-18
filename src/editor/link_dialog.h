@@ -28,16 +28,15 @@ extern "C"
 #endif
 
 #include <config.h>
-#include <glib.h>
 
 #include "editor/slib-editor.h"
 
 
 void editor_link_dialog (EDITOR *e);
-void entry_verse_changed_cb(GObject *object, EDITOR *e);
-void button_ok_clicked_cb(GObject *object, EDITOR *e);
-void button_test_clicked_cb(GObject *object, gpointer user_data);
-void button_cancel_clicked_cb(GObject *object, gpointer user_data);
+void entry_verse_changed_cb(GtkObject *object, EDITOR *e);
+void button_ok_clicked_cb(GtkObject *object, EDITOR *e);
+void button_test_clicked_cb(GtkObject *object, gpointer user_data);
+void button_cancel_clicked_cb(GtkObject *object, gpointer user_data);
 
 
 #ifdef __cplusplus

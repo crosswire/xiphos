@@ -26,9 +26,7 @@
 #endif
 
 #include <gtk/gtk.h>
-#ifdef USE_GTK_3
 #include <gtk/gtkwindow.h>
-#endif
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
 #include "main/sword.h"
@@ -158,7 +156,6 @@ static Icon *icon_new(ESplash * splash, GdkPixbuf * image_pixbuf)
 	return icon;
 }
 
-#ifndef USE_GTK_3
 static void icon_free(Icon * icon)
 {
 	g_object_unref(icon->dark_pixbuf);
@@ -166,7 +163,7 @@ static void icon_free(Icon * icon)
 
 	g_free(icon);
 }
-#endif
+
 /* Icon layout management.  */
 
 static void layout_icons(ESplash * splash)
@@ -226,8 +223,6 @@ static void schedule_relayout(ESplash * splash)
 
 /* GtkObject methods.  */
 
-
-#ifndef USE_GTK_3
 static void impl_destroy(GtkObject * object)
 {
 	ESplash *splash;
@@ -253,7 +248,8 @@ static void impl_destroy(GtkObject * object)
 		g_source_remove(priv->layout_idle_id);
 
 	g_free(priv);
-} 
+}
+
 static void class_init(ESplashClass * klass)
 {
 	GtkObjectClass *object_class;
@@ -263,7 +259,6 @@ static void class_init(ESplashClass * klass)
 
 	parent_class = g_type_class_ref(gtk_window_get_type());
 }
-#endif
 
 static void init(ESplash * splash)
 {
@@ -303,19 +298,18 @@ button_press_event(GtkWidget * widget, GdkEventButton * event,
 gboolean
 expose_event_callback (GtkWidget *widget, GdkEventExpose *event, gpointer data)
 {
-#ifndef USE_GTK_3
 	ESplashPrivate *priv = (ESplashPrivate *) data;
 	GtkWidget *canvas = widget;
 	GList *p;
 
 	/* draws main image */
-	gdk_draw_pixbuf(gtk_widget_get_window (canvas),
-			NULL,
+	gdk_draw_pixbuf(canvas->window,
+			canvas->style->fg_gc[GTK_WIDGET_STATE(canvas)],
 			GDK_PIXBUF(priv->splash_image_pixbuf),
 			0, 0, 0, 0,
 			gdk_pixbuf_get_width(priv->splash_image_pixbuf),
 			gdk_pixbuf_get_height(priv->splash_image_pixbuf),
-			2,
+			GDK_RGB_DITHER_MAX,
 			0, 0);
 
 	/* draws each of the small icons */
@@ -324,8 +318,8 @@ expose_event_callback (GtkWidget *widget, GdkEventExpose *event, gpointer data)
 
 		icon = (Icon *) p->data;
 
-		gdk_draw_pixbuf(gtk_widget_get_window (canvas),
-				NULL,
+		gdk_draw_pixbuf(canvas->window,
+				canvas->style->fg_gc[GTK_WIDGET_STATE(canvas)],
 				GDK_PIXBUF(icon->light ?
 					   icon->light_pixbuf : icon->dark_pixbuf),
 				0, 0,
@@ -333,12 +327,10 @@ expose_event_callback (GtkWidget *widget, GdkEventExpose *event, gpointer data)
 				icon->y,
 				gdk_pixbuf_get_width(icon->light_pixbuf),
 				gdk_pixbuf_get_height(icon->light_pixbuf),
-				2,
+				GDK_RGB_DITHER_MAX,
 				0, 0);
 	}
 	return TRUE;
-#endif
-    return FALSE;
 }
 
 
@@ -393,7 +385,7 @@ e_splash_construct(ESplash * splash, GdkPixbuf * splash_image_pixbuf)
 	gtk_widget_show(GTK_WIDGET(priv->progressbar));
 	gtk_box_pack_start((GtkBox *)vbox, GTK_WIDGET(priv->progressbar),FALSE,TRUE,0);
 
-	g_signal_connect(G_OBJECT(splash), "button-press-event",
+	g_signal_connect(GTK_OBJECT(splash), "button-press-event",
 			 G_CALLBACK(button_press_event), splash);
 
 	gtk_window_set_decorated(GTK_WINDOW(splash), FALSE);
@@ -520,8 +512,8 @@ e_splash_set_icon_highlight(ESplash * splash,
 	rectangle.height = gdk_pixbuf_get_height(icon->light_pixbuf);
 
 	canvas = GTK_WIDGET(priv->canvas);
-	gdk_window_invalidate_rect(gtk_widget_get_window (canvas), &rectangle, TRUE);
-	gdk_window_process_updates(gtk_widget_get_window (canvas), TRUE);
+	gdk_window_invalidate_rect(canvas->window, &rectangle, TRUE);
+	gdk_window_process_updates(canvas->window, TRUE);
 }
 
 E_MAKE_TYPE(e_splash, "ESplash", ESplash, class_init, init, PARENT_TYPE)
