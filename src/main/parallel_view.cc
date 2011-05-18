@@ -221,7 +221,7 @@ void main_set_parallel_module_global_options(GtkCheckMenuItem * menuitem,
 					   gpointer user_data)
 {
 	gchar *option = (gchar*) user_data;
-	gboolean choice = gtk_check_menu_item_get_active (menuitem);
+	gboolean choice = menuitem->active;
 
 
 	if (!strcmp(option, "Strong's Numbers")) {
@@ -381,8 +381,8 @@ void main_load_g_ops_parallel(GtkWidget *menu)
 	gtk_widget_show(item);
 	gtk_container_add(GTK_CONTAINER(menu), item);
 
-	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item),settings.parallel_strongs);
-	g_signal_connect(G_OBJECT(item), "activate",
+	GTK_CHECK_MENU_ITEM(item)->active = settings.parallel_strongs;
+	g_signal_connect(GTK_OBJECT(item), "activate",
 	    G_CALLBACK(main_set_parallel_module_global_options),
 			  (char*) "Strong's Numbers");
 
@@ -391,8 +391,8 @@ void main_load_g_ops_parallel(GtkWidget *menu)
 	gtk_widget_show(item);
 	gtk_container_add(GTK_CONTAINER(menu), item);
 
-	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), settings.parallel_footnotes);
-	g_signal_connect(G_OBJECT(item), "activate",
+	GTK_CHECK_MENU_ITEM(item)->active = settings.parallel_footnotes;
+	g_signal_connect(GTK_OBJECT(item), "activate",
 	    G_CALLBACK(main_set_parallel_module_global_options),
 			   (char*) "Footnotes");
 
@@ -401,8 +401,8 @@ void main_load_g_ops_parallel(GtkWidget *menu)
 	gtk_widget_show(item);
 	gtk_container_add(GTK_CONTAINER(menu), item);
 
-	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), settings.parallel_morphs);
-	g_signal_connect(G_OBJECT(item), "activate",
+	GTK_CHECK_MENU_ITEM(item)->active = settings.parallel_morphs;
+	g_signal_connect(GTK_OBJECT(item), "activate",
 	    G_CALLBACK(main_set_parallel_module_global_options),
 			  (char*)  "Morphological Tags");
 
@@ -411,8 +411,8 @@ void main_load_g_ops_parallel(GtkWidget *menu)
 	gtk_widget_show(item);
 	gtk_container_add(GTK_CONTAINER(menu), item);
 
-	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), settings.parallel_hebrewpoints);
-	g_signal_connect(G_OBJECT(item), "activate",
+	GTK_CHECK_MENU_ITEM(item)->active = settings.parallel_hebrewpoints;
+	g_signal_connect(GTK_OBJECT(item), "activate",
 	    G_CALLBACK(main_set_parallel_module_global_options),
 			  (char*)  "Hebrew Vowel Points");
 
@@ -421,8 +421,8 @@ void main_load_g_ops_parallel(GtkWidget *menu)
 	gtk_widget_show(item);
 	gtk_container_add(GTK_CONTAINER(menu), item);
 
-	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), settings.parallel_cantillationmarks);
-	g_signal_connect(G_OBJECT(item), "activate",
+	GTK_CHECK_MENU_ITEM(item)->active = settings.parallel_cantillationmarks;
+	g_signal_connect(GTK_OBJECT(item), "activate",
 	    G_CALLBACK(main_set_parallel_module_global_options),
 			   (char*) "Hebrew Cantillation");
 
@@ -431,8 +431,8 @@ void main_load_g_ops_parallel(GtkWidget *menu)
 	gtk_widget_show(item);
 	gtk_container_add(GTK_CONTAINER(menu), item);
 
-	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), settings.parallel_greekaccents);
-	g_signal_connect(G_OBJECT(item), "activate",
+	GTK_CHECK_MENU_ITEM(item)->active = settings.parallel_greekaccents;
+	g_signal_connect(GTK_OBJECT(item), "activate",
 	    G_CALLBACK(main_set_parallel_module_global_options),
 			  (char*)  "Greek Accents");
 
@@ -441,8 +441,8 @@ void main_load_g_ops_parallel(GtkWidget *menu)
 	gtk_widget_show(item);
 	gtk_container_add(GTK_CONTAINER(menu), item);
 
-	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), settings.parallel_crossref);
-	g_signal_connect(G_OBJECT(item), "activate",
+	GTK_CHECK_MENU_ITEM(item)->active = settings.parallel_crossref;
+	g_signal_connect(GTK_OBJECT(item), "activate",
 	    G_CALLBACK(main_set_parallel_module_global_options),
 			   (char*) "Cross-references");
 
@@ -451,8 +451,8 @@ void main_load_g_ops_parallel(GtkWidget *menu)
 	gtk_widget_show(item);
 	gtk_container_add(GTK_CONTAINER(menu), item);
 
-	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), settings.parallel_lemmas);
-	g_signal_connect(G_OBJECT(item), "activate",
+	GTK_CHECK_MENU_ITEM(item)->active = settings.parallel_lemmas;
+	g_signal_connect(GTK_OBJECT(item), "activate",
 	    G_CALLBACK(main_set_parallel_module_global_options),
 			  (char*) "Lemmas");
 
@@ -461,8 +461,8 @@ void main_load_g_ops_parallel(GtkWidget *menu)
 	gtk_widget_show(item);
 	gtk_container_add(GTK_CONTAINER(menu), item);
 
-	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), settings.parallel_headings);
-	g_signal_connect(G_OBJECT(item), "activate",
+	GTK_CHECK_MENU_ITEM(item)->active = settings.parallel_headings;
+	g_signal_connect(GTK_OBJECT(item), "activate",
 	    G_CALLBACK(main_set_parallel_module_global_options),
 			  (char*)  "Headings");
 
@@ -475,8 +475,8 @@ void main_load_g_ops_parallel(GtkWidget *menu)
 #endif
 	gtk_container_add(GTK_CONTAINER(menu), item);
 
-	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), settings.parallel_segmentation);
-	g_signal_connect(G_OBJECT(item), "activate",
+	GTK_CHECK_MENU_ITEM(item)->active = settings.parallel_segmentation;
+	g_signal_connect(GTK_OBJECT(item), "activate",
 	    G_CALLBACK(main_set_parallel_module_global_options),
 			  (char*) "Morpheme Segmentation" );
 
@@ -485,8 +485,8 @@ void main_load_g_ops_parallel(GtkWidget *menu)
 	gtk_widget_show(item);
 	gtk_container_add(GTK_CONTAINER(menu), item);
 
-	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), settings.parallel_red_words);
-	g_signal_connect(G_OBJECT(item), "activate",
+	GTK_CHECK_MENU_ITEM(item)->active = settings.parallel_red_words;
+	g_signal_connect(GTK_OBJECT(item), "activate",
 	    G_CALLBACK(main_set_parallel_module_global_options),
 			   (char*) "Words of Christ in Red");
 
@@ -495,8 +495,8 @@ void main_load_g_ops_parallel(GtkWidget *menu)
 	gtk_widget_show(item);
 	gtk_container_add(GTK_CONTAINER(menu), item);
 
-	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), settings.parallel_transliteration);
-	g_signal_connect(G_OBJECT(item), "activate",
+	GTK_CHECK_MENU_ITEM(item)->active = settings.parallel_transliteration;
+	g_signal_connect(GTK_OBJECT(item), "activate",
 	    G_CALLBACK(main_set_parallel_module_global_options),
 			   (char*) "Transliteration");
 
@@ -513,8 +513,8 @@ void main_load_g_ops_parallel(GtkWidget *menu)
   	group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (item));
 	gtk_widget_show(item);
 	gtk_container_add(GTK_CONTAINER(variants_menu), item);
-	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), settings.parallel_variants_primary);
-	g_signal_connect(G_OBJECT(item), "activate",
+	GTK_CHECK_MENU_ITEM(item)->active = settings.parallel_variants_primary;
+	g_signal_connect(GTK_OBJECT(item), "activate",
 	    G_CALLBACK(main_set_parallel_module_global_options),
 			   (char*) "Primary Reading");
 
@@ -522,8 +522,8 @@ void main_load_g_ops_parallel(GtkWidget *menu)
   	group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (item));
 	gtk_widget_show(item);
 	gtk_container_add(GTK_CONTAINER(variants_menu), item);
-	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), settings.parallel_variants_secondary);
-	g_signal_connect(G_OBJECT(item), "activate",
+	GTK_CHECK_MENU_ITEM(item)->active = settings.parallel_variants_secondary;
+	g_signal_connect(GTK_OBJECT(item), "activate",
 	    G_CALLBACK(main_set_parallel_module_global_options),
 			   (char*) "Secondary Reading");
 
@@ -531,8 +531,8 @@ void main_load_g_ops_parallel(GtkWidget *menu)
   	group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (item));
 	gtk_widget_show(item);
 	gtk_container_add(GTK_CONTAINER(variants_menu), item);
-	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (item), settings.parallel_variants_all);
-	g_signal_connect(G_OBJECT(item), "activate",
+	GTK_CHECK_MENU_ITEM (item)->active = settings.parallel_variants_all;
+	g_signal_connect(GTK_OBJECT(item), "activate",
 	    G_CALLBACK(main_set_parallel_module_global_options),
 			   (char*) "All Readings");
 }
@@ -724,7 +724,7 @@ static void interpolate_parallel_display(SWBuf& text, gchar *key, gint parallel_
 	MOD_FONT **mf;
 	gboolean *is_rtol, *is_module;
 
-	if (!gtk_widget_get_realized (GTK_WIDGET(widgets.notebook_bible_parallel))) return;
+	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.notebook_bible_parallel))) return;
 
 	is_module = g_new(gboolean, parallel_count);
 	is_rtol   = g_new(gboolean, parallel_count);
@@ -855,7 +855,7 @@ void main_update_parallel_page_detached(void)
 	gint modidx, parallel_count, fraction;
 
 #ifdef USE_GTKMOZEMBED
-	if (!gtk_widget_get_realized (GTK_WIDGET(widgets.html_parallel_dialog))) return;
+	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.html_parallel_dialog))) return;
 #endif
 
 	/* how big a pile of parallels have we got? */
@@ -959,7 +959,7 @@ void main_load_menu_form_mod_list(GtkWidget * pmInt, gchar * label,
 		item =
 		    gtk_menu_item_new_with_label((gchar *) tmp->data);
 		gtk_widget_show(item);
-		g_signal_connect(G_OBJECT(item), "activate",
+		g_signal_connect(GTK_OBJECT(item), "activate",
 				   G_CALLBACK(mycallback),
 				   g_strdup((gchar *) tmp->data));
 

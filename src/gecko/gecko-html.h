@@ -22,7 +22,6 @@
 #ifndef __GECKO_HTML_H__
 #define __GECKO_HTML_H__
 
-
 #include <gtkmozembed.h>
 
 #include "gecko/gecko-print.h"

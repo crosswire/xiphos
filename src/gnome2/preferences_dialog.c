@@ -577,7 +577,7 @@ void
 on_checkbutton1_toggled(GtkToggleButton * togglebutton,
 			gpointer user_data)
 {
-	gui_tabs_on_off (gtk_toggle_button_get_active (togglebutton));
+	gui_tabs_on_off (togglebutton->active);
 /*	if (togglebutton->active) {
 		xml_set_value("Xiphos", "tabs", "browsing", "1");
 		settings.browsing = TRUE;
@@ -614,14 +614,14 @@ void
 on_checkbutton2_toggled(GtkToggleButton * togglebutton,
 			gpointer user_data)
 {
-	if (gtk_toggle_button_get_active (togglebutton))
+	if (togglebutton->active)
 		xml_set_value("Xiphos", "misc", "showtexts", "1");
 	else
 		xml_set_value("Xiphos", "misc", "showtexts", "0");
 	settings.showtexts = atoi(xml_get_value("misc", "showtexts"));
-	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(widgets.viewtexts_item),
-	    settings.showtexts);
-	gui_show_hide_texts(gtk_toggle_button_get_active (togglebutton));
+	GTK_CHECK_MENU_ITEM(widgets.viewtexts_item)->active =
+	    settings.showtexts;
+	gui_show_hide_texts(togglebutton->active);
 }
 
 /******************************************************************************
@@ -645,14 +645,14 @@ void
 on_checkbutton3_toggled(GtkToggleButton * togglebutton,
 			gpointer user_data)
 {
-	if (gtk_toggle_button_get_active (togglebutton))
+	if (togglebutton->active)
 		xml_set_value("Xiphos", "misc", "showcomms", "1");
 	else
 		xml_set_value("Xiphos", "misc", "showcomms", "0");
 	settings.showcomms = atoi(xml_get_value("misc", "showcomms"));
-	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(widgets.viewcomms_item),
-	    settings.showcomms);
-	gui_show_hide_comms(gtk_toggle_button_get_active (togglebutton));
+	GTK_CHECK_MENU_ITEM(widgets.viewcomms_item)->active =
+	    settings.showcomms;
+	gui_show_hide_comms(togglebutton->active);
 }
 
 /******************************************************************************
@@ -676,14 +676,14 @@ void
 on_checkbutton9_toggled(GtkToggleButton * togglebutton,
 			gpointer user_data)
 {
-	if (gtk_toggle_button_get_active (togglebutton))
+	if (togglebutton->active)
 		xml_set_value("Xiphos", "misc", "showpreview", "1");
 	else
 		xml_set_value("Xiphos", "misc", "showpreview", "0");
 	settings.showpreview = atoi(xml_get_value("misc", "showpreview"));
-	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(widgets.viewpreview_item),
-	    settings.showpreview);
-	gui_show_hide_preview(gtk_toggle_button_get_active (togglebutton));
+	GTK_CHECK_MENU_ITEM(widgets.viewpreview_item)->active =
+	    settings.showpreview;
+	gui_show_hide_preview(togglebutton->active);
 }
 
 /******************************************************************************
@@ -707,14 +707,14 @@ void
 on_checkbutton4_toggled(GtkToggleButton *togglebutton,
 			gpointer user_data)
 {
-	if (gtk_toggle_button_get_active (togglebutton))
+	if (togglebutton->active)
 		xml_set_value("Xiphos", "misc", "showdicts", "1");
 	else
 		xml_set_value("Xiphos", "misc", "showdicts", "0");
 	settings.showdicts = atoi(xml_get_value("misc", "showdicts"));
-	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(widgets.viewdicts_item),
-	    settings.showdicts);
-	gui_show_hide_dicts(gtk_toggle_button_get_active (togglebutton));
+	GTK_CHECK_MENU_ITEM(widgets.viewdicts_item)->active =
+	    settings.showdicts;
+	gui_show_hide_dicts(togglebutton->active);
 }
 
 /******************************************************************************
@@ -739,7 +739,7 @@ on_checkbutton10_toggled(GtkToggleButton * togglebutton,
 			 gpointer user_data)
 {
 	xml_set_value("Xiphos", "misc", "pinnedtabs",
-		      (gtk_toggle_button_get_active (togglebutton) ? "1" : "0"));
+		      (togglebutton->active ? "1" : "0"));
 	settings.linkedtabs = atoi(xml_get_value("misc", "pinnedtabs"));
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 			       (widgets.linkedtabs_item),
@@ -769,8 +769,8 @@ on_checkbutton_showparatab_toggled(GtkToggleButton * togglebutton,
 			 gpointer user_data)
 {
 	xml_set_value("Xiphos", "misc", "showparatab",
-		      (gtk_toggle_button_get_active (togglebutton) ? "1" : "0"));
-	if (gtk_toggle_button_get_active (togglebutton))
+		      (togglebutton->active ? "1" : "0"));
+	if (togglebutton->active)
 		gui_open_parallel_view_in_new_tab();
 	else
 		gui_close_passage_tab(1);
@@ -801,7 +801,7 @@ on_checkbutton11_toggled(GtkToggleButton * togglebutton,
 			 gpointer user_data)
 {
 	xml_set_value("Xiphos", "misc", "readaloud",
-		      (gtk_toggle_button_get_active (togglebutton) ? "1" : "0"));
+		      (togglebutton->active ? "1" : "0"));
 	settings.readaloud = atoi(xml_get_value("misc", "readaloud"));
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 			       (widgets.readaloud_item),
@@ -831,7 +831,7 @@ on_checkbutton12_toggled(GtkToggleButton * togglebutton,
 			 gpointer user_data)
 {
 	xml_set_value("Xiphos", "misc", "showversenum",
-		      (gtk_toggle_button_get_active (togglebutton) ? "1" : "0"));
+		      (togglebutton->active ? "1" : "0"));
 	settings.showversenum = atoi(xml_get_value("misc", "showversenum"));
 
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
@@ -862,8 +862,8 @@ on_checkbutton6_toggled(GtkToggleButton * togglebutton,
 			gpointer user_data)
 {
 	xml_set_value("Xiphos", "lexicons", "usedefaultdict",
-		      (gtk_toggle_button_get_active (togglebutton) ? "1" : "0"));
-	settings.useDefaultDict = gtk_toggle_button_get_active (togglebutton);
+		      (togglebutton->active ? "1" : "0"));
+	settings.useDefaultDict = togglebutton->active;
 }
 
 
@@ -889,8 +889,8 @@ on_checkbutton7_toggled(GtkToggleButton * togglebutton,
 			gpointer user_data)
 {
 	xml_set_value("Xiphos", "misc", "dailydevotional",
-		      (gtk_toggle_button_get_active (togglebutton) ? "1" : "0"));
-	settings.showdevotional = gtk_toggle_button_get_active (togglebutton);
+		      (togglebutton->active ? "1" : "0"));
+	settings.showdevotional = togglebutton->active;
 }
 
 
@@ -916,8 +916,8 @@ on_checkbutton8_toggled(GtkToggleButton * togglebutton,
 			gpointer user_data)
 {
 	xml_set_value("Xiphos", "misc", "splash",
-		      (gtk_toggle_button_get_active (togglebutton) ? "1" : "0"));
-	settings.showsplash = gtk_toggle_button_get_active (togglebutton);
+		      (togglebutton->active ? "1" : "0"));
+	settings.showsplash = togglebutton->active;
 }
 
 
@@ -943,8 +943,8 @@ on_checkbutton_scroll_toggled(GtkToggleButton * togglebutton,
 			      gpointer user_data)
 {
 	xml_set_value("Xiphos", "misc", "chapter-scroll",
-		      (gtk_toggle_button_get_active (togglebutton) ? "1" : "0"));
-	settings.chapter_scroll = gtk_toggle_button_get_active (togglebutton);
+		      (togglebutton->active ? "1" : "0"));
+	settings.chapter_scroll = togglebutton->active;
 }
 
 /******************************************************************************
@@ -969,8 +969,8 @@ on_checkbutton_imageresize_toggled(GtkToggleButton * togglebutton,
 				   gpointer user_data)
 {
 	xml_set_value("Xiphos", "misc", "imageresize",
-		      (gtk_toggle_button_get_active (togglebutton) ? "1" : "0"));
-	settings.imageresize =  gtk_toggle_button_get_active (togglebutton);
+		      (togglebutton->active ? "1" : "0"));
+	settings.imageresize =  togglebutton->active;
 }
 
 /******************************************************************************
@@ -995,8 +995,8 @@ on_checkbutton_versehighlight_toggled(GtkToggleButton * togglebutton,
 				      gpointer user_data)
 {
 	xml_set_value("Xiphos", "misc", "versehighlight",
-		      (gtk_toggle_button_get_active (togglebutton) ? "1" : "0"));
-	settings.versehighlight = gtk_toggle_button_get_active (togglebutton);
+		      (togglebutton->active ? "1" : "0"));
+	settings.versehighlight = togglebutton->active;
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 			       (widgets.versehighlight_item),
 			       settings.versehighlight);
@@ -1024,8 +1024,8 @@ on_checkbutton_annotate_highlight_toggled(GtkToggleButton * togglebutton,
 				      gpointer user_data)
 {
 	xml_set_value("Xiphos", "misc", "annotatehighlight",
-		      (gtk_toggle_button_get_active (togglebutton) ? "1" : "0"));
-	settings.annotate_highlight = gtk_toggle_button_get_active (togglebutton);
+		      (togglebutton->active ? "1" : "0"));
+	settings.annotate_highlight = togglebutton->active;
 	main_display_bible(settings.MainWindowModule, settings.currentverse);
 }
 
@@ -1050,8 +1050,8 @@ on_checkbutton_xrefs_in_verse_list_toggled(GtkToggleButton * togglebutton,
 					   gpointer user_data)
 {
 	xml_set_value("Xiphos", "misc", "xrefsinverselist",
-		      (gtk_toggle_button_get_active (togglebutton) ? "1" : "0"));
-	settings.xrefs_in_verse_list = gtk_toggle_button_get_active (togglebutton);
+		      (togglebutton->active ? "1" : "0"));
+	settings.xrefs_in_verse_list = togglebutton->active;
 }
 
 /******************************************************************************
@@ -1076,8 +1076,8 @@ on_checkbutton_prayerlist_toggled(GtkToggleButton * togglebutton,
 				  gpointer user_data)
 {
 	xml_set_value("Xiphos", "misc", "prayerlist",
-		      (gtk_toggle_button_get_active (togglebutton) ? "1" : "0"));
-	settings.prayerlist = gtk_toggle_button_get_active (togglebutton);
+		      (togglebutton->active ? "1" : "0"));
+	settings.prayerlist = togglebutton->active;
 
 	/* update module list to show choice */
 	if (settings.prayerlist)

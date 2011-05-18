@@ -50,7 +50,7 @@ static GtkWidget *linkage_verse_list;
 
 
 G_MODULE_EXPORT
-void entry_verse_changed_cb(GObject *object, EDITOR *e)
+void entry_verse_changed_cb(GtkObject *object, EDITOR *e)
 {
 	const gchar *verse_str = NULL;
 
@@ -59,7 +59,7 @@ void entry_verse_changed_cb(GObject *object, EDITOR *e)
 }
 
 G_MODULE_EXPORT
-void button_ok_clicked_cb(GObject *object, EDITOR *e)
+void button_ok_clicked_cb(GtkObject *object, EDITOR *e)
 {
 	const gchar *mod_str = NULL;
 	const gchar *verse_str = NULL;
@@ -101,7 +101,7 @@ void button_ok_clicked_cb(GObject *object, EDITOR *e)
 }
 
 G_MODULE_EXPORT
-void button_test_clicked_cb(GObject *object, gpointer user_data)
+void button_test_clicked_cb(GtkObject *object, gpointer user_data)
 {
  	const gchar *mod_str = NULL;
 	const gchar *verse_str = NULL;
@@ -129,7 +129,7 @@ void button_test_clicked_cb(GObject *object, gpointer user_data)
 }
 
 G_MODULE_EXPORT
-void button_cancel_clicked_cb(GObject *object, gpointer user_data)
+void button_cancel_clicked_cb(GtkObject *object, gpointer user_data)
 {
         gtk_widget_destroy(GTK_WIDGET(window));
 }

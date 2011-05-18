@@ -344,7 +344,7 @@ void gui_save_tabs(const gchar *filename)
 	xmlNodePtr root_node;
 	xmlNodePtr cur_node;
 	xmlNodePtr section_node;
-//	xmlAttrPtr xml_attr;
+	xmlAttrPtr xml_attr;
 	//const xmlChar *xml_filename;
 	gchar *tabs_dir;
 	gchar *file;
@@ -378,8 +378,7 @@ void gui_save_tabs(const gchar *filename)
 	}
 
 	root_node = xmlNewNode(NULL, (const xmlChar *) "Xiphos_Tabs");
-	//xml_attr = 
-	xmlNewProp(root_node, (const xmlChar *)"Version", (const xmlChar *) VERSION);
+	xml_attr = xmlNewProp(root_node, (const xmlChar *)"Version", (const xmlChar *) VERSION);
 	xmlDocSetRootElement(xml_doc, root_node);
 
 	section_node = xmlNewChild(root_node, NULL,
@@ -447,7 +446,7 @@ void _save_off_tab (const gchar * filename)
 	xmlNodePtr root_node;
 	xmlNodePtr cur_node;
 	xmlNodePtr section_node;
-	//xmlAttrPtr xml_attr;
+	xmlAttrPtr xml_attr;
 	gchar *tabs_dir;
 	gchar *file;
 
@@ -473,8 +472,7 @@ void _save_off_tab (const gchar * filename)
 	}
 
 	root_node = xmlNewNode(NULL, (const xmlChar *) "Xiphos_Tabs");
-	//xml_attr = 
-	xmlNewProp(root_node, (const xmlChar *)"Version", (const xmlChar *) VERSION);
+	xml_attr = xmlNewProp(root_node, (const xmlChar *)"Version", (const xmlChar *) VERSION);
 	xmlDocSetRootElement(xml_doc, root_node);
 
 	section_node = xmlNewChild(root_node, NULL,
@@ -783,13 +781,8 @@ static GtkWidget* tab_widget_new(PASSAGE_TAB_INFO *tbinf, const gchar *label_tex
 {
 	GtkWidget *tmp_toolbar_icon;
 	GtkWidget *box;
-	GtkRequisition r;	 
-#ifdef USE_GTK_3
-	GtkRequisition r0;
-	GdkRGBA color;
-#else
-	GdkColor color;	
-#endif
+	GtkRequisition r;
+	GdkColor color;
 
 	g_return_val_if_fail(label_text != NULL, NULL);
 
@@ -802,11 +795,7 @@ static GtkWidget* tab_widget_new(PASSAGE_TAB_INFO *tbinf, const gchar *label_tex
 	gtk_widget_set_size_request(tbinf->button_close, 18, 16);
 
 	tbinf->close_pixmap = pixmap_finder("window-close.png");
-#ifdef USE_GTK_3
-	gtk_widget_get_preferred_size(tbinf->button_close,  &r0, &r);
-#else	
 	gtk_widget_size_request(tbinf->button_close, &r);
-#endif
 	gtk_widget_set_size_request(tbinf->close_pixmap, r.width, r.height);
 	gtk_widget_set_sensitive(tbinf->close_pixmap, FALSE);
 	gtk_widget_show(tbinf->close_pixmap);
@@ -817,20 +806,13 @@ static GtkWidget* tab_widget_new(PASSAGE_TAB_INFO *tbinf, const gchar *label_tex
 	color.red = 0;
 	color.green = 0;
 	color.blue = 0;
-		 
-#ifdef USE_GTK_3
-	gtk_widget_override_color (tbinf->button_close, GTK_STATE_NORMAL, &color);
-	gtk_widget_override_color (tbinf->button_close, GTK_STATE_INSENSITIVE, &color);
-	gtk_widget_override_color (tbinf->button_close, GTK_STATE_ACTIVE, &color);
-	gtk_widget_override_color (tbinf->button_close, GTK_STATE_PRELIGHT, &color);
-	gtk_widget_override_color (tbinf->button_close, GTK_STATE_SELECTED, &color);
-#else
+
 	gtk_widget_modify_fg (tbinf->button_close, GTK_STATE_NORMAL, &color);
 	gtk_widget_modify_fg (tbinf->button_close, GTK_STATE_INSENSITIVE, &color);
 	gtk_widget_modify_fg (tbinf->button_close, GTK_STATE_ACTIVE, &color);
 	gtk_widget_modify_fg (tbinf->button_close, GTK_STATE_PRELIGHT, &color);
 	gtk_widget_modify_fg (tbinf->button_close, GTK_STATE_SELECTED, &color);
-#endif
+
 	box = gtk_hbox_new(FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(box), GTK_WIDGET(tbinf->tab_label),
 			   TRUE, TRUE, 0);
@@ -839,7 +821,7 @@ static GtkWidget* tab_widget_new(PASSAGE_TAB_INFO *tbinf, const gchar *label_tex
 
 	gtk_widget_show(box);
 
-	g_signal_connect (G_OBJECT (tbinf->button_close), "clicked",
+	g_signal_connect (GTK_OBJECT (tbinf->button_close), "clicked",
 				G_CALLBACK(on_notebook_main_close_page),
 				tbinf);
 
@@ -864,6 +846,7 @@ static GtkWidget* tab_widget_new(PASSAGE_TAB_INFO *tbinf, const gchar *label_tex
  *   void
  */
 void gui_notebook_main_switch_page(GtkNotebook * notebook,
+					 GtkNotebookPage * page,
 					 gint page_num, GList **tl)
 {
 	gboolean comm_showing;
@@ -1489,17 +1472,18 @@ void gui_notebook_main_setup(int tabs, const char *tabsfile)
 
 	gui_load_tabs(tabsfile ? tabsfile : (tabs ? default_tab_filename : no_tab_filename));
 
-	g_signal_connect(G_OBJECT(widgets.notebook_main),
-			   "change-current-page",
+	g_signal_connect(GTK_OBJECT(widgets.notebook_main),
+			   "switch_page",
 			   G_CALLBACK
 			   (gui_notebook_main_switch_page), &passage_list);
-	g_signal_connect(G_OBJECT(widgets.button_new_tab), "clicked",
+	g_signal_connect(GTK_OBJECT(widgets.button_new_tab), "clicked",
 			   G_CALLBACK(on_notebook_main_new_tab_clicked), NULL);
 
 	//show the new tab button here instead of in main_window.c so it
 	//doesn't get shown if !settings.browsing
 	gtk_widget_show(widgets.button_new_tab);
 	gui_notebook_main_switch_page(GTK_NOTEBOOK(widgets.notebook_main),
+					 NULL,
 					 settings.tab_page,
 					&passage_list);
 }

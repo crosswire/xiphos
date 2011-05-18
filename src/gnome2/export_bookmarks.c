@@ -169,7 +169,7 @@ static gboolean _save_verselist_2_xml(BK_EXPORT *data)
 	xmlNodePtr root_node = NULL;
 	xmlNodePtr cur_node = NULL;
 	xmlDocPtr root_doc;
-	//xmlAttrPtr root_attr;
+	xmlAttrPtr root_attr;
 	gchar filename[256];
 	GString *name = g_string_new(NULL);
 	GString *str = g_string_new ("");
@@ -183,7 +183,7 @@ static gboolean _save_verselist_2_xml(BK_EXPORT *data)
 	if (root_doc != NULL) {
 		root_node = xmlNewNode(NULL, (const xmlChar *)
 				       "SwordBookmarks");
-		//root_attr =
+		root_attr =
 		    xmlNewProp(root_node, (const xmlChar *)"syntaxVersion",
 			       (const xmlChar *) "1");
 		xmlDocSetRootElement(root_doc, root_node);
@@ -419,7 +419,7 @@ static void save_iter_to_xml(GtkTreeIter * iter, BK_EXPORT *data)
 	xmlNodePtr root_node = NULL;
 	xmlNodePtr cur_node = NULL;
 	xmlDocPtr root_doc;
-//	xmlAttrPtr root_attr;
+	xmlAttrPtr root_attr;
 	gchar *caption = NULL;
 	gchar filename[256];
 	GtkTreeModel *tm;
@@ -439,7 +439,7 @@ static void save_iter_to_xml(GtkTreeIter * iter, BK_EXPORT *data)
 	if (root_doc != NULL) {
 		root_node = xmlNewNode(NULL, (const xmlChar *)
 				       "SwordBookmarks");
-		//root_attr =
+		root_attr =
 		    xmlNewProp(root_node, (const xmlChar *)"syntaxVersion",
 			       (const xmlChar *) "1");
 		xmlDocSetRootElement(root_doc, root_node);
@@ -605,14 +605,14 @@ G_MODULE_EXPORT void
 checkbutton_include_text_toggled_cb(GtkToggleButton * togglebutton,
 							     BK_EXPORT * data)
 {
-	data->with_scripture = gtk_toggle_button_get_active (togglebutton);
+	data->with_scripture = togglebutton->active;
 }
 
 G_MODULE_EXPORT void
 radiobutton_xiphos_bookmarks_toggled_cb(GtkToggleButton * togglebutton,
 							     BK_EXPORT * data)
 {
-	if (gtk_toggle_button_get_active (togglebutton)) {
+	if (togglebutton->active) {
 		data->type = BOOKMARKS;
 		gtk_widget_set_sensitive (data->cb_scripture,FALSE);
 	}
@@ -622,7 +622,7 @@ G_MODULE_EXPORT void
 radiobutton_html_toggled_cb(GtkToggleButton * togglebutton,
 							     BK_EXPORT * data)
 {
-	if (gtk_toggle_button_get_active (togglebutton)) {
+	if (togglebutton->active) {
 		data->type = HTML;
 		gtk_widget_set_sensitive (data->cb_scripture,TRUE);
 	}
@@ -633,7 +633,7 @@ G_MODULE_EXPORT void
 radiobutton_plain_text_toggled_cb(GtkToggleButton * togglebutton,
 							     BK_EXPORT * data)
 {
-	if (gtk_toggle_button_get_active (togglebutton)) {
+	if (togglebutton->active) {
 		data->type = PLAIN;
 		gtk_widget_set_sensitive (data->cb_scripture,TRUE);
 	}

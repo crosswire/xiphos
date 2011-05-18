@@ -144,7 +144,7 @@ void gui_popup_menu_parallel(void)
 
 	if (!settings.showparatab) {
 		if (undockInt) {
-			g_signal_connect(G_OBJECT(undockInt), "activate",
+			g_signal_connect(GTK_OBJECT(undockInt), "activate",
 					 G_CALLBACK(on_undockInt_activate),
 					 &settings);
 		} else {
@@ -251,17 +251,17 @@ void gui_create_parallel_page(void)
 	gtk_container_add(GTK_CONTAINER(scrolled_window),
 			  widgets.html_parallel);
 
-	g_signal_connect(G_OBJECT(widgets.html_parallel),
+	g_signal_connect(GTK_OBJECT(widgets.html_parallel),
 			 "on_url", G_CALLBACK(gui_url),
 			 (gpointer) widgets.app);
-	g_signal_connect(G_OBJECT(widgets.html_parallel),
+	g_signal_connect(GTK_OBJECT(widgets.html_parallel),
 			 "link_clicked",
 			 G_CALLBACK(gui_link_clicked), NULL);
-	g_signal_connect(G_OBJECT(widgets.html_parallel),
+	g_signal_connect(GTK_OBJECT(widgets.html_parallel),
 			 "button_release_event",
 			 G_CALLBACK (_popupmenu_requested_cb),
 			 NULL);
-	g_signal_connect(G_OBJECT(widgets.html_parallel),
+	g_signal_connect(GTK_OBJECT(widgets.html_parallel),
 			 "url_requested",
 			 G_CALLBACK(url_requested), NULL);
 #endif

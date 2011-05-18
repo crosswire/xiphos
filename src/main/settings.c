@@ -120,7 +120,7 @@ int settings_init(int argc, char **argv, int new_configs, int new_bookmarks)
 				strerror(errno));
 			gui_generic_warning(msg);
 			/* if we can not create gSwordDir exit */
-			exit(1);
+			gtk_exit(1);
 		}
 	}
 

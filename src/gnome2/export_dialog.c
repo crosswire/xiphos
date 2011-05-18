@@ -276,7 +276,7 @@ static
 void on_rb_multi_verse_toggled (GtkToggleButton *togglebutton,
                                 gpointer user_data)
 {
-	if (gtk_toggle_button_get_active (togglebutton)) {
+	if (togglebutton->active) {
 		gtk_widget_set_sensitive (d.sb_start_verse, TRUE);
 		gtk_widget_set_sensitive (d.sb_end_verse, TRUE);
 
