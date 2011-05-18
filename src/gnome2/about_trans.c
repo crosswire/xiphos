@@ -171,7 +171,7 @@ gui_create_about_trans(void)
 #else
 	GTK_WIDGET_SET_FLAGS(button, GTK_CAN_DEFAULT);
 #endif
-	g_signal_connect(G_OBJECT(button), "clicked",
+	g_signal_connect(GTK_OBJECT(button), "clicked",
 			   G_CALLBACK(about_trans_ok), NULL);
 	return dialog_about_trans;
 }

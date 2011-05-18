@@ -130,7 +130,7 @@ void gui_display_text_information(gchar * information)
  *   void
  */
 
-static void on_dlgInformation_destroy(GObject * object,
+static void on_dlgInformation_destroy(GtkObject * object,
 				      gpointer user_data)
 {
 	gsI_isrunning = FALSE;
@@ -194,17 +194,15 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 			  dialog_display_info);
 	gtk_window_set_title(GTK_WINDOW(dialog_display_info),
 			     " ");
-	//GTK_WINDOW(dialog_display_info)->type = GTK_WINDOW_TOPLEVEL;
+	GTK_WINDOW(dialog_display_info)->type =
+	    GTK_WINDOW_TOPLEVEL;
 	gtk_window_set_default_size(GTK_WINDOW
 				    (dialog_display_info), 350,
 				    200);
 	gtk_window_set_resizable(GTK_WINDOW(dialog_display_info), TRUE);
-  
-#ifndef USE_GTK_3
 	gtk_dialog_set_has_separator(GTK_DIALOG(dialog_display_info), FALSE);
-#endif    
 
-	dialog_vbox23 = gtk_dialog_get_content_area(GTK_DIALOG (dialog_display_info)); //GTK_DIALOG(dialog_display_info)->vbox;
+	dialog_vbox23 = GTK_DIALOG(dialog_display_info)->vbox;
 	g_object_set_data(G_OBJECT(dialog_display_info),
 			  "dialog_vbox23", dialog_vbox23);
 	gtk_widget_show(dialog_vbox23);
@@ -242,7 +240,7 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 
 
 	dialog_action_area23 =
-	   gtk_dialog_get_action_area (GTK_DIALOG (dialog_display_info));
+	    GTK_DIALOG(dialog_display_info)->action_area;
 	g_object_set_data(G_OBJECT(dialog_display_info),
 			  "dialog_action_area23",
 			  dialog_action_area23);
@@ -261,12 +259,12 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 
 	gtk_widget_show(button_close);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox2), button_close);
-	gtk_widget_set_can_default(button_close, 1);
+	GTK_WIDGET_SET_FLAGS(button_close, GTK_CAN_DEFAULT);
 
-	g_signal_connect(G_OBJECT(button_close), "clicked",
+	g_signal_connect(GTK_OBJECT(button_close), "clicked",
 			   G_CALLBACK(button_close_clicked), NULL);
 
-	g_signal_connect(G_OBJECT(dialog_display_info),
+	g_signal_connect(GTK_OBJECT(dialog_display_info),
 			   "destroy",
 			   G_CALLBACK(on_dlgInformation_destroy),
 			   NULL);

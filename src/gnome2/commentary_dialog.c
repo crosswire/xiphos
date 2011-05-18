@@ -74,7 +74,7 @@ DIALOG_DATA *cur_d;
  * Synopsis
  *   #include "commentary_dialog.h"
  *
- *   void on_dialog_destroy(GObject * object,
+ *   void on_dialog_destroy(GtkObject * object,
  *						DIALOG_DATA * d)
  *
  * Description
@@ -84,7 +84,7 @@ DIALOG_DATA *cur_d;
  *   void
  */
 
-static void on_dialog_destroy(GObject *object,
+static void on_dialog_destroy(GtkObject *object,
 			      DIALOG_DATA *d)
 {
 	if (!dialog_freed)
@@ -389,22 +389,22 @@ void gui_create_commentary_dialog(DIALOG_DATA *d,
 	gtk_html_load_empty(GTK_HTML(d->html));
 
 #ifndef USE_GTKMOZEMBED
-	g_signal_connect(G_OBJECT(d->html),
+	g_signal_connect(GTK_OBJECT(d->html),
 			 "link_clicked",
 			 G_CALLBACK(commentary_prefixable_link), d);
 #endif
 
-	g_signal_connect(G_OBJECT(d->html), "on_url",
+	g_signal_connect(GTK_OBJECT(d->html), "on_url",
 			 G_CALLBACK(dialog_url), d);
-	g_signal_connect(G_OBJECT(d->html),
+	g_signal_connect(GTK_OBJECT(d->html),
 			 "button_press_event",
 			 G_CALLBACK(button_press_event), d);
 
 #endif  /* !USE_GTKMOZEMBED */
 
-	g_signal_connect(G_OBJECT(d->dialog), "destroy",
+	g_signal_connect(GTK_OBJECT(d->dialog), "destroy",
 			 G_CALLBACK(on_dialog_destroy), d);
-	g_signal_connect(G_OBJECT(d->dialog),
+	g_signal_connect(GTK_OBJECT(d->dialog),
 			 "motion_notify_event",
 			 G_CALLBACK(on_dialog_motion_notify_event), d);
 }

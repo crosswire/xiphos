@@ -240,7 +240,6 @@ void menu_position_under(GtkMenu * menu, int * x, int * y,
 				gboolean * push_in, gpointer user_data)
 {
 	GtkWidget *widget;
-	GtkAllocation allocation;
 
 	g_return_if_fail(GTK_IS_BUTTON(user_data));
 #ifdef HAVE_GTK_220
@@ -250,10 +249,10 @@ void menu_position_under(GtkMenu * menu, int * x, int * y,
 #endif
 	widget = GTK_WIDGET(user_data);
 
-	gdk_window_get_origin(gtk_widget_get_window (widget), x, y);
-	gtk_widget_get_allocation (widget, &allocation);
-	*x += allocation.x;
-	*y += allocation.y + allocation.height;
+	gdk_window_get_origin(widget->window, x, y);
+
+	*x += widget->allocation.x;
+	*y += widget->allocation.y + widget->allocation.height;
 
 	*push_in = FALSE;
 }
@@ -287,10 +286,9 @@ gboolean select_book_button_press_callback(GtkWidget * widget,
 
 	GTimeVal start_time;
 	GTimeVal end_time;
-#ifdef WIN32
 	glong time_diff;
 	guint32 time_add;
-#endif
+
 	g_get_current_time( &start_time );
 //	GS_message(("Start time is: %d sec %d mil", start_time.tv_sec, start_time.tv_usec));
 
@@ -298,12 +296,11 @@ gboolean select_book_button_press_callback(GtkWidget * widget,
 
 	g_get_current_time( &end_time );
 //	GS_message(("End time is: %d sec %d mil", end_time.tv_sec, end_time.tv_usec));
-#ifdef WIN32
 	time_diff = ((end_time.tv_sec - start_time.tv_sec) * 1000000) + (end_time.tv_usec - start_time.tv_usec);
 	time_add = 0;
 	if (time_diff > 10000)
 	  time_add = (guint32)(time_diff / 1000);
-#endif
+
 	if (!menu)
 		return 0;
 	g_signal_connect(menu, "deactivate",

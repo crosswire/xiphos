@@ -138,7 +138,7 @@ void gui_parallel_close_tab(GtkButton * button, gpointer user_data)
  *   void
  */
 
-static void on_parallel_tab_destroy(GObject * object,
+static void on_parallel_tab_destroy(GtkObject * object,
 				      gpointer user_data)
 {
 
@@ -207,7 +207,7 @@ static void sync_with_main(const gchar * key)
 
 void gui_keep_parallel_tab_in_sync(void)
 {
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(navbar_parallel.button_sync)))
+	if (GTK_TOGGLE_BUTTON(navbar_parallel.button_sync)->active)
 		sync_with_main(NULL);
 }
 
@@ -218,7 +218,7 @@ void gui_parallel_tab_sync(const gchar * key)
 
 void gui_force_parallel_tab_sync(void)
 {
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(navbar_parallel.button_sync), settings.linkedtabs);
+	GTK_TOGGLE_BUTTON(navbar_parallel.button_sync)->active = settings.linkedtabs;
 	sync_on = settings.linkedtabs;
 	/* tell somebody that this button has been hacked */
 }
@@ -354,7 +354,7 @@ GtkWidget *_create_parallel_tab(void)
                                         TRUE);
 
 	parallel_vbox = gtk_vbox_new(FALSE, 0);
-	g_signal_connect(G_OBJECT(parallel_vbox), "destroy",
+	g_signal_connect(GTK_OBJECT(parallel_vbox), "destroy",
 			   G_CALLBACK(on_parallel_tab_destroy),
 			   NULL);
 	gtk_widget_show(parallel_vbox);
@@ -424,24 +424,24 @@ GtkWidget *_create_parallel_tab(void)
 	gtk_container_add(GTK_CONTAINER(scrolled_window),
 			  widgets.html_parallel_dialog);
 
-	g_signal_connect(G_OBJECT(widgets.html_parallel_dialog), "link_clicked",
+	g_signal_connect(GTK_OBJECT(widgets.html_parallel_dialog), "link_clicked",
 				G_CALLBACK(gui_link_clicked),
 				NULL);
-	g_signal_connect(G_OBJECT(widgets.html_parallel_dialog), "on_url",
+	g_signal_connect(GTK_OBJECT(widgets.html_parallel_dialog), "on_url",
 				G_CALLBACK(gui_url),
 				GINT_TO_POINTER(TEXT_TYPE));
-	g_signal_connect(G_OBJECT(widgets.html_parallel_dialog),"button_release_event",
+	g_signal_connect(GTK_OBJECT(widgets.html_parallel_dialog),"button_release_event",
 				G_CALLBACK(on_text_button_release_event),
 				NULL);
-	g_signal_connect(G_OBJECT(widgets.html_parallel_dialog), "button_press_event",
+	g_signal_connect(GTK_OBJECT(widgets.html_parallel_dialog), "button_press_event",
 				G_CALLBACK(on_text_button_press_event),
 				NULL);
 
-	g_signal_connect(G_OBJECT(widgets.html_parallel_dialog),
+	g_signal_connect(GTK_OBJECT(widgets.html_parallel_dialog),
 			 "button_release_event",
 			 G_CALLBACK (_popupmenu_requested_cb),
 			 NULL);
-	g_signal_connect(G_OBJECT(widgets.html_parallel_dialog),
+	g_signal_connect(GTK_OBJECT(widgets.html_parallel_dialog),
 			 "url_requested",
 			 G_CALLBACK(url_requested), NULL);
 #endif

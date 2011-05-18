@@ -660,14 +660,10 @@ void main_dialogs_dictionary_entry_changed(DIALOG_DATA * d)
 	model = gtk_tree_view_get_model(GTK_TREE_VIEW(d->listview));
 	list_store = GTK_LIST_STORE(model);
 
-	if (!firsttime) {   
-#ifdef USE_GTK_3
-		height = gdk_window_get_height(GDK_WINDOW(d->listview));
-#else          
+	if (!firsttime) {
 		gdk_drawable_get_size ((GdkDrawable *)d->listview->window,
                                              NULL,
                                              &height);
-#endif
 		count = height / settings.cell_height;
 	}
 
@@ -770,7 +766,7 @@ void main_dialog_goto_bookmark(const gchar * module, const gchar * key)
 					t->mod_type == COMMENTARY_TYPE)
 
 			be->display_mod->Display();
-			gdk_window_raise(GDK_WINDOW(t->dialog));
+			gdk_window_raise(t->dialog->window);
 			return;
 		}
 		tmp = g_list_next(tmp);

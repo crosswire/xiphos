@@ -836,7 +836,7 @@ GtkWidget *main_dictionary_drop_down_new(char * mod_name, char * old_key)
 		item =
 		    gtk_menu_item_new_with_label((gchar *) new_key);
 		gtk_widget_show(item);
-		g_signal_connect(G_OBJECT(item), "activate",
+		g_signal_connect(GTK_OBJECT(item), "activate",
 				   G_CALLBACK(dict_key_list_select),
 				   g_strdup(new_key));
 		gtk_container_add(GTK_CONTAINER(menu), item);
@@ -1090,7 +1090,7 @@ void main_display_bible(const char * mod_name,
 	/* keeps us out of a crash causing loop */
 	g_signal_handler_block(adjustment, scroll_adj_signal);
 #endif
-	if (!gtk_widget_get_realized (GTK_WIDGET(widgets.html_text))) return;
+	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.html_text))) return;
 	if (!mod_name)
 		mod_name = ((settings.browsing && (cur_passage_tab != NULL))
 			    ? g_strdup(cur_passage_tab->text_mod)
@@ -1780,13 +1780,13 @@ static char blank_html_content[] = "<html><head></head><body> </body></html>";
 
 void main_flush_widgets_content(void)
 {
-	if (gtk_widget_get_realized  (GTK_WIDGET(widgets.html_text)))
+	if (GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.html_text)))
 		HtmlOutput(blank_html_content, widgets.html_text, NULL, NULL);
-	if (gtk_widget_get_realized (GTK_WIDGET(widgets.html_comm)))
+	if (GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.html_comm)))
 		HtmlOutput(blank_html_content, widgets.html_comm, NULL, NULL);
-	if (gtk_widget_get_realized (GTK_WIDGET(widgets.html_dict)))
+	if (GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.html_dict)))
 		HtmlOutput(blank_html_content, widgets.html_dict, NULL, NULL);
-	if (gtk_widget_get_realized (GTK_WIDGET(widgets.html_book)))
+	if (GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.html_book)))
 		HtmlOutput(blank_html_content, widgets.html_book, NULL, NULL);
 }
 
