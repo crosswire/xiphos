@@ -298,7 +298,7 @@ ClearFontFaces(gchar *text)
 // we garbage-collect here so block_render doesn't have to.
 //
 
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 #define	ALIGN_WORD	"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
 #else
 #define	ALIGN_WORD	" "	// gtkhtml3 has no alignment need.
@@ -310,7 +310,7 @@ block_dump(SWBuf& rendered,
 	   const char **strongs,
 	   const char **morph)
 {
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 	int wlen;
 #endif
 	int slen, mlen, min_length;
@@ -348,7 +348,7 @@ block_dump(SWBuf& rendered,
 		}
 		*s = '<';
 		slen = s - t;
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 		s = (char*)strstr(*strongs, "&lt;");
 		*s = *(s+1) = *(s+2) = *(s+3) = ' ';
 		s = strstr(s, "&gt;");
@@ -376,7 +376,7 @@ block_dump(SWBuf& rendered,
 		t = (char*)strrchr(*morph, '>') + 1;
 		*s = '<';
 		mlen = s - t;
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 		s = (char*)strchr(*morph, '(');
 		*s = ' ';
 		s = strrchr(s, ')');
@@ -394,10 +394,10 @@ block_dump(SWBuf& rendered,
 	min_length = 2 + max(slen, mlen);
 
 	rendered += *word;
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 	for (wlen = strlen(*word); wlen <= min_length; ++wlen)
 		rendered += "&nbsp;";
-#endif /* USE_GTKMOZEMBED */
+#endif /* USE_XIPHOS_HTML */
 
 	g_free((char *)*word);
 	*word = NULL;
@@ -427,11 +427,11 @@ block_dump(SWBuf& rendered,
 // text destination is provided, ready to go.
 // this means we are able to recurse when needed.
 
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 #define EMPTY_WORD	""
 #else
 #define EMPTY_WORD	"&nbsp;"
-#endif /* USE_GTKMOZEMBED */
+#endif /* USE_XIPHOS_HTML */
 
 void
 block_render_secondary(const char *text,
@@ -1327,7 +1327,7 @@ GTKChapDisp::Display(SWModule &imodule)
 		    ((key->Verse() == curVerse) &&
 		     settings.versehighlight)) {
 			buf = g_strdup_printf(
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 			    "<span style=\"background-color: %s\">"
 #else
 			    "<table bgcolor=\"%s\"><tr><td>"
@@ -1393,7 +1393,7 @@ GTKChapDisp::Display(SWModule &imodule)
 			swbuf.append(paragraphMark);;
 		}
 
-#ifndef USE_GTKMOZEMBED
+#ifndef USE_XIPHOS_HTML
 		// correct a highlight glitch: in poetry verses which end in
 		// a forced line break, we must remove the break to prevent
 		// the enclosing <table> from producing a double break.
@@ -1418,7 +1418,7 @@ GTKChapDisp::Display(SWModule &imodule)
 				     : text->str /* left as-is */);
 			g_string_free(text, TRUE);
 		} else
-#endif /* USE_GTKMOZEMBED */
+#endif /* USE_XIPHOS_HTML */
 			swbuf.append(settings.imageresize
 				     ? AnalyzeForImageSize(rework->str,
 							   GDK_WINDOW(gtkText->window))
@@ -1444,7 +1444,7 @@ GTKChapDisp::Display(SWModule &imodule)
 		// special contrasty highlighting
 		if (((key->Verse() == curVerse) && settings.versehighlight) ||
 		    (e && settings.annotate_highlight))
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 			swbuf.append("</font></span>");
 #else
 			swbuf.append("</font></td></tr></table>");
@@ -1461,11 +1461,11 @@ GTKChapDisp::Display(SWModule &imodule)
 
 	swbuf.append("</div></font></body></html>");
 
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 	if (strongs_and_morph)
 		buf = g_strdup_printf("%d", curVerse);
 	else	/* this is not dangling: connects to following "if" */
-#endif /* USE_GTKMOZEMBED */
+#endif /* USE_XIPHOS_HTML */
 	if (curVerse > display_boundary)
 		buf = g_strdup_printf("%d", curVerse - display_boundary);
 	else
@@ -1774,7 +1774,7 @@ DialogChapDisp::Display(SWModule &imodule)
 		     settings.annotate_highlight) ||
 		    ((key->Verse() == curVerse) && settings.versehighlight)) {
 			buf = g_strdup_printf(
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 			    "<span style=\"background-color: %s\">"
 #else
 			    "<table bgcolor=\"%s\"><tr><td>"
@@ -1840,7 +1840,7 @@ DialogChapDisp::Display(SWModule &imodule)
 			swbuf.append(paragraphMark);;
 		}
 
-#ifndef USE_GTKMOZEMBED
+#ifndef USE_XIPHOS_HTML
 		// same forced line break glitch in highlighted current verse.
 		if ((settings.versehighlight ||
 		     (e && settings.annotate_highlight)) &&	// doing <table> h/l.
@@ -1863,7 +1863,7 @@ DialogChapDisp::Display(SWModule &imodule)
 				     : text->str /* left as-is */);
 			g_string_free(text, TRUE);
 		} else
-#endif /* USE_GTKMOZEMBED */
+#endif /* USE_XIPHOS_HTML */
 			swbuf.append(settings.imageresize
 				     ? AnalyzeForImageSize(rework->str,
 							   GDK_WINDOW(gtkText->window))
@@ -1889,7 +1889,7 @@ DialogChapDisp::Display(SWModule &imodule)
 		// special contrasty highlighting
 		if (((key->Verse() == curVerse) && settings.versehighlight) ||
 		    (e && settings.annotate_highlight))
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 			swbuf.append("</font></span>");
 #else
 			swbuf.append("</font></td></tr></table>");
@@ -1904,11 +1904,11 @@ DialogChapDisp::Display(SWModule &imodule)
 
 	swbuf.append("</div></font></body></html>");
 
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 	if (strongs_and_morph)
 		buf = g_strdup_printf("%d", curVerse);
 	else	/* this is not dangling: connects to following "if" */
-#endif /* USE_GTKMOZEMBED */
+#endif /* USE_XIPHOS_HTML */
 	if (curVerse > display_boundary)
 		buf = g_strdup_printf("%d", curVerse - display_boundary);
 	else

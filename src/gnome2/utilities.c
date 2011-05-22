@@ -1392,13 +1392,18 @@ HtmlOutput(char *text,
 	}
 #endif /* USE_XIPHOS_HTML */
 
+#ifdef USE_WEBKIT
+	XIPHOS_HTML_WRITE(html, text, len);
+#endif	
+	
 	// html widgets are uptight about being handed
 	// huge quantities of text -- producer/consumer problem,
 	// and we mustn't overload the receiver.  10k chunks.
 
+#ifndef USE_WEBKIT	
 	while (len > 0) {
 		write_size = min(10000, len);
-#ifdef USE_XIPHOS_HTML
+#ifdef USE_GTKMOZEMBED
 		XIPHOS_HTML_WRITE(html, text+offset, write_size);
 #else
 		gtk_html_write(html, stream, text+offset, write_size);
@@ -1406,6 +1411,7 @@ HtmlOutput(char *text,
 		offset += write_size;
 		len -= write_size;
 	}
+#endif	
 
 	/* use anchor if asked, but if so, special anchor takes priority. */
 #ifdef USE_XIPHOS_HTML
