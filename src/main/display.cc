@@ -38,6 +38,9 @@
 #include <assert.h>
 
 #ifdef USE_GTKMOZEMBED
+#ifndef USE_XIPHOS_HTML
+# define USE_XIPHOS_HTML
+#endif
 # ifdef PACKAGE_BUGREPORT
 #  undef PACKAGE_BUGREPORT
 # endif
@@ -54,6 +57,11 @@
 #  undef PACKAGE_VERSION
 # endif
 #endif /* USE_GTKMOZEMBED */
+#ifdef USE_WEBKIT
+#ifndef USE_XIPHOS_HTML
+# define USE_XIPHOS_HTML
+#endif
+#endif
 
 #include "main/display.hh"
 #include "main/settings.h"
