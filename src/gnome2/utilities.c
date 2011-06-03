@@ -914,7 +914,7 @@ void gui_add_mods_2_gtk_menu(gint mod_type, GtkWidget * menu,
 		item =
 		    gtk_menu_item_new_with_label((gchar *) tmp->data);
 		gtk_widget_show(item);
-		g_signal_connect(GTK_OBJECT(item), "activate",
+		g_signal_connect(G_OBJECT(item), "activate",
 				   G_CALLBACK
 				   (callback),
 				   (gchar *) tmp->data);
@@ -2007,7 +2007,12 @@ AnalyzeForImageSize(const char *origtext,
 		if (window_y == -999) {
 			/* we have images, but we don't know bounds yet */
 
+#ifdef USE_GTK_3
+			window_x = gdk_window_get_width (window);
+			window_y = gdk_window_get_height(window);	
+#else
 			gdk_drawable_get_size(window, &window_x, &window_y);
+#endif
 			if ((window_x > 200) || (window_y > 200)) {
 				window_x -= 23;
 				window_y -= 23;

@@ -84,8 +84,8 @@ void main_navbar_set(NAVBAR navbar, const char * key)
                                              book-1);
 
 	gtk_list_store_clear(GTK_LIST_STORE(chapter_store));
-	char xtestament = vkey.Testament() ;
-	char xbook = vkey.Book();
+	//char xtestament = vkey.Testament() ;
+	//char xbook = vkey.Book();
 	int xchapter = vkey.Chapter();
 	int xverse = vkey.Verse();
 	x = (vkey.getChapterMax());
@@ -103,8 +103,8 @@ void main_navbar_set(NAVBAR navbar, const char * key)
                                              xchapter-1);
 
 	gtk_list_store_clear(GTK_LIST_STORE(verse_store));
-	xtestament = vkey.Testament() ;
-	xbook = vkey.Book();
+	//xtestament = vkey.Testament() ;
+	//xbook = vkey.Book();
 	xchapter = vkey.Chapter();
 	xverse = vkey.Verse();
 	x = (vkey.getVerseMax());

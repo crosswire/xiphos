@@ -170,7 +170,7 @@ void gui_btnDockInt_clicked(GtkButton * button, gpointer user_data)
  *   void
  */
 
-static void on_dlgparallel_destroy(GtkObject * object,
+static void on_dlgparallel_destroy(GObject * object,
 				      gpointer user_data)
 {
 
@@ -237,7 +237,7 @@ static void sync_with_main(void)
 
 void gui_keep_parallel_dialog_in_sync(void)
 {
-	if (GTK_TOGGLE_BUTTON(navbar_parallel.button_sync)->active)
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(navbar_parallel.button_sync)))
 		sync_with_main();
 }
 
@@ -314,7 +314,7 @@ static gboolean on_parallel_configure_event(GtkWidget * widget,
 	gint y;
 
  	gdk_window_get_root_origin(
-	    GDK_WINDOW(dialog_parallel->window), &x, &y);
+	    GDK_WINDOW(gtk_widget_get_window (dialog_parallel)), &x, &y);
 
 	settings.parallel_width  = event->width;
 	settings.parallel_height = event->height;
@@ -382,7 +382,7 @@ GtkWidget *create_parallel_dialog(void)
 				    settings.parallel_height);
 	gtk_window_set_resizable(GTK_WINDOW(dialog_parallel), TRUE);
 
-	dialog_vbox25 = GTK_DIALOG(dialog_parallel)->vbox;
+	dialog_vbox25 = gtk_dialog_get_content_area (GTK_DIALOG(dialog_parallel));
 	g_object_set_data(G_OBJECT(dialog_parallel),
 			  "dialog_vbox25", dialog_vbox25);
 	gtk_widget_show(dialog_vbox25);
@@ -457,16 +457,16 @@ GtkWidget *create_parallel_dialog(void)
 	gtk_html_load_empty(GTK_HTML(widgets.html_parallel_dialog));
 	gtk_container_add(GTK_CONTAINER(scrolled_window),
 			  widgets.html_parallel_dialog);
-	g_signal_connect(GTK_OBJECT(widgets.html_parallel_dialog),
+	g_signal_connect(G_OBJECT(widgets.html_parallel_dialog),
 			 "button_release_event",
 			 G_CALLBACK (_popupmenu_requested_cb),
 			 NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_parallel_dialog),
+	g_signal_connect(G_OBJECT(widgets.html_parallel_dialog),
 			 "url_requested",
 			 G_CALLBACK(url_requested), NULL);
 #endif
 	dialog_action_area25 =
-	    GTK_DIALOG(dialog_parallel)->action_area;
+	    gtk_dialog_get_action_area (GTK_DIALOG(dialog_parallel));
 	g_object_set_data(G_OBJECT(dialog_parallel),
 			  "dialog_action_area25",
 			  dialog_action_area25);
@@ -484,13 +484,13 @@ GtkWidget *create_parallel_dialog(void)
 	btnDockInt = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
 	gtk_widget_show(btnDockInt);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox4), btnDockInt);
-	GTK_WIDGET_SET_FLAGS(btnDockInt, GTK_CAN_DEFAULT);
+	gtk_widget_set_can_default (btnDockInt, 1);
 
 
-	g_signal_connect(GTK_OBJECT(dialog_parallel), "destroy",
+	g_signal_connect(G_OBJECT(dialog_parallel), "destroy",
 			   G_CALLBACK(on_dlgparallel_destroy),
 			   NULL);
-	g_signal_connect(GTK_OBJECT(btnDockInt), "clicked",
+	g_signal_connect(G_OBJECT(btnDockInt), "clicked",
 			   G_CALLBACK(gui_btnDockInt_clicked),
 			   NULL);
 

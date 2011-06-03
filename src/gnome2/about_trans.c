@@ -168,10 +168,12 @@ gui_create_about_trans(void)
 	gtk_container_add(GTK_CONTAINER(hbuttonbox), button);
 #ifdef HAVE_GTK_218
         gtk_widget_set_can_default(button, TRUE);
+#elif defined(USE_GTK_3)
+	gtk_widget_set_can_default(button, 1);
 #else
 	GTK_WIDGET_SET_FLAGS(button, GTK_CAN_DEFAULT);
 #endif
-	g_signal_connect(GTK_OBJECT(button), "clicked",
+	g_signal_connect(G_OBJECT(button), "clicked",
 			   G_CALLBACK(about_trans_ok), NULL);
 	return dialog_about_trans;
 }

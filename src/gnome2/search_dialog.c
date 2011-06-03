@@ -691,7 +691,7 @@ void delete_list(GtkButton * button, gpointer user_data)
 void scope_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 {
 	search1.which_scope = togglebutton;
-	if (GTK_TOGGLE_BUTTON(search1.rb_custom_range)->active)
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(search1.rb_custom_range)))
 		gtk_widget_set_sensitive(search1.combo_range,TRUE);
 	else
 		gtk_widget_set_sensitive(search1.combo_range,FALSE);
@@ -718,11 +718,11 @@ void scope_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 void mod_list_toggled(GtkToggleButton * togglebutton,
 		      gpointer user_data)
 {
-	if (togglebutton->active) {
+	if (gtk_toggle_button_get_active (togglebutton)) {
 		main_comboboxentry2_changed((GtkComboBox *) search1.
 					    combo_list, user_data);
 	}
-	if (GTK_TOGGLE_BUTTON(search1.rb_custom_list)->active)
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(search1.rb_custom_list)))
 		gtk_widget_set_sensitive(search1.combo_list,TRUE);
 	else
 		gtk_widget_set_sensitive(search1.combo_list,FALSE);
@@ -749,7 +749,7 @@ void mod_list_toggled(GtkToggleButton * togglebutton,
 void optimized_toggled(GtkToggleButton * togglebutton,
 		      gpointer user_data)
 {
-	if (togglebutton->active)
+	if (gtk_toggle_button_get_active (togglebutton))
 		gtk_widget_show(search1.button_intro_lucene);
 	else
 		gtk_widget_hide(search1.button_intro_lucene);
@@ -812,7 +812,7 @@ on_lucene_intro_clicked(GtkButton * button, gpointer user_data)
 void attributes_toggled(GtkToggleButton * togglebutton,
 		      gpointer user_data)
 {
-	if (togglebutton->active)
+	if (gtk_toggle_button_get_active (togglebutton))
 		gtk_widget_show(search1.button_intro_attributes);
 	else
 		gtk_widget_hide(search1.button_intro_attributes);
@@ -877,7 +877,7 @@ on_attributes_intro_clicked(GtkButton * button, gpointer user_data)
 void current_module_toggled(GtkToggleButton * togglebutton,
 			    gpointer user_data)
 {
-	if (togglebutton->active) {
+	if (gtk_toggle_button_get_active (togglebutton)) {
 		main_change_mods_select_label(search1.search_mod);
 		gtk_widget_set_sensitive(search1.rb_last, TRUE);
 		gtk_widget_set_sensitive(search1.combo_list,FALSE);
@@ -1183,7 +1183,11 @@ void _setup_combobox(GtkComboBox * combo)
 
 	store = gtk_list_store_new(1, G_TYPE_STRING);
 	gtk_combo_box_set_model(combo, GTK_TREE_MODEL(store));
+#ifdef USE_GTK_3
+	gtk_combo_box_set_entry_text_column (GTK_COMBO_BOX(combo), 0);
+#else  	
 	gtk_combo_box_entry_set_text_column(GTK_COMBO_BOX_ENTRY(combo), 0);
+#endif       
 }
 
 

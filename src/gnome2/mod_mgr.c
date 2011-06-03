@@ -309,6 +309,23 @@ gboolean query_tooltip (GtkWidget  *widget,
 static void
 create_pixbufs(void)
 {
+
+#ifdef USE_GTK_3
+	INSTALLED = gtk_widget_render_icon_pixbuf(dialog,
+					   GTK_STOCK_APPLY,
+					   GTK_ICON_SIZE_MENU);
+	FASTICON  = pixbuf_finder("indexed-16.png", 0, NULL);
+	NO_INDEX  = gtk_widget_render_icon_pixbuf(dialog,
+					   GTK_STOCK_CANCEL,
+					   GTK_ICON_SIZE_MENU);
+	LOCKED    = pixbuf_finder("epiphany-secure.png", 0, NULL);
+	REFRESH   = gtk_widget_render_icon_pixbuf(dialog,
+					   GTK_STOCK_REFRESH,
+					   GTK_ICON_SIZE_MENU);
+	BLANK     = gtk_widget_render_icon_pixbuf(dialog,
+					   "gnome-stock-blank",
+					   GTK_ICON_SIZE_MENU);
+#else
 	INSTALLED = gtk_widget_render_icon(dialog,
 					   GTK_STOCK_APPLY,
 					   GTK_ICON_SIZE_MENU, NULL);
@@ -323,6 +340,7 @@ create_pixbufs(void)
 	BLANK     = gtk_widget_render_icon(dialog,
 					   "gnome-stock-blank",
 					   GTK_ICON_SIZE_MENU, NULL);
+#endif
 }
 
 /******************************************************************************
@@ -1250,10 +1268,10 @@ load_module_tree(GtkTreeView * treeview,
 	MOD_MGR *info;
 
 	if (install) {
-		if (GTK_TOGGLE_BUTTON(radiobutton_source)->active) {
+		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(radiobutton_source))) {
 			local = TRUE;
 			source =
-			    gtk_entry_get_text(GTK_ENTRY(GTK_BIN(combo_entry1)->child));
+			    gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child (GTK_BIN(combo_entry1))));
 
 			// must find the directory attached to the name.
 			// they may (and normally will) be the same,
@@ -1283,7 +1301,7 @@ load_module_tree(GtkTreeView * treeview,
 		} else {
 			local = FALSE;
 			source =
-			    gtk_entry_get_text(GTK_ENTRY(GTK_BIN(combo_entry2)->child));
+			    gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child (GTK_BIN(combo_entry2))));
 			tmp = mod_mgr_remote_list_modules(source);
 		}
 	} else {
@@ -1302,9 +1320,13 @@ load_module_tree(GtkTreeView * treeview,
 	if (install && !first_time_user) {
 		/* note the repository that is active */
 		if ((local == FALSE) && (remote_source == NULL))
+#ifdef USE_GTK_3
+			remote_source = g_strdup(gtk_combo_box_text_get_active_text(
+						     GTK_COMBO_BOX_TEXT(combo_entry2)));
+#else 
 			remote_source = g_strdup(gtk_combo_box_get_active_text(
-						     GTK_COMBO_BOX(combo_entry2)));
-
+						     GTK_COMBO_BOX(combo_entry2)));   
+#endif
 		repository_identifier =
 		    g_strdup_printf(_("Repository:\n%s"),
 				    (local ? source : remote_source));
@@ -1565,9 +1587,13 @@ response_refresh(void)
 	working = TRUE;
 
 	if (remote_source == NULL)
+#ifdef USE_GTK_3
+		remote_source = g_strdup(gtk_combo_box_text_get_active_text(
+					     GTK_COMBO_BOX_TEXT(combo_entry2)));
+#else 
 		remote_source = g_strdup(gtk_combo_box_get_active_text(
 					     GTK_COMBO_BOX(combo_entry2)));
-
+#endif
 	buf = g_strdup_printf("%s: %s", _("Refreshing from remote source"), remote_source);
 	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh), buf);
 	g_free(buf);
@@ -1940,19 +1966,21 @@ clear_and_hide_progress_bar(void)
 
 void
 on_notebook1_switch_page(GtkNotebook * notebook,
-			 GtkNotebookPage * page,
 			 guint page_num, gpointer user_data)
 {
 	gchar *str;
+#ifndef USE_GTK_3
 	GdkCursor *cursor;
 	GdkDisplay *display;
 	GdkWindow *window;
 	gint x, y;
+#endif
 	GTimer *total;
 	double d;
 
 	total = g_timer_new();
-
+#ifndef USE_GTK_3
+	// FIXME: for gtk 3
 	cursor = gdk_cursor_new(GDK_WATCH);
 	display = gdk_display_get_default();
 	window = gdk_display_get_window_at_pointer(display, &x, &y);
@@ -1960,7 +1988,7 @@ on_notebook1_switch_page(GtkNotebook * notebook,
 	gdk_window_set_cursor(window, cursor);
 	gdk_display_sync(display);
 	gdk_cursor_unref(cursor);
-
+#endif
 	current_page = page_num;
 	clear_and_hide_progress_bar();
 
@@ -1982,7 +2010,7 @@ on_notebook1_switch_page(GtkNotebook * notebook,
 			gui_generic_warning(str);
 			g_free(str);
 		}
-		if (GTK_TOGGLE_BUTTON(radiobutton_dest)->active) {
+		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(radiobutton_dest))) {
 			destination =
 			    gtk_label_get_text(GTK_LABEL(label_home));
 		} else {
@@ -1994,7 +2022,7 @@ on_notebook1_switch_page(GtkNotebook * notebook,
 		load_module_tree(GTK_TREE_VIEW(treeview), TRUE);
 		break;
 	case 4:
-		if (GTK_TOGGLE_BUTTON(radiobutton_dest)->active) {
+		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(radiobutton_dest))) {
 			destination =
 			    gtk_label_get_text(GTK_LABEL(label_home));
 		} else {
@@ -2007,7 +2035,10 @@ on_notebook1_switch_page(GtkNotebook * notebook,
 		load_module_tree(GTK_TREE_VIEW(treeview2), FALSE);
 		break;
 	}
+#ifndef USE_GTK_3
+	// FIXME: for gtk 3
 	gdk_window_set_cursor(window, NULL);
+#endif
 
 	g_timer_stop(total);
 	d = g_timer_elapsed(total, NULL);
@@ -2036,12 +2067,17 @@ void
 on_radiobutton2_toggled(GtkToggleButton * togglebutton,
 			gpointer user_data)
 {
-	if (togglebutton->active) {
+	if (gtk_toggle_button_get_active (togglebutton)) {
 		gtk_widget_show(button_refresh);
 		if (remote_source)
 		        g_free(remote_source);
+#ifdef USE_GTK_3
+		remote_source = g_strdup(gtk_combo_box_text_get_active_text(
+					     GTK_COMBO_BOX_TEXT(combo_entry2)));
+#else  
 		remote_source = g_strdup(gtk_combo_box_get_active_text(
 					     GTK_COMBO_BOX(combo_entry2)));
+#endif
 		xml_set_value("Xiphos", "modmgr", "mod_mgr_source", "1");
 
 	} else {
@@ -2049,7 +2085,7 @@ on_radiobutton2_toggled(GtkToggleButton * togglebutton,
 		gtk_widget_hide(progressbar_refresh);
 		xml_set_value("Xiphos", "modmgr", "mod_mgr_source", "0");
 	}
-	settings.mod_mgr_source = togglebutton->active;
+	settings.mod_mgr_source = gtk_toggle_button_get_active (togglebutton);
 	xml_save_settings_doc(settings.fnconfigure);
 }
 
@@ -2059,8 +2095,8 @@ on_radiobutton4_toggled(GtkToggleButton * togglebutton,
 			gpointer user_data)
 {
 	xml_set_value("Xiphos", "modmgr", "mod_mgr_source",
-		      (togglebutton->active ? "1" : "0"));
-	settings.mod_mgr_source = togglebutton->active;
+		      (gtk_toggle_button_get_active (togglebutton) ? "1" : "0"));
+	settings.mod_mgr_source = gtk_toggle_button_get_active (togglebutton);
 	xml_save_settings_doc(settings.fnconfigure);
 }
 
@@ -2226,7 +2262,7 @@ create_fileselection_local_source(void)
  */
 
 static void
-on_dialog_destroy(GtkObject * object, gpointer user_data)
+on_dialog_destroy(GObject * object, gpointer user_data)
 {
 	GList *tmp;
 	gchar *str;
@@ -2506,7 +2542,7 @@ void
 on_button_remove_local_clicked(GtkButton * button,
 		   gpointer user_data)
 {
-	gchar *name_string;
+//	gchar *name_string;
 	GtkTreeSelection *selection;
 	GtkTreeIter selected;
 	gchar *caption = NULL;
@@ -2538,7 +2574,7 @@ on_button_remove_local_clicked(GtkButton * button,
 			   COLUMN_PASS, &pass,
 			   COLUMN_UID, &uid,
 			   -1);
-	name_string = caption;
+	//name_string = caption;
 
 	str = g_strdup_printf("<span weight=\"bold\">%s</span>\n\n%s|%s|%s|%s",
 			      _("Remove the selected source"),
@@ -2746,7 +2782,7 @@ on_button_remove_remote_clicked(GtkButton * button,
 {
 	gint test;
 	GS_DIALOG *yes_no_dialog;
-	gchar *name_string;
+	//gchar *name_string;
 	GtkTreeSelection *selection;
 	GtkTreeIter selected;
 	gchar *caption = NULL;
@@ -2780,7 +2816,7 @@ on_button_remove_remote_clicked(GtkButton * button,
 			   COLUMN_PASS, &pass,
 			   COLUMN_UID, &uid,
 			   -1);
-	name_string = caption;
+	//name_string = caption;
 
 	yes_no_dialog = gui_new_dialog();
 	yes_no_dialog->stock_icon = GTK_STOCK_DIALOG_WARNING;
@@ -2869,8 +2905,7 @@ on_treeview1_button_release_event(GtkWidget * widget,
 					gtk_widget_show(button_load_sources);
 				break;
 			case 2:
-				if (GTK_TOGGLE_BUTTON(radiobutton2)->
-				    active)
+				if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(radiobutton2)))
 					gtk_widget_show(button_refresh);
 				else
 					gtk_widget_hide(button_refresh);
@@ -2882,8 +2917,7 @@ on_treeview1_button_release_event(GtkWidget * widget,
 				gtk_widget_hide(button_load_sources);
 				break;
 			case 3:
-				if (GTK_TOGGLE_BUTTON(radiobutton2)->
-				    active)
+				if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(radiobutton2)))
 					gtk_widget_show(button_refresh);
 				else
 					gtk_widget_hide(button_refresh);
@@ -2948,14 +2982,18 @@ set_combobox(GtkComboBox * combo)
 
 	store = gtk_list_store_new(1, G_TYPE_STRING);
 	gtk_combo_box_set_model(combo, GTK_TREE_MODEL(store));
+#ifdef USE_GTK_3
+	gtk_combo_box_set_entry_text_column (GTK_COMBO_BOX(combo), 0);
+#else
 	gtk_combo_box_entry_set_text_column(GTK_COMBO_BOX_ENTRY(combo), 0);
+#endif
 }
 
 
 static void
 setup_dialog_action_area(GtkDialog * dialog)
 {
-	GtkWidget *dialog_action_area1 = GTK_DIALOG (dialog)->action_area;
+	GtkWidget *dialog_action_area1 = gtk_dialog_get_action_area (GTK_DIALOG (dialog));
 
 	gtk_widget_show (dialog_action_area1);
 	gtk_button_box_set_layout (GTK_BUTTON_BOX (dialog_action_area1), GTK_BUTTONBOX_END);
@@ -3058,7 +3096,7 @@ on_comboboxentry_remote_changed(GtkComboBox *combobox, gpointer user_data)
 
 	if (remote_source)
 		g_free(remote_source);
-	remote_source = g_strdup(gtk_entry_get_text(GTK_ENTRY(GTK_BIN(combobox)->child)));
+	remote_source = g_strdup(gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child (GTK_BIN(combobox)))));
 }
 
 static GtkWidget *
@@ -3077,7 +3115,7 @@ create_module_manager_dialog(gboolean first_run)
 
 	/* response buttons */
 	button_close = glade_xml_get_widget (gxml, "button_close");
-	GTK_WIDGET_SET_FLAGS (button_close, GTK_CAN_DEFAULT);
+	gtk_widget_set_can_default (button_close, 1);
 	button_cancel = glade_xml_get_widget (gxml, "button_cancel");
 	button_refresh = glade_xml_get_widget (gxml, "button_refresh");
 	button_install = glade_xml_get_widget (gxml, "button_install");
@@ -3125,7 +3163,7 @@ create_module_manager_dialog(gboolean first_run)
 
 	/* notebook */
 	notebook1 = glade_xml_get_widget (gxml, "notebook1");
-	g_signal_connect(notebook1, "switch_page",
+	g_signal_connect(notebook1, "change-current-page",
 			 G_CALLBACK(on_notebook1_switch_page), NULL);
 	/* labels */
 	label_home = glade_xml_get_widget (gxml, "label_home");
@@ -3201,7 +3239,7 @@ void gui_open_mod_mgr(void)
 		set_window_icon(GTK_WINDOW(dlg));
 		is_running = TRUE;
 	} else
-		gdk_window_raise(GTK_WIDGET(dialog)->window);
+		gdk_window_raise(gtk_widget_get_window (GTK_WIDGET(dialog)));
 }
 
 

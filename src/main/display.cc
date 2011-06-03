@@ -147,7 +147,7 @@ marked_cache_fill(gchar *modname, gchar *key)
 	gchar *s, *t, *err, *mhold;
 	char *key_book = g_strdup(main_get_osisref_from_key((const char *)modname,
 							    (const char *)key));
-	int key_chapter, key_verse;
+	int key_chapter; //, key_verse;
 
 	// free the old cache.  first free contents, then the map itself.
 	MC::iterator it;
@@ -165,7 +165,7 @@ marked_cache_fill(gchar *modname, gchar *key)
 	*(s = strrchr(key_book, '.')) = '\0';
 	*(t = strrchr(key_book, '.')) = '\0';
 	key_chapter = atoi(t+1);
-	key_verse   = atoi(s+1);
+	// key_verse   = atoi(s+1);
 
 	// remember exactly what chapter this cache is for
 	g_free(marked_cache_modname);
@@ -833,7 +833,7 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule)
 		}
 		swbuf.append(settings.imageresize
 			     ? AnalyzeForImageSize(rework->str,
-						   GDK_WINDOW(gtkText->window))
+						   GDK_WINDOW(GTK_WINDOW(gtkText)))
 			     : rework->str /* left as-is */);
 		if (settings.showversenum)
 			swbuf.append("</font></td>");
@@ -868,7 +868,7 @@ char
 GTKEntryDisp::Display(SWModule &imodule)
 {
 #ifdef USE_GTKMOZEMBED
-	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(gtkText)))
+	if (!gtk_widget_get_realized(GTK_WIDGET(gtkText)))
 		gtk_widget_realize(gtkText);
 #endif
 
@@ -977,7 +977,7 @@ GTKEntryDisp::Display(SWModule &imodule)
 
 	swbuf.append(settings.imageresize
 		     ? AnalyzeForImageSize(rework->str,
-					   GDK_WINDOW(gtkText->window))
+					   GDK_WINDOW(GTK_WINDOW(gtkText)))
 		     : rework->str /* left as-is */);
 
 	swbuf.append("</div></font></body></html>");
@@ -1238,7 +1238,7 @@ GTKChapDisp::Display(SWModule &imodule)
 	is_rtol = main_is_mod_rtol(ModuleName);
 	mf = get_font(ModuleName);
 
-	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(gtkText))) return 0;
+	if (!gtk_widget_get_realized (GTK_WIDGET(gtkText))) return 0;
 
 	strongs_and_morph = ((ops->strongs || ops->lemmas) &&
 			     ops->morphs);
@@ -1315,7 +1315,7 @@ GTKChapDisp::Display(SWModule &imodule)
 		if (cache_flags & ModuleCache::Headings) {
 			swbuf.append(settings.imageresize
 				     ? AnalyzeForImageSize(cVerse.GetHeader(),
-							   GDK_WINDOW(gtkText->window))
+							   GDK_WINDOW(GTK_WINDOW(gtkText)))
 				     : cVerse.GetHeader() /* left as-is */);
 		} else
 			cVerse.InvalidateHeader();
@@ -1422,14 +1422,14 @@ GTKChapDisp::Display(SWModule &imodule)
 			}
 			swbuf.append(settings.imageresize
 				     ? AnalyzeForImageSize(text->str,
-							   GDK_WINDOW(gtkText->window))
+							   GDK_WINDOW(GTK_WINDOW(gtkText)))
 				     : text->str /* left as-is */);
 			g_string_free(text, TRUE);
 		} else
 #endif /* USE_XIPHOS_HTML */
 			swbuf.append(settings.imageresize
 				     ? AnalyzeForImageSize(rework->str,
-							   GDK_WINDOW(gtkText->window))
+							   GDK_WINDOW(GTK_WINDOW(gtkText)))
 				     : rework->str /* left as-is */);
 
 		if (key->Verse() == curVerse) {
@@ -1552,7 +1552,7 @@ DialogEntryDisp::DisplayByChapter(SWModule &imodule)
 		g_free(buf);
 		swbuf.append(settings.imageresize
 			     ? AnalyzeForImageSize(rework->str,
-						   GDK_WINDOW(gtkText->window))
+						   GDK_WINDOW(GTK_WINDOW(gtkText)))
 			     : rework->str /* left as-is */);
 	}
 
@@ -1643,7 +1643,7 @@ DialogEntryDisp::Display(SWModule &imodule)
 
 	swbuf.append(settings.imageresize
 		     ? AnalyzeForImageSize(rework->str,
-					   GDK_WINDOW(gtkText->window))
+					   GDK_WINDOW(GTK_WINDOW(gtkText)))
 		     : rework->str /* left as-is */);
 
 	swbuf.append("</font></body></html>");
@@ -1772,7 +1772,7 @@ DialogChapDisp::Display(SWModule &imodule)
 		if (cache_flags & ModuleCache::Headings)
 			swbuf.append(settings.imageresize
 				     ? AnalyzeForImageSize(cVerse.GetHeader(),
-							   GDK_WINDOW(gtkText->window))
+							   GDK_WINDOW(GTK_WINDOW(gtkText)))
 				     : cVerse.GetHeader() /* left as-is */);
 		else
 			cVerse.InvalidateHeader();
@@ -1867,14 +1867,14 @@ DialogChapDisp::Display(SWModule &imodule)
 			}
 			swbuf.append(settings.imageresize
 				     ? AnalyzeForImageSize(text->str,
-							   GDK_WINDOW(gtkText->window))
+							   GDK_WINDOW(GTK_WINDOW(gtkText)))
 				     : text->str /* left as-is */);
 			g_string_free(text, TRUE);
 		} else
 #endif /* USE_XIPHOS_HTML */
 			swbuf.append(settings.imageresize
 				     ? AnalyzeForImageSize(rework->str,
-							   GDK_WINDOW(gtkText->window))
+							   GDK_WINDOW(GTK_WINDOW(gtkText)))
 				     : rework->str /* left as-is */);
 
 		if (key->Verse() == curVerse) {

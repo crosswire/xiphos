@@ -460,10 +460,11 @@ Yelper::PrintPreviewEnd ()
 void
 Yelper::SetRTL()
 {
-	nsresult rv;
+	//nsresult rv;
 	nsCOMPtr<nsIPrefService> prefService =
 		do_GetService (NS_PREFSERVICE_CONTRACTID);
 	nsCOMPtr<nsIPrefBranch> pref;
 	prefService->GetBranch("", getter_AddRefs(pref));
-	rv = pref->SetIntPref("bidi.direction", 2);
+	//rv = 
+    	pref->SetIntPref("bidi.direction", 2);
 }

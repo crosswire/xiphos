@@ -59,13 +59,13 @@
 #include "gui/debug_glib_null.h"
 
 //global function to handle gtk_uri calls
-void
+/*void
 link_uri_hook(GtkLinkButton *button,
 	      const gchar *link,
 	      gpointer user_data)
 {
 	xiphos_open_default(link);
-}
+}*/
 
 /******************************************************************************
  * Name
@@ -318,7 +318,7 @@ G_MODULE_EXPORT void on_search_activate(GtkMenuItem * menuitem, gpointer user_da
 G_MODULE_EXPORT void
 on_linked_tabs_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 {
-	settings.linkedtabs = menuitem->active;
+	settings.linkedtabs = gtk_check_menu_item_get_active (menuitem);
 	xml_set_value("Xiphos", "misc", "pinnedtabs",
 		      (settings.linkedtabs ? "1" : "0"));
 	if (settings.showparatab)
@@ -343,7 +343,7 @@ on_linked_tabs_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 G_MODULE_EXPORT void
 on_read_aloud_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 {
-	settings.readaloud = menuitem->active;
+	settings.readaloud = gtk_check_menu_item_get_active (menuitem);
 	xml_set_value("Xiphos", "misc", "readaloud",
 		      (settings.readaloud ? "1" : "0"));
 	if (settings.readaloud)
@@ -368,7 +368,7 @@ on_read_aloud_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 G_MODULE_EXPORT void
 on_show_verse_numbers_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 {
-	settings.showversenum = menuitem->active;
+	settings.showversenum = gtk_check_menu_item_get_active (menuitem);
 	xml_set_value("Xiphos", "misc", "showversenum",
 		      (settings.showversenum ? "1" : "0"));
 	main_display_commentary(NULL, settings.currentverse);
@@ -393,7 +393,7 @@ on_show_verse_numbers_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 G_MODULE_EXPORT void
 on_versehighlight_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 {
-	settings.versehighlight = menuitem->active;
+	settings.versehighlight = gtk_check_menu_item_get_active (menuitem);
 	xml_set_value("Xiphos", "misc", "versehighlight",
 		      (settings.versehighlight ? "1" : "0"));
 	main_display_bible(NULL, settings.currentverse);
@@ -418,12 +418,12 @@ G_MODULE_EXPORT void
 gui_parallel_tab_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 {
 	if (!settings.browsing) return;
-	if (!settings.showparatab && !menuitem->active) {
+	if (!settings.showparatab && !gtk_check_menu_item_get_active (menuitem)) {
 		xml_set_value("Xiphos", "misc", "showparatab", "0");
 		return;
 	}
 
-	settings.showparatab = menuitem->active;
+	settings.showparatab = gtk_check_menu_item_get_active (menuitem);
 	xml_set_value("Xiphos", "misc", "showparatab",
 		      (settings.showparatab ? "1" : "0"));
 	if (settings.showparatab) {
@@ -453,7 +453,7 @@ gui_parallel_tab_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 G_MODULE_EXPORT void
 on_side_preview_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 {
-	settings.show_previewer_in_sidebar = menuitem->active;
+	settings.show_previewer_in_sidebar = gtk_check_menu_item_get_active (menuitem);
 	xml_set_value("Xiphos", "misc", "show_side_preview",
 		      (settings.show_previewer_in_sidebar ? "1" : "0"));
 	gui_show_previewer_in_sidebar(settings.show_previewer_in_sidebar);
@@ -676,17 +676,17 @@ on_open_session_activate(GtkMenuItem * menuitem, gpointer user_data)
  *   void
  */
 G_MODULE_EXPORT void
-on_show_bible_text_activate(GtkMenuItem * menuitem, gpointer user_data)
+on_show_bible_text_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 {
-	gui_show_hide_texts(GTK_CHECK_MENU_ITEM(menuitem)->active);
+	gui_show_hide_texts(gtk_check_menu_item_get_active (menuitem));
 	redisplay_to_realign();
 }
 
 
 G_MODULE_EXPORT void
-on_preview_activate(GtkMenuItem * menuitem, gpointer user_data)
+on_preview_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 {
-	gui_show_hide_preview(GTK_CHECK_MENU_ITEM(menuitem)->active);
+	gui_show_hide_preview(gtk_check_menu_item_get_active (menuitem));
 	redisplay_to_realign();
 }
 
@@ -708,9 +708,9 @@ on_preview_activate(GtkMenuItem * menuitem, gpointer user_data)
  *   void
  */
 G_MODULE_EXPORT void
-on_show_commentary_activate(GtkMenuItem * menuitem, gpointer user_data)
+on_show_commentary_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 {
-	gui_show_hide_comms(GTK_CHECK_MENU_ITEM(menuitem)->active);
+	gui_show_hide_comms(gtk_check_menu_item_get_active (menuitem));
 	redisplay_to_realign();
 }
 
@@ -731,9 +731,9 @@ on_show_commentary_activate(GtkMenuItem * menuitem, gpointer user_data)
  *   void
  */
 G_MODULE_EXPORT void
-on_show_dictionary_lexicon_activate(GtkMenuItem * menuitem, gpointer user_data)
+on_show_dictionary_lexicon_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 {
-	gui_show_hide_dicts(GTK_CHECK_MENU_ITEM(menuitem)->active);
+	gui_show_hide_dicts(gtk_check_menu_item_get_active (menuitem));
 	redisplay_to_realign();
 }
 
@@ -870,7 +870,7 @@ GtkWidget *gui_create_main_menu(void)
 		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);
 
 	//set up global function to handle all link buttons
-	gtk_link_button_set_uri_hook (link_uri_hook, NULL, NULL);
+//	gtk_link_button_set_uri_hook (link_uri_hook, NULL, NULL);
 
 	if (settings.prayerlist)
 		gtk_widget_show(widgets.new_journal_item);

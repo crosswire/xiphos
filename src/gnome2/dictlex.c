@@ -465,19 +465,20 @@ static void menu_position_under (GtkMenu *menu,
 		     gpointer user_data)
 {
 	GtkWidget *widget;
-
+	GtkAllocation allocation;
+    
 	g_return_if_fail (GTK_IS_BUTTON (user_data));
-#ifdef HAVE_GTK_220
+#if defined(HAVE_GTK_220) || defined(USE_GTK_3)
         g_return_if_fail (gtk_widget_get_has_window(user_data));
 #else
 	g_return_if_fail (GTK_WIDGET_NO_WINDOW (user_data));
 #endif
 	widget = GTK_WIDGET (user_data);
 
-	gdk_window_get_origin (widget->window, x, y);
-
-	*x += widget->allocation.x;
-	*y += widget->allocation.y + widget->allocation.height;
+	gdk_window_get_origin (gtk_widget_get_window(widget), x, y);
+	gtk_widget_get_allocation (widget,&allocation);
+	*x += allocation.x;
+	*y += allocation.y + allocation.height;
 
 	*push_in = FALSE;
 }
