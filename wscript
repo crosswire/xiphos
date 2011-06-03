@@ -323,24 +323,33 @@ def configure(conf):
                       errmsg='Probably, not'
                       ):
             editor='"gtkhtml-editor-3.14"'
+    elif conf.check_cfg(modversion='gtkhtml-editor-4.0',
+                         msg='Checking for GNOME gtkhtml-editor-4.0',
+                         okmsg='Definitely',
+                         errmsg='Probably not'
+                         ):
+            editor='"gtkhtml-editor-4.0"'
     else:
             editor='"gtkhtml-editor"'
 
+    if conf.check_cfg(modversion='libgtkhtml-4.0',
+                      msg='Checking for libgtkhtml4',
+                      okmsg='Definitely',
+                      errmsg='Probably not'
+                      ):
+            gtkhtml = 'libgtkhtml-4.0'
+    else:
+            gtkhtml = 'libgtkhtml-3.14 >= 3.23'
+
     common_libs = string.join(
-    [editor] + '''
-    "gtk+-2.0 >= 2.14"
-    "libglade-2.0"
+    [editor, gtkhtml] + '''
     "gmodule-2.0"
     "glib-2.0"
     "libgsf-1 >= 1.14"
     "libxml-2.0"
-    "libgtkhtml-3.14 >= 3.23"
     --cflags --libs'''
     .split()," ")
     
-    if env['ENABLE_WEBKIT']:
-	    common_libs += " webkit-1.0"
-
     conf.check_cfg(atleast_pkgconfig_version='0.9.0')
     conf.check_cfg(msg="Checking for GNOME related libs",
                    package='',
@@ -361,26 +370,41 @@ def configure(conf):
                    mandatory=True)
     env.append_value('ALL_LIBS', 'SWORD')
 
-    conf.check_cfg(package="gtk+-2.0",
-                   atleast_version = "2.16",
-                   uselib_store="GTK_216")
-    conf.check_cfg(package="gtk+-2.0",
-                   atleast_version = "2.18",
-                   uselib_store="GTK_218")
-    conf.check_cfg(package="gtk+-2.0",
-                   atleast_version = "2.20",
-                   uselib_store="GTK_220")
+    gtk3 = conf.check_cfg(package='gtk+-3.0',
+                   msg='Checking for GTK+3',
+                   okmsg='Definitely',
+                   errmsg='Probably not')
+    if gtk3 is not None:
+        conf.define('USE_GTK_3', 1)
+    else:
+        env.append_value('ALL_LIBS', 'LIBGLADE')
+        conf.check_cfg(package="gtk+-2.0",
+                       atleast_version = "2.16",
+                       uselib_store="GTK_216")
+        conf.check_cfg(package="gtk+-2.0",
+                       atleast_version = "2.18",
+                       uselib_store="GTK_218")
+        conf.check_cfg(package="gtk+-2.0",
+                       atleast_version = "2.20",
+                       uselib_store="GTK_220")
 
     ######################
     ### gtk-webkit for html rendering
     #
-    if env['ENABLE_WEBKIT']:
+    if env['ENABLE_WEBKIT'] and env['USE_GTK_3']:
+        conf.check_cfg(package='webkitgtk-3.0',
+                        uselib_store='WEBKIT',
+                        args='--libs --cflags',
+                        msg='Checking for webkit',
+                        required=True)
+        conf.define('USE_WEBKIT', 1)
+        env.append_value('ALL_LIBS', 'WEBKIT')
+    elif env['ENABLE_WEBKIT']:
         conf.check_cfg(package='webkit-1.0',
 			uselib_store='WEBKIT',
 			msg='Checking for webkit')
 	env.append_value('ALL_LIBS', 'WEBKIT')
         conf.define('USE_WEBKIT', 1)
-        #env.append_value('ALL_LIBS', 'WEBKIT')
     ######################
     ### gecko (xulrunner) for html rendering
     # gtkhtml only for editor
@@ -401,7 +425,7 @@ def configure(conf):
                                                     args='--modversion',
                                                      okmsg=waffles.misc.myokmsg,
                                                     msg="Checking for Gecko GREVersion").strip())
-            if not env['GECKO_VER'][3].isalpha():
+            if len(env['GECKO_VER']) >= 4 and not env['GECKO_VER'][3].isalpha():
                     conf.define('GECKO_MIN', env['GECKO_VER'][0:5]+'.0')
                     conf.define('GECKO_MAX', env['GECKO_VER'][0:5]+'.99')
             else:

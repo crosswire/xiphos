@@ -89,9 +89,10 @@ void menu_position_under(GtkMenu * menu, int * x, int * y,
 				gboolean * push_in, gpointer user_data)
 {
 	GtkWidget *widget;
+	GtkAllocation allocation;
 
 	g_return_if_fail(GTK_IS_BUTTON(user_data));
-#ifdef HAVE_GTK_220
+#if defined(HAVE_GTK_220) || defined(USE_GTK_3)
         g_return_if_fail (gtk_widget_get_has_window(user_data));
 #else
 	g_return_if_fail (GTK_WIDGET_NO_WINDOW (user_data));
@@ -99,11 +100,11 @@ void menu_position_under(GtkMenu * menu, int * x, int * y,
 
 	widget = GTK_WIDGET(user_data);
 
-	gdk_window_get_origin(widget->window, x, y);
-
-	*x += widget->allocation.x;
-	*y += widget->allocation.y + widget->allocation.height;
-
+	gdk_window_get_origin(gtk_widget_get_window (widget), x, y);
+	gtk_widget_get_allocation (widget, &allocation);
+	*x += allocation.x;
+	*y += allocation.y + allocation.height;
+    
 	*push_in = FALSE;
 }
 
@@ -136,9 +137,11 @@ gboolean select_book_button_press_callback(GtkWidget * widget,
 
 	GTimeVal start_time;
 	GTimeVal end_time;
+#ifdef WIN32
 	glong time_diff;
 	guint32 time_add;
-
+#endif
+    
 	g_get_current_time( &start_time );
 	GS_message(("Start time is: %ld sec %ld mil", start_time.tv_sec, start_time.tv_usec));
 
@@ -148,11 +151,12 @@ gboolean select_book_button_press_callback(GtkWidget * widget,
 
 	g_get_current_time( &end_time );
 	GS_message(("End time is: %ld sec %ld mil", end_time.tv_sec, end_time.tv_usec));
+#ifdef WIN32
 	time_diff = ((end_time.tv_sec - start_time.tv_sec) * 1000000) + (end_time.tv_usec - start_time.tv_usec);
 	time_add = 0;
 	if (time_diff > 10000)
 	  time_add = (guint32)(time_diff / 1000);
-
+#endif
 	if (!menu)
 		return 0;
 	g_signal_connect(menu, "deactivate",
@@ -399,7 +403,7 @@ static void sync_with_main (GtkToggleButton * button, gpointer data)
 	gchar *buf = NULL;
 	gchar *url = NULL;
 	sync_on = FALSE;
-	if (button->active) {
+	if (gtk_toggle_button_get_active (button)) {
 		sync_on = TRUE;
 		buf = (gchar*)main_url_encode(settings.currentverse);
 		if (buf && (strlen(buf) > 3)) {
@@ -860,6 +864,6 @@ GtkWidget *gui_navbar_versekey_parallel_new(void)
 	navbar_parallel.chapter_menu = gtk_menu_new();
 	navbar_parallel.verse_menu = gtk_menu_new();
 	_connect_signals(navbar_parallel);
-	GTK_TOGGLE_BUTTON(navbar_parallel.button_sync)->active = settings.linkedtabs;
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(navbar_parallel.button_sync), settings.linkedtabs);
 	return navbar_parallel.navbar;
 }

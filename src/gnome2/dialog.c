@@ -23,8 +23,6 @@
 #include <config.h>
 #endif
 
-
-
 #include <gtk/gtk.h>
 #include "gui/dialog.h"
 #include "gui/widgets.h"
@@ -184,7 +182,11 @@ static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 	gtk_container_set_border_width(GTK_CONTAINER(dialog_alert), 5);
 	gtk_window_set_title(GTK_WINDOW(dialog_alert), " ");
 	//gtk_window_set_resizable(GTK_WINDOW(dialog_alert), FALSE);
+    
+
+#ifndef USE_GTK_3
 	gtk_dialog_set_has_separator(GTK_DIALOG(dialog_alert), FALSE);
+#endif
 
 	dialog_vbox2 = gtk_dialog_get_content_area(GTK_DIALOG(dialog_alert));
 	gtk_widget_show(dialog_vbox2);
@@ -310,8 +312,9 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 			     (info->title ? info->title : " "));
 	gtk_window_set_modal(GTK_WINDOW(dialog_request), TRUE);
 	gtk_window_set_resizable(GTK_WINDOW(dialog_request), FALSE);
+#ifndef USE_GTK_3
 	gtk_dialog_set_has_separator(GTK_DIALOG(dialog_request), FALSE);
-
+#endif
 	dialog_vbox3 = gtk_dialog_get_content_area(GTK_DIALOG(dialog_request));
 	gtk_widget_show(dialog_vbox3);
 

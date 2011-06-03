@@ -293,7 +293,6 @@ gboolean gui_expand_treeview_to_path (GtkTreeView * tree, const gchar * book_nam
  */
 
 static void on_notebook_switch_page(GtkNotebook * notebook,
-				    GtkNotebookPage * page,
 				    guint page_num, gpointer user_data)
 {
 	switch (page_num) {
@@ -425,8 +424,9 @@ void gui_set_sidebar_program_start(void)
 
 void gui_sidebar_showhide(void)
 {
+	GtkAllocation allocation;
 	if (!settings.docked) {
-		gdk_window_raise(GTK_WIDGET(widgets.dock_sb)->window);
+		gdk_window_raise(gtk_widget_get_window (GTK_WIDGET(widgets.dock_sb)));
 		return;
 	}
 
@@ -435,7 +435,8 @@ void gui_sidebar_showhide(void)
 		settings.showshortcutbar = FALSE;
 		gtk_widget_hide(widgets.shortcutbar);
 		sync_windows();
-		settings.biblepane_width = GTK_WIDGET(widgets.vpaned)->allocation.width;
+	    	gtk_widget_get_allocation (GTK_WIDGET(widgets.vpaned), &allocation);
+		settings.biblepane_width = allocation.width;
 
 	} else {
 		xml_set_value("Xiphos", "misc", "show_sidebar",	"1");
@@ -444,7 +445,8 @@ void gui_sidebar_showhide(void)
 				       settings.sidebar_width);
 		gtk_widget_show(widgets.shortcutbar);
 		sync_windows();
-		settings.biblepane_width = GTK_WIDGET(widgets.vpaned)->allocation.width;
+	    	gtk_widget_get_allocation (GTK_WIDGET(widgets.vpaned), &allocation);
+		settings.biblepane_width = allocation.width;
 
 	}
 }
@@ -470,7 +472,7 @@ void gui_sidebar_showhide(void)
 static void on_modules_activate(GtkToggleButton * button,
 				gpointer user_data)
 {
-	if (button->active) {
+	if (gtk_toggle_button_get_active (button)) {
 		gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.
 							   notebook_sidebar), 0);
 	}
@@ -495,7 +497,7 @@ static void on_modules_activate(GtkToggleButton * button,
 static void on_bookmarks_activate(GtkToggleButton * button,
 				  gpointer user_data)
 {
-	if (button->active) {
+	if (gtk_toggle_button_get_active (button)) {
 		gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.
 							   notebook_sidebar), 1);
 	}
@@ -521,7 +523,7 @@ static void on_bookmarks_activate(GtkToggleButton * button,
 static void on_search_activate(GtkToggleButton * button,
 			       gpointer user_data)
 {
-	if (button->active) {
+	if (gtk_toggle_button_get_active (button)) {
 		gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.
 							   notebook_sidebar), 2);
 		gtk_widget_grab_focus(ss.entrySearch);
@@ -547,7 +549,7 @@ static void on_search_activate(GtkToggleButton * button,
 static void on_search_results_activate(GtkToggleButton * button,
 				       gpointer user_data)
 {
-	if (button->active) {
+	if (gtk_toggle_button_get_active (button)) {
 		gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.
 							   notebook_sidebar), 3);
 	}
@@ -1313,7 +1315,7 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	gtk_paned_pack2 (GTK_PANED (widgets.paned_sidebar),
 			widgets.box_side_preview, FALSE, TRUE);
 	gtk_container_set_border_width(GTK_CONTAINER(widgets.box_side_preview), 2);
-	g_signal_connect (GTK_OBJECT (widgets.paned_sidebar),
+	g_signal_connect (G_OBJECT (widgets.paned_sidebar),
 			"button_release_event",
 			G_CALLBACK (paned_button_release_event),
 			(gchar *) "paned_sidebar");
@@ -1349,7 +1351,7 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	sidebar.html_viewer_widget = gtk_html_new();
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
 			  sidebar.html_viewer_widget);
-	g_signal_connect(GTK_OBJECT(sidebar.html_viewer_widget),
+	g_signal_connect(G_OBJECT(sidebar.html_viewer_widget),
 			 "link_clicked", G_CALLBACK(gui_link_clicked),
 			 NULL);
 #endif /* USE_GTKMOZEMBED*/
@@ -1403,7 +1405,7 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	gtk_widget_show(widgets.notebook_sidebar);
 
 	gtk_box_pack_start(GTK_BOX(vbox1), widgets.notebook_sidebar, TRUE, TRUE, 0);
-	GTK_WIDGET_UNSET_FLAGS(widgets.notebook_sidebar, GTK_CAN_FOCUS);
+	gtk_widget_set_can_default(widgets.notebook_sidebar, 1);
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_sidebar), FALSE);
 	gtk_notebook_set_show_border(GTK_NOTEBOOK(widgets.notebook_sidebar), FALSE);
 	gtk_container_set_border_width(GTK_CONTAINER(widgets.notebook_sidebar), 2);
@@ -1468,7 +1470,7 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 			 G_CALLBACK(on_modules_activate), NULL);
 
 	g_signal_connect((gpointer) widgets.notebook_sidebar,
-			 "switch-page",
+			 "change-current-page",
 			 G_CALLBACK(on_notebook_switch_page),
 			 title_label);
 

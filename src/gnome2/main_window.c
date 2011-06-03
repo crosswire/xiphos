@@ -444,7 +444,7 @@ static gboolean on_configure_event(GtkWidget * widget,
 	gint x;
 	gint y;
 
- 	gdk_window_get_root_origin(GDK_WINDOW(widgets.app->window), &x, &y);
+ 	gdk_window_get_root_origin(gtk_widget_get_window (widgets.app), &x, &y);
 
 	settings.gs_width = event->width;
 	settings.gs_height = event->height;
@@ -468,7 +468,6 @@ static gboolean on_configure_event(GtkWidget * widget,
 }
 
 static void on_notebook_bible_parallel_switch_page(GtkNotebook * notebook,
-					GtkNotebookPage * page,
 					gint page_num, GList **tl)
 {
 #if 0
@@ -480,7 +479,6 @@ static void on_notebook_bible_parallel_switch_page(GtkNotebook * notebook,
 }
 
 static void on_notebook_comm_book_switch_page(GtkNotebook * notebook,
-					GtkNotebookPage * page,
 					gint page_num, GList **tl)
 {
 	gchar *url = NULL;
@@ -785,7 +783,7 @@ void create_mainwindow(void)
 	g_object_set_data(G_OBJECT(widgets.app),
 			  "widgets.app", widgets.app);
 	gtk_widget_set_size_request(widgets.app, 680, 425);
-	GTK_WIDGET_SET_FLAGS(widgets.app, GTK_CAN_FOCUS);
+	gtk_widget_set_can_focus (widgets.app, 1);
 	gtk_window_set_resizable(GTK_WINDOW(widgets.app), TRUE);
 
 	imagename = image_locator("gs2-48x48.png");
@@ -902,8 +900,8 @@ void create_mainwindow(void)
 	gtk_container_set_border_width (
 		GTK_CONTAINER (widgets.notebook_bible_parallel), 1);
 
-	g_signal_connect(GTK_OBJECT(widgets.notebook_bible_parallel),
-			   "switch_page",
+	g_signal_connect(G_OBJECT(widgets.notebook_bible_parallel),
+			   "change-current-page",
 			   G_CALLBACK
 			   (on_notebook_bible_parallel_switch_page),
 			   NULL);
@@ -954,7 +952,7 @@ void create_mainwindow(void)
 	widgets.html_previewer_text = gtk_html_new();
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
 			  widgets.html_previewer_text);
-	g_signal_connect(GTK_OBJECT(widgets.html_previewer_text),
+	g_signal_connect(G_OBJECT(widgets.html_previewer_text),
 			 "link_clicked", G_CALLBACK(gui_link_clicked),
 			 NULL);
 #endif
@@ -1024,8 +1022,10 @@ void create_mainwindow(void)
 	widgets.appbar = gtk_statusbar_new ();
 
 	gtk_widget_show(widgets.appbar);
+#ifndef USE_GTK_3
 	gtk_statusbar_set_has_resize_grip (GTK_STATUSBAR(widgets.appbar),
                                            TRUE);
+#endif
 	gtk_box_pack_start(GTK_BOX(vbox_gs), widgets.appbar, FALSE, TRUE, 0);
 	gui_set_statusbar (_("Welcome to Xiphos"));
 
@@ -1036,34 +1036,34 @@ void create_mainwindow(void)
 		    G_CALLBACK (on_vbox1_key_release_event),
 		    NULL);
 
-	g_signal_connect(GTK_OBJECT(widgets.notebook_comm_book),
-			   "switch_page",
+	g_signal_connect(G_OBJECT(widgets.notebook_comm_book),
+			   "change-current-page",
 			   G_CALLBACK
 			   (on_notebook_comm_book_switch_page),
 			   NULL);
 
-	g_signal_connect(GTK_OBJECT(widgets.app), "delete_event",
+	g_signal_connect(G_OBJECT(widgets.app), "delete_event",
 			   G_CALLBACK(delete_event), NULL);
 
 	g_signal_connect((gpointer) widgets.app,
 			 "configure_event",
 			 G_CALLBACK(on_configure_event), NULL);
-	g_signal_connect(GTK_OBJECT(widgets.epaned),
+	g_signal_connect(G_OBJECT(widgets.epaned),
 			   "button_release_event",
 			   G_CALLBACK
 			   (epaned_button_release_event),
 			   (gchar *) "epaned");
-	g_signal_connect(GTK_OBJECT(widgets.vpaned),
+	g_signal_connect(G_OBJECT(widgets.vpaned),
 			   "button_release_event",
 			   G_CALLBACK
 			   (epaned_button_release_event),
 			   (gchar *) "vpaned");
-	g_signal_connect(GTK_OBJECT(widgets.vpaned2),
+	g_signal_connect(G_OBJECT(widgets.vpaned2),
 			   "button_release_event",
 			   G_CALLBACK
 			   (epaned_button_release_event),
 			   (gchar *) "vpaned2");
-	g_signal_connect(GTK_OBJECT(widgets.hpaned),
+	g_signal_connect(G_OBJECT(widgets.hpaned),
 			   "button_release_event",
 			   G_CALLBACK
 			   (epaned_button_release_event),
