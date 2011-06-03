@@ -303,7 +303,7 @@ static void html_realize(GtkWidget * widget)
 static void html_init(GeckoHtml * html)
 {
 	GeckoHtmlPriv *priv;
-	GeckoHtmlClass *klass;
+	//GeckoHtmlClass *klass;
 
 	html->priv = priv = GECKO_HTML_GET_PRIVATE(html);
 
@@ -312,7 +312,7 @@ static void html_init(GeckoHtml * html)
 	priv->timeout = 0;
 
 	priv->yelper = new Yelper(GTK_MOZ_EMBED(html));
-	klass = GECKO_HTML_GET_CLASS(html);
+	//klass = GECKO_HTML_GET_CLASS(html);
 }
 
 static void html_dispose(GObject * object)

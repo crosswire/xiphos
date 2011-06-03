@@ -77,7 +77,7 @@ static GtkTreeModel *model;
  *   void
  */
 
-static void dialog_destroy(GtkObject *object,
+static void dialog_destroy(GObject *object,
 			   DIALOG_DATA *dlg)
 {
 	if (!dialog_freed)
@@ -413,16 +413,16 @@ void gui_create_gbs_dialog(DIALOG_DATA *dlg)
 	gtk_container_add(GTK_CONTAINER(scrolledwindow_html),
 			  dlg->html);
 	gtk_html_load_empty(GTK_HTML(dlg->html));
-	g_signal_connect(GTK_OBJECT(dlg->html),
+	g_signal_connect(G_OBJECT(dlg->html),
 			   "url_requested",
 			   G_CALLBACK(url_requested), NULL);
-	/*g_signal_connect(GTK_OBJECT(dlg->html), "on_url",
+	/*g_signal_connect(G_OBJECT(dlg->html), "on_url",
 			   G_CALLBACK(dialog_url),
 			   (DIALOG_DATA *) dlg);*/
-	g_signal_connect(GTK_OBJECT(dlg->html), "link_clicked",
+	g_signal_connect(G_OBJECT(dlg->html), "link_clicked",
 			   G_CALLBACK(link_clicked),
 			   (DIALOG_DATA *) dlg);
-	g_signal_connect(GTK_OBJECT(dlg->html),
+	g_signal_connect(G_OBJECT(dlg->html),
 			   "button_press_event",
 			   G_CALLBACK(button_press),
 			   (DIALOG_DATA *) dlg);
@@ -435,7 +435,7 @@ void gui_create_gbs_dialog(DIALOG_DATA *dlg)
 	gtk_box_pack_start(GTK_BOX(vbox_dialog), dlg->statusbar, FALSE,
 			   FALSE, 0);
 
-	g_signal_connect(GTK_OBJECT(dlg->dialog), "destroy",
+	g_signal_connect(G_OBJECT(dlg->dialog), "destroy",
 			   G_CALLBACK(dialog_destroy),
 			   (DIALOG_DATA *) dlg); 
 	cur_dlg =  dlg;

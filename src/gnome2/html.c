@@ -675,9 +675,9 @@ _draw_footer (GtkHTML *html, GtkPrintOperation *operation,
 void gui_html_print(GtkWidget * htmlwidget, gboolean preview, const gchar * mod_name)
 {
 	GtkPrintOperation *operation;
-	GtkPrintSettings *psettings;
+//	GtkPrintSettings *psettings;
 	GtkPageSetup *setup;
-	GtkPrintOperationResult result;
+//	GtkPrintOperationResult result;
 	GError *error = NULL;
 	GtkPrintOperationAction action;
 
@@ -687,9 +687,9 @@ void gui_html_print(GtkWidget * htmlwidget, gboolean preview, const gchar * mod_
 		action = GTK_PRINT_OPERATION_ACTION_PRINT_DIALOG;
 
 	operation = gtk_print_operation_new ();
-	psettings = gtk_print_settings_new ();
+//	psettings = gtk_print_settings_new ();
 
-	psettings = gtk_print_operation_get_print_settings (operation);
+//	psettings = gtk_print_operation_get_print_settings (operation);
 
 	setup = gtk_page_setup_new ();
 	gtk_page_setup_set_top_margin(setup, 30, GTK_UNIT_PIXEL);
@@ -702,7 +702,8 @@ void gui_html_print(GtkWidget * htmlwidget, gboolean preview, const gchar * mod_
 
 	gtk_print_operation_set_default_page_setup(operation, setup);
 
-	result = gtk_html_print_operation_run (GTK_HTML(htmlwidget),
+	//result = 
+	gtk_html_print_operation_run (GTK_HTML(htmlwidget),
 					       operation,
 					       action,
 					       NULL, //GTK_WINDOW (e->window),

@@ -143,8 +143,8 @@ static void link_clicked(GtkHTML *html,
  *   void
  */
 
-static void dialog_destroy(GtkObject *object,
-			   DIALOG_DATA *vt)
+static void dialog_destroy(GObject *object,
+                           DIALOG_DATA *vt)
 {
 	if (!bible_freed)
 		main_free_on_destroy(vt);
@@ -599,23 +599,23 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 	gtk_html_load_empty(GTK_HTML(vt->html));
 	g_signal_connect(G_OBJECT(vt->html), "on_url",
 			   G_CALLBACK(dialog_url), (gpointer) vt);
-	g_signal_connect(GTK_OBJECT(vt->html), "link_clicked",
+	g_signal_connect(G_OBJECT(vt->html), "link_clicked",
 			   G_CALLBACK(link_clicked), vt);
-	g_signal_connect(GTK_OBJECT(vt->html),
+	g_signal_connect(G_OBJECT(vt->html),
 			   "motion_notify_event",
 			   G_CALLBACK
 			   (on_dialog_motion_notify_event), vt);
-	g_signal_connect(GTK_OBJECT(vt->html),
+	g_signal_connect(G_OBJECT(vt->html),
 			   "button_release_event",
 			   G_CALLBACK
 			   (on_button_release_event),
 			   (DIALOG_DATA *) vt);
-	g_signal_connect(GTK_OBJECT(vt->html),
+	g_signal_connect(G_OBJECT(vt->html),
 			   "button_press_event",
 			   G_CALLBACK
 			   (on_text_button_press_event),
 			   (DIALOG_DATA *) vt);
-	g_signal_connect(GTK_OBJECT(vt->html),
+	g_signal_connect(G_OBJECT(vt->html),
 			   "url_requested",
 			   G_CALLBACK
 			   (url_requested),
@@ -640,7 +640,7 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 	gtk_container_add(GTK_CONTAINER(swVText), vt->previewer);
 	gtk_html_load_empty(GTK_HTML(vt->previewer));
 
-	g_signal_connect(GTK_OBJECT(vt->previewer), "link_clicked",
+	g_signal_connect(G_OBJECT(vt->previewer), "link_clicked",
 				   G_CALLBACK(link_clicked), vt);
 #endif /* !USE_XIPHOS_HTML */
 
@@ -649,12 +649,12 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 	gtk_box_pack_start(GTK_BOX(vbox33), vt->statusbar, FALSE, FALSE,
 			   0);
 
-	g_signal_connect(GTK_OBJECT(vt->dialog),
+	g_signal_connect(G_OBJECT(vt->dialog),
 			   "destroy",
 			   G_CALLBACK(dialog_destroy), vt);
 
 
-	g_signal_connect(GTK_OBJECT(vt->dialog),
+	g_signal_connect(G_OBJECT(vt->dialog),
 			   "motion_notify_event",
 			   G_CALLBACK
 			   (on_dialog_motion_notify_event), vt);

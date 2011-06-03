@@ -639,10 +639,18 @@ static void create_pixbufs(void)
 		pixbuf_finder("epiphany-bookmark-page.png", 0, NULL);
 
 	if (!bm_pixbufs->pixbuf_helpdoc)
+
+#ifdef USE_GTK_3
+	bm_pixbufs->pixbuf_helpdoc = 
+		gtk_widget_render_icon_pixbuf(widgets.app,
+                                              GTK_STOCK_DND,
+                                              GTK_ICON_SIZE_MENU );
+#else	
 		bm_pixbufs->pixbuf_helpdoc
 		    = gtk_widget_render_icon(widgets.app,
 					     GTK_STOCK_DND,
 					     GTK_ICON_SIZE_MENU, NULL);
+#endif
 }
 
 /******************************************************************************
