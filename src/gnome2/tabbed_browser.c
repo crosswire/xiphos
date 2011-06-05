@@ -863,13 +863,19 @@ static GtkWidget* tab_widget_new(PASSAGE_TAB_INFO *tbinf, const gchar *label_tex
  * Return value
  *   void
  */
+#ifdef USE_GTK_3
 void gui_notebook_main_switch_page(GtkNotebook * notebook,
 					 gint page_num, GList **tl)
+#else
+void gui_notebook_main_switch_page(GtkNotebook * notebook,
+					 GtkNotebookPage * page,
+					 gint page_num, GList **tl)
+#endif
 {
 	gboolean comm_showing;
 	gint number_of_pages = gtk_notebook_get_n_pages(notebook);
 	PASSAGE_TAB_INFO *pt;
-
+	
 	if (stop_refresh)
 		return;
 
@@ -1490,18 +1496,29 @@ void gui_notebook_main_setup(int tabs, const char *tabsfile)
 	gui_load_tabs(tabsfile ? tabsfile : (tabs ? default_tab_filename : no_tab_filename));
 
 	g_signal_connect(G_OBJECT(widgets.notebook_main),
+
+#ifdef USE_GTK_3	                 
 			   "change-current-page",
-			   G_CALLBACK
-			   (gui_notebook_main_switch_page), &passage_list);
+#else
+				"switch-page",
+#endif	                 
+			   G_CALLBACK (gui_notebook_main_switch_page), &passage_list);
 	g_signal_connect(G_OBJECT(widgets.button_new_tab), "clicked",
 			   G_CALLBACK(on_notebook_main_new_tab_clicked), NULL);
 
 	//show the new tab button here instead of in main_window.c so it
 	//doesn't get shown if !settings.browsing
 	gtk_widget_show(widgets.button_new_tab);
+#ifdef USE_GTK_3
 	gui_notebook_main_switch_page(GTK_NOTEBOOK(widgets.notebook_main),
 					 settings.tab_page,
 					&passage_list);
+#else		
+	gui_notebook_main_switch_page(GTK_NOTEBOOK(widgets.notebook_main),
+					 NULL,
+					 settings.tab_page,
+					&passage_list);
+#endif	                 
 }
 
 /******************************************************************************
