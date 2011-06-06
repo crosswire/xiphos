@@ -1964,9 +1964,16 @@ clear_and_hide_progress_bar(void)
  *   void
  */
 
+#ifdef USE_GTK_3
 void
 on_notebook1_switch_page(GtkNotebook * notebook,
 			 guint page_num, gpointer user_data)
+#else
+void
+on_notebook1_switch_page(GtkNotebook * notebook,
+			 GtkNotebookPage * page,
+			 guint page_num, gpointer user_data)
+#endif
 {
 	gchar *str;
 #ifndef USE_GTK_3
@@ -3163,8 +3170,13 @@ create_module_manager_dialog(gboolean first_run)
 
 	/* notebook */
 	notebook1 = glade_xml_get_widget (gxml, "notebook1");
+#ifdef USE_GTK_3
 	g_signal_connect(notebook1, "change-current-page",
 			 G_CALLBACK(on_notebook1_switch_page), NULL);
+#else
+	g_signal_connect(notebook1, "switch_page",
+			 G_CALLBACK(on_notebook1_switch_page), NULL);
+#endif
 	/* labels */
 	label_home = glade_xml_get_widget (gxml, "label_home");
 	label_system = glade_xml_get_widget (gxml, "label_sword_sys");
