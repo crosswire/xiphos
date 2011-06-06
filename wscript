@@ -339,7 +339,7 @@ def configure(conf):
                       ):
             gtkhtml = 'libgtkhtml-4.0'
     else:
-            gtkhtml = 'libgtkhtml-3.14 >= 3.23'
+            gtkhtml = '"libgtkhtml-3.14 >= 3.23"'
 
     common_libs = string.join(
     [editor, gtkhtml] + '''
