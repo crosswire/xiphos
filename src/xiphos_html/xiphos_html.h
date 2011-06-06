@@ -97,7 +97,7 @@
 	#define XIPHOS_HTML_INITIALIZE gecko_html_initialize
 	
 	#define XIPHOS_TYPE_HTML GECKO_TYPE_HTML
-	#define XIPHOS_HTML_GET_PRIVATE GECKO_HTML_GET_PRIVATE
+	#define XIPHOS_HTML_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GECKO_TYPE_HTML, GeckoHtmlPriv)) 
   #endif
 #endif
 
