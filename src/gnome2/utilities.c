@@ -1345,8 +1345,11 @@ HtmlOutput(char *text,
 	   MOD_FONT *mf,
 	   char *anchor)
 {
-	int len = strlen(text), offset = 0, write_size;
-
+	int len = strlen(text), offset = 0;
+ 
+#ifndef USE_WEBKIT  
+	int write_size;
+#endif
 #ifdef USE_XIPHOS_HTML
 	XiphosHtml *html = XIPHOS_HTML(gtkText);
 	XIPHOS_HTML_OPEN_STREAM(html,"text/html");

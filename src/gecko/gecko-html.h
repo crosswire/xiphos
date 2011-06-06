@@ -23,7 +23,7 @@
 #define __GECKO_HTML_H__
 
 
-#include <gtkmozembed.h>
+#include <gtkmozembed.h>   
 
 #include "gecko/gecko-print.h"
 #include "main/module_dialogs.h"

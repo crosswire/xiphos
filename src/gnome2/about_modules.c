@@ -369,11 +369,14 @@ gui_core_display_about_dialog(gchar * desc,
 	GString *str = g_string_new(NULL);
 	GString *description = g_string_new(NULL);
 	GString *text = g_string_new(NULL);
-	static const char *html_start =
-	    "<html><head><meta http-equiv=\"content-type\" "
-	    "content=\"text/html; charset=utf-8\"></head><body>";
+	GString *html_start = g_string_new(NULL);
+	    
 	static const char *html_end = "</body></html>";
-
+        g_string_printf (html_start,
+                         "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head><body bgcolor=\"%s\" text=\"%s\">",
+                         settings.bible_bg_color,
+                         settings.bible_text_color) ;
+                         
 	g_string_printf(description,
 			"<center><font color=\"#000fcf\"><b>%s</b></font><hr/>%s %s</center><br/>",
 			(desc ? desc : "No module present"),
@@ -388,7 +391,7 @@ gui_core_display_about_dialog(gchar * desc,
 			      : _("The module has no About information.")),
 			     FALSE);
 
-	g_string_append_len(text, html_start, strlen(html_start));
+	g_string_append_len(text, html_start->str, strlen(html_start->str));
 	g_string_append_len(text, description->str, strlen(description->str));
 	g_string_append_len(text, str->str, strlen(str->str));
 	g_string_append_len(text, html_end, strlen(html_end));
@@ -396,7 +399,8 @@ gui_core_display_about_dialog(gchar * desc,
 
 	g_string_free(text, TRUE);
 	g_string_free(str, TRUE);
-	g_string_free(description, TRUE);
+	g_string_free(description, TRUE);  
+	g_string_free(html_start, TRUE);
 }
 
 /******************************************************************************
