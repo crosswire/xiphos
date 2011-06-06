@@ -398,7 +398,7 @@ G_MODULE_EXPORT void on_popup_print_activate           (GtkMenuItem     *menuite
   #ifdef USE_WEBKIT	
 		XIPHOS_HTML_PRINT_DOCUMENT ((XiphosHtml*) user_data);   
   #else 
-		XIPHOS_HTML_PRINT_DOCUMENT ((XiphosHtml*) user_data, 
+		XIPHOS_HTML_PRINT_DOCUMENT (GTK_WINDOW((XiphosHtml*) user_data), 
 					   dialog->mod_name, 
 					   dialog);   
   #endif
@@ -410,7 +410,7 @@ G_MODULE_EXPORT void on_popup_print_activate           (GtkMenuItem     *menuite
   #ifdef USE_WEBKIT	
 		XIPHOS_HTML_PRINT_DOCUMENT ((XiphosHtml*) user_data);   
   #else 
-		XIPHOS_HTML_PRINT_DOCUMENT ((XiphosHtml*) user_data, 
+		XIPHOS_HTML_PRINT_DOCUMENT (GTK_WINDOW((XiphosHtml*) user_data), 
 					   menu_mod_name, 
 					   NULL);
   #endif	

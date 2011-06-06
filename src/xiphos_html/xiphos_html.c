@@ -8,6 +8,7 @@ XiphosHtml *xiphos_html_new(DIALOG_DATA * dialog, gboolean is_dialog, gint pane)
 	priv->pane = pane;
 	priv->is_dialog = is_dialog;
 	priv->dialog = dialog;
+	
 
 #ifdef USE_GTKMOZEMBED
 	//make scrollbar appear on the left for RTL locales
