@@ -664,3 +664,20 @@ gecko_html_print_document(GtkWindow * window, gchar * mod_name,
 		delete swdisplay;
 #endif
 }
+
+void
+gecko_html_set_parms(GeckoHtml *html,
+		     GeckoHtmlPriv *priv,
+		     DIALOG_DATA *dialog,
+		     gboolean is_dialog,
+		     gint pane)
+{
+    	priv->pane = pane;
+	priv->is_dialog = is_dialog;
+	priv->dialog = dialog;
+
+	//make scrollbar appear on the left for RTL locales
+	GtkTextDirection dir = gtk_widget_get_direction(GTK_WIDGET (html));
+	if (dir == GTK_TEXT_DIR_RTL)
+	    priv->yelper->SetRTL();
+}
