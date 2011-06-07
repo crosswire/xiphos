@@ -57,6 +57,10 @@ def set_options(opt):
             dest='gtkhtml',
             help='Use gtkhtml instead of gtkmozembed [Default: disabled]')
             
+    opt.add_option('--enable-gtk2', action='store_true', default=True,
+            dest='gtk2',
+            help='Use gtk2 instead of gtk3 [Default: disabled]')
+
     opt.add_option('--enable-webkit', action='store_true', default=False,
             dest='webkit',
             help='Use gtk-webkit instead of gtkmozembed or gtkhtml [Default: disabled]')
@@ -258,6 +262,11 @@ def configure(conf):
     if env['IS_WIN32']:
         dfn('WIN32', 1)
 
+    #gtk
+    if opt.gtk2:
+        env['ENABLE_GTK2'] = True
+        dfn('GTK2', 1)
+
     # gtkhtml
     if opt.webkit:
 	env['ENABLE_WEBKIT'] = True
@@ -349,6 +358,9 @@ def configure(conf):
     "libxml-2.0"
     --cflags --libs'''
     .split()," ")
+
+    if ['ENABLE_GTK2']:
+        common_libs += ' libglade-2.0'
     
     conf.check_cfg(atleast_pkgconfig_version='0.9.0')
     conf.check_cfg(msg="Checking for GNOME related libs",
@@ -370,11 +382,11 @@ def configure(conf):
                    mandatory=True)
     env.append_value('ALL_LIBS', 'SWORD')
 
-    gtk3 = conf.check_cfg(package='gtk+-3.0',
-                   msg='Checking for GTK+3',
-                   okmsg='Definitely',
-                   errmsg='Probably not')
-    if gtk3 is not None:
+    if not ['ENABLE_GTK2']:
+        gtk3 = conf.check_cfg(package='gtk+-3.0',
+                       msg='Checking for GTK+3',
+                       okmsg='Definitely',
+                       errmsg='Probably not')
         conf.define('USE_GTK_3', 1)
     else:
         env.append_value('ALL_LIBS', 'LIBGLADE')
@@ -402,7 +414,9 @@ def configure(conf):
     elif env['ENABLE_WEBKIT']:
         conf.check_cfg(package='webkit-1.0',
 			uselib_store='WEBKIT',
-			msg='Checking for webkit')
+                        args='--libs --cflags',
+			msg='Checking for webkit',
+                        required=True)
 	env.append_value('ALL_LIBS', 'WEBKIT')
         conf.define('USE_WEBKIT', 1)
     ######################
