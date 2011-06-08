@@ -280,11 +280,12 @@ _popupmenu_requested_cb (XiphosHtml *html,
 GtkWidget *gui_create_book_pane(void)
 {
 	GtkWidget *box;
-#ifdef USE_XIPHOS_HTML
+/* #ifdef USE_XIPHOS_HTML
 	GtkWidget *eventbox;
-#else
+#endif */ /* USE_XIPHOS_HTML */
+#ifndef  USE_GTKMOZEMBED
 	GtkWidget *scrolledwindow;
-#endif /* USE_XIPHOS_HTML */
+#endif /* !USE_GTKMOZEMBED */
 	GtkWidget *navbar;
 
 	box = gtk_vbox_new(FALSE, 0);
@@ -292,21 +293,7 @@ GtkWidget *gui_create_book_pane(void)
 
 	navbar = gui_navbar_book_new();
 	gtk_box_pack_start(GTK_BOX(box), navbar, FALSE, FALSE, 0);
-
-#ifdef USE_XIPHOS_HTML
-	eventbox = gtk_event_box_new ();
-	gtk_widget_show (eventbox);
-	gtk_box_pack_start(GTK_BOX(box), eventbox, TRUE, TRUE, 0);
-	widgets.html_book = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, BOOK_TYPE)); //embed_new(BOOK_TYPE);
-	gtk_widget_show(widgets.html_book);
-	gtk_container_add(GTK_CONTAINER(eventbox),
-			 widgets.html_book);
-
-	g_signal_connect((gpointer)widgets.html_book,
-		      "popupmenu_requested",
-		      G_CALLBACK (_popupmenu_requested_cb),
-		      NULL);
-#else
+#ifndef  USE_GTKMOZEMBED
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
 	gtk_box_pack_start(GTK_BOX(box), scrolledwindow, TRUE, TRUE, 0);
@@ -316,7 +303,26 @@ GtkWidget *gui_create_book_pane(void)
 				       GTK_POLICY_AUTOMATIC);
 /*	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow,
                                              settings.shadow_type);*/
+#endif /* !USE_GTKMOZEMBED */
+#ifdef USE_XIPHOS_HTML
+/*	eventbox = gtk_event_box_new ();
+	gtk_widget_show (eventbox);
+	gtk_box_pack_start(GTK_BOX(box), eventbox, TRUE, TRUE, 0);*/
+	widgets.html_book = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, BOOK_TYPE)); //embed_new(BOOK_TYPE);
+	gtk_widget_show(widgets.html_book);
+ #ifdef USE_WEBKIT  
+	gtk_container_add(GTK_CONTAINER(scrolledwindow),
+			 widgets.html_book);
+ #else   
+	gtk_box_pack_start(GTK_BOX(box),
+			 widgets.html_book, TRUE, TRUE, 0);
+ #endif /* USE_WEBKIT */
 
+	g_signal_connect((gpointer)widgets.html_book,
+		      "popupmenu_requested",
+		      G_CALLBACK (_popupmenu_requested_cb),
+		      NULL);
+#else
 	widgets.html_book = gtk_html_new();
 	gtk_widget_show(widgets.html_book);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),

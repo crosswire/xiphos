@@ -1300,12 +1300,11 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	GtkWidget *scrolledwindow4;
 	GtkWidget *scrolledwindow_bm;
 	GtkWidget *title_label = NULL;
-#ifdef USE_XIPHOS_HTML
+#ifdef USE_GTKMOZEMBED
 	GtkWidget *frame;
-	//GtkWidget *eventbox;
 #else
 	GtkWidget *scrolledwindow;
-#endif
+#endif /* USE_GTKMOZEMBED */
 
 	GtkWidget *table2;
 
@@ -1326,22 +1325,7 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 			(gchar *) "paned_sidebar");
 	widgets.shortcutbar = widgets.paned_sidebar;
 
-#ifdef USE_XIPHOS_HTML
-	frame = gtk_frame_new(NULL);
-	gtk_widget_show(frame);
-	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
-	gtk_box_pack_start(GTK_BOX(widgets.box_side_preview), frame,
-				TRUE, TRUE,
-			   	0);
-
-
-	sidebar.html_viewer_eventbox = gtk_event_box_new();
-	gtk_widget_show(sidebar.html_viewer_eventbox);
-	gtk_container_add(GTK_CONTAINER(frame), sidebar.html_viewer_eventbox);
-
-	sidebar.html_viewer_widget = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, SB_VIEWER_TYPE));
-	gtk_container_add(GTK_CONTAINER(sidebar.html_viewer_eventbox), sidebar.html_viewer_widget);
-#else
+#ifndef  USE_GTKMOZEMBED
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
 	gtk_box_pack_start(GTK_BOX(widgets.box_side_preview), scrolledwindow, TRUE, TRUE,
@@ -1353,13 +1337,36 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
 					    scrolledwindow,
 					    settings.shadow_type);
+#endif /* !USE_GTKMOZEMBED */
+#ifdef USE_XIPHOS_HTML
+ #ifdef  USE_GTKMOZEMBED
+	frame = gtk_frame_new(NULL);
+	gtk_widget_show(frame);
+	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
+	gtk_box_pack_start(GTK_BOX(widgets.box_side_preview), frame,
+				TRUE, TRUE,
+			   	0);
+#endif /* USE_GTKMOZEMBED */
+
+/*
+	sidebar.html_viewer_eventbox = gtk_event_box_new();
+	gtk_widget_show(sidebar.html_viewer_eventbox);
+	gtk_container_add(GTK_CONTAINER(frame), sidebar.html_viewer_eventbox);
+*/
+	sidebar.html_viewer_widget = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, SB_VIEWER_TYPE));
+ #ifdef USE_WEBKIT  
+	gtk_container_add(GTK_CONTAINER(scrolledwindow), sidebar.html_viewer_widget);
+ #else
+	gtk_container_add(GTK_CONTAINER(frame), sidebar.html_viewer_widget);
+ #endif /* USE_WEBKIT */
+#else
 	sidebar.html_viewer_widget = gtk_html_new();
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
 			  sidebar.html_viewer_widget);
 	g_signal_connect(G_OBJECT(sidebar.html_viewer_widget),
 			 "link_clicked", G_CALLBACK(gui_link_clicked),
 			 NULL);
-#endif /* USE_GTKMOZEMBED*/
+#endif /* USE_XIPHOS_HTML */
 	gtk_widget_show(sidebar.html_viewer_widget);
 
 	/* ---------------------------------------------------------------- */
