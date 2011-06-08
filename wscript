@@ -361,6 +361,7 @@ def configure(conf):
 
     if env['ENABLE_GTK2']:
         common_libs += ' libglade-2.0'
+        common_libs += ' "gtk+-2.0 >= 2.14" '
     
     conf.check_cfg(atleast_pkgconfig_version='0.9.0')
     conf.check_cfg(msg="Checking for GNOME related libs",
