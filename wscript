@@ -363,10 +363,10 @@ def configure(conf):
         common_libs += ' "gtk+-3.0" '
         conf.define('USE_GTK_3', 1)
         # FC15 and Oneiric have this, Natty does not
-        if conf.check_cfg(modversion='libgtkhtml-4.0', msg='Checking for libgtkhtml4'):
+        if conf.check_cfg(modversion='libgtkhtml-4.0', msg='Checking for libgtkhtml4', okmsg='Yes', errmsg='No'):
             common_libs += ' "libgtkhtml-4.0" '
         # FC15 and Oneiric have this, Natty does not
-        if conf.check_cfg(modversion="gtkhtml-editor-4.0", msg="Checking for GtkHTML Editor 4.0"):
+        if conf.check_cfg(modversion="gtkhtml-editor-4.0", msg="Checking for GtkHTML Editor 4.0", okmsg='Yes', errmsg='No', mandatory=True):
             common_libs += ' "gtkhtml-editor-4.0" '
     
     conf.check_cfg(atleast_pkgconfig_version='0.9.0')
