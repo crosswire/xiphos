@@ -326,32 +326,8 @@ def configure(conf):
     define('PACKAGE_SOURCE_DIR', conf.escpath(os.path.abspath(srcdir))) # foder where was wscript executed
 
 
-    if conf.check_cfg(modversion='gtkhtml-editor-3.14',
-                      msg='Checking for GNOME3 gtkhtml-editor',
-                      okmsg='Deffinatly',
-                      errmsg='Probably, not'
-                      ):
-            editor='"gtkhtml-editor-3.14"'
-    elif conf.check_cfg(modversion='gtkhtml-editor-4.0',
-                         msg='Checking for GNOME gtkhtml-editor-4.0',
-                         okmsg='Definitely',
-                         errmsg='Probably not'
-                         ):
-            editor='"gtkhtml-editor-4.0"'
-    else:
-            editor='"gtkhtml-editor"'
-
-    if conf.check_cfg(modversion='libgtkhtml-4.0',
-                      msg='Checking for libgtkhtml4',
-                      okmsg='Definitely',
-                      errmsg='Probably not'
-                      ):
-            gtkhtml = 'libgtkhtml-4.0'
-    else:
-            gtkhtml = '"libgtkhtml-3.14 >= 3.23"'
-
     common_libs = string.join(
-    [editor, gtkhtml] + '''
+    '''
     "gmodule-2.0"
     "glib-2.0"
     "libgsf-1 >= 1.14"
@@ -360,8 +336,38 @@ def configure(conf):
     .split()," ")
 
     if env['ENABLE_GTK2']:
+        env.append_value('ALL_LIBS', 'LIBGLADE')
+        # We need to know specific versions of GTK+-2.0
+        conf.check_cfg(package="gtk+-2.0",
+                       atleast_version = "2.16",
+                       uselib_store="GTK_216")
+        conf.check_cfg(package="gtk+-2.0",
+                       atleast_version = "2.18",
+                       uselib_store="GTK_218")
+        conf.check_cfg(package="gtk+-2.0",
+                       atleast_version = "2.20",
+                       uselib_store="GTK_220")
         common_libs += ' libglade-2.0'
         common_libs += ' "gtk+-2.0 >= 2.14" '
+        common_libs += ' "libgtkhtml-3.14 >= 3.23" '
+        if conf.check_cfg(modversion='gtkhtml-editor-3.14',
+                          msg='Checking for GNOME3 gtkhtml-editor',
+                          okmsg='Deffinatly',
+                          errmsg='Probably, not'
+                          ):
+            common_libs += ' "gtkhtml-editor-3.14" '
+        else:
+            common_libs += ' "gtkhtml-editor" '
+    else:
+        # So far, we only care about GTK+3, not any of its subversions
+        common_libs += ' "gtk+-3.0" '
+        conf.define('USE_GTK_3', 1)
+        # FC15 and Oneiric have this, Natty does not
+        if conf.check_cfg(modversion='libgtkhtml-4.0', msg='Checking for libgtkhtml4'):
+            common_libs += ' "libgtkhtml-4.0" '
+        # FC15 and Oneiric have this, Natty does not
+        if conf.check_cfg(modversion="gtkhtml-editor-4.0", msg="Checking for GtkHTML Editor 4.0"):
+            common_libs += ' "gtkhtml-editor-4.0" '
     
     conf.check_cfg(atleast_pkgconfig_version='0.9.0')
     conf.check_cfg(msg="Checking for GNOME related libs",
@@ -382,24 +388,6 @@ def configure(conf):
                    uselib_store='SWORD',
                    mandatory=True)
     env.append_value('ALL_LIBS', 'SWORD')
-
-    if not env['ENABLE_GTK2']:
-        gtk3 = conf.check_cfg(package='gtk+-3.0',
-                       msg='Checking for GTK+3',
-                       okmsg='Definitely',
-                       errmsg='Probably not')
-        conf.define('USE_GTK_3', 1)
-    else:
-        env.append_value('ALL_LIBS', 'LIBGLADE')
-        conf.check_cfg(package="gtk+-2.0",
-                       atleast_version = "2.16",
-                       uselib_store="GTK_216")
-        conf.check_cfg(package="gtk+-2.0",
-                       atleast_version = "2.18",
-                       uselib_store="GTK_218")
-        conf.check_cfg(package="gtk+-2.0",
-                       atleast_version = "2.20",
-                       uselib_store="GTK_220")
 
     ######################
     ### gtk-webkit for html rendering
