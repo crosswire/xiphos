@@ -57,7 +57,7 @@ def set_options(opt):
             dest='gtkhtml',
             help='Use gtkhtml instead of gtkmozembed [Default: disabled]')
             
-    opt.add_option('--enable-gtk2', action='store_true', default=True,
+    opt.add_option('--enable-gtk2', action='store_true', default=False,
             dest='gtk2',
             help='Use gtk2 instead of gtk3 [Default: disabled]')
 
@@ -359,7 +359,7 @@ def configure(conf):
     --cflags --libs'''
     .split()," ")
 
-    if ['ENABLE_GTK2']:
+    if env['ENABLE_GTK2']:
         common_libs += ' libglade-2.0'
     
     conf.check_cfg(atleast_pkgconfig_version='0.9.0')
@@ -382,7 +382,7 @@ def configure(conf):
                    mandatory=True)
     env.append_value('ALL_LIBS', 'SWORD')
 
-    if not ['ENABLE_GTK2']:
+    if not env['ENABLE_GTK2']:
         gtk3 = conf.check_cfg(package='gtk+-3.0',
                        msg='Checking for GTK+3',
                        okmsg='Definitely',
