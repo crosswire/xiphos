@@ -362,8 +362,7 @@ GtkWidget *create_parallel_dialog(void)
 	GtkWidget *dialog_action_area25;
 	GtkWidget *hbuttonbox4;
 	GtkWidget *btnDockInt;
-#ifdef USE_XIPHOS_HTML
-	GtkWidget *eventbox;
+#ifdef USE_GTKMOZEMBED
 	GtkWidget *frame;
 #else
 	GtkWidget *scrolled_window;
@@ -386,8 +385,6 @@ GtkWidget *create_parallel_dialog(void)
 	g_object_set_data(G_OBJECT(dialog_parallel),
 			  "dialog_vbox25", dialog_vbox25);
 	gtk_widget_show(dialog_vbox25);
-
-
 
 	vboxInt = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vboxInt);
@@ -423,26 +420,8 @@ GtkWidget *create_parallel_dialog(void)
 		}
 	}
 #endif /* 0 */
-
-#ifdef USE_XIPHOS_HTML
-	frame = gtk_frame_new(NULL);
-	gtk_widget_show(frame);
-	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
-	gtk_box_pack_start(GTK_BOX(vboxInt), frame, TRUE, TRUE,0);
-
-	eventbox = gtk_event_box_new ();
-	gtk_widget_show (eventbox);
-	gtk_container_add(GTK_CONTAINER(frame), eventbox);
-
-	widgets.html_parallel_dialog = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, PARALLEL_TYPE));
-	gtk_widget_show(widgets.html_parallel_dialog);
-	gtk_container_add(GTK_CONTAINER(eventbox),
-			  widgets.html_parallel_dialog);
-	g_signal_connect((gpointer)widgets.html_parallel_dialog,
-			 "popupmenu_requested",
-			 G_CALLBACK (_popupmenu_requested_cb),
-			 NULL);
-#else
+    
+#ifndef  USE_GTKMOZEMBED
 	scrolled_window = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolled_window);
 	gtk_box_pack_start(GTK_BOX(vboxInt), scrolled_window, TRUE, TRUE,0);
@@ -451,6 +430,27 @@ GtkWidget *create_parallel_dialog(void)
 				       GTK_POLICY_ALWAYS);
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolled_window,
                                              settings.shadow_type);
+#endif
+
+#ifdef USE_XIPHOS_HTML
+	widgets.html_parallel_dialog = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, PARALLEL_TYPE));
+	gtk_widget_show(widgets.html_parallel_dialog);
+ #ifdef USE_WEBKIT 
+	gtk_container_add(GTK_CONTAINER(scrolled_window),
+			  widgets.html_parallel_dialog);
+ #else    
+	frame = gtk_frame_new(NULL);
+	gtk_widget_show(frame);
+	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
+	gtk_box_pack_start(GTK_BOX(vboxInt), frame, TRUE, TRUE,0);	
+	gtk_container_add(GTK_CONTAINER(frame),
+			  widgets.html_parallel_dialog);    
+ #endif /* USE_WEBKIT */ 
+	g_signal_connect((gpointer)widgets.html_parallel_dialog,
+			 "popupmenu_requested",
+			 G_CALLBACK (_popupmenu_requested_cb),
+			 NULL);
+#else
 
 	widgets.html_parallel_dialog = gtk_html_new();
 	gtk_widget_show(widgets.html_parallel_dialog);

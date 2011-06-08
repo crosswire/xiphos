@@ -199,32 +199,16 @@ _popupmenu_requested_cb(GtkHTML *html,
 void gui_create_parallel_page(void)
 {
 	GtkWidget *label;
-#ifdef USE_XIPHOS_HTML
-	GtkWidget *eventbox;
-#else
+#ifndef  USE_GTKMOZEMBED
 	GtkWidget *scrolled_window;
-#endif
+#endif /* !USE_GTKMOZEMBED */
 
 	/*
 	 * parallel page
 	 */
 	settings.dockedInt = TRUE;
-#ifdef USE_XIPHOS_HTML
-	eventbox = gtk_event_box_new ();
-	gtk_widget_show (eventbox);
-	gtk_container_add(GTK_CONTAINER(widgets.notebook_bible_parallel), eventbox);
 
-	widgets.frame_parallel = eventbox;
-	widgets.html_parallel = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, PARALLEL_TYPE));
-	gtk_widget_show(widgets.html_parallel);
-	gtk_container_add(GTK_CONTAINER(eventbox),
-			  widgets.html_parallel);
-
-	g_signal_connect((gpointer)widgets.html_parallel,
-			 "popupmenu_requested",
-			 G_CALLBACK (_popupmenu_requested_cb),
-			 NULL);
-#else
+#ifndef  USE_GTKMOZEMBED
 	scrolled_window = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolled_window);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window),
@@ -232,10 +216,29 @@ void gui_create_parallel_page(void)
 				       GTK_POLICY_ALWAYS);
 /*	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolled_window,
                                              settings.shadow_type);*/
-	widgets.frame_parallel = scrolled_window;
-
 	gtk_container_add(GTK_CONTAINER(widgets.notebook_bible_parallel),
 			  scrolled_window);
+#endif /* !USE_GTKMOZEMBED */
+#ifdef USE_XIPHOS_HTML
+	widgets.html_parallel = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, PARALLEL_TYPE));
+	gtk_widget_show(widgets.html_parallel);
+    
+ #ifdef USE_WEBKIT  
+	widgets.frame_parallel = scrolled_window;
+	gtk_container_add(GTK_CONTAINER(scrolled_window),
+			  widgets.html_parallel);
+ #else
+	widgets.frame_parallel = widgets.notebook_bible_parallel;
+	gtk_container_add(GTK_CONTAINER(widgets.notebook_bible_parallel),
+			  widgets.html_parallel);
+ #endif /* USE_WEBKIT */ 
+	g_signal_connect((gpointer)widgets.html_parallel,
+			 "popupmenu_requested",
+			 G_CALLBACK (_popupmenu_requested_cb),
+			 NULL);
+#else
+	widgets.frame_parallel = scrolled_window;
+
 	widgets.html_parallel = gtk_html_new();
 	gtk_widget_show(widgets.html_parallel);
 	gtk_html_load_empty(GTK_HTML(widgets.html_parallel));
@@ -255,7 +258,7 @@ void gui_create_parallel_page(void)
 	g_signal_connect(G_OBJECT(widgets.html_parallel),
 			 "url_requested",
 			 G_CALLBACK(url_requested), NULL);
-#endif
+#endif  /* USE_XIPHOS_HTML */
 
 	label = gtk_label_new(_("Parallel View"));
 	gtk_widget_show(label);
