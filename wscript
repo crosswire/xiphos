@@ -408,7 +408,7 @@ def configure(conf):
                         uselib_store='WEBKIT',
                         args='--libs --cflags',
                         msg='Checking for webkit',
-                        required=True)
+                        mandatory=True)
         conf.define('USE_WEBKIT', 1)
         env.append_value('ALL_LIBS', 'WEBKIT')
     elif env['ENABLE_WEBKIT']:
@@ -416,7 +416,7 @@ def configure(conf):
 			uselib_store='WEBKIT',
                         args='--libs --cflags',
 			msg='Checking for webkit',
-                        required=True)
+                        mandatory=True)
 	env.append_value('ALL_LIBS', 'WEBKIT')
         conf.define('USE_WEBKIT', 1)
     ######################
