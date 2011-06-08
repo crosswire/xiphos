@@ -323,24 +323,29 @@ void adj_changed(GtkAdjustment * adjustment1, gpointer user_data)
 GtkWidget *gui_create_bible_pane(void)
 {
 	GtkWidget *vbox;
+#ifndef  USE_GTKMOZEMBED
 	GtkWidget *scrolledwindow;
-
+#endif
 	vbox = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox);
-
+  
+#ifndef  USE_GTKMOZEMBED
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
 	gtk_box_pack_start(GTK_BOX(vbox),
 			   scrolledwindow,
-	                   TRUE,
-			   TRUE, 0);
+	                   TRUE, TRUE, 0);
+#endif
 #ifdef USE_XIPHOS_HTML
-
 	widgets.html_text = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, TEXT_TYPE));
 	gtk_widget_show(widgets.html_text);
+ #ifdef USE_WEBKIT  
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
 	                  widgets.html_text);
-	                  
+ #else   
+	gtk_box_pack_start(GTK_BOX(vbox),
+			 widgets.html_text, TRUE, TRUE, 0);
+ #endif   
 	g_signal_connect((gpointer)widgets.html_text,
 	              "popupmenu_requested",
 	              G_CALLBACK (_popupmenu_requested_cb),

@@ -550,7 +550,9 @@ GtkWidget *gui_create_dictionary_pane(void)
 	GtkWidget *image2;
 	GtkWidget *arrow1;
 	GtkWidget *dict_drop_down;
+#ifndef  USE_GTKMOZEMBED
 	GtkWidget *scrolledwindow;
+#endif
 
 	box_dict = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(box_dict);
@@ -591,18 +593,25 @@ GtkWidget *gui_create_dictionary_pane(void)
 	image2 = gtk_image_new_from_stock(GTK_STOCK_GO_DOWN, GTK_ICON_SIZE_BUTTON);
 	gtk_widget_show(image2);
 	gtk_container_add(GTK_CONTAINER(button11), image2);
-
+    
+#ifndef  USE_GTKMOZEMBED
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
 	gtk_box_pack_start(GTK_BOX(box_dict), scrolledwindow, TRUE, TRUE, 0);
 	
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow,
-                                             settings.shadow_type);
+                                             settings.shadow_type);   
+#endif
 #ifdef USE_XIPHOS_HTML
 	widgets.html_dict = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, DICTIONARY_TYPE));
-	gtk_widget_show(widgets.html_dict);
+	gtk_widget_show(widgets.html_dict);   
+ #ifdef USE_WEBKIT  
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
-			 widgets.html_dict);
+			 widgets.html_dict);  
+ #else   
+	gtk_box_pack_start(GTK_BOX(box_dict), widgets.html_dict, TRUE, TRUE, 0);     
+ #endif
+    
 	g_signal_connect((gpointer)widgets.html_dict,
 		      "popupmenu_requested",
 		      G_CALLBACK (_popupmenu_requested_cb),
