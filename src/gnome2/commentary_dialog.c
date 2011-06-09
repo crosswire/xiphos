@@ -308,10 +308,8 @@ void gui_create_commentary_dialog(DIALOG_DATA *d,
 	GtkWidget *vbox30;
 	GtkWidget *vbox_toolbars;
 	GtkWidget *toolbar_nav;
-	GtkWidget *frame19;
-#ifdef USE_XIPHOS_HTML
-	GtkWidget *eventbox;
-#else
+	GtkWidget *frame19;     
+#ifndef  USE_GTKMOZEMBED
 	GtkWidget *scrolledwindow38;
 #endif
 
@@ -348,22 +346,8 @@ void gui_create_commentary_dialog(DIALOG_DATA *d,
 	gtk_widget_show(frame19);
 	gtk_box_pack_start(GTK_BOX(vbox30), frame19, TRUE, TRUE, 0);
 	gtk_frame_set_shadow_type(GTK_FRAME(frame19), GTK_SHADOW_IN);
-
-#ifdef USE_XIPHOS_HTML
-
-	eventbox = gtk_event_box_new();
-	gtk_widget_show(eventbox);
-	gtk_container_add(GTK_CONTAINER(frame19), eventbox);
-
-	d->html = GTK_WIDGET(XIPHOS_HTML_NEW(((DIALOG_DATA*) d),TRUE,DIALOG_COMMENTARY_TYPE));
-
-	gtk_container_add(GTK_CONTAINER(eventbox), d->html);
-	gtk_widget_show(d->html);
-	g_signal_connect((gpointer)d->html,
-		      "popupmenu_requested",
-		      G_CALLBACK (_popupmenu_requested_cb),
-		      (DIALOG_DATA*)d);
-#else
+                   
+#ifndef  USE_GTKMOZEMBED
 	scrolledwindow38 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow38);
 	gtk_container_add(GTK_CONTAINER(frame19), scrolledwindow38);
@@ -373,25 +357,36 @@ void gui_create_commentary_dialog(DIALOG_DATA *d,
 				       GTK_POLICY_AUTOMATIC);
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
 					    scrolledwindow38,
-					    settings.shadow_type);
+					    settings.shadow_type);   
+#endif
+	
+#ifdef USE_XIPHOS_HTML
+	d->html = GTK_WIDGET(XIPHOS_HTML_NEW(((DIALOG_DATA*) d),TRUE,DIALOG_COMMENTARY_TYPE));
+	gtk_widget_show(d->html);           
+ #ifdef USE_WEBKIT     
+	gtk_container_add(GTK_CONTAINER(scrolledwindow38), d->html);  
+ #else  
+	gtk_container_add(GTK_CONTAINER(frame19), d->html);                                          
+ #endif   
+	g_signal_connect((gpointer)d->html,
+		      "popupmenu_requested",
+		      G_CALLBACK (_popupmenu_requested_cb),
+		      (DIALOG_DATA*)d);
+#else	
 	d->html = gtk_html_new();
 	gtk_widget_show(d->html);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow38),
 			  d->html);
 	gtk_html_load_empty(GTK_HTML(d->html));
-
-#ifndef USE_XIPHOS_HTML
+	
 	g_signal_connect(G_OBJECT(d->html),
 			 "link_clicked",
 			 G_CALLBACK(commentary_prefixable_link), d);
-#endif
-
 	g_signal_connect(G_OBJECT(d->html), "on_url",
 			 G_CALLBACK(dialog_url), d);
 	g_signal_connect(G_OBJECT(d->html),
 			 "button_press_event",
 			 G_CALLBACK(button_press_event), d);
-
 #endif  /* !USE_XIPHOS_HTML */
 
 	g_signal_connect(G_OBJECT(d->dialog), "destroy",
