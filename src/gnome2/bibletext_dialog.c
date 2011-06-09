@@ -522,10 +522,8 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 {
 	GtkWidget *vbox33;
 	GtkWidget *paned;
-	GtkWidget *frame;
-#ifdef USE_XIPHOS_HTML
-	GtkWidget *eventbox;
-#else
+	GtkWidget *frame;      
+#ifndef  USE_GTKMOZEMBED
 	GtkWidget *swVText;
 #endif
 
@@ -555,17 +553,26 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 	gtk_widget_show(frame);
 	gtk_paned_add1((GtkPaned *)paned,frame);
 	gtk_widget_set_size_request(frame, -1, 200);
-
+            
+#ifndef  USE_GTKMOZEMBED
+	swVText = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_show(swVText);
+	gtk_container_add(GTK_CONTAINER(frame), swVText);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(swVText),
+				       GTK_POLICY_NEVER,
+				       GTK_POLICY_ALWAYS);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)swVText,
+					    settings.shadow_type);
+#endif
 #ifdef USE_XIPHOS_HTML
-	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
-
-	eventbox = gtk_event_box_new();
-	gtk_widget_show(eventbox);
-	gtk_container_add(GTK_CONTAINER(frame), eventbox);
-        vt->html = GTK_WIDGET(XIPHOS_HTML_NEW(vt, TRUE, DIALOG_TEXT_TYPE));
-
+	vt->html = GTK_WIDGET(XIPHOS_HTML_NEW(vt, TRUE, DIALOG_TEXT_TYPE));
 	gtk_widget_show(vt->html);
-	gtk_container_add(GTK_CONTAINER(eventbox), vt->html);
+ #ifdef USE_WEBKIT     
+	gtk_container_add(GTK_CONTAINER(swVText), vt->html);	
+ #else   
+	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
+	gtk_container_add(GTK_CONTAINER(frame), vt->html);                                          
+ #endif   
 	g_signal_connect((gpointer)vt->html,
 		      "popupmenu_requested",
 		      G_CALLBACK(_popupmenu_requested_cb),
@@ -576,15 +583,11 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 	gtk_paned_add2((GtkPaned *)paned,frame);
 	gtk_widget_set_size_request(frame, -1, 100);
 	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
-
-	eventbox = gtk_event_box_new();
-	gtk_widget_show(eventbox);
-	gtk_container_add(GTK_CONTAINER(frame), eventbox);
-
+        
         vt->previewer = GTK_WIDGET(XIPHOS_HTML_NEW(vt, TRUE, VIEWER_TYPE));
 	gtk_widget_show(vt->previewer);
-	gtk_container_add(GTK_CONTAINER(eventbox), vt->previewer);
-#else
+	
+ #ifdef USE_WEBKIT     
 	swVText = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(swVText);
 	gtk_container_add(GTK_CONTAINER(frame), swVText);
@@ -592,7 +595,12 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_ALWAYS);
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)swVText,
-					    settings.shadow_type);
+                                             settings.shadow_type);
+	gtk_container_add(GTK_CONTAINER(swVText), vt->previewer);                   
+ #else   
+	gtk_container_add(GTK_CONTAINER(frame), vt->previewer);	                                                    
+ #endif   
+#else
 	vt->html = gtk_html_new();
 	gtk_widget_show(vt->html);
 	gtk_container_add(GTK_CONTAINER(swVText), vt->html);
