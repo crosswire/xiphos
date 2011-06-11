@@ -74,7 +74,7 @@ gboolean is_search_result;
 extern gboolean shift_key_pressed;
 
 
-static GtkWidget* create_menu_modules(void);
+static void create_menu_modules(void);
 void on_export_verselist_activate (GtkMenuItem * menuitem, gpointer user_data);
 
 
@@ -940,22 +940,27 @@ on_export_verselist_activate (GtkMenuItem * menuitem,
 GtkWidget *create_results_menu(void)
 {
 	GtkWidget *menu;
-	gchar *glade_file;
-	GladeXML *gxml;
+	gchar *file; 
+	GError *er = NULL;	
+	GtkBuilder *builder;  
 
-	glade_file = gui_general_user_file ("xi-menus.glade", FALSE);
-	g_return_val_if_fail ((glade_file != NULL), NULL);
+	file = gui_general_user_file ("xi-menus-popup.glade", FALSE);
+	g_return_val_if_fail ((file != NULL), NULL);
+               
+	builder = gtk_builder_new ();
+	       
+	if (!gtk_builder_add_from_file (builder, file, &er)) {
+		GS_message(("%s %s","gtk_builder_add_from_file returned ",er->message));
+		g_error_free(er);						 
+		return NULL;
+	}
 
-	gxml = glade_xml_new (glade_file, "menu_verselist", NULL);
+	g_free (file);
 
-	g_free (glade_file);
-	g_return_val_if_fail ((gxml != NULL), NULL);
-
-	menu = glade_xml_get_widget (gxml, "menu_verselist");
-    	/* connect signals and data */
-	glade_xml_signal_autoconnect_full
-		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);
-
+	menu = GTK_WIDGET (gtk_builder_get_object (builder, "menu_verselist"));
+	     
+    	/* connect signals and data */    
+        gtk_builder_connect_signals (builder, NULL);    
 	return menu;
 }
 
@@ -975,27 +980,32 @@ GtkWidget *create_results_menu(void)
  *   void
  */
 static
-GtkWidget* create_menu_modules(void)
+void create_menu_modules(void)
 {
-	gchar *glade_file;
-	GladeXML *gxml;
+	gchar *file;   
+	GError *er = NULL;	
+	GtkBuilder *builder; 
 
-	glade_file = gui_general_user_file ("xi-menus.glade", FALSE);
-	g_return_val_if_fail ((glade_file != NULL), NULL);
+	file = gui_general_user_file ("xi-menus-popup.glade", FALSE);
+	g_return_if_fail ((file != NULL));
+                      
+	builder = gtk_builder_new ();
+	       
+	if (!gtk_builder_add_from_file (builder, file, &er)) {
+		GS_message(("%s %s","gtk_builder_add_from_file returned ",er->message));
+		g_error_free(er);						 
+		return;
+	}
 
-	gxml = glade_xml_new (glade_file, "menu_modules", NULL);
+	g_free (file);
 
-	g_free (glade_file);
-	g_return_val_if_fail ((gxml != NULL), NULL);
-
-	GtkWidget *menu 	= glade_xml_get_widget (gxml, "menu_modules");
-	glade_xml_signal_autoconnect_full
-		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);
-
+	GtkWidget *menu 	= GTK_WIDGET (gtk_builder_get_object (builder, "menu_modules"));
+	
+    	/* connect signals and data */    
+        gtk_builder_connect_signals (builder, NULL);  
+	
 	gtk_menu_popup ((GtkMenu*)menu, NULL, NULL, NULL, NULL, 2,
 			gtk_get_current_event_time());
-
-	return menu;
 }
 
 
@@ -1037,22 +1047,29 @@ on_outlined_topic_activate(GtkMenuItem *menuitem,
 GtkWidget *create_menu_prayerlist(void)
 {
 	GtkWidget *menu;
-	gchar *glade_file;
-	GladeXML *gxml;
+	gchar *file;   
+	GError *er = NULL;	
+	GtkBuilder *builder; 
 
-	glade_file = gui_general_user_file ("xi-menus.glade", FALSE);
-	g_return_val_if_fail ((glade_file != NULL), NULL);
+	file = gui_general_user_file ("xi-menus-popup.glade", FALSE);   
+	g_return_val_if_fail ((file != NULL), NULL);
+                      
+	builder = gtk_builder_new ();
+	       
+	if (!gtk_builder_add_from_file (builder, file, &er)) {
+		GS_message(("%s %s","gtk_builder_add_from_file returned ",er->message));
+		g_error_free(er);						 
+		return NULL;
+	}
 
-	gxml = glade_xml_new (glade_file, "menu_prayerlist", NULL);
-
-	g_free (glade_file);
-	g_return_val_if_fail ((gxml != NULL), NULL);
-
-	menu = glade_xml_get_widget (gxml, "menu_prayerlist");
-	glade_xml_signal_autoconnect_full
-		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);
+	g_free (file);
+	
+	menu = GTK_WIDGET (gtk_builder_get_object (builder, "menu_prayerlist"));
+                
+    	/* connect signals and data */    
+        gtk_builder_connect_signals (builder, NULL);
+	
 	return menu;
-
 }
 
 void
@@ -1065,20 +1082,28 @@ on_edit_activate(GtkMenuItem *menuitem,
 GtkWidget *create_menu_prayerlist_mod(void)
 {
 	GtkWidget *menu;
-	gchar *glade_file;
-	GladeXML *gxml;
+	gchar *file;
+	GError *er = NULL;	
+	GtkBuilder *builder;
+            
+	builder = gtk_builder_new ();
+	
+	file = gui_general_user_file ("xi-menus-popup.glade", FALSE);  
+	g_return_val_if_fail ((file != NULL), NULL);
 
-	glade_file = gui_general_user_file ("xi-menus.glade", FALSE);
-	g_return_val_if_fail ((glade_file != NULL), NULL);
+	if (!gtk_builder_add_from_file (builder, file, &er)) {
+		GS_message(("%s %s","gtk_builder_add_from_file returned ",er->message));
+		g_error_free(er);						 
+		return NULL;
+	}
 
-	gxml = glade_xml_new (glade_file, "menu_prayerlist_mod", NULL);
+	g_free (file);
+	
 
-	g_free (glade_file);
-	g_return_val_if_fail ((gxml != NULL), NULL);
-
-	menu = glade_xml_get_widget (gxml, "menu_prayerlist_mod");
-	glade_xml_signal_autoconnect_full
-		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);
+	menu = GTK_WIDGET (gtk_builder_get_object (builder, "menu_prayerlist_mod"));   
+    	/* connect signals and data */    
+        gtk_builder_connect_signals (builder, NULL);
+	
 	return menu;
 }
 
