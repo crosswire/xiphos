@@ -805,32 +805,38 @@ on_sidebar_showhide_activate(GtkMenuItem *menuitem, gpointer user_data)
 
 GtkWidget *gui_create_main_menu(void)
 {
-	gchar *glade_file;
-	GladeXML *gxml;
- //   	const gchar *mname = NULL;
+	gchar *file;
+	GError *er = NULL;	
+	GtkBuilder *builder;  
+    	GtkWidget *menu;
+	
+	builder = gtk_builder_new ();
+	
+	file = gui_general_user_file ("xi-menus.glade", FALSE);  
+	g_return_val_if_fail ((file != NULL), NULL);
 
-	glade_file = gui_general_user_file ("xi-menus.glade", FALSE);
-	g_return_val_if_fail (glade_file != NULL, NULL);
+	if (!gtk_builder_add_from_file (builder, file, &er)) {
+		GS_message(("%s %s","gtk_builder_add_from_file returned ",er->message));
+		g_error_free(er);						 
+		return NULL;
+	}
 
-	gxml = glade_xml_new (glade_file, "menu_main", NULL);
+	g_free (file);
+	
+	menu = GTK_WIDGET (gtk_builder_get_object (builder, "menu_main"));
 
-	g_free (glade_file);
-	g_return_val_if_fail (gxml != NULL, NULL);
+	widgets.viewtexts_item = GTK_WIDGET (gtk_builder_get_object (builder, "show_bible_text"));
+	widgets.viewpreview_item = GTK_WIDGET (gtk_builder_get_object (builder, "preview"));
+	widgets.viewcomms_item = GTK_WIDGET (gtk_builder_get_object (builder, "commentary"));
+	widgets.viewdicts_item = GTK_WIDGET (gtk_builder_get_object (builder, "show_dictionary_lexicon"));
+	widgets.linkedtabs_item = GTK_WIDGET (gtk_builder_get_object (builder, "link_tabs"));
+	widgets.readaloud_item = GTK_WIDGET (gtk_builder_get_object (builder, "read_aloud"));
+	widgets.showversenum_item = GTK_WIDGET (gtk_builder_get_object (builder, "show_verse_numbers"));
+	widgets.versehighlight_item = GTK_WIDGET (gtk_builder_get_object (builder, "highlight_current_verse"));
+	widgets.parallel_tab_item = GTK_WIDGET (gtk_builder_get_object (builder, "show_parallel_view_in_a_tab"));
+	widgets.side_preview_item = GTK_WIDGET (gtk_builder_get_object (builder, "show_previewer_in_sidebar"));
 
-	GtkWidget *menu 	= glade_xml_get_widget (gxml, "menu_main");
-
-	widgets.viewtexts_item = glade_xml_get_widget (gxml, "show_bible_text");
-	widgets.viewpreview_item = glade_xml_get_widget (gxml, "preview");
-	widgets.viewcomms_item = glade_xml_get_widget (gxml, "commentary");
-	widgets.viewdicts_item = glade_xml_get_widget (gxml, "show_dictionary_lexicon");
-	widgets.linkedtabs_item = glade_xml_get_widget (gxml, "link_tabs");
-	widgets.readaloud_item = glade_xml_get_widget (gxml, "read_aloud");
-	widgets.showversenum_item = glade_xml_get_widget (gxml, "show_verse_numbers");
-	widgets.versehighlight_item = glade_xml_get_widget (gxml, "highlight_current_verse");
-	widgets.parallel_tab_item = glade_xml_get_widget (gxml, "show_parallel_view_in_a_tab");
-	widgets.side_preview_item = glade_xml_get_widget (gxml, "show_previewer_in_sidebar");
-
-	widgets.new_journal_item = glade_xml_get_widget (gxml, "newjournal");
+	widgets.new_journal_item = GTK_WIDGET (gtk_builder_get_object (builder, "newjournal"));
 
 	/* map tab's show state into view menu. */
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
@@ -864,11 +870,11 @@ GtkWidget *gui_create_main_menu(void)
 				       settings.showversenum);
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.versehighlight_item),
-				       settings.versehighlight);
-    	/* connect signals and data */
-	glade_xml_signal_autoconnect_full
-		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);
-
+				       settings.versehighlight);  
+	
+    	/* connect signals and data */    
+        gtk_builder_connect_signals (builder, NULL);
+	
 	//set up global function to handle all link buttons
 //	gtk_link_button_set_uri_hook (link_uri_hook, NULL, NULL);
 
