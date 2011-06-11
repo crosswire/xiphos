@@ -1,0 +1,737 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk+" version="2.16"/>
+  <!-- interface-naming-policy project-wide -->
+  <object class="GtkMenu" id="menu_popup">
+    <child>
+      <object class="GtkImageMenuItem" id="about">
+        <property name="label">About</property>
+        <property name="visible">True</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_popup_about_activate"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="bookmark">
+        <property name="label">Bookmark</property>
+        <property name="visible">True</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_popup_bookmark_activate"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="mark_verse">
+        <property name="label">Annotate Verse</property>
+        <property name="visible">True</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_mark_verse_activate"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkSeparatorMenuItem" id="separator4">
+        <property name="visible">True</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="export_passage">
+        <property name="label">Copy/Export Passage</property>
+        <property name="visible">True</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_popup_export_passage_activate"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkSeparatorMenuItem" id="separator9">
+        <property name="visible">True</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="file1">
+        <property name="label">File</property>
+        <property name="visible">True</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <child type="submenu">
+          <object class="GtkMenu" id="file1_menu">
+            <child>
+              <object class="GtkImageMenuItem" id="open_module2">
+                <property name="label">Open Module</property>
+                <property name="visible">True</property>
+                <property name="use_underline">True</property>
+                <property name="use_stock">True</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkSeparatorMenuItem" id="separator5">
+                <property name="visible">True</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkImageMenuItem" id="print">
+                <property name="label">gtk-print</property>
+                <property name="visible">True</property>
+                <property name="use_underline">True</property>
+                <property name="use_stock">True</property>
+                <signal name="activate" handler="on_popup_print_activate"/>
+              </object>
+            </child>
+            <child>
+              <object class="GtkImageMenuItem" id="close">
+                <property name="label">gtk-close</property>
+                <property name="visible">True</property>
+                <property name="use_underline">True</property>
+                <property name="use_stock">True</property>
+                <signal name="activate" handler="on_close_activate"/>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="edit1">
+        <property name="label">Edit</property>
+        <property name="visible">True</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <child type="submenu">
+          <object class="GtkMenu" id="edit1_menu">
+            <child>
+              <object class="GtkImageMenuItem" id="copy">
+                <property name="label">gtk-copy</property>
+                <property name="visible">True</property>
+                <property name="use_underline">True</property>
+                <property name="use_stock">True</property>
+                <signal name="activate" handler="on_popup_copy_activate"/>
+              </object>
+            </child>
+            <child>
+              <object class="GtkImageMenuItem" id="find">
+                <property name="label">gtk-find</property>
+                <property name="visible">True</property>
+                <property name="use_underline">True</property>
+                <property name="use_stock">True</property>
+                <signal name="activate" handler="on_popup_find_activate"/>
+              </object>
+            </child>
+            <child>
+              <object class="GtkImageMenuItem" id="note">
+                <property name="label">Note</property>
+                <property name="visible">True</property>
+                <property name="use_underline">True</property>
+                <property name="use_stock">True</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkImageMenuItem" id="open_in_editor">
+                <property name="label">Open in editor</property>
+                <property name="visible">True</property>
+                <property name="use_underline">True</property>
+                <property name="use_stock">True</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="module_options">
+        <property name="label">Module Options</property>
+        <property name="visible">True</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <child type="submenu">
+          <object class="GtkMenu" id="module_options_menu">
+            <child>
+              <object class="GtkImageMenuItem" id="font">
+                <property name="label">gtk-select-font</property>
+                <property name="visible">True</property>
+                <property name="use_underline">True</property>
+                <property name="use_stock">True</property>
+                <signal name="activate" handler="on_popup_font_activate"/>
+              </object>
+            </child>
+            <child>
+              <object class="GtkSeparatorMenuItem" id="separator10">
+                <property name="visible">True</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="verse_per_line">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Verse Per Line</property>
+                <property name="use_underline">True</property>
+                <signal name="activate" handler="on_verse_per_line_activate"/>
+              </object>
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="words_of_christ_in_red">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Words of Christ in Red</property>
+                <property name="use_underline">True</property>
+                <signal name="activate" handler="on_words_of_christ_in_red_activate"/>
+              </object>
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="strong's_numbers">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Strong's Numbers</property>
+                <property name="use_underline">True</property>
+                <signal name="activate" handler="on_strong_s_numbers_activate"/>
+              </object>
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="morphological_tags">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Morphological Tags</property>
+                <property name="use_underline">True</property>
+                <signal name="activate" handler="on_morphological_tags_activate"/>
+              </object>
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="footnotes">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Footnotes</property>
+                <property name="use_underline">True</property>
+                <signal name="activate" handler="on_footnotes_activate"/>
+              </object>
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="greek_accents">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Greek Accents</property>
+                <property name="use_underline">True</property>
+                <signal name="activate" handler="on_greek_accents_activate"/>
+              </object>
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="lemmas">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Lemmas</property>
+                <property name="use_underline">True</property>
+                <signal name="activate" handler="on_lemmas_activate"/>
+              </object>
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="scripture_cross-references">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Scripture Cross-references</property>
+                <property name="use_underline">True</property>
+                <signal name="activate" handler="on_scripture_cross_references_activate"/>
+              </object>
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="hebrew_vowel_points">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Hebrew Vowel Points</property>
+                <property name="use_underline">True</property>
+                <signal name="activate" handler="on_hebrew_vowel_points_activate"/>
+              </object>
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="hebrew_cantillation">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Hebrew Cantillation</property>
+                <property name="use_underline">True</property>
+                <signal name="activate" handler="on_hebrew_cantillation_activate"/>
+              </object>
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="headings">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Headings</property>
+                <property name="use_underline">True</property>
+                <signal name="activate" handler="on_headings_activate"/>
+              </object>
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="transliteration">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Transliteration</property>
+                <property name="use_underline">True</property>
+                <signal name="activate" handler="on_transliteration_activate"/>
+              </object>
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="variants">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Variants</property>
+                <property name="use_underline">True</property>
+                <child type="submenu">
+                  <object class="GtkMenu" id="variants_menu">
+                    <child>
+                      <object class="GtkCheckMenuItem" id="primary_reading">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">Primary Reading</property>
+                        <property name="use_underline">True</property>
+                        <signal name="activate" handler="on_primary_reading_activate"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkCheckMenuItem" id="secondary_reading">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">Secondary Reading</property>
+                        <property name="use_underline">True</property>
+                        <signal name="activate" handler="on_secondary_reading_activate"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkCheckMenuItem" id="all_readings">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">All Readings</property>
+                        <property name="use_underline">True</property>
+                        <signal name="activate" handler="on_all_readings_activate"/>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="image_content">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Image Content</property>
+                <property name="use_underline">True</property>
+                <signal name="activate" handler="on_image_content_activate"/>
+              </object>
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="respect_font_faces">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Respect Font Faces</property>
+                <property name="use_underline">True</property>
+                <signal name="activate" handler="on_respect_font_faces_activate"/>
+              </object>
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="commentary_by_chapter">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Commentary by Chapter</property>
+                <property name="use_underline">True</property>
+                <signal name="activate" handler="on_commentary_by_chapter_activate"/>
+              </object>
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="doublespace">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Doublespace</property>
+                <property name="use_underline">True</property>
+                <signal name="activate" handler="on_doublespace_activate"/>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="lookup_selection1">
+        <property name="label">Lookup Selection</property>
+        <property name="visible">True</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <child type="submenu">
+          <object class="GtkMenu" id="lookup_selection1_menu">
+            <child>
+              <object class="GtkMenuItem" id="use_current_dictionary">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Use Current Dictionary</property>
+                <property name="use_underline">True</property>
+                <signal name="activate" handler="on_use_current_dictionary_activate"/>
+              </object>
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="lookup_google">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Browse in BibleMap.org</property>
+                <property name="use_underline">True</property>
+                <signal name="activate" handler="on_lookup_google_activate"/>
+              </object>
+            </child>
+            <child>
+              <object class="GtkSeparatorMenuItem" id="separator11">
+                <property name="visible">True</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="unlock_this_module">
+        <property name="label">Unlock This Module</property>
+        <property name="visible">True</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_unlock_this_module_activate"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="display_book_heading">
+        <property name="label">Display Book Heading</property>
+        <property name="visible">True</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_display_book_heading_activate"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="display_chapter_heading">
+        <property name="label">Display Chapter Heading</property>
+        <property name="visible">True</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_display_chapter_heading_activate"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="rename_perscomm">
+        <property name="label">Rename Pers.Comm.</property>
+        <property name="visible">True</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_rename_perscomm_activate"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="dump_perscomm">
+        <property name="label">Dump Pers.Comm.</property>
+        <property name="visible">True</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_dump_perscomm_activate"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="read_selection_aloud">
+        <property name="label">Read Selection Aloud</property>
+        <property name="visible">True</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_read_selection_aloud_activate"/>
+      </object>
+    </child>
+  </object>
+  <object class="GtkMenu" id="menu_verselist">
+    <child>
+      <object class="GtkImageMenuItem" id="save_list_as_a_single_bookmark">
+        <property name="label">Save list as a single bookmark</property>
+        <property name="visible">True</property>
+        <property name="tooltip_text" translatable="yes">Save these results as a single bookmark</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_save_list_as_a_single_bookmark_activate"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="save_list_as_a_series_of_bookmarks">
+        <property name="label">Save list as a series of bookmarks</property>
+        <property name="visible">True</property>
+        <property name="tooltip_text" translatable="yes">Save these results as a series of bookmarks in their own folder</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_save_list_as_a_series_of_bookmarks_activate"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkSeparatorMenuItem" id="separator13">
+        <property name="visible">True</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="export_list1">
+        <property name="label">Export List</property>
+        <property name="visible">True</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_export_verselist_activate"/>
+      </object>
+    </child>
+  </object>
+  <object class="GtkMenu" id="menu_bookmark">
+    <child>
+      <object class="GtkImageMenuItem" id="open_in_new_tab">
+        <property name="label">Open in new tab</property>
+        <property name="visible">True</property>
+        <property name="tooltip_text" translatable="yes">Open this bookmark in a new tab</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_open_in_tab_activate"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="open_in_a_dialog">
+        <property name="label">Open in a dialog</property>
+        <property name="visible">True</property>
+        <property name="tooltip_text" translatable="yes">Open this bookmark in a dialog</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_dialog_activate"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="new_folder">
+        <property name="label">New Folder</property>
+        <property name="visible">True</property>
+        <property name="tooltip_text" translatable="yes">Add new folder to selected folder</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_new_folder_activate"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="insert_bookmark">
+        <property name="label">Insert Bookmark</property>
+        <property name="visible">True</property>
+        <property name="tooltip_text" translatable="yes">Insert new bookmark here</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_insert_bookmark_activate"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="edit_item">
+        <property name="label">_Edit Item</property>
+        <property name="visible">True</property>
+        <property name="tooltip_text" translatable="yes">Edit bookmark item</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_edit_item_activate"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="delete_item">
+        <property name="label">Delete Item</property>
+        <property name="visible">True</property>
+        <property name="tooltip_text" translatable="yes">Delete item</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_delete_item_activate"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkSeparatorMenuItem" id="separator12">
+        <property name="visible">True</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="expand_all">
+        <property name="label">Expand All</property>
+        <property name="visible">True</property>
+        <property name="tooltip_text" translatable="yes">Expand all Bookmarks groups</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_expand_activate"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="collapse_all">
+        <property name="label">Collapse All</property>
+        <property name="visible">True</property>
+        <property name="tooltip_text" translatable="yes">Collapse all Bookmarks groups</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_collapse_activate"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkSeparatorMenuItem" id="separator14">
+        <property name="visible">True</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkCheckMenuItem" id="allow_reordering">
+        <property name="visible">True</property>
+        <property name="tooltip_text" translatable="yes">Allow items to be moved from one folder to another</property>
+        <property name="label" translatable="yes">Allow Reordering</property>
+        <property name="use_underline">True</property>
+        <signal name="activate" handler="on_allow_reordering_activate"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkSeparatorMenuItem" id="separator15">
+        <property name="visible">True</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="import_bibletime_bookmarks1">
+        <property name="label">Import Bookmarks</property>
+        <property name="visible">True</property>
+        <property name="tooltip_text" translatable="yes">Load other bookmarks file (default: from BibleTime)</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="bibletime_bookmarks_activate"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="remove_folder">
+        <property name="label">Export Folder</property>
+        <property name="visible">True</property>
+        <property name="tooltip_text" translatable="yes">Remove folder and save it</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_export_folder_activate"/>
+      </object>
+    </child>
+  </object>
+  <object class="GtkMenu" id="menu_modules">
+    <child>
+      <object class="GtkImageMenuItem" id="open_in_new_tab1">
+        <property name="label">Open in new tab</property>
+        <property name="visible">True</property>
+        <property name="tooltip_text" translatable="yes">Open selected module in a new tab</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_open_in_tab_activate2"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="open_in_a_dialog1">
+        <property name="label">Open in a separate window</property>
+        <property name="visible">True</property>
+        <property name="tooltip_text" translatable="yes">Open selected module in a
+	separate ['dialog'] window</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_open_in_dialog_activate"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="about1">
+        <property name="label">About</property>
+        <property name="visible">True</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_about2_activate"/>
+      </object>
+    </child>
+  </object>
+  <object class="GtkMenu" id="menu_prayerlist">
+    <child>
+      <object class="GtkImageMenuItem" id="create_simple_prayer_list">
+        <property name="label">Simple</property>
+        <property name="visible">True</property>
+        <property name="tooltip_text" translatable="yes">Create a new simple prayer list</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_simple_activate"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="create_subject_prayer_list">
+        <property name="label">Subject</property>
+        <property name="visible">True</property>
+        <property name="tooltip_text" translatable="yes">Create a new subject prayer list</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_subject_activate"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="create_monthly_prayer_list">
+        <property name="label">Monthly</property>
+        <property name="visible">True</property>
+        <property name="tooltip_text" translatable="yes">Create a new monthly journal</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_monthly_activate"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="create_daily_journal">
+        <property name="label">Daily</property>
+        <property name="visible">True</property>
+        <property name="tooltip_text" translatable="yes">Create a new daily journal</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_journal_activate"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="create_outlined_topic_list">
+        <property name="label">Outlined</property>
+        <property name="visible">True</property>
+        <property name="tooltip_text" translatable="yes">Create a new outlined topic</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_outlined_topic_activate"/>
+      </object>
+    </child>
+  </object>
+  <object class="GtkMenu" id="menu_prayerlist_mod">
+    <child>
+      <object class="GtkImageMenuItem" id="open_in_new_tab2">
+        <property name="label">Open in new tab</property>
+        <property name="visible">True</property>
+        <property name="tooltip_text" translatable="yes">Open selected module in a new tab</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_open_in_tab_activate2"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="open_in_a_dialog2">
+        <property name="label">Open in editor</property>
+        <property name="visible">True</property>
+        <property name="tooltip_text" translatable="yes">Open in editor</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_open_in_dialog_activate"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="about3">
+        <property name="label">About</property>
+        <property name="visible">True</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_about2_activate"/>
+      </object>
+    </child>
+  </object>
+  <object class="GtkMenu" id="menu_edit_tree">
+    <child>
+      <object class="GtkImageMenuItem" id="add_child">
+        <property name="label">Add Sub-Item</property>
+        <property name="visible">True</property>
+        <property name="tooltip_text" translatable="yes">Add a sub-item</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_add_child_activate"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="add_sibling">
+        <property name="label">Add Item</property>
+        <property name="visible">True</property>
+        <property name="tooltip_text" translatable="yes">Add an item</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_add_sibling_activate"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="remove">
+        <property name="label">Remove</property>
+        <property name="visible">True</property>
+        <property name="tooltip_text" translatable="yes">Remove this item</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_remove_activate"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="edit">
+        <property name="label">Edit</property>
+        <property name="visible">True</property>
+        <property name="tooltip_text" translatable="yes">Edit this item</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_edit_activate2"/>
+      </object>
+    </child>
+  </object>
+</interface>
