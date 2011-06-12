@@ -26,7 +26,7 @@
 extern "C" {
 #endif
 
-//#include <glade/glade-xml.h>
+#include <glade/glade-xml.h>
 
 #include "main/module_dialogs.h"
 //#include "gnome2/xiphos_html.h"
@@ -72,7 +72,7 @@ void on_rename_perscomm_activate (GtkMenuItem * menuitem, gpointer user_data);
 void on_dump_perscomm_activate (GtkMenuItem * menuitem, gpointer user_data);
 void on_read_selection_aloud_activate (GtkMenuItem * menuitem, gpointer user_data);
 void on_mark_verse_activate (GtkMenuItem * menuitem, gpointer user_data);
-void _add_and_check_global_opts (GtkBuilder *builder, const gchar * mod_name, GtkWidget * submenu, DIALOG_DATA * d);
+void _add_and_check_global_opts (GladeXML *gxml, const gchar * mod_name, GtkWidget * submenu, DIALOG_DATA * d);
 
 #ifdef __cplusplus
 }

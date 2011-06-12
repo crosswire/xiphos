@@ -305,27 +305,21 @@ GtkWidget *
 create_edit_tree_menu (EDITOR * editor)
 {
 	GtkWidget *menu;
-	gchar *file;
-	GError *er = NULL;	
-	GtkBuilder *builder;
-            
-	builder = gtk_builder_new ();
-	
-	file = gui_general_user_file ("xi-menus-popup.glade", FALSE);  
-	g_return_val_if_fail ((file != NULL), NULL);
+	gchar *glade_file;
+	GladeXML *gxml;
 
-	if (!gtk_builder_add_from_file (builder, file, &er)) {
-		GS_message(("%s %s","gtk_builder_add_from_file returned ",er->message));
-		g_error_free(er);						 
-		return NULL;
-	}
+	glade_file = gui_general_user_file ("xi-menus.glade", FALSE);
+	g_return_val_if_fail ((glade_file != NULL), NULL);
 
-	g_free (file);
-	
-	menu = GTK_WIDGET (gtk_builder_get_object (builder, "menu_edit_tree"));
-	
-    	/* connect signals and data */    
-        gtk_builder_connect_signals (builder, editor);
+	gxml = glade_xml_new (glade_file, "menu_edit_tree", NULL);
+
+	g_free (glade_file);
+	g_return_val_if_fail ((gxml != NULL), NULL);
+
+	menu = glade_xml_get_widget (gxml, "menu_edit_tree");
+    	/* connect signals and data */
+	glade_xml_signal_autoconnect_full
+		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, editor);
 
 	return menu;
 }
