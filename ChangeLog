@@ -1,3 +1,15 @@
+2011-06-20  Terry Biggs  <tbiggs@users.sf.net>
+
+	* added scrollbars to webkit in the following files:
+	  * src/gnome2/about_modules.c (gui_create_about_modules):
+	  * src/gnome2/bibletext_dialog.c (gui_create_bibletext_dialog):
+	  * src/gnome2/commentary_dialog.c (gui_create_commentary_dialog):
+	  * src/gnome2/dictlex_dialog.c (gui_create_dictlex_dialog):
+	  * src/gnome2/gbs_dialog.c (gui_create_gbs_dialog):
+	
+	* committed work on gtkbuilder and webkit done by
+	   Greg and Terry
+
 2011-05-15  karl <charcoal@users.sf.net>
 
 	* fix #3302627 undo module cache damage to pers.comm. update.

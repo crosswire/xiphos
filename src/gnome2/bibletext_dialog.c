@@ -522,12 +522,8 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 {
 	GtkWidget *vbox33;
 	GtkWidget *paned;
-	GtkWidget *frame;
-#ifdef USE_XIPHOS_HTML
-	GtkWidget *eventbox;
-#else
+	//GtkWidget *frame;
 	GtkWidget *swVText;
-#endif
 
 	vt->dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 
@@ -535,7 +531,7 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 			  vt->dialog);
 	gtk_window_set_title(GTK_WINDOW(vt->dialog),
 			     main_get_module_description(vt->mod_name));
-	gtk_window_set_default_size(GTK_WINDOW(vt->dialog), 200, 200);
+	gtk_window_set_default_size(GTK_WINDOW(vt->dialog), 350, 450);
 	gtk_window_set_resizable(GTK_WINDOW(vt->dialog), TRUE);
 
 	vbox33 = gtk_vbox_new(FALSE, 0);
@@ -550,53 +546,46 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 	paned = gtk_vpaned_new();
 	gtk_box_pack_start(GTK_BOX(vbox33), paned, TRUE, TRUE, 0);
 	gtk_widget_show(paned);
-
-	frame = gtk_frame_new(NULL);
-	gtk_widget_show(frame);
-	gtk_paned_add1((GtkPaned *)paned,frame);
-	gtk_widget_set_size_request(frame, -1, 200);
-
-#ifdef USE_XIPHOS_HTML
-	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
-
-	eventbox = gtk_event_box_new();
-	gtk_widget_show(eventbox);
-	gtk_container_add(GTK_CONTAINER(frame), eventbox);
-        vt->html = GTK_WIDGET(XIPHOS_HTML_NEW(vt, TRUE, DIALOG_TEXT_TYPE));
-
-	gtk_widget_show(vt->html);
-	gtk_container_add(GTK_CONTAINER(eventbox), vt->html);
-	g_signal_connect((gpointer)vt->html,
-		      "popupmenu_requested",
-		      G_CALLBACK(_popupmenu_requested_cb),
-		      vt);
-
-	frame = gtk_frame_new(NULL);
-	gtk_widget_show(frame);
-	gtk_paned_add2((GtkPaned *)paned,frame);
-	gtk_widget_set_size_request(frame, -1, 100);
-	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
-
-	eventbox = gtk_event_box_new();
-	gtk_widget_show(eventbox);
-	gtk_container_add(GTK_CONTAINER(frame), eventbox);
-
-        vt->previewer = GTK_WIDGET(XIPHOS_HTML_NEW(vt, TRUE, VIEWER_TYPE));
-	gtk_widget_show(vt->previewer);
-	gtk_container_add(GTK_CONTAINER(eventbox), vt->previewer);
-#else
+	
 	swVText = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(swVText);
-	gtk_container_add(GTK_CONTAINER(frame), swVText);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(swVText),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_ALWAYS);
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)swVText,
-					    settings.shadow_type);
+					    settings.shadow_type);   
+	gtk_paned_add1((GtkPaned *)paned, swVText);
+
+#ifdef USE_XIPHOS_HTML
+
+	vt->html = GTK_WIDGET(XIPHOS_HTML_NEW(vt, TRUE, DIALOG_TEXT_TYPE));
+	gtk_widget_show(vt->html);
+	gtk_container_add(GTK_CONTAINER(swVText), vt->html);
+	g_signal_connect((gpointer)vt->html,
+		      "popupmenu_requested",
+		      G_CALLBACK(_popupmenu_requested_cb),
+		      vt);
+                              
+	swVText = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_show(swVText);
+	//gtk_container_add(GTK_CONTAINER(frame), swVText);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(swVText),
+				       GTK_POLICY_NEVER,
+				       GTK_POLICY_ALWAYS);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)swVText,
+                                             settings.shadow_type);
+	
+	gtk_paned_add2((GtkPaned *)paned,swVText);
+	
+        vt->previewer = GTK_WIDGET(XIPHOS_HTML_NEW(vt, TRUE, VIEWER_TYPE));
+	gtk_widget_show(vt->previewer);
+	gtk_container_add(GTK_CONTAINER(swVText), vt->previewer);
+#else
 	vt->html = gtk_html_new();
 	gtk_widget_show(vt->html);
 	gtk_container_add(GTK_CONTAINER(swVText), vt->html);
 	gtk_html_load_empty(GTK_HTML(vt->html));
+	
 	g_signal_connect(G_OBJECT(vt->html), "on_url",
 			   G_CALLBACK(dialog_url), (gpointer) vt);
 	g_signal_connect(G_OBJECT(vt->html), "link_clicked",
@@ -621,11 +610,6 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 			   (url_requested),
 			   (DIALOG_DATA *) vt);
 
-
-	frame = gtk_frame_new(NULL);
-	gtk_widget_show(frame);
-	gtk_paned_add2((GtkPaned *)paned,frame);
-
 	swVText = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(swVText);
 	gtk_container_add(GTK_CONTAINER(frame), swVText);
@@ -633,7 +617,9 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_ALWAYS);
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)swVText,
-                                             settings.shadow_type);
+                                             settings.shadow_type);  
+	
+	gtk_paned_add2((GtkPaned *)paned,swVText);
 
 	vt->previewer = gtk_html_new();
 	gtk_widget_show(vt->previewer);
@@ -643,7 +629,8 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 	g_signal_connect(G_OBJECT(vt->previewer), "link_clicked",
 				   G_CALLBACK(link_clicked), vt);
 #endif /* !USE_XIPHOS_HTML */
-
+         gtk_paned_set_position  (GTK_PANED(paned),
+                                                         250);
 	vt->statusbar = gtk_statusbar_new();
 	gtk_widget_show(vt->statusbar);
 	gtk_box_pack_start(GTK_BOX(vbox33), vt->statusbar, FALSE, FALSE,
