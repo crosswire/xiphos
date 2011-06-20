@@ -328,11 +328,7 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 	GtkWidget *btnSyncDL;
 //	GtkWidget *label205;
 	GtkWidget *frameDictHTML;
-#ifdef USE_XIPHOS_HTML
-	GtkWidget *eventbox;
-#else
 	GtkWidget *scrolledwindowDictHTML;
-#endif /* !USE_XIPHOS_HTML */
 	GtkWidget *scrolledwindow;
 //	GtkWidget *label;
 	GtkListStore *model;
@@ -422,22 +418,6 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 	gtk_widget_show(frameDictHTML);
 	gtk_paned_pack2(GTK_PANED(hpaned7), frameDictHTML, TRUE, TRUE);
 
-#ifdef USE_XIPHOS_HTML
-	gtk_frame_set_shadow_type(GTK_FRAME(frameDictHTML), GTK_SHADOW_IN);
-
-	eventbox = gtk_event_box_new();
-	gtk_widget_show(eventbox);
-	gtk_container_add(GTK_CONTAINER(frameDictHTML), eventbox);
-
-	dlg->html = GTK_WIDGET(XIPHOS_HTML_NEW((DIALOG_DATA*) dlg,TRUE,DIALOG_DICTIONARY_TYPE));
-
-	gtk_container_add(GTK_CONTAINER(eventbox), dlg->html);
-	gtk_widget_show(dlg->html);
-	g_signal_connect((gpointer)dlg->html,
-		      "popupmenu_requested",
-		      G_CALLBACK(_popupmenu_requested_cb),
-		      dlg);
-#else
 	scrolledwindowDictHTML = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindowDictHTML);
 	gtk_container_add(GTK_CONTAINER(frameDictHTML),
@@ -449,7 +429,17 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
 					    scrolledwindowDictHTML,
 					    settings.shadow_type);
+#ifdef USE_XIPHOS_HTML
+	//gtk_frame_set_shadow_type(GTK_FRAME(frameDictHTML), GTK_SHADOW_IN);
+	dlg->html = GTK_WIDGET(XIPHOS_HTML_NEW((DIALOG_DATA*) dlg,TRUE,DIALOG_DICTIONARY_TYPE));
 
+	gtk_container_add(GTK_CONTAINER(scrolledwindowDictHTML), dlg->html);
+	gtk_widget_show(dlg->html);
+	g_signal_connect((gpointer)dlg->html,
+		      "popupmenu_requested",
+		      G_CALLBACK(_popupmenu_requested_cb),
+		      dlg);
+#else
 
 	dlg->html = gtk_html_new();
 	gtk_widget_show(dlg->html);
