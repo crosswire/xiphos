@@ -24,7 +24,9 @@
 #endif
 
 #include <gtk/gtk.h>
-#include <glade/glade-xml.h>
+#ifndef USE_GTKBUILDER
+  #include <glade/glade-xml.h>
+#endif
 
 #include "gui/bookmark_dialog.h"
 #include "gui/bookmarks_menu.h"
@@ -434,32 +436,59 @@ static GtkWidget *_create_bookmark_dialog(gchar * label,
 					  gchar * module,
 					  gchar * key)
 {
+#ifdef USE_GTKBUILDER
+	GtkBuilder *gxml;
+#else
 	GladeXML *gxml;
+#endif
 	gchar *glade_file;
 
+#ifdef USE_GTKBUILDER
+	glade_file = gui_general_user_file ("bookmarks.gtkbuilder", TRUE);
+#else
 	glade_file = gui_general_user_file ("bookmarks.glade", TRUE);
+#endif
 	g_return_val_if_fail(glade_file != NULL, NULL);
 	GS_message(("%s",glade_file));
 
 	/* build the widget */
+#ifdef USE_GTKBUILDER
+	gxml = gtk_builder_new ();
+	gtk_builder_add_from_file (gxml, glade_file, NULL);
+#else
 	gxml = glade_xml_new (glade_file, NULL, NULL);
+#endif
 	g_free (glade_file);
 	g_return_val_if_fail(gxml != NULL, NULL);
 
 	/* lookup the root widget */
+#ifdef USE_GTKBUILDER
+	bookmark_dialog = GTK_WIDGET (gtk_builder_get_object (gxml, "dialog"));
+#else
 	bookmark_dialog = glade_xml_get_widget (gxml, "dialog");
+#endif
 	g_signal_connect(bookmark_dialog, "response",
 			 G_CALLBACK(on_dialog_response), NULL);
 
 	/* treeview */
+#ifdef USE_GTKBUILDER
+	treeview = GTK_WIDGET (gtk_builder_get_object (gxml, "treeview"));
+#else
 	treeview = glade_xml_get_widget (gxml, "treeview");
+#endif
 	setup_treeview();
 	g_signal_connect(treeview, "button-release-event",
 			 G_CALLBACK(on_treeview_button_release_event), NULL);
 	/* entrys */
+#ifdef USE_GTKBUILDER
+	entry_label = GTK_WIDGET (gtk_builder_get_object (gxml, "entry1"));
+	entry_key = GTK_WIDGET (gtk_builder_get_object (gxml, "entry2"));
+	entry_module = GTK_WIDGET (gtk_builder_get_object (gxml, "entry3"));
+#else
 	entry_label = glade_xml_get_widget (gxml, "entry1");
 	entry_key = glade_xml_get_widget (gxml, "entry2");
 	entry_module = glade_xml_get_widget (gxml, "entry3");
+#endif
 	gtk_entry_set_text(GTK_ENTRY(entry_label), label);
 	gtk_entry_set_text(GTK_ENTRY(entry_key), key);
 	gtk_entry_set_text(GTK_ENTRY(entry_module), module);
@@ -471,8 +500,13 @@ static GtkWidget *_create_bookmark_dialog(gchar * label,
 			 G_CALLBACK(on_dialog_enter), NULL);
 
 	/* dialog buttons */
+#ifdef USE_GTKBUILDER
+	button_new_folder = GTK_WIDGET (gtk_builder_get_object (gxml, "button1"));
+	button_add_bookmark = GTK_WIDGET (gtk_builder_get_object (gxml, "button3"));
+#else
 	button_new_folder = glade_xml_get_widget (gxml, "button1");
 	button_add_bookmark = glade_xml_get_widget (gxml, "button3");
+#endif
 
 	return bookmark_dialog;
 }
@@ -495,7 +529,11 @@ static GtkWidget *_create_bookmark_dialog(gchar * label,
 static GtkWidget *_create_mark_verse_dialog(gchar * module,
 					    gchar * key)
 {
+#ifdef USE_GTKBUILDER
+	GtkBuilder *gxml;
+#else
 	GladeXML *gxml;
+#endif
 	gchar *glade_file;
 	GtkWidget *sw;
 	gchar osisreference[100];
@@ -506,17 +544,30 @@ static GtkWidget *_create_mark_verse_dialog(gchar * module,
 					     (const char *)key));
 	note = NULL;
 
+#ifdef USE_GTKBUILDER
+	glade_file = gui_general_user_file("markverse.gtkbuilder", TRUE);
+#else
 	glade_file = gui_general_user_file("markverse.glade", TRUE);
+#endif
 	g_return_val_if_fail(glade_file != NULL, NULL);
 	GS_message(("%s",glade_file));
 
 	/* build the widget */
+#ifdef USE_GTKBUILDER
+	gxml = gtk_builder_new ();
+	gtk_builder_add_from_file (gxml, glade_file, NULL);
+#else
 	gxml = glade_xml_new(glade_file, NULL, NULL);
+#endif
 	g_free(glade_file);
 	g_return_val_if_fail(gxml != NULL, NULL);
 
 	/* lookup the root widget */
+#ifdef USE_GTKBUILDER
+	mark_verse_dialog = GTK_WIDGET (gtk_builder_get_object (gxml, "dialog"));
+#else
 	mark_verse_dialog = glade_xml_get_widget(gxml, "dialog");
+#endif
 	gtk_window_set_default_size (GTK_WINDOW (mark_verse_dialog),
                                    300, 350);
 
@@ -524,13 +575,23 @@ static GtkWidget *_create_mark_verse_dialog(gchar * module,
 			 G_CALLBACK(on_mark_verse_response), NULL);
 
 	/* entrys */
+#ifdef USE_GTKBUILDER
+	entry_key = GTK_WIDGET (gtk_builder_get_object (gxml, "entry2"));
+	entry_module = GTK_WIDGET (gtk_builder_get_object (gxml, "entry3"));
+	textview = GTK_WIDGET (gtk_builder_get_object (gxml, "textview"));
+#else
 	entry_key = glade_xml_get_widget(gxml, "entry2");
 	entry_module = glade_xml_get_widget(gxml, "entry3");
 	textview = glade_xml_get_widget(gxml, "textview");
+#endif
 	textbuffer = gtk_text_view_get_buffer ((GtkTextView*)textview);
 	gtk_entry_set_text(GTK_ENTRY(entry_key), key);
 	gtk_entry_set_text(GTK_ENTRY(entry_module), module);
+#ifdef USE_GTKBUILDER
+	sw = GTK_WIDGET (gtk_builder_get_object (gxml, "scrolledwindow1"));
+#else
 	sw = glade_xml_get_widget(gxml, "scrolledwindow1");
+#endif
 
 	gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (textview), GTK_WRAP_WORD);
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),

@@ -26,7 +26,9 @@
 //#ifdef USE_EXPORTER
 
 #include <gtk/gtk.h>
-#include <glade/glade-xml.h>
+#ifndef USE_GTKBUILDER
+  #include <glade/glade-xml.h>
+#endif
 
 #include "gui/export_dialog.h"
 #include "gui/dialog.h"
@@ -129,18 +131,32 @@ void on_filechooserdialog_response(GtkDialog * fdialog,
 void _get_export_filename(void)
 {
 	gchar *glade_file;
+#ifdef USE_GTKBUILDER
+	GtkBuilder *gxml;
+#else
 	GladeXML *gxml;
+#endif
 	GtkWidget *fdialog;
 	filename = NULL;
 
+#ifdef USE_GTKBUILDER
+	glade_file = gui_general_user_file("export-dialog.desktop", FALSE);
+#else
 	glade_file = gui_general_user_file("export-dialog.glade", FALSE);
+#endif
 	g_return_if_fail(glade_file != NULL);
 	GS_message(("%s",glade_file));
 
 	/* build the widget */
+#ifdef USE_GTKBUILDER
+	gxml = gtk_builder_new ();
+
+	fdialog = GTK_WIDGET (gtk_builder_get_object (gxml, "filechooserdialog1"));
+#else
 	gxml = glade_xml_new(glade_file, "filechooserdialog1", NULL);
 
 	fdialog =  glade_xml_get_widget (gxml, "filechooserdialog1");
+#endif
 	g_signal_connect(fdialog,
 			 "response",
 			 G_CALLBACK(on_filechooserdialog_response),
@@ -306,23 +322,49 @@ void on_rb_multi_verse_toggled (GtkToggleButton *togglebutton,
 void gui_export_dialog(void)
 {
 	gchar *glade_file;
+#ifdef USE_GTKBUILDER
+	GtkBuilder *gxml;
+#else
 	GladeXML *gxml;
+#endif
 	gint dist_license, curVerse;
 	gdouble max;
 
 
 	dist_license = _check_for_distribution_license(settings.MainWindowModule);
 
+#ifdef USE_GTKBUILDER
+	glade_file = gui_general_user_file("export-dialog.gtkbuilder", FALSE);
+#else
 	glade_file = gui_general_user_file("export-dialog.glade", FALSE);
+#endif
 	g_return_if_fail(glade_file != NULL);
 	GS_message(("%s",glade_file));
 
 	/* build the widget */
+#ifdef USE_GTKBUILDER
+	gxml = gtk_builder_new ();
+	gtk_builder_add_from_file(gxml, glade_file, NULL);
+	
+	dialog =  GTK_WIDGET (gtk_builder_get_object (gxml, "dialog_export_passage"));
+
+	d.rb_book = GTK_WIDGET (gtk_builder_get_object (gxml, "radiobutton1"));
+	d.rb_chapter = GTK_WIDGET (gtk_builder_get_object (gxml, "radiobutton2"));
+	d.rb_verse = GTK_WIDGET (gtk_builder_get_object (gxml, "radiobutton3"));
+	d.rb_multi_verse = GTK_WIDGET (gtk_builder_get_object (gxml, "rb_multi_verse"));
+	d.rb_html = GTK_WIDGET (gtk_builder_get_object (gxml, "radiobutton4"));
+	d.rb_plain = GTK_WIDGET (gtk_builder_get_object (gxml, "radiobutton5"));
+	d.rb_copy = GTK_WIDGET (gtk_builder_get_object (gxml, "rb_copy"));
+	d.rb_export = GTK_WIDGET (gtk_builder_get_object (gxml, "rb_export"));
+	d.lb_version = GTK_WIDGET (gtk_builder_get_object (gxml, "label3"));
+	d.lb_key = GTK_WIDGET (gtk_builder_get_object (gxml, "label4"));
+	d.sb_start_verse = GTK_WIDGET (gtk_builder_get_object (gxml, "sb_start_verse"));
+	d.sb_end_verse = GTK_WIDGET (gtk_builder_get_object (gxml, "sb_end_verse"));
+	d.warning_label = GTK_WIDGET (gtk_builder_get_object (gxml, "hbox2"));
+#else
 	gxml = glade_xml_new(glade_file, "dialog_export_passage", NULL);
 
 	dialog =  glade_xml_get_widget (gxml, "dialog_export_passage");
-	g_signal_connect(dialog, "response",
-			 G_CALLBACK(on_dialog_export_passage_response), NULL);
 
 	d.rb_book = glade_xml_get_widget(gxml, "radiobutton1");
 	d.rb_chapter = glade_xml_get_widget(gxml, "radiobutton2");
@@ -337,6 +379,10 @@ void gui_export_dialog(void)
 	d.sb_start_verse = glade_xml_get_widget(gxml, "sb_start_verse");
 	d.sb_end_verse = glade_xml_get_widget(gxml, "sb_end_verse");
 	d.warning_label = glade_xml_get_widget(gxml, "hbox2");
+#endif
+
+	g_signal_connect(dialog, "response",
+			 G_CALLBACK(on_dialog_export_passage_response), NULL);
 
 	max = main_get_max_verses ();
 	gtk_spin_button_set_range (GTK_SPIN_BUTTON (d.sb_start_verse),
