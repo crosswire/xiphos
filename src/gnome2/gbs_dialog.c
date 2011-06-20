@@ -322,13 +322,18 @@ void gui_create_gbs_dialog(DIALOG_DATA *dlg)
 	GtkWidget *navbar;
 	GtkWidget *hpaned;
 	GtkWidget *scrolledwindow_ctree;
-#ifdef  USE_GTKMOZEMBED
+//	GtkWidget *label241;
+//	GtkWidget *label242;
+//	GtkWidget *label243;
+#ifdef USE_XIPHOS_HTML
 	GtkWidget *frame;
+	GtkWidget *eventbox;
 #else
 	GtkWidget *scrolledwindow_html;
-#endif /* USE_GTKMOZEMBED */
+#endif /* USE_XIPHOS_HTML */
 	GObject *selection;
-	
+
+
 	dlg->dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	g_object_set_data(G_OBJECT(dlg->dialog), "dlg->dialog",
 			  dlg->dialog);
@@ -348,6 +353,8 @@ void gui_create_gbs_dialog(DIALOG_DATA *dlg)
 	gtk_widget_show(hpaned);
 	gtk_box_pack_start(GTK_BOX(vbox_dialog), hpaned, TRUE, TRUE,
 			   0);
+	//gtk_container_add(GTK_CONTAINER(frame_gbs), hpaned);
+	//gtk_paned_set_position(GTK_PANED(hpaned), 190);
 
 	scrolledwindow_ctree = gtk_scrolled_window_new(NULL, NULL);
 	//gtk_widget_show(scrolledwindow_ctree);
@@ -371,8 +378,26 @@ void gui_create_gbs_dialog(DIALOG_DATA *dlg)
 
 	selection =
 	    G_OBJECT(gtk_tree_view_get_selection(GTK_TREE_VIEW(dlg->tree)));
-            
-#ifndef  USE_GTKMOZEMBED
+
+#ifdef USE_XIPHOS_HTML
+	frame = gtk_frame_new(NULL);
+	gtk_widget_show(frame);
+	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
+	gtk_paned_pack2(GTK_PANED(hpaned), frame, FALSE, TRUE);
+
+	eventbox = gtk_event_box_new();
+	gtk_widget_show(eventbox);
+	gtk_container_add(GTK_CONTAINER(frame), eventbox);
+	dlg->html = GTK_WIDGET(XIPHOS_HTML_NEW(((DIALOG_DATA*) dlg),TRUE,DIALOG_BOOK_TYPE));
+
+	gtk_container_add(GTK_CONTAINER(eventbox), dlg->html);
+	gtk_widget_show(dlg->html);
+	g_signal_connect((gpointer)dlg->html,
+		      "popupmenu_requested",
+		      G_CALLBACK (_popupmenu_requested_cb),
+		      (DIALOG_DATA*)dlg);
+
+#else
 	scrolledwindow_html = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow_html);
 	gtk_paned_pack2(GTK_PANED(hpaned), scrolledwindow_html, FALSE, TRUE);
@@ -382,27 +407,7 @@ void gui_create_gbs_dialog(DIALOG_DATA *dlg)
 				       GTK_POLICY_AUTOMATIC);
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow_html,
                                              settings.shadow_type);
-#endif
-	
-#ifdef USE_XIPHOS_HTML
-	                  
-	dlg->html = GTK_WIDGET(XIPHOS_HTML_NEW(((DIALOG_DATA*) dlg),TRUE,DIALOG_BOOK_TYPE));
-	gtk_widget_show(dlg->html);
-   
- #ifdef USE_WEBKIT         
-	gtk_container_add(GTK_CONTAINER(scrolledwindow_html), dlg->html);             
- #else          
-	frame = gtk_frame_new(NULL);
-	gtk_widget_show(frame);
-	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
-	gtk_paned_pack2(GTK_PANED(hpaned), frame, FALSE, TRUE);
-	gtk_container_add(GTK_CONTAINER(frame), dlg->html);                                             
- #endif   
-	g_signal_connect((gpointer)dlg->html,
-		      "popupmenu_requested",
-		      G_CALLBACK (_popupmenu_requested_cb),
-		      (DIALOG_DATA*)dlg);
-#else
+
 	dlg->html = gtk_html_new();
 	gtk_widget_show(dlg->html);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow_html),
@@ -411,6 +416,9 @@ void gui_create_gbs_dialog(DIALOG_DATA *dlg)
 	g_signal_connect(G_OBJECT(dlg->html),
 			   "url_requested",
 			   G_CALLBACK(url_requested), NULL);
+	/*g_signal_connect(G_OBJECT(dlg->html), "on_url",
+			   G_CALLBACK(dialog_url),
+			   (DIALOG_DATA *) dlg);*/
 	g_signal_connect(G_OBJECT(dlg->html), "link_clicked",
 			   G_CALLBACK(link_clicked),
 			   (DIALOG_DATA *) dlg);

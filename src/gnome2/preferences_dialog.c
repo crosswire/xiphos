@@ -31,7 +31,9 @@
 
 #include <gtk/gtk.h>
 #include <gtk/gtk.h>
-#include <glade/glade-xml.h>
+#ifndef USE_GTKBUILDER
+  #include <glade/glade-xml.h>
+#endif
 
 #include "gui/bibletext.h"
 #include "gui/dialog.h"
@@ -2428,22 +2430,40 @@ void ps_button_cut(GtkButton * button, gpointer user_data)
 void ps_button_add(GtkButton * button, gpointer user_data)
 {
 	gchar *glade_file;
+#ifdef USE_GTKBUILDER
+	GtkBuilder *gxml;
+
+	glade_file = gui_general_user_file("prefs.gtkbuilder", FALSE);
+#else
 	GladeXML *gxml;
 
 	glade_file = gui_general_user_file("prefs.glade", FALSE);
+#endif
 	g_return_if_fail(glade_file != NULL);
 
+#ifdef USE_GTKBUILDER
+	gxml = gtk_builder_new ();
+	gtk_builder_add_from_file (gxml, glade_file, NULL);
+	parallel_select.mod_sel_dialog = GTK_WIDGET (gtk_builder_get_object (gxml, "mod_sel_dialog"));
+	parallel_select.mod_sel_close  = GTK_WIDGET (gtk_builder_get_object (gxml, "mod_sel_button_close"));
+	parallel_select.mod_sel_add    = GTK_WIDGET (gtk_builder_get_object (gxml, "mod_sel_button_add"));
+#else
 	gxml = glade_xml_new(glade_file, "mod_sel_dialog", NULL);
 	parallel_select.mod_sel_dialog = glade_xml_get_widget(gxml, "mod_sel_dialog");
 	parallel_select.mod_sel_close  = glade_xml_get_widget(gxml, "mod_sel_button_close");
 	parallel_select.mod_sel_add    = glade_xml_get_widget(gxml, "mod_sel_button_add");
+#endif
 
 	g_signal_connect((gpointer)parallel_select.mod_sel_close, "clicked",
 			 G_CALLBACK(on_mod_sel_close_clicked), NULL);
 	g_signal_connect((gpointer)parallel_select.mod_sel_add, "clicked",
 			 G_CALLBACK(on_mod_sel_add_clicked), NULL);
 
+#ifdef USE_GTKBUILDER
+	parallel_select.mod_sel_treeview = GTK_WIDGET (gtk_builder_get_object (gxml, "mod_sel_treeview"));
+#else
 	parallel_select.mod_sel_treeview = glade_xml_get_widget(gxml, "mod_sel_treeview");
+#endif
 	ps_setup_treeview(parallel_select.mod_sel_treeview);
 
 	gtk_widget_show(parallel_select.mod_sel_dialog);
@@ -2474,7 +2494,11 @@ void ps_button_add(GtkButton * button, gpointer user_data)
 static void
 create_preferences_dialog(void)
 {
+#ifdef USE_GTKBUILDER
+	GtkBuilder *gxml;
+#else
 	GladeXML *gxml;
+#endif
 	gchar *glade_file;
 	GtkWidget *dialog_prefs;
 	GtkWidget *treeview;
@@ -2483,54 +2507,77 @@ create_preferences_dialog(void)
 	GtkWidget *chooser;
 	gint index = 0;
 
+#ifdef USE_GTKBUILDER
+	glade_file = gui_general_user_file ("prefs.gtkbuilder", TRUE);
+#else
 	glade_file = gui_general_user_file ("prefs.glade", TRUE);
+#endif
 	g_return_if_fail(glade_file != NULL);
 
 	/* build the widget */
+#ifdef USE_GTKBUILDER
+	gxml = gtk_builder_new ();
+	gtk_builder_add_from_file (gxml, glade_file, NULL);
+#else
 	gxml = glade_xml_new (glade_file, NULL, NULL);
+#endif
 	g_free (glade_file);
 	g_return_if_fail (gxml != NULL);
 
 	/* lookup the root widget */
+#ifdef USE_GTKBUILDER
+	dialog_prefs = GTK_WIDGET (gtk_builder_get_object (gxml, "dialog_prefs"));
+#else
 	dialog_prefs = glade_xml_get_widget (gxml, "dialog_prefs");
+#endif
 	g_signal_connect(dialog_prefs, "response",
 			 G_CALLBACK(on_dialog_prefs_response), NULL);
-/*	g_signal_connect(, "",
-			 G_CALLBACK(), NULL);
-*/
+
 	/* color pickers */
+#ifdef USE_GTKBUILDER
+	color_picker.text_background = GTK_WIDGET (gtk_builder_get_object (gxml, "colorbutton1"));
+	color_picker.text = GTK_WIDGET (gtk_builder_get_object (gxml, "colorbutton2"));
+	color_picker.text_current_verse = GTK_WIDGET (gtk_builder_get_object (gxml, "colorbutton3"));
+	color_picker.verse_numbers = GTK_WIDGET (gtk_builder_get_object (gxml, "colorbutton4"));
+	color_picker.href_links = GTK_WIDGET (gtk_builder_get_object (gxml, "colorbutton5"));
+	color_picker.highlight_fg = GTK_WIDGET (gtk_builder_get_object (gxml, "colorbutton6"));
+	color_picker.highlight_bg = GTK_WIDGET (gtk_builder_get_object (gxml, "colorbutton7"));
+
+	color_picker.invert_normal = GTK_WIDGET (gtk_builder_get_object (gxml, "invert_normal"));
+	color_picker.invert_highlight = GTK_WIDGET (gtk_builder_get_object (gxml, "invert_highlight"));
+
+	check_button.enable_tabbed_browsing = GTK_WIDGET (gtk_builder_get_object(gxml, "checkbutton1"));
+	check_button.show_bible_pane = GTK_WIDGET (gtk_builder_get_object(gxml,"checkbutton2"));
+	check_button.show_preview_pane = GTK_WIDGET (gtk_builder_get_object(gxml, "checkbutton9"));
+	check_button.show_commentary_pane = GTK_WIDGET (gtk_builder_get_object(gxml, "checkbutton3"));
+	check_button.show_dictionary_pane = GTK_WIDGET (gtk_builder_get_object(gxml, "checkbutton4"));
+	check_button.use_linked_tabs = GTK_WIDGET (gtk_builder_get_object(gxml, "checkbutton10"));
+	check_button.readaloud = GTK_WIDGET (gtk_builder_get_object(gxml, "checkbutton11"));
+	check_button.show_verse_num = GTK_WIDGET (gtk_builder_get_object(gxml, "checkbutton12"));
+	check_button.use_default_dictionary = GTK_WIDGET (gtk_builder_get_object(gxml, "checkbutton6"));
+	check_button.show_devotion = GTK_WIDGET (gtk_builder_get_object(gxml, "checkbutton7"));
+	check_button.show_splash_screen = GTK_WIDGET (gtk_builder_get_object(gxml, "checkbutton8"));
+	check_button.use_chapter_scroll = GTK_WIDGET (gtk_builder_get_object(gxml, "checkbutton_scroll"));
+
+	check_button.use_imageresize = GTK_WIDGET (gtk_builder_get_object(gxml, "checkbutton_imageresize"));
+	check_button.versehighlight = GTK_WIDGET (gtk_builder_get_object(gxml, "checkbutton_versehighlight"));
+	check_button.annotate_highlight = GTK_WIDGET (gtk_builder_get_object(gxml, "checkbutton_annotate_highlight"));
+	check_button.xrefs_in_verse_list = GTK_WIDGET (gtk_builder_get_object(gxml, "checkbutton_xrefs_in_verse_list"));
+	check_button.prayerlist = GTK_WIDGET (gtk_builder_get_object(gxml, "checkbutton_prayerlist"));
+
+	check_button.show_paratab = GTK_WIDGET (gtk_builder_get_object(gxml, "checkbutton_paratab"));
+#else
 	color_picker.text_background = glade_xml_get_widget (gxml, "colorbutton1");
-	g_signal_connect(color_picker.text_background, "color_set",
-			 G_CALLBACK(on_colorbutton1_color_set), NULL);
 	color_picker.text = glade_xml_get_widget (gxml, "colorbutton2");
-	g_signal_connect(color_picker.text, "color_set",
-			 G_CALLBACK(on_colorbutton2_color_set), NULL);
 	color_picker.text_current_verse = glade_xml_get_widget (gxml, "colorbutton3");
-	g_signal_connect(color_picker.text_current_verse, "color_set",
-			 G_CALLBACK(on_colorbutton3_color_set), NULL);
 	color_picker.verse_numbers = glade_xml_get_widget (gxml, "colorbutton4");
-	g_signal_connect(color_picker.verse_numbers, "color_set",
-			 G_CALLBACK(on_colorbutton4_color_set), NULL);
 	color_picker.href_links = glade_xml_get_widget (gxml, "colorbutton5");
-	g_signal_connect(color_picker.href_links, "color_set",
-			 G_CALLBACK(on_colorbutton5_color_set), NULL);
 	color_picker.highlight_fg = glade_xml_get_widget (gxml, "colorbutton6");
-	g_signal_connect(color_picker.highlight_fg, "color_set",
-			 G_CALLBACK(on_colorbutton6_color_set), NULL);
 	color_picker.highlight_bg = glade_xml_get_widget (gxml, "colorbutton7");
-	g_signal_connect(color_picker.highlight_bg, "color_set",
-			 G_CALLBACK(on_colorbutton7_color_set), NULL);
-	setup_color_pickers();
 
-	/* color inverters */
 	color_picker.invert_normal = glade_xml_get_widget (gxml, "invert_normal");
-	g_signal_connect((gpointer)color_picker.invert_normal, "clicked",
-			 G_CALLBACK(on_invert), (void*)1);
 	color_picker.invert_highlight = glade_xml_get_widget (gxml, "invert_highlight");
-	g_signal_connect((gpointer)color_picker.invert_highlight, "clicked",
-			 G_CALLBACK(on_invert), (void*)0);
 
-	/* check buttons */
 	check_button.enable_tabbed_browsing = glade_xml_get_widget(gxml, "checkbutton1");
 	check_button.show_bible_pane = glade_xml_get_widget(gxml,"checkbutton2");
 	check_button.show_preview_pane = glade_xml_get_widget(gxml, "checkbutton9");
@@ -2543,9 +2590,7 @@ create_preferences_dialog(void)
 	check_button.show_devotion = glade_xml_get_widget(gxml, "checkbutton7");
 	check_button.show_splash_screen = glade_xml_get_widget(gxml, "checkbutton8");
 	check_button.use_chapter_scroll = glade_xml_get_widget(gxml, "checkbutton_scroll");
-#ifdef USE_GTKMOZEMBED
-	gtk_widget_hide(check_button.use_chapter_scroll);
-#endif
+
 	check_button.use_imageresize = glade_xml_get_widget(gxml, "checkbutton_imageresize");
 	check_button.versehighlight = glade_xml_get_widget(gxml, "checkbutton_versehighlight");
 	check_button.annotate_highlight = glade_xml_get_widget(gxml, "checkbutton_annotate_highlight");
@@ -2553,6 +2598,33 @@ create_preferences_dialog(void)
 	check_button.prayerlist = glade_xml_get_widget(gxml, "checkbutton_prayerlist");
 
 	check_button.show_paratab = glade_xml_get_widget(gxml, "checkbutton_paratab");
+#endif
+	g_signal_connect(color_picker.text_background, "color_set",
+			 G_CALLBACK(on_colorbutton1_color_set), NULL);
+	g_signal_connect(color_picker.text, "color_set",
+			 G_CALLBACK(on_colorbutton2_color_set), NULL);
+	g_signal_connect(color_picker.text_current_verse, "color_set",
+			 G_CALLBACK(on_colorbutton3_color_set), NULL);
+	g_signal_connect(color_picker.verse_numbers, "color_set",
+			 G_CALLBACK(on_colorbutton4_color_set), NULL);
+	g_signal_connect(color_picker.href_links, "color_set",
+			 G_CALLBACK(on_colorbutton5_color_set), NULL);
+	g_signal_connect(color_picker.highlight_fg, "color_set",
+			 G_CALLBACK(on_colorbutton6_color_set), NULL);
+	g_signal_connect(color_picker.highlight_bg, "color_set",
+			 G_CALLBACK(on_colorbutton7_color_set), NULL);
+	setup_color_pickers();
+
+	/* color inverters */
+	g_signal_connect((gpointer)color_picker.invert_normal, "clicked",
+			 G_CALLBACK(on_invert), (void*)1);
+	g_signal_connect((gpointer)color_picker.invert_highlight, "clicked",
+			 G_CALLBACK(on_invert), (void*)0);
+
+	/* check buttons */
+#ifdef USE_GTKMOZEMBED
+	gtk_widget_hide(check_button.use_chapter_scroll);
+#endif
 
 	gtk_widget_hide(check_button.show_paratab);
 
@@ -2560,33 +2632,61 @@ create_preferences_dialog(void)
 
 	/* verse number size */
 	index = get_font_size_index(settings.verse_num_font_size_str);
+#ifdef USE_GTKBUILDER
+	combo.verse_number_size = GTK_WIDGET (gtk_builder_get_object (gxml, "combobox1"));
+#else
 	combo.verse_number_size = glade_xml_get_widget(gxml, "combobox1");
+#endif
 	gtk_combo_box_set_active(GTK_COMBO_BOX(combo.verse_number_size), index);
 	g_signal_connect(combo.verse_number_size, "changed",
 			 G_CALLBACK(on_combobox1_changed), NULL);
 
 	/* base font size */
 	index = get_font_size_index(settings.base_font_size_str);
+#ifdef USE_GTKBUILDER
+	combo.base_font_size = GTK_WIDGET (gtk_builder_get_object (gxml, "basecombobox1"));
+#else
 	combo.base_font_size = glade_xml_get_widget(gxml, "basecombobox1");
+#endif
 	gtk_combo_box_set_active(GTK_COMBO_BOX(combo.base_font_size), index);
 	g_signal_connect(combo.base_font_size, "changed",
 			 G_CALLBACK(on_basecombobox1_changed), NULL);
 
 	/* module combos */
+#ifdef USE_GTKBUILDER
+	combo.default_dictionary_module = GTK_WIDGET (gtk_builder_get_object (gxml, "combobox5"));
+	combo.percomm_module = GTK_WIDGET (gtk_builder_get_object (gxml, "combobox6"));
+	combo.devotion_module = GTK_WIDGET (gtk_builder_get_object (gxml, "combobox12"));
+	combo.hebrew_lex__module = GTK_WIDGET (gtk_builder_get_object (gxml, "combobox13"));
+	combo.greek_lex__module = GTK_WIDGET (gtk_builder_get_object (gxml, "combobox14"));
+#else
 	combo.default_dictionary_module = glade_xml_get_widget (gxml, "combobox5");
 	combo.percomm_module = glade_xml_get_widget (gxml, "combobox6");
 	combo.devotion_module = glade_xml_get_widget (gxml, "combobox12");
 	combo.hebrew_lex__module = glade_xml_get_widget (gxml, "combobox13");
 	combo.greek_lex__module = glade_xml_get_widget (gxml, "combobox14");
+#endif
 	setup_module_comboboxes();
 
+#ifdef USE_GTKBUILDER
+	combo.special_locale = GTK_WIDGET (gtk_builder_get_object (gxml, "combobox16"));
+#else
 	combo.special_locale = glade_xml_get_widget (gxml, "combobox16");
+#endif
 	setup_locale_combobox();
+#ifdef USE_GTKBUILDER
+	combo.font_prefs = GTK_WIDGET (gtk_builder_get_object (gxml, "combobox17"));
+#else
 	combo.font_prefs = glade_xml_get_widget (gxml, "combobox17");
+#endif
 	setup_font_prefs_combobox();
 
 	/* studypad directory chooserbutton */
+#ifdef USE_GTKBUILDER
+	chooser = GTK_WIDGET (gtk_builder_get_object (gxml, "filechooserbutton1"));
+#else
 	chooser = glade_xml_get_widget (gxml, "filechooserbutton1");
+#endif
 	gtk_file_chooser_set_current_folder((GtkFileChooser *)chooser,
                                              settings.studypaddir);
 	g_signal_connect(chooser, "current_folder_changed",
@@ -2594,10 +2694,18 @@ create_preferences_dialog(void)
 
 
 	/* prefs notebook */
+#ifdef USE_GTKBUILDER
+	notebook = GTK_WIDGET (gtk_builder_get_object (gxml, "notebook"));
+#else
 	notebook = glade_xml_get_widget (gxml, "notebook");
+#endif
 	/* setup treeview */
 	model = create_model();
+#ifdef USE_GTKBUILDER
+	treeview = GTK_WIDGET (gtk_builder_get_object (gxml, "treeview"));
+#else
 	treeview = glade_xml_get_widget (gxml, "treeview");
+#endif
 	gtk_tree_view_set_model(GTK_TREE_VIEW(treeview), model);
 	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(treeview), FALSE);
 	gtk_widget_set_size_request(treeview, 130, -1);
@@ -2605,8 +2713,13 @@ create_preferences_dialog(void)
 	gtk_tree_view_expand_all(GTK_TREE_VIEW(treeview));
 	selection = G_OBJECT(gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview)));
 	/* connect signals and data */
+#ifdef USE_GTKBUILDER
+	gtk_builder_connect_signals_full
+		(gxml, (GtkBuilderConnectFunc)gui_glade_signal_connect_func, NULL);
+#else
 	glade_xml_signal_autoconnect_full
 		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);
+#endif
 
 	g_signal_connect(selection, "changed",
 			 G_CALLBACK(tree_selection_changed), model);
@@ -2614,10 +2727,17 @@ create_preferences_dialog(void)
 	/*
 	 * parallel select dialog: chooser and button connectivity
 	 */
+#ifdef USE_GTKBUILDER
+	parallel_select.button_clear = GTK_WIDGET (gtk_builder_get_object (gxml, "ps_toolbutton_clear"));
+	parallel_select.button_cut   = GTK_WIDGET (gtk_builder_get_object (gxml, "ps_toolbutton_cut"));
+	parallel_select.button_add   = GTK_WIDGET (gtk_builder_get_object (gxml, "ps_toolbutton_add"));
+	parallel_select.listview     = GTK_WIDGET (gtk_builder_get_object (gxml, "ps_listview"));
+#else
 	parallel_select.button_clear = glade_xml_get_widget(gxml, "ps_toolbutton_clear");
 	parallel_select.button_cut   = glade_xml_get_widget(gxml, "ps_toolbutton_cut");
 	parallel_select.button_add   = glade_xml_get_widget(gxml, "ps_toolbutton_add");
 	parallel_select.listview     = glade_xml_get_widget(gxml, "ps_listview");
+#endif
 
 	g_signal_connect(parallel_select.button_clear, "clicked",
 			 G_CALLBACK(ps_button_clear), NULL);

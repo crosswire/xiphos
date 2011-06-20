@@ -24,7 +24,9 @@
 #endif
 
 #include <gtk/gtk.h>
-#include <glade/glade-xml.h>
+#ifndef USE_GTKBUILDER
+  #include <glade/glade-xml.h>
+#endif
 
 #include "../xiphos_html/xiphos_html.h"
 
@@ -1365,17 +1367,33 @@ static
 void _create_mod_sel_dialog(void)
 {
 	gchar *glade_file;
+#ifdef USE_GTKBUILDER
+	GtkBuilder *gxml2;
+
+	glade_file = gui_general_user_file("search-dialog.gtkbuilder", FALSE);
+#else
 	GladeXML *gxml2;
 
 	glade_file = gui_general_user_file("search-dialog.glade", FALSE);
+#endif
 	g_return_if_fail(glade_file != NULL);
 	GS_message(("%s",glade_file));
 
+#ifdef USE_GTKBUILDER
+	gxml2 = gtk_builder_new ();
+	gtk_builder_add_from_file (gxml2, glade_file, NULL);
+	search1.mod_sel_dialog = GTK_WIDGET (gtk_builder_get_object (gxml2, "dialog2"));
+#else
 	gxml2 = glade_xml_new(glade_file, "dialog2", NULL);
 	search1.mod_sel_dialog = glade_xml_get_widget(gxml2, "dialog2");
+#endif
 	g_signal_connect((gpointer)search1.mod_sel_dialog, "response",
 			 G_CALLBACK(_on_dialog2_response), NULL);
+#ifdef USE_GTKBUILDER
+	search1.mod_sel_dlg_treeview = GTK_WIDGET (gtk_builder_get_object (gxml2, "treeview8"));
+#else	
 	search1.mod_sel_dlg_treeview = glade_xml_get_widget(gxml2, "treeview8");
+#endif
 	_setup_treeview2(search1.mod_sel_dlg_treeview);
 	gtk_widget_hide(search1.mod_sel_dialog);
 
@@ -1499,7 +1517,11 @@ static
 void _create_search_dialog(void)
 {
 	gchar *glade_file;
+#ifdef USE_GTKBUILDER
+	GtkBuilder *gxml;
+#else
 	GladeXML *gxml;
+#endif
 	GtkWidget *toolbutton1;
 	GtkWidget *toolbutton2;
 	GtkWidget *toolbutton3;
@@ -1516,99 +1538,216 @@ void _create_search_dialog(void)
 	verse_selected = NULL;
 	_preview_on = TRUE;
 
+#ifdef USE_GTKBUILDER
+	glade_file = gui_general_user_file("search-dialog.gtkbuilder", FALSE);
+#else
 	glade_file = gui_general_user_file("search-dialog.glade", FALSE);
+#endif
 	g_return_if_fail(glade_file != NULL);
 	GS_message(("%s",glade_file));
 
 	/* build the widget */
+#ifdef USE_GTKBUILDER
+	gxml = gtk_builder_new ();
+	gtk_builder_add_from_file (gxml, glade_file, NULL);
+#else
 	gxml = glade_xml_new(glade_file, "dialog", NULL);
+#endif
 	g_return_if_fail(gxml != NULL);
 
-/*	g_signal_connect(search1., "",
-			 G_CALLBACK(), NULL);
-*/
-
 	/* lookup the root widget */
+#ifdef USE_GTKBUILDER
+	search1.dialog = GTK_WIDGET (gtk_builder_get_object (gxml, "dialog"));
+#else
 	search1.dialog = glade_xml_get_widget(gxml, "dialog");
+#endif
 	g_signal_connect(search1.dialog, "response",
 			 G_CALLBACK(_on_dialog_response), NULL);
 	g_signal_connect(search1.dialog, "destroy",
 			 G_CALLBACK(_on_destroy), NULL);
 
+#ifdef USE_GTKBUILDER
+	remember_search = GTK_WIDGET (gtk_builder_get_object (gxml, "button1"));
+#else
 	remember_search = glade_xml_get_widget(gxml, "button1");
+#endif
 	g_signal_connect(remember_search, "clicked",
 			 G_CALLBACK(on_button_begin_search), NULL);
 
+#ifdef USE_GTKBUILDER
+	search1.label_search_module =
+	    GTK_WIDGET (gtk_builder_get_object(gxml, "label5"));
+	search1.search_entry = GTK_WIDGET (gtk_builder_get_object (gxml, "entry1"));
+#else
 	search1.label_search_module =
 	    glade_xml_get_widget(gxml, "label5");
 	search1.search_entry = glade_xml_get_widget(gxml, "entry1");
+#endif
 	g_signal_connect(search1.search_entry, "activate",
 			 G_CALLBACK(on_button_begin_search), NULL);
 
+#ifdef USE_GTKBUILDER
+	search1.notebook = GTK_WIDGET (gtk_builder_get_object (gxml, "notebook1"));
+
+	search1.treeview = GTK_WIDGET (gtk_builder_get_object (gxml, "treeview1"));
+#else
 	search1.notebook = glade_xml_get_widget(gxml, "notebook1");
 
 	search1.treeview = glade_xml_get_widget(gxml, "treeview1");
+#endif
 	_setup_treeview(search1.treeview);
 
+#ifdef USE_GTKBUILDER
+	search1.list_range_name =
+	    GTK_WIDGET (gtk_builder_get_object (gxml, "treeview4"));
+#else
 	search1.list_range_name =
 	    glade_xml_get_widget(gxml, "treeview4");
+#endif
 	_setup_listviews(search1.list_range_name,
 			 (GCallback) selection_range_lists_changed);
 
+#ifdef USE_GTKBUILDER
+	search1.list_ranges = GTK_WIDGET (gtk_builder_get_object (gxml, "treeview5"));
+#else
 	search1.list_ranges = glade_xml_get_widget(gxml, "treeview5");
+#endif
 	_setup_listviews(search1.list_ranges, NULL);
 
+#ifdef USE_GTKBUILDER
+	search1.module_lists = GTK_WIDGET (gtk_builder_get_object (gxml, "treeview6"));
+#else
 	search1.module_lists = glade_xml_get_widget(gxml, "treeview6");
+#endif
 	_setup_listviews(search1.module_lists,
 			 (GCallback) _selection_modules_lists_changed);
 
+#ifdef USE_GTKBUILDER
+	search1.listview_modules =
+	    GTK_WIDGET (gtk_builder_get_object (gxml, "treeview7"));
+#else
 	search1.listview_modules =
 	    glade_xml_get_widget(gxml, "treeview7");
+#endif
 	_setup_listviews(search1.listview_modules, NULL);
 
 	/* scope radio buttons */
+#ifdef USE_GTKBUILDER
+	search1.rb_no_scope = GTK_WIDGET (gtk_builder_get_object (gxml, "radiobutton1"));
+#else
 	search1.rb_no_scope = glade_xml_get_widget(gxml, "radiobutton1");
+#endif
 	g_signal_connect(search1.rb_no_scope, "toggled",
 			 G_CALLBACK(scope_toggled), NULL);
+
+#ifdef USE_GTKBUILDER
+	search1.rb_last = GTK_WIDGET (gtk_builder_get_object (gxml, "radiobutton2"));
+#else
 	search1.rb_last = glade_xml_get_widget(gxml, "radiobutton2");
+#endif
 	search1.which_scope = GTK_TOGGLE_BUTTON(search1.rb_no_scope);
+#ifdef USE_GTKBUILDER
+	search1.rb_custom_range = GTK_WIDGET (gtk_builder_get_object (gxml, "radiobutton3"));
+#else
 	search1.rb_custom_range = glade_xml_get_widget(gxml, "radiobutton3");
+#endif
 	g_signal_connect(search1.rb_custom_range, "toggled",
 			 G_CALLBACK(scope_toggled), NULL);
 	/* modules radio buttons */
+#ifdef USE_GTKBUILDER
+	search1.rb_current_module = GTK_WIDGET (gtk_builder_get_object (gxml, "radiobutton4"));
+#else
 	search1.rb_current_module = glade_xml_get_widget(gxml, "radiobutton4");
+#endif
 	g_signal_connect(search1.rb_current_module, "toggled",
 			 G_CALLBACK(current_module_toggled), NULL);
+#ifdef USE_GTKBUILDER
+	search1.rb_mod_list = GTK_WIDGET (gtk_builder_get_object (gxml, "radiobutton5"));
+#else
 	search1.rb_mod_list = glade_xml_get_widget(gxml, "radiobutton5");
+#endif
 	g_signal_connect(search1.rb_mod_list, "toggled",
 			 G_CALLBACK(mod_list_toggled), NULL);
+#ifdef USE_GTKBUILDER
+	search1.rb_custom_list = GTK_WIDGET (gtk_builder_get_object (gxml, "radiobutton6"));
+#else
 	search1.rb_custom_list = glade_xml_get_widget(gxml, "radiobutton6");
+#endif
 	g_signal_connect(search1.rb_custom_list, "toggled",
 			 G_CALLBACK(mod_list_toggled), NULL);
 
 	/* search type selection */
+#ifdef USE_GTKBUILDER
+	search1.rb_words        = GTK_WIDGET (gtk_builder_get_object (gxml, "radiobutton9"));
+	search1.rb_regexp       = GTK_WIDGET (gtk_builder_get_object (gxml, "radiobutton10"));
+	search1.rb_exact_phrase = GTK_WIDGET (gtk_builder_get_object (gxml, "radiobutton11"));
+
+	search1.rb_optimized     = GTK_WIDGET (gtk_builder_get_object (gxml, "radiobutton16"));
+#else
 	search1.rb_words        = glade_xml_get_widget(gxml, "radiobutton9");
 	search1.rb_regexp       = glade_xml_get_widget(gxml, "radiobutton10");
 	search1.rb_exact_phrase = glade_xml_get_widget(gxml, "radiobutton11");
 
 	search1.rb_optimized    = glade_xml_get_widget(gxml, "radiobutton16");
+#endif
 	g_signal_connect(search1.rb_optimized, "toggled",
 			 G_CALLBACK(optimized_toggled), NULL);
 
+#ifdef USE_GTKBUILDER
+	search1.button_intro_lucene = GTK_WIDGET (gtk_builder_get_object (gxml, "button_intro_lucene"));
+#else
 	search1.button_intro_lucene = glade_xml_get_widget(gxml, "button_intro_lucene");
+#endif
 	g_signal_connect(search1.button_intro_lucene, "clicked",
 			 G_CALLBACK(on_lucene_intro_clicked), NULL);
 	gtk_widget_show(search1.button_intro_lucene);
 
+#ifdef USE_GTKBUILDER
+	search1.rb_attributes = GTK_WIDGET (gtk_builder_get_object (gxml, "radiobutton12"));
+#else
 	search1.rb_attributes = glade_xml_get_widget(gxml, "radiobutton12");
+#endif
 	g_signal_connect(search1.rb_attributes, "toggled",
 			 G_CALLBACK(attributes_toggled), NULL);
 
+#ifdef USE_GTKBUILDER
+	search1.button_intro_attributes = GTK_WIDGET (gtk_builder_get_object (gxml, "button_intro_attributes"));
+#else
 	search1.button_intro_attributes = glade_xml_get_widget(gxml, "button_intro_attributes");
+#endif
 	g_signal_connect(search1.button_intro_attributes, "clicked",
 			 G_CALLBACK(on_attributes_intro_clicked), NULL);
 	gtk_widget_hide(search1.button_intro_attributes);
 
+#ifdef USE_GTKBUILDER	
+	/* attributes radio buttons */
+	search1.rb_strongs    = GTK_WIDGET (gtk_builder_get_object (gxml, "radiobutton13"));
+	search1.rb_morphs     = GTK_WIDGET (gtk_builder_get_object (gxml, "radiobutton15"));
+	search1.rb_footnotes  = GTK_WIDGET (gtk_builder_get_object (gxml, "radiobutton14"));
+
+	/*   */
+	search1.cb_case_sensitive = GTK_WIDGET (gtk_builder_get_object (gxml, "checkbutton1"));
+
+	/* display options check buttons */
+	search1.cb_include_strongs   = GTK_WIDGET (gtk_builder_get_object (gxml, "checkbutton2"));
+	search1.cb_include_morphs    = GTK_WIDGET (gtk_builder_get_object (gxml, "checkbutton3"));
+	search1.cb_include_footnotes = GTK_WIDGET (gtk_builder_get_object (gxml, "checkbutton4"));
+
+	toolbutton1 = GTK_WIDGET (gtk_builder_get_object (gxml, "toolbutton1"));
+	toolbutton2 = GTK_WIDGET (gtk_builder_get_object (gxml, "toolbutton2"));
+	toolbutton3 = GTK_WIDGET (gtk_builder_get_object (gxml, "toolbutton3"));
+	toolbutton4 = GTK_WIDGET (gtk_builder_get_object (gxml, "toolbutton4"));
+	toolbutton5 = GTK_WIDGET (gtk_builder_get_object (gxml, "toolbutton5"));
+	toolbutton6 = GTK_WIDGET (gtk_builder_get_object (gxml, "toolbutton6"));
+	toolbutton7 = GTK_WIDGET (gtk_builder_get_object (gxml, "toolbutton7"));
+	toolbutton8 = GTK_WIDGET (gtk_builder_get_object (gxml, "toolbutton8"));
+	toolbutton10 = GTK_WIDGET (gtk_builder_get_object (gxml, "toolbutton10"));
+	toolbutton11 = GTK_WIDGET (gtk_builder_get_object (gxml, "toolbutton11"));
+	toolbutton12 = GTK_WIDGET (gtk_builder_get_object (gxml, "toolbutton12"));
+	toolbutton13 = GTK_WIDGET (gtk_builder_get_object (gxml, "toolbutton_export"));
+	search1.combo_list =
+	    GTK_WIDGET (gtk_builder_get_object (gxml, "comboboxentry2"));
+#else
 	/* attributes radio buttons */
 	search1.rb_strongs    = glade_xml_get_widget(gxml, "radiobutton13");
 	search1.rb_morphs     = glade_xml_get_widget(gxml, "radiobutton15");
@@ -1623,83 +1762,116 @@ void _create_search_dialog(void)
 	search1.cb_include_footnotes = glade_xml_get_widget(gxml, "checkbutton4");
 
 	toolbutton1 = glade_xml_get_widget(gxml, "toolbutton1");
+	toolbutton2 = glade_xml_get_widget(gxml, "toolbutton2");
+	toolbutton3 = glade_xml_get_widget(gxml, "toolbutton3");
+	toolbutton4 = glade_xml_get_widget(gxml, "toolbutton4");
+	toolbutton5 = glade_xml_get_widget(gxml, "toolbutton5");
+	toolbutton6 = glade_xml_get_widget(gxml, "toolbutton6");
+	toolbutton7 = glade_xml_get_widget(gxml, "toolbutton7");
+	toolbutton8 = glade_xml_get_widget(gxml, "toolbutton8");
+	toolbutton10 = glade_xml_get_widget(gxml, "toolbutton10");
+	toolbutton11 = glade_xml_get_widget(gxml, "toolbutton11");
+	toolbutton12 = glade_xml_get_widget(gxml, "toolbutton12");
+	toolbutton13 = glade_xml_get_widget(gxml, "toolbutton_export");
+	search1.combo_list =
+	    glade_xml_get_widget(gxml, "comboboxentry2");
+#endif
 	g_signal_connect(toolbutton1, "clicked",
 			 G_CALLBACK(button_save), NULL);
 
-	toolbutton2 = glade_xml_get_widget(gxml, "toolbutton2");
 	g_signal_connect(toolbutton2, "clicked",
 			 G_CALLBACK(button_clean), NULL);
 
-	toolbutton3 = glade_xml_get_widget(gxml, "toolbutton3");
 	g_signal_connect(toolbutton3, "clicked",
 			 G_CALLBACK(new_range), NULL);
 
-	toolbutton4 = glade_xml_get_widget(gxml, "toolbutton4");
 	g_signal_connect(toolbutton4, "clicked",
 			 G_CALLBACK(save_range), NULL);
 
-	toolbutton5 = glade_xml_get_widget(gxml, "toolbutton5");
 	g_signal_connect(toolbutton5, "clicked",
 			 G_CALLBACK(delete_range), NULL);
 
-	toolbutton6 = glade_xml_get_widget(gxml, "toolbutton6");
 	g_signal_connect(toolbutton6, "clicked",
 			 G_CALLBACK(new_modlist), NULL);
 
-	toolbutton7 = glade_xml_get_widget(gxml, "toolbutton7");
 	g_signal_connect(toolbutton7, "clicked",
 			 G_CALLBACK(save_modlist), NULL);
 
-	toolbutton8 = glade_xml_get_widget(gxml, "toolbutton8");
 	g_signal_connect(toolbutton8, "clicked",
 			 G_CALLBACK(delete_list), NULL);
 
-	toolbutton10 = glade_xml_get_widget(gxml, "toolbutton10");
 	g_signal_connect(toolbutton10, "clicked",
 			 G_CALLBACK(clear_modules), NULL);
 
-	toolbutton11 = glade_xml_get_widget(gxml, "toolbutton11");
 	g_signal_connect(toolbutton11, "clicked",
 			 G_CALLBACK(delete_module), NULL);
 
-	toolbutton12 = glade_xml_get_widget(gxml, "toolbutton12");
 	g_signal_connect(toolbutton12, "clicked",
 			 G_CALLBACK(on_toolbutton12_clicked), NULL);
 
-	toolbutton13 = glade_xml_get_widget(gxml, "toolbutton_export");
 	g_signal_connect(toolbutton13, "clicked",
 			 G_CALLBACK(button_export), NULL);
 
-	search1.combo_list =
-	    glade_xml_get_widget(gxml, "comboboxentry2");
 	_setup_combobox(GTK_COMBO_BOX(search1.combo_list));
 	g_signal_connect(search1.combo_list, "changed",
 			 G_CALLBACK(on_comboboxentry2_changed), NULL);
 
+#ifdef USE_GTKBUILDER
+	search1.entry_list_name = GTK_WIDGET (gtk_builder_get_object (gxml, "entry4"));
+#else
 	search1.entry_list_name = glade_xml_get_widget(gxml, "entry4");
+#endif
 	g_signal_connect(search1.entry_list_name, "changed",
 			 G_CALLBACK(list_name_changed), NULL);
 
+#ifdef USE_GTKBUILDER
+	search1.combo_range =
+	    GTK_WIDGET (gtk_builder_get_object (gxml, "comboboxentry1"));
+#else
 	search1.combo_range =
 	    glade_xml_get_widget(gxml, "comboboxentry1");
+#endif
 	_setup_combobox(GTK_COMBO_BOX(search1.combo_range));
 
+#ifdef USE_GTKBUILDER
+	search1.entry_range_name = GTK_WIDGET (gtk_builder_get_object (gxml, "entry2"));
+#else
 	search1.entry_range_name = glade_xml_get_widget(gxml, "entry2");
+#endif
 	g_signal_connect(search1.entry_range_name, "changed",
 			 G_CALLBACK(range_name_changed), NULL);
+#ifdef USE_GTKBUILDER
+	search1.entry_range_text = GTK_WIDGET (gtk_builder_get_object (gxml, "entry3"));
+#else
 	search1.entry_range_text = glade_xml_get_widget(gxml, "entry3");
+#endif
 	g_signal_connect(search1.entry_range_text, "changed",
 			 G_CALLBACK(range_text_changed), NULL);
 
+#ifdef USE_GTKBUILDER
+	search1.progressbar =
+	    GTK_WIDGET (gtk_builder_get_object (gxml, "progressbar1"));
+	search1.label_mod_select = GTK_WIDGET (gtk_builder_get_object (gxml, "label5"));
+	search1.listview_results = GTK_WIDGET (gtk_builder_get_object (gxml, "treeview9"));
+#else
 	search1.progressbar =
 	    glade_xml_get_widget(gxml, "progressbar1");
 	search1.label_mod_select = glade_xml_get_widget(gxml, "label5");
-
 	search1.listview_results = glade_xml_get_widget(gxml, "treeview9");
+#endif
+
 	_setup_listviews(search1.listview_results, (GCallback) _selection_finds_list_changed);
+#ifdef USE_GTKBUILDER
+	search1.listview_verses = GTK_WIDGET (gtk_builder_get_object (gxml, "treeview10"));
+#else
 	search1.listview_verses = glade_xml_get_widget(gxml, "treeview10");
+#endif
 	_setup_listviews2(search1.listview_verses, (GCallback) _finds_verselist_selection_changed);
+#ifdef USE_GTKBUILDER
+	_add_html_widget(GTK_WIDGET (gtk_builder_get_object (gxml, "vbox12")));
+#else
 	_add_html_widget(glade_xml_get_widget(gxml, "vbox12"));
+#endif
 }
 
 

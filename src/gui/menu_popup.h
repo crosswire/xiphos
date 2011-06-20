@@ -25,8 +25,10 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#include <glade/glade-xml.h>
+   
+#ifndef USE_GTKBUILDER
+  #include <glade/glade-xml.h>
+#endif
 
 #include "main/module_dialogs.h"
 //#include "gnome2/xiphos_html.h"
@@ -71,9 +73,12 @@ void on_lookup_google_activate (GtkMenuItem * menuitem, gpointer user_data);
 void on_rename_perscomm_activate (GtkMenuItem * menuitem, gpointer user_data);
 void on_dump_perscomm_activate (GtkMenuItem * menuitem, gpointer user_data);
 void on_read_selection_aloud_activate (GtkMenuItem * menuitem, gpointer user_data);
-void on_mark_verse_activate (GtkMenuItem * menuitem, gpointer user_data);
+void on_mark_verse_activate (GtkMenuItem * menuitem, gpointer user_data);  
+#ifdef USE_GTKBUILDER
+void _add_and_check_global_opts (GtkBuilder *gxml, const gchar * mod_name, GtkWidget * submenu, DIALOG_DATA * d);
+#else
 void _add_and_check_global_opts (GladeXML *gxml, const gchar * mod_name, GtkWidget * submenu, DIALOG_DATA * d);
-
+#endif
 #ifdef __cplusplus
 }
 #endif
