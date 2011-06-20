@@ -25,7 +25,9 @@
 
 #include <gtk/gtk.h>
 #include <libxml/parser.h>
-#include <glade/glade-xml.h>
+#ifndef USE_GTKBUILDER
+  #include <glade/glade-xml.h>
+#endif
 
 #include "gui/export_bookmarks.h"
 #include "gui/xiphos.h"

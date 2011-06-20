@@ -25,7 +25,9 @@
 
 #include <gtk/gtk.h>
 #include <libxml/parser.h>
-#include <glade/glade-xml.h>
+#ifndef USE_GTKBUILDER
+  #include <glade/glade-xml.h>
+#endif
 //#include <gal/shortcut-bar/e-shortcut-bar.h>
 #include <math.h>
 #include <ctype.h>
@@ -852,31 +854,46 @@ G_MODULE_EXPORT void on_open_in_tab_activate(GtkMenuItem * menuitem, gpointer us
 void gui_create_bookmark_menu(void)
 {
 	gchar *glade_file;
+#ifdef USE_GTKBUILDER
+	GtkBuilder *gxml;
+	glade_file = gui_general_user_file ("xi-menus.gtkbuilder", FALSE);
+#else
 	GladeXML *gxml;
-
 	glade_file = gui_general_user_file ("xi-menus.glade", FALSE);
+#endif
 	g_return_if_fail ((glade_file != NULL));
 
+#ifdef USE_GTKBUILDER
+	gxml = gtk_builder_new ();
+	gtk_builder_add_from_file (gxml, glade_file, NULL);
+#else
 	gxml = glade_xml_new (glade_file, "menu_bookmark", NULL);
-
+#endif
 	g_free (glade_file);
 	g_return_if_fail ((gxml != NULL));
-
+#ifdef USE_GTKBUILDER
+	menu.menu = GTK_WIDGET (gtk_builder_get_object (gxml, "menu_bookmark"));
+	menu.in_tab = GTK_WIDGET (gtk_builder_get_object (gxml, "open_in_new_tab"));
+	menu.in_dialog = GTK_WIDGET (gtk_builder_get_object (gxml, "open_in_a_dialog"));
+	menu.new = GTK_WIDGET (gtk_builder_get_object (gxml, "new_folder"));
+	menu.insert = GTK_WIDGET (gtk_builder_get_object (gxml, "insert_bookmark"));
+	menu.edit = GTK_WIDGET (gtk_builder_get_object (gxml, "edit_item"));
+	menu.delete = GTK_WIDGET (gtk_builder_get_object (gxml, "delete_item"));
+	menu.reorder = GTK_WIDGET (gtk_builder_get_object (gxml, "allow_reordering"));
+	menu.bibletime = GTK_WIDGET (gtk_builder_get_object (gxml, "import_bibletime_bookmarks1"));
+	menu.remove = GTK_WIDGET (gtk_builder_get_object (gxml, "remove_folder"));
+#else
 	 menu.menu = glade_xml_get_widget (gxml, "menu_bookmark");
-
 	menu.in_tab = glade_xml_get_widget (gxml, "open_in_new_tab");
 	menu.in_dialog = glade_xml_get_widget (gxml, "open_in_a_dialog");
 	menu.new = glade_xml_get_widget (gxml, "new_folder");
 	menu.insert = glade_xml_get_widget (gxml, "insert_bookmark");
 	menu.edit = glade_xml_get_widget (gxml, "edit_item");
 	menu.delete = glade_xml_get_widget (gxml, "delete_item");
-
 	menu.reorder = glade_xml_get_widget (gxml, "allow_reordering");
-
 	menu.bibletime = glade_xml_get_widget (gxml, "import_bibletime_bookmarks1");
-
 	menu.remove = glade_xml_get_widget (gxml, "remove_folder");
-
+#endif
 	gtk_widget_set_sensitive(menu.in_tab, FALSE);
 	gtk_widget_set_sensitive(menu.in_dialog, FALSE);
 	gtk_widget_set_sensitive(menu.new, FALSE);
@@ -887,9 +904,13 @@ void gui_create_bookmark_menu(void)
 
 	gtk_widget_set_sensitive(menu.remove, TRUE);
 	//gtk_widget_hide(menu.remove);
-
     	/* connect signals and data */
+#ifdef USE_GTKBUILDER    
+        gtk_builder_connect_signals (gxml, NULL);
+	/*gtk_builder_connect_signals_full
+		(gxml, (GtkBuilderConnectFunc)gui_glade_signal_connect_func, NULL);*/
+#else
 	glade_xml_signal_autoconnect_full
 		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);
-
+#endif
 }

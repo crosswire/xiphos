@@ -24,7 +24,9 @@
 #endif
 
 #include <gtk/gtk.h>
-#include <glade/glade-xml.h>
+#ifndef USE_GTKBUILDER
+  #include <glade/glade-xml.h>
+#endif
 
 #include "gui/navbar_versekey_parallel.h"
 #include "gui/utilities.h"
@@ -800,25 +802,46 @@ void _connect_signals(NAVBAR_VERSEKEY navbar)
 GtkWidget *gui_navbar_versekey_parallel_new(void)
 {
 	gchar *glade_file;
+#ifdef USE_GTKBUILDER
+	GtkBuilder *gxml;
+
+	glade_file =
+		    gui_general_user_file("navbar_versekey.gtkbuilder", FALSE);
+#else
 	GladeXML *gxml;
 
 	glade_file =
 		    gui_general_user_file("navbar_versekey.glade", FALSE);
+#endif
 	g_return_val_if_fail((glade_file != NULL), NULL);
 	GS_message(("%s",glade_file));
 
 	/* build the widget */
+#ifdef USE_GTKBUILDER
+	gxml = gtk_builder_new ();
+	gtk_builder_add_from_file (gxml, glade_file, NULL);
+#else
 	gxml = glade_xml_new(glade_file, "navbar", NULL);
+#endif
 	navbar_parallel.dialog = TRUE;
 	navbar_parallel.module_name = g_string_new(settings.MainWindowModule);
 	navbar_parallel.key =  g_string_new(settings.currentverse);
 
+#ifdef USE_GTKBUILDER
+	navbar_parallel.navbar = GTK_WIDGET (gtk_builder_get_object (gxml, "navbar"));
+	navbar_parallel.button_history_back = GTK_WIDGET (gtk_builder_get_object (gxml, "button_history_back"));
+	navbar_parallel.button_history_next = GTK_WIDGET (gtk_builder_get_object (gxml, "button_history_foward"));
+	navbar_parallel.button_history_menu = GTK_WIDGET (gtk_builder_get_object (gxml, "togglebutton_history_list"));
+
+	navbar_parallel.button_sync = GTK_WIDGET (gtk_builder_get_object (gxml, "togglebutton_sync"));
+#else
 	navbar_parallel.navbar = glade_xml_get_widget(gxml, "navbar");
 	navbar_parallel.button_history_back = glade_xml_get_widget(gxml, "button_history_back");
 	navbar_parallel.button_history_next = glade_xml_get_widget(gxml, "button_history_foward");
 	navbar_parallel.button_history_menu = glade_xml_get_widget(gxml, "togglebutton_history_list");
 
 	navbar_parallel.button_sync = glade_xml_get_widget(gxml, "togglebutton_sync");
+#endif
 	gtk_widget_show(navbar_parallel.button_sync);
 	gtk_widget_set_tooltip_text(navbar_parallel.button_sync,
 				    _("Synchronize this window's scrolling with the main window"));
@@ -833,6 +856,35 @@ GtkWidget *gui_navbar_versekey_parallel_new(void)
 	navbar_parallel.button_verse_up = glade_xml_get_widget(gxml, "button_verse2");
 	navbar_parallel.button_verse_down = glade_xml_get_widget(gxml, "button_verse1");
 */
+#ifdef USE_GTKBUILDER
+	navbar_parallel.button_book_up = GTK_WIDGET (gtk_builder_get_object (gxml, "eventbox9"));
+	navbar_parallel.button_book_down = GTK_WIDGET (gtk_builder_get_object (gxml, "eventbox6"));
+	navbar_parallel.button_chapter_up = GTK_WIDGET (gtk_builder_get_object (gxml, "eventbox8"));
+	navbar_parallel.button_chapter_down = GTK_WIDGET (gtk_builder_get_object (gxml, "eventbox4"));
+	navbar_parallel.button_verse_up = GTK_WIDGET (gtk_builder_get_object (gxml, "eventbox7"));
+	navbar_parallel.button_verse_down = GTK_WIDGET (gtk_builder_get_object (gxml, "eventbox1"));
+
+	navbar_parallel.arrow_book_up_box = GTK_WIDGET (gtk_builder_get_object (gxml, "image13"));
+	navbar_parallel.arrow_book_up = GTK_WIDGET (gtk_builder_get_object (gxml, "image12"));
+	navbar_parallel.arrow_book_down_box = GTK_WIDGET (gtk_builder_get_object (gxml, "image15"));
+	navbar_parallel.arrow_book_down = GTK_WIDGET (gtk_builder_get_object (gxml, "image14"));
+	navbar_parallel.arrow_chapter_up_box = GTK_WIDGET (gtk_builder_get_object (gxml, "image9"));
+	navbar_parallel.arrow_chapter_up = GTK_WIDGET (gtk_builder_get_object (gxml, "image8"));
+	navbar_parallel.arrow_chapter_down_box = GTK_WIDGET (gtk_builder_get_object (gxml, "image11"));
+	navbar_parallel.arrow_chapter_down = GTK_WIDGET (gtk_builder_get_object (gxml, "image10"));
+	navbar_parallel.arrow_verse_up_box = GTK_WIDGET (gtk_builder_get_object (gxml, "image7"));
+	navbar_parallel.arrow_verse_up = GTK_WIDGET (gtk_builder_get_object (gxml, "image6"));
+	navbar_parallel.arrow_verse_down_box = GTK_WIDGET (gtk_builder_get_object (gxml, "image16"));
+	navbar_parallel.arrow_verse_down = GTK_WIDGET (gtk_builder_get_object (gxml, "image5"));
+
+	navbar_parallel.button_book_menu = GTK_WIDGET (gtk_builder_get_object (gxml, "togglebutton_book"));
+	navbar_parallel.button_chapter_menu = GTK_WIDGET (gtk_builder_get_object (gxml, "togglebutton_chapter"));
+	navbar_parallel.button_verse_menu = GTK_WIDGET (gtk_builder_get_object (gxml, "togglebutton_verse"));
+	navbar_parallel.lookup_entry = GTK_WIDGET (gtk_builder_get_object (gxml, "entry_lookup"));
+	navbar_parallel.label_book_menu = GTK_WIDGET (gtk_builder_get_object (gxml, "label_book"));
+	navbar_parallel.label_chapter_menu = GTK_WIDGET (gtk_builder_get_object (gxml, "label_chapter"));
+	navbar_parallel.label_verse_menu = GTK_WIDGET (gtk_builder_get_object (gxml, "label_verse"));
+#else
 	navbar_parallel.button_book_up = glade_xml_get_widget(gxml, "eventbox9");
 	navbar_parallel.button_book_down = glade_xml_get_widget(gxml, "eventbox6");
 	navbar_parallel.button_chapter_up = glade_xml_get_widget(gxml, "eventbox8");
@@ -860,6 +912,7 @@ GtkWidget *gui_navbar_versekey_parallel_new(void)
 	navbar_parallel.label_book_menu = glade_xml_get_widget(gxml, "label_book");
 	navbar_parallel.label_chapter_menu = glade_xml_get_widget(gxml, "label_chapter");
 	navbar_parallel.label_verse_menu = glade_xml_get_widget(gxml, "label_verse");
+#endif
 	navbar_parallel.book_menu = gtk_menu_new();
 	navbar_parallel.chapter_menu = gtk_menu_new();
 	navbar_parallel.verse_menu = gtk_menu_new();

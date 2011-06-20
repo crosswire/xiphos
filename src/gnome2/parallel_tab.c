@@ -24,7 +24,9 @@
 #endif
 
 #include <gtk/gtk.h>
-#include <glade/glade-xml.h>
+#ifndef USE_GTKBUILDER
+  #include <glade/glade-xml.h>
+#endif
 #include "../xiphos_html/xiphos_html.h"
 
 #include "gui/parallel_tab.h"
