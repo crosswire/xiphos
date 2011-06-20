@@ -1,5 +1,6 @@
 2011-06-20  Terry Biggs  <tbiggs@users.sf.net>
 
+	* fixed the double display in the chapter displays
 	* added scrollbars to webkit in the following files:
 	  * src/gnome2/about_modules.c (gui_create_about_modules):
 	  * src/gnome2/bibletext_dialog.c (gui_create_bibletext_dialog):

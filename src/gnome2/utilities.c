@@ -1396,6 +1396,7 @@ HtmlOutput(char *text,
 #endif /* USE_XIPHOS_HTML */
 
 #ifdef USE_WEBKIT
+	if(!anchor)
 	XIPHOS_HTML_WRITE(html, text, len);
 #endif	
 	
