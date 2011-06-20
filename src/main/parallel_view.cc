@@ -856,6 +856,8 @@ void main_update_parallel_page_detached(void)
 
 #ifdef USE_GTKMOZEMBED
 	if (!gtk_widget_get_realized (GTK_WIDGET(widgets.html_parallel_dialog))) return;
+#else
+	if (!widgets.html_parallel_dialog) return;
 #endif
 
 	/* how big a pile of parallels have we got? */
