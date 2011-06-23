@@ -14,6 +14,7 @@ XiphosHtml *xiphos_html_new(DIALOG_DATA * dialog, gboolean is_dialog, gint pane)
 	priv->pane = pane;
 	priv->is_dialog = is_dialog;
 	priv->dialog = dialog;
+#endif /* USE_WEBKIT || !USE_GTKMOZEMBED */
 	
 
 # ifdef USE_GTKMOZEMBED
@@ -22,6 +23,5 @@ XiphosHtml *xiphos_html_new(DIALOG_DATA * dialog, gboolean is_dialog, gint pane)
 	if (dir == GTK_TEXT_DIR_RTL)
 	    priv->yelper->SetRTL();
 # endif /* USE_GTKMOZEMBED */
-#endif /* USE_WEBKIT || !USE_GTKMOZEMBED */
 	return html;
 }

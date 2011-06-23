@@ -833,7 +833,7 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule)
 		}
 		swbuf.append(settings.imageresize
 			     ? AnalyzeForImageSize(rework->str,
-						   GDK_WINDOW(GTK_WINDOW(gtkText)))
+						   GDK_WINDOW(gtk_widget_get_window(gtkText)))
 			     : rework->str /* left as-is */);
 		if (settings.showversenum)
 			swbuf.append("</font></td>");
@@ -977,7 +977,7 @@ GTKEntryDisp::Display(SWModule &imodule)
 
 	swbuf.append(settings.imageresize
 		     ? AnalyzeForImageSize(rework->str,
-					   GDK_WINDOW(GTK_WINDOW(gtkText)))
+					   GDK_WINDOW(gtk_widget_get_window(gtkText)))
 		     : rework->str /* left as-is */);
 
 	swbuf.append("</div></font></body></html>");
@@ -1315,7 +1315,7 @@ GTKChapDisp::Display(SWModule &imodule)
 		if (cache_flags & ModuleCache::Headings) {
 			swbuf.append(settings.imageresize
 				     ? AnalyzeForImageSize(cVerse.GetHeader(),
-							   GDK_WINDOW(GTK_WINDOW(gtkText)))
+							   GDK_WINDOW(gtk_widget_get_window(gtkText)))
 				     : cVerse.GetHeader() /* left as-is */);
 		} else
 			cVerse.InvalidateHeader();
@@ -1422,14 +1422,14 @@ GTKChapDisp::Display(SWModule &imodule)
 			}
 			swbuf.append(settings.imageresize
 				     ? AnalyzeForImageSize(text->str,
-							   GDK_WINDOW(GTK_WINDOW(gtkText)))
+							   GDK_WINDOW(gtk_widget_get_window(gtkText)))
 				     : text->str /* left as-is */);
 			g_string_free(text, TRUE);
 		} else
 #endif /* USE_XIPHOS_HTML */
 			swbuf.append(settings.imageresize
 				     ? AnalyzeForImageSize(rework->str,
-							   GDK_WINDOW(GTK_WINDOW(gtkText)))
+							   GDK_WINDOW(gtk_widget_get_window(gtkText)))
 				     : rework->str /* left as-is */);
 
 		if (key->Verse() == curVerse) {
@@ -1552,7 +1552,7 @@ DialogEntryDisp::DisplayByChapter(SWModule &imodule)
 		g_free(buf);
 		swbuf.append(settings.imageresize
 			     ? AnalyzeForImageSize(rework->str,
-						   GDK_WINDOW(GTK_WINDOW(gtkText)))
+						   GDK_WINDOW(gtk_widget_get_window(gtkText)))
 			     : rework->str /* left as-is */);
 	}
 
@@ -1643,7 +1643,7 @@ DialogEntryDisp::Display(SWModule &imodule)
 
 	swbuf.append(settings.imageresize
 		     ? AnalyzeForImageSize(rework->str,
-					   GDK_WINDOW(GTK_WINDOW(gtkText)))
+					   GDK_WINDOW(gtk_widget_get_window(gtkText)))
 		     : rework->str /* left as-is */);
 
 	swbuf.append("</font></body></html>");
@@ -1772,7 +1772,7 @@ DialogChapDisp::Display(SWModule &imodule)
 		if (cache_flags & ModuleCache::Headings)
 			swbuf.append(settings.imageresize
 				     ? AnalyzeForImageSize(cVerse.GetHeader(),
-							   GDK_WINDOW(GTK_WINDOW(gtkText)))
+							   GDK_WINDOW(gtk_widget_get_window(gtkText)))
 				     : cVerse.GetHeader() /* left as-is */);
 		else
 			cVerse.InvalidateHeader();
@@ -1867,14 +1867,14 @@ DialogChapDisp::Display(SWModule &imodule)
 			}
 			swbuf.append(settings.imageresize
 				     ? AnalyzeForImageSize(text->str,
-							   GDK_WINDOW(GTK_WINDOW(gtkText)))
+							   GDK_WINDOW(gtk_widget_get_window(gtkText)))
 				     : text->str /* left as-is */);
 			g_string_free(text, TRUE);
 		} else
 #endif /* USE_XIPHOS_HTML */
 			swbuf.append(settings.imageresize
 				     ? AnalyzeForImageSize(rework->str,
-							   GDK_WINDOW(GTK_WINDOW(gtkText)))
+							   GDK_WINDOW(gtk_widget_get_window(gtkText)))
 				     : rework->str /* left as-is */);
 
 		if (key->Verse() == curVerse) {
