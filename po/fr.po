@@ -20,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 3.1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-23 17:22+0100\n"
-"PO-Revision-Date: 2011-01-23 17:38+0100\n"
+"POT-Creation-Date: 2011-06-24 20:09+0200\n"
+"PO-Revision-Date: 2011-06-24 20:28+0200\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: emacs + po-mode <gnomefr@traduc.org>\n"
 "Language: \n"
@@ -547,9 +547,9 @@ msgid "Open a new tab"
 msgstr "Ouvrir un nouvel onglet"
 
 #: ../src/gnome2/main_window.c:932 ../src/gnome2/sidebar.c:616
-#: ../src/gnome2/sidebar.c:622 ../src/main/sidebar.cc:664
-#: ../src/main/sidebar.cc:1009 ../src/main/sidebar.cc:1010
-#: ../src/main/sidebar.cc:1011
+#: ../src/gnome2/sidebar.c:622 ../src/main/sidebar.cc:647
+#: ../src/main/sidebar.cc:992 ../src/main/sidebar.cc:993
+#: ../src/main/sidebar.cc:994
 msgid "Standard View"
 msgstr "Vue simple"
 
@@ -627,7 +627,7 @@ msgstr ""
 "Erreur de configuration\n"
 "\n"
 
-#: ../src/gnome2/menu_popup.c:1865
+#: ../src/gnome2/menu_popup.c:1867
 msgid "No module in this pane."
 msgstr "Pas de module dans ce volet"
 
@@ -912,25 +912,25 @@ msgstr "Archivé dans \n"
 msgid "Journals and prayer lists cannot be indexed."
 msgstr "Les listes de prières et journaux ne peuvent pas être indexés."
 
-#: ../src/gnome2/mod_mgr.c:837
+#: ../src/gnome2/mod_mgr.c:838
 #, c-format
 msgid "%s failed"
 msgstr "%s a échoué"
 
-#: ../src/gnome2/mod_mgr.c:840 ../src/gnome2/mod_mgr.c:1586
+#: ../src/gnome2/mod_mgr.c:841 ../src/gnome2/mod_mgr.c:1587
 msgid "Finished"
 msgstr "Terminé"
 
-#: ../src/gnome2/mod_mgr.c:1008 ../src/gnome2/mod_mgr.c:1010
-#: ../src/gnome2/mod_mgr.c:1112 ../src/gnome2/mod_mgr.c:1147
-#: ../src/gnome2/mod_mgr.c:1149 ../src/gnome2/utilities.c:463
+#: ../src/gnome2/mod_mgr.c:1009 ../src/gnome2/mod_mgr.c:1011
+#: ../src/gnome2/mod_mgr.c:1113 ../src/gnome2/mod_mgr.c:1148
+#: ../src/gnome2/mod_mgr.c:1150 ../src/gnome2/utilities.c:462
 #: ../src/gnome2/utilities.c:528 ../src/gnome2/utilities.c:530
-#: ../src/gnome2/utilities.c:1051 ../src/main/sidebar.cc:844
-#: ../src/main/sidebar.cc:916 ../src/main/sidebar.cc:918
+#: ../src/gnome2/utilities.c:1085 ../src/main/sidebar.cc:826
+#: ../src/main/sidebar.cc:898 ../src/main/sidebar.cc:900
 msgid "Unknown"
 msgstr "Inconnu"
 
-#: ../src/gnome2/mod_mgr.c:1308
+#: ../src/gnome2/mod_mgr.c:1309
 #, c-format
 msgid ""
 "Repository:\n"
@@ -939,7 +939,7 @@ msgstr ""
 "Dépôt :\n"
 "%s"
 
-#: ../src/gnome2/mod_mgr.c:1320
+#: ../src/gnome2/mod_mgr.c:1321
 msgid ""
 "Categorized by\n"
 "Module Type"
@@ -947,54 +947,54 @@ msgstr ""
 "Modules classés\n"
 "par type"
 
-#: ../src/gnome2/mod_mgr.c:1325 ../src/gnome2/utilities.c:591
-#: ../src/main/sidebar.cc:993 ../src/main/sidebar.cc:995
+#: ../src/gnome2/mod_mgr.c:1326 ../src/gnome2/utilities.c:596
+#: ../src/main/sidebar.cc:976 ../src/main/sidebar.cc:978
 msgid "Biblical Texts"
 msgstr "Textes bibliques"
 
-#: ../src/gnome2/mod_mgr.c:1329 ../src/gnome2/utilities.c:595
-#: ../src/main/sidebar.cc:676 ../src/main/sidebar.cc:1018
-#: ../src/main/sidebar.cc:1020 ../ui/prefs.glade.h:36
+#: ../src/gnome2/mod_mgr.c:1330 ../src/gnome2/utilities.c:603
+#: ../src/main/sidebar.cc:659 ../src/main/sidebar.cc:1001
+#: ../src/main/sidebar.cc:1003 ../ui/prefs.glade.h:36
 msgid "Commentaries"
 msgstr "Commentaires"
 
-#: ../src/gnome2/mod_mgr.c:1333 ../src/gnome2/utilities.c:600
-#: ../src/main/sidebar.cc:1027 ../src/main/sidebar.cc:1029
+#: ../src/gnome2/mod_mgr.c:1334 ../src/gnome2/utilities.c:611
+#: ../src/main/sidebar.cc:1010 ../src/main/sidebar.cc:1012
 msgid "Dictionaries"
 msgstr "Dictionnaires"
 
-#: ../src/gnome2/mod_mgr.c:1337 ../src/gnome2/utilities.c:604
-#: ../src/main/sidebar.cc:1036 ../src/main/sidebar.cc:1038
+#: ../src/gnome2/mod_mgr.c:1338 ../src/gnome2/utilities.c:618
+#: ../src/main/sidebar.cc:1019 ../src/main/sidebar.cc:1021
 msgid "Glossaries"
 msgstr "Glossaires"
 
-#: ../src/gnome2/mod_mgr.c:1341 ../src/gnome2/utilities.c:608
-#: ../src/main/sidebar.cc:1045 ../src/main/sidebar.cc:1047
+#: ../src/gnome2/mod_mgr.c:1342 ../src/gnome2/utilities.c:625
+#: ../src/main/sidebar.cc:1028 ../src/main/sidebar.cc:1030
 msgid "Daily Devotionals"
 msgstr "Calendriers bibliques"
 
-#: ../src/gnome2/mod_mgr.c:1345 ../src/gnome2/utilities.c:612
-#: ../src/main/sidebar.cc:686 ../src/main/sidebar.cc:1054
-#: ../src/main/sidebar.cc:1056
+#: ../src/gnome2/mod_mgr.c:1346 ../src/gnome2/utilities.c:632
+#: ../src/main/sidebar.cc:669 ../src/main/sidebar.cc:1037
+#: ../src/main/sidebar.cc:1039
 msgid "General Books"
 msgstr "Livres"
 
-#: ../src/gnome2/mod_mgr.c:1349 ../src/gnome2/utilities.c:616
-#: ../src/main/sidebar.cc:1063 ../src/main/sidebar.cc:1065
+#: ../src/gnome2/mod_mgr.c:1350 ../src/gnome2/utilities.c:639
+#: ../src/main/sidebar.cc:1046 ../src/main/sidebar.cc:1048
 msgid "Maps"
 msgstr "Cartes"
 
-#: ../src/gnome2/mod_mgr.c:1353 ../src/gnome2/utilities.c:620
-#: ../src/main/sidebar.cc:1072 ../src/main/sidebar.cc:1074
+#: ../src/gnome2/mod_mgr.c:1354 ../src/gnome2/utilities.c:646
+#: ../src/main/sidebar.cc:1055 ../src/main/sidebar.cc:1057
 msgid "Images"
 msgstr "Images"
 
-#: ../src/gnome2/mod_mgr.c:1357 ../src/gnome2/utilities.c:624
-#: ../src/main/sidebar.cc:1081 ../src/main/sidebar.cc:1083
+#: ../src/gnome2/mod_mgr.c:1358 ../src/gnome2/utilities.c:653
+#: ../src/main/sidebar.cc:1064 ../src/main/sidebar.cc:1066
 msgid "Cult/Unorthodox"
 msgstr "Hétérodoxie"
 
-#: ../src/gnome2/mod_mgr.c:1365
+#: ../src/gnome2/mod_mgr.c:1366
 msgid ""
 "Categorized by\n"
 "Availability"
@@ -1002,96 +1002,96 @@ msgstr ""
 "Modules classés\n"
 "par disponibilité"
 
-#: ../src/gnome2/mod_mgr.c:1370
+#: ../src/gnome2/mod_mgr.c:1371
 msgid "Updates"
 msgstr "Mise à jour disponible"
 
-#: ../src/gnome2/mod_mgr.c:1374
+#: ../src/gnome2/mod_mgr.c:1375
 msgid "Uninstalled"
 msgstr "Non installé"
 
-#: ../src/gnome2/mod_mgr.c:1378 ../src/gnome2/sidebar.c:632
-#: ../src/gnome2/utilities.c:629 ../src/main/prayerlists.cc:241
-#: ../src/main/sidebar.cc:1091 ../src/main/sidebar.cc:1093
+#: ../src/gnome2/mod_mgr.c:1379 ../src/gnome2/sidebar.c:632
+#: ../src/gnome2/utilities.c:661 ../src/main/prayerlists.cc:241
+#: ../src/main/sidebar.cc:1074 ../src/main/sidebar.cc:1076
 msgid "Prayer List/Journal"
 msgstr "Liste de prières / Journal"
 
-#: ../src/gnome2/mod_mgr.c:1570
+#: ../src/gnome2/mod_mgr.c:1571
 msgid "Refreshing from remote source"
 msgstr "Rafraîchissement en cours"
 
-#: ../src/gnome2/mod_mgr.c:1580
+#: ../src/gnome2/mod_mgr.c:1581
 msgid "Remote source not found"
 msgstr "Serveur non trouvé"
 
-#: ../src/gnome2/mod_mgr.c:1650
+#: ../src/gnome2/mod_mgr.c:1651
 msgid "Configure"
 msgstr "Configurer"
 
-#: ../src/gnome2/mod_mgr.c:1681
+#: ../src/gnome2/mod_mgr.c:1682
 msgid "Type"
 msgstr "Type"
 
-#: ../src/gnome2/mod_mgr.c:1688
+#: ../src/gnome2/mod_mgr.c:1689
 msgid "Caption"
 msgstr "Libellé"
 
-#: ../src/gnome2/mod_mgr.c:1696
+#: ../src/gnome2/mod_mgr.c:1697
 msgid "Source"
 msgstr "Source"
 
 # src/gs_preferences_dlg.c
-#: ../src/gnome2/mod_mgr.c:1704
+#: ../src/gnome2/mod_mgr.c:1705
 msgid "Directory"
 msgstr "Répertoire"
 
-#: ../src/gnome2/mod_mgr.c:1712
+#: ../src/gnome2/mod_mgr.c:1713
 msgid "User"
 msgstr "Identifiant"
 
-#: ../src/gnome2/mod_mgr.c:1720
+#: ../src/gnome2/mod_mgr.c:1721
 msgid "Password"
 msgstr "Mot de passe"
 
-#: ../src/gnome2/mod_mgr.c:1728
+#: ../src/gnome2/mod_mgr.c:1729
 msgid "UID"
 msgstr "UID"
 
-#: ../src/gnome2/mod_mgr.c:1745
+#: ../src/gnome2/mod_mgr.c:1746
 msgid "Module Sources"
 msgstr "Dépots"
 
-#: ../src/gnome2/mod_mgr.c:1748
+#: ../src/gnome2/mod_mgr.c:1749
 msgid "Add/Remove"
 msgstr "Ajouter/Supprimer"
 
-#: ../src/gnome2/mod_mgr.c:1750
+#: ../src/gnome2/mod_mgr.c:1751
 msgid "Choose"
 msgstr "Sélection"
 
-#: ../src/gnome2/mod_mgr.c:1754 ../src/gnome2/preferences_dialog.c:1716
+#: ../src/gnome2/mod_mgr.c:1755 ../src/gnome2/preferences_dialog.c:1716
 #: ../src/gnome2/sidebar.c:1398
 msgid "Modules"
 msgstr "Modules"
 
-#: ../src/gnome2/mod_mgr.c:1756
+#: ../src/gnome2/mod_mgr.c:1757
 msgid "Install/Update"
 msgstr "Installer/Maj"
 
-#: ../src/gnome2/mod_mgr.c:1758
+#: ../src/gnome2/mod_mgr.c:1759
 msgid "Maintenance"
 msgstr "Maintenance"
 
-#: ../src/gnome2/mod_mgr.c:1979
+#: ../src/gnome2/mod_mgr.c:1980
 msgid "Please Refresh"
 msgstr "Rafraîchir"
 
-#: ../src/gnome2/mod_mgr.c:1980
+#: ../src/gnome2/mod_mgr.c:1981
 msgid "Your module list is not up to date!"
 msgstr "La liste des modules n'est pas à jour!"
 
 #. Zero Bibles is just not workable in Xiphos.
-#: ../src/gnome2/mod_mgr.c:2273
+#: ../src/gnome2/mod_mgr.c:2274
 msgid ""
 "You have uninstalled your last Bible.\n"
 "Xiphos requires at least one."
@@ -1099,7 +1099,7 @@ msgstr ""
 "Vous avez désinstallé votre dernière Bible.\n"
 "Xiphos requiert au minimum une."
 
-#: ../src/gnome2/mod_mgr.c:2279
+#: ../src/gnome2/mod_mgr.c:2280
 msgid ""
 "There are still no Bibles installed.\n"
 "Xiphos cannot continue without one."
@@ -1107,57 +1107,61 @@ msgstr ""
 "Toujours aucune Bible installée.\n"
 "Xiphos ne peut pas continuer sans."
 
-#: ../src/gnome2/mod_mgr.c:2369
+#: ../src/gnome2/mod_mgr.c:2370
 msgid "Standard remote sources have been loaded."
 msgstr ""
 "Les dépôts distants standards\n"
 "ont été chargés."
 
-#: ../src/gnome2/mod_mgr.c:2375
+#: ../src/gnome2/mod_mgr.c:2376
 msgid "Could not load standard sources from CrossWire."
 msgstr "Impossible de charger les dépôts standards depuis CrossWire."
 
-#: ../src/gnome2/mod_mgr.c:2543 ../src/gnome2/mod_mgr.c:2789
+#: ../src/gnome2/mod_mgr.c:2544 ../src/gnome2/mod_mgr.c:2790
 msgid "Remove the selected source"
 msgstr "Supprime le dépôt sélectionné"
 
-#: ../src/gnome2/mod_mgr.c:2603
+#: ../src/gnome2/mod_mgr.c:2604
 msgid "Enter a remote source"
 msgstr "Ajouter un dépôt distant"
 
-#: ../src/gnome2/mod_mgr.c:2607
+#: ../src/gnome2/mod_mgr.c:2608
 msgid "Caption:"
 msgstr "Libellé :"
 
-#: ../src/gnome2/mod_mgr.c:2608
+#: ../src/gnome2/mod_mgr.c:2609
 msgid "Type:"
 msgstr "Type :"
 
-#: ../src/gnome2/mod_mgr.c:2609
+#: ../src/gnome2/mod_mgr.c:2610
 msgid "Host:"
 msgstr "Serveur :"
 
 # src/gs_preferences_dlg.c
-#: ../src/gnome2/mod_mgr.c:2610
+#: ../src/gnome2/mod_mgr.c:2611
 msgid "Directory:"
 msgstr "Répertoire :"
 
-#: ../src/gnome2/mod_mgr.c:2611
+#: ../src/gnome2/mod_mgr.c:2612
 msgid "User (optional):"
 msgstr "Identifiant (optionnel) :"
 
-#: ../src/gnome2/mod_mgr.c:2612
+#: ../src/gnome2/mod_mgr.c:2613
 msgid "Password (optional):"
 msgstr "Password (optional):(optionnel) :"
 
 #. this can happen at most once
-#: ../src/gnome2/mod_mgr.c:2639
+#: ../src/gnome2/mod_mgr.c:2640
 msgid "A source by that name already exists."
 msgstr "Un dépôt du même nom existe déjà"
 
-#: ../src/gnome2/mod_mgr.c:2786
+#: ../src/gnome2/mod_mgr.c:2787
 msgid "Delete a remote source"
 msgstr "Supprimer un dépôt distant"
+
+#: ../src/gnome2/mod_mgr.c:3256
+msgid "[no module]"
+msgstr "Pas de module"
 
 #: ../src/gnome2/navbar_book.c:362 ../src/gnome2/navbar_book_dialog.c:302
 msgid "Go outward, to the section containing this one"
@@ -1195,8 +1199,8 @@ msgstr "Options du module"
 
 #: ../src/gnome2/parallel_view.c:269 ../src/gnome2/sidebar.c:615
 #: ../src/gnome2/sidebar.c:621 ../src/gnome2/tabbed_browser.c:255
-#: ../src/main/sidebar.cc:645 ../src/main/sidebar.cc:1001
-#: ../src/main/sidebar.cc:1002 ../src/main/sidebar.cc:1003
+#: ../src/main/sidebar.cc:628 ../src/main/sidebar.cc:984
+#: ../src/main/sidebar.cc:985 ../src/main/sidebar.cc:986
 msgid "Parallel View"
 msgstr "Vue parallèle"
 
@@ -1246,19 +1250,19 @@ msgstr "Options"
 msgid "Special"
 msgstr "Spécial"
 
-#: ../src/gnome2/preferences_dialog.c:2352 ../src/gnome2/search_dialog.c:460
+#: ../src/gnome2/preferences_dialog.c:2353 ../src/gnome2/search_dialog.c:460
 msgid "Clear List?"
 msgstr "Effacer la liste?"
 
-#: ../src/gnome2/preferences_dialog.c:2353 ../src/gnome2/search_dialog.c:461
+#: ../src/gnome2/preferences_dialog.c:2354 ../src/gnome2/search_dialog.c:461
 msgid "Are you sure you want to clear the module list?"
 msgstr "Êtes-vous certain d'effacer la liste des modules?"
 
-#: ../src/gnome2/preferences_dialog.c:2398 ../src/main/search_dialog.cc:700
+#: ../src/gnome2/preferences_dialog.c:2399 ../src/main/search_dialog.cc:699
 msgid "Remove Module?"
 msgstr "Enlever les modules?"
 
-#: ../src/gnome2/preferences_dialog.c:2399 ../src/main/search_dialog.cc:701
+#: ../src/gnome2/preferences_dialog.c:2400 ../src/main/search_dialog.cc:700
 msgid "Are you sure you want to remove the selected module?"
 msgstr "Êtes-vous certain de vouloir supprimer le module sélectionné?"
 
@@ -1432,16 +1436,12 @@ msgstr ""
 
 #. button to open advanced search
 #: ../src/gnome2/search_sidebar.c:195
-#, fuzzy
 msgid "_Open Advanced Search"
-msgstr "Recherche avancée.."
+msgstr "Ouvre la recherche avancée"
 
 #: ../src/gnome2/search_sidebar.c:199
-#, fuzzy
 msgid "Open the separate Advanced Search dialog."
-msgstr ""
-"Ouvre la boîte de dialogue de recherche avancée, pour exécuter des requêtes "
-"complexes"
+msgstr "Ouvre la boîte de dialogue de recherche avancée"
 
 #: ../src/gnome2/search_sidebar.c:211
 msgid "Search Module"
@@ -1529,7 +1529,7 @@ msgstr "Nouveau nom"
 msgid "Remove the selected item"
 msgstr "Supprimer l'élément sélectionné"
 
-#: ../src/gnome2/utilities.c:2022
+#: ../src/gnome2/utilities.c:2056
 msgid ""
 "An image file's size could not be determined.\n"
 "Xiphos cannot resize images to fit window."
@@ -1546,8 +1546,8 @@ msgstr ""
 "Ce nom d'annotation personnelle est improprement formé :\n"
 "'%s'"
 
-#: ../src/main/display.cc:1013 ../src/main/display.cc:1073
-#: ../src/main/display.cc:1157 ../ui/export-dialog.glade.h:7
+#: ../src/main/display.cc:1014 ../src/main/display.cc:1074
+#: ../src/main/display.cc:1158 ../ui/export-dialog.glade.h:7
 msgid "Chapter"
 msgstr "Chapitre"
 
@@ -1927,26 +1927,26 @@ msgstr "<b>Sujet majeur C</b><br/>"
 msgid "User Annotation"
 msgstr "Annotation personnelle de"
 
-#: ../src/main/search_dialog.cc:208
+#: ../src/main/search_dialog.cc:207
 #, c-format
 msgid "Search result %s: %s"
 msgstr "Résultat de la requête %s : %s"
 
-#: ../src/main/search_dialog.cc:440
+#: ../src/main/search_dialog.cc:439
 msgid "Delete Range?"
 msgstr "Supprimer la plage?"
 
-#: ../src/main/search_dialog.cc:441
+#: ../src/main/search_dialog.cc:440
 msgid "Are you sure you want to delete this range?"
 msgstr "Êtes-vous certain de supprimer cette plage?"
 
-#: ../src/main/search_dialog.cc:655 ../src/main/search_dialog.cc:1072
-#: ../src/main/search_dialog.cc:1075 ../src/main/search_dialog.cc:1097
-#: ../src/main/search_dialog.cc:1100
+#: ../src/main/search_dialog.cc:654 ../src/main/search_dialog.cc:1071
+#: ../src/main/search_dialog.cc:1074 ../src/main/search_dialog.cc:1096
+#: ../src/main/search_dialog.cc:1099
 msgid "Search: "
 msgstr "Dans : "
 
-#: ../src/main/search_dialog.cc:1465
+#: ../src/main/search_dialog.cc:1464
 #, c-format
 msgid ""
 "%s:\n"
@@ -1957,16 +1957,16 @@ msgstr ""
 "Module non installé.\n"
 "%s"
 
-#: ../src/main/search_dialog.cc:1467
+#: ../src/main/search_dialog.cc:1466
 msgid "Please adjust the module list."
 msgstr "La liste de modules est à régénérer"
 
-#: ../src/main/search_dialog.cc:1483
+#: ../src/main/search_dialog.cc:1482
 #, c-format
 msgid "No fast-search index exists for %s.%s%s"
 msgstr "Aucun index de recherche optimisée n'existe pour %s %s%s"
 
-#: ../src/main/search_dialog.cc:1485
+#: ../src/main/search_dialog.cc:1484
 msgid ""
 "\n"
 "Search on this module is now `multi word'."
@@ -1974,7 +1974,7 @@ msgstr ""
 "\n"
 "Les requêtes sur ce module sont maintenant 'multi-mots'"
 
-#: ../src/main/search_dialog.cc:1486
+#: ../src/main/search_dialog.cc:1485
 msgid ""
 "\n"
 "See the Module Manager, Maintenance pane."
@@ -1982,7 +1982,7 @@ msgstr ""
 "\n"
 "Voir le Gestionnaire de modules, onglet Maintenance"
 
-#: ../src/main/search_dialog.cc:1549
+#: ../src/main/search_dialog.cc:1548
 msgid "Search finished"
 msgstr "Recherche terminée"
 
@@ -2051,15 +2051,15 @@ msgstr ""
 msgid "Bible module installation complete."
 msgstr "Installation de module terminée."
 
-#: ../src/main/sidebar.cc:409
+#: ../src/main/sidebar.cc:399
 msgid "verse"
 msgstr "verset"
 
-#: ../src/main/sidebar.cc:470
+#: ../src/main/sidebar.cc:460
 msgid "chapter"
 msgstr "chapitre"
 
-#: ../src/main/sword.cc:540
+#: ../src/main/sword.cc:538
 msgid ""
 "Xiphos's file for language\n"
 "abbreviations is missing."
@@ -2067,7 +2067,7 @@ msgstr ""
 "Le fichier des définitions\n"
 "de langages est absent."
 
-#: ../src/main/sword.cc:547
+#: ../src/main/sword.cc:545
 msgid ""
 "Xiphos's language abbreviation\n"
 "file cannot be opened."
@@ -2075,7 +2075,7 @@ msgstr ""
 "Ouverture impossible du fichier\n"
 "des définitions de langages."
 
-#: ../src/main/sword.cc:560
+#: ../src/main/sword.cc:558
 msgid ""
 "Xiphos cannot allocate space\n"
 "for language abbreviations."
@@ -2083,7 +2083,7 @@ msgstr ""
 "Impossible d'allouer l'espace suffisant\n"
 "aux abbréviations de langage."
 
-#: ../src/main/sword.cc:567
+#: ../src/main/sword.cc:565
 msgid ""
 "Xiphos cannot read the\n"
 "language abbreviation file."
@@ -2092,7 +2092,7 @@ msgstr ""
 "définitions de langages."
 
 #. either we were given a null sys_locale, or it didn't match anything.
-#: ../src/main/sword.cc:649
+#: ../src/main/sword.cc:647
 #, c-format
 msgid ""
 "No matching locale found for `%s'.\n"
@@ -2101,18 +2101,18 @@ msgstr ""
 "Pas de locale correspondante pour `%s'.\n"
 "%s"
 
-#: ../src/main/sword.cc:651
+#: ../src/main/sword.cc:649
 msgid "Book names and menus may not be translated."
 msgstr "Les noms de livres et les menus ne seront peut-être pas traduits"
 
-#: ../src/main/sword.cc:1247
+#: ../src/main/sword.cc:1245
 msgid "Daily devotional was requested, but there are none installed."
 msgstr ""
 "Impossible d'afficher le calendrier\n"
 "biblique, aucun module de ce type \n"
 "n'est installé."
 
-#: ../src/main/sword.cc:1483
+#: ../src/main/sword.cc:1481
 msgid ""
 "<b>Locked Module.</b>\n"
 "\n"
