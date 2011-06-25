@@ -645,7 +645,7 @@ void main_update_parallel_page(void)
 			}
 
 			sprintf(tmpBuf,
-				"<tr bgcolor=\"%s\"><td><b><a href=\"passagestudy.jsp?action=showModInfo&value=%s&module=%s\"><font color=\"%s\" size=\"%+d\"> [%s]</font></a></b>",
+				"<tr bgcolor=\"%s\"><td><b><a href=\"passagestudy.jsp?action=showModInfo&value=%s&module=%s\"><font color=\"%s\" size=\"%+d\"> [%s]</font></a></b><br/>",
 				rowcolor,
 				main_get_module_description(mod_name),
 				mod_name,
@@ -654,14 +654,14 @@ void main_update_parallel_page(void)
 				mod_name);
 			g_string_append(data, tmpBuf);
 
-			if ((strlen(mf->old_font) < 2) ||
-			    !strncmp(mf->old_font, "none", 4))
-				sprintf(tmpBuf, "<font size=\"%s\">",
-					mf->old_font_size);
-			else
-				sprintf(tmpBuf,
-					"<font face=\"%s\" size=\"%s\">",
-					mf->old_font, mf->old_font_size);
+			int size = ((mf->old_font_size)
+				    ? (atoi(mf->old_font_size) + settings.base_font_size)
+				    : settings.base_font_size);
+			sprintf(tmpBuf, (((strlen(mf->old_font) < 2) ||
+					  !strncmp(mf->old_font, "none", 4))
+					 ? "<font size=\"%+d\">"
+					 : "<font size=\"%+d\" face=\"%s\">"),
+				size, mf->old_font);
 			free_font(mf);
 			g_string_append(data, tmpBuf);
 
@@ -683,7 +683,7 @@ void main_update_parallel_page(void)
 				g_string_append(data, "</div><br/>");
 
 			sprintf(tmpBuf,
-				"</font><small>[<a href=\"passagestudy.jsp?action=showParallel&"
+				"</font><small><br/>[<a href=\"passagestudy.jsp?action=showParallel&"
 				"type=swap&value=%s\">%s</a>]</small></td></tr>",
 				mod_name,_("view context"));
 			g_string_append(data, tmpBuf);
