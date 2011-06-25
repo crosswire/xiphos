@@ -1,3 +1,8 @@
+2011-06-25  karl <charcoal@users.sf.net>
+
+	* add base font respect to parallel view tab and detached parallel window.
+	* silence a few warnings.
+
 2011-06-20  Terry Biggs  <tbiggs@users.sf.net>
 
 	* fixed the double display in the chapter displays
