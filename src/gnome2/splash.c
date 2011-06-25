@@ -32,7 +32,8 @@
 #include "main/settings.h"
 #include "gui/splash.h"
 #include "gui/utilities.h"
-
+     
+#ifndef USE_GTK_3
 /*****************************************************************************/
 /* FIXME: clean up below */
 
@@ -604,3 +605,85 @@ gboolean gui_splash_done()
 	}
 	return FALSE;
 }
+
+#else
+         
+GtkWidget *splash; 
+GtkWidget *progressbar; 
+GtkWidget *image1; 
+GtkWidget *image2;
+GtkWidget *image3;
+GtkWidget *image4;
+    
+gboolean gui_splash_done(void)
+{
+	if (settings.showsplash) {
+		sync_windows();
+		/*g_object_unref(splash);*/
+		gtk_widget_destroy(splash);
+	}
+	return FALSE;
+}
+
+void gui_splash_step(gchar *text, gdouble progress, gint step)
+{
+	if (settings.showsplash) {
+		gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar),
+					  text);
+		gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar),
+					      progress);
+		switch (step) {
+		case 1: gtk_widget_show (image1);
+			break;    
+		case 2: gtk_widget_show (image2);
+			break;
+		case 3: gtk_widget_show (image3);
+			break;
+		case 4: gtk_widget_show (image4);
+			break;
+		}
+		sync_windows();
+	}
+}
+
+void gui_splash_init (void)
+{
+	gchar *builder_file;
+	GtkBuilder *builder;
+	GError* error = NULL;
+	
+        if (!settings.showsplash) return;
+	
+	builder_file = gui_general_user_file ("xi-splash.ui", FALSE);    
+	g_return_if_fail ((builder_file != NULL));
+	
+	builder = gtk_builder_new ();
+	if (!gtk_builder_add_from_file (builder, builder_file, &error))
+	{
+		g_warning ("Couldn't load builder file: %s", error->message);
+		g_error_free (error);
+	}
+
+	/* This is important */
+	splash = GTK_WIDGET (gtk_builder_get_object (builder, "window")); 
+	image1 = GTK_WIDGET (gtk_builder_get_object (builder, "image2"));     
+	//gtk_widget_hide(image);
+	image2 = GTK_WIDGET (gtk_builder_get_object (builder, "image3"));      
+	//gtk_widget_hide(image2);
+	image3 = GTK_WIDGET (gtk_builder_get_object (builder, "image4"));     
+	//gtk_widget_hide(image3);
+	image4 = GTK_WIDGET (gtk_builder_get_object (builder, "image5"));      
+	//gtk_widget_hide(image4);
+	progressbar = GTK_WIDGET (gtk_builder_get_object (builder, "progressbar1"));
+
+	
+	gtk_builder_connect_signals (builder, NULL);
+
+	g_object_unref (builder);
+	
+
+	
+	
+	
+}
+#endif  /* !USE_GTK_3 */
