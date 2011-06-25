@@ -783,16 +783,20 @@ static void interpolate_parallel_display(SWBuf& text, gchar *key, gint parallel_
 					 "<td width=\"%d%%\" bgcolor=\"%s\">"
 					 "<a href=\"passagestudy.jsp?action=showParallel&"
 					 "type=verse&value=%s\" name=\"%d\">"
-					 "<font color=\"%s\">%s. </font></a>"
-					 "<font face=\"%s\" size=\"%s\" color=\"%s\">",
+					 "<font color=\"%s\" size=\"%+d\">%s. </font></a>"
+					 "<font face=\"%s\" size=\"%+d\" color=\"%s\">",
 					 fraction,
 					 bgColor,
 					 newurl,
 					 verse,
 					 settings.bible_verse_num_color,
+					 settings.verse_num_font_size + settings.base_font_size,
 					 num,
 					 mf[modidx]->old_font,
-					 mf[modidx]->old_font_size,
+					 ((mf[modidx]->old_font_size)
+					  ? (atoi(mf[modidx]->old_font_size) +
+					     settings.base_font_size)
+					  : settings.base_font_size),
 					 textColor);
 				g_free((gchar*)newurl);
 				g_free(num);
@@ -804,7 +808,8 @@ static void interpolate_parallel_display(SWBuf& text, gchar *key, gint parallel_
 				backend_p->set_module_key(settings.parallel_list[modidx], tmpkey);
 				get_heading(text, backend_p, modidx);
 
-				utf8str = backend_p->get_render_text(settings.parallel_list[modidx], tmpkey);
+				utf8str = backend_p->get_render_text
+						(settings.parallel_list[modidx], tmpkey);
 				if (utf8str) {
 					text += utf8str;
 					g_free(utf8str);
