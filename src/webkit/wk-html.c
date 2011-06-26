@@ -5,17 +5,17 @@
 #include <webkit/webkitwebview.h>
 #include <webkit/webkitwebsettings.h>
 
-#include "main/url.hh" 
+#include "main/url.hh"
 #include "main/module_dialogs.h"
 
 #include "wk-html.h"
-#include "marshal.h"    
+#include "marshal.h"
 
-#include "gui/dictlex.h"     
+#include "gui/dictlex.h"
 #include "main/sword.h"
 
 #define WK_HTML_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), WK_TYPE_HTML, WkHtmlPriv))
-        
+
 extern gboolean shift_key_pressed;
 extern gboolean in_url;
 
@@ -81,51 +81,48 @@ static GObjectClass *parent_class = NULL;
 /* } */
    static gboolean button_release_handler (GtkWidget *widget,
 			       GdkEventButton *event)
-{  
-	 GtkClipboard * clipboard;    
+{
+	 GtkClipboard * clipboard;
          if(event->type ==  GDK_BUTTON_RELEASE && db_click) {
 		GS_message((" button 1 = %s" , "double click!\n"));
-	
+
 		if(webkit_web_view_has_selection(WEBKIT_WEB_VIEW (widget))) {
-			webkit_web_view_copy_clipboard (WEBKIT_WEB_VIEW (widget));  
-		
+			webkit_web_view_copy_clipboard (WEBKIT_WEB_VIEW (widget));
+
 			clipboard = gtk_widget_get_clipboard (widget,
-							       GDK_SELECTION_CLIPBOARD );          
+							      GDK_SELECTION_CLIPBOARD );
 
 			gtk_clipboard_request_text  (clipboard,
-								 gui_get_clipboard_text_for_lookup,
-								 NULL);
+						     gui_get_clipboard_text_for_lookup,
+						     NULL);
 		}
-	} 
+	}
 	return FALSE;
 }
 static gboolean button_press_handler (GtkWidget *widget,
 			       GdkEventButton *event)
-{                  
+{
 	WkHtmlPriv *priv;
-        priv = WK_HTML_GET_PRIVATE (WK_HTML(widget)); 
-	
-	if(event->type ==  GDK_2BUTTON_PRESS && !x_uri) {  
+        priv = WK_HTML_GET_PRIVATE (WK_HTML(widget));
+
+	if(event->type ==  GDK_2BUTTON_PRESS && !x_uri) {
 		db_click = TRUE;
 		return FALSE;
-	}	     
+	}
 	db_click = FALSE;
-	
-	if (event->button == 1)	{   
-		//GS_message((" button 1\n uri = %s\n" , webkit_web_view_get_uri (WEBKIT_WEB_VIEW(widget)))); 
+
+	if (event->button == 1)	{
 		if (x_uri) {
-		
-			if ( priv->is_dialog ) 
+			if ( priv->is_dialog )
 				main_dialogs_url_handler(priv->dialog, x_uri, TRUE);
 			else
-				main_url_handler(x_uri, TRUE);  
-			return TRUE; 
-		}  
+				main_url_handler(x_uri, TRUE);
+			return TRUE;
+		}
 		return FALSE;
 	}
 	if (event->button == 3)	{
-		//g_print ("in button_press_handler button 3\n");
-		g_signal_emit(widget, 
+		g_signal_emit(widget,
 			signals[POPUPMENU_REQUESTED],
 		      	0,
 		      	priv->dialog,
@@ -139,36 +136,35 @@ static void link_handler (GtkWidget *widget,
 			      gchar     *title,
 			      gchar     *uri,
 			      gpointer   user_data)
-{                              
-	WkHtmlPriv *priv;	  
-	priv = WK_HTML_GET_PRIVATE (WK_HTML(widget)); 
+{
+	WkHtmlPriv *priv;
+	priv = WK_HTML_GET_PRIVATE(WK_HTML(widget));
 	GS_message(("html_link_message: uri = %s", (uri ? uri : "-none-")));
-	
+
 	if (shift_key_pressed)
 		return;
-	
-	if(x_uri) {  
+
+	if(x_uri) {
 		g_free(x_uri);
 		x_uri = NULL;
 	}
 	if (uri) {
 		x_uri = g_strdup(uri);
 		in_url = 1;
-	} else 
+	} else
 		in_url = 0;
-	
+
 	g_signal_emit(widget,
 		      signals[URI_SELECTED],
 		      0,
 		      uri,
 		      FALSE);
 	if (uri)  {
-		if ( priv->is_dialog ) 
+		if ( priv->is_dialog )
 			main_dialogs_url_handler(priv->dialog, uri, FALSE);
 		else
 			main_url_handler(uri, FALSE);
 	}
-	//g_print ("in link_handler\nuri = %s",uri);
 }
 
 static void
@@ -179,7 +175,7 @@ html_realize (GtkWidget *widget)
 
 	g_signal_connect (G_OBJECT (widget), "button-press-event",
 			  G_CALLBACK (button_press_handler),
-			  NULL);         
+			  NULL);
 	g_signal_connect (G_OBJECT (widget), "button-release-event",
 			  G_CALLBACK (button_release_handler),
 			  NULL);
@@ -238,10 +234,10 @@ html_class_init (WkHtmlClass *klass)
 
 	object_class->finalize = html_finalize;
 	object_class->dispose = html_dispose;
-	
+
 	widget_class->realize = html_realize;
-	
-	signals[URI_SELECTED] = 
+
+	signals[URI_SELECTED] =
 		g_signal_new ("uri_selected",
 			      G_TYPE_FROM_CLASS (klass),
 			      G_SIGNAL_RUN_LAST,
@@ -251,7 +247,7 @@ html_class_init (WkHtmlClass *klass)
 			      wk_marshal_VOID__POINTER_BOOLEAN,
 			      G_TYPE_NONE,
 			      2, G_TYPE_POINTER, G_TYPE_BOOLEAN);
-	
+
 	signals[FRAME_SELECTED] =
 		g_signal_new ("frame_selected",
 			      G_TYPE_FROM_CLASS (klass),
@@ -262,16 +258,16 @@ html_class_init (WkHtmlClass *klass)
 			      wk_marshal_BOOLEAN__POINTER_BOOLEAN,
 			      G_TYPE_BOOLEAN,
 			      2, G_TYPE_POINTER, G_TYPE_BOOLEAN);
-    
 
-	signals[POPUPMENU_REQUESTED] = 
+
+	signals[POPUPMENU_REQUESTED] =
 		g_signal_new ("popupmenu_requested",
 			      G_TYPE_FROM_CLASS (klass),
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (WkHtmlClass,
 					       popupmenu_requested),
 			      NULL, NULL,
-		               
+
 			      wk_marshal_VOID__POINTER_BOOLEAN,
 			      G_TYPE_NONE,
 			      2, G_TYPE_POINTER, G_TYPE_BOOLEAN);
@@ -286,51 +282,49 @@ html_class_init (WkHtmlClass *klass)
 GType
 wk_html_get_type (void)
 {
-    static GType type = 0;
+	static GType type = 0;
 
-    if (G_UNLIKELY (type == 0)) {
-	static const GTypeInfo info = {
-	    sizeof (WkHtmlClass),
-	    NULL,
-	    NULL,
-	    (GClassInitFunc) html_class_init,
-	    NULL,
-	    NULL,
-	    sizeof (WkHtml),
-	    0,
-	    (GInstanceInitFunc) html_init,
-	};
+	if (G_UNLIKELY(type == 0)) {
+		static const GTypeInfo info = {
+		    sizeof (WkHtmlClass),
+		    NULL,
+		    NULL,
+		    (GClassInitFunc) html_class_init,
+		    NULL,
+		    NULL,
+		    sizeof (WkHtml),
+		    0,
+		    (GInstanceInitFunc) html_init,
+		};
 
-	type = g_type_register_static (WEBKIT_TYPE_WEB_VIEW,
-				       "WkHtml", 
-				       &info, (GTypeFlags) 0);
-    }
+		type = g_type_register_static(WEBKIT_TYPE_WEB_VIEW,
+					      "WkHtml",
+					      &info, (GTypeFlags) 0);
+	}
 
-    return type;
+	return type;
 }
 
 void
 wk_html_set_base_uri (WkHtml *html, const gchar *uri)
 {
-    WkHtmlPriv *priv;
+	WkHtmlPriv *priv;
 
-    g_return_if_fail (WK_HTML_IS_HTML (html));
+	g_return_if_fail(WK_HTML_IS_HTML (html));
 
-    priv = html->priv;
+	priv = html->priv;
 
-    if (priv->base_uri)
-	g_free (priv->base_uri);
+	if (priv->base_uri)
+		g_free (priv->base_uri);
 
-    priv->base_uri = g_strdup("file://");
-
+	priv->base_uri = g_strdup("file://");
 }
 
 void
 wk_html_open_stream (WkHtml *html, const gchar *mime)
 {
 	wk_html_set_base_uri (html, NULL);
-	webkit_web_view_set_transparent
-		(WEBKIT_WEB_VIEW (html), TRUE);
+	webkit_web_view_set_transparent(WEBKIT_WEB_VIEW(html), TRUE);
 
 	html->priv->frames_enabled = FALSE;
 	g_free (html->priv->content);
@@ -345,7 +339,7 @@ wk_html_write (WkHtml *html, const gchar *data, gint len)
 	gchar *tmp = NULL;
 
 	if (len == -1) len = strlen (data);
-	
+
 	if (html->priv->content) {
 		tmp = g_strjoin (NULL, html->priv->content, data, NULL);
 		g_free (html->priv->content);
@@ -423,11 +417,11 @@ wk_html_find (WkHtml    *html,
 }
 
 gboolean
-wk_html_find_again (WkHtml    *html,					  
+wk_html_find_again (WkHtml    *html,
 		    gboolean     forward)
 {
 	return webkit_web_view_search_text (WEBKIT_WEB_VIEW (html),
-					    html->priv->find_string, 
+					    html->priv->find_string,
 					    FALSE,
 					    forward, TRUE);
 }
@@ -460,16 +454,16 @@ void ClipboardTextReceivedFunc (GtkClipboard *clipboard,
                                                          const gchar *text,
                                                          gpointer data)
 {
-     
-	GS_message(("clipboard text = %s",text));  
+
+	GS_message(("clipboard text = %s",text));
 }
 */
 
 void
 wk_html_copy_selection (WkHtml *html)
-{                  
-	if(webkit_web_view_has_selection(WEBKIT_WEB_VIEW (html))) 
-		webkit_web_view_copy_clipboard (WEBKIT_WEB_VIEW (html)); 
+{
+	if(webkit_web_view_has_selection(WEBKIT_WEB_VIEW (html)))
+		webkit_web_view_copy_clipboard (WEBKIT_WEB_VIEW (html));
 }
 
 void
@@ -480,11 +474,11 @@ wk_html_select_all (WkHtml *html)
 
 void
 wk_html_print (WkHtml *html)
-{         
+{
 	webkit_web_frame_print (webkit_web_view_get_main_frame (WEBKIT_WEB_VIEW (html)));
 	//webkit_web_view_execute_script (WEBKIT_WEB_VIEW (html), "print();");
 }
-			
+
 gboolean
 wk_html_initialize (void)
 {
