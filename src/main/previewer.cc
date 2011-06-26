@@ -48,6 +48,8 @@ extern "C" {
 #include "main/xml.h"
 #include "backend/sword_main.hh"
 
+#include "xiphos_html/xiphos_html.h"
+
 #include "gui/debug_glib_null.h"
 
 #define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><style type=\"text/css\"><!-- A { text-decoration:none } --></style></head>"
@@ -265,7 +267,7 @@ void mark_search_words(GString * str)
 	}
 	GS_message(("%s",settings.searchText));
 	/* open and close tags */
-#if defined(USE_GTKMOZEMBED) || defined(USE_WEBKIT)
+#ifdef USE_XIPHOS_HTML
 	sprintf(openstr,
 		"<span style=\"background-color: %s; color: %s\">",
 		settings.highlight_fg, settings.highlight_bg);
@@ -273,7 +275,7 @@ void mark_search_words(GString * str)
 #else
 	sprintf(openstr, "<font color=\"%s\"><b>", settings.found_color);
 	sprintf(closestr, "</b></font>");
-#endif /* !USE_GTKMOZEMBED && !USE_WEBKIT */
+#endif /* !USE_XIPHOS_HTML */
 	searchbuf = g_utf8_casefold(g_strdup(settings.searchText),-1);
 	if (g_str_has_prefix(searchbuf, "\"")) {
 		searchbuf = g_strdelimit(searchbuf, "\"", ' ');
