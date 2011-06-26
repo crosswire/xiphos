@@ -42,6 +42,7 @@ static GtkWidget *label_mod;
 static GtkWidget *label_current_font;
 static GtkWidget *button_ok;
 static gboolean new_font_set = FALSE;
+static const char *new_gdk_font;
 static MOD_FONT * mf;
 
 /******************************************************************************
@@ -99,14 +100,13 @@ static void ok_clicked(GtkButton * button,  gpointer data)
 	gchar *new_font = NULL;
 	gchar *font_name = NULL;
 
-	GS_message(("ok_clicked: %s",
-		    (mf->new_gdk_font ? mf->new_gdk_font : "-none-")));
+	GS_message(("ok_clicked: %s", (new_gdk_font ? new_gdk_font : "-none-")));
 	if (file == NULL)
 		file = g_strdup_printf("%s/fonts.conf", settings.gSwordDir);
 
 	if (!mf->no_font) {
 		if (new_font_set) {
-			new_font = g_strdup(mf->new_gdk_font);
+			new_font = g_strdup(new_gdk_font);
 			font_name = get_html_font_name(new_font);
 			mf->new_font = font_name;
 		} else {
@@ -116,19 +116,17 @@ static void ok_clicked(GtkButton * button,  gpointer data)
 		}
 	} else {
 		mf->new_font = "none";
-		mf->new_gdk_font = "none";
+		new_gdk_font = "none";
 	}
 
 	mf->new_font_size = gtk_entry_get_text(GTK_ENTRY(combo_entry_size));
 
 	save_conf_file_item(file, mf->mod_name, "Font", mf->new_font);
-	save_conf_file_item(file, mf->mod_name, "GdkFont", mf->new_gdk_font);
 	save_conf_file_item(file, mf->mod_name, "Fontsize", mf->new_font_size);
 
 	//evidently new_gdk_font is never set on Windows
-	GS_message (("\nFont: %s\nGdkFont: %s\nFontsize: %s\n",
+	GS_message (("\nFont: %s\nFontsize: %s\n",
 		     (mf->new_font ? mf->new_font : "-none-"),
-		     (mf->new_gdk_font ? mf->new_gdk_font : "-none-"),
 		     (mf->new_font_size ? mf->new_font_size : "-none-")));
 
 	gtk_widget_destroy(dlg);
@@ -201,7 +199,7 @@ static void dialog_destroy(GObject * object,  gpointer data)
  *   the gnomefontpicker gave us a gdkfont
  *   the gtkfontbutton gives up a fontname plus size 'Sans 14'
  *   get_html_font_name () deals with that now.
- *   mf->new_gdk_font is now in the form 'Sans 14'
+ *   new_gdk_font is now in the form 'Sans 14'
  *
  * Return value
  *   void
@@ -210,8 +208,8 @@ static void dialog_destroy(GObject * object,  gpointer data)
 static void font_set(GtkFontButton * button,
 		     gchar * arg1,  gpointer data)
 {
-	mf->new_gdk_font = gtk_font_button_get_font_name (button);
-	GS_message (("%s", mf->new_gdk_font));
+	new_gdk_font = gtk_font_button_get_font_name (button);
+	GS_message (("%s", new_gdk_font));
 	new_font_set = 1;
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
 				     (checkbutton_no_font), FALSE);

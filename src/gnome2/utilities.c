@@ -778,56 +778,62 @@ MOD_FONT *get_font(gchar * mod_name)
 	mf->mod_name = mod_name;
 
 	mf->old_font = get_conf_file_item(file, mod_name, "Font");
-	mf->old_gdk_font = get_conf_file_item(file, mod_name, "GdkFont");
 	mf->old_font_size = get_conf_file_item(file, mod_name, "Fontsize");
 
+	/* 1st try: module pref */
 	if ((mf->old_font == NULL) ||
 	    !strcmp(mf->old_font, "none")) {
-		/* in absence of selected font, module can name its preference */
-		gchar *preferred_font = main_get_mod_config_entry(mod_name, "Font");
-		gchar *preferred_font_size = main_get_mod_config_entry(mod_name, "Fontsize");
-
-		/* in absence of module preference, user can specify language pref */
+		/* in absence of module pref, user can specify language pref */
 		gchar *lang = main_get_mod_config_entry(mod_name, "Lang");
-		gchar *lang_lang = g_strdup_printf("Language:%s",
-						   (lang ? lang : ""));
+		gchar *lang_lang = g_strdup_printf("Language:%s", (lang ? lang : ""));
+		g_free(lang);
 		gchar *lang_font = get_conf_file_item(file, lang_lang, "Font");
 		gchar *lang_size = get_conf_file_item(file, lang_lang, "Fontsize");
+		g_free(lang_lang);
+
+		/* in absence of any pref, module can name its pref */
+		gchar *preferred_font = main_get_mod_config_entry(mod_name, "Font");
+		gchar *preferred_size = main_get_mod_config_entry(mod_name, "Fontsize");
 
 		g_free(mf->old_font);
 
-		if (preferred_font && (*preferred_font != '\0'))
-			mf->old_font = preferred_font;
-		else {
+		/* 2nd try: per-language pref */
+		if (lang_font && (*lang_font != '\0')) {
 			g_free(preferred_font);
-			/* next try: fallback to per-language choice */
-			if (lang_font && (*lang_font != '\0'))
-				mf->old_font = lang_font;
+			mf->old_font = lang_font;
+		} else {
+			g_free(lang_font);
+			/* 3rd try: module config pref */
+			if (preferred_font && (*preferred_font != '\0'))
+				mf->old_font = preferred_font;
 			else {
 				/* nothing ever specified: utter default */
-				g_free(lang_font);
+				g_free(preferred_font);
 				mf->old_font = g_strdup("none");
 			}
 		}
 
+		/* 1st try */
 		if ((mf->old_font_size == NULL) ||
 		    !strcmp(mf->old_font_size, "+0")) {
 			g_free(mf->old_font_size);
 
-			if (preferred_font_size && (*preferred_font_size != '\0'))
-				mf->old_font_size = preferred_font_size;
-			else {
-				g_free(preferred_font_size);
-				if (lang_size && (*lang_size != '\0'))
-					mf->old_font_size = lang_size;
+			/* 2nd try */
+			if (lang_size && (*lang_size != '\0')) {
+				g_free(preferred_size);
+				mf->old_font_size = lang_size;
+			} else {
+				/* 3rd try */
+				g_free(lang_size);
+				if (preferred_size && (*preferred_size != '\0'))
+					mf->old_font_size = preferred_size;
 				else {
-					g_free(lang_size);
+					/* utter default */
+					g_free(preferred_size);
 					mf->old_font_size = g_strdup("+0");
 				}
 			}
 		}
-
-		g_free(lang);
 	}
 
 	return mf;
@@ -853,7 +859,6 @@ void free_font(MOD_FONT *mf)
 {
 
 	if (mf->old_font) g_free(mf->old_font);
-	if (mf->old_gdk_font) g_free(mf->old_gdk_font);
 	if (mf->old_font_size) g_free(mf->old_font_size);
 	g_free(mf);
 }
