@@ -142,7 +142,7 @@ static void link_handler (GtkWidget *widget,
 {                              
 	WkHtmlPriv *priv;	  
 	priv = WK_HTML_GET_PRIVATE (WK_HTML(widget)); 
-	GS_message(("html_link_message: uri = %s",uri));  
+	GS_message(("html_link_message: uri = %s", (uri ? uri : "-none-")));
 	
 	if (shift_key_pressed)
 		return;
@@ -163,9 +163,8 @@ static void link_handler (GtkWidget *widget,
 		      uri,
 		      FALSE);
 	if (uri)  {
-		
 		if ( priv->is_dialog ) 
-				main_dialogs_url_handler(priv->dialog, uri, FALSE);
+			main_dialogs_url_handler(priv->dialog, uri, FALSE);
 		else
 			main_url_handler(uri, FALSE);
 	}
