@@ -3,6 +3,8 @@
 	* add base font respect to parallel view tab and detached parallel window.
 	* silence a few warnings.
 	* fix #3302253 update manual, re: parallel view tab configuration.
+	* use correct highlight for found words in webkit.
+	* fix black adv.search results.
 
 2011-06-20  Terry Biggs  <tbiggs@users.sf.net>
 
