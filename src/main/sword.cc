@@ -1778,18 +1778,22 @@ main_deformat_number(char *digitstring)
  * Return value
  *   int
  */
-static char blank_html_content[] = "<html><head></head><body> </body></html>";
-
 void main_flush_widgets_content(void)
 {
+	GString *blank_html_content = g_string_new(NULL);
+	g_string_printf(blank_html_content,
+			"<html><head></head><body bgcolor=\"%s\" text=\"%s\"> </body></html>",
+			settings.bible_bg_color, settings.bible_text_color);
+
 	if (gtk_widget_get_realized  (GTK_WIDGET(widgets.html_text)))
-		HtmlOutput(blank_html_content, widgets.html_text, NULL, NULL);
+		HtmlOutput(blank_html_content->str, widgets.html_text, NULL, NULL);
 	if (gtk_widget_get_realized (GTK_WIDGET(widgets.html_comm)))
-		HtmlOutput(blank_html_content, widgets.html_comm, NULL, NULL);
+		HtmlOutput(blank_html_content->str, widgets.html_comm, NULL, NULL);
 	if (gtk_widget_get_realized (GTK_WIDGET(widgets.html_dict)))
-		HtmlOutput(blank_html_content, widgets.html_dict, NULL, NULL);
+		HtmlOutput(blank_html_content->str, widgets.html_dict, NULL, NULL);
 	if (gtk_widget_get_realized (GTK_WIDGET(widgets.html_book)))
-		HtmlOutput(blank_html_content, widgets.html_book, NULL, NULL);
+		HtmlOutput(blank_html_content->str, widgets.html_book, NULL, NULL);
+	g_string_free(blank_html_content, TRUE);
 }
 
 /******************************************************************************
