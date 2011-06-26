@@ -124,7 +124,7 @@ static gboolean button_press_handler (GtkWidget *widget,
 		return FALSE;
 	}
 	if (event->button == 3)	{
-		g_print ("in button_press_handler button 3\n");
+		//g_print ("in button_press_handler button 3\n");
 		g_signal_emit(widget, 
 			signals[POPUPMENU_REQUESTED],
 		      	0,
