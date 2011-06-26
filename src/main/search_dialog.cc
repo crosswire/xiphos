@@ -940,9 +940,11 @@ void main_finds_verselist_selection_changed(GtkTreeSelection * selection,
 	mark_search_words(text_str);
 
 #ifdef USE_XIPHOS_HTML
-	GString *html_text = g_string_new(HTML_START);
+	GString *html_text = g_string_new("");
+	g_string_printf(html_text, HTML_START "<body text=\"%s\" bgcolor=\"%s\">",
+			settings.bible_text_color, settings.bible_bg_color);
 	g_string_append(html_text, text_str->str);
-	g_string_append(html_text, "</html>");	
+	g_string_append(html_text, "</body></html>");	
 	XIPHOS_HTML_OPEN_STREAM(search1.preview_html, "text/html");
 	XIPHOS_HTML_WRITE(search1.preview_html,
 			 html_text->str, html_text->len);
@@ -1071,7 +1073,7 @@ void main_comboboxentry2_changed(GtkComboBox * combobox, gpointer user_data)
 	gchar *str = NULL;
 	gchar *mod_list_str = NULL;
 	const gchar *name = NULL;
- 
+
 	if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(search1.rb_custom_list)))
 		return;
 	name = gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(combobox))));
@@ -1505,8 +1507,7 @@ void main_do_dialog_search(void)
 
 		// add number of hits in each module to finds listview
 		num = main_format_number(finds);
-		g_string_printf(str, "%s %s %s",
-				num, FINDS, module);
+		g_string_printf(str, "%s %s %s", num, FINDS, module);
 		g_free(num);
 		gtk_list_store_append(list_store, &iter);
 		gtk_list_store_set(list_store,
