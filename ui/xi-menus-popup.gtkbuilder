@@ -441,7 +441,7 @@
             </child>
             <child>
               <object class="GtkCheckMenuItem" id="verse_per_line">
-                <property name="visible">True</property>
+                <property name="visible">False</property>
                 <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">Verse Per Line</property>
@@ -451,7 +451,7 @@
             </child>
             <child>
               <object class="GtkCheckMenuItem" id="words_of_christ_in_red">
-                <property name="visible">True</property>
+                <property name="visible">False</property>
                 <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">Words of Christ in Red</property>
@@ -461,7 +461,7 @@
             </child>
             <child>
               <object class="GtkCheckMenuItem" id="strongs_numbers">
-                <property name="visible">True</property>
+                <property name="visible">False</property>
                 <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">Strong's Numbers</property>
@@ -471,7 +471,7 @@
             </child>
             <child>
               <object class="GtkCheckMenuItem" id="morphological_tags">
-                <property name="visible">True</property>
+                <property name="visible">False</property>
                 <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">Morphological Tags</property>
@@ -481,7 +481,7 @@
             </child>
             <child>
               <object class="GtkCheckMenuItem" id="footnotes">
-                <property name="visible">True</property>
+                <property name="visible">False</property>
                 <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">Footnotes</property>
@@ -491,7 +491,7 @@
             </child>
             <child>
               <object class="GtkCheckMenuItem" id="greek_accents">
-                <property name="visible">True</property>
+                <property name="visible">False</property>
                 <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">Greek Accents</property>
@@ -501,7 +501,7 @@
             </child>
             <child>
               <object class="GtkCheckMenuItem" id="lemmas">
-                <property name="visible">True</property>
+                <property name="visible">False</property>
                 <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">Lemmas</property>
@@ -511,7 +511,7 @@
             </child>
             <child>
               <object class="GtkCheckMenuItem" id="scripture_cross-references">
-                <property name="visible">True</property>
+                <property name="visible">False</property>
                 <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">Scripture Cross-references</property>
@@ -521,7 +521,7 @@
             </child>
             <child>
               <object class="GtkCheckMenuItem" id="hebrew_vowel_points">
-                <property name="visible">True</property>
+                <property name="visible">False</property>
                 <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">Hebrew Vowel Points</property>
@@ -531,7 +531,7 @@
             </child>
             <child>
               <object class="GtkCheckMenuItem" id="hebrew_cantillation">
-                <property name="visible">True</property>
+                <property name="visible">False</property>
                 <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">Hebrew Cantillation</property>
@@ -541,7 +541,7 @@
             </child>
             <child>
               <object class="GtkCheckMenuItem" id="headings">
-                <property name="visible">True</property>
+                <property name="visible">False</property>
                 <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">Headings</property>
@@ -561,7 +561,7 @@
             </child>
             <child>
               <object class="GtkMenuItem" id="variants">
-                <property name="visible">True</property>
+                <property name="visible">False</property>
                 <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">Variants</property>
@@ -605,7 +605,7 @@
             </child>
             <child>
               <object class="GtkCheckMenuItem" id="image_content">
-                <property name="visible">True</property>
+                <property name="visible">False</property>
                 <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">Image Content</property>
@@ -615,7 +615,7 @@
             </child>
             <child>
               <object class="GtkCheckMenuItem" id="respect_font_faces">
-                <property name="visible">True</property>
+                <property name="visible">False</property>
                 <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">Respect Font Faces</property>
@@ -625,7 +625,7 @@
             </child>
             <child>
               <object class="GtkCheckMenuItem" id="commentary_by_chapter">
-                <property name="visible">True</property>
+                <property name="visible">False</property>
                 <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">Commentary by Chapter</property>
