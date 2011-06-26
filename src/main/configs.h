@@ -30,9 +30,7 @@ typedef struct _mod_font MOD_FONT;
 struct  _mod_font {
 	const char *mod_name;
 	char *old_font;
-	char *old_gdk_font;
 	const char *new_font;
-	const char *new_gdk_font;
 	char *old_font_size;
 	const char *new_font_size;
 	int no_font;

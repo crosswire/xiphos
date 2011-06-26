@@ -5,6 +5,8 @@
 	* fix #3302253 update manual, re: parallel view tab configuration.
 	* use correct highlight for found words in webkit.
 	* fix black adv.search results.
+	* dispose of as much "gdk font" stuff as possible.
+	* correct font selection order: module pref, language pref, conf pref
 
 2011-06-20  Terry Biggs  <tbiggs@users.sf.net>
 
