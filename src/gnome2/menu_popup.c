@@ -1461,7 +1461,6 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 #else
     	item = glade_xml_get_widget (gxml, "verse_per_line");
 #endif
-    	gtk_widget_hide (item);
 
 	if (mod_name && (modtype == TEXT_TYPE)) {
 	    	gtk_widget_show (item);
@@ -1473,7 +1472,6 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 #else
     	item = glade_xml_get_widget (gxml, "words_of_christ_in_red");
 #endif
-    	gtk_widget_hide (item);
 
 	if ((main_check_for_global_option ((gchar*) mod_name, "GBFRedLetterWords")) ||
 	    (main_check_for_global_option ((gchar*) mod_name, "OSISRedLetterWords"))) {
@@ -1486,7 +1484,6 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 #else
     	item = glade_xml_get_widget (gxml, "strong's_numbers");
 #endif
-    	gtk_widget_hide (item);
 
 	if ((main_check_for_global_option((gchar*) mod_name, "GBFStrongs")) ||
 	    (main_check_for_global_option((gchar*) mod_name, "ThMLStrongs")) ||
@@ -1500,7 +1497,6 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 #else
     	item = glade_xml_get_widget (gxml, "morphological_tags");
 #endif
-    	gtk_widget_hide (item);
 
 	if (main_check_for_global_option((gchar*) mod_name, "GBFMorph") ||
 	    main_check_for_global_option((gchar*) mod_name, "ThMLMorph") ||
@@ -1514,7 +1510,6 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 #else
     	item = glade_xml_get_widget (gxml, "footnotes");
 #endif
-    	gtk_widget_hide (item);
 
 	if (main_check_for_global_option((gchar*) mod_name, "GBFFootnotes") ||
 	    main_check_for_global_option((gchar*) mod_name, "ThMLFootnotes") ||
@@ -1528,7 +1523,6 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 #else
     	item = glade_xml_get_widget (gxml, "greek_accents");
 #endif
-    	gtk_widget_hide (item);
 
 	if (main_check_for_global_option((gchar*) mod_name, "UTF8GreekAccents")) {
 		gtk_widget_show(item);
@@ -1540,7 +1534,6 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 #else
     	item = glade_xml_get_widget (gxml, "lemmas");
 #endif
-    	gtk_widget_hide (item);
 
 	if (main_check_for_global_option((gchar*) mod_name, "ThMLLemma") ||
 	    main_check_for_global_option((gchar*) mod_name, "OSISLemma")) {
@@ -1553,7 +1546,6 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 #else
     	item = glade_xml_get_widget (gxml, "scripture_cross-references");
 #endif
-    	gtk_widget_hide (item);
 
 	if (main_check_for_global_option((gchar*) mod_name, "ThMLScripref") ||
 	    main_check_for_global_option((gchar*) mod_name, "OSISScripref")) {
@@ -1577,7 +1569,6 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 #else
     	item = glade_xml_get_widget (gxml, "hebrew_cantillation");
 #endif
-    	gtk_widget_hide (item);
 
 	if (main_check_for_global_option ((gchar*) mod_name, "UTF8Cantillation")) {
 		gtk_widget_show (item);
@@ -1589,7 +1580,6 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 #else
     	item = glade_xml_get_widget (gxml, "headings");
 #endif
-    	gtk_widget_hide (item);
 
 	if (main_check_for_global_option ((gchar*) mod_name, "ThMLHeadings") ||
 	    main_check_for_global_option ((gchar*) mod_name, "OSISHeadings")) {
@@ -1609,7 +1599,6 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 #else
     	item = glade_xml_get_widget (gxml, "variants");
 #endif
-    	gtk_widget_hide (item);
 
 	if (main_check_for_global_option ((gchar*) mod_name, "ThMLVariants")) {
 		gtk_widget_show (item);
@@ -1619,21 +1608,21 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 #else
 		item = glade_xml_get_widget (gxml, "primary_reading");
 #endif
-			gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), ops->variants_primary);
+		gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), ops->variants_primary);
 
 #ifdef USE_GTKBUILDER
 		item = GTK_WIDGET (gtk_builder_get_object (gxml, "secondary_reading"));
 #else
 		item = glade_xml_get_widget (gxml, "secondary_reading");
 #endif
-			gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), ops->variants_secondary);
+		gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), ops->variants_secondary);
 
 #ifdef USE_GTKBUILDER
 		item = GTK_WIDGET (gtk_builder_get_object (gxml, "all_readings"));
 #else
 		item = glade_xml_get_widget (gxml, "all_readings");
 #endif
-			gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (item), ops->variants_all);
+		gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (item), ops->variants_all);
 	}
 
 #ifdef USE_GTKBUILDER
@@ -1641,7 +1630,6 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 #else
     	item = glade_xml_get_widget (gxml, "image_content");
 #endif
-    	gtk_widget_hide (item);
 
 	if (ops->image_content != -1) {
 		gtk_widget_show (item);
@@ -1653,7 +1641,6 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 #else
     	item = glade_xml_get_widget (gxml, "respect_font_faces");
 #endif
-    	gtk_widget_hide (item);
 
 	if (ops->respect_font_faces != -1) {
 		gtk_widget_show(item);
@@ -1665,7 +1652,6 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 #else
     	item = glade_xml_get_widget (gxml, "commentary_by_chapter");
 #endif
-    	gtk_widget_hide (item);
 
     	if ((modtype == COMMENTARY_TYPE) || (modtype == PERCOM_TYPE)) {
     		gtk_widget_show (item);
