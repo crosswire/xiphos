@@ -96,9 +96,7 @@ void gui_popup_pm_text(void)
 
   #endif
 {
-    gui_menu_popup (html, settings.MainWindowModule,
-			NULL);  
-		g_print ("in _popupmenu_requested_cb\n");
+    gui_menu_popup(html, settings.MainWindowModule, NULL);  
     #ifdef USE_WEBKIT
       return TRUE;
    // #elif USE_GTKMOZEMBED
