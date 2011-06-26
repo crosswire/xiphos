@@ -265,7 +265,7 @@ void mark_search_words(GString * str)
 	}
 	GS_message(("%s",settings.searchText));
 	/* open and close tags */
-#ifdef USE_GTKMOZEMBED
+#if defined(USE_GTKMOZEMBED) || defined(USE_WEBKIT)
 	sprintf(openstr,
 		"<span style=\"background-color: %s; color: %s\">",
 		settings.highlight_fg, settings.highlight_bg);
@@ -273,7 +273,7 @@ void mark_search_words(GString * str)
 #else
 	sprintf(openstr, "<font color=\"%s\"><b>", settings.found_color);
 	sprintf(closestr, "</b></font>");
-#endif /* !USE_GTKMOZEMBED */
+#endif /* !USE_GTKMOZEMBED && !USE_WEBKIT */
 	searchbuf = g_utf8_casefold(g_strdup(settings.searchText),-1);
 	if (g_str_has_prefix(searchbuf, "\"")) {
 		searchbuf = g_strdelimit(searchbuf, "\"", ' ');

@@ -127,7 +127,7 @@ void button_clean(GtkButton * button, gpointer user_data)
 	GtkTreeModel *model;
 	GtkListStore *list_store;
 #ifdef USE_XIPHOS_HTML
-	GString *html_text;
+	GString *html_text = g_string_new("");
 #endif
 
 	GS_message(("button_clean"));
@@ -140,17 +140,14 @@ void button_clean(GtkButton * button, gpointer user_data)
 	gtk_list_store_clear(list_store);
 
 #ifdef USE_XIPHOS_HTML
-	html_text = g_string_new(HTML_START);
-	g_string_append(html_text," ");
-
-	g_string_append(html_text,"</html>");	
+	g_string_printf(html_text, HTML_START "<body text=\"%s\" bgcolor=\"%s\"> </body></html>",
+			settings.bible_text_color, settings.bible_bg_color);
 	XIPHOS_HTML_OPEN_STREAM(search1.preview_html,"text/html");
 	XIPHOS_HTML_WRITE(search1.preview_html,html_text->str,html_text->len);
 	XIPHOS_HTML_CLOSE(search1.preview_html);
 	g_string_free(html_text,TRUE);
 #else
-	gtk_html_load_from_string(GTK_HTML(search1.preview_html),
-				  " ", strlen(" "));
+	gtk_html_load_from_string(GTK_HTML(search1.preview_html), " ", 1);
 #endif
 }
 
@@ -1189,7 +1186,7 @@ void _setup_combobox(GtkComboBox * combo)
 	gtk_combo_box_set_entry_text_column (GTK_COMBO_BOX(combo), 0);
 #else  	
 	gtk_combo_box_entry_set_text_column(GTK_COMBO_BOX_ENTRY(combo), 0);
-#endif       
+#endif
 }
 
 
