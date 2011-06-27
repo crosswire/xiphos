@@ -4,7 +4,6 @@
   <!-- interface-naming-policy project-wide -->
   <object class="GtkMenuBar" id="menu_main">
     <property name="visible">True</property>
-    <property name="ubuntu_local">True</property>
     <child>
       <object class="GtkMenuItem" id="menuitem4">
         <property name="visible">True</property>
@@ -12,7 +11,6 @@
         <property name="use_underline">True</property>
         <child type="submenu">
           <object class="GtkMenu" id="menuitem4_menu">
-            <property name="ubuntu_local">True</property>
             <child>
               <object class="GtkImageMenuItem" id="open_studypad">
                 <property name="label">Open Study_pad</property>
@@ -84,7 +82,6 @@
         <property name="use_underline">True</property>
         <child type="submenu">
           <object class="GtkMenu" id="menuitem5_menu">
-            <property name="ubuntu_local">True</property>
             <child>
               <object class="GtkImageMenuItem" id="search">
                 <property name="label">_Search</property>
@@ -140,7 +137,6 @@
         <property name="use_underline">True</property>
         <child type="submenu">
           <object class="GtkMenu" id="menuitem6_menu">
-            <property name="ubuntu_local">True</property>
             <child>
               <object class="GtkMenuItem" id="daily_devotion">
                 <property name="visible">True</property>
@@ -270,7 +266,6 @@
         <property name="use_underline">True</property>
         <child type="submenu">
           <object class="GtkMenu" id="menuitem7_menu">
-            <property name="ubuntu_local">True</property>
             <child>
               <object class="GtkImageMenuItem" id="contents">
                 <property name="label">_Contents</property>

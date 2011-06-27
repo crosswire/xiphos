@@ -1,79 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk+" version="2.14"/>
-  <!-- interface-naming-policy project-wide -->
   <object class="GtkWindow" id="window">
     <property name="visible">True</property>
+    <property name="can_focus">False</property>
     <property name="title" translatable="yes">window</property>
     <property name="default_width">500</property>
     <property name="default_height">400</property>
     <property name="type_hint">splashscreen</property>
-    <signal name="destroy" handler="destroy" object="NULL"/>
-    <signal name="button_press_event" handler="on_window_button_press_event"/>
     <child>
       <object class="GtkEventBox" id="eventbox1">
         <property name="visible">True</property>
-        <signal name="button_press_event" handler="on_eventbox1_button_press_event"/>
+        <property name="can_focus">False</property>
         <child>
           <object class="GtkVBox" id="vbox1">
             <property name="visible">True</property>
+            <property name="can_focus">False</property>
             <child>
               <object class="GtkImage" id="image1">
                 <property name="visible">True</property>
+                <property name="can_focus">False</property>
                 <property name="pixbuf">splash.png</property>
-                <signal name="button_press_event" handler="on_image_button_press_event"/>
               </object>
               <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
                 <property name="position">0</property>
               </packing>
             </child>
             <child>
               <object class="GtkHBox" id="hbox1">
                 <property name="visible">True</property>
+                <property name="can_focus">False</property>
                 <property name="homogeneous">True</property>
                 <child>
                   <object class="GtkImage" id="image2">
+                    <property name="can_focus">False</property>
                     <property name="pixbuf">gnome-windows.png</property>
                   </object>
                   <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
                     <property name="position">0</property>
                   </packing>
                 </child>
                 <child>
                   <object class="GtkImage" id="image3">
+                    <property name="can_focus">False</property>
                     <property name="pixbuf">sword.png</property>
                   </object>
                   <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
                 <child>
                   <object class="GtkImage" id="image4">
+                    <property name="can_focus">False</property>
                     <property name="pixbuf">gnome-session.png</property>
                   </object>
                   <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
                     <property name="position">2</property>
                   </packing>
                 </child>
                 <child>
                   <object class="GtkImage" id="image5">
+                    <property name="can_focus">False</property>
                     <property name="pixbuf">gs2-48x48-old.png</property>
                   </object>
                   <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
                     <property name="position">3</property>
                   </packing>
                 </child>
               </object>
               <packing>
                 <property name="expand">False</property>
+                <property name="fill">True</property>
                 <property name="position">1</property>
               </packing>
             </child>
             <child>
               <object class="GtkProgressBar" id="progressbar1">
                 <property name="visible">True</property>
+                <property name="can_focus">False</property>
               </object>
               <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
                 <property name="position">2</property>
               </packing>
             </child>
