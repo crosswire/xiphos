@@ -67,8 +67,8 @@ ceb	Sinugboanong Binisaya
 ch	Chamoru
 # Corsican
 co	Corsu
-# Coptic
-cop	ⲙⲛⲧⲣⲙⲛⲕⲏⲙⲉ
+# Coptic - disabled because this causes some grief.
+#cop	ⲙⲛⲧⲣⲙⲛⲕⲏⲙⲉ
 # Czech
 cs	Česky
 # Church Slavic
@@ -1749,7 +1749,8 @@ col	Columbia-Wenatchi
 com	Comanche
 con	Cofán
 coo	Comox
-#cop	Coptic				// dup
+# enabled plain latin name because font-specific name causes grief.
+cop	Coptic
 coq	Coquille
 cor	Cornish
 cos	Corsican
