@@ -24,6 +24,10 @@
 #endif
 
 #include <gtk/gtk.h>
+#ifdef GTKHTML
+#include <gtkhtml/gtkhtml.h>
+#include "gui/html.h"
+#endif
 #include "../xiphos_html/xiphos_html.h"
 
 #include "gui/bibletext_dialog.h"
@@ -421,7 +425,7 @@ static gboolean on_text_button_press_event(GtkWidget *widget,
 	case 2:
 		break;
 	case 3:
-		gui_menu_popup (NULL, t);
+		gui_menu_popup (NULL,NULL, t);
 		//create_menu(t, event);
 		break;
 	}
@@ -612,7 +616,7 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 
 	swVText = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(swVText);
-	gtk_container_add(GTK_CONTAINER(frame), swVText);
+	//gtk_container_add(GTK_CONTAINER(frame), swVText);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(swVText),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_ALWAYS);

@@ -24,6 +24,10 @@
 #endif
 
 #include <gtk/gtk.h>
+#ifdef GTKHTML
+#include <gtkhtml/gtkhtml.h>
+#include "gui/html.h"
+#endif
 
 #include "../xiphos_html/xiphos_html.h"
 
@@ -241,7 +245,7 @@ static gint html_button_pressed(GtkWidget * html,
 		break;
 	case 3:
 		//gui_create_pm_dictionary();
-		gui_menu_popup (settings.DictWindowModule, NULL);
+		gui_menu_popup (NULL, settings.DictWindowModule, NULL);
 		break;
 		/*gtk_signal_emit_stop_by_name(GTK_OBJECT(html),
 		   "button_press_event"); */

@@ -24,6 +24,10 @@
 #endif
 
 #include <gtk/gtk.h>
+#ifdef GTKHTML
+#include <gtkhtml/gtkhtml.h>
+#include "gui/html.h"
+#endif
 
 #include "../xiphos_html/xiphos_html.h"
 
@@ -198,7 +202,7 @@ static gboolean button_press(GtkWidget *widget,
 {
 	//cur_dlg = g;
 	if (event->button == 2)
-		gui_menu_popup (NULL, g);
+		gui_menu_popup (NULL, NULL, g);
 	return FALSE;
 }
 #endif /* !USE_XIPHOS_HTML */

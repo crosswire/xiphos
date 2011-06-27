@@ -29,12 +29,20 @@ extern "C" {
 #ifndef USE_GTKBUILDER
   #include <glade/glade-xml.h>
 #endif
+#ifdef GTKHTML
+#include <gtkhtml/gtkhtml.h>
+#include "gui/html.h"
+#endif
 
 #include "main/module_dialogs.h"
 //#include "gnome2/xiphos_html.h"
-	
+#ifdef GTKHTML
+void gui_menu_popup (GtkHTML *html, const gchar * mod_name,
+			DIALOG_DATA * d);	
+#else
 void gui_menu_popup (XiphosHtml *html, const gchar * mod_name,
 			DIALOG_DATA * d);
+#endif  /* GTKHTML */
 gint _get_type_mod_list (void);
 gchar * _get_key (gchar * mod_name);
 GtkWidget * _get_html (void);

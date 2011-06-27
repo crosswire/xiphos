@@ -26,6 +26,10 @@
 #include <gtk/gtk.h>
 
 #include "../xiphos_html/xiphos_html.h"
+#ifdef GTKHTML
+#include <gtkhtml/gtkhtml.h>
+#include "gui/html.h"
+#endif
 
 #include "gui/about_modules.h"
 #include "gui/utilities.h"
