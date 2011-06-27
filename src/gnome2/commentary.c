@@ -25,6 +25,10 @@
 
 #include <errno.h>
 #include <gtk/gtk.h>
+#ifdef GTKHTML
+#include <gtkhtml/gtkhtml.h>
+#include "gui/html.h"
+#endif
 
 
 #include "../xiphos_html/xiphos_html.h"
@@ -112,7 +116,7 @@ static gboolean on_comm_button_press_event(GtkWidget * widget,
 	case 2:
 		break;
 	case 3:
-    		gui_menu_popup (settings.CommWindowModule, NULL);
+    		gui_menu_popup (NULL, settings.CommWindowModule, NULL);
 		break;
 	}
 	return FALSE;

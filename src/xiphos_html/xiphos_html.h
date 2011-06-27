@@ -25,7 +25,8 @@
  * A general compatibility layer that will buffer the application from the
  * direct effects of WebKit and Gecko being alternatively selected for
  * the rendering system.
- */
+ */   
+#ifndef GTKHTML
 #ifdef USE_WEBKIT
   #include "../webkit/wk-html.h"
   #define USE_XIPHOS_HTML
@@ -102,3 +103,5 @@
 #endif
 
 XiphosHtml *xiphos_html_new(DIALOG_DATA * dialog, gboolean is_dialog, gint pane);
+   
+#endif /* !GTKHTML */

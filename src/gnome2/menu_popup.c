@@ -24,6 +24,10 @@
 #endif
 
 #include <gtk/gtk.h>
+#ifdef GTKHTML
+#include <gtkhtml/gtkhtml.h>
+#include "gui/html.h"
+#endif
     
 #ifndef USE_GTKBUILDER
   #include <glade/glade-xml.h>
@@ -1776,8 +1780,12 @@ static void _lookup_selection(GtkMenuItem *menuitem,
  *   GtkWidget*
  */
 
-static
+static 
+#ifdef GTKHTML
+ GtkWidget * _create_popup_menu (GtkHTML *html, const gchar * mod_name, DIALOG_DATA * d)
+#else
 GtkWidget * _create_popup_menu (XiphosHtml *html, const gchar * mod_name, DIALOG_DATA * d)
+#endif
 {
 	gchar *glade_file;
 #ifdef USE_GTKBUILDER
@@ -1960,7 +1968,11 @@ GtkWidget * _create_popup_menu (XiphosHtml *html, const gchar * mod_name, DIALOG
  *   void
  */
 
+#ifdef GTKHTML
+void gui_menu_popup (GtkHTML *html, const gchar * mod_name, DIALOG_DATA * d)
+#else
 void gui_menu_popup (XiphosHtml *html, const gchar * mod_name, DIALOG_DATA * d)
+#endif /* GTKHTML */
 {
 	GtkWidget *menu;
 

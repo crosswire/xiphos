@@ -27,8 +27,14 @@
 #include <swbuf.h>
 #include <swmodule.h>
 #define XIPHOS_HTML_EXTERN_C
-#include "../xiphos_html/xiphos_html.h"
-
+#include "../xiphos_html/xiphos_html.h"   
+      #ifdef __cplusplus
+        extern "C" {
+#ifdef GTKHTML
+#include <gtkhtml/gtkhtml.h>
+#endif
+} 
+#endif
 #include "main/previewer.h"
 #include "main/search_dialog.h"
 #include "main/settings.h"

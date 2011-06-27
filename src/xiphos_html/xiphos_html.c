@@ -1,5 +1,5 @@
 #include "xiphos_html.h"
-
+#ifndef GTKHTML
 XiphosHtml *xiphos_html_new(DIALOG_DATA * dialog, gboolean is_dialog, gint pane)
 {
 	XiphosHtml *html;
@@ -24,3 +24,4 @@ XiphosHtml *xiphos_html_new(DIALOG_DATA * dialog, gboolean is_dialog, gint pane)
 # endif /* USE_GTKMOZEMBED */
 	return html;
 }
+#endif /* !GTKHTML */
