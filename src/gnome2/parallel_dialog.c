@@ -24,6 +24,10 @@
 #endif
 
 #include <gtk/gtk.h>
+#ifdef GTKHTML
+#include <gtkhtml/gtkhtml.h>
+#include "gui/html.h"
+#endif
 #ifndef USE_GTKBUILDER
   #include <glade/glade-xml.h>
 #endif

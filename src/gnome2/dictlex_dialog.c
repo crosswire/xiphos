@@ -24,6 +24,10 @@
 #endif
 
 #include <gtk/gtk.h>
+#ifdef GTKHTML
+#include <gtkhtml/gtkhtml.h>
+#include "gui/html.h"
+#endif
 #include "../xiphos_html/xiphos_html.h"
 
 
@@ -298,7 +302,7 @@ _popupmenu_requested_cb (XiphosHtml *html,
 static void dialog_url(GtkHTML * html, const gchar * url,
 		       DIALOG_DATA * d)
 {
-	gui_menu_popup (d->mod_name, d);
+	gui_menu_popup (NULL, d->mod_name, d);
 }
 #endif
 

@@ -24,6 +24,10 @@
 #endif
 
 #include <gtk/gtk.h>
+#ifdef GTKHTML
+#include <gtkhtml/gtkhtml.h>
+#include "gui/html.h"
+#endif
 #include "../xiphos_html/xiphos_html.h"
 
 
@@ -189,7 +193,7 @@ static gint button_press_event(GtkWidget *html,
 	case 2:
 		break;
 	case 3:
-		gui_menu_popup (NULL, d);
+		gui_menu_popup (NULL, NULL, d);
 		//create_menu(d, event);
 		break;
 	}
