@@ -47,6 +47,8 @@ struct _editor {
 	gint type;
 
 	gboolean studypad;
+	gboolean noteeditor;
+	gboolean bookeditor;
 	gboolean is_changed;
 	gboolean sync;
 

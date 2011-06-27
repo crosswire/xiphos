@@ -1340,6 +1340,8 @@ gint _create_new(const gchar * filename, const gchar * key, gint editor_type)
 	switch (editor_type) {
 	case STUDYPAD_EDITOR:
 		editor->studypad = TRUE;
+		editor->bookeditor = FALSE;
+		editor->noteeditor = FALSE;
 		editor->module = NULL;
 		editor->key = NULL;
 		editor->filename = NULL;
@@ -1352,6 +1354,8 @@ gint _create_new(const gchar * filename, const gchar * key, gint editor_type)
 		}
 		break;
 	case NOTE_EDITOR:
+		editor->noteeditor = TRUE;
+		editor->bookeditor = FALSE;
 		editor->studypad = FALSE;
 		editor->filename = NULL;
 		editor->module = g_strdup(filename);
@@ -1367,6 +1371,8 @@ gint _create_new(const gchar * filename, const gchar * key, gint editor_type)
 		editor_load_note(editor, NULL, NULL);
 		break;
 	case BOOK_EDITOR:
+		editor->bookeditor = TRUE;
+		editor->noteeditor = FALSE;
 		editor->studypad = FALSE;
 		editor->filename = NULL;
 		editor->module = g_strdup(filename);
@@ -1455,6 +1461,7 @@ gint editor_create_new(const gchar * filename, const gchar * key, gint editor_ty
 			}
 			break;
 		case NOTE_EDITOR:
+			if (!e->noteeditor) break;
 			if (editor_is_dirty(e))
 				_save_note (e);
 			if (e->module)
@@ -1471,6 +1478,7 @@ gint editor_create_new(const gchar * filename, const gchar * key, gint editor_ty
 			return 1;
 			break;
 		case BOOK_EDITOR:
+			if (!e->bookeditor) break;
 			if (editor_is_dirty(e))
 				_save_book (e);
 			if (e->module)
