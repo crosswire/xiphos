@@ -8,36 +8,36 @@ using WebKit;
 private class EditKit : Window {
 
 	private const string MAIN_UI  = "main.ui";
-    private WebView web_view;
+        private WebView web_view;
 
 	private const ActionEntry[] entries = {
 		{"menuFile", null, "_File"},
-		{"new", STOCK_NEW, "_New", null, null, on_new},
-		{"open", STOCK_OPEN, "_Open", null, null, on_open},
-		{"save", STOCK_SAVE, "_Save", null, null, on_save},
-		{"print", STOCK_PRINT, "_Print", null, null, on_action},
+		{"new", Gtk.Stock.NEW, "_New", null, null, on_new},
+		{"open", Gtk.Stock.OPEN, "_Open", null, null, on_open},
+		{"save", Gtk.Stock.SAVE, "_Save", null, null, on_save},
+		{"print", Gtk.Stock.PRINT, "_Print", null, null, on_action},
 		{"menuEdit", null, "_Edit"},
-		{"undo", STOCK_UNDO, "_Undo", null, null, on_action},
-		{"redo", STOCK_REDO, "_Redo", null, null, on_action},
-		{"cut", STOCK_CUT, "_Cut", null, null, on_action},
-		{"copy", STOCK_COPY, "_Copy", null, null, on_action},
-		{"paste", STOCK_PASTE, "_Paste", null, null, on_paste},
+		{"undo", Gtk.Stock.UNDO, "_Undo", null, null, on_action},
+		{"redo", Gtk.Stock.REDO, "_Redo", null, null, on_action},
+		{"cut", Gtk.Stock.CUT, "_Cut", null, null, on_action},
+		{"copy", Gtk.Stock.COPY, "_Copy", null, null, on_action},
+		{"paste", Gtk.Stock.PASTE, "_Paste", null, null, on_paste},
 		{"menuInsert", null, "_Insert"},
 		{"insertimage", "insert-image", "Insert _Image", null, null, on_insert_image},
 		{"insertlink", "insert-link", "Insert _Link", null, null, on_insert_link},
 		{"menuFormat", null, "_Format"},
-		{"bold", STOCK_BOLD, "_Bold", """<ctrl>B""", null, on_action},
-		{"italic", STOCK_ITALIC, "_Italic", """<ctrl>I""", null, on_action},
-		{"underline", STOCK_UNDERLINE, "_Underline", """<ctrl>U""", null, on_action},
-		{"strikethrough", STOCK_STRIKETHROUGH, "_Strike", """<ctrl>T""", null, on_action},
-		{"font", STOCK_SELECT_FONT, "Select _Font", """<ctrl>F""", null, on_select_font},
-		{"color", STOCK_SELECT_COLOR, "Select _Color", null, null, on_select_color},
-		{"justifyleft", STOCK_JUSTIFY_LEFT, "Justify _Left", null, null, on_action},
-		{"justifyright", STOCK_JUSTIFY_RIGHT, "Justify _Right", null, null, on_action},
-		{"justifycenter", STOCK_JUSTIFY_CENTER, "Justify _Center", null, null, on_action},
-		{"justifyfull", STOCK_JUSTIFY_FILL, "Justify _Full", null, null, on_action},
-		{"indent", STOCK_INDENT, "_Icrease Indent", "<Control>bracketright", "Increase Indent", on_action},
-		{"outdent", STOCK_UNINDENT, "_Decrease Indent", "<Control>bracketleft", "Decrease Indent", on_action}
+		{"bold", Gtk.Stock.BOLD, "_Bold", """<ctrl>B""", null, on_action},
+		{"italic", Gtk.Stock.ITALIC, "_Italic", """<ctrl>I""", null, on_action},
+		{"underline", Gtk.Stock.UNDERLINE, "_Underline", """<ctrl>U""", null, on_action},
+		{"strikethrough", Gtk.Stock.STRIKETHROUGH, "_Strike", """<ctrl>T""", null, on_action},
+		{"font", Gtk.Stock.SELECT_FONT, "Select _Font", """<ctrl>F""", null, on_select_font},
+		{"color", Gtk.Stock.SELECT_COLOR, "Select _Color", null, null, on_select_color},
+		{"justifyleft", Gtk.Stock.JUSTIFY_LEFT, "Justify _Left", null, null, on_action},
+		{"justifyright", Gtk.Stock.JUSTIFY_RIGHT, "Justify _Right", null, null, on_action},
+		{"justifycenter", Gtk.Stock.JUSTIFY_CENTER, "Justify _Center", null, null, on_action},
+		{"justifyfull", Gtk.Stock.JUSTIFY_FILL, "Justify _Full", null, null, on_action},
+		{"indent", Gtk.Stock.INDENT, "_Icrease Indent", "<Control>bracketright", "Increase Indent", on_action},
+		{"outdent", Gtk.Stock.UNINDENT, "_Decrease Indent", "<Control>bracketleft", "Decrease Indent", on_action}
 	};
 
     private EditKit () {
@@ -49,7 +49,7 @@ private class EditKit : Window {
 
 	private void create_widgets () {
 
-		var actions = new ActionGroup("Actions");
+		var actions = new Gtk.ActionGroup("Actions");
 		actions.set_translation_domain("xiphos");
 		actions.add_actions(entries, this);
 
@@ -90,7 +90,7 @@ private class EditKit : Window {
 	this.destroy.connect (Gtk.main_quit);
     }
 
-	private void on_action(Action action) {
+	private void on_action(Gtk.Action action) {
 		this.web_view.execute_script("document.execCommand('" + action.get_name() + "', false, false);");
 	}
 
@@ -103,8 +103,8 @@ private class EditKit : Window {
 			"Select an HTML file",
 			this,
 			Gtk.FileChooserAction.OPEN,
-			Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
-			Gtk.STOCK_OPEN, Gtk.ResponseType.ACCEPT,
+			Gtk.Stock.CANCEL, Gtk.ResponseType.CANCEL,
+			Gtk.Stock.OPEN, Gtk.ResponseType.ACCEPT,
 			null);
 
 		if (dialog.run() == Gtk.ResponseType.ACCEPT) {
@@ -133,8 +133,8 @@ private class EditKit : Window {
 			"Select an HTML file",
 			this,
 			Gtk.FileChooserAction.SAVE,
-			Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
-			Gtk.STOCK_OPEN, Gtk.ResponseType.ACCEPT,
+			Gtk.Stock.CANCEL, Gtk.ResponseType.CANCEL,
+			Gtk.Stock.OPEN, Gtk.ResponseType.ACCEPT,
 			null);
 
 		dialog.set_do_overwrite_confirmation(true);
