@@ -3175,7 +3175,7 @@ create_module_manager_dialog(gboolean first_run)
 
 	/* progress bars */
 #ifdef USE_GTKBUILDER
-	progressbar_refresh = GTK_WIDGET (gtk_builder_get_object (gxml, "progressbzr1"));
+	progressbar_refresh = GTK_WIDGET (gtk_builder_get_object (gxml, "progressbar1"));
 #else
 	progressbar_refresh = glade_xml_get_widget (gxml, "progressbar1"); /* refresh */
 #endif
