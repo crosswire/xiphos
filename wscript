@@ -631,6 +631,12 @@ def run(ctx):
     import subprocess
     subprocess.call(os.path.join(blddir,'default/src/gnome2/xiphos'))
 
+
+def test(ctx):
+    '''Run unit tests'''
+    import subprocess
+    subprocess.call(os.path.join(srcdir,'tests/build.py'))
+
 def dist(ctx):
     import Scripting
     Scripting.dist()
