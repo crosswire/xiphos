@@ -16,12 +16,6 @@ XiphosHtml *xiphos_html_new(DIALOG_DATA * dialog, gboolean is_dialog, gint pane)
 	priv->dialog = dialog;
 #endif /* USE_WEBKIT || !USE_GTKMOZEMBED */
 	
-# ifdef USE_GTKMOZEMBED
-	//make scrollbar appear on the left for RTL locales
-	GtkTextDirection dir = gtk_widget_get_direction(GTK_WIDGET (html));
-	if (dir == GTK_TEXT_DIR_RTL)
-	    priv->yelper->SetRTL();
-# endif /* USE_GTKMOZEMBED */
 	return html;
 }
 #endif /* !GTKHTML */
