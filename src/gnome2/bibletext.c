@@ -286,14 +286,23 @@ static
 void adj_changed(GtkAdjustment * adjustment1, gpointer user_data)
 
 {
-	static int scroll = 1;
+	gdouble scroll = 1;
+        gdouble value, lower, upper, page_size;
+
+        g_object_get (adjustment1,
+                      "value", &value,
+                      "upper", &upper,
+                      "lower", &lower,
+                      "page-size", &page_size,
+                      NULL);
+
 	if (!settings.chapter_scroll) return;
-	if (scroll && (adjustment1->value <= adjustment1->lower)) {
-		GS_message(("\ntop: %g\n",adjustment1->value));
+	if (scroll && (value <= lower)) {
+		GS_message(("\ntop: %g\n", value));
 		main_navbar_versekey_spin_chapter(navbar_versekey,0);
 		scroll = 0;
-	} else if (scroll && (adjustment1->value >= (adjustment1->upper - adjustment1->page_size))) {
-		GS_message(("\nvalue + page_size: %g\n",adjustment1->value + adjustment1->page_size));
+	} else if (scroll && (value >= (upper - page_size))) {
+		GS_message(("\nvalue + page_size: %g\n", value + page_size));
 		main_navbar_versekey_spin_chapter(navbar_versekey,1);
 		scroll = 0;
 		gtk_adjustment_set_value(adjustment,2);
@@ -353,7 +362,7 @@ GtkWidget *gui_create_bible_pane(void)
 
 	adjustment = gtk_scrolled_window_get_vadjustment
 					     (GTK_SCROLLED_WINDOW(scrolledwindow));
-	scroll_adj_signal = g_signal_connect(GTK_OBJECT(adjustment), "value-changed",
+	scroll_adj_signal = g_signal_connect(G_OBJECT(adjustment), "value-changed",
 				G_CALLBACK(adj_changed),
 				NULL);
 	widgets.html_text = gtk_html_new();
@@ -361,22 +370,22 @@ GtkWidget *gui_create_bible_pane(void)
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
 			  widgets.html_text);
 
-	g_signal_connect(GTK_OBJECT(widgets.html_text), "link_clicked",
+	g_signal_connect(G_OBJECT(widgets.html_text), "link_clicked",
 				G_CALLBACK(gui_link_clicked),
 				NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_text), "on_url",
+	g_signal_connect(G_OBJECT(widgets.html_text), "on_url",
 				G_CALLBACK(gui_url),
 				GINT_TO_POINTER(TEXT_TYPE));
-	g_signal_connect(GTK_OBJECT(widgets.html_text),"button_release_event",
+	g_signal_connect(G_OBJECT(widgets.html_text),"button_release_event",
 				G_CALLBACK(on_text_button_release_event),
 				NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_text), "button_press_event",
+	g_signal_connect(G_OBJECT(widgets.html_text), "button_press_event",
 				G_CALLBACK(on_text_button_press_event),
 				NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_text), "enter_notify_event",
+	g_signal_connect(G_OBJECT(widgets.html_text), "enter_notify_event",
 				G_CALLBACK (on_enter_notify_event),
 				NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_text),
+	g_signal_connect(G_OBJECT(widgets.html_text),
 			 "url_requested",
 			 G_CALLBACK(url_requested), NULL);
 #endif /* USE_XIPHOS_HTML */

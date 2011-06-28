@@ -96,10 +96,15 @@ static void find_clicked(GtkButton * button, FIND_DIALOG * d)
 	sprintf(settings.findText, "%s", text);
 
 #ifndef USE_XIPHOS_HTML
-	gtk_html_engine_search(GTK_HTML(d->htmlwidget), text,
-			       GTK_TOGGLE_BUTTON(d->case_sensitive)->active,
-			       GTK_TOGGLE_BUTTON(d->backward)->active == 0,
-			       d->regular);
+        gboolean cs_active, b_active;
+        g_object_get(GTK_TOGGLE_BUTTON(d->case_sensitive),
+                     "active", &cs_active,
+                     NULL);
+        g_object_get(GTK_TOGGLE_BUTTON(d->backward),
+                     "active", &b_active,
+                     NULL);
+	gtk_html_engine_search(GTK_HTML(d->htmlwidget), text, cs_active,
+                               b_active == 0, d->regular);
 #else
 	XIPHOS_HTML_FIND((void *)d->htmlwidget, text);
 #endif /* !USE_XIPHOS_HTML */

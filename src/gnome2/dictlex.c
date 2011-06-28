@@ -247,7 +247,7 @@ static gint html_button_pressed(GtkWidget * html,
 		//gui_create_pm_dictionary();
 		gui_menu_popup (NULL, settings.DictWindowModule, NULL);
 		break;
-		/*gtk_signal_emit_stop_by_name(GTK_OBJECT(html),
+		/*gtk_signal_emit_stop_by_name(G_OBJECT(html),
 		   "button_press_event"); */
 		break;
 	default:
@@ -618,19 +618,19 @@ GtkWidget *gui_create_dictionary_pane(void)
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
 			  widgets.html_dict);
 
-	g_signal_connect(GTK_OBJECT(widgets.html_dict),
+	g_signal_connect(G_OBJECT(widgets.html_dict),
 			 "button_press_event",
 			 G_CALLBACK(html_button_pressed), NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_dict),
+	g_signal_connect(G_OBJECT(widgets.html_dict),
 			 "button_release_event",
 			 G_CALLBACK(html_button_released), NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_dict),
+	g_signal_connect(G_OBJECT(widgets.html_dict),
 			 "url_requested",
 			 G_CALLBACK(url_requested), NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_dict), "on_url",
+	g_signal_connect(G_OBJECT(widgets.html_dict), "on_url",
 			 G_CALLBACK(gui_url),
 			 GINT_TO_POINTER(DICTIONARY_TYPE));
-	g_signal_connect(GTK_OBJECT(widgets.html_dict), "link_clicked",
+	g_signal_connect(G_OBJECT(widgets.html_dict), "link_clicked",
 			 G_CALLBACK(gui_link_clicked), NULL);
 #endif
 

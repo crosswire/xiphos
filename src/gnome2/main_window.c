@@ -1049,7 +1049,7 @@ void create_mainwindow(void)
 			   (on_notebook_comm_book_switch_page),
 			   NULL);
 #else
-	g_signal_connect(GTK_OBJECT(widgets.notebook_comm_book),
+	g_signal_connect(G_OBJECT(widgets.notebook_comm_book),
 			   "switch_page",
 			   G_CALLBACK
 			   (on_notebook_comm_book_switch_page),

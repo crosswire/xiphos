@@ -289,23 +289,23 @@ GtkWidget *gui_create_commentary_pane(void)
 	gtk_widget_show(widgets.html_comm);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
 			  widgets.html_comm);
-	g_signal_connect(GTK_OBJECT(widgets.html_comm), "link_clicked",
+	g_signal_connect(G_OBJECT(widgets.html_comm), "link_clicked",
 				   G_CALLBACK(gui_link_clicked),
 				   NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_comm), "on_url",
+	g_signal_connect(G_OBJECT(widgets.html_comm), "on_url",
 				   G_CALLBACK(gui_url),
 				   GINT_TO_POINTER(COMMENTARY_TYPE));
-	g_signal_connect(GTK_OBJECT(widgets.html_comm),
+	g_signal_connect(G_OBJECT(widgets.html_comm),
 				   "button_press_event",
 				   G_CALLBACK
 				   (on_comm_button_press_event),
 				   NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_comm),
+	g_signal_connect(G_OBJECT(widgets.html_comm),
 				   "button_release_event",
 				   G_CALLBACK
 				   (on_comm_button_release_event),
 				   NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_comm),
+	g_signal_connect(G_OBJECT(widgets.html_comm),
 			   "url_requested",
 			   G_CALLBACK(url_requested), NULL);
 #endif
