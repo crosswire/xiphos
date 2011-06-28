@@ -856,7 +856,7 @@ void gui_create_bookmark_menu(void)
 	gchar *glade_file;
 #ifdef USE_GTKBUILDER
 	GtkBuilder *gxml;
-	glade_file = gui_general_user_file ("xi-menus.gtkbuilder", FALSE);
+	glade_file = gui_general_user_file ("xi-menus-popup.gtkbuilder", FALSE);
 #else
 	GladeXML *gxml;
 	glade_file = gui_general_user_file ("xi-menus.glade", FALSE);
@@ -903,7 +903,7 @@ void gui_create_bookmark_menu(void)
 	gtk_widget_set_sensitive(menu.bibletime, TRUE);
 
 	gtk_widget_set_sensitive(menu.remove, TRUE);
-	//gtk_widget_hide(menu.remove);
+	gtk_widget_hide(menu.remove);
     	/* connect signals and data */
 #ifdef USE_GTKBUILDER    
         gtk_builder_connect_signals (gxml, NULL);

@@ -295,7 +295,8 @@ gboolean gui_expand_treeview_to_path (GtkTreeView * tree, const gchar * book_nam
  */
 #ifdef USE_GTK_3
 static void on_notebook_switch_page(GtkNotebook * notebook,
-				    guint page_num, gpointer user_data)
+					 gpointer arg,
+                     guint page_num, gpointer user_data)
 #else
 static void on_notebook_switch_page(GtkNotebook * notebook,
 				    GtkNotebookPage * page,
@@ -1544,16 +1545,9 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 			 G_CALLBACK(on_search_results_activate), NULL);
 	g_signal_connect((gpointer) button_modules, "toggled",
 			 G_CALLBACK(on_modules_activate), NULL);
-#ifdef USE_GTK_3
-	g_signal_connect((gpointer) widgets.notebook_sidebar,
-			 "change-current-page",
-			 G_CALLBACK(on_notebook_switch_page),
-			 title_label);
-#else
 	g_signal_connect((gpointer) widgets.notebook_sidebar,
 			 "switch-page",
 			 G_CALLBACK(on_notebook_switch_page),
 			 title_label);
-#endif
 	return vbox1;
 }

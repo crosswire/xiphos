@@ -905,6 +905,6 @@ GtkWidget *gui_create_main_menu(void)
 		gtk_widget_show(widgets.new_journal_item);
 	else
 		gtk_widget_hide(widgets.new_journal_item);
-
+	gtk_widget_show(menu);
 	return menu;
 }
