@@ -129,6 +129,10 @@ static gboolean button_press_handler (GtkWidget *widget,
 		      	FALSE);
 		return TRUE;
 	}
+	if (event->button == 2)	{
+		/* ignore middle button */
+		return TRUE;
+	}
 	return FALSE;
 }
 
