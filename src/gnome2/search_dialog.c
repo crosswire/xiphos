@@ -1364,43 +1364,32 @@ void _on_dialog2_response(GtkDialog * dialog, gint response_id,
  *   void
  */
 
+#ifndef USE_GTKBUILDER	
 static
 void _create_mod_sel_dialog(void)
-{
+{	
 	gchar *glade_file;
-#ifdef USE_GTKBUILDER
-	GtkBuilder *gxml2;
-
-	glade_file = gui_general_user_file("search-dialog.gtkbuilder", FALSE);
-#else
 	GladeXML *gxml2;
 
 	glade_file = gui_general_user_file("search-dialog.glade", FALSE);
-#endif
 	g_return_if_fail(glade_file != NULL);
 	GS_message(("%s",glade_file));
 
-#ifdef USE_GTKBUILDER
-	gxml2 = gtk_builder_new ();
-	gtk_builder_add_from_file (gxml2, glade_file, NULL);
-	search1.mod_sel_dialog = GTK_WIDGET (gtk_builder_get_object (gxml2, "dialog2"));
-#else
+
 	gxml2 = glade_xml_new(glade_file, "dialog2", NULL);
 	search1.mod_sel_dialog = glade_xml_get_widget(gxml2, "dialog2");
-#endif
+
 	g_signal_connect((gpointer)search1.mod_sel_dialog, "response",
 			 G_CALLBACK(_on_dialog2_response), NULL);
-#ifdef USE_GTKBUILDER
-	search1.mod_sel_dlg_treeview = GTK_WIDGET (gtk_builder_get_object (gxml2, "treeview8"));
-#else	
+	
 	search1.mod_sel_dlg_treeview = glade_xml_get_widget(gxml2, "treeview8");
-#endif
+
 	_setup_treeview2(search1.mod_sel_dlg_treeview);
 	gtk_widget_hide(search1.mod_sel_dialog);
 
 	g_free(glade_file);
-
 }
+#endif
 
 /******************************************************************************
  * Name
@@ -1420,8 +1409,10 @@ void _create_mod_sel_dialog(void)
 
 void
 on_toolbutton12_clicked(GtkToolButton * toolbutton, gpointer user_data)
-{
-        _create_mod_sel_dialog();
+{    
+#ifndef USE_GTKBUILDER
+		_create_mod_sel_dialog();
+#endif
 	gtk_widget_show(search1.mod_sel_dialog);
 }
 
@@ -1860,7 +1851,15 @@ void _create_search_dialog(void)
 	search1.label_mod_select = glade_xml_get_widget(gxml, "label5");
 	search1.listview_results = glade_xml_get_widget(gxml, "treeview9");
 #endif
-
+#ifdef USE_GTKBUILDER
+	/* setup module select dialog */
+	search1.mod_sel_dialog = GTK_WIDGET (gtk_builder_get_object (gxml, "dialog2"));
+	g_signal_connect((gpointer)search1.mod_sel_dialog, "response",
+			 G_CALLBACK(_on_dialog2_response), NULL);	
+	search1.mod_sel_dlg_treeview = GTK_WIDGET (gtk_builder_get_object (gxml, "treeview8"));
+	_setup_treeview2(search1.mod_sel_dlg_treeview);
+	gtk_widget_hide(search1.mod_sel_dialog);
+#endif
 	_setup_listviews(search1.listview_results, (GCallback) _selection_finds_list_changed);
 #ifdef USE_GTKBUILDER
 	search1.listview_verses = GTK_WIDGET (gtk_builder_get_object (gxml, "treeview10"));
