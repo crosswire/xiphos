@@ -332,23 +332,23 @@ GtkWidget *gui_create_book_pane(void)
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
 			  widgets.html_book);
 
-	g_signal_connect(GTK_OBJECT(widgets.html_book), "link_clicked",
+	g_signal_connect(G_OBJECT(widgets.html_book), "link_clicked",
 				   G_CALLBACK(gui_link_clicked),
 				   NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_book), "on_url",
+	g_signal_connect(G_OBJECT(widgets.html_book), "on_url",
 				   G_CALLBACK(gui_url),
 				   GINT_TO_POINTER(BOOK_TYPE));
-	g_signal_connect(GTK_OBJECT(widgets.html_book),
+	g_signal_connect(G_OBJECT(widgets.html_book),
 				   "button_press_event",
 				   G_CALLBACK
 				   (on_book_button_press_event),
 				   NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_book),
+	g_signal_connect(G_OBJECT(widgets.html_book),
 				   "button_release_event",
 				   G_CALLBACK
 				   (on_book_button_release_event),
 				   NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_book),
+	g_signal_connect(G_OBJECT(widgets.html_book),
 			   "url_requested",
 			   G_CALLBACK(url_requested), NULL);
 #endif
