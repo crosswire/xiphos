@@ -73,7 +73,7 @@ private class EditKit : Window {
 
 		this.web_view = new WebView ();
 		web_view.set_editable(true);
-		web_view.load_html_string("", "file:///");
+		web_view.load_html_string("This is some text", "file:///");
 		var scrolled_window = new ScrolledWindow (null, null);
 		scrolled_window.set_policy (PolicyType.AUTOMATIC, PolicyType.AUTOMATIC);
 		scrolled_window.add (this.web_view);
@@ -190,7 +190,7 @@ private class EditKit : Window {
 
     private static int main (string[] args) {
 
-	Gtk.init (ref args);
+	//Gtk.init (ref args);
 	var editor = new EditKit ();
 		editor.show_all();
 	Gtk.main ();
