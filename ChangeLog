@@ -1,3 +1,9 @@
+2011-06-27  Terry Biggs  <tbiggs@users.sf.net>
+
+	* add gtkbuilder files to install.
+	* resurrect gtkhtml3.
+	* fix #3166491 now able to open studypad, pers.comm., and journal.
+
 2011-06-25  karl <charcoal@users.sf.net>
 
 	* add base font respect to parallel view tab and detached parallel window.
@@ -9,6 +15,7 @@
 	* correct font selection order: module pref, language pref, conf pref.
 	* adjust macro readability in xiphos-html.h.
 	* stop black flash on tab change.
+	* ignore button-2 in webkit.
 
 2011-06-20  Terry Biggs  <tbiggs@users.sf.net>
 
