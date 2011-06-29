@@ -97,7 +97,6 @@
                 <property name="visible">True</property>
                 <property name="use_underline">True</property>
                 <property name="use_stock">True</property>
-                <accelerator key="F3" signal="activate"/>
                 <signal name="activate" handler="on_advanced_search_activate"/>
               </object>
             </child>
@@ -112,7 +111,6 @@
                 <property name="visible">True</property>
                 <property name="use_underline">True</property>
                 <property name="use_stock">True</property>
-                <accelerator key="F2" signal="activate"/>
                 <signal name="activate" handler="on_preferences_activate"/>
               </object>
             </child>
@@ -122,7 +120,6 @@
                 <property name="visible">True</property>
                 <property name="use_underline">True</property>
                 <property name="use_stock">True</property>
-                <accelerator key="F4" signal="activate"/>
                 <signal name="activate" handler="on_module_manager_activate"/>
               </object>
             </child>
@@ -272,7 +269,6 @@
                 <property name="visible">True</property>
                 <property name="use_underline">True</property>
                 <property name="use_stock">True</property>
-                <accelerator key="F1" signal="activate"/>
                 <signal name="activate" handler="on_help_contents_activate"/>
               </object>
             </child>
