@@ -1973,7 +1973,8 @@ clear_and_hide_progress_bar(void)
 #ifdef USE_GTK_3
 void
 on_notebook1_switch_page(GtkNotebook * notebook,
-			 guint page_num, gpointer user_data)
+			 gpointer arg,
+             guint page_num, gpointer user_data)
 #else
 void
 on_notebook1_switch_page(GtkNotebook * notebook,
@@ -3224,13 +3225,9 @@ create_module_manager_dialog(gboolean first_run)
 	notebook1 = glade_xml_get_widget (gxml, "notebook1");
 #endif
 
-#ifdef USE_GTK_3
-	g_signal_connect(notebook1, "change-current-page",
-			 G_CALLBACK(on_notebook1_switch_page), NULL);
-#else
+
 	g_signal_connect(notebook1, "switch_page",
 			 G_CALLBACK(on_notebook1_switch_page), NULL);
-#endif
 
 #ifdef USE_GTKBUILDER
 	/* labels */
