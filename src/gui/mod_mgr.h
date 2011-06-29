@@ -37,7 +37,8 @@ void clear_and_hide_progress_bar(void);
 #ifdef USE_GTK_3
 void
 on_notebook1_switch_page(GtkNotebook * notebook,
-			 guint page_num, gpointer user_data);
+			 gpointer arg,
+             guint page_num, gpointer user_data);
 #else
 void
 on_notebook1_switch_page(GtkNotebook * notebook,
