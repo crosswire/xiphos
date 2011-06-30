@@ -1,6 +1,7 @@
 2011-06-29  karl <charcoal@users.sf.net>
 
 	* resurrect functioning bookmark xml functions.
+	* eliminate dead "removed bookmarks" code.
 
 2011-06-27  Terry Biggs  <tbiggs@users.sf.net>
 
