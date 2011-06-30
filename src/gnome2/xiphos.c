@@ -112,6 +112,23 @@ void frontend_init(void)
 	main_dialogs_setup();
 
 	gui_set_sidebar_program_start();
+
+	/* bring the major html widgets to life, then flush them clean. */
+	if (!gtk_widget_get_realized(GTK_WIDGET(widgets.html_text)))
+		gtk_widget_realize(widgets.html_text);
+	if (!gtk_widget_get_realized(GTK_WIDGET(widgets.html_comm)))
+		gtk_widget_realize(widgets.html_comm);
+	if (!gtk_widget_get_realized(GTK_WIDGET(widgets.html_book)))
+		gtk_widget_realize(widgets.html_book);
+	if (!gtk_widget_get_realized(GTK_WIDGET(widgets.html_dict)))
+		gtk_widget_realize(widgets.html_dict);
+	if (!gtk_widget_get_realized(GTK_WIDGET(widgets.html_previewer_text)))
+		gtk_widget_realize(widgets.html_previewer_text);
+	if (!gtk_widget_get_realized(GTK_WIDGET(sidebar.html_viewer_widget)))
+		gtk_widget_realize(sidebar.html_viewer_widget);
+	main_flush_widgets_content();
+	gui_show_previewer_in_sidebar(settings.show_previewer_in_sidebar);
+	main_init_previewer();
 }
 
 
