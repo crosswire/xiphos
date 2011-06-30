@@ -285,15 +285,6 @@ int init_bookmarks(int new_bookmarks)
 		}
 	}
 
-	/* set removed dir to settings.swbmDir + /removed */
-	removed = g_strdup_printf("%s/%s", settings.swbmDir, "removed");
-	if (g_access(removed, F_OK) == -1) {
-		if ((Mkdir(removed, S_IRWXU)) == -1) {
-			g_warning("can't create removed dir");
-			//return 0;
-		}
-	}
-
 	if (new_bookmarks)
 		xml_new_bookmark_file();
 
