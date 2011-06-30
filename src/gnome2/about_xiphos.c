@@ -54,7 +54,6 @@ static const gchar *documenters[] = {
     "Peter von Kaehne",
     "Karl Kleinpaste",
     "Matthew Talbert",
-    "Peter von Kaehne",
     "Simon Meers",
     NULL
 };
