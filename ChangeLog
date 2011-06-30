@@ -2,6 +2,9 @@
 
 	* resurrect functioning bookmark xml functions.
 	* eliminate dead "removed bookmarks" code.
+	* copyright update.
+	* tidy up "about xiphos" window.
+	* add content flush right after startup to avoid webkit black flash.
 
 2011-06-27  Terry Biggs  <tbiggs@users.sf.net>
 
