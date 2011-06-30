@@ -1,8 +1,13 @@
+2011-06-29  karl <charcoal@users.sf.net>
+
+	* resurrect functioning bookmark xml functions.
+
 2011-06-27  Terry Biggs  <tbiggs@users.sf.net>
 
 	* add gtkbuilder files to install.
 	* resurrect gtkhtml3.
 	* fix #3166491 now able to open studypad, pers.comm., and journal.
+	* Fedora15 compatibility (warnings elimination).
 
 2011-06-25  karl <charcoal@users.sf.net>
 
