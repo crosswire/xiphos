@@ -399,15 +399,15 @@ open_dialog (EDITOR * e)
 
 	filename = gtkhtml_editor_get_filename (GTKHTML_EDITOR(e->window));
 
-	if (filename != NULL)
+	/*if (filename != NULL)
 		gtk_file_chooser_set_filename (
 			GTK_FILE_CHOOSER (dialog), filename);
-	else {
+	else {*/
 		gtk_file_chooser_set_current_folder (
 			GTK_FILE_CHOOSER (dialog), settings.studypaddir); //g_getenv(HOMEVAR));
-		gtk_file_chooser_set_current_name (
-			GTK_FILE_CHOOSER (dialog), _("Untitled document"));
-	}
+		//gtk_file_chooser_set_current_name (
+			//GTK_FILE_CHOOSER (dialog), _("Untitled document"));
+	//}
 
 	response = gtk_dialog_run (GTK_DIALOG (dialog));
 
