@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * link_dialog.c - dialog for inserting a link
  *
- * Copyright (C) 2005-2010 Xiphos Developer Team
+ * Copyright (C) 2005-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
