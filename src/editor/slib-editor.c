@@ -399,16 +399,10 @@ open_dialog (EDITOR * e)
 
 	filename = gtkhtml_editor_get_filename (GTKHTML_EDITOR(e->window));
 
-	/*if (filename != NULL)
-		gtk_file_chooser_set_filename (
-			GTK_FILE_CHOOSER (dialog), filename);
-	else {*/
-		gtk_file_chooser_set_current_folder (
-			GTK_FILE_CHOOSER (dialog), settings.studypaddir); //g_getenv(HOMEVAR));
-		//gtk_file_chooser_set_current_name (
-			//GTK_FILE_CHOOSER (dialog), _("Untitled document"));
-	//}
-
+	
+	gtk_file_chooser_set_current_folder (
+			GTK_FILE_CHOOSER (dialog), settings.studypaddir); 
+	
 	response = gtk_dialog_run (GTK_DIALOG (dialog));
 
 	if (response == GTK_RESPONSE_ACCEPT) {
@@ -451,7 +445,7 @@ save_dialog (GtkhtmlEditor *editor, EDITOR * e)
 			GTK_FILE_CHOOSER (dialog), filename);
 	else {
 		gtk_file_chooser_set_current_folder (
-			GTK_FILE_CHOOSER (dialog), settings.studypaddir); //g_getenv(HOMEVAR));
+			GTK_FILE_CHOOSER (dialog), settings.studypaddir); 
 		gtk_file_chooser_set_current_name (
 			GTK_FILE_CHOOSER (dialog), _("Untitled document"));
 	}
@@ -1489,7 +1483,7 @@ gint editor_create_new(const gchar * filename, const gchar * key, gint editor_ty
 			e->key = g_strdup(key);
 			gtk_widget_show(e->window);
 			gdk_window_raise(gtk_widget_get_parent_window(GTK_WIDGET(e->window)));
-
+			main_load_book_tree_in_editor (GTK_TREE_VIEW (e->treeview), e->module);
 			editor_load_book(e);
 
 			return 1;
