@@ -311,7 +311,11 @@ GLOBAL_OPS *main_new_globals(gchar * mod_name, int dialog)
 	    (ops->variants_secondary == FALSE)) {
 		ops->variants_primary = TRUE;
 	}
-
+	ops->verse_per_line = 
+	    (*(module_options[mod_name]["style"].c_str()) == 'v')
+	    ? 1	
+	    : 0;//  otherwise, paragraph style.
+	
 	ops->image_content =
 	    (*(module_options[mod_name]["Image Content"].c_str()) == '\0')
 	    ? -1	// "unknown"; otherwise, it's like the others.
