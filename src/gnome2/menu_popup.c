@@ -576,17 +576,27 @@ G_MODULE_EXPORT void on_verse_per_line_activate (GtkCheckMenuItem * menuitem, gp
 {
 	gchar *file = g_strdup_printf("%s/modops.conf",
 				      settings.gSwordDir);
+		
 	gchar *url = g_strdup_printf("sword://%s/%s",
-				     settings.MainWindowModule,
-				     settings.currentverse);
+				     (is_dialog ? dialog->mod_name : settings.MainWindowModule),
+				     (is_dialog ? dialog->key : settings.currentverse));
 
-	settings.versestyle = gtk_check_menu_item_get_active (menuitem);
-	save_conf_file_item(file, settings.MainWindowModule, "style",
-			    (gtk_check_menu_item_get_active (menuitem)
-			     ? "verse"
-			     : "paragraph"));
+		
+	save_conf_file_item(file, (is_dialog 
+	                           ? dialog->mod_name 
+	                           : settings.MainWindowModule), 
+	                    	"style",
+			    			(gtk_check_menu_item_get_active (menuitem)
+			     			? "verse"
+			     			: "paragraph"));
 	if (settings.havebible) {
-		main_url_handler(url, TRUE);
+		if (is_dialog) { 
+			 /* show the change */
+			main_dialogs_url_handler(dialog, url, TRUE);
+		} else {	
+			settings.versestyle = gtk_check_menu_item_get_active (menuitem);
+			main_url_handler(url, TRUE);
+		}
 	}
 	g_free(url);
 	g_free(file);
@@ -1467,8 +1477,9 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 #endif
 
 	if (mod_name && (modtype == TEXT_TYPE)) {
-	    	gtk_widget_show (item);
-		gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (item), settings.versestyle);
+		gtk_widget_show(item);
+			gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (item), 
+				                                ops->verse_per_line);
 	}
 
 #ifdef USE_GTKBUILDER
@@ -1868,7 +1879,7 @@ GtkWidget * _create_popup_menu (XiphosHtml *html, const gchar * mod_name, DIALOG
    	gtk_widget_hide (mark_verse);
 	gtk_widget_hide (close); /* FIXME: hide until connected to dialog close */
 
-    	if (is_dialog) {
+   	if (is_dialog) {
 	    	gtk_widget_hide (open);
 	    	gtk_widget_hide (bookmark);
 	    	gtk_widget_hide (export_);
@@ -1884,7 +1895,7 @@ GtkWidget * _create_popup_menu (XiphosHtml *html, const gchar * mod_name, DIALOG
 			gtk_widget_show(unlock);
 	}
 
-    	switch (main_get_mod_type((gchar*) mname)) {
+   	switch (main_get_mod_type((gchar*) mname)) {
 	case TEXT_TYPE:
 		gtk_widget_show (export_);
 		if (is_dialog) break;
