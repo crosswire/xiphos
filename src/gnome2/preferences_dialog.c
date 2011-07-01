@@ -2622,7 +2622,7 @@ create_preferences_dialog(void)
 			 G_CALLBACK(on_invert), (void*)0);
 
 	/* check buttons */
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_WEBKIT
 	gtk_widget_hide(check_button.use_chapter_scroll);
 #endif
 
