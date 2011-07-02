@@ -352,7 +352,8 @@ def configure(conf):
     define('PACKAGE_HELP_DIR', conf.escpath(sub('${DATAROOTDIR}/gnome/help/${PACKAGE}', env)))
     define('PACKAGE_LOCALE_DIR', conf.escpath(env['LOCALEDIR']))
     define('PACKAGE_MENU_DIR', conf.escpath(sub('${DATAROOTDIR}/applications', env)))
-    define('PACKAGE_PIXMAPS_DIR', conf.escpath(sub('${DATAROOTDIR}/pixmaps/${PACKAGE}', env)))
+    #define('PACKAGE_PIXMAPS_DIR', conf.escpath(sub('${DATAROOTDIR}/pixmaps/${PACKAGE}', env)))
+    define('PACKAGE_PIXMAPS_DIR', conf.escpath(sub('${DATAROOTDIR}/${PACKAGE}', env)))
     define('PACKAGE_SOURCE_DIR', conf.escpath(os.path.abspath(srcdir))) # foder where was wscript executed
 
     common_libs = string.join(
