@@ -674,8 +674,9 @@ void gui_splash_init (void)
 	//gtk_widget_hide(image3);
 	image4 = GTK_WIDGET (gtk_builder_get_object (builder, "image5"));      
 	//gtk_widget_hide(image4);
-	progressbar = GTK_WIDGET (gtk_builder_get_object (builder, "progressbar1"));
-
+	progressbar = GTK_WIDGET (gtk_builder_get_object (builder, "progressbar1"));    
+	gtk_progress_bar_set_show_text (GTK_PROGRESS_BAR(progressbar),TRUE);
+	
 	
 	gtk_builder_connect_signals (builder, NULL);
 
