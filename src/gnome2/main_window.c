@@ -480,7 +480,8 @@ static void on_notebook_bible_parallel_switch_page(GtkNotebook * notebook,
 
 #ifdef USE_GTK_3
 static void on_notebook_comm_book_switch_page(GtkNotebook * notebook,
-					gint page_num, GList **tl)
+					gpointer arg,
+                    gint page_num, GList **tl)
 #else
 static void on_notebook_comm_book_switch_page(GtkNotebook * notebook,
 					GtkNotebookPage * page,
@@ -1042,19 +1043,11 @@ void create_mainwindow(void)
 		    G_CALLBACK (on_vbox1_key_release_event),
 		    NULL);
 
-#ifdef USE_GTK_3
-	g_signal_connect(G_OBJECT(widgets.notebook_comm_book),
-			   "change-current-page",
-			   G_CALLBACK
-			   (on_notebook_comm_book_switch_page),
-			   NULL);
-#else
 	g_signal_connect(G_OBJECT(widgets.notebook_comm_book),
 			   "switch_page",
 			   G_CALLBACK
 			   (on_notebook_comm_book_switch_page),
 			   NULL);	
-#endif
 
 	g_signal_connect(G_OBJECT(widgets.app), "delete_event",
 			   G_CALLBACK(delete_event), NULL);
