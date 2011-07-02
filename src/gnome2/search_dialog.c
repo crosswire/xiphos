@@ -1842,7 +1842,8 @@ void _create_search_dialog(void)
 
 #ifdef USE_GTKBUILDER
 	search1.progressbar =
-	    GTK_WIDGET (gtk_builder_get_object (gxml, "progressbar1"));
+	    GTK_WIDGET (gtk_builder_get_object (gxml, "progressbar1")); 
+	gtk_progress_bar_set_show_text (GTK_PROGRESS_BAR(search1.progressbar),TRUE);
 	search1.label_mod_select = GTK_WIDGET (gtk_builder_get_object (gxml, "label5"));
 	search1.listview_results = GTK_WIDGET (gtk_builder_get_object (gxml, "treeview9"));
 #else
