@@ -64,15 +64,19 @@ static const char *f_message = "backend/sword_main.cc line #%d \"%s\" = %s";
 
 BackEnd::BackEnd()
 {
+#ifdef DEBUG
 	GTimer *t;
 	double d;
 	t = g_timer_new();
+#endif
 
 	main_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
 
+#ifdef DEBUG
 	g_timer_stop(t);
 	d = g_timer_elapsed(t, NULL);
 	GS_message(("create main_mgr time is %f", d));
+#endif
 
 	display_mod = NULL;
 	tree_key = NULL;
