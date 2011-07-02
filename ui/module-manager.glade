@@ -21,7 +21,6 @@
   <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
   <property name="focus_on_map">True</property>
   <property name="urgency_hint">False</property>
-  <property name="has_separator">True</property>
   <signal name="destroy" handler="on_dialog_destroy"/>
 
   <child internal-child="vbox">

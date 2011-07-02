@@ -33,7 +33,6 @@
     <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
     <property name="focus_on_map">True</property>
     <property name="urgency_hint">False</property>
-    <property name="has_separator">True</property>
     <signal handler="on_dialog_export_passage_response" name="response"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox1">
