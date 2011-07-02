@@ -384,8 +384,10 @@ static gint
 open_dialog (EDITOR * e)
 {
 	GtkWidget *dialog;
-	const gchar *filename;
 	gint response;
+#if 0
+	const gchar *filename;
+#endif
 
 	dialog = gtk_file_chooser_dialog_new (
 		_("Save As"), GTK_WINDOW (e->window),
@@ -397,8 +399,9 @@ open_dialog (EDITOR * e)
 	/*gtk_file_chooser_set_do_overwrite_confirmation (
 		GTK_FILE_CHOOSER (dialog), TRUE);*/
 
+#if 0
 	filename = gtkhtml_editor_get_filename (GTKHTML_EDITOR(e->window));
-
+#endif
 	
 	gtk_file_chooser_set_current_folder (
 			GTK_FILE_CHOOSER (dialog), settings.studypaddir); 

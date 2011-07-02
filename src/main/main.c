@@ -70,12 +70,18 @@ int main(int argc, char *argv[])
 	int have_sword_url = FALSE;
 	int have_tab_list = FALSE;
 	gint base_step = 0; //needed for splash
+#ifdef DEBUG
 	GTimer *total;
 	double d;
+#endif
 
 	//	g_thread_init(NULL);
 	g_type_init();
+
+#ifdef DEBUG
 	total = g_timer_new();
+#endif
+
 
 #ifdef WIN32
 	/*
@@ -196,9 +202,9 @@ int main(int argc, char *argv[])
 		main_url_handler(argv[1], TRUE);
 	}
 
+#ifdef DEBUG
 	g_timer_stop(total);
 	d = g_timer_elapsed(total, NULL);
-#ifdef DEBUG
 	printf("total time is %f\n", d);
 #endif
 	g_idle_add ((GSourceFunc)gui_splash_done, NULL);

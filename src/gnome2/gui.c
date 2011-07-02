@@ -116,7 +116,9 @@ void gconf_setup()
 {
 	int i;
 	gchar *str;
+#ifdef DEBUG
 	gboolean retval;
+#endif
 	GConfClient* client = gconf_client_get_default();
 
 	if (client == NULL)
@@ -140,7 +142,10 @@ void gconf_setup()
 		 * Mechanical as can be, one after another.
 		 */
 		for (i = 0; i < GS_GCONF_MAX; ++i) {
-			retval = (((i % 3) == 0)	/* contrived hack */
+#ifdef DEBUG
+			retval =
+#endif
+			(((i % 3) == 0)	/* contrived hack */
 				  ? gconf_client_set_string
 					(client,
 					 gconf_keys[i][0],

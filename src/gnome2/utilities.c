@@ -1996,7 +1996,7 @@ AnalyzeForImageSize(const char *origtext,
 	char *path;		// ... the current "path".
 	char *end;		// "end" is the path's end.
 	char buf[32];		// for preparing new width+height spec.
-	gint image_x, image_y, window_x, window_y = -999;
+	gint image_x, image_y, window_x = -999, window_y = -999;
 	int image_retval;
 	gboolean no_warning_yet = TRUE;
 
