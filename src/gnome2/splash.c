@@ -632,16 +632,7 @@ void gui_splash_step(gchar *text, gdouble progress, gint step)
 					  text);
 		gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar),
 					      progress);
-		switch (step) {
-		case 1: gtk_widget_show (image1);
-			break;    
-		case 2: gtk_widget_show (image2);
-			break;
-		case 3: gtk_widget_show (image3);
-			break;
-		case 4: gtk_widget_show (image4);
-			break;
-		}
+		
 		sync_windows();
 	}
 }
@@ -666,14 +657,10 @@ void gui_splash_init (void)
 
 	/* This is important */
 	splash = GTK_WIDGET (gtk_builder_get_object (builder, "window")); 
-	image1 = GTK_WIDGET (gtk_builder_get_object (builder, "image2"));     
-	//gtk_widget_hide(image);
-	image2 = GTK_WIDGET (gtk_builder_get_object (builder, "image3"));      
-	//gtk_widget_hide(image2);
-	image3 = GTK_WIDGET (gtk_builder_get_object (builder, "image4"));     
-	//gtk_widget_hide(image3);
-	image4 = GTK_WIDGET (gtk_builder_get_object (builder, "image5"));      
-	//gtk_widget_hide(image4);
+	image1 = GTK_WIDGET (gtk_builder_get_object (builder, "image2"));
+	image2 = GTK_WIDGET (gtk_builder_get_object (builder, "image3")); 
+	image3 = GTK_WIDGET (gtk_builder_get_object (builder, "image4"));
+	image4 = GTK_WIDGET (gtk_builder_get_object (builder, "image5"));
 	progressbar = GTK_WIDGET (gtk_builder_get_object (builder, "progressbar1"));    
 	gtk_progress_bar_set_show_text (GTK_PROGRESS_BAR(progressbar),TRUE);
 	

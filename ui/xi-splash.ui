@@ -35,6 +35,7 @@
                 <property name="homogeneous">True</property>
                 <child>
                   <object class="GtkImage" id="image2">
+                    <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="pixbuf">gnome-windows.png</property>
                   </object>
@@ -46,6 +47,7 @@
                 </child>
                 <child>
                   <object class="GtkImage" id="image3">
+                    <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="pixbuf">sword.png</property>
                   </object>
@@ -57,6 +59,7 @@
                 </child>
                 <child>
                   <object class="GtkImage" id="image4">
+                    <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="pixbuf">gnome-session.png</property>
                   </object>
@@ -68,6 +71,7 @@
                 </child>
                 <child>
                   <object class="GtkImage" id="image5">
+                    <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="pixbuf">gs2-48x48-old.png</property>
                   </object>
