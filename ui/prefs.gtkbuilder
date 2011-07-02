@@ -1858,7 +1858,6 @@
                         <property name="visible">True</property>
                         <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
                         <property name="toolbar_style">GTK_TOOLBAR_ICONS</property>
-                        <property name="tooltips">True</property>
                         <property name="show_arrow">True</property>
                         <child>
                           <object class="GtkToolButton" id="ps_toolbutton_clear">
