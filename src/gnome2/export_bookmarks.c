@@ -263,6 +263,9 @@ static gboolean _save_verselist_2_html(BK_EXPORT *data)
 		case PLAIN:
 			buf = g_strdup_printf("%s\n\n",name->str);
 			break;
+		default:
+			buf = g_strdup_printf("bogus data type, cannot happen");
+			break;
 		}
 		g_string_append(str,buf);
 		g_string_free(name,1);

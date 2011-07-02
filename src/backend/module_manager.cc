@@ -720,9 +720,11 @@ void backend_init_module_mgr(const char *dir,
 	//                then "as sent" ([a] total list or [b] per-area list)
 	//		  else "false for local install" (always per-area)
 
+#ifdef DEBUG
 	GTimer *t;
 	double d;
 	t = g_timer_new();
+#endif
 
 	if (regular) {		// use main (regular) swmgr.
 		if (mgr)
@@ -733,9 +735,12 @@ void backend_init_module_mgr(const char *dir,
 			delete list_mgr;
 		list_mgr = new SWMgr(dir, true, 0, false, false);
 	}
+
+#ifdef DEBUG
 	g_timer_stop(t);
 	d = g_timer_elapsed(t, NULL);
 	GS_message(("create SWMgr time is %f", d));
+#endif
 
 	const gchar *envhomedir = g_getenv(HOMEVAR);
 	SWBuf baseDir = (envhomedir) ? envhomedir : ".";

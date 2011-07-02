@@ -1989,10 +1989,13 @@ on_notebook1_switch_page(GtkNotebook * notebook,
 	GdkWindow *window;
 	gint x, y;
 #endif
+
+#ifdef DEBUG
 	GTimer *total;
 	double d;
-
 	total = g_timer_new();
+#endif
+
 #ifndef USE_GTK_3
 	// FIXME: for gtk 3
 	cursor = gdk_cursor_new(GDK_WATCH);
@@ -2054,9 +2057,11 @@ on_notebook1_switch_page(GtkNotebook * notebook,
 	gdk_window_set_cursor(window, NULL);
 #endif
 
+#ifdef DEBUG
 	g_timer_stop(total);
 	d = g_timer_elapsed(total, NULL);
 	GS_message(("total time is %f", d));
+#endif
 }
 
 
