@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk+" version="2.20"/>
+  <!-- interface-naming-policy toplevel-contextual -->
   <object class="GtkHBox" id="navbar">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -155,7 +156,7 @@
             </child>
           </object>
           <packing>
-            <property name="expand">True</property>
+            <property name="expand">False</property>
             <property name="fill">True</property>
             <property name="position">0</property>
           </packing>
@@ -594,6 +595,10 @@
         <property name="can_focus">True</property>
         <property name="tooltip_text" translatable="yes">Enter a Verse reference in Book 1:1 format and press Return</property>
         <property name="invisible_char">●</property>
+        <property name="primary_icon_activatable">False</property>
+        <property name="secondary_icon_activatable">False</property>
+        <property name="primary_icon_sensitive">True</property>
+        <property name="secondary_icon_sensitive">True</property>
         <child internal-child="accessible">
           <object class="AtkObject" id="entry_lookup-atkobject">
             <property name="AtkObject::accessible-name" translatable="yes">Reference Entry</property>
