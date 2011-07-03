@@ -106,8 +106,8 @@ int footnote, xref;
 // specification which overlays both on top of one another.
 #define CSS_BLOCK_BOTH \
 " *        { line-height: 3.8em; }" \
-" .word    { position: relative; top:  0.0em; left: 0 }" \
-" .strongs { position: absolute; top:  0.3em; left: 0; z-index: 2; height: 1em }" \
+" .word    { position: relative; top:  0.0em; left: 0; white-space: nowrap; }" \
+" .strongs { position: absolute; top:  0.3em; left: 0; z-index: 2 }" \
 " .morph   { position: absolute; top:  1.2em; left: 0; z-index: 1 }"
 #define CSS_BLOCK_ONE \
 " *        { line-height: 2.7em; }" \
