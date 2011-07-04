@@ -156,9 +156,8 @@ static gboolean select_button_press_callback(GtkWidget * widget,
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), TRUE);
 		gtk_menu_popup(GTK_MENU(menu), 
 		           NULL, 
-		           NULL, 
-		           NULL, 
-			      // menu_position_under, 
+		           NULL,
+		           menu_position_under, 
 		           widget, event->button,
 			       event->time);
 		return TRUE;
