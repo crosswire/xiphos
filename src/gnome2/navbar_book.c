@@ -87,7 +87,7 @@ void menu_position_under(GtkMenu * menu, int * x, int * y,
 	GtkAllocation allocation;
 	g_return_if_fail(GTK_IS_BUTTON(user_data));
 #if defined(HAVE_GTK_220) || defined(USE_GTK_3)
-        g_return_if_fail (gtk_widget_get_has_window(user_data));
+        g_return_if_fail (gtk_widget_get_window(user_data));
 #else
 	g_return_if_fail (GTK_WIDGET_NO_WINDOW (user_data));
 #endif
