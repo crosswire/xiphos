@@ -606,6 +606,13 @@ redisplay_to_realign()
 		main_url_handler(url, TRUE);
 		g_free(url);
 	}
+	if (settings.book_mod) {
+		url = g_strdup_printf("sword://%s/%s",
+				      settings.book_mod,
+				      settings.book_key);
+		main_url_handler(url, TRUE);
+		g_free(url);
+	}
 
 	realign_busy = FALSE;
 }
