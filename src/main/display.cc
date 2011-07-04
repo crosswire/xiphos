@@ -111,7 +111,7 @@ int footnote, xref;
 " .morph   { position: absolute; top:  1.2em; left: 0; z-index: 1 }"
 #define CSS_BLOCK_ONE \
 " *        { line-height: 2.7em; }" \
-" .word    { position: relative; top:  0.0em; left: 0 }" \
+" .word    { position: relative; top:  0.0em; left: 0; white-space: nowrap }" \
 " .strongs { position: absolute; top:  0.8em; left: 0 }" \
 " .morph   { position: absolute; top:  0.8em; left: 0 }"
 
