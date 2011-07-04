@@ -104,7 +104,7 @@ void menu_position_under(GtkMenu * menu, int * x, int * y,
 
 	g_return_if_fail(GTK_IS_BUTTON(user_data));
 #if defined(HAVE_GTK_220) || defined(USE_GTK_3)
-        g_return_if_fail (gtk_widget_get_has_window(user_data));
+        g_return_if_fail (gtk_widget_get_window(user_data));
 #else
 	g_return_if_fail (GTK_WIDGET_NO_WINDOW (user_data));
 #endif
@@ -154,8 +154,12 @@ static gboolean select_button_press_callback(GtkWidget * widget,
 	if ((event->type == GDK_BUTTON_PRESS) && event->button == 1) {
 		gtk_widget_grab_focus(widget);
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), TRUE);
-		gtk_menu_popup(GTK_MENU(menu), NULL, NULL,
-			       menu_position_under, widget, event->button,
+		gtk_menu_popup(GTK_MENU(menu), 
+		           NULL, 
+		           NULL, 
+		           NULL, 
+			      // menu_position_under, 
+		           widget, event->button,
 			       event->time);
 		return TRUE;
 	}
@@ -217,7 +221,7 @@ static gboolean select_book_button_press_callback(GtkWidget * widget,
 		gtk_widget_grab_focus(widget);
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), TRUE);
 		gtk_menu_popup(GTK_MENU(menu), NULL, NULL,
-			       menu_position_under, widget, event->button,
+			       menu_position_under,widget, event->button,
 #ifdef WIN32
 			       event->time + time_add);
 #else
