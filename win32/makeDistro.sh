@@ -1,6 +1,6 @@
 #!/bin/sh
 
-#Copyright (c) 2009 Matthew Talbert
+#Copyright (c) 2009-2011 Matthew Talbert
 
 #Permission is hereby granted, free of charge, to any person
 #obtaining a copy of this software and associated documentation
