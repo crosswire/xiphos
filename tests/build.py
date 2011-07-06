@@ -18,26 +18,31 @@ class BuildTests(unittest.TestCase):
         sub.communicate()
         return sub
         
-    def _configure(self, gtk, backend):
-        sub = self._run(["./waf","configure","--gtk", gtk, "--backend", backend, "--disable-dbus"])
+    def _configure(self, gtk, backend, delint):
+        arglist = ["./waf","configure","--gtk", gtk, "--backend", backend,
+                   "--disable-dbus"]
+        if delint:
+            arglist.append("--enable-delint")
+        sub = self._run(arglist)
         self.assertEqual(0,sub.returncode)
 
     def _build(self):
         sub = self._run(["./waf","build"])
         self.assertEqual(0,sub.returncode)
 
-    def _configure_and_build(self, gtk, backend):
-        self._configure(gtk, backend)
+    def _configure_and_build(self, gtk, backend, delint):
+        self._configure(gtk, backend, delint)
         self._build()
 
 gtks = ("2","3")
 backs= ("webkit","gtkhtml","xulrunner")
+delit= ("delint_", '')
 
-for gtk, backend in itertools.product(gtks,backs):
+for gtk, backend, delint in itertools.product(gtks,backs,delit):
     if gtk == "3" and backend == "xulrunner": continue
-    def ch(gtk, backend):
-        return lambda self: self._configure_and_build(gtk, backend)
-    setattr(BuildTests, "test_%s_%s" % (gtk, backend), ch(gtk, backend))
+    def ch(gtk, backend, delint):
+        return lambda self: self._configure_and_build(gtk, backend, delint)
+    setattr(BuildTests, "test_%s%s_%s" % (delint, gtk, backend), ch(gtk, backend, delint))
 
 suite = unittest.TestLoader().loadTestsFromTestCase(BuildTests)
 unittest.TextTestRunner(verbosity=2).run(suite)
