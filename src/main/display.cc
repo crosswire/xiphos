@@ -319,9 +319,8 @@ block_dump(SWBuf& rendered,
 	   const char **morph)
 {
 #ifdef USE_XIPHOS_HTML
-	int wlen, min_length;
+	int wlen, min_length, slen, mlen;
 #endif
-	int slen, mlen;
 	char *s, *s0, *t;
 
 	// unannotated words need no help.
@@ -355,8 +354,8 @@ block_dump(SWBuf& rendered,
 			*s0 = ' ';
 		}
 		*s = '<';
-		slen = s - t;
 #ifdef USE_XIPHOS_HTML
+		slen = s - t;
 		s = (char*)strstr(*strongs, "&lt;");
 		*s = *(s+1) = *(s+2) = *(s+3) = ' ';
 		s = strstr(s, "&gt;");
@@ -369,8 +368,12 @@ block_dump(SWBuf& rendered,
 			if ((s = (char*)strstr(s, " class=\"strongs\">")))
 				memcpy(s, ">                ", 17);
 		}
-	} else
+	}
+#ifdef USE_XIPHOS_HTML
+	else
 		slen = 0;
+#endif /* USE_GTKMOZEMBED */
+
 	if (*morph) {
 		s = s0 = (char*)g_strrstr(*morph, "\">") + 2;
 		t = strchr(s, '<');
@@ -383,8 +386,8 @@ block_dump(SWBuf& rendered,
 		*s = '\0';
 		t = (char*)strrchr(*morph, '>') + 1;
 		*s = '<';
-		mlen = s - t;
 #ifdef USE_XIPHOS_HTML
+		mlen = s - t;
 		s = (char*)strchr(*morph, '(');
 		*s = ' ';
 		s = strrchr(s, ')');
@@ -397,13 +400,16 @@ block_dump(SWBuf& rendered,
 			if ((s = (char*)strstr(s, " class=\"morph\">")))
 				memcpy(s, ">              ", 15);
 		}
-	} else
-		mlen = 0;
+	}
 #ifdef USE_XIPHOS_HTML
+	else
+		mlen = 0;
+
 	min_length = 2 + max(slen, mlen);
 #endif /* USE_XIPHOS_HTML */
 
 	rendered += *word;
+
 #ifdef USE_XIPHOS_HTML
 	for (wlen = strlen(*word); wlen <= min_length; ++wlen)
 		rendered += "&nbsp;";

@@ -533,8 +533,6 @@ static void on_notebook_comm_book_switch_page(GtkNotebook * notebook,
 static void
 new_base_font_size(gboolean up)
 {
-	gchar *url;
-
 	if (up) {
 		settings.base_font_size++;
 		if (settings.base_font_size > 5)
@@ -551,11 +549,7 @@ new_base_font_size(gboolean up)
 
 	xml_set_value("Xiphos", "fontsize", "basefontsize",
 		      settings.base_font_size_str);
-	url = g_strdup_printf("sword://%s/%s",
-			      settings.MainWindowModule,
-			      settings.currentverse);
-	main_url_handler(url, TRUE);
-	g_free(url);
+	redisplay_to_realign();
 }
 
 
