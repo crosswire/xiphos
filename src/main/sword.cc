@@ -84,8 +84,6 @@ extern "C" {
 
 using namespace sword;
 
-#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
-
 extern GtkWidget *cbe_book;
 extern GtkWidget *spb_chapter;
 extern GtkWidget *spb_verse;
