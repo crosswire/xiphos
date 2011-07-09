@@ -133,10 +133,7 @@ static GdkPixbuf *create_darkened_pixbuf(GdkPixbuf * pixbuf)
 
 static Icon *icon_new(ESplash * splash, GdkPixbuf * image_pixbuf)
 {
-	ESplashPrivate *priv;
 	Icon *icon;
-
-	priv = splash->priv;
 
 	icon = g_new(Icon, 1);
 
