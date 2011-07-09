@@ -60,8 +60,7 @@
 
 #include "gui/debug_glib_null.h"
 
-#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
-
+#define	HTML_START	"<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><style type=\"text/css\"><!-- A { text-decoration:none } *[dir=rtl] { text-align: right; } --></style></head>"
 
 typedef struct _treeitem TreeItem;
 struct _treeitem {

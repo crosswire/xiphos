@@ -1,3 +1,7 @@
+2011-07-09  karl <charcoal@users.sf.net>
+
+	* several RtoL fixes: HTML_START and comm-by-chapter verse output order.
+
 2011-06-30  terry  <tbiggs@users.sf.net>
 
 	* fixed studypad to honor 'settings.studypaddir'

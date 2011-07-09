@@ -98,7 +98,7 @@ int marked_cache_chapter = -1;
 
 int footnote, xref;
 
-#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><STYLE type=\"text/css\"><!-- A { text-decoration:none } %s --></STYLE></head>"
+#define	HTML_START	"<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><style type=\"text/css\"><!-- A { text-decoration:none } *[dir=rtl] { text-align: right; } %s --></style></head>"
 
 // CSS style blocks to control blocked strongs+morph output
 // BOTH is when the user wants to see both types of markup.
@@ -822,8 +822,8 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule)
 				       settings.bible_verse_num_color,
 				       num);
 		g_free(num);
-		if (!is_rtol)
-			swbuf.append(vbuf);
+
+		swbuf.append(vbuf);
 
 		if (settings.showversenum) {
 			buf = g_strdup_printf("<td><font size=\"%+d\">",
@@ -840,8 +840,6 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule)
 		if (settings.showversenum)
 			swbuf.append("</font></td>");
 
-		if (is_rtol)
-			swbuf.append(vbuf);
 		g_free(vbuf);
 
 		swbuf.append("</tr>");
