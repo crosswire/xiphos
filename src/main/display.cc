@@ -319,9 +319,9 @@ block_dump(SWBuf& rendered,
 	   const char **morph)
 {
 #ifdef USE_XIPHOS_HTML
-	int wlen;
+	int wlen, min_length;
 #endif
-	int slen, mlen, min_length;
+	int slen, mlen;
 	char *s, *s0, *t;
 
 	// unannotated words need no help.
@@ -399,7 +399,9 @@ block_dump(SWBuf& rendered,
 		}
 	} else
 		mlen = 0;
+#ifdef USE_XIPHOS_HTML
 	min_length = 2 + max(slen, mlen);
+#endif /* USE_XIPHOS_HTML */
 
 	rendered += *word;
 #ifdef USE_XIPHOS_HTML
