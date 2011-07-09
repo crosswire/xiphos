@@ -65,8 +65,7 @@
 #define SEARCHING N_("Searching the ")
 #define SMODULE N_(" Module")
 #define FINDS N_("found in ")
-#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
-
+#define	HTML_START	"<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><style type=\"text/css\"><!-- A { text-decoration:none } *[dir=rtl] { text-align: right; } --></style></head>"
 
 SEARCH_DIALOG1 search1;
 
