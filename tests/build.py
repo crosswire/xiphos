@@ -1,13 +1,13 @@
 #!/usr/bin/python
 
-import os
 import subprocess
 import itertools
 import unittest
+from tempfile import TemporaryFile
 
 class BuildTests(unittest.TestCase):
     def setUp(self):
-        self.fnull = open(os.devnull,'w')
+        self.fnull = TemporaryFile()
 
     def tearDown(self):
         self._run(["./waf","distclean"])
@@ -16,19 +16,21 @@ class BuildTests(unittest.TestCase):
     def _run(self, args):
         sub = subprocess.Popen(args, stderr=self.fnull, stdout=self.fnull)
         sub.communicate()
-        return sub
-        
+        self.fnull.seek(0)
+        tail = ''.join(self.fnull.readlines()[-10:])
+        return sub, tail
+
     def _configure(self, gtk, backend, delint):
         arglist = ["./waf","configure","--gtk", gtk, "--backend", backend,
                    "--disable-dbus"]
         if delint:
             arglist.append("--enable-delint")
-        sub = self._run(arglist)
-        self.assertEqual(0,sub.returncode)
+        sub, tail = self._run(arglist)
+        self.assertEqual(0, sub.returncode, msg=tail)
 
     def _build(self):
-        sub = self._run(["./waf","build"])
-        self.assertEqual(0,sub.returncode)
+        sub, tail = self._run(["./waf","build"])
+        self.assertEqual(0, sub.returncode, msg=tail)
 
     def _configure_and_build(self, gtk, backend, delint):
         self._configure(gtk, backend, delint)
