@@ -21,8 +21,7 @@ class BuildTests(unittest.TestCase):
         return sub, tail
 
     def _configure(self, gtk, backend, delint):
-        arglist = ["./waf","configure","--gtk", gtk, "--backend", backend,
-                   "--disable-dbus"]
+        arglist = ["./waf","configure","--gtk", gtk, "--backend", backend]
         if delint:
             arglist.append("--enable-delint")
         sub, tail = self._run(arglist)
