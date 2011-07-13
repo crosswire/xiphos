@@ -8,7 +8,8 @@ lib = bld.new_task_gen(
     uselib= bld.env['ALL_LIBS'],
 )
 
-lib.add_marshal_file('marshal.list', 'xihtml_marshal')
+if not bld.env['WITHOUT_DBUS']:
+    lib.add_marshal_file('marshal.list', 'xihtml_marshal')
 lib.find_sources_in_dirs('.')
 
 	
