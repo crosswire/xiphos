@@ -26,7 +26,7 @@ def process_dbus(self):
 		env['DBUS_BINDING_TOOL_PREFIX'] = prefix
 		env['DBUS_BINDING_TOOL_MODE']   = mode
 
-		task = self.create_task('dbus_binding_tool', env)
+		task = self.create_task('dbus_binding_tool', env=env)
 		task.set_inputs(node)
 		task.set_outputs(node.change_ext('.h'))
 
