@@ -770,7 +770,7 @@ static void interpolate_parallel_display(SWBuf& text, gchar *key, gint parallel_
 
 		// alternate background colors.
 		if (verse % 2 == 0)
-			bgColor = "#f1f1f1";
+			bgColor = "#c0c0c0";
 		else
 			bgColor = settings.bible_bg_color;
 
@@ -883,7 +883,7 @@ void main_update_parallel_page_detached(void)
 
 	for (modidx = 0; settings.parallel_list[modidx]; ++modidx) {
 		snprintf(buf, 499,
-			 "<td valign=\"top\" width=\"%d%%\" bgcolor=\"#f1f1f1\"><font color=\"%s\" size=\"%+d\"><b>%s</b></font></td>",
+			 "<td valign=\"top\" width=\"%d%%\" bgcolor=\"#c0c0c0\"><font color=\"%s\" size=\"%+d\"><b>%s</b></font></td>",
 			 fraction,
 			 settings.bible_verse_num_color,
 			 settings.verse_num_font_size + settings.base_font_size,
