@@ -631,7 +631,7 @@ void main_update_parallel_page(void)
 			is_rtol = main_is_mod_rtol(mod_name);
 
 			if (modidx % 2 == 1)	/* alternating background color */
-				rowcolor = "#F1F1F1";
+				rowcolor = "#c0c0c0";
 			else
 				rowcolor = settings.bible_bg_color;
 
