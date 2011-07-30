@@ -312,7 +312,7 @@ def configure(conf):
 
     # strip xiphos binary
     if env['IS_CROSS_WIN32']:
-        env['STRIP'] = conf.find_program('i686-pc-mingw32-strip', mandatory=True)
+        env['STRIP'] = conf.find_program('i686-w64-mingw32-strip', mandatory=True)
     else:
         env['STRIP'] = conf.find_program('strip', mandatory=True)
 
@@ -325,7 +325,8 @@ def configure(conf):
         conf.check_pkg('dbus-glib-1', '0.60', True, var='DBUS')
         # we need a modified version of dbus.py for running on windows
         conf.check_tool('dbus', tooldir=_tooldir)
-        conf.check_tool('glib2')
+    
+    conf.check_tool('glib2')
 
     ### App info, paths
     define = conf.define
