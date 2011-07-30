@@ -22,6 +22,7 @@
 #ifndef __WK_HTML_H__
 #define __WK_HTML_H__
 
+#undef DATADIR
 #include <webkit/webkit.h>  
 #include "main/module_dialogs.h"
 
