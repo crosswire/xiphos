@@ -1300,7 +1300,7 @@ image_locator(const char *image)
 	return g_strdup_printf("%s/%s", PACKAGE_PIXMAPS_DIR, image);
 #else
 	return g_build_filename(xiphos_win32_get_subdir("share"),
-				"pixmaps", "xiphos", image, NULL);
+				"xiphos", image, NULL);
 #endif /* WIN32 */
 }
 
