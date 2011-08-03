@@ -1,3 +1,8 @@
+2011-08-03  karl <charcoal@users.sf.net>
+
+	* pass parallel texts through AnalyzeForImageSize.
+	* avoid "widowed" verse numbers by forcing connection to 1st word with &nbsp;.
+
 2011-07-09  karl <charcoal@users.sf.net>
 
 	* several RtoL fixes: HTML_START and comm-by-chapter verse output order.

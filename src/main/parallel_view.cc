@@ -691,8 +691,15 @@ void main_update_parallel_page(void)
 	}
 
 	g_string_append(data, "</table></body></html>");
-	HtmlOutput(data->str, widgets.html_parallel, NULL, NULL);
+	HtmlOutput((char *)(settings.imageresize
+			    ? AnalyzeForImageSize
+			         (data->str,
+				  GDK_WINDOW(gtk_widget_get_window(widgets.html_parallel)))
+			    : data->str),
+		   widgets.html_parallel, NULL, NULL);
 	g_string_free(data, TRUE);
+
+						
 }
 
 /******************************************************************************
@@ -839,12 +846,12 @@ static void interpolate_parallel_display(SWBuf& text, gchar *key, gint parallel_
 
 /******************************************************************************
  * Name
- *   gui_update_parallel_page_detached
+ *   main_update_parallel_page_detached
  *
  * Synopsis
  *   #include "main/parallel_view.h
  *
- *   void gui_update_parallel_page_detached(void)
+ *   void main_update_parallel_page_detached(void)
  *
  * Description
  *
@@ -899,7 +906,12 @@ void main_update_parallel_page_detached(void)
 				  ? settings.intCurVerse - 1
 				  : settings.intCurVerse));
 
-	HtmlOutput((char *)text.c_str(), widgets.html_parallel_dialog, NULL, buf);
+	HtmlOutput((char *)(settings.imageresize
+			    ? AnalyzeForImageSize
+			         ((char *)text.c_str(),
+				  GDK_WINDOW(gtk_widget_get_window(widgets.html_parallel_dialog)))
+			    : (char *)text.c_str()),
+		   widgets.html_parallel_dialog, NULL, buf);
 }
 
 /******************************************************************************
@@ -922,8 +934,7 @@ void main_swap_parallel_with_main(char *intmod)
 {
 	main_display_bible(intmod, settings.currentverse);
 	main_update_parallel_page();
-	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_bible_parallel),
-                                             0);
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_bible_parallel), 0);
 }
 
 
