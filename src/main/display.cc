@@ -901,8 +901,7 @@ GTKEntryDisp::Display(SWModule &imodule)
 			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
 			      "<font face=\"%s\" size=\"%+d\">"
 			      "[<a href=\"passagestudy.jsp?action=showModInfo&value=%s&module=%s\">"
-			      "<font color=\"%s\">"
-			      "*%s*</font></a>]<br/>",
+			      "<font color=\"%s\">*%s*</font></a>]<br/>",
 			      (strongs_and_morph		// both
 			       ? CSS_BLOCK_BOTH
 			       : (strongs_or_morph		// either
@@ -1062,7 +1061,7 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 		num = main_format_number(key->Verse());
 		buf=g_strdup_printf(settings.showversenum
 				? "&nbsp; <a name=\"%d\" href=\"sword:///%s\">"
-				  "<font size=\"%+d\" color=\"%s\">%s</font></a> "
+				  "<font size=\"%+d\" color=\"%s\">%s</font></a>&nbsp;"
 				: "&nbsp; <a name=\"%d\"> </a>",
 				0,
 				(char*)key->getText(),
@@ -1182,7 +1181,7 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 		num = main_format_number(key->Verse());
 		buf=g_strdup_printf(settings.showversenum
 				? "&nbsp; <a name=\"%d\" href=\"sword:///%s\">"
-				  "<font size=\"%+d\" color=\"%s\">%s</font></a> "
+				  "<font size=\"%+d\" color=\"%s\">%s</font></a>&nbsp;"
 				: "&nbsp; <a name=\"%d\"> </a>",
 				0,
 				(char*)key->getText(),
@@ -1361,7 +1360,7 @@ GTKChapDisp::Display(SWModule &imodule)
 		num = main_format_number(key->Verse());
 		buf = g_strdup_printf(settings.showversenum
 			? "&nbsp; <span class=\"word\"><a name=\"%d\" href=\"sword:///%s\">"
-			  "<font size=\"%+d\" color=\"%s\">%s</font></a></span> "
+			  "<font size=\"%+d\" color=\"%s\">%s</font></a></span>&nbsp;"
 			: "&nbsp; <a name=\"%d\"> </a>",
 			key->Verse(),
 			(char*)key->getText(),
@@ -1808,7 +1807,7 @@ DialogChapDisp::Display(SWModule &imodule)
 		num = main_format_number(key->Verse());
 		buf = g_strdup_printf(settings.showversenum
 			? "&nbsp; <a name=\"%d\" href=\"sword:///%s\">"
-			  "<font size=\"%+d\" color=\"%s\">%s</font></a> "
+			  "<font size=\"%+d\" color=\"%s\">%s</font></a>&nbsp;"
 			: "&nbsp; <a name=\"%d\"> </a>",
 			key->Verse(),
 			(char*)key->getText(),
@@ -2067,7 +2066,7 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 		num = main_format_number(key->Verse());
 		buf=g_strdup_printf(settings.showversenum
 			? "&nbsp; <a name=\"%d\" href=\"sword:///%s\">"
-			  "<font size=\"%+d\" color=\"%s\">%s</font></a> "
+			  "<font size=\"%+d\" color=\"%s\">%s</font></a>&nbsp;"
 			: "&nbsp; <a name=\"%d\"> </a>",
 			key->Verse(),
 			(char*)key->getText(),
