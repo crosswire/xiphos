@@ -472,7 +472,10 @@ void main_entry_display(gpointer data, gchar * mod_name,
 	g_string_printf(tmp_str, " %s", "</font></body></html>");
 	str = g_string_append(str, tmp_str->str);
 
-	HtmlOutput(str->str, html_widget, mf, NULL);
+	HtmlOutput((char *)AnalyzeForImageSize
+			   (str->str,
+			    GDK_WINDOW(gtk_widget_get_window(html_widget))),
+			    html_widget, mf, NULL);
 	free_font(mf);
 	g_string_free(str, TRUE);
 	g_string_free(tmp_str, TRUE);
