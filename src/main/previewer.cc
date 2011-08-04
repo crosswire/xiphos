@@ -231,7 +231,10 @@ void main_information_viewer(const gchar * mod_name,
 
 	str = g_string_append(str, "</font></body></html>");
 
-	HtmlOutput(str->str, previewer_html_widget, mf, NULL);
+	HtmlOutput((char *)AnalyzeForImageSize
+			   (str->str,
+			    GDK_WINDOW(gtk_widget_get_window(previewer_html_widget))),
+			   previewer_html_widget, mf, NULL);
 	free_font(mf);
 	g_string_free(str, TRUE);
 	g_string_free(tmp_str, TRUE);
