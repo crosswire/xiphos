@@ -1,6 +1,6 @@
 2011-08-03  karl <charcoal@users.sf.net>
 
-	* pass parallel texts through AnalyzeForImageSize.
+	* pass parallel texts and previewer through AnalyzeForImageSize.
 	* avoid "widowed" verse numbers by forcing connection to 1st word with &nbsp;.
 
 2011-07-09  karl <charcoal@users.sf.net>
