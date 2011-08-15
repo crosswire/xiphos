@@ -902,9 +902,7 @@ void main_update_parallel_page_detached(void)
 	interpolate_parallel_display(text, settings.cvparallel, parallel_count, fraction);
 	text += "</table></body></html>";
 
-	snprintf(buf, 499, "%d", ((settings.intCurVerse > 1)
-				  ? settings.intCurVerse - 1
-				  : settings.intCurVerse));
+	snprintf(buf, 499, "%d", settings.intCurVerse);
 
 	HtmlOutput((char *)(settings.imageresize
 			    ? AnalyzeForImageSize
