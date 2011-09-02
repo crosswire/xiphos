@@ -1,3 +1,7 @@
+2011-09-02  karl <charcoal@users.sf.net>
+
+	* avoid crash due to deleted module ref in <parallels> list.
+
 2011-08-14  karl <charcoal@users.sf.net>
 
 	* do away with 1-verse context in full-chapter parallel window.
