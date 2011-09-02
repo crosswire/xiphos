@@ -626,6 +626,15 @@ void main_update_parallel_page(void)
 		for (modidx = 0;
 		     (mod_name = settings.parallel_list[modidx]);
 		     modidx++) {
+
+			// if a module was deleted, but still in parallels list,
+			// we will segfault when looking for content for the
+			// nonexistent module.  avoid this.
+			if (!main_is_module(mod_name)) {
+				GS_warning(("unknown parallel module %s\n", mod_name));
+				continue;
+			}
+
 			mf = get_font(mod_name);
 
 			is_rtol = main_is_mod_rtol(mod_name);
