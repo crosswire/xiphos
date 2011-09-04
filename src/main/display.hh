@@ -27,8 +27,6 @@
 #include <stdint.h>
 
 #ifdef __cplusplus
-extern "C" {
-
 #include <gtk/gtk.h>
 #include <swmgr.h>
 #include <swdisp.h>
@@ -152,6 +150,7 @@ public:
 	MOD_FONT *mf;
 };
 
+extern "C" {
 #endif /* __cplusplus */
 
 void marked_cache_fill(gchar *modname, gchar *key);
