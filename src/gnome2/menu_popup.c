@@ -220,8 +220,7 @@ void _global_option_main_pane(GtkMenuItem * menuitem, const gchar * option)
 					     mod,
 					     key);
 		main_save_module_options (mod, (gchar*) option,
-					 gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM (menuitem)),
-					 is_dialog);
+					 gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM (menuitem)));
 		if (is_dialog) {
 			/* show the change */
 			main_dialogs_url_handler(dialog, url, TRUE);
@@ -1465,10 +1464,7 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 	GLOBAL_OPS *ops = NULL;
 	gint modtype = main_get_mod_type((gchar*) (is_dialog ? d->mod_name : mod_name));
 
-	if (is_dialog)
-		ops = main_new_globals((gchar*) mod_name, 1);
-	else
-		ops = main_new_globals((gchar*) mod_name, 0);
+	ops = main_new_globals((gchar*) mod_name);
 
 #ifdef USE_GTKBUILDER
 	item = GTK_WIDGET (gtk_builder_get_object (gxml, "verse_per_line"));
