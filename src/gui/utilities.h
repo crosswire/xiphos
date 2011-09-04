@@ -22,14 +22,14 @@
 #ifndef GS_UTILITIES_H
 #define GS_UTILITIES_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <libxml/parser.h>
 #include "main/configs.h"
 #include "main/module_dialogs.h"
 #include <gsf/gsf-outfile.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 extern gint stop_window_sync;
 void sync_windows(void);

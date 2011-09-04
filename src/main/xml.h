@@ -22,10 +22,11 @@
 #ifndef __XML_H__
 #define __XML_H__
 
+#include <libxml/parser.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-#include <libxml/parser.h>
 
 void xml_add_new_section_to_settings_doc(char * section);
 void xml_new_bookmark_file(void);

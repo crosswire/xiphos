@@ -45,8 +45,6 @@
 #include <map>
 #include <string>
 
-extern "C" {
-
 namespace ModuleCache {
 
 	// bitwise cache type indicators:
@@ -296,6 +294,7 @@ InvalidateHeader()
 	_header = NULL;
 }
 
+extern "C" {
 #endif	/* __cplusplus */
 
 // namespace-free routines.
