@@ -1026,9 +1026,9 @@ void reading_selector(char *modname,
 
 
 	url = g_strdup_printf("sword://%s/%s", modname, key);
-	main_save_module_options(modname, "Primary Reading", primary, is_dialog);
-	main_save_module_options(modname, "Secondary Reading", secondary, is_dialog);
-	main_save_module_options(modname, "All Readings", all, is_dialog);
+	main_save_module_options(modname, "Primary Reading", primary);
+	main_save_module_options(modname, "Secondary Reading", secondary);
+	main_save_module_options(modname, "All Readings", all);
 	if (is_dialog)
 		main_dialogs_url_handler(dialog, url, TRUE);
 	else

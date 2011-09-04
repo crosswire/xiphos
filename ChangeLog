@@ -1,6 +1,9 @@
 2011-09-02  karl <charcoal@users.sf.net>
 
 	* avoid crash due to deleted module ref in <parallels> list.
+	* update export: re-work a lot of options stuff; eliminate dialog
+	  sensitivity; make license query dialog happen once with
+	  permanent modops memory so we never ask again.
 
 2011-08-14  karl <charcoal@users.sf.net>
 

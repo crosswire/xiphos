@@ -623,14 +623,14 @@ CleanupContent(GString *text,
 	else if ((ops->image_content == -1) &&	// "unknown"
 		 (strcasestr(text->str, "<img ") != NULL)) {
 		ops->image_content = 1;		// now known.
-		main_save_module_options(name, "Image Content", 1, ops->dialog);
+		main_save_module_options(name, "Image Content", 1);
 	}
 	if (ops->respect_font_faces == 0)
 		ClearFontFaces((gchar *)text->str);
 	else if ((ops->respect_font_faces == -1) &&	// "unknown"
 		 (strcasestr(text->str, "<font face=\"Galax") != NULL)) {
 		ops->respect_font_faces = 1;	// now known.
-		main_save_module_options(name, "Respect Font Faces", 1, ops->dialog);
+		main_save_module_options(name, "Respect Font Faces", 1);
 	}
 
 	gint pos;
@@ -883,7 +883,7 @@ GTKEntryDisp::Display(SWModule &imodule)
 	swbuf = "";
 	footnote = xref = 0;
 
-	ops = main_new_globals(imodule.Name(),0);
+	ops = main_new_globals(imodule.Name());
 
 	GString *rework;			// for image size analysis rework.
 
@@ -1236,7 +1236,7 @@ GTKChapDisp::Display(SWModule &imodule)
 	gboolean newparagraph = FALSE;
 	GString *rework;			// for image size analysis rework.
 	char *ModuleName = imodule.Name();
-	ops = main_new_globals(ModuleName, 0);
+	ops = main_new_globals(ModuleName);
 	cache_flags = ConstructFlags(ops);
 	marked_element *e = NULL;
 
@@ -1580,13 +1580,12 @@ DialogEntryDisp::Display(SWModule &imodule)
 	swbuf = "";
 	char *buf;
 	mf = get_font(imodule.Name());
-	ops = main_new_globals(imodule.Name(),1);
-	main_dialog_set_global_options((BackEnd*)be, ops);
+	ops = main_new_globals(imodule.Name());
+	main_set_global_options(ops);
 	GString *rework;			// for image size analysis rework.
 	footnote = xref = 0;
 
 	(const char *)imodule;	// snap to entry
-	//main_set_global_options(ops);
 
 	buf = g_strdup_printf(HTML_START
 			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
@@ -1679,7 +1678,7 @@ DialogChapDisp::Display(SWModule &imodule)
 	marked_element *e = NULL;
 
 	char *ModuleName = imodule.Name();
-	ops = main_new_globals(ModuleName, 1);
+	ops = main_new_globals(ModuleName);
 	cache_flags = ConstructFlags(ops);
 
 	is_rtol = main_is_mod_rtol(ModuleName);
@@ -1719,7 +1718,7 @@ DialogChapDisp::Display(SWModule &imodule)
 	g_free(style);
 	g_free(file);
 
-	main_dialog_set_global_options((BackEnd*)be, ops);
+	main_set_global_options(ops);
 
 	swbuf = "";
 	footnote = xref = 0;
@@ -1948,7 +1947,7 @@ GTKPrintEntryDisp::Display(SWModule &imodule)
 	gint mod_type;
 	MOD_FONT *mf = get_font(imodule.Name());
 
-	GLOBAL_OPS * ops = main_new_globals(imodule.Name(),0);
+	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
 
 	(const char *)imodule;	// snap to entry
 	GS_message(("%s",(const char *)imodule.getRawEntry()));
@@ -2013,7 +2012,7 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 	SWBuf swbuf;
 	char *num;
 
-	GLOBAL_OPS * ops = main_new_globals(imodule.Name(),0);
+	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
 	gboolean is_rtol = main_is_mod_rtol(imodule.Name());
 	gboolean newparagraph = FALSE;
 	mf = get_font(imodule.Name());

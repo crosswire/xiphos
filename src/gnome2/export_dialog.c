@@ -254,6 +254,8 @@ void on_dialog_export_passage_response(GtkDialog * dialog,
  *   gint
  */
 
+#define	OP_NAME	"Warned about License for Export"
+
 gint _check_for_distribution_license(gchar * mod_name)
 {
 	gchar *distributionlicense;
@@ -279,8 +281,12 @@ gint _check_for_distribution_license(gchar * mod_name)
 	if (!distributionlicense || (distributionlicense &&
 				          g_strstr_len(distributionlicense,
 					  strlen(distributionlicense),
-					  "Copyrighted"))) {
-		gui_generic_warning(_("Please check copyright before exporting!"));
+					  "Copyright"))) {
+		if (main_get_one_option(mod_name, OP_NAME) == 0) {
+			gui_generic_warning(_("Please check copyright before exporting!"));
+			main_save_module_options(mod_name, OP_NAME, 1);
+		}
+		
 		return 1;
 	}
 
@@ -292,14 +298,9 @@ static
 void on_rb_multi_verse_toggled (GtkToggleButton *togglebutton,
                                 gpointer user_data)
 {
-	if (gtk_toggle_button_get_active (togglebutton)) {
-		gtk_widget_set_sensitive (d.sb_start_verse, TRUE);
-		gtk_widget_set_sensitive (d.sb_end_verse, TRUE);
-
-	} else {
-		gtk_widget_set_sensitive (d.sb_start_verse, FALSE);
-		gtk_widget_set_sensitive (d.sb_end_verse, FALSE);
-	}
+	gint state = gtk_toggle_button_get_active(togglebutton);
+	gtk_widget_set_sensitive(d.sb_start_verse, state);
+	gtk_widget_set_sensitive(d.sb_end_verse, state);
 }
 
 
@@ -381,6 +382,10 @@ void gui_export_dialog(void)
 	d.warning_label = glade_xml_get_widget(gxml, "hbox2");
 #endif
 
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(d.rb_copy), TRUE);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(d.rb_multi_verse), TRUE);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(d.rb_plain), TRUE);
+
 	g_signal_connect(dialog, "response",
 			 G_CALLBACK(on_dialog_export_passage_response), NULL);
 
@@ -397,6 +402,11 @@ void gui_export_dialog(void)
 	gtk_widget_set_sensitive (d.sb_start_verse, FALSE);
 	gtk_widget_set_sensitive (d.sb_end_verse, FALSE);
 
+	/* experiment: hide single verse option; subsumed into multi-verse. */
+	gtk_widget_hide(d.rb_verse);
+	gtk_widget_set_sensitive(d.sb_start_verse, TRUE);
+	gtk_widget_set_sensitive(d.sb_end_verse, TRUE);
+	/* end experiment. */
 
 	if (dist_license) {
 		gtk_widget_show(d.warning_label);
