@@ -130,8 +130,8 @@ void on_filechooserdialog_response(GtkDialog * fdialog,
 
 void _get_export_filename(void)
 {
-	gchar *glade_file;
 #ifndef USE_GTKBUILDER
+	gchar *glade_file;
 	GladeXML *gxml;
 #endif
 	GtkWidget *fdialog;
