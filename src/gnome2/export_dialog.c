@@ -95,7 +95,7 @@ void on_filechooserdialog_response(GtkDialog * fdialog,
 {
 
 	switch (response_id) {
-	case GTK_RESPONSE_OK:
+	case GTK_RESPONSE_ACCEPT:
 		edata.filename = g_strdup(gtk_file_chooser_get_filename(filesel));
 
 		if (d.format)
@@ -131,27 +131,26 @@ void on_filechooserdialog_response(GtkDialog * fdialog,
 void _get_export_filename(void)
 {
 	gchar *glade_file;
-#ifdef USE_GTKBUILDER
-	GtkBuilder *gxml;
-#else
+#ifndef USE_GTKBUILDER
 	GladeXML *gxml;
 #endif
 	GtkWidget *fdialog;
 	filename = NULL;
 
-#ifdef USE_GTKBUILDER
-	glade_file = gui_general_user_file("export-dialog.desktop", FALSE);
-#else
+#ifndef USE_GTKBUILDER
 	glade_file = gui_general_user_file("export-dialog.glade", FALSE);
-#endif
 	g_return_if_fail(glade_file != NULL);
 	GS_message(("%s",glade_file));
+#endif
 
 	/* build the widget */
 #ifdef USE_GTKBUILDER
-	gxml = gtk_builder_new ();
-
-	fdialog = GTK_WIDGET (gtk_builder_get_object (gxml, "filechooserdialog1"));
+	fdialog = gtk_file_chooser_dialog_new ("Save Export File",
+				      NULL,
+				      GTK_FILE_CHOOSER_ACTION_SAVE,
+				      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+				      GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT,
+				      NULL);	
 #else
 	gxml = glade_xml_new(glade_file, "filechooserdialog1", NULL);
 
@@ -162,6 +161,9 @@ void _get_export_filename(void)
 			 G_CALLBACK(on_filechooserdialog_response),
 			 (GtkFileChooser *)fdialog);
 
+#ifdef USE_GTKBUILDER
+	gtk_dialog_run (GTK_DIALOG (fdialog));
+#endif
 }
 
 /******************************************************************************
