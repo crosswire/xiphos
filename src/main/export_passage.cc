@@ -36,7 +36,7 @@
 #include "main/settings.h"
 #include "main/sword.h"
 
-#define	HTML_START	"<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><style type=\"text/css\"><!-- A { text-decoration:none } *[dir=rtl] { text-align: right; } --></style></head>"
+#define	HTML_START	"<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><style type=\"text/css\"><!-- A { text-decoration:none } *[dir=rtl] { text-align: right; } --></style></head><body>"
 
 enum {
         TARGET_HTML,
@@ -148,12 +148,12 @@ static void _export_book(char *filename, int type)
 
 	if (type == HTML)
 		g_string_append_printf(str,
-				       "%s<BR><CENTER>%s<BR>Chapter %d</CENTER><BR><BR>",
+				       "%s<center>%s<br/>Chapter %d</center><br/>",
 				       HTML_START,
 				       mod->Description(),
 				       1);
 	else
-		g_string_append_printf(str,"\n%s\nChapter %d\n\n",
+		g_string_append_printf(str,"%s\n\nChapter %d\n\n",
 				       mod->Description(),
 				       1);
 
@@ -163,9 +163,9 @@ static void _export_book(char *filename, int type)
 			myverse = 1;
 			curChapter = key->Chapter();
 			if (type == HTML)
-				g_string_append_printf(str,"<BR><CENTER>Chapter %d</CENTER><BR><BR>", curChapter);
+				g_string_append_printf(str,"<br/><center>Chapter %d</center><br/>", curChapter);
 			else
-				g_string_append_printf(str,"\nChapter %d\n\n", curChapter);
+				g_string_append_printf(str,"\n\nChapter %d\n\n", curChapter);
 		}
 
 		if (settings.showversenum)
@@ -178,7 +178,7 @@ static void _export_book(char *filename, int type)
 		if (type == HTML)
 			g_string_append_printf(str, " %s%s",
 					       (char*)mod->RenderText(),
-					       (settings.versestyle ? "<BR>" : ""));
+					       (settings.versestyle ? "<br/>" : ""));
 		else
 			g_string_append_printf(str, " %s%s",
 					       (char*)mod->StripText(),
@@ -188,7 +188,7 @@ static void _export_book(char *filename, int type)
 		(*mod)++;
 	}
 	if (type == HTML)
-		g_string_append_printf(str,"%s","</BODY></HTML>");
+		g_string_append_printf(str,"%s","</body></html>");
 	if (filename)
 		_save(filename, str->str,str->len);
 	else
@@ -211,14 +211,14 @@ static void _export_chapter(char *filename, int type)
 	book = backend->key_get_book(settings.currentverse);
 	if (type == HTML)
 		g_string_append_printf(str,
-				       "%s<BR>%s: %s Chapter %d<BR><BR>",
+				       "%s%s: %s Chapter %d<br/><br/>",
 				       HTML_START,
 				       mod->Description(),
 				       book,
 				       key->Chapter());
 	else
 		g_string_append_printf(str,
-				       "\n%s: %s Chapter %d\n\n",
+				       "%s: %s Chapter %d\n\n",
 				       mod->Description(),
 				       book,
 				       key->Chapter());
@@ -235,7 +235,7 @@ static void _export_chapter(char *filename, int type)
 		if (type == HTML)
 			g_string_append_printf(str," %s%s",
 					       (char*)mod->RenderText(),
-					       (settings.versestyle ? "<BR>" : ""));
+					       (settings.versestyle ? "<br/>" : ""));
 		else
 			g_string_append_printf(str," %s%s",
 					       (char*)mod->StripText(),
@@ -243,7 +243,7 @@ static void _export_chapter(char *filename, int type)
 		++myverse;
 	}
 	if (type == HTML)
-		g_string_append_printf(str,"%s","</BODY></HTML>");
+		g_string_append_printf(str,"%s","</body></html>");
 	if (filename)
 		_save(filename, str->str,str->len);
 	else
@@ -266,17 +266,17 @@ static void _export_verse(char *filename, int type)
 	book = backend->key_get_book(settings.currentverse);
 	if (type == HTML)
 		g_string_append_printf(str,
-				       "%s%s: %s %d:%d. %s%s</BODY></HTML>",
+				       "%s%s: %s %d:%d. %s%s</body></html>",
 				       HTML_START,
 				       settings.MainWindowModule,
 				       book,
 				       key->Chapter(),
 				       key->Verse(),
 				       (char*)mod->RenderText(),
-				       (settings.versestyle ? "<BR>" : ""));
+				       (settings.versestyle ? "<br/>" : ""));
 	else
 		g_string_append_printf(str,
-				       "\n%s: %s %d:%d. %s%s",
+				       "%s: %s %d:%d. %s%s",
 				       settings.MainWindowModule,
 				       book,
 				       key->Chapter(),
@@ -311,8 +311,8 @@ static void _export_verse_range (EXPORT_DATA data, int type)
 	if (type == HTML)
 		g_string_append_printf(str,
 				       (settings.showversenum
-					? "%s<BR>%s: %s Chapter %d<BR><BR>"
-					: "%s<BR>%s: %s %d:%d-%d<BR><BR>"),
+					? "%s%s: %s Chapter %d<br/><br/>"
+					: "%s%s: %s %d:%d-%d<br/><br/>"),
 				       HTML_START,
 				       settings.MainWindowModule,
 				       book,
@@ -322,8 +322,8 @@ static void _export_verse_range (EXPORT_DATA data, int type)
 	else
 		g_string_append_printf(str,
 				       (settings.showversenum
-					? "\n%s: %s Chapter %d\n\n"
-					: "\n%s: %s %d:%d-%d\n\n"),
+					? "%s: %s Chapter %d\n\n"
+					: "%s: %s %d:%d-%d\n\n"),
 				       settings.MainWindowModule,
 				       book,
 				       key->Chapter(),
@@ -343,14 +343,14 @@ static void _export_verse_range (EXPORT_DATA data, int type)
 		if (type == HTML)
 			g_string_append_printf(str," %s%s",
 					       (char*)mod->RenderText(),
-					       (settings.versestyle ? "<BR>" : ""));
+					       (settings.versestyle ? "<br/>" : ""));
 		else
 			g_string_append_printf(str," %s%s",
 					       (char*)mod->StripText(),
 					       (settings.versestyle ? "\n" : ""));
 	}
 	if (type == HTML)
-		g_string_append_printf(str,"%s","</BODY></HTML>");
+		g_string_append_printf(str,"%s","</body></html>");
 	if (data.filename)
 		_save(data.filename, str->str,str->len);
 	else
