@@ -259,14 +259,15 @@ void main_do_sidebar_search(gpointer user_data)
 	// if we do lucene search (-4), we assume AND for simple sidebar search.
 	// therefore, we must prepend '+' to each word to force that semantic.
 	if (settings.searchType == -4) {
+		g_string_append_c(new_search, '+');
 		while (*search_string) {
-			if (isalnum(*search_string))
-				g_string_append_c(new_search, '+');
 			while (((*search_string) != ' ') && ((*search_string) != '\0'))
 				g_string_append_c(new_search, *(search_string++));
 			if ((*search_string) == ' ') {
 				g_string_append_c(new_search, ' ');
 				search_string++;
+				if ((*search_string) != '\0')
+					g_string_append_c(new_search, '+');
 			}
 		}
 		search_string = new_search->str;

@@ -1,7 +1,8 @@
 2011-09-20  karl <charcoal@users.sf.net>
 
-	* add gconf to wscript for explicit detection.
+	* fix #3411260 add gconf to wscript for explicit detection.
 	* tidy up passage export whitespace formatting; correct an html error.
+	* fix #3384710 bad sidebar search implicit AND construction.
 
 2011-09-02  karl <charcoal@users.sf.net>
 
