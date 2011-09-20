@@ -578,6 +578,10 @@ int xml_create_settings_file(char *path)
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"versestyle", (const xmlChar *)"1");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"pinnedtabs", (const xmlChar *)"0");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"showversenum", (const xmlChar *)"1");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"imageresize", (const xmlChar *)"1");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"verse_num_bold", (const xmlChar *)"0");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"verse_num_bracket", (const xmlChar *)"0");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"verse_num_superscript", (const xmlChar *)"0");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"readaloud", (const xmlChar *)"0");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"versehighlight", (const xmlChar *)"0");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"annotatehighlight", (const xmlChar *)"1");

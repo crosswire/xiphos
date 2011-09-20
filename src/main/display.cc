@@ -820,13 +820,19 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule)
 		vbuf = g_strdup_printf((settings.showversenum
 					? "<td valign=\"top\" align=\"right\">"
 					"<a name=\"%d\" href=\"sword:///%s\">"
-					"<font size=\"%+d\" color=\"%s\">%s</font></a></td>"
+					"<font size=\"%+d\" color=\"%s\">%s%s%s%s%s%s%s</font></a></td>"
 					: "<p/><a name=\"%d\"> </a>"),
 				       key->Verse(),
 				       (char*)key->getText(),
 				       settings.verse_num_font_size + settings.base_font_size,
 				       settings.bible_verse_num_color,
-				       num);
+				       (settings.verse_num_superscript ? superscript_start : ""),
+				       (settings.verse_num_bracket ? "[" : ""),
+				       (settings.verse_num_bold ? bold_start : ""),
+				       num,
+				       (settings.verse_num_bold ? bold_end : ""),
+				       (settings.verse_num_bracket ? "]" : ""),
+				       (settings.verse_num_superscript ? superscript_end : ""));
 		g_free(num);
 
 		swbuf.append(vbuf);
@@ -1061,7 +1067,7 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 		num = main_format_number(key->Verse());
 		buf=g_strdup_printf(settings.showversenum
 				? "&nbsp; <a name=\"%d\" href=\"sword:///%s\">"
-				  "<font size=\"%+d\" color=\"%s\">%s</font></a>&nbsp;"
+				  "<font size=\"%+d\" color=\"%s\">%s%s%s%s%s%s%s</font></a>&nbsp;"
 				: "&nbsp; <a name=\"%d\"> </a>",
 				0,
 				(char*)key->getText(),
@@ -1069,7 +1075,13 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 				 ? settings.verse_num_font_size + settings.base_font_size
 				 : settings.base_font_size - 2),
 				settings.bible_verse_num_color,
-				num);
+				(settings.verse_num_superscript ? superscript_start : ""),
+				(settings.verse_num_bracket ? "[" : ""),
+				(settings.verse_num_bold ? bold_start : ""),
+				num,
+				(settings.verse_num_bold ? bold_end : ""),
+				(settings.verse_num_bracket ? "]" : ""),
+				(settings.verse_num_superscript ? superscript_end : ""));
 		g_free(num);
 		swbuf.append(buf);
 		g_free(buf);
@@ -1181,7 +1193,7 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 		num = main_format_number(key->Verse());
 		buf=g_strdup_printf(settings.showversenum
 				? "&nbsp; <a name=\"%d\" href=\"sword:///%s\">"
-				  "<font size=\"%+d\" color=\"%s\">%s</font></a>&nbsp;"
+				  "<font size=\"%+d\" color=\"%s\">%s%s%s%s%s%s%s</font></a>&nbsp;"
 				: "&nbsp; <a name=\"%d\"> </a>",
 				0,
 				(char*)key->getText(),
@@ -1189,7 +1201,13 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 				 ? settings.verse_num_font_size + settings.base_font_size
 				 : settings.base_font_size - 2),
 				settings.bible_verse_num_color,
-				num);
+				(settings.verse_num_superscript ? superscript_start : ""),
+				(settings.verse_num_bracket ? "[" : ""),
+				(settings.verse_num_bold ? bold_start : ""),
+				num,
+				(settings.verse_num_bold ? bold_end : ""),
+				(settings.verse_num_bracket ? "]" : ""),
+				(settings.verse_num_superscript ? superscript_end : ""));
 		g_free(num);
 		swbuf.append(buf);
 		g_free(buf);
@@ -1360,7 +1378,7 @@ GTKChapDisp::Display(SWModule &imodule)
 		num = main_format_number(key->Verse());
 		buf = g_strdup_printf(settings.showversenum
 			? "&nbsp; <span class=\"word\"><a name=\"%d\" href=\"sword:///%s\">"
-			  "<font size=\"%+d\" color=\"%s\">%s</font></a></span>&nbsp;"
+			  "<font size=\"%+d\" color=\"%s\">%s%s%s%s%s%s%s</font></a></span>&nbsp;"
 			: "&nbsp; <a name=\"%d\"> </a>",
 			key->Verse(),
 			(char*)key->getText(),
@@ -1371,7 +1389,13 @@ GTKChapDisp::Display(SWModule &imodule)
 			    ? settings.highlight_bg
 			    : settings.highlight_fg)
 			 : settings.bible_verse_num_color),
-			num);
+			(settings.verse_num_superscript ? superscript_start : ""),
+			(settings.verse_num_bracket ? "[" : ""),
+			(settings.verse_num_bold ? bold_start : ""),
+			num,
+			(settings.verse_num_bold ? bold_end : ""),
+			(settings.verse_num_bracket ? "]" : ""),
+			(settings.verse_num_superscript ? superscript_end : ""));
 		g_free(num);
 		swbuf.append(buf);
 		g_free(buf);
@@ -1806,7 +1830,7 @@ DialogChapDisp::Display(SWModule &imodule)
 		num = main_format_number(key->Verse());
 		buf = g_strdup_printf(settings.showversenum
 			? "&nbsp; <a name=\"%d\" href=\"sword:///%s\">"
-			  "<font size=\"%+d\" color=\"%s\">%s</font></a>&nbsp;"
+			  "<font size=\"%+d\" color=\"%s\">%s%s%s%s%s%s%s</font></a>&nbsp;"
 			: "&nbsp; <a name=\"%d\"> </a>",
 			key->Verse(),
 			(char*)key->getText(),
@@ -1817,7 +1841,13 @@ DialogChapDisp::Display(SWModule &imodule)
 			    ? settings.highlight_bg
 			    : settings.highlight_fg)
 			 : settings.bible_verse_num_color),
-			num);
+			(settings.verse_num_superscript ? superscript_start : ""),
+			(settings.verse_num_bracket ? "[" : ""),
+			(settings.verse_num_bold ? bold_start : ""),
+			num,
+			(settings.verse_num_bold ? bold_end : ""),
+			(settings.verse_num_bracket ? "]" : ""),
+			(settings.verse_num_superscript ? superscript_end : ""));
 		g_free(num);
 		swbuf.append(buf);
 		g_free(buf);
@@ -2065,13 +2095,19 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 		num = main_format_number(key->Verse());
 		buf=g_strdup_printf(settings.showversenum
 			? "&nbsp; <a name=\"%d\" href=\"sword:///%s\">"
-			  "<font size=\"%+d\" color=\"%s\">%s</font></a>&nbsp;"
+			  "<font size=\"%+d\" color=\"%s\">%s%s%s%s%s%s%s</font></a>&nbsp;"
 			: "&nbsp; <a name=\"%d\"> </a>",
 			key->Verse(),
 			(char*)key->getText(),
 			settings.verse_num_font_size + settings.base_font_size,
 			settings.bible_verse_num_color,
-			num);
+			(settings.verse_num_superscript ? superscript_start : ""),
+			(settings.verse_num_bracket ? "[" : ""),
+			(settings.verse_num_bold ? bold_start : ""),
+			num,
+			(settings.verse_num_bold ? bold_end : ""),
+			(settings.verse_num_bracket ? "]" : ""),
+			(settings.verse_num_superscript ? superscript_end : ""));
 		g_free(num);
 		swbuf.append(buf);
 		g_free(buf);

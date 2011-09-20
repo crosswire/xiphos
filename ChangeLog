@@ -4,6 +4,7 @@
 	* tidy up passage export whitespace formatting; correct an html error.
 	* fix #3384710 bad sidebar search implicit AND construction.
 	* fix #3400041 correct startup previewer show-or-not.
+	* feat.req #3210164 verse number display customization.
 
 2011-09-02  karl <charcoal@users.sf.net>
 

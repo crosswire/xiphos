@@ -63,6 +63,10 @@
  */
 SETTINGS settings;
 
+char *bold_start = "<b>",
+     *bold_end   = "</b>",
+     *superscript_start = "<sup>",
+     *superscript_end   = "</sup>";
 
 /******************************************************************************
  * static
@@ -791,6 +795,27 @@ void load_settings_structure(void)
 	else {
 		xml_add_new_item_to_section("misc", "showversenum", "1");
 		settings.showversenum = 1;
+	}
+
+	if ((buf = xml_get_value("misc", "verse_num_bold")))
+		settings.verse_num_bold = atoi(buf);
+	else {
+		xml_add_new_item_to_section("misc", "verse_num_bold", "0");
+		settings.verse_num_bold = 0;
+	}
+
+	if ((buf = xml_get_value("misc", "verse_num_bracket")))
+		settings.verse_num_bracket = atoi(buf);
+	else {
+		xml_add_new_item_to_section("misc", "verse_num_bracket", "0");
+		settings.verse_num_bracket = 0;
+	}
+
+	if ((buf = xml_get_value("misc", "verse_num_superscript")))
+		settings.verse_num_superscript = atoi(buf);
+	else {
+		xml_add_new_item_to_section("misc", "verse_num_superscript", "0");
+		settings.verse_num_superscript = 0;
 	}
 
 	if ((buf = xml_get_value("misc", "versehighlight")))
