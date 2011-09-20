@@ -113,13 +113,14 @@ static gchar *true_false2yes_no(int true_false)
  * Return value
  *   void
  */
-void gui_recompute_shows(void)
+void gui_recompute_shows(gboolean flush)
 {
 	if (stop_refresh)
 		return;
 	stop_refresh = TRUE;
 
-	main_flush_widgets_content();
+	if (flush)
+		main_flush_widgets_content();
 
 	if (cur_passage_tab)
 		gui_reassign_strdup(&settings.currentverse,
@@ -224,7 +225,7 @@ void set_current_tab (PASSAGE_TAB_INFO *pt)
 		settings.showcomms   = pt->showcomms;
 		settings.showdicts   = pt->showdicts;
 		settings.comm_showing = pt->comm_showing;
-		gui_recompute_shows();
+		gui_recompute_shows(TRUE);
 	}
 }
 
