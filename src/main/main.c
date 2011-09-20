@@ -209,6 +209,8 @@ int main(int argc, char *argv[])
 #endif
 	g_idle_add ((GSourceFunc)gui_splash_done, NULL);
 
+	gui_recompute_shows(FALSE);
+
 	gui_main();
 	return 0;
 }
