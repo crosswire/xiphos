@@ -355,10 +355,11 @@ def configure(conf):
     define('PACKAGE_MENU_DIR', conf.escpath(sub('${DATAROOTDIR}/applications', env)))
     #define('PACKAGE_PIXMAPS_DIR', conf.escpath(sub('${DATAROOTDIR}/pixmaps/${PACKAGE}', env)))
     define('PACKAGE_PIXMAPS_DIR', conf.escpath(sub('${DATAROOTDIR}/${PACKAGE}', env)))
-    define('PACKAGE_SOURCE_DIR', conf.escpath(os.path.abspath(srcdir))) # foder where was wscript executed
+    define('PACKAGE_SOURCE_DIR', conf.escpath(os.path.abspath(srcdir))) # folder where was wscript executed
 
     common_libs = string.join(
     '''
+    "gconf-2.0"
     "gmodule-2.0"
     "glib-2.0"
     "libgsf-1 >= 1.14"
@@ -383,8 +384,8 @@ def configure(conf):
         common_libs += ' "libgtkhtml-3.14 >= 3.23" '
         if conf.check_cfg(modversion='gtkhtml-editor-3.14',
                           msg='Checking for GNOME3 gtkhtml-editor',
-                          okmsg='Deffinatly',
-                          errmsg='Probably, not'
+                          okmsg='Definitely',
+                          errmsg='Probably not'
                           ):
             common_libs += ' "gtkhtml-editor-3.14" '
         else:
