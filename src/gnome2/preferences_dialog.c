@@ -104,6 +104,9 @@ struct _preferences_check_buttons {
 	GtkWidget *use_linked_tabs;
 	GtkWidget *use_chapter_scroll;
 	GtkWidget *use_imageresize;
+	GtkWidget *use_verse_num_bold;
+	GtkWidget *use_verse_num_bracket;
+	GtkWidget *use_verse_num_superscript;
 	GtkWidget *readaloud;
 	GtkWidget *show_verse_num;
 	GtkWidget *versehighlight;
@@ -974,6 +977,96 @@ on_checkbutton_imageresize_toggled(GtkToggleButton * togglebutton,
 		      (gtk_toggle_button_get_active (togglebutton) ? "1" : "0"));
 	settings.imageresize =  gtk_toggle_button_get_active (togglebutton);
 }
+
+/******************************************************************************
+ * Name
+ *   on_checkbutton_verse_num_bold_toggled
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_checkbutton_verse_num_bold_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+ *
+ * Description
+ *
+ *
+ *
+ * Return value
+ *   void
+ */
+
+void
+on_checkbutton_verse_num_bold_toggled(GtkToggleButton * togglebutton,
+				      gpointer user_data)
+{
+	xml_set_value("Xiphos", "misc", "verse_num_bold",
+		      (gtk_toggle_button_get_active (togglebutton) ? "1" : "0"));
+	settings.verse_num_bold = atoi(xml_get_value("misc", "verse_num_bold"));
+	char *url = g_strdup_printf("sword:///%s", settings.currentverse);
+	main_url_handler(url, TRUE);
+	g_free(url);
+}
+
+
+/******************************************************************************
+ * Name
+ *   on_checkbutton_verse_num_bracket_toggled
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_checkbutton_verse_num_bracket_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+ *
+ * Description
+ *
+ *
+ *
+ * Return value
+ *   void
+ */
+
+void
+on_checkbutton_verse_num_bracket_toggled(GtkToggleButton * togglebutton,
+					 gpointer user_data)
+{
+	xml_set_value("Xiphos", "misc", "verse_num_bracket",
+		      (gtk_toggle_button_get_active (togglebutton) ? "1" : "0"));
+	settings.verse_num_bracket = atoi(xml_get_value("misc", "verse_num_bracket"));
+	char *url = g_strdup_printf("sword:///%s", settings.currentverse);
+	main_url_handler(url, TRUE);
+	g_free(url);
+}
+
+
+/******************************************************************************
+ * Name
+ *   on_checkbutton_verse_num_superscript_toggled
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_checkbutton_verse_num_superscript_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+ *
+ * Description
+ *
+ *
+ *
+ * Return value
+ *   void
+ */
+
+void
+on_checkbutton_verse_num_superscript_toggled(GtkToggleButton * togglebutton,
+					     gpointer user_data)
+{
+	xml_set_value("Xiphos", "misc", "verse_num_superscript",
+		      (gtk_toggle_button_get_active (togglebutton) ? "1" : "0"));
+	settings.verse_num_superscript = atoi(xml_get_value("misc", "verse_num_superscript"));
+	char *url = g_strdup_printf("sword:///%s", settings.currentverse);
+	main_url_handler(url, TRUE);
+	g_free(url);
+}
+
 
 /******************************************************************************
  * Name
@@ -1864,6 +1957,15 @@ setup_check_buttons(void)
 				     (check_button.use_imageresize),
 				     settings.imageresize);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+				     (check_button.use_verse_num_bold),
+				     settings.verse_num_bold);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+				     (check_button.use_verse_num_bracket),
+				     settings.verse_num_bracket);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+				     (check_button.use_verse_num_superscript),
+				     settings.verse_num_superscript);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.versehighlight),
 				     settings.versehighlight);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
@@ -1900,6 +2002,12 @@ setup_check_buttons(void)
 			 G_CALLBACK(on_checkbutton_scroll_toggled), NULL);
 	g_signal_connect(check_button.use_imageresize, "toggled",
 			 G_CALLBACK(on_checkbutton_imageresize_toggled), NULL);
+	g_signal_connect(check_button.use_verse_num_bold, "toggled",
+			 G_CALLBACK(on_checkbutton_verse_num_bold_toggled), NULL);
+	g_signal_connect(check_button.use_verse_num_bracket, "toggled",
+			 G_CALLBACK(on_checkbutton_verse_num_bracket_toggled), NULL);
+	g_signal_connect(check_button.use_verse_num_superscript, "toggled",
+			 G_CALLBACK(on_checkbutton_verse_num_superscript_toggled), NULL);
 	g_signal_connect(check_button.versehighlight, "toggled",
 			 G_CALLBACK(on_checkbutton_versehighlight_toggled), NULL);
 	g_signal_connect(check_button.annotate_highlight, "toggled",
@@ -2560,6 +2668,9 @@ create_preferences_dialog(void)
 	check_button.use_chapter_scroll = GTK_WIDGET (gtk_builder_get_object(gxml, "checkbutton_scroll"));
 
 	check_button.use_imageresize = GTK_WIDGET (gtk_builder_get_object(gxml, "checkbutton_imageresize"));
+	check_button.use_verse_num_bold = GTK_WIDGET (gtk_builder_get_object(gxml, "checkbutton_verse_num_bold"));
+	check_button.use_verse_num_bracket = GTK_WIDGET (gtk_builder_get_object(gxml, "checkbutton_verse_num_bracket"));
+	check_button.use_verse_num_superscript = GTK_WIDGET (gtk_builder_get_object(gxml, "checkbutton_verse_num_superscript"));
 	check_button.versehighlight = GTK_WIDGET (gtk_builder_get_object(gxml, "checkbutton_versehighlight"));
 	check_button.annotate_highlight = GTK_WIDGET (gtk_builder_get_object(gxml, "checkbutton_annotate_highlight"));
 	check_button.xrefs_in_verse_list = GTK_WIDGET (gtk_builder_get_object(gxml, "checkbutton_xrefs_in_verse_list"));
@@ -2592,6 +2703,9 @@ create_preferences_dialog(void)
 	check_button.use_chapter_scroll = glade_xml_get_widget(gxml, "checkbutton_scroll");
 
 	check_button.use_imageresize = glade_xml_get_widget(gxml, "checkbutton_imageresize");
+	check_button.use_verse_num_bold = glade_xml_get_widget(gxml, "checkbutton_verse_num_bold");
+	check_button.use_verse_num_bracket = glade_xml_get_widget(gxml, "checkbutton_verse_num_bracket");
+	check_button.use_verse_num_superscript = glade_xml_get_widget(gxml, "checkbutton_verse_num_superscript");
 	check_button.versehighlight = glade_xml_get_widget(gxml, "checkbutton_versehighlight");
 	check_button.annotate_highlight = glade_xml_get_widget(gxml, "checkbutton_annotate_highlight");
 	check_button.xrefs_in_verse_list = glade_xml_get_widget(gxml, "checkbutton_xrefs_in_verse_list");
