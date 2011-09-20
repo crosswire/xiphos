@@ -3,11 +3,11 @@ echo ----------------------------------------------------------------
 echo ./configure is no longer used in building Xiphos.
 echo please run "'./waf --help'" to understand current build habits.
 echo for linux and unix, we recommend
-echo '    ./waf configure --prefix=/usr --debug-level=optimized --enable-delint'
-echo for distribution-ready builds, although we require only --prefix.
+echo '    ./waf configure --prefix=/usr --gtk=auto --backend=webkit --debug-level=optimized'
+echo for distribution-ready builds.
 echo then
 echo '    ./waf build'
 echo and
-echo '    ./waf install'
+echo '    sudo ./waf install'
 echo ----------------------------------------------------------------
 exit 1
