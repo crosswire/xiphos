@@ -1378,6 +1378,87 @@
                           </packing>
                         </child>
                         <child>
+                          <object class="GtkCheckButton" id="checkbutton_verse_num_bold">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="label" translatable="yes">Verse number: Bold</property>
+                            <property name="tooltip-text" translatable="yes">Show verse number in bold text</property>
+                            <property name="use_underline">True</property>
+                            <property name="relief">GTK_RELIEF_NORMAL</property>
+                            <property name="focus_on_click">True</property>
+                            <property name="active">True</property>
+                            <property name="inconsistent">False</property>
+                            <property name="draw_indicator">True</property>
+                            <accessibility>
+			    
+			  </accessibility>
+                            <child internal-child="accessible">
+                              <object class="AtkObject" id="a11y-checkbutton_verse_num_bold1">
+                                <property name="AtkObject::accessible_name" translatable="yes">Verse number bold checkbox</property>
+                              </object>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="padding">0</property>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkCheckButton" id="checkbutton_verse_num_bracket">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="label" translatable="yes">Verse number: Brackets</property>
+                            <property name="tooltip-text" translatable="yes">Show verse number with [surrounding brackets]</property>
+                            <property name="use_underline">True</property>
+                            <property name="relief">GTK_RELIEF_NORMAL</property>
+                            <property name="focus_on_click">True</property>
+                            <property name="active">True</property>
+                            <property name="inconsistent">False</property>
+                            <property name="draw_indicator">True</property>
+                            <accessibility>
+			    
+			  </accessibility>
+                            <child internal-child="accessible">
+                              <object class="AtkObject" id="a11y-checkbutton_verse_num_bracket1">
+                                <property name="AtkObject::accessible_name" translatable="yes">Verse number bracket checkbox</property>
+                              </object>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="padding">0</property>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkCheckButton" id="checkbutton_verse_num_superscript">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="label" translatable="yes">Verse number: Superscript</property>
+                            <property name="tooltip-text" translatable="yes">Show verse number as a superscript</property>
+                            <property name="use_underline">True</property>
+                            <property name="relief">GTK_RELIEF_NORMAL</property>
+                            <property name="focus_on_click">True</property>
+                            <property name="active">True</property>
+                            <property name="inconsistent">False</property>
+                            <property name="draw_indicator">True</property>
+                            <accessibility>
+			    
+			  </accessibility>
+                            <child internal-child="accessible">
+                              <object class="AtkObject" id="a11y-checkbutton_verse_num_superscript1">
+                                <property name="AtkObject::accessible_name" translatable="yes">Verse number superscript checkbox</property>
+                              </object>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="padding">0</property>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                          </packing>
+                        </child>
+                        <child>
                           <object class="GtkCheckButton" id="checkbutton_annotate_highlight">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
