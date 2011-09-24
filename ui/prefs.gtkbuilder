@@ -904,21 +904,15 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkCheckButton" id="checkbutton6">
-                            <property name="label" translatable="yes">Use default Dictionary</property>
+                          <object class="GtkCheckButton" id="checkbutton8">
+                            <property name="label" translatable="yes">Show splash screen at start up</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
-                            <property name="tooltip_text" translatable="yes">Make double-click of a word always use default dictionary instead of dictionary currently displayed</property>
                             <property name="use_action_appearance">False</property>
                             <property name="use_underline">True</property>
                             <property name="active">True</property>
                             <property name="draw_indicator">True</property>
-                            <child internal-child="accessible">
-                              <object class="AtkObject" id="checkbutton6-atkobject">
-                                <property name="AtkObject::accessible-name" translatable="yes">Use default Dictionary Checkbox</property>
-                              </object>
-                            </child>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -945,15 +939,21 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkCheckButton" id="checkbutton8">
-                            <property name="label" translatable="yes">Show splash screen at start up</property>
+                          <object class="GtkCheckButton" id="checkbutton6">
+                            <property name="label" translatable="yes">Use default Dictionary</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
+                            <property name="tooltip_text" translatable="yes">Make double-click of a word always use default dictionary instead of dictionary currently displayed</property>
                             <property name="use_action_appearance">False</property>
                             <property name="use_underline">True</property>
                             <property name="active">True</property>
                             <property name="draw_indicator">True</property>
+                            <child internal-child="accessible">
+                              <object class="AtkObject" id="checkbutton6-atkobject">
+                                <property name="AtkObject::accessible-name" translatable="yes">Use default Dictionary Checkbox</property>
+                              </object>
+                            </child>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -1028,6 +1028,75 @@
                             <property name="expand">False</property>
                             <property name="fill">False</property>
                             <property name="position">6</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkCheckButton" id="checkbutton_annotate_highlight">
+                            <property name="label" translatable="yes">Highlight user annotations</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="tooltip_text" translatable="yes">Use inverted highlight on user-annotated verses</property>
+                            <property name="use_action_appearance">False</property>
+                            <property name="use_underline">True</property>
+                            <property name="active">True</property>
+                            <property name="draw_indicator">True</property>
+                            <child internal-child="accessible">
+                              <object class="AtkObject" id="checkbutton_annotate_highlight-atkobject">
+                                <property name="AtkObject::accessible-name" translatable="yes">Highlight user annotations check box</property>
+                              </object>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">7</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkCheckButton" id="checkbutton_xrefs_in_verse_list">
+                            <property name="label" translatable="yes">Cross-references in verse list</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="tooltip_text" translatable="yes">Use the verse list for Bible cross-references instead of the previewer</property>
+                            <property name="use_action_appearance">False</property>
+                            <property name="use_underline">True</property>
+                            <property name="active">True</property>
+                            <property name="draw_indicator">True</property>
+                            <child internal-child="accessible">
+                              <object class="AtkObject" id="checkbutton_xrefs_in_verse_list-atkobject">
+                                <property name="AtkObject::accessible-name" translatable="yes">Xrefs in verse list check box</property>
+                              </object>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">8</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkCheckButton" id="checkbutton_prayerlist">
+                            <property name="label" translatable="yes">Enable Prayer Lists</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="tooltip_text" translatable="yes">Make journals/prayer lists available</property>
+                            <property name="use_action_appearance">False</property>
+                            <property name="use_underline">True</property>
+                            <property name="active">True</property>
+                            <property name="draw_indicator">True</property>
+                            <child internal-child="accessible">
+                              <object class="AtkObject" id="checkbutton_prayerlist-atkobject">
+                                <property name="AtkObject::accessible-name" translatable="yes">Enable Prayer Lists Checkbox</property>
+                              </object>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">9</property>
                           </packing>
                         </child>
                         <child>
@@ -1130,7 +1199,7 @@
                           <packing>
                             <property name="expand">True</property>
                             <property name="fill">True</property>
-                            <property name="position">7</property>
+                            <property name="position">10</property>
                           </packing>
                         </child>
                         <child>
@@ -1141,75 +1210,6 @@
                         </child>
                         <child>
                           <placeholder/>
-                        </child>
-                        <child>
-                          <object class="GtkCheckButton" id="checkbutton_annotate_highlight">
-                            <property name="label" translatable="yes">Highlight user annotations</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">False</property>
-                            <property name="tooltip_text" translatable="yes">Use inverted highlight on user-annotated verses</property>
-                            <property name="use_action_appearance">False</property>
-                            <property name="use_underline">True</property>
-                            <property name="active">True</property>
-                            <property name="draw_indicator">True</property>
-                            <child internal-child="accessible">
-                              <object class="AtkObject" id="checkbutton_annotate_highlight-atkobject">
-                                <property name="AtkObject::accessible-name" translatable="yes">Highlight user annotations check box</property>
-                              </object>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
-                            <property name="position">11</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkCheckButton" id="checkbutton_xrefs_in_verse_list">
-                            <property name="label" translatable="yes">Cross-references in verse list</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">False</property>
-                            <property name="tooltip_text" translatable="yes">Use the verse list for Bible cross-references instead of the previewer</property>
-                            <property name="use_action_appearance">False</property>
-                            <property name="use_underline">True</property>
-                            <property name="active">True</property>
-                            <property name="draw_indicator">True</property>
-                            <child internal-child="accessible">
-                              <object class="AtkObject" id="checkbutton_xrefs_in_verse_list-atkobject">
-                                <property name="AtkObject::accessible-name" translatable="yes">Xrefs in verse list check box</property>
-                              </object>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
-                            <property name="position">12</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkCheckButton" id="checkbutton_prayerlist">
-                            <property name="label" translatable="yes">Enable Prayer Lists</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">False</property>
-                            <property name="tooltip_text" translatable="yes">Make journals/prayer lists available</property>
-                            <property name="use_action_appearance">False</property>
-                            <property name="use_underline">True</property>
-                            <property name="active">True</property>
-                            <property name="draw_indicator">True</property>
-                            <child internal-child="accessible">
-                              <object class="AtkObject" id="checkbutton_prayerlist-atkobject">
-                                <property name="AtkObject::accessible-name" translatable="yes">Enable Prayer Lists Checkbox</property>
-                              </object>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
-                            <property name="position">13</property>
-                          </packing>
                         </child>
                       </object>
                       <packing>
