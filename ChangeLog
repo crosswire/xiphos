@@ -1,3 +1,13 @@
+2011-09-24  karl <charcoal@users.sf.net>
+
+	* darker green current verse.
+	* re-arrange prefs->options display order.
+	* feat.req #3168708 more tweaks to export format, mostly single-verse.
+
+2011-09-24  terry  <tbiggs@users.sf.net>
+
+	* customization improvement: single line of verse# selectors.
+
 2011-09-20  karl <charcoal@users.sf.net>
 
 	* fix #3411260 add gconf to wscript for explicit detection.
