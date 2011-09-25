@@ -684,11 +684,17 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 		if (state == (GDK_CONTROL_MASK|GDK_SHIFT_MASK))
 			new_base_font_size(TRUE);
 		break;
-
 	case XK_minus: // Ctrl-Minus  Decrease base font size
 		if (state == GDK_CONTROL_MASK)
 			new_base_font_size(FALSE);
 		break;
+	case XK_0: // Ctrl-0 (zero)  Neutralize base font size.
+		if (state == GDK_CONTROL_MASK) {
+			settings.base_font_size = 1;
+			new_base_font_size(FALSE);
+		}
+		break;
+
 	case XK_F1: // F1 help
 		if (state == 0)
 			on_help_contents_activate(NULL, NULL);
