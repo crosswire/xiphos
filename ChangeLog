@@ -4,6 +4,7 @@
 	* re-arrange prefs->options display order.
 	* feat.req #3168708 more tweaks to export format, mostly single-verse.
 	* add Ctrl-0 to force base font size to 0.
+	* make footnotes, xrefs, and headings default to On.
 
 2011-09-24  terry  <tbiggs@users.sf.net>
 
