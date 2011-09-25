@@ -201,20 +201,14 @@ GLOBAL_OPS *main_new_globals(gchar * mod_name)
 	    gui_of2tf(module_options[mod_name]["Strong's Numbers"].c_str());
 	ops->morphs =
 	    gui_of2tf(module_options[mod_name]["Morphological Tags"].c_str());
-	ops->footnotes =
-	    gui_of2tf(module_options[mod_name]["Footnotes"].c_str());
 	ops->greekaccents =
 	    gui_of2tf(module_options[mod_name]["Greek Accents"].c_str());
 	ops->lemmas =
 	    gui_of2tf(module_options[mod_name]["Lemmas"].c_str());
-	ops->scripturerefs =
-	    gui_of2tf(module_options[mod_name]["Scripture Cross-references"].c_str());
 	ops->hebrewpoints =
 	    gui_of2tf(module_options[mod_name]["Hebrew Vowel Points"].c_str());
 	ops->hebrewcant =
 	    gui_of2tf(module_options[mod_name]["Hebrew Cantillation"].c_str());
-	ops->headings =
-	    gui_of2tf(module_options[mod_name]["Headings"].c_str());
 	ops->transliteration =
 	    gui_of2tf(module_options[mod_name]["Transliteration"].c_str());
 
@@ -229,6 +223,15 @@ GLOBAL_OPS *main_new_globals(gchar * mod_name)
 	    (ops->variants_secondary == FALSE)) {
 		ops->variants_primary = TRUE;
 	}
+
+	// special case options, default on:
+	ops->footnotes =
+	    (module_options[mod_name]["Footnotes"] != "Off");
+	ops->scripturerefs =
+	    (module_options[mod_name]["Scripture Cross-references"] != "Off");
+	ops->headings =
+	    (module_options[mod_name]["Headings"] != "Off");
+
 	ops->verse_per_line = 
 	    (*(module_options[mod_name]["style"].c_str()) == 'v')
 	    ? 1	
