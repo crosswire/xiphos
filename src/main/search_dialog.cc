@@ -947,8 +947,9 @@ void main_finds_verselist_selection_changed(GtkTreeSelection * selection,
 
 #ifdef USE_XIPHOS_HTML
 	GString *html_text = g_string_new("");
-	g_string_printf(html_text, HTML_START "<body text=\"%s\" bgcolor=\"%s\">",
-			settings.bible_text_color, settings.bible_bg_color);
+	g_string_printf(html_text, HTML_START "<body text=\"%s\" bgcolor=\"%s\" link=\"%s\">",
+			settings.bible_text_color, settings.bible_bg_color,
+			settings.link_color);
 	g_string_append(html_text, text_str->str);
 	g_string_append(html_text, "</body></html>");	
 	XIPHOS_HTML_OPEN_STREAM(search1.preview_html, "text/html");
