@@ -23,7 +23,6 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-//#ifdef USE_EXPORTER
 
 #include <gtk/gtk.h>
 #ifndef USE_GTKBUILDER
@@ -54,6 +53,7 @@ struct _export_dialog {
 	GtkWidget *rb_chapter;
 	GtkWidget *rb_verse;
 	GtkWidget *rb_multi_verse;
+	GtkWidget *cb_versenum;
 	GtkWidget *rb_html;
 	GtkWidget *rb_plain;
 	GtkWidget *lb_version;
@@ -203,6 +203,8 @@ void on_dialog_export_passage_response(GtkDialog * dialog,
 			 : gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(d.rb_chapter)) ? CHAPTER
 			 : gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(d.rb_verse)) ? VERSE
 			 : VERSE_RANGE;
+
+		edata.verse_num = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(d.cb_versenum));
 
 		if (edata.passage_type == VERSE_RANGE) {
 			edata.start_verse =
@@ -355,6 +357,7 @@ void gui_export_dialog(void)
 	d.rb_chapter = GTK_WIDGET (gtk_builder_get_object (gxml, "radiobutton2"));
 	d.rb_verse = GTK_WIDGET (gtk_builder_get_object (gxml, "radiobutton3"));
 	d.rb_multi_verse = GTK_WIDGET (gtk_builder_get_object (gxml, "rb_multi_verse"));
+	d.cb_versenum = GTK_WIDGET (gtk_builder_get_object (gxml, "check_versenum"));
 	d.rb_html = GTK_WIDGET (gtk_builder_get_object (gxml, "radiobutton4"));
 	d.rb_plain = GTK_WIDGET (gtk_builder_get_object (gxml, "radiobutton5"));
 	d.rb_copy = GTK_WIDGET (gtk_builder_get_object (gxml, "rb_copy"));
@@ -373,6 +376,7 @@ void gui_export_dialog(void)
 	d.rb_chapter = glade_xml_get_widget(gxml, "radiobutton2");
 	d.rb_verse = glade_xml_get_widget(gxml, "radiobutton3");
 	d.rb_multi_verse = glade_xml_get_widget(gxml, "rb_multi_verse");
+	d.cb_versenum = glade_xml_get_widget(gxml, "check_versenum");
 	d.rb_html = glade_xml_get_widget(gxml, "radiobutton4");
 	d.rb_plain = glade_xml_get_widget(gxml, "radiobutton5");
 	d.rb_copy = glade_xml_get_widget(gxml, "rb_copy");
@@ -427,4 +431,3 @@ void gui_export_dialog(void)
 
 
 }
-//#endif
