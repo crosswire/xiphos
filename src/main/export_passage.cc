@@ -131,7 +131,7 @@ static void _save(char *filename, char* text,int len)
 		g_free(filename);
 }
 
-static void _export_book(char *filename, int type)
+static void _export_book(EXPORT_DATA data, int type)
 {
 	GString *str = g_string_new(NULL);
 	SWMgr *mgr = backend->get_mgr();
@@ -167,7 +167,7 @@ static void _export_book(char *filename, int type)
 				g_string_append_printf(str,"\n\nChapter %d\n\n", curChapter);
 		}
 
-		if (settings.showversenum)
+		if (data.verse_num)
 			g_string_append_printf(str,
 					       ((type == HTML)
 						? "&nbsp;&nbsp;[%d]"
@@ -188,14 +188,14 @@ static void _export_book(char *filename, int type)
 	}
 	if (type == HTML)
 		g_string_append_printf(str,"%s","</body></html>");
-	if (filename)
-		_save(filename, str->str,str->len);
+	if (data.filename)
+		_save(data.filename, str->str,str->len);
 	else
 		_copy_to_clipboard (str->str, str->len);
 	g_string_free(str,TRUE);
 }
 
-static void _export_chapter(char *filename, int type)
+static void _export_chapter(EXPORT_DATA data, int type)
 {
 	GString *str = g_string_new(NULL);
 	char* book;
@@ -228,7 +228,7 @@ static void _export_chapter(char *filename, int type)
 	     !mod->Error();
 	     (*mod)++) {
 
-		if (settings.showversenum)
+		if (data.verse_num)
 			g_string_append_printf(str, " [%d]", myverse);
 
 		if (type == HTML)
@@ -243,8 +243,8 @@ static void _export_chapter(char *filename, int type)
 	}
 	if (type == HTML)
 		g_string_append_printf(str,"%s","</body></html>");
-	if (filename)
-		_save(filename, str->str,str->len);
+	if (data.filename)
+		_save(data.filename, str->str,str->len);
 	else
 		_copy_to_clipboard (str->str, str->len);
 	g_string_free(str,TRUE);
@@ -253,7 +253,7 @@ static void _export_chapter(char *filename, int type)
 }
 
 
-static void _export_verse(char *filename, int type)
+static void _export_verse(EXPORT_DATA data, int type)
 {
 	GString *str = g_string_new(NULL);
 	char* book;
@@ -283,8 +283,8 @@ static void _export_verse(char *filename, int type)
 				       key->Verse(),
 				       settings.MainWindowModule);
 
-	if (filename)
-		_save(filename, str->str,str->len);
+	if (data.filename)
+		_save(data.filename, str->str,str->len);
 	else
 		_copy_to_clipboard (str->str, str->len);
 
@@ -308,7 +308,7 @@ static void _export_verse_range (EXPORT_DATA data, int type)
 
 	// special case: one verse range => single verse export.
 	if (data.start_verse == data.end_verse) {
-		_export_verse(data.filename, type);
+		_export_verse(data, type);
 		return;
 	}
 
@@ -324,7 +324,7 @@ static void _export_verse_range (EXPORT_DATA data, int type)
 	     !mod->Error();
 	     (*mod)++) {
 
-		if (settings.showversenum)
+		if (data.verse_num)
 			g_string_append_printf(str, "[%d]", key->Verse());
 
 		if (type == HTML)
@@ -362,13 +362,13 @@ void main_export_html(EXPORT_DATA data)
 {
 	switch (data.passage_type) {
 		case BOOK:
-			_export_book(data.filename, HTML);
+			_export_book(data, HTML);
 			break;
 		case CHAPTER:
-			_export_chapter(data.filename, HTML);
+			_export_chapter(data, HTML);
 			break;
 		case VERSE:
-			_export_verse(data.filename, HTML);
+			_export_verse(data, HTML);
 			break;
 		case VERSE_RANGE:
 			_export_verse_range(data, HTML);
@@ -380,13 +380,13 @@ void main_export_plain(EXPORT_DATA data)
 {
 	switch (data.passage_type) {
 		case BOOK:
-			_export_book(data.filename, PLAIN);
+			_export_book(data, PLAIN);
 			break;
 		case CHAPTER:
-			_export_chapter(data.filename, PLAIN);
+			_export_chapter(data, PLAIN);
 			break;
 		case VERSE:
-			_export_verse(data.filename, PLAIN);
+			_export_verse(data, PLAIN);
 			break;
 		case VERSE_RANGE:
 			_export_verse_range(data, PLAIN);

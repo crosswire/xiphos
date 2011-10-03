@@ -33,6 +33,7 @@ struct _export_data {
 	int passage_type;
 	int start_verse;
 	int end_verse;
+	int verse_num;
 };
 
 enum {
