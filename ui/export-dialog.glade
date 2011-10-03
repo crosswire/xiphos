@@ -605,43 +605,6 @@
 	  </child>
 
 	  <child>
-	    <widget class="GtkAlignment" id="alignment9">
-	      <property name="visible">True</property>
-	      <property name="xalign">0.5</property>
-	      <property name="yalign">0.5</property>
-	      <property name="xscale">1</property>
-	      <property name="yscale">1</property>
-	      <property name="top_padding">0</property>
-	      <property name="bottom_padding">0</property>
-	      <property name="left_padding">12</property>
-	      <property name="right_padding">0</property>
-
-	      <child>
-		<widget class="GtkCheckButton" id="check_versenum">
-		  <property name="visible">True</property>
-		  <property name="tooltip" translatable="yes">Indicates whether verse numbers should appear inline in the text.</property>
-		  <property name="can_focus">True</property>
-		  <property name="label" translatable="yes">_Verse numbers in text</property>
-		  <property name="use_underline">True</property>
-		  <property name="relief">GTK_RELIEF_NORMAL</property>
-		  <property name="focus_on_click">True</property>
-		  <property name="active">False</property>
-		  <property name="inconsistent">False</property>
-		  <property name="draw_indicator">True</property>
-		  <accessibility>
-		    <atkproperty name="AtkObject::accessible_name" translatable="yes">Verse Number button</atkproperty>
-		  </accessibility>
-		</widget>
-	      </child>
-	    </widget>
-	    <packing>
-	      <property name="padding">0</property>
-	      <property name="expand">False</property>
-	      <property name="fill">False</property>
-	    </packing>
-	  </child>
-
-	  <child>
 	    <widget class="GtkLabel" id="label1">
 	      <property name="visible">True</property>
 	      <property name="label" translatable="yes">&lt;b&gt;Format&lt;/b&gt;</property>
@@ -728,6 +691,43 @@
 		  <property name="draw_indicator">True</property>
 		  <accessibility>
 		    <atkproperty name="AtkObject::accessible_name" translatable="yes">HTML Radio Button</atkproperty>
+		  </accessibility>
+		</widget>
+	      </child>
+	    </widget>
+	    <packing>
+	      <property name="padding">0</property>
+	      <property name="expand">False</property>
+	      <property name="fill">False</property>
+	    </packing>
+	  </child>
+
+	  <child>
+	    <widget class="GtkAlignment" id="alignment9">
+	      <property name="visible">True</property>
+	      <property name="xalign">0.5</property>
+	      <property name="yalign">0.5</property>
+	      <property name="xscale">1</property>
+	      <property name="yscale">1</property>
+	      <property name="top_padding">0</property>
+	      <property name="bottom_padding">0</property>
+	      <property name="left_padding">12</property>
+	      <property name="right_padding">0</property>
+
+	      <child>
+		<widget class="GtkCheckButton" id="check_versenum">
+		  <property name="visible">True</property>
+		  <property name="tooltip" translatable="yes">Indicates whether verse numbers should appear inline in the text for more than 1 verse.</property>
+		  <property name="can_focus">True</property>
+		  <property name="label" translatable="yes">_Verse numbers in text</property>
+		  <property name="use_underline">True</property>
+		  <property name="relief">GTK_RELIEF_NORMAL</property>
+		  <property name="focus_on_click">True</property>
+		  <property name="active">False</property>
+		  <property name="inconsistent">False</property>
+		  <property name="draw_indicator">True</property>
+		  <accessibility>
+		    <atkproperty name="AtkObject::accessible_name" translatable="yes">Verse Number button</atkproperty>
 		  </accessibility>
 		</widget>
 	      </child>
