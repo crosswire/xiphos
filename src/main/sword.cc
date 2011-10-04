@@ -275,6 +275,28 @@ void main_save_module_key(const char * mod_name, char * key)
 
 /******************************************************************************
  * Name
+ *  main_getText
+ *
+ * Synopsis
+ *   #include "main/sword.h"
+ *   void main_getText(gchar * key)
+ *
+ * Description
+ *   get unabbreviated key
+ *
+ * Return value
+ *   char *
+ */
+
+char *main_getText(char *key)
+{
+	VerseKey vkey(key);
+	return strdup((char *)vkey.getText());
+}
+
+
+/******************************************************************************
+ * Name
  *   main_update_nav_controls
  *
  * Synopsis
