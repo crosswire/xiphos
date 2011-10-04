@@ -334,7 +334,7 @@ void gui_export_dialog(void)
 #endif
 	gint dist_license, curVerse;
 	gdouble max;
-
+	char *ref;
 
 	dist_license = _check_for_distribution_license(settings.MainWindowModule);
 
@@ -423,11 +423,11 @@ void gui_export_dialog(void)
 	}
 
 	gtk_label_set_text (GTK_LABEL(d.lb_version), settings.MainWindowModule);
-	gtk_label_set_text (GTK_LABEL(d.lb_key), settings.currentverse);
+	ref = (char *)main_getText(settings.currentverse);
+	gtk_label_set_text (GTK_LABEL(d.lb_key), ref);
+	g_free(ref);
 
 	g_signal_connect ((gpointer) d.rb_multi_verse, "toggled",
 		    G_CALLBACK (on_rb_multi_verse_toggled),
 		    NULL);
-
-
 }
