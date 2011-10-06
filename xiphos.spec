@@ -1,44 +1,50 @@
 Name:		xiphos 
-Version:	3.1.3
+Version:	3.1.4
 Release:	1
 Summary:	Bible study and research tool
 
 Group:		Applications/Text
-License:	GPLv2+
+License:	GPLv2
 URL:		http://xiphos.sourceforge.net/
 Source0:	http://downloads.sourceforge.net/gnomesword/xiphos-%{version}.tar.gz
 Source1:        %name-%version.tar.gz
-Patch0:         path-nspr.patch
+#Patch0:         path-nspr.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 
 BuildRequires:	sword-devel >= 1.5.11
 BuildRequires:	gettext
 BuildRequires:	desktop-file-utils
 BuildRequires:	gnome-doc-utils
-BuildRequires:	libglade2-devel 
 BuildRequires:	libgsf-devel
 BuildRequires:	perl(XML::Parser) intltool
 BuildRequires:  gcc-c++
 BuildRequires:  pkgconfig
 AutoReqProv:    on
 Requires:	yelp
-Requires:       %{name}-lang = %{version}
 Obsoletes:	gnomesword < 2.4.2
 Provides:	gnomesword = %{version}-%{release}
 BuildRequires:    scrollkeeper
 
-%if 0%{?fedora} || 0%{?rhel_version} || 0%{?centos_version}
-BuildRequires:  gtk2-devel >= 2.14
-BuildRequires:	gtkhtml3-devel
+%if 0%{?rhel_version} || 0%{?centos_version}
 BuildRequires:  libgnomeprintui22-devel
 %if 0%{?rhel_version} != 406
 BuildRequires:	dbus-glib-devel
 %endif
-%if 0%{?fedora version} >= 13
-BuildRequires:	  xulrunner-devel
+%endif
+
+%if 0%{?fedora} 
+BuildRequires:  libgnomeprintui22-devel
 BuildRequires:	  rarian-compat
+%if 0%{?fedora version} >= 15
+BuildRequires:  gtk3-devel
+BuildRequires:	gtkhtml3-devel
+Requires:  webkitgtk >= 1.3
+BuildRequires:  webkitgtk-devel >= 1.3
 %else
-BuildRequires:	xulrunner-devel-unstable
+BuildRequires:  gtk2-devel
+BuildRequires:	gtkhtml2-devel
+Requires:  webkitgtk >= 1.2
+BuildRequires:  webkitgtk-devel >= 1.2
 %endif
 %endif
 
@@ -57,71 +63,45 @@ Prefer: PolicyKit-gnome
 
 %if 0%{?mandriva_version}
 BuildRequires:  libdbus-glib-devel
+Requires:  webkit
 %ifarch x86_64
 BuildRequires:	lib64gtkhtml-3.14-devel
 BuildRequires:	lib64gtkhtml-3.14-devel
-%if 0%{?mandriva_version} < 201000
-BuildRequires:  lib64xulrunner-unstable-devel
-%else
-BuildRequires:  lib64xulrunner-devel
-%endif
+BuildRequires:  lib64webkitgtk1.0-devel
 %else
 BuildRequires:	libgtkhtml-3.14-devel
 BuildRequires:	libgtkhtml-3.14-devel
-%if 0%{?mandriva_version} < 201000
-BuildRequires:  libxulrunner-unstable-devel
+BuildRequires:  libwebkitgtk1.0-devel
+%endif
+%endif
+
+# If compiling for SuSE Development version (will be 12.1), this next line should be changed to
+# >= 1140 because the development version still returns 1140 for %{?suse_version}
+%if 0%{?suse_version} > 1140
+BuildRequires:  gtkhtml-devel
+BuildRequires:  gtk3-devel
 %else
-BuildRequires:  libxulrunner-devel
+BuildRequires:  gtkhtml2-devel
+BuildRequires:  gtk2-devel >= 2.14
 %endif
-%endif
-%endif
 
-
-
-
-
-%if 0%{?suse_version} > 1120
-%define xulrunner_version 192
+%if 0%{?suse_version} >= 1140
+Requires:  libwebkitgtk-1_0-0
+BuildRequires:  libwebkitgtk-devel
 %else
-%if 0%{?suse_version} > 1110
-%define xulrunner_version 191
-%else
-%if 0%{?suse_version} > 1100
-%define xulrunner_version 190
-%else
-%define xulrunner_version 180
+Requires:  libwebkit-1_0-2
+BuildRequires:  libwebkit-devel
 %endif
-%endif
-%endif
+
 
 %if 0%{?suse_version}
 BuildRequires:  libgnomeprintui-devel
-BuildRequires:  gtkhtml2-devel
-BuildRequires:  mozilla-xulrunner%{xulrunner_version}-devel
-BuildRequires:  gtk2-devel >= 2.14
 BuildRequires:  update-desktop-files
 BuildRequires:  libxslt-devel
 Requires:       gnome-doc-utils
-%if 0%{?suse_version} <= 1020
-%define _prefix   /opt/gnome
-%define _sysconfdir /etc%_prefix
-BuildRequires:  scrollkeeper
-BuildRequires:  gnome-doc-utils
-%else
 BuildRequires:  rarian-devel
 BuildRequires:  gnome-doc-utils-devel
 BuildRequires:  dbus-1-glib-devel
-%endif
-%endif
-
-%if 0%{?suse_version} <= 1020
-%if 0%{?suse_version} > 910
-BuildRequires:  mozilla-nspr-devel
-%endif
-%endif
-
-%if 0%{?centos_version} || 0%{?rhel_version}
-BuildRequires:  mozilla-nspr-devel
 %endif
 
 %description
@@ -133,7 +113,7 @@ Project and elsewhere.
 %lang_package
 %prep
 %setup -q
-%patch0 -p1
+#%patch0 -p1
 %build
 export CFLAGS=$RPM_OPT_FLAGS
 ./waf configure %{?jobs:-j%jobs} --prefix=/usr 
@@ -143,10 +123,21 @@ export CFLAGS=$RPM_OPT_FLAGS
 ./waf install %{?jobs:-j%jobs} --destdir=$RPM_BUILD_ROOT
 rm -rf %buildroot%_datadir/doc/%{name}
 
+%if 0%{?fedora version} >= 13
+desktop-file-install --delete-original \
+	--add-category=X-Bible		\
+	--add-category=X-Religion	\
+	--dir=%buildroot%_datadir/applications \
+	--copy-name-to-generic-name \
+	%buildroot%_datadir/applications/xiphos.desktop
+%endif
+
 %if 0%{?suse_version}
 %suse_update_desktop_file -n -D %{_datadir}/gnome/help/%{name} -G "Bible Study Tool" xiphos Teaching
+gtk-update-icon-cache -q -f -t %{_datadir}/icons/hicolor
 %endif
 %find_lang %{name}
+
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -164,18 +155,18 @@ if which scrollkeeper-update>/dev/null 2>&1; then scrollkeeper-update -q; fi
 %{_datadir}/applications/*
 %{_datadir}/icons/hicolor/scalable/apps/xiphos.svg
 %{_datadir}/xiphos
-%{_datadir}/pixmaps/xiphos
-
-%if 0%{?suse_version}
-%files lang -f %{name}.lang
-%else
+# you might need to comment the next few lines on some distros
+#%{_datadir}/pixmaps/xiphos
+#/usr/var/scrollkeeper/*
 %{_datadir}/gnome/help/xiphos
 %{_datadir}/locale/*/LC_MESSAGES/xiphos.mo
 %{_datadir}/omf/xiphos
-%endif
+
 
 %changelog
 %changelog
+* Tue Sep 20 2011 Brian Dumont <brian.j.dumont@gmail.com>
+- update to fix for OpenSuSE Development Version (will be 12.1)
 * Tue Mar 30 2010 Dmitrijs Ledkovs <dmitrij.ledkov@ubuntu.com>
 - reworked to use waf
 - works on f11; f12; Mandriva2010; SLE11,
