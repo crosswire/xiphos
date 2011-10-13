@@ -585,6 +585,7 @@ void
 redisplay_to_realign()
 {
 	static int realign_busy = FALSE;
+	int save_comm_show = settings.comm_showing;
 
 	if (realign_busy || change_tabs_no_redisplay)
 		return;
@@ -613,6 +614,10 @@ redisplay_to_realign()
 		main_url_handler(url, TRUE);
 		g_free(url);
 	}
+
+	settings.comm_showing = save_comm_show;
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),
+				      (settings.comm_showing ? 0 : 1));
 
 	realign_busy = FALSE;
 }
