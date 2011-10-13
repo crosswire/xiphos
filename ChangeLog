@@ -1,3 +1,7 @@
+2011-10-13  karl <charcoal@users.sf.net>
+
+	* fixed erroneous comm -vs- book display during font size change.
+
 2011-10-02  karl <charcoal@users.sf.net>
 
 	* added (in|ex)clusion option for verse#s in copy/export.
