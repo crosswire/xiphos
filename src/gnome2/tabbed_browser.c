@@ -208,16 +208,12 @@ void set_current_tab (PASSAGE_TAB_INFO *pt)
 		return;
 
 	if (ot != NULL && ot->button_close != NULL) {
-		//gtk_widget_set_sensitive(ot->button_close, FALSE);
-		gtk_widget_hide (ot->button_close);
-		gtk_widget_show (ot->close_pixmap);
+		gtk_widget_set_sensitive(ot->button_close, FALSE);
 	}
 	cur_passage_tab = pt;
 	if (pt != NULL && pt->button_close != NULL) {
 		//main_update_tab_history_menu((PASSAGE_TAB_INFO*)pt);
-		//gtk_widget_set_sensitive(pt->button_close, TRUE);
-		gtk_widget_show (pt->button_close);
-		gtk_widget_hide (pt->close_pixmap);
+		gtk_widget_set_sensitive(pt->button_close, TRUE);
 
 		/* adopt panel shows from passage tab memory. */
 		settings.showtexts   = pt->showtexts;
@@ -794,24 +790,34 @@ static GtkWidget* tab_widget_new(PASSAGE_TAB_INFO *tbinf, const gchar *label_tex
 
 	g_return_val_if_fail(label_text != NULL, NULL);
 
-	tmp_toolbar_icon = pixmap_finder("window-close.png");
-	gtk_widget_show(tmp_toolbar_icon);
+	tmp_toolbar_icon = gtk_image_new_from_stock(GTK_STOCK_CLOSE, GTK_ICON_SIZE_MENU);
 
 	tbinf->button_close = gtk_button_new();
-	gtk_container_add(GTK_CONTAINER(tbinf->button_close), tmp_toolbar_icon);
+	gtk_button_set_image(GTK_BUTTON(tbinf->button_close), tmp_toolbar_icon);
 	gtk_button_set_relief(GTK_BUTTON(tbinf->button_close), GTK_RELIEF_NONE);
+#ifndef USE_GTK_3
+	gtk_rc_parse_string (
+		"style \"tab-button-style\"\n"
+		"{\n"
+        "    GtkWidget::focus-padding = 0\n"
+        "    GtkWidget::focus-line-width = 0\n"
+        "    xthickness = 0\n"
+        "    ythickness = 0\n"
+		"    GtkButton::internal-border = 0\n"
+		"    GtkButton::default-border = 0\n"
+		"    GtkButton::default-outside-border = 0\n"
+		"}\n"
+		"widget \"*.button-close\" style \"tab-button-style\"");
+        gtk_widget_set_name(GTK_WIDGET (tbinf->button_close), "button-close");
+#endif
 	gtk_widget_set_size_request(tbinf->button_close, 18, 16);
-
-	tbinf->close_pixmap = pixmap_finder("window-close.png");
 #ifdef USE_GTK_3
 	gtk_widget_get_preferred_size(tbinf->button_close,  &r0, &r);
 #else	
 	gtk_widget_size_request(tbinf->button_close, &r);
 #endif
-	gtk_widget_set_size_request(tbinf->close_pixmap, r.width, r.height);
-	gtk_widget_set_sensitive(tbinf->close_pixmap, FALSE);
-	gtk_widget_show(tbinf->close_pixmap);
-
+	gtk_widget_set_sensitive(tbinf->button_close, FALSE);
+	gtk_widget_show(tbinf->button_close);
 	tbinf->tab_label = GTK_LABEL(gtk_label_new (label_text));
 	gtk_widget_show (GTK_WIDGET(tbinf->tab_label));
 
@@ -836,7 +842,6 @@ static GtkWidget* tab_widget_new(PASSAGE_TAB_INFO *tbinf, const gchar *label_tex
 	gtk_box_pack_start(GTK_BOX(box), GTK_WIDGET(tbinf->tab_label),
 			   TRUE, TRUE, 0);
 	gtk_box_pack_start(GTK_BOX(box), tbinf->button_close, FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(box), tbinf->close_pixmap, FALSE, FALSE, 0);
 
 	gtk_widget_show(box);
 
