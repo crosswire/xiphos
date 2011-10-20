@@ -835,7 +835,9 @@ void create_mainwindow(void)
 	widgets.button_new_tab = gtk_button_new();
 	//don't show button here in case !settings.browsing
 
-	tab_button_icon = pixmap_finder("new_tab_button.png");
+	tab_button_icon = gtk_image_new_from_icon_name("stock_new-tab", GTK_ICON_SIZE_SMALL_TOOLBAR);
+	// ...or perhaps gtk_image_new_from_stock(GTK_STOCK_ADD, ...)
+
 	gtk_widget_show(tab_button_icon);
 	gtk_container_add(GTK_CONTAINER(widgets.button_new_tab), tab_button_icon);
 	gtk_button_set_relief(GTK_BUTTON(widgets.button_new_tab), GTK_RELIEF_NONE);
