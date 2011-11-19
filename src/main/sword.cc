@@ -38,6 +38,7 @@ extern "C" {
 #endif
 #include <gtkhtml/gtkhtml.h>
 #include "gui/bibletext.h"
+#include "main/gtk_compat.h"
 #ifdef __cplusplus
 }
 #endif

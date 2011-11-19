@@ -30,6 +30,7 @@
 #include <gtk/gtk.h>
 #include <swmgr.h>
 #include <swdisp.h>
+#include "main/gtk_compat.h"
 #include "main/global_ops.hh"
 #include "backend/sword_main.hh"
 #include "gui/utilities.h"
