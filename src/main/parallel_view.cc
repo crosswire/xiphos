@@ -26,6 +26,7 @@
 #include <gtk/gtk.h>
 
 #include "backend/sword_main.hh"
+#include "main/gtk_compat.h"
 
 #include "gui/parallel_view.h"
 #include "gui/parallel_dialog.h"
