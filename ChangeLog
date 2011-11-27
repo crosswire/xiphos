@@ -1,3 +1,9 @@
+2011-11-26  karl <charcoal@users.sf.net>
+
+	* apply proper font to modules' About boxes, to correct for
+	  different X servers' (e.g. "non-free" nVidia's) very peculiar
+	  choices for default font interpretation.
+
 2011-11-19  karl <charcoal@users.sf.net>
 
 	* Mark__T's gtk pre-2.20 compatibility patch.
