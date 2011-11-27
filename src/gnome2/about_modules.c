@@ -362,7 +362,8 @@ about_module_display(GString * str,
 void
 gui_core_display_about_dialog(gchar * desc,
 			      gchar * abouttext,
-			      const gchar * version)
+			      const gchar * version,
+			      gchar * modname)
 {
 	GtkWidget *aboutbox;	//-- pointer to about dialog
 	GString *str = g_string_new(NULL);
@@ -370,11 +371,17 @@ gui_core_display_about_dialog(gchar * desc,
 	GString *text = g_string_new(NULL);
 	GString *html_start = g_string_new(NULL);
 	    
-	static const char *html_end = "</body></html>";
+	static const char *html_end = "</font></body></html>";
+	MOD_FONT *mf = get_font(modname);
         g_string_printf (html_start,
-                         "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head><body bgcolor=\"%s\" text=\"%s\">",
+                         "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head><body bgcolor=\"%s\" text=\"%s\"><font face=\"%s\" size=\"%+d\">",
                          settings.bible_bg_color,
-                         settings.bible_text_color) ;
+                         settings.bible_text_color,
+			 ((mf->old_font) ? mf->old_font : ""),
+			 ((mf->old_font_size)
+			  ? atoi(mf->old_font_size) + settings.base_font_size
+			  : settings.base_font_size));
+	free_font(mf);
                          
 	g_string_printf(description,
 			"<center><font color=\"#000fcf\"><b>%s</b></font><hr/>%s %s</center><br/>",
@@ -429,7 +436,7 @@ gui_display_about_module_dialog(gchar *modname)
 	bufabout = main_get_mod_about_info(modname);
 	version = main_get_mod_config_entry(modname, "Version");
 
-	gui_core_display_about_dialog(buf, bufabout, version);
+	gui_core_display_about_dialog(buf, bufabout, version, modname);
 
 	if (bufabout)
 		g_free(bufabout);
