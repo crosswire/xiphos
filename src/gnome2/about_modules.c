@@ -379,8 +379,8 @@ gui_core_display_about_dialog(gchar * desc,
                          settings.bible_text_color,
 			 ((mf->old_font) ? mf->old_font : ""),
 			 ((mf->old_font_size)
-			  ? atoi(mf->old_font_size) + settings.base_font_size
-			  : settings.base_font_size));
+			  ? atoi(mf->old_font_size) + settings.base_font_size - 1
+			  : settings.base_font_size - 1));
 	free_font(mf);
                          
 	g_string_printf(description,
