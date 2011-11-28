@@ -3,6 +3,7 @@
 	* apply proper font to modules' About boxes, to correct for
 	  different X servers' (e.g. "non-free" nVidia's) very peculiar
 	  choices for default font interpretation.
+	* also for Previewer re-init during fore/background switch.
 
 2011-11-19  karl <charcoal@users.sf.net>
 

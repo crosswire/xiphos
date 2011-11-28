@@ -186,14 +186,17 @@ void main_dialogs_clear_viewer(DIALOG_DATA *d)
 {
 	GString *str = g_string_new(NULL);
 	const char *buf = N_("Previewer");
+	MOD_FONT *mf = get_font(settings.MainWindowModule);
 
 	g_string_printf(str,
 			HTML_START
 			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
-			"<b><font color=\"grey\" size=\"-1\">%s</font></b><hr/></body></html>",
+			"<b><font color=\"grey\" size=\"-1\" face=\"%s\">%s</font></b><hr/></body></html>",
 			settings.bible_bg_color, settings.bible_text_color,
-			settings.link_color, buf);
-
+			settings.link_color,
+			((mf->old_font) ? mf->old_font : ""),
+			buf);
+	free_font(mf);
 	HtmlOutput(str->str, d->previewer, NULL, NULL);
 	g_string_free(str, TRUE);
 }

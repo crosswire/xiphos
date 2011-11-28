@@ -93,14 +93,17 @@ void main_init_previewer(void)
 {
 	GString *str = g_string_new(NULL);
 	gchar *buf = _("Previewer");
+	MOD_FONT *mf = get_font(settings.MainWindowModule);
 
 	g_string_printf(str,
 			HTML_START
 			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
-			"<font color=\"grey\" size=\"-1\"><b>%s</b></font><hr/></body></html>",
+			"<font color=\"grey\" size=\"-1\" face=\"%s\"><b>%s</b></font><hr/></body></html>",
 			settings.bible_bg_color, settings.bible_text_color,
 			settings.link_color,
+			((mf->old_font) ? mf->old_font : ""),
 			buf);
+	free_font(mf);
 	HtmlOutput(str->str, previewer_html_widget, NULL, NULL);
 	g_string_free(str, TRUE);
 }
