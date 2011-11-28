@@ -98,9 +98,12 @@ void main_init_previewer(void)
 	g_string_printf(str,
 			HTML_START
 			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
-			"<font color=\"grey\" size=\"-1\" face=\"%s\"><b>%s</b></font><hr/></body></html>",
+			"<font color=\"grey\" size=\"%+d\" face=\"%s\"><b>%s</b></font><hr/></body></html>",
 			settings.bible_bg_color, settings.bible_text_color,
 			settings.link_color,
+			((mf->old_font_size)
+			 ? atoi(mf->old_font_size) + settings.base_font_size - 1
+			 : settings.base_font_size - 1),
 			((mf->old_font) ? mf->old_font : ""),
 			buf);
 	free_font(mf);
