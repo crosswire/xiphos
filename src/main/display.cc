@@ -1405,7 +1405,7 @@ GTKChapDisp::Display(SWModule &imodule)
 			buf = g_strdup_printf("<span class=\"word\">"
 					      "<a href=\"passagestudy.jsp?action=showUserNote&"
 					      "module=%s&passage=%s&value=%s\"><small>"
-					      "<sup>*u</sup></small></a></span> ",
+					      "<sup>*u</sup></small></a></span>&nbsp;",
 					      settings.MainWindowModule,
 			                      (char*)key->getShortText(),
 					      e->annotation->str);
