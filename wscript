@@ -17,14 +17,13 @@ import waffles.gnome as gnome
 bzrrevno = '$CurRevno$'
 bzrrevid = '$CurRevid$'
 
-VERSION='3.1.4'
+VERSION='3.1.4+webkit'
 
-if VERSION.find('dev') != -1 and len(bzrrevno.split()) > 1:
-        VERSION = '+'.join((VERSION,
-                            'bzr' + bzrrevno.split()[1]))
-        if bzrrevid.split()[1].find('svn') != -1:
-                VERSION = '+'.join((VERSION,
-                                    'svn' + bzrrevid.split()[1].split(':')[-1]))
+if VERSION.endswith('webkit'):
+    import commands
+    from string import ascii_letters
+    VERSION+=commands.getoutput('svnversion').translate(None, ascii_letters)
+
 
 APPNAME='xiphos'
 PACKAGE='xiphos'
