@@ -276,7 +276,7 @@ def configure(conf):
 
     # Auto detecting backed if none were specified
     if opt.backend == 'auto':
-            webkit = 'webkitgtk-3.0' if opt.gtkver == 3 else 'webkit-1.0'
+            webkit = 'webkitgtk-3.0' if opt.gtkver == '3' else 'webkit-1.0'
             if conf.check_cfg(modversion=webkit, msg='Auto detecting webkit', okmsg='ok',
                               erromsg='Not found'):
                     opt.backend = 'webkit'
@@ -286,7 +286,7 @@ def configure(conf):
                     opt.backend = 'xulrunner'
 
             else:
-                    gtkhtml = 'libgtkhtml-4.0' if opt.gtkver == 3 else 'libgtkhtml-3.14'
+                    gtkhtml = 'libgtkhtml-4.0' if opt.gtkver == '3' else 'libgtkhtml-3.14'
                     conf.check_cfg(modversion=gtkhtml, msg='Auto detecting gtkhtml', okmsg='ok',
                                    erromsg='Not found', mandatory=True)
                     opt.backend = 'gtkhtml'
