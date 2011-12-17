@@ -867,14 +867,14 @@
 		which <application>Xiphos</application> was built.
 		</para>
 		<figure id="displib_figure">
-		  <title>Comparison, gtkhtml3 -vs- mozembed</title>
+		  <title>Comparison, gtkhtml3 -vs- webkit</title>
 		  <screenshot> 
 		    <mediaobject> 
 		      <imageobject>
 			<imagedata fileref="figures/gtkhtml3-vs-mozembed.png" format="PNG" /> 
 		      </imageobject>
 		      <textobject> 
-			<phrase>Comparison, gtkhtml3 -vs- mozembed</phrase> 
+			<phrase>Comparison, gtkhtml3 -vs- webkit</phrase> 
 		      </textobject> 
 		   </mediaobject> 
 		  </screenshot>
