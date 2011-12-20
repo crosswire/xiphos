@@ -2,17 +2,21 @@
 # encoding: utf-8
 
 import os, os.path
-import intltool
 import string
-import Utils
-import Options
-import ccroot
-import preproc
-preproc.go_absolute=1
-preproc.strict_quotes=0
+
+from waflib import Logs,Utils,Options
+
+from waflib.Tools import (
+     c_preproc,
+     ccroot,
+     intltool,
+)
+
+c_preproc.go_absolute=1
+c_preproc.strict_quotes=0
 
 import waffles.misc
-import waffles.gnome as gnome
+#import waffles.gnome as gnome
 
 bzrrevno = '$CurRevno$'
 bzrrevid = '$CurRevid$'
@@ -27,8 +31,8 @@ if VERSION.endswith('webkit'):
 
 APPNAME='xiphos'
 PACKAGE='xiphos'
-srcdir = '.'
-blddir = 'build'
+top = '.'
+out = 'build'
 
 _tooldir = './waffles/'
 ROOTDIR_WIN32 = 'C:\msys'
@@ -48,11 +52,10 @@ sys/select.h
 sys/socket.h
 winsock.h
 '''.split()
-def set_options(opt):
+def options(ctx):
+    ctx.load('compiler_c compiler_cxx')
 
-    opt.tool_options('g++ gcc')
-
-    maingroup = opt.add_option_group('Main Xiphos Options')
+    maingroup = ctx.add_option_group('Main Xiphos Options')
 
     maingroup.add_option('--gtk',
                    action='store', default='auto', dest='gtkver',
@@ -64,11 +67,11 @@ def set_options(opt):
                    choices=['auto', 'webkit', 'xulrunner', 'gtkhtml'],
                    help="Select rendering backend ['auto', 'webkit', 'xulrunner', 'gtkhtml']")
 
-    miscgroup = opt.add_option_group('Miscellaneous Options')
+    miscgroup = ctx.add_option_group('Miscellaneous Options')
 
     miscgroup.add_option('-d', '--debug-level',
                 action = 'store',
-		default = ccroot.DEBUG_LEVELS.ULTRADEBUG,
+		default = 'ultradebug',
 		help = "Specify the debugging level ['ultradebug', 'debug', 'release', 'optimized']",
 		choices = ['ultradebug', 'debug', 'release', 'optimized'],
 		dest = 'debug_level')
@@ -86,193 +89,22 @@ def set_options(opt):
                    help = "Disable the Xiphos dbus API [default: enabled]",
                    dest = 'without_dbus')
 
-    ### cross compilation from Linux/Unix for win32
-
-    w32 = opt.add_option_group ('Windows and Cross-compile Options', '')
-
-    w32.add_option('--target-platform-win32', action='store_true', default=False,
-            dest='cross_win32',
-            help='Cross-compile for win32 [default: disabled]')
-
-    w32.add_option('--disable-console',
-            action='store_true',
-            default=False,
-            help='Disable console window in win32 [default: enabled]',
-            dest='no_console')
-
-    # FIXME - handle this option
-    #w32.add_option('--rootdir',
-		#action = 'store',
-		#help = 'Specify path where resides msys. This dir is used for finding libraries and other files',
-		#dest = 'rootdir')
-
-    w32.add_option('--pkgconf-libdir',
-		action = 'store',
-		default = os.path.join(ROOTDIR_WIN32, 'local', 'lib', 'pkgconfig'),
-		help = "Specify dir with *.pc files for cross-compilation",
-		dest = 'pkg_conf_libdir')
-
-    w32.add_option('--pkgconf-prefix',
-		action = 'store',
-		default = os.path.join(ROOTDIR_WIN32, 'local'),
-		help = "Specify prefix with folders for headers and libraries for cross-compilation",
-		dest = 'pkg_conf_prefix')
-
-    w32.add_option('--mozilla-distdir',
-		action = 'store',
-		default = os.path.join(ROOTDIR_WIN32, 'local'),
-		help = "Folder 'dist' in unpacked mozilla devel tarball. Mandatory for win32 compilation",
-		dest = 'mozilla_distdir')
-
-    ######### end of windows options.
-
-    group = opt.add_option_group ('Localization and documentation')
-    group.add_option('--helpdir',
-                     action = 'store',
-                     default = '${DATAROOTDIR}/gnome/help/${PACKAGE}',
-                     help = "user documentation [default: ${DATAROOTDIR}/gnome/help/${PACKAGE}]",
-                     dest = 'helpdir')
-    group.add_option('--disable-help',
-                     action='store_true',
-                    default=False,
-                     help='Disable creating help files',
-                     dest='disable_help')
-    group.add_option('--no-post-install',
-                   action = 'store_false',
-                   default = True,
-                   help = "Disable post-install tasks",
-                   dest = 'post_install')
-
-    deprecated_group = opt.add_option_group ('Deprecated options')
-
-    deprecated_group.add_option('--enable-gtkhtml',
-                   action='store_const', const='gtkhtml', dest='backend',
-                   help='Use gtkhtml rendering backend [deprecated by --backend gtkhtml]')
-
-    deprecated_group.add_option('--enable-webkit',
-                   action='store_const', const='webkit', dest='backend',
-                   help='Use gtk-webkit backend [deprecated by --backend webkit]')
-
-    deprecated_group.add_option('--enable-gtk2',
-                   action='store_const', const='2', dest='gtkver',
-                   help='Use gtk2 API [deprecated by --gtk=2]')
-
-def configure(conf):
-
-    opt = Options.options
-    dfn = conf.define
-    env = conf.env
-
-    platform = Utils.detect_platform()
-    env['IS_WIN32'] = platform == 'win32'
-    env['IS_LINUX'] = platform == 'linux'
-
-    env['IS_CROSS_WIN32'] = Options.options.cross_win32
-
-    # cross-compilation for Windows
-    # behave mostly like on windows platform
-    if env['IS_CROSS_WIN32']:
-        env['IS_WIN32'] = True
-        env['IS_LINUX'] = False
-        Utils.pprint('CYAN', "Cross-compilation")
-
-    # IS_WIN32 means compiling for win32, not compiling necessary on win32
-    if env['IS_WIN32']:
-        Utils.pprint('CYAN', "Windows detected")
-    elif env['IS_LINUX']:
-        Utils.pprint('CYAN', "Linux detected")
-
-    if not (env['IS_LINUX'] or env['IS_WIN32']):
-        Utils.pprint('RED', "Assuming %s is UNIX like platform" % platform)
-        env['IS_LINUX'] = True
-
-    ## temporary HACKS for win32
-    #if env['IS_WIN32']:
-    #    env['PREFIX'] = conf.escpath(os.path.abspath('win32/binaries/Xiphos'))
-
-    if env['IS_WIN32']:
-        env['ROOTDIR'] = ROOTDIR_WIN32
-
-    conf.check_tool('nothreads', tooldir=_tooldir)
-    conf.check_tool('g++ gcc')
-    # cross compiler
-    if env['IS_CROSS_WIN32']:
-        conf.check_tool('cross_linux_win32', tooldir=_tooldir)
-  
-    conf.check_tool('gnu_dirs misc')
-    conf.check_tool('intltool')
-
-    env['DISABLE_HELP'] = opt.disable_help
-
-    if not opt.disable_help:
-        if env['IS_LINUX']:
-            conf.check_tool('gnome', tooldir=_tooldir)
-        else:
-            conf.check_tool('documentation', tooldir=_tooldir) # stuff to create help files
-
-    # DATADIR is defined by intltool in config.h - conflict in win32 (mingw)
-    conf.undefine('DATADIR')
-
-    env['POST_INSTALL']=opt.post_install
-
-    # delint flags
-    env['CXXFLAGS_DELINT'] = ['-Werror', '-Wall']
-    env['CCFLAGS_DELINT'] = ['-Werror', '-Wall', '-Wmissing-prototypes',
-                             '-Wnested-externs', '-Wpointer-arith', '-Wno-sign-compare']
-
-    # gcc compiler debug levels
-    # msvc has levels predefined
-    if env['CC_NAME'] == 'gcc':
-        env['CCFLAGS_SAFE']       = env['CCFLAGS']
-        env['CCFLAGS']            = []
-        env['CCFLAGS_OPTIMIZED']  = ['-O2']
-        env['CCFLAGS_RELEASE']    = ['-O2']
-        env['CCFLAGS_DEBUG']      = ['-g', '-DDEBUG']
-        env['CCFLAGS_ULTRADEBUG'] = ['-g3', '-O0', '-DDEBUG']
-
-    if env['CXX_NAME'] == 'gcc':
-        env['CXXFLAGS_SAFE']       = env['CXXFLAGS']
-        env['CXXFLAGS']            = []
-        env['CXXFLAGS_OPTIMIZED']  = ['-O2']
-        env['CXXFLAGS_RELEASE']    = ['-O2']
-        env['CXXFLAGS_DEBUG']      = ['-g', '-DDEBUG', '-ftemplate-depth-25']
-        env['CXXFLAGS_ULTRADEBUG'] = ['-g3', '-O0', '-DDEBUG', '-ftemplate-depth-25']
-    
-    if env['IS_WIN32']:
-        ## setup for Winsock on Windows (required for read-aloud)
-        conf.check(lib='ws2_32', uselib='WSOCK', mandatory=True)
-        conf.check(lib='shell32', uselib='SHELLAPI', mandatory=True)
-        # this isn't supposed to be necessary
-        env['LINKFLAGS'] = ['-lws2_32']
-        dfn('WIN32', 1)
-        # mozilla distdir mandatory for win32 for using libxul
-        if opt.mozilla_distdir:
-            env['MOZILLA_DISTDIR'] = opt.mozilla_distdir
-        else:
-            env['MOZILLA_DISTDIR'] = '%s/../..' % env['PKG_CONFIG_LIBDIR']
-        # tool to link icon with executable
-        # use tool modified for cross-compilation support
-        env['POST_INSTALL']=False
-        conf.check_tool('winres', tooldir=_tooldir)
-        # the following line does not work because of a problem with waf
-        # conf.check_tool('intltool')
-        #env['POCOM'] = conf.find_program('msgfmt')
-        #env['INTLTOOL'] = '/usr/local/bin/intltool-merge'
-    
-    #if env['IS_CROSS_WIN32']:
-        # allows to use linux pkg-config for cross-compilation
-        #os.environ['PKG_CONFIG_LIBDIR'] = opt.pkg_conf_libdir
-        #env['PKG_CONFIG_PREFIX'] = opt.pkg_conf_prefix
+def configure(ctx):
+    ctx.load('compiler_c compiler_cxx')
+    ctx.load('intltool')
+    ctx.load('misc', tooldir=_tooldir)
+#    ctx.load('gnome', tooldir=_tooldir)
 
     # Auto detecting gtk version, if none were specified.
-    if opt.gtkver == 'auto':
-            if conf.check_cfg(modversion='libgtkhtml-4.0', okmsg='ok',
-                              msg='Auto detecting gtk 3'):
-                    opt.gtkver = '3'
-            else:
-                    conf.check_cfg(modversion='libgtkhtml-3.14', okmsg='ok',
-                                   msg='Auto detecting gtk 2', mandatory=True)
-                    opt.gtkver = '2'
+    ctx.msg('GTK version set to', ctx.options.gtkver)
+    if ctx.options.gtkver == 'auto':
+        if ctx.check_cfg(modversion='libgtkhtml-4.0', mandatory=False):
+            ctx.options.gtkver = '3'
+        elif ctx.check_cfg(modversion='libgtkhtml-3.14', mandatory=False):
+            ctx.options.gtkver = '2'
+        else:
+            ctx.fatal('Could not set GTK based on above checks!')
+        ctx.msg('Detected GTK', ctx.options.gtkver)
 
     # Auto detecting backed if none were specified
     if opt.backend == 'auto':
