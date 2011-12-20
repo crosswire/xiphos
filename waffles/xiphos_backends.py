@@ -40,7 +40,7 @@ def pick_backend(ctx):
 
     if ctx.env.gtkver == '3':
         ctx.define('USE_GTK_3', 1)
-	conf.define('USE_GTKBUILDER', 1)
+	ctx.define('USE_GTKBUILDER', 1)
         ctx.env.common_libs.extend(['libgtkhtml-4.0','gtkhtml-editor-4.0'])
         web_libs = [('webkit', 'webkitgtk-3.0'), ('gtkhtml', 'libgtkhtml-4.0')]
     else:

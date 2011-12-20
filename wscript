@@ -35,7 +35,7 @@ top = '.'
 out = 'build'
 
 _tooldir = './waffles/'
-ROOTDIR_WIN32 = 'C:\msys'
+#ROOTDIR_WIN32 = 'C:\msys'
 _headers = '''
 locale.h
 stdint.h
@@ -45,13 +45,13 @@ sys/stat.h
 sys/types.h
 unistd.h
 sys/socket.h
-winsock.h
 '''.split()
+#winsock.h
 def options(ctx):
     ctx.load('compiler_c compiler_cxx')
     ctx.load('xiphos_backends', tooldir=_tooldir)
 
-    miscgroup.add_option('--disable-dbus',
+    ctx.add_option('--disable-dbus',
                    action = 'store_true',
                    default = False,
                    help = "Disable the Xiphos dbus API [default: enabled]",
@@ -60,72 +60,70 @@ def options(ctx):
 def configure(ctx):
     ctx.env.common_libs = ['sword', 'gconf-2.0','gmodule-2.0','glib-2.0','libgsf-1','libxml-2.0']
 
-    conf.check_cfg(atleast_pkgconfig_version='0.9.0')
+    ctx.check_cfg(atleast_pkgconfig_version='0.9.0')
 
     ctx.load('compiler_c compiler_cxx')
     ctx.load('xiphos_backends', tooldir=_tooldir)
     ctx.load('intltool')
 
-    common_libs.extend(['--cflags','--libs'])
-
     # strip xiphos binary
 
-    if not opt.without_dbus:
-        conf.check_pkg('dbus-glib-1', '0.60', True, var='DBUS')
+#    if not ctx.options.without_dbus:
+#        ctx.check_pkg('dbus-glib-1', '0.60', True, var='DBUS')
         # we need a modified version of dbus.py for running on windows
         #conf.check_tool('dbus', tooldir=_tooldir)
     
-    conf.check_tool('glib2')
+    ctx.check_tool('glib2')
 
     ### App info, paths
-    define = conf.define
-    sub = Utils.subst_vars
+#    define = ctx.define
+#    env = ctx.env
+#    sub = Utils.subst_vars
 
-    env['VERSION'] = VERSION
-    env['APPNAME'] = APPNAME
-    env['PACKAGE'] = PACKAGE
+#    env['APPNAME'] = APPNAME
+#    env['PACKAGE'] = PACKAGE
 #    env['HELPDIR'] = sub(opt.helpdir, env)
 
-    define('PACKAGE_VERSION', VERSION)
-    define('GETTEXT_PACKAGE', PACKAGE)
-    define('PACKAGE', PACKAGE)
-    define('PACKAGE_NAME', APPNAME)
-    define('PACKAGE_STRING', '%s %s' % (APPNAME, VERSION))
-    define('PACKAGE_TARNAME', PACKAGE)
+#    define('PACKAGE_VERSION', VERSION)
+#    define('GETTEXT_PACKAGE', PACKAGE)
+#    define('PACKAGE', PACKAGE)
+#    define('PACKAGE_NAME', APPNAME)
+#    define('PACKAGE_STRING', '%s %s' % (APPNAME, VERSION))
+#    define('PACKAGE_TARNAME', PACKAGE)
 
-    define('INSTALL_PREFIX', conf.escpath(sub('${PREFIX}/', env)))
-    define('PACKAGE_BUGREPORT','http://sourceforge.net/tracker/?group_id=5528&atid=105528' )
-    define('PACKAGE_DATA_DIR', conf.escpath(sub('${DATAROOTDIR}/${PACKAGE}', env)))
+#    define('INSTALL_PREFIX', conf.escpath(sub('${PREFIX}/', env)))
+#    define('PACKAGE_BUGREPORT','http://sourceforge.net/tracker/?group_id=5528&atid=105528' )
+#    define('PACKAGE_DATA_DIR', conf.escpath(sub('${DATAROOTDIR}/${PACKAGE}', env)))
 #    define('PACKAGE_DOC_DIR', conf.escpath(env['DOCDIR']))
-    define('PACKAGE_HELP_DIR', conf.escpath(sub('${DATAROOTDIR}/gnome/help/${PACKAGE}', env)))
+#    define('PACKAGE_HELP_DIR', conf.escpath(sub('${DATAROOTDIR}/gnome/help/${PACKAGE}', env)))
 #    define('PACKAGE_LOCALE_DIR', conf.escpath(env['LOCALEDIR']))
-    define('PACKAGE_MENU_DIR', conf.escpath(sub('${DATAROOTDIR}/applications', env)))
+#    define('PACKAGE_MENU_DIR', conf.escpath(sub('${DATAROOTDIR}/applications', env)))
     #define('PACKAGE_PIXMAPS_DIR', conf.escpath(sub('${DATAROOTDIR}/pixmaps/${PACKAGE}', env)))
-    define('PACKAGE_PIXMAPS_DIR', conf.escpath(sub('${DATAROOTDIR}/${PACKAGE}', env)))
-    define('PACKAGE_SOURCE_DIR', conf.escpath(os.path.abspath(top))) # folder where was wscript executed
-
-
-    conf.check_cfg(msg="Checking for GNOME related libs",
-                   package='',
-                   args=common_libs,
-                   uselib_store='GNOME',
-                   mandatory=True)
-
-    env.append_value('ALL_LIBS', 'GNOME')
-
+#    define('PACKAGE_PIXMAPS_DIR', conf.escpath(sub('${DATAROOTDIR}/${PACKAGE}', env)))
+#    define('PACKAGE_SOURCE_DIR', conf.escpath(os.path.abspath(top))) # folder where was wscript executed
 
     # Check for header files
     for h in _headers:
-        conf.check(header_name=h)
+        ctx.check(header_name=h)
 
     # Define to 1 if you have the `strcasestr' function.
     # this function is part of some glibc, string.h
     # could be missing in win32
-    conf.check_cc(msg='Checking for function strcasestr', define_name="HAVE_STRCASESTR",
+    ctx.check_cc(msg='Checking for function strcasestr', define_name="HAVE_STRCASESTR",
             fragment='int main() {strcasestr("hello","he");}\n')
 
 
-    conf.write_config_header('config.h')
+    ctx.env.common_libs.extend(['--cflags','--libs'])
+
+    ctx.check_cfg(msg="Checking for libs",
+                 package='',
+                 args=ctx.env.common_libs,
+                 uselib_store='ALL_LIBS',
+                 mandatory=True)
+
+
+
+    ctx.write_config_header('config.h')
 
 
 def build(bld):
