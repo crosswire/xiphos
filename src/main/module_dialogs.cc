@@ -191,13 +191,11 @@ void main_dialogs_clear_viewer(DIALOG_DATA *d)
 	g_string_printf(str,
 			HTML_START
 			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
-			"<b><font color=\"grey\" size=\"%+d\" face=\"%s\">%s</font></b><hr/></body></html>",
+			"<b><font color=\"grey\" face=\"%s\" size=\"%+d\">%s</font></b><hr/></body></html>",
 			settings.bible_bg_color, settings.bible_text_color,
 			settings.link_color,
-			((mf->old_font_size)
-			 ? atoi(mf->old_font_size) + settings.base_font_size - 1
-			 : settings.base_font_size - 1),
 			((mf->old_font) ? mf->old_font : ""),
+			mf->old_font_size_value - 1,
 			buf);
 	free_font(mf);
 	HtmlOutput(str->str, d->previewer, NULL, NULL);

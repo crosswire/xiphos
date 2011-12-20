@@ -98,13 +98,11 @@ void main_init_previewer(void)
 	g_string_printf(str,
 			HTML_START
 			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
-			"<font color=\"grey\" size=\"%+d\" face=\"%s\"><b>%s</b></font><hr/></body></html>",
+			"<font color=\"grey\" face=\"%s\" size=\"%+d\"><b>%s</b></font><hr/></body></html>",
 			settings.bible_bg_color, settings.bible_text_color,
 			settings.link_color,
-			((mf->old_font_size)
-			 ? atoi(mf->old_font_size) + settings.base_font_size - 1
-			 : settings.base_font_size - 1),
 			((mf->old_font) ? mf->old_font : ""),
+			mf->old_font_size_value - 1,
 			buf);
 	free_font(mf);
 	HtmlOutput(str->str, previewer_html_widget, NULL, NULL);
@@ -175,9 +173,7 @@ void main_information_viewer(const gchar * mod_name,
 			settings.bible_bg_color, settings.bible_text_color,
 			settings.link_color,
 			(mf->old_font ? mf->old_font : "none"),
-			(mf->old_font_size
-			 ? atoi(mf->old_font_size) + settings.base_font_size
-			 : settings.base_font_size) - 1);
+			mf->old_font_size_value - 1);
 
 	str = g_string_new(tmp_str->str);
 
@@ -439,9 +435,7 @@ void main_entry_display(gpointer data, gchar * mod_name,
 	g_string_printf(tmp_str,
 			"<font face=\"%s\" size=\"%+d\">",
 			(mf->old_font ? mf->old_font : "none"),
-			(mf->old_font_size
-			 ? atoi(mf->old_font_size) + settings.base_font_size
-			 : settings.base_font_size) - 1);
+			mf->old_font_size_value - 1);
 	str = g_string_append(str, tmp_str->str);
 
 	/* show key in html widget  */
