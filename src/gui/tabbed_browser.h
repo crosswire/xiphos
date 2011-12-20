@@ -29,7 +29,7 @@ extern "C" {
 #include <gtk/gtk.h>
 #include "main/tab_history.h"
 
-#define	TABHISTORYLENGTH	25
+#define	TABHISTORYLENGTH	40
 
 struct _passage_tab_info {
 	GtkWidget *page_widget;
@@ -65,6 +65,7 @@ extern PASSAGE_TAB_INFO *cur_passage_tab;
 
 void gui_save_tabs(const gchar *filename);
 void gui_load_tabs(const gchar *filename);
+void gui_select_nth_tab(gint page_num);
 void gui_set_tab_label(const gchar *key, gboolean one_tab);
 void gui_set_named_tab_label(const gchar *key, PASSAGE_TAB_INFO *pt, gboolean update);
 void gui_open_module_in_new_tab(gchar *module);

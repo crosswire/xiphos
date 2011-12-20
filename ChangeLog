@@ -1,3 +1,8 @@
+2011-12-19  karl <charcoal@users.sf.net>
+
+	* added Ctrl-[1-9] to select Nth tab.
+	* lengthened history from 25 to 40.
+
 2011-12-12  karl <charcoal@users.sf.net>
 
 	* Mark__T's splash fixes.
