@@ -2,6 +2,7 @@
 
 	* added Ctrl-[1-9] to select Nth tab.
 	* lengthened history from 25 to 40.
+	* apply proper font specs to adv.search display.
 
 2011-12-12  karl <charcoal@users.sf.net>
 
