@@ -3,6 +3,9 @@
 	* added Ctrl-[1-9] to select Nth tab.
 	* lengthened history from 25 to 40.
 	* apply proper font specs to adv.search display.
+	* vastly simplified font size references (one calculation, many refs).
+	* alter bible context boundary: vv.1,2 anchored at chapter beginning.
+	* eliminate context boundary when base font size is large.	
 
 2011-12-12  karl <charcoal@users.sf.net>
 

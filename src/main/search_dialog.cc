@@ -955,9 +955,7 @@ void main_finds_verselist_selection_changed(GtkTreeSelection * selection,
 			settings.bible_text_color, settings.bible_bg_color,
 			settings.link_color,
 			((mf->old_font) ? mf->old_font : ""),
-			((mf->old_font_size)
-			 ? atoi(mf->old_font_size) + settings.base_font_size
-			 : settings.base_font_size));
+			mf->old_font_size_value);
 	free_font(mf);
 	g_string_append(html_text, text_str->str);
 	g_string_append(html_text, "</font></body></html>");	
