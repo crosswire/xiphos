@@ -947,11 +947,20 @@ void main_finds_verselist_selection_changed(GtkTreeSelection * selection,
 
 #ifdef USE_XIPHOS_HTML
 	GString *html_text = g_string_new("");
-	g_string_printf(html_text, HTML_START "<body text=\"%s\" bgcolor=\"%s\" link=\"%s\">",
+	MOD_FONT *mf = get_font(module);
+	g_string_printf(html_text,
+			HTML_START
+			"<body text=\"%s\" bgcolor=\"%s\" link=\"%s\">"
+			"<font face=\"%s\" size=\"%+d\">",
 			settings.bible_text_color, settings.bible_bg_color,
-			settings.link_color);
+			settings.link_color,
+			((mf->old_font) ? mf->old_font : ""),
+			((mf->old_font_size)
+			 ? atoi(mf->old_font_size) + settings.base_font_size
+			 : settings.base_font_size));
+	free_font(mf);
 	g_string_append(html_text, text_str->str);
-	g_string_append(html_text, "</body></html>");	
+	g_string_append(html_text, "</font></body></html>");	
 	XIPHOS_HTML_OPEN_STREAM(search1.preview_html, "text/html");
 	XIPHOS_HTML_WRITE(search1.preview_html,
 			 html_text->str, html_text->len);
