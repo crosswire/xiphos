@@ -376,7 +376,7 @@ void gui_save_tabs(const gchar *filename)
 
 	root_node = xmlNewNode(NULL, (const xmlChar *) "Xiphos_Tabs");
 	//xml_attr = 
-	xmlNewProp(root_node, (const xmlChar *)"Version", (const xmlChar *) VERSION);
+	xmlNewProp(root_node, (const xmlChar *)"Version", (const xmlChar *) PACKAGE_VERSION);
 	xmlDocSetRootElement(xml_doc, root_node);
 
 	section_node = xmlNewChild(root_node, NULL,
@@ -471,7 +471,7 @@ void _save_off_tab (const gchar * filename)
 
 	root_node = xmlNewNode(NULL, (const xmlChar *) "Xiphos_Tabs");
 	//xml_attr = 
-	xmlNewProp(root_node, (const xmlChar *)"Version", (const xmlChar *) VERSION);
+	xmlNewProp(root_node, (const xmlChar *)"Version", (const xmlChar *) PACKAGE_VERSION);
 	xmlDocSetRootElement(xml_doc, root_node);
 
 	section_node = xmlNewChild(root_node, NULL,
