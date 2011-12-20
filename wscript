@@ -37,35 +37,19 @@ out = 'build'
 _tooldir = './waffles/'
 ROOTDIR_WIN32 = 'C:\msys'
 _headers = '''
-dlfcn.h
-inttypes.h
 locale.h
-memory.h
 stdint.h
 stdlib.h
-strings.h
 string.h
 sys/stat.h
 sys/types.h
 unistd.h
-sys/select.h
 sys/socket.h
 winsock.h
 '''.split()
 def options(ctx):
     ctx.load('compiler_c compiler_cxx')
-
-    maingroup = ctx.add_option_group('Main Xiphos Options')
-
-    maingroup.add_option('--gtk',
-                   action='store', default='auto', dest='gtkver',
-                   choices=['auto', '3', '2'],
-                   help="Select gtk+ API ['auto', '3', '2']")
-
-    maingroup.add_option('--backend',
-                   action='store', default='auto', dest='backend',
-                   choices=['auto', 'webkit', 'xulrunner', 'gtkhtml'],
-                   help="Select rendering backend ['auto', 'webkit', 'xulrunner', 'gtkhtml']")
+    ctx.load('xiphos_backends', tooldir=_tooldir)
 
     miscgroup = ctx.add_option_group('Miscellaneous Options')
 
@@ -91,51 +75,10 @@ def options(ctx):
 
 def configure(ctx):
     ctx.load('compiler_c compiler_cxx')
+    ctx.load('xiphos_backends', tooldir=_tooldir)
     ctx.load('intltool')
     ctx.load('misc', tooldir=_tooldir)
 #    ctx.load('gnome', tooldir=_tooldir)
-
-    # Auto detecting gtk version, if none were specified.
-    ctx.msg('GTK version set to', ctx.options.gtkver)
-    if ctx.options.gtkver == 'auto':
-        if ctx.check_cfg(modversion='libgtkhtml-4.0', mandatory=False):
-            ctx.options.gtkver = '3'
-        elif ctx.check_cfg(modversion='libgtkhtml-3.14', mandatory=False):
-            ctx.options.gtkver = '2'
-        else:
-            ctx.fatal('Could not set GTK based on above checks!')
-        ctx.msg('Detected GTK', ctx.options.gtkver)
-
-    # Auto detecting backed if none were specified
-    if opt.backend == 'auto':
-            webkit = 'webkitgtk-3.0' if opt.gtkver == '3' else 'webkit-1.0'
-            if conf.check_cfg(modversion=webkit, msg='Auto detecting webkit', okmsg='ok',
-                              erromsg='Not found'):
-                    opt.backend = 'webkit'
-
-            elif conf.check_cfg(modversion='libxul-embedding', msg='Auto detecting xulrunner', okmsg='ok',
-                              erromsg='Not found'):
-                    opt.backend = 'xulrunner'
-
-            else:
-                    gtkhtml = 'libgtkhtml-4.0' if opt.gtkver == '3' else 'libgtkhtml-3.14'
-                    conf.check_cfg(modversion=gtkhtml, msg='Auto detecting gtkhtml', okmsg='ok',
-                                   erromsg='Not found', mandatory=True)
-                    opt.backend = 'gtkhtml'
-
-    #gtk
-    if opt.gtkver == '2':
-        env['ENABLE_GTK2'] = True
-        dfn('GTK2', 1)
-
-    # gtkhtml
-    if opt.backend == 'webkit':
-	env['ENABLE_WEBKIT'] = True
-	dfn('WEBKIT', 1)
-
-    if opt.backend == 'gtkhtml':
-        env['ENABLE_GTKHTML'] = True
-        dfn('GTKHTML', 1)
 
     # disable console window in win32
     if opt.no_console and env['IS_WIN32']:
@@ -177,7 +120,6 @@ def configure(ctx):
     define('PACKAGE_TARNAME', PACKAGE)
 
     define('INSTALL_PREFIX', conf.escpath(sub('${PREFIX}/', env)))
-    #dfn('LT_OBJDIR', '.libs') - what's the purpose?
     define('PACKAGE_BUGREPORT','http://sourceforge.net/tracker/?group_id=5528&atid=105528' )
     define('PACKAGE_DATA_DIR', conf.escpath(sub('${DATAROOTDIR}/${PACKAGE}', env)))
     define('PACKAGE_DOC_DIR', conf.escpath(env['DOCDIR']))
@@ -327,17 +269,6 @@ def configure(ctx):
         env.append_value('ALL_LIBS', 'NSPR')
         env.append_value('ALL_LIBS', 'GECKO')
         conf.define('USE_GTKMOZEMBED', 1)
-
-    #
-    # Random defines... legacy from autotools. Can we drop these?
-    # Define to 1 if you have the ANSI C header files. */
-    dfn('STDC_HEADERS', 1)
-    # Define to 1 if you can safely include both <sys/time.h> and <time.h>. */
-    dfn('TIME_WITH_SYS_TIME', 1)
-    dfn('ENABLE_NLS', 1)
-    dfn('HAVE_BIND_TEXTDOMAIN_CODESET', 1)
-    dfn('HAVE_GETTEXT', 1)
-    dfn('HAVE_DCGETTEXT', 1)
 
     # Check for header files
     for h in _headers:
