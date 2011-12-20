@@ -964,11 +964,46 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
 
 /******************************************************************************
  * Name
- *  gui_set_tab_label
+ *  gui_select_nth_tab
  *
  * Synopsis
  *   #include "tabbed_browser.h"
  *
+ *   void gui_select_nth_tab(gint page_num)
+ *
+ * Description
+ *   from ctrl-DIGIT in main_window.c, select a tab.
+ *   the tab list is 0-based: page_num must already be 0-normalized.
+ *
+ * Return value
+ *   void
+ */
+
+void gui_select_nth_tab(gint page_num)
+{
+	gint number_of_pages = gtk_notebook_get_n_pages(GTK_NOTEBOOK(widgets.notebook_main));
+
+	/* within bounds of available tabs? */
+	if (page_num >= number_of_pages)
+		return;
+
+	settings.tab_page = page_num;
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_main),
+				      page_num);
+	gui_notebook_main_switch_page(GTK_NOTEBOOK(widgets.notebook_main),
+				      NULL,
+				      page_num,
+				      &passage_list);
+}
+
+
+/******************************************************************************
+ * Name
+ *  gui_set_tab_label
+ *
+ * Synopsis
+ *   #include "tabbed_browser.h"
+if *
  *   void gui_set_tab_label(const char *key, gboolean one_tab)
  *
  * Description

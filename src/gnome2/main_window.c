@@ -695,6 +695,13 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 		}
 		break;
 
+		// ctrl-DIGIT [1-9] selects DIGIT-th tab.
+	case XK_1: case XK_2: case XK_3:
+	case XK_4: case XK_5: case XK_6:
+	case XK_7: case XK_8: case XK_9:
+		if (state == GDK_CONTROL_MASK)
+			gui_select_nth_tab((event->keyval - XK_0) - 1);	/* 0-based list */
+
 	case XK_F1: // F1 help
 		if (state == 0)
 			on_help_contents_activate(NULL, NULL);
