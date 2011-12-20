@@ -786,7 +786,7 @@ void create_mainwindow(void)
 	*/
 	settings.shadow_type = GTK_SHADOW_IN;
 
-	GS_print(("%s xiphos-%s\n", "Starting", VERSION));
+	GS_print(("%s xiphos-%s\n", "Starting", PACKAGE_VERSION));
 	GS_print(("%s\n\n", "Building Xiphos interface"));
 
 	widgets.studypad_dialog = NULL;

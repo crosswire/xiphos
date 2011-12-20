@@ -111,7 +111,6 @@ def configure(ctx):
     env['PACKAGE'] = PACKAGE
     env['HELPDIR'] = sub(opt.helpdir, env)
 
-    define('VERSION', VERSION)
     define('PACKAGE_VERSION', VERSION)
     define('GETTEXT_PACKAGE', PACKAGE)
     define('PACKAGE', PACKAGE)

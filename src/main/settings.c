@@ -343,7 +343,7 @@ void load_settings_structure(void)
 {
 	char *buf = NULL, *parallels;
 
-	settings.gs_version = VERSION;
+	settings.gs_version = PACKAGE_VERSION;
 	if ((settings.MainWindowModule = xml_get_value("modules", "bible")) == NULL) {
 		/* by the time we are here, we *must* have at least 1 bible */
 		settings.MainWindowModule = g_strdup(get_list(TEXT_LIST)->data);

@@ -108,7 +108,7 @@ gui_create_about_xiphos(void)
 	gchar versionbuild[128];
 
 	snprintf
-	    (versionbuild, 120, "%s-%s", VERSION,
+	    (versionbuild, 120, "%s-%s", PACKAGE_VERSION,
 #ifdef USE_WEBKIT  
 	     "webkit"
 #else    
