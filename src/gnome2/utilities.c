@@ -840,6 +840,11 @@ MOD_FONT *get_font(gchar * mod_name)
 		}
 	}
 
+	/* convert string -> int, here, once for all. includes base bias. */
+	mf->old_font_size_value = ((mf->old_font_size)
+				   ? atoi(mf->old_font_size) + settings.base_font_size
+				   : settings.base_font_size);
+
 	return mf;
 }
 

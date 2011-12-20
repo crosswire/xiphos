@@ -32,6 +32,7 @@ struct  _mod_font {
 	char *old_font;
 	const char *new_font;
 	char *old_font_size;
+	int old_font_size_value;
 	const char *new_font_size;
 	int no_font;
 };

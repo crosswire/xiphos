@@ -839,9 +839,7 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule)
 
 		if (settings.showversenum) {
 			buf = g_strdup_printf("<td><font size=\"%+d\">",
-					      ((mf->old_font_size)
-					       ? atoi(mf->old_font_size) + settings.base_font_size
-					       : settings.base_font_size));
+					      mf->old_font_size_value);
 			swbuf.append(buf);
 			g_free(buf);
 		}
@@ -919,9 +917,7 @@ GTKEntryDisp::Display(SWModule &imodule)
 			      settings.bible_text_color,
 			      settings.link_color,
 			      ((mf->old_font) ? mf->old_font : ""),
-			      ((mf->old_font_size)
-			       ? atoi(mf->old_font_size) + settings.base_font_size
-			       : settings.base_font_size),
+			      mf->old_font_size_value,
 			      imodule.Description(),
 			      imodule.Name(),
 			      settings.bible_verse_num_color,
@@ -1022,16 +1018,13 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 
 	if (imodule.Error()) {
 		num = main_format_number(chapter);
-		buf=g_strdup_printf("<div style=\"text-align: center\">"
-				    "<p><b><font size=\"%+d\">%s</font></b></p>"
-				    "<b>%s %s</b></div>",
-				    1 + ((mf->old_font_size)
-					 ? atoi(mf->old_font_size) +
-					 settings.base_font_size
-					 : settings.base_font_size),
-				    imodule.Description(),
-				    _("Chapter"),
-				    num);
+		buf = g_strdup_printf("<a name=\"TOP\"><div style=\"text-align: center\">"
+				      "<p><b><font size=\"%+d\">%s</font></b></p>"
+				      "<b>%s %s</b></div>",
+				      1 + mf->old_font_size_value,
+				      imodule.Description(),
+				      _("Chapter"),
+				      num);
 		g_free(num);
 		swbuf.append(buf);
 		g_free(buf);
@@ -1065,7 +1058,7 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 				       : "ltr"));
 
 		num = main_format_number(key->Verse());
-		buf=g_strdup_printf(settings.showversenum
+		buf = g_strdup_printf(settings.showversenum
 				? "&nbsp; <a name=\"%d\" href=\"sword:///%s\">"
 				  "<font size=\"%+d\" color=\"%s\">%s%s%s%s%s%s%s</font></a>&nbsp;"
 				: "&nbsp; <a name=\"%d\"> </a>",
@@ -1087,8 +1080,8 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 		g_free(buf);
 
 		num = main_format_number(chapter);
-		buf=g_strdup_printf(
-				"%s%s<br/><hr/><div style=\"text-align: center\"><b>%s %s</b></div>",
+		buf = g_strdup_printf(
+				"%s%s<br/><a name=\"TOP\"><hr/><div style=\"text-align: center\"><b>%s %s</b></div>",
 #if 0
 				cVerse.GetText(),
 #else
@@ -1137,11 +1130,11 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 					? block_render((const char *)imodule)
 					: (const char *)imodule),
 				       cache_flags);
-		buf=g_strdup_printf("%s<br />", cVerse.GetText());
+		buf = g_strdup_printf("%s<br />", cVerse.GetText());
 #else
-		buf=g_strdup_printf("%s<br />", (strongs_or_morph
-						 ? block_render((const char *)imodule)
-						 : (const char *)imodule));
+		buf = g_strdup_printf("%s<br />", (strongs_or_morph
+						   ? block_render((const char *)imodule)
+						   : (const char *)imodule));
 #endif /* !0 */
 		swbuf.append(buf);
 		g_free(buf);
@@ -1166,7 +1159,7 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 
 	imodule++;
 	if (imodule.Error()) {
-		buf=g_strdup_printf(
+		buf = g_strdup_printf(
 			"%s<hr/><div style=\"text-align: center\"><p><b>%s</b></p></div>",
 			// extra break when excess strongs/morph space.
 			(strongs_or_morph ? "<br/><br/>" : ""),
@@ -1177,7 +1170,7 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 		imodule--;
 		char *num = main_format_number(key->Chapter());
 
-		buf=g_strdup_printf(
+		buf = g_strdup_printf(
 			"%s<hr/><div style=\"text-align: center\"><b>%s %s</b></div>",
 			(strongs_or_morph ? "<br/><br/>" : ""),
 			_("Chapter"), num);
@@ -1191,7 +1184,7 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 				       : "ltr"));
 
 		num = main_format_number(key->Verse());
-		buf=g_strdup_printf(settings.showversenum
+		buf = g_strdup_printf(settings.showversenum
 				? "&nbsp; <a name=\"%d\" href=\"sword:///%s\">"
 				  "<font size=\"%+d\" color=\"%s\">%s%s%s%s%s%s%s</font></a>&nbsp;"
 				: "&nbsp; <a name=\"%d\"> </a>",
@@ -1271,8 +1264,12 @@ GTKChapDisp::Display(SWModule &imodule)
 		set_morph_order(imodule);
 
 	// when strongs/morph are on, the anchor boundary must be smaller.
-	// or if main window is too small to keep curverse in-pane.
-	gint display_boundary = ((settings.gs_height < 500) ? 0 : (strongs_or_morph ? 1 : 2));
+	// or if main window is too small to keep curverse in-pane,
+	// of it the user wants really big fonts.
+	gint display_boundary = (((settings.gs_height < 500) ||
+				  (mf->old_font_size_value > 2))
+				 ? 0
+				 : (strongs_or_morph ? 1 : 2));
 
 	// if we are no longer where annotations were current, re-load.
 	if (strcasecmp(ModuleName,
@@ -1289,7 +1286,7 @@ GTKChapDisp::Display(SWModule &imodule)
 	swbuf = "";
 	footnote = xref = 0;
 
-	buf=g_strdup_printf(HTML_START
+	buf = g_strdup_printf(HTML_START
 			    "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
 			    "<font face=\"%s\" size=\"%+d\">",
 			    // strongs & morph specs win over dblspc.
@@ -1304,9 +1301,7 @@ GTKChapDisp::Display(SWModule &imodule)
 			    settings.bible_text_color,
 			    settings.link_color,
 			    ((mf->old_font) ? mf->old_font : ""),
-			    ((mf->old_font_size)
-			     ? atoi(mf->old_font_size) + settings.base_font_size
-			     : settings.base_font_size));
+			    mf->old_font_size_value);
 	swbuf.append(buf);
 	g_free(buf);
 
@@ -1368,9 +1363,7 @@ GTKChapDisp::Display(SWModule &imodule)
 			     ? settings.highlight_fg
 			     : settings.highlight_bg),
 			    ((mf->old_font) ? mf->old_font : ""),
-			    ((mf->old_font_size)
-			     ? atoi(mf->old_font_size) + settings.base_font_size
-			     : settings.base_font_size));
+			    mf->old_font_size_value);
 			swbuf.append(buf);
 			g_free(buf);
 		}
@@ -1499,11 +1492,13 @@ GTKChapDisp::Display(SWModule &imodule)
 	swbuf.append("</div></font></body></html>");
 
 #ifdef USE_XIPHOS_HTML
-	if (strongs_and_morph)
+	if (strongs_and_morph && (curVerse != 1))
 		buf = g_strdup_printf("%d", curVerse);
 	else	/* this is not dangling: connects to following "if" */
 #endif /* USE_XIPHOS_HTML */
-	if (curVerse > display_boundary)
+	if ((curVerse == 1) || (display_boundary >= curVerse))
+		buf = g_strdup("TOP");
+	else if (curVerse > display_boundary)
 		buf = g_strdup_printf("%d", curVerse - display_boundary);
 	else
 		buf = NULL;
@@ -1622,9 +1617,7 @@ DialogEntryDisp::Display(SWModule &imodule)
 			      settings.bible_text_color,
 			      settings.link_color,
 			      ((mf->old_font) ? mf->old_font : ""),
-			      ((mf->old_font_size)
-			       ? atoi(mf->old_font_size) + settings.base_font_size
-			       : settings.base_font_size),
+			      mf->old_font_size_value,
 			      settings.bible_verse_num_color,
 			      imodule.Description(),
 			      imodule.Name(),
@@ -1716,7 +1709,12 @@ DialogChapDisp::Display(SWModule &imodule)
 		set_morph_order(imodule);
 
 	// when strongs/morph are on, the anchor boundary must be smaller.
-	gint display_boundary = (strongs_or_morph ? 1 : 2);
+	// or if main window is too small to keep curverse in-pane,
+	// of it the user wants really big fonts.
+	gint display_boundary = (((settings.gs_height < 500) ||
+				  (mf->old_font_size_value > 2))
+				 ? 0
+				 : (strongs_or_morph ? 1 : 2));
 
 	// if we are no longer where annotations were current, re-load.
 	if (strcasecmp(ModuleName,
@@ -1760,9 +1758,7 @@ DialogChapDisp::Display(SWModule &imodule)
 			      settings.bible_text_color,
 			      settings.link_color,
 			      ((mf->old_font) ? mf->old_font : ""),
-			      ((mf->old_font_size)
-			       ? atoi(mf->old_font_size) + settings.base_font_size
-			       : settings.base_font_size));
+			      mf->old_font_size_value);
 	swbuf.append(buf);
 	g_free(buf);
 
@@ -1820,9 +1816,7 @@ DialogChapDisp::Display(SWModule &imodule)
 			     ? settings.highlight_fg
 			     : settings.highlight_bg),
 			    ((mf->old_font) ? mf->old_font : ""),
-			    ((mf->old_font_size)
-			     ? atoi(mf->old_font_size) + settings.base_font_size
-			     : settings.base_font_size));
+			    mf->old_font_size_value);
 			swbuf.append(buf);
 			g_free(buf);
 		}
@@ -1947,11 +1941,13 @@ DialogChapDisp::Display(SWModule &imodule)
 	swbuf.append("</div></font></body></html>");
 
 #ifdef USE_XIPHOS_HTML
-	if (strongs_and_morph)
+	if (strongs_and_morph && (curVerse != 1))
 		buf = g_strdup_printf("%d", curVerse);
 	else	/* this is not dangling: connects to following "if" */
 #endif /* USE_XIPHOS_HTML */
-	if (curVerse > display_boundary)
+	if ((curVerse == 1) || (display_boundary >= curVerse))
+		buf = g_strdup("TOP");
+	else if (curVerse > display_boundary)
 		buf = g_strdup_printf("%d", curVerse - display_boundary);
 	else
 		buf = NULL;
@@ -1992,7 +1988,7 @@ GTKPrintEntryDisp::Display(SWModule &imodule)
 	else
 		keytext = strdup((char*)imodule.KeyText());
 
-	buf=g_strdup_printf(HTML_START
+	buf = g_strdup_printf(HTML_START
 			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
 			      "<font face=\"%s\" size=\"%+d\">"
 			      "<font color=\"%s\">"
@@ -2003,9 +1999,7 @@ GTKPrintEntryDisp::Display(SWModule &imodule)
 			      settings.bible_text_color,
 			      settings.link_color,
 			      ((mf->old_font) ? mf->old_font : ""),
-			      ((mf->old_font_size)
-			       ? atoi(mf->old_font_size) + settings.base_font_size
-			       : settings.base_font_size),
+			      mf->old_font_size_value,
 			      settings.bible_verse_num_color,
 			      imodule.Description(),
 			      imodule.Name(),
@@ -2054,7 +2048,7 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 
 	swbuf = "";
 
-	buf=g_strdup_printf(HTML_START
+	buf = g_strdup_printf(HTML_START
 			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
 			      "<font face=\"%s\" size=\"%+d\">",
 			      (ops->doublespace ? DOUBLE_SPACE : ""),
@@ -2062,9 +2056,7 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 			      settings.bible_text_color,
 			      settings.link_color,
 			      ((mf->old_font) ? mf->old_font : ""),
-			      ((mf->old_font_size)
-			       ? atoi(mf->old_font_size) + settings.base_font_size
-			       : settings.base_font_size));
+			      mf->old_font_size_value);
 	swbuf.append(buf);
 	g_free(buf);
 
@@ -2084,7 +2076,7 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 			= backend->get_entry_attribute("Heading", "Preverse",
 						       heading)) != NULL) {
 			const char *preverse2 = imodule.RenderText(preverse);
-			buf=g_strdup_printf("<br/><b>%s</b><br/><br/>", preverse2);
+			buf = g_strdup_printf("<br/><b>%s</b><br/><br/>", preverse2);
 			swbuf.append(buf);
 			g_free(buf);
 			g_free(preverse);
@@ -2093,7 +2085,7 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 		}
 
 		num = main_format_number(key->Verse());
-		buf=g_strdup_printf(settings.showversenum
+		buf = g_strdup_printf(settings.showversenum
 			? "&nbsp; <a name=\"%d\" href=\"sword:///%s\">"
 			  "<font size=\"%+d\" color=\"%s\">%s%s%s%s%s%s%s</font></a>&nbsp;"
 			: "&nbsp; <a name=\"%d\"> </a>",

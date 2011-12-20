@@ -664,14 +664,11 @@ void main_update_parallel_page(void)
 				mod_name);
 			g_string_append(data, tmpBuf);
 
-			int size = ((mf->old_font_size)
-				    ? (atoi(mf->old_font_size) + settings.base_font_size)
-				    : settings.base_font_size);
 			sprintf(tmpBuf, (((strlen(mf->old_font) < 2) ||
 					  !strncmp(mf->old_font, "none", 4))
 					 ? "<font size=\"%+d\">"
 					 : "<font size=\"%+d\" face=\"%s\">"),
-				size, mf->old_font);
+				mf->old_font_size_value, mf->old_font);
 			free_font(mf);
 			g_string_append(data, tmpBuf);
 
@@ -810,10 +807,7 @@ static void interpolate_parallel_display(SWBuf& text, gchar *key, gint parallel_
 					 settings.verse_num_font_size + settings.base_font_size,
 					 num,
 					 mf[modidx]->old_font,
-					 ((mf[modidx]->old_font_size)
-					  ? (atoi(mf[modidx]->old_font_size) +
-					     settings.base_font_size)
-					  : settings.base_font_size),
+					 mf[modidx]->old_font_size_value,
 					 textColor);
 				g_free((gchar*)newurl);
 				g_free(num);
