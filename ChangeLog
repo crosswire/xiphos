@@ -6,6 +6,7 @@
 	* vastly simplified font size references (one calculation, many refs).
 	* alter bible context boundary: vv.1,2 anchored at chapter beginning.
 	* eliminate context boundary when base font size is large.	
+	* only bible texts get green current verse in full-chapter parallel.
 
 2011-12-12  karl <charcoal@users.sf.net>
 
