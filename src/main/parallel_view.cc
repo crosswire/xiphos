@@ -736,15 +736,16 @@ static void interpolate_parallel_display(SWBuf& text, gchar *key, gint parallel_
 	gint cur_verse, cur_chapter, verse, modidx;
 	char *cur_book;
 	MOD_FONT **mf;
-	gboolean *is_rtol, *is_module;
+	gboolean *is_rtol, *is_module, *is_bible_text;
 
-	if (!gtk_widget_get_realized (GTK_WIDGET(widgets.notebook_bible_parallel))) return;
+	if (!gtk_widget_get_realized(GTK_WIDGET(widgets.notebook_bible_parallel))) return;
 
-	is_module = g_new(gboolean, parallel_count);
-	is_rtol   = g_new(gboolean, parallel_count);
-	mf        = g_new(MOD_FONT *, parallel_count);
+	is_module     = g_new(gboolean, parallel_count);
+	is_rtol       = g_new(gboolean, parallel_count);
+	is_bible_text = g_new(gboolean, parallel_count);
+	mf            = g_new(MOD_FONT *, parallel_count);
 
-	// quick cache of fonts/rtol info.
+	// quick cache of fonts/rtol/type info.
 	for (modidx = 0; modidx < parallel_count; ++modidx) {
 		// determine module presence once each.
 		is_module[modidx] = backend->is_module(settings.parallel_list[modidx]);
@@ -752,6 +753,9 @@ static void interpolate_parallel_display(SWBuf& text, gchar *key, gint parallel_
 		if (is_module[modidx]) {
 			is_rtol[modidx] = main_is_mod_rtol(settings.parallel_list[modidx]);
 			mf[modidx] = get_font(settings.parallel_list[modidx]);
+			is_bible_text[modidx] =
+			    (main_get_mod_type(settings.parallel_list[modidx])
+			     == TEXT_TYPE);
 		}
 	}
 
@@ -776,12 +780,6 @@ static void interpolate_parallel_display(SWBuf& text, gchar *key, gint parallel_
 
 		text += "<tr valign=\"top\">";
 
-		// mark current verse properly.
-		if (verse == cur_verse)
-			textColor = settings.currentverse_color;
-		else
-			textColor = settings.bible_text_color;
-
 		// alternate background colors.
 		if (verse % 2 == 0)
 			bgColor = "#c0c0c0";
@@ -791,6 +789,12 @@ static void interpolate_parallel_display(SWBuf& text, gchar *key, gint parallel_
 		for (modidx = 0; modidx < parallel_count; modidx++) {
 			if (is_module[modidx]) {		
 				
+				// mark current verse properly.
+				if ((verse == cur_verse) && is_bible_text[modidx])
+					textColor = settings.currentverse_color;
+				else
+					textColor = settings.bible_text_color;
+
 				const gchar *newurl = main_url_encode(tmpkey);
 				gchar *num = main_format_number(verse);
 				snprintf(str, 499,
@@ -845,6 +849,7 @@ static void interpolate_parallel_display(SWBuf& text, gchar *key, gint parallel_
 	g_free(mf);
 	g_free(is_rtol);
 	g_free(is_module);
+	g_free(is_bible_text);
 }
 
 
