@@ -175,6 +175,7 @@ def configure(conf):
         env['IS_WIN32'] = True
         env['IS_LINUX'] = False
         Utils.pprint('CYAN', "Cross-compilation")
+        env['CROSS'] = os.environ['CROSS']
 
     # IS_WIN32 means compiling for win32, not compiling necessary on win32
     if env['IS_WIN32']:
@@ -259,10 +260,10 @@ def configure(conf):
         #env['POCOM'] = conf.find_program('msgfmt')
         #env['INTLTOOL'] = '/usr/local/bin/intltool-merge'
     
-    #if env['IS_CROSS_WIN32']:
+    if env['IS_CROSS_WIN32']:
         # allows to use linux pkg-config for cross-compilation
-        #os.environ['PKG_CONFIG_LIBDIR'] = opt.pkg_conf_libdir
-        #env['PKG_CONFIG_PREFIX'] = opt.pkg_conf_prefix
+        os.environ['PKG_CONFIG_PATH'] = opt.pkg_conf_libdir
+        env['PKG_CONFIG_PREFIX'] = opt.pkg_conf_prefix
 
     # Auto detecting gtk version, if none were specified.
     if opt.gtkver == 'auto':
@@ -311,7 +312,7 @@ def configure(conf):
 
     # strip xiphos binary
     if env['IS_CROSS_WIN32']:
-        env['STRIP'] = conf.find_program('i686-w64-mingw32-strip', mandatory=True)
+        env['STRIP'] = conf.find_program(env['CROSS'] + 'strip', mandatory=True)
     else:
         env['STRIP'] = conf.find_program('strip', mandatory=True)
 
