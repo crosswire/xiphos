@@ -1,5 +1,5 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index fd57bf9..1cb4717 100644
+index 17b978d..2828b37 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -46,6 +46,7 @@ FIND_PACKAGE(CURL QUIET)
@@ -10,9 +10,9 @@ index fd57bf9..1cb4717 100644
  
  ###########################################################################################
  # Based on user input and the results of the above tests, we may need to mux with the source
-@@ -175,12 +176,14 @@ IF(WITH_ICU)
- 	SET(SWORD_LINK_LIBRARIES ${SWORD_LINK_LIBRARIES} ${ICU_LIBRARIES} ${ICU_I18N_LIBRARIES})
- ENDIF(WITH_ICU)
+@@ -182,12 +183,14 @@ IF(REGEX_FOUND AND CROSS_COMPILE_MINGW32)
+ 	SET(SWORD_LINK_LIBRARIES ${SWORD_LINK_LIBRARIES} ${REGEX_LIBRARY})
+ ENDIF(REGEX_FOUND AND CROSS_COMPILE_MINGW32)
  
 +INCLUDE_DIRECTORIES(${Glib_INCLUDE_DIRS})
 +
@@ -205,7 +205,7 @@ index 046291e..e1a4aa1 100644
  			return -1; /* failure, can't open file to write */
  	}
 diff --git a/src/mgr/filemgr.cpp b/src/mgr/filemgr.cpp
-index 95d0f99..97d5992 100644
+index 5b45049..493cfd2 100644
 --- a/src/mgr/filemgr.cpp
 +++ b/src/mgr/filemgr.cpp
 @@ -22,6 +22,8 @@
@@ -400,15 +400,22 @@ index 95d0f99..97d5992 100644
  				if (!isDirectory(targetPath.c_str())) {
  					FileMgr::removeFile(targetPath.c_str());
  				}
-@@ -544,7 +544,7 @@ int FileMgr::removeDir(const char *targetDir) {
+@@ -544,14 +544,8 @@ int FileMgr::removeDir(const char *targetDir) {
  				}
  			}
  		}
 -		closedir(dir);
 +		g_dir_close(dir);
- 		removeFile(targetDir);
+ 		FileMgr::removeFile(targetDir);
+-/*
+-		int status = FileMgr::removeFile(targetDir);
+-          int stuff = errno;
+-          char *err = strerror(errno);
+-          int x = stuff;
+-*/
  	}
  	return 0;
+ }
 diff --git a/src/mgr/installmgr.cpp b/src/mgr/installmgr.cpp
 index b75df6f..f81eee3 100644
 --- a/src/mgr/installmgr.cpp
@@ -506,7 +513,7 @@ index b75df6f..f81eee3 100644
  		}
  		return (aborted) ? -1 : 0;
 diff --git a/src/mgr/swmgr.cpp b/src/mgr/swmgr.cpp
-index 6f4bb3a..91cf75e 100644
+index 4bb3966..8c2d195 100644
 --- a/src/mgr/swmgr.cpp
 +++ b/src/mgr/swmgr.cpp
 @@ -23,6 +23,8 @@
@@ -605,7 +612,7 @@ index 6f4bb3a..91cf75e 100644
  		
  		if (!config) {	// if no .conf file exist yet, create a default
  			newmodfile = ipath;
-@@ -807,7 +810,7 @@ signed char SWMgr::Load() {
+@@ -809,7 +812,7 @@ signed char SWMgr::Load() {
  			SWBuf homeDir = getHomeDir();
  			if (homeDir.length() && configType != 2) { // 2 = user only
  				SWBuf path = homeDir;
@@ -614,7 +621,7 @@ index 6f4bb3a..91cf75e 100644
  				augmentModules(path.c_str(), mgrModeMultiMod);
  				path = homeDir;
  				path += "sword/";
-@@ -1259,21 +1262,21 @@ void SWMgr::deleteModule(const char *modName) {
+@@ -1260,21 +1263,21 @@ void SWMgr::deleteModule(const char *modName) {
  
  void SWMgr::InstallScan(const char *dirname)
  {
@@ -643,7 +650,7 @@ index 6f4bb3a..91cf75e 100644
  
  					// mods.d
  					if (configType) {
-@@ -1282,7 +1285,7 @@ void SWMgr::InstallScan(const char *dirname)
+@@ -1283,7 +1286,7 @@ void SWMgr::InstallScan(const char *dirname)
  						targetName = configPath;
  						if ((configPath[strlen(configPath)-1] != '\\') && (configPath[strlen(configPath)-1] != '/'))
  							targetName += "/";
@@ -652,7 +659,7 @@ index 6f4bb3a..91cf75e 100644
  						conffd = FileMgr::getSystemFileMgr()->open(targetName.c_str(), FileMgr::WRONLY|FileMgr::CREAT, FileMgr::IREAD|FileMgr::IWRITE);
  					}
  
-@@ -1304,7 +1307,7 @@ void SWMgr::InstallScan(const char *dirname)
+@@ -1305,7 +1308,7 @@ void SWMgr::InstallScan(const char *dirname)
  			}
  			if (conffd)
  				FileMgr::getSystemFileMgr()->close(conffd);

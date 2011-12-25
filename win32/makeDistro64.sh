@@ -24,16 +24,16 @@
 #OTHER DEALINGS IN THE SOFTWARE.
 
 # copy sword utils and libs
-outdir=win32/binaries/Xiphos/32/
-sworddir=/usr/i686-w64-mingw32/sys-root/mingw/bin/
+outdir=win32/binaries/Xiphos/64/
+sworddir=/usr/x86_64-w64-mingw32/sys-root/mingw/bin/
 
-CROSS=i686-w64-mingw32-
-CFLAGS="-I/usr/i686-w64-mingw32/sys-root/mingw/include -g"
-LDFLAGS="-L/usr/i686-w64-mingw32/sys-root/mingw/lib `i686-w64-mingw32-pkg-config --libs gthread-2.0`"
-PKG_CONFIG_PATH=/usr/i686-w64-mingw32/sys-root/mingw/lib/pkgconfig/:/usr/i686-w64-mingw32/sys-root/mingw/share/pkgconfig/
-PKG_CONFIG_LIBDIR=/usr/i686-w64-mingw32/sys-root/mingw/lib/pkgconfig/:/usr/i686-w64-mingw32/sys-root/mingw/share/pkgconfig/
-PKG_CONFIG_PREFIX=/usr/i686-w64-mingw32/sys-root/mingw/
-MSVC_LIBPATH=/usr/i686-w64-mingw32/sys-root/mingw/
+CROSS=x86_64-w64-mingw32-
+CFLAGS="-I/usr/x86_64-w64-mingw32/sys-root/mingw/include -g"
+LDFLAGS="-L/usr/x86_64-w64-mingw32/sys-root/mingw/lib `x86_64-w64-mingw32-pkg-config --libs gthread-2.0`"
+PKG_CONFIG_PATH=/usr/x86_64-w64-mingw32/sys-root/mingw/lib/pkgconfig/:/usr/x86_64-w64-mingw32/sys-root/mingw/share/pkgconfig/
+PKG_CONFIG_LIBDIR=/usr/x86_64-w64-mingw32/sys-root/mingw/lib/pkgconfig/:/usr/x86_64-w64-mingw32/sys-root/mingw/share/pkgconfig/
+PKG_CONFIG_PREFIX=/usr/x86_64-w64-mingw32/sys-root/mingw/
+MSVC_LIBPATH=/usr/x86_64-w64-mingw32/sys-root/mingw/
 
 CC=/usr/bin/${CROSS}gcc
 CXX=/usr/bin/${CROSS}g++
@@ -57,7 +57,7 @@ export CROSS CC CXX AR RANLIB CFLAGS LDFLAGS WINRC \
 	--disable-help \
 	--prefix=${outdir} \
 	-d debug \
-	-b build-win32
+	-b build-win64
 	#--disable-console
 ./waf
 ./waf install
