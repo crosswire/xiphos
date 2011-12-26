@@ -1018,7 +1018,7 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 
 	if (imodule.Error()) {
 		num = main_format_number(chapter);
-		buf = g_strdup_printf("<a name=\"TOP\"><div style=\"text-align: center\">"
+		buf = g_strdup_printf("<a name=\"TOP\"></a><div style=\"text-align: center\">"
 				      "<p><b><font size=\"%+d\">%s</font></b></p>"
 				      "<b>%s %s</b></div>",
 				      1 + mf->old_font_size_value,
@@ -1081,7 +1081,7 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 
 		num = main_format_number(chapter);
 		buf = g_strdup_printf(
-				"%s%s<br/><a name=\"TOP\"><hr/><div style=\"text-align: center\"><b>%s %s</b></div>",
+				"%s%s<br/><a name=\"TOP\"></a><hr/><div style=\"text-align: center\"><b>%s %s</b></div>",
 #if 0
 				cVerse.GetText(),
 #else
