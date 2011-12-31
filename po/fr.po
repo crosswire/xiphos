@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 3.1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-17 12:47+0200\n"
+"POT-Creation-Date: 2011-12-31 01:50-0500\n"
 "PO-Revision-Date: 2011-07-17 12:48+0200\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: emacs + po-mode <gnomefr@traduc.org>\n"
@@ -212,7 +212,7 @@ msgstr "Le document %s n'a pas pu être imprimé"
 msgid "About Sword Module"
 msgstr "À propos de ce module SWORD"
 
-#: ../src/gnome2/about_modules.c:390 ../src/gnome2/mod_mgr.c:271
+#: ../src/gnome2/about_modules.c:395 ../src/gnome2/mod_mgr.c:271
 msgid "The module has no About information."
 msgstr "Ce module ne contient pas d'information À propos"
 
@@ -410,7 +410,7 @@ msgstr "Liste de versets"
 msgid "SearchResults"
 msgstr "Résultat de la requête"
 
-#: ../src/gnome2/export_dialog.c:283 ../ui/export-dialog.glade.h:20
+#: ../src/gnome2/export_dialog.c:290 ../ui/export-dialog.glade.h:21
 msgid "Please check copyright before exporting!"
 msgstr "Prière de vérifier le copyright avant l'export!"
 
@@ -537,34 +537,34 @@ msgstr ""
 msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
 msgstr "BUG! Xiphos va s'arrêter sur une erreur « STRING »."
 
-#: ../src/gnome2/main_window.c:782
+#: ../src/gnome2/main_window.c:795
 msgid "Xiphos - Bible Study Software"
 msgstr "Xiphos - Logiciel d'étude biblique"
 
-#: ../src/gnome2/main_window.c:837
+#: ../src/gnome2/main_window.c:852
 msgid "Open a new tab"
 msgstr "Ouvrir un nouvel onglet"
 
-#: ../src/gnome2/main_window.c:917 ../src/gnome2/sidebar.c:620
+#: ../src/gnome2/main_window.c:932 ../src/gnome2/sidebar.c:620
 #: ../src/gnome2/sidebar.c:626 ../src/main/sidebar.cc:651
 #: ../src/main/sidebar.cc:996 ../src/main/sidebar.cc:997
 #: ../src/main/sidebar.cc:998
 msgid "Standard View"
 msgstr "Vue simple"
 
-#: ../src/gnome2/main_window.c:988
+#: ../src/gnome2/main_window.c:1003
 msgid "Commentary View"
 msgstr "Commentaire"
 
-#: ../src/gnome2/main_window.c:1004
+#: ../src/gnome2/main_window.c:1019
 msgid "Book View"
 msgstr "Livre"
 
-#: ../src/gnome2/main_window.c:1031
+#: ../src/gnome2/main_window.c:1046
 msgid "Welcome to Xiphos"
 msgstr "Bienvenue dans Xiphos"
 
-#: ../src/gnome2/menu_popup.c:1224
+#: ../src/gnome2/menu_popup.c:1223
 msgid ""
 "Renaming is not available in Windows.\n"
 "\n"
@@ -582,34 +582,34 @@ msgstr ""
 "Windows ne permet pas de renommer des fichiers en cours d'utilisation\n"
 "ce qui est le cas des commentaires personnels."
 
-#: ../src/gnome2/menu_popup.c:1243
+#: ../src/gnome2/menu_popup.c:1242
 msgid "Rename Commentary"
 msgstr "Renommer le commentaire"
 
-#: ../src/gnome2/menu_popup.c:1246
+#: ../src/gnome2/menu_popup.c:1245
 msgid "Choose Commentary Name"
 msgstr "Nom du commentaire"
 
-#: ../src/gnome2/menu_popup.c:1248
+#: ../src/gnome2/menu_popup.c:1247
 msgid "New Name"
 msgstr "Nouveau nom :"
 
-#: ../src/gnome2/menu_popup.c:1249 ../src/gnome2/treekey-editor.c:137
+#: ../src/gnome2/menu_popup.c:1248 ../src/gnome2/treekey-editor.c:137
 #: ../src/gnome2/treekey-editor.c:196 ../src/gnome2/treekey-editor.c:282
 #: ../src/main/prayerlists.cc:243
 msgid "Name: "
 msgstr "Nom : "
 
-#: ../src/gnome2/menu_popup.c:1259 ../src/main/prayerlists.cc:257
+#: ../src/gnome2/menu_popup.c:1258 ../src/main/prayerlists.cc:257
 msgid "Module names must contain [A-Za-z0-9_] only."
 msgstr ""
 "Les noms de modules ne peuvent contenir que des lettres et des chiffres."
 
-#: ../src/gnome2/menu_popup.c:1266 ../src/main/prayerlists.cc:264
+#: ../src/gnome2/menu_popup.c:1265 ../src/main/prayerlists.cc:264
 msgid "Xiphos already knows a module by that name."
 msgstr "Il existe déjà un module de ce nom."
 
-#: ../src/gnome2/menu_popup.c:1307
+#: ../src/gnome2/menu_popup.c:1306
 #, c-format
 msgid ""
 "Failed to create new configuration:\n"
@@ -618,7 +618,7 @@ msgstr ""
 "Impossible de créer une nouvelle configuration\n"
 "%s"
 
-#: ../src/gnome2/menu_popup.c:1316
+#: ../src/gnome2/menu_popup.c:1315
 msgid ""
 "Configuration build error:\n"
 "\n"
@@ -626,7 +626,7 @@ msgstr ""
 "Erreur de configuration\n"
 "\n"
 
-#: ../src/gnome2/menu_popup.c:2006
+#: ../src/gnome2/menu_popup.c:2002
 msgid "No module in this pane."
 msgstr "Pas de module dans ce volet"
 
@@ -924,7 +924,7 @@ msgstr "Terminé"
 #: ../src/gnome2/mod_mgr.c:1137 ../src/gnome2/mod_mgr.c:1172
 #: ../src/gnome2/mod_mgr.c:1174 ../src/gnome2/utilities.c:457
 #: ../src/gnome2/utilities.c:523 ../src/gnome2/utilities.c:525
-#: ../src/gnome2/utilities.c:1085 ../src/main/sidebar.cc:830
+#: ../src/gnome2/utilities.c:1090 ../src/main/sidebar.cc:830
 #: ../src/main/sidebar.cc:902 ../src/main/sidebar.cc:904
 msgid "Unknown"
 msgstr "Inconnu"
@@ -953,7 +953,7 @@ msgstr "Textes bibliques"
 
 #: ../src/gnome2/mod_mgr.c:1358 ../src/gnome2/utilities.c:598
 #: ../src/main/sidebar.cc:663 ../src/main/sidebar.cc:1005
-#: ../src/main/sidebar.cc:1007 ../ui/prefs.glade.h:36
+#: ../src/main/sidebar.cc:1007 ../ui/prefs.glade.h:38
 msgid "Commentaries"
 msgstr "Commentaires"
 
@@ -1068,7 +1068,7 @@ msgstr "Ajouter/Supprimer"
 msgid "Choose"
 msgstr "Sélection"
 
-#: ../src/gnome2/mod_mgr.c:1787 ../src/gnome2/preferences_dialog.c:1718
+#: ../src/gnome2/mod_mgr.c:1787 ../src/gnome2/preferences_dialog.c:1811
 #: ../src/gnome2/sidebar.c:1471
 msgid "Modules"
 msgstr "Modules"
@@ -1184,7 +1184,7 @@ msgstr "Aller à la première sous-section"
 msgid "Synchronize this window's scrolling with the main window"
 msgstr "Synchronise le défilement de cette fenêtre avec la fenêtre principale"
 
-#: ../src/gnome2/parallel_dialog.c:378 ../src/gnome2/preferences_dialog.c:1725
+#: ../src/gnome2/parallel_dialog.c:378 ../src/gnome2/preferences_dialog.c:1818
 msgid "Parallel"
 msgstr "Vue parallèle"
 
@@ -1197,71 +1197,71 @@ msgid "Module Options"
 msgstr "Options du module"
 
 #: ../src/gnome2/parallel_view.c:267 ../src/gnome2/sidebar.c:619
-#: ../src/gnome2/sidebar.c:625 ../src/gnome2/tabbed_browser.c:255
+#: ../src/gnome2/sidebar.c:625 ../src/gnome2/tabbed_browser.c:252
 #: ../src/main/sidebar.cc:632 ../src/main/sidebar.cc:988
 #: ../src/main/sidebar.cc:989 ../src/main/sidebar.cc:990
 msgid "Parallel View"
 msgstr "Vue parallèle"
 
-#: ../src/gnome2/preferences_dialog.c:1238
-#: ../src/gnome2/preferences_dialog.c:1276
-#: ../src/gnome2/preferences_dialog.c:1313
-#: ../src/gnome2/preferences_dialog.c:1348
-#: ../src/gnome2/preferences_dialog.c:1383
-#: ../src/gnome2/preferences_dialog.c:1418
-#: ../src/gnome2/preferences_dialog.c:1453
-#: ../src/gnome2/preferences_dialog.c:1489
-#: ../src/gnome2/preferences_dialog.c:1526
-#: ../src/gnome2/preferences_dialog.c:1578
-#: ../src/gnome2/preferences_dialog.c:1968
+#: ../src/gnome2/preferences_dialog.c:1331
+#: ../src/gnome2/preferences_dialog.c:1369
+#: ../src/gnome2/preferences_dialog.c:1406
+#: ../src/gnome2/preferences_dialog.c:1441
+#: ../src/gnome2/preferences_dialog.c:1476
+#: ../src/gnome2/preferences_dialog.c:1511
+#: ../src/gnome2/preferences_dialog.c:1546
+#: ../src/gnome2/preferences_dialog.c:1582
+#: ../src/gnome2/preferences_dialog.c:1619
+#: ../src/gnome2/preferences_dialog.c:1671
+#: ../src/gnome2/preferences_dialog.c:2076
 msgid "-- Select --"
 msgstr "[ Aucun ]"
 
-#: ../src/gnome2/preferences_dialog.c:1540
+#: ../src/gnome2/preferences_dialog.c:1633
 msgid "Locale will take effect after restart."
 msgstr "La langue prendra effet après redémarrage."
 
-#: ../src/gnome2/preferences_dialog.c:1615 ../ui/prefs.glade.h:83
+#: ../src/gnome2/preferences_dialog.c:1708 ../ui/prefs.glade.h:85
 msgid "Preferences"
 msgstr "Préférences"
 
-#: ../src/gnome2/preferences_dialog.c:1697
+#: ../src/gnome2/preferences_dialog.c:1790
 msgid "Fonts"
 msgstr "Polices"
 
-#: ../src/gnome2/preferences_dialog.c:1700
+#: ../src/gnome2/preferences_dialog.c:1793
 msgid "Color"
 msgstr "Couleurs"
 
-#: ../src/gnome2/preferences_dialog.c:1703
+#: ../src/gnome2/preferences_dialog.c:1796
 msgid "Sizes and Faces"
 msgstr "Tailles et apparence"
 
-#: ../src/gnome2/preferences_dialog.c:1707
+#: ../src/gnome2/preferences_dialog.c:1800
 msgid "General"
 msgstr "Général"
 
-#: ../src/gnome2/preferences_dialog.c:1714
+#: ../src/gnome2/preferences_dialog.c:1807
 msgid "Options"
 msgstr "Options"
 
-#: ../src/gnome2/preferences_dialog.c:1728
+#: ../src/gnome2/preferences_dialog.c:1821
 msgid "Special"
 msgstr "Spécial"
 
-#: ../src/gnome2/preferences_dialog.c:2355 ../src/gnome2/search_dialog.c:454
+#: ../src/gnome2/preferences_dialog.c:2463 ../src/gnome2/search_dialog.c:454
 msgid "Clear List?"
 msgstr "Effacer la liste?"
 
-#: ../src/gnome2/preferences_dialog.c:2356 ../src/gnome2/search_dialog.c:455
+#: ../src/gnome2/preferences_dialog.c:2464 ../src/gnome2/search_dialog.c:455
 msgid "Are you sure you want to clear the module list?"
 msgstr "Êtes-vous certain d'effacer la liste des modules?"
 
-#: ../src/gnome2/preferences_dialog.c:2401 ../src/main/search_dialog.cc:691
+#: ../src/gnome2/preferences_dialog.c:2509 ../src/main/search_dialog.cc:691
 msgid "Remove Module?"
 msgstr "Enlever les modules?"
 
-#: ../src/gnome2/preferences_dialog.c:2402 ../src/main/search_dialog.cc:692
+#: ../src/gnome2/preferences_dialog.c:2510 ../src/main/search_dialog.cc:692
 msgid "Are you sure you want to remove the selected module?"
 msgstr "Êtes-vous certain de vouloir supprimer le module sélectionné?"
 
@@ -1450,7 +1450,7 @@ msgstr "Module"
 msgid "Bible"
 msgstr "Texte biblique"
 
-#: ../src/gnome2/search_sidebar.c:234 ../ui/prefs.glade.h:38
+#: ../src/gnome2/search_sidebar.c:234 ../ui/prefs.glade.h:40
 msgid "Commentary"
 msgstr "Commentaire"
 
@@ -1510,7 +1510,7 @@ msgstr "Barre latérale"
 msgid "Powered by the SWORD Project"
 msgstr "Xiphos utilise les logiciels du Projet SWORD"
 
-#: ../src/gnome2/tabbed_browser.c:364
+#: ../src/gnome2/tabbed_browser.c:361
 msgid "Can't create tabs dir."
 msgstr "Impossible de créer le répertoire tabs."
 
@@ -1528,7 +1528,7 @@ msgstr "Nouveau nom"
 msgid "Remove the selected item"
 msgstr "Supprimer l'élément sélectionné"
 
-#: ../src/gnome2/utilities.c:2072
+#: ../src/gnome2/utilities.c:2077
 msgid ""
 "An image file's size could not be determined.\n"
 "Xiphos cannot resize images to fit window."
@@ -1545,8 +1545,8 @@ msgstr ""
 "Ce nom d'annotation personnelle est improprement formé :\n"
 "'%s'"
 
-#: ../src/main/display.cc:1028 ../src/main/display.cc:1088
-#: ../src/main/display.cc:1172 ../ui/export-dialog.glade.h:7
+#: ../src/main/display.cc:1026 ../src/main/display.cc:1092
+#: ../src/main/display.cc:1176 ../ui/export-dialog.glade.h:7
 msgid "Chapter"
 msgstr "Chapitre"
 
@@ -1575,103 +1575,103 @@ msgid "Displaying Xiphos"
 msgstr "Affichage de Xiphos"
 
 #: ../src/main/module_dialogs.cc:188 ../src/main/previewer.cc:95
-#: ../ui/prefs.glade.h:84
+#: ../ui/prefs.glade.h:86
 msgid "Previewer"
 msgstr "Aperçu"
 
-#: ../src/main/module_dialogs.cc:239 ../src/main/module_dialogs.cc:350
-#: ../src/main/previewer.cc:182
+#: ../src/main/module_dialogs.cc:243 ../src/main/module_dialogs.cc:354
+#: ../src/main/previewer.cc:184
 msgid "Footnote"
 msgstr "Note de bas de page"
 
-#: ../src/main/module_dialogs.cc:245 ../src/main/module_dialogs.cc:355
-#: ../src/main/previewer.cc:194
+#: ../src/main/module_dialogs.cc:249 ../src/main/module_dialogs.cc:359
+#: ../src/main/previewer.cc:196
 msgid "Cross Reference"
 msgstr "Référence croisée"
 
-#: ../src/main/module_dialogs.cc:251 ../src/main/module_dialogs.cc:265
-#: ../src/main/module_dialogs.cc:360 ../src/main/module_dialogs.cc:372
-#: ../src/main/previewer.cc:200 ../src/main/previewer.cc:219
+#: ../src/main/module_dialogs.cc:255 ../src/main/module_dialogs.cc:269
+#: ../src/main/module_dialogs.cc:364 ../src/main/module_dialogs.cc:376
+#: ../src/main/previewer.cc:202 ../src/main/previewer.cc:221
 msgid "Strongs"
 msgstr "Strongs"
 
-#: ../src/main/module_dialogs.cc:257 ../src/main/module_dialogs.cc:276
-#: ../src/main/module_dialogs.cc:365 ../src/main/module_dialogs.cc:382
-#: ../src/main/previewer.cc:206 ../src/main/previewer.cc:225
+#: ../src/main/module_dialogs.cc:261 ../src/main/module_dialogs.cc:280
+#: ../src/main/module_dialogs.cc:369 ../src/main/module_dialogs.cc:386
+#: ../src/main/previewer.cc:208 ../src/main/previewer.cc:227
 msgid "Morphology"
 msgstr "Étiquette morphologique"
 
-#: ../src/main/module_dialogs.cc:1010 ../src/main/url.cc:518
+#: ../src/main/module_dialogs.cc:1014 ../src/main/url.cc:518
 msgid "Back to "
 msgstr "Revenir à "
 
-#: ../src/main/parallel_view.cc:380 ../ui/xi-menus.glade.h:108
+#: ../src/main/parallel_view.cc:381 ../ui/xi-menus.glade.h:108
 msgid "Strong's Numbers"
 msgstr "Nombres de Strong"
 
-#: ../src/main/parallel_view.cc:390 ../ui/search-dialog.glade.h:52
+#: ../src/main/parallel_view.cc:391 ../ui/search-dialog.glade.h:52
 #: ../ui/xi-menus.glade.h:44
 msgid "Footnotes"
 msgstr "Notes de bas de page"
 
-#: ../src/main/parallel_view.cc:400 ../ui/search-dialog.glade.h:64
+#: ../src/main/parallel_view.cc:401 ../ui/search-dialog.glade.h:64
 #: ../ui/xi-menus.glade.h:63
 msgid "Morphological Tags"
 msgstr "Étiquettes morphologiques"
 
-#: ../src/main/parallel_view.cc:410 ../ui/xi-menus.glade.h:48
+#: ../src/main/parallel_view.cc:411 ../ui/xi-menus.glade.h:48
 msgid "Hebrew Vowel Points"
 msgstr "Ponctuation des voyelles en hébreu"
 
-#: ../src/main/parallel_view.cc:420 ../ui/xi-menus.glade.h:47
+#: ../src/main/parallel_view.cc:421 ../ui/xi-menus.glade.h:47
 msgid "Hebrew Cantillation"
 msgstr "Vocalisations en hébreu"
 
-#: ../src/main/parallel_view.cc:430 ../ui/xi-menus.glade.h:45
+#: ../src/main/parallel_view.cc:431 ../ui/xi-menus.glade.h:45
 msgid "Greek Accents"
 msgstr "Accents grecs"
 
-#: ../src/main/parallel_view.cc:440
+#: ../src/main/parallel_view.cc:441
 msgid "Cross-references"
 msgstr "Références croisées"
 
-#: ../src/main/parallel_view.cc:450 ../ui/xi-menus.glade.h:57
+#: ../src/main/parallel_view.cc:451 ../ui/xi-menus.glade.h:57
 msgid "Lemmas"
 msgstr "Lemmes"
 
-#: ../src/main/parallel_view.cc:460 ../ui/xi-menus.glade.h:46
+#: ../src/main/parallel_view.cc:461 ../ui/xi-menus.glade.h:46
 msgid "Headings"
 msgstr "En-têtes"
 
-#: ../src/main/parallel_view.cc:470
+#: ../src/main/parallel_view.cc:471
 msgid "Morpheme Segmentation"
 msgstr "Segmentation de morphème"
 
-#: ../src/main/parallel_view.cc:484 ../ui/xi-menus.glade.h:117
+#: ../src/main/parallel_view.cc:485 ../ui/xi-menus.glade.h:117
 msgid "Words of Christ in Red"
 msgstr "Paroles de Christ en rouge"
 
-#: ../src/main/parallel_view.cc:494 ../ui/xi-menus.glade.h:110
+#: ../src/main/parallel_view.cc:495 ../ui/xi-menus.glade.h:110
 msgid "Transliteration"
 msgstr "Translittération"
 
-#: ../src/main/parallel_view.cc:504
+#: ../src/main/parallel_view.cc:505
 msgid "Textual Variants"
 msgstr "Variantes du texte"
 
-#: ../src/main/parallel_view.cc:512 ../ui/xi-menus.glade.h:86
+#: ../src/main/parallel_view.cc:513 ../ui/xi-menus.glade.h:86
 msgid "Primary Reading"
 msgstr "Lectures principales"
 
-#: ../src/main/parallel_view.cc:521 ../ui/xi-menus.glade.h:101
+#: ../src/main/parallel_view.cc:522 ../ui/xi-menus.glade.h:101
 msgid "Secondary Reading"
 msgstr "Lectures secondaires"
 
-#: ../src/main/parallel_view.cc:530 ../ui/xi-menus.glade.h:9
+#: ../src/main/parallel_view.cc:531 ../ui/xi-menus.glade.h:9
 msgid "All Readings"
 msgstr "Toutes les lectures"
 
-#: ../src/main/parallel_view.cc:688
+#: ../src/main/parallel_view.cc:695
 msgid "view context"
 msgstr "Voir le contexte"
 
@@ -1922,7 +1922,7 @@ msgstr "Sujet majeur C"
 msgid "<b>Major Topic C</b><br/>"
 msgstr "<b>Sujet majeur C</b><br/>"
 
-#: ../src/main/previewer.cc:188
+#: ../src/main/previewer.cc:190
 msgid "User Annotation"
 msgstr "Annotation personnelle de"
 
@@ -1939,13 +1939,13 @@ msgstr "Supprimer la plage?"
 msgid "Are you sure you want to delete this range?"
 msgstr "Êtes-vous certain de supprimer cette plage?"
 
-#: ../src/main/search_dialog.cc:646 ../src/main/search_dialog.cc:1065
-#: ../src/main/search_dialog.cc:1068 ../src/main/search_dialog.cc:1090
-#: ../src/main/search_dialog.cc:1093
+#: ../src/main/search_dialog.cc:646 ../src/main/search_dialog.cc:1073
+#: ../src/main/search_dialog.cc:1076 ../src/main/search_dialog.cc:1098
+#: ../src/main/search_dialog.cc:1101
 msgid "Search: "
 msgstr "Dans : "
 
-#: ../src/main/search_dialog.cc:1455
+#: ../src/main/search_dialog.cc:1463
 #, c-format
 msgid ""
 "%s:\n"
@@ -1956,16 +1956,16 @@ msgstr ""
 "Module non installé.\n"
 "%s"
 
-#: ../src/main/search_dialog.cc:1457
+#: ../src/main/search_dialog.cc:1465
 msgid "Please adjust the module list."
 msgstr "La liste de modules est à régénérer"
 
-#: ../src/main/search_dialog.cc:1473
+#: ../src/main/search_dialog.cc:1481
 #, c-format
 msgid "No fast-search index exists for %s.%s%s"
 msgstr "Aucun index de recherche optimisée n'existe pour %s %s%s"
 
-#: ../src/main/search_dialog.cc:1475
+#: ../src/main/search_dialog.cc:1483
 msgid ""
 "\n"
 "Search on this module is now `multi word'."
@@ -1973,7 +1973,7 @@ msgstr ""
 "\n"
 "Les requêtes sur ce module sont maintenant 'multi-mots'"
 
-#: ../src/main/search_dialog.cc:1476
+#: ../src/main/search_dialog.cc:1484
 msgid ""
 "\n"
 "See the Module Manager, Maintenance pane."
@@ -1981,7 +1981,7 @@ msgstr ""
 "\n"
 "Voir le Gestionnaire de modules, onglet Maintenance"
 
-#: ../src/main/search_dialog.cc:1538
+#: ../src/main/search_dialog.cc:1546
 msgid "Search finished"
 msgstr "Recherche terminée"
 
@@ -1993,11 +1993,11 @@ msgstr "réponses"
 msgid "There is no commentary module."
 msgstr "Il n'y a pas de module commentaire."
 
-#: ../src/main/settings.c:106
+#: ../src/main/settings.c:110
 msgid "$HOME is not set!"
 msgstr "$HOME n'est pas défini!"
 
-#: ../src/main/settings.c:119
+#: ../src/main/settings.c:123
 #, c-format
 msgid ""
 "Xiphos can not create  .xiphos:\n"
@@ -2010,12 +2010,12 @@ msgstr ""
 "\n"
 "Xiphos ne peut s'exécuter normalement."
 
-#: ../src/main/settings.c:132 ../src/main/settings.c:141
-#: ../src/main/settings.c:150
+#: ../src/main/settings.c:136 ../src/main/settings.c:145
+#: ../src/main/settings.c:154
 msgid "can not create "
 msgstr "impossible de créer "
 
-#: ../src/main/settings.c:180
+#: ../src/main/settings.c:184
 msgid ""
 "Empty settings file -- backup recovery attempted.\n"
 "Some information may have been lost."
@@ -2023,12 +2023,12 @@ msgstr ""
 "Fichier de configuration vide -- Essai de restauration.\n"
 "Des informations ont pu être perdues."
 
-#: ../src/main/settings.c:182
+#: ../src/main/settings.c:186
 msgid "Empty settings file -- no backup?!? Information lost!"
 msgstr ""
 "Fichier de configuration vide -- pas de sauvegarde?!? Informations perdues!"
 
-#: ../src/main/settings.c:210
+#: ../src/main/settings.c:214
 msgid ""
 "There are no Bibles installed.\n"
 "Evidently, you declined to install any.\n"
@@ -2046,7 +2046,7 @@ msgstr ""
 "fonctionner, et va maintenant\n"
 "se terminer."
 
-#: ../src/main/settings.c:213
+#: ../src/main/settings.c:217
 msgid "Bible module installation complete."
 msgstr "Installation de module terminée."
 
@@ -2058,7 +2058,7 @@ msgstr "verset"
 msgid "chapter"
 msgstr "chapitre"
 
-#: ../src/main/sword.cc:536
+#: ../src/main/sword.cc:559
 msgid ""
 "Xiphos's file for language\n"
 "abbreviations is missing."
@@ -2066,7 +2066,7 @@ msgstr ""
 "Le fichier des définitions\n"
 "de langages est absent."
 
-#: ../src/main/sword.cc:543
+#: ../src/main/sword.cc:566
 msgid ""
 "Xiphos's language abbreviation\n"
 "file cannot be opened."
@@ -2074,7 +2074,7 @@ msgstr ""
 "Ouverture impossible du fichier\n"
 "des définitions de langages."
 
-#: ../src/main/sword.cc:556
+#: ../src/main/sword.cc:579
 msgid ""
 "Xiphos cannot allocate space\n"
 "for language abbreviations."
@@ -2082,7 +2082,7 @@ msgstr ""
 "Impossible d'allouer l'espace suffisant\n"
 "aux abbréviations de langage."
 
-#: ../src/main/sword.cc:563
+#: ../src/main/sword.cc:586
 msgid ""
 "Xiphos cannot read the\n"
 "language abbreviation file."
@@ -2091,7 +2091,7 @@ msgstr ""
 "définitions de langages."
 
 #. either we were given a null sys_locale, or it didn't match anything.
-#: ../src/main/sword.cc:645
+#: ../src/main/sword.cc:668
 #, c-format
 msgid ""
 "No matching locale found for `%s'.\n"
@@ -2100,18 +2100,18 @@ msgstr ""
 "Pas de locale correspondante pour `%s'.\n"
 "%s"
 
-#: ../src/main/sword.cc:647
+#: ../src/main/sword.cc:670
 msgid "Book names and menus may not be translated."
 msgstr "Les noms de livres et les menus ne seront peut-être pas traduits"
 
-#: ../src/main/sword.cc:1245
+#: ../src/main/sword.cc:1268
 msgid "Daily devotional was requested, but there are none installed."
 msgstr ""
 "Impossible d'afficher le calendrier\n"
 "biblique, aucun module de ce type \n"
 "n'est installé."
 
-#: ../src/main/sword.cc:1481
+#: ../src/main/sword.cc:1504
 msgid ""
 "<b>Locked Module.</b>\n"
 "\n"
@@ -2190,13 +2190,13 @@ msgstr "Qu'est-ce que l'Évangile?"
 msgid "1 Cor 15:1-4"
 msgstr "1 Cor 15:1-4"
 
-#: ../src/main/xml.c:409 ../src/main/xml.c:1163
+#: ../src/main/xml.c:409 ../src/main/xml.c:1167
 #, c-format
 msgid "Document not parsed successfully. \n"
 msgstr "Erreur de lecture du document. \n"
 
-#: ../src/main/xml.c:415 ../src/main/xml.c:730 ../src/main/xml.c:1044
-#: ../src/main/xml.c:1241
+#: ../src/main/xml.c:415 ../src/main/xml.c:734 ../src/main/xml.c:1048
+#: ../src/main/xml.c:1245
 #, c-format
 msgid "empty document \n"
 msgstr "Document vide \n"
@@ -2226,12 +2226,12 @@ msgstr "Mt - Ap"
 msgid "Sample Module List"
 msgstr "Exemple de liste de modules"
 
-#: ../src/main/xml.c:736 ../src/main/xml.c:1050
+#: ../src/main/xml.c:740 ../src/main/xml.c:1054
 #, c-format
 msgid "wrong type, root node != %s\n"
 msgstr "Erreur de type, root node != %s\n"
 
-#: ../src/main/xml.c:1203
+#: ../src/main/xml.c:1207
 #, c-format
 msgid ""
 "Save of settings failed! stat %d, size %d\n"
@@ -2240,7 +2240,7 @@ msgstr ""
 "La sauvegarde de la configuration a échouée! stat %d, taille %d\n"
 "%s"
 
-#: ../src/main/xml.c:1205
+#: ../src/main/xml.c:1209
 msgid "Attempting to revert to previous save."
 msgstr "Tentative de retour à la sauvegarde précédente."
 
@@ -2401,7 +2401,7 @@ msgstr "<b>Exporter</b>"
 msgid "<b>Format</b>"
 msgstr "<b>Format</b>"
 
-#: ../ui/export-dialog.glade.h:5 ../ui/prefs.glade.h:27
+#: ../ui/export-dialog.glade.h:5 ../ui/prefs.glade.h:28
 msgid "Book"
 msgstr "Livre"
 
@@ -2446,36 +2446,52 @@ msgid "HTML Radio Button"
 msgstr "Bouton radio HTML"
 
 #: ../ui/export-dialog.glade.h:17
+msgid ""
+"Indicates whether verse numbers should appear inline in the text for more "
+"than 1 verse."
+msgstr ""
+
+#: ../ui/export-dialog.glade.h:18
 msgid "Key"
 msgstr "Clé"
 
-#: ../ui/export-dialog.glade.h:18
+#: ../ui/export-dialog.glade.h:19
 msgid "Plain Text"
 msgstr "Texte simple"
 
-#: ../ui/export-dialog.glade.h:19
+#: ../ui/export-dialog.glade.h:20
 msgid "Plain Text Radio Button"
 msgstr "Bouton radio Texte simple"
 
-#: ../ui/export-dialog.glade.h:21
+#: ../ui/export-dialog.glade.h:22
 msgid "Save Export As"
 msgstr "Enregistrer / Exporter sous"
 
-#: ../ui/export-dialog.glade.h:22
+#: ../ui/export-dialog.glade.h:23
 msgid "Verse"
 msgstr "Verset"
 
-#: ../ui/export-dialog.glade.h:23
+#: ../ui/export-dialog.glade.h:24
+#, fuzzy
+msgid "Verse Number button"
+msgstr "Numéros de verset"
+
+#: ../ui/export-dialog.glade.h:25
 msgid "Verse Radio Button"
 msgstr "Bouton radio Verset"
 
-#: ../ui/export-dialog.glade.h:24
+#: ../ui/export-dialog.glade.h:26
 msgid "Verse range"
 msgstr "Plage de versets"
 
-#: ../ui/export-dialog.glade.h:25
+#: ../ui/export-dialog.glade.h:27
 msgid "Version"
 msgstr "Version"
+
+#: ../ui/export-dialog.glade.h:28
+#, fuzzy
+msgid "_Verse numbers in text"
+msgstr "Taille du numéro de verset"
 
 #: ../ui/markverse.glade.h:4
 msgid "Mark"
@@ -2802,161 +2818,169 @@ msgstr "Case à cocher Textes bibliques"
 msgid "Biblical Text"
 msgstr "Texte biblique"
 
-#: ../ui/prefs.glade.h:28
+#: ../ui/prefs.glade.h:27
+msgid "Bold"
+msgstr ""
+
+#: ../ui/prefs.glade.h:29
+msgid "Brackets"
+msgstr ""
+
+#: ../ui/prefs.glade.h:30
 msgid "Change Biblical Text Combo"
 msgstr "Boite combinée Changement de texte biblique"
 
-#: ../ui/prefs.glade.h:29
+#: ../ui/prefs.glade.h:31
 msgid "Change Book Combo"
 msgstr "Boite combinée Changement de livre"
 
-#: ../ui/prefs.glade.h:30
+#: ../ui/prefs.glade.h:32
 msgid "Change Commentary Combo"
 msgstr "Boite combinée Changement de commentaire"
 
 # src/gs_preferences_dlg.c
-#: ../ui/prefs.glade.h:31
+#: ../ui/prefs.glade.h:33
 msgid "Change Default Dictionary Combo"
 msgstr "Boite combinée Changement de dictionnaire"
 
-#: ../ui/prefs.glade.h:32
+#: ../ui/prefs.glade.h:34
 msgid "Change Dictionary Combo"
 msgstr "Boite combinée Changement de dictionnaire"
 
-#: ../ui/prefs.glade.h:33
+#: ../ui/prefs.glade.h:35
 msgid "Change Personal Notes Combo"
 msgstr "Boite combinée Changement de notes personnelles"
 
-#: ../ui/prefs.glade.h:34 ../ui/search-dialog.glade.h:21
+#: ../ui/prefs.glade.h:36 ../ui/search-dialog.glade.h:21
 msgid "Clear Modules from List Button"
 msgstr "Bouton Efface tous les modules de la liste"
 
-#: ../ui/prefs.glade.h:35 ../ui/search-dialog.glade.h:22
+#: ../ui/prefs.glade.h:37 ../ui/search-dialog.glade.h:22
 msgid "Clear all modules from the list"
 msgstr "Efface tous les modules de la liste"
 
-#: ../ui/prefs.glade.h:37
+#: ../ui/prefs.glade.h:39
 msgid "Commentaries Checkbox"
 msgstr "Case à cocher Commentaires"
 
-#: ../ui/prefs.glade.h:39
+#: ../ui/prefs.glade.h:41
 msgid "Commonly -1, to make verse numbers less obtrusive"
 msgstr "Généralement -1, pour rendre les numéros de versets plus discret"
 
-#: ../ui/prefs.glade.h:40
+#: ../ui/prefs.glade.h:42
 msgid "Cover"
 msgstr "Accueil"
 
-#: ../ui/prefs.glade.h:41
+#: ../ui/prefs.glade.h:43
 msgid "Cross-references in verse list"
 msgstr "Références croisées dans Versets"
 
-#: ../ui/prefs.glade.h:42
+#: ../ui/prefs.glade.h:44
 msgid "Current Verse"
 msgstr "Verset en cours"
 
-#: ../ui/prefs.glade.h:43
+#: ../ui/prefs.glade.h:45
 msgid "Daily Devotional"
 msgstr "Calendrier biblique"
 
-#: ../ui/prefs.glade.h:44
+#: ../ui/prefs.glade.h:46
 msgid "Daily Devotional Combo"
 msgstr "Boite combinée Changement de calendrier biblique"
 
 # src/gs_preferences_dlg.c
-#: ../ui/prefs.glade.h:45
+#: ../ui/prefs.glade.h:47
 msgid "Default Dictionary"
 msgstr "Dictionnaire par défaut"
 
-#: ../ui/prefs.glade.h:46 ../ui/search-dialog.glade.h:39
+#: ../ui/prefs.glade.h:48 ../ui/search-dialog.glade.h:39
 msgid "Delete Selected Module From List Button"
 msgstr "Bouton Supprime le module sélectionné de la liste"
 
-#: ../ui/prefs.glade.h:47
+#: ../ui/prefs.glade.h:49
 msgid "Dictionary"
 msgstr "Dictionnaire"
 
-#: ../ui/prefs.glade.h:48
+#: ../ui/prefs.glade.h:50
 msgid "Dictionary/Lexicon"
 msgstr "Dictionnaire/Lexique"
 
-#: ../ui/prefs.glade.h:49
+#: ../ui/prefs.glade.h:51
 msgid "Dictionary/Lexicon Checkbox"
 msgstr "Case à cocher Dictionnaire/Lexique"
 
-#: ../ui/prefs.glade.h:50
+#: ../ui/prefs.glade.h:52
 msgid "Enable Prayer Lists"
 msgstr "Activer les listes de prières"
 
-#: ../ui/prefs.glade.h:51
+#: ../ui/prefs.glade.h:53
 msgid "Enable Prayer Lists Checkbox"
 msgstr "Case à cocher Activer les listes de prières"
 
-#: ../ui/prefs.glade.h:52
+#: ../ui/prefs.glade.h:54
 msgid "Font Colors"
 msgstr "Couleurs"
 
-#: ../ui/prefs.glade.h:53
+#: ../ui/prefs.glade.h:55
 msgid "Font Misc"
 msgstr "Divers"
 
-#: ../ui/prefs.glade.h:54
+#: ../ui/prefs.glade.h:56
 msgid "Font preferences, per language"
 msgstr "Préférences de police, par langue"
 
-#: ../ui/prefs.glade.h:55
+#: ../ui/prefs.glade.h:57
 msgid "Foreground"
 msgstr "Avant-plan"
 
-#: ../ui/prefs.glade.h:56
+#: ../ui/prefs.glade.h:58
 msgid "General Misc"
 msgstr "Divers"
 
-#: ../ui/prefs.glade.h:57
+#: ../ui/prefs.glade.h:59
 msgid "Greek Lexicon"
 msgstr "Lexique grec"
 
-#: ../ui/prefs.glade.h:58
+#: ../ui/prefs.glade.h:60
 msgid "Greek Lexicon Combo"
 msgstr "Boite combinée Lexique grec"
 
-#: ../ui/prefs.glade.h:59
+#: ../ui/prefs.glade.h:61
 msgid "Hebrew Lexicon"
 msgstr "Lexique hébreu"
 
-#: ../ui/prefs.glade.h:60
+#: ../ui/prefs.glade.h:62
 msgid "Hebrew Lexicon Combo"
 msgstr "Boite combinée Lexique hébreu"
 
-#: ../ui/prefs.glade.h:61
+#: ../ui/prefs.glade.h:63
 msgid "Highlight"
 msgstr "Surlignement"
 
-#: ../ui/prefs.glade.h:62
+#: ../ui/prefs.glade.h:64
 msgid "Highlight Background"
 msgstr "Arrière-plan surlignement"
 
-#: ../ui/prefs.glade.h:63
+#: ../ui/prefs.glade.h:65
 msgid "Highlight Foreground"
 msgstr "Avant-plan surlignement"
 
-#: ../ui/prefs.glade.h:64
+#: ../ui/prefs.glade.h:66
 msgid "Highlight current verse"
 msgstr "Verset en cours surligné"
 
-#: ../ui/prefs.glade.h:65
+#: ../ui/prefs.glade.h:67
 msgid "Highlight current verse check box"
 msgstr "Case à cocher Verset en cours surligné"
 
-#: ../ui/prefs.glade.h:66
+#: ../ui/prefs.glade.h:68
 msgid "Highlight user annotations"
 msgstr "Annotations personnelles surlignées"
 
-#: ../ui/prefs.glade.h:67
+#: ../ui/prefs.glade.h:69
 msgid "Highlight user annotations check box"
 msgstr "Case à cocher Annotations personnelles surlignées"
 
-#: ../ui/prefs.glade.h:68
+#: ../ui/prefs.glade.h:70
 msgid ""
 "If you have set a preferred daily devotion module, its entry for today will "
 "be shown at startup."
@@ -2964,19 +2988,19 @@ msgstr ""
 "Si un module de calendrier biblique est défini, son entrée d'aujourd'hui est "
 "affichée au démarrage"
 
-#: ../ui/prefs.glade.h:69
+#: ../ui/prefs.glade.h:71
 msgid "Invert color pairs"
 msgstr "Inverser les paires de couleurs"
 
-#: ../ui/prefs.glade.h:70
+#: ../ui/prefs.glade.h:72
 msgid "Language Font Combo"
 msgstr "Boite combinée Police de langue"
 
-#: ../ui/prefs.glade.h:71
+#: ../ui/prefs.glade.h:73
 msgid "Links"
 msgstr "Liens"
 
-#: ../ui/prefs.glade.h:72
+#: ../ui/prefs.glade.h:74
 msgid ""
 "Make double-click of a word always use default dictionary instead of "
 "dictionary currently displayed"
@@ -2984,23 +3008,23 @@ msgstr ""
 "Un double-clic sur un mot utilise toujours le dictionnaire par défaut au "
 "lieu du dictionnaire actuellement affiché"
 
-#: ../ui/prefs.glade.h:73
+#: ../ui/prefs.glade.h:75
 msgid "Make journals/prayer lists available"
 msgstr "Rendre les listes de prières / Journaux disponibles"
 
-#: ../ui/prefs.glade.h:74 ../ui/search-dialog.glade.h:61
+#: ../ui/prefs.glade.h:76 ../ui/search-dialog.glade.h:61
 msgid "Module Selection"
 msgstr "Sélection de module"
 
-#: ../ui/prefs.glade.h:75
+#: ../ui/prefs.glade.h:77
 msgid "Modules Misc"
 msgstr "Divers"
 
-#: ../ui/prefs.glade.h:76
+#: ../ui/prefs.glade.h:78
 msgid "Modules Parallel"
 msgstr "Vue parallèle"
 
-#: ../ui/prefs.glade.h:77
+#: ../ui/prefs.glade.h:79
 msgid ""
 "Name and size choice for any module in a given language; still overridden by "
 "a specific choice on a particular module"
@@ -3008,56 +3032,56 @@ msgstr ""
 "Choix de police et taille pour n'importe quel module dans une langue donnée; "
 "toujours remplacées par un choix spécifique sur une module particulier"
 
-#: ../ui/prefs.glade.h:78
+#: ../ui/prefs.glade.h:80
 msgid "Normal Text"
 msgstr "Texte normal"
 
-#: ../ui/prefs.glade.h:79 ../ui/search-dialog.glade.h:70
+#: ../ui/prefs.glade.h:81 ../ui/search-dialog.glade.h:70
 msgid "Open Selection Dialog Button"
 msgstr "Bouton Ouvrir la boite de sélection"
 
-#: ../ui/prefs.glade.h:80
+#: ../ui/prefs.glade.h:82
 msgid "Open a dialog to select modules"
 msgstr "Ouvre la fenêtre de sélection des modules"
 
-#: ../ui/prefs.glade.h:81
+#: ../ui/prefs.glade.h:83
 msgid "Parallel View in a tab"
 msgstr "Vue parallèle dans un onglet"
 
-#: ../ui/prefs.glade.h:82
+#: ../ui/prefs.glade.h:84
 msgid "Personal Notes"
 msgstr "Notes personnelles"
 
-#: ../ui/prefs.glade.h:85
+#: ../ui/prefs.glade.h:87
 msgid "Previewer Checkbox"
 msgstr "Case à cocher Volet Aperçu"
 
-#: ../ui/prefs.glade.h:86 ../ui/search-dialog.glade.h:80
+#: ../ui/prefs.glade.h:88 ../ui/search-dialog.glade.h:80
 msgid "Remove the selected module from the list"
 msgstr "Supprime le module sélectionné de la liste"
 
-#: ../ui/prefs.glade.h:87
+#: ../ui/prefs.glade.h:89
 msgid "Resize images"
 msgstr "Images redimensionnées"
 
-#: ../ui/prefs.glade.h:88
+#: ../ui/prefs.glade.h:90
 msgid "Resize images checkbox"
 msgstr "Case à cocher Images redimensionnées"
 
-#: ../ui/prefs.glade.h:89
+#: ../ui/prefs.glade.h:91
 msgid "Scroll to Previous/Next Chapter"
 msgstr "Défilement des chapitres en continu"
 
-#: ../ui/prefs.glade.h:90
+#: ../ui/prefs.glade.h:92
 msgid "Scroll to Previous/Next Chapter Checkbox"
 msgstr "Case à cocher Défilement des chapitres en continu"
 
 # src/gs_preferences_dlg.c
-#: ../ui/prefs.glade.h:91
+#: ../ui/prefs.glade.h:93
 msgid "Select A Directory"
 msgstr "Choix du répertoire"
 
-#: ../ui/prefs.glade.h:92
+#: ../ui/prefs.glade.h:94
 msgid ""
 "Select a particular language for interface display, other than your usual "
 "setting"
@@ -3065,15 +3089,29 @@ msgstr ""
 "Sélection d'une langue spécifique pour affichage de l'interface, autre que "
 "celle de la configuration habituelle"
 
-#: ../ui/prefs.glade.h:93
+#: ../ui/prefs.glade.h:95
 msgid "Show Daily Devotion at start up"
 msgstr "Afficher le calendrier biblique au démarrage"
 
-#: ../ui/prefs.glade.h:94
+#: ../ui/prefs.glade.h:96
 msgid "Show splash screen at start up"
 msgstr "Afficher l'écran de démarrage"
 
-#: ../ui/prefs.glade.h:95
+#: ../ui/prefs.glade.h:97
+#, fuzzy
+msgid "Show verse number as a superscript"
+msgstr "Affiche les numéros de verset"
+
+#: ../ui/prefs.glade.h:98
+#, fuzzy
+msgid "Show verse number in bold text"
+msgstr "Affiche les numéros de verset dans le texte"
+
+#: ../ui/prefs.glade.h:99
+msgid "Show verse number with [surrounding brackets]"
+msgstr ""
+
+#: ../ui/prefs.glade.h:100
 msgid ""
 "Single selection of Bible+commentary+book+dictionary, or many sets of such "
 "selections in a tabbed interface"
@@ -3081,67 +3119,92 @@ msgstr ""
 "Fenêtre unique d'une Bible + commentaire + livre + dictionnaire, ou de "
 "nombreux ensembles de telles sélections dans une interface à onglets"
 
-#: ../ui/prefs.glade.h:96
+#: ../ui/prefs.glade.h:101
 msgid "Special Locale (requires restart)"
 msgstr "Langue spéciale (Nécessite un redémarrage)"
 
-#: ../ui/prefs.glade.h:97
+#: ../ui/prefs.glade.h:102
 msgid "Special Locale Combo"
 msgstr "Combo langue spéciale"
 
 # src/gs_preferences_dlg.c
-#: ../ui/prefs.glade.h:98
+#: ../ui/prefs.glade.h:103
 msgid "StudyPad default directory combo"
 msgstr "Boite combinée Répertoire par défaut du bloc-notes"
 
-#: ../ui/prefs.glade.h:99
+#: ../ui/prefs.glade.h:104
+#, fuzzy
+msgid "Superscript"
+msgstr "Description"
+
+#: ../ui/prefs.glade.h:105
 msgid "Tabs and Panes"
 msgstr "Onglets et volets"
 
-#: ../ui/prefs.glade.h:100
+#: ../ui/prefs.glade.h:106
 msgid "Use Bible Text scroll bar to scroll to previous or next chapter"
 msgstr ""
 "Permet d'utiliser la barre de déplacement vertical du volet des textes "
 "bibliques pour se déplacer au chapitre suivant ou précédent"
 
 # src/gs_preferences_dlg.c
-#: ../ui/prefs.glade.h:101
+#: ../ui/prefs.glade.h:107
 msgid "Use default Dictionary"
 msgstr "Définitions du dictionnaire par défaut"
 
 # src/gs_preferences_dlg.c
-#: ../ui/prefs.glade.h:102
+#: ../ui/prefs.glade.h:108
 msgid "Use default Dictionary Checkbox"
 msgstr "Case à cocher Dictionnaire par défaut"
 
-#: ../ui/prefs.glade.h:103
+#: ../ui/prefs.glade.h:109
 msgid "Use inverted highlight on user-annotated verses"
 msgstr ""
 "Applique un surlignement aux versets comportant des annotations personnelles"
 
-#: ../ui/prefs.glade.h:104
+#: ../ui/prefs.glade.h:110
 msgid "Use tabbed browsing"
 msgstr "Utiliser les onglets"
 
-#: ../ui/prefs.glade.h:105
+#: ../ui/prefs.glade.h:111
 msgid "Use tabbed browsing Checkbox"
 msgstr "Case à cocher Utiliser les onglets"
 
-#: ../ui/prefs.glade.h:106
+#: ../ui/prefs.glade.h:112
 msgid "Use the verse list for Bible cross-references instead of the previewer"
 msgstr ""
 "Utiliser la liste de versets pour les références-croisées de la Bible au "
 "lieu du volet Aperçu"
 
-#: ../ui/prefs.glade.h:107
+#: ../ui/prefs.glade.h:113
 msgid "Verse Number"
 msgstr "Numéros de verset"
 
-#: ../ui/prefs.glade.h:108
+#: ../ui/prefs.glade.h:114
+#, fuzzy
+msgid "Verse number bold checkbox"
+msgstr "Taille du numéro de verset"
+
+#: ../ui/prefs.glade.h:115
+#, fuzzy
+msgid "Verse number bracket checkbox"
+msgstr "Case à cocher Verset par ligne"
+
+#: ../ui/prefs.glade.h:116
 msgid "Verse number size"
 msgstr "Taille du numéro de verset"
 
-#: ../ui/prefs.glade.h:109
+#: ../ui/prefs.glade.h:117
+#, fuzzy
+msgid "Verse number superscript checkbox"
+msgstr "Taille du numéro de verset"
+
+#: ../ui/prefs.glade.h:118
+#, fuzzy
+msgid "Verse number:"
+msgstr "Numéros de verset"
+
+#: ../ui/prefs.glade.h:119
 msgid "Xrefs in verse list check box"
 msgstr "Case à cocher Xrefs dans la liste de versets"
 
@@ -4195,9 +4258,6 @@ msgstr "Guide de la Bible Xiphos"
 
 #~ msgid "Use Verse Per Line"
 #~ msgstr "Affichage d'un verset par ligne"
-
-#~ msgid "Use Verse Per Line Checkbox"
-#~ msgstr "Case à cocher Verset par ligne"
 
 #~ msgid "Restore Folder"
 #~ msgstr "Restaurer le dossier"
