@@ -57,9 +57,9 @@
 
 #ifdef WIN32
 #undef DATADIR
+#include <winsock2.h>
 #include <windows.h>
 #include <shellapi.h>
-#include <winsock2.h>
 #else
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -1491,10 +1491,10 @@ gboolean xiphos_open_default (const gchar *file)
 {
 #ifdef WIN32
 	gunichar2 *w_file;
-	gint rt;
+	gint64 rt;
 	w_file = g_utf8_to_utf16(file, -1, NULL, NULL, NULL);
 	GS_message(("opening file %ls", w_file));
-	rt = (gint)ShellExecuteW(NULL, L"open", w_file, NULL, NULL, SW_SHOWDEFAULT);
+	rt = (gint64)ShellExecuteW(NULL, L"open", w_file, NULL, NULL, SW_SHOWDEFAULT);
 	return rt > 32;
 
 #else
@@ -1659,7 +1659,12 @@ void xiphos_create_archive(gchar* conf_file, gchar* datapath, gchar *zip,
 //
 
 #ifndef INVALID_SOCKET
-# define INVALID_SOCKET -1
+# define INVALID_SOCKET (-1)
+#else
+# ifdef WIN32
+#  undef INVALID_SOCKET
+#  define INVALID_SOCKET (-1)
+# endif
 #endif
 
 void
