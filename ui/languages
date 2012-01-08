@@ -217,9 +217,9 @@ my	မြန်မာစာ
 # Nauruan
 na	Dorerin Naoero
 # correct: Norwegian Bokmål
-#nb	Norsk Bokmål
+nb	Norsk Bokmål
 # a hack while g_utf8_validate() dislikes 'å': Norwegian Bokmaal
-nb	Norsk Bokmaal
+#nb	Norsk Bokmaal
 # Ndebele, North
 nd	Sindebele
 # Low German; Low Saxon
@@ -233,9 +233,9 @@ nl	Nederlands
 # Norwegian Nynorsk
 nn	Nynorsk
 # correct: Norwegian
-#no	Norsk (bokmål)
+no	Norsk (bokmål)
 # a hack while g_utf8_validate() dislikes 'å': Norwegian
-no	Norsk Bokmaal
+#no	Norsk Bokmaal
 # Ndebele, South
 nr	Nrebele
 # Navajo
@@ -355,7 +355,7 @@ vi	Tiếng Việt
 vo	Volapük
 # Wolof
 wo	Wolof
-# Xhosa -- causes gettext problems
+# Xhosa
 xh	isiXhosa
 # Bavarian
 x-E-BAR	Boarisch
