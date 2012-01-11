@@ -753,6 +753,7 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule)
 	imodule.setSkipConsecutiveLinks(true);
 
 	VerseKey *key = (VerseKey *)(SWKey *)imodule;
+	bool before_curVerse(true);
 	int curVerse = key->Verse();
 	int curChapter = key->Chapter();
 	int curBook = key->Book();
@@ -813,6 +814,26 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule)
 			else
 				rework = g_string_new(cVerse.GetText());
 		}
+
+		// add an indicator for where in the chapter we are.
+		// (commentaries can have big sections on 1 verse.)
+		if (curVerse != 1) {			// not at the top of the pane
+			buf = NULL;
+			if ((curVerse == key->Verse()) ||
+			    (before_curVerse && (key->Verse() > curVerse))) {
+				vbuf = g_strdup_printf("<tr><td>%s<hr/></td><td><hr/></td></tr>",
+						       // repeated conditional check here
+						       ((before_curVerse &&
+							 (key->Verse() > curVerse))
+							? (buf = g_strdup_printf(
+							       "<a name=\"%d\"> </a>", curVerse))
+							: ""));
+				swbuf.append(vbuf);
+				g_free(vbuf);
+			}
+			g_free(buf);
+		}
+
 		swbuf.append("<tr>");
 
 		// insert verse numbers
@@ -853,6 +874,7 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule)
 		g_free(vbuf);
 
 		swbuf.append("</tr>");
+		before_curVerse = (key->Verse() < curVerse);
 	}
 
 	// close the table.
