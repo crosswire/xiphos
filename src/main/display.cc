@@ -815,23 +815,23 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule)
 				rework = g_string_new(cVerse.GetText());
 		}
 
-		// add an indicator for where in the chapter we are.
-		// (commentaries can have big sections on 1 verse.)
-		if (curVerse != 1) {			// not at the top of the pane
+		// add an anchor for where in the chapter we are.
+		// (commentaries can have big sections on 1 verse [<hr>],
+		// and many missing verses [<a name>].)
+		if ((curVerse != 1) &&			// not at top of pane
+		    ((curVerse == key->Verse()) ||
+		     (before_curVerse && (key->Verse() > curVerse)))) {
 			buf = NULL;
-			if ((curVerse == key->Verse()) ||
-			    (before_curVerse && (key->Verse() > curVerse))) {
-				vbuf = g_strdup_printf("<tr><td>%s<hr/></td><td><hr/></td></tr>",
-						       // repeated conditional check here
-						       ((before_curVerse &&
-							 (key->Verse() > curVerse))
-							? (buf = g_strdup_printf(
-							       "<a name=\"%d\"> </a>", curVerse))
-							: ""));
-				swbuf.append(vbuf);
-				g_free(vbuf);
-			}
+			vbuf = g_strdup_printf("<tr><td>%s<hr/></td><td><hr/></td></tr>",
+					       // repeated conditional check here
+					       ((before_curVerse &&
+						 (key->Verse() > curVerse))
+						? (buf = g_strdup_printf(
+						       "<a name=\"%d\"> </a>", curVerse))
+						: ""));
 			g_free(buf);
+			swbuf.append(vbuf);
+			g_free(vbuf);
 		}
 
 		swbuf.append("<tr>");
@@ -875,6 +875,14 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule)
 
 		swbuf.append("</tr>");
 		before_curVerse = (key->Verse() < curVerse);
+	}
+
+	// if we haven't gotten around to placing the anchor, do so now.
+	if (before_curVerse) {
+		buf = g_strdup_printf("<tr><td><a name=\"%d\"> </a><hr/></td><td><hr/></td></tr>",
+				      curVerse);
+		swbuf.append(buf);
+		g_free(buf);
 	}
 
 	// close the table.
