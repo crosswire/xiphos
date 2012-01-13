@@ -2059,8 +2059,11 @@ AnalyzeForImageSize(const char *origtext,
 		} else if (strncmp(path, "file:", 5) == 0) {
 			path += 5;
 			resized = g_string_append(resized, "file:");
-		} else
-			continue;	// no file spec there -- odd.
+		}
+		// else we have an odd case of a src="..." which does not
+		// begin with "file:"...which is now the WIN32 norm because
+		// webkit is broken as of 2012 jan 12.
+		// we will just take "path" as it stands.
 
 		// getting this far means we have a valid img src and file.
 		// find closing '"' to determine pathname end.
