@@ -1,3 +1,7 @@
+2012-01-12  karl <charcoal@users.sf.net>
+
+	* patch around new webkit WIN32 lack of "file:" in <img src="...">.
+
 2012-01-10  karl <charcoal@users.sf.net>
 
 	* missing verse anchor + current verse <hr> to commentary by chapter.
