@@ -1499,6 +1499,10 @@ GTKChapDisp::Display(SWModule &imodule)
 			    (!settings.versehighlight &&
 			     (!e || !settings.annotate_highlight)))
 				swbuf.append("<br/>");
+#ifdef USE_XIPHOS_HTML
+			else if (key->Verse() == curVerse)
+				swbuf.append("<br/>");
+#endif
 		}
 
 		// special contrasty highlighting
@@ -1950,6 +1954,10 @@ DialogChapDisp::Display(SWModule &imodule)
 			    (!settings.versehighlight &&
 			     (!e || !settings.annotate_highlight)))
 				swbuf.append("<br/>");
+#ifdef USE_XIPHOS_HTML
+			else if (key->Verse() == curVerse)
+				swbuf.append("<br/>");
+#endif
 		}
 
 		// special contrasty highlighting
