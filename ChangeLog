@@ -1,6 +1,7 @@
 2012-01-12  karl <charcoal@users.sf.net>
 
 	* patch around new webkit WIN32 lack of "file:" in <img src="...">.
+	* fix verse-per-line display glitch in webkit.
 
 2012-01-10  karl <charcoal@users.sf.net>
 
