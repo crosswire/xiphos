@@ -2,6 +2,8 @@
 
 	* patch around new webkit WIN32 lack of "file:" in <img src="...">.
 	* fix verse-per-line display glitch in webkit.
+	* substitute GTK_STOCK_ADD for image name, because that image
+	  seems not to exist in all GTK installations.
 
 2012-01-10  karl <charcoal@users.sf.net>
 
