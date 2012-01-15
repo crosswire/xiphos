@@ -48,6 +48,44 @@
 
 #include <glib/gstdio.h>
 
+#ifdef WIN32
+
+/*
+ * this is, we hope, a temporary fix for the webkit image display problem.
+ * we instantiate a local web server (!) so as to self-serve image files
+ * whose size we have already otherwise determined using local path.
+ */
+
+#include <libsoup/soup.h>
+
+static void
+server_callback_media (SoupServer *server,
+                       SoupMessage *msg,
+                       const char *path,
+                       GHashTable *query,
+                       SoupClientContext *client,
+                       gpointer user_data)
+{
+	char *contents;
+	gsize length;
+	GError *error = NULL;
+	gchar *real_path;
+
+	real_path = g_strdup(path);
+	real_path++;
+	printf("file path is: %s", real_path);
+
+	if (!g_file_test(real_path, G_FILE_TEST_EXISTS))
+		return;
+	g_file_get_contents(real_path, &contents, &length, &error);
+	g_assert(!error);
+
+	soup_message_body_append(msg->response_body, SOUP_MEMORY_TAKE,
+				 contents, length);
+	soup_message_set_status(msg, SOUP_STATUS_OK);
+}
+#endif /* WIN32 */
+
 /******************************************************************************
  * Name
  *   main
@@ -70,6 +108,10 @@ int main(int argc, char *argv[])
 	int have_sword_url = FALSE;
 	int have_tab_list = FALSE;
 	gint base_step = 0; //needed for splash
+#ifdef WIN32
+	/* see comments on function immediately preceding. */
+	SoupServer *server;
+#endif
 #ifdef DEBUG
 	GTimer *total;
 	double d;
@@ -116,6 +158,12 @@ int main(int argc, char *argv[])
 	/* we need an idea of $HOME that's convenient. */
 	/* this gives us linux-equivalent semantics. */
 	g_setenv("HOME", g_getenv("APPDATA"), TRUE);
+
+	/* see comments near top of file. */
+	server = soup_server_new(SOUP_SERVER_PORT, 7878, NULL);
+	soup_server_add_handler(server, "/", server_callback_media,
+				NULL, NULL);
+	soup_server_run_async(server);
 #endif /* WIN32 */
 
 	if (argc > 2) {

@@ -1491,10 +1491,10 @@ gboolean xiphos_open_default (const gchar *file)
 {
 #ifdef WIN32
 	gunichar2 *w_file;
-	gint64 rt;
+	gint rt;
 	w_file = g_utf8_to_utf16(file, -1, NULL, NULL, NULL);
 	GS_message(("opening file %ls", w_file));
-	rt = (gint64)ShellExecuteW(NULL, L"open", w_file, NULL, NULL, SW_SHOWDEFAULT);
+	rt = (gint)ShellExecuteW(NULL, L"open", w_file, NULL, NULL, SW_SHOWDEFAULT);
 	return rt > 32;
 
 #else
@@ -2054,16 +2054,28 @@ AnalyzeForImageSize(const char *origtext,
 
 		// some modules play fast-n-loose with proper file spec.
 		if (strncmp(path, "file://", 7) == 0) {
+#ifdef WIN32
+			/* due to need for local soup server */
+			path += 5;
+			resized = g_string_append(resized, "http://127.0.0.1:7878/");
+#else
 			path += 7;
 			resized = g_string_append(resized, "file://");
+#endif
 		} else if (strncmp(path, "file:", 5) == 0) {
 			path += 5;
+#ifdef WIN32
+			resized = g_string_append(resized, "http://127.0.0.1:7878/");
+#else
 			resized = g_string_append(resized, "file:");
+#endif
 		}
 		// else we have an odd case of a src="..." which does not
-		// begin with "file:"...which is now the WIN32 norm because
+		// begin with "file:"...which may become the WIN32 norm because
 		// webkit is broken as of 2012 jan 12.
 		// we will just take "path" as it stands.
+
+		GS_message((resized->str));
 
 		// getting this far means we have a valid img src and file.
 		// find closing '"' to determine pathname end.
@@ -2071,13 +2083,18 @@ AnalyzeForImageSize(const char *origtext,
 			continue;
 
 		*end = '\0';
+#ifdef WIN32
+		resized = g_string_append(resized, g_strdelimit(path, "\\", '/'));
+#else
 		resized = g_string_append(resized, path);
+#endif
 		image_retval = ImageDimensions(path, &image_x, &image_y);
 		*end = '"';
 
 		resized = g_string_append_c(resized, '"');
 		path = end+1;
 		trail = path;
+		GS_message((resized->str));
 
 		if (image_retval != 0) {
 			if (no_warning_yet) {
@@ -2106,6 +2123,7 @@ AnalyzeForImageSize(const char *origtext,
         }
 
 	resized = g_string_append(resized, trail);	// remainder of text appended.
+	GS_message((resized->str));
 	return resized->str;
 }
 

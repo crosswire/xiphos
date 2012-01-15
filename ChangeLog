@@ -1,3 +1,8 @@
+2012-01-15  karl <charcoal@users.sf.net>
+
+	* integrated mwtalbert's WIN32 image patch with modifications,
+	  including disabling WIN32 users' access to resize preference.
+
 2012-01-12  karl <charcoal@users.sf.net>
 
 	* patch around new webkit WIN32 lack of "file:" in <img src="...">.
