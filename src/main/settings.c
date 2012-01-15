@@ -852,6 +852,10 @@ void load_settings_structure(void)
 		xml_add_new_item_to_section("misc","imageresize","1");
 		settings.imageresize = 1;
 	}
+#ifdef WIN32
+	/* due to hackery caused by webkit "no images" bug */
+	settings.imageresize = 1;
+#endif
 
 	if ((buf = xml_get_value("editor", "spell_language")))
 		settings.spell_language = g_strdup(buf);
