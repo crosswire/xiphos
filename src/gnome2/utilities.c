@@ -2123,7 +2123,6 @@ AnalyzeForImageSize(const char *origtext,
         }
 
 	resized = g_string_append(resized, trail);	// remainder of text appended.
-	GS_message((resized->str));
 	return resized->str;
 }
 
