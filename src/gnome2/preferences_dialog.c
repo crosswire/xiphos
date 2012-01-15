@@ -2703,6 +2703,9 @@ create_preferences_dialog(void)
 	check_button.use_chapter_scroll = glade_xml_get_widget(gxml, "checkbutton_scroll");
 
 	check_button.use_imageresize = glade_xml_get_widget(gxml, "checkbutton_imageresize");
+#ifdef WIN32
+	gtk_widget_hide(check_button.use_imageresize);
+#endif
 	check_button.use_verse_num_bold = glade_xml_get_widget(gxml, "checkbutton_verse_num_bold");
 	check_button.use_verse_num_bracket = glade_xml_get_widget(gxml, "checkbutton_verse_num_bracket");
 	check_button.use_verse_num_superscript = glade_xml_get_widget(gxml, "checkbutton_verse_num_superscript");

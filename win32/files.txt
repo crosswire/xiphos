@@ -49,6 +49,7 @@ bin/libgstvideo-0.10-0.dll
 bin/libsoup-2.4-1.dll
 bin/libsqlite3-0.dll
 bin/libxslt-1.dll
+bin/pthreadGC2.dll
 
 d etc/fonts
 etc/fonts/fonts.conf
