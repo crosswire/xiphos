@@ -2075,8 +2075,6 @@ AnalyzeForImageSize(const char *origtext,
 		// webkit is broken as of 2012 jan 12.
 		// we will just take "path" as it stands.
 
-		GS_message((resized->str));
-
 		// getting this far means we have a valid img src and file.
 		// find closing '"' to determine pathname end.
 		if ((end = strchr(path, '"')) == 0)
@@ -2094,7 +2092,6 @@ AnalyzeForImageSize(const char *origtext,
 		resized = g_string_append_c(resized, '"');
 		path = end+1;
 		trail = path;
-		GS_message((resized->str));
 
 		if (image_retval != 0) {
 			if (no_warning_yet) {
