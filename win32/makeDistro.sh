@@ -76,14 +76,37 @@ for f in libsword.dll \
 	gdb.exe libwebkitgtk-1.0-0.dll
 do
     echo "Copying and stripping ${f}"
-    cp ${sworddir}${f} ${outdir}bin/${f}
-    #strip -o ${outdir}bin/${f} ${sworddir}${f}
+    #cp ${sworddir}${f} ${outdir}bin/${f}
+    strip -o ${outdir}bin/${f} ${sworddir}${f}
 done
 
-#strip -o ${outdir}bin/libwebkitgtk-1.0-0.dll ${sworddir}/libwebkitgtk-1.0-0.dll
-#strip ${outdir}bin/xiphos.exe
+# Fetch extra libraries
+for d in "gtk-2.0/2.10.0/engines" "gtk-2.0/modules" enchant
+do
+	mkdir -p ${outdir}/lib/${d}
+done
+for f in gtk-2.0/2.10.0/engines/libpixmap.dll \
+	 gtk-2.0/2.10.0/engines/libwimp.dll \
+	 gtk-2.0/modules/libgail.dll \
+	 enchant/libenchant_ispell.dll \
+	 enchant/libenchant_myspell.dll
+do
+	echo "Copying and stripping ${f}"
+	strip -o ${outdir}lib/${f} ${sworddir}../lib/${f}
+done
 
+# Strip the main Xiphos binary
+strip ${outdir}bin/xiphos.exe
+
+# Copy shared files
 cp -r /usr/local/share/sword/locales.d ${outdir}share/sword/
+for d in enchant gtkhtml-3.14 pixmaps webkitgtk-1.0
+do
+	cp -r ${sworddir}../share/${d} ${outdir}share/${d}
+done
+mkdir -p ${outdir}etc
+cp -r ${sworddir}../etc/fonts ${outdir}etc/fonts
+cp -r ${sworddir}../etc/gtk-2.0 ${outdir}etc/gtk-2.0
 
 # update gtk+ mo files
 
@@ -93,4 +116,4 @@ cp messages.mo ../../${outdir}/share/locale/fa/LC_MESSAGES/gtk20.mo
 
 # make installer
 cd ../nsis
-makensis installer.nsi
+${sworddir}makensis installer.nsi
