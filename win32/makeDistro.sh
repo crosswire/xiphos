@@ -107,6 +107,7 @@ done
 mkdir -p ${outdir}etc
 cp -r ${sworddir}../etc/fonts ${outdir}etc/fonts
 cp -r ${sworddir}../etc/gtk-2.0 ${outdir}etc/gtk-2.0
+cp win32/gtkrc ${outdir}etc/gtk-2.0/
 
 # update gtk+ mo files
 
