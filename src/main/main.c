@@ -73,7 +73,6 @@ server_callback_media (SoupServer *server,
 
 	real_path = g_strdup(path);
 	real_path++;
-	printf("file path is: %s", real_path);
 
 	if (!g_file_test(real_path, G_FILE_TEST_EXISTS))
 		return;
