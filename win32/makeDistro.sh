@@ -44,8 +44,11 @@ PKG_CONFIG=/usr/bin/${CROSS}pkg-config
 
 cd ..
 
-# configure and build xiphos
+# Setup build tree
 rm -rf $outdir
+mkdir -p ${outdir}
+cp -r -t ${outdir} win32/extras/*
+# configure and build xiphos
 export CROSS CC CXX AR RANLIB CFLAGS LDFLAGS WINRC \
 	PKG_CONFIG PKG_CONFIG_PATH PKG_CONFIG_LIBDIR \
 	PKG_CONFIG_PREFIX MSVC_LIBPATH
@@ -73,7 +76,8 @@ for f in libsword.dll \
 	libenchant-1.dll libcurl-4.dll libidn-11.dll libssh2-1.dll libgcrypt-11.dll libgpg-error-0.dll libclucene-core.dll libclucene-shared.dll \
 	libjavascriptcoregtk-1.0-0.dll pthreadGC2.dll libsoup-2.4-1.dll libsqlite3-0.dll libxslt-1.dll \
 	libgcc_s_sjlj-1.dll libstdc++-6.dll \
-	gdb.exe libwebkitgtk-1.0-0.dll
+	gdb.exe libwebkitgtk-1.0-0.dll \
+	gspawn-win32-helper.exe gspawn-win32-helper-console.exe
 do
     echo "Copying and stripping ${f}"
     #cp ${sworddir}${f} ${outdir}bin/${f}
@@ -99,15 +103,16 @@ done
 strip ${outdir}bin/xiphos.exe
 
 # Copy shared files
-cp -r /usr/local/share/sword/locales.d ${outdir}share/sword/
+mkdir -p ${outdir}share/sword/
+cp -r ${sworddir}../share/sword/locales.d ${outdir}share/sword/locales.d
 for d in enchant gtkhtml-3.14 pixmaps webkitgtk-1.0
 do
 	cp -r ${sworddir}../share/${d} ${outdir}share/${d}
 done
 mkdir -p ${outdir}etc
 cp -r ${sworddir}../etc/fonts ${outdir}etc/fonts
-cp -r ${sworddir}../etc/gtk-2.0 ${outdir}etc/gtk-2.0
-cp win32/gtkrc ${outdir}etc/gtk-2.0/
+#cp -r ${sworddir}../etc/gtk-2.0 ${outdir}etc/gtk-2.0
+#cp win32/gtkrc ${outdir}etc/gtk-2.0/
 
 # update gtk+ mo files
 
@@ -117,4 +122,5 @@ cp messages.mo ../../${outdir}/share/locale/fa/LC_MESSAGES/gtk20.mo
 
 # make installer
 cd ../nsis
-${sworddir}makensis installer.nsi
+#${sworddir}makensis installer.nsi
+wine ~/.wine/drive_c/Program\ Files/NSIS/Unicode/makensis.exe installer.nsi
