@@ -20,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 3.1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-31 01:50-0500\n"
-"PO-Revision-Date: 2011-07-17 12:48+0200\n"
+"POT-Creation-Date: 2012-01-24 22:18+0100\n"
+"PO-Revision-Date: 2012-01-24 22:33+0100\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: emacs + po-mode <gnomefr@traduc.org>\n"
 "Language: \n"
@@ -541,26 +541,26 @@ msgstr "BUG! Xiphos va s'arrêter sur une erreur « STRING »."
 msgid "Xiphos - Bible Study Software"
 msgstr "Xiphos - Logiciel d'étude biblique"
 
-#: ../src/gnome2/main_window.c:852
+#: ../src/gnome2/main_window.c:851
 msgid "Open a new tab"
 msgstr "Ouvrir un nouvel onglet"
 
-#: ../src/gnome2/main_window.c:932 ../src/gnome2/sidebar.c:620
+#: ../src/gnome2/main_window.c:931 ../src/gnome2/sidebar.c:620
 #: ../src/gnome2/sidebar.c:626 ../src/main/sidebar.cc:651
 #: ../src/main/sidebar.cc:996 ../src/main/sidebar.cc:997
 #: ../src/main/sidebar.cc:998
 msgid "Standard View"
 msgstr "Vue simple"
 
-#: ../src/gnome2/main_window.c:1003
+#: ../src/gnome2/main_window.c:1002
 msgid "Commentary View"
 msgstr "Commentaire"
 
-#: ../src/gnome2/main_window.c:1019
+#: ../src/gnome2/main_window.c:1018
 msgid "Book View"
 msgstr "Livre"
 
-#: ../src/gnome2/main_window.c:1046
+#: ../src/gnome2/main_window.c:1045
 msgid "Welcome to Xiphos"
 msgstr "Bienvenue dans Xiphos"
 
@@ -1528,7 +1528,7 @@ msgstr "Nouveau nom"
 msgid "Remove the selected item"
 msgstr "Supprimer l'élément sélectionné"
 
-#: ../src/gnome2/utilities.c:2077
+#: ../src/gnome2/utilities.c:2099
 msgid ""
 "An image file's size could not be determined.\n"
 "Xiphos cannot resize images to fit window."
@@ -1545,32 +1545,32 @@ msgstr ""
 "Ce nom d'annotation personnelle est improprement formé :\n"
 "'%s'"
 
-#: ../src/main/display.cc:1026 ../src/main/display.cc:1092
-#: ../src/main/display.cc:1176 ../ui/export-dialog.glade.h:7
+#: ../src/main/display.cc:1056 ../src/main/display.cc:1122
+#: ../src/main/display.cc:1206 ../ui/export-dialog.glade.h:7
 msgid "Chapter"
 msgstr "Chapitre"
 
-#: ../src/main/main.c:122
+#: ../src/main/main.c:169
 msgid "Xiphos does not understand more than one argument."
 msgstr "Xiphos n'accepte pas plus d'un argument."
 
-#: ../src/main/main.c:168
+#: ../src/main/main.c:215
 msgid "Initiating HTML"
 msgstr "Initialisation HTML"
 
-#: ../src/main/main.c:174
+#: ../src/main/main.c:221
 msgid "Building Interface"
 msgstr "Construction de l'interface"
 
-#: ../src/main/main.c:178
+#: ../src/main/main.c:225
 msgid "Starting Sword"
 msgstr "Démarrage de Sword"
 
-#: ../src/main/main.c:182
+#: ../src/main/main.c:229
 msgid "Loading Settings"
 msgstr "Chargement des préférences"
 
-#: ../src/main/main.c:186
+#: ../src/main/main.c:233
 msgid "Displaying Xiphos"
 msgstr "Affichage de Xiphos"
 
@@ -2449,7 +2449,7 @@ msgstr "Bouton radio HTML"
 msgid ""
 "Indicates whether verse numbers should appear inline in the text for more "
 "than 1 verse."
-msgstr ""
+msgstr "Indique si les numéros de versets doivent apparaître en ligne dans un texte sur plusieurs versets."
 
 #: ../ui/export-dialog.glade.h:18
 msgid "Key"
@@ -2472,9 +2472,8 @@ msgid "Verse"
 msgstr "Verset"
 
 #: ../ui/export-dialog.glade.h:24
-#, fuzzy
 msgid "Verse Number button"
-msgstr "Numéros de verset"
+msgstr "Bouton numéro de verset"
 
 #: ../ui/export-dialog.glade.h:25
 msgid "Verse Radio Button"
@@ -2489,9 +2488,8 @@ msgid "Version"
 msgstr "Version"
 
 #: ../ui/export-dialog.glade.h:28
-#, fuzzy
 msgid "_Verse numbers in text"
-msgstr "Taille du numéro de verset"
+msgstr "Numéros de versets dans le texte"
 
 #: ../ui/markverse.glade.h:4
 msgid "Mark"
@@ -2820,11 +2818,11 @@ msgstr "Texte biblique"
 
 #: ../ui/prefs.glade.h:27
 msgid "Bold"
-msgstr ""
+msgstr "Gras"
 
 #: ../ui/prefs.glade.h:29
 msgid "Brackets"
-msgstr ""
+msgstr "Parenthèses"
 
 #: ../ui/prefs.glade.h:30
 msgid "Change Biblical Text Combo"
@@ -3098,18 +3096,16 @@ msgid "Show splash screen at start up"
 msgstr "Afficher l'écran de démarrage"
 
 #: ../ui/prefs.glade.h:97
-#, fuzzy
 msgid "Show verse number as a superscript"
-msgstr "Affiche les numéros de verset"
+msgstr "Affiche les numéros de verset en forme exposant"
 
 #: ../ui/prefs.glade.h:98
-#, fuzzy
 msgid "Show verse number in bold text"
-msgstr "Affiche les numéros de verset dans le texte"
+msgstr "Affiche les numéros de verset en gras"
 
 #: ../ui/prefs.glade.h:99
 msgid "Show verse number with [surrounding brackets]"
-msgstr ""
+msgstr "Affiche les numéros de versets entourés de [parenthèses]"
 
 #: ../ui/prefs.glade.h:100
 msgid ""
@@ -3133,9 +3129,8 @@ msgid "StudyPad default directory combo"
 msgstr "Boite combinée Répertoire par défaut du bloc-notes"
 
 #: ../ui/prefs.glade.h:104
-#, fuzzy
 msgid "Superscript"
-msgstr "Description"
+msgstr "Exposant"
 
 #: ../ui/prefs.glade.h:105
 msgid "Tabs and Panes"
@@ -3181,28 +3176,24 @@ msgid "Verse Number"
 msgstr "Numéros de verset"
 
 #: ../ui/prefs.glade.h:114
-#, fuzzy
 msgid "Verse number bold checkbox"
-msgstr "Taille du numéro de verset"
+msgstr "Case à cocher numéro de verset en gras"
 
 #: ../ui/prefs.glade.h:115
-#, fuzzy
 msgid "Verse number bracket checkbox"
-msgstr "Case à cocher Verset par ligne"
+msgstr "Case à cocher Verset entre parenthèses"
 
 #: ../ui/prefs.glade.h:116
 msgid "Verse number size"
 msgstr "Taille du numéro de verset"
 
 #: ../ui/prefs.glade.h:117
-#, fuzzy
 msgid "Verse number superscript checkbox"
-msgstr "Taille du numéro de verset"
+msgstr "Case à cocher numéro de verset en exposant"
 
 #: ../ui/prefs.glade.h:118
-#, fuzzy
 msgid "Verse number:"
-msgstr "Numéros de verset"
+msgstr "Numéro de verset :"
 
 #: ../ui/prefs.glade.h:119
 msgid "Xrefs in verse list check box"
