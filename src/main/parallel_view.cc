@@ -606,7 +606,7 @@ void get_heading(SWBuf &text, BackEnd *p, gint modidx)
 
 void main_update_parallel_page(void)
 {
-	gchar tmpBuf[256];
+	gchar *tmpBuf, *fontstring;
 	const gchar *rowcolor;
 	gchar *utf8str, *mod_name;
 	gint modidx;
@@ -617,11 +617,12 @@ void main_update_parallel_page(void)
 
 	settings.cvparallel = settings.currentverse;
 
-	sprintf(tmpBuf, HTML_START
-		"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table>",
-		settings.bible_bg_color,
-		settings.bible_text_color, settings.link_color);
+	tmpBuf = g_strdup_printf(HTML_START
+				  "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table>",
+				  settings.bible_bg_color,
+				  settings.bible_text_color, settings.link_color);
 	data = g_string_new(tmpBuf);
+	g_free(tmpBuf);
 
 	if (settings.parallel_list) {
 		for (modidx = 0;
@@ -636,8 +637,6 @@ void main_update_parallel_page(void)
 				continue;
 			}
 
-			mf = get_font(mod_name);
-
 			is_rtol = main_is_mod_rtol(mod_name);
 
 			if (modidx % 2 == 1)	/* alternating background color */
@@ -646,31 +645,35 @@ void main_update_parallel_page(void)
 				rowcolor = settings.bible_bg_color;
 
 			if (modidx == 0) {
-				sprintf(tmpBuf,
+				tmpBuf = g_strdup_printf(
 					"<tr><td><i><font color=\"%s\" size=\"%d\">[%s]</font></i></td></tr>",
 					settings.bible_verse_num_color,
 					settings.verse_num_font_size + settings.base_font_size,
 					settings.currentverse);
 				g_string_append(data, tmpBuf);
+				g_free(tmpBuf);
 			}
 
-			sprintf(tmpBuf,
-				"<tr bgcolor=\"%s\"><td><b><a href=\"passagestudy.jsp?action=showModInfo&value=%s&module=%s\"><font color=\"%s\" size=\"%+d\"> [%s]</font></a></b><br/>",
+			mf = get_font(mod_name);
+			fontstring = g_strdup_printf((((strlen(mf->old_font) < 2) ||
+						       !strncmp(mf->old_font, "none", 4))
+						      ? "<font size=\"%+d\">"
+						      : "<font size=\"%+d\" face=\"%s\">"),
+						     mf->old_font_size_value, mf->old_font);
+			free_font(mf);
+
+			tmpBuf = g_strdup_printf(
+				"<tr bgcolor=\"%s\"><td>%s<b><a href=\"passagestudy.jsp?action=showModInfo&value=%s&module=%s\"><font color=\"%s\" size=\"%+d\">[%s]</font></a></b><br/>",
 				rowcolor,
+				fontstring,
 				main_get_module_description(mod_name),
 				mod_name,
 				settings.bible_verse_num_color,
 				settings.verse_num_font_size + settings.base_font_size,
 				mod_name);
+			g_free(fontstring);
 			g_string_append(data, tmpBuf);
-
-			sprintf(tmpBuf, (((strlen(mf->old_font) < 2) ||
-					  !strncmp(mf->old_font, "none", 4))
-					 ? "<font size=\"%+d\">"
-					 : "<font size=\"%+d\" face=\"%s\">"),
-				mf->old_font_size_value, mf->old_font);
-			free_font(mf);
-			g_string_append(data, tmpBuf);
+			g_free(tmpBuf);
 
 			if (is_rtol)
 				g_string_append(data, "<br/><div align=right>");
@@ -689,11 +692,12 @@ void main_update_parallel_page(void)
 			if (is_rtol)
 				g_string_append(data, "</div><br/>");
 
-			sprintf(tmpBuf,
-				"</font><small><br/>[<a href=\"passagestudy.jsp?action=showParallel&"
-				"type=swap&value=%s\">%s</a>]</small></td></tr>",
+			tmpBuf = g_strdup_printf(
+				"<small><br/>[<a href=\"passagestudy.jsp?action=showParallel&"
+				"type=swap&value=%s\">%s</a>]</small></font></td></tr>",
 				mod_name,_("view context"));
 			g_string_append(data, tmpBuf);
+			g_free(tmpBuf);
 		}
 	}
 
