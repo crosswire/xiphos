@@ -1,6 +1,7 @@
 2012-01-30  karl <charcoal@users.sf.net>
 
 	* put module name inside font spec of 1-verse Parallel View display.
+	* be much (yet trivially) smarter about saved x/y coordinates.
 
 2012-01-15  karl <charcoal@users.sf.net>
 
