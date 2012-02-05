@@ -637,7 +637,7 @@ CleanupContent(GString *text,
 	gchar value[50], *reported, *notetype, *s = text->str;
 
 	// test for any 'n="X"' content.  if so, use it directly.
-	if ((reported = backend->get_entry_attribute("Footnote", "1", "n"))) {
+	if ((reported = backend->get_entry_attribute("Footnote", "1", "n", false))) {
 		g_free(reported);		// dispose of test junk.
 
 		// operate on notes+xrefs together: both are "Footnote".
@@ -649,9 +649,9 @@ CleanupContent(GString *text,
 
 		again:
 			g_snprintf(value, 5, "%d", ++footnote);
-			if ((reported = backend->get_entry_attribute("Footnote", value, "n"))) {
+			if ((reported = backend->get_entry_attribute("Footnote", value, "n", false))) {
 
-				notetype = backend->get_entry_attribute("Footnote", value, "type");
+				notetype = backend->get_entry_attribute("Footnote", value, "type", false);
 				if (notetype &&
 				    (((*(s+1) == 'n') && !strcmp(notetype, "crossReference")) ||
 				     ((*(s+1) == 'x') && strcmp(notetype, "crossReference")))) {

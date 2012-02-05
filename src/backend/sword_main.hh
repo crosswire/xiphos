@@ -107,7 +107,10 @@ public:
 	int module_has_testament(const char * module_name,  int testament);
 	int module_get_testaments(const char * module_name);
 
-	char *get_entry_attribute(const char *level1, const char *level2, const char *level3);
+	char *get_entry_attribute(const char *level1,
+				  const char *level2,
+				  const char *level3,
+				  bool render = true);
 
 	char *get_key_from_offset(unsigned long offset);
 	void set_treekey(unsigned long offset);

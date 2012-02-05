@@ -653,10 +653,14 @@ int BackEnd::module_get_testaments(const char * module_name)
 	return -1;
 }
 
-char *BackEnd::get_entry_attribute(const char *level1, const char *level2, const char *level3)
+char *BackEnd::get_entry_attribute(const char *level1,
+				   const char *level2,
+				   const char *level3,
+				   bool render)
 {
 	UTF8HTML u2html;
-	display_mod->RenderText();
+	if (render)
+		display_mod->RenderText();
 	SWBuf attribute2 = display_mod->getEntryAttributes()[level1][level2][level3].c_str();
 
 	u2html.processText(attribute2);
