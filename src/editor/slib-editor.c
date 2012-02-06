@@ -390,7 +390,7 @@ open_dialog (EDITOR * e)
 #endif
 
 	dialog = gtk_file_chooser_dialog_new (
-		_("Save As"), GTK_WINDOW (e->window),
+		_("Open"), GTK_WINDOW (e->window),
 		GTK_FILE_CHOOSER_ACTION_OPEN,
 		GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 		GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
