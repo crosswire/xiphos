@@ -1,3 +1,8 @@
+2012-02-06  karl <charcoal@users.sf.net>
+
+	* put "general" prefs at top of dialog.
+	* correct "Open" (was "Save As") in slib-editor.
+
 2012-02-05  karl <charcoal@users.sf.net>
 
 	* correct horrific excess RenderText() usage during footnote naming.

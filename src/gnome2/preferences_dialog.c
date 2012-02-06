@@ -1787,16 +1787,6 @@ create_model(void)
 	model = gtk_tree_store_new(2, G_TYPE_STRING, G_TYPE_INT);
 
 	gtk_tree_store_append(model, &iter, NULL);
-	gtk_tree_store_set(model, &iter, 0, _("Fonts"), -1);
-
-	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, _("Color"), 1, 1, -1);
-
-	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, _("Sizes and Faces"), 1, 2, -1);
-
-
-	gtk_tree_store_append(model, &iter, NULL);
 	gtk_tree_store_set(model, &iter, 0, _("General"), -1);
 
 	/* the former element "3" was previously here,
@@ -1805,6 +1795,16 @@ create_model(void)
 
 	gtk_tree_store_append(model, &child_iter, &iter);
 	gtk_tree_store_set(model, &child_iter, 0, _("Options"), 1, 4, -1);
+
+
+	gtk_tree_store_append(model, &iter, NULL);
+	gtk_tree_store_set(model, &iter, 0, _("Fonts"), -1);
+
+	gtk_tree_store_append(model, &child_iter, &iter);
+	gtk_tree_store_set(model, &child_iter, 0, _("Color"), 1, 1, -1);
+
+	gtk_tree_store_append(model, &child_iter, &iter);
+	gtk_tree_store_set(model, &child_iter, 0, _("Sizes and Faces"), 1, 2, -1);
 
 
 	gtk_tree_store_append(model, &iter, NULL);
