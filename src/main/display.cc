@@ -134,11 +134,11 @@ struct replace {
     { '<',  (gchar *)"&lt;"   },
     { '>',  (gchar *)"&gt;"   },
     { '\n', (gchar *)"<br />" },
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
     { '"',  (gchar *)"&quot;" },
 #else
     { '"',  (gchar *)"'" },
-#endif /* !USE_GTKMOZEMBED */
+#endif /* !USE_XIPHOS_HTML */
 };
 
 void
@@ -310,7 +310,7 @@ ClearFontFaces(gchar *text)
 #define	ALIGN_WORD	"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
 #else
 #define	ALIGN_WORD	" "	// gtkhtml3 has no alignment need.
-#endif /* USE_GTKMOZEMBED */
+#endif /* USE_XIPHOS_HTML */
 
 void
 block_dump(SWBuf& rendered,
@@ -360,7 +360,7 @@ block_dump(SWBuf& rendered,
 		*s = *(s+1) = *(s+2) = *(s+3) = ' ';
 		s = strstr(s, "&gt;");
 		*s = *(s+1) = *(s+2) = *(s+3) = ' ';
-#endif /* USE_GTKMOZEMBED */
+#endif /* USE_XIPHOS_HTML */
 
 		// gross hack needed to handle new class="..." in sword -r2512.
 		if ((s = (char*)strstr(*strongs, " class=\"strongs\">"))) {
@@ -372,7 +372,7 @@ block_dump(SWBuf& rendered,
 #ifdef USE_XIPHOS_HTML
 	else
 		slen = 0;
-#endif /* USE_GTKMOZEMBED */
+#endif /* USE_XIPHOS_HTML */
 
 	if (*morph) {
 		s = s0 = (char*)g_strrstr(*morph, "\">") + 2;
@@ -392,7 +392,7 @@ block_dump(SWBuf& rendered,
 		*s = ' ';
 		s = strrchr(s, ')');
 		*s = ' ';
-#endif /* USE_GTKMOZEMBED */
+#endif /* USE_XIPHOS_HTML */
 
 		// gross hack needed to handle new class="..." in sword -r2512.
 		if ((s = (char*)strstr(*morph, " class=\"morph\">"))) {
@@ -907,7 +907,7 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule)
 char
 GTKEntryDisp::Display(SWModule &imodule)
 {
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 	if (!gtk_widget_get_realized(GTK_WIDGET(gtkText)))
 		gtk_widget_realize(gtkText);
 #endif
@@ -2004,7 +2004,7 @@ DialogChapDisp::Display(SWModule &imodule)
 char
 GTKPrintEntryDisp::Display(SWModule &imodule)
 {
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 	gchar *keytext = NULL;
 	gchar *buf;
 	SWBuf swbuf = "";
@@ -2061,8 +2061,8 @@ GTKPrintEntryDisp::Display(SWModule &imodule)
 char
 GTKPrintChapDisp::Display(SWModule &imodule)
 {
-#ifdef USE_GTKMOZEMBED
-       imodule.setSkipConsecutiveLinks(true);
+#ifdef USE_XIPHOS_HTML
+	imodule.setSkipConsecutiveLinks(true);
 	VerseKey *key = (VerseKey *)(SWKey *)imodule;
 	int curVerse = key->Verse();
 	int curChapter = key->Chapter();

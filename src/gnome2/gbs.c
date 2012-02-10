@@ -287,7 +287,7 @@ GtkWidget *gui_create_book_pane(void)
 /* #ifdef USE_XIPHOS_HTML
 	GtkWidget *eventbox;
 #endif */ /* USE_XIPHOS_HTML */
-#ifndef  USE_GTKMOZEMBED
+#ifndef USE_GTKMOZEMBED
 	GtkWidget *scrolledwindow;
 #endif /* !USE_GTKMOZEMBED */
 	GtkWidget *navbar;
