@@ -43,6 +43,8 @@
 #include "main/xml.h"
 #include "main/display.hh"
 
+#include "../xiphos_html/xiphos_html.h"
+
 #include "gui/debug_glib_null.h"
 
 #define	HTML_START	"<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><style type=\"text/css\"><!-- A { text-decoration:none } *[dir=rtl] { text-align: right; } --></style></head>"
@@ -880,7 +882,7 @@ void main_update_parallel_page_detached(void)
 	gint modidx, parallel_count, fraction;
 
 	if (!widgets.html_parallel_dialog 
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 	    || !gtk_widget_get_realized(GTK_WIDGET(widgets.html_parallel_dialog))
 #endif
 	    ) return;
