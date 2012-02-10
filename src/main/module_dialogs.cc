@@ -1440,11 +1440,7 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 	case TEXT_TYPE:
 		t->mod_type = TEXT_TYPE;
 		gui_create_bibletext_dialog(t);
-#ifdef USE_GTKMOZEMBED
 		be->chapDisplay = new DialogChapDisp(t->html, t, be);
-#else
-		be->chapDisplay = new DialogChapDisp(t->html,  t, be);
-#endif
 		be->init_SWORD(1);
 		if (key)
 			t->key = g_strdup(key);
