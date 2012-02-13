@@ -70,11 +70,11 @@ for f in libsword.dll \
 	installmgr.exe  diatheke.exe vs2osisreftxt.exe \
 	uconv.exe icui18n48.dll icuuc48.dll icudata48.dll \
 	libcairo-2.dll libfontconfig-1.dll libexpat-1.dll libfreetype-6.dll zlib1.dll libpixman-1-0.dll libpng15-15.dll libgdk-win32-2.0-0.dll libgdk_pixbuf-2.0-0.dll \
-	libgio-2.0-0.dll libglib-2.0-0.dll libgmodule-2.0-0.dll libgobject-2.0-0.dll libffi-5.dll libjasper-1.dll libjpeg-8.dll libtiff-3.dll libpango-1.0-0.dll \
+	libgio-2.0-0.dll libglib-2.0-0.dll libgmodule-2.0-0.dll libgobject-2.0-0.dll libffi-5.dll libjasper-1.dll libjpeg-8.dll libtiff-5.dll libpango-1.0-0.dll \
 	libpangocairo-1.0-0.dll libpangoft2-1.0-0.dll libpangowin32-1.0-0.dll libglade-2.0-0.dll libatk-1.0-0.dll libgtk-win32-2.0-0.dll libxml2-2.dll libgsf-1-114.dll \
 	bz2-1.dll libgtkhtml-3.14-19.dll libgailutil-18.dll libgconf-2-4.dll libORBit-2-0.dll libgthread-2.0-0.dll libgnurx-0.dll libgtkhtml-editor-3.14-0.dll \
 	libenchant-1.dll libcurl-4.dll libidn-11.dll libssh2-1.dll libgcrypt-11.dll libgpg-error-0.dll libclucene-core.dll libclucene-shared.dll \
-	libjavascriptcoregtk-1.0-0.dll pthreadGC2.dll libsoup-2.4-1.dll libsqlite3-0.dll libxslt-1.dll \
+	libjavascriptcoregtk-1.0-0.dll pthreadGC2.dll libsoup-2.4-1.dll libsqlite3-0.dll libxslt-1.dll libintl-8.dll \
 	libgcc_s_sjlj-1.dll libstdc++-6.dll \
 	gdb.exe libwebkitgtk-1.0-0.dll \
 	gspawn-win32-helper.exe gspawn-win32-helper-console.exe
