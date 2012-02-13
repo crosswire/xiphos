@@ -1,6 +1,7 @@
 2012-02-09  karl <charcoal@users.sf.net>
 
 	* fix a bunch of USE_GTKMOZEMBED -vs- USE_XIPHOS_HTML glitches.
+	* use setRenderNoteNumbers() from recent Sword update.
 
 2012-02-06  karl <charcoal@users.sf.net>
 

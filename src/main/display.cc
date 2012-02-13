@@ -26,6 +26,10 @@
 #include <glib.h>
 
 #include <osishtmlhref.h>
+#include <thmlhtmlhref.h>
+#include <gbfhtmlhref.h>
+#include <teihtmlhref.h>
+
 #include <osisvariants.h>
 #include <thmlvariants.h>
 #include <swmgr.h>
@@ -634,12 +638,19 @@ CleanupContent(GString *text,
 	}
 
 	gint pos;
-	gchar value[50], *reported, *notetype, *s = text->str;
+	gchar value[50], *reported, *s = text->str;
 
 	// test for any 'n="X"' content.  if so, use it directly.
 	if ((reported = backend->get_entry_attribute("Footnote", "1", "n", false))) {
 		g_free(reported);		// dispose of test junk.
 
+#if 0
+		//
+		// with recent engine change to auto-render
+		// note/xref markers, this is unneeded.
+		//
+
+		gchar *notetype;
 		// operate on notes+xrefs together: both are "Footnote".
 		while ((s = strchr(s, '*'))) {
 			if ((*(s+1) != 'n') && (*(s+1) != 'x')) {
@@ -672,6 +683,7 @@ CleanupContent(GString *text,
 		// naïveté: if any verse uses 'n=', all do: reset for next verse.
 		if (reset)
 			footnote = 0;
+#endif /* !0 */
 	}
 
 	// otherwise we simply count notes & xrefs through the verse.
@@ -744,6 +756,28 @@ set_morph_order(SWModule& imodule)
 	}
 }
 
+void
+set_render_numbers(SWModule& imodule)
+{
+	for (FilterList::const_iterator it =
+		 imodule.getRenderFilters().begin();
+	     it != imodule.getRenderFilters().end();
+	     it++) {
+		OSISHTMLHREF *f1 = dynamic_cast<OSISHTMLHREF *>(*it);
+		if (f1)
+			f1->setRenderNoteNumbers();
+		ThMLHTMLHREF *f2 = dynamic_cast<ThMLHTMLHREF *>(*it);
+		if (f2)
+			f2->setRenderNoteNumbers();
+		GBFHTMLHREF *f3 = dynamic_cast<GBFHTMLHREF *>(*it);
+		if (f3)
+			f3->setRenderNoteNumbers();
+		TEIHTMLHREF *f4 = dynamic_cast<TEIHTMLHREF *>(*it);
+		if (f4)
+			f4->setRenderNoteNumbers();
+	}
+}
+
 //
 // display of commentary by chapter.
 //
@@ -774,6 +808,7 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule)
 			     ops->morphs);
 	if (strongs_and_morph)
 		set_morph_order(imodule);
+	set_render_numbers(imodule);
 
 	// open the table.
 	if (settings.showversenum) {
@@ -930,6 +965,7 @@ GTKEntryDisp::Display(SWModule &imodule)
 			     ops->morphs);
 	if (strongs_and_morph)
 		set_morph_order(imodule);
+	set_render_numbers(imodule);
 
 	buf = g_strdup_printf(HTML_START
 			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
@@ -1062,6 +1098,7 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 
 		if (strongs_and_morph)
 			set_morph_order(imodule);
+		set_render_numbers(imodule);
 
 #if 0		// with footnote counting, we no longer cache before/after verses.
 		ModuleCache::CacheVerse& cVerse = ModuleMap
@@ -1237,6 +1274,7 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 
 		if (strongs_and_morph)
 			set_morph_order(imodule);
+		set_render_numbers(imodule);
 
 #if 0		// with footnote counting, we no longer cache before/after verses.
 		ModuleCache::CacheVerse& cVerse = ModuleMap
@@ -1292,6 +1330,7 @@ GTKChapDisp::Display(SWModule &imodule)
 			     ops->morphs);
 	if (strongs_and_morph)
 		set_morph_order(imodule);
+	set_render_numbers(imodule);
 
 	// when strongs/morph are on, the anchor boundary must be smaller.
 	// or if main window is too small to keep curverse in-pane,
@@ -1576,6 +1615,7 @@ DialogEntryDisp::DisplayByChapter(SWModule &imodule)
 			     ops->morphs);
 	if (strongs_and_morph)
 		set_morph_order(imodule);
+	set_render_numbers(imodule);
 
 	swbuf.appendFormatted("<div dir=%s>",
 			      ((is_rtol && !ops->transliteration)
@@ -1741,6 +1781,7 @@ DialogChapDisp::Display(SWModule &imodule)
 			     ops->morphs);
 	if (strongs_and_morph)
 		set_morph_order(imodule);
+	set_render_numbers(imodule);
 
 	// when strongs/morph are on, the anchor boundary must be smaller.
 	// or if main window is too small to keep curverse in-pane,
