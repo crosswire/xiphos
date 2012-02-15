@@ -963,14 +963,13 @@ GtkWidget *create_results_menu(void)
 	g_free (glade_file);
 	g_return_val_if_fail ((gxml != NULL), NULL);
 
+	menu = UI_GET_ITEM(gxml, "menu_verselist");
 #ifdef USE_GTKBUILDER
-	menu = GTK_WIDGET (gtk_builder_get_object (gxml, "menu_verselist"));
 	/* connect signals and data */
         gtk_builder_connect_signals (gxml, NULL);
 	/*gtk_builder_connect_signals_full
 		(gxml, (GtkBuilderConnectFunc)gui_glade_signal_connect_func, NULL);*/
 #else
-	menu = glade_xml_get_widget (gxml, "menu_verselist");
     	/* connect signals and data */
 	glade_xml_signal_autoconnect_full
 		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);
@@ -1016,13 +1015,12 @@ GtkWidget* create_menu_modules(void)
 	g_free (glade_file);
 	g_return_val_if_fail ((gxml != NULL), NULL);
 
+	GtkWidget *menu = UI_GET_ITEM(gxml, "menu_modules");
 #ifdef USE_GTKBUILDER
-	GtkWidget *menu         = GTK_WIDGET (gtk_builder_get_object (gxml, "menu_modules"));
         gtk_builder_connect_signals (gxml, NULL);
 	/*gtk_builder_connect_signals_full
 		(gxml, (GtkBuilderConnectFunc)gui_glade_signal_connect_func, NULL);*/
 #else
-	GtkWidget *menu 	= glade_xml_get_widget (gxml, "menu_modules");
 	glade_xml_signal_autoconnect_full
 		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);
 #endif
@@ -1091,13 +1089,12 @@ GtkWidget *create_menu_prayerlist(void)
 	g_free (glade_file);
 	g_return_val_if_fail ((gxml != NULL), NULL);
 
+	menu = UI_GET_ITEM(gxml, "menu_prayerlist"); 
 #ifdef USE_GTKBUILDER
-	menu = GTK_WIDGET (gtk_builder_get_object (gxml, "menu_prayerlist")); 
         gtk_builder_connect_signals (gxml, NULL);
 	/*gtk_builder_connect_signals_full
 		(gxml, (GtkBuilderConnectFunc)gui_glade_signal_connect_func, NULL);*/
 #else
-	menu = glade_xml_get_widget (gxml, "menu_prayerlist");
 	glade_xml_signal_autoconnect_full
 		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);
 #endif
@@ -1134,13 +1131,12 @@ GtkWidget *create_menu_prayerlist_mod(void)
 	g_free (glade_file);
 	g_return_val_if_fail ((gxml != NULL), NULL);
 
+	menu = UI_GET_ITEM(gxml, "menu_prayerlist_mod");
 #ifdef USE_GTKBUILDER
-	menu = GTK_WIDGET (gtk_builder_get_object (gxml, "menu_prayerlist_mod"));
         gtk_builder_connect_signals (gxml, NULL);
 	/*gtk_builder_connect_signals_full
 		(gxml, (GtkBuilderConnectFunc)gui_glade_signal_connect_func, NULL);*/
 #else
-	menu = glade_xml_get_widget (gxml, "menu_prayerlist_mod");
 	glade_xml_signal_autoconnect_full
 		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);
 #endif

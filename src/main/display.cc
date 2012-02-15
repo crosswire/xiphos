@@ -687,7 +687,7 @@ CleanupContent(GString *text,
 	}
 
 	// otherwise we simply count notes & xrefs through the verse.
-	else {
+	else if (ops->xrefnotenumbers) {
 		while ((s = strstr(s, "*n"))) {
 			g_snprintf(value, 5, "%d", ++footnote);
 			pos = s-(text->str)+2;
@@ -757,7 +757,7 @@ set_morph_order(SWModule& imodule)
 }
 
 void
-set_render_numbers(SWModule& imodule)
+set_render_numbers(SWModule& imodule, GLOBAL_OPS *ops)
 {
 	for (FilterList::const_iterator it =
 		 imodule.getRenderFilters().begin();
@@ -765,16 +765,16 @@ set_render_numbers(SWModule& imodule)
 	     it++) {
 		OSISHTMLHREF *f1 = dynamic_cast<OSISHTMLHREF *>(*it);
 		if (f1)
-			f1->setRenderNoteNumbers();
+			f1->setRenderNoteNumbers((ops->xrefnotenumbers != 0));
 		ThMLHTMLHREF *f2 = dynamic_cast<ThMLHTMLHREF *>(*it);
 		if (f2)
-			f2->setRenderNoteNumbers();
+			f2->setRenderNoteNumbers((ops->xrefnotenumbers != 0));
 		GBFHTMLHREF *f3 = dynamic_cast<GBFHTMLHREF *>(*it);
 		if (f3)
-			f3->setRenderNoteNumbers();
+			f3->setRenderNoteNumbers((ops->xrefnotenumbers != 0));
 		TEIHTMLHREF *f4 = dynamic_cast<TEIHTMLHREF *>(*it);
 		if (f4)
-			f4->setRenderNoteNumbers();
+			f4->setRenderNoteNumbers((ops->xrefnotenumbers != 0));
 	}
 }
 
@@ -808,7 +808,7 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule)
 			     ops->morphs);
 	if (strongs_and_morph)
 		set_morph_order(imodule);
-	set_render_numbers(imodule);
+	set_render_numbers(imodule, ops);
 
 	// open the table.
 	if (settings.showversenum) {
@@ -965,7 +965,7 @@ GTKEntryDisp::Display(SWModule &imodule)
 			     ops->morphs);
 	if (strongs_and_morph)
 		set_morph_order(imodule);
-	set_render_numbers(imodule);
+	set_render_numbers(imodule, ops);
 
 	buf = g_strdup_printf(HTML_START
 			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
@@ -1098,7 +1098,7 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 
 		if (strongs_and_morph)
 			set_morph_order(imodule);
-		set_render_numbers(imodule);
+		set_render_numbers(imodule, ops);
 
 #if 0		// with footnote counting, we no longer cache before/after verses.
 		ModuleCache::CacheVerse& cVerse = ModuleMap
@@ -1274,7 +1274,7 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 
 		if (strongs_and_morph)
 			set_morph_order(imodule);
-		set_render_numbers(imodule);
+		set_render_numbers(imodule, ops);
 
 #if 0		// with footnote counting, we no longer cache before/after verses.
 		ModuleCache::CacheVerse& cVerse = ModuleMap
@@ -1330,7 +1330,7 @@ GTKChapDisp::Display(SWModule &imodule)
 			     ops->morphs);
 	if (strongs_and_morph)
 		set_morph_order(imodule);
-	set_render_numbers(imodule);
+	set_render_numbers(imodule, ops);
 
 	// when strongs/morph are on, the anchor boundary must be smaller.
 	// or if main window is too small to keep curverse in-pane,
@@ -1615,7 +1615,7 @@ DialogEntryDisp::DisplayByChapter(SWModule &imodule)
 			     ops->morphs);
 	if (strongs_and_morph)
 		set_morph_order(imodule);
-	set_render_numbers(imodule);
+	set_render_numbers(imodule, ops);
 
 	swbuf.appendFormatted("<div dir=%s>",
 			      ((is_rtol && !ops->transliteration)
@@ -1781,7 +1781,7 @@ DialogChapDisp::Display(SWModule &imodule)
 			     ops->morphs);
 	if (strongs_and_morph)
 		set_morph_order(imodule);
-	set_render_numbers(imodule);
+	set_render_numbers(imodule, ops);
 
 	// when strongs/morph are on, the anchor boundary must be smaller.
 	// or if main window is too small to keep curverse in-pane,

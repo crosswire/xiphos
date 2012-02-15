@@ -68,6 +68,7 @@ void on_headings_activate (GtkCheckMenuItem * menuitem, gpointer user_data);
 void on_transliteration_activate (GtkCheckMenuItem * menuitem, gpointer user_data);
 void on_commentary_by_chapter_activate (GtkCheckMenuItem * menuitem, gpointer user_data);
 void on_doublespace_activate (GtkCheckMenuItem * menuitem, gpointer user_data);
+void on_xrefnotenumbers_activate (GtkCheckMenuItem * menuitem, gpointer user_data);
 void on_primary_reading_activate (GtkCheckMenuItem * menuitem, gpointer user_data);
 void on_secondary_reading_activate (GtkCheckMenuItem * menuitem, gpointer user_data);
 void on_all_readings_activate (GtkCheckMenuItem * menuitem, gpointer user_data);

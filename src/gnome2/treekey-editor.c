@@ -327,13 +327,12 @@ create_edit_tree_menu (EDITOR * editor)
 	g_free (glade_file);
 	g_return_val_if_fail ((gxml != NULL), NULL);
 
+	menu = UI_GET_ITEM(gxml, "menu_edit_tree");    
 #ifdef USE_GTKBUILDER
-	menu = GTK_WIDGET (gtk_builder_get_object (gxml, "menu_edit_tree"));    
        gtk_builder_connect_signals (gxml, NULL);
 	/* gtk_builder_connect_signals_full
 		(gxml, (GtkBuilderConnectFunc)gui_glade_signal_connect_func, editor); */
 #else
-	menu = glade_xml_get_widget (gxml, "menu_edit_tree");
     	/* connect signals and data */
 	glade_xml_signal_autoconnect_full
 		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, editor);

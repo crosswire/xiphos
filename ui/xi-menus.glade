@@ -921,6 +921,16 @@
 	  </child>
 
 	  <child>
+	    <widget class="GtkCheckMenuItem" id="headings">
+	      <property name="visible">False</property>
+	      <property name="label" translatable="yes">Headings</property>
+	      <property name="use_underline">True</property>
+	      <property name="active">False</property>
+	      <signal name="activate" handler="on_headings_activate" last_modification_time="Thu, 26 Feb 2009 19:23:37 GMT"/>
+	    </widget>
+	  </child>
+
+	  <child>
 	    <widget class="GtkCheckMenuItem" id="words_of_christ_in_red">
 	      <property name="visible">False</property>
 	      <property name="label" translatable="yes">Words of Christ in Red</property>
@@ -931,12 +941,22 @@
 	  </child>
 
 	  <child>
-	    <widget class="GtkCheckMenuItem" id="strong's_numbers">
+	    <widget class="GtkCheckMenuItem" id="strongs_numbers">
 	      <property name="visible">False</property>
 	      <property name="label" translatable="yes">Strong's Numbers</property>
 	      <property name="use_underline">True</property>
 	      <property name="active">False</property>
 	      <signal name="activate" handler="on_strong_s_numbers_activate" last_modification_time="Thu, 26 Feb 2009 20:05:06 GMT"/>
+	    </widget>
+	  </child>
+
+	  <child>
+	    <widget class="GtkCheckMenuItem" id="lemmas">
+	      <property name="visible">False</property>
+	      <property name="label" translatable="yes">Lemmas</property>
+	      <property name="use_underline">True</property>
+	      <property name="active">False</property>
+	      <signal name="activate" handler="on_lemmas_activate" last_modification_time="Thu, 26 Feb 2009 19:23:37 GMT"/>
 	    </widget>
 	  </child>
 
@@ -961,32 +981,33 @@
 	  </child>
 
 	  <child>
-	    <widget class="GtkCheckMenuItem" id="greek_accents">
-	      <property name="visible">False</property>
-	      <property name="label" translatable="yes">Greek Accents</property>
-	      <property name="use_underline">True</property>
-	      <property name="active">False</property>
-	      <signal name="activate" handler="on_greek_accents_activate" last_modification_time="Thu, 26 Feb 2009 19:23:37 GMT"/>
-	    </widget>
-	  </child>
-
-	  <child>
-	    <widget class="GtkCheckMenuItem" id="lemmas">
-	      <property name="visible">False</property>
-	      <property name="label" translatable="yes">Lemmas</property>
-	      <property name="use_underline">True</property>
-	      <property name="active">False</property>
-	      <signal name="activate" handler="on_lemmas_activate" last_modification_time="Thu, 26 Feb 2009 19:23:37 GMT"/>
-	    </widget>
-	  </child>
-
-	  <child>
 	    <widget class="GtkCheckMenuItem" id="scripture_cross-references">
 	      <property name="visible">False</property>
 	      <property name="label" translatable="yes">Scripture Cross-references</property>
 	      <property name="use_underline">True</property>
 	      <property name="active">False</property>
 	      <signal name="activate" handler="on_scripture_cross_references_activate" last_modification_time="Thu, 26 Feb 2009 20:05:23 GMT"/>
+	    </widget>
+	  </child>
+
+	  <child>
+	    <widget class="GtkCheckMenuItem" id="xrefnotenumbers">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">Footnote/Cross-ref Markers</property>
+	      <property name="tooltip" translatable="yes">Show non-anonymous markers e.g. "*n23"</property>
+	      <property name="use_underline">True</property>
+	      <property name="active">False</property>
+	      <signal name="activate" handler="on_xrefnotenumbers_activate" last_modification_time="Sat, 28 Feb 2009 20:09:05 GMT"/>
+	    </widget>
+	  </child>
+
+	  <child>
+	    <widget class="GtkCheckMenuItem" id="greek_accents">
+	      <property name="visible">False</property>
+	      <property name="label" translatable="yes">Greek Accents</property>
+	      <property name="use_underline">True</property>
+	      <property name="active">False</property>
+	      <signal name="activate" handler="on_greek_accents_activate" last_modification_time="Thu, 26 Feb 2009 19:23:37 GMT"/>
 	    </widget>
 	  </child>
 
@@ -1007,16 +1028,6 @@
 	      <property name="use_underline">True</property>
 	      <property name="active">False</property>
 	      <signal name="activate" handler="on_hebrew_cantillation_activate" last_modification_time="Thu, 26 Feb 2009 19:23:37 GMT"/>
-	    </widget>
-	  </child>
-
-	  <child>
-	    <widget class="GtkCheckMenuItem" id="headings">
-	      <property name="visible">False</property>
-	      <property name="label" translatable="yes">Headings</property>
-	      <property name="use_underline">True</property>
-	      <property name="active">False</property>
-	      <signal name="activate" handler="on_headings_activate" last_modification_time="Thu, 26 Feb 2009 19:23:37 GMT"/>
 	    </widget>
 	  </child>
 
