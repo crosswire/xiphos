@@ -871,29 +871,18 @@ void gui_create_bookmark_menu(void)
 #endif
 	g_free (glade_file);
 	g_return_if_fail ((gxml != NULL));
-#ifdef USE_GTKBUILDER
-	menu.menu = GTK_WIDGET (gtk_builder_get_object (gxml, "menu_bookmark"));
-	menu.in_tab = GTK_WIDGET (gtk_builder_get_object (gxml, "open_in_new_tab"));
-	menu.in_dialog = GTK_WIDGET (gtk_builder_get_object (gxml, "open_in_a_dialog"));
-	menu.new = GTK_WIDGET (gtk_builder_get_object (gxml, "new_folder"));
-	menu.insert = GTK_WIDGET (gtk_builder_get_object (gxml, "insert_bookmark"));
-	menu.edit = GTK_WIDGET (gtk_builder_get_object (gxml, "edit_item"));
-	menu.delete = GTK_WIDGET (gtk_builder_get_object (gxml, "delete_item"));
-	menu.reorder = GTK_WIDGET (gtk_builder_get_object (gxml, "allow_reordering"));
-	menu.bibletime = GTK_WIDGET (gtk_builder_get_object (gxml, "import_bibletime_bookmarks1"));
-	menu.remove = GTK_WIDGET (gtk_builder_get_object (gxml, "remove_folder"));
-#else
-	 menu.menu = glade_xml_get_widget (gxml, "menu_bookmark");
-	menu.in_tab = glade_xml_get_widget (gxml, "open_in_new_tab");
-	menu.in_dialog = glade_xml_get_widget (gxml, "open_in_a_dialog");
-	menu.new = glade_xml_get_widget (gxml, "new_folder");
-	menu.insert = glade_xml_get_widget (gxml, "insert_bookmark");
-	menu.edit = glade_xml_get_widget (gxml, "edit_item");
-	menu.delete = glade_xml_get_widget (gxml, "delete_item");
-	menu.reorder = glade_xml_get_widget (gxml, "allow_reordering");
-	menu.bibletime = glade_xml_get_widget (gxml, "import_bibletime_bookmarks1");
-	menu.remove = glade_xml_get_widget (gxml, "remove_folder");
-#endif
+
+	menu.menu = UI_GET_ITEM(gxml, "menu_bookmark");
+	menu.in_tab = UI_GET_ITEM(gxml, "open_in_new_tab");
+	menu.in_dialog = UI_GET_ITEM(gxml, "open_in_a_dialog");
+	menu.new = UI_GET_ITEM(gxml, "new_folder");
+	menu.insert = UI_GET_ITEM(gxml, "insert_bookmark");
+	menu.edit = UI_GET_ITEM(gxml, "edit_item");
+	menu.delete = UI_GET_ITEM(gxml, "delete_item");
+	menu.reorder = UI_GET_ITEM(gxml, "allow_reordering");
+	menu.bibletime = UI_GET_ITEM(gxml, "import_bibletime_bookmarks1");
+	menu.remove = UI_GET_ITEM(gxml, "remove_folder");
+
 	gtk_widget_set_sensitive(menu.in_tab, FALSE);
 	gtk_widget_set_sensitive(menu.in_dialog, FALSE);
 	gtk_widget_set_sensitive(menu.new, FALSE);

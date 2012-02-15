@@ -450,6 +450,16 @@
               </object>
             </child>
             <child>
+              <object class="GtkCheckMenuItem" id="headings">
+                <property name="visible">False</property>
+                <property name="can_focus">False</property>
+                <property name="use_action_appearance">False</property>
+                <property name="label" translatable="yes">Headings</property>
+                <property name="use_underline">True</property>
+                <signal name="activate" handler="on_headings_activate" swapped="no"/>
+              </object>
+            </child>
+            <child>
               <object class="GtkCheckMenuItem" id="words_of_christ_in_red">
                 <property name="visible">False</property>
                 <property name="can_focus">False</property>
@@ -467,6 +477,16 @@
                 <property name="label" translatable="yes">Strong's Numbers</property>
                 <property name="use_underline">True</property>
                 <signal name="activate" handler="on_strong_s_numbers_activate" swapped="no"/>
+              </object>
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="lemmas">
+                <property name="visible">False</property>
+                <property name="can_focus">False</property>
+                <property name="use_action_appearance">False</property>
+                <property name="label" translatable="yes">Lemmas</property>
+                <property name="use_underline">True</property>
+                <signal name="activate" handler="on_lemmas_activate" swapped="no"/>
               </object>
             </child>
             <child>
@@ -490,26 +510,6 @@
               </object>
             </child>
             <child>
-              <object class="GtkCheckMenuItem" id="greek_accents">
-                <property name="visible">False</property>
-                <property name="can_focus">False</property>
-                <property name="use_action_appearance">False</property>
-                <property name="label" translatable="yes">Greek Accents</property>
-                <property name="use_underline">True</property>
-                <signal name="activate" handler="on_greek_accents_activate" swapped="no"/>
-              </object>
-            </child>
-            <child>
-              <object class="GtkCheckMenuItem" id="lemmas">
-                <property name="visible">False</property>
-                <property name="can_focus">False</property>
-                <property name="use_action_appearance">False</property>
-                <property name="label" translatable="yes">Lemmas</property>
-                <property name="use_underline">True</property>
-                <signal name="activate" handler="on_lemmas_activate" swapped="no"/>
-              </object>
-            </child>
-            <child>
               <object class="GtkCheckMenuItem" id="scripture_cross-references">
                 <property name="visible">False</property>
                 <property name="can_focus">False</property>
@@ -517,6 +517,26 @@
                 <property name="label" translatable="yes">Scripture Cross-references</property>
                 <property name="use_underline">True</property>
                 <signal name="activate" handler="on_scripture_cross_references_activate" swapped="no"/>
+              </object>
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="xrefnotenumbers">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="use_action_appearance">False</property>
+                <property name="label" translatable="yes">Footnote/Cross-ref Markers</property>
+                <property name="use_underline">True</property>
+                <signal name="activate" handler="on_xrefnotenumbers_activate" swapped="no"/>
+              </object>
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="greek_accents">
+                <property name="visible">False</property>
+                <property name="can_focus">False</property>
+                <property name="use_action_appearance">False</property>
+                <property name="label" translatable="yes">Greek Accents</property>
+                <property name="use_underline">True</property>
+                <signal name="activate" handler="on_greek_accents_activate" swapped="no"/>
               </object>
             </child>
             <child>
@@ -537,16 +557,6 @@
                 <property name="label" translatable="yes">Hebrew Cantillation</property>
                 <property name="use_underline">True</property>
                 <signal name="activate" handler="on_hebrew_cantillation_activate" swapped="no"/>
-              </object>
-            </child>
-            <child>
-              <object class="GtkCheckMenuItem" id="headings">
-                <property name="visible">False</property>
-                <property name="can_focus">False</property>
-                <property name="use_action_appearance">False</property>
-                <property name="label" translatable="yes">Headings</property>
-                <property name="use_underline">True</property>
-                <signal name="activate" handler="on_headings_activate" swapped="no"/>
               </object>
             </child>
             <child>

@@ -67,6 +67,7 @@ namespace ModuleCache {
 	static const int Transliteration    = (1<<15);
 	static const int CommentaryChapter  = (1<<16);
 	static const int Doublespace        = (1<<17);
+	static const int XrefNoteNumbers    = (1<<18);
 
 	class CacheVerse {
 	public:

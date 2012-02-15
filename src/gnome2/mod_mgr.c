@@ -3121,13 +3121,7 @@ on_comboboxentry_remote_changed(GtkComboBox *combobox, gpointer user_data)
 static GtkWidget *
 create_module_manager_dialog(gboolean first_run)
 {
-	gchar *glade_file;
-
-#ifdef USE_GTKBUILDER
-	glade_file = gui_general_user_file ("module-manager.gtkbuilder", FALSE);
-#else
-	glade_file = gui_general_user_file ("module-manager.glade", FALSE);
-#endif
+	gchar *glade_file = gui_general_user_file ("module-manager" UI_SUFFIX, FALSE);
 	g_return_val_if_fail((glade_file != NULL), NULL);
 	GS_message(("%s",glade_file));
 
@@ -3140,35 +3134,21 @@ create_module_manager_dialog(gboolean first_run)
 #endif
 	g_free (glade_file);
 	g_return_val_if_fail ((gxml != NULL), NULL);
-#ifdef USE_GTKBUILDER
-	dialog =  GTK_WIDGET (gtk_builder_get_object (gxml, "dialog"));
+
+	dialog = UI_GET_ITEM(gxml, "dialog");
 
 	/* response buttons */
-	button_close = GTK_WIDGET (gtk_builder_get_object (gxml, "button_close"));
-	button_cancel = GTK_WIDGET (gtk_builder_get_object (gxml, "button_cancel"));
-	button_refresh = GTK_WIDGET (gtk_builder_get_object (gxml, "button_refresh"));
-	button_install = GTK_WIDGET (gtk_builder_get_object (gxml, "button_install"));
-	button_remove = GTK_WIDGET (gtk_builder_get_object (gxml, "button_remove"));
-	button_arch = GTK_WIDGET (gtk_builder_get_object (gxml, "button_archive"));
-	button_idx = GTK_WIDGET (gtk_builder_get_object (gxml, "button_index"));
-	button_delidx = GTK_WIDGET (gtk_builder_get_object (gxml, "button_delete_index"));
-	button_load_sources = GTK_WIDGET (gtk_builder_get_object (gxml, "button_load_sources"));
-	button_intro = GTK_WIDGET (gtk_builder_get_object (gxml, "button_view_intro"));
-#else
-	dialog =  glade_xml_get_widget (gxml, "dialog");
+	button_close = UI_GET_ITEM(gxml, "button_close");
+	button_cancel = UI_GET_ITEM(gxml, "button_cancel");
+	button_refresh = UI_GET_ITEM(gxml, "button_refresh");
+	button_install = UI_GET_ITEM(gxml, "button_install");
+	button_remove = UI_GET_ITEM(gxml, "button_remove");
+	button_arch = UI_GET_ITEM(gxml, "button_archive");
+	button_idx = UI_GET_ITEM(gxml, "button_index");
+	button_delidx = UI_GET_ITEM(gxml, "button_delete_index");
+	button_load_sources = UI_GET_ITEM(gxml, "button_load_sources");
+	button_intro = UI_GET_ITEM(gxml, "button_view_intro");
 
-	/* response buttons */
-	button_close = glade_xml_get_widget (gxml, "button_close");
-	button_cancel = glade_xml_get_widget (gxml, "button_cancel");
-	button_refresh = glade_xml_get_widget (gxml, "button_refresh");
-	button_install = glade_xml_get_widget (gxml, "button_install");
-	button_remove = glade_xml_get_widget (gxml, "button_remove");
-	button_arch = glade_xml_get_widget (gxml, "button_archive");
-	button_idx = glade_xml_get_widget (gxml, "button_index");
-	button_delidx = glade_xml_get_widget (gxml, "button_delete_index");
-	button_load_sources = glade_xml_get_widget (gxml, "button_load_sources"); /* load sources */
-	button_intro = glade_xml_get_widget (gxml, "button_view_intro");
-#endif
 	gtk_widget_set_can_default (button_close, 1);
 
 	g_signal_connect(dialog, "destroy",
@@ -3180,37 +3160,21 @@ create_module_manager_dialog(gboolean first_run)
 				 G_CALLBACK(on_mod_mgr_response), NULL);
 
 	/* progress bars */
+	progressbar_refresh = UI_GET_ITEM(gxml, "progressbar1"); 
 #ifdef USE_GTKBUILDER
-	progressbar_refresh = GTK_WIDGET (gtk_builder_get_object (gxml, "progressbar1")); 
 	gtk_progress_bar_set_show_text (GTK_PROGRESS_BAR(progressbar_refresh),TRUE);
-#else
-	progressbar_refresh = glade_xml_get_widget (gxml, "progressbar1"); /* refresh */
 #endif
 
 	/* treeviews */
-#ifdef USE_GTKBUILDER
-	treeview1 = GTK_WIDGET (gtk_builder_get_object (gxml, "treeview1"));
-#else
-	treeview1 = glade_xml_get_widget (gxml, "treeview1");
-#endif
+	treeview1 = UI_GET_ITEM(gxml, "treeview1");
 	setup_treeview_main(GTK_TREE_VIEW(treeview1));
 
-#ifdef USE_GTKBUILDER
-	treeview_local = GTK_WIDGET (gtk_builder_get_object (gxml, "treeview2"));
-	treeview_remote = GTK_WIDGET (gtk_builder_get_object (gxml, "treeview3"));
-#else
-	treeview_local = glade_xml_get_widget (gxml, "treeview2");
-	treeview_remote = glade_xml_get_widget (gxml, "treeview3");
-#endif
+	treeview_local = UI_GET_ITEM(gxml, "treeview2");
+	treeview_remote = UI_GET_ITEM(gxml, "treeview3");
 	setup_treeviews_local_remote(GTK_TREE_VIEW(treeview_local), GTK_TREE_VIEW(treeview_remote));
 
-#ifdef USE_GTKBUILDER
-	treeview = GTK_WIDGET (gtk_builder_get_object (gxml, "treeview4"));
-	treeview2 = GTK_WIDGET (gtk_builder_get_object (gxml, "treeview5"));
-#else
-	treeview = glade_xml_get_widget (gxml, "treeview4");
-	treeview2 = glade_xml_get_widget (gxml, "treeview5");
-#endif
+	treeview = UI_GET_ITEM(gxml, "treeview4");
+	treeview2 = UI_GET_ITEM(gxml, "treeview5");
 	setup_treeview_install(GTK_TREE_VIEW(treeview));
 	setup_treeview_maintenance(GTK_TREE_VIEW(treeview2));
 
@@ -3225,37 +3189,20 @@ create_module_manager_dialog(gboolean first_run)
 			 G_CALLBACK(query_tooltip), NULL);
 
 	/* notebook */
-#ifdef USE_GTKBUILDER
-	notebook1 = GTK_WIDGET (gtk_builder_get_object (gxml, "notebook1"));
-#else
-	notebook1 = glade_xml_get_widget (gxml, "notebook1");
-#endif
-
-
+	notebook1 = UI_GET_ITEM(gxml, "notebook1");
 	g_signal_connect(notebook1, "switch_page",
 			 G_CALLBACK(on_notebook1_switch_page), NULL);
 
-#ifdef USE_GTKBUILDER
 	/* labels */
-	label_home = GTK_WIDGET (gtk_builder_get_object (gxml, "label_home"));
-	label_system = GTK_WIDGET (gtk_builder_get_object (gxml, "label_sword_sys"));
+	label_home = UI_GET_ITEM(gxml, "label_home");
+	label_system = UI_GET_ITEM(gxml, "label_sword_sys");
 
 	/* sources buttons */
-	button_add_local = GTK_WIDGET (gtk_builder_get_object (gxml, "button_add_local"));
-	button_remove_local = GTK_WIDGET (gtk_builder_get_object (gxml, "button_remove_local"));
-	button_add_remote = GTK_WIDGET (gtk_builder_get_object (gxml, "button_add_remote"));
-	button_remove_remote = GTK_WIDGET (gtk_builder_get_object (gxml, "button_remove_remote"));
-#else
-	/* labels */
-	label_home = glade_xml_get_widget (gxml, "label_home");
-	label_system = glade_xml_get_widget (gxml, "label_sword_sys");
+	button_add_local = UI_GET_ITEM(gxml, "button_add_local");
+	button_remove_local = UI_GET_ITEM(gxml, "button_remove_local");
+	button_add_remote = UI_GET_ITEM(gxml, "button_add_remote");
+	button_remove_remote = UI_GET_ITEM(gxml, "button_remove_remote");
 
-	/* sources buttons */
-	button_add_local = glade_xml_get_widget (gxml, "button_add_local"); /* close */
-	button_remove_local = glade_xml_get_widget (gxml, "button_remove_local"); /* close */
-	button_add_remote = glade_xml_get_widget (gxml, "button_add_remote"); /* refresh */
-	button_remove_remote = glade_xml_get_widget (gxml, "button_remove_remote"); /* install */
-#endif
 	g_signal_connect(button_add_local, "clicked",
 			 G_CALLBACK(on_button_add_local_clicked), NULL);
 	g_signal_connect(button_remove_local, "clicked",
@@ -3266,30 +3213,17 @@ create_module_manager_dialog(gboolean first_run)
 			 G_CALLBACK(on_button_remove_remote_clicked), NULL);
 
 	/* combo box entrys */
-#ifdef USE_GTKBUILDER
-	combo_entry1 = GTK_WIDGET (gtk_builder_get_object (gxml, "comboboxentry1"));
+	combo_entry1 = UI_GET_ITEM(gxml, "comboboxentry1");
+	combo_entry2 = UI_GET_ITEM(gxml, "comboboxentry2");
 	set_combobox(GTK_COMBO_BOX(combo_entry1));
-	combo_entry2 = GTK_WIDGET (gtk_builder_get_object (gxml, "comboboxentry2"));
 	set_combobox(GTK_COMBO_BOX(combo_entry2));
-#else
-	combo_entry1 = glade_xml_get_widget (gxml, "comboboxentry1"); /* local source */
-	set_combobox(GTK_COMBO_BOX(combo_entry1));
-	combo_entry2 = glade_xml_get_widget (gxml, "comboboxentry2"); /* remote source */
-	set_combobox(GTK_COMBO_BOX(combo_entry2));
-#endif
 
 	/* radio buttons */
-#ifdef USE_GTKBUILDER
-	radiobutton_source = GTK_WIDGET (gtk_builder_get_object (gxml, "radiobutton1"));
-	radiobutton2 = GTK_WIDGET (gtk_builder_get_object (gxml, "radiobutton2"));
-	radiobutton_dest = GTK_WIDGET (gtk_builder_get_object (gxml, "radiobutton3"));
-	radiobutton4 = GTK_WIDGET (gtk_builder_get_object (gxml, "radiobutton4"));
-#else
-	radiobutton_source = glade_xml_get_widget (gxml, "radiobutton1"); /* local */
-	radiobutton2 = glade_xml_get_widget (gxml, "radiobutton2"); /* remote */
-	radiobutton_dest = glade_xml_get_widget (gxml, "radiobutton3"); /* homedir */
-	radiobutton4 = glade_xml_get_widget (gxml, "radiobutton4"); /* homedir */
-#endif
+	radiobutton_source = UI_GET_ITEM(gxml, "radiobutton1"); /* local */
+	radiobutton2 = UI_GET_ITEM(gxml, "radiobutton2"); /* remote */
+	radiobutton_dest = UI_GET_ITEM(gxml, "radiobutton3"); /* homedir */
+	radiobutton4 = UI_GET_ITEM(gxml, "radiobutton4"); /* homedir */
+
 	setup_ui_labels();
 	set_controls_to_last_use();
 	g_signal_connect(radiobutton2, "toggled",

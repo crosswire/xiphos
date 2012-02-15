@@ -138,7 +138,7 @@ void _get_export_filename(void)
 	filename = NULL;
 
 #ifndef USE_GTKBUILDER
-	glade_file = gui_general_user_file("export-dialog.glade", FALSE);
+	glade_file = gui_general_user_file("export-dialog" UI_SUFFIX, FALSE);
 	g_return_if_fail(glade_file != NULL);
 	GS_message(("%s",glade_file));
 #endif
@@ -326,7 +326,6 @@ void on_rb_multi_verse_toggled (GtkToggleButton *togglebutton,
 
 void gui_export_dialog(void)
 {
-	gchar *glade_file;
 #ifdef USE_GTKBUILDER
 	GtkBuilder *gxml;
 #else
@@ -336,57 +335,36 @@ void gui_export_dialog(void)
 	gdouble max;
 	char *ref;
 
-	dist_license = _check_for_distribution_license(settings.MainWindowModule);
-
-#ifdef USE_GTKBUILDER
-	glade_file = gui_general_user_file("export-dialog.gtkbuilder", FALSE);
-#else
-	glade_file = gui_general_user_file("export-dialog.glade", FALSE);
-#endif
+	gchar *glade_file = gui_general_user_file("export-dialog" UI_SUFFIX, FALSE);
 	g_return_if_fail(glade_file != NULL);
 	GS_message(("%s",glade_file));
+
+	dist_license = _check_for_distribution_license(settings.MainWindowModule);
 
 	/* build the widget */
 #ifdef USE_GTKBUILDER
 	gxml = gtk_builder_new ();
 	gtk_builder_add_from_file(gxml, glade_file, NULL);
-	
-	dialog =  GTK_WIDGET (gtk_builder_get_object (gxml, "dialog_export_passage"));
-
-	d.rb_book = GTK_WIDGET (gtk_builder_get_object (gxml, "radiobutton1"));
-	d.rb_chapter = GTK_WIDGET (gtk_builder_get_object (gxml, "radiobutton2"));
-	d.rb_verse = GTK_WIDGET (gtk_builder_get_object (gxml, "radiobutton3"));
-	d.rb_multi_verse = GTK_WIDGET (gtk_builder_get_object (gxml, "rb_multi_verse"));
-	d.cb_versenum = GTK_WIDGET (gtk_builder_get_object (gxml, "check_versenum"));
-	d.rb_html = GTK_WIDGET (gtk_builder_get_object (gxml, "radiobutton4"));
-	d.rb_plain = GTK_WIDGET (gtk_builder_get_object (gxml, "radiobutton5"));
-	d.rb_copy = GTK_WIDGET (gtk_builder_get_object (gxml, "rb_copy"));
-	d.rb_export = GTK_WIDGET (gtk_builder_get_object (gxml, "rb_export"));
-	d.lb_version = GTK_WIDGET (gtk_builder_get_object (gxml, "label3"));
-	d.lb_key = GTK_WIDGET (gtk_builder_get_object (gxml, "label4"));
-	d.sb_start_verse = GTK_WIDGET (gtk_builder_get_object (gxml, "sb_start_verse"));
-	d.sb_end_verse = GTK_WIDGET (gtk_builder_get_object (gxml, "sb_end_verse"));
-	d.warning_label = GTK_WIDGET (gtk_builder_get_object (gxml, "hbox2"));
 #else
 	gxml = glade_xml_new(glade_file, "dialog_export_passage", NULL);
-
-	dialog =  glade_xml_get_widget (gxml, "dialog_export_passage");
-
-	d.rb_book = glade_xml_get_widget(gxml, "radiobutton1");
-	d.rb_chapter = glade_xml_get_widget(gxml, "radiobutton2");
-	d.rb_verse = glade_xml_get_widget(gxml, "radiobutton3");
-	d.rb_multi_verse = glade_xml_get_widget(gxml, "rb_multi_verse");
-	d.cb_versenum = glade_xml_get_widget(gxml, "check_versenum");
-	d.rb_html = glade_xml_get_widget(gxml, "radiobutton4");
-	d.rb_plain = glade_xml_get_widget(gxml, "radiobutton5");
-	d.rb_copy = glade_xml_get_widget(gxml, "rb_copy");
-	d.rb_export = glade_xml_get_widget(gxml, "rb_export");
-	d.lb_version = glade_xml_get_widget(gxml, "label3");
-	d.lb_key = glade_xml_get_widget(gxml, "label4");
-	d.sb_start_verse = glade_xml_get_widget(gxml, "sb_start_verse");
-	d.sb_end_verse = glade_xml_get_widget(gxml, "sb_end_verse");
-	d.warning_label = glade_xml_get_widget(gxml, "hbox2");
 #endif
+	
+	dialog = UI_GET_ITEM(gxml, "dialog_export_passage");
+
+	d.rb_book = UI_GET_ITEM(gxml, "radiobutton1");
+	d.rb_chapter = UI_GET_ITEM(gxml, "radiobutton2");
+	d.rb_verse = UI_GET_ITEM(gxml, "radiobutton3");
+	d.rb_multi_verse = UI_GET_ITEM(gxml, "rb_multi_verse");
+	d.cb_versenum = UI_GET_ITEM(gxml, "check_versenum");
+	d.rb_html = UI_GET_ITEM(gxml, "radiobutton4");
+	d.rb_plain = UI_GET_ITEM(gxml, "radiobutton5");
+	d.rb_copy = UI_GET_ITEM(gxml, "rb_copy");
+	d.rb_export = UI_GET_ITEM(gxml, "rb_export");
+	d.lb_version = UI_GET_ITEM(gxml, "label3");
+	d.lb_key = UI_GET_ITEM(gxml, "label4");
+	d.sb_start_verse = UI_GET_ITEM(gxml, "sb_start_verse");
+	d.sb_end_verse = UI_GET_ITEM(gxml, "sb_end_verse");
+	d.warning_label = UI_GET_ITEM(gxml, "hbox2");
 
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(d.rb_copy), TRUE);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(d.rb_multi_verse), TRUE);
