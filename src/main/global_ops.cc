@@ -195,8 +195,6 @@ GLOBAL_OPS *main_new_globals(gchar * mod_name)
 	g_free(buf);
 
 	ops = g_new0(GLOBAL_OPS, 1);
-	ops->words_in_red =
-	    gui_of2tf(module_options[mod_name]["Words of Christ in Red"].c_str());
 	ops->strongs =
 	    gui_of2tf(module_options[mod_name]["Strong's Numbers"].c_str());
 	ops->morphs =
@@ -225,12 +223,16 @@ GLOBAL_OPS *main_new_globals(gchar * mod_name)
 	}
 
 	// special case options, default on:
+	ops->words_in_red =
+	    (module_options[mod_name]["Words of Christ in Red"] != "Off");
+	ops->headings =
+	    (module_options[mod_name]["Headings"] != "Off");
 	ops->footnotes =
 	    (module_options[mod_name]["Footnotes"] != "Off");
 	ops->scripturerefs =
 	    (module_options[mod_name]["Scripture Cross-references"] != "Off");
-	ops->headings =
-	    (module_options[mod_name]["Headings"] != "Off");
+	ops->xrefnotenumbers =
+	    (module_options[mod_name]["XrefNoteNumbers"] != "Off");
 
 	ops->verse_per_line = 
 	    (*(module_options[mod_name]["style"].c_str()) == 'v')

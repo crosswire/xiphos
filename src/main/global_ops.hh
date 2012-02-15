@@ -48,6 +48,7 @@ struct  _global_ops {
 	gboolean commentary_by_chapter;
 	gboolean doublespace;
 	gboolean verse_per_line;
+	gboolean xrefnotenumbers;
 	gint image_content;
 	gint respect_font_faces;
 };

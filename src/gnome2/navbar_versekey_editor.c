@@ -858,19 +858,12 @@ void _connect_signals(NAVBAR_VERSEKEY navbar, EDITOR * editor)
 
 GtkWidget *gui_navbar_versekey_editor_new(EDITOR * editor)
 {
-	gchar *glade_file;
 #ifdef USE_GTKBUILDER
 	GtkBuilder *gxml;
-
-	glade_file =
-		    gui_general_user_file("navbar_versekey.gtkbuilder", FALSE);
 #else
 	GladeXML *gxml;
-
-	glade_file =
-		    gui_general_user_file("navbar_versekey.glade", FALSE);
 #endif
-
+	gchar *glade_file = gui_general_user_file("navbar_versekey" UI_SUFFIX, FALSE);
 	g_return_val_if_fail((glade_file != NULL), NULL);
 	GS_message(("%s",glade_file));
 
@@ -885,82 +878,44 @@ GtkWidget *gui_navbar_versekey_editor_new(EDITOR * editor)
 	editor->navbar.module_name = g_string_new(settings.MainWindowModule);
 	editor->navbar.key =  g_string_new(settings.currentverse);
 
-#ifdef USE_GTKBUILDER
-	editor->navbar.navbar = GTK_WIDGET (gtk_builder_get_object(gxml, "navbar"));
-	editor->navbar.button_history_back = GTK_WIDGET (gtk_builder_get_object(gxml, "button_history_back"));
-	editor->navbar.button_history_next = GTK_WIDGET (gtk_builder_get_object(gxml, "button_history_foward"));
-	editor->navbar.button_history_menu = GTK_WIDGET (gtk_builder_get_object(gxml, "togglebutton_history_list"));
+	editor->navbar.navbar = UI_GET_ITEM(gxml, "navbar");
+	editor->navbar.button_history_back = UI_GET_ITEM(gxml, "button_history_back");
+	editor->navbar.button_history_next = UI_GET_ITEM(gxml, "button_history_foward");
+	editor->navbar.button_history_menu = UI_GET_ITEM(gxml, "togglebutton_history_list");
 
-	editor->navbar.button_sync = GTK_WIDGET (gtk_builder_get_object(gxml, "togglebutton_sync"));
-#else
-	editor->navbar.navbar = glade_xml_get_widget(gxml, "navbar");
-	editor->navbar.button_history_back = glade_xml_get_widget(gxml, "button_history_back");
-	editor->navbar.button_history_next = glade_xml_get_widget(gxml, "button_history_foward");
-	editor->navbar.button_history_menu = glade_xml_get_widget(gxml, "togglebutton_history_list");
-
-	editor->navbar.button_sync = glade_xml_get_widget(gxml, "togglebutton_sync");
-#endif
+	editor->navbar.button_sync = UI_GET_ITEM(gxml, "togglebutton_sync");
 	gtk_widget_show(editor->navbar.button_sync);
 	gtk_widget_set_tooltip_text(editor->navbar.button_sync,
 				    _("Synchronize this window's scrolling with the main window"));
 
-#ifdef USE_GTKBUILDER
-	editor->navbar.button_book_up = GTK_WIDGET (gtk_builder_get_object(gxml, "eventbox9"));
-	editor->navbar.button_book_down = GTK_WIDGET (gtk_builder_get_object(gxml, "eventbox6"));
-	editor->navbar.button_chapter_up = GTK_WIDGET (gtk_builder_get_object(gxml, "eventbox8"));
-	editor->navbar.button_chapter_down = GTK_WIDGET (gtk_builder_get_object(gxml, "eventbox4"));
-	editor->navbar.button_verse_up = GTK_WIDGET (gtk_builder_get_object(gxml, "eventbox7"));
-	editor->navbar.button_verse_down = GTK_WIDGET (gtk_builder_get_object(gxml, "eventbox1"));
+	editor->navbar.button_book_up = UI_GET_ITEM(gxml, "eventbox9");
+	editor->navbar.button_book_down = UI_GET_ITEM(gxml, "eventbox6");
+	editor->navbar.button_chapter_up = UI_GET_ITEM(gxml, "eventbox8");
+	editor->navbar.button_chapter_down = UI_GET_ITEM(gxml, "eventbox4");
+	editor->navbar.button_verse_up = UI_GET_ITEM(gxml, "eventbox7");
+	editor->navbar.button_verse_down = UI_GET_ITEM(gxml, "eventbox1");
 
-	editor->navbar.arrow_book_up_box = GTK_WIDGET (gtk_builder_get_object(gxml, "image13"));
-	editor->navbar.arrow_book_up = GTK_WIDGET (gtk_builder_get_object(gxml, "image12"));
-	editor->navbar.arrow_book_down_box = GTK_WIDGET (gtk_builder_get_object(gxml, "image15"));
-	editor->navbar.arrow_book_down = GTK_WIDGET (gtk_builder_get_object(gxml, "image14"));
-	editor->navbar.arrow_chapter_up_box = GTK_WIDGET (gtk_builder_get_object(gxml, "image9"));
-	editor->navbar.arrow_chapter_up = GTK_WIDGET (gtk_builder_get_object(gxml, "image8"));
-	editor->navbar.arrow_chapter_down_box = GTK_WIDGET (gtk_builder_get_object(gxml, "image11"));
-	editor->navbar.arrow_chapter_down = GTK_WIDGET (gtk_builder_get_object(gxml, "image10"));
-	editor->navbar.arrow_verse_up_box = GTK_WIDGET (gtk_builder_get_object(gxml, "image7"));
-	editor->navbar.arrow_verse_up = GTK_WIDGET (gtk_builder_get_object(gxml, "image6"));
-	editor->navbar.arrow_verse_down_box = GTK_WIDGET (gtk_builder_get_object(gxml, "image16"));
-	editor->navbar.arrow_verse_down = GTK_WIDGET (gtk_builder_get_object(gxml, "image5"));
+	editor->navbar.arrow_book_up_box = UI_GET_ITEM(gxml, "image13");
+	editor->navbar.arrow_book_up = UI_GET_ITEM(gxml, "image12");
+	editor->navbar.arrow_book_down_box = UI_GET_ITEM(gxml, "image15");
+	editor->navbar.arrow_book_down = UI_GET_ITEM(gxml, "image14");
+	editor->navbar.arrow_chapter_up_box = UI_GET_ITEM(gxml, "image9");
+	editor->navbar.arrow_chapter_up = UI_GET_ITEM(gxml, "image8");
+	editor->navbar.arrow_chapter_down_box = UI_GET_ITEM(gxml, "image11");
+	editor->navbar.arrow_chapter_down = UI_GET_ITEM(gxml, "image10");
+	editor->navbar.arrow_verse_up_box = UI_GET_ITEM(gxml, "image7");
+	editor->navbar.arrow_verse_up = UI_GET_ITEM(gxml, "image6");
+	editor->navbar.arrow_verse_down_box = UI_GET_ITEM(gxml, "image16");
+	editor->navbar.arrow_verse_down = UI_GET_ITEM(gxml, "image5");
 
-	editor->navbar.button_book_menu = GTK_WIDGET (gtk_builder_get_object(gxml, "togglebutton_book"));
-	editor->navbar.button_chapter_menu = GTK_WIDGET (gtk_builder_get_object(gxml, "togglebutton_chapter"));
-	editor->navbar.button_verse_menu = GTK_WIDGET (gtk_builder_get_object(gxml, "togglebutton_verse"));
-	editor->navbar.lookup_entry = GTK_WIDGET (gtk_builder_get_object(gxml, "entry_lookup"));
-	editor->navbar.label_book_menu = GTK_WIDGET (gtk_builder_get_object(gxml, "label_book"));
-	editor->navbar.label_chapter_menu = GTK_WIDGET (gtk_builder_get_object(gxml, "label_chapter"));
-	editor->navbar.label_verse_menu = GTK_WIDGET (gtk_builder_get_object(gxml, "label_verse"));
-#else
-	editor->navbar.button_book_up = glade_xml_get_widget(gxml, "eventbox9");
-	editor->navbar.button_book_down = glade_xml_get_widget(gxml, "eventbox6");
-	editor->navbar.button_chapter_up = glade_xml_get_widget(gxml, "eventbox8");
-	editor->navbar.button_chapter_down = glade_xml_get_widget(gxml, "eventbox4");
-	editor->navbar.button_verse_up = glade_xml_get_widget(gxml, "eventbox7");
-	editor->navbar.button_verse_down = glade_xml_get_widget(gxml, "eventbox1");
+	editor->navbar.button_book_menu = UI_GET_ITEM(gxml, "togglebutton_book");
+	editor->navbar.button_chapter_menu = UI_GET_ITEM(gxml, "togglebutton_chapter");
+	editor->navbar.button_verse_menu = UI_GET_ITEM(gxml, "togglebutton_verse");
+	editor->navbar.lookup_entry = UI_GET_ITEM(gxml, "entry_lookup");
+	editor->navbar.label_book_menu = UI_GET_ITEM(gxml, "label_book");
+	editor->navbar.label_chapter_menu = UI_GET_ITEM(gxml, "label_chapter");
+	editor->navbar.label_verse_menu = UI_GET_ITEM(gxml, "label_verse");
 
-	editor->navbar.arrow_book_up_box = glade_xml_get_widget(gxml, "image13");
-	editor->navbar.arrow_book_up = glade_xml_get_widget(gxml, "image12");
-	editor->navbar.arrow_book_down_box = glade_xml_get_widget(gxml, "image15");
-	editor->navbar.arrow_book_down = glade_xml_get_widget(gxml, "image14");
-	editor->navbar.arrow_chapter_up_box = glade_xml_get_widget(gxml, "image9");
-	editor->navbar.arrow_chapter_up = glade_xml_get_widget(gxml, "image8");
-	editor->navbar.arrow_chapter_down_box = glade_xml_get_widget(gxml, "image11");
-	editor->navbar.arrow_chapter_down = glade_xml_get_widget(gxml, "image10");
-	editor->navbar.arrow_verse_up_box = glade_xml_get_widget(gxml, "image7");
-	editor->navbar.arrow_verse_up = glade_xml_get_widget(gxml, "image6");
-	editor->navbar.arrow_verse_down_box = glade_xml_get_widget(gxml, "image16");
-	editor->navbar.arrow_verse_down = glade_xml_get_widget(gxml, "image5");
-
-	editor->navbar.button_book_menu = glade_xml_get_widget(gxml, "togglebutton_book");
-	editor->navbar.button_chapter_menu = glade_xml_get_widget(gxml, "togglebutton_chapter");
-	editor->navbar.button_verse_menu = glade_xml_get_widget(gxml, "togglebutton_verse");
-	editor->navbar.lookup_entry = glade_xml_get_widget(gxml, "entry_lookup");
-	editor->navbar.label_book_menu = glade_xml_get_widget(gxml, "label_book");
-	editor->navbar.label_chapter_menu = glade_xml_get_widget(gxml, "label_chapter");
-	editor->navbar.label_verse_menu = glade_xml_get_widget(gxml, "label_verse");
-#endif
 	editor->navbar.book_menu = gtk_menu_new();
 	editor->navbar.chapter_menu = gtk_menu_new();
 	editor->navbar.verse_menu = gtk_menu_new();

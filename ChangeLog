@@ -1,3 +1,9 @@
+2012-02-14  karl <charcoal@users.sf.net>
+
+	* big code simplification to avoid overuse of #ifdef USE_GTKBUILDER.
+	  (UI_GET_ITEM & UI_SUFFIX in src/gui/utilities.h.)
+	* add per-module option so user can choose setRenderNoteNumbers().
+
 2012-02-09  karl <charcoal@users.sf.net>
 
 	* fix a bunch of USE_GTKMOZEMBED -vs- USE_XIPHOS_HTML glitches.
