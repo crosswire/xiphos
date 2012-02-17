@@ -349,6 +349,8 @@ uk	Українська
 ur	اردو
 # Uzbek
 uz	O'zbek
+uz-Cyrl	O'zbek
+uz-Latn	O'zbek (Latin)
 # Vietnamese
 vi	Tiếng Việt
 # Volapk
@@ -827,6 +829,7 @@ auw	Awyi
 aux	Aurá
 auy	Awiyaana
 auz	Uzbeki Arabic
+av	Avaric
 ava	Avaric
 avb	Avau
 avd	Alviri-Vidari
