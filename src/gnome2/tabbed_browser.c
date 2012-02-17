@@ -799,13 +799,13 @@ static GtkWidget* tab_widget_new(PASSAGE_TAB_INFO *tbinf, const gchar *label_tex
 	gtk_rc_parse_string (
 		"style \"tab-button-style\"\n"
 		"{\n"
-        "    GtkWidget::focus-padding = 0\n"
-        "    GtkWidget::focus-line-width = 0\n"
-        "    xthickness = 0\n"
-        "    ythickness = 0\n"
-		"    GtkButton::internal-border = 0\n"
-		"    GtkButton::default-border = 0\n"
-		"    GtkButton::default-outside-border = 0\n"
+		"    GtkWidget::focus-padding = 0\n"
+		"    GtkWidget::focus-line-width = 0\n"
+		"    xthickness = 0\n"
+		"    ythickness = 0\n"
+		"    GtkButton::internal-border = {0, 0, 0, 0}\n"
+		"    GtkButton::default-border = {0, 0, 0, 0}\n"
+		"    GtkButton::default-outside-border = {0, 0, 0, 0}\n"
 		"}\n"
 		"widget \"*.button-close\" style \"tab-button-style\"");
         gtk_widget_set_name(GTK_WIDGET (tbinf->button_close), "button-close");
