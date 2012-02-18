@@ -62,6 +62,40 @@ export CROSS CC CXX AR RANLIB CFLAGS LDFLAGS WINRC \
 	-d debug \
 	-b build-win32
 	#--disable-console
+
+#
+# GROSS HACK - TEMPORARY
+# our configuration is failing to find a lot of *.h that are actually present.
+# rather than fix the nightmare that is waf right now, in the interest of getting
+# this release out the door, we force these items to be set.  we'll figure out
+# what's wrong with waf later.
+for symbol in LOCALE_H INTTYPES_H MEMORY_H STDINT_H STDLIB_H STRINGS_H STRING_H SYS_STAT_H UNISTD_H WINSOCK_H ; do
+    sed -i -e "/undef.*$symbol/d" build-win32/default/config.h
+done
+for symbol in LOCALEDIR GNOMELOCALEDIR PACKAGE_LOCALE_DIR ; do
+    sed -i -e "/$symbol/d" build-win32/default/config.h
+done
+ed -s build-win32/default/config.h << \EOF
+$i
+#define HAVE_LOCALE_H 1
+#define HAVE_INTTYPES_H 1
+#define HAVE_MEMORY_H 1
+#define HAVE_STDINT_H 1
+#define HAVE_STDLIB_H 1
+#define HAVE_STRINGS_H 1
+#define HAVE_STRING_H 1
+#define HAVE_SYS_STAT_H 1
+#define HAVE_UNISTD_H 1
+#define HAVE_WINSOCK_H 1
+#define LOCALEDIR "../share/locale"
+#define GNOMELOCALEDIR "../share/locale"
+#define PACKAGE_LOCALE_DIR "../share/locale"
+.
+w
+q
+EOF
+# GROSS HACK - END
+
 ./waf
 ./waf install
 
