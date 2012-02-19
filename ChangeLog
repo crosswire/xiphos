@@ -1,3 +1,9 @@
+2012-02-18  karl <charcoal@users.sf.net>
+
+	* remove wscript's svn version. temp-hack makeDistro.sh configuration.
+	* add code to handle *XHTML filters, and to restore post-process n=X
+	  if Sword has not been updated.
+
 2012-02-14  karl <charcoal@users.sf.net>
 
 	* big code simplification to avoid overuse of #ifdef USE_GTKBUILDER.

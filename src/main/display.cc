@@ -29,6 +29,9 @@
 #include <thmlhtmlhref.h>
 #include <gbfhtmlhref.h>
 #include <teihtmlhref.h>
+#include <osisxhtml.h>
+#include <thmlxhtml.h>
+#include <gbfxhtml.h>
 
 #include <osisvariants.h>
 #include <thmlvariants.h>
@@ -644,7 +647,7 @@ CleanupContent(GString *text,
 	if ((reported = backend->get_entry_attribute("Footnote", "1", "n", false))) {
 		g_free(reported);		// dispose of test junk.
 
-#if 0
+#ifdef NO_SWORD_SET_RENDER_NOTE_NUMBERS
 		//
 		// with recent engine change to auto-render
 		// note/xref markers, this is unneeded.
@@ -683,7 +686,7 @@ CleanupContent(GString *text,
 		// naïveté: if any verse uses 'n=', all do: reset for next verse.
 		if (reset)
 			footnote = 0;
-#endif /* !0 */
+#endif /* NO_SWORD_SET_RENDER_NOTE_NUMBERS */
 	}
 
 	// otherwise we simply count notes & xrefs through the verse.
@@ -756,6 +759,7 @@ set_morph_order(SWModule& imodule)
 	}
 }
 
+#ifndef NO_SWORD_SET_RENDER_NOTE_NUMBERS
 void
 set_render_numbers(SWModule& imodule, GLOBAL_OPS *ops)
 {
@@ -775,8 +779,18 @@ set_render_numbers(SWModule& imodule, GLOBAL_OPS *ops)
 		TEIHTMLHREF *f4 = dynamic_cast<TEIHTMLHREF *>(*it);
 		if (f4)
 			f4->setRenderNoteNumbers((ops->xrefnotenumbers != 0));
+		OSISXHTML *f5 = dynamic_cast<OSISXHTML *>(*it);
+		if (f5)
+			f5->setRenderNoteNumbers((ops->xrefnotenumbers != 0));
+		ThMLXHTML *f6 = dynamic_cast<ThMLXHTML *>(*it);
+		if (f6)
+			f6->setRenderNoteNumbers((ops->xrefnotenumbers != 0));
+		GBFXHTML *f7 = dynamic_cast<GBFXHTML *>(*it);
+		if (f7)
+			f7->setRenderNoteNumbers((ops->xrefnotenumbers != 0));
 	}
 }
+#endif /* !NO_SWORD_SET_RENDER_NOTE_NUMBERS */
 
 //
 // display of commentary by chapter.
