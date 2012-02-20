@@ -1,3 +1,8 @@
+2012-02-18  - 3.1.5.  webkit and gtk3 compatibility.  win32 with modern display
+	      engine.  better xref/note handling.  default-on status for
+	      headings, notes, xrefs, red words.  verse# display control.
+	      module lists including descriptions.  improved font handling.
+
 2010-10-15  - 3.1.4.  new det.parallel. first modules installable from local
               media. per-language font defaults. better sword:// handling.
 	      improved bookmark import. more tooltips (mod.mgr, adv.search).

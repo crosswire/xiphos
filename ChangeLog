@@ -1,3 +1,7 @@
+2012-02-19  karl <charcoal@users.sf.net>
+
+	* 3.1.5 release.
+
 2012-02-18  karl <charcoal@users.sf.net>
 
 	* remove wscript's svn version. temp-hack makeDistro.sh configuration.
