@@ -3,6 +3,124 @@ ____________________
 XIPHOS RELEASE NOTES
 ____________________
 
+Release 3.1.5
+19 Feb 2012
+
+This is primarily a toolkit compatibility release, providing 2 features,
+plus numerous ongoing routine bug fixes and enhancements.
+
+- The WebKit display driver, which finally brings display feature parity
+  to Windows with what has been available on other platforms for some time.
+  WebKit is now our normal display driver for all platforms.  Windows users
+  should see §3.9 of the manual for differences from the older gtkhtml3
+  driver.  Mozembed (xulrunner) is no longer in use, replaced by WebKit.
+
+  Note that certain problems were encountered regarding RtoL languages,
+  especially Arabic and Hebrew (Farsi seems fine) very late in the effort to
+  finalize Win32 WebKit support.  Farsi both fully translates and provides
+  RtoL-inverted display; Hebrew translates fully (modulo missing strings)
+  but does not RtoL-invert; most perversely, Arabic translates half
+  strings and does not RtoL-invert.  We do not yet understand these
+  flaws but will continue to try to resolve them, perhaps in a 3.1.6 for
+  Windows only, as these problems do not haunt non-Windows builds at all.
+
+- GTK3 compatibility, for the sake of newly-updated environments such as
+  Fedora 15/16 and Ubuntu 11.10.
+
+Other incidental improvements:
+
+- Module-internal footnote & xref numbering/lettering is respected.
+
+- Display of headings, footnotes, xrefs, and red words all default On.
+
+- Image content is resized in parallel windows and the previewer.
+
+- Module lists include modules' 1-line descriptions as well as short names.
+
+- Verse numbers will no longer be "widowed" (left alone at the end of a
+  line) by being forced to combine against the first word of their verse.
+
+- Verse number display is configurable: bold, brackets, superscripts.
+
+- RtoL consistency improvements.
+
+- Studypad save respects its default directory specification.
+
+- Base font is respected in all parallel views.
+
+- Font selection order has been fixed: Any user specification (per module
+  or per language) supercedes module configuration file specification.
+
+- In export, avoid more than one dialog, ever, about checking a module's
+  license, and change copy/export defaults to plaintext and 1 verse.
+
+- Ctrl-0 (zero) forces base font size to 0.
+
+- Ctrl-[1-9] selects the Nth tab.
+
+- Countless internal module, cache, font, and display fixes.
+
+Bug reports addressed since 3.1.4:
+3094968  Switching Bibles to one without the current book
+3094981  Navigation bug observed for the DRC module
+3102898  Xiphos stops responding if search term includes a pilcrow
+3103244  Xiphos does show italics for some transChange text
+3103905  Preview pane does not display words containing Æ or æ
+3125234  3.1.4 binary crashes on MacOS 10.6.5
+3125240  References into Apocrypha partially broken
+3141563  Xiphos doesn't start
+3141617  Localized language name for Salo module
+3147636  More localised language names
+3148222  Hebrew letters at beginning of a verse
+3157517  Xiphos No Longer Works on IBM Laptop
+3166318  parallel view selections are not saved on exit
+3166491  Opening both study pad and "personal commentary"
+3166864  Xiphos don't work correctly with the Synodal versification
+3169829  Windows font for two language names
+3172700  Support for the Khmer language
+3179097  Parallel View in a Tab
+3257699  Xiphos crash on Fedora 13
+3265450  xiphos-3.1.4 with xulrunner-2.0 fails to start
+3289327  Xiphos don't display properly tables
+3291274  Xiphos crashes when searching expression (in FreJND)
+3301774  Font size of RNKJV Bible
+3302253  Suggested reorganization of first paragraph on using Para.
+3302627  editing pers.comm. should not use module cache
+3306579  Headings missing at the beginning of chapters
+3307692  Install failure Fedora 15
+3361376  Parallel View: Will only show OT in Book Drop Down
+3367552  No option for "Use Verse Per Line"
+3384710  Strange search behavior at russian language
+3392639  Non-display of verses containing U+FFFD
+3392809  No way to choose verse, not existing in KJV versification
+3400041  Previewer setting not functioning properly
+3403641  xiphos 3.1.4 fails to build due to C template errors
+3411260  Build fails to find gconf2 includes
+3424836  Won't Run On Ubuntu 11.10
+3428934  The word "mute" links to the Strongs entry for "mustard"
+3434897  Certain Chapters in KJV Don't Display
+3438261  Xiphos doesn't even start - error
+3438931  xiphos-svn4312 build fails on fedora 16 64bit
+3439031  gtk_widget_get_realized not available for gtk < 2.20
+3439513  Xiphos Remote Source Not Working
+3440353  Xiphos failure: "can't happen", display_mod: null
+3440363  On start, Standard View text is invisible.
+3482318	 Problems with separators
+3482351  Note layout in Xiphos
+3442601  Languages hacks?
+3485166  Xiphos build 4363 fails to build
+3485167	 Xiphos only displays Genesis (or first book in a text)
+3488597  Build problem webkit branch
+
+Feature requests closed:
+3168708  preferences for copy
+3163996  Cut off...
+3166868  Morphological search function
+3210164  Custom verse number formatting
+3291278  Add ability to navigate from the keyboard
+3291283  Add option to justify texts
+________________________________________________________________
+
 Release 3.1.4
 15 Oct 2010
 

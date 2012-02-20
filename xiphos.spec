@@ -1,5 +1,5 @@
 Name:		xiphos 
-Version:	3.1.4
+Version:	3.1.5
 Release:	1
 Summary:	Bible study and research tool
 
