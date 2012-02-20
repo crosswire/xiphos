@@ -762,7 +762,10 @@ set_morph_order(SWModule& imodule)
 	}
 }
 
-#ifndef NO_SWORD_SET_RENDER_NOTE_NUMBERS
+#ifdef NO_SWORD_SET_RENDER_NOTE_NUMBERS
+// placeholder for older Sword.
+#define	set_render_numbers(x,y)	/* nothing */
+#else
 void
 set_render_numbers(SWModule& imodule, GLOBAL_OPS *ops)
 {
