@@ -29,9 +29,12 @@
 #include <thmlhtmlhref.h>
 #include <gbfhtmlhref.h>
 #include <teihtmlhref.h>
+#ifndef NO_SWORD_SET_RENDER_NOTE_NUMBERS
+/* these files are erroneously uninstalled as of previous release */
 #include <osisxhtml.h>
 #include <thmlxhtml.h>
 #include <gbfxhtml.h>
+#endif
 
 #include <osisvariants.h>
 #include <thmlvariants.h>
