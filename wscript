@@ -652,7 +652,7 @@ def dist_dfsg(ctx):
 
     def dist_hook2():
         shutil.rmtree('win32')
-        shutil.copytree(os.path.join(glob.glob('../.waf-*')[0],'wafadmin'), 'wafadmin')
+        shutil.copytree(os.path.join(glob.glob('../.waf-*')[0],'wafadmin'), 'wafadmin', ignore=shutil.ignore_patterns('*.pyc'))
         lines = []
         with open('waf') as f:
             lines = f.readlines()
