@@ -506,6 +506,10 @@ def configure(conf):
     for h in _headers:
         conf.check(header_name=h)
 
+    if not conf.check(header_name='osisxhtml.h'):
+        Utils.pprint('RED', "Old libsword is used, please upgrade to gain engine support for notes/xrefs.")
+        dfn('NO_SWORD_SET_RENDER_NOTE_NUMBERS', 1)
+
     # Define to 1 if you have the `strcasestr' function.
     # this function is part of some glibc, string.h
     # could be missing in win32
