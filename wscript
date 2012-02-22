@@ -619,23 +619,42 @@ def build(bld):
 
     bld.add_post_fun(post)
 
+import shutil
+import subprocess
+import glob
+
 def dist_hook():
-    import shutil
     shutil.rmtree('win32')
 
 def run(ctx):
     '''Execute xiphos binary from build directory'''
-    import subprocess
     subprocess.call(os.path.join(blddir,'default/src/gnome2/xiphos'))
 
 
 def test(ctx):
     '''Run unit tests'''
-    import subprocess
     subprocess.call(os.path.join(srcdir,'tests/build.py'))
 
 def dist(ctx):
     import Scripting
     Scripting.dist()
     Scripting.g_gz = 'gz'
+    Scripting.dist()
+
+def dist_dfsg(ctx):
+    import Scripting
+    global dist_hook
+    global VERSION
+
+    def dist_hook2():
+        shutil.rmtree('win32')
+        shutil.copytree(os.path.join(glob.glob('../.waf-*')[0],'wafadmin'), 'wafadmin')
+        lines = []
+        with open('waf') as f:
+            lines = f.readlines()
+        with open('waf','w') as f:
+            f.writelines(lines[:-3])
+
+    VERSION = VERSION + '+dfsg'
+    dist_hook=dist_hook2
     Scripting.dist()
