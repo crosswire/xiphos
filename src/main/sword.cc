@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * sword.cc - glue
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -38,6 +38,7 @@ extern "C" {
 #endif
 #include <gtkhtml/gtkhtml.h>
 #include "gui/bibletext.h"
+#include "main/gtk_compat.h"
 #ifdef __cplusplus
 }
 #endif
@@ -83,8 +84,6 @@ extern "C" {
 #endif
 
 using namespace sword;
-
-#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
 
 extern GtkWidget *cbe_book;
 extern GtkWidget *spb_chapter;
@@ -272,6 +271,28 @@ void main_set_module_unlocked(const char * mod_name, char * key)
 void main_save_module_key(const char * mod_name, char * key)
 {
 	backend->save_module_key((char *) mod_name, key);
+}
+
+
+/******************************************************************************
+ * Name
+ *  main_getText
+ *
+ * Synopsis
+ *   #include "main/sword.h"
+ *   void main_getText(gchar * key)
+ *
+ * Description
+ *   get unabbreviated key
+ *
+ * Return value
+ *   char *
+ */
+
+char *main_getText(char *key)
+{
+	VerseKey vkey(key);
+	return strdup((char *)vkey.getText());
 }
 
 
@@ -836,7 +857,7 @@ GtkWidget *main_dictionary_drop_down_new(char * mod_name, char * old_key)
 		item =
 		    gtk_menu_item_new_with_label((gchar *) new_key);
 		gtk_widget_show(item);
-		g_signal_connect(GTK_OBJECT(item), "activate",
+		g_signal_connect(G_OBJECT(item), "activate",
 				   G_CALLBACK(dict_key_list_select),
 				   g_strdup(new_key));
 		gtk_container_add(GTK_CONTAINER(menu), item);
@@ -1088,9 +1109,10 @@ void main_display_bible(const char * mod_name,
 	extern GtkAdjustment* adjustment;
 
 	/* keeps us out of a crash causing loop */
-	g_signal_handler_block(adjustment, scroll_adj_signal);
+	if (adjustment)
+		g_signal_handler_block(adjustment, scroll_adj_signal);
 #endif
-	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.html_text))) return;
+	if (!gtk_widget_get_realized (GTK_WIDGET(widgets.html_text))) return;
 	if (!mod_name)
 		mod_name = ((settings.browsing && (cur_passage_tab != NULL))
 			    ? g_strdup(cur_passage_tab->text_mod)
@@ -1201,7 +1223,8 @@ void main_display_bible(const char * mod_name,
 			gui_keep_parallel_dialog_in_sync();
 	}
 #ifndef USE_GTKMOZEMBED
-	g_signal_handler_unblock(adjustment, scroll_adj_signal);
+	if (adjustment)
+		g_signal_handler_unblock(adjustment, scroll_adj_signal);
 #endif
 }
 
@@ -1776,18 +1799,22 @@ main_deformat_number(char *digitstring)
  * Return value
  *   int
  */
-static char blank_html_content[] = "<html><head></head><body> </body></html>";
-
 void main_flush_widgets_content(void)
 {
-	if (GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.html_text)))
-		HtmlOutput(blank_html_content, widgets.html_text, NULL, NULL);
-	if (GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.html_comm)))
-		HtmlOutput(blank_html_content, widgets.html_comm, NULL, NULL);
-	if (GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.html_dict)))
-		HtmlOutput(blank_html_content, widgets.html_dict, NULL, NULL);
-	if (GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.html_book)))
-		HtmlOutput(blank_html_content, widgets.html_book, NULL, NULL);
+	GString *blank_html_content = g_string_new(NULL);
+	g_string_printf(blank_html_content,
+			"<html><head></head><body bgcolor=\"%s\" text=\"%s\"> </body></html>",
+			settings.bible_bg_color, settings.bible_text_color);
+
+	if (gtk_widget_get_realized  (GTK_WIDGET(widgets.html_text)))
+		HtmlOutput(blank_html_content->str, widgets.html_text, NULL, NULL);
+	if (gtk_widget_get_realized (GTK_WIDGET(widgets.html_comm)))
+		HtmlOutput(blank_html_content->str, widgets.html_comm, NULL, NULL);
+	if (gtk_widget_get_realized (GTK_WIDGET(widgets.html_dict)))
+		HtmlOutput(blank_html_content->str, widgets.html_dict, NULL, NULL);
+	if (gtk_widget_get_realized (GTK_WIDGET(widgets.html_book)))
+		HtmlOutput(blank_html_content->str, widgets.html_book, NULL, NULL);
+	g_string_free(blank_html_content, TRUE);
 }
 
 /******************************************************************************

@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * utilities.c - support functions
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -35,6 +35,10 @@
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
 #include <gtk/gtk.h>
+#ifdef GTKHTML
+#include <gtkhtml/gtkhtml.h>
+#include "gui/html.h"
+#endif
 
 #include "gui/utilities.h"
 #include "gui/preferences_dialog.h"
@@ -53,25 +57,16 @@
 
 #ifdef WIN32
 #undef DATADIR
+#include <winsock2.h>
 #include <windows.h>
 #include <shellapi.h>
-#include <winsock2.h>
 #else
 #include <sys/socket.h>
 #include <netinet/in.h>
 #endif /* !WIN32 */
 #include <errno.h>
 
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "gecko/gecko-html.h"
-#endif /* WIN32 */
-#else
-#include <gtkhtml/gtkhtml.h>
-#include <gtkhtml/htmltypes.h>
-#endif /* USE_GTKMOZEMBED */
+#include "../xiphos_html/xiphos_html.h"
 
 #include <gsf/gsf-utils.h>
 #include <gsf/gsf-outfile-zip.h>
@@ -787,57 +782,68 @@ MOD_FONT *get_font(gchar * mod_name)
 	mf->mod_name = mod_name;
 
 	mf->old_font = get_conf_file_item(file, mod_name, "Font");
-	mf->old_gdk_font = get_conf_file_item(file, mod_name, "GdkFont");
 	mf->old_font_size = get_conf_file_item(file, mod_name, "Fontsize");
 
+	/* 1st try: module pref */
 	if ((mf->old_font == NULL) ||
 	    !strcmp(mf->old_font, "none")) {
-		/* in absence of selected font, module can name its preference */
-		gchar *preferred_font = main_get_mod_config_entry(mod_name, "Font");
-		gchar *preferred_font_size = main_get_mod_config_entry(mod_name, "Fontsize");
-
-		/* in absence of module preference, user can specify language pref */
+		/* in absence of module pref, user can specify language pref */
 		gchar *lang = main_get_mod_config_entry(mod_name, "Lang");
-		gchar *lang_lang = g_strdup_printf("Language:%s",
-						   (lang ? lang : ""));
+		gchar *lang_lang = g_strdup_printf("Language:%s", (lang ? lang : ""));
+		g_free(lang);
 		gchar *lang_font = get_conf_file_item(file, lang_lang, "Font");
 		gchar *lang_size = get_conf_file_item(file, lang_lang, "Fontsize");
+		g_free(lang_lang);
+
+		/* in absence of any pref, module can name its pref */
+		gchar *preferred_font = main_get_mod_config_entry(mod_name, "Font");
+		gchar *preferred_size = main_get_mod_config_entry(mod_name, "Fontsize");
 
 		g_free(mf->old_font);
 
-		if (preferred_font && (*preferred_font != '\0'))
-			mf->old_font = preferred_font;
-		else {
+		/* 2nd try: per-language pref */
+		if (lang_font && (*lang_font != '\0')) {
 			g_free(preferred_font);
-			/* next try: fallback to per-language choice */
-			if (lang_font && (*lang_font != '\0'))
-				mf->old_font = lang_font;
+			mf->old_font = lang_font;
+		} else {
+			g_free(lang_font);
+			/* 3rd try: module config pref */
+			if (preferred_font && (*preferred_font != '\0'))
+				mf->old_font = preferred_font;
 			else {
 				/* nothing ever specified: utter default */
-				g_free(lang_font);
+				g_free(preferred_font);
 				mf->old_font = g_strdup("none");
 			}
 		}
 
+		/* 1st try */
 		if ((mf->old_font_size == NULL) ||
 		    !strcmp(mf->old_font_size, "+0")) {
 			g_free(mf->old_font_size);
 
-			if (preferred_font_size && (*preferred_font_size != '\0'))
-				mf->old_font_size = preferred_font_size;
-			else {
-				g_free(preferred_font_size);
-				if (lang_size && (*lang_size != '\0'))
-					mf->old_font_size = lang_size;
+			/* 2nd try */
+			if (lang_size && (*lang_size != '\0')) {
+				g_free(preferred_size);
+				mf->old_font_size = lang_size;
+			} else {
+				/* 3rd try */
+				g_free(lang_size);
+				if (preferred_size && (*preferred_size != '\0'))
+					mf->old_font_size = preferred_size;
 				else {
-					g_free(lang_size);
+					/* utter default */
+					g_free(preferred_size);
 					mf->old_font_size = g_strdup("+0");
 				}
 			}
 		}
-
-		g_free(lang);
 	}
+
+	/* convert string -> int, here, once for all. includes base bias. */
+	mf->old_font_size_value = ((mf->old_font_size)
+				   ? atoi(mf->old_font_size) + settings.base_font_size
+				   : settings.base_font_size);
 
 	return mf;
 }
@@ -862,7 +868,6 @@ void free_font(MOD_FONT *mf)
 {
 
 	if (mf->old_font) g_free(mf->old_font);
-	if (mf->old_gdk_font) g_free(mf->old_gdk_font);
 	if (mf->old_font_size) g_free(mf->old_font_size);
 	g_free(mf);
 }
@@ -923,7 +928,7 @@ void gui_add_mods_2_gtk_menu(gint mod_type, GtkWidget * menu,
 		item =
 		    gtk_menu_item_new_with_label((gchar *) tmp->data);
 		gtk_widget_show(item);
-		g_signal_connect(GTK_OBJECT(item), "activate",
+		g_signal_connect(G_OBJECT(item), "activate",
 				   G_CALLBACK
 				   (callback),
 				   (gchar *) tmp->data);
@@ -1026,9 +1031,9 @@ void reading_selector(char *modname,
 
 
 	url = g_strdup_printf("sword://%s/%s", modname, key);
-	main_save_module_options(modname, "Primary Reading", primary, is_dialog);
-	main_save_module_options(modname, "Secondary Reading", secondary, is_dialog);
-	main_save_module_options(modname, "All Readings", all, is_dialog);
+	main_save_module_options(modname, "Primary Reading", primary);
+	main_save_module_options(modname, "Secondary Reading", secondary);
+	main_save_module_options(modname, "All Readings", all);
 	if (is_dialog)
 		main_dialogs_url_handler(dialog, url, TRUE);
 	else
@@ -1300,7 +1305,7 @@ image_locator(const char *image)
 	return g_strdup_printf("%s/%s", PACKAGE_PIXMAPS_DIR, image);
 #else
 	return g_build_filename(xiphos_win32_get_subdir("share"),
-				"pixmaps", "xiphos", image, NULL);
+				"xiphos", image, NULL);
 #endif /* WIN32 */
 }
 
@@ -1354,11 +1359,14 @@ HtmlOutput(char *text,
 	   MOD_FONT *mf,
 	   char *anchor)
 {
-	int len = strlen(text), offset = 0, write_size;
-
-#ifdef USE_GTKMOZEMBED
-	GeckoHtml *html = GECKO_HTML(gtkText);
-	gecko_html_open_stream(html,"text/html");
+	int len = strlen(text), offset = 0;
+ 
+#ifndef USE_WEBKIT  
+	int write_size;
+#endif
+#ifdef USE_XIPHOS_HTML
+	XiphosHtml *html = XIPHOS_HTML(gtkText);
+	XIPHOS_HTML_OPEN_STREAM(html,"text/html");
 #else
 	GtkHTML *html = GTK_HTML(gtkText);
 	PangoContext* pc = gtk_widget_get_pango_context(gtkText);
@@ -1374,7 +1382,7 @@ HtmlOutput(char *text,
 		gtk_html_set_editable(html, FALSE);
 #endif
 
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 	// EVIL EVIL EVIL EVIL.
 	// crazy nonsense with xulrunner 1.9.2.3, failure to jump to anchor.
 	// force the issue by stuffing a javascript snippet inside <head></head>.
@@ -1386,7 +1394,7 @@ HtmlOutput(char *text,
 		buf = strstr(text, "</head>");	// yes, lowercase.
 		assert(buf != NULL);	// don't be so stupid as not to include <head></head>.
 		offset = buf - text;
-		gecko_html_write(html, text, offset);
+		XIPHOS_HTML_WRITE(html, text, offset);
 		len -= offset;
 
 		// now write the javascript snippet.
@@ -1396,33 +1404,41 @@ HtmlOutput(char *text,
 		    " </script>", (settings.special_anchor
 				   ? settings.special_anchor
 				   : anchor));
-		gecko_html_write(html, buf, strlen(buf));
+		XIPHOS_HTML_WRITE(html, buf, strlen(buf));
 		g_free(buf);
 	}
-#endif /* USE_GTKMOZEMBED */
+#endif /* USE_XIPHOS_HTML */
 
+#ifdef USE_WEBKIT
+	if(!anchor)
+	XIPHOS_HTML_WRITE(html, text, len);
+#endif	
+	
 	// html widgets are uptight about being handed
 	// huge quantities of text -- producer/consumer problem,
 	// and we mustn't overload the receiver.  10k chunks.
 
+#ifndef USE_WEBKIT	
 	while (len > 0) {
 		write_size = min(10000, len);
 #ifdef USE_GTKMOZEMBED
-		gecko_html_write(html, text+offset, write_size);
+		XIPHOS_HTML_WRITE(html, text+offset, write_size);
 #else
 		gtk_html_write(html, stream, text+offset, write_size);
 #endif
 		offset += write_size;
 		len -= write_size;
 	}
+#endif	
 
 	/* use anchor if asked, but if so, special anchor takes priority. */
-#ifdef USE_GTKMOZEMBED
-	gecko_html_close(html);
+#ifdef USE_XIPHOS_HTML
+	XIPHOS_HTML_CLOSE(html);
 	if (anchor || settings.special_anchor)
-		gecko_html_jump_to_anchor(html, (settings.special_anchor
-						 ? settings.special_anchor
-						 : anchor));
+		XIPHOS_HTML_JUMP_TO_ANCHOR(html, (settings.special_anchor
+						  ? settings.special_anchor
+						  : anchor));
+
 #else
 	gtk_html_end(html, stream, GTK_HTML_STREAM_OK);
 	gtk_html_set_editable(html, was_editable);
@@ -1643,7 +1659,12 @@ void xiphos_create_archive(gchar* conf_file, gchar* datapath, gchar *zip,
 //
 
 #ifndef INVALID_SOCKET
-# define INVALID_SOCKET -1
+# define INVALID_SOCKET (-1)
+#else
+# ifdef WIN32
+#  undef INVALID_SOCKET
+#  define INVALID_SOCKET (-1)
+# endif
 #endif
 
 void
@@ -1985,7 +2006,7 @@ AnalyzeForImageSize(const char *origtext,
 	char *path;		// ... the current "path".
 	char *end;		// "end" is the path's end.
 	char buf[32];		// for preparing new width+height spec.
-	gint image_x, image_y, window_x, window_y = -999;
+	gint image_x, image_y, window_x = -999, window_y = -999;
 	int image_retval;
 	gboolean no_warning_yet = TRUE;
 
@@ -2009,7 +2030,12 @@ AnalyzeForImageSize(const char *origtext,
 		if (window_y == -999) {
 			/* we have images, but we don't know bounds yet */
 
+#ifdef USE_GTK_3
+			window_x = gdk_window_get_width (window);
+			window_y = gdk_window_get_height(window);	
+#else
 			gdk_drawable_get_size(window, &window_x, &window_y);
+#endif
 			if ((window_x > 200) || (window_y > 200)) {
 				window_x -= 23;
 				window_y -= 23;
@@ -2028,13 +2054,26 @@ AnalyzeForImageSize(const char *origtext,
 
 		// some modules play fast-n-loose with proper file spec.
 		if (strncmp(path, "file://", 7) == 0) {
+#ifdef WIN32
+			/* due to need for local soup server */
+			path += 5;
+			resized = g_string_append(resized, "http://127.0.0.1:7878/");
+#else
 			path += 7;
 			resized = g_string_append(resized, "file://");
+#endif
 		} else if (strncmp(path, "file:", 5) == 0) {
 			path += 5;
+#ifdef WIN32
+			resized = g_string_append(resized, "http://127.0.0.1:7878/");
+#else
 			resized = g_string_append(resized, "file:");
-		} else
-			continue;	// no file spec there -- odd.
+#endif
+		}
+		// else we have an odd case of a src="..." which does not
+		// begin with "file:"...which may become the WIN32 norm because
+		// webkit is broken as of 2012 jan 12.
+		// we will just take "path" as it stands.
 
 		// getting this far means we have a valid img src and file.
 		// find closing '"' to determine pathname end.
@@ -2042,7 +2081,11 @@ AnalyzeForImageSize(const char *origtext,
 			continue;
 
 		*end = '\0';
+#ifdef WIN32
+		resized = g_string_append(resized, g_strdelimit(path, "\\", '/'));
+#else
 		resized = g_string_append(resized, path);
+#endif
 		image_retval = ImageDimensions(path, &image_x, &image_y);
 		*end = '"';
 

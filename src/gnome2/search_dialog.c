@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * search_dialog.c - gui for searching Sword modules
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,18 +24,15 @@
 #endif
 
 #include <gtk/gtk.h>
-#include <glade/glade-xml.h>
-
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "gecko/gecko-html.h"
-#endif
-#else
+#ifdef GTKHTML
 #include <gtkhtml/gtkhtml.h>
 #include "gui/html.h"
 #endif
+#ifndef USE_GTKBUILDER
+  #include <glade/glade-xml.h>
+#endif
+
+#include "../xiphos_html/xiphos_html.h"
 
 #include <regex.h>
 #include <string.h>
@@ -68,8 +65,7 @@
 #define SEARCHING N_("Searching the ")
 #define SMODULE N_(" Module")
 #define FINDS N_("found in ")
-#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
-
+#define	HTML_START	"<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><style type=\"text/css\"><!-- A { text-decoration:none } *[dir=rtl] { text-align: right; } --></style></head>"
 
 SEARCH_DIALOG1 search1;
 
@@ -133,8 +129,8 @@ void button_clean(GtkButton * button, gpointer user_data)
 {
 	GtkTreeModel *model;
 	GtkListStore *list_store;
-#ifdef USE_GTKMOZEMBED
-	GString *html_text;
+#ifdef USE_XIPHOS_HTML
+	GString *html_text = g_string_new("");
 #endif
 
 	GS_message(("button_clean"));
@@ -146,17 +142,15 @@ void button_clean(GtkButton * button, gpointer user_data)
 	list_store = GTK_LIST_STORE(model);
 	gtk_list_store_clear(list_store);
 
-#ifdef USE_GTKMOZEMBED
-	html_text = g_string_new(HTML_START);
-	g_string_append(html_text," ");
-	g_string_append(html_text,"</html>");
-	gecko_html_open_stream(GECKO_HTML(search1.preview_html), "text/html");
-	gecko_html_write(GECKO_HTML(search1.preview_html), html_text->str, html_text->len);
-	gecko_html_close(GECKO_HTML(search1.preview_html));
+#ifdef USE_XIPHOS_HTML
+	g_string_printf(html_text, HTML_START "<body text=\"%s\" bgcolor=\"%s\"> </body></html>",
+			settings.bible_text_color, settings.bible_bg_color);
+	XIPHOS_HTML_OPEN_STREAM(search1.preview_html,"text/html");
+	XIPHOS_HTML_WRITE(search1.preview_html,html_text->str,html_text->len);
+	XIPHOS_HTML_CLOSE(search1.preview_html);
 	g_string_free(html_text,TRUE);
 #else
-	gtk_html_load_from_string(GTK_HTML(search1.preview_html),
-				  " ", strlen(" "));
+	gtk_html_load_from_string(GTK_HTML(search1.preview_html), " ", 1);
 #endif
 }
 
@@ -699,7 +693,7 @@ void delete_list(GtkButton * button, gpointer user_data)
 void scope_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 {
 	search1.which_scope = togglebutton;
-	if (GTK_TOGGLE_BUTTON(search1.rb_custom_range)->active)
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(search1.rb_custom_range)))
 		gtk_widget_set_sensitive(search1.combo_range,TRUE);
 	else
 		gtk_widget_set_sensitive(search1.combo_range,FALSE);
@@ -726,11 +720,11 @@ void scope_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 void mod_list_toggled(GtkToggleButton * togglebutton,
 		      gpointer user_data)
 {
-	if (togglebutton->active) {
+	if (gtk_toggle_button_get_active (togglebutton)) {
 		main_comboboxentry2_changed((GtkComboBox *) search1.
 					    combo_list, user_data);
 	}
-	if (GTK_TOGGLE_BUTTON(search1.rb_custom_list)->active)
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(search1.rb_custom_list)))
 		gtk_widget_set_sensitive(search1.combo_list,TRUE);
 	else
 		gtk_widget_set_sensitive(search1.combo_list,FALSE);
@@ -757,7 +751,7 @@ void mod_list_toggled(GtkToggleButton * togglebutton,
 void optimized_toggled(GtkToggleButton * togglebutton,
 		      gpointer user_data)
 {
-	if (togglebutton->active)
+	if (gtk_toggle_button_get_active (togglebutton))
 		gtk_widget_show(search1.button_intro_lucene);
 	else
 		gtk_widget_hide(search1.button_intro_lucene);
@@ -820,7 +814,7 @@ on_lucene_intro_clicked(GtkButton * button, gpointer user_data)
 void attributes_toggled(GtkToggleButton * togglebutton,
 		      gpointer user_data)
 {
-	if (togglebutton->active)
+	if (gtk_toggle_button_get_active (togglebutton))
 		gtk_widget_show(search1.button_intro_attributes);
 	else
 		gtk_widget_hide(search1.button_intro_attributes);
@@ -885,7 +879,7 @@ on_attributes_intro_clicked(GtkButton * button, gpointer user_data)
 void current_module_toggled(GtkToggleButton * togglebutton,
 			    gpointer user_data)
 {
-	if (togglebutton->active) {
+	if (gtk_toggle_button_get_active (togglebutton)) {
 		main_change_mods_select_label(search1.search_mod);
 		gtk_widget_set_sensitive(search1.rb_last, TRUE);
 		gtk_widget_set_sensitive(search1.combo_list,FALSE);
@@ -1191,7 +1185,11 @@ void _setup_combobox(GtkComboBox * combo)
 
 	store = gtk_list_store_new(1, G_TYPE_STRING);
 	gtk_combo_box_set_model(combo, GTK_TREE_MODEL(store));
+#ifdef USE_GTK_3
+	gtk_combo_box_set_entry_text_column (GTK_COMBO_BOX(combo), 0);
+#else  	
 	gtk_combo_box_entry_set_text_column(GTK_COMBO_BOX_ENTRY(combo), 0);
+#endif
 }
 
 
@@ -1365,9 +1363,10 @@ void _on_dialog2_response(GtkDialog * dialog, gint response_id,
  *   void
  */
 
+#ifndef USE_GTKBUILDER	
 static
 void _create_mod_sel_dialog(void)
-{
+{	
 	gchar *glade_file;
 	GladeXML *gxml2;
 
@@ -1375,17 +1374,21 @@ void _create_mod_sel_dialog(void)
 	g_return_if_fail(glade_file != NULL);
 	GS_message(("%s",glade_file));
 
+
 	gxml2 = glade_xml_new(glade_file, "dialog2", NULL);
 	search1.mod_sel_dialog = glade_xml_get_widget(gxml2, "dialog2");
+
 	g_signal_connect((gpointer)search1.mod_sel_dialog, "response",
 			 G_CALLBACK(_on_dialog2_response), NULL);
+	
 	search1.mod_sel_dlg_treeview = glade_xml_get_widget(gxml2, "treeview8");
+
 	_setup_treeview2(search1.mod_sel_dlg_treeview);
 	gtk_widget_hide(search1.mod_sel_dialog);
 
 	g_free(glade_file);
-
 }
+#endif
 
 /******************************************************************************
  * Name
@@ -1405,8 +1408,10 @@ void _create_mod_sel_dialog(void)
 
 void
 on_toolbutton12_clicked(GtkToolButton * toolbutton, gpointer user_data)
-{
-        _create_mod_sel_dialog();
+{    
+#ifndef USE_GTKBUILDER
+	_create_mod_sel_dialog();
+#endif
 	gtk_widget_show(search1.mod_sel_dialog);
 }
 
@@ -1430,10 +1435,6 @@ on_toolbutton12_clicked(GtkToolButton * toolbutton, gpointer user_data)
 static
 void _add_html_widget(GtkWidget * vbox)
 {
-#ifdef USE_GTKMOZEMBED
-	search1.preview_html = GTK_WIDGET(gecko_html_new(NULL, FALSE, DIALOG_SEARCH_PREVIEW_TYPE));
-	gtk_box_pack_start(GTK_BOX(vbox), search1.preview_html, TRUE, TRUE, 0);
-#else
 	GtkWidget *scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
 	gtk_box_pack_start(GTK_BOX(vbox), scrolledwindow, TRUE, TRUE, 0);
@@ -1444,10 +1445,13 @@ void _add_html_widget(GtkWidget * vbox)
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
 					    scrolledwindow,
 					    settings.shadow_type);
+#ifdef USE_XIPHOS_HTML
+	search1.preview_html = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, DIALOG_SEARCH_PREVIEW_TYPE));
+#else	
 	search1.preview_html = gtk_html_new();
+#endif
 	gtk_container_add(GTK_CONTAINER(scrolledwindow), search1.preview_html);
 	gtk_box_pack_start(GTK_BOX(scrolledwindow), search1.preview_html, TRUE, TRUE, 0);
-#endif
 	gtk_widget_show(search1.preview_html);
 }
 
@@ -1503,7 +1507,11 @@ static
 void _create_search_dialog(void)
 {
 	gchar *glade_file;
+#ifdef USE_GTKBUILDER
+	GtkBuilder *gxml;
+#else
 	GladeXML *gxml;
+#endif
 	GtkWidget *toolbutton1;
 	GtkWidget *toolbutton2;
 	GtkWidget *toolbutton3;
@@ -1520,190 +1528,203 @@ void _create_search_dialog(void)
 	verse_selected = NULL;
 	_preview_on = TRUE;
 
-	glade_file = gui_general_user_file("search-dialog.glade", FALSE);
+	glade_file = gui_general_user_file("search-dialog" UI_SUFFIX, FALSE);
 	g_return_if_fail(glade_file != NULL);
 	GS_message(("%s",glade_file));
 
 	/* build the widget */
+#ifdef USE_GTKBUILDER
+	gxml = gtk_builder_new ();
+	gtk_builder_add_from_file (gxml, glade_file, NULL);
+#else
 	gxml = glade_xml_new(glade_file, "dialog", NULL);
+#endif
 	g_return_if_fail(gxml != NULL);
 
-/*	g_signal_connect(search1., "",
-			 G_CALLBACK(), NULL);
-*/
-
 	/* lookup the root widget */
-	search1.dialog = glade_xml_get_widget(gxml, "dialog");
+	search1.dialog = UI_GET_ITEM(gxml, "dialog");
 	g_signal_connect(search1.dialog, "response",
 			 G_CALLBACK(_on_dialog_response), NULL);
 	g_signal_connect(search1.dialog, "destroy",
 			 G_CALLBACK(_on_destroy), NULL);
 
-	remember_search = glade_xml_get_widget(gxml, "button1");
+	remember_search = UI_GET_ITEM(gxml, "button1");
 	g_signal_connect(remember_search, "clicked",
 			 G_CALLBACK(on_button_begin_search), NULL);
 
-	search1.label_search_module =
-	    glade_xml_get_widget(gxml, "label5");
-	search1.search_entry = glade_xml_get_widget(gxml, "entry1");
+	search1.label_search_module = UI_GET_ITEM(gxml, "label5");
+	search1.search_entry = UI_GET_ITEM(gxml, "entry1");
 	g_signal_connect(search1.search_entry, "activate",
 			 G_CALLBACK(on_button_begin_search), NULL);
 
-	search1.notebook = glade_xml_get_widget(gxml, "notebook1");
-
-	search1.treeview = glade_xml_get_widget(gxml, "treeview1");
+	search1.notebook = UI_GET_ITEM(gxml, "notebook1");
+	search1.treeview = UI_GET_ITEM(gxml, "treeview1");
 	_setup_treeview(search1.treeview);
 
-	search1.list_range_name =
-	    glade_xml_get_widget(gxml, "treeview4");
+	search1.list_range_name = UI_GET_ITEM(gxml, "treeview4");
 	_setup_listviews(search1.list_range_name,
 			 (GCallback) selection_range_lists_changed);
 
-	search1.list_ranges = glade_xml_get_widget(gxml, "treeview5");
+	search1.list_ranges = UI_GET_ITEM(gxml, "treeview5");
 	_setup_listviews(search1.list_ranges, NULL);
 
-	search1.module_lists = glade_xml_get_widget(gxml, "treeview6");
+	search1.module_lists = UI_GET_ITEM(gxml, "treeview6");
 	_setup_listviews(search1.module_lists,
 			 (GCallback) _selection_modules_lists_changed);
 
-	search1.listview_modules =
-	    glade_xml_get_widget(gxml, "treeview7");
+	search1.listview_modules = UI_GET_ITEM(gxml, "treeview7");
 	_setup_listviews(search1.listview_modules, NULL);
 
 	/* scope radio buttons */
-	search1.rb_no_scope = glade_xml_get_widget(gxml, "radiobutton1");
+	search1.rb_no_scope = UI_GET_ITEM(gxml, "radiobutton1");
 	g_signal_connect(search1.rb_no_scope, "toggled",
 			 G_CALLBACK(scope_toggled), NULL);
-	search1.rb_last = glade_xml_get_widget(gxml, "radiobutton2");
+
+	search1.rb_last = UI_GET_ITEM(gxml, "radiobutton2");
 	search1.which_scope = GTK_TOGGLE_BUTTON(search1.rb_no_scope);
-	search1.rb_custom_range = glade_xml_get_widget(gxml, "radiobutton3");
+	search1.rb_custom_range = UI_GET_ITEM(gxml, "radiobutton3");
 	g_signal_connect(search1.rb_custom_range, "toggled",
 			 G_CALLBACK(scope_toggled), NULL);
 	/* modules radio buttons */
-	search1.rb_current_module = glade_xml_get_widget(gxml, "radiobutton4");
+	search1.rb_current_module = UI_GET_ITEM(gxml, "radiobutton4");
 	g_signal_connect(search1.rb_current_module, "toggled",
 			 G_CALLBACK(current_module_toggled), NULL);
-	search1.rb_mod_list = glade_xml_get_widget(gxml, "radiobutton5");
+	search1.rb_mod_list = UI_GET_ITEM(gxml, "radiobutton5");
 	g_signal_connect(search1.rb_mod_list, "toggled",
 			 G_CALLBACK(mod_list_toggled), NULL);
-	search1.rb_custom_list = glade_xml_get_widget(gxml, "radiobutton6");
+	search1.rb_custom_list = UI_GET_ITEM(gxml, "radiobutton6");
 	g_signal_connect(search1.rb_custom_list, "toggled",
 			 G_CALLBACK(mod_list_toggled), NULL);
 
 	/* search type selection */
-	search1.rb_words        = glade_xml_get_widget(gxml, "radiobutton9");
-	search1.rb_regexp       = glade_xml_get_widget(gxml, "radiobutton10");
-	search1.rb_exact_phrase = glade_xml_get_widget(gxml, "radiobutton11");
-
-	search1.rb_optimized    = glade_xml_get_widget(gxml, "radiobutton16");
+	search1.rb_words        = UI_GET_ITEM(gxml, "radiobutton9");
+	search1.rb_regexp       = UI_GET_ITEM(gxml, "radiobutton10");
+	search1.rb_exact_phrase = UI_GET_ITEM(gxml, "radiobutton11");
+	search1.rb_optimized    = UI_GET_ITEM(gxml, "radiobutton16");
 	g_signal_connect(search1.rb_optimized, "toggled",
 			 G_CALLBACK(optimized_toggled), NULL);
 
-	search1.button_intro_lucene = glade_xml_get_widget(gxml, "button_intro_lucene");
+	search1.button_intro_lucene = UI_GET_ITEM(gxml, "button_intro_lucene");
 	g_signal_connect(search1.button_intro_lucene, "clicked",
 			 G_CALLBACK(on_lucene_intro_clicked), NULL);
 	gtk_widget_show(search1.button_intro_lucene);
 
-	search1.rb_attributes = glade_xml_get_widget(gxml, "radiobutton12");
+	search1.rb_attributes = UI_GET_ITEM(gxml, "radiobutton12");
 	g_signal_connect(search1.rb_attributes, "toggled",
 			 G_CALLBACK(attributes_toggled), NULL);
 
-	search1.button_intro_attributes = glade_xml_get_widget(gxml, "button_intro_attributes");
+	search1.button_intro_attributes = UI_GET_ITEM(gxml, "button_intro_attributes");
 	g_signal_connect(search1.button_intro_attributes, "clicked",
 			 G_CALLBACK(on_attributes_intro_clicked), NULL);
 	gtk_widget_hide(search1.button_intro_attributes);
 
 	/* attributes radio buttons */
-	search1.rb_strongs    = glade_xml_get_widget(gxml, "radiobutton13");
-	search1.rb_morphs     = glade_xml_get_widget(gxml, "radiobutton15");
-	search1.rb_footnotes  = glade_xml_get_widget(gxml, "radiobutton14");
+	search1.rb_strongs    = UI_GET_ITEM(gxml, "radiobutton13");
+	search1.rb_morphs     = UI_GET_ITEM(gxml, "radiobutton15");
+	search1.rb_footnotes  = UI_GET_ITEM(gxml, "radiobutton14");
 
 	/*   */
-	search1.cb_case_sensitive = glade_xml_get_widget(gxml, "checkbutton1");
+	search1.cb_case_sensitive = UI_GET_ITEM(gxml, "checkbutton1");
 
 	/* display options check buttons */
-	search1.cb_include_strongs   = glade_xml_get_widget(gxml, "checkbutton2");
-	search1.cb_include_morphs    = glade_xml_get_widget(gxml, "checkbutton3");
-	search1.cb_include_footnotes = glade_xml_get_widget(gxml, "checkbutton4");
+	search1.cb_include_strongs   = UI_GET_ITEM(gxml, "checkbutton2");
+	search1.cb_include_morphs    = UI_GET_ITEM(gxml, "checkbutton3");
+	search1.cb_include_footnotes = UI_GET_ITEM(gxml, "checkbutton4");
 
-	toolbutton1 = glade_xml_get_widget(gxml, "toolbutton1");
+	toolbutton1 = UI_GET_ITEM(gxml, "toolbutton1");
+	toolbutton2 = UI_GET_ITEM(gxml, "toolbutton2");
+	toolbutton3 = UI_GET_ITEM(gxml, "toolbutton3");
+	toolbutton4 = UI_GET_ITEM(gxml, "toolbutton4");
+	toolbutton5 = UI_GET_ITEM(gxml, "toolbutton5");
+	toolbutton6 = UI_GET_ITEM(gxml, "toolbutton6");
+	toolbutton7 = UI_GET_ITEM(gxml, "toolbutton7");
+	toolbutton8 = UI_GET_ITEM(gxml, "toolbutton8");
+	toolbutton10 = UI_GET_ITEM(gxml, "toolbutton10");
+	toolbutton11 = UI_GET_ITEM(gxml, "toolbutton11");
+	toolbutton12 = UI_GET_ITEM(gxml, "toolbutton12");
+	toolbutton13 = UI_GET_ITEM(gxml, "toolbutton_export");
+	search1.combo_list = UI_GET_ITEM(gxml, "comboboxentry2");
+
 	g_signal_connect(toolbutton1, "clicked",
 			 G_CALLBACK(button_save), NULL);
 
-	toolbutton2 = glade_xml_get_widget(gxml, "toolbutton2");
 	g_signal_connect(toolbutton2, "clicked",
 			 G_CALLBACK(button_clean), NULL);
 
-	toolbutton3 = glade_xml_get_widget(gxml, "toolbutton3");
 	g_signal_connect(toolbutton3, "clicked",
 			 G_CALLBACK(new_range), NULL);
 
-	toolbutton4 = glade_xml_get_widget(gxml, "toolbutton4");
 	g_signal_connect(toolbutton4, "clicked",
 			 G_CALLBACK(save_range), NULL);
 
-	toolbutton5 = glade_xml_get_widget(gxml, "toolbutton5");
 	g_signal_connect(toolbutton5, "clicked",
 			 G_CALLBACK(delete_range), NULL);
 
-	toolbutton6 = glade_xml_get_widget(gxml, "toolbutton6");
 	g_signal_connect(toolbutton6, "clicked",
 			 G_CALLBACK(new_modlist), NULL);
 
-	toolbutton7 = glade_xml_get_widget(gxml, "toolbutton7");
 	g_signal_connect(toolbutton7, "clicked",
 			 G_CALLBACK(save_modlist), NULL);
 
-	toolbutton8 = glade_xml_get_widget(gxml, "toolbutton8");
 	g_signal_connect(toolbutton8, "clicked",
 			 G_CALLBACK(delete_list), NULL);
 
-	toolbutton10 = glade_xml_get_widget(gxml, "toolbutton10");
 	g_signal_connect(toolbutton10, "clicked",
 			 G_CALLBACK(clear_modules), NULL);
 
-	toolbutton11 = glade_xml_get_widget(gxml, "toolbutton11");
 	g_signal_connect(toolbutton11, "clicked",
 			 G_CALLBACK(delete_module), NULL);
 
-	toolbutton12 = glade_xml_get_widget(gxml, "toolbutton12");
 	g_signal_connect(toolbutton12, "clicked",
 			 G_CALLBACK(on_toolbutton12_clicked), NULL);
 
-	toolbutton13 = glade_xml_get_widget(gxml, "toolbutton_export");
 	g_signal_connect(toolbutton13, "clicked",
 			 G_CALLBACK(button_export), NULL);
 
-	search1.combo_list =
-	    glade_xml_get_widget(gxml, "comboboxentry2");
 	_setup_combobox(GTK_COMBO_BOX(search1.combo_list));
 	g_signal_connect(search1.combo_list, "changed",
 			 G_CALLBACK(on_comboboxentry2_changed), NULL);
 
-	search1.entry_list_name = glade_xml_get_widget(gxml, "entry4");
+	search1.entry_list_name = UI_GET_ITEM(gxml, "entry4");
 	g_signal_connect(search1.entry_list_name, "changed",
 			 G_CALLBACK(list_name_changed), NULL);
 
-	search1.combo_range =
-	    glade_xml_get_widget(gxml, "comboboxentry1");
+	search1.combo_range = UI_GET_ITEM(gxml, "comboboxentry1");
 	_setup_combobox(GTK_COMBO_BOX(search1.combo_range));
 
-	search1.entry_range_name = glade_xml_get_widget(gxml, "entry2");
+	search1.entry_range_name = UI_GET_ITEM(gxml, "entry2");
 	g_signal_connect(search1.entry_range_name, "changed",
 			 G_CALLBACK(range_name_changed), NULL);
-	search1.entry_range_text = glade_xml_get_widget(gxml, "entry3");
+	search1.entry_range_text = UI_GET_ITEM(gxml, "entry3");
 	g_signal_connect(search1.entry_range_text, "changed",
 			 G_CALLBACK(range_text_changed), NULL);
 
-	search1.progressbar =
-	    glade_xml_get_widget(gxml, "progressbar1");
-	search1.label_mod_select = glade_xml_get_widget(gxml, "label5");
+	search1.progressbar = UI_GET_ITEM(gxml, "progressbar1"); 
+#ifdef USE_GTKBUILDER
+	gtk_progress_bar_set_show_text(GTK_PROGRESS_BAR(search1.progressbar),TRUE);
+#endif
+	search1.label_mod_select = UI_GET_ITEM(gxml, "label5");
+	search1.listview_results = UI_GET_ITEM(gxml, "treeview9");
 
-	search1.listview_results = glade_xml_get_widget(gxml, "treeview9");
+#ifdef USE_GTKBUILDER
+	/* setup module select dialog */
+	search1.mod_sel_dialog = UI_GET_ITEM(gxml, "dialog2");
+	g_signal_connect((gpointer)search1.mod_sel_dialog, "response",
+			 G_CALLBACK(_on_dialog2_response), NULL);	
+	search1.mod_sel_dlg_treeview = UI_GET_ITEM(gxml, "treeview8");
+	_setup_treeview2(search1.mod_sel_dlg_treeview);
+	gtk_widget_hide(search1.mod_sel_dialog);
+#endif
+
 	_setup_listviews(search1.listview_results, (GCallback) _selection_finds_list_changed);
-	search1.listview_verses = glade_xml_get_widget(gxml, "treeview10");
+	search1.listview_verses = UI_GET_ITEM(gxml, "treeview10");
 	_setup_listviews2(search1.listview_verses, (GCallback) _finds_verselist_selection_changed);
+
+#ifdef USE_GTKBUILDER
+	_add_html_widget(GTK_WIDGET (gtk_builder_get_object (gxml, "vbox12")));
+#else
 	_add_html_widget(glade_xml_get_widget(gxml, "vbox12"));
+#endif
 }
 
 

@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * find_dialog.c
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,13 +30,7 @@
 #include "gui/find_dialog.h"
 #include "main/settings.h"
 #include "main/sword.h"
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "gecko/gecko-html.h"
-#endif
-#endif
+#include "../xiphos_html/xiphos_html.h"
 
 typedef struct _find_dialog FIND_DIALOG;
 
@@ -72,7 +66,7 @@ static FIND_DIALOG *dialog;
  *   void
  */
 
-static void dialog_destroy(GtkObject * object, gpointer data)
+static void dialog_destroy(GObject * object, gpointer data)
 {
 	g_free(dialog);
 	dialog = NULL;
@@ -101,14 +95,19 @@ static void find_clicked(GtkButton * button, FIND_DIALOG * d)
 	gchar *text = (gchar*)gtk_entry_get_text(GTK_ENTRY(d->entry));
 	sprintf(settings.findText, "%s", text);
 
-#ifndef USE_GTKMOZEMBED
-	gtk_html_engine_search(GTK_HTML(d->htmlwidget), text,
-			       GTK_TOGGLE_BUTTON(d->case_sensitive)->active,
-			       GTK_TOGGLE_BUTTON(d->backward)->active == 0,
-			       d->regular);
+#ifndef USE_XIPHOS_HTML
+        gboolean cs_active, b_active;
+        g_object_get(GTK_TOGGLE_BUTTON(d->case_sensitive),
+                     "active", &cs_active,
+                     NULL);
+        g_object_get(GTK_TOGGLE_BUTTON(d->backward),
+                     "active", &b_active,
+                     NULL);
+	gtk_html_engine_search(GTK_HTML(d->htmlwidget), text, cs_active,
+                               b_active == 0, d->regular);
 #else
-	gecko_html_find((void *)d->htmlwidget, text);
-#endif /* !USE_GTKMOZEMBED */
+	XIPHOS_HTML_FIND((void *)d->htmlwidget, text);
+#endif /* !USE_XIPHOS_HTML */
 }
 
 
@@ -130,12 +129,12 @@ static void find_clicked(GtkButton * button, FIND_DIALOG * d)
 
 static void next_clicked(GtkButton * button, FIND_DIALOG * d)
 {
-#ifndef USE_GTKMOZEMBED
+#ifndef USE_XIPHOS_HTML
 	gtk_html_engine_search_next(GTK_HTML(d->htmlwidget));
 #else
-	gecko_html_find_again((void *)d->htmlwidget,
-			      GTK_TOGGLE_BUTTON(d->backward)->active == 0);
-#endif /* !USE_GTKMOZEMBED */
+	XIPHOS_HTML_FIND_AGAIN((void *)d->htmlwidget, 1);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(d->backward), 0);
+#endif /* !USE_XIPHOS_HTML */
 }
 
 
@@ -202,14 +201,15 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 	g_object_set_data(G_OBJECT(dialog->dialog),
 			  "dialog->dialog", dialog->dialog);
 	gtk_window_set_title(GTK_WINDOW(dialog->dialog), _("Find"));
-	GTK_WINDOW(dialog->dialog)->type = GTK_WINDOW_TOPLEVEL;
+	//GTK_WINDOW(dialog->dialog)->type = GTK_WINDOW_TOPLEVEL;
 	/*gtk_window_set_policy(GTK_WINDOW(dialog->dialog), TRUE, TRUE,
 			      FALSE);*/
   	gtk_container_set_border_width (GTK_CONTAINER (dialog->dialog), 6);
   	gtk_window_set_resizable (GTK_WINDOW (dialog->dialog), FALSE);
+#ifndef USE_GTK_3
   	gtk_dialog_set_has_separator (GTK_DIALOG (dialog->dialog), FALSE);
-
-	dialog_vbox29 = GTK_DIALOG(dialog->dialog)->vbox;
+#endif
+	dialog_vbox29 = gtk_dialog_get_content_area (GTK_DIALOG(dialog->dialog));
 	g_object_set_data(G_OBJECT(dialog->dialog), "dialog_vbox29",
 			  dialog_vbox29);
 	gtk_widget_show(dialog_vbox29);
@@ -233,13 +233,13 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 	gtk_widget_show(hbox66);
 	gtk_box_pack_start(GTK_BOX(vbox45), hbox66, TRUE, TRUE, 0);
 
-#ifndef USE_GTKMOZEMBED
+#ifndef USE_XIPHOS_HTML
 	dialog->case_sensitive =
 	    gtk_check_button_new_with_label(_("Match case"));
 	gtk_widget_show(dialog->case_sensitive);
 	gtk_box_pack_start(GTK_BOX(hbox66), dialog->case_sensitive,
 			   FALSE, FALSE, 0);
-#endif /* !USE_GTKMOZEMBED */
+#endif /* !USE_XIPHOS_HTML */
 
 	dialog->backward =
 	    gtk_check_button_new_with_label(_("Search backwards"));
@@ -249,15 +249,15 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (dialog->backward), FALSE);
 
-#ifndef USE_GTKMOZEMBED
+#ifndef USE_XIPHOS_HTML
 	dialog->regex =
 	    gtk_check_button_new_with_label(_("Regular expression"));
 	gtk_widget_show(dialog->regex);
 	gtk_box_pack_start(GTK_BOX(hbox66), dialog->regex, FALSE, FALSE,
 			   0);
-#endif /* !USE_GTKMOZEMBED */
+#endif /* !USE_XIPHOS_HTML */
 
-	dialog_action_area29 = GTK_DIALOG(dialog->dialog)->action_area;
+	dialog_action_area29 = gtk_dialog_get_action_area (GTK_DIALOG(dialog->dialog));
 	g_object_set_data(G_OBJECT(dialog->dialog),
 			  "dialog_action_area29",
 			  dialog_action_area29);
@@ -301,18 +301,18 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 	gtk_widget_show(dialog->close);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox8), dialog->close);
 	//GTK_WIDGET_SET_FLAGS(dialog->close, GTK_CAN_DEFAULT);
-	GTK_WIDGET_SET_FLAGS(dialog->find, GTK_CAN_DEFAULT);
+	gtk_widget_set_can_default (dialog->find, 1);
 
 
 
 
-	g_signal_connect(GTK_OBJECT(dialog->dialog), "destroy",
+	g_signal_connect(G_OBJECT(dialog->dialog), "destroy",
 			   G_CALLBACK(dialog_destroy), dialog);
-	g_signal_connect(GTK_OBJECT(dialog->find), "clicked",
+	g_signal_connect(G_OBJECT(dialog->find), "clicked",
 			   G_CALLBACK(find_clicked), dialog);
-	g_signal_connect(GTK_OBJECT(dialog->next), "clicked",
+	g_signal_connect(G_OBJECT(dialog->next), "clicked",
 			   G_CALLBACK(next_clicked), dialog);
-	g_signal_connect(GTK_OBJECT(dialog->close), "clicked",
+	g_signal_connect(G_OBJECT(dialog->close), "clicked",
 			   G_CALLBACK(close_clicked), dialog);
 }
 
@@ -339,7 +339,7 @@ static void find_dialog(GtkWidget * htmlwidget, const gchar * title)
 		//gtk_window_set_title(GTK_WINDOW(dialog->dialog), title);
 		dialog->htmlwidget = htmlwidget;
 		gtk_widget_show(GTK_WIDGET(dialog->dialog));
-		gdk_window_raise(GTK_WIDGET(dialog->dialog)->window);
+		gdk_window_raise(gtk_widget_get_window (GTK_WIDGET(dialog->dialog)));
 	} else {
 		create_find_dialog(htmlwidget);
 		//gtk_window_set_title(GTK_WINDOW(dialog->dialog), title);

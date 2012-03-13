@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * bookmarks_treeview.c - gui for bookmarks using treeview
  *
- * Copyright (C) 2003-2010 Xiphos Developer Team
+ * Copyright (C) 2003-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -451,67 +451,6 @@ void gui_parse_bookmarks(GtkTreeView * tree, const xmlChar * file,
 
 /******************************************************************************
  * Name
- *   gui_load_removed
- *
- * Synopsis
- *   #include "gui/bookmarks_treview.h"
- *
- *   void gui_load_removed()
- *
- * Description
- *    restore bookmarks that have been removed and saved
- *
- * Return value
- *   void
- */
-
-void gui_load_removed(const xmlChar * file)
-{
-	xmlNodePtr cur = NULL;
-	BOOKMARK_DATA data, *p = NULL;
-	GtkTreeIter iter;
-	GtkTreeIter parent;
-	GtkTreePath *path;
-//	gchar *caption = NULL;
-	GtkTreeSelection *selection;
-	GtkTreeIter selected;
-
-	selection = gtk_tree_view_get_selection(bookmark_tree);
-	if (!gtk_tree_selection_get_selected
-	    (selection, NULL, &selected))
-		return;
-	p = &data;
-
-	cur = xml_load_bookmark_file(file);
-	while (cur != NULL) {
-		if (!xmlStrcmp(cur->name, (const xmlChar *) "Bookmark")) {
-			get_xml_bookmark_data(cur, p);
-			gui_add_item_to_tree(&iter, &parent, p);
-			free_bookmark_data(p);
-		} else {
-			get_xml_folder_data(cur, p);
-			if (p->caption) {
-				gui_add_item_to_tree(&parent, &selected, p);
-			}
-			free_bookmark_data(p);
-			add_node(cur, &parent);
-		}
-
-		if (cur->next)
-			cur = cur->next;
-		else
-			break;
-	}
-	xml_free_bookmark_doc();
-	path =
-	    gtk_tree_model_get_path(GTK_TREE_MODEL(model), &selected);
-	gtk_tree_view_expand_to_path(bookmark_tree, path);
-	gtk_tree_path_free(path);
-}
-
-
-/******************************************************************************
- * Name
  *  load_xml_bookmarks
  *
  * Synopsis
@@ -639,10 +578,18 @@ static void create_pixbufs(void)
 		pixbuf_finder("epiphany-bookmark-page.png", 0, NULL);
 
 	if (!bm_pixbufs->pixbuf_helpdoc)
+
+#ifdef USE_GTK_3
+	bm_pixbufs->pixbuf_helpdoc = 
+		gtk_widget_render_icon_pixbuf(widgets.app,
+                                              GTK_STOCK_DND,
+                                              GTK_ICON_SIZE_MENU );
+#else	
 		bm_pixbufs->pixbuf_helpdoc
 		    = gtk_widget_render_icon(widgets.app,
 					     GTK_STOCK_DND,
 					     GTK_ICON_SIZE_MENU, NULL);
+#endif
 }
 
 /******************************************************************************

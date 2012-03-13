@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * dictlex_dialog.c - dialog for displaying a dictlex module
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,16 +24,11 @@
 #endif
 
 #include <gtk/gtk.h>
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "gecko/gecko-html.h"
-#endif
-#else
+#ifdef GTKHTML
 #include <gtkhtml/gtkhtml.h>
 #include "gui/html.h"
 #endif
+#include "../xiphos_html/xiphos_html.h"
 
 
 #include "gui/dictlex_dialog.h"
@@ -53,7 +48,7 @@ extern gboolean dialog_freed;
  * static - global to this file only
  */
 //static GList *dialog_list;
-//static DIALOG_DATA *cur_dlg;
+static DIALOG_DATA *cur_dlg;
 static gint cell_height;
 
 /******************************************************************************
@@ -151,7 +146,7 @@ static void dialog_set_focus(GtkWindow *window,
  * Synopsis
  *   #include "dictlex_dialog.h"
  *
- *   void dialog_destroy(GtkObject *object, DL_DATA * dlg)
+ *   void dialog_destroy(GObject *object, DL_DATA * dlg)
  *
  * Description
  *
@@ -160,7 +155,7 @@ static void dialog_set_focus(GtkWindow *window,
  *   void
  */
 
-static void dialog_destroy(GtkObject *object,
+static void dialog_destroy(GObject *object,
 			   DIALOG_DATA *dlg)
 {
 	if (!dialog_freed)
@@ -207,7 +202,11 @@ static gint list_button_released(GtkWidget *html,
 static void add_columns(GtkTreeView *treeview)
 {
 	GtkCellRenderer *renderer;
-	GtkTreeViewColumn *column;
+	GtkTreeViewColumn *column; 
+#ifdef USE_GTK_3
+    	GtkRequisition size;  
+#endif
+    
 //	GtkTreeModel *model = gtk_tree_view_get_model(treeview);
 
 	/* column for fixed toggles */
@@ -221,10 +220,18 @@ static void add_columns(GtkTreeView *treeview)
 
 	gtk_tree_view_append_column(treeview, column);
 	/* get cell (row) height */
+#ifdef USE_GTK_3
+ 	gtk_cell_renderer_get_preferred_size (renderer,
+                                              GTK_WIDGET(treeview) ,
+                                              NULL,
+                                              &size);
+    	cell_height = size.height;
+#else
 	gtk_cell_renderer_get_size(renderer,
 				   GTK_WIDGET(treeview),
 				   NULL,
 				   NULL, NULL, NULL, &cell_height);
+#endif
 	settings.cell_height = cell_height;
 }
 
@@ -283,19 +290,19 @@ static void entry_changed(GtkEditable *editable,
 	main_dialogs_dictionary_entry_changed(d);
 }
 
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 static void
-_popupmenu_requested_cb (GeckoHtml *html,
+_popupmenu_requested_cb (XiphosHtml *html,
 			     gchar *uri,
 			     DIALOG_DATA * d)
 {
-	gui_menu_popup (d->mod_name, d);
+	gui_menu_popup (html, cur_dlg->mod_name, cur_dlg);
 }
 #else
 static void dialog_url(GtkHTML * html, const gchar * url,
 		       DIALOG_DATA * d)
 {
-	gui_menu_popup (d->mod_name, d);
+	gui_menu_popup (NULL, d->mod_name, d);
 }
 #endif
 
@@ -325,11 +332,7 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 	GtkWidget *btnSyncDL;
 //	GtkWidget *label205;
 	GtkWidget *frameDictHTML;
-#ifdef USE_GTKMOZEMBED
-	GtkWidget *eventbox;
-#else
 	GtkWidget *scrolledwindowDictHTML;
-#endif /* !USE_GTKMOZEMBED */
 	GtkWidget *scrolledwindow;
 //	GtkWidget *label;
 	GtkListStore *model;
@@ -419,21 +422,6 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 	gtk_widget_show(frameDictHTML);
 	gtk_paned_pack2(GTK_PANED(hpaned7), frameDictHTML, TRUE, TRUE);
 
-#ifdef USE_GTKMOZEMBED
-	gtk_frame_set_shadow_type(GTK_FRAME(frameDictHTML), GTK_SHADOW_IN);
-
-	eventbox = gtk_event_box_new();
-	gtk_widget_show(eventbox);
-	gtk_container_add(GTK_CONTAINER(frameDictHTML), eventbox);
-
-	dlg->html = GTK_WIDGET(gecko_html_new((DIALOG_DATA*) dlg,TRUE,DIALOG_DICTIONARY_TYPE));
-	gtk_container_add(GTK_CONTAINER(eventbox), dlg->html);
-	gtk_widget_show(dlg->html);
-	g_signal_connect((gpointer)dlg->html,
-		      "popupmenu_requested",
-		      G_CALLBACK(_popupmenu_requested_cb),
-		      dlg);
-#else
 	scrolledwindowDictHTML = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindowDictHTML);
 	gtk_container_add(GTK_CONTAINER(frameDictHTML),
@@ -445,7 +433,17 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
 					    scrolledwindowDictHTML,
 					    settings.shadow_type);
+#ifdef USE_XIPHOS_HTML
+	//gtk_frame_set_shadow_type(GTK_FRAME(frameDictHTML), GTK_SHADOW_IN);
+	dlg->html = GTK_WIDGET(XIPHOS_HTML_NEW((DIALOG_DATA*) dlg,TRUE,DIALOG_DICTIONARY_TYPE));
 
+	gtk_container_add(GTK_CONTAINER(scrolledwindowDictHTML), dlg->html);
+	gtk_widget_show(dlg->html);
+	g_signal_connect((gpointer)dlg->html,
+		      "popupmenu_requested",
+		      G_CALLBACK(_popupmenu_requested_cb),
+		      dlg);
+#else
 
 	dlg->html = gtk_html_new();
 	gtk_widget_show(dlg->html);
@@ -453,27 +451,28 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 			  dlg->html);
 	gtk_html_load_empty(GTK_HTML(dlg->html));
 
-	g_signal_connect(GTK_OBJECT(dlg->html),
+	g_signal_connect(G_OBJECT(dlg->html),
 			 "url_requested",
 			 G_CALLBACK(url_requested), NULL);
-	g_signal_connect(GTK_OBJECT(dlg->html), "on_url",
+	g_signal_connect(G_OBJECT(dlg->html), "on_url",
 			 G_CALLBACK(dialog_url), dlg);
-	/*g_signal_connect(GTK_OBJECT(dlg->html),
+	/*g_signal_connect(G_OBJECT(dlg->html),
 			 "button_press_event",
 			 G_CALLBACK(button_press_event), dlg);*/
 #endif
-	g_signal_connect(GTK_OBJECT(dlg->dialog), "set_focus",
+	g_signal_connect(G_OBJECT(dlg->dialog), "set_focus",
 			 G_CALLBACK(dialog_set_focus), dlg);
-	g_signal_connect(GTK_OBJECT(dlg->dialog), "destroy",
+	g_signal_connect(G_OBJECT(dlg->dialog), "destroy",
 			 G_CALLBACK(dialog_destroy), dlg);
-	g_signal_connect(GTK_OBJECT(btnSyncDL), "clicked",
+	g_signal_connect(G_OBJECT(btnSyncDL), "clicked",
 			 G_CALLBACK(on_btnSyncDL_clicked), dlg);
-	g_signal_connect(GTK_OBJECT(dlg->entry), "changed",
+	g_signal_connect(G_OBJECT(dlg->entry), "changed",
 			 G_CALLBACK(entry_changed),
 			 (DIALOG_DATA *) dlg);
 	g_signal_connect(G_OBJECT(dlg->listview),
 			 "button_release_event",
 			 G_CALLBACK(list_button_released), dlg);
+	cur_dlg =   dlg;
 }
 
 //******  end of file  ******/

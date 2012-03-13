@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * html-editor.c - the html editor
  *
- * Copyright (C) 2005-2010 Xiphos Developer Team
+ * Copyright (C) 2005-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -384,11 +384,13 @@ static gint
 open_dialog (EDITOR * e)
 {
 	GtkWidget *dialog;
-	const gchar *filename;
 	gint response;
+#if 0
+	const gchar *filename;
+#endif
 
 	dialog = gtk_file_chooser_dialog_new (
-		_("Save As"), GTK_WINDOW (e->window),
+		_("Open"), GTK_WINDOW (e->window),
 		GTK_FILE_CHOOSER_ACTION_OPEN,
 		GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 		GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
@@ -397,18 +399,13 @@ open_dialog (EDITOR * e)
 	/*gtk_file_chooser_set_do_overwrite_confirmation (
 		GTK_FILE_CHOOSER (dialog), TRUE);*/
 
+#if 0
 	filename = gtkhtml_editor_get_filename (GTKHTML_EDITOR(e->window));
-
-	if (filename != NULL)
-		gtk_file_chooser_set_filename (
-			GTK_FILE_CHOOSER (dialog), filename);
-	else {
-		gtk_file_chooser_set_current_folder (
-			GTK_FILE_CHOOSER (dialog), g_getenv(HOMEVAR));
-		gtk_file_chooser_set_current_name (
-			GTK_FILE_CHOOSER (dialog), _("Untitled document"));
-	}
-
+#endif
+	
+	gtk_file_chooser_set_current_folder (
+			GTK_FILE_CHOOSER (dialog), settings.studypaddir); 
+	
 	response = gtk_dialog_run (GTK_DIALOG (dialog));
 
 	if (response == GTK_RESPONSE_ACCEPT) {
@@ -451,7 +448,7 @@ save_dialog (GtkhtmlEditor *editor, EDITOR * e)
 			GTK_FILE_CHOOSER (dialog), filename);
 	else {
 		gtk_file_chooser_set_current_folder (
-			GTK_FILE_CHOOSER (dialog), g_getenv(HOMEVAR));
+			GTK_FILE_CHOOSER (dialog), settings.studypaddir); 
 		gtk_file_chooser_set_current_name (
 			GTK_FILE_CHOOSER (dialog), _("Untitled document"));
 	}
@@ -509,8 +506,7 @@ view_source_dialog (GtkhtmlEditor *editor,
 
 	dialog = gtk_dialog_new_with_buttons (
 		title, GTK_WINDOW (editor),
-		GTK_DIALOG_DESTROY_WITH_PARENT |
-		GTK_DIALOG_NO_SEPARATOR,
+		GTK_DIALOG_DESTROY_WITH_PARENT,
 		GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
 		NULL);
 
@@ -1341,6 +1337,8 @@ gint _create_new(const gchar * filename, const gchar * key, gint editor_type)
 	switch (editor_type) {
 	case STUDYPAD_EDITOR:
 		editor->studypad = TRUE;
+		editor->bookeditor = FALSE;
+		editor->noteeditor = FALSE;
 		editor->module = NULL;
 		editor->key = NULL;
 		editor->filename = NULL;
@@ -1353,6 +1351,8 @@ gint _create_new(const gchar * filename, const gchar * key, gint editor_type)
 		}
 		break;
 	case NOTE_EDITOR:
+		editor->noteeditor = TRUE;
+		editor->bookeditor = FALSE;
 		editor->studypad = FALSE;
 		editor->filename = NULL;
 		editor->module = g_strdup(filename);
@@ -1368,6 +1368,8 @@ gint _create_new(const gchar * filename, const gchar * key, gint editor_type)
 		editor_load_note(editor, NULL, NULL);
 		break;
 	case BOOK_EDITOR:
+		editor->bookeditor = TRUE;
+		editor->noteeditor = FALSE;
 		editor->studypad = FALSE;
 		editor->filename = NULL;
 		editor->module = g_strdup(filename);
@@ -1456,6 +1458,7 @@ gint editor_create_new(const gchar * filename, const gchar * key, gint editor_ty
 			}
 			break;
 		case NOTE_EDITOR:
+			if (!e->noteeditor) break;
 			if (editor_is_dirty(e))
 				_save_note (e);
 			if (e->module)
@@ -1472,6 +1475,7 @@ gint editor_create_new(const gchar * filename, const gchar * key, gint editor_ty
 			return 1;
 			break;
 		case BOOK_EDITOR:
+			if (!e->bookeditor) break;
 			if (editor_is_dirty(e))
 				_save_book (e);
 			if (e->module)
@@ -1482,7 +1486,7 @@ gint editor_create_new(const gchar * filename, const gchar * key, gint editor_ty
 			e->key = g_strdup(key);
 			gtk_widget_show(e->window);
 			gdk_window_raise(gtk_widget_get_parent_window(GTK_WIDGET(e->window)));
-
+			main_load_book_tree_in_editor (GTK_TREE_VIEW (e->treeview), e->module);
 			editor_load_book(e);
 
 			return 1;

@@ -1,9 +1,5 @@
 TODO:
-	* Re-work advanced search (req #1615402):
-	  - Specify search range on the fly, without having to name it.
-	  - Search Hebrew/Greek using native charsets.
 	* Completion of Sword 1.6's av11n integration.
-	* Integration of xulrunner for Windows.
 
 For more information on feature requests:
 http://sourceforge.net/tracker/?group_id=5528&atid=355528

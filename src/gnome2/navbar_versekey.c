@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * navbar_verse.c - navigation bar for versekey modules
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,7 +24,9 @@
 #endif
 
 #include <gtk/gtk.h>
-#include <glade/glade-xml.h>
+#ifndef USE_GTKBUILDER
+  #include <glade/glade-xml.h>
+#endif
 
 #include "editor/slib-editor.h"
 
@@ -98,19 +100,22 @@ void menu_position_under(GtkMenu * menu, int * x, int * y,
 				gboolean * push_in, gpointer user_data)
 {
 	GtkWidget *widget;
+	GtkAllocation allocation;
 
 	g_return_if_fail(GTK_IS_BUTTON(user_data));
-#ifdef HAVE_GTK_220
-        g_return_if_fail (gtk_widget_get_has_window(user_data));
+#if defined(HAVE_GTK_220) || defined(USE_GTK_3)
+        g_return_if_fail (gtk_widget_get_window(user_data));
 #else
 	g_return_if_fail (GTK_WIDGET_NO_WINDOW (user_data));
 #endif
 	widget = GTK_WIDGET(user_data);
 
-	gdk_window_get_origin(widget->window, x, y);
+	
+	gdk_window_get_origin(gtk_widget_get_window (widget), x, y);
+	gtk_widget_get_allocation (widget, &allocation);
+	*x += allocation.x;
+	*y += allocation.y + allocation.height;
 
-	*x += widget->allocation.x;
-	*y += widget->allocation.y + widget->allocation.height;
 
 	*push_in = FALSE;
 }
@@ -149,8 +154,11 @@ static gboolean select_button_press_callback(GtkWidget * widget,
 	if ((event->type == GDK_BUTTON_PRESS) && event->button == 1) {
 		gtk_widget_grab_focus(widget);
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), TRUE);
-		gtk_menu_popup(GTK_MENU(menu), NULL, NULL,
-			       menu_position_under, widget, event->button,
+		gtk_menu_popup(GTK_MENU(menu), 
+		           NULL, 
+		           NULL,
+		           menu_position_under, 
+		           widget, event->button,
 			       event->time);
 		return TRUE;
 	}
@@ -185,8 +193,10 @@ static gboolean select_book_button_press_callback(GtkWidget * widget,
 
 	GTimeVal start_time;
 	GTimeVal end_time;
+#ifdef WIN32
 	glong time_diff;
 	guint32 time_add;
+#endif
 
 	g_get_current_time( &start_time );
 //	GS_message(("Start time is: %d sec %d mil", start_time.tv_sec, start_time.tv_usec));
@@ -196,11 +206,12 @@ static gboolean select_book_button_press_callback(GtkWidget * widget,
 
 	g_get_current_time( &end_time );
 //	GS_message(("End time is: %d sec %d mil", end_time.tv_sec, end_time.tv_usec));
+#ifdef WIN32
 	time_diff = ((end_time.tv_sec - start_time.tv_sec) * 1000000) + (end_time.tv_usec - start_time.tv_usec);
 	time_add = 0;
 	//if (time_diff > 10000)
 	time_add = (guint32)(time_diff / 1000);
-
+#endif
 	if (!menu)
 		return 0;
 	g_signal_connect(menu, "deactivate",
@@ -209,7 +220,7 @@ static gboolean select_book_button_press_callback(GtkWidget * widget,
 		gtk_widget_grab_focus(widget);
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), TRUE);
 		gtk_menu_popup(GTK_MENU(menu), NULL, NULL,
-			       menu_position_under, widget, event->button,
+			       menu_position_under,widget, event->button,
 #ifdef WIN32
 			       event->time + time_add);
 #else
@@ -924,52 +935,60 @@ void _connect_signals(NAVBAR_VERSEKEY navbar)
 GtkWidget *gui_navbar_versekey_new(void)
 {
 
-	gchar *glade_file;
+#ifdef USE_GTKBUILDER
+	GtkBuilder *gxml;
+#else
 	GladeXML *gxml;
-
-	glade_file = gui_general_user_file("navbar_versekey.glade", FALSE);
+#endif
+	gchar *glade_file = gui_general_user_file("navbar_versekey" UI_SUFFIX, FALSE);
 	g_return_val_if_fail((glade_file != NULL), NULL);
 	GS_message(("%s",glade_file));
 
 	/* build the widget */
+#ifdef USE_GTKBUILDER
+	gxml = gtk_builder_new ();
+	gtk_builder_add_from_file (gxml, glade_file, NULL);
+#else
 	gxml = glade_xml_new(glade_file, "navbar", NULL);
+#endif
 	navbar_versekey.dialog = FALSE;
 	navbar_versekey.module_name = g_string_new(settings.MainWindowModule);
 	navbar_versekey.key =  g_string_new(settings.currentverse);
 
-	navbar_versekey.navbar = glade_xml_get_widget(gxml, "navbar");
+	navbar_versekey.navbar = UI_GET_ITEM(gxml, "navbar");
 
-	navbar_versekey.button_history_back = glade_xml_get_widget(gxml, "button_history_back");
-	navbar_versekey.button_history_next = glade_xml_get_widget(gxml, "button_history_foward");
-	navbar_versekey.button_history_menu = glade_xml_get_widget(gxml, "togglebutton_history_list");
+	navbar_versekey.button_history_back = UI_GET_ITEM(gxml, "button_history_back");
+	navbar_versekey.button_history_next = UI_GET_ITEM(gxml, "button_history_foward");
+	navbar_versekey.button_history_menu = UI_GET_ITEM(gxml, "togglebutton_history_list");
 
-	navbar_versekey.button_book_up = glade_xml_get_widget(gxml, "eventbox9");
-	navbar_versekey.button_book_down = glade_xml_get_widget(gxml, "eventbox6");
-	navbar_versekey.button_chapter_up = glade_xml_get_widget(gxml, "eventbox8");
-	navbar_versekey.button_chapter_down = glade_xml_get_widget(gxml, "eventbox4");
-	navbar_versekey.button_verse_up = glade_xml_get_widget(gxml, "eventbox7");
-	navbar_versekey.button_verse_down = glade_xml_get_widget(gxml, "eventbox1");
+	navbar_versekey.button_book_up = UI_GET_ITEM(gxml, "eventbox9");
+	navbar_versekey.button_book_down = UI_GET_ITEM(gxml, "eventbox6");
+	navbar_versekey.button_chapter_up = UI_GET_ITEM(gxml, "eventbox8");
+	navbar_versekey.button_chapter_down = UI_GET_ITEM(gxml, "eventbox4");
+	navbar_versekey.button_verse_up = UI_GET_ITEM(gxml, "eventbox7");
+	navbar_versekey.button_verse_down = UI_GET_ITEM(gxml, "eventbox1");
 
-	navbar_versekey.arrow_book_up_box = glade_xml_get_widget(gxml, "image13");
-	navbar_versekey.arrow_book_up = glade_xml_get_widget(gxml, "image12");
-	navbar_versekey.arrow_book_down_box = glade_xml_get_widget(gxml, "image15");
-	navbar_versekey.arrow_book_down = glade_xml_get_widget(gxml, "image14");
-	navbar_versekey.arrow_chapter_up_box = glade_xml_get_widget(gxml, "image9");
-	navbar_versekey.arrow_chapter_up = glade_xml_get_widget(gxml, "image8");
-	navbar_versekey.arrow_chapter_down_box = glade_xml_get_widget(gxml, "image11");
-	navbar_versekey.arrow_chapter_down = glade_xml_get_widget(gxml, "image10");
-	navbar_versekey.arrow_verse_up_box = glade_xml_get_widget(gxml, "image7");
-	navbar_versekey.arrow_verse_up = glade_xml_get_widget(gxml, "image6");
-	navbar_versekey.arrow_verse_down_box = glade_xml_get_widget(gxml, "image16");
-	navbar_versekey.arrow_verse_down = glade_xml_get_widget(gxml, "image5");
+	navbar_versekey.arrow_book_up_box = UI_GET_ITEM(gxml, "image13");
+	navbar_versekey.arrow_book_up = UI_GET_ITEM(gxml, "image12");
+	navbar_versekey.arrow_book_down_box = UI_GET_ITEM(gxml, "image15");
+	navbar_versekey.arrow_book_down = UI_GET_ITEM(gxml, "image14");
+	navbar_versekey.arrow_chapter_up_box = UI_GET_ITEM(gxml, "image9");
+	navbar_versekey.arrow_chapter_up = UI_GET_ITEM(gxml, "image8");
+	navbar_versekey.arrow_chapter_down_box = UI_GET_ITEM(gxml, "image11");
+	navbar_versekey.arrow_chapter_down = UI_GET_ITEM(gxml, "image10");
+	navbar_versekey.arrow_verse_up_box = UI_GET_ITEM(gxml, "image7");
+	navbar_versekey.arrow_verse_up = UI_GET_ITEM(gxml, "image6");
+	navbar_versekey.arrow_verse_down_box = UI_GET_ITEM(gxml, "image16");
+	navbar_versekey.arrow_verse_down = UI_GET_ITEM(gxml, "image5");
 
-	navbar_versekey.button_book_menu = glade_xml_get_widget(gxml, "togglebutton_book");
-	navbar_versekey.button_chapter_menu = glade_xml_get_widget(gxml, "togglebutton_chapter");
-	navbar_versekey.button_verse_menu = glade_xml_get_widget(gxml, "togglebutton_verse");
-	navbar_versekey.lookup_entry = glade_xml_get_widget(gxml, "entry_lookup");
-	navbar_versekey.label_book_menu = glade_xml_get_widget(gxml, "label_book");
-	navbar_versekey.label_chapter_menu = glade_xml_get_widget(gxml, "label_chapter");
-	navbar_versekey.label_verse_menu = glade_xml_get_widget(gxml, "label_verse");
+	navbar_versekey.button_book_menu = UI_GET_ITEM(gxml, "togglebutton_book");
+	navbar_versekey.button_chapter_menu = UI_GET_ITEM(gxml, "togglebutton_chapter");
+	navbar_versekey.button_verse_menu = UI_GET_ITEM(gxml, "togglebutton_verse");
+	navbar_versekey.lookup_entry = UI_GET_ITEM(gxml, "entry_lookup");
+	navbar_versekey.label_book_menu = UI_GET_ITEM(gxml, "label_book");
+	navbar_versekey.label_chapter_menu = UI_GET_ITEM(gxml, "label_chapter");
+	navbar_versekey.label_verse_menu = UI_GET_ITEM(gxml, "label_verse");
+
 	navbar_versekey.book_menu = gtk_menu_new();
 	navbar_versekey.chapter_menu = gtk_menu_new();
 	navbar_versekey.verse_menu = gtk_menu_new();

@@ -1,7 +1,7 @@
 ; Xiphos Bible Study Tool
 ; installer.nsi
 ;
-; Copyright (C) 2008-2010 Xiphos Developer Team
+; Copyright (C) 2008-2011 Xiphos Developer Team
 ;
 ; This program is free software; you can redistribute it and/or modify
 ; it under the terms of the GNU General Public License as published by
@@ -44,12 +44,12 @@
     !define APP_NAME "Xiphos"
     !define INSTALLER_NAME "xiphos"
     !define APP_BINARY_NAME "xiphos.exe"
-    !define APP_VERS "3.1.4"
+    !define APP_VERS "3.1.5"
     !define APP_EDITION "win32"
     !define APP_URL "http://xiphos.org"
 
     ; Paths with application files for installer
-    !define PATH_CORE "..\binaries\Xiphos"
+    !define PATH_CORE "..\binaries\Xiphos\32"
     !define PATH_IMG "pixmaps"
     !define PATH_FONT "..\fonts"
 

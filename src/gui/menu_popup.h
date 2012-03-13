@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * menu_popup.h - creation of (and call backs) for xiphos popup menus
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,13 +25,24 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#include <glade/glade-xml.h>
+   
+#ifndef USE_GTKBUILDER
+  #include <glade/glade-xml.h>
+#endif
+#ifdef GTKHTML
+#include <gtkhtml/gtkhtml.h>
+#include "gui/html.h"
+#endif
 
 #include "main/module_dialogs.h"
-
-void gui_menu_popup (const gchar * mod_name,
+//#include "gnome2/xiphos_html.h"
+#ifdef GTKHTML
+void gui_menu_popup (GtkHTML *html, const gchar * mod_name,
+			DIALOG_DATA * d);	
+#else
+void gui_menu_popup (XiphosHtml *html, const gchar * mod_name,
 			DIALOG_DATA * d);
+#endif  /* GTKHTML */
 gint _get_type_mod_list (void);
 gchar * _get_key (gchar * mod_name);
 GtkWidget * _get_html (void);
@@ -57,6 +68,7 @@ void on_headings_activate (GtkCheckMenuItem * menuitem, gpointer user_data);
 void on_transliteration_activate (GtkCheckMenuItem * menuitem, gpointer user_data);
 void on_commentary_by_chapter_activate (GtkCheckMenuItem * menuitem, gpointer user_data);
 void on_doublespace_activate (GtkCheckMenuItem * menuitem, gpointer user_data);
+void on_xrefnotenumbers_activate (GtkCheckMenuItem * menuitem, gpointer user_data);
 void on_primary_reading_activate (GtkCheckMenuItem * menuitem, gpointer user_data);
 void on_secondary_reading_activate (GtkCheckMenuItem * menuitem, gpointer user_data);
 void on_all_readings_activate (GtkCheckMenuItem * menuitem, gpointer user_data);
@@ -70,9 +82,12 @@ void on_lookup_google_activate (GtkMenuItem * menuitem, gpointer user_data);
 void on_rename_perscomm_activate (GtkMenuItem * menuitem, gpointer user_data);
 void on_dump_perscomm_activate (GtkMenuItem * menuitem, gpointer user_data);
 void on_read_selection_aloud_activate (GtkMenuItem * menuitem, gpointer user_data);
-void on_mark_verse_activate (GtkMenuItem * menuitem, gpointer user_data);
+void on_mark_verse_activate (GtkMenuItem * menuitem, gpointer user_data);  
+#ifdef USE_GTKBUILDER
+void _add_and_check_global_opts (GtkBuilder *gxml, const gchar * mod_name, GtkWidget * submenu, DIALOG_DATA * d);
+#else
 void _add_and_check_global_opts (GladeXML *gxml, const gchar * mod_name, GtkWidget * submenu, DIALOG_DATA * d);
-
+#endif
 #ifdef __cplusplus
 }
 #endif

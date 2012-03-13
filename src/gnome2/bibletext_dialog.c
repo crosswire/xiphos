@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * bibletext_dialog.c - view Bible text module in a dialog
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,16 +24,11 @@
 #endif
 
 #include <gtk/gtk.h>
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "gecko/gecko-html.h"
-#endif
-#else
+#ifdef GTKHTML
 #include <gtkhtml/gtkhtml.h>
 #include "gui/html.h"
 #endif
+#include "../xiphos_html/xiphos_html.h"
 
 #include "gui/bibletext_dialog.h"
 #include "gui/display_info.h"
@@ -67,7 +62,7 @@ static DIALOG_DATA *cur_vt;
  */
 extern gboolean bible_freed;
 
-#ifndef USE_GTKMOZEMBED
+#ifndef USE_XIPHOS_HTML
 /******************************************************************************
  * Name
  *   show_in_statusbar
@@ -106,7 +101,7 @@ static void show_in_statusbar(GtkWidget *statusbar,
 	}
 	g_free(text);
 }
-#endif /* !USE_GTKMOZEMBED */
+#endif /* !USE_XIPHOS_HTML */
 
 
 /******************************************************************************
@@ -126,7 +121,7 @@ static void show_in_statusbar(GtkWidget *statusbar,
  *   void
  */
 
-#ifndef USE_GTKMOZEMBED
+#ifndef USE_XIPHOS_HTML
 static void link_clicked(GtkHTML *html,
 			 const gchar *url,
 			 DIALOG_DATA *vt)
@@ -134,7 +129,7 @@ static void link_clicked(GtkHTML *html,
 	cur_vt = vt;
 	main_dialogs_url_handler(vt, url, TRUE);
 }
-#endif /* !USE_GTKMOZEMBED */
+#endif /* !USE_XIPHOS_HTML */
 
 /******************************************************************************
  * Name
@@ -152,8 +147,8 @@ static void link_clicked(GtkHTML *html,
  *   void
  */
 
-static void dialog_destroy(GtkObject *object,
-			   DIALOG_DATA *vt)
+static void dialog_destroy(GObject *object,
+                           DIALOG_DATA *vt)
 {
 	if (!bible_freed)
 		main_free_on_destroy(vt);
@@ -170,7 +165,7 @@ static gboolean on_dialog_motion_notify_event(GtkWidget *widget,
 }
 
 
-#ifndef USE_GTKMOZEMBED
+#ifndef USE_XIPHOS_HTML
 /******************************************************************************
  * Name
  *   dialog_url
@@ -321,7 +316,7 @@ static void dialog_url(GtkHTML *html,
 	if (url_buf)
 		g_free(url_buf);
 }
-#endif /* !USE_GTKMOZEMBED */
+#endif /* !USE_XIPHOS_HTML */
 
 
 /******************************************************************************
@@ -400,7 +395,7 @@ static GtkWidget *create_nav_toolbar(DIALOG_DATA *c)
 }
 
 
-#ifndef USE_GTKMOZEMBED
+#ifndef USE_XIPHOS_HTML
 
 /******************************************************************************
  * Name
@@ -430,7 +425,7 @@ static gboolean on_text_button_press_event(GtkWidget *widget,
 	case 2:
 		break;
 	case 3:
-		gui_menu_popup (NULL, t);
+		gui_menu_popup (NULL,NULL, t);
 		//create_menu(t, event);
 		break;
 	}
@@ -498,18 +493,18 @@ static gboolean on_button_release_event(GtkWidget *widget,
 	}
 	return FALSE;
 }
-#endif /* !USE_GTKMOZEMBED */
+#endif /* !USE_XIPHOS_HTML */
 
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 static void
-_popupmenu_requested_cb (GeckoHtml *html,
+  _popupmenu_requested_cb (XiphosHtml *html,
 			 gchar *uri,
 			 gpointer user_data)
 {
-	DIALOG_DATA * d = (DIALOG_DATA *)user_data;
-	gui_text_dialog_create_menu(d);
+	DIALOG_DATA * d = (DIALOG_DATA *)cur_vt;
+	gui_menu_popup (html, d->mod_name, d);  //gui_text_dialog_create_menu(d);
 }
-#endif /* USE_GTKMOZEMBED */
+#endif /* USE_XIPHOS_HTML */
 
 /******************************************************************************
  * Name
@@ -531,12 +526,8 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 {
 	GtkWidget *vbox33;
 	GtkWidget *paned;
-	GtkWidget *frame;
-#ifdef USE_GTKMOZEMBED
-	GtkWidget *eventbox;
-#else
+	//GtkWidget *frame;
 	GtkWidget *swVText;
-#endif
 
 	vt->dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 
@@ -544,7 +535,7 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 			  vt->dialog);
 	gtk_window_set_title(GTK_WINDOW(vt->dialog),
 			     main_get_module_description(vt->mod_name));
-	gtk_window_set_default_size(GTK_WINDOW(vt->dialog), 200, 200);
+	gtk_window_set_default_size(GTK_WINDOW(vt->dialog), 350, 450);
 	gtk_window_set_resizable(GTK_WINDOW(vt->dialog), TRUE);
 
 	vbox33 = gtk_vbox_new(FALSE, 0);
@@ -559,120 +550,111 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 	paned = gtk_vpaned_new();
 	gtk_box_pack_start(GTK_BOX(vbox33), paned, TRUE, TRUE, 0);
 	gtk_widget_show(paned);
-
-	frame = gtk_frame_new(NULL);
-	gtk_widget_show(frame);
-	gtk_paned_add1((GtkPaned *)paned,frame);
-	gtk_widget_set_size_request(frame, -1, 200);
-
-#ifdef USE_GTKMOZEMBED
-	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
-
-	eventbox = gtk_event_box_new();
-	gtk_widget_show(eventbox);
-	gtk_container_add(GTK_CONTAINER(frame), eventbox);
-
-	vt->html = GTK_WIDGET(gecko_html_new(vt, TRUE, DIALOG_TEXT_TYPE));
-	gtk_widget_show(vt->html);
-	gtk_container_add(GTK_CONTAINER(eventbox), vt->html);
-	g_signal_connect((gpointer)vt->html,
-		      "popupmenu_requested",
-		      G_CALLBACK(_popupmenu_requested_cb),
-		      vt);
-
-	frame = gtk_frame_new(NULL);
-	gtk_widget_show(frame);
-	gtk_paned_add2((GtkPaned *)paned,frame);
-	gtk_widget_set_size_request(frame, -1, 100);
-	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
-
-	eventbox = gtk_event_box_new();
-	gtk_widget_show(eventbox);
-	gtk_container_add(GTK_CONTAINER(frame), eventbox);
-
-	vt->previewer = GTK_WIDGET(gecko_html_new(vt, TRUE, VIEWER_TYPE));
-	gtk_widget_show(vt->previewer);
-	gtk_container_add(GTK_CONTAINER(eventbox), vt->previewer);
-#else
+	
 	swVText = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(swVText);
-	gtk_container_add(GTK_CONTAINER(frame), swVText);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(swVText),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_ALWAYS);
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)swVText,
-					    settings.shadow_type);
-	vt->html = gtk_html_new();
+					    settings.shadow_type);   
+	gtk_paned_add1((GtkPaned *)paned, swVText);
+
+#ifdef USE_XIPHOS_HTML
+
+	vt->html = GTK_WIDGET(XIPHOS_HTML_NEW(vt, TRUE, DIALOG_TEXT_TYPE));
 	gtk_widget_show(vt->html);
 	gtk_container_add(GTK_CONTAINER(swVText), vt->html);
-	gtk_html_load_empty(GTK_HTML(vt->html));
-	g_signal_connect(G_OBJECT(vt->html), "on_url",
-			   G_CALLBACK(dialog_url), (gpointer) vt);
-	g_signal_connect(GTK_OBJECT(vt->html), "link_clicked",
-			   G_CALLBACK(link_clicked), vt);
-	g_signal_connect(GTK_OBJECT(vt->html),
-			   "motion_notify_event",
-			   G_CALLBACK
-			   (on_dialog_motion_notify_event), vt);
-	g_signal_connect(GTK_OBJECT(vt->html),
-			   "button_release_event",
-			   G_CALLBACK
-			   (on_button_release_event),
-			   (DIALOG_DATA *) vt);
-	g_signal_connect(GTK_OBJECT(vt->html),
-			   "button_press_event",
-			   G_CALLBACK
-			   (on_text_button_press_event),
-			   (DIALOG_DATA *) vt);
-	g_signal_connect(GTK_OBJECT(vt->html),
-			   "url_requested",
-			   G_CALLBACK
-			   (url_requested),
-			   (DIALOG_DATA *) vt);
-
-
-	frame = gtk_frame_new(NULL);
-	gtk_widget_show(frame);
-	gtk_paned_add2((GtkPaned *)paned,frame);
-
+	g_signal_connect((gpointer)vt->html,
+		      "popupmenu_requested",
+		      G_CALLBACK(_popupmenu_requested_cb),
+		      vt);
+                              
 	swVText = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(swVText);
-	gtk_container_add(GTK_CONTAINER(frame), swVText);
+	//gtk_container_add(GTK_CONTAINER(frame), swVText);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(swVText),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_ALWAYS);
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)swVText,
                                              settings.shadow_type);
+	
+	gtk_paned_add2((GtkPaned *)paned,swVText);
+	
+        vt->previewer = GTK_WIDGET(XIPHOS_HTML_NEW(vt, TRUE, VIEWER_TYPE));
+	gtk_widget_show(vt->previewer);
+	gtk_container_add(GTK_CONTAINER(swVText), vt->previewer);
+#else
+	vt->html = gtk_html_new();
+	gtk_widget_show(vt->html);
+	gtk_container_add(GTK_CONTAINER(swVText), vt->html);
+	gtk_html_load_empty(GTK_HTML(vt->html));
+	
+	g_signal_connect(G_OBJECT(vt->html), "on_url",
+			   G_CALLBACK(dialog_url), (gpointer) vt);
+	g_signal_connect(G_OBJECT(vt->html), "link_clicked",
+			   G_CALLBACK(link_clicked), vt);
+	g_signal_connect(G_OBJECT(vt->html),
+			   "motion_notify_event",
+			   G_CALLBACK
+			   (on_dialog_motion_notify_event), vt);
+	g_signal_connect(G_OBJECT(vt->html),
+			   "button_release_event",
+			   G_CALLBACK
+			   (on_button_release_event),
+			   (DIALOG_DATA *) vt);
+	g_signal_connect(G_OBJECT(vt->html),
+			   "button_press_event",
+			   G_CALLBACK
+			   (on_text_button_press_event),
+			   (DIALOG_DATA *) vt);
+	g_signal_connect(G_OBJECT(vt->html),
+			   "url_requested",
+			   G_CALLBACK
+			   (url_requested),
+			   (DIALOG_DATA *) vt);
+
+	swVText = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_show(swVText);
+	//gtk_container_add(GTK_CONTAINER(frame), swVText);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(swVText),
+				       GTK_POLICY_NEVER,
+				       GTK_POLICY_ALWAYS);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)swVText,
+                                             settings.shadow_type);  
+	
+	gtk_paned_add2((GtkPaned *)paned,swVText);
 
 	vt->previewer = gtk_html_new();
 	gtk_widget_show(vt->previewer);
 	gtk_container_add(GTK_CONTAINER(swVText), vt->previewer);
 	gtk_html_load_empty(GTK_HTML(vt->previewer));
 
-	g_signal_connect(GTK_OBJECT(vt->previewer), "link_clicked",
+	g_signal_connect(G_OBJECT(vt->previewer), "link_clicked",
 				   G_CALLBACK(link_clicked), vt);
-#endif /* !USE_GTKMOZEMBED */
-
+#endif /* !USE_XIPHOS_HTML */
+         gtk_paned_set_position  (GTK_PANED(paned),
+                                                         250);
 	vt->statusbar = gtk_statusbar_new();
 	gtk_widget_show(vt->statusbar);
 	gtk_box_pack_start(GTK_BOX(vbox33), vt->statusbar, FALSE, FALSE,
 			   0);
 
-	g_signal_connect(GTK_OBJECT(vt->dialog),
+	g_signal_connect(G_OBJECT(vt->dialog),
 			   "destroy",
 			   G_CALLBACK(dialog_destroy), vt);
 
 
-	g_signal_connect(GTK_OBJECT(vt->dialog),
+	g_signal_connect(G_OBJECT(vt->dialog),
 			   "motion_notify_event",
 			   G_CALLBACK
 			   (on_dialog_motion_notify_event), vt);
 }
 
-
+/*
 void gui_text_dialog_create_menu(DIALOG_DATA * d)
 {
-	gui_menu_popup (NULL, d);
+	gui_menu_popup (NULL, NULL, d);
 }
-
+*/
 /******   end of file   ******/

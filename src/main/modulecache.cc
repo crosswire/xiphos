@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * modulecache.cc -
  *
- * Copyright (C) 2007-2010 Xiphos Developer Team
+ * Copyright (C) 2007-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -60,6 +60,7 @@ ConstructFlags(GLOBAL_OPS *ops)
 	flags |= (ops->transliteration       ? Transliteration : 0);
 	flags |= (ops->commentary_by_chapter ? CommentaryChapter : 0);
 	flags |= (ops->doublespace           ? Doublespace : 0);
+	flags |= (ops->xrefnotenumbers       ? XrefNoteNumbers : 0);
 	return flags;
 }
 

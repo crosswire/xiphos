@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * sidebar.c - create and maintain the new sidebar bar
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,7 +24,9 @@
 #endif
 
 #include <gtkhtml/gtkhtml.h>
-#include <glade/glade-xml.h>
+#ifndef USE_GTKBUILDER
+  #include <glade/glade-xml.h>
+#endif
 
 #include "editor/slib-editor.h"
 
@@ -46,13 +48,7 @@
 #include "gui/tabbed_browser.h"
 #include "gui/search_dialog.h"
 
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "gecko/gecko-html.h"
-#endif
-#endif
+#include "../xiphos_html/xiphos_html.h"
 
 #include "main/sword.h"
 #include "main/settings.h"
@@ -297,10 +293,15 @@ gboolean gui_expand_treeview_to_path (GtkTreeView * tree, const gchar * book_nam
  * Return value
  *   void
  */
-
+#ifdef USE_GTK_3
+static void on_notebook_switch_page(GtkNotebook * notebook,
+					 gpointer arg,
+                     guint page_num, gpointer user_data)
+#else
 static void on_notebook_switch_page(GtkNotebook * notebook,
 				    GtkNotebookPage * page,
 				    guint page_num, gpointer user_data)
+#endif
 {
 	switch (page_num) {
 	case 0:
@@ -431,8 +432,9 @@ void gui_set_sidebar_program_start(void)
 
 void gui_sidebar_showhide(void)
 {
+	GtkAllocation allocation;
 	if (!settings.docked) {
-		gdk_window_raise(GTK_WIDGET(widgets.dock_sb)->window);
+		gdk_window_raise(gtk_widget_get_window (GTK_WIDGET(widgets.dock_sb)));
 		return;
 	}
 
@@ -441,7 +443,8 @@ void gui_sidebar_showhide(void)
 		settings.showshortcutbar = FALSE;
 		gtk_widget_hide(widgets.shortcutbar);
 		sync_windows();
-		settings.biblepane_width = GTK_WIDGET(widgets.vpaned)->allocation.width;
+	    	gtk_widget_get_allocation (GTK_WIDGET(widgets.vpaned), &allocation);
+		settings.biblepane_width = allocation.width;
 
 	} else {
 		xml_set_value("Xiphos", "misc", "show_sidebar",	"1");
@@ -450,7 +453,8 @@ void gui_sidebar_showhide(void)
 				       settings.sidebar_width);
 		gtk_widget_show(widgets.shortcutbar);
 		sync_windows();
-		settings.biblepane_width = GTK_WIDGET(widgets.vpaned)->allocation.width;
+	    	gtk_widget_get_allocation (GTK_WIDGET(widgets.vpaned), &allocation);
+		settings.biblepane_width = allocation.width;
 
 	}
 }
@@ -476,7 +480,7 @@ void gui_sidebar_showhide(void)
 static void on_modules_activate(GtkToggleButton * button,
 				gpointer user_data)
 {
-	if (button->active) {
+	if (gtk_toggle_button_get_active (button)) {
 		gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.
 							   notebook_sidebar), 0);
 	}
@@ -501,7 +505,7 @@ static void on_modules_activate(GtkToggleButton * button,
 static void on_bookmarks_activate(GtkToggleButton * button,
 				  gpointer user_data)
 {
-	if (button->active) {
+	if (gtk_toggle_button_get_active (button)) {
 		gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.
 							   notebook_sidebar), 1);
 	}
@@ -527,7 +531,7 @@ static void on_bookmarks_activate(GtkToggleButton * button,
 static void on_search_activate(GtkToggleButton * button,
 			       gpointer user_data)
 {
-	if (button->active) {
+	if (gtk_toggle_button_get_active (button)) {
 		gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.
 							   notebook_sidebar), 2);
 		gtk_widget_grab_focus(ss.entrySearch);
@@ -553,7 +557,7 @@ static void on_search_activate(GtkToggleButton * button,
 static void on_search_results_activate(GtkToggleButton * button,
 				       gpointer user_data)
 {
-	if (button->active) {
+	if (gtk_toggle_button_get_active (button)) {
 		gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.
 							   notebook_sidebar), 3);
 	}
@@ -940,20 +944,36 @@ GtkWidget *create_results_menu(void)
 {
 	GtkWidget *menu;
 	gchar *glade_file;
+#ifdef USE_GTKBUILDER
+	GtkBuilder *gxml;
+	glade_file = gui_general_user_file ("xi-menus-popup.gtkbuilder", FALSE);
+#else
 	GladeXML *gxml;
-
 	glade_file = gui_general_user_file ("xi-menus.glade", FALSE);
+#endif
 	g_return_val_if_fail ((glade_file != NULL), NULL);
 
+#ifdef USE_GTKBUILDER
+	gxml = gtk_builder_new ();
+	gtk_builder_add_from_file (gxml, glade_file, NULL);
+#else
 	gxml = glade_xml_new (glade_file, "menu_verselist", NULL);
+#endif
 
 	g_free (glade_file);
 	g_return_val_if_fail ((gxml != NULL), NULL);
 
-	menu = glade_xml_get_widget (gxml, "menu_verselist");
+	menu = UI_GET_ITEM(gxml, "menu_verselist");
+#ifdef USE_GTKBUILDER
+	/* connect signals and data */
+        gtk_builder_connect_signals (gxml, NULL);
+	/*gtk_builder_connect_signals_full
+		(gxml, (GtkBuilderConnectFunc)gui_glade_signal_connect_func, NULL);*/
+#else
     	/* connect signals and data */
 	glade_xml_signal_autoconnect_full
 		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);
+#endif
 
 	return menu;
 }
@@ -977,20 +997,33 @@ static
 GtkWidget* create_menu_modules(void)
 {
 	gchar *glade_file;
+#ifdef USE_GTKBUILDER
+	GtkBuilder *gxml;
+	glade_file = gui_general_user_file ("xi-menus-popup.gtkbuilder", FALSE);
+#else
 	GladeXML *gxml;
-
 	glade_file = gui_general_user_file ("xi-menus.glade", FALSE);
+#endif
 	g_return_val_if_fail ((glade_file != NULL), NULL);
-
+	
+#ifdef USE_GTKBUILDER
+	gxml = gtk_builder_new ();
+	gtk_builder_add_from_file (gxml, glade_file, NULL);
+#else
 	gxml = glade_xml_new (glade_file, "menu_modules", NULL);
-
+#endif
 	g_free (glade_file);
 	g_return_val_if_fail ((gxml != NULL), NULL);
 
-	GtkWidget *menu 	= glade_xml_get_widget (gxml, "menu_modules");
+	GtkWidget *menu = UI_GET_ITEM(gxml, "menu_modules");
+#ifdef USE_GTKBUILDER
+        gtk_builder_connect_signals (gxml, NULL);
+	/*gtk_builder_connect_signals_full
+		(gxml, (GtkBuilderConnectFunc)gui_glade_signal_connect_func, NULL);*/
+#else
 	glade_xml_signal_autoconnect_full
 		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);
-
+#endif
 	gtk_menu_popup ((GtkMenu*)menu, NULL, NULL, NULL, NULL, 2,
 			gtk_get_current_event_time());
 
@@ -1037,19 +1070,34 @@ GtkWidget *create_menu_prayerlist(void)
 {
 	GtkWidget *menu;
 	gchar *glade_file;
+#ifdef USE_GTKBUILDER
+	GtkBuilder *gxml;
+	glade_file = gui_general_user_file ("xi-menus-popup.gtkbuilder", FALSE);
+#else
 	GladeXML *gxml;
-
 	glade_file = gui_general_user_file ("xi-menus.glade", FALSE);
+#endif
 	g_return_val_if_fail ((glade_file != NULL), NULL);
 
+#ifdef USE_GTKBUILDER
+	gxml = gtk_builder_new ();
+	gtk_builder_add_from_file (gxml, glade_file, NULL);
+#else
 	gxml = glade_xml_new (glade_file, "menu_prayerlist", NULL);
+#endif
 
 	g_free (glade_file);
 	g_return_val_if_fail ((gxml != NULL), NULL);
 
-	menu = glade_xml_get_widget (gxml, "menu_prayerlist");
+	menu = UI_GET_ITEM(gxml, "menu_prayerlist"); 
+#ifdef USE_GTKBUILDER
+        gtk_builder_connect_signals (gxml, NULL);
+	/*gtk_builder_connect_signals_full
+		(gxml, (GtkBuilderConnectFunc)gui_glade_signal_connect_func, NULL);*/
+#else
 	glade_xml_signal_autoconnect_full
 		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);
+#endif
 	return menu;
 
 }
@@ -1065,19 +1113,33 @@ GtkWidget *create_menu_prayerlist_mod(void)
 {
 	GtkWidget *menu;
 	gchar *glade_file;
+#ifdef USE_GTKBUILDER
+	GtkBuilder *gxml;
+	glade_file = gui_general_user_file ("xi-menus-popup.gtkbuilder", FALSE);
+#else
 	GladeXML *gxml;
-
 	glade_file = gui_general_user_file ("xi-menus.glade", FALSE);
+#endif
 	g_return_val_if_fail ((glade_file != NULL), NULL);
 
+#ifdef USE_GTKBUILDER
+	gxml = gtk_builder_new ();
+	gtk_builder_add_from_file (gxml, glade_file, NULL);
+#else
 	gxml = glade_xml_new (glade_file, "menu_prayerlist_mod", NULL);
-
+#endif
 	g_free (glade_file);
 	g_return_val_if_fail ((gxml != NULL), NULL);
 
-	menu = glade_xml_get_widget (gxml, "menu_prayerlist_mod");
+	menu = UI_GET_ITEM(gxml, "menu_prayerlist_mod");
+#ifdef USE_GTKBUILDER
+        gtk_builder_connect_signals (gxml, NULL);
+	/*gtk_builder_connect_signals_full
+		(gxml, (GtkBuilderConnectFunc)gui_glade_signal_connect_func, NULL);*/
+#else
 	glade_xml_signal_autoconnect_full
 		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);
+#endif
 	return menu;
 }
 
@@ -1255,7 +1317,7 @@ void gui_show_previewer_in_sidebar(gint choice)
 {
 	if (choice) {
 		gtk_widget_show(widgets.box_side_preview);
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 		gtk_widget_show (widgets.box_side_preview);
 #else
 		gtk_widget_show_all (widgets.box_side_preview);
@@ -1264,7 +1326,7 @@ void gui_show_previewer_in_sidebar(gint choice)
 		gtk_paned_set_position(GTK_PANED(widgets.paned_sidebar),
 				       settings.sidebar_notebook_height);
 	} else {
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 		gtk_widget_show (widgets.vbox_previewer);
 #else
 		gtk_widget_show_all (widgets.vbox_previewer);
@@ -1301,10 +1363,9 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	GtkWidget *title_label = NULL;
 #ifdef USE_GTKMOZEMBED
 	GtkWidget *frame;
-	//GtkWidget *eventbox;
 #else
 	GtkWidget *scrolledwindow;
-#endif
+#endif /* USE_GTKMOZEMBED */
 
 	GtkWidget *table2;
 
@@ -1319,28 +1380,13 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	gtk_paned_pack2 (GTK_PANED (widgets.paned_sidebar),
 			widgets.box_side_preview, FALSE, TRUE);
 	gtk_container_set_border_width(GTK_CONTAINER(widgets.box_side_preview), 2);
-	g_signal_connect (GTK_OBJECT (widgets.paned_sidebar),
+	g_signal_connect (G_OBJECT (widgets.paned_sidebar),
 			"button_release_event",
 			G_CALLBACK (paned_button_release_event),
 			(gchar *) "paned_sidebar");
 	widgets.shortcutbar = widgets.paned_sidebar;
 
-#ifdef USE_GTKMOZEMBED
-	frame = gtk_frame_new(NULL);
-	gtk_widget_show(frame);
-	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
-	gtk_box_pack_start(GTK_BOX(widgets.box_side_preview), frame,
-				TRUE, TRUE,
-			   	0);
-
-
-	sidebar.html_viewer_eventbox = gtk_event_box_new();
-	gtk_widget_show(sidebar.html_viewer_eventbox);
-	gtk_container_add(GTK_CONTAINER(frame), sidebar.html_viewer_eventbox);
-
-	sidebar.html_viewer_widget = GTK_WIDGET(gecko_html_new(NULL, FALSE, SB_VIEWER_TYPE));
-	gtk_container_add(GTK_CONTAINER(sidebar.html_viewer_eventbox), sidebar.html_viewer_widget);
-#else
+#ifndef  USE_GTKMOZEMBED
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
 	gtk_box_pack_start(GTK_BOX(widgets.box_side_preview), scrolledwindow, TRUE, TRUE,
@@ -1352,13 +1398,36 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
 					    scrolledwindow,
 					    settings.shadow_type);
+#endif /* !USE_GTKMOZEMBED */
+#ifdef USE_XIPHOS_HTML
+ #ifdef  USE_GTKMOZEMBED
+	frame = gtk_frame_new(NULL);
+	gtk_widget_show(frame);
+	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
+	gtk_box_pack_start(GTK_BOX(widgets.box_side_preview), frame,
+				TRUE, TRUE,
+			   	0);
+#endif /* USE_GTKMOZEMBED */
+
+/*
+	sidebar.html_viewer_eventbox = gtk_event_box_new();
+	gtk_widget_show(sidebar.html_viewer_eventbox);
+	gtk_container_add(GTK_CONTAINER(frame), sidebar.html_viewer_eventbox);
+*/
+	sidebar.html_viewer_widget = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, SB_VIEWER_TYPE));
+ #ifdef USE_WEBKIT  
+	gtk_container_add(GTK_CONTAINER(scrolledwindow), sidebar.html_viewer_widget);
+ #else
+	gtk_container_add(GTK_CONTAINER(frame), sidebar.html_viewer_widget);
+ #endif /* USE_WEBKIT */
+#else
 	sidebar.html_viewer_widget = gtk_html_new();
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
 			  sidebar.html_viewer_widget);
-	g_signal_connect(GTK_OBJECT(sidebar.html_viewer_widget),
+	g_signal_connect(G_OBJECT(sidebar.html_viewer_widget),
 			 "link_clicked", G_CALLBACK(gui_link_clicked),
 			 NULL);
-#endif /* USE_GTKMOZEMBED*/
+#endif /* USE_XIPHOS_HTML */
 	gtk_widget_show(sidebar.html_viewer_widget);
 
 	/* ---------------------------------------------------------------- */
@@ -1409,7 +1478,7 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	gtk_widget_show(widgets.notebook_sidebar);
 
 	gtk_box_pack_start(GTK_BOX(vbox1), widgets.notebook_sidebar, TRUE, TRUE, 0);
-	GTK_WIDGET_UNSET_FLAGS(widgets.notebook_sidebar, GTK_CAN_FOCUS);
+	gtk_widget_set_can_default(widgets.notebook_sidebar, 1);
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_sidebar), FALSE);
 	gtk_notebook_set_show_border(GTK_NOTEBOOK(widgets.notebook_sidebar), FALSE);
 	gtk_container_set_border_width(GTK_CONTAINER(widgets.notebook_sidebar), 2);
@@ -1472,11 +1541,9 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 			 G_CALLBACK(on_search_results_activate), NULL);
 	g_signal_connect((gpointer) button_modules, "toggled",
 			 G_CALLBACK(on_modules_activate), NULL);
-
 	g_signal_connect((gpointer) widgets.notebook_sidebar,
 			 "switch-page",
 			 G_CALLBACK(on_notebook_switch_page),
 			 title_label);
-
 	return vbox1;
 }

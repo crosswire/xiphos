@@ -3,7 +3,7 @@
  * mod_global_ops.c - setup for SWORD global options and
  *                    a few of our own in the gui
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -43,30 +43,8 @@
 #include "gui/debug_glib_null.h"
 
 
-static void _set_dialog_global_option(BackEnd *be,
-				     const char *option,
-				     gboolean choice)
-{
-	SWMgr *mgr = be->get_mgr();
-	char *on_off;
-
-	on_off = gui_tf2of(choice);
-	mgr->setGlobalOption(option, on_off);
-}
-
-
-static void _set_dialog_global_textual(BackEnd *be,
-				      const char *option,
-				      const char *choice)
-{
-	SWMgr *mgr = be->get_mgr();
-	mgr->setGlobalOption(option, choice);
-}
-
-
-static void _set_global_option(int manager,
-			      const char *option,
-			      gboolean choice)
+static void _set_global_option(const char *option,
+			       gboolean choice)
 {
 	SWMgr *mgr = backend->get_mgr();
 	char *on_off;
@@ -76,9 +54,8 @@ static void _set_global_option(int manager,
 }
 
 
-static void _set_global_textual(int manager,
-			       const char *option,
-			       const char *choice)
+static void _set_global_textual(const char *option,
+				const char *choice)
 {
 	SWMgr *mgr = backend->get_mgr();
 	mgr->setGlobalOption(option, choice);
@@ -105,16 +82,9 @@ static void _set_global_textual(int manager,
 
 int main_save_module_options(const char *mod_name,
 			     const char *option,
-			     int choice,
-			     int dialog)
+			     int choice)
 {
-	gchar *buf = NULL;
-#if 0
-    	if (dialog)
-		buf = g_strdup_printf("%s/modops-dialog.conf", settings.gSwordDir);
-	else
-#endif
-		buf = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
+	gchar *buf = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
 	SWConfig module_options(buf);
 
 	module_options.Load();
@@ -129,60 +99,30 @@ int main_save_module_options(const char *mod_name,
 
 /******************************************************************************
  * Name
- *  main_dialog_set_global_options
+ *  main_get_option
  *
  * Synopsis
- *   #include "gui/mod_global_ops.h"
+ *   #include "main/mod_global_ops.h"
  *
- *   void main_dialog_set_global_options(gpointer backend, GLOBAL_OPS * ops)
+ *   void main_get_one_option(const char *mod_name, const char *op)
  *
  * Description
- *   set module global options
+ *   obtain a single option
  *
  * Return value
- *   void
+ *   int
  */
 
-void main_dialog_set_global_options(gpointer backend,
-				    GLOBAL_OPS * ops)
+int
+main_get_one_option(const char *mod_name, const char *op)
 {
-	BackEnd* b = (BackEnd*)backend;
+	gchar *buf = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
+	SWConfig module_options(buf);
 
-	_set_dialog_global_option(b, "Strong's Numbers",
-				 ops->strongs);
-	_set_dialog_global_option(b, "Morphological Tags",
-				 ops->morphs);
-	_set_dialog_global_option(b, "Footnotes",
-				 ops->footnotes);
-	_set_dialog_global_option(b, "Greek Accents",
-				 ops->greekaccents);
-	_set_dialog_global_option(b, "Lemmas",
-				 ops->lemmas);
-	_set_dialog_global_option(b, "Cross-references",
-				 ops->scripturerefs);
-	_set_dialog_global_option(b, "Hebrew Vowel Points",
-				 ops->hebrewpoints);
-	_set_dialog_global_option(b, "Hebrew Cantillation",
-				 ops->hebrewcant);
-	// always turn on headings in the engine (and later cache them).
-	// whether we display them or not is another matter (display.cc).
-	_set_dialog_global_option(b, "Headings", 1);
-	_set_dialog_global_option(b, "Words of Christ in Red",
-				 ops->words_in_red);
+	module_options.Load();
+	g_free(buf);
 
-	_set_dialog_global_textual(b, "Transliteration",
-				  (ops->transliteration
-				   ? "Latin" : "Off"));
-
-	if (ops->variants_primary)
-		_set_dialog_global_textual(b, "Textual Variants",
-					  "Primary Reading");
-	else if (ops->variants_secondary)
-		_set_dialog_global_textual(b, "Textual Variants",
-					  "Secondary Reading");
-	else if (ops->variants_all)
-		_set_dialog_global_textual(b, "Textual Variants",
-					  "All Readings");
+	return gui_of2tf(module_options[mod_name][op].c_str());
 }
 
 
@@ -191,7 +131,7 @@ void main_dialog_set_global_options(gpointer backend,
  *  main_set_global_options
  *
  * Synopsis
- *   #include "gui/mod_global_ops.h"
+ *   #include "main/global_ops.h"
  *
  *   void main_set_global_options(GLOBAL_OPS * ops)
  *
@@ -204,99 +144,69 @@ void main_dialog_set_global_options(gpointer backend,
 
 void main_set_global_options(GLOBAL_OPS * ops)
 {
-	_set_global_option(ops->module_type, "Strong's Numbers",
-			  ops->strongs);
-	_set_global_option(ops->module_type, "Morphological Tags",
-			  ops->morphs);
-	_set_global_option(ops->module_type, "Footnotes",
-			  ops->footnotes);
-	_set_global_option(ops->module_type, "Greek Accents",
-			  ops->greekaccents);
-	_set_global_option(ops->module_type, "Lemmas",
-			  ops->lemmas);
-	_set_global_option(ops->module_type, "Cross-references",
-			  ops->scripturerefs);
-	_set_global_option(ops->module_type, "Hebrew Vowel Points",
-			  ops->hebrewpoints);
-	_set_global_option(ops->module_type, "Hebrew Cantillation",
-			  ops->hebrewcant);
+	_set_global_option("Strong's Numbers", ops->strongs);
+	_set_global_option("Morphological Tags", ops->morphs);
+	_set_global_option("Footnotes", ops->footnotes);
+	_set_global_option("Greek Accents", ops->greekaccents);
+	_set_global_option("Lemmas", ops->lemmas);
+	_set_global_option("Cross-references", ops->scripturerefs);
+	_set_global_option("Hebrew Vowel Points", ops->hebrewpoints);
+	_set_global_option("Hebrew Cantillation", ops->hebrewcant);
 	// always turn on headings in the engine (and later cache them).
 	// whether we display them or not is another matter (display.cc).
-	_set_global_option(ops->module_type, "Headings", 1);
-	_set_global_option(ops->module_type, "Words of Christ in Red",
-			  ops->words_in_red);
+	_set_global_option("Headings", 1);
+	_set_global_option("Words of Christ in Red", ops->words_in_red);
 
-	_set_global_textual(ops->module_type, "Transliteration",
-			   (ops->transliteration
-			    ? "Latin" : "Off"));
+	_set_global_textual("Transliteration", (ops->transliteration
+						? "Latin" : "Off"));
 
 	if (ops->variants_primary)
-		_set_global_textual(ops->module_type, "Textual Variants",
-				   "Primary Reading");
+		_set_global_textual("Textual Variants", "Primary Reading");
 	else if (ops->variants_secondary)
-		_set_global_textual(ops->module_type, "Textual Variants",
-				   "Secondary Reading");
+		_set_global_textual("Textual Variants", "Secondary Reading");
 	else if (ops->variants_all)
-		_set_global_textual(ops->module_type, "Textual Variants",
-				   "All Readings");
+		_set_global_textual("Textual Variants", "All Readings");
 }
 
 
 /******************************************************************************
  * Name
- *    gui_new_globals
+ *    main_new_globals
  *
  * Synopsis
- *   #include "gui/.h"
+ *   #include "main/global_ops.h"
  *
- *   GLOBAL_OPS *gui_new_globals(void)
+ *   GLOBAL_OPS *main_new_globals(gchar *mod_name)
  *
  * Description
- *
+ *   obtain all options for the module.
  *
  * Return value
  *   GLOBAL_OPS *
  */
 
-GLOBAL_OPS *main_new_globals(gchar * mod_name, int dialog)
+GLOBAL_OPS *main_new_globals(gchar * mod_name)
 {
 	GLOBAL_OPS *ops;
-	gchar *buf = NULL;
-
-#if 0
-	if (dialog)
-		buf = g_strdup_printf("%s/modops-dialog.conf", settings.gSwordDir);
-    	else
-#endif
-		buf = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
+	gchar *buf = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
 	SWConfig module_options(buf);
 
 	module_options.Load();
 	g_free(buf);
 
 	ops = g_new0(GLOBAL_OPS, 1);
-	ops->module_type = 0;
-	ops->dialog = dialog;
-	ops->words_in_red =
-	    gui_of2tf(module_options[mod_name]["Words of Christ in Red"].c_str());
 	ops->strongs =
 	    gui_of2tf(module_options[mod_name]["Strong's Numbers"].c_str());
 	ops->morphs =
 	    gui_of2tf(module_options[mod_name]["Morphological Tags"].c_str());
-	ops->footnotes =
-	    gui_of2tf(module_options[mod_name]["Footnotes"].c_str());
 	ops->greekaccents =
 	    gui_of2tf(module_options[mod_name]["Greek Accents"].c_str());
 	ops->lemmas =
 	    gui_of2tf(module_options[mod_name]["Lemmas"].c_str());
-	ops->scripturerefs =
-	    gui_of2tf(module_options[mod_name]["Scripture Cross-references"].c_str());
 	ops->hebrewpoints =
 	    gui_of2tf(module_options[mod_name]["Hebrew Vowel Points"].c_str());
 	ops->hebrewcant =
 	    gui_of2tf(module_options[mod_name]["Hebrew Cantillation"].c_str());
-	ops->headings =
-	    gui_of2tf(module_options[mod_name]["Headings"].c_str());
 	ops->transliteration =
 	    gui_of2tf(module_options[mod_name]["Transliteration"].c_str());
 
@@ -312,6 +222,23 @@ GLOBAL_OPS *main_new_globals(gchar * mod_name, int dialog)
 		ops->variants_primary = TRUE;
 	}
 
+	// special case options, default on:
+	ops->words_in_red =
+	    (module_options[mod_name]["Words of Christ in Red"] != "Off");
+	ops->headings =
+	    (module_options[mod_name]["Headings"] != "Off");
+	ops->footnotes =
+	    (module_options[mod_name]["Footnotes"] != "Off");
+	ops->scripturerefs =
+	    (module_options[mod_name]["Scripture Cross-references"] != "Off");
+	ops->xrefnotenumbers =
+	    (module_options[mod_name]["XrefNoteNumbers"] != "Off");
+
+	ops->verse_per_line = 
+	    (*(module_options[mod_name]["style"].c_str()) == 'v')
+	    ? 1	
+	    : 0;//  otherwise, paragraph style.
+	
 	ops->image_content =
 	    (*(module_options[mod_name]["Image Content"].c_str()) == '\0')
 	    ? -1	// "unknown"; otherwise, it's like the others.

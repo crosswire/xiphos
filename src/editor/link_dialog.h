@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * link_dialog.f - dialog for inserting a link
  *
- * Copyright (C) 2005-2010 Xiphos Developer Team
+ * Copyright (C) 2005-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,15 +28,16 @@ extern "C"
 #endif
 
 #include <config.h>
+#include <glib.h>
 
 #include "editor/slib-editor.h"
 
 
 void editor_link_dialog (EDITOR *e);
-void entry_verse_changed_cb(GtkObject *object, EDITOR *e);
-void button_ok_clicked_cb(GtkObject *object, EDITOR *e);
-void button_test_clicked_cb(GtkObject *object, gpointer user_data);
-void button_cancel_clicked_cb(GtkObject *object, gpointer user_data);
+void entry_verse_changed_cb(GObject *object, EDITOR *e);
+void button_ok_clicked_cb(GObject *object, EDITOR *e);
+void button_test_clicked_cb(GObject *object, gpointer user_data);
+void button_cancel_clicked_cb(GObject *object, gpointer user_data);
 
 
 #ifdef __cplusplus

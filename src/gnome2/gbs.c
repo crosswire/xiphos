@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * gbs.c - generic book support - the gui
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,17 +26,12 @@
 #include <gtk/gtk.h>
 
 #include <gtk/gtk.h>
-
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "gecko/gecko-html.h"
-#endif
-#else
+#ifdef GTKHTML
 #include <gtkhtml/gtkhtml.h>
 #include "gui/html.h"
 #endif
+
+#include "../xiphos_html/xiphos_html.h"
 
 #include "editor/slib-editor.h"
 
@@ -85,7 +80,7 @@
  * Return value
  *   gboolean
  */
-#ifndef USE_GTKMOZEMBED
+#ifndef USE_XIPHOS_HTML
 static gboolean on_book_button_press_event(GtkWidget * widget,
 					GdkEventButton * event,
 					gpointer data)
@@ -98,7 +93,7 @@ static gboolean on_book_button_press_event(GtkWidget * widget,
 	case 2:
 		break;
 	case 3:
-		gui_menu_popup (settings.book_mod, NULL);
+		gui_menu_popup (NULL, settings.book_mod, NULL);
 		break;
 	}
 	return FALSE;
@@ -187,7 +182,7 @@ static gboolean on_book_button_release_event(GtkWidget * widget,
 #endif
 	return FALSE;
 }
-#endif /* !USE_GTKMOZEMBED */
+#endif /* !USE_XIPHOS_HTML */
 
 /******************************************************************************
  * Name
@@ -260,13 +255,13 @@ void gui_update_gbs_global_ops(gchar * option, gboolean choice)
 }
 
 
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 static void
-_popupmenu_requested_cb (GeckoHtml *html,
+_popupmenu_requested_cb (XiphosHtml *html,
 			     gchar *uri,
 			     gpointer user_data)
 {
-	gui_menu_popup (settings.book_mod, NULL);
+	gui_menu_popup (html, settings.book_mod, NULL);
 }
 #endif
 
@@ -289,11 +284,12 @@ _popupmenu_requested_cb (GeckoHtml *html,
 GtkWidget *gui_create_book_pane(void)
 {
 	GtkWidget *box;
-#ifdef USE_GTKMOZEMBED
+/* #ifdef USE_XIPHOS_HTML
 	GtkWidget *eventbox;
-#else
+#endif */ /* USE_XIPHOS_HTML */
+#ifndef USE_GTKMOZEMBED
 	GtkWidget *scrolledwindow;
-#endif /* USE_GTKMOZEMBED */
+#endif /* !USE_GTKMOZEMBED */
 	GtkWidget *navbar;
 
 	box = gtk_vbox_new(FALSE, 0);
@@ -301,21 +297,7 @@ GtkWidget *gui_create_book_pane(void)
 
 	navbar = gui_navbar_book_new();
 	gtk_box_pack_start(GTK_BOX(box), navbar, FALSE, FALSE, 0);
-
-#ifdef USE_GTKMOZEMBED
-	eventbox = gtk_event_box_new ();
-	gtk_widget_show (eventbox);
-	gtk_box_pack_start(GTK_BOX(box), eventbox, TRUE, TRUE, 0);
-	widgets.html_book = GTK_WIDGET(gecko_html_new(NULL, FALSE, BOOK_TYPE)); //embed_new(BOOK_TYPE);
-	gtk_widget_show(widgets.html_book);
-	gtk_container_add(GTK_CONTAINER(eventbox),
-			 widgets.html_book);
-
-	g_signal_connect((gpointer)widgets.html_book,
-		      "popupmenu_requested",
-		      G_CALLBACK (_popupmenu_requested_cb),
-		      NULL);
-#else
+#ifndef  USE_GTKMOZEMBED
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
 	gtk_box_pack_start(GTK_BOX(box), scrolledwindow, TRUE, TRUE, 0);
@@ -325,29 +307,48 @@ GtkWidget *gui_create_book_pane(void)
 				       GTK_POLICY_AUTOMATIC);
 /*	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow,
                                              settings.shadow_type);*/
+#endif /* !USE_GTKMOZEMBED */
+#ifdef USE_XIPHOS_HTML
+/*	eventbox = gtk_event_box_new ();
+	gtk_widget_show (eventbox);
+	gtk_box_pack_start(GTK_BOX(box), eventbox, TRUE, TRUE, 0);*/
+	widgets.html_book = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, BOOK_TYPE)); //embed_new(BOOK_TYPE);
+	gtk_widget_show(widgets.html_book);
+ #ifdef USE_WEBKIT  
+	gtk_container_add(GTK_CONTAINER(scrolledwindow),
+			 widgets.html_book);
+ #else   
+	gtk_box_pack_start(GTK_BOX(box),
+			 widgets.html_book, TRUE, TRUE, 0);
+ #endif /* USE_WEBKIT */
 
+	g_signal_connect((gpointer)widgets.html_book,
+		      "popupmenu_requested",
+		      G_CALLBACK (_popupmenu_requested_cb),
+		      NULL);
+#else
 	widgets.html_book = gtk_html_new();
 	gtk_widget_show(widgets.html_book);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
 			  widgets.html_book);
 
-	g_signal_connect(GTK_OBJECT(widgets.html_book), "link_clicked",
+	g_signal_connect(G_OBJECT(widgets.html_book), "link_clicked",
 				   G_CALLBACK(gui_link_clicked),
 				   NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_book), "on_url",
+	g_signal_connect(G_OBJECT(widgets.html_book), "on_url",
 				   G_CALLBACK(gui_url),
 				   GINT_TO_POINTER(BOOK_TYPE));
-	g_signal_connect(GTK_OBJECT(widgets.html_book),
+	g_signal_connect(G_OBJECT(widgets.html_book),
 				   "button_press_event",
 				   G_CALLBACK
 				   (on_book_button_press_event),
 				   NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_book),
+	g_signal_connect(G_OBJECT(widgets.html_book),
 				   "button_release_event",
 				   G_CALLBACK
 				   (on_book_button_release_event),
 				   NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_book),
+	g_signal_connect(G_OBJECT(widgets.html_book),
 			   "url_requested",
 			   G_CALLBACK(url_requested), NULL);
 #endif

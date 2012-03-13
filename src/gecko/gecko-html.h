@@ -22,7 +22,8 @@
 #ifndef __GECKO_HTML_H__
 #define __GECKO_HTML_H__
 
-#include <gtkmozembed.h>
+
+#include <gtkmozembed.h>   
 
 #include "gecko/gecko-print.h"
 #include "main/module_dialogs.h"
@@ -126,6 +127,12 @@ void            gecko_html_shutdown       (void);
 void            gecko_html_print_document (GtkWindow * window,
 					   gchar * mod_name,
 					   DIALOG_DATA * dialog);
+void		gecko_html_set_parms(GeckoHtml *html,
+				     GeckoHtmlPriv *priv,
+				     DIALOG_DATA *dialog,
+				     gboolean is_dialog,
+				     gint pane);
+
 G_END_DECLS
 
 #endif /* __GECKO_HTML_H__ */

@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * _dictlex.c - gui for commentary modules
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,17 +24,12 @@
 #endif
 
 #include <gtk/gtk.h>
-
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "gecko/gecko-html.h"
-#endif
-#else
+#ifdef GTKHTML
 #include <gtkhtml/gtkhtml.h>
 #include "gui/html.h"
 #endif
+
+#include "../xiphos_html/xiphos_html.h"
 
 #include "gui/dictlex.h"
 #include "gui/bookmark_dialog.h"
@@ -83,10 +78,11 @@ extern gboolean isrunningSD;	/* is the view dictionary dialog runing */
  *					     gpointer data)
  *
  * Description
- *    an ugly hack to get the selection from gecko on a dbl click
+ *    an ugly hack to get the selection from widget on a dbl click
  *    and display text in dictionary pane using default dictionary if set or
- *    current dictionary - this called by gecko/Yelper.cpp
+ *    current dictionary - this called by (gecko|wk)/Yelper.cpp 
  *    Yelper::ProcessMouseDblClickEvent (void* aEvent)
+ *    also called by wk-html.c   button_press_handler() -- still ugly
  *
  * Return value
  *   void
@@ -230,7 +226,7 @@ void gui_set_dictlex_mod_and_key(gchar * mod_name, gchar * key)
  *   gint
  */
 
-#ifndef USE_GTKMOZEMBED
+#ifndef USE_XIPHOS_HTML
 static gint html_button_pressed(GtkWidget * html,
 				GdkEventButton * event, gpointer data)
 {
@@ -249,9 +245,9 @@ static gint html_button_pressed(GtkWidget * html,
 		break;
 	case 3:
 		//gui_create_pm_dictionary();
-		gui_menu_popup (settings.DictWindowModule, NULL);
+		gui_menu_popup (NULL, settings.DictWindowModule, NULL);
 		break;
-		/*gtk_signal_emit_stop_by_name(GTK_OBJECT(html),
+		/*gtk_signal_emit_stop_by_name(G_OBJECT(html),
 		   "button_press_event"); */
 		break;
 	default:
@@ -319,7 +315,7 @@ static gint html_button_released(GtkWidget * html,
 	return FALSE;
 }
 
-#endif /* !USE_GTKMOZEMBED */
+#endif /* !USE_XIPHOS_HTML */
 
 /******************************************************************************
  * Name
@@ -473,19 +469,20 @@ static void menu_position_under (GtkMenu *menu,
 		     gpointer user_data)
 {
 	GtkWidget *widget;
-
+	GtkAllocation allocation;
+    
 	g_return_if_fail (GTK_IS_BUTTON (user_data));
-#ifdef HAVE_GTK_220
-        g_return_if_fail (gtk_widget_get_has_window(user_data));
+#if defined(HAVE_GTK_220) || defined(USE_GTK_3)
+        g_return_if_fail (gtk_widget_get_window(user_data));
 #else
 	g_return_if_fail (GTK_WIDGET_NO_WINDOW (user_data));
 #endif
 	widget = GTK_WIDGET (user_data);
 
-	gdk_window_get_origin (widget->window, x, y);
-
-	*x += widget->allocation.x;
-	*y += widget->allocation.y + widget->allocation.height;
+	gdk_window_get_origin (gtk_widget_get_window(widget), x, y);
+	gtk_widget_get_allocation (widget,&allocation);
+	*x += allocation.x;
+	*y += allocation.y + allocation.height;
 
 	*push_in = FALSE;
 }
@@ -536,13 +533,13 @@ static gboolean select_button_press_callback (GtkWidget *widget,
 	}
 	return FALSE;
 }
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 static void
-_popupmenu_requested_cb (GeckoHtml *html,
+_popupmenu_requested_cb (XiphosHtml *html,
 			     gchar *uri,
 			     gpointer user_data)
 {
-	gui_menu_popup (settings.DictWindowModule, NULL);
+	gui_menu_popup (html, settings.DictWindowModule, NULL);
 	//gui_create_pm_dictionary();
 }
 #endif
@@ -550,28 +547,14 @@ _popupmenu_requested_cb (GeckoHtml *html,
 GtkWidget *gui_create_dictionary_pane(void)
 {
 	GtkWidget *box_dict;
-//	GtkWidget *hpaned;
-//	GtkWidget *vbox;
 	GtkWidget *hbox2;
 	GtkWidget *button10;
 	GtkWidget *image1;
-//	GtkWidget *comboboxentry1;
 	GtkWidget *button11;
 	GtkWidget *image2;
 	GtkWidget *arrow1;
-//	GtkWidget *frame_entry;
-//	GtkWidget *toolbarDLKey;
 	GtkWidget *dict_drop_down;
-//	GtkWidget *tmp_toolbar_icon;
-//	GtkWidget *label205;
-#ifdef USE_GTKMOZEMBED
-	GtkWidget *frame;
-	GtkWidget *eventbox;
-#else
 	GtkWidget *scrolledwindow;
-#endif
-//	GtkListStore *model;
-//	GtkListStore *store;
 
 	box_dict = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(box_dict);
@@ -613,54 +596,41 @@ GtkWidget *gui_create_dictionary_pane(void)
 	gtk_widget_show(image2);
 	gtk_container_add(GTK_CONTAINER(button11), image2);
 
-#ifdef USE_GTKMOZEMBED
-	frame = gtk_frame_new(NULL);
-	gtk_frame_set_shadow_type(GTK_FRAME(frame), settings.shadow_type);
-	gtk_box_pack_start(GTK_BOX(box_dict), frame, TRUE, TRUE, 0);
-	gtk_widget_show(frame);
-
-	eventbox = gtk_event_box_new ();
-	gtk_container_add(GTK_CONTAINER(frame), eventbox);
-	gtk_widget_show (eventbox);
-
-	widgets.html_dict = GTK_WIDGET(gecko_html_new(NULL, FALSE, DICTIONARY_TYPE));
+	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_show(scrolledwindow);
+	gtk_box_pack_start(GTK_BOX(box_dict), scrolledwindow, TRUE, TRUE, 0);
+	
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow,
+                                             settings.shadow_type);
+#ifdef USE_XIPHOS_HTML
+	widgets.html_dict = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, DICTIONARY_TYPE));
 	gtk_widget_show(widgets.html_dict);
-	gtk_container_add(GTK_CONTAINER(eventbox),
+	gtk_container_add(GTK_CONTAINER(scrolledwindow),
 			 widgets.html_dict);
 	g_signal_connect((gpointer)widgets.html_dict,
 		      "popupmenu_requested",
 		      G_CALLBACK (_popupmenu_requested_cb),
 		      NULL);
 #else
-	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_show(scrolledwindow);
-	gtk_box_pack_start(GTK_BOX(box_dict), scrolledwindow, TRUE, TRUE, 0);
-
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow),
-				       GTK_POLICY_AUTOMATIC,
-				       GTK_POLICY_AUTOMATIC);
-	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow,
-                                             settings.shadow_type);
 
 	widgets.html_dict = gtk_html_new();
 	gtk_widget_show(widgets.html_dict);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
 			  widgets.html_dict);
 
-	g_signal_connect(GTK_OBJECT(widgets.html_dict),
+	g_signal_connect(G_OBJECT(widgets.html_dict),
 			 "button_press_event",
 			 G_CALLBACK(html_button_pressed), NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_dict),
+	g_signal_connect(G_OBJECT(widgets.html_dict),
 			 "button_release_event",
 			 G_CALLBACK(html_button_released), NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_dict),
+	g_signal_connect(G_OBJECT(widgets.html_dict),
 			 "url_requested",
 			 G_CALLBACK(url_requested), NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_dict), "on_url",
+	g_signal_connect(G_OBJECT(widgets.html_dict), "on_url",
 			 G_CALLBACK(gui_url),
 			 GINT_TO_POINTER(DICTIONARY_TYPE));
-	g_signal_connect(GTK_OBJECT(widgets.html_dict), "link_clicked",
+	g_signal_connect(G_OBJECT(widgets.html_dict), "link_clicked",
 			 G_CALLBACK(gui_link_clicked), NULL);
 #endif
 

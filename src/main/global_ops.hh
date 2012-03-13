@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * mod_global_ops.h - setup for SWORD global options in the gui
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -47,20 +47,17 @@ struct  _global_ops {
 	gboolean transliteration;
 	gboolean commentary_by_chapter;
 	gboolean doublespace;
-	gint module_type;
+	gboolean verse_per_line;
+	gboolean xrefnotenumbers;
 	gint image_content;
 	gint respect_font_faces;
-
-	gboolean dialog;
 };
 
-GLOBAL_OPS *main_new_globals(gchar * mod_name, int dialog);
-int main_save_module_options(const char * mod_name, const char * option, int choice, int dialog);
+GLOBAL_OPS *main_new_globals(gchar * mod_name);
+int main_save_module_options(const char * mod_name, const char * option, int choice);
+int main_get_one_option(const char *mod_name, const char *op);
 
-/* main window */
 void main_set_global_options(GLOBAL_OPS * ops);
-/* dialog */
-void main_dialog_set_global_options(gpointer backend, GLOBAL_OPS * ops);
 
 #ifdef __cplusplus
 }

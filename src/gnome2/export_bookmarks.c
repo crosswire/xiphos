@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * export_bookmarks.c -
  *
- * Copyright (C) 2003-2010 Xiphos Developer Team
+ * Copyright (C) 2003-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,7 +25,9 @@
 
 #include <gtk/gtk.h>
 #include <libxml/parser.h>
-#include <glade/glade-xml.h>
+#ifndef USE_GTKBUILDER
+  #include <glade/glade-xml.h>
+#endif
 
 #include "gui/export_bookmarks.h"
 #include "gui/xiphos.h"
@@ -169,7 +171,7 @@ static gboolean _save_verselist_2_xml(BK_EXPORT *data)
 	xmlNodePtr root_node = NULL;
 	xmlNodePtr cur_node = NULL;
 	xmlDocPtr root_doc;
-	xmlAttrPtr root_attr;
+	//xmlAttrPtr root_attr;
 	gchar filename[256];
 	GString *name = g_string_new(NULL);
 	GString *str = g_string_new ("");
@@ -183,7 +185,7 @@ static gboolean _save_verselist_2_xml(BK_EXPORT *data)
 	if (root_doc != NULL) {
 		root_node = xmlNewNode(NULL, (const xmlChar *)
 				       "SwordBookmarks");
-		root_attr =
+		//root_attr =
 		    xmlNewProp(root_node, (const xmlChar *)"syntaxVersion",
 			       (const xmlChar *) "1");
 		xmlDocSetRootElement(root_doc, root_node);
@@ -260,6 +262,9 @@ static gboolean _save_verselist_2_html(BK_EXPORT *data)
 			break;
 		case PLAIN:
 			buf = g_strdup_printf("%s\n\n",name->str);
+			break;
+		default:
+			buf = g_strdup_printf("bogus data type, cannot happen");
 			break;
 		}
 		g_string_append(str,buf);
@@ -419,7 +424,7 @@ static void save_iter_to_xml(GtkTreeIter * iter, BK_EXPORT *data)
 	xmlNodePtr root_node = NULL;
 	xmlNodePtr cur_node = NULL;
 	xmlDocPtr root_doc;
-	xmlAttrPtr root_attr;
+//	xmlAttrPtr root_attr;
 	gchar *caption = NULL;
 	gchar filename[256];
 	GtkTreeModel *tm;
@@ -439,7 +444,7 @@ static void save_iter_to_xml(GtkTreeIter * iter, BK_EXPORT *data)
 	if (root_doc != NULL) {
 		root_node = xmlNewNode(NULL, (const xmlChar *)
 				       "SwordBookmarks");
-		root_attr =
+		//root_attr =
 		    xmlNewProp(root_node, (const xmlChar *)"syntaxVersion",
 			       (const xmlChar *) "1");
 		xmlDocSetRootElement(root_doc, root_node);
@@ -605,14 +610,14 @@ G_MODULE_EXPORT void
 checkbutton_include_text_toggled_cb(GtkToggleButton * togglebutton,
 							     BK_EXPORT * data)
 {
-	data->with_scripture = togglebutton->active;
+	data->with_scripture = gtk_toggle_button_get_active (togglebutton);
 }
 
 G_MODULE_EXPORT void
 radiobutton_xiphos_bookmarks_toggled_cb(GtkToggleButton * togglebutton,
 							     BK_EXPORT * data)
 {
-	if (togglebutton->active) {
+	if (gtk_toggle_button_get_active (togglebutton)) {
 		data->type = BOOKMARKS;
 		gtk_widget_set_sensitive (data->cb_scripture,FALSE);
 	}
@@ -622,7 +627,7 @@ G_MODULE_EXPORT void
 radiobutton_html_toggled_cb(GtkToggleButton * togglebutton,
 							     BK_EXPORT * data)
 {
-	if (togglebutton->active) {
+	if (gtk_toggle_button_get_active (togglebutton)) {
 		data->type = HTML;
 		gtk_widget_set_sensitive (data->cb_scripture,TRUE);
 	}
@@ -633,7 +638,7 @@ G_MODULE_EXPORT void
 radiobutton_plain_text_toggled_cb(GtkToggleButton * togglebutton,
 							     BK_EXPORT * data)
 {
-	if (togglebutton->active) {
+	if (gtk_toggle_button_get_active (togglebutton)) {
 		data->type = PLAIN;
 		gtk_widget_set_sensitive (data->cb_scripture,TRUE);
 	}

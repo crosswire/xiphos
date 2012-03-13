@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * parallel_view.cc - support for displaying multiple modules
  *
- * Copyright (C) 2004-2010 Xiphos Developer Team
+ * Copyright (C) 2004-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,6 +26,7 @@
 #include <gtk/gtk.h>
 
 #include "backend/sword_main.hh"
+#include "main/gtk_compat.h"
 
 #include "gui/parallel_view.h"
 #include "gui/parallel_dialog.h"
@@ -42,9 +43,11 @@
 #include "main/xml.h"
 #include "main/display.hh"
 
+#include "../xiphos_html/xiphos_html.h"
+
 #include "gui/debug_glib_null.h"
 
-#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><style type=\"text/css\"><!--A { text-decoration:none }--></style></head>"
+#define	HTML_START	"<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><style type=\"text/css\"><!-- A { text-decoration:none } *[dir=rtl] { text-align: right; } --></style></head>"
 
 extern GtkWidget *entrycbIntBook;
 extern GtkWidget *sbIntChapter;
@@ -221,7 +224,7 @@ void main_set_parallel_module_global_options(GtkCheckMenuItem * menuitem,
 					   gpointer user_data)
 {
 	gchar *option = (gchar*) user_data;
-	gboolean choice = menuitem->active;
+	gboolean choice = gtk_check_menu_item_get_active (menuitem);
 
 
 	if (!strcmp(option, "Strong's Numbers")) {
@@ -381,8 +384,8 @@ void main_load_g_ops_parallel(GtkWidget *menu)
 	gtk_widget_show(item);
 	gtk_container_add(GTK_CONTAINER(menu), item);
 
-	GTK_CHECK_MENU_ITEM(item)->active = settings.parallel_strongs;
-	g_signal_connect(GTK_OBJECT(item), "activate",
+	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item),settings.parallel_strongs);
+	g_signal_connect(G_OBJECT(item), "activate",
 	    G_CALLBACK(main_set_parallel_module_global_options),
 			  (char*) "Strong's Numbers");
 
@@ -391,8 +394,8 @@ void main_load_g_ops_parallel(GtkWidget *menu)
 	gtk_widget_show(item);
 	gtk_container_add(GTK_CONTAINER(menu), item);
 
-	GTK_CHECK_MENU_ITEM(item)->active = settings.parallel_footnotes;
-	g_signal_connect(GTK_OBJECT(item), "activate",
+	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), settings.parallel_footnotes);
+	g_signal_connect(G_OBJECT(item), "activate",
 	    G_CALLBACK(main_set_parallel_module_global_options),
 			   (char*) "Footnotes");
 
@@ -401,8 +404,8 @@ void main_load_g_ops_parallel(GtkWidget *menu)
 	gtk_widget_show(item);
 	gtk_container_add(GTK_CONTAINER(menu), item);
 
-	GTK_CHECK_MENU_ITEM(item)->active = settings.parallel_morphs;
-	g_signal_connect(GTK_OBJECT(item), "activate",
+	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), settings.parallel_morphs);
+	g_signal_connect(G_OBJECT(item), "activate",
 	    G_CALLBACK(main_set_parallel_module_global_options),
 			  (char*)  "Morphological Tags");
 
@@ -411,8 +414,8 @@ void main_load_g_ops_parallel(GtkWidget *menu)
 	gtk_widget_show(item);
 	gtk_container_add(GTK_CONTAINER(menu), item);
 
-	GTK_CHECK_MENU_ITEM(item)->active = settings.parallel_hebrewpoints;
-	g_signal_connect(GTK_OBJECT(item), "activate",
+	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), settings.parallel_hebrewpoints);
+	g_signal_connect(G_OBJECT(item), "activate",
 	    G_CALLBACK(main_set_parallel_module_global_options),
 			  (char*)  "Hebrew Vowel Points");
 
@@ -421,8 +424,8 @@ void main_load_g_ops_parallel(GtkWidget *menu)
 	gtk_widget_show(item);
 	gtk_container_add(GTK_CONTAINER(menu), item);
 
-	GTK_CHECK_MENU_ITEM(item)->active = settings.parallel_cantillationmarks;
-	g_signal_connect(GTK_OBJECT(item), "activate",
+	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), settings.parallel_cantillationmarks);
+	g_signal_connect(G_OBJECT(item), "activate",
 	    G_CALLBACK(main_set_parallel_module_global_options),
 			   (char*) "Hebrew Cantillation");
 
@@ -431,8 +434,8 @@ void main_load_g_ops_parallel(GtkWidget *menu)
 	gtk_widget_show(item);
 	gtk_container_add(GTK_CONTAINER(menu), item);
 
-	GTK_CHECK_MENU_ITEM(item)->active = settings.parallel_greekaccents;
-	g_signal_connect(GTK_OBJECT(item), "activate",
+	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), settings.parallel_greekaccents);
+	g_signal_connect(G_OBJECT(item), "activate",
 	    G_CALLBACK(main_set_parallel_module_global_options),
 			  (char*)  "Greek Accents");
 
@@ -441,8 +444,8 @@ void main_load_g_ops_parallel(GtkWidget *menu)
 	gtk_widget_show(item);
 	gtk_container_add(GTK_CONTAINER(menu), item);
 
-	GTK_CHECK_MENU_ITEM(item)->active = settings.parallel_crossref;
-	g_signal_connect(GTK_OBJECT(item), "activate",
+	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), settings.parallel_crossref);
+	g_signal_connect(G_OBJECT(item), "activate",
 	    G_CALLBACK(main_set_parallel_module_global_options),
 			   (char*) "Cross-references");
 
@@ -451,8 +454,8 @@ void main_load_g_ops_parallel(GtkWidget *menu)
 	gtk_widget_show(item);
 	gtk_container_add(GTK_CONTAINER(menu), item);
 
-	GTK_CHECK_MENU_ITEM(item)->active = settings.parallel_lemmas;
-	g_signal_connect(GTK_OBJECT(item), "activate",
+	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), settings.parallel_lemmas);
+	g_signal_connect(G_OBJECT(item), "activate",
 	    G_CALLBACK(main_set_parallel_module_global_options),
 			  (char*) "Lemmas");
 
@@ -461,8 +464,8 @@ void main_load_g_ops_parallel(GtkWidget *menu)
 	gtk_widget_show(item);
 	gtk_container_add(GTK_CONTAINER(menu), item);
 
-	GTK_CHECK_MENU_ITEM(item)->active = settings.parallel_headings;
-	g_signal_connect(GTK_OBJECT(item), "activate",
+	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), settings.parallel_headings);
+	g_signal_connect(G_OBJECT(item), "activate",
 	    G_CALLBACK(main_set_parallel_module_global_options),
 			  (char*)  "Headings");
 
@@ -475,8 +478,8 @@ void main_load_g_ops_parallel(GtkWidget *menu)
 #endif
 	gtk_container_add(GTK_CONTAINER(menu), item);
 
-	GTK_CHECK_MENU_ITEM(item)->active = settings.parallel_segmentation;
-	g_signal_connect(GTK_OBJECT(item), "activate",
+	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), settings.parallel_segmentation);
+	g_signal_connect(G_OBJECT(item), "activate",
 	    G_CALLBACK(main_set_parallel_module_global_options),
 			  (char*) "Morpheme Segmentation" );
 
@@ -485,8 +488,8 @@ void main_load_g_ops_parallel(GtkWidget *menu)
 	gtk_widget_show(item);
 	gtk_container_add(GTK_CONTAINER(menu), item);
 
-	GTK_CHECK_MENU_ITEM(item)->active = settings.parallel_red_words;
-	g_signal_connect(GTK_OBJECT(item), "activate",
+	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), settings.parallel_red_words);
+	g_signal_connect(G_OBJECT(item), "activate",
 	    G_CALLBACK(main_set_parallel_module_global_options),
 			   (char*) "Words of Christ in Red");
 
@@ -495,8 +498,8 @@ void main_load_g_ops_parallel(GtkWidget *menu)
 	gtk_widget_show(item);
 	gtk_container_add(GTK_CONTAINER(menu), item);
 
-	GTK_CHECK_MENU_ITEM(item)->active = settings.parallel_transliteration;
-	g_signal_connect(GTK_OBJECT(item), "activate",
+	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), settings.parallel_transliteration);
+	g_signal_connect(G_OBJECT(item), "activate",
 	    G_CALLBACK(main_set_parallel_module_global_options),
 			   (char*) "Transliteration");
 
@@ -513,8 +516,8 @@ void main_load_g_ops_parallel(GtkWidget *menu)
   	group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (item));
 	gtk_widget_show(item);
 	gtk_container_add(GTK_CONTAINER(variants_menu), item);
-	GTK_CHECK_MENU_ITEM(item)->active = settings.parallel_variants_primary;
-	g_signal_connect(GTK_OBJECT(item), "activate",
+	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), settings.parallel_variants_primary);
+	g_signal_connect(G_OBJECT(item), "activate",
 	    G_CALLBACK(main_set_parallel_module_global_options),
 			   (char*) "Primary Reading");
 
@@ -522,8 +525,8 @@ void main_load_g_ops_parallel(GtkWidget *menu)
   	group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (item));
 	gtk_widget_show(item);
 	gtk_container_add(GTK_CONTAINER(variants_menu), item);
-	GTK_CHECK_MENU_ITEM(item)->active = settings.parallel_variants_secondary;
-	g_signal_connect(GTK_OBJECT(item), "activate",
+	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), settings.parallel_variants_secondary);
+	g_signal_connect(G_OBJECT(item), "activate",
 	    G_CALLBACK(main_set_parallel_module_global_options),
 			   (char*) "Secondary Reading");
 
@@ -531,8 +534,8 @@ void main_load_g_ops_parallel(GtkWidget *menu)
   	group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (item));
 	gtk_widget_show(item);
 	gtk_container_add(GTK_CONTAINER(variants_menu), item);
-	GTK_CHECK_MENU_ITEM (item)->active = settings.parallel_variants_all;
-	g_signal_connect(GTK_OBJECT(item), "activate",
+	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (item), settings.parallel_variants_all);
+	g_signal_connect(G_OBJECT(item), "activate",
 	    G_CALLBACK(main_set_parallel_module_global_options),
 			   (char*) "All Readings");
 }
@@ -605,7 +608,7 @@ void get_heading(SWBuf &text, BackEnd *p, gint modidx)
 
 void main_update_parallel_page(void)
 {
-	gchar tmpBuf[256];
+	gchar *tmpBuf, *fontstring;
 	const gchar *rowcolor;
 	gchar *utf8str, *mod_name;
 	gint modidx;
@@ -616,54 +619,63 @@ void main_update_parallel_page(void)
 
 	settings.cvparallel = settings.currentverse;
 
-	sprintf(tmpBuf, HTML_START
-		"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table>",
-		settings.bible_bg_color,
-		settings.bible_text_color, settings.link_color);
+	tmpBuf = g_strdup_printf(HTML_START
+				  "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table>",
+				  settings.bible_bg_color,
+				  settings.bible_text_color, settings.link_color);
 	data = g_string_new(tmpBuf);
+	g_free(tmpBuf);
 
 	if (settings.parallel_list) {
 		for (modidx = 0;
 		     (mod_name = settings.parallel_list[modidx]);
 		     modidx++) {
-			mf = get_font(mod_name);
+
+			// if a module was deleted, but still in parallels list,
+			// we will segfault when looking for content for the
+			// nonexistent module.  avoid this.
+			if (!main_is_module(mod_name)) {
+				GS_warning(("unknown parallel module %s\n", mod_name));
+				continue;
+			}
 
 			is_rtol = main_is_mod_rtol(mod_name);
 
 			if (modidx % 2 == 1)	/* alternating background color */
-				rowcolor = "#F1F1F1";
+				rowcolor = "#c0c0c0";
 			else
 				rowcolor = settings.bible_bg_color;
 
 			if (modidx == 0) {
-				sprintf(tmpBuf,
+				tmpBuf = g_strdup_printf(
 					"<tr><td><i><font color=\"%s\" size=\"%d\">[%s]</font></i></td></tr>",
 					settings.bible_verse_num_color,
 					settings.verse_num_font_size + settings.base_font_size,
 					settings.currentverse);
 				g_string_append(data, tmpBuf);
+				g_free(tmpBuf);
 			}
 
-			sprintf(tmpBuf,
-				"<tr bgcolor=\"%s\"><td><b><a href=\"passagestudy.jsp?action=showModInfo&value=%s&module=%s\"><font color=\"%s\" size=\"%+d\"> [%s]</font></a></b>",
+			mf = get_font(mod_name);
+			fontstring = g_strdup_printf((((strlen(mf->old_font) < 2) ||
+						       !strncmp(mf->old_font, "none", 4))
+						      ? "<font size=\"%+d\">"
+						      : "<font size=\"%+d\" face=\"%s\">"),
+						     mf->old_font_size_value, mf->old_font);
+			free_font(mf);
+
+			tmpBuf = g_strdup_printf(
+				"<tr bgcolor=\"%s\"><td>%s<b><a href=\"passagestudy.jsp?action=showModInfo&value=%s&module=%s\"><font color=\"%s\" size=\"%+d\">[%s]</font></a></b><br/>",
 				rowcolor,
+				fontstring,
 				main_get_module_description(mod_name),
 				mod_name,
 				settings.bible_verse_num_color,
 				settings.verse_num_font_size + settings.base_font_size,
 				mod_name);
+			g_free(fontstring);
 			g_string_append(data, tmpBuf);
-
-			if ((strlen(mf->old_font) < 2) ||
-			    !strncmp(mf->old_font, "none", 4))
-				sprintf(tmpBuf, "<font size=\"%s\">",
-					mf->old_font_size);
-			else
-				sprintf(tmpBuf,
-					"<font face=\"%s\" size=\"%s\">",
-					mf->old_font, mf->old_font_size);
-			free_font(mf);
-			g_string_append(data, tmpBuf);
+			g_free(tmpBuf);
 
 			if (is_rtol)
 				g_string_append(data, "<br/><div align=right>");
@@ -682,17 +694,25 @@ void main_update_parallel_page(void)
 			if (is_rtol)
 				g_string_append(data, "</div><br/>");
 
-			sprintf(tmpBuf,
-				"</font><small>[<a href=\"passagestudy.jsp?action=showParallel&"
-				"type=swap&value=%s\">%s</a>]</small></td></tr>",
+			tmpBuf = g_strdup_printf(
+				"<small><br/>[<a href=\"passagestudy.jsp?action=showParallel&"
+				"type=swap&value=%s\">%s</a>]</small></font></td></tr>",
 				mod_name,_("view context"));
 			g_string_append(data, tmpBuf);
+			g_free(tmpBuf);
 		}
 	}
 
 	g_string_append(data, "</table></body></html>");
-	HtmlOutput(data->str, widgets.html_parallel, NULL, NULL);
+	HtmlOutput((char *)(settings.imageresize
+			    ? AnalyzeForImageSize
+			         (data->str,
+				  GDK_WINDOW(gtk_widget_get_window(widgets.html_parallel)))
+			    : data->str),
+		   widgets.html_parallel, NULL, NULL);
 	g_string_free(data, TRUE);
+
+						
 }
 
 /******************************************************************************
@@ -722,15 +742,16 @@ static void interpolate_parallel_display(SWBuf& text, gchar *key, gint parallel_
 	gint cur_verse, cur_chapter, verse, modidx;
 	char *cur_book;
 	MOD_FONT **mf;
-	gboolean *is_rtol, *is_module;
+	gboolean *is_rtol, *is_module, *is_bible_text;
 
-	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.notebook_bible_parallel))) return;
+	if (!gtk_widget_get_realized(GTK_WIDGET(widgets.notebook_bible_parallel))) return;
 
-	is_module = g_new(gboolean, parallel_count);
-	is_rtol   = g_new(gboolean, parallel_count);
-	mf        = g_new(MOD_FONT *, parallel_count);
+	is_module     = g_new(gboolean, parallel_count);
+	is_rtol       = g_new(gboolean, parallel_count);
+	is_bible_text = g_new(gboolean, parallel_count);
+	mf            = g_new(MOD_FONT *, parallel_count);
 
-	// quick cache of fonts/rtol info.
+	// quick cache of fonts/rtol/type info.
 	for (modidx = 0; modidx < parallel_count; ++modidx) {
 		// determine module presence once each.
 		is_module[modidx] = backend->is_module(settings.parallel_list[modidx]);
@@ -738,6 +759,9 @@ static void interpolate_parallel_display(SWBuf& text, gchar *key, gint parallel_
 		if (is_module[modidx]) {
 			is_rtol[modidx] = main_is_mod_rtol(settings.parallel_list[modidx]);
 			mf[modidx] = get_font(settings.parallel_list[modidx]);
+			is_bible_text[modidx] =
+			    (main_get_mod_type(settings.parallel_list[modidx])
+			     == TEXT_TYPE);
 		}
 	}
 
@@ -762,37 +786,38 @@ static void interpolate_parallel_display(SWBuf& text, gchar *key, gint parallel_
 
 		text += "<tr valign=\"top\">";
 
-		// mark current verse properly.
-		if (verse == cur_verse)
-			textColor = settings.currentverse_color;
-		else
-			textColor = settings.bible_text_color;
-
 		// alternate background colors.
 		if (verse % 2 == 0)
-			bgColor = "#f1f1f1";
+			bgColor = "#c0c0c0";
 		else
 			bgColor = settings.bible_bg_color;
 
 		for (modidx = 0; modidx < parallel_count; modidx++) {
 			if (is_module[modidx]) {		
 				
+				// mark current verse properly.
+				if ((verse == cur_verse) && is_bible_text[modidx])
+					textColor = settings.currentverse_color;
+				else
+					textColor = settings.bible_text_color;
+
 				const gchar *newurl = main_url_encode(tmpkey);
 				gchar *num = main_format_number(verse);
 				snprintf(str, 499,
 					 "<td width=\"%d%%\" bgcolor=\"%s\">"
 					 "<a href=\"passagestudy.jsp?action=showParallel&"
 					 "type=verse&value=%s\" name=\"%d\">"
-					 "<font color=\"%s\">%s. </font></a>"
-					 "<font face=\"%s\" size=\"%s\" color=\"%s\">",
+					 "<font color=\"%s\" size=\"%+d\">%s. </font></a>"
+					 "<font face=\"%s\" size=\"%+d\" color=\"%s\">",
 					 fraction,
 					 bgColor,
 					 newurl,
 					 verse,
 					 settings.bible_verse_num_color,
+					 settings.verse_num_font_size + settings.base_font_size,
 					 num,
 					 mf[modidx]->old_font,
-					 mf[modidx]->old_font_size,
+					 mf[modidx]->old_font_size_value,
 					 textColor);
 				g_free((gchar*)newurl);
 				g_free(num);
@@ -804,7 +829,8 @@ static void interpolate_parallel_display(SWBuf& text, gchar *key, gint parallel_
 				backend_p->set_module_key(settings.parallel_list[modidx], tmpkey);
 				get_heading(text, backend_p, modidx);
 
-				utf8str = backend_p->get_render_text(settings.parallel_list[modidx], tmpkey);
+				utf8str = backend_p->get_render_text
+						(settings.parallel_list[modidx], tmpkey);
 				if (utf8str) {
 					text += utf8str;
 					g_free(utf8str);
@@ -829,17 +855,18 @@ static void interpolate_parallel_display(SWBuf& text, gchar *key, gint parallel_
 	g_free(mf);
 	g_free(is_rtol);
 	g_free(is_module);
+	g_free(is_bible_text);
 }
 
 
 /******************************************************************************
  * Name
- *   gui_update_parallel_page_detached
+ *   main_update_parallel_page_detached
  *
  * Synopsis
  *   #include "main/parallel_view.h
  *
- *   void gui_update_parallel_page_detached(void)
+ *   void main_update_parallel_page_detached(void)
  *
  * Description
  *
@@ -854,9 +881,11 @@ void main_update_parallel_page_detached(void)
 	gchar buf[500];
 	gint modidx, parallel_count, fraction;
 
-#ifdef USE_GTKMOZEMBED
-	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.html_parallel_dialog))) return;
+	if (!widgets.html_parallel_dialog 
+#ifdef USE_XIPHOS_HTML
+	    || !gtk_widget_get_realized(GTK_WIDGET(widgets.html_parallel_dialog))
 #endif
+	    ) return;
 
 	/* how big a pile of parallels have we got? */
 	if (settings.parallel_list == NULL)
@@ -876,7 +905,7 @@ void main_update_parallel_page_detached(void)
 
 	for (modidx = 0; settings.parallel_list[modidx]; ++modidx) {
 		snprintf(buf, 499,
-			 "<td valign=\"top\" width=\"%d%%\" bgcolor=\"#f1f1f1\"><font color=\"%s\" size=\"%+d\"><b>%s</b></font></td>",
+			 "<td valign=\"top\" width=\"%d%%\" bgcolor=\"#c0c0c0\"><font color=\"%s\" size=\"%+d\"><b>%s</b></font></td>",
 			 fraction,
 			 settings.bible_verse_num_color,
 			 settings.verse_num_font_size + settings.base_font_size,
@@ -888,11 +917,14 @@ void main_update_parallel_page_detached(void)
 	interpolate_parallel_display(text, settings.cvparallel, parallel_count, fraction);
 	text += "</table></body></html>";
 
-	snprintf(buf, 499, "%d", ((settings.intCurVerse > 1)
-				  ? settings.intCurVerse - 1
-				  : settings.intCurVerse));
+	snprintf(buf, 499, "%d", settings.intCurVerse);
 
-	HtmlOutput((char *)text.c_str(), widgets.html_parallel_dialog, NULL, buf);
+	HtmlOutput((char *)(settings.imageresize
+			    ? AnalyzeForImageSize
+			         ((char *)text.c_str(),
+				  GDK_WINDOW(gtk_widget_get_window(widgets.html_parallel_dialog)))
+			    : (char *)text.c_str()),
+		   widgets.html_parallel_dialog, NULL, buf);
 }
 
 /******************************************************************************
@@ -915,8 +947,7 @@ void main_swap_parallel_with_main(char *intmod)
 {
 	main_display_bible(intmod, settings.currentverse);
 	main_update_parallel_page();
-	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_bible_parallel),
-                                             0);
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_bible_parallel), 0);
 }
 
 
@@ -959,7 +990,7 @@ void main_load_menu_form_mod_list(GtkWidget * pmInt, gchar * label,
 		item =
 		    gtk_menu_item_new_with_label((gchar *) tmp->data);
 		gtk_widget_show(item);
-		g_signal_connect(GTK_OBJECT(item), "activate",
+		g_signal_connect(G_OBJECT(item), "activate",
 				   G_CALLBACK(mycallback),
 				   g_strdup((gchar *) tmp->data));
 

@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * display_info.c - display information (ie strongs) in a dialog
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,18 +24,13 @@
 #endif
 
 #include <gtk/gtk.h>
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "gecko/gecko-html.h"
-#endif
-#else
+#ifdef GTKHTML
 #include <gtkhtml/gtkhtml.h>
+#include "gui/html.h"
 #endif
-
+#include "../xiphos_html/xiphos_html.h"
+                                  
 #include "gui/display_info.h"
-
 
 #include "main/previewer.h"
 #include "main/sword.h"
@@ -99,10 +94,10 @@ void gui_display_mod_and_key(const gchar * mod_name, const gchar * key)
 
 void gui_display_text_information(gchar * information)
 {
-#ifdef USE_GTKMOZEMBED
-	gecko_html_open_stream(GECKO_HTML(html_widget), "text/html");
-	gecko_html_write(GECKO_HTML(html_widget),information,strlen(information));
-	gecko_html_close(GECKO_HTML(html_widget));
+#ifdef USE_XIPHOS_HTML
+	XIPHOS_HTML_OPEN_STREAM(html_widget, "text/html");
+	XIPHOS_HTML_WRITE(html_widget,information,strlen(information));
+	XIPHOS_HTML_CLOSE(html_widget);
 #else
 	gboolean was_editable = gtk_html_get_editable(GTK_HTML(html_widget));
 	if (was_editable)
@@ -130,7 +125,7 @@ void gui_display_text_information(gchar * information)
  *   void
  */
 
-static void on_dlgInformation_destroy(GtkObject * object,
+static void on_dlgInformation_destroy(GObject * object,
 				      gpointer user_data)
 {
 	gsI_isrunning = FALSE;
@@ -178,9 +173,9 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 
 	GtkWidget *dialog_vbox23;
 	GtkWidget *hbox;
-#ifndef USE_GTKMOZEMBED
+#ifndef USE_XIPHOS_HTML
 	GtkWidget *scrolledwindow70;
-#endif /* !USE_GTKMOZEMBED */
+#endif /* !USE_XIPHOS_HTML */
 	GtkWidget *dialog_action_area23;
 	GtkWidget *hbuttonbox2;
 	GtkWidget *button_close;
@@ -194,15 +189,17 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 			  dialog_display_info);
 	gtk_window_set_title(GTK_WINDOW(dialog_display_info),
 			     " ");
-	GTK_WINDOW(dialog_display_info)->type =
-	    GTK_WINDOW_TOPLEVEL;
+	//GTK_WINDOW(dialog_display_info)->type = GTK_WINDOW_TOPLEVEL;
 	gtk_window_set_default_size(GTK_WINDOW
 				    (dialog_display_info), 350,
 				    200);
 	gtk_window_set_resizable(GTK_WINDOW(dialog_display_info), TRUE);
+  
+#ifndef USE_GTK_3
 	gtk_dialog_set_has_separator(GTK_DIALOG(dialog_display_info), FALSE);
+#endif    
 
-	dialog_vbox23 = GTK_DIALOG(dialog_display_info)->vbox;
+	dialog_vbox23 = gtk_dialog_get_content_area(GTK_DIALOG (dialog_display_info)); //GTK_DIALOG(dialog_display_info)->vbox;
 	g_object_set_data(G_OBJECT(dialog_display_info),
 			  "dialog_vbox23", dialog_vbox23);
 	gtk_widget_show(dialog_vbox23);
@@ -219,8 +216,8 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 	gtk_box_pack_start(GTK_BOX(hbox), image, FALSE, TRUE,
 			   0);
 	gtk_misc_set_alignment(GTK_MISC(image), 0.5, 0);
-#ifdef USE_GTKMOZEMBED
-	html_widget = GTK_WIDGET(gecko_html_new(NULL,FALSE,30));//gtk_html_new();
+#ifdef USE_XIPHOS_HTML
+	html_widget = GTK_WIDGET(XIPHOS_HTML_NEW(NULL,FALSE,30));//gtk_html_new();
 	gtk_widget_show(html_widget);
 	gtk_box_pack_start(GTK_BOX(hbox), html_widget, TRUE, TRUE, 0);
 #else
@@ -240,7 +237,7 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 
 
 	dialog_action_area23 =
-	    GTK_DIALOG(dialog_display_info)->action_area;
+	   gtk_dialog_get_action_area (GTK_DIALOG (dialog_display_info));
 	g_object_set_data(G_OBJECT(dialog_display_info),
 			  "dialog_action_area23",
 			  dialog_action_area23);
@@ -259,12 +256,12 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 
 	gtk_widget_show(button_close);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox2), button_close);
-	GTK_WIDGET_SET_FLAGS(button_close, GTK_CAN_DEFAULT);
+	gtk_widget_set_can_default(button_close, 1);
 
-	g_signal_connect(GTK_OBJECT(button_close), "clicked",
+	g_signal_connect(G_OBJECT(button_close), "clicked",
 			   G_CALLBACK(button_close_clicked), NULL);
 
-	g_signal_connect(GTK_OBJECT(dialog_display_info),
+	g_signal_connect(G_OBJECT(dialog_display_info),
 			   "destroy",
 			   G_CALLBACK(on_dlgInformation_destroy),
 			   NULL);

@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * previewer.cc -
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -48,9 +48,11 @@ extern "C" {
 #include "main/xml.h"
 #include "backend/sword_main.hh"
 
+#include "xiphos_html/xiphos_html.h"
+
 #include "gui/debug_glib_null.h"
 
-#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><style type=\"text/css\"><!-- A { text-decoration:none } --></style></head>"
+#define	HTML_START	"<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><style type=\"text/css\"><!-- A { text-decoration:none } *[dir=rtl] { text-align: right; } --></style></head>"
 
 using namespace std;
 
@@ -91,14 +93,18 @@ void main_init_previewer(void)
 {
 	GString *str = g_string_new(NULL);
 	gchar *buf = _("Previewer");
+	MOD_FONT *mf = get_font(settings.MainWindowModule);
 
 	g_string_printf(str,
 			HTML_START
 			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
-			"<font color=\"grey\" size=\"-1\"><b>%s</b></font><hr/></body></html>",
+			"<font color=\"grey\" face=\"%s\" size=\"%+d\"><b>%s</b></font><hr/></body></html>",
 			settings.bible_bg_color, settings.bible_text_color,
 			settings.link_color,
+			((mf->old_font) ? mf->old_font : ""),
+			mf->old_font_size_value - 1,
 			buf);
+	free_font(mf);
 	HtmlOutput(str->str, previewer_html_widget, NULL, NULL);
 	g_string_free(str, TRUE);
 }
@@ -167,9 +173,7 @@ void main_information_viewer(const gchar * mod_name,
 			settings.bible_bg_color, settings.bible_text_color,
 			settings.link_color,
 			(mf->old_font ? mf->old_font : "none"),
-			(mf->old_font_size
-			 ? atoi(mf->old_font_size) + settings.base_font_size
-			 : settings.base_font_size) - 1);
+			mf->old_font_size_value - 1);
 
 	str = g_string_new(tmp_str->str);
 
@@ -229,7 +233,10 @@ void main_information_viewer(const gchar * mod_name,
 
 	str = g_string_append(str, "</font></body></html>");
 
-	HtmlOutput(str->str, previewer_html_widget, mf, NULL);
+	HtmlOutput((char *)AnalyzeForImageSize
+			   (str->str,
+			    GDK_WINDOW(gtk_widget_get_window(previewer_html_widget))),
+			   previewer_html_widget, mf, NULL);
 	free_font(mf);
 	g_string_free(str, TRUE);
 	g_string_free(tmp_str, TRUE);
@@ -265,7 +272,7 @@ void mark_search_words(GString * str)
 	}
 	GS_message(("%s",settings.searchText));
 	/* open and close tags */
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 	sprintf(openstr,
 		"<span style=\"background-color: %s; color: %s\">",
 		settings.highlight_fg, settings.highlight_bg);
@@ -273,7 +280,7 @@ void mark_search_words(GString * str)
 #else
 	sprintf(openstr, "<font color=\"%s\"><b>", settings.found_color);
 	sprintf(closestr, "</b></font>");
-#endif /* !USE_GTKMOZEMBED */
+#endif /* !USE_XIPHOS_HTML */
 	searchbuf = g_utf8_casefold(g_strdup(settings.searchText),-1);
 	if (g_str_has_prefix(searchbuf, "\"")) {
 		searchbuf = g_strdelimit(searchbuf, "\"", ' ');
@@ -428,9 +435,7 @@ void main_entry_display(gpointer data, gchar * mod_name,
 	g_string_printf(tmp_str,
 			"<font face=\"%s\" size=\"%+d\">",
 			(mf->old_font ? mf->old_font : "none"),
-			(mf->old_font_size
-			 ? atoi(mf->old_font_size) + settings.base_font_size
-			 : settings.base_font_size) - 1);
+			mf->old_font_size_value - 1);
 	str = g_string_append(str, tmp_str->str);
 
 	/* show key in html widget  */
@@ -467,7 +472,10 @@ void main_entry_display(gpointer data, gchar * mod_name,
 	g_string_printf(tmp_str, " %s", "</font></body></html>");
 	str = g_string_append(str, tmp_str->str);
 
-	HtmlOutput(str->str, html_widget, mf, NULL);
+	HtmlOutput((char *)AnalyzeForImageSize
+			   (str->str,
+			    GDK_WINDOW(gtk_widget_get_window(html_widget))),
+			    html_widget, mf, NULL);
 	free_font(mf);
 	g_string_free(str, TRUE);
 	g_string_free(tmp_str, TRUE);

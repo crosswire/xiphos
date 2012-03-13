@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * about_modules.h - About dialogs for Xiphos
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,7 +31,8 @@ extern "C" {
 void gui_display_about_module_dialog(gchar * modname);
 void gui_core_display_about_dialog(gchar *desc,
 				   gchar *abouttext,
-				   const gchar *version);
+				   const gchar *version,
+				   gchar *modname);
 void about_module_display(GString * str,
 			  gchar * text,
 			  gboolean tooltip);

@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * parallel_dialog.c - dialog for detached parallel
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,17 +24,14 @@
 #endif
 
 #include <gtk/gtk.h>
-#include <glade/glade-xml.h>
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "gecko/gecko-html.h"
-#endif
-#else
+#ifdef GTKHTML
 #include <gtkhtml/gtkhtml.h>
 #include "gui/html.h"
-#endif  /* USE_GTKMOZEMBED */
+#endif
+#ifndef USE_GTKBUILDER
+  #include <glade/glade-xml.h>
+#endif
+#include "../xiphos_html/xiphos_html.h"
 
 #include "gui/parallel_tab.h"
 #include "gui/parallel_view.h"
@@ -71,9 +68,9 @@ NAVBAR_VERSEKEY navbar_parallel;
 static void sync_with_main(const gchar * key);
 
 
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 static void
-_popupmenu_requested_cb(GeckoHtml *html,
+_popupmenu_requested_cb(XiphosHtml *html,
 			gchar *uri,
 			gpointer user_data)
 {
@@ -138,7 +135,7 @@ void gui_parallel_close_tab(GtkButton * button, gpointer user_data)
  *   void
  */
 
-static void on_parallel_tab_destroy(GtkObject * object,
+static void on_parallel_tab_destroy(GObject * object,
 				      gpointer user_data)
 {
 
@@ -207,7 +204,7 @@ static void sync_with_main(const gchar * key)
 
 void gui_keep_parallel_tab_in_sync(void)
 {
-	if (GTK_TOGGLE_BUTTON(navbar_parallel.button_sync)->active)
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(navbar_parallel.button_sync)))
 		sync_with_main(NULL);
 }
 
@@ -218,7 +215,7 @@ void gui_parallel_tab_sync(const gchar * key)
 
 void gui_force_parallel_tab_sync(void)
 {
-	GTK_TOGGLE_BUTTON(navbar_parallel.button_sync)->active = settings.linkedtabs;
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(navbar_parallel.button_sync), settings.linkedtabs);
 	sync_on = settings.linkedtabs;
 	/* tell somebody that this button has been hacked */
 }
@@ -245,7 +242,7 @@ static GtkWidget *create_nav_toolbar(void)
 	return gui_navbar_versekey_parallel_new();
 }
 
-#ifndef USE_GTKMOZEMBED
+#ifndef USE_XIPHOS_HTML
 /******************************************************************************
  * Name
  *  on_text_button_press_event
@@ -317,7 +314,7 @@ static gboolean on_text_button_release_event(GtkWidget * widget,
 	}
 	return FALSE;
 }
-#endif /* !USE_GTKMOZEMBED */
+#endif /* !USE_XIPHOS_HTML */
 
 /******************************************************************************
  * Name
@@ -340,8 +337,7 @@ GtkWidget *_create_parallel_tab(void)
 {
 	GtkWidget *toolbar29;
   	GtkWidget *box_parallel_labels;
-#ifdef USE_GTKMOZEMBED
-	GtkWidget *eventbox;
+#ifdef  USE_GTKMOZEMBED
 	GtkWidget *frame;
 #else
 	GtkWidget *scrolled_window;
@@ -354,7 +350,7 @@ GtkWidget *_create_parallel_tab(void)
                                         TRUE);
 
 	parallel_vbox = gtk_vbox_new(FALSE, 0);
-	g_signal_connect(GTK_OBJECT(parallel_vbox), "destroy",
+	g_signal_connect(G_OBJECT(parallel_vbox), "destroy",
 			   G_CALLBACK(on_parallel_tab_destroy),
 			   NULL);
 	gtk_widget_show(parallel_vbox);
@@ -389,26 +385,7 @@ GtkWidget *_create_parallel_tab(void)
 		}
 	}
 #endif /* 0 */
-
-#ifdef USE_GTKMOZEMBED
-	frame = gtk_frame_new(NULL);
-	gtk_widget_show(frame);
-	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
-	gtk_box_pack_start(GTK_BOX(parallel_vbox), frame, TRUE, TRUE, 0);
-
-	eventbox = gtk_event_box_new ();
-	gtk_widget_show (eventbox);
-	gtk_container_add(GTK_CONTAINER(frame), eventbox);
-
-	widgets.html_parallel_dialog = GTK_WIDGET(gecko_html_new(NULL, FALSE, PARALLEL_TYPE));
-	gtk_widget_show(widgets.html_parallel_dialog);
-	gtk_container_add(GTK_CONTAINER(eventbox),
-			  widgets.html_parallel_dialog);
-	g_signal_connect((gpointer)widgets.html_parallel_dialog,
-			 "popupmenu_requested",
-			 G_CALLBACK (_popupmenu_requested_cb),
-			 NULL);
-#else
+#ifndef  USE_GTKMOZEMBED
 	scrolled_window = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolled_window);
 	gtk_box_pack_start(GTK_BOX(parallel_vbox), scrolled_window, TRUE, TRUE,0);
@@ -417,6 +394,37 @@ GtkWidget *_create_parallel_tab(void)
 				       GTK_POLICY_ALWAYS);
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolled_window,
                                              settings.shadow_type);
+#endif
+#ifdef USE_XIPHOS_HTML
+    
+	widgets.html_parallel_dialog = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, PARALLEL_TYPE));
+	gtk_widget_show(widgets.html_parallel_dialog);
+    
+ #ifdef USE_WEBKIT 
+	gtk_container_add(GTK_CONTAINER(scrolled_window),
+			  widgets.html_parallel_dialog);
+
+ #else
+	frame = gtk_frame_new(NULL);
+	gtk_widget_show(frame);
+	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
+	gtk_box_pack_start(GTK_BOX(parallel_vbox), frame, TRUE, TRUE, 0);
+	
+	gtk_container_add(GTK_CONTAINER(frame),
+			  widgets.html_parallel_dialog);
+    
+ #endif /* USE_WEBKIT */ 
+	
+/*
+	eventbox = gtk_event_box_new ();
+	gtk_widget_show (eventbox);
+	gtk_container_add(GTK_CONTAINER(frame), eventbox);
+*/
+	g_signal_connect((gpointer)widgets.html_parallel_dialog,
+			 "popupmenu_requested",
+			 G_CALLBACK (_popupmenu_requested_cb),
+			 NULL);
+#else
 
 	widgets.html_parallel_dialog = gtk_html_new();
 	gtk_widget_show(widgets.html_parallel_dialog);
@@ -424,24 +432,24 @@ GtkWidget *_create_parallel_tab(void)
 	gtk_container_add(GTK_CONTAINER(scrolled_window),
 			  widgets.html_parallel_dialog);
 
-	g_signal_connect(GTK_OBJECT(widgets.html_parallel_dialog), "link_clicked",
+	g_signal_connect(G_OBJECT(widgets.html_parallel_dialog), "link_clicked",
 				G_CALLBACK(gui_link_clicked),
 				NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_parallel_dialog), "on_url",
+	g_signal_connect(G_OBJECT(widgets.html_parallel_dialog), "on_url",
 				G_CALLBACK(gui_url),
 				GINT_TO_POINTER(TEXT_TYPE));
-	g_signal_connect(GTK_OBJECT(widgets.html_parallel_dialog),"button_release_event",
+	g_signal_connect(G_OBJECT(widgets.html_parallel_dialog),"button_release_event",
 				G_CALLBACK(on_text_button_release_event),
 				NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_parallel_dialog), "button_press_event",
+	g_signal_connect(G_OBJECT(widgets.html_parallel_dialog), "button_press_event",
 				G_CALLBACK(on_text_button_press_event),
 				NULL);
 
-	g_signal_connect(GTK_OBJECT(widgets.html_parallel_dialog),
+	g_signal_connect(G_OBJECT(widgets.html_parallel_dialog),
 			 "button_release_event",
 			 G_CALLBACK (_popupmenu_requested_cb),
 			 NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_parallel_dialog),
+	g_signal_connect(G_OBJECT(widgets.html_parallel_dialog),
 			 "url_requested",
 			 G_CALLBACK(url_requested), NULL);
 #endif

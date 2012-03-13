@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * about_modules.c - Sword modules about dialog
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,13 +25,8 @@
 
 #include <gtk/gtk.h>
 
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "gecko/gecko-html.h"
-#endif
-#else
+#include "../xiphos_html/xiphos_html.h"
+#ifdef GTKHTML
 #include <gtkhtml/gtkhtml.h>
 #include "gui/html.h"
 #endif
@@ -80,8 +75,8 @@ on_copy_activate(GtkMenuItem * menuitem,
 		 gpointer data)
 {
 	GS_message(("on_copy_activate"));
-#ifdef USE_GTKMOZEMBED
-	gecko_html_copy_selection(GECKO_HTML(text_html));
+#ifdef USE_XIPHOS_HTML
+	XIPHOS_HTML_COPY_SELECTION(text_html);
 #else
 	gui_copy_html(text_html);
 #endif
@@ -100,7 +95,7 @@ create_menu1(void)
 	item =gtk_image_menu_item_new_from_stock  ("gtk-copy",
                                                         accel_group);
 	gtk_widget_show(item);
-	g_signal_connect(GTK_OBJECT(item), "clicked",
+	g_signal_connect(G_OBJECT(item), "clicked",
 			   G_CALLBACK  (on_copy_activate),
 			  NULL);
 	gtk_container_add(GTK_CONTAINER(menu), item);
@@ -126,7 +121,7 @@ create_menu1(void)
  * Return value
  *   gboolean
  */
-#ifndef USE_GTKMOZEMBED
+#ifndef USE_XIPHOS_HTML
 static gboolean
 on_button_release_event(GtkWidget * widget,
 			GdkEventButton * event,
@@ -146,9 +141,10 @@ on_button_release_event(GtkWidget * widget,
 }
 #endif /* 0 */
 
-#ifdef USE_GTKMOZEMBED
+
+#ifdef USE_XIPHOS_HTML
 static void
-_popupmenu_requested_cb(GeckoHtml *html,
+_popupmenu_requested_cb (XiphosHtml *html,
 			gchar *uri,
 			gpointer user_data)
 {
@@ -181,9 +177,7 @@ gui_create_about_modules(void)
 	GtkWidget *hbox21;
 	GtkWidget *pixmap;
 	GtkWidget *frame73;
-#ifndef USE_GTKMOZEMBED
 	GtkWidget *scrolledwindow30;
-#endif
 	GtkWidget *dialog_action_area28;
 	GtkWidget *hbuttonbox7;
 	GtkWidget *button;
@@ -218,16 +212,6 @@ gui_create_about_modules(void)
 	frame73 = gtk_frame_new(NULL);
 	gtk_widget_show(frame73);
 	gtk_box_pack_start(GTK_BOX(vbox25), frame73, TRUE, TRUE, 0);
-#ifdef USE_GTKMOZEMBED
-	text_html = GTK_WIDGET(gecko_html_new(NULL, FALSE, 12));
-	gtk_widget_show(text_html);
-	gtk_container_add(GTK_CONTAINER(frame73), text_html);
-	//gtk_widget_set_sensitive(text_html,FALSE);
-	g_signal_connect((gpointer)text_html,
-		      "popupmenu_requested",
-		      G_CALLBACK (_popupmenu_requested_cb),
-		      NULL);
-#else
 
 	scrolledwindow30 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow30);
@@ -239,14 +223,21 @@ gui_create_about_modules(void)
 				       GTK_POLICY_ALWAYS);
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow30,
                                              settings.shadow_type);
+#ifdef USE_XIPHOS_HTML
+	text_html = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, 12));
+	gtk_widget_show(text_html);
+	g_signal_connect((gpointer)text_html,
+		      "popupmenu_requested",
+		      G_CALLBACK (_popupmenu_requested_cb),
+		      NULL);
+#else
 	text_html = gtk_html_new();
 	gtk_widget_show(text_html);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow30), text_html);
-
-	g_signal_connect(GTK_OBJECT(text_html),"button_release_event",
+	g_signal_connect(G_OBJECT(text_html),"button_release_event",
 				G_CALLBACK(on_button_release_event),
 				NULL);
 #endif
+	gtk_container_add(GTK_CONTAINER(scrolledwindow30), text_html);
 	dialog_action_area28 =
                 gtk_dialog_get_action_area(GTK_DIALOG(dialog_about_mods));
 	g_object_set_data(G_OBJECT(dialog_about_mods),
@@ -269,9 +260,13 @@ gui_create_about_modules(void)
 #ifdef HAVE_GTK_218
         gtk_widget_set_can_default(button, TRUE);
 #else
+  #ifdef USE_GTK_3
+	gtk_widget_set_can_default(button, 1);
+  #else
 	GTK_WIDGET_SET_FLAGS(button, GTK_CAN_DEFAULT);
+  #endif
 #endif
-	g_signal_connect(GTK_OBJECT(button), "clicked",
+	g_signal_connect(G_OBJECT(button), "clicked",
 			   G_CALLBACK(about_modules_ok), NULL);
 	return dialog_about_mods;
 
@@ -367,17 +362,25 @@ about_module_display(GString * str,
 void
 gui_core_display_about_dialog(gchar * desc,
 			      gchar * abouttext,
-			      const gchar * version)
+			      const gchar * version,
+			      gchar * modname)
 {
 	GtkWidget *aboutbox;	//-- pointer to about dialog
 	GString *str = g_string_new(NULL);
 	GString *description = g_string_new(NULL);
 	GString *text = g_string_new(NULL);
-	static const char *html_start =
-	    "<html><head><meta http-equiv=\"content-type\" "
-	    "content=\"text/html; charset=utf-8\"></head><body>";
-	static const char *html_end = "</body></html>";
-
+	GString *html_start = g_string_new(NULL);
+	    
+	static const char *html_end = "</font></body></html>";
+	MOD_FONT *mf = get_font(modname);
+        g_string_printf (html_start,
+                         "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head><body bgcolor=\"%s\" text=\"%s\"><font face=\"%s\" size=\"%+d\">",
+                         settings.bible_bg_color,
+                         settings.bible_text_color,
+			 ((mf->old_font) ? mf->old_font : ""),
+			 mf->old_font_size_value - 1);
+	free_font(mf);
+                         
 	g_string_printf(description,
 			"<center><font color=\"#000fcf\"><b>%s</b></font><hr/>%s %s</center><br/>",
 			(desc ? desc : "No module present"),
@@ -392,7 +395,7 @@ gui_core_display_about_dialog(gchar * desc,
 			      : _("The module has no About information.")),
 			     FALSE);
 
-	g_string_append_len(text, html_start, strlen(html_start));
+	g_string_append_len(text, html_start->str, strlen(html_start->str));
 	g_string_append_len(text, description->str, strlen(description->str));
 	g_string_append_len(text, str->str, strlen(str->str));
 	g_string_append_len(text, html_end, strlen(html_end));
@@ -400,7 +403,8 @@ gui_core_display_about_dialog(gchar * desc,
 
 	g_string_free(text, TRUE);
 	g_string_free(str, TRUE);
-	g_string_free(description, TRUE);
+	g_string_free(description, TRUE);  
+	g_string_free(html_start, TRUE);
 }
 
 /******************************************************************************
@@ -430,7 +434,7 @@ gui_display_about_module_dialog(gchar *modname)
 	bufabout = main_get_mod_about_info(modname);
 	version = main_get_mod_config_entry(modname, "Version");
 
-	gui_core_display_about_dialog(buf, bufabout, version);
+	gui_core_display_about_dialog(buf, bufabout, version, modname);
 
 	if (bufabout)
 		g_free(bufabout);

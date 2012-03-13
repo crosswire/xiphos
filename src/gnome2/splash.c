@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * splash.c - Splash related functions
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,14 +26,14 @@
 #endif
 
 #include <gtk/gtk.h>
-#include <gtk/gtkwindow.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
 #include "main/sword.h"
 #include "main/settings.h"
 #include "gui/splash.h"
 #include "gui/utilities.h"
-
+     
+#ifndef USE_GTK_3
 /*****************************************************************************/
 /* FIXME: clean up below */
 
@@ -133,10 +133,7 @@ static GdkPixbuf *create_darkened_pixbuf(GdkPixbuf * pixbuf)
 
 static Icon *icon_new(ESplash * splash, GdkPixbuf * image_pixbuf)
 {
-	ESplashPrivate *priv;
 	Icon *icon;
-
-	priv = splash->priv;
 
 	icon = g_new(Icon, 1);
 
@@ -163,7 +160,6 @@ static void icon_free(Icon * icon)
 
 	g_free(icon);
 }
-
 /* Icon layout management.  */
 
 static void layout_icons(ESplash * splash)
@@ -223,7 +219,11 @@ static void schedule_relayout(ESplash * splash)
 
 /* GtkObject methods.  */
 
+#ifdef USE_GTK_3
+static void impl_destroy(GObject * object)
+#else
 static void impl_destroy(GtkObject * object)
+#endif
 {
 	ESplash *splash;
 	ESplashPrivate *priv;
@@ -248,13 +248,17 @@ static void impl_destroy(GtkObject * object)
 		g_source_remove(priv->layout_idle_id);
 
 	g_free(priv);
-}
-
+} 
 static void class_init(ESplashClass * klass)
 {
+#ifdef USE_GTK_3
+	GtkWidgetClass *object_class;
+	object_class = GTK_WIDGET_CLASS(klass);
+#else
 	GtkObjectClass *object_class;
-
 	object_class = GTK_OBJECT_CLASS(klass);
+#endif
+
 	object_class->destroy = impl_destroy;
 
 	parent_class = g_type_class_ref(gtk_window_get_type());
@@ -298,18 +302,19 @@ button_press_event(GtkWidget * widget, GdkEventButton * event,
 gboolean
 expose_event_callback (GtkWidget *widget, GdkEventExpose *event, gpointer data)
 {
+#ifndef USE_GTK_3
 	ESplashPrivate *priv = (ESplashPrivate *) data;
 	GtkWidget *canvas = widget;
 	GList *p;
 
 	/* draws main image */
-	gdk_draw_pixbuf(canvas->window,
-			canvas->style->fg_gc[GTK_WIDGET_STATE(canvas)],
+	gdk_draw_pixbuf(gtk_widget_get_window (canvas),
+			NULL,
 			GDK_PIXBUF(priv->splash_image_pixbuf),
 			0, 0, 0, 0,
 			gdk_pixbuf_get_width(priv->splash_image_pixbuf),
 			gdk_pixbuf_get_height(priv->splash_image_pixbuf),
-			GDK_RGB_DITHER_MAX,
+			2,
 			0, 0);
 
 	/* draws each of the small icons */
@@ -318,8 +323,8 @@ expose_event_callback (GtkWidget *widget, GdkEventExpose *event, gpointer data)
 
 		icon = (Icon *) p->data;
 
-		gdk_draw_pixbuf(canvas->window,
-				canvas->style->fg_gc[GTK_WIDGET_STATE(canvas)],
+		gdk_draw_pixbuf(gtk_widget_get_window (canvas),
+				NULL,
 				GDK_PIXBUF(icon->light ?
 					   icon->light_pixbuf : icon->dark_pixbuf),
 				0, 0,
@@ -327,10 +332,12 @@ expose_event_callback (GtkWidget *widget, GdkEventExpose *event, gpointer data)
 				icon->y,
 				gdk_pixbuf_get_width(icon->light_pixbuf),
 				gdk_pixbuf_get_height(icon->light_pixbuf),
-				GDK_RGB_DITHER_MAX,
+				2,
 				0, 0);
 	}
 	return TRUE;
+#endif
+    return FALSE;
 }
 
 
@@ -385,7 +392,7 @@ e_splash_construct(ESplash * splash, GdkPixbuf * splash_image_pixbuf)
 	gtk_widget_show(GTK_WIDGET(priv->progressbar));
 	gtk_box_pack_start((GtkBox *)vbox, GTK_WIDGET(priv->progressbar),FALSE,TRUE,0);
 
-	g_signal_connect(GTK_OBJECT(splash), "button-press-event",
+	g_signal_connect(G_OBJECT(splash), "button-press-event",
 			 G_CALLBACK(button_press_event), splash);
 
 	gtk_window_set_decorated(GTK_WINDOW(splash), FALSE);
@@ -491,6 +498,7 @@ e_splash_set_icon_highlight(ESplash * splash,
 
 	g_return_if_fail(splash != NULL);
 	g_return_if_fail(E_IS_SPLASH(splash));
+	if (num >= splash->priv->num_icons) return;	// no noisy logging
 
 	if (!splash)
 		return;
@@ -512,8 +520,8 @@ e_splash_set_icon_highlight(ESplash * splash,
 	rectangle.height = gdk_pixbuf_get_height(icon->light_pixbuf);
 
 	canvas = GTK_WIDGET(priv->canvas);
-	gdk_window_invalidate_rect(canvas->window, &rectangle, TRUE);
-	gdk_window_process_updates(canvas->window, TRUE);
+	gdk_window_invalidate_rect(gtk_widget_get_window (canvas), &rectangle, TRUE);
+	gdk_window_process_updates(gtk_widget_get_window (canvas), TRUE);
 }
 
 E_MAKE_TYPE(e_splash, "ESplash", ESplash, class_init, init, PARENT_TYPE)
@@ -594,3 +602,73 @@ gboolean gui_splash_done()
 	}
 	return FALSE;
 }
+
+#else
+         
+GtkWidget *splash; 
+GtkWidget *progressbar; 
+GtkWidget *image1; 
+GtkWidget *image2;
+GtkWidget *image3;
+GtkWidget *image4;
+    
+gboolean gui_splash_done(void)
+{
+	if (settings.showsplash) {
+		sync_windows();
+		/*g_object_unref(splash);*/
+		gtk_widget_destroy(splash);
+	}
+	return FALSE;
+}
+
+void gui_splash_step(gchar *text, gdouble progress, gint step)
+{
+	if (settings.showsplash) {
+		gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar),
+					  text);
+		gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar),
+					      progress);
+		
+		sync_windows();
+	}
+}
+
+void gui_splash_init (void)
+{
+	gchar *builder_file;
+	GtkBuilder *builder;
+	GError* error = NULL;
+	
+        if (!settings.showsplash) return;
+	
+	builder_file = gui_general_user_file ("xi-splash.ui", FALSE);    
+	g_return_if_fail ((builder_file != NULL));
+	
+	builder = gtk_builder_new ();
+	if (!gtk_builder_add_from_file (builder, builder_file, &error))
+	{
+		g_warning ("Couldn't load builder file: %s", error->message);
+		g_error_free (error);
+	}
+
+	/* This is important */
+	splash = GTK_WIDGET (gtk_builder_get_object (builder, "window")); 
+	image1 = GTK_WIDGET (gtk_builder_get_object (builder, "image2"));
+	image2 = GTK_WIDGET (gtk_builder_get_object (builder, "image3")); 
+	image3 = GTK_WIDGET (gtk_builder_get_object (builder, "image4"));
+	image4 = GTK_WIDGET (gtk_builder_get_object (builder, "image5"));
+	progressbar = GTK_WIDGET (gtk_builder_get_object (builder, "progressbar1"));    
+	gtk_progress_bar_set_show_text (GTK_PROGRESS_BAR(progressbar),TRUE);
+	
+	
+	gtk_builder_connect_signals (builder, NULL);
+
+	g_object_unref (builder);
+	
+
+	
+	
+	
+}
+#endif  /* !USE_GTK_3 */

@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * commentary.c - gui for commentary modules
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,18 +25,13 @@
 
 #include <errno.h>
 #include <gtk/gtk.h>
-
-
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "gecko/gecko-html.h"
-#endif
-#else
+#ifdef GTKHTML
 #include <gtkhtml/gtkhtml.h>
 #include "gui/html.h"
 #endif
+
+
+#include "../xiphos_html/xiphos_html.h"
 
 #include "gui/dialog.h"
 #include "gui/commentary.h"
@@ -94,7 +89,7 @@ void access_to_edit_percomm()
 
 
 
-#ifndef USE_GTKMOZEMBED
+#ifndef USE_XIPHOS_HTML
 /******************************************************************************
  * Name
  *  on_comm_button_press_event
@@ -121,7 +116,7 @@ static gboolean on_comm_button_press_event(GtkWidget * widget,
 	case 2:
 		break;
 	case 3:
-    		gui_menu_popup (settings.CommWindowModule, NULL);
+    		gui_menu_popup (NULL, settings.CommWindowModule, NULL);
 		break;
 	}
 	return FALSE;
@@ -213,9 +208,9 @@ static gboolean on_comm_button_release_event(GtkWidget * widget,
 //#endif /* GTKHTML */
 	return FALSE;
 }
-#endif /* !USE_GTKMOZEMBED */
+#endif /* !USE_XIPHOS_HTML */
 
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 static gboolean on_enter_notify_event(GtkWidget * widget,
 				      GdkEventCrossing * event,
 				      gpointer user_data)
@@ -229,11 +224,12 @@ static gboolean on_enter_notify_event(GtkWidget * widget,
 
 
 static void
-_popupmenu_requested_cb (GeckoHtml *html,
+_popupmenu_requested_cb (XiphosHtml *html,
 			     gchar *uri,
 			     gpointer user_data)
 {
-    	gui_menu_popup (settings.CommWindowModule, NULL);
+	//g_print ("in comm _popupmenu_requested_cb\n");
+    	gui_menu_popup (html, settings.CommWindowModule, NULL);
 }
 #endif
 
@@ -256,39 +252,32 @@ _popupmenu_requested_cb (GeckoHtml *html,
 GtkWidget *gui_create_commentary_pane(void)
 {
 	GtkWidget *box_comm;
-#ifdef USE_GTKMOZEMBED
-	GtkWidget *eventbox1;
-#else
 	GtkWidget *scrolledwindow;
-#endif
+
 	box_comm = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(box_comm);
 
-#ifdef USE_GTKMOZEMBED
-	eventbox1 = gtk_event_box_new ();
-	gtk_widget_show (eventbox1);
+	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_show(scrolledwindow);
 	gtk_box_pack_start(GTK_BOX(box_comm),
-			   eventbox1, TRUE,
+			   scrolledwindow, TRUE,
 			   TRUE, 0);
-	widgets.html_comm = GTK_WIDGET(gecko_html_new(NULL, FALSE, COMMENTARY_TYPE));
+#ifdef USE_XIPHOS_HTML
+	widgets.html_comm = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, COMMENTARY_TYPE));
 	gtk_widget_show(widgets.html_comm);
-	gtk_container_add(GTK_CONTAINER(eventbox1),
+	gtk_container_add(GTK_CONTAINER(scrolledwindow),
 			 widgets.html_comm);
 
 	g_signal_connect((gpointer)widgets.html_comm,
 		      "popupmenu_requested",
 		      G_CALLBACK (_popupmenu_requested_cb),
 		      NULL);
-	g_signal_connect ((gpointer) eventbox1, "enter_notify_event",
+	g_signal_connect ((gpointer) scrolledwindow, "enter_notify_event",
 		    G_CALLBACK (on_enter_notify_event),
 		    NULL);
 
 #else
-	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_show(scrolledwindow);
-	gtk_box_pack_start(GTK_BOX(box_comm),
-			   scrolledwindow, TRUE,
-			   TRUE, 0);
+
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow),
 				       GTK_POLICY_AUTOMATIC,
@@ -300,23 +289,23 @@ GtkWidget *gui_create_commentary_pane(void)
 	gtk_widget_show(widgets.html_comm);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
 			  widgets.html_comm);
-	g_signal_connect(GTK_OBJECT(widgets.html_comm), "link_clicked",
+	g_signal_connect(G_OBJECT(widgets.html_comm), "link_clicked",
 				   G_CALLBACK(gui_link_clicked),
 				   NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_comm), "on_url",
+	g_signal_connect(G_OBJECT(widgets.html_comm), "on_url",
 				   G_CALLBACK(gui_url),
 				   GINT_TO_POINTER(COMMENTARY_TYPE));
-	g_signal_connect(GTK_OBJECT(widgets.html_comm),
+	g_signal_connect(G_OBJECT(widgets.html_comm),
 				   "button_press_event",
 				   G_CALLBACK
 				   (on_comm_button_press_event),
 				   NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_comm),
+	g_signal_connect(G_OBJECT(widgets.html_comm),
 				   "button_release_event",
 				   G_CALLBACK
 				   (on_comm_button_release_event),
 				   NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_comm),
+	g_signal_connect(G_OBJECT(widgets.html_comm),
 			   "url_requested",
 			   G_CALLBACK(url_requested), NULL);
 #endif

@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * parallel_view.h - support for displaying multiple modules
  *
- * Copyright (C) 2004-2010 Xiphos Developer Team
+ * Copyright (C) 2004-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

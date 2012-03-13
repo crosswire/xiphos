@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * tabbed_browser.h - functions to facilitate tabbed browsing of different passages at once
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,13 +29,12 @@ extern "C" {
 #include <gtk/gtk.h>
 #include "main/tab_history.h"
 
-#define	TABHISTORYLENGTH	25
+#define	TABHISTORYLENGTH	40
 
 struct _passage_tab_info {
 	GtkWidget *page_widget;
 	GtkLabel *tab_label;
 	GtkWidget *button_close;
-	GtkWidget *close_pixmap;
 	GtkWidget *editor;
 	GtkWidget *paratab;
 	gchar *text_mod;
@@ -66,6 +65,7 @@ extern PASSAGE_TAB_INFO *cur_passage_tab;
 
 void gui_save_tabs(const gchar *filename);
 void gui_load_tabs(const gchar *filename);
+void gui_select_nth_tab(gint page_num);
 void gui_set_tab_label(const gchar *key, gboolean one_tab);
 void gui_set_named_tab_label(const gchar *key, PASSAGE_TAB_INFO *pt, gboolean update);
 void gui_open_module_in_new_tab(gchar *module);
@@ -88,9 +88,6 @@ void gui_open_tabs(void);
 
 void gui_notebook_main_setup(int tabs, const char *tabsfile);
 void gui_notebook_main_shutdown(int tabs);
-/*void gui_notebook_main_switch_page(GtkNotebook * notebook,
-					GtkNotebookPage * page,
-					gint page_num, GList **tl);*/
 
 void gui_tab_set_showtexts(int show);
 void gui_tab_set_showpreview(int show);
@@ -102,11 +99,18 @@ void on_notebook_main_new_tab_clicked(GtkButton *button, gpointer user_data);
 
 extern gboolean change_tabs_no_redisplay;
 
-void gui_recompute_shows(void);
+void gui_recompute_shows(gboolean flush);
 void gui_recompute_view_menu_choices(void);
 void setup_book_editor_tab(PASSAGE_TAB_INFO *pt);
 GString *pick_tab_label(PASSAGE_TAB_INFO *pt);
-void gui_notebook_main_switch_page(GtkNotebook * notebook, GtkNotebookPage * page, gint page_num, GList **tl);
+#ifdef USE_GTK_3
+void gui_notebook_main_switch_page(GtkNotebook * notebook, 
+                                   gpointer arg1, gint page_num, GList **tl);
+#else
+void gui_notebook_main_switch_page(GtkNotebook * notebook,
+					 GtkNotebookPage * page,
+					 gint page_num, GList **tl);
+#endif
 
 #ifdef __cplusplus
 }

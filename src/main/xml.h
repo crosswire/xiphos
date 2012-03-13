@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * xml.h -
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,10 +22,11 @@
 #ifndef __XML_H__
 #define __XML_H__
 
+#include <libxml/parser.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-#include <libxml/parser.h>
 
 void xml_add_new_section_to_settings_doc(char * section);
 void xml_new_bookmark_file(void);
