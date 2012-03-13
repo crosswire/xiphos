@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * about_xiphos.c - Xiphos about dialog
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -54,7 +54,6 @@ static const gchar *documenters[] = {
     "Peter von Kaehne",
     "Karl Kleinpaste",
     "Matthew Talbert",
-    "Peter von Kaehne",
     "Simon Meers",
     NULL
 };
@@ -110,10 +109,14 @@ gui_create_about_xiphos(void)
 
 	snprintf
 	    (versionbuild, 120, "%s-%s", VERSION,
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_WEBKIT  
+	     "webkit"
+#else    
+  #ifdef USE_GTKMOZEMBED
 	     "mozembed"
-#else
+  #else    
 	     "gtkhtml3"
+  #endif
 #endif
 		);
 
@@ -127,12 +130,14 @@ gui_create_about_xiphos(void)
 	    (GTK_ABOUT_DIALOG (about1), versionbuild);
 	gtk_about_dialog_set_copyright
 	    (GTK_ABOUT_DIALOG (about1),
-	     _("Copyright 2000-2010 Xiphos Development Team"));
+	     _("Copyright © 2000-2011 Xiphos Development Team"));
 	gtk_about_dialog_set_comments
 	    (GTK_ABOUT_DIALOG (about1),
 	     _("(formerly known as GnomeSword)\n\nPowered by The SWORD Project.\nWe would like to thank Troy Griffitts and all the other folks who have given us The SWORD Project."));
+#ifndef WIN32
 	gtk_about_dialog_set_website
 	    (GTK_ABOUT_DIALOG (about1), "http://xiphos.org/");
+#endif
 	gtk_about_dialog_set_authors
 	    (GTK_ABOUT_DIALOG (about1), authors);
 	gtk_about_dialog_set_documenters

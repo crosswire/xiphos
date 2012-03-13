@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * sidebar_dialog.c - dialog for detached sidebar
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,13 +39,7 @@
 
 #include "gui/debug_glib_null.h"
 
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "gecko/gecko-html.h"
-#endif
-#endif
+#include "../xiphos_html/xiphos_html.h"
 
 static GtkWidget* create_sidebar_dialog(void);
 static GtkWidget * vbox_dock;
@@ -82,9 +76,9 @@ void gui_attach_detach_sidebar(void)
 				       biblepanesize);*/
 		
 		/* ugly fix until someone can make mozembed work with 'gtk_widget_reparent()' */
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 		gtk_widget_destroy(sidebar.html_viewer_widget);
-		sidebar.html_viewer_widget = GTK_WIDGET(gecko_html_new(NULL, FALSE, SB_VIEWER_TYPE));
+		sidebar.html_viewer_widget = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, SB_VIEWER_TYPE));
 		gtk_container_add(GTK_CONTAINER(sidebar.html_viewer_eventbox), sidebar.html_viewer_widget);
 #endif
 		/* */
@@ -104,9 +98,9 @@ void gui_attach_detach_sidebar(void)
 				    widgets.epaned);
 		
 		/* ugly fix until someone can make mozembed work with 'gtk_widget_reparent()' */
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 		gtk_widget_destroy(sidebar.html_viewer_widget);
-		sidebar.html_viewer_widget = GTK_WIDGET(gecko_html_new(NULL, FALSE, SB_VIEWER_TYPE));
+		sidebar.html_viewer_widget = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, SB_VIEWER_TYPE));
 		gtk_container_add(GTK_CONTAINER(sidebar.html_viewer_eventbox), sidebar.html_viewer_widget);
 #endif
 		gtk_widget_show(sidebar.html_viewer_widget);
@@ -136,7 +130,7 @@ void gui_attach_detach_sidebar(void)
  *   void
  */
 
-static void on_dialog_destroy(GtkObject *object, gpointer user_data)
+static void on_dialog_destroy(GObject *object, gpointer user_data)
 {
 	/* we need the if to prevent a loop */
 	if (!settings.docked)

@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * sword_main.cc -
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -64,15 +64,19 @@ static const char *f_message = "backend/sword_main.cc line #%d \"%s\" = %s";
 
 BackEnd::BackEnd()
 {
+#ifdef DEBUG
 	GTimer *t;
 	double d;
 	t = g_timer_new();
+#endif
 
 	main_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
 
+#ifdef DEBUG
 	g_timer_stop(t);
 	d = g_timer_elapsed(t, NULL);
 	GS_message(("create main_mgr time is %f", d));
+#endif
 
 	display_mod = NULL;
 	tree_key = NULL;
@@ -649,10 +653,14 @@ int BackEnd::module_get_testaments(const char * module_name)
 	return -1;
 }
 
-char *BackEnd::get_entry_attribute(const char *level1, const char *level2, const char *level3)
+char *BackEnd::get_entry_attribute(const char *level1,
+				   const char *level2,
+				   const char *level3,
+				   bool render)
 {
 	UTF8HTML u2html;
-	display_mod->RenderText();
+	if (render)
+		display_mod->RenderText();
 	SWBuf attribute2 = display_mod->getEntryAttributes()[level1][level2][level3].c_str();
 
 	u2html.processText(attribute2);

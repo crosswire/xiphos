@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * export_dialog.c -
  *
- * Copyright (C) 2008-2010 Xiphos Developer Team
+ * Copyright (C) 2008-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,10 +23,11 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-//#ifdef USE_EXPORTER
 
 #include <gtk/gtk.h>
-#include <glade/glade-xml.h>
+#ifndef USE_GTKBUILDER
+  #include <glade/glade-xml.h>
+#endif
 
 #include "gui/export_dialog.h"
 #include "gui/dialog.h"
@@ -52,6 +53,7 @@ struct _export_dialog {
 	GtkWidget *rb_chapter;
 	GtkWidget *rb_verse;
 	GtkWidget *rb_multi_verse;
+	GtkWidget *cb_versenum;
 	GtkWidget *rb_html;
 	GtkWidget *rb_plain;
 	GtkWidget *lb_version;
@@ -93,7 +95,7 @@ void on_filechooserdialog_response(GtkDialog * fdialog,
 {
 
 	switch (response_id) {
-	case GTK_RESPONSE_OK:
+	case GTK_RESPONSE_ACCEPT:
 		edata.filename = g_strdup(gtk_file_chooser_get_filename(filesel));
 
 		if (d.format)
@@ -128,24 +130,40 @@ void on_filechooserdialog_response(GtkDialog * fdialog,
 
 void _get_export_filename(void)
 {
+#ifndef USE_GTKBUILDER
 	gchar *glade_file;
 	GladeXML *gxml;
+#endif
 	GtkWidget *fdialog;
 	filename = NULL;
 
-	glade_file = gui_general_user_file("export-dialog.glade", FALSE);
+#ifndef USE_GTKBUILDER
+	glade_file = gui_general_user_file("export-dialog" UI_SUFFIX, FALSE);
 	g_return_if_fail(glade_file != NULL);
 	GS_message(("%s",glade_file));
+#endif
 
 	/* build the widget */
+#ifdef USE_GTKBUILDER
+	fdialog = gtk_file_chooser_dialog_new ("Save Export File",
+				      NULL,
+				      GTK_FILE_CHOOSER_ACTION_SAVE,
+				      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+				      GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT,
+				      NULL);	
+#else
 	gxml = glade_xml_new(glade_file, "filechooserdialog1", NULL);
 
 	fdialog =  glade_xml_get_widget (gxml, "filechooserdialog1");
+#endif
 	g_signal_connect(fdialog,
 			 "response",
 			 G_CALLBACK(on_filechooserdialog_response),
 			 (GtkFileChooser *)fdialog);
 
+#ifdef USE_GTKBUILDER
+	gtk_dialog_run (GTK_DIALOG (fdialog));
+#endif
 }
 
 /******************************************************************************
@@ -185,6 +203,8 @@ void on_dialog_export_passage_response(GtkDialog * dialog,
 			 : gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(d.rb_chapter)) ? CHAPTER
 			 : gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(d.rb_verse)) ? VERSE
 			 : VERSE_RANGE;
+
+		edata.verse_num = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(d.cb_versenum));
 
 		if (edata.passage_type == VERSE_RANGE) {
 			edata.start_verse =
@@ -238,6 +258,8 @@ void on_dialog_export_passage_response(GtkDialog * dialog,
  *   gint
  */
 
+#define	OP_NAME	"Warned about License for Export"
+
 gint _check_for_distribution_license(gchar * mod_name)
 {
 	gchar *distributionlicense;
@@ -263,8 +285,12 @@ gint _check_for_distribution_license(gchar * mod_name)
 	if (!distributionlicense || (distributionlicense &&
 				          g_strstr_len(distributionlicense,
 					  strlen(distributionlicense),
-					  "Copyrighted"))) {
-		gui_generic_warning(_("Please check copyright before exporting!"));
+					  "Copyright"))) {
+		if (main_get_one_option(mod_name, OP_NAME) == 0) {
+			gui_generic_warning(_("Please check copyright before exporting!"));
+			main_save_module_options(mod_name, OP_NAME, 1);
+		}
+		
 		return 1;
 	}
 
@@ -276,14 +302,9 @@ static
 void on_rb_multi_verse_toggled (GtkToggleButton *togglebutton,
                                 gpointer user_data)
 {
-	if (togglebutton->active) {
-		gtk_widget_set_sensitive (d.sb_start_verse, TRUE);
-		gtk_widget_set_sensitive (d.sb_end_verse, TRUE);
-
-	} else {
-		gtk_widget_set_sensitive (d.sb_start_verse, FALSE);
-		gtk_widget_set_sensitive (d.sb_end_verse, FALSE);
-	}
+	gint state = gtk_toggle_button_get_active(togglebutton);
+	gtk_widget_set_sensitive(d.sb_start_verse, state);
+	gtk_widget_set_sensitive(d.sb_end_verse, state);
 }
 
 
@@ -305,38 +326,52 @@ void on_rb_multi_verse_toggled (GtkToggleButton *togglebutton,
 
 void gui_export_dialog(void)
 {
-	gchar *glade_file;
+#ifdef USE_GTKBUILDER
+	GtkBuilder *gxml;
+#else
 	GladeXML *gxml;
+#endif
 	gint dist_license, curVerse;
 	gdouble max;
+	char *ref;
 
-
-	dist_license = _check_for_distribution_license(settings.MainWindowModule);
-
-	glade_file = gui_general_user_file("export-dialog.glade", FALSE);
+	gchar *glade_file = gui_general_user_file("export-dialog" UI_SUFFIX, FALSE);
 	g_return_if_fail(glade_file != NULL);
 	GS_message(("%s",glade_file));
 
-	/* build the widget */
-	gxml = glade_xml_new(glade_file, "dialog_export_passage", NULL);
+	dist_license = _check_for_distribution_license(settings.MainWindowModule);
 
-	dialog =  glade_xml_get_widget (gxml, "dialog_export_passage");
+	/* build the widget */
+#ifdef USE_GTKBUILDER
+	gxml = gtk_builder_new ();
+	gtk_builder_add_from_file(gxml, glade_file, NULL);
+#else
+	gxml = glade_xml_new(glade_file, "dialog_export_passage", NULL);
+#endif
+	
+	dialog = UI_GET_ITEM(gxml, "dialog_export_passage");
+
+	d.rb_book = UI_GET_ITEM(gxml, "radiobutton1");
+	d.rb_chapter = UI_GET_ITEM(gxml, "radiobutton2");
+	d.rb_verse = UI_GET_ITEM(gxml, "radiobutton3");
+	d.rb_multi_verse = UI_GET_ITEM(gxml, "rb_multi_verse");
+	d.cb_versenum = UI_GET_ITEM(gxml, "check_versenum");
+	d.rb_html = UI_GET_ITEM(gxml, "radiobutton4");
+	d.rb_plain = UI_GET_ITEM(gxml, "radiobutton5");
+	d.rb_copy = UI_GET_ITEM(gxml, "rb_copy");
+	d.rb_export = UI_GET_ITEM(gxml, "rb_export");
+	d.lb_version = UI_GET_ITEM(gxml, "label3");
+	d.lb_key = UI_GET_ITEM(gxml, "label4");
+	d.sb_start_verse = UI_GET_ITEM(gxml, "sb_start_verse");
+	d.sb_end_verse = UI_GET_ITEM(gxml, "sb_end_verse");
+	d.warning_label = UI_GET_ITEM(gxml, "hbox2");
+
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(d.rb_copy), TRUE);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(d.rb_multi_verse), TRUE);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(d.rb_plain), TRUE);
+
 	g_signal_connect(dialog, "response",
 			 G_CALLBACK(on_dialog_export_passage_response), NULL);
-
-	d.rb_book = glade_xml_get_widget(gxml, "radiobutton1");
-	d.rb_chapter = glade_xml_get_widget(gxml, "radiobutton2");
-	d.rb_verse = glade_xml_get_widget(gxml, "radiobutton3");
-	d.rb_multi_verse = glade_xml_get_widget(gxml, "rb_multi_verse");
-	d.rb_html = glade_xml_get_widget(gxml, "radiobutton4");
-	d.rb_plain = glade_xml_get_widget(gxml, "radiobutton5");
-	d.rb_copy = glade_xml_get_widget(gxml, "rb_copy");
-	d.rb_export = glade_xml_get_widget(gxml, "rb_export");
-	d.lb_version = glade_xml_get_widget(gxml, "label3");
-	d.lb_key = glade_xml_get_widget(gxml, "label4");
-	d.sb_start_verse = glade_xml_get_widget(gxml, "sb_start_verse");
-	d.sb_end_verse = glade_xml_get_widget(gxml, "sb_end_verse");
-	d.warning_label = glade_xml_get_widget(gxml, "hbox2");
 
 	max = main_get_max_verses ();
 	gtk_spin_button_set_range (GTK_SPIN_BUTTON (d.sb_start_verse),
@@ -351,6 +386,11 @@ void gui_export_dialog(void)
 	gtk_widget_set_sensitive (d.sb_start_verse, FALSE);
 	gtk_widget_set_sensitive (d.sb_end_verse, FALSE);
 
+	/* experiment: hide single verse option; subsumed into multi-verse. */
+	gtk_widget_hide(d.rb_verse);
+	gtk_widget_set_sensitive(d.sb_start_verse, TRUE);
+	gtk_widget_set_sensitive(d.sb_end_verse, TRUE);
+	/* end experiment. */
 
 	if (dist_license) {
 		gtk_widget_show(d.warning_label);
@@ -361,12 +401,11 @@ void gui_export_dialog(void)
 	}
 
 	gtk_label_set_text (GTK_LABEL(d.lb_version), settings.MainWindowModule);
-	gtk_label_set_text (GTK_LABEL(d.lb_key), settings.currentverse);
+	ref = (char *)main_getText(settings.currentverse);
+	gtk_label_set_text (GTK_LABEL(d.lb_key), ref);
+	g_free(ref);
 
 	g_signal_connect ((gpointer) d.rb_multi_verse, "toggled",
 		    G_CALLBACK (on_rb_multi_verse_toggled),
 		    NULL);
-
-
 }
-//#endif

@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * configs.h -
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,10 +30,9 @@ typedef struct _mod_font MOD_FONT;
 struct  _mod_font {
 	const char *mod_name;
 	char *old_font;
-	char *old_gdk_font;
 	const char *new_font;
-	const char *new_gdk_font;
 	char *old_font_size;
+	int old_font_size_value;
 	const char *new_font_size;
 	int no_font;
 };

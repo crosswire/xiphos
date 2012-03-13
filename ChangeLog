@@ -1,6 +1,190 @@
+2012-02-19  karl <charcoal@users.sf.net>
+
+	* 3.1.5 release.
+
+2012-02-18  karl <charcoal@users.sf.net>
+
+	* remove wscript's svn version. temp-hack makeDistro.sh configuration.
+	* add code to handle *XHTML filters, and to restore post-process n=X
+	  if Sword has not been updated.
+
+2012-02-14  karl <charcoal@users.sf.net>
+
+	* big code simplification to avoid overuse of #ifdef USE_GTKBUILDER.
+	  (UI_GET_ITEM & UI_SUFFIX in src/gui/utilities.h.)
+	* add per-module option so user can choose setRenderNoteNumbers().
+
+2012-02-09  karl <charcoal@users.sf.net>
+
+	* fix a bunch of USE_GTKMOZEMBED -vs- USE_XIPHOS_HTML glitches.
+	* use setRenderNoteNumbers() from recent Sword update.
+
+2012-02-06  karl <charcoal@users.sf.net>
+
+	* put "general" prefs at top of dialog.
+	* correct "Open" (was "Save As") in slib-editor.
+
+2012-02-05  karl <charcoal@users.sf.net>
+
+	* correct horrific excess RenderText() usage during footnote naming.
+
+2012-01-30  karl <charcoal@users.sf.net>
+
+	* put module name inside font spec of 1-verse Parallel View display.
+	* be much (yet trivially) smarter about saved x/y coordinates.
+
+2012-01-15  karl <charcoal@users.sf.net>
+
+	* integrated mwtalbert's WIN32 image patch with modifications,
+	  including disabling WIN32 users' access to resize preference.
+
+2012-01-12  karl <charcoal@users.sf.net>
+
+	* patch around new webkit WIN32 lack of "file:" in <img src="...">.
+	* fix verse-per-line display glitch in webkit.
+	* substitute GTK_STOCK_ADD for image name, because that image
+	  seems not to exist in all GTK installations.
+
+2012-01-10  karl <charcoal@users.sf.net>
+
+	* missing verse anchor + current verse <hr> to commentary by chapter.
+
+2011-12-19  karl <charcoal@users.sf.net>
+
+	* added Ctrl-[1-9] to select Nth tab.
+	* lengthened history from 25 to 40.
+	* apply proper font specs to adv.search display.
+	* vastly simplified font size references (one calculation, many refs).
+	* alter bible context boundary: vv.1,2 anchored at chapter beginning.
+	* eliminate context boundary when base font size is large.	
+	* only bible texts get green current verse in full-chapter parallel.
+
+2011-12-12  karl <charcoal@users.sf.net>
+
+	* Mark__T's splash fixes.
+
+2011-11-26  karl <charcoal@users.sf.net>
+
+	* apply proper font to modules' About boxes, to correct for
+	  different X servers' (e.g. "non-free" nVidia's) very peculiar
+	  choices for default font interpretation.
+	* also for Previewer re-init during fore/background switch.
+
+2011-11-19  karl <charcoal@users.sf.net>
+
+	* Mark__T's gtk pre-2.20 compatibility patch.
+
+2011-10-20  karl <charcoal@users.sf.net>
+
+	* Mark__T's changes for tab "new" and "close" buttons.
+
+2011-10-13  karl <charcoal@users.sf.net>
+
+	* fixed erroneous comm -vs- book display during font size change.
+
+2011-10-02  karl <charcoal@users.sf.net>
+
+	* added (in|ex)clusion option for verse#s in copy/export.
+
+2011-09-24  terry  <tbiggs@users.sf.net>
+
+	* Added scroll bars to adv search previewer for webkit build
+
+2011-09-24  karl <charcoal@users.sf.net>
+
+	* darker green current verse.
+	* re-arrange prefs->options display order.
+	* feat.req #3168708 more tweaks to export format, mostly single-verse.
+	* add Ctrl-0 to force base font size to 0.
+	* make footnotes, xrefs, and headings default to On.
+
+2011-09-24  terry  <tbiggs@users.sf.net>
+
+	* customization improvement: single line of verse# selectors.
+
+2011-09-20  karl <charcoal@users.sf.net>
+
+	* fix #3411260 add gconf to wscript for explicit detection.
+	* tidy up passage export whitespace formatting; correct an html error.
+	* fix #3384710 bad sidebar search implicit AND construction.
+	* fix #3400041 correct startup previewer show-or-not.
+	* feat.req #3210164 verse number display customization.
+
+2011-09-02  karl <charcoal@users.sf.net>
+
+	* avoid crash due to deleted module ref in <parallels> list.
+	* update export: re-work a lot of options stuff; eliminate dialog
+	  sensitivity; make license query dialog happen once with
+	  permanent modops memory so we never ask again.
+
+2011-08-14  karl <charcoal@users.sf.net>
+
+	* do away with 1-verse context in full-chapter parallel window.
+
+2011-08-03  karl <charcoal@users.sf.net>
+
+	* pass parallel texts and previewer through AnalyzeForImageSize.
+	* avoid "widowed" verse numbers by forcing connection to 1st word with &nbsp;.
+
+2011-07-09  karl <charcoal@users.sf.net>
+
+	* several RtoL fixes: HTML_START and comm-by-chapter verse output order.
+
+2011-06-30  terry  <tbiggs@users.sf.net>
+
+	* fixed studypad to honor 'settings.studypaddir'
+
+2011-06-29  karl <charcoal@users.sf.net>
+
+	* resurrect functioning bookmark xml functions.
+	* eliminate dead "removed bookmarks" code.
+	* copyright update.
+	* tidy up "about xiphos" window.
+	* add content flush right after startup to avoid webkit black flash.
+
+2011-06-27  Terry Biggs  <tbiggs@users.sf.net>
+
+	* add gtkbuilder files to install.
+	* resurrect gtkhtml3.
+	* fix #3166491 now able to open studypad, pers.comm., and journal.
+	* Fedora15 compatibility (warnings elimination).
+
+2011-06-25  karl <charcoal@users.sf.net>
+
+	* add base font respect to parallel view tab and detached parallel window.
+	* silence a few warnings.
+	* fix #3302253 update manual, re: parallel view tab configuration.
+	* use correct highlight for found words in webkit.
+	* fix black adv.search results.
+	* dispose of as much "gdk font" stuff as possible.
+	* correct font selection order: module pref, language pref, conf pref.
+	* adjust macro readability in xiphos-html.h.
+	* stop black flash on tab change.
+	* ignore button-2 in webkit.
+
+2011-06-20  Terry Biggs  <tbiggs@users.sf.net>
+
+	* fixed the double display in the chapter displays
+	* added scrollbars to webkit in the following files:
+	  * src/gnome2/about_modules.c (gui_create_about_modules):
+	  * src/gnome2/bibletext_dialog.c (gui_create_bibletext_dialog):
+	  * src/gnome2/commentary_dialog.c (gui_create_commentary_dialog):
+	  * src/gnome2/dictlex_dialog.c (gui_create_dictlex_dialog):
+	  * src/gnome2/gbs_dialog.c (gui_create_gbs_dialog):
+	
+	* committed work on gtkbuilder and webkit done by
+	   Greg and Terry
+
 2011-05-15  karl <charcoal@users.sf.net>
 
 	* fix #3302627 undo module cache damage to pers.comm. update.
+
+2011-04-06 terry <tbiggs@users.sf.net>
+
+	* EDIT: fix -> work on :)
+	* fix link handling - webkit
+	* fix popup menus  - webkit
+	* fix printing - webkit 
 
 2010-11-06  karl <charcoal@users.sf.net>
 

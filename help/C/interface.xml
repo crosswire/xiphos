@@ -239,13 +239,21 @@
 		<sect3 id="xiphos-bible-parallel">
 			<title>Using the Parallel View Mode</title>
 			<para>
-			A nice function in <application>Xiphos</application> is the ability to view your specified bible text in several
-			parallel translations of your choice. The Parallel View mode can be accessed by selecting <guimenuitem>Parallel
-			View</guimenuitem> just below the <interface>Bible Text Pane</interface>, next to the <guimenuitem>Standard
-			View</guimenuitem> tab. Please note that you can only view one verse at a time in this mode. You can change the
-			verse by selecting another verse, chapter, or book at the toolbar. Also note that modules that are Old Testament or
-			New Testament only (eg Westminster Leningrad Codex and Byzantine Majority Text) will not be able to display books,
-			chapters, or verses that they don't have.  Modules displayed are selected via the Preferences dialog.
+			A nice function in <application>Xiphos</application> is the ability to view your specified bible text in several
+			parallel translations of your choice.  The Parallel View mode can be accessed by selecting <guimenuitem>Parallel
+			View</guimenuitem> just below the <interface>Bible Text Pane</interface>, next to the <guimenuitem>Standard
+			View</guimenuitem> tab.
+			</para>
+			<para>
+			You must choose which modules to display in parallel with the <guibutton>Preferences</guibutton> dialog found under
+			the <guimenuitem>Edit</guimenuitem> menu.  In the dialog, choose Modules, then Parallel.  You can add or subtract
+			from the list of modules that will be shown in the parallel view.  The toolbar gives you a selector tool to erase
+			the list, delete a module from the list, and add modules to the list.
+			</para>
+			<para>
+			The <guimenuitem>Parallel View</guimenuitem> shows just one verse at a time.  You can change the verse by selecting
+			another verse, chapter, or book at the toolbar. Also note that modules that are Old Testament or New Testament only
+			(e.g. Westminster Leningrad Codex, Byzantine Majority Text) will not be able to display books that they don't have.
 			</para>
 		<figure id="parallel_figure">
 			<title>Bible textpane - parallel view</title>
@@ -809,41 +817,40 @@
 		<para>
 		The <application>Xiphos</application> interface has evolved over time, and there are two display libraries with which
 		<application>Xiphos</application> can be built.  The older, less featureful version is called "gtkhtml3", and the newer,
-		more capable version is called "MozEmbed".  Both of these display libraries render text in a browser-like fashion, using HTML
+		more capable version is called "webkit".  Both of these display libraries render text in a browser-like fashion, using HTML
 		constructs to control display.
 		</para>
 
 		<para>
 		Several desirable capabilities are unsupportable in gtkhtml3, and although recent <application>Xiphos</application> is
-		written to take advantage of MozEmbed features, it is possible that the version running on your computer needed to be
-		built with gtkhtml3 instead, either because the version of MozEmbed available for your system is not recent enough to
-		support the needs of <application>Xiphos</application>, or it simply doesn't exist for your system.  (Mozembed is not
-		supported under Windows at this time.)  The following differences will be apparent, depending on whether gtkhtml3 or 
-		MozEmbed is the underlying display engine:
+		written to take advantage of webkit features, it is possible that the version running on your computer needed to be built
+		with gtkhtml3 instead, either because the version of webkit available for your system is not recent enough to support the
+		needs of <application>Xiphos</application>, or it simply doesn't exist for your system.  The following differences will be
+		apparent, depending on whether gtkhtml3 or webkit is the underlying display engine:
 		</para>
 
 		<itemizedlist>
 			<listitem>
 				<para>
 				Morphology and Strong's references, enabled via the right-click menu in some modules, are displayed inline
-				with gtkhtml3; with MozEmbed, a blocked display is used, where these references are aligned beneath the word
+				with gtkhtml3; with webkit, a blocked display is used, where these references are aligned beneath the word
 				to which they refer, for a much more readable, less cluttered display.
 				</para>
 			</listitem>
 			<listitem>
 				<para>
 				Footnote and cross-reference markers (<guibutton>*n</guibutton>, <guibutton>*x</guibutton>) are displayed as
-				proper superscripts in MozEmbed, but not in gtkhtml3.
+				proper superscripts in webkit, but not in gtkhtml3.
 				</para>
 			</listitem>
 			<listitem>
 				<para>
-				Links in gtkhtml3 are necessarily both colored and underlined; in MozEmbed, no underlines are needed.
+				Links in gtkhtml3 are necessarily both colored and underlined; in webkit, no underlines are needed.
 				</para>
 			</listitem>
 			<listitem>
 				<para>
-				Under MozEmbed, double-space display is available using the context menu, but not under gtkhtml3.
+				Under webkit, double-space display is available using the context menu, but not under gtkhtml3.
 				</para>
 			</listitem>
 			<listitem>
@@ -860,14 +867,14 @@
 		which <application>Xiphos</application> was built.
 		</para>
 		<figure id="displib_figure">
-		  <title>Comparison, gtkhtml3 -vs- mozembed</title>
+		  <title>Comparison, gtkhtml3 -vs- webkit</title>
 		  <screenshot> 
 		    <mediaobject> 
 		      <imageobject>
 			<imagedata fileref="figures/gtkhtml3-vs-mozembed.png" format="PNG" /> 
 		      </imageobject>
 		      <textobject> 
-			<phrase>Comparison, gtkhtml3 -vs- mozembed</phrase> 
+			<phrase>Comparison, gtkhtml3 -vs- webkit</phrase> 
 		      </textobject> 
 		   </mediaobject> 
 		  </screenshot>

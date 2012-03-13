@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * parallel_dialog.c - dialog for detached parallel
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,17 +24,14 @@
 #endif
 
 #include <gtk/gtk.h>
-#include <glade/glade-xml.h>
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "gecko/gecko-html.h"
-#endif
-#else
+#ifdef GTKHTML
 #include <gtkhtml/gtkhtml.h>
 #include "gui/html.h"
-#endif  /* USE_GTKMOZEMBED */
+#endif
+#ifndef USE_GTKBUILDER
+  #include <glade/glade-xml.h>
+#endif
+#include "../xiphos_html/xiphos_html.h"
 
 #include "gui/parallel_dialog.h"
 #include "gui/parallel_view.h"
@@ -76,9 +73,9 @@ static GtkWidget *create_parallel_dialog(void);
 static void sync_with_main(void);
 
 
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 static void
-_popupmenu_requested_cb(GeckoHtml *html,
+_popupmenu_requested_cb(XiphosHtml *html,
 			gchar *uri,
 			gpointer user_data)
 {
@@ -179,7 +176,7 @@ void gui_btnDockInt_clicked(GtkButton * button, gpointer user_data)
  *   void
  */
 
-static void on_dlgparallel_destroy(GtkObject * object,
+static void on_dlgparallel_destroy(GObject * object,
 				      gpointer user_data)
 {
 
@@ -246,7 +243,7 @@ static void sync_with_main(void)
 
 void gui_keep_parallel_dialog_in_sync(void)
 {
-	if (GTK_TOGGLE_BUTTON(navbar_parallel.button_sync)->active)
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(navbar_parallel.button_sync)))
 		sync_with_main();
 }
 
@@ -323,7 +320,7 @@ static gboolean on_parallel_configure_event(GtkWidget * widget,
 	gint y;
 
  	gdk_window_get_root_origin(
-	    GDK_WINDOW(dialog_parallel->window), &x, &y);
+	    GDK_WINDOW(gtk_widget_get_window (dialog_parallel)), &x, &y);
 
 	settings.parallel_width  = event->width;
 	settings.parallel_height = event->height;
@@ -372,7 +369,6 @@ GtkWidget *create_parallel_dialog(void)
 	GtkWidget *hbuttonbox4;
 	GtkWidget *btnDockInt;
 #ifdef USE_GTKMOZEMBED
-	GtkWidget *eventbox;
 	GtkWidget *frame;
 #else
 	GtkWidget *scrolled_window;
@@ -391,12 +387,10 @@ GtkWidget *create_parallel_dialog(void)
 				    settings.parallel_height);
 	gtk_window_set_resizable(GTK_WINDOW(dialog_parallel), TRUE);
 
-	dialog_vbox25 = GTK_DIALOG(dialog_parallel)->vbox;
+	dialog_vbox25 = gtk_dialog_get_content_area (GTK_DIALOG(dialog_parallel));
 	g_object_set_data(G_OBJECT(dialog_parallel),
 			  "dialog_vbox25", dialog_vbox25);
 	gtk_widget_show(dialog_vbox25);
-
-
 
 	vboxInt = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vboxInt);
@@ -432,26 +426,8 @@ GtkWidget *create_parallel_dialog(void)
 		}
 	}
 #endif /* 0 */
-
-#ifdef USE_GTKMOZEMBED
-	frame = gtk_frame_new(NULL);
-	gtk_widget_show(frame);
-	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
-	gtk_box_pack_start(GTK_BOX(vboxInt), frame, TRUE, TRUE,0);
-
-	eventbox = gtk_event_box_new ();
-	gtk_widget_show (eventbox);
-	gtk_container_add(GTK_CONTAINER(frame), eventbox);
-
-	widgets.html_parallel_dialog = GTK_WIDGET(gecko_html_new(NULL, FALSE, PARALLEL_TYPE));
-	gtk_widget_show(widgets.html_parallel_dialog);
-	gtk_container_add(GTK_CONTAINER(eventbox),
-			  widgets.html_parallel_dialog);
-	g_signal_connect((gpointer)widgets.html_parallel_dialog,
-			 "popupmenu_requested",
-			 G_CALLBACK (_popupmenu_requested_cb),
-			 NULL);
-#else
+    
+#ifndef  USE_GTKMOZEMBED
 	scrolled_window = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolled_window);
 	gtk_box_pack_start(GTK_BOX(vboxInt), scrolled_window, TRUE, TRUE,0);
@@ -460,22 +436,43 @@ GtkWidget *create_parallel_dialog(void)
 				       GTK_POLICY_ALWAYS);
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolled_window,
                                              settings.shadow_type);
+#endif
+
+#ifdef USE_XIPHOS_HTML
+	widgets.html_parallel_dialog = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, PARALLEL_TYPE));
+	gtk_widget_show(widgets.html_parallel_dialog);
+ #ifdef USE_WEBKIT 
+	gtk_container_add(GTK_CONTAINER(scrolled_window),
+			  widgets.html_parallel_dialog);
+ #else    
+	frame = gtk_frame_new(NULL);
+	gtk_widget_show(frame);
+	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
+	gtk_box_pack_start(GTK_BOX(vboxInt), frame, TRUE, TRUE,0);	
+	gtk_container_add(GTK_CONTAINER(frame),
+			  widgets.html_parallel_dialog);    
+ #endif /* USE_WEBKIT */ 
+	g_signal_connect((gpointer)widgets.html_parallel_dialog,
+			 "popupmenu_requested",
+			 G_CALLBACK (_popupmenu_requested_cb),
+			 NULL);
+#else
 
 	widgets.html_parallel_dialog = gtk_html_new();
 	gtk_widget_show(widgets.html_parallel_dialog);
 	gtk_html_load_empty(GTK_HTML(widgets.html_parallel_dialog));
 	gtk_container_add(GTK_CONTAINER(scrolled_window),
 			  widgets.html_parallel_dialog);
-	g_signal_connect(GTK_OBJECT(widgets.html_parallel_dialog),
+	g_signal_connect(G_OBJECT(widgets.html_parallel_dialog),
 			 "button_release_event",
 			 G_CALLBACK (_popupmenu_requested_cb),
 			 NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_parallel_dialog),
+	g_signal_connect(G_OBJECT(widgets.html_parallel_dialog),
 			 "url_requested",
 			 G_CALLBACK(url_requested), NULL);
 #endif
 	dialog_action_area25 =
-	    GTK_DIALOG(dialog_parallel)->action_area;
+	    gtk_dialog_get_action_area (GTK_DIALOG(dialog_parallel));
 	g_object_set_data(G_OBJECT(dialog_parallel),
 			  "dialog_action_area25",
 			  dialog_action_area25);
@@ -493,13 +490,13 @@ GtkWidget *create_parallel_dialog(void)
 	btnDockInt = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
 	gtk_widget_show(btnDockInt);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox4), btnDockInt);
-	GTK_WIDGET_SET_FLAGS(btnDockInt, GTK_CAN_DEFAULT);
+	gtk_widget_set_can_default (btnDockInt, 1);
 
 
-	g_signal_connect(GTK_OBJECT(dialog_parallel), "destroy",
+	g_signal_connect(G_OBJECT(dialog_parallel), "destroy",
 			   G_CALLBACK(on_dlgparallel_destroy),
 			   NULL);
-	g_signal_connect(GTK_OBJECT(btnDockInt), "clicked",
+	g_signal_connect(G_OBJECT(btnDockInt), "clicked",
 			   G_CALLBACK(gui_btnDockInt_clicked),
 			   NULL);
 

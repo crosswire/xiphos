@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * settings.h - SHORT DESCRIPTION
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -71,6 +71,9 @@ struct _settings {
 
 	int
 		verse_num_font_size,
+		verse_num_bold,		/* verse number customizations */
+		verse_num_bracket,
+		verse_num_superscript,
 		base_font_size,
       		sidebar_width,
 		verselist_toppane_height, /* height of the top pane in the search results window */
@@ -232,6 +235,9 @@ extern SETTINGS settings;
 
 int settings_init(int argc, char **argv, int new_configs, int new_bookmarks);
 void load_settings_structure(void);
+
+/* mostly for verse number customization */
+extern char *bold_start, *bold_end, *superscript_start, *superscript_end;
 
 #ifdef __cplusplus
 }

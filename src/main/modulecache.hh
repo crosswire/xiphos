@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * modulecache.hh -
  *
- * Copyright (C) 2007-2010 Xiphos Developer Team
+ * Copyright (C) 2007-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -45,8 +45,6 @@
 #include <map>
 #include <string>
 
-extern "C" {
-
 namespace ModuleCache {
 
 	// bitwise cache type indicators:
@@ -69,6 +67,7 @@ namespace ModuleCache {
 	static const int Transliteration    = (1<<15);
 	static const int CommentaryChapter  = (1<<16);
 	static const int Doublespace        = (1<<17);
+	static const int XrefNoteNumbers    = (1<<18);
 
 	class CacheVerse {
 	public:
@@ -296,6 +295,7 @@ InvalidateHeader()
 	_header = NULL;
 }
 
+extern "C" {
 #endif	/* __cplusplus */
 
 // namespace-free routines.

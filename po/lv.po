@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-30 15:29-0500\n"
+"POT-Creation-Date: 2011-12-31 01:50-0500\n"
 "PO-Revision-Date: 2010-03-21 01:28+0000\n"
 "Last-Translator: Dmitrijs Ledkovs <dmitrij.ledkov@gmail.com>\n"
 "Language-Team: Latvian <lv@li.org>\n"
@@ -18,14 +18,14 @@ msgstr ""
 "X-Launchpad-Export-Date: 2010-03-22 04:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../src/backend/sword_main.cc:732
+#: ../src/backend/sword_main.cc:736
 msgid ""
 "Xiphos failure: \"can't happen\", display_mod: null\n"
 "Please report this. sword_main.cc:set_treekey\n"
 "What were you doing when this occurred?"
 msgstr ""
 
-#: ../src/backend/sword_main.cc:1083
+#: ../src/backend/sword_main.cc:1087
 msgid "Configuration not found"
 msgstr ""
 
@@ -34,120 +34,119 @@ msgstr ""
 msgid "Page %d of %d"
 msgstr "Lapa %d no %d"
 
-#: ../src/editor/slib-editor.c:391 ../src/editor/slib-editor.c:438
+#: ../src/editor/slib-editor.c:393 ../src/editor/slib-editor.c:435
 msgid "Save As"
 msgstr "Saglabāt kā"
 
-#: ../src/editor/slib-editor.c:409 ../src/editor/slib-editor.c:456
-#: ../src/editor/slib-editor.c:623
+#: ../src/editor/slib-editor.c:453 ../src/editor/slib-editor.c:619
 msgid "Untitled document"
 msgstr "Nenosaukts dokuments"
 
-#: ../src/editor/slib-editor.c:648
+#: ../src/editor/slib-editor.c:644
 msgid "Are you sure you want to delete the note for"
 msgstr ""
 
-#: ../src/editor/slib-editor.c:691
+#: ../src/editor/slib-editor.c:687
 msgid "HTML Output"
 msgstr ""
 
-#: ../src/editor/slib-editor.c:698
+#: ../src/editor/slib-editor.c:694
 msgid "HTML Source"
 msgstr ""
 
-#: ../src/editor/slib-editor.c:705
+#: ../src/editor/slib-editor.c:701
 msgid "Plain Source"
 msgstr ""
 
-#: ../src/editor/slib-editor.c:715 ../ui/editor_note.xml.h:15
+#: ../src/editor/slib-editor.c:711 ../ui/editor_note.xml.h:15
 #: ../ui/editor_studypad.xml.h:21
 msgid "_Print..."
 msgstr "_Drukāt..."
 
-#: ../src/editor/slib-editor.c:722 ../ui/editor_note.xml.h:9
+#: ../src/editor/slib-editor.c:718 ../ui/editor_note.xml.h:9
 #: ../ui/editor_studypad.xml.h:14
 msgid "Print Pre_view"
 msgstr "Drukas pirms_skate"
 
-#: ../src/editor/slib-editor.c:729
+#: ../src/editor/slib-editor.c:725
 msgid "_Quit"
 msgstr "_Iziet"
 
-#: ../src/editor/slib-editor.c:736
+#: ../src/editor/slib-editor.c:732
 msgid "_Open"
 msgstr "_Atvērt"
 
-#: ../src/editor/slib-editor.c:743
+#: ../src/editor/slib-editor.c:739
 msgid "_Save"
 msgstr "_Saglabāt"
 
-#: ../src/editor/slib-editor.c:750
+#: ../src/editor/slib-editor.c:746
 msgid "Save _As..."
 msgstr "Saglabāt _kā..."
 
-#: ../src/editor/slib-editor.c:756
+#: ../src/editor/slib-editor.c:752
 msgid "New"
 msgstr "Jauna"
 
-#: ../src/editor/slib-editor.c:758
+#: ../src/editor/slib-editor.c:754
 msgid "Open new document"
 msgstr ""
 
-#: ../src/editor/slib-editor.c:762
+#: ../src/editor/slib-editor.c:758
 msgid "Delete"
 msgstr "Dzēst"
 
-#: ../src/editor/slib-editor.c:764
+#: ../src/editor/slib-editor.c:760
 msgid "Delete current note"
 msgstr ""
 
-#: ../src/editor/slib-editor.c:769 ../ui/editor_note.xml.h:14
+#: ../src/editor/slib-editor.c:765 ../ui/editor_note.xml.h:14
 #: ../ui/editor_studypad.xml.h:20 ../ui/xi-menus.glade.h:126
 msgid "_File"
 msgstr "_Fails"
 
-#: ../src/editor/slib-editor.c:824
+#: ../src/editor/slib-editor.c:820
 msgid "HTML _Output"
 msgstr ""
 
-#: ../src/editor/slib-editor.c:831
+#: ../src/editor/slib-editor.c:827
 msgid "_HTML Source"
 msgstr ""
 
-#: ../src/editor/slib-editor.c:838
+#: ../src/editor/slib-editor.c:834
 msgid "_Plain Source"
 msgstr ""
 
-#: ../src/editor/slib-editor.c:845 ../ui/xi-menus.glade.h:141
+#: ../src/editor/slib-editor.c:841 ../ui/xi-menus.glade.h:141
 msgid "_View"
 msgstr "_Skats"
 
-#: ../src/editor/slib-editor.c:856 ../ui/editor_note.xml.h:11
+#: ../src/editor/slib-editor.c:852 ../ui/editor_note.xml.h:11
 #: ../ui/editor_studypad.xml.h:16
 msgid "Save"
 msgstr "_Saglabāt"
 
-#: ../src/editor/slib-editor.c:867 ../src/editor/slib-editor.c:874
+#: ../src/editor/slib-editor.c:863 ../src/editor/slib-editor.c:870
 msgid "Insert Link"
 msgstr "Ievietot Saiti"
 
-#: ../src/editor/slib-editor.c:1256 ../src/editor/slib-editor.c:1294
+#: ../src/editor/slib-editor.c:1252 ../src/editor/slib-editor.c:1290
 msgid "Save the changes to document"
 msgstr ""
 
-#: ../src/editor/slib-editor.c:1257 ../src/editor/slib-editor.c:1295
+#: ../src/editor/slib-editor.c:1253 ../src/editor/slib-editor.c:1291
 msgid "before closing?"
 msgstr ""
 
-#: ../src/editor/slib-editor.c:1264 ../src/editor/slib-editor.c:1302
+#: ../src/editor/slib-editor.c:1260 ../src/editor/slib-editor.c:1298
 msgid "If you don't save, changes will be permanently lost."
 msgstr "Ja nesaglabāsiet, izmaiņas neatgriezeniski pazudīs."
 
-#: ../src/editor/slib-editor.c:1293 ../ui/xi-menus.glade.h:43
+#: ../src/editor/slib-editor.c:1289 ../ui/xi-menus.glade.h:43
 msgid "File"
 msgstr "Fails"
 
-#: ../src/editor/slib-editor.c:1348
+#: ../src/editor/slib-editor.c:1346
 msgid "StudyPad"
 msgstr ""
 
@@ -155,7 +154,7 @@ msgstr ""
 msgid "Note Editor"
 msgstr ""
 
-#: ../src/editor/slib-editor.c:1375
+#: ../src/editor/slib-editor.c:1377
 msgid "Prayer List/Journal Editor"
 msgstr ""
 
@@ -193,11 +192,11 @@ msgstr "Drukāšanas laikā radusies kļūda"
 msgid "It was not possible to print your document: %s"
 msgstr "Jūsu dokumentu nebija iespējams izdrukāt: %s"
 
-#: ../src/gnome2/about_modules.c:195
+#: ../src/gnome2/about_modules.c:189
 msgid "About Sword Module"
 msgstr ""
 
-#: ../src/gnome2/about_modules.c:392 ../src/gnome2/mod_mgr.c:265
+#: ../src/gnome2/about_modules.c:395 ../src/gnome2/mod_mgr.c:271
 msgid "The module has no About information."
 msgstr ""
 
@@ -239,11 +238,11 @@ msgstr ""
 msgid "Xiphos development"
 msgstr ""
 
-#: ../src/gnome2/about_xiphos.c:130
-msgid "Copyright 2000-2010 Xiphos Development Team"
+#: ../src/gnome2/about_xiphos.c:133
+msgid "Copyright © 2000-2011 Xiphos Development Team"
 msgstr ""
 
-#: ../src/gnome2/about_xiphos.c:133
+#: ../src/gnome2/about_xiphos.c:136
 msgid ""
 "(formerly known as GnomeSword)\n"
 "\n"
@@ -252,83 +251,83 @@ msgid ""
 "us The SWORD Project."
 msgstr ""
 
-#: ../src/gnome2/bibletext_dialog.c:317
+#: ../src/gnome2/bibletext_dialog.c:312
 msgid "Go to "
 msgstr ""
 
 #. info->stock_icon = GTK_STOCK_OPEN;
-#: ../src/gnome2/bookmark_dialog.c:171 ../src/gnome2/bookmarks_menu.c:363
-#: ../src/gnome2/bookmarks_menu.c:658 ../src/gnome2/bookmarks_menu.c:757
+#: ../src/gnome2/bookmark_dialog.c:173 ../src/gnome2/bookmarks_menu.c:365
+#: ../src/gnome2/bookmarks_menu.c:660 ../src/gnome2/bookmarks_menu.c:759
 #: ../src/gnome2/bookmarks_treeview.c:134 ../ui/editor_studypad.xml.h:2
 #: ../ui/xi-menus.glade.h:14
 msgid "Bookmark"
 msgstr "Grāmatzīme"
 
-#: ../src/gnome2/bookmark_dialog.c:173 ../src/gnome2/bookmarks_menu.c:759
+#: ../src/gnome2/bookmark_dialog.c:175 ../src/gnome2/bookmarks_menu.c:761
 #: ../src/gnome2/bookmarks_treeview.c:135
 msgid "Enter Folder Name"
 msgstr ""
 
-#: ../src/gnome2/bookmark_dialog.c:175 ../src/gnome2/bookmarks_menu.c:761
+#: ../src/gnome2/bookmark_dialog.c:177 ../src/gnome2/bookmarks_menu.c:763
 msgid "Folder Name"
 msgstr "Mapes nosaukums"
 
-#: ../src/gnome2/bookmark_dialog.c:176 ../src/gnome2/bookmarks_menu.c:762
+#: ../src/gnome2/bookmark_dialog.c:178 ../src/gnome2/bookmarks_menu.c:764
 #: ../src/gnome2/bookmarks_treeview.c:137
 msgid "Folder: "
 msgstr "Mape: "
 
-#: ../src/gnome2/bookmarks_menu.c:206
+#: ../src/gnome2/bookmarks_menu.c:208
 msgid "Specify bookmarks file"
 msgstr ""
 
-#: ../src/gnome2/bookmarks_menu.c:349 ../ui/xi-menus.glade.h:36
+#: ../src/gnome2/bookmarks_menu.c:351 ../ui/xi-menus.glade.h:36
 msgid "Edit"
 msgstr "Rediģēt"
 
-#: ../src/gnome2/bookmarks_menu.c:366
+#: ../src/gnome2/bookmarks_menu.c:368
 msgid "Folder name: "
 msgstr ""
 
-#: ../src/gnome2/bookmarks_menu.c:369
+#: ../src/gnome2/bookmarks_menu.c:371
 msgid "Bookmark name: "
 msgstr ""
 
-#: ../src/gnome2/bookmarks_menu.c:372 ../src/gnome2/bookmarks_menu.c:666
+#: ../src/gnome2/bookmarks_menu.c:374 ../src/gnome2/bookmarks_menu.c:668
 msgid "Verse: "
 msgstr ""
 
-#: ../src/gnome2/bookmarks_menu.c:373 ../src/gnome2/bookmarks_menu.c:667
+#: ../src/gnome2/bookmarks_menu.c:375 ../src/gnome2/bookmarks_menu.c:669
 msgid "Module: "
 msgstr ""
 
-#: ../src/gnome2/bookmarks_menu.c:495
+#: ../src/gnome2/bookmarks_menu.c:497
 msgid "Remove the selected folder"
 msgstr ""
 
-#: ../src/gnome2/bookmarks_menu.c:497
+#: ../src/gnome2/bookmarks_menu.c:499
 msgid "(and all its contents)?"
 msgstr ""
 
-#: ../src/gnome2/bookmarks_menu.c:500
+#: ../src/gnome2/bookmarks_menu.c:502
 msgid "Remove the selected bookmark"
 msgstr "Nodzēst iezīmēto grāmatzīmi"
 
-#: ../src/gnome2/bookmarks_menu.c:659
+#: ../src/gnome2/bookmarks_menu.c:661
 msgid "Add"
 msgstr "Pievienot"
 
-#: ../src/gnome2/bookmarks_menu.c:665
+#: ../src/gnome2/bookmarks_menu.c:667
 msgid "Label: "
 msgstr ""
 
-#: ../src/gnome2/bookmarks_treeview.c:108 ../src/gnome2/export_bookmarks.c:193
-#: ../src/gnome2/export_bookmarks.c:252
+#: ../src/gnome2/bookmarks_treeview.c:108 ../src/gnome2/export_bookmarks.c:195
+#: ../src/gnome2/export_bookmarks.c:254
 #, c-format
 msgid "Search result: %s"
 msgstr ""
 
-#: ../src/gnome2/bookmarks_treeview.c:944 ../src/gnome2/sidebar.c:1374
+#: ../src/gnome2/bookmarks_treeview.c:891 ../src/gnome2/sidebar.c:1447
 msgid "Bookmarks"
 msgstr "Grāmatzīmes"
 
@@ -345,37 +344,37 @@ msgstr ""
 msgid "Enter Key: "
 msgstr ""
 
-#: ../src/gnome2/dialog.c:264
+#: ../src/gnome2/dialog.c:266
 msgid "Close without Saving"
 msgstr "Nesaglabāt un aizvērt"
 
-#: ../src/gnome2/dialog.c:573
+#: ../src/gnome2/dialog.c:576
 msgid "Xiphos:"
 msgstr ""
 
-#: ../src/gnome2/dialog.c:674
+#: ../src/gnome2/dialog.c:677
 msgid "Close _without Saving"
 msgstr "Aizvērt _bez saglabāšanas"
 
-#: ../src/gnome2/export_bookmarks.c:195 ../src/gnome2/export_bookmarks.c:254
-#: ../src/gnome2/sidebar.c:1390
+#: ../src/gnome2/export_bookmarks.c:197 ../src/gnome2/export_bookmarks.c:256
+#: ../src/gnome2/sidebar.c:1463
 #, c-format
 msgid "Verse List"
 msgstr ""
 
-#: ../src/gnome2/export_bookmarks.c:689
+#: ../src/gnome2/export_bookmarks.c:694
 msgid "VerseList"
 msgstr ""
 
-#: ../src/gnome2/export_bookmarks.c:694
+#: ../src/gnome2/export_bookmarks.c:699
 msgid "SearchResults"
 msgstr ""
 
-#: ../src/gnome2/export_dialog.c:267 ../ui/export-dialog.glade.h:20
+#: ../src/gnome2/export_dialog.c:290 ../ui/export-dialog.glade.h:21
 msgid "Please check copyright before exporting!"
 msgstr ""
 
-#: ../src/gnome2/find_dialog.c:204 ../src/gnome2/find_dialog.c:373
+#: ../src/gnome2/find_dialog.c:203 ../src/gnome2/find_dialog.c:373
 msgid "Find"
 msgstr "Meklēt"
 
@@ -401,27 +400,27 @@ msgstr "Regulāra izteiksme"
 msgid "Find Next"
 msgstr "Meklēt nākamo"
 
-#: ../src/gnome2/font_dialog.c:304
+#: ../src/gnome2/font_dialog.c:302
 msgid "Set Module Font"
 msgstr ""
 
-#: ../src/gnome2/font_dialog.c:334
+#: ../src/gnome2/font_dialog.c:332
 msgid "Change font for"
 msgstr ""
 
-#: ../src/gnome2/font_dialog.c:338
+#: ../src/gnome2/font_dialog.c:336
 msgid "Module"
 msgstr "Modulis"
 
-#: ../src/gnome2/font_dialog.c:342
+#: ../src/gnome2/font_dialog.c:340
 msgid "Current font: "
 msgstr ""
 
-#: ../src/gnome2/font_dialog.c:374
+#: ../src/gnome2/font_dialog.c:372 ../src/gnome2/font_dialog.c:388
 msgid "+0"
 msgstr "+0"
 
-#: ../src/gnome2/font_dialog.c:378
+#: ../src/gnome2/font_dialog.c:392
 msgid "Use the default font for this module"
 msgstr ""
 
@@ -463,26 +462,26 @@ msgid ""
 "if you need to change these."
 msgstr ""
 
-#: ../src/gnome2/gui.c:157
+#: ../src/gnome2/gui.c:162
 #, c-format
 msgid ""
 "Xiphos failed to complete handler init for key #%d:\n"
 "%s"
 msgstr ""
 
-#: ../src/gnome2/gui.c:203
+#: ../src/gnome2/gui.c:208
 msgid "BUG! Xiphos is about to crash due to a \"STRDUP\" error."
 msgstr ""
 
-#: ../src/gnome2/gui.c:204 ../src/gnome2/gui.c:239
+#: ../src/gnome2/gui.c:209 ../src/gnome2/gui.c:244
 msgid "Please report this error to the Xiphos team with:"
 msgstr ""
 
-#: ../src/gnome2/gui.c:238
+#: ../src/gnome2/gui.c:243
 msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
 msgstr ""
 
-#: ../src/gnome2/main_window.c:797
+#: ../src/gnome2/main_window.c:795
 msgid "Xiphos - Bible Study Software"
 msgstr ""
 
@@ -490,26 +489,26 @@ msgstr ""
 msgid "Open a new tab"
 msgstr "Atvērt jaunu cilni"
 
-#: ../src/gnome2/main_window.c:932 ../src/gnome2/sidebar.c:616
-#: ../src/gnome2/sidebar.c:622 ../src/main/sidebar.cc:647
-#: ../src/main/sidebar.cc:992 ../src/main/sidebar.cc:993
-#: ../src/main/sidebar.cc:994
+#: ../src/gnome2/main_window.c:932 ../src/gnome2/sidebar.c:620
+#: ../src/gnome2/sidebar.c:626 ../src/main/sidebar.cc:651
+#: ../src/main/sidebar.cc:996 ../src/main/sidebar.cc:997
+#: ../src/main/sidebar.cc:998
 msgid "Standard View"
 msgstr ""
 
-#: ../src/gnome2/main_window.c:1013
+#: ../src/gnome2/main_window.c:1003
 msgid "Commentary View"
 msgstr ""
 
-#: ../src/gnome2/main_window.c:1029
+#: ../src/gnome2/main_window.c:1019
 msgid "Book View"
 msgstr ""
 
-#: ../src/gnome2/main_window.c:1054
+#: ../src/gnome2/main_window.c:1046
 msgid "Welcome to Xiphos"
 msgstr ""
 
-#: ../src/gnome2/menu_popup.c:1208
+#: ../src/gnome2/menu_popup.c:1223
 msgid ""
 "Renaming is not available in Windows.\n"
 "\n"
@@ -521,53 +520,53 @@ msgid ""
 "not available in the Windows environment."
 msgstr ""
 
-#: ../src/gnome2/menu_popup.c:1227
+#: ../src/gnome2/menu_popup.c:1242
 msgid "Rename Commentary"
 msgstr ""
 
-#: ../src/gnome2/menu_popup.c:1230
+#: ../src/gnome2/menu_popup.c:1245
 msgid "Choose Commentary Name"
 msgstr ""
 
-#: ../src/gnome2/menu_popup.c:1232
+#: ../src/gnome2/menu_popup.c:1247
 msgid "New Name"
 msgstr "Jaunais nosaukums"
 
-#: ../src/gnome2/menu_popup.c:1233 ../src/gnome2/treekey-editor.c:135
-#: ../src/gnome2/treekey-editor.c:194 ../src/gnome2/treekey-editor.c:280
+#: ../src/gnome2/menu_popup.c:1248 ../src/gnome2/treekey-editor.c:137
+#: ../src/gnome2/treekey-editor.c:196 ../src/gnome2/treekey-editor.c:282
 #: ../src/main/prayerlists.cc:243
 msgid "Name: "
 msgstr "Nosaukums: "
 
-#: ../src/gnome2/menu_popup.c:1243 ../src/main/prayerlists.cc:257
+#: ../src/gnome2/menu_popup.c:1258 ../src/main/prayerlists.cc:257
 msgid "Module names must contain [A-Za-z0-9_] only."
 msgstr ""
 
-#: ../src/gnome2/menu_popup.c:1250 ../src/main/prayerlists.cc:264
+#: ../src/gnome2/menu_popup.c:1265 ../src/main/prayerlists.cc:264
 msgid "Xiphos already knows a module by that name."
 msgstr ""
 
-#: ../src/gnome2/menu_popup.c:1291
+#: ../src/gnome2/menu_popup.c:1306
 #, c-format
 msgid ""
 "Failed to create new configuration:\n"
 "%s"
 msgstr ""
 
-#: ../src/gnome2/menu_popup.c:1300
+#: ../src/gnome2/menu_popup.c:1315
 msgid ""
 "Configuration build error:\n"
 "\n"
 msgstr ""
 
-#: ../src/gnome2/menu_popup.c:1867
+#: ../src/gnome2/menu_popup.c:2002
 msgid "No module in this pane."
 msgstr ""
 
 #. *****************************************************************************
 #. * defines
 #.
-#: ../src/gnome2/mod_mgr.c:62
+#: ../src/gnome2/mod_mgr.c:64
 msgid ""
 "<b>Overview of the Module Manager.</b>\n"
 "\n"
@@ -592,7 +591,7 @@ msgid ""
 "mailing list.\n"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:65
+#: ../src/gnome2/mod_mgr.c:67
 msgid ""
 "<b>Welcome to Xiphos.</b>\n"
 "\n"
@@ -627,526 +626,526 @@ msgid ""
 "dialog may be closed at any time."
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:183
+#: ../src/gnome2/mod_mgr.c:189
 msgid "Remove these modules?"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:184
+#: ../src/gnome2/mod_mgr.c:190
 msgid "Preparing to remove"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:185
+#: ../src/gnome2/mod_mgr.c:191
 msgid "Removing"
 msgstr "Izņemu"
 
-#: ../src/gnome2/mod_mgr.c:186 ../ui/xi-menus.glade.h:89
+#: ../src/gnome2/mod_mgr.c:192 ../ui/xi-menus.glade.h:89
 msgid "Remove"
 msgstr "Izņemt"
 
-#: ../src/gnome2/mod_mgr.c:189
+#: ../src/gnome2/mod_mgr.c:195
 msgid "Install these modules?"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:190
+#: ../src/gnome2/mod_mgr.c:196
 msgid "Preparing to install"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:191
+#: ../src/gnome2/mod_mgr.c:197
 msgid "Installing"
 msgstr "Instalē"
 
-#: ../src/gnome2/mod_mgr.c:192
+#: ../src/gnome2/mod_mgr.c:198
 msgid "Install"
 msgstr "Instalēt"
 
-#: ../src/gnome2/mod_mgr.c:195
+#: ../src/gnome2/mod_mgr.c:201
 msgid "Archive these modules?"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:196
+#: ../src/gnome2/mod_mgr.c:202
 msgid "Preparing to archive"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:197
+#: ../src/gnome2/mod_mgr.c:203
 msgid "Archiving"
 msgstr "Arhivē"
 
-#: ../src/gnome2/mod_mgr.c:198
+#: ../src/gnome2/mod_mgr.c:204
 msgid "Archive"
 msgstr "Arhīvs"
 
-#: ../src/gnome2/mod_mgr.c:201
+#: ../src/gnome2/mod_mgr.c:207
 msgid ""
 "Build fast-search index for these\n"
 "modules (may take minutes/module)?"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:202
+#: ../src/gnome2/mod_mgr.c:208
 msgid "Preparing to index"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:203
+#: ../src/gnome2/mod_mgr.c:209
 msgid "Indexing"
 msgstr "Indeksēšana"
 
-#: ../src/gnome2/mod_mgr.c:204
+#: ../src/gnome2/mod_mgr.c:210
 msgid "Index"
 msgstr "Saturs"
 
-#: ../src/gnome2/mod_mgr.c:207
+#: ../src/gnome2/mod_mgr.c:213
 msgid "Delete fast-search index for these modules?"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:208
+#: ../src/gnome2/mod_mgr.c:214
 msgid "Preparing to delete index"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:209
+#: ../src/gnome2/mod_mgr.c:215
 msgid "Deleting index"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:210
+#: ../src/gnome2/mod_mgr.c:216
 msgid "Deletion"
 msgstr "Dzēšana"
 
-#: ../src/gnome2/mod_mgr.c:435
+#: ../src/gnome2/mod_mgr.c:459
 msgid "Module Name"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:456
+#: ../src/gnome2/mod_mgr.c:480
 msgid "A checkmark means this module is already installed"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:478
+#: ../src/gnome2/mod_mgr.c:502
 msgid "Click the box to work on this module"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:479
+#: ../src/gnome2/mod_mgr.c:503
 msgid "Click the box to select this module for install/update"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:498
+#: ../src/gnome2/mod_mgr.c:522
 msgid "Installed"
 msgstr "Uzinstalēta"
 
-#: ../src/gnome2/mod_mgr.c:508
+#: ../src/gnome2/mod_mgr.c:532
 msgid ""
 "The index icon means you have built an optimized ('lucene') index for this "
 "module for fast searching (see the Maintenance pane for this function)"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:526
+#: ../src/gnome2/mod_mgr.c:550
 msgid ""
 "The lock icon means this module is encrypted, and requires that you purchase "
 "an unlock key from the content owner"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:543 ../ui/xi-menus.glade.h:1
+#: ../src/gnome2/mod_mgr.c:567 ../ui/xi-menus.glade.h:1
 msgid "About"
 msgstr "Par programmu"
 
-#: ../src/gnome2/mod_mgr.c:563
+#: ../src/gnome2/mod_mgr.c:587
 msgid ""
 "The refresh icon means the Installed module is older than the newer "
 "Available module: You should update the module"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:575
+#: ../src/gnome2/mod_mgr.c:599
 msgid "Available"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:584
+#: ../src/gnome2/mod_mgr.c:608
 msgid "Size"
 msgstr "Izmērs"
 
-#: ../src/gnome2/mod_mgr.c:593
+#: ../src/gnome2/mod_mgr.c:617
 msgid "Description"
 msgstr "Aparaksts"
 
-#: ../src/gnome2/mod_mgr.c:740
+#: ../src/gnome2/mod_mgr.c:764
 #, c-format
 msgid ""
 "`mkdir %s' failed:\n"
 "%s."
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:762
+#: ../src/gnome2/mod_mgr.c:786
 msgid " archived in: \n"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:817
+#: ../src/gnome2/mod_mgr.c:841
 msgid "Journals and prayer lists cannot be indexed."
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:838
+#: ../src/gnome2/mod_mgr.c:862
 #, c-format
 msgid "%s failed"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:841 ../src/gnome2/mod_mgr.c:1587
+#: ../src/gnome2/mod_mgr.c:865 ../src/gnome2/mod_mgr.c:1619
 msgid "Finished"
 msgstr "Pabeigts"
 
-#: ../src/gnome2/mod_mgr.c:1009 ../src/gnome2/mod_mgr.c:1011
-#: ../src/gnome2/mod_mgr.c:1113 ../src/gnome2/mod_mgr.c:1148
-#: ../src/gnome2/mod_mgr.c:1150 ../src/gnome2/utilities.c:462
-#: ../src/gnome2/utilities.c:528 ../src/gnome2/utilities.c:530
-#: ../src/gnome2/utilities.c:1085 ../src/main/sidebar.cc:826
-#: ../src/main/sidebar.cc:898 ../src/main/sidebar.cc:900
+#: ../src/gnome2/mod_mgr.c:1033 ../src/gnome2/mod_mgr.c:1035
+#: ../src/gnome2/mod_mgr.c:1137 ../src/gnome2/mod_mgr.c:1172
+#: ../src/gnome2/mod_mgr.c:1174 ../src/gnome2/utilities.c:457
+#: ../src/gnome2/utilities.c:523 ../src/gnome2/utilities.c:525
+#: ../src/gnome2/utilities.c:1090 ../src/main/sidebar.cc:830
+#: ../src/main/sidebar.cc:902 ../src/main/sidebar.cc:904
 msgid "Unknown"
 msgstr "Nezināms"
 
-#: ../src/gnome2/mod_mgr.c:1309
+#: ../src/gnome2/mod_mgr.c:1337
 #, c-format
 msgid ""
 "Repository:\n"
 "%s"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1321
+#: ../src/gnome2/mod_mgr.c:1349
 msgid ""
 "Categorized by\n"
 "Module Type"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1326 ../src/gnome2/utilities.c:596
-#: ../src/main/sidebar.cc:976 ../src/main/sidebar.cc:978
+#: ../src/gnome2/mod_mgr.c:1354 ../src/gnome2/utilities.c:591
+#: ../src/main/sidebar.cc:980 ../src/main/sidebar.cc:982
 msgid "Biblical Texts"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1330 ../src/gnome2/utilities.c:603
-#: ../src/main/sidebar.cc:659 ../src/main/sidebar.cc:1001
-#: ../src/main/sidebar.cc:1003 ../ui/prefs.glade.h:36
+#: ../src/gnome2/mod_mgr.c:1358 ../src/gnome2/utilities.c:598
+#: ../src/main/sidebar.cc:663 ../src/main/sidebar.cc:1005
+#: ../src/main/sidebar.cc:1007 ../ui/prefs.glade.h:38
 msgid "Commentaries"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1334 ../src/gnome2/utilities.c:611
-#: ../src/main/sidebar.cc:1010 ../src/main/sidebar.cc:1012
+#: ../src/gnome2/mod_mgr.c:1362 ../src/gnome2/utilities.c:606
+#: ../src/main/sidebar.cc:1014 ../src/main/sidebar.cc:1016
 msgid "Dictionaries"
 msgstr "Vārdnīcas"
 
-#: ../src/gnome2/mod_mgr.c:1338 ../src/gnome2/utilities.c:618
-#: ../src/main/sidebar.cc:1019 ../src/main/sidebar.cc:1021
+#: ../src/gnome2/mod_mgr.c:1366 ../src/gnome2/utilities.c:613
+#: ../src/main/sidebar.cc:1023 ../src/main/sidebar.cc:1025
 msgid "Glossaries"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1342 ../src/gnome2/utilities.c:625
-#: ../src/main/sidebar.cc:1028 ../src/main/sidebar.cc:1030
+#: ../src/gnome2/mod_mgr.c:1370 ../src/gnome2/utilities.c:620
+#: ../src/main/sidebar.cc:1032 ../src/main/sidebar.cc:1034
 msgid "Daily Devotionals"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1346 ../src/gnome2/utilities.c:632
-#: ../src/main/sidebar.cc:669 ../src/main/sidebar.cc:1037
-#: ../src/main/sidebar.cc:1039
+#: ../src/gnome2/mod_mgr.c:1374 ../src/gnome2/utilities.c:627
+#: ../src/main/sidebar.cc:673 ../src/main/sidebar.cc:1041
+#: ../src/main/sidebar.cc:1043
 msgid "General Books"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1350 ../src/gnome2/utilities.c:639
-#: ../src/main/sidebar.cc:1046 ../src/main/sidebar.cc:1048
+#: ../src/gnome2/mod_mgr.c:1378 ../src/gnome2/utilities.c:634
+#: ../src/main/sidebar.cc:1050 ../src/main/sidebar.cc:1052
 msgid "Maps"
 msgstr "Kartes"
 
-#: ../src/gnome2/mod_mgr.c:1354 ../src/gnome2/utilities.c:646
-#: ../src/main/sidebar.cc:1055 ../src/main/sidebar.cc:1057
+#: ../src/gnome2/mod_mgr.c:1382 ../src/gnome2/utilities.c:641
+#: ../src/main/sidebar.cc:1059 ../src/main/sidebar.cc:1061
 msgid "Images"
 msgstr "Attēli"
 
-#: ../src/gnome2/mod_mgr.c:1358 ../src/gnome2/utilities.c:653
-#: ../src/main/sidebar.cc:1064 ../src/main/sidebar.cc:1066
+#: ../src/gnome2/mod_mgr.c:1386 ../src/gnome2/utilities.c:648
+#: ../src/main/sidebar.cc:1068 ../src/main/sidebar.cc:1070
 msgid "Cult/Unorthodox"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1366
+#: ../src/gnome2/mod_mgr.c:1394
 msgid ""
 "Categorized by\n"
 "Availability"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1371
+#: ../src/gnome2/mod_mgr.c:1399
 msgid "Updates"
 msgstr "Atjauninājumi"
 
-#: ../src/gnome2/mod_mgr.c:1375
+#: ../src/gnome2/mod_mgr.c:1403
 msgid "Uninstalled"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1379 ../src/gnome2/sidebar.c:632
-#: ../src/gnome2/utilities.c:661 ../src/main/prayerlists.cc:241
-#: ../src/main/sidebar.cc:1074 ../src/main/sidebar.cc:1076
+#: ../src/gnome2/mod_mgr.c:1407 ../src/gnome2/sidebar.c:636
+#: ../src/gnome2/utilities.c:656 ../src/main/prayerlists.cc:241
+#: ../src/main/sidebar.cc:1078 ../src/main/sidebar.cc:1080
 msgid "Prayer List/Journal"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1571
+#: ../src/gnome2/mod_mgr.c:1603
 msgid "Refreshing from remote source"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1581
+#: ../src/gnome2/mod_mgr.c:1613
 msgid "Remote source not found"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1651
+#: ../src/gnome2/mod_mgr.c:1683
 msgid "Configure"
 msgstr "Konfigurēt"
 
-#: ../src/gnome2/mod_mgr.c:1682
+#: ../src/gnome2/mod_mgr.c:1714
 msgid "Type"
 msgstr "Veids"
 
-#: ../src/gnome2/mod_mgr.c:1689
+#: ../src/gnome2/mod_mgr.c:1721
 msgid "Caption"
 msgstr "Apraksts"
 
-#: ../src/gnome2/mod_mgr.c:1697
+#: ../src/gnome2/mod_mgr.c:1729
 msgid "Source"
 msgstr "Avots"
 
-#: ../src/gnome2/mod_mgr.c:1705
+#: ../src/gnome2/mod_mgr.c:1737
 msgid "Directory"
 msgstr "Mape"
 
-#: ../src/gnome2/mod_mgr.c:1713
+#: ../src/gnome2/mod_mgr.c:1745
 msgid "User"
 msgstr "Lietotājs"
 
-#: ../src/gnome2/mod_mgr.c:1721
+#: ../src/gnome2/mod_mgr.c:1753
 msgid "Password"
 msgstr "Parole"
 
-#: ../src/gnome2/mod_mgr.c:1729
+#: ../src/gnome2/mod_mgr.c:1761
 msgid "UID"
 msgstr "UID"
 
-#: ../src/gnome2/mod_mgr.c:1746
+#: ../src/gnome2/mod_mgr.c:1778
 msgid "Module Sources"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1749
+#: ../src/gnome2/mod_mgr.c:1781
 msgid "Add/Remove"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1751
+#: ../src/gnome2/mod_mgr.c:1783
 msgid "Choose"
 msgstr "Izvēlēties"
 
-#: ../src/gnome2/mod_mgr.c:1755 ../src/gnome2/preferences_dialog.c:1716
-#: ../src/gnome2/sidebar.c:1398
+#: ../src/gnome2/mod_mgr.c:1787 ../src/gnome2/preferences_dialog.c:1811
+#: ../src/gnome2/sidebar.c:1471
 msgid "Modules"
 msgstr "Moduļi"
 
-#: ../src/gnome2/mod_mgr.c:1757
+#: ../src/gnome2/mod_mgr.c:1789
 msgid "Install/Update"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1759
+#: ../src/gnome2/mod_mgr.c:1791
 msgid "Maintenance"
 msgstr "Apkalpošana"
 
-#: ../src/gnome2/mod_mgr.c:1980
+#: ../src/gnome2/mod_mgr.c:2025
 msgid "Please Refresh"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1981
+#: ../src/gnome2/mod_mgr.c:2026
 msgid "Your module list is not up to date!"
 msgstr ""
 
 #. Zero Bibles is just not workable in Xiphos.
-#: ../src/gnome2/mod_mgr.c:2274
+#: ../src/gnome2/mod_mgr.c:2329
 msgid ""
 "You have uninstalled your last Bible.\n"
 "Xiphos requires at least one."
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2280
+#: ../src/gnome2/mod_mgr.c:2335
 msgid ""
 "There are still no Bibles installed.\n"
 "Xiphos cannot continue without one."
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2370
+#: ../src/gnome2/mod_mgr.c:2425
 msgid "Standard remote sources have been loaded."
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2376
+#: ../src/gnome2/mod_mgr.c:2431
 msgid "Could not load standard sources from CrossWire."
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2544 ../src/gnome2/mod_mgr.c:2790
+#: ../src/gnome2/mod_mgr.c:2599 ../src/gnome2/mod_mgr.c:2845
 msgid "Remove the selected source"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2604
+#: ../src/gnome2/mod_mgr.c:2659
 msgid "Enter a remote source"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2608
+#: ../src/gnome2/mod_mgr.c:2663
 msgid "Caption:"
 msgstr "Apraksts:"
 
-#: ../src/gnome2/mod_mgr.c:2609
+#: ../src/gnome2/mod_mgr.c:2664
 msgid "Type:"
 msgstr "Tips:"
 
-#: ../src/gnome2/mod_mgr.c:2610
+#: ../src/gnome2/mod_mgr.c:2665
 msgid "Host:"
 msgstr "Hosts:"
 
-#: ../src/gnome2/mod_mgr.c:2611
+#: ../src/gnome2/mod_mgr.c:2666
 msgid "Directory:"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2612
+#: ../src/gnome2/mod_mgr.c:2667
 msgid "User (optional):"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2613
+#: ../src/gnome2/mod_mgr.c:2668
 msgid "Password (optional):"
 msgstr ""
 
 #. this can happen at most once
-#: ../src/gnome2/mod_mgr.c:2640
+#: ../src/gnome2/mod_mgr.c:2695
 msgid "A source by that name already exists."
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2787
+#: ../src/gnome2/mod_mgr.c:2842
 msgid "Delete a remote source"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:3256
+#: ../src/gnome2/mod_mgr.c:3390
 msgid "[no module]"
 msgstr ""
 
-#: ../src/gnome2/navbar_book.c:362 ../src/gnome2/navbar_book_dialog.c:302
+#: ../src/gnome2/navbar_book.c:362 ../src/gnome2/navbar_book_dialog.c:304
 msgid "Go outward, to the section containing this one"
 msgstr ""
 
-#: ../src/gnome2/navbar_book.c:377 ../src/gnome2/navbar_book_dialog.c:317
+#: ../src/gnome2/navbar_book.c:377 ../src/gnome2/navbar_book_dialog.c:319
 msgid "Go to previous item"
 msgstr ""
 
-#: ../src/gnome2/navbar_book.c:391 ../src/gnome2/navbar_book_dialog.c:331
+#: ../src/gnome2/navbar_book.c:391 ../src/gnome2/navbar_book_dialog.c:333
 msgid "Go to next item"
 msgstr ""
 
-#: ../src/gnome2/navbar_book.c:405 ../src/gnome2/navbar_book_dialog.c:345
+#: ../src/gnome2/navbar_book.c:405 ../src/gnome2/navbar_book_dialog.c:347
 msgid "Go inward, to the first subsection"
 msgstr ""
 
-#: ../src/gnome2/navbar_versekey_dialog.c:871
-#: ../src/gnome2/navbar_versekey_editor.c:880
-#: ../src/gnome2/navbar_versekey_parallel.c:820
+#: ../src/gnome2/navbar_versekey_dialog.c:898
+#: ../src/gnome2/navbar_versekey_editor.c:905
+#: ../src/gnome2/navbar_versekey_parallel.c:847
 msgid "Synchronize this window's scrolling with the main window"
 msgstr ""
 
-#: ../src/gnome2/parallel_dialog.c:382 ../src/gnome2/preferences_dialog.c:1723
+#: ../src/gnome2/parallel_dialog.c:378 ../src/gnome2/preferences_dialog.c:1818
 msgid "Parallel"
 msgstr "Paralēlais"
 
-#: ../src/gnome2/parallel_view.c:124
+#: ../src/gnome2/parallel_view.c:119
 msgid "Detach/Attach"
 msgstr ""
 
-#: ../src/gnome2/parallel_view.c:130 ../ui/xi-menus.glade.h:61
+#: ../src/gnome2/parallel_view.c:125 ../ui/xi-menus.glade.h:61
 msgid "Module Options"
 msgstr ""
 
-#: ../src/gnome2/parallel_view.c:269 ../src/gnome2/sidebar.c:615
-#: ../src/gnome2/sidebar.c:621 ../src/gnome2/tabbed_browser.c:255
-#: ../src/main/sidebar.cc:628 ../src/main/sidebar.cc:984
-#: ../src/main/sidebar.cc:985 ../src/main/sidebar.cc:986
+#: ../src/gnome2/parallel_view.c:267 ../src/gnome2/sidebar.c:619
+#: ../src/gnome2/sidebar.c:625 ../src/gnome2/tabbed_browser.c:252
+#: ../src/main/sidebar.cc:632 ../src/main/sidebar.cc:988
+#: ../src/main/sidebar.cc:989 ../src/main/sidebar.cc:990
 msgid "Parallel View"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1236
-#: ../src/gnome2/preferences_dialog.c:1274
-#: ../src/gnome2/preferences_dialog.c:1311
-#: ../src/gnome2/preferences_dialog.c:1346
-#: ../src/gnome2/preferences_dialog.c:1381
-#: ../src/gnome2/preferences_dialog.c:1416
-#: ../src/gnome2/preferences_dialog.c:1451
-#: ../src/gnome2/preferences_dialog.c:1487
-#: ../src/gnome2/preferences_dialog.c:1524
-#: ../src/gnome2/preferences_dialog.c:1576
-#: ../src/gnome2/preferences_dialog.c:1966
+#: ../src/gnome2/preferences_dialog.c:1331
+#: ../src/gnome2/preferences_dialog.c:1369
+#: ../src/gnome2/preferences_dialog.c:1406
+#: ../src/gnome2/preferences_dialog.c:1441
+#: ../src/gnome2/preferences_dialog.c:1476
+#: ../src/gnome2/preferences_dialog.c:1511
+#: ../src/gnome2/preferences_dialog.c:1546
+#: ../src/gnome2/preferences_dialog.c:1582
+#: ../src/gnome2/preferences_dialog.c:1619
+#: ../src/gnome2/preferences_dialog.c:1671
+#: ../src/gnome2/preferences_dialog.c:2076
 msgid "-- Select --"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1538
+#: ../src/gnome2/preferences_dialog.c:1633
 msgid "Locale will take effect after restart."
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1613 ../ui/prefs.glade.h:83
+#: ../src/gnome2/preferences_dialog.c:1708 ../ui/prefs.glade.h:85
 msgid "Preferences"
 msgstr "Iestatījumi"
 
-#: ../src/gnome2/preferences_dialog.c:1695
+#: ../src/gnome2/preferences_dialog.c:1790
 msgid "Fonts"
 msgstr "Fonti"
 
-#: ../src/gnome2/preferences_dialog.c:1698
+#: ../src/gnome2/preferences_dialog.c:1793
 msgid "Color"
 msgstr "Krāsa"
 
-#: ../src/gnome2/preferences_dialog.c:1701
+#: ../src/gnome2/preferences_dialog.c:1796
 msgid "Sizes and Faces"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1705
+#: ../src/gnome2/preferences_dialog.c:1800
 msgid "General"
 msgstr "Vispārēji"
 
-#: ../src/gnome2/preferences_dialog.c:1712
+#: ../src/gnome2/preferences_dialog.c:1807
 msgid "Options"
 msgstr "Opcijas"
 
-#: ../src/gnome2/preferences_dialog.c:1726
+#: ../src/gnome2/preferences_dialog.c:1821
 msgid "Special"
 msgstr "Speciāls"
 
-#: ../src/gnome2/preferences_dialog.c:2353 ../src/gnome2/search_dialog.c:460
+#: ../src/gnome2/preferences_dialog.c:2463 ../src/gnome2/search_dialog.c:454
 msgid "Clear List?"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:2354 ../src/gnome2/search_dialog.c:461
+#: ../src/gnome2/preferences_dialog.c:2464 ../src/gnome2/search_dialog.c:455
 msgid "Are you sure you want to clear the module list?"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:2399 ../src/main/search_dialog.cc:699
+#: ../src/gnome2/preferences_dialog.c:2509 ../src/main/search_dialog.cc:691
 msgid "Remove Module?"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:2400 ../src/main/search_dialog.cc:700
+#: ../src/gnome2/preferences_dialog.c:2510 ../src/main/search_dialog.cc:692
 msgid "Are you sure you want to remove the selected module?"
 msgstr ""
 
-#: ../src/gnome2/search_dialog.c:68 ../src/main/search_dialog.cc:66
+#: ../src/gnome2/search_dialog.c:65 ../src/main/search_dialog.cc:58
 #: ../src/main/search_sidebar.cc:61
 msgid "Searching the "
 msgstr ""
 
-#: ../src/gnome2/search_dialog.c:69 ../src/main/search_dialog.cc:67
+#: ../src/gnome2/search_dialog.c:66 ../src/main/search_dialog.cc:59
 #: ../src/main/search_sidebar.cc:62
 msgid " Module"
 msgstr ""
 
-#: ../src/gnome2/search_dialog.c:70 ../src/main/search_dialog.cc:68
+#: ../src/gnome2/search_dialog.c:67 ../src/main/search_dialog.cc:60
 #: ../src/main/search_sidebar.cc:63
 msgid "found in "
 msgstr ""
 
-#: ../src/gnome2/search_dialog.c:419
+#: ../src/gnome2/search_dialog.c:413
 #, c-format
 msgid "New List %s"
 msgstr ""
 
-#: ../src/gnome2/search_dialog.c:643
+#: ../src/gnome2/search_dialog.c:637
 msgid "The last module list may not be deleted"
 msgstr ""
 
-#: ../src/gnome2/search_dialog.c:661
+#: ../src/gnome2/search_dialog.c:655
 msgid "Delete list?"
 msgstr ""
 
-#: ../src/gnome2/search_dialog.c:662
+#: ../src/gnome2/search_dialog.c:656
 msgid "Are you sure you want to delete:"
 msgstr ""
 
@@ -1166,7 +1165,7 @@ msgstr ""
 #. * Return value
 #. *   void
 #.
-#: ../src/gnome2/search_dialog.c:785
+#: ../src/gnome2/search_dialog.c:779
 msgid ""
 "<b>Syntax overview for optimized \"lucene\" searches</b>\n"
 "Search for verses that contain...\n"
@@ -1211,7 +1210,7 @@ msgstr ""
 #. * Return value
 #. *   void
 #.
-#: ../src/gnome2/search_dialog.c:848
+#: ../src/gnome2/search_dialog.c:842
 msgid ""
 "<b>Attribute-based searches</b>\n"
 "Searches for content contained in markup outside the main text. Attributes "
@@ -1253,7 +1252,7 @@ msgstr ""
 msgid "Bible"
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:234 ../ui/prefs.glade.h:38
+#: ../src/gnome2/search_sidebar.c:234 ../ui/prefs.glade.h:40
 msgid "Commentary"
 msgstr ""
 
@@ -1301,51 +1300,51 @@ msgstr "Zemākais"
 msgid "Upper"
 msgstr "Augšējais"
 
-#: ../src/gnome2/sidebar.c:1382
+#: ../src/gnome2/sidebar.c:1455
 msgid "Search"
 msgstr "Meklēt"
 
-#: ../src/gnome2/sidebar_dialog.c:170 ../src/gnome2/sidebar_dialog.c:179
+#: ../src/gnome2/sidebar_dialog.c:164 ../src/gnome2/sidebar_dialog.c:173
 msgid "Sidebar"
 msgstr "Sānjosla"
 
-#: ../src/gnome2/splash.c:396
+#: ../src/gnome2/splash.c:403
 msgid "Powered by the SWORD Project"
 msgstr ""
 
-#: ../src/gnome2/tabbed_browser.c:364
+#: ../src/gnome2/tabbed_browser.c:361
 msgid "Can't create tabs dir."
 msgstr ""
 
-#: ../src/gnome2/treekey-editor.c:133 ../src/gnome2/treekey-editor.c:192
-#: ../src/gnome2/treekey-editor.c:278
+#: ../src/gnome2/treekey-editor.c:135 ../src/gnome2/treekey-editor.c:194
+#: ../src/gnome2/treekey-editor.c:280
 msgid "Prayer List/Journal Item"
 msgstr ""
 
-#: ../src/gnome2/treekey-editor.c:134 ../src/gnome2/treekey-editor.c:193
-#: ../src/gnome2/treekey-editor.c:279
+#: ../src/gnome2/treekey-editor.c:136 ../src/gnome2/treekey-editor.c:195
+#: ../src/gnome2/treekey-editor.c:281
 msgid "New name"
 msgstr "Jauns nosaukums"
 
-#: ../src/gnome2/treekey-editor.c:249
+#: ../src/gnome2/treekey-editor.c:251
 msgid "Remove the selected item"
 msgstr ""
 
-#: ../src/gnome2/utilities.c:2056
+#: ../src/gnome2/utilities.c:2077
 msgid ""
 "An image file's size could not be determined.\n"
 "Xiphos cannot resize images to fit window."
 msgstr ""
 
-#: ../src/main/display.cc:230
+#: ../src/main/display.cc:238
 #, c-format
 msgid ""
 "Improperly encoded personal annotation label:\n"
 "'%s'"
 msgstr ""
 
-#: ../src/main/display.cc:1014 ../src/main/display.cc:1074
-#: ../src/main/display.cc:1158 ../ui/export-dialog.glade.h:7
+#: ../src/main/display.cc:1026 ../src/main/display.cc:1092
+#: ../src/main/display.cc:1176 ../ui/export-dialog.glade.h:7
 msgid "Chapter"
 msgstr "Nodaļa"
 
@@ -1354,7 +1353,7 @@ msgid "Xiphos does not understand more than one argument."
 msgstr ""
 
 #: ../src/main/main.c:168
-msgid "Initiating Gecko"
+msgid "Initiating HTML"
 msgstr ""
 
 #: ../src/main/main.c:174
@@ -1373,104 +1372,104 @@ msgstr ""
 msgid "Displaying Xiphos"
 msgstr ""
 
-#: ../src/main/module_dialogs.cc:189 ../src/main/previewer.cc:93
-#: ../ui/prefs.glade.h:84
+#: ../src/main/module_dialogs.cc:188 ../src/main/previewer.cc:95
+#: ../ui/prefs.glade.h:86
 msgid "Previewer"
 msgstr "Priekšskatītājs"
 
-#: ../src/main/module_dialogs.cc:240 ../src/main/module_dialogs.cc:351
-#: ../src/main/previewer.cc:180
+#: ../src/main/module_dialogs.cc:243 ../src/main/module_dialogs.cc:354
+#: ../src/main/previewer.cc:184
 msgid "Footnote"
 msgstr ""
 
-#: ../src/main/module_dialogs.cc:246 ../src/main/module_dialogs.cc:356
-#: ../src/main/previewer.cc:192
+#: ../src/main/module_dialogs.cc:249 ../src/main/module_dialogs.cc:359
+#: ../src/main/previewer.cc:196
 msgid "Cross Reference"
 msgstr ""
 
-#: ../src/main/module_dialogs.cc:252 ../src/main/module_dialogs.cc:266
-#: ../src/main/module_dialogs.cc:361 ../src/main/module_dialogs.cc:373
-#: ../src/main/previewer.cc:198 ../src/main/previewer.cc:217
+#: ../src/main/module_dialogs.cc:255 ../src/main/module_dialogs.cc:269
+#: ../src/main/module_dialogs.cc:364 ../src/main/module_dialogs.cc:376
+#: ../src/main/previewer.cc:202 ../src/main/previewer.cc:221
 msgid "Strongs"
 msgstr ""
 
-#: ../src/main/module_dialogs.cc:258 ../src/main/module_dialogs.cc:277
-#: ../src/main/module_dialogs.cc:366 ../src/main/module_dialogs.cc:383
-#: ../src/main/previewer.cc:204 ../src/main/previewer.cc:223
+#: ../src/main/module_dialogs.cc:261 ../src/main/module_dialogs.cc:280
+#: ../src/main/module_dialogs.cc:369 ../src/main/module_dialogs.cc:386
+#: ../src/main/previewer.cc:208 ../src/main/previewer.cc:227
 msgid "Morphology"
 msgstr ""
 
-#: ../src/main/module_dialogs.cc:1007 ../src/main/url.cc:518
+#: ../src/main/module_dialogs.cc:1014 ../src/main/url.cc:518
 msgid "Back to "
 msgstr ""
 
-#: ../src/main/parallel_view.cc:380 ../ui/xi-menus.glade.h:108
+#: ../src/main/parallel_view.cc:381 ../ui/xi-menus.glade.h:108
 msgid "Strong's Numbers"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:390 ../ui/search-dialog.glade.h:52
+#: ../src/main/parallel_view.cc:391 ../ui/search-dialog.glade.h:52
 #: ../ui/xi-menus.glade.h:44
 msgid "Footnotes"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:400 ../ui/search-dialog.glade.h:64
+#: ../src/main/parallel_view.cc:401 ../ui/search-dialog.glade.h:64
 #: ../ui/xi-menus.glade.h:63
 msgid "Morphological Tags"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:410 ../ui/xi-menus.glade.h:48
+#: ../src/main/parallel_view.cc:411 ../ui/xi-menus.glade.h:48
 msgid "Hebrew Vowel Points"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:420 ../ui/xi-menus.glade.h:47
+#: ../src/main/parallel_view.cc:421 ../ui/xi-menus.glade.h:47
 msgid "Hebrew Cantillation"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:430 ../ui/xi-menus.glade.h:45
+#: ../src/main/parallel_view.cc:431 ../ui/xi-menus.glade.h:45
 msgid "Greek Accents"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:440
+#: ../src/main/parallel_view.cc:441
 msgid "Cross-references"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:450 ../ui/xi-menus.glade.h:57
+#: ../src/main/parallel_view.cc:451 ../ui/xi-menus.glade.h:57
 msgid "Lemmas"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:460 ../ui/xi-menus.glade.h:46
+#: ../src/main/parallel_view.cc:461 ../ui/xi-menus.glade.h:46
 msgid "Headings"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:470
+#: ../src/main/parallel_view.cc:471
 msgid "Morpheme Segmentation"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:484 ../ui/xi-menus.glade.h:117
+#: ../src/main/parallel_view.cc:485 ../ui/xi-menus.glade.h:117
 msgid "Words of Christ in Red"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:494 ../ui/xi-menus.glade.h:110
+#: ../src/main/parallel_view.cc:495 ../ui/xi-menus.glade.h:110
 msgid "Transliteration"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:504
+#: ../src/main/parallel_view.cc:505
 msgid "Textual Variants"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:512 ../ui/xi-menus.glade.h:86
+#: ../src/main/parallel_view.cc:513 ../ui/xi-menus.glade.h:86
 msgid "Primary Reading"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:521 ../ui/xi-menus.glade.h:101
+#: ../src/main/parallel_view.cc:522 ../ui/xi-menus.glade.h:101
 msgid "Secondary Reading"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:530 ../ui/xi-menus.glade.h:9
+#: ../src/main/parallel_view.cc:531 ../ui/xi-menus.glade.h:9
 msgid "All Readings"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:688
+#: ../src/main/parallel_view.cc:695
 msgid "view context"
 msgstr ""
 
@@ -1718,30 +1717,30 @@ msgstr ""
 msgid "<b>Major Topic C</b><br/>"
 msgstr ""
 
-#: ../src/main/previewer.cc:186
+#: ../src/main/previewer.cc:190
 msgid "User Annotation"
 msgstr ""
 
-#: ../src/main/search_dialog.cc:207
+#: ../src/main/search_dialog.cc:199
 #, c-format
 msgid "Search result %s: %s"
 msgstr ""
 
-#: ../src/main/search_dialog.cc:439
+#: ../src/main/search_dialog.cc:431
 msgid "Delete Range?"
 msgstr ""
 
-#: ../src/main/search_dialog.cc:440
+#: ../src/main/search_dialog.cc:432
 msgid "Are you sure you want to delete this range?"
 msgstr ""
 
-#: ../src/main/search_dialog.cc:654 ../src/main/search_dialog.cc:1071
-#: ../src/main/search_dialog.cc:1074 ../src/main/search_dialog.cc:1096
-#: ../src/main/search_dialog.cc:1099
+#: ../src/main/search_dialog.cc:646 ../src/main/search_dialog.cc:1073
+#: ../src/main/search_dialog.cc:1076 ../src/main/search_dialog.cc:1098
+#: ../src/main/search_dialog.cc:1101
 msgid "Search: "
 msgstr ""
 
-#: ../src/main/search_dialog.cc:1464
+#: ../src/main/search_dialog.cc:1463
 #, c-format
 msgid ""
 "%s:\n"
@@ -1749,44 +1748,44 @@ msgid ""
 "%s"
 msgstr ""
 
-#: ../src/main/search_dialog.cc:1466
+#: ../src/main/search_dialog.cc:1465
 msgid "Please adjust the module list."
 msgstr ""
 
-#: ../src/main/search_dialog.cc:1482
+#: ../src/main/search_dialog.cc:1481
 #, c-format
 msgid "No fast-search index exists for %s.%s%s"
 msgstr ""
 
-#: ../src/main/search_dialog.cc:1484
+#: ../src/main/search_dialog.cc:1483
 msgid ""
 "\n"
 "Search on this module is now `multi word'."
 msgstr ""
 
-#: ../src/main/search_dialog.cc:1485
+#: ../src/main/search_dialog.cc:1484
 msgid ""
 "\n"
 "See the Module Manager, Maintenance pane."
 msgstr ""
 
-#: ../src/main/search_dialog.cc:1548
+#: ../src/main/search_dialog.cc:1546
 msgid "Search finished"
 msgstr ""
 
-#: ../src/main/search_sidebar.cc:100
+#: ../src/main/search_sidebar.cc:99
 msgid "matches"
 msgstr ""
 
-#: ../src/main/search_sidebar.cc:218
+#: ../src/main/search_sidebar.cc:217
 msgid "There is no commentary module."
 msgstr ""
 
-#: ../src/main/settings.c:106
+#: ../src/main/settings.c:110
 msgid "$HOME is not set!"
 msgstr ""
 
-#: ../src/main/settings.c:119
+#: ../src/main/settings.c:123
 #, c-format
 msgid ""
 "Xiphos can not create  .xiphos:\n"
@@ -1795,22 +1794,22 @@ msgid ""
 "Xiphos cannot continue."
 msgstr ""
 
-#: ../src/main/settings.c:132 ../src/main/settings.c:141
-#: ../src/main/settings.c:150
+#: ../src/main/settings.c:136 ../src/main/settings.c:145
+#: ../src/main/settings.c:154
 msgid "can not create "
 msgstr ""
 
-#: ../src/main/settings.c:180
+#: ../src/main/settings.c:184
 msgid ""
 "Empty settings file -- backup recovery attempted.\n"
 "Some information may have been lost."
 msgstr ""
 
-#: ../src/main/settings.c:182
+#: ../src/main/settings.c:186
 msgid "Empty settings file -- no backup?!? Information lost!"
 msgstr ""
 
-#: ../src/main/settings.c:210
+#: ../src/main/settings.c:214
 msgid ""
 "There are no Bibles installed.\n"
 "Evidently, you declined to install any.\n"
@@ -1820,59 +1819,59 @@ msgid ""
 "and will now exit."
 msgstr ""
 
-#: ../src/main/settings.c:213
+#: ../src/main/settings.c:217
 msgid "Bible module installation complete."
 msgstr ""
 
-#: ../src/main/sidebar.cc:399
+#: ../src/main/sidebar.cc:403
 msgid "verse"
 msgstr ""
 
-#: ../src/main/sidebar.cc:460
+#: ../src/main/sidebar.cc:464
 msgid "chapter"
 msgstr ""
 
-#: ../src/main/sword.cc:538
+#: ../src/main/sword.cc:559
 msgid ""
 "Xiphos's file for language\n"
 "abbreviations is missing."
 msgstr ""
 
-#: ../src/main/sword.cc:545
+#: ../src/main/sword.cc:566
 msgid ""
 "Xiphos's language abbreviation\n"
 "file cannot be opened."
 msgstr ""
 
-#: ../src/main/sword.cc:558
+#: ../src/main/sword.cc:579
 msgid ""
 "Xiphos cannot allocate space\n"
 "for language abbreviations."
 msgstr ""
 
-#: ../src/main/sword.cc:565
+#: ../src/main/sword.cc:586
 msgid ""
 "Xiphos cannot read the\n"
 "language abbreviation file."
 msgstr ""
 
 #. either we were given a null sys_locale, or it didn't match anything.
-#: ../src/main/sword.cc:647
+#: ../src/main/sword.cc:668
 #, c-format
 msgid ""
 "No matching locale found for `%s'.\n"
 "%s"
 msgstr ""
 
-#: ../src/main/sword.cc:649
+#: ../src/main/sword.cc:670
 msgid "Book names and menus may not be translated."
 msgstr ""
 
-#: ../src/main/sword.cc:1245
+#: ../src/main/sword.cc:1268
 msgid "Daily devotional was requested, but there are none installed."
 msgstr ""
 
-#: ../src/main/sword.cc:1481
+#: ../src/main/sword.cc:1504
 msgid ""
 "<b>Locked Module.</b>\n"
 "\n"
@@ -1908,88 +1907,88 @@ msgstr ""
 msgid "Show %s in main window"
 msgstr ""
 
-#: ../src/main/xml.c:84 ../src/main/xml.c:468
+#: ../src/main/xml.c:83 ../src/main/xml.c:457
 #, c-format
 msgid "Document not created successfully. \n"
 msgstr ""
 
-#: ../src/main/xml.c:93
+#: ../src/main/xml.c:92
 msgid "Personal"
 msgstr ""
 
-#: ../src/main/xml.c:94
+#: ../src/main/xml.c:93
 msgid "What must I do to be saved?"
 msgstr ""
 
-#: ../src/main/xml.c:96 ../src/main/xml.c:97
+#: ../src/main/xml.c:95 ../src/main/xml.c:96
 msgid "Acts 16:31"
 msgstr ""
 
-#: ../src/main/xml.c:101 ../src/main/xml.c:102
+#: ../src/main/xml.c:100 ../src/main/xml.c:101
 msgid "Eph 2:8,9"
 msgstr ""
 
-#: ../src/main/xml.c:106 ../src/main/xml.c:107
+#: ../src/main/xml.c:105 ../src/main/xml.c:106
 msgid "Romans 1:16"
 msgstr ""
 
-#: ../src/main/xml.c:110
+#: ../src/main/xml.c:109
 msgid "What is the Gospel?"
 msgstr ""
 
-#: ../src/main/xml.c:112 ../src/main/xml.c:113
+#: ../src/main/xml.c:111 ../src/main/xml.c:112
 msgid "1 Cor 15:1-4"
 msgstr ""
 
-#: ../src/main/xml.c:417 ../src/main/xml.c:1174
+#: ../src/main/xml.c:409 ../src/main/xml.c:1167
 #, c-format
 msgid "Document not parsed successfully. \n"
 msgstr ""
 
-#: ../src/main/xml.c:423 ../src/main/xml.c:741 ../src/main/xml.c:1055
-#: ../src/main/xml.c:1253
+#: ../src/main/xml.c:415 ../src/main/xml.c:734 ../src/main/xml.c:1048
+#: ../src/main/xml.c:1245
 #, c-format
 msgid "empty document \n"
 msgstr ""
 
-#: ../src/main/xml.c:429
+#: ../src/main/xml.c:421
 #, c-format
 msgid "wrong type, root node != SwordBookmarks\n"
 msgstr ""
 
-#: ../src/main/xml.c:480
+#: ../src/main/xml.c:469
 msgid "Old Testament"
 msgstr ""
 
-#: ../src/main/xml.c:481
+#: ../src/main/xml.c:470
 msgid "Gen - Mal"
 msgstr ""
 
-#: ../src/main/xml.c:486
+#: ../src/main/xml.c:475
 msgid "New Testament"
 msgstr ""
 
-#: ../src/main/xml.c:487
+#: ../src/main/xml.c:476
 msgid "Mat - Rev"
 msgstr ""
 
-#: ../src/main/xml.c:493
+#: ../src/main/xml.c:482
 msgid "Sample Module List"
 msgstr ""
 
-#: ../src/main/xml.c:747 ../src/main/xml.c:1061
+#: ../src/main/xml.c:740 ../src/main/xml.c:1054
 #, c-format
 msgid "wrong type, root node != %s\n"
 msgstr ""
 
-#: ../src/main/xml.c:1214
+#: ../src/main/xml.c:1207
 #, c-format
 msgid ""
 "Save of settings failed! stat %d, size %d\n"
 "%s"
 msgstr ""
 
-#: ../src/main/xml.c:1216
+#: ../src/main/xml.c:1209
 msgid "Attempting to revert to previous save."
 msgstr ""
 
@@ -2150,7 +2149,7 @@ msgstr ""
 msgid "<b>Format</b>"
 msgstr "<b>Formāts</b>"
 
-#: ../ui/export-dialog.glade.h:5 ../ui/prefs.glade.h:27
+#: ../ui/export-dialog.glade.h:5 ../ui/prefs.glade.h:28
 msgid "Book"
 msgstr "Grāmata"
 
@@ -2195,36 +2194,50 @@ msgid "HTML Radio Button"
 msgstr ""
 
 #: ../ui/export-dialog.glade.h:17
-msgid "Key"
+msgid ""
+"Indicates whether verse numbers should appear inline in the text for more "
+"than 1 verse."
 msgstr ""
 
 #: ../ui/export-dialog.glade.h:18
+msgid "Key"
+msgstr ""
+
+#: ../ui/export-dialog.glade.h:19
 msgid "Plain Text"
 msgstr "Vienkāršs teksts"
 
-#: ../ui/export-dialog.glade.h:19
+#: ../ui/export-dialog.glade.h:20
 msgid "Plain Text Radio Button"
 msgstr ""
 
-#: ../ui/export-dialog.glade.h:21
+#: ../ui/export-dialog.glade.h:22
 msgid "Save Export As"
 msgstr ""
 
-#: ../ui/export-dialog.glade.h:22
+#: ../ui/export-dialog.glade.h:23
 msgid "Verse"
 msgstr ""
 
-#: ../ui/export-dialog.glade.h:23
-msgid "Verse Radio Button"
-msgstr ""
-
 #: ../ui/export-dialog.glade.h:24
-msgid "Verse range"
+msgid "Verse Number button"
 msgstr ""
 
 #: ../ui/export-dialog.glade.h:25
+msgid "Verse Radio Button"
+msgstr ""
+
+#: ../ui/export-dialog.glade.h:26
+msgid "Verse range"
+msgstr ""
+
+#: ../ui/export-dialog.glade.h:27
 msgid "Version"
 msgstr "Versija"
+
+#: ../ui/export-dialog.glade.h:28
+msgid "_Verse numbers in text"
+msgstr ""
 
 #: ../ui/markverse.glade.h:4
 msgid "Mark"
@@ -2536,326 +2549,367 @@ msgstr ""
 msgid "Biblical Text"
 msgstr ""
 
-#: ../ui/prefs.glade.h:28
-msgid "Change Biblical Text Combo"
+#: ../ui/prefs.glade.h:27
+msgid "Bold"
 msgstr ""
 
 #: ../ui/prefs.glade.h:29
-msgid "Change Book Combo"
+msgid "Brackets"
 msgstr ""
 
 #: ../ui/prefs.glade.h:30
-msgid "Change Commentary Combo"
+msgid "Change Biblical Text Combo"
 msgstr ""
 
 #: ../ui/prefs.glade.h:31
-msgid "Change Default Dictionary Combo"
+msgid "Change Book Combo"
 msgstr ""
 
 #: ../ui/prefs.glade.h:32
-msgid "Change Dictionary Combo"
+msgid "Change Commentary Combo"
 msgstr ""
 
 #: ../ui/prefs.glade.h:33
+msgid "Change Default Dictionary Combo"
+msgstr ""
+
+#: ../ui/prefs.glade.h:34
+msgid "Change Dictionary Combo"
+msgstr ""
+
+#: ../ui/prefs.glade.h:35
 msgid "Change Personal Notes Combo"
 msgstr ""
 
-#: ../ui/prefs.glade.h:34 ../ui/search-dialog.glade.h:21
+#: ../ui/prefs.glade.h:36 ../ui/search-dialog.glade.h:21
 msgid "Clear Modules from List Button"
 msgstr ""
 
-#: ../ui/prefs.glade.h:35 ../ui/search-dialog.glade.h:22
+#: ../ui/prefs.glade.h:37 ../ui/search-dialog.glade.h:22
 msgid "Clear all modules from the list"
 msgstr ""
 
-#: ../ui/prefs.glade.h:37
+#: ../ui/prefs.glade.h:39
 msgid "Commentaries Checkbox"
 msgstr ""
 
-#: ../ui/prefs.glade.h:39
+#: ../ui/prefs.glade.h:41
 msgid "Commonly -1, to make verse numbers less obtrusive"
 msgstr ""
 
-#: ../ui/prefs.glade.h:40
+#: ../ui/prefs.glade.h:42
 msgid "Cover"
 msgstr "Vāks"
 
-#: ../ui/prefs.glade.h:41
+#: ../ui/prefs.glade.h:43
 msgid "Cross-references in verse list"
 msgstr ""
 
-#: ../ui/prefs.glade.h:42
+#: ../ui/prefs.glade.h:44
 msgid "Current Verse"
 msgstr ""
 
-#: ../ui/prefs.glade.h:43
+#: ../ui/prefs.glade.h:45
 msgid "Daily Devotional"
 msgstr ""
 
-#: ../ui/prefs.glade.h:44
+#: ../ui/prefs.glade.h:46
 msgid "Daily Devotional Combo"
 msgstr ""
 
-#: ../ui/prefs.glade.h:45
+#: ../ui/prefs.glade.h:47
 msgid "Default Dictionary"
 msgstr ""
 
-#: ../ui/prefs.glade.h:46 ../ui/search-dialog.glade.h:39
+#: ../ui/prefs.glade.h:48 ../ui/search-dialog.glade.h:39
 msgid "Delete Selected Module From List Button"
 msgstr ""
 
-#: ../ui/prefs.glade.h:47
+#: ../ui/prefs.glade.h:49
 msgid "Dictionary"
 msgstr "Vārdnīca"
 
-#: ../ui/prefs.glade.h:48
+#: ../ui/prefs.glade.h:50
 msgid "Dictionary/Lexicon"
 msgstr ""
 
-#: ../ui/prefs.glade.h:49
+#: ../ui/prefs.glade.h:51
 msgid "Dictionary/Lexicon Checkbox"
 msgstr ""
 
-#: ../ui/prefs.glade.h:50
+#: ../ui/prefs.glade.h:52
 msgid "Enable Prayer Lists"
 msgstr ""
 
-#: ../ui/prefs.glade.h:51
+#: ../ui/prefs.glade.h:53
 msgid "Enable Prayer Lists Checkbox"
 msgstr ""
 
-#: ../ui/prefs.glade.h:52
+#: ../ui/prefs.glade.h:54
 msgid "Font Colors"
 msgstr ""
 
-#: ../ui/prefs.glade.h:53
+#: ../ui/prefs.glade.h:55
 msgid "Font Misc"
 msgstr ""
 
-#: ../ui/prefs.glade.h:54
+#: ../ui/prefs.glade.h:56
 msgid "Font preferences, per language"
 msgstr ""
 
-#: ../ui/prefs.glade.h:55
+#: ../ui/prefs.glade.h:57
 msgid "Foreground"
 msgstr "Priekšplāns"
 
-#: ../ui/prefs.glade.h:56
+#: ../ui/prefs.glade.h:58
 msgid "General Misc"
 msgstr ""
 
-#: ../ui/prefs.glade.h:57
+#: ../ui/prefs.glade.h:59
 msgid "Greek Lexicon"
 msgstr ""
 
-#: ../ui/prefs.glade.h:58
+#: ../ui/prefs.glade.h:60
 msgid "Greek Lexicon Combo"
 msgstr ""
 
-#: ../ui/prefs.glade.h:59
+#: ../ui/prefs.glade.h:61
 msgid "Hebrew Lexicon"
 msgstr ""
 
-#: ../ui/prefs.glade.h:60
+#: ../ui/prefs.glade.h:62
 msgid "Hebrew Lexicon Combo"
 msgstr ""
 
-#: ../ui/prefs.glade.h:61
+#: ../ui/prefs.glade.h:63
 msgid "Highlight"
 msgstr ""
 
-#: ../ui/prefs.glade.h:62
+#: ../ui/prefs.glade.h:64
 msgid "Highlight Background"
 msgstr ""
 
-#: ../ui/prefs.glade.h:63
+#: ../ui/prefs.glade.h:65
 msgid "Highlight Foreground"
 msgstr ""
 
-#: ../ui/prefs.glade.h:64
+#: ../ui/prefs.glade.h:66
 msgid "Highlight current verse"
 msgstr ""
 
-#: ../ui/prefs.glade.h:65
+#: ../ui/prefs.glade.h:67
 msgid "Highlight current verse check box"
 msgstr ""
 
-#: ../ui/prefs.glade.h:66
+#: ../ui/prefs.glade.h:68
 msgid "Highlight user annotations"
 msgstr ""
 
-#: ../ui/prefs.glade.h:67
+#: ../ui/prefs.glade.h:69
 msgid "Highlight user annotations check box"
 msgstr ""
 
-#: ../ui/prefs.glade.h:68
+#: ../ui/prefs.glade.h:70
 msgid ""
 "If you have set a preferred daily devotion module, its entry for today will "
 "be shown at startup."
 msgstr ""
 
-#: ../ui/prefs.glade.h:69
+#: ../ui/prefs.glade.h:71
 #, fuzzy
 msgid "Invert color pairs"
 msgstr "Iespraust Grāmatzīmi"
 
-#: ../ui/prefs.glade.h:70
+#: ../ui/prefs.glade.h:72
 msgid "Language Font Combo"
 msgstr ""
 
-#: ../ui/prefs.glade.h:71
+#: ../ui/prefs.glade.h:73
 msgid "Links"
 msgstr "Saites"
 
-#: ../ui/prefs.glade.h:72
+#: ../ui/prefs.glade.h:74
 msgid ""
 "Make double-click of a word always use default dictionary instead of "
 "dictionary currently displayed"
 msgstr ""
 
-#: ../ui/prefs.glade.h:73
+#: ../ui/prefs.glade.h:75
 msgid "Make journals/prayer lists available"
 msgstr ""
 
-#: ../ui/prefs.glade.h:74 ../ui/search-dialog.glade.h:61
+#: ../ui/prefs.glade.h:76 ../ui/search-dialog.glade.h:61
 msgid "Module Selection"
 msgstr ""
 
-#: ../ui/prefs.glade.h:75
+#: ../ui/prefs.glade.h:77
 msgid "Modules Misc"
 msgstr ""
 
-#: ../ui/prefs.glade.h:76
+#: ../ui/prefs.glade.h:78
 msgid "Modules Parallel"
 msgstr ""
 
-#: ../ui/prefs.glade.h:77
+#: ../ui/prefs.glade.h:79
 msgid ""
 "Name and size choice for any module in a given language; still overridden by "
 "a specific choice on a particular module"
 msgstr ""
 
-#: ../ui/prefs.glade.h:78
+#: ../ui/prefs.glade.h:80
 msgid "Normal Text"
 msgstr ""
 
-#: ../ui/prefs.glade.h:79 ../ui/search-dialog.glade.h:70
+#: ../ui/prefs.glade.h:81 ../ui/search-dialog.glade.h:70
 msgid "Open Selection Dialog Button"
 msgstr ""
 
-#: ../ui/prefs.glade.h:80
+#: ../ui/prefs.glade.h:82
 msgid "Open a dialog to select modules"
 msgstr ""
 
-#: ../ui/prefs.glade.h:81
+#: ../ui/prefs.glade.h:83
 msgid "Parallel View in a tab"
 msgstr ""
 
-#: ../ui/prefs.glade.h:82
+#: ../ui/prefs.glade.h:84
 msgid "Personal Notes"
 msgstr "Personīgās piezīmes"
 
-#: ../ui/prefs.glade.h:85
+#: ../ui/prefs.glade.h:87
 msgid "Previewer Checkbox"
 msgstr ""
 
-#: ../ui/prefs.glade.h:86 ../ui/search-dialog.glade.h:80
+#: ../ui/prefs.glade.h:88 ../ui/search-dialog.glade.h:80
 msgid "Remove the selected module from the list"
 msgstr ""
 
-#: ../ui/prefs.glade.h:87
+#: ../ui/prefs.glade.h:89
 msgid "Resize images"
 msgstr ""
 
-#: ../ui/prefs.glade.h:88
+#: ../ui/prefs.glade.h:90
 msgid "Resize images checkbox"
 msgstr ""
 
-#: ../ui/prefs.glade.h:89
+#: ../ui/prefs.glade.h:91
 msgid "Scroll to Previous/Next Chapter"
 msgstr ""
 
-#: ../ui/prefs.glade.h:90
+#: ../ui/prefs.glade.h:92
 msgid "Scroll to Previous/Next Chapter Checkbox"
 msgstr ""
 
-#: ../ui/prefs.glade.h:91
+#: ../ui/prefs.glade.h:93
 msgid "Select A Directory"
 msgstr ""
 
-#: ../ui/prefs.glade.h:92
+#: ../ui/prefs.glade.h:94
 msgid ""
 "Select a particular language for interface display, other than your usual "
 "setting"
 msgstr ""
 
-#: ../ui/prefs.glade.h:93
+#: ../ui/prefs.glade.h:95
 msgid "Show Daily Devotion at start up"
 msgstr ""
 
-#: ../ui/prefs.glade.h:94
+#: ../ui/prefs.glade.h:96
 msgid "Show splash screen at start up"
 msgstr ""
 
-#: ../ui/prefs.glade.h:95
+#: ../ui/prefs.glade.h:97
+msgid "Show verse number as a superscript"
+msgstr ""
+
+#: ../ui/prefs.glade.h:98
+msgid "Show verse number in bold text"
+msgstr ""
+
+#: ../ui/prefs.glade.h:99
+msgid "Show verse number with [surrounding brackets]"
+msgstr ""
+
+#: ../ui/prefs.glade.h:100
 msgid ""
 "Single selection of Bible+commentary+book+dictionary, or many sets of such "
 "selections in a tabbed interface"
 msgstr ""
 
-#: ../ui/prefs.glade.h:96
+#: ../ui/prefs.glade.h:101
 msgid "Special Locale (requires restart)"
 msgstr ""
 
-#: ../ui/prefs.glade.h:97
+#: ../ui/prefs.glade.h:102
 msgid "Special Locale Combo"
 msgstr ""
 
-#: ../ui/prefs.glade.h:98
+#: ../ui/prefs.glade.h:103
 msgid "StudyPad default directory combo"
 msgstr ""
 
-#: ../ui/prefs.glade.h:99
+#: ../ui/prefs.glade.h:104
+#, fuzzy
+msgid "Superscript"
+msgstr "Aparaksts"
+
+#: ../ui/prefs.glade.h:105
 msgid "Tabs and Panes"
 msgstr ""
 
-#: ../ui/prefs.glade.h:100
+#: ../ui/prefs.glade.h:106
 msgid "Use Bible Text scroll bar to scroll to previous or next chapter"
 msgstr ""
 
-#: ../ui/prefs.glade.h:101
+#: ../ui/prefs.glade.h:107
 msgid "Use default Dictionary"
 msgstr ""
 
-#: ../ui/prefs.glade.h:102
+#: ../ui/prefs.glade.h:108
 msgid "Use default Dictionary Checkbox"
 msgstr ""
 
-#: ../ui/prefs.glade.h:103
+#: ../ui/prefs.glade.h:109
 msgid "Use inverted highlight on user-annotated verses"
 msgstr ""
 
-#: ../ui/prefs.glade.h:104
+#: ../ui/prefs.glade.h:110
 msgid "Use tabbed browsing"
 msgstr ""
 
-#: ../ui/prefs.glade.h:105
+#: ../ui/prefs.glade.h:111
 msgid "Use tabbed browsing Checkbox"
 msgstr ""
 
-#: ../ui/prefs.glade.h:106
+#: ../ui/prefs.glade.h:112
 msgid "Use the verse list for Bible cross-references instead of the previewer"
 msgstr ""
 
-#: ../ui/prefs.glade.h:107
+#: ../ui/prefs.glade.h:113
 msgid "Verse Number"
 msgstr ""
 
-#: ../ui/prefs.glade.h:108
+#: ../ui/prefs.glade.h:114
+msgid "Verse number bold checkbox"
+msgstr ""
+
+#: ../ui/prefs.glade.h:115
+msgid "Verse number bracket checkbox"
+msgstr ""
+
+#: ../ui/prefs.glade.h:116
 msgid "Verse number size"
 msgstr ""
 
-#: ../ui/prefs.glade.h:109
+#: ../ui/prefs.glade.h:117
+msgid "Verse number superscript checkbox"
+msgstr ""
+
+#: ../ui/prefs.glade.h:118
+msgid "Verse number:"
+msgstr ""
+
+#: ../ui/prefs.glade.h:119
 msgid "Xrefs in verse list check box"
 msgstr ""
 

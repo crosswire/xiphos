@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * bookmark_dialog.c - gui to popup a dialog for adding a bookmark
  *
- * Copyright (C) 2005-2010 Xiphos Developer Team
+ * Copyright (C) 2005-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,7 +24,9 @@
 #endif
 
 #include <gtk/gtk.h>
-#include <glade/glade-xml.h>
+#ifndef USE_GTKBUILDER
+  #include <glade/glade-xml.h>
+#endif
 
 #include "gui/bookmark_dialog.h"
 #include "gui/bookmarks_menu.h"
@@ -36,6 +38,8 @@
 #include "main/sword.h"
 #include "main/settings.h"
 #include "main/xml.h"
+
+#include "../xiphos_html/xiphos_html.h"
 
 #include "gui/debug_glib_null.h"
 
@@ -297,11 +301,11 @@ void on_mark_verse_response(GtkDialog * dialog,
 	case GTK_RESPONSE_ACCEPT: /*  mark the verse  */
 		xml_set_list_item("osisrefmarkedverses", "markedverse",
 				  reference, (note ?
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 					      note
 #else
 					      g_strdelimit(note, "\"", '\'')
-#endif /* !USE_GTKMOZEMBED */
+#endif /* !USE_XIPHOS_HTML */
 					      : "user content"));
 		marked_cache_fill(settings.MainWindowModule, settings.currentverse);
 		main_display_bible(NULL, settings.currentverse);
@@ -434,32 +438,40 @@ static GtkWidget *_create_bookmark_dialog(gchar * label,
 					  gchar * module,
 					  gchar * key)
 {
+#ifdef USE_GTKBUILDER
+	GtkBuilder *gxml;
+#else
 	GladeXML *gxml;
-	gchar *glade_file;
-
-	glade_file = gui_general_user_file ("bookmarks.glade", TRUE);
+#endif
+	gchar *glade_file = gui_general_user_file ("bookmarks" UI_SUFFIX, TRUE);
 	g_return_val_if_fail(glade_file != NULL, NULL);
 	GS_message(("%s",glade_file));
 
 	/* build the widget */
+#ifdef USE_GTKBUILDER
+	gxml = gtk_builder_new ();
+	gtk_builder_add_from_file (gxml, glade_file, NULL);
+#else
 	gxml = glade_xml_new (glade_file, NULL, NULL);
+#endif
 	g_free (glade_file);
 	g_return_val_if_fail(gxml != NULL, NULL);
 
 	/* lookup the root widget */
-	bookmark_dialog = glade_xml_get_widget (gxml, "dialog");
+	bookmark_dialog = UI_GET_ITEM(gxml, "dialog");
 	g_signal_connect(bookmark_dialog, "response",
 			 G_CALLBACK(on_dialog_response), NULL);
 
 	/* treeview */
-	treeview = glade_xml_get_widget (gxml, "treeview");
+	treeview = UI_GET_ITEM(gxml, "treeview");
 	setup_treeview();
 	g_signal_connect(treeview, "button-release-event",
 			 G_CALLBACK(on_treeview_button_release_event), NULL);
 	/* entrys */
-	entry_label = glade_xml_get_widget (gxml, "entry1");
-	entry_key = glade_xml_get_widget (gxml, "entry2");
-	entry_module = glade_xml_get_widget (gxml, "entry3");
+	entry_label = UI_GET_ITEM(gxml, "entry1");
+	entry_key = UI_GET_ITEM(gxml, "entry2");
+	entry_module = UI_GET_ITEM(gxml, "entry3");
+
 	gtk_entry_set_text(GTK_ENTRY(entry_label), label);
 	gtk_entry_set_text(GTK_ENTRY(entry_key), key);
 	gtk_entry_set_text(GTK_ENTRY(entry_module), module);
@@ -471,8 +483,8 @@ static GtkWidget *_create_bookmark_dialog(gchar * label,
 			 G_CALLBACK(on_dialog_enter), NULL);
 
 	/* dialog buttons */
-	button_new_folder = glade_xml_get_widget (gxml, "button1");
-	button_add_bookmark = glade_xml_get_widget (gxml, "button3");
+	button_new_folder = UI_GET_ITEM(gxml, "button1");
+	button_add_bookmark = UI_GET_ITEM(gxml, "button3");
 
 	return bookmark_dialog;
 }
@@ -495,28 +507,36 @@ static GtkWidget *_create_bookmark_dialog(gchar * label,
 static GtkWidget *_create_mark_verse_dialog(gchar * module,
 					    gchar * key)
 {
+#ifdef USE_GTKBUILDER
+	GtkBuilder *gxml;
+#else
 	GladeXML *gxml;
-	gchar *glade_file;
+#endif
 	GtkWidget *sw;
 	gchar osisreference[100];
 	gchar *old_note = NULL;
+
+	gchar *glade_file = gui_general_user_file("markverse" UI_SUFFIX, TRUE);
+	g_return_val_if_fail(glade_file != NULL, NULL);
+	GS_message(("%s",glade_file));
 
 	g_snprintf(osisreference,  100, "%s %s", module,
 		   main_get_osisref_from_key((const char *)module,
 					     (const char *)key));
 	note = NULL;
 
-	glade_file = gui_general_user_file("markverse.glade", TRUE);
-	g_return_val_if_fail(glade_file != NULL, NULL);
-	GS_message(("%s",glade_file));
-
 	/* build the widget */
+#ifdef USE_GTKBUILDER
+	gxml = gtk_builder_new ();
+	gtk_builder_add_from_file (gxml, glade_file, NULL);
+#else
 	gxml = glade_xml_new(glade_file, NULL, NULL);
+#endif
 	g_free(glade_file);
 	g_return_val_if_fail(gxml != NULL, NULL);
 
 	/* lookup the root widget */
-	mark_verse_dialog = glade_xml_get_widget(gxml, "dialog");
+	mark_verse_dialog = UI_GET_ITEM(gxml, "dialog");
 	gtk_window_set_default_size (GTK_WINDOW (mark_verse_dialog),
                                    300, 350);
 
@@ -524,13 +544,15 @@ static GtkWidget *_create_mark_verse_dialog(gchar * module,
 			 G_CALLBACK(on_mark_verse_response), NULL);
 
 	/* entrys */
-	entry_key = glade_xml_get_widget(gxml, "entry2");
-	entry_module = glade_xml_get_widget(gxml, "entry3");
-	textview = glade_xml_get_widget(gxml, "textview");
+	entry_key = UI_GET_ITEM(gxml, "entry2");
+	entry_module = UI_GET_ITEM(gxml, "entry3");
+	textview = UI_GET_ITEM(gxml, "textview");
+
 	textbuffer = gtk_text_view_get_buffer ((GtkTextView*)textview);
 	gtk_entry_set_text(GTK_ENTRY(entry_key), key);
 	gtk_entry_set_text(GTK_ENTRY(entry_module), module);
-	sw = glade_xml_get_widget(gxml, "scrolledwindow1");
+
+	sw = UI_GET_ITEM(gxml, "scrolledwindow1");
 
 	gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (textview), GTK_WRAP_WORD);
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),

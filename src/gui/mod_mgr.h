@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * mod_mgr.h
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,13 +26,26 @@
 extern "C" {
 #endif
 #include "main/mod_mgr.h"
+#include <gtk/gtk.h>
 
 void gui_update_install_status(glong total, glong done, const gchar *message);
 void gui_update_install_progressbar(gdouble fraction);
 void gui_open_mod_mgr(void);
 void gui_open_mod_mgr_initial_run(void);
 void clear_and_hide_progress_bar(void);
-void on_notebook1_switch_page(GtkNotebook * notebook, GtkNotebookPage * page, guint page_num, gpointer user_data);
+
+#ifdef USE_GTK_3
+void
+on_notebook1_switch_page(GtkNotebook * notebook,
+			 gpointer arg,
+             guint page_num, gpointer user_data);
+#else
+void
+on_notebook1_switch_page(GtkNotebook * notebook,
+			 GtkNotebookPage * page,
+			 guint page_num, gpointer user_data);
+#endif	
+//void on_notebook1_switch_page(GtkNotebook * notebook, guint page_num, gpointer user_data);
 void on_radiobutton2_toggled(GtkToggleButton * togglebutton, gpointer user_data);
 void on_radiobutton4_toggled(GtkToggleButton * togglebutton, gpointer user_data);
 void save_sources(void);

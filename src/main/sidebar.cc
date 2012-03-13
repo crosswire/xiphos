@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * utilities.c - support functions
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +22,6 @@
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
 #endif
-
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
@@ -347,11 +346,16 @@ void main_create_pixbufs(void)
 			pixbuf_finder("book_open_rtol.png", 16, NULL);
 	}
 
-
-	pixbufs->pixbuf_helpdoc =
-	    gtk_widget_render_icon(widgets.app,
+#ifdef USE_GTK_3
+	pixbufs->pixbuf_helpdoc = 
+		gtk_widget_render_icon_pixbuf(widgets.app,
+                                              GTK_STOCK_DND,
+                                              GTK_ICON_SIZE_MENU );
+#else
+	gtk_widget_render_icon(widgets.app,
 				   GTK_STOCK_DND,
 				   GTK_ICON_SIZE_MENU, NULL);
+#endif
 }
 
 
@@ -701,12 +705,12 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 		    (GTK_TREE_MODEL(model), &selected)
 		    && strstr(key, "chapter:"))
 			add_verses_to_chapter(model, selected, key);
-#endif
+#endif 
 
-		if (!GTK_CHECK_MENU_ITEM(widgets.viewtexts_item)->active) {
-			GTK_CHECK_MENU_ITEM(widgets.viewtexts_item)->active = 1;
+		if (!gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM(widgets.viewtexts_item))) {
+			gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(widgets.viewtexts_item), 1);
 			on_show_bible_text_activate
-			    (GTK_MENU_ITEM(widgets.viewtexts_item), NULL);
+			    (GTK_CHECK_MENU_ITEM(widgets.viewtexts_item), NULL);
 		}
 
 		if (key)
@@ -722,20 +726,20 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 					       notebook_comm_book), 0);
 		settings.comm_showing = TRUE;
 
-		if ((!GTK_CHECK_MENU_ITEM(widgets.viewcomms_item)->active) ||
+		if ((!gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM(widgets.viewcomms_item))) ||
 		    (!settings.comm_showing)) {
-			GTK_CHECK_MENU_ITEM(widgets.viewcomms_item)->active = 1;
+			gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(widgets.viewcomms_item), 1);
 			on_show_commentary_activate
-			    (GTK_MENU_ITEM(widgets.viewcomms_item), NULL);
+			    (GTK_CHECK_MENU_ITEM(widgets.viewcomms_item), NULL);
 		}
 		main_display_commentary(mod, settings.currentverse);
 		break;
 
 	case DICTIONARY_TYPE:
-		if (!GTK_CHECK_MENU_ITEM(widgets.viewdicts_item)->active) {
-			GTK_CHECK_MENU_ITEM(widgets.viewdicts_item)->active = 1;
+		if (!gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM(widgets.viewdicts_item))) {
+			gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(widgets.viewdicts_item), 1);
 			on_show_dictionary_lexicon_activate
-			    (GTK_MENU_ITEM(widgets.viewcomms_item), NULL);
+			    (GTK_CHECK_MENU_ITEM(widgets.viewcomms_item), NULL);
 		}
 		main_display_dictionary(mod, settings.dictkey);
 		break;
@@ -773,11 +777,11 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 					 FALSE);
 		gtk_tree_path_free(path);
 
-		if ((!GTK_CHECK_MENU_ITEM(widgets.viewcomms_item)->active) ||
+		if ((!gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM(widgets.viewcomms_item))) ||
 		    (!settings.comm_showing)) {
-			GTK_CHECK_MENU_ITEM(widgets.viewcomms_item)->active = 1;
+			gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(widgets.viewcomms_item), 1);
 			on_show_commentary_activate
-			    (GTK_MENU_ITEM(widgets.viewcomms_item), NULL);
+			    (GTK_CHECK_MENU_ITEM(widgets.viewcomms_item), NULL);
 		}
 
 		main_display_book(mod, (key ? key : (gchar *) "0"));

@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * bookmarks_treeview.c - gui for bookmarks using treeview
  *
- * Copyright (C) 2003-2010 Xiphos Developer Team
+ * Copyright (C) 2003-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,7 +25,9 @@
 
 #include <gtk/gtk.h>
 #include <libxml/parser.h>
-#include <glade/glade-xml.h>
+#ifndef USE_GTKBUILDER
+  #include <glade/glade-xml.h>
+#endif
 //#include <gal/shortcut-bar/e-shortcut-bar.h>
 #include <math.h>
 #include <ctype.h>
@@ -88,7 +90,7 @@ static void save_treeview_to_xml_bookmarks(GtkTreeIter * iter, gchar * filename)
 	xmlNodePtr root_node = NULL;
 	xmlNodePtr cur_node = NULL;
 	xmlDocPtr root_doc;
-	xmlAttrPtr root_attr;
+//	xmlAttrPtr root_attr;
 	gchar *caption = NULL;
 	gchar *key = NULL;
 	gchar *module = NULL;
@@ -103,7 +105,7 @@ static void save_treeview_to_xml_bookmarks(GtkTreeIter * iter, gchar * filename)
 	if (root_doc != NULL) {
 		root_node = xmlNewNode(NULL, (const xmlChar *)
 				       "SwordBookmarks");
-		root_attr =
+		//root_attr =
 		    xmlNewProp(root_node, (const xmlChar *) "syntaxVersion",
 			       (const xmlChar *) "1");
 		xmlDocSetRootElement(root_doc, root_node);
@@ -852,30 +854,34 @@ G_MODULE_EXPORT void on_open_in_tab_activate(GtkMenuItem * menuitem, gpointer us
 void gui_create_bookmark_menu(void)
 {
 	gchar *glade_file;
+#ifdef USE_GTKBUILDER
+	GtkBuilder *gxml;
+	glade_file = gui_general_user_file ("xi-menus-popup.gtkbuilder", FALSE);
+#else
 	GladeXML *gxml;
-
 	glade_file = gui_general_user_file ("xi-menus.glade", FALSE);
+#endif
 	g_return_if_fail ((glade_file != NULL));
 
+#ifdef USE_GTKBUILDER
+	gxml = gtk_builder_new ();
+	gtk_builder_add_from_file (gxml, glade_file, NULL);
+#else
 	gxml = glade_xml_new (glade_file, "menu_bookmark", NULL);
-
+#endif
 	g_free (glade_file);
 	g_return_if_fail ((gxml != NULL));
 
-	 menu.menu = glade_xml_get_widget (gxml, "menu_bookmark");
-
-	menu.in_tab = glade_xml_get_widget (gxml, "open_in_new_tab");
-	menu.in_dialog = glade_xml_get_widget (gxml, "open_in_a_dialog");
-	menu.new = glade_xml_get_widget (gxml, "new_folder");
-	menu.insert = glade_xml_get_widget (gxml, "insert_bookmark");
-	menu.edit = glade_xml_get_widget (gxml, "edit_item");
-	menu.delete = glade_xml_get_widget (gxml, "delete_item");
-
-	menu.reorder = glade_xml_get_widget (gxml, "allow_reordering");
-
-	menu.bibletime = glade_xml_get_widget (gxml, "import_bibletime_bookmarks1");
-
-	menu.remove = glade_xml_get_widget (gxml, "remove_folder");
+	menu.menu = UI_GET_ITEM(gxml, "menu_bookmark");
+	menu.in_tab = UI_GET_ITEM(gxml, "open_in_new_tab");
+	menu.in_dialog = UI_GET_ITEM(gxml, "open_in_a_dialog");
+	menu.new = UI_GET_ITEM(gxml, "new_folder");
+	menu.insert = UI_GET_ITEM(gxml, "insert_bookmark");
+	menu.edit = UI_GET_ITEM(gxml, "edit_item");
+	menu.delete = UI_GET_ITEM(gxml, "delete_item");
+	menu.reorder = UI_GET_ITEM(gxml, "allow_reordering");
+	menu.bibletime = UI_GET_ITEM(gxml, "import_bibletime_bookmarks1");
+	menu.remove = UI_GET_ITEM(gxml, "remove_folder");
 
 	gtk_widget_set_sensitive(menu.in_tab, FALSE);
 	gtk_widget_set_sensitive(menu.in_dialog, FALSE);
@@ -886,10 +892,14 @@ void gui_create_bookmark_menu(void)
 	gtk_widget_set_sensitive(menu.bibletime, TRUE);
 
 	gtk_widget_set_sensitive(menu.remove, TRUE);
-	//gtk_widget_hide(menu.remove);
-
+	gtk_widget_hide(menu.remove);
     	/* connect signals and data */
+#ifdef USE_GTKBUILDER    
+        gtk_builder_connect_signals (gxml, NULL);
+	/*gtk_builder_connect_signals_full
+		(gxml, (GtkBuilderConnectFunc)gui_glade_signal_connect_func, NULL);*/
+#else
 	glade_xml_signal_autoconnect_full
 		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);
-
+#endif
 }
