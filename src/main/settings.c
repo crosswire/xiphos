@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * settings.c - Guess what?
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -63,6 +63,10 @@
  */
 SETTINGS settings;
 
+char *bold_start = "<b>",
+     *bold_end   = "</b>",
+     *superscript_start = "<sup>",
+     *superscript_end   = "</sup>";
 
 /******************************************************************************
  * static
@@ -120,7 +124,7 @@ int settings_init(int argc, char **argv, int new_configs, int new_bookmarks)
 				strerror(errno));
 			gui_generic_warning(msg);
 			/* if we can not create gSwordDir exit */
-			gtk_exit(1);
+			exit(1);
 		}
 	}
 
@@ -282,15 +286,6 @@ int init_bookmarks(int new_bookmarks)
 		if ((Mkdir(settings.swbmDir, S_IRWXU)) == -1) {
 			g_warning("can't create bookmarks dir");
 			return 0;
-		}
-	}
-
-	/* set removed dir to settings.swbmDir + /removed */
-	removed = g_strdup_printf("%s/%s", settings.swbmDir, "removed");
-	if (g_access(removed, F_OK) == -1) {
-		if ((Mkdir(removed, S_IRWXU)) == -1) {
-			g_warning("can't create removed dir");
-			//return 0;
 		}
 	}
 
@@ -802,6 +797,27 @@ void load_settings_structure(void)
 		settings.showversenum = 1;
 	}
 
+	if ((buf = xml_get_value("misc", "verse_num_bold")))
+		settings.verse_num_bold = atoi(buf);
+	else {
+		xml_add_new_item_to_section("misc", "verse_num_bold", "0");
+		settings.verse_num_bold = 0;
+	}
+
+	if ((buf = xml_get_value("misc", "verse_num_bracket")))
+		settings.verse_num_bracket = atoi(buf);
+	else {
+		xml_add_new_item_to_section("misc", "verse_num_bracket", "0");
+		settings.verse_num_bracket = 0;
+	}
+
+	if ((buf = xml_get_value("misc", "verse_num_superscript")))
+		settings.verse_num_superscript = atoi(buf);
+	else {
+		xml_add_new_item_to_section("misc", "verse_num_superscript", "0");
+		settings.verse_num_superscript = 0;
+	}
+
 	if ((buf = xml_get_value("misc", "versehighlight")))
 		settings.versehighlight = atoi(buf);
 	else {
@@ -836,6 +852,10 @@ void load_settings_structure(void)
 		xml_add_new_item_to_section("misc","imageresize","1");
 		settings.imageresize = 1;
 	}
+#ifdef WIN32
+	/* due to hackery caused by webkit "no images" bug */
+	settings.imageresize = 1;
+#endif
 
 	if ((buf = xml_get_value("editor", "spell_language")))
 		settings.spell_language = g_strdup(buf);

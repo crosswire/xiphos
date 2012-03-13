@@ -1,0 +1,14 @@
+#!/usr/bin/env python
+# encoding: utf8
+
+lib = bld.new_task_gen(
+    features='cxx cc',
+    includes='. ../.. ../../src %s' % bld.env['GNOME_INCLUDE'],
+    target='webkit',
+    uselib= bld.env['ALL_LIBS'],
+)
+
+lib.add_marshal_file('marshal.list', 'wk_marshal')
+lib.find_sources_in_dirs('.')
+
+	

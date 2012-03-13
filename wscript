@@ -17,14 +17,7 @@ import waffles.gnome as gnome
 bzrrevno = '$CurRevno$'
 bzrrevid = '$CurRevid$'
 
-VERSION='3.1.4'
-
-if VERSION.find('dev') != -1 and len(bzrrevno.split()) > 1:
-        VERSION = '+'.join((VERSION,
-                            'bzr' + bzrrevno.split()[1]))
-        if bzrrevid.split()[1].find('svn') != -1:
-                VERSION = '+'.join((VERSION,
-                                    'svn' + bzrrevid.split()[1].split(':')[-1]))
+VERSION='3.1.5'
 
 APPNAME='xiphos'
 PACKAGE='xiphos'
@@ -53,90 +46,117 @@ def set_options(opt):
 
     opt.tool_options('g++ gcc')
 
-    opt.add_option('--enable-gtkhtml', action='store_true', default=False,
-            dest='gtkhtml',
-            help='Use gtkhtml instead of gtkmozembed [Default: disabled]')
+    maingroup = opt.add_option_group('Main Xiphos Options')
 
-    opt.add_option('--disable-console',
-            action='store_true',
-            default=False,
-            help='Disable console window in win32 [Default: enabled]',
-            dest='no_console')
+    maingroup.add_option('--gtk',
+                   action='store', default='auto', dest='gtkver',
+                   choices=['auto', '3', '2'],
+                   help="Select gtk+ API ['auto', '3', '2']")
 
-    opt.add_option('-d', '--debug-level',
-		action = 'store',
+    maingroup.add_option('--backend',
+                   action='store', default='auto', dest='backend',
+                   choices=['auto', 'webkit', 'xulrunner', 'gtkhtml'],
+                   help="Select rendering backend ['auto', 'webkit', 'xulrunner', 'gtkhtml']")
+
+    miscgroup = opt.add_option_group('Miscellaneous Options')
+
+    miscgroup.add_option('-d', '--debug-level',
+                action = 'store',
 		default = ccroot.DEBUG_LEVELS.ULTRADEBUG,
 		help = "Specify the debugging level ['ultradebug', 'debug', 'release', 'optimized']",
 		choices = ['ultradebug', 'debug', 'release', 'optimized'],
 		dest = 'debug_level')
 
-    opt.add_option('--strip', action='store_true', default=False,
+    miscgroup.add_option('--strip', action='store_true', default=False,
                     help='Strip resulting binary')
 
-    opt.add_option('--enable-delint', action='store_true', default=False,
+    miscgroup.add_option('--enable-delint', action='store_true', default=False,
             dest='delint',
-            help='Use -Wall -Werror[Default: disabled]')
+            help='Use -Wall -Werror [default: disabled]')
 
+    miscgroup.add_option('--disable-dbus',
+                   action = 'store_true',
+                   default = False,
+                   help = "Disable the Xiphos dbus API [default: enabled]",
+                   dest = 'without_dbus')
 
     ### cross compilation from Linux/Unix for win32
 
-    opt.add_option('--target-platform-win32', action='store_true', default=False,
+    w32 = opt.add_option_group ('Windows and Cross-compile Options', '')
+
+    w32.add_option('--target-platform-win32', action='store_true', default=False,
             dest='cross_win32',
-            help='Cross-compile for win32 [Default: disabled]')
+            help='Cross-compile for win32 [default: disabled]')
+
+    w32.add_option('--disable-console',
+            action='store_true',
+            default=False,
+            help='Disable console window in win32 [default: enabled]',
+            dest='no_console')
 
     # FIXME - handle this option
-    #opt.add_option('--rootdir',
+    #w32.add_option('--rootdir',
 		#action = 'store',
 		#help = 'Specify path where resides msys. This dir is used for finding libraries and other files',
 		#dest = 'rootdir')
 
-    opt.add_option('--pkgconf-libdir',
+    w32.add_option('--pkgconf-libdir',
 		action = 'store',
 		default = os.path.join(ROOTDIR_WIN32, 'local', 'lib', 'pkgconfig'),
 		help = "Specify dir with *.pc files for cross-compilation",
 		dest = 'pkg_conf_libdir')
 
-    opt.add_option('--pkgconf-prefix',
+    w32.add_option('--pkgconf-prefix',
 		action = 'store',
 		default = os.path.join(ROOTDIR_WIN32, 'local'),
 		help = "Specify prefix with folders for headers and libraries for cross-compilation",
 		dest = 'pkg_conf_prefix')
 
-    opt.add_option('--mozilla-distdir',
+    w32.add_option('--mozilla-distdir',
 		action = 'store',
 		default = os.path.join(ROOTDIR_WIN32, 'local'),
 		help = "Folder 'dist' in unpacked mozilla devel tarball. Mandatory for win32 compilation",
 		dest = 'mozilla_distdir')
 
-    opt.add_option('--disable-dbus',
-                   action = 'store_true',
-                   default = False,
-                   help = "Disable the Xiphos dbus API [Default: enabled]",
-                   dest = 'without_dbus')
+    ######### end of windows options.
 
-    opt.add_option('--no-post-install',
+    group = opt.add_option_group ('Localization and documentation')
+    group.add_option('--helpdir',
+                     action = 'store',
+                     default = '${DATAROOTDIR}/gnome/help/${PACKAGE}',
+                     help = "user documentation [default: ${DATAROOTDIR}/gnome/help/${PACKAGE}]",
+                     dest = 'helpdir')
+    group.add_option('--disable-help',
+                     action='store_true',
+                    default=False,
+                     help='Disable creating help files',
+                     dest='disable_help')
+    group.add_option('--no-post-install',
                    action = 'store_false',
                    default = True,
                    help = "Disable post-install tasks",
                    dest = 'post_install')
 
-    group = opt.add_option_group ('Localization and documentation', '')
-    group.add_option('--helpdir',
-		action = 'store',
-		default = '${DATAROOTDIR}/gnome/help/${PACKAGE}',
-                help = "user documentation [Default: ${DATAROOTDIR}/gnome/help/${PACKAGE}]",
-		dest = 'helpdir')
-    group.add_option('--disable-help',
-            action='store_true',
-            default=False,
-            help='Disable creating help files',
-            dest='disable_help')
+    deprecated_group = opt.add_option_group ('Deprecated options')
 
+    deprecated_group.add_option('--enable-gtkhtml',
+                   action='store_const', const='gtkhtml', dest='backend',
+                   help='Use gtkhtml rendering backend [deprecated by --backend gtkhtml]')
+
+    deprecated_group.add_option('--enable-webkit',
+                   action='store_const', const='webkit', dest='backend',
+                   help='Use gtk-webkit backend [deprecated by --backend webkit]')
+
+    deprecated_group.add_option('--enable-gtk2',
+                   action='store_const', const='2', dest='gtkver',
+                   help='Use gtk2 API [deprecated by --gtk=2]')
 
 def configure(conf):
 
+    opt = Options.options
+    dfn = conf.define
     env = conf.env
-    import Utils
+
     platform = Utils.detect_platform()
     env['IS_WIN32'] = platform == 'win32'
     env['IS_LINUX'] = platform == 'linux'
@@ -149,6 +169,7 @@ def configure(conf):
         env['IS_WIN32'] = True
         env['IS_LINUX'] = False
         Utils.pprint('CYAN', "Cross-compilation")
+        env['CROSS'] = os.environ['CROSS']
 
     # IS_WIN32 means compiling for win32, not compiling necessary on win32
     if env['IS_WIN32']:
@@ -176,7 +197,6 @@ def configure(conf):
     conf.check_tool('gnu_dirs misc')
     conf.check_tool('intltool')
 
-    opt = Options.options
     env['DISABLE_HELP'] = opt.disable_help
 
     if not opt.disable_help:
@@ -189,18 +209,6 @@ def configure(conf):
     conf.undefine('DATADIR')
 
     env['POST_INSTALL']=opt.post_install
-
-    if env['IS_WIN32']:
-        # tool to link icon with executable
-        # use tool modified for cross-compilation support
-        env['POST_INSTALL']=False
-        conf.check_tool('winres', tooldir=_tooldir)
-        # the following line does not work because of a problem with waf
-        # conf.check_tool('intltool')
-        #env['POCOM'] = conf.find_program('msgfmt')
-        #env['INTLTOOL'] = '/usr/local/bin/intltool-merge'
-    #else:
-
 
     # delint flags
     env['CXXFLAGS_DELINT'] = ['-Werror', '-Wall']
@@ -231,31 +239,64 @@ def configure(conf):
         conf.check(lib='shell32', uselib='SHELLAPI', mandatory=True)
         # this isn't supposed to be necessary
         env['LINKFLAGS'] = ['-lws2_32']
-    
-    ### cmd line options
-
-    opt = Options.options
-    dfn = conf.define
-    env = conf.env
-
-
-    #if env['IS_CROSS_WIN32']:
-        # allows to use linux pkg-config for cross-compilation
-        #os.environ['PKG_CONFIG_LIBDIR'] = opt.pkg_conf_libdir
-        #env['PKG_CONFIG_PREFIX'] = opt.pkg_conf_prefix
-
-    # mozilla distdir mandatory for win32 for using libxul
-    if env['IS_WIN32']:
+        dfn('WIN32', 1)
+        # mozilla distdir mandatory for win32 for using libxul
         if opt.mozilla_distdir:
             env['MOZILLA_DISTDIR'] = opt.mozilla_distdir
         else:
             env['MOZILLA_DISTDIR'] = '%s/../..' % env['PKG_CONFIG_LIBDIR']
+        # tool to link icon with executable
+        # use tool modified for cross-compilation support
+        env['POST_INSTALL']=False
+        conf.check_tool('winres', tooldir=_tooldir)
+        # the following line does not work because of a problem with waf
+        # conf.check_tool('intltool')
+        #env['POCOM'] = conf.find_program('msgfmt')
+        #env['INTLTOOL'] = '/usr/local/bin/intltool-merge'
+    
+    if env['IS_CROSS_WIN32']:
+        # allows to use linux pkg-config for cross-compilation
+        os.environ['PKG_CONFIG_PATH'] = opt.pkg_conf_libdir
+        env['PKG_CONFIG_PREFIX'] = opt.pkg_conf_prefix
 
-    if env['IS_WIN32']:
-        dfn('WIN32', 1)
+    # Auto detecting gtk version, if none were specified.
+    if opt.gtkver == 'auto':
+            if conf.check_cfg(modversion='libgtkhtml-4.0', okmsg='ok',
+                              msg='Auto detecting gtk 3'):
+                    opt.gtkver = '3'
+            else:
+                    conf.check_cfg(modversion='libgtkhtml-3.14', okmsg='ok',
+                                   msg='Auto detecting gtk 2', mandatory=True)
+                    opt.gtkver = '2'
+
+    # Auto detecting backed if none were specified
+    if opt.backend == 'auto':
+            webkit = 'webkitgtk-3.0' if opt.gtkver == '3' else 'webkit-1.0'
+            if conf.check_cfg(modversion=webkit, msg='Auto detecting webkit', okmsg='ok',
+                              erromsg='Not found'):
+                    opt.backend = 'webkit'
+
+            elif conf.check_cfg(modversion='libxul-embedding', msg='Auto detecting xulrunner', okmsg='ok',
+                              erromsg='Not found'):
+                    opt.backend = 'xulrunner'
+
+            else:
+                    gtkhtml = 'libgtkhtml-4.0' if opt.gtkver == '3' else 'libgtkhtml-3.14'
+                    conf.check_cfg(modversion=gtkhtml, msg='Auto detecting gtkhtml', okmsg='ok',
+                                   erromsg='Not found', mandatory=True)
+                    opt.backend = 'gtkhtml'
+
+    #gtk
+    if opt.gtkver == '2':
+        env['ENABLE_GTK2'] = True
+        dfn('GTK2', 1)
 
     # gtkhtml
-    if opt.gtkhtml:
+    if opt.backend == 'webkit':
+	env['ENABLE_WEBKIT'] = True
+	dfn('WEBKIT', 1)
+
+    if opt.backend == 'gtkhtml':
         env['ENABLE_GTKHTML'] = True
         dfn('GTKHTML', 1)
 
@@ -263,10 +304,9 @@ def configure(conf):
     if opt.no_console and env['IS_WIN32']:
         env.append_value('LINKFLAGS', '-mwindows')
 
-
     # strip xiphos binary
     if env['IS_CROSS_WIN32']:
-        env['STRIP'] = conf.find_program('i686-pc-mingw32-strip', mandatory=True)
+        env['STRIP'] = conf.find_program(env['CROSS'] + 'strip', mandatory=True)
     else:
         env['STRIP'] = conf.find_program('strip', mandatory=True)
 
@@ -279,7 +319,8 @@ def configure(conf):
         conf.check_pkg('dbus-glib-1', '0.60', True, var='DBUS')
         # we need a modified version of dbus.py for running on windows
         conf.check_tool('dbus', tooldir=_tooldir)
-        conf.check_tool('glib2')
+    
+    conf.check_tool('glib2')
 
     ### App info, paths
     define = conf.define
@@ -306,31 +347,55 @@ def configure(conf):
     define('PACKAGE_HELP_DIR', conf.escpath(sub('${DATAROOTDIR}/gnome/help/${PACKAGE}', env)))
     define('PACKAGE_LOCALE_DIR', conf.escpath(env['LOCALEDIR']))
     define('PACKAGE_MENU_DIR', conf.escpath(sub('${DATAROOTDIR}/applications', env)))
-    define('PACKAGE_PIXMAPS_DIR', conf.escpath(sub('${DATAROOTDIR}/pixmaps/${PACKAGE}', env)))
-    define('PACKAGE_SOURCE_DIR', conf.escpath(os.path.abspath(srcdir))) # foder where was wscript executed
-
-
-    if conf.check_cfg(modversion='gtkhtml-editor-3.14',
-                      msg='Checking for GNOME3 gtkhtml-editor',
-                      okmsg='Deffinatly',
-                      errmsg='Probably, not'
-                      ):
-            editor='"gtkhtml-editor-3.14"'
-    else:
-            editor='"gtkhtml-editor"'
+    #define('PACKAGE_PIXMAPS_DIR', conf.escpath(sub('${DATAROOTDIR}/pixmaps/${PACKAGE}', env)))
+    define('PACKAGE_PIXMAPS_DIR', conf.escpath(sub('${DATAROOTDIR}/${PACKAGE}', env)))
+    define('PACKAGE_SOURCE_DIR', conf.escpath(os.path.abspath(srcdir))) # folder where was wscript executed
 
     common_libs = string.join(
-    [editor] + '''
-    "gtk+-2.0 >= 2.14"
-    "libglade-2.0"
+    '''
+    "gconf-2.0"
     "gmodule-2.0"
     "glib-2.0"
     "libgsf-1 >= 1.14"
     "libxml-2.0"
-    "libgtkhtml-3.14 >= 3.23"
     --cflags --libs'''
     .split()," ")
 
+    if env['ENABLE_GTK2']:
+        env.append_value('ALL_LIBS', 'LIBGLADE')
+        # We need to know specific versions of GTK+-2.0
+        conf.check_cfg(package="gtk+-2.0",
+                       atleast_version = "2.16",
+                       uselib_store="GTK_216")
+        conf.check_cfg(package="gtk+-2.0",
+                       atleast_version = "2.18",
+                       uselib_store="GTK_218")
+        conf.check_cfg(package="gtk+-2.0",
+                       atleast_version = "2.20",
+                       uselib_store="GTK_220")
+        common_libs += ' libglade-2.0'
+        common_libs += ' "gtk+-2.0 >= 2.14" '
+        common_libs += ' "libgtkhtml-3.14 >= 3.23" '
+        if conf.check_cfg(modversion='gtkhtml-editor-3.14',
+                          msg='Checking for GNOME3 gtkhtml-editor',
+                          okmsg='Definitely',
+                          errmsg='Probably not'
+                          ):
+            common_libs += ' "gtkhtml-editor-3.14" '
+        else:
+            common_libs += ' "gtkhtml-editor" '
+    else:
+        # So far, we only care about GTK+3, not any of its subversions
+        common_libs += ' "gtk+-3.0" '
+        conf.define('USE_GTK_3', 1)
+	conf.define('USE_GTKBUILDER', 1)
+        # FC15 and Oneiric have this, Natty does not
+        if conf.check_cfg(modversion='libgtkhtml-4.0', msg='Checking for libgtkhtml4', okmsg='ok', errmsg='fail'):
+            common_libs += ' "libgtkhtml-4.0" '
+        # FC15 and Oneiric have this, Natty does not
+        if conf.check_cfg(modversion="gtkhtml-editor-4.0", msg="Checking for GtkHTML Editor 4.0", okmsg='ok', errmsg='fail', mandatory=True):
+            common_libs += ' "gtkhtml-editor-4.0" '
+    
     conf.check_cfg(atleast_pkgconfig_version='0.9.0')
     conf.check_cfg(msg="Checking for GNOME related libs",
                    package='',
@@ -351,20 +416,29 @@ def configure(conf):
                    mandatory=True)
     env.append_value('ALL_LIBS', 'SWORD')
 
-    conf.check_cfg(package="gtk+-2.0",
-                   atleast_version = "2.16",
-                   uselib_store="GTK_216")
-    conf.check_cfg(package="gtk+-2.0",
-                   atleast_version = "2.18",
-                   uselib_store="GTK_218")
-    conf.check_cfg(package="gtk+-2.0",
-                   atleast_version = "2.20",
-                   uselib_store="GTK_220")
-
+    ######################
+    ### gtk-webkit for html rendering
+    #
+    if env['ENABLE_WEBKIT'] and env['USE_GTK_3']:
+        conf.check_cfg(package='webkitgtk-3.0',
+                        uselib_store='WEBKIT',
+                        args='--libs --cflags',
+                        msg='Checking for webkit',
+                        mandatory=True)
+        conf.define('USE_WEBKIT', 1)
+        env.append_value('ALL_LIBS', 'WEBKIT')
+    elif env['ENABLE_WEBKIT']:
+        conf.check_cfg(package='webkit-1.0',
+			uselib_store='WEBKIT',
+                        args='--libs --cflags',
+			msg='Checking for webkit',
+                        mandatory=True)
+	env.append_value('ALL_LIBS', 'WEBKIT')
+        conf.define('USE_WEBKIT', 1)
     ######################
     ### gecko (xulrunner) for html rendering
     # gtkhtml only for editor
-    if not env['ENABLE_GTKHTML']:
+    elif not env['ENABLE_GTKHTML']:
         if not env["IS_WIN32"]:
 
             conf.check_cfg (package='nspr', uselib_store='NSPR')    
@@ -381,15 +455,21 @@ def configure(conf):
                                                     args='--modversion',
                                                      okmsg=waffles.misc.myokmsg,
                                                     msg="Checking for Gecko GREVersion").strip())
-            if not env['GECKO_VER'][3].isalpha():
-                    conf.define('GECKO_MIN', env['GECKO_VER'][0:5]+'.0')
-                    conf.define('GECKO_MAX', env['GECKO_VER'][0:5]+'.99')
-            else:
-                    conf.define('GECKO_MIN', env['GECKO_VER'][0:4]+'0')
-                    conf.define('GECKO_MAX', env['GECKO_VER'][0:3]+'.0.99')
+            gecko = env['GECKO_VER']
 
-            conf.check_message("Gecko", "GREVersionMin", 1, env['GECKO_MIN'])
-            conf.check_message("Gecko", "GREVersionMax", 1, env['GECKO_MAX'])
+            def geckoversion(i):
+                    if i.startswith('1.'):
+                            if len(i) >= 4 and not i[3].isalpha():
+                                    return (i[0:5]+'.0', i[0:5]+'.99')
+                            else:
+                                    return (i[0:4]+'0', i[0:3]+'.0.99')
+                    else:
+                            return ('2.0b', '2.0.99')
+            geckomin, geckomax = geckoversion(env['GECKO_VER'])
+            conf.check_message("Gecko", "GREVersionMin", 1, geckomin)
+            conf.check_message("Gecko", "GREVersionMax", 1, geckomax)
+            conf.define('GECKO_MIN', geckomin)
+            conf.define('GECKO_MAX', geckomax)
 
         else:
                     d = env['MOZILLA_DISTDIR']
@@ -407,37 +487,34 @@ def configure(conf):
                     conf.define('GECKO_MIN', '1.9.0.0')
                     conf.define('GECKO_MAX', '2.0.0.*')
 
-
         env.append_value('ALL_LIBS', 'NSPR')
         env.append_value('ALL_LIBS', 'GECKO')
         conf.define('USE_GTKMOZEMBED', 1)
 
-
-
+    #
+    # Random defines... legacy from autotools. Can we drop these?
+    # Define to 1 if you have the ANSI C header files. */
+    dfn('STDC_HEADERS', 1)
+    # Define to 1 if you can safely include both <sys/time.h> and <time.h>. */
+    dfn('TIME_WITH_SYS_TIME', 1)
     dfn('ENABLE_NLS', 1)
     dfn('HAVE_BIND_TEXTDOMAIN_CODESET', 1)
     dfn('HAVE_GETTEXT', 1)
     dfn('HAVE_DCGETTEXT', 1)
 
-
     # Check for header files
     for h in _headers:
         conf.check(header_name=h)
 
+    if not conf.check(header_name='osisxhtml.h', uselib='SWORD'):
+        Utils.pprint('RED', "Old libsword is used, please upgrade to gain engine support for notes/xrefs.")
+        dfn('NO_SWORD_SET_RENDER_NOTE_NUMBERS', 1)
 
     # Define to 1 if you have the `strcasestr' function.
     # this function is part of some glibc, string.h
     # could be missing in win32
     conf.check_cc(msg='Checking for function strcasestr', define_name="HAVE_STRCASESTR",
             fragment='int main() {strcasestr("hello","he");}\n')
-
-
-    # TODO: What's the purpose of STDC? Is xiphos able compile without that?
-    # Define to 1 if you have the ANSI C header files. */
-    # NOT necessary?
-    dfn('STDC_HEADERS', 1)
-    # Define to 1 if you can safely include both <sys/time.h> and <time.h>. */
-    dfn('TIME_WITH_SYS_TIME', 1)
 
     # appropriate cflags
     env.append_value('CXXFLAGS', env['CXXFLAGS_%s' % opt.debug_level.upper()])
@@ -470,10 +547,13 @@ def build(bld):
         src/editor
         src/main
         src/gnome2
+        src/xiphos_html
         ui
     """)
     # use GECKO
-    if not env['ENABLE_GTKHTML']:
+    if env['ENABLE_WEBKIT']:
+	bld.add_subdirs('src/webkit')
+    elif not env['ENABLE_GTKHTML']:
         if env["IS_WIN32"]:
             bld.add_subdirs('src/geckowin')
         else:
@@ -543,17 +623,42 @@ def build(bld):
 
     bld.add_post_fun(post)
 
+import shutil
+import subprocess
+import glob
+
 def dist_hook():
-    import shutil
     shutil.rmtree('win32')
 
 def run(ctx):
     '''Execute xiphos binary from build directory'''
-    import subprocess
     subprocess.call(os.path.join(blddir,'default/src/gnome2/xiphos'))
+
+
+def test(ctx):
+    '''Run unit tests'''
+    subprocess.call(os.path.join(srcdir,'tests/build.py'))
 
 def dist(ctx):
     import Scripting
     Scripting.dist()
     Scripting.g_gz = 'gz'
+    Scripting.dist()
+
+def dist_dfsg(ctx):
+    import Scripting
+    global dist_hook
+    global VERSION
+
+    def dist_hook2():
+        shutil.rmtree('win32')
+        shutil.copytree(os.path.join(glob.glob('../.waf-*')[0],'wafadmin'), 'wafadmin', ignore=shutil.ignore_patterns('*.pyc'))
+        lines = []
+        with open('waf') as f:
+            lines = f.readlines()
+        with open('waf','w') as f:
+            f.writelines(lines[:-3])
+
+    VERSION = VERSION + '+dfsg'
+    dist_hook=dist_hook2
     Scripting.dist()

@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * navbar_versekey_parallel.c - navigation bar for the parallel dialog
  *
- * Copyright (C) 2007-2010 Xiphos Developer Team
+ * Copyright (C) 2007-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,7 +24,9 @@
 #endif
 
 #include <gtk/gtk.h>
-#include <glade/glade-xml.h>
+#ifndef USE_GTKBUILDER
+  #include <glade/glade-xml.h>
+#endif
 
 #include "gui/navbar_versekey_parallel.h"
 #include "gui/utilities.h"
@@ -89,21 +91,22 @@ void menu_position_under(GtkMenu * menu, int * x, int * y,
 				gboolean * push_in, gpointer user_data)
 {
 	GtkWidget *widget;
+	GtkAllocation allocation;
 
 	g_return_if_fail(GTK_IS_BUTTON(user_data));
-#ifdef HAVE_GTK_220
-        g_return_if_fail (gtk_widget_get_has_window(user_data));
+#if defined(HAVE_GTK_220) || defined(USE_GTK_3)
+        g_return_if_fail (gtk_widget_get_window(user_data));
 #else
 	g_return_if_fail (GTK_WIDGET_NO_WINDOW (user_data));
 #endif
 
 	widget = GTK_WIDGET(user_data);
 
-	gdk_window_get_origin(widget->window, x, y);
-
-	*x += widget->allocation.x;
-	*y += widget->allocation.y + widget->allocation.height;
-
+	gdk_window_get_origin(gtk_widget_get_window (widget), x, y);
+	gtk_widget_get_allocation (widget, &allocation);
+	*x += allocation.x;
+	*y += allocation.y + allocation.height;
+    
 	*push_in = FALSE;
 }
 
@@ -136,9 +139,11 @@ gboolean select_book_button_press_callback(GtkWidget * widget,
 
 	GTimeVal start_time;
 	GTimeVal end_time;
+#ifdef WIN32
 	glong time_diff;
 	guint32 time_add;
-
+#endif
+    
 	g_get_current_time( &start_time );
 	GS_message(("Start time is: %ld sec %ld mil", start_time.tv_sec, start_time.tv_usec));
 
@@ -148,11 +153,12 @@ gboolean select_book_button_press_callback(GtkWidget * widget,
 
 	g_get_current_time( &end_time );
 	GS_message(("End time is: %ld sec %ld mil", end_time.tv_sec, end_time.tv_usec));
+#ifdef WIN32
 	time_diff = ((end_time.tv_sec - start_time.tv_sec) * 1000000) + (end_time.tv_usec - start_time.tv_usec);
 	time_add = 0;
 	if (time_diff > 10000)
 	  time_add = (guint32)(time_diff / 1000);
-
+#endif
 	if (!menu)
 		return 0;
 	g_signal_connect(menu, "deactivate",
@@ -399,7 +405,7 @@ static void sync_with_main (GtkToggleButton * button, gpointer data)
 	gchar *buf = NULL;
 	gchar *url = NULL;
 	sync_on = FALSE;
-	if (button->active) {
+	if (gtk_toggle_button_get_active (button)) {
 		sync_on = TRUE;
 		buf = (gchar*)main_url_encode(settings.currentverse);
 		if (buf && (strlen(buf) > 3)) {
@@ -796,25 +802,33 @@ void _connect_signals(NAVBAR_VERSEKEY navbar)
 GtkWidget *gui_navbar_versekey_parallel_new(void)
 {
 	gchar *glade_file;
+#ifdef USE_GTKBUILDER
+	GtkBuilder *gxml;
+#else
 	GladeXML *gxml;
-
-	glade_file =
-		    gui_general_user_file("navbar_versekey.glade", FALSE);
+#endif
+	glade_file = gui_general_user_file("navbar_versekey" UI_SUFFIX, FALSE);
 	g_return_val_if_fail((glade_file != NULL), NULL);
 	GS_message(("%s",glade_file));
 
 	/* build the widget */
+#ifdef USE_GTKBUILDER
+	gxml = gtk_builder_new ();
+	gtk_builder_add_from_file (gxml, glade_file, NULL);
+#else
 	gxml = glade_xml_new(glade_file, "navbar", NULL);
+#endif
 	navbar_parallel.dialog = TRUE;
 	navbar_parallel.module_name = g_string_new(settings.MainWindowModule);
 	navbar_parallel.key =  g_string_new(settings.currentverse);
 
-	navbar_parallel.navbar = glade_xml_get_widget(gxml, "navbar");
-	navbar_parallel.button_history_back = glade_xml_get_widget(gxml, "button_history_back");
-	navbar_parallel.button_history_next = glade_xml_get_widget(gxml, "button_history_foward");
-	navbar_parallel.button_history_menu = glade_xml_get_widget(gxml, "togglebutton_history_list");
+	navbar_parallel.navbar = UI_GET_ITEM(gxml, "navbar");
+	navbar_parallel.button_history_back = UI_GET_ITEM(gxml, "button_history_back");
+	navbar_parallel.button_history_next = UI_GET_ITEM(gxml, "button_history_foward");
+	navbar_parallel.button_history_menu = UI_GET_ITEM(gxml, "togglebutton_history_list");
 
-	navbar_parallel.button_sync = glade_xml_get_widget(gxml, "togglebutton_sync");
+	navbar_parallel.button_sync = UI_GET_ITEM(gxml, "togglebutton_sync");
+
 	gtk_widget_show(navbar_parallel.button_sync);
 	gtk_widget_set_tooltip_text(navbar_parallel.button_sync,
 				    _("Synchronize this window's scrolling with the main window"));
@@ -829,37 +843,38 @@ GtkWidget *gui_navbar_versekey_parallel_new(void)
 	navbar_parallel.button_verse_up = glade_xml_get_widget(gxml, "button_verse2");
 	navbar_parallel.button_verse_down = glade_xml_get_widget(gxml, "button_verse1");
 */
-	navbar_parallel.button_book_up = glade_xml_get_widget(gxml, "eventbox9");
-	navbar_parallel.button_book_down = glade_xml_get_widget(gxml, "eventbox6");
-	navbar_parallel.button_chapter_up = glade_xml_get_widget(gxml, "eventbox8");
-	navbar_parallel.button_chapter_down = glade_xml_get_widget(gxml, "eventbox4");
-	navbar_parallel.button_verse_up = glade_xml_get_widget(gxml, "eventbox7");
-	navbar_parallel.button_verse_down = glade_xml_get_widget(gxml, "eventbox1");
+	navbar_parallel.button_book_up = UI_GET_ITEM(gxml, "eventbox9");
+	navbar_parallel.button_book_down = UI_GET_ITEM(gxml, "eventbox6");
+	navbar_parallel.button_chapter_up = UI_GET_ITEM(gxml, "eventbox8");
+	navbar_parallel.button_chapter_down = UI_GET_ITEM(gxml, "eventbox4");
+	navbar_parallel.button_verse_up = UI_GET_ITEM(gxml, "eventbox7");
+	navbar_parallel.button_verse_down = UI_GET_ITEM(gxml, "eventbox1");
 
-	navbar_parallel.arrow_book_up_box = glade_xml_get_widget(gxml, "image13");
-	navbar_parallel.arrow_book_up = glade_xml_get_widget(gxml, "image12");
-	navbar_parallel.arrow_book_down_box = glade_xml_get_widget(gxml, "image15");
-	navbar_parallel.arrow_book_down = glade_xml_get_widget(gxml, "image14");
-	navbar_parallel.arrow_chapter_up_box = glade_xml_get_widget(gxml, "image9");
-	navbar_parallel.arrow_chapter_up = glade_xml_get_widget(gxml, "image8");
-	navbar_parallel.arrow_chapter_down_box = glade_xml_get_widget(gxml, "image11");
-	navbar_parallel.arrow_chapter_down = glade_xml_get_widget(gxml, "image10");
-	navbar_parallel.arrow_verse_up_box = glade_xml_get_widget(gxml, "image7");
-	navbar_parallel.arrow_verse_up = glade_xml_get_widget(gxml, "image6");
-	navbar_parallel.arrow_verse_down_box = glade_xml_get_widget(gxml, "image16");
-	navbar_parallel.arrow_verse_down = glade_xml_get_widget(gxml, "image5");
+	navbar_parallel.arrow_book_up_box = UI_GET_ITEM(gxml, "image13");
+	navbar_parallel.arrow_book_up = UI_GET_ITEM(gxml, "image12");
+	navbar_parallel.arrow_book_down_box = UI_GET_ITEM(gxml, "image15");
+	navbar_parallel.arrow_book_down = UI_GET_ITEM(gxml, "image14");
+	navbar_parallel.arrow_chapter_up_box = UI_GET_ITEM(gxml, "image9");
+	navbar_parallel.arrow_chapter_up = UI_GET_ITEM(gxml, "image8");
+	navbar_parallel.arrow_chapter_down_box = UI_GET_ITEM(gxml, "image11");
+	navbar_parallel.arrow_chapter_down = UI_GET_ITEM(gxml, "image10");
+	navbar_parallel.arrow_verse_up_box = UI_GET_ITEM(gxml, "image7");
+	navbar_parallel.arrow_verse_up = UI_GET_ITEM(gxml, "image6");
+	navbar_parallel.arrow_verse_down_box = UI_GET_ITEM(gxml, "image16");
+	navbar_parallel.arrow_verse_down = UI_GET_ITEM(gxml, "image5");
 
-	navbar_parallel.button_book_menu = glade_xml_get_widget(gxml, "togglebutton_book");
-	navbar_parallel.button_chapter_menu = glade_xml_get_widget(gxml, "togglebutton_chapter");
-	navbar_parallel.button_verse_menu = glade_xml_get_widget(gxml, "togglebutton_verse");
-	navbar_parallel.lookup_entry = glade_xml_get_widget(gxml, "entry_lookup");
-	navbar_parallel.label_book_menu = glade_xml_get_widget(gxml, "label_book");
-	navbar_parallel.label_chapter_menu = glade_xml_get_widget(gxml, "label_chapter");
-	navbar_parallel.label_verse_menu = glade_xml_get_widget(gxml, "label_verse");
+	navbar_parallel.button_book_menu = UI_GET_ITEM(gxml, "togglebutton_book");
+	navbar_parallel.button_chapter_menu = UI_GET_ITEM(gxml, "togglebutton_chapter");
+	navbar_parallel.button_verse_menu = UI_GET_ITEM(gxml, "togglebutton_verse");
+	navbar_parallel.lookup_entry = UI_GET_ITEM(gxml, "entry_lookup");
+	navbar_parallel.label_book_menu = UI_GET_ITEM(gxml, "label_book");
+	navbar_parallel.label_chapter_menu = UI_GET_ITEM(gxml, "label_chapter");
+	navbar_parallel.label_verse_menu = UI_GET_ITEM(gxml, "label_verse");
+
 	navbar_parallel.book_menu = gtk_menu_new();
 	navbar_parallel.chapter_menu = gtk_menu_new();
 	navbar_parallel.verse_menu = gtk_menu_new();
 	_connect_signals(navbar_parallel);
-	GTK_TOGGLE_BUTTON(navbar_parallel.button_sync)->active = settings.linkedtabs;
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(navbar_parallel.button_sync), settings.linkedtabs);
 	return navbar_parallel.navbar;
 }

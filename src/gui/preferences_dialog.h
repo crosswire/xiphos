@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * preferences_dialog.h - get user preferences
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -80,6 +80,9 @@ void setup_font_prefs_combobox(void);
 void on_checkbutton10_toggled(GtkToggleButton * togglebutton, gpointer user_data);
 void on_checkbutton11_toggled(GtkToggleButton * togglebutton, gpointer user_data);
 void on_checkbutton12_toggled(GtkToggleButton * togglebutton, gpointer user_data);
+void on_checkbutton_verse_num_bold_toggled(GtkToggleButton * togglebutton, gpointer user_data);
+void on_checkbutton_verse_num_bracket_toggled(GtkToggleButton * togglebutton, gpointer user_data);
+void on_checkbutton_verse_num_superscript_toggled(GtkToggleButton * togglebutton, gpointer user_data);
 void on_checkbutton_scroll_toggled(GtkToggleButton * togglebutton, gpointer user_data);
 void on_checkbutton_imageresize_toggled(GtkToggleButton * togglebutton, gpointer user_data);
 void on_checkbutton_versehighlight_toggled(GtkToggleButton * togglebutton, gpointer user_data);

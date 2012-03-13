@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * main_window.c - main window gui
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,16 +25,7 @@
 
 #include <gtk/gtk.h>
 
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "gecko/gecko-html.h"
-#endif
-#else
-#include <gtkhtml/gtkhtml.h>
-#include "gui/html.h"
-#endif
+#include "../xiphos_html/xiphos_html.h"
 #include "main/sword.h"
 #include "main/settings.h"
 #include "main/xml.h"
@@ -453,7 +444,7 @@ static gboolean on_configure_event(GtkWidget * widget,
 	gint x;
 	gint y;
 
- 	gdk_window_get_root_origin(GDK_WINDOW(widgets.app->window), &x, &y);
+ 	gdk_window_get_root_origin(gtk_widget_get_window (widgets.app), &x, &y);
 
 	settings.gs_width = event->width;
 	settings.gs_height = event->height;
@@ -477,7 +468,6 @@ static gboolean on_configure_event(GtkWidget * widget,
 }
 
 static void on_notebook_bible_parallel_switch_page(GtkNotebook * notebook,
-					GtkNotebookPage * page,
 					gint page_num, GList **tl)
 {
 #if 0
@@ -488,9 +478,15 @@ static void on_notebook_bible_parallel_switch_page(GtkNotebook * notebook,
 #endif /* 0 */
 }
 
+#ifdef USE_GTK_3
+static void on_notebook_comm_book_switch_page(GtkNotebook * notebook,
+					gpointer arg,
+                    gint page_num, GList **tl)
+#else
 static void on_notebook_comm_book_switch_page(GtkNotebook * notebook,
 					GtkNotebookPage * page,
 					gint page_num, GList **tl)
+#endif
 {
 	gchar *url = NULL;
 
@@ -537,8 +533,6 @@ static void on_notebook_comm_book_switch_page(GtkNotebook * notebook,
 static void
 new_base_font_size(gboolean up)
 {
-	gchar *url;
-
 	if (up) {
 		settings.base_font_size++;
 		if (settings.base_font_size > 5)
@@ -555,11 +549,7 @@ new_base_font_size(gboolean up)
 
 	xml_set_value("Xiphos", "fontsize", "basefontsize",
 		      settings.base_font_size_str);
-	url = g_strdup_printf("sword://%s/%s",
-			      settings.MainWindowModule,
-			      settings.currentverse);
-	main_url_handler(url, TRUE);
-	g_free(url);
+	redisplay_to_realign();
 }
 
 
@@ -694,11 +684,24 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 		if (state == (GDK_CONTROL_MASK|GDK_SHIFT_MASK))
 			new_base_font_size(TRUE);
 		break;
-
 	case XK_minus: // Ctrl-Minus  Decrease base font size
 		if (state == GDK_CONTROL_MASK)
 			new_base_font_size(FALSE);
 		break;
+	case XK_0: // Ctrl-0 (zero)  Neutralize base font size.
+		if (state == GDK_CONTROL_MASK) {
+			settings.base_font_size = 1;
+			new_base_font_size(FALSE);
+		}
+		break;
+
+		// ctrl-DIGIT [1-9] selects DIGIT-th tab.
+	case XK_1: case XK_2: case XK_3:
+	case XK_4: case XK_5: case XK_6:
+	case XK_7: case XK_8: case XK_9:
+		if (state == GDK_CONTROL_MASK)
+			gui_select_nth_tab((event->keyval - XK_0) - 1);	/* 0-based list */
+
 	case XK_F1: // F1 help
 		if (state == 0)
 			on_help_contents_activate(NULL, NULL);
@@ -725,7 +728,7 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 		break;
 	case XK_F10: // Shift-F10 bible module right click
 		if (state == GDK_SHIFT_MASK)
-			gui_menu_popup(settings.MainWindowModule, NULL);
+			gui_menu_popup(NULL, settings.MainWindowModule, NULL); /* FIXME: needs the html widget as first pram */
 		break;
 	}
 	GS_message(("on_vbox1_key_press_event\nkeycode: %d, keysym: %0x, state: %d",
@@ -771,12 +774,7 @@ void create_mainwindow(void)
 	GtkWidget *hbox25;
 	GtkWidget *tab_button_icon;
 	GtkWidget *label;
-#ifdef USE_GTKMOZEMBED
-	GtkWidget *frame;
-	GtkWidget *eventbox;
-#else
 	GtkWidget *scrolledwindow;
-#endif /* USE_GTKMOZEMBED */
 	GtkWidget *box_book;
 	GdkPixbuf* pixbuf;
 	/*
@@ -799,7 +797,7 @@ void create_mainwindow(void)
 	g_object_set_data(G_OBJECT(widgets.app),
 			  "widgets.app", widgets.app);
 	gtk_widget_set_size_request(widgets.app, 680, 425);
-	GTK_WIDGET_SET_FLAGS(widgets.app, GTK_CAN_FOCUS);
+	gtk_widget_set_can_focus (widgets.app, 1);
 	gtk_window_set_resizable(GTK_WINDOW(widgets.app), TRUE);
 
 	imagename = image_locator("gs2-48x48.png");
@@ -844,7 +842,8 @@ void create_mainwindow(void)
 	widgets.button_new_tab = gtk_button_new();
 	//don't show button here in case !settings.browsing
 
-	tab_button_icon = pixmap_finder("new_tab_button.png");
+	tab_button_icon = gtk_image_new_from_stock(GTK_STOCK_ADD, GTK_ICON_SIZE_SMALL_TOOLBAR);
+
 	gtk_widget_show(tab_button_icon);
 	gtk_container_add(GTK_CONTAINER(widgets.button_new_tab), tab_button_icon);
 	gtk_button_set_relief(GTK_BUTTON(widgets.button_new_tab), GTK_RELIEF_NONE);
@@ -916,8 +915,8 @@ void create_mainwindow(void)
 	gtk_container_set_border_width (
 		GTK_CONTAINER (widgets.notebook_bible_parallel), 1);
 
-	g_signal_connect(GTK_OBJECT(widgets.notebook_bible_parallel),
-			   "switch_page",
+	g_signal_connect(G_OBJECT(widgets.notebook_bible_parallel),
+			   "change-current-page",
 			   G_CALLBACK
 			   (on_notebook_bible_parallel_switch_page),
 			   NULL);
@@ -948,22 +947,6 @@ void create_mainwindow(void)
 
 	gtk_container_set_border_width(GTK_CONTAINER(widgets.vbox_previewer), 2);
 
-#ifdef USE_GTKMOZEMBED
-	frame = gtk_frame_new(NULL);
-	gtk_widget_show(frame);
-	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
-	gtk_box_pack_start(GTK_BOX(widgets.vbox_previewer), frame,
-				TRUE, TRUE, 0);
-
-
-	eventbox = gtk_event_box_new();
-	gtk_widget_show(eventbox);
-	gtk_container_add(GTK_CONTAINER(frame), eventbox);
-
-	widgets.html_previewer_text
-			= GTK_WIDGET ( gecko_html_new( NULL, FALSE, VIEWER_TYPE));
-	gtk_container_add(GTK_CONTAINER(eventbox), widgets.html_previewer_text);
-#else
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
 	gtk_box_pack_start(GTK_BOX(widgets.vbox_previewer), scrolledwindow, TRUE, TRUE,
@@ -975,10 +958,16 @@ void create_mainwindow(void)
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
 					    scrolledwindow,
 					    settings.shadow_type);
+#ifdef USE_XIPHOS_HTML
+	widgets.html_previewer_text
+			= GTK_WIDGET ( XIPHOS_HTML_NEW( NULL, FALSE, VIEWER_TYPE));
+	gtk_container_add(GTK_CONTAINER(scrolledwindow), widgets.html_previewer_text);
+#else
+
 	widgets.html_previewer_text = gtk_html_new();
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
 			  widgets.html_previewer_text);
-	g_signal_connect(GTK_OBJECT(widgets.html_previewer_text),
+	g_signal_connect(G_OBJECT(widgets.html_previewer_text),
 			 "link_clicked", G_CALLBACK(gui_link_clicked),
 			 NULL);
 #endif
@@ -1048,8 +1037,10 @@ void create_mainwindow(void)
 	widgets.appbar = gtk_statusbar_new ();
 
 	gtk_widget_show(widgets.appbar);
+#ifndef USE_GTK_3
 	gtk_statusbar_set_has_resize_grip (GTK_STATUSBAR(widgets.appbar),
                                            TRUE);
+#endif
 	gtk_box_pack_start(GTK_BOX(vbox_gs), widgets.appbar, FALSE, TRUE, 0);
 	gui_set_statusbar (_("Welcome to Xiphos"));
 
@@ -1060,34 +1051,34 @@ void create_mainwindow(void)
 		    G_CALLBACK (on_vbox1_key_release_event),
 		    NULL);
 
-	g_signal_connect(GTK_OBJECT(widgets.notebook_comm_book),
+	g_signal_connect(G_OBJECT(widgets.notebook_comm_book),
 			   "switch_page",
 			   G_CALLBACK
 			   (on_notebook_comm_book_switch_page),
-			   NULL);
+			   NULL);	
 
-	g_signal_connect(GTK_OBJECT(widgets.app), "delete_event",
+	g_signal_connect(G_OBJECT(widgets.app), "delete_event",
 			   G_CALLBACK(delete_event), NULL);
 
 	g_signal_connect((gpointer) widgets.app,
 			 "configure_event",
 			 G_CALLBACK(on_configure_event), NULL);
-	g_signal_connect(GTK_OBJECT(widgets.epaned),
+	g_signal_connect(G_OBJECT(widgets.epaned),
 			   "button_release_event",
 			   G_CALLBACK
 			   (epaned_button_release_event),
 			   (gchar *) "epaned");
-	g_signal_connect(GTK_OBJECT(widgets.vpaned),
+	g_signal_connect(G_OBJECT(widgets.vpaned),
 			   "button_release_event",
 			   G_CALLBACK
 			   (epaned_button_release_event),
 			   (gchar *) "vpaned");
-	g_signal_connect(GTK_OBJECT(widgets.vpaned2),
+	g_signal_connect(G_OBJECT(widgets.vpaned2),
 			   "button_release_event",
 			   G_CALLBACK
 			   (epaned_button_release_event),
 			   (gchar *) "vpaned2");
-	g_signal_connect(GTK_OBJECT(widgets.hpaned),
+	g_signal_connect(G_OBJECT(widgets.hpaned),
 			   "button_release_event",
 			   G_CALLBACK
 			   (epaned_button_release_event),

@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * utilities.h - support functions
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,14 +22,14 @@
 #ifndef GS_UTILITIES_H
 #define GS_UTILITIES_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <libxml/parser.h>
 #include "main/configs.h"
 #include "main/module_dialogs.h"
 #include <gsf/gsf-outfile.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 extern gint stop_window_sync;
 void sync_windows(void);
@@ -141,6 +141,15 @@ void language_init(void);
 
 #ifdef __cplusplus
 }
+#endif
+
+/* visually simplify some code that needs to pick out UI details */
+#ifdef USE_GTKBUILDER
+#define	UI_GET_ITEM(ui,label)	GTK_WIDGET(gtk_builder_get_object(ui, label))
+#define	UI_SUFFIX		".gtkbuilder"
+#else
+#define	UI_GET_ITEM(ui,label)	glade_xml_get_widget(ui, label)
+#define	UI_SUFFIX		".glade"
 #endif
 
 #endif /* GS_UTILITIES_H */

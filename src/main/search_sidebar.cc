@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * search_sidebar.cc - glue  (: very sticky :)
  *
- * Copyright (C) 2004-2010 Xiphos Developer Team
+ * Copyright (C) 2004-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -61,7 +61,6 @@ extern "C" {
 #define SEARCHING N_("Searching the ")
 #define SMODULE N_(" Module")
 #define FINDS N_("found in ")
-#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
 
 static BackEnd *backendSearch;
 
@@ -208,11 +207,11 @@ void main_do_sidebar_search(gpointer user_data)
 		return;
 
 	/* text -vs- commentary search selection. */
-	if (GTK_TOGGLE_BUTTON(ss.radiobutton_search_text)->active) {
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(ss.radiobutton_search_text))) {
 		strcpy(settings.sb_search_mod,
 		       settings.MainWindowModule);
 	}
-	else if (GTK_TOGGLE_BUTTON(ss.radiobutton_search_comm)->active) {
+	else if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(ss.radiobutton_search_comm))) {
 		if (!settings.CommWindowModule ||
 		    (strlen(settings.CommWindowModule) == 0)) {
 			gui_generic_warning(_("There is no commentary module."));
@@ -225,27 +224,34 @@ void main_do_sidebar_search(gpointer user_data)
 
 	backendSearch->clear_scope();
 
-	if (GTK_TOGGLE_BUTTON(ss.rrbUseBounds)->active) {
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(ss.rrbUseBounds))) {
 		gchar *str;
-		backendSearch->clear_search_list();
-		str = g_strdup_printf("%s - %s",
+		backendSearch->clear_search_list(); 
+		str = g_strdup_printf("%s - %s",  
+#ifdef USE_GTK_3
+				      gtk_combo_box_text_get_active_text((GtkComboBoxText*)
+								    ss.entryLower),
+				      gtk_combo_box_text_get_active_text((GtkComboBoxText*)
+								    ss.entryUpper));
+#else 
 				      gtk_combo_box_get_active_text(GTK_COMBO_BOX
 								    (ss.entryLower)),
 				      gtk_combo_box_get_active_text(GTK_COMBO_BOX
 								    (ss.entryUpper)));
+#endif
 		backendSearch->set_range(str);
 		backendSearch->set_scope2range();
 		g_free(str);
 	}
 
-	if (GTK_TOGGLE_BUTTON(ss.rbLastSearch)->active)
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(ss.rbLastSearch)))
 		backendSearch->set_scope2last_search();
 
 	snprintf(settings.searchText, 255, "%s", search_string);
 
 	settings.searchType =
-		GTK_TOGGLE_BUTTON(ss.rbRegExp)->active ? 0 :
-	    	GTK_TOGGLE_BUTTON(ss.rbPhraseSearch)->active ? -1 : -2;
+		gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(ss.rbRegExp)) ? 0 :
+	    	gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(ss.rbPhraseSearch)) ? -1 : -2;
 
 	if (settings.searchType == -2)
 		settings.searchType = backendSearch->check_for_optimal_search(search_module);
@@ -253,21 +259,22 @@ void main_do_sidebar_search(gpointer user_data)
 	// if we do lucene search (-4), we assume AND for simple sidebar search.
 	// therefore, we must prepend '+' to each word to force that semantic.
 	if (settings.searchType == -4) {
+		g_string_append_c(new_search, '+');
 		while (*search_string) {
-			if (isalnum(*search_string))
-				g_string_append_c(new_search, '+');
 			while (((*search_string) != ' ') && ((*search_string) != '\0'))
 				g_string_append_c(new_search, *(search_string++));
 			if ((*search_string) == ' ') {
 				g_string_append_c(new_search, ' ');
 				search_string++;
+				if ((*search_string) != '\0')
+					g_string_append_c(new_search, '+');
 			}
 		}
 		search_string = new_search->str;
 	}
 
 	search_params =
-	    GTK_TOGGLE_BUTTON(ss.ckbCaseSensitive)->active ? 0 : REG_ICASE;
+	    gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(ss.ckbCaseSensitive)) ? 0 : REG_ICASE;
 
 	terminate_search = FALSE;
 	search_active = TRUE;
@@ -337,7 +344,7 @@ void main_search_sidebar_fill_bounds_combos(void)
 	char *book = NULL;
 	char *module_name;
 	int i = 0;
-	int testaments;
+	//int testaments;
 
 	if (!backendSearch)
 		main_init_sidebar_search_backend();
@@ -345,7 +352,7 @@ void main_search_sidebar_fill_bounds_combos(void)
 	//module_name = settings.sb_search_mod;
 	module_name = g_strdup(settings.MainWindowModule);
 
-	testaments = backendSearch->module_get_testaments(module_name);
+	//testaments = backendSearch->module_get_testaments(module_name);
 
 	GtkTreeModel* upper_model = gtk_combo_box_get_model(
 			GTK_COMBO_BOX(ss.entryUpper));
@@ -358,9 +365,14 @@ void main_search_sidebar_fill_bounds_combos(void)
 		while (i < key.BMAX[0]) {
 			key.Testament(1);
 			key.Book(i+1);
-			book = strdup((const char *) key.getBookName());
+			book = strdup((const char *) key.getBookName());  
+#ifdef USE_GTK_3
+			gtk_combo_box_text_append_text((GtkComboBoxText*)ss.entryUpper, book);
+			gtk_combo_box_text_append_text((GtkComboBoxText*)ss.entryLower, book);
+#else          
 			gtk_combo_box_append_text(GTK_COMBO_BOX(ss.entryUpper), book);
 			gtk_combo_box_append_text(GTK_COMBO_BOX(ss.entryLower), book);
+#endif
 			++i;
 			g_free(book);
 		}
@@ -372,8 +384,13 @@ void main_search_sidebar_fill_bounds_combos(void)
 			key.Testament(2);
 			key.Book(i+1);
 			book = strdup((const char *) key.getBookName());
+#ifdef USE_GTK_3
+			gtk_combo_box_text_append_text((GtkComboBoxText*)ss.entryUpper, book);
+			gtk_combo_box_text_append_text((GtkComboBoxText*)ss.entryLower, book);
+#else          
 			gtk_combo_box_append_text(GTK_COMBO_BOX(ss.entryUpper), book);
 			gtk_combo_box_append_text(GTK_COMBO_BOX(ss.entryLower), book);
+#endif
 			++i;
 			g_free(book);
 		}

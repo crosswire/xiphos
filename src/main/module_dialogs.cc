@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * module_dialogs.cc - view module in a dialog
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -60,8 +60,7 @@
 
 #include "gui/debug_glib_null.h"
 
-#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
-
+#define	HTML_START	"<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><style type=\"text/css\"><!-- A { text-decoration:none } *[dir=rtl] { text-align: right; } --></style></head>"
 
 typedef struct _treeitem TreeItem;
 struct _treeitem {
@@ -187,14 +186,18 @@ void main_dialogs_clear_viewer(DIALOG_DATA *d)
 {
 	GString *str = g_string_new(NULL);
 	const char *buf = N_("Previewer");
+	MOD_FONT *mf = get_font(settings.MainWindowModule);
 
 	g_string_printf(str,
 			HTML_START
 			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
-			"<b><font color=\"grey\" size=\"-1\">%s</font></b><hr/></body></html>",
+			"<b><font color=\"grey\" face=\"%s\" size=\"%+d\">%s</font></b><hr/></body></html>",
 			settings.bible_bg_color, settings.bible_text_color,
-			settings.link_color, buf);
-
+			settings.link_color,
+			((mf->old_font) ? mf->old_font : ""),
+			mf->old_font_size_value - 1,
+			buf);
+	free_font(mf);
 	HtmlOutput(str->str, d->previewer, NULL, NULL);
 	g_string_free(str, TRUE);
 }
@@ -660,10 +663,14 @@ void main_dialogs_dictionary_entry_changed(DIALOG_DATA * d)
 	model = gtk_tree_view_get_model(GTK_TREE_VIEW(d->listview));
 	list_store = GTK_LIST_STORE(model);
 
-	if (!firsttime) {
+	if (!firsttime) {   
+#ifdef USE_GTK_3
+		height = gdk_window_get_height(GDK_WINDOW(d->listview));
+#else          
 		gdk_drawable_get_size ((GdkDrawable *)d->listview->window,
                                              NULL,
                                              &height);
+#endif
 		count = height / settings.cell_height;
 	}
 
@@ -766,7 +773,7 @@ void main_dialog_goto_bookmark(const gchar * module, const gchar * key)
 					t->mod_type == COMMENTARY_TYPE)
 
 			be->display_mod->Display();
-			gdk_window_raise(t->dialog->window);
+			gdk_window_raise(GDK_WINDOW(t->dialog));
 			return;
 		}
 		tmp = g_list_next(tmp);
@@ -1370,8 +1377,10 @@ gint main_dialogs_url_handler(DIALOG_DATA * t, const gchar * url, gboolean click
 		retval = sword_uri(t, url_clean->str, clicked);
 		g_string_free(url_clean, TRUE);
 	}
-	if (strstr(url,"passagestudy.jsp") || strstr(url,"xiphos.url"))
+	if (strstr(url,"passagestudy.jsp") || strstr(url,"xiphos.url")) {    
+		handling_url = FALSE;
 		return new_url_handler(t,url,clicked);
+	}
 	/*if (strstr(url,"sword://"))
 		return sword_uri(t, url, clicked);*/
 
@@ -1431,11 +1440,7 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 	case TEXT_TYPE:
 		t->mod_type = TEXT_TYPE;
 		gui_create_bibletext_dialog(t);
-#ifdef USE_GTKMOZEMBED
 		be->chapDisplay = new DialogChapDisp(t->html, t, be);
-#else
-		be->chapDisplay = new DialogChapDisp(t->html,  t, be);
-#endif
 		be->init_SWORD(1);
 		if (key)
 			t->key = g_strdup(key);

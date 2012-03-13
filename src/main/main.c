@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * main.c - In the beginning... ;o)
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -41,18 +41,49 @@
 #include "main/sword.h"
 #include "main/url.hh"
 #include "main/xml.h"
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "gecko/gecko-html.h"
-#endif
-#endif
+#include "../xiphos_html/xiphos_html.h"
 //#include "backend/sword.h"
 
 #include "gui/debug_glib_null.h"
 
 #include <glib/gstdio.h>
+
+#ifdef WIN32
+
+/*
+ * this is, we hope, a temporary fix for the webkit image display problem.
+ * we instantiate a local web server (!) so as to self-serve image files
+ * whose size we have already otherwise determined using local path.
+ */
+
+#include <libsoup/soup.h>
+
+static void
+server_callback_media (SoupServer *server,
+                       SoupMessage *msg,
+                       const char *path,
+                       GHashTable *query,
+                       SoupClientContext *client,
+                       gpointer user_data)
+{
+	char *contents;
+	gsize length;
+	GError *error = NULL;
+	gchar *real_path;
+
+	real_path = g_strdup(path);
+	real_path++;
+
+	if (!g_file_test(real_path, G_FILE_TEST_EXISTS))
+		return;
+	g_file_get_contents(real_path, &contents, &length, &error);
+	g_assert(!error);
+
+	soup_message_body_append(msg->response_body, SOUP_MEMORY_TAKE,
+				 contents, length);
+	soup_message_set_status(msg, SOUP_STATUS_OK);
+}
+#endif /* WIN32 */
 
 /******************************************************************************
  * Name
@@ -76,12 +107,22 @@ int main(int argc, char *argv[])
 	int have_sword_url = FALSE;
 	int have_tab_list = FALSE;
 	gint base_step = 0; //needed for splash
+#ifdef WIN32
+	/* see comments on function immediately preceding. */
+	SoupServer *server;
+#endif
+#ifdef DEBUG
 	GTimer *total;
 	double d;
+#endif
 
 	//	g_thread_init(NULL);
 	g_type_init();
+
+#ifdef DEBUG
 	total = g_timer_new();
+#endif
+
 
 #ifdef WIN32
 	/*
@@ -116,6 +157,12 @@ int main(int argc, char *argv[])
 	/* we need an idea of $HOME that's convenient. */
 	/* this gives us linux-equivalent semantics. */
 	g_setenv("HOME", g_getenv("APPDATA"), TRUE);
+
+	/* see comments near top of file. */
+	server = soup_server_new(SOUP_SERVER_PORT, 7878, NULL);
+	soup_server_add_handler(server, "/", server_callback_media,
+				NULL, NULL);
+	soup_server_run_async(server);
 #endif /* WIN32 */
 
 	if (argc > 2) {
@@ -163,11 +210,11 @@ int main(int argc, char *argv[])
 
 	gui_splash_init();
 
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 
-	gui_splash_step(_("Initiating Gecko"), 0.0, 0);
-
-	gecko_html_initialize();
+	gui_splash_step(_("Initiating HTML"), 0.0, 0);
+	
+	XIPHOS_HTML_INITIALIZE();
 
 	base_step = 1;
 #endif
@@ -202,12 +249,14 @@ int main(int argc, char *argv[])
 		main_url_handler(argv[1], TRUE);
 	}
 
+#ifdef DEBUG
 	g_timer_stop(total);
 	d = g_timer_elapsed(total, NULL);
-#ifdef DEBUG
 	printf("total time is %f\n", d);
 #endif
 	g_idle_add ((GSourceFunc)gui_splash_done, NULL);
+
+	gui_recompute_shows(FALSE);
 
 	gui_main();
 	return 0;

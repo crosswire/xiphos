@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * display.hh -
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,11 +27,10 @@
 #include <stdint.h>
 
 #ifdef __cplusplus
-extern "C" {
-
 #include <gtk/gtk.h>
 #include <swmgr.h>
 #include <swdisp.h>
+#include "main/gtk_compat.h"
 #include "main/global_ops.hh"
 #include "backend/sword_main.hh"
 #include "gui/utilities.h"
@@ -152,6 +151,7 @@ public:
 	MOD_FONT *mf;
 };
 
+extern "C" {
 #endif /* __cplusplus */
 
 void marked_cache_fill(gchar *modname, gchar *key);

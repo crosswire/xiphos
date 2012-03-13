@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * bibletext.c - gui for Bible text modules
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,16 +25,7 @@
 
 #include <gtk/gtk.h>
 
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "gecko/gecko-html.h"
-#endif
-#else
-#include <gtkhtml/gtkhtml.h>
-#include "gui/html.h"
-#endif
+#include "../xiphos_html/xiphos_html.h"
 
 
 #include "gui/xiphos.h"
@@ -86,24 +77,35 @@ GtkAdjustment* adjustment;
 
 void gui_popup_pm_text(void)
 {
-    gui_menu_popup (settings.MainWindowModule,
-			NULL);
+   /* gui_menu_popup (settings.MainWindowModule,
+			NULL);*/
 }
 
 
-#ifdef USE_GTKMOZEMBED
-static void
-_popupmenu_requested_cb (GeckoHtml *html,
+#ifdef USE_XIPHOS_HTML
+  #ifdef USE_WEBKIT
+    static gboolean
+    _popupmenu_requested_cb (XiphosHtml *html,
+			    gchar *uri ,
+			     gpointer user_data)
+  #elif USE_GTKMOZEMBED
+    static void
+    _popupmenu_requested_cb (XiphosHtml *html,
 			     gchar *uri,
 			     gpointer user_data)
+
+  #endif
 {
-    gui_menu_popup (settings.MainWindowModule,
-			NULL);
-	//gui_popup_pm_text();
+    gui_menu_popup(html, settings.MainWindowModule, NULL);  
+    #ifdef USE_WEBKIT
+      return TRUE;
+   // #elif USE_GTKMOZEMBED
+      //gui_popup_pm_text();
+    #endif
 }
 #endif
 
-#ifndef USE_GTKMOZEMBED
+#ifndef USE_XIPHOS_HTML
 /******************************************************************************
  * Name
  *  on_text_button_press_event
@@ -284,21 +286,30 @@ static
 void adj_changed(GtkAdjustment * adjustment1, gpointer user_data)
 
 {
-	static int scroll = 1;
+	gdouble scroll = 1;
+        gdouble value, lower, upper, page_size;
+
+        g_object_get (adjustment1,
+                      "value", &value,
+                      "upper", &upper,
+                      "lower", &lower,
+                      "page-size", &page_size,
+                      NULL);
+
 	if (!settings.chapter_scroll) return;
-	if (scroll && (adjustment1->value <= adjustment1->lower)) {
-		GS_message(("\ntop: %g\n",adjustment1->value));
+	if (scroll && (value <= lower)) {
+		GS_message(("\ntop: %g\n", value));
 		main_navbar_versekey_spin_chapter(navbar_versekey,0);
 		scroll = 0;
-	} else if (scroll && (adjustment1->value >= (adjustment1->upper - adjustment1->page_size))) {
-		GS_message(("\nvalue + page_size: %g\n",adjustment1->value + adjustment1->page_size));
+	} else if (scroll && (value >= (upper - page_size))) {
+		GS_message(("\nvalue + page_size: %g\n", value + page_size));
 		main_navbar_versekey_spin_chapter(navbar_versekey,1);
 		scroll = 0;
 		gtk_adjustment_set_value(adjustment,2);
 	} else 	scroll = 1;
 }
 
-#endif /* !USE_GTKMOZEMBED */
+#endif /* !USE_XIPHOS_HTML */
 
 /******************************************************************************
  * Name
@@ -319,32 +330,10 @@ void adj_changed(GtkAdjustment * adjustment1, gpointer user_data)
 GtkWidget *gui_create_bible_pane(void)
 {
 	GtkWidget *vbox;
-#ifdef USE_GTKMOZEMBED
-	GtkWidget *eventbox1;
-#else
 	GtkWidget *scrolledwindow;
-#endif
 
 	vbox = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox);
-
-#ifdef USE_GTKMOZEMBED
-
-	eventbox1 = gtk_event_box_new();
-	gtk_widget_show(eventbox1);
-	gtk_box_pack_start(GTK_BOX(vbox),
-			   eventbox1, TRUE,
-			   TRUE, 0);
-	widgets.html_text = GTK_WIDGET(gecko_html_new(NULL, FALSE, TEXT_TYPE));
-	gtk_widget_show(widgets.html_text);
-	gtk_container_add(GTK_CONTAINER(eventbox1),
-			  widgets.html_text);
-
-	g_signal_connect((gpointer)widgets.html_text,
-		      "popupmenu_requested",
-		      G_CALLBACK (_popupmenu_requested_cb),
-		      NULL);
-#else
 
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
@@ -352,13 +341,28 @@ GtkWidget *gui_create_bible_pane(void)
 			   scrolledwindow,
 	                   TRUE,
 			   TRUE, 0);
+#ifdef USE_XIPHOS_HTML
+
+	widgets.html_text = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, TEXT_TYPE));
+	gtk_widget_show(widgets.html_text);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow),
+	                  widgets.html_text);
+	                  
+	g_signal_connect((gpointer)widgets.html_text,
+	              "popupmenu_requested",
+	              G_CALLBACK (_popupmenu_requested_cb),
+	              NULL);
+#else
+
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
+
+
 	adjustment = gtk_scrolled_window_get_vadjustment
-                                            (GTK_SCROLLED_WINDOW(scrolledwindow));
-	scroll_adj_signal = g_signal_connect(GTK_OBJECT(adjustment), "value-changed",
+					     (GTK_SCROLLED_WINDOW(scrolledwindow));
+	scroll_adj_signal = g_signal_connect(G_OBJECT(adjustment), "value-changed",
 				G_CALLBACK(adj_changed),
 				NULL);
 	widgets.html_text = gtk_html_new();
@@ -366,25 +370,25 @@ GtkWidget *gui_create_bible_pane(void)
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
 			  widgets.html_text);
 
-	g_signal_connect(GTK_OBJECT(widgets.html_text), "link_clicked",
+	g_signal_connect(G_OBJECT(widgets.html_text), "link_clicked",
 				G_CALLBACK(gui_link_clicked),
 				NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_text), "on_url",
+	g_signal_connect(G_OBJECT(widgets.html_text), "on_url",
 				G_CALLBACK(gui_url),
 				GINT_TO_POINTER(TEXT_TYPE));
-	g_signal_connect(GTK_OBJECT(widgets.html_text),"button_release_event",
+	g_signal_connect(G_OBJECT(widgets.html_text),"button_release_event",
 				G_CALLBACK(on_text_button_release_event),
 				NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_text), "button_press_event",
+	g_signal_connect(G_OBJECT(widgets.html_text), "button_press_event",
 				G_CALLBACK(on_text_button_press_event),
 				NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_text), "enter_notify_event",
-		    		G_CALLBACK (on_enter_notify_event),
-		       		NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_text),
+	g_signal_connect(G_OBJECT(widgets.html_text), "enter_notify_event",
+				G_CALLBACK (on_enter_notify_event),
+				NULL);
+	g_signal_connect(G_OBJECT(widgets.html_text),
 			 "url_requested",
 			 G_CALLBACK(url_requested), NULL);
-#endif
+#endif /* USE_XIPHOS_HTML */
 
 	return 	vbox;
 

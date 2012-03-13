@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * main_menu.c - creation of and call backs for xiphos main menu
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,7 +26,9 @@
 #include <gtk/gtk.h>
 #include <unistd.h>
 
-#include <glade/glade-xml.h>
+#ifndef USE_GTKBUILDER
+  #include <glade/glade-xml.h>
+#endif
 
 #include "editor/slib-editor.h"
 
@@ -59,13 +61,13 @@
 #include "gui/debug_glib_null.h"
 
 //global function to handle gtk_uri calls
-void
+/*void
 link_uri_hook(GtkLinkButton *button,
 	      const gchar *link,
 	      gpointer user_data)
 {
 	xiphos_open_default(link);
-}
+}*/
 
 /******************************************************************************
  * Name
@@ -318,7 +320,7 @@ G_MODULE_EXPORT void on_search_activate(GtkMenuItem * menuitem, gpointer user_da
 G_MODULE_EXPORT void
 on_linked_tabs_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 {
-	settings.linkedtabs = menuitem->active;
+	settings.linkedtabs = gtk_check_menu_item_get_active (menuitem);
 	xml_set_value("Xiphos", "misc", "pinnedtabs",
 		      (settings.linkedtabs ? "1" : "0"));
 	if (settings.showparatab)
@@ -343,7 +345,7 @@ on_linked_tabs_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 G_MODULE_EXPORT void
 on_read_aloud_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 {
-	settings.readaloud = menuitem->active;
+	settings.readaloud = gtk_check_menu_item_get_active (menuitem);
 	xml_set_value("Xiphos", "misc", "readaloud",
 		      (settings.readaloud ? "1" : "0"));
 	if (settings.readaloud)
@@ -368,7 +370,7 @@ on_read_aloud_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 G_MODULE_EXPORT void
 on_show_verse_numbers_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 {
-	settings.showversenum = menuitem->active;
+	settings.showversenum = gtk_check_menu_item_get_active (menuitem);
 	xml_set_value("Xiphos", "misc", "showversenum",
 		      (settings.showversenum ? "1" : "0"));
 	main_display_commentary(NULL, settings.currentverse);
@@ -393,7 +395,7 @@ on_show_verse_numbers_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 G_MODULE_EXPORT void
 on_versehighlight_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 {
-	settings.versehighlight = menuitem->active;
+	settings.versehighlight = gtk_check_menu_item_get_active (menuitem);
 	xml_set_value("Xiphos", "misc", "versehighlight",
 		      (settings.versehighlight ? "1" : "0"));
 	main_display_bible(NULL, settings.currentverse);
@@ -418,12 +420,12 @@ G_MODULE_EXPORT void
 gui_parallel_tab_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 {
 	if (!settings.browsing) return;
-	if (!settings.showparatab && !menuitem->active) {
+	if (!settings.showparatab && !gtk_check_menu_item_get_active (menuitem)) {
 		xml_set_value("Xiphos", "misc", "showparatab", "0");
 		return;
 	}
 
-	settings.showparatab = menuitem->active;
+	settings.showparatab = gtk_check_menu_item_get_active (menuitem);
 	xml_set_value("Xiphos", "misc", "showparatab",
 		      (settings.showparatab ? "1" : "0"));
 	if (settings.showparatab) {
@@ -453,7 +455,7 @@ gui_parallel_tab_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 G_MODULE_EXPORT void
 on_side_preview_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 {
-	settings.show_previewer_in_sidebar = menuitem->active;
+	settings.show_previewer_in_sidebar = gtk_check_menu_item_get_active (menuitem);
 	xml_set_value("Xiphos", "misc", "show_side_preview",
 		      (settings.show_previewer_in_sidebar ? "1" : "0"));
 	gui_show_previewer_in_sidebar(settings.show_previewer_in_sidebar);
@@ -583,6 +585,7 @@ void
 redisplay_to_realign()
 {
 	static int realign_busy = FALSE;
+	int save_comm_show = settings.comm_showing;
 
 	if (realign_busy || change_tabs_no_redisplay)
 		return;
@@ -604,6 +607,17 @@ redisplay_to_realign()
 		main_url_handler(url, TRUE);
 		g_free(url);
 	}
+	if (settings.book_mod) {
+		url = g_strdup_printf("sword://%s/%s",
+				      settings.book_mod,
+				      settings.book_key);
+		main_url_handler(url, TRUE);
+		g_free(url);
+	}
+
+	settings.comm_showing = save_comm_show;
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),
+				      (settings.comm_showing ? 0 : 1));
 
 	realign_busy = FALSE;
 }
@@ -676,17 +690,17 @@ on_open_session_activate(GtkMenuItem * menuitem, gpointer user_data)
  *   void
  */
 G_MODULE_EXPORT void
-on_show_bible_text_activate(GtkMenuItem * menuitem, gpointer user_data)
+on_show_bible_text_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 {
-	gui_show_hide_texts(GTK_CHECK_MENU_ITEM(menuitem)->active);
+	gui_show_hide_texts(gtk_check_menu_item_get_active (menuitem));
 	redisplay_to_realign();
 }
 
 
 G_MODULE_EXPORT void
-on_preview_activate(GtkMenuItem * menuitem, gpointer user_data)
+on_preview_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 {
-	gui_show_hide_preview(GTK_CHECK_MENU_ITEM(menuitem)->active);
+	gui_show_hide_preview(gtk_check_menu_item_get_active (menuitem));
 	redisplay_to_realign();
 }
 
@@ -708,9 +722,9 @@ on_preview_activate(GtkMenuItem * menuitem, gpointer user_data)
  *   void
  */
 G_MODULE_EXPORT void
-on_show_commentary_activate(GtkMenuItem * menuitem, gpointer user_data)
+on_show_commentary_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 {
-	gui_show_hide_comms(GTK_CHECK_MENU_ITEM(menuitem)->active);
+	gui_show_hide_comms(gtk_check_menu_item_get_active (menuitem));
 	redisplay_to_realign();
 }
 
@@ -731,9 +745,9 @@ on_show_commentary_activate(GtkMenuItem * menuitem, gpointer user_data)
  *   void
  */
 G_MODULE_EXPORT void
-on_show_dictionary_lexicon_activate(GtkMenuItem * menuitem, gpointer user_data)
+on_show_dictionary_lexicon_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 {
-	gui_show_hide_dicts(GTK_CHECK_MENU_ITEM(menuitem)->active);
+	gui_show_hide_dicts(gtk_check_menu_item_get_active (menuitem));
 	redisplay_to_realign();
 }
 
@@ -805,32 +819,36 @@ on_sidebar_showhide_activate(GtkMenuItem *menuitem, gpointer user_data)
 
 GtkWidget *gui_create_main_menu(void)
 {
-	gchar *glade_file;
+#ifdef USE_GTKBUILDER
+	GtkBuilder *gxml;
+#else
 	GladeXML *gxml;
- //   	const gchar *mname = NULL;
-
-	glade_file = gui_general_user_file ("xi-menus.glade", FALSE);
+#endif
+	gchar *glade_file = gui_general_user_file ("xi-menus" UI_SUFFIX, FALSE);
 	g_return_val_if_fail (glade_file != NULL, NULL);
 
+#ifdef USE_GTKBUILDER
+	gxml = gtk_builder_new ();
+	gtk_builder_add_from_file (gxml, glade_file, NULL);
+#else
 	gxml = glade_xml_new (glade_file, "menu_main", NULL);
-
+#endif
 	g_free (glade_file);
 	g_return_val_if_fail (gxml != NULL, NULL);
+	
+	GtkWidget *menu = UI_GET_ITEM(gxml, "menu_main");
 
-	GtkWidget *menu 	= glade_xml_get_widget (gxml, "menu_main");
-
-	widgets.viewtexts_item = glade_xml_get_widget (gxml, "show_bible_text");
-	widgets.viewpreview_item = glade_xml_get_widget (gxml, "preview");
-	widgets.viewcomms_item = glade_xml_get_widget (gxml, "commentary");
-	widgets.viewdicts_item = glade_xml_get_widget (gxml, "show_dictionary_lexicon");
-	widgets.linkedtabs_item = glade_xml_get_widget (gxml, "link_tabs");
-	widgets.readaloud_item = glade_xml_get_widget (gxml, "read_aloud");
-	widgets.showversenum_item = glade_xml_get_widget (gxml, "show_verse_numbers");
-	widgets.versehighlight_item = glade_xml_get_widget (gxml, "highlight_current_verse");
-	widgets.parallel_tab_item = glade_xml_get_widget (gxml, "show_parallel_view_in_a_tab");
-	widgets.side_preview_item = glade_xml_get_widget (gxml, "show_previewer_in_sidebar");
-
-	widgets.new_journal_item = glade_xml_get_widget (gxml, "newjournal");
+	widgets.viewtexts_item = UI_GET_ITEM(gxml, "show_bible_text");
+	widgets.viewpreview_item = UI_GET_ITEM(gxml, "preview");
+	widgets.viewcomms_item = UI_GET_ITEM(gxml, "commentary");
+	widgets.viewdicts_item = UI_GET_ITEM(gxml, "show_dictionary_lexicon");
+	widgets.linkedtabs_item = UI_GET_ITEM(gxml, "link_tabs");
+	widgets.readaloud_item = UI_GET_ITEM(gxml, "read_aloud");
+	widgets.showversenum_item = UI_GET_ITEM(gxml, "show_verse_numbers");
+	widgets.versehighlight_item = UI_GET_ITEM(gxml, "highlight_current_verse");
+	widgets.parallel_tab_item = UI_GET_ITEM(gxml, "show_parallel_view_in_a_tab");
+	widgets.side_preview_item = UI_GET_ITEM(gxml, "show_previewer_in_sidebar");
+	widgets.new_journal_item = UI_GET_ITEM(gxml, "newjournal");
 
 	/* map tab's show state into view menu. */
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
@@ -866,16 +884,21 @@ GtkWidget *gui_create_main_menu(void)
 				       (widgets.versehighlight_item),
 				       settings.versehighlight);
     	/* connect signals and data */
+#ifdef USE_GTKBUILDER 
+        gtk_builder_connect_signals (gxml, NULL);
+	/*gtk_builder_connect_signals_full
+		(gxml, (GtkBuilderConnectFunc)gui_glade_signal_connect_func, NULL);*/
+#else
 	glade_xml_signal_autoconnect_full
 		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);
-
+#endif
 	//set up global function to handle all link buttons
-	gtk_link_button_set_uri_hook (link_uri_hook, NULL, NULL);
+//	gtk_link_button_set_uri_hook (link_uri_hook, NULL, NULL);
 
 	if (settings.prayerlist)
 		gtk_widget_show(widgets.new_journal_item);
 	else
 		gtk_widget_hide(widgets.new_journal_item);
-
+	gtk_widget_show(menu);
 	return menu;
 }

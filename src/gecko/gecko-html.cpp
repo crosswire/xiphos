@@ -303,7 +303,7 @@ static void html_realize(GtkWidget * widget)
 static void html_init(GeckoHtml * html)
 {
 	GeckoHtmlPriv *priv;
-	GeckoHtmlClass *klass;
+	//GeckoHtmlClass *klass;
 
 	html->priv = priv = GECKO_HTML_GET_PRIVATE(html);
 
@@ -312,7 +312,7 @@ static void html_init(GeckoHtml * html)
 	priv->timeout = 0;
 
 	priv->yelper = new Yelper(GTK_MOZ_EMBED(html));
-	klass = GECKO_HTML_GET_CLASS(html);
+	//klass = GECKO_HTML_GET_CLASS(html);
 }
 
 static void html_dispose(GObject * object)
@@ -663,4 +663,21 @@ gecko_html_print_document(GtkWindow * window, gchar * mod_name,
 	if (swdisplay)
 		delete swdisplay;
 #endif
+}
+
+void
+gecko_html_set_parms(GeckoHtml *html,
+		     GeckoHtmlPriv *priv,
+		     DIALOG_DATA *dialog,
+		     gboolean is_dialog,
+		     gint pane)
+{
+    	priv->pane = pane;
+	priv->is_dialog = is_dialog;
+	priv->dialog = dialog;
+
+	//make scrollbar appear on the left for RTL locales
+	GtkTextDirection dir = gtk_widget_get_direction(GTK_WIDGET (html));
+	if (dir == GTK_TEXT_DIR_RTL)
+	    priv->yelper->SetRTL();
 }

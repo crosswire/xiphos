@@ -67,8 +67,8 @@ ceb	Sinugboanong Binisaya
 ch	Chamoru
 # Corsican
 co	Corsu
-# Coptic
-cop	ⲙⲛⲧⲣⲙⲛⲕⲏⲙⲉ
+# Coptic - disabled because this causes some grief.
+#cop	ⲙⲛⲧⲣⲙⲛⲕⲏⲙⲉ
 # Czech
 cs	Česky
 # Church Slavic
@@ -217,9 +217,9 @@ my	မြန်မာစာ
 # Nauruan
 na	Dorerin Naoero
 # correct: Norwegian Bokmål
-#nb	Norsk Bokmål
+nb	Norsk Bokmål
 # a hack while g_utf8_validate() dislikes 'å': Norwegian Bokmaal
-nb	Norsk Bokmaal
+#nb	Norsk Bokmaal
 # Ndebele, North
 nd	Sindebele
 # Low German; Low Saxon
@@ -233,9 +233,9 @@ nl	Nederlands
 # Norwegian Nynorsk
 nn	Nynorsk
 # correct: Norwegian
-#no	Norsk (bokmål)
+no	Norsk (bokmål)
 # a hack while g_utf8_validate() dislikes 'å': Norwegian
-no	Norsk Bokmaal
+#no	Norsk Bokmaal
 # Ndebele, South
 nr	Nrebele
 # Navajo
@@ -349,13 +349,15 @@ uk	Українська
 ur	اردو
 # Uzbek
 uz	O'zbek
+uz-Cyrl	O'zbek
+uz-Latn	O'zbek (Latin)
 # Vietnamese
 vi	Tiếng Việt
 # Volapk
 vo	Volapük
 # Wolof
 wo	Wolof
-# Xhosa -- causes gettext problems
+# Xhosa
 xh	isiXhosa
 # Bavarian
 x-E-BAR	Boarisch
@@ -827,6 +829,7 @@ auw	Awyi
 aux	Aurá
 auy	Awiyaana
 auz	Uzbeki Arabic
+av	Avaric
 ava	Avaric
 avb	Avau
 avd	Alviri-Vidari
@@ -1751,7 +1754,8 @@ col	Columbia-Wenatchi
 com	Comanche
 con	Cofán
 coo	Comox
-#cop	Coptic				// dup
+# enabled plain latin name because font-specific name causes grief.
+cop	Coptic
 coq	Coquille
 cor	Cornish
 cos	Corsican
@@ -3344,7 +3348,7 @@ khj	Kuturmi
 # khk	Halh Mongolian - unused?
 khk	Хакас
 khl	Lusi
-khm	Central Khmer
+khm	Khmer
 khn	Khandesi
 kho	Khotanese
 khp	Kapori

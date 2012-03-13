@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * gs_parallel.c - support for displaying multiple modules
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,17 +24,12 @@
 #endif
 
 #include <gtk/gtk.h>
-
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "gecko/gecko-html.h"
-#endif
-#else
+#ifdef GTKHTML
 #include <gtkhtml/gtkhtml.h>
 #include "gui/html.h"
 #endif
+
+#include "../xiphos_html/xiphos_html.h"
 
 #include "gui/parallel_view.h"
 #include "gui/parallel_dialog.h"
@@ -144,7 +139,7 @@ void gui_popup_menu_parallel(void)
 
 	if (!settings.showparatab) {
 		if (undockInt) {
-			g_signal_connect(GTK_OBJECT(undockInt), "activate",
+			g_signal_connect(G_OBJECT(undockInt), "activate",
 					 G_CALLBACK(on_undockInt_activate),
 					 &settings);
 		} else {
@@ -167,9 +162,9 @@ on_enter_notify_event(GtkWidget       *widget,
 }
 
 
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 static void
-_popupmenu_requested_cb(GeckoHtml *html,
+_popupmenu_requested_cb(XiphosHtml *html,
 			gchar *uri,
 			gpointer user_data)
 {
@@ -208,32 +203,16 @@ _popupmenu_requested_cb(GtkHTML *html,
 void gui_create_parallel_page(void)
 {
 	GtkWidget *label;
-#ifdef USE_GTKMOZEMBED
-	GtkWidget *eventbox;
-#else
+#ifndef  USE_GTKMOZEMBED
 	GtkWidget *scrolled_window;
-#endif
+#endif /* !USE_GTKMOZEMBED */
 
 	/*
 	 * parallel page
 	 */
 	settings.dockedInt = TRUE;
-#ifdef USE_GTKMOZEMBED
-	eventbox = gtk_event_box_new ();
-	gtk_widget_show (eventbox);
-	gtk_container_add(GTK_CONTAINER(widgets.notebook_bible_parallel), eventbox);
 
-	widgets.frame_parallel = eventbox;
-	widgets.html_parallel = GTK_WIDGET(gecko_html_new(NULL, FALSE, PARALLEL_TYPE)); //embed_new(PARALLEL_TYPE); //gtk_moz_embed_new();
-	gtk_widget_show(widgets.html_parallel);
-	gtk_container_add(GTK_CONTAINER(eventbox),
-			  widgets.html_parallel);
-
-	g_signal_connect((gpointer)widgets.html_parallel,
-			 "popupmenu_requested",
-			 G_CALLBACK (_popupmenu_requested_cb),
-			 NULL);
-#else
+#ifndef  USE_GTKMOZEMBED
 	scrolled_window = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolled_window);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window),
@@ -241,30 +220,49 @@ void gui_create_parallel_page(void)
 				       GTK_POLICY_ALWAYS);
 /*	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolled_window,
                                              settings.shadow_type);*/
-	widgets.frame_parallel = scrolled_window;
-
 	gtk_container_add(GTK_CONTAINER(widgets.notebook_bible_parallel),
 			  scrolled_window);
+#endif /* !USE_GTKMOZEMBED */
+#ifdef USE_XIPHOS_HTML
+	widgets.html_parallel = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, PARALLEL_TYPE));
+	gtk_widget_show(widgets.html_parallel);
+    
+ #ifdef USE_WEBKIT  
+	widgets.frame_parallel = scrolled_window;
+	gtk_container_add(GTK_CONTAINER(scrolled_window),
+			  widgets.html_parallel);
+ #else
+	widgets.frame_parallel = widgets.notebook_bible_parallel;
+	gtk_container_add(GTK_CONTAINER(widgets.notebook_bible_parallel),
+			  widgets.html_parallel);
+ #endif /* USE_WEBKIT */ 
+	g_signal_connect((gpointer)widgets.html_parallel,
+			 "popupmenu_requested",
+			 G_CALLBACK (_popupmenu_requested_cb),
+			 NULL);
+#else
+	widgets.frame_parallel = scrolled_window;
+
 	widgets.html_parallel = gtk_html_new();
 	gtk_widget_show(widgets.html_parallel);
 	gtk_html_load_empty(GTK_HTML(widgets.html_parallel));
 	gtk_container_add(GTK_CONTAINER(scrolled_window),
 			  widgets.html_parallel);
 
-	g_signal_connect(GTK_OBJECT(widgets.html_parallel),
+	g_signal_connect(G_OBJECT(widgets.html_parallel),
 			 "on_url", G_CALLBACK(gui_url),
 			 (gpointer) widgets.app);
-	g_signal_connect(GTK_OBJECT(widgets.html_parallel),
+	g_signal_connect(G_OBJECT(widgets.html_parallel),
 			 "link_clicked",
 			 G_CALLBACK(gui_link_clicked), NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_parallel),
+	g_signal_connect(G_OBJECT(widgets.html_parallel),
 			 "button_release_event",
 			 G_CALLBACK (_popupmenu_requested_cb),
 			 NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_parallel),
+	g_signal_connect(G_OBJECT(widgets.html_parallel),
 			 "url_requested",
 			 G_CALLBACK(url_requested), NULL);
-#endif
+#endif  /* USE_XIPHOS_HTML */
 
 	label = gtk_label_new(_("Parallel View"));
 	gtk_widget_show(label);

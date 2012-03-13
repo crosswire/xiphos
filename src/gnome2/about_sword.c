@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * about_xiphos.c - Xiphos about dialog
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -99,10 +99,12 @@ Books can be downloaded from the SWORD Project.");
 	    (GTK_ABOUT_DIALOG (about1), (gchar *)main_get_sword_version());
 	gtk_about_dialog_set_comments
 	    (GTK_ABOUT_DIALOG (about1), about);
+#ifndef WIN32
 	gtk_about_dialog_set_website
 	    (GTK_ABOUT_DIALOG (about1), "http://www.crosswire.org/sword");
 	gtk_about_dialog_set_website_label
 	    (GTK_ABOUT_DIALOG (about1), _("The SWORD Project"));
+#endif
 	gtk_about_dialog_set_logo
 	    (GTK_ABOUT_DIALOG (about1), about1_logo_pixbuf);
 

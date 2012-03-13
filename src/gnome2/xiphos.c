@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * xiphos.c -
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,10 +24,12 @@
 #endif
 
 #include <gtk/gtk.h>
+#include <gdk/gdk.h>
 #include <libxml/parser.h>
 #include <ctype.h>
 #include <time.h>
 
+#include "main/gtk_compat.h"
 #include "editor/slib-editor.h"
 
 #include "gui/xiphos.h"
@@ -64,13 +66,7 @@
 #include "main/lists.h"
 #include "main/xml.h"
 
-#ifdef USE_GTKMOZEMBED
-#ifdef WIN32
-#include "geckowin/gecko-html.h"
-#else
-#include "gecko/gecko-html.h"
-#endif
-#endif
+#include "../xiphos_html/xiphos_html.h"
 
 #include "gui/debug_glib_null.h"
 
@@ -118,6 +114,23 @@ void frontend_init(void)
 	main_dialogs_setup();
 
 	gui_set_sidebar_program_start();
+
+	/* bring the major html widgets to life, then flush them clean. */
+	if (!gtk_widget_get_realized(GTK_WIDGET(widgets.html_text)))
+		gtk_widget_realize(widgets.html_text);
+	if (!gtk_widget_get_realized(GTK_WIDGET(widgets.html_comm)))
+		gtk_widget_realize(widgets.html_comm);
+	if (!gtk_widget_get_realized(GTK_WIDGET(widgets.html_book)))
+		gtk_widget_realize(widgets.html_book);
+	if (!gtk_widget_get_realized(GTK_WIDGET(widgets.html_dict)))
+		gtk_widget_realize(widgets.html_dict);
+	if (!gtk_widget_get_realized(GTK_WIDGET(widgets.html_previewer_text)))
+		gtk_widget_realize(widgets.html_previewer_text);
+	if (!gtk_widget_get_realized(GTK_WIDGET(sidebar.html_viewer_widget)))
+		gtk_widget_realize(sidebar.html_viewer_widget);
+	main_flush_widgets_content();
+	gui_show_previewer_in_sidebar(settings.show_previewer_in_sidebar);
+	main_init_previewer();
 }
 
 
@@ -140,6 +153,10 @@ void frontend_init(void)
 
 void frontend_display(const char *tabs)
 {
+	GdkScreen *screen  = gdk_screen_get_default();
+	gint screen_width  = gdk_screen_get_width(screen);
+	gint screen_height = gdk_screen_get_height(screen);
+
 	GS_print(("%s\n", "Displaying Xiphos"));
 	gui_show_main_window();
 
@@ -166,14 +183,18 @@ void frontend_display(const char *tabs)
 	 * sometimes xiphos gets insane reconfig events as it dies,
 	 * especially if it's due to just shutting linux down.
 	 */
-	if ((settings.app_x < 0) || (settings.app_x > 400))
-		settings.app_x = 0;
-	if ((settings.app_y < 0) || (settings.app_y > 400))
-		settings.app_y = 0;
+	if (settings.app_x < 0)
+		settings.app_x = 10;
+	if (settings.app_x > (screen_width - 100))
+		settings.app_x = screen_width - 100;
+	if (settings.app_y < 0)
+		settings.app_y = 10;
+	if (settings.app_y > (screen_height - 100))
+		settings.app_y = screen_height - 100;
 
  	gtk_window_move(GTK_WINDOW(widgets.app),settings.app_x,settings.app_y);
 
-#ifdef USE_GTKMOZEMBED
+#ifdef USE_XIPHOS_HTML
 	/* gecko  needs the widgets to be visible before writing */
 	sync_windows();
 #endif
@@ -203,7 +224,7 @@ void frontend_display(const char *tabs)
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.parallel_tab_item),
 				       settings.showparatab);
-	g_signal_connect(GTK_OBJECT(widgets.parallel_tab_item),
+	g_signal_connect(G_OBJECT(widgets.parallel_tab_item),
 			   "toggled",
 			   G_CALLBACK(gui_parallel_tab_activate),
 			   NULL	);
@@ -271,8 +292,8 @@ void shutdown_frontend(void)
 	xml_free_settings_doc();
 
 	main_shutdown_list();
-#ifdef USE_GTKMOZEMBED
-	gecko_html_shutdown();
+#ifdef USE_XIPHOS_HTML
+	XIPHOS_HTML_SHUTDOWN();
 #endif
 //	if(settings.browsing)
 	gui_notebook_main_shutdown (settings.browsing);

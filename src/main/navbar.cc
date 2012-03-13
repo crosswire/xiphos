@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * navbar.cc - glue between all navbars and sword
  *
- * Copyright (C) 2000-2010 Xiphos Developer Team
+ * Copyright (C) 2000-2011 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -84,8 +84,8 @@ void main_navbar_set(NAVBAR navbar, const char * key)
                                              book-1);
 
 	gtk_list_store_clear(GTK_LIST_STORE(chapter_store));
-	char xtestament = vkey.Testament() ;
-	char xbook = vkey.Book();
+	//char xtestament = vkey.Testament() ;
+	//char xbook = vkey.Book();
 	int xchapter = vkey.Chapter();
 	int xverse = vkey.Verse();
 	x = (vkey.getChapterMax());
@@ -103,8 +103,8 @@ void main_navbar_set(NAVBAR navbar, const char * key)
                                              xchapter-1);
 
 	gtk_list_store_clear(GTK_LIST_STORE(verse_store));
-	xtestament = vkey.Testament() ;
-	xbook = vkey.Book();
+	//xtestament = vkey.Testament() ;
+	//xbook = vkey.Book();
 	xchapter = vkey.Chapter();
 	xverse = vkey.Verse();
 	x = (vkey.getVerseMax());
