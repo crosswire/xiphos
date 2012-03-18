@@ -1581,7 +1581,8 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 
 	item = UI_GET_ITEM(gxml, "variants");
 
-	if (main_check_for_global_option ((gchar*) mod_name, "ThMLVariants")) {
+	if (main_check_for_global_option ((gchar*) mod_name, "ThMLVariants") ||
+	    main_check_for_global_option ((gchar*) mod_name, "OSISVariants")) {
 		gtk_widget_show (item);
 		
 		item = UI_GET_ITEM(gxml, "primary_reading");
