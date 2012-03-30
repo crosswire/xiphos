@@ -329,7 +329,7 @@ create_edit_tree_menu (EDITOR * editor)
 
 	menu = UI_GET_ITEM(gxml, "menu_edit_tree");    
 #ifdef USE_GTKBUILDER
-       gtk_builder_connect_signals (gxml, NULL);
+       gtk_builder_connect_signals (gxml, editor);
 	/* gtk_builder_connect_signals_full
 		(gxml, (GtkBuilderConnectFunc)gui_glade_signal_connect_func, editor); */
 #else
