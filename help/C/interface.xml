@@ -732,7 +732,12 @@
 			</listitem>
 			<listitem>
 				<para>
-					<guibutton>Ctrl-t</guibutton> opens a new tab.
+					<guibutton>Ctrl-T</guibutton> opens a new tab.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<guibutton>Ctrl-[0-9]</guibutton> makes the Nth tab current.
 				</para>
 			</listitem>
 		</itemizedlist>
@@ -774,6 +779,11 @@
 			</listitem>
 			<listitem>
 				<para>
+					<guibutton>Ctrl-F3</guibutton>: brings forward the simple sidebar search.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
 					<guibutton>F4</guibutton>: opens the <guibutton>Module Manager</guibutton>.
 				</para>
 			</listitem>
@@ -807,6 +817,11 @@
 			<listitem>
 				<para>
 					<guibutton>Ctrl-Plus/Ctrl-Minus</guibutton> increases/decreases the base font size.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<guibutton>Ctrl-0</guibutton> (zero) sets the base font size to zero.
 				</para>
 			</listitem>
 		</itemizedlist>
