@@ -530,7 +530,7 @@
                 <property name="can_focus">False</property>
                 <property name="left_padding">12</property>
                 <child>
-                  <object class="GtkRadioButton" id="check_versenum">
+                  <object class="GtkCheckButton" id="check_versenum">
                     <property name="label" translatable="yes">_Verse numbers in text</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
