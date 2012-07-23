@@ -887,7 +887,7 @@ msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:786
 msgid " archived in: \n"
-msgstr " arkivert i:"
+msgstr " arkivert i: \n"
 
 #: ../src/gnome2/mod_mgr.c:841
 msgid "Journals and prayer lists cannot be indexed."
@@ -1950,7 +1950,7 @@ msgstr ""
 msgid ""
 "\n"
 "See the Module Manager, Maintenance pane."
-msgstr "Se Vedlikehold-fanen i Modulbehandleren."
+msgstr "\nSe Vedlikehold-fanen i Modulbehandleren."
 
 #: ../src/main/search_dialog.cc:1546
 msgid "Search finished"
