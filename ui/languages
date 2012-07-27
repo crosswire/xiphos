@@ -37,9 +37,14 @@ ar	العربية
 # Assamese
 as	অসমীয়া
 # Aymara
-ay	Aymar
+#ay	Aymar
+ay	Aymar aru
 # Azerbaijani
-az	Azərbaycan
+#az	Azərbaycan
+az	Azərbaycan / Азәрбајҹан / آذربایجان
+az-Arab	آذربایجان
+az-Cyrl	Азәрбајҹан
+az-Latn	Azərbaycan
 # Bashkir
 ba	Башҡорт
 # Belarusian
@@ -62,17 +67,21 @@ ca	Català
 # Chechen
 ce	Нохчийн
 # Cebuano (cf. wikipedia)
-ceb	Sinugboanong Binisaya
+#ceb	Sinugboanong Binisaya
+ceb	Sinugboanon
 # Chamorro
 ch	Chamoru
 # Corsican
 co	Corsu
 # Coptic - disabled because this causes some grief.
 #cop	ⲙⲛⲧⲣⲙⲛⲕⲏⲙⲉ
+#cop	Ⲙⲉⲧⲣⲉⲙ̀ⲛⲭⲏⲙⲓ
 # Czech
-cs	Česky
+#cs	Česky
+cs	Čeština
 # Church Slavic
-cu	Словѣньскъ
+#cu	Словѣньскъ
+cu	Словѣ́ньскъ ѩꙁꙑ́къ
 # Chuvash
 cv	Чăвашла
 # Welsh
@@ -87,12 +96,15 @@ dz	རྫོང་ཁ
 el	Ελληνικά ·(1453-)
 en	English
 en_US	American English
+en-GB	English (UK)
+en-US	English (US)
 enm	English, Middle (1100-1500)
 eo	Esperanto
 # Spanish
 es	Español
 # Estonian
-et	Eesti
+#et	Eesti
+et	Eesti Keel
 # Basque
 eu	Euskara
 # Farsi (Persian)
@@ -100,7 +112,8 @@ fa	فارسی
 # Finnish
 fi	Suomi
 # Fijian
-fj	Na Vosa Vakaviti
+#fj	Na Vosa Vakaviti
+fj	Na vosa vaka-Viti
 # Faroese
 fo	Føroyskt
 # French
@@ -110,9 +123,11 @@ fy	Frysk
 # Irish Gaelic
 ga	Gaeilge
 # Gaelic (Scots)
-gd	Gàidhlig
+#gd	Gàidhlig
+gd	A' Ghàidhlig
 # Gallegan
-gl	galego
+#gl	galego
+gl	Galego
 # Gujarati
 gn	ગુજરાતી
 # Gothic (missing font: untranslated) 𐌲𐌿𐍄𐌹𐍃𐌺𐌰 𐍂𐌰𐌶𐌳𐌰
@@ -124,7 +139,8 @@ grc	Κοινὴ Ἑλληνική
 # Hebrew
 he	עברית
 # Hawaiian
-haw	Hawai`i
+#haw	Hawai`i
+haw	ʻŌlelo Hawaiʻi
 # Hindi
 hi	हिन्दी
 # Hiri Motu
@@ -170,10 +186,18 @@ km	ភាសាខ្មែរ
 kn	ಕನ್ನಡ
 # Korean
 ko	한국어
+ko-KP	조선말
 # Kashmiri
-ks	कश्मीरी / كشميري
+#ks	कश्मीरी / كشميري
+ks	कॉशुर / کٲشُر
+ks-Arab	کٲشُر
+ks-Deva	कॉशुर
 # Kurdish
-ku	Kurdî / كوردي
+#ku	Kurdî / كوردي
+ku	Kurdî / كوردی / К'ӧрди
+ku-Arab	كوردی
+ku-Cyrl	К'ӧрди
+ku-Latn	Kurdî
 # Komi
 kv	Коми
 # Cornish
@@ -187,7 +211,8 @@ lb	Lëtzebuergesch
 # Lingala
 ln	Lingála
 # Lao
-lo	ລາວ
+#lo	ລາວ
+lo	ພາສາລາວ
 # Lithuanian
 lt	Lietuvių
 # Latvian
@@ -213,7 +238,8 @@ ms	Bahasa Melayu
 # Maltese
 mt	Malti
 # Burmese (Myanmar)
-my	မြန်မာစာ
+#my	မြန်မာစာ
+my	မြန်မာစ
 # Nauruan
 na	Dorerin Naoero
 # correct: Norwegian Bokmål
@@ -227,13 +253,15 @@ nds	Plattdüütsch
 # Nepali
 ne	नेपाली
 # Ndonga
-ng	Oshiwambo
+#ng	Oshiwambo
+ng	Owambo
 # Dutch
 nl	Nederlands
 # Norwegian Nynorsk
 nn	Nynorsk
 # correct: Norwegian
-no	Norsk (bokmål)
+#no	Norsk (bokmål)
+no	Norsk
 # a hack while g_utf8_validate() dislikes 'å': Norwegian
 #no	Norsk Bokmaal
 # Ndebele, South
@@ -251,13 +279,18 @@ or	ଓଡ଼ିଆ
 # Ossetian; Ossetic
 os	Иронау
 # Panjabi
-pa	ਪੰਜਾਬੀ پنجابی
+#pa	ਪੰਜਾਬੀ پنجابی
+pa	ਪੰਜਾਬੀ / پنجابی / पंजाबी
+pa-Arab	پنجابی
+pa-Deva	पंजाबी
+pa-Guru	ਪੰਜਾਬੀ
 # Papiamento
 pap	Papiamentu
 # Pali
 pi	पािऴ
 # Polish
 pl	Polski
+#pl	Polszczyzna
 # Potawatomi (cf. wikipedia)
 pot	Neshnabémwen
 ppk	Uma
@@ -265,10 +298,11 @@ ppk	Uma
 ps	پښتو
 # Portuguese
 pt	Português
+pt-BR	Português Brasileiro
 # Quechua
 qu	Quechua
 # Raeto-Romance
-rm	rumantsch
+rm	Rumantsch
 # Rundi
 rn	Kirundi
 # Romanian
@@ -303,6 +337,8 @@ so	Soomaaliga
 sq	Shqip
 # Serbian
 sr	Српски / Srpski
+sr-Cyrl	Српски
+sr-Latn	Srpski
 # Swati
 ss	SiSwati
 # Sotho, Southern
@@ -320,12 +356,23 @@ ta	தமிழ்
 # Telugu
 te	తెలుగు
 # Tajik
-tg	Тоҷикӣ/tojikī
+#tg	Тоҷикӣ/tojikī
+tg	Тоҷикӣ / Tojikī / تاجیکی‎
+tg-Arab	تاجیکی‎
+tg-Cyrl	Тоҷикӣ
+tg-Latn	Tojikī
 # Thai
-th	ไทย
+#th	ไทย
+th	ภาษาไทย
 # Turkmen
-tk	Türkmen
-tl	Tagalog
+#tk	Türkmen
+tk	Türkmençe / Түркменче / تورکمنچه
+tk-Arab	تورکمنچه
+tk-Cyrl	Түркменче
+tk-Latn	Türkmençe
+#tl	Tagalog
+tl	Wikang Tagalog
+tl-Tglg	ᜆᜄᜎᜓᜄ
 # Klingon
 tlh	tlhIngan Hol
 # Tswana
@@ -337,20 +384,33 @@ tr_BG	Тюркче
 # Tsonga
 ts	Xitsonga
 # Tatar
-tt	Tatarça/Татарча
+#tt	Tatarça/Татарча
+tt	Tatarça / Татарча
+tt-Cyrl	Татарча
+tt-Latn	Tatarça
 tw	Twi
 # Tahitian
 ty	Reo Mā`ohi
 # Uyghur
-ug	Uyghurche‎ / ئۇيغۇرچە
+#ug	Uyghurche‎ / ئۇيغۇرچە
+ug	Uyghurche‎ / ئۇيغۇرچە / Уйғурчә
+ug-Arab	ئۇيغۇرچە
+ug-Cyrl	Уйғурчә
+ug-Latn	Uyghurche‎
 # Ukrainian
 uk	Українська
 # Urdu
-ur	اردو
+#ur	اردو
+ur	اردو / उर्दू
+ur-Arab	اردو
+ur-Deva	उर्दू
 # Uzbek
-uz	O'zbek
-uz-Cyrl	O'zbek
-uz-Latn	O'zbek (Latin)
+#uz	O'zbek
+#uz-Cyrl	O'zbek
+#uz-Latn	O'zbek (Latin)
+uz	O'zbek / Ўзбек
+uz-Cyrl	Ўзбек
+uz-Latn	O'zbek
 # Vietnamese
 vi	Tiếng Việt
 # Volapk
@@ -379,11 +439,16 @@ x-E-SAJ	Sängö
 x-E-SRN	nengre
 # Yiddish
 yi	ייִדיש
-yo	Yoruba
+#yo	Yoruba
+yo	èdèe Yorùbá
 # Zhuang
-za	Saw cuengh
+#za	Saw cuengh
+za	Vahcuengh
 # Chinese
+#zh	中文
 zh	中文
+zh-Hans	简体中文
+zh-Hant	繁体中文
 # Zulu
 zu	isiZulu
 #
@@ -481,7 +546,8 @@ adt	Adnyamathanha
 adu	Aduge
 adw	Amundava
 adx	Amdo Tibetan
-ady	Adyghe
+#ady	Adyghe
+ady	адыгaбзэ
 adz	Adzera
 aea	Areba
 aeb	Tunisian Arabic
@@ -775,7 +841,8 @@ asp	Algerian Sign Language
 asq	Austrian Sign Language
 asr	Asuri
 ass	Ipulo
-ast	Asturian
+#ast	Asturian
+ast	Llingua Llïonesa
 asu	Tocantins Asurini
 asv	Asoa
 asw	Australian Aborigines Sign Language
@@ -845,7 +912,8 @@ avu	Avokaya
 avv	Avá-Canoeiro
 awa	Awadhi
 awb	Awa
-awc	Western Acipa
+#awc	Western Acipa
+awc	Cicipu
 awe	Awetí
 awh	Awbono
 awi	Aekyom
@@ -892,11 +960,19 @@ aza	Azha
 #
 # via refdoc
 #azb	South Azerbaijani
-azb	آذربايجان ديلی
+#azb	آذربايجان ديلی
+azb	Azərbaycan / Азәрбајҹан / آذربایجان
+azb-Arab	آذربایجان
+azb-Cyrl	Азәрбајҹан
+azb-Latn	Azərbaycan
 #
 aze	Azerbaijani
 azg	San Pedro Amuzgos Amuzgo
-azj	North Azerbaijani
+#azj	North Azerbaijani
+azj	Azərbaycan / Азәрбајҹан / آذربایجان
+azj-Arab	آذربایجان
+azj-Cyrl	Азәрбајҹан
+azj-Latn	Azərbaycan
 azm	Ipalapa Amuzgo
 azo	Awing
 azt	Faire Atta
@@ -915,7 +991,8 @@ bam	Bambara
 ban	Balinese
 bao	Waimaha
 bap	Bantawa
-bar	Bavarian
+#bar	Bavarian
+bar	Bairisch
 bas	Basa (Cameroon)
 bau	Bada (Nigeria)
 bav	Vengo
@@ -1643,7 +1720,8 @@ chn	Chinook jargon
 cho	Choctaw
 chp	Chipewyan
 chq	Quiotepec Chinantec
-chr	Cherokee
+#chr	Cherokee
+chr	ᏣᎳᎩ
 chs	Chumash
 cht	Cholón
 chu	Church Slavic
@@ -1837,7 +1915,8 @@ ctp	Western Highland Chatino
 cts	Northern Catanduanes Bicolano
 # ctt	Wayanad Chetti - unused?
 ctt	Къырымтатар
-ctu	Tumbalá Chol
+#ctu	Tumbalá Chol
+ctu	Ch'ol
 ctz	Zacatepec Chatino
 cua	Cua
 cub	Cubeo
@@ -2447,7 +2526,8 @@ ges	Geser-Gorom
 gew	Gera
 gex	Garre
 gey	Enya
-gez	Geez
+#gez	Geez
+gez	ግዕዝ
 gfk	Patpatar
 gft	Gafat
 gga	Gao
@@ -2705,7 +2785,8 @@ haz	Hazaragi
 hba	Hamba
 hbb	Huba
 hbn	Heiban
-hbo	Ancient Hebrew
+#hbo	Ancient Hebrew
+hbo	עברית מקראית
 hbs	Serbo-Croatian
 hbu	Habu
 hca	Andaman Creole Hindi
@@ -2729,7 +2810,8 @@ hhy	Hoyahoya
 hia	Lamang
 hib	Hibito
 hid	Hidatsa
-hif	Fijian Hindustani
+#hif	Fijian Hindustani
+hif	फ़िजि हिन्दी
 hig	Kamwe
 hih	Pamosu
 hii	Hinduri
@@ -2849,7 +2931,8 @@ huo	Hu
 hup	Hupa
 huq	Tsat
 hur	Halkomelem
-hus	Veracruz Huastec
+#hus	Veracruz Huastec
+hus	Tenek
 hut	Humla
 huu	Murui Huitoto
 huv	San Mateo Del Mar Huave
@@ -5796,7 +5879,8 @@ pyy	Pyen
 pzn	Para Naga
 qua	Quapaw
 qub	Huallaga Huánuco Quechua
-quc	Central Quiché
+#quc	Central Quiché
+quc	Qatzijob'al
 qud	Calderón Highland Quichua
 que	Quechua
 quf	Lambayeque Quechua
@@ -7037,7 +7121,8 @@ tzh	Oxchuc Tzeltal
 tzj	Eastern Tzutujil
 tzm	Central Atlas Tamazight
 tzn	Tugun
-tzo	Venustiano Carranza Tzotzil
+#tzo	Venustiano Carranza Tzotzil
+tzo	Bats'i k'op
 tzs	San Andrés Larrainzar Tzotzil
 tzt	Western Tzutujil
 tzu	Huixtán Tzotzil
@@ -7265,7 +7350,8 @@ wag	Wa'ema
 wah	Watubela
 wai	Wares
 waj	Waffa
-wal	Walamo
+#wal	Walamo
+wal	ወላይትኛ
 wam	Wampanoag
 wan	Wan
 wao	Wappo
