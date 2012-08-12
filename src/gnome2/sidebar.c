@@ -33,6 +33,7 @@
 
 #include "gui/sidebar.h"
 #include "gui/bookmarks_treeview.h"
+#include "gui/dialog.h"
 #include "gui/export_bookmarks.h"
 #include "gui/utilities.h"
 #include "gui/about_modules.h"
@@ -833,15 +834,26 @@ G_MODULE_EXPORT void
 on_open_in_dialog_activate(GtkMenuItem * menuitem,
 				       gpointer user_data)
 {
-	if (main_get_mod_type(buf_module) == PERCOM_TYPE)
-		editor_create_new((gchar *)buf_module,
-				  (gchar *)settings.currentverse,
-				  NOTE_EDITOR);
-	else if (main_get_mod_type(buf_module) == PRAYERLIST_TYPE)
-		editor_create_new((gchar *)buf_module,
-				  "0",
-				  BOOK_EDITOR);
-	else
+	int mod_type = main_get_mod_type(buf_module);
+
+	if ((mod_type == PERCOM_TYPE) || (mod_type == PRAYERLIST_TYPE)) {
+		gchar *dialog_text = g_strdup_printf(
+		    "<span weight=\"bold\">%s</span>\n\n%s",
+		    _("Open module in editor?"), _("If no, it will open for display only."));
+
+		if (gui_yes_no_dialog(dialog_text, NULL)) {
+			if (mod_type == PERCOM_TYPE)
+				editor_create_new((gchar *)buf_module,
+						  (gchar *)settings.currentverse,
+						  NOTE_EDITOR);
+			else
+				editor_create_new((gchar *)buf_module,
+						  "0",
+						  BOOK_EDITOR);
+		} else
+			main_dialogs_open(buf_module, NULL);
+		g_free(dialog_text);
+	} else
 		main_dialogs_open(buf_module, NULL);
 
 	g_free(buf_module);

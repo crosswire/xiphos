@@ -844,10 +844,10 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="open_in_a_dialog2">
-        <property name="label">Open in editor</property>
+        <property name="label">Open in separate window</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="tooltip_text" translatable="yes">Open in editor</property>
+        <property name="tooltip_text" translatable="yes">Open module in editor or plain display window</property>
         <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
