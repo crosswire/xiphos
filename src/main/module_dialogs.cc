@@ -1452,6 +1452,7 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 		break;
 
 	case COMMENTARY_TYPE:
+	case PERCOM_TYPE:
 		t->mod_type = COMMENTARY_TYPE;
 		gui_create_commentary_dialog(t, FALSE);
 		be->entryDisplay = new DialogEntryDisp(t->html,  t, be);
@@ -1501,6 +1502,7 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 		break;
 
 	case BOOK_TYPE:
+	case PRAYERLIST_TYPE:
 		t->mod_type = BOOK_TYPE;
 		gui_create_gbs_dialog(t);
 		be->entryDisplay = new DialogEntryDisp(t->html,  t, be);
@@ -1532,14 +1534,18 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 		t->is_locked = 0;
 		t->cipher_old = NULL;
 	}
-	if (type != BOOK_TYPE) {
+	if ((type != BOOK_TYPE) &&
+	    (type != PRAYERLIST_TYPE) &&
+	    (type != DICTIONARY_TYPE)) {
 		be->display_mod->Display();
 		bible_apply_change = TRUE;
 	}
 	if (type == TEXT_TYPE)
 		main_dialogs_clear_viewer(t);
 
-	if (type == COMMENTARY_TYPE || type == TEXT_TYPE)
+	if ((type == COMMENTARY_TYPE) ||
+	    (type == PERCOM_TYPE) ||
+	    (type == TEXT_TYPE))
 		main_navbar_versekey_set(t->navbar, (char*)t->key);
 
 	if (type == DICTIONARY_TYPE)
