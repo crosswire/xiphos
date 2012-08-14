@@ -42,6 +42,7 @@
 #include "gui/xiphos.h"
 #include "gui/utilities.h"
 #include "gui/widgets.h"
+#include "gui/about_modules.h"
 
 
 #include "main/navbar_book_dialog.h"
@@ -1279,6 +1280,68 @@ static gint show_strongs_morph(DIALOG_DATA * d,const gchar * type, const gchar *
 }
 
 
+/******************************************************************************
+ * Name
+ *   show_mod_info
+ *
+ * Synopsis
+ *   #include "main/url.hh"
+ *
+ *   gint show_mod_info(const gchar * module, const gchar * description,
+ *						gboolean clicked)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   gint
+ */
+
+ static gint show_mod_info(const gchar * module, const gchar * description,
+						gboolean clicked)
+{
+	if (clicked) {
+		GS_print(("module = %s\n",module));
+		gui_display_about_module_dialog((gchar*)module);
+	} else {
+		/* some mod descriptions contain fun(ny) characters */
+		GString *desc_clean = hex_decode(description);
+		GS_print(("description = %s\n", desc_clean->str));
+		gui_set_statusbar (desc_clean->str);
+		g_string_free(desc_clean, TRUE);
+	}
+	return 1;
+}
+
+
+/******************************************************************************
+ * Name
+ *   reference_uri
+ *
+ * Synopsis
+ *   #include "main/url.hh"
+ *
+ *   gint reference_uri(const gchar * url)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   gint
+ */
+
+static gint show_ref(const gchar * module, const gchar * list, gboolean clicked)
+{
+	if (!clicked)
+		return 1;
+
+	if (!backend->is_module(module))
+		module = settings.MainWindowModule;
+	main_display_verse_list_in_sidebar(settings.currentverse,
+						  (gchar*)module,
+						  (gchar*)list);
+	return 1;
+}
 
 static gint new_url_handler(DIALOG_DATA * t, const gchar * url, gboolean clicked)
 {
@@ -1314,6 +1377,12 @@ static gint new_url_handler(DIALOG_DATA * t, const gchar * url, gboolean clicked
 		show_strongs(t, type, value, clicked);
 	}
 
+	if (!strcmp(action, "showModInfo")) {
+			module = g_strdup(m_url->getParameterValue("module"));
+			show_mod_info(module, value, clicked);
+			if (module) g_free(module);
+	}
+
 
 	if (!strcmp(action,"showMorph")) {
 		show_morph(t, type, value, clicked);
@@ -1329,7 +1398,7 @@ static gint new_url_handler(DIALOG_DATA * t, const gchar * url, gboolean clicked
 
 	if (!strcmp(action,"showRef")) {
 		module = g_strdup(m_url->getParameterValue("module"));
-		//new_reference_uri(module,value,clicked);
+		show_ref (module,value,clicked);
 		if (module) g_free(module);
 	}
 
