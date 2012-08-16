@@ -71,7 +71,6 @@ void gui_parse_bookmarks(GtkTreeView *tree, const xmlChar * file,
 			    GtkTreeIter *parent);
 GtkWidget* gui_create_dialog_add_bookmark(gchar * label,
 				gchar * module_name, gchar * key);
-void gui_save_old_bookmarks_to_new(GNode * gnode);
 
 #ifdef __cplusplus
 }

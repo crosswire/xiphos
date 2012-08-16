@@ -1,3 +1,7 @@
+2012-08-15  karl <charcoal@users.sf.net>
+
+	* remove "old bookmarks"/"gnode" (dead) code.
+
 2012-08-11  karl <charcoal@users.sf.net>
 
 	* add ability to open pers.comm and journals in non-editor windows.
