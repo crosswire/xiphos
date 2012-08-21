@@ -428,15 +428,15 @@ block_dump(SWBuf& rendered,
 	g_free((char *)*word);
 	*word = NULL;
 
-	rendered += "<span class=\"strongs\">";
+	rendered += "<span class=\"strongs\"><sup>";
 	rendered += (*strongs ? *strongs : "&nbsp;");
-	rendered += "</span>";
+	rendered += "</sup></span>";
 	if (*strongs) g_free((char *)*strongs);
 	*strongs = NULL;
 
-	rendered += "<span class=\"morph\">";
+	rendered += "<span class=\"morph\"><sup>";
 	rendered += (*morph ? *morph : "&nbsp;");
-	rendered += "</span>";
+	rendered += "</sup></span>";
 	if (*morph) g_free((char *)*morph);
 	*morph = NULL;
 
