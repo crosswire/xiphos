@@ -850,8 +850,13 @@ on_open_in_dialog_activate(GtkMenuItem * menuitem,
 				editor_create_new((gchar *)buf_module,
 						  "0",
 						  BOOK_EDITOR);
-		} else
-			main_dialogs_open(buf_module, NULL);
+		} else {
+			if (mod_type == PERCOM_TYPE)
+				main_dialogs_open(buf_module, 
+						  (gchar *)settings.currentverse);
+			else
+				main_dialogs_open(buf_module, NULL);
+		}
 		g_free(dialog_text);
 	} else
 		main_dialogs_open(buf_module, NULL);
