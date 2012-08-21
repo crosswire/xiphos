@@ -72,7 +72,7 @@ export CROSS CC CXX AR RANLIB CFLAGS LDFLAGS WINRC \
 for symbol in LOCALE_H INTTYPES_H MEMORY_H STDINT_H STDLIB_H STRINGS_H STRING_H SYS_STAT_H UNISTD_H WINSOCK_H ; do
     sed -i -e "/undef.*$symbol/d" build-win32/default/config.h
 done
-for symbol in LOCALEDIR GNOMELOCALEDIR PACKAGE_LOCALE_DIR ; do
+for symbol in LOCALEDIR GNOMELOCALEDIR PACKAGE_LOCALE_DIR NO_SWORD_SET_RENDER_NOTE_NUMBERS ; do
     sed -i -e "/$symbol/d" build-win32/default/config.h
 done
 ed -s build-win32/default/config.h << \EOF
@@ -87,6 +87,7 @@ $i
 #define HAVE_SYS_STAT_H 1
 #define HAVE_UNISTD_H 1
 #define HAVE_WINSOCK_H 1
+/* #undef NO_SWORD_SET_RENDER_NOTE_NUMBERS */
 #define LOCALEDIR "../share/locale"
 #define GNOMELOCALEDIR "../share/locale"
 #define PACKAGE_LOCALE_DIR "../share/locale"
@@ -154,7 +155,10 @@ cd win32/po
 for f in `ls *.po`; do msgfmt $f; done
 cp messages.mo ../../${outdir}/share/locale/fa/LC_MESSAGES/gtk20.mo
 
+# remove .svn dirs that were cp'd into the dist tree.
+find ../../${outdir} -name .svn | xargs rm -r
+
 # make installer
 cd ../nsis
 #${sworddir}makensis installer.nsi
-wine ~/.wine/drive_c/Program\ Files/NSIS/Unicode/makensis.exe installer.nsi
+wine ~/.wine/drive_c/Program\ Files*/NSIS/Unicode/makensis.exe installer.nsi
