@@ -83,6 +83,10 @@ extern "C" {
 #include "gui/ipc.h"
 #endif
 
+/* for daily devotional */
+extern int month_day_counts[];
+extern char *(month_names[]);
+
 using namespace sword;
 
 extern GtkWidget *cbe_book;
@@ -1250,6 +1254,7 @@ void main_display_bible(const char * mod_name,
 void main_display_devotional(void)
 {
 	gchar buf[10];
+	gchar *prettybuf;
 	time_t curtime;
 	struct tm *loctime;
 	gchar *text;
@@ -1270,30 +1275,24 @@ void main_display_devotional(void)
 	}
 
 	/*
-	 * Get the current time.
+	 * Get the current time, converted to local time.
 	 */
 	curtime = time(NULL);
-
-	/*
-	 * Convert it to local time representation.
-	 */
 	loctime = localtime(&curtime);
-
-	/*
-	 * Print it out in a nice format.
-	 */
 	strftime(buf, 10, "%m.%d", loctime);
-
+	prettybuf = g_strdup_printf("<b>%s %d</b>",
+				    month_names[loctime->tm_mon],
+				    loctime->tm_mday);
 
 	text = backend->get_render_text(settings.devotionalmod, buf);
-	
 	if (text) {
 		main_entry_display(settings.show_previewer_in_sidebar
 				     ? sidebar.html_viewer_widget
 				     : widgets.html_previewer_text,
-			      settings.devotionalmod, text, buf, TRUE);
+			      settings.devotionalmod, text, prettybuf, TRUE);
 		g_free(text);
 	}
+	g_free(prettybuf);
 }
 
 void main_refresh_all(void)

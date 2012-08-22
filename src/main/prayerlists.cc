@@ -69,21 +69,9 @@ enum
 	N_COLUMNS
 };
 
-static int pl_month_days[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-static char *(pl_months[]) = {
-    _("January"),
-    _("February"),
-    _("March"),
-    _("April"),
-    _("May"),
-    _("June"),
-    _("July"),
-    _("August"),
-    _("September"),
-    _("October"),
-    _("November"),
-    _("December")
-};
+/* for constructing journals */
+extern int month_day_counts[];
+extern char *(month_names[]);
 
 /*********************************    *************************************/
 
@@ -430,7 +418,7 @@ main_prayerlist_monthly_create(void)
 	{
 		char monthnum[4], monthstring[32];
 		snprintf(monthnum, 3, "%02d", month+1);
-		snprintf(monthstring, 31, "<b>%s</b><br/>", _(pl_months[month]));
+		snprintf(monthstring, 31, "<b>%s</b><br/>", _(month_names[month]));
 
 		if (month == 0)
 			appendChild(treeKey, monthnum);
@@ -482,7 +470,7 @@ main_prayerlist_journal_create(void)
 	{
 		char monthnum[4], monthstring[32];
 		snprintf(monthnum, 3, "%02d", month+1);
-		snprintf(monthstring, 31, "<b>%s</b><br/>", _(pl_months[month]));
+		snprintf(monthstring, 31, "<b>%s</b><br/>", _(month_names[month]));
 
 		if (month == 0)
 			appendChild(treeKey, monthnum);
@@ -490,10 +478,10 @@ main_prayerlist_journal_create(void)
 			appendSibling(treeKey, monthnum);
 		setEntryText(book, monthstring);
 
-		for (int day = 0; day < pl_month_days[month]; ++day) {
+		for (int day = 0; day < month_day_counts[month]; ++day) {
 			char daynum[4], monthday[32];
 			snprintf(daynum, 3, "%02d", day+1);
-			snprintf(monthday, 31, "<b>%s %d</b><br/>", _(pl_months[month]), day+1);
+			snprintf(monthday, 31, "<b>%s %d</b><br/>", _(month_names[month]), day+1);
 
 			if (day == 0)
 				appendChild(treeKey, daynum);

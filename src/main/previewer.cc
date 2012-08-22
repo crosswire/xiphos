@@ -451,7 +451,7 @@ void main_entry_display(gpointer data, gchar * mod_name,
 		} else {
 			g_string_printf(tmp_str,
 					"<a href=\"passagestudy.jsp?action=showModInfo&value=%s&module=%s\">"
-					"<font color=\"%s\">[%s]</a></font>[%s]<br />",
+					"<font color=\"%s\">[%s]</a></font><br>[%s]<br />",
 					backend->module_description(mod_name),
 					mod_name,
 					settings.link_color,
