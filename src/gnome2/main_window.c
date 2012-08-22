@@ -566,6 +566,13 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 		shift_key_pressed = TRUE;
 		/* no break? hm... */
 
+	case XK_a: // Alt-A  annotation
+		if (state == GDK_MOD1_MASK) {
+			gui_mark_verse_dialog(settings.MainWindowModule,
+					      settings.currentverse);
+		}
+		break;
+
 	case XK_b: // Alt-B  bookmark
 		if (state == GDK_MOD1_MASK) {
 			gchar *label = g_strdup_printf("%s, %s",
