@@ -78,6 +78,25 @@
 
 #include "gui/debug_glib_null.h"
 
+/*
+ * month names and lengths, for use in constructing journals and devotional references.
+ */
+int month_day_counts[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+char *(month_names[]) = {
+    N_("January"),
+    N_("February"),
+    N_("March"),
+    N_("April"),
+    N_("May"),
+    N_("June"),
+    N_("July"),
+    N_("August"),
+    N_("September"),
+    N_("October"),
+    N_("November"),
+    N_("December")
+};
+
 /******************************************************************************
  * Name
  *   sync_windows
