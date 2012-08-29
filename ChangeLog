@@ -1,3 +1,7 @@
+2012-08-20  karl <charcoal@users.sf.net>
+
+	* fix #3522395 chdir(sword-path) to stop inadvertent strrchr() use.
+
 2012-08-22  karl <charcoal@users.sf.net>
 
 	* bind Alt-A to annotate verse, analogous to Alt-B for bookmark verse.
