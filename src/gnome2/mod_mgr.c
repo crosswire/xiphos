@@ -2166,7 +2166,16 @@ save_sources(void)
 				   COLUMN_UID, &uid,
 				   -1);
 
-		mod_mgr_add_source("FTPSource",
+		if(strcasecmp(type,"HTTP") == 0)
+			mod_mgr_add_source("HTTPSource",
+				   type, caption, source, directory,
+				   user, pass, uid);
+		else if(strcasecmp(type,"HTTPS") == 0)
+			mod_mgr_add_source("HTTPSSource",
+				   type, caption, source, directory,
+				   user, pass, uid);
+		else
+			mod_mgr_add_source("FTPSource",
 				   type, caption, source, directory,
 				   user, pass, uid);
 		g_free(type);
