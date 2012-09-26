@@ -70,7 +70,7 @@ BackEnd::BackEnd()
 	t = g_timer_new();
 #endif
 
-	main_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
+	main_mgr = new SWMgr(new MarkupFilterMgr(FMT_XHTML));
 
 #ifdef DEBUG
 	g_timer_stop(t);
