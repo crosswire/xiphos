@@ -399,8 +399,26 @@ int xml_create_settings_file(char *path)
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"parallelopen", (const xmlChar *)"0");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"parallel_height", (const xmlChar *)"361");
 	xmlNewTextChild(section_node, NULL,(const xmlChar *) "parallel_width", (const xmlChar *)"657");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *)"parallel_x", (const xmlChar *)"200");
-	xmlNewTextChild(section_node, NULL,(const xmlChar *) "parallel_y", (const xmlChar *)"200");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"parallel_x", (const xmlChar *)"40");
+	xmlNewTextChild(section_node, NULL,(const xmlChar *) "parallel_y", (const xmlChar *)"40");
+
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"modmgropen", (const xmlChar *)"0");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"modmgr_height", (const xmlChar *)"450");
+	xmlNewTextChild(section_node, NULL,(const xmlChar *) "modmgr_width", (const xmlChar *)"710");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"modmgr_x", (const xmlChar *)"40");
+	xmlNewTextChild(section_node, NULL,(const xmlChar *) "modmgr_y", (const xmlChar *)"40");
+
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"advsearchopen", (const xmlChar *)"0");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"advsearch_height", (const xmlChar *)"465");
+	xmlNewTextChild(section_node, NULL,(const xmlChar *) "advsearch_width", (const xmlChar *)"665");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"advsearch_x", (const xmlChar *)"40");
+	xmlNewTextChild(section_node, NULL,(const xmlChar *) "advsearch_y", (const xmlChar *)"40");
+
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"prefsopen", (const xmlChar *)"0");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"prefs_height", (const xmlChar *)"300");
+	xmlNewTextChild(section_node, NULL,(const xmlChar *) "prefs_width", (const xmlChar *)"590");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"prefs_x", (const xmlChar *)"40");
+	xmlNewTextChild(section_node, NULL,(const xmlChar *) "prefs_y", (const xmlChar *)"40");
 
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"textpane", (const xmlChar *)"240");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"shortcutbar", (const xmlChar *)"158");

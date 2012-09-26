@@ -54,6 +54,8 @@
 #include "gui/tabbed_browser.h"
 #include "gui/bookmarks_menu.h"
 #include "gui/utilities.h"
+#include "gui/preferences_dialog.h"
+#include "main/search_dialog.h"
 
 #include "main/sword_treekey.h"
 #include "main/navbar_book.h"
@@ -230,8 +232,15 @@ void frontend_display(const char *tabs)
 			   NULL	);
 	gui_show_previewer_in_sidebar(settings.show_previewer_in_sidebar);
 
-	if (settings.parallelpage)
+	/* open saved windows as needed */
+	if (settings.display_parallel)
 		on_undockInt_activate(NULL);
+	if (settings.display_modmgr)
+		gui_open_mod_mgr();
+	if (settings.display_advsearch)
+		main_open_search_dialog();
+	if (settings.display_prefs)
+		gui_setup_preferences_dialog();
 
 	if (settings.showdevotional)
 		main_display_devotional();
