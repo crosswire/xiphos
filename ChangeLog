@@ -1,3 +1,7 @@
+2012-09-23  karl <charcoal@users.sf.net>
+
+	* convert from HTMLHREF to XHTML filter sets.
+
 2012-09-18  karl <charcoal@users.sf.net>
 
 	* added Greg's patch for HTTP & HTTPS install sources.

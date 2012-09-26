@@ -25,16 +25,10 @@
 
 #include <glib.h>
 
-#include <osishtmlhref.h>
-#include <thmlhtmlhref.h>
-#include <gbfhtmlhref.h>
-#include <teihtmlhref.h>
-#ifndef NO_SWORD_SET_RENDER_NOTE_NUMBERS
-/* these files are erroneously uninstalled as of previous release */
 #include <osisxhtml.h>
 #include <thmlxhtml.h>
 #include <gbfxhtml.h>
-#endif
+#include <teixhtml.h>
 
 #include <osisvariants.h>
 #include <thmlvariants.h>
@@ -756,9 +750,8 @@ set_morph_order(SWModule& imodule)
 		 imodule.getRenderFilters().begin();
 	     it != imodule.getRenderFilters().end();
 	     it++) {
-		OSISHTMLHREF *f = dynamic_cast<OSISHTMLHREF *>(*it);
-		if (f)
-			f->setMorphFirst();
+		OSISXHTML *f = dynamic_cast<OSISXHTML *>(*it);
+		if (f) f->setMorphFirst();
 	}
 }
 
@@ -773,27 +766,14 @@ set_render_numbers(SWModule& imodule, GLOBAL_OPS *ops)
 		 imodule.getRenderFilters().begin();
 	     it != imodule.getRenderFilters().end();
 	     it++) {
-		OSISHTMLHREF *f1 = dynamic_cast<OSISHTMLHREF *>(*it);
-		if (f1)
-			f1->setRenderNoteNumbers((ops->xrefnotenumbers != 0));
-		ThMLHTMLHREF *f2 = dynamic_cast<ThMLHTMLHREF *>(*it);
-		if (f2)
-			f2->setRenderNoteNumbers((ops->xrefnotenumbers != 0));
-		GBFHTMLHREF *f3 = dynamic_cast<GBFHTMLHREF *>(*it);
-		if (f3)
-			f3->setRenderNoteNumbers((ops->xrefnotenumbers != 0));
-		TEIHTMLHREF *f4 = dynamic_cast<TEIHTMLHREF *>(*it);
-		if (f4)
-			f4->setRenderNoteNumbers((ops->xrefnotenumbers != 0));
-		OSISXHTML *f5 = dynamic_cast<OSISXHTML *>(*it);
-		if (f5)
-			f5->setRenderNoteNumbers((ops->xrefnotenumbers != 0));
-		ThMLXHTML *f6 = dynamic_cast<ThMLXHTML *>(*it);
-		if (f6)
-			f6->setRenderNoteNumbers((ops->xrefnotenumbers != 0));
-		GBFXHTML *f7 = dynamic_cast<GBFXHTML *>(*it);
-		if (f7)
-			f7->setRenderNoteNumbers((ops->xrefnotenumbers != 0));
+		OSISXHTML *f1 = dynamic_cast<OSISXHTML *>(*it);
+		if (f1) f1->setRenderNoteNumbers((ops->xrefnotenumbers != 0));
+		ThMLXHTML *f2 = dynamic_cast<ThMLXHTML *>(*it);
+		if (f2) f2->setRenderNoteNumbers((ops->xrefnotenumbers != 0));
+		GBFXHTML *f3 = dynamic_cast<GBFXHTML *>(*it);
+		if (f3) f3->setRenderNoteNumbers((ops->xrefnotenumbers != 0));
+		TEIXHTML *f4 = dynamic_cast<TEIXHTML *>(*it);
+		if (f4) f4->setRenderNoteNumbers((ops->xrefnotenumbers != 0));
 	}
 }
 #endif /* !NO_SWORD_SET_RENDER_NOTE_NUMBERS */
