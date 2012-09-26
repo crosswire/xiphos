@@ -75,6 +75,57 @@ gchar *verse_selected;
 
 GtkWidget *remember_search;	/* needed to change button in search stop */
 
+/******************************************************************************
+ * Name
+ *   on_advsearch_configure_event
+ *
+ * Synopsis
+ *   #include "gui/main_window.h"
+ *
+ *   gboolean on_advsearch_configure_event(GtkWidget * widget,
+ *				   GdkEventConfigure * event,
+ *				   gpointer user_data)
+ *
+ * Description
+ *   remember placement+size of parallel window.
+ *   cloned from on_configure_event
+ *
+ * Return value
+ *   gboolean
+ */
+
+static gboolean on_advsearch_configure_event(GtkWidget * widget,
+					    GdkEventConfigure * event,
+					    gpointer user_data)
+{
+	gchar layout[10];
+	gint x;
+	gint y;
+
+ 	gdk_window_get_root_origin(
+	    GDK_WINDOW(gtk_widget_get_window (search1.dialog)), &x, &y);
+
+	settings.advsearch_width  = event->width;
+	settings.advsearch_height = event->height;
+	settings.advsearch_x = x;
+	settings.advsearch_y = y;
+
+	sprintf(layout, "%d", settings.advsearch_width);
+	xml_set_value("Xiphos", "layout", "advsearch_width", layout);
+
+	sprintf(layout, "%d", settings.advsearch_height);
+	xml_set_value("Xiphos", "layout", "advsearch_height", layout);
+
+	sprintf(layout, "%d", settings.advsearch_x);
+	xml_set_value("Xiphos", "layout", "advsearch_x", layout);
+
+	sprintf(layout, "%d", settings.advsearch_y);
+	xml_set_value("Xiphos", "layout", "advsearch_y", layout);
+	xml_save_settings_doc(settings.fnconfigure);
+
+	return FALSE;
+}
+
 /* click on treeview folder to expand or collapse it */
 static gboolean button_release_event(GtkWidget * widget,
 				     GdkEventButton * event,
@@ -223,6 +274,10 @@ void _on_destroy(GtkWidget * dialog, gpointer user_data)
 		sync_windows();
 	} else {
 		main_close_search_dialog();
+
+		settings.display_advsearch = 0;
+		xml_set_value("Xiphos", "layout", "advsearchopen", "0");
+
 		if (module_selected) {
 			g_free(module_selected);
 			module_selected = NULL;
@@ -1543,6 +1598,10 @@ void _create_search_dialog(void)
 
 	/* lookup the root widget */
 	search1.dialog = UI_GET_ITEM(gxml, "dialog");
+	gtk_window_resize(GTK_WINDOW(search1.dialog),
+			  settings.advsearch_width,
+			  settings.advsearch_height);
+
 	g_signal_connect(search1.dialog, "response",
 			 G_CALLBACK(_on_dialog_response), NULL);
 	g_signal_connect(search1.dialog, "destroy",
@@ -1725,6 +1784,27 @@ void _create_search_dialog(void)
 #else
 	_add_html_widget(glade_xml_get_widget(gxml, "vbox12"));
 #endif
+
+	g_signal_connect((gpointer) search1.dialog, 
+			 "configure_event",
+			 G_CALLBACK(on_advsearch_configure_event), NULL);
+
+	settings.display_advsearch = 1;
+	xml_set_value("Xiphos", "layout", "advsearchopen", "1");
+
+	/*
+	 * (from xiphos.c)
+	 * a little paranoia:
+	 * clamp geometry values to a reasonable bound.
+	 * sometimes xiphos gets insane reconfig events as it dies,
+	 * especially if it's due to just shutting linux down.
+	 */
+	if ((settings.advsearch_x < 0) || (settings.advsearch_x > 2000))
+		settings.advsearch_x = 40;
+	if ((settings.advsearch_y < 0) || (settings.advsearch_y > 2000))
+		settings.advsearch_y = 40;
+
+ 	gtk_window_move(GTK_WINDOW(search1.dialog),settings.advsearch_x,settings.advsearch_y);
 }
 
 

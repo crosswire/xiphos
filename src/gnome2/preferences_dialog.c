@@ -142,6 +142,7 @@ struct _parallel_select {
 	GtkWidget *mod_sel_add;
 	GtkWidget *mod_sel_treeview;
 };
+static GtkWidget *dialog_prefs;
 
 
 /*****************************************************************************
@@ -158,6 +159,57 @@ static COLOR_PICKERS color_picker;
 static CHECK_BUTTONS check_button;
 static PARALLEL_SELECT parallel_select;
 
+
+/******************************************************************************
+ * Name
+ *   on_prefs_configure_event
+ *
+ * Synopsis
+ *   #include "gui/main_window.h"
+ *
+ *   gboolean on_prefs_configure_event(GtkWidget * widget,
+ *				   GdkEventConfigure * event,
+ *				   gpointer user_data)
+ *
+ * Description
+ *   remember placement+size of prefs window.
+ *   cloned from on_parallel_configure_event
+ *
+ * Return value
+ *   gboolean
+ */
+
+static gboolean on_prefs_configure_event(GtkWidget * widget,
+					 GdkEventConfigure * event,
+					 gpointer user_data)
+{
+	gchar layout[10];
+	gint x;
+	gint y;
+
+ 	gdk_window_get_root_origin(
+	    GDK_WINDOW(gtk_widget_get_window (dialog_prefs)), &x, &y);
+
+	settings.prefs_width  = event->width;
+	settings.prefs_height = event->height;
+	settings.prefs_x = x;
+	settings.prefs_y = y;
+
+	sprintf(layout, "%d", settings.prefs_width);
+	xml_set_value("Xiphos", "layout", "prefs_width", layout);
+
+	sprintf(layout, "%d", settings.prefs_height);
+	xml_set_value("Xiphos", "layout", "prefs_height", layout);
+
+	sprintf(layout, "%d", settings.prefs_x);
+	xml_set_value("Xiphos", "layout", "prefs_x", layout);
+
+	sprintf(layout, "%d", settings.prefs_y);
+	xml_set_value("Xiphos", "layout", "prefs_y", layout);
+	xml_save_settings_doc(settings.fnconfigure);
+
+	return FALSE;
+}
 
 /******************************************************************************
  * Name
@@ -313,12 +365,12 @@ void invert_colors(char **color1, char *label1,
 
 void on_invert(GtkWidget * button, gchar * user_data)
 {
-    if (user_data)
-	invert_colors(&settings.bible_bg_color, "background",
-		      &settings.bible_text_color, "text_fg");
-    else
-	invert_colors(&settings.highlight_fg, "highlight_fg",
-		      &settings.highlight_bg, "highlight_bg");
+	if (user_data)
+		invert_colors(&settings.bible_bg_color, "background",
+			      &settings.bible_text_color, "text_fg");
+	else
+		invert_colors(&settings.highlight_fg, "highlight_fg",
+			      &settings.highlight_bg, "highlight_bg");
 }
 
 /******************************************************************************
@@ -1770,8 +1822,13 @@ on_dialog_prefs_response(GtkDialog * dialog,
 			 gpointer user_data)
 {
 	if (response_id == GTK_RESPONSE_CLOSE) {
+		settings.display_prefs = 0;
+		xml_set_value("Xiphos", "layout", "prefsopen", "0");
+
 		xml_save_settings_doc(settings.fnconfigure);
 		gtk_widget_destroy(GTK_WIDGET(dialog));
+
+		dialog_prefs = NULL;
 	}
 	main_update_parallel_page();
 }
@@ -2596,7 +2653,6 @@ create_preferences_dialog(void)
 #else
 	GladeXML *gxml;
 #endif
-	GtkWidget *dialog_prefs;
 	GtkWidget *treeview;
 	GtkTreeModel *model;
 	GObject *selection;
@@ -2618,6 +2674,9 @@ create_preferences_dialog(void)
 
 	/* lookup the root widget */
 	dialog_prefs = UI_GET_ITEM(gxml, "dialog_prefs");
+	gtk_window_resize(GTK_WINDOW(dialog_prefs),
+			  settings.prefs_width,
+			  settings.prefs_height);
 	g_signal_connect(dialog_prefs, "response",
 			 G_CALLBACK(on_dialog_prefs_response), NULL);
 
@@ -2767,6 +2826,28 @@ create_preferences_dialog(void)
 			 G_CALLBACK(ps_button_add), NULL);
 
 	ps_setup_listview();
+
+	/* geometry notifications */
+	g_signal_connect((gpointer) dialog_prefs, 
+			 "configure_event",
+			 G_CALLBACK(on_prefs_configure_event), NULL);
+
+	settings.display_prefs = 1;
+	xml_set_value("Xiphos", "layout", "prefsopen", "1");
+
+	/*
+	 * (from xiphos.c)
+	 * a little paranoia:
+	 * clamp geometry values to a reasonable bound.
+	 * sometimes xiphos gets insane reconfig events as it dies,
+	 * especially if it's due to just shutting linux down.
+	 */
+	if ((settings.prefs_x < 0) || (settings.prefs_x > 2000))
+		settings.prefs_x = 40;
+	if ((settings.prefs_y < 0) || (settings.prefs_y > 2000))
+		settings.prefs_y = 40;
+
+ 	gtk_window_move(GTK_WINDOW(dialog_prefs),settings.prefs_x,settings.prefs_y);
 }
 
 

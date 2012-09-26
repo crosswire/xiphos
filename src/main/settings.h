@@ -85,6 +85,12 @@ struct _settings {
 		gs_height,
 		parallel_height,
 		parallel_width,
+		modmgr_height,
+		modmgr_width,
+		advsearch_height,
+		advsearch_width,
+		prefs_height,
+		prefs_width,
 		searchbargroup,		  /* number of search group in shortcut bar */
 		searchType,
 		whichwindow,		  /* which of the main form html windows is active */
@@ -113,10 +119,16 @@ struct _settings {
 	        versestyle,			/* verse if true, paragraph if not */
 	        linkedtabs,			/* tabs linked together, move in concert */
 	        showversenum,			/* display verse numbers in text (default on) */
-	        readaloud,			/* pass text through (existing) "festival -server" */
+	        readaloud,			/* pass text through "festival -server" */
 	        versehighlight,			/* do special fg/bg for current verse */
 	        annotate_highlight,		/* do special bg/fg for user annotations */
-	        parallelpage,			/* display detached parallel page */
+
+						/* saved startup displays */
+	        display_parallel,		/* detached parallel */
+	        display_modmgr,			/* mod.mgr */
+	        display_advsearch,		/* advanced search */
+	        display_prefs,			/* preferences */
+
 	        autosavepersonalcomments,	/* auto save personal notes */
 	        formatpercom,			/* use html to format personal notes */
 	        showshortcutbar,		/* display shortcut bar if true */
@@ -195,6 +207,9 @@ struct _settings {
 	/* window location at close */
 	int app_x, app_y;
 	int parallel_x, parallel_y;
+	int modmgr_x, modmgr_y;
+	int advsearch_x, advsearch_y;
+	int prefs_x, prefs_y;
 
 	/* there is no settings.xml file */
 	int first_run;
