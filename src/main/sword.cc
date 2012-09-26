@@ -707,7 +707,10 @@ void main_init_backend(void)
 
 	backend->init_SWORD(0);
 	settings.path_to_mods = main_get_path_to_mods();
+#ifndef DEBUG
+	// FYI: the lack of this chdir in debug mode will make archive fail.
 	g_chdir(settings.path_to_mods);
+#endif
 	GS_print(("%s sword-%s\n", "Starting", backend->get_sword_version()));
 	GS_print(("%s\n", "Initiating SWORD"));
 	GS_print(("%s: %s\n","path to sword", settings.path_to_mods));

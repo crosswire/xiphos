@@ -492,15 +492,36 @@ void load_settings_structure(void)
 		g_free(buf);
 	}
 
-	/* whether to open the parallel page at startup */
+	/* whether to open saved windows at startup */
 	if ((buf = xml_get_value("layout", "parallelopen")))
-		settings.parallelpage = atoi(buf);
+		settings.display_parallel = atoi(buf);
 	else {
 		xml_add_new_item_to_section("layout", "parallelopen", "0");
-		settings.parallelpage = 0;
+		settings.display_parallel = 0;
 	}
 
-	/* main and parallel window geometry */
+	if ((buf = xml_get_value("layout", "modmgropen")))
+		settings.display_modmgr = atoi(buf);
+	else {
+		xml_add_new_item_to_section("layout", "modmgropen", "0");
+		settings.display_modmgr = 0;
+	}
+
+	if ((buf = xml_get_value("layout", "advsearchopen")))
+		settings.display_advsearch = atoi(buf);
+	else {
+		xml_add_new_item_to_section("layout", "advsearchopen", "0");
+		settings.display_advsearch = 0;
+	}
+
+	if ((buf = xml_get_value("layout", "prefsopen")))
+		settings.display_prefs = atoi(buf);
+	else {
+		xml_add_new_item_to_section("layout", "prefsopen", "0");
+		settings.display_prefs = 0;
+	}
+
+	/* main window geometry */
 	if ((buf = xml_get_value("layout", "height")))
 		settings.gs_height = atoi(buf);
 	else {
@@ -519,6 +540,10 @@ void load_settings_structure(void)
 		xml_add_new_item_to_section("layout", "width", "500");
 		settings.gs_width = 500;
 	}
+
+	/* other panes' sizes */
+	/* some of these sizes come out of the glade/gtkbuilder files */
+	/* must maintain them in parallel */
 	if ((buf = xml_get_value("layout", "parallel_height")))
 		settings.parallel_height = atoi(buf);
 	else {
@@ -528,8 +553,47 @@ void load_settings_structure(void)
 	if ((buf = xml_get_value("layout", "parallel_width")))
 		settings.parallel_width = atoi(buf);
 	else{
-		xml_add_new_item_to_section("layout", "parallel_width", "500");
+		xml_add_new_item_to_section("layout", "parallel_width", "657");
 		settings.parallel_width = 657;
+	}
+
+	if ((buf = xml_get_value("layout", "modmgr_height")))
+		settings.modmgr_height = atoi(buf);
+	else {
+		xml_add_new_item_to_section("layout", "modmgr_height", "450");
+		settings.modmgr_height = 450;
+	}
+	if ((buf = xml_get_value("layout", "modmgr_width")))
+		settings.modmgr_width = atoi(buf);
+	else{
+		xml_add_new_item_to_section("layout", "modmgr_width", "710");
+		settings.modmgr_width = 710;
+	}
+
+	if ((buf = xml_get_value("layout", "advsearch_height")))
+		settings.advsearch_height = atoi(buf);
+	else {
+		xml_add_new_item_to_section("layout", "advsearch_height", "465");
+		settings.advsearch_height = 465;
+	}
+	if ((buf = xml_get_value("layout", "advsearch_width")))
+		settings.advsearch_width = atoi(buf);
+	else{
+		xml_add_new_item_to_section("layout", "advsearch_width", "665");
+		settings.advsearch_width = 665;
+	}
+
+	if ((buf = xml_get_value("layout", "prefs_height")))
+		settings.prefs_height = atoi(buf);
+	else {
+		xml_add_new_item_to_section("layout", "prefs_height", "300");
+		settings.prefs_height = 300;
+	}
+	if ((buf = xml_get_value("layout", "prefs_width")))
+		settings.prefs_width = atoi(buf);
+	else{
+		xml_add_new_item_to_section("layout", "prefs_width", "590");
+		settings.prefs_width = 590;
 	}
 
 	/* main window placement */
@@ -546,20 +610,60 @@ void load_settings_structure(void)
 		settings.app_y = 40;
 	}
 
-	/* parallel window placement */
+	/* other windows' placement */
 	if ((buf = xml_get_value("layout", "parallel_x")))
 		settings.parallel_x = atoi(buf);
 	else {
-		xml_add_new_item_to_section("layout", "parallel_x", "200");
+		xml_add_new_item_to_section("layout", "parallel_x", "40");
 		settings.parallel_x = 40;
 	}
 	if ((buf = xml_get_value("layout", "parallel_y")))
 		settings.parallel_y = atoi(buf);
 	else{
-		xml_add_new_item_to_section("layout", "parallel_y", "200");
+		xml_add_new_item_to_section("layout", "parallel_y", "40");
 		settings.parallel_y = 40;
 	}
 
+	if ((buf = xml_get_value("layout", "modmgr_x")))
+		settings.modmgr_x = atoi(buf);
+	else {
+		xml_add_new_item_to_section("layout", "modmgr_x", "40");
+		settings.modmgr_x = 40;
+	}
+	if ((buf = xml_get_value("layout", "modmgr_y")))
+		settings.modmgr_y = atoi(buf);
+	else{
+		xml_add_new_item_to_section("layout", "modmgr_y", "40");
+		settings.modmgr_y = 40;
+	}
+
+	if ((buf = xml_get_value("layout", "advsearch_x")))
+		settings.advsearch_x = atoi(buf);
+	else {
+		xml_add_new_item_to_section("layout", "advsearch_x", "40");
+		settings.advsearch_x = 40;
+	}
+	if ((buf = xml_get_value("layout", "advsearch_y")))
+		settings.advsearch_y = atoi(buf);
+	else{
+		xml_add_new_item_to_section("layout", "advsearch_y", "40");
+		settings.advsearch_y = 40;
+	}
+
+	if ((buf = xml_get_value("layout", "prefs_x")))
+		settings.prefs_x = atoi(buf);
+	else {
+		xml_add_new_item_to_section("layout", "prefs_x", "40");
+		settings.prefs_x = 40;
+	}
+	if ((buf = xml_get_value("layout", "prefs_y")))
+		settings.prefs_y = atoi(buf);
+	else{
+		xml_add_new_item_to_section("layout", "prefs_y", "40");
+		settings.prefs_y = 40;
+	}
+
+	/* random geometry stuff */
 	settings.biblepane_width = atoi((buf = xml_get_value("layout", "textpane"))
 					? buf : "0");
 

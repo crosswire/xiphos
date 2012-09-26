@@ -1,3 +1,7 @@
+2012-09-26  karl <charcoal@users.sf.net>
+
+	* add save/restore of prefs, adv.search, and mod.mgr.
+
 2012-09-23  karl <charcoal@users.sf.net>
 
 	* convert from HTMLHREF to XHTML filter sets.

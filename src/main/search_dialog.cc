@@ -1575,9 +1575,8 @@ void main_open_search_dialog(void)
 		backendSearch = new BackEnd();
 
 		/* create and show search dialog */
-		gui_create_search_dialog();
 		backendSearch->init_SWORD(2);
-
+		gui_create_search_dialog();
 
 		/* initiate module count to 0 */
 		search1.module_count = 0;

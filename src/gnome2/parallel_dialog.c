@@ -188,7 +188,7 @@ static void on_dlgparallel_destroy(GObject * object,
 	settings.dockedInt = TRUE;
 	main_update_parallel_page();
 
-	settings.parallelpage = 0;
+	settings.display_parallel = 0;
 	xml_set_value("Xiphos", "layout", "parallelopen", "0");
 }
 
@@ -315,7 +315,7 @@ static gboolean on_parallel_configure_event(GtkWidget * widget,
 					    GdkEventConfigure * event,
 					    gpointer user_data)
 {
-	gchar layout[80];
+	gchar layout[10];
 	gint x;
 	gint y;
 
@@ -382,9 +382,9 @@ GtkWidget *create_parallel_dialog(void)
 
 	g_object_set_data(G_OBJECT(dialog_parallel),
 			  "dialog_parallel", dialog_parallel);
-	gtk_window_set_default_size(GTK_WINDOW(dialog_parallel),
-				    settings.parallel_width,
-				    settings.parallel_height);
+	gtk_window_resize(GTK_WINDOW(dialog_parallel),
+			  settings.parallel_width,
+			  settings.parallel_height);
 	gtk_window_set_resizable(GTK_WINDOW(dialog_parallel), TRUE);
 
 	dialog_vbox25 = gtk_dialog_get_content_area (GTK_DIALOG(dialog_parallel));
@@ -504,7 +504,7 @@ GtkWidget *create_parallel_dialog(void)
 			 "configure_event",
 			 G_CALLBACK(on_parallel_configure_event), NULL);
 
-	settings.parallelpage = 1;
+	settings.display_parallel = 1;
 	xml_set_value("Xiphos", "layout", "parallelopen", "1");
 
 	set_window_icon(GTK_WINDOW(dialog_parallel));
@@ -517,9 +517,9 @@ GtkWidget *create_parallel_dialog(void)
 	 * especially if it's due to just shutting linux down.
 	 */
 	if ((settings.parallel_x < 0) || (settings.parallel_x > 2000))
-		settings.parallel_x = 0;
+		settings.parallel_x = 40;
 	if ((settings.parallel_y < 0) || (settings.parallel_y > 2000))
-		settings.parallel_y = 0;
+		settings.parallel_y = 40;
 
  	gtk_window_move(GTK_WINDOW(dialog_parallel),settings.parallel_x,settings.parallel_y);
 

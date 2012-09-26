@@ -151,7 +151,7 @@ static GtkWidget *radiobutton_dest;
 static GtkWidget *radiobutton4;
 static GtkWidget *combo_entry1;
 static GtkWidget *combo_entry2;
-static GtkWidget *dialog;
+static GtkWidget *dialog_modmgr;
 static GtkWidget *treeview_local;
 static GtkWidget *treeview_remote;
 
@@ -216,6 +216,57 @@ char *verbs[5][4] = {
 	N_("Deletion")
     },
 };
+
+/******************************************************************************
+ * Name
+ *   on_modmgr_configure_event
+ *
+ * Synopsis
+ *   #include "gui/main_window.h"
+ *
+ *   gboolean on_modmgr_configure_event(GtkWidget * widget,
+ *				   GdkEventConfigure * event,
+ *				   gpointer user_data)
+ *
+ * Description
+ *   remember placement+size of modmgr window.
+ *   cloned from on_configure_event
+ *
+ * Return value
+ *   gboolean
+ */
+
+static gboolean on_modmgr_configure_event(GtkWidget * widget,
+					    GdkEventConfigure * event,
+					    gpointer user_data)
+{
+	gchar layout[10];
+	gint x;
+	gint y;
+
+ 	gdk_window_get_root_origin(
+	    GDK_WINDOW(gtk_widget_get_window (dialog_modmgr)), &x, &y);
+
+	settings.modmgr_width  = event->width;
+	settings.modmgr_height = event->height;
+	settings.modmgr_x = x;
+	settings.modmgr_y = y;
+
+	sprintf(layout, "%d", settings.modmgr_width);
+	xml_set_value("Xiphos", "layout", "modmgr_width", layout);
+
+	sprintf(layout, "%d", settings.modmgr_height);
+	xml_set_value("Xiphos", "layout", "modmgr_height", layout);
+
+	sprintf(layout, "%d", settings.modmgr_x);
+	xml_set_value("Xiphos", "layout", "modmgr_x", layout);
+
+	sprintf(layout, "%d", settings.modmgr_y);
+	xml_set_value("Xiphos", "layout", "modmgr_y", layout);
+	xml_save_settings_doc(settings.fnconfigure);
+
+	return FALSE;
+}
 
 static
 gboolean query_tooltip (GtkWidget  *widget,
@@ -317,33 +368,33 @@ create_pixbufs(void)
 {
 
 #ifdef USE_GTK_3
-	INSTALLED = gtk_widget_render_icon_pixbuf(dialog,
+	INSTALLED = gtk_widget_render_icon_pixbuf(dialog_modmgr,
 					   GTK_STOCK_APPLY,
 					   GTK_ICON_SIZE_MENU);
 	FASTICON  = pixbuf_finder("indexed-16.png", 0, NULL);
-	NO_INDEX  = gtk_widget_render_icon_pixbuf(dialog,
+	NO_INDEX  = gtk_widget_render_icon_pixbuf(dialog_modmgr,
 					   GTK_STOCK_CANCEL,
 					   GTK_ICON_SIZE_MENU);
 	LOCKED    = pixbuf_finder("epiphany-secure.png", 0, NULL);
-	REFRESH   = gtk_widget_render_icon_pixbuf(dialog,
+	REFRESH   = gtk_widget_render_icon_pixbuf(dialog_modmgr,
 					   GTK_STOCK_REFRESH,
 					   GTK_ICON_SIZE_MENU);
-	BLANK     = gtk_widget_render_icon_pixbuf(dialog,
+	BLANK     = gtk_widget_render_icon_pixbuf(dialog_modmgr,
 					   "gnome-stock-blank",
 					   GTK_ICON_SIZE_MENU);
 #else
-	INSTALLED = gtk_widget_render_icon(dialog,
+	INSTALLED = gtk_widget_render_icon(dialog_modmgr,
 					   GTK_STOCK_APPLY,
 					   GTK_ICON_SIZE_MENU, NULL);
 	FASTICON  = pixbuf_finder("indexed-16.png", 0, NULL);
-	NO_INDEX  = gtk_widget_render_icon(dialog,
+	NO_INDEX  = gtk_widget_render_icon(dialog_modmgr,
 					   GTK_STOCK_CANCEL,
 					   GTK_ICON_SIZE_MENU, NULL);
 	LOCKED    = pixbuf_finder("epiphany-secure.png", 0, NULL);
-	REFRESH   = gtk_widget_render_icon(dialog,
+	REFRESH   = gtk_widget_render_icon(dialog_modmgr,
 					   GTK_STOCK_REFRESH,
 					   GTK_ICON_SIZE_MENU, NULL);
-	BLANK     = gtk_widget_render_icon(dialog,
+	BLANK     = gtk_widget_render_icon(dialog_modmgr,
 					   "gnome-stock-blank",
 					   GTK_ICON_SIZE_MENU, NULL);
 #endif
@@ -725,7 +776,7 @@ remove_install_modules(GList * modules,
 	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh),
 				  gettext (verbs[activity][PHRASE_PREPARE]));
 	gtk_widget_show(progressbar_refresh);
-	gtk_widget_queue_draw(dialog);
+	gtk_widget_queue_draw(dialog_modmgr);
 	gtk_widget_hide(button_close);
 	gtk_widget_hide(button_refresh);
 	gtk_widget_hide(button_install);
@@ -2321,6 +2372,9 @@ on_dialog_destroy(GObject * object, gpointer user_data)
 
 	working = FALSE;
 	is_running = FALSE;
+	settings.display_prefs = 0;
+	xml_set_value("Xiphos", "layout", "prefsopen", "0");
+
 	if (first_time_user) {
 		/* no deeper analysis, first time around. */
 		gtk_main_quit();
@@ -2359,6 +2413,9 @@ on_dialog_destroy(GObject * object, gpointer user_data)
 		if ((tmp = get_list(GBS_LIST)))
 			main_display_book((char *)tmp->data, "/");	/* blank key */
 	}
+
+	settings.display_modmgr = 0;
+	xml_set_value("Xiphos", "layout", "modmgropen", "0");
 }
 
 
@@ -2381,7 +2438,7 @@ on_dialog_destroy(GObject * object, gpointer user_data)
 static void
 response_close(void)
 {
-	gtk_widget_destroy(GTK_WIDGET(dialog));
+	gtk_widget_destroy(GTK_WIDGET(dialog_modmgr));
 	on_dialog_destroy(NULL, NULL);
 }
 
@@ -3144,7 +3201,10 @@ create_module_manager_dialog(gboolean first_run)
 	g_free (glade_file);
 	g_return_val_if_fail ((gxml != NULL), NULL);
 
-	dialog = UI_GET_ITEM(gxml, "dialog");
+	dialog_modmgr = UI_GET_ITEM(gxml, "dialog");
+	gtk_window_resize(GTK_WINDOW(dialog_modmgr),
+			  settings.modmgr_width,
+			  settings.modmgr_height);
 
 	/* response buttons */
 	button_close = UI_GET_ITEM(gxml, "button_close");
@@ -3160,12 +3220,12 @@ create_module_manager_dialog(gboolean first_run)
 
 	gtk_widget_set_can_default (button_close, 1);
 
-	g_signal_connect(dialog, "destroy",
+	g_signal_connect(dialog_modmgr, "destroy",
 			 G_CALLBACK(on_dialog_destroy), NULL);
 	if (first_run)
-		setup_dialog_action_area(GTK_DIALOG (dialog));
+		setup_dialog_action_area(GTK_DIALOG (dialog_modmgr));
 	else
-		g_signal_connect(dialog, "response",
+		g_signal_connect(dialog_modmgr, "response",
 				 G_CALLBACK(on_mod_mgr_response), NULL);
 
 	/* progress bars */
@@ -3250,7 +3310,27 @@ create_module_manager_dialog(gboolean first_run)
 
 	gtk_widget_hide(button_refresh);
 
-	return dialog;
+	g_signal_connect((gpointer) dialog_modmgr, 
+			 "configure_event",
+			 G_CALLBACK(on_modmgr_configure_event), NULL);
+
+	settings.display_modmgr = 1;
+	xml_set_value("Xiphos", "layout", "modmgropen", "1");
+
+	/*
+	 * (from xiphos.c)
+	 * a little paranoia:
+	 * clamp geometry values to a reasonable bound.
+	 * sometimes xiphos gets insane reconfig events as it dies,
+	 * especially if it's due to just shutting linux down.
+	 */
+	if ((settings.modmgr_x < 0) || (settings.modmgr_x > 2000))
+		settings.modmgr_x = 40;
+	if ((settings.modmgr_y < 0) || (settings.modmgr_y > 2000))
+		settings.modmgr_y = 40;
+
+ 	gtk_window_move(GTK_WINDOW(dialog_modmgr),settings.modmgr_x,settings.modmgr_y);
+	return dialog_modmgr;
 }
 
 
@@ -3278,7 +3358,7 @@ void gui_open_mod_mgr(void)
 		set_window_icon(GTK_WINDOW(dlg));
 		is_running = TRUE;
 	} else
-		gdk_window_raise(gtk_widget_get_window (GTK_WIDGET(dialog)));
+		gdk_window_raise(gtk_widget_get_window (GTK_WIDGET(dialog_modmgr)));
 }
 
 
