@@ -1,5 +1,5 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 17b978d..2828b37 100644
+index d07d010..76adbc9 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -46,6 +46,7 @@ FIND_PACKAGE(CURL QUIET)
@@ -10,7 +10,7 @@ index 17b978d..2828b37 100644
  
  ###########################################################################################
  # Based on user input and the results of the above tests, we may need to mux with the source
-@@ -182,12 +183,14 @@ IF(REGEX_FOUND AND CROSS_COMPILE_MINGW32)
+@@ -184,12 +185,14 @@ IF(REGEX_FOUND AND CROSS_COMPILE_MINGW32)
  	SET(SWORD_LINK_LIBRARIES ${SWORD_LINK_LIBRARIES} ${REGEX_LIBRARY})
  ENDIF(REGEX_FOUND AND CROSS_COMPILE_MINGW32)
  
@@ -417,7 +417,7 @@ index 5b45049..493cfd2 100644
  	return 0;
  }
 diff --git a/src/mgr/installmgr.cpp b/src/mgr/installmgr.cpp
-index b75df6f..f81eee3 100644
+index c1ddd1b..d6ebe5e 100644
 --- a/src/mgr/installmgr.cpp
 +++ b/src/mgr/installmgr.cpp
 @@ -33,6 +33,8 @@ extern "C" {
@@ -429,7 +429,7 @@ index b75df6f..f81eee3 100644
  
  #include <swmgr.h>
  #include <swmodule.h>
-@@ -238,20 +240,19 @@ int InstallMgr::removeModule(SWMgr *manager, const char *moduleName) {
+@@ -251,20 +253,19 @@ int InstallMgr::removeModule(SWMgr *manager, const char *moduleName) {
  		}
  		else {	//remove all files in DataPath directory
  
@@ -456,7 +456,7 @@ index b75df6f..f81eee3 100644
  						SWConfig *config = new SWConfig(modFile.c_str());
  						if (config->Sections.find(modName) != config->Sections.end()) {
  							delete config;
-@@ -259,8 +260,8 @@ int InstallMgr::removeModule(SWMgr *manager, const char *moduleName) {
+@@ -272,8 +273,8 @@ int InstallMgr::removeModule(SWMgr *manager, const char *moduleName) {
  						}
  						else	delete config;
  					}
@@ -467,7 +467,7 @@ index b75df6f..f81eee3 100644
  			}
  		}
  		return 0;
-@@ -349,8 +350,8 @@ int InstallMgr::installModule(SWMgr *destMgr, const char *fromLocation, const ch
+@@ -372,8 +373,8 @@ int InstallMgr::installModule(SWMgr *destMgr, const char *fromLocation, const ch
  	SWBuf buffer;
  	bool aborted = false;
  	bool cipher = false;
@@ -478,7 +478,7 @@ index b75df6f..f81eee3 100644
  	SWBuf modFile;
  
  	SWLog::getSystemLog()->logDebug("***** InstallMgr::installModule\n");
-@@ -462,18 +463,18 @@ int InstallMgr::installModule(SWMgr *destMgr, const char *fromLocation, const ch
+@@ -485,18 +486,18 @@ int InstallMgr::installModule(SWMgr *destMgr, const char *fromLocation, const ch
  		}
  		if (!aborted) {
  			SWBuf confDir = sourceDir + "mods.d/";
@@ -503,7 +503,7 @@ index b75df6f..f81eee3 100644
  							FileMgr::copyFile(modFile.c_str(), targetFile.c_str());
  							if (cipher) {
  								if (getCipherCode(modName, config)) {
-@@ -490,7 +491,7 @@ int InstallMgr::installModule(SWMgr *destMgr, const char *fromLocation, const ch
+@@ -513,7 +514,7 @@ int InstallMgr::installModule(SWMgr *destMgr, const char *fromLocation, const ch
  						delete config;
  					}
  				}
@@ -513,7 +513,7 @@ index b75df6f..f81eee3 100644
  		}
  		return (aborted) ? -1 : 0;
 diff --git a/src/mgr/swmgr.cpp b/src/mgr/swmgr.cpp
-index 4bb3966..8c2d195 100644
+index 27c24f3..08097d6 100644
 --- a/src/mgr/swmgr.cpp
 +++ b/src/mgr/swmgr.cpp
 @@ -23,6 +23,8 @@
@@ -525,7 +525,7 @@ index 4bb3966..8c2d195 100644
  
  #include <sys/stat.h>
  #ifndef _MSC_VER
-@@ -264,10 +266,10 @@ void SWMgr::init() {
+@@ -270,10 +272,10 @@ void SWMgr::init() {
  SWBuf SWMgr::getHomeDir() {
  
  	// figure out 'home' directory for app data
@@ -538,7 +538,7 @@ index 4bb3966..8c2d195 100644
  	}
  	if (homeDir.length()) {
  		if ((homeDir[homeDir.length()-1] != '\\') && (homeDir[homeDir.length()-1] != '/')) {
-@@ -450,7 +452,7 @@ void SWMgr::findConfig(char *configType, char **prefixPath, char **configPath, s
+@@ -456,7 +458,7 @@ void SWMgr::findConfig(char *configType, char **prefixPath, char **configPath, s
  			// check environment variable SWORD_PATH
  			SWLog::getSystemLog()->logDebug("Checking $SWORD_PATH...");
  
@@ -547,7 +547,7 @@ index 4bb3966..8c2d195 100644
  			if (envsworddir.length()) {
  				
  				SWLog::getSystemLog()->logDebug("found (%s).", envsworddir.c_str());
-@@ -581,14 +583,15 @@ void SWMgr::findConfig(char *configType, char **prefixPath, char **configPath, s
+@@ -587,14 +589,15 @@ void SWMgr::findConfig(char *configType, char **prefixPath, char **configPath, s
  
  	SWLog::getSystemLog()->logDebug("Checking $ALLUSERSPROFILE/Application Data/sword/...");
  
@@ -565,7 +565,7 @@ index 4bb3966..8c2d195 100644
  		SWLog::getSystemLog()->logDebug("Checking %s for mods.d...", path.c_str());
  		if (FileMgr::existsDir(path.c_str(), "mods.d")) {
  			SWLog::getSystemLog()->logDebug("found.");
-@@ -630,7 +633,7 @@ void SWMgr::findConfig(char *configType, char **prefixPath, char **configPath, s
+@@ -636,7 +639,7 @@ void SWMgr::findConfig(char *configType, char **prefixPath, char **configPath, s
  
  	if (homeDir.length()) {
  		path = homeDir;
@@ -574,7 +574,7 @@ index 4bb3966..8c2d195 100644
  		SWLog::getSystemLog()->logDebug("  Checking for %smods.conf...", path.c_str());
  		if (FileMgr::existsFile(path.c_str(), "mods.conf")) {
  			SWLog::getSystemLog()->logDebug("found.");
-@@ -667,29 +670,29 @@ void SWMgr::findConfig(char *configType, char **prefixPath, char **configPath, s
+@@ -673,29 +676,29 @@ void SWMgr::findConfig(char *configType, char **prefixPath, char **configPath, s
  
  void SWMgr::loadConfigDir(const char *ipath)
  {
@@ -612,7 +612,7 @@ index 4bb3966..8c2d195 100644
  		
  		if (!config) {	// if no .conf file exist yet, create a default
  			newmodfile = ipath;
-@@ -809,7 +812,7 @@ signed char SWMgr::Load() {
+@@ -815,7 +818,7 @@ signed char SWMgr::Load() {
  			SWBuf homeDir = getHomeDir();
  			if (homeDir.length() && configType != 2) { // 2 = user only
  				SWBuf path = homeDir;
@@ -621,7 +621,7 @@ index 4bb3966..8c2d195 100644
  				augmentModules(path.c_str(), mgrModeMultiMod);
  				path = homeDir;
  				path += "sword/";
-@@ -1260,21 +1263,21 @@ void SWMgr::deleteModule(const char *modName) {
+@@ -1266,21 +1269,21 @@ void SWMgr::deleteModule(const char *modName) {
  
  void SWMgr::InstallScan(const char *dirname)
  {
@@ -650,7 +650,7 @@ index 4bb3966..8c2d195 100644
  
  					// mods.d
  					if (configType) {
-@@ -1283,7 +1286,7 @@ void SWMgr::InstallScan(const char *dirname)
+@@ -1289,7 +1292,7 @@ void SWMgr::InstallScan(const char *dirname)
  						targetName = configPath;
  						if ((configPath[strlen(configPath)-1] != '\\') && (configPath[strlen(configPath)-1] != '/'))
  							targetName += "/";
@@ -659,7 +659,7 @@ index 4bb3966..8c2d195 100644
  						conffd = FileMgr::getSystemFileMgr()->open(targetName.c_str(), FileMgr::WRONLY|FileMgr::CREAT, FileMgr::IREAD|FileMgr::IWRITE);
  					}
  
-@@ -1305,7 +1308,7 @@ void SWMgr::InstallScan(const char *dirname)
+@@ -1311,7 +1314,7 @@ void SWMgr::InstallScan(const char *dirname)
  			}
  			if (conffd)
  				FileMgr::getSystemFileMgr()->close(conffd);
@@ -669,7 +669,7 @@ index 4bb3966..8c2d195 100644
  	}
  }
 diff --git a/src/utilfuns/zlib/untgz.c b/src/utilfuns/zlib/untgz.c
-index 2919656..53f8281 100644
+index f3f3f56..959a7e4 100644
 --- a/src/utilfuns/zlib/untgz.c
 +++ b/src/utilfuns/zlib/untgz.c
 @@ -5,6 +5,9 @@
@@ -682,7 +682,7 @@ index 2919656..53f8281 100644
  #include <stdio.h>
  #include <stdlib.h>
  #include <string.h>
-@@ -225,7 +228,7 @@ int makedir (char *newdir)
+@@ -210,7 +213,7 @@ int makedir (char *newdir)
    if (buffer[len-1] == '/') {
      buffer[len-1] = '\0';
    }
@@ -691,7 +691,7 @@ index 2919656..53f8281 100644
      {
        free(buffer);
        return 1;
-@@ -240,7 +243,7 @@ int makedir (char *newdir)
+@@ -225,7 +228,7 @@ int makedir (char *newdir)
  	p++;
        hold = *p;
        *p = 0;
@@ -700,7 +700,7 @@ index 2919656..53f8281 100644
  	{
  	  fprintf(stderr,"%s: couldn't create directory %s\n",prog,buffer);
  	  free(buffer);
-@@ -315,15 +318,15 @@ int untar (gzFile in, const char *dest) {
+@@ -300,15 +303,15 @@ int untar (gzFile in, const char *dest) {
  			case AREGTYPE:
  				remaining = getoct(buffer.header.size,12);
  				if (remaining) {
@@ -719,7 +719,7 @@ index 2919656..53f8281 100644
  						}
  					}
  /*
-@@ -368,7 +371,11 @@ int untar (gzFile in, const char *dest) {
+@@ -353,7 +356,11 @@ int untar (gzFile in, const char *dest) {
  
  					localt = *localtime(&tartime);
  
