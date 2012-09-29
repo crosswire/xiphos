@@ -1,3 +1,8 @@
+2012-09-29  karl <charcoal@users.sf.net>
+
+	* add "friendly" (month name) display in dict window for devotional.
+	* remove last of NO_SWORD_SET_RENDER_NOTE_NUMBERS from display.cc.
+
 2012-09-26  karl <charcoal@users.sf.net>
 
 	* add save/restore of prefs, adv.search, and mod.mgr.

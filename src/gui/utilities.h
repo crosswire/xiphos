@@ -152,4 +152,8 @@ void language_init(void);
 #define	UI_SUFFIX		".glade"
 #endif
 
+/* for daily devotional */
+extern int month_day_counts[];
+extern char *(month_names[]);
+
 #endif /* GS_UTILITIES_H */
