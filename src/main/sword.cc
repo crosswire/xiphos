@@ -83,10 +83,6 @@ extern "C" {
 #include "gui/ipc.h"
 #endif
 
-/* for daily devotional */
-extern int month_day_counts[];
-extern char *(month_names[]);
-
 using namespace sword;
 
 extern GtkWidget *cbe_book;

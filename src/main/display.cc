@@ -643,49 +643,7 @@ CleanupContent(GString *text,
 	// test for any 'n="X"' content.  if so, use it directly.
 	if ((reported = backend->get_entry_attribute("Footnote", "1", "n", false))) {
 		g_free(reported);		// dispose of test junk.
-
-#ifdef NO_SWORD_SET_RENDER_NOTE_NUMBERS
-		//
-		// with recent engine change to auto-render
-		// note/xref markers, this is unneeded.
-		//
-
-		gchar *notetype;
-		// operate on notes+xrefs together: both are "Footnote".
-		while ((s = strchr(s, '*'))) {
-			if ((*(s+1) != 'n') && (*(s+1) != 'x')) {
-				s++;		// that's not our marker.
-				continue;
-			}
-
-		again:
-			g_snprintf(value, 5, "%d", ++footnote);
-			if ((reported = backend->get_entry_attribute("Footnote", value, "n", false))) {
-
-				notetype = backend->get_entry_attribute("Footnote", value, "type", false);
-				if (notetype &&
-				    (((*(s+1) == 'n') && !strcmp(notetype, "crossReference")) ||
-				     ((*(s+1) == 'x') && strcmp(notetype, "crossReference")))) {
-					// only 1 of notes & xrefs is active.
-					g_free(notetype);
-					g_free(reported);
-					goto again;
-				}
-
-				g_free(notetype);
-				pos = s-(text->str)+2;
-				text = g_string_insert(text, pos, reported);
-				g_free(reported);
-				s = text->str + pos + 1;
-			}
-		}
-
-		// naïveté: if any verse uses 'n=', all do: reset for next verse.
-		if (reset)
-			footnote = 0;
-#endif /* NO_SWORD_SET_RENDER_NOTE_NUMBERS */
 	}
-
 	// otherwise we simply count notes & xrefs through the verse.
 	else if (ops->xrefnotenumbers) {
 		while ((s = strstr(s, "*n"))) {
@@ -755,10 +713,6 @@ set_morph_order(SWModule& imodule)
 	}
 }
 
-#ifdef NO_SWORD_SET_RENDER_NOTE_NUMBERS
-// placeholder for older Sword.
-#define	set_render_numbers(x,y)	/* nothing */
-#else
 void
 set_render_numbers(SWModule& imodule, GLOBAL_OPS *ops)
 {
@@ -776,7 +730,6 @@ set_render_numbers(SWModule& imodule, GLOBAL_OPS *ops)
 		if (f4) f4->setRenderNoteNumbers((ops->xrefnotenumbers != 0));
 	}
 }
-#endif /* !NO_SWORD_SET_RENDER_NOTE_NUMBERS */
 
 //
 // display of commentary by chapter.
@@ -1012,7 +965,8 @@ GTKEntryDisp::Display(SWModule &imodule)
 	// for handling potential clearing of images, due to the
 	// difference in how modules are being accessed.
 
-	if (backend->module_type(imodule.Name()) == COMMENTARY_TYPE) {
+	int modtype = backend->module_type(imodule.Name());
+	if (modtype == COMMENTARY_TYPE) {
 		VerseKey *key = (VerseKey *)(SWKey *)imodule;
 		cache_flags = ConstructFlags(ops);
 		const char *ModuleName = imodule.Name();
@@ -1036,15 +990,34 @@ GTKEntryDisp::Display(SWModule &imodule)
 
 	} else {
 
-		if ((backend->module_type(imodule.Name()) == PERCOM_TYPE) ||
-		    (backend->module_type(imodule.Name()) == PRAYERLIST_TYPE))
+		if ((modtype == PERCOM_TYPE) ||
+		    (modtype == PRAYERLIST_TYPE))
 			rework = g_string_new(strongs_or_morph
 					      ? block_render(imodule.getRawEntry())
 					      : imodule.getRawEntry());
-		else
+		else {
 			rework = g_string_new(strongs_or_morph
 					      ? block_render(imodule.RenderText())
 					      : imodule.RenderText());
+			if (modtype == DICTIONARY_TYPE) {
+				char *f = (char *)imodule.getConfigEntry("Feature");
+				if (f && !strcmp(f, "DailyDevotion")) {
+					char *pretty;
+					char *month = backend->get_module_key();
+					char *day = strchr(month, '.');
+					if (day)
+						*(day++) = '\0';
+					else
+						day = (char*)"XX";
+					int idx_month = atoi(month) - 1;
+					pretty = g_strdup_printf("<b>%s %s</b><br/>",
+								 month_names[idx_month],
+								 day);
+					swbuf.append(pretty);
+					g_free(pretty);
+				}
+			}
+		}
 		rework = CleanupContent(rework, ops, imodule.Name());
 	}
 
