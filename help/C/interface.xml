@@ -737,7 +737,7 @@
 			</listitem>
 			<listitem>
 				<para>
-					<guibutton>Ctrl-[0-9]</guibutton> makes the Nth tab current.
+					<guibutton>Ctrl-[1-9]</guibutton> makes the Nth tab current.
 				</para>
 			</listitem>
 		</itemizedlist>
