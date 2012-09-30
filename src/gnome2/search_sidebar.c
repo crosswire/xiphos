@@ -28,7 +28,6 @@
 
 #include "gui/sidebar.h"
 #include "gui/search_sidebar.h"
-//#include "gui/html.h"
 #include "gui/xiphos.h"
 #include "gui/widgets.h"
 #include "gui/utilities.h"
@@ -405,7 +404,6 @@ void gui_create_search_sidebar(void)
 			 (GtkAttachOptions) (GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
 	gtk_widget_set_size_request(ss.entryLower, 114, 22);
-//	gtk_entry_set_text(GTK_ENTRY(ss.entryLower), _("Genesis"));
                            
 #ifdef USE_GTK_3
 	ss.entryUpper = gtk_combo_box_text_new_with_entry();  
@@ -417,8 +415,6 @@ void gui_create_search_sidebar(void)
 			 (GtkAttachOptions) (GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
 	gtk_widget_set_size_request(ss.entryUpper, 114, 22);
-//	gtk_entry_set_text(GTK_ENTRY(ss.entryUpper), _("Revelation"));
-
 
 	g_signal_connect(G_OBJECT(ss.rrbUseBounds),
 			 "toggled",

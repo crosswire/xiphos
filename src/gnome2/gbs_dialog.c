@@ -24,12 +24,8 @@
 #endif
 
 #include <gtk/gtk.h>
-#ifdef GTKHTML
-#include <gtkhtml/gtkhtml.h>
-#include "gui/html.h"
-#endif
 
-#include "../xiphos_html/xiphos_html.h"
+#include "xiphos_html/xiphos_html.h"
 
 #include "gui/gbs_dialog.h"
 #include "gui/navbar_book_dialog.h"
@@ -157,59 +153,6 @@ static void dialog_url(GtkHTML * html, const gchar * url,
 
 /******************************************************************************
  * Name
- *   link_clicked
- *
- * Synopsis
- *   #include "gbs_dialog.h"
- *
- *   void link_clicked(GtkButton * button, gpointer user_data)
- *
- * Description
- *
- *
- * Return value
- *   void
- */
-#ifndef USE_XIPHOS_HTML
-static void link_clicked(GtkButton * button, gpointer user_data)
-{
-
-}
-#endif
-
-
-/******************************************************************************
- * Name
- *   button_press
- *
- * Synopsis
- *   #include "gbs_dialog.h"
- *
- *   gboolean button_press(GtkWidget * widget,
-				GdkEventButton * event,GBS_DATA  * g)
- *
- * Description
- *
- *
- * Return value
- *   void
- */
-
-#ifndef USE_XIPHOS_HTML
-static gboolean button_press(GtkWidget *widget,
-			     GdkEventButton *event,
-			     DIALOG_DATA *g)
-{
-	//cur_dlg = g;
-	if (event->button == 2)
-		gui_menu_popup (NULL, NULL, g);
-	return FALSE;
-}
-#endif /* !USE_XIPHOS_HTML */
-
-
-/******************************************************************************
- * Name
  *   tree_selection_changed
  *
  * Synopsis
@@ -294,7 +237,6 @@ static void add_columns(GtkTreeView *tree)
 	gtk_tree_view_column_set_visible(column,FALSE);
 }
 
-#ifdef USE_XIPHOS_HTML
 static void
 _popupmenu_requested_cb (XiphosHtml *html,
 			 gchar *uri,
@@ -302,7 +244,6 @@ _popupmenu_requested_cb (XiphosHtml *html,
 {
 	gui_menu_popup (html, cur_dlg->mod_name, cur_dlg);
 }
-#endif
 
 /******************************************************************************
  * Name
@@ -384,7 +325,6 @@ void gui_create_gbs_dialog(DIALOG_DATA *dlg)
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow_html,
                                              settings.shadow_type);
 
-#ifdef USE_XIPHOS_HTML
 	dlg->html = GTK_WIDGET(XIPHOS_HTML_NEW(((DIALOG_DATA*) dlg),TRUE,DIALOG_BOOK_TYPE));
 	gtk_container_add(GTK_CONTAINER(scrolledwindow_html), dlg->html);
 	gtk_widget_show(dlg->html);
@@ -393,26 +333,6 @@ void gui_create_gbs_dialog(DIALOG_DATA *dlg)
 		      G_CALLBACK (_popupmenu_requested_cb),
 		      (DIALOG_DATA*)dlg);
 
-#else
-	dlg->html = gtk_html_new();
-	gtk_widget_show(dlg->html);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow_html),
-			  dlg->html);
-	gtk_html_load_empty(GTK_HTML(dlg->html));
-	g_signal_connect(G_OBJECT(dlg->html),
-			   "url_requested",
-			   G_CALLBACK(url_requested), NULL);
-	/*g_signal_connect(G_OBJECT(dlg->html), "on_url",
-			   G_CALLBACK(dialog_url),
-			   (DIALOG_DATA *) dlg);*/
-	g_signal_connect(G_OBJECT(dlg->html), "link_clicked",
-			   G_CALLBACK(link_clicked),
-			   (DIALOG_DATA *) dlg);
-	g_signal_connect(G_OBJECT(dlg->html),
-			   "button_press_event",
-			   G_CALLBACK(button_press),
-			   (DIALOG_DATA *) dlg);
-#endif
 	g_signal_connect(selection, "changed",
 			 G_CALLBACK(tree_selection_changed),
 			   (DIALOG_DATA *) dlg);

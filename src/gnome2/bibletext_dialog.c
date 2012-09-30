@@ -24,11 +24,8 @@
 #endif
 
 #include <gtk/gtk.h>
-#ifdef GTKHTML
-#include <gtkhtml/gtkhtml.h>
-#include "gui/html.h"
-#endif
-#include "../xiphos_html/xiphos_html.h"
+
+#include "xiphos_html/xiphos_html.h"
 
 #include "gui/bibletext_dialog.h"
 #include "gui/display_info.h"
@@ -62,75 +59,6 @@ static DIALOG_DATA *cur_vt;
  */
 extern gboolean bible_freed;
 
-#ifndef USE_XIPHOS_HTML
-/******************************************************************************
- * Name
- *   show_in_statusbar
- *
- * Synopsis
- *   #include "gui/bibletext_dialog.h"
- *
- *   void show_in_statusbar(GtkWidget * statusbar, gchar * key, gchar * mod)
- *
- * Description
- *   display information (morph or strongs) in statusbar
- *
- * Return value
- *   void
- */
-
-static void show_in_statusbar(GtkWidget *statusbar,
-			      gchar *key,
-			      gchar *mod)
-{
-	gchar *str;
-	gchar *text;
-	gint context_id2;
-
-	context_id2 =
-	    gtk_statusbar_get_context_id(GTK_STATUSBAR(statusbar),
-					 settings.program_title);
-	gtk_statusbar_pop(GTK_STATUSBAR(statusbar), context_id2);
-
-	text = main_get_striptext(mod, key);
-	str = remove_linefeeds(text);
-	if (str) {
-		gtk_statusbar_push(GTK_STATUSBAR(statusbar),
-				   context_id2, str);
-		g_free(str);
-	}
-	g_free(text);
-}
-#endif /* !USE_XIPHOS_HTML */
-
-
-/******************************************************************************
- * Name
- *   link_clicked
- *
- * Synopsis
- *   #include "bibletext_dialog.h"
- *
- *   void link_clicked(GtkHTML * html, const gchar * url,
- *							gpointer data)
- *
- * Description
- *   html link clicked
- *
- * Return value
- *   void
- */
-
-#ifndef USE_XIPHOS_HTML
-static void link_clicked(GtkHTML *html,
-			 const gchar *url,
-			 DIALOG_DATA *vt)
-{
-	cur_vt = vt;
-	main_dialogs_url_handler(vt, url, TRUE);
-}
-#endif /* !USE_XIPHOS_HTML */
-
 /******************************************************************************
  * Name
  *   dialog_destroy
@@ -163,160 +91,6 @@ static gboolean on_dialog_motion_notify_event(GtkWidget *widget,
 	cur_vt = vt;
 	return FALSE;
 }
-
-
-#ifndef USE_XIPHOS_HTML
-/******************************************************************************
- * Name
- *   dialog_url
- *
- * Synopsis
- *   #include "bibletext_dialog.h"
- *
- *   void dialog_url(GtkHTML * html, const gchar * url, DIALOG_DATA * vt)
- *
- * Description
- *
- *
- * Return value
- *   void
- */
-
-static void dialog_url(GtkHTML *html,
-		       const gchar *url,
-		       DIALOG_DATA *vt)
-{
-	gchar buf[255], *buf1;
-	gchar *url_buf = NULL;
-	gint context_id2;
-
-	cur_vt = vt;
-
-
-	if (url) url_buf = g_strdup(url);
-	context_id2 =
-	    gtk_statusbar_get_context_id(GTK_STATUSBAR(vt->statusbar),
-					 settings.program_title);
-	gtk_statusbar_pop(GTK_STATUSBAR(vt->statusbar), context_id2);
-
-	/***  moved out of url - clear appbar  ***/
-	if (url == NULL) {
-		gtk_statusbar_push(GTK_STATUSBAR(vt->statusbar),
-				   context_id2, "");
-		in_url = FALSE;
-	}
-	/***  we are in an url  ***/
-	else {
-		in_url = TRUE;
-
-		if (main_dialogs_url_handler(vt, url, FALSE))
-			return;
-		if (*url_buf == '#') {
-			++url_buf;	/* remove # */
-			if (*url_buf == 'T') {
-				++url_buf;	/* remove T */
-				if (*url_buf == 'G') {
-					++url_buf;	/* remove G */
-					return;
-				}
-
-				if (*url_buf == 'H') {
-					++url_buf;	/* remove H */
-					return;
-				}
-			}
-
-			if (*url_buf == 'G') {
-				++url_buf;	/* remove G */
-				buf1 = g_strdup(url_buf);
-				if (atoi(buf1) > 5624) {
-                                        g_free(buf1);
-					return;
-				}
-				else {
-					show_in_statusbar(vt->statusbar,
-							  buf1,
-							  settings.
-							  lex_greek);
-					g_free(buf1);
-					return;
-				}
-			}
-
-			if (*url_buf == 'H') {
-				++url_buf;	/* remove H */
-				buf1 = g_strdup(url);
-				if (atoi(buf1) > 8674) {
-                                        g_free(buf1);
-					return;
-				}
-				else {
-					show_in_statusbar(vt->statusbar,
-							  buf1,
-							  settings.
-							  lex_hebrew);
-					g_free(buf1);
-					return;
-				}
-			}
-		}
-		/***  thml morph tag  ***/
-		else if (!strncmp(url, "type=morph", 10)) {
-			gchar *modbuf = NULL;
-			gchar *mybuf = NULL;
-			buf1 = g_strdup(url_buf);
-			modbuf = "Robinson";
-			mybuf = NULL;
-			mybuf = strstr(buf1, "value=");
-			if (mybuf) {
-				mybuf = strchr(mybuf, '=');
-				++mybuf;
-			}
-			buf1 = g_strdup(mybuf);
-			show_in_statusbar(vt->statusbar, buf1, modbuf);
-			g_free(buf1);
-			return;
-		}
-		/*** thml strongs ***/
-		else if (!strncmp(url_buf, "type=Strongs", 12)) {
-			gchar *modbuf = NULL;
-			gchar *mybuf = NULL;
-			gchar newref[80];
-			gint type = 0;
-			//buf = g_strdup(url);
-			mybuf = NULL;
-			mybuf = strstr(url, "value=");
-			//i = 0;
-			if (mybuf) {
-				mybuf = strchr(mybuf, '=');
-				++mybuf;
-				if (mybuf[0] == 'H')
-					type = 0;
-				if (mybuf[0] == 'G')
-					type = 1;
-				++mybuf;
-				sprintf(newref, "%5.5d", atoi(mybuf));
-			}
-			if (type)
-				modbuf = settings.lex_greek;
-			else
-				modbuf = settings.lex_hebrew;
-
-			buf1 = g_strdup(newref);
-			show_in_statusbar(vt->statusbar, buf1, modbuf);
-			g_free(buf1);
-			return;
-		}
-		/***  any other link  ***/
-		else
-			sprintf(buf, "%s %s", _("Go to "), url);
-		gtk_statusbar_push(GTK_STATUSBAR(vt->statusbar),
-				   context_id2, buf);
-	}
-	if (url_buf)
-		g_free(url_buf);
-}
-#endif /* !USE_XIPHOS_HTML */
 
 
 /******************************************************************************
@@ -395,107 +169,6 @@ static GtkWidget *create_nav_toolbar(DIALOG_DATA *c)
 }
 
 
-#ifndef USE_XIPHOS_HTML
-
-/******************************************************************************
- * Name
- *  on_text_button_press_event
- *
- * Synopsis
- *   #include ".h"
- *
- *  gboolean on_text_button_press_event(GtkWidget * widget,
-			    GdkEventButton * event, DIALOG_DATA * t)
- *
- * Description
- *   called when mouse button is clicked in html widget
- *
- * Return value
- *   gboolean
- */
-static gboolean on_text_button_press_event(GtkWidget *widget,
-					   GdkEventButton *event,
-					   DIALOG_DATA *t)
-{
-	cur_vt = t;
-
-	switch (event->button) {
-	case 1:
-		break;
-	case 2:
-		break;
-	case 3:
-		gui_menu_popup (NULL,NULL, t);
-		//create_menu(t, event);
-		break;
-	}
-	return FALSE;
-}
-
-
-/******************************************************************************
- * Name
- *  on_button_release_event
- *
- * Synopsis
- *   #include "gui/bibletext_dialog.h"
- *
- *  gboolean on_button_release_event(GtkWidget * widget,
-			    GdkEventButton * event, DIALOG_DATA * t)
- *
- * Description
- *   called when mouse button is clicked in html widget
- *
- * Return value
- *   gboolean
- */
-
-static gboolean on_button_release_event(GtkWidget *widget,
-					GdkEventButton *event,
-					DIALOG_DATA *t)
-{
-
-	gchar *key;
-	cur_vt = t;
-
-	//settings.whichwindow = MAIN_TEXT_WINDOW;
-	/*
-	 * set program title to current text module name
-	 */
-	//gui_change_window_title(t->mod_name);
-
-	switch (event->button) {
-	case 1:
-		if (!in_url) {
-			key = gui_button_press_lookup(t->html);
-			if (key) {
-				gchar *dict = NULL;
-				if (settings.useDefaultDict)
-					dict =
-					    g_strdup(settings.
-						     DefaultDict);
-				else
-					dict =
-					    g_strdup(settings.
-						     DictWindowModule);
-				main_display_dictionary(dict,
-								  key);
-				g_free(key);
-				if (dict)
-					g_free(dict);
-			}
-		}
-		break;
-	case 2:
-		break;
-	case 3:
-		break;
-	}
-	return FALSE;
-}
-#endif /* !USE_XIPHOS_HTML */
-
-#ifdef USE_XIPHOS_HTML
 static void
   _popupmenu_requested_cb (XiphosHtml *html,
 			 gchar *uri,
@@ -504,7 +177,6 @@ static void
 	DIALOG_DATA * d = (DIALOG_DATA *)cur_vt;
 	gui_menu_popup (html, d->mod_name, d);  //gui_text_dialog_create_menu(d);
 }
-#endif /* USE_XIPHOS_HTML */
 
 /******************************************************************************
  * Name
@@ -560,8 +232,6 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 					    settings.shadow_type);   
 	gtk_paned_add1((GtkPaned *)paned, swVText);
 
-#ifdef USE_XIPHOS_HTML
-
 	vt->html = GTK_WIDGET(XIPHOS_HTML_NEW(vt, TRUE, DIALOG_TEXT_TYPE));
 	gtk_widget_show(vt->html);
 	gtk_container_add(GTK_CONTAINER(swVText), vt->html);
@@ -584,56 +254,8 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
         vt->previewer = GTK_WIDGET(XIPHOS_HTML_NEW(vt, TRUE, VIEWER_TYPE));
 	gtk_widget_show(vt->previewer);
 	gtk_container_add(GTK_CONTAINER(swVText), vt->previewer);
-#else
-	vt->html = gtk_html_new();
-	gtk_widget_show(vt->html);
-	gtk_container_add(GTK_CONTAINER(swVText), vt->html);
-	gtk_html_load_empty(GTK_HTML(vt->html));
-	
-	g_signal_connect(G_OBJECT(vt->html), "on_url",
-			   G_CALLBACK(dialog_url), (gpointer) vt);
-	g_signal_connect(G_OBJECT(vt->html), "link_clicked",
-			   G_CALLBACK(link_clicked), vt);
-	g_signal_connect(G_OBJECT(vt->html),
-			   "motion_notify_event",
-			   G_CALLBACK
-			   (on_dialog_motion_notify_event), vt);
-	g_signal_connect(G_OBJECT(vt->html),
-			   "button_release_event",
-			   G_CALLBACK
-			   (on_button_release_event),
-			   (DIALOG_DATA *) vt);
-	g_signal_connect(G_OBJECT(vt->html),
-			   "button_press_event",
-			   G_CALLBACK
-			   (on_text_button_press_event),
-			   (DIALOG_DATA *) vt);
-	g_signal_connect(G_OBJECT(vt->html),
-			   "url_requested",
-			   G_CALLBACK
-			   (url_requested),
-			   (DIALOG_DATA *) vt);
 
-	swVText = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_show(swVText);
-	//gtk_container_add(GTK_CONTAINER(frame), swVText);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(swVText),
-				       GTK_POLICY_NEVER,
-				       GTK_POLICY_ALWAYS);
-	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)swVText,
-                                             settings.shadow_type);  
-	
-	gtk_paned_add2((GtkPaned *)paned,swVText);
-
-	vt->previewer = gtk_html_new();
-	gtk_widget_show(vt->previewer);
-	gtk_container_add(GTK_CONTAINER(swVText), vt->previewer);
-	gtk_html_load_empty(GTK_HTML(vt->previewer));
-
-	g_signal_connect(G_OBJECT(vt->previewer), "link_clicked",
-				   G_CALLBACK(link_clicked), vt);
-#endif /* !USE_XIPHOS_HTML */
-         gtk_paned_set_position  (GTK_PANED(paned),
+	gtk_paned_set_position  (GTK_PANED(paned),
                                                          250);
 	vt->statusbar = gtk_statusbar_new();
 	gtk_widget_show(vt->statusbar);
@@ -651,10 +273,4 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 			   (on_dialog_motion_notify_event), vt);
 }
 
-/*
-void gui_text_dialog_create_menu(DIALOG_DATA * d)
-{
-	gui_menu_popup (NULL, NULL, d);
-}
-*/
 /******   end of file   ******/

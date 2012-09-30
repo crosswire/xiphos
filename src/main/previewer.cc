@@ -29,14 +29,11 @@
 #include <stringmgr.h>
 #include <localemgr.h>
 
-#ifdef __cplusplus
 extern "C" {
-#endif
 #include <gtkhtml/gtkhtml.h>
 #include "gui/bibletext.h"
-#ifdef __cplusplus
 }
-#endif
+
 #include <ctype.h>
 #include <time.h>
 #include "gui/widgets.h"
@@ -270,17 +267,14 @@ void mark_search_words(GString * str)
 	    (settings.searchText[0] == '\0')) {
 		return;
 	}
-	GS_message(("%s",settings.searchText));
+	GS_message(("%s", settings.searchText));
+
 	/* open and close tags */
-#ifdef USE_XIPHOS_HTML
 	sprintf(openstr,
 		"<span style=\"background-color: %s; color: %s\">",
 		settings.highlight_fg, settings.highlight_bg);
 	sprintf(closestr, "</span>");
-#else
-	sprintf(openstr, "<font color=\"%s\"><b>", settings.found_color);
-	sprintf(closestr, "</b></font>");
-#endif /* !USE_XIPHOS_HTML */
+
 	searchbuf = g_utf8_casefold(g_strdup(settings.searchText),-1);
 	if (g_str_has_prefix(searchbuf, "\"")) {
 		searchbuf = g_strdelimit(searchbuf, "\"", ' ');

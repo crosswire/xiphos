@@ -49,7 +49,7 @@
 #include "gui/tabbed_browser.h"
 #include "gui/search_dialog.h"
 
-#include "../xiphos_html/xiphos_html.h"
+#include "xiphos_html/xiphos_html.h"
 
 #include "main/sword.h"
 #include "main/settings.h"
@@ -296,12 +296,14 @@ gboolean gui_expand_treeview_to_path (GtkTreeView * tree, const gchar * book_nam
  */
 #ifdef USE_GTK_3
 static void on_notebook_switch_page(GtkNotebook * notebook,
-					 gpointer arg,
-                     guint page_num, gpointer user_data)
+				    gpointer arg,
+				    guint page_num,
+				    gpointer user_data)
 #else
 static void on_notebook_switch_page(GtkNotebook * notebook,
 				    GtkNotebookPage * page,
-				    guint page_num, gpointer user_data)
+				    guint page_num,
+				    gpointer user_data)
 #endif
 {
 	switch (page_num) {
@@ -1334,20 +1336,12 @@ void gui_show_previewer_in_sidebar(gint choice)
 {
 	if (choice) {
 		gtk_widget_show(widgets.box_side_preview);
-#ifdef USE_XIPHOS_HTML
 		gtk_widget_show (widgets.box_side_preview);
-#else
-		gtk_widget_show_all (widgets.box_side_preview);
-#endif
 		gtk_widget_hide(widgets.vbox_previewer);
 		gtk_paned_set_position(GTK_PANED(widgets.paned_sidebar),
 				       settings.sidebar_notebook_height);
 	} else {
-#ifdef USE_XIPHOS_HTML
 		gtk_widget_show (widgets.vbox_previewer);
-#else
-		gtk_widget_show_all (widgets.vbox_previewer);
-#endif
 		gtk_widget_hide(widgets.box_side_preview);
 		gtk_paned_set_position(GTK_PANED(widgets.vpaned),
 				       settings.biblepane_height);
@@ -1378,11 +1372,7 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	GtkWidget *scrolledwindow4;
 	GtkWidget *scrolledwindow_bm;
 	GtkWidget *title_label = NULL;
-#ifdef USE_GTKMOZEMBED
-	GtkWidget *frame;
-#else
 	GtkWidget *scrolledwindow;
-#endif /* USE_GTKMOZEMBED */
 
 	GtkWidget *table2;
 
@@ -1403,7 +1393,6 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 			(gchar *) "paned_sidebar");
 	widgets.shortcutbar = widgets.paned_sidebar;
 
-#ifndef  USE_GTKMOZEMBED
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
 	gtk_box_pack_start(GTK_BOX(widgets.box_side_preview), scrolledwindow, TRUE, TRUE,
@@ -1415,36 +1404,9 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
 					    scrolledwindow,
 					    settings.shadow_type);
-#endif /* !USE_GTKMOZEMBED */
-#ifdef USE_XIPHOS_HTML
- #ifdef  USE_GTKMOZEMBED
-	frame = gtk_frame_new(NULL);
-	gtk_widget_show(frame);
-	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
-	gtk_box_pack_start(GTK_BOX(widgets.box_side_preview), frame,
-				TRUE, TRUE,
-			   	0);
-#endif /* USE_GTKMOZEMBED */
 
-/*
-	sidebar.html_viewer_eventbox = gtk_event_box_new();
-	gtk_widget_show(sidebar.html_viewer_eventbox);
-	gtk_container_add(GTK_CONTAINER(frame), sidebar.html_viewer_eventbox);
-*/
 	sidebar.html_viewer_widget = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, SB_VIEWER_TYPE));
- #ifdef USE_WEBKIT  
 	gtk_container_add(GTK_CONTAINER(scrolledwindow), sidebar.html_viewer_widget);
- #else
-	gtk_container_add(GTK_CONTAINER(frame), sidebar.html_viewer_widget);
- #endif /* USE_WEBKIT */
-#else
-	sidebar.html_viewer_widget = gtk_html_new();
-	gtk_container_add(GTK_CONTAINER(scrolledwindow),
-			  sidebar.html_viewer_widget);
-	g_signal_connect(G_OBJECT(sidebar.html_viewer_widget),
-			 "link_clicked", G_CALLBACK(gui_link_clicked),
-			 NULL);
-#endif /* USE_XIPHOS_HTML */
 	gtk_widget_show(sidebar.html_viewer_widget);
 
 	/* ---------------------------------------------------------------- */

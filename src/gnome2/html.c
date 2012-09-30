@@ -707,10 +707,10 @@ void gui_html_print(GtkWidget * htmlwidget, gboolean preview, const gchar * mod_
 					       operation,
 					       action,
 					       NULL, //GTK_WINDOW (e->window),
-					       (GtkHTMLPrintCalcHeight) _calc_header_height, /* GtkHTMLPrintCalcHeight  calc_header_height*/
-					       (GtkHTMLPrintCalcHeight) _calc_footer_height, /* GtkHTMLPrintCalcHeight  calc_footer_height*/
-					       (GtkHTMLPrintDrawFunc) _draw_header, /* GtkHTMLPrintDrawFunc draw_header */
-					       (GtkHTMLPrintDrawFunc) _draw_footer, /* GtkHTMLPrintDrawFunc draw_footer */
+					       (GtkHTMLPrintCalcHeight) _calc_header_height,
+					       (GtkHTMLPrintCalcHeight) _calc_footer_height,
+					       (GtkHTMLPrintDrawFunc) _draw_header,
+					       (GtkHTMLPrintDrawFunc) _draw_footer,
 					       (gchar*)mod_name, //e, /* gpointer user_data */
 					       &error);
 

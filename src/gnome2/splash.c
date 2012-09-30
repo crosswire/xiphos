@@ -545,9 +545,6 @@ void gui_splash_init()
 		g_object_ref(G_OBJECT(splash));
 
 
-#ifdef USE_GTKMOZEMBED
-		icons = g_list_append(icons, "mozilla-icon.png");
-#endif
 		icons = g_list_append(icons, "gnome-windows.png");
 		icons = g_list_append(icons, "sword.png");
 		icons = g_list_append(icons, "gnome-session.png");

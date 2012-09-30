@@ -24,12 +24,8 @@
 #endif
 
 #include <gtk/gtk.h>
-#ifdef GTKHTML
-#include <gtkhtml/gtkhtml.h>
-#include "gui/html.h"
-#endif
-#include "../xiphos_html/xiphos_html.h"
 
+#include "xiphos_html/xiphos_html.h"
 
 #include "gui/dictlex_dialog.h"
 #include "gui/main_window.h"
@@ -290,7 +286,6 @@ static void entry_changed(GtkEditable *editable,
 	main_dialogs_dictionary_entry_changed(d);
 }
 
-#ifdef USE_XIPHOS_HTML
 static void
 _popupmenu_requested_cb (XiphosHtml *html,
 			     gchar *uri,
@@ -298,13 +293,6 @@ _popupmenu_requested_cb (XiphosHtml *html,
 {
 	gui_menu_popup (html, cur_dlg->mod_name, cur_dlg);
 }
-#else
-static void dialog_url(GtkHTML * html, const gchar * url,
-		       DIALOG_DATA * d)
-{
-	gui_menu_popup (NULL, d->mod_name, d);
-}
-#endif
 
 /******************************************************************************
  * Name
@@ -433,8 +421,7 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
 					    scrolledwindowDictHTML,
 					    settings.shadow_type);
-#ifdef USE_XIPHOS_HTML
-	//gtk_frame_set_shadow_type(GTK_FRAME(frameDictHTML), GTK_SHADOW_IN);
+
 	dlg->html = GTK_WIDGET(XIPHOS_HTML_NEW((DIALOG_DATA*) dlg,TRUE,DIALOG_DICTIONARY_TYPE));
 
 	gtk_container_add(GTK_CONTAINER(scrolledwindowDictHTML), dlg->html);
@@ -443,23 +430,7 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 		      "popupmenu_requested",
 		      G_CALLBACK(_popupmenu_requested_cb),
 		      dlg);
-#else
 
-	dlg->html = gtk_html_new();
-	gtk_widget_show(dlg->html);
-	gtk_container_add(GTK_CONTAINER(scrolledwindowDictHTML),
-			  dlg->html);
-	gtk_html_load_empty(GTK_HTML(dlg->html));
-
-	g_signal_connect(G_OBJECT(dlg->html),
-			 "url_requested",
-			 G_CALLBACK(url_requested), NULL);
-	g_signal_connect(G_OBJECT(dlg->html), "on_url",
-			 G_CALLBACK(dialog_url), dlg);
-	/*g_signal_connect(G_OBJECT(dlg->html),
-			 "button_press_event",
-			 G_CALLBACK(button_press_event), dlg);*/
-#endif
 	g_signal_connect(G_OBJECT(dlg->dialog), "set_focus",
 			 G_CALLBACK(dialog_set_focus), dlg);
 	g_signal_connect(G_OBJECT(dlg->dialog), "destroy",

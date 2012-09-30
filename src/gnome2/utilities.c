@@ -35,10 +35,6 @@
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
 #include <gtk/gtk.h>
-#ifdef GTKHTML
-#include <gtkhtml/gtkhtml.h>
-#include "gui/html.h"
-#endif
 
 #include "gui/utilities.h"
 #include "gui/preferences_dialog.h"
@@ -66,7 +62,7 @@
 #endif /* !WIN32 */
 #include <errno.h>
 
-#include "../xiphos_html/xiphos_html.h"
+#include "xiphos_html/xiphos_html.h"
 
 #include <gsf/gsf-utils.h>
 #include <gsf/gsf-outfile-zip.h>
@@ -1380,28 +1376,9 @@ HtmlOutput(char *text,
 {
 	int len = strlen(text), offset = 0;
  
-#ifndef USE_WEBKIT  
-	int write_size;
-#endif
-#ifdef USE_XIPHOS_HTML
 	XiphosHtml *html = XIPHOS_HTML(gtkText);
 	XIPHOS_HTML_OPEN_STREAM(html,"text/html");
-#else
-	GtkHTML *html = GTK_HTML(gtkText);
-	PangoContext* pc = gtk_widget_get_pango_context(gtkText);
-	PangoFontDescription *desc = pango_context_get_font_description(pc);
 
-	pango_font_description_set_family(
-	    desc, ((mf && mf->old_font) ? mf->old_font : "Serif"));
-	gtk_widget_modify_font(gtkText, desc);
-
-	GtkHTMLStream *stream = gtk_html_begin(html);
-	gboolean was_editable = gtk_html_get_editable(html);
-	if (was_editable)
-		gtk_html_set_editable(html, FALSE);
-#endif
-
-#ifdef USE_XIPHOS_HTML
 	// EVIL EVIL EVIL EVIL.
 	// crazy nonsense with xulrunner 1.9.2.3, failure to jump to anchor.
 	// force the issue by stuffing a javascript snippet inside <head></head>.
@@ -1426,47 +1403,16 @@ HtmlOutput(char *text,
 		XIPHOS_HTML_WRITE(html, buf, strlen(buf));
 		g_free(buf);
 	}
-#endif /* USE_XIPHOS_HTML */
 
-#ifdef USE_WEBKIT
 	if(!anchor)
-	XIPHOS_HTML_WRITE(html, text, len);
-#endif	
-	
-	// html widgets are uptight about being handed
-	// huge quantities of text -- producer/consumer problem,
-	// and we mustn't overload the receiver.  10k chunks.
-
-#ifndef USE_WEBKIT	
-	while (len > 0) {
-		write_size = min(10000, len);
-#ifdef USE_GTKMOZEMBED
-		XIPHOS_HTML_WRITE(html, text+offset, write_size);
-#else
-		gtk_html_write(html, stream, text+offset, write_size);
-#endif
-		offset += write_size;
-		len -= write_size;
-	}
-#endif	
+		XIPHOS_HTML_WRITE(html, text, len);
 
 	/* use anchor if asked, but if so, special anchor takes priority. */
-#ifdef USE_XIPHOS_HTML
 	XIPHOS_HTML_CLOSE(html);
 	if (anchor || settings.special_anchor)
 		XIPHOS_HTML_JUMP_TO_ANCHOR(html, (settings.special_anchor
 						  ? settings.special_anchor
 						  : anchor));
-
-#else
-	gtk_html_end(html, stream, GTK_HTML_STREAM_OK);
-	gtk_html_set_editable(html, was_editable);
-	if (anchor || settings.special_anchor)
-		gtk_html_jump_to_anchor(html, (settings.special_anchor
-					       ? settings.special_anchor
-					       : anchor));
-	gtk_html_flush(html);
-#endif
 
 	/* the special anchor gets exactly one use. */
 	settings.special_anchor = NULL;

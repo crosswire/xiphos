@@ -25,7 +25,7 @@
 
 #include <gtk/gtk.h>
 
-#include "../xiphos_html/xiphos_html.h"
+#include "xiphos_html/xiphos_html.h"
 #include "main/sword.h"
 #include "main/settings.h"
 #include "main/xml.h"
@@ -480,12 +480,12 @@ static void on_notebook_bible_parallel_switch_page(GtkNotebook * notebook,
 
 #ifdef USE_GTK_3
 static void on_notebook_comm_book_switch_page(GtkNotebook * notebook,
-					gpointer arg,
-                    gint page_num, GList **tl)
+					      gpointer arg,
+					      gint page_num, GList **tl)
 #else
 static void on_notebook_comm_book_switch_page(GtkNotebook * notebook,
-					GtkNotebookPage * page,
-					gint page_num, GList **tl)
+					      GtkNotebookPage * page,
+					      gint page_num, GList **tl)
 #endif
 {
 	gchar *url = NULL;
@@ -965,19 +965,9 @@ void create_mainwindow(void)
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
 					    scrolledwindow,
 					    settings.shadow_type);
-#ifdef USE_XIPHOS_HTML
 	widgets.html_previewer_text
 			= GTK_WIDGET ( XIPHOS_HTML_NEW( NULL, FALSE, VIEWER_TYPE));
 	gtk_container_add(GTK_CONTAINER(scrolledwindow), widgets.html_previewer_text);
-#else
-
-	widgets.html_previewer_text = gtk_html_new();
-	gtk_container_add(GTK_CONTAINER(scrolledwindow),
-			  widgets.html_previewer_text);
-	g_signal_connect(G_OBJECT(widgets.html_previewer_text),
-			 "link_clicked", G_CALLBACK(gui_link_clicked),
-			 NULL);
-#endif
 
 	gtk_widget_show(widgets.html_previewer_text);
 

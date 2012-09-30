@@ -26,7 +26,7 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 #include <libxml/parser.h>
-//#include <gal/shortcut-bar/e-shortcut-bar.h>
+
 #include <math.h>
 #include <ctype.h>
 #include <sys/types.h>
@@ -46,7 +46,6 @@
 #include "gui/dictlex_dialog.h"
 #include "gui/gbs_dialog.h"
 #include "gui/sidebar.h"
-//#include "gui/toolbar_nav.h"
 #include "gui/widgets.h"
 
 #include "main/settings.h"
@@ -58,7 +57,6 @@
 
 #include "gui/debug_glib_null.h"
 
-//TreePixbufs *pixbufs;
 GtkTreeStore *model;
 GtkTreeModel *tree_model;
 gboolean button_one;
@@ -66,10 +64,9 @@ gboolean button_two;
 gboolean use_dialog;
 GtkTreeSelection *current_selection;
 GtkTreeView *bookmark_tree;
-//static gboolean save_reorderable;
-
 
 BookMarksPixbufs *bm_pixbufs;
+
 /******************************************************************************
  * Name
  *   gui_verselist_to_bookmarks
@@ -205,10 +202,10 @@ static void get_xml_folder_data(xmlNodePtr cur, BOOKMARK_DATA * data)
 
 	folder = xmlGetProp(cur, (const xmlChar *) "caption");
 	data->caption = g_strdup((char *)folder);
-	data->key = NULL;	//g_strdup("GROUP");
-	data->module = NULL;	//g_strdup("GROUP");
-	data->module_desc = NULL;	//g_strdup("GROUP");
-	data->description = NULL;	//g_strdup("GROUP");
+	data->key = NULL;
+	data->module = NULL;
+	data->module_desc = NULL;
+	data->description = NULL;
 	data->is_leaf = FALSE;
 	data->opened = bm_pixbufs->pixbuf_opened;
 	data->closed = bm_pixbufs->pixbuf_closed;
@@ -244,7 +241,6 @@ static void get_xml_bookmark_data(xmlNodePtr cur, BOOKMARK_DATA * data)
 	data->closed = NULL;
 	mod1 = xmlGetProp(cur, (const xmlChar *)"modulename");
 	key = xmlGetProp(cur, (const xmlChar *)"key");
-	//caption = xmlGetProp(cur, "caption");
 	mod_desc = xmlGetProp(cur, (const xmlChar *)"moduledescription");
 	description = xmlGetProp(cur, (const xmlChar *)"description");
 	caption = xmlGetProp(cur, (const xmlChar *)"description");
@@ -815,21 +811,6 @@ static gboolean button_release_event(GtkWidget * widget,
 	return FALSE;
 }
 
-/*
-gboolean
-on_treeview_modules_drag_drop          (GtkWidget       *widget,
-                                        GdkDragContext  *drag_context,
-                                        gint             x,
-                                        gint             y,
-                                        guint            time,
-                                        gpointer         user_data)
-{
-g_message("on_treeview_modules_drag_drop");
-  return FALSE;
-}
-*/
-
-
 /******************************************************************************
  * Name
  *   gui_create_bookmark_tree
@@ -866,15 +847,7 @@ GtkWidget *gui_create_bookmark_tree(void)
 			   COL_KEY, NULL, COL_MODULE, NULL, -1);
 
 	load_xml_bookmarks(GTK_TREE_VIEW(tree), &iter);
-	/*g_signal_connect(G_OBJECT(tree),
-	   "row-collapsed",
-	   G_CALLBACK(expand_release_cursor_row),
-	   NULL); */
-	/*
-	   g_signal_connect (G_OBJECT(tree) , "drag_drop",
-	   G_CALLBACK (on_treeview_modules_drag_drop),
-	   NULL);
-	 */
+
 	g_signal_connect_after(G_OBJECT(tree),
 			       "button_release_event",
 			       G_CALLBACK(button_release_event),

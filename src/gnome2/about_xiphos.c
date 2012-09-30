@@ -107,18 +107,7 @@ gui_create_about_xiphos(void)
 	GtkWidget *about1;
 	gchar versionbuild[128];
 
-	snprintf
-	    (versionbuild, 120, "%s-%s", VERSION,
-#ifdef USE_WEBKIT  
-	     "webkit"
-#else    
-  #ifdef USE_GTKMOZEMBED
-	     "mozembed"
-  #else    
-	     "gtkhtml3"
-  #endif
-#endif
-		);
+	snprintf(versionbuild, 120, "%s", VERSION);
 
 	about1_logo_pixbuf = pixbuf_finder("about.png", 0, NULL);
 

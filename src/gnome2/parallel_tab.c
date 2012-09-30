@@ -24,14 +24,10 @@
 #endif
 
 #include <gtk/gtk.h>
-#ifdef GTKHTML
-#include <gtkhtml/gtkhtml.h>
-#include "gui/html.h"
-#endif
 #ifndef USE_GTKBUILDER
   #include <glade/glade-xml.h>
 #endif
-#include "../xiphos_html/xiphos_html.h"
+#include "xiphos_html/xiphos_html.h"
 
 #include "gui/parallel_tab.h"
 #include "gui/parallel_view.h"
@@ -68,7 +64,6 @@ NAVBAR_VERSEKEY navbar_parallel;
 static void sync_with_main(const gchar * key);
 
 
-#ifdef USE_XIPHOS_HTML
 static void
 _popupmenu_requested_cb(XiphosHtml *html,
 			gchar *uri,
@@ -76,19 +71,6 @@ _popupmenu_requested_cb(XiphosHtml *html,
 {
 	gui_popup_menu_parallel();
 }
-#else
-static gboolean
-_popupmenu_requested_cb(GtkHTML *html,
-			GdkEventButton * event,
-			gpointer date)
-{
-	if (event->button == 3) {
-		gui_popup_menu_parallel();
-		return 1;
-	}
-	return 0;
-}
-#endif
 
 
 /******************************************************************************
@@ -242,79 +224,6 @@ static GtkWidget *create_nav_toolbar(void)
 	return gui_navbar_versekey_parallel_new();
 }
 
-#ifndef USE_XIPHOS_HTML
-/******************************************************************************
- * Name
- *  on_text_button_press_event
- *
- * Synopsis
- *   #include ".h"
- *
- *  gboolean on_text_button_press_event(GtkWidget * widget,
-			    GdkEventButton * event, DIALOG_DATA * t)
- *
- * Description
- *   called when mouse button is clicked in html widget
- *
- * Return value
- *   gboolean
- */
-static gboolean on_text_button_press_event(GtkWidget * widget,
-					GdkEventButton * event,
-					gpointer data)
-{
-	switch (event->button) {
-	case 1:
-		break;
-	case 2:
-		shift_key_pressed = TRUE;
-		break;
-	case 3:
-		//gui_popup_pm_text();
-		break;
-	}
-	return FALSE;
-}
-
-
-/******************************************************************************
- * Name
- *  on_text_button_release_event
- *
- * Synopsis
- *   #include "_bibletext.h"
- *
- *  gboolean on_text_button_release_event(GtkWidget * widget,
- *					  GdkEventButton * event,
- *					  DIALOG_DATA * t)
- *
- * Description
- *   called when mouse button is clicked in html widget
- *
- * Return value
- *   gboolean
- */
-
-static gboolean on_text_button_release_event(GtkWidget * widget,
-					     GdkEventButton * event,
-					     gpointer date)
-{
-	switch (event->button) {
-	case 1:
-
-		break;
-	case 2:
-		if (shift_key_pressed) {
-			shift_key_pressed = FALSE;
-			break;
-		}
-		break;
-	case 3:
-		break;
-	}
-	return FALSE;
-}
-#endif /* !USE_XIPHOS_HTML */
 
 /******************************************************************************
  * Name
@@ -337,11 +246,8 @@ GtkWidget *_create_parallel_tab(void)
 {
 	GtkWidget *toolbar29;
   	GtkWidget *box_parallel_labels;
-#ifdef  USE_GTKMOZEMBED
-	GtkWidget *frame;
-#else
 	GtkWidget *scrolled_window;
-#endif
+
 	gtk_notebook_set_show_tabs (GTK_NOTEBOOK(widgets.notebook_bible_parallel),
                                              FALSE);
 	gtk_notebook_set_current_page (GTK_NOTEBOOK(widgets.notebook_bible_parallel),
@@ -385,7 +291,7 @@ GtkWidget *_create_parallel_tab(void)
 		}
 	}
 #endif /* 0 */
-#ifndef  USE_GTKMOZEMBED
+
 	scrolled_window = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolled_window);
 	gtk_box_pack_start(GTK_BOX(parallel_vbox), scrolled_window, TRUE, TRUE,0);
@@ -394,65 +300,17 @@ GtkWidget *_create_parallel_tab(void)
 				       GTK_POLICY_ALWAYS);
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolled_window,
                                              settings.shadow_type);
-#endif
-#ifdef USE_XIPHOS_HTML
-    
+
 	widgets.html_parallel_dialog = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, PARALLEL_TYPE));
 	gtk_widget_show(widgets.html_parallel_dialog);
     
- #ifdef USE_WEBKIT 
 	gtk_container_add(GTK_CONTAINER(scrolled_window),
 			  widgets.html_parallel_dialog);
-
- #else
-	frame = gtk_frame_new(NULL);
-	gtk_widget_show(frame);
-	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
-	gtk_box_pack_start(GTK_BOX(parallel_vbox), frame, TRUE, TRUE, 0);
 	
-	gtk_container_add(GTK_CONTAINER(frame),
-			  widgets.html_parallel_dialog);
-    
- #endif /* USE_WEBKIT */ 
-	
-/*
-	eventbox = gtk_event_box_new ();
-	gtk_widget_show (eventbox);
-	gtk_container_add(GTK_CONTAINER(frame), eventbox);
-*/
 	g_signal_connect((gpointer)widgets.html_parallel_dialog,
 			 "popupmenu_requested",
 			 G_CALLBACK (_popupmenu_requested_cb),
 			 NULL);
-#else
-
-	widgets.html_parallel_dialog = gtk_html_new();
-	gtk_widget_show(widgets.html_parallel_dialog);
-	gtk_html_load_empty(GTK_HTML(widgets.html_parallel_dialog));
-	gtk_container_add(GTK_CONTAINER(scrolled_window),
-			  widgets.html_parallel_dialog);
-
-	g_signal_connect(G_OBJECT(widgets.html_parallel_dialog), "link_clicked",
-				G_CALLBACK(gui_link_clicked),
-				NULL);
-	g_signal_connect(G_OBJECT(widgets.html_parallel_dialog), "on_url",
-				G_CALLBACK(gui_url),
-				GINT_TO_POINTER(TEXT_TYPE));
-	g_signal_connect(G_OBJECT(widgets.html_parallel_dialog),"button_release_event",
-				G_CALLBACK(on_text_button_release_event),
-				NULL);
-	g_signal_connect(G_OBJECT(widgets.html_parallel_dialog), "button_press_event",
-				G_CALLBACK(on_text_button_press_event),
-				NULL);
-
-	g_signal_connect(G_OBJECT(widgets.html_parallel_dialog),
-			 "button_release_event",
-			 G_CALLBACK (_popupmenu_requested_cb),
-			 NULL);
-	g_signal_connect(G_OBJECT(widgets.html_parallel_dialog),
-			 "url_requested",
-			 G_CALLBACK(url_requested), NULL);
-#endif
 	gtk_widget_hide(widgets.hpaned);
 	return parallel_vbox;
 

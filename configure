@@ -1,13 +1,18 @@
 #!/bin/sh
-echo ----------------------------------------------------------------
-echo ./configure is no longer used in building Xiphos.
-echo please run "'./waf --help'" to understand current build habits.
-echo for linux and unix, we recommend
-echo '    ./waf configure --prefix=/usr --gtk=auto --backend=webkit --debug-level=optimized'
-echo for distribution-ready builds.
-echo then
-echo '    ./waf build'
-echo and
-echo '    sudo ./waf install'
-echo ----------------------------------------------------------------
+cat - <<\EOF
+----------------------------------------------------------------
+"configure" is no longer used in building Xiphos.
+
+please run "./waf --help" to understand current build habits.
+for linux and unix, we recommend
+    ./waf configure --prefix=/usr --debug-level=optimized
+for distribution-ready builds.
+then
+    ./waf build
+and
+    sudo ./waf install
+
+note that the --backend option is gone -- only webkit is used now.
+----------------------------------------------------------------
+EOF
 exit 1

@@ -38,13 +38,16 @@ void clear_and_hide_progress_bar(void);
 void
 on_notebook1_switch_page(GtkNotebook * notebook,
 			 gpointer arg,
-             guint page_num, gpointer user_data);
+			 guint page_num,
+			 gpointer user_data);
 #else
 void
 on_notebook1_switch_page(GtkNotebook * notebook,
 			 GtkNotebookPage * page,
-			 guint page_num, gpointer user_data);
-#endif	
+			 guint page_num,
+			 gpointer user_data);
+#endif
+
 //void on_notebook1_switch_page(GtkNotebook * notebook, guint page_num, gpointer user_data);
 void on_radiobutton2_toggled(GtkToggleButton * togglebutton, gpointer user_data);
 void on_radiobutton4_toggled(GtkToggleButton * togglebutton, gpointer user_data);

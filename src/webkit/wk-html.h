@@ -26,7 +26,7 @@
 #include <webkit/webkit.h>  
 #include "main/module_dialogs.h"
 
-#include "../main/module_dialogs.h"
+#include "main/module_dialogs.h"
 
 G_BEGIN_DECLS
 

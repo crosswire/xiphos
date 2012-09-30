@@ -108,8 +108,8 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
                                    gpointer arg1, gint page_num, GList **tl);
 #else
 void gui_notebook_main_switch_page(GtkNotebook * notebook,
-					 GtkNotebookPage * page,
-					 gint page_num, GList **tl);
+				   GtkNotebookPage * page,
+				   gint page_num, GList **tl);
 #endif
 
 #ifdef __cplusplus
