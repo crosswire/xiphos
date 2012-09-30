@@ -53,7 +53,6 @@ export CROSS CC CXX AR RANLIB CFLAGS LDFLAGS WINRC \
 	PKG_CONFIG PKG_CONFIG_PATH PKG_CONFIG_LIBDIR \
 	PKG_CONFIG_PREFIX MSVC_LIBPATH
 ./waf configure \
-	--backend=webkit \
 	--target-platform-win32 \
 	--gtk=3 \
 	--disable-dbus \
