@@ -1,5 +1,12 @@
 2012-09-29  karl <charcoal@users.sf.net>
 
+	* code simplification: remove gtkhtml3, once and for all.
+	  we have committed to XHTML filters in Sword.  those filters 
+	  depend on <span>, which means that the gtkhtml3 backend is no
+	  longer an option.  the world must catch up and deploy webkit.
+
+2012-09-29  karl <charcoal@users.sf.net>
+
 	* add "friendly" (month name) display in dict window for devotional.
 	* remove last of NO_SWORD_SET_RENDER_NOTE_NUMBERS from display.cc.
 

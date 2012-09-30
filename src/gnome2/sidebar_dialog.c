@@ -39,7 +39,7 @@
 
 #include "gui/debug_glib_null.h"
 
-#include "../xiphos_html/xiphos_html.h"
+#include "xiphos_html/xiphos_html.h"
 
 static GtkWidget* create_sidebar_dialog(void);
 static GtkWidget * vbox_dock;
@@ -76,12 +76,9 @@ void gui_attach_detach_sidebar(void)
 				       biblepanesize);*/
 		
 		/* ugly fix until someone can make mozembed work with 'gtk_widget_reparent()' */
-#ifdef USE_XIPHOS_HTML
 		gtk_widget_destroy(sidebar.html_viewer_widget);
 		sidebar.html_viewer_widget = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, SB_VIEWER_TYPE));
 		gtk_container_add(GTK_CONTAINER(sidebar.html_viewer_eventbox), sidebar.html_viewer_widget);
-#endif
-		/* */
 		
 		gtk_widget_show_all(widgets.dock_sb);
 		gtk_widget_show(sidebar.html_viewer_widget);
@@ -98,14 +95,11 @@ void gui_attach_detach_sidebar(void)
 				    widgets.epaned);
 		
 		/* ugly fix until someone can make mozembed work with 'gtk_widget_reparent()' */
-#ifdef USE_XIPHOS_HTML
 		gtk_widget_destroy(sidebar.html_viewer_widget);
 		sidebar.html_viewer_widget = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, SB_VIEWER_TYPE));
 		gtk_container_add(GTK_CONTAINER(sidebar.html_viewer_eventbox), sidebar.html_viewer_widget);
-#endif
+
 		gtk_widget_show(sidebar.html_viewer_widget);
-		/*  */
-		
 		gtk_widget_destroy(widgets.dock_sb);
 	}
 	main_set_previewer_widget(TRUE);

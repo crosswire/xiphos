@@ -53,54 +53,8 @@ enum {
 static guint signals[LAST_SIGNAL] = { 0 };
 static GObjectClass *parent_class = NULL;
 
-/* static gboolean */
-/* html_open_uri (WebKitWebView* view, */
-/* 	       WebKitWebFrame* web_frame, */
-/* 	       WebKitNetworkRequest* req, */
-/* 	       WebKitWebNavigationAction* action, */
-/* 	       WebKitWebPolicyDecision* decision, */
-/* 	       gpointer data) */
-/* { */
-/* 	const gchar *uri = webkit_network_request_get_uri (req); */
-/* 	WebKitNavigationResponse resp = WEBKIT_NAVIGATION_RESPONSE_IGNORE; */
-/* 	WkHtml *html = WK_HTML(view); */
-/* 	gboolean block_load; */
-/* 	gchar *real_uri; */
-
-/* 	if (webkit_web_navigation_action_get_reason (action) !=  */
-/* 	    WEBKIT_WEB_NAVIGATION_REASON_LINK_CLICKED) { */
-/* 		webkit_web_policy_decision_use (decision); */
-/* 		return TRUE; */
-/* 	} */
-
-/* 	real_uri = g_strdup (uri); */
-
-/* 	if (g_str_has_prefix (uri, html->priv->base_uri)) { */
-/* 		gint length = strlen (html->priv->base_uri); */
-
-/* 		if (uri[length] == '#') { */
-/* 			gchar *question_mark = g_strrstr (real_uri, "?"); */
-/* 			gchar *tmp = real_uri; */
-
-/* 			*question_mark = '\0'; */
-/* 			real_uri = g_strdup_printf ("%s?%s", tmp, uri + length + 1); */
-
-/* 			g_free (tmp); */
-/* 		} */
-/* 	} */
-
-/* 	if (!html->priv->frames_enabled) { */
-/* 		g_signal_emit (html, signals[URI_SELECTED], 0, real_uri, FALSE); */
-/* 	} else { */
-/* 		g_signal_emit (html, signals[FRAME_SELECTED], 0, real_uri, FALSE, &block_load); */
-/* 	} */
-
-/* 	g_free (real_uri); */
-/* 	webkit_web_policy_decision_ignore (decision); */
-/* 	return TRUE; */
-/* } */
-   static gboolean button_release_handler (GtkWidget *widget,
-			       GdkEventButton *event)
+static gboolean button_release_handler (GtkWidget *widget,
+					GdkEventButton *event)
 {
 	 GtkClipboard * clipboard;
          if(event->type ==  GDK_BUTTON_RELEASE && db_click) {
@@ -120,7 +74,7 @@ static GObjectClass *parent_class = NULL;
 	return FALSE;
 }
 static gboolean button_press_handler (GtkWidget *widget,
-			       GdkEventButton *event)
+				      GdkEventButton *event)
 {
 	WkHtmlPriv *priv;
         priv = WK_HTML_GET_PRIVATE (WK_HTML(widget));
@@ -157,9 +111,9 @@ static gboolean button_press_handler (GtkWidget *widget,
 }
 
 static void link_handler (GtkWidget *widget,
-			      gchar     *title,
-			      gchar     *uri,
-			      gpointer   user_data)
+			  gchar     *title,
+			  gchar     *uri,
+			  gpointer   user_data)
 {
 	WkHtmlPriv *priv;
 	priv = WK_HTML_GET_PRIVATE(WK_HTML(widget));

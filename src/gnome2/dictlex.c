@@ -24,12 +24,8 @@
 #endif
 
 #include <gtk/gtk.h>
-#ifdef GTKHTML
-#include <gtkhtml/gtkhtml.h>
-#include "gui/html.h"
-#endif
 
-#include "../xiphos_html/xiphos_html.h"
+#include "xiphos_html/xiphos_html.h"
 
 #include "gui/dictlex.h"
 #include "gui/bookmark_dialog.h"
@@ -209,192 +205,6 @@ void gui_set_dictlex_mod_and_key(gchar * mod_name, gchar * key)
 }
 
 
-/******************************************************************************
- * Name
- *  html_button_pressed
- *
- * Synopsis
- *   #include "gui/dictlex.h"
- *
- *   gint html_button_pressed(GtkWidget * html, GdkEventButton * event,
- *					GSHTMLEditorControlData * d)
- *
- * Description
- *    mouse button pressed in dictionary / lexicon
- *
- * Return value
- *   gint
- */
-
-#ifndef USE_XIPHOS_HTML
-static gint html_button_pressed(GtkWidget * html,
-				GdkEventButton * event, gpointer data)
-{
-	settings.whichwindow = DICTIONARY_WINDOW;
-
-	//gui_change_window_title(settings.DictWindowModule);
-
-	switch (event->button) {
-	case 1:
-
-		break;
-	case 2:
-		/*
-		 * pass this for pasting
-		 */
-		break;
-	case 3:
-		//gui_create_pm_dictionary();
-		gui_menu_popup (NULL, settings.DictWindowModule, NULL);
-		break;
-		/*gtk_signal_emit_stop_by_name(G_OBJECT(html),
-		   "button_press_event"); */
-		break;
-	default:
-		break;
-	}
-
-	return FALSE;
-}
-
-
-
-/******************************************************************************
- * Name
- *  html_button_released
- *
- * Synopsis
- *   #include "gui/dictlex.h"
- *
- *   gint html_button_released(GtkWidget * html, GdkEventButton * event,
- *					GSHTMLEditorControlData * d)
- *
- * Description
- *    mouse button released in dictionary / lexicon
- *
- * Return value
- *   gint
- */
-
-extern gboolean in_url;
-
-static gint html_button_released(GtkWidget * html,
-				GdkEventButton * event, gpointer data)
-{
-#ifdef GTKHTML
-	gchar *key;
-	const gchar *url;
-#endif
-
-	settings.whichwindow = DICTIONARY_WINDOW;
-
-	//gui_change_window_title(settings.DictWindowModule);
-
-#ifdef GTKHTML
-	switch (event->button) {
-	case 1:
-		if (in_url)
-			break;
-		key = gui_button_press_lookup(widgets.html_dict);
-		if (key) {
-			if (g_strstr_len(key,strlen(key),"*")) {
-				key = g_strdelimit(key, "*", ' ');
-				key = g_strstrip(key);
-				url = g_strdup_printf(
-					"passagestudy.jsp?action=showModInfo&value=1&module=%s",
-					key);
-				main_url_handler(url,TRUE);
-				g_free((gchar*)url);
-				g_free(key);
-				break;
-			}
-		}
-		break;
-	}
-#endif /* GTKHTML */
-	return FALSE;
-}
-
-#endif /* !USE_XIPHOS_HTML */
-
-/******************************************************************************
- * Name
- *  list_button_released
- *
- * Synopsis
- *   #include "gui/dictlex.h"
- *
- *   gint list_button_released(GtkWidget * html, GdkEventButton * event,
- *					GSHTMLEditorControlData * d)
- *
- * Description
- *    mouse button released in key list
- *
- * Return value
- *   gint
- */
-#if 0
-static gint list_button_released(GtkWidget * treeview,
-			 GdkEventButton * event, gpointer data)
-{
-	GtkTreeSelection *selection;
-	GtkTreeIter selected;
-	gchar *buf = NULL;
-	GtkTreeModel *model;
-
-	selection =
-	    gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview));
-
-	if (!gtk_tree_selection_get_selected
-	    (selection, &model, &selected))
-		return 0;
-
-	switch (event->button) {
-	case 1:
-		gtk_tree_model_get(model, &selected, 0, &buf, -1);
-		if (buf) {
-			gtk_entry_set_text(GTK_ENTRY
-					   (widgets.entry_dict), buf);
-			g_free(buf);
-		}
-		break;
-	case 2:
-	case 3:
-	default:
-		break;
-	}
-
-	return FALSE;
-}
-
-
-
-static void add_columns(GtkTreeView * treeview)
-{
-	GtkCellRenderer *renderer;
-	GtkTreeViewColumn *column;
-//	GtkTreeModel *model = gtk_tree_view_get_model(treeview);
-
-	/* column for fixed toggles */
-	renderer = gtk_cell_renderer_text_new();
-
-	column = gtk_tree_view_column_new_with_attributes("Keys",
-							  renderer,
-							  "text", 0,
-							  NULL);
-	gtk_tree_view_column_set_sort_column_id(column, 0);
-
-	gtk_tree_view_append_column(treeview, column);
-	/* get cell (row) height */
-	gtk_cell_renderer_get_size(renderer,
-				   GTK_WIDGET(treeview),
-				   NULL,
-				   NULL,
-				   NULL, NULL, &settings.cell_height);
-}
-#endif /* 0 */
-
-
 void dict_key_entry_changed(GtkEntry * entry, gpointer data)
 {
 	gchar *buf = NULL;
@@ -533,7 +343,7 @@ static gboolean select_button_press_callback (GtkWidget *widget,
 	}
 	return FALSE;
 }
-#ifdef USE_XIPHOS_HTML
+
 static void
 _popupmenu_requested_cb (XiphosHtml *html,
 			     gchar *uri,
@@ -542,7 +352,6 @@ _popupmenu_requested_cb (XiphosHtml *html,
 	gui_menu_popup (html, settings.DictWindowModule, NULL);
 	//gui_create_pm_dictionary();
 }
-#endif
 
 GtkWidget *gui_create_dictionary_pane(void)
 {
@@ -602,7 +411,7 @@ GtkWidget *gui_create_dictionary_pane(void)
 	
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow,
                                              settings.shadow_type);
-#ifdef USE_XIPHOS_HTML
+
 	widgets.html_dict = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, DICTIONARY_TYPE));
 	gtk_widget_show(widgets.html_dict);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
@@ -611,28 +420,6 @@ GtkWidget *gui_create_dictionary_pane(void)
 		      "popupmenu_requested",
 		      G_CALLBACK (_popupmenu_requested_cb),
 		      NULL);
-#else
-
-	widgets.html_dict = gtk_html_new();
-	gtk_widget_show(widgets.html_dict);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow),
-			  widgets.html_dict);
-
-	g_signal_connect(G_OBJECT(widgets.html_dict),
-			 "button_press_event",
-			 G_CALLBACK(html_button_pressed), NULL);
-	g_signal_connect(G_OBJECT(widgets.html_dict),
-			 "button_release_event",
-			 G_CALLBACK(html_button_released), NULL);
-	g_signal_connect(G_OBJECT(widgets.html_dict),
-			 "url_requested",
-			 G_CALLBACK(url_requested), NULL);
-	g_signal_connect(G_OBJECT(widgets.html_dict), "on_url",
-			 G_CALLBACK(gui_url),
-			 GINT_TO_POINTER(DICTIONARY_TYPE));
-	g_signal_connect(G_OBJECT(widgets.html_dict), "link_clicked",
-			 G_CALLBACK(gui_link_clicked), NULL);
-#endif
 
 	g_signal_connect (dict_drop_down,
 			  "button_press_event",

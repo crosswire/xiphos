@@ -353,8 +353,8 @@ void main_create_pixbufs(void)
                                               GTK_ICON_SIZE_MENU );
 #else
 	gtk_widget_render_icon(widgets.app,
-				   GTK_STOCK_DND,
-				   GTK_ICON_SIZE_MENU, NULL);
+			       GTK_STOCK_DND,
+			       GTK_ICON_SIZE_MENU, NULL);
 #endif
 }
 

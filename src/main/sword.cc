@@ -33,15 +33,11 @@
 #include <stringmgr.h>
 #include <localemgr.h>
 
-#ifdef __cplusplus
 extern "C" {
-#endif
 #include <gtkhtml/gtkhtml.h>
 #include "gui/bibletext.h"
 #include "main/gtk_compat.h"
-#ifdef __cplusplus
 }
-#endif
 
 #include <ctype.h>
 #include <time.h>
@@ -704,8 +700,9 @@ void main_init_backend(void)
 	backend->init_SWORD(0);
 	settings.path_to_mods = main_get_path_to_mods();
 #ifndef DEBUG
-	// FYI: the lack of this chdir in debug mode will make archive fail.
 	g_chdir(settings.path_to_mods);
+#else
+	GS_warning(("no chdir(SWORD_PATH) => modmgr 'archive' may not work"));
 #endif
 	GS_print(("%s sword-%s\n", "Starting", backend->get_sword_version()));
 	GS_print(("%s\n", "Initiating SWORD"));
@@ -1108,14 +1105,12 @@ void main_display_bible(const char * mod_name,
 	gchar *style = NULL;
 	gchar *val_key = NULL;
 
-#ifndef USE_GTKMOZEMBED
+	/* keeps us out of a crash causing loop */
 	extern guint scroll_adj_signal;
 	extern GtkAdjustment* adjustment;
-
-	/* keeps us out of a crash causing loop */
 	if (adjustment)
 		g_signal_handler_block(adjustment, scroll_adj_signal);
-#endif
+
 	if (!gtk_widget_get_realized (GTK_WIDGET(widgets.html_text))) return;
 	if (!mod_name)
 		mod_name = ((settings.browsing && (cur_passage_tab != NULL))
@@ -1226,10 +1221,8 @@ void main_display_bible(const char * mod_name,
 		else
 			gui_keep_parallel_dialog_in_sync();
 	}
-#ifndef USE_GTKMOZEMBED
 	if (adjustment)
 		g_signal_handler_unblock(adjustment, scroll_adj_signal);
-#endif
 }
 
 

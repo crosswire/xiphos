@@ -26,12 +26,8 @@
 #include <gtk/gtk.h>
 
 #include <gtk/gtk.h>
-#ifdef GTKHTML
-#include <gtkhtml/gtkhtml.h>
-#include "gui/html.h"
-#endif
 
-#include "../xiphos_html/xiphos_html.h"
+#include "xiphos_html/xiphos_html.h"
 
 #include "editor/slib-editor.h"
 
@@ -63,126 +59,6 @@
 
 //static void create_menu(GdkEventButton * event);
 
-
-/******************************************************************************
- * Name
- *  on_comm_button_press_event
- *
- * Synopsis
- *   #include ".h"
- *
- *  gboolean on_comm_button_press_event(GtkWidget * widget,
-			    GdkEventButton * event, DIALOG_DATA * t)
- *
- * Description
- *   called when mouse button is clicked in html widget
- *
- * Return value
- *   gboolean
- */
-#ifndef USE_XIPHOS_HTML
-static gboolean on_book_button_press_event(GtkWidget * widget,
-					GdkEventButton * event,
-					gpointer data)
-{
-	if (!settings.havebook)
-		return FALSE;
-	switch (event->button) {
-	case 1:
-		break;
-	case 2:
-		break;
-	case 3:
-		gui_menu_popup (NULL, settings.book_mod, NULL);
-		break;
-	}
-	return FALSE;
-}
-
-
-/******************************************************************************
- * Name
- *  on_button_release_event
- *
- * Synopsis
- *   #include "_bibletext.h"
- *
- *  gboolean on_button_release_event(GtkWidget * widget,
-			    GdkEventButton * event, DIALOG_DATA * t)
- *
- * Description
- *   called when mouse button is clicked in html widget
- *
- * Return value
- *   gboolean
- */
-
-extern gboolean in_url;
-
-static gboolean on_book_button_release_event(GtkWidget * widget,
-					GdkEventButton * event,
-					gpointer data)
-{
-#ifdef GTKHTML
-	gchar *key;
-	const gchar *url;
-#endif /*GTKHTML */
-
-	if (!settings.havebook)
-		return FALSE;
-	settings.whichwindow = BOOK_WINDOW;
-
-#ifdef GTKHTML
-	switch (event->button) {
-	case 1:
-		if (in_url)
-			break;
-		key = gui_button_press_lookup(widgets.html_book);
-		if (key) {
-			if (g_strstr_len(key,strlen(key),"*")) {
-				key = g_strdelimit(key, "*", ' ');
-				key = g_strstrip(key);
-				url = g_strdup_printf(
-					"passagestudy.jsp?action=showModInfo&value=1&module=%s",
-					key);
-				main_url_handler(url,TRUE);
-				g_free((gchar*)url);
-				g_free(key);
-				break;
-			}
-			gchar *dict = NULL;
-			if (settings.useDefaultDict)
-				dict =
-				    g_strdup(settings.
-					     DefaultDict);
-			else
-				dict = g_strdup(settings.DictWindowModule);
-
-			main_display_dictionary(dict, key);
-			g_free(key);
-			if (dict)
-				g_free(dict);
-		}
-		break;
-	case 2:
-		if (!in_url)
-			break;
-		url = gtk_html_get_url_at (GTK_HTML(widgets.html_text),
-								event->x,
-								event->y);
-		if (url && (strstr(url,"sword://"))) {
-			gchar **work_buf = g_strsplit (url,"/",4);
-			gui_open_passage_in_new_tab(work_buf[3]);
-			g_strfreev(work_buf);
-		}
-		break;
-	case 3:
-		break;
-	}
-#endif
-	return FALSE;
-}
-#endif /* !USE_XIPHOS_HTML */
 
 /******************************************************************************
  * Name
@@ -255,7 +131,6 @@ void gui_update_gbs_global_ops(gchar * option, gboolean choice)
 }
 
 
-#ifdef USE_XIPHOS_HTML
 static void
 _popupmenu_requested_cb (XiphosHtml *html,
 			     gchar *uri,
@@ -263,7 +138,6 @@ _popupmenu_requested_cb (XiphosHtml *html,
 {
 	gui_menu_popup (html, settings.book_mod, NULL);
 }
-#endif
 
 /******************************************************************************
  * Name
@@ -284,12 +158,7 @@ _popupmenu_requested_cb (XiphosHtml *html,
 GtkWidget *gui_create_book_pane(void)
 {
 	GtkWidget *box;
-/* #ifdef USE_XIPHOS_HTML
-	GtkWidget *eventbox;
-#endif */ /* USE_XIPHOS_HTML */
-#ifndef USE_GTKMOZEMBED
 	GtkWidget *scrolledwindow;
-#endif /* !USE_GTKMOZEMBED */
 	GtkWidget *navbar;
 
 	box = gtk_vbox_new(FALSE, 0);
@@ -297,7 +166,6 @@ GtkWidget *gui_create_book_pane(void)
 
 	navbar = gui_navbar_book_new();
 	gtk_box_pack_start(GTK_BOX(box), navbar, FALSE, FALSE, 0);
-#ifndef  USE_GTKMOZEMBED
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
 	gtk_box_pack_start(GTK_BOX(box), scrolledwindow, TRUE, TRUE, 0);
@@ -305,56 +173,17 @@ GtkWidget *gui_create_book_pane(void)
 				       (scrolledwindow),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
-/*	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow,
-                                             settings.shadow_type);*/
-#endif /* !USE_GTKMOZEMBED */
-#ifdef USE_XIPHOS_HTML
-/*	eventbox = gtk_event_box_new ();
-	gtk_widget_show (eventbox);
-	gtk_box_pack_start(GTK_BOX(box), eventbox, TRUE, TRUE, 0);*/
-	widgets.html_book = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, BOOK_TYPE)); //embed_new(BOOK_TYPE);
+
+	widgets.html_book = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, BOOK_TYPE));
 	gtk_widget_show(widgets.html_book);
- #ifdef USE_WEBKIT  
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
 			 widgets.html_book);
- #else   
-	gtk_box_pack_start(GTK_BOX(box),
-			 widgets.html_book, TRUE, TRUE, 0);
- #endif /* USE_WEBKIT */
 
 	g_signal_connect((gpointer)widgets.html_book,
 		      "popupmenu_requested",
 		      G_CALLBACK (_popupmenu_requested_cb),
 		      NULL);
-#else
-	widgets.html_book = gtk_html_new();
-	gtk_widget_show(widgets.html_book);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow),
-			  widgets.html_book);
-
-	g_signal_connect(G_OBJECT(widgets.html_book), "link_clicked",
-				   G_CALLBACK(gui_link_clicked),
-				   NULL);
-	g_signal_connect(G_OBJECT(widgets.html_book), "on_url",
-				   G_CALLBACK(gui_url),
-				   GINT_TO_POINTER(BOOK_TYPE));
-	g_signal_connect(G_OBJECT(widgets.html_book),
-				   "button_press_event",
-				   G_CALLBACK
-				   (on_book_button_press_event),
-				   NULL);
-	g_signal_connect(G_OBJECT(widgets.html_book),
-				   "button_release_event",
-				   G_CALLBACK
-				   (on_book_button_release_event),
-				   NULL);
-	g_signal_connect(G_OBJECT(widgets.html_book),
-			   "url_requested",
-			   G_CALLBACK(url_requested), NULL);
-#endif
 	return box;
 }
-
-
 
 //******  end of file  ******/

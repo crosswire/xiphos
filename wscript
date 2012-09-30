@@ -55,8 +55,8 @@ def set_options(opt):
 
     maingroup.add_option('--backend',
                    action='store', default='auto', dest='backend',
-                   choices=['auto', 'webkit', 'xulrunner', 'gtkhtml'],
-                   help="Select rendering backend ['auto', 'webkit', 'xulrunner', 'gtkhtml']")
+                   choices=['auto'],
+                   help="Select rendering backend [no selection available, auto webkit only]")
 
     miscgroup = opt.add_option_group('Miscellaneous Options')
 
@@ -94,12 +94,6 @@ def set_options(opt):
             help='Disable console window in win32 [default: enabled]',
             dest='no_console')
 
-    # FIXME - handle this option
-    #w32.add_option('--rootdir',
-		#action = 'store',
-		#help = 'Specify path where resides msys. This dir is used for finding libraries and other files',
-		#dest = 'rootdir')
-
     w32.add_option('--pkgconf-libdir',
 		action = 'store',
 		default = os.path.join(ROOTDIR_WIN32, 'local', 'lib', 'pkgconfig'),
@@ -111,12 +105,6 @@ def set_options(opt):
 		default = os.path.join(ROOTDIR_WIN32, 'local'),
 		help = "Specify prefix with folders for headers and libraries for cross-compilation",
 		dest = 'pkg_conf_prefix')
-
-    w32.add_option('--mozilla-distdir',
-		action = 'store',
-		default = os.path.join(ROOTDIR_WIN32, 'local'),
-		help = "Folder 'dist' in unpacked mozilla devel tarball. Mandatory for win32 compilation",
-		dest = 'mozilla_distdir')
 
     ######### end of windows options.
 
@@ -136,20 +124,6 @@ def set_options(opt):
                    default = True,
                    help = "Disable post-install tasks",
                    dest = 'post_install')
-
-    deprecated_group = opt.add_option_group ('Deprecated options')
-
-    deprecated_group.add_option('--enable-gtkhtml',
-                   action='store_const', const='gtkhtml', dest='backend',
-                   help='Use gtkhtml rendering backend [deprecated by --backend gtkhtml]')
-
-    deprecated_group.add_option('--enable-webkit',
-                   action='store_const', const='webkit', dest='backend',
-                   help='Use gtk-webkit backend [deprecated by --backend webkit]')
-
-    deprecated_group.add_option('--enable-gtk2',
-                   action='store_const', const='2', dest='gtkver',
-                   help='Use gtk2 API [deprecated by --gtk=2]')
 
 def configure(conf):
 
@@ -171,7 +145,7 @@ def configure(conf):
         Utils.pprint('CYAN', "Cross-compilation")
         env['CROSS'] = os.environ['CROSS']
 
-    # IS_WIN32 means compiling for win32, not compiling necessary on win32
+    # IS_WIN32 means compiling for win32, not necessarily compiling on win32
     if env['IS_WIN32']:
         Utils.pprint('CYAN', "Windows detected")
     elif env['IS_LINUX']:
@@ -180,10 +154,6 @@ def configure(conf):
     if not (env['IS_LINUX'] or env['IS_WIN32']):
         Utils.pprint('RED', "Assuming %s is UNIX like platform" % platform)
         env['IS_LINUX'] = True
-
-    ## temporary HACKS for win32
-    #if env['IS_WIN32']:
-    #    env['PREFIX'] = conf.escpath(os.path.abspath('win32/binaries/Xiphos'))
 
     if env['IS_WIN32']:
         env['ROOTDIR'] = ROOTDIR_WIN32
@@ -240,11 +210,6 @@ def configure(conf):
         # this isn't supposed to be necessary
         env['LINKFLAGS'] = ['-lws2_32']
         dfn('WIN32', 1)
-        # mozilla distdir mandatory for win32 for using libxul
-        if opt.mozilla_distdir:
-            env['MOZILLA_DISTDIR'] = opt.mozilla_distdir
-        else:
-            env['MOZILLA_DISTDIR'] = '%s/../..' % env['PKG_CONFIG_LIBDIR']
         # tool to link icon with executable
         # use tool modified for cross-compilation support
         env['POST_INSTALL']=False
@@ -276,16 +241,6 @@ def configure(conf):
                               erromsg='Not found'):
                     opt.backend = 'webkit'
 
-            elif conf.check_cfg(modversion='libxul-embedding', msg='Auto detecting xulrunner', okmsg='ok',
-                              erromsg='Not found'):
-                    opt.backend = 'xulrunner'
-
-            else:
-                    gtkhtml = 'libgtkhtml-4.0' if opt.gtkver == '3' else 'libgtkhtml-3.14'
-                    conf.check_cfg(modversion=gtkhtml, msg='Auto detecting gtkhtml', okmsg='ok',
-                                   erromsg='Not found', mandatory=True)
-                    opt.backend = 'gtkhtml'
-
     #gtk
     if opt.gtkver == '2':
         env['ENABLE_GTK2'] = True
@@ -295,10 +250,6 @@ def configure(conf):
     if opt.backend == 'webkit':
 	env['ENABLE_WEBKIT'] = True
 	dfn('WEBKIT', 1)
-
-    if opt.backend == 'gtkhtml':
-        env['ENABLE_GTKHTML'] = True
-        dfn('GTKHTML', 1)
 
     # disable console window in win32
     if opt.no_console and env['IS_WIN32']:
@@ -471,22 +422,6 @@ def configure(conf):
             conf.define('GECKO_MIN', geckomin)
             conf.define('GECKO_MAX', geckomax)
 
-        else:
-                    d = env['MOZILLA_DISTDIR']
-                    conf.define['CPPPATH_GECKO'] = ['%s/sdk/include' % d,
-                                                '%s/include' % d,
-                                                '%s/include/widget' % d,
-                                                '%s/include/xpcom' % d,
-                                                '%s/include/dom' % d,
-                                                '%s/include/content' % d,
-                                                '%s/include/layout' % d,
-                                                '%s/include/gfx' % d]
-                    conf.define['LIBPATH_GECKO'] = ['%s/sdk/lib' % d]
-                    conf.define['LIB_GECKO'] = ['xpcomglue_s', 'xpcom', 'xul', 'nspr4']
-                    # FIXME: how to detect Gecko-ver on Win similar to pkg-config on unix?
-                    conf.define('GECKO_MIN', '1.9.0.0')
-                    conf.define('GECKO_MAX', '2.0.0.*')
-
         env.append_value('ALL_LIBS', 'NSPR')
         env.append_value('ALL_LIBS', 'GECKO')
         conf.define('USE_GTKMOZEMBED', 1)
@@ -546,14 +481,8 @@ def build(bld):
         src/xiphos_html
         ui
     """)
-    # use GECKO
-    if env['ENABLE_WEBKIT']:
-	bld.add_subdirs('src/webkit')
-    elif not env['ENABLE_GTKHTML']:
-        if env["IS_WIN32"]:
-            bld.add_subdirs('src/geckowin')
-        else:
-            bld.add_subdirs('src/gecko')
+
+    bld.add_subdirs('src/webkit')
             
     if env['IS-WIN32']:
       bld.add_subdirs('win32/include')

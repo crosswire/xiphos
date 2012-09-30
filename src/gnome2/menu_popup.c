@@ -24,10 +24,6 @@
 #endif
 
 #include <gtk/gtk.h>
-#ifdef GTKHTML
-#include <gtkhtml/gtkhtml.h>
-#include "gui/html.h"
-#endif
     
 #ifndef USE_GTKBUILDER
   #include <glade/glade-xml.h>
@@ -39,7 +35,7 @@
 #include <unistd.h>
 #include <ctype.h>
 
-#include "../xiphos_html/xiphos_html.h"
+#include "xiphos_html/xiphos_html.h"
 
 
 #include "gui/menu_popup.h"
@@ -398,33 +394,15 @@ G_MODULE_EXPORT void on_popup_export_passage_activate  (GtkMenuItem     *menuite
  *
  */
 
-G_MODULE_EXPORT void on_popup_print_activate           (GtkMenuItem     *menuitem,
-                                        gpointer         user_data)
+G_MODULE_EXPORT void on_popup_print_activate(GtkMenuItem     *menuitem,
+					     gpointer         user_data)
 {
+	/* there is some weirdness here, from having eliminated gtkhtml3.
+	 * we must understand why this is an interesting conditional.  */
 	if (is_dialog) {
-#ifdef USE_XIPHOS_HTML
-  #ifdef USE_WEBKIT	
 		XIPHOS_HTML_PRINT_DOCUMENT ((XiphosHtml*) user_data);   
-  #else 
-		XIPHOS_HTML_PRINT_DOCUMENT (GTK_WINDOW((XiphosHtml*) user_data), 
-					   dialog->mod_name, 
-					   dialog);   
-  #endif
-#else
-		gui_html_print (dialog->html, FALSE, dialog->mod_name);
-#endif
 	} else {
-#ifdef USE_XIPHOS_HTML   
-  #ifdef USE_WEBKIT	
 		XIPHOS_HTML_PRINT_DOCUMENT ((XiphosHtml*) user_data);   
-  #else 
-		XIPHOS_HTML_PRINT_DOCUMENT (GTK_WINDOW((XiphosHtml*) user_data), 
-					   menu_mod_name, 
-					   NULL);
-  #endif	
-#else
-		gui_html_print (_get_html(), FALSE, menu_mod_name);
-#endif
 	}
 }
 
@@ -471,18 +449,11 @@ G_MODULE_EXPORT void on_close_activate           (GtkMenuItem     *menuitem,
 G_MODULE_EXPORT void on_popup_copy_activate            (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
+	/* ditto above comment re: printing */
 	if (is_dialog) {
-#ifdef USE_XIPHOS_HTML
-	XIPHOS_HTML_COPY_SELECTION (dialog->html);
-#else
-	gui_copy_html (dialog->html);
-#endif
+		XIPHOS_HTML_COPY_SELECTION(dialog->html);
 	} else {
-#ifdef USE_XIPHOS_HTML
-	XIPHOS_HTML_COPY_SELECTION (_get_html ());
-#else
-	gui_copy_html (_get_html ());
-#endif
+		XIPHOS_HTML_COPY_SELECTION(_get_html ());
 	}
 }
 
@@ -1166,19 +1137,10 @@ G_MODULE_EXPORT void on_display_chapter_heading_activate (GtkMenuItem * menuitem
 
 G_MODULE_EXPORT void on_use_current_dictionary_activate (GtkMenuItem * menuitem, gpointer user_data)
 {
-#ifdef USE_XIPHOS_HTML
 	XIPHOS_HTML_COPY_SELECTION(_get_html());
 	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
 	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
 	gtk_widget_activate(widgets.entry_dict);
-#else
-	gchar *dict_key = gui_get_word_or_selection(_get_html(), FALSE);
-	if (dict_key) {
-		gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), dict_key);
-		gtk_widget_activate(widgets.entry_dict);
-		g_free(dict_key);
-	}
-#endif
 }
 
 
@@ -1200,15 +1162,11 @@ G_MODULE_EXPORT void on_lookup_google_activate (GtkMenuItem * menuitem, gpointer
 {
 	gchar *dict_key, *showstr;
 
-#ifdef USE_XIPHOS_HTML
 	XIPHOS_HTML_COPY_SELECTION(_get_html());
 	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
 	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
 	dict_key = g_strdup(gtk_editable_get_chars(
 				(GtkEditable *)widgets.entry_dict,0,-1));
-#else
-	dict_key = gui_get_word_or_selection(_get_html(), FALSE);
-#endif
 
 	if ((dict_key == NULL) || (*dict_key == '\0')) {
 		gui_generic_warning("No selection made");
@@ -1411,7 +1369,7 @@ G_MODULE_EXPORT void on_read_selection_aloud_activate (GtkMenuItem * menuitem, g
 	gchar *dict_key;
 	int len;
 	GtkWidget *html_widget = _get_html();
-#ifdef USE_XIPHOS_HTML
+
 	XIPHOS_HTML_COPY_SELECTION(html_widget);
 	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
 	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
@@ -1419,10 +1377,6 @@ G_MODULE_EXPORT void on_read_selection_aloud_activate (GtkMenuItem * menuitem, g
 		g_strdup(gtk_editable_get_chars(
 			(GtkEditable *)widgets.entry_dict,0,-1));
 	len = (dict_key ? strlen(dict_key) : 0);
-#else
-	GtkHTML *html = GTK_HTML(html_widget);
-	dict_key = gtk_html_get_selection_html(html, &len);
-#endif /* !USE_XIPHOS_HTML */
 
 	if (dict_key && len && *dict_key) {
 		ReadAloud(0, dict_key);
@@ -1474,9 +1428,9 @@ G_MODULE_EXPORT void on_mark_verse_activate (GtkMenuItem * menuitem, gpointer us
  */
 
 #ifdef USE_GTKBUILDER
-G_MODULE_EXPORT void _add_and_check_global_opts (GtkBuilder *gxml,
+G_MODULE_EXPORT void _add_and_check_global_opts(GtkBuilder *gxml,
 #else
-G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
+G_MODULE_EXPORT void _add_and_check_global_opts(GladeXML *gxml,
 #endif
 				 const gchar * mod_name,
 				 GtkWidget * submenu,
@@ -1623,10 +1577,6 @@ G_MODULE_EXPORT void _add_and_check_global_opts (GladeXML *gxml,
 	GTK_CHECK_MENU_ITEM (item)->active = ops->doublespace;
 #endif
 
-#ifndef USE_XIPHOS_HTML
-    	gtk_widget_hide (item);
-#endif
-
 	item = UI_GET_ITEM(gxml, "xrefnotenumbers");
 
     	if ((ops->scripturerefs
@@ -1708,9 +1658,9 @@ static void _lookup_selection(GtkMenuItem *menuitem,
 	gchar *dict_key = NULL;
 	gchar *mod_name = NULL;
 	GtkWidget *html = _get_html ();
+
     	if (!html) return;
 	mod_name = main_module_name_from_description (dict_mod_description);
-#ifdef USE_XIPHOS_HTML
 	XIPHOS_HTML_COPY_SELECTION(html);
 	gtk_editable_select_region ((GtkEditable *)widgets.entry_dict,0,-1);
 	gtk_editable_paste_clipboard ((GtkEditable *)widgets.entry_dict);
@@ -1719,9 +1669,6 @@ static void _lookup_selection(GtkMenuItem *menuitem,
 		g_strdup(gtk_editable_get_chars (
 			(GtkEditable *)widgets.entry_dict,0,-1));
 
-#else
-	dict_key = gui_get_word_or_selection (html, FALSE);
-#endif
 	if (dict_key && mod_name) {
 		main_display_dictionary (mod_name, dict_key);
 	}
@@ -1749,11 +1696,7 @@ static void _lookup_selection(GtkMenuItem *menuitem,
  */
 
 static 
-#ifdef GTKHTML
- GtkWidget * _create_popup_menu (GtkHTML *html, const gchar * mod_name, DIALOG_DATA * d)
-#else
 GtkWidget * _create_popup_menu (XiphosHtml *html, const gchar * mod_name, DIALOG_DATA * d)
-#endif
 {
 	gchar *glade_file;
 #ifdef USE_GTKBUILDER
@@ -1782,45 +1725,22 @@ GtkWidget * _create_popup_menu (XiphosHtml *html, const gchar * mod_name, DIALOG
 	g_free (glade_file);
 	g_return_val_if_fail ((gxml != NULL), NULL);
 
-#ifdef USE_GTKBUILDER
-	GtkWidget *menu 	= GTK_WIDGET (gtk_builder_get_object (gxml, "menu_popup"));
-	GtkWidget *bookmark	= GTK_WIDGET (gtk_builder_get_object (gxml, "bookmark"));
-	GtkWidget *open 	= GTK_WIDGET (gtk_builder_get_object (gxml, "open_module2"));
-	GtkWidget *export_	= GTK_WIDGET (gtk_builder_get_object (gxml, "export_passage"));
-	GtkWidget *close 	= GTK_WIDGET (gtk_builder_get_object (gxml, "close"));
-	GtkWidget *note 	= GTK_WIDGET (gtk_builder_get_object (gxml, "note"));
-	GtkWidget *mark_verse	= GTK_WIDGET (gtk_builder_get_object (gxml, "mark_verse"));
-	GtkWidget *open_edit	= GTK_WIDGET (gtk_builder_get_object (gxml, "open_in_editor"));
-    GtkWidget *mod_opt_sub 	= GTK_WIDGET (gtk_builder_get_object (gxml, "module_options1_menu"));
-
-	GtkWidget *lookup 	= GTK_WIDGET (gtk_builder_get_object (gxml, "lookup_selection1"));
-	GtkWidget *lookup_sub 	= GTK_WIDGET (gtk_builder_get_object (gxml, "lookup_selection1_menu"));
-	GtkWidget *unlock 	= GTK_WIDGET (gtk_builder_get_object (gxml, "unlock_this_module"));
-	GtkWidget *book_heading = GTK_WIDGET (gtk_builder_get_object (gxml, "display_book_heading"));
-	GtkWidget *chapter_heading = GTK_WIDGET (gtk_builder_get_object (gxml, "display_chapter_heading"));
-	GtkWidget *rename_percomm = GTK_WIDGET (gtk_builder_get_object (gxml, "rename_perscomm"));
-    	GtkWidget *dump_percomm = GTK_WIDGET (gtk_builder_get_object (gxml, "dump_perscomm"));
-#else
-	GtkWidget *menu 	= glade_xml_get_widget (gxml, "menu_popup");
-
-	GtkWidget *bookmark	= glade_xml_get_widget (gxml, "bookmark");
-	GtkWidget *open 	= glade_xml_get_widget (gxml, "open_module2"); /*  */
-	GtkWidget *export_	= glade_xml_get_widget (gxml, "export_passage");
-	GtkWidget *close 	= glade_xml_get_widget (gxml, "close");
-	GtkWidget *note 	= glade_xml_get_widget (gxml, "note"); /*  */
-	GtkWidget *mark_verse	= glade_xml_get_widget (gxml, "mark_verse"); /*  */
-	GtkWidget *open_edit	= glade_xml_get_widget (gxml, "open_in_editor");
-
-    GtkWidget *mod_opt_sub 	= GTK_WIDGET (glade_xml_get_widget (gxml, "module_options1_menu")); /*  */
-
-	GtkWidget *lookup 	= glade_xml_get_widget (gxml, "lookup_selection1"); /*  */
-	GtkWidget *lookup_sub 	= glade_xml_get_widget (gxml, "lookup_selection1_menu");
-	GtkWidget *unlock 	= glade_xml_get_widget (gxml, "unlock_this_module");
-	GtkWidget *book_heading = glade_xml_get_widget (gxml, "display_book_heading");
-	GtkWidget *chapter_heading = glade_xml_get_widget (gxml, "display_chapter_heading");
-	GtkWidget *rename_percomm = glade_xml_get_widget (gxml, "rename_perscomm");
-    	GtkWidget *dump_percomm = glade_xml_get_widget (gxml, "dump_perscomm");
-#endif
+	GtkWidget *menu            = UI_GET_ITEM(gxml, "menu_popup");
+	GtkWidget *bookmark        = UI_GET_ITEM(gxml, "bookmark");
+	GtkWidget *open            = UI_GET_ITEM(gxml, "open_module2");
+	GtkWidget *export_         = UI_GET_ITEM(gxml, "export_passage");
+	GtkWidget *close           = UI_GET_ITEM(gxml, "close");
+	GtkWidget *note            = UI_GET_ITEM(gxml, "note");
+	GtkWidget *mark_verse      = UI_GET_ITEM(gxml, "mark_verse");
+	GtkWidget *open_edit       = UI_GET_ITEM(gxml, "open_in_editor");
+	GtkWidget *mod_opt_sub     = UI_GET_ITEM(gxml, "module_options1_menu");
+	GtkWidget *lookup          = UI_GET_ITEM(gxml, "lookup_selection1");
+	GtkWidget *lookup_sub      = UI_GET_ITEM(gxml, "lookup_selection1_menu");
+	GtkWidget *unlock          = UI_GET_ITEM(gxml, "unlock_this_module");
+	GtkWidget *book_heading    = UI_GET_ITEM(gxml, "display_book_heading");
+	GtkWidget *chapter_heading = UI_GET_ITEM(gxml, "display_chapter_heading");
+	GtkWidget *rename_percomm  = UI_GET_ITEM(gxml, "rename_perscomm");
+    	GtkWidget *dump_percomm    = UI_GET_ITEM(gxml, "dump_perscomm");
 
     	GtkWidget *open_sub 	= gtk_menu_new ();
 	GtkWidget *note_sub 	= gtk_menu_new ();
@@ -1862,11 +1782,13 @@ GtkWidget * _create_popup_menu (XiphosHtml *html, const gchar * mod_name, DIALOG
 		gui_add_mods_2_gtk_menu (PERCOMM_LIST, note_sub,
 				(GCallback) on_edit_percomm_activate);
 		break;
+
 	case COMMENTARY_TYPE:
 		gtk_widget_show(export_);
 		gtk_widget_show(book_heading);
 		gtk_widget_show(chapter_heading);
 		break;
+
 	case PERCOM_TYPE:
 		gtk_widget_show(export_);
    		gtk_widget_show (open_edit);
@@ -1878,19 +1800,19 @@ GtkWidget * _create_popup_menu (XiphosHtml *html, const gchar * mod_name, DIALOG
 		gtk_widget_show (rename_percomm);
 		gtk_widget_show (dump_percomm);
 		break;
+
 	case DICTIONARY_TYPE:
-
 		break;
+
 	case BOOK_TYPE:
-
 		break;
+
 	case PRAYERLIST_TYPE:
    		gtk_widget_show (open_edit);
 		g_signal_connect (G_OBJECT(open_edit),
 			 	"activate",
 			 	G_CALLBACK (on_edit_prayerlist_activate),
 			 	(gchar*) (is_dialog ? d->mod_name : mod_name));
-
 		break;
 	}
 
@@ -1936,11 +1858,7 @@ GtkWidget * _create_popup_menu (XiphosHtml *html, const gchar * mod_name, DIALOG
  *   void
  */
 
-#ifdef GTKHTML
-void gui_menu_popup (GtkHTML *html, const gchar * mod_name, DIALOG_DATA * d)
-#else
 void gui_menu_popup (XiphosHtml *html, const gchar * mod_name, DIALOG_DATA * d)
-#endif /* GTKHTML */
 {
 	GtkWidget *menu;
 

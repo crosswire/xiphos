@@ -25,11 +25,7 @@
 
 #include <gtk/gtk.h>
 
-#include "../xiphos_html/xiphos_html.h"
-#ifdef GTKHTML
-#include <gtkhtml/gtkhtml.h>
-#include "gui/html.h"
-#endif
+#include "xiphos_html/xiphos_html.h"
 
 #include "gui/about_modules.h"
 #include "gui/utilities.h"
@@ -75,11 +71,7 @@ on_copy_activate(GtkMenuItem * menuitem,
 		 gpointer data)
 {
 	GS_message(("on_copy_activate"));
-#ifdef USE_XIPHOS_HTML
 	XIPHOS_HTML_COPY_SELECTION(text_html);
-#else
-	gui_copy_html(text_html);
-#endif
 }
 
 static void
@@ -105,44 +97,6 @@ create_menu1(void)
 					gtk_get_current_event_time());
 }
 
-/******************************************************************************
- * Name
- *  on_button_press_event
- *
- * Synopsis
- *   #include "about_modules.h"
- *
- *  gboolean on_button_press_event(GtkWidget * widget,
-			    GdkEventButton * event, gpointer data)
- *
- * Description
- *   called when mouse button is clicked in html widget
- *
- * Return value
- *   gboolean
- */
-#ifndef USE_XIPHOS_HTML
-static gboolean
-on_button_release_event(GtkWidget * widget,
-			GdkEventButton * event,
-			gpointer data)
-{
-	switch (event->button) {
-	case 1:
-		break;
-	case 2:
-
-		break;
-	case 3:
-		create_menu1();
-		break;
-	}
-	return FALSE;
-}
-#endif /* 0 */
-
-
-#ifdef USE_XIPHOS_HTML
 static void
 _popupmenu_requested_cb (XiphosHtml *html,
 			gchar *uri,
@@ -150,7 +104,7 @@ _popupmenu_requested_cb (XiphosHtml *html,
 {
 	create_menu1();
 }
-#endif
+
 
 /******************************************************************************
  * Name
@@ -223,20 +177,14 @@ gui_create_about_modules(void)
 				       GTK_POLICY_ALWAYS);
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow30,
                                              settings.shadow_type);
-#ifdef USE_XIPHOS_HTML
+
 	text_html = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, 12));
 	gtk_widget_show(text_html);
 	g_signal_connect((gpointer)text_html,
 		      "popupmenu_requested",
 		      G_CALLBACK (_popupmenu_requested_cb),
 		      NULL);
-#else
-	text_html = gtk_html_new();
-	gtk_widget_show(text_html);
-	g_signal_connect(G_OBJECT(text_html),"button_release_event",
-				G_CALLBACK(on_button_release_event),
-				NULL);
-#endif
+
 	gtk_container_add(GTK_CONTAINER(scrolledwindow30), text_html);
 	dialog_action_area28 =
                 gtk_dialog_get_action_area(GTK_DIALOG(dialog_about_mods));

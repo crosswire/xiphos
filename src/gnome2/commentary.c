@@ -25,13 +25,8 @@
 
 #include <errno.h>
 #include <gtk/gtk.h>
-#ifdef GTKHTML
-#include <gtkhtml/gtkhtml.h>
-#include "gui/html.h"
-#endif
 
-
-#include "../xiphos_html/xiphos_html.h"
+#include "xiphos_html/xiphos_html.h"
 
 #include "gui/dialog.h"
 #include "gui/commentary.h"
@@ -88,129 +83,6 @@ void access_to_edit_percomm()
 }
 
 
-
-#ifndef USE_XIPHOS_HTML
-/******************************************************************************
- * Name
- *  on_comm_button_press_event
- *
- * Synopsis
- *   #include ".h"
- *
- *  gboolean on_comm_button_press_event(GtkWidget * widget,
-			    GdkEventButton * event, DIALOG_DATA * t)
- *
- * Description
- *   called when mouse button is clicked in html widget
- *
- * Return value
- *   gboolean
- */
-static gboolean on_comm_button_press_event(GtkWidget * widget,
-					GdkEventButton * event,
-					gpointer data)
-{
-	switch (event->button) {
-	case 1:
-		break;
-	case 2:
-		break;
-	case 3:
-    		gui_menu_popup (NULL, settings.CommWindowModule, NULL);
-		break;
-	}
-	return FALSE;
-}
-
-
-/******************************************************************************
- * Name
- *  on_button_release_event
- *
- * Synopsis
- *   #include "commentary.h"
- *
- *  gboolean on_button_release_event(GtkWidget * widget,
-			    GdkEventButton * event, DIALOG_DATA * t)
- *
- * Description
- *   called when mouse button is clicked in html widget
- *
- * Return value
- *   gboolean
- */
-
-extern gboolean in_url;
-
-static gboolean on_comm_button_release_event(GtkWidget * widget,
-					GdkEventButton * event,
-					gpointer data)
-{
-//#ifdef GTKHTML
-	gchar *key;
-	const gchar *url;
-
-	settings.whichwindow = COMMENTARY_WINDOW;
-
-	switch (event->button) {
-	case 1:
-		if (in_url)
-			break;
-		key = gui_button_press_lookup(widgets.html_comm);
-		if (key) {
-			if (g_strstr_len(key,strlen(key),"*")) {
-				key = g_strdelimit(key, "*", ' ');
-				key = g_strstrip(key);
-				url = g_strdup_printf(
-					"passagestudy.jsp?action=showModInfo&value=1&module=%s",
-					key);
-				main_url_handler(url,TRUE);
-				g_free((gchar*)url);
-				g_free(key);
-				break;
-			}
-			gchar *dict = NULL;
-			if (settings.useDefaultDict)
-				dict =
-				    g_strdup(settings.
-					     DefaultDict);
-			else
-				dict =
-				    g_strdup(settings.
-					     DictWindowModule);
-			main_display_dictionary(dict, key);
-			g_free(key);
-			if (dict)
-				g_free(dict);
-		}
-		break;
-	case 2:
-		if (!in_url)
-			break;
-
-		url = gtk_html_get_url_at (GTK_HTML(widgets.html_comm),
-								event->x,
-								event->y);
-
-		if (url) {
-			if (strstr(url,"sword://")) {
-				gchar **work_buf = g_strsplit (url,"/",4);
-				gui_open_passage_in_new_tab(work_buf[3]);
-				g_strfreev(work_buf);
-			}
-		} else {
-			gui_generic_warning("Middle-click invalid.");
-		}
-		break;
-	case 3:
-		break;
-	}
-//#endif /* GTKHTML */
-	return FALSE;
-}
-#endif /* !USE_XIPHOS_HTML */
-
-#ifdef USE_XIPHOS_HTML
 static gboolean on_enter_notify_event(GtkWidget * widget,
 				      GdkEventCrossing * event,
 				      gpointer user_data)
@@ -225,13 +97,12 @@ static gboolean on_enter_notify_event(GtkWidget * widget,
 
 static void
 _popupmenu_requested_cb (XiphosHtml *html,
-			     gchar *uri,
-			     gpointer user_data)
+			 gchar *uri,
+			 gpointer user_data)
 {
 	//g_print ("in comm _popupmenu_requested_cb\n");
     	gui_menu_popup (html, settings.CommWindowModule, NULL);
 }
-#endif
 
 /******************************************************************************
  * Name
@@ -262,7 +133,7 @@ GtkWidget *gui_create_commentary_pane(void)
 	gtk_box_pack_start(GTK_BOX(box_comm),
 			   scrolledwindow, TRUE,
 			   TRUE, 0);
-#ifdef USE_XIPHOS_HTML
+
 	widgets.html_comm = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, COMMENTARY_TYPE));
 	gtk_widget_show(widgets.html_comm);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
@@ -276,39 +147,6 @@ GtkWidget *gui_create_commentary_pane(void)
 		    G_CALLBACK (on_enter_notify_event),
 		    NULL);
 
-#else
-
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow),
-				       GTK_POLICY_AUTOMATIC,
-				       GTK_POLICY_AUTOMATIC);
-	/*gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow,
-                                             settings.shadow_type);*/
-
-	widgets.html_comm = gtk_html_new();
-	gtk_widget_show(widgets.html_comm);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow),
-			  widgets.html_comm);
-	g_signal_connect(G_OBJECT(widgets.html_comm), "link_clicked",
-				   G_CALLBACK(gui_link_clicked),
-				   NULL);
-	g_signal_connect(G_OBJECT(widgets.html_comm), "on_url",
-				   G_CALLBACK(gui_url),
-				   GINT_TO_POINTER(COMMENTARY_TYPE));
-	g_signal_connect(G_OBJECT(widgets.html_comm),
-				   "button_press_event",
-				   G_CALLBACK
-				   (on_comm_button_press_event),
-				   NULL);
-	g_signal_connect(G_OBJECT(widgets.html_comm),
-				   "button_release_event",
-				   G_CALLBACK
-				   (on_comm_button_release_event),
-				   NULL);
-	g_signal_connect(G_OBJECT(widgets.html_comm),
-			   "url_requested",
-			   G_CALLBACK(url_requested), NULL);
-#endif
 	return box_comm;
 }
 

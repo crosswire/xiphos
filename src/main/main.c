@@ -36,13 +36,11 @@
 #include "gui/tabbed_browser.h"
 #include "gui/xiphos.h"
 #include "gui/utilities.h"
-//#include "gui/widgets.h"
 
 #include "main/sword.h"
 #include "main/url.hh"
 #include "main/xml.h"
-#include "../xiphos_html/xiphos_html.h"
-//#include "backend/sword.h"
+#include "xiphos_html/xiphos_html.h"
 
 #include "gui/debug_glib_null.h"
 
@@ -207,24 +205,18 @@ int main(int argc, char *argv[])
 
 	gui_splash_init();
 
-#ifdef USE_XIPHOS_HTML
-
 	gui_splash_step(_("Initiating HTML"), 0.0, 0);
-	
 	XIPHOS_HTML_INITIALIZE();
 
 	base_step = 1;
-#endif
-	gui_splash_step(_("Building Interface"), 0.2, 0 + base_step);
 
+	gui_splash_step(_("Building Interface"), 0.2, 0 + base_step);
 	create_mainwindow();
 
 	gui_splash_step(_("Starting Sword"), 0.5, 1 + base_step);
-
 	main_init_backend();
 
 	gui_splash_step(_("Loading Settings"), 0.8, 2 + base_step);
-
 	frontend_init();
 
 	gui_splash_step(_("Displaying Xiphos"), 1.0, 3 + base_step);
