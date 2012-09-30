@@ -669,8 +669,8 @@ void main_dialogs_dictionary_entry_changed(DIALOG_DATA * d)
 		height = gdk_window_get_height(GDK_WINDOW(d->listview));
 #else          
 		gdk_drawable_get_size ((GdkDrawable *)d->listview->window,
-                                             NULL,
-                                             &height);
+				       NULL,
+				       &height);
 #endif
 		count = height / settings.cell_height;
 	}

@@ -795,6 +795,7 @@ static GtkWidget* tab_widget_new(PASSAGE_TAB_INFO *tbinf, const gchar *label_tex
 	tbinf->button_close = gtk_button_new();
 	gtk_button_set_image(GTK_BUTTON(tbinf->button_close), tmp_toolbar_icon);
 	gtk_button_set_relief(GTK_BUTTON(tbinf->button_close), GTK_RELIEF_NONE);
+
 #ifndef USE_GTK_3
 	gtk_rc_parse_string (
 		"style \"tab-button-style\"\n"
@@ -810,12 +811,15 @@ static GtkWidget* tab_widget_new(PASSAGE_TAB_INFO *tbinf, const gchar *label_tex
 		"widget \"*.button-close\" style \"tab-button-style\"");
         gtk_widget_set_name(GTK_WIDGET (tbinf->button_close), "button-close");
 #endif
+
 	gtk_widget_set_size_request(tbinf->button_close, 18, 16);
+
 #ifdef USE_GTK_3
 	gtk_widget_get_preferred_size(tbinf->button_close,  &r0, &r);
 #else	
 	gtk_widget_size_request(tbinf->button_close, &r);
 #endif
+
 	gtk_widget_set_sensitive(tbinf->button_close, FALSE);
 	gtk_widget_show(tbinf->button_close);
 	tbinf->tab_label = GTK_LABEL(gtk_label_new (label_text));
@@ -838,6 +842,7 @@ static GtkWidget* tab_widget_new(PASSAGE_TAB_INFO *tbinf, const gchar *label_tex
 	gtk_widget_modify_fg (tbinf->button_close, GTK_STATE_PRELIGHT, &color);
 	gtk_widget_modify_fg (tbinf->button_close, GTK_STATE_SELECTED, &color);
 #endif
+
 	box = gtk_hbox_new(FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(box), GTK_WIDGET(tbinf->tab_label),
 			   TRUE, TRUE, 0);
@@ -871,11 +876,14 @@ static GtkWidget* tab_widget_new(PASSAGE_TAB_INFO *tbinf, const gchar *label_tex
  */
 #ifdef USE_GTK_3
 void gui_notebook_main_switch_page(GtkNotebook * notebook,
-					 gpointer arg, gint page_num, GList **tl)
+				   gpointer arg,
+				   gint page_num,
+				   GList **tl)
 #else
 void gui_notebook_main_switch_page(GtkNotebook * notebook,
-					 GtkNotebookPage * page,
-					 gint page_num, GList **tl)
+				   GtkNotebookPage * page,
+				   gint page_num,
+				   GList **tl)
 #endif
 {
 	gboolean comm_showing;

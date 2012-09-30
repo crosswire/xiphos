@@ -43,7 +43,7 @@
 #include "main/xml.h"
 #include "main/display.hh"
 
-#include "../xiphos_html/xiphos_html.h"
+#include "xiphos_html/xiphos_html.h"
 
 #include "gui/debug_glib_null.h"
 
@@ -881,11 +881,9 @@ void main_update_parallel_page_detached(void)
 	gchar buf[500];
 	gint modidx, parallel_count, fraction;
 
-	if (!widgets.html_parallel_dialog 
-#ifdef USE_XIPHOS_HTML
-	    || !gtk_widget_get_realized(GTK_WIDGET(widgets.html_parallel_dialog))
-#endif
-	    ) return;
+	if (!widgets.html_parallel_dialog ||
+	    !gtk_widget_get_realized(GTK_WIDGET(widgets.html_parallel_dialog)))
+		return;
 
 	/* how big a pile of parallels have we got? */
 	if (settings.parallel_list == NULL)

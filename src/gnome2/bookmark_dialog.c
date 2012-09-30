@@ -39,7 +39,7 @@
 #include "main/settings.h"
 #include "main/xml.h"
 
-#include "../xiphos_html/xiphos_html.h"
+#include "xiphos_html/xiphos_html.h"
 
 #include "gui/debug_glib_null.h"
 
@@ -300,13 +300,7 @@ void on_mark_verse_response(GtkDialog * dialog,
 		break;
 	case GTK_RESPONSE_ACCEPT: /*  mark the verse  */
 		xml_set_list_item("osisrefmarkedverses", "markedverse",
-				  reference, (note ?
-#ifdef USE_XIPHOS_HTML
-					      note
-#else
-					      g_strdelimit(note, "\"", '\'')
-#endif /* !USE_XIPHOS_HTML */
-					      : "user content"));
+				  reference, (note ? note : "user content"));
 		marked_cache_fill(settings.MainWindowModule, settings.currentverse);
 		main_display_bible(NULL, settings.currentverse);
 		break;

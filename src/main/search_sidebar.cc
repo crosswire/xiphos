@@ -27,15 +27,9 @@
 #include <ctype.h>
 #include <swmodule.h>
 
-
-#ifdef __cplusplus
 extern "C" {
-#endif
 #include <gtkhtml/gtkhtml.h>
-#ifdef __cplusplus
 }
-#endif
-
 
 #include "main/search_dialog.h"
 #include "main/search_sidebar.h"

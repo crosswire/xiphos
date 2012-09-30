@@ -24,11 +24,8 @@
 #endif
 
 #include <gtk/gtk.h>
-#ifdef GTKHTML
-#include <gtkhtml/gtkhtml.h>
-#include "gui/html.h"
-#endif
-#include "../xiphos_html/xiphos_html.h"
+
+#include "xiphos_html/xiphos_html.h"
                                   
 #include "gui/display_info.h"
 
@@ -94,18 +91,9 @@ void gui_display_mod_and_key(const gchar * mod_name, const gchar * key)
 
 void gui_display_text_information(gchar * information)
 {
-#ifdef USE_XIPHOS_HTML
 	XIPHOS_HTML_OPEN_STREAM(html_widget, "text/html");
 	XIPHOS_HTML_WRITE(html_widget,information,strlen(information));
 	XIPHOS_HTML_CLOSE(html_widget);
-#else
-	gboolean was_editable = gtk_html_get_editable(GTK_HTML(html_widget));
-	if (was_editable)
-		gtk_html_set_editable(GTK_HTML(html_widget), FALSE);
-
-	gtk_html_load_from_string(GTK_HTML(html_widget),information,strlen(information));
-	gtk_html_set_editable(GTK_HTML(html_widget), was_editable);
-#endif
 }
 
 /******************************************************************************
@@ -173,9 +161,6 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 
 	GtkWidget *dialog_vbox23;
 	GtkWidget *hbox;
-#ifndef USE_XIPHOS_HTML
-	GtkWidget *scrolledwindow70;
-#endif /* !USE_XIPHOS_HTML */
 	GtkWidget *dialog_action_area23;
 	GtkWidget *hbuttonbox2;
 	GtkWidget *button_close;
@@ -216,25 +201,10 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 	gtk_box_pack_start(GTK_BOX(hbox), image, FALSE, TRUE,
 			   0);
 	gtk_misc_set_alignment(GTK_MISC(image), 0.5, 0);
-#ifdef USE_XIPHOS_HTML
 	html_widget = GTK_WIDGET(XIPHOS_HTML_NEW(NULL,FALSE,30));//gtk_html_new();
 	gtk_widget_show(html_widget);
 	gtk_box_pack_start(GTK_BOX(hbox), html_widget, TRUE, TRUE, 0);
-#else
-
-	scrolledwindow70 = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_show(scrolledwindow70);
-	gtk_box_pack_start(GTK_BOX(hbox), scrolledwindow70, TRUE, TRUE,
-			   0);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow70),
-				       GTK_POLICY_NEVER,
-				       GTK_POLICY_AUTOMATIC);
-	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow70,
-                                             settings.shadow_type);
-#endif
 	//gtk_container_add(GTK_CONTAINER(scrolledwindow70), html_widget);
-
 
 	dialog_action_area23 =
 	   gtk_dialog_get_action_area (GTK_DIALOG (dialog_display_info));
@@ -265,7 +235,6 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 			   "destroy",
 			   G_CALLBACK(on_dlgInformation_destroy),
 			   NULL);
-
 
 	gtk_widget_show(dialog_display_info);
 	gsI_isrunning = TRUE;

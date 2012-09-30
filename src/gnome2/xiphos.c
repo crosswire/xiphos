@@ -68,7 +68,7 @@
 #include "main/lists.h"
 #include "main/xml.h"
 
-#include "../xiphos_html/xiphos_html.h"
+#include "xiphos_html/xiphos_html.h"
 
 #include "gui/debug_glib_null.h"
 
@@ -196,10 +196,9 @@ void frontend_display(const char *tabs)
 
  	gtk_window_move(GTK_WINDOW(widgets.app),settings.app_x,settings.app_y);
 
-#ifdef USE_XIPHOS_HTML
 	/* gecko  needs the widgets to be visible before writing */
 	sync_windows();
-#endif
+
 	// setup passage notebook
 //	if (settings.browsing) {
 	gui_notebook_main_setup (settings.browsing, tabs);
@@ -301,10 +300,9 @@ void shutdown_frontend(void)
 	xml_free_settings_doc();
 
 	main_shutdown_list();
-#ifdef USE_XIPHOS_HTML
+
 	XIPHOS_HTML_SHUTDOWN();
-#endif
-//	if(settings.browsing)
+
 	gui_notebook_main_shutdown (settings.browsing);
 
 	/* free dir and file stuff */

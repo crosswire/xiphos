@@ -2025,12 +2025,14 @@ clear_and_hide_progress_bar(void)
 void
 on_notebook1_switch_page(GtkNotebook * notebook,
 			 gpointer arg,
-             guint page_num, gpointer user_data)
+			 guint page_num,
+			 gpointer user_data)
 #else
 void
 on_notebook1_switch_page(GtkNotebook * notebook,
 			 GtkNotebookPage * page,
-			 guint page_num, gpointer user_data)
+			 guint page_num,
+			 gpointer user_data)
 #endif
 {
 	gchar *str;

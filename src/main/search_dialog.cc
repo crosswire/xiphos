@@ -26,15 +26,9 @@
 #include <regex.h>
 #include <swbuf.h>
 #include <swmodule.h>
-#define XIPHOS_HTML_EXTERN_C
-#include "../xiphos_html/xiphos_html.h"   
-      #ifdef __cplusplus
-        extern "C" {
-#ifdef GTKHTML
-#include <gtkhtml/gtkhtml.h>
-#endif
-} 
-#endif
+
+#include "xiphos_html/xiphos_html.h"   
+
 #include "main/previewer.h"
 #include "main/search_dialog.h"
 #include "main/settings.h"
@@ -945,7 +939,6 @@ void main_finds_verselist_selection_changed(GtkTreeSelection * selection,
 	text_str = g_string_new(backendSearch->get_render_text(module,key));
 	mark_search_words(text_str);
 
-#ifdef USE_XIPHOS_HTML
 	GString *html_text = g_string_new("");
 	MOD_FONT *mf = get_font(module);
 	g_string_printf(html_text,
@@ -964,10 +957,6 @@ void main_finds_verselist_selection_changed(GtkTreeSelection * selection,
 			 html_text->str, html_text->len);
 	XIPHOS_HTML_CLOSE(search1.preview_html);
 	g_string_free(html_text, TRUE);
-#else
-	gtk_html_load_from_string(GTK_HTML(search1.preview_html),
-				  text_str->str, text_str->len);
-#endif
 
 	GS_message(("main_finds_verselist_selection_changed: %s %s", module, key));
 

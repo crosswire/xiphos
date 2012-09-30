@@ -32,7 +32,6 @@
 
 #include "gui/debug_glib_null.h"
 
-//static GtkWidget *gs_dialog;
 static GtkWidget *entry1 = NULL;
 static GtkWidget *entry2 = NULL;
 static GtkWidget *entry3 = NULL;
@@ -173,17 +172,13 @@ static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 	GtkWidget *label7;
 	GtkWidget *label10;
 	GtkWidget *dialog_action_area2;
-//	GtkWidget *cancelbutton1;
-//	GtkWidget *okbutton2;
 	GtkWidget *scrolledwindow;
 	GtkWidget *viewport;
 
 	dialog_alert = gtk_dialog_new();
 	gtk_container_set_border_width(GTK_CONTAINER(dialog_alert), 5);
 	gtk_window_set_title(GTK_WINDOW(dialog_alert), " ");
-	//gtk_window_set_resizable(GTK_WINDOW(dialog_alert), FALSE);
     
-
 #ifndef USE_GTK_3
 	gtk_dialog_set_has_separator(GTK_DIALOG(dialog_alert), FALSE);
 #endif

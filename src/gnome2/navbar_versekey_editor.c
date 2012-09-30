@@ -36,7 +36,6 @@
 #include "gui/tabbed_browser.h"
 #include "gui/utilities.h"
 
-//#include "main/module_dialogs.h"
 #include "main/navbar_versekey.h"
 #include "main/settings.h"
 #include "main/sword.h"

@@ -24,12 +24,8 @@
 #endif
 
 #include <gtk/gtk.h>
-#ifdef GTKHTML
-#include <gtkhtml/gtkhtml.h>
-#include "gui/html.h"
-#endif
-#include "../xiphos_html/xiphos_html.h"
 
+#include "xiphos_html/xiphos_html.h"
 
 #include "gui/commentary_dialog.h"
 #include "gui/dialog.h"
@@ -48,10 +44,6 @@
 #include "main/display.hh"
 
 #include "gui/debug_glib_null.h"
-
-#ifndef USE_XIPHOS_HTML
-void commentary_prefixable_link(GtkHTML *html, const gchar *url, gpointer data);
-#endif
 
 extern gboolean dialog_freed;
 extern gboolean do_display;
@@ -139,98 +131,6 @@ static gboolean on_dialog_motion_notify_event(GtkWidget *widget,
 }
 
 
-
-#ifndef USE_XIPHOS_HTML
-/******************************************************************************
- * Name
- *   dialog_url
- *
- * Synopsis
- *   #include "commentary_dialog.h"
- *
- *   void dialog_url(GtkHTML * html, const gchar * url, DIALOG_DATA * d)
- *
- * Description
- *
- *
- * Return value
- *   void
- */
-
-static void dialog_url(GtkHTML *html,
-		       const gchar *url,
-		       DIALOG_DATA *d)
-{
-	cur_d = d;
-}
-
-/******************************************************************************
- * Name
- *  html_button_pressed
- *
- * Synopsis
- *   #include "gui/commentary_dialog.h"
- *
- *   gint html_button_pressed(GtkWidget * html, GdkEventButton * event,
- *					DIALOG_DATA * d)
- *
- * Description
- *    mouse button pressed in window - used to set cur_d to the current
- *    commentary dialog structure
- *
- * Return value
- *   gint
- */
-
-static gint button_press_event(GtkWidget *html,
-			       GdkEventButton *event,
-			       DIALOG_DATA *d)
-{
-	cur_d = d;
-	switch (event->button) {
-	case 1:
-		break;
-	case 2:
-		break;
-	case 3:
-		gui_menu_popup (NULL, NULL, d);
-		//create_menu(d, event);
-		break;
-	}
-	return FALSE;
-}
-
-
-/******************************************************************************
- * Name
- *   commentary_prefixable_link
- *
- * Synopsis
- *   #include ".h"
- *
- *   void commentary_prefixable_link(void)
- *
- * Description
- *    front-end-ish handler for xref clicks, to supply book name to prefix.
- *o
- * Return value
- *   void
- */
-
-void commentary_prefixable_link(GtkHTML *html,
-				const gchar *url,
-				gpointer data)
-{
-	gchar buf[32];
-
-	cur_d = data;
-	strcpy(buf, cur_d->key);
-	*(strrchr(buf, ' ')) = '\0';
-	gui_prefixable_link_clicked(html, url, data, buf);
-}
-#endif /* !USE_XIPHOS_HTML */
-
-
 /******************************************************************************
  * Name
  *   sync_with_main
@@ -279,7 +179,6 @@ static GtkWidget *create_nav_toolbar(DIALOG_DATA *d)
 	return gui_navbar_versekey_dialog_new(d);
 }
 
-#ifdef USE_XIPHOS_HTML
 static void
 _popupmenu_requested_cb (XiphosHtml *html,
 			 gchar *uri,
@@ -288,7 +187,6 @@ _popupmenu_requested_cb (XiphosHtml *html,
     	gui_menu_popup (html, cur_d->mod_name, cur_d);
 	//gui_commentary_dialog_create_menu(d);
 }
-#endif /* USE_XIPHOS_HTML */
 
 /******************************************************************************
  * Name
@@ -359,7 +257,6 @@ void gui_create_commentary_dialog(DIALOG_DATA *d,
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
 					    scrolledwindow38,
 					    settings.shadow_type);
-#ifdef USE_XIPHOS_HTML
 
 	d->html = GTK_WIDGET(XIPHOS_HTML_NEW(((DIALOG_DATA*) d),TRUE,DIALOG_COMMENTARY_TYPE));
 
@@ -369,26 +266,6 @@ void gui_create_commentary_dialog(DIALOG_DATA *d,
 		      "popupmenu_requested",
 		      G_CALLBACK (_popupmenu_requested_cb),
 		      (DIALOG_DATA*)d);
-#else
-	d->html = gtk_html_new();
-	gtk_widget_show(d->html);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow38),
-			  d->html);
-	gtk_html_load_empty(GTK_HTML(d->html));
-
-#ifndef USE_XIPHOS_HTML
-	g_signal_connect(G_OBJECT(d->html),
-			 "link_clicked",
-			 G_CALLBACK(commentary_prefixable_link), d);
-#endif
-
-	g_signal_connect(G_OBJECT(d->html), "on_url",
-			 G_CALLBACK(dialog_url), d);
-	g_signal_connect(G_OBJECT(d->html),
-			 "button_press_event",
-			 G_CALLBACK(button_press_event), d);
-
-#endif  /* !USE_XIPHOS_HTML */
 
 	g_signal_connect(G_OBJECT(d->dialog), "destroy",
 			 G_CALLBACK(on_dialog_destroy), d);

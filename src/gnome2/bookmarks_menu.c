@@ -28,7 +28,7 @@
 #ifndef USE_GTKBUILDER
   #include <glade/glade-xml.h>
 #endif
-//#include <gal/shortcut-bar/e-shortcut-bar.h>
+
 #include <math.h>
 #include <ctype.h>
 #include <sys/types.h>

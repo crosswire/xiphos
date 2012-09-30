@@ -24,15 +24,11 @@
 #endif
 
 #include <gtk/gtk.h>
-#ifdef GTKHTML
-#include <gtkhtml/gtkhtml.h>
-#include "gui/html.h"
-#endif
 #ifndef USE_GTKBUILDER
   #include <glade/glade-xml.h>
 #endif
 
-#include "../xiphos_html/xiphos_html.h"
+#include "xiphos_html/xiphos_html.h"
 
 #include <regex.h>
 #include <string.h>
@@ -180,9 +176,7 @@ void button_clean(GtkButton * button, gpointer user_data)
 {
 	GtkTreeModel *model;
 	GtkListStore *list_store;
-#ifdef USE_XIPHOS_HTML
 	GString *html_text = g_string_new("");
-#endif
 
 	GS_message(("button_clean"));
 	model = gtk_tree_view_get_model(GTK_TREE_VIEW(search1.listview_results));
@@ -193,16 +187,12 @@ void button_clean(GtkButton * button, gpointer user_data)
 	list_store = GTK_LIST_STORE(model);
 	gtk_list_store_clear(list_store);
 
-#ifdef USE_XIPHOS_HTML
 	g_string_printf(html_text, HTML_START "<body text=\"%s\" bgcolor=\"%s\"> </body></html>",
 			settings.bible_text_color, settings.bible_bg_color);
 	XIPHOS_HTML_OPEN_STREAM(search1.preview_html,"text/html");
 	XIPHOS_HTML_WRITE(search1.preview_html,html_text->str,html_text->len);
 	XIPHOS_HTML_CLOSE(search1.preview_html);
 	g_string_free(html_text,TRUE);
-#else
-	gtk_html_load_from_string(GTK_HTML(search1.preview_html), " ", 1);
-#endif
 }
 
 /******************************************************************************
@@ -1500,11 +1490,7 @@ void _add_html_widget(GtkWidget * vbox)
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
 					    scrolledwindow,
 					    settings.shadow_type);
-#ifdef USE_XIPHOS_HTML
 	search1.preview_html = GTK_WIDGET(XIPHOS_HTML_NEW(NULL, FALSE, DIALOG_SEARCH_PREVIEW_TYPE));
-#else	
-	search1.preview_html = gtk_html_new();
-#endif
 	gtk_container_add(GTK_CONTAINER(scrolledwindow), search1.preview_html);
 	gtk_box_pack_start(GTK_BOX(scrolledwindow), search1.preview_html, TRUE, TRUE, 0);
 	gtk_widget_show(search1.preview_html);

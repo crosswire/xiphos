@@ -41,31 +41,7 @@
 #include <ctype.h>
 #include <assert.h>
 
-#ifdef USE_GTKMOZEMBED
-#ifndef USE_XIPHOS_HTML
-# define USE_XIPHOS_HTML
-#endif
-# ifdef PACKAGE_BUGREPORT
-#  undef PACKAGE_BUGREPORT
-# endif
-# ifdef PACKAGE_NAME
-#  undef PACKAGE_NAME
-# endif
-# ifdef PACKAGE_STRING
-#  undef PACKAGE_STRING
-# endif
-# ifdef PACKAGE_TARNAME
-#  undef PACKAGE_TARNAME
-# endif
-# ifdef PACKAGE_VERSION
-#  undef PACKAGE_VERSION
-# endif
-#endif /* USE_GTKMOZEMBED */
-#ifdef USE_WEBKIT
-#ifndef USE_XIPHOS_HTML
-# define USE_XIPHOS_HTML
-#endif
-#endif
+#include "xiphos_html/xiphos_html.h"
 
 #include "main/display.hh"
 #include "main/settings.h"
@@ -138,11 +114,7 @@ struct replace {
     { '<',  (gchar *)"&lt;"   },
     { '>',  (gchar *)"&gt;"   },
     { '\n', (gchar *)"<br />" },
-#ifdef USE_XIPHOS_HTML
     { '"',  (gchar *)"&quot;" },
-#else
-    { '"',  (gchar *)"'" },
-#endif /* !USE_XIPHOS_HTML */
 };
 
 void
@@ -310,11 +282,7 @@ ClearFontFaces(gchar *text)
 // we garbage-collect here so block_render doesn't have to.
 //
 
-#ifdef USE_XIPHOS_HTML
 #define	ALIGN_WORD	"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-#else
-#define	ALIGN_WORD	" "	// gtkhtml3 has no alignment need.
-#endif /* USE_XIPHOS_HTML */
 
 void
 block_dump(SWBuf& rendered,
@@ -322,9 +290,7 @@ block_dump(SWBuf& rendered,
 	   const char **strongs,
 	   const char **morph)
 {
-#ifdef USE_XIPHOS_HTML
 	int wlen, min_length, slen, mlen;
-#endif
 	char *s, *s0, *t;
 
 	// unannotated words need no help.
@@ -358,13 +324,11 @@ block_dump(SWBuf& rendered,
 			*s0 = ' ';
 		}
 		*s = '<';
-#ifdef USE_XIPHOS_HTML
 		slen = s - t;
 		s = (char*)strstr(*strongs, "&lt;");
 		*s = *(s+1) = *(s+2) = *(s+3) = ' ';
 		s = strstr(s, "&gt;");
 		*s = *(s+1) = *(s+2) = *(s+3) = ' ';
-#endif /* USE_XIPHOS_HTML */
 
 		// gross hack needed to handle new class="..." in sword -r2512.
 		if ((s = (char*)strstr(*strongs, " class=\"strongs\">"))) {
@@ -373,10 +337,8 @@ block_dump(SWBuf& rendered,
 				memcpy(s, ">                ", 17);
 		}
 	}
-#ifdef USE_XIPHOS_HTML
 	else
 		slen = 0;
-#endif /* USE_XIPHOS_HTML */
 
 	if (*morph) {
 		s = s0 = (char*)g_strrstr(*morph, "\">") + 2;
@@ -390,13 +352,11 @@ block_dump(SWBuf& rendered,
 		*s = '\0';
 		t = (char*)strrchr(*morph, '>') + 1;
 		*s = '<';
-#ifdef USE_XIPHOS_HTML
 		mlen = s - t;
 		s = (char*)strchr(*morph, '(');
 		*s = ' ';
 		s = strrchr(s, ')');
 		*s = ' ';
-#endif /* USE_XIPHOS_HTML */
 
 		// gross hack needed to handle new class="..." in sword -r2512.
 		if ((s = (char*)strstr(*morph, " class=\"morph\">"))) {
@@ -405,19 +365,15 @@ block_dump(SWBuf& rendered,
 				memcpy(s, ">              ", 15);
 		}
 	}
-#ifdef USE_XIPHOS_HTML
 	else
 		mlen = 0;
 
 	min_length = 2 + max(slen, mlen);
-#endif /* USE_XIPHOS_HTML */
 
 	rendered += *word;
 
-#ifdef USE_XIPHOS_HTML
 	for (wlen = strlen(*word); wlen <= min_length; ++wlen)
 		rendered += "&nbsp;";
-#endif /* USE_XIPHOS_HTML */
 
 	g_free((char *)*word);
 	*word = NULL;
@@ -447,11 +403,7 @@ block_dump(SWBuf& rendered,
 // text destination is provided, ready to go.
 // this means we are able to recurse when needed.
 
-#ifdef USE_XIPHOS_HTML
 #define EMPTY_WORD	""
-#else
-#define EMPTY_WORD	"&nbsp;"
-#endif /* USE_XIPHOS_HTML */
 
 void
 block_render_secondary(const char *text,
@@ -895,10 +847,8 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule)
 char
 GTKEntryDisp::Display(SWModule &imodule)
 {
-#ifdef USE_XIPHOS_HTML
 	if (!gtk_widget_get_realized(GTK_WIDGET(gtkText)))
 		gtk_widget_realize(gtkText);
-#endif
 
 	gchar *buf;
 	mf = get_font(imodule.Name());
@@ -1395,11 +1345,7 @@ GTKChapDisp::Display(SWModule &imodule)
 		    ((key->Verse() == curVerse) &&
 		     settings.versehighlight)) {
 			buf = g_strdup_printf(
-#ifdef USE_XIPHOS_HTML
 			    "<span style=\"background-color: %s\">"
-#else
-			    "<table bgcolor=\"%s\"><tr><td>"
-#endif
 			    "<font face=\"%s\" size=\"%+d\">",
 			    ((settings.annotate_highlight && e)
 			     ? settings.highlight_fg
@@ -1465,36 +1411,10 @@ GTKChapDisp::Display(SWModule &imodule)
 			swbuf.append(paragraphMark);;
 		}
 
-#ifndef USE_XIPHOS_HTML
-		// correct a highlight glitch: in poetry verses which end in
-		// a forced line break, we must remove the break to prevent
-		// the enclosing <table> from producing a double break.
-		if ((settings.versehighlight ||
-		     (e && settings.annotate_highlight)) &&	// doing <table> h/l.
-		    !settings.versestyle &&			// paragraph format.
-		    (key->Verse() == curVerse)) {
-			GString *text = g_string_new(NULL);
-
-			g_string_printf(text, "%s", rework->str);
-			if (!strcmp(text->str + text->len - 6, "<br />")) {
-				text->len -= 6;
-				*(text->str + text->len) = '\0';
-			}
-			else if (!strcmp(text->str + text->len - 4, "<br/>")) {
-				text->len -= 4;
-				*(text->str + text->len) = '\0';
-			}
-			swbuf.append(settings.imageresize
-				     ? AnalyzeForImageSize(text->str,
-							   GDK_WINDOW(gtk_widget_get_window(gtkText)))
-				     : text->str /* left as-is */);
-			g_string_free(text, TRUE);
-		} else
-#endif /* USE_XIPHOS_HTML */
-			swbuf.append(settings.imageresize
-				     ? AnalyzeForImageSize(rework->str,
-							   GDK_WINDOW(gtk_widget_get_window(gtkText)))
-				     : rework->str /* left as-is */);
+		swbuf.append(settings.imageresize
+			     ? AnalyzeForImageSize(rework->str,
+						   GDK_WINDOW(gtk_widget_get_window(gtkText)))
+			     : rework->str /* left as-is */);
 
 		if (key->Verse() == curVerse) {
 			swbuf.append("</font>");
@@ -1511,20 +1431,14 @@ GTKChapDisp::Display(SWModule &imodule)
 			    (!settings.versehighlight &&
 			     (!e || !settings.annotate_highlight)))
 				swbuf.append("<br/>");
-#ifdef USE_XIPHOS_HTML
 			else if (key->Verse() == curVerse)
 				swbuf.append("<br/>");
-#endif
 		}
 
 		// special contrasty highlighting
 		if (((key->Verse() == curVerse) && settings.versehighlight) ||
 		    (e && settings.annotate_highlight))
-#ifdef USE_XIPHOS_HTML
 			swbuf.append("</font></span>");
-#else
-			swbuf.append("</font></td></tr></table>");
-#endif
 	}
 
 	getVerseAfter(imodule);
@@ -1537,12 +1451,9 @@ GTKChapDisp::Display(SWModule &imodule)
 
 	swbuf.append("</div></font></body></html>");
 
-#ifdef USE_XIPHOS_HTML
 	if (strongs_and_morph && (curVerse != 1))
 		buf = g_strdup_printf("%d", curVerse);
-	else	/* this is not dangling: connects to following "if" */
-#endif /* USE_XIPHOS_HTML */
-	if ((curVerse == 1) || (display_boundary >= curVerse))
+	else if ((curVerse == 1) || (display_boundary >= curVerse))
 		buf = g_strdup("TOP");
 	else if (curVerse > display_boundary)
 		buf = g_strdup_printf("%d", curVerse - display_boundary);
@@ -1854,11 +1765,7 @@ DialogChapDisp::Display(SWModule &imodule)
 		     settings.annotate_highlight) ||
 		    ((key->Verse() == curVerse) && settings.versehighlight)) {
 			buf = g_strdup_printf(
-#ifdef USE_XIPHOS_HTML
 			    "<span style=\"background-color: %s\">"
-#else
-			    "<table bgcolor=\"%s\"><tr><td>"
-#endif
 			    "<font face=\"%s\" size=\"%+d\">",
 			    ((settings.annotate_highlight && e)
 			     ? settings.highlight_fg
@@ -1924,34 +1831,10 @@ DialogChapDisp::Display(SWModule &imodule)
 			swbuf.append(paragraphMark);;
 		}
 
-#ifndef USE_XIPHOS_HTML
-		// same forced line break glitch in highlighted current verse.
-		if ((settings.versehighlight ||
-		     (e && settings.annotate_highlight)) &&	// doing <table> h/l.
-		    !versestyle &&				// paragraph format.
-		    (key->Verse() == curVerse)) {
-			GString *text = g_string_new(NULL);
-
-			g_string_printf(text, "%s", rework->str);
-			if (!strcmp(text->str + text->len - 6, "<br />")) {
-				text->len -= 6;
-				*(text->str + text->len) = '\0';
-			}
-			else if (!strcmp(text->str + text->len - 4, "<br/>")) {
-				text->len -= 4;
-				*(text->str + text->len) = '\0';
-			}
-			swbuf.append(settings.imageresize
-				     ? AnalyzeForImageSize(text->str,
-							   GDK_WINDOW(gtk_widget_get_window(gtkText)))
-				     : text->str /* left as-is */);
-			g_string_free(text, TRUE);
-		} else
-#endif /* USE_XIPHOS_HTML */
-			swbuf.append(settings.imageresize
-				     ? AnalyzeForImageSize(rework->str,
-							   GDK_WINDOW(gtk_widget_get_window(gtkText)))
-				     : rework->str /* left as-is */);
+		swbuf.append(settings.imageresize
+			     ? AnalyzeForImageSize(rework->str,
+						   GDK_WINDOW(gtk_widget_get_window(gtkText)))
+			     : rework->str /* left as-is */);
 
 		if (key->Verse() == curVerse) {
 			swbuf.append("</font>");
@@ -1968,20 +1851,14 @@ DialogChapDisp::Display(SWModule &imodule)
 			    (!settings.versehighlight &&
 			     (!e || !settings.annotate_highlight)))
 				swbuf.append("<br/>");
-#ifdef USE_XIPHOS_HTML
 			else if (key->Verse() == curVerse)
 				swbuf.append("<br/>");
-#endif
 		}
 
 		// special contrasty highlighting
 		if (((key->Verse() == curVerse) && settings.versehighlight) ||
 		    (e && settings.annotate_highlight))
-#ifdef USE_XIPHOS_HTML
 			swbuf.append("</font></span>");
-#else
-			swbuf.append("</font></td></tr></table>");
-#endif
 	}
 
 	// Reset the Bible location before GTK gets access:
@@ -1992,12 +1869,9 @@ DialogChapDisp::Display(SWModule &imodule)
 
 	swbuf.append("</div></font></body></html>");
 
-#ifdef USE_XIPHOS_HTML
 	if (strongs_and_morph && (curVerse != 1))
 		buf = g_strdup_printf("%d", curVerse);
-	else	/* this is not dangling: connects to following "if" */
-#endif /* USE_XIPHOS_HTML */
-	if ((curVerse == 1) || (display_boundary >= curVerse))
+	else if ((curVerse == 1) || (display_boundary >= curVerse))
 		buf = g_strdup("TOP");
 	else if (curVerse > display_boundary)
 		buf = g_strdup_printf("%d", curVerse - display_boundary);
@@ -2018,7 +1892,6 @@ DialogChapDisp::Display(SWModule &imodule)
 char
 GTKPrintEntryDisp::Display(SWModule &imodule)
 {
-#ifdef USE_XIPHOS_HTML
 	gchar *keytext = NULL;
 	gchar *buf;
 	SWBuf swbuf = "";
@@ -2068,14 +1941,13 @@ GTKPrintEntryDisp::Display(SWModule &imodule)
 	g_free(ops);
 	if (keytext)
 		g_free(keytext);
-#endif
+
 	return 0;
 }
 
 char
 GTKPrintChapDisp::Display(SWModule &imodule)
 {
-#ifdef USE_XIPHOS_HTML
 	imodule.setSkipConsecutiveLinks(true);
 	VerseKey *key = (VerseKey *)(SWKey *)imodule;
 	int curVerse = key->Verse();
@@ -2189,6 +2061,6 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 
 	free_font(mf);
 	g_free(ops);
-#endif
+
 	return 0;
 }
