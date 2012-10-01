@@ -53,6 +53,11 @@ def set_options(opt):
                    choices=['auto', '3', '2'],
                    help="Select gtk+ API ['auto', '3', '2']")
 
+    maingroup.add_option('--backend',
+                   action='store', default='auto', dest='backend',
+                   choices=['auto'],
+                   help="Select rendering backend [no selection available, auto webkit only]")
+
     miscgroup = opt.add_option_group('Miscellaneous Options')
 
     miscgroup.add_option('-d', '--debug-level',
@@ -229,14 +234,22 @@ def configure(conf):
                                    msg='Auto detecting gtk 2', mandatory=True)
                     opt.gtkver = '2'
 
-    # TODO are these still needed?
-	env['ENABLE_WEBKIT'] = True
-	dfn('WEBKIT', 1)
-    
+    # Auto detecting backed if none were specified
+    if opt.backend == 'auto':
+            webkit = 'webkitgtk-3.0' if opt.gtkver == '3' else 'webkit-1.0'
+            if conf.check_cfg(modversion=webkit, msg='Auto detecting webkit', okmsg='ok',
+                              erromsg='Not found'):
+                    opt.backend = 'webkit'
+
     #gtk
     if opt.gtkver == '2':
         env['ENABLE_GTK2'] = True
         dfn('GTK2', 1)
+
+    # gtkhtml
+    if opt.backend == 'webkit':
+	env['ENABLE_WEBKIT'] = True
+	dfn('WEBKIT', 1)
 
     # disable console window in win32
     if opt.no_console and env['IS_WIN32']:
@@ -314,7 +327,6 @@ def configure(conf):
         common_libs += ' libglade-2.0'
         common_libs += ' "gtk+-2.0 >= 2.14" '
         common_libs += ' "libgtkhtml-3.14 >= 3.23" '
-        common_libs += ' webkitgtk-1.0'
         if conf.check_cfg(modversion='gtkhtml-editor-3.14',
                           msg='Checking for GNOME3 gtkhtml-editor',
                           okmsg='Definitely',
@@ -326,7 +338,6 @@ def configure(conf):
     else:
         # So far, we only care about GTK+3, not any of its subversions
         common_libs += ' "gtk+-3.0" '
-        common_libs += ' "webkitgtk-3.0" '
         conf.define('USE_GTK_3', 1)
 	conf.define('USE_GTKBUILDER', 1)
         # FC15 and Oneiric have this, Natty does not
@@ -355,6 +366,65 @@ def configure(conf):
                    uselib_store='SWORD',
                    mandatory=True)
     env.append_value('ALL_LIBS', 'SWORD')
+
+    ######################
+    ### gtk-webkit for html rendering
+    #
+    if env['ENABLE_WEBKIT'] and env['USE_GTK_3']:
+        conf.check_cfg(package='webkitgtk-3.0',
+                        uselib_store='WEBKIT',
+                        args='--libs --cflags',
+                        msg='Checking for webkit',
+                        mandatory=True)
+        conf.define('USE_WEBKIT', 1)
+        env.append_value('ALL_LIBS', 'WEBKIT')
+    elif env['ENABLE_WEBKIT']:
+        conf.check_cfg(package='webkit-1.0',
+			uselib_store='WEBKIT',
+                        args='--libs --cflags',
+			msg='Checking for webkit',
+                        mandatory=True)
+	env.append_value('ALL_LIBS', 'WEBKIT')
+        conf.define('USE_WEBKIT', 1)
+    ######################
+    ### gecko (xulrunner) for html rendering
+    # gtkhtml only for editor
+    elif not env['ENABLE_GTKHTML']:
+        if not env["IS_WIN32"]:
+
+            conf.check_cfg (package='nspr', uselib_store='NSPR')    
+            conf.check_cfg (package='',
+                            uselib_store='GECKO',
+                            args='"libxul-embedding >= 1.9.0" --define-variable=includetype=unstable "nspr" --cflags --libs',
+                            msg='checking for libxul-embedding')
+
+            conf.define('GECKO_HOME', conf.check_cfg(package='libxul-embedding',
+                                                     args='--variable=sdkdir',
+                                                     okmsg=waffles.misc.myokmsg,
+                                                     msg="Checking for libxul sdkdir").strip())
+            conf.define('GECKO_VER', conf.check_cfg(package='libxul-embedding',
+                                                    args='--modversion',
+                                                     okmsg=waffles.misc.myokmsg,
+                                                    msg="Checking for Gecko GREVersion").strip())
+            gecko = env['GECKO_VER']
+
+            def geckoversion(i):
+                    if i.startswith('1.'):
+                            if len(i) >= 4 and not i[3].isalpha():
+                                    return (i[0:5]+'.0', i[0:5]+'.99')
+                            else:
+                                    return (i[0:4]+'0', i[0:3]+'.0.99')
+                    else:
+                            return ('2.0b', '2.0.99')
+            geckomin, geckomax = geckoversion(env['GECKO_VER'])
+            conf.check_message("Gecko", "GREVersionMin", 1, geckomin)
+            conf.check_message("Gecko", "GREVersionMax", 1, geckomax)
+            conf.define('GECKO_MIN', geckomin)
+            conf.define('GECKO_MAX', geckomax)
+
+        env.append_value('ALL_LIBS', 'NSPR')
+        env.append_value('ALL_LIBS', 'GECKO')
+        conf.define('USE_GTKMOZEMBED', 1)
 
     #
     # Random defines... legacy from autotools. Can we drop these?
