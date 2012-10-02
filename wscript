@@ -355,12 +355,6 @@ def configure(conf):
                    uselib_store='SWORD',
                    mandatory=True)
 
-    for sword_header in ['teixhtml', 'osisxhtml']:
-        conf.check(header_name='sword/%s.h' % sword_header, mandatory=True,
-                   msg='Checking for header sword/%s' % sword_header,
-                   errmsg='FAIL, install sword svn/1.7',
-                   compiler_mode='cxx',
-                   uselib='SWORD')
     env.append_value('ALL_LIBS', 'SWORD')
 
     #
