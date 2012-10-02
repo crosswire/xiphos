@@ -314,7 +314,7 @@ def configure(conf):
         common_libs += ' libglade-2.0'
         common_libs += ' "gtk+-2.0 >= 2.14" '
         common_libs += ' "libgtkhtml-3.14 >= 3.23" '
-        common_libs += ' webkitgtk-1.0'
+        common_libs += ' webkit-1.0'
         if conf.check_cfg(modversion='gtkhtml-editor-3.14',
                           msg='Checking for GNOME3 gtkhtml-editor',
                           okmsg='Definitely',
