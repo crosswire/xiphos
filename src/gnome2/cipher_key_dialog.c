@@ -24,7 +24,6 @@
 #endif
 
 #include <gtk/gtk.h>
-#include <gtkhtml/gtkhtml.h>
 
 #include "gui/cipher_key_dialog.h"
 #include "gui/dialog.h"

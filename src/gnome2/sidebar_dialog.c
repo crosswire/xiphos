@@ -24,7 +24,6 @@
 #endif
 
 #include <gtk/gtk.h>
-#include <gtkhtml/gtkhtml.h>
 #include <glib/gi18n.h>
 
 #include "gui/sidebar.h"

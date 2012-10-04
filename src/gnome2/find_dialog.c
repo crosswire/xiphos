@@ -24,8 +24,6 @@
 #endif
 
 #include <gtk/gtk.h>
-#include <gtkhtml/gtkhtml.h>
-#include <gtkhtml/gtkhtml-search.h>
 
 #include "gui/find_dialog.h"
 #include "main/settings.h"
