@@ -36,10 +36,8 @@
 #include <editor/gtkhtml-editor.h>
 #include <gtkhtml/gtkhtml-stream.h>
 
-
 #include "editor/slib-editor.h"
 #include "editor/link_dialog.h"
-
 
 #include "main/settings.h"
 #include "main/sword.h"

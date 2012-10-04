@@ -34,7 +34,6 @@
 #include <localemgr.h>
 
 extern "C" {
-#include <gtkhtml/gtkhtml.h>
 #include "gui/bibletext.h"
 #include "main/gtk_compat.h"
 }

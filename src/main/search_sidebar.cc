@@ -27,10 +27,6 @@
 #include <ctype.h>
 #include <swmodule.h>
 
-extern "C" {
-#include <gtkhtml/gtkhtml.h>
-}
-
 #include "main/search_dialog.h"
 #include "main/search_sidebar.h"
 #include "main/settings.h"

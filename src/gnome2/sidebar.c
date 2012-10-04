@@ -23,7 +23,6 @@
 #include <config.h>
 #endif
 
-#include <gtkhtml/gtkhtml.h>
 #ifndef USE_GTKBUILDER
   #include <glade/glade-xml.h>
 #endif
@@ -38,7 +37,6 @@
 #include "gui/utilities.h"
 #include "gui/about_modules.h"
 #include "gui/main_window.h"
-#include "gui/html.h"
 #include "gui/xiphos.h"
 #include "gui/bibletext_dialog.h"
 #include "gui/commentary_dialog.h"
