@@ -63,11 +63,6 @@
  */
 SETTINGS settings;
 
-char *bold_start = "<b>",
-     *bold_end   = "</b>",
-     *superscript_start = "<sup>",
-     *superscript_end   = "</sup>";
-
 /******************************************************************************
  * static
  */
