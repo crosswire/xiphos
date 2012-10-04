@@ -117,6 +117,22 @@ struct replace {
     { '"',  (gchar *)"&quot;" },
 };
 
+// a macro to substitute the visually ugly presentation below.
+// this puts all the decoration possible around a verse number.
+#define PRETTYPRINT(v)	\
+	(settings.verse_num_superscript ? superscript_start : ""),	\
+	(settings.verse_num_bracket ? "[" : ""),			\
+	(settings.verse_num_bold ? bold_start : ""),			\
+	(v),								\
+	(settings.verse_num_bold ? bold_end : ""),			\
+	(settings.verse_num_bracket ? "]" : ""),			\
+	(settings.verse_num_superscript ? superscript_end : "")
+
+const char *bold_start = "<b>",
+	   *bold_end   = "</b>",
+	   *superscript_start = "<sup>",
+	   *superscript_end   = "</sup>";
+
 void
 marked_cache_fill(gchar *modname, gchar *key)
 {
@@ -787,13 +803,7 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule)
 				       (char*)key->getText(),
 				       settings.verse_num_font_size + settings.base_font_size,
 				       settings.bible_verse_num_color,
-				       (settings.verse_num_superscript ? superscript_start : ""),
-				       (settings.verse_num_bracket ? "[" : ""),
-				       (settings.verse_num_bold ? bold_start : ""),
-				       num,
-				       (settings.verse_num_bold ? bold_end : ""),
-				       (settings.verse_num_bracket ? "]" : ""),
-				       (settings.verse_num_superscript ? superscript_end : ""));
+				       PRETTYPRINT(num));
 		g_free(num);
 
 		swbuf.append(vbuf);
@@ -1058,13 +1068,7 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 				 ? settings.verse_num_font_size + settings.base_font_size
 				 : settings.base_font_size - 2),
 				settings.bible_verse_num_color,
-				(settings.verse_num_superscript ? superscript_start : ""),
-				(settings.verse_num_bracket ? "[" : ""),
-				(settings.verse_num_bold ? bold_start : ""),
-				num,
-				(settings.verse_num_bold ? bold_end : ""),
-				(settings.verse_num_bracket ? "]" : ""),
-				(settings.verse_num_superscript ? superscript_end : ""));
+				PRETTYPRINT(num));
 		g_free(num);
 		swbuf.append(buf);
 		g_free(buf);
@@ -1184,13 +1188,7 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 				 ? settings.verse_num_font_size + settings.base_font_size
 				 : settings.base_font_size - 2),
 				settings.bible_verse_num_color,
-				(settings.verse_num_superscript ? superscript_start : ""),
-				(settings.verse_num_bracket ? "[" : ""),
-				(settings.verse_num_bold ? bold_start : ""),
-				num,
-				(settings.verse_num_bold ? bold_end : ""),
-				(settings.verse_num_bracket ? "]" : ""),
-				(settings.verse_num_superscript ? superscript_end : ""));
+				PRETTYPRINT(num));
 		g_free(num);
 		swbuf.append(buf);
 		g_free(buf);
@@ -1370,13 +1368,7 @@ GTKChapDisp::Display(SWModule &imodule)
 			    ? settings.highlight_bg
 			    : settings.highlight_fg)
 			 : settings.bible_verse_num_color),
-			(settings.verse_num_superscript ? superscript_start : ""),
-			(settings.verse_num_bracket ? "[" : ""),
-			(settings.verse_num_bold ? bold_start : ""),
-			num,
-			(settings.verse_num_bold ? bold_end : ""),
-			(settings.verse_num_bracket ? "]" : ""),
-			(settings.verse_num_superscript ? superscript_end : ""));
+			PRETTYPRINT(num));
 		g_free(num);
 		swbuf.append(buf);
 		g_free(buf);
@@ -1790,13 +1782,7 @@ DialogChapDisp::Display(SWModule &imodule)
 			    ? settings.highlight_bg
 			    : settings.highlight_fg)
 			 : settings.bible_verse_num_color),
-			(settings.verse_num_superscript ? superscript_start : ""),
-			(settings.verse_num_bracket ? "[" : ""),
-			(settings.verse_num_bold ? bold_start : ""),
-			num,
-			(settings.verse_num_bold ? bold_end : ""),
-			(settings.verse_num_bracket ? "]" : ""),
-			(settings.verse_num_superscript ? superscript_end : ""));
+			PRETTYPRINT(num));
 		g_free(num);
 		swbuf.append(buf);
 		g_free(buf);
@@ -2017,13 +2003,7 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 			(char*)key->getText(),
 			settings.verse_num_font_size + settings.base_font_size,
 			settings.bible_verse_num_color,
-			(settings.verse_num_superscript ? superscript_start : ""),
-			(settings.verse_num_bracket ? "[" : ""),
-			(settings.verse_num_bold ? bold_start : ""),
-			num,
-			(settings.verse_num_bold ? bold_end : ""),
-			(settings.verse_num_bracket ? "]" : ""),
-			(settings.verse_num_superscript ? superscript_end : ""));
+			PRETTYPRINT(num));
 		g_free(num);
 		swbuf.append(buf);
 		g_free(buf);

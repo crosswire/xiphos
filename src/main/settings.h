@@ -251,9 +251,6 @@ extern SETTINGS settings;
 int settings_init(int argc, char **argv, int new_configs, int new_bookmarks);
 void load_settings_structure(void);
 
-/* mostly for verse number customization */
-extern char *bold_start, *bold_end, *superscript_start, *superscript_end;
-
 #ifdef __cplusplus
 }
 #endif
