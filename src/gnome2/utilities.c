@@ -1757,6 +1757,23 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 			}
 		}
 
+		// clean: no unicode apostrophes and quotation marks.
+		for (s = strstr(text->str, "\342\200\231"); s; s = strstr(s, "\342\200\231")) {
+			*(s++) = '\'';
+			*(s++) = '\'';
+			*(s++) = '\'';
+		}
+		for (s = strstr(text->str, "\342\200\234"); s; s = strstr(s, "\342\200\234")) {
+			*(s++) = ' ';
+			*(s++) = ' ';
+			*(s++) = ' ';
+		}
+		for (s = strstr(text->str, "\342\200\235"); s; s = strstr(s, "\342\200\235")) {
+			*(s++) = ' ';
+			*(s++) = ' ';
+			*(s++) = ' ';
+		}
+
 		// clean: no other &symbols;.
 		for (s = strchr(text->str, '&'); s; s = strchr(s, '&')) {
 			if ((t = strchr(s, ';'))) {
