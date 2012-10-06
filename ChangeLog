@@ -1,4 +1,8 @@
-2012-09-29  karl <charcoal@users.sf.net>
+2012-10-05  karl <charcoal@users.sf.net>
+
+	* strip out some more problematic unicode punctuation for Read Aloud.
+
+2012-09-30  karl <charcoal@users.sf.net>
 
 	* code simplification: remove gtkhtml3, once and for all.
 	  we have committed to XHTML filters in Sword.  those filters 
