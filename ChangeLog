@@ -1,3 +1,7 @@
+2012-10-07  karl <charcoal@users.sf.net>
+
+	* add use of getRenderHeader() so that we get prototype XHTML style.
+
 2012-10-05  karl <charcoal@users.sf.net>
 
 	* strip out some more problematic unicode punctuation for Read Aloud.

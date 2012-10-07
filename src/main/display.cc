@@ -78,7 +78,7 @@ int marked_cache_chapter = -1;
 
 int footnote, xref;
 
-#define	HTML_START	"<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><style type=\"text/css\"><!-- A { text-decoration:none } *[dir=rtl] { text-align: right; } %s --></style></head>"
+#define	HTML_START	"<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><style type=\"text/css\"><!-- A { text-decoration:none } *[dir=rtl] { text-align: right; } %s%s --></style></head>"
 
 // CSS style blocks to control blocked strongs+morph output
 // BOTH is when the user wants to see both types of markup.
@@ -892,6 +892,7 @@ GTKEntryDisp::Display(SWModule &imodule)
 				  : (ops->doublespace		// neither
 				     ? DOUBLE_SPACE
 				     : ""))),
+			      imodule.getRenderHeader(),
 			      settings.bible_bg_color,
 			      settings.bible_text_color,
 			      settings.link_color,
@@ -1287,6 +1288,7 @@ GTKChapDisp::Display(SWModule &imodule)
 				: (ops->doublespace	// neither
 				   ? DOUBLE_SPACE
 				   : ""))),
+			    imodule.getRenderHeader(),
 			    settings.bible_bg_color,
 			    settings.bible_text_color,
 			    settings.link_color,
@@ -1563,6 +1565,7 @@ DialogEntryDisp::Display(SWModule &imodule)
 			      "<a href=\"passagestudy.jsp?action=showModInfo&value=%s&module=%s\">"
 			      "[*%s*]</a></font><br/>",
 			      (ops->doublespace ? DOUBLE_SPACE : ""),
+			      imodule.getRenderHeader(),
 			      settings.bible_bg_color,
 			      settings.bible_text_color,
 			      settings.link_color,
@@ -1705,6 +1708,7 @@ DialogChapDisp::Display(SWModule &imodule)
 				  : (ops->doublespace
 				     ? DOUBLE_SPACE
 				     : ""))),
+			      imodule.getRenderHeader(),
 			      settings.bible_bg_color,
 			      settings.bible_text_color,
 			      settings.link_color,
@@ -1906,6 +1910,7 @@ GTKPrintEntryDisp::Display(SWModule &imodule)
 			      "<a href=\"passagestudy.jsp?action=showModInfo&value=%s&module=%s\">"
 			      "[*%s*]</a></font>[%s]<br/>",
 			      (ops->doublespace ? DOUBLE_SPACE : ""),
+			      imodule.getRenderHeader(),
 			      settings.bible_bg_color,
 			      settings.bible_text_color,
 			      settings.link_color,
@@ -1962,6 +1967,7 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
 			      "<font face=\"%s\" size=\"%+d\">",
 			      (ops->doublespace ? DOUBLE_SPACE : ""),
+			      imodule.getRenderHeader(),
 			      settings.bible_bg_color,
 			      settings.bible_text_color,
 			      settings.link_color,
