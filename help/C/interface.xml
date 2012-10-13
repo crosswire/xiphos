@@ -789,6 +789,11 @@
 			</listitem>
 			<listitem>
 				<para>
+					<guibutton>Alt-A</guibutton> opens an annotation dialog on the current verse.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
 					<guibutton>Alt-B</guibutton> opens a bookmark dialog on the current verse.
 				</para>
 			</listitem>
