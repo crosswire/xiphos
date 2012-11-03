@@ -230,8 +230,8 @@ def configure(conf):
             opt.gtkver = '2'
 
     # TODO are these still needed?
-	env['ENABLE_WEBKIT'] = True
-	dfn('WEBKIT', 1)
+    env['ENABLE_WEBKIT'] = True
+    dfn('WEBKIT', 1)
     
     #gtk
     if opt.gtkver == '2':
