@@ -342,22 +342,10 @@ void gui_change_window_title(gchar * module_name)
 
 
 static gboolean  delete_event (GtkWidget *widget,
-                                            GdkEvent *event,
-                                            gpointer user_data)
+			       GdkEvent *event,
+			       gpointer user_data)
 {
-	/* offer to save all editors remaining open */
-	editor_maybe_save_all();
-
-	shutdown_frontend();
-	/* shutdown the sword stuff */
-	main_shutdown_backend();
-	gtk_main_quit();
-#if 0
-	/* this causes trouble when paratab is active.
-	   and frankly, why do we care?  we're about to exit.  just leave. */
-	gtk_widget_destroy(widgets.app);
-#endif
-	exit(0);
+	on_quit_activate(NULL, NULL);
 	return TRUE;
 }
 

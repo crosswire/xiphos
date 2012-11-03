@@ -48,6 +48,10 @@
 
 #ifdef WIN32
 
+#ifdef HAVE_DBUS
+GPid dbus_pid;
+#endif
+
 /*
  * this is, we hope, a temporary fix for the webkit image display problem.
  * we instantiate a local web server (!) so as to self-serve image files
@@ -118,6 +122,11 @@ int main(int argc, char *argv[])
 	total = g_timer_new();
 #endif
 
+	/* get this error check out of the way before risking leaking win32 resources */
+	if (argc > 2) {
+		gui_generic_warning(_("Xiphos does not understand more than one argument."));
+		exit(1);
+	}
 
 #ifdef WIN32
 	/*
@@ -158,12 +167,36 @@ int main(int argc, char *argv[])
 	soup_server_add_handler(server, "/", server_callback_media,
 				NULL, NULL);
 	soup_server_run_async(server);
-#endif /* WIN32 */
 
-	if (argc > 2) {
-		gui_generic_warning(_("Xiphos does not understand more than one argument."));
-		exit(1);
-	}
+#ifdef HAVE_DBUS
+	/* we must start dbus-daemon on our own as well */
+	/* on windows, we will ship dbus along with Xiphos */
+	gchar *dbus_args[4];
+
+	gchar *dbus_com = g_win32_get_package_installation_directory_of_module(NULL);
+	dbus_com = g_strconcat(dbus_com, "\0", NULL);
+
+	gchar *dbus_conf = g_build_filename(dbus_com, "etc\\dbus-session.conf\0", NULL);
+	dbus_conf = g_build_filename("--config-file=\0", dbus_conf, NULL);
+
+	dbus_com = g_build_filename(dbus_com, "dbus.exe\0", NULL);
+
+	dbus_args[0] = dbus_com;
+	dbus_args[1] = dbus_conf;
+	dbus_args[2] = g_strdup("--fork");
+	dbus_args[3] = NULL;
+	g_spawn_async(NULL,
+		      dbus_args,
+		      NULL,
+		      G_SPAWN_SEARCH_PATH,
+		      NULL,
+		      NULL,
+		      &dbus_pid,
+		      NULL);
+	Sleep(2);			// give dbus a moment to init.
+#endif /* HAVE_DBUS */
+
+#endif /* WIN32 */
 
 	if (argc > 1) {
 		/*
