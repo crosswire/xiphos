@@ -154,11 +154,28 @@ G_MODULE_EXPORT void
 on_live_chat_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	gchar *user = g_strdup_printf("%s", g_get_user_name()), *s, *url;
+	gchar version[] = VERSION;
+	int i;
+	gchar platform =
+#ifdef WIN32
+	    'W'
+#else
+	    'L'
+#endif
+	    ;
+
+	/* mibbit nick length limit = 16 chars. */
+	/* cut name off at 8, leaving 8 for "|platform+version". */
+	user[8] = '\0';
+	for (i = 0; version[i]; ++i)
+		if (version[i] == '.')
+			version[i] = '-';
+	/* no blanks in irc nicks. */
 	for (s = strchr(user, ' '); s; s = strchr(s, ' '))
 		*s = '_';
 	url = g_strdup_printf(
-	    "http://webchat.freenode.net/?nick=%s|xiphos&channels=xiphos&prompt=1",
-	    user);
+	    "http://webchat.freenode.net/?nick=%s|%c%s&channels=xiphos&prompt=1",
+	    user, platform, version);
 	xiphos_open_default(url);
 	g_free(url);
 	g_free(user);
@@ -481,11 +498,25 @@ on_side_preview_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 G_MODULE_EXPORT void
 on_quit_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
+#if defined(WIN32) && defined(HAVE_DBUS)
+	/* we started dbus-daemon ourselves, so we must kill it, too. */
+	extern GPid dbus_pid;
+
+	g_spawn_close_pid(dbus_pid);
+#endif
+
+	/* offer to save all editors remaining open */
+	editor_maybe_save_all();
+
 	shutdown_frontend();
 	/* shutdown the sword stuff */
 	main_shutdown_backend();
 	gtk_main_quit();
+#if 0
+	/* this causes trouble when paratab is active.
+	   and frankly, why do we care?  we're about to exit.  just leave. */
 	gtk_widget_destroy(widgets.app);
+#endif
 	exit(0);
 }
 
