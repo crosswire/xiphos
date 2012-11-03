@@ -12,22 +12,14 @@ from Tools.ccroot import get_target_name
 env = bld.env
 sub = Utils.subst_vars
 
-# use GECKO as html engine
 objects = 'backend editor main xiphos_html'
 if bld.env['ENABLE_WEBKIT']:
     objects += ' %s' % 'webkit'
-elif not bld.env['ENABLE_GTKHTML']:
-    objects += ' %s' % 'gecko'
 
 # GTKHTML
 gtkhtml = 'GTKHTML'
 if env['HAVE_GTKHTML_EDITOR']:
     gtkhtml += ' %s' % 'GTKHTML_EDITOR'
-
-# GECKO
-gecko = 'GTKMOZEMBED'
-if env['HAVE_GTKMOZEMBED_UNSTABLE']:
-    gecko += ' %s' % 'GTKMOZEMBED_UNSTABLE'
 
 # on WIN32 compile Xiphos icon into executable
 winresource = ''

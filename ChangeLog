@@ -2,6 +2,8 @@
 
 	* add dbus-daemon spawn for win32 (incomplete).
 	* change IRC nick startup to use version+OS.
+	* fix broken ubuntu gtk2 build by avoiding outdated gecko refs
+	  and making sure webkit definitions remain (python indent sucks).
 
 2012-10-07  karl <charcoal@users.sf.net>
 
