@@ -29,6 +29,7 @@ sworddir=/usr/i686-w64-mingw32/sys-root/mingw/bin/
 
 CROSS=i686-w64-mingw32-
 CFLAGS="-I/usr/i686-w64-mingw32/sys-root/mingw/include -g"
+CXXFLAGS="-I/usr/i686-w64-mingw32/sys-root/mingw/include -g"
 LDFLAGS="-L/usr/i686-w64-mingw32/sys-root/mingw/lib `i686-w64-mingw32-pkg-config --libs gthread-2.0`"
 PKG_CONFIG_PATH=/usr/i686-w64-mingw32/sys-root/mingw/lib/pkgconfig/:/usr/i686-w64-mingw32/sys-root/mingw/share/pkgconfig/
 PKG_CONFIG_LIBDIR=/usr/i686-w64-mingw32/sys-root/mingw/lib/pkgconfig/:/usr/i686-w64-mingw32/sys-root/mingw/share/pkgconfig/
@@ -54,12 +55,12 @@ export CROSS CC CXX AR RANLIB CFLAGS LDFLAGS WINRC \
 	PKG_CONFIG_PREFIX MSVC_LIBPATH
 ./waf configure \
 	--target-platform-win32 \
-	--disable-dbus \
 	--disable-help \
 	--prefix=${outdir} \
 	-d debug \
 	-b build-win32
 	#--disable-console
+	#--disable-dbus \
 
 #
 # GROSS HACK - TEMPORARY
@@ -98,6 +99,7 @@ EOF
 ./waf install
 
 for f in libsword.dll \
+	libdbus-1-3.dll libdbus-glib-1-2.dll \
 	imp2ld.exe addld.exe mod2zmod.exe imp2gbs.exe xml2gbs.exe imp2vs.exe vpl2mod.exe mkfastmod.exe mod2vpl.exe tei2mod.exe osis2mod.exe mod2osis.exe mod2imp.exe \
 	installmgr.exe  diatheke.exe vs2osisreftxt.exe \
 	uconv.exe icui18n48.dll icuuc48.dll icudata48.dll \
