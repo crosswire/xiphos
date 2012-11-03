@@ -61,6 +61,7 @@ export CROSS CC CXX AR RANLIB CFLAGS LDFLAGS WINRC \
 	-b build-win32
 	#--disable-console
 	#--disable-dbus \
+[ $? -ne 0 ] && exit 1
 
 #
 # GROSS HACK - TEMPORARY
@@ -96,7 +97,9 @@ EOF
 # GROSS HACK - END
 
 ./waf
+[ $? -ne 0 ] && exit 1
 ./waf install
+[ $? -ne 0 ] && exit 1
 
 for f in libsword.dll \
 	libdbus-1-3.dll libdbus-glib-1-2.dll \
