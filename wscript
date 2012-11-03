@@ -356,7 +356,7 @@ def configure(conf):
                    mandatory=True)
 
     for sword_header in ['teixhtml', 'osisxhtml']:
-        conf.check(header_name='%s.h' % sword_header, mandatory=True,
+        conf.check(header_name='%s.h' % sword_header, mandatory=False,
                    msg='Checking for header sword/%s.h' % sword_header,
                    errmsg='FAIL, install sword svn/1.7',
                    compiler_mode='cxx',
