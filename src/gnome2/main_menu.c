@@ -164,15 +164,20 @@ on_live_chat_activate(GtkMenuItem * menuitem, gpointer user_data)
 #endif
 	    ;
 
-	/* mibbit nick length limit = 16 chars. */
-	/* cut name off at 8, leaving 8 for "|platform+version". */
-	user[8] = '\0';
+	/* no periods in irc nicks. */
 	for (i = 0; version[i]; ++i)
 		if (version[i] == '.')
 			version[i] = '-';
+
+	/* mibbit nick length limit = 16 chars. */
+	/* cut name off at 8, leaving 8 for "|platform+version". */
+	if (strlen(user) > 8)
+		user[8] = '\0';
+
 	/* no blanks in irc nicks. */
 	for (s = strchr(user, ' '); s; s = strchr(s, ' '))
 		*s = '_';
+
 	url = g_strdup_printf(
 	    "http://webchat.freenode.net/?nick=%s|%c%s&channels=xiphos&prompt=1",
 	    user, platform, version);
