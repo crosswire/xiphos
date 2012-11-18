@@ -23,16 +23,20 @@
 #FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 #OTHER DEALINGS IN THE SOFTWARE.
 
+set -e
+
 # copy sword utils and libs
 outdir=win32/binaries/Xiphos/32/
 sworddir=/usr/i686-w64-mingw32/sys-root/mingw/bin/
 
 CROSS=i686-w64-mingw32-
-CFLAGS="-I/usr/i686-w64-mingw32/sys-root/mingw/include -g"
-LDFLAGS="-L/usr/i686-w64-mingw32/sys-root/mingw/lib `i686-w64-mingw32-pkg-config --libs gthread-2.0`"
 PKG_CONFIG_PATH=/usr/i686-w64-mingw32/sys-root/mingw/lib/pkgconfig/:/usr/i686-w64-mingw32/sys-root/mingw/share/pkgconfig/
 PKG_CONFIG_LIBDIR=/usr/i686-w64-mingw32/sys-root/mingw/lib/pkgconfig/:/usr/i686-w64-mingw32/sys-root/mingw/share/pkgconfig/
 PKG_CONFIG_PREFIX=/usr/i686-w64-mingw32/sys-root/mingw/
+export PKG_CONFIG_PATH PKG_CONFIG_LIBDIR PKG_CONFIG_PREFIX
+
+CFLAGS="-I/usr/i686-w64-mingw32/sys-root/mingw/include -g"
+LDFLAGS="-L/usr/i686-w64-mingw32/sys-root/mingw/lib `pkg-config --libs gthread-2.0`"
 MSVC_LIBPATH=/usr/i686-w64-mingw32/sys-root/mingw/
 
 CC=/usr/bin/${CROSS}gcc
@@ -50,8 +54,7 @@ mkdir -p ${outdir}
 cp -r -t ${outdir} win32/extras/*
 # configure and build xiphos
 export CROSS CC CXX AR RANLIB CFLAGS LDFLAGS WINRC \
-	PKG_CONFIG PKG_CONFIG_PATH PKG_CONFIG_LIBDIR \
-	PKG_CONFIG_PREFIX MSVC_LIBPATH
+	PKG_CONFIG MSVC_LIBPATH
 ./waf configure \
 	--target-platform-win32 \
 	--gtk=3 \
@@ -106,7 +109,7 @@ for f in libsword.dll \
 	libcairo-2.dll libfontconfig-1.dll libexpat-1.dll libfreetype-6.dll zlib1.dll libpixman-1-0.dll libpng15-15.dll libgdk_pixbuf-2.0-0.dll \
 	libgdk-3-0.dll \
 	libgio-2.0-0.dll libglib-2.0-0.dll libgmodule-2.0-0.dll libgobject-2.0-0.dll libffi-6.dll libjasper-1.dll libjpeg-62.dll libtiff-3.dll libpango-1.0-0.dll \
-	libpangocairo-1.0-0.dll libpangoft2-1.0-0.dll libpangowin32-1.0-0.dll libglade-2.0-0.dll libatk-1.0-0.dll libgtk-3-0.dll libxml2-2.dll libgsf-1-114.dll \
+	libpangocairo-1.0-0.dll libpangoft2-1.0-0.dll libpangowin32-1.0-0.dll libatk-1.0-0.dll libgtk-3-0.dll libxml2-2.dll libgsf-1-114.dll \
 	libbz2-1.dll libgtkhtml-4.0-0.dll libgailutil-3-0.dll libgthread-2.0-0.dll libgnurx-0.dll libgtkhtml-editor-4.0-0.dll \
 	libenchant.dll libcurl-4.dll libidn-11.dll libssh2-1.dll libgcrypt-11.dll libgpg-error-0.dll libclucene-core.dll libclucene-shared.dll \
 	libjavascriptcoregtk-3.0-0.dll pthreadGC2.dll libsoup-2.4-1.dll libsqlite3-0.dll libxslt-1.dll libintl-8.dll \
@@ -131,21 +134,21 @@ done
 for f in enchant/libenchant_myspell.dll
 do
 	echo "Copying and stripping ${f}"
-	#strip -o ${outdir}lib/${f} ${sworddir}../lib/${f}
 	cp ${sworddir}../lib/${f} ${outdir}lib/${f}
+	#strip -o ${outdir}lib/${f} ${sworddir}../lib/${f}
 done
 for f in $(find ${sworddir}../lib/gtk-3.0/3.0.0/immodules/ -name '*.dll')
 do
 	echo "Copying and stripping ${f}"
-	#strip -o ${outdir}lib/gtk-3.0/3.0.0/immodules/`basename ${f}` $f
 	cp ${f} ${outdir}lib/gtk-3.0/3.0.0/immodules/
+	#strip -o ${outdir}lib/gtk-3.0/3.0.0/immodules/`basename ${f}` $f
 done
 mkdir -p ${outdir}lib/pango/1.6.0/modules/
 for f in $(find ${sworddir}../lib/pango/1.6.0/modules/ -name '*.dll')
 do
 	echo "Copying and stripping ${f}"
-	#strip -o ${outdir}lib/pango/1.6.0/modules/`basename ${f}` $f
 	cp ${f} ${outdir}lib/pango/1.6.0/modules/
+	#strip -o ${outdir}lib/pango/1.6.0/modules/`basename ${f}` $f
 done
 
 # Strip the main Xiphos binary
@@ -154,7 +157,7 @@ done
 # Copy shared files
 mkdir -p ${outdir}share/sword/
 cp -r ${sworddir}../share/sword/locales.d ${outdir}share/sword/locales.d
-for d in enchant gtkhtml-4.0 pixmaps webkitgtk-3.0
+for d in enchant gtkhtml-4.0 webkitgtk-3.0 #pixmaps 
 do
 	cp -r ${sworddir}../share/${d} ${outdir}share/${d}
 done
@@ -169,7 +172,7 @@ for f in `ls *.po`; do msgfmt $f; done
 cp messages.mo ../../${outdir}/share/locale/fa/LC_MESSAGES/gtk20.mo
 
 # remove .svn dirs that were cp'd into the dist tree.
-find ../../${outdir} -name .svn | xargs rm -r
+find ../../${outdir} -name .svn -delete #| xargs rm -r {}
 
 # make installer
 cd ../nsis
