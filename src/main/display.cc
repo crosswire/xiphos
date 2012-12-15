@@ -1233,8 +1233,6 @@ GTKChapDisp::Display(SWModule &imodule)
 	int curBook = key->Book();
 	gchar *buf;
 	char *num;
-	const gchar *paragraphMark = NULL;
-	gboolean newparagraph = FALSE;
 	GString *rework;			// for image size analysis rework.
 	char *ModuleName = imodule.Name();
 	ops = main_new_globals(ModuleName);
@@ -1268,11 +1266,6 @@ GTKChapDisp::Display(SWModule &imodule)
 	    strcasecmp(key->getBookAbbrev(), marked_cache_book) ||
 	    (curChapter != marked_cache_chapter))
 		marked_cache_fill(ModuleName, settings.currentverse);
-
-	if (!strcmp(ModuleName, "KJV"))
-		paragraphMark = "&para;&nbsp;";
-	else
-		paragraphMark = "";
 
 	swbuf = "";
 	footnote = xref = 0;
@@ -1400,11 +1393,6 @@ GTKChapDisp::Display(SWModule &imodule)
 			g_free(buf);
 		}
 
-		if (newparagraph && settings.versestyle) {
-			newparagraph = FALSE;
-			swbuf.append(paragraphMark);;
-		}
-
 		swbuf.append(settings.imageresize
 			     ? AnalyzeForImageSize(rework->str,
 						   GDK_WINDOW(gtk_widget_get_window(gtkText)))
@@ -1416,11 +1404,6 @@ GTKChapDisp::Display(SWModule &imodule)
 		}
 
 		if (settings.versestyle) {
-			if (strstr(rework->str, "<!p>")) {
-				newparagraph = TRUE;
-			} else {
-				newparagraph = FALSE;
-			}
 			if ((key->Verse() != curVerse) ||
 			    (!settings.versehighlight &&
 			     (!e || !settings.annotate_highlight)))
@@ -1642,8 +1625,6 @@ DialogChapDisp::Display(SWModule &imodule)
 	int curBook = key->Book();
 	gchar *buf;
 	char *num;
-	const gchar *paragraphMark = NULL;
-	gboolean newparagraph = FALSE;
 	GString *rework;			// for image size analysis rework.
 	marked_element *e = NULL;
 
@@ -1676,11 +1657,6 @@ DialogChapDisp::Display(SWModule &imodule)
 	    strcasecmp(key->getBookName(), marked_cache_book) ||
 	    (curChapter != marked_cache_chapter))
 		marked_cache_fill(ModuleName, (gchar *)key->getShortText());
-
-	if (!strcmp(ModuleName, "KJV"))
-		paragraphMark = "&para;&nbsp;";
-	else
-		paragraphMark = "";
 
 	gint versestyle;
 	gchar *file = NULL, *style = NULL;
@@ -1816,11 +1792,6 @@ DialogChapDisp::Display(SWModule &imodule)
 			g_free(buf);
 		}
 
-		if (newparagraph && versestyle) {
-			newparagraph = FALSE;
-			swbuf.append(paragraphMark);;
-		}
-
 		swbuf.append(settings.imageresize
 			     ? AnalyzeForImageSize(rework->str,
 						   GDK_WINDOW(gtk_widget_get_window(gtkText)))
@@ -1832,11 +1803,6 @@ DialogChapDisp::Display(SWModule &imodule)
 		}
 
 		if (versestyle) {
-			if (strstr(cVerse.GetText(), "<!p>")) {
-				newparagraph = TRUE;
-			} else {
-				newparagraph = FALSE;
-			}
 			if ((key->Verse() != curVerse) ||
 			    (!settings.versehighlight &&
 			     (!e || !settings.annotate_highlight)))
@@ -1946,20 +1912,13 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 	int curBook = key->Book();
 	gchar *buf;
 	gchar *preverse = NULL;
-	const gchar *paragraphMark = NULL;
 	gchar heading[32];
 	SWBuf swbuf;
 	char *num;
 
 	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
 	gboolean is_rtol = main_is_mod_rtol(imodule.Name());
-	gboolean newparagraph = FALSE;
 	mf = get_font(imodule.Name());
-
-	if (!strcmp(imodule.Name(), "KJV"))
-		paragraphMark = "&para;&nbsp;";
-	else
-		paragraphMark = "";
 
 	swbuf = "";
 
@@ -2014,21 +1973,11 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 		swbuf.append(buf);
 		g_free(buf);
 
-		if (newparagraph && settings.versestyle) {
-			newparagraph = FALSE;
-			swbuf.append(paragraphMark);
-		}
-
 		swbuf.append((const char *)imodule);
 
 		buf = g_strdup_printf("%s", (const char *)imodule);
 
 		if (settings.versestyle) {
-			if (g_strstr_len(buf, strlen(buf), "<!p>")) {
-				newparagraph = TRUE;
-			} else {
-				newparagraph = FALSE;
-			}
 			swbuf.append("<br/>");
 		}
 
