@@ -2227,6 +2227,10 @@ save_sources(void)
 			mod_mgr_add_source("HTTPSSource",
 				   type, caption, source, directory,
 				   user, pass, uid);
+		else if(strcasecmp(type,"SFTP") == 0)
+			mod_mgr_add_source("SFTPSource",
+				   type, caption, source, directory,
+				   user, pass, uid);
 		else
 			mod_mgr_add_source("FTPSource",
 				   type, caption, source, directory,
