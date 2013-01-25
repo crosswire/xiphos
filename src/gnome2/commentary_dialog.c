@@ -227,12 +227,20 @@ void gui_create_commentary_dialog(DIALOG_DATA *d,
 	else
 		gtk_widget_set_size_request(d->dialog, 460, 280);
 
-	vbox30 = gtk_vbox_new(FALSE, 0);
+#ifdef USE_GTK_3
+    vbox30 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+#else
+    vbox30 = gtk_vbox_new(FALSE, 0);
+#endif
 	gtk_widget_show(vbox30);
 
 	gtk_container_add(GTK_CONTAINER(d->dialog), vbox30);
 
-	vbox_toolbars = gtk_vbox_new(FALSE, 0);
+#ifdef USE_GTK_3
+    vbox_toolbars = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+#else
+    vbox_toolbars = gtk_vbox_new(FALSE, 0);
+#endif
 	gtk_widget_show(vbox_toolbars);
 	gtk_box_pack_start(GTK_BOX(vbox30), vbox_toolbars, FALSE, FALSE,
 			   0);

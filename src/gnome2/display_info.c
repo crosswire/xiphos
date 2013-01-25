@@ -190,7 +190,11 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 	gtk_widget_show(dialog_vbox23);
 
 
-	hbox = gtk_hbox_new(FALSE, 12);
+#ifdef USE_GTK_3
+    hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
+#else
+    hbox = gtk_hbox_new(FALSE, 12);
+#endif
 	gtk_widget_show(hbox);
 	gtk_box_pack_start(GTK_BOX(dialog_vbox23), hbox, TRUE, TRUE, 0);
 	gtk_container_set_border_width(GTK_CONTAINER(hbox), 6);
@@ -215,7 +219,11 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 	gtk_container_set_border_width(GTK_CONTAINER
 				       (dialog_action_area23), 10);
 
-	hbuttonbox2 = gtk_hbutton_box_new();
+#ifdef USE_GTK_3
+    hbuttonbox2 = gtk_button_box_new (GTK_ORIENTATION_HORIZONTAL);
+#else
+    hbuttonbox2 = gtk_hbutton_box_new();
+#endif
 	gtk_widget_show(hbuttonbox2);
 	gtk_box_pack_start(GTK_BOX(dialog_action_area23), hbuttonbox2,
 			   TRUE, TRUE, 0);
