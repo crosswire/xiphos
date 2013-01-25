@@ -49,7 +49,7 @@ void gui_glade_signal_connect_func (const gchar *cb_name, GObject *obj,
 			   gpointer user_data);
 gchar *gui_general_user_file (const char *fname, gboolean critical);
 void gui_load_module_tree(GtkWidget * tree, gboolean limited);
-MOD_FONT *get_font(gchar * mod_name);
+MOD_FONT *get_font(const gchar * mod_name);
 void free_font(MOD_FONT *mf);
 gchar * remove_linefeeds(gchar * buf);
 void gui_add_mods_to_menus(GList * modlist, gchar * menu,

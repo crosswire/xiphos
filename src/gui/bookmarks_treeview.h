@@ -50,8 +50,8 @@ struct _bookmark_data {
 	gchar *caption;
 	gchar *key;
 	gchar *module;
-	gchar *module_desc;
-	gchar *description;
+    gchar *module_desc;
+    gchar *description;
 	gboolean is_leaf;
 	GdkPixbuf *opened;
 	GdkPixbuf *closed;

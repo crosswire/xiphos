@@ -185,7 +185,7 @@ void main_set_global_options(GLOBAL_OPS * ops)
  *   GLOBAL_OPS *
  */
 
-GLOBAL_OPS *main_new_globals(gchar * mod_name)
+GLOBAL_OPS *main_new_globals(const gchar * mod_name)
 {
 	GLOBAL_OPS *ops;
 	gchar *buf = g_strdup_printf("%s/modops.conf", settings.gSwordDir);

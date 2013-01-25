@@ -131,23 +131,23 @@ void BackEnd::init_SWORD(int gsType)
 		for (it = main_mgr->Modules.begin();
 					it != main_mgr->Modules.end(); it++) {
 			display_mod = (*it).second;
-			if (!strcmp(display_mod->Type(), TEXT_MODS)) {
+            if (!strcmp(display_mod->getType(), TEXT_MODS)) {
 				display_mod->setDisplay(textDisplay);
 			}
-			if (!strcmp(display_mod->Type(), COMM_MODS)) {
+            if (!strcmp(display_mod->getType(), COMM_MODS)) {
 				display_mod->setDisplay(commDisplay);
 			}
-			if (!strcmp(display_mod->Type(), DICT_MODS)) {
+            if (!strcmp(display_mod->getType(), DICT_MODS)) {
 				display_mod->setDisplay(dictDisplay);
 			}
-			if (!strcmp(display_mod->Type(), BOOK_MODS)) {
+            if (!strcmp(display_mod->getType(), BOOK_MODS)) {
 				display_mod->setDisplay(bookDisplay);
 			}
 		}
 	} else if (gsType == 1) { // dialogs
 		for (it = main_mgr->Modules.begin(); it != main_mgr->Modules.end(); it++) {
 			display_mod = (*it).second;
-			if (!strcmp(display_mod->Type(), TEXT_MODS)) {
+            if (!strcmp(display_mod->getType(), TEXT_MODS)) {
 				display_mod->setDisplay(chapDisplay);
 			} else {
 				display_mod->setDisplay(entryDisplay);
@@ -167,61 +167,61 @@ void BackEnd::init_lists(MOD_LISTS * mods)
 
 	for (it = main_mgr->Modules.begin();
 				it != main_mgr->Modules.end(); it++) {
-		if (!strcmp((*it).second->Type(), TEXT_MODS)) {
+        if (!strcmp((*it).second->getType(), TEXT_MODS)) {
 			mods->biblemods =
 			    g_list_append(mods->biblemods,
-				strdup((char *) (*it).second->Name()));
+                strdup((char *) (*it).second->getName()));
 			mods->text_descriptions =
 			    g_list_append(mods->text_descriptions,
 				strdup((char *) (*it).second->
-				   Description()));
+                   getDescription()));
 		}
-		if (!strcmp((*it).second->Type(), COMM_MODS)) {
+        if (!strcmp((*it).second->getType(), COMM_MODS)) {
 			mods->commentarymods =
 			    g_list_append(mods->commentarymods,
-			    strdup((char *) (*it).second->Name()));
+                strdup((char *) (*it).second->getName()));
 			mods->comm_descriptions =
 			    g_list_append(mods->comm_descriptions,
 				strdup((char *) (*it).second->
-				   Description()));
+                   getDescription()));
 			if (!strcmp((*it).second->getConfigEntry("ModDrv")
 				    , "RawFiles")) {
 				mods->percommods = g_list_append(mods->percommods,
-				    strdup((char *) (*it).second->Name()));
+                    strdup((char *) (*it).second->getName()));
 			}
 		}
-		if (!strcmp((*it).second->Type(), DICT_MODS)) {
+        if (!strcmp((*it).second->getType(), DICT_MODS)) {
 			char *feature =
 			    (char *) (*it).second->getConfigEntry("Feature");
 
 			if (feature && !strcmp(feature, "DailyDevotion")) {
 				mods->devotionmods =
 				    g_list_append(mods->devotionmods,
-						  strdup((char *) (*it).second->Name()));
+                          strdup((char *) (*it).second->getName()));
 			} else {
 				mods->dictionarymods =
 				    g_list_append(mods->dictionarymods,
-						  strdup((char *) (*it).second->Name()));
+                          strdup((char *) (*it).second->getName()));
 				mods->dict_descriptions =
 				    g_list_append(mods->dict_descriptions,
 						  strdup((char *) (*it).second->
-							 Description()));
+                             getDescription()));
 			}
 		}
-		if (!strcmp((*it).second->Type(), BOOK_MODS)) {
+        if (!strcmp((*it).second->getType(), BOOK_MODS)) {
 			if ((*it).second->getConfigEntry("GSType") &&
 				!strcmp((*it).second->getConfigEntry("GSType")
 				    , "PrayerList")) {
 				mods->prayermods = g_list_append(mods->prayermods,
-				    strdup((char *) (*it).second->Name()));
+                    strdup((char *) (*it).second->getName()));
 			} else {
 				mods->bookmods =
 				    g_list_append(mods->bookmods,
-				    strdup((char *) (*it).second->Name()));
+                    strdup((char *) (*it).second->getName()));
 				mods->book_descriptions =
 				    g_list_append(mods->book_descriptions,
 				    strdup((char *) (*it).second->
-					   Description()));
+                       getDescription()));
 			}
 		}
 
@@ -232,11 +232,11 @@ void BackEnd::init_lists(MOD_LISTS * mods)
 		if (!strcmp(category, "Maps"))
 			mods->mapmods
 			   = g_list_append(mods->mapmods,
-			    strdup((char *) (*it).second->Name()));
+                strdup((char *) (*it).second->getName()));
 		if (!strcmp(category, "Images"))
 			mods->imagemods
 			   = g_list_append(mods->imagemods,
-			    strdup((char *) (*it).second->Name()));
+                strdup((char *) (*it).second->getName()));
 	}
 }
 
@@ -296,7 +296,7 @@ int BackEnd::is_Bible_key(const char * list, char * current_key)
 	VerseKey key;
 
 	key.setText(current_key);
-	ListKey vs = key.ParseVerseList(list, key);
+    ListKey vs = key.parseVerseList(list, key);
 	return vs.Count();
 }
 
@@ -310,7 +310,7 @@ char *BackEnd::get_render_text(const char *module_name, const char *key)
 	if (it != main_mgr->Modules.end()) {
 		mod = (*it).second;
 		mod->setKey(key);
-		return strdup((char *) mod->RenderText());
+        return strdup((char *) mod->renderText());
 	}
 	return NULL;
 }
@@ -337,7 +337,7 @@ char *BackEnd::render_this_text(const char * module_name, const char * text)
 	it = main_mgr->Modules.find(module_name);
 	if (it != main_mgr->Modules.end()) {
 		mod = (*it).second;
-		return strdup((char *) mod->RenderText(text));
+        return strdup((char *) mod->renderText(text));
 	}
 	return NULL;
 }
@@ -350,7 +350,7 @@ char *BackEnd::get_strip_text_from_string(const char * module_name, const char *
 	it = main_mgr->Modules.find(module_name);
 	if (it != main_mgr->Modules.end()) {
 		mod = (*it).second;
-		return strdup((char *) mod->StripText(string));
+        return strdup((char *) mod->stripText(string));
 	}
 	return NULL;
 }
@@ -363,7 +363,7 @@ char *BackEnd::get_strip_text(const char *module_name, const char *key)
 	if (it != main_mgr->Modules.end()) {
 		mod = (*it).second;
 		mod->setKey(key);
-		return strdup((char *) mod->StripText());
+        return strdup((char *) mod->stripText());
 	}
 	return NULL;
 }
@@ -373,7 +373,7 @@ char *BackEnd::get_valid_key(const char *key)
 {
 	VerseKey vkey;
 	char *mykey;
-	vkey.AutoNormalize(1);
+    vkey.setAutoNormalize(1);
 	vkey = key;
 	if ((sword_locale) && (!strcmp(sword_locale,"en")))
 		mykey = (char*)vkey.getShortText();
@@ -385,7 +385,7 @@ char *BackEnd::get_valid_key(const char *key)
 char *BackEnd::key_get_book(const char *key)
 {
 	VerseKey vkey;
-	vkey.AutoNormalize(1);
+    vkey.setAutoNormalize(1);
 	vkey = key;
 
 	return strdup((char*)vkey.getBookName());
@@ -395,23 +395,23 @@ char *BackEnd::key_get_book(const char *key)
 int BackEnd::key_get_chapter(const char *key)
 {
 	VerseKey vkey;
-	vkey.AutoNormalize(1);
+    vkey.setAutoNormalize(1);
 	vkey = key;
-	return vkey.Chapter();
+    return vkey.getChapter();
 }
 
 int BackEnd::key_get_verse(const char *key)
 {
 	VerseKey vkey;
-	vkey.AutoNormalize(1);
+    vkey.setAutoNormalize(1);
 	vkey = key;
-	return vkey.Verse();
+    return vkey.getVerse();
 }
 
 unsigned int BackEnd::key_chapter_count(const char *key)
 {
 	VerseKey vkey;
-	vkey.AutoNormalize(1);
+    vkey.setAutoNormalize(1);
 	vkey = key;
 
 	return (vkey.getChapterMax());
@@ -421,7 +421,7 @@ unsigned int BackEnd::key_chapter_count(const char *key)
 unsigned int BackEnd::key_verse_count(const char *key)
 {
 	VerseKey vkey;
-	vkey.AutoNormalize(1);
+    vkey.setAutoNormalize(1);
 	vkey = key;
 
 	return (vkey.getVerseMax());
@@ -432,7 +432,7 @@ char *BackEnd::get_module_key()
 {
 	(const char *) *display_mod;
 
-	return strdup((char*)display_mod->KeyText());
+    return strdup((char*)display_mod->getKeyText());
 }
 
 void BackEnd::save_entry(const char * entry)
@@ -447,11 +447,11 @@ void BackEnd::save_note_entry(const char * module, const char * key, const char 
 
 	if (display_mod) {
 		display_mod->setKey(key);
-		display_mod->KeyText(); /* snap to entry */
+        display_mod->getKeyText(); /* snap to entry */
 		display_mod->setEntry((const char *) entry);
 		GS_message (("\nsave_note_entry\nmod: %s\nkey: %s\nentry: %s",
-			     display_mod->Name(), display_mod->KeyText(),
-			     display_mod->RenderText()));
+                 display_mod->getName(), display_mod->getKeyText(),
+                 display_mod->renderText()));
 	}
 }
 
@@ -467,7 +467,7 @@ const char *BackEnd::module_get_language(const char *module_name)
 	ModMap::iterator it;
 	it = main_mgr->Modules.find(module_name);
 	if (it != main_mgr->Modules.end())
-		return main_get_language_map((*it).second->Lang());
+        return main_get_language_map((*it).second->getLanguage());
 	return "unknown";
 }
 
@@ -483,7 +483,7 @@ char **BackEnd::get_module_language_list(void)
 	// create a set of unique language names in use by modules.
 	ModMap::iterator it;
 	for (it = main_mgr->Modules.begin(); it != main_mgr->Modules.end(); it++)
-		module_languages.insert((*it).second->Lang());
+        module_languages.insert((*it).second->getLanguage());
 
 	// construct a list of char* from the uniquified set.
 	retval = g_new0(char *, module_languages.size() + 1);
@@ -517,21 +517,21 @@ int BackEnd::module_type(const char *mod_name)
 	it = main_mgr->Modules.find(mod_name);
 	if (it != main_mgr->Modules.end()) {
 
-		if (!strcmp((*it).second->Type(), TEXT_MODS)) {
+        if (!strcmp((*it).second->getType(), TEXT_MODS)) {
 			return TEXT_TYPE;
 		}
 
-		if (!strcmp((*it).second->Type(), COMM_MODS)) {
+        if (!strcmp((*it).second->getType(), COMM_MODS)) {
 			if (!strcmp((char *) (*it).second->getConfigEntry("ModDrv"), "RawFiles"))
 				return PERCOM_TYPE;
 			return COMMENTARY_TYPE;
 		}
 
-		if (!strcmp((*it).second->Type(), DICT_MODS)) {
+        if (!strcmp((*it).second->getType(), DICT_MODS)) {
 			return DICTIONARY_TYPE;
 		}
 
-		if (!strcmp((*it).second->Type(), BOOK_MODS)) {
+        if (!strcmp((*it).second->getType(), BOOK_MODS)) {
 			if ((*it).second->getConfigEntry("GSType") &&
 				!strcmp((char *) (*it).second->getConfigEntry("GSType"), "PrayerList"))
 				return PRAYERLIST_TYPE;
@@ -541,7 +541,7 @@ int BackEnd::module_type(const char *mod_name)
 	return -1;
 }
 
-char *BackEnd::module_description(char *mod_name)
+const char *BackEnd::module_description(const char *mod_name)
 {
 	ModMap::iterator it;
 
@@ -550,7 +550,7 @@ char *BackEnd::module_description(char *mod_name)
 
 	it = main_mgr->Modules.find(mod_name);
 	if (it != main_mgr->Modules.end()) {
-		return (*it).second->Description();
+        return (*it).second->getDescription();
 	}
 	return NULL;
 }
@@ -565,8 +565,8 @@ char *BackEnd::module_name_from_description(char *description)
 
 	for (it = main_mgr->Modules.begin();
 	     it != main_mgr->Modules.end(); it++) {
-		  if (!strcmp((*it).second->Description(), description))
-			retval = strdup((*it).second->Name());
+          if (!strcmp((*it).second->getDescription(), description))
+            retval = strdup((*it).second->getName());
 	}
 	return retval;
 }
@@ -575,7 +575,7 @@ char *BackEnd::module_name_from_description(char *description)
 int BackEnd::get_key_testament(const char * key)
 {
 	sword::VerseKey ikey( key );
-	return ikey.Testament();
+    return ikey.getTestament();
 }
 
 int BackEnd::module_has_testament(const char * module_name,  int testament)
@@ -590,18 +590,18 @@ int BackEnd::module_has_testament(const char * module_name,  int testament)
 		module->setSkipConsecutiveLinks(true);
 
 		*module = sword::TOP; //position to first entry
-		sword::VerseKey key( module->KeyText() );
-		if (key.Testament() == 1) { // OT && NT
+        sword::VerseKey key( module->getKeyText() );
+        if (key.getTestament() == 1) { // OT && NT
 			ot = 1;
-		} else if (key.Testament() == 2) { //no OT
+        } else if (key.getTestament() == 2) { //no OT
 			ot = 0;
 		}
 
 		*module = sword::BOTTOM;
-		key = module->KeyText();
-		if (key.Testament() == 1) { // only OT, no NT
+        key = module->getKeyText();
+        if (key.getTestament() == 1) { // only OT, no NT
 			nt = 0;
-		} else if (key.Testament() == 2) { //has NT
+        } else if (key.getTestament() == 2) { //has NT
 			nt = 1;
 		}
 		module->setSkipConsecutiveLinks(false);
@@ -628,18 +628,18 @@ int BackEnd::module_get_testaments(const char * module_name)
 		SWModule *module = (*it).second;
 		module->setSkipConsecutiveLinks(true);
 			*module = sword::TOP; //position to first entry
-			sword::VerseKey key( module->KeyText() );
-			if (key.Testament() == 1) { // OT && NT
+            sword::VerseKey key( module->getKeyText() );
+            if (key.getTestament() == 1) { // OT && NT
 				ot = 1;
-			} else if (key.Testament() == 2) { //no OT
+            } else if (key.getTestament() == 2) { //no OT
 				ot = 0;
 			}
 
 			*module = sword::BOTTOM;
-			key = module->KeyText();
-			if (key.Testament() == 1) { // only OT, no NT
+            key = module->getKeyText();
+            if (key.getTestament() == 1) { // only OT, no NT
 				nt = 0;
-			} else if (key.Testament() == 2) { //has NT
+            } else if (key.getTestament() == 2) { //has NT
 				nt = 1;
 			}
 	         module->setSkipConsecutiveLinks(false);
@@ -660,7 +660,7 @@ char *BackEnd::get_entry_attribute(const char *level1,
 {
 	UTF8HTML u2html;
 	if (render)
-		display_mod->RenderText();
+        display_mod->renderText();
 	SWBuf attribute2 = display_mod->getEntryAttributes()[level1][level2][level3].c_str();
 
 	u2html.processText(attribute2);
@@ -715,10 +715,10 @@ char *BackEnd::get_key_from_offset(unsigned long offset)
                 treenode.setOffset(offset);
                 /** if not root node then display **/
                 if (treenode.getOffset() > 0) {
-                        display_mod->SetKey(treenode);
-                        display_mod->KeyText();      //snap to entry
+                        display_mod->setKey(treenode);
+                        display_mod->getKeyText();      //snap to entry
                 }
-		return strdup(display_mod->KeyText());
+        return strdup(display_mod->getKeyText());
         }
         return NULL;
 }
@@ -728,8 +728,8 @@ unsigned long BackEnd::treekey_set_key(char * key)
 	if (tree_key) {
                 TreeKeyIdx treenode = *tree_key;
 		treenode.setText(key);
-                display_mod->SetKey(treenode);
-		display_mod->KeyText();      //snap to entry
+                display_mod->setKey(treenode);
+        display_mod->getKeyText();      //snap to entry
 		return treenode.getOffset();
 	}
 	return 0;
@@ -744,14 +744,14 @@ void BackEnd::set_treekey(unsigned long offset)
 	}
 	if (tree_key)
 		delete tree_key;
-	tree_key = (TreeKeyIdx *) display_mod->CreateKey();
+    tree_key = (TreeKeyIdx *) display_mod->createKey();
 	if (tree_key) {
                 TreeKeyIdx treenode = *tree_key;
                 treenode.setOffset(offset);
                 /** if not root node then display **/
                 if (treenode.getOffset() > 0) {
-                        display_mod->SetKey(treenode);
-                        display_mod->KeyText();      //snap to entry
+                        display_mod->setKey(treenode);
+                        display_mod->getKeyText();      //snap to entry
                 }
         }
 }
@@ -765,9 +765,9 @@ unsigned long BackEnd::get_treekey_offset_from_key(const char * module_name, con
 	it = main_mgr->Modules.find(module_name);
 	if (it != main_mgr->Modules.end()) {
 		mod = (*it).second;
-		TreeKeyIdx *tree_key_idx = (TreeKeyIdx *) mod->CreateKey();
+        TreeKeyIdx *tree_key_idx = (TreeKeyIdx *) mod->createKey();
 		tree_key_idx->setText(key);
-                mod->SetKey(tree_key_idx);
+                mod->setKey(tree_key_idx);
 		//(char*)mod;
 		retval = tree_key_idx->getOffset();
 		delete tree_key_idx;
@@ -852,7 +852,7 @@ int BackEnd::treekey_prev_sibling(unsigned long offset)
 char *BackEnd::navigate_module(int direction)
 {
 	if (direction == -1)
-		return strdup((char *) display_mod->KeyText());
+        return strdup((char *) display_mod->getKeyText());
 
 	switch (direction) {
 	case 0:
@@ -862,8 +862,8 @@ char *BackEnd::navigate_module(int direction)
 		(*display_mod)++;
 		break;
 	}
-	display_mod->Error();
-	return strdup((char *) display_mod->KeyText());
+    display_mod->popError();
+    return strdup((char *) display_mod->getKeyText());
 }
 
 GList *BackEnd::parse_verse_list(const char * list, char * current_key)
@@ -876,10 +876,10 @@ GList *BackEnd::parse_verse_list(const char * list, char * current_key)
 		return retlist;
 	GS_message(("current_key=%s",current_key));
 	key.setText(current_key);
-	vs = key.ParseVerseList(list, key, TRUE);
+    vs = key.parseVerseList(list, key, TRUE);
 	if (!vs.Count())
 		return retlist;
-	while (!vs.Error()) {
+    while (!vs.popError()) {
 		retlist = g_list_append(retlist, strdup((char*)vs.getText()));
 		vs++;
 	}
@@ -893,7 +893,7 @@ GList *BackEnd::parse_range_list(const char * list)
 	VerseKey key;
 
 	verses.ClearList();
-	verses = key.ParseVerseList(list, key, true);
+    verses = key.parseVerseList(list, key, true);
 
 	buf = verses.getRangeText();
 	retlist = g_list_append(retlist, g_strdup(buf));
@@ -918,7 +918,7 @@ const char *BackEnd::get_next_listkey(void)
 
 	static char retval[128];
 
-	while (!results.Error()) {
+    while (!results.popError()) {
 		(void) g_strlcpy(retval, results.getText(), 126);
 		results++;
 		return retval;
@@ -940,7 +940,7 @@ int BackEnd::clear_search_list(void)
 
 int BackEnd::set_range(char * list)
 {
-	search_range = VerseKey().ParseVerseList(list, "", true);
+    search_range = VerseKey().parseVerseList(list, "", true);
 	return search_range.Count ();
 }
 

@@ -52,7 +52,7 @@ public:
 	      cache_flags(0)
 	{
 	}
-	virtual char Display(SWModule &imodule);
+    virtual char display(SWModule &imodule);
 	virtual char DisplayByChapter(SWModule &imodule);
 
 protected:
@@ -74,7 +74,7 @@ public:
 	    : GTKEntryDisp(_gtkText, _be)
 	{
 	}
-	virtual char Display(SWModule &imodule);
+    virtual char display(SWModule &imodule);
 	virtual void getVerseBefore(SWModule &imodule);
 	virtual void getVerseAfter(SWModule &imodule);
 
@@ -97,7 +97,7 @@ public:
 	      cache_flags(0)
 	{
 	}
-	virtual char Display(SWModule &imodule);
+    virtual char display(SWModule &imodule);
 	virtual char DisplayByChapter(SWModule &imodule);
 
 protected:
@@ -154,7 +154,7 @@ public:
 extern "C" {
 #endif /* __cplusplus */
 
-void marked_cache_fill(gchar *modname, gchar *key);
+void marked_cache_fill(const gchar *modname, gchar *key);
 
 #ifdef __cplusplus
 }

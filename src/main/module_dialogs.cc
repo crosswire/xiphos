@@ -124,13 +124,13 @@ void main_dialogs_book_heading(DIALOG_DATA * d)
 	SWMgr *mgr = be->get_mgr();
 
 	be->display_mod = mgr->Modules[d->mod_name];
-	GS_message(("%s",(char*)be->display_mod->RenderText()));
+    GS_message(("%s",(char*)be->display_mod->renderText()));
 	vkey = (VerseKey*)(SWKey*)(*be->display_mod);
-	vkey->Headings(1);
-	vkey->AutoNormalize(0);
-	vkey->Verse(0);
-	vkey->Chapter(0);
-	be->display_mod->Display();
+    vkey->setIntros(1);
+    vkey->setAutoNormalize(0);
+    vkey->setVerse(0);
+    vkey->setChapter(0);
+    be->display_mod->display();
 }
 
 
@@ -159,11 +159,11 @@ void main_dialogs_chapter_heading(DIALOG_DATA * d)
 	be->display_mod = mgr->Modules[d->mod_name];
 	backend->display_mod->setKey(d->key);
 	vkey = (VerseKey*)(SWKey*)(*be->display_mod);
-	vkey->Headings(1);
-	vkey->AutoNormalize(0);
-	vkey->Verse(0);
+    vkey->setIntros(1);
+    vkey->setAutoNormalize(0);
+    vkey->setVerse(0);
 	//vkey->Chapter(0);
-	be->display_mod->Display();
+    be->display_mod->display();
 }
 
 
@@ -609,7 +609,7 @@ void main_dialogs_tree_selection_changed(GtkTreeModel * model,
 						l_offset, is_dialog, g);
 			}
 			//is_leaf = gtk_tree_model_iter_has_child(model, &selected);
-			be->display_mod->Display();
+            be->display_mod->display();
 			g_free(name);
 			g_free(book);
 			g_free(offset);
@@ -659,7 +659,7 @@ void main_dialogs_dictionary_entry_changed(DIALOG_DATA * d)
 //	settings.dictkey = xml_get_value("keys", "dictionary");
 
 	be->set_module_key(mod_name, key);
-	be->display_mod->Display();
+    be->display_mod->display();
 
 	model = gtk_tree_view_get_model(GTK_TREE_VIEW(d->listview));
 	list_store = GTK_LIST_STORE(model);
@@ -773,7 +773,7 @@ void main_dialog_goto_bookmark(const gchar * module, const gchar * key)
 			if (t->mod_type == TEXT_TYPE ||
 					t->mod_type == COMMENTARY_TYPE)
 
-			be->display_mod->Display();
+            be->display_mod->display();
 			gdk_window_raise(GDK_WINDOW(t->dialog));
 			return;
 		}
@@ -791,7 +791,7 @@ void main_dialog_goto_bookmark(const gchar * module, const gchar * key)
 		t->key = g_strdup(key);
 		be->set_key(t->key);
 	}
-	be->display_mod->Display();
+    be->display_mod->display();
 }
 
 
@@ -1214,7 +1214,7 @@ static gint sword_uri(DIALOG_DATA * t, const gchar * url, gboolean clicked)
 	t->mod_name = g_strdup(module);
 
 	be->set_module_key(t->mod_name, t->key);
-	be->display_mod->Display();
+    be->display_mod->display();
 	if (t->navbar.module_name)
 		main_navbar_versekey_set(t->navbar, t->key);
 
@@ -1606,7 +1606,7 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 	if ((type != BOOK_TYPE) &&
 	    (type != PRAYERLIST_TYPE) &&
 	    (type != DICTIONARY_TYPE)) {
-		be->display_mod->Display();
+        be->display_mod->display();
 		bible_apply_change = TRUE;
 	}
 	if (type == TEXT_TYPE)
