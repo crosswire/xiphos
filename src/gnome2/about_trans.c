@@ -104,7 +104,11 @@ gui_create_about_trans(void)
 			  "dialog_vbox", dialog_vbox);
 	gtk_widget_show(dialog_vbox);
 
-	vbox = gtk_vbox_new(FALSE, 0);
+#ifdef USE_GTK_3
+    vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+#else
+    vbox = gtk_vbox_new(FALSE, 0);
+#endif
 	gtk_widget_show(vbox);
 	gtk_box_pack_start(GTK_BOX(dialog_vbox), vbox, TRUE, TRUE,
 			   0);
@@ -156,7 +160,11 @@ gui_create_about_trans(void)
 	gtk_container_set_border_width(GTK_CONTAINER
 				       (dialog_action_area), 10);
 
-	hbuttonbox = gtk_hbutton_box_new();
+#ifdef USE_GTK_3
+    hbuttonbox = gtk_button_box_new (GTK_ORIENTATION_HORIZONTAL);
+#else
+    hbuttonbox = gtk_hbutton_box_new();
+#endif
 	gtk_widget_show(hbuttonbox);
 	gtk_box_pack_start(GTK_BOX(dialog_action_area), hbuttonbox,
 			   TRUE, TRUE, 0);

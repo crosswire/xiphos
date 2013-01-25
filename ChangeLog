@@ -1,5 +1,10 @@
 2013-01-25  greg <hellings@users.sf.net>
 
+	* Fixed many of the GTK3 deprecation warnings.
+	  Table->grid and color->rgba conversions are still needed.
+
+2013-01-25  greg <hellings@users.sf.net>
+
 	* Removed SWORD deprecated method warnings.
 
 2013-01-08  greg <hellings@users.sf.net>

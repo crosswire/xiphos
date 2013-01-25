@@ -162,11 +162,19 @@ void gui_create_search_sidebar(void)
 	gtk_container_add(GTK_CONTAINER(scrolledwindow_search),
 			  viewport_search);
 
-	vbox1 = gtk_vbox_new(FALSE, 4);
+#ifdef USE_GTK_3
+    vbox1 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 4);
+#else
+    vbox1 = gtk_vbox_new(FALSE, 4);
+#endif
 	gtk_widget_show(vbox1);
 	gtk_container_add(GTK_CONTAINER(viewport_search), vbox1);
 
-	vbox5 = gtk_vbox_new(FALSE, 0);
+#ifdef USE_GTK_3
+    vbox5 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+#else
+    vbox5 = gtk_vbox_new(FALSE, 0);
+#endif
 	gtk_widget_show(vbox5);
 	gtk_box_pack_start(GTK_BOX(vbox1), vbox5, FALSE, TRUE,
 			   0);
@@ -215,7 +223,11 @@ void gui_create_search_sidebar(void)
 	gtk_frame_set_label_widget      (GTK_FRAME(ss.frame_module),
                                              label1);
 
-	vbox90 = gtk_vbox_new(FALSE, 0);
+#ifdef USE_GTK_3
+    vbox90 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+#else
+    vbox90 = gtk_vbox_new(FALSE, 0);
+#endif
 	gtk_widget_show(vbox90);
 	gtk_container_add(GTK_CONTAINER(ss.frame_module), vbox90);
 	gtk_container_set_border_width (GTK_CONTAINER (vbox90), 4);
@@ -251,7 +263,12 @@ void gui_create_search_sidebar(void)
 	gtk_widget_show(label1);
 	gtk_frame_set_label_widget(GTK_FRAME(frame2), label1);
 
-	vbox2 = gtk_vbox_new(TRUE, 0);
+#ifdef USE_GTK_3
+    vbox2 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+    gtk_box_set_homogeneous(GTK_BOX(vbox2), TRUE);
+#else
+    vbox2 = gtk_vbox_new(TRUE, 0);
+#endif
 	gtk_widget_show(vbox2);
 	gtk_container_add(GTK_CONTAINER(frame2), vbox2);
 	gtk_container_set_border_width (GTK_CONTAINER (vbox2), 4);
@@ -298,7 +315,11 @@ void gui_create_search_sidebar(void)
 	gtk_widget_show(label1);
 	gtk_frame_set_label_widget(GTK_FRAME(frame3), label1);
 
-	vbox3 = gtk_vbox_new(FALSE, 0);
+#ifdef USE_GTK_3
+    vbox3 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+#else
+    vbox3 = gtk_vbox_new(FALSE, 0);
+#endif
 	gtk_widget_show(vbox3);
 	gtk_container_add(GTK_CONTAINER(frame3), vbox3);
 	gtk_container_set_border_width (GTK_CONTAINER (vbox3), 4);
@@ -326,7 +347,12 @@ void gui_create_search_sidebar(void)
 	gtk_widget_show(label1);
 	gtk_frame_set_label_widget(GTK_FRAME(frame4),label1);
 
-	vbox4 = gtk_vbox_new(TRUE, 0);
+#ifdef USE_GTK_3
+    vbox4 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+    gtk_box_set_homogeneous(GTK_BOX(vbox4), TRUE);
+#else
+    vbox4 = gtk_vbox_new(TRUE, 0);
+#endif
 	gtk_widget_show(vbox4);
 	gtk_container_add(GTK_CONTAINER(frame4), vbox4);
 	gtk_container_set_border_width (GTK_CONTAINER (vbox4), 4);

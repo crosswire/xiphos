@@ -196,7 +196,11 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 			  dialog_vbox29);
 	gtk_widget_show(dialog_vbox29);
 
-	vbox45 = gtk_vbox_new(FALSE, 12);
+#ifdef USE_GTK_3
+    vbox45 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 12);
+#else
+    vbox45 = gtk_vbox_new(FALSE, 12);
+#endif
 	gtk_widget_show(vbox45);
 	gtk_box_pack_start(GTK_BOX(dialog_vbox29), vbox45, TRUE, TRUE,
 			   0);
@@ -211,7 +215,11 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 			   0);
 	gtk_widget_set_size_request(dialog->entry, 291, -1);
 
-	hbox66 = gtk_hbox_new(FALSE, 0);
+#ifdef USE_GTK_3
+    hbox66 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+#else
+    hbox66 = gtk_hbox_new(FALSE, 0);
+#endif
 	gtk_widget_show(hbox66);
 	gtk_box_pack_start(GTK_BOX(vbox45), hbox66, TRUE, TRUE, 0);
 
@@ -231,7 +239,11 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 	gtk_container_set_border_width(GTK_CONTAINER
 				       (dialog_action_area29), 10);
 
-	hbuttonbox8 = gtk_hbutton_box_new();
+#ifdef USE_GTK_3
+    hbuttonbox8 = gtk_button_box_new (GTK_ORIENTATION_HORIZONTAL);
+#else
+    hbuttonbox8 = gtk_hbutton_box_new();
+#endif
 	gtk_widget_show(hbuttonbox8);
 	gtk_box_pack_start(GTK_BOX(dialog_action_area29), hbuttonbox8,
 			   TRUE, TRUE, 0);
@@ -249,7 +261,11 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 	gtk_widget_show(alignment);
 	gtk_container_add(GTK_CONTAINER(dialog->next), alignment);
 
-	hbox5 = gtk_hbox_new(FALSE, 2);
+#ifdef USE_GTK_3
+    hbox5 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 2);
+#else
+    hbox5 = gtk_hbox_new(FALSE, 2);
+#endif
 	gtk_widget_show(hbox5);
 	gtk_container_add(GTK_CONTAINER(alignment), hbox5);
 

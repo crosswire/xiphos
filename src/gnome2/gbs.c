@@ -161,7 +161,11 @@ GtkWidget *gui_create_book_pane(void)
 	GtkWidget *scrolledwindow;
 	GtkWidget *navbar;
 
-	box = gtk_vbox_new(FALSE, 0);
+#ifdef USE_GTK_3
+    box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+#else
+    box = gtk_vbox_new(FALSE, 0);
+#endif
 	gtk_widget_show(box);
 
 	navbar = gui_navbar_book_new();

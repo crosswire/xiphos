@@ -270,10 +270,18 @@ GtkWidget *gui_navbar_book_dialog_new(DIALOG_DATA * d)
 	GtkWidget *arrow1;
 	GtkWidget *image2;
 
-	vbox1 = gtk_vbox_new(FALSE, 0);
+#ifdef USE_GTK_3
+    vbox1 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+#else
+    vbox1 = gtk_vbox_new(FALSE, 0);
+#endif
 	gtk_widget_show(vbox1);
 
-	hbox1 = gtk_hbox_new(FALSE, 0);
+#ifdef USE_GTK_3
+    hbox1 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+#else
+    hbox1 = gtk_hbox_new(FALSE, 0);
+#endif
 	gtk_widget_show(hbox1);
 	gtk_box_pack_start(GTK_BOX(vbox1), hbox1, FALSE, TRUE, 0);
 
