@@ -163,7 +163,7 @@ xmlNodePtr xml_add_folder_to_parent(xmlNodePtr parent, gchar * caption)
  */
 
 void xml_add_bookmark_to_parent(xmlNodePtr parent, gchar * caption,
-			gchar * key, gchar * module, gchar * mod_desc)
+            gchar * key, gchar * module, const gchar * mod_desc)
 {
 	xmlNodePtr xml_node;
 	//gchar *mod_desc = NULL;

@@ -122,7 +122,7 @@ ModuleManager::~ModuleManager() {
 
 }
 
-char *backend_mod_mgr_get_config_entry(char *module_name,
+char *backend_mod_mgr_get_config_entry(const char *module_name,
 				       const char *entry) {
 	SWModule *mod;
 	ModMap::iterator it;	//-- iteratior
@@ -168,13 +168,13 @@ MOD_MGR *backend_module_mgr_get_next_module(void)
 	if (list_it != list_end) {
 		module = list_it->second;
 		mod_info = g_new(MOD_MGR, 1);
-		gchar *name = module->Name();
+        const gchar *name = module->getName();
 
 		if (name) {
 			mod_info->name = g_strdup(name);
 			mod_info->language =
-			    main_get_language_map(module->Lang());
-			mod_info->type = g_strdup(module->Type());
+                main_get_language_map(module->getLanguage());
+            mod_info->type = g_strdup(module->getType());
 			mod_info->about = g_strdup((char *)module->getConfigEntry("About"));
 
 			char *vers = (char *)module->getConfigEntry("Version");
@@ -213,7 +213,7 @@ MOD_MGR *backend_module_mgr_get_next_module(void)
 			    backend_mod_mgr_get_config_entry(name, "Version");
 			mod_info->installed =
 			    backend_mod_mgr_is_module(name);
-			mod_info->description = module->Description();
+            mod_info->description = g_strdup(module->getDescription());
 			mod_info->locked =
 			    ((module->getConfigEntry("CipherKey")) ? 1 : 0);
 			list_it++;
@@ -318,7 +318,7 @@ int backend_uninstall_module(const char *dir,
 		return -1;
 	}
 	module = it->second;
-	retval = installMgr->removeModule(tmp_mgr, module->Name());
+    retval = installMgr->removeModule(tmp_mgr, module->getName());
 	delete tmp_mgr;
 	return retval;
 }

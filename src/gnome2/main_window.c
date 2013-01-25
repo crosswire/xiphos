@@ -305,7 +305,7 @@ void gui_set_bible_comm_layout(void)
 
 void gui_change_window_title(gchar * module_name)
 {
-	gchar *title;
+    gchar *title;
 
 	if (cur_passage_tab) {
 		/* borrowed from tabbed_browser.c:pick_tab_label() */
@@ -331,9 +331,9 @@ void gui_change_window_title(gchar * module_name)
 	/*
 	 * set program title to current module name
 	 */
-	title = main_get_module_description(title);
+    title = g_strdup(main_get_module_description(title));
 	if (!title)
-		title = main_get_module_description(settings.MainWindowModule);
+        title = g_strdup(main_get_module_description(settings.MainWindowModule));
 	title = g_strdup_printf("%s - %s", (title ? title : "[no title]"),
 				settings.program_title);
 	gtk_window_set_title(GTK_WINDOW(widgets.app), title);

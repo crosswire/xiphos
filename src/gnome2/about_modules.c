@@ -308,7 +308,7 @@ about_module_display(GString * str,
  */
 
 void
-gui_core_display_about_dialog(gchar * desc,
+gui_core_display_about_dialog(const gchar * desc,
 			      gchar * abouttext,
 			      const gchar * version,
 			      gchar * modname)
@@ -374,7 +374,7 @@ gui_core_display_about_dialog(gchar * desc,
 void
 gui_display_about_module_dialog(gchar *modname)
 {
-	gchar *buf;		//-- pointer to text buffer for label (mod name)
+    const gchar *buf;		//-- pointer to text buffer for label (mod name)
 	gchar *bufabout;	//-- pointer to text buffer for text widget (mod about)
 	const gchar * version;
 

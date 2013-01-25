@@ -785,7 +785,7 @@ void gui_load_module_tree(GtkWidget * tree, gboolean limited)
  *   void
  */
 
-MOD_FONT *get_font(gchar * mod_name)
+MOD_FONT *get_font(const gchar * mod_name)
 {
 	MOD_FONT *mf;
 	static gchar *file = NULL;

@@ -58,7 +58,7 @@ extern "C" {
 #endif
 #include "main/mod_mgr.h"
 
-char *backend_mod_mgr_get_config_entry(char * module_name, char * entry);
+char *backend_mod_mgr_get_config_entry(const char * module_name, char * entry);
 void backend_mod_mgr_init_language_map(void);
 MOD_MGR *backend_module_mgr_get_next_module(void);
 GList *backend_module_mgr_list_remote_sources(void);

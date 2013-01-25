@@ -769,7 +769,7 @@ static void interpolate_parallel_display(SWBuf& text, gchar *key, gint parallel_
 	VerseKey vkey;
 	int xverses;
 
-	vkey.AutoNormalize(1);
+    vkey.setAutoNormalize(1);
 	vkey = key;
 	xverses = (vkey.getVerseMax());
 
