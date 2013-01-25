@@ -29,7 +29,7 @@ extern "C" {
 #include <gtk/gtk.h>
 
 void gui_display_about_module_dialog(gchar * modname);
-void gui_core_display_about_dialog(gchar *desc,
+void gui_core_display_about_dialog(const gchar *desc,
 				   gchar *abouttext,
 				   const gchar *version,
 				   gchar *modname);

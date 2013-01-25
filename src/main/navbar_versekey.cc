@@ -97,13 +97,13 @@ void main_navbar_versekey_spin_book(NAVBAR_VERSEKEY navbar, int direction)
 
 	tmpkey = backend->get_valid_key(navbar.key->str);
 
-	vkey.AutoNormalize(1);
+    vkey.setAutoNormalize(1);
 	vkey = tmpkey;
 
 
 
-	book = (direction)?(vkey.Book()+1):(vkey.Book()-1);
-	vkey.Book(book);
+    book = (direction)?(vkey.getBook()+1):(vkey.getBook()-1);
+    vkey.setBook(book);
 
 
 	tmpkey = g_strdup_printf("%s 1:1",vkey.getBookName());
@@ -141,11 +141,11 @@ void main_navbar_versekey_spin_chapter(NAVBAR_VERSEKEY navbar, int direction)
 
 	tmpkey = backend->get_valid_key(navbar.key->str);
 
-	vkey.AutoNormalize(1);
+    vkey.setAutoNormalize(1);
 	vkey = tmpkey;
-	chapter = (direction ? (vkey.Chapter()+1) : (vkey.Chapter()-1));
-	vkey.Chapter(chapter);
-	tmpkey = g_strdup_printf("%s %d:1", vkey.getBookName(), vkey.Chapter());
+    chapter = (direction ? (vkey.getChapter()+1) : (vkey.getChapter()-1));
+    vkey.setChapter(chapter);
+    tmpkey = g_strdup_printf("%s %d:1", vkey.getBookName(), vkey.getChapter());
 	gtk_entry_set_text(GTK_ENTRY(navbar.lookup_entry), tmpkey);
 	gtk_widget_activate(navbar.lookup_entry);
 	g_free(tmpkey);
@@ -180,12 +180,12 @@ void main_navbar_versekey_spin_verse(NAVBAR_VERSEKEY navbar, int direction)
 
 	tmpkey = backend->get_valid_key(navbar.key->str);
 
-	vkey.AutoNormalize(1);
+    vkey.setAutoNormalize(1);
 	vkey = tmpkey;
-	verse = (direction)?(vkey.Verse()+1):(vkey.Verse()-1);
-	vkey.Verse(verse);
+    verse = (direction)?(vkey.getVerse()+1):(vkey.getVerse()-1);
+    vkey.setVerse(verse);
 	tmpkey = g_strdup_printf("%s %d:%d", vkey.getBookName(),
-				 vkey.Chapter(), vkey.Verse());
+                 vkey.getChapter(), vkey.getVerse());
 	gtk_entry_set_text(GTK_ENTRY(navbar.lookup_entry), tmpkey);
 	gtk_widget_activate(navbar.lookup_entry);
 	g_free(tmpkey);
@@ -216,7 +216,7 @@ void on_nt_book_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 	GtkWidget *entry = NULL;
 	int book = GPOINTER_TO_INT(user_data);
 
-	vkey.AutoNormalize(1);
+    vkey.setAutoNormalize(1);
 	switch (c_type) {
 		case NB_MAIN:
 			vkey = navbar_versekey.key->str;
@@ -238,8 +238,8 @@ void on_nt_book_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 		break;
 	}
 	if (entry) {
-		vkey.Testament(2);
-		vkey.Book(book+1);
+        vkey.setTestament(2);
+        vkey.setBook(book+1);
 		gtk_entry_set_text(GTK_ENTRY(entry),vkey.getText());
 		gtk_widget_activate(entry);
 	}
@@ -270,7 +270,7 @@ void on_ot_book_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 	GtkWidget *entry = NULL;
 	int book = GPOINTER_TO_INT(user_data);
 //#ifndef OLD_NAVBAR
-	vkey.AutoNormalize(1);
+    vkey.setAutoNormalize(1);
 
 	switch (c_type) {
 		case NB_MAIN:
@@ -293,8 +293,8 @@ void on_ot_book_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 		break;
 	}
 	if (entry) {
-		vkey.Testament(0);
-		vkey.Book(book+1);
+        vkey.setTestament(0);
+        vkey.setBook(book+1);
 		gtk_entry_set_text(GTK_ENTRY(entry),vkey.getText());
 		gtk_widget_activate(entry);
 	}
@@ -327,7 +327,7 @@ void on_chapter_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 	int chapter = GPOINTER_TO_INT(user_data);
 
 //#ifndef OLD_NAVBAR
-	vkey.AutoNormalize(1);
+    vkey.setAutoNormalize(1);
 
 	switch (c_type) {
 		case NB_MAIN:
@@ -350,7 +350,7 @@ void on_chapter_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 		break;
 	}
 	if (entry) {
-		vkey.Chapter(chapter);
+        vkey.setChapter(chapter);
 		gtk_entry_set_text(GTK_ENTRY(entry),vkey.getText());
 		gtk_widget_activate(entry);
 	}
@@ -383,7 +383,7 @@ void on_verse_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 	int verse = GPOINTER_TO_INT(user_data);
 
 //#ifndef OLD_NAVBAR
-	vkey.AutoNormalize(1);
+    vkey.setAutoNormalize(1);
 	switch (c_type) {
 		case NB_MAIN:
 			vkey = navbar_versekey.key->str;
@@ -405,7 +405,7 @@ void on_verse_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 		break;
 	}
 	if (entry) {
-		vkey.Verse(verse);
+        vkey.setVerse(verse);
 		gtk_entry_set_text(GTK_ENTRY(entry),vkey.getText());
 		gtk_widget_activate(entry);
 	}
@@ -440,7 +440,7 @@ void main_navbar_versekey_set(NAVBAR_VERSEKEY navbar, const char * key)
 	if (!navbar.module_name->len)
 		return;
 
-	vkey.AutoNormalize(1);
+    vkey.setAutoNormalize(1);
 	vkey = key;
 
 	/*if ((backend->module_has_testament(navbar.module_name->str, 1))
@@ -453,12 +453,12 @@ void main_navbar_versekey_set(NAVBAR_VERSEKEY navbar, const char * key)
 	tmpbuf = g_strdup_printf("<b>%s</b>", vkey.getBookName());
 	gtk_label_set_label(GTK_LABEL(navbar.label_book_menu), tmpbuf);
 
-	num = main_format_number(vkey.Chapter());
+    num = main_format_number(vkey.getChapter());
 	tmpbuf = g_strdup_printf("<b>%s</b>", num);
 	g_free(num);
 	gtk_label_set_label(GTK_LABEL(navbar.label_chapter_menu), tmpbuf);
 
-	num = main_format_number(vkey.Verse());
+    num = main_format_number(vkey.getVerse());
 	tmpbuf = g_strdup_printf("<b>%s</b>", num);
 	g_free(num);
 	gtk_label_set_label(GTK_LABEL(navbar.label_verse_menu), tmpbuf);
@@ -508,9 +508,9 @@ GtkWidget *main_versekey_drop_down_verse_menu(NAVBAR_VERSEKEY navbar,
 	menu = gtk_menu_new();
 	menu_shell = GTK_MENU_SHELL(menu);
 
-	vkey.AutoNormalize(1);
+    vkey.setAutoNormalize(1);
 	vkey = navbar.key->str;
-	int xverse = vkey.Verse();
+    int xverse = vkey.getVerse();
 
 	x = (vkey.getVerseMax());
 	for(i=1; i <= x; i++) {
@@ -563,7 +563,7 @@ GtkWidget *main_versekey_drop_down_chapter_menu(NAVBAR_VERSEKEY navbar,
 {
 	VerseKey vkey;
 	char *num;
-	vkey.AutoNormalize(1);
+    vkey.setAutoNormalize(1);
 	gint i,x;
 	GtkWidget *menu;
 	GtkMenuShell *menu_shell;
@@ -578,7 +578,7 @@ GtkWidget *main_versekey_drop_down_chapter_menu(NAVBAR_VERSEKEY navbar,
 	menu = gtk_menu_new();
 	menu_shell = GTK_MENU_SHELL(menu);
 	vkey = navbar.key->str;
-	int xchapter = vkey.Chapter();
+    int xchapter = vkey.getChapter();
 	x = (vkey.getChapterMax());
 	for(i=1; i <= x; i++) {
 		num = main_format_number(i);
@@ -651,8 +651,8 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar,
 
 	if (backend->module_has_testament(navbar.module_name->str, 1)) {
 		while (i < key.BMAX[0]) {
-			key.Testament(1);
-			key.Book(i+1);
+            key.setTestament(1);
+            key.setBook(i+1);
 			book = strdup((const char *) key.getBookName());
 			char *mykey = g_strdup_printf("%s 1:1",book);
 			char *rawtext = main_get_raw_text(navbar.module_name->str, mykey);
@@ -689,8 +689,8 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar,
 	i = 0;
 	if (backend->module_has_testament(navbar.module_name->str, 2)) {
 		while (i < key.BMAX[1]) {
-			key.Testament(2);
-			key.Book(i+1);
+            key.setTestament(2);
+            key.setBook(i+1);
 			book = strdup((const char *) key.getBookName());
 			char *mykey = g_strdup_printf("%s 1:1",book);
 			char *rawtext = main_get_raw_text(navbar.module_name->str, mykey);

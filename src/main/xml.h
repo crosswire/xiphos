@@ -32,7 +32,7 @@ void xml_add_new_section_to_settings_doc(char * section);
 void xml_new_bookmark_file(void);
 xmlNodePtr xml_add_folder_to_parent(xmlNodePtr parent, gchar * caption);
 void xml_add_bookmark_to_parent(xmlNodePtr parent, gchar * caption,
-			gchar * key, gchar * module, gchar * mod_desc);
+            gchar * key, gchar * module, const gchar * mod_desc);
 void xml_write_bookmark_doc(const xmlChar * xml_filename);
 
 void xml_free_bookmark_doc(void);

@@ -717,7 +717,7 @@ void main_add_mod_to_list(GtkWidget * tree_widget, gchar * mod_name)
 	GtkTreeIter selected_modules_lists;
 	GtkListStore *list_store;
 	GtkListStore *store_modules_lists;
-	gchar *mod_description = NULL;
+    const gchar *mod_description = NULL;
 	gchar *mod_list = NULL;
 	GList *mods = NULL;
 	GtkTreeSelection *selection_modules_lists;
@@ -774,7 +774,7 @@ void main_mod_selection_changed(GtkTreeSelection * selection,
 				  GtkWidget * tree_widget)
 {
 	gchar *mod = NULL;
-	gchar *mod_description = NULL;
+    const gchar *mod_description = NULL;
 	gchar *mod_list = NULL;
 	GList *mods = NULL;
 	GtkListStore *store_modules_lists;
@@ -1479,9 +1479,9 @@ void main_do_dialog_search(void)
 		finds = backendSearch->do_module_search(module,
 					(attribute_search_string
 					 ? mgr->getModule(module)->
-						StripText(attribute_search_string)
+                        stripText(attribute_search_string)
 					 : mgr->getModule(module)->
-						StripText(search_string)),
+                        stripText(search_string)),
 					search_type,
 					search_params,
 					TRUE);

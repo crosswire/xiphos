@@ -100,7 +100,7 @@ public:
 	char *navigate_module(int direction);
 
 	int module_type(const char *mod_name);
-	char *module_description(char *mod_name);
+    const char *module_description(const char *mod_name);
 	char *module_name_from_description(char *description);
 	const char *module_get_language(const char *module_name);
 	char **get_module_language_list(void);

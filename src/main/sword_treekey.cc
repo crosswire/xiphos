@@ -175,10 +175,10 @@ unsigned long main_treekey_remove (char *book, char *name, char * offset)
 	if (!mod)
 		return 0;
 
-	TreeKeyIdx *treekey = (TreeKeyIdx *) mod->CreateKey ();
+    TreeKeyIdx *treekey = (TreeKeyIdx *) mod->createKey ();
 	treekey->setOffset (atol(offset));
-        mod->SetKey(treekey);
-	mod->KeyText();      //snap to entry
+        mod->setKey(treekey);
+    mod->getKeyText();      //snap to entry
 	mod->deleteEntry();
 	treekey->remove();
 	return treekey->getOffset();
@@ -194,15 +194,15 @@ unsigned long main_treekey_append_sibling (char *book, char *name, char * offset
 	if (!mod)
 		return 0;
 
-	TreeKeyIdx *treekey = (TreeKeyIdx *) mod->CreateKey ();
+    TreeKeyIdx *treekey = (TreeKeyIdx *) mod->createKey ();
 	treekey->setOffset (atol(offset));
 	GS_message (("offset1: %ld",  treekey->getOffset()));
 	treekey->append ();
 	treekey->setLocalName (name);
 	treekey->save ();
 
-        mod->SetKey(treekey);
-	mod->KeyText();      //snap to entry
+        mod->setKey(treekey);
+    mod->getKeyText();      //snap to entry
 	(*mod) << name;
 
 	GS_message (("offset2: %ld",  treekey->getOffset()));
@@ -220,14 +220,14 @@ unsigned long main_treekey_append_child (char *book, char *name, char * offset)
 	if (!mod)
 		return 0;
 
-	TreeKeyIdx *treekey = (TreeKeyIdx *) mod->CreateKey ();
+    TreeKeyIdx *treekey = (TreeKeyIdx *) mod->createKey ();
 	treekey->setOffset (atol(offset));
 	treekey->appendChild ();
 	treekey->setLocalName (name);
 	treekey->save ();
 
-        mod->SetKey(treekey);
-	mod->KeyText();      //snap to entry
+        mod->setKey(treekey);
+    mod->getKeyText();      //snap to entry
 	(*mod) << name;
 	GS_message (("book: %s\nlocalName: %s\noffset :%s", book, name,
 		     offset));
@@ -244,7 +244,7 @@ void main_treekey_set_local_name (char *book, char *name, char * offset)
 	if (!mod)
 		return;
 
-	TreeKeyIdx *treekey = (TreeKeyIdx *) mod->CreateKey ();
+    TreeKeyIdx *treekey = (TreeKeyIdx *) mod->createKey ();
 	treekey->setOffset (atol(offset));
 	treekey->setLocalName (name);
 	treekey->save ();
@@ -264,11 +264,11 @@ char *main_get_book_raw_text (char *book, char * offset)
 	if (!mod)
 		return NULL;
 
-	TreeKeyIdx *treekey = (TreeKeyIdx *) mod->CreateKey ();
+    TreeKeyIdx *treekey = (TreeKeyIdx *) mod->createKey ();
 	TreeKeyIdx treenode = *treekey;
         treenode.setOffset(atol(offset));
-	mod->SetKey(treenode);
-        mod->KeyText();      //snap to entry
+    mod->setKey(treenode);
+        mod->getKeyText();      //snap to entry
 
 	return strdup(mod->getRawEntry());
 }
@@ -283,11 +283,11 @@ void main_treekey_save_book_text (char *book, char * offset, char * text)
 	if (!mod || (atol(offset) == 0))
 		return;
 
-	TreeKeyIdx *treekey = (TreeKeyIdx *) mod->CreateKey ();
+    TreeKeyIdx *treekey = (TreeKeyIdx *) mod->createKey ();
 	TreeKeyIdx treenode = *treekey;
         treenode.setOffset(atol(offset));
-	mod->SetKey(treenode);
-        mod->KeyText();      //snap to entry
+    mod->setKey(treenode);
+        mod->getKeyText();      //snap to entry
 	(*mod) << text;
 	if (settings.book_mod && book
 		   	&& !strcmp(settings.book_mod,book)){
@@ -310,7 +310,7 @@ void main_load_book_tree_in_editor (GtkTreeView * treeview, char *book)
 		return;
 	tmpbuf = book;
 	mod_name = book;
-	TreeKeyIdx root = *((TreeKeyIdx *) mod->CreateKey ());
+    TreeKeyIdx root = *((TreeKeyIdx *) mod->createKey ());
 	root.root ();
 
 	store = gtk_tree_store_new (N_COLUMNS,
