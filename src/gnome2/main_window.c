@@ -800,7 +800,11 @@ void create_mainwindow(void)
 	g_free(imagename);
 	gtk_window_set_icon (GTK_WINDOW(widgets.app), pixbuf);
 
-	vbox_gs = gtk_vbox_new(FALSE, 0);
+#ifdef USE_GTK_3
+    vbox_gs = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+#else
+    vbox_gs = gtk_vbox_new(FALSE, 0);
+#endif
 	gtk_widget_show(vbox_gs);
 	gtk_container_add (GTK_CONTAINER (widgets.app), vbox_gs);
 
@@ -808,17 +812,29 @@ void create_mainwindow(void)
 
 	gtk_box_pack_start(GTK_BOX(vbox_gs), menu, FALSE, TRUE, 0);
 
-	hbox25 = gtk_hbox_new(FALSE, 0);
+#ifdef USE_GTK_3
+    hbox25 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+#else
+    hbox25 = gtk_hbox_new(FALSE, 0);
+#endif
 	gtk_widget_show(hbox25);
 	gtk_box_pack_start(GTK_BOX(vbox_gs), hbox25, TRUE, TRUE, 0);
 
 /**widgets.epaned********/
-	widgets.epaned = gtk_hpaned_new();
+#ifdef USE_GTK_3
+    widgets.epaned = gtk_paned_new (GTK_ORIENTATION_HORIZONTAL);
+#else
+    widgets.epaned = gtk_hpaned_new();
+#endif
 	gtk_widget_show(widgets.epaned);
 	gtk_container_set_border_width (GTK_CONTAINER (widgets.epaned), 4);
 	gtk_box_pack_start(GTK_BOX(hbox25), widgets.epaned, TRUE, TRUE, 0);
 
-	widgets.vboxMain = gtk_vbox_new(FALSE, 0);
+#ifdef USE_GTK_3
+    widgets.vboxMain = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+#else
+    widgets.vboxMain = gtk_vbox_new(FALSE, 0);
+#endif
 	gtk_widget_show(widgets.vboxMain);
 	gtk_paned_pack2(GTK_PANED(widgets.epaned), widgets.vboxMain,
 			TRUE, TRUE);
@@ -829,7 +845,11 @@ void create_mainwindow(void)
 	 * the passages are not actually open but are switched
 	 * between similar to bookmarks
 	 */
-	widgets.hboxtb = gtk_hbox_new(FALSE, 0);
+#ifdef USE_GTK_3
+    widgets.hboxtb = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+#else
+    widgets.hboxtb = gtk_hbox_new(FALSE, 0);
+#endif
 	if (settings.browsing)
 		gtk_widget_show(widgets.hboxtb);
 	gtk_box_pack_start(GTK_BOX(widgets.vboxMain), widgets.hboxtb, FALSE, FALSE, 0);
@@ -856,7 +876,11 @@ void create_mainwindow(void)
 	gtk_notebook_set_show_border(GTK_NOTEBOOK(widgets.notebook_main), FALSE);
 	/* main passage tabbed notebook end */
 
-	widgets.page = gtk_vbox_new(FALSE, 0);
+#ifdef USE_GTK_3
+    widgets.page = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+#else
+    widgets.page = gtk_vbox_new(FALSE, 0);
+#endif
 	gtk_widget_show(widgets.page);
 	gtk_box_pack_start(GTK_BOX(widgets.vboxMain), widgets.page, TRUE,
 			   TRUE, 0);
@@ -871,23 +895,39 @@ void create_mainwindow(void)
 	 */
 
 /**widgets.hpaned********/
-	widgets.hpaned = gtk_hpaned_new();
+#ifdef USE_GTK_3
+    widgets.hpaned = gtk_paned_new (GTK_ORIENTATION_HORIZONTAL);
+#else
+    widgets.hpaned = gtk_hpaned_new();
+#endif
 	gtk_widget_show(widgets.hpaned);
 	gtk_box_pack_start(GTK_BOX(widgets.page), widgets.hpaned, TRUE, TRUE, 0);
 
 /**widgets.vpaned********/
-	widgets.vpaned = gtk_vpaned_new();
+#ifdef USE_GTK_3
+    widgets.vpaned = gtk_paned_new (GTK_ORIENTATION_VERTICAL);
+#else
+    widgets.vpaned = gtk_vpaned_new();
+#endif
 	gtk_widget_show(widgets.vpaned);
 	gtk_widget_set_size_request(widgets.vpaned, 50, -1);
 	gtk_paned_pack1(GTK_PANED(widgets.hpaned), widgets.vpaned, TRUE, FALSE);
 
-	widgets.vpaned2 = gtk_vpaned_new();
+#ifdef USE_GTK_3
+    widgets.vpaned2 = gtk_paned_new (GTK_ORIENTATION_VERTICAL);
+#else
+    widgets.vpaned2 = gtk_vpaned_new();
+#endif
 	gtk_widget_show(widgets.vpaned2);
 	gtk_widget_set_size_request(widgets.vpaned2, 50, -1);
 	gtk_paned_pack2(GTK_PANED(widgets.hpaned), widgets.vpaned2, TRUE, FALSE);
 
 /**widgets.hpaned********/
-	widgets.vbox_text = gtk_vbox_new(FALSE, 0);
+#ifdef USE_GTK_3
+    widgets.vbox_text = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+#else
+    widgets.vbox_text = gtk_vbox_new(FALSE, 0);
+#endif
 	gtk_widget_show(widgets.vbox_text);
 	gtk_paned_pack1(GTK_PANED(widgets.vpaned),
 			widgets.vbox_text, TRUE, TRUE);
@@ -935,7 +975,11 @@ void create_mainwindow(void)
 	/*
 	 * previewer
 	 */
-	widgets.vbox_previewer = gtk_vbox_new(FALSE, 0);
+#ifdef USE_GTK_3
+    widgets.vbox_previewer = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+#else
+    widgets.vbox_previewer = gtk_vbox_new(FALSE, 0);
+#endif
 	gtk_widget_show(widgets.vbox_previewer);
 	gtk_container_set_border_width (GTK_CONTAINER (widgets.vbox_previewer), 1);
 	gtk_paned_pack2(GTK_PANED(widgets.vpaned), widgets.vbox_previewer, TRUE, TRUE);

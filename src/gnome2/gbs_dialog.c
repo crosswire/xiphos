@@ -278,14 +278,22 @@ void gui_create_gbs_dialog(DIALOG_DATA *dlg)
 	gtk_window_set_default_size(GTK_WINDOW(dlg->dialog), 525, 306);
 	gtk_window_set_resizable(GTK_WINDOW(dlg->dialog), TRUE);
 
-	vbox_dialog = gtk_vbox_new(FALSE, 0);
+#ifdef USE_GTK_3
+    vbox_dialog = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+#else
+    vbox_dialog = gtk_vbox_new(FALSE, 0);
+#endif
 	gtk_widget_show(vbox_dialog);
 	gtk_container_add(GTK_CONTAINER(dlg->dialog), vbox_dialog);
 
 	navbar = gui_navbar_book_dialog_new(dlg);
 	gtk_box_pack_start(GTK_BOX(vbox_dialog), navbar, FALSE, FALSE, 0);
 
-	hpaned = gtk_hpaned_new();
+#ifdef USE_GTK_3
+    hpaned = gtk_paned_new (GTK_ORIENTATION_HORIZONTAL);
+#else
+    hpaned = gtk_hpaned_new();
+#endif
 	gtk_widget_show(hpaned);
 	gtk_box_pack_start(GTK_BOX(vbox_dialog), hpaned, TRUE, TRUE,
 			   0);

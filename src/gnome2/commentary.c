@@ -125,7 +125,11 @@ GtkWidget *gui_create_commentary_pane(void)
 	GtkWidget *box_comm;
 	GtkWidget *scrolledwindow;
 
-	box_comm = gtk_vbox_new(FALSE, 0);
+#ifdef USE_GTK_3
+    box_comm = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+#else
+    box_comm = gtk_vbox_new(FALSE, 0);
+#endif
 	gtk_widget_show(box_comm);
 
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);

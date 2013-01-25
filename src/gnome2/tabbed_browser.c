@@ -296,7 +296,11 @@ void notebook_main_add_page(PASSAGE_TAB_INFO *tbinf)
 	GString *str;
 
 	str = pick_tab_label(tbinf);
-	tbinf->page_widget = gtk_vbox_new (FALSE, 0);
+#ifdef USE_GTK_3
+    tbinf->page_widget = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+#else
+    tbinf->page_widget = gtk_vbox_new (FALSE, 0);
+#endif
 	if (tbinf->showparallel)
 		widgets.parallel_tab = tbinf->page_widget;
 	gtk_widget_show(tbinf->page_widget);
@@ -842,7 +846,11 @@ static GtkWidget* tab_widget_new(PASSAGE_TAB_INFO *tbinf, const gchar *label_tex
 	gtk_widget_modify_fg (tbinf->button_close, GTK_STATE_SELECTED, &color);
 #endif
 
-	box = gtk_hbox_new(FALSE, 0);
+#ifdef USE_GTK_3
+    box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+#else
+    box = gtk_hbox_new(FALSE, 0);
+#endif
 	gtk_box_pack_start(GTK_BOX(box), GTK_WIDGET(tbinf->tab_label),
 			   TRUE, TRUE, 0);
 	gtk_box_pack_start(GTK_BOX(box), tbinf->button_close, FALSE, FALSE, 0);

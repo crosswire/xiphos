@@ -365,12 +365,20 @@ GtkWidget *gui_create_dictionary_pane(void)
 	GtkWidget *dict_drop_down;
 	GtkWidget *scrolledwindow;
 
-	box_dict = gtk_vbox_new(FALSE, 0);
+#ifdef USE_GTK_3
+    box_dict = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+#else
+    box_dict = gtk_vbox_new(FALSE, 0);
+#endif
 	gtk_widget_show(box_dict);
 
 	gtk_container_set_border_width (GTK_CONTAINER (box_dict), 1);
 
-	hbox2 = gtk_hbox_new(FALSE, 0);
+#ifdef USE_GTK_3
+    hbox2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+#else
+    hbox2 = gtk_hbox_new(FALSE, 0);
+#endif
 	gtk_widget_show(hbox2);
 	gtk_box_pack_start(GTK_BOX(box_dict), hbox2, FALSE, FALSE, 0);
 

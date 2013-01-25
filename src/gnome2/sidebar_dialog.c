@@ -159,7 +159,11 @@ GtkWidget* create_sidebar_dialog(void)
 	gtk_widget_set_size_request(dlgDock, settings.sidebar_width,
 			     settings.gs_height);
 
-	vbox_dock = gtk_vbox_new(FALSE, 0);
+#ifdef USE_GTK_3
+    vbox_dock = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+#else
+    vbox_dock = gtk_vbox_new(FALSE, 0);
+#endif
 	gtk_widget_show(vbox_dock);
 	gtk_container_add(GTK_CONTAINER(dlgDock), vbox_dock);
 

@@ -210,7 +210,11 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 	gtk_window_set_default_size(GTK_WINDOW(vt->dialog), 350, 450);
 	gtk_window_set_resizable(GTK_WINDOW(vt->dialog), TRUE);
 
-	vbox33 = gtk_vbox_new(FALSE, 0);
+#ifdef USE_GTK_3
+    vbox33 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+#else
+    vbox33 = gtk_vbox_new(FALSE, 0);
+#endif
 	gtk_widget_show(vbox33);
 	gtk_container_add(GTK_CONTAINER(vt->dialog), vbox33);
 
@@ -219,7 +223,11 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 	gtk_box_pack_start(GTK_BOX(vbox33), vt->toolbar_nav, FALSE, FALSE,
 			   0);
 
-	paned = gtk_vpaned_new();
+#ifdef USE_GTK_3
+    paned = gtk_paned_new (GTK_ORIENTATION_VERTICAL);
+#else
+    paned = gtk_vpaned_new();
+#endif
 	gtk_box_pack_start(GTK_BOX(vbox33), paned, TRUE, TRUE, 0);
 	gtk_widget_show(paned);
 	
