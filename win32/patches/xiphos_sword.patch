@@ -1,8 +1,8 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index d07d010..76adbc9 100644
+index 8bda43b..46eb927 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -46,6 +46,7 @@ FIND_PACKAGE(CURL QUIET)
+@@ -48,6 +48,7 @@ FIND_PACKAGE(CURL QUIET)
  FIND_PACKAGE(CLucene QUIET)
  FIND_PACKAGE(PkgConfig QUIET)
  FIND_PACKAGE(Regex QUIET)
@@ -10,7 +10,7 @@ index d07d010..76adbc9 100644
  
  ###########################################################################################
  # Based on user input and the results of the above tests, we may need to mux with the source
-@@ -184,12 +185,14 @@ IF(REGEX_FOUND AND CROSS_COMPILE_MINGW32)
+@@ -205,12 +206,14 @@ IF(REGEX_FOUND AND CROSS_COMPILE_MINGW32)
  	SET(SWORD_LINK_LIBRARIES ${SWORD_LINK_LIBRARIES} ${REGEX_LIBRARY})
  ENDIF(REGEX_FOUND AND CROSS_COMPILE_MINGW32)
  
@@ -417,7 +417,7 @@ index 5b45049..493cfd2 100644
  	return 0;
  }
 diff --git a/src/mgr/installmgr.cpp b/src/mgr/installmgr.cpp
-index c1ddd1b..d6ebe5e 100644
+index 183989d..7beb701 100644
 --- a/src/mgr/installmgr.cpp
 +++ b/src/mgr/installmgr.cpp
 @@ -33,6 +33,8 @@ extern "C" {
@@ -429,7 +429,7 @@ index c1ddd1b..d6ebe5e 100644
  
  #include <swmgr.h>
  #include <swmodule.h>
-@@ -251,20 +253,19 @@ int InstallMgr::removeModule(SWMgr *manager, const char *moduleName) {
+@@ -266,20 +268,19 @@ int InstallMgr::removeModule(SWMgr *manager, const char *moduleName) {
  		}
  		else {	//remove all files in DataPath directory
  
@@ -456,7 +456,7 @@ index c1ddd1b..d6ebe5e 100644
  						SWConfig *config = new SWConfig(modFile.c_str());
  						if (config->Sections.find(modName) != config->Sections.end()) {
  							delete config;
-@@ -272,8 +273,8 @@ int InstallMgr::removeModule(SWMgr *manager, const char *moduleName) {
+@@ -287,8 +288,8 @@ int InstallMgr::removeModule(SWMgr *manager, const char *moduleName) {
  						}
  						else	delete config;
  					}
@@ -467,7 +467,7 @@ index c1ddd1b..d6ebe5e 100644
  			}
  		}
  		return 0;
-@@ -372,8 +373,8 @@ int InstallMgr::installModule(SWMgr *destMgr, const char *fromLocation, const ch
+@@ -397,8 +398,8 @@ int InstallMgr::installModule(SWMgr *destMgr, const char *fromLocation, const ch
  	SWBuf buffer;
  	bool aborted = false;
  	bool cipher = false;
@@ -478,7 +478,7 @@ index c1ddd1b..d6ebe5e 100644
  	SWBuf modFile;
  
  	SWLog::getSystemLog()->logDebug("***** InstallMgr::installModule\n");
-@@ -485,18 +486,18 @@ int InstallMgr::installModule(SWMgr *destMgr, const char *fromLocation, const ch
+@@ -510,18 +511,18 @@ int InstallMgr::installModule(SWMgr *destMgr, const char *fromLocation, const ch
  		}
  		if (!aborted) {
  			SWBuf confDir = sourceDir + "mods.d/";
@@ -503,7 +503,7 @@ index c1ddd1b..d6ebe5e 100644
  							FileMgr::copyFile(modFile.c_str(), targetFile.c_str());
  							if (cipher) {
  								if (getCipherCode(modName, config)) {
-@@ -513,7 +514,7 @@ int InstallMgr::installModule(SWMgr *destMgr, const char *fromLocation, const ch
+@@ -538,7 +539,7 @@ int InstallMgr::installModule(SWMgr *destMgr, const char *fromLocation, const ch
  						delete config;
  					}
  				}
@@ -513,7 +513,7 @@ index c1ddd1b..d6ebe5e 100644
  		}
  		return (aborted) ? -1 : 0;
 diff --git a/src/mgr/swmgr.cpp b/src/mgr/swmgr.cpp
-index 27c24f3..08097d6 100644
+index e774912..a8ac07e 100644
 --- a/src/mgr/swmgr.cpp
 +++ b/src/mgr/swmgr.cpp
 @@ -23,6 +23,8 @@
