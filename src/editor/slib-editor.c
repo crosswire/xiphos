@@ -1374,17 +1374,10 @@ gint _create_new(const gchar * filename, const gchar * key, gint editor_type)
 		editor->key = g_strdup(key);
 		editor_new(_("Prayer List/Journal Editor"), editor);
 
-#ifdef USE_GTK_3
-        GtkWidget *box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-#else
-        GtkWidget *box = gtk_vbox_new (FALSE, 0);
-#endif
+		GtkWidget *box;
+		UI_VBOX(box, FALSE, 0);
 		gtk_widget_show (box);
-#ifdef USE_GTK_3
-        GtkWidget *hpaned1 = gtk_paned_new (GTK_ORIENTATION_HORIZONTAL);
-#else
-        GtkWidget *hpaned1 = gtk_hpaned_new ();
-#endif
+		GtkWidget *hpaned1 = UI_HPANE();
 		gtk_widget_show (hpaned1);
 		gtk_paned_pack2 (GTK_PANED (hpaned1), box, TRUE, TRUE);
 

@@ -152,6 +152,24 @@ void language_init(void);
 #define	UI_SUFFIX		".glade"
 #endif
 
+#ifdef USE_GTK_3
+#define	UI_VBOX(item,tf,spacing)					\
+			item = gtk_box_new(GTK_ORIENTATION_VERTICAL, spacing);	\
+			if (tf == TRUE)						\
+				gtk_box_set_homogeneous(GTK_BOX(item), TRUE)
+#define	UI_HBOX(item,tf,spacing)					\
+			item = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, spacing);\
+			if (tf == TRUE)						\
+				gtk_box_set_homogeneous(GTK_BOX(item), TRUE)
+#define	UI_HPANE()			gtk_paned_new(GTK_ORIENTATION_HORIZONTAL)
+#define	UI_VPANE()			gtk_paned_new(GTK_ORIENTATION_VERTICAL)
+#else
+#define	UI_VBOX(item,tf,spacing)	item = gtk_vbox_new(tf, spacing)
+#define	UI_HBOX(item,tf,spacing)	item = gtk_hbox_new(tf, spacing)
+#define	UI_HPANE()			gtk_hpaned_new()
+#define	UI_VPANE()			gtk_vpaned_new()
+#endif
+
 /* for daily devotional */
 extern int month_day_counts[];
 extern char *(month_names[]);

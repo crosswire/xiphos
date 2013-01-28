@@ -31,7 +31,7 @@
 #include "gui/main_window.h"
 #include "gui/menu_popup.h"
 #include "gui/sidebar.h"
-
+#include "gui/utilities.h"
 
 #include "main/module_dialogs.h"
 #include "main/sword.h"
@@ -335,11 +335,7 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 	gtk_window_set_default_size(GTK_WINDOW(dlg->dialog), 465, 275);
 	gtk_window_set_resizable(GTK_WINDOW(dlg->dialog), TRUE);
 
-#ifdef USE_GTK_3
-    vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-#else
-    vbox = gtk_vbox_new(FALSE, 0);
-#endif
+	UI_VBOX(vbox, FALSE, 0);
 	gtk_widget_show(vbox);
 	gtk_container_add(GTK_CONTAINER(dlg->dialog), vbox);
 
@@ -348,29 +344,17 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 	gtk_widget_show(dlg->frame);
 	gtk_box_pack_start(GTK_BOX(vbox), dlg->frame, TRUE, TRUE, 0);
 
-#ifdef USE_GTK_3
-    hpaned7 = gtk_paned_new (GTK_ORIENTATION_HORIZONTAL);
-#else
-    hpaned7 = gtk_hpaned_new();
-#endif
+	hpaned7 = UI_HPANE();
 	gtk_widget_show(hpaned7);
 	gtk_container_add(GTK_CONTAINER(dlg->frame), hpaned7);
 	gtk_paned_set_position(GTK_PANED(hpaned7), 150);
 
-#ifdef USE_GTK_3
-    vbox56 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-#else
-    vbox56 = gtk_vbox_new(FALSE, 0);
-#endif
+	UI_VBOX(vbox56, FALSE, 0);
 	gtk_widget_show(vbox56);
 	gtk_paned_pack1(GTK_PANED(hpaned7), vbox56, FALSE, TRUE);
 
 
-#ifdef USE_GTK_3
-    hbox_toolbar = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-#else
-    hbox_toolbar = gtk_hbox_new(FALSE, 0);
-#endif
+	UI_HBOX(hbox_toolbar, FALSE, 0);
 	gtk_widget_show(hbox_toolbar);
 	gtk_box_pack_start(GTK_BOX(vbox56), hbox_toolbar, FALSE, TRUE,
 			   0);

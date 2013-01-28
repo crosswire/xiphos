@@ -1374,26 +1374,14 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 
 	GtkWidget *table2;
 
-#ifdef USE_GTK_3
-    vbox1 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-#else
-    vbox1 = gtk_vbox_new(FALSE, 0);
-#endif
+	UI_VBOX(vbox1, FALSE, 0);
 	gtk_widget_show(vbox1);
 
-#ifdef USE_GTK_3
-    widgets.paned_sidebar = gtk_paned_new (GTK_ORIENTATION_VERTICAL);
-#else
-    widgets.paned_sidebar = gtk_vpaned_new();
-#endif
+	widgets.paned_sidebar = UI_VPANE();
 	gtk_paned_pack1 (GTK_PANED (paned), widgets.paned_sidebar, FALSE, TRUE);
 	gtk_widget_show (widgets.paned_sidebar);
 	gtk_paned_pack1 (GTK_PANED (widgets.paned_sidebar), vbox1, FALSE, TRUE);
-#ifdef USE_GTK_3
-    widgets.box_side_preview = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-#else
-    widgets.box_side_preview = gtk_vbox_new(FALSE, 0);
-#endif
+	UI_VBOX(widgets.box_side_preview, FALSE, 0);
 	gtk_paned_pack2 (GTK_PANED (widgets.paned_sidebar),
 			widgets.box_side_preview, FALSE, TRUE);
 	gtk_container_set_border_width(GTK_CONTAINER(widgets.box_side_preview), 2);

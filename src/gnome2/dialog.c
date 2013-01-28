@@ -26,6 +26,7 @@
 #include <gtk/gtk.h>
 #include "gui/dialog.h"
 #include "gui/widgets.h"
+#include "gui/utilities.h"
 
 #include "main/settings.h"
 #include "main/sword.h"
@@ -186,11 +187,7 @@ static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 	dialog_vbox2 = gtk_dialog_get_content_area(GTK_DIALOG(dialog_alert));
 	gtk_widget_show(dialog_vbox2);
 
-#ifdef USE_GTK_3
-    hbox3 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-#else
-    hbox3 = gtk_hbox_new(FALSE, 12);
-#endif
+	UI_HBOX(hbox3, FALSE, 12);
 	gtk_widget_show(hbox3);
 	gtk_box_pack_start(GTK_BOX(dialog_vbox2), hbox3, TRUE, TRUE, 0);
 	gtk_container_set_border_width(GTK_CONTAINER(hbox3), 6);
@@ -207,11 +204,7 @@ static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 	}
 
 
-#ifdef USE_GTK_3
-    vbox2 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-#else
-    vbox2 = gtk_vbox_new(FALSE, 6);
-#endif
+	UI_VBOX(vbox2, FALSE, 6);
 	gtk_widget_show(vbox2);
 	gtk_box_pack_start(GTK_BOX(hbox3), vbox2, TRUE, TRUE, 0);
 
@@ -321,11 +314,7 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 	dialog_vbox3 = gtk_dialog_get_content_area(GTK_DIALOG(dialog_request));
 	gtk_widget_show(dialog_vbox3);
 
-#ifdef USE_GTK_3
-    hbox4 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-#else
-	hbox4 = gtk_hbox_new(FALSE, 12);
-#endif
+	UI_HBOX(hbox4, FALSE, 12);
 	gtk_widget_show(hbox4);
 	gtk_box_pack_start(GTK_BOX(dialog_vbox3), hbox4, TRUE, TRUE, 0);
 	gtk_container_set_border_width(GTK_CONTAINER(hbox4), 6);
@@ -340,11 +329,7 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 		gtk_misc_set_alignment(GTK_MISC(image6), 0.5, 0);
 		gtk_misc_set_padding(GTK_MISC(image6), 12, 0);
 	}
-#ifdef USE_GTK_3
-    vbox3 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 4);
-#else
-    vbox3 = gtk_vbox_new(FALSE, 4);
-#endif
+	UI_VBOX(vbox3, FALSE, 4);
 	gtk_widget_show(vbox3);
 	gtk_box_pack_start(GTK_BOX(hbox4), vbox3, TRUE, TRUE, 0);
 
