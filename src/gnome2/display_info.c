@@ -28,6 +28,7 @@
 #include "xiphos_html/xiphos_html.h"
                                   
 #include "gui/display_info.h"
+#include "gui/utilities.h"
 
 #include "main/previewer.h"
 #include "main/sword.h"
@@ -190,11 +191,7 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 	gtk_widget_show(dialog_vbox23);
 
 
-#ifdef USE_GTK_3
-    hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-#else
-    hbox = gtk_hbox_new(FALSE, 12);
-#endif
+	UI_HBOX(hbox, FALSE, 12);
 	gtk_widget_show(hbox);
 	gtk_box_pack_start(GTK_BOX(dialog_vbox23), hbox, TRUE, TRUE, 0);
 	gtk_container_set_border_width(GTK_CONTAINER(hbox), 6);

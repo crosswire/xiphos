@@ -26,6 +26,7 @@
 #include <gtk/gtk.h>
 
 #include "gui/find_dialog.h"
+#include "gui/utilities.h"
 #include "main/settings.h"
 #include "main/sword.h"
 #include "xiphos_html/xiphos_html.h"
@@ -196,11 +197,7 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 			  dialog_vbox29);
 	gtk_widget_show(dialog_vbox29);
 
-#ifdef USE_GTK_3
-    vbox45 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 12);
-#else
-    vbox45 = gtk_vbox_new(FALSE, 12);
-#endif
+	UI_VBOX(vbox45, FALSE, 12);
 	gtk_widget_show(vbox45);
 	gtk_box_pack_start(GTK_BOX(dialog_vbox29), vbox45, TRUE, TRUE,
 			   0);
@@ -215,11 +212,7 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 			   0);
 	gtk_widget_set_size_request(dialog->entry, 291, -1);
 
-#ifdef USE_GTK_3
-    hbox66 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-#else
-    hbox66 = gtk_hbox_new(FALSE, 0);
-#endif
+	UI_HBOX(hbox66, FALSE, 0);
 	gtk_widget_show(hbox66);
 	gtk_box_pack_start(GTK_BOX(vbox45), hbox66, TRUE, TRUE, 0);
 
@@ -261,11 +254,7 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 	gtk_widget_show(alignment);
 	gtk_container_add(GTK_CONTAINER(dialog->next), alignment);
 
-#ifdef USE_GTK_3
-    hbox5 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 2);
-#else
-    hbox5 = gtk_hbox_new(FALSE, 2);
-#endif
+	UI_HBOX(hbox5, FALSE, 2);
 	gtk_widget_show(hbox5);
 	gtk_container_add(GTK_CONTAINER(alignment), hbox5);
 

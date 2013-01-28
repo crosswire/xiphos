@@ -310,20 +310,12 @@ static GtkWidget *create_dialog_mod_font()
 			  "dialog_vbox21", dialog_vbox21);
 	gtk_widget_show(dialog_vbox21);
 
-#ifdef USE_GTK_3
-    vbox56 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-#else
-    vbox56 = gtk_vbox_new(FALSE, 0);
-#endif
+	UI_VBOX(vbox56, FALSE, 0);
 	gtk_widget_show(vbox56);
 	gtk_box_pack_start(GTK_BOX(dialog_vbox21), vbox56, TRUE, TRUE,
 			   0);
 
-#ifdef USE_GTK_3
-    hbox67 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-#else
-    hbox67 = gtk_hbox_new(FALSE, 0);
-#endif
+	UI_HBOX(hbox67, FALSE, 0);
 	gtk_widget_show(hbox67);
 	gtk_box_pack_start(GTK_BOX(vbox56), hbox67, TRUE, TRUE, 0);
 
@@ -333,11 +325,7 @@ static GtkWidget *create_dialog_mod_font()
 	gtk_widget_show(pixmap6);
 	gtk_box_pack_start(GTK_BOX(hbox67), pixmap6, TRUE, TRUE, 0);
 
-#ifdef USE_GTK_3
-    vbox57 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-#else
-    vbox57 = gtk_vbox_new(FALSE, 0);
-#endif
+	UI_VBOX(vbox57, FALSE, 0);
 	gtk_widget_show(vbox57);
 	gtk_box_pack_start(GTK_BOX(hbox67), vbox57, TRUE, TRUE, 0);
 
@@ -355,11 +343,7 @@ static GtkWidget *create_dialog_mod_font()
 			   FALSE, 0);
 
 
-#ifdef USE_GTK_3
-    hbox_picker = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-#else
-    hbox_picker = gtk_hbox_new(FALSE, 6);
-#endif
+	UI_HBOX(hbox_picker, FALSE, 6);
 	gtk_widget_show(hbox_picker);
 	gtk_box_pack_start(GTK_BOX(vbox56), hbox_picker, FALSE, FALSE,
 			   0);
@@ -422,9 +406,9 @@ static GtkWidget *create_dialog_mod_font()
 				       (dialog_action_area21), 10);
 
 #ifdef USE_GTK_3
-    hbuttonbox1 = gtk_button_box_new (GTK_ORIENTATION_HORIZONTAL);
+	hbuttonbox1 = gtk_button_box_new (GTK_ORIENTATION_HORIZONTAL);
 #else
-    hbuttonbox1 = gtk_hbutton_box_new();
+	hbuttonbox1 = gtk_hbutton_box_new();
 #endif
 	gtk_widget_show(hbuttonbox1);
 	gtk_box_pack_start(GTK_BOX(dialog_action_area21), hbuttonbox1,

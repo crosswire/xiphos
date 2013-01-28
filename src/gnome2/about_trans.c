@@ -104,11 +104,7 @@ gui_create_about_trans(void)
 			  "dialog_vbox", dialog_vbox);
 	gtk_widget_show(dialog_vbox);
 
-#ifdef USE_GTK_3
-    vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-#else
-    vbox = gtk_vbox_new(FALSE, 0);
-#endif
+	UI_VBOX(vbox, FALSE, 0);
 	gtk_widget_show(vbox);
 	gtk_box_pack_start(GTK_BOX(dialog_vbox), vbox, TRUE, TRUE,
 			   0);

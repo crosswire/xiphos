@@ -46,6 +46,7 @@
 #include "gui/navbar_book.h"
 #include "gui/tabbed_browser.h"
 #include "gui/menu_popup.h"
+#include "gui/utilities.h"
 
 #include "main/settings.h"
 #include "main/lists.h"
@@ -161,11 +162,7 @@ GtkWidget *gui_create_book_pane(void)
 	GtkWidget *scrolledwindow;
 	GtkWidget *navbar;
 
-#ifdef USE_GTK_3
-    box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-#else
-    box = gtk_vbox_new(FALSE, 0);
-#endif
+	UI_VBOX(box, FALSE, 0);
 	gtk_widget_show(box);
 
 	navbar = gui_navbar_book_new();

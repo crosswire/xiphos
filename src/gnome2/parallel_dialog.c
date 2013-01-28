@@ -370,11 +370,7 @@ GtkWidget *create_parallel_dialog(void)
 			  "dialog_vbox25", dialog_vbox25);
 	gtk_widget_show(dialog_vbox25);
 
-#ifdef USE_GTK_3
-    vboxInt = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-#else
-    vboxInt = gtk_vbox_new(FALSE, 0);
-#endif
+	UI_VBOX(vboxInt, FALSE, 0);
 	gtk_widget_show(vboxInt);
 	gtk_box_pack_start(GTK_BOX(dialog_vbox25), vboxInt, TRUE, TRUE,
 			   0);
@@ -383,12 +379,7 @@ GtkWidget *create_parallel_dialog(void)
 	gtk_box_pack_start(GTK_BOX(vboxInt), toolbar29, FALSE, FALSE,
 			   0);
 
-#ifdef USE_GTK_3
-    box_parallel_labels = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 2);
-    gtk_box_set_homogeneous (GTK_BOX(box_parallel_labels), TRUE);
-#else
-    box_parallel_labels = gtk_hbox_new (TRUE, 2);
-#endif
+	UI_HBOX(box_parallel_labels, TRUE, 2);
 	gtk_widget_show (box_parallel_labels);
 	gtk_box_pack_start (GTK_BOX (vboxInt), box_parallel_labels, FALSE, TRUE, 0);
 	gtk_container_set_border_width (GTK_CONTAINER (box_parallel_labels), 2);
@@ -444,9 +435,9 @@ GtkWidget *create_parallel_dialog(void)
 				       (dialog_action_area25), 10);
 
 #ifdef USE_GTK_3
-    hbuttonbox4 = gtk_button_box_new (GTK_ORIENTATION_HORIZONTAL);
+	hbuttonbox4 = gtk_button_box_new (GTK_ORIENTATION_HORIZONTAL);
 #else
-    hbuttonbox4 = gtk_hbutton_box_new();
+	hbuttonbox4 = gtk_hbutton_box_new();
 #endif
 	gtk_widget_show(hbuttonbox4);
 	gtk_box_pack_start(GTK_BOX(dialog_action_area25), hbuttonbox4,

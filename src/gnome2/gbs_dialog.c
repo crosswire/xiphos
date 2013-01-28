@@ -31,7 +31,7 @@
 #include "gui/navbar_book_dialog.h"
 #include "gui/widgets.h"
 #include "gui/menu_popup.h"
-
+#include "gui/utilities.h"
 
 #include "main/module_dialogs.h"
 #include "main/sidebar.h"
@@ -278,22 +278,14 @@ void gui_create_gbs_dialog(DIALOG_DATA *dlg)
 	gtk_window_set_default_size(GTK_WINDOW(dlg->dialog), 525, 306);
 	gtk_window_set_resizable(GTK_WINDOW(dlg->dialog), TRUE);
 
-#ifdef USE_GTK_3
-    vbox_dialog = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-#else
-    vbox_dialog = gtk_vbox_new(FALSE, 0);
-#endif
+	UI_VBOX(vbox_dialog, FALSE, 0);
 	gtk_widget_show(vbox_dialog);
 	gtk_container_add(GTK_CONTAINER(dlg->dialog), vbox_dialog);
 
 	navbar = gui_navbar_book_dialog_new(dlg);
 	gtk_box_pack_start(GTK_BOX(vbox_dialog), navbar, FALSE, FALSE, 0);
 
-#ifdef USE_GTK_3
-    hpaned = gtk_paned_new (GTK_ORIENTATION_HORIZONTAL);
-#else
-    hpaned = gtk_hpaned_new();
-#endif
+	hpaned = UI_HPANE();
 	gtk_widget_show(hpaned);
 	gtk_box_pack_start(GTK_BOX(vbox_dialog), hpaned, TRUE, TRUE,
 			   0);

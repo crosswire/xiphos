@@ -382,7 +382,7 @@ e_splash_construct(ESplash * splash, GdkPixbuf * splash_image_pixbuf)
 
 	gtk_container_add(GTK_CONTAINER(splash), frame);
 
-	vbox = gtk_vbox_new(FALSE,2);
+	UI_VBOX(vbox, FALSE, 2);
 	gtk_widget_show(vbox);
 	gtk_container_add(GTK_CONTAINER(frame), vbox);
 
