@@ -255,11 +255,7 @@ GtkWidget *_create_parallel_tab(void)
 	gtk_notebook_set_show_border (GTK_NOTEBOOK(widgets.notebook_bible_parallel),
                                         TRUE);
 
-#ifdef USE_GTK_3
-    parallel_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-#else
-    parallel_vbox = gtk_vbox_new(FALSE, 0);
-#endif
+	UI_VBOX(parallel_vbox, FALSE, 0);
 	g_signal_connect(G_OBJECT(parallel_vbox), "destroy",
 			   G_CALLBACK(on_parallel_tab_destroy),
 			   NULL);
@@ -270,12 +266,7 @@ GtkWidget *_create_parallel_tab(void)
 	gtk_widget_show(toolbar29);
 	gtk_box_pack_start(GTK_BOX(parallel_vbox), toolbar29, FALSE, FALSE, 0);
 
-#ifdef USE_GTK_3
-    box_parallel_labels = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 2);
-    gtk_box_set_homogeneous(GTK_BOX(box_parallel_labels), TRUE);
-#else
-    box_parallel_labels = gtk_hbox_new (TRUE, 2);
-#endif
+	UI_HBOX(box_parallel_labels, TRUE, 2);
 	gtk_widget_show (box_parallel_labels);
 	gtk_box_pack_start (GTK_BOX (parallel_vbox), box_parallel_labels, FALSE, TRUE, 0);
 	gtk_container_set_border_width (GTK_CONTAINER (box_parallel_labels), 2);

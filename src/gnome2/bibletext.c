@@ -111,11 +111,7 @@ GtkWidget *gui_create_bible_pane(void)
 	GtkWidget *vbox;
 	GtkWidget *scrolledwindow;
 
-#ifdef USE_GTK_3
-    vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-#else
-	vbox = gtk_vbox_new(FALSE, 0);
-#endif
+	UI_VBOX(vbox, FALSE, 0);
 	gtk_widget_show(vbox);
 
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);

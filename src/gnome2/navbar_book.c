@@ -26,6 +26,7 @@
 #include <gtk/gtk.h>
 
 #include "gui/navbar_book.h"
+#include "gui/utilities.h"
 
 #include "main/navbar_book.h"
 #include "main/settings.h"
@@ -328,18 +329,10 @@ GtkWidget *gui_navbar_book_new(void)
 	GtkWidget *arrow1;
 	GtkWidget *image2;
 
-#ifdef USE_GTK_3
-    vbox1 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-#else
-    vbox1 = gtk_vbox_new(FALSE, 0);
-#endif
+	UI_VBOX(vbox1, FALSE, 0);
 	gtk_widget_show(vbox1);
 
-#ifdef USE_GTK_3
-    hbox1 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-#else
-    hbox1 = gtk_hbox_new(FALSE, 0);
-#endif
+	UI_HBOX(hbox1, FALSE, 0);
 	gtk_widget_show(hbox1);
 	gtk_box_pack_start(GTK_BOX(vbox1), hbox1, FALSE, TRUE, 0);
 

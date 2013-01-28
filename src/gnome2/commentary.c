@@ -41,6 +41,7 @@
 #include "gui/font_dialog.h"
 #include "gui/tabbed_browser.h"
 #include "gui/widgets.h"
+#include "gui/utilities.h"
 
 #include "editor/slib-editor.h"
 
@@ -125,11 +126,7 @@ GtkWidget *gui_create_commentary_pane(void)
 	GtkWidget *box_comm;
 	GtkWidget *scrolledwindow;
 
-#ifdef USE_GTK_3
-    box_comm = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-#else
-    box_comm = gtk_vbox_new(FALSE, 0);
-#endif
+	UI_VBOX(box_comm, FALSE, 0);
 	gtk_widget_show(box_comm);
 
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);

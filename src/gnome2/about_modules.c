@@ -150,20 +150,12 @@ gui_create_about_modules(void)
 			  "dialog_vbox28", dialog_vbox28);
 	gtk_widget_show(dialog_vbox28);
 
-#ifdef USE_GTK_3
-    vbox25 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-#else
-	vbox25 = gtk_vbox_new(FALSE, 0);
-#endif
+	UI_VBOX(vbox25, FALSE, 0);
 	gtk_widget_show(vbox25);
 	gtk_box_pack_start(GTK_BOX(dialog_vbox28), vbox25, TRUE, TRUE,
 			   0);
 
-#ifdef USE_GTK_3
-    hbox21 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-#else
-    hbox21 = gtk_hbox_new(FALSE, 0);
-#endif
+	UI_HBOX(hbox21, FALSE, 0);
 	gtk_widget_show(hbox21);
 	gtk_box_pack_start(GTK_BOX(vbox25), hbox21, FALSE, TRUE, 0);
 

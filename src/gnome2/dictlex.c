@@ -39,6 +39,7 @@
 #include "gui/find_dialog.h"
 #include "gui/font_dialog.h"
 #include "gui/widgets.h"
+#include "gui/utilities.h"
 
 #include "main/sword.h"
 #include "main/settings.h"
@@ -365,20 +366,12 @@ GtkWidget *gui_create_dictionary_pane(void)
 	GtkWidget *dict_drop_down;
 	GtkWidget *scrolledwindow;
 
-#ifdef USE_GTK_3
-    box_dict = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-#else
-    box_dict = gtk_vbox_new(FALSE, 0);
-#endif
+	UI_VBOX(box_dict, FALSE, 0);
 	gtk_widget_show(box_dict);
 
 	gtk_container_set_border_width (GTK_CONTAINER (box_dict), 1);
 
-#ifdef USE_GTK_3
-    hbox2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-#else
-    hbox2 = gtk_hbox_new(FALSE, 0);
-#endif
+	UI_HBOX(hbox2, FALSE, 0);
 	gtk_widget_show(hbox2);
 	gtk_box_pack_start(GTK_BOX(box_dict), hbox2, FALSE, FALSE, 0);
 
