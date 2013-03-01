@@ -15,5 +15,3 @@ gpgcheck=0
 5) Run the installer, installing to the default location (if your wine is configured differently than
 the default Fedora installation, you will need to alter the final line of makeDistroGTK3.sh to point
 to your proper install location).
-
-sudo yum install mingw{32,64}-{clucene,glib2,curl,icu,libgnurx}
