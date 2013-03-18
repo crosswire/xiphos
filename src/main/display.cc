@@ -1137,10 +1137,10 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 
     key->setAutoNormalize(oldAutoNorm);
 
+    key->setTestament(curTest);
     key->setBook(curBook);
     key->setChapter(chapter);
     key->setVerse(curVerse);
-    key->setTestament(curTest);
 }
 
 void
