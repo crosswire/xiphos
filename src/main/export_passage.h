@@ -30,10 +30,32 @@ extern "C" {
 typedef struct _export_data EXPORT_DATA;
 struct _export_data {
 	char *filename;
+	char *bookheader;
+	char *chapterheader_book;
+	char *chapterheader_chapter;
+	char *versenumber;
+	char *verselayout_chapter;
+	char *verselayout_range_verses;
+	char *verselayout_single_verse_ref_last;
+	char *verselayout_single_verse_ref_first;
+	char *verse_range_ref_last;
+	char *verse_range_ref_first;	
+	char *plain_bookheader;
+	char *plain_chapterheader_book;
+	char *plain_chapterheader_chapter;
+	char *plain_versenumber;
+	char *plain_verselayout_chapter;
+	char *plain_verselayout_range_verses;
+	char *plain_verselayout_single_verse_ref_last;
+	char *plain_verselayout_single_verse_ref_first;
+	char *plain_verse_range_ref_last;
+	char *plain_verse_range_ref_first;	
 	int passage_type;
 	int start_verse;
 	int end_verse;
 	int verse_num;
+	int reference_last;
+	int version;
 };
 
 enum {

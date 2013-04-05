@@ -45,6 +45,13 @@ void xml_set_new_element(const char *section, const char *item, const char *cont
 int xml_next_item(void);
 char *xml_get_label(void);
 char *xml_get_list(void);
+void xml_free_export_doc(void);
+void xml_export_set_value(const char *type_doc, const char *section, const char *item,
+		   const char *value);
+void xml_save_export_doc(char *name);
+int xml_create_copy_export_file(char *path);
+int xml_load_copy_export_file(const xmlChar * file);
+char *xml_get_copy_export_value(const char *section, const char *item);
 int xml_create_settings_file(char * file_name);
 int xml_parse_settings_file(char *file_name);
 char *xml_get_value(const char *section, const char *item);

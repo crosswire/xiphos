@@ -1,3 +1,11 @@
+2013-04-05  terry  <tbiggs@users.sf.net>
+
+	* added two buttons to the export dialog
+		<Refernce Last>
+		<Include Version>
+	* added file to store export dialog prefs and format
+	  strings. .xiphos/export_copy.xml
+
 2013-01-27  karl <charcoal@users.sf.net>
 
 	* update gtk2/gtk3 changes to avoid excess #if use.
