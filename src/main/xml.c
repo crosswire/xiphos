@@ -43,9 +43,11 @@ struct _bookmark_data {
 typedef struct _bookmark_data BOOKMARK_DATA;
 
 static xmlDocPtr xml_settings_doc;
+static xmlDocPtr xml_export_doc;
 static xmlNodePtr section_ptr;
 static xmlDocPtr bookmark_doc;
-
+static xmlNodePtr xml_find_prop(xmlDocPtr doc, const char *type_doc, const char *section,
+				const char *prop);
 
 /******************************************************************************
  * Name
@@ -284,6 +286,243 @@ xmlNodePtr xml_load_bookmark_file(const xmlChar * bookmark_file)
 
 /******************************************************************************
  * Name
+ *   xml_save_export_doc
+ *
+ * Synopsis
+ *   #include "main/xml.h"
+ *
+ *   void xml_save_export_doc(char *file_name)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   void
+ */
+
+void xml_save_export_doc(char *name)
+{
+	
+	xmlSaveFormatFile(name, xml_export_doc, 1);
+}
+
+
+/******************************************************************************
+ * Name
+ *   xml_get_copy_export_value
+ *
+ * Synopsis
+ *   #include "main/xml.h"
+ *
+ *   char *xml_get_copy_export_value(char *section, char *item)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   char *
+ */
+
+char *xml_get_copy_export_value(const char *section, const char *item)
+{
+	xmlNodePtr cur = NULL;
+	xmlChar *results = NULL;
+	if ((cur =
+	     xml_find_prop(xml_export_doc, "Copy_Export", section, item)) != NULL) {
+		results = xmlNodeListGetString(xml_export_doc,
+					       cur->xmlChildrenNode, 1);
+		if (results)
+			return (char *)results;
+	}
+	return NULL;
+}
+
+/******************************************************************************
+ * Name
+ *   xml_export_set_value
+ *
+ * Synopsis
+ *   #include "main/xml.h"
+ *
+ *   void xml_export_set_value(char *type_doc, char *section, char *item,
+ *		   char *value)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   void
+ */
+
+void xml_export_set_value(const char *type_doc, const char *section, const char *item,
+		   const char *value)
+{
+	xmlNodePtr cur = NULL;
+	if ((cur =
+	     xml_find_prop(xml_export_doc, type_doc, section, item)) != NULL) {
+		xmlNodeSetContent(cur, (const xmlChar *)value);
+	}
+}
+
+/******************************************************************************
+ * Name
+ *   xml_free_export_doc
+ *
+ * Synopsis
+ *   #include "main/xml.h"
+ *
+ *   void xml_free_export_doc(void)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   void
+ */
+
+void xml_free_export_doc(void)
+{
+	xmlFreeDoc(xml_export_doc);
+}
+
+/******************************************************************************
+ * Name
+ *   xml_load_copy_export_file
+ *
+ * Synopsis
+ *   #include "main/xml.h"
+ *
+ *   xmlNodePtr xml_load_copy_export_file(char * bookmark_file)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   xmlNodePtr
+ */
+
+int xml_load_copy_export_file(const xmlChar * file)
+{
+	xmlNodePtr cur = NULL;
+
+	xml_export_doc = xmlParseFile((const char *) file);
+
+	if (xml_export_doc == NULL) {
+		fprintf(stderr, _("Document not parsed successfully. \n"));
+		return 0;
+	}
+
+	cur = xmlDocGetRootElement(xml_export_doc);
+	if (cur == NULL) {
+		fprintf(stderr, _("empty document \n"));
+		return 0;
+	}
+
+	if (xmlStrcmp(cur->name, (const xmlChar *) "Copy_Export")) {
+		fprintf(stderr,
+			_("wrong type, root node != Copy_Export\n"));
+		xmlFreeDoc(xml_export_doc);
+		return 0;
+	}
+
+	//cur = cur->xmlChildrenNode;
+	return 1;
+}
+
+
+/******************************************************************************
+ * Name
+ *   xml_create_copy_export_file
+ *
+ * Synopsis
+ *   #include "main/xml.h"
+ *
+ *   int xml_create_copy_export_file(char * path)
+ *
+ * Description
+ *   create new copy/export file
+ *
+ * Return value
+ *   int
+ */
+
+int xml_create_copy_export_file(char *path)
+{
+	xmlNodePtr root_node;
+	xmlNodePtr cur_node;
+	xmlNodePtr section_node;
+	xmlDocPtr xml_doc;
+	GList *tmp = NULL;
+
+	xml_doc = xmlNewDoc((const xmlChar *) "1.0");
+
+	if (xml_doc == NULL) {
+		fprintf(stderr, _("Document not created successfully. \n"));
+		return 0;
+	}
+
+	root_node = xmlNewNode(NULL, (const xmlChar *) "Copy_Export");
+	(void) xmlNewProp(root_node, (const xmlChar *) "Version", (const xmlChar *) "0");
+	xmlDocSetRootElement(xml_doc, root_node);
+	
+	section_node =
+	    xmlNewChild(root_node, NULL, (const xmlChar *)"dialog", NULL);
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"plaintext", (const xmlChar *)"1");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"HTML", (const xmlChar *)"0");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"verse_numbers", (const xmlChar *)"0");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"reference_last", (const xmlChar *)"1");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"version", (const xmlChar *)"1");
+	
+	/* book format */
+	
+	section_node = xmlNewChild(root_node, NULL, (const xmlChar *) "book", NULL);
+	xmlNewTextChild(section_node, NULL, (const xmlChar *) "header", (const xmlChar *)  _("%s<center>%s<br>Chapter %d</center><br>"));
+	xmlNewTextChild(section_node, NULL, (const xmlChar *) "chapterheader", (const xmlChar *) _("<br><center>Chapter %d</center><br>"));
+	xmlNewTextChild(section_node, NULL, (const xmlChar *) "plain_header", (const xmlChar *)  _("%s\n\nChapter %d\n\n"));
+	xmlNewTextChild(section_node, NULL, (const xmlChar *) "plain_chapterheader", (const xmlChar *) _("\n\nChapter %d\n\n"));
+	
+	
+	/* chapter format */
+	
+	section_node = xmlNewChild(root_node, NULL, (const xmlChar *) "chapter", NULL);
+	xmlNewTextChild(section_node, NULL, (const xmlChar *) "header", (const xmlChar *) _("%s%s: %s Chapter %d<br><br>"));	
+	xmlNewTextChild(section_node, NULL, (const xmlChar *) "plain_header", (const xmlChar *) _("%s: %s Chapter %d\n\n"));	
+	
+	/* versenumber format */
+	
+	section_node = xmlNewChild(root_node, NULL, (const xmlChar *) "versenumber", NULL);
+	xmlNewTextChild(section_node, NULL, (const xmlChar *) "format", (const xmlChar *) _("&nbsp;&nbsp;[%d]"));
+	xmlNewTextChild(section_node, NULL, (const xmlChar *) "plain_format", (const xmlChar *) _(" [%d]"));
+
+	
+	/* single verse format */
+	
+	section_node = xmlNewChild(root_node, NULL, (const xmlChar *) "singleverse", NULL);
+	xmlNewTextChild(section_node, NULL, (const xmlChar *) "last", (const xmlChar *)  _("%s%s (%s %d:%d%s)</body></html>"));
+	xmlNewTextChild(section_node, NULL, (const xmlChar *) "first", (const xmlChar *) _("%s(%s %d:%d%s)%s </body></html>"));
+	xmlNewTextChild(section_node, NULL, (const xmlChar *) "plain_last", (const xmlChar *)  _("%s (%s %d:%d%s)"));
+	xmlNewTextChild(section_node, NULL, (const xmlChar *) "plain_first", (const xmlChar *) _("(%s %d:%d%s) %s"));
+
+	
+	/* verse range format */
+	
+	section_node = xmlNewChild(root_node, NULL, (const xmlChar *) "verserange", NULL);
+	xmlNewTextChild(section_node, NULL, (const xmlChar *) "last", (const xmlChar *)  _("%s(%s %d:%d-%d%s)"));
+	xmlNewTextChild(section_node, NULL, (const xmlChar *) "first", (const xmlChar *) _("(%s %d:%d-%d%s)<br>"));
+	xmlNewTextChild(section_node, NULL, (const xmlChar *) "plain_last", (const xmlChar *)  _("%s(%s %d:%d-%d%s)"));
+	xmlNewTextChild(section_node, NULL, (const xmlChar *) "plain_first", (const xmlChar *) _("(%s %d:%d-%d%s)\n"));
+
+
+	xmlSaveFormatFile (path, 
+			   xml_doc, 
+			   1);
+	xmlFreeDoc(xml_doc);
+
+}
+
+
+/******************************************************************************
+ * Name
  *   xml_create_settings_file
  *
  * Synopsis
@@ -322,7 +561,7 @@ int xml_create_settings_file(char *path)
 			  (const xmlChar *) "label",
 			  (const xmlChar *) _("Old Testament"));
 	(void) xmlNewProp(cur_node, (const xmlChar *) "list", (const xmlChar *) _("Gen - Mal"));
-
+	
 	cur_node = xmlNewChild(section_node, NULL, (const xmlChar *) "range", NULL);
 	(void) xmlNewProp(cur_node,
 			  (const xmlChar *) "label",
@@ -899,7 +1138,7 @@ char *xml_get_list(void)
  * Synopsis
  *   #include "main/xml.h"
  *
- *   xmlNodePtr xml_find_prop(char *type_doc, char *section,
+ *   xmlNodePtr xml_find_prop(xmlDocPtr doc, char *type_doc, char *section,
 				char *prop)
  *
  * Description
@@ -909,13 +1148,13 @@ char *xml_get_list(void)
  *   xmlNodePtr
  */
 
-static xmlNodePtr xml_find_prop(const char *type_doc, const char *section,
+static xmlNodePtr xml_find_prop(xmlDocPtr doc, const char *type_doc, const char *section,
 				const char *prop)
 {
 	xmlNodePtr cur = NULL;
 	xmlNodePtr item_cur = NULL;
 
-	cur = xmlDocGetRootElement(xml_settings_doc);
+	cur = xmlDocGetRootElement(doc);
 	if (cur == NULL) {
 		fprintf(stderr, _("empty document \n"));
 		return NULL;
@@ -974,7 +1213,7 @@ char *xml_get_value(const char *section, const char *item)
 	xmlNodePtr cur = NULL;
 	xmlChar *results = NULL;
 	if ((cur =
-	     xml_find_prop("Xiphos", section, item)) != NULL) {
+	     xml_find_prop(xml_settings_doc, "Xiphos", section, item)) != NULL) {
 		results = xmlNodeListGetString(xml_settings_doc,
 					       cur->xmlChildrenNode, 1);
 		if (results)
@@ -982,7 +1221,6 @@ char *xml_get_value(const char *section, const char *item)
 	}
 	return NULL;
 }
-
 
 /******************************************************************************
  * Name
@@ -1006,10 +1244,11 @@ void xml_set_value(const char *type_doc, const char *section, const char *item,
 {
 	xmlNodePtr cur = NULL;
 	if ((cur =
-	     xml_find_prop(type_doc, section, item)) != NULL) {
+	     xml_find_prop(xml_settings_doc, type_doc, section, item)) != NULL) {
 		xmlNodeSetContent(cur, (const xmlChar *)value);
 	}
 }
+
 
 
 /******************************************************************************
@@ -1030,15 +1269,12 @@ void xml_set_value(const char *type_doc, const char *section, const char *item,
 
 int xml_parse_settings_file(char *file_name)
 {
-	//const xmlChar *file;
-
-	//file = (const xmlChar *) file_name;
 	xml_settings_doc = xmlParseFile(file_name);
-
 	if (xml_settings_doc == NULL) {
 		fprintf(stderr, _("Document not parsed successfully. \n"));
 		return FALSE;
 	}
+	
 	return TRUE;
 }
 
