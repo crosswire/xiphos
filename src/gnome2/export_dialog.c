@@ -375,6 +375,7 @@ static
 void _load_data(gchar * filename)
 { 
 	gchar *buf;
+	gchar *file = g_strdup_printf("%s/export-copy.xml", settings.gSwordDir);
 	
 	if(xml_load_copy_export_file(filename)) {	
 
@@ -388,6 +389,13 @@ void _load_data(gchar * filename)
 		edata.verselayout_single_verse_ref_first = xml_get_copy_export_value("singleverse", "first");
 		edata.verse_range_ref_first = xml_get_copy_export_value("verserange", "first");
 		edata.verse_range_ref_last = xml_get_copy_export_value("verserange", "last");
+		edata.verse_range_verse = xml_get_copy_export_value("verserange", "verse");
+
+		if( edata.verse_range_verse == NULL) {
+			xml_add_new_item_to_export_doc_section("verserange", "verse", " %s%s");
+			edata.verse_range_verse = xml_get_copy_export_value("verserange", "verse");
+			xml_save_export_doc(file);
+		}
 
 		/* plain text */
 		
@@ -432,6 +440,8 @@ void _load_data(gchar * filename)
 		}
 		
 		xml_free_export_doc();
+		if(file)
+			g_free(file);
 	}
 }
 

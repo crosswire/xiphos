@@ -430,6 +430,21 @@ int xml_load_copy_export_file(const xmlChar * file)
 }
 
 
+void xml_add_new_section_to_doc(xmlDocPtr doc, char * section)
+{
+	xmlNodePtr root_node = NULL;
+
+	root_node = xmlDocGetRootElement(doc);
+	if (root_node == NULL) {
+		fprintf(stderr, _("empty document \n"));
+		return;
+	}
+	(void) xmlNewChild(root_node, NULL,
+			   (const xmlChar *) section, NULL);
+}
+
+
+
 /******************************************************************************
  * Name
  *   xml_create_copy_export_file
@@ -507,6 +522,7 @@ int xml_create_copy_export_file(char *path)
 	/* verse range format */
 	
 	section_node = xmlNewChild(root_node, NULL, (const xmlChar *) "verserange", NULL);
+	xmlNewTextChild(section_node, NULL, (const xmlChar *) "verse", (const xmlChar *) _(" %s%s"));
 	xmlNewTextChild(section_node, NULL, (const xmlChar *) "last", (const xmlChar *)  _("%s(%s %d:%d-%d%s)"));
 	xmlNewTextChild(section_node, NULL, (const xmlChar *) "first", (const xmlChar *) _("(%s %d:%d-%d%s)<br>"));
 	xmlNewTextChild(section_node, NULL, (const xmlChar *) "plain_last", (const xmlChar *)  _("%s(%s %d:%d-%d%s)"));
@@ -836,11 +852,11 @@ void xml_convert_to_osisref(void)
  *   xmlNodePtr
  */
 
-static xmlNodePtr xml_find_section(const char *type_doc, const char *section)
+static xmlNodePtr xml_find_section(xmlDocPtr doc, const char *type_doc, const char *section)
 {
 	xmlNodePtr cur = NULL;
 
-	cur = xmlDocGetRootElement(xml_settings_doc);
+	cur = xmlDocGetRootElement(doc);
 	if (cur == NULL) {
 		fprintf(stderr, _("empty document \n"));
 		return NULL;
@@ -936,7 +952,7 @@ char *xml_get_list_from_label(const char *section, const char *item, const char 
 	xmlChar *prop_label = NULL;
 
 
-	if ((cur = xml_find_section("Xiphos", section)) != NULL) {
+	if ((cur = xml_find_section(xml_settings_doc, "Xiphos", section)) != NULL) {
 
 		cur = cur->xmlChildrenNode;
 
@@ -987,7 +1003,7 @@ void xml_set_list_item(const char *section, const char *item, const char *label,
 	xmlNodePtr cur_item = NULL;
 	xmlNodePtr new = NULL;
 
-	if ((cur = xml_find_section("Xiphos", section)) == NULL) {
+	if ((cur = xml_find_section(xml_settings_doc, "Xiphos", section)) == NULL) {
 		xmlNodePtr root_node = xmlDocGetRootElement(xml_settings_doc);
 		cur = xmlNewChild(root_node, NULL, (const xmlChar *) section, NULL);
 	}
@@ -1024,7 +1040,7 @@ void xml_set_new_element(const char *section, const char *item, const char *cont
 {
 	xmlNodePtr cur = NULL;
 
-	if ((cur = xml_find_section("Xiphos", section)) == NULL) {
+	if ((cur = xml_find_section(xml_settings_doc, "Xiphos", section)) == NULL) {
 		xmlNodePtr root_node = xmlDocGetRootElement(xml_settings_doc);
 		cur = xmlNewChild(root_node, NULL, (const xmlChar *) section, NULL);
 	}
@@ -1054,7 +1070,7 @@ int xml_set_section_ptr(const char *section)
 {
 	xmlNodePtr cur = NULL;
 
-	if ((cur = xml_find_section("Xiphos", section)) != NULL) {
+	if ((cur = xml_find_section(xml_settings_doc, "Xiphos", section)) != NULL) {
 		section_ptr = cur->xmlChildrenNode;
 		if (section_ptr)
 			return 1;
@@ -1358,6 +1374,33 @@ void xml_add_new_section_to_settings_doc(char * section)
 }
 
 
+
+/******************************************************************************
+ * Name
+ *
+ *
+ * Synopsis
+ *   #include "main/xml.h"
+ *
+ *
+ *
+ * Description
+ *
+ *
+ * Return value
+ *
+ */
+
+void xml_add_new_item_to_export_doc_section(char * section, char * item_name, char * value)
+{
+	xmlNodePtr section_node = NULL;
+
+	section_node = xml_find_section(xml_export_doc, "Copy_Export", section);
+
+	if (section_node)
+		xmlNewTextChild(section_node, NULL, (const xmlChar *)item_name,
+						    (const xmlChar *)value);
+}
 /******************************************************************************
  * Name
  *
@@ -1378,7 +1421,7 @@ void xml_add_new_item_to_section(char * section, char * item_name, char * value)
 {
 	xmlNodePtr section_node = NULL;
 
-	section_node = xml_find_section("Xiphos", section);
+	section_node = xml_find_section(xml_settings_doc, "Xiphos", section);
 
 	if (section_node)
 		xmlNewTextChild(section_node, NULL, (const xmlChar *)item_name,
@@ -1406,7 +1449,7 @@ void xml_remove_node(const char *section, const char *item, const char *label)
 	xmlNodePtr cur = NULL;
 	xmlNodePtr cur_item = NULL;
 	if ((cur =
-	     xml_find_section( "Xiphos", section)) != NULL) {
+	     xml_find_section(xml_settings_doc, "Xiphos", section)) != NULL) {
 		if ((cur_item = xml_find_item(cur, item, label)) != NULL) {
 			xmlUnlinkNode(cur_item);
 			xmlFreeNode(cur_item);
@@ -1435,7 +1478,7 @@ void xml_remove_section(const char *section)
 {
 	xmlNodePtr cur = NULL;
 
-	if ((cur = xml_find_section("Xiphos", section)) != NULL) {
+	if ((cur = xml_find_section(xml_settings_doc, "Xiphos", section)) != NULL) {
 		xmlUnlinkNode(cur);
 		xmlFreeNode(cur);
 	}

@@ -133,6 +133,8 @@ static void _copy_to_clipboard (EXPORT_DATA data, char* text,int len)
 		g_free(data.verselayout_single_verse_ref_last);
 	if (data.verselayout_single_verse_ref_first)
 		g_free(data.verselayout_single_verse_ref_first);
+	if (data.verse_range_verse)
+		g_free(data.verse_range_verse);
 }
 
 static void _save(EXPORT_DATA data, char* text,int len)
@@ -153,6 +155,8 @@ static void _save(EXPORT_DATA data, char* text,int len)
 		g_free(data.verselayout_single_verse_ref_last);
 	if (data.verselayout_single_verse_ref_first)
 		g_free(data.verselayout_single_verse_ref_first);
+	if (data.verse_range_verse)
+		g_free(data.verse_range_verse);
 }
 
 static void _export_book(EXPORT_DATA data, int type)
@@ -396,11 +400,11 @@ static void _export_verse_range (EXPORT_DATA data, int type)
 		                               key->getVerse());
 
 		if (type == HTML)
-			g_string_append_printf(str," %s%s",
+			g_string_append_printf(str,data.verse_range_verse,
                            (char*)mod->renderText(),
 					       (settings.versestyle ? "<br>" : " "));
 		else
-			g_string_append_printf(str," %s%s",
+			g_string_append_printf(str,data.verse_range_verse,
                            (char*)mod->stripText(),
 					       (settings.versestyle ? "\n" : " "));
 	}
