@@ -49,7 +49,8 @@ struct _export_data {
 	char *plain_verselayout_single_verse_ref_last;
 	char *plain_verselayout_single_verse_ref_first;
 	char *plain_verse_range_ref_last;
-	char *plain_verse_range_ref_first;	
+	char *plain_verse_range_ref_first;
+	char *verse_range_verse;	
 	int passage_type;
 	int start_verse;
 	int end_verse;

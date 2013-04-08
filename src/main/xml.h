@@ -49,6 +49,7 @@ void xml_free_export_doc(void);
 void xml_export_set_value(const char *type_doc, const char *section, const char *item,
 		   const char *value);
 void xml_save_export_doc(char *name);
+void xml_add_new_section_to_doc(xmlDocPtr doc, char * section);
 int xml_create_copy_export_file(char *path);
 int xml_load_copy_export_file(const xmlChar * file);
 char *xml_get_copy_export_value(const char *section, const char *item);
@@ -59,6 +60,7 @@ void xml_set_value(const char *type_doc, const char *section, const char *item,
 		  const char *value);
 void xml_save_settings_doc(char *file_name);
 void xml_free_settings_doc(void);
+void xml_add_new_item_to_export_doc_section(char * section, char * item_name, char * value);
 void xml_add_new_item_to_section(char * section, char * item_name, char * value);
 void xml_remove_node(const char *section, const char *item, const char *label);
 void xml_remove_section(const char *section);
