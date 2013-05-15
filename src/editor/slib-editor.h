@@ -29,6 +29,8 @@ extern "C"
 
 #include <config.h>
 
+#ifndef USE_WEBKIT_EDITOR
+	
 #include <gtk/gtk.h>
 
 #include "main/navbar_versekey.h"
@@ -81,4 +83,6 @@ GtkWidget * editor_new (const gchar * title, EDITOR *e);
 }
 #endif
 
+
+#endif /* !USE_WEBKIT_EDITOR */
 #endif /* _SLIB_EDITOR_H */

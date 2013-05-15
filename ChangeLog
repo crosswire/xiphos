@@ -1,5 +1,9 @@
 2013-04-05  terry  <tbiggs@users.sf.net>
 
+	* added webkit editor for studypad - requires gtk+3.0
+
+2013-04-05  terry  <tbiggs@users.sf.net>
+
 	* added two buttons to the export dialog
 		<Refernce Last>
 		<Include Version>

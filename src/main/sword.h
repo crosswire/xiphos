@@ -56,7 +56,7 @@ extern "C" {
 #define COMM_MODS "Commentaries"
 #define DICT_MODS "Lexicons / Dictionaries"
 #define BOOK_MODS "Generic Books"
-
+	
 #define UTF_8 "UTF-8"
 extern char *OLD_CODESET;
 extern char *sword_locale;

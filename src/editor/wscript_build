@@ -1,7 +1,11 @@
 #!/usr/bin/env python
 # encoding: utf8
 
-source = 'slib-editor.c link_dialog.c'
+
+if bld.env['ENABLE_WEBKIT_EDITOR']:
+    source = 'link_dialog.c editor.c webkit_editor.c'
+else:
+    source = 'slib-editor.c link_dialog.c'
 
 bld.new_task_gen(
     features='cc cxx', # compile C with gcc, C++ with g++

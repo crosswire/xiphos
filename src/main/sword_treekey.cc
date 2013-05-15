@@ -306,6 +306,8 @@ void main_load_book_tree_in_editor (GtkTreeView * treeview, char *book)
 	SWMgr *mgr = backend->get_mgr ();
 	SWModule *mod = mgr->Modules[book];
 
+	GS_message(("main_load_book_tree_in_editor book: %s", book ));
+
 	if (!mod)
 		return;
 	tmpbuf = book;
