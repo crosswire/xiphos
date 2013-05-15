@@ -58,7 +58,11 @@
 #include "main/mod_mgr.h"
 #include "main/url.hh"
 
+#ifdef USE_WEBKIT_EDITOR
+#include "editor/webkit_editor.h"
+#else
 #include "editor/slib-editor.h"
+#endif
 
 #include "gui/debug_glib_null.h"
 
@@ -1705,7 +1709,7 @@ GtkWidget * _create_popup_menu (XiphosHtml *html, const gchar * mod_name, DIALOG
 	GladeXML *gxml;
 #endif
     	const gchar *mname = (is_dialog ? d->mod_name : mod_name);
-
+	GS_message(("_create_popup_menu mod_name:",mod_name));
 	if (!mname || !*mname)
 		return NULL;
 
@@ -1829,7 +1833,7 @@ GtkWidget * _create_popup_menu (XiphosHtml *html, const gchar * mod_name, DIALOG
 				    d);
     	/* connect signals and data */
 #ifdef USE_GTKBUILDER 
-        gtk_builder_connect_signals (gxml, NULL);
+        gtk_builder_connect_signals (gxml, html);
 	/*gtk_builder_connect_signals_full
 		(gxml, (GtkBuilderConnectFunc)gui_glade_signal_connect_func, html);*/
 #else

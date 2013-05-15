@@ -34,7 +34,11 @@
 #include "gui/navbar_versekey.h"
 #include "gui/tabbed_browser.h"
 
+#ifdef USE_WEBKIT_EDITOR
+#include "editor/webkit_editor.h"
+#else
 #include "editor/slib-editor.h"
+#endif
 
 #include "backend/sword_main.hh"
 
