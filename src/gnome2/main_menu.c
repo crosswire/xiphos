@@ -30,7 +30,13 @@
   #include <glade/glade-xml.h>
 #endif
 
+#ifdef USE_WEBKIT_EDITOR	
+#include "editor/webkit_editor.h"
+#include "editor/editor.h"
+#else
 #include "editor/slib-editor.h"
+#endif
+
 
 #include "gui/about_xiphos.h"
 #include "gui/about_sword.h"
@@ -829,6 +835,7 @@ G_MODULE_EXPORT void
 on_open_studypad_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	editor_create_new(settings.studypadfilename, NULL, FALSE);
+	//create_window ();
 }
 
 

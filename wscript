@@ -69,6 +69,10 @@ def set_options(opt):
             dest='delint',
             help='Use -Wall -Werror [default: disabled]')
 
+    miscgroup.add_option('--enable-webkit-editor', action='store_true', default=False,
+            dest='webkit_editor',
+            help='Use webkit editor [default: disabled]')
+			
     miscgroup.add_option('--disable-dbus',
                    action = 'store_true',
                    default = False,
@@ -231,7 +235,7 @@ def configure(conf):
 
     # TODO are these still needed?
     env['ENABLE_WEBKIT'] = True
-    dfn('WEBKIT', 1)
+    dfn('WEBKIT', 1) 
     
     #gtk
     if opt.gtkver == '2':
@@ -326,9 +330,12 @@ def configure(conf):
     else:
         # So far, we only care about GTK+3, not any of its subversions
         common_libs += ' "gtk+-3.0" '
-        common_libs += ' "webkitgtk-3.0" '
+        common_libs += ' "webkitgtk-3.0" '  
         conf.define('USE_GTK_3', 1)
         conf.define('USE_GTKBUILDER', 1)
+        if opt.webkit_editor:
+           conf.define('USE_WEBKIT_EDITOR', 1)
+           env['ENABLE_WEBKIT_EDITOR'] = True
         # FC15 and Oneiric have this, Natty does not
         if conf.check_cfg(modversion='libgtkhtml-4.0', msg='Checking for libgtkhtml4', okmsg='ok', errmsg='fail'):
             common_libs += ' "libgtkhtml-4.0" '

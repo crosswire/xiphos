@@ -29,7 +29,12 @@
 #endif
 
 
+#ifdef USE_WEBKIT_EDITOR	
+#include "editor/webkit_editor.h"
+#else
 #include "editor/slib-editor.h"
+#endif
+
 
 #include "gui/navbar_versekey_editor.h"
 #include "gui/bibletext_dialog.h"

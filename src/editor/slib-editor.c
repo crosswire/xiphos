@@ -21,6 +21,8 @@
 
 #include <config.h>
 
+#ifndef USE_WEBKIT_EDITOR
+
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -40,8 +42,8 @@
 #include "editor/link_dialog.h"
 
 #include "main/settings.h"
-#include "main/sword.h"
 #include "main/sword_treekey.h"
+#include "main/sword.h"
 #include "main/url.hh"
 #include "main/xml.h"
 
@@ -1512,3 +1514,4 @@ void editor_maybe_save_all(void)
 	}
 }
 
+#endif /* !USE_WEBKIT_EDITOR */
