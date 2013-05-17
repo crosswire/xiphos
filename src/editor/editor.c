@@ -36,7 +36,7 @@
 
 
 #include "main/sword.h"
-
+#define html_start "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\"><html><head>" 
 BUTTONS_STATE buttons_state;
 
 glong mouse_x;
@@ -67,6 +67,7 @@ gint editor_insert_new_outline_level (gint level, EDITOR * e)
 	gchar * class = NULL;
 	gchar * level_str = NULL;
 
+	GS_message(("\n%s\n","editor_insert_new_outline_level"));
 	if(!current_element) 
 		return 0;
 	
@@ -128,21 +129,26 @@ gint editor_insert_new_outline_level (gint level, EDITOR * e)
 void editor_get_document_content (GString * data, EDITOR * e)
 {
 	WebKitDOMHTMLElement* html;
+	WebKitDOMHTMLHeadElement* header;
 	WebKitDOMDocument* dom_document = NULL;
-	//gchar * data = g_string_new ("");
 	gchar * filename = NULL;
 	gchar* body = NULL;
+	gchar* head = NULL;
 	
 	dom_document = webkit_web_view_get_dom_document ((WebKitWebView*) e->html_widget);
 	if(!dom_document)
 		return;
-	
-	html = webkit_dom_document_get_body(dom_document);
-	
-	body = webkit_dom_html_element_get_inner_html(html);
-	g_string_printf (data, "%s%s</body>\n</html>",html_head,body); 
 
-	GS_message(("%s",data->str));
+	/* get document <head> info */
+	header = webkit_dom_document_get_head(dom_document);
+	head = webkit_dom_html_element_get_inner_html((WebKitDOMHTMLElement*)header);
+	
+	/* get document <body> info */
+	html = webkit_dom_document_get_body(dom_document);
+	body = webkit_dom_html_element_get_inner_html(html);
+	
+	
+	g_string_printf (data, "%s%s</head><body contenteditable=\"true\">%s</body>\n</html>",html_start, head, body); 
 }
 
 gchar * editor_get_selected_text (EDITOR * e)
@@ -207,8 +213,8 @@ void editor_execute_script(gchar * script, EDITOR * e)
 {
 	if (script) {
 		webkit_web_view_execute_script (WEBKIT_WEB_VIEW (e->html_widget), script);
+		GS_message(("script: %s",script));
 		g_free (script);
-		e->is_changed = TRUE;
 	}
 }
 
@@ -226,13 +232,6 @@ void editor_open_recent (const gchar * uri, EDITOR * e)
 {
 	webkit_web_view_load_uri (WEBKIT_WEB_VIEW(e->html_widget),uri); 
 
-}
-
-
-
-gboolean editor_is_dirty2(void)
-{
-	return 0; //editor_changed;
 }
 
 
@@ -364,13 +363,25 @@ gboolean editor_insert_link(void)
 
 */
 
+void     user_changed_contents_cb (WebKitWebView * web_view,
+                                   EDITOR * e)
+{	
+	GS_message(("%s","user_changed_contents_cb"));
+	e->is_changed = TRUE;
+}
 
-WebKitNavigationResponse   on_navigation_requested   (WebKitWebView        *web_view,
-                                                           WebKitWebFrame       *frame,
-                                                           WebKitNetworkRequest *request)
+
+WebKitNavigationResponse   on_navigation_requested (WebKitWebView * web_view,
+                                                           WebKitWebFrame * frame,
+                                                           WebKitNetworkRequest * request,
+                                                			EDITOR * e)
 {
 	const gchar * uri = NULL;
-
+	
+	if (e->is_changed) {
+		ask_about_saving(e);
+	}
+	
 	uri = webkit_network_request_get_uri  (request);
 	GS_message(("on_navigation_requested uri: %s",uri));
 	if (g_strstr_len (uri, 6, "file:"))
@@ -384,7 +395,7 @@ static
 void link_handler (GtkWidget *widget,
 			      gchar     *title,
 			      gchar     *uri,
-			      gpointer   user_data)
+			      EDITOR * e)
 {
 	GS_message(("link_handler"));
 }
@@ -489,7 +500,7 @@ gboolean key_handler (GtkWidget *widget,
                                GdkEvent  *event,
                                EDITOR * e)
 {			  
-	e->is_changed = TRUE;
+	
 	return 0;	
 }
 
@@ -548,15 +559,17 @@ gint _fill_spell_menu(GtkWidget * menu, gchar * word, EDITOR * e)
                                                                 word,
                                                                 NULL);
 	/* add guesses to menu */
-	while(word_list[i]) {
-		item = gtk_menu_item_new_with_label (word_list[i]);
-		gtk_widget_show (item);
-		g_signal_connect (G_OBJECT (item), "activate",
-			  		 G_CALLBACK (menu_spell_item_activated),
-			  		 e);
-                gtk_menu_shell_append ((GtkMenuShell* )menu, (GtkWidget*) item);
-		i++;
-	} 
+	if (word_list) {
+		while(word_list[i]) {
+			item = gtk_menu_item_new_with_label (word_list[i]);
+			gtk_widget_show (item);
+			g_signal_connect (G_OBJECT (item), "activate",
+				  		 G_CALLBACK (menu_spell_item_activated),
+				  		 e);
+		            gtk_menu_shell_append ((GtkMenuShell* )menu, (GtkWidget*) item);
+			i++;
+		} 
+	}
 	
 	/* separator */
 	item = gtk_separator_menu_item_new ();
@@ -793,7 +806,9 @@ void create_editor_window (GtkWidget * scrollwindow, EDITOR * e)
 	g_signal_connect (G_OBJECT (webview), "hovering-over-link",
 			  		 G_CALLBACK (link_handler),
 			  		 e);
-	
+	g_signal_connect (G_OBJECT (webview), "user-changed-contents",
+			  		 G_CALLBACK (user_changed_contents_cb),
+			  		 e);
 	g_signal_connect (G_OBJECT (webview), "button-press-event",
 			  		 G_CALLBACK (button_handler),
 			  		 e);
