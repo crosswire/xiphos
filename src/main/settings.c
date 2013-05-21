@@ -47,6 +47,8 @@
 #include "main/sword.h"
 #include "main/xml.h"
 
+#include "editor/template.h"
+
 #include <glib/gstdio.h>
 
 #include "gui/debug_glib_null.h"
@@ -216,6 +218,13 @@ int settings_init(int argc, char **argv, int new_configs, int new_bookmarks)
 	tmp = g_strdup_printf("%s/%s", settings.gSwordDir, "template.pad");
 	if ((g_access(tmp, F_OK) == -1)) {
 		g_file_set_contents(tmp, " ", 1, NULL);
+	}
+	g_free(tmp);
+	
+	/* check for studypad.spt template file for studypad */
+	tmp = g_strdup_printf("%s/%s", settings.gSwordDir, "studypad.spt");
+	if ((g_access(tmp, F_OK) == -1)) {
+		g_file_set_contents(tmp, studypad_template, -1, NULL);
 	}
 	g_free(tmp);
 
