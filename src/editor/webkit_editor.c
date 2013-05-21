@@ -42,7 +42,7 @@
 #include "editor/webkit_editor.h"
 #include "editor/editor.h"
 #include "editor/link_dialog.h"
-#include "editor/html.h"
+//#include "editor/html.h"
 
 #include "main/settings.h"
 #include "main/sword.h"
@@ -82,11 +82,8 @@ void _save_note (EDITOR * e);
 static
 void _save_book (EDITOR * e);
 
-static
-gint ask_about_saving(EDITOR * e);
-
-
-static GList *editors_all = NULL;
+static 
+GList *editors_all = NULL;
 
 static
 gchar * editor_get_filename(EDITOR * e)
@@ -297,8 +294,9 @@ void action_delete_activate_cb (GtkWidget *widget, EDITOR * e)
 
 void action_delete_item_activate_cb (GtkWidget *widget, EDITOR * e)
 {
-gchar *buf;
-
+	gchar *buf = NULL;
+	gchar *uri = NULL;
+	
 	if (e->studypad)
 		return;
 
@@ -308,12 +306,11 @@ gchar *buf;
 
 	if (gui_yes_no_dialog(buf, GTK_STOCK_DIALOG_WARNING)) {
 		main_delete_note(e->module, e->key);
-				
-		webkit_web_view_load_string  ( WEBKIT_WEB_VIEW(e->html_widget),
-                                         html_head, //const gchar *content,
-                                         "text/html",  //const gchar *mime_type,
-                                         "utf-8",  //const gchar *encoding,
-                                         "file:///");   //const gchar  *base_uri		
+						
+		/* open with new empty document */	
+		uri = g_strdup_printf("file://%s/%s",settings.gSwordDir,"studypad.spt");
+		webkit_web_view_load_uri (WEBKIT_WEB_VIEW(e->html_widget), uri); 
+		g_free (uri);		
 	}
 	e->is_changed = FALSE;
 	g_free(buf);	
@@ -737,11 +734,15 @@ void
 action_new_activate_cb ( GtkWidget * widget,
             			EDITOR *e)	/* for studypad only */
 {
-
+	gchar *filename = NULL;
+	
 	if (e->is_changed)
-		_save_file (e);
+		ask_about_saving (e);
 
-	_load_file(e, g_strdup_printf("%s/%s",settings.gSwordDir,"studypad.spt"));
+	filename = g_strdup_printf("%s/%s",settings.gSwordDir,"studypad.spt");
+
+	
+	_load_file(e, filename);
 
 	if (e->filename)
 		g_free(e->filename);
@@ -1108,9 +1109,11 @@ _load_file (EDITOR * e, const gchar * filename)
 		uri = g_strdup_printf("file://%s",filename);
 		
 	webkit_web_view_load_uri (WEBKIT_WEB_VIEW(e->html_widget),uri); 
+	
 	rm = gtk_recent_manager_get_default ();
 	gtk_recent_manager_add_item (rm,uri);
 	g_free (uri);
+	e->is_changed =FALSE;
 }
 
 gboolean editor_is_dirty(EDITOR * e)
@@ -1131,6 +1134,7 @@ void editor_load_book(EDITOR * e)
 {
 	gchar *title = NULL;
 	gchar *text = NULL;
+	gchar *uri = NULL;
 
 	if (!g_ascii_isdigit(e->key[0])) return; /* make sure is a number (offset) */
 
@@ -1149,12 +1153,11 @@ void editor_load_book(EDITOR * e)
                                          "text/html", //const gchar          *mime_type,
                                          "utf_8", //const gchar          *encoding,
                                          "file://" ); //const gchar          *base_uri);
-	} else {			
-		webkit_web_view_load_string  ( WEBKIT_WEB_VIEW(e->html_widget),
-                                         html_head, //const gchar *content,
-                                         "text/html",  //const gchar *mime_type,
-                                         "utf-8",  //const gchar *encoding,
-                                         "file:///");   //const gchar  *base_uri
+	} else {
+		/* open with new empty document */	
+		uri = g_strdup_printf("file://%s/%s",settings.gSwordDir,"studypad.spt");
+		webkit_web_view_load_uri (WEBKIT_WEB_VIEW(e->html_widget), uri); 
+		g_free (uri);			
 	}
 
 
@@ -1207,8 +1210,9 @@ void
 editor_load_note(EDITOR * e, const gchar * module_name,
 		 const gchar * key)
 {
-	gchar *title;
-	gchar *text;
+	gchar *title = NULL;
+	gchar *text = NULL;
+	gchar *uri = NULL;
 
 
 	if (e->is_changed)
@@ -1234,12 +1238,11 @@ editor_load_note(EDITOR * e, const gchar * module_name,
                                                  "text/html", //const gchar          *mime_type,
                                                  "utf_8", //const gchar          *encoding,
                                                  "file://" ); //const gchar          *base_uri);
-	} else {			
-		webkit_web_view_load_string  ( WEBKIT_WEB_VIEW(e->html_widget),
-                                         html_head, //const gchar *content,
-                                         "text/html",  //const gchar *mime_type,
-                                         "utf-8",  //const gchar *encoding,
-                                         "file:///");   //const gchar  *base_uri
+	} else {	
+		/* open with new empty document */	
+		uri = g_strdup_printf("file://%s/%s",settings.gSwordDir,"studypad.spt");
+		webkit_web_view_load_uri (WEBKIT_WEB_VIEW(e->html_widget), uri); 
+		g_free (uri);	
 	}
 	e->is_changed = FALSE;
 	change_window_title(e->window, title);
@@ -1275,7 +1278,6 @@ delete_event (GtkWidget *widget, GdkEvent  *event, EDITOR * e)
 }
 
 
-static
 gint ask_about_saving(EDITOR * e)
 {
 	gint test;

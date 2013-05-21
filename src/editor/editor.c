@@ -32,10 +32,12 @@
 
 #include "editor/webkit_editor.h"
 #include "editor/editor.h"
-#include "editor/html.h"
+//#include "editor/html.h"
 
 
 #include "main/sword.h"
+#include "main/settings.h" 
+
 #define html_start "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\"><html><head>" 
 BUTTONS_STATE buttons_state;
 
@@ -554,7 +556,7 @@ gint _fill_spell_menu(GtkWidget * menu, gchar * word, EDITOR * e)
                                                &misspelling_length);
 	if(!misspelling_length) 
 		return 0;
-	
+	 
 	word_list = webkit_spell_checker_get_guesses_for_word (checker,
                                                                 word,
                                                                 NULL);
@@ -768,8 +770,9 @@ gboolean button_handler (GtkWidget *widget,
 
 void create_editor_window (GtkWidget * scrollwindow, EDITOR * e)
 {
-	WebKitWebSettings *settings;
+	WebKitWebSettings *setting;
 	GtkWidget *webview;
+	gchar *uri = NULL;
 	
 	webview = webkit_web_view_new();
 	e->html_widget = webview;
@@ -779,22 +782,17 @@ void create_editor_window (GtkWidget * scrollwindow, EDITOR * e)
 	webkit_web_view_set_editable ((WebKitWebView*) webview, TRUE); 
 	
 	/* Create a new websettings and enable spell checking */
-	settings = webkit_web_settings_new ();
-	g_object_set (G_OBJECT(settings), "enable-spell_checking", TRUE, NULL);
+	setting = webkit_web_settings_new ();
+	g_object_set (G_OBJECT(setting), "enable-spell_checking", TRUE, NULL);
 
 	/* Apply the result */
-	webkit_web_view_set_settings (WEBKIT_WEB_VIEW(webview), settings);
-	
-	/*webkit_web_view_load_uri (WEBKIT_WEB_VIEW(webview),
-                              "file:///home/terry/Desktop/studypad.html"); */
+	webkit_web_view_set_settings (WEBKIT_WEB_VIEW(webview), setting);
 
-	/* open with new empty document */
-	webkit_web_view_load_string  ( WEBKIT_WEB_VIEW(webview),
-                                         html_head, //const gchar *content,
-                                         "text/html",  //const gchar *mime_type,
-                                         "utf-8",  //const gchar *encoding,
-                                         "file:///");   //const gchar  *base_uri
-								  
+	/* open with new empty document */	
+	uri = g_strdup_printf("file://%s/%s",settings.gSwordDir,"studypad.spt");
+	webkit_web_view_load_uri (WEBKIT_WEB_VIEW(webview), uri); 
+	g_free (uri);
+	
 	e->is_changed = FALSE;
 	//use_outline = 	TRUE;	
 	

@@ -172,7 +172,7 @@ void editor_load_book(EDITOR * e);
 gint editor_create_new(const gchar * filename, const gchar * key, gint note);
 void editor_save_book(EDITOR * e);
 void editor_maybe_save_all(void);
-
+gint ask_about_saving(EDITOR * e);
 
 #ifdef __cplusplus
 }
