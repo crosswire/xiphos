@@ -175,7 +175,7 @@ static void _save_state_buttons(void)
 	gchar value[10];/* set export-copy.xml */
 	gchar *file = g_strdup_printf("%s/export-copy.xml", settings.gSwordDir);
 	
-	if(xml_load_copy_export_file(file)) {
+	if (xml_load_copy_export_file((const xmlChar *)file)) {
 		sprintf(value, "%d", gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(d.rb_plain)));
 		xml_export_set_value("Copy_Export", "dialog", "plaintext", value);
 		sprintf(value, "%d", gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(d.cb_versenum)));
@@ -377,7 +377,7 @@ void _load_data(gchar * filename)
 	gchar *buf;
 	gchar *file = g_strdup_printf("%s/export-copy.xml", settings.gSwordDir);
 	
-	if(xml_load_copy_export_file(filename)) {	
+	if (xml_load_copy_export_file((const xmlChar *)filename)) {
 
 		/* html */
 
@@ -460,6 +460,8 @@ void _load_data(gchar * filename)
  * Return value
  *   void
  */
+
+int g_access(const gchar *, int); /* without this, we get an error -- why? */
 
 void gui_export_dialog(void)
 {

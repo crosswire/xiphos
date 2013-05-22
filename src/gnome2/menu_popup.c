@@ -1709,7 +1709,7 @@ GtkWidget * _create_popup_menu (XiphosHtml *html, const gchar * mod_name, DIALOG
 	GladeXML *gxml;
 #endif
     	const gchar *mname = (is_dialog ? d->mod_name : mod_name);
-	GS_message(("_create_popup_menu mod_name:",mod_name));
+	GS_message(("_create_popup_menu mod_name:%s",mod_name));
 	if (!mname || !*mname)
 		return NULL;
 
