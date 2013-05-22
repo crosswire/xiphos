@@ -464,10 +464,8 @@ void xml_add_new_section_to_doc(xmlDocPtr doc, char * section)
 int xml_create_copy_export_file(char *path)
 {
 	xmlNodePtr root_node;
-	xmlNodePtr cur_node;
 	xmlNodePtr section_node;
 	xmlDocPtr xml_doc;
-	GList *tmp = NULL;
 
 	xml_doc = xmlNewDoc((const xmlChar *) "1.0");
 
@@ -533,7 +531,7 @@ int xml_create_copy_export_file(char *path)
 			   xml_doc, 
 			   1);
 	xmlFreeDoc(xml_doc);
-
+	return 1;
 }
 
 
