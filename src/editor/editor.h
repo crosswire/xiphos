@@ -35,11 +35,6 @@ extern "C"
 	
 #include "editor/webkit_editor.h"
 
-extern GtkWidget * webview;
-extern gboolean editor_changed;
-extern gboolean use_outline;
-extern GtkWidget * webview;
-
 
 gchar * editor_get_selected_text (EDITOR * e);
 void editor_find_string (gchar * needle, EDITOR * e);
