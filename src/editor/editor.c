@@ -32,30 +32,40 @@
 
 #include "editor/webkit_editor.h"
 #include "editor/editor.h"
-//#include "editor/html.h"
-
 
 #include "main/sword.h"
 #include "main/settings.h" 
 
 #define html_start "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\"><html><head>" 
+
 BUTTONS_STATE buttons_state;
 
 glong mouse_x;
 glong mouse_y;
+
 WebKitDOMElement * current_element;
 
-//extern TOOL_ITEMS toolitems;
 
-//#define LINK_DIALOG_UI_FILE "/home/terry/Dropbox/Code/gtk-webedit/src/link_dialog.ui"
+/******************************************************************************
+ * Name
+ *   editor_insert_new_outline_level
+ *
+ * Synopsis
+ *   #include "editor/editor.h"
+ *
+ *   gint editor_insert_new_outline_level (gint level, EDITOR * e)
+ *
+ * Description
+ *  use to create an outline:
+ * I. 
+ *  	A.
+ *  		1.
+ *  			a.  
+ *
+ * Return value
+ *   gint
+ */
 
-/* 
-use to create outline:
-I. 
-	A.
-		1.
-			a. 
-*/
 gint editor_insert_new_outline_level (gint level, EDITOR * e)
 {
 	WebKitDOMDocument * doc;
@@ -128,6 +138,22 @@ gint editor_insert_new_outline_level (gint level, EDITOR * e)
 	return 1;
 }
 
+/******************************************************************************
+ * Name
+ *   editor_get_document_content
+ *
+ * Synopsis
+ *   #include "editor/editor.h"
+ *
+ *   void editor_get_document_content (GString * data, EDITOR * e)
+ *
+ * Description
+ *   fills the GString with the contents of the html document.
+ *
+ * Return value
+ *   void
+ */
+
 void editor_get_document_content (GString * data, EDITOR * e)
 {
 	WebKitDOMHTMLElement* html;
@@ -152,6 +178,23 @@ void editor_get_document_content (GString * data, EDITOR * e)
 	
 	g_string_printf (data, "%s%s</head><body contenteditable=\"true\">%s</body>\n</html>",html_start, head, body); 
 }
+
+
+/******************************************************************************
+ * Name
+ *   editor_get_selected_text
+ *
+ * Synopsis
+ *   #include "editor/editor.h"
+ *
+ *   gchar * editor_get_selected_text (EDITOR * e)
+ *
+ * Description
+ *   returns the selected text and must be freed by calling function
+ *
+ * Return value
+ *   gchar *
+ */
 
 gchar * editor_get_selected_text (EDITOR * e)
 	{
@@ -186,6 +229,22 @@ gchar * editor_get_selected_text (EDITOR * e)
 	return g_strdup(text);
 }
 
+/******************************************************************************
+ * Name
+ *   editor_find_string
+ *
+ * Synopsis
+ *   #include "editor/editor.h"
+ *
+ *   void editor_find_string (gchar * needle, EDITOR * e)
+ *
+ * Description
+ *   search document for needle
+ *
+ * Return value
+ *   void
+ */
+
 void editor_find_string (gchar * needle, EDITOR * e)
 {
 	webkit_web_view_search_text ((WebKitWebView*)e->html_widget,
@@ -195,6 +254,23 @@ void editor_find_string (gchar * needle, EDITOR * e)
                                                  TRUE);
 
 }
+
+/******************************************************************************
+ * Name
+ *   editor_replace_string
+ *
+ * Synopsis
+ *   #include "editor/editor.h"
+ *
+ *  void editor_replace_string (gchar * old_string, gchar * new_string, EDITOR * e) 
+ *
+ * Description
+ *   search document for old_string and replace with new_string
+ *   **** needs work ****
+ *
+ * Return value
+ *   void
+ */
 
 void editor_replace_string (gchar * old_string, gchar * new_string, EDITOR * e)
 {
@@ -211,6 +287,23 @@ void editor_replace_string (gchar * old_string, gchar * new_string, EDITOR * e)
 }
 
 
+/******************************************************************************
+ * Name
+ *   editor_execute_script
+ *
+ * Synopsis
+ *   #include "editor/editor.h"
+ *
+ *   void editor_execute_script(gchar * script, EDITOR * e)
+ *
+ * Description
+ *   executes scripts ie "document.execCommand('insertOrderedList', null, \"\");"
+ *	 
+ *
+ * Return value
+ *   void
+ */
+
 void editor_execute_script(gchar * script, EDITOR * e)
 {
 	if (script) {
@@ -219,6 +312,23 @@ void editor_execute_script(gchar * script, EDITOR * e)
 		g_free (script);
 	}
 }
+
+
+/******************************************************************************
+ * Name
+ *   editor_insert_html
+ *
+ * Synopsis
+ *   #include "editor/editor.h"
+ *
+ *   void editor_insert_html(const gchar * html, EDITOR * e)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
 
 void editor_insert_html(const gchar * html, EDITOR * e)
 {
@@ -365,18 +475,53 @@ gboolean editor_insert_link(void)
 
 */
 
-void     user_changed_contents_cb (WebKitWebView * web_view,
-                                   EDITOR * e)
+
+/******************************************************************************
+ * Name
+ *   user_changed_contents_cb
+ *
+ * Synopsis
+ *   #include "editor/editor.h"
+ *
+ *   void user_changed_contents_cb (WebKitWebView * web_view, EDITOR * e)
+ *
+ * Description
+ *   callback - when user makes a change to a document
+ *
+ * Return value
+ *   void
+ */
+
+void user_changed_contents_cb (WebKitWebView * web_view, EDITOR * e)
 {	
 	GS_message(("%s","user_changed_contents_cb"));
 	e->is_changed = TRUE;
 }
 
 
-WebKitNavigationResponse   on_navigation_requested (WebKitWebView * web_view,
-                                                           WebKitWebFrame * frame,
-                                                           WebKitNetworkRequest * request,
-                                                			EDITOR * e)
+/******************************************************************************
+ * Name
+ *   on_navigation_requested
+ *
+ * Synopsis
+ *   #include "editor/editor.h"
+ *
+ *   WebKitNavigationResponse on_navigation_requested (WebKitWebView * web_view,
+ *                                                     WebKitWebFrame * frame,
+ *                                                     WebKitNetworkRequest * request,
+ *                                             		   EDITOR * e)
+ *
+ * Description
+ *   allows only a uri that contains 'file:'
+ *
+ * Return value
+ *   WebKitNavigationResponse
+ */
+
+WebKitNavigationResponse on_navigation_requested (WebKitWebView * web_view,
+                                                  WebKitWebFrame * frame,
+                                                  WebKitNetworkRequest * request,
+                                       			  EDITOR * e)
 {
 	const gchar * uri = NULL;
 	
@@ -393,14 +538,50 @@ WebKitNavigationResponse   on_navigation_requested (WebKitWebView * web_view,
 }
 
 
+/******************************************************************************
+ * Name
+ *   link_handler
+ *
+ * Synopsis
+ *   #include "editor/editor.h"
+ *
+ *   void link_handler (GtkWidget *widget, 
+ *			      gchar     *title,
+ *			      gchar     *uri,
+ *			      EDITOR * e)
+ *
+ * Description
+ *   hovering over a link - does nothing at present
+ *
+ * Return value
+ *   void
+ */
+
 static 
-void link_handler (GtkWidget *widget,
+void link_handler (GtkWidget *widget, 
 			      gchar     *title,
 			      gchar     *uri,
 			      EDITOR * e)
 {
 	GS_message(("link_handler"));
 }
+
+
+/******************************************************************************
+ * Name
+ *   _has_element
+ *
+ * Synopsis
+ *   #include "editor/editor.h"
+ *
+ *   gint _has_element(gchar * name, gchar * class, EDITOR * e)
+ *
+ * Description
+ *   checks for html element - for button status ie bold on or off
+ *
+ * Return value
+ *   gint
+ */
 
 static
 gint _has_element(gchar * name, gchar * class, EDITOR * e)
@@ -498,14 +679,50 @@ gint _has_element(gchar * name, gchar * class, EDITOR * e)
 	return 1;
 }
 
+
+/******************************************************************************
+ * Name
+ *   key_handler
+ *
+ * Synopsis
+ *   #include "editor/editor.h"
+ *
+ *   gboolean key_handler (GtkWidget *widget,
+ *                         GdkEvent  *event,
+ *                         EDITOR * e)
+ *
+ * Description
+ *   key release handler - does nothing at present
+ *
+ * Return value
+ *   gboolean
+ */
+
 gboolean key_handler (GtkWidget *widget,
-                               GdkEvent  *event,
-                               EDITOR * e)
+                      GdkEvent  *event,
+                      EDITOR * e)
 {			  
 	
 	return 0;	
 }
 
+
+/******************************************************************************
+ * Name
+ *   menu_spell_item_activated
+ *
+ * Synopsis
+ *   #include "editor/editor.h"
+ *
+ *   void  menu_spell_item_activated (GtkWidget *menuitem, EDITOR * e)
+ *
+ * Description
+ *   user clicked on spelling word guess - get word form menu item label
+ *   and replace misspelled word
+ *
+ * Return value
+ *   void
+ */
 
 void  menu_spell_item_activated (GtkWidget *menuitem, EDITOR * e)
 {
@@ -518,6 +735,23 @@ void  menu_spell_item_activated (GtkWidget *menuitem, EDITOR * e)
 	webkit_web_frame_replace_selection (frame, label);
 }
 
+
+/******************************************************************************
+ * Name
+ *   menu_spell_add_item_activated
+ *
+ * Synopsis
+ *   #include "editor/editor.h"
+ *
+ *   void  menu_spell_add_item_activated (GtkWidget *menuitem, gpointer user_data)
+ *
+ * Description
+ *   add word to dictionary
+ *
+ * Return value
+ *   void
+ */
+
 void  menu_spell_add_item_activated (GtkWidget *menuitem, gpointer user_data)
 {
 	WebKitSpellChecker *checker = NULL;
@@ -528,6 +762,23 @@ void  menu_spell_add_item_activated (GtkWidget *menuitem, gpointer user_data)
 		g_free ((gchar*)user_data);
 }
 
+
+/******************************************************************************
+ * Name
+ *  menu_spell_ignore_item_activated 
+ *
+ * Synopsis
+ *   #include "editor/editor.h"
+ *
+ *   void  menu_spell_ignore_item_activated (GtkWidget *menuitem, gpointer user_data)
+ *
+ * Description
+ *   ignore word for this document
+ *
+ * Return value
+ *   void
+ */
+
 void  menu_spell_ignore_item_activated (GtkWidget *menuitem, gpointer user_data)
 {	
 	WebKitSpellChecker *checker = NULL;
@@ -537,6 +788,24 @@ void  menu_spell_ignore_item_activated (GtkWidget *menuitem, gpointer user_data)
 	if ((gchar*)user_data)
 		g_free ((gchar*)user_data);
 }
+
+
+/******************************************************************************
+ * Name
+ *   _fill_spell_menu
+ *
+ * Synopsis
+ *   #include "editor/editor.h"
+ *
+ *   gint _fill_spell_menu(GtkWidget * menu, gchar * word, EDITOR * e)
+ *
+ * Description
+ *   add spelling guesses to context menu - word must be selected in
+ *   for this to work - it's webkit thing
+ *
+ * Return value
+ *   gint
+ */
 
 gint _fill_spell_menu(GtkWidget * menu, gchar * word, EDITOR * e)
 {	
@@ -605,6 +874,23 @@ gint _fill_spell_menu(GtkWidget * menu, gchar * word, EDITOR * e)
 	return misspelling_length;
 }
 
+
+/******************************************************************************
+ * Name
+ *   _create_context_menu
+ *
+ * Synopsis
+ *   #include "editor/editor.h"
+ *
+ *   void _create_context_menu (WebKitDOMDocument * dom_document, guint32 time, EDITOR * e)
+ *
+ * Description
+ *   called when right button is clicked - 
+ *
+ * Return value
+ *   void
+ */
+
 void _create_context_menu (WebKitDOMDocument * dom_document, guint32 time, EDITOR * e)
 {
 	WebKitDOMDOMWindow* window = NULL;
@@ -625,7 +911,6 @@ void _create_context_menu (WebKitDOMDocument * dom_document, guint32 time, EDITO
 		      	fprintf(stderr, "Failed to get range: %s\n", error->message);
 		      	g_error_free(error);
 		      	error = NULL;
-			//return;
 		}	
 		text = webkit_dom_range_to_string(range, &error);
 		if (error) {
@@ -686,6 +971,24 @@ void _create_context_menu (WebKitDOMDocument * dom_document, guint32 time, EDITO
 }
 
 
+/******************************************************************************
+ * Name
+ *   button_handler
+ *
+ * Synopsis
+ *   #include "editor/editor.h"
+ *
+ *   gboolean button_handler (GtkWidget *widget,
+ *                              GdkEvent  *event,
+ *                              EDITOR * e)
+ *
+ * Description
+ *   user pressed a button - set button status 
+ *   if right button call _create_context_menu()
+ *
+ * Return value
+ *   gboolean
+ */
 
 gboolean button_handler (GtkWidget *widget,
                                GdkEvent  *event,
@@ -703,18 +1006,19 @@ gboolean button_handler (GtkWidget *widget,
 	gchar *class = NULL;
 	gchar *color = NULL;
 	gint i = 1;
-	//GdkRGBA rgba;
+	
 	current_element = NULL;
 	e->toolitems.outline_level = 0;
 	mouse_x = event->button.x;
 	mouse_y = event->button.y;
+
 	dom_document = webkit_web_view_get_dom_document ((WebKitWebView*) e->html_widget);
 	if(!dom_document)
 		return 0;
 
 	if(event->button.button == 3) {
 		_create_context_menu (dom_document, event->button.time, e);
-		return 1;
+		return 1; // return true so we don't get the webkit context menu
 	}
 	
 	element = webkit_dom_document_element_from_point(dom_document, mouse_x, mouse_y);
@@ -724,13 +1028,15 @@ gboolean button_handler (GtkWidget *widget,
 	name = webkit_dom_element_get_tag_name(element);
 	if(!name)
 		return 0;
+
+	/* set buttons.color to font color element */
 	if (buttons_state.color) 
 			g_free (buttons_state.color);
-	buttons_state.color = g_strdup("#000000");
+	buttons_state.color = g_strdup("#000000"); /* start with black */
 	
+	/* we have to set it here in case the color element is the only element */
 	color = webkit_dom_element_get_attribute(element, "color");
 	if (color[0] == '#') {
-		//gboolean gdk_rgba_parse (&rgba, (gchar*)color);
 		if (buttons_state.color) 
 			g_free (buttons_state.color);
 		buttons_state.color = g_strdup(color);
@@ -750,8 +1056,8 @@ gboolean button_handler (GtkWidget *widget,
 				class = webkit_dom_element_get_attribute(element, "class");
 				color = webkit_dom_element_get_attribute(element, "color");
 				name = webkit_dom_element_get_tag_name(element);
+
 				if (color[0] == '#') {
-					//gboolean gdk_rgba_parse (&rgba, (gchar*)color);
 					if (buttons_state.color) 
 						g_free (buttons_state.color);
 					buttons_state.color = g_strdup(color);
@@ -764,9 +1070,24 @@ gboolean button_handler (GtkWidget *widget,
 	set_button_state(buttons_state, e);
 	buttons_state.nochange = 0;
 	return 0;
-
 }
 
+
+/******************************************************************************
+ * Name
+ *   create_editor_window
+ *
+ * Synopsis
+ *   #include "editor/editor.h"
+ *
+ *   void create_editor_window (GtkWidget * scrollwindow, EDITOR * e)
+ *
+ * Description
+ *   create and setup webkit wigdet for editing
+ *
+ * Return value
+ *   void
+ */
 
 void create_editor_window (GtkWidget * scrollwindow, EDITOR * e)
 {
@@ -793,8 +1114,7 @@ void create_editor_window (GtkWidget * scrollwindow, EDITOR * e)
 	webkit_web_view_load_uri (WEBKIT_WEB_VIEW(webview), uri); 
 	g_free (uri);
 	
-	e->is_changed = FALSE;
-	//use_outline = 	TRUE;	
+	e->is_changed = FALSE;	
 	
 	gtk_container_add (GTK_CONTAINER(scrollwindow), webview);
 

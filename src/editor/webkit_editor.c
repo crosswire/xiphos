@@ -723,12 +723,7 @@ action_save_activate_cb (GtkWidget * widget, EDITOR *e)
 		break;
 	}
 }
-/*
-void action_new_activate_cb (GtkWidget *widget, gpointer data)
-{
-		editor_new_document ();
-}
-*/
+
 
 void
 action_new_activate_cb ( GtkWidget * widget,
@@ -756,32 +751,6 @@ action_new_activate_cb ( GtkWidget * widget,
 	e->is_changed = TRUE;
 }
 
-
-static void
-action_delete_cb (GtkAction *action,
-                EDITOR *e)	/* for note only */
-{
-
-	gchar *buf;
-
-	if (e->studypad)
-		return;
-
-	buf = g_strdup_printf
-	    ("<span weight=\"bold\" size=\"larger\">%s %s?</span>",
-	    _("Are you sure you want to delete the note for") , e->key);
-
-	if (gui_yes_no_dialog(buf, GTK_STOCK_DIALOG_WARNING)) {
-		main_delete_note(e->module, e->key);
-		
-		//FIXME:
-		//gtkhtml_editor_set_text_html (GTKHTML_EDITOR(e->window),
-		//			      "",
-		//			      strlen(""));
-	}
-	g_free(buf);
-
-}
 
 void 
 action_insert_sword_link_activate_cb (GtkWidget * widget, gpointer data)
@@ -1118,7 +1087,7 @@ _load_file (EDITOR * e, const gchar * filename)
 
 gboolean editor_is_dirty(EDITOR * e)
 {
-	return e->is_changed;//gtkhtml_editor_get_changed(GTKHTML_EDITOR(e->window));
+	return e->is_changed;
 }
 
 
