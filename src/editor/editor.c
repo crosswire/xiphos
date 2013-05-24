@@ -43,7 +43,7 @@ BUTTONS_STATE buttons_state;
 glong mouse_x;
 glong mouse_y;
 
-WebKitDOMElement * current_element;
+//WebKitDOMElement * current_element;
 
 
 /******************************************************************************
@@ -80,8 +80,6 @@ gint editor_insert_new_outline_level (gint level, EDITOR * e)
 	gchar * level_str = NULL;
 
 	GS_message(("\n%s\n","editor_insert_new_outline_level"));
-	if(!current_element) 
-		return 0;
 	
 	doc = webkit_web_view_get_dom_document ((WebKitWebView*) e->html_widget);
 	
@@ -1007,7 +1005,7 @@ gboolean button_handler (GtkWidget *widget,
 	gchar *color = NULL;
 	gint i = 1;
 	
-	current_element = NULL;
+	//current_element = NULL;
 	e->toolitems.outline_level = 0;
 	mouse_x = event->button.x;
 	mouse_y = event->button.y;
@@ -1042,11 +1040,11 @@ gboolean button_handler (GtkWidget *widget,
 		buttons_state.color = g_strdup(color);
 	}
 	
-		
+	/*	
 	if(!g_strcmp0 ("LI",name)){
 		current_element = element;
 	}
-	
+	*/
 	i = _has_element(name, class, e);
 	while (i) {
 		if(name) {
