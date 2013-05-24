@@ -169,6 +169,7 @@ void action_insert_outline_activate_cb (GtkWidget *widget, EDITOR * e)
 
 		script = g_strdup ("document.execCommand('insertHTML', null, \"<OL CLASS=L1><LI> </LI></OL> \");");
 		editor_execute_script (script, e);
+		
 } 
 
 
