@@ -64,13 +64,6 @@
     <property name="stock_id">gtk-select-font</property>
     <signal name="activate" handler="action_font_activate_cb" swapped="no"/>
   </object>
-  <object class="GtkAction" id="action_fontcolor">
-    <property name="label">Font color</property>
-    <property name="short_label">Color</property>
-    <property name="tooltip">Change font color</property>
-    <property name="stock_id">gtk-select-color</property>
-    <signal name="activate" handler="action_fontcolor_activate_cb" swapped="no"/>
-  </object>
   <object class="GtkAction" id="action_increase_indent">
     <property name="label">Increase indent</property>
     <property name="short_label">Increase</property>
@@ -90,14 +83,14 @@
     <property name="label">Insert image</property>
     <property name="short_label">Image</property>
     <property name="tooltip">Insert image at cursor</property>
-    <property name="icon_name">insert-image</property>
+    <property name="stock_id">gtk-orientation-landscape</property>
     <signal name="activate" handler="action_insert_image_activate_cb" swapped="no"/>
   </object>
   <object class="GtkAction" id="action_insert_link">
     <property name="label">Insert link</property>
     <property name="short_label">Link</property>
     <property name="tooltip">Insert a link</property>
-    <property name="icon_name">insert-link</property>
+    <property name="stock_id">gtk-network</property>
     <signal name="activate" handler="action_insert_link_activate_cb" swapped="no"/>
   </object>
   <object class="GtkAction" id="action_insert_outline">
@@ -111,21 +104,21 @@
     <property name="label">Insert rule</property>
     <property name="short_label">Rule</property>
     <property name="tooltip">Insert horizontal rule</property>
-    <property name="icon_name">insert-object</property>
+    <property name="stock_id">gtk-remove</property>
     <signal name="activate" handler="action_insert_rule_activate_cb" swapped="no"/>
   </object>
   <object class="GtkAction" id="action_insert_sword_link">
     <property name="label">Xiphos Link</property>
     <property name="short_label">Xiphos</property>
     <property name="tooltip">Insert a link to a sword module</property>
-    <property name="icon_name">insert-link</property>
+    <property name="stock_id">gtk-network</property>
     <signal name="activate" handler="action_insert_sword_link_activate_cb" swapped="no"/>
   </object>
   <object class="GtkAction" id="action_insert_table">
     <property name="label">Insert table</property>
     <property name="short_label">Table</property>
     <property name="tooltip">Insert a table</property>
-    <property name="icon_name">insert-object</property>
+    <property name="stock_id">gtk-missing-image</property>
     <property name="visible">False</property>
     <signal name="activate" handler="action_insert_table_activate_cb" swapped="no"/>
   </object>
@@ -1109,10 +1102,30 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="receives_default">True</property>
-                        <property name="tooltip_text" translatable="yes">Font color</property>
+                        <property name="tooltip_text" translatable="yes">Set font color of selected text.</property>
                         <property name="always_show_image">True</property>
                         <property name="rgba">rgb(0,0,0)</property>
                         <signal name="color-set" handler="colorbutton1_color_set_cb" swapped="no"/>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="homogeneous">True</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkToolItem" id="toolbutton_highlight">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child>
+                      <object class="GtkColorButton" id="colorbutton_highlight">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="receives_default">True</property>
+                        <property name="tooltip_text" translatable="yes">Highlight selected text by setting background color.</property>
+                        <property name="color">#fcfce9e94f4f</property>
+                        <signal name="color-set" handler="colorbutton_highlight_color_set_cb" swapped="no"/>
                       </object>
                     </child>
                   </object>

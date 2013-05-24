@@ -346,6 +346,19 @@ void  colorbutton1_color_set_cb (GtkColorButton *widget, EDITOR * e )
 }
 
 
+void  colorbutton_highlight_color_set_cb (GtkColorButton *widget, EDITOR * e )
+{
+	GdkRGBA color;
+	gchar *color_str;
+	gchar *highligntcolor = NULL;
+	
+	gtk_color_chooser_get_rgba ((GtkColorChooser *)widget, &color);
+	color_str = gdk_rgba_to_string (&color);
+	highligntcolor =  g_strdup_printf("document.execCommand('backColor', null, '%s');",color_str);
+	editor_execute_script (highligntcolor, e);
+}
+
+
 static 
 gchar *get_font_size_from_name(GString * fontname)
 {
