@@ -27,8 +27,6 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <editor/gtkhtml-editor.h>
-#include <gtkhtml/gtkhtml-stream.h>
 
 
 
@@ -36,6 +34,8 @@
 #include "editor/webkit_editor.h"
 #include "editor/editor.h"
 #else
+#include <editor/gtkhtml-editor.h>
+#include <gtkhtml/gtkhtml-stream.h>
 #include "editor/slib-editor.h"
 #endif
 

@@ -336,12 +336,13 @@ def configure(conf):
         if opt.webkit_editor:
            conf.define('USE_WEBKIT_EDITOR', 1)
            env['ENABLE_WEBKIT_EDITOR'] = True
-        # FC15 and Oneiric have this, Natty does not
-        if conf.check_cfg(modversion='libgtkhtml-4.0', msg='Checking for libgtkhtml4', okmsg='ok', errmsg='fail'):
-            common_libs += ' "libgtkhtml-4.0" '
-        # FC15 and Oneiric have this, Natty does not
-        if conf.check_cfg(modversion="gtkhtml-editor-4.0", msg="Checking for GtkHTML Editor 4.0", okmsg='ok', errmsg='fail', mandatory=True):
-            common_libs += ' "gtkhtml-editor-4.0" '
+           # FC15 and Oneiric have this, Natty does not
+        else:
+           if conf.check_cfg(modversion='libgtkhtml-4.0', msg='Checking for libgtkhtml4', okmsg='ok', errmsg='fail'):
+               common_libs += ' "libgtkhtml-4.0" '
+           # FC15 and Oneiric have this, Natty does not
+           if conf.check_cfg(modversion="gtkhtml-editor-4.0", msg="Checking for GtkHTML Editor 4.0", okmsg='ok', errmsg='fail', mandatory=True):
+               common_libs += ' "gtkhtml-editor-4.0" '
     
     conf.check_cfg(atleast_pkgconfig_version='0.9.0')
     conf.check_cfg(msg="Checking for GNOME related libs",
