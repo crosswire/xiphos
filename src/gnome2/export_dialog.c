@@ -28,6 +28,7 @@
 #ifndef USE_GTKBUILDER
   #include <glade/glade-xml.h>
 #endif
+#include <glib/gstdio.h>
 
 #include "gui/export_dialog.h"
 #include "gui/dialog.h"
@@ -460,8 +461,6 @@ void _load_data(gchar * filename)
  * Return value
  *   void
  */
-
-int g_access(const gchar *, int); /* without this, we get an error -- why? */
 
 void gui_export_dialog(void)
 {
