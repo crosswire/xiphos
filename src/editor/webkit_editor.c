@@ -487,8 +487,8 @@ void recent_item_cb (GtkRecentChooser *chooser, EDITOR * e)
 		g_free(e->filename);
 	e->filename = g_strdup(file_uri);
 	
-	editor_open_recent (file_uri, e);	
-
+	//editor_open_recent (file_uri, e);	
+	_load_file(e, file_uri);
 	xml_set_value("Xiphos", "studypad", "lastfile",
 		      e->filename);
 	settings.studypadfilename =
@@ -932,13 +932,14 @@ GtkWidget* editor_new (const gchar * title, EDITOR * e)
 	
 	switch (e->type){
 		case STUDYPAD_EDITOR:
-			filter = gtk_recent_filter_new ();
-			gtk_recent_filter_add_mime_type ( filter, "text/html"); 
 			gtk_widget_hide(GTK_WIDGET(e->toolitems.deletedoc));
 			
+			//filter = gtk_recent_filter_new ();
+			//gtk_recent_filter_add_mime_type ( filter, "text/html"); 
+			
 			recent_item = gtk_recent_chooser_menu_new();
-			gtk_recent_chooser_set_filter ((GtkRecentChooser*)recent_item,
-                                                         filter);
+			//gtk_recent_chooser_set_filter ((GtkRecentChooser*)recent_item,
+            //                                             filter);
 			g_signal_connect (G_OBJECT (recent_item), "item-activated",
 					  		 G_CALLBACK (recent_item_cb),
 					  		 e);
@@ -1074,6 +1075,9 @@ _load_file (EDITOR * e, const gchar * filename)
 	gsize length;
 	GtkRecentManager * rm = NULL;
 	
+	rm = gtk_recent_manager_get_default ();
+	gtk_recent_manager_add_item (rm, filename);
+	
 	if (e->filename)
 		g_free(e->filename);
 	e->filename = g_strdup(filename);
@@ -1086,15 +1090,13 @@ _load_file (EDITOR * e, const gchar * filename)
 	    xml_get_value("studypad", "lastfile");
 	
 	change_window_title(e->window, e->filename);
-	if (g_strstr_len (filename,6,"file:"))
+	if (g_strstr_len (filename,6,"file:")) 
 		uri = g_strdup_printf("%s",filename);
-	 else
+	else
 		uri = g_strdup_printf("file://%s",filename);
 		
 	webkit_web_view_load_uri (WEBKIT_WEB_VIEW(e->html_widget),uri); 
 	
-	rm = gtk_recent_manager_get_default ();
-	gtk_recent_manager_add_item (rm,uri);
 	g_free (uri);
 	e->is_changed =FALSE;
 }
