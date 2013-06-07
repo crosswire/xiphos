@@ -44,7 +44,7 @@ gboolean editor_cut( EDITOR * e );
 gboolean editor_copy( EDITOR * e );
 gboolean editor_paste( EDITOR * e );
 void editor_get_document_content (GString * data, EDITOR * e);
-void editor_open_recent (const gchar * uri, EDITOR * e);
+//void editor_open_recent (const gchar * uri, EDITOR * e);
 gboolean editor_insert_link(void);   
 gboolean editor_insert_sword_link(void);  
 void editor_insert_link_ok (void);

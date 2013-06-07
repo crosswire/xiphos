@@ -337,13 +337,13 @@ void editor_insert_html(const gchar * html, EDITOR * e)
 	editor_execute_script(str, e);
 }
 
-
+/*
 void editor_open_recent (const gchar * uri, EDITOR * e)
 {
 	webkit_web_view_load_uri (WEBKIT_WEB_VIEW(e->html_widget),uri); 
 
 }
-
+*/
 
 gboolean editor_cut( EDITOR * e )
 {
