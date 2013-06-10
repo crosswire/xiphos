@@ -85,6 +85,8 @@ void _save_book (EDITOR * e);
 static 
 GList *editors_all = NULL;
 
+
+
 static
 gchar * editor_get_filename(EDITOR * e)
 {
@@ -1157,12 +1159,12 @@ void editor_load_book(EDITOR * e)
 
 /******************************************************************************
  * Name
- *   sync_toggled
+ *   editor_sync_with_main
  *
  * Synopsis
- *   #include "/.h"
+ *   #include "editor/webkit_editor.h"
  *
- *   void sync_toggled(GtkToggleButton * button, DIALOG_DATA * vc)
+ *   void editor_sync_with_main(void)
  *
  * Description
  *
@@ -1179,12 +1181,14 @@ void editor_sync_with_main(void)
 	tmp = g_list_first(editors_all);
 	while (tmp != NULL) {
 		e = (EDITOR*)tmp->data;
-		//if (!e->studypad) {
+		
 		switch (e->type) {
 			case STUDYPAD_EDITOR:
 			case BOOK_EDITOR:
 				break;
 			case NOTE_EDITOR:
+				if (e->sync)
+					editor_load_note(e, NULL, settings.currentverse);
 			break;
 		}
 		tmp = g_list_next(tmp);
