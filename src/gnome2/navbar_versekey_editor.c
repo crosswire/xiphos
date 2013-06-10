@@ -468,6 +468,7 @@ gboolean on_button_verse_menu_verse_scroll_event(GtkWidget * widget,
                                             GdkEvent * event,
                                             EDITOR * editor)
 {
+	GS_message(("%s","on_button_verse_menu_verse_scroll_event"));
 	main_navbar_versekey_spin_verse(editor->navbar,
 				event->scroll.direction);
 	return FALSE;
@@ -717,14 +718,42 @@ gboolean on_verse_down_enter_notify_event(GtkWidget * widget, GdkEventCrossing *
 	return FALSE;
 }
 
+/******************************************************************************
+ * Name
+ *   _sync_toggled
+ *
+ * Synopsis
+ *   #include ""
+ *
+ *   void _sync_toggled(GtkToggleButton * button, EDITOR * e)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   void
+ */
+
+static
+void _sync_toggled(GtkToggleButton *button, EDITOR * e)
+{
+	if (gtk_toggle_button_get_active(button)) {
+		e->sync = TRUE;
+		editor_sync_with_main ();//sync_with_main(c);
+	} else
+		e->sync = FALSE;
+}
+
 
 static
 void _connect_signals(NAVBAR_VERSEKEY navbar, EDITOR * editor)
 {
 	g_signal_connect((gpointer) navbar.lookup_entry,
 			 "activate", G_CALLBACK(on_entry_activate),
+			 editor);	
+	g_signal_connect((gpointer) editor->navbar.button_sync,
+			 "clicked", G_CALLBACK(_sync_toggled),
 			 editor);
-
 	g_signal_connect((gpointer) navbar.button_book_up,
 			 "button_release_event",
 			 G_CALLBACK(on_book_up_button_release_event),
@@ -891,7 +920,6 @@ GtkWidget *gui_navbar_versekey_editor_new(EDITOR * editor)
 	gtk_widget_show(editor->navbar.button_sync);
 	gtk_widget_set_tooltip_text(editor->navbar.button_sync,
 				    _("Synchronize this window's scrolling with the main window"));
-
 	editor->navbar.button_book_up = UI_GET_ITEM(gxml, "eventbox9");
 	editor->navbar.button_book_down = UI_GET_ITEM(gxml, "eventbox6");
 	editor->navbar.button_chapter_up = UI_GET_ITEM(gxml, "eventbox8");
@@ -919,7 +947,6 @@ GtkWidget *gui_navbar_versekey_editor_new(EDITOR * editor)
 	editor->navbar.label_book_menu = UI_GET_ITEM(gxml, "label_book");
 	editor->navbar.label_chapter_menu = UI_GET_ITEM(gxml, "label_chapter");
 	editor->navbar.label_verse_menu = UI_GET_ITEM(gxml, "label_verse");
-
 	editor->navbar.book_menu = gtk_menu_new();
 	editor->navbar.chapter_menu = gtk_menu_new();
 	editor->navbar.verse_menu = gtk_menu_new();
