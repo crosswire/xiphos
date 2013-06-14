@@ -71,6 +71,7 @@ BackEnd::BackEnd()
 #endif
 
 	main_mgr = new SWMgr(new MarkupFilterMgr(FMT_XHTML));
+	//main_mgr->augmentModules("/home/terry/Dropbox/sword/");
 
 #ifdef DEBUG
 	g_timer_stop(t);
