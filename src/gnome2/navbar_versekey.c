@@ -942,7 +942,9 @@ GtkWidget *gui_navbar_versekey_new(void)
 #else
 	GladeXML *gxml;
 #endif
+#ifdef USE_GTK_3
 	GtkWidget * eventbox;
+#endif
 	
 	gchar *glade_file = gui_general_user_file("navbar_versekey" UI_SUFFIX, FALSE);
 	g_return_val_if_fail((glade_file != NULL), NULL);
