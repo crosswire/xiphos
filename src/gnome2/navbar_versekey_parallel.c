@@ -771,15 +771,6 @@ void _connect_signals(NAVBAR_VERSEKEY navbar)
 			 "button_press_event",
 			 G_CALLBACK(select_verse_button_press_callback),
 			 NULL);
-	g_signal_connect ((gpointer)navbar.button_verse_menu , "scroll_event",
-		    	 G_CALLBACK (on_button_verse_menu_verse_scroll_event),
-		    	 NULL);
-	g_signal_connect ((gpointer)navbar.button_chapter_menu , "scroll_event",
-		    	 G_CALLBACK (on_button_verse_menu_chapter_scroll_event),
-		    	 NULL);
-	g_signal_connect ((gpointer)navbar.button_book_menu , "scroll_event",
-		    	 G_CALLBACK (on_button_verse_menu_book_scroll_event),
-		    	 NULL);
 }
 
 
@@ -807,6 +798,8 @@ GtkWidget *gui_navbar_versekey_parallel_new(void)
 #else
 	GladeXML *gxml;
 #endif
+	GtkWidget * eventbox;
+	
 	glade_file = gui_general_user_file("navbar_versekey" UI_SUFFIX, FALSE);
 	g_return_val_if_fail((glade_file != NULL), NULL);
 	GS_message(("%s",glade_file));
@@ -870,10 +863,22 @@ GtkWidget *gui_navbar_versekey_parallel_new(void)
 	navbar_parallel.label_book_menu = UI_GET_ITEM(gxml, "label_book");
 	navbar_parallel.label_chapter_menu = UI_GET_ITEM(gxml, "label_chapter");
 	navbar_parallel.label_verse_menu = UI_GET_ITEM(gxml, "label_verse");
-
-	navbar_parallel.book_menu = gtk_menu_new();
-	navbar_parallel.chapter_menu = gtk_menu_new();
-	navbar_parallel.verse_menu = gtk_menu_new();
+	
+	eventbox = UI_GET_ITEM(gxml, "eventbox_book");
+	g_signal_connect ((gpointer) eventbox, "scroll_event",
+		    	 G_CALLBACK (on_button_verse_menu_book_scroll_event),
+		    	 NULL);
+	
+	eventbox = UI_GET_ITEM(gxml, "eventbox_chapter");
+	g_signal_connect ((gpointer) eventbox, "scroll_event",
+		    	 G_CALLBACK (on_button_verse_menu_chapter_scroll_event),
+		    	 NULL);
+	
+	eventbox = UI_GET_ITEM(gxml, "eventbox_verse");
+	g_signal_connect ((gpointer) eventbox, "scroll_event",
+		    	 G_CALLBACK (on_button_verse_menu_verse_scroll_event),
+		    	 NULL);
+	
 	_connect_signals(navbar_parallel);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(navbar_parallel.button_sync), settings.linkedtabs);
 	return navbar_parallel.navbar;
