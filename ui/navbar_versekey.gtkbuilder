@@ -120,44 +120,49 @@
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <child>
-          <object class="GtkToggleButton" id="togglebutton_book">
-            <property name="width_request">160</property>
+          <object class="GtkEventBox" id="eventbox_book">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">False</property>
-            <property name="tooltip_text" translatable="yes">Choose book to display</property>
-            <property name="use_action_appearance">False</property>
-            <child internal-child="accessible">
-              <object class="AtkObject" id="togglebutton_book-atkobject">
-                <property name="AtkObject::accessible-name" translatable="yes">Book Selector Button</property>
-              </object>
-            </child>
+            <property name="can_focus">False</property>
             <child>
-              <object class="GtkHBox" id="hbox5">
+              <object class="GtkToggleButton" id="togglebutton_book">
+                <property name="width_request">160</property>
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="spacing">2</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
+                <child internal-child="accessible">
+                  <object class="AtkObject" id="togglebutton_book-atkobject">
+                    <property name="AtkObject::accessible-name" translatable="yes">Book Selector Button</property>
+                  </object>
+                </child>
                 <child>
-                  <object class="GtkLabel" id="label_book">
-                    <property name="width_request">150</property>
+                  <object class="GtkHBox" id="hbox5">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="xalign">0.029999999329447746</property>
-                    <property name="label" translatable="yes">&lt;b&gt;Revelation of John&lt;/b&gt;</property>
-                    <property name="use_markup">True</property>
+                    <property name="spacing">2</property>
+                    <child>
+                      <object class="GtkLabel" id="label_book">
+                        <property name="width_request">150</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="xalign">0.029999999329447746</property>
+                        <property name="label" translatable="yes">&lt;b&gt;Revelation of John&lt;/b&gt;</property>
+                        <property name="use_markup">True</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
                   </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">False</property>
-                    <property name="position">0</property>
-                  </packing>
                 </child>
               </object>
             </child>
           </object>
           <packing>
             <property name="expand">False</property>
-            <property name="fill">True</property>
+            <property name="fill">False</property>
             <property name="position">0</property>
           </packing>
         </child>
@@ -278,43 +283,48 @@
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <child>
-          <object class="GtkToggleButton" id="togglebutton_chapter">
+          <object class="GtkEventBox" id="eventbox_chapter">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">False</property>
-            <property name="tooltip_text" translatable="yes">Choose chapter to display</property>
-            <property name="use_action_appearance">False</property>
-            <property name="xalign">1</property>
-            <child internal-child="accessible">
-              <object class="AtkObject" id="togglebutton_chapter-atkobject">
-                <property name="AtkObject::accessible-name" translatable="yes">Toggle Chapter Button</property>
-              </object>
-            </child>
+            <property name="can_focus">False</property>
             <child>
-              <object class="GtkHBox" id="hbox6">
+              <object class="GtkToggleButton" id="togglebutton_chapter">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
+                <property name="xalign">1</property>
+                <child internal-child="accessible">
+                  <object class="AtkObject" id="togglebutton_chapter-atkobject">
+                    <property name="AtkObject::accessible-name" translatable="yes">Toggle Chapter Button</property>
+                  </object>
+                </child>
                 <child>
-                  <object class="GtkLabel" id="label_chapter">
+                  <object class="GtkHBox" id="hbox6">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="xpad">3</property>
-                    <property name="label" translatable="yes">1</property>
-                    <property name="use_markup">True</property>
-                    <property name="justify">right</property>
+                    <child>
+                      <object class="GtkLabel" id="label_chapter">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="xpad">3</property>
+                        <property name="label" translatable="yes">1</property>
+                        <property name="use_markup">True</property>
+                        <property name="justify">right</property>
+                      </object>
+                      <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
                   </object>
-                  <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
                 </child>
               </object>
             </child>
           </object>
           <packing>
             <property name="expand">False</property>
-            <property name="fill">True</property>
+            <property name="fill">False</property>
             <property name="position">0</property>
           </packing>
         </child>
@@ -435,42 +445,47 @@
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <child>
-          <object class="GtkToggleButton" id="togglebutton_verse">
+          <object class="GtkEventBox" id="eventbox_verse">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">False</property>
-            <property name="tooltip_text" translatable="yes">Choose Verse to display</property>
-            <property name="use_action_appearance">False</property>
-            <child internal-child="accessible">
-              <object class="AtkObject" id="togglebutton_verse-atkobject">
-                <property name="AtkObject::accessible-name" translatable="yes">Toggle Verse Button</property>
-              </object>
-            </child>
+            <property name="can_focus">False</property>
             <child>
-              <object class="GtkHBox" id="hbox7">
+              <object class="GtkToggleButton" id="togglebutton_verse">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
+                <child internal-child="accessible">
+                  <object class="AtkObject" id="togglebutton_verse-atkobject">
+                    <property name="AtkObject::accessible-name" translatable="yes">Toggle Verse Button</property>
+                  </object>
+                </child>
                 <child>
-                  <object class="GtkLabel" id="label_verse">
+                  <object class="GtkHBox" id="hbox7">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="xpad">3</property>
-                    <property name="label" translatable="yes">1</property>
-                    <property name="use_markup">True</property>
-                    <property name="justify">right</property>
+                    <child>
+                      <object class="GtkLabel" id="label_verse">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="xpad">3</property>
+                        <property name="label" translatable="yes">1</property>
+                        <property name="use_markup">True</property>
+                        <property name="justify">right</property>
+                      </object>
+                      <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
                   </object>
-                  <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
                 </child>
               </object>
             </child>
           </object>
           <packing>
             <property name="expand">False</property>
-            <property name="fill">True</property>
+            <property name="fill">False</property>
             <property name="position">0</property>
           </packing>
         </child>

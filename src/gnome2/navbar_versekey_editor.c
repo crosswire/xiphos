@@ -861,15 +861,7 @@ void _connect_signals(NAVBAR_VERSEKEY navbar, EDITOR * editor)
 			 "button_press_event",
 			 G_CALLBACK(select_verse_button_press_callback),
 			 editor);
-	g_signal_connect ((gpointer)navbar.button_verse_menu , "scroll_event",
-		    	 G_CALLBACK (on_button_verse_menu_verse_scroll_event),
-		    	 editor);
-	g_signal_connect ((gpointer)navbar.button_chapter_menu , "scroll_event",
-		    	 G_CALLBACK (on_button_verse_menu_chapter_scroll_event),
-		    	 editor);
-	g_signal_connect ((gpointer)navbar.button_book_menu , "scroll_event",
-		    	 G_CALLBACK (on_button_verse_menu_book_scroll_event),
-		    	 editor);
+	
 }
 
 
@@ -896,6 +888,8 @@ GtkWidget *gui_navbar_versekey_editor_new(EDITOR * editor)
 #else
 	GladeXML *gxml;
 #endif
+	GtkWidget * eventbox;
+	
 	gchar *glade_file = gui_general_user_file("navbar_versekey" UI_SUFFIX, FALSE);
 	g_return_val_if_fail((glade_file != NULL), NULL);
 	GS_message(("%s",glade_file));
@@ -947,9 +941,22 @@ GtkWidget *gui_navbar_versekey_editor_new(EDITOR * editor)
 	editor->navbar.label_book_menu = UI_GET_ITEM(gxml, "label_book");
 	editor->navbar.label_chapter_menu = UI_GET_ITEM(gxml, "label_chapter");
 	editor->navbar.label_verse_menu = UI_GET_ITEM(gxml, "label_verse");
-	editor->navbar.book_menu = gtk_menu_new();
-	editor->navbar.chapter_menu = gtk_menu_new();
-	editor->navbar.verse_menu = gtk_menu_new();
+	
+	eventbox = UI_GET_ITEM(gxml, "eventbox_book");
+	g_signal_connect ((gpointer) eventbox, "scroll_event",
+		    	 G_CALLBACK (on_button_verse_menu_book_scroll_event),
+		    	 editor);
+	
+	eventbox = UI_GET_ITEM(gxml, "eventbox_chapter");
+	g_signal_connect ((gpointer) eventbox, "scroll_event",
+		    	 G_CALLBACK (on_button_verse_menu_chapter_scroll_event),
+		    	 editor);
+	
+	eventbox = UI_GET_ITEM(gxml, "eventbox_verse");
+	g_signal_connect ((gpointer) eventbox, "scroll_event",
+		    	 G_CALLBACK (on_button_verse_menu_verse_scroll_event),
+		    	 editor);
+	
 	_connect_signals(editor->navbar, editor);
 
 	return editor->navbar.navbar;
