@@ -771,6 +771,17 @@ void _connect_signals(NAVBAR_VERSEKEY navbar)
 			 "button_press_event",
 			 G_CALLBACK(select_verse_button_press_callback),
 			 NULL);
+#ifndef USE_GTK_3	
+	g_signal_connect ((gpointer)navbar.button_verse_menu , "scroll_event",
+		    	 G_CALLBACK (on_button_verse_menu_verse_scroll_event),
+		    	 NULL);
+	g_signal_connect ((gpointer)navbar.button_chapter_menu , "scroll_event",
+		    	 G_CALLBACK (on_button_verse_menu_chapter_scroll_event),
+		    	 NULL);
+	g_signal_connect ((gpointer)navbar.button_book_menu , "scroll_event",
+		    	 G_CALLBACK (on_button_verse_menu_book_scroll_event),
+		    	 NULL);
+#endif
 }
 
 
@@ -864,6 +875,7 @@ GtkWidget *gui_navbar_versekey_parallel_new(void)
 	navbar_parallel.label_chapter_menu = UI_GET_ITEM(gxml, "label_chapter");
 	navbar_parallel.label_verse_menu = UI_GET_ITEM(gxml, "label_verse");
 	
+#ifdef USE_GTK_3
 	eventbox = UI_GET_ITEM(gxml, "eventbox_book");
 	g_signal_connect ((gpointer) eventbox, "scroll_event",
 		    	 G_CALLBACK (on_button_verse_menu_book_scroll_event),
@@ -878,7 +890,7 @@ GtkWidget *gui_navbar_versekey_parallel_new(void)
 	g_signal_connect ((gpointer) eventbox, "scroll_event",
 		    	 G_CALLBACK (on_button_verse_menu_verse_scroll_event),
 		    	 NULL);
-	
+#endif	
 	_connect_signals(navbar_parallel);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(navbar_parallel.button_sync), settings.linkedtabs);
 	return navbar_parallel.navbar;

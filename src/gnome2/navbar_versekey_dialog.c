@@ -821,6 +821,17 @@ void _connect_signals(NAVBAR_VERSEKEY navbar, DIALOG_DATA * dialog)
 			 "button_press_event",
 			 G_CALLBACK(select_verse_button_press_callback),
 			 dialog);
+#ifndef USE_GTK_3	
+	g_signal_connect ((gpointer)navbar.button_verse_menu , "scroll_event",
+		    	 G_CALLBACK (on_button_verse_menu_verse_scroll_event),
+		    	 dialog);
+	g_signal_connect ((gpointer)navbar.button_chapter_menu , "scroll_event",
+		    	 G_CALLBACK (on_button_verse_menu_chapter_scroll_event),
+		    	 dialog);
+	g_signal_connect ((gpointer)navbar.button_book_menu , "scroll_event",
+		    	 G_CALLBACK (on_button_verse_menu_book_scroll_event),
+		    	 dialog);
+#endif
 }
 
 
@@ -905,6 +916,7 @@ GtkWidget *gui_navbar_versekey_dialog_new(DIALOG_DATA * dialog)
 	dialog->navbar.label_chapter_menu = UI_GET_ITEM(gxml, "label_chapter");
 	dialog->navbar.label_verse_menu = UI_GET_ITEM(gxml, "label_verse");
 
+#ifdef USE_GTK_3	
 	eventbox = UI_GET_ITEM(gxml, "eventbox_book");
 	g_signal_connect ((gpointer) eventbox, "scroll_event",
 		    	 G_CALLBACK (on_button_verse_menu_book_scroll_event),
@@ -919,6 +931,7 @@ GtkWidget *gui_navbar_versekey_dialog_new(DIALOG_DATA * dialog)
 	g_signal_connect ((gpointer) eventbox, "scroll_event",
 		    	 G_CALLBACK (on_button_verse_menu_verse_scroll_event),
 		    	 dialog);
+#endif
 		
 	_connect_signals(dialog->navbar, dialog);
 
