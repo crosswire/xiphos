@@ -27,7 +27,7 @@
 #include <installmgr.h>
 #include <filemgr.h>
 
-#include <ftptrans.h>
+#include <remotetrans.h>
 
 using namespace std;
 using namespace sword;
