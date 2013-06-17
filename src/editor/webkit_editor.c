@@ -26,6 +26,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <ctype.h>
 
 #include <glib.h>
 #include <webkit/webkit.h>
@@ -63,6 +64,7 @@ MENU popup;
 FIND_DIALOG find_dialog;
 
 extern gboolean do_display;
+extern BUTTONS_STATE buttons_state;
 
 static
 void change_window_title(GtkWidget * window, const gchar * window_title);
@@ -86,7 +88,7 @@ static
 GList *editors_all = NULL;
 
 
-
+/*
 static
 gchar * editor_get_filename(EDITOR * e)
 {
@@ -98,6 +100,7 @@ void  editor_set_filename(EDITOR * e, const gchar * new_filename)
 {
 	
 }
+*/
 
 void action_about_activate_cb (GtkWidget *widget, EDITOR * e)
 {
@@ -211,7 +214,6 @@ void action_justify_full_activate_cb (GtkWidget *widget, EDITOR * e)
 
 void action_bold_activate_cb (GtkWidget *widget, EDITOR * e)
 {
-		extern BUTTONS_STATE buttons_state;
 		gchar * script = NULL;
 		if(buttons_state.nochange)
 			return;
@@ -222,7 +224,7 @@ void action_bold_activate_cb (GtkWidget *widget, EDITOR * e)
       
 void action_italic_activate_cb (GtkWidget *widget, EDITOR * e)
 {
-		extern BUTTONS_STATE buttons_state;
+		//extern BUTTONS_STATE buttons_state;
 		gchar * script = NULL;
 		if(buttons_state.nochange)
 			return;;
@@ -249,7 +251,7 @@ void action_redo_activate_cb (GtkWidget *widget, EDITOR * e)
 
 void action_underline_activate_cb (GtkWidget *widget, EDITOR * e)
 {  
-		extern BUTTONS_STATE buttons_state;
+		//extern BUTTONS_STATE buttons_state;
 		gchar * script = NULL;
 		if(buttons_state.nochange)
 			return;
@@ -260,7 +262,7 @@ void action_underline_activate_cb (GtkWidget *widget, EDITOR * e)
 
 void action_strikethrough_activate_cb (GtkWidget *widget, EDITOR * e)
 {    
-		extern BUTTONS_STATE buttons_state;
+		//extern BUTTONS_STATE buttons_state;
 		gchar * script = NULL;
 		if(buttons_state.nochange)
 			return;
@@ -322,7 +324,11 @@ void action_delete_item_activate_cb (GtkWidget *widget, EDITOR * e)
 
 void set_button_state(BUTTONS_STATE state, EDITOR * e)
 {
+#ifdef USE_GTK_3
 	GdkRGBA rgba;
+#else
+	GdkColor color;
+#endif
 	gtk_toggle_tool_button_set_active (e->toolitems.bold,state.bold);
 	gtk_toggle_tool_button_set_active (e->toolitems.italic,state.italic);
 	gtk_toggle_tool_button_set_active (e->toolitems.underline,state.underline);
@@ -330,20 +336,35 @@ void set_button_state(BUTTONS_STATE state, EDITOR * e)
 	gtk_combo_box_set_active ((GtkComboBox *)e->toolitems.cb, state.style);
 	if (state.color) {
 		GS_message(("state.color: %s",state.color));
+#ifdef USE_GTK_3
 		if(gdk_rgba_parse (&rgba, state.color))
 			gtk_color_chooser_set_rgba ((GtkColorChooser*) e->toolitems.color, &rgba);
+#else
+		if(gdk_color_parse (state.color, &color))
+			gtk_color_button_set_color ((GtkColorButton*) e->toolitems.color, &color);
+#endif
 	}
 }
 
 
 void  colorbutton1_color_set_cb (GtkColorButton *widget, EDITOR * e )
 {
+#ifdef USE_GTK_3
 	GdkRGBA color;
+#else
+	GdkColor color;
+#endif
 	gchar *color_str;
 	gchar *forecolor = NULL;
-	
+
+#ifdef USE_GTK_3	
 	gtk_color_chooser_get_rgba ((GtkColorChooser *)widget, &color);
 	color_str = gdk_rgba_to_string (&color);
+#else
+	gtk_color_button_get_color ((GtkColorButton *)widget, &color);
+	/* FIXME: ugly need something better */
+	color_str = g_strdup_printf("rgb(%u,%u,%u)", color.red>>8, color.green>>8, color.blue>>8);
+#endif
 	forecolor =  g_strdup_printf("document.execCommand('forecolor', null, '%s');",color_str);
 	editor_execute_script (forecolor, e);
 }
@@ -351,12 +372,23 @@ void  colorbutton1_color_set_cb (GtkColorButton *widget, EDITOR * e )
 
 void  colorbutton_highlight_color_set_cb (GtkColorButton *widget, EDITOR * e )
 {
+
+#ifdef USE_GTK_3
 	GdkRGBA color;
+#else
+	GdkColor color;
+#endif
 	gchar *color_str;
 	gchar *highligntcolor = NULL;
 	
+#ifdef USE_GTK_3	
 	gtk_color_chooser_get_rgba ((GtkColorChooser *)widget, &color);
 	color_str = gdk_rgba_to_string (&color);
+#else
+	gtk_color_button_get_color ((GtkColorButton *)widget, &color);
+	/* FIXME: ugly need something better */
+	color_str = g_strdup_printf("rgb(%u,%u,%u)", color.red>>8, color.green>>8, color.blue>>8);
+#endif
 	highligntcolor =  g_strdup_printf("document.execCommand('backColor', null, '%s');",color_str);
 	editor_execute_script (highligntcolor, e);
 }
@@ -390,21 +422,34 @@ void action_font_activate_cb (GtkWidget *widget, EDITOR * e)
 	gchar * script = NULL;
 	gchar *  size = NULL;
 	PangoFontDescription * font_description;
-	
+#ifdef USE_GTK_3
 	dialog = gtk_font_chooser_dialog_new ("Select font",NULL);
 	gtk_font_chooser_set_font ((GtkFontChooser *)dialog,
+#else
+	dialog = gtk_font_selection_dialog_new ("Select font");
+	gtk_font_selection_dialog_set_font_name ((GtkFontSelectionDialog *)dialog,
+#endif
                                                  "Droid Sans 14");
+                                                 
 	if(gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_OK)
 	{	
+	#ifdef USE_GTK_3
 		fontname = gtk_font_chooser_get_font ((GtkFontChooser*)dialog);
+	#else
+		fontname = gtk_font_selection_dialog_get_font_name ((GtkFontSelectionDialog*)dialog);
+	#endif
 		name = g_string_new (fontname);
 		size = get_font_size_from_name (name);
 		g_string_free (name,TRUE);	
 
 		selected_text = editor_get_selected_text (e);
-
+	#ifdef USE_GTK3
 		font_description = gtk_font_chooser_get_font_desc ((GtkFontChooser*)dialog);
 		fontname = pango_font_description_get_family   (font_description);
+	#else
+	    font_description = pango_font_description_from_string(fontname);
+		fontname = pango_font_description_get_family(font_description);
+	#endif
 
 		script = g_strdup_printf("<SPAN STYLE=\"font-family:%s;font-size:%spx;\">%s</SPAN>", fontname, size, selected_text);
 
@@ -479,7 +524,7 @@ void do_exit(EDITOR * e)
 	g_free(e);
 }
 
-
+static
 void recent_item_cb (GtkRecentChooser *chooser, EDITOR * e)
 {
 	gchar * file_uri = gtk_recent_chooser_get_current_uri (chooser);
@@ -562,7 +607,7 @@ open_dialog (EDITOR * e)
 	return response;
 }
 
-
+/*
 static gint
 save_dialog (EDITOR * e)
 {
@@ -619,6 +664,7 @@ save_dialog (EDITOR * e)
 
 	return response;
 }
+*/
 
 /* Helper for view_source_dialog() */
 /*
@@ -818,7 +864,7 @@ void combo_box_changed_cb (GtkComboBox *widget, EDITOR * e)
 		gchar * script = NULL;
 		gint choice = gtk_combo_box_get_active(widget);
 		/* we need the line of text where the cursor is */
-		extern BUTTONS_STATE buttons_state;
+		//extern BUTTONS_STATE buttons_state;
 	
 		if(buttons_state.nochange) return;
 	
@@ -894,13 +940,16 @@ GtkWidget* editor_new (const gchar * title, EDITOR * e)
 	GError* error = NULL; 
 	GtkMenuItem *item;
 	GtkWidget *recent_item;
-	extern BUTTONS_STATE buttons_state;
-	GtkRecentFilter *filter;
+	//extern BUTTONS_STATE buttons_state;
+	//GtkRecentFilter *filter;
 
 	buttons_state.nochange = 1;
 
-   	builder = gtk_builder_new ();
+#ifdef USE_GTK_3
 	gbuilder_file = gui_general_user_file ("gtk_webedit.ui", FALSE);
+#else
+    gbuilder_file = gui_general_user_file ("gtk2_webedit.ui", FALSE);
+#endif
 	builder = gtk_builder_new ();   
 	
 	if (!gtk_builder_add_from_file (builder, gbuilder_file, &error))
@@ -1074,7 +1123,7 @@ static void
 _load_file (EDITOR * e, const gchar * filename)
 {
 	char *uri;
-	gsize length;
+	//gsize length;
 	GtkRecentManager * rm = NULL;
 	
 	rm = gtk_recent_manager_get_default ();
@@ -1353,7 +1402,7 @@ static
 gint _create_new(const gchar * filename, const gchar * key, gint editor_type)
 {
 	EDITOR *editor;
-	GtkWidget *vbox = NULL;
+//	GtkWidget *vbox = NULL;
 	GtkWidget *toolbar_nav = NULL;
 
 
