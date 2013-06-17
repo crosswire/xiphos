@@ -129,6 +129,9 @@ void action_insert_image_activate_cb (GtkWidget *widget, EDITOR * e);
 void action_insert_rule_activate_cb (GtkWidget *widget, EDITOR * e);  
 void action_insert_table_activate_cb (GtkWidget *widget, EDITOR * e); 
 void action_insert_emoticon_activate_cb (GtkWidget *widget, EDITOR * e); 
+void action_insert_sword_link_activate_cb (GtkWidget * widget, gpointer data);
+void action_insert_link_activate_cb (GtkWidget * widget, EDITOR *e);
+
 
 void action_insert_outline_activate_cb (GtkWidget *widget, EDITOR * e);
 
@@ -149,6 +152,7 @@ void action_cut_activate_cb (GtkWidget *widget, EDITOR * e);
 void action_copy_activate_cb (GtkWidget *widget, EDITOR * e); 
 void action_paste_activate_cb (GtkWidget *widget, EDITOR * e); 
 void action_delete_activate_cb (GtkWidget *widget, EDITOR * e);
+void action_delete_item_activate_cb (GtkWidget *widget, EDITOR * e);
 
 void set_button_state(BUTTONS_STATE state, EDITOR * e);
 void action_fontcolor_activate_cb (GtkWidget *widget, EDITOR * e); 
@@ -173,6 +177,9 @@ gint editor_create_new(const gchar * filename, const gchar * key, gint note);
 void editor_save_book(EDITOR * e);
 void editor_maybe_save_all(void);
 gint ask_about_saving(EDITOR * e);
+void  colorbutton1_color_set_cb (GtkColorButton *widget, EDITOR * e );
+void  colorbutton_highlight_color_set_cb (GtkColorButton *widget, EDITOR * e );
+void combo_box_changed_cb (GtkComboBox *widget, EDITOR * e);
 
 #ifdef __cplusplus
 }

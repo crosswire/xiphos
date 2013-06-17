@@ -157,7 +157,7 @@ void editor_get_document_content (GString * data, EDITOR * e)
 	WebKitDOMHTMLElement* html;
 	WebKitDOMHTMLHeadElement* header;
 	WebKitDOMDocument* dom_document = NULL;
-	gchar * filename = NULL;
+	//gchar * filename = NULL;
 	gchar* body = NULL;
 	gchar* head = NULL;
 	
@@ -489,7 +489,7 @@ gboolean editor_insert_link(void)
  * Return value
  *   void
  */
-
+static
 void user_changed_contents_cb (WebKitWebView * web_view, EDITOR * e)
 {	
 	GS_message(("%s","user_changed_contents_cb"));
@@ -515,7 +515,7 @@ void user_changed_contents_cb (WebKitWebView * web_view, EDITOR * e)
  * Return value
  *   WebKitNavigationResponse
  */
-
+static
 WebKitNavigationResponse on_navigation_requested (WebKitWebView * web_view,
                                                   WebKitWebFrame * frame,
                                                   WebKitNetworkRequest * request,
@@ -696,6 +696,7 @@ gint _has_element(gchar * name, gchar * class, EDITOR * e)
  *   gboolean
  */
 
+static
 gboolean key_handler (GtkWidget *widget,
                       GdkEvent  *event,
                       EDITOR * e)
@@ -722,6 +723,7 @@ gboolean key_handler (GtkWidget *widget,
  *   void
  */
 
+static
 void  menu_spell_item_activated (GtkWidget *menuitem, EDITOR * e)
 {
 	WebKitWebFrame * frame;
@@ -750,6 +752,7 @@ void  menu_spell_item_activated (GtkWidget *menuitem, EDITOR * e)
  *   void
  */
 
+static
 void  menu_spell_add_item_activated (GtkWidget *menuitem, gpointer user_data)
 {
 	WebKitSpellChecker *checker = NULL;
@@ -777,6 +780,7 @@ void  menu_spell_add_item_activated (GtkWidget *menuitem, gpointer user_data)
  *   void
  */
 
+static
 void  menu_spell_ignore_item_activated (GtkWidget *menuitem, gpointer user_data)
 {	
 	WebKitSpellChecker *checker = NULL;
@@ -805,6 +809,7 @@ void  menu_spell_ignore_item_activated (GtkWidget *menuitem, gpointer user_data)
  *   gint
  */
 
+static
 gint _fill_spell_menu(GtkWidget * menu, gchar * word, EDITOR * e)
 {	
 	WebKitSpellChecker *checker = NULL;
@@ -889,6 +894,7 @@ gint _fill_spell_menu(GtkWidget * menu, gchar * word, EDITOR * e)
  *   void
  */
 
+static
 void _create_context_menu (WebKitDOMDocument * dom_document, guint32 time, EDITOR * e)
 {
 	WebKitDOMDOMWindow* window = NULL;
@@ -988,6 +994,7 @@ void _create_context_menu (WebKitDOMDocument * dom_document, guint32 time, EDITO
  *   gboolean
  */
 
+static
 gboolean button_handler (GtkWidget *widget,
                                GdkEvent  *event,
                                EDITOR * e)
