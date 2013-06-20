@@ -317,7 +317,6 @@ def configure(conf):
                        uselib_store="GTK_220")
         common_libs += ' libglade-2.0'
         common_libs += ' "gtk+-2.0 >= 2.14" '
-        common_libs += ' "libgtkhtml-3.14 >= 3.23" '
         common_libs += ' webkit-1.0'
         if opt.webkit_editor:
            conf.define('USE_WEBKIT_EDITOR', 1)
@@ -329,8 +328,10 @@ def configure(conf):
                           errmsg='Probably not'
                           ):
             common_libs += ' "gtkhtml-editor-3.14" '
+            common_libs += ' "libgtkhtml-3.14 >= 3.23" '
         else:
             common_libs += ' "gtkhtml-editor" '
+            common_libs += ' "libgtkhtml-3.14 >= 3.23" '
     else:
         # So far, we only care about GTK+3, not any of its subversions
         common_libs += ' "gtk+-3.0" '
