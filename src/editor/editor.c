@@ -26,7 +26,13 @@
 #endif
 
 #ifdef USE_WEBKIT_EDITOR
-     
+    
+/* X keyboard #definitions, to handle shortcuts */
+/* we must define the categories of #definitions we need. */
+#define XK_MISCELLANY
+#define XK_LATIN1
+#include <X11/keysymdef.h>
+ 
 #include <gtk/gtk.h>
 #include <webkit/webkit.h>
 
@@ -698,9 +704,19 @@ gint _has_element(gchar * name, gchar * class, EDITOR * e)
 
 static
 gboolean key_handler (GtkWidget *widget,
-                      GdkEvent  *event,
+                      GdkEventKey  *event,
                       EDITOR * e)
 {			  
+	/* these are the mods we actually use for global keys, we always only check for these set */
+	guint state = event->state & (GDK_SHIFT_MASK  | GDK_CONTROL_MASK | GDK_MOD1_MASK | GDK_MOD4_MASK );
+
+	switch (event->keyval) {
+	case XK_s: // Ctrl-L  verse entry
+		if (state == GDK_CONTROL_MASK)
+			action_save_activate_cb (e->html_widget, e);
+		break;
+
+	}
 	
 	return 0;	
 }
@@ -1135,7 +1151,7 @@ void create_editor_window (GtkWidget * scrollwindow, EDITOR * e)
 	g_signal_connect (G_OBJECT (webview), "button-press-event",
 			  		 G_CALLBACK (button_handler),
 			  		 e);
-	g_signal_connect (G_OBJECT (webview), "key-release-event",
+	g_signal_connect (G_OBJECT (webview), "key-press-event",
 			  		 G_CALLBACK (key_handler),
 			  		 e);
 	
