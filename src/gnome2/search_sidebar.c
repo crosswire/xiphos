@@ -372,7 +372,37 @@ void gui_create_search_sidebar(void)
 
 	gtk_widget_show(label1);
 	gtk_frame_set_label_widget(GTK_FRAME(ss.frame5), label1);
+	
+#ifdef HAVE_GTK_34	
+	table1 = gtk_grid_new();
+	gtk_widget_show(table1);
+	gtk_container_add(GTK_CONTAINER(ss.frame5), table1);
+	gtk_grid_set_row_spacing (GTK_GRID(table1), 3);
+	gtk_grid_set_column_spacing (GTK_GRID(table1), 3);
+	gtk_container_set_border_width (GTK_CONTAINER (table1), 8);
 
+	label1 = gtk_label_new(_("Lower"));
+	gtk_widget_show(label1);
+	gtk_grid_attach(GTK_GRID(table1), label1, 0, 0, 1, 1);
+	gtk_misc_set_alignment(GTK_MISC(label1), 1.0, 0.5);
+	
+	ss.entryLower = gtk_combo_box_text_new_with_entry();	
+	gtk_widget_show(ss.entryLower);
+	gtk_grid_attach(GTK_GRID(table1), ss.entryLower, 1, 0, 1, 1);
+	gtk_widget_set_size_request(ss.entryLower, 114, 22);
+
+	label2 = gtk_label_new(_("Upper"));
+	gtk_widget_show(label2);
+	gtk_grid_attach(GTK_GRID(table1), label2, 0, 1, 1, 1);
+	gtk_misc_set_alignment(GTK_MISC(label2), 1.0, 0.5);
+   
+                  
+	ss.entryUpper = gtk_combo_box_text_new_with_entry();	
+	gtk_widget_show(ss.entryUpper);
+	gtk_grid_attach(GTK_GRID(table1), ss.entryUpper, 1, 1, 1, 1);
+	gtk_widget_set_size_request(ss.entryUpper, 114, 22);
+
+#else
 	table1 = gtk_table_new(2, 2, FALSE);
 	gtk_widget_show(table1);
 	gtk_container_add(GTK_CONTAINER(ss.frame5), table1);
@@ -394,7 +424,7 @@ void gui_create_search_sidebar(void)
 			 (GtkAttachOptions) (0), 0, 0);
 	gtk_misc_set_alignment(GTK_MISC(label2), 1.0, 0.5);
    
-#ifdef USE_GTK_3
+#ifdef HAVE_GTK_224
 	ss.entryLower = gtk_combo_box_text_new_with_entry();
 #else	                                                                    
 	ss.entryLower = gtk_combo_box_entry_new_text();
@@ -405,7 +435,7 @@ void gui_create_search_sidebar(void)
 			 (GtkAttachOptions) (0), 0, 0);
 	gtk_widget_set_size_request(ss.entryLower, 114, 22);
                            
-#ifdef USE_GTK_3
+#ifdef HAVE_GTK_224
 	ss.entryUpper = gtk_combo_box_text_new_with_entry();  
 #else
 	ss.entryUpper  = gtk_combo_box_entry_new_text();
@@ -415,7 +445,8 @@ void gui_create_search_sidebar(void)
 			 (GtkAttachOptions) (GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
 	gtk_widget_set_size_request(ss.entryUpper, 114, 22);
-
+#endif
+	
 	g_signal_connect(G_OBJECT(ss.rrbUseBounds),
 			 "toggled",
 			 G_CALLBACK(on_rrbUseBounds_toggled),

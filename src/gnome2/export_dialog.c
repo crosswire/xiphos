@@ -509,7 +509,11 @@ void gui_export_dialog(void)
 	/* set export-copy.xml */
 	datafile = g_strdup_printf("%s/export-copy.xml", settings.gSwordDir);
 	/* check for datafile */
+	#ifdef HAVE_GTK_224
 	if (g_access(datafile, F_OK) == -1) {
+	#else
+	if (g_access(datafile, 0) == -1) {
+	#endif
 		xml_create_copy_export_file(datafile);
 	}
 	_load_data(datafile);

@@ -48,7 +48,13 @@ extern "C" {
 
 #include "gui/debug_glib_null.h"
 
-#define	HTML_START	"<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><style type=\"text/css\"><!-- A { text-decoration:none } *[dir=rtl] { text-align: right; } --></style></head>"
+#define	HTML_START	"<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\">\
+<style type=\"text/css\"><!-- \
+A { text-decoration:none } \
+*[dir=rtl] { text-align: right;} \
+body {background-color:%s;color:%s;} \
+a:link{color:%s} -->\
+</style></head><body>"
 
 using namespace std;
 
@@ -93,7 +99,6 @@ void main_init_previewer(void)
 
 	g_string_printf(str,
 			HTML_START
-			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
 			"<font color=\"grey\" face=\"%s\" size=\"%+d\"><b>%s</b></font><hr/></body></html>",
 			settings.bible_bg_color, settings.bible_text_color,
 			settings.link_color,
@@ -164,7 +169,6 @@ void main_information_viewer(const gchar * mod_name,
 
 	g_string_printf(tmp_str,
 			HTML_START
-			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
 			"<font face=\"%s\" size=\"%+d\">",
 			settings.bible_bg_color, settings.bible_text_color,
 			settings.link_color,
@@ -418,8 +422,7 @@ void main_entry_display(gpointer data, gchar * mod_name,
 	MOD_FONT *mf = get_font(mod_name);
 
 	g_string_printf(tmp_str,
-			HTML_START
-			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+			HTML_START,
 			settings.bible_bg_color, settings.bible_text_color,
 			settings.link_color);
 
