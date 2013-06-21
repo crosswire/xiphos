@@ -1416,6 +1416,43 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	/* ---------------------------------------------------------------- */
 	/* 2x2 button box set: modules/bookmarks/search/vlist */
 	/* ---------------------------------------------------------------- */
+	
+#ifdef HAVE_GTK_34	
+	table2 = gtk_grid_new();
+	gtk_widget_show(table2);
+	gtk_box_pack_start(GTK_BOX(vbox1), table2, FALSE, TRUE, 0);
+	gtk_container_set_border_width(GTK_CONTAINER(table2), 2);
+	gtk_grid_set_row_spacing (GTK_GRID(table2), 6);
+	gtk_grid_set_column_spacing (GTK_GRID(table2), 6);
+	gtk_grid_set_row_homogeneous (GTK_GRID(table2),TRUE);
+	gtk_grid_set_column_homogeneous (GTK_GRID(table2),TRUE); 
+	
+	button_bookmarks = gtk_toggle_button_new_with_mnemonic(_("Bookmarks"));
+	gtk_widget_show(button_bookmarks);
+	gtk_grid_attach (GTK_GRID(table2), button_bookmarks, 1, 0, 1, 1);
+	gtk_button_set_relief(GTK_BUTTON(button_bookmarks), GTK_RELIEF_HALF);
+	gtk_button_set_focus_on_click(GTK_BUTTON(button_bookmarks), FALSE);
+
+	button_search = gtk_toggle_button_new_with_mnemonic(_("Search"));
+	gtk_widget_show(button_search);
+	gtk_grid_attach (GTK_GRID(table2), button_search, 0, 1, 1, 1);
+	gtk_button_set_relief(GTK_BUTTON(button_search), GTK_RELIEF_HALF);
+	gtk_button_set_focus_on_click(GTK_BUTTON(button_search), FALSE);
+
+	button_v_lists = gtk_toggle_button_new_with_mnemonic(_("Verse List"));
+	gtk_widget_show(button_v_lists);
+	gtk_grid_attach (GTK_GRID(table2), button_v_lists, 1, 1, 1, 1);
+	gtk_button_set_relief(GTK_BUTTON(button_v_lists), GTK_RELIEF_HALF);
+	gtk_button_set_focus_on_click(GTK_BUTTON(button_v_lists), FALSE);
+
+	button_modules = gtk_toggle_button_new_with_mnemonic(_("Modules"));
+	gtk_widget_show(button_modules);
+	gtk_grid_attach (GTK_GRID(table2), button_modules, 0, 0, 1, 1);
+	gtk_button_set_relief(GTK_BUTTON(button_modules), GTK_RELIEF_HALF);
+	gtk_button_set_focus_on_click(GTK_BUTTON(button_modules), FALSE);
+	
+#else
+
 	table2 = gtk_table_new(2, 2, TRUE);
 	gtk_widget_show(table2);
 	gtk_box_pack_start(GTK_BOX(vbox1), table2, FALSE, TRUE, 0);
@@ -1454,6 +1491,7 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 			 (GtkAttachOptions) (0), 0, 0);
 	gtk_button_set_relief(GTK_BUTTON(button_modules), GTK_RELIEF_HALF);
 	gtk_button_set_focus_on_click(GTK_BUTTON(button_modules), FALSE);
+#endif
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(button_modules), TRUE);
 	/* ---------------------------------------------------------------- */
 

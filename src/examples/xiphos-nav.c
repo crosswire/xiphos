@@ -34,8 +34,9 @@ int main (int argc, char **argv)
 	GError *error = NULL;
 
 	/* not necessary if using from a gtk/gnome program */
+#if 0 // needed to get by delint ubuntu 13.4
 	g_type_init ();
-
+#endif
 	/* get the "session" dbus */
 	bus = dbus_g_bus_get (DBUS_BUS_SESSION, &error);
 

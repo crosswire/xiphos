@@ -315,27 +315,35 @@ def configure(conf):
         conf.check_cfg(package="gtk+-2.0",
                        atleast_version = "2.20",
                        uselib_store="GTK_220")
+        conf.check_cfg(package="gtk+-2.0",
+                       atleast_version = "2.24",
+                       uselib_store="GTK_224")
         common_libs += ' libglade-2.0'
-        common_libs += ' "gtk+-2.0 >= 2.14" '
         common_libs += ' webkit-1.0'
         if opt.webkit_editor:
-           conf.define('USE_WEBKIT_EDITOR', 1)
-           env['ENABLE_WEBKIT_EDITOR'] = True
+            conf.define('USE_WEBKIT_EDITOR', 1)
+            env['ENABLE_WEBKIT_EDITOR'] = True
+            common_libs += ' "gtk+-2.0 >= 2.24" '
            # FC15 and Oneiric have this, Natty does not
         elif conf.check_cfg(modversion='gtkhtml-editor-3.14',
                           msg='Checking for GNOME3 gtkhtml-editor',
                           okmsg='Definitely',
                           errmsg='Probably not'
                           ):
+            common_libs += ' "gtk+-2.0 >= 2.14" '
             common_libs += ' "gtkhtml-editor-3.14" '
             common_libs += ' "libgtkhtml-3.14 >= 3.23" '
         else:
+            common_libs += ' "gtk+-2.0 >= 2.14" '
             common_libs += ' "gtkhtml-editor" '
             common_libs += ' "libgtkhtml-3.14 >= 3.23" '
     else:
-        # So far, we only care about GTK+3, not any of its subversions
+        # 
         common_libs += ' "gtk+-3.0" '
-        common_libs += ' "webkitgtk-3.0" '  
+        common_libs += ' "webkitgtk-3.0" ' 
+        conf.check_cfg(package="gtk+-3.0",
+                       atleast_version = "3.4",
+                       uselib_store="GTK_34") 
         conf.define('USE_GTK_3', 1)
         conf.define('USE_GTKBUILDER', 1)
         if opt.webkit_editor:
