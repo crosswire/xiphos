@@ -226,7 +226,7 @@ static gboolean on_prefs_configure_event(GtkWidget * widget,
  * Return value
  *   gint
  */
-
+#ifndef HAVE_GTK_34
 static gint
 string_is_color(gchar * color)
 {
@@ -259,8 +259,24 @@ string_is_color(gchar * color)
 	return 1;
 
 }
+#endif
 
 
+#ifdef HAVE_GTK_34
+static gchar *
+gdkrgba_to_hex(GdkRGBA * color)
+{
+	gchar *tmpstr;
+
+	tmpstr = g_malloc(8*sizeof(char));
+	g_snprintf (tmpstr, 8,"#%.2X%.2X%.2X",
+					(unsigned int)(color->red*255),
+					(unsigned int)(color->green*255),
+					(unsigned int)(color->blue*255));
+	return tmpstr;
+}
+
+#else
 /******************************************************************************
  * Name
  *  gdkcolor_to_hex
@@ -298,6 +314,7 @@ gdkcolor_to_hex(GdkColor color,
 	return tmpstr;
 }
 
+#endif
 
 void
 apply_color_settings(void)
@@ -396,10 +413,15 @@ on_colorbutton1_color_set(GtkColorButton  * colorbutton,
 			  gpointer user_data)
 {
 	gchar *buf = NULL;
+#ifdef HAVE_GTK_34	
+	GdkRGBA color;
+	gtk_color_chooser_get_rgba ((GtkColorChooser *) colorbutton, &color);
+	buf = gdkrgba_to_hex (&color);//gdk_rgba_to_string (&color);
+#else
  	GdkColor color;
-
 	gtk_color_button_get_color(colorbutton, &color);
 	buf = gdkcolor_to_hex(color,1);
+#endif
 	xml_set_value("Xiphos", "HTMLcolors", "background", buf);
 	settings.bible_bg_color = xml_get_value("HTMLcolors", "background");
 	if (buf)
@@ -430,10 +452,17 @@ on_colorbutton2_color_set(GtkColorButton * colorbutton,
 			  gpointer user_data)
 {
 	gchar *buf2 = NULL;
+#ifdef HAVE_GTK_34	
+	GdkRGBA color;
+	
+	gtk_color_chooser_get_rgba ((GtkColorChooser *) colorbutton, &color);
+	buf2 = gdkrgba_to_hex (&color);
+#else
  	GdkColor color;
 
 	gtk_color_button_get_color(colorbutton, &color);
 	buf2 = gdkcolor_to_hex(color,1);
+#endif
 	xml_set_value("Xiphos", "HTMLcolors", "text_fg", buf2);
 	settings.bible_text_color = xml_get_value("HTMLcolors", "text_fg");
 	if (buf2)
@@ -464,10 +493,17 @@ on_colorbutton3_color_set(GtkColorButton * colorbutton,
 			  gpointer user_data)
 {
 	gchar *buf2 = NULL;
+#ifdef HAVE_GTK_34	
+	GdkRGBA color;
+	
+	gtk_color_chooser_get_rgba ((GtkColorChooser *) colorbutton, &color);
+	buf2 = gdkrgba_to_hex (&color);
+#else
  	GdkColor color;
 
 	gtk_color_button_get_color(colorbutton, &color);
 	buf2 = gdkcolor_to_hex(color,1);
+#endif
 	xml_set_value("Xiphos", "HTMLcolors", "currentverse", buf2);
 	settings.currentverse_color =
 		xml_get_value("HTMLcolors", "currentverse");
@@ -499,10 +535,17 @@ on_colorbutton4_color_set(GtkColorButton * colorbutton,
 			  gpointer user_data)
 {
 	gchar *buf2 = NULL;
+#ifdef HAVE_GTK_34	
+	GdkRGBA color;
+	
+	gtk_color_chooser_get_rgba ((GtkColorChooser *) colorbutton, &color);
+	buf2 = gdkrgba_to_hex (&color);
+#else
  	GdkColor color;
 
 	gtk_color_button_get_color(colorbutton, &color);
 	buf2 = gdkcolor_to_hex(color,1);
+#endif
 	xml_set_value("Xiphos", "HTMLcolors", "versenum", buf2);
 	settings.bible_verse_num_color =
 		xml_get_value("HTMLcolors", "versenum");
@@ -534,10 +577,17 @@ on_colorbutton5_color_set(GtkColorButton * colorbutton,
 			  gpointer user_data)
 {
 	gchar *buf2 = NULL;
+#ifdef HAVE_GTK_34	
+	GdkRGBA color;
+	
+	gtk_color_chooser_get_rgba ((GtkColorChooser *) colorbutton, &color);
+	buf2 = gdkrgba_to_hex (&color);
+#else
  	GdkColor color;
 
 	gtk_color_button_get_color(colorbutton, &color);
 	buf2 = gdkcolor_to_hex(color,1);
+#endif
 	xml_set_value("Xiphos", "HTMLcolors", "link", buf2);
 	settings.link_color = xml_get_value("HTMLcolors", "link");
 	if (buf2)
@@ -568,10 +618,17 @@ on_colorbutton6_color_set(GtkColorButton * colorbutton,
 			  gpointer user_data)
 {
 	gchar *buf2 = NULL;
+#ifdef HAVE_GTK_34	
+	GdkRGBA color;
+	
+	gtk_color_chooser_get_rgba ((GtkColorChooser *) colorbutton, &color);
+	buf2 = gdkrgba_to_hex (&color);
+#else
  	GdkColor color;
 
 	gtk_color_button_get_color(colorbutton, &color);
 	buf2 = gdkcolor_to_hex(color,1);
+#endif
 	xml_set_value("Xiphos", "HTMLcolors", "highlight_fg", buf2);
 	settings.highlight_fg = xml_get_value("HTMLcolors", "highlight_fg");
 	if (buf2)
@@ -602,10 +659,17 @@ on_colorbutton7_color_set(GtkColorButton * colorbutton,
 			  gpointer user_data)
 {
 	gchar *buf2 = NULL;
+#ifdef HAVE_GTK_34	
+	GdkRGBA color;
+	
+	gtk_color_chooser_get_rgba ((GtkColorChooser *) colorbutton, &color);
+	buf2 = gdkrgba_to_hex (&color);
+#else
  	GdkColor color;
 
 	gtk_color_button_get_color(colorbutton, &color);
 	buf2 = gdkcolor_to_hex(color,1);
+#endif
 	xml_set_value("Xiphos", "HTMLcolors", "highlight_bg", buf2);
 	settings.highlight_bg = xml_get_value("HTMLcolors", "highlight_bg");
 	if (buf2)
@@ -1901,10 +1965,27 @@ create_model(void)
 void
 setup_color_pickers(void)
 {
+#ifdef HAVE_GTK_34
+	GdkRGBA rgba;
+		if(gdk_rgba_parse (&rgba, settings.bible_bg_color))
+			gtk_color_chooser_set_rgba ((GtkColorChooser*) color_picker.text_background, &rgba);
+		if(gdk_rgba_parse (&rgba, settings.bible_text_color))
+			gtk_color_chooser_set_rgba ((GtkColorChooser*) color_picker.text, &rgba);
+		if(gdk_rgba_parse (&rgba, settings.currentverse_color))
+			gtk_color_chooser_set_rgba ((GtkColorChooser*) color_picker.text_current_verse, &rgba);
+		if(gdk_rgba_parse (&rgba, settings.bible_verse_num_color))
+			gtk_color_chooser_set_rgba ((GtkColorChooser*) color_picker.verse_numbers, &rgba);
+		if(gdk_rgba_parse (&rgba, settings.link_color))
+			gtk_color_chooser_set_rgba ((GtkColorChooser*) color_picker.href_links, &rgba);
+		if(gdk_rgba_parse (&rgba, settings.highlight_fg))
+			gtk_color_chooser_set_rgba ((GtkColorChooser*) color_picker.highlight_fg, &rgba);
+		if(gdk_rgba_parse (&rgba, settings.highlight_bg))
+			gtk_color_chooser_set_rgba ((GtkColorChooser*) color_picker.highlight_bg, &rgba);
+#else
 	GdkColor color;
 	if (string_is_color(settings.bible_bg_color)) {
 		gdk_color_parse(settings.bible_bg_color, &color);
-		gtk_color_button_set_color(
+		gtk_color_button_set_color( 
 				GTK_COLOR_BUTTON(color_picker.text_background),
                                 &color);
 	} else {
@@ -1913,7 +1994,6 @@ setup_color_pickers(void)
 				GTK_COLOR_BUTTON(color_picker.text_background),
                                 &color);
 	}
-
 	if (string_is_color(settings.bible_text_color)) {
 		gdk_color_parse(settings.bible_text_color, &color);
 		gtk_color_button_set_color(GTK_COLOR_BUTTON(color_picker.text),
@@ -1977,6 +2057,7 @@ setup_color_pickers(void)
 	gtk_color_button_set_color(
 		GTK_COLOR_BUTTON(color_picker.highlight_bg),
 				&color);
+#endif
 }
 
 

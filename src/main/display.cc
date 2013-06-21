@@ -78,7 +78,14 @@ int marked_cache_chapter = -1;
 
 int footnote, xref;
 
-#define	HTML_START	"<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><style type=\"text/css\"><!-- A { text-decoration:none } *[dir=rtl] { text-align: right; } %s%s --></style></head>"
+#define	HTML_START	\
+"<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"> \
+<style type=\"text/css\"><!-- \
+A { text-decoration:none } \
+*[dir=rtl] { text-align: right; } \
+body {background-color:%s;color:%s;} \
+a:link{color:%s} %s%s -->\
+</style></head><body>"
 
 // CSS style blocks to control blocked strongs+morph output
 // BOTH is when the user wants to see both types of markup.
@@ -880,11 +887,13 @@ GTKEntryDisp::display(SWModule &imodule)
 		set_morph_order(imodule);
 	set_render_numbers(imodule, ops);
 
-	buf = g_strdup_printf(HTML_START
-			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
+	buf = g_strdup_printf(HTML_START // //bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
 			      "<font face=\"%s\" size=\"%+d\">"
 			      "[<a href=\"passagestudy.jsp?action=showModInfo&value=%s&module=%s\">"
 			      "<font color=\"%s\">*%s*</font></a>]<br/>",
+			      settings.bible_bg_color,
+			      settings.bible_text_color,
+			      settings.link_color,	                      
 			      (strongs_and_morph		// both
 			       ? CSS_BLOCK_BOTH
 			       : (strongs_or_morph		// either
@@ -893,9 +902,6 @@ GTKEntryDisp::display(SWModule &imodule)
 				     ? DOUBLE_SPACE
 				     : ""))),
 			      imodule.getRenderHeader(),
-			      settings.bible_bg_color,
-			      settings.bible_text_color,
-			      settings.link_color,
 			      ((mf->old_font) ? mf->old_font : ""),
 			      mf->old_font_size_value,
                   imodule.getDescription(),
@@ -1270,9 +1276,11 @@ GTKChapDisp::display(SWModule &imodule)
 	swbuf = "";
 	footnote = xref = 0;
 
-	buf = g_strdup_printf(HTML_START
-			    "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
+	buf = g_strdup_printf(HTML_START // "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
 			    "<font face=\"%s\" size=\"%+d\">",
+			    settings.bible_bg_color,
+			    settings.bible_text_color,
+			    settings.link_color,
 			    // strongs & morph specs win over dblspc.
 			    (strongs_and_morph		// both
 			     ? CSS_BLOCK_BOTH
@@ -1282,9 +1290,6 @@ GTKChapDisp::display(SWModule &imodule)
 				   ? DOUBLE_SPACE
 				   : ""))),
 			    imodule.getRenderHeader(),
-			    settings.bible_bg_color,
-			    settings.bible_text_color,
-			    settings.link_color,
 			    ((mf->old_font) ? mf->old_font : ""),
 			    mf->old_font_size_value);
 	swbuf.append(buf);
@@ -1542,16 +1547,15 @@ DialogEntryDisp::display(SWModule &imodule)
 	(const char *)imodule;	// snap to entry
 
 	buf = g_strdup_printf(HTML_START
-			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
 			      "<font face=\"%s\" size=\"%+d\">"
 			      "<font color=\"%s\">"
 			      "<a href=\"passagestudy.jsp?action=showModInfo&value=%s&module=%s\">"
 			      "[*%s*]</a></font><br/>",
-			      (ops->doublespace ? DOUBLE_SPACE : ""),
-			      imodule.getRenderHeader(),
 			      settings.bible_bg_color,
 			      settings.bible_text_color,
 			      settings.link_color,
+			      (ops->doublespace ? DOUBLE_SPACE : ""),
+			      imodule.getRenderHeader(),
 			      ((mf->old_font) ? mf->old_font : ""),
 			      mf->old_font_size_value,
 			      settings.bible_verse_num_color,
@@ -1675,8 +1679,10 @@ DialogChapDisp::Display(SWModule &imodule)
 	swbuf = "";
 	footnote = xref = 0;
 	buf = g_strdup_printf(HTML_START
-			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
 			      "<font face=\"%s\" size=\"%+d\">",
+			      settings.bible_bg_color,
+			      settings.bible_text_color,
+			      settings.link_color,
 			      (strongs_and_morph
 			       ? CSS_BLOCK_BOTH
 			       : (strongs_or_morph
@@ -1685,9 +1691,6 @@ DialogChapDisp::Display(SWModule &imodule)
 				     ? DOUBLE_SPACE
 				     : ""))),
 			      imodule.getRenderHeader(),
-			      settings.bible_bg_color,
-			      settings.bible_text_color,
-			      settings.link_color,
 			      ((mf->old_font) ? mf->old_font : ""),
 			      mf->old_font_size_value);
 	swbuf.append(buf);
@@ -1870,16 +1873,15 @@ GTKPrintEntryDisp::Display(SWModule &imodule)
         keytext = strdup((char*)imodule.getKeyText());
 
 	buf = g_strdup_printf(HTML_START
-			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
 			      "<font face=\"%s\" size=\"%+d\">"
 			      "<font color=\"%s\">"
 			      "<a href=\"passagestudy.jsp?action=showModInfo&value=%s&module=%s\">"
 			      "[*%s*]</a></font>[%s]<br/>",
-			      (ops->doublespace ? DOUBLE_SPACE : ""),
-			      imodule.getRenderHeader(),
 			      settings.bible_bg_color,
 			      settings.bible_text_color,
 			      settings.link_color,
+			      (ops->doublespace ? DOUBLE_SPACE : ""),
+			      imodule.getRenderHeader(),
 			      ((mf->old_font) ? mf->old_font : ""),
 			      mf->old_font_size_value,
 			      settings.bible_verse_num_color,
@@ -1923,13 +1925,12 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 	swbuf = "";
 
 	buf = g_strdup_printf(HTML_START
-			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
 			      "<font face=\"%s\" size=\"%+d\">",
-			      (ops->doublespace ? DOUBLE_SPACE : ""),
-			      imodule.getRenderHeader(),
 			      settings.bible_bg_color,
 			      settings.bible_text_color,
 			      settings.link_color,
+			      (ops->doublespace ? DOUBLE_SPACE : ""),
+			      imodule.getRenderHeader(),
 			      ((mf->old_font) ? mf->old_font : ""),
 			      mf->old_font_size_value);
 	swbuf.append(buf);
