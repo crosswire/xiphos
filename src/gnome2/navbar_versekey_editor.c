@@ -861,7 +861,7 @@ void _connect_signals(NAVBAR_VERSEKEY navbar, EDITOR * editor)
 			 "button_press_event",
 			 G_CALLBACK(select_verse_button_press_callback),
 			 editor);
-#ifndef USE_GTK_3	
+#ifndef HAVE_GTK_34	
 	g_signal_connect ((gpointer)navbar.button_verse_menu , "scroll_event",
 		    	 G_CALLBACK (on_button_verse_menu_verse_scroll_event),
 		    	 editor);
@@ -899,7 +899,7 @@ GtkWidget *gui_navbar_versekey_editor_new(EDITOR * editor)
 #else
 	GladeXML *gxml;
 #endif
-#ifdef USE_GTK_3
+#ifdef HAVE_GTK_34
 	GtkWidget * eventbox;
 #endif
 	
@@ -955,7 +955,7 @@ GtkWidget *gui_navbar_versekey_editor_new(EDITOR * editor)
 	editor->navbar.label_chapter_menu = UI_GET_ITEM(gxml, "label_chapter");
 	editor->navbar.label_verse_menu = UI_GET_ITEM(gxml, "label_verse");
 	
-#ifdef USE_GTK_3	
+#ifdef HAVE_GTK_34	
 	eventbox = UI_GET_ITEM(gxml, "eventbox_book");
 	g_signal_connect ((gpointer) eventbox, "scroll_event",
 		    	 G_CALLBACK (on_button_verse_menu_book_scroll_event),
