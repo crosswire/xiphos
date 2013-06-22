@@ -342,6 +342,9 @@ def configure(conf):
         common_libs += ' "gtk+-3.0" '
         common_libs += ' "webkitgtk-3.0" ' 
         conf.check_cfg(package="gtk+-3.0",
+                       atleast_version = "3.2",
+                       uselib_store="GTK_32") 
+        conf.check_cfg(package="gtk+-3.0",
                        atleast_version = "3.4",
                        uselib_store="GTK_34") 
         conf.define('USE_GTK_3', 1)

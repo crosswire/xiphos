@@ -324,7 +324,7 @@ void action_delete_item_activate_cb (GtkWidget *widget, EDITOR * e)
 
 void set_button_state(BUTTONS_STATE state, EDITOR * e)
 {
-#ifdef USE_GTK_3
+#ifdef HAVE_GTK_34
 	GdkRGBA rgba;
 #else
 	GdkColor color;
@@ -336,7 +336,7 @@ void set_button_state(BUTTONS_STATE state, EDITOR * e)
 	gtk_combo_box_set_active ((GtkComboBox *)e->toolitems.cb, state.style);
 	if (state.color) {
 		GS_message(("state.color: %s",state.color));
-#ifdef USE_GTK_3
+#ifdef HAVE_GTK_34
 		if(gdk_rgba_parse (&rgba, state.color))
 			gtk_color_chooser_set_rgba ((GtkColorChooser*) e->toolitems.color, &rgba);
 #else
@@ -349,7 +349,7 @@ void set_button_state(BUTTONS_STATE state, EDITOR * e)
 
 void  colorbutton1_color_set_cb (GtkColorButton *widget, EDITOR * e )
 {
-#ifdef USE_GTK_3
+#ifdef HAVE_GTK_34
 	GdkRGBA color;
 #else
 	GdkColor color;
@@ -357,7 +357,7 @@ void  colorbutton1_color_set_cb (GtkColorButton *widget, EDITOR * e )
 	gchar *color_str;
 	gchar *forecolor = NULL;
 
-#ifdef USE_GTK_3	
+#ifdef HAVE_GTK_34	
 	gtk_color_chooser_get_rgba ((GtkColorChooser *)widget, &color);
 	color_str = gdk_rgba_to_string (&color);
 #else
@@ -373,7 +373,7 @@ void  colorbutton1_color_set_cb (GtkColorButton *widget, EDITOR * e )
 void  colorbutton_highlight_color_set_cb (GtkColorButton *widget, EDITOR * e )
 {
 
-#ifdef USE_GTK_3
+#ifdef HAVE_GTK_34
 	GdkRGBA color;
 #else
 	GdkColor color;
@@ -381,7 +381,7 @@ void  colorbutton_highlight_color_set_cb (GtkColorButton *widget, EDITOR * e )
 	gchar *color_str;
 	gchar *highligntcolor = NULL;
 	
-#ifdef USE_GTK_3	
+#ifdef HAVE_GTK_34	
 	gtk_color_chooser_get_rgba ((GtkColorChooser *)widget, &color);
 	color_str = gdk_rgba_to_string (&color);
 #else
@@ -422,7 +422,7 @@ void action_font_activate_cb (GtkWidget *widget, EDITOR * e)
 	gchar * script = NULL;
 	gchar *  size = NULL;
 	PangoFontDescription * font_description;
-#ifdef USE_GTK_3
+#ifdef HAVE_GTK_32
 	dialog = gtk_font_chooser_dialog_new ("Select font",NULL);
 	gtk_font_chooser_set_font ((GtkFontChooser *)dialog,
 #else
@@ -433,7 +433,7 @@ void action_font_activate_cb (GtkWidget *widget, EDITOR * e)
                                                  
 	if(gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_OK)
 	{	
-	#ifdef USE_GTK_3
+	#ifdef HAVE_GTK_32
 		fontname = gtk_font_chooser_get_font ((GtkFontChooser*)dialog);
 	#else
 		fontname = gtk_font_selection_dialog_get_font_name ((GtkFontSelectionDialog*)dialog);
@@ -443,7 +443,7 @@ void action_font_activate_cb (GtkWidget *widget, EDITOR * e)
 		g_string_free (name,TRUE);	
 
 		selected_text = editor_get_selected_text (e);
-	#ifdef USE_GTK3
+	#ifdef HAVE_GTK_32
 		font_description = gtk_font_chooser_get_font_desc ((GtkFontChooser*)dialog);
 		fontname = pango_font_description_get_family   (font_description);
 	#else
