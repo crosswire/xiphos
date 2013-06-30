@@ -300,7 +300,9 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 	GtkWidget *label13;
 	GtkWidget *label14;
 	GtkWidget *dialog_action_area3;
+#ifdef HAVE_GTK_34
 	gint nextrow = 0;
+#endif
 
 	dialog_request = gtk_dialog_new();
 	info->dialog = dialog_request;
