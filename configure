@@ -4,8 +4,8 @@ cat - <<\EOF
 "configure" is no longer used in building Xiphos.
 
 please run "./waf --help" to understand current build habits.
-for linux and unix, we recommend
-    ./waf configure --prefix=/usr --debug-level=optimized
+for recent (i.e. gnome3) linux and unix, we recommend
+    ./waf configure --prefix=/usr --debug-level=optimized --enable-webkit-editor
 for distribution-ready builds.
 then
     ./waf build
