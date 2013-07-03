@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * dictlex_dialog.c - dialog for displaying a dictlex module
  *
- * Copyright (C) 2000-2011 Xiphos Developer Team
+ * Copyright (C) 2000-2013 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
