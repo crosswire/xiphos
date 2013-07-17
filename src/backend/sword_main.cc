@@ -298,7 +298,7 @@ int BackEnd::is_Bible_key(const char * list, char * current_key)
 
 	key.setText(current_key);
     ListKey vs = key.parseVerseList(list, key);
-	return vs.Count();
+	return vs.getCount();
 }
 
 
@@ -878,7 +878,7 @@ GList *BackEnd::parse_verse_list(const char * list, char * current_key)
 	GS_message(("current_key=%s",current_key));
 	key.setText(current_key);
     vs = key.parseVerseList(list, key, TRUE);
-	if (!vs.Count())
+	if (!vs.getCount())
 		return retlist;
     while (!vs.popError()) {
 		retlist = g_list_append(retlist, strdup((char*)vs.getText()));
@@ -893,7 +893,7 @@ GList *BackEnd::parse_range_list(const char * list)
 	const char *buf = NULL;
 	VerseKey key;
 
-	verses.ClearList();
+	verses.clear();
     verses = key.parseVerseList(list, key, true);
 
 	buf = verses.getRangeText();
@@ -935,14 +935,14 @@ int BackEnd::clear_scope(void)
 
 int BackEnd::clear_search_list(void)
 {
-	search_scope_list.ClearList();
-	return search_scope_list.Count ();
+	search_scope_list.clear();
+	return search_scope_list.getCount ();
 }
 
 int BackEnd::set_range(char * list)
 {
     search_range = VerseKey().parseVerseList(list, "", true);
-	return search_range.Count ();
+	return search_range.getCount ();
 }
 
 void BackEnd::set_scope2range(void)
@@ -1006,14 +1006,14 @@ int BackEnd::do_module_search(char *module_name,
 {
 	char progressunits = 70;
 	results.clear();
-	//search_scope_list.ClearList()
+	//search_scope_list.clear()
 	search_mod = NULL;
 
 	search_mod = main_mgr->Modules[module_name];
 	if (!search_mod)
 		return -1;
 	if ((current_scope == &search_scope_list) &&
-	    (search_scope_list.Count() == 0))
+	    (search_scope_list.getCount() == 0))
 		return 0;
 
 	results = search_mod->search(search_string,
@@ -1027,7 +1027,7 @@ int BackEnd::do_module_search(char *module_name,
 	search_scope_list = results;
 	if (search_type == -4)
 		results.sort();
-	return results.Count();
+	return results.getCount();
 }
 
 void BackEnd::terminate_search()
