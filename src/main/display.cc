@@ -765,8 +765,8 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule)
 		if (!cVerse.CacheIsValid(cache_flags) && 
             (backend->module_type(imodule.getName()) != PERCOM_TYPE)) {
 			rework = g_string_new(strongs_or_morph
-                          ? block_render(imodule.renderText())
-                          : imodule.renderText());
+			  ? block_render(imodule.renderText())
+			  : (const char *)imodule.renderText());
             rework = CleanupContent(rework, ops, imodule.getName());
 			cVerse.SetText(rework->str, cache_flags);
 		} else {
@@ -949,7 +949,7 @@ GTKEntryDisp::display(SWModule &imodule)
 		if (!cVerse.CacheIsValid(cache_flags)) {
 			rework = g_string_new(strongs_or_morph
                           ? block_render(imodule.renderText())
-                          : imodule.renderText());
+                          : (const char *)imodule.renderText());
             rework = CleanupContent(rework, ops, imodule.getName());
 			cVerse.SetText(rework->str, cache_flags);
 		} else
@@ -965,7 +965,7 @@ GTKEntryDisp::display(SWModule &imodule)
 		else {
 			rework = g_string_new(strongs_or_morph
                           ? block_render(imodule.renderText())
-                          : imodule.renderText());
+                          : (const char *)imodule.renderText());
 			if (modtype == DICTIONARY_TYPE) {
 				char *f = (char *)imodule.getConfigEntry("Feature");
 				if (f && !strcmp(f, "DailyDevotion")) {
@@ -1331,7 +1331,7 @@ GTKChapDisp::display(SWModule &imodule)
 		if (!cVerse.CacheIsValid(cache_flags)) {
 			rework = g_string_new(strongs_or_morph
                           ? block_render(imodule.renderText())
-                          : imodule.renderText());
+                          : (const char *)imodule.renderText());
             rework = CleanupContent(rework, ops, imodule.getName());
 			cVerse.SetText(rework->str, cache_flags);
 		} else
@@ -1505,7 +1505,7 @@ DialogEntryDisp::DisplayByChapter(SWModule &imodule)
 		if (!cVerse.CacheIsValid(cache_flags)) {
 			rework = g_string_new(strongs_or_morph
                           ? block_render(imodule.renderText())
-                          : imodule.renderText());
+                          : (const char *)imodule.renderText());
             rework = CleanupContent(rework, ops, imodule.getName());
 			cVerse.SetText(rework->str, cache_flags);
 		} else
@@ -1718,7 +1718,7 @@ DialogChapDisp::Display(SWModule &imodule)
 		if (!cVerse.CacheIsValid(cache_flags)) {
 			rework = g_string_new(strongs_or_morph
                           ? block_render(imodule.renderText())
-                          : imodule.renderText());
+                          : (const char *)imodule.renderText());
             rework = CleanupContent(rework, ops, imodule.getName());
 			cVerse.SetText(rework->str, cache_flags);
 		} else
