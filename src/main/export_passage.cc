@@ -207,7 +207,7 @@ static void _export_book(EXPORT_DATA data, int type)
 
 		if (type == HTML)
 			g_string_append_printf(str, " %s%s",
-                           (char*)mod->renderText(),
+                           (const char*)mod->renderText(),
 					       (settings.versestyle ? "<br>" : ""));
 		else
 			g_string_append_printf(str, " %s%s",
@@ -267,7 +267,7 @@ static void _export_chapter(EXPORT_DATA data, int type)
 
 		if (type == HTML)
 			g_string_append_printf(str," %s%s",
-                           (char*)mod->renderText(),
+                           (const char*)mod->renderText(),
 					       (settings.versestyle ? "<br>" : ""));
 		else
 			g_string_append_printf(str," %s%s",
@@ -303,7 +303,7 @@ static void _export_verse(EXPORT_DATA data, int type)
 			g_string_append_printf(str,
 				       data.verselayout_single_verse_ref_last,
 				       HTML_START,
-		                       (char*)mod->renderText(),
+		                       (const char*)mod->renderText(),
 				       book,
 				       key->getChapter(),
 				       key->getVerse(),
@@ -316,7 +316,7 @@ static void _export_verse(EXPORT_DATA data, int type)
 				       key->getChapter(),
 				       key->getVerse(),
 				       (data.version ? modstr : ""),
-		                       (char*)mod->renderText());
+		                       (const char*)mod->renderText());
 		
 	else
 		if(data.reference_last) 
@@ -401,7 +401,7 @@ static void _export_verse_range (EXPORT_DATA data, int type)
 
 		if (type == HTML)
 			g_string_append_printf(str,data.verse_range_verse,
-                           (char*)mod->renderText(),
+                           (const char*)mod->renderText(),
 					       (settings.versestyle ? "<br>" : " "));
 		else
 			g_string_append_printf(str,data.verse_range_verse,

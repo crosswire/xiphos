@@ -311,7 +311,7 @@ char *BackEnd::get_render_text(const char *module_name, const char *key)
 	if (it != main_mgr->Modules.end()) {
 		mod = (*it).second;
 		mod->setKey(key);
-        return strdup((char *) mod->renderText());
+        return strdup((const char *) mod->renderText());
 	}
 	return NULL;
 }
@@ -338,7 +338,7 @@ char *BackEnd::render_this_text(const char * module_name, const char * text)
 	it = main_mgr->Modules.find(module_name);
 	if (it != main_mgr->Modules.end()) {
 		mod = (*it).second;
-        return strdup((char *) mod->renderText(text));
+        return strdup((const char *) mod->renderText(text));
 	}
 	return NULL;
 }
@@ -452,7 +452,7 @@ void BackEnd::save_note_entry(const char * module, const char * key, const char 
 		display_mod->setEntry((const char *) entry);
 		GS_message (("\nsave_note_entry\nmod: %s\nkey: %s\nentry: %s",
                  display_mod->getName(), display_mod->getKeyText(),
-                 display_mod->renderText()));
+	         (const char *)display_mod->renderText()));
 	}
 }
 
