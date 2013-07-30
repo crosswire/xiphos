@@ -311,7 +311,7 @@ char *BackEnd::get_render_text(const char *module_name, const char *key)
 	if (it != main_mgr->Modules.end()) {
 		mod = (*it).second;
 		mod->setKey(key);
-        return strdup((const char *) mod->renderText());
+		return strdup(mod->renderText().c_str());
 	}
 	return NULL;
 }
@@ -338,7 +338,7 @@ char *BackEnd::render_this_text(const char * module_name, const char * text)
 	it = main_mgr->Modules.find(module_name);
 	if (it != main_mgr->Modules.end()) {
 		mod = (*it).second;
-        return strdup((const char *) mod->renderText(text));
+		return strdup(mod->renderText(text).c_str());
 	}
 	return NULL;
 }
@@ -451,8 +451,8 @@ void BackEnd::save_note_entry(const char * module, const char * key, const char 
         display_mod->getKeyText(); /* snap to entry */
 		display_mod->setEntry((const char *) entry);
 		GS_message (("\nsave_note_entry\nmod: %s\nkey: %s\nentry: %s",
-                 display_mod->getName(), display_mod->getKeyText(),
-	         (const char *)display_mod->renderText()));
+			     display_mod->getName(), display_mod->getKeyText(),
+			     display_mod->renderText().c_str()));
 	}
 }
 
@@ -661,7 +661,7 @@ char *BackEnd::get_entry_attribute(const char *level1,
 {
 	UTF8HTML u2html;
 	if (render)
-        display_mod->renderText();
+		display_mod->renderText().c_str();
 	SWBuf attribute2 = display_mod->getEntryAttributes()[level1][level2][level3].c_str();
 
 	u2html.processText(attribute2);
