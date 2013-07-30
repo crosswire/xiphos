@@ -207,11 +207,11 @@ static void _export_book(EXPORT_DATA data, int type)
 
 		if (type == HTML)
 			g_string_append_printf(str, " %s%s",
-                           (const char*)mod->renderText(),
+					       mod->renderText().c_str(),
 					       (settings.versestyle ? "<br>" : ""));
 		else
 			g_string_append_printf(str, " %s%s",
-                           (char*)mod->stripText(),
+					       (char*)mod->stripText(),
 					       (settings.versestyle ? "\n" : ""));
 
 		++myverse;
@@ -267,11 +267,11 @@ static void _export_chapter(EXPORT_DATA data, int type)
 
 		if (type == HTML)
 			g_string_append_printf(str," %s%s",
-                           (const char*)mod->renderText(),
+					       mod->renderText().c_str(),
 					       (settings.versestyle ? "<br>" : ""));
 		else
 			g_string_append_printf(str," %s%s",
-                           (char*)mod->stripText(),
+					       (char*)mod->stripText(),
 					       (settings.versestyle ? "\n" : ""));
 		++myverse;
 	}
@@ -303,7 +303,7 @@ static void _export_verse(EXPORT_DATA data, int type)
 			g_string_append_printf(str,
 				       data.verselayout_single_verse_ref_last,
 				       HTML_START,
-		                       (const char*)mod->renderText(),
+				       mod->renderText().c_str(),
 				       book,
 				       key->getChapter(),
 				       key->getVerse(),
@@ -316,7 +316,7 @@ static void _export_verse(EXPORT_DATA data, int type)
 				       key->getChapter(),
 				       key->getVerse(),
 				       (data.version ? modstr : ""),
-		                       (const char*)mod->renderText());
+				       mod->renderText().c_str());
 		
 	else
 		if(data.reference_last) 
@@ -401,11 +401,11 @@ static void _export_verse_range (EXPORT_DATA data, int type)
 
 		if (type == HTML)
 			g_string_append_printf(str,data.verse_range_verse,
-                           (const char*)mod->renderText(),
+					       mod->renderText().c_str(),
 					       (settings.versestyle ? "<br>" : " "));
 		else
 			g_string_append_printf(str,data.verse_range_verse,
-                           (char*)mod->stripText(),
+					       (char*)mod->stripText(),
 					       (settings.versestyle ? "\n" : " "));
 	}
 	if (data.reference_last)
