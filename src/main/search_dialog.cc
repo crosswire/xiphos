@@ -1255,29 +1255,6 @@ static void set_up_dialog_search(GList *modlist)
 }
 
 
-
-/******************************************************************************
- * Name
- *   main_get_rendered_text
- *
- * Synopsis
- *   #include "main/sword.h"
- *
- *   char *main_get_rendered_text(char *module_name, char *key)
- *
- * Description
- *
- *
- * Return value
- *   char *
- */
-
-char *main_get_search_rendered_text(char *module_name, char *key)
-{
-	check_search_global_options();
-	return backendSearch->get_render_text(module_name, key);
-}
-
 static
 void _clear_find_lists(void)
 {
@@ -1479,9 +1456,9 @@ void main_do_dialog_search(void)
 		finds = backendSearch->do_module_search(module,
 					(attribute_search_string
 					 ? mgr->getModule(module)->
-                        stripText(attribute_search_string)
+					   stripText(attribute_search_string)
 					 : mgr->getModule(module)->
-                        stripText(search_string)),
+					   stripText(search_string)),
 					search_type,
 					search_params,
 					TRUE);

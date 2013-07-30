@@ -661,7 +661,7 @@ char *BackEnd::get_entry_attribute(const char *level1,
 {
 	UTF8HTML u2html;
 	if (render)
-		display_mod->renderText().c_str();
+		display_mod->renderText();
 	SWBuf attribute2 = display_mod->getEntryAttributes()[level1][level2][level3].c_str();
 
 	u2html.processText(attribute2);
