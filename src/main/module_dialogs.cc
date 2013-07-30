@@ -124,13 +124,13 @@ void main_dialogs_book_heading(DIALOG_DATA * d)
 	SWMgr *mgr = be->get_mgr();
 
 	be->display_mod = mgr->Modules[d->mod_name];
-    GS_message(("%s",(const char*)be->display_mod->renderText()));
+	GS_message(("%s", be->display_mod->renderText().c_str()));
 	vkey = (VerseKey*)(SWKey*)(*be->display_mod);
-    vkey->setIntros(1);
-    vkey->setAutoNormalize(0);
-    vkey->setVerse(0);
-    vkey->setChapter(0);
-    be->display_mod->display();
+	vkey->setIntros(1);
+	vkey->setAutoNormalize(0);
+	vkey->setVerse(0);
+	vkey->setChapter(0);
+	be->display_mod->display();
 }
 
 
