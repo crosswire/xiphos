@@ -1915,8 +1915,8 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 		while ((preverse
 			= backend->get_entry_attribute("Heading", "Preverse",
 						       heading)) != NULL) {
-			const char *preverse2 = imodule.renderText(preverse).c_str();
-			buf = g_strdup_printf("<br/><b>%s</b><br/><br/>", preverse2);
+			SWBuf preverse2 = imodule.renderText(preverse);
+			buf = g_strdup_printf("<br/><b>%s</b><br/><br/>", preverse2.c_str());
 			swbuf.append(buf);
 			g_free(buf);
 			g_free(preverse);
