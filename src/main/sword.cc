@@ -495,7 +495,7 @@ char *main_get_treekey_local_name(unsigned long offset)
 
 char *main_get_search_results_text(char * mod_name, char * key)
 {
-	return g_strdup(backend->get_render_text((char *)mod_name,(char *)key));
+	return backend->get_render_text((char *)mod_name,(char *)key);
 }
 
 

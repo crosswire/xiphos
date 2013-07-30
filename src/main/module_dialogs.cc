@@ -965,7 +965,7 @@ static gint show_note(DIALOG_DATA * d,const gchar * module, const gchar * passag
 					NULL,
 					NULL,
 					d);
-			if (buf) g_free(buf);
+			g_free(buf);
 		}
 	} else if (strstr(type,"x") && !clicked) {
 		be->set_module_key((gchar*)module, (gchar*)passage);
@@ -1139,8 +1139,7 @@ static gint show_strongs(DIALOG_DATA * t, const gchar * type,
 		gui_display_mod_and_key(modbuf, value);
 		gtk_window_set_title(GTK_WINDOW(dialog_display_info), modbuf);
 	} else {
-		mybuf =
-		    main_get_rendered_text((gchar*)modbuf, (gchar*)value);
+		mybuf = main_get_rendered_text((gchar*)modbuf, (gchar*)value);
 		if (mybuf) {
 			main_dialog_information_viewer(
 					modbuf,
