@@ -877,7 +877,7 @@ GTKEntryDisp::display(SWModule &imodule)
 
 	GString *rework;			// for image size analysis rework.
 
-	(const char *)imodule;	// snap to entry
+    imodule.getRawEntry();      // snap to entry
 	main_set_global_options(ops);
 
 	strongs_and_morph = ((ops->strongs || ops->lemmas) &&
@@ -1509,7 +1509,7 @@ DialogEntryDisp::display(SWModule &imodule)
 	GString *rework;			// for image size analysis rework.
 	footnote = xref = 0;
 
-	(const char *)imodule;	// snap to entry
+	imodule.getRawEntry();	// snap to entry
 
 	buf = g_strdup_printf(HTML_START
 			      "<font face=\"%s\" size=\"%+d\">"
@@ -1551,7 +1551,7 @@ DialogEntryDisp::display(SWModule &imodule)
 
 		// use the module cache rather than re-accessing Sword.
 		if (!cVerse.CacheIsValid(cache_flags)) {
-			rework = g_string_new((const char *)imodule);
+			rework = g_string_new(imodule.renderText().c_str());
 			rework = CleanupContent(rework, ops, imodule.getName());
 			cVerse.SetText(rework->str, cache_flags);
 		} else
@@ -1562,7 +1562,7 @@ DialogEntryDisp::display(SWModule &imodule)
 		    (be->module_type(imodule.getName()) == PRAYERLIST_TYPE))
 			rework = g_string_new(imodule.getRawEntry());
 		else
-			rework = g_string_new((const char *)imodule);
+			rework = g_string_new(imodule.renderText().c_str());
 		rework = CleanupContent(rework, ops, imodule.getName());
 	}
 
@@ -1823,7 +1823,7 @@ GTKPrintEntryDisp::Display(SWModule &imodule)
 
 	GLOBAL_OPS * ops = main_new_globals(imodule.getName());
 
-	(const char *)imodule;	// snap to entry
+	imodule.getRawEntry();	// snap to entry
 	GS_message(("%s",(const char *)imodule.getRawEntry()));
 	main_set_global_options(ops);
 	mod_type = backend->module_type(imodule.getName());
@@ -1856,7 +1856,7 @@ GTKPrintEntryDisp::Display(SWModule &imodule)
 	swbuf.append(buf);
 	g_free(buf);
 
-	swbuf.append((const char *)imodule);
+	swbuf.append(imodule.renderText());
 	swbuf.append("</font></body></html>");
 
 	HtmlOutput((char *)swbuf.c_str(), gtkText, mf, NULL);
@@ -1938,9 +1938,9 @@ GTKPrintChapDisp::Display(SWModule &imodule)
 		swbuf.append(buf);
 		g_free(buf);
 
-		swbuf.append((const char *)imodule);
+		swbuf.append(imodule.renderText());
 
-		buf = g_strdup_printf("%s", (const char *)imodule);
+		buf = g_strdup_printf("%s", imodule.renderText().c_str());
 
 		if (settings.versestyle) {
 			swbuf.append("<br/>");
