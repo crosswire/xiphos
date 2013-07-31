@@ -431,7 +431,7 @@ unsigned int BackEnd::key_verse_count(const char *key)
 
 char *BackEnd::get_module_key()
 {
-	(const char *) *display_mod;
+    display_mod->getRawEntry();
 
     return strdup((char*)display_mod->getKeyText());
 }
