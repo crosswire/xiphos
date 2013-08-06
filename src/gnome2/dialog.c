@@ -287,19 +287,19 @@ static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 
 static GtkWidget *create_dialog_request(GS_DIALOG * info)
 {
-	GtkWidget *dialog_vbox3;
-	GtkWidget *hbox4;
-	GtkWidget *image6;
-	GtkWidget *vbox3;
-	GtkWidget *label8;
-	GtkWidget *table2;
-	GtkWidget *label9;
-	GtkWidget *label10;
-	GtkWidget *label11;
-	GtkWidget *label12;
-	GtkWidget *label13;
-	GtkWidget *label14;
-	GtkWidget *dialog_action_area3;
+	GtkWidget *dialog_vbox3 = NULL;
+	GtkWidget *hbox4 = NULL;
+	GtkWidget *image6 = NULL;
+	GtkWidget *vbox3 = NULL;
+	GtkWidget *label8 = NULL;
+	GtkWidget *table2 = NULL;
+	GtkWidget *label9 = NULL;
+	GtkWidget *label10 = NULL;
+	GtkWidget *label11 = NULL;
+	GtkWidget *label12 = NULL;
+	GtkWidget *label13 = NULL;
+	GtkWidget *label14 = NULL;
+	GtkWidget *dialog_action_area3 = NULL;
 #ifdef HAVE_GTK_34
 	gint nextrow = 0;
 #endif
