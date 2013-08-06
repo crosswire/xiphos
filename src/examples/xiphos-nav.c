@@ -34,7 +34,9 @@ int main (int argc, char **argv)
 	GError *error = NULL;
 
 	/* not necessary if using from a gtk/gnome program */
+#if !GLIB_CHECK_VERSION(2, 35, 0)
 	g_type_init ();
+#endif
 	/* get the "session" dbus */
 	bus = dbus_g_bus_get (DBUS_BUS_SESSION, &error);
 
