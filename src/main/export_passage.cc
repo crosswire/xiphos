@@ -97,7 +97,7 @@ int main_get_max_verses (void)
 int main_get_current_verse (void)
 {
 	VerseKey key = settings.currentverse;
-    return key.getVerse();
+	return key.getVerse();
 }
 
 /**
@@ -187,11 +187,11 @@ static void _export_book(EXPORT_DATA data, int type)
                        mod->getDescription(),
 				       1);
 	//g_free(buf);
-    while (key->getBook() == curBook && !mod->popError()) {
-        if (key->getChapter() != curChapter) {
+	while (key->getBook() == curBook && !mod->popError()) {
+		if (key->getChapter() != curChapter) {
 			++mychapter;
 			myverse = 1;
-            curChapter = key->getChapter();
+			curChapter = key->getChapter();
 			if (type == HTML)
 				g_string_append_printf(str,data.chapterheader_book, curChapter);
 			else
@@ -253,10 +253,10 @@ static void _export_chapter(EXPORT_DATA data, int type)
 				       book,
                        key->getChapter());
 
-    for (key->setVerse(1);
-         (key->getBook() == curBook) &&
-         (key->getChapter() == curChapter) &&
-         !mod->popError();
+	for (key->setVerse(1);
+	     (key->getBook() == curBook) &&
+	     (key->getChapter() == curChapter) &&
+	     !mod->popError();
 	     (*mod)++) {
 
 		if (data.verse_num)
@@ -385,11 +385,11 @@ static void _export_verse_range (EXPORT_DATA data, int type)
 			       data.end_verse,
 			       (data.version ? modstr : ""));
 	
-    for (key->setVerse(data.start_verse);
-         (key->getVerse() <= data.end_verse) &&
-         (key->getBook() == curBook) &&
-         (key->getChapter() == curChapter) &&
-         !mod->popError();
+	for (key->setVerse(data.start_verse);
+	     (key->getVerse() <= data.end_verse) &&
+	     (key->getBook() == curBook) &&
+	     (key->getChapter() == curChapter) &&
+	     !mod->popError();
 	     (*mod)++) {
 
 		if (data.verse_num)
