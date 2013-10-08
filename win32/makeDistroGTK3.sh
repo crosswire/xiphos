@@ -114,11 +114,11 @@ for f in libsword.dll \
 	libenchant.dll libcurl-4.dll libidn-11.dll libssh2-1.dll libclucene-core.dll libclucene-shared.dll \
 	libjavascriptcoregtk-3.0-0.dll pthreadGC2.dll libsoup-2.4-1.dll libsqlite3-0.dll libxslt-1.dll libintl-8.dll \
 	libgcc_s_sjlj-1.dll libstdc++-6.dll \
-	gdb.exe libwebkitgtk-3.0-0.dll \
-	libcrypto-10.dll libssl-10.dll libgstapp-0.10-0.dll libgstbase-0.10-0.dll libgstreamer-0.10-0.dll libgstinterfaces-0.10-0.dll libgstpbutils-0.10-0.dll \
-	libgstvideo-0.10-0.dll libgstaudio-0.10-0.dll libgstbase-0.10-0.dll libgstcdda-0.10-0.dll libgstcontroller-0.10-0.dll libgstdataprotocol-0.10-0.dll \
-	libgstfft-0.10-0.dll libgstnet-0.10-0.dll libgstnetbuffer-0.10-0.dll libgstriff-0.10-0.dll libgstrtp-0.10-0.dll libgstrtsp-0.10-0.dll libgstsdp-0.10-0.dll \
-	libgsttag-0.10-0.dll libharfbuzz-0.dll \
+	gdb.exe libwebkitgtk-3.0-0.dll libwebp-4.dll \
+	libcrypto-10.dll libssl-10.dll libgstapp-1.0-0.dll libgstbase-1.0-0.dll libgstreamer-1.0-0.dll libgstpbutils-1.0-0.dll \
+	libgstvideo-1.0-0.dll libgstaudio-1.0-0.dll libgstbase-1.0-0.dll libgstcontroller-1.0-0.dll \
+	libgstfft-1.0-0.dll libgstnet-1.0-0.dll libgstriff-1.0-0.dll libgstrtp-1.0-0.dll libgstrtsp-1.0-0.dll libgstsdp-1.0-0.dll \
+	libgsttag-1.0-0.dll libharfbuzz-0.dll libharfbuzz-icu-0.dll \
 	gspawn-win32-helper.exe gspawn-win32-helper-console.exe
 do
     echo "Copying and stripping ${f}"
