@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Romanian Version\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-31 01:51-0500\n"
+"POT-Creation-Date: 2013-10-08 10:07-0400\n"
 "PO-Revision-Date: 2010-09-29 21:56+0100\n"
 "Last-Translator: Peter von Kaehne <refdoc@crosswire.org>\n"
 "Language-Team: Xiphos <nick.laurentiu.nica@gmail.com>\n"
@@ -21,31 +21,37 @@ msgstr ""
 "X-Poedit-Language: Romanian\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../src/backend/sword_main.cc:736
+#: ../src/backend/sword_main.cc:741
 msgid ""
 "Xiphos failure: \"can't happen\", display_mod: null\n"
 "Please report this. sword_main.cc:set_treekey\n"
 "What were you doing when this occurred?"
 msgstr ""
 
-#: ../src/backend/sword_main.cc:1087
+#: ../src/backend/sword_main.cc:1092
 msgid "Configuration not found"
 msgstr "Configuratia nu s-a gasit"
 
-#: ../src/editor/slib-editor.c:224 ../src/gnome2/html.c:633
+#: ../src/editor/slib-editor.c:224
 #, c-format
 msgid "Page %d of %d"
 msgstr "Pagina %d din %d"
 
-#: ../src/editor/slib-editor.c:393 ../src/editor/slib-editor.c:435
+#: ../src/editor/slib-editor.c:393 ../src/editor/webkit_editor.c:585
+#: ../ui/editor_studypad.xml.h:9
+msgid "Open"
+msgstr "Deschide"
+
+#: ../src/editor/slib-editor.c:435
 msgid "Save As"
 msgstr "Salveaza ca"
 
 #: ../src/editor/slib-editor.c:453 ../src/editor/slib-editor.c:619
+#: ../src/editor/webkit_editor.c:806
 msgid "Untitled document"
 msgstr "Document fara titlu"
 
-#: ../src/editor/slib-editor.c:644
+#: ../src/editor/slib-editor.c:644 ../src/editor/webkit_editor.c:310
 msgid "Are you sure you want to delete the note for"
 msgstr "Esti sigur ca vrei sa stergi nota pentru"
 
@@ -61,13 +67,13 @@ msgstr "Sursa HTML"
 msgid "Plain Source"
 msgstr "Sursa Simpla"
 
-#: ../src/editor/slib-editor.c:711 ../ui/editor_note.xml.h:15
-#: ../ui/editor_studypad.xml.h:21
+#: ../src/editor/slib-editor.c:711 ../ui/editor_note.xml.h:13
+#: ../ui/editor_studypad.xml.h:19
 msgid "_Print..."
 msgstr "Ti_parire..."
 
-#: ../src/editor/slib-editor.c:718 ../ui/editor_note.xml.h:9
-#: ../ui/editor_studypad.xml.h:14
+#: ../src/editor/slib-editor.c:718 ../ui/editor_note.xml.h:12
+#: ../ui/editor_studypad.xml.h:18
 msgid "Print Pre_view"
 msgstr "Pre_vizualizare tiparire"
 
@@ -103,8 +109,8 @@ msgstr "Sterge"
 msgid "Delete current note"
 msgstr "Sterge nota curenta"
 
-#: ../src/editor/slib-editor.c:765 ../ui/editor_note.xml.h:14
-#: ../ui/editor_studypad.xml.h:20 ../ui/xi-menus.glade.h:126
+#: ../src/editor/slib-editor.c:765 ../ui/editor_note.xml.h:9
+#: ../ui/editor_studypad.xml.h:7 ../ui/xi-menus.glade.h:1
 msgid "_File"
 msgstr "_Fisier"
 
@@ -120,12 +126,12 @@ msgstr "_Sursa HTML"
 msgid "_Plain Source"
 msgstr "_Sursa Simpla"
 
-#: ../src/editor/slib-editor.c:841 ../ui/xi-menus.glade.h:141
+#: ../src/editor/slib-editor.c:841 ../ui/xi-menus.glade.h:17
 msgid "_View"
 msgstr "_Vizualizare"
 
-#: ../src/editor/slib-editor.c:852 ../ui/editor_note.xml.h:11
-#: ../ui/editor_studypad.xml.h:16
+#: ../src/editor/slib-editor.c:852 ../ui/editor_note.xml.h:16
+#: ../ui/editor_studypad.xml.h:11
 msgid "Save"
 msgstr "Salvare"
 
@@ -133,35 +139,39 @@ msgstr "Salvare"
 msgid "Insert Link"
 msgstr "Inserare Link"
 
-#: ../src/editor/slib-editor.c:1252 ../src/editor/slib-editor.c:1290
+#: ../src/editor/slib-editor.c:1254 ../src/editor/slib-editor.c:1292
+#: ../src/editor/webkit_editor.c:1336 ../src/editor/webkit_editor.c:1374
 msgid "Save the changes to document"
 msgstr "Salveaza schimbarile la document"
 
-#: ../src/editor/slib-editor.c:1253 ../src/editor/slib-editor.c:1291
+#: ../src/editor/slib-editor.c:1255 ../src/editor/slib-editor.c:1293
+#: ../src/editor/webkit_editor.c:1337 ../src/editor/webkit_editor.c:1375
 msgid "before closing?"
 msgstr "inainte de inchidere?"
 
-#: ../src/editor/slib-editor.c:1260 ../src/editor/slib-editor.c:1298
+#: ../src/editor/slib-editor.c:1262 ../src/editor/slib-editor.c:1300
+#: ../src/editor/webkit_editor.c:1344 ../src/editor/webkit_editor.c:1382
 msgid "If you don't save, changes will be permanently lost."
 msgstr "Daca nu salvezi, schimbarile vor fi pierdute permanent."
 
-#: ../src/editor/slib-editor.c:1289 ../ui/xi-menus.glade.h:43
+#: ../src/editor/slib-editor.c:1291 ../src/editor/webkit_editor.c:1373
+#: ../ui/xi-menus.glade.h:59
 msgid "File"
 msgstr "Fisier"
 
-#: ../src/editor/slib-editor.c:1346
+#: ../src/editor/slib-editor.c:1348 ../src/editor/webkit_editor.c:1423
 msgid "StudyPad"
 msgstr "Caiet de Studiu"
 
-#: ../src/editor/slib-editor.c:1361
+#: ../src/editor/slib-editor.c:1363 ../src/editor/webkit_editor.c:1438
 msgid "Note Editor"
 msgstr "Editor de Note"
 
-#: ../src/editor/slib-editor.c:1377
+#: ../src/editor/slib-editor.c:1379 ../src/editor/webkit_editor.c:1453
 msgid "Prayer List/Journal Editor"
 msgstr "Lista de Rugaciune / Editor Jurnal"
 
-#: ../src/gecko/gecko-html.cpp:177 ../src/gnome2/html.c:162
+#: ../src/gecko/gecko-html.cpp:177
 msgid "Unlock "
 msgstr "Deschide "
 
@@ -195,11 +205,11 @@ msgstr "O eroare a avut loc in timpul tiparirii"
 msgid "It was not possible to print your document: %s"
 msgstr "Nu s-a putut tiparii documentu tau: %s"
 
-#: ../src/gnome2/about_modules.c:189
+#: ../src/gnome2/about_modules.c:143
 msgid "About Sword Module"
 msgstr "Despre Modului Sword"
 
-#: ../src/gnome2/about_modules.c:395 ../src/gnome2/mod_mgr.c:271
+#: ../src/gnome2/about_modules.c:347 ../src/gnome2/mod_mgr.c:322
 msgid "The module has no About information."
 msgstr "Modului nu are informatii descriptive."
 
@@ -215,7 +225,7 @@ msgid ""
 " Books can be downloaded from the SWORD Project."
 msgstr ""
 
-#: ../src/gnome2/about_sword.c:105
+#: ../src/gnome2/about_sword.c:106
 msgid "The SWORD Project"
 msgstr "Proiectul SWORD"
 
@@ -247,12 +257,12 @@ msgstr "Vezi TRANSLATION-HOWTO din sursa Xiphos"
 msgid "Xiphos development"
 msgstr "Dezvoltarea Xiphos"
 
-#: ../src/gnome2/about_xiphos.c:133
+#: ../src/gnome2/about_xiphos.c:122
 #, fuzzy
-msgid "Copyright © 2000-2011 Xiphos Development Team"
+msgid "Copyright © 2000-2013 Xiphos Development Team"
 msgstr "Copyright 2000-2009 Echipa de Developeri Xiphos"
 
-#: ../src/gnome2/about_xiphos.c:136
+#: ../src/gnome2/about_xiphos.c:125
 msgid ""
 "(formerly known as GnomeSword)\n"
 "\n"
@@ -266,114 +276,111 @@ msgstr ""
 "Dorim sa multumim lui Troy Friffitts si toti ceilalti care ne-au daruit "
 "Proiectul SWORD."
 
-#: ../src/gnome2/bibletext_dialog.c:312
-msgid "Go to "
-msgstr "Mergi la "
-
 #. info->stock_icon = GTK_STOCK_OPEN;
-#: ../src/gnome2/bookmark_dialog.c:173 ../src/gnome2/bookmarks_menu.c:365
-#: ../src/gnome2/bookmarks_menu.c:660 ../src/gnome2/bookmarks_menu.c:759
-#: ../src/gnome2/bookmarks_treeview.c:134 ../ui/editor_studypad.xml.h:2
-#: ../ui/xi-menus.glade.h:14
+#: ../src/gnome2/bookmark_dialog.c:175 ../src/gnome2/bookmarks_menu.c:369
+#: ../src/gnome2/bookmarks_menu.c:664 ../src/gnome2/bookmarks_menu.c:763
+#: ../src/gnome2/bookmarks_treeview.c:131 ../ui/editor_studypad.xml.h:15
+#: ../ui/xi-menus.glade.h:56
 msgid "Bookmark"
 msgstr "Insemnare"
 
-#: ../src/gnome2/bookmark_dialog.c:175 ../src/gnome2/bookmarks_menu.c:761
-#: ../src/gnome2/bookmarks_treeview.c:135
+#: ../src/gnome2/bookmark_dialog.c:177 ../src/gnome2/bookmarks_menu.c:765
+#: ../src/gnome2/bookmarks_treeview.c:132
 msgid "Enter Folder Name"
 msgstr "Introdu Nume Folder"
 
-#: ../src/gnome2/bookmark_dialog.c:177 ../src/gnome2/bookmarks_menu.c:763
+#: ../src/gnome2/bookmark_dialog.c:179 ../src/gnome2/bookmarks_menu.c:767
 msgid "Folder Name"
 msgstr "Nume Folder"
 
-#: ../src/gnome2/bookmark_dialog.c:178 ../src/gnome2/bookmarks_menu.c:764
-#: ../src/gnome2/bookmarks_treeview.c:137
+#: ../src/gnome2/bookmark_dialog.c:180 ../src/gnome2/bookmarks_menu.c:768
+#: ../src/gnome2/bookmarks_treeview.c:134
 msgid "Folder: "
 msgstr "Folder: "
 
-#: ../src/gnome2/bookmarks_menu.c:208
+#: ../src/gnome2/bookmarks_menu.c:212
 #, fuzzy
 msgid "Specify bookmarks file"
 msgstr "Editeaza obiectul de insemnare"
 
-#: ../src/gnome2/bookmarks_menu.c:351 ../ui/xi-menus.glade.h:36
+#: ../src/gnome2/bookmarks_menu.c:355 ../ui/xi-menus.glade.h:61
 msgid "Edit"
 msgstr "Editare"
 
-#: ../src/gnome2/bookmarks_menu.c:368
+#: ../src/gnome2/bookmarks_menu.c:372
 msgid "Folder name: "
 msgstr "Nume folder: "
 
-#: ../src/gnome2/bookmarks_menu.c:371
+#: ../src/gnome2/bookmarks_menu.c:375
 msgid "Bookmark name: "
 msgstr "Nume insemnare: "
 
-#: ../src/gnome2/bookmarks_menu.c:374 ../src/gnome2/bookmarks_menu.c:668
+#: ../src/gnome2/bookmarks_menu.c:378 ../src/gnome2/bookmarks_menu.c:672
 msgid "Verse: "
 msgstr "Verset: "
 
-#: ../src/gnome2/bookmarks_menu.c:375 ../src/gnome2/bookmarks_menu.c:669
+#: ../src/gnome2/bookmarks_menu.c:379 ../src/gnome2/bookmarks_menu.c:673
 msgid "Module: "
 msgstr "Modul: "
 
-#: ../src/gnome2/bookmarks_menu.c:497
+#: ../src/gnome2/bookmarks_menu.c:501
 msgid "Remove the selected folder"
 msgstr "Scoate folderul selectat"
 
-#: ../src/gnome2/bookmarks_menu.c:499
+#: ../src/gnome2/bookmarks_menu.c:503
 msgid "(and all its contents)?"
 msgstr "(si tot continutul sau)?"
 
-#: ../src/gnome2/bookmarks_menu.c:502
+#: ../src/gnome2/bookmarks_menu.c:506
 msgid "Remove the selected bookmark"
 msgstr "Scoate semnul de carte selectat"
 
-#: ../src/gnome2/bookmarks_menu.c:661
+#: ../src/gnome2/bookmarks_menu.c:665
 msgid "Add"
 msgstr "Adauga"
 
-#: ../src/gnome2/bookmarks_menu.c:667
+#: ../src/gnome2/bookmarks_menu.c:671
 msgid "Label: "
 msgstr "Eticheta: "
 
-#: ../src/gnome2/bookmarks_treeview.c:108 ../src/gnome2/export_bookmarks.c:195
+#: ../src/gnome2/bookmarks_treeview.c:105 ../src/gnome2/export_bookmarks.c:195
 #: ../src/gnome2/export_bookmarks.c:254
 #, c-format
 msgid "Search result: %s"
 msgstr "Rezultate cautare: %s"
 
-#: ../src/gnome2/bookmarks_treeview.c:891 ../src/gnome2/sidebar.c:1447
+#: ../src/gnome2/bookmarks_treeview.c:846 ../src/gnome2/sidebar.c:1430
+#: ../src/gnome2/sidebar.c:1463
 msgid "Bookmarks"
 msgstr "Insemne"
 
-#: ../src/gnome2/cipher_key_dialog.c:61
+#: ../src/gnome2/cipher_key_dialog.c:60
 #, c-format
 msgid "Cipher key for module %s"
 msgstr ""
 
-#: ../src/gnome2/cipher_key_dialog.c:62
+#: ../src/gnome2/cipher_key_dialog.c:61
 msgid "for:"
 msgstr "pentru:"
 
-#: ../src/gnome2/cipher_key_dialog.c:65
+#: ../src/gnome2/cipher_key_dialog.c:64
 msgid "Enter Key: "
 msgstr "Introdu Cheia Cipher: "
 
-#: ../src/gnome2/dialog.c:266
+#: ../src/gnome2/dialog.c:262
 msgid "Close without Saving"
 msgstr "Inchide fara salvare"
 
-#: ../src/gnome2/dialog.c:576
+#: ../src/gnome2/dialog.c:664
 msgid "Xiphos:"
 msgstr "Xiphos:"
 
-#: ../src/gnome2/dialog.c:677
+#: ../src/gnome2/dialog.c:765
 msgid "Close _without Saving"
 msgstr "Inchide _fara Salvare"
 
 #: ../src/gnome2/export_bookmarks.c:197 ../src/gnome2/export_bookmarks.c:256
-#: ../src/gnome2/sidebar.c:1463
+#: ../src/gnome2/sidebar.c:1442 ../src/gnome2/sidebar.c:1479
 #, c-format
 msgid "Verse List"
 msgstr "Lista Verset"
@@ -386,33 +393,23 @@ msgstr ""
 msgid "SearchResults"
 msgstr ""
 
-#: ../src/gnome2/export_dialog.c:290 ../ui/export-dialog.glade.h:21
+#: ../src/gnome2/export_dialog.c:319 ../ui/export-dialog.glade.h:4
 msgid "Please check copyright before exporting!"
 msgstr "Te rog sa verifici drepturile de autor inainte de exportare!"
 
-#: ../src/gnome2/find_dialog.c:203 ../src/gnome2/find_dialog.c:373
+#: ../src/gnome2/find_dialog.c:186 ../src/gnome2/find_dialog.c:344
 msgid "Find"
 msgstr "Cauta"
 
-#: ../src/gnome2/find_dialog.c:222
+#: ../src/gnome2/find_dialog.c:205
 msgid "Enter Word or Phrase"
 msgstr "Introdu Cuvantul sau Fraza"
 
-#: ../src/gnome2/find_dialog.c:238 ../src/gnome2/search_sidebar.c:308
-#: ../ui/search-dialog.glade.h:59
-msgid "Match case"
-msgstr "Potrivire litere"
-
-#: ../src/gnome2/find_dialog.c:245
+#: ../src/gnome2/find_dialog.c:220
 msgid "Search backwards"
 msgstr "Cauta invers"
 
-#: ../src/gnome2/find_dialog.c:254 ../src/gnome2/search_sidebar.c:273
-#: ../ui/search-dialog.glade.h:78
-msgid "Regular expression"
-msgstr "Expresie regulata"
-
-#: ../src/gnome2/find_dialog.c:295
+#: ../src/gnome2/find_dialog.c:266
 msgid "Find Next"
 msgstr "Gaseste Urmatorul"
 
@@ -512,34 +509,34 @@ msgstr "Te rog sa raportezi aceasta eroare echipei Xiphos cu:"
 msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
 msgstr "BUG! Xiphos e pe cale sa se inchida datorita unei erori \"STRDUP\"."
 
-#: ../src/gnome2/main_window.c:795
+#: ../src/gnome2/main_window.c:790
 msgid "Xiphos - Bible Study Software"
 msgstr "Xiphos - Software de Studiu Biblic"
 
-#: ../src/gnome2/main_window.c:852
+#: ../src/gnome2/main_window.c:846
 msgid "Open a new tab"
 msgstr "Deschide un tab nou"
 
-#: ../src/gnome2/main_window.c:932 ../src/gnome2/sidebar.c:620
-#: ../src/gnome2/sidebar.c:626 ../src/main/sidebar.cc:651
+#: ../src/gnome2/main_window.c:926 ../src/gnome2/sidebar.c:627
+#: ../src/gnome2/sidebar.c:633 ../src/main/sidebar.cc:651
 #: ../src/main/sidebar.cc:996 ../src/main/sidebar.cc:997
 #: ../src/main/sidebar.cc:998
 msgid "Standard View"
 msgstr "Vedere Standard"
 
-#: ../src/gnome2/main_window.c:1003
+#: ../src/gnome2/main_window.c:987
 msgid "Commentary View"
 msgstr "Vedere Comentariu"
 
-#: ../src/gnome2/main_window.c:1019
+#: ../src/gnome2/main_window.c:1003
 msgid "Book View"
 msgstr "Vedere Carte"
 
-#: ../src/gnome2/main_window.c:1046
+#: ../src/gnome2/main_window.c:1030
 msgid "Welcome to Xiphos"
 msgstr "Bun venit la Xiphos"
 
-#: ../src/gnome2/menu_popup.c:1223
+#: ../src/gnome2/menu_popup.c:1207
 msgid ""
 "Renaming is not available in Windows.\n"
 "\n"
@@ -559,33 +556,33 @@ msgstr ""
 "Prin urmare, redenumirea comentariului personal\n"
 "nu este disponibila in mediul Windows."
 
-#: ../src/gnome2/menu_popup.c:1242
+#: ../src/gnome2/menu_popup.c:1226
 msgid "Rename Commentary"
 msgstr "Redenumire Comentariu"
 
-#: ../src/gnome2/menu_popup.c:1245
+#: ../src/gnome2/menu_popup.c:1229
 msgid "Choose Commentary Name"
 msgstr "Alege Nume Comentariu"
 
-#: ../src/gnome2/menu_popup.c:1247
+#: ../src/gnome2/menu_popup.c:1231
 msgid "New Name"
 msgstr "Nume Nou"
 
-#: ../src/gnome2/menu_popup.c:1248 ../src/gnome2/treekey-editor.c:137
-#: ../src/gnome2/treekey-editor.c:196 ../src/gnome2/treekey-editor.c:282
-#: ../src/main/prayerlists.cc:243
+#: ../src/gnome2/menu_popup.c:1232 ../src/gnome2/treekey-editor.c:143
+#: ../src/gnome2/treekey-editor.c:202 ../src/gnome2/treekey-editor.c:288
+#: ../src/main/prayerlists.cc:231
 msgid "Name: "
 msgstr "Nume: "
 
-#: ../src/gnome2/menu_popup.c:1258 ../src/main/prayerlists.cc:257
+#: ../src/gnome2/menu_popup.c:1242 ../src/main/prayerlists.cc:245
 msgid "Module names must contain [A-Za-z0-9_] only."
 msgstr "Numele de modul trebuie sa contina doar [A-Za-z0-9_]."
 
-#: ../src/gnome2/menu_popup.c:1265 ../src/main/prayerlists.cc:264
+#: ../src/gnome2/menu_popup.c:1249 ../src/main/prayerlists.cc:252
 msgid "Xiphos already knows a module by that name."
 msgstr "Xiphos cunoaste deja un modul cu acest nume."
 
-#: ../src/gnome2/menu_popup.c:1306
+#: ../src/gnome2/menu_popup.c:1290
 #, c-format
 msgid ""
 "Failed to create new configuration:\n"
@@ -594,7 +591,7 @@ msgstr ""
 "S-a esuat in crearea noii configuratii:\n"
 "%s"
 
-#: ../src/gnome2/menu_popup.c:1315
+#: ../src/gnome2/menu_popup.c:1299
 msgid ""
 "Configuration build error:\n"
 "\n"
@@ -602,7 +599,7 @@ msgstr ""
 "Eroare in cladirea configuratiei:\n"
 "\n"
 
-#: ../src/gnome2/menu_popup.c:2002
+#: ../src/gnome2/menu_popup.c:1885
 msgid "No module in this pane."
 msgstr ""
 
@@ -704,7 +701,7 @@ msgstr "Pregatire pentru eliminare"
 msgid "Removing"
 msgstr "Eliminare"
 
-#: ../src/gnome2/mod_mgr.c:192 ../ui/xi-menus.glade.h:89
+#: ../src/gnome2/mod_mgr.c:192 ../ui/xi-menus.glade.h:144
 msgid "Remove"
 msgstr "Elimina"
 
@@ -776,27 +773,27 @@ msgstr "Stergere index"
 msgid "Deletion"
 msgstr "Stergere"
 
-#: ../src/gnome2/mod_mgr.c:459
+#: ../src/gnome2/mod_mgr.c:510
 msgid "Module Name"
 msgstr "Nume Modul"
 
-#: ../src/gnome2/mod_mgr.c:480
+#: ../src/gnome2/mod_mgr.c:531
 msgid "A checkmark means this module is already installed"
 msgstr "O bifare inseamna ca acest modul este deja instalat"
 
-#: ../src/gnome2/mod_mgr.c:502
+#: ../src/gnome2/mod_mgr.c:553
 msgid "Click the box to work on this module"
 msgstr "Apasa pe casuta pentru a lucra la acest modul"
 
-#: ../src/gnome2/mod_mgr.c:503
+#: ../src/gnome2/mod_mgr.c:554
 msgid "Click the box to select this module for install/update"
 msgstr "Apasa casuta pentru a selecta acest modul pentru instalare/actualizare"
 
-#: ../src/gnome2/mod_mgr.c:522
+#: ../src/gnome2/mod_mgr.c:573
 msgid "Installed"
 msgstr "Instalat"
 
-#: ../src/gnome2/mod_mgr.c:532
+#: ../src/gnome2/mod_mgr.c:583
 msgid ""
 "The index icon means you have built an optimized ('lucene') index for this "
 "module for fast searching (see the Maintenance pane for this function)"
@@ -805,7 +802,7 @@ msgstr ""
 "pentru acest modul pentru cautare rapida (vezi panoul de Intretinere pentru "
 "aceasta functie)"
 
-#: ../src/gnome2/mod_mgr.c:550
+#: ../src/gnome2/mod_mgr.c:601
 msgid ""
 "The lock icon means this module is encrypted, and requires that you purchase "
 "an unlock key from the content owner"
@@ -813,11 +810,11 @@ msgstr ""
 "Iconita de lacat inseamna ca acest modul este encriptate, si necesita ca tu "
 "sa cumperi o cheie de deblocare de la proprietareul acestuia"
 
-#: ../src/gnome2/mod_mgr.c:567 ../ui/xi-menus.glade.h:1
+#: ../src/gnome2/mod_mgr.c:618 ../ui/xi-menus.glade.h:55
 msgid "About"
 msgstr "Despre"
 
-#: ../src/gnome2/mod_mgr.c:587
+#: ../src/gnome2/mod_mgr.c:638
 msgid ""
 "The refresh icon means the Installed module is older than the newer "
 "Available module: You should update the module"
@@ -825,19 +822,19 @@ msgstr ""
 "Iconita de reimprospatare inseamna ca modulul Instalat este mai vechi decat "
 "modului Disponibil mai nou: Ar trebui sa actualizezi modului"
 
-#: ../src/gnome2/mod_mgr.c:599
+#: ../src/gnome2/mod_mgr.c:650
 msgid "Available"
 msgstr "Disponibil"
 
-#: ../src/gnome2/mod_mgr.c:608
+#: ../src/gnome2/mod_mgr.c:659
 msgid "Size"
 msgstr "Marime"
 
-#: ../src/gnome2/mod_mgr.c:617
+#: ../src/gnome2/mod_mgr.c:668
 msgid "Description"
 msgstr "Descriere"
 
-#: ../src/gnome2/mod_mgr.c:764
+#: ../src/gnome2/mod_mgr.c:815
 #, c-format
 msgid ""
 "`mkdir %s' failed:\n"
@@ -846,33 +843,33 @@ msgstr ""
 "`mkdir %s' a esuat:\n"
 "%s."
 
-#: ../src/gnome2/mod_mgr.c:786
+#: ../src/gnome2/mod_mgr.c:837
 msgid " archived in: \n"
 msgstr " arhivat in: \n"
 
-#: ../src/gnome2/mod_mgr.c:841
+#: ../src/gnome2/mod_mgr.c:892
 msgid "Journals and prayer lists cannot be indexed."
 msgstr "Jurnalele si listele de rugaciune nu pot fi indexate."
 
-#: ../src/gnome2/mod_mgr.c:862
+#: ../src/gnome2/mod_mgr.c:913
 #, c-format
 msgid "%s failed"
 msgstr "%s a esuat"
 
-#: ../src/gnome2/mod_mgr.c:865 ../src/gnome2/mod_mgr.c:1619
+#: ../src/gnome2/mod_mgr.c:916 ../src/gnome2/mod_mgr.c:1670
 msgid "Finished"
 msgstr "Terminat"
 
-#: ../src/gnome2/mod_mgr.c:1033 ../src/gnome2/mod_mgr.c:1035
-#: ../src/gnome2/mod_mgr.c:1137 ../src/gnome2/mod_mgr.c:1172
-#: ../src/gnome2/mod_mgr.c:1174 ../src/gnome2/utilities.c:457
-#: ../src/gnome2/utilities.c:523 ../src/gnome2/utilities.c:525
-#: ../src/gnome2/utilities.c:1090 ../src/main/sidebar.cc:830
+#: ../src/gnome2/mod_mgr.c:1084 ../src/gnome2/mod_mgr.c:1086
+#: ../src/gnome2/mod_mgr.c:1188 ../src/gnome2/mod_mgr.c:1223
+#: ../src/gnome2/mod_mgr.c:1225 ../src/gnome2/utilities.c:472
+#: ../src/gnome2/utilities.c:538 ../src/gnome2/utilities.c:540
+#: ../src/gnome2/utilities.c:1105 ../src/main/sidebar.cc:830
 #: ../src/main/sidebar.cc:902 ../src/main/sidebar.cc:904
 msgid "Unknown"
 msgstr "Necunoscut"
 
-#: ../src/gnome2/mod_mgr.c:1337
+#: ../src/gnome2/mod_mgr.c:1388
 #, c-format
 msgid ""
 "Repository:\n"
@@ -881,7 +878,7 @@ msgstr ""
 "Repozitoriu:\n"
 "%s"
 
-#: ../src/gnome2/mod_mgr.c:1349
+#: ../src/gnome2/mod_mgr.c:1400
 msgid ""
 "Categorized by\n"
 "Module Type"
@@ -889,54 +886,54 @@ msgstr ""
 "Categorizat dupa\n"
 "Tip Modul"
 
-#: ../src/gnome2/mod_mgr.c:1354 ../src/gnome2/utilities.c:591
+#: ../src/gnome2/mod_mgr.c:1405 ../src/gnome2/utilities.c:606
 #: ../src/main/sidebar.cc:980 ../src/main/sidebar.cc:982
 msgid "Biblical Texts"
 msgstr "Texte Biblice"
 
-#: ../src/gnome2/mod_mgr.c:1358 ../src/gnome2/utilities.c:598
+#: ../src/gnome2/mod_mgr.c:1409 ../src/gnome2/utilities.c:613
 #: ../src/main/sidebar.cc:663 ../src/main/sidebar.cc:1005
-#: ../src/main/sidebar.cc:1007 ../ui/prefs.glade.h:38
+#: ../src/main/sidebar.cc:1007 ../ui/prefs.glade.h:41
 msgid "Commentaries"
 msgstr "Comentarii"
 
-#: ../src/gnome2/mod_mgr.c:1362 ../src/gnome2/utilities.c:606
+#: ../src/gnome2/mod_mgr.c:1413 ../src/gnome2/utilities.c:621
 #: ../src/main/sidebar.cc:1014 ../src/main/sidebar.cc:1016
 msgid "Dictionaries"
 msgstr "Dictionare"
 
-#: ../src/gnome2/mod_mgr.c:1366 ../src/gnome2/utilities.c:613
+#: ../src/gnome2/mod_mgr.c:1417 ../src/gnome2/utilities.c:628
 #: ../src/main/sidebar.cc:1023 ../src/main/sidebar.cc:1025
 msgid "Glossaries"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1370 ../src/gnome2/utilities.c:620
+#: ../src/gnome2/mod_mgr.c:1421 ../src/gnome2/utilities.c:635
 #: ../src/main/sidebar.cc:1032 ../src/main/sidebar.cc:1034
 msgid "Daily Devotionals"
 msgstr "Devotionale Zilnice"
 
-#: ../src/gnome2/mod_mgr.c:1374 ../src/gnome2/utilities.c:627
+#: ../src/gnome2/mod_mgr.c:1425 ../src/gnome2/utilities.c:642
 #: ../src/main/sidebar.cc:673 ../src/main/sidebar.cc:1041
 #: ../src/main/sidebar.cc:1043
 msgid "General Books"
 msgstr "Carti Generale"
 
-#: ../src/gnome2/mod_mgr.c:1378 ../src/gnome2/utilities.c:634
+#: ../src/gnome2/mod_mgr.c:1429 ../src/gnome2/utilities.c:649
 #: ../src/main/sidebar.cc:1050 ../src/main/sidebar.cc:1052
 msgid "Maps"
 msgstr "Harti"
 
-#: ../src/gnome2/mod_mgr.c:1382 ../src/gnome2/utilities.c:641
+#: ../src/gnome2/mod_mgr.c:1433 ../src/gnome2/utilities.c:656
 #: ../src/main/sidebar.cc:1059 ../src/main/sidebar.cc:1061
 msgid "Images"
 msgstr "Imagini"
 
-#: ../src/gnome2/mod_mgr.c:1386 ../src/gnome2/utilities.c:648
+#: ../src/gnome2/mod_mgr.c:1437 ../src/gnome2/utilities.c:663
 #: ../src/main/sidebar.cc:1068 ../src/main/sidebar.cc:1070
 msgid "Cult/Unorthodox"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1394
+#: ../src/gnome2/mod_mgr.c:1445
 msgid ""
 "Categorized by\n"
 "Availability"
@@ -944,95 +941,95 @@ msgstr ""
 "Categorizat dupa\n"
 "Disponibilitate"
 
-#: ../src/gnome2/mod_mgr.c:1399
+#: ../src/gnome2/mod_mgr.c:1450
 msgid "Updates"
 msgstr "Actualizari"
 
-#: ../src/gnome2/mod_mgr.c:1403
+#: ../src/gnome2/mod_mgr.c:1454
 msgid "Uninstalled"
 msgstr "Dezinstalat"
 
-#: ../src/gnome2/mod_mgr.c:1407 ../src/gnome2/sidebar.c:636
-#: ../src/gnome2/utilities.c:656 ../src/main/prayerlists.cc:241
+#: ../src/gnome2/mod_mgr.c:1458 ../src/gnome2/sidebar.c:643
+#: ../src/gnome2/utilities.c:671 ../src/main/prayerlists.cc:229
 #: ../src/main/sidebar.cc:1078 ../src/main/sidebar.cc:1080
 msgid "Prayer List/Journal"
 msgstr "Lista/Jurnal de Rugaciune"
 
-#: ../src/gnome2/mod_mgr.c:1603
+#: ../src/gnome2/mod_mgr.c:1654
 msgid "Refreshing from remote source"
 msgstr "Reimprospatare din sursa indepartata"
 
-#: ../src/gnome2/mod_mgr.c:1613
+#: ../src/gnome2/mod_mgr.c:1664
 msgid "Remote source not found"
 msgstr "Sursa indepartata nu s-a gasit"
 
-#: ../src/gnome2/mod_mgr.c:1683
+#: ../src/gnome2/mod_mgr.c:1734
 msgid "Configure"
 msgstr "Configurare"
 
-#: ../src/gnome2/mod_mgr.c:1714
+#: ../src/gnome2/mod_mgr.c:1765
 msgid "Type"
 msgstr "Tip"
 
-#: ../src/gnome2/mod_mgr.c:1721
+#: ../src/gnome2/mod_mgr.c:1772
 msgid "Caption"
 msgstr "Legenda"
 
-#: ../src/gnome2/mod_mgr.c:1729
+#: ../src/gnome2/mod_mgr.c:1780
 msgid "Source"
 msgstr "Sursa"
 
-#: ../src/gnome2/mod_mgr.c:1737
+#: ../src/gnome2/mod_mgr.c:1788
 msgid "Directory"
 msgstr "Director"
 
-#: ../src/gnome2/mod_mgr.c:1745
+#: ../src/gnome2/mod_mgr.c:1796
 msgid "User"
 msgstr "User"
 
-#: ../src/gnome2/mod_mgr.c:1753
+#: ../src/gnome2/mod_mgr.c:1804
 msgid "Password"
 msgstr "Parola"
 
-#: ../src/gnome2/mod_mgr.c:1761
+#: ../src/gnome2/mod_mgr.c:1812
 msgid "UID"
 msgstr "UID"
 
-#: ../src/gnome2/mod_mgr.c:1778
+#: ../src/gnome2/mod_mgr.c:1829
 msgid "Module Sources"
 msgstr "Surse Module"
 
-#: ../src/gnome2/mod_mgr.c:1781
+#: ../src/gnome2/mod_mgr.c:1832
 msgid "Add/Remove"
 msgstr "Adauga/Elimina"
 
-#: ../src/gnome2/mod_mgr.c:1783
+#: ../src/gnome2/mod_mgr.c:1834
 msgid "Choose"
 msgstr "Alege"
 
-#: ../src/gnome2/mod_mgr.c:1787 ../src/gnome2/preferences_dialog.c:1811
-#: ../src/gnome2/sidebar.c:1471
+#: ../src/gnome2/mod_mgr.c:1838 ../src/gnome2/preferences_dialog.c:1932
+#: ../src/gnome2/sidebar.c:1448 ../src/gnome2/sidebar.c:1487
 msgid "Modules"
 msgstr "Module"
 
-#: ../src/gnome2/mod_mgr.c:1789
+#: ../src/gnome2/mod_mgr.c:1840
 msgid "Install/Update"
 msgstr "Instalare/Actualizare"
 
-#: ../src/gnome2/mod_mgr.c:1791
+#: ../src/gnome2/mod_mgr.c:1842
 msgid "Maintenance"
 msgstr "Intretinere"
 
-#: ../src/gnome2/mod_mgr.c:2025
+#: ../src/gnome2/mod_mgr.c:2078
 msgid "Please Refresh"
 msgstr "Te rog Reimprospateaza"
 
-#: ../src/gnome2/mod_mgr.c:2026
+#: ../src/gnome2/mod_mgr.c:2079
 msgid "Your module list is not up to date!"
 msgstr "Lista ta de module nu este actualizata!"
 
 #. Zero Bibles is just not workable in Xiphos.
-#: ../src/gnome2/mod_mgr.c:2329
+#: ../src/gnome2/mod_mgr.c:2398
 msgid ""
 "You have uninstalled your last Bible.\n"
 "Xiphos requires at least one."
@@ -1040,7 +1037,7 @@ msgstr ""
 "Ai dezinstalat ultima Biblie folosita. \n"
 "Xiphos are nevoie de cel putin una."
 
-#: ../src/gnome2/mod_mgr.c:2335
+#: ../src/gnome2/mod_mgr.c:2404
 msgid ""
 "There are still no Bibles installed.\n"
 "Xiphos cannot continue without one."
@@ -1048,193 +1045,193 @@ msgstr ""
 "Inca nu sunt Biblii instalate. \n"
 "Xiphos nu poate continua fara nici una."
 
-#: ../src/gnome2/mod_mgr.c:2425
+#: ../src/gnome2/mod_mgr.c:2497
 msgid "Standard remote sources have been loaded."
 msgstr "Sursele standard indepartate au fost incarcate."
 
-#: ../src/gnome2/mod_mgr.c:2431
+#: ../src/gnome2/mod_mgr.c:2503
 msgid "Could not load standard sources from CrossWire."
 msgstr "Nu s-au putut incarca sursele standard de la CrossWire."
 
-#: ../src/gnome2/mod_mgr.c:2599 ../src/gnome2/mod_mgr.c:2845
+#: ../src/gnome2/mod_mgr.c:2671 ../src/gnome2/mod_mgr.c:2917
 msgid "Remove the selected source"
 msgstr "Elimina sursa selectata"
 
-#: ../src/gnome2/mod_mgr.c:2659
+#: ../src/gnome2/mod_mgr.c:2731
 msgid "Enter a remote source"
 msgstr "Introdu o sursa indepartata"
 
-#: ../src/gnome2/mod_mgr.c:2663
+#: ../src/gnome2/mod_mgr.c:2735
 msgid "Caption:"
 msgstr "Legenda:"
 
-#: ../src/gnome2/mod_mgr.c:2664
+#: ../src/gnome2/mod_mgr.c:2736
 msgid "Type:"
 msgstr "Tip"
 
-#: ../src/gnome2/mod_mgr.c:2665
+#: ../src/gnome2/mod_mgr.c:2737
 msgid "Host:"
 msgstr "Gazda:"
 
-#: ../src/gnome2/mod_mgr.c:2666
+#: ../src/gnome2/mod_mgr.c:2738
 msgid "Directory:"
 msgstr "Director:"
 
-#: ../src/gnome2/mod_mgr.c:2667
+#: ../src/gnome2/mod_mgr.c:2739
 msgid "User (optional):"
 msgstr "User (optional)"
 
-#: ../src/gnome2/mod_mgr.c:2668
+#: ../src/gnome2/mod_mgr.c:2740
 msgid "Password (optional):"
 msgstr "Parola (optional):"
 
 #. this can happen at most once
-#: ../src/gnome2/mod_mgr.c:2695
+#: ../src/gnome2/mod_mgr.c:2767
 msgid "A source by that name already exists."
 msgstr "O sursa cu acel nume deja exista."
 
-#: ../src/gnome2/mod_mgr.c:2842
+#: ../src/gnome2/mod_mgr.c:2914
 msgid "Delete a remote source"
 msgstr "Sterge o sursa indepartata"
 
-#: ../src/gnome2/mod_mgr.c:3390
+#: ../src/gnome2/mod_mgr.c:3419
 #, fuzzy
 msgid "[no module]"
 msgstr "Intregul modul"
 
-#: ../src/gnome2/navbar_book.c:362 ../src/gnome2/navbar_book_dialog.c:304
+#: ../src/gnome2/navbar_book.c:363 ../src/gnome2/navbar_book_dialog.c:304
 msgid "Go outward, to the section containing this one"
 msgstr "Mergi in afara, la sectiunea ce contine aceasta"
 
-#: ../src/gnome2/navbar_book.c:377 ../src/gnome2/navbar_book_dialog.c:319
+#: ../src/gnome2/navbar_book.c:378 ../src/gnome2/navbar_book_dialog.c:319
 msgid "Go to previous item"
 msgstr "Mergi la obiectul anterior"
 
-#: ../src/gnome2/navbar_book.c:391 ../src/gnome2/navbar_book_dialog.c:333
+#: ../src/gnome2/navbar_book.c:392 ../src/gnome2/navbar_book_dialog.c:333
 msgid "Go to next item"
 msgstr "Mergi la obiectul urmator"
 
-#: ../src/gnome2/navbar_book.c:405 ../src/gnome2/navbar_book_dialog.c:347
+#: ../src/gnome2/navbar_book.c:406 ../src/gnome2/navbar_book_dialog.c:347
 msgid "Go inward, to the first subsection"
 msgstr "Mergi in interior, la prima sub-sectiune"
 
-#: ../src/gnome2/navbar_versekey_dialog.c:898
-#: ../src/gnome2/navbar_versekey_editor.c:905
-#: ../src/gnome2/navbar_versekey_parallel.c:847
+#: ../src/gnome2/navbar_versekey_dialog.c:888
+#: ../src/gnome2/navbar_versekey_editor.c:929
+#: ../src/gnome2/navbar_versekey_parallel.c:840
 msgid "Synchronize this window's scrolling with the main window"
 msgstr ""
 
-#: ../src/gnome2/parallel_dialog.c:378 ../src/gnome2/preferences_dialog.c:1818
+#: ../src/gnome2/parallel_dialog.c:356 ../src/gnome2/preferences_dialog.c:1939
 msgid "Parallel"
 msgstr "Paralel"
 
-#: ../src/gnome2/parallel_view.c:119
+#: ../src/gnome2/parallel_view.c:115
 msgid "Detach/Attach"
 msgstr "Detaseaza/Ataseaza"
 
-#: ../src/gnome2/parallel_view.c:125 ../ui/xi-menus.glade.h:61
+#: ../src/gnome2/parallel_view.c:121 ../ui/xi-menus.glade.h:64
 msgid "Module Options"
 msgstr "Optiuni Modul"
 
-#: ../src/gnome2/parallel_view.c:267 ../src/gnome2/sidebar.c:619
-#: ../src/gnome2/sidebar.c:625 ../src/gnome2/tabbed_browser.c:252
+#: ../src/gnome2/parallel_view.c:215 ../src/gnome2/sidebar.c:626
+#: ../src/gnome2/sidebar.c:632 ../src/gnome2/tabbed_browser.c:251
 #: ../src/main/sidebar.cc:632 ../src/main/sidebar.cc:988
 #: ../src/main/sidebar.cc:989 ../src/main/sidebar.cc:990
 msgid "Parallel View"
 msgstr "Vedere Paralela"
 
-#: ../src/gnome2/preferences_dialog.c:1331
-#: ../src/gnome2/preferences_dialog.c:1369
-#: ../src/gnome2/preferences_dialog.c:1406
-#: ../src/gnome2/preferences_dialog.c:1441
-#: ../src/gnome2/preferences_dialog.c:1476
-#: ../src/gnome2/preferences_dialog.c:1511
-#: ../src/gnome2/preferences_dialog.c:1546
-#: ../src/gnome2/preferences_dialog.c:1582
-#: ../src/gnome2/preferences_dialog.c:1619
-#: ../src/gnome2/preferences_dialog.c:1671
-#: ../src/gnome2/preferences_dialog.c:2076
+#: ../src/gnome2/preferences_dialog.c:1447
+#: ../src/gnome2/preferences_dialog.c:1485
+#: ../src/gnome2/preferences_dialog.c:1522
+#: ../src/gnome2/preferences_dialog.c:1557
+#: ../src/gnome2/preferences_dialog.c:1592
+#: ../src/gnome2/preferences_dialog.c:1627
+#: ../src/gnome2/preferences_dialog.c:1662
+#: ../src/gnome2/preferences_dialog.c:1698
+#: ../src/gnome2/preferences_dialog.c:1735
+#: ../src/gnome2/preferences_dialog.c:1787
+#: ../src/gnome2/preferences_dialog.c:2214
 msgid "-- Select --"
 msgstr "-- Selecteaza --"
 
-#: ../src/gnome2/preferences_dialog.c:1633
+#: ../src/gnome2/preferences_dialog.c:1749
 msgid "Locale will take effect after restart."
 msgstr "Limba va avea efect dupa restartare."
 
-#: ../src/gnome2/preferences_dialog.c:1708 ../ui/prefs.glade.h:85
+#: ../src/gnome2/preferences_dialog.c:1824 ../ui/prefs.glade.h:1
 msgid "Preferences"
 msgstr "Preferinte"
 
-#: ../src/gnome2/preferences_dialog.c:1790
+#: ../src/gnome2/preferences_dialog.c:1911
+msgid "General"
+msgstr "General"
+
+#: ../src/gnome2/preferences_dialog.c:1918
+msgid "Options"
+msgstr "Optiuni"
+
+#: ../src/gnome2/preferences_dialog.c:1922
 msgid "Fonts"
 msgstr "Fonturi"
 
-#: ../src/gnome2/preferences_dialog.c:1793
+#: ../src/gnome2/preferences_dialog.c:1925
 msgid "Color"
 msgstr "Culoare"
 
-#: ../src/gnome2/preferences_dialog.c:1796
+#: ../src/gnome2/preferences_dialog.c:1928
 #, fuzzy
 msgid "Sizes and Faces"
 msgstr "Taburi si Panouri"
 
-#: ../src/gnome2/preferences_dialog.c:1800
-msgid "General"
-msgstr "General"
-
-#: ../src/gnome2/preferences_dialog.c:1807
-msgid "Options"
-msgstr "Optiuni"
-
-#: ../src/gnome2/preferences_dialog.c:1821
+#: ../src/gnome2/preferences_dialog.c:1942
 msgid "Special"
 msgstr "Special"
 
-#: ../src/gnome2/preferences_dialog.c:2463 ../src/gnome2/search_dialog.c:454
+#: ../src/gnome2/preferences_dialog.c:2601 ../src/gnome2/search_dialog.c:499
 msgid "Clear List?"
 msgstr "Curata Lista?"
 
-#: ../src/gnome2/preferences_dialog.c:2464 ../src/gnome2/search_dialog.c:455
+#: ../src/gnome2/preferences_dialog.c:2602 ../src/gnome2/search_dialog.c:500
 msgid "Are you sure you want to clear the module list?"
 msgstr "Esti sigur ca vrei sa cureti lista de module?"
 
-#: ../src/gnome2/preferences_dialog.c:2509 ../src/main/search_dialog.cc:691
+#: ../src/gnome2/preferences_dialog.c:2647 ../src/main/search_dialog.cc:685
 msgid "Remove Module?"
 msgstr "Elimina Modul?"
 
-#: ../src/gnome2/preferences_dialog.c:2510 ../src/main/search_dialog.cc:692
+#: ../src/gnome2/preferences_dialog.c:2648 ../src/main/search_dialog.cc:686
 msgid "Are you sure you want to remove the selected module?"
 msgstr "Esti sigur ca vrei sa elimini modulul selectat?"
 
-#: ../src/gnome2/search_dialog.c:65 ../src/main/search_dialog.cc:58
-#: ../src/main/search_sidebar.cc:61
+#: ../src/gnome2/search_dialog.c:61 ../src/main/search_dialog.cc:52
+#: ../src/main/search_sidebar.cc:51
 msgid "Searching the "
 msgstr "Cautarea "
 
-#: ../src/gnome2/search_dialog.c:66 ../src/main/search_dialog.cc:59
-#: ../src/main/search_sidebar.cc:62
+#: ../src/gnome2/search_dialog.c:62 ../src/main/search_dialog.cc:53
+#: ../src/main/search_sidebar.cc:52
 msgid " Module"
 msgstr " Modul"
 
-#: ../src/gnome2/search_dialog.c:67 ../src/main/search_dialog.cc:60
-#: ../src/main/search_sidebar.cc:63
+#: ../src/gnome2/search_dialog.c:63 ../src/main/search_dialog.cc:54
+#: ../src/main/search_sidebar.cc:53
 msgid "found in "
 msgstr "gasit i "
 
-#: ../src/gnome2/search_dialog.c:413
+#: ../src/gnome2/search_dialog.c:458
 #, c-format
 msgid "New List %s"
 msgstr ""
 
-#: ../src/gnome2/search_dialog.c:637
+#: ../src/gnome2/search_dialog.c:682
 msgid "The last module list may not be deleted"
 msgstr "Ultima lista de module nu poate fi stearsa"
 
-#: ../src/gnome2/search_dialog.c:655
+#: ../src/gnome2/search_dialog.c:700
 msgid "Delete list?"
 msgstr "Sterge lista?"
 
-#: ../src/gnome2/search_dialog.c:656
+#: ../src/gnome2/search_dialog.c:701
 msgid "Are you sure you want to delete:"
 msgstr "Esti sigur ca vrei sa stergi:"
 
@@ -1254,7 +1251,7 @@ msgstr "Esti sigur ca vrei sa stergi:"
 #. * Return value
 #. *   void
 #.
-#: ../src/gnome2/search_dialog.c:779
+#: ../src/gnome2/search_dialog.c:824
 msgid ""
 "<b>Syntax overview for optimized \"lucene\" searches</b>\n"
 "Search for verses that contain...\n"
@@ -1299,7 +1296,7 @@ msgstr ""
 #. * Return value
 #. *   void
 #.
-#: ../src/gnome2/search_dialog.c:842
+#: ../src/gnome2/search_dialog.c:887
 msgid ""
 "<b>Attribute-based searches</b>\n"
 "Searches for content contained in markup outside the main text. Attributes "
@@ -1317,7 +1314,7 @@ msgid ""
 "accusative singular feminine\" -- see the Robinson module for details."
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:186
+#: ../src/gnome2/search_sidebar.c:185
 msgid ""
 "This is an inclusive (\"AND\") search:\n"
 "Find matches showing all words."
@@ -1326,76 +1323,93 @@ msgstr ""
 "Gaseste potriviri prin aratarea tuturor cuvintelor."
 
 #. button to open advanced search
-#: ../src/gnome2/search_sidebar.c:195
+#: ../src/gnome2/search_sidebar.c:194
 #, fuzzy
 msgid "_Open Advanced Search"
 msgstr "Cautare _Avansata"
 
-#: ../src/gnome2/search_sidebar.c:199
+#: ../src/gnome2/search_sidebar.c:198
 msgid "Open the separate Advanced Search dialog."
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:211
+#: ../src/gnome2/search_sidebar.c:210
 msgid "Search Module"
 msgstr "Cauta Modul"
 
-#: ../src/gnome2/search_sidebar.c:225
+#: ../src/gnome2/search_sidebar.c:224
 msgid "Bible"
 msgstr "Biblie"
 
-#: ../src/gnome2/search_sidebar.c:234 ../ui/prefs.glade.h:40
+#: ../src/gnome2/search_sidebar.c:233 ../ui/prefs.glade.h:92
 msgid "Commentary"
 msgstr "Comentariu"
 
-#: ../src/gnome2/search_sidebar.c:248
+#: ../src/gnome2/search_sidebar.c:247
 msgid "Search Type"
 msgstr "Tip Cautare"
 
-#: ../src/gnome2/search_sidebar.c:262 ../ui/search-dialog.glade.h:66
+#: ../src/gnome2/search_sidebar.c:261 ../ui/search-dialog.glade.h:39
 msgid "Multi word"
 msgstr "Multi cuvant"
 
-#: ../src/gnome2/search_sidebar.c:281 ../ui/search-dialog.glade.h:44
+#: ../src/gnome2/search_sidebar.c:272 ../ui/search-dialog.glade.h:41
+msgid "Regular expression"
+msgstr "Expresie regulata"
+
+#: ../src/gnome2/search_sidebar.c:280 ../ui/search-dialog.glade.h:43
 msgid "Exact phrase"
 msgstr "Fraza exacta"
 
-#: ../src/gnome2/search_sidebar.c:295
+#: ../src/gnome2/search_sidebar.c:294
 msgid "Search Options"
 msgstr "Optiuni Cautare"
 
-#: ../src/gnome2/search_sidebar.c:323
+#: ../src/gnome2/search_sidebar.c:307 ../ui/search-dialog.glade.h:49
+msgid "Match case"
+msgstr "Potrivire litere"
+
+#: ../src/gnome2/search_sidebar.c:322
 msgid "Search Scope"
 msgstr "Proportie Cautare"
 
-#: ../src/gnome2/search_sidebar.c:336
+#: ../src/gnome2/search_sidebar.c:335
 msgid "No scope"
 msgstr "Nici o proportie"
 
-#: ../src/gnome2/search_sidebar.c:346
+#: ../src/gnome2/search_sidebar.c:345
 msgid "Use bounds"
 msgstr "Foloseste limite"
 
-#: ../src/gnome2/search_sidebar.c:355
+#: ../src/gnome2/search_sidebar.c:354
 msgid "Last search"
 msgstr "Ultima cautare"
 
-#: ../src/gnome2/search_sidebar.c:370
+#: ../src/gnome2/search_sidebar.c:369
 msgid "Bounds"
 msgstr "Limite"
 
-#: ../src/gnome2/search_sidebar.c:384
+#: ../src/gnome2/search_sidebar.c:384 ../src/gnome2/search_sidebar.c:413
 msgid "Lower"
 msgstr "Mai jos"
 
-#: ../src/gnome2/search_sidebar.c:391
+#: ../src/gnome2/search_sidebar.c:394 ../src/gnome2/search_sidebar.c:420
 msgid "Upper"
 msgstr "Mai sus"
 
-#: ../src/gnome2/sidebar.c:1455
+#: ../src/gnome2/sidebar.c:848
+#, fuzzy
+msgid "Open module in editor?"
+msgstr "Deschide in editor"
+
+#: ../src/gnome2/sidebar.c:848
+msgid "If no, it will open for display only."
+msgstr ""
+
+#: ../src/gnome2/sidebar.c:1436 ../src/gnome2/sidebar.c:1471
 msgid "Search"
 msgstr "Cauta"
 
-#: ../src/gnome2/sidebar_dialog.c:164 ../src/gnome2/sidebar_dialog.c:173
+#: ../src/gnome2/sidebar_dialog.c:157 ../src/gnome2/sidebar_dialog.c:166
 msgid "Sidebar"
 msgstr "Bara laterala"
 
@@ -1403,25 +1417,73 @@ msgstr "Bara laterala"
 msgid "Powered by the SWORD Project"
 msgstr "Powered by the SWORD Project"
 
-#: ../src/gnome2/tabbed_browser.c:361
+#: ../src/gnome2/tabbed_browser.c:360
 msgid "Can't create tabs dir."
 msgstr ""
 
-#: ../src/gnome2/treekey-editor.c:135 ../src/gnome2/treekey-editor.c:194
-#: ../src/gnome2/treekey-editor.c:280
+#: ../src/gnome2/treekey-editor.c:141 ../src/gnome2/treekey-editor.c:200
+#: ../src/gnome2/treekey-editor.c:286
 msgid "Prayer List/Journal Item"
 msgstr "Obiect de Lista/Jurnal de Rugaciune"
 
-#: ../src/gnome2/treekey-editor.c:136 ../src/gnome2/treekey-editor.c:195
-#: ../src/gnome2/treekey-editor.c:281
+#: ../src/gnome2/treekey-editor.c:142 ../src/gnome2/treekey-editor.c:201
+#: ../src/gnome2/treekey-editor.c:287
 msgid "New name"
 msgstr "Nume nou"
 
-#: ../src/gnome2/treekey-editor.c:251
+#: ../src/gnome2/treekey-editor.c:257
 msgid "Remove the selected item"
 msgstr "Elimina obiectul selectat"
 
-#: ../src/gnome2/utilities.c:2077
+#: ../src/gnome2/utilities.c:82
+msgid "January"
+msgstr "Ianuarie"
+
+#: ../src/gnome2/utilities.c:83
+msgid "February"
+msgstr "Februarie"
+
+#: ../src/gnome2/utilities.c:84
+msgid "March"
+msgstr "Martie"
+
+#: ../src/gnome2/utilities.c:85
+msgid "April"
+msgstr "Aprilie"
+
+#: ../src/gnome2/utilities.c:86
+msgid "May"
+msgstr "Mai"
+
+#: ../src/gnome2/utilities.c:87
+msgid "June"
+msgstr "Iunie"
+
+#: ../src/gnome2/utilities.c:88
+msgid "July"
+msgstr "Iulie"
+
+#: ../src/gnome2/utilities.c:89
+msgid "August"
+msgstr "August"
+
+#: ../src/gnome2/utilities.c:90
+msgid "September"
+msgstr "Septembrie"
+
+#: ../src/gnome2/utilities.c:91
+msgid "October"
+msgstr "Octombrie"
+
+#: ../src/gnome2/utilities.c:92
+msgid "November"
+msgstr "Noiembrie"
+
+#: ../src/gnome2/utilities.c:93
+msgid "December"
+msgstr "Decembrie"
+
+#: ../src/gnome2/utilities.c:2081
 msgid ""
 "An image file's size could not be determined.\n"
 "Xiphos cannot resize images to fit window."
@@ -1431,7 +1493,7 @@ msgstr ""
 "(Sau probabil imaginea e de alt tip decat bmp/gif/jpg/png.)\n"
 "Xiphos nu poate redimensiona imaginile pentru a se potrivi in fereastra."
 
-#: ../src/main/display.cc:238
+#: ../src/main/display.cc:237
 #, c-format
 msgid ""
 "Improperly encoded personal annotation label:\n"
@@ -1440,282 +1502,234 @@ msgstr ""
 "Eticheta de adnotare personnala encodata impropriu:\n"
 "'%s'"
 
-#: ../src/main/display.cc:1026 ../src/main/display.cc:1092
-#: ../src/main/display.cc:1176 ../ui/export-dialog.glade.h:7
+#: ../src/main/display.cc:1031 ../src/main/display.cc:1072
+#: ../src/main/display.cc:1157 ../ui/export-dialog.glade.h:14
 msgid "Chapter"
 msgstr "Capitol"
 
-#: ../src/main/main.c:122
+#: ../src/main/main.c:131
 msgid "Xiphos does not understand more than one argument."
 msgstr "Xiphos nu intelege mai mult de un argument."
 
-#: ../src/main/main.c:168
+#: ../src/main/main.c:245
 #, fuzzy
 msgid "Initiating HTML"
 msgstr "Initializez Gecko"
 
-#: ../src/main/main.c:174
+#: ../src/main/main.c:250
 msgid "Building Interface"
 msgstr "Cladesc Interfata"
 
-#: ../src/main/main.c:178
+#: ../src/main/main.c:253
 msgid "Starting Sword"
 msgstr "Incepe Sword"
 
-#: ../src/main/main.c:182
+#: ../src/main/main.c:256
 msgid "Loading Settings"
 msgstr "Incarcare Setari"
 
-#: ../src/main/main.c:186
+#: ../src/main/main.c:259
 msgid "Displaying Xiphos"
 msgstr "Afisare Xiphos"
 
-#: ../src/main/module_dialogs.cc:188 ../src/main/previewer.cc:95
-#: ../ui/prefs.glade.h:86
+#: ../src/main/module_dialogs.cc:189 ../src/main/previewer.cc:97
+#: ../ui/prefs.glade.h:39
 msgid "Previewer"
 msgstr "Revizuitor"
 
-#: ../src/main/module_dialogs.cc:243 ../src/main/module_dialogs.cc:354
+#: ../src/main/module_dialogs.cc:244 ../src/main/module_dialogs.cc:355
 #: ../src/main/previewer.cc:184
 msgid "Footnote"
 msgstr "Nota de subsol"
 
-#: ../src/main/module_dialogs.cc:249 ../src/main/module_dialogs.cc:359
+#: ../src/main/module_dialogs.cc:250 ../src/main/module_dialogs.cc:360
 #: ../src/main/previewer.cc:196
 msgid "Cross Reference"
 msgstr "Trimitere"
 
-#: ../src/main/module_dialogs.cc:255 ../src/main/module_dialogs.cc:269
-#: ../src/main/module_dialogs.cc:364 ../src/main/module_dialogs.cc:376
+#: ../src/main/module_dialogs.cc:256 ../src/main/module_dialogs.cc:270
+#: ../src/main/module_dialogs.cc:365 ../src/main/module_dialogs.cc:377
 #: ../src/main/previewer.cc:202 ../src/main/previewer.cc:221
 msgid "Strongs"
 msgstr "Strongs"
 
-#: ../src/main/module_dialogs.cc:261 ../src/main/module_dialogs.cc:280
-#: ../src/main/module_dialogs.cc:369 ../src/main/module_dialogs.cc:386
+#: ../src/main/module_dialogs.cc:262 ../src/main/module_dialogs.cc:281
+#: ../src/main/module_dialogs.cc:370 ../src/main/module_dialogs.cc:387
 #: ../src/main/previewer.cc:208 ../src/main/previewer.cc:227
 msgid "Morphology"
 msgstr "Morfologie"
 
-#: ../src/main/module_dialogs.cc:1014 ../src/main/url.cc:518
+#: ../src/main/module_dialogs.cc:1015 ../src/main/url.cc:523
 msgid "Back to "
 msgstr "Inapoi la "
 
-#: ../src/main/parallel_view.cc:381 ../ui/xi-menus.glade.h:108
+#: ../src/main/parallel_view.cc:383 ../ui/xi-menus.glade.h:68
 msgid "Strong's Numbers"
 msgstr "Numere Strong's"
 
-#: ../src/main/parallel_view.cc:391 ../ui/search-dialog.glade.h:52
-#: ../ui/xi-menus.glade.h:44
+#: ../src/main/parallel_view.cc:393 ../ui/search-dialog.glade.h:102
+#: ../ui/xi-menus.glade.h:71
 msgid "Footnotes"
 msgstr "Note de subsol"
 
-#: ../src/main/parallel_view.cc:401 ../ui/search-dialog.glade.h:64
-#: ../ui/xi-menus.glade.h:63
+#: ../src/main/parallel_view.cc:403 ../ui/search-dialog.glade.h:99
+#: ../ui/xi-menus.glade.h:70
 msgid "Morphological Tags"
 msgstr "Etichete Morfologice"
 
-#: ../src/main/parallel_view.cc:411 ../ui/xi-menus.glade.h:48
+#: ../src/main/parallel_view.cc:413 ../ui/xi-menus.glade.h:76
 msgid "Hebrew Vowel Points"
 msgstr "Puncte de Vocale Ebraice"
 
-#: ../src/main/parallel_view.cc:421 ../ui/xi-menus.glade.h:47
+#: ../src/main/parallel_view.cc:423 ../ui/xi-menus.glade.h:77
 msgid "Hebrew Cantillation"
 msgstr "Cantilatie Ebraica"
 
-#: ../src/main/parallel_view.cc:431 ../ui/xi-menus.glade.h:45
+#: ../src/main/parallel_view.cc:433 ../ui/xi-menus.glade.h:75
 msgid "Greek Accents"
 msgstr "Accente Grecesti"
 
-#: ../src/main/parallel_view.cc:441
+#: ../src/main/parallel_view.cc:443
 msgid "Cross-references"
 msgstr "Trimiteri"
 
-#: ../src/main/parallel_view.cc:451 ../ui/xi-menus.glade.h:57
+#: ../src/main/parallel_view.cc:453 ../ui/xi-menus.glade.h:69
 msgid "Lemmas"
 msgstr "Leme"
 
-#: ../src/main/parallel_view.cc:461 ../ui/xi-menus.glade.h:46
+#: ../src/main/parallel_view.cc:463 ../ui/xi-menus.glade.h:66
 msgid "Headings"
 msgstr "Titluri"
 
-#: ../src/main/parallel_view.cc:471
+#: ../src/main/parallel_view.cc:473
 msgid "Morpheme Segmentation"
 msgstr "Segmentare Morfema"
 
-#: ../src/main/parallel_view.cc:485 ../ui/xi-menus.glade.h:117
+#: ../src/main/parallel_view.cc:487 ../ui/xi-menus.glade.h:67
 msgid "Words of Christ in Red"
 msgstr "Cuvintele lui Hristos in Rosu"
 
-#: ../src/main/parallel_view.cc:495 ../ui/xi-menus.glade.h:110
+#: ../src/main/parallel_view.cc:497 ../ui/xi-menus.glade.h:78
 msgid "Transliteration"
 msgstr "Transliteratie"
 
-#: ../src/main/parallel_view.cc:505
+#: ../src/main/parallel_view.cc:507
 msgid "Textual Variants"
 msgstr "Variante Textuale"
 
-#: ../src/main/parallel_view.cc:513 ../ui/xi-menus.glade.h:86
+#: ../src/main/parallel_view.cc:515 ../ui/xi-menus.glade.h:80
 msgid "Primary Reading"
 msgstr "Citirea Primara"
 
-#: ../src/main/parallel_view.cc:522 ../ui/xi-menus.glade.h:101
+#: ../src/main/parallel_view.cc:524 ../ui/xi-menus.glade.h:81
 msgid "Secondary Reading"
 msgstr "Citirea Secundara"
 
-#: ../src/main/parallel_view.cc:531 ../ui/xi-menus.glade.h:9
+#: ../src/main/parallel_view.cc:533 ../ui/xi-menus.glade.h:82
 msgid "All Readings"
 msgstr "Toate Citirile"
 
-#: ../src/main/parallel_view.cc:695
+#: ../src/main/parallel_view.cc:700
 msgid "view context"
 msgstr "vezi contextul"
 
-#: ../src/main/prayerlists.cc:74
-msgid "January"
-msgstr "Ianuarie"
-
-#: ../src/main/prayerlists.cc:75
-msgid "February"
-msgstr "Februarie"
-
-#: ../src/main/prayerlists.cc:76
-msgid "March"
-msgstr "Martie"
-
-#: ../src/main/prayerlists.cc:77
-msgid "April"
-msgstr "Aprilie"
-
-#: ../src/main/prayerlists.cc:78
-msgid "May"
-msgstr "Mai"
-
-#: ../src/main/prayerlists.cc:79
-msgid "June"
-msgstr "Iunie"
-
-#: ../src/main/prayerlists.cc:80
-msgid "July"
-msgstr "Iulie"
-
-#: ../src/main/prayerlists.cc:81
-msgid "August"
-msgstr "August"
-
-#: ../src/main/prayerlists.cc:82
-msgid "September"
-msgstr "Septembrie"
-
-#: ../src/main/prayerlists.cc:83
-msgid "October"
-msgstr "Octombrie"
-
-#: ../src/main/prayerlists.cc:84
-msgid "November"
-msgstr "Noiembrie"
-
-#: ../src/main/prayerlists.cc:85
-msgid "December"
-msgstr "Decembrie"
-
-#: ../src/main/prayerlists.cc:124
+#: ../src/main/prayerlists.cc:112
 msgid "Growth"
 msgstr "Crestere"
 
-#: ../src/main/prayerlists.cc:125
+#: ../src/main/prayerlists.cc:113
 msgid "<b>For Growth</b><br/>"
 msgstr "<b>Pentru Crestere</b><br>"
 
-#: ../src/main/prayerlists.cc:126 ../src/main/prayerlists.cc:383
+#: ../src/main/prayerlists.cc:114 ../src/main/prayerlists.cc:371
 msgid "Salvation"
 msgstr "Mantuire"
 
-#: ../src/main/prayerlists.cc:127
+#: ../src/main/prayerlists.cc:115
 msgid "<b>For Salvation</b><br/>"
 msgstr "<b>Pentru Mantuire</b><br>"
 
-#: ../src/main/prayerlists.cc:128 ../src/main/prayerlists.cc:387
+#: ../src/main/prayerlists.cc:116 ../src/main/prayerlists.cc:375
 msgid "Health"
 msgstr "Sanatate"
 
-#: ../src/main/prayerlists.cc:129
+#: ../src/main/prayerlists.cc:117
 msgid "<b>For Health</b><br/>"
 msgstr "<b>Pentru Sanatate</b><br>"
 
-#: ../src/main/prayerlists.cc:130
+#: ../src/main/prayerlists.cc:118
 msgid "Misc"
 msgstr "Diverse"
 
-#: ../src/main/prayerlists.cc:131
+#: ../src/main/prayerlists.cc:119
 msgid "<b>Miscellaneous</b><br/>"
 msgstr "<b>Diverse</b><br>"
 
-#: ../src/main/prayerlists.cc:139
+#: ../src/main/prayerlists.cc:127
 msgid "Point x"
 msgstr "Punct x"
 
-#: ../src/main/prayerlists.cc:140
+#: ../src/main/prayerlists.cc:128
 msgid "<b>(x)</b><br/>"
 msgstr "<b>(x)</b><br>"
 
-#: ../src/main/prayerlists.cc:141
+#: ../src/main/prayerlists.cc:129
 msgid "Point y"
 msgstr "Punct y"
 
-#: ../src/main/prayerlists.cc:142
+#: ../src/main/prayerlists.cc:130
 msgid "<b>(y)</b><br/>"
 msgstr "<b>(y)</b><br>"
 
-#: ../src/main/prayerlists.cc:143
+#: ../src/main/prayerlists.cc:131
 msgid "Point z"
 msgstr "Punct z"
 
-#: ../src/main/prayerlists.cc:144
+#: ../src/main/prayerlists.cc:132
 msgid "<b>(z)</b><br/>"
 msgstr "<b>(z)</b><br>"
 
-#: ../src/main/prayerlists.cc:152
+#: ../src/main/prayerlists.cc:140
 msgid "Minor Topic 1"
 msgstr "Topic Minor 1"
 
-#: ../src/main/prayerlists.cc:153
+#: ../src/main/prayerlists.cc:141
 msgid "<b>Subtopic 1</b><br/>"
 msgstr "<b>Subtopic 1</b><br>"
 
-#: ../src/main/prayerlists.cc:155
+#: ../src/main/prayerlists.cc:143
 msgid "Minor Topic 2"
 msgstr "Topic Minor 2"
 
-#: ../src/main/prayerlists.cc:156
+#: ../src/main/prayerlists.cc:144
 msgid "<b>Subtopic 2</b><br/>"
 msgstr "<b>Subtopic 2</b><br>"
 
-#: ../src/main/prayerlists.cc:158
+#: ../src/main/prayerlists.cc:146
 msgid "Minor Topic 3"
 msgstr "Topic Minor 3"
 
-#: ../src/main/prayerlists.cc:159
+#: ../src/main/prayerlists.cc:147
 msgid "<b>Subtopic 3</b><br/>"
 msgstr "<b>Subtopic 3</b><br>"
 
-#: ../src/main/prayerlists.cc:161
+#: ../src/main/prayerlists.cc:149
 msgid "Minor Topic 4"
 msgstr "Topic Minor 4"
 
-#: ../src/main/prayerlists.cc:162
+#: ../src/main/prayerlists.cc:150
 msgid "<b>Subtopic 4</b><br/>"
 msgstr "<b>Subtopic 4</b><br>"
 
-#: ../src/main/prayerlists.cc:242
+#: ../src/main/prayerlists.cc:230
 msgid "Name for new prayer list or journal"
 msgstr "Nume pentru lista noua de rugaciune sau jurnal"
 
-#: ../src/main/prayerlists.cc:273
+#: ../src/main/prayerlists.cc:261
 msgid "Xiphos finds that prayer list already."
 msgstr "Xiphos a gasit deja lista aceea de rugaciune."
 
-#: ../src/main/prayerlists.cc:286
+#: ../src/main/prayerlists.cc:274
 #, c-format
 msgid ""
 "Xiphos cannot create module's path:\n"
@@ -1724,19 +1738,19 @@ msgstr ""
 "Xiphos nu poate crea calea modulului:\n"
 "%s"
 
-#: ../src/main/prayerlists.cc:326
+#: ../src/main/prayerlists.cc:314
 msgid "A basic prayer list. \\par\\par Module created by Xiphos."
 msgstr "O lista de rugaciune de baza. \\par\\par Modul cread de Xiphos."
 
-#: ../src/main/prayerlists.cc:327
+#: ../src/main/prayerlists.cc:315
 msgid "BasicPrayerList"
 msgstr "ListaDeRugaciuneDeBaza"
 
-#: ../src/main/prayerlists.cc:341
+#: ../src/main/prayerlists.cc:329
 msgid "MyPrayerList"
 msgstr "ListaMeaDeRugaciune"
 
-#: ../src/main/prayerlists.cc:342
+#: ../src/main/prayerlists.cc:330
 msgid ""
 "<b>People:</b><br/>Bob<br/>Sam<br/>Sue<br/><br/><b>Church:</b><br/>pews<br/"
 ">fellowship<br/>Bibles for missionaries<br/><br/><br/>"
@@ -1744,76 +1758,76 @@ msgstr ""
 "<b>Oameni:</b><br>Bob<br>Sam<br>Sue<br><br><b>Biserica:</"
 "b><br>scaune<br>partasie<br>Biblii pentru misionari<br><br><br>"
 
-#: ../src/main/prayerlists.cc:368
+#: ../src/main/prayerlists.cc:356
 msgid "A subject-based prayer list. \\par\\par Module created by Xiphos."
 msgstr ""
 "O lista de rugaciune bazata pe un subiect. \\par\\par Modul creat de Xiphos."
 
-#: ../src/main/prayerlists.cc:369
+#: ../src/main/prayerlists.cc:357
 msgid "SubjectPrayerList"
 msgstr "SubiectListaRugaciune"
 
-#: ../src/main/prayerlists.cc:384
+#: ../src/main/prayerlists.cc:372
 msgid "Bob<br/>Sam<br/>Sue<br/>John<br/>"
 msgstr "Bob<br>Sam<br>Sue<br>John<br>"
 
-#: ../src/main/prayerlists.cc:385
+#: ../src/main/prayerlists.cc:373
 msgid "Spiritual Growth"
 msgstr "Crestere Spirituala"
 
-#: ../src/main/prayerlists.cc:386
+#: ../src/main/prayerlists.cc:374
 msgid "Mike<br/>Steve<br/>"
 msgstr "Mike<br>Steve<br>"
 
-#: ../src/main/prayerlists.cc:388
+#: ../src/main/prayerlists.cc:376
 msgid "Sue<br/>John<br/>"
 msgstr "Sue<br>John<br>"
 
-#: ../src/main/prayerlists.cc:414
+#: ../src/main/prayerlists.cc:402
 msgid "A monthly prayer list. \\par\\par Module created by Xiphos."
 msgstr "O lista de rugaciune lunara. \\par\\par Modul cread de Xiphos."
 
-#: ../src/main/prayerlists.cc:415
+#: ../src/main/prayerlists.cc:403
 msgid "MonthlyPrayerList"
 msgstr "ListaDeRugaciuneLunara"
 
-#: ../src/main/prayerlists.cc:466
+#: ../src/main/prayerlists.cc:454
 msgid "A daily journal. \\par\\par Module created by Xiphos."
 msgstr "Un jurnal zilnic. \\par\\par Modul cread de Xiphos."
 
-#: ../src/main/prayerlists.cc:467
+#: ../src/main/prayerlists.cc:455
 msgid "DailyJournal"
 msgstr "JurnalZilnic"
 
-#: ../src/main/prayerlists.cc:531
+#: ../src/main/prayerlists.cc:519
 msgid "An outlined topic (e.g. sermon). \\par\\par Module created by Xiphos."
 msgstr "Un topic schitat (ex. predica).  \\par\\par Modul cread de Xiphos."
 
-#: ../src/main/prayerlists.cc:532
+#: ../src/main/prayerlists.cc:520
 msgid "OutlinedTopic"
 msgstr "TopicSchitat"
 
-#: ../src/main/prayerlists.cc:546
+#: ../src/main/prayerlists.cc:534
 msgid "Major Topic A"
 msgstr "Topic Major A"
 
-#: ../src/main/prayerlists.cc:547
+#: ../src/main/prayerlists.cc:535
 msgid "<b>Major Topic A</b><br/>"
 msgstr "<b>Topic Major A</b><br>"
 
-#: ../src/main/prayerlists.cc:549
+#: ../src/main/prayerlists.cc:537
 msgid "Major Topic B"
 msgstr "Topic Major B"
 
-#: ../src/main/prayerlists.cc:550
+#: ../src/main/prayerlists.cc:538
 msgid "<b>Major Topic B</b><br/>"
 msgstr "<b>Topic Major B</b><br>"
 
-#: ../src/main/prayerlists.cc:552
+#: ../src/main/prayerlists.cc:540
 msgid "Major Topic C"
 msgstr "Topic Major C"
 
-#: ../src/main/prayerlists.cc:553
+#: ../src/main/prayerlists.cc:541
 msgid "<b>Major Topic C</b><br/>"
 msgstr "<b>Topic Major C</b><br>"
 
@@ -1821,26 +1835,26 @@ msgstr "<b>Topic Major C</b><br>"
 msgid "User Annotation"
 msgstr "Notarile Userului"
 
-#: ../src/main/search_dialog.cc:199
+#: ../src/main/search_dialog.cc:193
 #, c-format
 msgid "Search result %s: %s"
 msgstr "Rezultat cautare %s: %s"
 
-#: ../src/main/search_dialog.cc:431
+#: ../src/main/search_dialog.cc:425
 msgid "Delete Range?"
 msgstr "Sterge Rang?"
 
-#: ../src/main/search_dialog.cc:432
+#: ../src/main/search_dialog.cc:426
 msgid "Are you sure you want to delete this range?"
 msgstr "Esti sigur ca vrei sa stergi acest rang?"
 
-#: ../src/main/search_dialog.cc:646 ../src/main/search_dialog.cc:1073
-#: ../src/main/search_dialog.cc:1076 ../src/main/search_dialog.cc:1098
-#: ../src/main/search_dialog.cc:1101
+#: ../src/main/search_dialog.cc:640 ../src/main/search_dialog.cc:1062
+#: ../src/main/search_dialog.cc:1065 ../src/main/search_dialog.cc:1087
+#: ../src/main/search_dialog.cc:1090
 msgid "Search: "
 msgstr "Cauta: "
 
-#: ../src/main/search_dialog.cc:1463
+#: ../src/main/search_dialog.cc:1429
 #, c-format
 msgid ""
 "%s:\n"
@@ -1851,16 +1865,16 @@ msgstr ""
 "Nu este un asemenea modul instalat.\n"
 "%s"
 
-#: ../src/main/search_dialog.cc:1465
+#: ../src/main/search_dialog.cc:1431
 msgid "Please adjust the module list."
 msgstr "Te rog sa ajustezi lista de module."
 
-#: ../src/main/search_dialog.cc:1481
+#: ../src/main/search_dialog.cc:1447
 #, c-format
 msgid "No fast-search index exists for %s.%s%s"
 msgstr "Nu exista un index de cautare rapida pentru %s.%s%s"
 
-#: ../src/main/search_dialog.cc:1483
+#: ../src/main/search_dialog.cc:1449
 msgid ""
 "\n"
 "Search on this module is now `multi word'."
@@ -1868,7 +1882,7 @@ msgstr ""
 "\n"
 "Cautarea in acest modul este acum 'multi cuvant'."
 
-#: ../src/main/search_dialog.cc:1484
+#: ../src/main/search_dialog.cc:1450
 msgid ""
 "\n"
 "See the Module Manager, Maintenance pane."
@@ -1876,23 +1890,23 @@ msgstr ""
 "\n"
 "Vezi Managerul de Modul, panoul Intretinere."
 
-#: ../src/main/search_dialog.cc:1546
+#: ../src/main/search_dialog.cc:1512
 msgid "Search finished"
 msgstr "Cautare terminata"
 
-#: ../src/main/search_sidebar.cc:99
+#: ../src/main/search_sidebar.cc:89
 msgid "matches"
 msgstr "potriviri"
 
-#: ../src/main/search_sidebar.cc:217
+#: ../src/main/search_sidebar.cc:207
 msgid "There is no commentary module."
 msgstr ""
 
-#: ../src/main/settings.c:110
+#: ../src/main/settings.c:107
 msgid "$HOME is not set!"
 msgstr "$HOME nu este setat!"
 
-#: ../src/main/settings.c:123
+#: ../src/main/settings.c:120
 #, c-format
 msgid ""
 "Xiphos can not create  .xiphos:\n"
@@ -1905,22 +1919,22 @@ msgstr ""
 "\n"
 "Xiphos nu poate continua."
 
-#: ../src/main/settings.c:136 ../src/main/settings.c:145
-#: ../src/main/settings.c:154
+#: ../src/main/settings.c:133 ../src/main/settings.c:142
+#: ../src/main/settings.c:151
 msgid "can not create "
 msgstr "nu se poate crea "
 
-#: ../src/main/settings.c:184
+#: ../src/main/settings.c:181
 msgid ""
 "Empty settings file -- backup recovery attempted.\n"
 "Some information may have been lost."
 msgstr ""
 
-#: ../src/main/settings.c:186
+#: ../src/main/settings.c:183
 msgid "Empty settings file -- no backup?!? Information lost!"
 msgstr ""
 
-#: ../src/main/settings.c:214
+#: ../src/main/settings.c:211
 msgid ""
 "There are no Bibles installed.\n"
 "Evidently, you declined to install any.\n"
@@ -1936,7 +1950,7 @@ msgstr ""
 "Xiphos nu poate continua,\n"
 "si se va inchide acum."
 
-#: ../src/main/settings.c:217
+#: ../src/main/settings.c:214
 msgid "Bible module installation complete."
 msgstr "Instalarea de modul de Biblie s-a incheiat."
 
@@ -1948,7 +1962,7 @@ msgstr "verset"
 msgid "chapter"
 msgstr "capitol"
 
-#: ../src/main/sword.cc:559
+#: ../src/main/sword.cc:554
 msgid ""
 "Xiphos's file for language\n"
 "abbreviations is missing."
@@ -1956,7 +1970,7 @@ msgstr ""
 "Fisierul Xiphos pentru abreviatii\n"
 "de limba lipseste."
 
-#: ../src/main/sword.cc:566
+#: ../src/main/sword.cc:561
 msgid ""
 "Xiphos's language abbreviation\n"
 "file cannot be opened."
@@ -1964,7 +1978,7 @@ msgstr ""
 "Fisierul de abreviatie de limba\n"
 "din Xiphos nu poate fi deschis."
 
-#: ../src/main/sword.cc:579
+#: ../src/main/sword.cc:574
 msgid ""
 "Xiphos cannot allocate space\n"
 "for language abbreviations."
@@ -1972,7 +1986,7 @@ msgstr ""
 "Xiphos nu poate aloca spatiu\n"
 "pentru abreviatiile de limba."
 
-#: ../src/main/sword.cc:586
+#: ../src/main/sword.cc:581
 msgid ""
 "Xiphos cannot read the\n"
 "language abbreviation file."
@@ -1981,23 +1995,23 @@ msgstr ""
 "fisierul abreviat de limbaj."
 
 #. either we were given a null sys_locale, or it didn't match anything.
-#: ../src/main/sword.cc:668
+#: ../src/main/sword.cc:663
 #, fuzzy, c-format
 msgid ""
 "No matching locale found for `%s'.\n"
 "%s"
 msgstr "Nici o potrivire de limba pentru"
 
-#: ../src/main/sword.cc:670
+#: ../src/main/sword.cc:665
 #, fuzzy
 msgid "Book names and menus may not be translated."
 msgstr "Numele de carti si meniurile nu pot fi translatate"
 
-#: ../src/main/sword.cc:1268
+#: ../src/main/sword.cc:1265
 msgid "Daily devotional was requested, but there are none installed."
 msgstr "Devotionalul zilnic a fost solicitat dar nu este nici unu instalat."
 
-#: ../src/main/sword.cc:1504
+#: ../src/main/sword.cc:1495
 msgid ""
 "<b>Locked Module.</b>\n"
 "\n"
@@ -2015,106 +2029,201 @@ msgstr ""
 msgid "Clear History"
 msgstr "Curata Istoric"
 
-#: ../src/main/url.cc:98
+#: ../src/main/url.cc:103
 msgid "URL not found:"
 msgstr "URL negasit:"
 
-#: ../src/main/url.cc:188
+#: ../src/main/url.cc:193
 #, c-format
 msgid "Xiphos could not execute %s"
 msgstr "Xiphos nu a putut executa %s"
 
-#: ../src/main/url.cc:196
+#: ../src/main/url.cc:201
 msgid "Viewer error:\n"
 msgstr "Eroare vizualizator:\n"
 
-#: ../src/main/url.cc:269
+#: ../src/main/url.cc:274
 #, c-format
 msgid "Show %s in main window"
 msgstr "Arata %s in fereastra principala"
 
-#: ../src/main/xml.c:83 ../src/main/xml.c:457
+#: ../src/main/xml.c:84 ../src/main/xml.c:473 ../src/main/xml.c:564
 #, c-format
 msgid "Document not created successfully. \n"
 msgstr "Documentul nu s-a creat cu succes. \n"
 
-#: ../src/main/xml.c:92
+#: ../src/main/xml.c:93
 msgid "Personal"
 msgstr "Personal"
 
-#: ../src/main/xml.c:93
+#: ../src/main/xml.c:94
 msgid "What must I do to be saved?"
 msgstr "Ce trebuie sa fac pentru a fi mantuit?"
 
-#: ../src/main/xml.c:95 ../src/main/xml.c:96
+#: ../src/main/xml.c:96 ../src/main/xml.c:97
 msgid "Acts 16:31"
 msgstr "Fapte 16:31"
 
-#: ../src/main/xml.c:100 ../src/main/xml.c:101
+#: ../src/main/xml.c:101 ../src/main/xml.c:102
 msgid "Eph 2:8,9"
 msgstr "Ef 2:8,9"
 
-#: ../src/main/xml.c:105 ../src/main/xml.c:106
+#: ../src/main/xml.c:106 ../src/main/xml.c:107
 msgid "Romans 1:16"
 msgstr "Romani 1:16"
 
-#: ../src/main/xml.c:109
+#: ../src/main/xml.c:110
 msgid "What is the Gospel?"
 msgstr "Ce este Evanghelia?"
 
-#: ../src/main/xml.c:111 ../src/main/xml.c:112
+#: ../src/main/xml.c:112 ../src/main/xml.c:113
 msgid "1 Cor 15:1-4"
 msgstr "1 Cor 15:1-4"
 
-#: ../src/main/xml.c:409 ../src/main/xml.c:1167
+#: ../src/main/xml.c:265 ../src/main/xml.c:411 ../src/main/xml.c:1288
 #, c-format
 msgid "Document not parsed successfully. \n"
 msgstr "Documentul nu s-a analizat cu succes. \n"
 
-#: ../src/main/xml.c:415 ../src/main/xml.c:734 ../src/main/xml.c:1048
-#: ../src/main/xml.c:1245
+#: ../src/main/xml.c:271 ../src/main/xml.c:417 ../src/main/xml.c:439
+#: ../src/main/xml.c:859 ../src/main/xml.c:1173 ../src/main/xml.c:1367
 #, c-format
 msgid "empty document \n"
 msgstr "document gol \n"
 
-#: ../src/main/xml.c:421
+#: ../src/main/xml.c:277
 #, c-format
 msgid "wrong type, root node != SwordBookmarks\n"
 msgstr "tip gresit, nodul radacina != InsemneSword\n"
 
-#: ../src/main/xml.c:469
+#: ../src/main/xml.c:423
+#, fuzzy, c-format
+msgid "wrong type, root node != Copy_Export\n"
+msgstr "tip gresit, nod radacina != %s\n"
+
+#: ../src/main/xml.c:492
+#, c-format
+msgid "%s<center>%s<br>Chapter %d</center><br>"
+msgstr ""
+
+#: ../src/main/xml.c:493
+#, c-format
+msgid "<br><center>Chapter %d</center><br>"
+msgstr ""
+
+#: ../src/main/xml.c:494
+#, fuzzy, c-format
+msgid ""
+"%s\n"
+"\n"
+"Chapter %d\n"
+"\n"
+msgstr "Capitol"
+
+#: ../src/main/xml.c:495
+#, fuzzy, c-format
+msgid ""
+"\n"
+"\n"
+"Chapter %d\n"
+"\n"
+msgstr "Capitol"
+
+#: ../src/main/xml.c:501
+#, c-format
+msgid "%s%s: %s Chapter %d<br><br>"
+msgstr ""
+
+#: ../src/main/xml.c:502
+#, c-format
+msgid ""
+"%s: %s Chapter %d\n"
+"\n"
+msgstr ""
+
+#: ../src/main/xml.c:507
+#, c-format
+msgid "&nbsp;&nbsp;[%d]"
+msgstr ""
+
+#: ../src/main/xml.c:508
+#, c-format
+msgid " [%d]"
+msgstr ""
+
+#: ../src/main/xml.c:514
+#, c-format
+msgid "%s%s (%s %d:%d%s)</body></html>"
+msgstr ""
+
+#: ../src/main/xml.c:515
+#, c-format
+msgid "%s(%s %d:%d%s)%s </body></html>"
+msgstr ""
+
+#: ../src/main/xml.c:516
+#, c-format
+msgid "%s (%s %d:%d%s)"
+msgstr ""
+
+#: ../src/main/xml.c:517
+#, c-format
+msgid "(%s %d:%d%s) %s"
+msgstr ""
+
+#: ../src/main/xml.c:523
+#, c-format
+msgid " %s%s"
+msgstr ""
+
+#: ../src/main/xml.c:524 ../src/main/xml.c:526
+#, c-format
+msgid "%s(%s %d:%d-%d%s)"
+msgstr ""
+
+#: ../src/main/xml.c:525
+#, c-format
+msgid "(%s %d:%d-%d%s)<br>"
+msgstr ""
+
+#: ../src/main/xml.c:527
+#, c-format
+msgid "(%s %d:%d-%d%s)\n"
+msgstr ""
+
+#: ../src/main/xml.c:576
 msgid "Old Testament"
 msgstr "Vechiul Testament"
 
-#: ../src/main/xml.c:470
+#: ../src/main/xml.c:577
 msgid "Gen - Mal"
 msgstr "Gen - Mal"
 
-#: ../src/main/xml.c:475
+#: ../src/main/xml.c:582
 msgid "New Testament"
 msgstr "Noul Testament"
 
-#: ../src/main/xml.c:476
+#: ../src/main/xml.c:583
 msgid "Mat - Rev"
 msgstr "Mat - Apoc"
 
-#: ../src/main/xml.c:482
+#: ../src/main/xml.c:589
 msgid "Sample Module List"
 msgstr "Mostra de Lista Module"
 
-#: ../src/main/xml.c:740 ../src/main/xml.c:1054
+#: ../src/main/xml.c:865 ../src/main/xml.c:1179
 #, c-format
 msgid "wrong type, root node != %s\n"
 msgstr "tip gresit, nod radacina != %s\n"
 
-#: ../src/main/xml.c:1207
+#: ../src/main/xml.c:1329
 #, c-format
 msgid ""
 "Save of settings failed! stat %d, size %d\n"
 "%s"
 msgstr ""
 
-#: ../src/main/xml.c:1209
+#: ../src/main/xml.c:1331
 msgid "Attempting to revert to previous save."
 msgstr ""
 
@@ -2122,316 +2231,341 @@ msgstr ""
 msgid "Add Bookmark"
 msgstr "Adauga Insemn"
 
-#: ../ui/bookmarks.glade.h:2 ../ui/markverse.glade.h:1
+#: ../ui/bookmarks.glade.h:2 ../ui/markverse.glade.h:2
 msgid "Bookmark Dialog"
 msgstr "Dialog de Insemnari"
 
-#: ../ui/bookmarks.glade.h:3
-msgid "Bookmark Folder Treeview"
-msgstr "Folder de Insemne in forma de arbore"
-
-#: ../ui/bookmarks.glade.h:4 ../ui/markverse.glade.h:2
-msgid "Cancel Bookmark"
-msgstr "Anulare Insemnare"
-
-#: ../ui/bookmarks.glade.h:5 ../ui/markverse.glade.h:3
+#: ../ui/bookmarks.glade.h:3 ../ui/markverse.glade.h:7
 msgid "Create new folder"
 msgstr "Creaza un folder nou"
 
-#: ../ui/bookmarks.glade.h:6
-msgid "Label Entry"
-msgstr "Eticheteaza Intrare"
+#: ../ui/bookmarks.glade.h:4 ../ui/markverse.glade.h:8
+#: ../ui/xi-menus.glade.h:106
+msgid "New Folder"
+msgstr "Folder Nou"
+
+#: ../ui/bookmarks.glade.h:5
+msgid "New ..."
+msgstr "Nou ..."
+
+#: ../ui/bookmarks.glade.h:6 ../ui/markverse.glade.h:11
+msgid "Cancel Bookmark"
+msgstr "Anulare Insemnare"
 
 #: ../ui/bookmarks.glade.h:7
 msgid "Label:"
 msgstr "Eticheta:"
 
-#: ../ui/bookmarks.glade.h:8 ../ui/markverse.glade.h:6
-msgid "Module Entry"
-msgstr "Intrare Modul"
+#: ../ui/bookmarks.glade.h:8
+msgid "Label Entry"
+msgstr "Eticheteaza Intrare"
 
-#: ../ui/bookmarks.glade.h:9 ../ui/markverse.glade.h:7
-msgid "Module:"
-msgstr "Modul"
-
-#: ../ui/bookmarks.glade.h:10
-msgid "New ..."
-msgstr "Nou ..."
-
-#: ../ui/bookmarks.glade.h:11 ../ui/markverse.glade.h:8
-#: ../ui/xi-menus.glade.h:64
-msgid "New Folder"
-msgstr "Folder Nou"
-
-#: ../ui/bookmarks.glade.h:12 ../ui/markverse.glade.h:10
-msgid "Verse Entry"
-msgstr "Intrare Verset"
-
-#: ../ui/bookmarks.glade.h:13 ../ui/markverse.glade.h:11
+#: ../ui/bookmarks.glade.h:9 ../ui/markverse.glade.h:3
 msgid "Verse:"
 msgstr "Verset:"
 
-#: ../ui/editor_note.xml.h:1
-msgid "Delete the current note"
-msgstr "Sterge nota curenta"
+#: ../ui/bookmarks.glade.h:10 ../ui/markverse.glade.h:4
+msgid "Verse Entry"
+msgstr "Intrare Verset"
 
-#: ../ui/editor_note.xml.h:2 ../ui/editor_studypad.xml.h:4
-msgid "E_xit"
-msgstr "I_esire"
+#: ../ui/bookmarks.glade.h:11 ../ui/markverse.glade.h:5
+msgid "Module:"
+msgstr "Modul"
 
-#: ../ui/editor_note.xml.h:3 ../ui/editor_studypad.xml.h:5
-msgid "Exit"
-msgstr "Iesire"
+#: ../ui/bookmarks.glade.h:12 ../ui/markverse.glade.h:6
+msgid "Module Entry"
+msgstr "Intrare Modul"
 
-#: ../ui/editor_note.xml.h:4 ../ui/editor_studypad.xml.h:6
+#: ../ui/bookmarks.glade.h:13
+msgid "Bookmark Folder Treeview"
+msgstr "Folder de Insemne in forma de arbore"
+
+#: ../ui/editor_note.xml.h:1 ../ui/editor_studypad.xml.h:1
 msgid "Exit the program"
 msgstr "Iesire din program"
 
-#: ../ui/editor_note.xml.h:5 ../ui/editor_studypad.xml.h:7
-msgid "For_mat"
-msgstr "For_mat"
+#: ../ui/editor_note.xml.h:2 ../ui/editor_studypad.xml.h:2
+msgid "Exit"
+msgstr "Iesire"
 
-#: ../ui/editor_note.xml.h:6 ../ui/editor_studypad.xml.h:8
-msgid "HTML Format switch"
-msgstr "Schimbare format HTML"
-
-#: ../ui/editor_note.xml.h:7 ../ui/editor_studypad.xml.h:9
-msgid "HTML mode"
-msgstr "Mod HTML"
-
-#: ../ui/editor_note.xml.h:8
-msgid "Preview the note to be printed"
-msgstr "Previzualizare nota inainte de tiparire"
-
-#: ../ui/editor_note.xml.h:10
+#: ../ui/editor_note.xml.h:3
 msgid "Print this note"
 msgstr "Tipareste aceasta nota"
 
-#: ../ui/editor_note.xml.h:12
-msgid "Save the current note"
-msgstr "Salveaza nota curenta"
+#: ../ui/editor_note.xml.h:4
+msgid "Preview the note to be printed"
+msgstr "Previzualizare nota inainte de tiparire"
 
-#: ../ui/editor_note.xml.h:13
+#: ../ui/editor_note.xml.h:5 ../ui/editor_studypad.xml.h:5
+msgid "HTML Format switch"
+msgstr "Schimbare format HTML"
+
+#: ../ui/editor_note.xml.h:6 ../ui/editor_studypad.xml.h:6
+msgid "HTML mode"
+msgstr "Mod HTML"
+
+#: ../ui/editor_note.xml.h:7
+msgid "Delete the current note"
+msgstr "Sterge nota curenta"
+
+#: ../ui/editor_note.xml.h:8
 msgid "_Delete Personal Comment"
 msgstr "_Sterge Comentariu Personal"
 
-#: ../ui/editor_note.xml.h:16
+#: ../ui/editor_note.xml.h:10
+msgid "Save the current note"
+msgstr "Salveaza nota curenta"
+
+#: ../ui/editor_note.xml.h:11
 msgid "_Save (Personal Comment)"
 msgstr "_Salveaza (Comentariu Personal)"
 
-#: ../ui/editor_studypad.xml.h:1
-msgid "Add this file to your bookmarks"
-msgstr "Adauga acest fisier la insemnele tale"
+#: ../ui/editor_note.xml.h:14 ../ui/editor_studypad.xml.h:20
+msgid "E_xit"
+msgstr "I_esire"
+
+#: ../ui/editor_note.xml.h:15 ../ui/editor_studypad.xml.h:21
+msgid "For_mat"
+msgstr "For_mat"
 
 #: ../ui/editor_studypad.xml.h:3
-msgid "Create a new document"
-msgstr "Creaza un document nou"
-
-#: ../ui/editor_studypad.xml.h:10
-msgid "New Document"
-msgstr "Document Nou"
-
-#: ../ui/editor_studypad.xml.h:11
-msgid "Open"
-msgstr "Deschide"
-
-#: ../ui/editor_studypad.xml.h:12
-msgid "Open a file in Studypad"
-msgstr "Deschide un fisier in Caietul de Studiu"
-
-#: ../ui/editor_studypad.xml.h:13
-msgid "Preview the document to be printed"
-msgstr "Previzualizare document inainte de tiparire"
-
-#: ../ui/editor_studypad.xml.h:15
 msgid "Print this document"
 msgstr "Tipareste acest document"
 
-#: ../ui/editor_studypad.xml.h:17
-msgid "Save AS"
-msgstr "Salveaza CA"
+#: ../ui/editor_studypad.xml.h:4
+msgid "Preview the document to be printed"
+msgstr "Previzualizare document inainte de tiparire"
 
-#: ../ui/editor_studypad.xml.h:18
+#: ../ui/editor_studypad.xml.h:8
+msgid "Open a file in Studypad"
+msgstr "Deschide un fisier in Caietul de Studiu"
+
+#: ../ui/editor_studypad.xml.h:10
 msgid "Save the current file"
 msgstr "Salveaza fisierul curent"
 
-#: ../ui/editor_studypad.xml.h:19
+#: ../ui/editor_studypad.xml.h:12
 msgid "Save the current file as"
 msgstr "Salveaza fisierul curent ca"
 
-#: ../ui/export-dialog.glade.h:1
-msgid ": "
-msgstr ": "
+#: ../ui/editor_studypad.xml.h:13
+msgid "Save AS"
+msgstr "Salveaza CA"
 
-#: ../ui/export-dialog.glade.h:2
-msgid "<b>Copy</b>"
-msgstr "<b>Copiaza</b>"
+#: ../ui/editor_studypad.xml.h:14
+msgid "Add this file to your bookmarks"
+msgstr "Adauga acest fisier la insemnele tale"
 
-#: ../ui/export-dialog.glade.h:3
-msgid "<b>Export</b>"
-msgstr "<b>Exporta</b>"
+#: ../ui/editor_studypad.xml.h:16
+msgid "Create a new document"
+msgstr "Creaza un document nou"
 
-#: ../ui/export-dialog.glade.h:4
-msgid "<b>Format</b>"
-msgstr "<b>Formatare</b>"
+#: ../ui/editor_studypad.xml.h:17
+msgid "New Document"
+msgstr "Document Nou"
 
-#: ../ui/export-dialog.glade.h:5 ../ui/prefs.glade.h:28
-msgid "Book"
-msgstr "Carte"
-
-#: ../ui/export-dialog.glade.h:6
-msgid "Book Radio Button"
-msgstr "Buton Radio Carte"
-
-#: ../ui/export-dialog.glade.h:8
-msgid "Chapter Radio Button"
-msgstr "Buton Radio Capitol"
-
-#: ../ui/export-dialog.glade.h:9 ../ui/xi-menus.glade.h:20
+#: ../ui/export-dialog.glade.h:1 ../ui/xi-menus.glade.h:58
 msgid "Copy/Export Passage"
 msgstr "Copiaza/Exporta Pasaj"
 
-#: ../ui/export-dialog.glade.h:10
+#: ../ui/export-dialog.glade.h:2
 msgid "Export Passage Cancel"
 msgstr "Anulare Exportare Pasaj"
 
-#: ../ui/export-dialog.glade.h:11
+#: ../ui/export-dialog.glade.h:3
 msgid "Export Passage OK"
 msgstr "OK Exportare Pasaj"
 
-#: ../ui/export-dialog.glade.h:12
+#: ../ui/export-dialog.glade.h:5
+msgid "Version"
+msgstr "Versiune"
+
+#: ../ui/export-dialog.glade.h:6
+msgid ": "
+msgstr ": "
+
+#: ../ui/export-dialog.glade.h:7
+msgid "Key"
+msgstr "Cheie"
+
+#: ../ui/export-dialog.glade.h:8
+msgid "<b>Copy</b>"
+msgstr "<b>Copiaza</b>"
+
+#: ../ui/export-dialog.glade.h:9
+msgid "<b>Export</b>"
+msgstr "<b>Exporta</b>"
+
+#: ../ui/export-dialog.glade.h:10
 msgid "Export complete book"
 msgstr "Exporta toata cartea"
+
+#: ../ui/export-dialog.glade.h:11 ../ui/prefs.glade.h:96
+msgid "Book"
+msgstr "Carte"
+
+#: ../ui/export-dialog.glade.h:12
+msgid "Book Radio Button"
+msgstr "Buton Radio Carte"
 
 #: ../ui/export-dialog.glade.h:13
 msgid "Export complete chapter"
 msgstr "Exporta tot capitolul"
 
-#: ../ui/export-dialog.glade.h:14
+#: ../ui/export-dialog.glade.h:15
+msgid "Chapter Radio Button"
+msgstr "Buton Radio Capitol"
+
+#: ../ui/export-dialog.glade.h:16
 msgid "Export single verse"
 msgstr "Exporta versetul singur"
 
-#: ../ui/export-dialog.glade.h:15
+#: ../ui/export-dialog.glade.h:17
+msgid "Verse"
+msgstr "Verset"
+
+#: ../ui/export-dialog.glade.h:18
+msgid "Verse Radio Button"
+msgstr "Buton Radio Verset"
+
+#: ../ui/export-dialog.glade.h:19
+msgid "Verse range"
+msgstr "Rang verset"
+
+#: ../ui/export-dialog.glade.h:20
+msgid "<b>Format</b>"
+msgstr "<b>Formatare</b>"
+
+#: ../ui/export-dialog.glade.h:21
+msgid "Plain Text"
+msgstr "Text simplu"
+
+#: ../ui/export-dialog.glade.h:22
+msgid "Plain Text Radio Button"
+msgstr "Buton Radio Text Simplu"
+
+#: ../ui/export-dialog.glade.h:23
 msgid "HTML"
 msgstr "HTML"
 
-#: ../ui/export-dialog.glade.h:16
+#: ../ui/export-dialog.glade.h:24
 msgid "HTML Radio Button"
 msgstr "Buton Radio HTML"
 
-#: ../ui/export-dialog.glade.h:17
+#: ../ui/export-dialog.glade.h:25
 msgid ""
 "Indicates whether verse numbers should appear inline in the text for more "
 "than 1 verse."
 msgstr ""
 
-#: ../ui/export-dialog.glade.h:18
-msgid "Key"
-msgstr "Cheie"
-
-#: ../ui/export-dialog.glade.h:19
-msgid "Plain Text"
-msgstr "Text simplu"
-
-#: ../ui/export-dialog.glade.h:20
-msgid "Plain Text Radio Button"
-msgstr "Buton Radio Text Simplu"
-
-#: ../ui/export-dialog.glade.h:22
-msgid "Save Export As"
-msgstr "Salveaza Exportarea Ca"
-
-#: ../ui/export-dialog.glade.h:23
-msgid "Verse"
-msgstr "Verset"
-
-#: ../ui/export-dialog.glade.h:24
-#, fuzzy
-msgid "Verse Number button"
-msgstr "Numar Verset"
-
-#: ../ui/export-dialog.glade.h:25
-msgid "Verse Radio Button"
-msgstr "Buton Radio Verset"
-
 #: ../ui/export-dialog.glade.h:26
-msgid "Verse range"
-msgstr "Rang verset"
-
-#: ../ui/export-dialog.glade.h:27
-msgid "Version"
-msgstr "Versiune"
-
-#: ../ui/export-dialog.glade.h:28
 #, fuzzy
 msgid "_Verse numbers in text"
 msgstr "Marime numar verset"
 
-#: ../ui/markverse.glade.h:4
-msgid "Mark"
-msgstr "Marcare"
+#: ../ui/export-dialog.glade.h:27
+#, fuzzy
+msgid "Verse Number button"
+msgstr "Numar Verset"
 
-#: ../ui/markverse.glade.h:5
+#: ../ui/export-dialog.glade.h:28
+msgid "Indicates whether reference is placed first or last."
+msgstr ""
+
+#: ../ui/export-dialog.glade.h:29
+#, fuzzy
+msgid "Reference last"
+msgstr "Intrare Referinta"
+
+#: ../ui/export-dialog.glade.h:30
+#, fuzzy
+msgid "Reference last button"
+msgstr "Intrare Referinta"
+
+#: ../ui/export-dialog.glade.h:31
+msgid "Indicates whether or not version name is included in reference."
+msgstr ""
+
+#: ../ui/export-dialog.glade.h:32
+#, fuzzy
+msgid "Include Version"
+msgstr "Versiunea Sword"
+
+#: ../ui/export-dialog.glade.h:33
+#, fuzzy
+msgid "Version button"
+msgstr "Buton Radio Verset"
+
+#: ../ui/export-dialog.glade.h:34
+msgid "Save Export As"
+msgstr "Salveaza Exportarea Ca"
+
+#: ../ui/markverse.glade.h:1
 msgid "Mark/Unmark Verse"
 msgstr "Marcare/Nemarcare Verset"
 
 #: ../ui/markverse.glade.h:9
+msgid "Mark"
+msgstr "Marcare"
+
+#: ../ui/markverse.glade.h:10
 msgid "Unmark"
 msgstr "Nemarcare"
 
 #: ../ui/module-manager.glade.h:1
-msgid "<b>Add and Remove Sources</b>"
-msgstr "<b>Adauga si Elimina Surse</b>"
+msgid "Module Manager"
+msgstr "Manager Module"
 
 #: ../ui/module-manager.glade.h:2
-msgid "<b>Install Destination</b>"
-msgstr "<b>Destinatie Instalare</b>"
+#, fuzzy
+msgid "_View Intro"
+msgstr "_Vizualizare"
 
 #: ../ui/module-manager.glade.h:3
-msgid "<b>Install Source</b>"
-msgstr "<b>Sursa Instalare</b>"
+msgid "Open a brief introductory explanation of how the Module Manager works."
+msgstr ""
 
 #: ../ui/module-manager.glade.h:4
-msgid "<b>Module Manager</b>"
-msgstr "<b>Manager Module</b>"
+#, fuzzy
+msgid "_Load Standard"
+msgstr "Incarca Standard"
 
-#. do not translate <b> and </b> they are html formating
+#: ../ui/module-manager.glade.h:5
+msgid ""
+"Load and synchronize the standard set of known repositories, as maintained "
+"at crosswire.org, with your current remote sources."
+msgstr ""
+
 #: ../ui/module-manager.glade.h:6
-msgid "<b>Sword</b>"
-msgstr "<b>Sword</b>"
+msgid ""
+"Refresh Xiphos' knowledge of what modules are available at the selected "
+"remote repository"
+msgstr ""
 
 #: ../ui/module-manager.glade.h:7
-msgid "<b>WARNING:</b> If you live in a persecuted country use with care."
-msgstr ""
-"<b>ATENTIE:</b> Daca traiesti intr-o tara persecutata foloseste cu atentie."
+msgid "_Install"
+msgstr "_Instaleaza"
 
 #: ../ui/module-manager.glade.h:8
-msgid ""
-"<b>Warning:</b> If you live in a persecuted country and do not wish to risk "
-"detection you should NOT use  the remote installation feature! "
-msgstr ""
-"<b>Atentie:</b> Daca traiesti intr-o tara persecutate si nu vrei sa risti "
-"detectarea NU ar trebui sa folosest caracteristica de instalare indepartata! "
+msgid "Install or update the selected modules"
+msgstr "Instalezi aceste module?"
 
 #: ../ui/module-manager.glade.h:9
-msgid "<i>Personal area, for your use only:</i>"
-msgstr "<i>Zona personala, doar pentru folosul tau:</i>"
+msgid "Remove the selected modules from your system"
+msgstr "Elimina modulul selectat din lista"
 
 #: ../ui/module-manager.glade.h:10
-msgid "<i>System area, for all users:</i>"
-msgstr "<i>Zona de sistem, pentru toti userii:</i>"
+msgid "_Archive"
+msgstr "_Arhiveaza"
 
 #: ../ui/module-manager.glade.h:11
-msgid ""
-"Add a custom remote install source. You must know its hostname and the "
-"folder where its repository lives."
-msgstr ""
+#, fuzzy
+msgid "Create a zip archive of the selected modules."
+msgstr "Esti sigur ca vrei sa elimini modulul selectat?"
 
 #: ../ui/module-manager.glade.h:12
-msgid ""
-"Add a local folder as an install source, typically on a cdrom or flash "
-"drive.  Such a folder contains subfolders \"mods.d\" and \"modules\"."
-msgstr ""
+msgid "_Index"
+msgstr "_Index"
 
 #: ../ui/module-manager.glade.h:13
 msgid ""
@@ -2439,155 +2573,220 @@ msgid ""
 msgstr ""
 
 #: ../ui/module-manager.glade.h:14
-msgid "Continue"
-msgstr "Continua"
-
-#: ../ui/module-manager.glade.h:15
-#, fuzzy
-msgid "Create a zip archive of the selected modules."
-msgstr "Esti sigur ca vrei sa elimini modulul selectat?"
-
-#: ../ui/module-manager.glade.h:16
-msgid "Current Remote Sources"
-msgstr "Surse Indepartate Curente"
-
-#: ../ui/module-manager.glade.h:17
-msgid "Current local sources"
-msgstr "Surse locale curente"
-
-#: ../ui/module-manager.glade.h:18
-msgid "Delete the fast-search index of the selected modules."
-msgstr "Sterge indexul de cautare pentru aceste module?"
-
-#: ../ui/module-manager.glade.h:19
-msgid "Home dir"
-msgstr "Dir Home"
-
-#: ../ui/module-manager.glade.h:20
-msgid "Install or update the selected modules"
-msgstr "Instalezi aceste module?"
-
-#: ../ui/module-manager.glade.h:21
-msgid ""
-"Load and synchronize the standard set of known repositories, as maintained "
-"at crosswire.org, with your current remote sources."
-msgstr ""
-
-#: ../ui/module-manager.glade.h:22
-msgid "Local"
-msgstr "Local"
-
-#: ../ui/module-manager.glade.h:23
-msgid "Local Install Folder"
-msgstr "Folderul Instalare Local"
-
-#: ../ui/module-manager.glade.h:24
-msgid "Module Manager"
-msgstr "Manager Module"
-
-#: ../ui/module-manager.glade.h:25
-msgid "Open a brief introductory explanation of how the Module Manager works."
-msgstr ""
-
-#: ../ui/module-manager.glade.h:26
-msgid ""
-"Refresh Xiphos' knowledge of what modules are available at the selected "
-"remote repository"
-msgstr ""
-
-#: ../ui/module-manager.glade.h:27
-msgid "Remote"
-msgstr "Indepartat"
-
-#: ../ui/module-manager.glade.h:28
-msgid "Remove a remote install source."
-msgstr "Sterge o sursa indepartata"
-
-#: ../ui/module-manager.glade.h:29
-msgid "Remove one of your local folders as an install source."
-msgstr ""
-
-#: ../ui/module-manager.glade.h:30
-msgid "Remove the selected modules from your system"
-msgstr "Elimina modulul selectat din lista"
-
-#: ../ui/module-manager.glade.h:31
-msgid "Sword sys dir"
-msgstr "Sword dir sistem"
-
-#: ../ui/module-manager.glade.h:32
-msgid "_Archive"
-msgstr "_Arhiveaza"
-
-#: ../ui/module-manager.glade.h:33
 msgid "_Delete Index"
 msgstr "_Sterge Index"
 
+#: ../ui/module-manager.glade.h:15
+msgid "Delete the fast-search index of the selected modules."
+msgstr "Sterge indexul de cautare pentru aceste module?"
+
+#: ../ui/module-manager.glade.h:16
+msgid "Continue"
+msgstr "Continua"
+
+#. do not translate <b> and </b> they are html formating
+#: ../ui/module-manager.glade.h:18
+msgid "<b>Sword</b>"
+msgstr "<b>Sword</b>"
+
+#: ../ui/module-manager.glade.h:19
+msgid "<b>Module Manager</b>"
+msgstr "<b>Manager Module</b>"
+
+#: ../ui/module-manager.glade.h:20
+msgid "<b>WARNING:</b> If you live in a persecuted country use with care."
+msgstr ""
+"<b>ATENTIE:</b> Daca traiesti intr-o tara persecutata foloseste cu atentie."
+
+#: ../ui/module-manager.glade.h:21
+msgid "<b>Add and Remove Sources</b>"
+msgstr "<b>Adauga si Elimina Surse</b>"
+
+#: ../ui/module-manager.glade.h:22
+msgid "Current local sources"
+msgstr "Surse locale curente"
+
+#: ../ui/module-manager.glade.h:23
+msgid ""
+"Add a local folder as an install source, typically on a cdrom or flash "
+"drive.  Such a folder contains subfolders \"mods.d\" and \"modules\"."
+msgstr ""
+
+#: ../ui/module-manager.glade.h:24
+msgid "Remove one of your local folders as an install source."
+msgstr ""
+
+#: ../ui/module-manager.glade.h:25
+msgid "Current Remote Sources"
+msgstr "Surse Indepartate Curente"
+
+#: ../ui/module-manager.glade.h:26
+msgid ""
+"Add a custom remote install source. You must know its hostname and the "
+"folder where its repository lives."
+msgstr ""
+
+#: ../ui/module-manager.glade.h:27
+msgid "Remove a remote install source."
+msgstr "Sterge o sursa indepartata"
+
+#: ../ui/module-manager.glade.h:28
+msgid "<b>Install Source</b>"
+msgstr "<b>Sursa Instalare</b>"
+
+#: ../ui/module-manager.glade.h:29
+msgid "Local"
+msgstr "Local"
+
+#: ../ui/module-manager.glade.h:30
+msgid "Remote"
+msgstr "Indepartat"
+
+#: ../ui/module-manager.glade.h:31
+msgid "<b>Install Destination</b>"
+msgstr "<b>Destinatie Instalare</b>"
+
+#: ../ui/module-manager.glade.h:32
+msgid "<i>Personal area, for your use only:</i>"
+msgstr "<i>Zona personala, doar pentru folosul tau:</i>"
+
+#: ../ui/module-manager.glade.h:33
+msgid "Home dir"
+msgstr "Dir Home"
+
 #: ../ui/module-manager.glade.h:34
-msgid "_Index"
-msgstr "_Index"
+msgid "<i>System area, for all users:</i>"
+msgstr "<i>Zona de sistem, pentru toti userii:</i>"
 
 #: ../ui/module-manager.glade.h:35
-msgid "_Install"
-msgstr "_Instaleaza"
+msgid "Sword sys dir"
+msgstr "Sword dir sistem"
 
 #: ../ui/module-manager.glade.h:36
-#, fuzzy
-msgid "_Load Standard"
-msgstr "Incarca Standard"
+msgid ""
+"<b>Warning:</b> If you live in a persecuted country and do not wish to risk "
+"detection you should NOT use  the remote installation feature! "
+msgstr ""
+"<b>Atentie:</b> Daca traiesti intr-o tara persecutate si nu vrei sa risti "
+"detectarea NU ar trebui sa folosest caracteristica de instalare indepartata! "
 
 #: ../ui/module-manager.glade.h:37
-#, fuzzy
-msgid "_View Intro"
-msgstr "_Vizualizare"
+msgid "Local Install Folder"
+msgstr "Folderul Instalare Local"
 
 #: ../ui/navbar_versekey.glade.h:1
-msgid "1"
-msgstr "1"
+msgid "Drop down history list"
+msgstr "Lista derulativa cu istoric"
 
 #: ../ui/navbar_versekey.glade.h:2
-msgid "<b>Revelation of John</b>"
-msgstr "<b>Apocalipsa lui Ioan</b>"
+msgid "Choose book to display"
+msgstr "Alege cartea de afisat"
 
 #: ../ui/navbar_versekey.glade.h:3
 msgid "Book Selector Button"
 msgstr "Buton Selector Carte"
 
 #: ../ui/navbar_versekey.glade.h:4
-#, fuzzy
-msgid "Choose Verse to display"
-msgstr "Alege cartea de afisat"
+msgid "<b>Revelation of John</b>"
+msgstr "<b>Apocalipsa lui Ioan</b>"
 
 #: ../ui/navbar_versekey.glade.h:5
-msgid "Choose book to display"
-msgstr "Alege cartea de afisat"
-
-#: ../ui/navbar_versekey.glade.h:6
 #, fuzzy
 msgid "Choose chapter to display"
 msgstr "Alege cartea de afisat"
 
-#: ../ui/navbar_versekey.glade.h:7
-msgid "Drop down history list"
-msgstr "Lista derulativa cu istoric"
-
-#: ../ui/navbar_versekey.glade.h:8
-msgid "Enter a Verse reference in Book 1:1 format and press Return"
-msgstr ""
-
-#: ../ui/navbar_versekey.glade.h:9
-msgid "Reference Entry"
-msgstr "Intrare Referinta"
-
-#: ../ui/navbar_versekey.glade.h:10
+#: ../ui/navbar_versekey.glade.h:6
 msgid "Toggle Chapter Button"
 msgstr "Buton Schimbare Capitol"
 
-#: ../ui/navbar_versekey.glade.h:11
+#: ../ui/navbar_versekey.glade.h:7
+msgid "1"
+msgstr "1"
+
+#: ../ui/navbar_versekey.glade.h:8
+#, fuzzy
+msgid "Choose Verse to display"
+msgstr "Alege cartea de afisat"
+
+#: ../ui/navbar_versekey.glade.h:9
 msgid "Toggle Verse Button"
 msgstr "Buton Schimbare Verset"
 
-#: ../ui/prefs.glade.h:1
+#: ../ui/navbar_versekey.glade.h:10
+msgid "Enter a Verse reference in Book 1:1 format and press Return"
+msgstr ""
+
+#: ../ui/navbar_versekey.glade.h:11
+msgid "Reference Entry"
+msgstr "Intrare Referinta"
+
+#: ../ui/prefs.glade.h:2
+msgid "Cover"
+msgstr "Copertă"
+
+#: ../ui/prefs.glade.h:3
+msgid "<b>Font Colors</b>"
+msgstr "<b>Culori Font</b>"
+
+#: ../ui/prefs.glade.h:4
+msgid "Background"
+msgstr "Fundal"
+
+#: ../ui/prefs.glade.h:5
+msgid "Foreground"
+msgstr "Prim-plan"
+
+#: ../ui/prefs.glade.h:6
+msgid "Current Verse"
+msgstr "Verset Curent"
+
+#: ../ui/prefs.glade.h:7
+msgid "Verse Number"
+msgstr "Numar Verset"
+
+#: ../ui/prefs.glade.h:8
+msgid "Links"
+msgstr "Link-uri"
+
+#: ../ui/prefs.glade.h:9
+msgid "Highlight Foreground"
+msgstr "Marcheaza Prim-Planul"
+
+#: ../ui/prefs.glade.h:10
+msgid "Highlight Background"
+msgstr "Marcheaza Fundalul"
+
+#: ../ui/prefs.glade.h:11
+#, fuzzy
+msgid "Invert color pairs"
+msgstr "Insereaza Insemn"
+
+#: ../ui/prefs.glade.h:12
+msgid "Normal Text"
+msgstr ""
+
+#: ../ui/prefs.glade.h:13
+#, fuzzy
+msgid "Highlight"
+msgstr "Marcheaza Fundalul"
+
+#: ../ui/prefs.glade.h:14
+msgid "Font Colors"
+msgstr "Culori Font"
+
+#: ../ui/prefs.glade.h:15
+msgid "<b>Font Sizes</b>"
+msgstr "<b>Marimi Font</b>"
+
+#: ../ui/prefs.glade.h:16
+msgid "All displayed font sizes are relative to this choice"
+msgstr ""
+
+#: ../ui/prefs.glade.h:17
+msgid "Base font size"
+msgstr "Marime font de baza"
+
+#: ../ui/prefs.glade.h:18
 msgid ""
 "-2\n"
 "-1\n"
@@ -2607,626 +2806,526 @@ msgstr ""
 "+4\n"
 "+5"
 
-#: ../ui/prefs.glade.h:9
-msgid "<b>Font Colors</b>"
-msgstr "<b>Culori Font</b>"
+#: ../ui/prefs.glade.h:26
+msgid "Commonly -1, to make verse numbers less obtrusive"
+msgstr ""
 
-#: ../ui/prefs.glade.h:10
-msgid "<b>Font Sizes</b>"
-msgstr "<b>Marimi Font</b>"
+#: ../ui/prefs.glade.h:27
+msgid "Verse number size"
+msgstr "Marime numar verset"
 
-#: ../ui/prefs.glade.h:11
-msgid "<b>General</b>"
-msgstr "<b>General</b>"
+#: ../ui/prefs.glade.h:28
+msgid ""
+"Name and size choice for any module in a given language; still overridden by "
+"a specific choice on a particular module"
+msgstr ""
 
-#: ../ui/prefs.glade.h:12
-msgid "<b>Main Window Modules</b>"
-msgstr "<b>Module Fereastra Principala</b>"
+#: ../ui/prefs.glade.h:29
+msgid "Font preferences, per language"
+msgstr ""
 
-#: ../ui/prefs.glade.h:13 ../ui/search-dialog.glade.h:5
-msgid "<b>Modules</b>"
-msgstr "<b>Module</b>"
+#: ../ui/prefs.glade.h:30
+#, fuzzy
+msgid "Language Font Combo"
+msgstr "Schimba Combo Carte"
 
-#: ../ui/prefs.glade.h:14
-msgid "<b>Show</b>"
-msgstr "<b>Arata</b>"
+#: ../ui/prefs.glade.h:31
+msgid "Font Misc"
+msgstr "Diverse despre Font"
 
-#: ../ui/prefs.glade.h:15
-msgid "<b>Special Purpose Modules</b>"
-msgstr "<b>Module cu Scop Special</b>"
-
-#: ../ui/prefs.glade.h:16
-msgid "<b>StudyPad default directory</b>"
-msgstr "<b>Directorul implicit al Caietului de Studiu</b>"
-
-#: ../ui/prefs.glade.h:17
+#: ../ui/prefs.glade.h:32
 msgid "<b>Tabs</b>"
 msgstr "<b>Tab-uri</b>"
 
-#: ../ui/prefs.glade.h:18 ../ui/search-dialog.glade.h:15
-msgid "Add Modules"
-msgstr "Adauga Module"
+#: ../ui/prefs.glade.h:33
+msgid "Use tabbed browsing"
+msgstr "Foloseste rasfoire in taburi"
 
-#: ../ui/prefs.glade.h:19
-msgid "All displayed font sizes are relative to this choice"
+#: ../ui/prefs.glade.h:34
+msgid ""
+"Single selection of Bible+commentary+book+dictionary, or many sets of such "
+"selections in a tabbed interface"
 msgstr ""
 
-#: ../ui/prefs.glade.h:20
-#, fuzzy
-msgid "Apply high-contrast highlight to current verse - see color pickers"
-msgstr "Aplica o marcare de contrast mare la versetul curent"
+#: ../ui/prefs.glade.h:35
+msgid "Use tabbed browsing Checkbox"
+msgstr "Casuta de verificare folosire rasfoire in tab-uri"
 
-#: ../ui/prefs.glade.h:21
+#: ../ui/prefs.glade.h:36
+msgid "<b>Show</b>"
+msgstr "<b>Arata</b>"
+
+#: ../ui/prefs.glade.h:37
+msgid "Bible Texts"
+msgstr "Texte Biblie"
+
+#: ../ui/prefs.glade.h:38
+msgid "Bible Texts Checkbox"
+msgstr "Casuta de verificare Texte Biblie"
+
+#: ../ui/prefs.glade.h:40
+msgid "Previewer Checkbox"
+msgstr "Lista verificare Revizuitor"
+
+#: ../ui/prefs.glade.h:42
+msgid "Commentaries Checkbox"
+msgstr "Casuta de verificare Comentarii"
+
+#: ../ui/prefs.glade.h:43
+msgid "Dictionary/Lexicon"
+msgstr "Dictionar/Lexicon"
+
+#: ../ui/prefs.glade.h:44
+msgid "Dictionary/Lexicon Checkbox"
+msgstr "Casuta de verificare Dictionar/Lexicon"
+
+#: ../ui/prefs.glade.h:45
+msgid "Parallel View in a tab"
+msgstr "Vedere Paralela intr-un tab"
+
+#: ../ui/prefs.glade.h:46
+msgid "Tabs and Panes"
+msgstr "Taburi si Panouri"
+
+#: ../ui/prefs.glade.h:47
+msgid "<b>General</b>"
+msgstr "<b>General</b>"
+
+#: ../ui/prefs.glade.h:48
+msgid ""
+"Select a particular language for interface display, other than your usual "
+"setting"
+msgstr ""
+
+#: ../ui/prefs.glade.h:49
+msgid "Special Locale (requires restart)"
+msgstr "Limba Speciala (necesita restartare)"
+
+#: ../ui/prefs.glade.h:50
+msgid "Special Locale Combo"
+msgstr "Combo Limba Speciala"
+
+#: ../ui/prefs.glade.h:51
+msgid "Show splash screen at start up"
+msgstr "Arata ecranul de pornire la incepere"
+
+#: ../ui/prefs.glade.h:52
+msgid "Show Daily Devotion at start up"
+msgstr "Arata Devotionalul Zilnic la incepere"
+
+#: ../ui/prefs.glade.h:53
+msgid ""
+"If you have set a preferred daily devotion module, its entry for today will "
+"be shown at startup."
+msgstr ""
+
+#: ../ui/prefs.glade.h:54
+msgid "Use default Dictionary"
+msgstr "Foloseste Dictionarul implicit"
+
+#: ../ui/prefs.glade.h:55
+msgid ""
+"Make double-click of a word always use default dictionary instead of "
+"dictionary currently displayed"
+msgstr ""
+
+#: ../ui/prefs.glade.h:56
+msgid "Use default Dictionary Checkbox"
+msgstr "Casuta de verificare folosire Dictionar implicit"
+
+#: ../ui/prefs.glade.h:57
+msgid "Scroll to Previous/Next Chapter"
+msgstr "Mergi la Capitolul Anterior/Urmator"
+
+#: ../ui/prefs.glade.h:58
+msgid "Use Bible Text scroll bar to scroll to previous or next chapter"
+msgstr ""
+"Foloseste bara de derulare a Textului BIbliei pentru capitolul anterior sau "
+"urmator"
+
+#: ../ui/prefs.glade.h:59
+msgid "Scroll to Previous/Next Chapter Checkbox"
+msgstr "Casuta de verificare Capitol Anterior/Urmator"
+
+#: ../ui/prefs.glade.h:60
+msgid "Resize images"
+msgstr "Dimensionare imagini"
+
+#: ../ui/prefs.glade.h:61
 #, fuzzy
 msgid "Automatically resize image content to fit the pane"
 msgstr ""
 "Redimensioneaza automat comentariul, cartea si continutul imaginii din "
 "dictionar pentru a se potrivi sub-ferestrei"
 
-#: ../ui/prefs.glade.h:22
-msgid "Background"
-msgstr "Fundal"
-
-#: ../ui/prefs.glade.h:23
-msgid "Base font size"
-msgstr "Marime font de baza"
-
-#: ../ui/prefs.glade.h:24
-msgid "Bible Texts"
-msgstr "Texte Biblie"
-
-#: ../ui/prefs.glade.h:25
-msgid "Bible Texts Checkbox"
-msgstr "Casuta de verificare Texte Biblie"
-
-#: ../ui/prefs.glade.h:26
-msgid "Biblical Text"
-msgstr "Text Biblic"
-
-#: ../ui/prefs.glade.h:27
-msgid "Bold"
-msgstr ""
-
-#: ../ui/prefs.glade.h:29
-msgid "Brackets"
-msgstr ""
-
-#: ../ui/prefs.glade.h:30
-msgid "Change Biblical Text Combo"
-msgstr "Schimba Combo Text Biblic"
-
-#: ../ui/prefs.glade.h:31
-msgid "Change Book Combo"
-msgstr "Schimba Combo Carte"
-
-#: ../ui/prefs.glade.h:32
-msgid "Change Commentary Combo"
-msgstr "Schimba Combo Comentariu"
-
-#: ../ui/prefs.glade.h:33
-msgid "Change Default Dictionary Combo"
-msgstr "Schimba Combo Dictionar Implicit"
-
-#: ../ui/prefs.glade.h:34
-msgid "Change Dictionary Combo"
-msgstr "Schimba Combo Dictionar"
-
-#: ../ui/prefs.glade.h:35
-msgid "Change Personal Notes Combo"
-msgstr "Schimba Combo Note Personale"
-
-#: ../ui/prefs.glade.h:36 ../ui/search-dialog.glade.h:21
-msgid "Clear Modules from List Button"
-msgstr "Curata Modulele din Butonul Lista"
-
-#: ../ui/prefs.glade.h:37 ../ui/search-dialog.glade.h:22
-msgid "Clear all modules from the list"
-msgstr "Curata toate modulele din lista"
-
-#: ../ui/prefs.glade.h:39
-msgid "Commentaries Checkbox"
-msgstr "Casuta de verificare Comentarii"
-
-#: ../ui/prefs.glade.h:41
-msgid "Commonly -1, to make verse numbers less obtrusive"
-msgstr ""
-
-#: ../ui/prefs.glade.h:42
-msgid "Cover"
-msgstr "Copertă"
-
-#: ../ui/prefs.glade.h:43
-#, fuzzy
-msgid "Cross-references in verse list"
-msgstr "Trimiteri"
-
-#: ../ui/prefs.glade.h:44
-msgid "Current Verse"
-msgstr "Verset Curent"
-
-#: ../ui/prefs.glade.h:45
-msgid "Daily Devotional"
-msgstr "Devotional Zilnic"
-
-#: ../ui/prefs.glade.h:46
-msgid "Daily Devotional Combo"
-msgstr "Combo Devotional Zilnic"
-
-#: ../ui/prefs.glade.h:47
-msgid "Default Dictionary"
-msgstr "Dictionar Implicit"
-
-#: ../ui/prefs.glade.h:48 ../ui/search-dialog.glade.h:39
-msgid "Delete Selected Module From List Button"
-msgstr "Sterge Modulul Selectat din Butonul Lista"
-
-#: ../ui/prefs.glade.h:49
-msgid "Dictionary"
-msgstr "Dictionar"
-
-#: ../ui/prefs.glade.h:50
-msgid "Dictionary/Lexicon"
-msgstr "Dictionar/Lexicon"
-
-#: ../ui/prefs.glade.h:51
-msgid "Dictionary/Lexicon Checkbox"
-msgstr "Casuta de verificare Dictionar/Lexicon"
-
-#: ../ui/prefs.glade.h:52
-msgid "Enable Prayer Lists"
-msgstr "Activare Liste de Rugaciune"
-
-#: ../ui/prefs.glade.h:53
-msgid "Enable Prayer Lists Checkbox"
-msgstr "Activeaza casuta de verificare Liste de Rugaciune"
-
-#: ../ui/prefs.glade.h:54
-msgid "Font Colors"
-msgstr "Culori Font"
-
-#: ../ui/prefs.glade.h:55
-msgid "Font Misc"
-msgstr "Diverse despre Font"
-
-#: ../ui/prefs.glade.h:56
-msgid "Font preferences, per language"
-msgstr ""
-
-#: ../ui/prefs.glade.h:57
-msgid "Foreground"
-msgstr "Prim-plan"
-
-#: ../ui/prefs.glade.h:58
-msgid "General Misc"
-msgstr "Diverse Generale"
-
-#: ../ui/prefs.glade.h:59
-msgid "Greek Lexicon"
-msgstr "Lexicon Grec"
-
-#: ../ui/prefs.glade.h:60
-msgid "Greek Lexicon Combo"
-msgstr "Combo Lexicon Grec"
-
-#: ../ui/prefs.glade.h:61
-msgid "Hebrew Lexicon"
-msgstr "Lexicon Ebraic"
-
 #: ../ui/prefs.glade.h:62
-msgid "Hebrew Lexicon Combo"
-msgstr "Combo Lexicon Ebraic"
+msgid "Resize images checkbox"
+msgstr "Lista verificare dimensionare imagini"
 
 #: ../ui/prefs.glade.h:63
-#, fuzzy
-msgid "Highlight"
-msgstr "Marcheaza Fundalul"
-
-#: ../ui/prefs.glade.h:64
-msgid "Highlight Background"
-msgstr "Marcheaza Fundalul"
-
-#: ../ui/prefs.glade.h:65
-msgid "Highlight Foreground"
-msgstr "Marcheaza Prim-Planul"
-
-#: ../ui/prefs.glade.h:66
 msgid "Highlight current verse"
 msgstr "Marcheaza versetul curent"
 
-#: ../ui/prefs.glade.h:67
+#: ../ui/prefs.glade.h:64
+#, fuzzy
+msgid "Apply high-contrast highlight to current verse - see color pickers"
+msgstr "Aplica o marcare de contrast mare la versetul curent"
+
+#: ../ui/prefs.glade.h:65
 msgid "Highlight current verse check box"
 msgstr "Marcheaza casuta versetului curent"
 
-#: ../ui/prefs.glade.h:68
+#: ../ui/prefs.glade.h:66
 #, fuzzy
 msgid "Highlight user annotations"
 msgstr "Notarile Userului"
 
-#: ../ui/prefs.glade.h:69
-#, fuzzy
-msgid "Highlight user annotations check box"
-msgstr "Marcheaza casuta versetului curent"
-
-#: ../ui/prefs.glade.h:70
-msgid ""
-"If you have set a preferred daily devotion module, its entry for today will "
-"be shown at startup."
-msgstr ""
-
-#: ../ui/prefs.glade.h:71
-#, fuzzy
-msgid "Invert color pairs"
-msgstr "Insereaza Insemn"
-
-#: ../ui/prefs.glade.h:72
-#, fuzzy
-msgid "Language Font Combo"
-msgstr "Schimba Combo Carte"
-
-#: ../ui/prefs.glade.h:73
-msgid "Links"
-msgstr "Link-uri"
-
-#: ../ui/prefs.glade.h:74
-msgid ""
-"Make double-click of a word always use default dictionary instead of "
-"dictionary currently displayed"
-msgstr ""
-
-#: ../ui/prefs.glade.h:75
-msgid "Make journals/prayer lists available"
-msgstr ""
-
-#: ../ui/prefs.glade.h:76 ../ui/search-dialog.glade.h:61
-msgid "Module Selection"
-msgstr "Selectie Module"
-
-#: ../ui/prefs.glade.h:77
-msgid "Modules Misc"
-msgstr "Diverse despre Module"
-
-#: ../ui/prefs.glade.h:78
-msgid "Modules Parallel"
-msgstr "Paralela Module"
-
-#: ../ui/prefs.glade.h:79
-msgid ""
-"Name and size choice for any module in a given language; still overridden by "
-"a specific choice on a particular module"
-msgstr ""
-
-#: ../ui/prefs.glade.h:80
-msgid "Normal Text"
-msgstr ""
-
-#: ../ui/prefs.glade.h:81 ../ui/search-dialog.glade.h:70
-msgid "Open Selection Dialog Button"
-msgstr "Buton de Dialog Deschidere Selectie"
-
-#: ../ui/prefs.glade.h:82
-msgid "Open a dialog to select modules"
-msgstr "Deschide un dialog pentru a selecta modulele de adaugat la lista"
-
-#: ../ui/prefs.glade.h:83
-msgid "Parallel View in a tab"
-msgstr "Vedere Paralela intr-un tab"
-
-#: ../ui/prefs.glade.h:84
-msgid "Personal Notes"
-msgstr "Note Personale"
-
-#: ../ui/prefs.glade.h:87
-msgid "Previewer Checkbox"
-msgstr "Lista verificare Revizuitor"
-
-#: ../ui/prefs.glade.h:88 ../ui/search-dialog.glade.h:80
-msgid "Remove the selected module from the list"
-msgstr "Elimina modulul selectat din lista"
-
-#: ../ui/prefs.glade.h:89
-msgid "Resize images"
-msgstr "Dimensionare imagini"
-
-#: ../ui/prefs.glade.h:90
-msgid "Resize images checkbox"
-msgstr "Lista verificare dimensionare imagini"
-
-#: ../ui/prefs.glade.h:91
-msgid "Scroll to Previous/Next Chapter"
-msgstr "Mergi la Capitolul Anterior/Urmator"
-
-#: ../ui/prefs.glade.h:92
-msgid "Scroll to Previous/Next Chapter Checkbox"
-msgstr "Casuta de verificare Capitol Anterior/Urmator"
-
-#: ../ui/prefs.glade.h:93
-msgid "Select A Directory"
-msgstr "Selecteaza Un Director"
-
-#: ../ui/prefs.glade.h:94
-msgid ""
-"Select a particular language for interface display, other than your usual "
-"setting"
-msgstr ""
-
-#: ../ui/prefs.glade.h:95
-msgid "Show Daily Devotion at start up"
-msgstr "Arata Devotionalul Zilnic la incepere"
-
-#: ../ui/prefs.glade.h:96
-msgid "Show splash screen at start up"
-msgstr "Arata ecranul de pornire la incepere"
-
-#: ../ui/prefs.glade.h:97
-#, fuzzy
-msgid "Show verse number as a superscript"
-msgstr "Arata _Numerele Versetelor"
-
-#: ../ui/prefs.glade.h:98
-#, fuzzy
-msgid "Show verse number in bold text"
-msgstr "Arata _Numerele Versetelor"
-
-#: ../ui/prefs.glade.h:99
-msgid "Show verse number with [surrounding brackets]"
-msgstr ""
-
-#: ../ui/prefs.glade.h:100
-msgid ""
-"Single selection of Bible+commentary+book+dictionary, or many sets of such "
-"selections in a tabbed interface"
-msgstr ""
-
-#: ../ui/prefs.glade.h:101
-msgid "Special Locale (requires restart)"
-msgstr "Limba Speciala (necesita restartare)"
-
-#: ../ui/prefs.glade.h:102
-msgid "Special Locale Combo"
-msgstr "Combo Limba Speciala"
-
-#: ../ui/prefs.glade.h:103
-msgid "StudyPad default directory combo"
-msgstr "Directorul implicit combo Caiet de Studiu"
-
-#: ../ui/prefs.glade.h:104
-#, fuzzy
-msgid "Superscript"
-msgstr "Descriere"
-
-#: ../ui/prefs.glade.h:105
-msgid "Tabs and Panes"
-msgstr "Taburi si Panouri"
-
-#: ../ui/prefs.glade.h:106
-msgid "Use Bible Text scroll bar to scroll to previous or next chapter"
-msgstr ""
-"Foloseste bara de derulare a Textului BIbliei pentru capitolul anterior sau "
-"urmator"
-
-#: ../ui/prefs.glade.h:107
-msgid "Use default Dictionary"
-msgstr "Foloseste Dictionarul implicit"
-
-#: ../ui/prefs.glade.h:108
-msgid "Use default Dictionary Checkbox"
-msgstr "Casuta de verificare folosire Dictionar implicit"
-
-#: ../ui/prefs.glade.h:109
+#: ../ui/prefs.glade.h:67
 #, fuzzy
 msgid "Use inverted highlight on user-annotated verses"
 msgstr "Aplica o marcare de contrast mare la versetul curent"
 
-#: ../ui/prefs.glade.h:110
-msgid "Use tabbed browsing"
-msgstr "Foloseste rasfoire in taburi"
+#: ../ui/prefs.glade.h:68
+#, fuzzy
+msgid "Highlight user annotations check box"
+msgstr "Marcheaza casuta versetului curent"
 
-#: ../ui/prefs.glade.h:111
-msgid "Use tabbed browsing Checkbox"
-msgstr "Casuta de verificare folosire rasfoire in tab-uri"
+#: ../ui/prefs.glade.h:69
+#, fuzzy
+msgid "Cross-references in verse list"
+msgstr "Trimiteri"
 
-#: ../ui/prefs.glade.h:112
+#: ../ui/prefs.glade.h:70
 msgid "Use the verse list for Bible cross-references instead of the previewer"
 msgstr ""
 
-#: ../ui/prefs.glade.h:113
-msgid "Verse Number"
-msgstr "Numar Verset"
-
-#: ../ui/prefs.glade.h:114
-#, fuzzy
-msgid "Verse number bold checkbox"
-msgstr "Marime numar verset"
-
-#: ../ui/prefs.glade.h:115
-#, fuzzy
-msgid "Verse number bracket checkbox"
-msgstr "Casuta de verificare Verset Per Linie"
-
-#: ../ui/prefs.glade.h:116
-msgid "Verse number size"
-msgstr "Marime numar verset"
-
-#: ../ui/prefs.glade.h:117
-#, fuzzy
-msgid "Verse number superscript checkbox"
-msgstr "Marime numar verset"
-
-#: ../ui/prefs.glade.h:118
-#, fuzzy
-msgid "Verse number:"
-msgstr "Numar Verset"
-
-#: ../ui/prefs.glade.h:119
+#: ../ui/prefs.glade.h:71
 #, fuzzy
 msgid "Xrefs in verse list check box"
 msgstr "Lista verificare dimensionare imagini"
 
+#: ../ui/prefs.glade.h:72
+msgid "Enable Prayer Lists"
+msgstr "Activare Liste de Rugaciune"
+
+#: ../ui/prefs.glade.h:73
+msgid "Make journals/prayer lists available"
+msgstr ""
+
+#: ../ui/prefs.glade.h:74
+msgid "Enable Prayer Lists Checkbox"
+msgstr "Activeaza casuta de verificare Liste de Rugaciune"
+
+#: ../ui/prefs.glade.h:75
+#, fuzzy
+msgid "Verse number:"
+msgstr "Numar Verset"
+
+#: ../ui/prefs.glade.h:76
+msgid "Bold"
+msgstr ""
+
+#: ../ui/prefs.glade.h:77
+#, fuzzy
+msgid "Show verse number in bold text"
+msgstr "Arata _Numerele Versetelor"
+
+#: ../ui/prefs.glade.h:78
+#, fuzzy
+msgid "Verse number bold checkbox"
+msgstr "Marime numar verset"
+
+#: ../ui/prefs.glade.h:79
+msgid "Brackets"
+msgstr ""
+
+#: ../ui/prefs.glade.h:80
+msgid "Show verse number with [surrounding brackets]"
+msgstr ""
+
+#: ../ui/prefs.glade.h:81
+#, fuzzy
+msgid "Verse number bracket checkbox"
+msgstr "Casuta de verificare Verset Per Linie"
+
+#: ../ui/prefs.glade.h:82
+#, fuzzy
+msgid "Superscript"
+msgstr "Descriere"
+
+#: ../ui/prefs.glade.h:83
+#, fuzzy
+msgid "Show verse number as a superscript"
+msgstr "Arata _Numerele Versetelor"
+
+#: ../ui/prefs.glade.h:84
+#, fuzzy
+msgid "Verse number superscript checkbox"
+msgstr "Marime numar verset"
+
+#: ../ui/prefs.glade.h:85
+msgid "<b>StudyPad default directory</b>"
+msgstr "<b>Directorul implicit al Caietului de Studiu</b>"
+
+#: ../ui/prefs.glade.h:86
+msgid "Select A Directory"
+msgstr "Selecteaza Un Director"
+
+#: ../ui/prefs.glade.h:87
+msgid "StudyPad default directory combo"
+msgstr "Directorul implicit combo Caiet de Studiu"
+
+#: ../ui/prefs.glade.h:88
+msgid "General Misc"
+msgstr "Diverse Generale"
+
+#: ../ui/prefs.glade.h:89
+msgid "<b>Main Window Modules</b>"
+msgstr "<b>Module Fereastra Principala</b>"
+
+#: ../ui/prefs.glade.h:90
+msgid "Biblical Text"
+msgstr "Text Biblic"
+
+#: ../ui/prefs.glade.h:91
+msgid "Change Biblical Text Combo"
+msgstr "Schimba Combo Text Biblic"
+
+#: ../ui/prefs.glade.h:93
+msgid "Change Commentary Combo"
+msgstr "Schimba Combo Comentariu"
+
+#: ../ui/prefs.glade.h:94
+msgid "Dictionary"
+msgstr "Dictionar"
+
+#: ../ui/prefs.glade.h:95
+msgid "Change Dictionary Combo"
+msgstr "Schimba Combo Dictionar"
+
+#: ../ui/prefs.glade.h:97
+msgid "Change Book Combo"
+msgstr "Schimba Combo Carte"
+
+#: ../ui/prefs.glade.h:98 ../ui/search-dialog.glade.h:22
+msgid "<b>Modules</b>"
+msgstr "<b>Module</b>"
+
+#: ../ui/prefs.glade.h:99 ../ui/search-dialog.glade.h:86
+msgid "Clear all modules from the list"
+msgstr "Curata toate modulele din lista"
+
+#: ../ui/prefs.glade.h:100 ../ui/search-dialog.glade.h:87
+msgid "Clear Modules from List Button"
+msgstr "Curata Modulele din Butonul Lista"
+
+#: ../ui/prefs.glade.h:101 ../ui/search-dialog.glade.h:88
+msgid "Remove the selected module from the list"
+msgstr "Elimina modulul selectat din lista"
+
+#: ../ui/prefs.glade.h:102 ../ui/search-dialog.glade.h:89
+msgid "Delete Selected Module From List Button"
+msgstr "Sterge Modulul Selectat din Butonul Lista"
+
+#: ../ui/prefs.glade.h:103
+msgid "Open a dialog to select modules"
+msgstr "Deschide un dialog pentru a selecta modulele de adaugat la lista"
+
+#: ../ui/prefs.glade.h:104 ../ui/search-dialog.glade.h:91
+msgid "Add Modules"
+msgstr "Adauga Module"
+
+#: ../ui/prefs.glade.h:105 ../ui/search-dialog.glade.h:92
+msgid "Open Selection Dialog Button"
+msgstr "Buton de Dialog Deschidere Selectie"
+
+#: ../ui/prefs.glade.h:106
+msgid "Modules Parallel"
+msgstr "Paralela Module"
+
+#: ../ui/prefs.glade.h:107
+msgid "<b>Special Purpose Modules</b>"
+msgstr "<b>Module cu Scop Special</b>"
+
+#: ../ui/prefs.glade.h:108
+msgid "Daily Devotional"
+msgstr "Devotional Zilnic"
+
+#: ../ui/prefs.glade.h:109
+msgid "Daily Devotional Combo"
+msgstr "Combo Devotional Zilnic"
+
+#: ../ui/prefs.glade.h:110
+msgid "Hebrew Lexicon"
+msgstr "Lexicon Ebraic"
+
+#: ../ui/prefs.glade.h:111
+msgid "Hebrew Lexicon Combo"
+msgstr "Combo Lexicon Ebraic"
+
+#: ../ui/prefs.glade.h:112
+msgid "Greek Lexicon"
+msgstr "Lexicon Grec"
+
+#: ../ui/prefs.glade.h:113
+msgid "Greek Lexicon Combo"
+msgstr "Combo Lexicon Grec"
+
+#: ../ui/prefs.glade.h:114
+msgid "Default Dictionary"
+msgstr "Dictionar Implicit"
+
+#: ../ui/prefs.glade.h:115
+msgid "Change Default Dictionary Combo"
+msgstr "Schimba Combo Dictionar Implicit"
+
+#: ../ui/prefs.glade.h:116
+msgid "Personal Notes"
+msgstr "Note Personale"
+
+#: ../ui/prefs.glade.h:117
+msgid "Change Personal Notes Combo"
+msgstr "Schimba Combo Note Personale"
+
+#: ../ui/prefs.glade.h:118
+msgid "Modules Misc"
+msgstr "Diverse despre Module"
+
+#: ../ui/prefs.glade.h:119 ../ui/search-dialog.glade.h:115
+msgid "Module Selection"
+msgstr "Selectie Module"
+
 #: ../ui/search-dialog.glade.h:1
-msgid "<b>Attribute</b>"
-msgstr "<b>Atribut</b>"
-
-#: ../ui/search-dialog.glade.h:2
-msgid "<b>Found</b>"
-msgstr "<b>Gasit</b>"
-
-#: ../ui/search-dialog.glade.h:3
-msgid "<b>List Name</b>"
-msgstr "<b>Nume Lista</b>"
-
-#: ../ui/search-dialog.glade.h:4
-msgid "<b>Module Lists</b>"
-msgstr "<b>Lista Module</b>"
-
-#: ../ui/search-dialog.glade.h:6
-msgid "<b>Options</b>"
-msgstr "<b>Optiuni</b>"
-
-#: ../ui/search-dialog.glade.h:7
-msgid "<b>Preview</b>"
-msgstr "<b>Previzualizare</b>"
-
-#: ../ui/search-dialog.glade.h:8
-msgid "<b>Range Definition</b>"
-msgstr "<b>Rang Definire</b>"
-
-#: ../ui/search-dialog.glade.h:9
-msgid "<b>Range Name</b>"
-msgstr "<b>Rang Nume</b>"
-
-#: ../ui/search-dialog.glade.h:10
-msgid "<b>Ranges</b>"
-msgstr "<b>Ranguri</b>"
-
-#: ../ui/search-dialog.glade.h:11
-msgid "<b>Results Display Options</b>"
-msgstr "<b>Optiuni Afisare Rezultate</b>"
-
-#: ../ui/search-dialog.glade.h:12
-msgid "<b>Scope</b>"
-msgstr "<b>Scop</b>"
-
-#: ../ui/search-dialog.glade.h:13
-msgid "<b>Search Results</b>"
-msgstr "<b>Rezultate Cautare</b>"
-
-#: ../ui/search-dialog.glade.h:14
-msgid "<b>Search Type</b>"
-msgstr "<b>Tip Cautare</b>"
-
-#: ../ui/search-dialog.glade.h:16
 msgid "Advanced Search"
 msgstr "Cautare Avansata"
 
-#: ../ui/search-dialog.glade.h:17
-msgid "Attribute Search"
-msgstr "Atribut Cautare"
+#: ../ui/search-dialog.glade.h:2
+msgid "_Lucene Search Syntax"
+msgstr ""
 
-#: ../ui/search-dialog.glade.h:18
-msgid "Attributes"
-msgstr "Atribute"
+#: ../ui/search-dialog.glade.h:3
+msgid ""
+"Open a brief explanation of the syntax used for optimized \"lucene\" "
+"searches."
+msgstr ""
 
-#: ../ui/search-dialog.glade.h:19
-msgid "Attributes radiobutton"
-msgstr "Buton Radio Atribute"
+#: ../ui/search-dialog.glade.h:4
+msgid "_Attribute Search"
+msgstr "_Atribut Cautare"
 
-#: ../ui/search-dialog.glade.h:20
-msgid "Clear Custom Module List Button"
-msgstr "Curata Modulul la Comanda din Butonul de lista"
+#: ../ui/search-dialog.glade.h:5
+msgid "Open a brief explanation of attribute-based searches."
+msgstr ""
 
-#: ../ui/search-dialog.glade.h:23
-msgid "Clear lists for new search"
-msgstr "Curata listele pentru cautare noua"
+#: ../ui/search-dialog.glade.h:6
+msgid "for "
+msgstr "pentru "
 
-#: ../ui/search-dialog.glade.h:24
-msgid "Create a new module list"
-msgstr "Creaza o lista noua de module"
+#: ../ui/search-dialog.glade.h:7
+msgid "Main Search Entry"
+msgstr "Intrarea de Cautare Principala"
 
-#: ../ui/search-dialog.glade.h:25
-msgid "Create new custom range"
-msgstr "Creaza rang nou la  comanda"
+#: ../ui/search-dialog.glade.h:8
+msgid "Start/stop searching"
+msgstr "Incepe/opreste cautarea"
 
-#: ../ui/search-dialog.glade.h:26
-msgid "Current results"
-msgstr "Rezultate curente"
+#: ../ui/search-dialog.glade.h:9
+msgid "Find Button"
+msgstr "Buton Cautare"
 
-#: ../ui/search-dialog.glade.h:27
-msgid "Current results radiobutton"
-msgstr "Buton Radio rezultate curente"
+#: ../ui/search-dialog.glade.h:10
+msgid "Search Criteria Treeview"
+msgstr "Criteriu de Cautare in forma de arbore"
 
-#: ../ui/search-dialog.glade.h:28
-msgid "Custom Module List Combo"
-msgstr "Combo Lista Module la Comanda"
+#: ../ui/search-dialog.glade.h:11
+msgid "<b>Scope</b>"
+msgstr "<b>Scop</b>"
 
-#: ../ui/search-dialog.glade.h:29
-msgid "Custom Module List Name Entry"
-msgstr "Nume Intrare Lista Module la Comanda"
+#: ../ui/search-dialog.glade.h:12
+msgid "Search entire module"
+msgstr "Cauta intregul modul"
 
-#: ../ui/search-dialog.glade.h:30
-msgid "Custom Module Lists"
-msgstr "Liste Module la Comanda"
-
-#: ../ui/search-dialog.glade.h:31
-msgid "Custom Range Preview"
-msgstr "Rang la Comanda de Previzualizare"
-
-#: ../ui/search-dialog.glade.h:32
-msgid "Custom Range Selector Combo"
-msgstr "Combo Selector Rang la Comanda"
-
-#: ../ui/search-dialog.glade.h:33
-msgid "Custom Verse Ranges"
-msgstr "Ranguri Verset la Comanda"
-
-#: ../ui/search-dialog.glade.h:34
-msgid "Custom module list"
-msgstr "Lista module la comanda"
-
-#: ../ui/search-dialog.glade.h:35
-msgid "Custom module list radiobutton"
-msgstr "Buton radio lista module la comanda"
-
-#: ../ui/search-dialog.glade.h:36
-msgid "Custom verse range"
-msgstr "Rang verset la comanda"
-
-#: ../ui/search-dialog.glade.h:37
-msgid "Custom verse range radiobutton"
-msgstr "Buton radio rang verset la comanda"
-
-#: ../ui/search-dialog.glade.h:38
-msgid "Delete Range Button"
-msgstr "Sterge Butonul Rang"
-
-#: ../ui/search-dialog.glade.h:40
-msgid "Delete selected range"
-msgstr "Sterge rangul selectat"
-
-#: ../ui/search-dialog.glade.h:41
-msgid "Delete the selected list"
-msgstr "Sterge lista selectata"
-
-#: ../ui/search-dialog.glade.h:42
+#: ../ui/search-dialog.glade.h:13
 msgid "Entire module"
 msgstr "Intregul modul"
 
-#: ../ui/search-dialog.glade.h:43
+#: ../ui/search-dialog.glade.h:14
 msgid "Entire module radiobutton"
 msgstr "Buton radio intregul modul"
 
-#: ../ui/search-dialog.glade.h:45
-msgid "Exact phrase radiobutton"
-msgstr "Buton radio fraza exacta"
+#: ../ui/search-dialog.glade.h:15
+msgid "Use the results of the last search as the scope of the search"
+msgstr "Foloseste rezultatele ultimei cautari ca scop al cautarii"
 
-#: ../ui/search-dialog.glade.h:46
-msgid "Export"
-msgstr "Exporta"
+#: ../ui/search-dialog.glade.h:16
+msgid "Current results"
+msgstr "Rezultate curente"
 
-#: ../ui/search-dialog.glade.h:47
-msgid "Export current search results"
-msgstr "Exporta rezultatele curente de cautare"
+#: ../ui/search-dialog.glade.h:17
+msgid "Current results radiobutton"
+msgstr "Buton Radio rezultate curente"
 
-#: ../ui/search-dialog.glade.h:48
+#: ../ui/search-dialog.glade.h:18
+msgid "Use a custom range for the scope of the search"
+msgstr "Foloseste un rang la comanda pentru cautare"
+
+#: ../ui/search-dialog.glade.h:19
+msgid "Custom verse range"
+msgstr "Rang verset la comanda"
+
+#: ../ui/search-dialog.glade.h:20
+msgid "Custom verse range radiobutton"
+msgstr "Buton radio rang verset la comanda"
+
+#: ../ui/search-dialog.glade.h:21
+msgid "Custom Range Selector Combo"
+msgstr "Combo Selector Rang la Comanda"
+
+#: ../ui/search-dialog.glade.h:23
+msgid "Use a single module for the search"
+msgstr "Foloseste un singur modul pentru cautare"
+
+#: ../ui/search-dialog.glade.h:24
+msgid "Single module"
+msgstr "Modul singur"
+
+#: ../ui/search-dialog.glade.h:25
+msgid "Single module radiobutton"
+msgstr "Buton radio modul singur"
+
+#: ../ui/search-dialog.glade.h:26
+msgid "Use the current module list for the search"
+msgstr "Foloseste lista curenta de module pentru cautare"
+
+#: ../ui/search-dialog.glade.h:27
+msgid "Module list"
+msgstr "Lista module"
+
+#: ../ui/search-dialog.glade.h:28
+msgid "Module list radiobutton"
+msgstr "Buton radio lista module"
+
+#: ../ui/search-dialog.glade.h:29
+msgid "Use a custom module list for the search"
+msgstr "Foloseste o lista de module la comanda pentru cautare"
+
+#: ../ui/search-dialog.glade.h:30
+msgid "Custom module list"
+msgstr "Lista module la comanda"
+
+#: ../ui/search-dialog.glade.h:31
+msgid "Custom module list radiobutton"
+msgstr "Buton radio lista module la comanda"
+
+#: ../ui/search-dialog.glade.h:32
+msgid "Custom Module List Combo"
+msgstr "Combo Lista Module la Comanda"
+
+#: ../ui/search-dialog.glade.h:33
+msgid "<b>Search Type</b>"
+msgstr "<b>Tip Cautare</b>"
+
+#: ../ui/search-dialog.glade.h:34
 msgid ""
 "Fast, featureful, index-based search\n"
 "Indexes must have been built beforehand:\n"
@@ -3236,738 +3335,292 @@ msgstr ""
 "Indexurile trebuiesc sa fie construite in prealabil:\n"
 "Vezi functiile de intretinere de la Managerul de Module"
 
-#: ../ui/search-dialog.glade.h:51
-msgid "Find Button"
-msgstr "Buton Cautare"
-
-#: ../ui/search-dialog.glade.h:53
-msgid "Footnotes radiobutton"
-msgstr "Buton radio note de subsol"
-
-#: ../ui/search-dialog.glade.h:54
-msgid "In modules that have Footnotes"
-msgstr "In modulele care au Note de Subsol"
-
-#: ../ui/search-dialog.glade.h:55
-msgid "In modules that have Morphological Tags"
-msgstr "In modulele care au Tag-uri Morfologice"
-
-#: ../ui/search-dialog.glade.h:56
-msgid "In modules that have Strong's Numbers"
-msgstr "In modulele care ah Numere Strong's"
-
-#: ../ui/search-dialog.glade.h:57
-msgid "Main Search Entry"
-msgstr "Intrarea de Cautare Principala"
-
-#: ../ui/search-dialog.glade.h:58
-msgid "Make selections on the Attribute Search tab"
-msgstr "Fa selectii la tab-ul de Atribute Cautare"
-
-#: ../ui/search-dialog.glade.h:60
-msgid "Match case checkbox"
-msgstr "Casuta de verificare Marcheaza cazul"
-
-#: ../ui/search-dialog.glade.h:62
-msgid "Module list"
-msgstr "Lista module"
-
-#: ../ui/search-dialog.glade.h:63
-msgid "Module list radiobutton"
-msgstr "Buton radio lista module"
-
-#: ../ui/search-dialog.glade.h:65
-msgid "Morphological Tags radiobutton"
-msgstr "Buton radio Tag-uri Morfologice"
-
-#: ../ui/search-dialog.glade.h:67
-msgid "Multi word radiobutton"
-msgstr "Buton radio multi-cuvant"
-
-#: ../ui/search-dialog.glade.h:68
-msgid "New Custom Module List Button"
-msgstr "Buton Lista Modul Nou la Comanda"
-
-#: ../ui/search-dialog.glade.h:69
-msgid "New Range Button"
-msgstr "Buton Rang Nou"
-
-#: ../ui/search-dialog.glade.h:71
-msgid "Open a brief explanation of attribute-based searches."
-msgstr ""
-
-#: ../ui/search-dialog.glade.h:72
-msgid ""
-"Open a brief explanation of the syntax used for optimized \"lucene\" "
-"searches."
-msgstr ""
-
-#: ../ui/search-dialog.glade.h:73
-msgid "Open a dialog to select modules to add to the list"
-msgstr "Deschide un dialog pentru a selecta modulele de adaugat la lista"
-
-#: ../ui/search-dialog.glade.h:74
+#: ../ui/search-dialog.glade.h:37
 msgid "Optimized (\"Lucene\")"
 msgstr "Optimizat (\"Lucene\")"
 
-#: ../ui/search-dialog.glade.h:75
+#: ../ui/search-dialog.glade.h:38
 msgid "Optimized (\"Lucene\") radiobutton"
 msgstr "Buton radio Optimizat (\"Lucene\")"
 
-#: ../ui/search-dialog.glade.h:76
-msgid "Range Definition Entry"
-msgstr "Intrare Rang Definire"
+#: ../ui/search-dialog.glade.h:40
+msgid "Multi word radiobutton"
+msgstr "Buton radio multi-cuvant"
 
-#: ../ui/search-dialog.glade.h:77
-msgid "Range Name Entry"
-msgstr "Intrare Nume Rang"
-
-#: ../ui/search-dialog.glade.h:79
+#: ../ui/search-dialog.glade.h:42
 msgid "Regular expression radiobutton"
 msgstr "Buton radio expresie regulata"
 
-#: ../ui/search-dialog.glade.h:81
-msgid "Result Summary Table"
-msgstr "Tabelul Sumar de Rezultate"
+#: ../ui/search-dialog.glade.h:44
+msgid "Exact phrase radiobutton"
+msgstr "Buton radio fraza exacta"
 
-#: ../ui/search-dialog.glade.h:82
-msgid "Result Summary Window"
-msgstr "Fereastra Sumar de Rezultate"
+#: ../ui/search-dialog.glade.h:45
+msgid "Make selections on the Attribute Search tab"
+msgstr "Fa selectii la tab-ul de Atribute Cautare"
 
-#: ../ui/search-dialog.glade.h:83
-msgid "Results"
-msgstr "Rezultate"
+#: ../ui/search-dialog.glade.h:46
+msgid "Attributes"
+msgstr "Atribute"
 
-#: ../ui/search-dialog.glade.h:84
-msgid "Save Custom Module List Button"
-msgstr "Salvare Buton Lista Modul la Comanda"
+#: ../ui/search-dialog.glade.h:47
+msgid "Attributes radiobutton"
+msgstr "Buton Radio Atribute"
 
-#: ../ui/search-dialog.glade.h:85
-msgid "Save Range Button"
-msgstr "Buton Salveaza Rang"
+#: ../ui/search-dialog.glade.h:48
+msgid "<b>Options</b>"
+msgstr "<b>Optiuni</b>"
 
-#: ../ui/search-dialog.glade.h:86
-msgid "Save custom range"
-msgstr "Salveaza rangul la comanda"
+#: ../ui/search-dialog.glade.h:50
+msgid "Match case checkbox"
+msgstr "Casuta de verificare Marcheaza cazul"
 
-#: ../ui/search-dialog.glade.h:87
-msgid "Save search results as bookmarks"
-msgstr "Salveaza rezultatele de cautare ca insemnari"
-
-#: ../ui/search-dialog.glade.h:88
-msgid "Save the module list"
-msgstr "Salveaza lista de module"
-
-#: ../ui/search-dialog.glade.h:89
+#: ../ui/search-dialog.glade.h:51
 msgid "Search  Criteria"
 msgstr "Criteriu de Cautare"
 
-#: ../ui/search-dialog.glade.h:90
-msgid "Search Criteria Treeview"
-msgstr "Criteriu de Cautare in forma de arbore"
-
-#: ../ui/search-dialog.glade.h:91
-msgid "Search entire module"
-msgstr "Cauta intregul modul"
-
-#: ../ui/search-dialog.glade.h:92
-msgid "Search for Morphological tags"
-msgstr "Cauta tag-uri Morfologice"
-
-#: ../ui/search-dialog.glade.h:93
-msgid "Search for Strongs Numbers like G4442 or H1121"
-msgstr "Cauta Numere Strongs de genul G4442 sau H11121"
-
-#: ../ui/search-dialog.glade.h:94
-msgid "Search in footnotes"
-msgstr "Cauta in note de subsol"
-
-#: ../ui/search-dialog.glade.h:95
-msgid "Show Footnotes"
-msgstr "Arata Note de Subsol"
-
-#: ../ui/search-dialog.glade.h:96
-msgid "Show Footnotes checkbox"
-msgstr "Casuta de verificare Arata Note de Subsol"
-
-#: ../ui/search-dialog.glade.h:97
-msgid "Show Morphological Tags"
-msgstr "Arata Tag-urile Morfologice"
-
-#: ../ui/search-dialog.glade.h:98
-msgid "Show Morphological Tags checkbox"
-msgstr "Casuta de verificare Arata Tag-urile Morfologice"
-
-#: ../ui/search-dialog.glade.h:99
-msgid "Show Strong's Numbers"
-msgstr "Arata Numerele Strong's"
-
-#: ../ui/search-dialog.glade.h:100
-msgid "Show Strong's Numbers checkbox"
-msgstr "Casuta de verificare Arata Numerele Strong's"
-
-#: ../ui/search-dialog.glade.h:101
+#: ../ui/search-dialog.glade.h:52
 msgid "Show in main window"
 msgstr "Arata in fereastra principala"
 
-#: ../ui/search-dialog.glade.h:102
-msgid "Single module"
-msgstr "Modul singur"
+#: ../ui/search-dialog.glade.h:53
+msgid "Save search results as bookmarks"
+msgstr "Salveaza rezultatele de cautare ca insemnari"
 
-#: ../ui/search-dialog.glade.h:103
-msgid "Single module radiobutton"
-msgstr "Buton radio modul singur"
+#: ../ui/search-dialog.glade.h:54
+msgid "Export current search results"
+msgstr "Exporta rezultatele curente de cautare"
 
-#: ../ui/search-dialog.glade.h:104
-msgid "Start/stop searching"
-msgstr "Incepe/opreste cautarea"
+#: ../ui/search-dialog.glade.h:55
+msgid "Export"
+msgstr "Exporta"
 
-#: ../ui/search-dialog.glade.h:105
-msgid "Strongs Numbers"
-msgstr "Numere Strongs"
+#: ../ui/search-dialog.glade.h:56
+msgid "Clear lists for new search"
+msgstr "Curata listele pentru cautare noua"
 
-#: ../ui/search-dialog.glade.h:106
-msgid "Strongs Numbers radiobutton"
-msgstr "Buton radion Numere Strongs"
+#: ../ui/search-dialog.glade.h:57
+msgid "<b>Found</b>"
+msgstr "<b>Gasit</b>"
 
-#: ../ui/search-dialog.glade.h:107
-msgid "Use a custom module list for the search"
-msgstr "Foloseste o lista de module la comanda pentru cautare"
+#: ../ui/search-dialog.glade.h:58
+msgid "Result Summary Window"
+msgstr "Fereastra Sumar de Rezultate"
 
-#: ../ui/search-dialog.glade.h:108
-msgid "Use a custom range for the scope of the search"
-msgstr "Foloseste un rang la comanda pentru cautare"
+#: ../ui/search-dialog.glade.h:59
+msgid "Result Summary Table"
+msgstr "Tabelul Sumar de Rezultate"
 
-#: ../ui/search-dialog.glade.h:109
-msgid "Use a single module for the search"
-msgstr "Foloseste un singur modul pentru cautare"
+#: ../ui/search-dialog.glade.h:60
+msgid "<b>Search Results</b>"
+msgstr "<b>Rezultate Cautare</b>"
 
-#: ../ui/search-dialog.glade.h:110
-msgid "Use the current module list for the search"
-msgstr "Foloseste lista curenta de module pentru cautare"
+#: ../ui/search-dialog.glade.h:61
+msgid "<b>Preview</b>"
+msgstr "<b>Previzualizare</b>"
 
-#: ../ui/search-dialog.glade.h:111
-msgid "Use the results of the last search as the scope of the search"
-msgstr "Foloseste rezultatele ultimei cautari ca scop al cautarii"
+#: ../ui/search-dialog.glade.h:62
+msgid "Results"
+msgstr "Rezultate"
 
-#: ../ui/search-dialog.glade.h:112
-msgid "_Attribute Search"
-msgstr "_Atribut Cautare"
+#: ../ui/search-dialog.glade.h:63
+msgid "Create new custom range"
+msgstr "Creaza rang nou la  comanda"
 
-#: ../ui/search-dialog.glade.h:113
-msgid "_Lucene Search Syntax"
-msgstr ""
+#: ../ui/search-dialog.glade.h:64
+msgid "New Range Button"
+msgstr "Buton Rang Nou"
 
-#: ../ui/search-dialog.glade.h:114
+#: ../ui/search-dialog.glade.h:65
+msgid "Save custom range"
+msgstr "Salveaza rangul la comanda"
+
+#: ../ui/search-dialog.glade.h:66
+msgid "Save Range Button"
+msgstr "Buton Salveaza Rang"
+
+#: ../ui/search-dialog.glade.h:67
+msgid "Delete selected range"
+msgstr "Sterge rangul selectat"
+
+#: ../ui/search-dialog.glade.h:68
+msgid "Delete Range Button"
+msgstr "Sterge Butonul Rang"
+
+#: ../ui/search-dialog.glade.h:69
+msgid "<b>Ranges</b>"
+msgstr "<b>Ranguri</b>"
+
+#: ../ui/search-dialog.glade.h:70
+msgid "<b>Range Name</b>"
+msgstr "<b>Rang Nume</b>"
+
+#: ../ui/search-dialog.glade.h:71
+msgid "Range Name Entry"
+msgstr "Intrare Nume Rang"
+
+#: ../ui/search-dialog.glade.h:72
+msgid "<b>Range Definition</b>"
+msgstr "<b>Rang Definire</b>"
+
+#: ../ui/search-dialog.glade.h:73
+msgid "Range Definition Entry"
+msgstr "Intrare Rang Definire"
+
+#: ../ui/search-dialog.glade.h:74
 msgid "e.g. Matt-John;Rev4"
 msgstr "ex. Mat-Ioan;Apoc4"
 
-#: ../ui/search-dialog.glade.h:115
-msgid "for "
-msgstr "pentru "
-
-#: ../ui/xi-menus.glade.h:2
-msgid "About _Translation"
-msgstr "Despre _Traducere"
-
-#: ../ui/xi-menus.glade.h:3
-msgid "About _Xiphos"
-msgstr "Despre _Xiphos"
-
-#: ../ui/xi-menus.glade.h:4
-msgid "Add Item"
-msgstr "Adauga obiect"
-
-#: ../ui/xi-menus.glade.h:5
-msgid "Add Sub-Item"
-msgstr "Adauga Sub-Obiect"
-
-#: ../ui/xi-menus.glade.h:6
-msgid "Add a sub-item"
-msgstr "Adauga un sub-obiect"
-
-#: ../ui/xi-menus.glade.h:7
-msgid "Add an item"
-msgstr "Adauga un obiect"
-
-#: ../ui/xi-menus.glade.h:8
-msgid "Add new folder to selected folder"
-msgstr "Adauga folder nou la folderul selectat"
-
-#: ../ui/xi-menus.glade.h:10
-msgid "Allow Reordering"
-msgstr "Permite Reordonarea"
-
-#: ../ui/xi-menus.glade.h:11
-msgid "Allow items to be moved from one folder to another"
-msgstr "Permite ca obiectele sa fie mutate de la un folder la altu"
-
-#: ../ui/xi-menus.glade.h:12
-msgid "Annotate Verse"
-msgstr "Adnotare Verset"
-
-#: ../ui/xi-menus.glade.h:13
-#, fuzzy
-msgid "Apply a high-contrast highlight to the current verse"
-msgstr "Aplica o marcare de contrast mare la versetul curent"
-
-#: ../ui/xi-menus.glade.h:15
-msgid "Bring the simple sidebar search forward"
-msgstr ""
-
-#: ../ui/xi-menus.glade.h:16
-msgid "Browse in BibleMap.org"
-msgstr "Rasfoieste in BibleMap.org"
-
-#: ../ui/xi-menus.glade.h:17
-msgid "Collapse All"
-msgstr "Strange toate"
-
-#: ../ui/xi-menus.glade.h:18
-msgid "Collapse all Bookmarks groups"
-msgstr "Strange toate grupele de Insemne"
-
-#: ../ui/xi-menus.glade.h:19
-msgid "Commentary by Chapter"
-msgstr "Comentariu pe Capitol"
-
-#: ../ui/xi-menus.glade.h:21
-msgid "Create a new daily journal"
-msgstr "Creaza un jurnal zilnic nou"
-
-#: ../ui/xi-menus.glade.h:22
-#, fuzzy
-msgid "Create a new journal or prayerlist from a template"
-msgstr "Creaza o lista noua de rugaciune"
-
-#: ../ui/xi-menus.glade.h:23
-msgid "Create a new monthly journal"
-msgstr "Creaza un jurnal lunar nou"
-
-#: ../ui/xi-menus.glade.h:24
-msgid "Create a new outlined topic"
-msgstr "Creaza un topic subliniat nou"
-
-#: ../ui/xi-menus.glade.h:25
-msgid "Create a new simple prayer list"
-msgstr "Creaza o simpla lista noua de rugaciune"
-
-#: ../ui/xi-menus.glade.h:26
-msgid "Create a new subject prayer list"
-msgstr "Creaza o lista noua de rugaciune pe subiecte"
-
-#: ../ui/xi-menus.glade.h:27
-msgid "Daily"
-msgstr "Zilnic"
-
-#: ../ui/xi-menus.glade.h:28
-msgid "Delete Item"
-msgstr "Sterge Obiect"
-
-#: ../ui/xi-menus.glade.h:29
-msgid "Delete item"
-msgstr "Sterge obiect"
-
-#: ../ui/xi-menus.glade.h:30
-msgid "Dictionar_y"
-msgstr "Dictiona_r"
-
-#: ../ui/xi-menus.glade.h:31
-msgid "Display Book Heading"
-msgstr "Afiseaza Titlu Carte"
-
-#: ../ui/xi-menus.glade.h:32
-msgid "Display Chapter Heading"
-msgstr "Afiseaza Titlu Capitol"
-
-#: ../ui/xi-menus.glade.h:33
-msgid "Display verse numbers in the text"
-msgstr ""
-
-#: ../ui/xi-menus.glade.h:34
-msgid "Doublespace"
-msgstr "Text cu D_ublu-Spatiu"
-
-#: ../ui/xi-menus.glade.h:35
-msgid "Dump Pers.Comm."
-msgstr "Goleste Com.Pers."
-
-#: ../ui/xi-menus.glade.h:37
-msgid "Edit bookmark item"
-msgstr "Editeaza obiectul de insemnare"
-
-#: ../ui/xi-menus.glade.h:38
-msgid "Edit this item"
-msgstr "Editeaza acest obiect"
-
-#: ../ui/xi-menus.glade.h:39
-msgid "Expand All"
-msgstr "Extinde Toate"
-
-#: ../ui/xi-menus.glade.h:40
-msgid "Expand all Bookmarks groups"
-msgstr "Extinde toate grupele de Insemne"
-
-#: ../ui/xi-menus.glade.h:41
-msgid "Export Folder"
-msgstr "Exporta Folder"
-
-#: ../ui/xi-menus.glade.h:42
-msgid "Export List"
-msgstr "Exporta Lista"
-
-#: ../ui/xi-menus.glade.h:49
-msgid "Image Content"
-msgstr "Continut Imagine"
-
-#: ../ui/xi-menus.glade.h:50
-#, fuzzy
-msgid "Import Bookmarks"
-msgstr "Insereaza Insemn"
-
-#: ../ui/xi-menus.glade.h:51
-msgid "Insert Bookmark"
-msgstr "Insereaza Insemn"
-
-#: ../ui/xi-menus.glade.h:52
-msgid "Insert new bookmark here"
-msgstr "Insereaza o insemnare aici"
-
-#: ../ui/xi-menus.glade.h:53
-msgid "L_ink Tabs"
-msgstr "Tab-ul L_ink-uri"
-
-#: ../ui/xi-menus.glade.h:54
-msgid "Learn about The Sword Project, of which Xiphos is one application"
-msgstr ""
-
-#: ../ui/xi-menus.glade.h:55
-msgid "Learn about Xiphos"
-msgstr "Despre _Xiphos"
-
-#: ../ui/xi-menus.glade.h:56
-msgid "Learn about translating the Xiphos interface to other languages"
-msgstr ""
-
-#: ../ui/xi-menus.glade.h:58
-#, fuzzy
-msgid "Load other bookmarks file (default: from BibleTime)"
-msgstr "Incarca Insemnele din Bibletime"
-
-#: ../ui/xi-menus.glade.h:59
-msgid "Lookup Selection"
-msgstr "Cauta Selectia"
-
-#: ../ui/xi-menus.glade.h:60
-msgid "Make all tabs' Bibles navigate together"
-msgstr ""
-
-#: ../ui/xi-menus.glade.h:62
-msgid "Monthly"
-msgstr "Lunar"
-
-#: ../ui/xi-menus.glade.h:65
-msgid "Note"
-msgstr "Nota"
-
-#: ../ui/xi-menus.glade.h:66
-msgid "Open Module"
-msgstr "Deschide Modul"
-
-#: ../ui/xi-menus.glade.h:67
-msgid "Open Study_pad"
-msgstr "Deschide Caietul de _Studiu"
-
-#: ../ui/xi-menus.glade.h:68
-msgid "Open a browser on an interface to live IRC chat"
-msgstr ""
-
-#: ../ui/xi-menus.glade.h:69
-msgid "Open a browser on our bug tracker"
-msgstr ""
-
-#: ../ui/xi-menus.glade.h:70
-msgid "Open a browser on the users' mailing list webpage"
-msgstr ""
-
-#: ../ui/xi-menus.glade.h:71
-msgid "Open a saved tab settings collection"
-msgstr ""
-
-#: ../ui/xi-menus.glade.h:72
-msgid "Open in a dialog"
-msgstr "Deschide intr-un dialog"
-
-#: ../ui/xi-menus.glade.h:73
-msgid "Open in a separate window"
-msgstr "Deschide intr-o fereastra separata"
-
-#: ../ui/xi-menus.glade.h:74
-msgid "Open in editor"
-msgstr "Deschide in editor"
-
-#: ../ui/xi-menus.glade.h:75
-msgid "Open in new tab"
-msgstr "Deschide in tab-ul curent"
-
-#: ../ui/xi-menus.glade.h:76
-msgid ""
-"Open selected module in a\n"
-"\tseparate ['dialog'] window"
-msgstr ""
-"Deschide modulul selectat intr-o\n"
-"\tfereastra ['dialog'] separata"
-
-#: ../ui/xi-menus.glade.h:78
-msgid "Open selected module in a new tab"
-msgstr "Deschide modulul selectate intr-un tab nou"
-
-#: ../ui/xi-menus.glade.h:79
-msgid "Open the advanced search dialog, to run complex queries"
-msgstr ""
-
-#: ../ui/xi-menus.glade.h:80
-msgid "Open the help viewer on the Xiphos manual"
-msgstr ""
-
-#: ../ui/xi-menus.glade.h:81
-msgid "Open this bookmark in a dialog"
-msgstr "Deschide acest insemn intr-un dialog"
-
-#: ../ui/xi-menus.glade.h:82
-msgid "Open this bookmark in a new tab"
-msgstr "Deschide aceasta insemnare intr-un tab nou"
-
-#: ../ui/xi-menus.glade.h:83
-#, fuzzy
-msgid "Operate the sidebar as a separate window"
-msgstr "Deschide intr-o fereastra separata"
-
-#: ../ui/xi-menus.glade.h:84
-msgid "Outlined"
-msgstr "Subliniat"
-
-#: ../ui/xi-menus.glade.h:85
-msgid "Preview _Daily Devotion"
-msgstr "Previzualizare _Devotional Zilnic"
-
-#: ../ui/xi-menus.glade.h:87
-msgid "Provide the full-chapter parallel Bible window as another tab"
-msgstr ""
-
-#: ../ui/xi-menus.glade.h:88
-msgid "Read Selection Aloud"
-msgstr "Citeste Selectiunea Tare"
-
-#: ../ui/xi-menus.glade.h:90
-msgid "Remove folder and save it"
-msgstr "Elimina folder si salveaza-l"
-
-#: ../ui/xi-menus.glade.h:91
-#, fuzzy
-msgid "Remove the sidebar entirely from view"
-msgstr "Scoate folderul selectat"
-
-#: ../ui/xi-menus.glade.h:92
-msgid "Remove this item"
-msgstr "Elimina acest obiect"
-
-#: ../ui/xi-menus.glade.h:93
-msgid "Rename Pers.Comm."
-msgstr "Redenumeste Com.Pers."
-
-#: ../ui/xi-menus.glade.h:94
-msgid "Respect Font Faces"
-msgstr "Respecta Fetele de Font"
-
-#: ../ui/xi-menus.glade.h:95
-msgid "Save list as a series of bookmarks"
-msgstr "Salveaza lista ca o serie de insemnari"
-
-#: ../ui/xi-menus.glade.h:96
-msgid "Save list as a single bookmark"
-msgstr "Salveza lista ca o insemnare singura"
-
-#: ../ui/xi-menus.glade.h:97
-msgid "Save these results as a series of bookmarks in their own folder"
-msgstr ""
-"Salveaza aceste rezultate ca o serie de insemnari in propriul lor folder"
-
-#: ../ui/xi-menus.glade.h:98
-msgid "Save these results as a single bookmark"
-msgstr "Salveaza aceste rezultate ca o insemnare singura"
-
-#: ../ui/xi-menus.glade.h:99
-msgid "Save this collection of tab settings"
-msgstr ""
-
-#: ../ui/xi-menus.glade.h:100
-msgid "Scripture Cross-references"
-msgstr "Trimiteri Scriptura"
-
-#: ../ui/xi-menus.glade.h:102
-msgid "Select Previewer position between sidebar or beneath Bible"
-msgstr ""
-
-#: ../ui/xi-menus.glade.h:103
-msgid "Show Parallel View in a _Tab"
-msgstr "_Arata Vederea paralela intr-un Tab"
-
-#: ../ui/xi-menus.glade.h:104
-msgid "Show Previe_wer in the Sidebar"
-msgstr "Arata _Revizuitorul in Bara laterala"
-
-#: ../ui/xi-menus.glade.h:105
-msgid "Show Verse _Numbers"
-msgstr "Arata _Numerele Versetelor"
-
-#: ../ui/xi-menus.glade.h:106
-msgid "Show today's entry from your selected daily devotional in the previewer"
-msgstr ""
-
-#: ../ui/xi-menus.glade.h:107
-msgid "Simple"
-msgstr "Simplu"
-
-#: ../ui/xi-menus.glade.h:109
-msgid "Subject"
-msgstr "Subiect"
-
-#: ../ui/xi-menus.glade.h:111
-msgid "Turn on text-to-speech reading of Bible verses as they are selected"
-msgstr ""
-
-#: ../ui/xi-menus.glade.h:112
-msgid "Unlock This Module"
-msgstr "Deschide Acest Modul"
-
-#: ../ui/xi-menus.glade.h:113
-msgid "Use Current Dictionary"
-msgstr "Foloseste Dictionarul Curent"
-
-#: ../ui/xi-menus.glade.h:114
-msgid "Use module manager to install and remove Sword modules"
-msgstr "Foloseste managerul de modul pentru a instala si elimina module Sword"
-
-#: ../ui/xi-menus.glade.h:115
-msgid "Variants"
-msgstr "Variante"
-
-#: ../ui/xi-menus.glade.h:116
-msgid "Verse Per Line"
-msgstr "Verset Per _Linie"
-
-#: ../ui/xi-menus.glade.h:118
-msgid "_About The SWORD Project"
-msgstr "_Despre Proiectul SWORD"
-
-#: ../ui/xi-menus.glade.h:119
-msgid "_Advanced Search"
-msgstr "Cautare _Avansata"
-
-#: ../ui/xi-menus.glade.h:120
-msgid "_Attach/Detach Sidebar"
-msgstr "_Ataseaza/Detaseaza Bara laterala"
-
-#: ../ui/xi-menus.glade.h:121
-msgid "_Bible"
-msgstr "_Biblie"
-
-#: ../ui/xi-menus.glade.h:122
-msgid "_Commentary/Book"
-msgstr "_Comentariu/Carte"
-
-#: ../ui/xi-menus.glade.h:123
-msgid "_Contents"
-msgstr "_Cuprins"
-
-#: ../ui/xi-menus.glade.h:124
-msgid "_Edit"
-msgstr "_Editare"
-
-#: ../ui/xi-menus.glade.h:125
-msgid "_Edit Item"
-msgstr "_Editare obiect"
-
-#: ../ui/xi-menus.glade.h:127
-msgid "_Help"
-msgstr "_Ajutor"
-
-#: ../ui/xi-menus.glade.h:128
-msgid "_Highlight Current Verse"
-msgstr "_Marcheaza Versetul Curent"
-
-#: ../ui/xi-menus.glade.h:129
-msgid "_Live Chat"
-msgstr "Chat Liv_e"
-
-#: ../ui/xi-menus.glade.h:130
-msgid "_Mailing List"
-msgstr "_Lista de Corespondenta"
-
-#: ../ui/xi-menus.glade.h:131
-msgid "_Module Manager"
-msgstr "_Manager de Modul"
-
-#: ../ui/xi-menus.glade.h:132
-#, fuzzy
-msgid "_New Prayerlist/Journal"
-msgstr "Lista/Jurnal de Rugaciune"
-
-#: ../ui/xi-menus.glade.h:133
-msgid "_Open Session"
-msgstr "_Deschide Sesiune"
-
-#: ../ui/xi-menus.glade.h:134
-msgid "_Preferences"
-msgstr "_Preferinte"
-
-#: ../ui/xi-menus.glade.h:135
-msgid "_Preview"
-msgstr "Pre_vizualizare"
-
-#: ../ui/xi-menus.glade.h:136
-msgid "_Read Aloud"
-msgstr "Citeste _Tare"
-
-#: ../ui/xi-menus.glade.h:137
-msgid "_Report Bug"
-msgstr "_Raporteaza Problema"
-
-#: ../ui/xi-menus.glade.h:138
-msgid "_Save Session"
-msgstr "_Salvare Sesiune"
-
-#: ../ui/xi-menus.glade.h:139
-msgid "_Search"
-msgstr "_Cautare"
-
-#: ../ui/xi-menus.glade.h:140
-msgid "_Show/Hide Attached Sidebar"
-msgstr "Ara_ta/Ascunde Bara de margine Atasata"
+#: ../ui/search-dialog.glade.h:75
+msgid "Custom Range Preview"
+msgstr "Rang la Comanda de Previzualizare"
+
+#: ../ui/search-dialog.glade.h:76
+msgid "Custom Verse Ranges"
+msgstr "Ranguri Verset la Comanda"
+
+#: ../ui/search-dialog.glade.h:77
+msgid "Create a new module list"
+msgstr "Creaza o lista noua de module"
+
+#: ../ui/search-dialog.glade.h:78
+msgid "New Custom Module List Button"
+msgstr "Buton Lista Modul Nou la Comanda"
+
+#: ../ui/search-dialog.glade.h:79
+msgid "Save the module list"
+msgstr "Salveaza lista de module"
+
+#: ../ui/search-dialog.glade.h:80
+msgid "Save Custom Module List Button"
+msgstr "Salvare Buton Lista Modul la Comanda"
+
+#: ../ui/search-dialog.glade.h:81
+msgid "Delete the selected list"
+msgstr "Sterge lista selectata"
+
+#: ../ui/search-dialog.glade.h:82
+msgid "Clear Custom Module List Button"
+msgstr "Curata Modulul la Comanda din Butonul de lista"
+
+#: ../ui/search-dialog.glade.h:83
+msgid "<b>Module Lists</b>"
+msgstr "<b>Lista Module</b>"
+
+#: ../ui/search-dialog.glade.h:84
+msgid "<b>List Name</b>"
+msgstr "<b>Nume Lista</b>"
+
+#: ../ui/search-dialog.glade.h:85
+msgid "Custom Module List Name Entry"
+msgstr "Nume Intrare Lista Module la Comanda"
+
+#: ../ui/search-dialog.glade.h:90
+msgid "Open a dialog to select modules to add to the list"
+msgstr "Deschide un dialog pentru a selecta modulele de adaugat la lista"
+
+#: ../ui/search-dialog.glade.h:93
+msgid "Custom Module Lists"
+msgstr "Liste Module la Comanda"
+
+#: ../ui/search-dialog.glade.h:94
+msgid "<b>Attribute</b>"
+msgstr "<b>Atribut</b>"
+
+#: ../ui/search-dialog.glade.h:95
+msgid "Search for Strongs Numbers like G4442 or H1121"
+msgstr "Cauta Numere Strongs de genul G4442 sau H11121"
+
+#: ../ui/search-dialog.glade.h:96
+msgid "Strongs Numbers"
+msgstr "Numere Strongs"
+
+#: ../ui/search-dialog.glade.h:97
+msgid "Strongs Numbers radiobutton"
+msgstr "Buton radion Numere Strongs"
+
+#: ../ui/search-dialog.glade.h:98
+msgid "Search for Morphological tags"
+msgstr "Cauta tag-uri Morfologice"
+
+#: ../ui/search-dialog.glade.h:100
+msgid "Morphological Tags radiobutton"
+msgstr "Buton radio Tag-uri Morfologice"
+
+#: ../ui/search-dialog.glade.h:101
+msgid "Search in footnotes"
+msgstr "Cauta in note de subsol"
+
+#: ../ui/search-dialog.glade.h:103
+msgid "Footnotes radiobutton"
+msgstr "Buton radio note de subsol"
+
+#: ../ui/search-dialog.glade.h:104
+msgid "<b>Results Display Options</b>"
+msgstr "<b>Optiuni Afisare Rezultate</b>"
+
+#: ../ui/search-dialog.glade.h:105
+msgid "In modules that have Strong's Numbers"
+msgstr "In modulele care ah Numere Strong's"
+
+#: ../ui/search-dialog.glade.h:106
+msgid "Show Strong's Numbers"
+msgstr "Arata Numerele Strong's"
+
+#: ../ui/search-dialog.glade.h:107
+msgid "Show Strong's Numbers checkbox"
+msgstr "Casuta de verificare Arata Numerele Strong's"
+
+#: ../ui/search-dialog.glade.h:108
+msgid "In modules that have Morphological Tags"
+msgstr "In modulele care au Tag-uri Morfologice"
+
+#: ../ui/search-dialog.glade.h:109
+msgid "Show Morphological Tags"
+msgstr "Arata Tag-urile Morfologice"
+
+#: ../ui/search-dialog.glade.h:110
+msgid "Show Morphological Tags checkbox"
+msgstr "Casuta de verificare Arata Tag-urile Morfologice"
+
+#: ../ui/search-dialog.glade.h:111
+msgid "In modules that have Footnotes"
+msgstr "In modulele care au Note de Subsol"
+
+#: ../ui/search-dialog.glade.h:112
+msgid "Show Footnotes"
+msgstr "Arata Note de Subsol"
+
+#: ../ui/search-dialog.glade.h:113
+msgid "Show Footnotes checkbox"
+msgstr "Casuta de verificare Arata Note de Subsol"
+
+#: ../ui/search-dialog.glade.h:114
+msgid "Attribute Search"
+msgstr "Atribut Cautare"
 
 #: ../ui/xi-export-bookmarks.glade.h:1
-msgid "<b>Export to:</b>"
-msgstr ""
-
-#: ../ui/xi-export-bookmarks.glade.h:2
 msgid "Export Bookmark Folder"
 msgstr ""
 
+#: ../ui/xi-export-bookmarks.glade.h:2
+msgid "<b>Export to:</b>"
+msgstr ""
+
 #: ../ui/xi-export-bookmarks.glade.h:3
-msgid "Html"
-msgstr "HTML"
+msgid "Xiphos bookmarks"
+msgstr ""
 
 #: ../ui/xi-export-bookmarks.glade.h:4
-msgid "Include Bible text"
-msgstr ""
+msgid "Html"
+msgstr "HTML"
 
 #: ../ui/xi-export-bookmarks.glade.h:5
 msgid "Plain text"
 msgstr ""
 
 #: ../ui/xi-export-bookmarks.glade.h:6
-msgid "Xiphos bookmarks"
+msgid "Include Bible text"
 msgstr ""
 
 #: ../ui/xi-export-bookmarks.glade.h:7
@@ -3978,13 +3631,513 @@ msgstr ""
 msgid "gtk-ok"
 msgstr ""
 
+#: ../ui/xi-menus.glade.h:2
+msgid "Open Study_pad"
+msgstr "Deschide Caietul de _Studiu"
+
+#: ../ui/xi-menus.glade.h:3
+msgid "_Open Session"
+msgstr "_Deschide Sesiune"
+
+#: ../ui/xi-menus.glade.h:4
+msgid "Open a saved tab settings collection"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:5
+msgid "_Save Session"
+msgstr "_Salvare Sesiune"
+
+#: ../ui/xi-menus.glade.h:6
+msgid "Save this collection of tab settings"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:7
+#, fuzzy
+msgid "_New Prayerlist/Journal"
+msgstr "Lista/Jurnal de Rugaciune"
+
+#: ../ui/xi-menus.glade.h:8
+#, fuzzy
+msgid "Create a new journal or prayerlist from a template"
+msgstr "Creaza o lista noua de rugaciune"
+
+#: ../ui/xi-menus.glade.h:9
+msgid "_Edit"
+msgstr "_Editare"
+
+#: ../ui/xi-menus.glade.h:10
+msgid "_Search"
+msgstr "_Cautare"
+
+#: ../ui/xi-menus.glade.h:11
+msgid "Bring the simple sidebar search forward"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:12
+msgid "_Advanced Search"
+msgstr "Cautare _Avansata"
+
+#: ../ui/xi-menus.glade.h:13
+msgid "Open the advanced search dialog, to run complex queries"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:14
+msgid "_Preferences"
+msgstr "_Preferinte"
+
+#: ../ui/xi-menus.glade.h:15
+msgid "Use module manager to install and remove Sword modules"
+msgstr "Foloseste managerul de modul pentru a instala si elimina module Sword"
+
+#: ../ui/xi-menus.glade.h:16
+msgid "_Module Manager"
+msgstr "_Manager de Modul"
+
+#: ../ui/xi-menus.glade.h:18
+msgid "Preview _Daily Devotion"
+msgstr "Previzualizare _Devotional Zilnic"
+
+#: ../ui/xi-menus.glade.h:19
+msgid "Show today's entry from your selected daily devotional in the previewer"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:20
+msgid "_Bible"
+msgstr "_Biblie"
+
+#: ../ui/xi-menus.glade.h:21
+msgid "_Preview"
+msgstr "Pre_vizualizare"
+
+#: ../ui/xi-menus.glade.h:22
+msgid "_Commentary/Book"
+msgstr "_Comentariu/Carte"
+
+#: ../ui/xi-menus.glade.h:23
+msgid "Dictionar_y"
+msgstr "Dictiona_r"
+
+#: ../ui/xi-menus.glade.h:24
+msgid "L_ink Tabs"
+msgstr "Tab-ul L_ink-uri"
+
+#: ../ui/xi-menus.glade.h:25
+msgid "Make all tabs' Bibles navigate together"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:26
+msgid "_Read Aloud"
+msgstr "Citeste _Tare"
+
+#: ../ui/xi-menus.glade.h:27
+msgid "Turn on text-to-speech reading of Bible verses as they are selected"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:28
+msgid "Show Verse _Numbers"
+msgstr "Arata _Numerele Versetelor"
+
+#: ../ui/xi-menus.glade.h:29
+msgid "Display verse numbers in the text"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:30
+msgid "_Highlight Current Verse"
+msgstr "_Marcheaza Versetul Curent"
+
+#: ../ui/xi-menus.glade.h:31
+#, fuzzy
+msgid "Apply a high-contrast highlight to the current verse"
+msgstr "Aplica o marcare de contrast mare la versetul curent"
+
+#: ../ui/xi-menus.glade.h:32
+msgid "_Attach/Detach Sidebar"
+msgstr "_Ataseaza/Detaseaza Bara laterala"
+
+#: ../ui/xi-menus.glade.h:33
+#, fuzzy
+msgid "Operate the sidebar as a separate window"
+msgstr "Deschide intr-o fereastra separata"
+
+#: ../ui/xi-menus.glade.h:34
+msgid "_Show/Hide Attached Sidebar"
+msgstr "Ara_ta/Ascunde Bara de margine Atasata"
+
+#: ../ui/xi-menus.glade.h:35
+#, fuzzy
+msgid "Remove the sidebar entirely from view"
+msgstr "Scoate folderul selectat"
+
+#: ../ui/xi-menus.glade.h:36
+msgid "Show Parallel View in a _Tab"
+msgstr "_Arata Vederea paralela intr-un Tab"
+
+#: ../ui/xi-menus.glade.h:37
+msgid "Provide the full-chapter parallel Bible window as another tab"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:38
+msgid "Show Previe_wer in the Sidebar"
+msgstr "Arata _Revizuitorul in Bara laterala"
+
+#: ../ui/xi-menus.glade.h:39
+msgid "Select Previewer position between sidebar or beneath Bible"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:40
+msgid "_Help"
+msgstr "_Ajutor"
+
+#: ../ui/xi-menus.glade.h:41
+msgid "_Contents"
+msgstr "_Cuprins"
+
+#: ../ui/xi-menus.glade.h:42
+msgid "Open the help viewer on the Xiphos manual"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:43
+msgid "_Mailing List"
+msgstr "_Lista de Corespondenta"
+
+#: ../ui/xi-menus.glade.h:44
+msgid "Open a browser on the users' mailing list webpage"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:45
+msgid "_Live Chat"
+msgstr "Chat Liv_e"
+
+#: ../ui/xi-menus.glade.h:46
+msgid "Open a browser on an interface to live IRC chat"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:47
+msgid "_Report Bug"
+msgstr "_Raporteaza Problema"
+
+#: ../ui/xi-menus.glade.h:48
+msgid "Open a browser on our bug tracker"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:49
+msgid "About _Translation"
+msgstr "Despre _Traducere"
+
+#: ../ui/xi-menus.glade.h:50
+msgid "Learn about translating the Xiphos interface to other languages"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:51
+msgid "_About The SWORD Project"
+msgstr "_Despre Proiectul SWORD"
+
+#: ../ui/xi-menus.glade.h:52
+msgid "Learn about The Sword Project, of which Xiphos is one application"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:53
+msgid "About _Xiphos"
+msgstr "Despre _Xiphos"
+
+#: ../ui/xi-menus.glade.h:54
+msgid "Learn about Xiphos"
+msgstr "Despre _Xiphos"
+
+#: ../ui/xi-menus.glade.h:57
+msgid "Annotate Verse"
+msgstr "Adnotare Verset"
+
+#: ../ui/xi-menus.glade.h:60
+msgid "Open Module"
+msgstr "Deschide Modul"
+
+#: ../ui/xi-menus.glade.h:62
+msgid "Note"
+msgstr "Nota"
+
+#: ../ui/xi-menus.glade.h:63
+msgid "Open in editor"
+msgstr "Deschide in editor"
+
+#: ../ui/xi-menus.glade.h:65
+msgid "Verse Per Line"
+msgstr "Verset Per _Linie"
+
+#: ../ui/xi-menus.glade.h:72
+msgid "Scripture Cross-references"
+msgstr "Trimiteri Scriptura"
+
+#: ../ui/xi-menus.glade.h:73
+msgid "Footnote/Cross-ref Markers"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:74
+msgid "Show non-anonymous markers e.g. \"*n23\""
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:79
+msgid "Variants"
+msgstr "Variante"
+
+#: ../ui/xi-menus.glade.h:83
+msgid "Image Content"
+msgstr "Continut Imagine"
+
+#: ../ui/xi-menus.glade.h:84
+msgid "Respect Font Faces"
+msgstr "Respecta Fetele de Font"
+
+#: ../ui/xi-menus.glade.h:85
+msgid "Commentary by Chapter"
+msgstr "Comentariu pe Capitol"
+
+#: ../ui/xi-menus.glade.h:86
+msgid "Doublespace"
+msgstr "Text cu D_ublu-Spatiu"
+
+#: ../ui/xi-menus.glade.h:87
+msgid "Lookup Selection"
+msgstr "Cauta Selectia"
+
+#: ../ui/xi-menus.glade.h:88
+msgid "Use Current Dictionary"
+msgstr "Foloseste Dictionarul Curent"
+
+#: ../ui/xi-menus.glade.h:89
+msgid "Browse in BibleMap.org"
+msgstr "Rasfoieste in BibleMap.org"
+
+#: ../ui/xi-menus.glade.h:90
+msgid "Unlock This Module"
+msgstr "Deschide Acest Modul"
+
+#: ../ui/xi-menus.glade.h:91
+msgid "Display Book Heading"
+msgstr "Afiseaza Titlu Carte"
+
+#: ../ui/xi-menus.glade.h:92
+msgid "Display Chapter Heading"
+msgstr "Afiseaza Titlu Capitol"
+
+#: ../ui/xi-menus.glade.h:93
+msgid "Rename Pers.Comm."
+msgstr "Redenumeste Com.Pers."
+
+#: ../ui/xi-menus.glade.h:94
+msgid "Dump Pers.Comm."
+msgstr "Goleste Com.Pers."
+
+#: ../ui/xi-menus.glade.h:95
+msgid "Read Selection Aloud"
+msgstr "Citeste Selectiunea Tare"
+
+#: ../ui/xi-menus.glade.h:96
+msgid "Save these results as a single bookmark"
+msgstr "Salveaza aceste rezultate ca o insemnare singura"
+
+#: ../ui/xi-menus.glade.h:97
+msgid "Save list as a single bookmark"
+msgstr "Salveza lista ca o insemnare singura"
+
+#: ../ui/xi-menus.glade.h:98
+msgid "Save these results as a series of bookmarks in their own folder"
+msgstr ""
+"Salveaza aceste rezultate ca o serie de insemnari in propriul lor folder"
+
+#: ../ui/xi-menus.glade.h:99
+msgid "Save list as a series of bookmarks"
+msgstr "Salveaza lista ca o serie de insemnari"
+
+#: ../ui/xi-menus.glade.h:100
+msgid "Export List"
+msgstr "Exporta Lista"
+
+#: ../ui/xi-menus.glade.h:101
+msgid "Open this bookmark in a new tab"
+msgstr "Deschide aceasta insemnare intr-un tab nou"
+
+#: ../ui/xi-menus.glade.h:102
+msgid "Open in new tab"
+msgstr "Deschide in tab-ul curent"
+
+#: ../ui/xi-menus.glade.h:103
+msgid "Open this bookmark in a dialog"
+msgstr "Deschide acest insemn intr-un dialog"
+
+#: ../ui/xi-menus.glade.h:104
+msgid "Open in a dialog"
+msgstr "Deschide intr-un dialog"
+
+#: ../ui/xi-menus.glade.h:105
+msgid "Add new folder to selected folder"
+msgstr "Adauga folder nou la folderul selectat"
+
+#: ../ui/xi-menus.glade.h:107
+msgid "Insert new bookmark here"
+msgstr "Insereaza o insemnare aici"
+
+#: ../ui/xi-menus.glade.h:108
+msgid "Insert Bookmark"
+msgstr "Insereaza Insemn"
+
+#: ../ui/xi-menus.glade.h:109
+msgid "Edit bookmark item"
+msgstr "Editeaza obiectul de insemnare"
+
+#: ../ui/xi-menus.glade.h:110
+msgid "_Edit Item"
+msgstr "_Editare obiect"
+
+#: ../ui/xi-menus.glade.h:111
+msgid "Delete item"
+msgstr "Sterge obiect"
+
+#: ../ui/xi-menus.glade.h:112
+msgid "Delete Item"
+msgstr "Sterge Obiect"
+
+#: ../ui/xi-menus.glade.h:113
+msgid "Expand all Bookmarks groups"
+msgstr "Extinde toate grupele de Insemne"
+
+#: ../ui/xi-menus.glade.h:114
+msgid "Expand All"
+msgstr "Extinde Toate"
+
+#: ../ui/xi-menus.glade.h:115
+msgid "Collapse all Bookmarks groups"
+msgstr "Strange toate grupele de Insemne"
+
+#: ../ui/xi-menus.glade.h:116
+msgid "Collapse All"
+msgstr "Strange toate"
+
+#: ../ui/xi-menus.glade.h:117
+msgid "Allow items to be moved from one folder to another"
+msgstr "Permite ca obiectele sa fie mutate de la un folder la altu"
+
+#: ../ui/xi-menus.glade.h:118
+msgid "Allow Reordering"
+msgstr "Permite Reordonarea"
+
+#: ../ui/xi-menus.glade.h:119
+#, fuzzy
+msgid "Load other bookmarks file (default: from BibleTime)"
+msgstr "Incarca Insemnele din Bibletime"
+
+#: ../ui/xi-menus.glade.h:120
+#, fuzzy
+msgid "Import Bookmarks"
+msgstr "Insereaza Insemn"
+
+#: ../ui/xi-menus.glade.h:121
+msgid "Remove folder and save it"
+msgstr "Elimina folder si salveaza-l"
+
+#: ../ui/xi-menus.glade.h:122
+msgid "Export Folder"
+msgstr "Exporta Folder"
+
+#: ../ui/xi-menus.glade.h:123
+msgid "Open selected module in a new tab"
+msgstr "Deschide modulul selectate intr-un tab nou"
+
+#: ../ui/xi-menus.glade.h:124
+msgid ""
+"Open selected module in a\n"
+"\tseparate ['dialog'] window"
+msgstr ""
+"Deschide modulul selectat intr-o\n"
+"\tfereastra ['dialog'] separata"
+
+#: ../ui/xi-menus.glade.h:126
+msgid "Open in a separate window"
+msgstr "Deschide intr-o fereastra separata"
+
+#: ../ui/xi-menus.glade.h:127
+msgid "Create a new simple prayer list"
+msgstr "Creaza o simpla lista noua de rugaciune"
+
+#: ../ui/xi-menus.glade.h:128
+msgid "Simple"
+msgstr "Simplu"
+
+#: ../ui/xi-menus.glade.h:129
+msgid "Create a new subject prayer list"
+msgstr "Creaza o lista noua de rugaciune pe subiecte"
+
+#: ../ui/xi-menus.glade.h:130
+msgid "Subject"
+msgstr "Subiect"
+
+#: ../ui/xi-menus.glade.h:131
+msgid "Create a new monthly journal"
+msgstr "Creaza un jurnal lunar nou"
+
+#: ../ui/xi-menus.glade.h:132
+msgid "Monthly"
+msgstr "Lunar"
+
+#: ../ui/xi-menus.glade.h:133
+msgid "Create a new daily journal"
+msgstr "Creaza un jurnal zilnic nou"
+
+#: ../ui/xi-menus.glade.h:134
+msgid "Daily"
+msgstr "Zilnic"
+
+#: ../ui/xi-menus.glade.h:135
+msgid "Create a new outlined topic"
+msgstr "Creaza un topic subliniat nou"
+
+#: ../ui/xi-menus.glade.h:136
+msgid "Outlined"
+msgstr "Subliniat"
+
+#: ../ui/xi-menus.glade.h:137
+msgid "Open module in editor or plain display window"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:138
+#, fuzzy
+msgid "Open in separate window"
+msgstr "Deschide intr-o fereastra separata"
+
+#: ../ui/xi-menus.glade.h:139
+msgid "Add a sub-item"
+msgstr "Adauga un sub-obiect"
+
+#: ../ui/xi-menus.glade.h:140
+msgid "Add Sub-Item"
+msgstr "Adauga Sub-Obiect"
+
+#: ../ui/xi-menus.glade.h:141
+msgid "Add an item"
+msgstr "Adauga un obiect"
+
+#: ../ui/xi-menus.glade.h:142
+msgid "Add Item"
+msgstr "Adauga obiect"
+
+#: ../ui/xi-menus.glade.h:143
+msgid "Remove this item"
+msgstr "Elimina acest obiect"
+
+#: ../ui/xi-menus.glade.h:145
+msgid "Edit this item"
+msgstr "Editeaza acest obiect"
+
 #: ../xiphos.desktop.in.in.h:1
+msgid "Xiphos Bible Guide"
+msgstr "Ghid Xiphos pentru Biblie"
+
+#: ../xiphos.desktop.in.in.h:2
 msgid "Study the Bible"
 msgstr "Studiaza Biblia"
 
-#: ../xiphos.desktop.in.in.h:2
-msgid "Xiphos Bible Guide"
-msgstr "Ghid Xiphos pentru Biblie"
+#~ msgid "Go to "
+#~ msgstr "Mergi la "
 
 #~ msgid "Main"
 #~ msgstr "Principal"
@@ -4111,9 +4264,6 @@ msgstr "Ghid Xiphos pentru Biblie"
 
 #~ msgid "About the SWORD Project"
 #~ msgstr "Despre Proiectul SWORD"
-
-#~ msgid "Sword Version"
-#~ msgstr "Versiunea Sword"
 
 #~ msgid "Books can be downloaded from the SWORD Project"
 #~ msgstr "Cartile pot fi descarcate din cadrul Proiectului SWORD"

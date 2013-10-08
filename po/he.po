@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 2.3.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-31 01:50-0500\n"
+"POT-Creation-Date: 2013-10-08 10:07-0400\n"
 "PO-Revision-Date: 2010-03-15 12:44+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Xiphos Translation Team\n"
@@ -22,31 +22,37 @@ msgstr ""
 "X-Poedit-Country: ISRAEL\n"
 "X-Poedit-Language: Hebrew\n"
 
-#: ../src/backend/sword_main.cc:736
+#: ../src/backend/sword_main.cc:741
 msgid ""
 "Xiphos failure: \"can't happen\", display_mod: null\n"
 "Please report this. sword_main.cc:set_treekey\n"
 "What were you doing when this occurred?"
 msgstr ""
 
-#: ../src/backend/sword_main.cc:1087
+#: ../src/backend/sword_main.cc:1092
 msgid "Configuration not found"
 msgstr "מידע מרוחק לא נמצא"
 
-#: ../src/editor/slib-editor.c:224 ../src/gnome2/html.c:633
+#: ../src/editor/slib-editor.c:224
 #, c-format
 msgid "Page %d of %d"
 msgstr "עמוד %d מתוך %d"
 
-#: ../src/editor/slib-editor.c:393 ../src/editor/slib-editor.c:435
+#: ../src/editor/slib-editor.c:393 ../src/editor/webkit_editor.c:585
+#: ../ui/editor_studypad.xml.h:9
+msgid "Open"
+msgstr "פתיחה"
+
+#: ../src/editor/slib-editor.c:435
 msgid "Save As"
 msgstr "שמור רשימה"
 
 #: ../src/editor/slib-editor.c:453 ../src/editor/slib-editor.c:619
+#: ../src/editor/webkit_editor.c:806
 msgid "Untitled document"
 msgstr "הדפס מסמך"
 
-#: ../src/editor/slib-editor.c:644
+#: ../src/editor/slib-editor.c:644 ../src/editor/webkit_editor.c:310
 msgid "Are you sure you want to delete the note for"
 msgstr "האם ברצונך למחוק את ההערה על"
 
@@ -62,13 +68,13 @@ msgstr "מקור"
 msgid "Plain Source"
 msgstr "מקור"
 
-#: ../src/editor/slib-editor.c:711 ../ui/editor_note.xml.h:15
-#: ../ui/editor_studypad.xml.h:21
+#: ../src/editor/slib-editor.c:711 ../ui/editor_note.xml.h:13
+#: ../ui/editor_studypad.xml.h:19
 msgid "_Print..."
 msgstr "הדפס..."
 
-#: ../src/editor/slib-editor.c:718 ../ui/editor_note.xml.h:9
-#: ../ui/editor_studypad.xml.h:14
+#: ../src/editor/slib-editor.c:718 ../ui/editor_note.xml.h:12
+#: ../ui/editor_studypad.xml.h:18
 msgid "Print Pre_view"
 msgstr "תצוגה לפני הדפסה"
 
@@ -104,8 +110,8 @@ msgstr "מחיקה"
 msgid "Delete current note"
 msgstr "מחיקת ההערה הנוכחית"
 
-#: ../src/editor/slib-editor.c:765 ../ui/editor_note.xml.h:14
-#: ../ui/editor_studypad.xml.h:20 ../ui/xi-menus.glade.h:126
+#: ../src/editor/slib-editor.c:765 ../ui/editor_note.xml.h:9
+#: ../ui/editor_studypad.xml.h:7 ../ui/xi-menus.glade.h:1
 msgid "_File"
 msgstr "_קובץ"
 
@@ -121,12 +127,12 @@ msgstr "_מקור HTML"
 msgid "_Plain Source"
 msgstr "מקור"
 
-#: ../src/editor/slib-editor.c:841 ../ui/xi-menus.glade.h:141
+#: ../src/editor/slib-editor.c:841 ../ui/xi-menus.glade.h:17
 msgid "_View"
 msgstr "_תצוגה"
 
-#: ../src/editor/slib-editor.c:852 ../ui/editor_note.xml.h:11
-#: ../ui/editor_studypad.xml.h:16
+#: ../src/editor/slib-editor.c:852 ../ui/editor_note.xml.h:16
+#: ../ui/editor_studypad.xml.h:11
 msgid "Save"
 msgstr "שמירה"
 
@@ -134,35 +140,39 @@ msgstr "שמירה"
 msgid "Insert Link"
 msgstr "הוספת קישור"
 
-#: ../src/editor/slib-editor.c:1252 ../src/editor/slib-editor.c:1290
+#: ../src/editor/slib-editor.c:1254 ../src/editor/slib-editor.c:1292
+#: ../src/editor/webkit_editor.c:1336 ../src/editor/webkit_editor.c:1374
 msgid "Save the changes to document"
 msgstr "שמור את השינויים במסמך"
 
-#: ../src/editor/slib-editor.c:1253 ../src/editor/slib-editor.c:1291
+#: ../src/editor/slib-editor.c:1255 ../src/editor/slib-editor.c:1293
+#: ../src/editor/webkit_editor.c:1337 ../src/editor/webkit_editor.c:1375
 msgid "before closing?"
 msgstr "לפני הסגירה?"
 
-#: ../src/editor/slib-editor.c:1260 ../src/editor/slib-editor.c:1298
+#: ../src/editor/slib-editor.c:1262 ../src/editor/slib-editor.c:1300
+#: ../src/editor/webkit_editor.c:1344 ../src/editor/webkit_editor.c:1382
 msgid "If you don't save, changes will be permanently lost."
 msgstr "ללא שמירה, השינויים יאבדו לעד."
 
-#: ../src/editor/slib-editor.c:1289 ../ui/xi-menus.glade.h:43
+#: ../src/editor/slib-editor.c:1291 ../src/editor/webkit_editor.c:1373
+#: ../ui/xi-menus.glade.h:59
 msgid "File"
 msgstr "קובץ"
 
-#: ../src/editor/slib-editor.c:1346
+#: ../src/editor/slib-editor.c:1348 ../src/editor/webkit_editor.c:1423
 msgid "StudyPad"
 msgstr "שולחן מחקר"
 
-#: ../src/editor/slib-editor.c:1361
+#: ../src/editor/slib-editor.c:1363 ../src/editor/webkit_editor.c:1438
 msgid "Note Editor"
 msgstr "עורך הערות"
 
-#: ../src/editor/slib-editor.c:1377
+#: ../src/editor/slib-editor.c:1379 ../src/editor/webkit_editor.c:1453
 msgid "Prayer List/Journal Editor"
 msgstr "עורך יומן\\רשימת תפילות"
 
-#: ../src/gecko/gecko-html.cpp:177 ../src/gnome2/html.c:162
+#: ../src/gecko/gecko-html.cpp:177
 msgid "Unlock "
 msgstr "פתח "
 
@@ -196,11 +206,11 @@ msgstr "חלה שגיאה בעת ההדפסה"
 msgid "It was not possible to print your document: %s"
 msgstr "הדפסת המסמך נכשלה: %s"
 
-#: ../src/gnome2/about_modules.c:189
+#: ../src/gnome2/about_modules.c:143
 msgid "About Sword Module"
 msgstr "אודות מודול SWORD"
 
-#: ../src/gnome2/about_modules.c:395 ../src/gnome2/mod_mgr.c:271
+#: ../src/gnome2/about_modules.c:347 ../src/gnome2/mod_mgr.c:322
 msgid "The module has no About information."
 msgstr "למודול זה אין טקסט 'אודות'."
 
@@ -216,7 +226,7 @@ msgid ""
 " Books can be downloaded from the SWORD Project."
 msgstr ""
 
-#: ../src/gnome2/about_sword.c:105
+#: ../src/gnome2/about_sword.c:106
 msgid "The SWORD Project"
 msgstr "פרויקט SWORD"
 
@@ -247,12 +257,12 @@ msgstr "ראו TRANSLATION-HOWTO בקוד המקור של Xiphos"
 msgid "Xiphos development"
 msgstr "פיתוח Xiphos"
 
-#: ../src/gnome2/about_xiphos.c:133
+#: ../src/gnome2/about_xiphos.c:122
 #, fuzzy
-msgid "Copyright © 2000-2011 Xiphos Development Team"
+msgid "Copyright © 2000-2013 Xiphos Development Team"
 msgstr "זכויות היוצרים (2000-2009) שמורות לצוות הפיתוח של Xiphos"
 
-#: ../src/gnome2/about_xiphos.c:136
+#: ../src/gnome2/about_xiphos.c:125
 msgid ""
 "(formerly known as GnomeSword)\n"
 "\n"
@@ -265,115 +275,112 @@ msgstr ""
 "בחסות פרויקט Sword.\n"
 "תודה לטרוי גריפיתס ולכל מי שהעניק לנו את פרוייקט SWORD."
 
-#: ../src/gnome2/bibletext_dialog.c:312
-msgid "Go to "
-msgstr "לך אל "
-
 #. info->stock_icon = GTK_STOCK_OPEN;
-#: ../src/gnome2/bookmark_dialog.c:173 ../src/gnome2/bookmarks_menu.c:365
-#: ../src/gnome2/bookmarks_menu.c:660 ../src/gnome2/bookmarks_menu.c:759
-#: ../src/gnome2/bookmarks_treeview.c:134 ../ui/editor_studypad.xml.h:2
-#: ../ui/xi-menus.glade.h:14
+#: ../src/gnome2/bookmark_dialog.c:175 ../src/gnome2/bookmarks_menu.c:369
+#: ../src/gnome2/bookmarks_menu.c:664 ../src/gnome2/bookmarks_menu.c:763
+#: ../src/gnome2/bookmarks_treeview.c:131 ../ui/editor_studypad.xml.h:15
+#: ../ui/xi-menus.glade.h:56
 msgid "Bookmark"
 msgstr "סימנייה"
 
-#: ../src/gnome2/bookmark_dialog.c:175 ../src/gnome2/bookmarks_menu.c:761
-#: ../src/gnome2/bookmarks_treeview.c:135
+#: ../src/gnome2/bookmark_dialog.c:177 ../src/gnome2/bookmarks_menu.c:765
+#: ../src/gnome2/bookmarks_treeview.c:132
 msgid "Enter Folder Name"
 msgstr "הזן שם תיקייה"
 
-#: ../src/gnome2/bookmark_dialog.c:177 ../src/gnome2/bookmarks_menu.c:763
+#: ../src/gnome2/bookmark_dialog.c:179 ../src/gnome2/bookmarks_menu.c:767
 msgid "Folder Name"
 msgstr "שם תיקייה"
 
-#: ../src/gnome2/bookmark_dialog.c:178 ../src/gnome2/bookmarks_menu.c:764
-#: ../src/gnome2/bookmarks_treeview.c:137
+#: ../src/gnome2/bookmark_dialog.c:180 ../src/gnome2/bookmarks_menu.c:768
+#: ../src/gnome2/bookmarks_treeview.c:134
 msgid "Folder: "
 msgstr "תיקייה: "
 
-#: ../src/gnome2/bookmarks_menu.c:208
+#: ../src/gnome2/bookmarks_menu.c:212
 #, fuzzy
 msgid "Specify bookmarks file"
 msgstr "ערוך פריט סימנייה"
 
-#: ../src/gnome2/bookmarks_menu.c:351 ../ui/xi-menus.glade.h:36
+#: ../src/gnome2/bookmarks_menu.c:355 ../ui/xi-menus.glade.h:61
 msgid "Edit"
 msgstr "ערוך"
 
-#: ../src/gnome2/bookmarks_menu.c:368
+#: ../src/gnome2/bookmarks_menu.c:372
 msgid "Folder name: "
 msgstr "שם תיקייה: "
 
-#: ../src/gnome2/bookmarks_menu.c:371
+#: ../src/gnome2/bookmarks_menu.c:375
 msgid "Bookmark name: "
 msgstr "שם סימנייה: "
 
-#: ../src/gnome2/bookmarks_menu.c:374 ../src/gnome2/bookmarks_menu.c:668
+#: ../src/gnome2/bookmarks_menu.c:378 ../src/gnome2/bookmarks_menu.c:672
 msgid "Verse: "
 msgstr "פסוק: "
 
-#: ../src/gnome2/bookmarks_menu.c:375 ../src/gnome2/bookmarks_menu.c:669
+#: ../src/gnome2/bookmarks_menu.c:379 ../src/gnome2/bookmarks_menu.c:673
 msgid "Module: "
 msgstr "מודול: "
 
-#: ../src/gnome2/bookmarks_menu.c:497
+#: ../src/gnome2/bookmarks_menu.c:501
 msgid "Remove the selected folder"
 msgstr "להסיר התיקייה שנבחרה"
 
-#: ../src/gnome2/bookmarks_menu.c:499
+#: ../src/gnome2/bookmarks_menu.c:503
 msgid "(and all its contents)?"
 msgstr "על כל אשר בה?"
 
-#: ../src/gnome2/bookmarks_menu.c:502
+#: ../src/gnome2/bookmarks_menu.c:506
 msgid "Remove the selected bookmark"
 msgstr "הסר את הסימנייה שנבחרה"
 
-#: ../src/gnome2/bookmarks_menu.c:661
+#: ../src/gnome2/bookmarks_menu.c:665
 msgid "Add"
 msgstr "הוסף"
 
-#: ../src/gnome2/bookmarks_menu.c:667
+#: ../src/gnome2/bookmarks_menu.c:671
 msgid "Label: "
 msgstr "תווית: "
 
-#: ../src/gnome2/bookmarks_treeview.c:108 ../src/gnome2/export_bookmarks.c:195
+#: ../src/gnome2/bookmarks_treeview.c:105 ../src/gnome2/export_bookmarks.c:195
 #: ../src/gnome2/export_bookmarks.c:254
 #, c-format
 msgid "Search result: %s"
 msgstr "תוצאות החיפוש: %s"
 
-#: ../src/gnome2/bookmarks_treeview.c:891 ../src/gnome2/sidebar.c:1447
+#: ../src/gnome2/bookmarks_treeview.c:846 ../src/gnome2/sidebar.c:1430
+#: ../src/gnome2/sidebar.c:1463
 msgid "Bookmarks"
 msgstr "סימניות"
 
-#: ../src/gnome2/cipher_key_dialog.c:61
+#: ../src/gnome2/cipher_key_dialog.c:60
 #, fuzzy, c-format
 msgid "Cipher key for module %s"
 msgstr "בודק את מודולי SWORD"
 
-#: ../src/gnome2/cipher_key_dialog.c:62
+#: ../src/gnome2/cipher_key_dialog.c:61
 msgid "for:"
 msgstr "עבור:"
 
-#: ../src/gnome2/cipher_key_dialog.c:65
+#: ../src/gnome2/cipher_key_dialog.c:64
 #, fuzzy
 msgid "Enter Key: "
 msgstr "נא להזין מפתח הצפנה: "
 
-#: ../src/gnome2/dialog.c:266
+#: ../src/gnome2/dialog.c:262
 msgid "Close without Saving"
 msgstr "סגור ללא שמירה"
 
-#: ../src/gnome2/dialog.c:576
+#: ../src/gnome2/dialog.c:664
 msgid "Xiphos:"
 msgstr "Xiphos:"
 
-#: ../src/gnome2/dialog.c:677
+#: ../src/gnome2/dialog.c:765
 msgid "Close _without Saving"
 msgstr "סגור ללא שמירה"
 
 #: ../src/gnome2/export_bookmarks.c:197 ../src/gnome2/export_bookmarks.c:256
-#: ../src/gnome2/sidebar.c:1463
+#: ../src/gnome2/sidebar.c:1442 ../src/gnome2/sidebar.c:1479
 #, c-format
 msgid "Verse List"
 msgstr "רשימת פסוקים"
@@ -386,33 +393,23 @@ msgstr ""
 msgid "SearchResults"
 msgstr ""
 
-#: ../src/gnome2/export_dialog.c:290 ../ui/export-dialog.glade.h:21
+#: ../src/gnome2/export_dialog.c:319 ../ui/export-dialog.glade.h:4
 msgid "Please check copyright before exporting!"
 msgstr "נא לבדוק זכויות יוצרים בטרם ייצוא!"
 
-#: ../src/gnome2/find_dialog.c:203 ../src/gnome2/find_dialog.c:373
+#: ../src/gnome2/find_dialog.c:186 ../src/gnome2/find_dialog.c:344
 msgid "Find"
 msgstr "מצא"
 
-#: ../src/gnome2/find_dialog.c:222
+#: ../src/gnome2/find_dialog.c:205
 msgid "Enter Word or Phrase"
 msgstr "הזן מילה או ביטוי"
 
-#: ../src/gnome2/find_dialog.c:238 ../src/gnome2/search_sidebar.c:308
-#: ../ui/search-dialog.glade.h:59
-msgid "Match case"
-msgstr "התאם אותיות רישיות"
-
-#: ../src/gnome2/find_dialog.c:245
+#: ../src/gnome2/find_dialog.c:220
 msgid "Search backwards"
 msgstr "חפש אחורה"
 
-#: ../src/gnome2/find_dialog.c:254 ../src/gnome2/search_sidebar.c:273
-#: ../ui/search-dialog.glade.h:78
-msgid "Regular expression"
-msgstr "ביטוי רגולרי"
-
-#: ../src/gnome2/find_dialog.c:295
+#: ../src/gnome2/find_dialog.c:266
 msgid "Find Next"
 msgstr "מצא את הבא"
 
@@ -512,34 +509,34 @@ msgstr "יש לדווח אודות התקלה לצוות של Xiphos דרך:"
 msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
 msgstr "תקלה! Xiphos עומדת בפני קריסה עקב שגיאת \"STRING\"."
 
-#: ../src/gnome2/main_window.c:795
+#: ../src/gnome2/main_window.c:790
 msgid "Xiphos - Bible Study Software"
 msgstr "Xiphos - תוכנה לחקר כתבי הקודש"
 
-#: ../src/gnome2/main_window.c:852
+#: ../src/gnome2/main_window.c:846
 msgid "Open a new tab"
 msgstr "פתח לשונית חדשה"
 
-#: ../src/gnome2/main_window.c:932 ../src/gnome2/sidebar.c:620
-#: ../src/gnome2/sidebar.c:626 ../src/main/sidebar.cc:651
+#: ../src/gnome2/main_window.c:926 ../src/gnome2/sidebar.c:627
+#: ../src/gnome2/sidebar.c:633 ../src/main/sidebar.cc:651
 #: ../src/main/sidebar.cc:996 ../src/main/sidebar.cc:997
 #: ../src/main/sidebar.cc:998
 msgid "Standard View"
 msgstr "תצוגה רגילה"
 
-#: ../src/gnome2/main_window.c:1003
+#: ../src/gnome2/main_window.c:987
 msgid "Commentary View"
 msgstr "תצוגת פירוש"
 
-#: ../src/gnome2/main_window.c:1019
+#: ../src/gnome2/main_window.c:1003
 msgid "Book View"
 msgstr "תצוגת ספר"
 
-#: ../src/gnome2/main_window.c:1046
+#: ../src/gnome2/main_window.c:1030
 msgid "Welcome to Xiphos"
 msgstr "ברוכים הבאים ל-Xiphos"
 
-#: ../src/gnome2/menu_popup.c:1223
+#: ../src/gnome2/menu_popup.c:1207
 msgid ""
 "Renaming is not available in Windows.\n"
 "\n"
@@ -559,33 +556,33 @@ msgstr ""
 "לפיכך, לא ניתן לשנות שמות של פירושים אישיים\n"
 "בסביבת חלונות."
 
-#: ../src/gnome2/menu_popup.c:1242
+#: ../src/gnome2/menu_popup.c:1226
 msgid "Rename Commentary"
 msgstr "פירוש"
 
-#: ../src/gnome2/menu_popup.c:1245
+#: ../src/gnome2/menu_popup.c:1229
 msgid "Choose Commentary Name"
 msgstr "תצוגת פירוש"
 
-#: ../src/gnome2/menu_popup.c:1247
+#: ../src/gnome2/menu_popup.c:1231
 msgid "New Name"
 msgstr "שם תיקייה"
 
-#: ../src/gnome2/menu_popup.c:1248 ../src/gnome2/treekey-editor.c:137
-#: ../src/gnome2/treekey-editor.c:196 ../src/gnome2/treekey-editor.c:282
-#: ../src/main/prayerlists.cc:243
+#: ../src/gnome2/menu_popup.c:1232 ../src/gnome2/treekey-editor.c:143
+#: ../src/gnome2/treekey-editor.c:202 ../src/gnome2/treekey-editor.c:288
+#: ../src/main/prayerlists.cc:231
 msgid "Name: "
 msgstr "תווית: "
 
-#: ../src/gnome2/menu_popup.c:1258 ../src/main/prayerlists.cc:257
+#: ../src/gnome2/menu_popup.c:1242 ../src/main/prayerlists.cc:245
 msgid "Module names must contain [A-Za-z0-9_] only."
 msgstr "שמות מודולים יכולים להכיל אך ורק את התווים [A-Za-z0-9_]."
 
-#: ../src/gnome2/menu_popup.c:1265 ../src/main/prayerlists.cc:264
+#: ../src/gnome2/menu_popup.c:1249 ../src/main/prayerlists.cc:252
 msgid "Xiphos already knows a module by that name."
 msgstr "מערכת Xiphos כבר מכירה מודול בשם זה."
 
-#: ../src/gnome2/menu_popup.c:1306
+#: ../src/gnome2/menu_popup.c:1290
 #, c-format
 msgid ""
 "Failed to create new configuration:\n"
@@ -594,7 +591,7 @@ msgstr ""
 "לא ניתן להפיק תצורה חדשה:\n"
 "%s"
 
-#: ../src/gnome2/menu_popup.c:1315
+#: ../src/gnome2/menu_popup.c:1299
 msgid ""
 "Configuration build error:\n"
 "\n"
@@ -602,7 +599,7 @@ msgstr ""
 "שגיאה בבניית תצורה:\n"
 "\n"
 
-#: ../src/gnome2/menu_popup.c:2002
+#: ../src/gnome2/menu_popup.c:1885
 #, fuzzy
 msgid "No module in this pane."
 msgstr "המודול נעול."
@@ -682,7 +679,7 @@ msgstr "מתכונן להסרה"
 msgid "Removing"
 msgstr "מסיר:"
 
-#: ../src/gnome2/mod_mgr.c:192 ../ui/xi-menus.glade.h:89
+#: ../src/gnome2/mod_mgr.c:192 ../ui/xi-menus.glade.h:144
 msgid "Remove"
 msgstr "הסרה"
 
@@ -754,27 +751,27 @@ msgstr "מחק פריט"
 msgid "Deletion"
 msgstr "מחק פריט"
 
-#: ../src/gnome2/mod_mgr.c:459
+#: ../src/gnome2/mod_mgr.c:510
 msgid "Module Name"
 msgstr "שם מודול"
 
-#: ../src/gnome2/mod_mgr.c:480
+#: ../src/gnome2/mod_mgr.c:531
 msgid "A checkmark means this module is already installed"
 msgstr "סימן וי מציין שהמודול כבר מותקן"
 
-#: ../src/gnome2/mod_mgr.c:502
+#: ../src/gnome2/mod_mgr.c:553
 msgid "Click the box to work on this module"
 msgstr "נא לסמן תיבה זו על מנת לעבוד עם המודול הזה."
 
-#: ../src/gnome2/mod_mgr.c:503
+#: ../src/gnome2/mod_mgr.c:554
 msgid "Click the box to select this module for install/update"
 msgstr "סמנו תיבה זו כדי להתקין או לעדכן מודול זה"
 
-#: ../src/gnome2/mod_mgr.c:522
+#: ../src/gnome2/mod_mgr.c:573
 msgid "Installed"
 msgstr "התקנה"
 
-#: ../src/gnome2/mod_mgr.c:532
+#: ../src/gnome2/mod_mgr.c:583
 msgid ""
 "The index icon means you have built an optimized ('lucene') index for this "
 "module for fast searching (see the Maintenance pane for this function)"
@@ -782,17 +779,17 @@ msgstr ""
 "סמלון האינדקס מציין שבנית אינדקס מיטבי ('lucene') עבור המודול על מנת לבצע "
 "חיפוש מהיר (עיינו בפונקציה זו בחלונית התחזוקה)"
 
-#: ../src/gnome2/mod_mgr.c:550
+#: ../src/gnome2/mod_mgr.c:601
 msgid ""
 "The lock icon means this module is encrypted, and requires that you purchase "
 "an unlock key from the content owner"
 msgstr "סמלון המנעול מציין שהמודול מוצפן, ושעליך לרכוש מפתח מבעלי התוכן"
 
-#: ../src/gnome2/mod_mgr.c:567 ../ui/xi-menus.glade.h:1
+#: ../src/gnome2/mod_mgr.c:618 ../ui/xi-menus.glade.h:55
 msgid "About"
 msgstr "אודות"
 
-#: ../src/gnome2/mod_mgr.c:587
+#: ../src/gnome2/mod_mgr.c:638
 msgid ""
 "The refresh icon means the Installed module is older than the newer "
 "Available module: You should update the module"
@@ -800,19 +797,19 @@ msgstr ""
 "סמלון הרענון מציין שהמודול המותקן מיושן וקיימת גרסה חדשה יותר: עליך לעדכן את "
 "המודול"
 
-#: ../src/gnome2/mod_mgr.c:599
+#: ../src/gnome2/mod_mgr.c:650
 msgid "Available"
 msgstr "זמין"
 
-#: ../src/gnome2/mod_mgr.c:608
+#: ../src/gnome2/mod_mgr.c:659
 msgid "Size"
 msgstr "גודל"
 
-#: ../src/gnome2/mod_mgr.c:617
+#: ../src/gnome2/mod_mgr.c:668
 msgid "Description"
 msgstr "תיאור"
 
-#: ../src/gnome2/mod_mgr.c:764
+#: ../src/gnome2/mod_mgr.c:815
 #, c-format
 msgid ""
 "`mkdir %s' failed:\n"
@@ -821,33 +818,33 @@ msgstr ""
 "פעולת `mkdir %s' נכשלה:\n"
 "%s."
 
-#: ../src/gnome2/mod_mgr.c:786
+#: ../src/gnome2/mod_mgr.c:837
 msgid " archived in: \n"
 msgstr " נשמר בארכיון תחת: \n"
 
-#: ../src/gnome2/mod_mgr.c:841
+#: ../src/gnome2/mod_mgr.c:892
 msgid "Journals and prayer lists cannot be indexed."
 msgstr "לא ניתן לאנדקס כתבי עת ורשימות תפילות."
 
-#: ../src/gnome2/mod_mgr.c:862
+#: ../src/gnome2/mod_mgr.c:913
 #, c-format
 msgid "%s failed"
 msgstr "%sכישלון ב"
 
-#: ../src/gnome2/mod_mgr.c:865 ../src/gnome2/mod_mgr.c:1619
+#: ../src/gnome2/mod_mgr.c:916 ../src/gnome2/mod_mgr.c:1670
 msgid "Finished"
 msgstr "הסתיים"
 
-#: ../src/gnome2/mod_mgr.c:1033 ../src/gnome2/mod_mgr.c:1035
-#: ../src/gnome2/mod_mgr.c:1137 ../src/gnome2/mod_mgr.c:1172
-#: ../src/gnome2/mod_mgr.c:1174 ../src/gnome2/utilities.c:457
-#: ../src/gnome2/utilities.c:523 ../src/gnome2/utilities.c:525
-#: ../src/gnome2/utilities.c:1090 ../src/main/sidebar.cc:830
+#: ../src/gnome2/mod_mgr.c:1084 ../src/gnome2/mod_mgr.c:1086
+#: ../src/gnome2/mod_mgr.c:1188 ../src/gnome2/mod_mgr.c:1223
+#: ../src/gnome2/mod_mgr.c:1225 ../src/gnome2/utilities.c:472
+#: ../src/gnome2/utilities.c:538 ../src/gnome2/utilities.c:540
+#: ../src/gnome2/utilities.c:1105 ../src/main/sidebar.cc:830
 #: ../src/main/sidebar.cc:902 ../src/main/sidebar.cc:904
 msgid "Unknown"
 msgstr "לא ידוע"
 
-#: ../src/gnome2/mod_mgr.c:1337
+#: ../src/gnome2/mod_mgr.c:1388
 #, c-format
 msgid ""
 "Repository:\n"
@@ -856,7 +853,7 @@ msgstr ""
 "מאגר:\n"
 "%s"
 
-#: ../src/gnome2/mod_mgr.c:1349
+#: ../src/gnome2/mod_mgr.c:1400
 msgid ""
 "Categorized by\n"
 "Module Type"
@@ -864,54 +861,54 @@ msgstr ""
 "ממוין לפי\n"
 "סוג המודול"
 
-#: ../src/gnome2/mod_mgr.c:1354 ../src/gnome2/utilities.c:591
+#: ../src/gnome2/mod_mgr.c:1405 ../src/gnome2/utilities.c:606
 #: ../src/main/sidebar.cc:980 ../src/main/sidebar.cc:982
 msgid "Biblical Texts"
 msgstr "כתבי קודש"
 
-#: ../src/gnome2/mod_mgr.c:1358 ../src/gnome2/utilities.c:598
+#: ../src/gnome2/mod_mgr.c:1409 ../src/gnome2/utilities.c:613
 #: ../src/main/sidebar.cc:663 ../src/main/sidebar.cc:1005
-#: ../src/main/sidebar.cc:1007 ../ui/prefs.glade.h:38
+#: ../src/main/sidebar.cc:1007 ../ui/prefs.glade.h:41
 msgid "Commentaries"
 msgstr "פירושים"
 
-#: ../src/gnome2/mod_mgr.c:1362 ../src/gnome2/utilities.c:606
+#: ../src/gnome2/mod_mgr.c:1413 ../src/gnome2/utilities.c:621
 #: ../src/main/sidebar.cc:1014 ../src/main/sidebar.cc:1016
 msgid "Dictionaries"
 msgstr "מילונים"
 
-#: ../src/gnome2/mod_mgr.c:1366 ../src/gnome2/utilities.c:613
+#: ../src/gnome2/mod_mgr.c:1417 ../src/gnome2/utilities.c:628
 #: ../src/main/sidebar.cc:1023 ../src/main/sidebar.cc:1025
 msgid "Glossaries"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1370 ../src/gnome2/utilities.c:620
+#: ../src/gnome2/mod_mgr.c:1421 ../src/gnome2/utilities.c:635
 #: ../src/main/sidebar.cc:1032 ../src/main/sidebar.cc:1034
 msgid "Daily Devotionals"
 msgstr "דרשות יומיות"
 
-#: ../src/gnome2/mod_mgr.c:1374 ../src/gnome2/utilities.c:627
+#: ../src/gnome2/mod_mgr.c:1425 ../src/gnome2/utilities.c:642
 #: ../src/main/sidebar.cc:673 ../src/main/sidebar.cc:1041
 #: ../src/main/sidebar.cc:1043
 msgid "General Books"
 msgstr "ספרים כלליים"
 
-#: ../src/gnome2/mod_mgr.c:1378 ../src/gnome2/utilities.c:634
+#: ../src/gnome2/mod_mgr.c:1429 ../src/gnome2/utilities.c:649
 #: ../src/main/sidebar.cc:1050 ../src/main/sidebar.cc:1052
 msgid "Maps"
 msgstr "מפות"
 
-#: ../src/gnome2/mod_mgr.c:1382 ../src/gnome2/utilities.c:641
+#: ../src/gnome2/mod_mgr.c:1433 ../src/gnome2/utilities.c:656
 #: ../src/main/sidebar.cc:1059 ../src/main/sidebar.cc:1061
 msgid "Images"
 msgstr "התאמות"
 
-#: ../src/gnome2/mod_mgr.c:1386 ../src/gnome2/utilities.c:648
+#: ../src/gnome2/mod_mgr.c:1437 ../src/gnome2/utilities.c:663
 #: ../src/main/sidebar.cc:1068 ../src/main/sidebar.cc:1070
 msgid "Cult/Unorthodox"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1394
+#: ../src/gnome2/mod_mgr.c:1445
 msgid ""
 "Categorized by\n"
 "Availability"
@@ -919,95 +916,95 @@ msgstr ""
 "ממוין לפי\n"
 "זמינות"
 
-#: ../src/gnome2/mod_mgr.c:1399
+#: ../src/gnome2/mod_mgr.c:1450
 msgid "Updates"
 msgstr "עדכונים"
 
-#: ../src/gnome2/mod_mgr.c:1403
+#: ../src/gnome2/mod_mgr.c:1454
 msgid "Uninstalled"
 msgstr "התקנה"
 
-#: ../src/gnome2/mod_mgr.c:1407 ../src/gnome2/sidebar.c:636
-#: ../src/gnome2/utilities.c:656 ../src/main/prayerlists.cc:241
+#: ../src/gnome2/mod_mgr.c:1458 ../src/gnome2/sidebar.c:643
+#: ../src/gnome2/utilities.c:671 ../src/main/prayerlists.cc:229
 #: ../src/main/sidebar.cc:1078 ../src/main/sidebar.cc:1080
 msgid "Prayer List/Journal"
 msgstr "יומן\\רשימת תפילות"
 
-#: ../src/gnome2/mod_mgr.c:1603
+#: ../src/gnome2/mod_mgr.c:1654
 msgid "Refreshing from remote source"
 msgstr "מרענן מן המקור המרוחק"
 
-#: ../src/gnome2/mod_mgr.c:1613
+#: ../src/gnome2/mod_mgr.c:1664
 msgid "Remote source not found"
 msgstr "המקור המרוחק לא נמצא"
 
-#: ../src/gnome2/mod_mgr.c:1683
+#: ../src/gnome2/mod_mgr.c:1734
 msgid "Configure"
 msgstr "ערוך תצורה"
 
-#: ../src/gnome2/mod_mgr.c:1714
+#: ../src/gnome2/mod_mgr.c:1765
 msgid "Type"
 msgstr "סוג"
 
-#: ../src/gnome2/mod_mgr.c:1721
+#: ../src/gnome2/mod_mgr.c:1772
 msgid "Caption"
 msgstr "כותרת"
 
-#: ../src/gnome2/mod_mgr.c:1729
+#: ../src/gnome2/mod_mgr.c:1780
 msgid "Source"
 msgstr "מקור"
 
-#: ../src/gnome2/mod_mgr.c:1737
+#: ../src/gnome2/mod_mgr.c:1788
 msgid "Directory"
 msgstr "ספריה"
 
-#: ../src/gnome2/mod_mgr.c:1745
+#: ../src/gnome2/mod_mgr.c:1796
 msgid "User"
 msgstr "משתמש"
 
-#: ../src/gnome2/mod_mgr.c:1753
+#: ../src/gnome2/mod_mgr.c:1804
 msgid "Password"
 msgstr "סיסמה"
 
-#: ../src/gnome2/mod_mgr.c:1761
+#: ../src/gnome2/mod_mgr.c:1812
 msgid "UID"
 msgstr "UID"
 
-#: ../src/gnome2/mod_mgr.c:1778
+#: ../src/gnome2/mod_mgr.c:1829
 msgid "Module Sources"
 msgstr "מקורות המודול"
 
-#: ../src/gnome2/mod_mgr.c:1781
+#: ../src/gnome2/mod_mgr.c:1832
 msgid "Add/Remove"
 msgstr "הוספה/הסרה"
 
-#: ../src/gnome2/mod_mgr.c:1783
+#: ../src/gnome2/mod_mgr.c:1834
 msgid "Choose"
 msgstr "בחירה"
 
-#: ../src/gnome2/mod_mgr.c:1787 ../src/gnome2/preferences_dialog.c:1811
-#: ../src/gnome2/sidebar.c:1471
+#: ../src/gnome2/mod_mgr.c:1838 ../src/gnome2/preferences_dialog.c:1932
+#: ../src/gnome2/sidebar.c:1448 ../src/gnome2/sidebar.c:1487
 msgid "Modules"
 msgstr "מודולים"
 
-#: ../src/gnome2/mod_mgr.c:1789
+#: ../src/gnome2/mod_mgr.c:1840
 msgid "Install/Update"
 msgstr "התקנה"
 
-#: ../src/gnome2/mod_mgr.c:1791
+#: ../src/gnome2/mod_mgr.c:1842
 msgid "Maintenance"
 msgstr "תחזוקה"
 
-#: ../src/gnome2/mod_mgr.c:2025
+#: ../src/gnome2/mod_mgr.c:2078
 msgid "Please Refresh"
 msgstr "נא לרענן"
 
-#: ../src/gnome2/mod_mgr.c:2026
+#: ../src/gnome2/mod_mgr.c:2079
 msgid "Your module list is not up to date!"
 msgstr "רשימת המודולים אינה מעודכנת!"
 
 #. Zero Bibles is just not workable in Xiphos.
-#: ../src/gnome2/mod_mgr.c:2329
+#: ../src/gnome2/mod_mgr.c:2398
 msgid ""
 "You have uninstalled your last Bible.\n"
 "Xiphos requires at least one."
@@ -1015,7 +1012,7 @@ msgstr ""
 "ביצעת הסרה של התנ\"ך האחרון שברשותך.\n"
 "Xiphos דורש לפחות אחד."
 
-#: ../src/gnome2/mod_mgr.c:2335
+#: ../src/gnome2/mod_mgr.c:2404
 msgid ""
 "There are still no Bibles installed.\n"
 "Xiphos cannot continue without one."
@@ -1023,193 +1020,193 @@ msgstr ""
 "אין עדיין ספרי תנ\"ך מותקנים.\n"
 "Xiphos לא יכול להמשיך ללא ספרים."
 
-#: ../src/gnome2/mod_mgr.c:2425
+#: ../src/gnome2/mod_mgr.c:2497
 msgid "Standard remote sources have been loaded."
 msgstr "נטענו מקורות מרוחקים סטנדרטיים."
 
-#: ../src/gnome2/mod_mgr.c:2431
+#: ../src/gnome2/mod_mgr.c:2503
 msgid "Could not load standard sources from CrossWire."
 msgstr "טעינת מקורות סטנדרטיים מ-Crosswire נכשלה."
 
-#: ../src/gnome2/mod_mgr.c:2599 ../src/gnome2/mod_mgr.c:2845
+#: ../src/gnome2/mod_mgr.c:2671 ../src/gnome2/mod_mgr.c:2917
 msgid "Remove the selected source"
 msgstr "הסר את המקור שנבחר"
 
-#: ../src/gnome2/mod_mgr.c:2659
+#: ../src/gnome2/mod_mgr.c:2731
 msgid "Enter a remote source"
 msgstr "הזן מקור מרוחק"
 
-#: ../src/gnome2/mod_mgr.c:2663
+#: ../src/gnome2/mod_mgr.c:2735
 msgid "Caption:"
 msgstr "כותרת:"
 
-#: ../src/gnome2/mod_mgr.c:2664
+#: ../src/gnome2/mod_mgr.c:2736
 msgid "Type:"
 msgstr "סוג:"
 
-#: ../src/gnome2/mod_mgr.c:2665
+#: ../src/gnome2/mod_mgr.c:2737
 msgid "Host:"
 msgstr "מארח:"
 
-#: ../src/gnome2/mod_mgr.c:2666
+#: ../src/gnome2/mod_mgr.c:2738
 msgid "Directory:"
 msgstr "ספריה:"
 
-#: ../src/gnome2/mod_mgr.c:2667
+#: ../src/gnome2/mod_mgr.c:2739
 msgid "User (optional):"
 msgstr "משתמש (אופציונלי):"
 
-#: ../src/gnome2/mod_mgr.c:2668
+#: ../src/gnome2/mod_mgr.c:2740
 msgid "Password (optional):"
 msgstr "סיסמה (אופציונלי):"
 
 #. this can happen at most once
-#: ../src/gnome2/mod_mgr.c:2695
+#: ../src/gnome2/mod_mgr.c:2767
 msgid "A source by that name already exists."
 msgstr "יש כבר מקור בשם זה."
 
-#: ../src/gnome2/mod_mgr.c:2842
+#: ../src/gnome2/mod_mgr.c:2914
 msgid "Delete a remote source"
 msgstr "מחק מקור מרוחק"
 
-#: ../src/gnome2/mod_mgr.c:3390
+#: ../src/gnome2/mod_mgr.c:3419
 #, fuzzy
 msgid "[no module]"
 msgstr "כל המודול"
 
-#: ../src/gnome2/navbar_book.c:362 ../src/gnome2/navbar_book_dialog.c:304
+#: ../src/gnome2/navbar_book.c:363 ../src/gnome2/navbar_book_dialog.c:304
 msgid "Go outward, to the section containing this one"
 msgstr "נוע החוצה אל הקטע הכולל את זה הנוכחי"
 
-#: ../src/gnome2/navbar_book.c:377 ../src/gnome2/navbar_book_dialog.c:319
+#: ../src/gnome2/navbar_book.c:378 ../src/gnome2/navbar_book_dialog.c:319
 msgid "Go to previous item"
 msgstr "לך אל הפריט הקודם"
 
-#: ../src/gnome2/navbar_book.c:391 ../src/gnome2/navbar_book_dialog.c:333
+#: ../src/gnome2/navbar_book.c:392 ../src/gnome2/navbar_book_dialog.c:333
 msgid "Go to next item"
 msgstr "לך אל הפריט הבא"
 
-#: ../src/gnome2/navbar_book.c:405 ../src/gnome2/navbar_book_dialog.c:347
+#: ../src/gnome2/navbar_book.c:406 ../src/gnome2/navbar_book_dialog.c:347
 msgid "Go inward, to the first subsection"
 msgstr "נוע פנימה אל תת הקטע הראשון"
 
-#: ../src/gnome2/navbar_versekey_dialog.c:898
-#: ../src/gnome2/navbar_versekey_editor.c:905
-#: ../src/gnome2/navbar_versekey_parallel.c:847
+#: ../src/gnome2/navbar_versekey_dialog.c:888
+#: ../src/gnome2/navbar_versekey_editor.c:929
+#: ../src/gnome2/navbar_versekey_parallel.c:840
 msgid "Synchronize this window's scrolling with the main window"
 msgstr ""
 
-#: ../src/gnome2/parallel_dialog.c:378 ../src/gnome2/preferences_dialog.c:1818
+#: ../src/gnome2/parallel_dialog.c:356 ../src/gnome2/preferences_dialog.c:1939
 msgid "Parallel"
 msgstr "מקביל"
 
-#: ../src/gnome2/parallel_view.c:119
+#: ../src/gnome2/parallel_view.c:115
 msgid "Detach/Attach"
 msgstr "נתק \\ הצמד"
 
-#: ../src/gnome2/parallel_view.c:125 ../ui/xi-menus.glade.h:61
+#: ../src/gnome2/parallel_view.c:121 ../ui/xi-menus.glade.h:64
 msgid "Module Options"
 msgstr "אפשרויות מודול"
 
-#: ../src/gnome2/parallel_view.c:267 ../src/gnome2/sidebar.c:619
-#: ../src/gnome2/sidebar.c:625 ../src/gnome2/tabbed_browser.c:252
+#: ../src/gnome2/parallel_view.c:215 ../src/gnome2/sidebar.c:626
+#: ../src/gnome2/sidebar.c:632 ../src/gnome2/tabbed_browser.c:251
 #: ../src/main/sidebar.cc:632 ../src/main/sidebar.cc:988
 #: ../src/main/sidebar.cc:989 ../src/main/sidebar.cc:990
 msgid "Parallel View"
 msgstr "תצוגה מקבילה"
 
-#: ../src/gnome2/preferences_dialog.c:1331
-#: ../src/gnome2/preferences_dialog.c:1369
-#: ../src/gnome2/preferences_dialog.c:1406
-#: ../src/gnome2/preferences_dialog.c:1441
-#: ../src/gnome2/preferences_dialog.c:1476
-#: ../src/gnome2/preferences_dialog.c:1511
-#: ../src/gnome2/preferences_dialog.c:1546
-#: ../src/gnome2/preferences_dialog.c:1582
-#: ../src/gnome2/preferences_dialog.c:1619
-#: ../src/gnome2/preferences_dialog.c:1671
-#: ../src/gnome2/preferences_dialog.c:2076
+#: ../src/gnome2/preferences_dialog.c:1447
+#: ../src/gnome2/preferences_dialog.c:1485
+#: ../src/gnome2/preferences_dialog.c:1522
+#: ../src/gnome2/preferences_dialog.c:1557
+#: ../src/gnome2/preferences_dialog.c:1592
+#: ../src/gnome2/preferences_dialog.c:1627
+#: ../src/gnome2/preferences_dialog.c:1662
+#: ../src/gnome2/preferences_dialog.c:1698
+#: ../src/gnome2/preferences_dialog.c:1735
+#: ../src/gnome2/preferences_dialog.c:1787
+#: ../src/gnome2/preferences_dialog.c:2214
 msgid "-- Select --"
 msgstr "-- בחירה --"
 
-#: ../src/gnome2/preferences_dialog.c:1633
+#: ../src/gnome2/preferences_dialog.c:1749
 msgid "Locale will take effect after restart."
 msgstr "השפה תוחלף לאחר אתחול."
 
-#: ../src/gnome2/preferences_dialog.c:1708 ../ui/prefs.glade.h:85
+#: ../src/gnome2/preferences_dialog.c:1824 ../ui/prefs.glade.h:1
 msgid "Preferences"
 msgstr "העדפות"
 
-#: ../src/gnome2/preferences_dialog.c:1790
+#: ../src/gnome2/preferences_dialog.c:1911
+msgid "General"
+msgstr "כללי"
+
+#: ../src/gnome2/preferences_dialog.c:1918
+msgid "Options"
+msgstr "אפשרויות"
+
+#: ../src/gnome2/preferences_dialog.c:1922
 msgid "Fonts"
 msgstr "גופנים"
 
-#: ../src/gnome2/preferences_dialog.c:1793
+#: ../src/gnome2/preferences_dialog.c:1925
 msgid "Color"
 msgstr "צבע"
 
-#: ../src/gnome2/preferences_dialog.c:1796
+#: ../src/gnome2/preferences_dialog.c:1928
 #, fuzzy
 msgid "Sizes and Faces"
 msgstr "לשוניות וחלוניות"
 
-#: ../src/gnome2/preferences_dialog.c:1800
-msgid "General"
-msgstr "כללי"
-
-#: ../src/gnome2/preferences_dialog.c:1807
-msgid "Options"
-msgstr "אפשרויות"
-
-#: ../src/gnome2/preferences_dialog.c:1821
+#: ../src/gnome2/preferences_dialog.c:1942
 msgid "Special"
 msgstr "מיוחד"
 
-#: ../src/gnome2/preferences_dialog.c:2463 ../src/gnome2/search_dialog.c:454
+#: ../src/gnome2/preferences_dialog.c:2601 ../src/gnome2/search_dialog.c:499
 msgid "Clear List?"
 msgstr "לנקות את הרשימה?"
 
-#: ../src/gnome2/preferences_dialog.c:2464 ../src/gnome2/search_dialog.c:455
+#: ../src/gnome2/preferences_dialog.c:2602 ../src/gnome2/search_dialog.c:500
 msgid "Are you sure you want to clear the module list?"
 msgstr "לנר"
 
-#: ../src/gnome2/preferences_dialog.c:2509 ../src/main/search_dialog.cc:691
+#: ../src/gnome2/preferences_dialog.c:2647 ../src/main/search_dialog.cc:685
 msgid "Remove Module?"
 msgstr "להסיר את המודול?"
 
-#: ../src/gnome2/preferences_dialog.c:2510 ../src/main/search_dialog.cc:692
+#: ../src/gnome2/preferences_dialog.c:2648 ../src/main/search_dialog.cc:686
 msgid "Are you sure you want to remove the selected module?"
 msgstr "האם להסיר את המודול הנבחר?"
 
-#: ../src/gnome2/search_dialog.c:65 ../src/main/search_dialog.cc:58
-#: ../src/main/search_sidebar.cc:61
+#: ../src/gnome2/search_dialog.c:61 ../src/main/search_dialog.cc:52
+#: ../src/main/search_sidebar.cc:51
 msgid "Searching the "
 msgstr "מחפש בתוך "
 
-#: ../src/gnome2/search_dialog.c:66 ../src/main/search_dialog.cc:59
-#: ../src/main/search_sidebar.cc:62
+#: ../src/gnome2/search_dialog.c:62 ../src/main/search_dialog.cc:53
+#: ../src/main/search_sidebar.cc:52
 msgid " Module"
 msgstr " מודול"
 
-#: ../src/gnome2/search_dialog.c:67 ../src/main/search_dialog.cc:60
-#: ../src/main/search_sidebar.cc:63
+#: ../src/gnome2/search_dialog.c:63 ../src/main/search_dialog.cc:54
+#: ../src/main/search_sidebar.cc:53
 msgid "found in "
 msgstr "נמצא בתוך "
 
-#: ../src/gnome2/search_dialog.c:413
+#: ../src/gnome2/search_dialog.c:458
 #, fuzzy, c-format
 msgid "New List %s"
 msgstr "שמור רשימה"
 
-#: ../src/gnome2/search_dialog.c:637
+#: ../src/gnome2/search_dialog.c:682
 msgid "The last module list may not be deleted"
 msgstr "לא ניתן למחוק את רשימת המודולים האחרונה"
 
-#: ../src/gnome2/search_dialog.c:655
+#: ../src/gnome2/search_dialog.c:700
 msgid "Delete list?"
 msgstr "למחוק את הרשימה?"
 
-#: ../src/gnome2/search_dialog.c:656
+#: ../src/gnome2/search_dialog.c:701
 msgid "Are you sure you want to delete:"
 msgstr "האם למחוק:"
 
@@ -1229,7 +1226,7 @@ msgstr "האם למחוק:"
 #. * Return value
 #. *   void
 #.
-#: ../src/gnome2/search_dialog.c:779
+#: ../src/gnome2/search_dialog.c:824
 msgid ""
 "<b>Syntax overview for optimized \"lucene\" searches</b>\n"
 "Search for verses that contain...\n"
@@ -1274,7 +1271,7 @@ msgstr ""
 #. * Return value
 #. *   void
 #.
-#: ../src/gnome2/search_dialog.c:842
+#: ../src/gnome2/search_dialog.c:887
 msgid ""
 "<b>Attribute-based searches</b>\n"
 "Searches for content contained in markup outside the main text. Attributes "
@@ -1292,7 +1289,7 @@ msgid ""
 "accusative singular feminine\" -- see the Robinson module for details."
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:186
+#: ../src/gnome2/search_sidebar.c:185
 msgid ""
 "This is an inclusive (\"AND\") search:\n"
 "Find matches showing all words."
@@ -1301,76 +1298,93 @@ msgstr ""
 "מצא את כל ההתאמות שכוללות את כל המילים."
 
 #. button to open advanced search
-#: ../src/gnome2/search_sidebar.c:195
+#: ../src/gnome2/search_sidebar.c:194
 #, fuzzy
 msgid "_Open Advanced Search"
 msgstr "חיפוש מתקדם"
 
-#: ../src/gnome2/search_sidebar.c:199
+#: ../src/gnome2/search_sidebar.c:198
 msgid "Open the separate Advanced Search dialog."
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:211
+#: ../src/gnome2/search_sidebar.c:210
 msgid "Search Module"
 msgstr "חפש במודול"
 
-#: ../src/gnome2/search_sidebar.c:225
+#: ../src/gnome2/search_sidebar.c:224
 msgid "Bible"
 msgstr "כתבי קודש"
 
-#: ../src/gnome2/search_sidebar.c:234 ../ui/prefs.glade.h:40
+#: ../src/gnome2/search_sidebar.c:233 ../ui/prefs.glade.h:92
 msgid "Commentary"
 msgstr "פירוש"
 
-#: ../src/gnome2/search_sidebar.c:248
+#: ../src/gnome2/search_sidebar.c:247
 msgid "Search Type"
 msgstr "סוג חיפוש"
 
-#: ../src/gnome2/search_sidebar.c:262 ../ui/search-dialog.glade.h:66
+#: ../src/gnome2/search_sidebar.c:261 ../ui/search-dialog.glade.h:39
 msgid "Multi word"
 msgstr "מרובה מלים"
 
-#: ../src/gnome2/search_sidebar.c:281 ../ui/search-dialog.glade.h:44
+#: ../src/gnome2/search_sidebar.c:272 ../ui/search-dialog.glade.h:41
+msgid "Regular expression"
+msgstr "ביטוי רגולרי"
+
+#: ../src/gnome2/search_sidebar.c:280 ../ui/search-dialog.glade.h:43
 msgid "Exact phrase"
 msgstr "ביטוי מדויק"
 
-#: ../src/gnome2/search_sidebar.c:295
+#: ../src/gnome2/search_sidebar.c:294
 msgid "Search Options"
 msgstr "אפשרויות חיפוש"
 
-#: ../src/gnome2/search_sidebar.c:323
+#: ../src/gnome2/search_sidebar.c:307 ../ui/search-dialog.glade.h:49
+msgid "Match case"
+msgstr "התאם אותיות רישיות"
+
+#: ../src/gnome2/search_sidebar.c:322
 msgid "Search Scope"
 msgstr "היקף חיפוש"
 
-#: ../src/gnome2/search_sidebar.c:336
+#: ../src/gnome2/search_sidebar.c:335
 msgid "No scope"
 msgstr "ללא היקף"
 
-#: ../src/gnome2/search_sidebar.c:346
+#: ../src/gnome2/search_sidebar.c:345
 msgid "Use bounds"
 msgstr "הצב גבולות"
 
-#: ../src/gnome2/search_sidebar.c:355
+#: ../src/gnome2/search_sidebar.c:354
 msgid "Last search"
 msgstr "חיפוש אחרון"
 
-#: ../src/gnome2/search_sidebar.c:370
+#: ../src/gnome2/search_sidebar.c:369
 msgid "Bounds"
 msgstr "גבולות"
 
-#: ../src/gnome2/search_sidebar.c:384
+#: ../src/gnome2/search_sidebar.c:384 ../src/gnome2/search_sidebar.c:413
 msgid "Lower"
 msgstr "תחתון"
 
-#: ../src/gnome2/search_sidebar.c:391
+#: ../src/gnome2/search_sidebar.c:394 ../src/gnome2/search_sidebar.c:420
 msgid "Upper"
 msgstr "עליון"
 
-#: ../src/gnome2/sidebar.c:1455
+#: ../src/gnome2/sidebar.c:848
+#, fuzzy
+msgid "Open module in editor?"
+msgstr "פתח בתיבת דיאלוג"
+
+#: ../src/gnome2/sidebar.c:848
+msgid "If no, it will open for display only."
+msgstr ""
+
+#: ../src/gnome2/sidebar.c:1436 ../src/gnome2/sidebar.c:1471
 msgid "Search"
 msgstr "חיפוש"
 
-#: ../src/gnome2/sidebar_dialog.c:164 ../src/gnome2/sidebar_dialog.c:173
+#: ../src/gnome2/sidebar_dialog.c:157 ../src/gnome2/sidebar_dialog.c:166
 msgid "Sidebar"
 msgstr "שורת צד"
 
@@ -1378,25 +1392,73 @@ msgstr "שורת צד"
 msgid "Powered by the SWORD Project"
 msgstr "מושתת על פרויקט SWORD"
 
-#: ../src/gnome2/tabbed_browser.c:361
+#: ../src/gnome2/tabbed_browser.c:360
 msgid "Can't create tabs dir."
 msgstr ""
 
-#: ../src/gnome2/treekey-editor.c:135 ../src/gnome2/treekey-editor.c:194
-#: ../src/gnome2/treekey-editor.c:280
+#: ../src/gnome2/treekey-editor.c:141 ../src/gnome2/treekey-editor.c:200
+#: ../src/gnome2/treekey-editor.c:286
 msgid "Prayer List/Journal Item"
 msgstr "פריט יומן\\רשימת תפילות"
 
-#: ../src/gnome2/treekey-editor.c:136 ../src/gnome2/treekey-editor.c:195
-#: ../src/gnome2/treekey-editor.c:281
+#: ../src/gnome2/treekey-editor.c:142 ../src/gnome2/treekey-editor.c:201
+#: ../src/gnome2/treekey-editor.c:287
 msgid "New name"
 msgstr "מסמך חדש"
 
-#: ../src/gnome2/treekey-editor.c:251
+#: ../src/gnome2/treekey-editor.c:257
 msgid "Remove the selected item"
 msgstr "להסיר התיקייה שנבחרה"
 
-#: ../src/gnome2/utilities.c:2077
+#: ../src/gnome2/utilities.c:82
+msgid "January"
+msgstr "ינואר"
+
+#: ../src/gnome2/utilities.c:83
+msgid "February"
+msgstr "פברואר"
+
+#: ../src/gnome2/utilities.c:84
+msgid "March"
+msgstr "מרץ"
+
+#: ../src/gnome2/utilities.c:85
+msgid "April"
+msgstr "אפריל"
+
+#: ../src/gnome2/utilities.c:86
+msgid "May"
+msgstr "מאי"
+
+#: ../src/gnome2/utilities.c:87
+msgid "June"
+msgstr "יוני"
+
+#: ../src/gnome2/utilities.c:88
+msgid "July"
+msgstr "יולי"
+
+#: ../src/gnome2/utilities.c:89
+msgid "August"
+msgstr "אוגוסט"
+
+#: ../src/gnome2/utilities.c:90
+msgid "September"
+msgstr "ספטמבר"
+
+#: ../src/gnome2/utilities.c:91
+msgid "October"
+msgstr "אוקטובר"
+
+#: ../src/gnome2/utilities.c:92
+msgid "November"
+msgstr "נובמבר"
+
+#: ../src/gnome2/utilities.c:93
+msgid "December"
+msgstr "דצמבר"
+
+#: ../src/gnome2/utilities.c:2081
 #, fuzzy
 msgid ""
 "An image file's size could not be determined.\n"
@@ -1407,7 +1469,7 @@ msgstr ""
 "(ייתכן גם שהתמונה אינה מסוג bmp/gif/jpg/png.)\n"
 "לא ניתן להתאים את גודל התמונות לחלון."
 
-#: ../src/main/display.cc:238
+#: ../src/main/display.cc:237
 #, c-format
 msgid ""
 "Improperly encoded personal annotation label:\n"
@@ -1416,293 +1478,245 @@ msgstr ""
 "קידוד שגוי בתיבת הערות אישיות:\n"
 "'%s'"
 
-#: ../src/main/display.cc:1026 ../src/main/display.cc:1092
-#: ../src/main/display.cc:1176 ../ui/export-dialog.glade.h:7
+#: ../src/main/display.cc:1031 ../src/main/display.cc:1072
+#: ../src/main/display.cc:1157 ../ui/export-dialog.glade.h:14
 msgid "Chapter"
 msgstr "פרק"
 
-#: ../src/main/main.c:122
+#: ../src/main/main.c:131
 msgid "Xiphos does not understand more than one argument."
 msgstr "Xiphos אינה מפענחת יותר מארגומנט אחד"
 
-#: ../src/main/main.c:168
+#: ../src/main/main.c:245
 #, fuzzy
 msgid "Initiating HTML"
 msgstr "מפעיל את Xiphos"
 
-#: ../src/main/main.c:174
+#: ../src/main/main.c:250
 msgid "Building Interface"
 msgstr "ממשק בנייה"
 
-#: ../src/main/main.c:178
+#: ../src/main/main.c:253
 msgid "Starting Sword"
 msgstr "מתחיל את Sword"
 
-#: ../src/main/main.c:182
+#: ../src/main/main.c:256
 msgid "Loading Settings"
 msgstr "טוען הגדרות"
 
-#: ../src/main/main.c:186
+#: ../src/main/main.c:259
 msgid "Displaying Xiphos"
 msgstr "מציג את Xiphos"
 
-#: ../src/main/module_dialogs.cc:188 ../src/main/previewer.cc:95
-#: ../ui/prefs.glade.h:86
+#: ../src/main/module_dialogs.cc:189 ../src/main/previewer.cc:97
+#: ../ui/prefs.glade.h:39
 msgid "Previewer"
 msgstr "תצוגה מקדימה"
 
-#: ../src/main/module_dialogs.cc:243 ../src/main/module_dialogs.cc:354
+#: ../src/main/module_dialogs.cc:244 ../src/main/module_dialogs.cc:355
 #: ../src/main/previewer.cc:184
 msgid "Footnote"
 msgstr "הערת שוליים"
 
-#: ../src/main/module_dialogs.cc:249 ../src/main/module_dialogs.cc:359
+#: ../src/main/module_dialogs.cc:250 ../src/main/module_dialogs.cc:360
 #: ../src/main/previewer.cc:196
 msgid "Cross Reference"
 msgstr "הפנייה צולבת"
 
-#: ../src/main/module_dialogs.cc:255 ../src/main/module_dialogs.cc:269
-#: ../src/main/module_dialogs.cc:364 ../src/main/module_dialogs.cc:376
+#: ../src/main/module_dialogs.cc:256 ../src/main/module_dialogs.cc:270
+#: ../src/main/module_dialogs.cc:365 ../src/main/module_dialogs.cc:377
 #: ../src/main/previewer.cc:202 ../src/main/previewer.cc:221
 msgid "Strongs"
 msgstr "סטרונג"
 
-#: ../src/main/module_dialogs.cc:261 ../src/main/module_dialogs.cc:280
-#: ../src/main/module_dialogs.cc:369 ../src/main/module_dialogs.cc:386
+#: ../src/main/module_dialogs.cc:262 ../src/main/module_dialogs.cc:281
+#: ../src/main/module_dialogs.cc:370 ../src/main/module_dialogs.cc:387
 #: ../src/main/previewer.cc:208 ../src/main/previewer.cc:227
 msgid "Morphology"
 msgstr "מורפולוגיה"
 
-#: ../src/main/module_dialogs.cc:1014 ../src/main/url.cc:518
+#: ../src/main/module_dialogs.cc:1015 ../src/main/url.cc:523
 msgid "Back to "
 msgstr "חזרה אל "
 
-#: ../src/main/parallel_view.cc:381 ../ui/xi-menus.glade.h:108
+#: ../src/main/parallel_view.cc:383 ../ui/xi-menus.glade.h:68
 msgid "Strong's Numbers"
 msgstr "מספרי סטרונג"
 
-#: ../src/main/parallel_view.cc:391 ../ui/search-dialog.glade.h:52
-#: ../ui/xi-menus.glade.h:44
+#: ../src/main/parallel_view.cc:393 ../ui/search-dialog.glade.h:102
+#: ../ui/xi-menus.glade.h:71
 msgid "Footnotes"
 msgstr "הערות שוליים"
 
-#: ../src/main/parallel_view.cc:401 ../ui/search-dialog.glade.h:64
-#: ../ui/xi-menus.glade.h:63
+#: ../src/main/parallel_view.cc:403 ../ui/search-dialog.glade.h:99
+#: ../ui/xi-menus.glade.h:70
 msgid "Morphological Tags"
 msgstr "תגיות מורפולוגיות"
 
-#: ../src/main/parallel_view.cc:411 ../ui/xi-menus.glade.h:48
+#: ../src/main/parallel_view.cc:413 ../ui/xi-menus.glade.h:76
 msgid "Hebrew Vowel Points"
 msgstr "ניקוד עברי"
 
-#: ../src/main/parallel_view.cc:421 ../ui/xi-menus.glade.h:47
+#: ../src/main/parallel_view.cc:423 ../ui/xi-menus.glade.h:77
 msgid "Hebrew Cantillation"
 msgstr "טעמי המקרא"
 
-#: ../src/main/parallel_view.cc:431 ../ui/xi-menus.glade.h:45
+#: ../src/main/parallel_view.cc:433 ../ui/xi-menus.glade.h:75
 msgid "Greek Accents"
 msgstr "הטעמות יווניות"
 
-#: ../src/main/parallel_view.cc:441
+#: ../src/main/parallel_view.cc:443
 msgid "Cross-references"
 msgstr "הפניות צולבות"
 
-#: ../src/main/parallel_view.cc:451 ../ui/xi-menus.glade.h:57
+#: ../src/main/parallel_view.cc:453 ../ui/xi-menus.glade.h:69
 msgid "Lemmas"
 msgstr "כותרות פירושים"
 
-#: ../src/main/parallel_view.cc:461 ../ui/xi-menus.glade.h:46
+#: ../src/main/parallel_view.cc:463 ../ui/xi-menus.glade.h:66
 msgid "Headings"
 msgstr "כותרות"
 
-#: ../src/main/parallel_view.cc:471
+#: ../src/main/parallel_view.cc:473
 msgid "Morpheme Segmentation"
 msgstr "התחלקות מורפמות"
 
-#: ../src/main/parallel_view.cc:485 ../ui/xi-menus.glade.h:117
+#: ../src/main/parallel_view.cc:487 ../ui/xi-menus.glade.h:67
 msgid "Words of Christ in Red"
 msgstr "מילות הצלוב באדום"
 
-#: ../src/main/parallel_view.cc:495 ../ui/xi-menus.glade.h:110
+#: ../src/main/parallel_view.cc:497 ../ui/xi-menus.glade.h:78
 msgid "Transliteration"
 msgstr "תעתיק"
 
-#: ../src/main/parallel_view.cc:505
+#: ../src/main/parallel_view.cc:507
 msgid "Textual Variants"
 msgstr "משתנים טקסטואליים"
 
-#: ../src/main/parallel_view.cc:513 ../ui/xi-menus.glade.h:86
+#: ../src/main/parallel_view.cc:515 ../ui/xi-menus.glade.h:80
 msgid "Primary Reading"
 msgstr "קריאה עיקרית"
 
-#: ../src/main/parallel_view.cc:522 ../ui/xi-menus.glade.h:101
+#: ../src/main/parallel_view.cc:524 ../ui/xi-menus.glade.h:81
 msgid "Secondary Reading"
 msgstr "קריאה משנית"
 
-#: ../src/main/parallel_view.cc:531 ../ui/xi-menus.glade.h:9
+#: ../src/main/parallel_view.cc:533 ../ui/xi-menus.glade.h:82
 msgid "All Readings"
 msgstr "כל הקריאות"
 
-#: ../src/main/parallel_view.cc:695
+#: ../src/main/parallel_view.cc:700
 msgid "view context"
 msgstr "כתבי קודש"
 
-#: ../src/main/prayerlists.cc:74
-msgid "January"
-msgstr "ינואר"
-
-#: ../src/main/prayerlists.cc:75
-msgid "February"
-msgstr "פברואר"
-
-#: ../src/main/prayerlists.cc:76
-msgid "March"
-msgstr "מרץ"
-
-#: ../src/main/prayerlists.cc:77
-msgid "April"
-msgstr "אפריל"
-
-#: ../src/main/prayerlists.cc:78
-msgid "May"
-msgstr "מאי"
-
-#: ../src/main/prayerlists.cc:79
-msgid "June"
-msgstr "יוני"
-
-#: ../src/main/prayerlists.cc:80
-msgid "July"
-msgstr "יולי"
-
-#: ../src/main/prayerlists.cc:81
-msgid "August"
-msgstr "אוגוסט"
-
-#: ../src/main/prayerlists.cc:82
-msgid "September"
-msgstr "ספטמבר"
-
-#: ../src/main/prayerlists.cc:83
-msgid "October"
-msgstr "אוקטובר"
-
-#: ../src/main/prayerlists.cc:84
-msgid "November"
-msgstr "נובמבר"
-
-#: ../src/main/prayerlists.cc:85
-msgid "December"
-msgstr "דצמבר"
-
-#: ../src/main/prayerlists.cc:124
+#: ../src/main/prayerlists.cc:112
 msgid "Growth"
 msgstr "התחזקות"
 
-#: ../src/main/prayerlists.cc:125
+#: ../src/main/prayerlists.cc:113
 #, fuzzy
 msgid "<b>For Growth</b><br/>"
 msgstr "<b>לשם התחזקות</b><br>"
 
-#: ../src/main/prayerlists.cc:126 ../src/main/prayerlists.cc:383
+#: ../src/main/prayerlists.cc:114 ../src/main/prayerlists.cc:371
 msgid "Salvation"
 msgstr "ישועה"
 
-#: ../src/main/prayerlists.cc:127
+#: ../src/main/prayerlists.cc:115
 #, fuzzy
 msgid "<b>For Salvation</b><br/>"
 msgstr "<b>לשם ישועה</b><br>"
 
-#: ../src/main/prayerlists.cc:128 ../src/main/prayerlists.cc:387
+#: ../src/main/prayerlists.cc:116 ../src/main/prayerlists.cc:375
 msgid "Health"
 msgstr "בריאות"
 
-#: ../src/main/prayerlists.cc:129
+#: ../src/main/prayerlists.cc:117
 #, fuzzy
 msgid "<b>For Health</b><br/>"
 msgstr "<b>לשם בריאות</b><br>"
 
-#: ../src/main/prayerlists.cc:130
+#: ../src/main/prayerlists.cc:118
 msgid "Misc"
 msgstr "שונות"
 
-#: ../src/main/prayerlists.cc:131
+#: ../src/main/prayerlists.cc:119
 #, fuzzy
 msgid "<b>Miscellaneous</b><br/>"
 msgstr "<b>גופן - שונות</b>"
 
-#: ../src/main/prayerlists.cc:139
+#: ../src/main/prayerlists.cc:127
 msgid "Point x"
 msgstr "הדפס"
 
-#: ../src/main/prayerlists.cc:140
+#: ../src/main/prayerlists.cc:128
 #, fuzzy
 msgid "<b>(x)</b><br/>"
 msgstr "<b>(x)</b><br>"
 
-#: ../src/main/prayerlists.cc:141
+#: ../src/main/prayerlists.cc:129
 msgid "Point y"
 msgstr "הדפס"
 
-#: ../src/main/prayerlists.cc:142
+#: ../src/main/prayerlists.cc:130
 #, fuzzy
 msgid "<b>(y)</b><br/>"
 msgstr "<b>(y)</b><br>"
 
-#: ../src/main/prayerlists.cc:143
+#: ../src/main/prayerlists.cc:131
 msgid "Point z"
 msgstr "הדפס"
 
-#: ../src/main/prayerlists.cc:144
+#: ../src/main/prayerlists.cc:132
 #, fuzzy
 msgid "<b>(z)</b><br/>"
 msgstr "<b>(z)</b><br>"
 
-#: ../src/main/prayerlists.cc:152
+#: ../src/main/prayerlists.cc:140
 msgid "Minor Topic 1"
 msgstr "נושא משני 1"
 
-#: ../src/main/prayerlists.cc:153
+#: ../src/main/prayerlists.cc:141
 #, fuzzy
 msgid "<b>Subtopic 1</b><br/>"
 msgstr "<b>היקף</b>"
 
-#: ../src/main/prayerlists.cc:155
+#: ../src/main/prayerlists.cc:143
 msgid "Minor Topic 2"
 msgstr "נושא משני 2"
 
-#: ../src/main/prayerlists.cc:156
+#: ../src/main/prayerlists.cc:144
 #, fuzzy
 msgid "<b>Subtopic 2</b><br/>"
 msgstr "<b>היקף</b>"
 
-#: ../src/main/prayerlists.cc:158
+#: ../src/main/prayerlists.cc:146
 msgid "Minor Topic 3"
 msgstr "נושא משני 3"
 
-#: ../src/main/prayerlists.cc:159
+#: ../src/main/prayerlists.cc:147
 #, fuzzy
 msgid "<b>Subtopic 3</b><br/>"
 msgstr "<b>היקף</b>"
 
-#: ../src/main/prayerlists.cc:161
+#: ../src/main/prayerlists.cc:149
 msgid "Minor Topic 4"
 msgstr "נושא משני 4"
 
-#: ../src/main/prayerlists.cc:162
+#: ../src/main/prayerlists.cc:150
 #, fuzzy
 msgid "<b>Subtopic 4</b><br/>"
 msgstr "<b>היקף</b>"
 
-#: ../src/main/prayerlists.cc:242
+#: ../src/main/prayerlists.cc:230
 msgid "Name for new prayer list or journal"
 msgstr "שם עבור יומן או רשימת תפילות"
 
-#: ../src/main/prayerlists.cc:273
+#: ../src/main/prayerlists.cc:261
 msgid "Xiphos finds that prayer list already."
 msgstr "רשימת התפילות הזו כבר נמצאה."
 
-#: ../src/main/prayerlists.cc:286
+#: ../src/main/prayerlists.cc:274
 #, c-format
 msgid ""
 "Xiphos cannot create module's path:\n"
@@ -1711,19 +1725,19 @@ msgstr ""
 "לא ניתן ליצור את הנתיב למודול:\n"
 "%s"
 
-#: ../src/main/prayerlists.cc:326
+#: ../src/main/prayerlists.cc:314
 msgid "A basic prayer list. \\par\\par Module created by Xiphos."
 msgstr "A basic prayer list. \\par\\par Module created by Xiphos."
 
-#: ../src/main/prayerlists.cc:327
+#: ../src/main/prayerlists.cc:315
 msgid "BasicPrayerList"
 msgstr "רשימת-תפילות-בסיסית"
 
-#: ../src/main/prayerlists.cc:341
+#: ../src/main/prayerlists.cc:329
 msgid "MyPrayerList"
 msgstr "רשימת התפילות שלי"
 
-#: ../src/main/prayerlists.cc:342
+#: ../src/main/prayerlists.cc:330
 #, fuzzy
 msgid ""
 "<b>People:</b><br/>Bob<br/>Sam<br/>Sue<br/><br/><b>Church:</b><br/>pews<br/"
@@ -1732,80 +1746,80 @@ msgstr ""
 "<b>אנשים:</b><br>בנימין<br>שמואל<br>שושנה<br><br><b>כנסייה:</"
 "b><br>מושבים<br>אחווה<br>ספרים למסיונרים<br><br><br>"
 
-#: ../src/main/prayerlists.cc:368
+#: ../src/main/prayerlists.cc:356
 msgid "A subject-based prayer list. \\par\\par Module created by Xiphos."
 msgstr "רשימת תפילות על פי נושא. מודול אחד-לאחד שנבנה על ידי Xiphos."
 
-#: ../src/main/prayerlists.cc:369
+#: ../src/main/prayerlists.cc:357
 msgid "SubjectPrayerList"
 msgstr "רשימת-תפילות-נושא"
 
-#: ../src/main/prayerlists.cc:384
+#: ../src/main/prayerlists.cc:372
 #, fuzzy
 msgid "Bob<br/>Sam<br/>Sue<br/>John<br/>"
 msgstr "בנימין<br>שמואל<br>שושנה<br>יוחנן<br>"
 
-#: ../src/main/prayerlists.cc:385
+#: ../src/main/prayerlists.cc:373
 msgid "Spiritual Growth"
 msgstr "התחזקות רוחנית"
 
-#: ../src/main/prayerlists.cc:386
+#: ../src/main/prayerlists.cc:374
 #, fuzzy
 msgid "Mike<br/>Steve<br/>"
 msgstr "מיכאל<br>טוביה<br>"
 
-#: ../src/main/prayerlists.cc:388
+#: ../src/main/prayerlists.cc:376
 #, fuzzy
 msgid "Sue<br/>John<br/>"
 msgstr "שושנה<br>יוחנן<br>"
 
-#: ../src/main/prayerlists.cc:414
+#: ../src/main/prayerlists.cc:402
 msgid "A monthly prayer list. \\par\\par Module created by Xiphos."
 msgstr "רשימת תפילות חודשית. מודול אחד-לאחד שנבנה על ידי Xiphos."
 
-#: ../src/main/prayerlists.cc:415
+#: ../src/main/prayerlists.cc:403
 msgid "MonthlyPrayerList"
 msgstr "רשימת-תפילות-חודשית"
 
-#: ../src/main/prayerlists.cc:466
+#: ../src/main/prayerlists.cc:454
 msgid "A daily journal. \\par\\par Module created by Xiphos."
 msgstr "יומן יומי. מודול אחד-לאחד שנבנה על ידי Xiphos."
 
-#: ../src/main/prayerlists.cc:467
+#: ../src/main/prayerlists.cc:455
 msgid "DailyJournal"
 msgstr "יומן-יומי"
 
-#: ../src/main/prayerlists.cc:531
+#: ../src/main/prayerlists.cc:519
 msgid "An outlined topic (e.g. sermon). \\par\\par Module created by Xiphos."
 msgstr "נושא מתואר (למשל, דרשה). מודול אחד-לאחד שנבנה על ידי Xiphos."
 
-#: ../src/main/prayerlists.cc:532
+#: ../src/main/prayerlists.cc:520
 msgid "OutlinedTopic"
 msgstr "נושא-מתואר"
 
-#: ../src/main/prayerlists.cc:546
+#: ../src/main/prayerlists.cc:534
 msgid "Major Topic A"
 msgstr "נושא עיקרי א'"
 
-#: ../src/main/prayerlists.cc:547
+#: ../src/main/prayerlists.cc:535
 #, fuzzy
 msgid "<b>Major Topic A</b><br/>"
 msgstr "<b>נושא עיקרי א'</b><br>"
 
-#: ../src/main/prayerlists.cc:549
+#: ../src/main/prayerlists.cc:537
 msgid "Major Topic B"
 msgstr "נושא עיקרי ב'"
 
-#: ../src/main/prayerlists.cc:550
+#: ../src/main/prayerlists.cc:538
 #, fuzzy
 msgid "<b>Major Topic B</b><br/>"
 msgstr "<b>נושא עיקרי ב'</b><br>"
 
-#: ../src/main/prayerlists.cc:552
+#: ../src/main/prayerlists.cc:540
 msgid "Major Topic C"
 msgstr "נושא עיקרי ג'"
 
-#: ../src/main/prayerlists.cc:553
+#: ../src/main/prayerlists.cc:541
 #, fuzzy
 msgid "<b>Major Topic C</b><br/>"
 msgstr "<b>נושא עיקרי ג'</b><br>"
@@ -1814,26 +1828,26 @@ msgstr "<b>נושא עיקרי ג'</b><br>"
 msgid "User Annotation"
 msgstr "הערות משתמש"
 
-#: ../src/main/search_dialog.cc:199
+#: ../src/main/search_dialog.cc:193
 #, c-format
 msgid "Search result %s: %s"
 msgstr "תוצאות החיפוש %s: %s"
 
-#: ../src/main/search_dialog.cc:431
+#: ../src/main/search_dialog.cc:425
 msgid "Delete Range?"
 msgstr "טווח למחיקה?"
 
-#: ../src/main/search_dialog.cc:432
+#: ../src/main/search_dialog.cc:426
 msgid "Are you sure you want to delete this range?"
 msgstr "האם למחוק טווח זה?"
 
-#: ../src/main/search_dialog.cc:646 ../src/main/search_dialog.cc:1073
-#: ../src/main/search_dialog.cc:1076 ../src/main/search_dialog.cc:1098
-#: ../src/main/search_dialog.cc:1101
+#: ../src/main/search_dialog.cc:640 ../src/main/search_dialog.cc:1062
+#: ../src/main/search_dialog.cc:1065 ../src/main/search_dialog.cc:1087
+#: ../src/main/search_dialog.cc:1090
 msgid "Search: "
 msgstr "חיפוש "
 
-#: ../src/main/search_dialog.cc:1463
+#: ../src/main/search_dialog.cc:1429
 #, c-format
 msgid ""
 "%s:\n"
@@ -1844,16 +1858,16 @@ msgstr ""
 "לא מותקן מודול כזה.\n"
 "%s"
 
-#: ../src/main/search_dialog.cc:1465
+#: ../src/main/search_dialog.cc:1431
 msgid "Please adjust the module list."
 msgstr "שמור רשימת מודולים"
 
-#: ../src/main/search_dialog.cc:1481
+#: ../src/main/search_dialog.cc:1447
 #, c-format
 msgid "No fast-search index exists for %s.%s%s"
 msgstr "אין אינדקס לחיפוש מהיר עבור %s.%s%s"
 
-#: ../src/main/search_dialog.cc:1483
+#: ../src/main/search_dialog.cc:1449
 msgid ""
 "\n"
 "Search on this module is now `multi word'."
@@ -1861,7 +1875,7 @@ msgstr ""
 "\n"
 "החיפוש במודול זה הוא מעתה 'מרובה מלים'."
 
-#: ../src/main/search_dialog.cc:1484
+#: ../src/main/search_dialog.cc:1450
 msgid ""
 "\n"
 "See the Module Manager, Maintenance pane."
@@ -1869,24 +1883,24 @@ msgstr ""
 "\n"
 "ראו בחלונית התחזוקה שבמנהל המודולים."
 
-#: ../src/main/search_dialog.cc:1546
+#: ../src/main/search_dialog.cc:1512
 msgid "Search finished"
 msgstr "החיפוש הושלם"
 
-#: ../src/main/search_sidebar.cc:99
+#: ../src/main/search_sidebar.cc:89
 msgid "matches"
 msgstr "התאמות"
 
-#: ../src/main/search_sidebar.cc:217
+#: ../src/main/search_sidebar.cc:207
 #, fuzzy
 msgid "There is no commentary module."
 msgstr "מספר מודולי פירוש"
 
-#: ../src/main/settings.c:110
+#: ../src/main/settings.c:107
 msgid "$HOME is not set!"
 msgstr "לא נקבע $HOME!"
 
-#: ../src/main/settings.c:123
+#: ../src/main/settings.c:120
 #, c-format
 msgid ""
 "Xiphos can not create  .xiphos:\n"
@@ -1899,22 +1913,22 @@ msgstr ""
 "\n"
 "לא ניתן להמשיך."
 
-#: ../src/main/settings.c:136 ../src/main/settings.c:145
-#: ../src/main/settings.c:154
+#: ../src/main/settings.c:133 ../src/main/settings.c:142
+#: ../src/main/settings.c:151
 msgid "can not create "
 msgstr "לא ניתן ליצור "
 
-#: ../src/main/settings.c:184
+#: ../src/main/settings.c:181
 msgid ""
 "Empty settings file -- backup recovery attempted.\n"
 "Some information may have been lost."
 msgstr ""
 
-#: ../src/main/settings.c:186
+#: ../src/main/settings.c:183
 msgid "Empty settings file -- no backup?!? Information lost!"
 msgstr ""
 
-#: ../src/main/settings.c:214
+#: ../src/main/settings.c:211
 #, fuzzy
 msgid ""
 "There are no Bibles installed.\n"
@@ -1931,7 +1945,7 @@ msgstr ""
 "Xiphos אינה יכולה להמשיך,\n"
 "ולכן תיסגר."
 
-#: ../src/main/settings.c:217
+#: ../src/main/settings.c:214
 msgid "Bible module installation complete."
 msgstr "התקנת מודול כתבי קודש הושלמה."
 
@@ -1943,7 +1957,7 @@ msgstr "פסוק"
 msgid "chapter"
 msgstr "פרק"
 
-#: ../src/main/sword.cc:559
+#: ../src/main/sword.cc:554
 msgid ""
 "Xiphos's file for language\n"
 "abbreviations is missing."
@@ -1951,7 +1965,7 @@ msgstr ""
 "קובץ השפה\\הקיצורים\n"
 "של Xiphos חסר."
 
-#: ../src/main/sword.cc:566
+#: ../src/main/sword.cc:561
 msgid ""
 "Xiphos's language abbreviation\n"
 "file cannot be opened."
@@ -1959,7 +1973,7 @@ msgstr ""
 "לא ניתן לפתוח את קובץ\n"
 "השפה\\הקיצורים של Xiphos."
 
-#: ../src/main/sword.cc:579
+#: ../src/main/sword.cc:574
 msgid ""
 "Xiphos cannot allocate space\n"
 "for language abbreviations."
@@ -1967,7 +1981,7 @@ msgstr ""
 "לא ניתן להקצות שטח\n"
 "לקיצורי השפה של Xiphos."
 
-#: ../src/main/sword.cc:586
+#: ../src/main/sword.cc:581
 msgid ""
 "Xiphos cannot read the\n"
 "language abbreviation file."
@@ -1976,23 +1990,23 @@ msgstr ""
 "קיצורי השפה של Xiphos."
 
 #. either we were given a null sys_locale, or it didn't match anything.
-#: ../src/main/sword.cc:668
+#: ../src/main/sword.cc:663
 #, fuzzy, c-format
 msgid ""
 "No matching locale found for `%s'.\n"
 "%s"
 msgstr "לא נמצאה שפה תואמת"
 
-#: ../src/main/sword.cc:670
+#: ../src/main/sword.cc:665
 #, fuzzy
 msgid "Book names and menus may not be translated."
 msgstr "אין לתרגם את שמות הספרים ואת התפריטים"
 
-#: ../src/main/sword.cc:1268
+#: ../src/main/sword.cc:1265
 msgid "Daily devotional was requested, but there are none installed."
 msgstr "ביקשת דרשה יומית, אך אף מודול דרשות אינו מותקן."
 
-#: ../src/main/sword.cc:1504
+#: ../src/main/sword.cc:1495
 msgid ""
 "<b>Locked Module.</b>\n"
 "\n"
@@ -2010,106 +2024,201 @@ msgstr ""
 msgid "Clear History"
 msgstr "נקה את רשימת ההסטוריה"
 
-#: ../src/main/url.cc:98
+#: ../src/main/url.cc:103
 msgid "URL not found:"
 msgstr "%s לא נמצא"
 
-#: ../src/main/url.cc:188
+#: ../src/main/url.cc:193
 #, c-format
 msgid "Xiphos could not execute %s"
 msgstr "לא ניתן להריץ את %s"
 
-#: ../src/main/url.cc:196
+#: ../src/main/url.cc:201
 msgid "Viewer error:\n"
 msgstr "שגיאת תצוגה:\n"
 
-#: ../src/main/url.cc:269
+#: ../src/main/url.cc:274
 #, c-format
 msgid "Show %s in main window"
 msgstr "הצג %s בחלון הראשי"
 
-#: ../src/main/xml.c:83 ../src/main/xml.c:457
+#: ../src/main/xml.c:84 ../src/main/xml.c:473 ../src/main/xml.c:564
 #, c-format
 msgid "Document not created successfully. \n"
 msgstr "יצירת המסמך נכשלה. \n"
 
-#: ../src/main/xml.c:92
+#: ../src/main/xml.c:93
 msgid "Personal"
 msgstr "הערות אישיות"
 
-#: ../src/main/xml.c:93
+#: ../src/main/xml.c:94
 msgid "What must I do to be saved?"
 msgstr "מה עלי לעשות כדי להיוושע?"
 
-#: ../src/main/xml.c:95 ../src/main/xml.c:96
+#: ../src/main/xml.c:96 ../src/main/xml.c:97
 msgid "Acts 16:31"
 msgstr "מעשי השליחים 16:31"
 
-#: ../src/main/xml.c:100 ../src/main/xml.c:101
+#: ../src/main/xml.c:101 ../src/main/xml.c:102
 msgid "Eph 2:8,9"
 msgstr "אל האפסים 2:8,9"
 
-#: ../src/main/xml.c:105 ../src/main/xml.c:106
+#: ../src/main/xml.c:106 ../src/main/xml.c:107
 msgid "Romans 1:16"
 msgstr "אל הרומים 1:16"
 
-#: ../src/main/xml.c:109
+#: ../src/main/xml.c:110
 msgid "What is the Gospel?"
 msgstr "מהי הבשורה?"
 
-#: ../src/main/xml.c:111 ../src/main/xml.c:112
+#: ../src/main/xml.c:112 ../src/main/xml.c:113
 msgid "1 Cor 15:1-4"
 msgstr "הראשונה אל הקורינתים 15:1-4"
 
-#: ../src/main/xml.c:409 ../src/main/xml.c:1167
+#: ../src/main/xml.c:265 ../src/main/xml.c:411 ../src/main/xml.c:1288
 #, c-format
 msgid "Document not parsed successfully. \n"
 msgstr "לא ניתן לנתח את המסמך. \n"
 
-#: ../src/main/xml.c:415 ../src/main/xml.c:734 ../src/main/xml.c:1048
-#: ../src/main/xml.c:1245
+#: ../src/main/xml.c:271 ../src/main/xml.c:417 ../src/main/xml.c:439
+#: ../src/main/xml.c:859 ../src/main/xml.c:1173 ../src/main/xml.c:1367
 #, c-format
 msgid "empty document \n"
 msgstr "מסמך חדש \n"
 
-#: ../src/main/xml.c:421
+#: ../src/main/xml.c:277
 #, c-format
 msgid "wrong type, root node != SwordBookmarks\n"
 msgstr "סוג שגוי, צומת השורש != SwordBookmarks\n"
 
-#: ../src/main/xml.c:469
+#: ../src/main/xml.c:423
+#, fuzzy, c-format
+msgid "wrong type, root node != Copy_Export\n"
+msgstr "סוג שגוי, צומת השורש != %s\n"
+
+#: ../src/main/xml.c:492
+#, c-format
+msgid "%s<center>%s<br>Chapter %d</center><br>"
+msgstr ""
+
+#: ../src/main/xml.c:493
+#, c-format
+msgid "<br><center>Chapter %d</center><br>"
+msgstr ""
+
+#: ../src/main/xml.c:494
+#, fuzzy, c-format
+msgid ""
+"%s\n"
+"\n"
+"Chapter %d\n"
+"\n"
+msgstr "פרק"
+
+#: ../src/main/xml.c:495
+#, fuzzy, c-format
+msgid ""
+"\n"
+"\n"
+"Chapter %d\n"
+"\n"
+msgstr "פרק"
+
+#: ../src/main/xml.c:501
+#, c-format
+msgid "%s%s: %s Chapter %d<br><br>"
+msgstr ""
+
+#: ../src/main/xml.c:502
+#, c-format
+msgid ""
+"%s: %s Chapter %d\n"
+"\n"
+msgstr ""
+
+#: ../src/main/xml.c:507
+#, c-format
+msgid "&nbsp;&nbsp;[%d]"
+msgstr ""
+
+#: ../src/main/xml.c:508
+#, c-format
+msgid " [%d]"
+msgstr ""
+
+#: ../src/main/xml.c:514
+#, c-format
+msgid "%s%s (%s %d:%d%s)</body></html>"
+msgstr ""
+
+#: ../src/main/xml.c:515
+#, c-format
+msgid "%s(%s %d:%d%s)%s </body></html>"
+msgstr ""
+
+#: ../src/main/xml.c:516
+#, c-format
+msgid "%s (%s %d:%d%s)"
+msgstr ""
+
+#: ../src/main/xml.c:517
+#, c-format
+msgid "(%s %d:%d%s) %s"
+msgstr ""
+
+#: ../src/main/xml.c:523
+#, c-format
+msgid " %s%s"
+msgstr ""
+
+#: ../src/main/xml.c:524 ../src/main/xml.c:526
+#, c-format
+msgid "%s(%s %d:%d-%d%s)"
+msgstr ""
+
+#: ../src/main/xml.c:525
+#, c-format
+msgid "(%s %d:%d-%d%s)<br>"
+msgstr ""
+
+#: ../src/main/xml.c:527
+#, c-format
+msgid "(%s %d:%d-%d%s)\n"
+msgstr ""
+
+#: ../src/main/xml.c:576
 msgid "Old Testament"
 msgstr "הברית הישנה"
 
-#: ../src/main/xml.c:470
+#: ../src/main/xml.c:577
 msgid "Gen - Mal"
 msgstr "כללי"
 
-#: ../src/main/xml.c:475
+#: ../src/main/xml.c:582
 msgid "New Testament"
 msgstr "מסמך חדש"
 
-#: ../src/main/xml.c:476
+#: ../src/main/xml.c:583
 msgid "Mat - Rev"
 msgstr "הבשורה על פי מתי"
 
-#: ../src/main/xml.c:482
+#: ../src/main/xml.c:589
 msgid "Sample Module List"
 msgstr "רשימת מודולים"
 
-#: ../src/main/xml.c:740 ../src/main/xml.c:1054
+#: ../src/main/xml.c:865 ../src/main/xml.c:1179
 #, c-format
 msgid "wrong type, root node != %s\n"
 msgstr "סוג שגוי, צומת השורש != %s\n"
 
-#: ../src/main/xml.c:1207
+#: ../src/main/xml.c:1329
 #, c-format
 msgid ""
 "Save of settings failed! stat %d, size %d\n"
 "%s"
 msgstr ""
 
-#: ../src/main/xml.c:1209
+#: ../src/main/xml.c:1331
 msgid "Attempting to revert to previous save."
 msgstr ""
 
@@ -2117,316 +2226,346 @@ msgstr ""
 msgid "Add Bookmark"
 msgstr "הוסף סימניה"
 
-#: ../ui/bookmarks.glade.h:2 ../ui/markverse.glade.h:1
+#: ../ui/bookmarks.glade.h:2 ../ui/markverse.glade.h:2
 msgid "Bookmark Dialog"
 msgstr "דיאלוג סימנייה"
 
-#: ../ui/bookmarks.glade.h:3
-msgid "Bookmark Folder Treeview"
-msgstr "מבט עץ על תיקיית הסימניות"
-
-#: ../ui/bookmarks.glade.h:4 ../ui/markverse.glade.h:2
-msgid "Cancel Bookmark"
-msgstr "בטל סימנייה"
-
-#: ../ui/bookmarks.glade.h:5 ../ui/markverse.glade.h:3
+#: ../ui/bookmarks.glade.h:3 ../ui/markverse.glade.h:7
 msgid "Create new folder"
 msgstr "צור תיקייה חדשה"
 
-#: ../ui/bookmarks.glade.h:6
-msgid "Label Entry"
-msgstr "ערך תווית"
+#: ../ui/bookmarks.glade.h:4 ../ui/markverse.glade.h:8
+#: ../ui/xi-menus.glade.h:106
+msgid "New Folder"
+msgstr "תיקייה חדשה"
+
+#: ../ui/bookmarks.glade.h:5
+msgid "New ..."
+msgstr "חדש..."
+
+#: ../ui/bookmarks.glade.h:6 ../ui/markverse.glade.h:11
+msgid "Cancel Bookmark"
+msgstr "בטל סימנייה"
 
 #: ../ui/bookmarks.glade.h:7
 msgid "Label:"
 msgstr "תווית:"
 
-#: ../ui/bookmarks.glade.h:8 ../ui/markverse.glade.h:6
-msgid "Module Entry"
-msgstr "ערך מודול"
+#: ../ui/bookmarks.glade.h:8
+msgid "Label Entry"
+msgstr "ערך תווית"
 
-#: ../ui/bookmarks.glade.h:9 ../ui/markverse.glade.h:7
-msgid "Module:"
-msgstr "מודול:"
-
-#: ../ui/bookmarks.glade.h:10
-msgid "New ..."
-msgstr "חדש..."
-
-#: ../ui/bookmarks.glade.h:11 ../ui/markverse.glade.h:8
-#: ../ui/xi-menus.glade.h:64
-msgid "New Folder"
-msgstr "תיקייה חדשה"
-
-#: ../ui/bookmarks.glade.h:12 ../ui/markverse.glade.h:10
-msgid "Verse Entry"
-msgstr "ערך פסוק"
-
-#: ../ui/bookmarks.glade.h:13 ../ui/markverse.glade.h:11
+#: ../ui/bookmarks.glade.h:9 ../ui/markverse.glade.h:3
 msgid "Verse:"
 msgstr "פסוק:"
 
-#: ../ui/editor_note.xml.h:1
-msgid "Delete the current note"
-msgstr "מחק הערה נוכחית"
+#: ../ui/bookmarks.glade.h:10 ../ui/markverse.glade.h:4
+msgid "Verse Entry"
+msgstr "ערך פסוק"
 
-#: ../ui/editor_note.xml.h:2 ../ui/editor_studypad.xml.h:4
-msgid "E_xit"
-msgstr "יציאה"
+#: ../ui/bookmarks.glade.h:11 ../ui/markverse.glade.h:5
+msgid "Module:"
+msgstr "מודול:"
 
-#: ../ui/editor_note.xml.h:3 ../ui/editor_studypad.xml.h:5
-msgid "Exit"
-msgstr "יציאה"
+#: ../ui/bookmarks.glade.h:12 ../ui/markverse.glade.h:6
+msgid "Module Entry"
+msgstr "ערך מודול"
 
-#: ../ui/editor_note.xml.h:4 ../ui/editor_studypad.xml.h:6
+#: ../ui/bookmarks.glade.h:13
+msgid "Bookmark Folder Treeview"
+msgstr "מבט עץ על תיקיית הסימניות"
+
+#: ../ui/editor_note.xml.h:1 ../ui/editor_studypad.xml.h:1
 msgid "Exit the program"
 msgstr "צא מן התוכנה"
 
-#: ../ui/editor_note.xml.h:5 ../ui/editor_studypad.xml.h:7
-msgid "For_mat"
-msgstr "עיצוב"
+#: ../ui/editor_note.xml.h:2 ../ui/editor_studypad.xml.h:2
+msgid "Exit"
+msgstr "יציאה"
 
-#: ../ui/editor_note.xml.h:6 ../ui/editor_studypad.xml.h:8
-msgid "HTML Format switch"
-msgstr "מתג עיצוב HTML"
-
-#: ../ui/editor_note.xml.h:7 ../ui/editor_studypad.xml.h:9
-msgid "HTML mode"
-msgstr "מצב HTML"
-
-#: ../ui/editor_note.xml.h:8
-msgid "Preview the note to be printed"
-msgstr "תצוגה מקדימה של ההערה לפני הדפסה"
-
-#: ../ui/editor_note.xml.h:10
+#: ../ui/editor_note.xml.h:3
 msgid "Print this note"
 msgstr "הדפס הערה"
 
-#: ../ui/editor_note.xml.h:12
-msgid "Save the current note"
+#: ../ui/editor_note.xml.h:4
+msgid "Preview the note to be printed"
+msgstr "תצוגה מקדימה של ההערה לפני הדפסה"
+
+#: ../ui/editor_note.xml.h:5 ../ui/editor_studypad.xml.h:5
+msgid "HTML Format switch"
+msgstr "מתג עיצוב HTML"
+
+#: ../ui/editor_note.xml.h:6 ../ui/editor_studypad.xml.h:6
+msgid "HTML mode"
+msgstr "מצב HTML"
+
+#: ../ui/editor_note.xml.h:7
+msgid "Delete the current note"
 msgstr "מחק הערה נוכחית"
 
-#: ../ui/editor_note.xml.h:13
+#: ../ui/editor_note.xml.h:8
 msgid "_Delete Personal Comment"
 msgstr "מחק הערה אישית"
 
-#: ../ui/editor_note.xml.h:16
+#: ../ui/editor_note.xml.h:10
+msgid "Save the current note"
+msgstr "מחק הערה נוכחית"
+
+#: ../ui/editor_note.xml.h:11
 msgid "_Save (Personal Comment)"
 msgstr "שמור (הערה אישת)"
 
-#: ../ui/editor_studypad.xml.h:1
-msgid "Add this file to your bookmarks"
-msgstr "הוסף קובץ זה לסימניות"
+#: ../ui/editor_note.xml.h:14 ../ui/editor_studypad.xml.h:20
+msgid "E_xit"
+msgstr "יציאה"
+
+#: ../ui/editor_note.xml.h:15 ../ui/editor_studypad.xml.h:21
+msgid "For_mat"
+msgstr "עיצוב"
 
 #: ../ui/editor_studypad.xml.h:3
-msgid "Create a new document"
-msgstr "צור מסמך חדש"
-
-#: ../ui/editor_studypad.xml.h:10
-msgid "New Document"
-msgstr "מסמך חדש"
-
-#: ../ui/editor_studypad.xml.h:11
-msgid "Open"
-msgstr "פתיחה"
-
-#: ../ui/editor_studypad.xml.h:12
-msgid "Open a file in Studypad"
-msgstr "שולחן מחקר"
-
-#: ../ui/editor_studypad.xml.h:13
-msgid "Preview the document to be printed"
-msgstr "תצוגה מקדימה של המסמך לפני הדפסה"
-
-#: ../ui/editor_studypad.xml.h:15
 msgid "Print this document"
 msgstr "הדפס מסמך"
 
-#: ../ui/editor_studypad.xml.h:17
-msgid "Save AS"
-msgstr "שמור"
+#: ../ui/editor_studypad.xml.h:4
+msgid "Preview the document to be printed"
+msgstr "תצוגה מקדימה של המסמך לפני הדפסה"
 
-#: ../ui/editor_studypad.xml.h:18
+#: ../ui/editor_studypad.xml.h:8
+msgid "Open a file in Studypad"
+msgstr "שולחן מחקר"
+
+#: ../ui/editor_studypad.xml.h:10
 msgid "Save the current file"
 msgstr "שמור את ההפעלה הנוכחית בקובץ"
 
-#: ../ui/editor_studypad.xml.h:19
+#: ../ui/editor_studypad.xml.h:12
 msgid "Save the current file as"
 msgstr "שמור את ההפעלה הנוכחית בקובץ"
 
-#: ../ui/export-dialog.glade.h:1
-msgid ": "
-msgstr ": "
+#: ../ui/editor_studypad.xml.h:13
+msgid "Save AS"
+msgstr "שמור"
 
-#: ../ui/export-dialog.glade.h:2
-msgid "<b>Copy</b>"
-msgstr "<b>העתק</b>"
+#: ../ui/editor_studypad.xml.h:14
+msgid "Add this file to your bookmarks"
+msgstr "הוסף קובץ זה לסימניות"
 
-#: ../ui/export-dialog.glade.h:3
-msgid "<b>Export</b>"
-msgstr "<b>Sword</b>"
+#: ../ui/editor_studypad.xml.h:16
+msgid "Create a new document"
+msgstr "צור מסמך חדש"
 
-#: ../ui/export-dialog.glade.h:4
-msgid "<b>Format</b>"
-msgstr "<b>Sword</b>"
+#: ../ui/editor_studypad.xml.h:17
+msgid "New Document"
+msgstr "מסמך חדש"
 
-#: ../ui/export-dialog.glade.h:5 ../ui/prefs.glade.h:28
-msgid "Book"
-msgstr "ספר"
-
-#: ../ui/export-dialog.glade.h:6
-msgid "Book Radio Button"
-msgstr "כפתור רדיו: ספר"
-
-#: ../ui/export-dialog.glade.h:8
-msgid "Chapter Radio Button"
-msgstr "כפתור רדיו: פרק"
-
-#: ../ui/export-dialog.glade.h:9 ../ui/xi-menus.glade.h:20
+#: ../ui/export-dialog.glade.h:1 ../ui/xi-menus.glade.h:58
 msgid "Copy/Export Passage"
 msgstr "העתקייצא קטע"
 
-#: ../ui/export-dialog.glade.h:10
+#: ../ui/export-dialog.glade.h:2
 msgid "Export Passage Cancel"
 msgstr "בטל ייצוא קטע"
 
-#: ../ui/export-dialog.glade.h:11
+#: ../ui/export-dialog.glade.h:3
 msgid "Export Passage OK"
 msgstr "אשר ייצוא קטע"
 
-#: ../ui/export-dialog.glade.h:12
+#: ../ui/export-dialog.glade.h:5
+msgid "Version"
+msgstr "גרסת SWORD"
+
+#: ../ui/export-dialog.glade.h:6
+msgid ": "
+msgstr ": "
+
+#: ../ui/export-dialog.glade.h:7
+msgid "Key"
+msgstr "מפתח"
+
+#: ../ui/export-dialog.glade.h:8
+msgid "<b>Copy</b>"
+msgstr "<b>העתק</b>"
+
+#: ../ui/export-dialog.glade.h:9
+msgid "<b>Export</b>"
+msgstr "<b>Sword</b>"
+
+#: ../ui/export-dialog.glade.h:10
 msgid "Export complete book"
 msgstr "ייצוא ספר שלם"
+
+#: ../ui/export-dialog.glade.h:11 ../ui/prefs.glade.h:96
+msgid "Book"
+msgstr "ספר"
+
+#: ../ui/export-dialog.glade.h:12
+msgid "Book Radio Button"
+msgstr "כפתור רדיו: ספר"
 
 #: ../ui/export-dialog.glade.h:13
 msgid "Export complete chapter"
 msgstr "ייצוא פרק שלם"
 
-#: ../ui/export-dialog.glade.h:14
+#: ../ui/export-dialog.glade.h:15
+msgid "Chapter Radio Button"
+msgstr "כפתור רדיו: פרק"
+
+#: ../ui/export-dialog.glade.h:16
 msgid "Export single verse"
 msgstr "ייצוא פסוק בודד"
 
-#: ../ui/export-dialog.glade.h:15
+#: ../ui/export-dialog.glade.h:17
+msgid "Verse"
+msgstr "פסוק:"
+
+#: ../ui/export-dialog.glade.h:18
+msgid "Verse Radio Button"
+msgstr "כפתור רדיו: פסוק"
+
+#: ../ui/export-dialog.glade.h:19
+msgid "Verse range"
+msgstr "טווח פסוקים"
+
+#: ../ui/export-dialog.glade.h:20
+msgid "<b>Format</b>"
+msgstr "<b>Sword</b>"
+
+#: ../ui/export-dialog.glade.h:21
+msgid "Plain Text"
+msgstr "מצא את הבא"
+
+#: ../ui/export-dialog.glade.h:22
+msgid "Plain Text Radio Button"
+msgstr "כפתור רדיו להצגת טקסט פשוט"
+
+#: ../ui/export-dialog.glade.h:23
 msgid "HTML"
 msgstr "מצב HTML"
 
-#: ../ui/export-dialog.glade.h:16
+#: ../ui/export-dialog.glade.h:24
 msgid "HTML Radio Button"
 msgstr "כפתור רדיו: HTML"
 
-#: ../ui/export-dialog.glade.h:17
+#: ../ui/export-dialog.glade.h:25
 msgid ""
 "Indicates whether verse numbers should appear inline in the text for more "
 "than 1 verse."
 msgstr ""
 
-#: ../ui/export-dialog.glade.h:18
-msgid "Key"
-msgstr "מפתח"
-
-#: ../ui/export-dialog.glade.h:19
-msgid "Plain Text"
-msgstr "מצא את הבא"
-
-#: ../ui/export-dialog.glade.h:20
-msgid "Plain Text Radio Button"
-msgstr "כפתור רדיו להצגת טקסט פשוט"
-
-#: ../ui/export-dialog.glade.h:22
-msgid "Save Export As"
-msgstr "שמירת ייצוא בשם"
-
-#: ../ui/export-dialog.glade.h:23
-msgid "Verse"
-msgstr "פסוק:"
-
-#: ../ui/export-dialog.glade.h:24
-#, fuzzy
-msgid "Verse Number button"
-msgstr "פסוק מספר"
-
-#: ../ui/export-dialog.glade.h:25
-msgid "Verse Radio Button"
-msgstr "כפתור רדיו: פסוק"
-
 #: ../ui/export-dialog.glade.h:26
-msgid "Verse range"
-msgstr "טווח פסוקים"
-
-#: ../ui/export-dialog.glade.h:27
-msgid "Version"
-msgstr "גרסת SWORD"
-
-#: ../ui/export-dialog.glade.h:28
 #, fuzzy
 msgid "_Verse numbers in text"
 msgstr "גודל מספר הפסוק"
 
-#: ../ui/markverse.glade.h:4
-msgid "Mark"
-msgstr "מרקוס"
+#: ../ui/export-dialog.glade.h:27
+#, fuzzy
+msgid "Verse Number button"
+msgstr "פסוק מספר"
 
-#: ../ui/markverse.glade.h:5
+#: ../ui/export-dialog.glade.h:28
+msgid "Indicates whether reference is placed first or last."
+msgstr ""
+
+#: ../ui/export-dialog.glade.h:29
+#, fuzzy
+msgid "Reference last"
+msgstr "ערך מראה מקום"
+
+#: ../ui/export-dialog.glade.h:30
+#, fuzzy
+msgid "Reference last button"
+msgstr "ערך מראה מקום"
+
+#: ../ui/export-dialog.glade.h:31
+msgid "Indicates whether or not version name is included in reference."
+msgstr ""
+
+#: ../ui/export-dialog.glade.h:32
+#, fuzzy
+msgid "Include Version"
+msgstr "גרסת SWORD"
+
+#: ../ui/export-dialog.glade.h:33
+#, fuzzy
+msgid "Version button"
+msgstr "כפתור רדיו: פסוק"
+
+#: ../ui/export-dialog.glade.h:34
+msgid "Save Export As"
+msgstr "שמירת ייצוא בשם"
+
+#: ../ui/markverse.glade.h:1
 msgid "Mark/Unmark Verse"
 msgstr "סמן הסר סימון מפסוק"
 
 #: ../ui/markverse.glade.h:9
+msgid "Mark"
+msgstr "מרקוס"
+
+#: ../ui/markverse.glade.h:10
 msgid "Unmark"
 msgstr "הסר סימון"
 
 #: ../ui/module-manager.glade.h:1
-msgid "<b>Add and Remove Sources</b>"
-msgstr "<b>הוסף והסר מקורות</b>"
+msgid "Module Manager"
+msgstr "מנהל מודולים"
 
 #: ../ui/module-manager.glade.h:2
-msgid "<b>Install Destination</b>"
-msgstr "<b>יעד התקנה</b>"
+#, fuzzy
+msgid "_View Intro"
+msgstr "_תצוגה"
 
 #: ../ui/module-manager.glade.h:3
-msgid "<b>Install Source</b>"
-msgstr "<b>מקור התקנה</b>"
+msgid "Open a brief introductory explanation of how the Module Manager works."
+msgstr ""
 
 #: ../ui/module-manager.glade.h:4
-msgid "<b>Module Manager</b>"
-msgstr "<b>מנהל מודולים</b>"
+#, fuzzy
+msgid "_Load Standard"
+msgstr "טעינה סטנדרטית"
 
-#. do not translate <b> and </b> they are html formating
+#: ../ui/module-manager.glade.h:5
+msgid ""
+"Load and synchronize the standard set of known repositories, as maintained "
+"at crosswire.org, with your current remote sources."
+msgstr ""
+
 #: ../ui/module-manager.glade.h:6
-msgid "<b>Sword</b>"
-msgstr "<b>Sword</b>"
+msgid ""
+"Refresh Xiphos' knowledge of what modules are available at the selected "
+"remote repository"
+msgstr ""
 
 #: ../ui/module-manager.glade.h:7
-msgid "<b>WARNING:</b> If you live in a persecuted country use with care."
-msgstr ""
-"<b>אזהרה:</b> אם אתם חיים במדינה הרודפת את המאמינים, היזהרו בעת השימוש."
+#, fuzzy
+msgid "_Install"
+msgstr "התקנה"
 
 #: ../ui/module-manager.glade.h:8
-msgid ""
-"<b>Warning:</b> If you live in a persecuted country and do not wish to risk "
-"detection you should NOT use  the remote installation feature! "
-msgstr ""
-"<b>אזהרה:</b> אם אתם חיים במדינה הרודפת את המאמינים ומבקשים להימנע מזיהוי, "
-"אל תשתמשו באפשרות ההתקנה מרחוק! "
+#, fuzzy
+msgid "Install or update the selected modules"
+msgstr "להתקין את המודולים הבאים?"
 
 #: ../ui/module-manager.glade.h:9
-msgid "<i>Personal area, for your use only:</i>"
-msgstr "<i>איזור אישי, לעיניך בלבד:</i>"
+#, fuzzy
+msgid "Remove the selected modules from your system"
+msgstr "הסר את המודולים שנבחרו מהרשימה"
 
 #: ../ui/module-manager.glade.h:10
-msgid "<i>System area, for all users:</i>"
-msgstr "<i>איזור מערכת, לכל המשתמשים:</i>"
+#, fuzzy
+msgid "_Archive"
+msgstr "ארכיב"
 
 #: ../ui/module-manager.glade.h:11
-msgid ""
-"Add a custom remote install source. You must know its hostname and the "
-"folder where its repository lives."
-msgstr ""
+#, fuzzy
+msgid "Create a zip archive of the selected modules."
+msgstr "האם להסיר את המודול הנבחר?"
 
 #: ../ui/module-manager.glade.h:12
-msgid ""
-"Add a local folder as an install source, typically on a cdrom or flash "
-"drive.  Such a folder contains subfolders \"mods.d\" and \"modules\"."
-msgstr ""
+#, fuzzy
+msgid "_Index"
+msgstr "אינדקס"
 
 #: ../ui/module-manager.glade.h:13
 msgid ""
@@ -2434,799 +2573,760 @@ msgid ""
 msgstr ""
 
 #: ../ui/module-manager.glade.h:14
-msgid "Continue"
-msgstr "המשך"
-
-#: ../ui/module-manager.glade.h:15
-#, fuzzy
-msgid "Create a zip archive of the selected modules."
-msgstr "האם להסיר את המודול הנבחר?"
-
-#: ../ui/module-manager.glade.h:16
-msgid "Current Remote Sources"
-msgstr "מקורות מרוחקים נוכחיים"
-
-#: ../ui/module-manager.glade.h:17
-msgid "Current local sources"
-msgstr "מקורות מקומיים נוכחיים"
-
-#: ../ui/module-manager.glade.h:18
-#, fuzzy
-msgid "Delete the fast-search index of the selected modules."
-msgstr "למחוק אינדקס לחיפוש מהיר עבור המודולים הבאים?"
-
-#: ../ui/module-manager.glade.h:19
-msgid "Home dir"
-msgstr "ספריית בית"
-
-#: ../ui/module-manager.glade.h:20
-#, fuzzy
-msgid "Install or update the selected modules"
-msgstr "להתקין את המודולים הבאים?"
-
-#: ../ui/module-manager.glade.h:21
-msgid ""
-"Load and synchronize the standard set of known repositories, as maintained "
-"at crosswire.org, with your current remote sources."
-msgstr ""
-
-#: ../ui/module-manager.glade.h:22
-msgid "Local"
-msgstr "מקומי"
-
-#: ../ui/module-manager.glade.h:23
-msgid "Local Install Folder"
-msgstr "תיקיית התקנה מקומית"
-
-#: ../ui/module-manager.glade.h:24
-msgid "Module Manager"
-msgstr "מנהל מודולים"
-
-#: ../ui/module-manager.glade.h:25
-msgid "Open a brief introductory explanation of how the Module Manager works."
-msgstr ""
-
-#: ../ui/module-manager.glade.h:26
-msgid ""
-"Refresh Xiphos' knowledge of what modules are available at the selected "
-"remote repository"
-msgstr ""
-
-#: ../ui/module-manager.glade.h:27
-msgid "Remote"
-msgstr "מרוחק"
-
-#: ../ui/module-manager.glade.h:28
-#, fuzzy
-msgid "Remove a remote install source."
-msgstr "מחק מקור מרוחק"
-
-#: ../ui/module-manager.glade.h:29
-msgid "Remove one of your local folders as an install source."
-msgstr ""
-
-#: ../ui/module-manager.glade.h:30
-#, fuzzy
-msgid "Remove the selected modules from your system"
-msgstr "הסר את המודולים שנבחרו מהרשימה"
-
-#: ../ui/module-manager.glade.h:31
-msgid "Sword sys dir"
-msgstr "ספריית sys של Sword"
-
-#: ../ui/module-manager.glade.h:32
-#, fuzzy
-msgid "_Archive"
-msgstr "ארכיב"
-
-#: ../ui/module-manager.glade.h:33
 #, fuzzy
 msgid "_Delete Index"
 msgstr "מחק פריט"
 
-#: ../ui/module-manager.glade.h:34
+#: ../ui/module-manager.glade.h:15
 #, fuzzy
-msgid "_Index"
-msgstr "אינדקס"
+msgid "Delete the fast-search index of the selected modules."
+msgstr "למחוק אינדקס לחיפוש מהיר עבור המודולים הבאים?"
+
+#: ../ui/module-manager.glade.h:16
+msgid "Continue"
+msgstr "המשך"
+
+#. do not translate <b> and </b> they are html formating
+#: ../ui/module-manager.glade.h:18
+msgid "<b>Sword</b>"
+msgstr "<b>Sword</b>"
+
+#: ../ui/module-manager.glade.h:19
+msgid "<b>Module Manager</b>"
+msgstr "<b>מנהל מודולים</b>"
+
+#: ../ui/module-manager.glade.h:20
+msgid "<b>WARNING:</b> If you live in a persecuted country use with care."
+msgstr ""
+"<b>אזהרה:</b> אם אתם חיים במדינה הרודפת את המאמינים, היזהרו בעת השימוש."
+
+#: ../ui/module-manager.glade.h:21
+msgid "<b>Add and Remove Sources</b>"
+msgstr "<b>הוסף והסר מקורות</b>"
+
+#: ../ui/module-manager.glade.h:22
+msgid "Current local sources"
+msgstr "מקורות מקומיים נוכחיים"
+
+#: ../ui/module-manager.glade.h:23
+msgid ""
+"Add a local folder as an install source, typically on a cdrom or flash "
+"drive.  Such a folder contains subfolders \"mods.d\" and \"modules\"."
+msgstr ""
+
+#: ../ui/module-manager.glade.h:24
+msgid "Remove one of your local folders as an install source."
+msgstr ""
+
+#: ../ui/module-manager.glade.h:25
+msgid "Current Remote Sources"
+msgstr "מקורות מרוחקים נוכחיים"
+
+#: ../ui/module-manager.glade.h:26
+msgid ""
+"Add a custom remote install source. You must know its hostname and the "
+"folder where its repository lives."
+msgstr ""
+
+#: ../ui/module-manager.glade.h:27
+#, fuzzy
+msgid "Remove a remote install source."
+msgstr "מחק מקור מרוחק"
+
+#: ../ui/module-manager.glade.h:28
+msgid "<b>Install Source</b>"
+msgstr "<b>מקור התקנה</b>"
+
+#: ../ui/module-manager.glade.h:29
+msgid "Local"
+msgstr "מקומי"
+
+#: ../ui/module-manager.glade.h:30
+msgid "Remote"
+msgstr "מרוחק"
+
+#: ../ui/module-manager.glade.h:31
+msgid "<b>Install Destination</b>"
+msgstr "<b>יעד התקנה</b>"
+
+#: ../ui/module-manager.glade.h:32
+msgid "<i>Personal area, for your use only:</i>"
+msgstr "<i>איזור אישי, לעיניך בלבד:</i>"
+
+#: ../ui/module-manager.glade.h:33
+msgid "Home dir"
+msgstr "ספריית בית"
+
+#: ../ui/module-manager.glade.h:34
+msgid "<i>System area, for all users:</i>"
+msgstr "<i>איזור מערכת, לכל המשתמשים:</i>"
 
 #: ../ui/module-manager.glade.h:35
-#, fuzzy
-msgid "_Install"
-msgstr "התקנה"
+msgid "Sword sys dir"
+msgstr "ספריית sys של Sword"
 
 #: ../ui/module-manager.glade.h:36
-#, fuzzy
-msgid "_Load Standard"
-msgstr "טעינה סטנדרטית"
+msgid ""
+"<b>Warning:</b> If you live in a persecuted country and do not wish to risk "
+"detection you should NOT use  the remote installation feature! "
+msgstr ""
+"<b>אזהרה:</b> אם אתם חיים במדינה הרודפת את המאמינים ומבקשים להימנע מזיהוי, "
+"אל תשתמשו באפשרות ההתקנה מרחוק! "
 
 #: ../ui/module-manager.glade.h:37
-#, fuzzy
-msgid "_View Intro"
-msgstr "_תצוגה"
+msgid "Local Install Folder"
+msgstr "תיקיית התקנה מקומית"
 
 #: ../ui/navbar_versekey.glade.h:1
-msgid "1"
-msgstr "+1"
+msgid "Drop down history list"
+msgstr "נקה את רשימת ההסטוריה"
 
 #: ../ui/navbar_versekey.glade.h:2
-msgid "<b>Revelation of John</b>"
-msgstr "<b>הבשורה על פי יוחנן</b>"
+msgid "Choose book to display"
+msgstr "נא לבחור ספר"
 
 #: ../ui/navbar_versekey.glade.h:3
 msgid "Book Selector Button"
 msgstr "כפתור בחירת ספר"
 
 #: ../ui/navbar_versekey.glade.h:4
-#, fuzzy
-msgid "Choose Verse to display"
-msgstr "נא לבחור ספר"
+msgid "<b>Revelation of John</b>"
+msgstr "<b>הבשורה על פי יוחנן</b>"
 
 #: ../ui/navbar_versekey.glade.h:5
-msgid "Choose book to display"
-msgstr "נא לבחור ספר"
-
-#: ../ui/navbar_versekey.glade.h:6
 #, fuzzy
 msgid "Choose chapter to display"
 msgstr "נא לבחור ספר"
 
-#: ../ui/navbar_versekey.glade.h:7
-msgid "Drop down history list"
-msgstr "נקה את רשימת ההסטוריה"
-
-#: ../ui/navbar_versekey.glade.h:8
-msgid "Enter a Verse reference in Book 1:1 format and press Return"
-msgstr "הזן מראה מקום לפסוק בפורמט \"ספר 1:1\" והקש על Enter"
-
-#: ../ui/navbar_versekey.glade.h:9
-msgid "Reference Entry"
-msgstr "ערך מראה מקום"
-
-#: ../ui/navbar_versekey.glade.h:10
+#: ../ui/navbar_versekey.glade.h:6
 msgid "Toggle Chapter Button"
 msgstr "כפתור מעבר פרק"
 
-#: ../ui/navbar_versekey.glade.h:11
+#: ../ui/navbar_versekey.glade.h:7
+msgid "1"
+msgstr "+1"
+
+#: ../ui/navbar_versekey.glade.h:8
+#, fuzzy
+msgid "Choose Verse to display"
+msgstr "נא לבחור ספר"
+
+#: ../ui/navbar_versekey.glade.h:9
 msgid "Toggle Verse Button"
 msgstr "כפתור מעבר פסוק"
 
-#: ../ui/prefs.glade.h:1
-msgid ""
-"-2\n"
-"-1\n"
-"+0\n"
-"+1\n"
-"+2\n"
-"+3\n"
-"+4\n"
-"+5"
-msgstr ""
-"-2\n"
-"-1\n"
-"+0\n"
-"+1\n"
-"+2\n"
-"+3\n"
-"+4\n"
-"+5"
+#: ../ui/navbar_versekey.glade.h:10
+msgid "Enter a Verse reference in Book 1:1 format and press Return"
+msgstr "הזן מראה מקום לפסוק בפורמט \"ספר 1:1\" והקש על Enter"
 
-#: ../ui/prefs.glade.h:9
-msgid "<b>Font Colors</b>"
-msgstr "צבעי גופן"
+#: ../ui/navbar_versekey.glade.h:11
+msgid "Reference Entry"
+msgstr "ערך מראה מקום"
 
-#: ../ui/prefs.glade.h:10
-msgid "<b>Font Sizes</b>"
-msgstr "<b>גדלי גופן</b>"
-
-#: ../ui/prefs.glade.h:11
-msgid "<b>General</b>"
-msgstr "<b>כללי</b>"
-
-#: ../ui/prefs.glade.h:12
-msgid "<b>Main Window Modules</b>"
-msgstr "<b>מודולי חלון ראשי</b>"
-
-#: ../ui/prefs.glade.h:13 ../ui/search-dialog.glade.h:5
-msgid "<b>Modules</b>"
-msgstr "<b>מודולים</b>"
-
-#: ../ui/prefs.glade.h:14
-msgid "<b>Show</b>"
-msgstr "<b>הצג</b>"
-
-#: ../ui/prefs.glade.h:15
-msgid "<b>Special Purpose Modules</b>"
-msgstr "<b>מודולים למטרות מיוחדות</b>"
-
-#: ../ui/prefs.glade.h:16
-msgid "<b>StudyPad default directory</b>"
-msgstr "<b>תיקיית ברירת המחדל של שולחן המחקר</b>"
-
-#: ../ui/prefs.glade.h:17
-msgid "<b>Tabs</b>"
-msgstr "<b>לשוניות</b>"
-
-#: ../ui/prefs.glade.h:18 ../ui/search-dialog.glade.h:15
-msgid "Add Modules"
-msgstr "הוסף מודולים"
-
-#: ../ui/prefs.glade.h:19
-msgid "All displayed font sizes are relative to this choice"
-msgstr ""
-
-#: ../ui/prefs.glade.h:20
-#, fuzzy
-msgid "Apply high-contrast highlight to current verse - see color pickers"
-msgstr "הדגש את הפסוק הנוכחי בעזרת ניגודיות גבוהה"
-
-#: ../ui/prefs.glade.h:21
-#, fuzzy
-msgid "Automatically resize image content to fit the pane"
-msgstr "שנה את גודל התמונות בחלוניות הפירוש, הספר והמילון כדי להתאים לתת-החלון"
-
-#: ../ui/prefs.glade.h:22
-msgid "Background"
-msgstr "רקע"
-
-#: ../ui/prefs.glade.h:23
-msgid "Base font size"
-msgstr "גודל גופן בסיסי"
-
-#: ../ui/prefs.glade.h:24
-msgid "Bible Texts"
-msgstr "כתבי קודש"
-
-#: ../ui/prefs.glade.h:25
-msgid "Bible Texts Checkbox"
-msgstr "תיבת סימון לטקסטים תנ\"כיים"
-
-#: ../ui/prefs.glade.h:26
-msgid "Biblical Text"
-msgstr "כתבי קודש"
-
-#: ../ui/prefs.glade.h:27
-msgid "Bold"
-msgstr ""
-
-#: ../ui/prefs.glade.h:29
-msgid "Brackets"
-msgstr ""
-
-#: ../ui/prefs.glade.h:30
-msgid "Change Biblical Text Combo"
-msgstr "תיבה משולבת לשינוי טקסט תנ\"כי"
-
-#: ../ui/prefs.glade.h:31
-msgid "Change Book Combo"
-msgstr "תיבה משולבת לשינוי ספר"
-
-#: ../ui/prefs.glade.h:32
-msgid "Change Commentary Combo"
-msgstr "תיבה משולבת לשינוי פירוש"
-
-#: ../ui/prefs.glade.h:33
-msgid "Change Default Dictionary Combo"
-msgstr "תיבה משולבת לשינוי מילון ברירת המחדל"
-
-#: ../ui/prefs.glade.h:34
-msgid "Change Dictionary Combo"
-msgstr "תיבה משולבת לשינוי מילון"
-
-#: ../ui/prefs.glade.h:35
-msgid "Change Personal Notes Combo"
-msgstr "תיבה משולבת לשינוי הערות אישיות"
-
-#: ../ui/prefs.glade.h:36 ../ui/search-dialog.glade.h:21
-msgid "Clear Modules from List Button"
-msgstr "כפתור לניקוי המודולים מהרשימה"
-
-#: ../ui/prefs.glade.h:37 ../ui/search-dialog.glade.h:22
-msgid "Clear all modules from the list"
-msgstr "נקה את כל המודולים מהרשימה"
-
-#: ../ui/prefs.glade.h:39
-msgid "Commentaries Checkbox"
-msgstr "תיבת סימון לפירושים"
-
-#: ../ui/prefs.glade.h:41
-msgid "Commonly -1, to make verse numbers less obtrusive"
-msgstr ""
-
-#: ../ui/prefs.glade.h:42
+#: ../ui/prefs.glade.h:2
 msgid "Cover"
 msgstr "עטיפה"
 
-#: ../ui/prefs.glade.h:43
-#, fuzzy
-msgid "Cross-references in verse list"
-msgstr "הפניות צולבות"
-
-#: ../ui/prefs.glade.h:44
-msgid "Current Verse"
-msgstr "הפסוק הנוכחי"
-
-#: ../ui/prefs.glade.h:45
-msgid "Daily Devotional"
-msgstr "דרשה יומית"
-
-#: ../ui/prefs.glade.h:46
-msgid "Daily Devotional Combo"
-msgstr "תיבה משולבת לדרשה יומית"
-
-#: ../ui/prefs.glade.h:47
-msgid "Default Dictionary"
-msgstr "מילון ברירת המחדל"
-
-#: ../ui/prefs.glade.h:48 ../ui/search-dialog.glade.h:39
-msgid "Delete Selected Module From List Button"
-msgstr "כפתור להסרת המודולים שנבחרו מהרשימה"
-
-#: ../ui/prefs.glade.h:49
-msgid "Dictionary"
-msgstr "מילון"
-
-#: ../ui/prefs.glade.h:50
-msgid "Dictionary/Lexicon"
-msgstr "מילון \\ לקסיקון"
-
-#: ../ui/prefs.glade.h:51
-msgid "Dictionary/Lexicon Checkbox"
-msgstr "תיבת סימון למילון \\ לקסיקון"
-
-#: ../ui/prefs.glade.h:52
-msgid "Enable Prayer Lists"
-msgstr "לנקות את הרשימה?"
-
-#: ../ui/prefs.glade.h:53
-msgid "Enable Prayer Lists Checkbox"
-msgstr "תיבת סימון להפעלת רשימות תפילות"
-
-#: ../ui/prefs.glade.h:54
-msgid "Font Colors"
+#: ../ui/prefs.glade.h:3
+msgid "<b>Font Colors</b>"
 msgstr "צבעי גופן"
 
-#: ../ui/prefs.glade.h:55
-msgid "Font Misc"
-msgstr "גופנים - שונות"
+#: ../ui/prefs.glade.h:4
+msgid "Background"
+msgstr "רקע"
 
-#: ../ui/prefs.glade.h:56
-msgid "Font preferences, per language"
-msgstr ""
-
-#: ../ui/prefs.glade.h:57
+#: ../ui/prefs.glade.h:5
 msgid "Foreground"
 msgstr "חזית"
 
-#: ../ui/prefs.glade.h:58
-msgid "General Misc"
-msgstr "כללי - שונות"
+#: ../ui/prefs.glade.h:6
+msgid "Current Verse"
+msgstr "הפסוק הנוכחי"
 
-#: ../ui/prefs.glade.h:59
-msgid "Greek Lexicon"
-msgstr "לקסיקון יווני"
+#: ../ui/prefs.glade.h:7
+msgid "Verse Number"
+msgstr "פסוק מספר"
 
-#: ../ui/prefs.glade.h:60
-msgid "Greek Lexicon Combo"
-msgstr "תיבה משולבת ללקסיקון יווני"
+#: ../ui/prefs.glade.h:8
+msgid "Links"
+msgstr "קישורים"
 
-#: ../ui/prefs.glade.h:61
-msgid "Hebrew Lexicon"
-msgstr "לקסיקון עברי"
-
-#: ../ui/prefs.glade.h:62
-msgid "Hebrew Lexicon Combo"
-msgstr "תיבה משולבת ללקסיקון עברי"
-
-#: ../ui/prefs.glade.h:63
-#, fuzzy
-msgid "Highlight"
-msgstr "הדגש רקע"
-
-#: ../ui/prefs.glade.h:64
-msgid "Highlight Background"
-msgstr "הדגש רקע"
-
-#: ../ui/prefs.glade.h:65
+#: ../ui/prefs.glade.h:9
 msgid "Highlight Foreground"
 msgstr "הדגש חזית"
 
-#: ../ui/prefs.glade.h:66
-msgid "Highlight current verse"
-msgstr "הדגש פסוק נוכחי"
+#: ../ui/prefs.glade.h:10
+msgid "Highlight Background"
+msgstr "הדגש רקע"
 
-#: ../ui/prefs.glade.h:67
-msgid "Highlight current verse check box"
-msgstr "תיבת סימון להדגשת הפסוק הנוכחי"
-
-#: ../ui/prefs.glade.h:68
-#, fuzzy
-msgid "Highlight user annotations"
-msgstr "הערות משתמש"
-
-#: ../ui/prefs.glade.h:69
-#, fuzzy
-msgid "Highlight user annotations check box"
-msgstr "תיבת סימון להדגשת הפסוק הנוכחי"
-
-#: ../ui/prefs.glade.h:70
-msgid ""
-"If you have set a preferred daily devotion module, its entry for today will "
-"be shown at startup."
-msgstr ""
-
-#: ../ui/prefs.glade.h:71
+#: ../ui/prefs.glade.h:11
 #, fuzzy
 msgid "Invert color pairs"
 msgstr "הכנס סימנייה"
 
-#: ../ui/prefs.glade.h:72
+#: ../ui/prefs.glade.h:12
+msgid "Normal Text"
+msgstr ""
+
+#: ../ui/prefs.glade.h:13
 #, fuzzy
-msgid "Language Font Combo"
-msgstr "תיבה משולבת לשינוי ספר"
+msgid "Highlight"
+msgstr "הדגש רקע"
 
-#: ../ui/prefs.glade.h:73
-msgid "Links"
-msgstr "קישורים"
+#: ../ui/prefs.glade.h:14
+msgid "Font Colors"
+msgstr "צבעי גופן"
 
-#: ../ui/prefs.glade.h:74
+#: ../ui/prefs.glade.h:15
+msgid "<b>Font Sizes</b>"
+msgstr "<b>גדלי גופן</b>"
+
+#: ../ui/prefs.glade.h:16
+msgid "All displayed font sizes are relative to this choice"
+msgstr ""
+
+#: ../ui/prefs.glade.h:17
+msgid "Base font size"
+msgstr "גודל גופן בסיסי"
+
+#: ../ui/prefs.glade.h:18
 msgid ""
-"Make double-click of a word always use default dictionary instead of "
-"dictionary currently displayed"
+"-2\n"
+"-1\n"
+"+0\n"
+"+1\n"
+"+2\n"
+"+3\n"
+"+4\n"
+"+5"
+msgstr ""
+"-2\n"
+"-1\n"
+"+0\n"
+"+1\n"
+"+2\n"
+"+3\n"
+"+4\n"
+"+5"
+
+#: ../ui/prefs.glade.h:26
+msgid "Commonly -1, to make verse numbers less obtrusive"
 msgstr ""
 
-#: ../ui/prefs.glade.h:75
-msgid "Make journals/prayer lists available"
-msgstr ""
+#: ../ui/prefs.glade.h:27
+msgid "Verse number size"
+msgstr "גודל מספר הפסוק"
 
-#: ../ui/prefs.glade.h:76 ../ui/search-dialog.glade.h:61
-msgid "Module Selection"
-msgstr "בחירת מודולים"
-
-#: ../ui/prefs.glade.h:77
-msgid "Modules Misc"
-msgstr "מודולים - שונות"
-
-#: ../ui/prefs.glade.h:78
-msgid "Modules Parallel"
-msgstr "מודולים - מקביל"
-
-#: ../ui/prefs.glade.h:79
+#: ../ui/prefs.glade.h:28
 msgid ""
 "Name and size choice for any module in a given language; still overridden by "
 "a specific choice on a particular module"
 msgstr ""
 
-#: ../ui/prefs.glade.h:80
-msgid "Normal Text"
+#: ../ui/prefs.glade.h:29
+msgid "Font preferences, per language"
 msgstr ""
 
-#: ../ui/prefs.glade.h:81 ../ui/search-dialog.glade.h:70
-msgid "Open Selection Dialog Button"
-msgstr "כפתור לדיאלוג פתיחת הפריטים הנבחרים"
-
-#: ../ui/prefs.glade.h:82
+#: ../ui/prefs.glade.h:30
 #, fuzzy
-msgid "Open a dialog to select modules"
-msgstr "פתח תיבת דיאלוג לבחירת המודולים שיתווספו לרשימה"
+msgid "Language Font Combo"
+msgstr "תיבה משולבת לשינוי ספר"
 
-#: ../ui/prefs.glade.h:83
-msgid "Parallel View in a tab"
-msgstr "תצוגה מקבילה בטאב"
+#: ../ui/prefs.glade.h:31
+msgid "Font Misc"
+msgstr "גופנים - שונות"
 
-#: ../ui/prefs.glade.h:84
-msgid "Personal Notes"
-msgstr "הערות אישיות"
+#: ../ui/prefs.glade.h:32
+msgid "<b>Tabs</b>"
+msgstr "<b>לשוניות</b>"
 
-#: ../ui/prefs.glade.h:87
-msgid "Previewer Checkbox"
-msgstr "תיבת סימון לתצוגה מקדימה"
+#: ../ui/prefs.glade.h:33
+msgid "Use tabbed browsing"
+msgstr "השתמש בגלישה בלשוניות"
 
-#: ../ui/prefs.glade.h:88 ../ui/search-dialog.glade.h:80
-msgid "Remove the selected module from the list"
-msgstr "הסר את המודולים שנבחרו מהרשימה"
-
-#: ../ui/prefs.glade.h:89
-msgid "Resize images"
-msgstr "שנה גודל תמונות"
-
-#: ../ui/prefs.glade.h:90
-msgid "Resize images checkbox"
-msgstr "תיבת סימון לשינוי גודל תמונות"
-
-#: ../ui/prefs.glade.h:91
-msgid "Scroll to Previous/Next Chapter"
-msgstr "גלול אל הפרק הקודם \\ הבא"
-
-#: ../ui/prefs.glade.h:92
-msgid "Scroll to Previous/Next Chapter Checkbox"
-msgstr "תיבת סימון לגלילה אל הפרק הקודם \\ הבא"
-
-#: ../ui/prefs.glade.h:93
-msgid "Select A Directory"
-msgstr "בחר ספרייה"
-
-#: ../ui/prefs.glade.h:94
-msgid ""
-"Select a particular language for interface display, other than your usual "
-"setting"
-msgstr ""
-
-#: ../ui/prefs.glade.h:95
-msgid "Show Daily Devotion at start up"
-msgstr "הצג דרשה יומית בפתיחה"
-
-#: ../ui/prefs.glade.h:96
-msgid "Show splash screen at start up"
-msgstr "הצג מסך פתיחה"
-
-#: ../ui/prefs.glade.h:97
-#, fuzzy
-msgid "Show verse number as a superscript"
-msgstr "הצג מספרי פסוקים"
-
-#: ../ui/prefs.glade.h:98
-#, fuzzy
-msgid "Show verse number in bold text"
-msgstr "הצג מספרי פסוקים"
-
-#: ../ui/prefs.glade.h:99
-msgid "Show verse number with [surrounding brackets]"
-msgstr ""
-
-#: ../ui/prefs.glade.h:100
+#: ../ui/prefs.glade.h:34
 msgid ""
 "Single selection of Bible+commentary+book+dictionary, or many sets of such "
 "selections in a tabbed interface"
 msgstr ""
 
-#: ../ui/prefs.glade.h:101
-msgid "Special Locale (requires restart)"
-msgstr "שפה מיוחדת (נדרש אתחול)"
+#: ../ui/prefs.glade.h:35
+msgid "Use tabbed browsing Checkbox"
+msgstr "תיבת סימון לגלישה בלשוניות"
 
-#: ../ui/prefs.glade.h:102
-msgid "Special Locale Combo"
-msgstr ""
+#: ../ui/prefs.glade.h:36
+msgid "<b>Show</b>"
+msgstr "<b>הצג</b>"
 
-#: ../ui/prefs.glade.h:103
-msgid "StudyPad default directory combo"
-msgstr "תיבה משולבת לתיקיית ברירת המחדל של שולחן המחקר"
+#: ../ui/prefs.glade.h:37
+msgid "Bible Texts"
+msgstr "כתבי קודש"
 
-#: ../ui/prefs.glade.h:104
-#, fuzzy
-msgid "Superscript"
-msgstr "תיאור"
+#: ../ui/prefs.glade.h:38
+msgid "Bible Texts Checkbox"
+msgstr "תיבת סימון לטקסטים תנ\"כיים"
 
-#: ../ui/prefs.glade.h:105
+#: ../ui/prefs.glade.h:40
+msgid "Previewer Checkbox"
+msgstr "תיבת סימון לתצוגה מקדימה"
+
+#: ../ui/prefs.glade.h:42
+msgid "Commentaries Checkbox"
+msgstr "תיבת סימון לפירושים"
+
+#: ../ui/prefs.glade.h:43
+msgid "Dictionary/Lexicon"
+msgstr "מילון \\ לקסיקון"
+
+#: ../ui/prefs.glade.h:44
+msgid "Dictionary/Lexicon Checkbox"
+msgstr "תיבת סימון למילון \\ לקסיקון"
+
+#: ../ui/prefs.glade.h:45
+msgid "Parallel View in a tab"
+msgstr "תצוגה מקבילה בטאב"
+
+#: ../ui/prefs.glade.h:46
 msgid "Tabs and Panes"
 msgstr "לשוניות וחלוניות"
 
-#: ../ui/prefs.glade.h:106
-msgid "Use Bible Text scroll bar to scroll to previous or next chapter"
-msgstr "השתמש בשורת הגלילה של הטקסט כדי לעבור לפרק הקודם או הבא"
+#: ../ui/prefs.glade.h:47
+msgid "<b>General</b>"
+msgstr "<b>כללי</b>"
 
-#: ../ui/prefs.glade.h:107
+#: ../ui/prefs.glade.h:48
+msgid ""
+"Select a particular language for interface display, other than your usual "
+"setting"
+msgstr ""
+
+#: ../ui/prefs.glade.h:49
+msgid "Special Locale (requires restart)"
+msgstr "שפה מיוחדת (נדרש אתחול)"
+
+#: ../ui/prefs.glade.h:50
+msgid "Special Locale Combo"
+msgstr ""
+
+#: ../ui/prefs.glade.h:51
+msgid "Show splash screen at start up"
+msgstr "הצג מסך פתיחה"
+
+#: ../ui/prefs.glade.h:52
+msgid "Show Daily Devotion at start up"
+msgstr "הצג דרשה יומית בפתיחה"
+
+#: ../ui/prefs.glade.h:53
+msgid ""
+"If you have set a preferred daily devotion module, its entry for today will "
+"be shown at startup."
+msgstr ""
+
+#: ../ui/prefs.glade.h:54
 msgid "Use default Dictionary"
 msgstr "השתמש במילון ברירת המחדל"
 
-#: ../ui/prefs.glade.h:108
+#: ../ui/prefs.glade.h:55
+msgid ""
+"Make double-click of a word always use default dictionary instead of "
+"dictionary currently displayed"
+msgstr ""
+
+#: ../ui/prefs.glade.h:56
 msgid "Use default Dictionary Checkbox"
 msgstr "תיבת סימון לשימוש במילון ברירת המחדל"
 
-#: ../ui/prefs.glade.h:109
+#: ../ui/prefs.glade.h:57
+msgid "Scroll to Previous/Next Chapter"
+msgstr "גלול אל הפרק הקודם \\ הבא"
+
+#: ../ui/prefs.glade.h:58
+msgid "Use Bible Text scroll bar to scroll to previous or next chapter"
+msgstr "השתמש בשורת הגלילה של הטקסט כדי לעבור לפרק הקודם או הבא"
+
+#: ../ui/prefs.glade.h:59
+msgid "Scroll to Previous/Next Chapter Checkbox"
+msgstr "תיבת סימון לגלילה אל הפרק הקודם \\ הבא"
+
+#: ../ui/prefs.glade.h:60
+msgid "Resize images"
+msgstr "שנה גודל תמונות"
+
+#: ../ui/prefs.glade.h:61
+#, fuzzy
+msgid "Automatically resize image content to fit the pane"
+msgstr "שנה את גודל התמונות בחלוניות הפירוש, הספר והמילון כדי להתאים לתת-החלון"
+
+#: ../ui/prefs.glade.h:62
+msgid "Resize images checkbox"
+msgstr "תיבת סימון לשינוי גודל תמונות"
+
+#: ../ui/prefs.glade.h:63
+msgid "Highlight current verse"
+msgstr "הדגש פסוק נוכחי"
+
+#: ../ui/prefs.glade.h:64
+#, fuzzy
+msgid "Apply high-contrast highlight to current verse - see color pickers"
+msgstr "הדגש את הפסוק הנוכחי בעזרת ניגודיות גבוהה"
+
+#: ../ui/prefs.glade.h:65
+msgid "Highlight current verse check box"
+msgstr "תיבת סימון להדגשת הפסוק הנוכחי"
+
+#: ../ui/prefs.glade.h:66
+#, fuzzy
+msgid "Highlight user annotations"
+msgstr "הערות משתמש"
+
+#: ../ui/prefs.glade.h:67
 #, fuzzy
 msgid "Use inverted highlight on user-annotated verses"
 msgstr "הדגש את הפסוק הנוכחי בעזרת ניגודיות גבוהה"
 
-#: ../ui/prefs.glade.h:110
-msgid "Use tabbed browsing"
-msgstr "השתמש בגלישה בלשוניות"
+#: ../ui/prefs.glade.h:68
+#, fuzzy
+msgid "Highlight user annotations check box"
+msgstr "תיבת סימון להדגשת הפסוק הנוכחי"
 
-#: ../ui/prefs.glade.h:111
-msgid "Use tabbed browsing Checkbox"
-msgstr "תיבת סימון לגלישה בלשוניות"
+#: ../ui/prefs.glade.h:69
+#, fuzzy
+msgid "Cross-references in verse list"
+msgstr "הפניות צולבות"
 
-#: ../ui/prefs.glade.h:112
+#: ../ui/prefs.glade.h:70
 msgid "Use the verse list for Bible cross-references instead of the previewer"
 msgstr ""
 
-#: ../ui/prefs.glade.h:113
-msgid "Verse Number"
-msgstr "פסוק מספר"
-
-#: ../ui/prefs.glade.h:114
-#, fuzzy
-msgid "Verse number bold checkbox"
-msgstr "גודל מספר הפסוק"
-
-#: ../ui/prefs.glade.h:115
-#, fuzzy
-msgid "Verse number bracket checkbox"
-msgstr "תיבת סימון לציון הצגת פסוק בשורה אחת"
-
-#: ../ui/prefs.glade.h:116
-msgid "Verse number size"
-msgstr "גודל מספר הפסוק"
-
-#: ../ui/prefs.glade.h:117
-#, fuzzy
-msgid "Verse number superscript checkbox"
-msgstr "גודל מספר הפסוק"
-
-#: ../ui/prefs.glade.h:118
-#, fuzzy
-msgid "Verse number:"
-msgstr "פסוק מספר"
-
-#: ../ui/prefs.glade.h:119
+#: ../ui/prefs.glade.h:71
 #, fuzzy
 msgid "Xrefs in verse list check box"
 msgstr "תיבת סימון לשינוי גודל תמונות"
 
+#: ../ui/prefs.glade.h:72
+msgid "Enable Prayer Lists"
+msgstr "לנקות את הרשימה?"
+
+#: ../ui/prefs.glade.h:73
+msgid "Make journals/prayer lists available"
+msgstr ""
+
+#: ../ui/prefs.glade.h:74
+msgid "Enable Prayer Lists Checkbox"
+msgstr "תיבת סימון להפעלת רשימות תפילות"
+
+#: ../ui/prefs.glade.h:75
+#, fuzzy
+msgid "Verse number:"
+msgstr "פסוק מספר"
+
+#: ../ui/prefs.glade.h:76
+msgid "Bold"
+msgstr ""
+
+#: ../ui/prefs.glade.h:77
+#, fuzzy
+msgid "Show verse number in bold text"
+msgstr "הצג מספרי פסוקים"
+
+#: ../ui/prefs.glade.h:78
+#, fuzzy
+msgid "Verse number bold checkbox"
+msgstr "גודל מספר הפסוק"
+
+#: ../ui/prefs.glade.h:79
+msgid "Brackets"
+msgstr ""
+
+#: ../ui/prefs.glade.h:80
+msgid "Show verse number with [surrounding brackets]"
+msgstr ""
+
+#: ../ui/prefs.glade.h:81
+#, fuzzy
+msgid "Verse number bracket checkbox"
+msgstr "תיבת סימון לציון הצגת פסוק בשורה אחת"
+
+#: ../ui/prefs.glade.h:82
+#, fuzzy
+msgid "Superscript"
+msgstr "תיאור"
+
+#: ../ui/prefs.glade.h:83
+#, fuzzy
+msgid "Show verse number as a superscript"
+msgstr "הצג מספרי פסוקים"
+
+#: ../ui/prefs.glade.h:84
+#, fuzzy
+msgid "Verse number superscript checkbox"
+msgstr "גודל מספר הפסוק"
+
+#: ../ui/prefs.glade.h:85
+msgid "<b>StudyPad default directory</b>"
+msgstr "<b>תיקיית ברירת המחדל של שולחן המחקר</b>"
+
+#: ../ui/prefs.glade.h:86
+msgid "Select A Directory"
+msgstr "בחר ספרייה"
+
+#: ../ui/prefs.glade.h:87
+msgid "StudyPad default directory combo"
+msgstr "תיבה משולבת לתיקיית ברירת המחדל של שולחן המחקר"
+
+#: ../ui/prefs.glade.h:88
+msgid "General Misc"
+msgstr "כללי - שונות"
+
+#: ../ui/prefs.glade.h:89
+msgid "<b>Main Window Modules</b>"
+msgstr "<b>מודולי חלון ראשי</b>"
+
+#: ../ui/prefs.glade.h:90
+msgid "Biblical Text"
+msgstr "כתבי קודש"
+
+#: ../ui/prefs.glade.h:91
+msgid "Change Biblical Text Combo"
+msgstr "תיבה משולבת לשינוי טקסט תנ\"כי"
+
+#: ../ui/prefs.glade.h:93
+msgid "Change Commentary Combo"
+msgstr "תיבה משולבת לשינוי פירוש"
+
+#: ../ui/prefs.glade.h:94
+msgid "Dictionary"
+msgstr "מילון"
+
+#: ../ui/prefs.glade.h:95
+msgid "Change Dictionary Combo"
+msgstr "תיבה משולבת לשינוי מילון"
+
+#: ../ui/prefs.glade.h:97
+msgid "Change Book Combo"
+msgstr "תיבה משולבת לשינוי ספר"
+
+#: ../ui/prefs.glade.h:98 ../ui/search-dialog.glade.h:22
+msgid "<b>Modules</b>"
+msgstr "<b>מודולים</b>"
+
+#: ../ui/prefs.glade.h:99 ../ui/search-dialog.glade.h:86
+msgid "Clear all modules from the list"
+msgstr "נקה את כל המודולים מהרשימה"
+
+#: ../ui/prefs.glade.h:100 ../ui/search-dialog.glade.h:87
+msgid "Clear Modules from List Button"
+msgstr "כפתור לניקוי המודולים מהרשימה"
+
+#: ../ui/prefs.glade.h:101 ../ui/search-dialog.glade.h:88
+msgid "Remove the selected module from the list"
+msgstr "הסר את המודולים שנבחרו מהרשימה"
+
+#: ../ui/prefs.glade.h:102 ../ui/search-dialog.glade.h:89
+msgid "Delete Selected Module From List Button"
+msgstr "כפתור להסרת המודולים שנבחרו מהרשימה"
+
+#: ../ui/prefs.glade.h:103
+#, fuzzy
+msgid "Open a dialog to select modules"
+msgstr "פתח תיבת דיאלוג לבחירת המודולים שיתווספו לרשימה"
+
+#: ../ui/prefs.glade.h:104 ../ui/search-dialog.glade.h:91
+msgid "Add Modules"
+msgstr "הוסף מודולים"
+
+#: ../ui/prefs.glade.h:105 ../ui/search-dialog.glade.h:92
+msgid "Open Selection Dialog Button"
+msgstr "כפתור לדיאלוג פתיחת הפריטים הנבחרים"
+
+#: ../ui/prefs.glade.h:106
+msgid "Modules Parallel"
+msgstr "מודולים - מקביל"
+
+#: ../ui/prefs.glade.h:107
+msgid "<b>Special Purpose Modules</b>"
+msgstr "<b>מודולים למטרות מיוחדות</b>"
+
+#: ../ui/prefs.glade.h:108
+msgid "Daily Devotional"
+msgstr "דרשה יומית"
+
+#: ../ui/prefs.glade.h:109
+msgid "Daily Devotional Combo"
+msgstr "תיבה משולבת לדרשה יומית"
+
+#: ../ui/prefs.glade.h:110
+msgid "Hebrew Lexicon"
+msgstr "לקסיקון עברי"
+
+#: ../ui/prefs.glade.h:111
+msgid "Hebrew Lexicon Combo"
+msgstr "תיבה משולבת ללקסיקון עברי"
+
+#: ../ui/prefs.glade.h:112
+msgid "Greek Lexicon"
+msgstr "לקסיקון יווני"
+
+#: ../ui/prefs.glade.h:113
+msgid "Greek Lexicon Combo"
+msgstr "תיבה משולבת ללקסיקון יווני"
+
+#: ../ui/prefs.glade.h:114
+msgid "Default Dictionary"
+msgstr "מילון ברירת המחדל"
+
+#: ../ui/prefs.glade.h:115
+msgid "Change Default Dictionary Combo"
+msgstr "תיבה משולבת לשינוי מילון ברירת המחדל"
+
+#: ../ui/prefs.glade.h:116
+msgid "Personal Notes"
+msgstr "הערות אישיות"
+
+#: ../ui/prefs.glade.h:117
+msgid "Change Personal Notes Combo"
+msgstr "תיבה משולבת לשינוי הערות אישיות"
+
+#: ../ui/prefs.glade.h:118
+msgid "Modules Misc"
+msgstr "מודולים - שונות"
+
+#: ../ui/prefs.glade.h:119 ../ui/search-dialog.glade.h:115
+msgid "Module Selection"
+msgstr "בחירת מודולים"
+
 #: ../ui/search-dialog.glade.h:1
-msgid "<b>Attribute</b>"
-msgstr "תכונות"
-
-#: ../ui/search-dialog.glade.h:2
-msgid "<b>Found</b>"
-msgstr "<b>נמצא</b>"
-
-#: ../ui/search-dialog.glade.h:3
-msgid "<b>List Name</b>"
-msgstr "<b>רשימת שמות</b>"
-
-#: ../ui/search-dialog.glade.h:4
-msgid "<b>Module Lists</b>"
-msgstr "<b>רשימת מודולים</b>"
-
-#: ../ui/search-dialog.glade.h:6
-msgid "<b>Options</b>"
-msgstr "<b>אפשרויות</b>"
-
-#: ../ui/search-dialog.glade.h:7
-msgid "<b>Preview</b>"
-msgstr "<b>תצוגה מקדימה</b>"
-
-#: ../ui/search-dialog.glade.h:8
-msgid "<b>Range Definition</b>"
-msgstr "<b>טקסט טווח</b>"
-
-#: ../ui/search-dialog.glade.h:9
-msgid "<b>Range Name</b>"
-msgstr "<b>שם טווח</b>"
-
-#: ../ui/search-dialog.glade.h:10
-msgid "<b>Ranges</b>"
-msgstr "<b>טווחים</b>"
-
-#: ../ui/search-dialog.glade.h:11
-msgid "<b>Results Display Options</b>"
-msgstr "<b>אפשרויות תצוגת תוצאות</b>"
-
-#: ../ui/search-dialog.glade.h:12
-msgid "<b>Scope</b>"
-msgstr "<b>היקף</b>"
-
-#: ../ui/search-dialog.glade.h:13
-msgid "<b>Search Results</b>"
-msgstr "<b>Sתוצאות חיפוש</b>"
-
-#: ../ui/search-dialog.glade.h:14
-msgid "<b>Search Type</b>"
-msgstr "<b>סוג חיפוש</b>"
-
-#: ../ui/search-dialog.glade.h:16
 msgid "Advanced Search"
 msgstr "חיפוש מתקדם"
 
-#: ../ui/search-dialog.glade.h:17
-msgid "Attribute Search"
+#: ../ui/search-dialog.glade.h:2
+msgid "_Lucene Search Syntax"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:3
+msgid ""
+"Open a brief explanation of the syntax used for optimized \"lucene\" "
+"searches."
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:4
+#, fuzzy
+msgid "_Attribute Search"
 msgstr "חיפוש תכונות"
 
-#: ../ui/search-dialog.glade.h:18
-msgid "Attributes"
-msgstr "תכונות"
+#: ../ui/search-dialog.glade.h:5
+msgid "Open a brief explanation of attribute-based searches."
+msgstr ""
 
-#: ../ui/search-dialog.glade.h:19
-msgid "Attributes radiobutton"
-msgstr "כפתור רדיו לתכונות"
+#: ../ui/search-dialog.glade.h:6
+msgid "for "
+msgstr "עבור "
 
-#: ../ui/search-dialog.glade.h:20
-msgid "Clear Custom Module List Button"
-msgstr "כפתור לניקוי רשימת מודולים מותאמת אישית"
+#: ../ui/search-dialog.glade.h:7
+msgid "Main Search Entry"
+msgstr "ערך חיפוש ראשי"
 
-#: ../ui/search-dialog.glade.h:23
-msgid "Clear lists for new search"
-msgstr "נקה את הרשימות עבור חיפוש חדש"
+#: ../ui/search-dialog.glade.h:8
+msgid "Start/stop searching"
+msgstr "התחל חיפוש"
 
-#: ../ui/search-dialog.glade.h:24
-msgid "Create a new module list"
-msgstr "צור רשימת מודולים חדשה"
+#: ../ui/search-dialog.glade.h:9
+msgid "Find Button"
+msgstr "כפתור רדיו לאיתור"
 
-#: ../ui/search-dialog.glade.h:25
-msgid "Create new custom range"
-msgstr "צור טווח מותאם אישית חדש"
+#: ../ui/search-dialog.glade.h:10
+msgid "Search Criteria Treeview"
+msgstr "מבט עץ על קריטריונים לחיפוש"
 
-#: ../ui/search-dialog.glade.h:26
-msgid "Current results"
-msgstr "תוצאות נוכחיות"
+#: ../ui/search-dialog.glade.h:11
+msgid "<b>Scope</b>"
+msgstr "<b>היקף</b>"
 
-#: ../ui/search-dialog.glade.h:27
-msgid "Current results radiobutton"
-msgstr "כפתור רדיו לתוצאות הנוכחיות"
+#: ../ui/search-dialog.glade.h:12
+msgid "Search entire module"
+msgstr "חפש בכל המודול"
 
-#: ../ui/search-dialog.glade.h:28
-msgid "Custom Module List Combo"
-msgstr "תיבה משולבת לרשימת מודולים מותאמת אישית"
-
-#: ../ui/search-dialog.glade.h:29
-msgid "Custom Module List Name Entry"
-msgstr "ערך רשימת מודולים מותאמת אישית"
-
-#: ../ui/search-dialog.glade.h:30
-msgid "Custom Module Lists"
-msgstr "רשימות מותאמות אישית"
-
-#: ../ui/search-dialog.glade.h:31
-msgid "Custom Range Preview"
-msgstr "תצוגה מקדימה של טווח מותאם אישית"
-
-#: ../ui/search-dialog.glade.h:32
-msgid "Custom Range Selector Combo"
-msgstr "תיבה משולבת לבחירת טווח מוגדר אישית"
-
-#: ../ui/search-dialog.glade.h:33
-msgid "Custom Verse Ranges"
-msgstr "טווחים מותאמים אישית"
-
-#: ../ui/search-dialog.glade.h:34
-msgid "Custom module list"
-msgstr "רשימה מותאמת אישית"
-
-#: ../ui/search-dialog.glade.h:35
-msgid "Custom module list radiobutton"
-msgstr "כפתור רדיו לרשימת מודולים מותאמת אישית"
-
-#: ../ui/search-dialog.glade.h:36
-msgid "Custom verse range"
-msgstr "טווח מותאם אישית"
-
-#: ../ui/search-dialog.glade.h:37
-msgid "Custom verse range radiobutton"
-msgstr "כפתור רדיו לטווח פסוקים מותאם אישית"
-
-#: ../ui/search-dialog.glade.h:38
-msgid "Delete Range Button"
-msgstr "כפתור לטווח מחיקה"
-
-#: ../ui/search-dialog.glade.h:40
-msgid "Delete selected range"
-msgstr "מחק את הטווח הנבחר"
-
-#: ../ui/search-dialog.glade.h:41
-msgid "Delete the selected list"
-msgstr "מחק את הרשימה שנבחרה"
-
-#: ../ui/search-dialog.glade.h:42
+#: ../ui/search-dialog.glade.h:13
 msgid "Entire module"
 msgstr "כל המודול"
 
-#: ../ui/search-dialog.glade.h:43
+#: ../ui/search-dialog.glade.h:14
 msgid "Entire module radiobutton"
 msgstr "כפתור רדיו לכל המודול"
 
-#: ../ui/search-dialog.glade.h:45
-msgid "Exact phrase radiobutton"
-msgstr "כפתור רדיו לביטוי מדויק"
+#: ../ui/search-dialog.glade.h:15
+msgid "Use the results of the last search as the scope of the search"
+msgstr "חפש בטווח המוגדר על פי תוצאות החיפוש האחרון"
 
-#: ../ui/search-dialog.glade.h:46
-msgid "Export"
-msgstr "ייצוא"
+#: ../ui/search-dialog.glade.h:16
+msgid "Current results"
+msgstr "תוצאות נוכחיות"
 
-#: ../ui/search-dialog.glade.h:47
-msgid "Export current search results"
-msgstr "ייצוא תוצאות החיפוש הנוכחיות"
+#: ../ui/search-dialog.glade.h:17
+msgid "Current results radiobutton"
+msgstr "כפתור רדיו לתוצאות הנוכחיות"
 
-#: ../ui/search-dialog.glade.h:48
+#: ../ui/search-dialog.glade.h:18
+msgid "Use a custom range for the scope of the search"
+msgstr "חפש בטווח מותאם אישית"
+
+#: ../ui/search-dialog.glade.h:19
+msgid "Custom verse range"
+msgstr "טווח מותאם אישית"
+
+#: ../ui/search-dialog.glade.h:20
+msgid "Custom verse range radiobutton"
+msgstr "כפתור רדיו לטווח פסוקים מותאם אישית"
+
+#: ../ui/search-dialog.glade.h:21
+msgid "Custom Range Selector Combo"
+msgstr "תיבה משולבת לבחירת טווח מוגדר אישית"
+
+#: ../ui/search-dialog.glade.h:23
+msgid "Use a single module for the search"
+msgstr "חפש במודול יחיד"
+
+#: ../ui/search-dialog.glade.h:24
+msgid "Single module"
+msgstr "מודול יחיד"
+
+#: ../ui/search-dialog.glade.h:25
+msgid "Single module radiobutton"
+msgstr "תיבת סימון למודול יחיד"
+
+#: ../ui/search-dialog.glade.h:26
+msgid "Use the current module list for the search"
+msgstr "חפש במודולים שברשימה הנוכחית"
+
+#: ../ui/search-dialog.glade.h:27
+msgid "Module list"
+msgstr "רשימת מודולים"
+
+#: ../ui/search-dialog.glade.h:28
+msgid "Module list radiobutton"
+msgstr "כפתור רדיו לרשימת מודולים"
+
+#: ../ui/search-dialog.glade.h:29
+msgid "Use a custom module list for the search"
+msgstr "חפש ברשימת מודולים מותאמת אישית"
+
+#: ../ui/search-dialog.glade.h:30
+msgid "Custom module list"
+msgstr "רשימה מותאמת אישית"
+
+#: ../ui/search-dialog.glade.h:31
+msgid "Custom module list radiobutton"
+msgstr "כפתור רדיו לרשימת מודולים מותאמת אישית"
+
+#: ../ui/search-dialog.glade.h:32
+msgid "Custom Module List Combo"
+msgstr "תיבה משולבת לרשימת מודולים מותאמת אישית"
+
+#: ../ui/search-dialog.glade.h:33
+msgid "<b>Search Type</b>"
+msgstr "<b>סוג חיפוש</b>"
+
+#: ../ui/search-dialog.glade.h:34
 msgid ""
 "Fast, featureful, index-based search\n"
 "Indexes must have been built beforehand:\n"
@@ -3236,735 +3336,284 @@ msgstr ""
 "את האינדקס יש לבנות מראש:\n"
 "נא לעיין באפשרויות התחזוקה של מנהל המודולים"
 
-#: ../ui/search-dialog.glade.h:51
-msgid "Find Button"
-msgstr "כפתור רדיו לאיתור"
-
-#: ../ui/search-dialog.glade.h:53
-msgid "Footnotes radiobutton"
-msgstr "כפתור רדיו להערות שוליים"
-
-#: ../ui/search-dialog.glade.h:54
-msgid "In modules that have Footnotes"
-msgstr "במודולים בעלי הערות שוליים"
-
-#: ../ui/search-dialog.glade.h:55
-msgid "In modules that have Morphological Tags"
-msgstr "במודולים בעלי תגיות מורפולוגיות"
-
-#: ../ui/search-dialog.glade.h:56
-msgid "In modules that have Strong's Numbers"
-msgstr "במודולים בעלי מספרי סטרונג"
-
-#: ../ui/search-dialog.glade.h:57
-msgid "Main Search Entry"
-msgstr "ערך חיפוש ראשי"
-
-#: ../ui/search-dialog.glade.h:58
-msgid "Make selections on the Attribute Search tab"
-msgstr "בחר בלשונית חיפוש התכונות"
-
-#: ../ui/search-dialog.glade.h:60
-msgid "Match case checkbox"
-msgstr "תיבת סימון להתאמת אותיות רישיות"
-
-#: ../ui/search-dialog.glade.h:62
-msgid "Module list"
-msgstr "רשימת מודולים"
-
-#: ../ui/search-dialog.glade.h:63
-msgid "Module list radiobutton"
-msgstr "כפתור רדיו לרשימת מודולים"
-
-#: ../ui/search-dialog.glade.h:65
-msgid "Morphological Tags radiobutton"
-msgstr "כפתור רדיו לתגיות מורפולוגיות"
-
-#: ../ui/search-dialog.glade.h:67
-msgid "Multi word radiobutton"
-msgstr "כפתור רדיו לריבוי מלים"
-
-#: ../ui/search-dialog.glade.h:68
-msgid "New Custom Module List Button"
-msgstr "כפתור לרשימת מודולים מותאמת אישית"
-
-#: ../ui/search-dialog.glade.h:69
-msgid "New Range Button"
-msgstr "כפתור טווח חדש"
-
-#: ../ui/search-dialog.glade.h:71
-msgid "Open a brief explanation of attribute-based searches."
-msgstr ""
-
-#: ../ui/search-dialog.glade.h:72
-msgid ""
-"Open a brief explanation of the syntax used for optimized \"lucene\" "
-"searches."
-msgstr ""
-
-#: ../ui/search-dialog.glade.h:73
-msgid "Open a dialog to select modules to add to the list"
-msgstr "פתח תיבת דיאלוג לבחירת המודולים שיתווספו לרשימה"
-
-#: ../ui/search-dialog.glade.h:74
+#: ../ui/search-dialog.glade.h:37
 msgid "Optimized (\"Lucene\")"
 msgstr "מיועל (\"Lucene\")"
 
-#: ../ui/search-dialog.glade.h:75
+#: ../ui/search-dialog.glade.h:38
 msgid "Optimized (\"Lucene\") radiobutton"
 msgstr "כפתור רדיו לייעול (\"Lucene\")"
 
-#: ../ui/search-dialog.glade.h:76
-msgid "Range Definition Entry"
-msgstr "<b>ערך הגדרת טווח</b>"
+#: ../ui/search-dialog.glade.h:40
+msgid "Multi word radiobutton"
+msgstr "כפתור רדיו לריבוי מלים"
 
-#: ../ui/search-dialog.glade.h:77
-msgid "Range Name Entry"
-msgstr "ערך שם טווח"
-
-#: ../ui/search-dialog.glade.h:79
+#: ../ui/search-dialog.glade.h:42
 msgid "Regular expression radiobutton"
 msgstr "כפתור רדיו לביטוי רגולרי"
 
-#: ../ui/search-dialog.glade.h:81
-msgid "Result Summary Table"
-msgstr "טבלת תקציר תוצאות"
+#: ../ui/search-dialog.glade.h:44
+msgid "Exact phrase radiobutton"
+msgstr "כפתור רדיו לביטוי מדויק"
 
-#: ../ui/search-dialog.glade.h:82
-msgid "Result Summary Window"
-msgstr "חלון תקציר תוצאות"
+#: ../ui/search-dialog.glade.h:45
+msgid "Make selections on the Attribute Search tab"
+msgstr "בחר בלשונית חיפוש התכונות"
 
-#: ../ui/search-dialog.glade.h:83
-msgid "Results"
-msgstr "תוצאות"
+#: ../ui/search-dialog.glade.h:46
+msgid "Attributes"
+msgstr "תכונות"
 
-#: ../ui/search-dialog.glade.h:84
-msgid "Save Custom Module List Button"
-msgstr "כפתור לשמירת רשימת מודולים מותאמת אישית"
+#: ../ui/search-dialog.glade.h:47
+msgid "Attributes radiobutton"
+msgstr "כפתור רדיו לתכונות"
 
-#: ../ui/search-dialog.glade.h:85
-msgid "Save Range Button"
-msgstr "כפתור שמירת טווח"
+#: ../ui/search-dialog.glade.h:48
+msgid "<b>Options</b>"
+msgstr "<b>אפשרויות</b>"
 
-#: ../ui/search-dialog.glade.h:86
-msgid "Save custom range"
-msgstr "שמור טווח מותאם אישית"
+#: ../ui/search-dialog.glade.h:50
+msgid "Match case checkbox"
+msgstr "תיבת סימון להתאמת אותיות רישיות"
 
-#: ../ui/search-dialog.glade.h:87
-msgid "Save search results as bookmarks"
-msgstr "שמור את תוצאות החיפוש כסימניות"
-
-#: ../ui/search-dialog.glade.h:88
-msgid "Save the module list"
-msgstr "שמור רשימת מודולים"
-
-#: ../ui/search-dialog.glade.h:89
+#: ../ui/search-dialog.glade.h:51
 msgid "Search  Criteria"
 msgstr "קריטריונים לחיפוש"
 
-#: ../ui/search-dialog.glade.h:90
-msgid "Search Criteria Treeview"
-msgstr "מבט עץ על קריטריונים לחיפוש"
-
-#: ../ui/search-dialog.glade.h:91
-msgid "Search entire module"
-msgstr "חפש בכל המודול"
-
-#: ../ui/search-dialog.glade.h:92
-msgid "Search for Morphological tags"
-msgstr "הצג תגיות מורפולוגיות"
-
-#: ../ui/search-dialog.glade.h:93
-msgid "Search for Strongs Numbers like G4442 or H1121"
-msgstr "חפש מספרי סטרונג כגון G4442 or H1121"
-
-#: ../ui/search-dialog.glade.h:94
-msgid "Search in footnotes"
-msgstr "מחפש בתוך"
-
-#: ../ui/search-dialog.glade.h:95
-msgid "Show Footnotes"
-msgstr "הצג הערות שוליים"
-
-#: ../ui/search-dialog.glade.h:96
-msgid "Show Footnotes checkbox"
-msgstr "תיבת סימון להצגת הערות שוליים"
-
-#: ../ui/search-dialog.glade.h:97
-msgid "Show Morphological Tags"
-msgstr "הצג תגיות מורפולוגיות"
-
-#: ../ui/search-dialog.glade.h:98
-msgid "Show Morphological Tags checkbox"
-msgstr "תיבת סימון להצגת תגיות מורפולוגיות"
-
-#: ../ui/search-dialog.glade.h:99
-msgid "Show Strong's Numbers"
-msgstr "הצג את מספרי סטרונג"
-
-#: ../ui/search-dialog.glade.h:100
-msgid "Show Strong's Numbers checkbox"
-msgstr "תיבת סימון להצגת מספרי סטרונג"
-
-#: ../ui/search-dialog.glade.h:101
+#: ../ui/search-dialog.glade.h:52
 msgid "Show in main window"
 msgstr "הצג בחלון ראשי"
 
-#: ../ui/search-dialog.glade.h:102
-msgid "Single module"
-msgstr "מודול יחיד"
+#: ../ui/search-dialog.glade.h:53
+msgid "Save search results as bookmarks"
+msgstr "שמור את תוצאות החיפוש כסימניות"
 
-#: ../ui/search-dialog.glade.h:103
-msgid "Single module radiobutton"
-msgstr "תיבת סימון למודול יחיד"
+#: ../ui/search-dialog.glade.h:54
+msgid "Export current search results"
+msgstr "ייצוא תוצאות החיפוש הנוכחיות"
 
-#: ../ui/search-dialog.glade.h:104
-msgid "Start/stop searching"
-msgstr "התחל חיפוש"
+#: ../ui/search-dialog.glade.h:55
+msgid "Export"
+msgstr "ייצוא"
 
-#: ../ui/search-dialog.glade.h:105
-msgid "Strongs Numbers"
-msgstr "מספרי סטרונג"
+#: ../ui/search-dialog.glade.h:56
+msgid "Clear lists for new search"
+msgstr "נקה את הרשימות עבור חיפוש חדש"
 
-#: ../ui/search-dialog.glade.h:106
-msgid "Strongs Numbers radiobutton"
-msgstr "תיבת סימון למספרי סטרונג"
+#: ../ui/search-dialog.glade.h:57
+msgid "<b>Found</b>"
+msgstr "<b>נמצא</b>"
 
-#: ../ui/search-dialog.glade.h:107
-msgid "Use a custom module list for the search"
-msgstr "חפש ברשימת מודולים מותאמת אישית"
+#: ../ui/search-dialog.glade.h:58
+msgid "Result Summary Window"
+msgstr "חלון תקציר תוצאות"
 
-#: ../ui/search-dialog.glade.h:108
-msgid "Use a custom range for the scope of the search"
-msgstr "חפש בטווח מותאם אישית"
+#: ../ui/search-dialog.glade.h:59
+msgid "Result Summary Table"
+msgstr "טבלת תקציר תוצאות"
 
-#: ../ui/search-dialog.glade.h:109
-msgid "Use a single module for the search"
-msgstr "חפש במודול יחיד"
+#: ../ui/search-dialog.glade.h:60
+msgid "<b>Search Results</b>"
+msgstr "<b>Sתוצאות חיפוש</b>"
 
-#: ../ui/search-dialog.glade.h:110
-msgid "Use the current module list for the search"
-msgstr "חפש במודולים שברשימה הנוכחית"
+#: ../ui/search-dialog.glade.h:61
+msgid "<b>Preview</b>"
+msgstr "<b>תצוגה מקדימה</b>"
 
-#: ../ui/search-dialog.glade.h:111
-msgid "Use the results of the last search as the scope of the search"
-msgstr "חפש בטווח המוגדר על פי תוצאות החיפוש האחרון"
+#: ../ui/search-dialog.glade.h:62
+msgid "Results"
+msgstr "תוצאות"
 
-#: ../ui/search-dialog.glade.h:112
-#, fuzzy
-msgid "_Attribute Search"
-msgstr "חיפוש תכונות"
+#: ../ui/search-dialog.glade.h:63
+msgid "Create new custom range"
+msgstr "צור טווח מותאם אישית חדש"
 
-#: ../ui/search-dialog.glade.h:113
-msgid "_Lucene Search Syntax"
-msgstr ""
+#: ../ui/search-dialog.glade.h:64
+msgid "New Range Button"
+msgstr "כפתור טווח חדש"
 
-#: ../ui/search-dialog.glade.h:114
+#: ../ui/search-dialog.glade.h:65
+msgid "Save custom range"
+msgstr "שמור טווח מותאם אישית"
+
+#: ../ui/search-dialog.glade.h:66
+msgid "Save Range Button"
+msgstr "כפתור שמירת טווח"
+
+#: ../ui/search-dialog.glade.h:67
+msgid "Delete selected range"
+msgstr "מחק את הטווח הנבחר"
+
+#: ../ui/search-dialog.glade.h:68
+msgid "Delete Range Button"
+msgstr "כפתור לטווח מחיקה"
+
+#: ../ui/search-dialog.glade.h:69
+msgid "<b>Ranges</b>"
+msgstr "<b>טווחים</b>"
+
+#: ../ui/search-dialog.glade.h:70
+msgid "<b>Range Name</b>"
+msgstr "<b>שם טווח</b>"
+
+#: ../ui/search-dialog.glade.h:71
+msgid "Range Name Entry"
+msgstr "ערך שם טווח"
+
+#: ../ui/search-dialog.glade.h:72
+msgid "<b>Range Definition</b>"
+msgstr "<b>טקסט טווח</b>"
+
+#: ../ui/search-dialog.glade.h:73
+msgid "Range Definition Entry"
+msgstr "<b>ערך הגדרת טווח</b>"
+
+#: ../ui/search-dialog.glade.h:74
 msgid "e.g. Matt-John;Rev4"
 msgstr "למשל Matt-John;Rev4"
 
-#: ../ui/search-dialog.glade.h:115
-msgid "for "
-msgstr "עבור "
+#: ../ui/search-dialog.glade.h:75
+msgid "Custom Range Preview"
+msgstr "תצוגה מקדימה של טווח מותאם אישית"
 
-#: ../ui/xi-menus.glade.h:2
-msgid "About _Translation"
-msgstr "אודות _תרגום..."
+#: ../ui/search-dialog.glade.h:76
+msgid "Custom Verse Ranges"
+msgstr "טווחים מותאמים אישית"
 
-#: ../ui/xi-menus.glade.h:3
-msgid "About _Xiphos"
-msgstr "אודות Xiphos_..."
-
-#: ../ui/xi-menus.glade.h:4
-msgid "Add Item"
-msgstr "הוספת פריט"
-
-#: ../ui/xi-menus.glade.h:5
-msgid "Add Sub-Item"
-msgstr "הוספת תת־פריט"
-
-#: ../ui/xi-menus.glade.h:6
-msgid "Add a sub-item"
-msgstr ""
-
-#: ../ui/xi-menus.glade.h:7
-msgid "Add an item"
-msgstr "הוסף כפריט"
-
-#: ../ui/xi-menus.glade.h:8
-msgid "Add new folder to selected folder"
-msgstr "הוסף התיקייה החדשה לתיקייה שנבחרה"
-
-#: ../ui/xi-menus.glade.h:10
-msgid "Allow Reordering"
-msgstr "אפשר סידור מחדש"
-
-#: ../ui/xi-menus.glade.h:11
-msgid "Allow items to be moved from one folder to another"
-msgstr "אפשר הזזת פריטים בין ספריות"
-
-#: ../ui/xi-menus.glade.h:12
-msgid "Annotate Verse"
-msgstr "הערות לפסוק"
-
-#: ../ui/xi-menus.glade.h:13
-#, fuzzy
-msgid "Apply a high-contrast highlight to the current verse"
-msgstr "הדגש את הפסוק הנוכחי בעזרת ניגודיות גבוהה"
-
-#: ../ui/xi-menus.glade.h:15
-msgid "Bring the simple sidebar search forward"
-msgstr ""
-
-#: ../ui/xi-menus.glade.h:16
-msgid "Browse in BibleMap.org"
-msgstr "עיין ב-BibleMap.org"
-
-#: ../ui/xi-menus.glade.h:17
-msgid "Collapse All"
-msgstr "צמצם הכל"
-
-#: ../ui/xi-menus.glade.h:18
-msgid "Collapse all Bookmarks groups"
-msgstr "צמצם את כל קבוצות הסימניות"
-
-#: ../ui/xi-menus.glade.h:19
-msgid "Commentary by Chapter"
-msgstr "פירוש לפי פרק"
-
-#: ../ui/xi-menus.glade.h:21
-msgid "Create a new daily journal"
-msgstr "יצירת יומן יומי חדש"
-
-#: ../ui/xi-menus.glade.h:22
-#, fuzzy
-msgid "Create a new journal or prayerlist from a template"
+#: ../ui/search-dialog.glade.h:77
+msgid "Create a new module list"
 msgstr "צור רשימת מודולים חדשה"
 
-#: ../ui/xi-menus.glade.h:23
-msgid "Create a new monthly journal"
-msgstr "יצירת יומן חודשי חדש"
-
-#: ../ui/xi-menus.glade.h:24
-msgid "Create a new outlined topic"
-msgstr ""
-
-#: ../ui/xi-menus.glade.h:25
-msgid "Create a new simple prayer list"
-msgstr "צור רשימת מודולים חדשה"
-
-#: ../ui/xi-menus.glade.h:26
-msgid "Create a new subject prayer list"
-msgstr ""
-
-#: ../ui/xi-menus.glade.h:27
-msgid "Daily"
-msgstr "יומי"
-
-#: ../ui/xi-menus.glade.h:28
-msgid "Delete Item"
-msgstr "מחק פריט"
-
-#: ../ui/xi-menus.glade.h:29
-msgid "Delete item"
-msgstr "מחק פריט"
-
-#: ../ui/xi-menus.glade.h:30
-msgid "Dictionar_y"
-msgstr "מיל_ון"
-
-#: ../ui/xi-menus.glade.h:31
-msgid "Display Book Heading"
-msgstr "הצג כותרת ספר"
-
-#: ../ui/xi-menus.glade.h:32
-msgid "Display Chapter Heading"
-msgstr "הצג כותרת פרק"
-
-#: ../ui/xi-menus.glade.h:33
-msgid "Display verse numbers in the text"
-msgstr ""
-
-#: ../ui/xi-menus.glade.h:34
-#, fuzzy
-msgid "Doublespace"
-msgstr "רווחים כפולים"
-
-#: ../ui/xi-menus.glade.h:35
-msgid "Dump Pers.Comm."
-msgstr "השלך פירוש אישי"
-
-#: ../ui/xi-menus.glade.h:37
-msgid "Edit bookmark item"
-msgstr "ערוך פריט סימנייה"
-
-#: ../ui/xi-menus.glade.h:38
-msgid "Edit this item"
-msgstr "הדפס הערה"
-
-#: ../ui/xi-menus.glade.h:39
-msgid "Expand All"
-msgstr "הרחב הכל"
-
-#: ../ui/xi-menus.glade.h:40
-msgid "Expand all Bookmarks groups"
-msgstr "הרחב את כל קבוצות הסימניות"
-
-#: ../ui/xi-menus.glade.h:41
-msgid "Export Folder"
-msgstr "ייצוא תיקייה"
-
-#: ../ui/xi-menus.glade.h:42
-msgid "Export List"
-msgstr ""
-
-#: ../ui/xi-menus.glade.h:49
-msgid "Image Content"
-msgstr "תוכן"
-
-#: ../ui/xi-menus.glade.h:50
-#, fuzzy
-msgid "Import Bookmarks"
-msgstr "הכנס סימנייה"
-
-#: ../ui/xi-menus.glade.h:51
-msgid "Insert Bookmark"
-msgstr "הכנס סימנייה"
-
-#: ../ui/xi-menus.glade.h:52
-msgid "Insert new bookmark here"
-msgstr "הכנס לכאן את הסימנייה החדשה"
-
-#: ../ui/xi-menus.glade.h:53
-msgid "L_ink Tabs"
-msgstr "נעץ לשוניות"
-
-#: ../ui/xi-menus.glade.h:54
-msgid "Learn about The Sword Project, of which Xiphos is one application"
-msgstr ""
-
-#: ../ui/xi-menus.glade.h:55
-#, fuzzy
-msgid "Learn about Xiphos"
-msgstr "אודות Xiphos_..."
-
-#: ../ui/xi-menus.glade.h:56
-#, fuzzy
-msgid "Learn about translating the Xiphos interface to other languages"
-msgstr "תרגום Xiphos לשפות נוספות"
-
-#: ../ui/xi-menus.glade.h:58
-#, fuzzy
-msgid "Load other bookmarks file (default: from BibleTime)"
-msgstr "טען סימניות מ-Bibletime"
-
-#: ../ui/xi-menus.glade.h:59
-msgid "Lookup Selection"
-msgstr "בחירת חיפוש"
-
-#: ../ui/xi-menus.glade.h:60
-msgid "Make all tabs' Bibles navigate together"
-msgstr ""
-
-#: ../ui/xi-menus.glade.h:62
-msgid "Monthly"
-msgstr "חודשי"
-
-#: ../ui/xi-menus.glade.h:65
-msgid "Note"
-msgstr "הערה"
-
-#: ../ui/xi-menus.glade.h:66
-msgid "Open Module"
-msgstr "פתח מודול"
-
-#: ../ui/xi-menus.glade.h:67
-msgid "Open Study_pad"
-msgstr "פתח שולחן _מחקר"
-
-#: ../ui/xi-menus.glade.h:68
-msgid "Open a browser on an interface to live IRC chat"
-msgstr ""
-
-#: ../ui/xi-menus.glade.h:69
-msgid "Open a browser on our bug tracker"
-msgstr ""
-
-#: ../ui/xi-menus.glade.h:70
-#, fuzzy
-msgid "Open a browser on the users' mailing list webpage"
-msgstr "הצטרף לרשימת הדיוור למשתמשים"
-
-#: ../ui/xi-menus.glade.h:71
-#, fuzzy
-msgid "Open a saved tab settings collection"
-msgstr "פתח הפעלה שמורה"
-
-#: ../ui/xi-menus.glade.h:72
-msgid "Open in a dialog"
-msgstr "פתח בתיבת דיאלוג"
-
-#: ../ui/xi-menus.glade.h:73
-msgid "Open in a separate window"
-msgstr "פתח בחלון נפרד"
-
-#: ../ui/xi-menus.glade.h:74
-msgid "Open in editor"
-msgstr "פתח בתיבת דיאלוג"
-
-#: ../ui/xi-menus.glade.h:75
-msgid "Open in new tab"
-msgstr "פתח בלשונית חדשה"
-
-#: ../ui/xi-menus.glade.h:76
-msgid ""
-"Open selected module in a\n"
-"\tseparate ['dialog'] window"
-msgstr ""
-
-#: ../ui/xi-menus.glade.h:78
-msgid "Open selected module in a new tab"
-msgstr "פתח את המודול הנבחר בלשונית חדשה"
-
-#: ../ui/xi-menus.glade.h:79
-msgid "Open the advanced search dialog, to run complex queries"
-msgstr ""
-
-#: ../ui/xi-menus.glade.h:80
-#, fuzzy
-msgid "Open the help viewer on the Xiphos manual"
-msgstr "עיין במדריך ל-Xiphos"
-
-#: ../ui/xi-menus.glade.h:81
-msgid "Open this bookmark in a dialog"
-msgstr "פתח את הסימנייה בתיבת דיאלוג"
-
-#: ../ui/xi-menus.glade.h:82
-msgid "Open this bookmark in a new tab"
-msgstr "פתח סימנייה זו בטאב חדש."
-
-#: ../ui/xi-menus.glade.h:83
-#, fuzzy
-msgid "Operate the sidebar as a separate window"
-msgstr "פתח בחלון נפרד"
-
-#: ../ui/xi-menus.glade.h:84
-msgid "Outlined"
-msgstr ""
-
-#: ../ui/xi-menus.glade.h:85
-msgid "Preview _Daily Devotion"
-msgstr ""
-
-#: ../ui/xi-menus.glade.h:87
-msgid "Provide the full-chapter parallel Bible window as another tab"
-msgstr ""
-
-#: ../ui/xi-menus.glade.h:88
-msgid "Read Selection Aloud"
-msgstr "קריאה בקול"
-
-#: ../ui/xi-menus.glade.h:90
-msgid "Remove folder and save it"
-msgstr "הסר תיקייה ושמור אותה"
-
-#: ../ui/xi-menus.glade.h:91
-#, fuzzy
-msgid "Remove the sidebar entirely from view"
-msgstr "להסיר התיקייה שנבחרה"
-
-#: ../ui/xi-menus.glade.h:92
-msgid "Remove this item"
-msgstr "הסר - שחזר"
-
-#: ../ui/xi-menus.glade.h:93
-msgid "Rename Pers.Comm."
-msgstr "שנה שם פירוש אישי"
-
-#: ../ui/xi-menus.glade.h:94
-msgid "Respect Font Faces"
-msgstr "התחשב בקבוצות גופנים"
-
-#: ../ui/xi-menus.glade.h:95
-msgid "Save list as a series of bookmarks"
-msgstr "שמור את הרשימה כסדרת סימניות"
-
-#: ../ui/xi-menus.glade.h:96
-msgid "Save list as a single bookmark"
-msgstr "שמור את הרשימה כסימניה בודדת"
-
-#: ../ui/xi-menus.glade.h:97
-msgid "Save these results as a series of bookmarks in their own folder"
-msgstr "שמור תוצאות אלה כסדרת סימניות בתיקיה חדשה"
-
-#: ../ui/xi-menus.glade.h:98
-msgid "Save these results as a single bookmark"
-msgstr "שמור תוצאות אלה כסימניה בודדת"
-
-#: ../ui/xi-menus.glade.h:99
-msgid "Save this collection of tab settings"
-msgstr ""
-
-#: ../ui/xi-menus.glade.h:100
-msgid "Scripture Cross-references"
-msgstr "הפניות צולבות לכתבי הקודש"
-
-#: ../ui/xi-menus.glade.h:102
-msgid "Select Previewer position between sidebar or beneath Bible"
-msgstr ""
-
-#: ../ui/xi-menus.glade.h:103
-msgid "Show Parallel View in a _Tab"
-msgstr "הצג תצוגה מקבילה ב_לשונית"
-
-#: ../ui/xi-menus.glade.h:104
-msgid "Show Previe_wer in the Sidebar"
-msgstr "הצג תצוגה מ_קדימה בסרגל הצד"
-
-#: ../ui/xi-menus.glade.h:105
-msgid "Show Verse _Numbers"
-msgstr "הצג מספרי פסוקים"
-
-#: ../ui/xi-menus.glade.h:106
-msgid "Show today's entry from your selected daily devotional in the previewer"
-msgstr ""
-
-#: ../ui/xi-menus.glade.h:107
-msgid "Simple"
-msgstr "פשוט"
-
-#: ../ui/xi-menus.glade.h:109
-msgid "Subject"
-msgstr "אובייקט Pixbuf"
-
-#: ../ui/xi-menus.glade.h:111
-msgid "Turn on text-to-speech reading of Bible verses as they are selected"
-msgstr ""
-
-#: ../ui/xi-menus.glade.h:112
-msgid "Unlock This Module"
-msgstr "פתח מודול זה"
-
-#: ../ui/xi-menus.glade.h:113
-msgid "Use Current Dictionary"
-msgstr "השתמש במילון הנוכחי"
-
-#: ../ui/xi-menus.glade.h:114
-msgid "Use module manager to install and remove Sword modules"
-msgstr "השתמש במנהל המודולים להתקנת והסרת מודולים של Sword"
-
-#: ../ui/xi-menus.glade.h:115
-msgid "Variants"
-msgstr "משתנים"
-
-#: ../ui/xi-menus.glade.h:116
-#, fuzzy
-msgid "Verse Per Line"
-msgstr "_פסוק לשורה"
-
-#: ../ui/xi-menus.glade.h:118
-msgid "_About The SWORD Project"
-msgstr "אודות _פרויקט SWORD"
-
-#: ../ui/xi-menus.glade.h:119
-msgid "_Advanced Search"
-msgstr "חיפוש מתקדם"
-
-#: ../ui/xi-menus.glade.h:120
-msgid "_Attach/Detach Sidebar"
-msgstr "הצמד \\ נתק שורת צד"
-
-#: ../ui/xi-menus.glade.h:121
-msgid "_Bible"
-msgstr "_כתבי קודש"
-
-#: ../ui/xi-menus.glade.h:122
-msgid "_Commentary/Book"
-msgstr "_פירוש ספר"
-
-#: ../ui/xi-menus.glade.h:123
-msgid "_Contents"
-msgstr "_תכנים"
-
-#: ../ui/xi-menus.glade.h:124
-msgid "_Edit"
-msgstr "ע_ריכה"
-
-#: ../ui/xi-menus.glade.h:125
-msgid "_Edit Item"
-msgstr "ערוך פריט"
-
-#: ../ui/xi-menus.glade.h:127
-msgid "_Help"
-msgstr "ע_זרה"
-
-#: ../ui/xi-menus.glade.h:128
-msgid "_Highlight Current Verse"
-msgstr "הדגש פסוק נוכחי"
-
-#: ../ui/xi-menus.glade.h:129
-msgid "_Live Chat"
-msgstr "_צ'אט חי"
-
-#: ../ui/xi-menus.glade.h:130
-msgid "_Mailing List"
-msgstr "_רשימת דיוור"
-
-#: ../ui/xi-menus.glade.h:131
-msgid "_Module Manager"
-msgstr "מנהל מודולים"
-
-#: ../ui/xi-menus.glade.h:132
-#, fuzzy
-msgid "_New Prayerlist/Journal"
-msgstr "יומן\\רשימת תפילות"
-
-#: ../ui/xi-menus.glade.h:133
-msgid "_Open Session"
-msgstr "פתח הפעלה"
-
-#: ../ui/xi-menus.glade.h:134
-msgid "_Preferences"
-msgstr "_הגדרות"
-
-#: ../ui/xi-menus.glade.h:135
-msgid "_Preview"
-msgstr "תצוגה מקדימה"
-
-#: ../ui/xi-menus.glade.h:136
-msgid "_Read Aloud"
-msgstr "קריאה בקול"
-
-#: ../ui/xi-menus.glade.h:137
-msgid "_Report Bug"
-msgstr "_דיווח על באג"
-
-#: ../ui/xi-menus.glade.h:138
-msgid "_Save Session"
-msgstr "שמור הפעלה"
-
-#: ../ui/xi-menus.glade.h:139
-msgid "_Search"
-msgstr "חפש"
-
-#: ../ui/xi-menus.glade.h:140
-msgid "_Show/Hide Attached Sidebar"
-msgstr ""
+#: ../ui/search-dialog.glade.h:78
+msgid "New Custom Module List Button"
+msgstr "כפתור לרשימת מודולים מותאמת אישית"
+
+#: ../ui/search-dialog.glade.h:79
+msgid "Save the module list"
+msgstr "שמור רשימת מודולים"
+
+#: ../ui/search-dialog.glade.h:80
+msgid "Save Custom Module List Button"
+msgstr "כפתור לשמירת רשימת מודולים מותאמת אישית"
+
+#: ../ui/search-dialog.glade.h:81
+msgid "Delete the selected list"
+msgstr "מחק את הרשימה שנבחרה"
+
+#: ../ui/search-dialog.glade.h:82
+msgid "Clear Custom Module List Button"
+msgstr "כפתור לניקוי רשימת מודולים מותאמת אישית"
+
+#: ../ui/search-dialog.glade.h:83
+msgid "<b>Module Lists</b>"
+msgstr "<b>רשימת מודולים</b>"
+
+#: ../ui/search-dialog.glade.h:84
+msgid "<b>List Name</b>"
+msgstr "<b>רשימת שמות</b>"
+
+#: ../ui/search-dialog.glade.h:85
+msgid "Custom Module List Name Entry"
+msgstr "ערך רשימת מודולים מותאמת אישית"
+
+#: ../ui/search-dialog.glade.h:90
+msgid "Open a dialog to select modules to add to the list"
+msgstr "פתח תיבת דיאלוג לבחירת המודולים שיתווספו לרשימה"
+
+#: ../ui/search-dialog.glade.h:93
+msgid "Custom Module Lists"
+msgstr "רשימות מותאמות אישית"
+
+#: ../ui/search-dialog.glade.h:94
+msgid "<b>Attribute</b>"
+msgstr "תכונות"
+
+#: ../ui/search-dialog.glade.h:95
+msgid "Search for Strongs Numbers like G4442 or H1121"
+msgstr "חפש מספרי סטרונג כגון G4442 or H1121"
+
+#: ../ui/search-dialog.glade.h:96
+msgid "Strongs Numbers"
+msgstr "מספרי סטרונג"
+
+#: ../ui/search-dialog.glade.h:97
+msgid "Strongs Numbers radiobutton"
+msgstr "תיבת סימון למספרי סטרונג"
+
+#: ../ui/search-dialog.glade.h:98
+msgid "Search for Morphological tags"
+msgstr "הצג תגיות מורפולוגיות"
+
+#: ../ui/search-dialog.glade.h:100
+msgid "Morphological Tags radiobutton"
+msgstr "כפתור רדיו לתגיות מורפולוגיות"
+
+#: ../ui/search-dialog.glade.h:101
+msgid "Search in footnotes"
+msgstr "מחפש בתוך"
+
+#: ../ui/search-dialog.glade.h:103
+msgid "Footnotes radiobutton"
+msgstr "כפתור רדיו להערות שוליים"
+
+#: ../ui/search-dialog.glade.h:104
+msgid "<b>Results Display Options</b>"
+msgstr "<b>אפשרויות תצוגת תוצאות</b>"
+
+#: ../ui/search-dialog.glade.h:105
+msgid "In modules that have Strong's Numbers"
+msgstr "במודולים בעלי מספרי סטרונג"
+
+#: ../ui/search-dialog.glade.h:106
+msgid "Show Strong's Numbers"
+msgstr "הצג את מספרי סטרונג"
+
+#: ../ui/search-dialog.glade.h:107
+msgid "Show Strong's Numbers checkbox"
+msgstr "תיבת סימון להצגת מספרי סטרונג"
+
+#: ../ui/search-dialog.glade.h:108
+msgid "In modules that have Morphological Tags"
+msgstr "במודולים בעלי תגיות מורפולוגיות"
+
+#: ../ui/search-dialog.glade.h:109
+msgid "Show Morphological Tags"
+msgstr "הצג תגיות מורפולוגיות"
+
+#: ../ui/search-dialog.glade.h:110
+msgid "Show Morphological Tags checkbox"
+msgstr "תיבת סימון להצגת תגיות מורפולוגיות"
+
+#: ../ui/search-dialog.glade.h:111
+msgid "In modules that have Footnotes"
+msgstr "במודולים בעלי הערות שוליים"
+
+#: ../ui/search-dialog.glade.h:112
+msgid "Show Footnotes"
+msgstr "הצג הערות שוליים"
+
+#: ../ui/search-dialog.glade.h:113
+msgid "Show Footnotes checkbox"
+msgstr "תיבת סימון להצגת הערות שוליים"
+
+#: ../ui/search-dialog.glade.h:114
+msgid "Attribute Search"
+msgstr "חיפוש תכונות"
 
 #: ../ui/xi-export-bookmarks.glade.h:1
-msgid "<b>Export to:</b>"
-msgstr ""
-
-#: ../ui/xi-export-bookmarks.glade.h:2
 msgid "Export Bookmark Folder"
 msgstr ""
 
+#: ../ui/xi-export-bookmarks.glade.h:2
+msgid "<b>Export to:</b>"
+msgstr ""
+
 #: ../ui/xi-export-bookmarks.glade.h:3
-msgid "Html"
+msgid "Xiphos bookmarks"
 msgstr ""
 
 #: ../ui/xi-export-bookmarks.glade.h:4
-msgid "Include Bible text"
+msgid "Html"
 msgstr ""
 
 #: ../ui/xi-export-bookmarks.glade.h:5
@@ -3972,7 +3621,7 @@ msgid "Plain text"
 msgstr ""
 
 #: ../ui/xi-export-bookmarks.glade.h:6
-msgid "Xiphos bookmarks"
+msgid "Include Bible text"
 msgstr ""
 
 #: ../ui/xi-export-bookmarks.glade.h:7
@@ -3983,13 +3632,517 @@ msgstr ""
 msgid "gtk-ok"
 msgstr ""
 
+#: ../ui/xi-menus.glade.h:2
+msgid "Open Study_pad"
+msgstr "פתח שולחן _מחקר"
+
+#: ../ui/xi-menus.glade.h:3
+msgid "_Open Session"
+msgstr "פתח הפעלה"
+
+#: ../ui/xi-menus.glade.h:4
+#, fuzzy
+msgid "Open a saved tab settings collection"
+msgstr "פתח הפעלה שמורה"
+
+#: ../ui/xi-menus.glade.h:5
+msgid "_Save Session"
+msgstr "שמור הפעלה"
+
+#: ../ui/xi-menus.glade.h:6
+msgid "Save this collection of tab settings"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:7
+#, fuzzy
+msgid "_New Prayerlist/Journal"
+msgstr "יומן\\רשימת תפילות"
+
+#: ../ui/xi-menus.glade.h:8
+#, fuzzy
+msgid "Create a new journal or prayerlist from a template"
+msgstr "צור רשימת מודולים חדשה"
+
+#: ../ui/xi-menus.glade.h:9
+msgid "_Edit"
+msgstr "ע_ריכה"
+
+#: ../ui/xi-menus.glade.h:10
+msgid "_Search"
+msgstr "חפש"
+
+#: ../ui/xi-menus.glade.h:11
+msgid "Bring the simple sidebar search forward"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:12
+msgid "_Advanced Search"
+msgstr "חיפוש מתקדם"
+
+#: ../ui/xi-menus.glade.h:13
+msgid "Open the advanced search dialog, to run complex queries"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:14
+msgid "_Preferences"
+msgstr "_הגדרות"
+
+#: ../ui/xi-menus.glade.h:15
+msgid "Use module manager to install and remove Sword modules"
+msgstr "השתמש במנהל המודולים להתקנת והסרת מודולים של Sword"
+
+#: ../ui/xi-menus.glade.h:16
+msgid "_Module Manager"
+msgstr "מנהל מודולים"
+
+#: ../ui/xi-menus.glade.h:18
+msgid "Preview _Daily Devotion"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:19
+msgid "Show today's entry from your selected daily devotional in the previewer"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:20
+msgid "_Bible"
+msgstr "_כתבי קודש"
+
+#: ../ui/xi-menus.glade.h:21
+msgid "_Preview"
+msgstr "תצוגה מקדימה"
+
+#: ../ui/xi-menus.glade.h:22
+msgid "_Commentary/Book"
+msgstr "_פירוש ספר"
+
+#: ../ui/xi-menus.glade.h:23
+msgid "Dictionar_y"
+msgstr "מיל_ון"
+
+#: ../ui/xi-menus.glade.h:24
+msgid "L_ink Tabs"
+msgstr "נעץ לשוניות"
+
+#: ../ui/xi-menus.glade.h:25
+msgid "Make all tabs' Bibles navigate together"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:26
+msgid "_Read Aloud"
+msgstr "קריאה בקול"
+
+#: ../ui/xi-menus.glade.h:27
+msgid "Turn on text-to-speech reading of Bible verses as they are selected"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:28
+msgid "Show Verse _Numbers"
+msgstr "הצג מספרי פסוקים"
+
+#: ../ui/xi-menus.glade.h:29
+msgid "Display verse numbers in the text"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:30
+msgid "_Highlight Current Verse"
+msgstr "הדגש פסוק נוכחי"
+
+#: ../ui/xi-menus.glade.h:31
+#, fuzzy
+msgid "Apply a high-contrast highlight to the current verse"
+msgstr "הדגש את הפסוק הנוכחי בעזרת ניגודיות גבוהה"
+
+#: ../ui/xi-menus.glade.h:32
+msgid "_Attach/Detach Sidebar"
+msgstr "הצמד \\ נתק שורת צד"
+
+#: ../ui/xi-menus.glade.h:33
+#, fuzzy
+msgid "Operate the sidebar as a separate window"
+msgstr "פתח בחלון נפרד"
+
+#: ../ui/xi-menus.glade.h:34
+msgid "_Show/Hide Attached Sidebar"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:35
+#, fuzzy
+msgid "Remove the sidebar entirely from view"
+msgstr "להסיר התיקייה שנבחרה"
+
+#: ../ui/xi-menus.glade.h:36
+msgid "Show Parallel View in a _Tab"
+msgstr "הצג תצוגה מקבילה ב_לשונית"
+
+#: ../ui/xi-menus.glade.h:37
+msgid "Provide the full-chapter parallel Bible window as another tab"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:38
+msgid "Show Previe_wer in the Sidebar"
+msgstr "הצג תצוגה מ_קדימה בסרגל הצד"
+
+#: ../ui/xi-menus.glade.h:39
+msgid "Select Previewer position between sidebar or beneath Bible"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:40
+msgid "_Help"
+msgstr "ע_זרה"
+
+#: ../ui/xi-menus.glade.h:41
+msgid "_Contents"
+msgstr "_תכנים"
+
+#: ../ui/xi-menus.glade.h:42
+#, fuzzy
+msgid "Open the help viewer on the Xiphos manual"
+msgstr "עיין במדריך ל-Xiphos"
+
+#: ../ui/xi-menus.glade.h:43
+msgid "_Mailing List"
+msgstr "_רשימת דיוור"
+
+#: ../ui/xi-menus.glade.h:44
+#, fuzzy
+msgid "Open a browser on the users' mailing list webpage"
+msgstr "הצטרף לרשימת הדיוור למשתמשים"
+
+#: ../ui/xi-menus.glade.h:45
+msgid "_Live Chat"
+msgstr "_צ'אט חי"
+
+#: ../ui/xi-menus.glade.h:46
+msgid "Open a browser on an interface to live IRC chat"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:47
+msgid "_Report Bug"
+msgstr "_דיווח על באג"
+
+#: ../ui/xi-menus.glade.h:48
+msgid "Open a browser on our bug tracker"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:49
+msgid "About _Translation"
+msgstr "אודות _תרגום..."
+
+#: ../ui/xi-menus.glade.h:50
+#, fuzzy
+msgid "Learn about translating the Xiphos interface to other languages"
+msgstr "תרגום Xiphos לשפות נוספות"
+
+#: ../ui/xi-menus.glade.h:51
+msgid "_About The SWORD Project"
+msgstr "אודות _פרויקט SWORD"
+
+#: ../ui/xi-menus.glade.h:52
+msgid "Learn about The Sword Project, of which Xiphos is one application"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:53
+msgid "About _Xiphos"
+msgstr "אודות Xiphos_..."
+
+#: ../ui/xi-menus.glade.h:54
+#, fuzzy
+msgid "Learn about Xiphos"
+msgstr "אודות Xiphos_..."
+
+#: ../ui/xi-menus.glade.h:57
+msgid "Annotate Verse"
+msgstr "הערות לפסוק"
+
+#: ../ui/xi-menus.glade.h:60
+msgid "Open Module"
+msgstr "פתח מודול"
+
+#: ../ui/xi-menus.glade.h:62
+msgid "Note"
+msgstr "הערה"
+
+#: ../ui/xi-menus.glade.h:63
+msgid "Open in editor"
+msgstr "פתח בתיבת דיאלוג"
+
+#: ../ui/xi-menus.glade.h:65
+#, fuzzy
+msgid "Verse Per Line"
+msgstr "_פסוק לשורה"
+
+#: ../ui/xi-menus.glade.h:72
+msgid "Scripture Cross-references"
+msgstr "הפניות צולבות לכתבי הקודש"
+
+#: ../ui/xi-menus.glade.h:73
+msgid "Footnote/Cross-ref Markers"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:74
+msgid "Show non-anonymous markers e.g. \"*n23\""
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:79
+msgid "Variants"
+msgstr "משתנים"
+
+#: ../ui/xi-menus.glade.h:83
+msgid "Image Content"
+msgstr "תוכן"
+
+#: ../ui/xi-menus.glade.h:84
+msgid "Respect Font Faces"
+msgstr "התחשב בקבוצות גופנים"
+
+#: ../ui/xi-menus.glade.h:85
+msgid "Commentary by Chapter"
+msgstr "פירוש לפי פרק"
+
+#: ../ui/xi-menus.glade.h:86
+#, fuzzy
+msgid "Doublespace"
+msgstr "רווחים כפולים"
+
+#: ../ui/xi-menus.glade.h:87
+msgid "Lookup Selection"
+msgstr "בחירת חיפוש"
+
+#: ../ui/xi-menus.glade.h:88
+msgid "Use Current Dictionary"
+msgstr "השתמש במילון הנוכחי"
+
+#: ../ui/xi-menus.glade.h:89
+msgid "Browse in BibleMap.org"
+msgstr "עיין ב-BibleMap.org"
+
+#: ../ui/xi-menus.glade.h:90
+msgid "Unlock This Module"
+msgstr "פתח מודול זה"
+
+#: ../ui/xi-menus.glade.h:91
+msgid "Display Book Heading"
+msgstr "הצג כותרת ספר"
+
+#: ../ui/xi-menus.glade.h:92
+msgid "Display Chapter Heading"
+msgstr "הצג כותרת פרק"
+
+#: ../ui/xi-menus.glade.h:93
+msgid "Rename Pers.Comm."
+msgstr "שנה שם פירוש אישי"
+
+#: ../ui/xi-menus.glade.h:94
+msgid "Dump Pers.Comm."
+msgstr "השלך פירוש אישי"
+
+#: ../ui/xi-menus.glade.h:95
+msgid "Read Selection Aloud"
+msgstr "קריאה בקול"
+
+#: ../ui/xi-menus.glade.h:96
+msgid "Save these results as a single bookmark"
+msgstr "שמור תוצאות אלה כסימניה בודדת"
+
+#: ../ui/xi-menus.glade.h:97
+msgid "Save list as a single bookmark"
+msgstr "שמור את הרשימה כסימניה בודדת"
+
+#: ../ui/xi-menus.glade.h:98
+msgid "Save these results as a series of bookmarks in their own folder"
+msgstr "שמור תוצאות אלה כסדרת סימניות בתיקיה חדשה"
+
+#: ../ui/xi-menus.glade.h:99
+msgid "Save list as a series of bookmarks"
+msgstr "שמור את הרשימה כסדרת סימניות"
+
+#: ../ui/xi-menus.glade.h:100
+msgid "Export List"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:101
+msgid "Open this bookmark in a new tab"
+msgstr "פתח סימנייה זו בטאב חדש."
+
+#: ../ui/xi-menus.glade.h:102
+msgid "Open in new tab"
+msgstr "פתח בלשונית חדשה"
+
+#: ../ui/xi-menus.glade.h:103
+msgid "Open this bookmark in a dialog"
+msgstr "פתח את הסימנייה בתיבת דיאלוג"
+
+#: ../ui/xi-menus.glade.h:104
+msgid "Open in a dialog"
+msgstr "פתח בתיבת דיאלוג"
+
+#: ../ui/xi-menus.glade.h:105
+msgid "Add new folder to selected folder"
+msgstr "הוסף התיקייה החדשה לתיקייה שנבחרה"
+
+#: ../ui/xi-menus.glade.h:107
+msgid "Insert new bookmark here"
+msgstr "הכנס לכאן את הסימנייה החדשה"
+
+#: ../ui/xi-menus.glade.h:108
+msgid "Insert Bookmark"
+msgstr "הכנס סימנייה"
+
+#: ../ui/xi-menus.glade.h:109
+msgid "Edit bookmark item"
+msgstr "ערוך פריט סימנייה"
+
+#: ../ui/xi-menus.glade.h:110
+msgid "_Edit Item"
+msgstr "ערוך פריט"
+
+#: ../ui/xi-menus.glade.h:111
+msgid "Delete item"
+msgstr "מחק פריט"
+
+#: ../ui/xi-menus.glade.h:112
+msgid "Delete Item"
+msgstr "מחק פריט"
+
+#: ../ui/xi-menus.glade.h:113
+msgid "Expand all Bookmarks groups"
+msgstr "הרחב את כל קבוצות הסימניות"
+
+#: ../ui/xi-menus.glade.h:114
+msgid "Expand All"
+msgstr "הרחב הכל"
+
+#: ../ui/xi-menus.glade.h:115
+msgid "Collapse all Bookmarks groups"
+msgstr "צמצם את כל קבוצות הסימניות"
+
+#: ../ui/xi-menus.glade.h:116
+msgid "Collapse All"
+msgstr "צמצם הכל"
+
+#: ../ui/xi-menus.glade.h:117
+msgid "Allow items to be moved from one folder to another"
+msgstr "אפשר הזזת פריטים בין ספריות"
+
+#: ../ui/xi-menus.glade.h:118
+msgid "Allow Reordering"
+msgstr "אפשר סידור מחדש"
+
+#: ../ui/xi-menus.glade.h:119
+#, fuzzy
+msgid "Load other bookmarks file (default: from BibleTime)"
+msgstr "טען סימניות מ-Bibletime"
+
+#: ../ui/xi-menus.glade.h:120
+#, fuzzy
+msgid "Import Bookmarks"
+msgstr "הכנס סימנייה"
+
+#: ../ui/xi-menus.glade.h:121
+msgid "Remove folder and save it"
+msgstr "הסר תיקייה ושמור אותה"
+
+#: ../ui/xi-menus.glade.h:122
+msgid "Export Folder"
+msgstr "ייצוא תיקייה"
+
+#: ../ui/xi-menus.glade.h:123
+msgid "Open selected module in a new tab"
+msgstr "פתח את המודול הנבחר בלשונית חדשה"
+
+#: ../ui/xi-menus.glade.h:124
+msgid ""
+"Open selected module in a\n"
+"\tseparate ['dialog'] window"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:126
+msgid "Open in a separate window"
+msgstr "פתח בחלון נפרד"
+
+#: ../ui/xi-menus.glade.h:127
+msgid "Create a new simple prayer list"
+msgstr "צור רשימת מודולים חדשה"
+
+#: ../ui/xi-menus.glade.h:128
+msgid "Simple"
+msgstr "פשוט"
+
+#: ../ui/xi-menus.glade.h:129
+msgid "Create a new subject prayer list"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:130
+msgid "Subject"
+msgstr "אובייקט Pixbuf"
+
+#: ../ui/xi-menus.glade.h:131
+msgid "Create a new monthly journal"
+msgstr "יצירת יומן חודשי חדש"
+
+#: ../ui/xi-menus.glade.h:132
+msgid "Monthly"
+msgstr "חודשי"
+
+#: ../ui/xi-menus.glade.h:133
+msgid "Create a new daily journal"
+msgstr "יצירת יומן יומי חדש"
+
+#: ../ui/xi-menus.glade.h:134
+msgid "Daily"
+msgstr "יומי"
+
+#: ../ui/xi-menus.glade.h:135
+msgid "Create a new outlined topic"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:136
+msgid "Outlined"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:137
+msgid "Open module in editor or plain display window"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:138
+#, fuzzy
+msgid "Open in separate window"
+msgstr "פתח בחלון נפרד"
+
+#: ../ui/xi-menus.glade.h:139
+msgid "Add a sub-item"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:140
+msgid "Add Sub-Item"
+msgstr "הוספת תת־פריט"
+
+#: ../ui/xi-menus.glade.h:141
+msgid "Add an item"
+msgstr "הוסף כפריט"
+
+#: ../ui/xi-menus.glade.h:142
+msgid "Add Item"
+msgstr "הוספת פריט"
+
+#: ../ui/xi-menus.glade.h:143
+msgid "Remove this item"
+msgstr "הסר - שחזר"
+
+#: ../ui/xi-menus.glade.h:145
+msgid "Edit this item"
+msgstr "הדפס הערה"
+
 #: ../xiphos.desktop.in.in.h:1
+msgid "Xiphos Bible Guide"
+msgstr "ׂמדריך Xiphos לכתבי הקודש"
+
+#: ../xiphos.desktop.in.in.h:2
 msgid "Study the Bible"
 msgstr "מחקר בכתבי הקודש"
 
-#: ../xiphos.desktop.in.in.h:2
-msgid "Xiphos Bible Guide"
-msgstr "ׂמדריך Xiphos לכתבי הקודש"
+#~ msgid "Go to "
+#~ msgstr "לך אל "
 
 #~ msgid "Main"
 #~ msgstr "ראשי"
@@ -4114,9 +4267,6 @@ msgstr "ׂמדריך Xiphos לכתבי הקודש"
 
 #~ msgid "About the SWORD Project"
 #~ msgstr "אודות פרויקט SWORD"
-
-#~ msgid "Sword Version"
-#~ msgstr "גרסת SWORD"
 
 #~ msgid "Books can be downloaded from the SWORD Project"
 #~ msgstr "מודולים להורדה מפרויקט SWORD"
