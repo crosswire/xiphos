@@ -1,8 +1,8 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index aca398b..b2848f5 100644
+index e4a13f8..01eb35a 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -48,6 +48,7 @@ FIND_PACKAGE(CURL QUIET)
+@@ -49,6 +49,7 @@ FIND_PACKAGE(CURL QUIET)
  FIND_PACKAGE(CLucene QUIET)
  FIND_PACKAGE(PkgConfig QUIET)
  FIND_PACKAGE(Regex QUIET)
@@ -10,7 +10,7 @@ index aca398b..b2848f5 100644
  
  ###########################################################################################
  # Based on user input and the results of the above tests, we may need to mux with the source
-@@ -205,12 +206,14 @@ IF(REGEX_FOUND AND CROSS_COMPILE_MINGW32)
+@@ -206,12 +207,14 @@ IF(REGEX_FOUND AND CROSS_COMPILE_MINGW32)
  	SET(SWORD_LINK_LIBRARIES ${SWORD_LINK_LIBRARIES} ${REGEX_LIBRARY})
  ENDIF(REGEX_FOUND AND CROSS_COMPILE_MINGW32)
  
@@ -182,28 +182,35 @@ index 0000000..69975c5
 +endmacro(libfind_library)
 +
 diff --git a/src/mgr/curlftpt.cpp b/src/mgr/curlftpt.cpp
-index acd647c..f31b831 100644
+index 165c054..90c8931 100644
 --- a/src/mgr/curlftpt.cpp
 +++ b/src/mgr/curlftpt.cpp
-@@ -29,6 +29,9 @@
+@@ -29,6 +29,8 @@
  
  #include <swlog.h>
  
 +#include <glib.h>
 +#include <glib/gstdio.h>
-+
+ 
  SWORD_NAMESPACE_START
  
+@@ -58,7 +60,7 @@ namespace {
+ 		struct FtpFile *out=(struct FtpFile *)stream;
+ 		if (out && !out->stream && !out->destBuf) {
+ 			/* open file for writing */
+-			out->stream=fopen(out->filename, "wb");
++			out->stream=g_fopen(out->filename, "wb");
+ 			if (!out->stream)
+ 				return -1; /* failure, can't open file to write */
+ 		}
+@@ -141,7 +143,6 @@ char CURLFTPTransport::getURL(const char *destPath, const char *sourceURL, SWBuf
+ 	
+ 	if (session) {
  
-@@ -56,7 +59,7 @@ int my_fwrite(void *buffer, size_t size, size_t nmemb, void *stream) {
- 	struct FtpFile *out=(struct FtpFile *)stream;
- 	if (out && !out->stream && !out->destBuf) {
- 		/* open file for writing */
--		out->stream=fopen(out->filename, "wb");
-+		out->stream=g_fopen(out->filename, "wb");
- 		if (!out->stream)
- 			return -1; /* failure, can't open file to write */
- 	}
+-		struct MyProgressData pd;
+ 		pd.sr = statusReporter;
+ 		pd.term = &term;
+ 
 diff --git a/src/mgr/filemgr.cpp b/src/mgr/filemgr.cpp
 index fc4afd9..a33d06e 100644
 --- a/src/mgr/filemgr.cpp
@@ -417,10 +424,10 @@ index fc4afd9..a33d06e 100644
  	return 0;
  }
 diff --git a/src/mgr/installmgr.cpp b/src/mgr/installmgr.cpp
-index 0533757..0c24600 100644
+index 20020ea..18122fb 100644
 --- a/src/mgr/installmgr.cpp
 +++ b/src/mgr/installmgr.cpp
-@@ -33,6 +33,8 @@ extern "C" {
+@@ -31,6 +31,8 @@ extern "C" {
  #include <utilstr.h>
  
  #include <fcntl.h>
@@ -429,7 +436,7 @@ index 0533757..0c24600 100644
  
  #include <swmgr.h>
  #include <swmodule.h>
-@@ -266,20 +268,19 @@ int InstallMgr::removeModule(SWMgr *manager, const char *moduleName) {
+@@ -270,20 +272,19 @@ int InstallMgr::removeModule(SWMgr *manager, const char *moduleName) {
  		}
  		else {	//remove all files in DataPath directory
  
@@ -456,7 +463,7 @@ index 0533757..0c24600 100644
  						SWConfig *config = new SWConfig(modFile.c_str());
  						if (config->Sections.find(modName) != config->Sections.end()) {
  							delete config;
-@@ -287,8 +288,8 @@ int InstallMgr::removeModule(SWMgr *manager, const char *moduleName) {
+@@ -291,8 +292,8 @@ int InstallMgr::removeModule(SWMgr *manager, const char *moduleName) {
  						}
  						else	delete config;
  					}
@@ -467,7 +474,7 @@ index 0533757..0c24600 100644
  			}
  		}
  		return 0;
-@@ -397,8 +398,8 @@ int InstallMgr::installModule(SWMgr *destMgr, const char *fromLocation, const ch
+@@ -401,8 +402,8 @@ int InstallMgr::installModule(SWMgr *destMgr, const char *fromLocation, const ch
  	SWBuf buffer;
  	bool aborted = false;
  	bool cipher = false;
@@ -478,7 +485,7 @@ index 0533757..0c24600 100644
  	SWBuf modFile;
  
  	SWLog::getSystemLog()->logDebug("***** InstallMgr::installModule\n");
-@@ -510,18 +511,18 @@ int InstallMgr::installModule(SWMgr *destMgr, const char *fromLocation, const ch
+@@ -514,18 +515,18 @@ int InstallMgr::installModule(SWMgr *destMgr, const char *fromLocation, const ch
  		}
  		if (!aborted) {
  			SWBuf confDir = sourceDir + "mods.d/";
@@ -503,7 +510,7 @@ index 0533757..0c24600 100644
  							FileMgr::copyFile(modFile.c_str(), targetFile.c_str());
  							if (cipher) {
  								if (getCipherCode(modName, config)) {
-@@ -538,7 +539,7 @@ int InstallMgr::installModule(SWMgr *destMgr, const char *fromLocation, const ch
+@@ -542,7 +543,7 @@ int InstallMgr::installModule(SWMgr *destMgr, const char *fromLocation, const ch
  						delete config;
  					}
  				}
@@ -513,7 +520,7 @@ index 0533757..0c24600 100644
  		}
  		return (aborted) ? -1 : 0;
 diff --git a/src/mgr/swmgr.cpp b/src/mgr/swmgr.cpp
-index 3afa111..81d3629 100644
+index a497b7c..dcc5466 100644
 --- a/src/mgr/swmgr.cpp
 +++ b/src/mgr/swmgr.cpp
 @@ -23,6 +23,8 @@
@@ -525,7 +532,7 @@ index 3afa111..81d3629 100644
  
  #include <sys/stat.h>
  #ifndef _MSC_VER
-@@ -288,10 +290,10 @@ void SWMgr::init() {
+@@ -297,10 +299,10 @@ void SWMgr::init() {
  SWBuf SWMgr::getHomeDir() {
  
  	// figure out 'home' directory for app data
@@ -538,7 +545,7 @@ index 3afa111..81d3629 100644
  	}
  	if (homeDir.length()) {
  		if ((homeDir[homeDir.length()-1] != '\\') && (homeDir[homeDir.length()-1] != '/')) {
-@@ -474,7 +476,7 @@ void SWMgr::findConfig(char *configType, char **prefixPath, char **configPath, s
+@@ -483,7 +485,7 @@ void SWMgr::findConfig(char *configType, char **prefixPath, char **configPath, s
  			// check environment variable SWORD_PATH
  			SWLog::getSystemLog()->logDebug("Checking $SWORD_PATH...");
  
@@ -547,7 +554,7 @@ index 3afa111..81d3629 100644
  			if (envsworddir.length()) {
  				
  				SWLog::getSystemLog()->logDebug("found (%s).", envsworddir.c_str());
-@@ -605,14 +607,15 @@ void SWMgr::findConfig(char *configType, char **prefixPath, char **configPath, s
+@@ -614,14 +616,15 @@ void SWMgr::findConfig(char *configType, char **prefixPath, char **configPath, s
  
  	SWLog::getSystemLog()->logDebug("Checking $ALLUSERSPROFILE/Application Data/sword/...");
  
@@ -565,7 +572,7 @@ index 3afa111..81d3629 100644
  		SWLog::getSystemLog()->logDebug("Checking %s for mods.d...", path.c_str());
  		if (FileMgr::existsDir(path.c_str(), "mods.d")) {
  			SWLog::getSystemLog()->logDebug("found.");
-@@ -654,7 +657,7 @@ void SWMgr::findConfig(char *configType, char **prefixPath, char **configPath, s
+@@ -663,7 +666,7 @@ void SWMgr::findConfig(char *configType, char **prefixPath, char **configPath, s
  
  	if (homeDir.length()) {
  		path = homeDir;
@@ -574,7 +581,7 @@ index 3afa111..81d3629 100644
  		SWLog::getSystemLog()->logDebug("  Checking for %smods.conf...", path.c_str());
  		if (FileMgr::existsFile(path.c_str(), "mods.conf")) {
  			SWLog::getSystemLog()->logDebug("found.");
-@@ -691,29 +694,29 @@ void SWMgr::findConfig(char *configType, char **prefixPath, char **configPath, s
+@@ -700,29 +703,29 @@ void SWMgr::findConfig(char *configType, char **prefixPath, char **configPath, s
  
  void SWMgr::loadConfigDir(const char *ipath)
  {
@@ -612,7 +619,7 @@ index 3afa111..81d3629 100644
  		
  		if (!config) {	// if no .conf file exist yet, create a default
  			newmodfile = ipath;
-@@ -833,7 +836,7 @@ signed char SWMgr::Load() {
+@@ -842,7 +845,7 @@ signed char SWMgr::Load() {
  			SWBuf homeDir = getHomeDir();
  			if (homeDir.length() && configType != 2) { // 2 = user only
  				SWBuf path = homeDir;
@@ -621,7 +628,7 @@ index 3afa111..81d3629 100644
  				augmentModules(path.c_str(), mgrModeMultiMod);
  				path = homeDir;
  				path += "sword/";
-@@ -1295,21 +1298,21 @@ void SWMgr::deleteModule(const char *modName) {
+@@ -1331,21 +1334,21 @@ void SWMgr::deleteModule(const char *modName) {
  
  void SWMgr::InstallScan(const char *dirname)
  {
@@ -650,7 +657,7 @@ index 3afa111..81d3629 100644
  
  					// mods.d
  					if (configType) {
-@@ -1318,7 +1321,7 @@ void SWMgr::InstallScan(const char *dirname)
+@@ -1354,7 +1357,7 @@ void SWMgr::InstallScan(const char *dirname)
  						targetName = configPath;
  						if ((configPath[strlen(configPath)-1] != '\\') && (configPath[strlen(configPath)-1] != '/'))
  							targetName += "/";
@@ -659,7 +666,7 @@ index 3afa111..81d3629 100644
  						conffd = FileMgr::getSystemFileMgr()->open(targetName.c_str(), FileMgr::WRONLY|FileMgr::CREAT, FileMgr::IREAD|FileMgr::IWRITE);
  					}
  
-@@ -1340,7 +1343,7 @@ void SWMgr::InstallScan(const char *dirname)
+@@ -1376,7 +1379,7 @@ void SWMgr::InstallScan(const char *dirname)
  			}
  			if (conffd)
  				FileMgr::getSystemFileMgr()->close(conffd);
