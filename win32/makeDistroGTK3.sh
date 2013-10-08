@@ -104,7 +104,7 @@ EOF
 for f in libsword.dll \
 	imp2ld.exe addld.exe mod2zmod.exe imp2gbs.exe xml2gbs.exe imp2vs.exe vpl2mod.exe mkfastmod.exe mod2vpl.exe tei2mod.exe osis2mod.exe mod2osis.exe mod2imp.exe \
 	installmgr.exe  diatheke.exe vs2osisreftxt.exe \
-	uconv.exe icui18n48.dll icuuc48.dll icudata48.dll icule48.dll \
+	uconv.exe icui18n50.dll icuuc50.dll icudata50.dll icule50.dll \
 	libcairo-gobject-2.dll iconv.dll \
 	libcairo-2.dll libfontconfig-1.dll libexpat-1.dll libfreetype-6.dll zlib1.dll libpixman-1-0.dll libpng15-15.dll libgdk_pixbuf-2.0-0.dll \
 	libgdk-3-0.dll \
@@ -143,12 +143,12 @@ do
 	cp ${f} ${outdir}lib/gtk-3.0/3.0.0/immodules/
 	#strip -o ${outdir}lib/gtk-3.0/3.0.0/immodules/`basename ${f}` $f
 done
-mkdir -p ${outdir}lib/pango/1.6.0/modules/
-for f in $(find ${sworddir}../lib/pango/1.6.0/modules/ -name '*.dll')
+mkdir -p ${outdir}lib/pango/1.8.0/modules/
+for f in $(find ${sworddir}../lib/pango/1.8.0/modules/ -name '*.dll')
 do
 	echo "Copying and stripping ${f}"
-	cp ${f} ${outdir}lib/pango/1.6.0/modules/
-	#strip -o ${outdir}lib/pango/1.6.0/modules/`basename ${f}` $f
+	cp ${f} ${outdir}lib/pango/1.8.0/modules/
+	#strip -o ${outdir}lib/pango/1.8.0/modules/`basename ${f}` $f
 done
 
 # Strip the main Xiphos binary
