@@ -13,7 +13,7 @@
           <object class="GtkMenu" id="menuitem4_menu">
             <child>
               <object class="GtkImageMenuItem" id="open_studypad">
-                <property name="label">Open Study_pad</property>
+                <property name="label" translatable="yes">Open Study_pad</property>
                 <property name="visible">True</property>
                 <property name="use_underline">True</property>
                 <property name="use_stock">True</property>
@@ -27,7 +27,7 @@
             </child>
             <child>
               <object class="GtkImageMenuItem" id="open_session">
-                <property name="label">_Open Session</property>
+                <property name="label" translatable="yes">_Open Session</property>
                 <property name="visible">True</property>
                 <property name="use_underline">True</property>
                 <property name="use_stock">True</property>
@@ -36,7 +36,7 @@
             </child>
             <child>
               <object class="GtkImageMenuItem" id="save_session">
-                <property name="label">_Save Session</property>
+                <property name="label" translatable="yes">_Save Session</property>
                 <property name="visible">True</property>
                 <property name="use_underline">True</property>
                 <property name="use_stock">True</property>
@@ -50,7 +50,7 @@
             </child>
             <child>
               <object class="GtkImageMenuItem" id="newjournal">
-                <property name="label">_New Prayerlist/Journal</property>
+                <property name="label" translatable="yes">_New Prayerlist/Journal</property>
                 <property name="visible">True</property>
                 <property name="use_underline">True</property>
                 <property name="use_stock">True</property>
@@ -84,7 +84,7 @@
           <object class="GtkMenu" id="menuitem5_menu">
             <child>
               <object class="GtkImageMenuItem" id="search">
-                <property name="label">_Search</property>
+                <property name="label" translatable="yes">_Search</property>
                 <property name="visible">True</property>
                 <property name="use_underline">True</property>
                 <property name="use_stock">True</property>
@@ -93,7 +93,7 @@
             </child>
             <child>
               <object class="GtkImageMenuItem" id="advanced_search">
-                <property name="label">_Advanced Search</property>
+                <property name="label" translatable="yes">_Advanced Search</property>
                 <property name="visible">True</property>
                 <property name="use_underline">True</property>
                 <property name="use_stock">True</property>
@@ -107,7 +107,7 @@
             </child>
             <child>
               <object class="GtkImageMenuItem" id="preferences">
-                <property name="label">_Preferences</property>
+                <property name="label" translatable="yes">_Preferences</property>
                 <property name="visible">True</property>
                 <property name="use_underline">True</property>
                 <property name="use_stock">True</property>
@@ -116,7 +116,7 @@
             </child>
             <child>
               <object class="GtkImageMenuItem" id="module_manager">
-                <property name="label">_Module Manager</property>
+                <property name="label" translatable="yes">_Module Manager</property>
                 <property name="visible">True</property>
                 <property name="use_underline">True</property>
                 <property name="use_stock">True</property>
@@ -265,7 +265,7 @@
           <object class="GtkMenu" id="menuitem7_menu">
             <child>
               <object class="GtkImageMenuItem" id="contents">
-                <property name="label">_Contents</property>
+                <property name="label" translatable="yes">_Contents</property>
                 <property name="visible">True</property>
                 <property name="use_underline">True</property>
                 <property name="use_stock">True</property>
@@ -274,7 +274,7 @@
             </child>
             <child>
               <object class="GtkImageMenuItem" id="mailing_list">
-                <property name="label">_Mailing List</property>
+                <property name="label" translatable="yes">_Mailing List</property>
                 <property name="visible">True</property>
                 <property name="use_underline">True</property>
                 <property name="use_stock">True</property>
@@ -283,7 +283,7 @@
             </child>
             <child>
               <object class="GtkImageMenuItem" id="live_chat">
-                <property name="label">_Live Chat</property>
+                <property name="label" translatable="yes">_Live Chat</property>
                 <property name="visible">True</property>
                 <property name="use_underline">True</property>
                 <property name="use_stock">True</property>
@@ -292,7 +292,7 @@
             </child>
             <child>
               <object class="GtkImageMenuItem" id="report_bug">
-                <property name="label">_Report Bug</property>
+                <property name="label" translatable="yes">_Report Bug</property>
                 <property name="visible">True</property>
                 <property name="use_underline">True</property>
                 <property name="use_stock">True</property>
@@ -306,7 +306,7 @@
             </child>
             <child>
               <object class="GtkImageMenuItem" id="about">
-                <property name="label">About _Translation</property>
+                <property name="label" translatable="yes">About _Translation</property>
                 <property name="visible">True</property>
                 <property name="use_underline">True</property>
                 <property name="use_stock">True</property>
@@ -320,7 +320,7 @@
             </child>
             <child>
               <object class="GtkImageMenuItem" id="about_the_sword_project">
-                <property name="label">_About The SWORD Project</property>
+                <property name="label" translatable="yes">_About The SWORD Project</property>
                 <property name="visible">True</property>
                 <property name="use_underline">True</property>
                 <property name="use_stock">True</property>
@@ -329,7 +329,7 @@
             </child>
             <child>
               <object class="GtkImageMenuItem" id="about_xiphos">
-                <property name="label">About _Xiphos</property>
+                <property name="label" translatable="yes">About _Xiphos</property>
                 <property name="visible">True</property>
                 <property name="use_underline">True</property>
                 <property name="use_stock">True</property>
