@@ -117,5 +117,6 @@ ui/xi-export-bookmarks.glade
 ui/xi-export-bookmarks.gtkbuilder
 ui/xi-menus.glade
 ui/xi-menus.gtkbuilder
+ui/xi-menus-popup.gtkbuilder
 ## application files
 xiphos.desktop.in.in

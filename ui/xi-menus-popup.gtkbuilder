@@ -5,7 +5,7 @@
     <property name="can_focus">False</property>
     <child>
       <object class="GtkImageMenuItem" id="open_in_new_tab">
-        <property name="label">Open in new tab</property>
+        <property name="label" translatable="yes">Open in new tab</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Open this bookmark in a new tab</property>
@@ -17,7 +17,7 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="open_in_a_dialog">
-        <property name="label">Open in a dialog</property>
+        <property name="label" translatable="yes">Open in a dialog</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Open this bookmark in a dialog</property>
@@ -29,7 +29,7 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="new_folder">
-        <property name="label">New Folder</property>
+        <property name="label" translatable="yes">New Folder</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Add new folder to selected folder</property>
@@ -41,7 +41,7 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="insert_bookmark">
-        <property name="label">Insert Bookmark</property>
+        <property name="label" translatable="yes">Insert Bookmark</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Insert new bookmark here</property>
@@ -53,7 +53,7 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="edit_item">
-        <property name="label">_Edit Item</property>
+        <property name="label" translatable="yes">_Edit Item</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Edit bookmark item</property>
@@ -65,7 +65,7 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="delete_item">
-        <property name="label">Delete Item</property>
+        <property name="label" translatable="yes">Delete Item</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Delete item</property>
@@ -83,7 +83,7 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="expand_all">
-        <property name="label">Expand All</property>
+        <property name="label" translatable="yes">Expand All</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Expand all Bookmarks groups</property>
@@ -95,7 +95,7 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="collapse_all">
-        <property name="label">Collapse All</property>
+        <property name="label" translatable="yes">Collapse All</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Collapse all Bookmarks groups</property>
@@ -130,7 +130,7 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="import_bibletime_bookmarks1">
-        <property name="label">Import Bookmarks</property>
+        <property name="label" translatable="yes">Import Bookmarks</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Load other bookmarks file (default: from BibleTime)</property>
@@ -142,7 +142,7 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="remove_folder">
-        <property name="label">Export Folder</property>
+        <property name="label" translatable="yes">Export Folder</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Remove folder and save it</property>
@@ -169,7 +169,7 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="add_sibling">
-        <property name="label">Add Item</property>
+        <property name="label" translatable="yes">Add Item</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Add an item</property>
@@ -181,7 +181,7 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="remove">
-        <property name="label">Remove</property>
+        <property name="label" translatable="yes">Remove</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Remove this item</property>
@@ -193,7 +193,7 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="edit">
-        <property name="label">Edit</property>
+        <property name="label" translatable="yes">Edit</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Edit this item</property>
@@ -208,7 +208,7 @@
     <property name="can_focus">False</property>
     <child>
       <object class="GtkImageMenuItem" id="open_in_new_tab1">
-        <property name="label">Open in new tab</property>
+        <property name="label" translatable="yes">Open in new tab</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Open selected module in a new tab</property>
@@ -220,7 +220,7 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="open_in_a_dialog1">
-        <property name="label">Open in a separate window</property>
+        <property name="label" translatable="yes">Open in a separate window</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Open selected module in a
@@ -233,7 +233,7 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="about1">
-        <property name="label">About</property>
+        <property name="label" translatable="yes">About</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="use_action_appearance">False</property>
@@ -247,7 +247,7 @@
     <property name="can_focus">False</property>
     <child>
       <object class="GtkImageMenuItem" id="about">
-        <property name="label">About</property>
+        <property name="label" translatable="yes">About</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="use_action_appearance">False</property>
@@ -258,7 +258,7 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="bookmark">
-        <property name="label">Bookmark</property>
+        <property name="label" translatable="yes">Bookmark</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="use_action_appearance">False</property>
@@ -269,7 +269,7 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="mark_verse">
-        <property name="label">Annotate Verse</property>
+        <property name="label" translatable="yes">Annotate Verse</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="use_action_appearance">False</property>
@@ -286,7 +286,7 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="export_passage">
-        <property name="label">Copy/Export Passage</property>
+        <property name="label" translatable="yes">Copy/Export Passage</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="use_action_appearance">False</property>
@@ -303,7 +303,7 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="file1">
-        <property name="label">File</property>
+        <property name="label" translatable="yes">File</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="use_action_appearance">False</property>
@@ -314,7 +314,7 @@
             <property name="can_focus">False</property>
             <child>
               <object class="GtkImageMenuItem" id="open_module2">
-                <property name="label">Open Module</property>
+                <property name="label" translatable="yes">Open Module</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
@@ -356,7 +356,7 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="edit1">
-        <property name="label">Edit</property>
+        <property name="label" translatable="yes">Edit</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="use_action_appearance">False</property>
@@ -389,7 +389,7 @@
             </child>
             <child>
               <object class="GtkImageMenuItem" id="note">
-                <property name="label">Note</property>
+                <property name="label" translatable="yes">Note</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
@@ -399,7 +399,7 @@
             </child>
             <child>
               <object class="GtkImageMenuItem" id="open_in_editor">
-                <property name="label">Open in editor</property>
+                <property name="label" translatable="yes">Open in editor</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
@@ -413,7 +413,7 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="module_options">
-        <property name="label">Module Options</property>
+        <property name="label" translatable="yes">Module Options</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="use_action_appearance">False</property>
@@ -659,7 +659,7 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="lookup_selection1">
-        <property name="label">Lookup Selection</property>
+        <property name="label" translatable="yes">Lookup Selection</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="use_action_appearance">False</property>
@@ -700,7 +700,7 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="unlock_this_module">
-        <property name="label">Unlock This Module</property>
+        <property name="label" translatable="yes">Unlock This Module</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="use_action_appearance">False</property>
@@ -711,7 +711,7 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="display_book_heading">
-        <property name="label">Display Book Heading</property>
+        <property name="label" translatable="yes">Display Book Heading</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="use_action_appearance">False</property>
@@ -733,7 +733,7 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="rename_perscomm">
-        <property name="label">Rename Pers.Comm.</property>
+        <property name="label" translatable="yes">Rename Pers.Comm.</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="use_action_appearance">False</property>
@@ -744,7 +744,7 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="dump_perscomm">
-        <property name="label">Dump Pers.Comm.</property>
+        <property name="label" translatable="yes">Dump Pers.Comm.</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="use_action_appearance">False</property>
@@ -755,7 +755,7 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="read_selection_aloud">
-        <property name="label">Read Selection Aloud</property>
+        <property name="label" translatable="yes">Read Selection Aloud</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="use_action_appearance">False</property>
@@ -769,7 +769,7 @@
     <property name="can_focus">False</property>
     <child>
       <object class="GtkImageMenuItem" id="create_simple_prayer_list">
-        <property name="label">Simple</property>
+        <property name="label" translatable="yes">Simple</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Create a new simple prayer list</property>
@@ -781,7 +781,7 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="create_subject_prayer_list">
-        <property name="label">Subject</property>
+        <property name="label" translatable="yes">Subject</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Create a new subject prayer list</property>
@@ -793,7 +793,7 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="create_monthly_prayer_list">
-        <property name="label">Monthly</property>
+        <property name="label" translatable="yes">Monthly</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Create a new monthly journal</property>
@@ -805,7 +805,7 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="create_daily_journal">
-        <property name="label">Daily</property>
+        <property name="label" translatable="yes">Daily</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Create a new daily journal</property>
@@ -817,7 +817,7 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="create_outlined_topic_list">
-        <property name="label">Outlined</property>
+        <property name="label" translatable="yes">Outlined</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Create a new outlined topic</property>
@@ -832,7 +832,7 @@
     <property name="can_focus">False</property>
     <child>
       <object class="GtkImageMenuItem" id="open_in_new_tab2">
-        <property name="label">Open in new tab</property>
+        <property name="label" translatable="yes">Open in new tab</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Open selected module in a new tab</property>
@@ -844,7 +844,7 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="open_in_a_dialog2">
-        <property name="label">Open in separate window</property>
+        <property name="label" translatable="yes">Open in separate window</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Open module in editor or plain display window</property>
@@ -856,7 +856,7 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="about3">
-        <property name="label">About</property>
+        <property name="label" translatable="yes">About</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="use_action_appearance">False</property>
@@ -870,7 +870,7 @@
     <property name="can_focus">False</property>
     <child>
       <object class="GtkImageMenuItem" id="save_list_as_a_single_bookmark">
-        <property name="label">Save list as a single bookmark</property>
+        <property name="label" translatable="yes">Save list as a single bookmark</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Save these results as a single bookmark</property>
@@ -882,7 +882,7 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="save_list_as_a_series_of_bookmarks">
-        <property name="label">Save list as a series of bookmarks</property>
+        <property name="label" translatable="yes">Save list as a series of bookmarks</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Save these results as a series of bookmarks in their own folder</property>
@@ -900,7 +900,7 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="export_list1">
-        <property name="label">Export List</property>
+        <property name="label" translatable="yes">Export List</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="use_action_appearance">False</property>
