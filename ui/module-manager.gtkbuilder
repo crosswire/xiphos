@@ -21,7 +21,7 @@
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="button_view_intro">
-                <property name="label">_View Intro</property>
+                <property name="label" translatable="yes">_View Intro</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
@@ -38,7 +38,7 @@
             </child>
             <child>
               <object class="GtkButton" id="button_load_sources">
-                <property name="label">_Load Standard</property>
+                <property name="label" translatable="yes">_Load Standard</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
                 <property name="receives_default">False</property>
@@ -140,7 +140,7 @@
             </child>
             <child>
               <object class="GtkButton" id="button_archive">
-                <property name="label">_Archive</property>
+                <property name="label" translatable="yes">_Archive</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
                 <property name="receives_default">False</property>
@@ -156,7 +156,7 @@
             </child>
             <child>
               <object class="GtkButton" id="button_index">
-                <property name="label">_Index</property>
+                <property name="label" translatable="yes">_Index</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
                 <property name="receives_default">False</property>
@@ -172,7 +172,7 @@
             </child>
             <child>
               <object class="GtkButton" id="button_delete_index">
-                <property name="label">_Delete Index</property>
+                <property name="label" translatable="yes">_Delete Index</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
                 <property name="receives_default">False</property>
