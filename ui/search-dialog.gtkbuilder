@@ -20,7 +20,7 @@
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="button_intro_lucene">
-                <property name="label">_Lucene Search Syntax</property>
+                <property name="label" translatable="yes">_Lucene Search Syntax</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
                 <property name="receives_default">False</property>

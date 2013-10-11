@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: Xiphos 3.1.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-10-08 10:07-0400\n"
-"PO-Revision-Date: 2012-02-18 21:07+0100\n"
+"PO-Revision-Date: 2013-10-10 22:33+0200\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: emacs + po-mode <gnomefr@traduc.org>\n"
 "Language: \n"
@@ -284,9 +284,8 @@ msgid "Xiphos development"
 msgstr "SIte de développement de Xiphos"
 
 #: ../src/gnome2/about_xiphos.c:122
-#, fuzzy
 msgid "Copyright © 2000-2013 Xiphos Development Team"
-msgstr "Copyright © 2000-2011 L'équipe de développement Xiphos"
+msgstr "Copyright © 2000-2013 L'équipe de développement Xiphos"
 
 #: ../src/gnome2/about_xiphos.c:125
 msgid ""
@@ -1434,7 +1433,7 @@ msgstr ""
 #. button to open advanced search
 #: ../src/gnome2/search_sidebar.c:194
 msgid "_Open Advanced Search"
-msgstr "Ouvre la recherche avancée"
+msgstr "Recherche avancée"
 
 #: ../src/gnome2/search_sidebar.c:198
 msgid "Open the separate Advanced Search dialog."
@@ -1505,9 +1504,8 @@ msgid "Upper"
 msgstr "Haute"
 
 #: ../src/gnome2/sidebar.c:848
-#, fuzzy
 msgid "Open module in editor?"
-msgstr "Modifier le commentaire"
+msgstr "Ouvrir le module dans l'éditeur?"
 
 #: ../src/gnome2/sidebar.c:848
 msgid "If no, it will open for display only."
@@ -4250,7 +4248,6 @@ msgid "Open module in editor or plain display window"
 msgstr ""
 
 #: ../ui/xi-menus.glade.h:138
-#, fuzzy
 msgid "Open in separate window"
 msgstr "Ouvrir dans une fenêtre séparée"
 
