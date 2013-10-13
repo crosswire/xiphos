@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 3.1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-08 10:07-0400\n"
+"POT-Creation-Date: 2013-10-13 20:43+0200\n"
 "PO-Revision-Date: 2013-10-11 18:26+0200\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: emacs + po-mode <gnomefr@traduc.org>\n"
@@ -50,7 +50,8 @@ msgid "Page %d of %d"
 msgstr "Page %d de %d"
 
 #: ../src/editor/slib-editor.c:393 ../src/editor/webkit_editor.c:585
-#: ../ui/editor_studypad.xml.h:9
+#: ../ui/editor_studypad.xml.h:9 ../ui/gtk2_webedit.ui.h:58
+#: ../ui/gtk_webedit.ui.h:58
 msgid "Open"
 msgstr "Ouvrir"
 
@@ -105,7 +106,8 @@ msgstr "_Enregistrer"
 msgid "Save _As..."
 msgstr "Enregistrer _sous..."
 
-#: ../src/editor/slib-editor.c:752
+#: ../src/editor/slib-editor.c:752 ../ui/gtk2_webedit.ui.h:56
+#: ../ui/gtk_webedit.ui.h:56
 msgid "New"
 msgstr "Nouveau"
 
@@ -113,7 +115,8 @@ msgstr "Nouveau"
 msgid "Open new document"
 msgstr "Ouvre un nouveau document"
 
-#: ../src/editor/slib-editor.c:758
+#: ../src/editor/slib-editor.c:758 ../ui/gtk2_webedit.ui.h:14
+#: ../ui/gtk_webedit.ui.h:14
 msgid "Delete"
 msgstr "Supprime"
 
@@ -122,7 +125,9 @@ msgid "Delete current note"
 msgstr "Supprime la note en cours"
 
 #: ../src/editor/slib-editor.c:765 ../ui/editor_note.xml.h:9
-#: ../ui/editor_studypad.xml.h:7 ../ui/xi-menus.glade.h:1
+#: ../ui/editor_studypad.xml.h:7 ../ui/gtk2_webedit.ui.h:86
+#: ../ui/gtk_webedit.ui.h:86 ../ui/xi-menus.glade.h:1
+#: ../ui/xi-menus.gtkbuilder.h:1
 msgid "_File"
 msgstr "_Fichier"
 
@@ -138,12 +143,15 @@ msgstr "Source _HTML"
 msgid "_Plain Source"
 msgstr "Source _texte"
 
-#: ../src/editor/slib-editor.c:841 ../ui/xi-menus.glade.h:17
+#: ../src/editor/slib-editor.c:841 ../ui/gtk2_webedit.ui.h:89
+#: ../ui/gtk_webedit.ui.h:89 ../ui/xi-menus.glade.h:17
+#: ../ui/xi-menus.gtkbuilder.h:11
 msgid "_View"
 msgstr "_Affichage"
 
 #: ../src/editor/slib-editor.c:852 ../ui/editor_note.xml.h:16
-#: ../ui/editor_studypad.xml.h:11
+#: ../ui/editor_studypad.xml.h:11 ../ui/gtk2_webedit.ui.h:75
+#: ../ui/gtk_webedit.ui.h:75
 msgid "Save"
 msgstr "Enregistrer"
 
@@ -168,7 +176,7 @@ msgstr ""
 "Si vous n'enregistrez pas, les modifications seront définitivement perdues."
 
 #: ../src/editor/slib-editor.c:1291 ../src/editor/webkit_editor.c:1373
-#: ../ui/xi-menus.glade.h:59
+#: ../ui/xi-menus.glade.h:59 ../ui/xi-menus-popup.gtkbuilder.h:38
 msgid "File"
 msgstr "Fichier"
 
@@ -263,9 +271,13 @@ msgid ""
 "other languages. If you are able to translate for us, please see the link "
 "below, contact us, and get involved with our efforts."
 msgstr ""
-"Si vous appréciez Xiphos, vous aimeriez peut-être le voir s'afficher dans votre langue maternelle ? Sachez que vous pouvez participer à sa traduction !\n"
+"Si vous appréciez Xiphos, vous aimeriez peut-être le voir s'afficher dans "
+"votre langue maternelle ? Sachez que vous pouvez participer à sa "
+"traduction !\n"
 "\n"
-"Toute nouvelle contribution à la traduction de Xiphos est la bienvenue. Si vous souhaitez apporter votre aide, suivez le lien ci-dessous. N'hésitez pas à nous contacter et nous rejoindre."
+"Toute nouvelle contribution à la traduction de Xiphos est la bienvenue. Si "
+"vous souhaitez apporter votre aide, suivez le lien ci-dessous. N'hésitez pas "
+"à nous contacter et nous rejoindre."
 
 #: ../src/gnome2/about_trans.c:98
 msgid "About Xiphos Translation"
@@ -301,7 +313,7 @@ msgstr ""
 #: ../src/gnome2/bookmark_dialog.c:175 ../src/gnome2/bookmarks_menu.c:369
 #: ../src/gnome2/bookmarks_menu.c:664 ../src/gnome2/bookmarks_menu.c:763
 #: ../src/gnome2/bookmarks_treeview.c:131 ../ui/editor_studypad.xml.h:15
-#: ../ui/xi-menus.glade.h:56
+#: ../ui/xi-menus.glade.h:56 ../ui/xi-menus-popup.gtkbuilder.h:35
 msgid "Bookmark"
 msgstr "Signet"
 
@@ -324,6 +336,7 @@ msgid "Specify bookmarks file"
 msgstr "Spécifie le fichier des signets"
 
 #: ../src/gnome2/bookmarks_menu.c:355 ../ui/xi-menus.glade.h:61
+#: ../ui/xi-menus-popup.gtkbuilder.h:28
 msgid "Edit"
 msgstr "Édition"
 
@@ -414,10 +427,12 @@ msgid "SearchResults"
 msgstr "Résultat de la requête"
 
 #: ../src/gnome2/export_dialog.c:319 ../ui/export-dialog.glade.h:4
+#: ../ui/export-dialog.gtkbuilder.h:4
 msgid "Please check copyright before exporting!"
 msgstr "Prière de vérifier le copyright avant l'export!"
 
 #: ../src/gnome2/find_dialog.c:186 ../src/gnome2/find_dialog.c:344
+#: ../ui/gtk2_webedit.ui.h:18 ../ui/gtk_webedit.ui.h:18
 msgid "Find"
 msgstr "Rechercher..."
 
@@ -450,6 +465,7 @@ msgid "Current font: "
 msgstr "Police utilisée : "
 
 #: ../src/gnome2/font_dialog.c:372 ../src/gnome2/font_dialog.c:388
+#: ../ui/prefs.gtkbuilder.h:114
 msgid "+0"
 msgstr "+0"
 
@@ -755,6 +771,7 @@ msgid "Removing"
 msgstr "Suppression de"
 
 #: ../src/gnome2/mod_mgr.c:192 ../ui/xi-menus.glade.h:144
+#: ../ui/xi-menus-popup.gtkbuilder.h:26
 msgid "Remove"
 msgstr "Supprimer"
 
@@ -863,7 +880,9 @@ msgstr ""
 "L'icône protection indique un module encrypté et nécessite l'achat d'une clé "
 "de déverrouillage auprès de l'éditeur du document"
 
-#: ../src/gnome2/mod_mgr.c:618 ../ui/xi-menus.glade.h:55
+#: ../src/gnome2/mod_mgr.c:618 ../ui/gtk2_webedit.ui.h:2
+#: ../ui/gtk_webedit.ui.h:2 ../ui/xi-menus.glade.h:55
+#: ../ui/xi-menus-popup.gtkbuilder.h:34
 msgid "About"
 msgstr "À propos"
 
@@ -947,6 +966,7 @@ msgstr "Textes bibliques"
 #: ../src/gnome2/mod_mgr.c:1409 ../src/gnome2/utilities.c:613
 #: ../src/main/sidebar.cc:663 ../src/main/sidebar.cc:1005
 #: ../src/main/sidebar.cc:1007 ../ui/prefs.glade.h:41
+#: ../ui/prefs.gtkbuilder.h:33
 msgid "Commentaries"
 msgstr "Commentaires"
 
@@ -1186,6 +1206,7 @@ msgid "Detach/Attach"
 msgstr "Détacher/Attacher"
 
 #: ../src/gnome2/parallel_view.c:121 ../ui/xi-menus.glade.h:64
+#: ../ui/xi-menus-popup.gtkbuilder.h:42
 msgid "Module Options"
 msgstr "Options du module"
 
@@ -1215,6 +1236,7 @@ msgid "Locale will take effect after restart."
 msgstr "La langue prendra effet après redémarrage."
 
 #: ../src/gnome2/preferences_dialog.c:1824 ../ui/prefs.glade.h:1
+#: ../ui/prefs.gtkbuilder.h:1
 msgid "Preferences"
 msgstr "Préférences"
 
@@ -1444,6 +1466,7 @@ msgid "Bible"
 msgstr "Texte biblique"
 
 #: ../src/gnome2/search_sidebar.c:233 ../ui/prefs.glade.h:92
+#: ../ui/prefs.gtkbuilder.h:84
 msgid "Commentary"
 msgstr "Commentaire"
 
@@ -1452,14 +1475,17 @@ msgid "Search Type"
 msgstr "Type de requête"
 
 #: ../src/gnome2/search_sidebar.c:261 ../ui/search-dialog.glade.h:39
+#: ../ui/search-dialog.gtkbuilder.h:39
 msgid "Multi word"
 msgstr "Mots multiples"
 
 #: ../src/gnome2/search_sidebar.c:272 ../ui/search-dialog.glade.h:41
+#: ../ui/search-dialog.gtkbuilder.h:41
 msgid "Regular expression"
 msgstr "Expression rationnelle"
 
 #: ../src/gnome2/search_sidebar.c:280 ../ui/search-dialog.glade.h:43
+#: ../ui/search-dialog.gtkbuilder.h:43
 msgid "Exact phrase"
 msgstr "Phrase exacte"
 
@@ -1468,6 +1494,7 @@ msgid "Search Options"
 msgstr "Options de la requête"
 
 #: ../src/gnome2/search_sidebar.c:307 ../ui/search-dialog.glade.h:49
+#: ../ui/search-dialog.gtkbuilder.h:49
 msgid "Match case"
 msgstr "Respecter la casse"
 
@@ -1604,6 +1631,7 @@ msgstr ""
 
 #: ../src/main/display.cc:1031 ../src/main/display.cc:1072
 #: ../src/main/display.cc:1157 ../ui/export-dialog.glade.h:14
+#: ../ui/export-dialog.gtkbuilder.h:13
 msgid "Chapter"
 msgstr "Chapitre"
 
@@ -1632,7 +1660,7 @@ msgid "Displaying Xiphos"
 msgstr "Affichage de Xiphos"
 
 #: ../src/main/module_dialogs.cc:189 ../src/main/previewer.cc:97
-#: ../ui/prefs.glade.h:39
+#: ../ui/prefs.glade.h:39 ../ui/prefs.gtkbuilder.h:31
 msgid "Previewer"
 msgstr "Aperçu"
 
@@ -1663,28 +1691,34 @@ msgid "Back to "
 msgstr "Revenir à "
 
 #: ../src/main/parallel_view.cc:383 ../ui/xi-menus.glade.h:68
+#: ../ui/xi-menus-popup.gtkbuilder.h:46
 msgid "Strong's Numbers"
 msgstr "Nombres de Strong"
 
 #: ../src/main/parallel_view.cc:393 ../ui/search-dialog.glade.h:102
-#: ../ui/xi-menus.glade.h:71
+#: ../ui/search-dialog.gtkbuilder.h:101 ../ui/xi-menus.glade.h:71
+#: ../ui/xi-menus-popup.gtkbuilder.h:49
 msgid "Footnotes"
 msgstr "Notes de bas de page"
 
 #: ../src/main/parallel_view.cc:403 ../ui/search-dialog.glade.h:99
-#: ../ui/xi-menus.glade.h:70
+#: ../ui/search-dialog.gtkbuilder.h:98 ../ui/xi-menus.glade.h:70
+#: ../ui/xi-menus-popup.gtkbuilder.h:48
 msgid "Morphological Tags"
 msgstr "Étiquettes morphologiques"
 
 #: ../src/main/parallel_view.cc:413 ../ui/xi-menus.glade.h:76
+#: ../ui/xi-menus-popup.gtkbuilder.h:53
 msgid "Hebrew Vowel Points"
 msgstr "Ponctuation des voyelles en hébreu"
 
 #: ../src/main/parallel_view.cc:423 ../ui/xi-menus.glade.h:77
+#: ../ui/xi-menus-popup.gtkbuilder.h:54
 msgid "Hebrew Cantillation"
 msgstr "Vocalisations en hébreu"
 
 #: ../src/main/parallel_view.cc:433 ../ui/xi-menus.glade.h:75
+#: ../ui/xi-menus-popup.gtkbuilder.h:52
 msgid "Greek Accents"
 msgstr "Accents grecs"
 
@@ -1693,10 +1727,12 @@ msgid "Cross-references"
 msgstr "Références croisées"
 
 #: ../src/main/parallel_view.cc:453 ../ui/xi-menus.glade.h:69
+#: ../ui/xi-menus-popup.gtkbuilder.h:47
 msgid "Lemmas"
 msgstr "Lemmes"
 
 #: ../src/main/parallel_view.cc:463 ../ui/xi-menus.glade.h:66
+#: ../ui/xi-menus-popup.gtkbuilder.h:44
 msgid "Headings"
 msgstr "En-têtes"
 
@@ -1705,10 +1741,12 @@ msgid "Morpheme Segmentation"
 msgstr "Segmentation de morphème"
 
 #: ../src/main/parallel_view.cc:487 ../ui/xi-menus.glade.h:67
+#: ../ui/xi-menus-popup.gtkbuilder.h:45
 msgid "Words of Christ in Red"
 msgstr "Paroles de Christ en rouge"
 
 #: ../src/main/parallel_view.cc:497 ../ui/xi-menus.glade.h:78
+#: ../ui/xi-menus-popup.gtkbuilder.h:55
 msgid "Transliteration"
 msgstr "Translittération"
 
@@ -1717,14 +1755,17 @@ msgid "Textual Variants"
 msgstr "Variantes du texte"
 
 #: ../src/main/parallel_view.cc:515 ../ui/xi-menus.glade.h:80
+#: ../ui/xi-menus-popup.gtkbuilder.h:57
 msgid "Primary Reading"
 msgstr "Lectures principales"
 
 #: ../src/main/parallel_view.cc:524 ../ui/xi-menus.glade.h:81
+#: ../ui/xi-menus-popup.gtkbuilder.h:58
 msgid "Secondary Reading"
 msgstr "Lectures secondaires"
 
 #: ../src/main/parallel_view.cc:533 ../ui/xi-menus.glade.h:82
+#: ../ui/xi-menus-popup.gtkbuilder.h:59
 msgid "All Readings"
 msgstr "Toutes les lectures"
 
@@ -2348,56 +2389,64 @@ msgstr ""
 msgid "Attempting to revert to previous save."
 msgstr "Tentative de retour à la sauvegarde précédente."
 
-#: ../ui/bookmarks.glade.h:1
+#: ../ui/bookmarks.glade.h:1 ../ui/bookmarks.gtkbuilder.h:1
 msgid "Add Bookmark"
 msgstr "Ajouter un signet"
 
-#: ../ui/bookmarks.glade.h:2 ../ui/markverse.glade.h:2
+#: ../ui/bookmarks.glade.h:2 ../ui/bookmarks.gtkbuilder.h:13
+#: ../ui/markverse.glade.h:2 ../ui/markverse.gtkbuilder.h:11
 msgid "Bookmark Dialog"
 msgstr "Signet"
 
-#: ../ui/bookmarks.glade.h:3 ../ui/markverse.glade.h:7
+#: ../ui/bookmarks.glade.h:3 ../ui/bookmarks.gtkbuilder.h:2
+#: ../ui/markverse.glade.h:7 ../ui/markverse.gtkbuilder.h:6
 msgid "Create new folder"
 msgstr "Crée un nouveau dossier"
 
-#: ../ui/bookmarks.glade.h:4 ../ui/markverse.glade.h:8
-#: ../ui/xi-menus.glade.h:106
+#: ../ui/bookmarks.glade.h:4 ../ui/bookmarks.gtkbuilder.h:4
+#: ../ui/markverse.glade.h:8 ../ui/markverse.gtkbuilder.h:8
+#: ../ui/xi-menus.glade.h:106 ../ui/xi-menus-popup.gtkbuilder.h:5
 msgid "New Folder"
 msgstr "Nouveau dossier"
 
-#: ../ui/bookmarks.glade.h:5
+#: ../ui/bookmarks.glade.h:5 ../ui/bookmarks.gtkbuilder.h:3
 msgid "New ..."
 msgstr "Nouveau..."
 
-#: ../ui/bookmarks.glade.h:6 ../ui/markverse.glade.h:11
+#: ../ui/bookmarks.glade.h:6 ../ui/bookmarks.gtkbuilder.h:5
+#: ../ui/markverse.glade.h:11 ../ui/markverse.gtkbuilder.h:10
 msgid "Cancel Bookmark"
 msgstr "Annuler un signet"
 
-#: ../ui/bookmarks.glade.h:7
+#: ../ui/bookmarks.glade.h:7 ../ui/bookmarks.gtkbuilder.h:6
 msgid "Label:"
 msgstr "Étiquette :"
 
-#: ../ui/bookmarks.glade.h:8
+#: ../ui/bookmarks.glade.h:8 ../ui/bookmarks.gtkbuilder.h:7
 msgid "Label Entry"
 msgstr "Entrée Étiquette"
 
-#: ../ui/bookmarks.glade.h:9 ../ui/markverse.glade.h:3
+#: ../ui/bookmarks.glade.h:9 ../ui/bookmarks.gtkbuilder.h:8
+#: ../ui/markverse.glade.h:3 ../ui/markverse.gtkbuilder.h:2
 msgid "Verse:"
 msgstr "Verset :"
 
-#: ../ui/bookmarks.glade.h:10 ../ui/markverse.glade.h:4
+#: ../ui/bookmarks.glade.h:10 ../ui/bookmarks.gtkbuilder.h:9
+#: ../ui/markverse.glade.h:4 ../ui/markverse.gtkbuilder.h:3
 msgid "Verse Entry"
 msgstr "Entrée Verset"
 
-#: ../ui/bookmarks.glade.h:11 ../ui/markverse.glade.h:5
+#: ../ui/bookmarks.glade.h:11 ../ui/bookmarks.gtkbuilder.h:10
+#: ../ui/markverse.glade.h:5 ../ui/markverse.gtkbuilder.h:4
 msgid "Module:"
 msgstr "Module :"
 
-#: ../ui/bookmarks.glade.h:12 ../ui/markverse.glade.h:6
+#: ../ui/bookmarks.glade.h:12 ../ui/bookmarks.gtkbuilder.h:11
+#: ../ui/markverse.glade.h:6 ../ui/markverse.gtkbuilder.h:5
 msgid "Module Entry"
 msgstr "Entrée Module"
 
-#: ../ui/bookmarks.glade.h:13
+#: ../ui/bookmarks.glade.h:13 ../ui/bookmarks.gtkbuilder.h:12
 msgid "Bookmark Folder Treeview"
 msgstr "Arborescence Dossier des signets"
 
@@ -2485,91 +2534,93 @@ msgstr "Crée un nouveau document"
 msgid "New Document"
 msgstr "Nouveau document"
 
-#: ../ui/export-dialog.glade.h:1 ../ui/xi-menus.glade.h:58
+#: ../ui/export-dialog.glade.h:1 ../ui/export-dialog.gtkbuilder.h:1
+#: ../ui/xi-menus.glade.h:58 ../ui/xi-menus-popup.gtkbuilder.h:37
 msgid "Copy/Export Passage"
 msgstr "Copier/exporter le passage"
 
-#: ../ui/export-dialog.glade.h:2
+#: ../ui/export-dialog.glade.h:2 ../ui/export-dialog.gtkbuilder.h:2
 msgid "Export Passage Cancel"
 msgstr "Abandon de l'export"
 
-#: ../ui/export-dialog.glade.h:3
+#: ../ui/export-dialog.glade.h:3 ../ui/export-dialog.gtkbuilder.h:3
 msgid "Export Passage OK"
 msgstr "Continuer l'export"
 
-#: ../ui/export-dialog.glade.h:5
+#: ../ui/export-dialog.glade.h:5 ../ui/export-dialog.gtkbuilder.h:5
 msgid "Version"
 msgstr "Version"
 
-#: ../ui/export-dialog.glade.h:6
+#: ../ui/export-dialog.glade.h:6 ../ui/export-dialog.gtkbuilder.h:6
 msgid ": "
 msgstr ": "
 
-#: ../ui/export-dialog.glade.h:7
+#: ../ui/export-dialog.glade.h:7 ../ui/export-dialog.gtkbuilder.h:7
 msgid "Key"
 msgstr "Clé"
 
-#: ../ui/export-dialog.glade.h:8
+#: ../ui/export-dialog.glade.h:8 ../ui/export-dialog.gtkbuilder.h:8
 msgid "<b>Copy</b>"
 msgstr "<b>Copier</b>"
 
-#: ../ui/export-dialog.glade.h:9
+#: ../ui/export-dialog.glade.h:9 ../ui/export-dialog.gtkbuilder.h:9
 msgid "<b>Export</b>"
 msgstr "<b>Exporter</b>"
 
-#: ../ui/export-dialog.glade.h:10
+#: ../ui/export-dialog.glade.h:10 ../ui/export-dialog.gtkbuilder.h:11
 msgid "Export complete book"
 msgstr "Exporter un livre entier"
 
-#: ../ui/export-dialog.glade.h:11 ../ui/prefs.glade.h:96
+#: ../ui/export-dialog.glade.h:11 ../ui/export-dialog.gtkbuilder.h:10
+#: ../ui/prefs.glade.h:96 ../ui/prefs.gtkbuilder.h:88
 msgid "Book"
 msgstr "Livre"
 
-#: ../ui/export-dialog.glade.h:12
+#: ../ui/export-dialog.glade.h:12 ../ui/export-dialog.gtkbuilder.h:12
 msgid "Book Radio Button"
 msgstr "Bouton radio Livre"
 
-#: ../ui/export-dialog.glade.h:13
+#: ../ui/export-dialog.glade.h:13 ../ui/export-dialog.gtkbuilder.h:14
 msgid "Export complete chapter"
 msgstr "Exporter un chapitre entier"
 
-#: ../ui/export-dialog.glade.h:15
+#: ../ui/export-dialog.glade.h:15 ../ui/export-dialog.gtkbuilder.h:15
 msgid "Chapter Radio Button"
 msgstr "Bouton radio Chapitre"
 
-#: ../ui/export-dialog.glade.h:16
+#: ../ui/export-dialog.glade.h:16 ../ui/export-dialog.gtkbuilder.h:17
 msgid "Export single verse"
 msgstr "Exporte un seul verset"
 
-#: ../ui/export-dialog.glade.h:17
+#: ../ui/export-dialog.glade.h:17 ../ui/export-dialog.gtkbuilder.h:16
 msgid "Verse"
 msgstr "Verset"
 
-#: ../ui/export-dialog.glade.h:18
+#: ../ui/export-dialog.glade.h:18 ../ui/export-dialog.gtkbuilder.h:18
 msgid "Verse Radio Button"
 msgstr "Bouton radio Verset"
 
-#: ../ui/export-dialog.glade.h:19
+#: ../ui/export-dialog.glade.h:19 ../ui/export-dialog.gtkbuilder.h:19
 msgid "Verse range"
 msgstr "Plage de versets"
 
-#: ../ui/export-dialog.glade.h:20
+#: ../ui/export-dialog.glade.h:20 ../ui/export-dialog.gtkbuilder.h:20
 msgid "<b>Format</b>"
 msgstr "<b>Format</b>"
 
-#: ../ui/export-dialog.glade.h:21
+#: ../ui/export-dialog.glade.h:21 ../ui/export-dialog.gtkbuilder.h:21
 msgid "Plain Text"
 msgstr "Texte simple"
 
-#: ../ui/export-dialog.glade.h:22
+#: ../ui/export-dialog.glade.h:22 ../ui/export-dialog.gtkbuilder.h:22
 msgid "Plain Text Radio Button"
 msgstr "Bouton radio Texte simple"
 
-#: ../ui/export-dialog.glade.h:23
+#: ../ui/export-dialog.glade.h:23 ../ui/export-dialog.gtkbuilder.h:23
 msgid "HTML"
 msgstr "HTML"
 
-#: ../ui/export-dialog.glade.h:24
+#: ../ui/export-dialog.glade.h:24 ../ui/export-dialog.gtkbuilder.h:24
 msgid "HTML Radio Button"
 msgstr "Bouton radio HTML"
 
@@ -2581,29 +2632,29 @@ msgstr ""
 "Indique si les numéros de versets doivent apparaître en ligne dans un texte "
 "sur plusieurs versets."
 
-#: ../ui/export-dialog.glade.h:26
+#: ../ui/export-dialog.glade.h:26 ../ui/export-dialog.gtkbuilder.h:25
 msgid "_Verse numbers in text"
 msgstr "Numéros de versets dans le texte"
 
-#: ../ui/export-dialog.glade.h:27
+#: ../ui/export-dialog.glade.h:27 ../ui/export-dialog.gtkbuilder.h:27
 msgid "Verse Number button"
 msgstr "Bouton numéro de verset"
 
-#: ../ui/export-dialog.glade.h:28
+#: ../ui/export-dialog.glade.h:28 ../ui/export-dialog.gtkbuilder.h:29
 msgid "Indicates whether reference is placed first or last."
 msgstr ""
 
-#: ../ui/export-dialog.glade.h:29
+#: ../ui/export-dialog.glade.h:29 ../ui/export-dialog.gtkbuilder.h:28
 #, fuzzy
 msgid "Reference last"
 msgstr "Entrée Référence"
 
-#: ../ui/export-dialog.glade.h:30
+#: ../ui/export-dialog.glade.h:30 ../ui/export-dialog.gtkbuilder.h:30
 #, fuzzy
 msgid "Reference last button"
 msgstr "Entrée Référence"
 
-#: ../ui/export-dialog.glade.h:31
+#: ../ui/export-dialog.glade.h:31 ../ui/export-dialog.gtkbuilder.h:32
 msgid "Indicates whether or not version name is included in reference."
 msgstr ""
 
@@ -2612,7 +2663,7 @@ msgstr ""
 msgid "Include Version"
 msgstr "Version de Sword"
 
-#: ../ui/export-dialog.glade.h:33
+#: ../ui/export-dialog.glade.h:33 ../ui/export-dialog.gtkbuilder.h:33
 #, fuzzy
 msgid "Version button"
 msgstr "Bouton radio Verset"
@@ -2621,37 +2672,524 @@ msgstr "Bouton radio Verset"
 msgid "Save Export As"
 msgstr "Enregistrer / Exporter sous"
 
-#: ../ui/markverse.glade.h:1
+#: ../ui/export-dialog.gtkbuilder.h:26
+#, fuzzy
+msgid "Indicates whether verse numbers should appear inline in the text."
+msgstr ""
+"Indique si les numéros de versets doivent apparaître en ligne dans un texte "
+"sur plusieurs versets."
+
+#: ../ui/export-dialog.gtkbuilder.h:31
+#, fuzzy
+msgid "Include version"
+msgstr "Version de Sword"
+
+#: ../ui/gtk2_webedit.ui.h:1 ../ui/gtk_webedit.ui.h:1
+#, fuzzy
+msgid "About Studypad"
+msgstr "Ouvrir le bloc-notes"
+
+#: ../ui/gtk2_webedit.ui.h:3 ../ui/gtk_webedit.ui.h:3
+#, fuzzy
+msgid "Open about dialog"
+msgstr "Ouvrir dans une fenêtre"
+
+#: ../ui/gtk2_webedit.ui.h:4 ../ui/gtk_webedit.ui.h:4 ../ui/prefs.glade.h:76
+#: ../ui/prefs.gtkbuilder.h:68
+msgid "Bold"
+msgstr "Gras"
+
+#: ../ui/gtk2_webedit.ui.h:5 ../ui/gtk_webedit.ui.h:5
+#, fuzzy
+msgid "Make selection bold"
+msgstr "Synthèse vocale du texte sélectionné"
+
+#: ../ui/gtk2_webedit.ui.h:6 ../ui/gtk_webedit.ui.h:6
+msgid "Copy"
+msgstr "Copier"
+
+#: ../ui/gtk2_webedit.ui.h:7 ../ui/gtk_webedit.ui.h:7
+msgid "Copy selection to clipboard"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:8 ../ui/gtk_webedit.ui.h:8
+msgid "Cut"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:9 ../ui/gtk_webedit.ui.h:9
+#, fuzzy
+msgid "Cut selection"
+msgstr "Sélection de module"
+
+#: ../ui/gtk2_webedit.ui.h:10 ../ui/gtk_webedit.ui.h:10
+msgid "Decrease indent"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:11 ../ui/gtk_webedit.ui.h:11
+msgid "Decrease"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:12 ../ui/gtk_webedit.ui.h:12
+msgid "Decrease paragraph indent"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:13 ../ui/gtk_webedit.ui.h:13
+#, fuzzy
+msgid "Delete selection"
+msgstr "Supprime la plage sélectionnée"
+
+#: ../ui/gtk2_webedit.ui.h:15 ../ui/gtk_webedit.ui.h:15
+#, fuzzy
+msgid "Remove seledtion"
+msgstr "Supprimer l'élément sélectionné"
+
+#: ../ui/gtk2_webedit.ui.h:16 ../ui/gtk_webedit.ui.h:16
+#: ../ui/xi-menus.glade.h:112 ../ui/xi-menus-popup.gtkbuilder.h:11
+msgid "Delete Item"
+msgstr "Supprimer l'élément"
+
+#: ../ui/gtk2_webedit.ui.h:17 ../ui/gtk_webedit.ui.h:17
+#, fuzzy
+msgid "Delete current item"
+msgstr "Supprime la note en cours"
+
+#: ../ui/gtk2_webedit.ui.h:19 ../ui/gtk_webedit.ui.h:19
+#, fuzzy
+msgid "Search current document"
+msgstr "La requête s'exécute sur tous les versets"
+
+#: ../ui/gtk2_webedit.ui.h:20 ../ui/gtk_webedit.ui.h:20
+#, fuzzy
+msgid "Font"
+msgstr "Polices"
+
+#: ../ui/gtk2_webedit.ui.h:21 ../ui/gtk_webedit.ui.h:21
+#, fuzzy
+msgid "Change font"
+msgstr "Change la police de"
+
+#: ../ui/gtk2_webedit.ui.h:22 ../ui/gtk_webedit.ui.h:22
+msgid "Increase indent"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:23 ../ui/gtk_webedit.ui.h:23
+msgid "Increase"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:24 ../ui/gtk_webedit.ui.h:24
+msgid "Increase paragraph indent"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:25 ../ui/gtk_webedit.ui.h:25
+#, fuzzy
+msgid "Insert emoticon"
+msgstr "Insérer un lien"
+
+#: ../ui/gtk2_webedit.ui.h:26 ../ui/gtk_webedit.ui.h:26
+msgid "Emoticon"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:27 ../ui/gtk_webedit.ui.h:27
+#, fuzzy
+msgid "Insert an emoticon"
+msgstr "Insérer un lien"
+
+#: ../ui/gtk2_webedit.ui.h:28 ../ui/gtk_webedit.ui.h:28
+#, fuzzy
+msgid "Insert image"
+msgstr "Insérer un lien"
+
+#: ../ui/gtk2_webedit.ui.h:29 ../ui/gtk_webedit.ui.h:29
+#, fuzzy
+msgid "Image"
+msgstr "Images"
+
+#: ../ui/gtk2_webedit.ui.h:30 ../ui/gtk_webedit.ui.h:30
+msgid "Insert image at cursor"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:31 ../ui/gtk_webedit.ui.h:31
+#, fuzzy
+msgid "Insert link"
+msgstr "Insérer un lien"
+
+#: ../ui/gtk2_webedit.ui.h:32 ../ui/gtk_webedit.ui.h:32
+#, fuzzy
+msgid "Link"
+msgstr "Liens"
+
+#: ../ui/gtk2_webedit.ui.h:33 ../ui/gtk_webedit.ui.h:33
+#, fuzzy
+msgid "Insert a link"
+msgstr "Insérer un lien"
+
+#: ../ui/gtk2_webedit.ui.h:34 ../ui/gtk_webedit.ui.h:34
+#, fuzzy
+msgid "Insert Outline"
+msgstr "Insérer un lien"
+
+#: ../ui/gtk2_webedit.ui.h:35 ../ui/gtk_webedit.ui.h:35
+#, fuzzy
+msgid "Outline"
+msgstr "Thême structuré"
+
+#: ../ui/gtk2_webedit.ui.h:36 ../ui/gtk_webedit.ui.h:36
+#, fuzzy
+msgid "Insert outline"
+msgstr "Insérer un lien"
+
+#: ../ui/gtk2_webedit.ui.h:37 ../ui/gtk_webedit.ui.h:37
+#, fuzzy
+msgid "Insert rule"
+msgstr "Insérer un lien"
+
+#: ../ui/gtk2_webedit.ui.h:38 ../ui/gtk_webedit.ui.h:38
+msgid "Rule"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:39 ../ui/gtk_webedit.ui.h:39
+msgid "Insert horizontal rule"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:40 ../ui/gtk_webedit.ui.h:40
+#, fuzzy
+msgid "Xiphos Link"
+msgstr "Xiphos :"
+
+#: ../ui/gtk2_webedit.ui.h:41 ../ui/gtk_webedit.ui.h:41
+#, fuzzy
+msgid "Xiphos"
+msgstr "Xiphos :"
+
+#: ../ui/gtk2_webedit.ui.h:42 ../ui/gtk_webedit.ui.h:42
+#, fuzzy
+msgid "Insert a link to a sword module"
+msgstr "Installer ces modules ?"
+
+#: ../ui/gtk2_webedit.ui.h:43 ../ui/gtk_webedit.ui.h:43
+#, fuzzy
+msgid "Insert table"
+msgstr "Insérer un lien"
+
+#: ../ui/gtk2_webedit.ui.h:44 ../ui/gtk_webedit.ui.h:44
+msgid "Table"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:45 ../ui/gtk_webedit.ui.h:45
+msgid "Insert a table"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:46 ../ui/gtk_webedit.ui.h:46
+msgid "Italic"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:47 ../ui/gtk_webedit.ui.h:47
+msgid "Change selection to italic font"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:48 ../ui/gtk_webedit.ui.h:48
+msgid "Center"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:49 ../ui/gtk_webedit.ui.h:49
+msgid "Center justify paragraph"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:50 ../ui/gtk_webedit.ui.h:50
+msgid "Full"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:51 ../ui/gtk_webedit.ui.h:51
+msgid "full justify"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:52 ../ui/gtk_webedit.ui.h:52
+msgid "Left"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:53 ../ui/gtk_webedit.ui.h:53
+msgid "Left justify paragraph"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:54 ../ui/gtk_webedit.ui.h:54
+msgid "Right"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:55 ../ui/gtk_webedit.ui.h:55
+msgid "Right justify paragraph"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:57 ../ui/gtk_webedit.ui.h:57
+#, fuzzy
+msgid "Create new file"
+msgstr "Crée un nouveau dossier"
+
+#: ../ui/gtk2_webedit.ui.h:59 ../ui/gtk_webedit.ui.h:59
+#, fuzzy
+msgid "Open file"
+msgstr "Ouvrir le module"
+
+#: ../ui/gtk2_webedit.ui.h:60 ../ui/gtk_webedit.ui.h:60
+msgid "Paste"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:61 ../ui/gtk_webedit.ui.h:61
+msgid "Paste clipboard at cursor."
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:62 ../ui/gtk_webedit.ui.h:62
+#, fuzzy
+msgid "Print Document"
+msgstr "Imprime ce document"
+
+#: ../ui/gtk2_webedit.ui.h:63 ../ui/gtk_webedit.ui.h:63
+msgid "Print"
+msgstr "Imprimer..."
+
+#: ../ui/gtk2_webedit.ui.h:64 ../ui/gtk_webedit.ui.h:64
+#, fuzzy
+msgid "Print the current document"
+msgstr "Imprime ce document"
+
+#: ../ui/gtk2_webedit.ui.h:65 ../ui/gtk_webedit.ui.h:65
+msgid "Print Preview"
+msgstr "Aperçu avant impression"
+
+#: ../ui/gtk2_webedit.ui.h:66 ../ui/gtk_webedit.ui.h:66
+#, fuzzy
+msgid "Preview"
+msgstr "_Aperçu"
+
+#: ../ui/gtk2_webedit.ui.h:67 ../ui/gtk_webedit.ui.h:67
+#, fuzzy
+msgid "Print preview of current document"
+msgstr "Imprime ce document"
+
+#: ../ui/gtk2_webedit.ui.h:68 ../ui/gtk_webedit.ui.h:68
+#, fuzzy
+msgid "Quit"
+msgstr "_Quitter"
+
+#: ../ui/gtk2_webedit.ui.h:69 ../ui/gtk_webedit.ui.h:69
+#, fuzzy
+msgid "Shut down editor"
+msgstr "Modifier le commentaire"
+
+#: ../ui/gtk2_webedit.ui.h:70 ../ui/gtk_webedit.ui.h:70
+msgid "Redo"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:71 ../ui/gtk_webedit.ui.h:71
+msgid "Redo last undo"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:72 ../ui/gtk_webedit.ui.h:72
+msgid "Find and replace"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:73 ../ui/gtk_webedit.ui.h:73
+msgid "Replace"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:74 ../ui/gtk_webedit.ui.h:74
+#, fuzzy
+msgid "Search and replace"
+msgstr "Critères"
+
+#: ../ui/gtk2_webedit.ui.h:76 ../ui/gtk_webedit.ui.h:76
+#, fuzzy
+msgid "Save changes to file"
+msgstr "Voulez-vous enregistrer les modifications apportées au document"
+
+#: ../ui/gtk2_webedit.ui.h:77 ../ui/gtk_webedit.ui.h:77
+#, fuzzy
+msgid "Save as"
+msgstr "Enregistrer sous"
+
+#: ../ui/gtk2_webedit.ui.h:78 ../ui/gtk_webedit.ui.h:78
+#, fuzzy
+msgid "Save file as ..."
+msgstr "Enregistrer _sous..."
+
+#: ../ui/gtk2_webedit.ui.h:79 ../ui/gtk_webedit.ui.h:79
+msgid "Strikethrough"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:80 ../ui/gtk_webedit.ui.h:80
+msgid "Strikethrough selection"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:81 ../ui/gtk_webedit.ui.h:81
+msgid "Underline"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:82 ../ui/gtk_webedit.ui.h:82
+#, fuzzy
+msgid "Underline selection"
+msgstr "Sélection de module"
+
+#: ../ui/gtk2_webedit.ui.h:83 ../ui/gtk_webedit.ui.h:83
+msgid "Undo"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:84 ../ui/gtk_webedit.ui.h:84
+msgid "Undo last change"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:85 ../ui/gtk_webedit.ui.h:85
+#, fuzzy
+msgid "Editor"
+msgstr "Édition"
+
+#: ../ui/gtk2_webedit.ui.h:87 ../ui/gtk_webedit.ui.h:87
+#, fuzzy
+msgid "Recent files"
+msgstr "Enregistre le fichier le fichier en cours sous"
+
+#: ../ui/gtk2_webedit.ui.h:88 ../ui/gtk_webedit.ui.h:88
+#: ../ui/xi-menus.glade.h:9 ../ui/xi-menus.gtkbuilder.h:6
+msgid "_Edit"
+msgstr "_Édition"
+
+#: ../ui/gtk2_webedit.ui.h:90 ../ui/gtk_webedit.ui.h:90
+#: ../ui/xi-menus.glade.h:40 ../ui/xi-menus.gtkbuilder.h:25
+msgid "_Help"
+msgstr "_Aide"
+
+#: ../ui/gtk2_webedit.ui.h:91 ../ui/gtk_webedit.ui.h:91
+msgid "toolbutton1"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:92 ../ui/gtk_webedit.ui.h:92
+msgid "toolbutton10"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:93 ../ui/gtk_webedit.ui.h:93
+msgid "toolbutton3"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:94 ../ui/gtk_webedit.ui.h:94
+msgid "toolbutton2"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:95 ../ui/gtk_webedit.ui.h:95
+msgid "toolbutton4"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:96 ../ui/gtk_webedit.ui.h:96
+msgid "toolbutton6"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:97 ../ui/gtk_webedit.ui.h:97
+msgid "toolbutton7"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:98 ../ui/gtk_webedit.ui.h:98
+#, fuzzy
+msgid "Normal"
+msgstr "Texte normal"
+
+#: ../ui/gtk2_webedit.ui.h:99 ../ui/gtk_webedit.ui.h:99
+msgid "Header 1"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:100 ../ui/gtk_webedit.ui.h:100
+msgid "Header 2"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:101 ../ui/gtk_webedit.ui.h:101
+msgid "Header 3"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:102 ../ui/gtk_webedit.ui.h:102
+msgid "Header 4"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:103 ../ui/gtk_webedit.ui.h:103
+msgid "Header 5"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:104 ../ui/gtk_webedit.ui.h:104
+msgid "Header 6"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:105 ../ui/gtk_webedit.ui.h:105
+msgid "Address"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:106 ../ui/gtk_webedit.ui.h:106
+msgid "Preformatted"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:107 ../ui/gtk_webedit.ui.h:107
+#, fuzzy
+msgid "Bulleted List"
+msgstr "Supprimer la liste?"
+
+#: ../ui/gtk2_webedit.ui.h:108 ../ui/gtk_webedit.ui.h:108
+msgid "Roman Numeral List"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:109 ../ui/gtk_webedit.ui.h:109
+#, fuzzy
+msgid "Numbered List"
+msgstr "_Versets"
+
+#: ../ui/gtk2_webedit.ui.h:110 ../ui/gtk_webedit.ui.h:110
+msgid "Alphabetical List"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:111 ../ui/gtk_webedit.ui.h:111
+msgid "toolbutton11"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:112 ../ui/gtk_webedit.ui.h:112
+msgid "toolbutton12"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:113 ../ui/gtk_webedit.ui.h:113
+msgid "Set font color of selected text."
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:114 ../ui/gtk_webedit.ui.h:114
+msgid "Highlight selected text by setting background color."
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:115 ../ui/gtk_webedit.ui.h:115
+msgid "toolbutton9"
+msgstr ""
+
+#: ../ui/markverse.glade.h:1 ../ui/markverse.gtkbuilder.h:1
 msgid "Mark/Unmark Verse"
 msgstr "Annoter ce verset"
 
-#: ../ui/markverse.glade.h:9
+#: ../ui/markverse.glade.h:9 ../ui/markverse.gtkbuilder.h:7
 msgid "Mark"
 msgstr "Annoter"
 
-#: ../ui/markverse.glade.h:10
+#: ../ui/markverse.glade.h:10 ../ui/markverse.gtkbuilder.h:9
 msgid "Unmark"
 msgstr "Supprimer"
 
-#: ../ui/module-manager.glade.h:1
+#: ../ui/module-manager.glade.h:1 ../ui/module-manager.gtkbuilder.h:1
 msgid "Module Manager"
 msgstr "Gérer les modules"
 
-#: ../ui/module-manager.glade.h:2
+#: ../ui/module-manager.glade.h:2 ../ui/module-manager.gtkbuilder.h:2
 msgid "_View Intro"
 msgstr "_Voir l'intro"
 
-#: ../ui/module-manager.glade.h:3
+#: ../ui/module-manager.glade.h:3 ../ui/module-manager.gtkbuilder.h:3
 msgid "Open a brief introductory explanation of how the Module Manager works."
 msgstr ""
 "Ouvre une brève explication introduisant la façon dont le gestionnaire de "
 "modules fonctionne."
 
-#: ../ui/module-manager.glade.h:4
+#: ../ui/module-manager.glade.h:4 ../ui/module-manager.gtkbuilder.h:4
 msgid "_Load Standard"
 msgstr "_Charger défaut"
 
-#: ../ui/module-manager.glade.h:5
+#: ../ui/module-manager.glade.h:5 ../ui/module-manager.gtkbuilder.h:5
 msgid ""
 "Load and synchronize the standard set of known repositories, as maintained "
 "at crosswire.org, with your current remote sources."
@@ -2659,7 +3197,7 @@ msgstr ""
 "Charge et synchronise l'ensemble type de dépots référencés, maintenu à "
 "crosswire.org, avec vos dépots actuels."
 
-#: ../ui/module-manager.glade.h:6
+#: ../ui/module-manager.glade.h:6 ../ui/module-manager.gtkbuilder.h:6
 msgid ""
 "Refresh Xiphos' knowledge of what modules are available at the selected "
 "remote repository"
@@ -2667,71 +3205,71 @@ msgstr ""
 "Actualise l'information dans « Xiphos » au sujet des modules disponibles "
 "dans les dépôts."
 
-#: ../ui/module-manager.glade.h:7
+#: ../ui/module-manager.glade.h:7 ../ui/module-manager.gtkbuilder.h:8
 msgid "_Install"
 msgstr "_Installer"
 
-#: ../ui/module-manager.glade.h:8
+#: ../ui/module-manager.glade.h:8 ../ui/module-manager.gtkbuilder.h:7
 msgid "Install or update the selected modules"
 msgstr "Installer ou mettre à jour les modules sélectionnés"
 
-#: ../ui/module-manager.glade.h:9
+#: ../ui/module-manager.glade.h:9 ../ui/module-manager.gtkbuilder.h:9
 msgid "Remove the selected modules from your system"
 msgstr "Supprime les modules sélectionnés de votre système"
 
-#: ../ui/module-manager.glade.h:10
+#: ../ui/module-manager.glade.h:10 ../ui/module-manager.gtkbuilder.h:10
 msgid "_Archive"
 msgstr "_Archiver"
 
-#: ../ui/module-manager.glade.h:11
+#: ../ui/module-manager.glade.h:11 ../ui/module-manager.gtkbuilder.h:11
 msgid "Create a zip archive of the selected modules."
 msgstr "Crée une archive zip des modules sélectionnés."
 
-#: ../ui/module-manager.glade.h:12
+#: ../ui/module-manager.glade.h:12 ../ui/module-manager.gtkbuilder.h:12
 msgid "_Index"
 msgstr "_Indexer"
 
-#: ../ui/module-manager.glade.h:13
+#: ../ui/module-manager.glade.h:13 ../ui/module-manager.gtkbuilder.h:13
 msgid ""
 "Build an index of the selected modules, for optimized (\"lucene\") searching."
 msgstr ""
 "Construit un index des modules sélectionnés, pour une recherche optimisée "
 "(« lucène »)."
 
-#: ../ui/module-manager.glade.h:14
+#: ../ui/module-manager.glade.h:14 ../ui/module-manager.gtkbuilder.h:14
 msgid "_Delete Index"
 msgstr "_Désindexer"
 
-#: ../ui/module-manager.glade.h:15
+#: ../ui/module-manager.glade.h:15 ../ui/module-manager.gtkbuilder.h:15
 msgid "Delete the fast-search index of the selected modules."
 msgstr "Supprime l'index de recherche optimisée des modules sélectionnés."
 
-#: ../ui/module-manager.glade.h:16
+#: ../ui/module-manager.glade.h:16 ../ui/module-manager.gtkbuilder.h:16
 msgid "Continue"
 msgstr "Continuer"
 
 #. do not translate <b> and </b> they are html formating
-#: ../ui/module-manager.glade.h:18
+#: ../ui/module-manager.glade.h:18 ../ui/module-manager.gtkbuilder.h:18
 msgid "<b>Sword</b>"
 msgstr "<b>Sword</b>"
 
-#: ../ui/module-manager.glade.h:19
+#: ../ui/module-manager.glade.h:19 ../ui/module-manager.gtkbuilder.h:19
 msgid "<b>Module Manager</b>"
 msgstr "<b>Gestionnaire de modules</b>"
 
-#: ../ui/module-manager.glade.h:20
+#: ../ui/module-manager.glade.h:20 ../ui/module-manager.gtkbuilder.h:20
 msgid "<b>WARNING:</b> If you live in a persecuted country use with care."
 msgstr "<b>Attention :</b> Prudence dans les pays de persécution"
 
-#: ../ui/module-manager.glade.h:21
+#: ../ui/module-manager.glade.h:21 ../ui/module-manager.gtkbuilder.h:21
 msgid "<b>Add and Remove Sources</b>"
 msgstr "<b>Gestion des dépôts de modules </b>"
 
-#: ../ui/module-manager.glade.h:22
+#: ../ui/module-manager.glade.h:22 ../ui/module-manager.gtkbuilder.h:22
 msgid "Current local sources"
 msgstr "Dépôts locaux"
 
-#: ../ui/module-manager.glade.h:23
+#: ../ui/module-manager.glade.h:23 ../ui/module-manager.gtkbuilder.h:23
 msgid ""
 "Add a local folder as an install source, typically on a cdrom or flash "
 "drive.  Such a folder contains subfolders \"mods.d\" and \"modules\"."
@@ -2740,15 +3278,15 @@ msgstr ""
 "sur un CD-ROM ou en flash. Un tel répertoire contient les sous-dossiers "
 "« mods.d » et « modules »."
 
-#: ../ui/module-manager.glade.h:24
+#: ../ui/module-manager.glade.h:24 ../ui/module-manager.gtkbuilder.h:24
 msgid "Remove one of your local folders as an install source."
 msgstr "Supprime un répertoire local en tant que dépot."
 
-#: ../ui/module-manager.glade.h:25
+#: ../ui/module-manager.glade.h:25 ../ui/module-manager.gtkbuilder.h:25
 msgid "Current Remote Sources"
 msgstr "Dépôts distants"
 
-#: ../ui/module-manager.glade.h:26
+#: ../ui/module-manager.glade.h:26 ../ui/module-manager.gtkbuilder.h:26
 msgid ""
 "Add a custom remote install source. You must know its hostname and the "
 "folder where its repository lives."
@@ -2756,43 +3294,43 @@ msgstr ""
 "Ajoute un dépot d'installation à distance personnalisé. Il est nécessaire de "
 "connaître au préalable le nom de domaine et le répertoire de stockage."
 
-#: ../ui/module-manager.glade.h:27
+#: ../ui/module-manager.glade.h:27 ../ui/module-manager.gtkbuilder.h:27
 msgid "Remove a remote install source."
 msgstr "Supprimer un dépôt distant"
 
-#: ../ui/module-manager.glade.h:28
+#: ../ui/module-manager.glade.h:28 ../ui/module-manager.gtkbuilder.h:28
 msgid "<b>Install Source</b>"
 msgstr "<b>Source des dépôts</b>"
 
-#: ../ui/module-manager.glade.h:29
+#: ../ui/module-manager.glade.h:29 ../ui/module-manager.gtkbuilder.h:29
 msgid "Local"
 msgstr "Dépôt local"
 
-#: ../ui/module-manager.glade.h:30
+#: ../ui/module-manager.glade.h:30 ../ui/module-manager.gtkbuilder.h:30
 msgid "Remote"
 msgstr "Dépôt distant"
 
-#: ../ui/module-manager.glade.h:31
+#: ../ui/module-manager.glade.h:31 ../ui/module-manager.gtkbuilder.h:31
 msgid "<b>Install Destination</b>"
 msgstr "<b>Dossier d'installation</b>"
 
-#: ../ui/module-manager.glade.h:32
+#: ../ui/module-manager.glade.h:32 ../ui/module-manager.gtkbuilder.h:32
 msgid "<i>Personal area, for your use only:</i>"
 msgstr "<i>Espace personnel, pour votre usage uniquement</i>"
 
-#: ../ui/module-manager.glade.h:33
+#: ../ui/module-manager.glade.h:33 ../ui/module-manager.gtkbuilder.h:33
 msgid "Home dir"
 msgstr "Dossier personnel"
 
-#: ../ui/module-manager.glade.h:34
+#: ../ui/module-manager.glade.h:34 ../ui/module-manager.gtkbuilder.h:34
 msgid "<i>System area, for all users:</i>"
 msgstr "<i>Espace système, pour tous les utilisateurs</i>"
 
-#: ../ui/module-manager.glade.h:35
+#: ../ui/module-manager.glade.h:35 ../ui/module-manager.gtkbuilder.h:35
 msgid "Sword sys dir"
 msgstr "Rép Sword-sys"
 
-#: ../ui/module-manager.glade.h:36
+#: ../ui/module-manager.glade.h:36 ../ui/module-manager.gtkbuilder.h:36
 msgid ""
 "<b>Warning:</b> If you live in a persecuted country and do not wish to risk "
 "detection you should NOT use  the remote installation feature! "
@@ -2800,11 +3338,11 @@ msgstr ""
 "<b>Attention :</b> Ne pas utiliser les dépôts distants depuis les pays où il "
 "est dangereux d'être repéré! "
 
-#: ../ui/module-manager.glade.h:37
+#: ../ui/module-manager.glade.h:37 ../ui/module-manager.gtkbuilder.h:37
 msgid "Local Install Folder"
 msgstr "Répertoire local d'installation"
 
-#: ../ui/navbar_versekey.glade.h:1
+#: ../ui/navbar_versekey.glade.h:1 ../ui/navbar_versekey.gtkbuilder.h:1
 msgid "Drop down history list"
 msgstr "Historique des versets consultés"
 
@@ -2812,11 +3350,11 @@ msgstr "Historique des versets consultés"
 msgid "Choose book to display"
 msgstr "Sélection du livre à afficher"
 
-#: ../ui/navbar_versekey.glade.h:3
+#: ../ui/navbar_versekey.glade.h:3 ../ui/navbar_versekey.gtkbuilder.h:2
 msgid "Book Selector Button"
 msgstr "Bouton Sélection de livre"
 
-#: ../ui/navbar_versekey.glade.h:4
+#: ../ui/navbar_versekey.glade.h:4 ../ui/navbar_versekey.gtkbuilder.h:3
 msgid "<b>Revelation of John</b>"
 msgstr "<b>Apocalypse</b>"
 
@@ -2824,11 +3362,11 @@ msgstr "<b>Apocalypse</b>"
 msgid "Choose chapter to display"
 msgstr "Sélection du chapitre à afficher"
 
-#: ../ui/navbar_versekey.glade.h:6
+#: ../ui/navbar_versekey.glade.h:6 ../ui/navbar_versekey.gtkbuilder.h:4
 msgid "Toggle Chapter Button"
 msgstr "Bouton Bascule chapitre"
 
-#: ../ui/navbar_versekey.glade.h:7
+#: ../ui/navbar_versekey.glade.h:7 ../ui/navbar_versekey.gtkbuilder.h:5
 msgid "1"
 msgstr "1"
 
@@ -2836,81 +3374,81 @@ msgstr "1"
 msgid "Choose Verse to display"
 msgstr "Sélection du verset à afficher"
 
-#: ../ui/navbar_versekey.glade.h:9
+#: ../ui/navbar_versekey.glade.h:9 ../ui/navbar_versekey.gtkbuilder.h:6
 msgid "Toggle Verse Button"
 msgstr "Bouton Bascule verset"
 
-#: ../ui/navbar_versekey.glade.h:10
+#: ../ui/navbar_versekey.glade.h:10 ../ui/navbar_versekey.gtkbuilder.h:7
 msgid "Enter a Verse reference in Book 1:1 format and press Return"
 msgstr ""
 "Saisir une référence au format : Livre 1.1 (ex : Jn 3.16)\n"
 "puis valider par appui sur la touche Entrée"
 
-#: ../ui/navbar_versekey.glade.h:11
+#: ../ui/navbar_versekey.glade.h:11 ../ui/navbar_versekey.gtkbuilder.h:8
 msgid "Reference Entry"
 msgstr "Entrée Référence"
 
-#: ../ui/prefs.glade.h:2
+#: ../ui/prefs.glade.h:2 ../ui/prefs.gtkbuilder.h:2
 msgid "Cover"
 msgstr "Accueil"
 
-#: ../ui/prefs.glade.h:3
+#: ../ui/prefs.glade.h:3 ../ui/prefs.gtkbuilder.h:3
 msgid "<b>Font Colors</b>"
 msgstr "<b>Couleurs des polices</b>"
 
-#: ../ui/prefs.glade.h:4
+#: ../ui/prefs.glade.h:4 ../ui/prefs.gtkbuilder.h:4
 msgid "Background"
 msgstr "Arrière-plan"
 
-#: ../ui/prefs.glade.h:5
+#: ../ui/prefs.glade.h:5 ../ui/prefs.gtkbuilder.h:5
 msgid "Foreground"
 msgstr "Avant-plan"
 
-#: ../ui/prefs.glade.h:6
+#: ../ui/prefs.glade.h:6 ../ui/prefs.gtkbuilder.h:6
 msgid "Current Verse"
 msgstr "Verset en cours"
 
-#: ../ui/prefs.glade.h:7
+#: ../ui/prefs.glade.h:7 ../ui/prefs.gtkbuilder.h:7
 msgid "Verse Number"
 msgstr "Numéros de verset"
 
-#: ../ui/prefs.glade.h:8
+#: ../ui/prefs.glade.h:8 ../ui/prefs.gtkbuilder.h:8
 msgid "Links"
 msgstr "Liens"
 
-#: ../ui/prefs.glade.h:9
+#: ../ui/prefs.glade.h:9 ../ui/prefs.gtkbuilder.h:9
 msgid "Highlight Foreground"
 msgstr "Avant-plan surlignement"
 
-#: ../ui/prefs.glade.h:10
+#: ../ui/prefs.glade.h:10 ../ui/prefs.gtkbuilder.h:10
 msgid "Highlight Background"
 msgstr "Arrière-plan surlignement"
 
-#: ../ui/prefs.glade.h:11
+#: ../ui/prefs.glade.h:11 ../ui/prefs.gtkbuilder.h:11
 msgid "Invert color pairs"
 msgstr "Inverser les paires de couleurs"
 
-#: ../ui/prefs.glade.h:12
+#: ../ui/prefs.glade.h:12 ../ui/prefs.gtkbuilder.h:12
 msgid "Normal Text"
 msgstr "Texte normal"
 
-#: ../ui/prefs.glade.h:13
+#: ../ui/prefs.glade.h:13 ../ui/prefs.gtkbuilder.h:13
 msgid "Highlight"
 msgstr "Surlignement"
 
-#: ../ui/prefs.glade.h:14
+#: ../ui/prefs.glade.h:14 ../ui/prefs.gtkbuilder.h:14
 msgid "Font Colors"
 msgstr "Couleurs"
 
-#: ../ui/prefs.glade.h:15
+#: ../ui/prefs.glade.h:15 ../ui/prefs.gtkbuilder.h:15
 msgid "<b>Font Sizes</b>"
 msgstr "<b>Tailles des polices</b>"
 
-#: ../ui/prefs.glade.h:16
+#: ../ui/prefs.glade.h:16 ../ui/prefs.gtkbuilder.h:16
 msgid "All displayed font sizes are relative to this choice"
 msgstr "Toutes les tailles de police sont affichés par rapport à ce choix"
 
-#: ../ui/prefs.glade.h:17
+#: ../ui/prefs.glade.h:17 ../ui/prefs.gtkbuilder.h:17
 msgid "Base font size"
 msgstr "Taille police de base"
 
@@ -2934,15 +3472,15 @@ msgstr ""
 "+4\n"
 "+5"
 
-#: ../ui/prefs.glade.h:26
+#: ../ui/prefs.glade.h:26 ../ui/prefs.gtkbuilder.h:18
 msgid "Commonly -1, to make verse numbers less obtrusive"
 msgstr "Généralement -1, pour rendre les numéros de versets plus discret"
 
-#: ../ui/prefs.glade.h:27
+#: ../ui/prefs.glade.h:27 ../ui/prefs.gtkbuilder.h:19
 msgid "Verse number size"
 msgstr "Taille du numéro de verset"
 
-#: ../ui/prefs.glade.h:28
+#: ../ui/prefs.glade.h:28 ../ui/prefs.gtkbuilder.h:20
 msgid ""
 "Name and size choice for any module in a given language; still overridden by "
 "a specific choice on a particular module"
@@ -2950,27 +3488,27 @@ msgstr ""
 "Choix de police et taille pour n'importe quel module dans une langue donnée; "
 "toujours remplacées par un choix spécifique sur une module particulier"
 
-#: ../ui/prefs.glade.h:29
+#: ../ui/prefs.glade.h:29 ../ui/prefs.gtkbuilder.h:21
 msgid "Font preferences, per language"
 msgstr "Préférences de police, par langue"
 
-#: ../ui/prefs.glade.h:30
+#: ../ui/prefs.glade.h:30 ../ui/prefs.gtkbuilder.h:22
 msgid "Language Font Combo"
 msgstr "Boite combinée Police de langue"
 
-#: ../ui/prefs.glade.h:31
+#: ../ui/prefs.glade.h:31 ../ui/prefs.gtkbuilder.h:23
 msgid "Font Misc"
 msgstr "Divers"
 
-#: ../ui/prefs.glade.h:32
+#: ../ui/prefs.glade.h:32 ../ui/prefs.gtkbuilder.h:24
 msgid "<b>Tabs</b>"
 msgstr "<b>Onglets</b>"
 
-#: ../ui/prefs.glade.h:33
+#: ../ui/prefs.glade.h:33 ../ui/prefs.gtkbuilder.h:25
 msgid "Use tabbed browsing"
 msgstr "Utiliser les onglets"
 
-#: ../ui/prefs.glade.h:34
+#: ../ui/prefs.glade.h:34 ../ui/prefs.gtkbuilder.h:26
 msgid ""
 "Single selection of Bible+commentary+book+dictionary, or many sets of such "
 "selections in a tabbed interface"
@@ -2978,51 +3516,51 @@ msgstr ""
 "Fenêtre unique d'une Bible + commentaire + livre + dictionnaire, ou de "
 "nombreux ensembles de telles sélections dans une interface à onglets"
 
-#: ../ui/prefs.glade.h:35
+#: ../ui/prefs.glade.h:35 ../ui/prefs.gtkbuilder.h:27
 msgid "Use tabbed browsing Checkbox"
 msgstr "Case à cocher Utiliser les onglets"
 
-#: ../ui/prefs.glade.h:36
+#: ../ui/prefs.glade.h:36 ../ui/prefs.gtkbuilder.h:28
 msgid "<b>Show</b>"
 msgstr "<b>Volets</b>"
 
-#: ../ui/prefs.glade.h:37
+#: ../ui/prefs.glade.h:37 ../ui/prefs.gtkbuilder.h:29
 msgid "Bible Texts"
 msgstr "Texte biblique"
 
-#: ../ui/prefs.glade.h:38
+#: ../ui/prefs.glade.h:38 ../ui/prefs.gtkbuilder.h:30
 msgid "Bible Texts Checkbox"
 msgstr "Case à cocher Textes bibliques"
 
-#: ../ui/prefs.glade.h:40
+#: ../ui/prefs.glade.h:40 ../ui/prefs.gtkbuilder.h:32
 msgid "Previewer Checkbox"
 msgstr "Case à cocher Volet Aperçu"
 
-#: ../ui/prefs.glade.h:42
+#: ../ui/prefs.glade.h:42 ../ui/prefs.gtkbuilder.h:34
 msgid "Commentaries Checkbox"
 msgstr "Case à cocher Commentaires"
 
-#: ../ui/prefs.glade.h:43
+#: ../ui/prefs.glade.h:43 ../ui/prefs.gtkbuilder.h:35
 msgid "Dictionary/Lexicon"
 msgstr "Dictionnaire/Lexique"
 
-#: ../ui/prefs.glade.h:44
+#: ../ui/prefs.glade.h:44 ../ui/prefs.gtkbuilder.h:36
 msgid "Dictionary/Lexicon Checkbox"
 msgstr "Case à cocher Dictionnaire/Lexique"
 
-#: ../ui/prefs.glade.h:45
+#: ../ui/prefs.glade.h:45 ../ui/prefs.gtkbuilder.h:37
 msgid "Parallel View in a tab"
 msgstr "Vue parallèle dans un onglet"
 
-#: ../ui/prefs.glade.h:46
+#: ../ui/prefs.glade.h:46 ../ui/prefs.gtkbuilder.h:38
 msgid "Tabs and Panes"
 msgstr "Onglets et volets"
 
-#: ../ui/prefs.glade.h:47
+#: ../ui/prefs.glade.h:47 ../ui/prefs.gtkbuilder.h:39
 msgid "<b>General</b>"
 msgstr "<b>Général</b>"
 
-#: ../ui/prefs.glade.h:48
+#: ../ui/prefs.glade.h:48 ../ui/prefs.gtkbuilder.h:40
 msgid ""
 "Select a particular language for interface display, other than your usual "
 "setting"
@@ -3030,23 +3568,23 @@ msgstr ""
 "Sélection d'une langue spécifique pour affichage de l'interface, autre que "
 "celle de la configuration habituelle"
 
-#: ../ui/prefs.glade.h:49
+#: ../ui/prefs.glade.h:49 ../ui/prefs.gtkbuilder.h:41
 msgid "Special Locale (requires restart)"
 msgstr "Langue spéciale (Nécessite un redémarrage)"
 
-#: ../ui/prefs.glade.h:50
+#: ../ui/prefs.glade.h:50 ../ui/prefs.gtkbuilder.h:42
 msgid "Special Locale Combo"
 msgstr "Combo langue spéciale"
 
-#: ../ui/prefs.glade.h:51
+#: ../ui/prefs.glade.h:51 ../ui/prefs.gtkbuilder.h:43
 msgid "Show splash screen at start up"
 msgstr "Afficher l'écran de démarrage"
 
-#: ../ui/prefs.glade.h:52
+#: ../ui/prefs.glade.h:52 ../ui/prefs.gtkbuilder.h:44
 msgid "Show Daily Devotion at start up"
 msgstr "Afficher le calendrier biblique au démarrage"
 
-#: ../ui/prefs.glade.h:53
+#: ../ui/prefs.glade.h:53 ../ui/prefs.gtkbuilder.h:45
 msgid ""
 "If you have set a preferred daily devotion module, its entry for today will "
 "be shown at startup."
@@ -3055,11 +3593,11 @@ msgstr ""
 "affichée au démarrage"
 
 # src/gs_preferences_dlg.c
-#: ../ui/prefs.glade.h:54
+#: ../ui/prefs.glade.h:54 ../ui/prefs.gtkbuilder.h:46
 msgid "Use default Dictionary"
 msgstr "Définitions du dictionnaire par défaut"
 
-#: ../ui/prefs.glade.h:55
+#: ../ui/prefs.glade.h:55 ../ui/prefs.gtkbuilder.h:47
 msgid ""
 "Make double-click of a word always use default dictionary instead of "
 "dictionary currently displayed"
@@ -3068,276 +3606,308 @@ msgstr ""
 "lieu du dictionnaire actuellement affiché"
 
 # src/gs_preferences_dlg.c
-#: ../ui/prefs.glade.h:56
+#: ../ui/prefs.glade.h:56 ../ui/prefs.gtkbuilder.h:48
 msgid "Use default Dictionary Checkbox"
 msgstr "Case à cocher Dictionnaire par défaut"
 
-#: ../ui/prefs.glade.h:57
+#: ../ui/prefs.glade.h:57 ../ui/prefs.gtkbuilder.h:49
 msgid "Scroll to Previous/Next Chapter"
 msgstr "Défilement des chapitres en continu"
 
-#: ../ui/prefs.glade.h:58
+#: ../ui/prefs.glade.h:58 ../ui/prefs.gtkbuilder.h:50
 msgid "Use Bible Text scroll bar to scroll to previous or next chapter"
 msgstr ""
 "Permet d'utiliser la barre de déplacement vertical du volet des textes "
 "bibliques pour se déplacer au chapitre suivant ou précédent"
 
-#: ../ui/prefs.glade.h:59
+#: ../ui/prefs.glade.h:59 ../ui/prefs.gtkbuilder.h:51
 msgid "Scroll to Previous/Next Chapter Checkbox"
 msgstr "Case à cocher Défilement des chapitres en continu"
 
-#: ../ui/prefs.glade.h:60
+#: ../ui/prefs.glade.h:60 ../ui/prefs.gtkbuilder.h:52
 msgid "Resize images"
 msgstr "Images redimensionnées"
 
-#: ../ui/prefs.glade.h:61
+#: ../ui/prefs.glade.h:61 ../ui/prefs.gtkbuilder.h:53
 msgid "Automatically resize image content to fit the pane"
 msgstr ""
 "Réduit automatiquement les images et les adapte à la taille de la fenêtre"
 
-#: ../ui/prefs.glade.h:62
+#: ../ui/prefs.glade.h:62 ../ui/prefs.gtkbuilder.h:54
 msgid "Resize images checkbox"
 msgstr "Case à cocher Images redimensionnées"
 
-#: ../ui/prefs.glade.h:63
+#: ../ui/prefs.glade.h:63 ../ui/prefs.gtkbuilder.h:55
 msgid "Highlight current verse"
 msgstr "Verset en cours surligné"
 
-#: ../ui/prefs.glade.h:64
+#: ../ui/prefs.glade.h:64 ../ui/prefs.gtkbuilder.h:56
 msgid "Apply high-contrast highlight to current verse - see color pickers"
 msgstr ""
 "Applique des couleurs différentes au verset en cours - Voir le sélecteur de "
 "couleurs"
 
-#: ../ui/prefs.glade.h:65
+#: ../ui/prefs.glade.h:65 ../ui/prefs.gtkbuilder.h:57
 msgid "Highlight current verse check box"
 msgstr "Case à cocher Verset en cours surligné"
 
-#: ../ui/prefs.glade.h:66
+#: ../ui/prefs.glade.h:66 ../ui/prefs.gtkbuilder.h:58
 msgid "Highlight user annotations"
 msgstr "Annotations personnelles surlignées"
 
-#: ../ui/prefs.glade.h:67
+#: ../ui/prefs.glade.h:67 ../ui/prefs.gtkbuilder.h:59
 msgid "Use inverted highlight on user-annotated verses"
 msgstr ""
 "Applique un surlignement aux versets comportant des annotations personnelles"
 
-#: ../ui/prefs.glade.h:68
+#: ../ui/prefs.glade.h:68 ../ui/prefs.gtkbuilder.h:60
 msgid "Highlight user annotations check box"
 msgstr "Case à cocher Annotations personnelles surlignées"
 
-#: ../ui/prefs.glade.h:69
+#: ../ui/prefs.glade.h:69 ../ui/prefs.gtkbuilder.h:61
 msgid "Cross-references in verse list"
 msgstr "Références croisées dans Versets"
 
-#: ../ui/prefs.glade.h:70
+#: ../ui/prefs.glade.h:70 ../ui/prefs.gtkbuilder.h:62
 msgid "Use the verse list for Bible cross-references instead of the previewer"
 msgstr ""
 "Utiliser la liste de versets pour les références-croisées de la Bible au "
 "lieu du volet Aperçu"
 
-#: ../ui/prefs.glade.h:71
+#: ../ui/prefs.glade.h:71 ../ui/prefs.gtkbuilder.h:63
 msgid "Xrefs in verse list check box"
 msgstr "Case à cocher Xrefs dans la liste de versets"
 
-#: ../ui/prefs.glade.h:72
+#: ../ui/prefs.glade.h:72 ../ui/prefs.gtkbuilder.h:64
 msgid "Enable Prayer Lists"
 msgstr "Activer les listes de prières"
 
-#: ../ui/prefs.glade.h:73
+#: ../ui/prefs.glade.h:73 ../ui/prefs.gtkbuilder.h:65
 msgid "Make journals/prayer lists available"
 msgstr "Rendre les listes de prières / Journaux disponibles"
 
-#: ../ui/prefs.glade.h:74
+#: ../ui/prefs.glade.h:74 ../ui/prefs.gtkbuilder.h:66
 msgid "Enable Prayer Lists Checkbox"
 msgstr "Case à cocher Activer les listes de prières"
 
-#: ../ui/prefs.glade.h:75
+#: ../ui/prefs.glade.h:75 ../ui/prefs.gtkbuilder.h:67
 msgid "Verse number:"
 msgstr "Numéro de verset :"
 
-#: ../ui/prefs.glade.h:76
-msgid "Bold"
-msgstr "Gras"
-
-#: ../ui/prefs.glade.h:77
+#: ../ui/prefs.glade.h:77 ../ui/prefs.gtkbuilder.h:69
 msgid "Show verse number in bold text"
 msgstr "Affiche les numéros de verset en gras"
 
-#: ../ui/prefs.glade.h:78
+#: ../ui/prefs.glade.h:78 ../ui/prefs.gtkbuilder.h:70
 msgid "Verse number bold checkbox"
 msgstr "Case à cocher numéro de verset en gras"
 
-#: ../ui/prefs.glade.h:79
+#: ../ui/prefs.glade.h:79 ../ui/prefs.gtkbuilder.h:71
 msgid "Brackets"
 msgstr "Parenthèses"
 
-#: ../ui/prefs.glade.h:80
+#: ../ui/prefs.glade.h:80 ../ui/prefs.gtkbuilder.h:72
 msgid "Show verse number with [surrounding brackets]"
 msgstr "Affiche les numéros de versets entourés de [parenthèses]"
 
-#: ../ui/prefs.glade.h:81
+#: ../ui/prefs.glade.h:81 ../ui/prefs.gtkbuilder.h:73
 msgid "Verse number bracket checkbox"
 msgstr "Case à cocher Verset entre parenthèses"
 
-#: ../ui/prefs.glade.h:82
+#: ../ui/prefs.glade.h:82 ../ui/prefs.gtkbuilder.h:74
 msgid "Superscript"
 msgstr "Exposant"
 
-#: ../ui/prefs.glade.h:83
+#: ../ui/prefs.glade.h:83 ../ui/prefs.gtkbuilder.h:75
 msgid "Show verse number as a superscript"
 msgstr "Affiche les numéros de verset en forme exposant"
 
-#: ../ui/prefs.glade.h:84
+#: ../ui/prefs.glade.h:84 ../ui/prefs.gtkbuilder.h:76
 msgid "Verse number superscript checkbox"
 msgstr "Case à cocher numéro de verset en exposant"
 
 # src/gs_preferences_dlg.c
-#: ../ui/prefs.glade.h:85
+#: ../ui/prefs.glade.h:85 ../ui/prefs.gtkbuilder.h:77
 msgid "<b>StudyPad default directory</b>"
 msgstr "<b>Répertoire par défaut du bloc-notes</b>"
 
 # src/gs_preferences_dlg.c
-#: ../ui/prefs.glade.h:86
+#: ../ui/prefs.glade.h:86 ../ui/prefs.gtkbuilder.h:78
 msgid "Select A Directory"
 msgstr "Choix du répertoire"
 
 # src/gs_preferences_dlg.c
-#: ../ui/prefs.glade.h:87
+#: ../ui/prefs.glade.h:87 ../ui/prefs.gtkbuilder.h:79
 msgid "StudyPad default directory combo"
 msgstr "Boite combinée Répertoire par défaut du bloc-notes"
 
-#: ../ui/prefs.glade.h:88
+#: ../ui/prefs.glade.h:88 ../ui/prefs.gtkbuilder.h:80
 msgid "General Misc"
 msgstr "Divers"
 
-#: ../ui/prefs.glade.h:89
+#: ../ui/prefs.glade.h:89 ../ui/prefs.gtkbuilder.h:81
 msgid "<b>Main Window Modules</b>"
 msgstr "<b>Modules de base</b>"
 
-#: ../ui/prefs.glade.h:90
+#: ../ui/prefs.glade.h:90 ../ui/prefs.gtkbuilder.h:82
 msgid "Biblical Text"
 msgstr "Texte biblique"
 
-#: ../ui/prefs.glade.h:91
+#: ../ui/prefs.glade.h:91 ../ui/prefs.gtkbuilder.h:83
 msgid "Change Biblical Text Combo"
 msgstr "Boite combinée Changement de texte biblique"
 
-#: ../ui/prefs.glade.h:93
+#: ../ui/prefs.glade.h:93 ../ui/prefs.gtkbuilder.h:85
 msgid "Change Commentary Combo"
 msgstr "Boite combinée Changement de commentaire"
 
-#: ../ui/prefs.glade.h:94
+#: ../ui/prefs.glade.h:94 ../ui/prefs.gtkbuilder.h:86
 msgid "Dictionary"
 msgstr "Dictionnaire"
 
-#: ../ui/prefs.glade.h:95
+#: ../ui/prefs.glade.h:95 ../ui/prefs.gtkbuilder.h:87
 msgid "Change Dictionary Combo"
 msgstr "Boite combinée Changement de dictionnaire"
 
-#: ../ui/prefs.glade.h:97
+#: ../ui/prefs.glade.h:97 ../ui/prefs.gtkbuilder.h:89
 msgid "Change Book Combo"
 msgstr "Boite combinée Changement de livre"
 
-#: ../ui/prefs.glade.h:98 ../ui/search-dialog.glade.h:22
+#: ../ui/prefs.glade.h:98 ../ui/prefs.gtkbuilder.h:90
+#: ../ui/search-dialog.glade.h:22 ../ui/search-dialog.gtkbuilder.h:23
 msgid "<b>Modules</b>"
 msgstr "<b>Modules</b>"
 
-#: ../ui/prefs.glade.h:99 ../ui/search-dialog.glade.h:86
+#: ../ui/prefs.glade.h:99 ../ui/prefs.gtkbuilder.h:91
+#: ../ui/search-dialog.glade.h:86 ../ui/search-dialog.gtkbuilder.h:86
 msgid "Clear all modules from the list"
 msgstr "Efface tous les modules de la liste"
 
-#: ../ui/prefs.glade.h:100 ../ui/search-dialog.glade.h:87
+#: ../ui/prefs.glade.h:100 ../ui/prefs.gtkbuilder.h:92
+#: ../ui/search-dialog.glade.h:87 ../ui/search-dialog.gtkbuilder.h:87
 msgid "Clear Modules from List Button"
 msgstr "Bouton Efface tous les modules de la liste"
 
-#: ../ui/prefs.glade.h:101 ../ui/search-dialog.glade.h:88
+#: ../ui/prefs.glade.h:101 ../ui/prefs.gtkbuilder.h:93
+#: ../ui/search-dialog.glade.h:88 ../ui/search-dialog.gtkbuilder.h:88
 msgid "Remove the selected module from the list"
 msgstr "Supprime le module sélectionné de la liste"
 
-#: ../ui/prefs.glade.h:102 ../ui/search-dialog.glade.h:89
+#: ../ui/prefs.glade.h:102 ../ui/prefs.gtkbuilder.h:94
+#: ../ui/search-dialog.glade.h:89 ../ui/search-dialog.gtkbuilder.h:89
 msgid "Delete Selected Module From List Button"
 msgstr "Bouton Supprime le module sélectionné de la liste"
 
-#: ../ui/prefs.glade.h:103
+#: ../ui/prefs.glade.h:103 ../ui/prefs.gtkbuilder.h:95
 msgid "Open a dialog to select modules"
 msgstr "Ouvre la fenêtre de sélection des modules"
 
-#: ../ui/prefs.glade.h:104 ../ui/search-dialog.glade.h:91
+#: ../ui/prefs.glade.h:104 ../ui/prefs.gtkbuilder.h:96
+#: ../ui/search-dialog.glade.h:91 ../ui/search-dialog.gtkbuilder.h:91
 msgid "Add Modules"
 msgstr "Ajout de modules"
 
-#: ../ui/prefs.glade.h:105 ../ui/search-dialog.glade.h:92
+#: ../ui/prefs.glade.h:105 ../ui/prefs.gtkbuilder.h:97
+#: ../ui/search-dialog.glade.h:92 ../ui/search-dialog.gtkbuilder.h:92
 msgid "Open Selection Dialog Button"
 msgstr "Bouton Ouvrir la boite de sélection"
 
-#: ../ui/prefs.glade.h:106
+#: ../ui/prefs.glade.h:106 ../ui/prefs.gtkbuilder.h:98
 msgid "Modules Parallel"
 msgstr "Vue parallèle"
 
-#: ../ui/prefs.glade.h:107
+#: ../ui/prefs.glade.h:107 ../ui/prefs.gtkbuilder.h:99
 msgid "<b>Special Purpose Modules</b>"
 msgstr "<b>Modules d'emploi spécifique</b>"
 
-#: ../ui/prefs.glade.h:108
+#: ../ui/prefs.glade.h:108 ../ui/prefs.gtkbuilder.h:100
 msgid "Daily Devotional"
 msgstr "Calendrier biblique"
 
-#: ../ui/prefs.glade.h:109
+#: ../ui/prefs.glade.h:109 ../ui/prefs.gtkbuilder.h:101
 msgid "Daily Devotional Combo"
 msgstr "Boite combinée Changement de calendrier biblique"
 
-#: ../ui/prefs.glade.h:110
+#: ../ui/prefs.glade.h:110 ../ui/prefs.gtkbuilder.h:102
 msgid "Hebrew Lexicon"
 msgstr "Lexique hébreu"
 
-#: ../ui/prefs.glade.h:111
+#: ../ui/prefs.glade.h:111 ../ui/prefs.gtkbuilder.h:103
 msgid "Hebrew Lexicon Combo"
 msgstr "Boite combinée Lexique hébreu"
 
-#: ../ui/prefs.glade.h:112
+#: ../ui/prefs.glade.h:112 ../ui/prefs.gtkbuilder.h:104
 msgid "Greek Lexicon"
 msgstr "Lexique grec"
 
-#: ../ui/prefs.glade.h:113
+#: ../ui/prefs.glade.h:113 ../ui/prefs.gtkbuilder.h:105
 msgid "Greek Lexicon Combo"
 msgstr "Boite combinée Lexique grec"
 
 # src/gs_preferences_dlg.c
-#: ../ui/prefs.glade.h:114
+#: ../ui/prefs.glade.h:114 ../ui/prefs.gtkbuilder.h:106
 msgid "Default Dictionary"
 msgstr "Dictionnaire par défaut"
 
 # src/gs_preferences_dlg.c
-#: ../ui/prefs.glade.h:115
+#: ../ui/prefs.glade.h:115 ../ui/prefs.gtkbuilder.h:107
 msgid "Change Default Dictionary Combo"
 msgstr "Boite combinée Changement de dictionnaire"
 
-#: ../ui/prefs.glade.h:116
+#: ../ui/prefs.glade.h:116 ../ui/prefs.gtkbuilder.h:108
 msgid "Personal Notes"
 msgstr "Notes personnelles"
 
-#: ../ui/prefs.glade.h:117
+#: ../ui/prefs.glade.h:117 ../ui/prefs.gtkbuilder.h:109
 msgid "Change Personal Notes Combo"
 msgstr "Boite combinée Changement de notes personnelles"
 
-#: ../ui/prefs.glade.h:118
+#: ../ui/prefs.glade.h:118 ../ui/prefs.gtkbuilder.h:110
 msgid "Modules Misc"
 msgstr "Divers"
 
-#: ../ui/prefs.glade.h:119 ../ui/search-dialog.glade.h:115
+#: ../ui/prefs.glade.h:119 ../ui/prefs.gtkbuilder.h:111
+#: ../ui/search-dialog.glade.h:115 ../ui/search-dialog.gtkbuilder.h:115
 msgid "Module Selection"
 msgstr "Sélection de module"
 
-#: ../ui/search-dialog.glade.h:1
+#: ../ui/prefs.gtkbuilder.h:112
+msgid "-2"
+msgstr "-2"
+
+#: ../ui/prefs.gtkbuilder.h:113
+msgid "-1"
+msgstr "-1"
+
+#: ../ui/prefs.gtkbuilder.h:115
+msgid "+1"
+msgstr "+1"
+
+#: ../ui/prefs.gtkbuilder.h:116
+msgid "+2"
+msgstr "+2"
+
+#: ../ui/prefs.gtkbuilder.h:117
+msgid "+3"
+msgstr "+3"
+
+#: ../ui/prefs.gtkbuilder.h:118
+msgid "+4"
+msgstr "+4"
+
+#: ../ui/prefs.gtkbuilder.h:119
+msgid "+5"
+msgstr "+5"
+
+#: ../ui/search-dialog.glade.h:1 ../ui/search-dialog.gtkbuilder.h:1
 msgid "Advanced Search"
 msgstr "Recherche avancée"
 
-#: ../ui/search-dialog.glade.h:2
+#: ../ui/search-dialog.glade.h:2 ../ui/search-dialog.gtkbuilder.h:2
 msgid "_Lucene Search Syntax"
 msgstr "Syntaxe Lucene"
 
-#: ../ui/search-dialog.glade.h:3
+#: ../ui/search-dialog.glade.h:3 ../ui/search-dialog.gtkbuilder.h:3
 msgid ""
 "Open a brief explanation of the syntax used for optimized \"lucene\" "
 "searches."
@@ -3345,114 +3915,114 @@ msgstr ""
 "Ouvre une brève explication sur la syntaxe utilisée dans les recherches "
 "optimisées (« lucène »)."
 
-#: ../ui/search-dialog.glade.h:4
+#: ../ui/search-dialog.glade.h:4 ../ui/search-dialog.gtkbuilder.h:4
 msgid "_Attribute Search"
 msgstr "Recherche sur _attributs"
 
-#: ../ui/search-dialog.glade.h:5
+#: ../ui/search-dialog.glade.h:5 ../ui/search-dialog.gtkbuilder.h:5
 msgid "Open a brief explanation of attribute-based searches."
 msgstr ""
 "Ouvre une brève explication sur les recherches basées sur les attributs"
 
-#: ../ui/search-dialog.glade.h:6
+#: ../ui/search-dialog.glade.h:6 ../ui/search-dialog.gtkbuilder.h:7
 msgid "for "
 msgstr "Expression "
 
-#: ../ui/search-dialog.glade.h:7
+#: ../ui/search-dialog.glade.h:7 ../ui/search-dialog.gtkbuilder.h:8
 msgid "Main Search Entry"
 msgstr "Entrée Recherche principale"
 
-#: ../ui/search-dialog.glade.h:8
+#: ../ui/search-dialog.glade.h:8 ../ui/search-dialog.gtkbuilder.h:9
 msgid "Start/stop searching"
 msgstr "Démarre/stoppe la requête"
 
-#: ../ui/search-dialog.glade.h:9
+#: ../ui/search-dialog.glade.h:9 ../ui/search-dialog.gtkbuilder.h:10
 msgid "Find Button"
 msgstr "Bouton Rechercher"
 
-#: ../ui/search-dialog.glade.h:10
+#: ../ui/search-dialog.glade.h:10 ../ui/search-dialog.gtkbuilder.h:11
 msgid "Search Criteria Treeview"
 msgstr "Arborescence Critères de recherche"
 
-#: ../ui/search-dialog.glade.h:11
+#: ../ui/search-dialog.glade.h:11 ../ui/search-dialog.gtkbuilder.h:12
 msgid "<b>Scope</b>"
 msgstr "<b>Plage de versets</b>"
 
-#: ../ui/search-dialog.glade.h:12
+#: ../ui/search-dialog.glade.h:12 ../ui/search-dialog.gtkbuilder.h:14
 msgid "Search entire module"
 msgstr "La requête s'exécute sur tous les versets"
 
-#: ../ui/search-dialog.glade.h:13
+#: ../ui/search-dialog.glade.h:13 ../ui/search-dialog.gtkbuilder.h:13
 msgid "Entire module"
 msgstr "Module entier"
 
-#: ../ui/search-dialog.glade.h:14
+#: ../ui/search-dialog.glade.h:14 ../ui/search-dialog.gtkbuilder.h:15
 msgid "Entire module radiobutton"
 msgstr "Bouton radio Module entier"
 
-#: ../ui/search-dialog.glade.h:15
+#: ../ui/search-dialog.glade.h:15 ../ui/search-dialog.gtkbuilder.h:17
 msgid "Use the results of the last search as the scope of the search"
 msgstr ""
 "La requête s'exécute uniquement sur les versets retournés lors de la requête "
 "précédente"
 
-#: ../ui/search-dialog.glade.h:16
+#: ../ui/search-dialog.glade.h:16 ../ui/search-dialog.gtkbuilder.h:16
 msgid "Current results"
 msgstr "Dernière requête"
 
-#: ../ui/search-dialog.glade.h:17
+#: ../ui/search-dialog.glade.h:17 ../ui/search-dialog.gtkbuilder.h:18
 msgid "Current results radiobutton"
 msgstr "Bouton radio Dernière requête"
 
-#: ../ui/search-dialog.glade.h:18
+#: ../ui/search-dialog.glade.h:18 ../ui/search-dialog.gtkbuilder.h:20
 msgid "Use a custom range for the scope of the search"
 msgstr "La requête s'exécute sur une plage prédéfinie de versets"
 
-#: ../ui/search-dialog.glade.h:19
+#: ../ui/search-dialog.glade.h:19 ../ui/search-dialog.gtkbuilder.h:19
 msgid "Custom verse range"
 msgstr "Plage prédéfinie"
 
-#: ../ui/search-dialog.glade.h:20
+#: ../ui/search-dialog.glade.h:20 ../ui/search-dialog.gtkbuilder.h:21
 msgid "Custom verse range radiobutton"
 msgstr "Bouton radio Plage de versets"
 
-#: ../ui/search-dialog.glade.h:21
+#: ../ui/search-dialog.glade.h:21 ../ui/search-dialog.gtkbuilder.h:22
 msgid "Custom Range Selector Combo"
 msgstr "Boite de sélection Plage personnalisée"
 
-#: ../ui/search-dialog.glade.h:23
+#: ../ui/search-dialog.glade.h:23 ../ui/search-dialog.gtkbuilder.h:25
 msgid "Use a single module for the search"
 msgstr "La requête s'exécute sur  un seul module"
 
-#: ../ui/search-dialog.glade.h:24
+#: ../ui/search-dialog.glade.h:24 ../ui/search-dialog.gtkbuilder.h:24
 msgid "Single module"
 msgstr "Module unique"
 
-#: ../ui/search-dialog.glade.h:25
+#: ../ui/search-dialog.glade.h:25 ../ui/search-dialog.gtkbuilder.h:26
 msgid "Single module radiobutton"
 msgstr "Bouton radio Module unique"
 
-#: ../ui/search-dialog.glade.h:26
+#: ../ui/search-dialog.glade.h:26 ../ui/search-dialog.gtkbuilder.h:28
 msgid "Use the current module list for the search"
 msgstr "La requête s'exécute sur plusieurs modules"
 
-#: ../ui/search-dialog.glade.h:27
+#: ../ui/search-dialog.glade.h:27 ../ui/search-dialog.gtkbuilder.h:27
 msgid "Module list"
 msgstr "Plusieurs modules"
 
-#: ../ui/search-dialog.glade.h:28
+#: ../ui/search-dialog.glade.h:28 ../ui/search-dialog.gtkbuilder.h:29
 msgid "Module list radiobutton"
 msgstr "Radio bouton Liste de modules"
 
-#: ../ui/search-dialog.glade.h:29
+#: ../ui/search-dialog.glade.h:29 ../ui/search-dialog.gtkbuilder.h:31
 msgid "Use a custom module list for the search"
 msgstr "La requête s'exécute dans une liste de modules prédéfinie"
 
-#: ../ui/search-dialog.glade.h:30
+#: ../ui/search-dialog.glade.h:30 ../ui/search-dialog.gtkbuilder.h:30
 msgid "Custom module list"
 msgstr "Liste prédéfinie"
 
-#: ../ui/search-dialog.glade.h:31
+#: ../ui/search-dialog.glade.h:31 ../ui/search-dialog.gtkbuilder.h:32
 msgid "Custom module list radiobutton"
 msgstr "Bouton radio Liste de modules"
 
@@ -3460,11 +4030,11 @@ msgstr "Bouton radio Liste de modules"
 msgid "Custom Module List Combo"
 msgstr "Boite combinée Listes de modules"
 
-#: ../ui/search-dialog.glade.h:33
+#: ../ui/search-dialog.glade.h:33 ../ui/search-dialog.gtkbuilder.h:33
 msgid "<b>Search Type</b>"
 msgstr "<b>Type de requête</b>"
 
-#: ../ui/search-dialog.glade.h:34
+#: ../ui/search-dialog.glade.h:34 ../ui/search-dialog.gtkbuilder.h:35
 msgid ""
 "Fast, featureful, index-based search\n"
 "Indexes must have been built beforehand:\n"
@@ -3474,273 +4044,278 @@ msgstr ""
 "les index doivent être préalablement construits.\n"
 "Voir l'onglet Gérer du gestionnaire de modules."
 
-#: ../ui/search-dialog.glade.h:37
+#: ../ui/search-dialog.glade.h:37 ../ui/search-dialog.gtkbuilder.h:34
 msgid "Optimized (\"Lucene\")"
 msgstr "Optimisée Lucene"
 
-#: ../ui/search-dialog.glade.h:38
+#: ../ui/search-dialog.glade.h:38 ../ui/search-dialog.gtkbuilder.h:38
 msgid "Optimized (\"Lucene\") radiobutton"
 msgstr "Bouton radio Optimisée Lucene"
 
-#: ../ui/search-dialog.glade.h:40
+#: ../ui/search-dialog.glade.h:40 ../ui/search-dialog.gtkbuilder.h:40
 msgid "Multi word radiobutton"
 msgstr "Bouton radio Mots multiples"
 
-#: ../ui/search-dialog.glade.h:42
+#: ../ui/search-dialog.glade.h:42 ../ui/search-dialog.gtkbuilder.h:42
 msgid "Regular expression radiobutton"
 msgstr "Bouton radio Expression rationnelle"
 
-#: ../ui/search-dialog.glade.h:44
+#: ../ui/search-dialog.glade.h:44 ../ui/search-dialog.gtkbuilder.h:44
 msgid "Exact phrase radiobutton"
 msgstr "Bouton radio Phrase exacte"
 
-#: ../ui/search-dialog.glade.h:45
+#: ../ui/search-dialog.glade.h:45 ../ui/search-dialog.gtkbuilder.h:46
 msgid "Make selections on the Attribute Search tab"
 msgstr ""
 "Recherche sur les nombres de Strong \n"
 "Plus d'options dans l'onglet Attributs"
 
-#: ../ui/search-dialog.glade.h:46
+#: ../ui/search-dialog.glade.h:46 ../ui/search-dialog.gtkbuilder.h:45
 msgid "Attributes"
 msgstr "Attributs"
 
-#: ../ui/search-dialog.glade.h:47
+#: ../ui/search-dialog.glade.h:47 ../ui/search-dialog.gtkbuilder.h:47
 msgid "Attributes radiobutton"
 msgstr "Bouton radio Attributs"
 
-#: ../ui/search-dialog.glade.h:48
+#: ../ui/search-dialog.glade.h:48 ../ui/search-dialog.gtkbuilder.h:48
 msgid "<b>Options</b>"
 msgstr "<b>Options de la requête</b>"
 
-#: ../ui/search-dialog.glade.h:50
+#: ../ui/search-dialog.glade.h:50 ../ui/search-dialog.gtkbuilder.h:50
 msgid "Match case checkbox"
 msgstr "Case à cocher Respecter la casse"
 
-#: ../ui/search-dialog.glade.h:51
+#: ../ui/search-dialog.glade.h:51 ../ui/search-dialog.gtkbuilder.h:51
 msgid "Search  Criteria"
 msgstr "Critères"
 
-#: ../ui/search-dialog.glade.h:52
+#: ../ui/search-dialog.glade.h:52 ../ui/search-dialog.gtkbuilder.h:52
 msgid "Show in main window"
 msgstr "Affiche le résultat dans la fenêtre principale"
 
-#: ../ui/search-dialog.glade.h:53
+#: ../ui/search-dialog.glade.h:53 ../ui/search-dialog.gtkbuilder.h:53
 msgid "Save search results as bookmarks"
 msgstr ""
 "Enregistre les résultats de la recherche\n"
 "sous forme de signets"
 
-#: ../ui/search-dialog.glade.h:54
+#: ../ui/search-dialog.glade.h:54 ../ui/search-dialog.gtkbuilder.h:54
 msgid "Export current search results"
 msgstr "Exporte les résultats de la requête"
 
-#: ../ui/search-dialog.glade.h:55
+#: ../ui/search-dialog.glade.h:55 ../ui/search-dialog.gtkbuilder.h:55
 msgid "Export"
 msgstr "Exporter"
 
-#: ../ui/search-dialog.glade.h:56
+#: ../ui/search-dialog.glade.h:56 ../ui/search-dialog.gtkbuilder.h:56
 msgid "Clear lists for new search"
 msgstr "Efface tous les résultats"
 
-#: ../ui/search-dialog.glade.h:57
+#: ../ui/search-dialog.glade.h:57 ../ui/search-dialog.gtkbuilder.h:57
 msgid "<b>Found</b>"
 msgstr "<b>Réponses</b>"
 
-#: ../ui/search-dialog.glade.h:58
+#: ../ui/search-dialog.glade.h:58 ../ui/search-dialog.gtkbuilder.h:58
 msgid "Result Summary Window"
 msgstr "Fenêtre Récapitulatif des résultats"
 
-#: ../ui/search-dialog.glade.h:59
+#: ../ui/search-dialog.glade.h:59 ../ui/search-dialog.gtkbuilder.h:59
 msgid "Result Summary Table"
 msgstr "Table Récapitulatif des résultats"
 
-#: ../ui/search-dialog.glade.h:60
+#: ../ui/search-dialog.glade.h:60 ../ui/search-dialog.gtkbuilder.h:60
 msgid "<b>Search Results</b>"
 msgstr "<b>Détail</b>"
 
-#: ../ui/search-dialog.glade.h:61
+#: ../ui/search-dialog.glade.h:61 ../ui/search-dialog.gtkbuilder.h:61
 msgid "<b>Preview</b>"
 msgstr "<b>Aperçu</b>"
 
-#: ../ui/search-dialog.glade.h:62
+#: ../ui/search-dialog.glade.h:62 ../ui/search-dialog.gtkbuilder.h:62
 msgid "Results"
 msgstr "Résultats"
 
-#: ../ui/search-dialog.glade.h:63
+#: ../ui/search-dialog.glade.h:63 ../ui/search-dialog.gtkbuilder.h:63
 msgid "Create new custom range"
 msgstr "Crée une nouvelle plage de versets"
 
-#: ../ui/search-dialog.glade.h:64
+#: ../ui/search-dialog.glade.h:64 ../ui/search-dialog.gtkbuilder.h:64
 msgid "New Range Button"
 msgstr "Bouton Nouvelle plage personnalisée"
 
-#: ../ui/search-dialog.glade.h:65
+#: ../ui/search-dialog.glade.h:65 ../ui/search-dialog.gtkbuilder.h:65
 msgid "Save custom range"
 msgstr "Enregistre la plage de versets"
 
-#: ../ui/search-dialog.glade.h:66
+#: ../ui/search-dialog.glade.h:66 ../ui/search-dialog.gtkbuilder.h:66
 msgid "Save Range Button"
 msgstr "Bouton Enregistrer plage personnalisée"
 
-#: ../ui/search-dialog.glade.h:67
+#: ../ui/search-dialog.glade.h:67 ../ui/search-dialog.gtkbuilder.h:67
 msgid "Delete selected range"
 msgstr "Supprime la plage sélectionnée"
 
-#: ../ui/search-dialog.glade.h:68
+#: ../ui/search-dialog.glade.h:68 ../ui/search-dialog.gtkbuilder.h:68
 msgid "Delete Range Button"
 msgstr "Bouton Supprimer la plage"
 
-#: ../ui/search-dialog.glade.h:69
+#: ../ui/search-dialog.glade.h:69 ../ui/search-dialog.gtkbuilder.h:69
 msgid "<b>Ranges</b>"
 msgstr "<b>Plages de versets</b>"
 
-#: ../ui/search-dialog.glade.h:70
+#: ../ui/search-dialog.glade.h:70 ../ui/search-dialog.gtkbuilder.h:70
 msgid "<b>Range Name</b>"
 msgstr "<b>Nom de la plage</b>"
 
-#: ../ui/search-dialog.glade.h:71
+#: ../ui/search-dialog.glade.h:71 ../ui/search-dialog.gtkbuilder.h:71
 msgid "Range Name Entry"
 msgstr "Entrée Nom de la plage"
 
-#: ../ui/search-dialog.glade.h:72
+#: ../ui/search-dialog.glade.h:72 ../ui/search-dialog.gtkbuilder.h:72
 msgid "<b>Range Definition</b>"
 msgstr "<b>Limites de la plage</b>"
 
-#: ../ui/search-dialog.glade.h:73
+#: ../ui/search-dialog.glade.h:73 ../ui/search-dialog.gtkbuilder.h:73
 msgid "Range Definition Entry"
 msgstr "Entrée Limites de la plage"
 
-#: ../ui/search-dialog.glade.h:74
+#: ../ui/search-dialog.glade.h:74 ../ui/search-dialog.gtkbuilder.h:74
 msgid "e.g. Matt-John;Rev4"
 msgstr "ex Mat-Jean; Ap4"
 
-#: ../ui/search-dialog.glade.h:75
+#: ../ui/search-dialog.glade.h:75 ../ui/search-dialog.gtkbuilder.h:75
 msgid "Custom Range Preview"
 msgstr "Aperçu Plage personnalisée"
 
-#: ../ui/search-dialog.glade.h:76
+#: ../ui/search-dialog.glade.h:76 ../ui/search-dialog.gtkbuilder.h:76
 msgid "Custom Verse Ranges"
 msgstr "Plages de versets"
 
-#: ../ui/search-dialog.glade.h:77
+#: ../ui/search-dialog.glade.h:77 ../ui/search-dialog.gtkbuilder.h:77
 msgid "Create a new module list"
 msgstr "Crée une nouvelle liste de modules"
 
-#: ../ui/search-dialog.glade.h:78
+#: ../ui/search-dialog.glade.h:78 ../ui/search-dialog.gtkbuilder.h:78
 msgid "New Custom Module List Button"
 msgstr "Bouton Nouvelle liste de modules"
 
-#: ../ui/search-dialog.glade.h:79
+#: ../ui/search-dialog.glade.h:79 ../ui/search-dialog.gtkbuilder.h:79
 msgid "Save the module list"
 msgstr "Enregistre la liste de modules"
 
-#: ../ui/search-dialog.glade.h:80
+#: ../ui/search-dialog.glade.h:80 ../ui/search-dialog.gtkbuilder.h:80
 msgid "Save Custom Module List Button"
 msgstr "Bouton Enregistrer la liste de modules"
 
-#: ../ui/search-dialog.glade.h:81
+#: ../ui/search-dialog.glade.h:81 ../ui/search-dialog.gtkbuilder.h:81
 msgid "Delete the selected list"
 msgstr "Supprime la liste sélectionnée"
 
-#: ../ui/search-dialog.glade.h:82
+#: ../ui/search-dialog.glade.h:82 ../ui/search-dialog.gtkbuilder.h:82
 msgid "Clear Custom Module List Button"
 msgstr "Bouton Effacer Liste de modules"
 
-#: ../ui/search-dialog.glade.h:83
+#: ../ui/search-dialog.glade.h:83 ../ui/search-dialog.gtkbuilder.h:83
 msgid "<b>Module Lists</b>"
 msgstr "<b>Listes de modules</b>"
 
-#: ../ui/search-dialog.glade.h:84
+#: ../ui/search-dialog.glade.h:84 ../ui/search-dialog.gtkbuilder.h:84
 msgid "<b>List Name</b>"
 msgstr "<b>Nom de la liste</b>"
 
-#: ../ui/search-dialog.glade.h:85
+#: ../ui/search-dialog.glade.h:85 ../ui/search-dialog.gtkbuilder.h:85
 msgid "Custom Module List Name Entry"
 msgstr "Entrée Nom de la liste de modules"
 
-#: ../ui/search-dialog.glade.h:90
+#: ../ui/search-dialog.glade.h:90 ../ui/search-dialog.gtkbuilder.h:90
 msgid "Open a dialog to select modules to add to the list"
 msgstr "Sélectionne les modules à ajouter à la liste"
 
-#: ../ui/search-dialog.glade.h:93
+#: ../ui/search-dialog.glade.h:93 ../ui/search-dialog.gtkbuilder.h:93
 msgid "Custom Module Lists"
 msgstr "Listes de modules"
 
-#: ../ui/search-dialog.glade.h:94
+#: ../ui/search-dialog.glade.h:94 ../ui/search-dialog.gtkbuilder.h:94
 msgid "<b>Attribute</b>"
 msgstr "<b>Type d'attribut</b>"
 
-#: ../ui/search-dialog.glade.h:95
+#: ../ui/search-dialog.glade.h:95 ../ui/search-dialog.gtkbuilder.h:96
 msgid "Search for Strongs Numbers like G4442 or H1121"
 msgstr "Recherche de nombres de Strong de type G4442 ou H1121"
 
-#: ../ui/search-dialog.glade.h:96
+#: ../ui/search-dialog.glade.h:96 ../ui/search-dialog.gtkbuilder.h:95
 msgid "Strongs Numbers"
 msgstr "Nombres de Strong"
 
-#: ../ui/search-dialog.glade.h:97
+#: ../ui/search-dialog.glade.h:97 ../ui/search-dialog.gtkbuilder.h:97
 msgid "Strongs Numbers radiobutton"
 msgstr "Bouton radio Nombres de Strong"
 
-#: ../ui/search-dialog.glade.h:98
+#: ../ui/search-dialog.glade.h:98 ../ui/search-dialog.gtkbuilder.h:99
 msgid "Search for Morphological tags"
 msgstr "Recherche d'étiquettes morphologiques"
 
-#: ../ui/search-dialog.glade.h:100
+#: ../ui/search-dialog.glade.h:100 ../ui/search-dialog.gtkbuilder.h:100
 msgid "Morphological Tags radiobutton"
 msgstr "Bouton radio Étiquettes morphologiques"
 
-#: ../ui/search-dialog.glade.h:101
+#: ../ui/search-dialog.glade.h:101 ../ui/search-dialog.gtkbuilder.h:102
 msgid "Search in footnotes"
 msgstr "Recherche de notes de bas de page"
 
-#: ../ui/search-dialog.glade.h:103
+#: ../ui/search-dialog.glade.h:103 ../ui/search-dialog.gtkbuilder.h:103
 msgid "Footnotes radiobutton"
 msgstr "Bouton radio Notes de bas de page"
 
-#: ../ui/search-dialog.glade.h:104
+#: ../ui/search-dialog.glade.h:104 ../ui/search-dialog.gtkbuilder.h:104
 msgid "<b>Results Display Options</b>"
 msgstr "<b>Options d'affichage</b>"
 
-#: ../ui/search-dialog.glade.h:105
+#: ../ui/search-dialog.glade.h:105 ../ui/search-dialog.gtkbuilder.h:106
 msgid "In modules that have Strong's Numbers"
 msgstr "Pour les modules avec nombres de Strong"
 
-#: ../ui/search-dialog.glade.h:106
+#: ../ui/search-dialog.glade.h:106 ../ui/search-dialog.gtkbuilder.h:105
 msgid "Show Strong's Numbers"
 msgstr "Avec nombres de Strong"
 
-#: ../ui/search-dialog.glade.h:107
+#: ../ui/search-dialog.glade.h:107 ../ui/search-dialog.gtkbuilder.h:107
 msgid "Show Strong's Numbers checkbox"
 msgstr "Case à cocher Afficher les nombres de Strong"
 
-#: ../ui/search-dialog.glade.h:108
+#: ../ui/search-dialog.glade.h:108 ../ui/search-dialog.gtkbuilder.h:109
 msgid "In modules that have Morphological Tags"
 msgstr "Pour les modules avec étiquettes morphologiques"
 
-#: ../ui/search-dialog.glade.h:109
+#: ../ui/search-dialog.glade.h:109 ../ui/search-dialog.gtkbuilder.h:108
 msgid "Show Morphological Tags"
 msgstr "Avec étiquettes morphologiques"
 
-#: ../ui/search-dialog.glade.h:110
+#: ../ui/search-dialog.glade.h:110 ../ui/search-dialog.gtkbuilder.h:110
 msgid "Show Morphological Tags checkbox"
 msgstr "Case à cocher Afficher les étiquettes morphologiques"
 
-#: ../ui/search-dialog.glade.h:111
+#: ../ui/search-dialog.glade.h:111 ../ui/search-dialog.gtkbuilder.h:112
 msgid "In modules that have Footnotes"
 msgstr "Pour les modules avec notes de bas de page"
 
-#: ../ui/search-dialog.glade.h:112
+#: ../ui/search-dialog.glade.h:112 ../ui/search-dialog.gtkbuilder.h:111
 msgid "Show Footnotes"
 msgstr "Avec notes de bas de page"
 
-#: ../ui/search-dialog.glade.h:113
+#: ../ui/search-dialog.glade.h:113 ../ui/search-dialog.gtkbuilder.h:113
 msgid "Show Footnotes checkbox"
 msgstr "Case à cocher Afficher les notes de bas de page"
 
-#: ../ui/search-dialog.glade.h:114
+#: ../ui/search-dialog.glade.h:114 ../ui/search-dialog.gtkbuilder.h:114
 msgid "Attribute Search"
 msgstr "Attributs"
+
+#: ../ui/search-dialog.gtkbuilder.h:6
+#, fuzzy
+msgid "<b>search module</b>"
+msgstr "<b>Type de requête</b>"
 
 #: ../ui/xi-export-bookmarks.glade.h:1
 msgid "Export Bookmark Folder"
@@ -3774,11 +4349,11 @@ msgstr "Annuler"
 msgid "gtk-ok"
 msgstr "gtk-ok"
 
-#: ../ui/xi-menus.glade.h:2
+#: ../ui/xi-menus.glade.h:2 ../ui/xi-menus.gtkbuilder.h:2
 msgid "Open Study_pad"
 msgstr "Ouvrir le bloc-notes"
 
-#: ../ui/xi-menus.glade.h:3
+#: ../ui/xi-menus.glade.h:3 ../ui/xi-menus.gtkbuilder.h:3
 msgid "_Open Session"
 msgstr "Ouvrir une session"
 
@@ -3786,7 +4361,7 @@ msgstr "Ouvrir une session"
 msgid "Open a saved tab settings collection"
 msgstr "Ouvre une session d'onglets enregistrée"
 
-#: ../ui/xi-menus.glade.h:5
+#: ../ui/xi-menus.glade.h:5 ../ui/xi-menus.gtkbuilder.h:4
 msgid "_Save Session"
 msgstr "Enregistrer la session"
 
@@ -3794,7 +4369,7 @@ msgstr "Enregistrer la session"
 msgid "Save this collection of tab settings"
 msgstr "Enregistre cette session d'onglets"
 
-#: ../ui/xi-menus.glade.h:7
+#: ../ui/xi-menus.glade.h:7 ../ui/xi-menus.gtkbuilder.h:5
 msgid "_New Prayerlist/Journal"
 msgstr "Nouvelle Liste de prières / Journal"
 
@@ -3802,11 +4377,7 @@ msgstr "Nouvelle Liste de prières / Journal"
 msgid "Create a new journal or prayerlist from a template"
 msgstr "Crée un journal ou une nouvelle liste de prières à partir d'un modèle"
 
-#: ../ui/xi-menus.glade.h:9
-msgid "_Edit"
-msgstr "_Édition"
-
-#: ../ui/xi-menus.glade.h:10
+#: ../ui/xi-menus.glade.h:10 ../ui/xi-menus.gtkbuilder.h:7
 msgid "_Search"
 msgstr "_Rechercher"
 
@@ -3814,7 +4385,7 @@ msgstr "_Rechercher"
 msgid "Bring the simple sidebar search forward"
 msgstr "Affiche l'option recherche du volet latéral"
 
-#: ../ui/xi-menus.glade.h:12
+#: ../ui/xi-menus.glade.h:12 ../ui/xi-menus.gtkbuilder.h:8
 msgid "_Advanced Search"
 msgstr "Recherche avancée.."
 
@@ -3824,7 +4395,7 @@ msgstr ""
 "Ouvre la boîte de dialogue de recherche avancée, pour exécuter des requêtes "
 "complexes"
 
-#: ../ui/xi-menus.glade.h:14
+#: ../ui/xi-menus.glade.h:14 ../ui/xi-menus.gtkbuilder.h:9
 msgid "_Preferences"
 msgstr "_Préférences"
 
@@ -3832,11 +4403,11 @@ msgstr "_Préférences"
 msgid "Use module manager to install and remove Sword modules"
 msgstr "Installe ou supprime des modules du Projet SWORD"
 
-#: ../ui/xi-menus.glade.h:16
+#: ../ui/xi-menus.glade.h:16 ../ui/xi-menus.gtkbuilder.h:10
 msgid "_Module Manager"
 msgstr "Gérer les modules"
 
-#: ../ui/xi-menus.glade.h:18
+#: ../ui/xi-menus.glade.h:18 ../ui/xi-menus.gtkbuilder.h:12
 msgid "Preview _Daily Devotion"
 msgstr "Calendrier biblique"
 
@@ -3845,23 +4416,23 @@ msgid "Show today's entry from your selected daily devotional in the previewer"
 msgstr ""
 "Affiche le texte d'aujourd'hui du calendrier biblique dans le volet Aperçu"
 
-#: ../ui/xi-menus.glade.h:20
+#: ../ui/xi-menus.glade.h:20 ../ui/xi-menus.gtkbuilder.h:13
 msgid "_Bible"
 msgstr "Texte _biblique"
 
-#: ../ui/xi-menus.glade.h:21
+#: ../ui/xi-menus.glade.h:21 ../ui/xi-menus.gtkbuilder.h:14
 msgid "_Preview"
 msgstr "_Aperçu"
 
-#: ../ui/xi-menus.glade.h:22
+#: ../ui/xi-menus.glade.h:22 ../ui/xi-menus.gtkbuilder.h:15
 msgid "_Commentary/Book"
 msgstr "_Commentaire/Livre"
 
-#: ../ui/xi-menus.glade.h:23
+#: ../ui/xi-menus.glade.h:23 ../ui/xi-menus.gtkbuilder.h:16
 msgid "Dictionar_y"
 msgstr "Dictionnaire"
 
-#: ../ui/xi-menus.glade.h:24
+#: ../ui/xi-menus.glade.h:24 ../ui/xi-menus.gtkbuilder.h:17
 msgid "L_ink Tabs"
 msgstr "Onglets liés"
 
@@ -3869,7 +4440,7 @@ msgstr "Onglets liés"
 msgid "Make all tabs' Bibles navigate together"
 msgstr "Fait naviguer tous les onglets de texte biblique simultanément"
 
-#: ../ui/xi-menus.glade.h:26
+#: ../ui/xi-menus.glade.h:26 ../ui/xi-menus.gtkbuilder.h:18
 msgid "_Read Aloud"
 msgstr "Synthèse vocale"
 
@@ -3879,7 +4450,7 @@ msgstr ""
 "Active la lecture audio par synthèse vocale des textes bibliques lors de "
 "leur sélection"
 
-#: ../ui/xi-menus.glade.h:28
+#: ../ui/xi-menus.glade.h:28 ../ui/xi-menus.gtkbuilder.h:19
 msgid "Show Verse _Numbers"
 msgstr "Affiche les numéros de verset"
 
@@ -3887,7 +4458,7 @@ msgstr "Affiche les numéros de verset"
 msgid "Display verse numbers in the text"
 msgstr "Affiche les numéros de verset dans le texte"
 
-#: ../ui/xi-menus.glade.h:30
+#: ../ui/xi-menus.glade.h:30 ../ui/xi-menus.gtkbuilder.h:20
 msgid "_Highlight Current Verse"
 msgstr "_Verset en cours surligné"
 
@@ -3895,7 +4466,7 @@ msgstr "_Verset en cours surligné"
 msgid "Apply a high-contrast highlight to the current verse"
 msgstr "Applique un contraste élevé au verset en cours"
 
-#: ../ui/xi-menus.glade.h:32
+#: ../ui/xi-menus.glade.h:32 ../ui/xi-menus.gtkbuilder.h:21
 msgid "_Attach/Detach Sidebar"
 msgstr "Attacher/Détacher le volet latéral"
 
@@ -3903,7 +4474,7 @@ msgstr "Attacher/Détacher le volet latéral"
 msgid "Operate the sidebar as a separate window"
 msgstr "Positionne le volet latéral dans une fenêtre séparée"
 
-#: ../ui/xi-menus.glade.h:34
+#: ../ui/xi-menus.glade.h:34 ../ui/xi-menus.gtkbuilder.h:22
 msgid "_Show/Hide Attached Sidebar"
 msgstr "_Afficher/Cacher le volet latéral"
 
@@ -3911,7 +4482,7 @@ msgstr "_Afficher/Cacher le volet latéral"
 msgid "Remove the sidebar entirely from view"
 msgstr "Retire entièrement le volet latéral de la fenêtre principale"
 
-#: ../ui/xi-menus.glade.h:36
+#: ../ui/xi-menus.glade.h:36 ../ui/xi-menus.gtkbuilder.h:23
 msgid "Show Parallel View in a _Tab"
 msgstr "Vue parallèle dans un ongle_t"
 
@@ -3919,7 +4490,7 @@ msgstr "Vue parallèle dans un ongle_t"
 msgid "Provide the full-chapter parallel Bible window as another tab"
 msgstr "Affiche la vue parallèle entre textes bibliques dans un nouvel onglet"
 
-#: ../ui/xi-menus.glade.h:38
+#: ../ui/xi-menus.glade.h:38 ../ui/xi-menus.gtkbuilder.h:24
 msgid "Show Previe_wer in the Sidebar"
 msgstr "Aperçu dans le volet _latéral"
 
@@ -3928,11 +4499,7 @@ msgid "Select Previewer position between sidebar or beneath Bible"
 msgstr ""
 "Positionne le volet Aperçu dans le volet latéral ou sous le texte biblique"
 
-#: ../ui/xi-menus.glade.h:40
-msgid "_Help"
-msgstr "_Aide"
-
-#: ../ui/xi-menus.glade.h:41
+#: ../ui/xi-menus.glade.h:41 ../ui/xi-menus.gtkbuilder.h:26
 msgid "_Contents"
 msgstr "Sommaire"
 
@@ -3940,7 +4507,7 @@ msgstr "Sommaire"
 msgid "Open the help viewer on the Xiphos manual"
 msgstr "Ouvre le manuel d'aide de Xiphos"
 
-#: ../ui/xi-menus.glade.h:43
+#: ../ui/xi-menus.glade.h:43 ../ui/xi-menus.gtkbuilder.h:27
 msgid "_Mailing List"
 msgstr "Liste de diffusion"
 
@@ -3949,7 +4516,7 @@ msgid "Open a browser on the users' mailing list webpage"
 msgstr ""
 "Ouvre un navigateur sur la page Web de la liste de diffusion des utilisateurs"
 
-#: ../ui/xi-menus.glade.h:45
+#: ../ui/xi-menus.glade.h:45 ../ui/xi-menus.gtkbuilder.h:28
 msgid "_Live Chat"
 msgstr "Chat en _ligne"
 
@@ -3957,7 +4524,7 @@ msgstr "Chat en _ligne"
 msgid "Open a browser on an interface to live IRC chat"
 msgstr "Ouvrir un navigateur sur une interface web de Chat IRC"
 
-#: ../ui/xi-menus.glade.h:47
+#: ../ui/xi-menus.glade.h:47 ../ui/xi-menus.gtkbuilder.h:29
 msgid "_Report Bug"
 msgstr "_Signaler un bogue"
 
@@ -3965,7 +4532,7 @@ msgstr "_Signaler un bogue"
 msgid "Open a browser on our bug tracker"
 msgstr "Ouvre un navigateur sur le bug tracker"
 
-#: ../ui/xi-menus.glade.h:49
+#: ../ui/xi-menus.glade.h:49 ../ui/xi-menus.gtkbuilder.h:30
 msgid "About _Translation"
 msgstr "À propos de la _traduction"
 
@@ -3973,7 +4540,7 @@ msgstr "À propos de la _traduction"
 msgid "Learn about translating the Xiphos interface to other languages"
 msgstr "En savoir plus pour traduire l'interface Xiphos en d'autres langues"
 
-#: ../ui/xi-menus.glade.h:51
+#: ../ui/xi-menus.glade.h:51 ../ui/xi-menus.gtkbuilder.h:31
 msgid "_About The SWORD Project"
 msgstr "_À propos du Projet SWORD"
 
@@ -3981,7 +4548,7 @@ msgstr "_À propos du Projet SWORD"
 msgid "Learn about The Sword Project, of which Xiphos is one application"
 msgstr "En savoir plus sur le Projet Sword, dont Xiphos est une application"
 
-#: ../ui/xi-menus.glade.h:53
+#: ../ui/xi-menus.glade.h:53 ../ui/xi-menus.gtkbuilder.h:32
 msgid "About _Xiphos"
 msgstr "À propos de Xiphos"
 
@@ -3989,31 +4556,31 @@ msgstr "À propos de Xiphos"
 msgid "Learn about Xiphos"
 msgstr "En savoir plus sur Xiphos"
 
-#: ../ui/xi-menus.glade.h:57
+#: ../ui/xi-menus.glade.h:57 ../ui/xi-menus-popup.gtkbuilder.h:36
 msgid "Annotate Verse"
 msgstr "Annoter un verset"
 
-#: ../ui/xi-menus.glade.h:60
+#: ../ui/xi-menus.glade.h:60 ../ui/xi-menus-popup.gtkbuilder.h:39
 msgid "Open Module"
 msgstr "Ouvrir le module"
 
-#: ../ui/xi-menus.glade.h:62
+#: ../ui/xi-menus.glade.h:62 ../ui/xi-menus-popup.gtkbuilder.h:40
 msgid "Note"
 msgstr "Note"
 
-#: ../ui/xi-menus.glade.h:63
+#: ../ui/xi-menus.glade.h:63 ../ui/xi-menus-popup.gtkbuilder.h:41
 msgid "Open in editor"
 msgstr "Modifier le commentaire"
 
-#: ../ui/xi-menus.glade.h:65
+#: ../ui/xi-menus.glade.h:65 ../ui/xi-menus-popup.gtkbuilder.h:43
 msgid "Verse Per Line"
 msgstr "Verset par ligne"
 
-#: ../ui/xi-menus.glade.h:72
+#: ../ui/xi-menus.glade.h:72 ../ui/xi-menus-popup.gtkbuilder.h:50
 msgid "Scripture Cross-references"
 msgstr "Références croisées de l'Écriture"
 
-#: ../ui/xi-menus.glade.h:73
+#: ../ui/xi-menus.glade.h:73 ../ui/xi-menus-popup.gtkbuilder.h:51
 msgid "Footnote/Cross-ref Markers"
 msgstr "Marques des notes de bas de page et des références croisées"
 
@@ -4021,44 +4588,44 @@ msgstr "Marques des notes de bas de page et des références croisées"
 msgid "Show non-anonymous markers e.g. \"*n23\""
 msgstr "Afficher les marques non-anonymes comme « *n23 »"
 
-#: ../ui/xi-menus.glade.h:79
+#: ../ui/xi-menus.glade.h:79 ../ui/xi-menus-popup.gtkbuilder.h:56
 msgid "Variants"
 msgstr "Variantes"
 
-#: ../ui/xi-menus.glade.h:83
+#: ../ui/xi-menus.glade.h:83 ../ui/xi-menus-popup.gtkbuilder.h:60
 msgid "Image Content"
 msgstr "Afficher les images"
 
-#: ../ui/xi-menus.glade.h:84
+#: ../ui/xi-menus.glade.h:84 ../ui/xi-menus-popup.gtkbuilder.h:61
 msgid "Respect Font Faces"
 msgstr "Respect des polices"
 
-#: ../ui/xi-menus.glade.h:85
+#: ../ui/xi-menus.glade.h:85 ../ui/xi-menus-popup.gtkbuilder.h:62
 msgid "Commentary by Chapter"
 msgstr "Commentaire par chapitre"
 
-#: ../ui/xi-menus.glade.h:86
+#: ../ui/xi-menus.glade.h:86 ../ui/xi-menus-popup.gtkbuilder.h:63
 msgid "Doublespace"
 msgstr "Double espace"
 
-#: ../ui/xi-menus.glade.h:87
+#: ../ui/xi-menus.glade.h:87 ../ui/xi-menus-popup.gtkbuilder.h:64
 msgid "Lookup Selection"
 msgstr "Définition du mot sélectionné"
 
 # src/gs_preferences_dlg.c
-#: ../ui/xi-menus.glade.h:88
+#: ../ui/xi-menus.glade.h:88 ../ui/xi-menus-popup.gtkbuilder.h:65
 msgid "Use Current Dictionary"
 msgstr "Utiliser le dictionnaire en cours"
 
-#: ../ui/xi-menus.glade.h:89
+#: ../ui/xi-menus.glade.h:89 ../ui/xi-menus-popup.gtkbuilder.h:66
 msgid "Browse in BibleMap.org"
 msgstr "Consulter la carte sur BibleMap.org"
 
-#: ../ui/xi-menus.glade.h:90
+#: ../ui/xi-menus.glade.h:90 ../ui/xi-menus-popup.gtkbuilder.h:67
 msgid "Unlock This Module"
 msgstr "Déverrouiller ce module"
 
-#: ../ui/xi-menus.glade.h:91
+#: ../ui/xi-menus.glade.h:91 ../ui/xi-menus-popup.gtkbuilder.h:68
 msgid "Display Book Heading"
 msgstr "Affiche l'entête du livre"
 
@@ -4066,128 +4633,124 @@ msgstr "Affiche l'entête du livre"
 msgid "Display Chapter Heading"
 msgstr "Affiche l'entête du chapitre"
 
-#: ../ui/xi-menus.glade.h:93
+#: ../ui/xi-menus.glade.h:93 ../ui/xi-menus-popup.gtkbuilder.h:69
 msgid "Rename Pers.Comm."
 msgstr "Renommer ce commentaire"
 
-#: ../ui/xi-menus.glade.h:94
+#: ../ui/xi-menus.glade.h:94 ../ui/xi-menus-popup.gtkbuilder.h:70
 msgid "Dump Pers.Comm."
 msgstr "Liste des versets commentés"
 
-#: ../ui/xi-menus.glade.h:95
+#: ../ui/xi-menus.glade.h:95 ../ui/xi-menus-popup.gtkbuilder.h:71
 msgid "Read Selection Aloud"
 msgstr "Synthèse vocale du texte sélectionné"
 
-#: ../ui/xi-menus.glade.h:96
+#: ../ui/xi-menus.glade.h:96 ../ui/xi-menus-popup.gtkbuilder.h:85
 msgid "Save these results as a single bookmark"
 msgstr "Enregistre ces résultats sous un seul signet"
 
-#: ../ui/xi-menus.glade.h:97
+#: ../ui/xi-menus.glade.h:97 ../ui/xi-menus-popup.gtkbuilder.h:84
 msgid "Save list as a single bookmark"
 msgstr "Enregistre la liste sous un seul signet"
 
-#: ../ui/xi-menus.glade.h:98
+#: ../ui/xi-menus.glade.h:98 ../ui/xi-menus-popup.gtkbuilder.h:87
 msgid "Save these results as a series of bookmarks in their own folder"
 msgstr ""
 "Enregistre ces résultats sous une série de signets dans leur propre dossier"
 
-#: ../ui/xi-menus.glade.h:99
+#: ../ui/xi-menus.glade.h:99 ../ui/xi-menus-popup.gtkbuilder.h:86
 msgid "Save list as a series of bookmarks"
 msgstr "Enregistre la liste dans une série de signets"
 
-#: ../ui/xi-menus.glade.h:100
+#: ../ui/xi-menus.glade.h:100 ../ui/xi-menus-popup.gtkbuilder.h:88
 msgid "Export List"
 msgstr "Exporter la liste"
 
-#: ../ui/xi-menus.glade.h:101
+#: ../ui/xi-menus.glade.h:101 ../ui/xi-menus-popup.gtkbuilder.h:2
 msgid "Open this bookmark in a new tab"
 msgstr "Ouvre ce signet dans un nouvel onglet"
 
-#: ../ui/xi-menus.glade.h:102
+#: ../ui/xi-menus.glade.h:102 ../ui/xi-menus-popup.gtkbuilder.h:1
 msgid "Open in new tab"
 msgstr "Ouvrir dans un nouvel onglet"
 
-#: ../ui/xi-menus.glade.h:103
+#: ../ui/xi-menus.glade.h:103 ../ui/xi-menus-popup.gtkbuilder.h:4
 msgid "Open this bookmark in a dialog"
 msgstr "Ouvre le signet dans une nouvelle fenêtre"
 
-#: ../ui/xi-menus.glade.h:104
+#: ../ui/xi-menus.glade.h:104 ../ui/xi-menus-popup.gtkbuilder.h:3
 msgid "Open in a dialog"
 msgstr "Ouvrir dans une fenêtre"
 
-#: ../ui/xi-menus.glade.h:105
+#: ../ui/xi-menus.glade.h:105 ../ui/xi-menus-popup.gtkbuilder.h:6
 msgid "Add new folder to selected folder"
 msgstr "Ajoute un nouveau dossier au dossier sélectionné"
 
-#: ../ui/xi-menus.glade.h:107
+#: ../ui/xi-menus.glade.h:107 ../ui/xi-menus-popup.gtkbuilder.h:8
 msgid "Insert new bookmark here"
 msgstr "Insère un nouveau signet dans le dossier sélectionné"
 
-#: ../ui/xi-menus.glade.h:108
+#: ../ui/xi-menus.glade.h:108 ../ui/xi-menus-popup.gtkbuilder.h:7
 msgid "Insert Bookmark"
 msgstr "Insérer un signet"
 
-#: ../ui/xi-menus.glade.h:109
+#: ../ui/xi-menus.glade.h:109 ../ui/xi-menus-popup.gtkbuilder.h:10
 msgid "Edit bookmark item"
 msgstr "Édite ce signet"
 
-#: ../ui/xi-menus.glade.h:110
+#: ../ui/xi-menus.glade.h:110 ../ui/xi-menus-popup.gtkbuilder.h:9
 msgid "_Edit Item"
 msgstr "Éditer l'élément"
 
-#: ../ui/xi-menus.glade.h:111
+#: ../ui/xi-menus.glade.h:111 ../ui/xi-menus-popup.gtkbuilder.h:12
 msgid "Delete item"
 msgstr "Supprime l'élément sélectionné"
 
-#: ../ui/xi-menus.glade.h:112
-msgid "Delete Item"
-msgstr "Supprimer l'élément"
-
-#: ../ui/xi-menus.glade.h:113
+#: ../ui/xi-menus.glade.h:113 ../ui/xi-menus-popup.gtkbuilder.h:14
 msgid "Expand all Bookmarks groups"
 msgstr "Développe tous les groupes de signets"
 
-#: ../ui/xi-menus.glade.h:114
+#: ../ui/xi-menus.glade.h:114 ../ui/xi-menus-popup.gtkbuilder.h:13
 msgid "Expand All"
 msgstr "Développer tout"
 
-#: ../ui/xi-menus.glade.h:115
+#: ../ui/xi-menus.glade.h:115 ../ui/xi-menus-popup.gtkbuilder.h:16
 msgid "Collapse all Bookmarks groups"
 msgstr "Réduit tous les groupes de signets"
 
-#: ../ui/xi-menus.glade.h:116
+#: ../ui/xi-menus.glade.h:116 ../ui/xi-menus-popup.gtkbuilder.h:15
 msgid "Collapse All"
 msgstr "Réduire tout"
 
-#: ../ui/xi-menus.glade.h:117
+#: ../ui/xi-menus.glade.h:117 ../ui/xi-menus-popup.gtkbuilder.h:17
 msgid "Allow items to be moved from one folder to another"
 msgstr "Active/désactive le déplacement des éléments"
 
-#: ../ui/xi-menus.glade.h:118
+#: ../ui/xi-menus.glade.h:118 ../ui/xi-menus-popup.gtkbuilder.h:18
 msgid "Allow Reordering"
 msgstr "Déplacer les signets"
 
-#: ../ui/xi-menus.glade.h:119
+#: ../ui/xi-menus.glade.h:119 ../ui/xi-menus-popup.gtkbuilder.h:20
 msgid "Load other bookmarks file (default: from BibleTime)"
 msgstr "Importe un autre fichier de signets (par défaut: de Bibletime)"
 
-#: ../ui/xi-menus.glade.h:120
+#: ../ui/xi-menus.glade.h:120 ../ui/xi-menus-popup.gtkbuilder.h:19
 msgid "Import Bookmarks"
 msgstr "Importe les signets"
 
-#: ../ui/xi-menus.glade.h:121
+#: ../ui/xi-menus.glade.h:121 ../ui/xi-menus-popup.gtkbuilder.h:22
 msgid "Remove folder and save it"
 msgstr "Supprimer le dossier et le sauvegarder"
 
-#: ../ui/xi-menus.glade.h:122
+#: ../ui/xi-menus.glade.h:122 ../ui/xi-menus-popup.gtkbuilder.h:21
 msgid "Export Folder"
 msgstr "Exporter le dossier"
 
-#: ../ui/xi-menus.glade.h:123
+#: ../ui/xi-menus.glade.h:123 ../ui/xi-menus-popup.gtkbuilder.h:30
 msgid "Open selected module in a new tab"
 msgstr "Ouvrir le module sélectionné dans un nouvel onglet"
 
-#: ../ui/xi-menus.glade.h:124
+#: ../ui/xi-menus.glade.h:124 ../ui/xi-menus-popup.gtkbuilder.h:32
 msgid ""
 "Open selected module in a\n"
 "\tseparate ['dialog'] window"
@@ -4195,59 +4758,59 @@ msgstr ""
 "Ouvrir le module sélectionné dans une\n"
 "nouvelle fenêtre"
 
-#: ../ui/xi-menus.glade.h:126
+#: ../ui/xi-menus.glade.h:126 ../ui/xi-menus-popup.gtkbuilder.h:31
 msgid "Open in a separate window"
 msgstr "Ouvrir dans une fenêtre séparée"
 
-#: ../ui/xi-menus.glade.h:127
+#: ../ui/xi-menus.glade.h:127 ../ui/xi-menus-popup.gtkbuilder.h:73
 msgid "Create a new simple prayer list"
 msgstr "Crée une nouvelle simple liste de prières"
 
-#: ../ui/xi-menus.glade.h:128
+#: ../ui/xi-menus.glade.h:128 ../ui/xi-menus-popup.gtkbuilder.h:72
 msgid "Simple"
 msgstr "Liste simple"
 
-#: ../ui/xi-menus.glade.h:129
+#: ../ui/xi-menus.glade.h:129 ../ui/xi-menus-popup.gtkbuilder.h:75
 msgid "Create a new subject prayer list"
 msgstr "Crée une nouvelle liste de prières organisée par sujets"
 
-#: ../ui/xi-menus.glade.h:130
+#: ../ui/xi-menus.glade.h:130 ../ui/xi-menus-popup.gtkbuilder.h:74
 msgid "Subject"
 msgstr "Liste ordonnée par sujet"
 
-#: ../ui/xi-menus.glade.h:131
+#: ../ui/xi-menus.glade.h:131 ../ui/xi-menus-popup.gtkbuilder.h:77
 msgid "Create a new monthly journal"
 msgstr "Crée un nouveau journal mensuel"
 
-#: ../ui/xi-menus.glade.h:132
+#: ../ui/xi-menus.glade.h:132 ../ui/xi-menus-popup.gtkbuilder.h:76
 msgid "Monthly"
 msgstr "Liste de prières mensuelle"
 
-#: ../ui/xi-menus.glade.h:133
+#: ../ui/xi-menus.glade.h:133 ../ui/xi-menus-popup.gtkbuilder.h:79
 msgid "Create a new daily journal"
 msgstr "Crée un nouveau journal quotidien"
 
-#: ../ui/xi-menus.glade.h:134
+#: ../ui/xi-menus.glade.h:134 ../ui/xi-menus-popup.gtkbuilder.h:78
 msgid "Daily"
 msgstr "Journal quotidien"
 
-#: ../ui/xi-menus.glade.h:135
+#: ../ui/xi-menus.glade.h:135 ../ui/xi-menus-popup.gtkbuilder.h:81
 msgid "Create a new outlined topic"
 msgstr "Crée un nouveau thême structuré"
 
-#: ../ui/xi-menus.glade.h:136
+#: ../ui/xi-menus.glade.h:136 ../ui/xi-menus-popup.gtkbuilder.h:80
 msgid "Outlined"
 msgstr "Thême structuré"
 
-#: ../ui/xi-menus.glade.h:137
+#: ../ui/xi-menus.glade.h:137 ../ui/xi-menus-popup.gtkbuilder.h:83
 msgid "Open module in editor or plain display window"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:138
+#: ../ui/xi-menus.glade.h:138 ../ui/xi-menus-popup.gtkbuilder.h:82
 msgid "Open in separate window"
 msgstr "Ouvrir dans une fenêtre séparée"
 
-#: ../ui/xi-menus.glade.h:139
+#: ../ui/xi-menus.glade.h:139 ../ui/xi-menus-popup.gtkbuilder.h:23
 msgid "Add a sub-item"
 msgstr "Ajoute un sous-élément"
 
@@ -4255,19 +4818,19 @@ msgstr "Ajoute un sous-élément"
 msgid "Add Sub-Item"
 msgstr "Ajouter un sous-élément"
 
-#: ../ui/xi-menus.glade.h:141
+#: ../ui/xi-menus.glade.h:141 ../ui/xi-menus-popup.gtkbuilder.h:25
 msgid "Add an item"
 msgstr "Ajouter un élément"
 
-#: ../ui/xi-menus.glade.h:142
+#: ../ui/xi-menus.glade.h:142 ../ui/xi-menus-popup.gtkbuilder.h:24
 msgid "Add Item"
 msgstr "Ajouter un élément"
 
-#: ../ui/xi-menus.glade.h:143
+#: ../ui/xi-menus.glade.h:143 ../ui/xi-menus-popup.gtkbuilder.h:27
 msgid "Remove this item"
 msgstr "Supprimer cet élément :"
 
-#: ../ui/xi-menus.glade.h:145
+#: ../ui/xi-menus.glade.h:145 ../ui/xi-menus-popup.gtkbuilder.h:29
 msgid "Edit this item"
 msgstr "Éditer cet élément"
 
@@ -4305,9 +4868,6 @@ msgstr "Étudier la Bible avec Xiphos"
 
 #~ msgid "Cipher Key?"
 #~ msgstr "Clé de déverrouillage?"
-
-#~ msgid "Copy"
-#~ msgstr "Copier"
 
 #~ msgid "Change parallel 1"
 #~ msgstr "Changer parallèle 1"
@@ -4526,12 +5086,6 @@ msgstr "Étudier la Bible avec Xiphos"
 #~ msgid "Stay in sync"
 #~ msgstr "Synchronisé"
 
-#~ msgid "Print"
-#~ msgstr "Imprimer..."
-
-#~ msgid "Print Preview"
-#~ msgstr "Aperçu avant impression"
-
 #~ msgid "Failed to print the document"
 #~ msgstr "Le document n'a pas pu être imprimé"
 
@@ -4625,27 +5179,6 @@ msgstr "Étudier la Bible avec Xiphos"
 
 #~ msgid "\\par\\par My prayer list \\par\\par Module created in Xiphos"
 #~ msgstr "\\par\\par Liste simple\\par\\par Module crée par Xiphos"
-
-#~ msgid "+5"
-#~ msgstr "+5"
-
-#~ msgid "+4"
-#~ msgstr "+4"
-
-#~ msgid "+3"
-#~ msgstr "+3"
-
-#~ msgid "+2"
-#~ msgstr "+2"
-
-#~ msgid "+1"
-#~ msgstr "+1"
-
-#~ msgid "-1"
-#~ msgstr "-1"
-
-#~ msgid "-2"
-#~ msgstr "-2"
 
 #~ msgid "-3"
 #~ msgstr "-3"

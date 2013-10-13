@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 3.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-08 10:07-0400\n"
+"POT-Creation-Date: 2013-10-13 20:43+0200\n"
 "PO-Revision-Date: 2012-01-23 17:03+0100\n"
 "Last-Translator: Peter von Kaehne <refdoc@crosswire.org>\n"
 "Language-Team: English/GB <en@li.org>\n"
@@ -41,7 +41,8 @@ msgid "Page %d of %d"
 msgstr "صفحۀ %d  از %d"
 
 #: ../src/editor/slib-editor.c:393 ../src/editor/webkit_editor.c:585
-#: ../ui/editor_studypad.xml.h:9
+#: ../ui/editor_studypad.xml.h:9 ../ui/gtk2_webedit.ui.h:58
+#: ../ui/gtk_webedit.ui.h:58
 msgid "Open"
 msgstr "باز کن"
 
@@ -96,7 +97,8 @@ msgstr "_ضبط"
 msgid "Save _As..."
 msgstr "ضبط کن به _اسم"
 
-#: ../src/editor/slib-editor.c:752
+#: ../src/editor/slib-editor.c:752 ../ui/gtk2_webedit.ui.h:56
+#: ../ui/gtk_webedit.ui.h:56
 msgid "New"
 msgstr "جدید ..."
 
@@ -104,7 +106,8 @@ msgstr "جدید ..."
 msgid "Open new document"
 msgstr "ایجاد متن جدید"
 
-#: ../src/editor/slib-editor.c:758
+#: ../src/editor/slib-editor.c:758 ../ui/gtk2_webedit.ui.h:14
+#: ../ui/gtk_webedit.ui.h:14
 msgid "Delete"
 msgstr "حذف"
 
@@ -113,7 +116,9 @@ msgid "Delete current note"
 msgstr "یادداشت فعلی را حذف کن"
 
 #: ../src/editor/slib-editor.c:765 ../ui/editor_note.xml.h:9
-#: ../ui/editor_studypad.xml.h:7 ../ui/xi-menus.glade.h:1
+#: ../ui/editor_studypad.xml.h:7 ../ui/gtk2_webedit.ui.h:86
+#: ../ui/gtk_webedit.ui.h:86 ../ui/xi-menus.glade.h:1
+#: ../ui/xi-menus.gtkbuilder.h:1
 msgid "_File"
 msgstr "_پرونده"
 
@@ -129,12 +134,15 @@ msgstr "_منبع به فرمت اچ.تی.ام.ال"
 msgid "_Plain Source"
 msgstr "منبع فرمت نشده"
 
-#: ../src/editor/slib-editor.c:841 ../ui/xi-menus.glade.h:17
+#: ../src/editor/slib-editor.c:841 ../ui/gtk2_webedit.ui.h:89
+#: ../ui/gtk_webedit.ui.h:89 ../ui/xi-menus.glade.h:17
+#: ../ui/xi-menus.gtkbuilder.h:11
 msgid "_View"
 msgstr "_مرور"
 
 #: ../src/editor/slib-editor.c:852 ../ui/editor_note.xml.h:16
-#: ../ui/editor_studypad.xml.h:11
+#: ../ui/editor_studypad.xml.h:11 ../ui/gtk2_webedit.ui.h:75
+#: ../ui/gtk_webedit.ui.h:75
 msgid "Save"
 msgstr "ضبط"
 
@@ -158,7 +166,7 @@ msgid "If you don't save, changes will be permanently lost."
 msgstr "اگر ضبط نکنید، تغییرات به کلی حذف خواهد شد."
 
 #: ../src/editor/slib-editor.c:1291 ../src/editor/webkit_editor.c:1373
-#: ../ui/xi-menus.glade.h:59
+#: ../ui/xi-menus.glade.h:59 ../ui/xi-menus-popup.gtkbuilder.h:38
 msgid "File"
 msgstr "پرونده"
 
@@ -291,7 +299,7 @@ msgstr ""
 #: ../src/gnome2/bookmark_dialog.c:175 ../src/gnome2/bookmarks_menu.c:369
 #: ../src/gnome2/bookmarks_menu.c:664 ../src/gnome2/bookmarks_menu.c:763
 #: ../src/gnome2/bookmarks_treeview.c:131 ../ui/editor_studypad.xml.h:15
-#: ../ui/xi-menus.glade.h:56
+#: ../ui/xi-menus.glade.h:56 ../ui/xi-menus-popup.gtkbuilder.h:35
 msgid "Bookmark"
 msgstr "علامت"
 
@@ -315,6 +323,7 @@ msgid "Specify bookmarks file"
 msgstr "ویرایش مورد علامت"
 
 #: ../src/gnome2/bookmarks_menu.c:355 ../ui/xi-menus.glade.h:61
+#: ../ui/xi-menus-popup.gtkbuilder.h:28
 msgid "Edit"
 msgstr "ویرایش"
 
@@ -405,10 +414,12 @@ msgid "SearchResults"
 msgstr "\"نتیجه‌های چستچو"
 
 #: ../src/gnome2/export_dialog.c:319 ../ui/export-dialog.glade.h:4
+#: ../ui/export-dialog.gtkbuilder.h:4
 msgid "Please check copyright before exporting!"
 msgstr "لطفا قبل از ارسال فایل، به حقوق قانونی کپی و نشر دقت کنید!"
 
 #: ../src/gnome2/find_dialog.c:186 ../src/gnome2/find_dialog.c:344
+#: ../ui/gtk2_webedit.ui.h:18 ../ui/gtk_webedit.ui.h:18
 msgid "Find"
 msgstr "پیدا کن"
 
@@ -441,6 +452,7 @@ msgid "Current font: "
 msgstr "قلم فعلی: "
 
 #: ../src/gnome2/font_dialog.c:372 ../src/gnome2/font_dialog.c:388
+#: ../ui/prefs.gtkbuilder.h:114
 msgid "+0"
 msgstr "+٠"
 
@@ -729,6 +741,7 @@ msgid "Removing"
 msgstr "حذف"
 
 #: ../src/gnome2/mod_mgr.c:192 ../ui/xi-menus.glade.h:144
+#: ../ui/xi-menus-popup.gtkbuilder.h:26
 msgid "Remove"
 msgstr "حذف کن"
 
@@ -836,7 +849,9 @@ msgstr ""
 "نشانه قفل يعني اینکه این مدول قفل است و جهت استفاده از آن، بايد کليد اين قفل "
 "خريداري شود"
 
-#: ../src/gnome2/mod_mgr.c:618 ../ui/xi-menus.glade.h:55
+#: ../src/gnome2/mod_mgr.c:618 ../ui/gtk2_webedit.ui.h:2
+#: ../ui/gtk_webedit.ui.h:2 ../ui/xi-menus.glade.h:55
+#: ../ui/xi-menus-popup.gtkbuilder.h:34
 msgid "About"
 msgstr "درباره"
 
@@ -920,6 +935,7 @@ msgstr "متون کتابمقدس"
 #: ../src/gnome2/mod_mgr.c:1409 ../src/gnome2/utilities.c:613
 #: ../src/main/sidebar.cc:663 ../src/main/sidebar.cc:1005
 #: ../src/main/sidebar.cc:1007 ../ui/prefs.glade.h:41
+#: ../ui/prefs.gtkbuilder.h:33
 msgid "Commentaries"
 msgstr "کتب تفسیر"
 
@@ -1152,6 +1168,7 @@ msgid "Detach/Attach"
 msgstr "جدا کن/ الصاق کن"
 
 #: ../src/gnome2/parallel_view.c:121 ../ui/xi-menus.glade.h:64
+#: ../ui/xi-menus-popup.gtkbuilder.h:42
 msgid "Module Options"
 msgstr "گزینه‏های مختلف مدول"
 
@@ -1181,6 +1198,7 @@ msgid "Locale will take effect after restart."
 msgstr "زبان جدید بعد از شروع جدید این برنامه"
 
 #: ../src/gnome2/preferences_dialog.c:1824 ../ui/prefs.glade.h:1
+#: ../ui/prefs.gtkbuilder.h:1
 msgid "Preferences"
 msgstr "ویژگی‏ها"
 
@@ -1383,6 +1401,7 @@ msgid "Bible"
 msgstr "کتاب‏مقدس"
 
 #: ../src/gnome2/search_sidebar.c:233 ../ui/prefs.glade.h:92
+#: ../ui/prefs.gtkbuilder.h:84
 msgid "Commentary"
 msgstr "تفسیر"
 
@@ -1391,14 +1410,17 @@ msgid "Search Type"
 msgstr "نوع جستجو"
 
 #: ../src/gnome2/search_sidebar.c:261 ../ui/search-dialog.glade.h:39
+#: ../ui/search-dialog.gtkbuilder.h:39
 msgid "Multi word"
 msgstr "کلمات متعدد"
 
 #: ../src/gnome2/search_sidebar.c:272 ../ui/search-dialog.glade.h:41
+#: ../ui/search-dialog.gtkbuilder.h:41
 msgid "Regular expression"
 msgstr "بیان معمول"
 
 #: ../src/gnome2/search_sidebar.c:280 ../ui/search-dialog.glade.h:43
+#: ../ui/search-dialog.gtkbuilder.h:43
 msgid "Exact phrase"
 msgstr "عبارت به شکل دقیق"
 
@@ -1407,6 +1429,7 @@ msgid "Search Options"
 msgstr "ترجیحات در جستجو"
 
 #: ../src/gnome2/search_sidebar.c:307 ../ui/search-dialog.glade.h:49
+#: ../ui/search-dialog.gtkbuilder.h:49
 msgid "Match case"
 msgstr "مقایسه و تطبیق موارد"
 
@@ -1547,6 +1570,7 @@ msgstr ""
 
 #: ../src/main/display.cc:1031 ../src/main/display.cc:1072
 #: ../src/main/display.cc:1157 ../ui/export-dialog.glade.h:14
+#: ../ui/export-dialog.gtkbuilder.h:13
 msgid "Chapter"
 msgstr "فصل"
 
@@ -1576,7 +1600,7 @@ msgid "Displaying Xiphos"
 msgstr "نمایش زیفوس"
 
 #: ../src/main/module_dialogs.cc:189 ../src/main/previewer.cc:97
-#: ../ui/prefs.glade.h:39
+#: ../ui/prefs.glade.h:39 ../ui/prefs.gtkbuilder.h:31
 msgid "Previewer"
 msgstr "مرورگر"
 
@@ -1607,28 +1631,34 @@ msgid "Back to "
 msgstr "برگشت به "
 
 #: ../src/main/parallel_view.cc:383 ../ui/xi-menus.glade.h:68
+#: ../ui/xi-menus-popup.gtkbuilder.h:46
 msgid "Strong's Numbers"
 msgstr "شماره‌های استرانگ"
 
 #: ../src/main/parallel_view.cc:393 ../ui/search-dialog.glade.h:102
-#: ../ui/xi-menus.glade.h:71
+#: ../ui/search-dialog.gtkbuilder.h:101 ../ui/xi-menus.glade.h:71
+#: ../ui/xi-menus-popup.gtkbuilder.h:49
 msgid "Footnotes"
 msgstr "پانویس"
 
 #: ../src/main/parallel_view.cc:403 ../ui/search-dialog.glade.h:99
-#: ../ui/xi-menus.glade.h:70
+#: ../ui/search-dialog.gtkbuilder.h:98 ../ui/xi-menus.glade.h:70
+#: ../ui/xi-menus-popup.gtkbuilder.h:48
 msgid "Morphological Tags"
 msgstr "علائم واژه‏شناسی"
 
 #: ../src/main/parallel_view.cc:413 ../ui/xi-menus.glade.h:76
+#: ../ui/xi-menus-popup.gtkbuilder.h:53
 msgid "Hebrew Vowel Points"
 msgstr "نقاط حروف صدادار عبری"
 
 #: ../src/main/parallel_view.cc:423 ../ui/xi-menus.glade.h:77
+#: ../ui/xi-menus-popup.gtkbuilder.h:54
 msgid "Hebrew Cantillation"
 msgstr "نتهای عبری جهت قرائت"
 
 #: ../src/main/parallel_view.cc:433 ../ui/xi-menus.glade.h:75
+#: ../ui/xi-menus-popup.gtkbuilder.h:52
 msgid "Greek Accents"
 msgstr "اِعراب‏های زبان یونانی"
 
@@ -1637,10 +1667,12 @@ msgid "Cross-references"
 msgstr "ارجاعات"
 
 #: ../src/main/parallel_view.cc:453 ../ui/xi-menus.glade.h:69
+#: ../ui/xi-menus-popup.gtkbuilder.h:47
 msgid "Lemmas"
 msgstr "کلمه ریشه‌ای"
 
 #: ../src/main/parallel_view.cc:463 ../ui/xi-menus.glade.h:66
+#: ../ui/xi-menus-popup.gtkbuilder.h:44
 msgid "Headings"
 msgstr "تیترها"
 
@@ -1649,10 +1681,12 @@ msgid "Morpheme Segmentation"
 msgstr "تقسیم بندی یک واژه"
 
 #: ../src/main/parallel_view.cc:487 ../ui/xi-menus.glade.h:67
+#: ../ui/xi-menus-popup.gtkbuilder.h:45
 msgid "Words of Christ in Red"
 msgstr "سخنان مسیح به رنگ قرمز"
 
 #: ../src/main/parallel_view.cc:497 ../ui/xi-menus.glade.h:78
+#: ../ui/xi-menus-popup.gtkbuilder.h:55
 msgid "Transliteration"
 msgstr "نویسه گردانی"
 
@@ -1661,14 +1695,17 @@ msgid "Textual Variants"
 msgstr "تفاوت‏های متنی"
 
 #: ../src/main/parallel_view.cc:515 ../ui/xi-menus.glade.h:80
+#: ../ui/xi-menus-popup.gtkbuilder.h:57
 msgid "Primary Reading"
 msgstr "قرائت اولیه"
 
 #: ../src/main/parallel_view.cc:524 ../ui/xi-menus.glade.h:81
+#: ../ui/xi-menus-popup.gtkbuilder.h:58
 msgid "Secondary Reading"
 msgstr "قرائت دومین"
 
 #: ../src/main/parallel_view.cc:533 ../ui/xi-menus.glade.h:82
+#: ../ui/xi-menus-popup.gtkbuilder.h:59
 msgid "All Readings"
 msgstr "تمامی قرائت‏ها"
 
@@ -2281,56 +2318,64 @@ msgstr ""
 msgid "Attempting to revert to previous save."
 msgstr "تلاش برای برگرداندن به نجات قبلی."
 
-#: ../ui/bookmarks.glade.h:1
+#: ../ui/bookmarks.glade.h:1 ../ui/bookmarks.gtkbuilder.h:1
 msgid "Add Bookmark"
 msgstr "علامت بگذار"
 
-#: ../ui/bookmarks.glade.h:2 ../ui/markverse.glade.h:2
+#: ../ui/bookmarks.glade.h:2 ../ui/bookmarks.gtkbuilder.h:13
+#: ../ui/markverse.glade.h:2 ../ui/markverse.gtkbuilder.h:11
 msgid "Bookmark Dialog"
 msgstr "علامت گذاری دیالوگ"
 
-#: ../ui/bookmarks.glade.h:3 ../ui/markverse.glade.h:7
+#: ../ui/bookmarks.glade.h:3 ../ui/bookmarks.gtkbuilder.h:2
+#: ../ui/markverse.glade.h:7 ../ui/markverse.gtkbuilder.h:6
 msgid "Create new folder"
 msgstr "ایچاد پروندۀ جدید"
 
-#: ../ui/bookmarks.glade.h:4 ../ui/markverse.glade.h:8
-#: ../ui/xi-menus.glade.h:106
+#: ../ui/bookmarks.glade.h:4 ../ui/bookmarks.gtkbuilder.h:4
+#: ../ui/markverse.glade.h:8 ../ui/markverse.gtkbuilder.h:8
+#: ../ui/xi-menus.glade.h:106 ../ui/xi-menus-popup.gtkbuilder.h:5
 msgid "New Folder"
 msgstr "پروندۀ جدید"
 
-#: ../ui/bookmarks.glade.h:5
+#: ../ui/bookmarks.glade.h:5 ../ui/bookmarks.gtkbuilder.h:3
 msgid "New ..."
 msgstr "جدید ..."
 
-#: ../ui/bookmarks.glade.h:6 ../ui/markverse.glade.h:11
+#: ../ui/bookmarks.glade.h:6 ../ui/bookmarks.gtkbuilder.h:5
+#: ../ui/markverse.glade.h:11 ../ui/markverse.gtkbuilder.h:10
 msgid "Cancel Bookmark"
 msgstr "علامت را ابطال کن"
 
-#: ../ui/bookmarks.glade.h:7
+#: ../ui/bookmarks.glade.h:7 ../ui/bookmarks.gtkbuilder.h:6
 msgid "Label:"
 msgstr "برچسب:"
 
-#: ../ui/bookmarks.glade.h:8
+#: ../ui/bookmarks.glade.h:8 ../ui/bookmarks.gtkbuilder.h:7
 msgid "Label Entry"
 msgstr "نامگذاری کن"
 
-#: ../ui/bookmarks.glade.h:9 ../ui/markverse.glade.h:3
+#: ../ui/bookmarks.glade.h:9 ../ui/bookmarks.gtkbuilder.h:8
+#: ../ui/markverse.glade.h:3 ../ui/markverse.gtkbuilder.h:2
 msgid "Verse:"
 msgstr "آیه:"
 
-#: ../ui/bookmarks.glade.h:10 ../ui/markverse.glade.h:4
+#: ../ui/bookmarks.glade.h:10 ../ui/bookmarks.gtkbuilder.h:9
+#: ../ui/markverse.glade.h:4 ../ui/markverse.gtkbuilder.h:3
 msgid "Verse Entry"
 msgstr "ثبت آیه"
 
-#: ../ui/bookmarks.glade.h:11 ../ui/markverse.glade.h:5
+#: ../ui/bookmarks.glade.h:11 ../ui/bookmarks.gtkbuilder.h:10
+#: ../ui/markverse.glade.h:5 ../ui/markverse.gtkbuilder.h:4
 msgid "Module:"
 msgstr "مدول:"
 
-#: ../ui/bookmarks.glade.h:12 ../ui/markverse.glade.h:6
+#: ../ui/bookmarks.glade.h:12 ../ui/bookmarks.gtkbuilder.h:11
+#: ../ui/markverse.glade.h:6 ../ui/markverse.gtkbuilder.h:5
 msgid "Module Entry"
 msgstr "ثبت مدول"
 
-#: ../ui/bookmarks.glade.h:13
+#: ../ui/bookmarks.glade.h:13 ../ui/bookmarks.gtkbuilder.h:12
 msgid "Bookmark Folder Treeview"
 msgstr "پرونده را به حالت اول بازگردان"
 
@@ -2418,91 +2463,93 @@ msgstr "ایجاد متن جدید"
 msgid "New Document"
 msgstr "متن جدید"
 
-#: ../ui/export-dialog.glade.h:1 ../ui/xi-menus.glade.h:58
+#: ../ui/export-dialog.glade.h:1 ../ui/export-dialog.gtkbuilder.h:1
+#: ../ui/xi-menus.glade.h:58 ../ui/xi-menus-popup.gtkbuilder.h:37
 msgid "Copy/Export Passage"
 msgstr "کپی/ارسال متن"
 
-#: ../ui/export-dialog.glade.h:2
+#: ../ui/export-dialog.glade.h:2 ../ui/export-dialog.gtkbuilder.h:2
 msgid "Export Passage Cancel"
 msgstr "صرفنظر از ارسال متن"
 
-#: ../ui/export-dialog.glade.h:3
+#: ../ui/export-dialog.glade.h:3 ../ui/export-dialog.gtkbuilder.h:3
 msgid "Export Passage OK"
 msgstr "تایید ارسال متن"
 
-#: ../ui/export-dialog.glade.h:5
+#: ../ui/export-dialog.glade.h:5 ../ui/export-dialog.gtkbuilder.h:5
 msgid "Version"
 msgstr "ویرایش"
 
-#: ../ui/export-dialog.glade.h:6
+#: ../ui/export-dialog.glade.h:6 ../ui/export-dialog.gtkbuilder.h:6
 msgid ": "
 msgstr ": "
 
-#: ../ui/export-dialog.glade.h:7
+#: ../ui/export-dialog.glade.h:7 ../ui/export-dialog.gtkbuilder.h:7
 msgid "Key"
 msgstr "کلید"
 
-#: ../ui/export-dialog.glade.h:8
+#: ../ui/export-dialog.glade.h:8 ../ui/export-dialog.gtkbuilder.h:8
 msgid "<b>Copy</b>"
 msgstr "<b>کپی</b>"
 
-#: ../ui/export-dialog.glade.h:9
+#: ../ui/export-dialog.glade.h:9 ../ui/export-dialog.gtkbuilder.h:9
 msgid "<b>Export</b>"
 msgstr "<b>ارسال</b>"
 
-#: ../ui/export-dialog.glade.h:10
+#: ../ui/export-dialog.glade.h:10 ../ui/export-dialog.gtkbuilder.h:11
 msgid "Export complete book"
 msgstr "ارسال تمامی کتاب"
 
-#: ../ui/export-dialog.glade.h:11 ../ui/prefs.glade.h:96
+#: ../ui/export-dialog.glade.h:11 ../ui/export-dialog.gtkbuilder.h:10
+#: ../ui/prefs.glade.h:96 ../ui/prefs.gtkbuilder.h:88
 msgid "Book"
 msgstr "کتاب"
 
-#: ../ui/export-dialog.glade.h:12
+#: ../ui/export-dialog.glade.h:12 ../ui/export-dialog.gtkbuilder.h:12
 msgid "Book Radio Button"
 msgstr "یک گزینه را علامت گذاری کنید"
 
-#: ../ui/export-dialog.glade.h:13
+#: ../ui/export-dialog.glade.h:13 ../ui/export-dialog.gtkbuilder.h:14
 msgid "Export complete chapter"
 msgstr "ارسال تمامی فصل"
 
-#: ../ui/export-dialog.glade.h:15
+#: ../ui/export-dialog.glade.h:15 ../ui/export-dialog.gtkbuilder.h:15
 msgid "Chapter Radio Button"
 msgstr "یک فصل را علامت گذاری کنید"
 
-#: ../ui/export-dialog.glade.h:16
+#: ../ui/export-dialog.glade.h:16 ../ui/export-dialog.gtkbuilder.h:17
 msgid "Export single verse"
 msgstr "ارسال یک آیه"
 
-#: ../ui/export-dialog.glade.h:17
+#: ../ui/export-dialog.glade.h:17 ../ui/export-dialog.gtkbuilder.h:16
 msgid "Verse"
 msgstr "آیه"
 
-#: ../ui/export-dialog.glade.h:18
+#: ../ui/export-dialog.glade.h:18 ../ui/export-dialog.gtkbuilder.h:18
 msgid "Verse Radio Button"
 msgstr "یک آیه را علامت گذاری کنید"
 
-#: ../ui/export-dialog.glade.h:19
+#: ../ui/export-dialog.glade.h:19 ../ui/export-dialog.gtkbuilder.h:19
 msgid "Verse range"
 msgstr "لیست آیات"
 
-#: ../ui/export-dialog.glade.h:20
+#: ../ui/export-dialog.glade.h:20 ../ui/export-dialog.gtkbuilder.h:20
 msgid "<b>Format</b>"
 msgstr "<b>فرمت</b>"
 
-#: ../ui/export-dialog.glade.h:21
+#: ../ui/export-dialog.glade.h:21 ../ui/export-dialog.gtkbuilder.h:21
 msgid "Plain Text"
 msgstr "متن فرمت نشده"
 
-#: ../ui/export-dialog.glade.h:22
+#: ../ui/export-dialog.glade.h:22 ../ui/export-dialog.gtkbuilder.h:22
 msgid "Plain Text Radio Button"
 msgstr "یک متن فرمت نشده را علامت گذاری کنید"
 
-#: ../ui/export-dialog.glade.h:23
+#: ../ui/export-dialog.glade.h:23 ../ui/export-dialog.gtkbuilder.h:23
 msgid "HTML"
 msgstr "اچ.تی.ام.ال"
 
-#: ../ui/export-dialog.glade.h:24
+#: ../ui/export-dialog.glade.h:24 ../ui/export-dialog.gtkbuilder.h:24
 msgid "HTML Radio Button"
 msgstr "یک اچ.تی.ام.ال را علامت گذاری کنید"
 
@@ -2512,30 +2559,30 @@ msgid ""
 "than 1 verse."
 msgstr ""
 
-#: ../ui/export-dialog.glade.h:26
+#: ../ui/export-dialog.glade.h:26 ../ui/export-dialog.gtkbuilder.h:25
 #, fuzzy
 msgid "_Verse numbers in text"
 msgstr "اندازۀ قلم شماره آیه"
 
-#: ../ui/export-dialog.glade.h:27
+#: ../ui/export-dialog.glade.h:27 ../ui/export-dialog.gtkbuilder.h:27
 msgid "Verse Number button"
 msgstr "شماره‌های آیات"
 
-#: ../ui/export-dialog.glade.h:28
+#: ../ui/export-dialog.glade.h:28 ../ui/export-dialog.gtkbuilder.h:29
 msgid "Indicates whether reference is placed first or last."
 msgstr ""
 
-#: ../ui/export-dialog.glade.h:29
+#: ../ui/export-dialog.glade.h:29 ../ui/export-dialog.gtkbuilder.h:28
 #, fuzzy
 msgid "Reference last"
 msgstr "ثبت ترجیحات"
 
-#: ../ui/export-dialog.glade.h:30
+#: ../ui/export-dialog.glade.h:30 ../ui/export-dialog.gtkbuilder.h:30
 #, fuzzy
 msgid "Reference last button"
 msgstr "ثبت ترجیحات"
 
-#: ../ui/export-dialog.glade.h:31
+#: ../ui/export-dialog.glade.h:31 ../ui/export-dialog.gtkbuilder.h:32
 msgid "Indicates whether or not version name is included in reference."
 msgstr ""
 
@@ -2544,7 +2591,7 @@ msgstr ""
 msgid "Include Version"
 msgstr "نسخه سورد"
 
-#: ../ui/export-dialog.glade.h:33
+#: ../ui/export-dialog.glade.h:33 ../ui/export-dialog.gtkbuilder.h:33
 #, fuzzy
 msgid "Version button"
 msgstr "یک آیه را علامت گذاری کنید"
@@ -2553,35 +2600,519 @@ msgstr "یک آیه را علامت گذاری کنید"
 msgid "Save Export As"
 msgstr "ذخیرۀ متن ارسال شده با نام"
 
-#: ../ui/markverse.glade.h:1
+#: ../ui/export-dialog.gtkbuilder.h:26
+msgid "Indicates whether verse numbers should appear inline in the text."
+msgstr ""
+
+#: ../ui/export-dialog.gtkbuilder.h:31
+#, fuzzy
+msgid "Include version"
+msgstr "نسخه سورد"
+
+#: ../ui/gtk2_webedit.ui.h:1 ../ui/gtk_webedit.ui.h:1
+#, fuzzy
+msgid "About Studypad"
+msgstr "یادداشت مطالعه‌ را باز کن"
+
+#: ../ui/gtk2_webedit.ui.h:3 ../ui/gtk_webedit.ui.h:3
+#, fuzzy
+msgid "Open about dialog"
+msgstr "یک دیالوگ باز کن"
+
+#: ../ui/gtk2_webedit.ui.h:4 ../ui/gtk_webedit.ui.h:4 ../ui/prefs.glade.h:76
+#: ../ui/prefs.gtkbuilder.h:68
+msgid "Bold"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:5 ../ui/gtk_webedit.ui.h:5
+#, fuzzy
+msgid "Make selection bold"
+msgstr "گزیده را با صدای بلند بخوان"
+
+#: ../ui/gtk2_webedit.ui.h:6 ../ui/gtk_webedit.ui.h:6
+msgid "Copy"
+msgstr "کپی"
+
+#: ../ui/gtk2_webedit.ui.h:7 ../ui/gtk_webedit.ui.h:7
+msgid "Copy selection to clipboard"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:8 ../ui/gtk_webedit.ui.h:8
+msgid "Cut"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:9 ../ui/gtk_webedit.ui.h:9
+#, fuzzy
+msgid "Cut selection"
+msgstr "انتخاب مدول"
+
+#: ../ui/gtk2_webedit.ui.h:10 ../ui/gtk_webedit.ui.h:10
+msgid "Decrease indent"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:11 ../ui/gtk_webedit.ui.h:11
+msgid "Decrease"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:12 ../ui/gtk_webedit.ui.h:12
+msgid "Decrease paragraph indent"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:13 ../ui/gtk_webedit.ui.h:13
+#, fuzzy
+msgid "Delete selection"
+msgstr "محدوده منتخب را حذف کن"
+
+#: ../ui/gtk2_webedit.ui.h:15 ../ui/gtk_webedit.ui.h:15
+#, fuzzy
+msgid "Remove seledtion"
+msgstr "مدول انتخاب شده را حذف کن"
+
+#: ../ui/gtk2_webedit.ui.h:16 ../ui/gtk_webedit.ui.h:16
+#: ../ui/xi-menus.glade.h:112 ../ui/xi-menus-popup.gtkbuilder.h:11
+msgid "Delete Item"
+msgstr "حذف مورد"
+
+#: ../ui/gtk2_webedit.ui.h:17 ../ui/gtk_webedit.ui.h:17
+#, fuzzy
+msgid "Delete current item"
+msgstr "یادداشت فعلی را حذف کن"
+
+#: ../ui/gtk2_webedit.ui.h:19 ../ui/gtk_webedit.ui.h:19
+#, fuzzy
+msgid "Search current document"
+msgstr "جستجوی تمامی مدول"
+
+#: ../ui/gtk2_webedit.ui.h:20 ../ui/gtk_webedit.ui.h:20
+#, fuzzy
+msgid "Font"
+msgstr "قلم‏ها"
+
+#: ../ui/gtk2_webedit.ui.h:21 ../ui/gtk_webedit.ui.h:21
+#, fuzzy
+msgid "Change font"
+msgstr "تعویض قلم برای"
+
+#: ../ui/gtk2_webedit.ui.h:22 ../ui/gtk_webedit.ui.h:22
+msgid "Increase indent"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:23 ../ui/gtk_webedit.ui.h:23
+msgid "Increase"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:24 ../ui/gtk_webedit.ui.h:24
+msgid "Increase paragraph indent"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:25 ../ui/gtk_webedit.ui.h:25
+#, fuzzy
+msgid "Insert emoticon"
+msgstr "ایجاد علامت"
+
+#: ../ui/gtk2_webedit.ui.h:26 ../ui/gtk_webedit.ui.h:26
+msgid "Emoticon"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:27 ../ui/gtk_webedit.ui.h:27
+#, fuzzy
+msgid "Insert an emoticon"
+msgstr "ایجاد علامت"
+
+#: ../ui/gtk2_webedit.ui.h:28 ../ui/gtk_webedit.ui.h:28
+#, fuzzy
+msgid "Insert image"
+msgstr "ایجاد علامت"
+
+#: ../ui/gtk2_webedit.ui.h:29 ../ui/gtk_webedit.ui.h:29
+#, fuzzy
+msgid "Image"
+msgstr "تصاویر"
+
+#: ../ui/gtk2_webedit.ui.h:30 ../ui/gtk_webedit.ui.h:30
+msgid "Insert image at cursor"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:31 ../ui/gtk_webedit.ui.h:31
+#, fuzzy
+msgid "Insert link"
+msgstr "ایجاد علامت"
+
+#: ../ui/gtk2_webedit.ui.h:32 ../ui/gtk_webedit.ui.h:32
+#, fuzzy
+msgid "Link"
+msgstr "پیوندها"
+
+#: ../ui/gtk2_webedit.ui.h:33 ../ui/gtk_webedit.ui.h:33
+#, fuzzy
+msgid "Insert a link"
+msgstr "ایجاد علامت"
+
+#: ../ui/gtk2_webedit.ui.h:34 ../ui/gtk_webedit.ui.h:34
+#, fuzzy
+msgid "Insert Outline"
+msgstr "ایجاد علامت"
+
+#: ../ui/gtk2_webedit.ui.h:35 ../ui/gtk_webedit.ui.h:35
+#, fuzzy
+msgid "Outline"
+msgstr "زمینه‌ی"
+
+#: ../ui/gtk2_webedit.ui.h:36 ../ui/gtk_webedit.ui.h:36
+#, fuzzy
+msgid "Insert outline"
+msgstr "ایجاد علامت"
+
+#: ../ui/gtk2_webedit.ui.h:37 ../ui/gtk_webedit.ui.h:37
+#, fuzzy
+msgid "Insert rule"
+msgstr "ایجاد علامت"
+
+#: ../ui/gtk2_webedit.ui.h:38 ../ui/gtk_webedit.ui.h:38
+msgid "Rule"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:39 ../ui/gtk_webedit.ui.h:39
+msgid "Insert horizontal rule"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:40 ../ui/gtk_webedit.ui.h:40
+#, fuzzy
+msgid "Xiphos Link"
+msgstr "زیفوس:"
+
+#: ../ui/gtk2_webedit.ui.h:41 ../ui/gtk_webedit.ui.h:41
+#, fuzzy
+msgid "Xiphos"
+msgstr "زیفوس:"
+
+#: ../ui/gtk2_webedit.ui.h:42 ../ui/gtk_webedit.ui.h:42
+#, fuzzy
+msgid "Insert a link to a sword module"
+msgstr "آیا می‏خواهید این عناوین نصب گردند؟"
+
+#: ../ui/gtk2_webedit.ui.h:43 ../ui/gtk_webedit.ui.h:43
+#, fuzzy
+msgid "Insert table"
+msgstr "ایجاد علامت"
+
+#: ../ui/gtk2_webedit.ui.h:44 ../ui/gtk_webedit.ui.h:44
+msgid "Table"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:45 ../ui/gtk_webedit.ui.h:45
+msgid "Insert a table"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:46 ../ui/gtk_webedit.ui.h:46
+msgid "Italic"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:47 ../ui/gtk_webedit.ui.h:47
+msgid "Change selection to italic font"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:48 ../ui/gtk_webedit.ui.h:48
+msgid "Center"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:49 ../ui/gtk_webedit.ui.h:49
+msgid "Center justify paragraph"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:50 ../ui/gtk_webedit.ui.h:50
+msgid "Full"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:51 ../ui/gtk_webedit.ui.h:51
+msgid "full justify"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:52 ../ui/gtk_webedit.ui.h:52
+msgid "Left"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:53 ../ui/gtk_webedit.ui.h:53
+msgid "Left justify paragraph"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:54 ../ui/gtk_webedit.ui.h:54
+msgid "Right"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:55 ../ui/gtk_webedit.ui.h:55
+msgid "Right justify paragraph"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:57 ../ui/gtk_webedit.ui.h:57
+#, fuzzy
+msgid "Create new file"
+msgstr "ایچاد پروندۀ جدید"
+
+#: ../ui/gtk2_webedit.ui.h:59 ../ui/gtk_webedit.ui.h:59
+#, fuzzy
+msgid "Open file"
+msgstr "بازکردن مدول"
+
+#: ../ui/gtk2_webedit.ui.h:60 ../ui/gtk_webedit.ui.h:60
+msgid "Paste"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:61 ../ui/gtk_webedit.ui.h:61
+msgid "Paste clipboard at cursor."
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:62 ../ui/gtk_webedit.ui.h:62
+#, fuzzy
+msgid "Print Document"
+msgstr "این متن را چاپ کن"
+
+#: ../ui/gtk2_webedit.ui.h:63 ../ui/gtk_webedit.ui.h:63
+msgid "Print"
+msgstr "چاپ"
+
+#: ../ui/gtk2_webedit.ui.h:64 ../ui/gtk_webedit.ui.h:64
+#, fuzzy
+msgid "Print the current document"
+msgstr "این متن را چاپ کن"
+
+#: ../ui/gtk2_webedit.ui.h:65 ../ui/gtk_webedit.ui.h:65
+msgid "Print Preview"
+msgstr "نگرش قبل از چاپ"
+
+#: ../ui/gtk2_webedit.ui.h:66 ../ui/gtk_webedit.ui.h:66
+#, fuzzy
+msgid "Preview"
+msgstr "_پیش‌نگری"
+
+#: ../ui/gtk2_webedit.ui.h:67 ../ui/gtk_webedit.ui.h:67
+#, fuzzy
+msgid "Print preview of current document"
+msgstr "این متن را چاپ کن"
+
+#: ../ui/gtk2_webedit.ui.h:68 ../ui/gtk_webedit.ui.h:68
+#, fuzzy
+msgid "Quit"
+msgstr "_خروج"
+
+#: ../ui/gtk2_webedit.ui.h:69 ../ui/gtk_webedit.ui.h:69
+#, fuzzy
+msgid "Shut down editor"
+msgstr "در ویرایشگر باز کن"
+
+#: ../ui/gtk2_webedit.ui.h:70 ../ui/gtk_webedit.ui.h:70
+msgid "Redo"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:71 ../ui/gtk_webedit.ui.h:71
+msgid "Redo last undo"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:72 ../ui/gtk_webedit.ui.h:72
+msgid "Find and replace"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:73 ../ui/gtk_webedit.ui.h:73
+msgid "Replace"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:74 ../ui/gtk_webedit.ui.h:74
+#, fuzzy
+msgid "Search and replace"
+msgstr "جستجوی معیارهای"
+
+#: ../ui/gtk2_webedit.ui.h:76 ../ui/gtk_webedit.ui.h:76
+#, fuzzy
+msgid "Save changes to file"
+msgstr "تغییرات را ضبط کن"
+
+#: ../ui/gtk2_webedit.ui.h:77 ../ui/gtk_webedit.ui.h:77
+#, fuzzy
+msgid "Save as"
+msgstr "ضبط کن به اسم"
+
+#: ../ui/gtk2_webedit.ui.h:78 ../ui/gtk_webedit.ui.h:78
+#, fuzzy
+msgid "Save file as ..."
+msgstr "ضبط کن به _اسم"
+
+#: ../ui/gtk2_webedit.ui.h:79 ../ui/gtk_webedit.ui.h:79
+msgid "Strikethrough"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:80 ../ui/gtk_webedit.ui.h:80
+msgid "Strikethrough selection"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:81 ../ui/gtk_webedit.ui.h:81
+msgid "Underline"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:82 ../ui/gtk_webedit.ui.h:82
+#, fuzzy
+msgid "Underline selection"
+msgstr "انتخاب مدول"
+
+#: ../ui/gtk2_webedit.ui.h:83 ../ui/gtk_webedit.ui.h:83
+msgid "Undo"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:84 ../ui/gtk_webedit.ui.h:84
+msgid "Undo last change"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:85 ../ui/gtk_webedit.ui.h:85
+#, fuzzy
+msgid "Editor"
+msgstr "ویرایش"
+
+#: ../ui/gtk2_webedit.ui.h:87 ../ui/gtk_webedit.ui.h:87
+#, fuzzy
+msgid "Recent files"
+msgstr "این فایل را ذخیره کن با نام"
+
+#: ../ui/gtk2_webedit.ui.h:88 ../ui/gtk_webedit.ui.h:88
+#: ../ui/xi-menus.glade.h:9 ../ui/xi-menus.gtkbuilder.h:6
+msgid "_Edit"
+msgstr "_ویرایش"
+
+#: ../ui/gtk2_webedit.ui.h:90 ../ui/gtk_webedit.ui.h:90
+#: ../ui/xi-menus.glade.h:40 ../ui/xi-menus.gtkbuilder.h:25
+msgid "_Help"
+msgstr "_کمک"
+
+#: ../ui/gtk2_webedit.ui.h:91 ../ui/gtk_webedit.ui.h:91
+msgid "toolbutton1"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:92 ../ui/gtk_webedit.ui.h:92
+msgid "toolbutton10"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:93 ../ui/gtk_webedit.ui.h:93
+msgid "toolbutton3"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:94 ../ui/gtk_webedit.ui.h:94
+msgid "toolbutton2"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:95 ../ui/gtk_webedit.ui.h:95
+msgid "toolbutton4"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:96 ../ui/gtk_webedit.ui.h:96
+msgid "toolbutton6"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:97 ../ui/gtk_webedit.ui.h:97
+msgid "toolbutton7"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:98 ../ui/gtk_webedit.ui.h:98
+#, fuzzy
+msgid "Normal"
+msgstr "متن معمولی"
+
+#: ../ui/gtk2_webedit.ui.h:99 ../ui/gtk_webedit.ui.h:99
+msgid "Header 1"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:100 ../ui/gtk_webedit.ui.h:100
+msgid "Header 2"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:101 ../ui/gtk_webedit.ui.h:101
+msgid "Header 3"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:102 ../ui/gtk_webedit.ui.h:102
+msgid "Header 4"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:103 ../ui/gtk_webedit.ui.h:103
+msgid "Header 5"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:104 ../ui/gtk_webedit.ui.h:104
+msgid "Header 6"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:105 ../ui/gtk_webedit.ui.h:105
+msgid "Address"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:106 ../ui/gtk_webedit.ui.h:106
+msgid "Preformatted"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:107 ../ui/gtk_webedit.ui.h:107
+#, fuzzy
+msgid "Bulleted List"
+msgstr "لیست حذف شود؟"
+
+#: ../ui/gtk2_webedit.ui.h:108 ../ui/gtk_webedit.ui.h:108
+msgid "Roman Numeral List"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:109 ../ui/gtk_webedit.ui.h:109
+#, fuzzy
+msgid "Numbered List"
+msgstr "لیست آیات"
+
+#: ../ui/gtk2_webedit.ui.h:110 ../ui/gtk_webedit.ui.h:110
+msgid "Alphabetical List"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:111 ../ui/gtk_webedit.ui.h:111
+msgid "toolbutton11"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:112 ../ui/gtk_webedit.ui.h:112
+msgid "toolbutton12"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:113 ../ui/gtk_webedit.ui.h:113
+msgid "Set font color of selected text."
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:114 ../ui/gtk_webedit.ui.h:114
+msgid "Highlight selected text by setting background color."
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:115 ../ui/gtk_webedit.ui.h:115
+msgid "toolbutton9"
+msgstr ""
+
+#: ../ui/markverse.glade.h:1 ../ui/markverse.gtkbuilder.h:1
 msgid "Mark/Unmark Verse"
 msgstr "علامت‏گذاری/حذف علامت یک آیه"
 
-#: ../ui/markverse.glade.h:9
+#: ../ui/markverse.glade.h:9 ../ui/markverse.gtkbuilder.h:7
 msgid "Mark"
 msgstr "علامت‏گذاری‏کن"
 
-#: ../ui/markverse.glade.h:10
+#: ../ui/markverse.glade.h:10 ../ui/markverse.gtkbuilder.h:9
 msgid "Unmark"
 msgstr "حذف علامت"
 
-#: ../ui/module-manager.glade.h:1
+#: ../ui/module-manager.glade.h:1 ../ui/module-manager.gtkbuilder.h:1
 msgid "Module Manager"
 msgstr "مدیر مدول"
 
-#: ../ui/module-manager.glade.h:2
+#: ../ui/module-manager.glade.h:2 ../ui/module-manager.gtkbuilder.h:2
 msgid "_View Intro"
 msgstr "_مرور"
 
-#: ../ui/module-manager.glade.h:3
+#: ../ui/module-manager.glade.h:3 ../ui/module-manager.gtkbuilder.h:3
 msgid "Open a brief introductory explanation of how the Module Manager works."
 msgstr "باز توضیح مقدماتی مختصری از نحوه مدیریت ماژول کار می کند."
 
-#: ../ui/module-manager.glade.h:4
+#: ../ui/module-manager.glade.h:4 ../ui/module-manager.gtkbuilder.h:4
 msgid "_Load Standard"
 msgstr "بارگذاری استاندارد"
 
-#: ../ui/module-manager.glade.h:5
+#: ../ui/module-manager.glade.h:5 ../ui/module-manager.gtkbuilder.h:5
 msgid ""
 "Load and synchronize the standard set of known repositories, as maintained "
 "at crosswire.org, with your current remote sources."
@@ -2589,7 +3120,7 @@ msgstr ""
 "بار و همزمان مجموعه استاندارد از مخازن شناخته می شود ، همان طور که در "
 "crosswire.org حفظ ، با منابع موجود خود را از راه دور."
 
-#: ../ui/module-manager.glade.h:6
+#: ../ui/module-manager.glade.h:6 ../ui/module-manager.gtkbuilder.h:6
 msgid ""
 "Refresh Xiphos' knowledge of what modules are available at the selected "
 "remote repository"
@@ -2597,72 +3128,72 @@ msgstr ""
 "تازه کردن دانش Xiphos &#39;از آنچه ماژول در دسترس هستند در انتخاب مخزن از "
 "راه دور"
 
-#: ../ui/module-manager.glade.h:7
+#: ../ui/module-manager.glade.h:7 ../ui/module-manager.gtkbuilder.h:8
 msgid "_Install"
 msgstr "نصب کن"
 
-#: ../ui/module-manager.glade.h:8
+#: ../ui/module-manager.glade.h:8 ../ui/module-manager.gtkbuilder.h:7
 msgid "Install or update the selected modules"
 msgstr "آیا می‏خواهید این عناوین نصب گردند؟"
 
-#: ../ui/module-manager.glade.h:9
+#: ../ui/module-manager.glade.h:9 ../ui/module-manager.gtkbuilder.h:9
 msgid "Remove the selected modules from your system"
 msgstr "مدول انتخاب شده را از لیست حذف کن"
 
-#: ../ui/module-manager.glade.h:10
+#: ../ui/module-manager.glade.h:10 ../ui/module-manager.gtkbuilder.h:10
 #, fuzzy
 msgid "_Archive"
 msgstr "بایگانی کن"
 
-#: ../ui/module-manager.glade.h:11
+#: ../ui/module-manager.glade.h:11 ../ui/module-manager.gtkbuilder.h:11
 #, fuzzy
 msgid "Create a zip archive of the selected modules."
 msgstr "آیا به یقین می‌خواهید مدول انتخاب شده را حذف کنید؟"
 
-#: ../ui/module-manager.glade.h:12
+#: ../ui/module-manager.glade.h:12 ../ui/module-manager.gtkbuilder.h:12
 msgid "_Index"
 msgstr "_ایندکس"
 
-#: ../ui/module-manager.glade.h:13
+#: ../ui/module-manager.glade.h:13 ../ui/module-manager.gtkbuilder.h:13
 msgid ""
 "Build an index of the selected modules, for optimized (\"lucene\") searching."
 msgstr "ساخت شاخص از ماژول انتخاب شده ، برای بهینه سازی (\"lucene\") جستجو."
 
-#: ../ui/module-manager.glade.h:14
+#: ../ui/module-manager.glade.h:14 ../ui/module-manager.gtkbuilder.h:14
 msgid "_Delete Index"
 msgstr "حذف ایندکس"
 
-#: ../ui/module-manager.glade.h:15
+#: ../ui/module-manager.glade.h:15 ../ui/module-manager.gtkbuilder.h:15
 msgid "Delete the fast-search index of the selected modules."
 msgstr "آیا می‏خواهید که ایندکس جستجوی سریع برای این عناوین حذف گردد؟"
 
-#: ../ui/module-manager.glade.h:16
+#: ../ui/module-manager.glade.h:16 ../ui/module-manager.gtkbuilder.h:16
 msgid "Continue"
 msgstr "ادامه"
 
 #. do not translate <b> and </b> they are html formating
-#: ../ui/module-manager.glade.h:18
+#: ../ui/module-manager.glade.h:18 ../ui/module-manager.gtkbuilder.h:18
 msgid "<b>Sword</b>"
 msgstr "<b>سورد</b>"
 
-#: ../ui/module-manager.glade.h:19
+#: ../ui/module-manager.glade.h:19 ../ui/module-manager.gtkbuilder.h:19
 msgid "<b>Module Manager</b>"
 msgstr "<b>مدیر مدول</b>"
 
-#: ../ui/module-manager.glade.h:20
+#: ../ui/module-manager.glade.h:20 ../ui/module-manager.gtkbuilder.h:20
 msgid "<b>WARNING:</b> If you live in a persecuted country use with care."
 msgstr ""
 "<b>هشدار:</b>اگر در کشور زیر جفا زندگی می‌کنید، باید با احتیاط استفاده کنید."
 
-#: ../ui/module-manager.glade.h:21
+#: ../ui/module-manager.glade.h:21 ../ui/module-manager.gtkbuilder.h:21
 msgid "<b>Add and Remove Sources</b>"
 msgstr "<b>منابع را اضافه/کم کن</b>"
 
-#: ../ui/module-manager.glade.h:22
+#: ../ui/module-manager.glade.h:22 ../ui/module-manager.gtkbuilder.h:22
 msgid "Current local sources"
 msgstr "منابع محلی فعلی"
 
-#: ../ui/module-manager.glade.h:23
+#: ../ui/module-manager.glade.h:23 ../ui/module-manager.gtkbuilder.h:23
 msgid ""
 "Add a local folder as an install source, typically on a cdrom or flash "
 "drive.  Such a folder contains subfolders \"mods.d\" and \"modules\"."
@@ -2670,15 +3201,15 @@ msgstr ""
 "اضافه کردن پوشه های محلی به عنوان منبع نصب ، به طور معمول بر روی یک سی دی "
 "رام و یا فلش درایو. چنین پوشه حاوی پوشه \"mods.d\" و \"ماژول\" # :."
 
-#: ../ui/module-manager.glade.h:24
+#: ../ui/module-manager.glade.h:24 ../ui/module-manager.gtkbuilder.h:24
 msgid "Remove one of your local folders as an install source."
 msgstr "گزارش یکی از پوشه های محلی خود را به عنوان منبع نصب."
 
-#: ../ui/module-manager.glade.h:25
+#: ../ui/module-manager.glade.h:25 ../ui/module-manager.gtkbuilder.h:25
 msgid "Current Remote Sources"
 msgstr "منابع  راه دور فعلی"
 
-#: ../ui/module-manager.glade.h:26
+#: ../ui/module-manager.glade.h:26 ../ui/module-manager.gtkbuilder.h:26
 msgid ""
 "Add a custom remote install source. You must know its hostname and the "
 "folder where its repository lives."
@@ -2686,43 +3217,43 @@ msgstr ""
 "افزودنیهای سفارشی منبع نصب از راه دور. شما باید نام هاست خود و پوشه که در آن "
 "زندگی می کند مخزن آن می دانم."
 
-#: ../ui/module-manager.glade.h:27
+#: ../ui/module-manager.glade.h:27 ../ui/module-manager.gtkbuilder.h:27
 msgid "Remove a remote install source."
 msgstr "منبع راه‏ دور را حذف کنید"
 
-#: ../ui/module-manager.glade.h:28
+#: ../ui/module-manager.glade.h:28 ../ui/module-manager.gtkbuilder.h:28
 msgid "<b>Install Source</b>"
 msgstr "<b>منبع نصب </b>"
 
-#: ../ui/module-manager.glade.h:29
+#: ../ui/module-manager.glade.h:29 ../ui/module-manager.gtkbuilder.h:29
 msgid "Local"
 msgstr "محلی"
 
-#: ../ui/module-manager.glade.h:30
+#: ../ui/module-manager.glade.h:30 ../ui/module-manager.gtkbuilder.h:30
 msgid "Remote"
 msgstr "دوردست"
 
-#: ../ui/module-manager.glade.h:31
+#: ../ui/module-manager.glade.h:31 ../ui/module-manager.gtkbuilder.h:31
 msgid "<b>Install Destination</b>"
 msgstr "<b>مقصد نصب</b>"
 
-#: ../ui/module-manager.glade.h:32
+#: ../ui/module-manager.glade.h:32 ../ui/module-manager.gtkbuilder.h:32
 msgid "<i>Personal area, for your use only:</i>"
 msgstr "<i>محدودۀ شخصی، منحصراً برای استفادۀ شخصی شما</i>"
 
-#: ../ui/module-manager.glade.h:33
+#: ../ui/module-manager.glade.h:33 ../ui/module-manager.gtkbuilder.h:33
 msgid "Home dir"
 msgstr "فهرست پرونده‏های محلی"
 
-#: ../ui/module-manager.glade.h:34
+#: ../ui/module-manager.glade.h:34 ../ui/module-manager.gtkbuilder.h:34
 msgid "<i>System area, for all users:</i>"
 msgstr "<i>محدودۀ سیستم، برای تمام کاربران:</i>"
 
-#: ../ui/module-manager.glade.h:35
+#: ../ui/module-manager.glade.h:35 ../ui/module-manager.gtkbuilder.h:35
 msgid "Sword sys dir"
 msgstr "فهرست سیستم سورد"
 
-#: ../ui/module-manager.glade.h:36
+#: ../ui/module-manager.glade.h:36 ../ui/module-manager.gtkbuilder.h:36
 msgid ""
 "<b>Warning:</b> If you live in a persecuted country and do not wish to risk "
 "detection you should NOT use  the remote installation feature! "
@@ -2730,11 +3261,11 @@ msgstr ""
 "<b>هشدار:/b>اگر در کشور تحت جفا زندگی می‌کنید، به منظور جلوگیری از خطرات "
 "احتمالی لطفا بخش مربوط به نصب از راه دور را انجام ندهید! "
 
-#: ../ui/module-manager.glade.h:37
+#: ../ui/module-manager.glade.h:37 ../ui/module-manager.gtkbuilder.h:37
 msgid "Local Install Folder"
 msgstr "قفسه نصب محلی"
 
-#: ../ui/navbar_versekey.glade.h:1
+#: ../ui/navbar_versekey.glade.h:1 ../ui/navbar_versekey.gtkbuilder.h:1
 msgid "Drop down history list"
 msgstr "لیست تاریخچه"
 
@@ -2742,11 +3273,11 @@ msgstr "لیست تاریخچه"
 msgid "Choose book to display"
 msgstr "انتخاب کتاب جهت نمایش"
 
-#: ../ui/navbar_versekey.glade.h:3
+#: ../ui/navbar_versekey.glade.h:3 ../ui/navbar_versekey.gtkbuilder.h:2
 msgid "Book Selector Button"
 msgstr "کلید انتخاب کتاب"
 
-#: ../ui/navbar_versekey.glade.h:4
+#: ../ui/navbar_versekey.glade.h:4 ../ui/navbar_versekey.gtkbuilder.h:3
 msgid "<b>Revelation of John</b>"
 msgstr "<b>مکاشفه یوحنا</b>"
 
@@ -2755,11 +3286,11 @@ msgstr "<b>مکاشفه یوحنا</b>"
 msgid "Choose chapter to display"
 msgstr "انتخاب کتاب جهت نمایش"
 
-#: ../ui/navbar_versekey.glade.h:6
+#: ../ui/navbar_versekey.glade.h:6 ../ui/navbar_versekey.gtkbuilder.h:4
 msgid "Toggle Chapter Button"
 msgstr "دکمۀ انتخاب باب"
 
-#: ../ui/navbar_versekey.glade.h:7
+#: ../ui/navbar_versekey.glade.h:7 ../ui/navbar_versekey.gtkbuilder.h:5
 msgid "1"
 msgstr "۱"
 
@@ -2768,81 +3299,81 @@ msgstr "۱"
 msgid "Choose Verse to display"
 msgstr "انتخاب کتاب جهت نمایش"
 
-#: ../ui/navbar_versekey.glade.h:9
+#: ../ui/navbar_versekey.glade.h:9 ../ui/navbar_versekey.gtkbuilder.h:6
 msgid "Toggle Verse Button"
 msgstr "دکمۀ انتخاب آیات"
 
-#: ../ui/navbar_versekey.glade.h:10
+#: ../ui/navbar_versekey.glade.h:10 ../ui/navbar_versekey.gtkbuilder.h:7
 msgid "Enter a Verse reference in Book 1:1 format and press Return"
 msgstr "آیه ارجاعی را در فرمت کتاب 1: 1 وارد کرده و برگشت کن"
 
-#: ../ui/navbar_versekey.glade.h:11
+#: ../ui/navbar_versekey.glade.h:11 ../ui/navbar_versekey.gtkbuilder.h:8
 msgid "Reference Entry"
 msgstr "ثبت ترجیحات"
 
-#: ../ui/prefs.glade.h:2
+#: ../ui/prefs.glade.h:2 ../ui/prefs.gtkbuilder.h:2
 msgid "Cover"
 msgstr "جلد"
 
-#: ../ui/prefs.glade.h:3
+#: ../ui/prefs.glade.h:3 ../ui/prefs.gtkbuilder.h:3
 msgid "<b>Font Colors</b>"
 msgstr "<b>رنگ‏های قلم</b>"
 
-#: ../ui/prefs.glade.h:4
+#: ../ui/prefs.glade.h:4 ../ui/prefs.gtkbuilder.h:4
 msgid "Background"
 msgstr "پیش‏زمینه"
 
-#: ../ui/prefs.glade.h:5
+#: ../ui/prefs.glade.h:5 ../ui/prefs.gtkbuilder.h:5
 msgid "Foreground"
 msgstr "پیش‏نما"
 
-#: ../ui/prefs.glade.h:6
+#: ../ui/prefs.glade.h:6 ../ui/prefs.gtkbuilder.h:6
 msgid "Current Verse"
 msgstr "آیۀ فعلی"
 
-#: ../ui/prefs.glade.h:7
+#: ../ui/prefs.glade.h:7 ../ui/prefs.gtkbuilder.h:7
 msgid "Verse Number"
 msgstr "شماره‌های آیات"
 
-#: ../ui/prefs.glade.h:8
+#: ../ui/prefs.glade.h:8 ../ui/prefs.gtkbuilder.h:8
 msgid "Links"
 msgstr "پیوندها"
 
-#: ../ui/prefs.glade.h:9
+#: ../ui/prefs.glade.h:9 ../ui/prefs.gtkbuilder.h:9
 msgid "Highlight Foreground"
 msgstr "رو زمینه را مشخص کن"
 
-#: ../ui/prefs.glade.h:10
+#: ../ui/prefs.glade.h:10 ../ui/prefs.gtkbuilder.h:10
 msgid "Highlight Background"
 msgstr "پیش‏زمینه را مشخص کن"
 
-#: ../ui/prefs.glade.h:11
+#: ../ui/prefs.glade.h:11 ../ui/prefs.gtkbuilder.h:11
 #, fuzzy
 msgid "Invert color pairs"
 msgstr "ایجاد علامت"
 
-#: ../ui/prefs.glade.h:12
+#: ../ui/prefs.glade.h:12 ../ui/prefs.gtkbuilder.h:12
 msgid "Normal Text"
 msgstr "متن معمولی"
 
-#: ../ui/prefs.glade.h:13
+#: ../ui/prefs.glade.h:13 ../ui/prefs.gtkbuilder.h:13
 #, fuzzy
 msgid "Highlight"
 msgstr "پیش‏زمینه را مشخص کن"
 
-#: ../ui/prefs.glade.h:14
+#: ../ui/prefs.glade.h:14 ../ui/prefs.gtkbuilder.h:14
 msgid "Font Colors"
 msgstr "رنگ‏های قلم"
 
-#: ../ui/prefs.glade.h:15
+#: ../ui/prefs.glade.h:15 ../ui/prefs.gtkbuilder.h:15
 msgid "<b>Font Sizes</b>"
 msgstr "<b>اندازه‏های قلم</b>"
 
-#: ../ui/prefs.glade.h:16
+#: ../ui/prefs.glade.h:16 ../ui/prefs.gtkbuilder.h:16
 msgid "All displayed font sizes are relative to this choice"
 msgstr "نمایش تمام اندازه فونت ها نسبت به این انتخاب"
 
-#: ../ui/prefs.glade.h:17
+#: ../ui/prefs.glade.h:17 ../ui/prefs.gtkbuilder.h:17
 msgid "Base font size"
 msgstr "سایز قلم پایه"
 
@@ -2866,15 +3397,15 @@ msgstr ""
 "+۴\n"
 "+۵"
 
-#: ../ui/prefs.glade.h:26
+#: ../ui/prefs.glade.h:26 ../ui/prefs.gtkbuilder.h:18
 msgid "Commonly -1, to make verse numbers less obtrusive"
 msgstr "معمولا -1 ، به تعداد آیه کمتر مزاحم"
 
-#: ../ui/prefs.glade.h:27
+#: ../ui/prefs.glade.h:27 ../ui/prefs.gtkbuilder.h:19
 msgid "Verse number size"
 msgstr "اندازۀ قلم شماره آیه"
 
-#: ../ui/prefs.glade.h:28
+#: ../ui/prefs.glade.h:28 ../ui/prefs.gtkbuilder.h:20
 msgid ""
 "Name and size choice for any module in a given language; still overridden by "
 "a specific choice on a particular module"
@@ -2882,28 +3413,28 @@ msgstr ""
 "نام و نام خانوادگی و اندازه انتخاب برای هر ماژول در زبان داده ، هنوز لغو های "
 "انتخاب خاص در یک ماژول خاص"
 
-#: ../ui/prefs.glade.h:29
+#: ../ui/prefs.glade.h:29 ../ui/prefs.gtkbuilder.h:21
 msgid "Font preferences, per language"
 msgstr "فونت‌ها برای هر زبان "
 
-#: ../ui/prefs.glade.h:30
+#: ../ui/prefs.glade.h:30 ../ui/prefs.gtkbuilder.h:22
 #, fuzzy
 msgid "Language Font Combo"
 msgstr "تغییر ترکیب کتاب"
 
-#: ../ui/prefs.glade.h:31
+#: ../ui/prefs.glade.h:31 ../ui/prefs.gtkbuilder.h:23
 msgid "Font Misc"
 msgstr "قلم ... متفرقه"
 
-#: ../ui/prefs.glade.h:32
+#: ../ui/prefs.glade.h:32 ../ui/prefs.gtkbuilder.h:24
 msgid "<b>Tabs</b>"
 msgstr "<b>بخش‏ها</b>"
 
-#: ../ui/prefs.glade.h:33
+#: ../ui/prefs.glade.h:33 ../ui/prefs.gtkbuilder.h:25
 msgid "Use tabbed browsing"
 msgstr "گزینۀ جستجوی بخشی را استفاده کنید"
 
-#: ../ui/prefs.glade.h:34
+#: ../ui/prefs.glade.h:34 ../ui/prefs.gtkbuilder.h:26
 msgid ""
 "Single selection of Bible+commentary+book+dictionary, or many sets of such "
 "selections in a tabbed interface"
@@ -2911,73 +3442,73 @@ msgstr ""
 "انتخاب تنها از کتاب مقدس + تفسیر + کتاب + فرهنگ لغت ، و یا مجموعه های بسیاری "
 "از جمله انتخاب شده در یک رابط جدولبندیشده"
 
-#: ../ui/prefs.glade.h:35
+#: ../ui/prefs.glade.h:35 ../ui/prefs.gtkbuilder.h:27
 msgid "Use tabbed browsing Checkbox"
 msgstr "انتخاب گزینۀ جستجوی بخشی"
 
-#: ../ui/prefs.glade.h:36
+#: ../ui/prefs.glade.h:36 ../ui/prefs.gtkbuilder.h:28
 msgid "<b>Show</b>"
 msgstr "<b>نمایش</b>"
 
-#: ../ui/prefs.glade.h:37
+#: ../ui/prefs.glade.h:37 ../ui/prefs.gtkbuilder.h:29
 msgid "Bible Texts"
 msgstr "متون کتاب‏مقدس"
 
-#: ../ui/prefs.glade.h:38
+#: ../ui/prefs.glade.h:38 ../ui/prefs.gtkbuilder.h:30
 msgid "Bible Texts Checkbox"
 msgstr "انتخاب متون کتاب‏مقدس"
 
-#: ../ui/prefs.glade.h:40
+#: ../ui/prefs.glade.h:40 ../ui/prefs.gtkbuilder.h:32
 msgid "Previewer Checkbox"
 msgstr "انتخاب مرورگر"
 
-#: ../ui/prefs.glade.h:42
+#: ../ui/prefs.glade.h:42 ../ui/prefs.gtkbuilder.h:34
 msgid "Commentaries Checkbox"
 msgstr "انتخاب کتب تفاسیر"
 
-#: ../ui/prefs.glade.h:43
+#: ../ui/prefs.glade.h:43 ../ui/prefs.gtkbuilder.h:35
 msgid "Dictionary/Lexicon"
 msgstr "فرهنگ واژگان/قاموس"
 
-#: ../ui/prefs.glade.h:44
+#: ../ui/prefs.glade.h:44 ../ui/prefs.gtkbuilder.h:36
 msgid "Dictionary/Lexicon Checkbox"
 msgstr "انتخاب فرهنگ واژگان/قاموس"
 
-#: ../ui/prefs.glade.h:45
+#: ../ui/prefs.glade.h:45 ../ui/prefs.gtkbuilder.h:37
 msgid "Parallel View in a tab"
 msgstr "نگرش به شکل موازی در یک بخش"
 
-#: ../ui/prefs.glade.h:46
+#: ../ui/prefs.glade.h:46 ../ui/prefs.gtkbuilder.h:38
 msgid "Tabs and Panes"
 msgstr "بخش‏ها و پنجره‌ها"
 
-#: ../ui/prefs.glade.h:47
+#: ../ui/prefs.glade.h:47 ../ui/prefs.gtkbuilder.h:39
 msgid "<b>General</b>"
 msgstr "<b>عمومی</b>"
 
-#: ../ui/prefs.glade.h:48
+#: ../ui/prefs.glade.h:48 ../ui/prefs.gtkbuilder.h:40
 msgid ""
 "Select a particular language for interface display, other than your usual "
 "setting"
 msgstr "انتخاب زبان رابط خاص برای نمایش ، به غیر از تنظیمات معمول خود را"
 
-#: ../ui/prefs.glade.h:49
+#: ../ui/prefs.glade.h:49 ../ui/prefs.gtkbuilder.h:41
 msgid "Special Locale (requires restart)"
 msgstr "زبان برنامه"
 
-#: ../ui/prefs.glade.h:50
+#: ../ui/prefs.glade.h:50 ../ui/prefs.gtkbuilder.h:42
 msgid "Special Locale Combo"
 msgstr "انتخاب زبان کومبو"
 
-#: ../ui/prefs.glade.h:51
+#: ../ui/prefs.glade.h:51 ../ui/prefs.gtkbuilder.h:43
 msgid "Show splash screen at start up"
 msgstr "لوگو را در شروع نشان بده"
 
-#: ../ui/prefs.glade.h:52
+#: ../ui/prefs.glade.h:52 ../ui/prefs.gtkbuilder.h:44
 msgid "Show Daily Devotion at start up"
 msgstr "دعا و تفکر روزانه را در شروع نشان بده"
 
-#: ../ui/prefs.glade.h:53
+#: ../ui/prefs.glade.h:53 ../ui/prefs.gtkbuilder.h:45
 msgid ""
 "If you have set a preferred daily devotion module, its entry for today will "
 "be shown at startup."
@@ -2985,11 +3516,11 @@ msgstr ""
 "اگر شما مجموعه ای ترجیح ماژول روزانه خود گذشتگی ، خود را برای ورود به امروز "
 "خواهد بود در راه اندازی نشان داده شده است."
 
-#: ../ui/prefs.glade.h:54
+#: ../ui/prefs.glade.h:54 ../ui/prefs.gtkbuilder.h:46
 msgid "Use default Dictionary"
 msgstr "فرهنگ واژگان قراردادی را بکار گیر"
 
-#: ../ui/prefs.glade.h:55
+#: ../ui/prefs.glade.h:55 ../ui/prefs.gtkbuilder.h:47
 msgid ""
 "Make double-click of a word always use default dictionary instead of "
 "dictionary currently displayed"
@@ -2997,388 +3528,422 @@ msgstr ""
 "را دوبار کلیک کنید تا یک کلمه همیشه به طور پیش فرض به جای استفاده از فرهنگ "
 "لغت فرهنگ لغت در حال حاضر نمایش داده شده"
 
-#: ../ui/prefs.glade.h:56
+#: ../ui/prefs.glade.h:56 ../ui/prefs.gtkbuilder.h:48
 msgid "Use default Dictionary Checkbox"
 msgstr "انتخاب فرهنگ واژگان قراردادی"
 
-#: ../ui/prefs.glade.h:57
+#: ../ui/prefs.glade.h:57 ../ui/prefs.gtkbuilder.h:49
 msgid "Scroll to Previous/Next Chapter"
 msgstr "برو به فصل قبل/بعد"
 
-#: ../ui/prefs.glade.h:58
+#: ../ui/prefs.glade.h:58 ../ui/prefs.gtkbuilder.h:50
 msgid "Use Bible Text scroll bar to scroll to previous or next chapter"
 msgstr "از ستون بالابر/پایین‌بر جهت رفتن به فصل قبل و بعد استفاده کن"
 
-#: ../ui/prefs.glade.h:59
+#: ../ui/prefs.glade.h:59 ../ui/prefs.gtkbuilder.h:51
 msgid "Scroll to Previous/Next Chapter Checkbox"
 msgstr "انتخاب حرکت به فصل قبل/بعد"
 
-#: ../ui/prefs.glade.h:60
+#: ../ui/prefs.glade.h:60 ../ui/prefs.gtkbuilder.h:52
 msgid "Resize images"
 msgstr "اندازه تصاویر را عوض کن"
 
-#: ../ui/prefs.glade.h:61
+#: ../ui/prefs.glade.h:61 ../ui/prefs.gtkbuilder.h:53
 #, fuzzy
 msgid "Automatically resize image content to fit the pane"
 msgstr ""
 "اندازه محتویات تفاسیر، کتب، یا دیکشنری را به شکل اتوماتیک عوض کن تا در صفحات "
 "فرعی بگنجند"
 
-#: ../ui/prefs.glade.h:62
+#: ../ui/prefs.glade.h:62 ../ui/prefs.gtkbuilder.h:54
 msgid "Resize images checkbox"
 msgstr "اندازه تصاویر را عوض کن انتخاب"
 
-#: ../ui/prefs.glade.h:63
+#: ../ui/prefs.glade.h:63 ../ui/prefs.gtkbuilder.h:55
 msgid "Highlight current verse"
 msgstr "آیۀ فعلی را مشخص کن"
 
-#: ../ui/prefs.glade.h:64
+#: ../ui/prefs.glade.h:64 ../ui/prefs.gtkbuilder.h:56
 #, fuzzy
 msgid "Apply high-contrast highlight to current verse - see color pickers"
 msgstr "این آیه را قویا مشخص کن"
 
-#: ../ui/prefs.glade.h:65
+#: ../ui/prefs.glade.h:65 ../ui/prefs.gtkbuilder.h:57
 msgid "Highlight current verse check box"
 msgstr "آیه فعلی را مشخص کن"
 
-#: ../ui/prefs.glade.h:66
+#: ../ui/prefs.glade.h:66 ../ui/prefs.gtkbuilder.h:58
 #, fuzzy
 msgid "Highlight user annotations"
 msgstr "یادداشت کاربر"
 
-#: ../ui/prefs.glade.h:67
+#: ../ui/prefs.glade.h:67 ../ui/prefs.gtkbuilder.h:59
 #, fuzzy
 msgid "Use inverted highlight on user-annotated verses"
 msgstr "این آیه را قویا مشخص کن"
 
-#: ../ui/prefs.glade.h:68
+#: ../ui/prefs.glade.h:68 ../ui/prefs.gtkbuilder.h:60
 #, fuzzy
 msgid "Highlight user annotations check box"
 msgstr "آیه فعلی را مشخص کن"
 
-#: ../ui/prefs.glade.h:69
+#: ../ui/prefs.glade.h:69 ../ui/prefs.gtkbuilder.h:61
 msgid "Cross-references in verse list"
 msgstr "ارجاعات در لیست آیات"
 
-#: ../ui/prefs.glade.h:70
+#: ../ui/prefs.glade.h:70 ../ui/prefs.gtkbuilder.h:62
 msgid "Use the verse list for Bible cross-references instead of the previewer"
 msgstr "از لیست آیه برای انجیل متقابل مراجع به جای previewer"
 
-#: ../ui/prefs.glade.h:71
+#: ../ui/prefs.glade.h:71 ../ui/prefs.gtkbuilder.h:63
 #, fuzzy
 msgid "Xrefs in verse list check box"
 msgstr "اندازه تصاویر را عوض کن انتخاب"
 
-#: ../ui/prefs.glade.h:72
+#: ../ui/prefs.glade.h:72 ../ui/prefs.gtkbuilder.h:64
 msgid "Enable Prayer Lists"
 msgstr "لیست دعا را فعال کن"
 
-#: ../ui/prefs.glade.h:73
+#: ../ui/prefs.glade.h:73 ../ui/prefs.gtkbuilder.h:65
 msgid "Make journals/prayer lists available"
 msgstr "مجلات را تشکیل می دهند / لیست نماز در دسترس"
 
-#: ../ui/prefs.glade.h:74
+#: ../ui/prefs.glade.h:74 ../ui/prefs.gtkbuilder.h:66
 msgid "Enable Prayer Lists Checkbox"
 msgstr "قسمت فعال کردن لیستهای دعا را انتخاب کن"
 
-#: ../ui/prefs.glade.h:75
+#: ../ui/prefs.glade.h:75 ../ui/prefs.gtkbuilder.h:67
 msgid "Verse number:"
 msgstr "شماره‌ آیه"
 
-#: ../ui/prefs.glade.h:76
-msgid "Bold"
-msgstr ""
-
-#: ../ui/prefs.glade.h:77
+#: ../ui/prefs.glade.h:77 ../ui/prefs.gtkbuilder.h:69
 #, fuzzy
 msgid "Show verse number in bold text"
 msgstr "تعداد نمایش آیه در متن"
 
-#: ../ui/prefs.glade.h:78
+#: ../ui/prefs.glade.h:78 ../ui/prefs.gtkbuilder.h:70
 msgid "Verse number bold checkbox"
 msgstr "اندازۀ قلم شماره آیه"
 
-#: ../ui/prefs.glade.h:79
+#: ../ui/prefs.glade.h:79 ../ui/prefs.gtkbuilder.h:71
 msgid "Brackets"
 msgstr ""
 
-#: ../ui/prefs.glade.h:80
+#: ../ui/prefs.glade.h:80 ../ui/prefs.gtkbuilder.h:72
 msgid "Show verse number with [surrounding brackets]"
 msgstr ""
 
-#: ../ui/prefs.glade.h:81
+#: ../ui/prefs.glade.h:81 ../ui/prefs.gtkbuilder.h:73
 #, fuzzy
 msgid "Verse number bracket checkbox"
 msgstr "انتخاب شیوۀ یک آیه در هر خط استفاده کن"
 
-#: ../ui/prefs.glade.h:82
+#: ../ui/prefs.glade.h:82 ../ui/prefs.gtkbuilder.h:74
 #, fuzzy
 msgid "Superscript"
 msgstr "توصیف"
 
-#: ../ui/prefs.glade.h:83
+#: ../ui/prefs.glade.h:83 ../ui/prefs.gtkbuilder.h:75
 #, fuzzy
 msgid "Show verse number as a superscript"
 msgstr "شماره‌های آیات را نشان بده"
 
-#: ../ui/prefs.glade.h:84
+#: ../ui/prefs.glade.h:84 ../ui/prefs.gtkbuilder.h:76
 #, fuzzy
 msgid "Verse number superscript checkbox"
 msgstr "اندازۀ قلم شماره آیه"
 
-#: ../ui/prefs.glade.h:85
+#: ../ui/prefs.glade.h:85 ../ui/prefs.gtkbuilder.h:77
 msgid "<b>StudyPad default directory</b>"
 msgstr "<b>شاخه پیش‌گزیده یادداشت مطالعه</b>"
 
-#: ../ui/prefs.glade.h:86
+#: ../ui/prefs.glade.h:86 ../ui/prefs.gtkbuilder.h:78
 msgid "Select A Directory"
 msgstr "انتخاب شاخه"
 
-#: ../ui/prefs.glade.h:87
+#: ../ui/prefs.glade.h:87 ../ui/prefs.gtkbuilder.h:79
 msgid "StudyPad default directory combo"
 msgstr "شاخه ترکیبی پیش‌گزیده یادداشت مطالعه"
 
-#: ../ui/prefs.glade.h:88
+#: ../ui/prefs.glade.h:88 ../ui/prefs.gtkbuilder.h:80
 msgid "General Misc"
 msgstr "عمومی ... متفرقه"
 
-#: ../ui/prefs.glade.h:89
+#: ../ui/prefs.glade.h:89 ../ui/prefs.gtkbuilder.h:81
 msgid "<b>Main Window Modules</b>"
 msgstr "<b>مدولهای پنجره اصلی</b>"
 
-#: ../ui/prefs.glade.h:90
+#: ../ui/prefs.glade.h:90 ../ui/prefs.gtkbuilder.h:82
 msgid "Biblical Text"
 msgstr "متن از کتاب‏مقدس"
 
-#: ../ui/prefs.glade.h:91
+#: ../ui/prefs.glade.h:91 ../ui/prefs.gtkbuilder.h:83
 msgid "Change Biblical Text Combo"
 msgstr "تغییر ترکیبی متن کتاب‏مقدس"
 
-#: ../ui/prefs.glade.h:93
+#: ../ui/prefs.glade.h:93 ../ui/prefs.gtkbuilder.h:85
 msgid "Change Commentary Combo"
 msgstr "تغییر ترکیبی تفسیر"
 
-#: ../ui/prefs.glade.h:94
+#: ../ui/prefs.glade.h:94 ../ui/prefs.gtkbuilder.h:86
 msgid "Dictionary"
 msgstr "فرهنگ واژگان"
 
-#: ../ui/prefs.glade.h:95
+#: ../ui/prefs.glade.h:95 ../ui/prefs.gtkbuilder.h:87
 msgid "Change Dictionary Combo"
 msgstr "تغییر ترکیبی فرهنگ واژه‏ها"
 
-#: ../ui/prefs.glade.h:97
+#: ../ui/prefs.glade.h:97 ../ui/prefs.gtkbuilder.h:89
 msgid "Change Book Combo"
 msgstr "تغییر ترکیب کتاب"
 
-#: ../ui/prefs.glade.h:98 ../ui/search-dialog.glade.h:22
+#: ../ui/prefs.glade.h:98 ../ui/prefs.gtkbuilder.h:90
+#: ../ui/search-dialog.glade.h:22 ../ui/search-dialog.gtkbuilder.h:23
 msgid "<b>Modules</b>"
 msgstr "<b>مدول‏ها</b>"
 
-#: ../ui/prefs.glade.h:99 ../ui/search-dialog.glade.h:86
+#: ../ui/prefs.glade.h:99 ../ui/prefs.gtkbuilder.h:91
+#: ../ui/search-dialog.glade.h:86 ../ui/search-dialog.gtkbuilder.h:86
 msgid "Clear all modules from the list"
 msgstr "همۀ مدول‏ها را از لیست پاک کن"
 
-#: ../ui/prefs.glade.h:100 ../ui/search-dialog.glade.h:87
+#: ../ui/prefs.glade.h:100 ../ui/prefs.gtkbuilder.h:92
+#: ../ui/search-dialog.glade.h:87 ../ui/search-dialog.gtkbuilder.h:87
 msgid "Clear Modules from List Button"
 msgstr "مدول‏ها را از لیست پاک کن"
 
-#: ../ui/prefs.glade.h:101 ../ui/search-dialog.glade.h:88
+#: ../ui/prefs.glade.h:101 ../ui/prefs.gtkbuilder.h:93
+#: ../ui/search-dialog.glade.h:88 ../ui/search-dialog.gtkbuilder.h:88
 msgid "Remove the selected module from the list"
 msgstr "مدول انتخاب شده را از لیست حذف کن"
 
-#: ../ui/prefs.glade.h:102 ../ui/search-dialog.glade.h:89
+#: ../ui/prefs.glade.h:102 ../ui/prefs.gtkbuilder.h:94
+#: ../ui/search-dialog.glade.h:89 ../ui/search-dialog.gtkbuilder.h:89
 msgid "Delete Selected Module From List Button"
 msgstr "مدول انتخاب شده را از لیست حذف کن"
 
-#: ../ui/prefs.glade.h:103
+#: ../ui/prefs.glade.h:103 ../ui/prefs.gtkbuilder.h:95
 #, fuzzy
 msgid "Open a dialog to select modules"
 msgstr "بازکردن یک دیالوگ برای انتخاب مدول به جهت اضافه کردن به لیست"
 
-#: ../ui/prefs.glade.h:104 ../ui/search-dialog.glade.h:91
+#: ../ui/prefs.glade.h:104 ../ui/prefs.gtkbuilder.h:96
+#: ../ui/search-dialog.glade.h:91 ../ui/search-dialog.gtkbuilder.h:91
 msgid "Add Modules"
 msgstr "اضافه کردن مدول‏ها"
 
-#: ../ui/prefs.glade.h:105 ../ui/search-dialog.glade.h:92
+#: ../ui/prefs.glade.h:105 ../ui/prefs.gtkbuilder.h:97
+#: ../ui/search-dialog.glade.h:92 ../ui/search-dialog.gtkbuilder.h:92
 msgid "Open Selection Dialog Button"
 msgstr "دکمۀ دیالوگ بخش باز"
 
-#: ../ui/prefs.glade.h:106
+#: ../ui/prefs.glade.h:106 ../ui/prefs.gtkbuilder.h:98
 msgid "Modules Parallel"
 msgstr "مدولهای موازی"
 
-#: ../ui/prefs.glade.h:107
+#: ../ui/prefs.glade.h:107 ../ui/prefs.gtkbuilder.h:99
 msgid "<b>Special Purpose Modules</b>"
 msgstr "<b>مدولهای ویژه</b>"
 
-#: ../ui/prefs.glade.h:108
+#: ../ui/prefs.glade.h:108 ../ui/prefs.gtkbuilder.h:100
 msgid "Daily Devotional"
 msgstr "دعا و تفکر روزانه"
 
-#: ../ui/prefs.glade.h:109
+#: ../ui/prefs.glade.h:109 ../ui/prefs.gtkbuilder.h:101
 msgid "Daily Devotional Combo"
 msgstr "دعا و تفکر روزانه بصورت ترکیبی"
 
-#: ../ui/prefs.glade.h:110
+#: ../ui/prefs.glade.h:110 ../ui/prefs.gtkbuilder.h:102
 msgid "Hebrew Lexicon"
 msgstr "قاموس عبری"
 
-#: ../ui/prefs.glade.h:111
+#: ../ui/prefs.glade.h:111 ../ui/prefs.gtkbuilder.h:103
 msgid "Hebrew Lexicon Combo"
 msgstr "قاموس عبری ترکیبی"
 
-#: ../ui/prefs.glade.h:112
+#: ../ui/prefs.glade.h:112 ../ui/prefs.gtkbuilder.h:104
 msgid "Greek Lexicon"
 msgstr "قاموس به زبان یونانی"
 
-#: ../ui/prefs.glade.h:113
+#: ../ui/prefs.glade.h:113 ../ui/prefs.gtkbuilder.h:105
 msgid "Greek Lexicon Combo"
 msgstr "قاموس یونانی ترکیبی"
 
-#: ../ui/prefs.glade.h:114
+#: ../ui/prefs.glade.h:114 ../ui/prefs.gtkbuilder.h:106
 msgid "Default Dictionary"
 msgstr "فرهنگ قراردادی واژگان"
 
-#: ../ui/prefs.glade.h:115
+#: ../ui/prefs.glade.h:115 ../ui/prefs.gtkbuilder.h:107
 msgid "Change Default Dictionary Combo"
 msgstr "تغییر ترکیب فرهنگ واژه‏های قراردادی"
 
-#: ../ui/prefs.glade.h:116
+#: ../ui/prefs.glade.h:116 ../ui/prefs.gtkbuilder.h:108
 msgid "Personal Notes"
 msgstr "یادداشت‏های شخصی"
 
-#: ../ui/prefs.glade.h:117
+#: ../ui/prefs.glade.h:117 ../ui/prefs.gtkbuilder.h:109
 msgid "Change Personal Notes Combo"
 msgstr "تغییر ترکیبی یادداشت‏های شخصی"
 
-#: ../ui/prefs.glade.h:118
+#: ../ui/prefs.glade.h:118 ../ui/prefs.gtkbuilder.h:110
 msgid "Modules Misc"
 msgstr "گوناگونی مدولها"
 
-#: ../ui/prefs.glade.h:119 ../ui/search-dialog.glade.h:115
+#: ../ui/prefs.glade.h:119 ../ui/prefs.gtkbuilder.h:111
+#: ../ui/search-dialog.glade.h:115 ../ui/search-dialog.gtkbuilder.h:115
 msgid "Module Selection"
 msgstr "انتخاب مدول"
 
-#: ../ui/search-dialog.glade.h:1
+#: ../ui/prefs.gtkbuilder.h:112
+msgid "-2"
+msgstr ""
+
+#: ../ui/prefs.gtkbuilder.h:113
+#, fuzzy
+msgid "-1"
+msgstr "۱"
+
+#: ../ui/prefs.gtkbuilder.h:115
+#, fuzzy
+msgid "+1"
+msgstr "۱"
+
+#: ../ui/prefs.gtkbuilder.h:116
+msgid "+2"
+msgstr ""
+
+#: ../ui/prefs.gtkbuilder.h:117
+msgid "+3"
+msgstr ""
+
+#: ../ui/prefs.gtkbuilder.h:118
+msgid "+4"
+msgstr ""
+
+#: ../ui/prefs.gtkbuilder.h:119
+msgid "+5"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:1 ../ui/search-dialog.gtkbuilder.h:1
 msgid "Advanced Search"
 msgstr "جستجوی  پیشرفته"
 
-#: ../ui/search-dialog.glade.h:2
+#: ../ui/search-dialog.glade.h:2 ../ui/search-dialog.gtkbuilder.h:2
 msgid "_Lucene Search Syntax"
 msgstr "دستور چستچو 'لوسین'"
 
-#: ../ui/search-dialog.glade.h:3
+#: ../ui/search-dialog.glade.h:3 ../ui/search-dialog.gtkbuilder.h:3
 msgid ""
 "Open a brief explanation of the syntax used for optimized \"lucene\" "
 "searches."
 msgstr ""
 "باز توضیح مختصری از گرامر استفاده شده برای بهینه سازی \"lucene\" جستجو."
 
-#: ../ui/search-dialog.glade.h:4
+#: ../ui/search-dialog.glade.h:4 ../ui/search-dialog.gtkbuilder.h:4
 msgid "_Attribute Search"
 msgstr "جستجو در مشخصات"
 
-#: ../ui/search-dialog.glade.h:5
+#: ../ui/search-dialog.glade.h:5 ../ui/search-dialog.gtkbuilder.h:5
 msgid "Open a brief explanation of attribute-based searches."
 msgstr "باز توضیح مختصری از ویژگی های مبتنی بر جستجو."
 
-#: ../ui/search-dialog.glade.h:6
+#: ../ui/search-dialog.glade.h:6 ../ui/search-dialog.gtkbuilder.h:7
 msgid "for "
 msgstr "برای "
 
-#: ../ui/search-dialog.glade.h:7
+#: ../ui/search-dialog.glade.h:7 ../ui/search-dialog.gtkbuilder.h:8
 msgid "Main Search Entry"
 msgstr "ثبت جستجوی اصلی"
 
-#: ../ui/search-dialog.glade.h:8
+#: ../ui/search-dialog.glade.h:8 ../ui/search-dialog.gtkbuilder.h:9
 msgid "Start/stop searching"
 msgstr "شروع/ توقف جستجو"
 
-#: ../ui/search-dialog.glade.h:9
+#: ../ui/search-dialog.glade.h:9 ../ui/search-dialog.gtkbuilder.h:10
 msgid "Find Button"
 msgstr "کلید را جستجو کن"
 
-#: ../ui/search-dialog.glade.h:10
+#: ../ui/search-dialog.glade.h:10 ../ui/search-dialog.gtkbuilder.h:11
 msgid "Search Criteria Treeview"
 msgstr "جستجوی معیارهای شاخه‏ای"
 
-#: ../ui/search-dialog.glade.h:11
+#: ../ui/search-dialog.glade.h:11 ../ui/search-dialog.gtkbuilder.h:12
 msgid "<b>Scope</b>"
 msgstr "<b>محدوده</b>"
 
-#: ../ui/search-dialog.glade.h:12
+#: ../ui/search-dialog.glade.h:12 ../ui/search-dialog.gtkbuilder.h:14
 msgid "Search entire module"
 msgstr "جستجوی تمامی مدول"
 
-#: ../ui/search-dialog.glade.h:13
+#: ../ui/search-dialog.glade.h:13 ../ui/search-dialog.gtkbuilder.h:13
 msgid "Entire module"
 msgstr "تمامی مدول"
 
-#: ../ui/search-dialog.glade.h:14
+#: ../ui/search-dialog.glade.h:14 ../ui/search-dialog.gtkbuilder.h:15
 msgid "Entire module radiobutton"
 msgstr "انتخاب تمامی مدول"
 
-#: ../ui/search-dialog.glade.h:15
+#: ../ui/search-dialog.glade.h:15 ../ui/search-dialog.gtkbuilder.h:17
 msgid "Use the results of the last search as the scope of the search"
 msgstr "نتایج جستجوی آخر را به مدول محدوده جستجو بکار گیر"
 
-#: ../ui/search-dialog.glade.h:16
+#: ../ui/search-dialog.glade.h:16 ../ui/search-dialog.gtkbuilder.h:16
 msgid "Current results"
 msgstr "نتایج فعلی"
 
-#: ../ui/search-dialog.glade.h:17
+#: ../ui/search-dialog.glade.h:17 ../ui/search-dialog.gtkbuilder.h:18
 msgid "Current results radiobutton"
 msgstr "انتخاب نتایج فعلی"
 
-#: ../ui/search-dialog.glade.h:18
+#: ../ui/search-dialog.glade.h:18 ../ui/search-dialog.gtkbuilder.h:20
 msgid "Use a custom range for the scope of the search"
 msgstr "برای محدوده جستجو از محدوده غیر استاندارد استفاده کن"
 
-#: ../ui/search-dialog.glade.h:19
+#: ../ui/search-dialog.glade.h:19 ../ui/search-dialog.gtkbuilder.h:19
 msgid "Custom verse range"
 msgstr "محدودۀ غیر استاندارد"
 
-#: ../ui/search-dialog.glade.h:20
+#: ../ui/search-dialog.glade.h:20 ../ui/search-dialog.gtkbuilder.h:21
 msgid "Custom verse range radiobutton"
 msgstr "انتخاب محدودۀ آیات"
 
-#: ../ui/search-dialog.glade.h:21
+#: ../ui/search-dialog.glade.h:21 ../ui/search-dialog.gtkbuilder.h:22
 msgid "Custom Range Selector Combo"
 msgstr "ترکیب انتخابگر محدوده غیر استاندارد"
 
-#: ../ui/search-dialog.glade.h:23
+#: ../ui/search-dialog.glade.h:23 ../ui/search-dialog.gtkbuilder.h:25
 msgid "Use a single module for the search"
 msgstr "برای جستجو از مدول فردی استفاده کن"
 
-#: ../ui/search-dialog.glade.h:24
+#: ../ui/search-dialog.glade.h:24 ../ui/search-dialog.gtkbuilder.h:24
 msgid "Single module"
 msgstr "مدول فردی"
 
-#: ../ui/search-dialog.glade.h:25
+#: ../ui/search-dialog.glade.h:25 ../ui/search-dialog.gtkbuilder.h:26
 msgid "Single module radiobutton"
 msgstr "انتخاب مدول فردی"
 
-#: ../ui/search-dialog.glade.h:26
+#: ../ui/search-dialog.glade.h:26 ../ui/search-dialog.gtkbuilder.h:28
 msgid "Use the current module list for the search"
 msgstr "برای جستجو از لیست فعلی استفاده کن"
 
-#: ../ui/search-dialog.glade.h:27
+#: ../ui/search-dialog.glade.h:27 ../ui/search-dialog.gtkbuilder.h:27
 msgid "Module list"
 msgstr "لیست مدول"
 
-#: ../ui/search-dialog.glade.h:28
+#: ../ui/search-dialog.glade.h:28 ../ui/search-dialog.gtkbuilder.h:29
 msgid "Module list radiobutton"
 msgstr "انتخاب لیست مدول"
 
-#: ../ui/search-dialog.glade.h:29
+#: ../ui/search-dialog.glade.h:29 ../ui/search-dialog.gtkbuilder.h:31
 msgid "Use a custom module list for the search"
 msgstr "لیست یک مدول غیر استاندارد را برای جستجو استفاده کن"
 
-#: ../ui/search-dialog.glade.h:30
+#: ../ui/search-dialog.glade.h:30 ../ui/search-dialog.gtkbuilder.h:30
 msgid "Custom module list"
 msgstr "لیست مدول‏های غیراستاندارد"
 
-#: ../ui/search-dialog.glade.h:31
+#: ../ui/search-dialog.glade.h:31 ../ui/search-dialog.gtkbuilder.h:32
 msgid "Custom module list radiobutton"
 msgstr "انتخاب لیست مدول"
 
@@ -3386,11 +3951,11 @@ msgstr "انتخاب لیست مدول"
 msgid "Custom Module List Combo"
 msgstr "ترکیب لیست مدول‏های غیر استاندارد"
 
-#: ../ui/search-dialog.glade.h:33
+#: ../ui/search-dialog.glade.h:33 ../ui/search-dialog.gtkbuilder.h:33
 msgid "<b>Search Type</b>"
 msgstr "<b>نوع جستجو</b>"
 
-#: ../ui/search-dialog.glade.h:34
+#: ../ui/search-dialog.glade.h:34 ../ui/search-dialog.gtkbuilder.h:35
 msgid ""
 "Fast, featureful, index-based search\n"
 "Indexes must have been built beforehand:\n"
@@ -3400,269 +3965,274 @@ msgstr ""
 "اندکسها بايد قبلا آماده گردند:\n"
 "به عملکردهاي خود بقاي مدير مدول رجوع کنيد"
 
-#: ../ui/search-dialog.glade.h:37
+#: ../ui/search-dialog.glade.h:37 ../ui/search-dialog.gtkbuilder.h:34
 msgid "Optimized (\"Lucene\")"
 msgstr "بهینه‏سازی (\"Lucene\")"
 
-#: ../ui/search-dialog.glade.h:38
+#: ../ui/search-dialog.glade.h:38 ../ui/search-dialog.gtkbuilder.h:38
 msgid "Optimized (\"Lucene\") radiobutton"
 msgstr "انتخاب (\"Lucene\") بهینه‏سازی"
 
-#: ../ui/search-dialog.glade.h:40
+#: ../ui/search-dialog.glade.h:40 ../ui/search-dialog.gtkbuilder.h:40
 msgid "Multi word radiobutton"
 msgstr "انتخاب کلمات متعدد"
 
-#: ../ui/search-dialog.glade.h:42
+#: ../ui/search-dialog.glade.h:42 ../ui/search-dialog.gtkbuilder.h:42
 msgid "Regular expression radiobutton"
 msgstr "انتخاب بیان معمول"
 
-#: ../ui/search-dialog.glade.h:44
+#: ../ui/search-dialog.glade.h:44 ../ui/search-dialog.gtkbuilder.h:44
 msgid "Exact phrase radiobutton"
 msgstr "عبارت به شکل دقیق"
 
-#: ../ui/search-dialog.glade.h:45
+#: ../ui/search-dialog.glade.h:45 ../ui/search-dialog.gtkbuilder.h:46
 msgid "Make selections on the Attribute Search tab"
 msgstr "گزینه در بخش جستجو در مشخصات"
 
-#: ../ui/search-dialog.glade.h:46
+#: ../ui/search-dialog.glade.h:46 ../ui/search-dialog.gtkbuilder.h:45
 msgid "Attributes"
 msgstr "مشخصات"
 
-#: ../ui/search-dialog.glade.h:47
+#: ../ui/search-dialog.glade.h:47 ../ui/search-dialog.gtkbuilder.h:47
 msgid "Attributes radiobutton"
 msgstr "انتخاب مشخصات"
 
-#: ../ui/search-dialog.glade.h:48
+#: ../ui/search-dialog.glade.h:48 ../ui/search-dialog.gtkbuilder.h:48
 msgid "<b>Options</b>"
 msgstr "<b>گزینه‏ها</b>"
 
-#: ../ui/search-dialog.glade.h:50
+#: ../ui/search-dialog.glade.h:50 ../ui/search-dialog.gtkbuilder.h:50
 msgid "Match case checkbox"
 msgstr "انتخاب تطبیق مورد"
 
-#: ../ui/search-dialog.glade.h:51
+#: ../ui/search-dialog.glade.h:51 ../ui/search-dialog.gtkbuilder.h:51
 msgid "Search  Criteria"
 msgstr "جستجوی معیارهای"
 
-#: ../ui/search-dialog.glade.h:52
+#: ../ui/search-dialog.glade.h:52 ../ui/search-dialog.gtkbuilder.h:52
 msgid "Show in main window"
 msgstr "نمایش پنجره اصلی"
 
-#: ../ui/search-dialog.glade.h:53
+#: ../ui/search-dialog.glade.h:53 ../ui/search-dialog.gtkbuilder.h:53
 msgid "Save search results as bookmarks"
 msgstr "نتایج جستجو را به مدول علائم ضبط کن"
 
-#: ../ui/search-dialog.glade.h:54
+#: ../ui/search-dialog.glade.h:54 ../ui/search-dialog.gtkbuilder.h:54
 msgid "Export current search results"
 msgstr "صادرت نتایج جستجو"
 
-#: ../ui/search-dialog.glade.h:55
+#: ../ui/search-dialog.glade.h:55 ../ui/search-dialog.gtkbuilder.h:55
 msgid "Export"
 msgstr "صادرت"
 
-#: ../ui/search-dialog.glade.h:56
+#: ../ui/search-dialog.glade.h:56 ../ui/search-dialog.gtkbuilder.h:56
 msgid "Clear lists for new search"
 msgstr "لیست را برای جستجوی جدید پاک کن"
 
-#: ../ui/search-dialog.glade.h:57
+#: ../ui/search-dialog.glade.h:57 ../ui/search-dialog.gtkbuilder.h:57
 msgid "<b>Found</b>"
 msgstr "<b>پیدا شد</b>"
 
-#: ../ui/search-dialog.glade.h:58
+#: ../ui/search-dialog.glade.h:58 ../ui/search-dialog.gtkbuilder.h:58
 msgid "Result Summary Window"
 msgstr "پنجرۀ خلاصۀ نتیجه"
 
-#: ../ui/search-dialog.glade.h:59
+#: ../ui/search-dialog.glade.h:59 ../ui/search-dialog.gtkbuilder.h:59
 msgid "Result Summary Table"
 msgstr "لیست نتیجه‏ها"
 
-#: ../ui/search-dialog.glade.h:60
+#: ../ui/search-dialog.glade.h:60 ../ui/search-dialog.gtkbuilder.h:60
 msgid "<b>Search Results</b>"
 msgstr "<b>نتایج جستجو</b>"
 
-#: ../ui/search-dialog.glade.h:61
+#: ../ui/search-dialog.glade.h:61 ../ui/search-dialog.gtkbuilder.h:61
 msgid "<b>Preview</b>"
 msgstr "<b>پیش‏نگری</b>"
 
-#: ../ui/search-dialog.glade.h:62
+#: ../ui/search-dialog.glade.h:62 ../ui/search-dialog.gtkbuilder.h:62
 msgid "Results"
 msgstr "نتایج"
 
-#: ../ui/search-dialog.glade.h:63
+#: ../ui/search-dialog.glade.h:63 ../ui/search-dialog.gtkbuilder.h:63
 msgid "Create new custom range"
 msgstr "ایجاد محدوده جدید"
 
-#: ../ui/search-dialog.glade.h:64
+#: ../ui/search-dialog.glade.h:64 ../ui/search-dialog.gtkbuilder.h:64
 msgid "New Range Button"
 msgstr "دکمۀ محدودۀ جدید"
 
-#: ../ui/search-dialog.glade.h:65
+#: ../ui/search-dialog.glade.h:65 ../ui/search-dialog.gtkbuilder.h:65
 msgid "Save custom range"
 msgstr "محدوده غیراستاندارد را ضبط کن"
 
-#: ../ui/search-dialog.glade.h:66
+#: ../ui/search-dialog.glade.h:66 ../ui/search-dialog.gtkbuilder.h:66
 msgid "Save Range Button"
 msgstr "کلید ذخیره‏سازی محدوده"
 
-#: ../ui/search-dialog.glade.h:67
+#: ../ui/search-dialog.glade.h:67 ../ui/search-dialog.gtkbuilder.h:67
 msgid "Delete selected range"
 msgstr "محدوده منتخب را حذف کن"
 
-#: ../ui/search-dialog.glade.h:68
+#: ../ui/search-dialog.glade.h:68 ../ui/search-dialog.gtkbuilder.h:68
 msgid "Delete Range Button"
 msgstr "کلید حذف محدوده"
 
-#: ../ui/search-dialog.glade.h:69
+#: ../ui/search-dialog.glade.h:69 ../ui/search-dialog.gtkbuilder.h:69
 msgid "<b>Ranges</b>"
 msgstr "<b>محدوده‌ها</b>"
 
-#: ../ui/search-dialog.glade.h:70
+#: ../ui/search-dialog.glade.h:70 ../ui/search-dialog.gtkbuilder.h:70
 msgid "<b>Range Name</b>"
 msgstr "<b>نام محدوده</b>"
 
-#: ../ui/search-dialog.glade.h:71
+#: ../ui/search-dialog.glade.h:71 ../ui/search-dialog.gtkbuilder.h:71
 msgid "Range Name Entry"
 msgstr "ثبت نام محدوده"
 
-#: ../ui/search-dialog.glade.h:72
+#: ../ui/search-dialog.glade.h:72 ../ui/search-dialog.gtkbuilder.h:72
 msgid "<b>Range Definition</b>"
 msgstr "<b>تعیین محدوده</b>"
 
-#: ../ui/search-dialog.glade.h:73
+#: ../ui/search-dialog.glade.h:73 ../ui/search-dialog.gtkbuilder.h:73
 msgid "Range Definition Entry"
 msgstr "ثبت تعریف محدوده"
 
-#: ../ui/search-dialog.glade.h:74
+#: ../ui/search-dialog.glade.h:74 ../ui/search-dialog.gtkbuilder.h:74
 msgid "e.g. Matt-John;Rev4"
 msgstr "مثلاً متی-یوحنا؛مکا۴"
 
-#: ../ui/search-dialog.glade.h:75
+#: ../ui/search-dialog.glade.h:75 ../ui/search-dialog.gtkbuilder.h:75
 msgid "Custom Range Preview"
 msgstr "مرور محدوده غیر استاندارد"
 
-#: ../ui/search-dialog.glade.h:76
+#: ../ui/search-dialog.glade.h:76 ../ui/search-dialog.gtkbuilder.h:76
 msgid "Custom Verse Ranges"
 msgstr "محدوده‌های آیه غیر استاندارد"
 
-#: ../ui/search-dialog.glade.h:77
+#: ../ui/search-dialog.glade.h:77 ../ui/search-dialog.gtkbuilder.h:77
 msgid "Create a new module list"
 msgstr "ایجاد لیست مدول جدید"
 
-#: ../ui/search-dialog.glade.h:78
+#: ../ui/search-dialog.glade.h:78 ../ui/search-dialog.gtkbuilder.h:78
 msgid "New Custom Module List Button"
 msgstr "دکمۀ لیست شخصی مدول جدید"
 
-#: ../ui/search-dialog.glade.h:79
+#: ../ui/search-dialog.glade.h:79 ../ui/search-dialog.gtkbuilder.h:79
 msgid "Save the module list"
 msgstr "ضبط لیست مدول"
 
-#: ../ui/search-dialog.glade.h:80
+#: ../ui/search-dialog.glade.h:80 ../ui/search-dialog.gtkbuilder.h:80
 msgid "Save Custom Module List Button"
 msgstr "دکمۀ مدول ذخیره‏سازی غیر استاندارد"
 
-#: ../ui/search-dialog.glade.h:81
+#: ../ui/search-dialog.glade.h:81 ../ui/search-dialog.gtkbuilder.h:81
 msgid "Delete the selected list"
 msgstr "لیست منتخب را حذف کن"
 
-#: ../ui/search-dialog.glade.h:82
+#: ../ui/search-dialog.glade.h:82 ../ui/search-dialog.gtkbuilder.h:82
 msgid "Clear Custom Module List Button"
 msgstr "دگمه خالی کردن لیست مدولهای غیر استاندارد"
 
-#: ../ui/search-dialog.glade.h:83
+#: ../ui/search-dialog.glade.h:83 ../ui/search-dialog.gtkbuilder.h:83
 msgid "<b>Module Lists</b>"
 msgstr "<b>لیست‏های مدول</b>"
 
-#: ../ui/search-dialog.glade.h:84
+#: ../ui/search-dialog.glade.h:84 ../ui/search-dialog.gtkbuilder.h:84
 msgid "<b>List Name</b>"
 msgstr "<b>نام لینک</b>"
 
-#: ../ui/search-dialog.glade.h:85
+#: ../ui/search-dialog.glade.h:85 ../ui/search-dialog.gtkbuilder.h:85
 msgid "Custom Module List Name Entry"
 msgstr "درج نام لیست مدول غیر استاندارد"
 
-#: ../ui/search-dialog.glade.h:90
+#: ../ui/search-dialog.glade.h:90 ../ui/search-dialog.gtkbuilder.h:90
 msgid "Open a dialog to select modules to add to the list"
 msgstr "بازکردن یک دیالوگ برای انتخاب مدول به جهت اضافه کردن به لیست"
 
-#: ../ui/search-dialog.glade.h:93
+#: ../ui/search-dialog.glade.h:93 ../ui/search-dialog.gtkbuilder.h:93
 msgid "Custom Module Lists"
 msgstr "لیست‏های مدول غیر استاندارد"
 
-#: ../ui/search-dialog.glade.h:94
+#: ../ui/search-dialog.glade.h:94 ../ui/search-dialog.gtkbuilder.h:94
 msgid "<b>Attribute</b>"
 msgstr "<b>مشخصه</b>"
 
-#: ../ui/search-dialog.glade.h:95
+#: ../ui/search-dialog.glade.h:95 ../ui/search-dialog.gtkbuilder.h:96
 msgid "Search for Strongs Numbers like G4442 or H1121"
 msgstr "جستجو به جهت شماره‌های کشف‏الآیات استرانگ نظیر G4442 یا H1121"
 
-#: ../ui/search-dialog.glade.h:96
+#: ../ui/search-dialog.glade.h:96 ../ui/search-dialog.gtkbuilder.h:95
 msgid "Strongs Numbers"
 msgstr "شماره‌‌های کشف‏الآیات استرانگ"
 
-#: ../ui/search-dialog.glade.h:97
+#: ../ui/search-dialog.glade.h:97 ../ui/search-dialog.gtkbuilder.h:97
 msgid "Strongs Numbers radiobutton"
 msgstr "انتخاب شماره‌‌های کشف‏الآیات استرانگ"
 
-#: ../ui/search-dialog.glade.h:98
+#: ../ui/search-dialog.glade.h:98 ../ui/search-dialog.gtkbuilder.h:99
 msgid "Search for Morphological tags"
 msgstr "جستجو برای علائم واژه‏شناسی"
 
-#: ../ui/search-dialog.glade.h:100
+#: ../ui/search-dialog.glade.h:100 ../ui/search-dialog.gtkbuilder.h:100
 msgid "Morphological Tags radiobutton"
 msgstr "انتخاب علائم واژه‏شناسی"
 
-#: ../ui/search-dialog.glade.h:101
+#: ../ui/search-dialog.glade.h:101 ../ui/search-dialog.gtkbuilder.h:102
 msgid "Search in footnotes"
 msgstr "جستجو در پانویس"
 
-#: ../ui/search-dialog.glade.h:103
+#: ../ui/search-dialog.glade.h:103 ../ui/search-dialog.gtkbuilder.h:103
 msgid "Footnotes radiobutton"
 msgstr "انتخاب پانویس"
 
-#: ../ui/search-dialog.glade.h:104
+#: ../ui/search-dialog.glade.h:104 ../ui/search-dialog.gtkbuilder.h:104
 msgid "<b>Results Display Options</b>"
 msgstr "<b>گزینه‏های نتایج نمایش</b>"
 
-#: ../ui/search-dialog.glade.h:105
+#: ../ui/search-dialog.glade.h:105 ../ui/search-dialog.gtkbuilder.h:106
 msgid "In modules that have Strong's Numbers"
 msgstr "در مدول‏هایی که شماره‌های کشف‏الآیات استرانگ را دارند"
 
-#: ../ui/search-dialog.glade.h:106
+#: ../ui/search-dialog.glade.h:106 ../ui/search-dialog.gtkbuilder.h:105
 msgid "Show Strong's Numbers"
 msgstr "شماره‌های کشف‏اآیات استرانگ را نشان بده"
 
-#: ../ui/search-dialog.glade.h:107
+#: ../ui/search-dialog.glade.h:107 ../ui/search-dialog.gtkbuilder.h:107
 msgid "Show Strong's Numbers checkbox"
 msgstr "انتخاب شماره‌های کشف‏اآیات استرانگ"
 
-#: ../ui/search-dialog.glade.h:108
+#: ../ui/search-dialog.glade.h:108 ../ui/search-dialog.gtkbuilder.h:109
 msgid "In modules that have Morphological Tags"
 msgstr "در مدول‏هایی که بخش‏های واژه‏شناسی دارند"
 
-#: ../ui/search-dialog.glade.h:109
+#: ../ui/search-dialog.glade.h:109 ../ui/search-dialog.gtkbuilder.h:108
 msgid "Show Morphological Tags"
 msgstr "بخشهای واژه‏شناسی را نشان بده"
 
-#: ../ui/search-dialog.glade.h:110
+#: ../ui/search-dialog.glade.h:110 ../ui/search-dialog.gtkbuilder.h:110
 msgid "Show Morphological Tags checkbox"
 msgstr "انتخاب بخشهای واژه‏شناسی"
 
-#: ../ui/search-dialog.glade.h:111
+#: ../ui/search-dialog.glade.h:111 ../ui/search-dialog.gtkbuilder.h:112
 msgid "In modules that have Footnotes"
 msgstr "در مدول‏هایی که پانویس دارند"
 
-#: ../ui/search-dialog.glade.h:112
+#: ../ui/search-dialog.glade.h:112 ../ui/search-dialog.gtkbuilder.h:111
 msgid "Show Footnotes"
 msgstr "پانویس‏ها را نشان بده"
 
-#: ../ui/search-dialog.glade.h:113
+#: ../ui/search-dialog.glade.h:113 ../ui/search-dialog.gtkbuilder.h:113
 msgid "Show Footnotes checkbox"
 msgstr "نمایش انتخاب پانویسها"
 
-#: ../ui/search-dialog.glade.h:114
+#: ../ui/search-dialog.glade.h:114 ../ui/search-dialog.gtkbuilder.h:114
 msgid "Attribute Search"
 msgstr "جستجو در مشخصات"
+
+#: ../ui/search-dialog.gtkbuilder.h:6
+#, fuzzy
+msgid "<b>search module</b>"
+msgstr "<b>نوع جستجو</b>"
 
 #: ../ui/xi-export-bookmarks.glade.h:1
 msgid "Export Bookmark Folder"
@@ -3696,11 +4266,11 @@ msgstr "رد"
 msgid "gtk-ok"
 msgstr "باله"
 
-#: ../ui/xi-menus.glade.h:2
+#: ../ui/xi-menus.glade.h:2 ../ui/xi-menus.gtkbuilder.h:2
 msgid "Open Study_pad"
 msgstr "یادداشت مطالعه‌ را باز کن"
 
-#: ../ui/xi-menus.glade.h:3
+#: ../ui/xi-menus.glade.h:3 ../ui/xi-menus.gtkbuilder.h:3
 msgid "_Open Session"
 msgstr "_قسمت را باز کن"
 
@@ -3708,7 +4278,7 @@ msgstr "_قسمت را باز کن"
 msgid "Open a saved tab settings collection"
 msgstr "قسمت ضبط شده را باز کن"
 
-#: ../ui/xi-menus.glade.h:5
+#: ../ui/xi-menus.glade.h:5 ../ui/xi-menus.gtkbuilder.h:4
 msgid "_Save Session"
 msgstr "_قسمت را ذخیره کن"
 
@@ -3716,7 +4286,7 @@ msgstr "_قسمت را ذخیره کن"
 msgid "Save this collection of tab settings"
 msgstr "ذخیره سازی این مجموعه ای از تنظیمات زبانه"
 
-#: ../ui/xi-menus.glade.h:7
+#: ../ui/xi-menus.glade.h:7 ../ui/xi-menus.gtkbuilder.h:5
 msgid "_New Prayerlist/Journal"
 msgstr "لیست دعا/نوشتار روزانه"
 
@@ -3724,11 +4294,7 @@ msgstr "لیست دعا/نوشتار روزانه"
 msgid "Create a new journal or prayerlist from a template"
 msgstr "ایجاد لیست جدید دعا"
 
-#: ../ui/xi-menus.glade.h:9
-msgid "_Edit"
-msgstr "_ویرایش"
-
-#: ../ui/xi-menus.glade.h:10
+#: ../ui/xi-menus.glade.h:10 ../ui/xi-menus.gtkbuilder.h:7
 msgid "_Search"
 msgstr "_جستجو"
 
@@ -3736,7 +4302,7 @@ msgstr "_جستجو"
 msgid "Bring the simple sidebar search forward"
 msgstr "را بدنبال نوار ساده رو به جلو"
 
-#: ../ui/xi-menus.glade.h:12
+#: ../ui/xi-menus.glade.h:12 ../ui/xi-menus.gtkbuilder.h:8
 msgid "_Advanced Search"
 msgstr "_جستجوی پیشرفته"
 
@@ -3744,7 +4310,7 @@ msgstr "_جستجوی پیشرفته"
 msgid "Open the advanced search dialog, to run complex queries"
 msgstr "باز کردن پنجره جستجوی پیشرفته ، برای اجرای نمایش داده شد پیچیده"
 
-#: ../ui/xi-menus.glade.h:14
+#: ../ui/xi-menus.glade.h:14 ../ui/xi-menus.gtkbuilder.h:9
 msgid "_Preferences"
 msgstr "_ترجیحات"
 
@@ -3752,11 +4318,11 @@ msgstr "_ترجیحات"
 msgid "Use module manager to install and remove Sword modules"
 msgstr "از مدیر مدول‏ها به جهت نصب و یا حذف مدول‏ها استفاده کن"
 
-#: ../ui/xi-menus.glade.h:16
+#: ../ui/xi-menus.glade.h:16 ../ui/xi-menus.gtkbuilder.h:10
 msgid "_Module Manager"
 msgstr "_مدیر مدول‏ها"
 
-#: ../ui/xi-menus.glade.h:18
+#: ../ui/xi-menus.glade.h:18 ../ui/xi-menus.gtkbuilder.h:12
 msgid "Preview _Daily Devotion"
 msgstr "صمیمیت پیشنمایش _Daily"
 
@@ -3764,23 +4330,23 @@ msgstr "صمیمیت پیشنمایش _Daily"
 msgid "Show today's entry from your selected daily devotional in the previewer"
 msgstr "ورود به امروز نشان از انتخاب شما صمیمانه روزانه در previewer"
 
-#: ../ui/xi-menus.glade.h:20
+#: ../ui/xi-menus.glade.h:20 ../ui/xi-menus.gtkbuilder.h:13
 msgid "_Bible"
 msgstr "_کتاب‏مقدس"
 
-#: ../ui/xi-menus.glade.h:21
+#: ../ui/xi-menus.glade.h:21 ../ui/xi-menus.gtkbuilder.h:14
 msgid "_Preview"
 msgstr "_پیش‌نگری"
 
-#: ../ui/xi-menus.glade.h:22
+#: ../ui/xi-menus.glade.h:22 ../ui/xi-menus.gtkbuilder.h:15
 msgid "_Commentary/Book"
 msgstr "_تفسیر/کتاب"
 
-#: ../ui/xi-menus.glade.h:23
+#: ../ui/xi-menus.glade.h:23 ../ui/xi-menus.gtkbuilder.h:16
 msgid "Dictionar_y"
 msgstr "فرهنگ واژه‏ها"
 
-#: ../ui/xi-menus.glade.h:24
+#: ../ui/xi-menus.glade.h:24 ../ui/xi-menus.gtkbuilder.h:17
 msgid "L_ink Tabs"
 msgstr "بخش پیوندگاه"
 
@@ -3788,7 +4354,7 @@ msgstr "بخش پیوندگاه"
 msgid "Make all tabs' Bibles navigate together"
 msgstr "را Bibles تمام افزودنیهای زبانهها &#39;حرکت به هم"
 
-#: ../ui/xi-menus.glade.h:26
+#: ../ui/xi-menus.glade.h:26 ../ui/xi-menus.gtkbuilder.h:18
 msgid "_Read Aloud"
 msgstr "_با صدای بلند بخوان"
 
@@ -3797,7 +4363,7 @@ msgid "Turn on text-to-speech reading of Bible verses as they are selected"
 msgstr ""
 "روشن کردن متن به گفتار خواندن آیات کتاب مقدس از آنها به عنوان انتخاب می شوند"
 
-#: ../ui/xi-menus.glade.h:28
+#: ../ui/xi-menus.glade.h:28 ../ui/xi-menus.gtkbuilder.h:19
 msgid "Show Verse _Numbers"
 msgstr "شماره‌های آیات را نشان بده"
 
@@ -3805,7 +4371,7 @@ msgstr "شماره‌های آیات را نشان بده"
 msgid "Display verse numbers in the text"
 msgstr "تعداد نمایش آیه در متن"
 
-#: ../ui/xi-menus.glade.h:30
+#: ../ui/xi-menus.glade.h:30 ../ui/xi-menus.gtkbuilder.h:20
 msgid "_Highlight Current Verse"
 msgstr "_آیۀ فعلی را علامت بگذار"
 
@@ -3813,7 +4379,7 @@ msgstr "_آیۀ فعلی را علامت بگذار"
 msgid "Apply a high-contrast highlight to the current verse"
 msgstr "این آیه را قویا مشخص کن"
 
-#: ../ui/xi-menus.glade.h:32
+#: ../ui/xi-menus.glade.h:32 ../ui/xi-menus.gtkbuilder.h:21
 msgid "_Attach/Detach Sidebar"
 msgstr "_اضافه/حذف ستون جانبی"
 
@@ -3821,7 +4387,7 @@ msgstr "_اضافه/حذف ستون جانبی"
 msgid "Operate the sidebar as a separate window"
 msgstr "در پنجرۀ تازه‏ای این را باز کن"
 
-#: ../ui/xi-menus.glade.h:34
+#: ../ui/xi-menus.glade.h:34 ../ui/xi-menus.gtkbuilder.h:22
 msgid "_Show/Hide Attached Sidebar"
 msgstr "_ستون جانبی نمایش بده/نده"
 
@@ -3829,7 +4395,7 @@ msgstr "_ستون جانبی نمایش بده/نده"
 msgid "Remove the sidebar entirely from view"
 msgstr "پرونده انتخاب شده را حذف کن"
 
-#: ../ui/xi-menus.glade.h:36
+#: ../ui/xi-menus.glade.h:36 ../ui/xi-menus.gtkbuilder.h:23
 msgid "Show Parallel View in a _Tab"
 msgstr "نگرش موازی در یک بخش"
 
@@ -3838,7 +4404,7 @@ msgid "Provide the full-chapter parallel Bible window as another tab"
 msgstr ""
 "فراهم می کند که تمام پنجره های موازی فصل کتاب مقدس به عنوان یکی دیگر از تب"
 
-#: ../ui/xi-menus.glade.h:38
+#: ../ui/xi-menus.glade.h:38 ../ui/xi-menus.gtkbuilder.h:24
 msgid "Show Previe_wer in the Sidebar"
 msgstr "مرورگر را در ستون جانبی نشان بده"
 
@@ -3846,11 +4412,7 @@ msgstr "مرورگر را در ستون جانبی نشان بده"
 msgid "Select Previewer position between sidebar or beneath Bible"
 msgstr "انتخاب موقعیت Previewer بین نوار و یا در زیر کتاب مقدس"
 
-#: ../ui/xi-menus.glade.h:40
-msgid "_Help"
-msgstr "_کمک"
-
-#: ../ui/xi-menus.glade.h:41
+#: ../ui/xi-menus.glade.h:41 ../ui/xi-menus.gtkbuilder.h:26
 msgid "_Contents"
 msgstr "_محتویات"
 
@@ -3858,7 +4420,7 @@ msgstr "_محتویات"
 msgid "Open the help viewer on the Xiphos manual"
 msgstr "دستورالعمل زیفوس را باز کن"
 
-#: ../ui/xi-menus.glade.h:43
+#: ../ui/xi-menus.glade.h:43 ../ui/xi-menus.gtkbuilder.h:27
 msgid "_Mailing List"
 msgstr "_لیست  پست الکترونيک"
 
@@ -3866,7 +4428,7 @@ msgstr "_لیست  پست الکترونيک"
 msgid "Open a browser on the users' mailing list webpage"
 msgstr "باز در مرورگر کاربران وب لیست پستی"
 
-#: ../ui/xi-menus.glade.h:45
+#: ../ui/xi-menus.glade.h:45 ../ui/xi-menus.gtkbuilder.h:28
 msgid "_Live Chat"
 msgstr "_چت زنده"
 
@@ -3874,7 +4436,7 @@ msgstr "_چت زنده"
 msgid "Open a browser on an interface to live IRC chat"
 msgstr "باز کردن مرورگر در رابط کاربری را با زندگی آیآرسی چت"
 
-#: ../ui/xi-menus.glade.h:47
+#: ../ui/xi-menus.glade.h:47 ../ui/xi-menus.gtkbuilder.h:29
 msgid "_Report Bug"
 msgstr "_گزارش دادن مشکل در برنامه"
 
@@ -3882,7 +4444,7 @@ msgstr "_گزارش دادن مشکل در برنامه"
 msgid "Open a browser on our bug tracker"
 msgstr "باز کردن مرورگر اشکال در ردگیر ما"
 
-#: ../ui/xi-menus.glade.h:49
+#: ../ui/xi-menus.glade.h:49 ../ui/xi-menus.gtkbuilder.h:30
 msgid "About _Translation"
 msgstr "دربارۀ ترجمه"
 
@@ -3890,7 +4452,7 @@ msgstr "دربارۀ ترجمه"
 msgid "Learn about translating the Xiphos interface to other languages"
 msgstr "در حال ترجمه زیفوس به دیگر زبانها"
 
-#: ../ui/xi-menus.glade.h:51
+#: ../ui/xi-menus.glade.h:51 ../ui/xi-menus.gtkbuilder.h:31
 msgid "_About The SWORD Project"
 msgstr "_دربارۀ پروژه سورد"
 
@@ -3898,7 +4460,7 @@ msgstr "_دربارۀ پروژه سورد"
 msgid "Learn about The Sword Project, of which Xiphos is one application"
 msgstr "اطلاعات در مورد پروژه شمشیر ، که Xiphos است یک نرم افزار"
 
-#: ../ui/xi-menus.glade.h:53
+#: ../ui/xi-menus.glade.h:53 ../ui/xi-menus.gtkbuilder.h:32
 msgid "About _Xiphos"
 msgstr "دربارۀ زیفوس"
 
@@ -3906,31 +4468,31 @@ msgstr "دربارۀ زیفوس"
 msgid "Learn about Xiphos"
 msgstr "دربارۀ زیفوس"
 
-#: ../ui/xi-menus.glade.h:57
+#: ../ui/xi-menus.glade.h:57 ../ui/xi-menus-popup.gtkbuilder.h:36
 msgid "Annotate Verse"
 msgstr "تفسیر یک آیه"
 
-#: ../ui/xi-menus.glade.h:60
+#: ../ui/xi-menus.glade.h:60 ../ui/xi-menus-popup.gtkbuilder.h:39
 msgid "Open Module"
 msgstr "بازکردن مدول"
 
-#: ../ui/xi-menus.glade.h:62
+#: ../ui/xi-menus.glade.h:62 ../ui/xi-menus-popup.gtkbuilder.h:40
 msgid "Note"
 msgstr "یادداشت"
 
-#: ../ui/xi-menus.glade.h:63
+#: ../ui/xi-menus.glade.h:63 ../ui/xi-menus-popup.gtkbuilder.h:41
 msgid "Open in editor"
 msgstr "در ویرایشگر باز کن"
 
-#: ../ui/xi-menus.glade.h:65
+#: ../ui/xi-menus.glade.h:65 ../ui/xi-menus-popup.gtkbuilder.h:43
 msgid "Verse Per Line"
 msgstr "_یک آیه در هر خط"
 
-#: ../ui/xi-menus.glade.h:72
+#: ../ui/xi-menus.glade.h:72 ../ui/xi-menus-popup.gtkbuilder.h:50
 msgid "Scripture Cross-references"
 msgstr "ارجاعات کتاب‏مقدس"
 
-#: ../ui/xi-menus.glade.h:73
+#: ../ui/xi-menus.glade.h:73 ../ui/xi-menus-popup.gtkbuilder.h:51
 msgid "Footnote/Cross-ref Markers"
 msgstr ""
 
@@ -3938,43 +4500,43 @@ msgstr ""
 msgid "Show non-anonymous markers e.g. \"*n23\""
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:79
+#: ../ui/xi-menus.glade.h:79 ../ui/xi-menus-popup.gtkbuilder.h:56
 msgid "Variants"
 msgstr "مغایرت‏ها"
 
-#: ../ui/xi-menus.glade.h:83
+#: ../ui/xi-menus.glade.h:83 ../ui/xi-menus-popup.gtkbuilder.h:60
 msgid "Image Content"
 msgstr "محتویات تصویر"
 
-#: ../ui/xi-menus.glade.h:84
+#: ../ui/xi-menus.glade.h:84 ../ui/xi-menus-popup.gtkbuilder.h:61
 msgid "Respect Font Faces"
 msgstr "پذیرش فونت به گونه‏ای که هست"
 
-#: ../ui/xi-menus.glade.h:85
+#: ../ui/xi-menus.glade.h:85 ../ui/xi-menus-popup.gtkbuilder.h:62
 msgid "Commentary by Chapter"
 msgstr "تفسیر فصل به فصل"
 
-#: ../ui/xi-menus.glade.h:86
+#: ../ui/xi-menus.glade.h:86 ../ui/xi-menus-popup.gtkbuilder.h:63
 msgid "Doublespace"
 msgstr "متن را دوبرابر فاصله بده"
 
-#: ../ui/xi-menus.glade.h:87
+#: ../ui/xi-menus.glade.h:87 ../ui/xi-menus-popup.gtkbuilder.h:64
 msgid "Lookup Selection"
 msgstr "به گزیده نگاه کن"
 
-#: ../ui/xi-menus.glade.h:88
+#: ../ui/xi-menus.glade.h:88 ../ui/xi-menus-popup.gtkbuilder.h:65
 msgid "Use Current Dictionary"
 msgstr "فرهنگ لغت فعلی را استفاده کن"
 
-#: ../ui/xi-menus.glade.h:89
+#: ../ui/xi-menus.glade.h:89 ../ui/xi-menus-popup.gtkbuilder.h:66
 msgid "Browse in BibleMap.org"
 msgstr "جستجو ی نقشه‏های کتاب‏مقدس در بایبل‏مپ"
 
-#: ../ui/xi-menus.glade.h:90
+#: ../ui/xi-menus.glade.h:90 ../ui/xi-menus-popup.gtkbuilder.h:67
 msgid "Unlock This Module"
 msgstr "قفل این مدول را باز کن"
 
-#: ../ui/xi-menus.glade.h:91
+#: ../ui/xi-menus.glade.h:91 ../ui/xi-menus-popup.gtkbuilder.h:68
 msgid "Display Book Heading"
 msgstr "نمایش تیتر کتاب"
 
@@ -3982,186 +4544,182 @@ msgstr "نمایش تیتر کتاب"
 msgid "Display Chapter Heading"
 msgstr "نمایش تیتر فصل"
 
-#: ../ui/xi-menus.glade.h:93
+#: ../ui/xi-menus.glade.h:93 ../ui/xi-menus-popup.gtkbuilder.h:69
 msgid "Rename Pers.Comm."
 msgstr "نامگذاری جدید تفاسیر شخصی"
 
-#: ../ui/xi-menus.glade.h:94
+#: ../ui/xi-menus.glade.h:94 ../ui/xi-menus-popup.gtkbuilder.h:70
 msgid "Dump Pers.Comm."
 msgstr "دور ریزی تفاسیر شخصی"
 
-#: ../ui/xi-menus.glade.h:95
+#: ../ui/xi-menus.glade.h:95 ../ui/xi-menus-popup.gtkbuilder.h:71
 msgid "Read Selection Aloud"
 msgstr "گزیده را با صدای بلند بخوان"
 
-#: ../ui/xi-menus.glade.h:96
+#: ../ui/xi-menus.glade.h:96 ../ui/xi-menus-popup.gtkbuilder.h:85
 msgid "Save these results as a single bookmark"
 msgstr "این نتایج را بمدول یک علامت در پروندۀ من ذخیره کن"
 
-#: ../ui/xi-menus.glade.h:97
+#: ../ui/xi-menus.glade.h:97 ../ui/xi-menus-popup.gtkbuilder.h:84
 msgid "Save list as a single bookmark"
 msgstr "لیست را بمدول یک علامت ذخیره کن"
 
-#: ../ui/xi-menus.glade.h:98
+#: ../ui/xi-menus.glade.h:98 ../ui/xi-menus-popup.gtkbuilder.h:87
 msgid "Save these results as a series of bookmarks in their own folder"
 msgstr "این نتایج را بمدول لیستی از علائم در پروندۀ من ذخیره کن"
 
-#: ../ui/xi-menus.glade.h:99
+#: ../ui/xi-menus.glade.h:99 ../ui/xi-menus-popup.gtkbuilder.h:86
 msgid "Save list as a series of bookmarks"
 msgstr "لیست را بمدول لیستی از علائم ذخیره کن"
 
-#: ../ui/xi-menus.glade.h:100
+#: ../ui/xi-menus.glade.h:100 ../ui/xi-menus-popup.gtkbuilder.h:88
 msgid "Export List"
 msgstr "صادرت لیست"
 
-#: ../ui/xi-menus.glade.h:101
+#: ../ui/xi-menus.glade.h:101 ../ui/xi-menus-popup.gtkbuilder.h:2
 msgid "Open this bookmark in a new tab"
 msgstr "این علامت را در بخشی تازه باز کن"
 
-#: ../ui/xi-menus.glade.h:102
+#: ../ui/xi-menus.glade.h:102 ../ui/xi-menus-popup.gtkbuilder.h:1
 msgid "Open in new tab"
 msgstr "در بخشی جدید باز کن"
 
-#: ../ui/xi-menus.glade.h:103
+#: ../ui/xi-menus.glade.h:103 ../ui/xi-menus-popup.gtkbuilder.h:4
 msgid "Open this bookmark in a dialog"
 msgstr "این علامت را در دیالوگ باز کن"
 
-#: ../ui/xi-menus.glade.h:104
+#: ../ui/xi-menus.glade.h:104 ../ui/xi-menus-popup.gtkbuilder.h:3
 msgid "Open in a dialog"
 msgstr "یک دیالوگ باز کن"
 
-#: ../ui/xi-menus.glade.h:105
+#: ../ui/xi-menus.glade.h:105 ../ui/xi-menus-popup.gtkbuilder.h:6
 msgid "Add new folder to selected folder"
 msgstr "قفسۀ جدیدی را در این قفسه اضافه کن"
 
-#: ../ui/xi-menus.glade.h:107
+#: ../ui/xi-menus.glade.h:107 ../ui/xi-menus-popup.gtkbuilder.h:8
 msgid "Insert new bookmark here"
 msgstr "علامت جدید را در اینجا وارد کن"
 
-#: ../ui/xi-menus.glade.h:108
+#: ../ui/xi-menus.glade.h:108 ../ui/xi-menus-popup.gtkbuilder.h:7
 msgid "Insert Bookmark"
 msgstr "ایجاد علامت"
 
-#: ../ui/xi-menus.glade.h:109
+#: ../ui/xi-menus.glade.h:109 ../ui/xi-menus-popup.gtkbuilder.h:10
 msgid "Edit bookmark item"
 msgstr "ویرایش مورد علامت"
 
-#: ../ui/xi-menus.glade.h:110
+#: ../ui/xi-menus.glade.h:110 ../ui/xi-menus-popup.gtkbuilder.h:9
 msgid "_Edit Item"
 msgstr "_ویرایش مورد"
 
-#: ../ui/xi-menus.glade.h:111
+#: ../ui/xi-menus.glade.h:111 ../ui/xi-menus-popup.gtkbuilder.h:12
 msgid "Delete item"
 msgstr "حذف مورد"
 
-#: ../ui/xi-menus.glade.h:112
-msgid "Delete Item"
-msgstr "حذف مورد"
-
-#: ../ui/xi-menus.glade.h:113
+#: ../ui/xi-menus.glade.h:113 ../ui/xi-menus-popup.gtkbuilder.h:14
 msgid "Expand all Bookmarks groups"
 msgstr "بسط همۀ گروههای علائم"
 
-#: ../ui/xi-menus.glade.h:114
+#: ../ui/xi-menus.glade.h:114 ../ui/xi-menus-popup.gtkbuilder.h:13
 msgid "Expand All"
 msgstr "بسط همه"
 
-#: ../ui/xi-menus.glade.h:115
+#: ../ui/xi-menus.glade.h:115 ../ui/xi-menus-popup.gtkbuilder.h:16
 msgid "Collapse all Bookmarks groups"
 msgstr "فروریزی تمام گروههای علائم"
 
-#: ../ui/xi-menus.glade.h:116
+#: ../ui/xi-menus.glade.h:116 ../ui/xi-menus-popup.gtkbuilder.h:15
 msgid "Collapse All"
 msgstr "فروریزی تمام"
 
-#: ../ui/xi-menus.glade.h:117
+#: ../ui/xi-menus.glade.h:117 ../ui/xi-menus-popup.gtkbuilder.h:17
 msgid "Allow items to be moved from one folder to another"
 msgstr "انتقال یک مورد را از قفسه‌ای به قفسه‌ای دیگر اجازه بده"
 
-#: ../ui/xi-menus.glade.h:118
+#: ../ui/xi-menus.glade.h:118 ../ui/xi-menus-popup.gtkbuilder.h:18
 msgid "Allow Reordering"
 msgstr "ترتیب دوباره را اجازه بده"
 
-#: ../ui/xi-menus.glade.h:119
+#: ../ui/xi-menus.glade.h:119 ../ui/xi-menus-popup.gtkbuilder.h:20
 msgid "Load other bookmarks file (default: from BibleTime)"
 msgstr "علائم را از نرم افزار بایبل‏تایم بارگذاری کن"
 
-#: ../ui/xi-menus.glade.h:120
+#: ../ui/xi-menus.glade.h:120 ../ui/xi-menus-popup.gtkbuilder.h:19
 msgid "Import Bookmarks"
 msgstr "ایجاد علامت"
 
-#: ../ui/xi-menus.glade.h:121
+#: ../ui/xi-menus.glade.h:121 ../ui/xi-menus-popup.gtkbuilder.h:22
 msgid "Remove folder and save it"
 msgstr "پرونده را حذف کن و آن را ضبط نما"
 
-#: ../ui/xi-menus.glade.h:122
+#: ../ui/xi-menus.glade.h:122 ../ui/xi-menus-popup.gtkbuilder.h:21
 msgid "Export Folder"
 msgstr "صادرت پرونده"
 
-#: ../ui/xi-menus.glade.h:123
+#: ../ui/xi-menus.glade.h:123 ../ui/xi-menus-popup.gtkbuilder.h:30
 msgid "Open selected module in a new tab"
 msgstr "مدول انتخاب شده را در بخشی جدید باز کن"
 
-#: ../ui/xi-menus.glade.h:124
+#: ../ui/xi-menus.glade.h:124 ../ui/xi-menus-popup.gtkbuilder.h:32
 msgid ""
 "Open selected module in a\n"
 "\tseparate ['dialog'] window"
 msgstr "عنون باز کن در پنجاره جدید"
 
-#: ../ui/xi-menus.glade.h:126
+#: ../ui/xi-menus.glade.h:126 ../ui/xi-menus-popup.gtkbuilder.h:31
 msgid "Open in a separate window"
 msgstr "در پنجرۀ تازه‏ای این را باز کن"
 
-#: ../ui/xi-menus.glade.h:127
+#: ../ui/xi-menus.glade.h:127 ../ui/xi-menus-popup.gtkbuilder.h:73
 msgid "Create a new simple prayer list"
 msgstr "ایجاد لیست سادۀ دعا"
 
-#: ../ui/xi-menus.glade.h:128
+#: ../ui/xi-menus.glade.h:128 ../ui/xi-menus-popup.gtkbuilder.h:72
 msgid "Simple"
 msgstr "ساده"
 
-#: ../ui/xi-menus.glade.h:129
+#: ../ui/xi-menus.glade.h:129 ../ui/xi-menus-popup.gtkbuilder.h:75
 msgid "Create a new subject prayer list"
 msgstr "یجاد لیست دعا درباره مرود"
 
-#: ../ui/xi-menus.glade.h:130
+#: ../ui/xi-menus.glade.h:130 ../ui/xi-menus-popup.gtkbuilder.h:74
 msgid "Subject"
 msgstr "موضوع"
 
-#: ../ui/xi-menus.glade.h:131
+#: ../ui/xi-menus.glade.h:131 ../ui/xi-menus-popup.gtkbuilder.h:77
 msgid "Create a new monthly journal"
 msgstr "یجاد لیست دعا ماهیانه"
 
-#: ../ui/xi-menus.glade.h:132
+#: ../ui/xi-menus.glade.h:132 ../ui/xi-menus-popup.gtkbuilder.h:76
 msgid "Monthly"
 msgstr "ماهانه"
 
-#: ../ui/xi-menus.glade.h:133
+#: ../ui/xi-menus.glade.h:133 ../ui/xi-menus-popup.gtkbuilder.h:79
 msgid "Create a new daily journal"
 msgstr "یجاد لیست  دعا روزانه"
 
-#: ../ui/xi-menus.glade.h:134
+#: ../ui/xi-menus.glade.h:134 ../ui/xi-menus-popup.gtkbuilder.h:78
 msgid "Daily"
 msgstr "روزانه"
 
-#: ../ui/xi-menus.glade.h:135
+#: ../ui/xi-menus.glade.h:135 ../ui/xi-menus-popup.gtkbuilder.h:81
 msgid "Create a new outlined topic"
 msgstr "یجاد لیست دعا موضوع زمینه"
 
-#: ../ui/xi-menus.glade.h:136
+#: ../ui/xi-menus.glade.h:136 ../ui/xi-menus-popup.gtkbuilder.h:80
 msgid "Outlined"
 msgstr "زمینه‌ی"
 
-#: ../ui/xi-menus.glade.h:137
+#: ../ui/xi-menus.glade.h:137 ../ui/xi-menus-popup.gtkbuilder.h:83
 msgid "Open module in editor or plain display window"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:138
+#: ../ui/xi-menus.glade.h:138 ../ui/xi-menus-popup.gtkbuilder.h:82
 #, fuzzy
 msgid "Open in separate window"
 msgstr "در پنجرۀ تازه‏ای این را باز کن"
 
-#: ../ui/xi-menus.glade.h:139
+#: ../ui/xi-menus.glade.h:139 ../ui/xi-menus-popup.gtkbuilder.h:23
 msgid "Add a sub-item"
 msgstr "زیر مورد اضافه کن"
 
@@ -4169,19 +4727,19 @@ msgstr "زیر مورد اضافه کن"
 msgid "Add Sub-Item"
 msgstr "زیر مورد اضافه کن"
 
-#: ../ui/xi-menus.glade.h:141
+#: ../ui/xi-menus.glade.h:141 ../ui/xi-menus-popup.gtkbuilder.h:25
 msgid "Add an item"
 msgstr "اضافه کردن مورد"
 
-#: ../ui/xi-menus.glade.h:142
+#: ../ui/xi-menus.glade.h:142 ../ui/xi-menus-popup.gtkbuilder.h:24
 msgid "Add Item"
 msgstr "مورد اضافه کن"
 
-#: ../ui/xi-menus.glade.h:143
+#: ../ui/xi-menus.glade.h:143 ../ui/xi-menus-popup.gtkbuilder.h:27
 msgid "Remove this item"
 msgstr "این مورد را حذف کن"
 
-#: ../ui/xi-menus.glade.h:145
+#: ../ui/xi-menus.glade.h:145 ../ui/xi-menus-popup.gtkbuilder.h:29
 msgid "Edit this item"
 msgstr "این مورد را ویرایش کن"
 
@@ -4216,9 +4774,6 @@ msgstr "کتاب‏مقدس چه می‌گوید؟"
 
 #~ msgid "Cipher Key?"
 #~ msgstr "کلید قفل؟"
-
-#~ msgid "Copy"
-#~ msgstr "کپی"
 
 #~ msgid "Change parallel 1"
 #~ msgstr "توازی ! را عوض کن"
@@ -4456,12 +5011,6 @@ msgstr "کتاب‏مقدس چه می‌گوید؟"
 
 #~ msgid "Stay in sync"
 #~ msgstr "در ارتباط بمان"
-
-#~ msgid "Print"
-#~ msgstr "چاپ"
-
-#~ msgid "Print Preview"
-#~ msgstr "نگرش قبل از چاپ"
 
 #~ msgid "Failed to print the document"
 #~ msgstr "چاپ متن ممکن نشد"

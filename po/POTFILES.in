@@ -97,26 +97,27 @@ src/webkit/wk-html.c
 src/xiphos_html/xiphos_html.c
 ## Glade files
 ui/bookmarks.glade
-ui/bookmarks.gtkbuilder
+[type: gettext/glade]ui/bookmarks.gtkbuilder
 ui/editor_link_dialog.xml
 ui/editor_note.xml
 ui/editor_studypad.xml
 ui/export-dialog.glade
-ui/export-dialog.gtkbuilder
+[type: gettext/glade]ui/export-dialog.gtkbuilder
+[type: gettext/glade]ui/gtk2_webedit.ui
+[type: gettext/glade]ui/gtk_webedit.ui
 ui/markverse.glade
-ui/markverse.gtkbuilder
+[type: gettext/glade]ui/markverse.gtkbuilder
 ui/module-manager.glade
-ui/module-manager.gtkbuilder
+[type: gettext/glade]ui/module-manager.gtkbuilder
 ui/navbar_versekey.glade
-ui/navbar_versekey.gtkbuilder
+[type: gettext/glade]ui/navbar_versekey.gtkbuilder
 ui/prefs.glade
-ui/prefs.gtkbuilder
+[type: gettext/glade]ui/prefs.gtkbuilder
 ui/search-dialog.glade
-ui/search-dialog.gtkbuilder
+[type: gettext/glade]ui/search-dialog.gtkbuilder
 ui/xi-export-bookmarks.glade
-ui/xi-export-bookmarks.gtkbuilder
 ui/xi-menus.glade
-ui/xi-menus.gtkbuilder
-ui/xi-menus-popup.gtkbuilder
+[type: gettext/glade]ui/xi-menus.gtkbuilder
+[type: gettext/glade]ui/xi-menus-popup.gtkbuilder
 ## application files
 xiphos.desktop.in.in

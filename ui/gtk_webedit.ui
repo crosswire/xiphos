@@ -2,44 +2,44 @@
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
   <object class="GtkAction" id="action_about">
-    <property name="label">About Studypad</property>
-    <property name="short_label">About</property>
-    <property name="tooltip">Open about dialog</property>
+    <property name="label" translatable="yes">About Studypad</property>
+    <property name="short_label" translatable="yes">About</property>
+    <property name="tooltip" translatable="yes">Open about dialog</property>
     <property name="stock_id">gtk-about</property>
     <signal name="activate" handler="action_about_activate_cb" swapped="no"/>
   </object>
   <object class="GtkAction" id="action_bold">
-    <property name="label">Bold</property>
-    <property name="short_label">Bold</property>
-    <property name="tooltip">Make selection bold</property>
+    <property name="label" translatable="yes">Bold</property>
+    <property name="short_label" translatable="yes">Bold</property>
+    <property name="tooltip" translatable="yes">Make selection bold</property>
     <property name="stock_id">gtk-bold</property>
     <signal name="activate" handler="action_bold_activate_cb" swapped="no"/>
   </object>
   <object class="GtkAction" id="action_copy">
-    <property name="label">Copy</property>
-    <property name="short_label">Copy</property>
-    <property name="tooltip">Copy selection to clipboard</property>
+    <property name="label" translatable="yes">Copy</property>
+    <property name="short_label" translatable="yes">Copy</property>
+    <property name="tooltip" translatable="yes">Copy selection to clipboard</property>
     <property name="stock_id">gtk-copy</property>
     <signal name="activate" handler="action_copy_activate_cb" swapped="no"/>
   </object>
   <object class="GtkAction" id="action_cut">
-    <property name="label">Cut</property>
-    <property name="short_label">Cut</property>
-    <property name="tooltip">Cut selection</property>
+    <property name="label" translatable="yes">Cut</property>
+    <property name="short_label" translatable="yes">Cut</property>
+    <property name="tooltip" translatable="yes">Cut selection</property>
     <property name="stock_id">gtk-cut</property>
     <signal name="activate" handler="action_cut_activate_cb" swapped="no"/>
   </object>
   <object class="GtkAction" id="action_decrease_indent">
-    <property name="label">Decrease indent</property>
-    <property name="short_label">Decrease</property>
-    <property name="tooltip">Decrease paragraph indent</property>
+    <property name="label" translatable="yes">Decrease indent</property>
+    <property name="short_label" translatable="yes">Decrease</property>
+    <property name="tooltip" translatable="yes">Decrease paragraph indent</property>
     <property name="stock_id">gtk-unindent</property>
     <signal name="activate" handler="action_decrease_indent_activate_cb" swapped="no"/>
   </object>
   <object class="GtkAction" id="action_delete">
-    <property name="label">Delete selection</property>
-    <property name="short_label">Delete</property>
-    <property name="tooltip">Remove seledtion</property>
+    <property name="label" translatable="yes">Delete selection</property>
+    <property name="short_label" translatable="yes">Delete</property>
+    <property name="tooltip" translatable="yes">Remove seledtion</property>
     <property name="stock_id">gtk-delete</property>
     <signal name="activate" handler="action_delete_activate_cb" swapped="no"/>
   </object>
@@ -51,45 +51,45 @@
     <signal name="activate" handler="action_delete_item_activate_cb" swapped="no"/>
   </object>
   <object class="GtkAction" id="action_find">
-    <property name="label">Find</property>
-    <property name="short_label">Find</property>
-    <property name="tooltip">Search current document</property>
+    <property name="label" translatable="yes">Find</property>
+    <property name="short_label" translatable="yes">Find</property>
+    <property name="tooltip" translatable="yes">Search current document</property>
     <property name="stock_id">gtk-find</property>
     <signal name="activate" handler="action_find_activate_cb" swapped="no"/>
   </object>
   <object class="GtkAction" id="action_font">
-    <property name="label">Font</property>
-    <property name="short_label">Font</property>
-    <property name="tooltip">Change font</property>
+    <property name="label" translatable="yes">Font</property>
+    <property name="short_label" translatable="yes">Font</property>
+    <property name="tooltip" translatable="yes">Change font</property>
     <property name="stock_id">gtk-select-font</property>
     <signal name="activate" handler="action_font_activate_cb" swapped="no"/>
   </object>
   <object class="GtkAction" id="action_increase_indent">
-    <property name="label">Increase indent</property>
-    <property name="short_label">Increase</property>
-    <property name="tooltip">Increase paragraph indent</property>
+    <property name="label" translatable="yes">Increase indent</property>
+    <property name="short_label" translatable="yes">Increase</property>
+    <property name="tooltip" translatable="yes">Increase paragraph indent</property>
     <property name="stock_id">gtk-indent</property>
     <signal name="activate" handler="action_increase_indent_activate_cb" swapped="no"/>
   </object>
   <object class="GtkAction" id="action_insert_emoticon">
-    <property name="label">Insert emoticon</property>
-    <property name="short_label">Emoticon</property>
-    <property name="tooltip">Insert an emoticon</property>
+    <property name="label" translatable="yes">Insert emoticon</property>
+    <property name="short_label" translatable="yes">Emoticon</property>
+    <property name="tooltip" translatable="yes">Insert an emoticon</property>
     <property name="icon_name">face-smile</property>
     <property name="visible">False</property>
     <signal name="activate" handler="action_insert_emoticon_activate_cb" swapped="no"/>
   </object>
   <object class="GtkAction" id="action_insert_image">
-    <property name="label">Insert image</property>
-    <property name="short_label">Image</property>
-    <property name="tooltip">Insert image at cursor</property>
+    <property name="label" translatable="yes">Insert image</property>
+    <property name="short_label" translatable="yes">Image</property>
+    <property name="tooltip" translatable="yes">Insert image at cursor</property>
     <property name="stock_id">gtk-orientation-landscape</property>
     <signal name="activate" handler="action_insert_image_activate_cb" swapped="no"/>
   </object>
   <object class="GtkAction" id="action_insert_link">
-    <property name="label">Insert link</property>
-    <property name="short_label">Link</property>
-    <property name="tooltip">Insert a link</property>
+    <property name="label" translatable="yes">Insert link</property>
+    <property name="short_label" translatable="yes">Link</property>
+    <property name="tooltip" translatable="yes">Insert a link</property>
     <property name="stock_id">gtk-network</property>
     <signal name="activate" handler="action_insert_link_activate_cb" swapped="no"/>
   </object>
@@ -101,80 +101,80 @@
     <signal name="activate" handler="action_insert_outline_activate_cb" swapped="no"/>
   </object>
   <object class="GtkAction" id="action_insert_rule">
-    <property name="label">Insert rule</property>
-    <property name="short_label">Rule</property>
-    <property name="tooltip">Insert horizontal rule</property>
+    <property name="label" translatable="yes">Insert rule</property>
+    <property name="short_label" translatable="yes">Rule</property>
+    <property name="tooltip" translatable="yes">Insert horizontal rule</property>
     <property name="stock_id">gtk-remove</property>
     <signal name="activate" handler="action_insert_rule_activate_cb" swapped="no"/>
   </object>
   <object class="GtkAction" id="action_insert_sword_link">
-    <property name="label">Xiphos Link</property>
-    <property name="short_label">Xiphos</property>
-    <property name="tooltip">Insert a link to a sword module</property>
+    <property name="label" translatable="yes">Xiphos Link</property>
+    <property name="short_label" translatable="yes">Xiphos</property>
+    <property name="tooltip" translatable="yes">Insert a link to a sword module</property>
     <property name="stock_id">gtk-network</property>
     <signal name="activate" handler="action_insert_sword_link_activate_cb" swapped="no"/>
   </object>
   <object class="GtkAction" id="action_insert_table">
-    <property name="label">Insert table</property>
-    <property name="short_label">Table</property>
-    <property name="tooltip">Insert a table</property>
+    <property name="label" translatable="yes">Insert table</property>
+    <property name="short_label" translatable="yes">Table</property>
+    <property name="tooltip" translatable="yes">Insert a table</property>
     <property name="stock_id">gtk-missing-image</property>
     <property name="visible">False</property>
     <signal name="activate" handler="action_insert_table_activate_cb" swapped="no"/>
   </object>
   <object class="GtkAction" id="action_italic">
-    <property name="label">Italic</property>
-    <property name="short_label">Italic</property>
-    <property name="tooltip">Change selection to italic font</property>
+    <property name="label" translatable="yes">Italic</property>
+    <property name="short_label" translatable="yes">Italic</property>
+    <property name="tooltip" translatable="yes">Change selection to italic font</property>
     <property name="stock_id">gtk-italic</property>
     <signal name="activate" handler="action_italic_activate_cb" swapped="no"/>
   </object>
   <object class="GtkAction" id="action_justify_center">
-    <property name="label">Center</property>
-    <property name="short_label">Center</property>
-    <property name="tooltip">Center justify paragraph</property>
+    <property name="label" translatable="yes">Center</property>
+    <property name="short_label" translatable="yes">Center</property>
+    <property name="tooltip" translatable="yes">Center justify paragraph</property>
     <property name="stock_id">gtk-justify-center</property>
     <signal name="activate" handler="action_justify_center_activate_cb" swapped="no"/>
   </object>
   <object class="GtkAction" id="action_justify_full">
-    <property name="label">Full</property>
-    <property name="short_label">Full</property>
-    <property name="tooltip">full justify</property>
+    <property name="label" translatable="yes">Full</property>
+    <property name="short_label" translatable="yes">Full</property>
+    <property name="tooltip" translatable="yes">full justify</property>
     <property name="stock_id">gtk-justify-fill</property>
     <signal name="activate" handler="action_justify_full_activate_cb" swapped="no"/>
   </object>
   <object class="GtkAction" id="action_justify_left">
-    <property name="label">Left</property>
-    <property name="short_label">Left</property>
-    <property name="tooltip">Left justify paragraph</property>
+    <property name="label" translatable="yes">Left</property>
+    <property name="short_label" translatable="yes">Left</property>
+    <property name="tooltip" translatable="yes">Left justify paragraph</property>
     <property name="stock_id">gtk-justify-left</property>
     <signal name="activate" handler="action_justify_left_activate_cb" swapped="no"/>
   </object>
   <object class="GtkAction" id="action_justify_right">
-    <property name="label">Right</property>
-    <property name="short_label">Right</property>
-    <property name="tooltip">Right justify paragraph</property>
+    <property name="label" translatable="yes">Right</property>
+    <property name="short_label" translatable="yes">Right</property>
+    <property name="tooltip" translatable="yes">Right justify paragraph</property>
     <property name="stock_id">gtk-justify-right</property>
     <signal name="activate" handler="action_justify_right_activate_cb" swapped="no"/>
   </object>
   <object class="GtkAction" id="action_new">
-    <property name="label">New</property>
-    <property name="short_label">New</property>
-    <property name="tooltip">Create new file</property>
+    <property name="label" translatable="yes">New</property>
+    <property name="short_label" translatable="yes">New</property>
+    <property name="tooltip" translatable="yes">Create new file</property>
     <property name="stock_id">gtk-new</property>
     <signal name="activate" handler="action_new_activate_cb" swapped="no"/>
   </object>
   <object class="GtkAction" id="action_open">
-    <property name="label">Open</property>
-    <property name="short_label">Open</property>
-    <property name="tooltip">Open file</property>
+    <property name="label" translatable="yes">Open</property>
+    <property name="short_label" translatable="yes">Open</property>
+    <property name="tooltip" translatable="yes">Open file</property>
     <property name="stock_id">gtk-open</property>
     <signal name="activate" handler="action_open_activate_cb" swapped="no"/>
   </object>
   <object class="GtkAction" id="action_paste">
-    <property name="label">Paste</property>
-    <property name="short_label">Paste</property>
-    <property name="tooltip">Paste clipboard at cursor.</property>
+    <property name="label" translatable="yes">Paste</property>
+    <property name="short_label" translatable="yes">Paste</property>
+    <property name="tooltip" translatable="yes">Paste clipboard at cursor.</property>
     <property name="stock_id">gtk-paste</property>
     <signal name="activate" handler="action_paste_activate_cb" swapped="no"/>
   </object>
@@ -193,58 +193,58 @@
     <signal name="activate" handler="action_print_preview_cb" swapped="no"/>
   </object>
   <object class="GtkAction" id="action_quit">
-    <property name="label">Quit</property>
-    <property name="short_label">Quit</property>
-    <property name="tooltip">Shut down editor</property>
+    <property name="label" translatable="yes">Quit</property>
+    <property name="short_label" translatable="yes">Quit</property>
+    <property name="tooltip" translatable="yes">Shut down editor</property>
     <property name="stock_id">gtk-quit</property>
     <signal name="activate" handler="action_quit_activate_cb" swapped="no"/>
   </object>
   <object class="GtkAction" id="action_redo">
-    <property name="label">Redo</property>
-    <property name="short_label">Redo</property>
-    <property name="tooltip">Redo last undo</property>
+    <property name="label" translatable="yes">Redo</property>
+    <property name="short_label" translatable="yes">Redo</property>
+    <property name="tooltip" translatable="yes">Redo last undo</property>
     <property name="stock_id">gtk-redo</property>
     <signal name="activate" handler="action_redo_activate_cb" swapped="no"/>
   </object>
   <object class="GtkAction" id="action_replace">
-    <property name="label">Find and replace</property>
-    <property name="short_label">Replace</property>
-    <property name="tooltip">Search and replace</property>
+    <property name="label" translatable="yes">Find and replace</property>
+    <property name="short_label" translatable="yes">Replace</property>
+    <property name="tooltip" translatable="yes">Search and replace</property>
     <property name="stock_id">gtk-find-and-replace</property>
     <signal name="activate" handler="action_replace_activate_cb" swapped="no"/>
   </object>
   <object class="GtkAction" id="action_save">
-    <property name="label">Save</property>
-    <property name="short_label">Save</property>
-    <property name="tooltip">Save changes to file</property>
+    <property name="label" translatable="yes">Save</property>
+    <property name="short_label" translatable="yes">Save</property>
+    <property name="tooltip" translatable="yes">Save changes to file</property>
     <property name="stock_id">gtk-save</property>
     <signal name="activate" handler="action_save_activate_cb" swapped="no"/>
   </object>
   <object class="GtkAction" id="action_save_as">
-    <property name="label">Save as</property>
-    <property name="short_label">Save as</property>
-    <property name="tooltip">Save file as ...</property>
+    <property name="label" translatable="yes">Save as</property>
+    <property name="short_label" translatable="yes">Save as</property>
+    <property name="tooltip" translatable="yes">Save file as ...</property>
     <property name="stock_id">gtk-save-as</property>
     <signal name="activate" handler="action_save_as_activate_cb" swapped="no"/>
   </object>
   <object class="GtkAction" id="action_strikethrough">
-    <property name="label">Strikethrough</property>
-    <property name="short_label">Strikethrough</property>
-    <property name="tooltip">Strikethrough selection</property>
+    <property name="label" translatable="yes">Strikethrough</property>
+    <property name="short_label" translatable="yes">Strikethrough</property>
+    <property name="tooltip" translatable="yes">Strikethrough selection</property>
     <property name="stock_id">gtk-strikethrough</property>
     <signal name="activate" handler="action_strikethrough_activate_cb" swapped="no"/>
   </object>
   <object class="GtkAction" id="action_underline">
-    <property name="label">Underline</property>
-    <property name="short_label">Underline</property>
-    <property name="tooltip">Underline selection</property>
+    <property name="label" translatable="yes">Underline</property>
+    <property name="short_label" translatable="yes">Underline</property>
+    <property name="tooltip" translatable="yes">Underline selection</property>
     <property name="stock_id">gtk-underline</property>
     <signal name="activate" handler="action_underline_activate_cb" swapped="no"/>
   </object>
   <object class="GtkAction" id="action_undo">
-    <property name="label">Undo</property>
-    <property name="short_label">Undo</property>
-    <property name="tooltip">Undo last change</property>
+    <property name="label" translatable="yes">Undo</property>
+    <property name="short_label" translatable="yes">Undo</property>
+    <property name="tooltip" translatable="yes">Undo last change</property>
     <property name="stock_id">gtk-undo</property>
     <signal name="activate" handler="action_undo_activate_cb" swapped="no"/>
   </object>
