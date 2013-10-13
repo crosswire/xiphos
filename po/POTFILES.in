@@ -98,7 +98,7 @@ src/xiphos_html/xiphos_html.c
 ## Glade files
 ui/bookmarks.glade
 [type: gettext/glade]ui/bookmarks.gtkbuilder
-ui/editor_link_dialog.xml
+[type: gettext/glade]ui/editor_link_dialog.xml
 ui/editor_note.xml
 ui/editor_studypad.xml
 ui/export-dialog.glade

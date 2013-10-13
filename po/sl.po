@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-13 20:43+0200\n"
+"POT-Creation-Date: 2013-10-13 23:11+0200\n"
 "PO-Revision-Date: 2010-03-26 08:39+0000\n"
 "Last-Translator: Marjan Šavli <marjan.savli@gmail.com>\n"
 "Language-Team: Slovenščina (Slovene) <gnomesword-developers@lists."
@@ -145,6 +145,7 @@ msgid "Save"
 msgstr "Shrani"
 
 #: ../src/editor/slib-editor.c:863 ../src/editor/slib-editor.c:870
+#: ../ui/editor_link_dialog.xml.h:1
 msgid "Insert Link"
 msgstr "Vstavi povezavo"
 
@@ -442,7 +443,7 @@ msgstr "Nastavi pisavo modula"
 msgid "Change font for"
 msgstr "Spremeni pisavo za"
 
-#: ../src/gnome2/font_dialog.c:336
+#: ../src/gnome2/font_dialog.c:336 ../ui/editor_link_dialog.xml.h:3
 msgid "Module"
 msgstr "Modul"
 
@@ -2362,6 +2363,29 @@ msgstr "Vnos modula"
 msgid "Bookmark Folder Treeview"
 msgstr "Drevesna struktura map z zaznamki"
 
+#: ../ui/editor_link_dialog.xml.h:2 ../ui/export-dialog.glade.h:17
+#: ../ui/export-dialog.gtkbuilder.h:16
+msgid "Verse"
+msgstr "Vrstica"
+
+#: ../ui/editor_link_dialog.xml.h:4
+#, fuzzy
+msgid "Link Text"
+msgstr "Preprosto besedilo"
+
+#: ../ui/editor_link_dialog.xml.h:5
+msgid "Link directly"
+msgstr ""
+
+#: ../ui/editor_link_dialog.xml.h:6
+msgid "Link via verse list"
+msgstr ""
+
+#: ../ui/editor_link_dialog.xml.h:7
+#, fuzzy
+msgid "Test Link"
+msgstr "Vstavi povezavo"
+
 #: ../ui/editor_note.xml.h:1 ../ui/editor_studypad.xml.h:1
 msgid "Exit the program"
 msgstr "Končaj program"
@@ -2504,10 +2528,6 @@ msgstr "Bližnjica do poglavja"
 msgid "Export single verse"
 msgstr "Izvozi eno vrstico"
 
-#: ../ui/export-dialog.glade.h:17 ../ui/export-dialog.gtkbuilder.h:16
-msgid "Verse"
-msgstr "Vrstica"
-
 #: ../ui/export-dialog.glade.h:18 ../ui/export-dialog.gtkbuilder.h:18
 msgid "Verse Radio Button"
 msgstr "Bližnjica za vrstico"
@@ -2649,7 +2669,7 @@ msgstr "Izbris označenega območja"
 
 #: ../ui/gtk2_webedit.ui.h:15 ../ui/gtk_webedit.ui.h:15
 #, fuzzy
-msgid "Remove seledtion"
+msgid "Remove selection"
 msgstr "Odstrani označeno"
 
 #: ../ui/gtk2_webedit.ui.h:16 ../ui/gtk_webedit.ui.h:16
