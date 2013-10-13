@@ -39,7 +39,7 @@
   <object class="GtkAction" id="action_delete">
     <property name="label" translatable="yes">Delete selection</property>
     <property name="short_label" translatable="yes">Delete</property>
-    <property name="tooltip" translatable="yes">Remove seledtion</property>
+    <property name="tooltip" translatable="yes">Remove selection</property>
     <property name="stock_id">gtk-delete</property>
     <signal name="activate" handler="action_delete_activate_cb" swapped="no"/>
   </object>

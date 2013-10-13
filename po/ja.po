@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-13 20:43+0200\n"
+"POT-Creation-Date: 2013-10-13 23:10+0200\n"
 "PO-Revision-Date: 2010-05-17 03:32+0000\n"
 "Last-Translator: Kunio Nakamaru <n_e_o_m@hotmail.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
@@ -141,6 +141,7 @@ msgid "Save"
 msgstr "保存する"
 
 #: ../src/editor/slib-editor.c:863 ../src/editor/slib-editor.c:870
+#: ../ui/editor_link_dialog.xml.h:1
 msgid "Insert Link"
 msgstr "リンクの挿入"
 
@@ -434,7 +435,7 @@ msgstr "拡張データフォント設定"
 msgid "Change font for"
 msgstr "フォントの変更"
 
-#: ../src/gnome2/font_dialog.c:336
+#: ../src/gnome2/font_dialog.c:336 ../ui/editor_link_dialog.xml.h:3
 msgid "Module"
 msgstr "拡張データ"
 
@@ -2214,6 +2215,28 @@ msgstr ""
 msgid "Bookmark Folder Treeview"
 msgstr ""
 
+#: ../ui/editor_link_dialog.xml.h:2 ../ui/export-dialog.glade.h:17
+#: ../ui/export-dialog.gtkbuilder.h:16
+msgid "Verse"
+msgstr ""
+
+#: ../ui/editor_link_dialog.xml.h:4
+msgid "Link Text"
+msgstr ""
+
+#: ../ui/editor_link_dialog.xml.h:5
+msgid "Link directly"
+msgstr ""
+
+#: ../ui/editor_link_dialog.xml.h:6
+msgid "Link via verse list"
+msgstr ""
+
+#: ../ui/editor_link_dialog.xml.h:7
+#, fuzzy
+msgid "Test Link"
+msgstr "リンクの挿入"
+
 #: ../ui/editor_note.xml.h:1 ../ui/editor_studypad.xml.h:1
 msgid "Exit the program"
 msgstr ""
@@ -2356,10 +2379,6 @@ msgstr ""
 msgid "Export single verse"
 msgstr ""
 
-#: ../ui/export-dialog.glade.h:17 ../ui/export-dialog.gtkbuilder.h:16
-msgid "Verse"
-msgstr ""
-
 #: ../ui/export-dialog.glade.h:18 ../ui/export-dialog.gtkbuilder.h:18
 msgid "Verse Radio Button"
 msgstr ""
@@ -2492,7 +2511,7 @@ msgstr "削除"
 
 #: ../ui/gtk2_webedit.ui.h:15 ../ui/gtk_webedit.ui.h:15
 #, fuzzy
-msgid "Remove seledtion"
+msgid "Remove selection"
 msgstr "選択されたフォルダを削除"
 
 #: ../ui/gtk2_webedit.ui.h:16 ../ui/gtk_webedit.ui.h:16

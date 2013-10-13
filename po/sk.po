@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xiphos-3.1.sk.po\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-13 20:43+0200\n"
+"POT-Creation-Date: 2013-10-13 23:11+0200\n"
 "PO-Revision-Date: 2010-01-07 21:14+0000\n"
 "Last-Translator: helix84 <Unknown>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -143,6 +143,7 @@ msgid "Save"
 msgstr "Uložiť"
 
 #: ../src/editor/slib-editor.c:863 ../src/editor/slib-editor.c:870
+#: ../ui/editor_link_dialog.xml.h:1
 msgid "Insert Link"
 msgstr ""
 
@@ -432,7 +433,7 @@ msgstr "Nastaviť písmo pre modul"
 msgid "Change font for"
 msgstr "Zmeniť písmo pre"
 
-#: ../src/gnome2/font_dialog.c:336
+#: ../src/gnome2/font_dialog.c:336 ../ui/editor_link_dialog.xml.h:3
 msgid "Module"
 msgstr "Modul"
 
@@ -2323,6 +2324,29 @@ msgstr "Položka modul"
 msgid "Bookmark Folder Treeview"
 msgstr "Stromový pohľad na zložku záložiek"
 
+#: ../ui/editor_link_dialog.xml.h:2 ../ui/export-dialog.glade.h:17
+#: ../ui/export-dialog.gtkbuilder.h:16
+msgid "Verse"
+msgstr "Verš"
+
+#: ../ui/editor_link_dialog.xml.h:4
+#, fuzzy
+msgid "Link Text"
+msgstr "Obyčajný Text"
+
+#: ../ui/editor_link_dialog.xml.h:5
+msgid "Link directly"
+msgstr ""
+
+#: ../ui/editor_link_dialog.xml.h:6
+msgid "Link via verse list"
+msgstr ""
+
+#: ../ui/editor_link_dialog.xml.h:7
+#, fuzzy
+msgid "Test Link"
+msgstr "Odkazy"
+
 #: ../ui/editor_note.xml.h:1 ../ui/editor_studypad.xml.h:1
 msgid "Exit the program"
 msgstr "Ukončiť program"
@@ -2465,10 +2489,6 @@ msgstr "Výberové pole Kapitola"
 msgid "Export single verse"
 msgstr "Export jeden verš"
 
-#: ../ui/export-dialog.glade.h:17 ../ui/export-dialog.gtkbuilder.h:16
-msgid "Verse"
-msgstr "Verš"
-
 #: ../ui/export-dialog.glade.h:18 ../ui/export-dialog.gtkbuilder.h:18
 msgid "Verse Radio Button"
 msgstr "Výberové pole Verš"
@@ -2610,7 +2630,7 @@ msgstr "Zmazať označený rozsah"
 
 #: ../ui/gtk2_webedit.ui.h:15 ../ui/gtk_webedit.ui.h:15
 #, fuzzy
-msgid "Remove seledtion"
+msgid "Remove selection"
 msgstr "Odstrániť označenú položku"
 
 #: ../ui/gtk2_webedit.ui.h:16 ../ui/gtk_webedit.ui.h:16

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-13 20:43+0200\n"
+"POT-Creation-Date: 2013-10-13 23:10+0200\n"
 "PO-Revision-Date: 2010-04-11 02:43+0000\n"
 "Last-Translator: AJenbo <anders@jenbo.dk>\n"
 "Language-Team: Danish <da@li.org>\n"
@@ -141,6 +141,7 @@ msgid "Save"
 msgstr "Gem"
 
 #: ../src/editor/slib-editor.c:863 ../src/editor/slib-editor.c:870
+#: ../ui/editor_link_dialog.xml.h:1
 msgid "Insert Link"
 msgstr "Indsæt henvisning"
 
@@ -417,7 +418,7 @@ msgstr ""
 msgid "Change font for"
 msgstr ""
 
-#: ../src/gnome2/font_dialog.c:336
+#: ../src/gnome2/font_dialog.c:336 ../ui/editor_link_dialog.xml.h:3
 msgid "Module"
 msgstr "Modul"
 
@@ -2220,6 +2221,29 @@ msgstr ""
 msgid "Bookmark Folder Treeview"
 msgstr ""
 
+#: ../ui/editor_link_dialog.xml.h:2 ../ui/export-dialog.glade.h:17
+#: ../ui/export-dialog.gtkbuilder.h:16
+msgid "Verse"
+msgstr "Vers"
+
+#: ../ui/editor_link_dialog.xml.h:4
+#, fuzzy
+msgid "Link Text"
+msgstr "Bibeltekster"
+
+#: ../ui/editor_link_dialog.xml.h:5
+msgid "Link directly"
+msgstr ""
+
+#: ../ui/editor_link_dialog.xml.h:6
+msgid "Link via verse list"
+msgstr ""
+
+#: ../ui/editor_link_dialog.xml.h:7
+#, fuzzy
+msgid "Test Link"
+msgstr "Indsæt henvisning"
+
 #: ../ui/editor_note.xml.h:1 ../ui/editor_studypad.xml.h:1
 msgid "Exit the program"
 msgstr "Afslut programmet"
@@ -2362,10 +2386,6 @@ msgstr ""
 msgid "Export single verse"
 msgstr ""
 
-#: ../ui/export-dialog.glade.h:17 ../ui/export-dialog.gtkbuilder.h:16
-msgid "Verse"
-msgstr "Vers"
-
 #: ../ui/export-dialog.glade.h:18 ../ui/export-dialog.gtkbuilder.h:18
 msgid "Verse Radio Button"
 msgstr ""
@@ -2503,7 +2523,7 @@ msgstr "Sletning"
 
 #: ../ui/gtk2_webedit.ui.h:15 ../ui/gtk_webedit.ui.h:15
 #, fuzzy
-msgid "Remove seledtion"
+msgid "Remove selection"
 msgstr "Fjern den valgte mappe"
 
 #: ../ui/gtk2_webedit.ui.h:16 ../ui/gtk_webedit.ui.h:16

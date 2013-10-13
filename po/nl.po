@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-13 20:43+0200\n"
+"POT-Creation-Date: 2013-10-13 23:10+0200\n"
 "PO-Revision-Date: 2010-09-30 00:18+0100\n"
 "Last-Translator: Peter von Kaehne <refdoc@crosswire.org>\n"
 "Language-Team: Xiphos-developers <xiphos-developers@lists>\n"
@@ -142,6 +142,7 @@ msgid "Save"
 msgstr "Opslaan"
 
 #: ../src/editor/slib-editor.c:863 ../src/editor/slib-editor.c:870
+#: ../ui/editor_link_dialog.xml.h:1
 msgid "Insert Link"
 msgstr "Verwijzing toevoegen"
 
@@ -427,7 +428,7 @@ msgstr "Lettertype voor module"
 msgid "Change font for"
 msgstr "Wijzig lettertype van"
 
-#: ../src/gnome2/font_dialog.c:336
+#: ../src/gnome2/font_dialog.c:336 ../ui/editor_link_dialog.xml.h:3
 msgid "Module"
 msgstr "Module"
 
@@ -2321,6 +2322,29 @@ msgstr "Module Entry"
 msgid "Bookmark Folder Treeview"
 msgstr "Bladwijzermap Treeview"
 
+#: ../ui/editor_link_dialog.xml.h:2 ../ui/export-dialog.glade.h:17
+#: ../ui/export-dialog.gtkbuilder.h:16
+msgid "Verse"
+msgstr "Vers"
+
+#: ../ui/editor_link_dialog.xml.h:4
+#, fuzzy
+msgid "Link Text"
+msgstr "Verwijzing tekst "
+
+#: ../ui/editor_link_dialog.xml.h:5
+msgid "Link directly"
+msgstr ""
+
+#: ../ui/editor_link_dialog.xml.h:6
+msgid "Link via verse list"
+msgstr ""
+
+#: ../ui/editor_link_dialog.xml.h:7
+#, fuzzy
+msgid "Test Link"
+msgstr "Verwijzing toevoegen"
+
 #: ../ui/editor_note.xml.h:1 ../ui/editor_studypad.xml.h:1
 msgid "Exit the program"
 msgstr "Het programma afsluiten"
@@ -2463,10 +2487,6 @@ msgstr "Show romanizationHoofdstuk keuzerondje"
 msgid "Export single verse"
 msgstr "Enkel vers exporteren"
 
-#: ../ui/export-dialog.glade.h:17 ../ui/export-dialog.gtkbuilder.h:16
-msgid "Verse"
-msgstr "Vers"
-
 #: ../ui/export-dialog.glade.h:18 ../ui/export-dialog.gtkbuilder.h:18
 msgid "Verse Radio Button"
 msgstr "Vers Radio Button"
@@ -2608,7 +2628,7 @@ msgstr "Geselecteerde reeks verwijderen"
 
 #: ../ui/gtk2_webedit.ui.h:15 ../ui/gtk_webedit.ui.h:15
 #, fuzzy
-msgid "Remove seledtion"
+msgid "Remove selection"
 msgstr "Verwijderen is mislukt"
 
 #: ../ui/gtk2_webedit.ui.h:16 ../ui/gtk_webedit.ui.h:16
@@ -5487,9 +5507,6 @@ msgstr "Onderzoek de Bijbel"
 
 #~ msgid "Add reference Link"
 #~ msgstr "Referentieverwijzing toevoegen"
-
-#~ msgid "Link text: "
-#~ msgstr "Verwijzing tekst "
 
 #~ msgid "Spell Check"
 #~ msgstr "Spellingscontrole"

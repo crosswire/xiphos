@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-13 20:43+0200\n"
+"POT-Creation-Date: 2013-10-13 23:10+0200\n"
 "PO-Revision-Date: 2010-09-30 00:22+0100\n"
 "Last-Translator: Peter von Kaehne <refdoc@crosswire.org>\n"
 "Language-Team: <i18n-nb@lister.ping.uio.no>\n"
@@ -147,6 +147,7 @@ msgid "Save"
 msgstr "Lagre"
 
 #: ../src/editor/slib-editor.c:863 ../src/editor/slib-editor.c:870
+#: ../ui/editor_link_dialog.xml.h:1
 msgid "Insert Link"
 msgstr "Sett inn lenke"
 
@@ -444,7 +445,7 @@ msgstr "Sett skrifttype for modul"
 msgid "Change font for"
 msgstr "Endre tegnsett for"
 
-#: ../src/gnome2/font_dialog.c:336
+#: ../src/gnome2/font_dialog.c:336 ../ui/editor_link_dialog.xml.h:3
 msgid "Module"
 msgstr "Modul"
 
@@ -2423,6 +2424,29 @@ msgstr "Modul Inngang"
 msgid "Bookmark Folder Treeview"
 msgstr "Bokmerker Mappe 3 Visning"
 
+#: ../ui/editor_link_dialog.xml.h:2 ../ui/export-dialog.glade.h:17
+#: ../ui/export-dialog.gtkbuilder.h:16
+msgid "Verse"
+msgstr "Vers"
+
+#: ../ui/editor_link_dialog.xml.h:4
+#, fuzzy
+msgid "Link Text"
+msgstr "Ren Tekst"
+
+#: ../ui/editor_link_dialog.xml.h:5
+msgid "Link directly"
+msgstr ""
+
+#: ../ui/editor_link_dialog.xml.h:6
+msgid "Link via verse list"
+msgstr ""
+
+#: ../ui/editor_link_dialog.xml.h:7
+#, fuzzy
+msgid "Test Link"
+msgstr "Sett inn lenke"
+
 #: ../ui/editor_note.xml.h:1 ../ui/editor_studypad.xml.h:1
 msgid "Exit the program"
 msgstr "Avslutt programmet"
@@ -2565,10 +2589,6 @@ msgstr "Kapittel Radio Knapp"
 msgid "Export single verse"
 msgstr "Eksporter enkel vers"
 
-#: ../ui/export-dialog.glade.h:17 ../ui/export-dialog.gtkbuilder.h:16
-msgid "Verse"
-msgstr "Vers"
-
 #: ../ui/export-dialog.glade.h:18 ../ui/export-dialog.gtkbuilder.h:18
 msgid "Verse Radio Button"
 msgstr "Vers Radio Knapp"
@@ -2709,7 +2729,7 @@ msgstr "Slett valgt område"
 
 #: ../ui/gtk2_webedit.ui.h:15 ../ui/gtk_webedit.ui.h:15
 #, fuzzy
-msgid "Remove seledtion"
+msgid "Remove selection"
 msgstr "Fjern merket objekt"
 
 #: ../ui/gtk2_webedit.ui.h:16 ../ui/gtk_webedit.ui.h:16

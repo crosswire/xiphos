@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-13 20:43+0200\n"
+"POT-Creation-Date: 2013-10-13 23:10+0200\n"
 "PO-Revision-Date: 2010-09-15 13:02+0000\n"
 "Last-Translator: Dmitrijs Ledkovs <Unknown>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
@@ -143,6 +143,7 @@ msgid "Save"
 msgstr "Ment"
 
 #: ../src/editor/slib-editor.c:863 ../src/editor/slib-editor.c:870
+#: ../ui/editor_link_dialog.xml.h:1
 msgid "Insert Link"
 msgstr "Hivatkozás beszúrása"
 
@@ -440,7 +441,7 @@ msgstr "Modul betűkészlet beállítása"
 msgid "Change font for"
 msgstr "Betűkészlet megváltoztatása"
 
-#: ../src/gnome2/font_dialog.c:336
+#: ../src/gnome2/font_dialog.c:336 ../ui/editor_link_dialog.xml.h:3
 msgid "Module"
 msgstr "Modul"
 
@@ -2405,6 +2406,29 @@ msgstr "Module Entry"
 msgid "Bookmark Folder Treeview"
 msgstr "Bookmark Folder Treeview"
 
+#: ../ui/editor_link_dialog.xml.h:2 ../ui/export-dialog.glade.h:17
+#: ../ui/export-dialog.gtkbuilder.h:16
+msgid "Verse"
+msgstr "Vers"
+
+#: ../ui/editor_link_dialog.xml.h:4
+#, fuzzy
+msgid "Link Text"
+msgstr "Egyszerű szöveg"
+
+#: ../ui/editor_link_dialog.xml.h:5
+msgid "Link directly"
+msgstr ""
+
+#: ../ui/editor_link_dialog.xml.h:6
+msgid "Link via verse list"
+msgstr ""
+
+#: ../ui/editor_link_dialog.xml.h:7
+#, fuzzy
+msgid "Test Link"
+msgstr "Hivatkozás beszúrása"
+
 #: ../ui/editor_note.xml.h:1 ../ui/editor_studypad.xml.h:1
 msgid "Exit the program"
 msgstr "Kilépés a programból"
@@ -2547,10 +2571,6 @@ msgstr "Chapter Radio Button"
 msgid "Export single verse"
 msgstr "Vers exportálása"
 
-#: ../ui/export-dialog.glade.h:17 ../ui/export-dialog.gtkbuilder.h:16
-msgid "Verse"
-msgstr "Vers"
-
 #: ../ui/export-dialog.glade.h:18 ../ui/export-dialog.gtkbuilder.h:18
 msgid "Verse Radio Button"
 msgstr "Verse Radio Button"
@@ -2692,7 +2712,7 @@ msgstr "Kiválasztott tartomány törlése"
 
 #: ../ui/gtk2_webedit.ui.h:15 ../ui/gtk_webedit.ui.h:15
 #, fuzzy
-msgid "Remove seledtion"
+msgid "Remove selection"
 msgstr "Kiválasztott elem törlése"
 
 #: ../ui/gtk2_webedit.ui.h:16 ../ui/gtk_webedit.ui.h:16

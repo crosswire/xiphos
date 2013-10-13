@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos-1.0-0.9.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-13 20:42+0200\n"
+"POT-Creation-Date: 2013-10-13 23:10+0200\n"
 "PO-Revision-Date: 2010-03-15 22:44+0000\n"
 "Last-Translator: svilborg <Unknown>\n"
 "Language-Team: Xiphos Project\n"
@@ -140,6 +140,7 @@ msgid "Save"
 msgstr "Ñúõðàíè"
 
 #: ../src/editor/slib-editor.c:863 ../src/editor/slib-editor.c:870
+#: ../ui/editor_link_dialog.xml.h:1
 msgid "Insert Link"
 msgstr ""
 
@@ -417,7 +418,7 @@ msgstr ""
 msgid "Change font for"
 msgstr ""
 
-#: ../src/gnome2/font_dialog.c:336
+#: ../src/gnome2/font_dialog.c:336 ../ui/editor_link_dialog.xml.h:3
 msgid "Module"
 msgstr ""
 
@@ -2195,6 +2196,29 @@ msgstr ""
 msgid "Bookmark Folder Treeview"
 msgstr ""
 
+#: ../ui/editor_link_dialog.xml.h:2 ../ui/export-dialog.glade.h:17
+#: ../ui/export-dialog.gtkbuilder.h:16
+msgid "Verse"
+msgstr ""
+
+#: ../ui/editor_link_dialog.xml.h:4
+#, fuzzy
+msgid "Link Text"
+msgstr "âðúçêà..."
+
+#: ../ui/editor_link_dialog.xml.h:5
+msgid "Link directly"
+msgstr ""
+
+#: ../ui/editor_link_dialog.xml.h:6
+msgid "Link via verse list"
+msgstr ""
+
+#: ../ui/editor_link_dialog.xml.h:7
+#, fuzzy
+msgid "Test Link"
+msgstr "âðúçêà..."
+
 #: ../ui/editor_note.xml.h:1 ../ui/editor_studypad.xml.h:1
 msgid "Exit the program"
 msgstr ""
@@ -2337,10 +2361,6 @@ msgstr ""
 msgid "Export single verse"
 msgstr ""
 
-#: ../ui/export-dialog.glade.h:17 ../ui/export-dialog.gtkbuilder.h:16
-msgid "Verse"
-msgstr ""
-
 #: ../ui/export-dialog.glade.h:18 ../ui/export-dialog.gtkbuilder.h:18
 msgid "Verse Radio Button"
 msgstr ""
@@ -2472,8 +2492,9 @@ msgid "Delete selection"
 msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:15 ../ui/gtk_webedit.ui.h:15
-msgid "Remove seledtion"
-msgstr ""
+#, fuzzy
+msgid "Remove selection"
+msgstr "Ïðîâåðè ìàðêèðàíîòî"
 
 #: ../ui/gtk2_webedit.ui.h:16 ../ui/gtk_webedit.ui.h:16
 #: ../ui/xi-menus.glade.h:112 ../ui/xi-menus-popup.gtkbuilder.h:11

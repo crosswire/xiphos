@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-13 20:43+0200\n"
+"POT-Creation-Date: 2013-10-13 23:10+0200\n"
 "PO-Revision-Date: 2010-04-19 19:56+0000\n"
 "Last-Translator: DiegoJ <diegojromerolopez@gmail.com>\n"
 "Language-Team: Español <gnomesword-users@lists.sourceforge.net>\n"
@@ -140,6 +140,7 @@ msgid "Save"
 msgstr "Guardar"
 
 #: ../src/editor/slib-editor.c:863 ../src/editor/slib-editor.c:870
+#: ../ui/editor_link_dialog.xml.h:1
 msgid "Insert Link"
 msgstr "Insertar enlace"
 
@@ -436,7 +437,7 @@ msgstr "Definir tipografía para el módulo"
 msgid "Change font for"
 msgstr "Cambiar tipografía para"
 
-#: ../src/gnome2/font_dialog.c:336
+#: ../src/gnome2/font_dialog.c:336 ../ui/editor_link_dialog.xml.h:3
 msgid "Module"
 msgstr "Módulo"
 
@@ -2360,6 +2361,29 @@ msgstr "Entrada de módulo"
 msgid "Bookmark Folder Treeview"
 msgstr "Vista en árbol de la carpeta marcadores"
 
+#: ../ui/editor_link_dialog.xml.h:2 ../ui/export-dialog.glade.h:17
+#: ../ui/export-dialog.gtkbuilder.h:16
+msgid "Verse"
+msgstr "Versículo"
+
+#: ../ui/editor_link_dialog.xml.h:4
+#, fuzzy
+msgid "Link Text"
+msgstr "Texto plano"
+
+#: ../ui/editor_link_dialog.xml.h:5
+msgid "Link directly"
+msgstr ""
+
+#: ../ui/editor_link_dialog.xml.h:6
+msgid "Link via verse list"
+msgstr ""
+
+#: ../ui/editor_link_dialog.xml.h:7
+#, fuzzy
+msgid "Test Link"
+msgstr "Insertar enlace"
+
 #: ../ui/editor_note.xml.h:1 ../ui/editor_studypad.xml.h:1
 msgid "Exit the program"
 msgstr "Salir del programa"
@@ -2502,10 +2526,6 @@ msgstr "Botón de opción de Capítulo"
 msgid "Export single verse"
 msgstr "Exportar un versículo"
 
-#: ../ui/export-dialog.glade.h:17 ../ui/export-dialog.gtkbuilder.h:16
-msgid "Verse"
-msgstr "Versículo"
-
 #: ../ui/export-dialog.glade.h:18 ../ui/export-dialog.gtkbuilder.h:18
 msgid "Verse Radio Button"
 msgstr "Botón de opción de versículo"
@@ -2647,7 +2667,7 @@ msgstr "Borrar el rango seleccionado"
 
 #: ../ui/gtk2_webedit.ui.h:15 ../ui/gtk_webedit.ui.h:15
 #, fuzzy
-msgid "Remove seledtion"
+msgid "Remove selection"
 msgstr "Remover el elemento seleccionado"
 
 #: ../ui/gtk2_webedit.ui.h:16 ../ui/gtk_webedit.ui.h:16
