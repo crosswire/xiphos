@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xiphos-3.1.sk.po\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-08 10:07-0400\n"
+"POT-Creation-Date: 2013-10-13 20:43+0200\n"
 "PO-Revision-Date: 2010-01-07 21:14+0000\n"
 "Last-Translator: helix84 <Unknown>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -37,7 +37,8 @@ msgid "Page %d of %d"
 msgstr "Strana %d z %d"
 
 #: ../src/editor/slib-editor.c:393 ../src/editor/webkit_editor.c:585
-#: ../ui/editor_studypad.xml.h:9
+#: ../ui/editor_studypad.xml.h:9 ../ui/gtk2_webedit.ui.h:58
+#: ../ui/gtk_webedit.ui.h:58
 msgid "Open"
 msgstr "Otvoriť"
 
@@ -92,7 +93,8 @@ msgstr "_Uložiť"
 msgid "Save _As..."
 msgstr "Uložiť _ako..."
 
-#: ../src/editor/slib-editor.c:752
+#: ../src/editor/slib-editor.c:752 ../ui/gtk2_webedit.ui.h:56
+#: ../ui/gtk_webedit.ui.h:56
 msgid "New"
 msgstr ""
 
@@ -100,7 +102,8 @@ msgstr ""
 msgid "Open new document"
 msgstr ""
 
-#: ../src/editor/slib-editor.c:758
+#: ../src/editor/slib-editor.c:758 ../ui/gtk2_webedit.ui.h:14
+#: ../ui/gtk_webedit.ui.h:14
 msgid "Delete"
 msgstr ""
 
@@ -109,7 +112,9 @@ msgid "Delete current note"
 msgstr ""
 
 #: ../src/editor/slib-editor.c:765 ../ui/editor_note.xml.h:9
-#: ../ui/editor_studypad.xml.h:7 ../ui/xi-menus.glade.h:1
+#: ../ui/editor_studypad.xml.h:7 ../ui/gtk2_webedit.ui.h:86
+#: ../ui/gtk_webedit.ui.h:86 ../ui/xi-menus.glade.h:1
+#: ../ui/xi-menus.gtkbuilder.h:1
 msgid "_File"
 msgstr "_Súbor"
 
@@ -125,12 +130,15 @@ msgstr "_HTML zdroj"
 msgid "_Plain Source"
 msgstr "_Obyčajný zdroj"
 
-#: ../src/editor/slib-editor.c:841 ../ui/xi-menus.glade.h:17
+#: ../src/editor/slib-editor.c:841 ../ui/gtk2_webedit.ui.h:89
+#: ../ui/gtk_webedit.ui.h:89 ../ui/xi-menus.glade.h:17
+#: ../ui/xi-menus.gtkbuilder.h:11
 msgid "_View"
 msgstr "_Zobrazenie"
 
 #: ../src/editor/slib-editor.c:852 ../ui/editor_note.xml.h:16
-#: ../ui/editor_studypad.xml.h:11
+#: ../ui/editor_studypad.xml.h:11 ../ui/gtk2_webedit.ui.h:75
+#: ../ui/gtk_webedit.ui.h:75
 msgid "Save"
 msgstr "Uložiť"
 
@@ -154,7 +162,7 @@ msgid "If you don't save, changes will be permanently lost."
 msgstr "Ak ich neuložíte, zmeny sa natrvalo stratia."
 
 #: ../src/editor/slib-editor.c:1291 ../src/editor/webkit_editor.c:1373
-#: ../ui/xi-menus.glade.h:59
+#: ../ui/xi-menus.glade.h:59 ../ui/xi-menus-popup.gtkbuilder.h:38
 msgid "File"
 msgstr "Súbor"
 
@@ -279,7 +287,7 @@ msgstr ""
 #: ../src/gnome2/bookmark_dialog.c:175 ../src/gnome2/bookmarks_menu.c:369
 #: ../src/gnome2/bookmarks_menu.c:664 ../src/gnome2/bookmarks_menu.c:763
 #: ../src/gnome2/bookmarks_treeview.c:131 ../ui/editor_studypad.xml.h:15
-#: ../ui/xi-menus.glade.h:56
+#: ../ui/xi-menus.glade.h:56 ../ui/xi-menus-popup.gtkbuilder.h:35
 msgid "Bookmark"
 msgstr "Záložka"
 
@@ -303,6 +311,7 @@ msgid "Specify bookmarks file"
 msgstr "Upraviť položku záložky"
 
 #: ../src/gnome2/bookmarks_menu.c:355 ../ui/xi-menus.glade.h:61
+#: ../ui/xi-menus-popup.gtkbuilder.h:28
 msgid "Edit"
 msgstr "Upraviť"
 
@@ -394,10 +403,12 @@ msgid "SearchResults"
 msgstr ""
 
 #: ../src/gnome2/export_dialog.c:319 ../ui/export-dialog.glade.h:4
+#: ../ui/export-dialog.gtkbuilder.h:4
 msgid "Please check copyright before exporting!"
 msgstr "Pre exportovaní si prosím preverte autorské práva"
 
 #: ../src/gnome2/find_dialog.c:186 ../src/gnome2/find_dialog.c:344
+#: ../ui/gtk2_webedit.ui.h:18 ../ui/gtk_webedit.ui.h:18
 msgid "Find"
 msgstr "Nájsť"
 
@@ -430,6 +441,7 @@ msgid "Current font: "
 msgstr "Aktuálne písmo: "
 
 #: ../src/gnome2/font_dialog.c:372 ../src/gnome2/font_dialog.c:388
+#: ../ui/prefs.gtkbuilder.h:114
 msgid "+0"
 msgstr "+0"
 
@@ -679,6 +691,7 @@ msgid "Removing"
 msgstr "Mazanie"
 
 #: ../src/gnome2/mod_mgr.c:192 ../ui/xi-menus.glade.h:144
+#: ../ui/xi-menus-popup.gtkbuilder.h:26
 msgid "Remove"
 msgstr "Odstrániť"
 
@@ -788,7 +801,9 @@ msgstr ""
 "Ikona zo zámkom znamená, že tento modul je zašifrovaný, a vyžaduje si, aby "
 "ste si kúpili kľúč na odomknutie od vlastníka obsahu."
 
-#: ../src/gnome2/mod_mgr.c:618 ../ui/xi-menus.glade.h:55
+#: ../src/gnome2/mod_mgr.c:618 ../ui/gtk2_webedit.ui.h:2
+#: ../ui/gtk_webedit.ui.h:2 ../ui/xi-menus.glade.h:55
+#: ../ui/xi-menus-popup.gtkbuilder.h:34
 msgid "About"
 msgstr "Informácie"
 
@@ -872,6 +887,7 @@ msgstr "Biblické texty"
 #: ../src/gnome2/mod_mgr.c:1409 ../src/gnome2/utilities.c:613
 #: ../src/main/sidebar.cc:663 ../src/main/sidebar.cc:1005
 #: ../src/main/sidebar.cc:1007 ../ui/prefs.glade.h:41
+#: ../ui/prefs.gtkbuilder.h:33
 msgid "Commentaries"
 msgstr "Komentáre"
 
@@ -1104,6 +1120,7 @@ msgid "Detach/Attach"
 msgstr "Pripojiť/Odobrať"
 
 #: ../src/gnome2/parallel_view.c:121 ../ui/xi-menus.glade.h:64
+#: ../ui/xi-menus-popup.gtkbuilder.h:42
 msgid "Module Options"
 msgstr "Nastavenia modulov"
 
@@ -1133,6 +1150,7 @@ msgid "Locale will take effect after restart."
 msgstr ""
 
 #: ../src/gnome2/preferences_dialog.c:1824 ../ui/prefs.glade.h:1
+#: ../ui/prefs.gtkbuilder.h:1
 msgid "Preferences"
 msgstr "Nastavenia"
 
@@ -1315,6 +1333,7 @@ msgid "Bible"
 msgstr "Biblia"
 
 #: ../src/gnome2/search_sidebar.c:233 ../ui/prefs.glade.h:92
+#: ../ui/prefs.gtkbuilder.h:84
 msgid "Commentary"
 msgstr "Komentár"
 
@@ -1323,14 +1342,17 @@ msgid "Search Type"
 msgstr "Typ hľadania"
 
 #: ../src/gnome2/search_sidebar.c:261 ../ui/search-dialog.glade.h:39
+#: ../ui/search-dialog.gtkbuilder.h:39
 msgid "Multi word"
 msgstr "Viac slov"
 
 #: ../src/gnome2/search_sidebar.c:272 ../ui/search-dialog.glade.h:41
+#: ../ui/search-dialog.gtkbuilder.h:41
 msgid "Regular expression"
 msgstr "Regulárny výraz"
 
 #: ../src/gnome2/search_sidebar.c:280 ../ui/search-dialog.glade.h:43
+#: ../ui/search-dialog.gtkbuilder.h:43
 msgid "Exact phrase"
 msgstr "Presná fráza"
 
@@ -1339,6 +1361,7 @@ msgid "Search Options"
 msgstr "Možnosti vyhľadávania"
 
 #: ../src/gnome2/search_sidebar.c:307 ../ui/search-dialog.glade.h:49
+#: ../ui/search-dialog.gtkbuilder.h:49
 msgid "Match case"
 msgstr "Veľkosť písmen"
 
@@ -1479,6 +1502,7 @@ msgstr ""
 
 #: ../src/main/display.cc:1031 ../src/main/display.cc:1072
 #: ../src/main/display.cc:1157 ../ui/export-dialog.glade.h:14
+#: ../ui/export-dialog.gtkbuilder.h:13
 msgid "Chapter"
 msgstr "Kapitola"
 
@@ -1508,7 +1532,7 @@ msgid "Displaying Xiphos"
 msgstr "Zobrazujem Xiphos"
 
 #: ../src/main/module_dialogs.cc:189 ../src/main/previewer.cc:97
-#: ../ui/prefs.glade.h:39
+#: ../ui/prefs.glade.h:39 ../ui/prefs.gtkbuilder.h:31
 msgid "Previewer"
 msgstr "Náhľad"
 
@@ -1539,28 +1563,34 @@ msgid "Back to "
 msgstr "Späť k "
 
 #: ../src/main/parallel_view.cc:383 ../ui/xi-menus.glade.h:68
+#: ../ui/xi-menus-popup.gtkbuilder.h:46
 msgid "Strong's Numbers"
 msgstr "Strongové čísla"
 
 #: ../src/main/parallel_view.cc:393 ../ui/search-dialog.glade.h:102
-#: ../ui/xi-menus.glade.h:71
+#: ../ui/search-dialog.gtkbuilder.h:101 ../ui/xi-menus.glade.h:71
+#: ../ui/xi-menus-popup.gtkbuilder.h:49
 msgid "Footnotes"
 msgstr "Poznámky pod čiarou"
 
 #: ../src/main/parallel_view.cc:403 ../ui/search-dialog.glade.h:99
-#: ../ui/xi-menus.glade.h:70
+#: ../ui/search-dialog.gtkbuilder.h:98 ../ui/xi-menus.glade.h:70
+#: ../ui/xi-menus-popup.gtkbuilder.h:48
 msgid "Morphological Tags"
 msgstr "Morfologické značky"
 
 #: ../src/main/parallel_view.cc:413 ../ui/xi-menus.glade.h:76
+#: ../ui/xi-menus-popup.gtkbuilder.h:53
 msgid "Hebrew Vowel Points"
 msgstr "Body hebrejských samohlások"
 
 #: ../src/main/parallel_view.cc:423 ../ui/xi-menus.glade.h:77
+#: ../ui/xi-menus-popup.gtkbuilder.h:54
 msgid "Hebrew Cantillation"
 msgstr "Hebrejské vokalizácia"
 
 #: ../src/main/parallel_view.cc:433 ../ui/xi-menus.glade.h:75
+#: ../ui/xi-menus-popup.gtkbuilder.h:52
 msgid "Greek Accents"
 msgstr "Grécke akcenty"
 
@@ -1569,10 +1599,12 @@ msgid "Cross-references"
 msgstr "Krížové referencie"
 
 #: ../src/main/parallel_view.cc:453 ../ui/xi-menus.glade.h:69
+#: ../ui/xi-menus-popup.gtkbuilder.h:47
 msgid "Lemmas"
 msgstr "Lemy"
 
 #: ../src/main/parallel_view.cc:463 ../ui/xi-menus.glade.h:66
+#: ../ui/xi-menus-popup.gtkbuilder.h:44
 msgid "Headings"
 msgstr "Nadpisy"
 
@@ -1581,10 +1613,12 @@ msgid "Morpheme Segmentation"
 msgstr "Segmentácia morfém"
 
 #: ../src/main/parallel_view.cc:487 ../ui/xi-menus.glade.h:67
+#: ../ui/xi-menus-popup.gtkbuilder.h:45
 msgid "Words of Christ in Red"
 msgstr "Kristove slová červenou farbou"
 
 #: ../src/main/parallel_view.cc:497 ../ui/xi-menus.glade.h:78
+#: ../ui/xi-menus-popup.gtkbuilder.h:55
 msgid "Transliteration"
 msgstr "Prepis"
 
@@ -1593,14 +1627,17 @@ msgid "Textual Variants"
 msgstr "Textové varianty"
 
 #: ../src/main/parallel_view.cc:515 ../ui/xi-menus.glade.h:80
+#: ../ui/xi-menus-popup.gtkbuilder.h:57
 msgid "Primary Reading"
 msgstr "Prvoradé čítanie"
 
 #: ../src/main/parallel_view.cc:524 ../ui/xi-menus.glade.h:81
+#: ../ui/xi-menus-popup.gtkbuilder.h:58
 msgid "Secondary Reading"
 msgstr "Pomocné čítanie"
 
 #: ../src/main/parallel_view.cc:533 ../ui/xi-menus.glade.h:82
+#: ../ui/xi-menus-popup.gtkbuilder.h:59
 msgid "All Readings"
 msgstr "Všetky čítania"
 
@@ -2225,56 +2262,64 @@ msgstr ""
 msgid "Attempting to revert to previous save."
 msgstr ""
 
-#: ../ui/bookmarks.glade.h:1
+#: ../ui/bookmarks.glade.h:1 ../ui/bookmarks.gtkbuilder.h:1
 msgid "Add Bookmark"
 msgstr "Pridať záložku"
 
-#: ../ui/bookmarks.glade.h:2 ../ui/markverse.glade.h:2
+#: ../ui/bookmarks.glade.h:2 ../ui/bookmarks.gtkbuilder.h:13
+#: ../ui/markverse.glade.h:2 ../ui/markverse.gtkbuilder.h:11
 msgid "Bookmark Dialog"
 msgstr "Dialog záložiek"
 
-#: ../ui/bookmarks.glade.h:3 ../ui/markverse.glade.h:7
+#: ../ui/bookmarks.glade.h:3 ../ui/bookmarks.gtkbuilder.h:2
+#: ../ui/markverse.glade.h:7 ../ui/markverse.gtkbuilder.h:6
 msgid "Create new folder"
 msgstr "Vytvoriť nový priečinok"
 
-#: ../ui/bookmarks.glade.h:4 ../ui/markverse.glade.h:8
-#: ../ui/xi-menus.glade.h:106
+#: ../ui/bookmarks.glade.h:4 ../ui/bookmarks.gtkbuilder.h:4
+#: ../ui/markverse.glade.h:8 ../ui/markverse.gtkbuilder.h:8
+#: ../ui/xi-menus.glade.h:106 ../ui/xi-menus-popup.gtkbuilder.h:5
 msgid "New Folder"
 msgstr "Nový priečinok"
 
-#: ../ui/bookmarks.glade.h:5
+#: ../ui/bookmarks.glade.h:5 ../ui/bookmarks.gtkbuilder.h:3
 msgid "New ..."
 msgstr "Nový..."
 
-#: ../ui/bookmarks.glade.h:6 ../ui/markverse.glade.h:11
+#: ../ui/bookmarks.glade.h:6 ../ui/bookmarks.gtkbuilder.h:5
+#: ../ui/markverse.glade.h:11 ../ui/markverse.gtkbuilder.h:10
 msgid "Cancel Bookmark"
 msgstr "Zrušiť záložku"
 
-#: ../ui/bookmarks.glade.h:7
+#: ../ui/bookmarks.glade.h:7 ../ui/bookmarks.gtkbuilder.h:6
 msgid "Label:"
 msgstr "Označenie:"
 
-#: ../ui/bookmarks.glade.h:8
+#: ../ui/bookmarks.glade.h:8 ../ui/bookmarks.gtkbuilder.h:7
 msgid "Label Entry"
 msgstr "Položka Označenie"
 
-#: ../ui/bookmarks.glade.h:9 ../ui/markverse.glade.h:3
+#: ../ui/bookmarks.glade.h:9 ../ui/bookmarks.gtkbuilder.h:8
+#: ../ui/markverse.glade.h:3 ../ui/markverse.gtkbuilder.h:2
 msgid "Verse:"
 msgstr "Verš:"
 
-#: ../ui/bookmarks.glade.h:10 ../ui/markverse.glade.h:4
+#: ../ui/bookmarks.glade.h:10 ../ui/bookmarks.gtkbuilder.h:9
+#: ../ui/markverse.glade.h:4 ../ui/markverse.gtkbuilder.h:3
 msgid "Verse Entry"
 msgstr "Položka verš"
 
-#: ../ui/bookmarks.glade.h:11 ../ui/markverse.glade.h:5
+#: ../ui/bookmarks.glade.h:11 ../ui/bookmarks.gtkbuilder.h:10
+#: ../ui/markverse.glade.h:5 ../ui/markverse.gtkbuilder.h:4
 msgid "Module:"
 msgstr "Modul:"
 
-#: ../ui/bookmarks.glade.h:12 ../ui/markverse.glade.h:6
+#: ../ui/bookmarks.glade.h:12 ../ui/bookmarks.gtkbuilder.h:11
+#: ../ui/markverse.glade.h:6 ../ui/markverse.gtkbuilder.h:5
 msgid "Module Entry"
 msgstr "Položka modul"
 
-#: ../ui/bookmarks.glade.h:13
+#: ../ui/bookmarks.glade.h:13 ../ui/bookmarks.gtkbuilder.h:12
 msgid "Bookmark Folder Treeview"
 msgstr "Stromový pohľad na zložku záložiek"
 
@@ -2362,91 +2407,93 @@ msgstr "Vytvorí nový dokument"
 msgid "New Document"
 msgstr "Nový dokument"
 
-#: ../ui/export-dialog.glade.h:1 ../ui/xi-menus.glade.h:58
+#: ../ui/export-dialog.glade.h:1 ../ui/export-dialog.gtkbuilder.h:1
+#: ../ui/xi-menus.glade.h:58 ../ui/xi-menus-popup.gtkbuilder.h:37
 msgid "Copy/Export Passage"
 msgstr "Kopírovať/Exportovať pasáž"
 
-#: ../ui/export-dialog.glade.h:2
+#: ../ui/export-dialog.glade.h:2 ../ui/export-dialog.gtkbuilder.h:2
 msgid "Export Passage Cancel"
 msgstr "Zrušiť export pasáže"
 
-#: ../ui/export-dialog.glade.h:3
+#: ../ui/export-dialog.glade.h:3 ../ui/export-dialog.gtkbuilder.h:3
 msgid "Export Passage OK"
 msgstr "OK pre export pasáže"
 
-#: ../ui/export-dialog.glade.h:5
+#: ../ui/export-dialog.glade.h:5 ../ui/export-dialog.gtkbuilder.h:5
 msgid "Version"
 msgstr "Verzia"
 
-#: ../ui/export-dialog.glade.h:6
+#: ../ui/export-dialog.glade.h:6 ../ui/export-dialog.gtkbuilder.h:6
 msgid ": "
 msgstr ": "
 
-#: ../ui/export-dialog.glade.h:7
+#: ../ui/export-dialog.glade.h:7 ../ui/export-dialog.gtkbuilder.h:7
 msgid "Key"
 msgstr "Kľúč"
 
-#: ../ui/export-dialog.glade.h:8
+#: ../ui/export-dialog.glade.h:8 ../ui/export-dialog.gtkbuilder.h:8
 msgid "<b>Copy</b>"
 msgstr "<b>Kopírovať</b>"
 
-#: ../ui/export-dialog.glade.h:9
+#: ../ui/export-dialog.glade.h:9 ../ui/export-dialog.gtkbuilder.h:9
 msgid "<b>Export</b>"
 msgstr "<b>Export</b>"
 
-#: ../ui/export-dialog.glade.h:10
+#: ../ui/export-dialog.glade.h:10 ../ui/export-dialog.gtkbuilder.h:11
 msgid "Export complete book"
 msgstr "Export celú knihu"
 
-#: ../ui/export-dialog.glade.h:11 ../ui/prefs.glade.h:96
+#: ../ui/export-dialog.glade.h:11 ../ui/export-dialog.gtkbuilder.h:10
+#: ../ui/prefs.glade.h:96 ../ui/prefs.gtkbuilder.h:88
 msgid "Book"
 msgstr "Kniha"
 
-#: ../ui/export-dialog.glade.h:12
+#: ../ui/export-dialog.glade.h:12 ../ui/export-dialog.gtkbuilder.h:12
 msgid "Book Radio Button"
 msgstr "Výberové pole Kniha"
 
-#: ../ui/export-dialog.glade.h:13
+#: ../ui/export-dialog.glade.h:13 ../ui/export-dialog.gtkbuilder.h:14
 msgid "Export complete chapter"
 msgstr "Export celú kapitolu"
 
-#: ../ui/export-dialog.glade.h:15
+#: ../ui/export-dialog.glade.h:15 ../ui/export-dialog.gtkbuilder.h:15
 msgid "Chapter Radio Button"
 msgstr "Výberové pole Kapitola"
 
-#: ../ui/export-dialog.glade.h:16
+#: ../ui/export-dialog.glade.h:16 ../ui/export-dialog.gtkbuilder.h:17
 msgid "Export single verse"
 msgstr "Export jeden verš"
 
-#: ../ui/export-dialog.glade.h:17
+#: ../ui/export-dialog.glade.h:17 ../ui/export-dialog.gtkbuilder.h:16
 msgid "Verse"
 msgstr "Verš"
 
-#: ../ui/export-dialog.glade.h:18
+#: ../ui/export-dialog.glade.h:18 ../ui/export-dialog.gtkbuilder.h:18
 msgid "Verse Radio Button"
 msgstr "Výberové pole Verš"
 
-#: ../ui/export-dialog.glade.h:19
+#: ../ui/export-dialog.glade.h:19 ../ui/export-dialog.gtkbuilder.h:19
 msgid "Verse range"
 msgstr "Rozsah veršov"
 
-#: ../ui/export-dialog.glade.h:20
+#: ../ui/export-dialog.glade.h:20 ../ui/export-dialog.gtkbuilder.h:20
 msgid "<b>Format</b>"
 msgstr "<b>Formát</b>"
 
-#: ../ui/export-dialog.glade.h:21
+#: ../ui/export-dialog.glade.h:21 ../ui/export-dialog.gtkbuilder.h:21
 msgid "Plain Text"
 msgstr "Obyčajný Text"
 
-#: ../ui/export-dialog.glade.h:22
+#: ../ui/export-dialog.glade.h:22 ../ui/export-dialog.gtkbuilder.h:22
 msgid "Plain Text Radio Button"
 msgstr "Výberové pole Obyčajný Text"
 
-#: ../ui/export-dialog.glade.h:23
+#: ../ui/export-dialog.glade.h:23 ../ui/export-dialog.gtkbuilder.h:23
 msgid "HTML"
 msgstr "HTML"
 
-#: ../ui/export-dialog.glade.h:24
+#: ../ui/export-dialog.glade.h:24 ../ui/export-dialog.gtkbuilder.h:24
 msgid "HTML Radio Button"
 msgstr "Výberové pole HTML"
 
@@ -2456,31 +2503,31 @@ msgid ""
 "than 1 verse."
 msgstr ""
 
-#: ../ui/export-dialog.glade.h:26
+#: ../ui/export-dialog.glade.h:26 ../ui/export-dialog.gtkbuilder.h:25
 #, fuzzy
 msgid "_Verse numbers in text"
 msgstr "Veľkosť čísla verša"
 
-#: ../ui/export-dialog.glade.h:27
+#: ../ui/export-dialog.glade.h:27 ../ui/export-dialog.gtkbuilder.h:27
 #, fuzzy
 msgid "Verse Number button"
 msgstr "Výberové pole Strongové čísla"
 
-#: ../ui/export-dialog.glade.h:28
+#: ../ui/export-dialog.glade.h:28 ../ui/export-dialog.gtkbuilder.h:29
 msgid "Indicates whether reference is placed first or last."
 msgstr ""
 
-#: ../ui/export-dialog.glade.h:29
+#: ../ui/export-dialog.glade.h:29 ../ui/export-dialog.gtkbuilder.h:28
 #, fuzzy
 msgid "Reference last"
 msgstr "Položka Referencia"
 
-#: ../ui/export-dialog.glade.h:30
+#: ../ui/export-dialog.glade.h:30 ../ui/export-dialog.gtkbuilder.h:30
 #, fuzzy
 msgid "Reference last button"
 msgstr "Položka Referencia"
 
-#: ../ui/export-dialog.glade.h:31
+#: ../ui/export-dialog.glade.h:31 ../ui/export-dialog.gtkbuilder.h:32
 msgid "Indicates whether or not version name is included in reference."
 msgstr ""
 
@@ -2489,7 +2536,7 @@ msgstr ""
 msgid "Include Version"
 msgstr "Sword verzia"
 
-#: ../ui/export-dialog.glade.h:33
+#: ../ui/export-dialog.glade.h:33 ../ui/export-dialog.gtkbuilder.h:33
 #, fuzzy
 msgid "Version button"
 msgstr "Výberové pole Verš"
@@ -2498,177 +2545,658 @@ msgstr "Výberové pole Verš"
 msgid "Save Export As"
 msgstr "Uložiť export ako"
 
-#: ../ui/markverse.glade.h:1
+#: ../ui/export-dialog.gtkbuilder.h:26
+msgid "Indicates whether verse numbers should appear inline in the text."
+msgstr ""
+
+#: ../ui/export-dialog.gtkbuilder.h:31
+#, fuzzy
+msgid "Include version"
+msgstr "Sword verzia"
+
+#: ../ui/gtk2_webedit.ui.h:1 ../ui/gtk_webedit.ui.h:1
+#, fuzzy
+msgid "About Studypad"
+msgstr "Otvoriť _poznámkový blok"
+
+#: ../ui/gtk2_webedit.ui.h:3 ../ui/gtk_webedit.ui.h:3
+#, fuzzy
+msgid "Open about dialog"
+msgstr "Otvoriť v dialógu"
+
+#: ../ui/gtk2_webedit.ui.h:4 ../ui/gtk_webedit.ui.h:4 ../ui/prefs.glade.h:76
+#: ../ui/prefs.gtkbuilder.h:68
+msgid "Bold"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:5 ../ui/gtk_webedit.ui.h:5
+#, fuzzy
+msgid "Make selection bold"
+msgstr "Prečítať nahlas označené"
+
+#: ../ui/gtk2_webedit.ui.h:6 ../ui/gtk_webedit.ui.h:6
+msgid "Copy"
+msgstr "Kopírovať"
+
+#: ../ui/gtk2_webedit.ui.h:7 ../ui/gtk_webedit.ui.h:7
+msgid "Copy selection to clipboard"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:8 ../ui/gtk_webedit.ui.h:8
+msgid "Cut"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:9 ../ui/gtk_webedit.ui.h:9
+#, fuzzy
+msgid "Cut selection"
+msgstr "Výber modulu"
+
+#: ../ui/gtk2_webedit.ui.h:10 ../ui/gtk_webedit.ui.h:10
+msgid "Decrease indent"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:11 ../ui/gtk_webedit.ui.h:11
+msgid "Decrease"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:12 ../ui/gtk_webedit.ui.h:12
+msgid "Decrease paragraph indent"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:13 ../ui/gtk_webedit.ui.h:13
+#, fuzzy
+msgid "Delete selection"
+msgstr "Zmazať označený rozsah"
+
+#: ../ui/gtk2_webedit.ui.h:15 ../ui/gtk_webedit.ui.h:15
+#, fuzzy
+msgid "Remove seledtion"
+msgstr "Odstrániť označenú položku"
+
+#: ../ui/gtk2_webedit.ui.h:16 ../ui/gtk_webedit.ui.h:16
+#: ../ui/xi-menus.glade.h:112 ../ui/xi-menus-popup.gtkbuilder.h:11
+msgid "Delete Item"
+msgstr "Zmazať položku"
+
+#: ../ui/gtk2_webedit.ui.h:17 ../ui/gtk_webedit.ui.h:17
+#, fuzzy
+msgid "Delete current item"
+msgstr "Odstrániť aktuálnu poznámku"
+
+#: ../ui/gtk2_webedit.ui.h:19 ../ui/gtk_webedit.ui.h:19
+#, fuzzy
+msgid "Search current document"
+msgstr "Prehľadať celý modul"
+
+#: ../ui/gtk2_webedit.ui.h:20 ../ui/gtk_webedit.ui.h:20
+#, fuzzy
+msgid "Font"
+msgstr "Písma"
+
+#: ../ui/gtk2_webedit.ui.h:21 ../ui/gtk_webedit.ui.h:21
+#, fuzzy
+msgid "Change font"
+msgstr "Zmeniť písmo pre"
+
+#: ../ui/gtk2_webedit.ui.h:22 ../ui/gtk_webedit.ui.h:22
+msgid "Increase indent"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:23 ../ui/gtk_webedit.ui.h:23
+msgid "Increase"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:24 ../ui/gtk_webedit.ui.h:24
+msgid "Increase paragraph indent"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:25 ../ui/gtk_webedit.ui.h:25
+#, fuzzy
+msgid "Insert emoticon"
+msgstr "Vložiť záložku"
+
+#: ../ui/gtk2_webedit.ui.h:26 ../ui/gtk_webedit.ui.h:26
+msgid "Emoticon"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:27 ../ui/gtk_webedit.ui.h:27
+msgid "Insert an emoticon"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:28 ../ui/gtk_webedit.ui.h:28
+#, fuzzy
+msgid "Insert image"
+msgstr "Vložiť záložku"
+
+#: ../ui/gtk2_webedit.ui.h:29 ../ui/gtk_webedit.ui.h:29
+#, fuzzy
+msgid "Image"
+msgstr "Obrázky"
+
+#: ../ui/gtk2_webedit.ui.h:30 ../ui/gtk_webedit.ui.h:30
+msgid "Insert image at cursor"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:31 ../ui/gtk_webedit.ui.h:31
+#, fuzzy
+msgid "Insert link"
+msgstr "Vložiť záložku"
+
+#: ../ui/gtk2_webedit.ui.h:32 ../ui/gtk_webedit.ui.h:32
+#, fuzzy
+msgid "Link"
+msgstr "Odkazy"
+
+#: ../ui/gtk2_webedit.ui.h:33 ../ui/gtk_webedit.ui.h:33
+#, fuzzy
+msgid "Insert a link"
+msgstr "Vložiť záložku"
+
+#: ../ui/gtk2_webedit.ui.h:34 ../ui/gtk_webedit.ui.h:34
+msgid "Insert Outline"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:35 ../ui/gtk_webedit.ui.h:35
+#, fuzzy
+msgid "Outline"
+msgstr "StrukturovanaTema"
+
+#: ../ui/gtk2_webedit.ui.h:36 ../ui/gtk_webedit.ui.h:36
+msgid "Insert outline"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:37 ../ui/gtk_webedit.ui.h:37
+#, fuzzy
+msgid "Insert rule"
+msgstr "Vložiť záložku"
+
+#: ../ui/gtk2_webedit.ui.h:38 ../ui/gtk_webedit.ui.h:38
+msgid "Rule"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:39 ../ui/gtk_webedit.ui.h:39
+msgid "Insert horizontal rule"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:40 ../ui/gtk_webedit.ui.h:40
+#, fuzzy
+msgid "Xiphos Link"
+msgstr "Xiphos:"
+
+#: ../ui/gtk2_webedit.ui.h:41 ../ui/gtk_webedit.ui.h:41
+#, fuzzy
+msgid "Xiphos"
+msgstr "Xiphos:"
+
+#: ../ui/gtk2_webedit.ui.h:42 ../ui/gtk_webedit.ui.h:42
+#, fuzzy
+msgid "Insert a link to a sword module"
+msgstr "Inštalovať tieto moduly?"
+
+#: ../ui/gtk2_webedit.ui.h:43 ../ui/gtk_webedit.ui.h:43
+msgid "Insert table"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:44 ../ui/gtk_webedit.ui.h:44
+msgid "Table"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:45 ../ui/gtk_webedit.ui.h:45
+msgid "Insert a table"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:46 ../ui/gtk_webedit.ui.h:46
+msgid "Italic"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:47 ../ui/gtk_webedit.ui.h:47
+msgid "Change selection to italic font"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:48 ../ui/gtk_webedit.ui.h:48
+msgid "Center"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:49 ../ui/gtk_webedit.ui.h:49
+msgid "Center justify paragraph"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:50 ../ui/gtk_webedit.ui.h:50
+msgid "Full"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:51 ../ui/gtk_webedit.ui.h:51
+msgid "full justify"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:52 ../ui/gtk_webedit.ui.h:52
+msgid "Left"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:53 ../ui/gtk_webedit.ui.h:53
+msgid "Left justify paragraph"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:54 ../ui/gtk_webedit.ui.h:54
+msgid "Right"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:55 ../ui/gtk_webedit.ui.h:55
+msgid "Right justify paragraph"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:57 ../ui/gtk_webedit.ui.h:57
+#, fuzzy
+msgid "Create new file"
+msgstr "Vytvoriť nový priečinok"
+
+#: ../ui/gtk2_webedit.ui.h:59 ../ui/gtk_webedit.ui.h:59
+#, fuzzy
+msgid "Open file"
+msgstr "Otvoriť modul"
+
+#: ../ui/gtk2_webedit.ui.h:60 ../ui/gtk_webedit.ui.h:60
+msgid "Paste"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:61 ../ui/gtk_webedit.ui.h:61
+msgid "Paste clipboard at cursor."
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:62 ../ui/gtk_webedit.ui.h:62
+#, fuzzy
+msgid "Print Document"
+msgstr "Vytlačiť tento dokument"
+
+#: ../ui/gtk2_webedit.ui.h:63 ../ui/gtk_webedit.ui.h:63
+#, fuzzy
+msgid "Print"
+msgstr "Tlač"
+
+#: ../ui/gtk2_webedit.ui.h:64 ../ui/gtk_webedit.ui.h:64
+#, fuzzy
+msgid "Print the current document"
+msgstr "Vytlačiť tento dokument"
+
+#: ../ui/gtk2_webedit.ui.h:65 ../ui/gtk_webedit.ui.h:65
+#, fuzzy
+msgid "Print Preview"
+msgstr "Náhľad pre tlačou"
+
+#: ../ui/gtk2_webedit.ui.h:66 ../ui/gtk_webedit.ui.h:66
+#, fuzzy
+msgid "Preview"
+msgstr "_Náhľad"
+
+#: ../ui/gtk2_webedit.ui.h:67 ../ui/gtk_webedit.ui.h:67
+#, fuzzy
+msgid "Print preview of current document"
+msgstr "Vytlačiť tento dokument"
+
+#: ../ui/gtk2_webedit.ui.h:68 ../ui/gtk_webedit.ui.h:68
+#, fuzzy
+msgid "Quit"
+msgstr "_Koniec"
+
+#: ../ui/gtk2_webedit.ui.h:69 ../ui/gtk_webedit.ui.h:69
+#, fuzzy
+msgid "Shut down editor"
+msgstr "Otvoriť v editore"
+
+#: ../ui/gtk2_webedit.ui.h:70 ../ui/gtk_webedit.ui.h:70
+msgid "Redo"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:71 ../ui/gtk_webedit.ui.h:71
+msgid "Redo last undo"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:72 ../ui/gtk_webedit.ui.h:72
+msgid "Find and replace"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:73 ../ui/gtk_webedit.ui.h:73
+msgid "Replace"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:74 ../ui/gtk_webedit.ui.h:74
+#, fuzzy
+msgid "Search and replace"
+msgstr "Vyhľadávacie kritériá"
+
+#: ../ui/gtk2_webedit.ui.h:76 ../ui/gtk_webedit.ui.h:76
+#, fuzzy
+msgid "Save changes to file"
+msgstr "Uložiť zmeny v dokumente"
+
+#: ../ui/gtk2_webedit.ui.h:77 ../ui/gtk_webedit.ui.h:77
+#, fuzzy
+msgid "Save as"
+msgstr "Uložiť ako"
+
+#: ../ui/gtk2_webedit.ui.h:78 ../ui/gtk_webedit.ui.h:78
+#, fuzzy
+msgid "Save file as ..."
+msgstr "Uložiť _ako..."
+
+#: ../ui/gtk2_webedit.ui.h:79 ../ui/gtk_webedit.ui.h:79
+msgid "Strikethrough"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:80 ../ui/gtk_webedit.ui.h:80
+msgid "Strikethrough selection"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:81 ../ui/gtk_webedit.ui.h:81
+msgid "Underline"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:82 ../ui/gtk_webedit.ui.h:82
+#, fuzzy
+msgid "Underline selection"
+msgstr "Výber modulu"
+
+#: ../ui/gtk2_webedit.ui.h:83 ../ui/gtk_webedit.ui.h:83
+msgid "Undo"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:84 ../ui/gtk_webedit.ui.h:84
+msgid "Undo last change"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:85 ../ui/gtk_webedit.ui.h:85
+#, fuzzy
+msgid "Editor"
+msgstr "Upraviť"
+
+#: ../ui/gtk2_webedit.ui.h:87 ../ui/gtk_webedit.ui.h:87
+#, fuzzy
+msgid "Recent files"
+msgstr "Uložiť aktuálny súbor ako"
+
+#: ../ui/gtk2_webedit.ui.h:88 ../ui/gtk_webedit.ui.h:88
+#: ../ui/xi-menus.glade.h:9 ../ui/xi-menus.gtkbuilder.h:6
+msgid "_Edit"
+msgstr "_Upraviť"
+
+#: ../ui/gtk2_webedit.ui.h:90 ../ui/gtk_webedit.ui.h:90
+#: ../ui/xi-menus.glade.h:40 ../ui/xi-menus.gtkbuilder.h:25
+msgid "_Help"
+msgstr "_Pomocník"
+
+#: ../ui/gtk2_webedit.ui.h:91 ../ui/gtk_webedit.ui.h:91
+msgid "toolbutton1"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:92 ../ui/gtk_webedit.ui.h:92
+msgid "toolbutton10"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:93 ../ui/gtk_webedit.ui.h:93
+msgid "toolbutton3"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:94 ../ui/gtk_webedit.ui.h:94
+msgid "toolbutton2"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:95 ../ui/gtk_webedit.ui.h:95
+msgid "toolbutton4"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:96 ../ui/gtk_webedit.ui.h:96
+msgid "toolbutton6"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:97 ../ui/gtk_webedit.ui.h:97
+msgid "toolbutton7"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:98 ../ui/gtk_webedit.ui.h:98
+msgid "Normal"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:99 ../ui/gtk_webedit.ui.h:99
+msgid "Header 1"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:100 ../ui/gtk_webedit.ui.h:100
+msgid "Header 2"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:101 ../ui/gtk_webedit.ui.h:101
+msgid "Header 3"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:102 ../ui/gtk_webedit.ui.h:102
+msgid "Header 4"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:103 ../ui/gtk_webedit.ui.h:103
+msgid "Header 5"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:104 ../ui/gtk_webedit.ui.h:104
+msgid "Header 6"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:105 ../ui/gtk_webedit.ui.h:105
+msgid "Address"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:106 ../ui/gtk_webedit.ui.h:106
+msgid "Preformatted"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:107 ../ui/gtk_webedit.ui.h:107
+#, fuzzy
+msgid "Bulleted List"
+msgstr "Zmazať zoznam?"
+
+#: ../ui/gtk2_webedit.ui.h:108 ../ui/gtk_webedit.ui.h:108
+msgid "Roman Numeral List"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:109 ../ui/gtk_webedit.ui.h:109
+#, fuzzy
+msgid "Numbered List"
+msgstr "Zoznam veršov"
+
+#: ../ui/gtk2_webedit.ui.h:110 ../ui/gtk_webedit.ui.h:110
+msgid "Alphabetical List"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:111 ../ui/gtk_webedit.ui.h:111
+msgid "toolbutton11"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:112 ../ui/gtk_webedit.ui.h:112
+msgid "toolbutton12"
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:113 ../ui/gtk_webedit.ui.h:113
+msgid "Set font color of selected text."
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:114 ../ui/gtk_webedit.ui.h:114
+msgid "Highlight selected text by setting background color."
+msgstr ""
+
+#: ../ui/gtk2_webedit.ui.h:115 ../ui/gtk_webedit.ui.h:115
+msgid "toolbutton9"
+msgstr ""
+
+#: ../ui/markverse.glade.h:1 ../ui/markverse.gtkbuilder.h:1
 msgid "Mark/Unmark Verse"
 msgstr "Poznamenať/Zrušiť poznámku"
 
-#: ../ui/markverse.glade.h:9
+#: ../ui/markverse.glade.h:9 ../ui/markverse.gtkbuilder.h:7
 msgid "Mark"
 msgstr "Poznamenať"
 
-#: ../ui/markverse.glade.h:10
+#: ../ui/markverse.glade.h:10 ../ui/markverse.gtkbuilder.h:9
 msgid "Unmark"
 msgstr "Zrušiť poznámku"
 
-#: ../ui/module-manager.glade.h:1
+#: ../ui/module-manager.glade.h:1 ../ui/module-manager.gtkbuilder.h:1
 msgid "Module Manager"
 msgstr "Správca modulov"
 
-#: ../ui/module-manager.glade.h:2
+#: ../ui/module-manager.glade.h:2 ../ui/module-manager.gtkbuilder.h:2
 #, fuzzy
 msgid "_View Intro"
 msgstr "_Zobrazenie"
 
-#: ../ui/module-manager.glade.h:3
+#: ../ui/module-manager.glade.h:3 ../ui/module-manager.gtkbuilder.h:3
 msgid "Open a brief introductory explanation of how the Module Manager works."
 msgstr ""
 
-#: ../ui/module-manager.glade.h:4
+#: ../ui/module-manager.glade.h:4 ../ui/module-manager.gtkbuilder.h:4
 #, fuzzy
 msgid "_Load Standard"
 msgstr "Načítať štandardné"
 
-#: ../ui/module-manager.glade.h:5
+#: ../ui/module-manager.glade.h:5 ../ui/module-manager.gtkbuilder.h:5
 msgid ""
 "Load and synchronize the standard set of known repositories, as maintained "
 "at crosswire.org, with your current remote sources."
 msgstr ""
 
-#: ../ui/module-manager.glade.h:6
+#: ../ui/module-manager.glade.h:6 ../ui/module-manager.gtkbuilder.h:6
 msgid ""
 "Refresh Xiphos' knowledge of what modules are available at the selected "
 "remote repository"
 msgstr ""
 
-#: ../ui/module-manager.glade.h:7
+#: ../ui/module-manager.glade.h:7 ../ui/module-manager.gtkbuilder.h:8
 #, fuzzy
 msgid "_Install"
 msgstr "Inštalovať"
 
-#: ../ui/module-manager.glade.h:8
+#: ../ui/module-manager.glade.h:8 ../ui/module-manager.gtkbuilder.h:7
 #, fuzzy
 msgid "Install or update the selected modules"
 msgstr "Inštalovať tieto moduly?"
 
-#: ../ui/module-manager.glade.h:9
+#: ../ui/module-manager.glade.h:9 ../ui/module-manager.gtkbuilder.h:9
 #, fuzzy
 msgid "Remove the selected modules from your system"
 msgstr "Odstrániť označený modul zo zoznamu"
 
-#: ../ui/module-manager.glade.h:10
+#: ../ui/module-manager.glade.h:10 ../ui/module-manager.gtkbuilder.h:10
 #, fuzzy
 msgid "_Archive"
 msgstr "Archivovať"
 
-#: ../ui/module-manager.glade.h:11
+#: ../ui/module-manager.glade.h:11 ../ui/module-manager.gtkbuilder.h:11
 #, fuzzy
 msgid "Create a zip archive of the selected modules."
 msgstr "Ste si istý, že chcete odstrániť zvolený modul?"
 
-#: ../ui/module-manager.glade.h:12
+#: ../ui/module-manager.glade.h:12 ../ui/module-manager.gtkbuilder.h:12
 #, fuzzy
 msgid "_Index"
 msgstr "Indexovať"
 
-#: ../ui/module-manager.glade.h:13
+#: ../ui/module-manager.glade.h:13 ../ui/module-manager.gtkbuilder.h:13
 msgid ""
 "Build an index of the selected modules, for optimized (\"lucene\") searching."
 msgstr ""
 
-#: ../ui/module-manager.glade.h:14
+#: ../ui/module-manager.glade.h:14 ../ui/module-manager.gtkbuilder.h:14
 #, fuzzy
 msgid "_Delete Index"
 msgstr "Zmazať položku"
 
-#: ../ui/module-manager.glade.h:15
+#: ../ui/module-manager.glade.h:15 ../ui/module-manager.gtkbuilder.h:15
 #, fuzzy
 msgid "Delete the fast-search index of the selected modules."
 msgstr "Odstrániť indexy pre rýchle hľadanie pre tieto moduly?"
 
-#: ../ui/module-manager.glade.h:16
+#: ../ui/module-manager.glade.h:16 ../ui/module-manager.gtkbuilder.h:16
 msgid "Continue"
 msgstr "Pokračovať"
 
 #. do not translate <b> and </b> they are html formating
-#: ../ui/module-manager.glade.h:18
+#: ../ui/module-manager.glade.h:18 ../ui/module-manager.gtkbuilder.h:18
 msgid "<b>Sword</b>"
 msgstr "<b>Sword</b>"
 
-#: ../ui/module-manager.glade.h:19
+#: ../ui/module-manager.glade.h:19 ../ui/module-manager.gtkbuilder.h:19
 msgid "<b>Module Manager</b>"
 msgstr "<b>Správca modulov</b>"
 
-#: ../ui/module-manager.glade.h:20
+#: ../ui/module-manager.glade.h:20 ../ui/module-manager.gtkbuilder.h:20
 msgid "<b>WARNING:</b> If you live in a persecuted country use with care."
 msgstr ""
 "<b>VAROVANIE:</b> Ak žije v krajine, kde je prenasledovanie, buďte opatrní."
 
-#: ../ui/module-manager.glade.h:21
+#: ../ui/module-manager.glade.h:21 ../ui/module-manager.gtkbuilder.h:21
 msgid "<b>Add and Remove Sources</b>"
 msgstr "<b>Pridať a odstrániť zdroje</b>"
 
-#: ../ui/module-manager.glade.h:22
+#: ../ui/module-manager.glade.h:22 ../ui/module-manager.gtkbuilder.h:22
 msgid "Current local sources"
 msgstr "Aktuálne lokálne zdroje"
 
-#: ../ui/module-manager.glade.h:23
+#: ../ui/module-manager.glade.h:23 ../ui/module-manager.gtkbuilder.h:23
 msgid ""
 "Add a local folder as an install source, typically on a cdrom or flash "
 "drive.  Such a folder contains subfolders \"mods.d\" and \"modules\"."
 msgstr ""
 
-#: ../ui/module-manager.glade.h:24
+#: ../ui/module-manager.glade.h:24 ../ui/module-manager.gtkbuilder.h:24
 msgid "Remove one of your local folders as an install source."
 msgstr ""
 
-#: ../ui/module-manager.glade.h:25
+#: ../ui/module-manager.glade.h:25 ../ui/module-manager.gtkbuilder.h:25
 msgid "Current Remote Sources"
 msgstr "Aktuálne vzdialené zdroje"
 
-#: ../ui/module-manager.glade.h:26
+#: ../ui/module-manager.glade.h:26 ../ui/module-manager.gtkbuilder.h:26
 msgid ""
 "Add a custom remote install source. You must know its hostname and the "
 "folder where its repository lives."
 msgstr ""
 
-#: ../ui/module-manager.glade.h:27
+#: ../ui/module-manager.glade.h:27 ../ui/module-manager.gtkbuilder.h:27
 #, fuzzy
 msgid "Remove a remote install source."
 msgstr "Odstrániť vzdialený zdroj"
 
-#: ../ui/module-manager.glade.h:28
+#: ../ui/module-manager.glade.h:28 ../ui/module-manager.gtkbuilder.h:28
 msgid "<b>Install Source</b>"
 msgstr "<b>Inštalačný zdroj</b>"
 
-#: ../ui/module-manager.glade.h:29
+#: ../ui/module-manager.glade.h:29 ../ui/module-manager.gtkbuilder.h:29
 msgid "Local"
 msgstr "Lokálne"
 
-#: ../ui/module-manager.glade.h:30
+#: ../ui/module-manager.glade.h:30 ../ui/module-manager.gtkbuilder.h:30
 msgid "Remote"
 msgstr "Vzdialené"
 
-#: ../ui/module-manager.glade.h:31
+#: ../ui/module-manager.glade.h:31 ../ui/module-manager.gtkbuilder.h:31
 msgid "<b>Install Destination</b>"
 msgstr "<b>Inštalačný cieľ</b>"
 
-#: ../ui/module-manager.glade.h:32
+#: ../ui/module-manager.glade.h:32 ../ui/module-manager.gtkbuilder.h:32
 msgid "<i>Personal area, for your use only:</i>"
 msgstr "<i>Osobná oblasť, iba pre vaše použitie:</i>"
 
-#: ../ui/module-manager.glade.h:33
+#: ../ui/module-manager.glade.h:33 ../ui/module-manager.gtkbuilder.h:33
 msgid "Home dir"
 msgstr "Domovský priečinok"
 
-#: ../ui/module-manager.glade.h:34
+#: ../ui/module-manager.glade.h:34 ../ui/module-manager.gtkbuilder.h:34
 msgid "<i>System area, for all users:</i>"
 msgstr "<i>Systémová oblasť, pre všetkých používateľov:</i>"
 
-#: ../ui/module-manager.glade.h:35
+#: ../ui/module-manager.glade.h:35 ../ui/module-manager.gtkbuilder.h:35
 msgid "Sword sys dir"
 msgstr "Sword systémový priečinok"
 
-#: ../ui/module-manager.glade.h:36
+#: ../ui/module-manager.glade.h:36 ../ui/module-manager.gtkbuilder.h:36
 msgid ""
 "<b>Warning:</b> If you live in a persecuted country and do not wish to risk "
 "detection you should NOT use  the remote installation feature! "
@@ -2676,11 +3204,11 @@ msgstr ""
 "<b>Varovanie:</b> Ak žije v krajine, kde je prenasledovanie, a nechcete "
 "riskovať odhalenie, tak by ste nemali použiť možnosť vzdialenej inštalácie! "
 
-#: ../ui/module-manager.glade.h:37
+#: ../ui/module-manager.glade.h:37 ../ui/module-manager.gtkbuilder.h:37
 msgid "Local Install Folder"
 msgstr "Lokálny inštalačný priečinok"
 
-#: ../ui/navbar_versekey.glade.h:1
+#: ../ui/navbar_versekey.glade.h:1 ../ui/navbar_versekey.gtkbuilder.h:1
 msgid "Drop down history list"
 msgstr "Vysúvací zoznam s históriou"
 
@@ -2688,11 +3216,11 @@ msgstr "Vysúvací zoznam s históriou"
 msgid "Choose book to display"
 msgstr "Vybrať knihu na zobrazenie"
 
-#: ../ui/navbar_versekey.glade.h:3
+#: ../ui/navbar_versekey.glade.h:3 ../ui/navbar_versekey.gtkbuilder.h:2
 msgid "Book Selector Button"
 msgstr "Tlačidlo výberu knihy"
 
-#: ../ui/navbar_versekey.glade.h:4
+#: ../ui/navbar_versekey.glade.h:4 ../ui/navbar_versekey.gtkbuilder.h:3
 msgid "<b>Revelation of John</b>"
 msgstr "<B>Zjavenia Jána</b>"
 
@@ -2701,11 +3229,11 @@ msgstr "<B>Zjavenia Jána</b>"
 msgid "Choose chapter to display"
 msgstr "Vybrať knihu na zobrazenie"
 
-#: ../ui/navbar_versekey.glade.h:6
+#: ../ui/navbar_versekey.glade.h:6 ../ui/navbar_versekey.gtkbuilder.h:4
 msgid "Toggle Chapter Button"
 msgstr "Tlačidlo zmeniť kapitolu"
 
-#: ../ui/navbar_versekey.glade.h:7
+#: ../ui/navbar_versekey.glade.h:7 ../ui/navbar_versekey.gtkbuilder.h:5
 msgid "1"
 msgstr "1"
 
@@ -2714,81 +3242,81 @@ msgstr "1"
 msgid "Choose Verse to display"
 msgstr "Vybrať knihu na zobrazenie"
 
-#: ../ui/navbar_versekey.glade.h:9
+#: ../ui/navbar_versekey.glade.h:9 ../ui/navbar_versekey.gtkbuilder.h:6
 msgid "Toggle Verse Button"
 msgstr "Tlačidlo Zmeniť verš"
 
-#: ../ui/navbar_versekey.glade.h:10
+#: ../ui/navbar_versekey.glade.h:10 ../ui/navbar_versekey.gtkbuilder.h:7
 msgid "Enter a Verse reference in Book 1:1 format and press Return"
 msgstr "Vložte referenciu na verš vo formáte Kniha 1:1 a stlačte Enter"
 
-#: ../ui/navbar_versekey.glade.h:11
+#: ../ui/navbar_versekey.glade.h:11 ../ui/navbar_versekey.gtkbuilder.h:8
 msgid "Reference Entry"
 msgstr "Položka Referencia"
 
-#: ../ui/prefs.glade.h:2
+#: ../ui/prefs.glade.h:2 ../ui/prefs.gtkbuilder.h:2
 msgid "Cover"
 msgstr "Obal"
 
-#: ../ui/prefs.glade.h:3
+#: ../ui/prefs.glade.h:3 ../ui/prefs.gtkbuilder.h:3
 msgid "<b>Font Colors</b>"
 msgstr "<b>Farby písma</b>"
 
-#: ../ui/prefs.glade.h:4
+#: ../ui/prefs.glade.h:4 ../ui/prefs.gtkbuilder.h:4
 msgid "Background"
 msgstr "Pozadie"
 
-#: ../ui/prefs.glade.h:5
+#: ../ui/prefs.glade.h:5 ../ui/prefs.gtkbuilder.h:5
 msgid "Foreground"
 msgstr "Popredie"
 
-#: ../ui/prefs.glade.h:6
+#: ../ui/prefs.glade.h:6 ../ui/prefs.gtkbuilder.h:6
 msgid "Current Verse"
 msgstr "Aktuálny Verš"
 
-#: ../ui/prefs.glade.h:7
+#: ../ui/prefs.glade.h:7 ../ui/prefs.gtkbuilder.h:7
 msgid "Verse Number"
 msgstr ""
 
-#: ../ui/prefs.glade.h:8
+#: ../ui/prefs.glade.h:8 ../ui/prefs.gtkbuilder.h:8
 msgid "Links"
 msgstr "Odkazy"
 
-#: ../ui/prefs.glade.h:9
+#: ../ui/prefs.glade.h:9 ../ui/prefs.gtkbuilder.h:9
 msgid "Highlight Foreground"
 msgstr "Zvýraznenie popredia"
 
-#: ../ui/prefs.glade.h:10
+#: ../ui/prefs.glade.h:10 ../ui/prefs.gtkbuilder.h:10
 msgid "Highlight Background"
 msgstr "Zvýraznenie pozadia"
 
-#: ../ui/prefs.glade.h:11
+#: ../ui/prefs.glade.h:11 ../ui/prefs.gtkbuilder.h:11
 #, fuzzy
 msgid "Invert color pairs"
 msgstr "Vložiť záložku"
 
-#: ../ui/prefs.glade.h:12
+#: ../ui/prefs.glade.h:12 ../ui/prefs.gtkbuilder.h:12
 msgid "Normal Text"
 msgstr ""
 
-#: ../ui/prefs.glade.h:13
+#: ../ui/prefs.glade.h:13 ../ui/prefs.gtkbuilder.h:13
 #, fuzzy
 msgid "Highlight"
 msgstr "Zvýraznenie pozadia"
 
-#: ../ui/prefs.glade.h:14
+#: ../ui/prefs.glade.h:14 ../ui/prefs.gtkbuilder.h:14
 msgid "Font Colors"
 msgstr "Farby písma"
 
-#: ../ui/prefs.glade.h:15
+#: ../ui/prefs.glade.h:15 ../ui/prefs.gtkbuilder.h:15
 msgid "<b>Font Sizes</b>"
 msgstr "<b>Veľkosť písma</b>"
 
-#: ../ui/prefs.glade.h:16
+#: ../ui/prefs.glade.h:16 ../ui/prefs.gtkbuilder.h:16
 msgid "All displayed font sizes are relative to this choice"
 msgstr ""
 
-#: ../ui/prefs.glade.h:17
+#: ../ui/prefs.glade.h:17 ../ui/prefs.gtkbuilder.h:17
 msgid "Base font size"
 msgstr "Základná veľkosť textu"
 
@@ -2812,516 +3340,550 @@ msgstr ""
 "+4\n"
 "+5"
 
-#: ../ui/prefs.glade.h:26
+#: ../ui/prefs.glade.h:26 ../ui/prefs.gtkbuilder.h:18
 msgid "Commonly -1, to make verse numbers less obtrusive"
 msgstr ""
 
-#: ../ui/prefs.glade.h:27
+#: ../ui/prefs.glade.h:27 ../ui/prefs.gtkbuilder.h:19
 msgid "Verse number size"
 msgstr "Veľkosť čísla verša"
 
-#: ../ui/prefs.glade.h:28
+#: ../ui/prefs.glade.h:28 ../ui/prefs.gtkbuilder.h:20
 msgid ""
 "Name and size choice for any module in a given language; still overridden by "
 "a specific choice on a particular module"
 msgstr ""
 
-#: ../ui/prefs.glade.h:29
+#: ../ui/prefs.glade.h:29 ../ui/prefs.gtkbuilder.h:21
 msgid "Font preferences, per language"
 msgstr ""
 
-#: ../ui/prefs.glade.h:30
+#: ../ui/prefs.glade.h:30 ../ui/prefs.gtkbuilder.h:22
 #, fuzzy
 msgid "Language Font Combo"
 msgstr "Roletové menu Zmeniť knihu"
 
-#: ../ui/prefs.glade.h:31
+#: ../ui/prefs.glade.h:31 ../ui/prefs.gtkbuilder.h:23
 msgid "Font Misc"
 msgstr "Písmo - rôzne"
 
-#: ../ui/prefs.glade.h:32
+#: ../ui/prefs.glade.h:32 ../ui/prefs.gtkbuilder.h:24
 msgid "<b>Tabs</b>"
 msgstr "<b>Karty</b>"
 
-#: ../ui/prefs.glade.h:33
+#: ../ui/prefs.glade.h:33 ../ui/prefs.gtkbuilder.h:25
 msgid "Use tabbed browsing"
 msgstr "Použiť prezeranie v kartách"
 
-#: ../ui/prefs.glade.h:34
+#: ../ui/prefs.glade.h:34 ../ui/prefs.gtkbuilder.h:26
 msgid ""
 "Single selection of Bible+commentary+book+dictionary, or many sets of such "
 "selections in a tabbed interface"
 msgstr ""
 
-#: ../ui/prefs.glade.h:35
+#: ../ui/prefs.glade.h:35 ../ui/prefs.gtkbuilder.h:27
 msgid "Use tabbed browsing Checkbox"
 msgstr "Zaškrtávacie políčko Použiť prezeranie v kartách"
 
-#: ../ui/prefs.glade.h:36
+#: ../ui/prefs.glade.h:36 ../ui/prefs.gtkbuilder.h:28
 msgid "<b>Show</b>"
 msgstr "<b>Zobraziť</b>"
 
-#: ../ui/prefs.glade.h:37
+#: ../ui/prefs.glade.h:37 ../ui/prefs.gtkbuilder.h:29
 msgid "Bible Texts"
 msgstr "Biblické texty"
 
-#: ../ui/prefs.glade.h:38
+#: ../ui/prefs.glade.h:38 ../ui/prefs.gtkbuilder.h:30
 msgid "Bible Texts Checkbox"
 msgstr "Zaškrtávacie pole Biblické texty"
 
-#: ../ui/prefs.glade.h:40
+#: ../ui/prefs.glade.h:40 ../ui/prefs.gtkbuilder.h:32
 msgid "Previewer Checkbox"
 msgstr "Zaškrtávacie políčko Náhľad"
 
-#: ../ui/prefs.glade.h:42
+#: ../ui/prefs.glade.h:42 ../ui/prefs.gtkbuilder.h:34
 msgid "Commentaries Checkbox"
 msgstr "Zaškrtávacie pole Komentáre"
 
-#: ../ui/prefs.glade.h:43
+#: ../ui/prefs.glade.h:43 ../ui/prefs.gtkbuilder.h:35
 msgid "Dictionary/Lexicon"
 msgstr "Slovník/Lexikón"
 
-#: ../ui/prefs.glade.h:44
+#: ../ui/prefs.glade.h:44 ../ui/prefs.gtkbuilder.h:36
 msgid "Dictionary/Lexicon Checkbox"
 msgstr "Zaškrtávacie políčko Slovník/Lexikón"
 
-#: ../ui/prefs.glade.h:45
+#: ../ui/prefs.glade.h:45 ../ui/prefs.gtkbuilder.h:37
 msgid "Parallel View in a tab"
 msgstr "Paralelné zobrazenie v karte"
 
-#: ../ui/prefs.glade.h:46
+#: ../ui/prefs.glade.h:46 ../ui/prefs.gtkbuilder.h:38
 msgid "Tabs and Panes"
 msgstr "Karty a výplne"
 
-#: ../ui/prefs.glade.h:47
+#: ../ui/prefs.glade.h:47 ../ui/prefs.gtkbuilder.h:39
 msgid "<b>General</b>"
 msgstr "<b>Všeobecné</b>"
 
-#: ../ui/prefs.glade.h:48
+#: ../ui/prefs.glade.h:48 ../ui/prefs.gtkbuilder.h:40
 msgid ""
 "Select a particular language for interface display, other than your usual "
 "setting"
 msgstr ""
 
-#: ../ui/prefs.glade.h:49
+#: ../ui/prefs.glade.h:49 ../ui/prefs.gtkbuilder.h:41
 msgid "Special Locale (requires restart)"
 msgstr ""
 
-#: ../ui/prefs.glade.h:50
+#: ../ui/prefs.glade.h:50 ../ui/prefs.gtkbuilder.h:42
 msgid "Special Locale Combo"
 msgstr ""
 
-#: ../ui/prefs.glade.h:51
+#: ../ui/prefs.glade.h:51 ../ui/prefs.gtkbuilder.h:43
 msgid "Show splash screen at start up"
 msgstr "Zobraziť pri spustení úvodný obrázok"
 
-#: ../ui/prefs.glade.h:52
+#: ../ui/prefs.glade.h:52 ../ui/prefs.gtkbuilder.h:44
 msgid "Show Daily Devotion at start up"
 msgstr "Zobraziť pri spustení Denné zamyslenie"
 
-#: ../ui/prefs.glade.h:53
+#: ../ui/prefs.glade.h:53 ../ui/prefs.gtkbuilder.h:45
 msgid ""
 "If you have set a preferred daily devotion module, its entry for today will "
 "be shown at startup."
 msgstr ""
 
-#: ../ui/prefs.glade.h:54
+#: ../ui/prefs.glade.h:54 ../ui/prefs.gtkbuilder.h:46
 msgid "Use default Dictionary"
 msgstr "Použiť štandardný slovník"
 
-#: ../ui/prefs.glade.h:55
+#: ../ui/prefs.glade.h:55 ../ui/prefs.gtkbuilder.h:47
 msgid ""
 "Make double-click of a word always use default dictionary instead of "
 "dictionary currently displayed"
 msgstr ""
 
-#: ../ui/prefs.glade.h:56
+#: ../ui/prefs.glade.h:56 ../ui/prefs.gtkbuilder.h:48
 msgid "Use default Dictionary Checkbox"
 msgstr "Zaškrtávacie pole Použiť štandardný slovník"
 
-#: ../ui/prefs.glade.h:57
+#: ../ui/prefs.glade.h:57 ../ui/prefs.gtkbuilder.h:49
 msgid "Scroll to Previous/Next Chapter"
 msgstr "Presúvanie do predchádzajúcej/nasledujúcej kapitoly"
 
-#: ../ui/prefs.glade.h:58
+#: ../ui/prefs.glade.h:58 ../ui/prefs.gtkbuilder.h:50
 msgid "Use Bible Text scroll bar to scroll to previous or next chapter"
 msgstr ""
 "Použiť posuvnú lištu v Biblických textoch na presun do predchádzajúcej alebo "
 "nasledujúcej kapitoly"
 
-#: ../ui/prefs.glade.h:59
+#: ../ui/prefs.glade.h:59 ../ui/prefs.gtkbuilder.h:51
 msgid "Scroll to Previous/Next Chapter Checkbox"
 msgstr "Zaškrtávacie pole Presúvanie do predchádzajúcej/nasledujúcej kapitoly"
 
-#: ../ui/prefs.glade.h:60
+#: ../ui/prefs.glade.h:60 ../ui/prefs.gtkbuilder.h:52
 msgid "Resize images"
 msgstr "Meniť veľkosť obrázkov"
 
-#: ../ui/prefs.glade.h:61
+#: ../ui/prefs.glade.h:61 ../ui/prefs.gtkbuilder.h:53
 #, fuzzy
 msgid "Automatically resize image content to fit the pane"
 msgstr ""
 "Automaticky zmeniť veľkosť komentára, knihy, slovníka a obrázka, aby sa "
 "obsah zmestil do podokna."
 
-#: ../ui/prefs.glade.h:62
+#: ../ui/prefs.glade.h:62 ../ui/prefs.gtkbuilder.h:54
 msgid "Resize images checkbox"
 msgstr "Zaškrtávacie pole Meniť veľkosť obrázkov"
 
-#: ../ui/prefs.glade.h:63
+#: ../ui/prefs.glade.h:63 ../ui/prefs.gtkbuilder.h:55
 msgid "Highlight current verse"
 msgstr "Zvýraznenie aktuálneho verša"
 
-#: ../ui/prefs.glade.h:64
+#: ../ui/prefs.glade.h:64 ../ui/prefs.gtkbuilder.h:56
 #, fuzzy
 msgid "Apply high-contrast highlight to current verse - see color pickers"
 msgstr "Použiť vysoko kontrastné zvýraznenie aktuálneho verša"
 
-#: ../ui/prefs.glade.h:65
+#: ../ui/prefs.glade.h:65 ../ui/prefs.gtkbuilder.h:57
 msgid "Highlight current verse check box"
 msgstr "Zaškrtávacie pole Zvýrazniť aktuálny verš"
 
-#: ../ui/prefs.glade.h:66
+#: ../ui/prefs.glade.h:66 ../ui/prefs.gtkbuilder.h:58
 #, fuzzy
 msgid "Highlight user annotations"
 msgstr "Používateľov komentár"
 
-#: ../ui/prefs.glade.h:67
+#: ../ui/prefs.glade.h:67 ../ui/prefs.gtkbuilder.h:59
 #, fuzzy
 msgid "Use inverted highlight on user-annotated verses"
 msgstr "Použiť vysoko kontrastné zvýraznenie aktuálneho verša"
 
-#: ../ui/prefs.glade.h:68
+#: ../ui/prefs.glade.h:68 ../ui/prefs.gtkbuilder.h:60
 #, fuzzy
 msgid "Highlight user annotations check box"
 msgstr "Zaškrtávacie pole Zvýrazniť aktuálny verš"
 
-#: ../ui/prefs.glade.h:69
+#: ../ui/prefs.glade.h:69 ../ui/prefs.gtkbuilder.h:61
 #, fuzzy
 msgid "Cross-references in verse list"
 msgstr "Krížové referencie"
 
-#: ../ui/prefs.glade.h:70
+#: ../ui/prefs.glade.h:70 ../ui/prefs.gtkbuilder.h:62
 msgid "Use the verse list for Bible cross-references instead of the previewer"
 msgstr ""
 
-#: ../ui/prefs.glade.h:71
+#: ../ui/prefs.glade.h:71 ../ui/prefs.gtkbuilder.h:63
 #, fuzzy
 msgid "Xrefs in verse list check box"
 msgstr "Zaškrtávacie pole Meniť veľkosť obrázkov"
 
-#: ../ui/prefs.glade.h:72
+#: ../ui/prefs.glade.h:72 ../ui/prefs.gtkbuilder.h:64
 msgid "Enable Prayer Lists"
 msgstr "Povoliť Modlitebné zoznamy"
 
-#: ../ui/prefs.glade.h:73
+#: ../ui/prefs.glade.h:73 ../ui/prefs.gtkbuilder.h:65
 msgid "Make journals/prayer lists available"
 msgstr ""
 
-#: ../ui/prefs.glade.h:74
+#: ../ui/prefs.glade.h:74 ../ui/prefs.gtkbuilder.h:66
 msgid "Enable Prayer Lists Checkbox"
 msgstr "Voľba pre povolenie Modlitebných zoznamov"
 
-#: ../ui/prefs.glade.h:75
+#: ../ui/prefs.glade.h:75 ../ui/prefs.gtkbuilder.h:67
 #, fuzzy
 msgid "Verse number:"
 msgstr "Veľkosť čísla verša"
 
-#: ../ui/prefs.glade.h:76
-msgid "Bold"
-msgstr ""
-
-#: ../ui/prefs.glade.h:77
+#: ../ui/prefs.glade.h:77 ../ui/prefs.gtkbuilder.h:69
 #, fuzzy
 msgid "Show verse number in bold text"
 msgstr "Zobraziť čísla veršov"
 
-#: ../ui/prefs.glade.h:78
+#: ../ui/prefs.glade.h:78 ../ui/prefs.gtkbuilder.h:70
 #, fuzzy
 msgid "Verse number bold checkbox"
 msgstr "Veľkosť čísla verša"
 
-#: ../ui/prefs.glade.h:79
+#: ../ui/prefs.glade.h:79 ../ui/prefs.gtkbuilder.h:71
 msgid "Brackets"
 msgstr ""
 
-#: ../ui/prefs.glade.h:80
+#: ../ui/prefs.glade.h:80 ../ui/prefs.gtkbuilder.h:72
 msgid "Show verse number with [surrounding brackets]"
 msgstr ""
 
-#: ../ui/prefs.glade.h:81
+#: ../ui/prefs.glade.h:81 ../ui/prefs.gtkbuilder.h:73
 #, fuzzy
 msgid "Verse number bracket checkbox"
 msgstr "Zaškrtávacie pole Zobraziť verš v samostatnom riadku"
 
-#: ../ui/prefs.glade.h:82
+#: ../ui/prefs.glade.h:82 ../ui/prefs.gtkbuilder.h:74
 #, fuzzy
 msgid "Superscript"
 msgstr "Popis"
 
-#: ../ui/prefs.glade.h:83
+#: ../ui/prefs.glade.h:83 ../ui/prefs.gtkbuilder.h:75
 #, fuzzy
 msgid "Show verse number as a superscript"
 msgstr "Zobraziť čísla veršov"
 
-#: ../ui/prefs.glade.h:84
+#: ../ui/prefs.glade.h:84 ../ui/prefs.gtkbuilder.h:76
 #, fuzzy
 msgid "Verse number superscript checkbox"
 msgstr "Veľkosť čísla verša"
 
-#: ../ui/prefs.glade.h:85
+#: ../ui/prefs.glade.h:85 ../ui/prefs.gtkbuilder.h:77
 msgid "<b>StudyPad default directory</b>"
 msgstr "<b>Štandardný priečinok poznámkového bloku</b>"
 
-#: ../ui/prefs.glade.h:86
+#: ../ui/prefs.glade.h:86 ../ui/prefs.gtkbuilder.h:78
 msgid "Select A Directory"
 msgstr "Vybrať priečinok"
 
-#: ../ui/prefs.glade.h:87
+#: ../ui/prefs.glade.h:87 ../ui/prefs.gtkbuilder.h:79
 msgid "StudyPad default directory combo"
 msgstr "Roletové menu Štandardný priečinok pre poznámkový blok"
 
-#: ../ui/prefs.glade.h:88
+#: ../ui/prefs.glade.h:88 ../ui/prefs.gtkbuilder.h:80
 msgid "General Misc"
 msgstr "Rôzne všeobecné"
 
-#: ../ui/prefs.glade.h:89
+#: ../ui/prefs.glade.h:89 ../ui/prefs.gtkbuilder.h:81
 msgid "<b>Main Window Modules</b>"
 msgstr "<b>Okno hlavných modulov</b>"
 
-#: ../ui/prefs.glade.h:90
+#: ../ui/prefs.glade.h:90 ../ui/prefs.gtkbuilder.h:82
 msgid "Biblical Text"
 msgstr "Biblické texty"
 
-#: ../ui/prefs.glade.h:91
+#: ../ui/prefs.glade.h:91 ../ui/prefs.gtkbuilder.h:83
 msgid "Change Biblical Text Combo"
 msgstr "Roletové menu Zmeniť Biblický text"
 
-#: ../ui/prefs.glade.h:93
+#: ../ui/prefs.glade.h:93 ../ui/prefs.gtkbuilder.h:85
 msgid "Change Commentary Combo"
 msgstr "Roletové menu Zmeniť komentár"
 
-#: ../ui/prefs.glade.h:94
+#: ../ui/prefs.glade.h:94 ../ui/prefs.gtkbuilder.h:86
 msgid "Dictionary"
 msgstr "Slovník"
 
-#: ../ui/prefs.glade.h:95
+#: ../ui/prefs.glade.h:95 ../ui/prefs.gtkbuilder.h:87
 msgid "Change Dictionary Combo"
 msgstr "Roletové menu Zmeniť slovník"
 
-#: ../ui/prefs.glade.h:97
+#: ../ui/prefs.glade.h:97 ../ui/prefs.gtkbuilder.h:89
 msgid "Change Book Combo"
 msgstr "Roletové menu Zmeniť knihu"
 
-#: ../ui/prefs.glade.h:98 ../ui/search-dialog.glade.h:22
+#: ../ui/prefs.glade.h:98 ../ui/prefs.gtkbuilder.h:90
+#: ../ui/search-dialog.glade.h:22 ../ui/search-dialog.gtkbuilder.h:23
 msgid "<b>Modules</b>"
 msgstr "<b>Moduly</b>"
 
-#: ../ui/prefs.glade.h:99 ../ui/search-dialog.glade.h:86
+#: ../ui/prefs.glade.h:99 ../ui/prefs.gtkbuilder.h:91
+#: ../ui/search-dialog.glade.h:86 ../ui/search-dialog.gtkbuilder.h:86
 msgid "Clear all modules from the list"
 msgstr "Vyčistiť všetky moduly zo zoznamu"
 
-#: ../ui/prefs.glade.h:100 ../ui/search-dialog.glade.h:87
+#: ../ui/prefs.glade.h:100 ../ui/prefs.gtkbuilder.h:92
+#: ../ui/search-dialog.glade.h:87 ../ui/search-dialog.gtkbuilder.h:87
 msgid "Clear Modules from List Button"
 msgstr "Tlačidlo Vyčistiť moduly zo zoznamu"
 
-#: ../ui/prefs.glade.h:101 ../ui/search-dialog.glade.h:88
+#: ../ui/prefs.glade.h:101 ../ui/prefs.gtkbuilder.h:93
+#: ../ui/search-dialog.glade.h:88 ../ui/search-dialog.gtkbuilder.h:88
 msgid "Remove the selected module from the list"
 msgstr "Odstrániť označený modul zo zoznamu"
 
-#: ../ui/prefs.glade.h:102 ../ui/search-dialog.glade.h:89
+#: ../ui/prefs.glade.h:102 ../ui/prefs.gtkbuilder.h:94
+#: ../ui/search-dialog.glade.h:89 ../ui/search-dialog.gtkbuilder.h:89
 msgid "Delete Selected Module From List Button"
 msgstr "Tlačidlo Vymazať zvolený modul zo zoznamu"
 
-#: ../ui/prefs.glade.h:103
+#: ../ui/prefs.glade.h:103 ../ui/prefs.gtkbuilder.h:95
 #, fuzzy
 msgid "Open a dialog to select modules"
 msgstr "Otvoriť dialóg pre pridanie vybraných modulov do zoznam"
 
-#: ../ui/prefs.glade.h:104 ../ui/search-dialog.glade.h:91
+#: ../ui/prefs.glade.h:104 ../ui/prefs.gtkbuilder.h:96
+#: ../ui/search-dialog.glade.h:91 ../ui/search-dialog.gtkbuilder.h:91
 msgid "Add Modules"
 msgstr "Pridať moduly"
 
-#: ../ui/prefs.glade.h:105 ../ui/search-dialog.glade.h:92
+#: ../ui/prefs.glade.h:105 ../ui/prefs.gtkbuilder.h:97
+#: ../ui/search-dialog.glade.h:92 ../ui/search-dialog.gtkbuilder.h:92
 msgid "Open Selection Dialog Button"
 msgstr "Tlačidlo Otvoriť dialóg výberu"
 
-#: ../ui/prefs.glade.h:106
+#: ../ui/prefs.glade.h:106 ../ui/prefs.gtkbuilder.h:98
 msgid "Modules Parallel"
 msgstr "Paralelné moduly"
 
-#: ../ui/prefs.glade.h:107
+#: ../ui/prefs.glade.h:107 ../ui/prefs.gtkbuilder.h:99
 msgid "<b>Special Purpose Modules</b>"
 msgstr "<b>Moduly so špeciálnymi cieľmi</b>"
 
-#: ../ui/prefs.glade.h:108
+#: ../ui/prefs.glade.h:108 ../ui/prefs.gtkbuilder.h:100
 msgid "Daily Devotional"
 msgstr "Denné zamyslenie"
 
-#: ../ui/prefs.glade.h:109
+#: ../ui/prefs.glade.h:109 ../ui/prefs.gtkbuilder.h:101
 msgid "Daily Devotional Combo"
 msgstr "Roletové menu Denné zamyslenie"
 
-#: ../ui/prefs.glade.h:110
+#: ../ui/prefs.glade.h:110 ../ui/prefs.gtkbuilder.h:102
 msgid "Hebrew Lexicon"
 msgstr "Hebrejský lexikón"
 
-#: ../ui/prefs.glade.h:111
+#: ../ui/prefs.glade.h:111 ../ui/prefs.gtkbuilder.h:103
 msgid "Hebrew Lexicon Combo"
 msgstr "Roletové menu Hebrejský Lexikón"
 
-#: ../ui/prefs.glade.h:112
+#: ../ui/prefs.glade.h:112 ../ui/prefs.gtkbuilder.h:104
 msgid "Greek Lexicon"
 msgstr "Grécky lexikón"
 
-#: ../ui/prefs.glade.h:113
+#: ../ui/prefs.glade.h:113 ../ui/prefs.gtkbuilder.h:105
 msgid "Greek Lexicon Combo"
 msgstr "Roletové menu Grécky Lexikón"
 
-#: ../ui/prefs.glade.h:114
+#: ../ui/prefs.glade.h:114 ../ui/prefs.gtkbuilder.h:106
 msgid "Default Dictionary"
 msgstr "Štandardný slovník"
 
-#: ../ui/prefs.glade.h:115
+#: ../ui/prefs.glade.h:115 ../ui/prefs.gtkbuilder.h:107
 msgid "Change Default Dictionary Combo"
 msgstr "Roletové menu Zmeniť štandardný slovník"
 
-#: ../ui/prefs.glade.h:116
+#: ../ui/prefs.glade.h:116 ../ui/prefs.gtkbuilder.h:108
 msgid "Personal Notes"
 msgstr "Osobné poznámky"
 
-#: ../ui/prefs.glade.h:117
+#: ../ui/prefs.glade.h:117 ../ui/prefs.gtkbuilder.h:109
 msgid "Change Personal Notes Combo"
 msgstr "Roletové menu Osobné poznámky"
 
-#: ../ui/prefs.glade.h:118
+#: ../ui/prefs.glade.h:118 ../ui/prefs.gtkbuilder.h:110
 msgid "Modules Misc"
 msgstr "Rôzne moduly"
 
-#: ../ui/prefs.glade.h:119 ../ui/search-dialog.glade.h:115
+#: ../ui/prefs.glade.h:119 ../ui/prefs.gtkbuilder.h:111
+#: ../ui/search-dialog.glade.h:115 ../ui/search-dialog.gtkbuilder.h:115
 msgid "Module Selection"
 msgstr "Výber modulu"
 
-#: ../ui/search-dialog.glade.h:1
+#: ../ui/prefs.gtkbuilder.h:112
+msgid "-2"
+msgstr ""
+
+#: ../ui/prefs.gtkbuilder.h:113
+#, fuzzy
+msgid "-1"
+msgstr "1"
+
+#: ../ui/prefs.gtkbuilder.h:115
+#, fuzzy
+msgid "+1"
+msgstr "1"
+
+#: ../ui/prefs.gtkbuilder.h:116
+msgid "+2"
+msgstr ""
+
+#: ../ui/prefs.gtkbuilder.h:117
+msgid "+3"
+msgstr ""
+
+#: ../ui/prefs.gtkbuilder.h:118
+msgid "+4"
+msgstr ""
+
+#: ../ui/prefs.gtkbuilder.h:119
+msgid "+5"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:1 ../ui/search-dialog.gtkbuilder.h:1
 msgid "Advanced Search"
 msgstr "Pokročilé hľadanie"
 
-#: ../ui/search-dialog.glade.h:2
+#: ../ui/search-dialog.glade.h:2 ../ui/search-dialog.gtkbuilder.h:2
 msgid "_Lucene Search Syntax"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:3
+#: ../ui/search-dialog.glade.h:3 ../ui/search-dialog.gtkbuilder.h:3
 msgid ""
 "Open a brief explanation of the syntax used for optimized \"lucene\" "
 "searches."
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:4
+#: ../ui/search-dialog.glade.h:4 ../ui/search-dialog.gtkbuilder.h:4
 #, fuzzy
 msgid "_Attribute Search"
 msgstr "Atribúty hľadania"
 
-#: ../ui/search-dialog.glade.h:5
+#: ../ui/search-dialog.glade.h:5 ../ui/search-dialog.gtkbuilder.h:5
 msgid "Open a brief explanation of attribute-based searches."
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:6
+#: ../ui/search-dialog.glade.h:6 ../ui/search-dialog.gtkbuilder.h:7
 msgid "for "
 msgstr "na "
 
-#: ../ui/search-dialog.glade.h:7
+#: ../ui/search-dialog.glade.h:7 ../ui/search-dialog.gtkbuilder.h:8
 msgid "Main Search Entry"
 msgstr "Položka Hlavné hľadanie"
 
-#: ../ui/search-dialog.glade.h:8
+#: ../ui/search-dialog.glade.h:8 ../ui/search-dialog.gtkbuilder.h:9
 msgid "Start/stop searching"
 msgstr "Spustiť/Zastaviť hľadanie"
 
-#: ../ui/search-dialog.glade.h:9
+#: ../ui/search-dialog.glade.h:9 ../ui/search-dialog.gtkbuilder.h:10
 msgid "Find Button"
 msgstr "Tlačidlo Hľadať"
 
-#: ../ui/search-dialog.glade.h:10
+#: ../ui/search-dialog.glade.h:10 ../ui/search-dialog.gtkbuilder.h:11
 msgid "Search Criteria Treeview"
 msgstr "Stromové zobrazenie Vyhľadávacie kritériá"
 
-#: ../ui/search-dialog.glade.h:11
+#: ../ui/search-dialog.glade.h:11 ../ui/search-dialog.gtkbuilder.h:12
 msgid "<b>Scope</b>"
 msgstr "<b>Záber</b>"
 
-#: ../ui/search-dialog.glade.h:12
+#: ../ui/search-dialog.glade.h:12 ../ui/search-dialog.gtkbuilder.h:14
 msgid "Search entire module"
 msgstr "Prehľadať celý modul"
 
-#: ../ui/search-dialog.glade.h:13
+#: ../ui/search-dialog.glade.h:13 ../ui/search-dialog.gtkbuilder.h:13
 msgid "Entire module"
 msgstr "Celý modul"
 
-#: ../ui/search-dialog.glade.h:14
+#: ../ui/search-dialog.glade.h:14 ../ui/search-dialog.gtkbuilder.h:15
 msgid "Entire module radiobutton"
 msgstr "Výberové pole Celý modul"
 
-#: ../ui/search-dialog.glade.h:15
+#: ../ui/search-dialog.glade.h:15 ../ui/search-dialog.gtkbuilder.h:17
 msgid "Use the results of the last search as the scope of the search"
 msgstr "Použiť výsledky posledného hľadania ako záber pre hľadanie"
 
-#: ../ui/search-dialog.glade.h:16
+#: ../ui/search-dialog.glade.h:16 ../ui/search-dialog.gtkbuilder.h:16
 msgid "Current results"
 msgstr "Aktuálne výsledky"
 
-#: ../ui/search-dialog.glade.h:17
+#: ../ui/search-dialog.glade.h:17 ../ui/search-dialog.gtkbuilder.h:18
 msgid "Current results radiobutton"
 msgstr "Výberové pole Aktuálne výsledky"
 
-#: ../ui/search-dialog.glade.h:18
+#: ../ui/search-dialog.glade.h:18 ../ui/search-dialog.gtkbuilder.h:20
 msgid "Use a custom range for the scope of the search"
 msgstr "Použiť používateľský záber pre vyhľadávanie"
 
-#: ../ui/search-dialog.glade.h:19
+#: ../ui/search-dialog.glade.h:19 ../ui/search-dialog.gtkbuilder.h:19
 msgid "Custom verse range"
 msgstr "Používateľský rozsah veršov"
 
-#: ../ui/search-dialog.glade.h:20
+#: ../ui/search-dialog.glade.h:20 ../ui/search-dialog.gtkbuilder.h:21
 msgid "Custom verse range radiobutton"
 msgstr "Výberové pole Použ. rozsah veršov"
 
-#: ../ui/search-dialog.glade.h:21
+#: ../ui/search-dialog.glade.h:21 ../ui/search-dialog.gtkbuilder.h:22
 msgid "Custom Range Selector Combo"
 msgstr "Roletová ponuka Výber použ. rozsahu"
 
-#: ../ui/search-dialog.glade.h:23
+#: ../ui/search-dialog.glade.h:23 ../ui/search-dialog.gtkbuilder.h:25
 msgid "Use a single module for the search"
 msgstr "Použiť jeden modul pre hľadanie"
 
-#: ../ui/search-dialog.glade.h:24
+#: ../ui/search-dialog.glade.h:24 ../ui/search-dialog.gtkbuilder.h:24
 msgid "Single module"
 msgstr "Jeden modul"
 
-#: ../ui/search-dialog.glade.h:25
+#: ../ui/search-dialog.glade.h:25 ../ui/search-dialog.gtkbuilder.h:26
 msgid "Single module radiobutton"
 msgstr "Výberové pole Jeden modul"
 
-#: ../ui/search-dialog.glade.h:26
+#: ../ui/search-dialog.glade.h:26 ../ui/search-dialog.gtkbuilder.h:28
 msgid "Use the current module list for the search"
 msgstr "Použiť aktuálny zoznam modulov pre hľadanie"
 
-#: ../ui/search-dialog.glade.h:27
+#: ../ui/search-dialog.glade.h:27 ../ui/search-dialog.gtkbuilder.h:27
 msgid "Module list"
 msgstr "Zoznam modulov"
 
-#: ../ui/search-dialog.glade.h:28
+#: ../ui/search-dialog.glade.h:28 ../ui/search-dialog.gtkbuilder.h:29
 msgid "Module list radiobutton"
 msgstr "Výberové pole Zoznam modulov"
 
-#: ../ui/search-dialog.glade.h:29
+#: ../ui/search-dialog.glade.h:29 ../ui/search-dialog.gtkbuilder.h:31
 msgid "Use a custom module list for the search"
 msgstr "Použiť používateľský zoznam modulov pre vyhľadávanie"
 
-#: ../ui/search-dialog.glade.h:30
+#: ../ui/search-dialog.glade.h:30 ../ui/search-dialog.gtkbuilder.h:30
 msgid "Custom module list"
 msgstr "Používateľský zoznam modulov"
 
-#: ../ui/search-dialog.glade.h:31
+#: ../ui/search-dialog.glade.h:31 ../ui/search-dialog.gtkbuilder.h:32
 msgid "Custom module list radiobutton"
 msgstr "Výberové pole Použ. zoznam modulov"
 
@@ -3329,11 +3891,11 @@ msgstr "Výberové pole Použ. zoznam modulov"
 msgid "Custom Module List Combo"
 msgstr "Roletová ponuka použ. zoznamu modulov"
 
-#: ../ui/search-dialog.glade.h:33
+#: ../ui/search-dialog.glade.h:33 ../ui/search-dialog.gtkbuilder.h:33
 msgid "<b>Search Type</b>"
 msgstr "<b>Typ hľadania</b>"
 
-#: ../ui/search-dialog.glade.h:34
+#: ../ui/search-dialog.glade.h:34 ../ui/search-dialog.gtkbuilder.h:35
 msgid ""
 "Fast, featureful, index-based search\n"
 "Indexes must have been built beforehand:\n"
@@ -3343,269 +3905,274 @@ msgstr ""
 "Indexy musia byť vopred vytvorené:\n"
 "Pozrite si funkcie Údržby v Správcovi modulov"
 
-#: ../ui/search-dialog.glade.h:37
+#: ../ui/search-dialog.glade.h:37 ../ui/search-dialog.gtkbuilder.h:34
 msgid "Optimized (\"Lucene\")"
 msgstr "Optimalizované (\"Lucene\")"
 
-#: ../ui/search-dialog.glade.h:38
+#: ../ui/search-dialog.glade.h:38 ../ui/search-dialog.gtkbuilder.h:38
 msgid "Optimized (\"Lucene\") radiobutton"
 msgstr "Výberové pole Optimalizované (\"Lucene\")"
 
-#: ../ui/search-dialog.glade.h:40
+#: ../ui/search-dialog.glade.h:40 ../ui/search-dialog.gtkbuilder.h:40
 msgid "Multi word radiobutton"
 msgstr "Výberové pole Viac slov"
 
-#: ../ui/search-dialog.glade.h:42
+#: ../ui/search-dialog.glade.h:42 ../ui/search-dialog.gtkbuilder.h:42
 msgid "Regular expression radiobutton"
 msgstr "Výberové pople Regulárny výraz"
 
-#: ../ui/search-dialog.glade.h:44
+#: ../ui/search-dialog.glade.h:44 ../ui/search-dialog.gtkbuilder.h:44
 msgid "Exact phrase radiobutton"
 msgstr "Výberové pole Presná fráza"
 
-#: ../ui/search-dialog.glade.h:45
+#: ../ui/search-dialog.glade.h:45 ../ui/search-dialog.gtkbuilder.h:46
 msgid "Make selections on the Attribute Search tab"
 msgstr "Vyberte si v karte Atribúty hľadania"
 
-#: ../ui/search-dialog.glade.h:46
+#: ../ui/search-dialog.glade.h:46 ../ui/search-dialog.gtkbuilder.h:45
 msgid "Attributes"
 msgstr "Atribúty"
 
-#: ../ui/search-dialog.glade.h:47
+#: ../ui/search-dialog.glade.h:47 ../ui/search-dialog.gtkbuilder.h:47
 msgid "Attributes radiobutton"
 msgstr "Výberové pole Atribúty"
 
-#: ../ui/search-dialog.glade.h:48
+#: ../ui/search-dialog.glade.h:48 ../ui/search-dialog.gtkbuilder.h:48
 msgid "<b>Options</b>"
 msgstr "<b>Možnosti</b>"
 
-#: ../ui/search-dialog.glade.h:50
+#: ../ui/search-dialog.glade.h:50 ../ui/search-dialog.gtkbuilder.h:50
 msgid "Match case checkbox"
 msgstr "Zaškrtávacie pole Veľkosť písmen"
 
-#: ../ui/search-dialog.glade.h:51
+#: ../ui/search-dialog.glade.h:51 ../ui/search-dialog.gtkbuilder.h:51
 msgid "Search  Criteria"
 msgstr "Vyhľadávacie kritériá"
 
-#: ../ui/search-dialog.glade.h:52
+#: ../ui/search-dialog.glade.h:52 ../ui/search-dialog.gtkbuilder.h:52
 msgid "Show in main window"
 msgstr "Zobraziť v hlavnom okne"
 
-#: ../ui/search-dialog.glade.h:53
+#: ../ui/search-dialog.glade.h:53 ../ui/search-dialog.gtkbuilder.h:53
 msgid "Save search results as bookmarks"
 msgstr "Uložiť výsledky hľadania ako záložky"
 
-#: ../ui/search-dialog.glade.h:54
+#: ../ui/search-dialog.glade.h:54 ../ui/search-dialog.gtkbuilder.h:54
 msgid "Export current search results"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:55
+#: ../ui/search-dialog.glade.h:55 ../ui/search-dialog.gtkbuilder.h:55
 msgid "Export"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:56
+#: ../ui/search-dialog.glade.h:56 ../ui/search-dialog.gtkbuilder.h:56
 msgid "Clear lists for new search"
 msgstr "Vyčistiť zoznam pre nové hľadanie"
 
-#: ../ui/search-dialog.glade.h:57
+#: ../ui/search-dialog.glade.h:57 ../ui/search-dialog.gtkbuilder.h:57
 msgid "<b>Found</b>"
 msgstr "<b>Nájdené</b>"
 
-#: ../ui/search-dialog.glade.h:58
+#: ../ui/search-dialog.glade.h:58 ../ui/search-dialog.gtkbuilder.h:58
 msgid "Result Summary Window"
 msgstr "Okno Sumárne výsledky"
 
-#: ../ui/search-dialog.glade.h:59
+#: ../ui/search-dialog.glade.h:59 ../ui/search-dialog.gtkbuilder.h:59
 msgid "Result Summary Table"
 msgstr "Tabuľka Sumárne výsledky"
 
-#: ../ui/search-dialog.glade.h:60
+#: ../ui/search-dialog.glade.h:60 ../ui/search-dialog.gtkbuilder.h:60
 msgid "<b>Search Results</b>"
 msgstr "<b>Výsledky hľadania</b>"
 
-#: ../ui/search-dialog.glade.h:61
+#: ../ui/search-dialog.glade.h:61 ../ui/search-dialog.gtkbuilder.h:61
 msgid "<b>Preview</b>"
 msgstr "<b>Náhľad</b>"
 
-#: ../ui/search-dialog.glade.h:62
+#: ../ui/search-dialog.glade.h:62 ../ui/search-dialog.gtkbuilder.h:62
 msgid "Results"
 msgstr "Výsledky"
 
-#: ../ui/search-dialog.glade.h:63
+#: ../ui/search-dialog.glade.h:63 ../ui/search-dialog.gtkbuilder.h:63
 msgid "Create new custom range"
 msgstr "Vytvoriť nový vlastný rozsah"
 
-#: ../ui/search-dialog.glade.h:64
+#: ../ui/search-dialog.glade.h:64 ../ui/search-dialog.gtkbuilder.h:64
 msgid "New Range Button"
 msgstr "Tlačidlo Nový rozsah"
 
-#: ../ui/search-dialog.glade.h:65
+#: ../ui/search-dialog.glade.h:65 ../ui/search-dialog.gtkbuilder.h:65
 msgid "Save custom range"
 msgstr "Uložiť používateľský rozsah"
 
-#: ../ui/search-dialog.glade.h:66
+#: ../ui/search-dialog.glade.h:66 ../ui/search-dialog.gtkbuilder.h:66
 msgid "Save Range Button"
 msgstr "Tlačidlo Uložiť rozsah"
 
-#: ../ui/search-dialog.glade.h:67
+#: ../ui/search-dialog.glade.h:67 ../ui/search-dialog.gtkbuilder.h:67
 msgid "Delete selected range"
 msgstr "Zmazať označený rozsah"
 
-#: ../ui/search-dialog.glade.h:68
+#: ../ui/search-dialog.glade.h:68 ../ui/search-dialog.gtkbuilder.h:68
 msgid "Delete Range Button"
 msgstr "Tlačidlo Zmazať rozsah"
 
-#: ../ui/search-dialog.glade.h:69
+#: ../ui/search-dialog.glade.h:69 ../ui/search-dialog.gtkbuilder.h:69
 msgid "<b>Ranges</b>"
 msgstr "<b>Rozsahy</b>"
 
-#: ../ui/search-dialog.glade.h:70
+#: ../ui/search-dialog.glade.h:70 ../ui/search-dialog.gtkbuilder.h:70
 msgid "<b>Range Name</b>"
 msgstr "<b>Názov rozsahu</b>"
 
-#: ../ui/search-dialog.glade.h:71
+#: ../ui/search-dialog.glade.h:71 ../ui/search-dialog.gtkbuilder.h:71
 msgid "Range Name Entry"
 msgstr "Položka Názov rozsahu"
 
-#: ../ui/search-dialog.glade.h:72
+#: ../ui/search-dialog.glade.h:72 ../ui/search-dialog.gtkbuilder.h:72
 msgid "<b>Range Definition</b>"
 msgstr "<b>Definícia rozsahu</b>"
 
-#: ../ui/search-dialog.glade.h:73
+#: ../ui/search-dialog.glade.h:73 ../ui/search-dialog.gtkbuilder.h:73
 msgid "Range Definition Entry"
 msgstr "Položka Definícia rozsahu"
 
-#: ../ui/search-dialog.glade.h:74
+#: ../ui/search-dialog.glade.h:74 ../ui/search-dialog.gtkbuilder.h:74
 msgid "e.g. Matt-John;Rev4"
 msgstr "napr. Mat-Ján;Zjv4"
 
-#: ../ui/search-dialog.glade.h:75
+#: ../ui/search-dialog.glade.h:75 ../ui/search-dialog.gtkbuilder.h:75
 msgid "Custom Range Preview"
 msgstr "Náhľad na použ. rozsah"
 
-#: ../ui/search-dialog.glade.h:76
+#: ../ui/search-dialog.glade.h:76 ../ui/search-dialog.gtkbuilder.h:76
 msgid "Custom Verse Ranges"
 msgstr "Použ. rozsahy veršov"
 
-#: ../ui/search-dialog.glade.h:77
+#: ../ui/search-dialog.glade.h:77 ../ui/search-dialog.gtkbuilder.h:77
 msgid "Create a new module list"
 msgstr "Vytvoriť nový zoznam modulov"
 
-#: ../ui/search-dialog.glade.h:78
+#: ../ui/search-dialog.glade.h:78 ../ui/search-dialog.gtkbuilder.h:78
 msgid "New Custom Module List Button"
 msgstr "Tlačidlo Nový použ. zoznam modulov"
 
-#: ../ui/search-dialog.glade.h:79
+#: ../ui/search-dialog.glade.h:79 ../ui/search-dialog.gtkbuilder.h:79
 msgid "Save the module list"
 msgstr "Uložiť zoznam modulov"
 
-#: ../ui/search-dialog.glade.h:80
+#: ../ui/search-dialog.glade.h:80 ../ui/search-dialog.gtkbuilder.h:80
 msgid "Save Custom Module List Button"
 msgstr "Tlačidlo Uložiť použ. zoznam modulov"
 
-#: ../ui/search-dialog.glade.h:81
+#: ../ui/search-dialog.glade.h:81 ../ui/search-dialog.gtkbuilder.h:81
 msgid "Delete the selected list"
 msgstr "Zmazať označený zoznam"
 
-#: ../ui/search-dialog.glade.h:82
+#: ../ui/search-dialog.glade.h:82 ../ui/search-dialog.gtkbuilder.h:82
 msgid "Clear Custom Module List Button"
 msgstr "Tlačidlo Vyčistiť zoznam použ. modulov"
 
-#: ../ui/search-dialog.glade.h:83
+#: ../ui/search-dialog.glade.h:83 ../ui/search-dialog.gtkbuilder.h:83
 msgid "<b>Module Lists</b>"
 msgstr "<b>Zoznam modulov</b>"
 
-#: ../ui/search-dialog.glade.h:84
+#: ../ui/search-dialog.glade.h:84 ../ui/search-dialog.gtkbuilder.h:84
 msgid "<b>List Name</b>"
 msgstr "<b>Názov zoznamu</b>"
 
-#: ../ui/search-dialog.glade.h:85
+#: ../ui/search-dialog.glade.h:85 ../ui/search-dialog.gtkbuilder.h:85
 msgid "Custom Module List Name Entry"
 msgstr "Položka Názov použ. zoznamu modulov"
 
-#: ../ui/search-dialog.glade.h:90
+#: ../ui/search-dialog.glade.h:90 ../ui/search-dialog.gtkbuilder.h:90
 msgid "Open a dialog to select modules to add to the list"
 msgstr "Otvoriť dialóg pre pridanie vybraných modulov do zoznam"
 
-#: ../ui/search-dialog.glade.h:93
+#: ../ui/search-dialog.glade.h:93 ../ui/search-dialog.gtkbuilder.h:93
 msgid "Custom Module Lists"
 msgstr "Zoznam použ. modulov"
 
-#: ../ui/search-dialog.glade.h:94
+#: ../ui/search-dialog.glade.h:94 ../ui/search-dialog.gtkbuilder.h:94
 msgid "<b>Attribute</b>"
 msgstr "<b>Atribút</b>"
 
-#: ../ui/search-dialog.glade.h:95
+#: ../ui/search-dialog.glade.h:95 ../ui/search-dialog.gtkbuilder.h:96
 msgid "Search for Strongs Numbers like G4442 or H1121"
 msgstr "Hľadať Strongové čísla ako G4442 alebo H1121"
 
-#: ../ui/search-dialog.glade.h:96
+#: ../ui/search-dialog.glade.h:96 ../ui/search-dialog.gtkbuilder.h:95
 msgid "Strongs Numbers"
 msgstr "Strongové čísla"
 
-#: ../ui/search-dialog.glade.h:97
+#: ../ui/search-dialog.glade.h:97 ../ui/search-dialog.gtkbuilder.h:97
 msgid "Strongs Numbers radiobutton"
 msgstr "Výberové pole Strongové čísla"
 
-#: ../ui/search-dialog.glade.h:98
+#: ../ui/search-dialog.glade.h:98 ../ui/search-dialog.gtkbuilder.h:99
 msgid "Search for Morphological tags"
 msgstr "Hľadať morfologické značky"
 
-#: ../ui/search-dialog.glade.h:100
+#: ../ui/search-dialog.glade.h:100 ../ui/search-dialog.gtkbuilder.h:100
 msgid "Morphological Tags radiobutton"
 msgstr "Výberové pole Morfologické značky"
 
-#: ../ui/search-dialog.glade.h:101
+#: ../ui/search-dialog.glade.h:101 ../ui/search-dialog.gtkbuilder.h:102
 msgid "Search in footnotes"
 msgstr "Hľadať v poznámkach pod čiarou"
 
-#: ../ui/search-dialog.glade.h:103
+#: ../ui/search-dialog.glade.h:103 ../ui/search-dialog.gtkbuilder.h:103
 msgid "Footnotes radiobutton"
 msgstr "Výberové pole Poznámky pod čiarou"
 
-#: ../ui/search-dialog.glade.h:104
+#: ../ui/search-dialog.glade.h:104 ../ui/search-dialog.gtkbuilder.h:104
 msgid "<b>Results Display Options</b>"
 msgstr "<b>Nastavenie výsledného zobrazenia</b>"
 
-#: ../ui/search-dialog.glade.h:105
+#: ../ui/search-dialog.glade.h:105 ../ui/search-dialog.gtkbuilder.h:106
 msgid "In modules that have Strong's Numbers"
 msgstr "V moduloch, ktoré majú Strongové čísla"
 
-#: ../ui/search-dialog.glade.h:106
+#: ../ui/search-dialog.glade.h:106 ../ui/search-dialog.gtkbuilder.h:105
 msgid "Show Strong's Numbers"
 msgstr "Zobraziť Strongové čísla"
 
-#: ../ui/search-dialog.glade.h:107
+#: ../ui/search-dialog.glade.h:107 ../ui/search-dialog.gtkbuilder.h:107
 msgid "Show Strong's Numbers checkbox"
 msgstr "Zaškrtávacie pole Zobraziť Strongové čísla"
 
-#: ../ui/search-dialog.glade.h:108
+#: ../ui/search-dialog.glade.h:108 ../ui/search-dialog.gtkbuilder.h:109
 msgid "In modules that have Morphological Tags"
 msgstr "V moduloch, ktoré majú morfologické značky"
 
-#: ../ui/search-dialog.glade.h:109
+#: ../ui/search-dialog.glade.h:109 ../ui/search-dialog.gtkbuilder.h:108
 msgid "Show Morphological Tags"
 msgstr "Zobraziť morfologické značky"
 
-#: ../ui/search-dialog.glade.h:110
+#: ../ui/search-dialog.glade.h:110 ../ui/search-dialog.gtkbuilder.h:110
 msgid "Show Morphological Tags checkbox"
 msgstr "Zaškrtávacie pole Zobraziť morfologické značky"
 
-#: ../ui/search-dialog.glade.h:111
+#: ../ui/search-dialog.glade.h:111 ../ui/search-dialog.gtkbuilder.h:112
 msgid "In modules that have Footnotes"
 msgstr "V moduloch, ktoré majú poznámky pod čiarou"
 
-#: ../ui/search-dialog.glade.h:112
+#: ../ui/search-dialog.glade.h:112 ../ui/search-dialog.gtkbuilder.h:111
 msgid "Show Footnotes"
 msgstr "Zobraziť poznámky pod čiarou"
 
-#: ../ui/search-dialog.glade.h:113
+#: ../ui/search-dialog.glade.h:113 ../ui/search-dialog.gtkbuilder.h:113
 msgid "Show Footnotes checkbox"
 msgstr "Zaškrtávacie pole Zobraziť poznámky pod čiarou"
 
-#: ../ui/search-dialog.glade.h:114
+#: ../ui/search-dialog.glade.h:114 ../ui/search-dialog.gtkbuilder.h:114
 msgid "Attribute Search"
 msgstr "Atribúty hľadania"
+
+#: ../ui/search-dialog.gtkbuilder.h:6
+#, fuzzy
+msgid "<b>search module</b>"
+msgstr "<b>Typ hľadania</b>"
 
 #: ../ui/xi-export-bookmarks.glade.h:1
 msgid "Export Bookmark Folder"
@@ -3639,11 +4206,11 @@ msgstr ""
 msgid "gtk-ok"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:2
+#: ../ui/xi-menus.glade.h:2 ../ui/xi-menus.gtkbuilder.h:2
 msgid "Open Study_pad"
 msgstr "Otvoriť _poznámkový blok"
 
-#: ../ui/xi-menus.glade.h:3
+#: ../ui/xi-menus.glade.h:3 ../ui/xi-menus.gtkbuilder.h:3
 msgid "_Open Session"
 msgstr "_Otvoriť reláciu"
 
@@ -3651,7 +4218,7 @@ msgstr "_Otvoriť reláciu"
 msgid "Open a saved tab settings collection"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:5
+#: ../ui/xi-menus.glade.h:5 ../ui/xi-menus.gtkbuilder.h:4
 msgid "_Save Session"
 msgstr "_Uložiť sedenie"
 
@@ -3659,7 +4226,7 @@ msgstr "_Uložiť sedenie"
 msgid "Save this collection of tab settings"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:7
+#: ../ui/xi-menus.glade.h:7 ../ui/xi-menus.gtkbuilder.h:5
 #, fuzzy
 msgid "_New Prayerlist/Journal"
 msgstr "Modlitebný zoznam/Denník"
@@ -3669,11 +4236,7 @@ msgstr "Modlitebný zoznam/Denník"
 msgid "Create a new journal or prayerlist from a template"
 msgstr "Vytvoriť modlitebný zoznam"
 
-#: ../ui/xi-menus.glade.h:9
-msgid "_Edit"
-msgstr "_Upraviť"
-
-#: ../ui/xi-menus.glade.h:10
+#: ../ui/xi-menus.glade.h:10 ../ui/xi-menus.gtkbuilder.h:7
 msgid "_Search"
 msgstr "_Vyhľadávanie"
 
@@ -3681,7 +4244,7 @@ msgstr "_Vyhľadávanie"
 msgid "Bring the simple sidebar search forward"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:12
+#: ../ui/xi-menus.glade.h:12 ../ui/xi-menus.gtkbuilder.h:8
 msgid "_Advanced Search"
 msgstr "_Pokročilé vyhľadávanie"
 
@@ -3689,7 +4252,7 @@ msgstr "_Pokročilé vyhľadávanie"
 msgid "Open the advanced search dialog, to run complex queries"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:14
+#: ../ui/xi-menus.glade.h:14 ../ui/xi-menus.gtkbuilder.h:9
 msgid "_Preferences"
 msgstr "_Nastavenia"
 
@@ -3697,11 +4260,11 @@ msgstr "_Nastavenia"
 msgid "Use module manager to install and remove Sword modules"
 msgstr "Použite správcu modulov na inštaláciu a odstránenie Sword modulov"
 
-#: ../ui/xi-menus.glade.h:16
+#: ../ui/xi-menus.glade.h:16 ../ui/xi-menus.gtkbuilder.h:10
 msgid "_Module Manager"
 msgstr "Správca _modulov"
 
-#: ../ui/xi-menus.glade.h:18
+#: ../ui/xi-menus.glade.h:18 ../ui/xi-menus.gtkbuilder.h:12
 msgid "Preview _Daily Devotion"
 msgstr ""
 
@@ -3709,23 +4272,23 @@ msgstr ""
 msgid "Show today's entry from your selected daily devotional in the previewer"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:20
+#: ../ui/xi-menus.glade.h:20 ../ui/xi-menus.gtkbuilder.h:13
 msgid "_Bible"
 msgstr "_Biblia"
 
-#: ../ui/xi-menus.glade.h:21
+#: ../ui/xi-menus.glade.h:21 ../ui/xi-menus.gtkbuilder.h:14
 msgid "_Preview"
 msgstr "_Náhľad"
 
-#: ../ui/xi-menus.glade.h:22
+#: ../ui/xi-menus.glade.h:22 ../ui/xi-menus.gtkbuilder.h:15
 msgid "_Commentary/Book"
 msgstr "_Komentár/Kniha"
 
-#: ../ui/xi-menus.glade.h:23
+#: ../ui/xi-menus.glade.h:23 ../ui/xi-menus.gtkbuilder.h:16
 msgid "Dictionar_y"
 msgstr "S_lovník"
 
-#: ../ui/xi-menus.glade.h:24
+#: ../ui/xi-menus.glade.h:24 ../ui/xi-menus.gtkbuilder.h:17
 msgid "L_ink Tabs"
 msgstr "Prepoj_iť karty"
 
@@ -3733,7 +4296,7 @@ msgstr "Prepoj_iť karty"
 msgid "Make all tabs' Bibles navigate together"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:26
+#: ../ui/xi-menus.glade.h:26 ../ui/xi-menus.gtkbuilder.h:18
 msgid "_Read Aloud"
 msgstr "P_rečítať nahlas"
 
@@ -3741,7 +4304,7 @@ msgstr "P_rečítať nahlas"
 msgid "Turn on text-to-speech reading of Bible verses as they are selected"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:28
+#: ../ui/xi-menus.glade.h:28 ../ui/xi-menus.gtkbuilder.h:19
 msgid "Show Verse _Numbers"
 msgstr "Zobraziť čísla veršov"
 
@@ -3749,7 +4312,7 @@ msgstr "Zobraziť čísla veršov"
 msgid "Display verse numbers in the text"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:30
+#: ../ui/xi-menus.glade.h:30 ../ui/xi-menus.gtkbuilder.h:20
 msgid "_Highlight Current Verse"
 msgstr "_Zvýrazniť aktuálny verš"
 
@@ -3758,7 +4321,7 @@ msgstr "_Zvýrazniť aktuálny verš"
 msgid "Apply a high-contrast highlight to the current verse"
 msgstr "Použiť vysoko kontrastné zvýraznenie aktuálneho verša"
 
-#: ../ui/xi-menus.glade.h:32
+#: ../ui/xi-menus.glade.h:32 ../ui/xi-menus.gtkbuilder.h:21
 msgid "_Attach/Detach Sidebar"
 msgstr "_Pripojiť/Odpojiť bočný panel"
 
@@ -3767,7 +4330,7 @@ msgstr "_Pripojiť/Odpojiť bočný panel"
 msgid "Operate the sidebar as a separate window"
 msgstr "Otvoriť v samostatnom okne"
 
-#: ../ui/xi-menus.glade.h:34
+#: ../ui/xi-menus.glade.h:34 ../ui/xi-menus.gtkbuilder.h:22
 msgid "_Show/Hide Attached Sidebar"
 msgstr ""
 
@@ -3776,7 +4339,7 @@ msgstr ""
 msgid "Remove the sidebar entirely from view"
 msgstr "Odstrániť označený priečinok"
 
-#: ../ui/xi-menus.glade.h:36
+#: ../ui/xi-menus.glade.h:36 ../ui/xi-menus.gtkbuilder.h:23
 msgid "Show Parallel View in a _Tab"
 msgstr "Zobraziť paralelné zobrazenie v kar_te"
 
@@ -3784,7 +4347,7 @@ msgstr "Zobraziť paralelné zobrazenie v kar_te"
 msgid "Provide the full-chapter parallel Bible window as another tab"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:38
+#: ../ui/xi-menus.glade.h:38 ../ui/xi-menus.gtkbuilder.h:24
 msgid "Show Previe_wer in the Sidebar"
 msgstr "Zobraziť náhľad v bočnom panely"
 
@@ -3792,11 +4355,7 @@ msgstr "Zobraziť náhľad v bočnom panely"
 msgid "Select Previewer position between sidebar or beneath Bible"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:40
-msgid "_Help"
-msgstr "_Pomocník"
-
-#: ../ui/xi-menus.glade.h:41
+#: ../ui/xi-menus.glade.h:41 ../ui/xi-menus.gtkbuilder.h:26
 msgid "_Contents"
 msgstr "_Obsah"
 
@@ -3804,7 +4363,7 @@ msgstr "_Obsah"
 msgid "Open the help viewer on the Xiphos manual"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:43
+#: ../ui/xi-menus.glade.h:43 ../ui/xi-menus.gtkbuilder.h:27
 msgid "_Mailing List"
 msgstr "E-mailová konferencia"
 
@@ -3812,7 +4371,7 @@ msgstr "E-mailová konferencia"
 msgid "Open a browser on the users' mailing list webpage"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:45
+#: ../ui/xi-menus.glade.h:45 ../ui/xi-menus.gtkbuilder.h:28
 msgid "_Live Chat"
 msgstr "On_line komunikácia (chat)"
 
@@ -3820,7 +4379,7 @@ msgstr "On_line komunikácia (chat)"
 msgid "Open a browser on an interface to live IRC chat"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:47
+#: ../ui/xi-menus.glade.h:47 ../ui/xi-menus.gtkbuilder.h:29
 msgid "_Report Bug"
 msgstr "_Nahlásiť chybu"
 
@@ -3828,7 +4387,7 @@ msgstr "_Nahlásiť chybu"
 msgid "Open a browser on our bug tracker"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:49
+#: ../ui/xi-menus.glade.h:49 ../ui/xi-menus.gtkbuilder.h:30
 msgid "About _Translation"
 msgstr "O p_reklade"
 
@@ -3836,7 +4395,7 @@ msgstr "O p_reklade"
 msgid "Learn about translating the Xiphos interface to other languages"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:51
+#: ../ui/xi-menus.glade.h:51 ../ui/xi-menus.gtkbuilder.h:31
 msgid "_About The SWORD Project"
 msgstr "_O projekt The SWORD Project"
 
@@ -3844,7 +4403,7 @@ msgstr "_O projekt The SWORD Project"
 msgid "Learn about The Sword Project, of which Xiphos is one application"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:53
+#: ../ui/xi-menus.glade.h:53 ../ui/xi-menus.gtkbuilder.h:32
 msgid "About _Xiphos"
 msgstr "O aplikácií _Xiphos"
 
@@ -3853,32 +4412,32 @@ msgstr "O aplikácií _Xiphos"
 msgid "Learn about Xiphos"
 msgstr "O aplikácií _Xiphos"
 
-#: ../ui/xi-menus.glade.h:57
+#: ../ui/xi-menus.glade.h:57 ../ui/xi-menus-popup.gtkbuilder.h:36
 msgid "Annotate Verse"
 msgstr "Anotovať verš"
 
-#: ../ui/xi-menus.glade.h:60
+#: ../ui/xi-menus.glade.h:60 ../ui/xi-menus-popup.gtkbuilder.h:39
 msgid "Open Module"
 msgstr "Otvoriť modul"
 
-#: ../ui/xi-menus.glade.h:62
+#: ../ui/xi-menus.glade.h:62 ../ui/xi-menus-popup.gtkbuilder.h:40
 msgid "Note"
 msgstr "Poznámka"
 
-#: ../ui/xi-menus.glade.h:63
+#: ../ui/xi-menus.glade.h:63 ../ui/xi-menus-popup.gtkbuilder.h:41
 msgid "Open in editor"
 msgstr "Otvoriť v editore"
 
-#: ../ui/xi-menus.glade.h:65
+#: ../ui/xi-menus.glade.h:65 ../ui/xi-menus-popup.gtkbuilder.h:43
 #, fuzzy
 msgid "Verse Per Line"
 msgstr "Zobraziť _verše na samostatných riadkoch"
 
-#: ../ui/xi-menus.glade.h:72
+#: ../ui/xi-menus.glade.h:72 ../ui/xi-menus-popup.gtkbuilder.h:50
 msgid "Scripture Cross-references"
 msgstr "Krížové referencie Písma"
 
-#: ../ui/xi-menus.glade.h:73
+#: ../ui/xi-menus.glade.h:73 ../ui/xi-menus-popup.gtkbuilder.h:51
 msgid "Footnote/Cross-ref Markers"
 msgstr ""
 
@@ -3886,44 +4445,44 @@ msgstr ""
 msgid "Show non-anonymous markers e.g. \"*n23\""
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:79
+#: ../ui/xi-menus.glade.h:79 ../ui/xi-menus-popup.gtkbuilder.h:56
 msgid "Variants"
 msgstr "Varianty"
 
-#: ../ui/xi-menus.glade.h:83
+#: ../ui/xi-menus.glade.h:83 ../ui/xi-menus-popup.gtkbuilder.h:60
 msgid "Image Content"
 msgstr "Obsah obrázka"
 
-#: ../ui/xi-menus.glade.h:84
+#: ../ui/xi-menus.glade.h:84 ../ui/xi-menus-popup.gtkbuilder.h:61
 msgid "Respect Font Faces"
 msgstr "Rešpektovať písma"
 
-#: ../ui/xi-menus.glade.h:85
+#: ../ui/xi-menus.glade.h:85 ../ui/xi-menus-popup.gtkbuilder.h:62
 msgid "Commentary by Chapter"
 msgstr "Komentár podľa kapitoly"
 
-#: ../ui/xi-menus.glade.h:86
+#: ../ui/xi-menus.glade.h:86 ../ui/xi-menus-popup.gtkbuilder.h:63
 #, fuzzy
 msgid "Doublespace"
 msgstr "Dv_ojité riadkovanie textu"
 
-#: ../ui/xi-menus.glade.h:87
+#: ../ui/xi-menus.glade.h:87 ../ui/xi-menus-popup.gtkbuilder.h:64
 msgid "Lookup Selection"
 msgstr "Hľadať výber"
 
-#: ../ui/xi-menus.glade.h:88
+#: ../ui/xi-menus.glade.h:88 ../ui/xi-menus-popup.gtkbuilder.h:65
 msgid "Use Current Dictionary"
 msgstr "Použiť štandardný slovník"
 
-#: ../ui/xi-menus.glade.h:89
+#: ../ui/xi-menus.glade.h:89 ../ui/xi-menus-popup.gtkbuilder.h:66
 msgid "Browse in BibleMap.org"
 msgstr "Prezerať v BibleMap.org"
 
-#: ../ui/xi-menus.glade.h:90
+#: ../ui/xi-menus.glade.h:90 ../ui/xi-menus-popup.gtkbuilder.h:67
 msgid "Unlock This Module"
 msgstr "Odomknúť tento modul"
 
-#: ../ui/xi-menus.glade.h:91
+#: ../ui/xi-menus.glade.h:91 ../ui/xi-menus-popup.gtkbuilder.h:68
 msgid "Display Book Heading"
 msgstr "Zobraziť nadpis knihy"
 
@@ -3931,188 +4490,184 @@ msgstr "Zobraziť nadpis knihy"
 msgid "Display Chapter Heading"
 msgstr "Zobraziť nadpis kapitoly"
 
-#: ../ui/xi-menus.glade.h:93
+#: ../ui/xi-menus.glade.h:93 ../ui/xi-menus-popup.gtkbuilder.h:69
 msgid "Rename Pers.Comm."
 msgstr "Premenovať Osobné komentáre"
 
-#: ../ui/xi-menus.glade.h:94
+#: ../ui/xi-menus.glade.h:94 ../ui/xi-menus-popup.gtkbuilder.h:70
 msgid "Dump Pers.Comm."
 msgstr "Exportovať osobné komentáre"
 
-#: ../ui/xi-menus.glade.h:95
+#: ../ui/xi-menus.glade.h:95 ../ui/xi-menus-popup.gtkbuilder.h:71
 msgid "Read Selection Aloud"
 msgstr "Prečítať nahlas označené"
 
-#: ../ui/xi-menus.glade.h:96
+#: ../ui/xi-menus.glade.h:96 ../ui/xi-menus-popup.gtkbuilder.h:85
 msgid "Save these results as a single bookmark"
 msgstr "Uložiť tieto výsledky ako jednu záložku"
 
-#: ../ui/xi-menus.glade.h:97
+#: ../ui/xi-menus.glade.h:97 ../ui/xi-menus-popup.gtkbuilder.h:84
 msgid "Save list as a single bookmark"
 msgstr "Uložiť zoznam ako jednu záložku"
 
-#: ../ui/xi-menus.glade.h:98
+#: ../ui/xi-menus.glade.h:98 ../ui/xi-menus-popup.gtkbuilder.h:87
 msgid "Save these results as a series of bookmarks in their own folder"
 msgstr "Uložiť tieto výsledky ako sériu záložiek v ich vlastnom priečinku"
 
-#: ../ui/xi-menus.glade.h:99
+#: ../ui/xi-menus.glade.h:99 ../ui/xi-menus-popup.gtkbuilder.h:86
 msgid "Save list as a series of bookmarks"
 msgstr "Uložiť zoznam ako sériu záložiek"
 
-#: ../ui/xi-menus.glade.h:100
+#: ../ui/xi-menus.glade.h:100 ../ui/xi-menus-popup.gtkbuilder.h:88
 msgid "Export List"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:101
+#: ../ui/xi-menus.glade.h:101 ../ui/xi-menus-popup.gtkbuilder.h:2
 msgid "Open this bookmark in a new tab"
 msgstr "Otvoriť túto záložku v novej karte"
 
-#: ../ui/xi-menus.glade.h:102
+#: ../ui/xi-menus.glade.h:102 ../ui/xi-menus-popup.gtkbuilder.h:1
 msgid "Open in new tab"
 msgstr "Otvoriť v novej karte"
 
-#: ../ui/xi-menus.glade.h:103
+#: ../ui/xi-menus.glade.h:103 ../ui/xi-menus-popup.gtkbuilder.h:4
 msgid "Open this bookmark in a dialog"
 msgstr "Otvoriť túto záložku v dialógu"
 
-#: ../ui/xi-menus.glade.h:104
+#: ../ui/xi-menus.glade.h:104 ../ui/xi-menus-popup.gtkbuilder.h:3
 msgid "Open in a dialog"
 msgstr "Otvoriť v dialógu"
 
-#: ../ui/xi-menus.glade.h:105
+#: ../ui/xi-menus.glade.h:105 ../ui/xi-menus-popup.gtkbuilder.h:6
 msgid "Add new folder to selected folder"
 msgstr "Pridať nový priečinok do vybraného priečinku"
 
-#: ../ui/xi-menus.glade.h:107
+#: ../ui/xi-menus.glade.h:107 ../ui/xi-menus-popup.gtkbuilder.h:8
 msgid "Insert new bookmark here"
 msgstr "Sem vložiť novú záložku"
 
-#: ../ui/xi-menus.glade.h:108
+#: ../ui/xi-menus.glade.h:108 ../ui/xi-menus-popup.gtkbuilder.h:7
 msgid "Insert Bookmark"
 msgstr "Vložiť záložku"
 
-#: ../ui/xi-menus.glade.h:109
+#: ../ui/xi-menus.glade.h:109 ../ui/xi-menus-popup.gtkbuilder.h:10
 msgid "Edit bookmark item"
 msgstr "Upraviť položku záložky"
 
-#: ../ui/xi-menus.glade.h:110
+#: ../ui/xi-menus.glade.h:110 ../ui/xi-menus-popup.gtkbuilder.h:9
 msgid "_Edit Item"
 msgstr "_Upraviť položku"
 
-#: ../ui/xi-menus.glade.h:111
+#: ../ui/xi-menus.glade.h:111 ../ui/xi-menus-popup.gtkbuilder.h:12
 msgid "Delete item"
 msgstr "Zmazať položku"
 
-#: ../ui/xi-menus.glade.h:112
-msgid "Delete Item"
-msgstr "Zmazať položku"
-
-#: ../ui/xi-menus.glade.h:113
+#: ../ui/xi-menus.glade.h:113 ../ui/xi-menus-popup.gtkbuilder.h:14
 msgid "Expand all Bookmarks groups"
 msgstr "Rozbaliť všetky skupiny záložiek"
 
-#: ../ui/xi-menus.glade.h:114
+#: ../ui/xi-menus.glade.h:114 ../ui/xi-menus-popup.gtkbuilder.h:13
 msgid "Expand All"
 msgstr "Všetko rozbaliť"
 
-#: ../ui/xi-menus.glade.h:115
+#: ../ui/xi-menus.glade.h:115 ../ui/xi-menus-popup.gtkbuilder.h:16
 msgid "Collapse all Bookmarks groups"
 msgstr "Zbaliť všetky skupiny záložiek"
 
-#: ../ui/xi-menus.glade.h:116
+#: ../ui/xi-menus.glade.h:116 ../ui/xi-menus-popup.gtkbuilder.h:15
 msgid "Collapse All"
 msgstr "Zbaliť všetko"
 
-#: ../ui/xi-menus.glade.h:117
+#: ../ui/xi-menus.glade.h:117 ../ui/xi-menus-popup.gtkbuilder.h:17
 msgid "Allow items to be moved from one folder to another"
 msgstr "Povoliť presun položiek z jedného priečinku do druhého"
 
-#: ../ui/xi-menus.glade.h:118
+#: ../ui/xi-menus.glade.h:118 ../ui/xi-menus-popup.gtkbuilder.h:18
 msgid "Allow Reordering"
 msgstr "Povoliť preusporiadanie"
 
-#: ../ui/xi-menus.glade.h:119
+#: ../ui/xi-menus.glade.h:119 ../ui/xi-menus-popup.gtkbuilder.h:20
 #, fuzzy
 msgid "Load other bookmarks file (default: from BibleTime)"
 msgstr "Načítať záložky z Bibletime"
 
-#: ../ui/xi-menus.glade.h:120
+#: ../ui/xi-menus.glade.h:120 ../ui/xi-menus-popup.gtkbuilder.h:19
 #, fuzzy
 msgid "Import Bookmarks"
 msgstr "Vložiť záložku"
 
-#: ../ui/xi-menus.glade.h:121
+#: ../ui/xi-menus.glade.h:121 ../ui/xi-menus-popup.gtkbuilder.h:22
 msgid "Remove folder and save it"
 msgstr "Odstrániť priečinok a uložiť ho"
 
-#: ../ui/xi-menus.glade.h:122
+#: ../ui/xi-menus.glade.h:122 ../ui/xi-menus-popup.gtkbuilder.h:21
 msgid "Export Folder"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:123
+#: ../ui/xi-menus.glade.h:123 ../ui/xi-menus-popup.gtkbuilder.h:30
 msgid "Open selected module in a new tab"
 msgstr "Otvorí označený modul v novej karte"
 
-#: ../ui/xi-menus.glade.h:124
+#: ../ui/xi-menus.glade.h:124 ../ui/xi-menus-popup.gtkbuilder.h:32
 msgid ""
 "Open selected module in a\n"
 "\tseparate ['dialog'] window"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:126
+#: ../ui/xi-menus.glade.h:126 ../ui/xi-menus-popup.gtkbuilder.h:31
 msgid "Open in a separate window"
 msgstr "Otvoriť v samostatnom okne"
 
-#: ../ui/xi-menus.glade.h:127
+#: ../ui/xi-menus.glade.h:127 ../ui/xi-menus-popup.gtkbuilder.h:73
 msgid "Create a new simple prayer list"
 msgstr "Vytvoriť nový jednoduchý modlitebný zoznam"
 
-#: ../ui/xi-menus.glade.h:128
+#: ../ui/xi-menus.glade.h:128 ../ui/xi-menus-popup.gtkbuilder.h:72
 msgid "Simple"
 msgstr "Jednoduchý zoznam"
 
-#: ../ui/xi-menus.glade.h:129
+#: ../ui/xi-menus.glade.h:129 ../ui/xi-menus-popup.gtkbuilder.h:75
 msgid "Create a new subject prayer list"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:130
+#: ../ui/xi-menus.glade.h:130 ../ui/xi-menus-popup.gtkbuilder.h:74
 msgid "Subject"
 msgstr "Predmet"
 
-#: ../ui/xi-menus.glade.h:131
+#: ../ui/xi-menus.glade.h:131 ../ui/xi-menus-popup.gtkbuilder.h:77
 msgid "Create a new monthly journal"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:132
+#: ../ui/xi-menus.glade.h:132 ../ui/xi-menus-popup.gtkbuilder.h:76
 msgid "Monthly"
 msgstr "Mesačný denník"
 
-#: ../ui/xi-menus.glade.h:133
+#: ../ui/xi-menus.glade.h:133 ../ui/xi-menus-popup.gtkbuilder.h:79
 msgid "Create a new daily journal"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:134
+#: ../ui/xi-menus.glade.h:134 ../ui/xi-menus-popup.gtkbuilder.h:78
 msgid "Daily"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:135
+#: ../ui/xi-menus.glade.h:135 ../ui/xi-menus-popup.gtkbuilder.h:81
 msgid "Create a new outlined topic"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:136
+#: ../ui/xi-menus.glade.h:136 ../ui/xi-menus-popup.gtkbuilder.h:80
 msgid "Outlined"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:137
+#: ../ui/xi-menus.glade.h:137 ../ui/xi-menus-popup.gtkbuilder.h:83
 msgid "Open module in editor or plain display window"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:138
+#: ../ui/xi-menus.glade.h:138 ../ui/xi-menus-popup.gtkbuilder.h:82
 #, fuzzy
 msgid "Open in separate window"
 msgstr "Otvoriť v samostatnom okne"
 
-#: ../ui/xi-menus.glade.h:139
+#: ../ui/xi-menus.glade.h:139 ../ui/xi-menus-popup.gtkbuilder.h:23
 msgid "Add a sub-item"
 msgstr ""
 
@@ -4120,19 +4675,19 @@ msgstr ""
 msgid "Add Sub-Item"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:141
+#: ../ui/xi-menus.glade.h:141 ../ui/xi-menus-popup.gtkbuilder.h:25
 msgid "Add an item"
 msgstr "Pridať položku"
 
-#: ../ui/xi-menus.glade.h:142
+#: ../ui/xi-menus.glade.h:142 ../ui/xi-menus-popup.gtkbuilder.h:24
 msgid "Add Item"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:143
+#: ../ui/xi-menus.glade.h:143 ../ui/xi-menus-popup.gtkbuilder.h:27
 msgid "Remove this item"
 msgstr "Odstrániť túto položku"
 
-#: ../ui/xi-menus.glade.h:145
+#: ../ui/xi-menus.glade.h:145 ../ui/xi-menus-popup.gtkbuilder.h:29
 msgid "Edit this item"
 msgstr "Upraviť túto položku"
 
@@ -4167,9 +4722,6 @@ msgstr "Študovať Biblie"
 
 #~ msgid "Cipher Key?"
 #~ msgstr "Šifrovací kľúč?"
-
-#~ msgid "Copy"
-#~ msgstr "Kopírovať"
 
 #~ msgid "Change parallel 1"
 #~ msgstr "Zmeniť paralelu 1"
