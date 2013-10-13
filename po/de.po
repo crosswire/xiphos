@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 3.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-13 20:43+0200\n"
+"POT-Creation-Date: 2013-10-13 23:10+0200\n"
 "PO-Revision-Date: 2012-01-23 20:58+0100\n"
 "Last-Translator: Eicke Godehardt <sf at godehardt.org>\n"
 "Language-Team: Xiphos Translation Team <farsi@lists.sharif.edu>\n"
@@ -150,6 +150,7 @@ msgid "Save"
 msgstr "Speichern"
 
 #: ../src/editor/slib-editor.c:863 ../src/editor/slib-editor.c:870
+#: ../ui/editor_link_dialog.xml.h:1
 msgid "Insert Link"
 msgstr "Verweis einfügen"
 
@@ -445,7 +446,7 @@ msgstr "Schriftart wählen"
 msgid "Change font for"
 msgstr "Ändere Schriftart für"
 
-#: ../src/gnome2/font_dialog.c:336
+#: ../src/gnome2/font_dialog.c:336 ../ui/editor_link_dialog.xml.h:3
 msgid "Module"
 msgstr "Module"
 
@@ -2422,6 +2423,29 @@ msgstr "Modul Eintrag"
 msgid "Bookmark Folder Treeview"
 msgstr "Lesezeichen Baumansicht"
 
+#: ../ui/editor_link_dialog.xml.h:2 ../ui/export-dialog.glade.h:17
+#: ../ui/export-dialog.gtkbuilder.h:16
+msgid "Verse"
+msgstr "Vers"
+
+#: ../ui/editor_link_dialog.xml.h:4
+#, fuzzy
+msgid "Link Text"
+msgstr "Verweistext: "
+
+#: ../ui/editor_link_dialog.xml.h:5
+msgid "Link directly"
+msgstr ""
+
+#: ../ui/editor_link_dialog.xml.h:6
+msgid "Link via verse list"
+msgstr ""
+
+#: ../ui/editor_link_dialog.xml.h:7
+#, fuzzy
+msgid "Test Link"
+msgstr "Verweis einfügen"
+
 #: ../ui/editor_note.xml.h:1 ../ui/editor_studypad.xml.h:1
 msgid "Exit the program"
 msgstr "Das Program beenden"
@@ -2563,10 +2587,6 @@ msgstr "Kapitel Optionsfeld"
 #: ../ui/export-dialog.glade.h:16 ../ui/export-dialog.gtkbuilder.h:17
 msgid "Export single verse"
 msgstr "Exportiere einen ein"
-
-#: ../ui/export-dialog.glade.h:17 ../ui/export-dialog.gtkbuilder.h:16
-msgid "Verse"
-msgstr "Vers"
 
 #: ../ui/export-dialog.glade.h:18 ../ui/export-dialog.gtkbuilder.h:18
 msgid "Verse Radio Button"
@@ -2712,7 +2732,7 @@ msgstr "Ausgewählten Bereich löschen"
 
 #: ../ui/gtk2_webedit.ui.h:15 ../ui/gtk_webedit.ui.h:15
 #, fuzzy
-msgid "Remove seledtion"
+msgid "Remove selection"
 msgstr "Entfernung fehlgeschlagen"
 
 #: ../ui/gtk2_webedit.ui.h:16 ../ui/gtk_webedit.ui.h:16
@@ -5566,9 +5586,6 @@ msgstr "Studiere die Bibel"
 
 #~ msgid "Add reference Link"
 #~ msgstr "Referenz-Verweise hinzufügen"
-
-#~ msgid "Link text: "
-#~ msgstr "Verweistext: "
 
 #~ msgid "Spell Check"
 #~ msgstr "Rechtschreibprüfung"
