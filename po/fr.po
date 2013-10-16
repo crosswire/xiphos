@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: Xiphos 3.1.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-10-13 23:10+0200\n"
-"PO-Revision-Date: 2013-10-16 22:35+0200\n"
+"PO-Revision-Date: 2013-10-16 22:39+0200\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: emacs + po-mode <gnomefr@traduc.org>\n"
 "Language: \n"
@@ -2292,11 +2292,7 @@ msgid ""
 "\n"
 "Chapter %d\n"
 "\n"
-msgstr ""
-" \n"
-"\n"
-"Chapitre %d\n"
-"\n"
+msgstr "\n\nChapitre %d\n\n"
 
 #: ../src/main/xml.c:501
 #, c-format
@@ -2308,7 +2304,7 @@ msgstr "%s%s: %s Chapitre %d<br><br>"
 msgid ""
 "%s: %s Chapter %d\n"
 "\n"
-msgstr "\n%s: %s Chapitre %d\n\n"
+msgstr "%s: %s Chapitre %d\n\n"
 
 #: ../src/main/xml.c:507
 #, c-format
