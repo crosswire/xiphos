@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: Xiphos 3.1.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-10-13 23:10+0200\n"
-"PO-Revision-Date: 2013-10-13 23:09+0200\n"
+"PO-Revision-Date: 2013-10-16 22:35+0200\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: emacs + po-mode <gnomefr@traduc.org>\n"
 "Language: \n"
@@ -1533,7 +1533,7 @@ msgstr "Ouvrir le module dans l'éditeur?"
 
 #: ../src/gnome2/sidebar.c:848
 msgid "If no, it will open for display only."
-msgstr ""
+msgstr "Si la réponse est négative, il sera ouvert en lecture seulement."
 
 #: ../src/gnome2/sidebar.c:1436 ../src/gnome2/sidebar.c:1471
 msgid "Search"
@@ -2258,99 +2258,107 @@ msgid "wrong type, root node != SwordBookmarks\n"
 msgstr "Erreur de type, root node != SwordBookmarks\n"
 
 #: ../src/main/xml.c:423
-#, fuzzy, c-format
+#, c-format
 msgid "wrong type, root node != Copy_Export\n"
-msgstr "Erreur de type, root node != %s\n"
+msgstr "Erreur de type, root node !=Copy_Export\n"
 
 #: ../src/main/xml.c:492
 #, c-format
 msgid "%s<center>%s<br>Chapter %d</center><br>"
-msgstr ""
+msgstr "%s<center>%s<br>Chapitre %d</center><br>"
 
 #: ../src/main/xml.c:493
 #, c-format
 msgid "<br><center>Chapter %d</center><br>"
-msgstr ""
+msgstr "<br><center>Chapitre %d</center><br>"
 
 #: ../src/main/xml.c:494
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "\n"
 "Chapter %d\n"
 "\n"
-msgstr "Chapitre"
+msgstr ""
+"%s\n"
+"\n"
+"Chapitre %d\n"
+"\n"
 
 #: ../src/main/xml.c:495
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "\n"
 "Chapter %d\n"
 "\n"
-msgstr "Chapitre"
+msgstr ""
+" \n"
+"\n"
+"Chapitre %d\n"
+"\n"
 
 #: ../src/main/xml.c:501
 #, c-format
 msgid "%s%s: %s Chapter %d<br><br>"
-msgstr ""
+msgstr "%s%s: %s Chapitre %d<br><br>"
 
 #: ../src/main/xml.c:502
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s: %s Chapter %d\n"
 "\n"
-msgstr "Chapitre"
+msgstr "\n%s: %s Chapitre %d\n\n"
 
 #: ../src/main/xml.c:507
 #, c-format
 msgid "&nbsp;&nbsp;[%d]"
-msgstr ""
+msgstr "&nbsp;&nbsp;[%d]"
 
 #: ../src/main/xml.c:508
 #, c-format
 msgid " [%d]"
-msgstr ""
+msgstr " [%d]"
 
 #: ../src/main/xml.c:514
 #, c-format
 msgid "%s%s (%s %d:%d%s)</body></html>"
-msgstr ""
+msgstr "%s%s (%s %d:%d%s)</body></html>"
 
 #: ../src/main/xml.c:515
 #, c-format
 msgid "%s(%s %d:%d%s)%s </body></html>"
-msgstr ""
+msgstr "%s(%s %d:%d%s)%s </body></html>"
 
 #: ../src/main/xml.c:516
 #, c-format
 msgid "%s (%s %d:%d%s)"
-msgstr ""
+msgstr "%s (%s %d:%d%s)"
 
 #: ../src/main/xml.c:517
 #, c-format
 msgid "(%s %d:%d%s) %s"
-msgstr ""
+msgstr "(%s %d:%d%s) %s"
 
 #: ../src/main/xml.c:523
 #, c-format
 msgid " %s%s"
-msgstr ""
+msgstr " %s%s"
 
 #: ../src/main/xml.c:524 ../src/main/xml.c:526
 #, c-format
 msgid "%s(%s %d:%d-%d%s)"
-msgstr ""
+msgstr "%s(%s %d:%d-%d%s)"
 
 #: ../src/main/xml.c:525
 #, c-format
 msgid "(%s %d:%d-%d%s)<br>"
-msgstr ""
+msgstr "(%s %d:%d-%d%s)<br>"
 
 #: ../src/main/xml.c:527
 #, c-format
 msgid "(%s %d:%d-%d%s)\n"
-msgstr ""
+msgstr "(%s %d:%d-%d%s)\n"
 
 #: ../src/main/xml.c:576
 msgid "Old Testament"
@@ -2660,30 +2668,27 @@ msgstr "Bouton numéro de verset"
 
 #: ../ui/export-dialog.glade.h:28 ../ui/export-dialog.gtkbuilder.h:29
 msgid "Indicates whether reference is placed first or last."
-msgstr ""
+msgstr "Indique si la référence est placée au début ou à la fin"
 
 #: ../ui/export-dialog.glade.h:29 ../ui/export-dialog.gtkbuilder.h:28
 msgid "Reference last"
 msgstr "Dernière référence"
 
 #: ../ui/export-dialog.glade.h:30 ../ui/export-dialog.gtkbuilder.h:30
-#, fuzzy
 msgid "Reference last button"
-msgstr "Entrée Référence"
+msgstr "Bouton de la dernière Référence"
 
 #: ../ui/export-dialog.glade.h:31 ../ui/export-dialog.gtkbuilder.h:32
 msgid "Indicates whether or not version name is included in reference."
-msgstr ""
+msgstr "Indique si le nom de la version est inclue dans la référence"
 
 #: ../ui/export-dialog.glade.h:32
-#, fuzzy
 msgid "Include Version"
-msgstr "Version de Sword"
+msgstr "Inclure la version de la Bible"
 
 #: ../ui/export-dialog.glade.h:33 ../ui/export-dialog.gtkbuilder.h:33
-#, fuzzy
 msgid "Version button"
-msgstr "Bouton radio Verset"
+msgstr "Bouton de version"
 
 #: ../ui/export-dialog.glade.h:34
 msgid "Save Export As"
@@ -2694,9 +2699,8 @@ msgid "Indicates whether verse numbers should appear inline in the text."
 msgstr "Indique si les numéros de versets doivent apparaître dans le texte"
 
 #: ../ui/export-dialog.gtkbuilder.h:31
-#, fuzzy
 msgid "Include version"
-msgstr "Version de Sword"
+msgstr "Inclure la version de la Bible"
 
 #: ../ui/gtk2_webedit.ui.h:1 ../ui/gtk_webedit.ui.h:1
 msgid "About Studypad"
@@ -2748,9 +2752,8 @@ msgid "Delete selection"
 msgstr "Supprimer la sélection"
 
 #: ../ui/gtk2_webedit.ui.h:15 ../ui/gtk_webedit.ui.h:15
-#, fuzzy
 msgid "Remove selection"
-msgstr "Supprime l'élément sélectionné"
+msgstr "Enlève la sélection"
 
 #: ../ui/gtk2_webedit.ui.h:16 ../ui/gtk_webedit.ui.h:16
 #: ../ui/xi-menus.glade.h:112 ../ui/xi-menus-popup.gtkbuilder.h:11
@@ -4775,7 +4778,7 @@ msgstr "Thême structuré"
 
 #: ../ui/xi-menus.glade.h:137 ../ui/xi-menus-popup.gtkbuilder.h:83
 msgid "Open module in editor or plain display window"
-msgstr ""
+msgstr "Ouvre le module dans l'éditeur ou en lecture dans une fenêtre séparée"
 
 #: ../ui/xi-menus.glade.h:138 ../ui/xi-menus-popup.gtkbuilder.h:82
 msgid "Open in separate window"
