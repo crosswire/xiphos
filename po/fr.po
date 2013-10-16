@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: Xiphos 3.1.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-10-13 23:10+0200\n"
-"PO-Revision-Date: 2013-10-16 22:39+0200\n"
+"PO-Revision-Date: 2013-10-16 22:47+0200\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: emacs + po-mode <gnomefr@traduc.org>\n"
 "Language: \n"
@@ -2664,11 +2664,11 @@ msgstr "Bouton numéro de verset"
 
 #: ../ui/export-dialog.glade.h:28 ../ui/export-dialog.gtkbuilder.h:29
 msgid "Indicates whether reference is placed first or last."
-msgstr "Indique si la référence est placée au début ou à la fin"
+msgstr "Indique si la référence est placée au début ou en fin du texte"
 
 #: ../ui/export-dialog.glade.h:29 ../ui/export-dialog.gtkbuilder.h:28
 msgid "Reference last"
-msgstr "Dernière référence"
+msgstr "Référence placée en fin de texte"
 
 #: ../ui/export-dialog.glade.h:30 ../ui/export-dialog.gtkbuilder.h:30
 msgid "Reference last button"
@@ -2676,11 +2676,11 @@ msgstr "Bouton de la dernière Référence"
 
 #: ../ui/export-dialog.glade.h:31 ../ui/export-dialog.gtkbuilder.h:32
 msgid "Indicates whether or not version name is included in reference."
-msgstr "Indique si le nom de la version est inclue dans la référence"
+msgstr "Indique si le nom de la version est inclus dans la référence"
 
 #: ../ui/export-dialog.glade.h:32
 msgid "Include Version"
-msgstr "Inclure la version de la Bible"
+msgstr "Nom de la version de la Bible"
 
 #: ../ui/export-dialog.glade.h:33 ../ui/export-dialog.gtkbuilder.h:33
 msgid "Version button"
@@ -2696,7 +2696,7 @@ msgstr "Indique si les numéros de versets doivent apparaître dans le texte"
 
 #: ../ui/export-dialog.gtkbuilder.h:31
 msgid "Include version"
-msgstr "Inclure la version de la Bible"
+msgstr "Nom de la version de la Bible"
 
 #: ../ui/gtk2_webedit.ui.h:1 ../ui/gtk_webedit.ui.h:1
 msgid "About Studypad"
