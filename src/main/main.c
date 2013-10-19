@@ -116,7 +116,7 @@ int main(int argc, char *argv[])
 #endif
 
 	//	g_thread_init(NULL);
-#ifndef USE_GTK_3
+#if !GLIB_CHECK_VERSION(2, 35, 0)
 	g_type_init(); // g_type_init has been deprecated since version 2.36
 	               // Since GLib 2.36, the type system is initialised 
 	               // automatically and this function does nothing.

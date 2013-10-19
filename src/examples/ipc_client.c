@@ -80,7 +80,9 @@ int main (int argc, char **argv)
 	GMainLoop *mainloop;
 
 	//not necessary if using from a gtk/gnome program
+#if !GLIB_CHECK_VERSION(2, 35, 0)
 	g_type_init ();
+#endif
 
 	mainloop = g_main_loop_new (NULL, FALSE);
 
