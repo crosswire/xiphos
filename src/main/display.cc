@@ -877,7 +877,7 @@ GTKEntryDisp::display(SWModule &imodule)
 
 	GString *rework;			// for image size analysis rework.
 
-    imodule.getRawEntry();      // snap to entry
+	imodule.getRawEntry();      // snap to entry
 	main_set_global_options(ops);
 
 	strongs_and_morph = ((ops->strongs || ops->lemmas) &&
@@ -1424,7 +1424,7 @@ GTKChapDisp::display(SWModule &imodule)
 char
 DialogEntryDisp::DisplayByChapter(SWModule &imodule)
 {
-       imodule.setSkipConsecutiveLinks(true);
+	imodule.setSkipConsecutiveLinks(true);
 	VerseKey *key = (VerseKey *)(SWKey *)imodule;
 	int curVerse = key->getVerse();
 	int curChapter = key->getChapter();

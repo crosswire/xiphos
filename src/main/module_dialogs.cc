@@ -1605,7 +1605,7 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 	if ((type != BOOK_TYPE) &&
 	    (type != PRAYERLIST_TYPE) &&
 	    (type != DICTIONARY_TYPE)) {
-        be->display_mod->display();
+		be->display_mod->display();
 		bible_apply_change = TRUE;
 	}
 	if (type == TEXT_TYPE)

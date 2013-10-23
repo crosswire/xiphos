@@ -36,6 +36,7 @@ PKG_CONFIG_PREFIX=/usr/i686-w64-mingw32/sys-root/mingw/
 export PKG_CONFIG_PATH PKG_CONFIG_LIBDIR PKG_CONFIG_PREFIX
 
 CFLAGS="-I/usr/i686-w64-mingw32/sys-root/mingw/include -g"
+CXXFLAGS="-I/usr/i686-w64-mingw32/sys-root/mingw/include -g"
 LDFLAGS="-L/usr/i686-w64-mingw32/sys-root/mingw/lib `pkg-config --libs gthread-2.0`"
 MSVC_LIBPATH=/usr/i686-w64-mingw32/sys-root/mingw/
 
@@ -101,7 +102,11 @@ EOF
 ./waf
 ./waf install
 
+# gtk & webkit version-specific files begin the list.
 for f in libsword.dll \
+	libgailutil-3-0.dll libgtk-3-0.dll \
+	libjavascriptcoregtk-3.0-0.dll libwebkitgtk-3.0-0.dll \
+	libdbus-1-3.dll libdbus-glib-1-2.dll \
 	imp2ld.exe addld.exe mod2zmod.exe imp2gbs.exe xml2gbs.exe imp2vs.exe vpl2mod.exe mkfastmod.exe mod2vpl.exe tei2mod.exe osis2mod.exe mod2osis.exe mod2imp.exe \
 	installmgr.exe  diatheke.exe vs2osisreftxt.exe \
 	uconv.exe icui18n50.dll icuuc50.dll icudata50.dll icule50.dll \
@@ -109,12 +114,12 @@ for f in libsword.dll \
 	libcairo-2.dll libfontconfig-1.dll libexpat-1.dll libfreetype-6.dll zlib1.dll libpixman-1-0.dll libpng15-15.dll libgdk_pixbuf-2.0-0.dll \
 	libgdk-3-0.dll \
 	libgio-2.0-0.dll libglib-2.0-0.dll libgmodule-2.0-0.dll libgobject-2.0-0.dll libffi-6.dll libjasper-1.dll libjpeg-62.dll libtiff-5.dll libpango-1.0-0.dll \
-	libpangocairo-1.0-0.dll libpangoft2-1.0-0.dll libpangowin32-1.0-0.dll libatk-1.0-0.dll libgtk-3-0.dll libxml2-2.dll libgsf-1-114.dll \
-	libbz2-1.dll libgtkhtml-4.0-0.dll libgailutil-3-0.dll libgthread-2.0-0.dll libgnurx-0.dll libgtkhtml-editor-4.0-0.dll \
+	libpangocairo-1.0-0.dll libpangoft2-1.0-0.dll libpangowin32-1.0-0.dll libatk-1.0-0.dll libxml2-2.dll libgsf-1-114.dll \
+	libbz2-1.dll libgtkhtml-4.0-0.dll libgthread-2.0-0.dll libgnurx-0.dll libgtkhtml-editor-4.0-0.dll \
 	libenchant.dll libcurl-4.dll libidn-11.dll libssh2-1.dll libclucene-core.dll libclucene-shared.dll \
-	libjavascriptcoregtk-3.0-0.dll pthreadGC2.dll libsoup-2.4-1.dll libsqlite3-0.dll libxslt-1.dll libintl-8.dll \
+	pthreadGC2.dll libsoup-2.4-1.dll libsqlite3-0.dll libxslt-1.dll libintl-8.dll \
 	libgcc_s_sjlj-1.dll libstdc++-6.dll \
-	gdb.exe libwebkitgtk-3.0-0.dll libwebp-4.dll \
+	gdb.exe libwebp-4.dll \
 	libcrypto-10.dll libssl-10.dll libgstapp-1.0-0.dll libgstbase-1.0-0.dll libgstreamer-1.0-0.dll libgstpbutils-1.0-0.dll \
 	libgstvideo-1.0-0.dll libgstaudio-1.0-0.dll libgstbase-1.0-0.dll libgstcontroller-1.0-0.dll \
 	libgstfft-1.0-0.dll libgstnet-1.0-0.dll libgstriff-1.0-0.dll libgstrtp-1.0-0.dll libgstrtsp-1.0-0.dll libgstsdp-1.0-0.dll \
@@ -157,7 +162,7 @@ done
 # Copy shared files
 mkdir -p ${outdir}share/sword/
 cp -r ${sworddir}../share/sword/locales.d ${outdir}share/sword/locales.d
-for d in enchant gtkhtml-4.0 webkitgtk-3.0 #pixmaps 
+for d in enchant gtkhtml-4.0 webkitgtk-3.0
 do
 	cp -r ${sworddir}../share/${d} ${outdir}share/${d}
 done
