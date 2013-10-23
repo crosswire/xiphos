@@ -62,6 +62,7 @@ export CROSS CC CXX AR RANLIB CFLAGS LDFLAGS WINRC \
 	--disable-dbus \
 	--disable-help \
 	--prefix=${outdir} \
+	--enable-webkit-editor \
 	-d debug \
 	-b build-win32
 	#--disable-console
@@ -115,7 +116,7 @@ for f in libsword.dll \
 	libgdk-3-0.dll \
 	libgio-2.0-0.dll libglib-2.0-0.dll libgmodule-2.0-0.dll libgobject-2.0-0.dll libffi-6.dll libjasper-1.dll libjpeg-62.dll libtiff-5.dll libpango-1.0-0.dll \
 	libpangocairo-1.0-0.dll libpangoft2-1.0-0.dll libpangowin32-1.0-0.dll libatk-1.0-0.dll libxml2-2.dll libgsf-1-114.dll \
-	libbz2-1.dll libgtkhtml-4.0-0.dll libgthread-2.0-0.dll libgnurx-0.dll libgtkhtml-editor-4.0-0.dll \
+	libbz2-1.dll libgthread-2.0-0.dll libgnurx-0.dll \
 	libenchant.dll libcurl-4.dll libidn-11.dll libssh2-1.dll libclucene-core.dll libclucene-shared.dll \
 	pthreadGC2.dll libsoup-2.4-1.dll libsqlite3-0.dll libxslt-1.dll libintl-8.dll \
 	libgcc_s_sjlj-1.dll libstdc++-6.dll \
@@ -162,7 +163,7 @@ done
 # Copy shared files
 mkdir -p ${outdir}share/sword/
 cp -r ${sworddir}../share/sword/locales.d ${outdir}share/sword/locales.d
-for d in enchant gtkhtml-4.0 webkitgtk-3.0
+for d in enchant webkitgtk-3.0
 do
 	cp -r ${sworddir}../share/${d} ${outdir}share/${d}
 done
