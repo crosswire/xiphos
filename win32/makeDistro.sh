@@ -105,7 +105,7 @@ EOF
 # gtk & webkit version-specific files begin the list.
 for f in libsword.dll \
 	libglade-2.0-0.dll \
-	libgailutil-18.dll libgtk-win32-2.0-0.dll \
+	libgailutil-18.dll libgtk-win32-2.0-0.dll libgtkhtml-3.14-19.dll libgtkhtml-editor-3.14-0.dll \
 	libjavascriptcoregtk-1.0-0.dll libwebkitgtk-1.0-0.dll \
 	libdbus-1-3.dll libdbus-glib-1-2.dll \
 	imp2ld.exe addld.exe mod2zmod.exe imp2gbs.exe xml2gbs.exe imp2vs.exe vpl2mod.exe mkfastmod.exe mod2vpl.exe tei2mod.exe osis2mod.exe mod2osis.exe mod2imp.exe \
@@ -116,7 +116,7 @@ for f in libsword.dll \
 	libgdk-3-0.dll \
 	libgio-2.0-0.dll libglib-2.0-0.dll libgmodule-2.0-0.dll libgobject-2.0-0.dll libffi-6.dll libjasper-1.dll libjpeg-62.dll libtiff-5.dll libpango-1.0-0.dll \
 	libpangocairo-1.0-0.dll libpangoft2-1.0-0.dll libpangowin32-1.0-0.dll libatk-1.0-0.dll libxml2-2.dll libgsf-1-114.dll \
-	libbz2-1.dll libgtkhtml-4.0-0.dll libgthread-2.0-0.dll libgnurx-0.dll libgtkhtml-editor-4.0-0.dll \
+	libbz2-1.dll libgthread-2.0-0.dll libgnurx-0.dll \
 	libenchant.dll libcurl-4.dll libidn-11.dll libssh2-1.dll libclucene-core.dll libclucene-shared.dll \
 	pthreadGC2.dll libsoup-2.4-1.dll libsqlite3-0.dll libxslt-1.dll libintl-8.dll \
 	libgcc_s_sjlj-1.dll libstdc++-6.dll \
@@ -139,9 +139,7 @@ do
 done
 for f in gtk-2.0/2.10.0/engines/libpixmap.dll \
 	 gtk-2.0/2.10.0/engines/libwimp.dll \
-	 gtk-2.0/modules/libgail.dll \
-	 enchant/libenchant_ispell.dll \
-	 enchant/libenchant_myspell.dll
+	 gtk-2.0/modules/libgail.dll
 do
 	echo "Copying and stripping ${f}"
 	cp ${sworddir}../lib/${f} ${outdir}lib/${f}
@@ -161,7 +159,7 @@ done
 # Copy shared files
 mkdir -p ${outdir}share/sword/
 cp -r ${sworddir}../share/sword/locales.d ${outdir}share/sword/locales.d
-for d in enchant gtkhtml-4.0 webkitgtk-1.0
+for d in enchant gtkhtml-3.14 webkitgtk-1.0
 do
 	cp -r ${sworddir}../share/${d} ${outdir}share/${d}
 done
