@@ -7,10 +7,14 @@ if bld.env['ENABLE_WEBKIT_EDITOR']:
 else:
     source = 'slib-editor.c link_dialog.c'
 
+if bld.env['IS_WIN32']:
+    x11_include = '../../win32/include'
+else:
+    x11_include = ' '
+
 bld.new_task_gen(
     features='cc cxx', # compile C with gcc, C++ with g++
-    includes='. ../../ ../../src ../../src/editor %s' %
-    bld.env['GECKO_INCLUDE'], # ../../ for config.h
+    includes='. ../.. ../../src ../../src/editor %s %s' % (bld.env['GECKO_INCLUDE'], x11_include), # ../../ for config.h
     source=source,
     target='editor',
     #uselib='GLIB GNOMEUI SWORD GTKMOZEMBED GTKMOZEMBED_UNSTABLE GTKHTML GTKHTML_EDITOR'
