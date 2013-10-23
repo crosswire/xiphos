@@ -23,17 +23,21 @@
 #FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 #OTHER DEALINGS IN THE SOFTWARE.
 
+set -e
+
 # copy sword utils and libs
 outdir=win32/binaries/Xiphos/32/
 sworddir=/usr/i686-w64-mingw32/sys-root/mingw/bin/
 
 CROSS=i686-w64-mingw32-
-CFLAGS="-I/usr/i686-w64-mingw32/sys-root/mingw/include -g"
-CXXFLAGS="-I/usr/i686-w64-mingw32/sys-root/mingw/include -g"
-LDFLAGS="-L/usr/i686-w64-mingw32/sys-root/mingw/lib `i686-w64-mingw32-pkg-config --libs gthread-2.0`"
 PKG_CONFIG_PATH=/usr/i686-w64-mingw32/sys-root/mingw/lib/pkgconfig/:/usr/i686-w64-mingw32/sys-root/mingw/share/pkgconfig/
 PKG_CONFIG_LIBDIR=/usr/i686-w64-mingw32/sys-root/mingw/lib/pkgconfig/:/usr/i686-w64-mingw32/sys-root/mingw/share/pkgconfig/
 PKG_CONFIG_PREFIX=/usr/i686-w64-mingw32/sys-root/mingw/
+export PKG_CONFIG_PATH PKG_CONFIG_LIBDIR PKG_CONFIG_PREFIX
+
+CFLAGS="-I/usr/i686-w64-mingw32/sys-root/mingw/include -g"
+CXXFLAGS="-I/usr/i686-w64-mingw32/sys-root/mingw/include -g"
+LDFLAGS="-L/usr/i686-w64-mingw32/sys-root/mingw/lib `pkg-config --libs gthread-2.0`"
 MSVC_LIBPATH=/usr/i686-w64-mingw32/sys-root/mingw/
 
 CC=/usr/bin/${CROSS}gcc
@@ -51,17 +55,16 @@ mkdir -p ${outdir}
 cp -r -t ${outdir} win32/extras/*
 # configure and build xiphos
 export CROSS CC CXX AR RANLIB CFLAGS LDFLAGS WINRC \
-	PKG_CONFIG PKG_CONFIG_PATH PKG_CONFIG_LIBDIR \
-	PKG_CONFIG_PREFIX MSVC_LIBPATH
+	PKG_CONFIG MSVC_LIBPATH
 ./waf configure \
 	--target-platform-win32 \
+	--gtk=2 \
+	--disable-dbus \
 	--disable-help \
 	--prefix=${outdir} \
 	-d debug \
 	-b build-win32
 	#--disable-console
-	#--disable-dbus \
-[ $? -ne 0 ] && exit 1
 
 #
 # GROSS HACK - TEMPORARY
@@ -97,32 +100,40 @@ EOF
 # GROSS HACK - END
 
 ./waf
-[ $? -ne 0 ] && exit 1
 ./waf install
-[ $? -ne 0 ] && exit 1
 
+# gtk & webkit version-specific files begin the list.
 for f in libsword.dll \
+	libglade-2.0-0.dll \
+	libgailutil-18.dll libgtk-win32-2.0-0.dll \
+	libjavascriptcoregtk-1.0-0.dll libwebkitgtk-1.0-0.dll \
 	libdbus-1-3.dll libdbus-glib-1-2.dll \
 	imp2ld.exe addld.exe mod2zmod.exe imp2gbs.exe xml2gbs.exe imp2vs.exe vpl2mod.exe mkfastmod.exe mod2vpl.exe tei2mod.exe osis2mod.exe mod2osis.exe mod2imp.exe \
 	installmgr.exe  diatheke.exe vs2osisreftxt.exe \
-	uconv.exe icui18n48.dll icuuc48.dll icudata48.dll \
-	libcairo-2.dll libfontconfig-1.dll libexpat-1.dll libfreetype-6.dll zlib1.dll libpixman-1-0.dll libpng15-15.dll libgdk-win32-2.0-0.dll libgdk_pixbuf-2.0-0.dll \
-	libgio-2.0-0.dll libglib-2.0-0.dll libgmodule-2.0-0.dll libgobject-2.0-0.dll libffi-5.dll libjasper-1.dll libjpeg-8.dll libtiff-5.dll libpango-1.0-0.dll \
-	libpangocairo-1.0-0.dll libpangoft2-1.0-0.dll libpangowin32-1.0-0.dll libglade-2.0-0.dll libatk-1.0-0.dll libgtk-win32-2.0-0.dll libxml2-2.dll libgsf-1-114.dll \
-	bz2-1.dll libgtkhtml-3.14-19.dll libgailutil-18.dll libgconf-2-4.dll libORBit-2-0.dll libgthread-2.0-0.dll libgnurx-0.dll libgtkhtml-editor-3.14-0.dll \
-	libenchant-1.dll libcurl-4.dll libidn-11.dll libssh2-1.dll libgcrypt-11.dll libgpg-error-0.dll libclucene-core.dll libclucene-shared.dll \
-	libjavascriptcoregtk-1.0-0.dll pthreadGC2.dll libsoup-2.4-1.dll libsqlite3-0.dll libxslt-1.dll libintl-8.dll \
+	uconv.exe icui18n50.dll icuuc50.dll icudata50.dll icule50.dll \
+	libcairo-gobject-2.dll iconv.dll \
+	libcairo-2.dll libfontconfig-1.dll libexpat-1.dll libfreetype-6.dll zlib1.dll libpixman-1-0.dll libpng15-15.dll libgdk_pixbuf-2.0-0.dll \
+	libgdk-3-0.dll \
+	libgio-2.0-0.dll libglib-2.0-0.dll libgmodule-2.0-0.dll libgobject-2.0-0.dll libffi-6.dll libjasper-1.dll libjpeg-62.dll libtiff-5.dll libpango-1.0-0.dll \
+	libpangocairo-1.0-0.dll libpangoft2-1.0-0.dll libpangowin32-1.0-0.dll libatk-1.0-0.dll libxml2-2.dll libgsf-1-114.dll \
+	libbz2-1.dll libgtkhtml-4.0-0.dll libgthread-2.0-0.dll libgnurx-0.dll libgtkhtml-editor-4.0-0.dll \
+	libenchant.dll libcurl-4.dll libidn-11.dll libssh2-1.dll libclucene-core.dll libclucene-shared.dll \
+	pthreadGC2.dll libsoup-2.4-1.dll libsqlite3-0.dll libxslt-1.dll libintl-8.dll \
 	libgcc_s_sjlj-1.dll libstdc++-6.dll \
-	gdb.exe libwebkitgtk-1.0-0.dll \
+	gdb.exe libwebp-4.dll \
+	libcrypto-10.dll libssl-10.dll libgstapp-1.0-0.dll libgstbase-1.0-0.dll libgstreamer-1.0-0.dll libgstpbutils-1.0-0.dll \
+	libgstvideo-1.0-0.dll libgstaudio-1.0-0.dll libgstbase-1.0-0.dll libgstcontroller-1.0-0.dll \
+	libgstfft-1.0-0.dll libgstnet-1.0-0.dll libgstriff-1.0-0.dll libgstrtp-1.0-0.dll libgstrtsp-1.0-0.dll libgstsdp-1.0-0.dll \
+	libgsttag-1.0-0.dll libharfbuzz-0.dll libharfbuzz-icu-0.dll \
 	gspawn-win32-helper.exe gspawn-win32-helper-console.exe
 do
     echo "Copying and stripping ${f}"
-    #cp ${sworddir}${f} ${outdir}bin/${f}
-    strip -o ${outdir}bin/${f} ${sworddir}${f}
+    cp ${sworddir}${f} ${outdir}bin/${f}
+    #strip -o ${outdir}bin/${f} ${sworddir}${f}
 done
 
 # Fetch extra libraries
-for d in "gtk-2.0/2.10.0/engines" "gtk-2.0/modules" enchant
+for d in enchant gtk-2.0/2.10.0/engines gtk-2.0/modules
 do
 	mkdir -p ${outdir}/lib/${d}
 done
@@ -133,16 +144,24 @@ for f in gtk-2.0/2.10.0/engines/libpixmap.dll \
 	 enchant/libenchant_myspell.dll
 do
 	echo "Copying and stripping ${f}"
-	strip -o ${outdir}lib/${f} ${sworddir}../lib/${f}
+	cp ${sworddir}../lib/${f} ${outdir}lib/${f}
+	#strip -o ${outdir}lib/${f} ${sworddir}../lib/${f}
+done
+mkdir -p ${outdir}lib/pango/1.8.0/modules/
+for f in $(find ${sworddir}../lib/pango/1.8.0/modules/ -name '*.dll')
+do
+	echo "Copying and stripping ${f}"
+	cp ${f} ${outdir}lib/pango/1.8.0/modules/
+	#strip -o ${outdir}lib/pango/1.8.0/modules/`basename ${f}` $f
 done
 
 # Strip the main Xiphos binary
-strip ${outdir}bin/xiphos.exe
+#strip ${outdir}bin/xiphos.exe
 
 # Copy shared files
 mkdir -p ${outdir}share/sword/
 cp -r ${sworddir}../share/sword/locales.d ${outdir}share/sword/locales.d
-for d in enchant gtkhtml-3.14 pixmaps webkitgtk-1.0
+for d in enchant gtkhtml-4.0 webkitgtk-1.0
 do
 	cp -r ${sworddir}../share/${d} ${outdir}share/${d}
 done
@@ -150,6 +169,7 @@ mkdir -p ${outdir}etc
 cp -r ${sworddir}../etc/fonts ${outdir}etc/fonts
 #cp -r ${sworddir}../etc/gtk-2.0 ${outdir}etc/gtk-2.0
 #cp win32/gtkrc ${outdir}etc/gtk-2.0/
+cp -r ${sworddir}../etc/pango ${outdir}etc/pango
 
 # update gtk+ mo files
 
@@ -158,7 +178,7 @@ for f in `ls *.po`; do msgfmt $f; done
 cp messages.mo ../../${outdir}/share/locale/fa/LC_MESSAGES/gtk20.mo
 
 # remove .svn dirs that were cp'd into the dist tree.
-find ../../${outdir} -name .svn | xargs rm -r
+find ../../${outdir} -name .svn -delete #| xargs rm -r {}
 
 # make installer
 cd ../nsis
