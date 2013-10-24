@@ -107,13 +107,14 @@ for f in libsword.dll \
 	libglade-2.0-0.dll \
 	libgailutil-18.dll libgtk-win32-2.0-0.dll libgtkhtml-3.14-19.dll libgtkhtml-editor-3.14-0.dll \
 	libjavascriptcoregtk-1.0-0.dll libwebkitgtk-1.0-0.dll \
+	libgconf-2-4.dll \
 	libdbus-1-3.dll libdbus-glib-1-2.dll \
 	imp2ld.exe addld.exe mod2zmod.exe imp2gbs.exe xml2gbs.exe imp2vs.exe vpl2mod.exe mkfastmod.exe mod2vpl.exe tei2mod.exe osis2mod.exe mod2osis.exe mod2imp.exe \
 	installmgr.exe  diatheke.exe vs2osisreftxt.exe \
 	uconv.exe icui18n50.dll icuuc50.dll icudata50.dll icule50.dll \
 	libcairo-gobject-2.dll iconv.dll \
 	libcairo-2.dll libfontconfig-1.dll libexpat-1.dll libfreetype-6.dll zlib1.dll libpixman-1-0.dll libpng15-15.dll libgdk_pixbuf-2.0-0.dll \
-	libgdk-3-0.dll \
+	libgdk-3-0.dll libgdk-win32-2.0-0.dll \
 	libgio-2.0-0.dll libglib-2.0-0.dll libgmodule-2.0-0.dll libgobject-2.0-0.dll libffi-6.dll libjasper-1.dll libjpeg-62.dll libtiff-5.dll libpango-1.0-0.dll \
 	libpangocairo-1.0-0.dll libpangoft2-1.0-0.dll libpangowin32-1.0-0.dll libatk-1.0-0.dll libxml2-2.dll libgsf-1-114.dll \
 	libbz2-1.dll libgthread-2.0-0.dll libgnurx-0.dll \
