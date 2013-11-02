@@ -53,7 +53,7 @@ public:
 	{
 	}
     virtual char display(SWModule &imodule);
-	virtual char DisplayByChapter(SWModule &imodule);
+	virtual char displayByChapter(SWModule &imodule);
 
 protected:
 	GtkWidget  *gtkText;
@@ -98,7 +98,7 @@ public:
 	{
 	}
     virtual char display(SWModule &imodule);
-	virtual char DisplayByChapter(SWModule &imodule);
+	virtual char displayByChapter(SWModule &imodule);
 
 protected:
 	GtkWidget   *gtkText;
@@ -121,7 +121,7 @@ public:
 	    : DialogEntryDisp(_gtkText, _d, _be)
 	{
 	}
-	virtual char Display(SWModule &imodule);
+	virtual char display(SWModule &imodule);
 };
 
 
@@ -133,7 +133,7 @@ public:
 	      be(_be)
 	{
 	}
-	virtual char Display(SWModule &imodule);
+	virtual char display(SWModule &imodule);
 
 protected:
 	GtkWidget *gtkText;
@@ -147,7 +147,7 @@ public:
 	    : GTKPrintEntryDisp(_gtkText, _be)
 	{
 	}
-	virtual char Display(SWModule &imodule);
+	virtual char display(SWModule &imodule);
 	MOD_FONT *mf;
 };
 
