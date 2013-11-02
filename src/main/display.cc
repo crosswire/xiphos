@@ -711,7 +711,7 @@ set_render_numbers(SWModule& imodule, GLOBAL_OPS *ops)
 // display of commentary by chapter.
 //
 char
-GTKEntryDisp::DisplayByChapter(SWModule &imodule)
+GTKEntryDisp::displayByChapter(SWModule &imodule)
 {
 	imodule.setSkipConsecutiveLinks(true);
 
@@ -922,7 +922,7 @@ GTKEntryDisp::display(SWModule &imodule)
 	// (this option can be enabled only in commentaries.)
 	//
 	if (ops->commentary_by_chapter)
-		return DisplayByChapter(imodule);
+		return displayByChapter(imodule);
 
 	// we will use the module cache for regular commentaries,
 	// which navigate/change a lot, whereas pers.comms, lexdicts,
@@ -1422,7 +1422,7 @@ GTKChapDisp::display(SWModule &imodule)
 // display of commentary by chapter.
 //
 char
-DialogEntryDisp::DisplayByChapter(SWModule &imodule)
+DialogEntryDisp::displayByChapter(SWModule &imodule)
 {
 	imodule.setSkipConsecutiveLinks(true);
 	VerseKey *key = (VerseKey *)(SWKey *)imodule;
@@ -1535,7 +1535,7 @@ DialogEntryDisp::display(SWModule &imodule)
 	// instead heading off to show a whole chapter
 	//
 	if (ops->commentary_by_chapter)
-		return DisplayByChapter(imodule);
+		return displayByChapter(imodule);
 
 	if (be->module_type(imodule.getName()) == COMMENTARY_TYPE) {
 		VerseKey *key = (VerseKey *)(SWKey *)imodule;
@@ -1584,7 +1584,7 @@ DialogEntryDisp::display(SWModule &imodule)
 
 
 char
-DialogChapDisp::Display(SWModule &imodule)
+DialogChapDisp::display(SWModule &imodule)
 {
 	imodule.setSkipConsecutiveLinks(true);
 	VerseKey *key = (VerseKey *)(SWKey *)imodule;
@@ -1813,7 +1813,7 @@ DialogChapDisp::Display(SWModule &imodule)
 
 
 char
-GTKPrintEntryDisp::Display(SWModule &imodule)
+GTKPrintEntryDisp::display(SWModule &imodule)
 {
 	gchar *keytext = NULL;
 	gchar *buf;
@@ -1869,7 +1869,7 @@ GTKPrintEntryDisp::Display(SWModule &imodule)
 }
 
 char
-GTKPrintChapDisp::Display(SWModule &imodule)
+GTKPrintChapDisp::display(SWModule &imodule)
 {
 	imodule.setSkipConsecutiveLinks(true);
 	VerseKey *key = (VerseKey *)(SWKey *)imodule;
