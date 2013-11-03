@@ -1075,7 +1075,7 @@ add_module_to_language_folder(GtkTreeView * tree,
 	GdkPixbuf *fasticon;
 	GdkPixbuf *locked;
 	GdkPixbuf *refresh;
-    const gchar *description = NULL;
+	const gchar *description = NULL;
 //	GtkTooltip *tooltip;
 
 	/* Check language */

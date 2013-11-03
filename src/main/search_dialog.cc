@@ -717,7 +717,7 @@ void main_add_mod_to_list(GtkWidget * tree_widget, gchar * mod_name)
 	GtkTreeIter selected_modules_lists;
 	GtkListStore *list_store;
 	GtkListStore *store_modules_lists;
-    const gchar *mod_description = NULL;
+	const gchar *mod_description = NULL;
 	gchar *mod_list = NULL;
 	GList *mods = NULL;
 	GtkTreeSelection *selection_modules_lists;
@@ -774,7 +774,7 @@ void main_mod_selection_changed(GtkTreeSelection * selection,
 				  GtkWidget * tree_widget)
 {
 	gchar *mod = NULL;
-    const gchar *mod_description = NULL;
+	const gchar *mod_description = NULL;
 	gchar *mod_list = NULL;
 	GList *mods = NULL;
 	GtkListStore *store_modules_lists;
@@ -1454,14 +1454,14 @@ void main_do_dialog_search(void)
 		GS_message(("search_type = %d",search_type));
 
 		finds = backendSearch->do_module_search(module,
-					(attribute_search_string
-					 ? mgr->getModule(module)->
-					   stripText(attribute_search_string)
-					 : mgr->getModule(module)->
-					   stripText(search_string)),
-					search_type,
-					search_params,
-					TRUE);
+							(attribute_search_string
+							 ? mgr->getModule(module)->
+							   stripText(attribute_search_string)
+							 : mgr->getModule(module)->
+							   stripText(search_string)),
+							search_type,
+							search_params,
+							TRUE);
 
 		tmp_list = g_list_first(tmp_list);
 		tmp_list = NULL;
@@ -1471,7 +1471,8 @@ void main_do_dialog_search(void)
 		mod_type = backendSearch->module_type(module);
 		while ((key_buf = backendSearch->get_next_listkey()) != NULL) {
 			if (mod_type == TEXT_TYPE)
-				g_string_printf(str, "%s: %s  %s", module,  key_buf, backendSearch->get_strip_text(module, key_buf));
+				g_string_printf(str, "%s: %s  %s", module, key_buf,
+						backendSearch->get_strip_text(module, key_buf));
 			else
 				g_string_printf(str, "%s: %s", module,  key_buf);
 			tmp_list = g_list_append(tmp_list, (char*) g_strdup(str->str));

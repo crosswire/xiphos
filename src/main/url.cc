@@ -453,10 +453,10 @@ static gint show_note(const gchar * module, const gchar * passage,
 		backend->display_mod = mgr->Modules[module];
 		backend->display_mod->setKey(passage);
 		vkey = (VerseKey*)(SWKey*)(*backend->display_mod);
-        oldAutoNorm = vkey->isAutoNormalize();
-        vkey->setAutoNormalize(0);
-        vkey->setChapter(vkey->getChapter() + 1);
-        vkey->setVerse(0);
+		oldAutoNorm = vkey->isAutoNormalize();
+		vkey->setAutoNormalize(0);
+		vkey->setChapter(vkey->getChapter() + 1);
+		vkey->setVerse(0);
 	} else
 		backend->set_module_key((gchar*)module, (gchar*)passage);
 
@@ -536,7 +536,7 @@ static gint show_note(const gchar * module, const gchar * passage,
 	}
 
 	if (stop_autonorm && vkey)
-        vkey->setAutoNormalize(oldAutoNorm);
+		vkey->setAutoNormalize(oldAutoNorm);
 	if (work_buf)
 		g_free(work_buf);
 	g_string_free(str, TRUE);

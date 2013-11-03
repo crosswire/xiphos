@@ -398,7 +398,7 @@ G_MODULE_EXPORT void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user
 			data->closed = NULL;
 			data->key = info->text2;
 			data->module = info->text3;
-            data->module_desc = g_strdup(main_get_module_description(info->text3));
+			data->module_desc = g_strdup(main_get_module_description(info->text3));
 			if ((strlen(description) > 1) || (strcmp(caption,info->text1))) {
 				data->description = info->text1;
 			}
@@ -679,7 +679,7 @@ void on_add_bookmark_activate(GtkMenuItem * menuitem,
 		data->caption = info->text1;
 		data->key = info->text2;
 		data->module = info->text3;
-        data->module_desc = g_strdup(main_get_module_description(info->text3));
+		data->module_desc = g_strdup(main_get_module_description(info->text3));
 		if (!strcmp(data->caption,buf))
 			data->description = NULL;
 		else

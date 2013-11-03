@@ -277,7 +277,7 @@ void main_do_sidebar_search(gpointer user_data)
 
 	finds = backendSearch->do_module_search(search_module,
 						mgr->getModule(search_module)->
-                             stripText(search_string),
+						stripText(search_string),
 						settings.searchType,
 						search_params,
 						FALSE);
@@ -353,8 +353,8 @@ void main_search_sidebar_fill_bounds_combos(void)
 
 	if (backendSearch->module_has_testament(module_name, 1)) {
 		while (i < key.BMAX[0]) {
-            key.setTestament(1);
-            key.setBook(i+1);
+			key.setTestament(1);
+			key.setBook(i+1);
 			book = strdup((const char *) key.getBookName());  
 #ifdef USE_GTK_3
 			gtk_combo_box_text_append_text((GtkComboBoxText*)ss.entryUpper, book);
@@ -371,8 +371,8 @@ void main_search_sidebar_fill_bounds_combos(void)
 	i = 0;
 	if (backendSearch->module_has_testament(module_name, 2)) {
 		while (i < key.BMAX[1]) {
-            key.setTestament(2);
-            key.setBook(i+1);
+			key.setTestament(2);
+			key.setBook(i+1);
 			book = strdup((const char *) key.getBookName());
 #ifdef USE_GTK_3
 			gtk_combo_box_text_append_text((GtkComboBoxText*)ss.entryUpper, book);

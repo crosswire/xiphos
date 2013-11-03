@@ -39,7 +39,7 @@ struct  _mm {
 	const char *language;
 	char *old_version;
 	char *new_version;
-    char *description;
+	char *description;
 	int installed;
 	int is_devotional;
 	int is_maps;
