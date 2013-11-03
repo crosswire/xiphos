@@ -594,7 +594,7 @@ block_render(const char *text)
 GString *
 CleanupContent(GString *text,
 	       GLOBAL_OPS *ops,
-           const char *name,
+	       const char *name,
 	       bool reset = true)
 {
 	if (ops->image_content == 0)
@@ -749,9 +749,7 @@ GTKEntryDisp::displayByChapter(SWModule &imodule)
 	}
 
 	for (key->setVerse(1);
-	     (key->getBook()    == curBook)    &&
-		 (key->getChapter() == curChapter) &&
-		 !imodule.popError();
+	     (key->getBook() == curBook) && (key->getChapter() == curChapter) && !imodule.popError();
 	     imodule++) {
 
 	    ModuleCache::CacheVerse& cVerse = ModuleMap
@@ -789,7 +787,7 @@ GTKEntryDisp::displayByChapter(SWModule &imodule)
 			vbuf = g_strdup_printf("<tr><td>%s<hr/></td><td><hr/></td></tr>",
 					       // repeated conditional check here
 					       ((before_curVerse &&
-                         (key->getVerse() > curVerse))
+						 (key->getVerse() > curVerse))
 						? (buf = g_strdup_printf(
 						       "<a name=\"%d\"> </a>", curVerse))
 						: ""));
@@ -1269,9 +1267,7 @@ GTKChapDisp::display(SWModule &imodule)
 	getVerseBefore(imodule);
 
 	for (key->setVerse(1);
-	     (key->getBook() == curBook) &&
-	     (key->getChapter() == curChapter) &&
-	     !imodule.popError();
+	     (key->getBook() == curBook) && (key->getChapter() == curChapter) && !imodule.popError();
 	     imodule++) {
 
 		ModuleCache::CacheVerse& cVerse = ModuleMap
@@ -1454,9 +1450,7 @@ DialogEntryDisp::displayByChapter(SWModule &imodule)
 			       : "ltr"));
 
 	for (key->setVerse(1);
-	     (key->getBook() == curBook) &&
-	     (key->getChapter() == curChapter) &&
-	     !imodule.popError();
+	     (key->getBook() == curBook) && (key->getChapter() == curChapter) && !imodule.popError();
 	     imodule++) {
 
 		ModuleCache::CacheVerse& cVerse = ModuleMap
@@ -1476,7 +1470,7 @@ DialogEntryDisp::displayByChapter(SWModule &imodule)
 		} else
 			rework = g_string_new(cVerse.GetText());
 		buf = g_strdup_printf("<p /><a name=\"%d\"> </a>",
-                      key->getVerse());
+				      key->getVerse());
 		swbuf.append(buf);
 		g_free(buf);
 		swbuf.append(settings.imageresize
@@ -1524,9 +1518,9 @@ DialogEntryDisp::display(SWModule &imodule)
 			      ((mf->old_font) ? mf->old_font : ""),
 			      mf->old_font_size_value,
 			      settings.bible_verse_num_color,
-                  imodule.getDescription(),
-                  imodule.getName(),
-                  imodule.getName());
+			      imodule.getDescription(),
+			      imodule.getName(),
+			      imodule.getName());
 	swbuf.append(buf);
 	g_free(buf);
 
@@ -1666,9 +1660,7 @@ DialogChapDisp::display(SWModule &imodule)
 			       : "ltr"));
 
 	for (key->setVerse(1);
-	     (key->getBook() == curBook) &&
-	     (key->getChapter() == curChapter) &&
-	     !imodule.popError();
+	     (key->getBook() == curBook) && (key->getChapter() == curChapter) && !imodule.popError();
 	     imodule++) {
 
 		ModuleCache::CacheVerse& cVerse = ModuleMap
@@ -1832,9 +1824,9 @@ GTKPrintEntryDisp::display(SWModule &imodule)
 		keytext = strdup(backend->treekey_get_local_name(
 				settings.book_offset));
 	else if (mod_type == DICTIONARY_TYPE)
-        keytext = g_strdup((char*)imodule.getKeyText());
+		keytext = g_strdup((char*)imodule.getKeyText());
 	else
-        keytext = strdup((char*)imodule.getKeyText());
+		keytext = strdup((char*)imodule.getKeyText());
 
 	buf = g_strdup_printf(HTML_START
 			      "<font face=\"%s\" size=\"%+d\">"
@@ -1849,9 +1841,9 @@ GTKPrintEntryDisp::display(SWModule &imodule)
 			      ((mf->old_font) ? mf->old_font : ""),
 			      mf->old_font_size_value,
 			      settings.bible_verse_num_color,
-                  imodule.getDescription(),
-                  imodule.getName(),
-                  imodule.getName(),
+			      imodule.getDescription(),
+			      imodule.getName(),
+			      imodule.getName(),
 			      (gchar*)keytext );
 	swbuf.append(buf);
 	g_free(buf);
@@ -1908,13 +1900,12 @@ GTKPrintChapDisp::display(SWModule &imodule)
 	main_set_global_options(ops);
 
 	for (key->setVerse(1);
-	     key->getBook() == curBook && key->getChapter() == curChapter && !imodule.popError();
+	     (key->getBook() == curBook) && (key->getChapter() == curChapter) && !imodule.popError();
 	     imodule++) {
 		int x = 0;
 		sprintf(heading, "%d", x);
-		while ((preverse
-			= backend->get_entry_attribute("Heading", "Preverse",
-						       heading)) != NULL) {
+		while ((preverse = backend->get_entry_attribute("Heading", "Preverse",
+								heading)) != NULL) {
 			SWBuf preverse2 = imodule.renderText(preverse);
 			buf = g_strdup_printf("<br/><b>%s</b><br/><br/>", preverse2.c_str());
 			swbuf.append(buf);
@@ -1929,7 +1920,7 @@ GTKPrintChapDisp::display(SWModule &imodule)
 			? "&nbsp; <a name=\"%d\" href=\"sword:///%s\">"
 			  "<font size=\"%+d\" color=\"%s\">%s%s%s%s%s%s%s</font></a>&nbsp;"
 			: "&nbsp; <a name=\"%d\"> </a>",
-			key->getVerse(),
+				      key->getVerse(),
 			(char*)key->getText(),
 			settings.verse_num_font_size + settings.base_font_size,
 			settings.bible_verse_num_color,

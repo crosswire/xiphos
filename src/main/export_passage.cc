@@ -171,7 +171,6 @@ static void _export_book(EXPORT_DATA data, int type)
   	int curBook = key->getBook();
 	int mychapter = 1;
 	int myverse = 1;
-
 	
     	key->setChapter(1);
     	key->setVerse(1);
@@ -234,7 +233,7 @@ static void _export_chapter(EXPORT_DATA data, int type)
 	SWModule *mod = mgr->Modules[settings.MainWindowModule];
 	mod->setKey(settings.currentverse);
 	VerseKey *key = (VerseKey *)(SWKey *)(*mod);
-   	int curChapter = key->getChapter();
+	int curChapter = key->getChapter();
 	int curBook = key->getBook();
 	int myverse = 1;
 
@@ -243,20 +242,18 @@ static void _export_chapter(EXPORT_DATA data, int type)
 		g_string_append_printf(str,
 				       data.chapterheader_chapter,
 				       HTML_START,
-		                       (data.version ? mod->getDescription() : ""),
+				       (data.version ? mod->getDescription() : ""),
 				       book,
-                       key->getChapter());
+				       key->getChapter());
 	else
 		g_string_append_printf(str,
 				       data.plain_chapterheader_chapter,
-                       mod->getDescription(),
+				       mod->getDescription(),
 				       book,
-                       key->getChapter());
+				       key->getChapter());
 
 	for (key->setVerse(1);
-	     (key->getBook() == curBook) &&
-	     (key->getChapter() == curChapter) &&
-	     !mod->popError();
+	     (key->getBook() == curBook) && (key->getChapter() == curChapter) && !mod->popError();
 	     (*mod)++) {
 
 		if (data.verse_num)
@@ -299,42 +296,41 @@ static void _export_verse(EXPORT_DATA data, int type)
 
 	book = backend->key_get_book(settings.currentverse);
 	if (type == HTML)
-		if(data.reference_last) 
+		if (data.reference_last) 
 			g_string_append_printf(str,
-				       data.verselayout_single_verse_ref_last,
-				       HTML_START,
-				       mod->renderText().c_str(),
-				       book,
-				       key->getChapter(),
-				       key->getVerse(),
-				       (data.version ? modstr : ""));
+					       data.verselayout_single_verse_ref_last,
+					       HTML_START,
+					       mod->renderText().c_str(),
+					       book,
+					       key->getChapter(),
+					       key->getVerse(),
+					       (data.version ? modstr : ""));
 		else 
 			g_string_append_printf(str,
-				       data.verselayout_single_verse_ref_first,
-				       HTML_START,
-				       book,
-				       key->getChapter(),
-				       key->getVerse(),
-				       (data.version ? modstr : ""),
-				       mod->renderText().c_str());
-		
+					       data.verselayout_single_verse_ref_first,
+					       HTML_START,
+					       book,
+					       key->getChapter(),
+					       key->getVerse(),
+					       (data.version ? modstr : ""),
+					       mod->renderText().c_str());
 	else
-		if(data.reference_last) 
+		if (data.reference_last) 
 			g_string_append_printf(str,
-					data.plain_verselayout_single_verse_ref_last,
-		               		(char*)mod->stripText(),
-					book,
-		               		key->getChapter(),
-		               		key->getVerse(),
-					(data.version ? modstr : ""));
+					       data.plain_verselayout_single_verse_ref_last,
+					       (char*)mod->stripText(),
+					       book,
+					       key->getChapter(),
+					       key->getVerse(),
+					       (data.version ? modstr : ""));
 		else
 			g_string_append_printf(str,
-					data.plain_verselayout_single_verse_ref_first,
-					book,
-		               		key->getChapter(),
-		               		key->getVerse(),
-					(data.version ? modstr : ""),
-		               		(char*)mod->stripText());
+					       data.plain_verselayout_single_verse_ref_first,
+					       book,
+					       key->getChapter(),
+					       key->getVerse(),
+					       (data.version ? modstr : ""),
+					       (char*)mod->stripText());
 			
 
 	if (data.filename)
@@ -376,14 +372,14 @@ static void _export_verse_range (EXPORT_DATA data, int type)
 
 	if (!data.reference_last)
 		g_string_append_printf(str,
-			       ((type == HTML) 
-			        ? data.verse_range_ref_first 
-			        : data.plain_verse_range_ref_first),
-			       book,
-                   	       key->getChapter(),
-			       data.start_verse,
-			       data.end_verse,
-			       (data.version ? modstr : ""));
+				       ((type == HTML) 
+					? data.verse_range_ref_first 
+					: data.plain_verse_range_ref_first),
+				       book,
+				       key->getChapter(),
+				       data.start_verse,
+				       data.end_verse,
+				       (data.version ? modstr : ""));
 	
 	for (key->setVerse(data.start_verse);
 	     (key->getVerse() <= data.end_verse) &&
@@ -395,8 +391,8 @@ static void _export_verse_range (EXPORT_DATA data, int type)
 		if (data.verse_num)
             		g_string_append_printf(str, 
 		                               ((type == HTML) 
-		                                   ? data.versenumber 
-		                                   : data.plain_versenumber), 
+						? data.versenumber 
+						: data.plain_versenumber), 
 		                               key->getVerse());
 
 		if (type == HTML)
@@ -410,14 +406,14 @@ static void _export_verse_range (EXPORT_DATA data, int type)
 	}
 	if (data.reference_last)
 		g_string_append_printf(str,
-			       ((type == HTML) ? data.verse_range_ref_last 
-			                       : data.plain_verse_range_ref_last),
-			       ((type == HTML) ? "<br>" : "\n"),
-			       book,
-                   	       key->getChapter(),
-			       data.start_verse,
-			       data.end_verse,
-		               (data.version ? modstr : ""));
+				       ((type == HTML) ? data.verse_range_ref_last 
+					: data.plain_verse_range_ref_last),
+				       ((type == HTML) ? "<br>" : "\n"),
+				       book,
+				       key->getChapter(),
+				       data.start_verse,
+				       data.end_verse,
+				       (data.version ? modstr : ""));
 
 	if (type == HTML)
 		g_string_append_printf(str, "</body></html> ");

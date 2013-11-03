@@ -318,7 +318,7 @@ int backend_uninstall_module(const char *dir,
 		return -1;
 	}
 	module = it->second;
-    retval = installMgr->removeModule(tmp_mgr, module->getName());
+	retval = installMgr->removeModule(tmp_mgr, module->getName());
 	delete tmp_mgr;
 	return retval;
 }

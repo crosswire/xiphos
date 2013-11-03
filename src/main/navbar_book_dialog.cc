@@ -392,5 +392,5 @@ void main_setup_navbar_book_dialog(gpointer data)
 
 	free(tmpbuf);
 	be->set_treekey(d->offset);
-    be->display_mod->display();
+	be->display_mod->display();
 }
