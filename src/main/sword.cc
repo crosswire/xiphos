@@ -112,11 +112,11 @@ void main_book_heading(char * mod_name)
 
 	backend->display_mod = mgr->Modules[mod_name];
 	vkey = (VerseKey*)(SWKey*)(*backend->display_mod);
-    vkey->setIntros(1);
-    vkey->setAutoNormalize(0);
-    vkey->setChapter(0);
-    vkey->setVerse(0);
-    backend->display_mod->display();
+	vkey->setIntros(1);
+	vkey->setAutoNormalize(0);
+	vkey->setChapter(0);
+	vkey->setVerse(0);
+	backend->display_mod->display();
 }
 
 
@@ -144,10 +144,10 @@ void main_chapter_heading(char * mod_name)
 	backend->display_mod = mgr->Modules[mod_name];
 	backend->display_mod->setKey(settings.currentverse);
 	vkey = (VerseKey*)(SWKey*)(*backend->display_mod);
-    vkey->setIntros(1);
-    vkey->setAutoNormalize(0);
-    vkey->setVerse(0);
-    backend->display_mod->display();
+	vkey->setIntros(1);
+	vkey->setAutoNormalize(0);
+	vkey->setVerse(0);
+	backend->display_mod->display();
 }
 
 
@@ -780,7 +780,7 @@ void main_dictionary_entry_changed(char * mod_name)
 	main_check_unlock(mod_name, TRUE);
 
 	backend->set_module_key(mod_name, key);
-    backend->display_mod->display();
+	backend->display_mod->display();
 
 	gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), key);
 	g_free(key);
@@ -841,9 +841,9 @@ GtkWidget *main_dictionary_drop_down_new(char * mod_name, char * old_key)
 	main_check_unlock(mod_name, TRUE);
 
 	backend->set_module_key(mod_name, key);
-    backend->display_mod->display();
+	backend->display_mod->display();
 
-    new_key = g_strdup((char*)backend->display_mod->getKeyText());
+	new_key = g_strdup((char*)backend->display_mod->getKeyText());
 
 	for (i = 0; i < (count / 2)+1; i++) {
 		(*backend->display_mod)--;
@@ -852,7 +852,7 @@ GtkWidget *main_dictionary_drop_down_new(char * mod_name, char * old_key)
 	for (i = 0; i < count; i++) {
 		free(new_key);
 		(*backend->display_mod)++;
-        new_key = g_strdup((char*)backend->display_mod->getKeyText());
+		new_key = g_strdup((char*)backend->display_mod->getKeyText());
 		/* add menu item */
 		item =
 		    gtk_menu_item_new_with_label((gchar *) new_key);
@@ -902,7 +902,7 @@ void main_dictionary_button_clicked(gint direction)
 		(*backend->display_mod)--;
 	else
 		(*backend->display_mod)++;
-    key = g_strdup((char*)backend->display_mod->getKeyText());
+	key = g_strdup((char*)backend->display_mod->getKeyText());
 	gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), key);
 	gtk_widget_activate(widgets.entry_dict);
 	g_free(key);
@@ -950,7 +950,7 @@ void main_display_book(const char * mod_name,
 
 	main_check_unlock(mod_name, TRUE);
 
-    backend->display_mod->display();
+	backend->display_mod->display();
 	main_setup_navbar_book(settings.book_mod, settings.book_offset);
 	//if (settings.browsing)
 		gui_update_tab_struct(NULL,
@@ -1010,7 +1010,7 @@ void main_display_commentary(const char * mod_name,
 	main_check_unlock(mod_name, TRUE);
 
 	backend->set_module_key(mod_name, key);
-    backend->display_mod->display();
+	backend->display_mod->display();
 
 	//if (settings.browsing)
 		gui_update_tab_struct(NULL,
@@ -1178,7 +1178,7 @@ void main_display_bible(const char * mod_name,
 	if (backend->module_has_testament(mod_name,
 				backend->get_key_testament(key))) {
 			backend->set_module_key(mod_name, key);
-            backend->display_mod->display();
+			backend->display_mod->display();
 	} else {
 		if (backend->get_key_testament(key) == 1)
 			val_key = main_update_nav_controls("Matthew 1:1");
@@ -1186,7 +1186,7 @@ void main_display_bible(const char * mod_name,
 			val_key = main_update_nav_controls("Genesis 1:1");
 
 		backend->set_module_key(mod_name, val_key);
-        backend->display_mod->display();
+		backend->display_mod->display();
 		g_free(val_key);
 	}
 

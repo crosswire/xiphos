@@ -378,7 +378,7 @@ gui_core_display_about_dialog(const gchar * desc,
 void
 gui_display_about_module_dialog(gchar *modname)
 {
-    const gchar *buf;		//-- pointer to text buffer for label (mod name)
+	const gchar *buf;	//-- pointer to text buffer for label (mod name)
 	gchar *bufabout;	//-- pointer to text buffer for text widget (mod about)
 	const gchar * version;
 

@@ -71,14 +71,14 @@ void main_navbar_set(NAVBAR navbar, const char * key)
 
 	do_display = FALSE;
 
-    vkey.setAutoNormalize(1);
+	vkey.setAutoNormalize(1);
 	vkey = key;
 
 	if ((backend->module_has_testament(navbar.module_name, 1))
-                && (vkey.getTestament() == 2))
-        book = 39 + vkey.getBook();
+	    && (vkey.getTestament() == 2))
+	        book = 39 + vkey.getBook();
 	else
-        book = vkey.getBook();
+	        book = vkey.getBook();
 
 	gtk_combo_box_set_active((GtkComboBox *)navbar.comboboxentry_book,
                                              book-1);
@@ -86,8 +86,8 @@ void main_navbar_set(NAVBAR navbar, const char * key)
 	gtk_list_store_clear(GTK_LIST_STORE(chapter_store));
 	//char xtestament = vkey.Testament() ;
 	//char xbook = vkey.Book();
-    int xchapter = vkey.getChapter();
-    int xverse = vkey.getVerse();
+	int xchapter = vkey.getChapter();
+	int xverse = vkey.getVerse();
 	x = (vkey.getChapterMax());
 	for(i=1; i <= x; i++) {
 		char *num = main_format_number(i);
@@ -105,8 +105,8 @@ void main_navbar_set(NAVBAR navbar, const char * key)
 	gtk_list_store_clear(GTK_LIST_STORE(verse_store));
 	//xtestament = vkey.Testament() ;
 	//xbook = vkey.Book();
-    xchapter = vkey.getChapter();
-    xverse = vkey.getVerse();
+	xchapter = vkey.getChapter();
+	xverse = vkey.getVerse();
 	x = (vkey.getVerseMax());
 	for(i=1; i <= x; i++) {
 		char *num = main_format_number(i);
@@ -147,8 +147,8 @@ void main_navbar_fill_book_combo(NAVBAR navbar)
 	gtk_list_store_clear(GTK_LIST_STORE(book_model));
 	if (backend->module_has_testament(navbar.module_name, 1)) {
 		while (i < key.BMAX[0]) {
-            key.setTestament(1);
-            key.setBook(i+1);
+			key.setTestament(1);
+			key.setBook(i+1);
 			book = strdup((const char *) key.getBookName());
 			char *mykey = g_strdup_printf("%s 1:1",book);
 			if (!main_get_raw_text(navbar.module_name, mykey)){
@@ -171,8 +171,8 @@ void main_navbar_fill_book_combo(NAVBAR navbar)
 	i = 0;
 	if (backend->module_has_testament(navbar.module_name, 2)) {
 		while (i < key.BMAX[1]) {
-            key.setTestament(2);
-            key.setBook(i+1);
+			key.setTestament(2);
+			key.setBook(i+1);
 			book = strdup((const char *) key.getBookName());
 			char *mykey = g_strdup_printf("%s 1:1",book);
 			if (!main_get_raw_text(navbar.module_name, mykey)){
