@@ -404,6 +404,11 @@ static void _export_verse_range (EXPORT_DATA data, int type)
 					       (char*)mod->stripText(),
 					       (settings.versestyle ? "\n" : " "));
 	}
+	// back up one verse.
+	// if we have dumped the last verse of a chapter, then we will have stepped
+	// into next chapter in order to end loop above.  this reverts us correctly.
+	(*mod)--;
+
 	if (data.reference_last)
 		g_string_append_printf(str,
 				       ((type == HTML) ? data.verse_range_ref_last 

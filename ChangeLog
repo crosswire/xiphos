@@ -1,6 +1,7 @@
 2013-11-02  karl <charcoal@users.sf.net>
 
 	* fix "Display" -> "display" typo necessities for bible dialogs.
+	* correct export passage off-by-one chapter when including last verse.
 
 2013-07-29  karl <charcoal@users.sf.net>
 
