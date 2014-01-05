@@ -61,21 +61,30 @@ Windows Help files
 -----------------
 The DocBook copies are the master copy. Any alterations on the Windows
 helpfiles should only be done if the addition is absolutely and definitely
-Windows specific about a Windows subject only. If it is advise about the way
-a common problem is solved in Windows (and a similar piece of advice should
-be given to Unix/Linux users, please add your addition to Docbook.
+Windows specific about a Windows subject only. If it is advise about the
+way a common problem is solved in Windows (and a similar piece of advice
+should be given to Unix/Linux users, please add your addition to Docbook.
 
-The Windows htmlhelp files  should regularly get updated after serious commits. 
-To create a Windows Help file you require two steps:
+The Windows htmlhelp files should regularly get updated after serious
+commits. To create a Windows Help file you require two steps:
 
 1) process the docbook files with an XSL1.0 processor - e.g. Saxon 6.5.5
 (not the newer Saxon9 versions) and the htmlhelp stylesheet (available in
-docbook-xsl) 
+docbook-xsl)
 
  java -jar saxon.jar xiphos.xml htmlhelp.xsl
 
-2) create the CHM file out of the intermediate source by using htmlhelp.exe
-on a Windows system (obtainable from Microsoft). 
+This XSL file is typically installed as:
+	/usr/share/sgml/docbook/xsl-stylesheets-1.78.1/htmlhelp/htmlhelp.xsl
+Other identically-named files such as...
+	/usr/share/asciidoc/docbook-xsl/htmlhelp.xsl
+	/usr/share/xml/docbook/slides/3.4.0/xsl/htmlhelp/htmlhelp.xsl
+...are the wrong files and must be avoided here.
 
-
-
+2) create the CHM file out of the intermediate source by using
+htmlhelp.exe on a Windows system (obtainable from Microsoft).  Use "hhc"
+(htmlhelp compiler) and the *.hhp (htmlhelp project) file.  You must copy
+the entire contents of the individual help/* directories, and for the
+non-English versions, copy in xiphos.xml from where they were installed;
+all that is present in the source tree normally is the *.po, and you need
+to run the htmlhelp compiler against xiphos.xml plus the figures.
