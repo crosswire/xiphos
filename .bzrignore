@@ -13,8 +13,6 @@ compile
 depcomp
 gnome-doc-utils.make
 omf.make
-xiphos-3.1.2.tar.bz2
-xiphos-3.1.2.tar.gz
 xmldocs.make
 install-sh
 intltool-extract.in
