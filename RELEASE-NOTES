@@ -3,6 +3,64 @@ ____________________
 XIPHOS RELEASE NOTES
 ____________________
 
+Release 3.1.6
+12 Jan 2014
+
+This release is for compatibility with the recent Sword release, a number
+of small features, and many bug fixes.
+
+This release was very delayed both due to our need for the long-awaited
+Sword 1.7 release, upon which any release of Xiphos has been dependent for
+more than a year, and because of time demands on Xiphos developers.
+
+Due to many problems with GTK3 support, 3.1.6 is being released with the
+expectation of being built against GTK2.  The GTK3 problems will be
+resolved for a future release and we will move Xiphos forward for that then.
+
+Incidental improvements and bug fixes:
+
+- The existence and placement of Preferences, Module Manager, and Advanced
+Search windows is saved.
+
+- Major compatibility changes for the underlying Sword interface,
+especially renderText() and its minions.
+
+- Live chat nick selection identifies user's platform and Xiphos version.
+
+- Manual updates to reflect recent additions (eg. Alt-A [annotate]).
+
+- Journals can be opened in regular display detached window (not editor).
+
+- "Friendly" (abbreviation) month names for devotional use in the
+dictionary pane.
+
+- Export off-by-one error when crossing chapter boundary is fixed.  Export
+also made somewhat more general and featureful.  3.1.5's missing export
+submenu is back.
+
+- Addition of repository support for HTTP, HTTPS, and SFTP.
+
+- Version differences in dbus IPC (xiphos-nav) have been homogenized.
+
+- Build inconsistencies across Linux distributions are fixed.
+
+- Removed last vestiges of unneeded, defunct KJV pilcrow (¶) handling.
+
+- A number of updates to native language support for module tree lists.
+
+- Sword's OSISVariants now works (had never been added since Sword's OSIS
+support came into existence).
+
+- Xiphos internals have moved forward to Sword's XHTML interface, leaving
+behind the old HTMLHREF interface.  Many consequent internal changes.
+
+- Unicode punctuation is no longer mis-spoken in ReadAloud.
+
+- The last of the historic gtkhtml3 support has been removed, other than
+the editor component in GTK2: Xiphos depends exclusively on webkit.  This
+is Xiphos' 5th display engine.  We do not intend to change it ever again.
+________________________________________________________________
+
 Release 3.1.5
 19 Feb 2012
 

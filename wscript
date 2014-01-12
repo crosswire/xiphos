@@ -17,7 +17,7 @@ import waffles.gnome as gnome
 bzrrevno = '$CurRevno$'
 bzrrevid = '$CurRevid$'
 
-VERSION='3.1.6dev'
+VERSION='3.1.6'
 
 APPNAME='xiphos'
 PACKAGE='xiphos'
