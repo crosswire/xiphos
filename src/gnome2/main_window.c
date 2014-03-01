@@ -632,6 +632,22 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 			gtk_widget_grab_focus(navbar_versekey.lookup_entry);
 		break;
 
+	case XK_m: // morph toggle
+		if (state == GDK_MOD1_MASK)		// Alt-M morph
+		{
+			int opt = main_get_one_option(settings.MainWindowModule,
+						      "Morphological Tags");
+			main_save_module_options(settings.MainWindowModule,
+						 "Morphological Tags",
+						 !opt);	/* negate choice */
+			gchar *url = g_strdup_printf("sword://%s/%s",
+						     settings.MainWindowModule,
+						     settings.currentverse);
+			main_url_handler(url, TRUE);
+			g_free(url);
+		}
+		break;
+
 	case XK_n: // N    "next"
 	case XK_N:
 		if (state == GDK_CONTROL_MASK)		// Ctrl-N verse
@@ -663,6 +679,22 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 	case XK_q: // quit
 		if (state == GDK_CONTROL_MASK)		// Ctrl-Q quit
 			delete_event (NULL, NULL, NULL);
+		break;
+
+	case XK_s: // strong's toggle
+		if (state == GDK_MOD1_MASK)		// Alt-S strong's
+		{
+			int opt = main_get_one_option(settings.MainWindowModule,
+						      "Strong's Numbers");
+			main_save_module_options(settings.MainWindowModule,
+						 "Strong's Numbers",
+						 !opt);	/* negate choice */
+			gchar *url = g_strdup_printf("sword://%s/%s",
+						     settings.MainWindowModule,
+						     settings.currentverse);
+			main_url_handler(url, TRUE);
+			g_free(url);
+		}
 		break;
 
 	case XK_t: // open a new tab
