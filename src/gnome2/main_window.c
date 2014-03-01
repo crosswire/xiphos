@@ -548,6 +548,14 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 	/* these are the mods we actually use for global keys, we always only check for these set */
 	guint state = event->state & (GDK_SHIFT_MASK  | GDK_CONTROL_MASK | GDK_MOD1_MASK | GDK_MOD4_MASK );
 
+	/* simple references to repetitiously-used items. */
+	/* *NOT MALLOC'd -- not to be freed* */
+	char *M = settings.MainWindowModule;
+	char *C = settings.CommWindowModule;
+	char *D = settings.DictWindowModule;
+	char *B = settings.book_mod;
+	char *V = settings.currentverse;
+
 	switch (event->keyval) {
 	case XK_Shift_L:	/* shift keys - we need this for locking strongs (and */
 	case XK_Shift_R:	/* other stuff) while moving mouse to previewer */
@@ -556,19 +564,14 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 
 	case XK_a: // Alt-A  annotation
 		if (state == GDK_MOD1_MASK) {
-			gui_mark_verse_dialog(settings.MainWindowModule,
-					      settings.currentverse);
+			gui_mark_verse_dialog(M, V);
 		}
 		break;
 
 	case XK_b: // Alt-B  bookmark
 		if (state == GDK_MOD1_MASK) {
-			gchar *label = g_strdup_printf("%s, %s",
-						       settings.currentverse,
-						       settings.MainWindowModule);
-			gui_bookmark_dialog(label,
-					    settings.MainWindowModule,
-					    settings.currentverse);
+			gchar *label = g_strdup_printf("%s, %s", V, M);
+			gui_bookmark_dialog(label, M, V);
 			g_free(label);
 		}
 		break;
@@ -589,22 +592,18 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 		if (state == GDK_CONTROL_MASK) {
 			if (settings.showtexts) {
 				gui_find_dlg(widgets.html_text,
-					     settings.MainWindowModule,
-					     FALSE, NULL);
+					     M, FALSE, NULL);
 			} else if (settings.showcomms) {
 				if (settings.comm_showing) {
 					gui_find_dlg(widgets.html_comm,
-						     settings.CommWindowModule,
-						     FALSE, NULL);
+						     C, FALSE, NULL);
 				} else {
 					gui_find_dlg(widgets.html_book,
-						     settings.book_mod,
-						     FALSE, NULL);
+						     B, FALSE, NULL);
 				}
 			} else if (settings.showdicts) {
 				gui_find_dlg(widgets.html_dict,
-					     settings.DictWindowModule,
-					     FALSE, NULL);
+					     D, FALSE, NULL);
 			} else
 			    gui_generic_warning("Xiphos: No windows.");
 		}
@@ -633,19 +632,20 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 		break;
 
 	case XK_m: // morph toggle
-		if (state == GDK_MOD1_MASK)		// Alt-M morph
-		{
-			int opt = main_get_one_option(settings.MainWindowModule,
-						      "Morphological Tags");
-			main_save_module_options(settings.MainWindowModule,
-						 "Morphological Tags",
-						 !opt);	/* negate choice */
-			gchar *url = g_strdup_printf("sword://%s/%s",
-						     settings.MainWindowModule,
-						     settings.currentverse);
-			main_url_handler(url, TRUE);
-			g_free(url);
+		if (main_check_for_global_option((gchar*)M, "GBFMorph") ||
+		    main_check_for_global_option((gchar*)M, "ThMLMorph") ||
+		    main_check_for_global_option((gchar*)M, "OSISMorph")) {
+			if (state == GDK_MOD1_MASK)		// Alt-M morph
+			{
+				int opt = main_get_one_option(M, "Morphological Tags");
+				main_save_module_options(M, "Morphological Tags", !opt);
+				gchar *url = g_strdup_printf("sword://%s/%s", M, V);
+				main_url_handler(url, TRUE);
+				g_free(url);
+			}
 		}
+		else
+			gui_generic_warning(_("Module has no morphology support."));
 		break;
 
 	case XK_n: // N    "next"
@@ -682,19 +682,20 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 		break;
 
 	case XK_s: // strong's toggle
-		if (state == GDK_MOD1_MASK)		// Alt-S strong's
-		{
-			int opt = main_get_one_option(settings.MainWindowModule,
-						      "Strong's Numbers");
-			main_save_module_options(settings.MainWindowModule,
-						 "Strong's Numbers",
-						 !opt);	/* negate choice */
-			gchar *url = g_strdup_printf("sword://%s/%s",
-						     settings.MainWindowModule,
-						     settings.currentverse);
-			main_url_handler(url, TRUE);
-			g_free(url);
+		if ((main_check_for_global_option((gchar*)M, "GBFStrongs")) ||
+		    (main_check_for_global_option((gchar*)M, "ThMLStrongs")) ||
+		    (main_check_for_global_option((gchar*)M, "OSISStrongs"))) {
+			if (state == GDK_MOD1_MASK)		// Alt-S strong's
+			{
+				int opt = main_get_one_option(M, "Strong's Numbers");
+				main_save_module_options(M, "Strong's Numbers", !opt);
+				gchar *url = g_strdup_printf("sword://%s/%s", M, V);
+				main_url_handler(url, TRUE);
+				g_free(url);
+			}
 		}
+		else
+			gui_generic_warning(_("Module has no Strong's support."));
 		break;
 
 	case XK_t: // open a new tab
