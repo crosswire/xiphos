@@ -757,6 +757,12 @@
 			<listitem>
 				<para><guibutton>Shift-F10</guibutton> brings up the context menu for the Bible pane.</para>
 			</listitem>
+			<listitem>
+				<para><guibutton>Alt-S</guibutton>: Toggle Strong's display.</para>
+			</listitem>
+			<listitem>
+				<para><guibutton>Alt-M</guibutton>: Toggle morphology display.</para>
+			</listitem>
 		</itemizedlist>
 		<para>
 		Opening special windows:
