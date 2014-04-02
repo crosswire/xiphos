@@ -1115,7 +1115,7 @@ static gint show_strongs(DIALOG_DATA * t, const gchar * type,
 	gchar *mybuf = NULL;
 	static GtkWidget *dlg;
 
-	if (!strcmp(t->mod_name,"NASB")) {
+	if (!strncmp(t->mod_name,"NASB",4)) {
 		if (!strcmp(type,"Greek"))
 			modbuf = "NASGreek";
 		else
@@ -1231,11 +1231,11 @@ static gint show_strongs_morph(DIALOG_DATA * d,const gchar * type, const gchar *
 	gchar *morph_buf = NULL;
 	static GtkWidget *dlg;
 
-	if (!strcmp(d->mod_name,"NASB")) {
+	if (!strncmp(d->mod_name,"NASB",4)) {
 		if (!strcmp(type,"Greek"))
-			modbuf = "NASBgreek";
+			modbuf = "NASgreek";
 		else
-			modbuf = "NASBhebrew";
+			modbuf = "NAShebrew";
 	} else {
 		if (!strcmp(type,"Greek")) {
 			modbuf = settings.lex_greek;
