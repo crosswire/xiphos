@@ -681,6 +681,22 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 			delete_event (NULL, NULL, NULL);
 		break;
 
+	case XK_r: // red words toggle
+		if ((main_check_for_global_option((gchar*)M, "GBFRedLetterWords")) ||
+		    (main_check_for_global_option((gchar*)M, "OSISRedLetterWords"))) {
+			if (state == GDK_MOD1_MASK)		// Alt-R red words
+			{
+				int opt = main_get_one_option(M, "Words of Christ in Red");
+				main_save_module_options(M, "Words of Christ in Red", !opt);
+				gchar *url = g_strdup_printf("sword://%s/%s", M, V);
+				main_url_handler(url, TRUE);
+				g_free(url);
+			}
+		}
+		else
+			gui_generic_warning(_("Module has no Red Words support."));
+		break;
+
 	case XK_s: // strong's toggle
 		if ((main_check_for_global_option((gchar*)M, "GBFStrongs")) ||
 		    (main_check_for_global_option((gchar*)M, "ThMLStrongs")) ||
