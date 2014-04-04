@@ -763,6 +763,9 @@
 			<listitem>
 				<para><guibutton>Alt-M</guibutton>: Toggle morphology display.</para>
 			</listitem>
+			<listitem>
+				<para><guibutton>Alt-R</guibutton>: Toggle "red words of Christ" display.</para>
+			</listitem>
 		</itemizedlist>
 		<para>
 		Opening special windows:
