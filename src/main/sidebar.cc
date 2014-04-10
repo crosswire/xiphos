@@ -144,9 +144,10 @@ void main_display_verse_list_in_sidebar(gchar * key,
 	GtkTreeIter iter;
 	RESULTS *list_item;
 
-	/* can't happen? but was reported 10 apr 2014?!? */
+	/* improper xref encoding, not BCV: gets null list from Sword. */
 	if (verse_list == NULL) {
-		gui_generic_warning((char *)"null list!\nreport this, w/module & verse");
+		gui_generic_warning((char *)"Module error: Unusable xref encoding.\n"
+				    "Please report this, with module & verse");
 		return;
 	}
 
