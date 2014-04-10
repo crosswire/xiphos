@@ -37,6 +37,7 @@
 #include "gui/sidebar.h"
 #include "gui/tabbed_browser.h"
 #include "gui/utilities.h"
+#include "gui/dialog.h"
 
 #include "main/sidebar.h"
 #include "main/configs.h"
@@ -145,7 +146,7 @@ void main_display_verse_list_in_sidebar(gchar * key,
 
 	/* can't happen? but was reported 10 apr 2014?!? */
 	if (verse_list == NULL) {
-		gui_generic_warning("null list!\nreport this, w/module & verse");
+		gui_generic_warning((char *)"null list!\nreport this, w/module & verse");
 		return;
 	}
 
