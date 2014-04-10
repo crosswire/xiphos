@@ -143,6 +143,12 @@ void main_display_verse_list_in_sidebar(gchar * key,
 	GtkTreeIter iter;
 	RESULTS *list_item;
 
+	/* can't happen? but was reported 10 apr 2014?!? */
+	if (verse_list == NULL) {
+		gui_generic_warning("null list!\nreport this, w/module & verse");
+		return;
+	}
+
 	is_search_result = FALSE;
 
 	GS_warning(("verse_list = %s",verse_list));
