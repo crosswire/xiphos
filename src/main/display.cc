@@ -692,6 +692,10 @@ set_morph_order(SWModule& imodule)
 void
 set_render_numbers(SWModule& imodule, GLOBAL_OPS *ops)
 {
+	// if we have not yet determined options, don't bother.
+	if (!ops)
+		return;
+
 	for (FilterList::const_iterator it =
 		 imodule.getRenderFilters().begin();
 	     it != imodule.getRenderFilters().end();
