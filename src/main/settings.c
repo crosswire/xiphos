@@ -178,7 +178,8 @@ int settings_init(int argc, char **argv, int new_configs, int new_bookmarks)
 			buf_says_empty = (buf.st_size == 0);
 			rename(backup_name, settings.fnconfigure);
 			gui_init(argc, argv);
-			gui_generic_warning(_("Empty settings file -- backup recovery attempted.\nSome information may have been lost."));
+			gui_generic_warning(_("Empty settings file -- backup recovery attempted.\n"
+					      "Some information may have been lost."));
 		}
 		else gui_generic_warning(_("Empty settings file -- no backup?!? Information lost!"));
 		g_free(backup_name);
@@ -208,7 +209,10 @@ int settings_init(int argc, char **argv, int new_configs, int new_bookmarks)
 		main_init_lists();
 		if (settings.havebible == 0) {
 			gui_generic_warning
-			    (_("There are no Bibles installed.\nEvidently, you declined to install any.\n\nWithout any Bible modules to display,\nXiphos cannot proceed,\nand will now exit."));
+			    (_("There are no Bibles installed.\n"
+			       "Evidently, you declined to install any.\n\n"
+			       "Without any Bible modules to display,\n"
+			       "Xiphos cannot proceed,\nand will now exit."));
 			exit(1);
 		}
 		gui_generic_warning(_("Bible module installation complete."));
