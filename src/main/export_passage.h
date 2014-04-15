@@ -34,8 +34,6 @@ struct _export_data {
 	char *chapterheader_book;
 	char *chapterheader_chapter;
 	char *versenumber;
-	char *verselayout_chapter;
-	char *verselayout_range_verses;
 	char *verselayout_single_verse_ref_last;
 	char *verselayout_single_verse_ref_first;
 	char *verse_range_ref_last;
@@ -44,8 +42,6 @@ struct _export_data {
 	char *plain_chapterheader_book;
 	char *plain_chapterheader_chapter;
 	char *plain_versenumber;
-	char *plain_verselayout_chapter;
-	char *plain_verselayout_range_verses;
 	char *plain_verselayout_single_verse_ref_last;
 	char *plain_verselayout_single_verse_ref_first;
 	char *plain_verse_range_ref_last;
@@ -70,8 +66,7 @@ enum {
 
 int main_get_max_verses (void);
 int main_get_current_verse (void);
-void main_export_html (EXPORT_DATA data);
-void main_export_plain (EXPORT_DATA data);
+void main_export_content(EXPORT_DATA data, gint format);
 
 #ifdef __cplusplus
 }

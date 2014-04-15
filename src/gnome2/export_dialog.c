@@ -73,7 +73,13 @@ struct _export_dialog {
 };
 
 EXPORT_DIALOG d;
-EXPORT_DATA edata;
+EXPORT_DATA edata = {
+    NULL,
+    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+    NULL,
+    -1, -1, -1, -1, -1, -1
+};
 
 /******************************************************************************
  * Name
@@ -103,10 +109,7 @@ void on_filechooserdialog_response(GtkDialog * fdialog,
 	case GTK_RESPONSE_ACCEPT:
 		edata.filename = g_strdup(gtk_file_chooser_get_filename(filesel));
 
-		if (d.format)
-			main_export_html(edata);
-		else
-			main_export_plain(edata);
+		main_export_content(edata, d.format);
 		break;
 
 	case GTK_RESPONSE_CANCEL:
@@ -258,10 +261,7 @@ void on_dialog_export_passage_response(GtkDialog * dialog,
 			_get_export_filename();
 		else {
 			edata.filename = NULL;
-			if (d.format)
-				main_export_html(edata);
-			else
-				main_export_plain(edata);
+			main_export_content(edata, d.format);
 		}
 		gtk_widget_destroy(GTK_WIDGET(dialog));
 		break;

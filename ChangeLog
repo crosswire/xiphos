@@ -1,3 +1,7 @@
+2014-04-14  karl <charcoal@users.sf.net>
+
+	* fix bad passage export structure failure-to-init and data bleed.
+
 2014-04-10  karl <charcoal@users.sf.net>
 
 	* added crash-avoidance test for null list in display_verse_list.
