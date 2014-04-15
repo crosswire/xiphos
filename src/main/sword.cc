@@ -698,11 +698,11 @@ void main_init_backend(void)
 
 	backend->init_SWORD(0);
 	settings.path_to_mods = main_get_path_to_mods();
-#ifndef DEBUG
+//#ifndef DEBUG
 	g_chdir(settings.path_to_mods);
-#else
-	GS_warning(("no chdir(SWORD_PATH) => modmgr 'archive' may not work"));
-#endif
+//#else
+//	GS_warning(("no chdir(SWORD_PATH) => modmgr 'archive' may not work"));
+//#endif
 	GS_print(("%s sword-%s\n", "Starting", backend->get_sword_version()));
 	GS_print(("%s\n", "Initiating SWORD"));
 	GS_print(("%s: %s\n","path to sword", settings.path_to_mods));

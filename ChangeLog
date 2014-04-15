@@ -3,6 +3,7 @@
 	* small formatting cleanup in settings.c.
 	* removed user permission query for gconf handlers (bug 507).
 	* removed middle-click on bookmark (bug 509).
+	* unconditionalized chdir(sword_path) from DEBUG (bug 510).
 
 2014-04-14  karl <charcoal@users.sf.net>
 
