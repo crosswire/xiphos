@@ -799,7 +799,7 @@ static gboolean button_release_event(GtkWidget * widget,
 				    g_strdup_printf
 				    ("passagestudy.jsp?action=showBookmark&"
 				     "type=%s&value=%s&module=%s",
-				     (button_one) ? "currentTab" : "newTab",
+				     "currentTab",
 				     main_url_encode(key),
 				     main_url_encode(module));
 			if (url) {
