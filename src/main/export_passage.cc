@@ -434,38 +434,22 @@ static void _export_verse_range (EXPORT_DATA data, int type)
 }
 
 
-void main_export_html(EXPORT_DATA data)
+void main_export_content(EXPORT_DATA data, gint format)
 {
-	switch (data.passage_type) {
-		case BOOK:
-			_export_book(data, HTML);
-			break;
-		case CHAPTER:
-			_export_chapter(data, HTML);
-			break;
-		case VERSE:
-			_export_verse(data, HTML);
-			break;
-		case VERSE_RANGE:
-			_export_verse_range(data, HTML);
-			break;
-	}
-}
+	int style = (format ? HTML : PLAIN);
 
-void main_export_plain(EXPORT_DATA data)
-{
 	switch (data.passage_type) {
 		case BOOK:
-			_export_book(data, PLAIN);
+			_export_book(data, style);
 			break;
 		case CHAPTER:
-			_export_chapter(data, PLAIN);
+			_export_chapter(data, style);
 			break;
 		case VERSE:
-			_export_verse(data, PLAIN);
+			_export_verse(data, style);
 			break;
 		case VERSE_RANGE:
-			_export_verse_range(data, PLAIN);
+			_export_verse_range(data, style);
 			break;
 	}
 }
