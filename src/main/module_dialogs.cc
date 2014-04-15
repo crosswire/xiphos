@@ -1233,9 +1233,9 @@ static gint show_strongs_morph(DIALOG_DATA * d,const gchar * type, const gchar *
 
 	if (!strncmp(d->mod_name,"NASB",4)) {
 		if (!strcmp(type,"Greek"))
-			modbuf = "NASgreek";
+			modbuf = "NASGreek";
 		else
-			modbuf = "NAShebrew";
+			modbuf = "NASHebrew";
 	} else {
 		if (!strcmp(type,"Greek")) {
 			modbuf = settings.lex_greek;
