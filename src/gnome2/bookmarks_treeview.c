@@ -60,7 +60,6 @@
 GtkTreeStore *model;
 GtkTreeModel *tree_model;
 gboolean button_one;
-gboolean button_two;
 gboolean use_dialog;
 GtkTreeSelection *current_selection;
 GtkTreeView *bookmark_tree;
@@ -469,6 +468,7 @@ static void row_changed(GtkTreeModel * treemodel, GtkTreePath * arg1,
 			GtkTreeIter * arg2, gpointer user_data)
 {
 	bookmarks_changed = TRUE;
+	gui_save_bookmarks_treeview();
 }
 
 
@@ -703,7 +703,6 @@ static gboolean button_release_event(GtkWidget * widget,
 	gchar *description = NULL;
 	gchar *url = NULL;
 	button_one = FALSE;
-	button_two = FALSE;
 
 	selection = gtk_tree_view_get_selection(bookmark_tree);
 	current_selection = selection;
@@ -712,7 +711,9 @@ static gboolean button_release_event(GtkWidget * widget,
 				   2, &caption,
 				   3, &key,
 				   4, &module,
-				   5, &mod_desc, 6, &description, -1);
+				   5, &mod_desc,
+				   6, &description,
+				   -1);
 		if (!gtk_tree_model_iter_has_child
 		    (GTK_TREE_MODEL(model), &selected) && key != NULL) {
 			gboolean multi = (strpbrk(key, "-;,") != NULL);
@@ -750,7 +751,8 @@ static gboolean button_release_event(GtkWidget * widget,
 		button_one = TRUE;
 		break;
 	case 2:
-		button_two = TRUE;
+		gui_generic_warning(_("Opening a multi-reference bookmark in\n"
+				      "separate tabs is not supported."));
 		break;
 	case 3:
 		g_free(caption);
@@ -792,7 +794,7 @@ static gboolean button_release_event(GtkWidget * widget,
 				     main_url_encode(key),
 				     main_url_encode(module));
 
-			else
+			else if (button_one)
 				url =
 				    g_strdup_printf
 				    ("passagestudy.jsp?action=showBookmark&"
@@ -800,9 +802,10 @@ static gboolean button_release_event(GtkWidget * widget,
 				     (button_one) ? "currentTab" : "newTab",
 				     main_url_encode(key),
 				     main_url_encode(module));
-			main_url_handler(url, TRUE);
-			g_free(url);
-
+			if (url) {
+				main_url_handler(url, TRUE);
+				g_free(url);
+			}
 		}
 		g_free(caption);
 		g_free(key);
