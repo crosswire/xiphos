@@ -98,9 +98,8 @@ void gui_main(void)
  *   void
  */
 
-#define	GS_GCONF_PERMISSION	_("URL references using \"sword://\" (similar to web page\nreferences) can be used by programs to look up\nscripture references. Your system currently has no\nprogram set to handle these references.\n\nWould you like Xiphos to set itself as the\nprogram to handle these references?")
-
-#define	GS_GCONF_SUCCESS	_("Xiphos has successfully set itself\nas the handler of sword:// and bible:// URLs.\n\nYou may wish to run the program \"gconf-editor\"\nto examine keys under /desktop/gnome/url-handlers,\nif you need to change these.")
+/* NOTE: removed query for user permission to install handlers around -r4528. */
+/* we don't ask any more, because there's no good reason not to take over.    */
 
 char *gconf_keys[GS_GCONF_MAX][2] = {
     { "/desktop/gnome/url-handlers/bible/command",        "xiphos-nav \"%s\"" },
@@ -116,9 +115,6 @@ void gconf_setup()
 {
 	int i;
 	gchar *str;
-#ifdef DEBUG
-	gboolean retval;
-#endif
 	GConfClient* client = gconf_client_get_default();
 
 	if (client == NULL)
@@ -134,17 +130,11 @@ void gconf_setup()
 	if ((((str = gconf_client_get_string(client, gconf_keys[0][0],
 					    NULL)) == NULL) ||
 	     (strncmp(str, "xiphos ", 7) == 0))
-#ifdef DEBUG
-	    && gui_yes_no_dialog(GS_GCONF_PERMISSION, NULL)
-#endif /* DEBUG */
 	    ) {
 		/*
 		 * Mechanical as can be, one after another.
 		 */
 		for (i = 0; i < GS_GCONF_MAX; ++i) {
-#ifdef DEBUG
-			retval =
-#endif
 			(((i % 3) == 0)	/* contrived hack */
 				  ? gconf_client_set_string
 					(client,
@@ -156,19 +146,7 @@ void gconf_setup()
 					 gconf_keys[i][0],
 					 (gconf_keys[i][1] ? TRUE : FALSE),
 					 NULL));
-#ifdef DEBUG
-			if (!retval) {
-				char msg[256];
-				sprintf(msg, _("Xiphos failed to complete handler init for key #%d:\n%s"),
-					i, gconf_keys[i][0]);
-				gui_generic_warning(msg);
-				return;
-			}
-#endif /* DEBUG */
 		}
-#ifdef DEBUG
-		gui_generic_warning(GS_GCONF_SUCCESS);
-#endif /* DEBUG */
 	}
 }
 #endif /* WIN32 */

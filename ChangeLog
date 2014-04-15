@@ -1,3 +1,9 @@
+'2014-04-15  karl <charcoal@users.sf.net>
+
+	* small formatting cleanup in settings.c.
+	* removed user permission query for gconf handlers (bug 507).
+	* removed middle-click on bookmark (bug 509).
+
 2014-04-14  karl <charcoal@users.sf.net>
 
 	* fix bad passage export structure failure-to-init and data bleed.
