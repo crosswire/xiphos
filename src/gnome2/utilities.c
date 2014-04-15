@@ -1569,7 +1569,13 @@ void xiphos_create_archive(gchar* conf_file, gchar* datapath, gchar *zip,
 	gchar* moddirname;
 	GString *modpath;
 	int i;
-	gsf_init();
+
+	/* don't confuse gsf by init'ing more than once. */
+	static gboolean have_init_gsf = FALSE;
+	if (!have_init_gsf) {
+		gsf_init();
+		have_init_gsf = TRUE;
+	}
 
 	/* the module dir is the last part of the path */
 	path = g_strsplit(datapath, "/", -1);
