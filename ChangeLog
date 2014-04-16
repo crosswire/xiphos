@@ -1,4 +1,9 @@
-'2014-04-15  karl <charcoal@users.sf.net>
+2014-04-16  karl <charcoal@users.sf.net>
+
+	* conditionalize heading wrap <br/><b>%s</b><br/><br/> for
+	  non-OSIS because OSIS modules now self-render standoff.
+
+2014-04-15  karl <charcoal@users.sf.net>
 
 	* small formatting cleanup in settings.c.
 	* removed user permission query for gconf handlers (bug 507).
