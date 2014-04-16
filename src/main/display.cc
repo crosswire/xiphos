@@ -646,7 +646,7 @@ CleanupContent(GString *text,
 void
 CacheHeader(ModuleCache::CacheVerse& cVerse,
 	    SWModule& mod,
-	    GLOBAL_OPS *ops, BackEnd *be)
+	    GLOBAL_OPS *ops, BackEnd *be, bool is_osis)
 {
 	int x = 0;
 	gchar heading[8];
@@ -660,16 +660,19 @@ CacheHeader(ModuleCache::CacheVerse& cVerse,
 	while ((preverse = be->get_entry_attribute("Heading", "Preverse",
 						   heading)) != NULL) {
 		preverse2 = mod.renderText(preverse);
+		// OSIS modules now self-render their standoff markup.
+		// so we conditionalize <br/><b>%s</b><br/><br/> on is_osis.
 		g_string_printf(text,
-				"<br/><b>%s</b><br/><br/>",
+				"%s%s%s",
+				(is_osis ? "" : "<br/><b>"),
 				(((ops->strongs || ops->lemmas) ||
 				  ops->morphs)
 				 ? block_render(preverse2.c_str())
-				 : preverse2.c_str()));
+				 : preverse2.c_str()),
+				(is_osis ? "" : "</b><br/><br/>"));
 		text = CleanupContent(text, ops, mod.getName(), false);
 
 		cVerse.AppendHeader(text->str);
-		//g_free((gchar *)preverse2);
 		g_free((gchar *)preverse);
 		++x;
 		sprintf(heading, "%d", x);
@@ -1211,6 +1214,8 @@ GTKChapDisp::display(SWModule &imodule)
 	ops = main_new_globals(ModuleName);
 	cache_flags = ConstructFlags(ops);
 	marked_element *e = NULL;
+	char *sourcetype = main_get_mod_config_entry(imodule.getName(), "SourceType");
+	bool is_osis = (sourcetype && !strcmp(sourcetype, "OSIS"));
 
 	is_rtol = main_is_mod_rtol(ModuleName);
 	mf = get_font(ModuleName);
@@ -1283,7 +1288,7 @@ GTKChapDisp::display(SWModule &imodule)
 
 		// use the module cache rather than re-accessing Sword.
 		if (!cVerse.HeaderIsValid())
-			CacheHeader(cVerse, imodule, ops, be);
+			CacheHeader(cVerse, imodule, ops, be, is_osis);
 
 		if (cache_flags & ModuleCache::Headings) {
 			swbuf.append(settings.imageresize
@@ -1593,6 +1598,8 @@ DialogChapDisp::display(SWModule &imodule)
 	char *num;
 	GString *rework;			// for image size analysis rework.
 	marked_element *e = NULL;
+	char *sourcetype = main_get_mod_config_entry(imodule.getName(), "SourceType");
+	bool is_osis = (sourcetype && !strcmp(sourcetype, "OSIS"));
 
 	const char *ModuleName = imodule.getName();
 	ops = main_new_globals(ModuleName);
@@ -1685,7 +1692,7 @@ DialogChapDisp::display(SWModule &imodule)
 			rework = g_string_new(cVerse.GetText());
 
 		if (!cVerse.HeaderIsValid())
-			CacheHeader(cVerse, imodule, ops, be);
+			CacheHeader(cVerse, imodule, ops, be, is_osis);
 
 		if (cache_flags & ModuleCache::Headings)
 			swbuf.append(settings.imageresize
@@ -1877,6 +1884,8 @@ GTKPrintChapDisp::display(SWModule &imodule)
 	gchar heading[32];
 	SWBuf swbuf;
 	char *num;
+	char *sourcetype = main_get_mod_config_entry(imodule.getName(), "SourceType");
+	bool is_osis = (sourcetype && !strcmp(sourcetype, "OSIS"));
 
 	GLOBAL_OPS * ops = main_new_globals(imodule.getName());
 	gboolean is_rtol = main_is_mod_rtol(imodule.getName());
@@ -1911,7 +1920,10 @@ GTKPrintChapDisp::display(SWModule &imodule)
 		while ((preverse = backend->get_entry_attribute("Heading", "Preverse",
 								heading)) != NULL) {
 			SWBuf preverse2 = imodule.renderText(preverse);
-			buf = g_strdup_printf("<br/><b>%s</b><br/><br/>", preverse2.c_str());
+			buf = g_strdup_printf("%s%s%s",
+					      (is_osis ? "" : "<br/><b>"),
+					      preverse2.c_str(),
+					      (is_osis ? "" : "</b><br/><br/>"));
 			swbuf.append(buf);
 			g_free(buf);
 			g_free(preverse);
