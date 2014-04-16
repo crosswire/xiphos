@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-13 23:11+0200\n"
+"POT-Creation-Date: 2014-04-15 18:01-0400\n"
 "PO-Revision-Date: 2010-03-26 08:39+0000\n"
 "Last-Translator: Marjan Šavli <marjan.savli@gmail.com>\n"
 "Language-Team: Slovenščina (Slovene) <gnomesword-developers@lists."
@@ -22,14 +22,14 @@ msgstr ""
 "X-Language: sl_SI\n"
 "X-Poedit-Language: Slovene\n"
 
-#: ../src/backend/sword_main.cc:741
+#: ../src/backend/sword_main.cc:740
 msgid ""
 "Xiphos failure: \"can't happen\", display_mod: null\n"
 "Please report this. sword_main.cc:set_treekey\n"
 "What were you doing when this occurred?"
 msgstr ""
 
-#: ../src/backend/sword_main.cc:1092
+#: ../src/backend/sword_main.cc:1091
 msgid "Configuration not found"
 msgstr "Ne najdem nastavitev"
 
@@ -277,7 +277,7 @@ msgstr "Xiphos razvoj"
 
 #: ../src/gnome2/about_xiphos.c:122
 #, fuzzy
-msgid "Copyright © 2000-2013 Xiphos Development Team"
+msgid "Copyright © 2000-2014 Xiphos Development Team"
 msgstr "Avtorske pravice 2000-2010 Xiphos razvojna skupina"
 
 #: ../src/gnome2/about_xiphos.c:125
@@ -297,13 +297,13 @@ msgstr ""
 #. info->stock_icon = GTK_STOCK_OPEN;
 #: ../src/gnome2/bookmark_dialog.c:175 ../src/gnome2/bookmarks_menu.c:369
 #: ../src/gnome2/bookmarks_menu.c:664 ../src/gnome2/bookmarks_menu.c:763
-#: ../src/gnome2/bookmarks_treeview.c:131 ../ui/editor_studypad.xml.h:15
+#: ../src/gnome2/bookmarks_treeview.c:130 ../ui/editor_studypad.xml.h:15
 #: ../ui/xi-menus.glade.h:56 ../ui/xi-menus-popup.gtkbuilder.h:35
 msgid "Bookmark"
 msgstr "Zaznamek"
 
 #: ../src/gnome2/bookmark_dialog.c:177 ../src/gnome2/bookmarks_menu.c:765
-#: ../src/gnome2/bookmarks_treeview.c:132
+#: ../src/gnome2/bookmarks_treeview.c:131
 msgid "Enter Folder Name"
 msgstr "Vnesi ime mape"
 
@@ -312,7 +312,7 @@ msgid "Folder Name"
 msgstr "Ime Mape"
 
 #: ../src/gnome2/bookmark_dialog.c:180 ../src/gnome2/bookmarks_menu.c:768
-#: ../src/gnome2/bookmarks_treeview.c:134
+#: ../src/gnome2/bookmarks_treeview.c:133
 msgid "Folder: "
 msgstr "Mapa: "
 
@@ -362,13 +362,19 @@ msgstr "Dodaj"
 msgid "Label: "
 msgstr "Oznaka: "
 
-#: ../src/gnome2/bookmarks_treeview.c:105 ../src/gnome2/export_bookmarks.c:195
+#: ../src/gnome2/bookmarks_treeview.c:104 ../src/gnome2/export_bookmarks.c:195
 #: ../src/gnome2/export_bookmarks.c:254
 #, c-format
 msgid "Search result: %s"
 msgstr "Rezultat iskanja: %s"
 
-#: ../src/gnome2/bookmarks_treeview.c:846 ../src/gnome2/sidebar.c:1430
+#: ../src/gnome2/bookmarks_treeview.c:754
+msgid ""
+"Opening a multi-reference bookmark in\n"
+"separate tabs is not supported."
+msgstr ""
+
+#: ../src/gnome2/bookmarks_treeview.c:849 ../src/gnome2/sidebar.c:1430
 #: ../src/gnome2/sidebar.c:1463
 msgid "Bookmarks"
 msgstr "Zaznamki"
@@ -460,103 +466,55 @@ msgstr "+0"
 msgid "Use the default font for this module"
 msgstr "Za ta modul uporabi privzeto pisavo"
 
-#. *****************************************************************************
-#. * Name
-#. *    gconf_setup
-#. *
-#. * Synopsis
-#. *   #include "main/settings.h"
-#. *
-#. *   void gconf_setup()
-#. *
-#. * Description
-#. *   verifies and initializes the GConf subsystem, so that "sword://" and
-#. *   similar can be handled by url-comprehending programs such as browsers.
-#. *   dialogs for permission/success/failure => conditional on debug build.
-#. *
-#. * Return value
-#. *   void
-#.
-#: ../src/gnome2/gui.c:101
-msgid ""
-"URL references using \"sword://\" (similar to web page\n"
-"references) can be used by programs to look up\n"
-"scripture references. Your system currently has no\n"
-"program set to handle these references.\n"
-"\n"
-"Would you like Xiphos to set itself as the\n"
-"program to handle these references?"
-msgstr ""
-"URL reference \"sword://\" (podobno kot spletne\n"
-"strani) lahko uporabljajo programi da pogledajo\n"
-"biblijske reference. Vaš sistem trenutno nima\n"
-"nobenega programa ki bi bil nastavljen za\n"
-"upravljanje s temi referencami.\n"
-"\n"
-"Ali želite da se Xiphos nastavi kot program\n"
-"za upravljanje s temi referencami?"
-
-#: ../src/gnome2/gui.c:103
-msgid ""
-"Xiphos has successfully set itself\n"
-"as the handler of sword:// and bible:// URLs.\n"
-"\n"
-"You may wish to run the program \"gconf-editor\"\n"
-"to examine keys under /desktop/gnome/url-handlers,\n"
-"if you need to change these."
-msgstr ""
-"Xiphos se je uspešno nastavil kot upravljalec\n"
-"sword:// in bible:// URLjev.\n"
-"\n"
-"Če jih želite spremeniti mogoče želite zagnati\n"
-"program \"gconf-editor\" da preiščete zapise \n"
-"pod /desktop/gnome/url-handlers."
-
-#: ../src/gnome2/gui.c:162
-#, c-format
-msgid ""
-"Xiphos failed to complete handler init for key #%d:\n"
-"%s"
-msgstr ""
-"Xiphos ni uspel dokončati upravljanja za ključ #%d:\n"
-"%s"
-
-#: ../src/gnome2/gui.c:208
+#: ../src/gnome2/gui.c:186
 msgid "BUG! Xiphos is about to crash due to a \"STRDUP\" error."
 msgstr "HROŠČ! Xiphos je tik pred tem da se zruši zaradi \"STRDUP\" napake."
 
-#: ../src/gnome2/gui.c:209 ../src/gnome2/gui.c:244
+#: ../src/gnome2/gui.c:187 ../src/gnome2/gui.c:222
 msgid "Please report this error to the Xiphos team with:"
 msgstr "Prosimo sporočite to napako Xiphos osebju z:"
 
-#: ../src/gnome2/gui.c:243
+#: ../src/gnome2/gui.c:221
 msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
 msgstr "HROŠČ! Xiphos je tik pred tem da se zruši zaradi \"STRING\" napake."
 
-#: ../src/gnome2/main_window.c:790
+#: ../src/gnome2/main_window.c:648
+msgid "Module has no morphology support."
+msgstr ""
+
+#: ../src/gnome2/main_window.c:697
+msgid "Module has no Red Words support."
+msgstr ""
+
+#: ../src/gnome2/main_window.c:714
+#, fuzzy
+msgid "Module has no Strong's support."
+msgstr "V modulih ki imajo krepke številke"
+
+#: ../src/gnome2/main_window.c:839
 msgid "Xiphos - Bible Study Software"
 msgstr "Xiphos - Program za proučevanje Biblije"
 
-#: ../src/gnome2/main_window.c:846
+#: ../src/gnome2/main_window.c:895
 msgid "Open a new tab"
 msgstr "Odpri nov zavihek"
 
-#: ../src/gnome2/main_window.c:926 ../src/gnome2/sidebar.c:627
-#: ../src/gnome2/sidebar.c:633 ../src/main/sidebar.cc:651
-#: ../src/main/sidebar.cc:996 ../src/main/sidebar.cc:997
-#: ../src/main/sidebar.cc:998
+#: ../src/gnome2/main_window.c:975 ../src/gnome2/sidebar.c:627
+#: ../src/gnome2/sidebar.c:633 ../src/main/sidebar.cc:659
+#: ../src/main/sidebar.cc:1004 ../src/main/sidebar.cc:1005
+#: ../src/main/sidebar.cc:1006
 msgid "Standard View"
 msgstr "Običajen pogled"
 
-#: ../src/gnome2/main_window.c:987
+#: ../src/gnome2/main_window.c:1036
 msgid "Commentary View"
 msgstr "Pogled komentarjev"
 
-#: ../src/gnome2/main_window.c:1003
+#: ../src/gnome2/main_window.c:1052
 msgid "Book View"
 msgstr "Pogled knjig"
 
-#: ../src/gnome2/main_window.c:1030
+#: ../src/gnome2/main_window.c:1079
 msgid "Welcome to Xiphos"
 msgstr "Dobrodošli v program Xiphos"
 
@@ -892,8 +850,8 @@ msgstr "Končano"
 #: ../src/gnome2/mod_mgr.c:1188 ../src/gnome2/mod_mgr.c:1223
 #: ../src/gnome2/mod_mgr.c:1225 ../src/gnome2/utilities.c:472
 #: ../src/gnome2/utilities.c:538 ../src/gnome2/utilities.c:540
-#: ../src/gnome2/utilities.c:1105 ../src/main/sidebar.cc:830
-#: ../src/main/sidebar.cc:902 ../src/main/sidebar.cc:904
+#: ../src/gnome2/utilities.c:1105 ../src/main/sidebar.cc:838
+#: ../src/main/sidebar.cc:910 ../src/main/sidebar.cc:912
 msgid "Unknown"
 msgstr "Neznan"
 
@@ -915,50 +873,50 @@ msgstr ""
 "tipu modula"
 
 #: ../src/gnome2/mod_mgr.c:1405 ../src/gnome2/utilities.c:606
-#: ../src/main/sidebar.cc:980 ../src/main/sidebar.cc:982
+#: ../src/main/sidebar.cc:988 ../src/main/sidebar.cc:990
 msgid "Biblical Texts"
 msgstr "Biblična besedila"
 
 #: ../src/gnome2/mod_mgr.c:1409 ../src/gnome2/utilities.c:613
-#: ../src/main/sidebar.cc:663 ../src/main/sidebar.cc:1005
-#: ../src/main/sidebar.cc:1007 ../ui/prefs.glade.h:41
+#: ../src/main/sidebar.cc:671 ../src/main/sidebar.cc:1013
+#: ../src/main/sidebar.cc:1015 ../ui/prefs.glade.h:41
 #: ../ui/prefs.gtkbuilder.h:33
 msgid "Commentaries"
 msgstr "Komentarji"
 
 #: ../src/gnome2/mod_mgr.c:1413 ../src/gnome2/utilities.c:621
-#: ../src/main/sidebar.cc:1014 ../src/main/sidebar.cc:1016
+#: ../src/main/sidebar.cc:1022 ../src/main/sidebar.cc:1024
 msgid "Dictionaries"
 msgstr "Slovarji"
 
 #: ../src/gnome2/mod_mgr.c:1417 ../src/gnome2/utilities.c:628
-#: ../src/main/sidebar.cc:1023 ../src/main/sidebar.cc:1025
+#: ../src/main/sidebar.cc:1031 ../src/main/sidebar.cc:1033
 msgid "Glossaries"
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:1421 ../src/gnome2/utilities.c:635
-#: ../src/main/sidebar.cc:1032 ../src/main/sidebar.cc:1034
+#: ../src/main/sidebar.cc:1040 ../src/main/sidebar.cc:1042
 msgid "Daily Devotionals"
 msgstr "Dnevne posvetitve"
 
 #: ../src/gnome2/mod_mgr.c:1425 ../src/gnome2/utilities.c:642
-#: ../src/main/sidebar.cc:673 ../src/main/sidebar.cc:1041
-#: ../src/main/sidebar.cc:1043
+#: ../src/main/sidebar.cc:681 ../src/main/sidebar.cc:1049
+#: ../src/main/sidebar.cc:1051
 msgid "General Books"
 msgstr "Splošne knjige"
 
 #: ../src/gnome2/mod_mgr.c:1429 ../src/gnome2/utilities.c:649
-#: ../src/main/sidebar.cc:1050 ../src/main/sidebar.cc:1052
+#: ../src/main/sidebar.cc:1058 ../src/main/sidebar.cc:1060
 msgid "Maps"
 msgstr "Zemljevidi"
 
 #: ../src/gnome2/mod_mgr.c:1433 ../src/gnome2/utilities.c:656
-#: ../src/main/sidebar.cc:1059 ../src/main/sidebar.cc:1061
+#: ../src/main/sidebar.cc:1067 ../src/main/sidebar.cc:1069
 msgid "Images"
 msgstr "Slike"
 
 #: ../src/gnome2/mod_mgr.c:1437 ../src/gnome2/utilities.c:663
-#: ../src/main/sidebar.cc:1068 ../src/main/sidebar.cc:1070
+#: ../src/main/sidebar.cc:1076 ../src/main/sidebar.cc:1078
 msgid "Cult/Unorthodox"
 msgstr ""
 
@@ -980,7 +938,7 @@ msgstr "Odstranjeno"
 
 #: ../src/gnome2/mod_mgr.c:1458 ../src/gnome2/sidebar.c:643
 #: ../src/gnome2/utilities.c:671 ../src/main/prayerlists.cc:229
-#: ../src/main/sidebar.cc:1078 ../src/main/sidebar.cc:1080
+#: ../src/main/sidebar.cc:1086 ../src/main/sidebar.cc:1088
 msgid "Prayer List/Journal"
 msgstr "Molitveni seznam/Dnevnik"
 
@@ -1165,8 +1123,8 @@ msgstr "Opcije modulov"
 
 #: ../src/gnome2/parallel_view.c:215 ../src/gnome2/sidebar.c:626
 #: ../src/gnome2/sidebar.c:632 ../src/gnome2/tabbed_browser.c:251
-#: ../src/main/sidebar.cc:632 ../src/main/sidebar.cc:988
-#: ../src/main/sidebar.cc:989 ../src/main/sidebar.cc:990
+#: ../src/main/sidebar.cc:640 ../src/main/sidebar.cc:996
+#: ../src/main/sidebar.cc:997 ../src/main/sidebar.cc:998
 msgid "Parallel View"
 msgstr "Vzporedni pogled"
 
@@ -1519,7 +1477,7 @@ msgstr "November"
 msgid "December"
 msgstr "December"
 
-#: ../src/gnome2/utilities.c:2081
+#: ../src/gnome2/utilities.c:2087
 #, fuzzy
 msgid ""
 "An image file's size could not be determined.\n"
@@ -1539,8 +1497,8 @@ msgstr ""
 "Nepravilno kodirana osebna beležka:\n"
 "'%s'"
 
-#: ../src/main/display.cc:1031 ../src/main/display.cc:1072
-#: ../src/main/display.cc:1157 ../ui/export-dialog.glade.h:14
+#: ../src/main/display.cc:1033 ../src/main/display.cc:1074
+#: ../src/main/display.cc:1159 ../ui/export-dialog.glade.h:14
 #: ../ui/export-dialog.gtkbuilder.h:13
 msgid "Chapter"
 msgstr "Poglavje"
@@ -1597,7 +1555,7 @@ msgstr "Močni"
 msgid "Morphology"
 msgstr "Oblikoslovje"
 
-#: ../src/main/module_dialogs.cc:1015 ../src/main/url.cc:523
+#: ../src/main/module_dialogs.cc:1013 ../src/main/url.cc:523
 msgid "Back to "
 msgstr "Nazaj "
 
@@ -1959,7 +1917,7 @@ msgstr ""
 "\n"
 "Poglejte Upravljalca z modulom, zavihek Vzdrževanje."
 
-#: ../src/main/search_dialog.cc:1512
+#: ../src/main/search_dialog.cc:1513
 msgid "Search finished"
 msgstr "Iskanje je končano"
 
@@ -2001,12 +1959,12 @@ msgstr ""
 "Prazna datoteka z nastavitvami -- poskus obnovitve varnostne kopije.\n"
 "Nekaj podatkov bo mogoče izgubljenih."
 
-#: ../src/main/settings.c:183
+#: ../src/main/settings.c:184
 msgid "Empty settings file -- no backup?!? Information lost!"
 msgstr ""
 "Prazna datoteka z nastavitvami -- ni varnostne kopije?!? Izguba podatkov!"
 
-#: ../src/main/settings.c:211
+#: ../src/main/settings.c:212
 #, fuzzy
 msgid ""
 "There are no Bibles installed.\n"
@@ -2023,15 +1981,21 @@ msgstr ""
 "Xiphos ne more pričeti,\n"
 "in se bo sedaj končal."
 
-#: ../src/main/settings.c:214
+#: ../src/main/settings.c:218
 msgid "Bible module installation complete."
 msgstr "Namestitev Biblijskega modula je končana."
 
-#: ../src/main/sidebar.cc:403
+#: ../src/main/sidebar.cc:149
+msgid ""
+"Module error: Unusable xref encoding.\n"
+"Please report this, with module & verse"
+msgstr ""
+
+#: ../src/main/sidebar.cc:411
 msgid "verse"
 msgstr "vrstica"
 
-#: ../src/main/sidebar.cc:464
+#: ../src/main/sidebar.cc:472
 msgid "chapter"
 msgstr "poglavje"
 
@@ -2120,7 +2084,7 @@ msgstr "Napaka pregledovalnika:\n"
 msgid "Show %s in main window"
 msgstr "Prikaži %s v glavnem oknu"
 
-#: ../src/main/xml.c:84 ../src/main/xml.c:473 ../src/main/xml.c:564
+#: ../src/main/xml.c:84 ../src/main/xml.c:476 ../src/main/xml.c:567
 #, c-format
 msgid "Document not created successfully. \n"
 msgstr "Dokument ni bil uspešno kreiran. \n"
@@ -2153,38 +2117,38 @@ msgstr "Kaj je evangelij?"
 msgid "1 Cor 15:1-4"
 msgstr "1 Kor 15:1-4"
 
-#: ../src/main/xml.c:265 ../src/main/xml.c:411 ../src/main/xml.c:1288
+#: ../src/main/xml.c:268 ../src/main/xml.c:414 ../src/main/xml.c:1291
 #, c-format
 msgid "Document not parsed successfully. \n"
 msgstr "Dokument ni uspešno razčlenjen. \n"
 
-#: ../src/main/xml.c:271 ../src/main/xml.c:417 ../src/main/xml.c:439
-#: ../src/main/xml.c:859 ../src/main/xml.c:1173 ../src/main/xml.c:1367
+#: ../src/main/xml.c:274 ../src/main/xml.c:420 ../src/main/xml.c:442
+#: ../src/main/xml.c:862 ../src/main/xml.c:1176 ../src/main/xml.c:1370
 #, c-format
 msgid "empty document \n"
 msgstr "prazen dokument \n"
 
-#: ../src/main/xml.c:277
+#: ../src/main/xml.c:280
 #, c-format
 msgid "wrong type, root node != SwordBookmarks\n"
 msgstr "napačen tip, root vozel != SwordZaznamki\n"
 
-#: ../src/main/xml.c:423
+#: ../src/main/xml.c:426
 #, fuzzy, c-format
 msgid "wrong type, root node != Copy_Export\n"
 msgstr "napačen tip, root vozel != %s\n"
 
-#: ../src/main/xml.c:492
+#: ../src/main/xml.c:495
 #, c-format
 msgid "%s<center>%s<br>Chapter %d</center><br>"
 msgstr ""
 
-#: ../src/main/xml.c:493
+#: ../src/main/xml.c:496
 #, c-format
 msgid "<br><center>Chapter %d</center><br>"
 msgstr ""
 
-#: ../src/main/xml.c:494
+#: ../src/main/xml.c:497
 #, fuzzy, c-format
 msgid ""
 "%s\n"
@@ -2193,7 +2157,7 @@ msgid ""
 "\n"
 msgstr "Poglavje"
 
-#: ../src/main/xml.c:495
+#: ../src/main/xml.c:498
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -2202,94 +2166,94 @@ msgid ""
 "\n"
 msgstr "Poglavje"
 
-#: ../src/main/xml.c:501
+#: ../src/main/xml.c:504
 #, c-format
 msgid "%s%s: %s Chapter %d<br><br>"
 msgstr ""
 
-#: ../src/main/xml.c:502
+#: ../src/main/xml.c:505
 #, c-format
 msgid ""
 "%s: %s Chapter %d\n"
 "\n"
 msgstr ""
 
-#: ../src/main/xml.c:507
+#: ../src/main/xml.c:510
 #, c-format
 msgid "&nbsp;&nbsp;[%d]"
 msgstr ""
 
-#: ../src/main/xml.c:508
+#: ../src/main/xml.c:511
 #, c-format
 msgid " [%d]"
 msgstr ""
 
-#: ../src/main/xml.c:514
+#: ../src/main/xml.c:517
 #, c-format
 msgid "%s%s (%s %d:%d%s)</body></html>"
 msgstr ""
 
-#: ../src/main/xml.c:515
+#: ../src/main/xml.c:518
 #, c-format
 msgid "%s(%s %d:%d%s)%s </body></html>"
 msgstr ""
 
-#: ../src/main/xml.c:516
+#: ../src/main/xml.c:519
 #, c-format
 msgid "%s (%s %d:%d%s)"
 msgstr ""
 
-#: ../src/main/xml.c:517
+#: ../src/main/xml.c:520
 #, c-format
 msgid "(%s %d:%d%s) %s"
 msgstr ""
 
-#: ../src/main/xml.c:523
+#: ../src/main/xml.c:526
 #, c-format
 msgid " %s%s"
 msgstr ""
 
-#: ../src/main/xml.c:524 ../src/main/xml.c:526
+#: ../src/main/xml.c:527 ../src/main/xml.c:529
 #, c-format
 msgid "%s(%s %d:%d-%d%s)"
 msgstr ""
 
-#: ../src/main/xml.c:525
+#: ../src/main/xml.c:528
 #, c-format
 msgid "(%s %d:%d-%d%s)<br>"
 msgstr ""
 
-#: ../src/main/xml.c:527
+#: ../src/main/xml.c:530
 #, c-format
 msgid "(%s %d:%d-%d%s)\n"
 msgstr ""
 
-#: ../src/main/xml.c:576
+#: ../src/main/xml.c:579
 msgid "Old Testament"
 msgstr "Stara Zaveza"
 
-#: ../src/main/xml.c:577
+#: ../src/main/xml.c:580
 msgid "Gen - Mal"
 msgstr "1Mz - Mal"
 
-#: ../src/main/xml.c:582
+#: ../src/main/xml.c:585
 msgid "New Testament"
 msgstr "Nova Zaveza"
 
-#: ../src/main/xml.c:583
+#: ../src/main/xml.c:586
 msgid "Mat - Rev"
 msgstr "Mt - Raz"
 
-#: ../src/main/xml.c:589
+#: ../src/main/xml.c:592
 msgid "Sample Module List"
 msgstr "Primer seznama modulov"
 
-#: ../src/main/xml.c:865 ../src/main/xml.c:1179
+#: ../src/main/xml.c:868 ../src/main/xml.c:1182
 #, c-format
 msgid "wrong type, root node != %s\n"
 msgstr "napačen tip, root vozel != %s\n"
 
-#: ../src/main/xml.c:1329
+#: ../src/main/xml.c:1332
 #, c-format
 msgid ""
 "Save of settings failed! stat %d, size %d\n"
@@ -2298,7 +2262,7 @@ msgstr ""
 "Shranitev nastavitev je spodletela! stat %d, velikost %d\n"
 "%s"
 
-#: ../src/main/xml.c:1331
+#: ../src/main/xml.c:1334
 msgid "Attempting to revert to previous save."
 msgstr "Poskus obnovitve v prvotno stanje."
 
@@ -4766,6 +4730,46 @@ msgstr "Xiphosov biblijski vodič"
 #: ../xiphos.desktop.in.in.h:2
 msgid "Study the Bible"
 msgstr "Proučevanje Biblije"
+
+#~ msgid ""
+#~ "URL references using \"sword://\" (similar to web page\n"
+#~ "references) can be used by programs to look up\n"
+#~ "scripture references. Your system currently has no\n"
+#~ "program set to handle these references.\n"
+#~ "\n"
+#~ "Would you like Xiphos to set itself as the\n"
+#~ "program to handle these references?"
+#~ msgstr ""
+#~ "URL reference \"sword://\" (podobno kot spletne\n"
+#~ "strani) lahko uporabljajo programi da pogledajo\n"
+#~ "biblijske reference. Vaš sistem trenutno nima\n"
+#~ "nobenega programa ki bi bil nastavljen za\n"
+#~ "upravljanje s temi referencami.\n"
+#~ "\n"
+#~ "Ali želite da se Xiphos nastavi kot program\n"
+#~ "za upravljanje s temi referencami?"
+
+#~ msgid ""
+#~ "Xiphos has successfully set itself\n"
+#~ "as the handler of sword:// and bible:// URLs.\n"
+#~ "\n"
+#~ "You may wish to run the program \"gconf-editor\"\n"
+#~ "to examine keys under /desktop/gnome/url-handlers,\n"
+#~ "if you need to change these."
+#~ msgstr ""
+#~ "Xiphos se je uspešno nastavil kot upravljalec\n"
+#~ "sword:// in bible:// URLjev.\n"
+#~ "\n"
+#~ "Če jih želite spremeniti mogoče želite zagnati\n"
+#~ "program \"gconf-editor\" da preiščete zapise \n"
+#~ "pod /desktop/gnome/url-handlers."
+
+#~ msgid ""
+#~ "Xiphos failed to complete handler init for key #%d:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Xiphos ni uspel dokončati upravljanja za ključ #%d:\n"
+#~ "%s"
 
 #~ msgid "Go to "
 #~ msgstr "Pojdi na "
