@@ -146,8 +146,8 @@ void main_display_verse_list_in_sidebar(gchar * key,
 
 	/* improper xref encoding, not BCV: gets null list from Sword. */
 	if (verse_list == NULL) {
-		gui_generic_warning((char *)"Module error: Unusable xref encoding.\n"
-				    "Please report this, with module & verse");
+		gui_generic_warning(_("Module error: Unusable xref encoding.\n"
+				      "Please report this, with module & verse"));
 		return;
 	}
 
