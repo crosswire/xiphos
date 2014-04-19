@@ -661,7 +661,7 @@ CacheHeader(ModuleCache::CacheVerse& cVerse,
 						   heading)) != NULL) {
 		preverse2 = mod.renderText(preverse);
 		g_string_printf(text,
-				"<br/><b>%s</b><br/><br/>",
+				"%s",
 				(((ops->strongs || ops->lemmas) ||
 				  ops->morphs)
 				 ? block_render(preverse2.c_str())
@@ -1910,7 +1910,7 @@ GTKPrintChapDisp::display(SWModule &imodule)
 		while ((preverse = backend->get_entry_attribute("Heading", "Preverse",
 								heading)) != NULL) {
 			SWBuf preverse2 = imodule.renderText(preverse);
-			buf = g_strdup_printf("<br/><b>%s</b><br/><br/>", preverse2.c_str());
+			buf = g_strdup_printf("%s", preverse2.c_str());
 			swbuf.append(buf);
 			g_free(buf);
 			g_free(preverse);
