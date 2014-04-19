@@ -1,7 +1,10 @@
-2014-04-16  karl <charcoal@users.sf.net>
+2014-04-19  karl <charcoal@users.sf.net>
 
-	* conditionalize heading wrap <br/><b>%s</b><br/><br/> for
-	  non-OSIS because OSIS modules now self-render standoff.
+	* generalize companion in .conf: Companion=This,That,TheOther.
+	  arbitrary number of companions. the 1st opens in main window,
+	  any others in detached windows. requested in 2008 by Wycliffe,
+	  to support "fast" (per verse) and "slow" (broad sectional)
+	  commentaries.
 
 2014-04-15  karl <charcoal@users.sf.net>
 
