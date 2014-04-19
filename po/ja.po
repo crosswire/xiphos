@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-15 18:01-0400\n"
+"POT-Creation-Date: 2014-04-19 17:58-0400\n"
 "PO-Revision-Date: 2010-05-17 03:32+0000\n"
 "Last-Translator: Kunio Nakamaru <n_e_o_m@hotmail.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
@@ -1420,8 +1420,8 @@ msgid ""
 "'%s'"
 msgstr ""
 
-#: ../src/main/display.cc:1033 ../src/main/display.cc:1074
-#: ../src/main/display.cc:1159 ../ui/export-dialog.glade.h:14
+#: ../src/main/display.cc:1032 ../src/main/display.cc:1073
+#: ../src/main/display.cc:1158 ../ui/export-dialog.glade.h:14
 #: ../ui/export-dialog.gtkbuilder.h:13
 msgid "Chapter"
 msgstr ""
@@ -1913,11 +1913,27 @@ msgstr ""
 msgid "Book names and menus may not be translated."
 msgstr ""
 
-#: ../src/main/sword.cc:1265
+#: ../src/main/sword.cc:1007 ../src/main/sword.cc:1172
+#, c-format
+msgid ""
+"Module %s has companion modules:\n"
+"%s.\n"
+"Would you like to open these as well?%s"
+msgstr ""
+
+#: ../src/main/sword.cc:1011 ../src/main/sword.cc:1176
+msgid ""
+"\n"
+"\n"
+"The first will open in the main window\n"
+"and others in separate windows."
+msgstr ""
+
+#: ../src/main/sword.cc:1301
 msgid "Daily devotional was requested, but there are none installed."
 msgstr ""
 
-#: ../src/main/sword.cc:1495
+#: ../src/main/sword.cc:1531
 msgid ""
 "<b>Locked Module.</b>\n"
 "\n"
