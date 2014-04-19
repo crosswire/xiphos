@@ -989,21 +989,39 @@ void main_display_commentary(const char * mod_name,
 		xml_set_value("Xiphos", "modules", "comm", mod_name);
 		gui_reassign_strdup(&settings.CommWindowModule, (gchar *)mod_name);
 
+		// handle a conf directive "Companion=This,That,TheOther"
 		char *companion = main_get_mod_config_entry(mod_name, "Companion");
+		gchar **name_set = (companion ? g_strsplit(companion, ",", -1) : NULL);
 
 		if (companion &&
 		    (!companion_activity) &&
-		    backend->is_module(companion) &&
+		    name_set[0] &&
+		    *name_set[0] &&
+		    backend->is_module(name_set[0]) &&
 		    ((settings.MainWindowModule == NULL) ||
-		     strcmp(companion, settings.MainWindowModule))) {
+		     strcmp(name_set[0], settings.MainWindowModule))) {
 			companion_activity = TRUE;
+
+			gint name_length = g_strv_length(name_set);
 			char *companion_question =
-			    g_strdup_printf("Module %s has a companion module %s.\nWould you like to open %s as well?",
-					    mod_name, companion, companion);
-			if (gui_yes_no_dialog(companion_question, NULL))
-				main_display_bible(companion, key);
+			    g_strdup_printf(_("Module %s has companion modules:\n%s.\n"
+					      "Would you like to open these as well?%s"),
+					    mod_name, companion,
+					    ((name_length > 1)
+					     ? _("\n\nThe first will open in the main window\n"
+						 "and others in separate windows.")
+					     : ""));
+
+			if (gui_yes_no_dialog(companion_question, NULL)) {
+				main_display_bible(name_set[0], key);
+				for (int i = 1; i < name_length; i++) {
+					main_dialogs_open(name_set[i], key);
+				}
+			}
+			g_free(companion_question);
 			companion_activity = FALSE;
 		}
+		if (name_set)  g_strfreev(name_set);
 		if (companion) g_free(companion);
 	}
 
@@ -1136,21 +1154,39 @@ void main_display_bible(const char * mod_name,
 		xml_set_value("Xiphos", "modules", "bible", mod_name);
 		gui_reassign_strdup(&settings.MainWindowModule, (gchar *)mod_name);
 
+		// handle a conf directive "Companion=This,That,TheOther"
 		char *companion = main_get_mod_config_entry(mod_name, "Companion");
+		gchar **name_set = (companion ? g_strsplit(companion, ",", -1) : NULL);
 
 		if (companion &&
 		    (!companion_activity) &&
-		    backend->is_module(companion) &&
+		    name_set[0] &&
+		    *name_set[0] &&
+		    backend->is_module(name_set[0]) &&
 		    ((settings.CommWindowModule == NULL) ||
-		     strcmp(companion, settings.CommWindowModule))) {
+		     strcmp(name_set[0], settings.CommWindowModule))) {
 			companion_activity = TRUE;
+
+			gint name_length = g_strv_length(name_set);
 			char *companion_question =
-			    g_strdup_printf("Module %s has a companion module %s.\nWould you like to open %s as well?",
-					    mod_name, companion, companion);
-			if (gui_yes_no_dialog(companion_question, NULL))
-				main_display_commentary(companion, key);
+			    g_strdup_printf(_("Module %s has companion modules:\n%s.\n"
+					      "Would you like to open these as well?%s"),
+					    mod_name, companion,
+					    ((name_length > 1)
+					     ? _("\n\nThe first will open in the main window\n"
+						 "and others in separate windows.")
+					     : ""));
+
+			if (gui_yes_no_dialog(companion_question, NULL)) {
+				main_display_commentary(name_set[0], key);
+				for (int i = 1; i < name_length; i++) {
+					main_dialogs_open(name_set[i], key);
+				}
+			}
+			g_free(companion_question);
 			companion_activity = FALSE;
 		}
+		if (name_set)  g_strfreev(name_set);
 		if (companion) g_free(companion);
 
 		navbar_versekey.module_name = g_string_assign(navbar_versekey.module_name,
