@@ -463,7 +463,6 @@ def build(bld):
 	AUTHORS
 	ChangeLog
 	INSTALL
-	NEWS
 	TODO
 	Xiphos.ogg
     """)
