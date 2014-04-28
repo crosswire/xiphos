@@ -1,3 +1,7 @@
+2014-04-28  karl <charcoal@users.sf.net>
+
+	* added initial BibleSync implementation.
+
 2014-04-19  karl <charcoal@users.sf.net>
 
 	* generalize companion in .conf: Companion=This,That,TheOther.

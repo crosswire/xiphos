@@ -1,0 +1,45 @@
+BibleSync
+http://biblesyncprotocol.wikispaces.com
+(user Luigi_S, password openwikispaces)
+
+Xiphos provides the first implementation of BibleSync protocol, a method
+for shared navigation of Bible programs over multicast UDP.  This
+implementation is very general, and completely agnostic as to the nature
+of other software in which it operates.  It is explicitly NOT specific to
+Sword Project applications, though that is the environment from which it
+emanates.
+
+See src/backend/biblesync.hh for comments which detail the public
+interface of this implementation.  It is deliberately small and
+well-contained, with no extraneous features offered: setup, take-down,
+xmit, and recv, plus 2 "get" requests for current mode and passphrase.
+
+BibleSync has 4 modes:
+- Disabled.
+- Personal, in which the program both xmits and recvs.  Useful for one
+  person using multiple simultaneous programs on different devices, or for
+  teams working together (e.g. translators).
+- Instructor, in which the program xmits navigation synchronization but
+  does not recv any.
+- Student, in which the program recvs navigation synchronization but does
+  not xmit any.
+
+A few liberties have been taken with the spec, with the intent that these
+changes propagate back into a revised version:
+
+- application version and user identification are required, and sent in
+  every packet.  It seems only reasonable that everyone identify himself
+  fully when participating in a network conversation.
+- packet header is expanded to fill exactly 32 bytes, using 6 fill bytes,
+  for potential future use.
+- UUID is placed at end of header, aligned on 16-byte boundary.
+- No TTL-limiting support is present.  Due to the nature of there being a
+  single receiver on a UDP socket, zeroing TTL so that multicast packets
+  do not leave the local machine is useless, because only this program is
+  receiving the multicast datagrams.
+
+In the future, BibleSync will be separated into its own library,
+libbiblesync.{so,dll}, for inclusion in any other Bible program.
+
+Karl Kleinpaste
+April 2014
