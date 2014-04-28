@@ -124,7 +124,27 @@ struct _preferences_check_buttons {
 	GtkWidget *show_in_dictionary;
 	GtkWidget *show_devotion;
 	GtkWidget *show_paratab;
+
+	GtkWidget *bs_debug;
+	GtkWidget *bs_presence;
+	GtkWidget *bs_mismatch;
 };
+
+typedef struct _preferences_radio_buttons RADIO_BUTTONS;
+struct _preferences_radio_buttons {
+	/* BibleSync mode selection */
+	GtkWidget *bs_mode_off;
+	GtkWidget *bs_mode_personal;
+	GtkWidget *bs_mode_instructor;
+	GtkWidget *bs_mode_student;
+
+	/* BibleSync navigation choice */
+	GtkWidget *bs_nav_direct;
+	GtkWidget *bs_nav_verselist;
+};
+
+/* fixed callback values, for radio button assignment. */
+static int rb_cb_0 = 0, rb_cb_1 = 1, rb_cb_2 = 2, rb_cb_3 = 3;
 
 typedef struct _preferences_buttons BUTTONS;
 struct _preferences_buttons {
@@ -157,6 +177,7 @@ static GtkWidget *notebook;
 static COMBOBOXS combo;
 static COLOR_PICKERS color_picker;
 static CHECK_BUTTONS check_button;
+static RADIO_BUTTONS radio_button;
 static PARALLEL_SELECT parallel_select;
 
 
@@ -166,7 +187,6 @@ static PARALLEL_SELECT parallel_select;
  *
  * Synopsis
  *   #include "gui/main_window.h"
- *
  *   gboolean on_prefs_configure_event(GtkWidget * widget,
  *				   GdkEventConfigure * event,
  *				   gpointer user_data)
@@ -217,8 +237,7 @@ static gboolean on_prefs_configure_event(GtkWidget * widget,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
- *   	gint string_is_color(gchar * color)
+ *   gint string_is_color(gchar * color)
  *
  * Description
  *    this code is from bluefish-0.6
@@ -283,7 +302,6 @@ gdkrgba_to_hex(GdkRGBA * color)
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   gchar *gdkcolor_to_hex(gdouble * color, gint websafe)
  *
  * Description
@@ -339,7 +357,6 @@ apply_color_settings(void)
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void invert_colors(char **color1, char *label1,
 		        char **color2, char *label2)
  *
@@ -370,7 +387,6 @@ void invert_colors(char **color1, char *label1,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_invert(GtkWidget *button, gchar *user_data)
  *
  * Description
@@ -396,13 +412,10 @@ void on_invert(GtkWidget * button, gchar * user_data)
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_colorbutton1_color_set(GtkColorButton  * colorbutton,
  *							gpointer user_data)
  *
  * Description
- *
- *
  *
  * Return value
  *   void
@@ -435,13 +448,10 @@ on_colorbutton1_color_set(GtkColorButton  * colorbutton,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_colorbutton2_color_set(GtkColorButton  * colorbutton,
  *							gpointer user_data)
  *
  * Description
- *
- *
  *
  * Return value
  *   void
@@ -476,13 +486,10 @@ on_colorbutton2_color_set(GtkColorButton * colorbutton,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_colorbutton3_color_set(GtkColorButton  * colorbutton,
  *							gpointer user_data)
  *
  * Description
- *
- *
  *
  * Return value
  *   void
@@ -518,13 +525,10 @@ on_colorbutton3_color_set(GtkColorButton * colorbutton,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_colorbutton4_color_set(GtkColorButton  * colorbutton,
  *							gpointer user_data)
  *
  * Description
- *
- *
  *
  * Return value
  *   void
@@ -560,13 +564,10 @@ on_colorbutton4_color_set(GtkColorButton * colorbutton,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_colorbutton5_color_set(GtkColorButton  * colorbutton,
  *							gpointer user_data)
  *
  * Description
- *
- *
  *
  * Return value
  *   void
@@ -601,13 +602,10 @@ on_colorbutton5_color_set(GtkColorButton * colorbutton,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_colorbutton6_color_set(GtkColorButton  * colorbutton,
  *							gpointer user_data)
  *
  * Description
- *
- *
  *
  * Return value
  *   void
@@ -642,13 +640,10 @@ on_colorbutton6_color_set(GtkColorButton * colorbutton,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_colorbutton7_color_set(GtkColorButton  * colorbutton,
  *							gpointer user_data)
  *
  * Description
- *
- *
  *
  * Return value
  *   void
@@ -683,12 +678,9 @@ on_colorbutton7_color_set(GtkColorButton * colorbutton,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_checkbutton1_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *
  * Description
- *
- *
  *
  * Return value
  *   void
@@ -720,12 +712,9 @@ on_checkbutton1_toggled(GtkToggleButton * togglebutton,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_checkbutton2_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *
  * Description
- *
- *
  *
  * Return value
  *   void
@@ -751,12 +740,9 @@ on_checkbutton2_toggled(GtkToggleButton * togglebutton,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_checkbutton3_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *
  * Description
- *
- *
  *
  * Return value
  *   void
@@ -782,12 +768,9 @@ on_checkbutton3_toggled(GtkToggleButton * togglebutton,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_checkbutton9_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *
  * Description
- *
- *
  *
  * Return value
  *   void
@@ -813,12 +796,9 @@ on_checkbutton9_toggled(GtkToggleButton * togglebutton,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_checkbutton4_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *
  * Description
- *
- *
  *
  * Return value
  *   void
@@ -844,12 +824,9 @@ on_checkbutton4_toggled(GtkToggleButton *togglebutton,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_checkbutton10_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *
  * Description
- *
- *
  *
  * Return value
  *   void
@@ -874,12 +851,9 @@ on_checkbutton10_toggled(GtkToggleButton * togglebutton,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_checkbutton_showparatab_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *
  * Description
- *
- *
  *
  * Return value
  *   void
@@ -895,8 +869,124 @@ on_checkbutton_showparatab_toggled(GtkToggleButton * togglebutton,
 		gui_open_parallel_view_in_new_tab();
 	else
 		gui_close_passage_tab(1);
+}
 
 
+/******************************************************************************
+ * Name
+ *   on_biblesync_obtain_passphrase
+ *
+ * Synopsis
+ *   #include "unlock_key_dialog.h"
+ *   gchar *on_biblesync_obtain_passphrase()
+ *
+ * Description
+ *   create dialog to get session passphrase
+ *
+ * Return value
+ *   void
+ */
+
+static gchar *on_biblesync_obtain_passphrase()
+{
+	gchar *retval;
+	GS_DIALOG *info = gui_new_dialog();
+
+	info->stock_icon = GTK_STOCK_DIALOG_WARNING;
+	info->label_top = g_strdup(_("BibleSync session passphrase"));
+	info->text1 = g_strdup(main_biblesync_get_passphrase());
+	info->label1 = _("Phrase:");
+	info->ok = TRUE;
+
+	(void)gui_gs_dialog(info);
+
+	retval = g_strdup(info->text1);
+	g_free(info->label_top);
+	g_free(info->text1);
+	g_free(info);
+	return retval;
+}
+
+
+/******************************************************************************
+ * Name
+ *   on_checkbutton_biblesync_toggled
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *   void on_checkbutton_biblesync_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+ *   *((int*)user_data) is settings' bs_* bitflag.
+ *
+ * Description
+ *   BibleSync debug (packet dump), presence, and mismatch
+ *
+ * Return value
+ *   void
+ */
+
+static void
+on_checkbutton_biblesync_toggled(GtkToggleButton * togglebutton,
+				 gpointer user_data)
+{
+	*((int *)user_data) = gtk_toggle_button_get_active(togglebutton);
+}
+
+/******************************************************************************
+ * Name
+ *   on_radiobutton_biblesync_mode
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *   void on_radiobutton_biblesync_mode(GtkToggleButton * togglebutton, gpointer user_data)
+ *   *((int*)user_data) is settings.bs_mode's selection.
+ *
+ * Description
+ *   BibleSync mode selection, 0-3.
+ *
+ * Return value
+ *   void
+ */
+
+static void
+on_radiobutton_biblesync_mode(GtkToggleButton * togglebutton,
+			      gpointer user_data)
+{
+	if (gtk_toggle_button_get_active(togglebutton))
+	{
+		settings.bs_mode = *((int*)user_data);
+
+		if (settings.bs_mode != 0)
+		{
+			settings.bs_passphrase = g_strdup(on_biblesync_obtain_passphrase());
+		}
+		main_biblesync_mode_select(settings.bs_mode, settings.bs_passphrase);
+		/* selecting active mode enables polled receiver. */
+	}
+}
+
+
+/******************************************************************************
+ * Name
+ *   on_radiobutton_biblesync_nav
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *   void on_radiobutton_biblesync_nav(GtkToggleButton * togglebutton, gpointer user_data)
+ *   *((int*)user_data) is settings.bs_navdirect's T/F selection.
+ *
+ * Description
+ *   BibleSync nav selection, direct (1) or verse list (0).
+ *
+ * Return value
+ *   void
+ */
+
+static void
+on_radiobutton_biblesync_nav(GtkToggleButton * togglebutton,
+			     gpointer user_data)
+{
+	if (gtk_toggle_button_get_active(togglebutton))
+		settings.bs_navdirect = *((int*)user_data);
 }
 
 
@@ -906,12 +996,9 @@ on_checkbutton_showparatab_toggled(GtkToggleButton * togglebutton,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_checkbutton11_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *
  * Description
- *
- *
  *
  * Return value
  *   void
@@ -936,12 +1023,9 @@ on_checkbutton11_toggled(GtkToggleButton * togglebutton,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_checkbutton12_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *
  * Description
- *
- *
  *
  * Return value
  *   void
@@ -967,12 +1051,9 @@ on_checkbutton12_toggled(GtkToggleButton * togglebutton,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_checkbutton6_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *
  * Description
- *
- *
  *
  * Return value
  *   void
@@ -994,12 +1075,9 @@ on_checkbutton6_toggled(GtkToggleButton * togglebutton,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_checkbutton7_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *
  * Description
- *
- *
  *
  * Return value
  *   void
@@ -1021,12 +1099,9 @@ on_checkbutton7_toggled(GtkToggleButton * togglebutton,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_checkbutton8_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *
  * Description
- *
- *
  *
  * Return value
  *   void
@@ -1048,12 +1123,9 @@ on_checkbutton8_toggled(GtkToggleButton * togglebutton,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_checkbutton_scroll_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *
  * Description
- *
- *
  *
  * Return value
  *   void
@@ -1074,12 +1146,9 @@ on_checkbutton_scroll_toggled(GtkToggleButton * togglebutton,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_checkbutton_imageresize_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *
  * Description
- *
- *
  *
  * Return value
  *   void
@@ -1100,12 +1169,9 @@ on_checkbutton_imageresize_toggled(GtkToggleButton * togglebutton,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_checkbutton_verse_num_bold_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *
  * Description
- *
- *
  *
  * Return value
  *   void
@@ -1130,12 +1196,9 @@ on_checkbutton_verse_num_bold_toggled(GtkToggleButton * togglebutton,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_checkbutton_verse_num_bracket_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *
  * Description
- *
- *
  *
  * Return value
  *   void
@@ -1160,12 +1223,9 @@ on_checkbutton_verse_num_bracket_toggled(GtkToggleButton * togglebutton,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_checkbutton_verse_num_superscript_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *
  * Description
- *
- *
  *
  * Return value
  *   void
@@ -1190,12 +1250,9 @@ on_checkbutton_verse_num_superscript_toggled(GtkToggleButton * togglebutton,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_checkbutton_versehighlight_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *
  * Description
- *
- *
  *
  * Return value
  *   void
@@ -1220,7 +1277,6 @@ on_checkbutton_versehighlight_toggled(GtkToggleButton * togglebutton,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_checkbutton_annotate_highlight_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *
  * Description
@@ -1246,7 +1302,6 @@ on_checkbutton_annotate_highlight_toggled(GtkToggleButton * togglebutton,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_checkbutton_xrefs_in_verse_list_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *
  * Description
@@ -1271,12 +1326,9 @@ on_checkbutton_xrefs_in_verse_list_toggled(GtkToggleButton * togglebutton,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_checkbutton_prayerlist_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *
  * Description
- *
- *
  *
  * Return value
  *   void
@@ -1306,12 +1358,9 @@ on_checkbutton_prayerlist_toggled(GtkToggleButton * togglebutton,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_folder_changed(GtkFileChooser * filechooser, gpointer user_data)
  *
  * Description
- *
- *
  *
  * Return value
  *   void
@@ -1334,7 +1383,6 @@ on_folder_changed(GtkFileChooser * filechooser,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_combobox1_changed(GtkEditable * editable, gpointer user_data)
  *
  * Description
@@ -1375,7 +1423,6 @@ on_combobox1_changed(GtkComboBox * combobox,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_basecombobox1_changed(GtkEditable * editable, gpointer user_data)
  *
  * Description
@@ -1422,7 +1469,6 @@ on_basecombobox1_changed(GtkComboBox * combobox,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_combobox2_changed(GtkEditable * editable, gpointer user_data)
  *
  * Description
@@ -1460,7 +1506,6 @@ on_combobox2_changed(GtkComboBox * combobox,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_combobox4_changed(GtkEditable * editable, gpointer user_data)
  *
  * Description
@@ -1498,7 +1543,6 @@ on_combobox4_changed(GtkComboBox * combobox,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_combobox5_changed(GtkEditable * editable, gpointer user_data)
  *
  * Description
@@ -1533,7 +1577,6 @@ on_combobox5_changed(GtkComboBox * combobox,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_combobox6_changed(GtkEditable * editable, gpointer user_data)
  *
  * Description
@@ -1568,7 +1611,6 @@ on_combobox6_changed(GtkComboBox * combobox,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_combobox12_changed(GtkEditable * editable, gpointer user_data)
  *
  * Description
@@ -1603,7 +1645,6 @@ on_combobox12_changed(GtkComboBox * combobox,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_combobox13_changed(GtkEditable * editable, gpointer user_data)
  *
  * Description
@@ -1638,7 +1679,6 @@ on_combobox13_changed(GtkComboBox * combobox,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_combobox14_changed(GtkEditable * editable, gpointer user_data)
  *
  * Description
@@ -1673,7 +1713,6 @@ on_combobox14_changed(GtkComboBox * combobox,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_combobox15_changed(GtkEditable * editable, gpointer user_data)
  *
  * Description
@@ -1710,7 +1749,6 @@ on_combobox15_changed(GtkComboBox * combobox,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_combobox16_changed(GtkEditable * editable, gpointer user_data)
  *
  * Description
@@ -1763,7 +1801,6 @@ on_combobox16_changed(GtkComboBox * combobox,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void on_combobox17_changed(GtkEditable * editable, gpointer user_data)
  *
  * Description
@@ -1803,11 +1840,9 @@ on_combobox17_changed(GtkComboBox * combobox,
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void add_columns(GtkWidget * listview)
  *
  * Description
- *
  *
  * Return value
  *   void
@@ -1835,12 +1870,10 @@ add_columns(GtkWidget * treeview)
  *
  * Synopsis
  *   #include "gui/.h"
- *
  *   void tree_selection_changed(GtkTreeSelection * selection,
  *		      GtkWidget * tree_widget)
  *
  * Description
- *
  *
  * Return value
  *   void
@@ -1869,12 +1902,10 @@ tree_selection_changed(GtkTreeSelection * selection,
  *
  * Synopsis
  *   #include "gui/.h"
- *
  *   void on_dialog_prefs_response(GtkDialog * dialog, gint response_id,
-					gpointer user_data)
+ *					gpointer user_data)
  *
  * Description
- *
  *
  * Return value
  *   void
@@ -1952,11 +1983,9 @@ create_model(void)
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
  *   void setup_color_pickers(void)
  *
  * Description
- *
  *
  * Return value
  *   void
@@ -2120,6 +2149,42 @@ setup_check_buttons(void)
 				     (check_button.show_paratab),
 				     settings.showparatab);
 
+	/* v-- BibleSync --v */
+	/* toggles */
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+				     (check_button.bs_debug),
+				     settings.bs_debug);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+				     (check_button.bs_presence),
+				     settings.bs_presence);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+				     (check_button.bs_mismatch),
+				     settings.bs_mismatch);
+
+	/* mode */
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+				     (radio_button.bs_mode_off),
+				     (settings.bs_mode == 0));
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+				     (radio_button.bs_mode_personal),
+				     (settings.bs_mode == 1));
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+				     (radio_button.bs_mode_instructor),
+				     (settings.bs_mode == 2));
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+				     (radio_button.bs_mode_student),
+				     (settings.bs_mode == 3));
+
+	/* navigation method */
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+				     (radio_button.bs_nav_direct),
+				     (settings.bs_navdirect == 1));
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+				     (radio_button.bs_nav_verselist),
+				     (settings.bs_navdirect == 0));
+
+	/* ^-- BibleSync --^ */
+
 	g_signal_connect(check_button.enable_tabbed_browsing, "toggled",
 			 G_CALLBACK(on_checkbutton1_toggled), NULL);
 	g_signal_connect(check_button.show_bible_pane, "toggled",
@@ -2154,8 +2219,32 @@ setup_check_buttons(void)
 			 G_CALLBACK(on_checkbutton_xrefs_in_verse_list_toggled), NULL);
 	g_signal_connect(check_button.prayerlist, "toggled",
 			 G_CALLBACK(on_checkbutton_prayerlist_toggled), NULL);
+
 	g_signal_connect(check_button.show_paratab, "toggled",
 			 G_CALLBACK(on_checkbutton_showparatab_toggled), NULL);
+
+	/* v-- BibleSync --v */
+	g_signal_connect(check_button.bs_debug, "toggled",
+			 G_CALLBACK(on_checkbutton_biblesync_toggled), &settings.bs_debug);
+	g_signal_connect(check_button.bs_presence, "toggled",
+			 G_CALLBACK(on_checkbutton_biblesync_toggled), &settings.bs_presence);
+	g_signal_connect(check_button.bs_mismatch, "toggled",
+			 G_CALLBACK(on_checkbutton_biblesync_toggled), &settings.bs_mismatch);
+
+	g_signal_connect(radio_button.bs_mode_off, "toggled",
+			 G_CALLBACK(on_radiobutton_biblesync_mode), &rb_cb_0);
+	g_signal_connect(radio_button.bs_mode_personal, "toggled",
+			 G_CALLBACK(on_radiobutton_biblesync_mode), &rb_cb_1);
+	g_signal_connect(radio_button.bs_mode_instructor, "toggled",
+			 G_CALLBACK(on_radiobutton_biblesync_mode), &rb_cb_2);
+	g_signal_connect(radio_button.bs_mode_student, "toggled",
+			 G_CALLBACK(on_radiobutton_biblesync_mode), &rb_cb_3);
+
+	g_signal_connect(radio_button.bs_nav_direct, "toggled",
+			 G_CALLBACK(on_radiobutton_biblesync_nav), &rb_cb_1);
+	g_signal_connect(radio_button.bs_nav_verselist, "toggled",
+			 G_CALLBACK(on_radiobutton_biblesync_nav), &rb_cb_0);
+	/* ^-- BibleSync --^ */
 }
 
 /*
@@ -2356,7 +2445,6 @@ setup_font_prefs_combobox(void)
  *
  * Synopsis
  *   #include "gui/search_dialog.h"
- *
  *   static gboolean button_release_event(GtkWidget * widget,
  *					  GdkEventButton * event,
  *					  gpointer data)
@@ -2397,7 +2485,6 @@ static gboolean button_release_event(GtkWidget * widget,
  *
  * Synopsis
  *   #include "gui/search_dialog.h"
- *
  *   static void _setup_listview
  *
  * Description
@@ -2453,12 +2540,10 @@ void ps_setup_listview()
  *
  * Synopsis
  *   #include "gui/search_dialog.h"
- *
  *   void modules_lists_changed(GtkTreeSelection * selection,
  *		     					 gpointer data)
  *
  * Description
- *
  *
  * Return value
  *   void
@@ -2494,8 +2579,7 @@ static void modules_lists_changed(GtkTreeSelection * selection,
  *
  * Synopsis
  *   #include "gui/search_dialog.h"
- *
- *
+ *   void ps_setup_treeview(GtkWidget * treeview)
  *
  * Description
  *
@@ -2582,7 +2666,7 @@ static void on_mod_sel_close_clicked(void)
  *   ps_button_clear
  *
  * Synopsis
- *	ps_button_clear(GtkButton * button, gpointer user_data)
+ *   void ps_button_clear(GtkButton * button, gpointer user_data)
  *
  * Description
  *   clear all modules from the list. (parallel select)
@@ -2618,7 +2702,7 @@ void ps_button_clear(GtkButton * button, gpointer user_data)
  *   ps_button_cut
  *
  * Synopsis
- *	ps_button_cut(GtkButton * button, gpointer user_data)
+ *   void ps_button_cut(GtkButton * button, gpointer user_data)
  *
  * Description
  *   cut one module from the list. (parallel select)
@@ -2665,7 +2749,7 @@ void ps_button_cut(GtkButton * button, gpointer user_data)
  *   ps_button_add
  *
  * Synopsis
- *	ps_button_add(GtkButton * button, gpointer user_data)
+ *   void ps_button_add(GtkButton * button, gpointer user_data)
  *
  * Description
  *   add one module from the list. (parallel select)
@@ -2712,8 +2796,7 @@ void ps_button_add(GtkButton * button, gpointer user_data)
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *
- *   	GtkWidget *gui_create_preferences_dialog(GList * biblelist,
+ *   GtkWidget *gui_create_preferences_dialog(GList * biblelist,
  *					 GList * commlist,
  *					 GList * dictlist,
  *					 GList * percomlist,
@@ -2800,6 +2883,20 @@ create_preferences_dialog(void)
 	check_button.prayerlist = UI_GET_ITEM(gxml, "checkbutton_prayerlist");
 
 	check_button.show_paratab = UI_GET_ITEM(gxml, "checkbutton_paratab");
+
+	/* v-- BibleSync --v */
+	check_button.bs_debug           = UI_GET_ITEM(gxml, "checkbutton_BSP_nav_debug");
+	check_button.bs_presence        = UI_GET_ITEM(gxml, "checkbutton_BSP_presence");
+	check_button.bs_mismatch        = UI_GET_ITEM(gxml, "checkbutton_BSP_mismatch");
+
+	radio_button.bs_mode_off        = UI_GET_ITEM(gxml, "radiobutton_BSP_off");
+	radio_button.bs_mode_personal   = UI_GET_ITEM(gxml, "radiobutton_BSP_personal");
+	radio_button.bs_mode_instructor = UI_GET_ITEM(gxml, "radiobutton_BSP_instructor");
+	radio_button.bs_mode_student    = UI_GET_ITEM(gxml, "radiobutton_BSP_student");
+
+	radio_button.bs_nav_direct      = UI_GET_ITEM(gxml, "radiobutton_BSP_nav_direct");
+	radio_button.bs_nav_verselist   = UI_GET_ITEM(gxml, "radiobutton_BSP_nav_verselist");
+	/* ^-- BibleSync --^ */
 
 	g_signal_connect(color_picker.text_background, "color_set",
 			 G_CALLBACK(on_colorbutton1_color_set), NULL);

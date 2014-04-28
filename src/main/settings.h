@@ -163,6 +163,17 @@ struct _settings {
 		/* do we need to add item to history */
 		addhistoryitem;
 
+	int
+		bs_mode,	// [0..3] for radio button select
+		// 0=disable; 1=personal; 2=instructor; 3=student.
+
+		bs_navdirect,	// or via verse list (false).
+		bs_debug,	// show pkt traces.
+		bs_presence,	// show presence announcements.
+		bs_mismatch,	// show mismatch packets.
+		bs_receiving;	// lock: don't re-xmit what we recv.
+	char
+		*bs_passphrase;	// session exclusion/isolation.
 
 	/* gbs */
 	char *book_mod;				/* module to open at program startup  */

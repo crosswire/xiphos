@@ -234,6 +234,15 @@ int settings_init(int argc, char **argv, int new_configs, int new_bookmarks)
 
 	load_settings_structure();
 
+	/* BibleSync */
+	settings.bs_mode       = 0;
+	settings.bs_navdirect  = TRUE;
+	settings.bs_debug      = FALSE;
+	settings.bs_presence   = FALSE;
+	settings.bs_mismatch   = FALSE;
+	settings.bs_receiving  = FALSE;
+	settings.bs_passphrase = g_strdup("BibleSync");
+
 	/* if the user had forced a locale, we must set it now. */
 	if (settings.special_locale && strcmp(settings.special_locale, NONE)) {
 		g_setenv("LANG", settings.special_locale, TRUE);
