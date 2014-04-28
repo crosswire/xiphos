@@ -124,7 +124,12 @@ const char* main_get_osisref_from_key(const char *module, const char *key);
 const char *main_get_language_map(const char *language);
 char **main_get_module_language_list(void);
 void main_init_language_map(void);
-
+void main_biblesync_navigate(char cmd,
+			     char *bible, char *verse, char *alt,
+			     char *info, char *dump);
+void main_biblesync_mode_select(int m, char *p);
+int main_biblesync_active();
+const char *main_biblesync_get_passphrase();
 #ifdef __cplusplus
 }
 #endif

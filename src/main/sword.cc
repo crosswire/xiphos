@@ -63,6 +63,7 @@ extern "C" {
 #include "main/search_sidebar.h"
 #include "main/previewer.h"
 #include "main/settings.h"
+#include "main/sidebar.h"
 #include "main/sword.h"
 #include "main/url.hh"
 #include "main/xml.h"
@@ -71,12 +72,15 @@ extern "C" {
 
 #include "backend/sword_main.hh"
 #include "backend/gs_stringmgr.h"
+#include "backend/biblesync.hh"
 
 #include "gui/debug_glib_null.h"
 
 #ifdef HAVE_DBUS
 #include "gui/ipc.h"
 #endif
+
+BibleSync *biblesync;
 
 using namespace sword;
 
@@ -710,6 +714,13 @@ void main_init_backend(void)
 	GS_print(("%s\n", "Checking for SWORD Modules"));
 	settings.spell_language = strdup(lang);
 	main_init_lists();
+
+	//
+	// BibleSync backend startup.  identify the user by name.
+	//
+	string user = (string)g_get_real_name()
+	    + " (" + g_get_user_name() + ")";
+	biblesync = new BibleSync("Xiphos", PACKAGE_VERSION, user);
 }
 
 
@@ -1256,6 +1267,37 @@ void main_display_bible(const char * mod_name,
 		else
 			gui_keep_parallel_dialog_in_sync();
 	}
+
+	//
+	// BibleSync.
+	//
+	if (!settings.bs_receiving &&		// no re-xmit of recv'd nav.
+	    ((biblesync->getMode() == BSP_MODE_PERSONAL) ||
+	     (biblesync->getMode() == BSP_MODE_INSTRUCTOR)))
+	    // students do not xmit nav.
+	{
+	    sync_windows();		// update display for current page
+
+	    string group = "1";		// default if determination fails.
+	    char pchar[2];
+	    gint pagenum = gtk_notebook_get_current_page
+				(GTK_NOTEBOOK(widgets.notebook_main));
+
+	    if ((pagenum != -1) && (pagenum < 9))
+	    {
+		pchar[0] = pagenum + '1';
+		pchar[1] = '\0';
+		group = (string)pchar;
+	    }
+
+	    // ** this key is not to be freed. **
+	    char *osis_key = (char *)main_get_osisref_from_key(mod_name, key);
+	    biblesync->Transmit(BSP_SYNC,
+				(string)mod_name, (string)osis_key,
+				(string)"", group);
+	}
+	// -- BibleSync --
+
 	if (adjustment)
 		g_signal_handler_unblock(adjustment, scroll_adj_signal);
 }
@@ -1833,13 +1875,13 @@ void main_flush_widgets_content(void)
 			"<html><head></head><body bgcolor=\"%s\" text=\"%s\"> </body></html>",
 			settings.bible_bg_color, settings.bible_text_color);
 
-	if (gtk_widget_get_realized  (GTK_WIDGET(widgets.html_text)))
+	if (gtk_widget_get_realized(GTK_WIDGET(widgets.html_text)))
 		HtmlOutput(blank_html_content->str, widgets.html_text, NULL, NULL);
-	if (gtk_widget_get_realized (GTK_WIDGET(widgets.html_comm)))
+	if (gtk_widget_get_realized(GTK_WIDGET(widgets.html_comm)))
 		HtmlOutput(blank_html_content->str, widgets.html_comm, NULL, NULL);
-	if (gtk_widget_get_realized (GTK_WIDGET(widgets.html_dict)))
+	if (gtk_widget_get_realized(GTK_WIDGET(widgets.html_dict)))
 		HtmlOutput(blank_html_content->str, widgets.html_dict, NULL, NULL);
-	if (gtk_widget_get_realized (GTK_WIDGET(widgets.html_book)))
+	if (gtk_widget_get_realized(GTK_WIDGET(widgets.html_book)))
 		HtmlOutput(blank_html_content->str, widgets.html_book, NULL, NULL);
 	g_string_free(blank_html_content, TRUE);
 }
@@ -1880,5 +1922,221 @@ gboolean main_is_Bible_key(gchar *key)
 const char *
 main_get_osisref_from_key(const char *module, const char *key)
 {
-    return backend->get_osisref_from_key(module, key);
+	return backend->get_osisref_from_key(module, key);
+}
+
+/******************************************************************************
+ * Name
+ *  main_biblesync_navigate
+ *
+ * Synopsis
+ *   #include "backend/biblesync.hh"
+ *   void main_biblesync_navigate(cmd, bible, ref, alt, info, dump)
+ *
+ * Description
+ *   navigates per incoming BibleSync request, or handles
+ *   announcement or error instead.
+ *   used as a callback out of class BibleSync.
+ *
+ * Return value
+ *   void
+ */
+void
+main_biblesync_navigate(char cmd,
+			string bible, string ref, string alt,
+			string group, string domain,
+			string info,  string dump)
+{
+    string message;
+
+    // lockout: prevent re-xmit of what we're processing.
+    settings.bs_receiving = TRUE;
+
+    switch (cmd)
+    {
+
+    // error
+    case 'E':
+	if (settings.bs_debug)
+	{
+	    // recv error occurred: explanation in info, pkt in dump.
+	    message = info + "\n\n" + dump;
+	    gui_generic_warning((char *)message.c_str());
+	}
+	break;
+
+    // mismatch
+    case 'M':
+	if (settings.bs_mismatch)
+	{
+	    message = "BibleSync: Mismatched packet\n\nType: "
+		+ info
+		+ ((info == "announce")
+		   ? ("\nMessage: " + alt)
+		   : ("\nBible:" + bible + " Ref:" + ref + " Alt:" + alt
+		      + "\nGroup:" + group + " Domain:" + domain))
+		+ (settings.bs_debug
+		   ? ("\n\nDump: " + (string)dump)
+		   : "");
+	    gui_generic_warning((char *)message.c_str());
+	}
+	break;
+
+    // announce
+    case 'A':
+	if (settings.bs_presence)
+	{
+	    if (settings.bs_debug)
+	    {
+		message = "Presence announcement:\n\n" + dump;
+		gui_generic_warning((char *)message.c_str());
+	    }
+	    gui_generic_warning((char *)alt.c_str());
+	}
+	break;
+
+    // navigation
+    case 'N':
+	if (settings.bs_debug)
+	{
+	    message = "Navigation packet:\n\n" + dump;
+	    gui_generic_warning((char *)message.c_str());
+	}
+
+	if (backend->is_module(bible.c_str()))
+	{
+	    // Xiphos does nothing with "alt", the alternate reference.
+
+	    // direct navigation, or via verse list?
+	    if (settings.bs_navdirect &&
+		(strpbrk(ref.c_str(), "-;,") == NULL))	// not a multi-ref
+	    {
+		// Xiphos interprets param "group" as a tab#.
+		char tab = group.c_str()[0];
+		if ((group.length() == 1) &&		// 1-character string
+		    (tab >= '1') && (tab <= '9'))
+		{
+		    gui_select_nth_tab((tab - '1'));	// 0-based list
+		}
+		settings.showtexts = 1;			// make panes visible
+		settings.showcomms = 1;
+		//main_display_bible(bible.c_str(), ref.c_str());
+		main_url_handler(((string)"sword://" + bible + "/" " ref").c_str(), 0);
+	    }
+	    else
+	    {
+		// verse list as general preference, or due to multi-ref.
+		main_display_verse_list_in_sidebar
+		    (settings.currentverse,
+		     (gchar*)bible.c_str(), (gchar*)ref.c_str());
+	    }
+	}
+	else
+	{
+	    message = "BibleSync requested unknown module '" + bible + "'.";
+	    gui_generic_warning((char *)message.c_str());
+	}
+	break;
+
+    default:
+	message = (string)"ERROR: unknown BibleSync indicator '"
+	    + cmd
+	    + "'.\n"
+	    + "Other indications are:\n"
+	    + "bible: " + bible
+	    + "ref: " + ref
+	    + "alt: " + alt
+	    + "info: " + info
+	    + "dump:\n" + dump;
+	gui_generic_warning((char *)message.c_str());
+	break;
+    }
+
+    // unlock.
+    settings.bs_receiving = FALSE;
+}
+
+
+/******************************************************************************
+ * Name
+ *  main_biblesync_mode_select
+ *
+ * Synopsis
+ *   #include "backend/biblesync.hh"
+ *   void main_biblesync_mode_select(int m)
+ *
+ * Description
+ *   checks incoming argument and assigns mode appropriately.
+ *   starts receiver if we didn't disable.
+ *
+ * Return value
+ *   void
+ */
+void
+main_biblesync_mode_select(int m, char *p)
+{
+    BibleSync_mode mode;
+
+    switch (m)
+    {
+    case 0:
+	mode = BSP_MODE_DISABLE;    break;
+    case 1:
+	mode = BSP_MODE_PERSONAL;   break;
+    case 2:
+	mode = BSP_MODE_INSTRUCTOR; break;
+    case 3:
+	mode = BSP_MODE_DISABLE;    break;
+    default:
+	mode = N_BSP_MODE;          break;	// error
+    }
+    if (mode != N_BSP_MODE)
+    {
+	biblesync->setMode(mode, p, main_biblesync_navigate);
+
+	if (biblesync->getMode() != BSP_MODE_DISABLE)	// did it work?
+	{
+	    // every time we set an active mode, we must start the receiver.
+	    // glib will stop it on its own any time we go back to disable.
+	    g_timeout_add(5000, (GSourceFunc)BibleSync::Receive, biblesync);
+	}
+    }
+}
+
+/******************************************************************************
+ * Name
+ *  main_biblesync_active
+ *
+ * Synopsis
+ *   #include "backend/biblesync.hh"
+ *   void main_biblesync_active()
+ *
+ * Description
+ *   determines whether BibleSync is active or disabled.
+ *
+ * Return value
+ *   int
+ */
+int main_biblesync_active()
+{
+    return biblesync->getMode() != BSP_MODE_DISABLE;
+}
+
+/******************************************************************************
+ * Name
+ *  main_biblesync_get_passphrase
+ *
+ * Synopsis
+ *   #include "backend/biblesync.hh"
+ *   const char *main_biblesync_get_passphrase()
+ *
+ * Description
+ *   retrieves the currently-set session passphrase.
+ *
+ * Return value
+ *   void
+ */
+const char *main_biblesync_get_passphrase()
+{
+    return biblesync->getPassphrase().c_str();
 }
