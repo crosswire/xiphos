@@ -174,7 +174,7 @@ typedef void (*BibleSync_navigate)(char,
 #define	BSP_MAX_PAYLOAD	(BSP_MAX_SIZE - BSP_HEADER_SIZE)
 
 // message indications
-#define	BSP_MAGIC	0x409CAF11
+#define	BSP_MAGIC	htonl(0x409CAF11)
 #define	BSP_PROTOCOL	2
 
 // message types
