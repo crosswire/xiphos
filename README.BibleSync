@@ -31,12 +31,15 @@ changes propagate back into a revised version:
   every packet.  It seems only reasonable that everyone identify himself
   fully when participating in a network conversation.
 - packet header is expanded to fill exactly 32 bytes, using 6 fill bytes,
-  for potential future use.
-- UUID is placed at end of header, aligned on 16-byte boundary.
+  reserved for potential future use.
+- UUID is placed at header's end, aligned on 16-byte boundary.
+- There is a single passphrase parameter, msg.sync.passPhrase, for use in
+  either personal or classroom mode.  There is no sense in having distinct
+  fields when exactly one of them is in use at any one time.
 - No TTL-limiting support is present.  Due to the nature of there being a
   single receiver on a UDP socket, zeroing TTL so that multicast packets
   do not leave the local machine is useless, because only this program is
-  receiving the multicast datagrams.
+  receiving the multicast datagrams.  Simply turn off BibleSync.
 
 In the future, BibleSync will be separated into its own library,
 libbiblesync.{so,dll}, for inclusion in any other Bible program.

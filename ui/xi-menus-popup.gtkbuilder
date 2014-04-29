@@ -899,6 +899,18 @@
       </object>
     </child>
     <child>
+      <object class="GtkImageMenuItem" id="send_list_via_biblesync">
+        <property name="label" translatable="yes">Send list via BibleSync</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="tooltip_text" translatable="yes">Send this verse list via BibleSync to others, if you are in Personal or Instructor mode.</property>
+        <property name="use_action_appearance">False</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_send_list_via_biblesync_activate" swapped="no"/>
+      </object>
+    </child>
+    <child>
       <object class="GtkImageMenuItem" id="export_list1">
         <property name="label" translatable="yes">Export List</property>
         <property name="visible">True</property>
