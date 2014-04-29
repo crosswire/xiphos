@@ -2011,16 +2011,16 @@ main_biblesync_navigate(char cmd,
 	    if (settings.bs_navdirect &&
 		(strpbrk(ref.c_str(), "-;,") == NULL))	// not a multi-ref
 	    {
-		settings.showtexts = 1;			// make panes visible
-		settings.showcomms = 1;
-		settings.comm_showing = 1;
-
 		// Xiphos interprets param "group" as a tab#.
 		char tab = group.c_str()[0];
 		if ((group.length() == 1) &&		// 1-character string
 		    (tab >= '1') && (tab <= '9'))
 		{
 		    gui_select_nth_tab((tab - '1'));	// 0-based list
+		    settings.showtexts = 1;		// make panes visible
+		    settings.showcomms = 1;
+		    settings.comm_showing = 1;
+		    gui_recompute_shows(TRUE);
 		}
 		//main_display_bible(bible.c_str(), ref.c_str());
 		main_url_handler(((string)"sword://"
