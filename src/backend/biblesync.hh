@@ -61,19 +61,19 @@
 //		 string bible, string ref, string alt,
 //		 string group, string domain,
 //		 string info,  string dump)
-//	there are 4 use cases, shown in cmd:
-//	1. 'E' (error) for network errors & malformed packets.
-//	   only info + dump are useful.
-//	2. 'M' (mismatch) against passphrase
-//	   info == "announce" or "sync"
-//	   announce: presence message in alt.
-//	   sync:     bible, ref, alt, group, domain as arrived.
-//	   dump available.
-//	3. 'A' (announce)
-//	   presence message in alt.  dump available.
-//	4. 'N' (navigation)
-//	   bible, ref, alt, group, domain as arrived.
-//	   info + dump available.
+//		there are 4 your_void_nav_func() use cases, identified in cmd:
+//		1. 'E' (error) for network errors & malformed packets.
+//		   only info + dump are useful.
+//		2. 'M' (mismatch) against passphrase
+//		   info == "announce" or "sync"
+//			   announce: presence message in alt.
+//			   sync:     bible, ref, alt, group, domain as arrived.
+//		   dump available.
+//		3. 'A' (announce)
+//		   presence message in alt.  dump available.
+//		4. 'N' (navigation)
+//		   bible, ref, alt, group, domain as arrived.
+//		   info + dump available.
 //
 // - get current mode.
 //	BibleSync_mode getMode().
@@ -83,7 +83,7 @@
 //
 // - receive navigation.
 //	BibleSync::Receive(YourBibleSyncObjPtr);	// *-* poll often *-*
-//		see note below; calls your_void_nav_func.
+//		see note below; calls your_void_nav_func().
 //
 // - send navigation.
 //	BibleSync_xmit_status retval =
@@ -285,9 +285,9 @@ public:
     ~BibleSync();
 
     // operation.
-    void setMode(BibleSync_mode m,
-		 string p = "",
-		 BibleSync_navigate n = NULL);
+    BibleSync_mode setMode(BibleSync_mode m,
+			   string p = "",
+			   BibleSync_navigate n = NULL);
     inline BibleSync_mode getMode(void) { return mode; };
 
     // obtain passphrase, for default choice.
