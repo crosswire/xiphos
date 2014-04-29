@@ -103,9 +103,9 @@ BibleSync::~BibleSync()
 }
 
 // mode choice and setup invocation.
-void BibleSync::setMode(BibleSync_mode m,
-			string p,
-			BibleSync_navigate n)
+BibleSync_mode BibleSync::setMode(BibleSync_mode m,
+				  string p,
+				  BibleSync_navigate n)
 {
     if ((mode == BSP_MODE_DISABLE) ||
 	((mode != BSP_MODE_DISABLE) &&
@@ -132,6 +132,7 @@ void BibleSync::setMode(BibleSync_mode m,
 			BSP "network setup errors.", result);
 	Shutdown();
     }
+    return mode;
 }
 
 // network init w/listener start.
@@ -329,7 +330,7 @@ int BibleSync::ReceiveInternal()
 	snprintf(dump, DEBUG_LENGTH-1,
 		 "magic: 0x%08x\nversion: 0x%02x\ntype: 0x%02x (%s)\n"
 		 "uuid: %s\n#pkt: %d\npkt index: %d\n\n-*- body -*-\n%s",
-		 bsp.magic, bsp.version,
+		 ntohl(bsp.magic), bsp.version,
 		 bsp.msg_type, ((bsp.msg_type == BSP_ANNOUNCE)
 				   ? "announce"
 				   : ((bsp.msg_type == BSP_SYNC)
@@ -519,9 +520,9 @@ int BibleSync::InitSelectRead(char *dump,
     }
 
     if ((FD_ISSET(server_fd, &read_set)) &&
-	(recv_size = (recvfrom(server_fd, (char *)buffer, BSP_MAX_SIZE,
+	((recv_size = recvfrom(server_fd, (char *)buffer, BSP_MAX_SIZE,
 			       MSG_DONTWAIT, (sockaddr *)source,
-			       &source_length) < 0)))
+			       &source_length)) < 0))
     {
 	(*nav_func)('E', EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
 		    BSP "recvfrom < 0", (string)dump);
@@ -603,7 +604,7 @@ BibleSync_xmit_status BibleSync::Transmit(char message_type,
     snprintf(dump, DEBUG_LENGTH-1,
 	     "magic: 0x%08x\nversion: 0x%02x\ntype: 0x%02x (%s)\n"
 	     "uuid: %s\n#pkt: %d\npkt index: %d\n\n-*- body -*-\n%s",
-	     bsp.magic, bsp.version,
+	     ntohl(bsp.magic), bsp.version,
 	     bsp.msg_type, ((bsp.msg_type == BSP_ANNOUNCE)
 			    ? "announce"
 			    : ((bsp.msg_type == BSP_SYNC)

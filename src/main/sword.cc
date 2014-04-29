@@ -2011,6 +2011,10 @@ main_biblesync_navigate(char cmd,
 	    if (settings.bs_navdirect &&
 		(strpbrk(ref.c_str(), "-;,") == NULL))	// not a multi-ref
 	    {
+		settings.showtexts = 1;			// make panes visible
+		settings.showcomms = 1;
+		settings.comm_showing = 1;
+
 		// Xiphos interprets param "group" as a tab#.
 		char tab = group.c_str()[0];
 		if ((group.length() == 1) &&		// 1-character string
@@ -2018,10 +2022,11 @@ main_biblesync_navigate(char cmd,
 		{
 		    gui_select_nth_tab((tab - '1'));	// 0-based list
 		}
-		settings.showtexts = 1;			// make panes visible
-		settings.showcomms = 1;
 		//main_display_bible(bible.c_str(), ref.c_str());
-		main_url_handler(((string)"sword://" + bible + "/" " ref").c_str(), 0);
+		main_url_handler(((string)"sword://"
+				  + bible
+				  + "/"
+				  + ref).c_str(), 1);
 	    }
 	    else
 	    {
@@ -2092,13 +2097,12 @@ main_biblesync_mode_select(int m, char *p)
     }
     if (mode != N_BSP_MODE)
     {
-	biblesync->setMode(mode, p, main_biblesync_navigate);
-
-	if (biblesync->getMode() != BSP_MODE_DISABLE)	// did it work?
+	if (biblesync->setMode(mode, p, main_biblesync_navigate)
+	    != BSP_MODE_DISABLE)
 	{
 	    // every time we set an active mode, we must start the receiver.
 	    // glib will stop it on its own any time we go back to disable.
-	    g_timeout_add(5000, (GSourceFunc)BibleSync::Receive, biblesync);
+	    g_timeout_add(1000, (GSourceFunc)BibleSync::Receive, biblesync);
 	}
     }
 }
