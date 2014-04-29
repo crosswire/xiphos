@@ -785,8 +785,9 @@ static gboolean on_treeview_button_press_event(GtkWidget * widget,
 	}
 	switch (event->button) {
 	case 3:
-		gtk_menu_popup ((GtkMenu*)sidebar.menu_item_save_search, NULL, NULL, NULL, NULL, 2,
-		     			gtk_get_current_event_time());
+		gtk_menu_popup((GtkMenu*)sidebar.menu_item_save_search,
+			       NULL, NULL, NULL, NULL, 2,
+			       gtk_get_current_event_time());
 		return TRUE;
 
 	default:
@@ -937,6 +938,39 @@ on_save_list_as_a_series_of_bookmarks_activate (GtkMenuItem * menuitem,
                                         gpointer user_data)
 {
 	gui_verselist_to_bookmarks(list_of_verses, FALSE);
+}
+
+
+G_MODULE_EXPORT void
+on_send_list_via_biblesync_activate(GtkMenuItem * menuitem,
+				    gpointer user_data)
+{
+    if (main_biblesync_active_xmit_allowed())
+    {
+	GList *verse = list_of_verses;
+	GString *vlist = g_string_new("");
+	gboolean first = TRUE;
+	RESULTS *item;
+
+	for (verse = list_of_verses; verse; verse = g_list_next(verse))
+	{
+	    item = (RESULTS *)verse->data;
+	    if (!first)
+	    {
+		vlist = g_string_append_c(vlist, ';');
+	    }
+	    vlist = g_string_append(
+		vlist,
+		(char *)main_get_osisref_from_key
+		(settings.MainWindowModule, item->key));
+	    first = FALSE;
+	}
+	main_biblesync_transmit_verse_list(vlist->str);
+    }
+    else
+    {
+	gui_generic_warning(_("BibleSync is not active for transmit."));
+    }
 }
 
 

@@ -52,10 +52,10 @@ static string outbound_fill[] = {
     BSP_APP_USER,
     BSP_MSG_PASSPHRASE,
     BSP_MSG_SYNC_DOMAIN,
-    BSP_MSG_SYNC_VERSE,
-    BSP_MSG_SYNC_ALTVERSE,
+    BSP_MSG_SYNC_GROUP,
     BSP_MSG_SYNC_BIBLEABBREV,
-    BSP_MSG_SYNC_GROUP
+    BSP_MSG_SYNC_ALTVERSE,
+    BSP_MSG_SYNC_VERSE		// last: could go overly long, risk cutoff.
 };
 
 // BibleSync class constructor.
@@ -71,23 +71,22 @@ BibleSync::BibleSync(string a, string v, string u)
       server_fd(-1),
       client_fd(-1)
 {
-    // learn the address to which to assign for multicast.
-    InterfaceAddress();
-
 #ifndef WIN32
     // cobble together a description of this machine.
     struct utsname uts;
     uname(&uts);
     device = (string)uts.machine
-	+ " running "
+	+ ": "
 	+ uts.sysname
-	+ " "
-	+ uts.release
+	//+ " "
+	//+ uts.release
 	+ " on "
 	+ uts.nodename;
 #else
     device = "Windows PC";
 #endif
+
+    interface_addr.s_addr = htonl(0xff000001);	// 127.0.0.1
 }
 
 #define	BSP		(string)"BibleSync: "
@@ -146,6 +145,9 @@ string BibleSync::Setup()
 
     else
     {
+	// learn the address to which to assign for multicast.
+	InterfaceAddress();
+
 	// prepare both xmitter and recvr, even though one or the other might
 	// be not generally in use in classroom setting (viz. announce).
 
@@ -174,7 +176,7 @@ string BibleSync::Setup()
 			       (char *)&loop, sizeof(loop)) < 0)
 		{
 		    ok_so_far = false;
-		    retval += " IP_MULTICAST_LOOP " + loop;
+		    retval += " IP_MULTICAST_LOOP";
 		}
 		else
 		{
@@ -184,7 +186,7 @@ string BibleSync::Setup()
 				   sizeof(interface_addr)) < 0)
 		    {
 			ok_so_far = false;
-			retval += " IP_MULTICAST_IF " + (int)interface_addr.s_addr;
+			retval += " IP_MULTICAST_IF";
 		    }
 		}
 		// client is now ready for sendto(2) calls.
@@ -240,7 +242,8 @@ string BibleSync::Setup()
 	uuid_dump(uuid, uuid_string);
 
 	// now that we're alive, tell the network world that we're here.
-	Transmit(BSP_ANNOUNCE);
+	if (retval == "")
+	    Transmit(BSP_ANNOUNCE);
     }
 
     return retval;
@@ -258,7 +261,7 @@ void BibleSync::Shutdown()
 // which doesn't exist in win32 mingw.
 void BibleSync::uuid_gen(uuid_t u)
 {
-    char *p = (char *)u;
+    unsigned char *p = (unsigned char *)u;
     long int x;
 
     // srandom(time(NULL));
@@ -613,10 +616,23 @@ BibleSync_xmit_status BibleSync::Transmit(char message_type,
 		BSP "TRANSMIT:", dump);
 #endif /* 0 */
 
-    return ((sendto(client_fd, (char *)&bsp, xmit_size, 0,
+    BibleSync_xmit_status retval;
+    if (sendto(client_fd, (char *)&bsp, xmit_size, 0,
 	       (struct sockaddr *)&client, sizeof(client)) >= 0)
-	    ? BSP_XMIT_OK
-	    : BSP_XMIT_FAILED);
+    {
+	retval = BSP_XMIT_OK;
+    }
+    else
+    {
+	retval = BSP_XMIT_FAILED;
+	(*nav_func)('E', EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
+		BSP "Transmit failed.\n",
+		    "Unable to multicast a packet; BibleSync now disabled.\n"
+		    "If your network connection changed while this program\n"
+		    "was active, it may be sufficient simply to re-enable.");
+	Shutdown();
+    }
+    return retval;
 }
 
 // routines below imported from the net as workable examples.
@@ -812,6 +828,10 @@ int BibleSync::get_default_if_name(char *name, socklen_t size)
 
 void BibleSync::InterfaceAddress()
 {
+    // cancel any old interface value.
+    // we must fail with current info, if at all.
+    interface_addr.s_addr = htonl(0xff000001);	// 127.0.0.1 fallback
+
 #ifndef WIN32
     char gw_if[IF_NAMESIZE];	// default gateway interface.
 
@@ -840,8 +860,7 @@ void BibleSync::InterfaceAddress()
 	}
 	freeifaddrs(ifaddr);
     }
-#else
-    interface_addr = htonl(0xff000001);	// 127.0.0.1
 #endif /* WIN32 */
+
     return;
 }

@@ -2086,7 +2086,7 @@ main_biblesync_mode_select(int m, char *p)
     case 2:
 	mode = BSP_MODE_INSTRUCTOR; break;
     case 3:
-	mode = BSP_MODE_DISABLE;    break;
+	mode = BSP_MODE_STUDENT;    break;
     default:
 	mode = N_BSP_MODE;          break;	// error
     }
@@ -2124,6 +2124,26 @@ int main_biblesync_active()
 
 /******************************************************************************
  * Name
+ *  main_biblesync_active_xmit_allowed
+ *
+ * Synopsis
+ *   #include "backend/biblesync.hh"
+ *   void main_biblesync_active_xmit_allowed()
+ *
+ * Description
+ *   determines whether BibleSync is alive and this user may send.
+ *
+ * Return value
+ *   int
+ */
+int main_biblesync_active_xmit_allowed()
+{
+    return biblesync->getMode() == BSP_MODE_PERSONAL ||
+	   biblesync->getMode() == BSP_MODE_INSTRUCTOR;
+}
+
+/******************************************************************************
+ * Name
  *  main_biblesync_get_passphrase
  *
  * Synopsis
@@ -2139,4 +2159,24 @@ int main_biblesync_active()
 const char *main_biblesync_get_passphrase()
 {
     return biblesync->getPassphrase().c_str();
+}
+
+/******************************************************************************
+ * Name
+ *  main_biblesync_transmit_verse_list
+ *
+ * Synopsis
+ *   #include "backend/biblesync.hh"
+ *   const char *main_biblesync_transmit_verse_list()
+ *
+ * Description
+ *   ships out a multi-ref from verse list handler.
+ *
+ * Return value
+ *   void
+ */
+void main_biblesync_transmit_verse_list(char *vlist)
+{
+    biblesync->Transmit(BSP_SYNC, (string)settings.MainWindowModule, (string)vlist);
+    // remaining args irrelevant => defaulted.
 }
