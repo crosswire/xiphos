@@ -617,6 +617,9 @@ BibleSync_xmit_status BibleSync::Transmit(char message_type,
 		BSP "TRANSMIT:", dump);
 #endif /* 0 */
 
+    // force last == newline: attempt to preserve body format when long.
+    ((unsigned char*)&bsp)[BSP_MAX_SIZE-1] = '\n';
+
     BibleSync_xmit_status retval;
     if (sendto(client_fd, (char *)&bsp, xmit_size, 0,
 	       (struct sockaddr *)&client, sizeof(client)) >= 0)
