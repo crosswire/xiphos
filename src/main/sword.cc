@@ -2016,7 +2016,16 @@ main_biblesync_navigate(char cmd,
 		if ((group.length() == 1) &&		// 1-character string
 		    (tab >= '1') && (tab <= '9'))
 		{
-		    gui_select_nth_tab((tab - '1'));	// 0-based list
+		    tab -= '1';				// 0-based list
+		    
+		    // select tab if not already current, avoid screen flash.
+		    if (cur_passage_tab &&
+			(tab != gtk_notebook_page_num(
+				 GTK_NOTEBOOK(widgets.notebook_main),
+				 cur_passage_tab->page_widget)))
+		    {
+			gui_select_nth_tab(tab);
+		    }
 		    settings.showtexts = 1;		// make panes visible
 		    settings.showcomms = 1;
 		    settings.comm_showing = 1;
