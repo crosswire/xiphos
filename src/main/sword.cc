@@ -2020,7 +2020,7 @@ main_biblesync_navigate(char cmd,
 		    settings.showtexts = 1;		// make panes visible
 		    settings.showcomms = 1;
 		    settings.comm_showing = 1;
-		    gui_recompute_shows(TRUE);
+		    gui_recompute_shows(FALSE);
 		}
 		//main_display_bible(bible.c_str(), ref.c_str());
 		main_url_handler(((string)"sword://"
