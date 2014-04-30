@@ -1280,12 +1280,15 @@ void main_display_bible(const char * mod_name,
 
 	    string group = "1";		// default if determination fails.
 	    char pchar[2];
-	    gint pagenum = gtk_notebook_get_current_page
-				(GTK_NOTEBOOK(widgets.notebook_main));
+	    gint pagenum = (cur_passage_tab
+			    ? gtk_notebook_page_num(
+				    GTK_NOTEBOOK(widgets.notebook_main),
+				    cur_passage_tab->page_widget)
+			    : 1);
 
 	    if ((pagenum != -1) && (pagenum < 9))
 	    {
-		pchar[0] = pagenum + '1';
+		pchar[0] = pagenum + '1';		// 0-based list.
 		pchar[1] = '\0';
 		group = (string)pchar;
 	    }
