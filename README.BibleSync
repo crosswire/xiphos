@@ -36,6 +36,9 @@ changes propagate back into a revised version:
 - There is a single passphrase parameter, msg.sync.passPhrase, for use in
   either personal or classroom mode.  There is no sense in having distinct
   fields when exactly one of them is in use at any one time.
+- Body "name=value" elements are newline-terminated, not newline-delimited.
+  The point of this difference is ease and regularity of parsing, ensuring
+  that every element's termination can be consistently found.
 - No TTL-limiting support is present.  Due to the nature of there being a
   single receiver on a UDP socket, zeroing TTL so that multicast packets
   do not leave the local machine is useless, because only this program is
