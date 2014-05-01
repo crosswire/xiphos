@@ -54,7 +54,7 @@ rm -rf $outdir
 mkdir -p ${outdir}
 cp -r -t ${outdir} win32/extras/*
 # configure and build xiphos
-export CROSS CC CXX AR RANLIB CFLAGS LDFLAGS WINRC \
+export CROSS CC CXX AR RANLIB CFLAGS CXXFLAGS LDFLAGS WINRC \
 	PKG_CONFIG MSVC_LIBPATH
 ./waf configure \
 	--target-platform-win32 \
