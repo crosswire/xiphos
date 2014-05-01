@@ -1227,7 +1227,7 @@
 	                        <property name="can_focus">False</property>
 	                        <property name="pixbuf">biblesync-v1-30.png</property>
                                 <property name="xalign">0</property>
-                                <property name="tooltip_text" translatable="yes">BibleSync Protocol is a method for synchronization of BSP-compatible Bible programs. It operates in 1 of 3 modes: Personal, to synchronize multiple Bible applications of your own, or in a working team; Instructor, to drive a classroom's Bible programs to follow along; Student, to receive the instructor's navigation. Select its mode here.</property>
+                                <property name="tooltip_text" translatable="yes">BibleSync Protocol is a method for synchronization of BSP-compatible Bible programs. It operates in 1 of 3 modes: Personal, to synchronize multiple Bible applications of your own, or in a working team; Speaker, to drive a lecture audience's Bible programs to follow along; Audience, to receive the speaker's navigation. Select its mode here.</property>
 	                      </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -1287,13 +1287,13 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkCheckButton" id="radiobutton_BSP_instructor">
-                                <property name="label" translatable="yes">Instructor</property>
+                              <object class="GtkCheckButton" id="radiobutton_BSP_speaker">
+                                <property name="label" translatable="yes">Speaker</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
                                 <property name="has_tooltip">True</property>
-                                <property name="tooltip_markup" translatable="yes">Enable BibleSync as the class instructor.</property>
+                                <property name="tooltip_markup" translatable="yes">Enable BibleSync as the class speaker.</property>
                                 <property name="use_action_appearance">False</property>
                                 <property name="use_underline">True</property>
                                 <property name="xalign">0</property>
@@ -1302,7 +1302,7 @@
 				<property name="group">radiobutton_BSP_off</property>
                                 <child internal-child="accessible">
                                   <object class="AtkObject" id="radiobutton_BSP_personal-atkobject">
-                                    <property name="AtkObject::accessible-name" translatable="yes">BSP instructor radio button</property>
+                                    <property name="AtkObject::accessible-name" translatable="yes">BSP speaker radio button</property>
                                   </object>
                                 </child>
                               </object>
@@ -1313,13 +1313,13 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkCheckButton" id="radiobutton_BSP_student">
-                                <property name="label" translatable="yes">Student</property>
+                              <object class="GtkCheckButton" id="radiobutton_BSP_audience">
+                                <property name="label" translatable="yes">Audience</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
                                 <property name="has_tooltip">True</property>
-                                <property name="tooltip_markup" translatable="yes">Enable BibleSync as a student in class.</property>
+                                <property name="tooltip_markup" translatable="yes">Enable BibleSync as a member of the audience.</property>
                                 <property name="use_action_appearance">False</property>
                                 <property name="use_underline">True</property>
                                 <property name="xalign">0</property>
@@ -1328,7 +1328,7 @@
 				<property name="group">radiobutton_BSP_off</property>
                                 <child internal-child="accessible">
                                   <object class="AtkObject" id="radiobutton_BSP_personal-atkobject">
-                                    <property name="AtkObject::accessible-name" translatable="yes">BSP student radio button</property>
+                                    <property name="AtkObject::accessible-name" translatable="yes">BSP audience radio button</property>
                                   </object>
                                 </child>
                               </object>
