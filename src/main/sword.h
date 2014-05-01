@@ -131,7 +131,7 @@ void main_biblesync_mode_select(int m, char *p);
 int main_biblesync_active();
 int main_biblesync_active_xmit_allowed();
 const char *main_biblesync_get_passphrase();
-void main_biblesync_transmit_verse_list(char *vlist);
+void main_biblesync_transmit_verse_list(char *modname, char *vlist);
 #ifdef __cplusplus
 }
 #endif
