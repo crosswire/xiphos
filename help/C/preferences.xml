@@ -25,6 +25,92 @@
                 </figure>
                </sect2>
 	
+<!-- General Settings -->
+	<sect2 id="general-settings">
+		<title>General Settings</title>
+		<sect3 id="tab-pane2">
+			<title>Locale, General Preferences and StudyPad directory</title>
+		<figure>
+			<title>Locale, General Preferences and StudyPad directory</title>
+	        	<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+		fileref="figures/preferences_general-misc.png" format="PNG" />
+	    </imageobject>
+	    <!-- EPS versions of the figures are not required at the moment. -->
+            <!-- 
+		    <imageobject>
+      		<imagedata fileref="figures/preferences_general-misc.eps" format="EPS"/>
+    		    </imageobject>
+	    -->
+	    <textobject> 
+	      <phrase>General Preferences and StudyPad directory</phrase> 
+	    </textobject> 
+	  </mediaobject> 
+	
+                        </screenshot>
+
+                </figure>
+		<para>
+                If you wish <application>Xiphos</application> to display its interface in a language other than the default, you may select
+                one here.  A restart will be required, so that the locale can be initialized.
+		</para>
+		<para>
+                If you enable <guilabel>Default Dictionary</guilabel>, then that named dictionary (see <guimenuitem>Special</guimenuitem>
+                below) module will always be used when double-clicking a word anywhere in <application>Xiphos</application>.
+		</para>
+		<para>
+		Certain dictionary-style modules are <guilabel>Daily Devotionals</guilabel> whose keys are numerically in the form "Month.Day".  If you have
+		such a module installed and it has been selected as your preferred devotional, then you can ask that <application>Xiphos</application>
+		display today's selection during startup.
+		</para>
+		<para>
+		If you enable <guilabel>Resize images</guilabel>, <application>Xiphos</application> will automatically resize image
+		content in commentaries, general books, and dictionaries so as to fit the subwindow which contains them.
+		</para>
+		<para>
+		<guilabel>Highlight current verse</guilabel>, if enabled, will cause <application>Xiphos</application> to substitute
+		mere current verse colorization with a high-contrast alternate color scheme on the current verse.  The colors used may be
+		chosen from the color selector pane (see below).
+		</para>
+		<para>
+                <guilabel>Highlight user annotations</guilabel> uses inverted the highlight color choices when marking user-annotated
+                verses.
+		</para>
+		<para>
+                By default, <guilabel>Cross-references</guilabel> go into the Previewer.  Selecting this checkbox puts them into the verse
+                list instead.
+		</para>
+		<para>
+                Verse number display can be offset in several ways provided by the checkboxes.
+		</para>
+		<para>
+		BibleSync is a new shared navigation protocol using LAN multicast.  It is useful for a single person when running Bible programs on
+		multiple machines or devices, all of which you wish to navigate through the Bible together, or for a group working closely together,
+		such as translators.  Also, it has a "lecture" mode, where an instructor's Bible program induces students' programs to follow along.
+		The difference in the modes regards who transmits and who receives navigation.  In Personal mode, BibleSync navigation is both
+		transmitted and received; as Instructor, it transmits only; as Student, it receives only.
+		</para>
+		<para>
+		To enable BibleSync, select a mode from the radio buttons.  Also, choose whether to accept navigation directly, so that Xiphos moves
+		immediately to a specified verse, or whether incoming navigation is instead sent to the verse list, where you can decide whether to
+		follow.
+		</para>
+		<para>
+		You can send a verse list from the sidebar via BibleSync; see the context (right-click) menu there.  A particularly good use case for
+		this is when using a simpler Bible program, such as on a mobile device, with another, such as <application>Xiphos</application> that
+		has significant search capability: Do searches in <application>Xiphos</application> and send the resulting verse list to the mobile
+		device.  Be aware that size limitations on the protocol are small, and though a search may generate hundreds of results in the verse
+		list, at most a few dozen will pass in the protocol to the receivers.  Multi-references always induce verse list usage.
+		</para>
+		<para>
+		<application>Xiphos</application> is the first Bible program with a BibleSync implementation; as such, its utility may be limited for
+		now.  But a number of other programs' authors and support organizations have indicated their intention to support BibleSync as well,
+		including Laridian, theWord, BibleAnalyzer, and Accordance.
+		</para>
+                </sect3>
+	</sect2>
+	
 <!-- Fonts And Colors -->
 	<sect2 id="fonts-and-colors">
 		<title>Fonts And Colors</title>
@@ -118,65 +204,6 @@
                 </itemizedlist>
 
 		</sect3>
-	</sect2>
-	
-<!-- General Settings -->
-	<sect2 id="general-settings">
-		<title>General Settings</title>
-		<sect3 id="tab-pane2">
-			<title>Locale, General Preferences and StudyPad directory</title>
-		<figure>
-			<title>Locale, General Preferences and StudyPad directory</title>
-	        	<screenshot> 
-	  <mediaobject> 
-	    <imageobject><imagedata
-		fileref="figures/preferences_general-misc.png" format="PNG" />
-	    </imageobject>
-	    <!-- EPS versions of the figures are not required at the moment. -->
-            <!-- 
-		    <imageobject>
-      		<imagedata fileref="figures/preferences_general-misc.eps" format="EPS"/>
-    		    </imageobject>
-	    -->
-	    <textobject> 
-	      <phrase>General Preferences and StudyPad directory</phrase> 
-	    </textobject> 
-	  </mediaobject> 
-	
-                        </screenshot>
-
-                </figure>
-		<para>
-                If you wish <application>Xiphos</application> to display its interface in a language other than the default, you may select
-                one here.  A restart will be required, so that the locale can be initialized.
-		</para>
-		<para>
-                If you enable <guilabel>Default Dictionary</guilabel>, then that named dictionary (see <guimenuitem>Special</guimenuitem>
-                below) module will always be used when double-clicking a word anywhere in <application>Xiphos</application>.
-		</para>
-		<para>
-		Certain dictionary-style modules are <guilabel>Daily Devotionals</guilabel> whose keys are numerically in the form "Month.Day".  If you have
-		such a module installed and it has been selected as your preferred devotional, then you can ask that <application>Xiphos</application>
-		display today's selection during startup.
-		</para>
-		<para>
-		If you enable <guilabel>Resize images</guilabel>, <application>Xiphos</application> will automatically resize image
-		content in commentaries, general books, and dictionaries so as to fit the subwindow which contains them.
-		</para>
-		<para>
-		<guilabel>Highlight current verse</guilabel>, if enabled, will cause <application>Xiphos</application> to substitute
-		mere current verse colorization with a high-contrast alternate color scheme on the current verse.  The colors used may be
-		chosen from the color selector pane (see above).
-		</para>
-		<para>
-                <guilabel>Highlight user annotations</guilabel> uses inverted the highlight color choices when marking user-annotated
-                verses.
-		</para>
-		<para>
-                By default, <guilabel>Cross-references</guilabel> go into the Previewer.  Selecting this checkbox puts them into the verse
-                list instead.
-		</para>
-                </sect3>
 	</sect2>
 	
 <!-- Module Settings -->
