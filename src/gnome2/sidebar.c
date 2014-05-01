@@ -980,7 +980,10 @@ G_MODULE_EXPORT void
 on_export_verselist_activate (GtkMenuItem * menuitem,
                                         gpointer user_data)
 {
-	gui_export_bookmarks_dialog((is_search_result?SEARCH_RESULTS_EXPORT:VERSE_LIST_EXPORT), list_of_verses);
+	gui_export_bookmarks_dialog((is_search_result
+				     ? SEARCH_RESULTS_EXPORT
+				     : VERSE_LIST_EXPORT),
+				    list_of_verses);
 }
 
 /******************************************************************************

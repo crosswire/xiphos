@@ -87,9 +87,9 @@
 		<para>
 		BibleSync is a new shared navigation protocol using LAN multicast.  It is useful for a single person when running Bible programs on
 		multiple machines or devices, all of which you wish to navigate through the Bible together, or for a group working closely together,
-		such as translators.  Also, it has a "lecture" mode, where an instructor's Bible program induces students' programs to follow along.
+		such as translators.  Also, it has a "lecture" mode, where a speaker's Bible program induces the audience's programs to follow along.
 		The difference in the modes regards who transmits and who receives navigation.  In Personal mode, BibleSync navigation is both
-		transmitted and received; as Instructor, it transmits only; as Student, it receives only.
+		transmitted and received; as Speaker, it transmits only; as Audience, it receives only.
 		</para>
 		<para>
 		To enable BibleSync, select a mode from the radio buttons.  Also, choose whether to accept navigation directly, so that Xiphos moves
@@ -97,11 +97,15 @@
 		follow.
 		</para>
 		<para>
-		You can send a verse list from the sidebar via BibleSync; see the context (right-click) menu there.  A particularly good use case for
-		this is when using a simpler Bible program, such as on a mobile device, with another, such as <application>Xiphos</application> that
-		has significant search capability: Do searches in <application>Xiphos</application> and send the resulting verse list to the mobile
-		device.  Be aware that size limitations on the protocol are small, and though a search may generate hundreds of results in the verse
-		list, at most a few dozen will pass in the protocol to the receivers.  Multi-references always induce verse list usage.
+		If you use a firewall, you must punch a hole in it for UDP port 22272.
+		</para>
+		<para>
+		You can send a verse list from the sidebar search or Advanced Search Window via BibleSync; see the context (right-click) menu.  A
+		particularly good use case for this is when using a simpler Bible program, such as on a mobile device, with another, such as
+		<application>Xiphos</application> that has significant search capability: Do searches in <application>Xiphos</application> and send
+		the resulting verse list to the mobile device.  Be aware that size limitations on the protocol are small, and though a search may
+		generate hundreds of results in the verse list, at most a few dozen will pass in the protocol to the receivers.  Multi-references
+		always induce verse list usage.
 		</para>
 		<para>
 		<application>Xiphos</application> is the first Bible program with a BibleSync implementation; as such, its utility may be limited for

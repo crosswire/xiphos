@@ -1091,6 +1091,186 @@ static void _finds_verselist_selection_changed(GtkWidget * widget,
 
 /******************************************************************************
  * Name
+ *  on_treeview_button_advsearch_press_event
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *   gboolean on_treeview_button_advsearch_press_event(GtkWidget * widget,
+ *						       GdkEventButton * event,
+ *						       gpointer data)
+ *
+ * Description
+ *   handles context menu kickoff.
+ *
+ * Return value
+ *   gboolean
+ */
+
+static gboolean on_treeview_button_advsearch_press_event(GtkWidget * widget,
+							 GdkEventButton * event,
+							 gpointer user_data)
+{
+	if (event->button == 3)
+	{
+		gtk_menu_popup((GtkMenu*)search1.menu_item_send_search,
+			       NULL, NULL, NULL, NULL, 2,
+			       gtk_get_current_event_time());
+		return TRUE;
+	}
+	else
+	{
+		return FALSE;
+	}
+}
+
+
+/******************************************************************************
+ * Name
+ *   on_send_list_via_biblesync_advsearch_activate
+ *
+ * Synopsis
+ *   #include "gui/sidebar.h"
+ *   GtkWidget* on_send_list_via_biblesync_advsearch_activate
+ *
+ * Description
+ *   ship the adv.search window's current verse list.
+ *
+ * Return value
+ *   GtkWidget*
+ */
+
+G_MODULE_EXPORT void
+on_send_list_via_biblesync_advsearch_activate(GtkMenuItem * menuitem,
+					      gpointer user_data)
+{
+    if (main_biblesync_active_xmit_allowed())
+    {
+	GtkTreeIter iter;
+	GtkTreeModel *model =
+	    gtk_tree_view_get_model(GTK_TREE_VIEW(search1.listview_verses));
+
+	GString *vlist = g_string_new("");
+	gchar *module, *text, *buf, *key;
+
+	gboolean first = TRUE;
+	gboolean valid = gtk_tree_model_get_iter_first(model, &iter);
+
+	while (valid) {
+	    // retrieve a verse ref line.
+	    gtk_tree_model_get(model, &iter, 0, &text, -1);
+
+	    // painful parse of "NET: Revelation of John 2:12 and text here..."
+	    // first `:' finds end of module name.
+	    buf = strchr(text, ':');
+	    *buf = '\0';
+	    // key starts 2 characters after the (former) ':'.
+	    key = buf + 2;
+	    // next : is the middle of chapter:verse.
+	    buf = strchr(key, ':');
+	    // if that works, then space after that ends key.
+	    // it might not work, if not bible/comm...to be caught just below.
+	    if (buf)
+		buf = strchr(buf, ' ');
+	    if (buf)
+		*buf = '\0';
+	    
+	    if (first)
+	    {
+		/* we can send only verse nav -- no lex, no books */
+		module = g_strdup(text);
+		if (!main_is_module(module) ||
+		    ((main_get_mod_type(module) != TEXT_TYPE) &&
+		     (main_get_mod_type(module) != COMMENTARY_TYPE)))
+		{
+		    g_free(module);
+		    g_free(text);
+		    g_string_free(vlist, TRUE);
+		    gui_generic_warning
+			(_("Module is neither Bible nor commentary"));
+		    return;
+		}
+	    }
+	    else
+	    {
+		vlist = g_string_append_c(vlist, ';');
+	    }
+	    vlist = g_string_append(
+		vlist,
+		(char *)main_get_osisref_from_key(module, key));
+
+	    g_free(text);
+	    first = FALSE;
+	    valid = gtk_tree_model_iter_next(model, &iter);
+	}
+	g_free(module);
+
+	main_biblesync_transmit_verse_list(settings.MainWindowModule,
+					   vlist->str);
+	g_string_free(vlist, TRUE);
+    }
+    else
+    {
+	gui_generic_warning(_("BibleSync is not active for transmit."));
+    }
+}
+
+
+/******************************************************************************
+ * Name
+ *   create_results_menu_advsearch
+ *
+ * Synopsis
+ *   #include "gui/sidebar.h"
+ *   GtkWidget* create_results_menu_advsearch (void)
+ *
+ * Description
+ *   initialize context menu in adv.search results.
+ *
+ * Return value
+ *   GtkWidget*
+ */
+
+GtkWidget *create_results_menu_advsearch(void)
+{
+	GtkWidget *menu;
+	gchar *glade_file;
+#ifdef USE_GTKBUILDER
+	GtkBuilder *gxml;
+	glade_file = gui_general_user_file ("xi-menus-popup.gtkbuilder", FALSE);
+#else
+	GladeXML *gxml;
+	glade_file = gui_general_user_file ("xi-menus.glade", FALSE);
+#endif
+	g_return_val_if_fail ((glade_file != NULL), NULL);
+
+#ifdef USE_GTKBUILDER
+	gxml = gtk_builder_new ();
+	gtk_builder_add_from_file (gxml, glade_file, NULL);
+#else
+	gxml = glade_xml_new (glade_file, "menu_verselist_advsearch", NULL);
+#endif
+
+	g_free (glade_file);
+	g_return_val_if_fail ((gxml != NULL), NULL);
+
+	menu = UI_GET_ITEM(gxml, "menu_verselist_advsearch");
+#ifdef USE_GTKBUILDER
+	/* connect signals and data */
+        gtk_builder_connect_signals (gxml, NULL);
+	/*gtk_builder_connect_signals_full
+		(gxml, (GtkBuilderConnectFunc)gui_glade_signal_connect_func, NULL);*/
+#else
+    	/* connect signals and data */
+	glade_xml_signal_autoconnect_full
+		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);
+#endif
+
+	return menu;
+}
+
+
+/******************************************************************************
+ * Name
  *   selection_range_lists_changed
  *
  * Synopsis
@@ -1763,7 +1943,12 @@ void _create_search_dialog(void)
 
 	_setup_listviews(search1.listview_results, (GCallback) _selection_finds_list_changed);
 	search1.listview_verses = UI_GET_ITEM(gxml, "treeview10");
+	search1.menu_item_send_search = create_results_menu_advsearch();
 	_setup_listviews2(search1.listview_verses, (GCallback) _finds_verselist_selection_changed);
+	g_signal_connect((gpointer) search1.listview_verses,
+			 "button_press_event",
+			 G_CALLBACK(on_treeview_button_advsearch_press_event),
+			 NULL);
 
 #ifdef USE_GTKBUILDER
 	_add_html_widget(GTK_WIDGET (gtk_builder_get_object (gxml, "vbox12")));

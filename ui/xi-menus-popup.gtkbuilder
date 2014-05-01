@@ -903,7 +903,7 @@
         <property name="label" translatable="yes">Send list via BibleSync</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="tooltip_text" translatable="yes">Send this verse list via BibleSync to others, if you are in Personal or Instructor mode.</property>
+        <property name="tooltip_text" translatable="yes">Send this verse list via BibleSync to others, if you are in Personal or Speaker mode.</property>
         <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
@@ -919,6 +919,21 @@
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
         <signal name="activate" handler="on_export_verselist_activate" swapped="no"/>
+      </object>
+    </child>
+  </object>
+  <object class="GtkMenu" id="menu_verselist_advsearch">
+    <property name="can_focus">False</property>
+    <child>
+      <object class="GtkImageMenuItem" id="send_list_via_biblesync_advsearch">
+        <property name="label" translatable="yes">Send list via BibleSync</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="tooltip_text" translatable="yes">Send this verse list via BibleSync to others, if you are in Personal or Speaker mode.</property>
+        <property name="use_action_appearance">False</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_send_list_via_biblesync_advsearch_activate" swapped="no"/>
       </object>
     </child>
   </object>
