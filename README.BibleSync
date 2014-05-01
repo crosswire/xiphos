@@ -1,6 +1,19 @@
-BibleSync
+/*
+ * BibleSync library
+ *
+ * Karl Kleinpaste, May 2014
+ *
+ * All files related to implementation of BibleSync, including program
+ * source, READMEs, manual pages, and related similar documents, are in
+ * the public domain.  As a matter of simple decency, your social
+ * obligations are to credit the source and to coordinate any changes you
+ * make back to the origin repository.  These obligations are non-
+ * binding for public domain software, but they are to be seriously
+ * handled nonetheless.
+ */
+
 http://biblesyncprotocol.wikispaces.com
-(user Luigi_S, password openwikispaces)
+(user "General_Public", password "password")
 
 Xiphos provides the first implementation of BibleSync protocol, a method
 for shared navigation of Bible programs over multicast UDP.  This
@@ -19,9 +32,9 @@ BibleSync has 4 modes:
 - Personal, in which the program both xmits and recvs.  Useful for one
   person using multiple simultaneous programs on different devices, or for
   teams working together (e.g. translators).
-- Instructor, in which the program xmits navigation synchronization but
+- Speaker, in which the program xmits navigation synchronization but
   does not recv any.
-- Student, in which the program recvs navigation synchronization but does
+- Audience, in which the program recvs navigation synchronization but does
   not xmit any.
 
 A few liberties have been taken with the spec, with the intent that these

@@ -2,21 +2,15 @@
  * BibleSync library
  * biblesync.cc
  *
- * Copyright © 2014 Karl Kleinpaste
+ * Karl Kleinpaste, May 2014
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Library General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+ * All files related to implementation of BibleSync, including program
+ * source, READMEs, manual pages, and related similar documents, are in
+ * the public domain.  As a matter of simple decency, your social
+ * obligations are to credit the source and to coordinate any changes you
+ * make back to the origin repository.  These obligations are non-
+ * binding for public domain software, but they are to be seriously
+ * handled nonetheless.
  */
 
 //
@@ -155,7 +149,7 @@ string BibleSync::Setup()
 	// in "personal" mode, user is both server and client, because he
 	// receives nav from other programs, and sends nav to them, as peers.
 
-	// instructor == "client" insofar as he xmits nav to students.
+	// speaker == "client" insofar as he xmits nav to audience.
 	if (client_fd < 0)
 	{
 	    if ((client_fd = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) < 0)
@@ -194,7 +188,7 @@ string BibleSync::Setup()
 	    }
 	}
 
-	// student == "server" insofar as he recvs nav from instructor.
+	// audience == "server" insofar as he recvs nav from speaker.
 	if (ok_so_far && (server_fd < 0))
 	{
 	    if ((server_fd = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) < 0)
@@ -458,8 +452,8 @@ int BibleSync::ReceiveInternal()
 			if ((passphrase ==
 			     content.find(BSP_MSG_PASSPHRASE)->second) &&
 			    ((mode == BSP_MODE_PERSONAL) ||
-			     (mode == BSP_MODE_STUDENT)))
-			    // instructor accepts no navigation.
+			     (mode == BSP_MODE_AUDIENCE)))
+			    // speaker accepts no navigation.
 			{
 			    cmd = 'N';	// navigation
 			}
@@ -552,7 +546,7 @@ int BibleSync::InitSelectRead(char *dump,
     return recv_size;
 }
 
-// instructor transmitter
+// speaker transmitter
 // sanity checks for permission to xmit,
 // then format and ship it.
 BibleSync_xmit_status BibleSync::Transmit(char message_type,
@@ -571,8 +565,8 @@ BibleSync_xmit_status BibleSync::Transmit(char message_type,
     if ((message_type != BSP_ANNOUNCE) && (message_type != BSP_SYNC))
 	return BSP_XMIT_BAD_TYPE;
     
-    if ((mode == BSP_MODE_STUDENT) && (message_type == BSP_SYNC))
-	return BSP_XMIT_NO_STUDENT_XMIT;
+    if ((mode == BSP_MODE_AUDIENCE) && (message_type == BSP_SYNC))
+	return BSP_XMIT_NO_AUDIENCE_XMIT;
     
     BibleSyncContent content;
     BibleSyncMessage bsp;

@@ -135,8 +135,8 @@ struct _preferences_radio_buttons {
 	/* BibleSync mode selection */
 	GtkWidget *bs_mode_off;
 	GtkWidget *bs_mode_personal;
-	GtkWidget *bs_mode_instructor;
-	GtkWidget *bs_mode_student;
+	GtkWidget *bs_mode_speaker;
+	GtkWidget *bs_mode_audience;
 
 	/* BibleSync navigation choice */
 	GtkWidget *bs_nav_direct;
@@ -2169,10 +2169,10 @@ setup_check_buttons(void)
 				     (radio_button.bs_mode_personal),
 				     (settings.bs_mode == 1));
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-				     (radio_button.bs_mode_instructor),
+				     (radio_button.bs_mode_speaker),
 				     (settings.bs_mode == 2));
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-				     (radio_button.bs_mode_student),
+				     (radio_button.bs_mode_audience),
 				     (settings.bs_mode == 3));
 
 	/* navigation method */
@@ -2235,9 +2235,9 @@ setup_check_buttons(void)
 			 G_CALLBACK(on_radiobutton_biblesync_mode), &rb_cb_0);
 	g_signal_connect(radio_button.bs_mode_personal, "toggled",
 			 G_CALLBACK(on_radiobutton_biblesync_mode), &rb_cb_1);
-	g_signal_connect(radio_button.bs_mode_instructor, "toggled",
+	g_signal_connect(radio_button.bs_mode_speaker, "toggled",
 			 G_CALLBACK(on_radiobutton_biblesync_mode), &rb_cb_2);
-	g_signal_connect(radio_button.bs_mode_student, "toggled",
+	g_signal_connect(radio_button.bs_mode_audience, "toggled",
 			 G_CALLBACK(on_radiobutton_biblesync_mode), &rb_cb_3);
 
 	g_signal_connect(radio_button.bs_nav_direct, "toggled",
@@ -2891,8 +2891,8 @@ create_preferences_dialog(void)
 
 	radio_button.bs_mode_off        = UI_GET_ITEM(gxml, "radiobutton_BSP_off");
 	radio_button.bs_mode_personal   = UI_GET_ITEM(gxml, "radiobutton_BSP_personal");
-	radio_button.bs_mode_instructor = UI_GET_ITEM(gxml, "radiobutton_BSP_instructor");
-	radio_button.bs_mode_student    = UI_GET_ITEM(gxml, "radiobutton_BSP_student");
+	radio_button.bs_mode_speaker    = UI_GET_ITEM(gxml, "radiobutton_BSP_speaker");
+	radio_button.bs_mode_audience   = UI_GET_ITEM(gxml, "radiobutton_BSP_audience");
 
 	radio_button.bs_nav_direct      = UI_GET_ITEM(gxml, "radiobutton_BSP_nav_direct");
 	radio_button.bs_nav_verselist   = UI_GET_ITEM(gxml, "radiobutton_BSP_nav_verselist");
