@@ -168,7 +168,7 @@ typedef void (*BibleSync_navigate)(char,
 // message structure constants
 #define	BSP_MULTICAST	"239.225.27.227"
 #define	BSP_PORT	22272
-#define	BSP_MAX_SIZE	1024	// in spec, it's 512.  experimenting.
+#define	BSP_MAX_SIZE	1280	// in spec, it's 512.  experimenting.
 #define	BSP_RES_SIZE	6	// unused bytes, fill out header to 32.
 #define	BSP_HEADER_SIZE	32
 #define	BSP_MAX_PAYLOAD	(BSP_MAX_SIZE - BSP_HEADER_SIZE)
