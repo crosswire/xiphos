@@ -165,7 +165,7 @@ struct _settings {
 
 	int
 		bs_mode,	// [0..3] for radio button select
-		// 0=disable; 1=personal; 2=instructor; 3=student.
+		// 0=disable; 1=personal; 2=speaker; 3=audience.
 
 		bs_navdirect,	// or via verse list (false).
 		bs_debug,	// show pkt traces.

@@ -2,21 +2,15 @@
  * BibleSync library
  * biblesync.hh
  *
- * Copyright © 2014 Karl Kleinpaste
+ * Karl Kleinpaste, May 2014
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Library General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+ * All files related to implementation of BibleSync, including program
+ * source, READMEs, manual pages, and related similar documents, are in
+ * the public domain.  As a matter of simple decency, your social
+ * obligations are to credit the source and to coordinate any changes you
+ * make back to the origin repository.  These obligations are non-
+ * binding for public domain software, but they are to be seriously
+ * handled nonetheless.
  */
 
 #ifndef __BIBLESYNC_HH__
@@ -27,9 +21,9 @@
 // http://biblesyncprotocol.wikispaces.com/
 //
 // BSP provides a classroom type of arrangement, where one person
-// (instructor) is in charge of inducing others' (students') Bible
-// software to navigate as instructor requires.  The instructor only
-// xmits and the students only recv.
+// (speaker) is in charge of inducing others' (audience) Bible
+// software to navigate as speaker requires.  The speaker only
+// xmits and the audience only recvs.
 // BSP also provides a personal mode which both xmits and recvs, where
 // one user works with multiple programs across several devices,
 // also suitable for small teams working together, such as translators.
@@ -47,11 +41,11 @@
 // - mode selection.
 //	setMode(BSP_MODE_xyz, "passphrase", your_void_nav_func);
 //		invoke a mode, including net.setup as needed.
-//		xyz = { DISABLE, PERSONAL, INSTRUCTOR, STUDENT }.
+//		xyz = { DISABLE, PERSONAL, SPEAKER, AUDIENCE }.
 //		   DISABLE kills it, shuts off network access.
 //		   PERSONAL is bidirectional.
-//		   INSTRUCTOR xmits only.
-//		   STUDENT recvs only.
+//		   SPEAKER xmits only.
+//		   AUDIENCE recvs only.
 //	=> for any active mode, the application must then start polling using
 //	   the receiver, BibleSync::Receive(), and stop polling when mode
 //	   goes to DISABLE.  if Receive() is called while disabled, it will
@@ -141,8 +135,8 @@ typedef unsigned char xuuid_t[16];
 typedef enum _BibleSync_mode {
     BSP_MODE_DISABLE,
     BSP_MODE_PERSONAL,
-    BSP_MODE_INSTRUCTOR,
-    BSP_MODE_STUDENT,
+    BSP_MODE_SPEAKER,
+    BSP_MODE_AUDIENCE,
     N_BSP_MODE
 } BibleSync_mode;
 
@@ -151,7 +145,7 @@ typedef enum _BibleSync_xmit_status {
     BSP_XMIT_FAILED,
     BSP_XMIT_NO_SOCKET,
     BSP_XMIT_BAD_TYPE,
-    BSP_XMIT_NO_STUDENT_XMIT,
+    BSP_XMIT_NO_AUDIENCE_XMIT,
     BSP_XMIT_RECEIVING,
     N_BSP_XMIT
 } BibleSync_xmit_status;
@@ -301,10 +295,10 @@ public:
     // obtain passphrase, for default choice.
     inline string getPassphrase(void) { return passphrase; };
 
-    // student receiver
+    // audience receiver
     static int Receive(void *);	// C context, polled, e.g. from glib timeout
 
-    // instructor transmitter
+    // speaker transmitter
     BibleSync_xmit_status Transmit(char message_type = BSP_SYNC,
 				   string bible  = "KJV",
 				   string ref    = "Gen.1.1",

@@ -1273,8 +1273,8 @@ void main_display_bible(const char * mod_name,
 	//
 	if (!settings.bs_receiving &&		// no re-xmit of recv'd nav.
 	    ((biblesync->getMode() == BSP_MODE_PERSONAL) ||
-	     (biblesync->getMode() == BSP_MODE_INSTRUCTOR)))
-	    // students do not xmit nav.
+	     (biblesync->getMode() == BSP_MODE_SPEAKER)))
+	    // audience does not xmit nav.
 	{
 	    sync_windows();		// update display for current page
 
@@ -2101,9 +2101,9 @@ main_biblesync_mode_select(int m, char *p)
     case 1:
 	mode = BSP_MODE_PERSONAL;   break;
     case 2:
-	mode = BSP_MODE_INSTRUCTOR; break;
+	mode = BSP_MODE_SPEAKER;    break;
     case 3:
-	mode = BSP_MODE_STUDENT;    break;
+	mode = BSP_MODE_AUDIENCE;   break;
     default:
 	mode = N_BSP_MODE;          break;	// error
     }
@@ -2155,7 +2155,7 @@ int main_biblesync_active()
 int main_biblesync_active_xmit_allowed()
 {
     return biblesync->getMode() == BSP_MODE_PERSONAL ||
-	   biblesync->getMode() == BSP_MODE_INSTRUCTOR;
+	   biblesync->getMode() == BSP_MODE_SPEAKER;
 }
 
 /******************************************************************************
