@@ -206,7 +206,7 @@ string BibleSync::Setup()
 	    {
 		int reuse = 1;
 		if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR,
-			       &reuse, sizeof(reuse)) < 0)
+			       (char *)&reuse, sizeof(reuse)) < 0)
 		{
 		    ok_so_far = false;
 		    retval += " SO_REUSEADDR";
@@ -229,7 +229,8 @@ string BibleSync::Setup()
 		multicast_req.imr_multiaddr.s_addr = inet_addr(BSP_MULTICAST);
 		multicast_req.imr_interface.s_addr = interface_addr.s_addr;
 		if (setsockopt(server_fd, IPPROTO_IP, IP_ADD_MEMBERSHIP,
-			       &multicast_req, sizeof(multicast_req)) < 0)
+			       (char *)&multicast_req, sizeof(multicast_req))
+		    < 0)
 		{
 		    ok_so_far = false;
 		    retval += " IP_ADD_MEMBERSHIP";
@@ -263,15 +264,29 @@ void BibleSync::Shutdown()
 void BibleSync::uuid_gen(uuid_t u)
 {
     unsigned char *p = (unsigned char *)u;
+#ifndef WIN32
     long int x;
 
-    // srandom(time(NULL));
     srandom((unsigned int)interface_addr.s_addr); // "randomly" driven by address.
     for (int i = 0; i < 4; ++i)
     {
 	x = random();
 	memcpy(p+(i*4), &x, 4);
     }
+#else
+    time_t t = time(NULL);
+    long long t_1, t_2, t_3, t_4;
+
+    t_1 = t ^ interface_addr.s_addr;
+    t_2 = t ^ (((interface_addr.s_addr & 0xFFFF) << 16) |
+	       (interface_addr.s_addr >> 16));
+    t_3 = t ^ ((interface_addr.s_addr & 0xFFFF00) >> 8);
+    t_4 = t ^ ((interface_addr.s_addr & 0xFFFF) << 16);
+    memcpy(p,    &t_1, 4);
+    memcpy(p+4,  &t_2, 4);
+    memcpy(p+8,  &t_3, 4);
+    memcpy(p+12, &t_4, 4);
+#endif /* WIN32 */
 }
 
 // conversion of UUID to printable form.
@@ -506,7 +521,13 @@ int BibleSync::InitSelectRead(char *dump,
     struct timeval tv = { 0, 0 };	// select returns immediately
     fd_set read_set;
     int recv_size = 0;
-    unsigned int source_length = sizeof(*source);
+#ifndef WIN32
+    // yes, really:
+    // linux insists on unsigned int, win32 insists on int.
+    // each complains bitterly of invalid conversion if wrongly used.
+    unsigned
+#endif
+    int source_length = sizeof(*source);
 
     strcpy(dump, "[no dump ready]");	// initial, pre-read filler
 
@@ -521,7 +542,7 @@ int BibleSync::InitSelectRead(char *dump,
 
     if ((FD_ISSET(server_fd, &read_set)) &&
 	((recv_size = recvfrom(server_fd, (char *)buffer, BSP_MAX_SIZE,
-			       MSG_DONTWAIT, (sockaddr *)source,
+			       0, (sockaddr *)source,
 			       &source_length)) < 0))
     {
 	(*nav_func)('E', EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
@@ -578,10 +599,7 @@ BibleSync_xmit_status BibleSync::Transmit(char message_type,
     bsp.num_packets = 1;
     bsp.index_packet = 0;
     memcpy((void *)&bsp.uuid, (const void *)uuid, sizeof(uuid_t));
-    for (int i = 0; i < BSP_RES_SIZE; ++i)
-    {
-	bsp.reserved[i] = '\0';	// or 0xff?
-    }
+    memset((void *)&bsp.reserved, 0, BSP_RES_SIZE);
 
     // body prep.
     int field_count = ((message_type == BSP_ANNOUNCE)
@@ -639,6 +657,8 @@ BibleSync_xmit_status BibleSync::Transmit(char message_type,
     return retval;
 }
 
+#ifndef WIN32
+
 // routines below imported from the net as workable examples.
 // in order to do multicast setup, we require the address
 // of the interface that has our default route.  code below
@@ -669,7 +689,6 @@ int BibleSync::readNlSock(int sockFd,
 			  unsigned int seqNum,
 			  unsigned int pId)
 {
-#ifndef WIN32
     struct nlmsghdr *nlHdr;
     int readLen = 0, msgLen = 0;
 
@@ -677,7 +696,6 @@ int BibleSync::readNlSock(int sockFd,
     {
 	if((readLen = recv(sockFd, bufPtr, buf_size - msgLen, 0)) < 0)
 	{
-	    perror("SOCK READ: ");
 	    return -1;
 	}
 
@@ -685,7 +703,6 @@ int BibleSync::readNlSock(int sockFd,
 
 	if((NLMSG_OK(nlHdr, readLen) == 0) || (nlHdr->nlmsg_type == NLMSG_ERROR))
 	{
-	    perror("Error in recieved packet");
 	    return -1;
 	}
 
@@ -711,14 +728,10 @@ int BibleSync::readNlSock(int sockFd,
     while((nlHdr->nlmsg_seq != seqNum) || (nlHdr->nlmsg_pid != pId));
 
     return msgLen;
-#else
-    return 0;
-#endif
 }
 
 int BibleSync::parseRoutes(struct nlmsghdr *nlHdr, struct route_info *rtInfo)
 {
-#ifndef WIN32
     struct rtmsg *rtMsg;
     struct rtattr *rtAttr;
     int rtLen;
@@ -754,13 +767,11 @@ int BibleSync::parseRoutes(struct nlmsghdr *nlHdr, struct route_info *rtInfo)
 	}
     }
 
-#endif
     return 0;
 }
 
 int BibleSync::get_default_if_name(char *name, socklen_t size)
 {
-#ifndef WIN32
     int found_default = 0;
 
     struct nlmsghdr *nlMsg;
@@ -774,7 +785,6 @@ int BibleSync::get_default_if_name(char *name, socklen_t size)
 
     if((sock = socket(PF_NETLINK, SOCK_DGRAM, NETLINK_ROUTE)) < 0)
     {
-	perror("socket creation: ");
 	name[0] = 'x';
 	return -1;
     }
@@ -793,14 +803,12 @@ int BibleSync::get_default_if_name(char *name, socklen_t size)
 
     if(send(sock, nlMsg, nlMsg->nlmsg_len, 0) < 0)
     {
-	perror("write to socket failed: ");
 	name[0] = 'y';
 	return -1;
     }
 
     if((len = readNlSock(sock, msgBuf, sizeof(msgBuf), msgSeq, getpid())) < 0)
     {
-	perror("read from socket failed: ");
 	name[0] = 'z';
 	return -1;
     }
@@ -822,9 +830,6 @@ int BibleSync::get_default_if_name(char *name, socklen_t size)
 
     close(sock);
     return found_default;
-#else
-    return 0;
-#endif
 }
 
 #include <netdb.h>
@@ -836,7 +841,6 @@ void BibleSync::InterfaceAddress()
     // we must fail with current info, if at all.
     interface_addr.s_addr = htonl(0xff000001);	// 127.0.0.1 fallback
 
-#ifndef WIN32
     char gw_if[IF_NAMESIZE];	// default gateway interface.
 
     (void)get_default_if_name(gw_if, 100);
@@ -864,7 +868,63 @@ void BibleSync::InterfaceAddress()
 	}
 	freeifaddrs(ifaddr);
     }
-#endif /* WIN32 */
-
     return;
 }
+
+#else	/* WIN32 */
+
+#include <winsock2.h>
+#include <ws2tcpip.h>
+
+void BibleSync::InterfaceAddress()
+{
+    // cancel any old interface value.
+    // we must fail with current info, if at all.
+    interface_addr.s_addr = htonl(0xff000001);	// 127.0.0.1 fallback
+
+    /* WIN32 */
+
+    // this code is rudely derived from, and courtesy of,
+    // http://tangentsoft.net/wskfaq/examples/getifaces.html
+    // to whom we are grateful.
+
+    // this is more simplistic than the linux/unix case.
+    // here, we simply find a functioning multicast-capable interface.
+
+    WSADATA WinsockData;
+    if (WSAStartup(MAKEWORD(2, 2), &WinsockData) != 0) {
+        return;
+    }
+
+    SOCKET sd = WSASocket(AF_INET, SOCK_DGRAM, 0, 0, 0, 0);
+    if (sd == SOCKET_ERROR) {
+	return;
+    }
+
+    INTERFACE_INFO InterfaceList[20];
+    unsigned long nBytesReturned;
+    if (WSAIoctl(sd, SIO_GET_INTERFACE_LIST, 0, 0, &InterfaceList,
+			sizeof(InterfaceList), &nBytesReturned, 0, 0)
+	== SOCKET_ERROR) {
+	return;
+    }
+
+    int nNumInterfaces = nBytesReturned / sizeof(INTERFACE_INFO);
+    for (int i = 0; i < nNumInterfaces; ++i) {
+
+        u_long nFlags = InterfaceList[i].iiFlags;
+
+        if ((nFlags & IFF_UP)		&&	// alive.
+	    !(nFlags & IFF_LOOPBACK)	&&	// not local.
+	    (nFlags & IFF_MULTICAST))		// multicast-capable.
+	{
+	    sockaddr_in *pAddress;
+	    pAddress = (sockaddr_in *) & (InterfaceList[i].iiAddress);
+
+	    interface_addr.s_addr = pAddress->sin_addr.s_addr;
+	    break;
+	}
+    }
+    return;
+}
+#endif /* WIN32 */

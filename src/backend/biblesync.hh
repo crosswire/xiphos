@@ -120,16 +120,22 @@ using namespace std;
 #include <stdlib.h>
 #include <stdint.h>
 
-#include <arpa/inet.h>
-#include <netinet/in.h>
 #include <sys/types.h>
-#include <sys/socket.h>
 #include <unistd.h>
-#include <uuid/uuid.h>
-#include <sys/time.h>
+#include <time.h>
 
 #ifndef WIN32
 #include <sys/utsname.h>
+#include <arpa/inet.h>
+#include <netinet/in.h>
+#include <sys/socket.h>
+#include <uuid/uuid.h>
+#else
+typedef unsigned char xuuid_t[16];
+#define	uuid_t	xuuid_t
+#include <winsock2.h>
+#include <windows.h>
+#include <ws2tcpip.h>
 #endif
 
 typedef enum _BibleSync_mode {
@@ -274,11 +280,13 @@ private:
     char uuid_dump_string[BSP_UUID_PRINT_LENGTH];
     void uuid_gen(uuid_t u);	// hack sub: no win32 uuid_generate.
 
+#ifndef WIN32
     // network self-analysis, borrowed from the net.
     int get_default_if_name(char *name, socklen_t size);
     int parseRoutes(struct nlmsghdr *nlHdr, struct route_info *rtInfo);
     int readNlSock(int sockFd, char *bufPtr, size_t buf_size,
 		   unsigned int seqNum, unsigned int pId);
+#endif /* !WIN32 */
 
 public:
     BibleSync(string a, string v, string u);
