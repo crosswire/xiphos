@@ -947,7 +947,7 @@ on_send_list_via_biblesync_activate(GtkMenuItem * menuitem,
 {
     if (main_biblesync_active_xmit_allowed())
     {
-	GList *verse = list_of_verses;
+	GList *verse;
 	GString *vlist = g_string_new("");
 	gboolean first = TRUE;
 	RESULTS *item;
@@ -965,7 +965,9 @@ on_send_list_via_biblesync_activate(GtkMenuItem * menuitem,
 		(settings.MainWindowModule, item->key));
 	    first = FALSE;
 	}
-	main_biblesync_transmit_verse_list(vlist->str);
+	main_biblesync_transmit_verse_list(settings.MainWindowModule,
+					   vlist->str);
+	g_string_free(vlist, TRUE);
     }
     else
     {

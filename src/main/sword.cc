@@ -2191,8 +2191,8 @@ const char *main_biblesync_get_passphrase()
  * Return value
  *   void
  */
-void main_biblesync_transmit_verse_list(char *vlist)
+void main_biblesync_transmit_verse_list(char *modname, char *vlist)
 {
-    biblesync->Transmit(BSP_SYNC, (string)settings.MainWindowModule, (string)vlist);
+    biblesync->Transmit(BSP_SYNC, (string)modname, (string)vlist);
     // remaining args irrelevant => defaulted.
 }
