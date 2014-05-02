@@ -166,7 +166,7 @@ string BibleSync::Setup()
 		client.sin_addr.s_addr = inet_addr(BSP_MULTICAST);
 
 		// disable listening to our own multicast via loopback.
-		char loop=0;			/* ...or 1 enables */
+		char loop=1;
 		if (setsockopt(client_fd, IPPROTO_IP, IP_MULTICAST_LOOP,
 			       (char *)&loop, sizeof(loop)) < 0)
 		{
@@ -275,7 +275,7 @@ void BibleSync::uuid_gen(uuid_t u)
     t_2 = t ^ (((interface_addr.s_addr & 0xFFFF) << 16) |
 	       (interface_addr.s_addr >> 16));
     t_3 = t ^ ((interface_addr.s_addr & 0xFFFF00) >> 8);
-    t_4 = t ^ ((interface_addr.s_addr & 0xFFFF) << 16);
+    t_4 = t ^ ((interface_addr.s_addr & 0xFFFF) << 11);
     memcpy(p,    &t_1, 4);
     memcpy(p+4,  &t_2, 4);
     memcpy(p+8,  &t_3, 4);
@@ -433,6 +433,23 @@ int BibleSync::ReceiveInternal()
 
 		if (ok_so_far)
 		{
+		    // loopback is enabled: reject self-uuid packets.
+		    unsigned int i;
+		    for (i = 0; i < sizeof(uuid_t); ++i)
+		    {
+			if (uuid[i] != bsp.uuid[i])
+			    break;	// not ourselves.
+		    }
+		    // if we end the loop without early break,
+		    // then we matched UUID for ourselves.
+		    // i.e. we're hearing an echo of ourselves.  ignore.
+		    if (i == sizeof(uuid_t))
+		    {
+			(*nav_func)('E', EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
+				    BSP "Ignoring echo.", (string)dump);
+			continue;
+		    }
+		    
 		    // give reference items initial filler content.
 		    string bible = "<>", ref = "<>", alt = "<>",
 			group = "<>", domain = "<>",
@@ -460,7 +477,7 @@ int BibleSync::ReceiveInternal()
 			else
 			{
 			    cmd = 'M';	// mismatch
-			    info = "navigation";
+			    info = "sync";
 			}
 		    }
 		    else
