@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Romanian Version\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-19 17:58-0400\n"
+"POT-Creation-Date: 2014-05-02 16:41-0400\n"
 "PO-Revision-Date: 2010-09-29 21:56+0100\n"
 "Last-Translator: Peter von Kaehne <refdoc@crosswire.org>\n"
 "Language-Team: Xiphos <nick.laurentiu.nica@gmail.com>\n"
@@ -20,6 +20,91 @@ msgstr ""
 "X-Poedit-Country: ROMANIA\n"
 "X-Poedit-Language: Romanian\n"
 "X-Poedit-SourceCharset: utf-8\n"
+
+#: ../src/backend/biblesync.cc:124
+msgid "network setup errors."
+msgstr ""
+
+#: ../src/backend/biblesync.cc:156
+msgid " client socket"
+msgstr ""
+
+#: ../src/backend/biblesync.cc:195
+msgid " server socket"
+msgstr ""
+
+#: ../src/backend/biblesync.cc:353
+msgid "bad magic"
+msgstr ""
+
+#: ../src/backend/biblesync.cc:356
+msgid "bad protocol version"
+msgstr ""
+
+#: ../src/backend/biblesync.cc:360
+msgid "bad msg type"
+msgstr ""
+
+#: ../src/backend/biblesync.cc:363
+msgid "bad packet count"
+msgstr ""
+
+#: ../src/backend/biblesync.cc:366
+msgid "bad packet index"
+msgstr ""
+
+#: ../src/backend/biblesync.cc:409
+msgid "bad body format"
+msgstr ""
+
+#: ../src/backend/biblesync.cc:423
+msgid "missing required header "
+msgstr ""
+
+#: ../src/backend/biblesync.cc:447
+msgid "Ignoring echo."
+msgstr ""
+
+#: ../src/backend/biblesync.cc:488
+msgid ""
+"\n"
+"present at ["
+msgstr ""
+
+#: ../src/backend/biblesync.cc:490
+msgid ""
+"]\n"
+"using "
+msgstr ""
+
+#: ../src/backend/biblesync.cc:541
+#, fuzzy
+msgid "[no dump ready]"
+msgstr "Intregul modul"
+
+#: ../src/backend/biblesync.cc:548
+msgid "select < 0"
+msgstr ""
+
+#: ../src/backend/biblesync.cc:558
+msgid "recvfrom < 0"
+msgstr ""
+
+#: ../src/backend/biblesync.cc:644
+msgid "TRANSMIT:"
+msgstr ""
+
+#: ../src/backend/biblesync.cc:660
+#, fuzzy
+msgid "Transmit failed.\n"
+msgstr "%s a esuat"
+
+#: ../src/backend/biblesync.cc:661
+msgid ""
+"Unable to multicast; BibleSync is now disabled.\n"
+"If your network connection changed while this program\n"
+"was active, it may be sufficient to re-enable."
+msgstr ""
 
 #: ../src/backend/sword_main.cc:740
 msgid ""
@@ -365,8 +450,8 @@ msgid ""
 "separate tabs is not supported."
 msgstr ""
 
-#: ../src/gnome2/bookmarks_treeview.c:849 ../src/gnome2/sidebar.c:1430
-#: ../src/gnome2/sidebar.c:1463
+#: ../src/gnome2/bookmarks_treeview.c:849 ../src/gnome2/sidebar.c:1469
+#: ../src/gnome2/sidebar.c:1502
 msgid "Bookmarks"
 msgstr "Insemne"
 
@@ -396,7 +481,7 @@ msgid "Close _without Saving"
 msgstr "Inchide _fara Salvare"
 
 #: ../src/gnome2/export_bookmarks.c:197 ../src/gnome2/export_bookmarks.c:256
-#: ../src/gnome2/sidebar.c:1442 ../src/gnome2/sidebar.c:1479
+#: ../src/gnome2/sidebar.c:1481 ../src/gnome2/sidebar.c:1518
 #, c-format
 msgid "Verse List"
 msgstr "Lista Verset"
@@ -448,7 +533,7 @@ msgid "Current font: "
 msgstr "Fontul curent: "
 
 #: ../src/gnome2/font_dialog.c:372 ../src/gnome2/font_dialog.c:388
-#: ../ui/prefs.gtkbuilder.h:114
+#: ../ui/prefs.gtkbuilder.h:3
 msgid "+0"
 msgstr "+0"
 
@@ -673,7 +758,7 @@ msgstr "Pregatire pentru eliminare"
 msgid "Removing"
 msgstr "Eliminare"
 
-#: ../src/gnome2/mod_mgr.c:192 ../ui/xi-menus.glade.h:144
+#: ../src/gnome2/mod_mgr.c:192 ../ui/xi-menus.glade.h:146
 #: ../ui/xi-menus-popup.gtkbuilder.h:26
 msgid "Remove"
 msgstr "Elimina"
@@ -869,7 +954,7 @@ msgstr "Texte Biblice"
 #: ../src/gnome2/mod_mgr.c:1409 ../src/gnome2/utilities.c:613
 #: ../src/main/sidebar.cc:671 ../src/main/sidebar.cc:1013
 #: ../src/main/sidebar.cc:1015 ../ui/prefs.glade.h:41
-#: ../ui/prefs.gtkbuilder.h:33
+#: ../ui/prefs.gtkbuilder.h:41
 msgid "Commentaries"
 msgstr "Comentarii"
 
@@ -983,8 +1068,8 @@ msgstr "Adauga/Elimina"
 msgid "Choose"
 msgstr "Alege"
 
-#: ../src/gnome2/mod_mgr.c:1838 ../src/gnome2/preferences_dialog.c:1932
-#: ../src/gnome2/sidebar.c:1448 ../src/gnome2/sidebar.c:1487
+#: ../src/gnome2/mod_mgr.c:1838 ../src/gnome2/preferences_dialog.c:1963
+#: ../src/gnome2/sidebar.c:1487 ../src/gnome2/sidebar.c:1526
 msgid "Modules"
 msgstr "Module"
 
@@ -1097,7 +1182,7 @@ msgstr "Mergi in interior, la prima sub-sectiune"
 msgid "Synchronize this window's scrolling with the main window"
 msgstr ""
 
-#: ../src/gnome2/parallel_dialog.c:356 ../src/gnome2/preferences_dialog.c:1939
+#: ../src/gnome2/parallel_dialog.c:356 ../src/gnome2/preferences_dialog.c:1970
 msgid "Parallel"
 msgstr "Paralel"
 
@@ -1117,67 +1202,75 @@ msgstr "Optiuni Modul"
 msgid "Parallel View"
 msgstr "Vedere Paralela"
 
-#: ../src/gnome2/preferences_dialog.c:1447
-#: ../src/gnome2/preferences_dialog.c:1485
-#: ../src/gnome2/preferences_dialog.c:1522
-#: ../src/gnome2/preferences_dialog.c:1557
-#: ../src/gnome2/preferences_dialog.c:1592
-#: ../src/gnome2/preferences_dialog.c:1627
-#: ../src/gnome2/preferences_dialog.c:1662
-#: ../src/gnome2/preferences_dialog.c:1698
-#: ../src/gnome2/preferences_dialog.c:1735
-#: ../src/gnome2/preferences_dialog.c:1787
-#: ../src/gnome2/preferences_dialog.c:2214
+#: ../src/gnome2/preferences_dialog.c:896
+msgid "BibleSync session passphrase"
+msgstr ""
+
+#: ../src/gnome2/preferences_dialog.c:898
+msgid "Phrase:"
+msgstr ""
+
+#: ../src/gnome2/preferences_dialog.c:1493
+#: ../src/gnome2/preferences_dialog.c:1530
+#: ../src/gnome2/preferences_dialog.c:1566
+#: ../src/gnome2/preferences_dialog.c:1600
+#: ../src/gnome2/preferences_dialog.c:1634
+#: ../src/gnome2/preferences_dialog.c:1668
+#: ../src/gnome2/preferences_dialog.c:1702
+#: ../src/gnome2/preferences_dialog.c:1737
+#: ../src/gnome2/preferences_dialog.c:1773
+#: ../src/gnome2/preferences_dialog.c:1824
+#: ../src/gnome2/preferences_dialog.c:2303
 msgid "-- Select --"
 msgstr "-- Selecteaza --"
 
-#: ../src/gnome2/preferences_dialog.c:1749
+#: ../src/gnome2/preferences_dialog.c:1787
 msgid "Locale will take effect after restart."
 msgstr "Limba va avea efect dupa restartare."
 
-#: ../src/gnome2/preferences_dialog.c:1824 ../ui/prefs.glade.h:1
-#: ../ui/prefs.gtkbuilder.h:1
+#: ../src/gnome2/preferences_dialog.c:1859 ../ui/prefs.glade.h:1
+#: ../ui/prefs.gtkbuilder.h:9
 msgid "Preferences"
 msgstr "Preferinte"
 
-#: ../src/gnome2/preferences_dialog.c:1911
+#: ../src/gnome2/preferences_dialog.c:1942
 msgid "General"
 msgstr "General"
 
-#: ../src/gnome2/preferences_dialog.c:1918
+#: ../src/gnome2/preferences_dialog.c:1949
 msgid "Options"
 msgstr "Optiuni"
 
-#: ../src/gnome2/preferences_dialog.c:1922
+#: ../src/gnome2/preferences_dialog.c:1953
 msgid "Fonts"
 msgstr "Fonturi"
 
-#: ../src/gnome2/preferences_dialog.c:1925
+#: ../src/gnome2/preferences_dialog.c:1956
 msgid "Color"
 msgstr "Culoare"
 
-#: ../src/gnome2/preferences_dialog.c:1928
+#: ../src/gnome2/preferences_dialog.c:1959
 #, fuzzy
 msgid "Sizes and Faces"
 msgstr "Taburi si Panouri"
 
-#: ../src/gnome2/preferences_dialog.c:1942
+#: ../src/gnome2/preferences_dialog.c:1973
 msgid "Special"
 msgstr "Special"
 
-#: ../src/gnome2/preferences_dialog.c:2601 ../src/gnome2/search_dialog.c:499
+#: ../src/gnome2/preferences_dialog.c:2685 ../src/gnome2/search_dialog.c:499
 msgid "Clear List?"
 msgstr "Curata Lista?"
 
-#: ../src/gnome2/preferences_dialog.c:2602 ../src/gnome2/search_dialog.c:500
+#: ../src/gnome2/preferences_dialog.c:2686 ../src/gnome2/search_dialog.c:500
 msgid "Are you sure you want to clear the module list?"
 msgstr "Esti sigur ca vrei sa cureti lista de module?"
 
-#: ../src/gnome2/preferences_dialog.c:2647 ../src/main/search_dialog.cc:685
+#: ../src/gnome2/preferences_dialog.c:2731 ../src/main/search_dialog.cc:685
 msgid "Remove Module?"
 msgstr "Elimina Modul?"
 
-#: ../src/gnome2/preferences_dialog.c:2648 ../src/main/search_dialog.cc:686
+#: ../src/gnome2/preferences_dialog.c:2732 ../src/main/search_dialog.cc:686
 msgid "Are you sure you want to remove the selected module?"
 msgstr "Esti sigur ca vrei sa elimini modulul selectat?"
 
@@ -1292,6 +1385,14 @@ msgid ""
 "accusative singular feminine\" -- see the Robinson module for details."
 msgstr ""
 
+#: ../src/gnome2/search_dialog.c:1189
+msgid "Module is neither Bible nor commentary"
+msgstr ""
+
+#: ../src/gnome2/search_dialog.c:1212 ../src/gnome2/sidebar.c:974
+msgid "BibleSync is not active for transmit."
+msgstr ""
+
 #: ../src/gnome2/search_sidebar.c:185
 msgid ""
 "This is an inclusive (\"AND\") search:\n"
@@ -1318,8 +1419,8 @@ msgstr "Cauta Modul"
 msgid "Bible"
 msgstr "Biblie"
 
-#: ../src/gnome2/search_sidebar.c:233 ../ui/prefs.glade.h:92
-#: ../ui/prefs.gtkbuilder.h:84
+#: ../src/gnome2/search_sidebar.c:233 ../ui/prefs.glade.h:123
+#: ../ui/prefs.gtkbuilder.h:123
 msgid "Commentary"
 msgstr "Comentariu"
 
@@ -1379,16 +1480,16 @@ msgstr "Mai jos"
 msgid "Upper"
 msgstr "Mai sus"
 
-#: ../src/gnome2/sidebar.c:848
+#: ../src/gnome2/sidebar.c:849
 #, fuzzy
 msgid "Open module in editor?"
 msgstr "Deschide in editor"
 
-#: ../src/gnome2/sidebar.c:848
+#: ../src/gnome2/sidebar.c:849
 msgid "If no, it will open for display only."
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:1436 ../src/gnome2/sidebar.c:1471
+#: ../src/gnome2/sidebar.c:1475 ../src/gnome2/sidebar.c:1510
 msgid "Search"
 msgstr "Cauta"
 
@@ -1485,8 +1586,8 @@ msgstr ""
 "Eticheta de adnotare personnala encodata impropriu:\n"
 "'%s'"
 
-#: ../src/main/display.cc:1032 ../src/main/display.cc:1073
-#: ../src/main/display.cc:1158 ../ui/export-dialog.glade.h:14
+#: ../src/main/display.cc:1037 ../src/main/display.cc:1078
+#: ../src/main/display.cc:1163 ../ui/export-dialog.glade.h:14
 #: ../ui/export-dialog.gtkbuilder.h:13
 msgid "Chapter"
 msgstr "Capitol"
@@ -1517,7 +1618,7 @@ msgid "Displaying Xiphos"
 msgstr "Afisare Xiphos"
 
 #: ../src/main/module_dialogs.cc:189 ../src/main/previewer.cc:97
-#: ../ui/prefs.glade.h:39 ../ui/prefs.gtkbuilder.h:31
+#: ../ui/prefs.glade.h:39 ../ui/prefs.gtkbuilder.h:39
 msgid "Previewer"
 msgstr "Revizuitor"
 
@@ -1965,7 +2066,7 @@ msgstr "verset"
 msgid "chapter"
 msgstr "capitol"
 
-#: ../src/main/sword.cc:554
+#: ../src/main/sword.cc:558
 msgid ""
 "Xiphos's file for language\n"
 "abbreviations is missing."
@@ -1973,7 +2074,7 @@ msgstr ""
 "Fisierul Xiphos pentru abreviatii\n"
 "de limba lipseste."
 
-#: ../src/main/sword.cc:561
+#: ../src/main/sword.cc:565
 msgid ""
 "Xiphos's language abbreviation\n"
 "file cannot be opened."
@@ -1981,7 +2082,7 @@ msgstr ""
 "Fisierul de abreviatie de limba\n"
 "din Xiphos nu poate fi deschis."
 
-#: ../src/main/sword.cc:574
+#: ../src/main/sword.cc:578
 msgid ""
 "Xiphos cannot allocate space\n"
 "for language abbreviations."
@@ -1989,7 +2090,7 @@ msgstr ""
 "Xiphos nu poate aloca spatiu\n"
 "pentru abreviatiile de limba."
 
-#: ../src/main/sword.cc:581
+#: ../src/main/sword.cc:585
 msgid ""
 "Xiphos cannot read the\n"
 "language abbreviation file."
@@ -1998,19 +2099,19 @@ msgstr ""
 "fisierul abreviat de limbaj."
 
 #. either we were given a null sys_locale, or it didn't match anything.
-#: ../src/main/sword.cc:663
+#: ../src/main/sword.cc:667
 #, fuzzy, c-format
 msgid ""
 "No matching locale found for `%s'.\n"
 "%s"
 msgstr "Nici o potrivire de limba pentru"
 
-#: ../src/main/sword.cc:665
+#: ../src/main/sword.cc:669
 #, fuzzy
 msgid "Book names and menus may not be translated."
 msgstr "Numele de carti si meniurile nu pot fi translatate"
 
-#: ../src/main/sword.cc:1007 ../src/main/sword.cc:1172
+#: ../src/main/sword.cc:1018 ../src/main/sword.cc:1183
 #, c-format
 msgid ""
 "Module %s has companion modules:\n"
@@ -2018,7 +2119,7 @@ msgid ""
 "Would you like to open these as well?%s"
 msgstr ""
 
-#: ../src/main/sword.cc:1011 ../src/main/sword.cc:1176
+#: ../src/main/sword.cc:1022 ../src/main/sword.cc:1187
 msgid ""
 "\n"
 "\n"
@@ -2026,11 +2127,11 @@ msgid ""
 "and others in separate windows."
 msgstr ""
 
-#: ../src/main/sword.cc:1301
+#: ../src/main/sword.cc:1346
 msgid "Daily devotional was requested, but there are none installed."
 msgstr "Devotionalul zilnic a fost solicitat dar nu este nici unu instalat."
 
-#: ../src/main/sword.cc:1531
+#: ../src/main/sword.cc:1576
 msgid ""
 "<b>Locked Module.</b>\n"
 "\n"
@@ -2071,7 +2172,7 @@ msgstr "Arata %s in fereastra principala"
 msgid "Document not created successfully. \n"
 msgstr "Documentul nu s-a creat cu succes. \n"
 
-#: ../src/main/xml.c:93
+#: ../src/main/xml.c:93 ../ui/prefs.glade.h:90 ../ui/prefs.gtkbuilder.h:90
 msgid "Personal"
 msgstr "Personal"
 
@@ -2262,7 +2363,7 @@ msgstr "Creaza un folder nou"
 
 #: ../ui/bookmarks.glade.h:4 ../ui/bookmarks.gtkbuilder.h:4
 #: ../ui/markverse.glade.h:8 ../ui/markverse.gtkbuilder.h:8
-#: ../ui/xi-menus.glade.h:106 ../ui/xi-menus-popup.gtkbuilder.h:5
+#: ../ui/xi-menus.glade.h:108 ../ui/xi-menus-popup.gtkbuilder.h:5
 msgid "New Folder"
 msgstr "Folder Nou"
 
@@ -2452,7 +2553,7 @@ msgid "Export complete book"
 msgstr "Exporta toata cartea"
 
 #: ../ui/export-dialog.glade.h:11 ../ui/export-dialog.gtkbuilder.h:10
-#: ../ui/prefs.glade.h:96 ../ui/prefs.gtkbuilder.h:88
+#: ../ui/prefs.glade.h:127 ../ui/prefs.gtkbuilder.h:127
 msgid "Book"
 msgstr "Carte"
 
@@ -2568,7 +2669,7 @@ msgid "Open about dialog"
 msgstr "Deschide intr-un dialog"
 
 #: ../ui/gtk2_webedit.ui.h:4 ../ui/gtk_webedit.ui.h:4 ../ui/prefs.glade.h:76
-#: ../ui/prefs.gtkbuilder.h:68
+#: ../ui/prefs.gtkbuilder.h:76
 msgid "Bold"
 msgstr ""
 
@@ -2617,7 +2718,7 @@ msgid "Remove selection"
 msgstr "Elimina obiectul selectat"
 
 #: ../ui/gtk2_webedit.ui.h:16 ../ui/gtk_webedit.ui.h:16
-#: ../ui/xi-menus.glade.h:112 ../ui/xi-menus-popup.gtkbuilder.h:11
+#: ../ui/xi-menus.glade.h:114 ../ui/xi-menus-popup.gtkbuilder.h:11
 msgid "Delete Item"
 msgstr "Sterge Obiect"
 
@@ -3253,69 +3354,69 @@ msgstr ""
 msgid "Reference Entry"
 msgstr "Intrare Referinta"
 
-#: ../ui/prefs.glade.h:2 ../ui/prefs.gtkbuilder.h:2
+#: ../ui/prefs.glade.h:2 ../ui/prefs.gtkbuilder.h:10
 msgid "Cover"
 msgstr "Copertă"
 
-#: ../ui/prefs.glade.h:3 ../ui/prefs.gtkbuilder.h:3
+#: ../ui/prefs.glade.h:3 ../ui/prefs.gtkbuilder.h:11
 msgid "<b>Font Colors</b>"
 msgstr "<b>Culori Font</b>"
 
-#: ../ui/prefs.glade.h:4 ../ui/prefs.gtkbuilder.h:4
+#: ../ui/prefs.glade.h:4 ../ui/prefs.gtkbuilder.h:12
 msgid "Background"
 msgstr "Fundal"
 
-#: ../ui/prefs.glade.h:5 ../ui/prefs.gtkbuilder.h:5
+#: ../ui/prefs.glade.h:5 ../ui/prefs.gtkbuilder.h:13
 msgid "Foreground"
 msgstr "Prim-plan"
 
-#: ../ui/prefs.glade.h:6 ../ui/prefs.gtkbuilder.h:6
+#: ../ui/prefs.glade.h:6 ../ui/prefs.gtkbuilder.h:14
 msgid "Current Verse"
 msgstr "Verset Curent"
 
-#: ../ui/prefs.glade.h:7 ../ui/prefs.gtkbuilder.h:7
+#: ../ui/prefs.glade.h:7 ../ui/prefs.gtkbuilder.h:15
 msgid "Verse Number"
 msgstr "Numar Verset"
 
-#: ../ui/prefs.glade.h:8 ../ui/prefs.gtkbuilder.h:8
+#: ../ui/prefs.glade.h:8 ../ui/prefs.gtkbuilder.h:16
 msgid "Links"
 msgstr "Link-uri"
 
-#: ../ui/prefs.glade.h:9 ../ui/prefs.gtkbuilder.h:9
+#: ../ui/prefs.glade.h:9 ../ui/prefs.gtkbuilder.h:17
 msgid "Highlight Foreground"
 msgstr "Marcheaza Prim-Planul"
 
-#: ../ui/prefs.glade.h:10 ../ui/prefs.gtkbuilder.h:10
+#: ../ui/prefs.glade.h:10 ../ui/prefs.gtkbuilder.h:18
 msgid "Highlight Background"
 msgstr "Marcheaza Fundalul"
 
-#: ../ui/prefs.glade.h:11 ../ui/prefs.gtkbuilder.h:11
+#: ../ui/prefs.glade.h:11 ../ui/prefs.gtkbuilder.h:19
 #, fuzzy
 msgid "Invert color pairs"
 msgstr "Insereaza Insemn"
 
-#: ../ui/prefs.glade.h:12 ../ui/prefs.gtkbuilder.h:12
+#: ../ui/prefs.glade.h:12 ../ui/prefs.gtkbuilder.h:20
 msgid "Normal Text"
 msgstr ""
 
-#: ../ui/prefs.glade.h:13 ../ui/prefs.gtkbuilder.h:13
+#: ../ui/prefs.glade.h:13 ../ui/prefs.gtkbuilder.h:21
 #, fuzzy
 msgid "Highlight"
 msgstr "Marcheaza Fundalul"
 
-#: ../ui/prefs.glade.h:14 ../ui/prefs.gtkbuilder.h:14
+#: ../ui/prefs.glade.h:14 ../ui/prefs.gtkbuilder.h:22
 msgid "Font Colors"
 msgstr "Culori Font"
 
-#: ../ui/prefs.glade.h:15 ../ui/prefs.gtkbuilder.h:15
+#: ../ui/prefs.glade.h:15 ../ui/prefs.gtkbuilder.h:23
 msgid "<b>Font Sizes</b>"
 msgstr "<b>Marimi Font</b>"
 
-#: ../ui/prefs.glade.h:16 ../ui/prefs.gtkbuilder.h:16
+#: ../ui/prefs.glade.h:16 ../ui/prefs.gtkbuilder.h:24
 msgid "All displayed font sizes are relative to this choice"
 msgstr ""
 
-#: ../ui/prefs.glade.h:17 ../ui/prefs.gtkbuilder.h:17
+#: ../ui/prefs.glade.h:17 ../ui/prefs.gtkbuilder.h:25
 msgid "Base font size"
 msgstr "Marime font de baza"
 
@@ -3339,426 +3440,570 @@ msgstr ""
 "+4\n"
 "+5"
 
-#: ../ui/prefs.glade.h:26 ../ui/prefs.gtkbuilder.h:18
+#: ../ui/prefs.glade.h:26 ../ui/prefs.gtkbuilder.h:26
 msgid "Commonly -1, to make verse numbers less obtrusive"
 msgstr ""
 
-#: ../ui/prefs.glade.h:27 ../ui/prefs.gtkbuilder.h:19
+#: ../ui/prefs.glade.h:27 ../ui/prefs.gtkbuilder.h:27
 msgid "Verse number size"
 msgstr "Marime numar verset"
 
-#: ../ui/prefs.glade.h:28 ../ui/prefs.gtkbuilder.h:20
+#: ../ui/prefs.glade.h:28 ../ui/prefs.gtkbuilder.h:28
 msgid ""
 "Name and size choice for any module in a given language; still overridden by "
 "a specific choice on a particular module"
 msgstr ""
 
-#: ../ui/prefs.glade.h:29 ../ui/prefs.gtkbuilder.h:21
+#: ../ui/prefs.glade.h:29 ../ui/prefs.gtkbuilder.h:29
 msgid "Font preferences, per language"
 msgstr ""
 
-#: ../ui/prefs.glade.h:30 ../ui/prefs.gtkbuilder.h:22
+#: ../ui/prefs.glade.h:30 ../ui/prefs.gtkbuilder.h:30
 #, fuzzy
 msgid "Language Font Combo"
 msgstr "Schimba Combo Carte"
 
-#: ../ui/prefs.glade.h:31 ../ui/prefs.gtkbuilder.h:23
+#: ../ui/prefs.glade.h:31 ../ui/prefs.gtkbuilder.h:31
 msgid "Font Misc"
 msgstr "Diverse despre Font"
 
-#: ../ui/prefs.glade.h:32 ../ui/prefs.gtkbuilder.h:24
+#: ../ui/prefs.glade.h:32 ../ui/prefs.gtkbuilder.h:32
 msgid "<b>Tabs</b>"
 msgstr "<b>Tab-uri</b>"
 
-#: ../ui/prefs.glade.h:33 ../ui/prefs.gtkbuilder.h:25
+#: ../ui/prefs.glade.h:33 ../ui/prefs.gtkbuilder.h:33
 msgid "Use tabbed browsing"
 msgstr "Foloseste rasfoire in taburi"
 
-#: ../ui/prefs.glade.h:34 ../ui/prefs.gtkbuilder.h:26
+#: ../ui/prefs.glade.h:34 ../ui/prefs.gtkbuilder.h:34
 msgid ""
 "Single selection of Bible+commentary+book+dictionary, or many sets of such "
 "selections in a tabbed interface"
 msgstr ""
 
-#: ../ui/prefs.glade.h:35 ../ui/prefs.gtkbuilder.h:27
+#: ../ui/prefs.glade.h:35 ../ui/prefs.gtkbuilder.h:35
 msgid "Use tabbed browsing Checkbox"
 msgstr "Casuta de verificare folosire rasfoire in tab-uri"
 
-#: ../ui/prefs.glade.h:36 ../ui/prefs.gtkbuilder.h:28
+#: ../ui/prefs.glade.h:36 ../ui/prefs.gtkbuilder.h:36
 msgid "<b>Show</b>"
 msgstr "<b>Arata</b>"
 
-#: ../ui/prefs.glade.h:37 ../ui/prefs.gtkbuilder.h:29
+#: ../ui/prefs.glade.h:37 ../ui/prefs.gtkbuilder.h:37
 msgid "Bible Texts"
 msgstr "Texte Biblie"
 
-#: ../ui/prefs.glade.h:38 ../ui/prefs.gtkbuilder.h:30
+#: ../ui/prefs.glade.h:38 ../ui/prefs.gtkbuilder.h:38
 msgid "Bible Texts Checkbox"
 msgstr "Casuta de verificare Texte Biblie"
 
-#: ../ui/prefs.glade.h:40 ../ui/prefs.gtkbuilder.h:32
+#: ../ui/prefs.glade.h:40 ../ui/prefs.gtkbuilder.h:40
 msgid "Previewer Checkbox"
 msgstr "Lista verificare Revizuitor"
 
-#: ../ui/prefs.glade.h:42 ../ui/prefs.gtkbuilder.h:34
+#: ../ui/prefs.glade.h:42 ../ui/prefs.gtkbuilder.h:42
 msgid "Commentaries Checkbox"
 msgstr "Casuta de verificare Comentarii"
 
-#: ../ui/prefs.glade.h:43 ../ui/prefs.gtkbuilder.h:35
+#: ../ui/prefs.glade.h:43 ../ui/prefs.gtkbuilder.h:43
 msgid "Dictionary/Lexicon"
 msgstr "Dictionar/Lexicon"
 
-#: ../ui/prefs.glade.h:44 ../ui/prefs.gtkbuilder.h:36
+#: ../ui/prefs.glade.h:44 ../ui/prefs.gtkbuilder.h:44
 msgid "Dictionary/Lexicon Checkbox"
 msgstr "Casuta de verificare Dictionar/Lexicon"
 
-#: ../ui/prefs.glade.h:45 ../ui/prefs.gtkbuilder.h:37
+#: ../ui/prefs.glade.h:45 ../ui/prefs.gtkbuilder.h:45
 msgid "Parallel View in a tab"
 msgstr "Vedere Paralela intr-un tab"
 
-#: ../ui/prefs.glade.h:46 ../ui/prefs.gtkbuilder.h:38
+#: ../ui/prefs.glade.h:46 ../ui/prefs.gtkbuilder.h:46
 msgid "Tabs and Panes"
 msgstr "Taburi si Panouri"
 
-#: ../ui/prefs.glade.h:47 ../ui/prefs.gtkbuilder.h:39
+#: ../ui/prefs.glade.h:47 ../ui/prefs.gtkbuilder.h:47
 msgid "<b>General</b>"
 msgstr "<b>General</b>"
 
-#: ../ui/prefs.glade.h:48 ../ui/prefs.gtkbuilder.h:40
+#: ../ui/prefs.glade.h:48 ../ui/prefs.gtkbuilder.h:48
 msgid ""
 "Select a particular language for interface display, other than your usual "
 "setting"
 msgstr ""
 
-#: ../ui/prefs.glade.h:49 ../ui/prefs.gtkbuilder.h:41
+#: ../ui/prefs.glade.h:49 ../ui/prefs.gtkbuilder.h:49
 msgid "Special Locale (requires restart)"
 msgstr "Limba Speciala (necesita restartare)"
 
-#: ../ui/prefs.glade.h:50 ../ui/prefs.gtkbuilder.h:42
+#: ../ui/prefs.glade.h:50 ../ui/prefs.gtkbuilder.h:50
 msgid "Special Locale Combo"
 msgstr "Combo Limba Speciala"
 
-#: ../ui/prefs.glade.h:51 ../ui/prefs.gtkbuilder.h:43
+#: ../ui/prefs.glade.h:51 ../ui/prefs.gtkbuilder.h:51
 msgid "Show splash screen at start up"
 msgstr "Arata ecranul de pornire la incepere"
 
-#: ../ui/prefs.glade.h:52 ../ui/prefs.gtkbuilder.h:44
+#: ../ui/prefs.glade.h:52 ../ui/prefs.gtkbuilder.h:52
 msgid "Show Daily Devotion at start up"
 msgstr "Arata Devotionalul Zilnic la incepere"
 
-#: ../ui/prefs.glade.h:53 ../ui/prefs.gtkbuilder.h:45
+#: ../ui/prefs.glade.h:53 ../ui/prefs.gtkbuilder.h:53
 msgid ""
 "If you have set a preferred daily devotion module, its entry for today will "
 "be shown at startup."
 msgstr ""
 
-#: ../ui/prefs.glade.h:54 ../ui/prefs.gtkbuilder.h:46
+#: ../ui/prefs.glade.h:54 ../ui/prefs.gtkbuilder.h:54
 msgid "Use default Dictionary"
 msgstr "Foloseste Dictionarul implicit"
 
-#: ../ui/prefs.glade.h:55 ../ui/prefs.gtkbuilder.h:47
+#: ../ui/prefs.glade.h:55 ../ui/prefs.gtkbuilder.h:55
 msgid ""
 "Make double-click of a word always use default dictionary instead of "
 "dictionary currently displayed"
 msgstr ""
 
-#: ../ui/prefs.glade.h:56 ../ui/prefs.gtkbuilder.h:48
+#: ../ui/prefs.glade.h:56 ../ui/prefs.gtkbuilder.h:56
 msgid "Use default Dictionary Checkbox"
 msgstr "Casuta de verificare folosire Dictionar implicit"
 
-#: ../ui/prefs.glade.h:57 ../ui/prefs.gtkbuilder.h:49
+#: ../ui/prefs.glade.h:57 ../ui/prefs.gtkbuilder.h:57
 msgid "Scroll to Previous/Next Chapter"
 msgstr "Mergi la Capitolul Anterior/Urmator"
 
-#: ../ui/prefs.glade.h:58 ../ui/prefs.gtkbuilder.h:50
+#: ../ui/prefs.glade.h:58 ../ui/prefs.gtkbuilder.h:58
 msgid "Use Bible Text scroll bar to scroll to previous or next chapter"
 msgstr ""
 "Foloseste bara de derulare a Textului BIbliei pentru capitolul anterior sau "
 "urmator"
 
-#: ../ui/prefs.glade.h:59 ../ui/prefs.gtkbuilder.h:51
+#: ../ui/prefs.glade.h:59 ../ui/prefs.gtkbuilder.h:59
 msgid "Scroll to Previous/Next Chapter Checkbox"
 msgstr "Casuta de verificare Capitol Anterior/Urmator"
 
-#: ../ui/prefs.glade.h:60 ../ui/prefs.gtkbuilder.h:52
+#: ../ui/prefs.glade.h:60 ../ui/prefs.gtkbuilder.h:60
 msgid "Resize images"
 msgstr "Dimensionare imagini"
 
-#: ../ui/prefs.glade.h:61 ../ui/prefs.gtkbuilder.h:53
+#: ../ui/prefs.glade.h:61 ../ui/prefs.gtkbuilder.h:61
 #, fuzzy
 msgid "Automatically resize image content to fit the pane"
 msgstr ""
 "Redimensioneaza automat comentariul, cartea si continutul imaginii din "
 "dictionar pentru a se potrivi sub-ferestrei"
 
-#: ../ui/prefs.glade.h:62 ../ui/prefs.gtkbuilder.h:54
+#: ../ui/prefs.glade.h:62 ../ui/prefs.gtkbuilder.h:62
 msgid "Resize images checkbox"
 msgstr "Lista verificare dimensionare imagini"
 
-#: ../ui/prefs.glade.h:63 ../ui/prefs.gtkbuilder.h:55
+#: ../ui/prefs.glade.h:63 ../ui/prefs.gtkbuilder.h:63
 msgid "Highlight current verse"
 msgstr "Marcheaza versetul curent"
 
-#: ../ui/prefs.glade.h:64 ../ui/prefs.gtkbuilder.h:56
+#: ../ui/prefs.glade.h:64 ../ui/prefs.gtkbuilder.h:64
 #, fuzzy
 msgid "Apply high-contrast highlight to current verse - see color pickers"
 msgstr "Aplica o marcare de contrast mare la versetul curent"
 
-#: ../ui/prefs.glade.h:65 ../ui/prefs.gtkbuilder.h:57
+#: ../ui/prefs.glade.h:65 ../ui/prefs.gtkbuilder.h:65
 msgid "Highlight current verse check box"
 msgstr "Marcheaza casuta versetului curent"
 
-#: ../ui/prefs.glade.h:66 ../ui/prefs.gtkbuilder.h:58
+#: ../ui/prefs.glade.h:66 ../ui/prefs.gtkbuilder.h:66
 #, fuzzy
 msgid "Highlight user annotations"
 msgstr "Notarile Userului"
 
-#: ../ui/prefs.glade.h:67 ../ui/prefs.gtkbuilder.h:59
+#: ../ui/prefs.glade.h:67 ../ui/prefs.gtkbuilder.h:67
 #, fuzzy
 msgid "Use inverted highlight on user-annotated verses"
 msgstr "Aplica o marcare de contrast mare la versetul curent"
 
-#: ../ui/prefs.glade.h:68 ../ui/prefs.gtkbuilder.h:60
+#: ../ui/prefs.glade.h:68 ../ui/prefs.gtkbuilder.h:68
 #, fuzzy
 msgid "Highlight user annotations check box"
 msgstr "Marcheaza casuta versetului curent"
 
-#: ../ui/prefs.glade.h:69 ../ui/prefs.gtkbuilder.h:61
+#: ../ui/prefs.glade.h:69 ../ui/prefs.gtkbuilder.h:69
 #, fuzzy
 msgid "Cross-references in verse list"
 msgstr "Trimiteri"
 
-#: ../ui/prefs.glade.h:70 ../ui/prefs.gtkbuilder.h:62
+#: ../ui/prefs.glade.h:70 ../ui/prefs.gtkbuilder.h:70
 msgid "Use the verse list for Bible cross-references instead of the previewer"
 msgstr ""
 
-#: ../ui/prefs.glade.h:71 ../ui/prefs.gtkbuilder.h:63
+#: ../ui/prefs.glade.h:71 ../ui/prefs.gtkbuilder.h:71
 #, fuzzy
 msgid "Xrefs in verse list check box"
 msgstr "Lista verificare dimensionare imagini"
 
-#: ../ui/prefs.glade.h:72 ../ui/prefs.gtkbuilder.h:64
+#: ../ui/prefs.glade.h:72 ../ui/prefs.gtkbuilder.h:72
 msgid "Enable Prayer Lists"
 msgstr "Activare Liste de Rugaciune"
 
-#: ../ui/prefs.glade.h:73 ../ui/prefs.gtkbuilder.h:65
+#: ../ui/prefs.glade.h:73 ../ui/prefs.gtkbuilder.h:73
 msgid "Make journals/prayer lists available"
 msgstr ""
 
-#: ../ui/prefs.glade.h:74 ../ui/prefs.gtkbuilder.h:66
+#: ../ui/prefs.glade.h:74 ../ui/prefs.gtkbuilder.h:74
 msgid "Enable Prayer Lists Checkbox"
 msgstr "Activeaza casuta de verificare Liste de Rugaciune"
 
-#: ../ui/prefs.glade.h:75 ../ui/prefs.gtkbuilder.h:67
+#: ../ui/prefs.glade.h:75 ../ui/prefs.gtkbuilder.h:75
 #, fuzzy
 msgid "Verse number:"
 msgstr "Numar Verset"
 
-#: ../ui/prefs.glade.h:77 ../ui/prefs.gtkbuilder.h:69
+#: ../ui/prefs.glade.h:77 ../ui/prefs.gtkbuilder.h:77
 #, fuzzy
 msgid "Show verse number in bold text"
 msgstr "Arata _Numerele Versetelor"
 
-#: ../ui/prefs.glade.h:78 ../ui/prefs.gtkbuilder.h:70
+#: ../ui/prefs.glade.h:78 ../ui/prefs.gtkbuilder.h:78
 #, fuzzy
 msgid "Verse number bold checkbox"
 msgstr "Marime numar verset"
 
-#: ../ui/prefs.glade.h:79 ../ui/prefs.gtkbuilder.h:71
+#: ../ui/prefs.glade.h:79 ../ui/prefs.gtkbuilder.h:79
 msgid "Brackets"
 msgstr ""
 
-#: ../ui/prefs.glade.h:80 ../ui/prefs.gtkbuilder.h:72
+#: ../ui/prefs.glade.h:80 ../ui/prefs.gtkbuilder.h:80
 msgid "Show verse number with [surrounding brackets]"
 msgstr ""
 
-#: ../ui/prefs.glade.h:81 ../ui/prefs.gtkbuilder.h:73
+#: ../ui/prefs.glade.h:81 ../ui/prefs.gtkbuilder.h:81
 #, fuzzy
 msgid "Verse number bracket checkbox"
 msgstr "Casuta de verificare Verset Per Linie"
 
-#: ../ui/prefs.glade.h:82 ../ui/prefs.gtkbuilder.h:74
+#: ../ui/prefs.glade.h:82 ../ui/prefs.gtkbuilder.h:82
 #, fuzzy
 msgid "Superscript"
 msgstr "Descriere"
 
-#: ../ui/prefs.glade.h:83 ../ui/prefs.gtkbuilder.h:75
+#: ../ui/prefs.glade.h:83 ../ui/prefs.gtkbuilder.h:83
 #, fuzzy
 msgid "Show verse number as a superscript"
 msgstr "Arata _Numerele Versetelor"
 
-#: ../ui/prefs.glade.h:84 ../ui/prefs.gtkbuilder.h:76
+#: ../ui/prefs.glade.h:84 ../ui/prefs.gtkbuilder.h:84
 #, fuzzy
 msgid "Verse number superscript checkbox"
 msgstr "Marime numar verset"
 
-#: ../ui/prefs.glade.h:85 ../ui/prefs.gtkbuilder.h:77
-msgid "<b>StudyPad default directory</b>"
-msgstr "<b>Directorul implicit al Caietului de Studiu</b>"
+#: ../ui/prefs.glade.h:85 ../ui/prefs.gtkbuilder.h:85
+msgid ""
+"Xiphos is the first Bible study program to provide an implementation of "
+"BibleSync, a new synchronization protocol for Bible programs. If you work "
+"with multiple Bible programs, or if you work in a team, or you have "
+"classroom activities using shared study, BibleSync is a useful tool for you."
+msgstr ""
 
-#: ../ui/prefs.glade.h:86 ../ui/prefs.gtkbuilder.h:78
+#: ../ui/prefs.glade.h:86 ../ui/prefs.gtkbuilder.h:86
+msgid ""
+"BibleSync Protocol is a method for synchronization of BSP-compatible Bible "
+"programs. It operates in 1 of 3 modes: Personal, to synchronize multiple "
+"Bible applications of your own, or in a working team; Speaker, to drive a "
+"lecture audience's Bible programs to follow along; Audience, to receive the "
+"speaker's navigation. Select its mode here."
+msgstr ""
+
+#: ../ui/prefs.glade.h:87 ../ui/prefs.gtkbuilder.h:87
+msgid "Off"
+msgstr ""
+
+#: ../ui/prefs.glade.h:88 ../ui/prefs.gtkbuilder.h:88
+msgid "Disable BibleSync."
+msgstr ""
+
+#: ../ui/prefs.glade.h:89 ../ui/prefs.gtkbuilder.h:89
+#, fuzzy
+msgid "BSP off radio button"
+msgstr "Buton Radio Carte"
+
+#: ../ui/prefs.glade.h:91 ../ui/prefs.gtkbuilder.h:91
+msgid "Enable BibleSync for personal or team use."
+msgstr ""
+
+#: ../ui/prefs.glade.h:92 ../ui/prefs.gtkbuilder.h:92
+#, fuzzy
+msgid "BSP personal radio button"
+msgstr "Buton radio expresie regulata"
+
+#: ../ui/prefs.glade.h:93 ../ui/prefs.gtkbuilder.h:93
+msgid "Speaker"
+msgstr ""
+
+#: ../ui/prefs.glade.h:94 ../ui/prefs.gtkbuilder.h:94
+msgid "Enable BibleSync as the speaker."
+msgstr ""
+
+#: ../ui/prefs.glade.h:95 ../ui/prefs.gtkbuilder.h:95
+#, fuzzy
+msgid "BSP speaker radio button"
+msgstr "Buton radio fraza exacta"
+
+#: ../ui/prefs.glade.h:96 ../ui/prefs.gtkbuilder.h:96
+msgid "Audience"
+msgstr ""
+
+#: ../ui/prefs.glade.h:97 ../ui/prefs.gtkbuilder.h:97
+msgid "Enable BibleSync as a member of the audience."
+msgstr ""
+
+#: ../ui/prefs.glade.h:98 ../ui/prefs.gtkbuilder.h:98
+#, fuzzy
+msgid "BSP audience radio button"
+msgstr "Buton Radio Text Simplu"
+
+#: ../ui/prefs.glade.h:99 ../ui/prefs.gtkbuilder.h:99
+#, fuzzy
+msgid "Navigation"
+msgstr "Mantuire"
+
+#: ../ui/prefs.glade.h:100 ../ui/prefs.gtkbuilder.h:100
+msgid ""
+"Xiphos accepts navigation from other BibleSync-compatible programs either "
+"directly or via the verse list."
+msgstr ""
+
+#: ../ui/prefs.glade.h:101 ../ui/prefs.gtkbuilder.h:101
+#, fuzzy
+msgid "Direct"
+msgstr "Director"
+
+#: ../ui/prefs.glade.h:102 ../ui/prefs.gtkbuilder.h:102
+msgid "BibleSync navigation will send Xiphos directly to the verse indicated."
+msgstr ""
+
+#: ../ui/prefs.glade.h:103 ../ui/prefs.gtkbuilder.h:103
+#, fuzzy
+msgid "BSP nav direct radio button"
+msgstr "Buton radio modul singur"
+
+#: ../ui/prefs.glade.h:104 ../ui/prefs.gtkbuilder.h:104
+#, fuzzy
+msgid "Verse list"
+msgstr "Lista Verset"
+
+#: ../ui/prefs.glade.h:105 ../ui/prefs.gtkbuilder.h:105
+msgid "BibleSync navigation will use Xiphos' verse list."
+msgstr ""
+
+#: ../ui/prefs.glade.h:106 ../ui/prefs.gtkbuilder.h:106
+#, fuzzy
+msgid "BSP nav verse list radio button"
+msgstr "Buton radio lista module"
+
+#: ../ui/prefs.glade.h:107 ../ui/prefs.gtkbuilder.h:107
+#, fuzzy
+msgid "Presence"
+msgstr "Preferinte"
+
+#: ../ui/prefs.glade.h:108 ../ui/prefs.gtkbuilder.h:108
+msgid "\"Presence\" announcements will be shown in dialogs."
+msgstr ""
+
+#: ../ui/prefs.glade.h:109 ../ui/prefs.gtkbuilder.h:109
+#, fuzzy
+msgid "BSP presence button"
+msgstr "Buton Radio Verset"
+
+#: ../ui/prefs.glade.h:110 ../ui/prefs.gtkbuilder.h:110
+#, fuzzy
+msgid "Mismatch"
+msgstr "potriviri"
+
+#: ../ui/prefs.glade.h:111 ../ui/prefs.gtkbuilder.h:111
+msgid "Mismatches from your session will be shown in dialogs."
+msgstr ""
+
+#: ../ui/prefs.glade.h:112 ../ui/prefs.gtkbuilder.h:112
+msgid "BSP mismatch button"
+msgstr ""
+
+#: ../ui/prefs.glade.h:113 ../ui/prefs.gtkbuilder.h:113
+msgid "Debug"
+msgstr ""
+
+#: ../ui/prefs.glade.h:114 ../ui/prefs.gtkbuilder.h:114
+msgid "Packet tracing."
+msgstr ""
+
+#: ../ui/prefs.glade.h:115 ../ui/prefs.gtkbuilder.h:115
+msgid "BSP event debug button"
+msgstr ""
+
+#: ../ui/prefs.glade.h:116 ../ui/prefs.gtkbuilder.h:116
+#, fuzzy
+msgid "StudyPad default directory"
+msgstr "Directorul implicit combo Caiet de Studiu"
+
+#: ../ui/prefs.glade.h:117 ../ui/prefs.gtkbuilder.h:117
 msgid "Select A Directory"
 msgstr "Selecteaza Un Director"
 
-#: ../ui/prefs.glade.h:87 ../ui/prefs.gtkbuilder.h:79
+#: ../ui/prefs.glade.h:118 ../ui/prefs.gtkbuilder.h:118
 msgid "StudyPad default directory combo"
 msgstr "Directorul implicit combo Caiet de Studiu"
 
-#: ../ui/prefs.glade.h:88 ../ui/prefs.gtkbuilder.h:80
+#: ../ui/prefs.glade.h:119 ../ui/prefs.gtkbuilder.h:119
 msgid "General Misc"
 msgstr "Diverse Generale"
 
-#: ../ui/prefs.glade.h:89 ../ui/prefs.gtkbuilder.h:81
+#: ../ui/prefs.glade.h:120 ../ui/prefs.gtkbuilder.h:120
 msgid "<b>Main Window Modules</b>"
 msgstr "<b>Module Fereastra Principala</b>"
 
-#: ../ui/prefs.glade.h:90 ../ui/prefs.gtkbuilder.h:82
+#: ../ui/prefs.glade.h:121 ../ui/prefs.gtkbuilder.h:121
 msgid "Biblical Text"
 msgstr "Text Biblic"
 
-#: ../ui/prefs.glade.h:91 ../ui/prefs.gtkbuilder.h:83
+#: ../ui/prefs.glade.h:122 ../ui/prefs.gtkbuilder.h:122
 msgid "Change Biblical Text Combo"
 msgstr "Schimba Combo Text Biblic"
 
-#: ../ui/prefs.glade.h:93 ../ui/prefs.gtkbuilder.h:85
+#: ../ui/prefs.glade.h:124 ../ui/prefs.gtkbuilder.h:124
 msgid "Change Commentary Combo"
 msgstr "Schimba Combo Comentariu"
 
-#: ../ui/prefs.glade.h:94 ../ui/prefs.gtkbuilder.h:86
+#: ../ui/prefs.glade.h:125 ../ui/prefs.gtkbuilder.h:125
 msgid "Dictionary"
 msgstr "Dictionar"
 
-#: ../ui/prefs.glade.h:95 ../ui/prefs.gtkbuilder.h:87
+#: ../ui/prefs.glade.h:126 ../ui/prefs.gtkbuilder.h:126
 msgid "Change Dictionary Combo"
 msgstr "Schimba Combo Dictionar"
 
-#: ../ui/prefs.glade.h:97 ../ui/prefs.gtkbuilder.h:89
+#: ../ui/prefs.glade.h:128 ../ui/prefs.gtkbuilder.h:128
 msgid "Change Book Combo"
 msgstr "Schimba Combo Carte"
 
-#: ../ui/prefs.glade.h:98 ../ui/prefs.gtkbuilder.h:90
+#: ../ui/prefs.glade.h:129 ../ui/prefs.gtkbuilder.h:129
 #: ../ui/search-dialog.glade.h:22 ../ui/search-dialog.gtkbuilder.h:23
 msgid "<b>Modules</b>"
 msgstr "<b>Module</b>"
 
-#: ../ui/prefs.glade.h:99 ../ui/prefs.gtkbuilder.h:91
+#: ../ui/prefs.glade.h:130 ../ui/prefs.gtkbuilder.h:130
 #: ../ui/search-dialog.glade.h:86 ../ui/search-dialog.gtkbuilder.h:86
 msgid "Clear all modules from the list"
 msgstr "Curata toate modulele din lista"
 
-#: ../ui/prefs.glade.h:100 ../ui/prefs.gtkbuilder.h:92
+#: ../ui/prefs.glade.h:131 ../ui/prefs.gtkbuilder.h:131
 #: ../ui/search-dialog.glade.h:87 ../ui/search-dialog.gtkbuilder.h:87
 msgid "Clear Modules from List Button"
 msgstr "Curata Modulele din Butonul Lista"
 
-#: ../ui/prefs.glade.h:101 ../ui/prefs.gtkbuilder.h:93
+#: ../ui/prefs.glade.h:132 ../ui/prefs.gtkbuilder.h:132
 #: ../ui/search-dialog.glade.h:88 ../ui/search-dialog.gtkbuilder.h:88
 msgid "Remove the selected module from the list"
 msgstr "Elimina modulul selectat din lista"
 
-#: ../ui/prefs.glade.h:102 ../ui/prefs.gtkbuilder.h:94
+#: ../ui/prefs.glade.h:133 ../ui/prefs.gtkbuilder.h:133
 #: ../ui/search-dialog.glade.h:89 ../ui/search-dialog.gtkbuilder.h:89
 msgid "Delete Selected Module From List Button"
 msgstr "Sterge Modulul Selectat din Butonul Lista"
 
-#: ../ui/prefs.glade.h:103 ../ui/prefs.gtkbuilder.h:95
+#: ../ui/prefs.glade.h:134 ../ui/prefs.gtkbuilder.h:134
 msgid "Open a dialog to select modules"
 msgstr "Deschide un dialog pentru a selecta modulele de adaugat la lista"
 
-#: ../ui/prefs.glade.h:104 ../ui/prefs.gtkbuilder.h:96
+#: ../ui/prefs.glade.h:135 ../ui/prefs.gtkbuilder.h:135
 #: ../ui/search-dialog.glade.h:91 ../ui/search-dialog.gtkbuilder.h:91
 msgid "Add Modules"
 msgstr "Adauga Module"
 
-#: ../ui/prefs.glade.h:105 ../ui/prefs.gtkbuilder.h:97
+#: ../ui/prefs.glade.h:136 ../ui/prefs.gtkbuilder.h:136
 #: ../ui/search-dialog.glade.h:92 ../ui/search-dialog.gtkbuilder.h:92
 msgid "Open Selection Dialog Button"
 msgstr "Buton de Dialog Deschidere Selectie"
 
-#: ../ui/prefs.glade.h:106 ../ui/prefs.gtkbuilder.h:98
+#: ../ui/prefs.glade.h:137 ../ui/prefs.gtkbuilder.h:137
 msgid "Modules Parallel"
 msgstr "Paralela Module"
 
-#: ../ui/prefs.glade.h:107 ../ui/prefs.gtkbuilder.h:99
+#: ../ui/prefs.glade.h:138 ../ui/prefs.gtkbuilder.h:138
 msgid "<b>Special Purpose Modules</b>"
 msgstr "<b>Module cu Scop Special</b>"
 
-#: ../ui/prefs.glade.h:108 ../ui/prefs.gtkbuilder.h:100
+#: ../ui/prefs.glade.h:139 ../ui/prefs.gtkbuilder.h:139
 msgid "Daily Devotional"
 msgstr "Devotional Zilnic"
 
-#: ../ui/prefs.glade.h:109 ../ui/prefs.gtkbuilder.h:101
+#: ../ui/prefs.glade.h:140 ../ui/prefs.gtkbuilder.h:140
 msgid "Daily Devotional Combo"
 msgstr "Combo Devotional Zilnic"
 
-#: ../ui/prefs.glade.h:110 ../ui/prefs.gtkbuilder.h:102
+#: ../ui/prefs.glade.h:141 ../ui/prefs.gtkbuilder.h:141
 msgid "Hebrew Lexicon"
 msgstr "Lexicon Ebraic"
 
-#: ../ui/prefs.glade.h:111 ../ui/prefs.gtkbuilder.h:103
+#: ../ui/prefs.glade.h:142 ../ui/prefs.gtkbuilder.h:142
 msgid "Hebrew Lexicon Combo"
 msgstr "Combo Lexicon Ebraic"
 
-#: ../ui/prefs.glade.h:112 ../ui/prefs.gtkbuilder.h:104
+#: ../ui/prefs.glade.h:143 ../ui/prefs.gtkbuilder.h:143
 msgid "Greek Lexicon"
 msgstr "Lexicon Grec"
 
-#: ../ui/prefs.glade.h:113 ../ui/prefs.gtkbuilder.h:105
+#: ../ui/prefs.glade.h:144 ../ui/prefs.gtkbuilder.h:144
 msgid "Greek Lexicon Combo"
 msgstr "Combo Lexicon Grec"
 
-#: ../ui/prefs.glade.h:114 ../ui/prefs.gtkbuilder.h:106
+#: ../ui/prefs.glade.h:145 ../ui/prefs.gtkbuilder.h:145
 msgid "Default Dictionary"
 msgstr "Dictionar Implicit"
 
-#: ../ui/prefs.glade.h:115 ../ui/prefs.gtkbuilder.h:107
+#: ../ui/prefs.glade.h:146 ../ui/prefs.gtkbuilder.h:146
 msgid "Change Default Dictionary Combo"
 msgstr "Schimba Combo Dictionar Implicit"
 
-#: ../ui/prefs.glade.h:116 ../ui/prefs.gtkbuilder.h:108
+#: ../ui/prefs.glade.h:147 ../ui/prefs.gtkbuilder.h:147
 msgid "Personal Notes"
 msgstr "Note Personale"
 
-#: ../ui/prefs.glade.h:117 ../ui/prefs.gtkbuilder.h:109
+#: ../ui/prefs.glade.h:148 ../ui/prefs.gtkbuilder.h:148
 msgid "Change Personal Notes Combo"
 msgstr "Schimba Combo Note Personale"
 
-#: ../ui/prefs.glade.h:118 ../ui/prefs.gtkbuilder.h:110
+#: ../ui/prefs.glade.h:149 ../ui/prefs.gtkbuilder.h:149
 msgid "Modules Misc"
 msgstr "Diverse despre Module"
 
-#: ../ui/prefs.glade.h:119 ../ui/prefs.gtkbuilder.h:111
+#: ../ui/prefs.glade.h:150 ../ui/prefs.gtkbuilder.h:150
 #: ../ui/search-dialog.glade.h:115 ../ui/search-dialog.gtkbuilder.h:115
 msgid "Module Selection"
 msgstr "Selectie Module"
 
-#: ../ui/prefs.gtkbuilder.h:112
+#: ../ui/prefs.gtkbuilder.h:1
 msgid "-2"
 msgstr ""
 
-#: ../ui/prefs.gtkbuilder.h:113
+#: ../ui/prefs.gtkbuilder.h:2
 #, fuzzy
 msgid "-1"
 msgstr "1"
 
-#: ../ui/prefs.gtkbuilder.h:115
+#: ../ui/prefs.gtkbuilder.h:4
 #, fuzzy
 msgid "+1"
 msgstr "1"
 
-#: ../ui/prefs.gtkbuilder.h:116
+#: ../ui/prefs.gtkbuilder.h:5
 msgid "+2"
 msgstr ""
 
-#: ../ui/prefs.gtkbuilder.h:117
+#: ../ui/prefs.gtkbuilder.h:6
 msgid "+3"
 msgstr ""
 
-#: ../ui/prefs.gtkbuilder.h:118
+#: ../ui/prefs.gtkbuilder.h:7
 msgid "+4"
 msgstr ""
 
-#: ../ui/prefs.gtkbuilder.h:119
+#: ../ui/prefs.gtkbuilder.h:8
 msgid "+5"
 msgstr ""
 
@@ -4513,97 +4758,107 @@ msgstr ""
 msgid "Save list as a series of bookmarks"
 msgstr "Salveaza lista ca o serie de insemnari"
 
-#: ../ui/xi-menus.glade.h:100 ../ui/xi-menus-popup.gtkbuilder.h:88
+#: ../ui/xi-menus.glade.h:100 ../ui/xi-menus-popup.gtkbuilder.h:89
+msgid ""
+"Send this verse list via BibleSync to others, if you are in Personal or "
+"Speaker mode."
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:101 ../ui/xi-menus-popup.gtkbuilder.h:88
+msgid "Send list via BibleSync"
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:102 ../ui/xi-menus-popup.gtkbuilder.h:90
 msgid "Export List"
 msgstr "Exporta Lista"
 
-#: ../ui/xi-menus.glade.h:101 ../ui/xi-menus-popup.gtkbuilder.h:2
+#: ../ui/xi-menus.glade.h:103 ../ui/xi-menus-popup.gtkbuilder.h:2
 msgid "Open this bookmark in a new tab"
 msgstr "Deschide aceasta insemnare intr-un tab nou"
 
-#: ../ui/xi-menus.glade.h:102 ../ui/xi-menus-popup.gtkbuilder.h:1
+#: ../ui/xi-menus.glade.h:104 ../ui/xi-menus-popup.gtkbuilder.h:1
 msgid "Open in new tab"
 msgstr "Deschide in tab-ul curent"
 
-#: ../ui/xi-menus.glade.h:103 ../ui/xi-menus-popup.gtkbuilder.h:4
+#: ../ui/xi-menus.glade.h:105 ../ui/xi-menus-popup.gtkbuilder.h:4
 msgid "Open this bookmark in a dialog"
 msgstr "Deschide acest insemn intr-un dialog"
 
-#: ../ui/xi-menus.glade.h:104 ../ui/xi-menus-popup.gtkbuilder.h:3
+#: ../ui/xi-menus.glade.h:106 ../ui/xi-menus-popup.gtkbuilder.h:3
 msgid "Open in a dialog"
 msgstr "Deschide intr-un dialog"
 
-#: ../ui/xi-menus.glade.h:105 ../ui/xi-menus-popup.gtkbuilder.h:6
+#: ../ui/xi-menus.glade.h:107 ../ui/xi-menus-popup.gtkbuilder.h:6
 msgid "Add new folder to selected folder"
 msgstr "Adauga folder nou la folderul selectat"
 
-#: ../ui/xi-menus.glade.h:107 ../ui/xi-menus-popup.gtkbuilder.h:8
+#: ../ui/xi-menus.glade.h:109 ../ui/xi-menus-popup.gtkbuilder.h:8
 msgid "Insert new bookmark here"
 msgstr "Insereaza o insemnare aici"
 
-#: ../ui/xi-menus.glade.h:108 ../ui/xi-menus-popup.gtkbuilder.h:7
+#: ../ui/xi-menus.glade.h:110 ../ui/xi-menus-popup.gtkbuilder.h:7
 msgid "Insert Bookmark"
 msgstr "Insereaza Insemn"
 
-#: ../ui/xi-menus.glade.h:109 ../ui/xi-menus-popup.gtkbuilder.h:10
+#: ../ui/xi-menus.glade.h:111 ../ui/xi-menus-popup.gtkbuilder.h:10
 msgid "Edit bookmark item"
 msgstr "Editeaza obiectul de insemnare"
 
-#: ../ui/xi-menus.glade.h:110 ../ui/xi-menus-popup.gtkbuilder.h:9
+#: ../ui/xi-menus.glade.h:112 ../ui/xi-menus-popup.gtkbuilder.h:9
 msgid "_Edit Item"
 msgstr "_Editare obiect"
 
-#: ../ui/xi-menus.glade.h:111 ../ui/xi-menus-popup.gtkbuilder.h:12
+#: ../ui/xi-menus.glade.h:113 ../ui/xi-menus-popup.gtkbuilder.h:12
 msgid "Delete item"
 msgstr "Sterge obiect"
 
-#: ../ui/xi-menus.glade.h:113 ../ui/xi-menus-popup.gtkbuilder.h:14
+#: ../ui/xi-menus.glade.h:115 ../ui/xi-menus-popup.gtkbuilder.h:14
 msgid "Expand all Bookmarks groups"
 msgstr "Extinde toate grupele de Insemne"
 
-#: ../ui/xi-menus.glade.h:114 ../ui/xi-menus-popup.gtkbuilder.h:13
+#: ../ui/xi-menus.glade.h:116 ../ui/xi-menus-popup.gtkbuilder.h:13
 msgid "Expand All"
 msgstr "Extinde Toate"
 
-#: ../ui/xi-menus.glade.h:115 ../ui/xi-menus-popup.gtkbuilder.h:16
+#: ../ui/xi-menus.glade.h:117 ../ui/xi-menus-popup.gtkbuilder.h:16
 msgid "Collapse all Bookmarks groups"
 msgstr "Strange toate grupele de Insemne"
 
-#: ../ui/xi-menus.glade.h:116 ../ui/xi-menus-popup.gtkbuilder.h:15
+#: ../ui/xi-menus.glade.h:118 ../ui/xi-menus-popup.gtkbuilder.h:15
 msgid "Collapse All"
 msgstr "Strange toate"
 
-#: ../ui/xi-menus.glade.h:117 ../ui/xi-menus-popup.gtkbuilder.h:17
+#: ../ui/xi-menus.glade.h:119 ../ui/xi-menus-popup.gtkbuilder.h:17
 msgid "Allow items to be moved from one folder to another"
 msgstr "Permite ca obiectele sa fie mutate de la un folder la altu"
 
-#: ../ui/xi-menus.glade.h:118 ../ui/xi-menus-popup.gtkbuilder.h:18
+#: ../ui/xi-menus.glade.h:120 ../ui/xi-menus-popup.gtkbuilder.h:18
 msgid "Allow Reordering"
 msgstr "Permite Reordonarea"
 
-#: ../ui/xi-menus.glade.h:119 ../ui/xi-menus-popup.gtkbuilder.h:20
+#: ../ui/xi-menus.glade.h:121 ../ui/xi-menus-popup.gtkbuilder.h:20
 #, fuzzy
 msgid "Load other bookmarks file (default: from BibleTime)"
 msgstr "Incarca Insemnele din Bibletime"
 
-#: ../ui/xi-menus.glade.h:120 ../ui/xi-menus-popup.gtkbuilder.h:19
+#: ../ui/xi-menus.glade.h:122 ../ui/xi-menus-popup.gtkbuilder.h:19
 #, fuzzy
 msgid "Import Bookmarks"
 msgstr "Insereaza Insemn"
 
-#: ../ui/xi-menus.glade.h:121 ../ui/xi-menus-popup.gtkbuilder.h:22
+#: ../ui/xi-menus.glade.h:123 ../ui/xi-menus-popup.gtkbuilder.h:22
 msgid "Remove folder and save it"
 msgstr "Elimina folder si salveaza-l"
 
-#: ../ui/xi-menus.glade.h:122 ../ui/xi-menus-popup.gtkbuilder.h:21
+#: ../ui/xi-menus.glade.h:124 ../ui/xi-menus-popup.gtkbuilder.h:21
 msgid "Export Folder"
 msgstr "Exporta Folder"
 
-#: ../ui/xi-menus.glade.h:123 ../ui/xi-menus-popup.gtkbuilder.h:30
+#: ../ui/xi-menus.glade.h:125 ../ui/xi-menus-popup.gtkbuilder.h:30
 msgid "Open selected module in a new tab"
 msgstr "Deschide modulul selectate intr-un tab nou"
 
-#: ../ui/xi-menus.glade.h:124 ../ui/xi-menus-popup.gtkbuilder.h:32
+#: ../ui/xi-menus.glade.h:126 ../ui/xi-menus-popup.gtkbuilder.h:32
 msgid ""
 "Open selected module in a\n"
 "\tseparate ['dialog'] window"
@@ -4611,80 +4866,80 @@ msgstr ""
 "Deschide modulul selectat intr-o\n"
 "\tfereastra ['dialog'] separata"
 
-#: ../ui/xi-menus.glade.h:126 ../ui/xi-menus-popup.gtkbuilder.h:31
+#: ../ui/xi-menus.glade.h:128 ../ui/xi-menus-popup.gtkbuilder.h:31
 msgid "Open in a separate window"
 msgstr "Deschide intr-o fereastra separata"
 
-#: ../ui/xi-menus.glade.h:127 ../ui/xi-menus-popup.gtkbuilder.h:73
+#: ../ui/xi-menus.glade.h:129 ../ui/xi-menus-popup.gtkbuilder.h:73
 msgid "Create a new simple prayer list"
 msgstr "Creaza o simpla lista noua de rugaciune"
 
-#: ../ui/xi-menus.glade.h:128 ../ui/xi-menus-popup.gtkbuilder.h:72
+#: ../ui/xi-menus.glade.h:130 ../ui/xi-menus-popup.gtkbuilder.h:72
 msgid "Simple"
 msgstr "Simplu"
 
-#: ../ui/xi-menus.glade.h:129 ../ui/xi-menus-popup.gtkbuilder.h:75
+#: ../ui/xi-menus.glade.h:131 ../ui/xi-menus-popup.gtkbuilder.h:75
 msgid "Create a new subject prayer list"
 msgstr "Creaza o lista noua de rugaciune pe subiecte"
 
-#: ../ui/xi-menus.glade.h:130 ../ui/xi-menus-popup.gtkbuilder.h:74
+#: ../ui/xi-menus.glade.h:132 ../ui/xi-menus-popup.gtkbuilder.h:74
 msgid "Subject"
 msgstr "Subiect"
 
-#: ../ui/xi-menus.glade.h:131 ../ui/xi-menus-popup.gtkbuilder.h:77
+#: ../ui/xi-menus.glade.h:133 ../ui/xi-menus-popup.gtkbuilder.h:77
 msgid "Create a new monthly journal"
 msgstr "Creaza un jurnal lunar nou"
 
-#: ../ui/xi-menus.glade.h:132 ../ui/xi-menus-popup.gtkbuilder.h:76
+#: ../ui/xi-menus.glade.h:134 ../ui/xi-menus-popup.gtkbuilder.h:76
 msgid "Monthly"
 msgstr "Lunar"
 
-#: ../ui/xi-menus.glade.h:133 ../ui/xi-menus-popup.gtkbuilder.h:79
+#: ../ui/xi-menus.glade.h:135 ../ui/xi-menus-popup.gtkbuilder.h:79
 msgid "Create a new daily journal"
 msgstr "Creaza un jurnal zilnic nou"
 
-#: ../ui/xi-menus.glade.h:134 ../ui/xi-menus-popup.gtkbuilder.h:78
+#: ../ui/xi-menus.glade.h:136 ../ui/xi-menus-popup.gtkbuilder.h:78
 msgid "Daily"
 msgstr "Zilnic"
 
-#: ../ui/xi-menus.glade.h:135 ../ui/xi-menus-popup.gtkbuilder.h:81
+#: ../ui/xi-menus.glade.h:137 ../ui/xi-menus-popup.gtkbuilder.h:81
 msgid "Create a new outlined topic"
 msgstr "Creaza un topic subliniat nou"
 
-#: ../ui/xi-menus.glade.h:136 ../ui/xi-menus-popup.gtkbuilder.h:80
+#: ../ui/xi-menus.glade.h:138 ../ui/xi-menus-popup.gtkbuilder.h:80
 msgid "Outlined"
 msgstr "Subliniat"
 
-#: ../ui/xi-menus.glade.h:137 ../ui/xi-menus-popup.gtkbuilder.h:83
+#: ../ui/xi-menus.glade.h:139 ../ui/xi-menus-popup.gtkbuilder.h:83
 msgid "Open module in editor or plain display window"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:138 ../ui/xi-menus-popup.gtkbuilder.h:82
+#: ../ui/xi-menus.glade.h:140 ../ui/xi-menus-popup.gtkbuilder.h:82
 #, fuzzy
 msgid "Open in separate window"
 msgstr "Deschide intr-o fereastra separata"
 
-#: ../ui/xi-menus.glade.h:139 ../ui/xi-menus-popup.gtkbuilder.h:23
+#: ../ui/xi-menus.glade.h:141 ../ui/xi-menus-popup.gtkbuilder.h:23
 msgid "Add a sub-item"
 msgstr "Adauga un sub-obiect"
 
-#: ../ui/xi-menus.glade.h:140
+#: ../ui/xi-menus.glade.h:142
 msgid "Add Sub-Item"
 msgstr "Adauga Sub-Obiect"
 
-#: ../ui/xi-menus.glade.h:141 ../ui/xi-menus-popup.gtkbuilder.h:25
+#: ../ui/xi-menus.glade.h:143 ../ui/xi-menus-popup.gtkbuilder.h:25
 msgid "Add an item"
 msgstr "Adauga un obiect"
 
-#: ../ui/xi-menus.glade.h:142 ../ui/xi-menus-popup.gtkbuilder.h:24
+#: ../ui/xi-menus.glade.h:144 ../ui/xi-menus-popup.gtkbuilder.h:24
 msgid "Add Item"
 msgstr "Adauga obiect"
 
-#: ../ui/xi-menus.glade.h:143 ../ui/xi-menus-popup.gtkbuilder.h:27
+#: ../ui/xi-menus.glade.h:145 ../ui/xi-menus-popup.gtkbuilder.h:27
 msgid "Remove this item"
 msgstr "Elimina acest obiect"
 
-#: ../ui/xi-menus.glade.h:145 ../ui/xi-menus-popup.gtkbuilder.h:29
+#: ../ui/xi-menus.glade.h:147 ../ui/xi-menus-popup.gtkbuilder.h:29
 msgid "Edit this item"
 msgstr "Editeaza acest obiect"
 
@@ -4695,6 +4950,9 @@ msgstr "Ghid Xiphos pentru Biblie"
 #: ../xiphos.desktop.in.in.h:2
 msgid "Study the Bible"
 msgstr "Studiaza Biblia"
+
+#~ msgid "<b>StudyPad default directory</b>"
+#~ msgstr "<b>Directorul implicit al Caietului de Studiu</b>"
 
 #~ msgid ""
 #~ "URL references using \"sword://\" (similar to web page\n"
