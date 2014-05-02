@@ -487,9 +487,9 @@ int BibleSync::ReceiveInternal()
 
 			alt = BSP
 			    + content.find(BSP_APP_USER)->second
-			    + " present at ["
+			    + "\npresent at ["
 			    + (string)inet_ntoa(source.sin_addr)
-			    + "], using "
+			    + "]\nusing "
 			    + content.find(BSP_APP_NAME)->second
 			    + " "
 			    + ((version != "") ? version : (string)"(version?)")
