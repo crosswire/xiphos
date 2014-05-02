@@ -16,6 +16,10 @@
 #ifndef __BIBLESYNC_HH__
 #define __BIBLESYNC_HH__
 
+// XIPHOS-SPECIFIC - THIS #INCLUDE TO BE REMOVED WHEN
+// BIBLESYNC IS EXTRICATED TO AN INDEPENDENT LIBRARY.
+#include <glib/gi18n.h>
+
 //
 // Bible Sync Protocol.
 // http://biblesyncprotocol.wikispaces.com/

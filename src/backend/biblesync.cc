@@ -72,9 +72,7 @@ BibleSync::BibleSync(string a, string v, string u)
     device = (string)uts.machine
 	+ ": "
 	+ uts.sysname
-	//+ " "
-	//+ uts.release
-	+ " on "
+	+ " @ "
 	+ uts.nodename;
 #else
     device = "Windows PC";
@@ -123,7 +121,7 @@ BibleSync_mode BibleSync::setMode(BibleSync_mode m,
     {
 	if (nav_func != NULL)
 	    (*nav_func)('E', EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
-			BSP "network setup errors.", result);
+			BSP + _("network setup errors."), result);
 	Shutdown();
     }
     return mode;
@@ -155,7 +153,7 @@ string BibleSync::Setup()
 	    if ((client_fd = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) < 0)
 	    {
 		ok_so_far = false;
-		retval += "client socket";
+		retval += _(" client socket");
 	    }
 	    else
 	    {
@@ -194,7 +192,7 @@ string BibleSync::Setup()
 	    if ((server_fd = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) < 0)
 	    {
 		ok_so_far = false;
-		retval += " server socket";
+		retval += _(" server socket");
 	    }
 	    else
 	    {
@@ -352,20 +350,20 @@ int BibleSync::ReceiveInternal()
 	// validate message: fixed values.
 	if (bsp.magic != BSP_MAGIC)
 	    (*nav_func)('E', EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
-			BSP "bad magic", (string)dump);
+			BSP + _("bad magic"), (string)dump);
 	else if (bsp.version != BSP_PROTOCOL)
 	    (*nav_func)('E', EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
-			BSP "bad protocol version", (string)dump);
+			BSP + _("bad protocol version"), (string)dump);
 	else if ((bsp.msg_type != BSP_ANNOUNCE) &&
 		 (bsp.msg_type != BSP_SYNC))
 	    (*nav_func)('E', EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
-			BSP "bad msg type", (string)dump);
+			BSP + _("bad msg type"), (string)dump);
 	else if (bsp.num_packets != 1)
 	    (*nav_func)('E', EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
-			BSP "bad packet count", (string)dump);
+			BSP + _("bad packet count"), (string)dump);
 	else if (bsp.index_packet != 0)
 	    (*nav_func)('E', EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
-			BSP "bad packet index", (string)dump);
+			BSP + _("bad packet index"), (string)dump);
 
 	// basic header sanity tests passed.  now parse body content.
 	else
@@ -408,7 +406,7 @@ int BibleSync::ReceiveInternal()
 	    if (!ok_so_far)
 	    {
 		(*nav_func)('E', EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
-			    BSP "bad body format", (string)dump);
+			    BSP + _("bad body format"), (string)dump);
 	    }
 	    else
 	    {
@@ -422,7 +420,7 @@ int BibleSync::ReceiveInternal()
 		    if (content.find(inbound_required[i]) == content.end())
 		    {
 			ok_so_far = false;
-			string info = BSP "missing required header "
+			string info = BSP + _("missing required header ")
 			    + inbound_required[i]
 			    + ".";
 			(*nav_func)('E', EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
@@ -446,7 +444,7 @@ int BibleSync::ReceiveInternal()
 		    if (i == sizeof(uuid_t))
 		    {
 			(*nav_func)('E', EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
-				    BSP "Ignoring echo.", (string)dump);
+				    BSP + _("Ignoring echo."), (string)dump);
 			continue;
 		    }
 		    
@@ -487,9 +485,9 @@ int BibleSync::ReceiveInternal()
 
 			alt = BSP
 			    + content.find(BSP_APP_USER)->second
-			    + "\npresent at ["
+			    + _("\npresent at [")
 			    + (string)inet_ntoa(source.sin_addr)
-			    + "]\nusing "
+			    + _("]\nusing ")
 			    + content.find(BSP_APP_NAME)->second
 			    + " "
 			    + ((version != "") ? version : (string)"(version?)")
@@ -540,14 +538,14 @@ int BibleSync::InitSelectRead(char *dump,
 #endif
     int source_length = sizeof(*source);
 
-    strcpy(dump, "[no dump ready]");	// initial, pre-read filler
+    strcpy(dump, _("[no dump ready]"));	// initial, pre-read filler
 
     FD_ZERO(&read_set);
     FD_SET(server_fd, &read_set);
     if (select(server_fd+1, &read_set, NULL, NULL, &tv) < 0)
     {
 	(*nav_func)('E', EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
-		    BSP "select < 0", (string)dump);
+		    BSP + _("select < 0"), (string)dump);
 	return -1;
     }
 
@@ -557,7 +555,7 @@ int BibleSync::InitSelectRead(char *dump,
 			       &source_length)) < 0))
     {
 	(*nav_func)('E', EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
-		    BSP "recvfrom < 0", (string)dump);
+		    BSP + _("recvfrom < 0"), (string)dump);
 	return -1;
     }
     return recv_size;
@@ -643,7 +641,7 @@ BibleSync_xmit_status BibleSync::Transmit(char message_type,
 	     bsp.num_packets, bsp.index_packet,
 	     bsp.body);
     (*nav_func)('E', EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
-		BSP "TRANSMIT:", dump);
+		BSP + _("TRANSMIT:"), dump);
 #endif /* 0 */
 
     // force last == newline: attempt to preserve body format when long.
@@ -659,10 +657,10 @@ BibleSync_xmit_status BibleSync::Transmit(char message_type,
     {
 	retval = BSP_XMIT_FAILED;
 	(*nav_func)('E', EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
-		BSP "Transmit failed.\n",
-		    "Unable to multicast a packet; BibleSync now disabled.\n"
-		    "If your network connection changed while this program\n"
-		    "was active, it may be sufficient simply to re-enable.");
+		    BSP + _("Transmit failed.\n"),
+		    _("Unable to multicast; BibleSync is now disabled.\n"
+		      "If your network connection changed while this program\n"
+		      "was active, it may be sufficient to re-enable."));
 	Shutdown();
     }
     return retval;
