@@ -1,5 +1,6 @@
 [encoding: UTF-8]
 ## Backend source files
+src/backend/biblesync.cc
 src/backend/gs_stringmgr.cpp
 src/backend/module_manager.cc
 src/backend/sword_main.cc
