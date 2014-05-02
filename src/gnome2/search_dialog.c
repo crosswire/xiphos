@@ -1106,7 +1106,7 @@ static void _finds_verselist_selection_changed(GtkWidget * widget,
  *   gboolean
  */
 
-static gboolean on_treeview_button_advsearch_press_event(GtkWidget * widget,
+static gboolean on_treeview_button_press_event_advsearch(GtkWidget * widget,
 							 GdkEventButton * event,
 							 gpointer user_data)
 {
@@ -1202,10 +1202,9 @@ on_send_list_via_biblesync_advsearch_activate(GtkMenuItem * menuitem,
 	    first = FALSE;
 	    valid = gtk_tree_model_iter_next(model, &iter);
 	}
-	g_free(module);
 
-	main_biblesync_transmit_verse_list(settings.MainWindowModule,
-					   vlist->str);
+	main_biblesync_transmit_verse_list(module, vlist->str);
+	g_free(module);
 	g_string_free(vlist, TRUE);
     }
     else
@@ -1947,7 +1946,7 @@ void _create_search_dialog(void)
 	_setup_listviews2(search1.listview_verses, (GCallback) _finds_verselist_selection_changed);
 	g_signal_connect((gpointer) search1.listview_verses,
 			 "button_press_event",
-			 G_CALLBACK(on_treeview_button_advsearch_press_event),
+			 G_CALLBACK(on_treeview_button_press_event_advsearch),
 			 NULL);
 
 #ifdef USE_GTKBUILDER
