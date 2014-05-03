@@ -64,8 +64,11 @@
 //		   only info + dump are useful.
 //		2. 'M' (mismatch) against passphrase
 //		   info == "announce" or "sync"
-//			   announce: presence message in alt.
 //			   sync:     bible, ref, alt, group, domain as arrived.
+//			   announce: presence message in alt.
+//			      also, individual elements are also available:
+//			      parameter overload... bible  ref     group  domain
+//						    user   ipaddr  app    version
 //		   dump available.
 //		3. 'A' (announce)
 //		   presence message in alt.  dump available.
