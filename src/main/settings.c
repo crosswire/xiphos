@@ -236,6 +236,7 @@ int settings_init(int argc, char **argv, int new_configs, int new_bookmarks)
 
 	/* BibleSync */
 	settings.bs_mode       = 0;
+	settings.bs_privacy    = FALSE;
 	settings.bs_navdirect  = TRUE;
 	settings.bs_debug      = FALSE;
 	settings.bs_presence   = FALSE;

@@ -93,6 +93,10 @@
 //	=> it is the application's responsibility to send well-formed verse
 //	   references.
 //
+// - set self as private
+//	bool setPrivate(boolean);
+//	  sets outgoing TTL to zero so no one hears you off-machine.
+//
 // Receive() USAGE NOTE:
 // the application must call BibleSync::Receive(YourBibleSyncObjPtr)
 // frequently.  For example:
@@ -309,6 +313,9 @@ public:
 				   string alt    = "",
 				   string group  = "1",
 				   string domain = "BIBLE-VERSE");
+
+    // set privacy using TTL 0 in personal mode.
+    bool setPrivate(bool privacy);
 };
 
 #endif // __BIBLESYNC_HH__

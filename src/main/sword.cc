@@ -2121,6 +2121,25 @@ main_biblesync_mode_select(int m, char *p)
 
 /******************************************************************************
  * Name
+ *  main_biblesync_personal
+ *
+ * Synopsis
+ *   #include "backend/biblesync.hh"
+ *   void main_biblesync_personal()
+ *
+ * Description
+ *   determines whether BibleSync is set in Personal mode.
+ *
+ * Return value
+ *   int
+ */
+int main_biblesync_personal()
+{
+    return biblesync->getMode() == BSP_MODE_PERSONAL;
+}
+
+/******************************************************************************
+ * Name
  *  main_biblesync_active
  *
  * Synopsis
@@ -2195,4 +2214,23 @@ void main_biblesync_transmit_verse_list(char *modname, char *vlist)
 {
     biblesync->Transmit(BSP_SYNC, (string)modname, (string)vlist);
     // remaining args irrelevant => defaulted.
+}
+
+/******************************************************************************
+ * Name
+ *  main_biblesync_privacy
+ *
+ * Synopsis
+ *   #include "backend/biblesync.hh"
+ *   const char *main_biblesync_privacy(gboolean)
+ *
+ * Description
+ *   en/disables privacy in personal mode (TTL 0).
+ *
+ * Return value
+ *   void
+ */
+void main_biblesync_privacy(gboolean privacy)
+{
+    biblesync->setPrivate(privacy);
 }

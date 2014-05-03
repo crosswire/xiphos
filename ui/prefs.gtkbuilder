@@ -1173,33 +1173,6 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkRadioButton" id="radiobutton_BSP_personal">
-                                <property name="label" translatable="yes">Personal</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">False</property>
-                                <property name="has_tooltip">True</property>
-                                <property name="tooltip-text" translatable="yes">Enable BibleSync for personal or team use.</property>
-                                <property name="use_underline">True</property>
-                                <property name="active">True</property>
-                                <property name="draw_indicator">True</property>
-                                <property name="group">radiobutton_BSP_off</property>
-                                <accessibility>
-                                  
-                                </accessibility>
-                                <child internal-child="accessible">
-                                  <object class="AtkObject" id="a11y-radiobutton_BSP_personal1">
-                                    <property name="AtkObject::accessible-name" translatable="yes">BSP personal radio button</property>
-                                  </object>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
-                                <property name="position">3</property>
-                              </packing>
-                            </child>
-                            <child>
                               <object class="GtkRadioButton" id="radiobutton_BSP_speaker">
                                 <property name="label" translatable="yes">Speaker</property>
                                 <property name="visible">True</property>
@@ -1223,7 +1196,7 @@
                               <packing>
                                 <property name="expand">False</property>
                                 <property name="fill">False</property>
-                                <property name="position">4</property>
+                                <property name="position">3</property>
                               </packing>
                             </child>
                             <child>
@@ -1250,6 +1223,33 @@
                               <packing>
                                 <property name="expand">False</property>
                                 <property name="fill">False</property>
+                                <property name="position">4</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkRadioButton" id="radiobutton_BSP_personal">
+                                <property name="label" translatable="yes">Personal</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">False</property>
+                                <property name="has_tooltip">True</property>
+                                <property name="tooltip-text" translatable="yes">Enable BibleSync for personal or team use.</property>
+                                <property name="use_underline">True</property>
+                                <property name="active">True</property>
+                                <property name="draw_indicator">True</property>
+                                <property name="group">radiobutton_BSP_off</property>
+                                <accessibility>
+                                  
+                                </accessibility>
+                                <child internal-child="accessible">
+                                  <object class="AtkObject" id="a11y-radiobutton_BSP_personal1">
+                                    <property name="AtkObject::accessible-name" translatable="yes">BSP personal radio button</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
                                 <property name="position">5</property>
                               </packing>
                             </child>
@@ -1262,17 +1262,6 @@
                           <object class="GtkHBox" id="box-BSP-nav">
                             <property name="visible">True</property>
                             <property name="homogeneous">True</property>
-                            <child>
-                              <object class="GtkLabel" id="labelBSPnav">
-                                <property name="visible">True</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">Navigation</property>
-                                <property name="tooltip_text" translatable="yes">Xiphos accepts navigation from other BibleSync-compatible programs either directly or via the verse list.</property>
-                              </object>
-                              <packing>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
                             <child>
                               <object class="GtkRadioButton" id="radiobutton_BSP_nav_direct">
                                 <property name="label" translatable="yes">Direct</property>
@@ -1296,7 +1285,7 @@
                               <packing>
                                 <property name="expand">False</property>
                                 <property name="fill">False</property>
-                                <property name="position">1</property>
+                                <property name="position">0</property>
                               </packing>
                             </child>
                             <child>
@@ -1323,7 +1312,7 @@
                               <packing>
                                 <property name="expand">False</property>
                                 <property name="fill">False</property>
-                                <property name="position">2</property>
+                                <property name="position">1</property>
                               </packing>
                             </child>
                             <child>
@@ -1349,7 +1338,7 @@
                               <packing>
                                 <property name="expand">False</property>
                                 <property name="fill">False</property>
-                                <property name="position">4</property>
+                                <property name="position">2</property>
                               </packing>
                             </child>
                             <child>
@@ -1375,7 +1364,7 @@
                               <packing>
                                 <property name="expand">False</property>
                                 <property name="fill">False</property>
-                                <property name="position">5</property>
+                                <property name="position">3</property>
                               </packing>
                             </child>
                             <child>
@@ -1401,7 +1390,33 @@
                               <packing>
                                 <property name="expand">False</property>
                                 <property name="fill">False</property>
-                                <property name="position">6</property>
+                                <property name="position">4</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkCheckButton" id="checkbutton_BSP_privacy">
+                                <property name="label" translatable="yes">Private</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">False</property>
+                                <property name="has_tooltip">True</property>
+                                <property name="tooltip-text" translatable="yes">When in Personal mode, only programs running on this machine will hear your navigation.</property>
+                                <property name="use_underline">True</property>
+                                <property name="active">True</property>
+                                <property name="draw_indicator">True</property>
+                                <accessibility>
+                                  
+                                </accessibility>
+                                <child internal-child="accessible">
+                                  <object class="AtkObject" id="a11y-checkbutton_BSP_privacy1">
+                                    <property name="AtkObject::accessible-name" translatable="yes">BSP privacy button</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                                <property name="position">5</property>
                               </packing>
                             </child>
                           </object>
