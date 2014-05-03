@@ -97,6 +97,11 @@
 		follow.
 		</para>
 		<para>
+		If you run more than one BibleSync-compatible program on your computer and do not wish your activity among them to be shared on the
+		local net, you can use Personal mode combined with the Private checkbox.  This will tell <application>Xiphos</application> not to
+		broadcast outside your system.
+		</para>
+		<para>
 		If you use a firewall, you must punch a hole in it for UDP port 22272.
 		</para>
 		<para>
