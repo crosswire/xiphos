@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-02 16:41-0400\n"
+"POT-Creation-Date: 2014-05-03 17:06-0400\n"
 "PO-Revision-Date: 2010-03-20 18:19+0000\n"
 "Last-Translator: Dmitrijs Ledkovs <dmitrij.ledkov@gmail.com>\n"
 "Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
@@ -1004,7 +1004,7 @@ msgstr "新增/移除"
 msgid "Choose"
 msgstr "選擇"
 
-#: ../src/gnome2/mod_mgr.c:1838 ../src/gnome2/preferences_dialog.c:1963
+#: ../src/gnome2/mod_mgr.c:1838 ../src/gnome2/preferences_dialog.c:1978
 #: ../src/gnome2/sidebar.c:1487 ../src/gnome2/sidebar.c:1526
 msgid "Modules"
 msgstr "模組"
@@ -1118,7 +1118,7 @@ msgstr ""
 msgid "Synchronize this window's scrolling with the main window"
 msgstr ""
 
-#: ../src/gnome2/parallel_dialog.c:356 ../src/gnome2/preferences_dialog.c:1970
+#: ../src/gnome2/parallel_dialog.c:356 ../src/gnome2/preferences_dialog.c:1985
 msgid "Parallel"
 msgstr ""
 
@@ -1138,75 +1138,75 @@ msgstr "模組選項"
 msgid "Parallel View"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:896
+#: ../src/gnome2/preferences_dialog.c:897
 msgid "BibleSync session passphrase"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:898
+#: ../src/gnome2/preferences_dialog.c:899
 msgid "Phrase:"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1493
-#: ../src/gnome2/preferences_dialog.c:1530
-#: ../src/gnome2/preferences_dialog.c:1566
-#: ../src/gnome2/preferences_dialog.c:1600
-#: ../src/gnome2/preferences_dialog.c:1634
-#: ../src/gnome2/preferences_dialog.c:1668
-#: ../src/gnome2/preferences_dialog.c:1702
-#: ../src/gnome2/preferences_dialog.c:1737
-#: ../src/gnome2/preferences_dialog.c:1773
-#: ../src/gnome2/preferences_dialog.c:1824
-#: ../src/gnome2/preferences_dialog.c:2303
+#: ../src/gnome2/preferences_dialog.c:1508
+#: ../src/gnome2/preferences_dialog.c:1545
+#: ../src/gnome2/preferences_dialog.c:1581
+#: ../src/gnome2/preferences_dialog.c:1615
+#: ../src/gnome2/preferences_dialog.c:1649
+#: ../src/gnome2/preferences_dialog.c:1683
+#: ../src/gnome2/preferences_dialog.c:1717
+#: ../src/gnome2/preferences_dialog.c:1752
+#: ../src/gnome2/preferences_dialog.c:1788
+#: ../src/gnome2/preferences_dialog.c:1839
+#: ../src/gnome2/preferences_dialog.c:2325
 msgid "-- Select --"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1787
+#: ../src/gnome2/preferences_dialog.c:1802
 msgid "Locale will take effect after restart."
 msgstr "新的語言設定將在重新啟動後生效"
 
-#: ../src/gnome2/preferences_dialog.c:1859 ../ui/prefs.glade.h:1
+#: ../src/gnome2/preferences_dialog.c:1874 ../ui/prefs.glade.h:1
 #: ../ui/prefs.gtkbuilder.h:9
 msgid "Preferences"
 msgstr "偏好設定"
 
-#: ../src/gnome2/preferences_dialog.c:1942
+#: ../src/gnome2/preferences_dialog.c:1957
 msgid "General"
 msgstr "一般"
 
-#: ../src/gnome2/preferences_dialog.c:1949
+#: ../src/gnome2/preferences_dialog.c:1964
 msgid "Options"
 msgstr "選項"
 
-#: ../src/gnome2/preferences_dialog.c:1953
+#: ../src/gnome2/preferences_dialog.c:1968
 msgid "Fonts"
 msgstr "字型"
 
-#: ../src/gnome2/preferences_dialog.c:1956
+#: ../src/gnome2/preferences_dialog.c:1971
 msgid "Color"
 msgstr "色彩"
 
-#: ../src/gnome2/preferences_dialog.c:1959
+#: ../src/gnome2/preferences_dialog.c:1974
 #, fuzzy
 msgid "Sizes and Faces"
 msgstr "分頁和版面"
 
-#: ../src/gnome2/preferences_dialog.c:1973
+#: ../src/gnome2/preferences_dialog.c:1988
 msgid "Special"
 msgstr "特殊"
 
-#: ../src/gnome2/preferences_dialog.c:2685 ../src/gnome2/search_dialog.c:499
+#: ../src/gnome2/preferences_dialog.c:2707 ../src/gnome2/search_dialog.c:499
 msgid "Clear List?"
 msgstr "清理清單?"
 
-#: ../src/gnome2/preferences_dialog.c:2686 ../src/gnome2/search_dialog.c:500
+#: ../src/gnome2/preferences_dialog.c:2708 ../src/gnome2/search_dialog.c:500
 msgid "Are you sure you want to clear the module list?"
 msgstr "您確定要清理模組清單嗎？"
 
-#: ../src/gnome2/preferences_dialog.c:2731 ../src/main/search_dialog.cc:685
+#: ../src/gnome2/preferences_dialog.c:2753 ../src/main/search_dialog.cc:685
 msgid "Remove Module?"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:2732 ../src/main/search_dialog.cc:686
+#: ../src/gnome2/preferences_dialog.c:2754 ../src/main/search_dialog.cc:686
 msgid "Are you sure you want to remove the selected module?"
 msgstr ""
 
@@ -1352,8 +1352,8 @@ msgstr ""
 msgid "Bible"
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:233 ../ui/prefs.glade.h:123
-#: ../ui/prefs.gtkbuilder.h:123
+#: ../src/gnome2/search_sidebar.c:233 ../ui/prefs.glade.h:124
+#: ../ui/prefs.gtkbuilder.h:124
 msgid "Commentary"
 msgstr ""
 
@@ -1512,8 +1512,8 @@ msgid ""
 "'%s'"
 msgstr ""
 
-#: ../src/main/display.cc:1037 ../src/main/display.cc:1078
-#: ../src/main/display.cc:1163 ../ui/export-dialog.glade.h:14
+#: ../src/main/display.cc:1032 ../src/main/display.cc:1073
+#: ../src/main/display.cc:1158 ../ui/export-dialog.glade.h:14
 #: ../ui/export-dialog.gtkbuilder.h:13
 msgid "Chapter"
 msgstr ""
@@ -2066,7 +2066,7 @@ msgstr ""
 msgid "Document not created successfully. \n"
 msgstr ""
 
-#: ../src/main/xml.c:93 ../ui/prefs.glade.h:90 ../ui/prefs.gtkbuilder.h:90
+#: ../src/main/xml.c:93 ../ui/prefs.glade.h:96 ../ui/prefs.gtkbuilder.h:96
 msgid "Personal"
 msgstr ""
 
@@ -2446,7 +2446,7 @@ msgid "Export complete book"
 msgstr ""
 
 #: ../ui/export-dialog.glade.h:11 ../ui/export-dialog.gtkbuilder.h:10
-#: ../ui/prefs.glade.h:127 ../ui/prefs.gtkbuilder.h:127
+#: ../ui/prefs.glade.h:128 ../ui/prefs.gtkbuilder.h:128
 msgid "Book"
 msgstr ""
 
@@ -3577,249 +3577,254 @@ msgstr ""
 msgid "BSP off radio button"
 msgstr ""
 
+#: ../ui/prefs.glade.h:90 ../ui/prefs.gtkbuilder.h:90
+msgid "Speaker"
+msgstr ""
+
 #: ../ui/prefs.glade.h:91 ../ui/prefs.gtkbuilder.h:91
-msgid "Enable BibleSync for personal or team use."
+msgid "Enable BibleSync as the speaker."
 msgstr ""
 
 #: ../ui/prefs.glade.h:92 ../ui/prefs.gtkbuilder.h:92
+msgid "BSP speaker radio button"
+msgstr ""
+
+#: ../ui/prefs.glade.h:93 ../ui/prefs.gtkbuilder.h:93
+msgid "Audience"
+msgstr ""
+
+#: ../ui/prefs.glade.h:94 ../ui/prefs.gtkbuilder.h:94
+msgid "Enable BibleSync as a member of the audience."
+msgstr ""
+
+#: ../ui/prefs.glade.h:95 ../ui/prefs.gtkbuilder.h:95
+msgid "BSP audience radio button"
+msgstr ""
+
+#: ../ui/prefs.glade.h:97 ../ui/prefs.gtkbuilder.h:97
+msgid "Enable BibleSync for personal or team use."
+msgstr ""
+
+#: ../ui/prefs.glade.h:98 ../ui/prefs.gtkbuilder.h:98
 #, fuzzy
 msgid "BSP personal radio button"
 msgstr "每句換行(_V)"
 
-#: ../ui/prefs.glade.h:93 ../ui/prefs.gtkbuilder.h:93
-msgid "Speaker"
-msgstr ""
-
-#: ../ui/prefs.glade.h:94 ../ui/prefs.gtkbuilder.h:94
-msgid "Enable BibleSync as the speaker."
-msgstr ""
-
-#: ../ui/prefs.glade.h:95 ../ui/prefs.gtkbuilder.h:95
-msgid "BSP speaker radio button"
-msgstr ""
-
-#: ../ui/prefs.glade.h:96 ../ui/prefs.gtkbuilder.h:96
-msgid "Audience"
-msgstr ""
-
-#: ../ui/prefs.glade.h:97 ../ui/prefs.gtkbuilder.h:97
-msgid "Enable BibleSync as a member of the audience."
-msgstr ""
-
-#: ../ui/prefs.glade.h:98 ../ui/prefs.gtkbuilder.h:98
-msgid "BSP audience radio button"
-msgstr ""
-
 #: ../ui/prefs.glade.h:99 ../ui/prefs.gtkbuilder.h:99
-msgid "Navigation"
-msgstr ""
-
-#: ../ui/prefs.glade.h:100 ../ui/prefs.gtkbuilder.h:100
-msgid ""
-"Xiphos accepts navigation from other BibleSync-compatible programs either "
-"directly or via the verse list."
-msgstr ""
-
-#: ../ui/prefs.glade.h:101 ../ui/prefs.gtkbuilder.h:101
 #, fuzzy
 msgid "Direct"
 msgstr "目錄"
 
-#: ../ui/prefs.glade.h:102 ../ui/prefs.gtkbuilder.h:102
+#: ../ui/prefs.glade.h:100 ../ui/prefs.gtkbuilder.h:100
 msgid "BibleSync navigation will send Xiphos directly to the verse indicated."
 msgstr ""
 
-#: ../ui/prefs.glade.h:103 ../ui/prefs.gtkbuilder.h:103
+#: ../ui/prefs.glade.h:101 ../ui/prefs.gtkbuilder.h:101
 msgid "BSP nav direct radio button"
 msgstr ""
 
-#: ../ui/prefs.glade.h:104 ../ui/prefs.gtkbuilder.h:104
+#: ../ui/prefs.glade.h:102 ../ui/prefs.gtkbuilder.h:102
 #, fuzzy
 msgid "Verse list"
 msgstr "經句: "
 
-#: ../ui/prefs.glade.h:105 ../ui/prefs.gtkbuilder.h:105
+#: ../ui/prefs.glade.h:103 ../ui/prefs.gtkbuilder.h:103
 msgid "BibleSync navigation will use Xiphos' verse list."
 msgstr ""
 
-#: ../ui/prefs.glade.h:106 ../ui/prefs.gtkbuilder.h:106
+#: ../ui/prefs.glade.h:104 ../ui/prefs.gtkbuilder.h:104
 msgid "BSP nav verse list radio button"
 msgstr ""
 
-#: ../ui/prefs.glade.h:107 ../ui/prefs.gtkbuilder.h:107
+#: ../ui/prefs.glade.h:105 ../ui/prefs.gtkbuilder.h:105
 #, fuzzy
 msgid "Presence"
 msgstr "偏好設定"
 
-#: ../ui/prefs.glade.h:108 ../ui/prefs.gtkbuilder.h:108
+#: ../ui/prefs.glade.h:106 ../ui/prefs.gtkbuilder.h:106
 msgid "\"Presence\" announcements will be shown in dialogs."
 msgstr ""
 
-#: ../ui/prefs.glade.h:109 ../ui/prefs.gtkbuilder.h:109
+#: ../ui/prefs.glade.h:107 ../ui/prefs.gtkbuilder.h:107
 #, fuzzy
 msgid "BSP presence button"
 msgstr "每句換行(_V)"
 
-#: ../ui/prefs.glade.h:110 ../ui/prefs.gtkbuilder.h:110
+#: ../ui/prefs.glade.h:108 ../ui/prefs.gtkbuilder.h:108
 msgid "Mismatch"
 msgstr ""
 
-#: ../ui/prefs.glade.h:111 ../ui/prefs.gtkbuilder.h:111
+#: ../ui/prefs.glade.h:109 ../ui/prefs.gtkbuilder.h:109
 msgid "Mismatches from your session will be shown in dialogs."
 msgstr ""
 
-#: ../ui/prefs.glade.h:112 ../ui/prefs.gtkbuilder.h:112
+#: ../ui/prefs.glade.h:110 ../ui/prefs.gtkbuilder.h:110
 msgid "BSP mismatch button"
 msgstr ""
 
-#: ../ui/prefs.glade.h:113 ../ui/prefs.gtkbuilder.h:113
+#: ../ui/prefs.glade.h:111 ../ui/prefs.gtkbuilder.h:111
 msgid "Debug"
 msgstr ""
 
-#: ../ui/prefs.glade.h:114 ../ui/prefs.gtkbuilder.h:114
+#: ../ui/prefs.glade.h:112 ../ui/prefs.gtkbuilder.h:112
 msgid "Packet tracing."
 msgstr ""
 
-#: ../ui/prefs.glade.h:115 ../ui/prefs.gtkbuilder.h:115
+#: ../ui/prefs.glade.h:113 ../ui/prefs.gtkbuilder.h:113
 msgid "BSP event debug button"
 msgstr ""
 
+#: ../ui/prefs.glade.h:114 ../ui/prefs.gtkbuilder.h:114
+msgid "Private"
+msgstr ""
+
+#: ../ui/prefs.glade.h:115 ../ui/prefs.gtkbuilder.h:115
+msgid ""
+"When in Personal mode, only programs running on this machine will hear your "
+"navigation."
+msgstr ""
+
 #: ../ui/prefs.glade.h:116 ../ui/prefs.gtkbuilder.h:116
+#, fuzzy
+msgid "BSP privacy button"
+msgstr "每句換行(_V)"
+
+#: ../ui/prefs.glade.h:117 ../ui/prefs.gtkbuilder.h:117
 msgid "StudyPad default directory"
 msgstr ""
 
-#: ../ui/prefs.glade.h:117 ../ui/prefs.gtkbuilder.h:117
+#: ../ui/prefs.glade.h:118 ../ui/prefs.gtkbuilder.h:118
 msgid "Select A Directory"
 msgstr ""
 
-#: ../ui/prefs.glade.h:118 ../ui/prefs.gtkbuilder.h:118
+#: ../ui/prefs.glade.h:119 ../ui/prefs.gtkbuilder.h:119
 msgid "StudyPad default directory combo"
 msgstr ""
 
-#: ../ui/prefs.glade.h:119 ../ui/prefs.gtkbuilder.h:119
+#: ../ui/prefs.glade.h:120 ../ui/prefs.gtkbuilder.h:120
 msgid "General Misc"
 msgstr ""
 
-#: ../ui/prefs.glade.h:120 ../ui/prefs.gtkbuilder.h:120
+#: ../ui/prefs.glade.h:121 ../ui/prefs.gtkbuilder.h:121
 msgid "<b>Main Window Modules</b>"
 msgstr ""
 
-#: ../ui/prefs.glade.h:121 ../ui/prefs.gtkbuilder.h:121
+#: ../ui/prefs.glade.h:122 ../ui/prefs.gtkbuilder.h:122
 msgid "Biblical Text"
 msgstr ""
 
-#: ../ui/prefs.glade.h:122 ../ui/prefs.gtkbuilder.h:122
+#: ../ui/prefs.glade.h:123 ../ui/prefs.gtkbuilder.h:123
 msgid "Change Biblical Text Combo"
 msgstr ""
 
-#: ../ui/prefs.glade.h:124 ../ui/prefs.gtkbuilder.h:124
+#: ../ui/prefs.glade.h:125 ../ui/prefs.gtkbuilder.h:125
 msgid "Change Commentary Combo"
 msgstr ""
 
-#: ../ui/prefs.glade.h:125 ../ui/prefs.gtkbuilder.h:125
+#: ../ui/prefs.glade.h:126 ../ui/prefs.gtkbuilder.h:126
 msgid "Dictionary"
 msgstr ""
 
-#: ../ui/prefs.glade.h:126 ../ui/prefs.gtkbuilder.h:126
+#: ../ui/prefs.glade.h:127 ../ui/prefs.gtkbuilder.h:127
 msgid "Change Dictionary Combo"
 msgstr ""
 
-#: ../ui/prefs.glade.h:128 ../ui/prefs.gtkbuilder.h:128
+#: ../ui/prefs.glade.h:129 ../ui/prefs.gtkbuilder.h:129
 msgid "Change Book Combo"
 msgstr ""
 
-#: ../ui/prefs.glade.h:129 ../ui/prefs.gtkbuilder.h:129
+#: ../ui/prefs.glade.h:130 ../ui/prefs.gtkbuilder.h:130
 #: ../ui/search-dialog.glade.h:22 ../ui/search-dialog.gtkbuilder.h:23
 msgid "<b>Modules</b>"
 msgstr ""
 
-#: ../ui/prefs.glade.h:130 ../ui/prefs.gtkbuilder.h:130
+#: ../ui/prefs.glade.h:131 ../ui/prefs.gtkbuilder.h:131
 #: ../ui/search-dialog.glade.h:86 ../ui/search-dialog.gtkbuilder.h:86
 msgid "Clear all modules from the list"
 msgstr ""
 
-#: ../ui/prefs.glade.h:131 ../ui/prefs.gtkbuilder.h:131
+#: ../ui/prefs.glade.h:132 ../ui/prefs.gtkbuilder.h:132
 #: ../ui/search-dialog.glade.h:87 ../ui/search-dialog.gtkbuilder.h:87
 msgid "Clear Modules from List Button"
 msgstr ""
 
-#: ../ui/prefs.glade.h:132 ../ui/prefs.gtkbuilder.h:132
+#: ../ui/prefs.glade.h:133 ../ui/prefs.gtkbuilder.h:133
 #: ../ui/search-dialog.glade.h:88 ../ui/search-dialog.gtkbuilder.h:88
 msgid "Remove the selected module from the list"
 msgstr ""
 
-#: ../ui/prefs.glade.h:133 ../ui/prefs.gtkbuilder.h:133
+#: ../ui/prefs.glade.h:134 ../ui/prefs.gtkbuilder.h:134
 #: ../ui/search-dialog.glade.h:89 ../ui/search-dialog.gtkbuilder.h:89
 msgid "Delete Selected Module From List Button"
 msgstr ""
 
-#: ../ui/prefs.glade.h:134 ../ui/prefs.gtkbuilder.h:134
+#: ../ui/prefs.glade.h:135 ../ui/prefs.gtkbuilder.h:135
 msgid "Open a dialog to select modules"
 msgstr ""
 
-#: ../ui/prefs.glade.h:135 ../ui/prefs.gtkbuilder.h:135
+#: ../ui/prefs.glade.h:136 ../ui/prefs.gtkbuilder.h:136
 #: ../ui/search-dialog.glade.h:91 ../ui/search-dialog.gtkbuilder.h:91
 msgid "Add Modules"
 msgstr ""
 
-#: ../ui/prefs.glade.h:136 ../ui/prefs.gtkbuilder.h:136
+#: ../ui/prefs.glade.h:137 ../ui/prefs.gtkbuilder.h:137
 #: ../ui/search-dialog.glade.h:92 ../ui/search-dialog.gtkbuilder.h:92
 msgid "Open Selection Dialog Button"
 msgstr ""
 
-#: ../ui/prefs.glade.h:137 ../ui/prefs.gtkbuilder.h:137
+#: ../ui/prefs.glade.h:138 ../ui/prefs.gtkbuilder.h:138
 msgid "Modules Parallel"
 msgstr ""
 
-#: ../ui/prefs.glade.h:138 ../ui/prefs.gtkbuilder.h:138
+#: ../ui/prefs.glade.h:139 ../ui/prefs.gtkbuilder.h:139
 msgid "<b>Special Purpose Modules</b>"
 msgstr ""
 
-#: ../ui/prefs.glade.h:139 ../ui/prefs.gtkbuilder.h:139
+#: ../ui/prefs.glade.h:140 ../ui/prefs.gtkbuilder.h:140
 msgid "Daily Devotional"
 msgstr ""
 
-#: ../ui/prefs.glade.h:140 ../ui/prefs.gtkbuilder.h:140
+#: ../ui/prefs.glade.h:141 ../ui/prefs.gtkbuilder.h:141
 msgid "Daily Devotional Combo"
 msgstr ""
 
-#: ../ui/prefs.glade.h:141 ../ui/prefs.gtkbuilder.h:141
+#: ../ui/prefs.glade.h:142 ../ui/prefs.gtkbuilder.h:142
 msgid "Hebrew Lexicon"
 msgstr ""
 
-#: ../ui/prefs.glade.h:142 ../ui/prefs.gtkbuilder.h:142
+#: ../ui/prefs.glade.h:143 ../ui/prefs.gtkbuilder.h:143
 msgid "Hebrew Lexicon Combo"
 msgstr ""
 
-#: ../ui/prefs.glade.h:143 ../ui/prefs.gtkbuilder.h:143
+#: ../ui/prefs.glade.h:144 ../ui/prefs.gtkbuilder.h:144
 msgid "Greek Lexicon"
 msgstr ""
 
-#: ../ui/prefs.glade.h:144 ../ui/prefs.gtkbuilder.h:144
+#: ../ui/prefs.glade.h:145 ../ui/prefs.gtkbuilder.h:145
 msgid "Greek Lexicon Combo"
 msgstr ""
 
-#: ../ui/prefs.glade.h:145 ../ui/prefs.gtkbuilder.h:145
+#: ../ui/prefs.glade.h:146 ../ui/prefs.gtkbuilder.h:146
 msgid "Default Dictionary"
 msgstr ""
 
-#: ../ui/prefs.glade.h:146 ../ui/prefs.gtkbuilder.h:146
+#: ../ui/prefs.glade.h:147 ../ui/prefs.gtkbuilder.h:147
 msgid "Change Default Dictionary Combo"
 msgstr ""
 
-#: ../ui/prefs.glade.h:147 ../ui/prefs.gtkbuilder.h:147
+#: ../ui/prefs.glade.h:148 ../ui/prefs.gtkbuilder.h:148
 msgid "Personal Notes"
 msgstr ""
 
-#: ../ui/prefs.glade.h:148 ../ui/prefs.gtkbuilder.h:148
+#: ../ui/prefs.glade.h:149 ../ui/prefs.gtkbuilder.h:149
 msgid "Change Personal Notes Combo"
 msgstr ""
 
-#: ../ui/prefs.glade.h:149 ../ui/prefs.gtkbuilder.h:149
+#: ../ui/prefs.glade.h:150 ../ui/prefs.gtkbuilder.h:150
 msgid "Modules Misc"
 msgstr ""
 
-#: ../ui/prefs.glade.h:150 ../ui/prefs.gtkbuilder.h:150
+#: ../ui/prefs.glade.h:151 ../ui/prefs.gtkbuilder.h:151
 #: ../ui/search-dialog.glade.h:115 ../ui/search-dialog.gtkbuilder.h:115
 msgid "Module Selection"
 msgstr ""
