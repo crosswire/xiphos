@@ -492,6 +492,10 @@ int BibleSync::ReceiveInternal()
 			    + " "
 			    + ((version != "") ? version : (string)"(version?)")
 			    + ".";
+			bible  = content.find(BSP_APP_USER)->second;
+			ref    = (string)"[" + inet_ntoa(source.sin_addr) + "]";
+			group  = content.find(BSP_APP_NAME)->second;
+			domain = ((version != "") ? version : (string)"(version?)");
 			if (passphrase ==
 			    content.find(BSP_MSG_PASSPHRASE)->second)
 			{
