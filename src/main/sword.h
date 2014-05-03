@@ -128,10 +128,12 @@ void main_biblesync_navigate(char cmd,
 			     char *bible, char *verse, char *alt,
 			     char *info, char *dump);
 void main_biblesync_mode_select(int m, char *p);
+int main_biblesync_personal();
 int main_biblesync_active();
 int main_biblesync_active_xmit_allowed();
 const char *main_biblesync_get_passphrase();
 void main_biblesync_transmit_verse_list(char *modname, char *vlist);
+void main_biblesync_privacy(gboolean privacy);
 #ifdef __cplusplus
 }
 #endif

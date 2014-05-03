@@ -666,6 +666,25 @@ BibleSync_xmit_status BibleSync::Transmit(char message_type,
     return retval;
 }
 
+//
+// privacy setting.
+// only when in personal mode, allow setting TTL 0
+// so that packets do not leave this box.  only programs
+// running right here will hear.
+//
+bool BibleSync::setPrivate(bool privacy)
+{
+    int ttl = (privacy ? 0 : 1);
+
+    if ((mode != BSP_MODE_PERSONAL) ||		// only when operating alone.
+	(setsockopt(client_fd, IPPROTO_IP, IP_MULTICAST_TTL,
+		    (char *)&ttl, sizeof(ttl)) < 0))
+	return false;
+
+    return true;
+}
+
+
 #ifndef WIN32
 
 // routines below imported from the net as workable examples.
