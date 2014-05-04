@@ -1,4 +1,4 @@
-s/*
+/*
  * Xiphos Bible Study Tool
  * sword.cc - glue
  *
