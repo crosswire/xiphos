@@ -1150,7 +1150,7 @@ on_send_list_via_biblesync_advsearch_activate(GtkMenuItem * menuitem,
 	    gtk_tree_view_get_model(GTK_TREE_VIEW(search1.listview_verses));
 
 	GString *vlist = g_string_new("");
-	gchar *module, *text, *buf, *key;
+	gchar *module = NULL, *text, *buf, *key;
 
 	gboolean first = TRUE;
 	gboolean valid = gtk_tree_model_get_iter_first(model, &iter);

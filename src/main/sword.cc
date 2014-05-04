@@ -1,4 +1,4 @@
-/*
+s/*
  * Xiphos Bible Study Tool
  * sword.cc - glue
  *
@@ -1974,7 +1974,6 @@ main_biblesync_navigate(char cmd,
 	{
 	    message = "BibleSync: "
 		+ (string)_("Mismatched packet\n\n")
-		+ (string)_("Type: ")
 		+ info
 		+ ((info.substr(0,8) == "announce")
 		   ? ("\nMessage: " + alt)
