@@ -1976,7 +1976,7 @@ main_biblesync_navigate(char cmd,
 		+ (string)_("Mismatched packet\n\n")
 		+ (string)_("Type: ")
 		+ info
-		+ ((info == "announce")
+		+ ((info.substr(0,8) == "announce")
 		   ? ("\nMessage: " + alt)
 		   : ("\nBible: " + bible + "; Ref: " + ref + "; Alt: " + alt
 		      + "\nGroup: " + group + "; Domain: " + domain))
