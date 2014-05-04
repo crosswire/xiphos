@@ -161,7 +161,7 @@ typedef enum _BibleSync_xmit_status {
     N_BSP_XMIT
 } BibleSync_xmit_status;
 
-// args: cmd, bible, verse, alt, info, dump.
+// args: cmd, bible, verse, alt, group, domain, info, dump.
 typedef void (*BibleSync_navigate)(char,
 				   string, string, string,
 				   string, string,
