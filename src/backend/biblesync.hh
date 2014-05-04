@@ -63,7 +63,7 @@
 //		1. 'E' (error) for network errors & malformed packets.
 //		   only info + dump are useful.
 //		2. 'M' (mismatch) against passphrase
-//		   info == "announce" or "sync"
+//		   info == "announce" or "sync" (+ user@ipaddr)
 //			   sync:     bible, ref, alt, group, domain as arrived.
 //			   announce: presence message in alt.
 //			      also, individual elements are also available:

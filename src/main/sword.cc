@@ -1972,14 +1972,16 @@ main_biblesync_navigate(char cmd,
     case 'M':
 	if (settings.bs_mismatch)
 	{
-	    message = "BibleSync: Mismatched packet\n\nType: "
+	    message = "BibleSync: "
+		+ (string)_("Mismatched packet\n\n")
+		+ (string)_("Type: ")
 		+ info
 		+ ((info == "announce")
 		   ? ("\nMessage: " + alt)
-		   : ("\nBible:" + bible + " Ref:" + ref + " Alt:" + alt
-		      + "\nGroup:" + group + " Domain:" + domain))
+		   : ("\nBible: " + bible + "; Ref: " + ref + "; Alt: " + alt
+		      + "\nGroup: " + group + "; Domain: " + domain))
 		+ (settings.bs_debug
-		   ? ("\n\nDump: " + (string)dump)
+		   ? ("\n\n" + (string)dump)
 		   : "");
 	    gui_generic_warning((char *)message.c_str());
 	}
@@ -1991,7 +1993,7 @@ main_biblesync_navigate(char cmd,
 	{
 	    if (settings.bs_debug)
 	    {
-		message = "Presence announcement:\n\n" + dump;
+		message = _("Presence announcement:\n\n") + dump;
 		gui_generic_warning((char *)message.c_str());
 	    }
 	    gui_generic_warning((char *)alt.c_str());
@@ -2002,7 +2004,7 @@ main_biblesync_navigate(char cmd,
     case 'N':
 	if (settings.bs_debug)
 	{
-	    message = "Navigation packet:\n\n" + dump;
+	    message = _("Navigation packet:\n\n") + dump;
 	    gui_generic_warning((char *)message.c_str());
 	}
 
@@ -2050,21 +2052,23 @@ main_biblesync_navigate(char cmd,
 	}
 	else
 	{
-	    message = "BibleSync requested unknown module '" + bible + "'.";
+	    message = "BibleSync: " + (string)_("Unknown module ") + bible;
 	    gui_generic_warning((char *)message.c_str());
 	}
 	break;
 
     default:
-	message = (string)"ERROR: unknown BibleSync indicator '"
+	message = _("ERROR: unknown BibleSync indicator: ")
 	    + cmd
-	    + "'.\n"
-	    + "Other indications are:\n"
-	    + "bible: " + bible
-	    + "ref: " + ref
-	    + "alt: " + alt
-	    + "info: " + info
-	    + "dump:\n" + dump;
+	    + (string)".\n"
+	    + (string)_("Other indications are:")
+	    + "\nbible: " + bible
+	    + "\nref: " + ref
+	    + "\nalt: " + alt
+	    + "\ngroup: " + group
+	    + "\ndomain: " + domain
+	    + "\ninfo: " + info
+	    + "\ndump:\n" + dump;
 	gui_generic_warning((char *)message.c_str());
 	break;
     }
