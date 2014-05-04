@@ -181,6 +181,11 @@ string BibleSync::Setup()
 			ok_so_far = false;
 			retval += " IP_MULTICAST_IF";
 		    }
+		    else if ((mode == BSP_MODE_SPEAKER) ||
+			     (mode == BSP_MODE_AUDIENCE))
+		    {
+			setPrivate(false);
+		    }
 		}
 		// client is now ready for sendto(2) calls.
 	    }
