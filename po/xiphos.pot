@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-03 17:06-0400\n"
+"POT-Creation-Date: 2014-05-04 09:49-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,71 +29,71 @@ msgstr ""
 msgid " server socket"
 msgstr ""
 
-#: ../src/backend/biblesync.cc:353
+#: ../src/backend/biblesync.cc:354
 msgid "bad magic"
 msgstr ""
 
-#: ../src/backend/biblesync.cc:356
+#: ../src/backend/biblesync.cc:357
 msgid "bad protocol version"
 msgstr ""
 
-#: ../src/backend/biblesync.cc:360
+#: ../src/backend/biblesync.cc:361
 msgid "bad msg type"
 msgstr ""
 
-#: ../src/backend/biblesync.cc:363
+#: ../src/backend/biblesync.cc:364
 msgid "bad packet count"
 msgstr ""
 
-#: ../src/backend/biblesync.cc:366
+#: ../src/backend/biblesync.cc:367
 msgid "bad packet index"
 msgstr ""
 
-#: ../src/backend/biblesync.cc:409
+#: ../src/backend/biblesync.cc:410
 msgid "bad body format"
 msgstr ""
 
-#: ../src/backend/biblesync.cc:423
+#: ../src/backend/biblesync.cc:424
 msgid "missing required header "
 msgstr ""
 
-#: ../src/backend/biblesync.cc:447
+#: ../src/backend/biblesync.cc:448
 msgid "Ignoring echo."
 msgstr ""
 
-#: ../src/backend/biblesync.cc:488
+#: ../src/backend/biblesync.cc:493
 msgid ""
 "\n"
 "present at ["
 msgstr ""
 
-#: ../src/backend/biblesync.cc:490
+#: ../src/backend/biblesync.cc:495
 msgid ""
 "]\n"
 "using "
 msgstr ""
 
-#: ../src/backend/biblesync.cc:541
+#: ../src/backend/biblesync.cc:554
 msgid "[no dump ready]"
 msgstr ""
 
-#: ../src/backend/biblesync.cc:548
+#: ../src/backend/biblesync.cc:561
 msgid "select < 0"
 msgstr ""
 
-#: ../src/backend/biblesync.cc:558
+#: ../src/backend/biblesync.cc:571
 msgid "recvfrom < 0"
 msgstr ""
 
-#: ../src/backend/biblesync.cc:644
+#: ../src/backend/biblesync.cc:657
 msgid "TRANSMIT:"
 msgstr ""
 
-#: ../src/backend/biblesync.cc:660
+#: ../src/backend/biblesync.cc:673
 msgid "Transmit failed.\n"
 msgstr ""
 
-#: ../src/backend/biblesync.cc:661
+#: ../src/backend/biblesync.cc:674
 msgid ""
 "Unable to multicast; BibleSync is now disabled.\n"
 "If your network connection changed while this program\n"
@@ -2023,6 +2023,40 @@ msgid ""
 "confirmed your purchase, or perhaps sent via email after purchase.\n"
 "\n"
 "Please enter the key in the dialog."
+msgstr ""
+
+#: ../src/main/sword.cc:1976
+msgid ""
+"Mismatched packet\n"
+"\n"
+msgstr ""
+
+#: ../src/main/sword.cc:1977
+msgid "Type: "
+msgstr ""
+
+#: ../src/main/sword.cc:1996
+msgid ""
+"Presence announcement:\n"
+"\n"
+msgstr ""
+
+#: ../src/main/sword.cc:2007
+msgid ""
+"Navigation packet:\n"
+"\n"
+msgstr ""
+
+#: ../src/main/sword.cc:2055
+msgid "Unknown module "
+msgstr ""
+
+#: ../src/main/sword.cc:2061
+msgid "ERROR: unknown BibleSync indicator: "
+msgstr ""
+
+#: ../src/main/sword.cc:2064
+msgid "Other indications are:"
 msgstr ""
 
 #: ../src/main/tab_history.c:219

@@ -335,8 +335,9 @@ int BibleSync::ReceiveInternal()
 	// dump content into something humanly useful.
 	uuid_dump(bsp.uuid, uuid_dump_string);
 	snprintf(dump, DEBUG_LENGTH-1,
-		 "magic: 0x%08x\nversion: 0x%02x\ntype: 0x%02x (%s)\n"
+		 "[%s]\nmagic: 0x%08x\nversion: 0x%02x\ntype: 0x%02x (%s)\n"
 		 "uuid: %s\n#pkt: %d\npkt index: %d\n\n-*- body -*-\n%s",
+		 inet_ntoa(source.sin_addr),
 		 ntohl(bsp.magic), bsp.version,
 		 bsp.msg_type, ((bsp.msg_type == BSP_ANNOUNCE)
 				   ? "announce"
@@ -475,7 +476,11 @@ int BibleSync::ReceiveInternal()
 			else
 			{
 			    cmd = 'M';	// mismatch
-			    info = "sync";
+			    info = (string)"sync: "
+				+ content.find(BSP_APP_USER)->second
+				+ " @ ["
+				+ inet_ntoa(source.sin_addr)
+				+ "]";
 			}
 		    }
 		    else
@@ -504,7 +509,11 @@ int BibleSync::ReceiveInternal()
 			else
 			{
 			    cmd = 'M';	// mismatch
-			    info = "announce";
+			    info = (string)"announce: "
+				+ content.find(BSP_APP_USER)->second
+				+ " @ ["
+				+ inet_ntoa(source.sin_addr)
+				+ "]";
 			}
 		    }
 
