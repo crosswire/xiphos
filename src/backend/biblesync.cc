@@ -163,7 +163,7 @@ string BibleSync::Setup()
 		client.sin_port = htons(BSP_PORT);
 		client.sin_addr.s_addr = inet_addr(BSP_MULTICAST);
 
-		// disable listening to our own multicast via loopback.
+		// enable listening to our own multicast via loopback.
 		char loop=1;
 		if (setsockopt(client_fd, IPPROTO_IP, IP_MULTICAST_LOOP,
 			       (char *)&loop, sizeof(loop)) < 0)
