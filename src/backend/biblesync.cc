@@ -181,14 +181,18 @@ string BibleSync::Setup()
 			ok_so_far = false;
 			retval += " IP_MULTICAST_IF";
 		    }
-		    else if ((mode == BSP_MODE_SPEAKER) ||
-			     (mode == BSP_MODE_AUDIENCE))
-		    {
-			setPrivate(false);
-		    }
 		}
 		// client is now ready for sendto(2) calls.
 	    }
+	}
+
+	// one way or another, if we got this far with a valid socket,
+	// and the app is in a public mode, "TTL 0" privacy makes no sense.
+	if ((client_fd >= 0) &&
+	    ((mode == BSP_MODE_SPEAKER) ||
+	     (mode == BSP_MODE_AUDIENCE)))
+	{
+	    setPrivate(false);
 	}
 
 	// audience == "server" insofar as he recvs nav from speaker.
@@ -692,14 +696,13 @@ BibleSync_xmit_status BibleSync::Transmit(char message_type,
 //
 bool BibleSync::setPrivate(bool privacy)
 {
+    if (mode != BSP_MODE_PERSONAL)
+	privacy = false;		// regardless of caller intent.
+
     int ttl = (privacy ? 0 : 1);
 
-    if ((mode != BSP_MODE_PERSONAL) ||		// only when operating alone.
-	(setsockopt(client_fd, IPPROTO_IP, IP_MULTICAST_TTL,
-		    (char *)&ttl, sizeof(ttl)) < 0))
-	return false;
-
-    return true;
+    return (setsockopt(client_fd, IPPROTO_IP, IP_MULTICAST_TTL,
+		       (char *)&ttl, sizeof(ttl)) >= 0);
 }
 
 
