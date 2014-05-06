@@ -147,10 +147,14 @@ do
 	#strip -o ${outdir}lib/${f} ${sworddir}../lib/${f}
 done
 mkdir -p ${outdir}lib/pango/1.8.0/modules/
+# additional broken path expected by pango - duplicated path elements.
+mkdir -p ${outdir}lib/pango/lib/pango/1.8.0/modules/
 for f in $(find ${sworddir}../lib/pango/1.8.0/modules/ -name '*.dll')
 do
 	echo "Copying and stripping ${f}"
 	cp ${f} ${outdir}lib/pango/1.8.0/modules/
+	# duplicate modules at the (broken) path that pango (bogusly) expects.
+	cp ${f} ${outdir}lib/pango/lib/pango/1.8.0/modules/
 	#strip -o ${outdir}lib/pango/1.8.0/modules/`basename ${f}` $f
 done
 
