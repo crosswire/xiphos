@@ -446,14 +446,12 @@ static gint show_note(const gchar * module, const gchar * passage,
 	//
 	int stop_autonorm = ((strstr(passage, ":0")) != NULL);
 	VerseKey *vkey = NULL;
-	char oldAutoNorm = 0;
 
 	if (stop_autonorm) {
 		SWMgr *mgr = backend->get_mgr();
 		backend->display_mod = mgr->Modules[module];
 		backend->display_mod->setKey(passage);
 		vkey = (VerseKey*)(SWKey*)(*backend->display_mod);
-		oldAutoNorm = vkey->isAutoNormalize();
 		vkey->setAutoNormalize(0);
 		vkey->setChapter(vkey->getChapter() + 1);
 		vkey->setVerse(0);
@@ -535,8 +533,6 @@ static gint show_note(const gchar * module, const gchar * passage,
 		}
 	}
 
-	if (stop_autonorm && vkey)
-		vkey->setAutoNormalize(oldAutoNorm);
 	if (work_buf)
 		g_free(work_buf);
 	g_string_free(str, TRUE);
