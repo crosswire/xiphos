@@ -127,7 +127,7 @@ void main_init_language_map(void);
 void main_biblesync_navigate(char cmd,
 			     char *bible, char *verse, char *alt,
 			     char *info, char *dump);
-void main_biblesync_mode_select(int m, char *p);
+int main_biblesync_mode_select(int m, char *p);
 int main_biblesync_personal();
 int main_biblesync_active();
 int main_biblesync_active_xmit_allowed();

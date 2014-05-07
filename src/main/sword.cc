@@ -2092,7 +2092,7 @@ main_biblesync_navigate(char cmd,
  * Return value
  *   void
  */
-void
+int
 main_biblesync_mode_select(int m, char *p)
 {
     BibleSync_mode mode;
@@ -2112,14 +2112,30 @@ main_biblesync_mode_select(int m, char *p)
     }
     if (mode != N_BSP_MODE)
     {
-	if (biblesync->setMode(mode, p, main_biblesync_navigate)
+	if ((mode = biblesync->setMode(mode, p, main_biblesync_navigate))
 	    != BSP_MODE_DISABLE)
 	{
 	    // every time we set an active mode, we must start the receiver.
 	    // glib will stop it on its own any time we go back to disable.
 	    g_timeout_add(1000, (GSourceFunc)BibleSync::Receive, biblesync);
 	}
+
+	switch (mode)
+	{
+	case BSP_MODE_DISABLE:
+	    m = 0; break;
+	case BSP_MODE_PERSONAL:
+	    m = 1; break;
+	case BSP_MODE_SPEAKER:
+	    m = 2; break;
+	case BSP_MODE_AUDIENCE:
+	    m = 3; break;
+	default:
+	    m = 99; break;
+	}
     }
+
+    return m;
 }
 
 /******************************************************************************

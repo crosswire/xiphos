@@ -111,8 +111,6 @@ BibleSync_mode BibleSync::setMode(BibleSync_mode m,
     }
     else
     {
-	mode = BSP_MODE_DISABLE;
-	nav_func = NULL;
 	Shutdown();
     }
 
@@ -258,6 +256,8 @@ void BibleSync::Shutdown()
     close(server_fd);
     close(client_fd);
     server_fd = client_fd = -1;
+    mode = BSP_MODE_DISABLE;
+    nav_func = NULL;
 }
 
 // local hack version of uuid_generate(),
