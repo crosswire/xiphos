@@ -27,13 +27,12 @@ interface of this implementation.  It is deliberately small and
 well-contained, with no extraneous features offered: setup, take-down,
 xmit, and recv, plus 2 "get" requests for current mode and passphrase.
 
-BibleSync has 4 modes:
-- Disabled.
+BibleSync has 3 modes:
 - Personal, in which the program both xmits and recvs.  Useful for one
   person using multiple simultaneous programs on different devices, or for
   teams working together (e.g. translators).
-- Speaker, in which the program xmits navigation synchronization but
-  does not recv any.
+- Speaker, in which the program xmits navigation synchronization but does
+  not recv any.
 - Audience, in which the program recvs navigation synchronization but does
   not xmit any.
 
@@ -47,15 +46,11 @@ changes propagate back into a revised version:
   reserved for potential future use.
 - UUID is placed at header's end, aligned on 16-byte boundary.
 - There is a single passphrase parameter, msg.sync.passPhrase, for use in
-  either personal or classroom mode.  There is no sense in having distinct
+  either personal or lecture mode.  There is no sense in having distinct
   fields when exactly one of them is in use at any one time.
 - Body "name=value" elements are newline-terminated, not newline-delimited.
   The point of this difference is ease and regularity of parsing, ensuring
   that every element's termination can be consistently found.
-- No TTL-limiting support is present.  Due to the nature of there being a
-  single receiver on a UDP socket, zeroing TTL so that multicast packets
-  do not leave the local machine is useless, because only this program is
-  receiving the multicast datagrams.  Simply turn off BibleSync.
 
 In the future, BibleSync will be separated into its own library,
 libbiblesync.{so,dll}, for inclusion in any other Bible program.
