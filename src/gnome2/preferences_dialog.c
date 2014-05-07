@@ -888,7 +888,7 @@ on_checkbutton_showparatab_toggled(GtkToggleButton * togglebutton,
  *   void
  */
 
-static gchar *on_biblesync_obtain_passphrase()
+gchar *on_biblesync_obtain_passphrase()
 {
 	gchar *retval;
 	GS_DIALOG *info = gui_new_dialog();
@@ -954,16 +954,42 @@ static void
 on_radiobutton_biblesync_mode(GtkToggleButton * togglebutton,
 			      gpointer user_data)
 {
+	int new_mode;
+
 	if (gtk_toggle_button_get_active(togglebutton))
 	{
 		settings.bs_mode = *((int*)user_data);
 
 		if (settings.bs_mode != 0)
 		{
-			settings.bs_passphrase = g_strdup(on_biblesync_obtain_passphrase());
+			settings.bs_passphrase =
+			    on_biblesync_obtain_passphrase();
 		}
-		main_biblesync_mode_select(settings.bs_mode, settings.bs_passphrase);
+		new_mode = main_biblesync_mode_select(settings.bs_mode,
+						      settings.bs_passphrase);
 		/* selecting active mode enables polled receiver. */
+
+		if (new_mode != settings.bs_mode)
+		{
+			/* mode selection failed? probably dead interface */
+			gui_generic_warning(_("Mode selection failed.\n"
+					      "Set \"Debug\" and try "
+					      "again to see why."));
+			settings.bs_mode = new_mode;
+			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+						     (radio_button.bs_mode_off),
+						     (settings.bs_mode == 0));
+			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+						     (radio_button.bs_mode_personal),
+						     (settings.bs_mode == 1));
+			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+						     (radio_button.bs_mode_speaker),
+						     (settings.bs_mode == 2));
+			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+						     (radio_button.bs_mode_audience),
+						     (settings.bs_mode == 3));
+
+		}
 
 		if (main_biblesync_personal())
 		{
@@ -976,6 +1002,43 @@ on_radiobutton_biblesync_mode(GtkToggleButton * togglebutton,
 		{
 			gtk_widget_set_sensitive(check_button.bs_privacy, FALSE);
 		}
+	}
+}
+
+
+/******************************************************************************
+ * Name
+ *   on_biblesync_kbd
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *   void on_biblesync_kbd(int mode)
+ *
+ * Description
+ *   kbd-selected biblesync mode.
+ *   as elsewhere: 0 = off; 1 = personal; 2 = speaker; 3 = audience.
+ *
+ * Return value
+ *   void
+ */
+
+void
+on_biblesync_kbd(int mode)
+{
+	int new_mode;
+
+	if ((settings.bs_mode = mode) != 0)
+	{
+		settings.bs_passphrase =
+		    on_biblesync_obtain_passphrase();
+	}
+	new_mode = main_biblesync_mode_select(settings.bs_mode,
+					      settings.bs_passphrase);
+
+	if (new_mode != settings.bs_mode)
+	{
+		gui_generic_warning(_("Mode selection failed.\n"));
+		settings.bs_mode = new_mode;
 	}
 }
 

@@ -1,3 +1,9 @@
+2014-05-07  karl <charcoal@users.sf.net>
+
+	* Fix network failure scheme: Reset mode properly, tell user.
+	* Add ctrl-alt-shift-{O,P,S,A} to engage BibleSync:
+	  off, personal, speaker, audience.
+
 2014-05-05  karl <charcoal@users.sf.net>
 
 	* 3.2.0 release.

@@ -77,6 +77,9 @@ void gui_setup_preferences_dialog(void);
 void setup_locale_combobox(void);
 void setup_font_prefs_combobox(void);
 
+void on_biblesync_kbd(int);
+gchar *on_biblesync_obtain_passphrase(void);
+
 void on_checkbutton10_toggled(GtkToggleButton * togglebutton, gpointer user_data);
 void on_checkbutton11_toggled(GtkToggleButton * togglebutton, gpointer user_data);
 void on_checkbutton12_toggled(GtkToggleButton * togglebutton, gpointer user_data);
