@@ -54,6 +54,7 @@
 #include "gui/widgets.h"
 #include "gui/tabbed_browser.h"
 #include "gui/menu_popup.h"
+#include "gui/preferences_dialog.h"
 
 #include "editor/slib-editor.h"
 
@@ -562,34 +563,41 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 		shift_key_pressed = TRUE;
 		/* no break? hm... */
 
-	case XK_a: // Alt-A  annotation
-		if (state == GDK_MOD1_MASK) {
+	case XK_a:
+	case XK_A:
+		if (state == GDK_MOD1_MASK) {	 // Alt-A  annotation
 			gui_mark_verse_dialog(M, V);
 		}
+		else if (state == (GDK_CONTROL_MASK|GDK_MOD1_MASK|GDK_SHIFT_MASK))
+			on_biblesync_kbd(3);	// BSP audience
 		break;
 
-	case XK_b: // Alt-B  bookmark
-		if (state == GDK_MOD1_MASK) {
+	case XK_b:
+	case XK_B:
+		if (state == GDK_MOD1_MASK) {	// Alt-B  bookmark
 			gchar *label = g_strdup_printf("%s, %s", V, M);
 			gui_bookmark_dialog(label, M, V);
 			g_free(label);
 		}
 		break;
 
-	case XK_c: // Alt-C  commentary pane
-		if (state == GDK_MOD1_MASK) {
+	case XK_c:
+	case XK_C:
+		if (state == GDK_MOD1_MASK) {	// Alt-C  commentary pane
 			gtk_widget_grab_focus(navbar_versekey.lookup_entry);
 			gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),0);
 		}
 		break;
 
-	case XK_d: // Alt-D  dictionary entry
-		if (state == GDK_MOD1_MASK)
+	case XK_d:
+	case XK_D:
+		if (state == GDK_MOD1_MASK)	// Alt-D  dictionary entry
 			gtk_widget_grab_focus(widgets.entry_dict);
 		break;
 
-	case XK_f: // Ctrl-F  find text
-		if (state == GDK_CONTROL_MASK) {
+	case XK_f:
+	case XK_F:
+		if (state == GDK_CONTROL_MASK) { // Ctrl-F  find text
 			if (settings.showtexts) {
 				gui_find_dlg(widgets.html_text,
 					     M, FALSE, NULL);
@@ -609,118 +617,136 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 		}
 		break;
 
-	case XK_g: // Alt-G  genbook entry
-		if (state == GDK_MOD1_MASK) {
+	case XK_g:
+	case XK_G:
+		if (state == GDK_MOD1_MASK) {	// Alt-G  genbook entry
 			gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),1);
 			gtk_widget_grab_focus(navbar_book.lookup_entry);
 		}
 		break;
 
-	case XK_j: // J    "next verse"
-		if (state == 0)
+	case XK_j:
+		if (state == 0)			// J    "next verse"
 			access_on_down_eventbox_button_release_event(VERSE_BUTTON);
 		break;
 
-	case XK_k: // K    "previous verse"
-		if (state == 0)
+	case XK_k:
+		if (state == 0)			// K    "previous verse"
 			access_on_up_eventbox_button_release_event(VERSE_BUTTON);
 		break;
 
-	case XK_l: // Ctrl-L  verse entry
-		if (state == GDK_CONTROL_MASK)
+	case XK_l:
+	case XK_L:
+		if (state == GDK_CONTROL_MASK)	// Ctrl-L  verse entry
 			gtk_widget_grab_focus(navbar_versekey.lookup_entry);
 		break;
 
-	case XK_m: // morph toggle
-		if (main_check_for_global_option((gchar*)M, "GBFMorph") ||
-		    main_check_for_global_option((gchar*)M, "ThMLMorph") ||
-		    main_check_for_global_option((gchar*)M, "OSISMorph")) {
-			if (state == GDK_MOD1_MASK)		// Alt-M morph
-			{
+	case XK_m:
+	case XK_M:
+		if (state == GDK_MOD1_MASK)	// Alt-M morph
+		{
+			if (main_check_for_global_option((gchar*)M, "GBFMorph") ||
+			    main_check_for_global_option((gchar*)M, "ThMLMorph") ||
+			    main_check_for_global_option((gchar*)M, "OSISMorph")) {
 				int opt = main_get_one_option(M, "Morphological Tags");
 				main_save_module_options(M, "Morphological Tags", !opt);
 				gchar *url = g_strdup_printf("sword://%s/%s", M, V);
 				main_url_handler(url, TRUE);
 				g_free(url);
 			}
+			else
+				gui_generic_warning(_("Module has no morphology support."));
 		}
-		else
-			gui_generic_warning(_("Module has no morphology support."));
 		break;
 
-	case XK_n: // N    "next"
+	case XK_n:
 	case XK_N:
-		if (state == GDK_CONTROL_MASK)		// Ctrl-N verse
+		if (state == GDK_CONTROL_MASK)	// Ctrl-N verse
 			access_on_down_eventbox_button_release_event
 			    (VERSE_BUTTON);
-		else if (state == 0)			// n chapter
+		else if (state == 0)		// n chapter
 			access_on_down_eventbox_button_release_event
 			    (CHAPTER_BUTTON);
-		else if (state == GDK_SHIFT_MASK)	// N book
+		else if (state == GDK_SHIFT_MASK) // N book
 			access_on_down_eventbox_button_release_event
 			    (BOOK_BUTTON);
 		break;
 
-	case XK_p: // P    "previous" or "parallel"
+	case XK_o:
+	case XK_O:
+		if (state == (GDK_CONTROL_MASK|GDK_MOD1_MASK|GDK_SHIFT_MASK))
+			on_biblesync_kbd(0);	// BSP off
+		break;
+
+	case XK_p:
 	case XK_P:
-		if (state == GDK_CONTROL_MASK)		// Ctrl-P verse
+		if (state == GDK_CONTROL_MASK)	// Ctrl-P verse
 			access_on_up_eventbox_button_release_event
 			    (VERSE_BUTTON);
-		else if (state == 0)			// p chapter
+		else if (state == 0)		// p chapter
 			access_on_up_eventbox_button_release_event
 			    (CHAPTER_BUTTON);
-		else if (state == GDK_SHIFT_MASK)	// P book
+		else if (state == GDK_SHIFT_MASK) // P book
 			access_on_up_eventbox_button_release_event
 			    (BOOK_BUTTON);
 		else if (state == GDK_MOD1_MASK) // Alt-P  parallel detach
 			on_undockInt_activate(NULL);
+		else if (state == (GDK_CONTROL_MASK|GDK_MOD1_MASK|GDK_SHIFT_MASK))
+			on_biblesync_kbd(1);	// BSP personal
 		break;
 
-	case XK_q: // quit
+	case XK_q:
+	case XK_Q:
 		if (state == GDK_CONTROL_MASK)		// Ctrl-Q quit
 			delete_event (NULL, NULL, NULL);
 		break;
 
-	case XK_r: // red words toggle
-		if ((main_check_for_global_option((gchar*)M, "GBFRedLetterWords")) ||
-		    (main_check_for_global_option((gchar*)M, "OSISRedLetterWords"))) {
-			if (state == GDK_MOD1_MASK)		// Alt-R red words
-			{
+	case XK_r:
+	case XK_R:
+		if (state == GDK_MOD1_MASK)		// Alt-R red words
+		{
+			if ((main_check_for_global_option((gchar*)M, "GBFRedLetterWords")) ||
+			    (main_check_for_global_option((gchar*)M, "OSISRedLetterWords"))) {
 				int opt = main_get_one_option(M, "Words of Christ in Red");
 				main_save_module_options(M, "Words of Christ in Red", !opt);
 				gchar *url = g_strdup_printf("sword://%s/%s", M, V);
 				main_url_handler(url, TRUE);
 				g_free(url);
 			}
+			else
+				gui_generic_warning(_("Module has no Red Words support."));
 		}
-		else
-			gui_generic_warning(_("Module has no Red Words support."));
 		break;
 
-	case XK_s: // strong's toggle
-		if ((main_check_for_global_option((gchar*)M, "GBFStrongs")) ||
-		    (main_check_for_global_option((gchar*)M, "ThMLStrongs")) ||
-		    (main_check_for_global_option((gchar*)M, "OSISStrongs"))) {
-			if (state == GDK_MOD1_MASK)		// Alt-S strong's
-			{
+	case XK_s:
+	case XK_S:
+		if (state == GDK_MOD1_MASK)		// Alt-S strong's
+		{
+			if ((main_check_for_global_option((gchar*)M, "GBFStrongs")) ||
+			    (main_check_for_global_option((gchar*)M, "ThMLStrongs")) ||
+			    (main_check_for_global_option((gchar*)M, "OSISStrongs"))) {
 				int opt = main_get_one_option(M, "Strong's Numbers");
 				main_save_module_options(M, "Strong's Numbers", !opt);
 				gchar *url = g_strdup_printf("sword://%s/%s", M, V);
 				main_url_handler(url, TRUE);
 				g_free(url);
 			}
+			else
+				gui_generic_warning(_("Module has no Strong's support."));
 		}
-		else
-			gui_generic_warning(_("Module has no Strong's support."));
+		else if (state == (GDK_CONTROL_MASK|GDK_MOD1_MASK|GDK_SHIFT_MASK))
+			on_biblesync_kbd(2);	// BSP speaker
 		break;
 
-	case XK_t: // open a new tab
-		if (state == GDK_CONTROL_MASK)
+	case XK_t:
+	case XK_T:
+		if (state == GDK_CONTROL_MASK)	// open a new tab
 			on_notebook_main_new_tab_clicked(NULL, NULL);
 		break;
 
-	case XK_z: // Alt-Z  open personal commentary
-		if (state == GDK_MOD1_MASK)
+	case XK_z:
+	case XK_Z:
+		if (state == GDK_MOD1_MASK)	// Alt-Z  open personal commentary
 			access_to_edit_percomm();
 		break;
 
