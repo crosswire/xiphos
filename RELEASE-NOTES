@@ -3,6 +3,52 @@ ____________________
 XIPHOS RELEASE NOTES
 ____________________
 
+Release 3.2.0
+05 May 2014
+
+This release is to accommodate one late-arriving Sword engine change and
+to support generalized companion modules.  It also provides the first
+implementation of BibleSync, a shared navigation protocol specification
+for Bible programs, details of which we are sharing with other programs'
+authors and hope to see being made available soon.  GTK2 is still the
+display toolkit we expect to be used.  Also, several urgent bugfixes have
+been made.
+
+- New BibleSync subsystem: Multicast group navigation with glue on
+  navigation reception and transmission when navigating locally.
+
+- Preferences added to support BibleSync options: mode enable, navigation
+  style choice, and activity tracing and privacy toggle options.
+
+- Updated companion modules (conf directive Companion=Abc,Def,Xyz) for
+  Bibles and commentaries so as to allow arbitrary sets where the 1st
+  opens in the main window and the rest open in detached windows.  This is
+  important for organizations such as Wycliffe who produce grouped
+  modules, useful in such a manner.
+
+- Added kbd toggles alt-S (Strong's), alt-M (morphology), alt-R (red words).
+
+- Heading generation changed in line with Sword 1.7.3's new internals.
+
+- Fixed crash on unparseable xref module content.
+
+- Fixed crash on copy/export.
+
+- Fixed crash on bogus middle-click on multi-ref bookmark.
+
+- Fixed crash on handling xref within heading
+
+- Fixed win32 pango module filesystem placement.
+
+- Fixed module manager column width setting.
+
+- Fixed module manager archive function.
+
+- Fixed NASB-specific lexica references for forthcoming NASB release.
+
+- Removed gconf query.
+________________________________________________________________
+
 Release 3.1.6
 12 Jan 2014
 
@@ -20,10 +66,10 @@ resolved for a future release and we will move Xiphos forward for that then.
 Incidental improvements and bug fixes:
 
 - The existence and placement of Preferences, Module Manager, and Advanced
-Search windows is saved.
+  Search windows is saved.
 
 - Major compatibility changes for the underlying Sword interface,
-especially renderText() and its minions.
+  especially renderText() and its minions.
 
 - Live chat nick selection identifies user's platform and Xiphos version.
 
@@ -32,11 +78,11 @@ especially renderText() and its minions.
 - Journals can be opened in regular display detached window (not editor).
 
 - "Friendly" (abbreviation) month names for devotional use in the
-dictionary pane.
+  dictionary pane.
 
 - Export off-by-one error when crossing chapter boundary is fixed.  Export
-also made somewhat more general and featureful.  3.1.5's missing export
-submenu is back.
+  also made somewhat more general and featureful.  3.1.5's missing export
+  submenu is back.
 
 - Addition of repository support for HTTP, HTTPS, and SFTP.
 
@@ -49,16 +95,16 @@ submenu is back.
 - A number of updates to native language support for module tree lists.
 
 - Sword's OSISVariants now works (had never been added since Sword's OSIS
-support came into existence).
+  support came into existence).
 
 - Xiphos internals have moved forward to Sword's XHTML interface, leaving
-behind the old HTMLHREF interface.  Many consequent internal changes.
+  behind the old HTMLHREF interface.  Many consequent internal changes.
 
 - Unicode punctuation is no longer mis-spoken in ReadAloud.
 
 - The last of the historic gtkhtml3 support has been removed, other than
-the editor component in GTK2: Xiphos depends exclusively on webkit.  This
-is Xiphos' 5th display engine.  We do not intend to change it ever again.
+  the editor component in GTK2: Xiphos depends exclusively on webkit.  This
+  is Xiphos' 5th display engine.  We do not intend to change it ever again.
 ________________________________________________________________
 
 Release 3.1.5
