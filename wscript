@@ -387,6 +387,12 @@ def configure(conf):
                    uselib='SWORD')
     env.append_value('ALL_LIBS', 'SWORD')
 
+    conf.check_cfg(package='uuid',
+                   args='--cflags --libs',
+                   uselib_store='UUID',
+                   mandatory=True)
+    env.append_value('ALL_LIBS', 'UUID')
+
     #
     # Random defines... legacy from autotools. Can we drop these?
     # Define to 1 if you have the ANSI C header files. */
