@@ -375,23 +375,17 @@ def configure(conf):
     env.append_value('ALL_LIBS', 'GTKUPRINT')
 
     conf.check_cfg(package='sword',
-                   args='"sword >= 1.6.1" --cflags --libs',
+                   args='"sword >= 1.7.3" --cflags --libs',
                    uselib_store='SWORD',
                    mandatory=True)
-
-    for sword_header in ['teixhtml', 'osisxhtml']:
-        conf.check(header_name='%s.h' % sword_header, mandatory=False,
-                   msg='Checking for header sword/%s.h' % sword_header,
-                   errmsg='FAIL, install sword svn/1.7',
-                   compiler_mode='cxx',
-                   uselib='SWORD')
     env.append_value('ALL_LIBS', 'SWORD')
 
-    conf.check_cfg(package='uuid',
-                   args='--cflags --libs',
-                   uselib_store='UUID',
-                   mandatory=True)
-    env.append_value('ALL_LIBS', 'UUID')
+    if not env["IS_WIN32"]:
+        conf.check_cfg(package='uuid',
+                       args='--cflags --libs',
+                       uselib_store='UUID',
+                       mandatory=True)
+        env.append_value('ALL_LIBS', 'UUID')
 
     #
     # Random defines... legacy from autotools. Can we drop these?
@@ -452,7 +446,7 @@ def build(bld):
     bld.add_subdirs('src/webkit')
             
     if env['IS-WIN32']:
-      bld.add_subdirs('win32/include')
+        bld.add_subdirs('win32/include')
 
     if env['HAVE_DBUS']:
         import shutil
