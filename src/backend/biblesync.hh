@@ -136,8 +136,7 @@ using namespace std;
 #include <sys/socket.h>
 #include <uuid/uuid.h>
 #else
-typedef unsigned char xuuid_t[16];
-#define	uuid_t	xuuid_t
+#define	uuid_t	UUID
 #include <winsock2.h>
 #include <windows.h>
 #include <ws2tcpip.h>
@@ -281,9 +280,9 @@ private:
     int InitSelectRead(char *, struct sockaddr_in *, BibleSyncMessage *);
 
     // uuid dumper;
-    void uuid_dump(uuid_t, char *destination);
+    void uuid_dump(uuid_t &u, char *destination);
     char uuid_dump_string[BSP_UUID_PRINT_LENGTH];
-    void uuid_gen(uuid_t u);	// hack sub: no win32 uuid_generate.
+    void uuid_gen(uuid_t &u);		// differentiates linux/win32.
 
 #ifndef WIN32
     // network self-analysis, borrowed from the net.
