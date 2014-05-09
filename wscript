@@ -206,8 +206,9 @@ def configure(conf):
         ## setup for Winsock on Windows (required for read-aloud)
         conf.check(lib='ws2_32', uselib='WSOCK', mandatory=True)
         conf.check(lib='shell32', uselib='SHELLAPI', mandatory=True)
+        conf.check(lib='rpcrt4', uselib='RPCRT4', mandatory=True)
         # this isn't supposed to be necessary
-        env['LINKFLAGS'] = ['-lws2_32']
+        env['LINKFLAGS'] = ['-lws2_32', '-lrpcrt4']
         dfn('WIN32', 1)
         # tool to link icon with executable
         # use tool modified for cross-compilation support
