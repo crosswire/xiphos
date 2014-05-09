@@ -962,6 +962,7 @@ on_radiobutton_biblesync_mode(GtkToggleButton * togglebutton,
 
 		if (settings.bs_mode != 0)
 		{
+			g_free(settings.bs_passphrase);
 			settings.bs_passphrase =
 			    on_biblesync_obtain_passphrase();
 		}
@@ -1029,6 +1030,7 @@ on_biblesync_kbd(int mode)
 
 	if ((settings.bs_mode = mode) != 0)
 	{
+		g_free(settings.bs_passphrase);
 		settings.bs_passphrase =
 		    on_biblesync_obtain_passphrase();
 	}
