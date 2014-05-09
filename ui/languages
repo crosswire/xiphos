@@ -84,6 +84,7 @@ cs	Čeština
 cu	Словѣ́ньскъ ѩꙁꙑ́къ
 # Chuvash
 cv	Чăвашла
+cv-Cyrl	Чăвашла
 # Welsh
 cy	Cymraeg
 # Danish
@@ -204,6 +205,7 @@ kv	Коми
 kw	Kernewek
 # Kirghiz
 ky	Кыргызча
+ky-Arab	Кыргызча
 # Latin
 la	Latina
 # Letzeburgesch
@@ -548,6 +550,7 @@ adw	Amundava
 adx	Amdo Tibetan
 #ady	Adyghe
 ady	адыгaбзэ
+ady-Cyrl	адыгaбзэ
 adz	Adzera
 aea	Areba
 aeb	Tunisian Arabic
@@ -604,6 +607,7 @@ agu	Aguacateco
 agv	Remontado Agta
 agw	Kahua
 agx	Aghul
+agx-Cyrl	Aghul
 agy	Southern Alta
 agz	Mt. Iriga Agta
 aha	Ahanta
@@ -897,6 +901,7 @@ aux	Aurá
 auy	Awiyaana
 auz	Uzbeki Arabic
 av	Avaric
+av-Cyrl	Avaric
 ava	Avaric
 avb	Avau
 avd	Alviri-Vidari
@@ -1474,6 +1479,7 @@ btx	Batak Karo
 bty	Bobot
 btz	Batak Alas-Kluet
 bua	Buriat
+bua-Cyrl	Buriat
 bub	Bua
 buc	Bushi
 bud	Ntcham
@@ -1864,6 +1870,7 @@ cre	Cree
 crf	Caramanta
 crg	Michif
 crh	Crimean Tatar
+crh-Cyrl	Crimean Tatar
 cri	Sãotomense
 crj	Southern East Cree
 crk	Plains Cree
@@ -2441,6 +2448,8 @@ gad	Gaddang
 gae	Guarequena
 gaf	Gende
 gag	Gagauz
+gag-Cyrl	Gagauz
+gag-Latn	Gagauz
 gah	Alekano
 gai	Borei
 gaj	Gadsup
