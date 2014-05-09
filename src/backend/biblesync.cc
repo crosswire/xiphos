@@ -78,7 +78,7 @@ BibleSync::BibleSync(string a, string v, string u)
     device = "Windows PC";
 #endif
 
-    interface_addr.s_addr = htonl(0xff000001);	// 127.0.0.1
+    interface_addr.s_addr = htonl(0x7f000001);	// 127.0.0.1
 }
 
 #define	BSP		(string)"BibleSync: "
@@ -177,7 +177,9 @@ string BibleSync::Setup()
 				   sizeof(interface_addr)) < 0)
 		    {
 			ok_so_far = false;
-			retval += " IP_MULTICAST_IF";
+			retval += (string)" IP_MULTICAST_IF ["
+			    + inet_ntoa(interface_addr)
+			    + "]";
 		    }
 		}
 		// client is now ready for sendto(2) calls.
@@ -713,13 +715,10 @@ bool BibleSync::setPrivate(bool privacy)
 // against an entry that has the address we need.
 
 // extra includes needed only for the
-// route- & gateway-discovery code below.
+// route & gateway discovery code below.
 
-#include <sys/socket.h>
 #include <net/if.h>
 #include <linux/rtnetlink.h>
-#include <unistd.h>
-#include <arpa/inet.h>
 
 struct route_info
 {
@@ -885,7 +884,7 @@ void BibleSync::InterfaceAddress()
 {
     // cancel any old interface value.
     // we must fail with current info, if at all.
-    interface_addr.s_addr = htonl(0xff000001);	// 127.0.0.1 fallback
+    interface_addr.s_addr = htonl(0x7f000001);	// 127.0.0.1 fallback
 
     char gw_if[IF_NAMESIZE];	// default gateway interface.
 
@@ -919,16 +918,11 @@ void BibleSync::InterfaceAddress()
 
 #else	/* WIN32 */
 
-#include <winsock2.h>
-#include <ws2tcpip.h>
-
 void BibleSync::InterfaceAddress()
 {
     // cancel any old interface value.
     // we must fail with current info, if at all.
-    interface_addr.s_addr = htonl(0xff000001);	// 127.0.0.1 fallback
-
-    /* WIN32 */
+    interface_addr.s_addr = htonl(0x7f000001);	// 127.0.0.1 fallback
 
     // this code is rudely derived from, and courtesy of,
     // http://tangentsoft.net/wskfaq/examples/getifaces.html
