@@ -456,7 +456,22 @@ int BibleSync::ReceiveInternal()
 			group  = content.find(BSP_MSG_SYNC_GROUP)->second;
 			domain = content.find(BSP_MSG_SYNC_DOMAIN)->second;
 
-			if ((passphrase ==
+			if (domain != "BIBLE-VERSE")
+			{
+			    cmd = 'E';
+			    info = BSP
+				+ _("Domain not 'BIBLE-VERSE': ")
+				+ domain;
+			} else if ((group.length() != 1) ||
+				   (group.c_str()[0] < '1') ||
+				   (group.c_str()[0] > '9'))
+			{
+			    cmd = 'E';
+			    info = BSP
+				+ _("Invalid group: ")
+				+ group;
+			}
+			else if ((passphrase ==
 			     content.find(BSP_MSG_PASSPHRASE)->second) &&
 			    ((mode == BSP_MODE_PERSONAL) ||
 			     (mode == BSP_MODE_AUDIENCE)))
