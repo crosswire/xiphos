@@ -260,40 +260,20 @@ void BibleSync::Shutdown()
     nav_func = NULL;
 }
 
-// local hack version of uuid_generate(),
-// which doesn't exist in win32 mingw.
-void BibleSync::uuid_gen(uuid_t u)
+// pick the OS' generation flavor.
+void BibleSync::uuid_gen(uuid_t &u)
 {
-    unsigned char *p = (unsigned char *)u;
 #ifndef WIN32
-    long int x;
-
-    srandom((unsigned int)interface_addr.s_addr); // "randomly" driven by address.
-    for (int i = 0; i < 4; ++i)
-    {
-	x = random();
-	memcpy(p+(i*4), &x, 4);
-    }
+    uuid_generate(u);
 #else
-    time_t t = time(NULL);
-    long long t_1, t_2, t_3, t_4;
-
-    t_1 = t ^ interface_addr.s_addr;
-    t_2 = t ^ (((interface_addr.s_addr & 0xFFFF) << 16) |
-	       (interface_addr.s_addr >> 16));
-    t_3 = t ^ ((interface_addr.s_addr & 0xFFFF00) >> 8);
-    t_4 = t ^ ((interface_addr.s_addr & 0xFFFF) << 11);
-    memcpy(p,    &t_1, 4);
-    memcpy(p+4,  &t_2, 4);
-    memcpy(p+8,  &t_3, 4);
-    memcpy(p+12, &t_4, 4);
+    UuidCreate(&u);
 #endif /* WIN32 */
 }
 
 // conversion of UUID to printable form.
-void BibleSync::uuid_dump(uuid_t u, char *destination)
+void BibleSync::uuid_dump(uuid_t &u, char *destination)
 {
-    unsigned char *s = (unsigned char *)u;
+    unsigned char *s = (unsigned char *)&u;
     snprintf((char *)destination, BSP_UUID_PRINT_LENGTH,
 	     "%02x%02x%02x%02x-%02x%02x-%02x%02x-%02x%02x-%02x%02x%02x%02x%02x%02x",
 	      s[0],  s[1],  s[2],  s[3],  s[4],  s[5],  s[6],  s[7],
@@ -443,9 +423,11 @@ int BibleSync::ReceiveInternal()
 		{
 		    // loopback is enabled: reject self-uuid packets.
 		    unsigned int i;
+		    unsigned char *incoming = (unsigned char *)&uuid;
+		    unsigned char *mine     = (unsigned char *)&bsp.uuid;
 		    for (i = 0; i < sizeof(uuid_t); ++i)
 		    {
-			if (uuid[i] != bsp.uuid[i])
+			if (incoming[i] != mine[i])
 			    break;	// not ourselves.
 		    }
 		    // if we end the loop without early break,
@@ -629,7 +611,7 @@ BibleSync_xmit_status BibleSync::Transmit(char message_type,
     bsp.msg_type = message_type;
     bsp.num_packets = 1;
     bsp.index_packet = 0;
-    memcpy((void *)&bsp.uuid, (const void *)uuid, sizeof(uuid_t));
+    memcpy((void *)&bsp.uuid, (const void *)&uuid, sizeof(uuid_t));
     memset((void *)&bsp.reserved, 0, BSP_RES_SIZE);
 
     // body prep.
