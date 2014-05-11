@@ -96,15 +96,18 @@ BibleSync::~BibleSync()
 
 // mode choice and setup invocation.
 BibleSync_mode BibleSync::setMode(BibleSync_mode m,
-				  string p,
-				  BibleSync_navigate n)
+				  BibleSync_navigate n,
+				  string p)
 {
     if ((mode == BSP_MODE_DISABLE) ||
 	((mode != BSP_MODE_DISABLE) &&
 	 (n != NULL)))		// oops.
     {
 	mode = m;
-	passphrase = p;
+	if (p != "")
+	{
+	    passphrase = p;			// use existing.
+	}
 	nav_func = n;
 	if (mode == BSP_MODE_DISABLE)
 	    Shutdown();
