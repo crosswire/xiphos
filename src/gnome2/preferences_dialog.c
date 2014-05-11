@@ -998,6 +998,7 @@ on_radiobutton_biblesync_mode(GtkToggleButton * togglebutton,
 			on_checkbutton_biblesync_toggled(
 			    GTK_TOGGLE_BUTTON(check_button.bs_privacy),
 			    &settings.bs_privacy);
+			main_biblesync_privacy(settings.bs_privacy);
 		}
 		else
 		{
