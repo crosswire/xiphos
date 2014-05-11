@@ -298,8 +298,8 @@ public:
 
     // operation.
     BibleSync_mode setMode(BibleSync_mode m,
-			   string p = "",
-			   BibleSync_navigate n = NULL);
+			   BibleSync_navigate n = NULL,
+			   string p = "");
     inline BibleSync_mode getMode(void) { return mode; };
 
     // obtain passphrase, for default choice.

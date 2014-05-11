@@ -2112,7 +2112,7 @@ main_biblesync_mode_select(int m, char *p)
     }
     if (mode != N_BSP_MODE)
     {
-	if (((mode = biblesync->setMode(mode, p, main_biblesync_navigate))
+	if (((mode = biblesync->setMode(mode, main_biblesync_navigate, p))
 	     != BSP_MODE_DISABLE) &&
 	    (old_mode == BSP_MODE_DISABLE))
 	{
