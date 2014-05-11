@@ -998,7 +998,6 @@ on_radiobutton_biblesync_mode(GtkToggleButton * togglebutton,
 			on_checkbutton_biblesync_toggled(
 			    GTK_TOGGLE_BUTTON(check_button.bs_privacy),
 			    &settings.bs_privacy);
-			main_biblesync_privacy(settings.bs_privacy);
 		}
 		else
 		{
@@ -1029,12 +1028,7 @@ on_biblesync_kbd(int mode)
 {
 	int new_mode;
 
-	if ((settings.bs_mode = mode) != 0)
-	{
-		g_free(settings.bs_passphrase);
-		settings.bs_passphrase =
-		    on_biblesync_obtain_passphrase();
-	}
+	settings.bs_mode = mode;
 	new_mode = main_biblesync_mode_select(settings.bs_mode,
 					      settings.bs_passphrase);
 
@@ -1042,6 +1036,21 @@ on_biblesync_kbd(int mode)
 	{
 		gui_generic_warning(_("Mode selection failed.\n"));
 		settings.bs_mode = new_mode;
+	}
+	else
+	{
+	    gchar *msg = g_strdup_printf
+		(_("BibleSync: %s mode (passphrase \"%s\")."),
+		 ((mode == 0)
+		  ? _("Disabled")
+		  : ((mode == 1)
+		     ? _("Personal")
+		     : ((mode == 2)
+			? _("Speaker")
+			: _("Audience")))),
+		    settings.bs_passphrase);
+	    gui_set_statusbar(msg);
+	    g_free(msg);
 	}
 }
 
