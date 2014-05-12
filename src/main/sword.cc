@@ -72,7 +72,7 @@ extern "C" {
 
 #include "backend/sword_main.hh"
 #include "backend/gs_stringmgr.h"
-#include "backend/biblesync.hh"
+#include "biblesync/biblesync.hh"
 
 #include "gui/debug_glib_null.h"
 
