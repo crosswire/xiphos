@@ -459,7 +459,7 @@ def build(bld):
     else:
         bld.add_subdirs('src/biblesync')
         # following is repulsive. why doesn't it link on its own? how was it lost?
-        env['LINKFLAGS'] = ['default/src/biblesync/biblesync_1.o']
+        env.prepend_value('LINKFLAGS', 'default/src/biblesync/biblesync_1.o')
 
     bld.add_subdirs('src/webkit')
             
