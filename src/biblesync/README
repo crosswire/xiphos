@@ -1,0 +1,5 @@
+These files, biblesync.{cc,hh}, are the last commits of the BibleSync code
+before it was removed from Xiphos itself so as to become its own
+independent library.  They are used iff libbiblesync.so is not available.
+When BibleSync becomes a readily-available library, it will be removed
+from Xiphos' source tree.

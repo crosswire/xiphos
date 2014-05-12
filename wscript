@@ -381,6 +381,16 @@ def configure(conf):
                    mandatory=True)
     env.append_value('ALL_LIBS', 'SWORD')
 
+    if conf.check_cfg(package='biblesync',
+                      msg='Checking for BibleSync',
+                      okmsg='ok',
+                      errmsg='No. Using local (possibly out of date) version.'):
+        env['HAVE_BIBLESYNC'] = True
+        dfn('HAVE_BIBLESYNC', 1)
+    else:
+        env['HAVE_BIBLESYNC'] = False
+        dfn('HAVE_BIBLESYNC', 0)
+
     if not env["IS_WIN32"]:
         conf.check_cfg(package='uuid',
                        args='--cflags --libs',
@@ -443,6 +453,13 @@ def build(bld):
         src/xiphos_html
         ui
     """)
+
+    if env['HAVE_BIBLESYNC']:
+        env.append_value('ALL_LIBS', 'biblesync')
+    else:
+        bld.add_subdirs('src/biblesync')
+        # following is repulsive. why doesn't it link on its own? how was it lost?
+        env['LINKFLAGS'] = ['default/src/biblesync/biblesync_1.o']
 
     bld.add_subdirs('src/webkit')
             
