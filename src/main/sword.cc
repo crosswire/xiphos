@@ -1268,44 +1268,11 @@ void main_display_bible(const char * mod_name,
 			gui_keep_parallel_dialog_in_sync();
 	}
 
-	//
-	// BibleSync.
-	//
-	if (!settings.bs_receiving &&		// no re-xmit of recv'd nav.
-	    ((biblesync->getMode() == BSP_MODE_PERSONAL) ||
-	     (biblesync->getMode() == BSP_MODE_SPEAKER)))
-	    // audience does not xmit nav.
-	{
-	    sync_windows();		// update display for current page
-
-	    string group = "1";		// default if determination fails.
-	    char pchar[2];
-	    gint pagenum = (cur_passage_tab
-			    ? gtk_notebook_page_num(
-				    GTK_NOTEBOOK(widgets.notebook_main),
-				    cur_passage_tab->page_widget)
-			    : 1);
-
-	    if ((pagenum != -1) && (pagenum < 9))
-	    {
-		pchar[0] = pagenum + '1';		// 0-based list.
-		pchar[1] = '\0';
-		group = (string)pchar;
-	    }
-
-	    // ** this key is not to be freed. **
-	    char *osis_key = (char *)main_get_osisref_from_key(mod_name, key);
-	    biblesync->Transmit(BSP_SYNC,
-				(string)mod_name, (string)osis_key,
-				(string)"", group);
-	}
-	// -- BibleSync --
+	main_biblesync_prep_and_xmit(mod_name, key);
 
 	if (adjustment)
 		g_signal_handler_unblock(adjustment, scroll_adj_signal);
 }
-
-
 
 
 /******************************************************************************
@@ -2253,4 +2220,50 @@ void main_biblesync_transmit_verse_list(char *modname, char *vlist)
 void main_biblesync_privacy(gboolean privacy)
 {
     biblesync->setPrivate(privacy);
+}
+
+
+/******************************************************************************
+ * Name
+ *   main_biblesync_prep_and_xmit()
+ *
+ * Synopsis
+ *   #include "main/sword.h"
+ *   void main_biblesync_prep_and_xmit(void)
+ *
+ * Description
+ *   regular xmit of user's current nav point.
+ *
+ * Return value
+ *   void
+ */
+
+void main_biblesync_prep_and_xmit(const char *mod_name, const char *key)
+{
+    if (!settings.bs_receiving &&		// no re-xmit of recv'd nav.
+	((biblesync->getMode() == BSP_MODE_PERSONAL) ||
+	 (biblesync->getMode() == BSP_MODE_SPEAKER)))
+	// audience does not xmit nav.
+    {
+	string group = "1";		// default if determination fails.
+	char pchar[2];
+	gint pagenum = (cur_passage_tab
+			? gtk_notebook_page_num(
+			    GTK_NOTEBOOK(widgets.notebook_main),
+			    cur_passage_tab->page_widget)
+			: 1);
+
+	if ((pagenum != -1) && (pagenum < 9))
+	{
+	    pchar[0] = pagenum + '1';		// 0-based list.
+	    pchar[1] = '\0';
+	    group = (string)pchar;
+	}
+
+	// ** this key is not to be freed. **
+	char *osis_key = (char *)main_get_osisref_from_key(mod_name, key);
+	biblesync->Transmit(BSP_SYNC,
+			    (string)mod_name, (string)osis_key,
+			    (string)"", group);
+    }
 }
