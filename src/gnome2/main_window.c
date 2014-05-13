@@ -670,6 +670,25 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 		else if (state == GDK_SHIFT_MASK) // N book
 			access_on_down_eventbox_button_release_event
 			    (BOOK_BUTTON);
+		else if (state == (GDK_CONTROL_MASK|GDK_MOD1_MASK|GDK_SHIFT_MASK))
+		{				// BSP transient navigate
+		    gboolean restore = FALSE;
+		    int old = settings.bs_mode;
+
+		    if (!main_biblesync_active_xmit_allowed())
+		    {
+			restore = TRUE;
+			main_biblesync_mode_select(1, settings.bs_passphrase);
+		    }
+
+		    main_biblesync_prep_and_xmit(settings.MainWindowModule,
+						 settings.currentverse);
+
+		    if (restore)
+		    {
+			main_biblesync_mode_select(old, settings.bs_passphrase);
+		    }
+		}
 		break;
 
 	case XK_o:
