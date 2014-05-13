@@ -134,6 +134,8 @@ int main_biblesync_active_xmit_allowed();
 const char *main_biblesync_get_passphrase();
 void main_biblesync_transmit_verse_list(char *modname, char *vlist);
 void main_biblesync_privacy(gboolean privacy);
+void main_biblesync_prep_and_xmit(const char *mod_name, const char *key);
+
 #ifdef __cplusplus
 }
 #endif

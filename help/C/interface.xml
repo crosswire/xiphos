@@ -839,4 +839,36 @@
 				</para>
 			</listitem>
 		</itemizedlist>
+		<para>
+		BibleSync:
+		</para>
+		<itemizedlist>
+			<listitem>
+				<para>
+					<guibutton>Ctrl-Alt-Shift-P</guibutton> puts BibleSync into Personal mode.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<guibutton>Ctrl-Alt-Shift-S</guibutton> puts BibleSync into Speaker mode.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<guibutton>Ctrl-Alt-Shift-A</guibutton> puts BibleSync into Audience mode.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<guibutton>Ctrl-Alt-Shift-O</guibutton> turns off BibleSync.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<guibutton>Ctrl-Alt-Shift-N</guibutton> causes BibleSync to navigate your current main window point
+					transiently as a one-shot event.  If BibleSync is not already enabled at the time, BibleSync is momentarily
+					enabled in Personal mode, navigation is sent, and the previous mode is restored.
+				</para>
+			</listitem>
+		</itemizedlist>
 	</sect2>

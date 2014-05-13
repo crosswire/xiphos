@@ -105,12 +105,12 @@
 		If you use a firewall, you must punch a hole in it for UDP port 22272.
 		</para>
 		<para>
-		You can send a verse list from the sidebar search or Advanced Search Window via BibleSync; see the context (right-click) menu.  A
+		You can send a verse list from the sidebar search or Advanced Search window via BibleSync; see the context (right-click) menu.  A
 		particularly good use case for this is when using a simpler Bible program, such as on a mobile device, with another, such as
 		<application>Xiphos</application> that has significant search capability: Do searches in <application>Xiphos</application> and send
 		the resulting verse list to the mobile device.  Be aware that size limitations on the protocol are small, and though a search may
 		generate hundreds of results in the verse list, at most a few dozen will pass in the protocol to the receivers.  Multi-references
-		always induce verse list usage.
+		always induce indirect verse list navigation.
 		</para>
 		<para>
 		<application>Xiphos</application> is the first Bible program with a BibleSync implementation; as such, its utility may be limited for
