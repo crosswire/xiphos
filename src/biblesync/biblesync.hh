@@ -20,6 +20,8 @@
 // BIBLESYNC IS EXTRICATED TO AN INDEPENDENT LIBRARY.
 #include <glib/gi18n.h>
 
+#include "biblesync-version.hh"
+
 //
 // Bible Sync Protocol.
 // http://biblesyncprotocol.wikispaces.com/
