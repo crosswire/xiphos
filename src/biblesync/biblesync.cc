@@ -55,10 +55,10 @@ static string outbound_fill[] = {
 // BibleSync class constructor.
 // args identify the user of the class, by application, version, and user.
 BibleSync::BibleSync(string a, string v, string u)
-    : application(a),
+    : BibleSync_version(BIBLESYNC_VERSION_STR),
+      application(a),
       version(v),
       user(u),
-      BibleSync_version(BIBLESYNC_VERSION_STR),
       receiving(false),
       mode(BSP_MODE_DISABLE),
       nav_func(NULL),
