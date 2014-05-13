@@ -381,15 +381,12 @@ def configure(conf):
                    mandatory=True)
     env.append_value('ALL_LIBS', 'SWORD')
 
-    if conf.check_cfg(package='biblesync',
-                      msg='Checking for BibleSync',
-                      okmsg='ok',
-                      errmsg='No. Using local (possibly out of date) version.'):
-        env['HAVE_BIBLESYNC'] = True
-        dfn('HAVE_BIBLESYNC', 1)
-    else:
-        env['HAVE_BIBLESYNC'] = False
-        dfn('HAVE_BIBLESYNC', 0)
+    conf.check_cfg(package='biblesync',
+                   args='"biblesync >= 1.0.0" --cflags --libs',
+                   uselib_store='BIBLESYNC',
+                   errmsg='no: using local (possibly out of date) version.',
+                   mandatory=False)
+    env.append_value('ALL_LIBS', 'BIBLESYNC')
 
     if not env["IS_WIN32"]:
         conf.check_cfg(package='uuid',
@@ -454,9 +451,7 @@ def build(bld):
         ui
     """)
 
-    if env['HAVE_BIBLESYNC']:
-        env.append_value('ALL_LIBS', 'biblesync')
-    else:
+    if not env['HAVE_BIBLESYNC']:
         bld.add_subdirs('src/biblesync')
         # following is repulsive. why doesn't it link on its own? how was it lost?
         env.prepend_value('LINKFLAGS', 'default/src/biblesync/biblesync_1.o')
