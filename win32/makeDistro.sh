@@ -104,6 +104,7 @@ EOF
 
 # gtk & webkit version-specific files begin the list.
 for f in libsword.dll \
+	'../*/libbiblesync.dll' \
 	libglade-2.0-0.dll \
 	libgailutil-18.dll libgtk-win32-2.0-0.dll libgtkhtml-3.14-19.dll libgtkhtml-editor-3.14-0.dll \
 	libjavascriptcoregtk-1.0-0.dll libwebkitgtk-1.0-0.dll \
@@ -129,7 +130,7 @@ for f in libsword.dll \
 	gspawn-win32-helper.exe gspawn-win32-helper-console.exe
 do
     echo "Copying and stripping ${f}"
-    cp ${sworddir}${f} ${outdir}bin/${f}
+    cp ${sworddir}${f} ${outdir}bin/`basename ${f}`
     #strip -o ${outdir}bin/${f} ${sworddir}${f}
 done
 
