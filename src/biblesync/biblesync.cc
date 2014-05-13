@@ -19,7 +19,7 @@
 
 using namespace std;
 
-#include <biblesync.hh>
+#include "biblesync.hh"
 
 // sync is a proper superset of announce,
 // both inbound as well as outbound.
@@ -58,6 +58,7 @@ BibleSync::BibleSync(string a, string v, string u)
     : application(a),
       version(v),
       user(u),
+      BibleSync_version(BIBLESYNC_VERSION_STR),
       receiving(false),
       mode(BSP_MODE_DISABLE),
       nav_func(NULL),
