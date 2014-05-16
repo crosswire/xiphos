@@ -711,6 +711,8 @@ bool BibleSync::setPrivate(bool privacy)
 
 #ifndef WIN32
 
+#ifdef linux
+
 // routines below imported from the net as workable examples.
 // in order to do multicast setup, we require the address
 // of the interface that has our default route.  code below
@@ -919,6 +921,47 @@ void BibleSync::InterfaceAddress()
     }
     return;
 }
+
+#else /* linux */
+
+// Solaris & BSD.
+
+//
+// this seeming grotesqueness is in fact the most general command
+// that could be found which finds the interface holding the default
+// route and then collects that interface's address.  handles both
+// solaris and bsd.  in fact, it suffices for linux as well, but
+// we're leaving the existing code above in place for linux, if for
+// no other reason than that it's more likely that someone will
+// foolishly screw up ifconfig output format in the linux world.
+//
+#define	ADDRESS	"PATH=/sbin:/usr/sbin:/bin:/usr/bin " \
+		"ifconfig \"`netstat -rn | egrep '^0\\.0\\.0\\.0|^default' | " \
+		"tr ' ' '\\n' | sed -e '/^$/d' | tail -1`\" | grep 'inet ' | " \
+		"tr ' ' '\\n' | grep '^[0-9.][0-9.]*$' | head -1 | tr -d '\\n'"
+
+void BibleSync::InterfaceAddress()
+{
+    // cancel any old interface value.
+    // we must fail with current info, if at all.
+    interface_addr.s_addr = htonl(0x7f000001);	// 127.0.0.1 fallback
+
+    FILE *c;
+
+    if ((c = popen(ADDRESS, "r")) != NULL)
+    {
+	char addr_string[32];
+
+	fscanf(c, "%30s", addr_string);
+	interface_addr.s_addr = inet_addr(addr_string);
+
+	pclose(c);
+    }
+
+    return;
+}
+
+#endif /* linux */
 
 #else	/* WIN32 */
 
