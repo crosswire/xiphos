@@ -242,6 +242,7 @@ int settings_init(int argc, char **argv, int new_configs, int new_bookmarks)
 	settings.bs_presence   = FALSE;
 	settings.bs_mismatch   = FALSE;
 	settings.bs_receiving  = FALSE;
+	settings.bs_listen_set = 0;	// "some"
 	settings.bs_passphrase = g_strdup("BibleSync");
 
 	/* if the user had forced a locale, we must set it now. */

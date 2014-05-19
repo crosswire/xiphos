@@ -60,6 +60,7 @@ BibleSync::BibleSync(string a, string v, string u)
       version(v),
       user(u),
       receiving(false),
+      beacon_countdown(0),
       mode(BSP_MODE_DISABLE),
       nav_func(NULL),
       passphrase("BibleSync"),
@@ -89,8 +90,6 @@ BibleSync::BibleSync(string a, string v, string u)
 // kill it all off.
 BibleSync::~BibleSync()
 {
-    nav_func = NULL;
-    mode = BSP_MODE_DISABLE;
     if ((client_fd >= 0) || (server_fd >= 0))
 	Shutdown();
 }
@@ -126,6 +125,20 @@ BibleSync_mode BibleSync::setMode(BibleSync_mode m,
 			BSP + _("network setup errors."), result);
 	Shutdown();
     }
+
+    // nav xmitters also xmit periodic beacons.
+    // send one soon...but not right this instant.
+    // otherwise cancel it.
+    beacon_countdown = ((mode == BSP_MODE_PERSONAL) ||
+			(mode == BSP_MODE_SPEAKER))
+	? 2 : 0;
+
+    // going to speaker mode means speaker list has become irrelevant.
+    if (mode == BSP_MODE_SPEAKER)
+    {
+	clearSpeakers();
+    }
+
     return mode;
 }
 
@@ -259,9 +272,15 @@ string BibleSync::Setup()
 // disposal of network access.
 void BibleSync::Shutdown()
 {
+    // managed speaker list shutdown.
+    clearSpeakers();
+
+    // network shutdown.
     close(server_fd);
     close(client_fd);
     server_fd = client_fd = -1;
+
+    // internal shutdown.
     mode = BSP_MODE_DISABLE;
     nav_func = NULL;
 }
@@ -286,7 +305,7 @@ void BibleSync::uuid_dump(uuid_t &u, char *destination)
 	      s[8],  s[9], s[10], s[11], s[12], s[13], s[14], s[15]);
 }
 
-// receiver, generally from C.
+// receiver, object-less, generally from C.
 // to be called with "myself" as userdata.
 // this exists so as to be able to dive from object-less C context
 // into C++ context with reference to "this", the BibleSync object.
@@ -315,7 +334,7 @@ int BibleSync::ReceiveInternal()
     // nav_func unset => no point trying; no network => just leave.
     if ((nav_func == NULL) || (server_fd < 0))
 	return TRUE;
-    
+
     char dump[DEBUG_LENGTH];
     struct sockaddr_in source;
     BibleSyncMessage bsp;
@@ -335,10 +354,12 @@ int BibleSync::ReceiveInternal()
 		 inet_ntoa(source.sin_addr),
 		 ntohl(bsp.magic), bsp.version,
 		 bsp.msg_type, ((bsp.msg_type == BSP_ANNOUNCE)
-				   ? "announce"
-				   : ((bsp.msg_type == BSP_SYNC)
-				      ? "sync"
-				      : "*???*")),
+				? "announce"
+				: ((bsp.msg_type == BSP_SYNC)
+				   ? "sync"
+				   : ((bsp.msg_type == BSP_BEACON)
+				      ? "beacon"
+				      : "*???*"))),
 		 uuid_dump_string,
 		 bsp.num_packets, bsp.index_packet,
 		 bsp.body);
@@ -351,7 +372,8 @@ int BibleSync::ReceiveInternal()
 	    (*nav_func)('E', EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
 			BSP + _("bad protocol version"), (string)dump);
 	else if ((bsp.msg_type != BSP_ANNOUNCE) &&
-		 (bsp.msg_type != BSP_SYNC))
+		 (bsp.msg_type != BSP_SYNC) &&
+		 (bsp.msg_type != BSP_BEACON))
 	    (*nav_func)('E', EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
 			BSP + _("bad msg type"), (string)dump);
 	else if (bsp.num_packets != 1)
@@ -407,9 +429,9 @@ int BibleSync::ReceiveInternal()
 	    else
 	    {
 		// verify minimum body content.
-		int field_count = ((bsp.msg_type == BSP_ANNOUNCE)
-				   ? BSP_FIELDS_RECV_ANNOUNCE
-				   : BSP_FIELDS_RECV_SYNC);
+		int field_count = ((bsp.msg_type == BSP_SYNC)
+				   ? BSP_FIELDS_RECV_SYNC
+				   : BSP_FIELDS_RECV_ANNOUNCE);	// or beacon.
 
 		for (int i = 0; i < field_count; ++i)
 		{
@@ -452,6 +474,17 @@ int BibleSync::ReceiveInternal()
 			info = "<>";
 		    char cmd;
 
+		    // find listening status for this guy.
+		    string pkt_uuid = content.find(BSP_APP_INSTANCE_UUID)->second;
+		    BibleSyncSpeakerMapIterator object = speakers.find(pkt_uuid);
+		    bool listening = ((object != speakers.end())
+				      ? object->second.listen
+				      : false);	// not in map => probably ignore.
+		    
+		    string version = content.find(BSP_APP_VERSION)->second;
+		    if (version == "")
+			version = (string)"(version?)";
+		
 		    // generally good, so extract interesting content.
 		    if (bsp.msg_type == BSP_SYNC)
 		    {
@@ -477,11 +510,11 @@ int BibleSync::ReceiveInternal()
 				+ _("Invalid group: ")
 				+ group;
 			}
-			else if ((passphrase ==
-			     content.find(BSP_MSG_PASSPHRASE)->second) &&
-			    ((mode == BSP_MODE_PERSONAL) ||
-			     (mode == BSP_MODE_AUDIENCE)))
-			    // speaker accepts no navigation.
+			else if (((mode == BSP_MODE_PERSONAL) ||  // (receiver ||
+				  (mode == BSP_MODE_AUDIENCE)) && //  receiver) &&
+				 listening &&			  // being heard &&
+				 (passphrase ==			  // match
+				  content.find(BSP_MSG_PASSPHRASE)->second))
 			{
 			    cmd = 'N';	// navigation
 			}
@@ -495,10 +528,13 @@ int BibleSync::ReceiveInternal()
 				+ "]";
 			}
 		    }
-		    else
+		    else if (bsp.msg_type == BSP_ANNOUNCE)
 		    {
 			// construct user's presence announcement
-			string version = content.find(BSP_APP_VERSION)->second;
+			bible  = content.find(BSP_APP_USER)->second;
+			ref    = (string)"[" + inet_ntoa(source.sin_addr) + "]";
+			group  = content.find(BSP_APP_NAME)->second;
+			domain = version;
 
 			alt = BSP
 			    + content.find(BSP_APP_USER)->second
@@ -507,38 +543,91 @@ int BibleSync::ReceiveInternal()
 			    + _("]\nusing ")
 			    + content.find(BSP_APP_NAME)->second
 			    + " "
-			    + ((version != "") ? version : (string)"(version?)")
+			    + domain	// version.
 			    + ".";
+
+			info = (string)"announce: "
+			    + content.find(BSP_APP_USER)->second
+			    + " @ ["
+			    + inet_ntoa(source.sin_addr)
+			    + "]";
+
+			cmd = ((passphrase ==
+				content.find(BSP_MSG_PASSPHRASE)->second)
+			       ? 'A'	// presence announcement
+			       : 'M');	// mismatch
+		    }
+		    else // bsp.msg_type == BSP_BEACON
+		    {
+			alt    = pkt_uuid;
+
 			bible  = content.find(BSP_APP_USER)->second;
 			ref    = (string)"[" + inet_ntoa(source.sin_addr) + "]";
 			group  = content.find(BSP_APP_NAME)->second;
-			domain = ((version != "") ? version : (string)"(version?)");
+			domain = version;
+
+			info = (string)"beacon: "
+			    + content.find(BSP_APP_USER)->second
+			    + " @ ["
+			    + inet_ntoa(source.sin_addr)
+			    + "]";
+
 			if (passphrase ==
 			    content.find(BSP_MSG_PASSPHRASE)->second)
 			{
-			    cmd = 'A';	// presence announcement
+			    cmd = ((object == speakers.end())
+				   ? 'S'	// unknown: potential speaker.
+				   : 'x');	// known: don't tell app again.
+
+			    unsigned int old_speakers_size = speakers.size();
+
+			    // whether previously known or not,
+			    // a beacon (re)starts the aging countdown.
+			    speakers[pkt_uuid].countdown =
+				BSP_BEACON_COUNT * BSP_BEACON_MULTIPLIER + 1;
+
+			    // for new speakers:
+			    // we listen to 1st speaker by default.
+			    // we ignore everyone else by default.
+			    if ((old_speakers_size == 0) &&
+				(speakers.size() == 1))
+			    {
+				speakers[pkt_uuid].listen = true;
+			    }
+			    else if (old_speakers_size != speakers.size())
+			    {
+				speakers[pkt_uuid].listen = false;
+			    }
 			}
 			else
 			{
-			    cmd = 'M';	// mismatch
-			    info = (string)"announce: "
-				+ content.find(BSP_APP_USER)->second
-				+ " @ ["
-				+ inet_ntoa(source.sin_addr)
-				+ "]";
+			    cmd = 'M';		// mismatch.
 			}
 		    }
 
 		    // delivery to application.
-		    receiving = true;			// re-xmit lock.
-		    (*nav_func)(cmd,
-				bible, ref, alt, group, domain,
-				info, (string)dump);
-		    receiving = false;			// re-xmit unlock.
+		    if (cmd != 'x')
+		    {
+			receiving = true;			// re-xmit lock.
+			(*nav_func)(cmd,
+				    bible, ref, alt, group, domain,
+				    info, (string)dump);
+			receiving = false;			// re-xmit unlock.
+		    }
 		}
 	    }
 	}
+    }
 
+    // beacon-related tasks: others' aging and sending our beacon.
+    ageSpeakers(speakers.begin());
+
+    if (((mode == BSP_MODE_PERSONAL) ||
+	 (mode == BSP_MODE_SPEAKER)) &&
+	(--beacon_countdown == 0))
+    {
+	Transmit(BSP_BEACON);
+	beacon_countdown = BSP_BEACON_COUNT;
     }
 
     return TRUE;
@@ -596,18 +685,24 @@ BibleSync_xmit_status BibleSync::Transmit(char message_type,
 					  string group,
 					  string domain)
 {
-    if (receiving)
+    if (mode == BSP_MODE_DISABLE)
+	return BSP_XMIT_FAILED;
+
+    if (receiving && (message_type == BSP_SYNC))
 	return BSP_XMIT_RECEIVING;	// if this occurs, app re-xmit'd. *NO*.
-    
+
     if (client_fd < 0)
 	return BSP_XMIT_NO_SOCKET;
 
-    if ((message_type != BSP_ANNOUNCE) && (message_type != BSP_SYNC))
+    if ((message_type != BSP_ANNOUNCE) &&
+	(message_type != BSP_SYNC) &&
+	(message_type != BSP_BEACON))
 	return BSP_XMIT_BAD_TYPE;
-    
-    if ((mode == BSP_MODE_AUDIENCE) && (message_type == BSP_SYNC))
+
+    if ((mode == BSP_MODE_AUDIENCE) &&
+	((message_type == BSP_SYNC) || (message_type == BSP_BEACON)))
 	return BSP_XMIT_NO_AUDIENCE_XMIT;
-    
+
     BibleSyncContent content;
     BibleSyncMessage bsp;
     string body = "";
@@ -636,9 +731,9 @@ BibleSync_xmit_status BibleSync::Transmit(char message_type,
     memset((void *)&bsp.reserved, 0, BSP_RES_SIZE);
 
     // body prep.
-    int field_count = ((message_type == BSP_ANNOUNCE)
-		       ? BSP_FIELDS_XMIT_ANNOUNCE
-		       : BSP_FIELDS_XMIT_SYNC);
+    int field_count = ((message_type == BSP_SYNC)
+		       ? BSP_FIELDS_XMIT_SYNC
+		       : BSP_FIELDS_XMIT_ANNOUNCE);	// or beacon.
 
     for (int i = 0; i < field_count; ++i)
     {
@@ -661,7 +756,9 @@ BibleSync_xmit_status BibleSync::Transmit(char message_type,
 			    ? "announce"
 			    : ((bsp.msg_type == BSP_SYNC)
 			       ? "sync"
-			       : "*???*")),
+			       : ((bsp.msg_type == BSP_BEACON)
+				  ? "beacon"
+				  : "*???*"))),
 	     uuid_dump_string,
 	     bsp.num_packets, bsp.index_packet,
 	     bsp.body);
@@ -708,6 +805,61 @@ bool BibleSync::setPrivate(bool privacy)
 		       (char *)&ttl, sizeof(ttl)) >= 0);
 }
 
+//
+// user decision to listen or not to a certain speaker.
+// speakerkey is the UUID as given during (*nav_func)('S', ...).
+//
+void BibleSync::listenToSpeaker(bool listen, string speakerkey)
+{
+    BibleSyncSpeakerMapIterator object = speakers.find(speakerkey);
+
+    if (object != speakers.end())
+    {
+	object->second.listen = listen;
+    }
+}
+
+//
+// called from ReceiveInternal().  ages entries by one, waiting
+// to reach zero.  on zero, call (*nav_func)('D', ...) to inform
+// the app that the speaker is dead, then eliminate the element.
+// initial call uses speakers.begin().
+//
+void BibleSync::ageSpeakers(BibleSyncSpeakerMapIterator object)
+{
+    if (object != speakers.end())
+    {
+	ageSpeakers(++object);
+
+	if (--(object->second.countdown) == 0)
+	{
+	    (*nav_func)('D', EMPTY, EMPTY, object->first, EMPTY, EMPTY,
+			EMPTY, EMPTY);
+	    speakers.erase(object);
+	}
+    }
+}
+
+//
+// unconditionally wipe the set of speakers clean.
+// first, tell the app about each one, then clear.
+// used when leaving Personal or Audience mode.
+//
+void BibleSync::clearSpeakers()
+{
+    if (nav_func != NULL)
+    {
+	for (BibleSyncSpeakerMapIterator object = speakers.begin();
+	     object != speakers.end();
+	     ++object)
+	{
+	    (*nav_func)('D', EMPTY, EMPTY, object->first, EMPTY, EMPTY,
+			EMPTY, EMPTY);
+	}
+    }
+
+    speakers.clear();
+}
 
 #ifndef WIN32
 
@@ -897,7 +1049,7 @@ void BibleSync::InterfaceAddress()
     (void)get_default_if_name(gw_if, 100);
 
     // if no error, search the interface list for that address.
-    if (gw_if[1] != '\0')
+    if (gw_if[0] != '\0')
     {
 	struct ifaddrs *ifaddr, *ifa;
 

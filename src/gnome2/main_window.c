@@ -31,6 +31,7 @@
 #include "main/xml.h"
 #include "main/search_dialog.h"
 #include "main/url.hh"
+#include "main/biblesync_glue.h"
 
 #include "gui/xiphos.h"
 #include "gui/main_window.h"
@@ -675,18 +676,18 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 		    gboolean restore = FALSE;
 		    int old = settings.bs_mode;
 
-		    if (!main_biblesync_active_xmit_allowed())
+		    if (!biblesync_active_xmit_allowed())
 		    {
 			restore = TRUE;
-			main_biblesync_mode_select(1, settings.bs_passphrase);
+			biblesync_mode_select(1, settings.bs_passphrase);
 		    }
 
-		    main_biblesync_prep_and_xmit(settings.MainWindowModule,
-						 settings.currentverse);
+		    biblesync_prep_and_xmit(settings.MainWindowModule,
+					    settings.currentverse);
 
 		    if (restore)
 		    {
-			main_biblesync_mode_select(old, settings.bs_passphrase);
+			biblesync_mode_select(old, settings.bs_passphrase);
 		    }
 		}
 		break;
