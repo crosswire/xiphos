@@ -60,6 +60,7 @@
 #include "main/sidebar.h"
 #include "main/xml.h"
 #include "main/url.hh"
+#include "main/biblesync_glue.h"
 
 #include "gui/debug_glib_null.h"
 
@@ -895,7 +896,7 @@ gchar *on_biblesync_obtain_passphrase()
 
 	info->stock_icon = GTK_STOCK_DIALOG_WARNING;
 	info->label_top = g_strdup(_("BibleSync session passphrase"));
-	info->text1 = g_strdup(main_biblesync_get_passphrase());
+	info->text1 = g_strdup(biblesync_get_passphrase());
 	info->label1 = _("Phrase:");
 	info->ok = TRUE;
 
@@ -931,7 +932,7 @@ on_checkbutton_biblesync_toggled(GtkToggleButton * togglebutton,
 {
 	*((int *)user_data) = gtk_toggle_button_get_active(togglebutton);
 	if (user_data == &settings.bs_privacy)
-		main_biblesync_privacy(settings.bs_privacy);
+		biblesync_privacy(settings.bs_privacy);
 }
 
 /******************************************************************************
@@ -966,8 +967,8 @@ on_radiobutton_biblesync_mode(GtkToggleButton * togglebutton,
 			settings.bs_passphrase =
 			    on_biblesync_obtain_passphrase();
 		}
-		new_mode = main_biblesync_mode_select(settings.bs_mode,
-						      settings.bs_passphrase);
+		new_mode = biblesync_mode_select(settings.bs_mode,
+						 settings.bs_passphrase);
 		/* selecting active mode enables polled receiver. */
 
 		if (new_mode != settings.bs_mode)
@@ -992,7 +993,7 @@ on_radiobutton_biblesync_mode(GtkToggleButton * togglebutton,
 
 		}
 
-		if (main_biblesync_personal())
+		if (biblesync_personal())
 		{
 			gtk_widget_set_sensitive(check_button.bs_privacy, TRUE);
 			on_checkbutton_biblesync_toggled(
@@ -1029,8 +1030,8 @@ on_biblesync_kbd(int mode)
 	int new_mode;
 
 	settings.bs_mode = mode;
-	new_mode = main_biblesync_mode_select(settings.bs_mode,
-					      settings.bs_passphrase);
+	new_mode = biblesync_mode_select(settings.bs_mode,
+					 settings.bs_passphrase);
 
 	if (new_mode != settings.bs_mode)
 	{
@@ -2254,7 +2255,7 @@ setup_check_buttons(void)
 				     (check_button.bs_privacy),
 				     settings.bs_privacy);
 	gtk_widget_set_sensitive(check_button.bs_privacy,
-				 main_biblesync_personal());
+				 biblesync_personal());
 
 	/* mode */
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON

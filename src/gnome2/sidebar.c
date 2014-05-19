@@ -64,6 +64,7 @@
 #include "main/url.hh"
 #include "main/xml.h"
 #include "main/module_dialogs.h"
+#include "main/biblesync_glue.h"
 
 #include "gui/debug_glib_null.h"
 
@@ -945,7 +946,7 @@ G_MODULE_EXPORT void
 on_send_list_via_biblesync_activate(GtkMenuItem * menuitem,
 				    gpointer user_data)
 {
-    if (main_biblesync_active_xmit_allowed())
+    if (biblesync_active_xmit_allowed())
     {
 	GList *verse;
 	GString *vlist = g_string_new("");
@@ -965,8 +966,8 @@ on_send_list_via_biblesync_activate(GtkMenuItem * menuitem,
 		(settings.MainWindowModule, item->key));
 	    first = FALSE;
 	}
-	main_biblesync_transmit_verse_list(settings.MainWindowModule,
-					   vlist->str);
+	biblesync_transmit_verse_list(settings.MainWindowModule,
+				      vlist->str);
 	g_string_free(vlist, TRUE);
     }
     else

@@ -172,7 +172,8 @@ struct _settings {
 		bs_debug,	// show pkt traces.
 		bs_presence,	// show presence announcements.
 		bs_mismatch,	// show mismatch packets.
-		bs_receiving;	// lock: don't re-xmit what we recv.
+		bs_receiving,	// lock: don't re-xmit what we recv.
+		bs_listen_set;	// 0 = some, 1 = all, 2 = none.
 	char
 		*bs_passphrase;	// session exclusion/isolation.
 
