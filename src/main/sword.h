@@ -124,17 +124,6 @@ const char* main_get_osisref_from_key(const char *module, const char *key);
 const char *main_get_language_map(const char *language);
 char **main_get_module_language_list(void);
 void main_init_language_map(void);
-void main_biblesync_navigate(char cmd,
-			     char *bible, char *verse, char *alt,
-			     char *info, char *dump);
-int main_biblesync_mode_select(int m, char *p);
-int main_biblesync_personal();
-int main_biblesync_active();
-int main_biblesync_active_xmit_allowed();
-const char *main_biblesync_get_passphrase();
-void main_biblesync_transmit_verse_list(char *modname, char *vlist);
-void main_biblesync_privacy(gboolean privacy);
-void main_biblesync_prep_and_xmit(const char *mod_name, const char *key);
 
 #ifdef __cplusplus
 }

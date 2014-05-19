@@ -50,6 +50,7 @@
 #include "main/sword.h"
 #include "main/url.hh"
 #include "main/xml.h"
+#include "main/biblesync_glue.h"
 
 #include "gui/debug_glib_null.h"
 
@@ -1143,7 +1144,7 @@ G_MODULE_EXPORT void
 on_send_list_via_biblesync_advsearch_activate(GtkMenuItem * menuitem,
 					      gpointer user_data)
 {
-    if (main_biblesync_active_xmit_allowed())
+    if (biblesync_active_xmit_allowed())
     {
 	GtkTreeIter iter;
 	GtkTreeModel *model =
@@ -1203,7 +1204,7 @@ on_send_list_via_biblesync_advsearch_activate(GtkMenuItem * menuitem,
 	    valid = gtk_tree_model_iter_next(model, &iter);
 	}
 
-	main_biblesync_transmit_verse_list(module, vlist->str);
+	biblesync_transmit_verse_list(module, vlist->str);
 	g_free(module);
 	g_string_free(vlist, TRUE);
     }

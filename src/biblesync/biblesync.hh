@@ -45,13 +45,14 @@
 //		identify the application, its version, and the user.
 //
 // - mode selection.
-//	setMode(BSP_MODE_xyz, "passphrase", your_void_nav_func);
+//	setMode(BSP_MODE_xyz, your_void_nav_func, "passphrase");
 //		invoke a mode, including net.setup as needed.
 //		xyz = { DISABLE, PERSONAL, SPEAKER, AUDIENCE }.
 //		   DISABLE kills it, shuts off network access.
 //		   PERSONAL is bidirectional.
 //		   SPEAKER xmits only.
 //		   AUDIENCE recvs only.
+//	=> empty passphrase ("") means re-use existing passphrase.
 //	=> for any active mode, the application must then start polling using
 //	   the receiver, BibleSync::Receive(), and stop polling when mode
 //	   goes to DISABLE.  if Receive() is called while disabled, it will
@@ -64,19 +65,24 @@
 //		there are 4 your_void_nav_func() use cases, identified in cmd:
 //		1. 'E' (error) for network errors & malformed packets.
 //		   only info + dump are useful.
-//		2. 'M' (mismatch) against passphrase
-//		   info == "announce" or "sync" (+ user@ipaddr)
+//		2. 'M' (mismatch) against passphrase or mode
+//		   info == "announce" or "sync" or "beacon" (+ user @ [ipaddr])
 //			   sync:     bible, ref, alt, group, domain as arrived.
 //			   announce: presence message in alt.
 //			      also, individual elements are also available:
-//			      parameter overload... bible  ref     group  domain
-//						    user   ipaddr  app    version
+//			      overload: bible   ref       group  domain
+//					user    [ipaddr]  app    version
 //		   dump available.
 //		3. 'A' (announce)
 //		   presence message in alt.  dump available.
 //		4. 'N' (navigation)
 //		   bible, ref, alt, group, domain as arrived.
 //		   info + dump available.
+//		5. 'S' (new speaker)
+//		   param overload as above.  alt == sender UUID.
+//		   alt is the SPEAKER-KEY.  see listenToSpeaker().
+//		6. 'D' (dead speaker)
+//		   opposite of new speaker.  only param is alt == UUID.
 //
 // - get current mode.
 //	BibleSync_mode getMode().
@@ -101,6 +107,11 @@
 // - set self as private
 //	bool setPrivate(boolean);
 //	  sets outgoing TTL to zero so no one hears you off-machine.
+//
+// - allow another speaker to drive us
+//	void listenToSpeaker(bool listen, string speakerkey)
+//		say yes/no to listening.
+//		speakerkey was given during nav_func 'S'.
 //
 // Receive() USAGE NOTE:
 // the application must call BibleSync::Receive(YourBibleSyncObjPtr)
@@ -190,8 +201,14 @@ typedef void (*BibleSync_navigate)(char,
 #define	BSP_PROTOCOL	2
 
 // message types
-#define	BSP_ANNOUNCE	1
-#define	BSP_SYNC	2
+#define	BSP_ANNOUNCE	1	// presence announcement.
+#define	BSP_SYNC	2	// navigation synchronization.
+#define	BSP_BEACON	3	// speaker availability beacon.
+// beacon packet is identical to presence announcement except for type.
+
+// beacon constants
+#define	BSP_BEACON_COUNT	10	// xmit every N calls of Receive().
+#define	BSP_BEACON_MULTIPLIER	3	// multiplier for aging to death.
 
 // message content names.
 #define BSP_APP_NAME			"app.name"		// req'd
@@ -213,10 +230,14 @@ typedef void (*BibleSync_navigate)(char,
 #define	BSP_FIELDS_XMIT_ANNOUNCE	7
 #define	BSP_FIELDS_XMIT_SYNC		12
 
-#ifndef WIN32
-#define	BSP_OS	"UNIX/Linux"
+#ifdef linux
+# define	BSP_OS	"Linux"
 #else
-#define	BSP_OS	"Windows"
+# ifdef WIN32
+#  define	BSP_OS	"Windows"
+# else
+#  define	BSP_OS	"UNIX"
+# endif
 #endif
 
 #define	BSP_UUID_PRINT_LENGTH		37	// actually 36, plus '\0'.
@@ -239,6 +260,15 @@ private:
 	char      body[BSP_MAX_PAYLOAD+1];	// +1 for stuffing '\0'.
     } BibleSyncMessage;
 
+    typedef struct _BibleSyncSpeaker {
+	bool      listen;			// nav for this guy?
+	uint8_t   countdown;			// lifetime aging.
+    } BibleSyncSpeaker;
+
+    // key string is origin uuid.
+    typedef std::map < string, BibleSyncSpeaker > BibleSyncSpeakerMap;
+    typedef BibleSyncSpeakerMap::iterator BibleSyncSpeakerMapIterator;
+
     // self identification.
     string BibleSync_version;
 
@@ -251,6 +281,12 @@ private:
     // currently processing received navigation.
     // prevents use of Transmit.
     bool receiving;
+
+    // when xmit-capable, we xmit BSP_BEACON every N calls of Receive().
+    uint8_t beacon_countdown;
+
+    // track currently-known speaker set.
+    BibleSyncSpeakerMap speakers;
 
     // what operational mode we're in.
     BibleSync_mode mode;
@@ -284,18 +320,24 @@ private:
     int ReceiveInternal();		// C++ object context.
     int InitSelectRead(char *, struct sockaddr_in *, BibleSyncMessage *);
 
+    // speaker list management.
+    void ageSpeakers(BibleSyncSpeakerMapIterator object);
+    void clearSpeakers();
+
     // uuid dumper;
     void uuid_dump(uuid_t &u, char *destination);
     char uuid_dump_string[BSP_UUID_PRINT_LENGTH];
     void uuid_gen(uuid_t &u);		// differentiates linux/win32.
 
-#ifndef WIN32
+#ifdef linux
     // network self-analysis, borrowed from the net.
     int get_default_if_name(char *name, socklen_t size);
     int parseRoutes(struct nlmsghdr *nlHdr, struct route_info *rtInfo);
     int readNlSock(int sockFd, char *bufPtr, size_t buf_size,
 		   unsigned int seqNum, unsigned int pId);
-#endif /* !WIN32 */
+#else
+    // no other support routines needed for Windows/Solaris/BSD.
+#endif /* linux */
 
 public:
     BibleSync(string a, string v, string u);
@@ -314,7 +356,7 @@ public:
     inline string getPassphrase(void) { return passphrase; };
 
     // audience receiver
-    static int Receive(void *);	// C context, polled, e.g. from glib timeout
+    static int Receive(void *myself); // assume C context: poll from timeout.
 
     // speaker transmitter
     BibleSync_xmit_status Transmit(char message_type = BSP_SYNC,
@@ -326,6 +368,9 @@ public:
 
     // set privacy using TTL 0 in personal mode.
     bool setPrivate(bool privacy);
+
+    // say whether you want to hear from this speaker.
+    void listenToSpeaker(bool listen, string speakerkey);
 };
 
 #endif // __BIBLESYNC_HH__
