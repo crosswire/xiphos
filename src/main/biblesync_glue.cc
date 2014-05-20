@@ -31,6 +31,7 @@
 #include "gui/widgets.h"
 #include "gui/dialog.h"
 #include "gui/xiphos.h"
+#include "gui/preferences_dialog.h"
 #include "gui/tabbed_browser.h"
 #include "gui/utilities.h"
 
@@ -48,16 +49,9 @@
 
 BibleSync *biblesync;
 
-using namespace sword;
+BSP_SpeakerMap speakers;
 
-typedef struct _speaker {
-    string user;
-    string ipaddr;
-    string app;
-    string version;
-} speaker;
-
-std::map < string, speaker > speakers;
+#define	BSP	(string)"BibleSync: "
 
 /******************************************************************************
  * Name
@@ -81,11 +75,12 @@ biblesync_navigate(char cmd,
 		   string group, string domain,
 		   string info,  string dump)
 {
+    bool speaker_display_update = false;
     string message;
 
     // parameter overload usage.
-    string &presence = alt;
-    string &user = bible, &ipaddr = ref, &app = group, &version = domain;
+    string &presence = alt, &uuid = alt;
+    string &user = bible, &ipaddr = ref, &app = group, &device = domain;
 
     // lockout: prevent re-xmit of what we're processing.
     settings.bs_receiving = TRUE;
@@ -107,7 +102,7 @@ biblesync_navigate(char cmd,
     case 'M':
 	if (settings.bs_mismatch)
 	{
-	    message = "BibleSync: "
+	    message = BSP
 		+ (string)_("Mismatched packet\n\n")
 		+ info
 		+ ((info.substr(0,8) == "announce")
@@ -186,21 +181,81 @@ biblesync_navigate(char cmd,
 	}
 	else
 	{
-	    message = "BibleSync: " + (string)_("Unknown module ") + bible;
+	    message = BSP + _("Unknown module ") + bible;
 	    gui_generic_warning((char *)message.c_str());
 	}
 	break;
 
     // new speaker discovery.
     case 'S':
-	GS_message(("new speaker: u [%s], ip [%s], a [%s], v [%s]",
-		    user.c_str(), ipaddr.c_str(), app.c_str(), version.c_str()));
+	GS_message(("new speaker: u [%s], ip [%s], a [%s], d [%s]",
+		    user.c_str(), ipaddr.c_str(), app.c_str(), device.c_str()));
+
+	unsigned int old_speakers_size, new_speakers_size;
+
+	old_speakers_size = speakers.size();
+
+	speakers[uuid].uuid = uuid;
+	speakers[uuid].user = user;
+	speakers[uuid].ipaddr = ipaddr;
+	speakers[uuid].app = app;
+	speakers[uuid].device = device;
+
+	new_speakers_size = speakers.size();
+
+	if (biblesync->getMode() == BSP_MODE_SPEAKER)
+	{
+	    speakers[uuid].listen = false;
+	}
+	else
+	{	    
+	    switch (settings.bs_listen_set)
+	    {
+	    case 0:
+		// listen to the 1st, initially ignore later ones.
+		if ((old_speakers_size == 0) && (new_speakers_size == 1))
+		{
+		    speakers[uuid].listen = true;
+		    gui_generic_warning
+			(_((BSP + "Listening to\n" + user + ".").c_str()));
+		}
+		else
+		{
+		    speakers[uuid].listen = false;
+		    if ((old_speakers_size == 1) && (new_speakers_size == 2))
+		    {
+			gui_generic_warning
+			    (_((BSP + "More than 1 speaker.").c_str()));
+		    }
+		    // but we stop announcing after the 2nd.
+		}
+		break;
+
+	    case 1:
+		// listen to all.  announce only the first.
+		speakers[uuid].listen = true;
+		if ((old_speakers_size == 0) && (new_speakers_size == 1))
+		{
+		    gui_generic_warning
+			(_((BSP + "Listening to\n" + user + ".").c_str()));
+		}
+		break;
+
+	    case 2:
+		// listen to none.  announce none.
+		speakers[uuid].listen = false; break;
+	    }
+	}
+
+	biblesync->listenToSpeaker(speakers[uuid].listen, uuid);
+	speaker_display_update = true;
 	break;
 
     // dead speaker -- timed out from lack of beacons.
     case 'D':
-	GS_message(("dead speaker: u [%s], ip [%s], a [%s], v [%s]",
-		    user.c_str(), ipaddr.c_str(), app.c_str(), version.c_str()));
+	GS_message(("dead speaker: key [%s]", uuid.c_str()));
+	speakers.erase(uuid);
+	speaker_display_update = true;
 	break;
 
     default:
@@ -219,8 +274,347 @@ biblesync_navigate(char cmd,
 	break;
     }
 
+    // speakers change && preferences are open => re-display speakers.
+    if (speaker_display_update && settings.display_prefs)
+    {
+	biblesync_update_speaker();
+    }
+
     // unlock.
     settings.bs_receiving = FALSE;
+}
+
+
+/******************************************************************************
+ * Name
+ *  biblesync_compare_speaker
+ *
+ * Synopsis
+ *   #include "backend/biblesync.hh"
+ *   static int biblesync_compare_speaker(BSP_Speaker *left, BSP_Speaker *right)
+ *
+ * Description
+ *   qsort comparator for deciding lexical ordering of 2 BSP_Speakers.
+ *   dives down to c_str() because the function must return an integer.
+ *   order of dominance: user, ipaddr, app+version, device, uuid.
+ *
+ * Return value
+ *   void
+ */
+int biblesync_compare_speaker(const void *Lvoid, const void *Rvoid)
+{
+    const BSP_Speaker *L = *(const BSP_Speaker **)Lvoid;
+    const BSP_Speaker *R = *(const BSP_Speaker **)Rvoid;
+    int retval;
+
+    if ((retval = L->user.compare(R->user) == 0))
+	if ((retval = L->ipaddr.compare(R->ipaddr) == 0))
+	    if ((retval = L->app.compare(R->app) == 0))
+		if ((retval = L->device.compare(R->device) == 0))
+		    retval = L->uuid.compare(R->uuid);
+    return retval;
+}
+
+//
+// enumerator for column identification in speaker list
+//
+enum {
+    COLUMN_LISTEN,	// checkbox
+    COLUMN_USER,	// user
+    COLUMN_ABOUT,	// invisible: other identifying info (tooltip)
+    COLUMN_UUID,	// invisible: uuid
+    COLUMN_VISIBLE,	// gtk magic?
+    NUM_COLUMNS
+};
+
+
+/******************************************************************************
+ * Name
+ *  listen_toggled
+ *
+ * Synopsis
+ *   #include "backend/biblesync.hh"
+ *   static void listen_toggled(GtkCellRendererToggle *cell,
+ *				gchar *path_str,
+ *				gpointer data)
+ *
+ * Description
+ *   react to user's toggle of listen checkbox.
+ *
+ * Return value
+ *   void
+ */
+static void
+listen_toggled(GtkCellRendererToggle *cell,
+	       gchar *path_str,
+	       gpointer data)
+{
+    if (biblesync->getMode() == BSP_MODE_SPEAKER)
+    {
+	gui_generic_warning(_((BSP + "Speaker listens to none.").c_str()));
+    }
+    else if (settings.bs_listen_set == 0)		// selective
+    {
+	GtkTreeView *treeview = (GtkTreeView *)data;
+	GtkTreeModel *model = gtk_tree_view_get_model(treeview);
+	GtkTreeIter iter;
+	GtkTreePath *path = gtk_tree_path_new_from_string(path_str);
+	gboolean listen = 27;
+	gchar *uuid = NULL;
+
+	// get toggled iter
+	gtk_tree_model_get_iter(model, &iter, path);
+	gtk_tree_model_get(model, &iter,
+			   COLUMN_LISTEN, &listen,
+			   COLUMN_UUID,   &uuid,
+			   -1);
+
+	// negate
+	listen ^= 1;
+
+	// set new value
+	gtk_list_store_set(GTK_LIST_STORE(model), &iter,
+			   COLUMN_LISTEN, listen,
+			   -1);
+	speakers[(string)uuid].listen = listen;
+	biblesync->listenToSpeaker(listen, (string)uuid);
+	g_free(uuid);
+
+	// clean up
+	gtk_tree_path_free(path);
+    }
+    else					// all or nothing
+    {
+	gui_generic_warning(_((BSP + "Not listening selectively.").c_str()));
+    }
+}
+
+
+/******************************************************************************
+ * Name
+ *  query_tooltip
+ *
+ * Synopsis
+ *   #include "backend/biblesync.hh"
+ *   void query_tooltip()
+ *
+ * Description
+ *   find and show the identifying info for the selected user.
+ *
+ * Return value
+ *   void
+ */
+static
+gboolean query_tooltip(GtkWidget  *widget,
+		       gint        x,
+		       gint        y,
+		       gboolean    keyboard_mode,
+		       GtkTooltip *tooltip,
+		       gpointer    user_data)
+{
+    GtkTreeModel *model;
+    GtkTreePath *path;
+    GtkTreeIter iter;
+    gchar *about;
+
+    if (!gtk_tree_view_get_tooltip_context((GtkTreeView *)widget,
+					   &x, &y,
+					   keyboard_mode,
+					   &model, &path, &iter))
+	return FALSE;
+
+    if (gtk_tree_model_iter_has_child(model, &iter))
+    {
+	gtk_tree_path_free(path);
+	return FALSE;
+    }
+
+    gtk_tree_model_get(model, &iter, COLUMN_ABOUT, &about, -1);
+    gtk_tooltip_set_text(tooltip, about);
+    gtk_tree_view_set_tooltip_cell((GtkTreeView *)widget,
+				   tooltip, path,
+				   NULL, NULL);
+    gtk_tree_path_free (path);
+    g_free(about);
+    return TRUE;
+}
+
+
+/******************************************************************************
+ * Name
+ *  biblesync_set_clear_all_listen
+ *
+ * Synopsis
+ *   #include "backend/biblesync.hh"
+ *   void biblesync_set_clear_all_listen(gboolean listen)
+ *
+ * Description
+ *   turn on/off all listeners.
+ *   calls biblesync_update_speaker() to refresh display.
+ *
+ * Return value
+ *   void
+ */
+void biblesync_set_clear_all_listen(gboolean listen)
+{
+    BSP_SpeakerMapIterator object;
+
+    for (object = speakers.begin(); object != speakers.end(); ++object)
+    {
+	// update our app status, and tell the underlying protocol class.
+	object->second.listen = listen;
+	biblesync->listenToSpeaker(listen, object->second.uuid);
+    }
+
+    biblesync_update_speaker();
+}
+
+
+/******************************************************************************
+ * Name
+ *  biblesync_update_speaker
+ *
+ * Synopsis
+ *   #include "backend/biblesync.hh"
+ *   void biblesync_update_speaker()
+ *
+ * Description
+ *   push the updated speaker set into the preferences widget.
+ *
+ * Return value
+ *   void
+ */
+void biblesync_update_speaker()
+{
+    // need the widget in which the list should appear.
+    if (speaker_window == NULL)
+	return;
+    
+    unsigned int size = speakers.size();
+    BSP_Speaker **array = g_new(BSP_Speaker *, size);
+    unsigned int i = 0;
+
+    // extract map entries into a new array that's more accessible.
+    // what comes from the std::map is probably UUID-sorted, yuck.
+    // this provides re-sort in user|ipaddr|app|device order: human-useful.
+    for (BSP_SpeakerMapIterator object = speakers.begin();
+	 object != speakers.end();
+	 ++object)
+    {
+	array[i++] = &(object->second);
+    }
+    qsort(array, size, sizeof(BSP_Speaker *), biblesync_compare_speaker);
+
+    //
+    // window setup borrowed/modified from sidebar search results creation.
+    //
+
+    // GtkTreeSelection *selection;
+    GtkListStore *model_speakers =
+	gtk_list_store_new(NUM_COLUMNS,
+			   // listen       user
+			   G_TYPE_BOOLEAN, G_TYPE_STRING,
+			   // information  uuid
+			   G_TYPE_STRING,  G_TYPE_STRING,
+			   // visibility
+			   G_TYPE_BOOLEAN);
+
+    if (speaker_list)
+	gtk_widget_destroy(speaker_list);	// destroy old to create new.
+
+    speaker_list = 
+	gtk_tree_view_new_with_model(GTK_TREE_MODEL(model_speakers));
+    gtk_widget_show(speaker_list);
+    gtk_container_add(GTK_CONTAINER(speaker_window), speaker_list);
+    gtk_tree_view_set_rules_hint(GTK_TREE_VIEW(speaker_list), TRUE);
+    gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(speaker_list), TRUE);
+
+    //
+    // column setup
+    // borrowed/modified from mod.mgr module list creation.
+    //
+    GtkCellRenderer *renderer;
+    GtkTreeViewColumn *column;
+    GtkWidget *image;
+
+    /* -- toggle choice -- */
+    renderer = gtk_cell_renderer_toggle_new();
+    g_signal_connect(renderer, "toggled", G_CALLBACK(listen_toggled), speaker_list);
+
+    column = gtk_tree_view_column_new();
+    image = gtk_image_new_from_stock(GTK_STOCK_APPLY, GTK_ICON_SIZE_MENU);
+    gtk_widget_show(image);
+    gtk_widget_set_tooltip_text(image,
+				_("Check the box to listen to this user"));
+    gtk_tree_view_column_set_widget(column, image);
+    gtk_tree_view_column_pack_start(column, renderer, TRUE);
+    gtk_tree_view_column_set_attributes(column, renderer,
+					"active",  COLUMN_LISTEN,
+					"visible", COLUMN_VISIBLE, NULL);
+    gtk_tree_view_column_set_sizing(GTK_TREE_VIEW_COLUMN(column),
+				    GTK_TREE_VIEW_COLUMN_FIXED);
+    gtk_tree_view_column_set_min_width(GTK_TREE_VIEW_COLUMN(column), 35);
+    gtk_tree_view_append_column(GTK_TREE_VIEW(speaker_list), column);
+
+    /* -- column for sword module name -- */
+    renderer = gtk_cell_renderer_text_new();
+    column = gtk_tree_view_column_new_with_attributes(_("Available Speakers"), renderer,
+						      "text", COLUMN_USER, NULL);
+    gtk_tree_view_column_set_sizing(GTK_TREE_VIEW_COLUMN(column),
+				    GTK_TREE_VIEW_COLUMN_FIXED);
+    gtk_tree_view_column_set_min_width(GTK_TREE_VIEW_COLUMN(column), 200);
+    gtk_tree_view_append_column(GTK_TREE_VIEW(speaker_list), column);
+
+    /* -- identifying info (invisible) -- */
+    renderer = gtk_cell_renderer_text_new();
+    column = gtk_tree_view_column_new_with_attributes(_("About"), renderer,
+						      "text", COLUMN_ABOUT, NULL);
+    gtk_tree_view_column_set_visible(column, FALSE);	// not shown
+    gtk_tree_view_column_set_sizing(GTK_TREE_VIEW_COLUMN(column),
+				    GTK_TREE_VIEW_COLUMN_FIXED);
+    gtk_tree_view_column_set_min_width(GTK_TREE_VIEW_COLUMN(column), 2);
+    gtk_tree_view_append_column(GTK_TREE_VIEW(speaker_list), column);
+
+    /* -- uuid (invisible) -- */
+    renderer = gtk_cell_renderer_text_new();
+    column = gtk_tree_view_column_new_with_attributes(_("UUID"), renderer,
+						      "text", COLUMN_UUID, NULL);
+    gtk_tree_view_column_set_visible(column, FALSE);	// not shown
+    gtk_tree_view_column_set_sizing(GTK_TREE_VIEW_COLUMN(column),
+				    GTK_TREE_VIEW_COLUMN_FIXED);
+    gtk_tree_view_column_set_min_width(GTK_TREE_VIEW_COLUMN(column), 2);
+    gtk_tree_view_append_column(GTK_TREE_VIEW(speaker_list), column);
+    // end of column setup.
+
+    gtk_widget_set_has_tooltip(speaker_list, TRUE);
+    g_signal_connect((gpointer)speaker_list,
+		     "query-tooltip",
+		     G_CALLBACK(query_tooltip), NULL);
+
+    GtkTreeIter iter;
+    BSP_Speaker *object;
+    string identifying_info;
+
+    // fill it with the user list.
+    for (i = 0; i < size; ++i)
+    {
+	object = array[i];
+	identifying_info = (string)"IP address: " + object->ipaddr
+	    + (string)"\nApplication: " + object->app
+	    + (string)"\nDevice: " + object->device
+	    + (string)"\nUUID: " + object->uuid;
+
+	gtk_list_store_append(model_speakers, &iter);
+	gtk_list_store_set(model_speakers, &iter,
+			   COLUMN_LISTEN,  object->listen,
+			   COLUMN_USER,    object->user.c_str(),
+			   COLUMN_ABOUT,   identifying_info.c_str(),
+			   COLUMN_UUID,    object->uuid.c_str(),
+			   COLUMN_VISIBLE, TRUE,
+			   -1);
+    }
+
+    g_free(array);
 }
 
 
@@ -286,6 +680,7 @@ biblesync_mode_select(int m, char *p)
     return m;
 }
 
+
 /******************************************************************************
  * Name
  *  biblesync_personal
@@ -305,6 +700,7 @@ int biblesync_personal()
     return biblesync->getMode() == BSP_MODE_PERSONAL;
 }
 
+
 /******************************************************************************
  * Name
  *  biblesync_active
@@ -323,6 +719,7 @@ int biblesync_active()
 {
     return biblesync->getMode() != BSP_MODE_DISABLE;
 }
+
 
 /******************************************************************************
  * Name
@@ -344,6 +741,7 @@ int biblesync_active_xmit_allowed()
 	   biblesync->getMode() == BSP_MODE_SPEAKER;
 }
 
+
 /******************************************************************************
  * Name
  *  biblesync_get_passphrase
@@ -362,6 +760,7 @@ const char *biblesync_get_passphrase()
 {
     return biblesync->getPassphrase().c_str();
 }
+
 
 /******************************************************************************
  * Name
@@ -382,6 +781,7 @@ void biblesync_transmit_verse_list(char *modname, char *vlist)
     biblesync->Transmit(BSP_SYNC, (string)modname, (string)vlist);
     // remaining args irrelevant => defaulted.
 }
+
 
 /******************************************************************************
  * Name
@@ -417,7 +817,6 @@ void biblesync_privacy(gboolean privacy)
  * Return value
  *   void
  */
-
 void biblesync_prep_and_xmit(const char *mod_name, const char *key)
 {
     if (!settings.bs_receiving &&		// no re-xmit of recv'd nav.
@@ -446,25 +845,4 @@ void biblesync_prep_and_xmit(const char *mod_name, const char *key)
 			    (string)mod_name, (string)osis_key,
 			    (string)"", group);
     }
-}
-
-/******************************************************************************
- * Name
- *   biblesync_listen()
- *
- * Synopsis
- *   #include "main/sword.h"
- *   void biblesync_listen(gboolean listen, char *speakerkey)
- *
- * Description
- *   say whether to listen to a given speaker.
- *   (just type conversions on the way from C to C++.)
- *
- * Return value
- *   void
- */
-
-void biblesync_listen(gboolean listen, char *speakerkey)
-{
-    biblesync->listenToSpeaker((bool)listen, (string)speakerkey);
 }

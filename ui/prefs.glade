@@ -517,7 +517,7 @@
                       <widget class="GtkLabel" id="label17">
                         <property name="visible">True</property>
                         <property name="xalign">0</property>
-                        <property name="label" translatable="yes">&lt;b&gt;Tabs&lt;/b&gt;</property>
+                        <property name="label" translatable="yes">&lt;b&gt;BibleSync&lt;/b&gt;</property>
                         <property name="use_markup">True</property>
                       </widget>
                       <packing>
@@ -526,57 +526,41 @@
                         <property name="position">0</property>
                       </packing>
                     </child>
+
+
+
                     <child>
-                      <widget class="GtkCheckButton" id="checkbutton1">
-                        <property name="label" translatable="yes">Use tabbed browsing</property>
+                      <widget class="GtkHBox" id="box-BSP-logo">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">False</property>
-                        <property name="tooltip" translatable="yes">Single selection of Bible+commentary+book+dictionary, or many sets of such selections in a tabbed interface</property>
-                        <property name="border_width">8</property>
-                        <property name="use_underline">True</property>
-                        <property name="active">True</property>
-                        <property name="draw_indicator">True</property>
-                        <accessibility>
-                          <atkproperty name="AtkObject::accessible-name" translatable="yes">Use tabbed browsing Checkbox</atkproperty>
-                        </accessibility>
+                        <property name="homogeneous">True</property>
+                        <child>
+                          <widget class="GtkImage" id="image-biblesync">
+                            <property name="visible">True</property>
+                            <property name="pixbuf">biblesync-v1-50.png</property>
+                            <property name="xalign">0</property>
+                            <property name="tooltip_text" translatable="yes">Xiphos is the first Bible study program to provide an implementation of BibleSync, a synchronization protocol for Bible programs. If you work with multiple Bible programs, or if you work in a team, or if you have classroom activities using shared study, BibleSync can be a useful tool for you. BibleSync operates in 1 of 3 modes: Personal, to synchronize multiple Bible applications of your own, or in a working team; Speaker, to drive a lecture audience's Bible programs to follow along; Audience, to receive the speaker's navigation.</property>
+                          </widget>
+                          <packing>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
                       </widget>
                       <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">False</property>
                         <property name="position">1</property>
                       </packing>
                     </child>
+
+
                     <child>
-                      <widget class="GtkLabel" id="label18">
+                      <widget class="GtkHBox" id="box-BSP-mode">
                         <property name="visible">True</property>
-                        <property name="xalign">0</property>
-                        <property name="label" translatable="yes">&lt;b&gt;Show&lt;/b&gt;</property>
-                        <property name="use_markup">True</property>
-                      </widget>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">False</property>
-                        <property name="position">2</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <widget class="GtkVBox" id="vbox5">
-                        <property name="visible">True</property>
-                        <property name="border_width">8</property>
-                        <property name="spacing">2</property>
+                        <property name="homogeneous">True</property>
                         <child>
-                          <widget class="GtkCheckButton" id="checkbutton2">
-                            <property name="label" translatable="yes">Bible Texts</property>
+                          <widget class="GtkLabel" id="label-biblesync-mode">
                             <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">False</property>
-                            <property name="use_underline">True</property>
-                            <property name="active">True</property>
-                            <property name="draw_indicator">True</property>
-                            <accessibility>
-                              <atkproperty name="AtkObject::accessible-name" translatable="yes">Bible Texts Checkbox</atkproperty>
-                            </accessibility>
+                            <property name="label" translatable="yes">Mode</property>
+                            <property name="xalign">0</property>
+                            <property name="tooltip_text" translatable="yes">Select the mode in which BibleSync should operate.</property>
                           </widget>
                           <packing>
                             <property name="expand">False</property>
@@ -585,16 +569,18 @@
                           </packing>
                         </child>
                         <child>
-                          <widget class="GtkCheckButton" id="checkbutton9">
-                            <property name="label" translatable="yes">Previewer</property>
+                          <widget class="GtkRadioButton" id="radiobutton_BSP_off">
+                            <property name="label" translatable="yes">Off</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="receives_default">False</property>
+                            <property name="receives_default">True</property>
+                            <property name="has_tooltip">True</property>
+                            <property name="tooltip" translatable="yes">Disable BibleSync.</property>
                             <property name="use_underline">True</property>
                             <property name="active">True</property>
                             <property name="draw_indicator">True</property>
                             <accessibility>
-                              <atkproperty name="AtkObject::accessible-name" translatable="yes">Previewer Checkbox</atkproperty>
+                              <atkproperty name="AtkObject::accessible-name" translatable="yes">BSP off radio button</atkproperty>
                             </accessibility>
                           </widget>
                           <packing>
@@ -604,16 +590,19 @@
                           </packing>
                         </child>
                         <child>
-                          <widget class="GtkCheckButton" id="checkbutton3">
-                            <property name="label" translatable="yes">Commentaries</property>
+                          <widget class="GtkRadioButton" id="radiobutton_BSP_speaker">
+                            <property name="label" translatable="yes">Speaker</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
+                            <property name="has_tooltip">True</property>
+                            <property name="tooltip" translatable="yes">Enable BibleSync as the speaker.</property>
                             <property name="use_underline">True</property>
                             <property name="active">True</property>
                             <property name="draw_indicator">True</property>
+			    <property name="group">radiobutton_BSP_off</property>
                             <accessibility>
-                              <atkproperty name="AtkObject::accessible-name" translatable="yes">Commentaries Checkbox</atkproperty>
+                              <atkproperty name="AtkObject::accessible-name" translatable="yes">BSP speaker radio button</atkproperty>
                             </accessibility>
                           </widget>
                           <packing>
@@ -623,16 +612,19 @@
                           </packing>
                         </child>
                         <child>
-                          <widget class="GtkCheckButton" id="checkbutton4">
-                            <property name="label" translatable="yes">Dictionary/Lexicon</property>
+                          <widget class="GtkRadioButton" id="radiobutton_BSP_audience">
+                            <property name="label" translatable="yes">Audience</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
+                            <property name="has_tooltip">True</property>
+                            <property name="tooltip" translatable="yes">Enable BibleSync as a member of the audience.</property>
                             <property name="use_underline">True</property>
                             <property name="active">True</property>
                             <property name="draw_indicator">True</property>
+			    <property name="group">radiobutton_BSP_off</property>
                             <accessibility>
-                              <atkproperty name="AtkObject::accessible-name" translatable="yes">Dictionary/Lexicon Checkbox</atkproperty>
+                                <atkproperty name="AtkObject::accessible-name" translatable="yes">BSP audience radio button</atkproperty>
                             </accessibility>
                           </widget>
                           <packing>
@@ -642,24 +634,446 @@
                           </packing>
                         </child>
                         <child>
-                          <widget class="GtkCheckButton" id="checkbutton_paratab">
-                            <property name="label" translatable="yes">Parallel View in a tab</property>
+                          <widget class="GtkRadioButton" id="radiobutton_BSP_personal">
+                            <property name="label" translatable="yes">Personal</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
+                            <property name="has_tooltip">True</property>
+                            <property name="tooltip" translatable="yes">Enable BibleSync for personal or team use.</property>
                             <property name="use_underline">True</property>
+                            <property name="active">True</property>
                             <property name="draw_indicator">True</property>
+			    <property name="group">radiobutton_BSP_off</property>
+                            <accessibility>
+                              <atkproperty name="AtkObject::accessible-name" translatable="yes">BSP personal radio button</atkproperty>
+                            </accessibility>
                           </widget>
                           <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
                             <property name="position">4</property>
                           </packing>
                         </child>
                       </widget>
                       <packing>
-                        <property name="expand">False</property>
+                        <property name="position">2</property>
+                      </packing>
+                    </child>
+
+
+                    <child>
+                      <widget class="GtkHBox" id="box-BSP-private">
+                        <property name="visible">True</property>
+                        <property name="homogeneous">True</property>
+
+
+                        <child>
+                          <widget class="GtkLabel" id="labelp1">
+                            <property name="visible">True</property>
+                            <property name="xalign">0</property>
+                            <property name="label" translatable="yes"> </property>
+                            <property name="use_markup">True</property>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkLabel" id="labelp2">
+                            <property name="visible">True</property>
+                            <property name="xalign">0</property>
+                            <property name="label" translatable="yes"> </property>
+                            <property name="use_markup">True</property>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkLabel" id="labelp3">
+                            <property name="visible">True</property>
+                            <property name="xalign">0</property>
+                            <property name="label" translatable="yes"> </property>
+                            <property name="use_markup">True</property>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkLabel" id="labelp4">
+                            <property name="visible">True</property>
+                            <property name="xalign">0</property>
+                            <property name="label" translatable="yes"> </property>
+                            <property name="use_markup">True</property>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">3</property>
+                          </packing>
+                        </child>
+
+
+                        <child>
+                          <widget class="GtkCheckButton" id="checkbutton_BSP_privacy">
+                            <property name="label" translatable="yes">Private</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="has_tooltip">True</property>
+                            <property name="tooltip" translatable="yes">When in Personal mode, only programs running on this machine will hear your navigation.</property>
+                            <property name="use_underline">True</property>
+                            <property name="active">True</property>
+                            <property name="draw_indicator">True</property>
+                            <accessibility>
+                              <atkproperty name="AtkObject::accessible-name" translatable="yes">BSP privacy button</atkproperty>
+                            </accessibility>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">4</property>
+                          </packing>
+                        </child>
+                      </widget>
+                      <packing>
                         <property name="position">3</property>
                       </packing>
                     </child>
+
+
+                    <child>
+                      <widget class="GtkHBox" id="box-BSP-nav">
+                        <property name="visible">True</property>
+                        <property name="homogeneous">True</property>
+                        <child>
+                          <widget class="GtkLabel" id="label-biblesync-nav">
+                            <property name="visible">True</property>
+                            <property name="label" translatable="yes">Navigate</property>
+                            <property name="xalign">0</property>
+                            <property name="tooltip_text" translatable="yes">Choose how to accept incoming navigation synchronization.</property>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkRadioButton" id="radiobutton_BSP_nav_direct">
+                            <property name="label" translatable="yes">Direct</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="has_tooltip">True</property>
+                            <property name="tooltip" translatable="yes">BibleSync navigation will send Xiphos directly to the verse indicated.</property>
+                            <property name="use_underline">True</property>
+                            <property name="active">True</property>
+                            <property name="draw_indicator">True</property>
+                            <accessibility>
+                              <atkproperty name="AtkObject::accessible-name" translatable="yes">BSP nav direct radio button</atkproperty>
+                            </accessibility>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkRadioButton" id="radiobutton_BSP_nav_verselist">
+                            <property name="label" translatable="yes">Verse list</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="has_tooltip">True</property>
+                            <property name="tooltip" translatable="yes">BibleSync navigation will use Xiphos' sidebar verse list.</property>
+                            <property name="use_underline">True</property>
+                            <property name="active">True</property>
+                            <property name="draw_indicator">True</property>
+                            <property name="group">radiobutton_BSP_nav_direct</property>
+                            <accessibility>
+                              <atkproperty name="AtkObject::accessible-name" translatable="yes">BSP nav verse list radio button</atkproperty>
+                            </accessibility>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkLabel" id="labeln1">
+                            <property name="visible">True</property>
+                            <property name="xalign">0</property>
+                            <property name="label" translatable="yes"> </property>
+                            <property name="use_markup">True</property>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">3</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkLabel" id="labeln2">
+                            <property name="visible">True</property>
+                            <property name="xalign">0</property>
+                            <property name="label" translatable="yes"> </property>
+                            <property name="use_markup">True</property>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">4</property>
+                          </packing>
+                        </child>
+                      </widget>
+                      <packing>
+                        <property name="position">4</property>
+                      </packing>
+                    </child>
+
+
+                    <child>
+                      <widget class="GtkHBox" id="box-BSP-toggles">
+                        <property name="visible">True</property>
+                        <property name="homogeneous">True</property>
+                        <child>
+                          <widget class="GtkLabel" id="labels1">
+                            <property name="visible">True</property>
+                            <property name="xalign">0</property>
+                            <property name="label" translatable="yes">Special</property>
+                            <property name="has_tooltip">True</property>
+                            <property name="tooltip" translatable="yes">Additional traces can be presented during BibleSync operation. Beware enabling these, they can be very chatty.</property>
+                            <property name="use_markup">True</property>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkCheckButton" id="checkbutton_BSP_presence">
+                            <property name="label" translatable="yes">Presence</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="has_tooltip">True</property>
+                            <property name="tooltip" translatable="yes">Presence announcements will be shown in dialogs.</property>
+                            <property name="use_underline">True</property>
+                            <property name="active">True</property>
+                            <property name="draw_indicator">True</property>
+                            <accessibility>
+                              <atkproperty name="AtkObject::accessible-name" translatable="yes">BSP presence button</atkproperty>
+                            </accessibility>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkCheckButton" id="checkbutton_BSP_mismatch">
+                            <property name="label" translatable="yes">Mismatch</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="has_tooltip">True</property>
+                            <property name="tooltip" translatable="yes">Mismatches from your session will be shown in dialogs.</property>
+                            <property name="use_underline">True</property>
+                            <property name="active">True</property>
+                            <property name="draw_indicator">True</property>
+                            <accessibility>
+                              <atkproperty name="AtkObject::accessible-name" translatable="yes">BSP mismatch button</atkproperty>
+                            </accessibility>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkCheckButton" id="checkbutton_BSP_nav_debug">
+                            <property name="label" translatable="yes">Debug</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="has_tooltip">True</property>
+                            <property name="tooltip" translatable="yes">Packet tracing.</property>
+                            <property name="use_underline">True</property>
+                            <property name="active">True</property>
+                            <property name="draw_indicator">True</property>
+                            <accessibility>
+                              <atkproperty name="AtkObject::accessible-name" translatable="yes">BSP event debug button</atkproperty>
+                            </accessibility>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">3</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkLabel" id="labels2">
+                            <property name="visible">True</property>
+                            <property name="xalign">0</property>
+                            <property name="label" translatable="yes"> </property>
+                            <property name="use_markup">True</property>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">4</property>
+                          </packing>
+                        </child>
+                      </widget>
+                      <packing>
+                        <property name="position">5</property>
+                      </packing>
+                    </child>
+
+
+
+                    <child>
+                      <widget class="GtkHBox" id="box-BSP-listen">
+                        <property name="visible">True</property>
+                        <property name="homogeneous">True</property>
+                        <child>
+                          <widget class="GtkLabel" id="label-biblesync-listen">
+                            <property name="visible">True</property>
+                            <property name="label" translatable="yes">Listen</property>
+                            <property name="xalign">0</property>
+                            <property name="tooltip_text" translatable="yes">Xiphos will listen to Speakers according to choice here.</property>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkRadioButton" id="radiobutton_BSP_listen_some">
+                            <property name="label" translatable="yes">Selective</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="has_tooltip">True</property>
+                            <property name="tooltip" translatable="yes">Choose the Speakers to be followed.</property>
+                            <property name="use_underline">True</property>
+                            <property name="active">True</property>
+                            <property name="draw_indicator">True</property>
+                            <accessibility>
+                              <atkproperty name="AtkObject::accessible-name" translatable="yes">BSP listen some radio button</atkproperty>
+                            </accessibility>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkRadioButton" id="radiobutton_BSP_listen_all">
+                            <property name="label" translatable="yes">All</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="has_tooltip">True</property>
+                            <property name="tooltip" translatable="yes">All Speakers will be followed.</property>
+                            <property name="use_underline">True</property>
+                            <property name="active">True</property>
+                            <property name="draw_indicator">True</property>
+			    <property name="group">radiobutton_BSP_listen_some</property>
+                            <accessibility>
+                              <atkproperty name="AtkObject::accessible-name" translatable="yes">BSP listen all radio button</atkproperty>
+                            </accessibility>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkRadioButton" id="radiobutton_BSP_listen_none">
+                            <property name="label" translatable="yes">None</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="has_tooltip">True</property>
+                            <property name="tooltip" translatable="yes">No Speakers will be followed.</property>
+                            <property name="use_underline">True</property>
+                            <property name="active">True</property>
+                            <property name="draw_indicator">True</property>
+			    <property name="group">radiobutton_BSP_listen_some</property>
+                            <accessibility>
+                              <atkproperty name="AtkObject::accessible-name" translatable="yes">BSP listen none radio button</atkproperty>
+                            </accessibility>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">3</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkLabel" id="labell1">
+                            <property name="visible">True</property>
+                            <property name="xalign">0</property>
+                            <property name="label" translatable="yes"> </property>
+                            <property name="use_markup">True</property>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">4</property>
+                          </packing>
+                        </child>
+                      </widget>
+                      <packing>
+                        <property name="position">6</property>
+                      </packing>
+                    </child>
+
+
+
+                    <child>
+                      <widget class="GtkHBox" id="box-BSP-speaker-set">
+                        <property name="visible">True</property>
+                        <property name="homogeneous">True</property>
+                        <child>
+                          <widget class="GtkScrolledWindow" id="speakerwindow">
+                            <property name="width_request">300</property>
+                            <property name="height_request">150</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="hscrollbar_policy">automatic</property>
+                            <property name="vscrollbar_policy">automatic</property>
+                            <property name="shadow_type">in</property>
+                          </widget>
+                          <packing>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                      </widget>
+                      <packing>
+                        <property name="position">7</property>
+                      </packing>
+                    </child>
+
+
                   </widget>
                   <packing>
                     <property name="position">3</property>
@@ -668,7 +1082,7 @@
                 <child>
                   <widget class="GtkLabel" id="label4">
                     <property name="visible">True</property>
-                    <property name="label" translatable="yes">Tabs and Panes</property>
+                    <property name="label" translatable="yes">BibleSync</property>
                   </widget>
                   <packing>
                     <property name="position">3</property>
@@ -984,262 +1398,6 @@
                           </widget>
                           <packing>
                             <property name="position">10</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <widget class="GtkHBox" id="box-BSP">
-                            <property name="visible">True</property>
-                            <property name="homogeneous">True</property>
-                            <child>
-                              <widget class="GtkLabel" id="label-biblesync">
-                                <property name="visible">True</property>
-                                <property name="label" translatable="no">BibleSync</property>
-                                <property name="xalign">0</property>
-                                <property name="tooltip_text" translatable="yes">Xiphos is the first Bible study program to provide an implementation of BibleSync, a new synchronization protocol for Bible programs. If you work with multiple Bible programs, or if you work in a team, or you have classroom activities using shared study, BibleSync is a useful tool for you.</property>
-                              </widget>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-	                    <child>
-	                      <widget class="GtkImage" id="image-biblesync">
-	                        <property name="visible">True</property>
-	                        <property name="pixbuf">biblesync-v1-30.png</property>
-                                <property name="xalign">0</property>
-                                <property name="tooltip_text" translatable="yes">BibleSync Protocol is a method for synchronization of BSP-compatible Bible programs. It operates in 1 of 3 modes: Personal, to synchronize multiple Bible applications of your own, or in a working team; Speaker, to drive a lecture audience's Bible programs to follow along; Audience, to receive the speaker's navigation. Select its mode here.</property>
-	                      </widget>
-                              <packing>
-                                <property name="position">1</property>
-                              </packing>
-	                    </child>
-                            <child>
-                              <widget class="GtkRadioButton" id="radiobutton_BSP_off">
-                                <property name="label" translatable="yes">Off</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
-                                <property name="has_tooltip">True</property>
-                                <property name="tooltip" translatable="yes">Disable BibleSync.</property>
-                                <property name="use_underline">True</property>
-                                <property name="active">True</property>
-                                <property name="draw_indicator">True</property>
-                                <accessibility>
-                                  <atkproperty name="AtkObject::accessible-name" translatable="yes">BSP off radio button</atkproperty>
-                                </accessibility>
-                              </widget>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
-                                <property name="position">2</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkRadioButton" id="radiobutton_BSP_speaker">
-                                <property name="label" translatable="yes">Speaker</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">False</property>
-                                <property name="has_tooltip">True</property>
-                                <property name="tooltip" translatable="yes">Enable BibleSync as the speaker.</property>
-                                <property name="use_underline">True</property>
-                                <property name="active">True</property>
-                                <property name="draw_indicator">True</property>
-				<property name="group">radiobutton_BSP_off</property>
-                                <accessibility>
-                                  <atkproperty name="AtkObject::accessible-name" translatable="yes">BSP speaker radio button</atkproperty>
-                                </accessibility>
-                              </widget>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
-                                <property name="position">3</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkRadioButton" id="radiobutton_BSP_audience">
-                                <property name="label" translatable="yes">Audience</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">False</property>
-                                <property name="has_tooltip">True</property>
-                                <property name="tooltip" translatable="yes">Enable BibleSync as a member of the audience.</property>
-                                <property name="use_underline">True</property>
-                                <property name="active">True</property>
-                                <property name="draw_indicator">True</property>
-				<property name="group">radiobutton_BSP_off</property>
-                                <accessibility>
-                                  <atkproperty name="AtkObject::accessible-name" translatable="yes">BSP audience radio button</atkproperty>
-                                </accessibility>
-                              </widget>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
-                                <property name="position">4</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkRadioButton" id="radiobutton_BSP_personal">
-                                <property name="label" translatable="yes">Personal</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">False</property>
-                                <property name="has_tooltip">True</property>
-                                <property name="tooltip" translatable="yes">Enable BibleSync for personal or team use.</property>
-                                <property name="use_underline">True</property>
-                                <property name="active">True</property>
-                                <property name="draw_indicator">True</property>
-				<property name="group">radiobutton_BSP_off</property>
-                                <accessibility>
-                                  <atkproperty name="AtkObject::accessible-name" translatable="yes">BSP personal radio button</atkproperty>
-                                </accessibility>
-                              </widget>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
-                                <property name="position">5</property>
-                              </packing>
-                            </child>
-                          </widget>
-                          <packing>
-                            <property name="position">11</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <widget class="GtkHBox" id="box-BSP-nav">
-                            <property name="visible">True</property>
-                            <property name="homogeneous">True</property>
-                            <child>
-                              <widget class="GtkRadioButton" id="radiobutton_BSP_nav_direct">
-                                <property name="label" translatable="yes">Direct</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
-                                <property name="has_tooltip">True</property>
-                                <property name="tooltip" translatable="yes">BibleSync navigation will send Xiphos directly to the verse indicated.</property>
-                                <property name="use_underline">True</property>
-                                <property name="active">True</property>
-                                <property name="draw_indicator">True</property>
-                                <accessibility>
-                                  <atkproperty name="AtkObject::accessible-name" translatable="yes">BSP nav direct radio button</atkproperty>
-                                </accessibility>
-                              </widget>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkRadioButton" id="radiobutton_BSP_nav_verselist">
-                                <property name="label" translatable="yes">Verse list</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">False</property>
-                                <property name="has_tooltip">True</property>
-                                <property name="tooltip" translatable="yes">BibleSync navigation will use Xiphos' verse list.</property>
-                                <property name="use_underline">True</property>
-                                <property name="active">True</property>
-                                <property name="draw_indicator">True</property>
-				<property name="group">radiobutton_BSP_nav_direct</property>
-                                <accessibility>
-                                  <atkproperty name="AtkObject::accessible-name" translatable="yes">BSP nav verse list radio button</atkproperty>
-                                </accessibility>
-                              </widget>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkCheckButton" id="checkbutton_BSP_presence">
-                                <property name="label" translatable="yes">Presence</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">False</property>
-                                <property name="has_tooltip">True</property>
-                                <property name="tooltip" translatable="yes">"Presence" announcements will be shown in dialogs.</property>
-                                <property name="use_underline">True</property>
-                                <property name="active">True</property>
-                                <property name="draw_indicator">True</property>
-                                <accessibility>
-                                  <atkproperty name="AtkObject::accessible-name" translatable="yes">BSP presence button</atkproperty>
-                                </accessibility>
-                              </widget>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
-                                <property name="position">2</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkCheckButton" id="checkbutton_BSP_mismatch">
-                                <property name="label" translatable="yes">Mismatch</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">False</property>
-                                <property name="has_tooltip">True</property>
-                                <property name="tooltip" translatable="yes">Mismatches from your session will be shown in dialogs.</property>
-                                <property name="use_underline">True</property>
-                                <property name="active">True</property>
-                                <property name="draw_indicator">True</property>
-                                <accessibility>
-                                  <atkproperty name="AtkObject::accessible-name" translatable="yes">BSP mismatch button</atkproperty>
-                                </accessibility>
-                              </widget>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
-                                <property name="position">3</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkCheckButton" id="checkbutton_BSP_nav_debug">
-                                <property name="label" translatable="yes">Debug</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">False</property>
-                                <property name="has_tooltip">True</property>
-                                <property name="tooltip" translatable="yes">Packet tracing.</property>
-                                <property name="use_underline">True</property>
-                                <property name="active">True</property>
-                                <property name="draw_indicator">True</property>
-                                <accessibility>
-                                  <atkproperty name="AtkObject::accessible-name" translatable="yes">BSP event debug button</atkproperty>
-                                </accessibility>
-                              </widget>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
-                                <property name="position">4</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkCheckButton" id="checkbutton_BSP_privacy">
-                                <property name="label" translatable="yes">Private</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">False</property>
-                                <property name="has_tooltip">True</property>
-                                <property name="tooltip" translatable="yes">When in Personal mode, only programs running on this machine will hear your navigation.</property>
-                                <property name="use_underline">True</property>
-                                <property name="active">True</property>
-                                <property name="draw_indicator">True</property>
-                                <accessibility>
-                                  <atkproperty name="AtkObject::accessible-name" translatable="yes">BSP privacy button</atkproperty>
-                                </accessibility>
-                              </widget>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
-                                <property name="position">5</property>
-                              </packing>
-                            </child>
-                          </widget>
-                          <packing>
-                            <property name="position">12</property>
                           </packing>
                         </child>
                         <child>

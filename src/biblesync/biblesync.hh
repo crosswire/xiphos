@@ -62,16 +62,16 @@
 //		 string bible, string ref, string alt,
 //		 string group, string domain,
 //		 string info,  string dump)
-//		there are 4 your_void_nav_func() use cases, identified in cmd:
+//		there are 6 your_void_nav_func() use cases, identified in cmd:
 //		1. 'E' (error) for network errors & malformed packets.
 //		   only info + dump are useful.
-//		2. 'M' (mismatch) against passphrase or mode
+//		2. 'M' (mismatch) against passphrase or mode or listen status.
 //		   info == "announce" or "sync" or "beacon" (+ user @ [ipaddr])
 //			   sync:     bible, ref, alt, group, domain as arrived.
 //			   announce: presence message in alt.
 //			      also, individual elements are also available:
-//			      overload: bible   ref       group  domain
-//					user    [ipaddr]  app    version
+//			      overload: bible   ref       group    domain
+//					user    [ipaddr]  app+ver  device
 //		   dump available.
 //		3. 'A' (announce)
 //		   presence message in alt.  dump available.
@@ -127,6 +127,21 @@
 // called with the pointer to your BibleSync object in order that
 // object context be re-entered.  the internal receive routine
 // is private.
+//
+// Note on speaker beacons:
+// Protocol operates using periodic (10sec) beacons of speaker availability.
+// By default, audience accepts listening to the first available speaker,
+// thereafter ignores any more, but includes them in the list of available
+// speakers and notifies the app of their availability (see above, 'S'/'D').
+// Override this behavior choice however wished, using listenToSpeaker() in
+// reaction to 'S' events or on user request.
+// Speakers who stop xmitting beacons timeout, are declared dead, and
+// removed after 30sec beacon silence, with app notification ('D').
+// Observe that pure Speaker clears the speaker list and by default ignores
+// all newly-identified claimants to speaker status.  Again, this is default
+// behavior, but it makes no sense to try to listen to one as the mode is
+// a mismatch.
+// Note also that Personal is both speaker and audience.
 
 using namespace std;
 
@@ -321,7 +336,7 @@ private:
     int InitSelectRead(char *, struct sockaddr_in *, BibleSyncMessage *);
 
     // speaker list management.
-    void ageSpeakers(BibleSyncSpeakerMapIterator object);
+    void ageSpeakers();
     void clearSpeakers();
 
     // uuid dumper;

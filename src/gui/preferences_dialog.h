@@ -79,6 +79,7 @@ void setup_font_prefs_combobox(void);
 
 void on_biblesync_kbd(int);
 gchar *on_biblesync_obtain_passphrase(void);
+extern GtkWidget *speaker_window, *speaker_list;
 
 void on_checkbutton10_toggled(GtkToggleButton * togglebutton, gpointer user_data);
 void on_checkbutton11_toggled(GtkToggleButton * togglebutton, gpointer user_data);
