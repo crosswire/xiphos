@@ -533,17 +533,16 @@ int BibleSync::ReceiveInternal()
 			// construct user's presence announcement
 			bible  = content.find(BSP_APP_USER)->second;
 			ref    = (string)"[" + inet_ntoa(source.sin_addr) + "]";
-			group  = content.find(BSP_APP_NAME)->second;
-			domain = version;
+			group  = content.find(BSP_APP_NAME)->second
+			    + " " + version;
+			domain = content.find(BSP_APP_DEVICE)->second;
 
 			alt = BSP
 			    + content.find(BSP_APP_USER)->second
 			    + _("\npresent at [")
 			    + (string)inet_ntoa(source.sin_addr)
 			    + _("]\nusing ")
-			    + content.find(BSP_APP_NAME)->second
-			    + " "
-			    + domain	// version.
+			    + group
 			    + ".";
 
 			info = (string)"announce: "
@@ -559,12 +558,13 @@ int BibleSync::ReceiveInternal()
 		    }
 		    else // bsp.msg_type == BSP_BEACON
 		    {
-			alt    = pkt_uuid;
-
 			bible  = content.find(BSP_APP_USER)->second;
 			ref    = (string)"[" + inet_ntoa(source.sin_addr) + "]";
-			group  = content.find(BSP_APP_NAME)->second;
-			domain = version;
+			group  = content.find(BSP_APP_NAME)->second
+			    + " " + version;
+			domain = content.find(BSP_APP_DEVICE)->second;
+
+			alt = pkt_uuid;
 
 			info = (string)"beacon: "
 			    + content.find(BSP_APP_USER)->second
@@ -579,24 +579,36 @@ int BibleSync::ReceiveInternal()
 				   ? 'S'	// unknown: potential speaker.
 				   : 'x');	// known: don't tell app again.
 
-			    unsigned int old_speakers_size = speakers.size();
+			    unsigned int old_speakers_size, new_speakers_size;
+			    old_speakers_size = speakers.size();
 
 			    // whether previously known or not,
 			    // a beacon (re)starts the aging countdown.
 			    speakers[pkt_uuid].countdown =
-				BSP_BEACON_COUNT * BSP_BEACON_MULTIPLIER + 1;
+				BSP_BEACON_COUNT * BSP_BEACON_MULTIPLIER;
 
-			    // for new speakers:
-			    // we listen to 1st speaker by default.
-			    // we ignore everyone else by default.
-			    if ((old_speakers_size == 0) &&
-				(speakers.size() == 1))
+			    new_speakers_size = speakers.size();
+
+			    if (mode == BSP_MODE_SPEAKER)
 			    {
-				speakers[pkt_uuid].listen = true;
-			    }
-			    else if (old_speakers_size != speakers.size())
-			    {
+				// speaker listens to no one.
 				speakers[pkt_uuid].listen = false;
+			    }
+			    else
+			    {
+				// default behavior for new speakers:
+				// listen to 1st speaker, ignore everyone else.
+				// the app can make other choices.
+				if ((old_speakers_size == 0) &&
+				    (new_speakers_size == 1))
+				{
+				    speakers[pkt_uuid].listen = true;
+				}
+				else if (old_speakers_size != new_speakers_size)
+				{
+				    speakers[pkt_uuid].listen = false;
+				}
+				// else someone previously known: don't touch.
 			    }
 			}
 			else
@@ -620,7 +632,7 @@ int BibleSync::ReceiveInternal()
     }
 
     // beacon-related tasks: others' aging and sending our beacon.
-    ageSpeakers(speakers.begin());
+    ageSpeakers();
 
     if (((mode == BSP_MODE_PERSONAL) ||
 	 (mode == BSP_MODE_SPEAKER)) &&
@@ -745,27 +757,6 @@ BibleSync_xmit_status BibleSync::Transmit(char message_type,
     unsigned int xmit_size = min(BSP_MAX_SIZE,
 				 BSP_HEADER_SIZE + body.length());
 
-#if 0
-    char dump[DEBUG_LENGTH];
-    uuid_dump(bsp.uuid, uuid_dump_string);
-    snprintf(dump, DEBUG_LENGTH-1,
-	     "magic: 0x%08x\nversion: 0x%02x\ntype: 0x%02x (%s)\n"
-	     "uuid: %s\n#pkt: %d\npkt index: %d\n\n-*- body -*-\n%s",
-	     ntohl(bsp.magic), bsp.version,
-	     bsp.msg_type, ((bsp.msg_type == BSP_ANNOUNCE)
-			    ? "announce"
-			    : ((bsp.msg_type == BSP_SYNC)
-			       ? "sync"
-			       : ((bsp.msg_type == BSP_BEACON)
-				  ? "beacon"
-				  : "*???*"))),
-	     uuid_dump_string,
-	     bsp.num_packets, bsp.index_packet,
-	     bsp.body);
-    (*nav_func)('E', EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
-		BSP + _("TRANSMIT:"), dump);
-#endif /* 0 */
-
     // force last == newline: attempt to preserve body format when long.
     ((unsigned char*)&bsp)[BSP_MAX_SIZE-1] = '\n';
 
@@ -823,19 +814,19 @@ void BibleSync::listenToSpeaker(bool listen, string speakerkey)
 // called from ReceiveInternal().  ages entries by one, waiting
 // to reach zero.  on zero, call (*nav_func)('D', ...) to inform
 // the app that the speaker is dead, then eliminate the element.
-// initial call uses speakers.begin().
 //
-void BibleSync::ageSpeakers(BibleSyncSpeakerMapIterator object)
+void BibleSync::ageSpeakers()
 {
-    if (object != speakers.end())
+    for (BibleSyncSpeakerMapIterator object = speakers.begin();
+	 object != speakers.end();
+	 /* no increment here */)
     {
-	ageSpeakers(++object);
-
-	if (--(object->second.countdown) == 0)
+	BibleSyncSpeakerMapIterator victim = object++;	// loop increment
+	if (--(victim->second.countdown) == 0)
 	{
-	    (*nav_func)('D', EMPTY, EMPTY, object->first, EMPTY, EMPTY,
+	    (*nav_func)('D', EMPTY, EMPTY, victim->first, EMPTY, EMPTY,
 			EMPTY, EMPTY);
-	    speakers.erase(object);
+	    speakers.erase(victim);
 	}
     }
 }

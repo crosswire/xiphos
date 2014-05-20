@@ -95,12 +95,6 @@ typedef struct _preferences_check_buttons CHECK_BUTTONS;
 struct _preferences_check_buttons {
 	GtkWidget *use_defaults;	/* radio button */
 
-	GtkWidget *enable_tabbed_browsing;
-	GtkWidget *show_bible_tabs;
-	GtkWidget *show_commentary_tabs;
-	GtkWidget *show_dictionary_tabs;
-	GtkWidget *show_book_tabs;
-
 	GtkWidget *use_default_dictionary;
 	GtkWidget *use_linked_tabs;
 	GtkWidget *use_chapter_scroll;
@@ -116,15 +110,9 @@ struct _preferences_check_buttons {
 	GtkWidget *show_splash_screen;
 	GtkWidget *prayerlist;
 
-	GtkWidget *show_bible_pane;
-	GtkWidget *show_preview_pane;
-	GtkWidget *show_commentary_pane;
-	GtkWidget *show_dictionary_pane;
-
 	GtkWidget *show_in_viewer;
 	GtkWidget *show_in_dictionary;
 	GtkWidget *show_devotion;
-	GtkWidget *show_paratab;
 
 	GtkWidget *bs_debug;
 	GtkWidget *bs_presence;
@@ -143,10 +131,15 @@ struct _preferences_radio_buttons {
 	/* BibleSync navigation choice */
 	GtkWidget *bs_nav_direct;
 	GtkWidget *bs_nav_verselist;
+
+	/* BibleSync listener choice. */
+	GtkWidget *bs_listen_some;
+	GtkWidget *bs_listen_all;
+	GtkWidget *bs_listen_none;
 };
 
 /* fixed callback values, for radio button assignment. */
-static int rb_cb_0 = 0, rb_cb_1 = 1, rb_cb_2 = 2, rb_cb_3 = 3;
+static int rb_cb[] = { 0, 1, 2, 3 };	// userdata callback values.
 
 typedef struct _preferences_buttons BUTTONS;
 struct _preferences_buttons {
@@ -164,8 +157,10 @@ struct _parallel_select {
 	GtkWidget *mod_sel_add;
 	GtkWidget *mod_sel_treeview;
 };
-static GtkWidget *dialog_prefs;
+static GtkWidget *dialog_prefs = NULL;
 
+GtkWidget *speaker_window = NULL;	// BibleSync
+GtkWidget *speaker_list = NULL;	// BibleSync
 
 /*****************************************************************************
  * externs
@@ -849,33 +844,6 @@ on_checkbutton10_toggled(GtkToggleButton * togglebutton,
 
 /******************************************************************************
  * Name
- *   on_checkbutton_showparatab_toggled
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *   void on_checkbutton_showparatab_toggled(GtkToggleButton * togglebutton, gpointer user_data)
- *
- * Description
- *
- * Return value
- *   void
- */
-
-static void
-on_checkbutton_showparatab_toggled(GtkToggleButton * togglebutton,
-			 gpointer user_data)
-{
-	xml_set_value("Xiphos", "misc", "showparatab",
-		      (gtk_toggle_button_get_active (togglebutton) ? "1" : "0"));
-	if (gtk_toggle_button_get_active (togglebutton))
-		gui_open_parallel_view_in_new_tab();
-	else
-		gui_close_passage_tab(1);
-}
-
-
-/******************************************************************************
- * Name
  *   on_biblesync_obtain_passphrase
  *
  * Synopsis
@@ -934,6 +902,7 @@ on_checkbutton_biblesync_toggled(GtkToggleButton * togglebutton,
 	if (user_data == &settings.bs_privacy)
 		biblesync_privacy(settings.bs_privacy);
 }
+
 
 /******************************************************************************
  * Name
@@ -1041,7 +1010,7 @@ on_biblesync_kbd(int mode)
 	else
 	{
 	    gchar *msg = g_strdup_printf
-		(_("BibleSync: %s mode (passphrase \"%s\")."),
+		(_("BibleSync: %s (passphrase \"%s\")."),
 		 ((mode == 0)
 		  ? _("Disabled")
 		  : ((mode == 1)
@@ -1062,8 +1031,9 @@ on_biblesync_kbd(int mode)
  *
  * Synopsis
  *   #include "preferences_dialog.h"
- *   void on_radiobutton_biblesync_nav(GtkToggleButton * togglebutton, gpointer user_data)
- *   *((int*)user_data) is settings.bs_navdirect's T/F selection.
+ *   void on_radiobutton_biblesync_nav(GtkToggleButton * togglebutton,
+ *				       gpointer user_data)
+ *   *((int*)user_data) is settings.bs_navdirect's T|F selection.
  *
  * Description
  *   BibleSync nav selection, direct (1) or verse list (0).
@@ -1078,6 +1048,43 @@ on_radiobutton_biblesync_nav(GtkToggleButton * togglebutton,
 {
 	if (gtk_toggle_button_get_active(togglebutton))
 		settings.bs_navdirect = *((int*)user_data);
+}
+
+
+/******************************************************************************
+ * Name
+ *   on_radiobutton_biblesync_listen
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *   void on_radiobutton_biblesync_listen(GtkToggleButton * togglebutton,
+ *					  gpointer user_data)
+ *   *((int*)user_data) is settings.bs_listen_set's 0|1|2 selection.
+ *
+ * Description
+ *   BibleSync listen set choice.  calls biblesync glue if necessary,
+ *   to set or clear all listen bits.
+ *
+ * Return value
+ *   void
+ */
+
+static void
+on_radiobutton_biblesync_listen(GtkToggleButton * togglebutton,
+				gpointer user_data)
+{
+	if (gtk_toggle_button_get_active(togglebutton))
+	{
+		settings.bs_listen_set = *((int*)user_data);
+
+		if (settings.bs_listen_set != 0)	// not selective
+		{
+			biblesync_set_clear_all_listen
+			    ((settings.bs_listen_set == 1)
+			     ? TRUE
+			     : FALSE);
+		}
+	}
 }
 
 
@@ -2015,6 +2022,8 @@ on_dialog_prefs_response(GtkDialog * dialog,
 		gtk_widget_destroy(GTK_WIDGET(dialog));
 
 		dialog_prefs = NULL;
+		speaker_window = NULL;
+		speaker_list = NULL;
 	}
 	main_update_parallel_page();
 }
@@ -2032,12 +2041,11 @@ create_model(void)
 	gtk_tree_store_append(model, &iter, NULL);
 	gtk_tree_store_set(model, &iter, 0, _("General"), -1);
 
-	/* the former element "3" was previously here,
-	   which was for the "tabs and panes," now defunct.
-	   we maintain the numbering because 4 is a fixed ref. */
-
 	gtk_tree_store_append(model, &child_iter, &iter);
 	gtk_tree_store_set(model, &child_iter, 0, _("Options"), 1, 4, -1);
+
+	gtk_tree_store_append(model, &child_iter, &iter);
+	gtk_tree_store_set(model, &child_iter, 0, _("BibleSync"), 1, 3, -1);
 
 
 	gtk_tree_store_append(model, &iter, NULL);
@@ -2185,21 +2193,6 @@ static void
 setup_check_buttons(void)
 {
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-				     (check_button.enable_tabbed_browsing),
-				     settings.browsing);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-				     (check_button.show_bible_pane),
-				     settings.showtexts);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-				     (check_button.show_preview_pane),
-				     settings.showpreview);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-				     (check_button.show_commentary_pane),
-				     settings.showcomms);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-				     (check_button.show_dictionary_pane),
-				     settings.showdicts);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.use_default_dictionary),
 				     settings.useDefaultDict);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
@@ -2235,10 +2228,6 @@ setup_check_buttons(void)
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.prayerlist),
 				     settings.prayerlist);
-
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-				     (check_button.show_paratab),
-				     settings.showparatab);
 
 	/* v-- BibleSync --v */
 	/* toggles */
@@ -2279,18 +2268,18 @@ setup_check_buttons(void)
 				     (radio_button.bs_nav_verselist),
 				     (settings.bs_navdirect == 0));
 
+	/* listening choice */
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+				     (radio_button.bs_listen_some),
+				     (settings.bs_listen_set == 0));
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+				     (radio_button.bs_listen_all),
+				     (settings.bs_listen_set == 1));
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+				     (radio_button.bs_listen_none),
+				     (settings.bs_listen_set == 2));
 	/* ^-- BibleSync --^ */
 
-	g_signal_connect(check_button.enable_tabbed_browsing, "toggled",
-			 G_CALLBACK(on_checkbutton1_toggled), NULL);
-	g_signal_connect(check_button.show_bible_pane, "toggled",
-			 G_CALLBACK(on_checkbutton2_toggled), NULL);
-	g_signal_connect(check_button.show_preview_pane, "toggled",
-			 G_CALLBACK(on_checkbutton9_toggled), NULL);
-	g_signal_connect(check_button.show_commentary_pane, "toggled",
-			 G_CALLBACK(on_checkbutton3_toggled), NULL);
-	g_signal_connect(check_button.show_dictionary_pane, "toggled",
-			 G_CALLBACK(on_checkbutton4_toggled), NULL);
 	g_signal_connect(check_button.use_default_dictionary, "toggled",
 			 G_CALLBACK(on_checkbutton6_toggled), NULL);
 	g_signal_connect(check_button.show_devotion, "toggled",
@@ -2316,9 +2305,6 @@ setup_check_buttons(void)
 	g_signal_connect(check_button.prayerlist, "toggled",
 			 G_CALLBACK(on_checkbutton_prayerlist_toggled), NULL);
 
-	g_signal_connect(check_button.show_paratab, "toggled",
-			 G_CALLBACK(on_checkbutton_showparatab_toggled), NULL);
-
 	/* v-- BibleSync --v */
 	g_signal_connect(check_button.bs_debug, "toggled",
 			 G_CALLBACK(on_checkbutton_biblesync_toggled), &settings.bs_debug);
@@ -2330,18 +2316,25 @@ setup_check_buttons(void)
 			 G_CALLBACK(on_checkbutton_biblesync_toggled), &settings.bs_privacy);
 
 	g_signal_connect(radio_button.bs_mode_off, "toggled",
-			 G_CALLBACK(on_radiobutton_biblesync_mode), &rb_cb_0);
+			 G_CALLBACK(on_radiobutton_biblesync_mode), &rb_cb[0]);
 	g_signal_connect(radio_button.bs_mode_personal, "toggled",
-			 G_CALLBACK(on_radiobutton_biblesync_mode), &rb_cb_1);
+			 G_CALLBACK(on_radiobutton_biblesync_mode), &rb_cb[1]);
 	g_signal_connect(radio_button.bs_mode_speaker, "toggled",
-			 G_CALLBACK(on_radiobutton_biblesync_mode), &rb_cb_2);
+			 G_CALLBACK(on_radiobutton_biblesync_mode), &rb_cb[2]);
 	g_signal_connect(radio_button.bs_mode_audience, "toggled",
-			 G_CALLBACK(on_radiobutton_biblesync_mode), &rb_cb_3);
+			 G_CALLBACK(on_radiobutton_biblesync_mode), &rb_cb[3]);
 
 	g_signal_connect(radio_button.bs_nav_direct, "toggled",
-			 G_CALLBACK(on_radiobutton_biblesync_nav), &rb_cb_1);
+			 G_CALLBACK(on_radiobutton_biblesync_nav), &rb_cb[1]);
 	g_signal_connect(radio_button.bs_nav_verselist, "toggled",
-			 G_CALLBACK(on_radiobutton_biblesync_nav), &rb_cb_0);
+			 G_CALLBACK(on_radiobutton_biblesync_nav), &rb_cb[0]);
+
+	g_signal_connect(radio_button.bs_listen_some, "toggled",
+			 G_CALLBACK(on_radiobutton_biblesync_listen), &rb_cb[0]);
+	g_signal_connect(radio_button.bs_listen_all, "toggled",
+			 G_CALLBACK(on_radiobutton_biblesync_listen), &rb_cb[1]);
+	g_signal_connect(radio_button.bs_listen_none, "toggled",
+			 G_CALLBACK(on_radiobutton_biblesync_listen), &rb_cb[2]);
 	/* ^-- BibleSync --^ */
 }
 
@@ -2954,11 +2947,6 @@ create_preferences_dialog(void)
 	color_picker.invert_normal = UI_GET_ITEM(gxml, "invert_normal");
 	color_picker.invert_highlight = UI_GET_ITEM(gxml, "invert_highlight");
 
-	check_button.enable_tabbed_browsing = UI_GET_ITEM(gxml, "checkbutton1");
-	check_button.show_bible_pane = UI_GET_ITEM(gxml,"checkbutton2");
-	check_button.show_preview_pane = UI_GET_ITEM(gxml, "checkbutton9");
-	check_button.show_commentary_pane = UI_GET_ITEM(gxml, "checkbutton3");
-	check_button.show_dictionary_pane = UI_GET_ITEM(gxml, "checkbutton4");
 	check_button.use_linked_tabs = UI_GET_ITEM(gxml, "checkbutton10");
 	check_button.readaloud = UI_GET_ITEM(gxml, "checkbutton11");
 	check_button.show_verse_num = UI_GET_ITEM(gxml, "checkbutton12");
@@ -2980,21 +2968,26 @@ create_preferences_dialog(void)
 	check_button.xrefs_in_verse_list = UI_GET_ITEM(gxml, "checkbutton_xrefs_in_verse_list");
 	check_button.prayerlist = UI_GET_ITEM(gxml, "checkbutton_prayerlist");
 
-	check_button.show_paratab = UI_GET_ITEM(gxml, "checkbutton_paratab");
-
 	/* v-- BibleSync --v */
-	check_button.bs_debug           = UI_GET_ITEM(gxml, "checkbutton_BSP_nav_debug");
-	check_button.bs_presence        = UI_GET_ITEM(gxml, "checkbutton_BSP_presence");
-	check_button.bs_mismatch        = UI_GET_ITEM(gxml, "checkbutton_BSP_mismatch");
-	check_button.bs_privacy         = UI_GET_ITEM(gxml, "checkbutton_BSP_privacy");
+	check_button.bs_debug         = UI_GET_ITEM(gxml, "checkbutton_BSP_nav_debug");
+	check_button.bs_presence      = UI_GET_ITEM(gxml, "checkbutton_BSP_presence");
+	check_button.bs_mismatch      = UI_GET_ITEM(gxml, "checkbutton_BSP_mismatch");
+	check_button.bs_privacy       = UI_GET_ITEM(gxml, "checkbutton_BSP_privacy");
 
-	radio_button.bs_mode_off        = UI_GET_ITEM(gxml, "radiobutton_BSP_off");
-	radio_button.bs_mode_personal   = UI_GET_ITEM(gxml, "radiobutton_BSP_personal");
-	radio_button.bs_mode_speaker    = UI_GET_ITEM(gxml, "radiobutton_BSP_speaker");
-	radio_button.bs_mode_audience   = UI_GET_ITEM(gxml, "radiobutton_BSP_audience");
+	radio_button.bs_mode_off      = UI_GET_ITEM(gxml, "radiobutton_BSP_off");
+	radio_button.bs_mode_personal = UI_GET_ITEM(gxml, "radiobutton_BSP_personal");
+	radio_button.bs_mode_speaker  = UI_GET_ITEM(gxml, "radiobutton_BSP_speaker");
+	radio_button.bs_mode_audience = UI_GET_ITEM(gxml, "radiobutton_BSP_audience");
 
-	radio_button.bs_nav_direct      = UI_GET_ITEM(gxml, "radiobutton_BSP_nav_direct");
-	radio_button.bs_nav_verselist   = UI_GET_ITEM(gxml, "radiobutton_BSP_nav_verselist");
+	radio_button.bs_nav_direct    = UI_GET_ITEM(gxml, "radiobutton_BSP_nav_direct");
+	radio_button.bs_nav_verselist = UI_GET_ITEM(gxml, "radiobutton_BSP_nav_verselist");
+
+	radio_button.bs_listen_some   = UI_GET_ITEM(gxml, "radiobutton_BSP_listen_some");
+	radio_button.bs_listen_all    = UI_GET_ITEM(gxml, "radiobutton_BSP_listen_all");
+	radio_button.bs_listen_none   = UI_GET_ITEM(gxml, "radiobutton_BSP_listen_none");
+
+	speaker_window = UI_GET_ITEM(gxml, "speakerwindow");
+	biblesync_update_speaker();
 	/* ^-- BibleSync --^ */
 
 	g_signal_connect(color_picker.text_background, "color_set",
@@ -3023,8 +3016,6 @@ create_preferences_dialog(void)
 
 	/* chapter scroll doesn't work in anything but gtkhtml3. */
 	gtk_widget_hide(check_button.use_chapter_scroll);
-
-	gtk_widget_hide(check_button.show_paratab);
 
 	setup_check_buttons();
 
@@ -3148,6 +3139,8 @@ create_preferences_dialog(void)
 void
 gui_setup_preferences_dialog(void)
 {
-	/* create preferences dialog */
-	create_preferences_dialog();
+	if (dialog_prefs == NULL) {
+		create_preferences_dialog();
+	} else
+		gdk_window_raise(gtk_widget_get_window(GTK_WIDGET(dialog_prefs)));
 }
