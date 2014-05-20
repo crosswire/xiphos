@@ -22,18 +22,40 @@
 #ifndef _BIBLESYNC_GLUE_H__
 #define _BIBLESYNC_GLUE_H__
 
-#ifdef __cplusplus
-
-extern "C" {
-#endif
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
 
 #include "main/configs.h"
 
+#ifdef __cplusplus
+
+#include <map>
+#include <string>
+
+using namespace std;
+
+extern "C" {
+
+typedef struct _speaker {
+    string uuid;
+    string user;
+    string ipaddr;
+    string app;
+    string device;
+    bool   listen;
+} BSP_Speaker;
+
+typedef std::map < string, BSP_Speaker > BSP_SpeakerMap;
+typedef BSP_SpeakerMap::iterator BSP_SpeakerMapIterator;
+
+int biblesync_compare_speaker(BSP_Speaker *L, BSP_Speaker *R);
+
+#endif // __cplusplus
+
 void biblesync_navigate(char cmd,
-			     char *bible, char *verse, char *alt,
-			     char *info, char *dump);
+			char *bible, char *verse, char *alt,
+			char *info, char *dump);
+void biblesync_update_speaker();
 int biblesync_mode_select(int m, char *p);
 int biblesync_personal();
 int biblesync_active();
@@ -42,7 +64,7 @@ const char *biblesync_get_passphrase();
 void biblesync_transmit_verse_list(char *modname, char *vlist);
 void biblesync_privacy(gboolean privacy);
 void biblesync_prep_and_xmit(const char *mod_name, const char *key);
-void biblesync_listen(gboolean listen, char *speakerkey);
+void biblesync_set_clear_all_listen(gboolean listen);
 
 #ifdef __cplusplus
 }
