@@ -553,7 +553,7 @@ void biblesync_update_speaker()
 					"visible", COLUMN_VISIBLE, NULL);
     gtk_tree_view_column_set_sizing(GTK_TREE_VIEW_COLUMN(column),
 				    GTK_TREE_VIEW_COLUMN_FIXED);
-    gtk_tree_view_column_set_min_width(GTK_TREE_VIEW_COLUMN(column), 35);
+    gtk_tree_view_column_set_min_width(GTK_TREE_VIEW_COLUMN(column), 25);
     gtk_tree_view_append_column(GTK_TREE_VIEW(speaker_list), column);
 
     /* -- column for sword module name -- */
