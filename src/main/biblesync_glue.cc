@@ -141,10 +141,17 @@ biblesync_navigate(char cmd,
 	{
 	    // Xiphos does nothing with "alt", the alternate reference.
 
+	    string uuid =
+		((string)strstr((char*)dump.c_str(),
+				BSP_APP_INSTANCE_UUID)).substr(14, 36);
+	    speakers[uuid].ref = ref;
+
 	    // direct navigation, or via verse list?
 	    if (settings.bs_navdirect &&
 		(strpbrk(ref.c_str(), "-;,") == NULL))	// not a multi-ref
 	    {
+		speakers[uuid].direct = "D";
+
 		// Xiphos interprets param "group" as a tab#.
 		char tab = group.c_str()[0];
 		if ((group.length() == 1) &&		// 1-character string
@@ -173,11 +180,14 @@ biblesync_navigate(char cmd,
 	    }
 	    else
 	    {
+		speakers[uuid].direct = "I";
+
 		// verse list as general preference, or due to multi-ref.
 		main_display_verse_list_in_sidebar
 		    (settings.currentverse,
 		     (gchar*)bible.c_str(), (gchar*)ref.c_str());
 	    }
+	    biblesync_update_speaker();
 	}
 	else
 	{
@@ -197,6 +207,8 @@ biblesync_navigate(char cmd,
 
 	speakers[uuid].uuid = uuid;
 	speakers[uuid].user = user;
+	speakers[uuid].direct = "";
+	speakers[uuid].ref = "";
 	speakers[uuid].ipaddr = ipaddr;
 	speakers[uuid].app = app;
 	speakers[uuid].device = device;
@@ -321,6 +333,8 @@ int biblesync_compare_speaker(const void *Lvoid, const void *Rvoid)
 enum {
     COLUMN_LISTEN,	// checkbox
     COLUMN_USER,	// user
+    COLUMN_DIRECT,	// directly/indirectly navigated
+    COLUMN_NAV,		// last navigation reference received
     COLUMN_ABOUT,	// invisible: other identifying info (tooltip)
     COLUMN_UUID,	// invisible: uuid
     COLUMN_VISIBLE,	// gtk magic?
@@ -514,6 +528,8 @@ void biblesync_update_speaker()
 	gtk_list_store_new(NUM_COLUMNS,
 			   // listen       user
 			   G_TYPE_BOOLEAN, G_TYPE_STRING,
+			   // direct       ref
+			   G_TYPE_STRING,  G_TYPE_STRING,
 			   // information  uuid
 			   G_TYPE_STRING,  G_TYPE_STRING,
 			   // visibility
@@ -545,7 +561,7 @@ void biblesync_update_speaker()
     image = gtk_image_new_from_stock(GTK_STOCK_APPLY, GTK_ICON_SIZE_MENU);
     gtk_widget_show(image);
     gtk_widget_set_tooltip_text(image,
-				_("Check the box to listen to this user"));
+				_("Check the box to listen to this Speaker"));
     gtk_tree_view_column_set_widget(column, image);
     gtk_tree_view_column_pack_start(column, renderer, TRUE);
     gtk_tree_view_column_set_attributes(column, renderer,
@@ -556,13 +572,36 @@ void biblesync_update_speaker()
     gtk_tree_view_column_set_min_width(GTK_TREE_VIEW_COLUMN(column), 25);
     gtk_tree_view_append_column(GTK_TREE_VIEW(speaker_list), column);
 
-    /* -- column for sword module name -- */
+    /* -- column for user name -- */
     renderer = gtk_cell_renderer_text_new();
     column = gtk_tree_view_column_new_with_attributes(_("Available Speakers"), renderer,
 						      "text", COLUMN_USER, NULL);
     gtk_tree_view_column_set_sizing(GTK_TREE_VIEW_COLUMN(column),
-				    GTK_TREE_VIEW_COLUMN_FIXED);
+				    GTK_TREE_VIEW_COLUMN_GROW_ONLY);
     gtk_tree_view_column_set_min_width(GTK_TREE_VIEW_COLUMN(column), 200);
+    gtk_tree_view_append_column(GTK_TREE_VIEW(speaker_list), column);
+
+    /* -- column for direct/indirect -- */
+    renderer = gtk_cell_renderer_text_new();
+    column = gtk_tree_view_column_new_with_attributes(_("D/I"), renderer,
+						      "text", COLUMN_DIRECT, NULL);
+    image = gtk_image_new_from_stock("gtk-yes", GTK_ICON_SIZE_MENU);	// XXX
+    gtk_widget_show(image);
+    gtk_widget_set_tooltip_text(image,
+				_("Last navigation was Direct or Indirect"));
+    gtk_tree_view_column_set_widget(column, image);
+    gtk_tree_view_column_set_sizing(GTK_TREE_VIEW_COLUMN(column),
+				    GTK_TREE_VIEW_COLUMN_FIXED);
+    gtk_tree_view_column_set_min_width(GTK_TREE_VIEW_COLUMN(column), 25);
+    gtk_tree_view_append_column(GTK_TREE_VIEW(speaker_list), column);
+
+    /* -- column for recent nav -- */
+    renderer = gtk_cell_renderer_text_new();
+    column = gtk_tree_view_column_new_with_attributes(_("Last Navigation"), renderer,
+						      "text", COLUMN_NAV, NULL);
+    gtk_tree_view_column_set_sizing(GTK_TREE_VIEW_COLUMN(column),
+				    GTK_TREE_VIEW_COLUMN_GROW_ONLY);
+    gtk_tree_view_column_set_min_width(GTK_TREE_VIEW_COLUMN(column), 100);
     gtk_tree_view_append_column(GTK_TREE_VIEW(speaker_list), column);
 
     /* -- identifying info (invisible) -- */
@@ -608,6 +647,8 @@ void biblesync_update_speaker()
 	gtk_list_store_set(model_speakers, &iter,
 			   COLUMN_LISTEN,  object->listen,
 			   COLUMN_USER,    object->user.c_str(),
+			   COLUMN_DIRECT,  object->direct.c_str(),
+			   COLUMN_NAV,     object->ref.c_str(),
 			   COLUMN_ABOUT,   identifying_info.c_str(),
 			   COLUMN_UUID,    object->uuid.c_str(),
 			   COLUMN_VISIBLE, TRUE,

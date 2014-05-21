@@ -42,6 +42,8 @@ typedef struct _speaker {
     string ipaddr;
     string app;
     string device;
+    string ref;
+    string direct;
     bool   listen;
 } BSP_Speaker;
 
