@@ -673,21 +673,14 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 			    (BOOK_BUTTON);
 		else if (state == (GDK_CONTROL_MASK|GDK_MOD1_MASK|GDK_SHIFT_MASK))
 		{				// BSP transient navigate
-		    gboolean restore = FALSE;
-		    int old = settings.bs_mode;
-
-		    if (!biblesync_active_xmit_allowed())
+		    if (biblesync_active_xmit_allowed())
 		    {
-			restore = TRUE;
-			biblesync_mode_select(1, settings.bs_passphrase);
+			biblesync_prep_and_xmit(settings.MainWindowModule,
+						settings.currentverse);
 		    }
-
-		    biblesync_prep_and_xmit(settings.MainWindowModule,
-					    settings.currentverse);
-
-		    if (restore)
+		    else
 		    {
-			biblesync_mode_select(old, settings.bs_passphrase);
+			gui_generic_warning(_("BibleSync: Not speaking."));
 		    }
 		}
 		break;
