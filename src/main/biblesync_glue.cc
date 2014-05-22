@@ -319,10 +319,10 @@ int biblesync_compare_speaker(const void *Lvoid, const void *Rvoid)
     const BSP_Speaker *R = *(const BSP_Speaker **)Rvoid;
     int retval;
 
-    if ((retval = L->user.compare(R->user) == 0))
-	if ((retval = L->ipaddr.compare(R->ipaddr) == 0))
-	    if ((retval = L->app.compare(R->app) == 0))
-		if ((retval = L->device.compare(R->device) == 0))
+    if ((retval = L->user.compare(R->user)) == 0)
+	if ((retval = L->ipaddr.compare(R->ipaddr)) == 0)
+	    if ((retval = L->app.compare(R->app)) == 0)
+		if ((retval = L->device.compare(R->device)) == 0)
 		    retval = L->uuid.compare(R->uuid);
     return retval;
 }
