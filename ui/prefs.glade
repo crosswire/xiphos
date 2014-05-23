@@ -90,7 +90,7 @@
                             <child>
                               <widget class="GtkLabel" id="label10">
                                 <property name="visible">True</property>
-                                <property name="xalign">0.090000003576278687</property>
+                                <property name="xalign">0.1</property>
                                 <property name="label" translatable="yes">Background</property>
                               </widget>
                               <packing>
@@ -104,7 +104,22 @@
                                 <property name="receives_default">False</property>
                               </widget>
                               <packing>
+                                <property name="expand">True</property>
+                                <property name="fill">True</property>
                                 <property name="position">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkLabel" id="labelc1">
+                                <property name="visible">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes"> </property>
+                                <property name="use_markup">True</property>
+                              </widget>
+                              <packing>
+                                <property name="expand">True</property>
+                                <property name="fill">True</property>
+                                <property name="position">4</property>
                               </packing>
                             </child>
                           </widget>
@@ -119,10 +134,12 @@
                             <child>
                               <widget class="GtkLabel" id="label11">
                                 <property name="visible">True</property>
-                                <property name="xalign">0.090000003576278687</property>
+                                <property name="xalign">0.1</property>
                                 <property name="label" translatable="yes">Foreground</property>
                               </widget>
                               <packing>
+                                <property name="expand">True</property>
+                                <property name="fill">True</property>
                                 <property name="position">0</property>
                               </packing>
                             </child>
@@ -134,6 +151,19 @@
                               </widget>
                               <packing>
                                 <property name="position">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkLabel" id="labelc2">
+                                <property name="visible">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes"> </property>
+                                <property name="use_markup">True</property>
+                              </widget>
+                              <packing>
+                                <property name="expand">True</property>
+                                <property name="fill">True</property>
+                                <property name="position">4</property>
                               </packing>
                             </child>
                           </widget>
@@ -148,10 +178,12 @@
                             <child>
                               <widget class="GtkLabel" id="label12">
                                 <property name="visible">True</property>
-                                <property name="xalign">0.090000003576278687</property>
+                                <property name="xalign">0.1</property>
                                 <property name="label" translatable="yes">Current Verse</property>
                               </widget>
                               <packing>
+                                <property name="expand">True</property>
+                                <property name="fill">True</property>
                                 <property name="position">0</property>
                               </packing>
                             </child>
@@ -163,6 +195,19 @@
                               </widget>
                               <packing>
                                 <property name="position">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkLabel" id="labelc3">
+                                <property name="visible">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes"> </property>
+                                <property name="use_markup">True</property>
+                              </widget>
+                              <packing>
+                                <property name="expand">True</property>
+                                <property name="fill">True</property>
+                                <property name="position">4</property>
                               </packing>
                             </child>
                           </widget>
@@ -177,10 +222,12 @@
                             <child>
                               <widget class="GtkLabel" id="label13">
                                 <property name="visible">True</property>
-                                <property name="xalign">0.090000003576278687</property>
+                                <property name="xalign">0.1</property>
                                 <property name="label" translatable="yes">Verse Number</property>
                               </widget>
                               <packing>
+                                <property name="expand">True</property>
+                                <property name="fill">True</property>
                                 <property name="position">0</property>
                               </packing>
                             </child>
@@ -192,6 +239,19 @@
                               </widget>
                               <packing>
                                 <property name="position">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkLabel" id="labelc4">
+                                <property name="visible">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes"> </property>
+                                <property name="use_markup">True</property>
+                              </widget>
+                              <packing>
+                                <property name="expand">True</property>
+                                <property name="fill">True</property>
+                                <property name="position">4</property>
                               </packing>
                             </child>
                           </widget>
@@ -206,10 +266,12 @@
                             <child>
                               <widget class="GtkLabel" id="label14">
                                 <property name="visible">True</property>
-                                <property name="xalign">0.090000003576278687</property>
+                                <property name="xalign">0.1</property>
                                 <property name="label" translatable="yes">Links</property>
                               </widget>
                               <packing>
+                                <property name="expand">True</property>
+                                <property name="fill">True</property>
                                 <property name="position">0</property>
                               </packing>
                             </child>
@@ -221,6 +283,19 @@
                               </widget>
                               <packing>
                                 <property name="position">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkLabel" id="labelc5">
+                                <property name="visible">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes"> </property>
+                                <property name="use_markup">True</property>
+                              </widget>
+                              <packing>
+                                <property name="expand">True</property>
+                                <property name="fill">True</property>
+                                <property name="position">4</property>
                               </packing>
                             </child>
                           </widget>
@@ -235,10 +310,12 @@
                             <child>
                               <widget class="GtkLabel" id="label38">
                                 <property name="visible">True</property>
-                                <property name="xalign">0.090000003576278687</property>
+                                <property name="xalign">0.1</property>
                                 <property name="label" translatable="yes">Highlight Foreground</property>
                               </widget>
                               <packing>
+                                <property name="expand">True</property>
+                                <property name="fill">True</property>
                                 <property name="position">0</property>
                               </packing>
                             </child>
@@ -250,6 +327,19 @@
                               </widget>
                               <packing>
                                 <property name="position">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkLabel" id="labelc6">
+                                <property name="visible">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes"> </property>
+                                <property name="use_markup">True</property>
+                              </widget>
+                              <packing>
+                                <property name="expand">True</property>
+                                <property name="fill">True</property>
+                                <property name="position">4</property>
                               </packing>
                             </child>
                           </widget>
@@ -264,10 +354,12 @@
                             <child>
                               <widget class="GtkLabel" id="label39">
                                 <property name="visible">True</property>
-                                <property name="xalign">0.090000003576278687</property>
+                                <property name="xalign">0.1</property>
                                 <property name="label" translatable="yes">Highlight Background</property>
                               </widget>
                               <packing>
+                                <property name="expand">True</property>
+                                <property name="fill">True</property>
                                 <property name="position">0</property>
                               </packing>
                             </child>
@@ -279,6 +371,19 @@
                               </widget>
                               <packing>
                                 <property name="position">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkLabel" id="labelc7">
+                                <property name="visible">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes"> </property>
+                                <property name="use_markup">True</property>
+                              </widget>
+                              <packing>
+                                <property name="expand">True</property>
+                                <property name="fill">True</property>
+                                <property name="position">4</property>
                               </packing>
                             </child>
                           </widget>
@@ -293,10 +398,12 @@
                             <child>
                               <widget class="GtkLabel" id="label42">
                                 <property name="visible">True</property>
-                                <property name="xalign">0.090000003576278687</property>
+                                <property name="xalign">0.1</property>
                                 <property name="label" translatable="yes">Invert color pairs</property>
                               </widget>
                               <packing>
+                                <property name="expand">True</property>
+                                <property name="fill">True</property>
                                 <property name="position">0</property>
                               </packing>
                             </child>
@@ -331,6 +438,19 @@
                               </widget>
                               <packing>
                                 <property name="position">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkLabel" id="labelc8">
+                                <property name="visible">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes"> </property>
+                                <property name="use_markup">True</property>
+                              </widget>
+                              <packing>
+                                <property name="expand">True</property>
+                                <property name="fill">True</property>
+                                <property name="position">4</property>
                               </packing>
                             </child>
                           </widget>
@@ -397,6 +517,7 @@
                         <child>
                           <widget class="GtkComboBox" id="basecombobox1">
                             <property name="visible">True</property>
+                            <property name="xalign">0</property>
                             <property name="items" translatable="yes">-2
 -1
 +0
@@ -407,7 +528,7 @@
 +5</property>
                           </widget>
                           <packing>
-                            <property name="expand">False</property>
+                            <property name="expand">True</property>
                             <property name="fill">False</property>
                             <property name="position">1</property>
                           </packing>
@@ -438,6 +559,7 @@
                         <child>
                           <widget class="GtkComboBox" id="combobox1">
                             <property name="visible">True</property>
+                            <property name="xalign">0</property>
                             <property name="items" translatable="yes">-2
 -1
 +0
@@ -448,7 +570,7 @@
 +5</property>
                           </widget>
                           <packing>
-                            <property name="expand">False</property>
+                            <property name="expand">True</property>
                             <property name="fill">False</property>
                             <property name="position">1</property>
                           </packing>
@@ -467,7 +589,7 @@
                           <widget class="GtkLabel" id="label41">
                             <property name="visible">True</property>
                             <property name="tooltip" translatable="yes">Name and size choice for any module in a given language; still overridden by a specific choice on a particular module</property>
-                            <property name="xalign">0</property>
+                            <property name="xalign">0.2</property>
                             <property name="label" translatable="yes">Font preferences, per language</property>
                             <property name="use_markup">True</property>
                           </widget>
@@ -563,8 +685,8 @@
                             <property name="tooltip_text" translatable="yes">Select the mode in which BibleSync should operate.</property>
                           </widget>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
                             <property name="position">0</property>
                           </packing>
                         </child>
@@ -584,8 +706,8 @@
                             </accessibility>
                           </widget>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
                             <property name="position">1</property>
                           </packing>
                         </child>
@@ -606,8 +728,8 @@
                             </accessibility>
                           </widget>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
                             <property name="position">2</property>
                           </packing>
                         </child>
@@ -628,8 +750,8 @@
                             </accessibility>
                           </widget>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
                             <property name="position">3</property>
                           </packing>
                         </child>
@@ -650,8 +772,8 @@
                             </accessibility>
                           </widget>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
                             <property name="position">4</property>
                           </packing>
                         </child>
@@ -676,8 +798,8 @@
                             <property name="use_markup">True</property>
                           </widget>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
                             <property name="position">0</property>
                           </packing>
                         </child>
@@ -689,8 +811,8 @@
                             <property name="use_markup">True</property>
                           </widget>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
                             <property name="position">1</property>
                           </packing>
                         </child>
@@ -702,8 +824,8 @@
                             <property name="use_markup">True</property>
                           </widget>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
                             <property name="position">2</property>
                           </packing>
                         </child>
@@ -715,8 +837,8 @@
                             <property name="use_markup">True</property>
                           </widget>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
                             <property name="position">3</property>
                           </packing>
                         </child>
@@ -738,8 +860,8 @@
                             </accessibility>
                           </widget>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
                             <property name="position">4</property>
                           </packing>
                         </child>
@@ -762,8 +884,8 @@
                             <property name="tooltip_text" translatable="yes">Choose how to accept incoming navigation synchronization.</property>
                           </widget>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
                             <property name="position">0</property>
                           </packing>
                         </child>
@@ -783,8 +905,8 @@
                             </accessibility>
                           </widget>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
                             <property name="position">1</property>
                           </packing>
                         </child>
@@ -805,8 +927,8 @@
                             </accessibility>
                           </widget>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
                             <property name="position">2</property>
                           </packing>
                         </child>
@@ -818,8 +940,8 @@
                             <property name="use_markup">True</property>
                           </widget>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
                             <property name="position">3</property>
                           </packing>
                         </child>
@@ -831,8 +953,8 @@
                             <property name="use_markup">True</property>
                           </widget>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
                             <property name="position">4</property>
                           </packing>
                         </child>
@@ -857,8 +979,8 @@
                             <property name="use_markup">True</property>
                           </widget>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
                             <property name="position">0</property>
                           </packing>
                         </child>
@@ -878,8 +1000,8 @@
                             </accessibility>
                           </widget>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
                             <property name="position">1</property>
                           </packing>
                         </child>
@@ -899,8 +1021,8 @@
                             </accessibility>
                           </widget>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
                             <property name="position">2</property>
                           </packing>
                         </child>
@@ -920,8 +1042,8 @@
                             </accessibility>
                           </widget>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
                             <property name="position">3</property>
                           </packing>
                         </child>
@@ -933,8 +1055,8 @@
                             <property name="use_markup">True</property>
                           </widget>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
                             <property name="position">4</property>
                           </packing>
                         </child>
@@ -958,8 +1080,8 @@
                             <property name="tooltip_text" translatable="yes">Xiphos will listen to Speakers according to choice here.</property>
                           </widget>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
                             <property name="position">0</property>
                           </packing>
                         </child>
@@ -979,8 +1101,8 @@
                             </accessibility>
                           </widget>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
                             <property name="position">1</property>
                           </packing>
                         </child>
@@ -1001,8 +1123,8 @@
                             </accessibility>
                           </widget>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
                             <property name="position">2</property>
                           </packing>
                         </child>
@@ -1023,8 +1145,8 @@
                             </accessibility>
                           </widget>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
                             <property name="position">3</property>
                           </packing>
                         </child>
@@ -1036,8 +1158,8 @@
                             <property name="use_markup">True</property>
                           </widget>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
                             <property name="position">4</property>
                           </packing>
                         </child>
@@ -1326,73 +1448,85 @@
                               <widget class="GtkLabel" id="label6">
                                 <property name="visible">True</property>
                                 <property name="xalign">0</property>
-                                <property name="label" translatable="yes">Verse number:</property>
+                                <property name="label" translatable="yes">Verse number</property>
+                                <property name="tooltip" translatable="yes">Offset the verse number in several ways</property>
                               </widget>
                               <packing>
                                 <property name="position">0</property>
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkCheckButton" id="checkbutton_verse_num_bold">
-                                <property name="label" translatable="yes">Bold</property>
+                              <widget class="GtkHBox" id="verseboxes">
                                 <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">False</property>
-                                <property name="has_tooltip">True</property>
-                                <property name="tooltip" translatable="yes">Show verse number in bold text</property>
-                                <property name="use_underline">True</property>
-                                <property name="active">True</property>
-                                <property name="draw_indicator">True</property>
-                                <accessibility>
-                                  <atkproperty name="AtkObject::accessible-name" translatable="yes">Verse number bold checkbox</atkproperty>
-                                </accessibility>
+                                <property name="homogeneous">True</property>
+                                <child>
+                                  <widget class="GtkCheckButton" id="checkbutton_verse_num_bold">
+                                    <property name="label" translatable="yes">Bold</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">False</property>
+                                    <property name="has_tooltip">True</property>
+                                    <property name="tooltip" translatable="yes">Show verse number in bold text</property>
+                                    <property name="use_underline">True</property>
+                                    <property name="active">True</property>
+                                    <property name="draw_indicator">True</property>
+                                    <accessibility>
+                                      <atkproperty name="AtkObject::accessible-name" translatable="yes">Verse number bold checkbox</atkproperty>
+                                    </accessibility>
+                                  </widget>
+                                  <packing>
+                                    <property name="expand">True</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <widget class="GtkCheckButton" id="checkbutton_verse_num_bracket">
+                                    <property name="label" translatable="yes">Brackets</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">False</property>
+                                    <property name="has_tooltip">True</property>
+                                    <property name="tooltip" translatable="yes">Show verse number with [surrounding brackets]</property>
+                                    <property name="use_underline">True</property>
+                                    <property name="active">True</property>
+                                    <property name="draw_indicator">True</property>
+                                    <accessibility>
+                                      <atkproperty name="AtkObject::accessible-name" translatable="yes">Verse number bracket checkbox</atkproperty>
+                                    </accessibility>
+                                  </widget>
+                                  <packing>
+                                    <property name="expand">True</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <widget class="GtkCheckButton" id="checkbutton_verse_num_superscript">
+                                    <property name="label" translatable="yes">Superscript</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">False</property>
+                                    <property name="has_tooltip">True</property>
+                                    <property name="tooltip" translatable="yes">Show verse number as a superscript</property>
+                                    <property name="use_underline">True</property>
+                                    <property name="active">True</property>
+                                    <property name="draw_indicator">True</property>
+                                    <accessibility>
+                                      <atkproperty name="AtkObject::accessible-name" translatable="yes">Verse number superscript checkbox</atkproperty>
+                                    </accessibility>
+                                  </widget>
+                                  <packing>
+                                    <property name="expand">True</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">2</property>
+                                  </packing>
+                                </child>
                               </widget>
                               <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
+                                <property name="expand">True</property>
+                                <property name="fill">True</property>
                                 <property name="position">1</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkCheckButton" id="checkbutton_verse_num_bracket">
-                                <property name="label" translatable="yes">Brackets</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">False</property>
-                                <property name="has_tooltip">True</property>
-                                <property name="tooltip" translatable="yes">Show verse number with [surrounding brackets]</property>
-                                <property name="use_underline">True</property>
-                                <property name="active">True</property>
-                                <property name="draw_indicator">True</property>
-                                <accessibility>
-                                  <atkproperty name="AtkObject::accessible-name" translatable="yes">Verse number bracket checkbox</atkproperty>
-                                </accessibility>
-                              </widget>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
-                                <property name="position">2</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkCheckButton" id="checkbutton_verse_num_superscript">
-                                <property name="label" translatable="yes">Superscript</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">False</property>
-                                <property name="has_tooltip">True</property>
-                                <property name="tooltip" translatable="yes">Show verse number as a superscript</property>
-                                <property name="use_underline">True</property>
-                                <property name="active">True</property>
-                                <property name="draw_indicator">True</property>
-                                <accessibility>
-                                  <atkproperty name="AtkObject::accessible-name" translatable="yes">Verse number superscript checkbox</atkproperty>
-                                </accessibility>
-                              </widget>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
-                                <property name="position">3</property>
                               </packing>
                             </child>
                           </widget>
@@ -1412,8 +1546,8 @@
                                 <property name="use_markup">True</property>
                               </widget>
                               <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
+                                <property name="expand">True</property>
+                                <property name="fill">True</property>
                                 <property name="position">0</property>
                               </packing>
                             </child>
