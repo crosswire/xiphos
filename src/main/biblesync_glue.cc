@@ -641,10 +641,7 @@ void biblesync_update_speaker()
 	identifying_info = (string)_("IP address: ") + object->ipaddr
 	    + (string)_("\nApplication: ") + object->app
 	    + (string)_("\nDevice: ") + object->device
-	    + (string)_("\nUUID: ") + object->uuid
-	    + (string)_("\nLast navigation: ")
-	    + object->ref.substr(0,25)
-	    + (object->direct == "D" ? _(" (Direct)") : _(" (Indirect)"));
+	    + (string)_("\nUUID: ") + object->uuid;
 
 	gtk_list_store_append(model_speakers, &iter);
 	gtk_list_store_set(model_speakers, &iter,
