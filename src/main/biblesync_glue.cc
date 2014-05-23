@@ -229,7 +229,7 @@ biblesync_navigate(char cmd,
 		{
 		    speakers[uuid].listen = true;
 		    gui_generic_warning
-			(_((BSP + "Listening to\n" + user + ".").c_str()));
+			(_((BSP + "Listening to " + user + ".").c_str()));
 		}
 		else
 		{
@@ -249,7 +249,7 @@ biblesync_navigate(char cmd,
 		if ((old_speakers_size == 0) && (new_speakers_size == 1))
 		{
 		    gui_generic_warning
-			(_((BSP + "Listening to\n" + user + ".").c_str()));
+			(_((BSP + "Listening to " + user + ".").c_str()));
 		}
 		break;
 
