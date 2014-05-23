@@ -638,10 +638,13 @@ void biblesync_update_speaker()
     for (i = 0; i < size; ++i)
     {
 	object = array[i];
-	identifying_info = (string)"IP address: " + object->ipaddr
-	    + (string)"\nApplication: " + object->app
-	    + (string)"\nDevice: " + object->device
-	    + (string)"\nUUID: " + object->uuid;
+	identifying_info = (string)_("IP address: ") + object->ipaddr
+	    + (string)_("\nApplication: ") + object->app
+	    + (string)_("\nDevice: ") + object->device
+	    + (string)_("\nUUID: ") + object->uuid
+	    + (string)_("\nLast navigation: ")
+	    + object->ref.substr(0,25)
+	    + (object->direct == "D" ? _(" (Direct)") : _(" (Indirect)"));
 
 	gtk_list_store_append(model_speakers, &iter);
 	gtk_list_store_set(model_speakers, &iter,
