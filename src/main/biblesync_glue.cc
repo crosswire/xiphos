@@ -144,7 +144,7 @@ biblesync_navigate(char cmd,
 	    string uuid =
 		((string)strstr((char*)dump.c_str(),
 				BSP_APP_INSTANCE_UUID)).substr(14, 36);
-	    speakers[uuid].ref = ref;
+	    speakers[uuid].ref = bible + " " + ref;
 
 	    // direct navigation, or via verse list?
 	    if (settings.bs_navdirect &&
