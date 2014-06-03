@@ -117,6 +117,7 @@ struct _preferences_check_buttons {
 	GtkWidget *bs_debug;
 	GtkWidget *bs_presence;
 	GtkWidget *bs_mismatch;
+	GtkWidget *bs_group_tab;
 	GtkWidget *bs_privacy;
 };
 
@@ -888,7 +889,7 @@ gchar *on_biblesync_obtain_passphrase()
  *   *((int*)user_data) is settings' bs_* bitflag.
  *
  * Description
- *   BibleSync debug (packet dump), presence, mismatch, and privacy
+ *   debug (packet dump), presence, mismatch, privacy, and group/tab.
  *
  * Return value
  *   void
@@ -2241,6 +2242,9 @@ setup_check_buttons(void)
 				     (check_button.bs_mismatch),
 				     settings.bs_mismatch);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+				     (check_button.bs_group_tab),
+				     settings.bs_group_tab);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.bs_privacy),
 				     settings.bs_privacy);
 	gtk_widget_set_sensitive(check_button.bs_privacy,
@@ -2312,6 +2316,8 @@ setup_check_buttons(void)
 			 G_CALLBACK(on_checkbutton_biblesync_toggled), &settings.bs_presence);
 	g_signal_connect(check_button.bs_mismatch, "toggled",
 			 G_CALLBACK(on_checkbutton_biblesync_toggled), &settings.bs_mismatch);
+	g_signal_connect(check_button.bs_group_tab, "toggled",
+			 G_CALLBACK(on_checkbutton_biblesync_toggled), &settings.bs_group_tab);
 	g_signal_connect(check_button.bs_privacy, "toggled",
 			 G_CALLBACK(on_checkbutton_biblesync_toggled), &settings.bs_privacy);
 
@@ -2972,6 +2978,7 @@ create_preferences_dialog(void)
 	check_button.bs_debug         = UI_GET_ITEM(gxml, "checkbutton_BSP_nav_debug");
 	check_button.bs_presence      = UI_GET_ITEM(gxml, "checkbutton_BSP_presence");
 	check_button.bs_mismatch      = UI_GET_ITEM(gxml, "checkbutton_BSP_mismatch");
+	check_button.bs_group_tab     = UI_GET_ITEM(gxml, "checkbutton_BSP_group_tab");
 	check_button.bs_privacy       = UI_GET_ITEM(gxml, "checkbutton_BSP_privacy");
 
 	radio_button.bs_mode_off      = UI_GET_ITEM(gxml, "radiobutton_BSP_off");

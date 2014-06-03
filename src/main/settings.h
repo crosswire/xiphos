@@ -173,7 +173,8 @@ struct _settings {
 		bs_presence,	// show presence announcements.
 		bs_mismatch,	// show mismatch packets.
 		bs_receiving,	// lock: don't re-xmit what we recv.
-		bs_listen_set;	// 0 = some, 1 = all, 2 = none.
+		bs_listen_set,	// 0 = some, 1 = all, 2 = none.
+		bs_group_tab;	// use protocol's group# as tab#.
 	char
 		*bs_passphrase;	// session exclusion/isolation.
 
