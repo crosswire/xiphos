@@ -190,7 +190,8 @@ biblesync_navigate(char cmd,
 		    (settings.currentverse,
 		     (gchar*)bible.c_str(), (gchar*)ref.c_str());
 	    }
-	    biblesync_update_speaker();
+
+	    speaker_display_update = true;
 	}
 	else
 	{
@@ -258,7 +259,8 @@ biblesync_navigate(char cmd,
 
 	    case 2:
 		// listen to none.  announce none.
-		speakers[uuid].listen = false; break;
+		speakers[uuid].listen = false;
+		break;
 	    }
 	}
 
