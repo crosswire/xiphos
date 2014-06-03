@@ -50,7 +50,7 @@ typedef struct _speaker {
 typedef std::map < string, BSP_Speaker > BSP_SpeakerMap;
 typedef BSP_SpeakerMap::iterator BSP_SpeakerMapIterator;
 
-int biblesync_compare_speaker(BSP_Speaker *L, BSP_Speaker *R);
+int biblesync_compare_speaker(const void *Lvoid, const void *Rvoid);
 
 #endif // __cplusplus
 
