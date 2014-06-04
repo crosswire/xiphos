@@ -981,9 +981,9 @@
 	  </child>
 
 	  <child>
-	    <widget class="GtkCheckMenuItem" id="scripture_cross-references">
+	    <widget class="GtkCheckMenuItem" id="cross-references">
 	      <property name="visible">False</property>
-	      <property name="label" translatable="yes">Scripture Cross-references</property>
+	      <property name="label" translatable="yes">Cross-references</property>
 	      <property name="use_underline">True</property>
 	      <property name="active">False</property>
 	      <signal name="activate" handler="on_scripture_cross_references_activate" last_modification_time="Thu, 26 Feb 2009 20:05:23 GMT"/>
