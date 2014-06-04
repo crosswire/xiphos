@@ -53,6 +53,7 @@ struct  _global_ops {
 	gint respect_font_faces;
 };
 
+void _set_global_textual(const char *option, const char *choice);
 GLOBAL_OPS *main_new_globals(const gchar * mod_name);
 int main_save_module_options(const char * mod_name, const char * option, int choice);
 int main_get_one_option(const char *mod_name, const char *op);

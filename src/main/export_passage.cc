@@ -34,6 +34,7 @@
 #include "main/export_passage.h"
 #include "main/settings.h"
 #include "main/sword.h"
+#include "main/global_ops.hh"
 
 #define	HTML_START 	"<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><style type=\"text/css\"><!-- A { text-decoration:none } *[dir=rtl] { text-align: right; } .transChangeSupplied { font-style: italic; } --></style></head><body>"
 
@@ -437,6 +438,10 @@ static void _export_verse_range (EXPORT_DATA data, int type)
 void main_export_content(EXPORT_DATA data, gint format)
 {
 	int style = (format ? HTML : PLAIN);
+
+	// no markers are left in exported text.
+	_set_global_textual("Cross-references", "Off");
+	_set_global_textual("Footnotes", "Off");
 
 	switch (data.passage_type) {
 		case BOOK:
