@@ -729,7 +729,7 @@ G_MODULE_EXPORT void on_lemmas_activate (GtkCheckMenuItem * menuitem, gpointer u
 G_MODULE_EXPORT void on_scripture_cross_references_activate (GtkCheckMenuItem * menuitem,
                                         	gpointer user_data)
 {
-	_global_option_main_pane((GtkMenuItem*)menuitem, "Scripture Cross-references"); /* string not seen by user */
+	_global_option_main_pane((GtkMenuItem*)menuitem, "Cross-references"); /* string not seen by user */
 }
 
 
@@ -1504,7 +1504,7 @@ G_MODULE_EXPORT void _add_and_check_global_opts(GladeXML *gxml,
 		gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), ops->lemmas);
 	}
 
-    	item = UI_GET_ITEM(gxml, "scripture_cross-references");
+    	item = UI_GET_ITEM(gxml, "cross-references");
 
 	if (main_check_for_global_option((gchar*) mod_name, "ThMLScripref") ||
 	    main_check_for_global_option((gchar*) mod_name, "OSISScripref")) {

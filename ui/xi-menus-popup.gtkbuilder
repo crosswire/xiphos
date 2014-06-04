@@ -510,11 +510,11 @@
               </object>
             </child>
             <child>
-              <object class="GtkCheckMenuItem" id="scripture_cross-references">
+              <object class="GtkCheckMenuItem" id="cross-references">
                 <property name="visible">False</property>
                 <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
-                <property name="label" translatable="yes">Scripture Cross-references</property>
+                <property name="label" translatable="yes">Cross-references</property>
                 <property name="use_underline">True</property>
                 <signal name="activate" handler="on_scripture_cross_references_activate" swapped="no"/>
               </object>

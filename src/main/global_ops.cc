@@ -54,8 +54,8 @@ static void _set_global_option(const char *option,
 }
 
 
-static void _set_global_textual(const char *option,
-				const char *choice)
+void _set_global_textual(const char *option,
+			 const char *choice)
 {
 	SWMgr *mgr = backend->get_mgr();
 	mgr->setGlobalOption(option, choice);
@@ -230,7 +230,7 @@ GLOBAL_OPS *main_new_globals(const gchar * mod_name)
 	ops->footnotes =
 	    (module_options[mod_name]["Footnotes"] != "Off");
 	ops->scripturerefs =
-	    (module_options[mod_name]["Scripture Cross-references"] != "Off");
+	    (module_options[mod_name]["Cross-references"] != "Off");
 	ops->xrefnotenumbers =
 	    (module_options[mod_name]["XrefNoteNumbers"] != "Off");
 
