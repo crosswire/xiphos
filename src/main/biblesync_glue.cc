@@ -76,7 +76,8 @@ biblesync_navigate(char cmd,
 		   string info,  string dump)
 {
     bool speaker_display_update = false;
-    string message;
+    bool is_module;
+    string message, speaker_uuid;
 
     // parameter overload usage.
     string &presence = alt, &uuid = alt;
@@ -137,67 +138,66 @@ biblesync_navigate(char cmd,
 	    gui_generic_warning((char *)message.c_str());
 	}
 
-	if (backend->is_module(bible.c_str()))
+	// Xiphos does nothing with "alt", the alternate reference.
+
+	speaker_uuid = ((string)strstr((char*)dump.c_str(),
+				       BSP_APP_INSTANCE_UUID)).substr(14, 36);
+	is_module = backend->is_module(bible.c_str());
+
+	// direct navigation, or via verse list?
+	if (is_module &&
+	    settings.bs_navdirect &&
+	    (strpbrk(ref.c_str(), "-;,") == NULL))	// not a multi-ref
 	{
-	    // Xiphos does nothing with "alt", the alternate reference.
+	    speakers[speaker_uuid].direct = "D";
 
-	    string uuid =
-		((string)strstr((char*)dump.c_str(),
-				BSP_APP_INSTANCE_UUID)).substr(14, 36);
-	    speakers[uuid].ref = bible + " " + ref;
-
-	    // direct navigation, or via verse list?
-	    if (settings.bs_navdirect &&
-		(strpbrk(ref.c_str(), "-;,") == NULL))	// not a multi-ref
+	    // by default, Xiphos can interpret param "group" as tab#.
+	    if (settings.bs_group_tab)
 	    {
-		speakers[uuid].direct = "D";
-
-		// by default, Xiphos can interpret param "group" as tab#.
-		if (settings.bs_group_tab)
+		char tab = group.c_str()[0];
+		if ((group.length() == 1) &&	// 1-char string
+		    (tab >= '1') && (tab <= '9'))
 		{
-		    char tab = group.c_str()[0];
-		    if ((group.length() == 1) &&	// 1-char string
-			(tab >= '1') && (tab <= '9'))
+		    tab -= '1';			// 0-based list
+
+		    // select tab if not already current, avoid screen flash.
+		    if (cur_passage_tab &&
+			(tab != gtk_notebook_page_num(
+			    GTK_NOTEBOOK(widgets.notebook_main),
+			    cur_passage_tab->page_widget)))
 		    {
-			tab -= '1';			// 0-based list
-		    
-			// select tab if not already current, avoid screen flash.
-			if (cur_passage_tab &&
-			    (tab != gtk_notebook_page_num(
-				GTK_NOTEBOOK(widgets.notebook_main),
-				cur_passage_tab->page_widget)))
-			{
-			    gui_select_nth_tab(tab);
-			}
-			settings.showtexts = 1;		// make panes visible
-			settings.showcomms = 1;
-			settings.comm_showing = 1;
-			gui_recompute_shows(FALSE);
+			gui_select_nth_tab(tab);
 		    }
+		    settings.showtexts = 1;	// make panes visible
+		    settings.showcomms = 1;
+		    settings.comm_showing = 1;
+		    gui_recompute_shows(FALSE);
 		}
-		//main_display_bible(bible.c_str(), ref.c_str());
-		main_url_handler(((string)"sword://"
-				  + bible
-				  + "/"
-				  + ref).c_str(), TRUE);
-	    }
-	    else
-	    {
-		speakers[uuid].direct = "I";
-
-		// verse list as general preference, or due to multi-ref.
-		main_display_verse_list_in_sidebar
-		    (settings.currentverse,
-		     (gchar*)bible.c_str(), (gchar*)ref.c_str());
 	    }
 
-	    speaker_display_update = true;
+	    main_url_handler(((string)"sword://"
+			      + bible
+			      + "/"
+			      + ref).c_str(), TRUE);
 	}
-	else
+	else	// use verse list: unknown bible, user pref, or multi-ref.
 	{
-	    message = BSP + _("Unknown module ") + bible;
-	    gui_generic_warning((char *)message.c_str());
+	    speakers[speaker_uuid].direct = "I";
+
+	    main_display_verse_list_in_sidebar
+		(settings.currentverse,
+		 (gchar*)bible.c_str(), (gchar*)ref.c_str());
+
+	    if (!is_module)
+	    {
+		message = BSP + _("Unknown module ") + bible
+		    + _(".\nNavigated indirectly using verse list.");
+		gui_generic_warning((char *)message.c_str());
+	    }
 	}
+
+	speakers[speaker_uuid].ref = bible + " " + ref;
+	speaker_display_update = true;
 	break;
 
     // new speaker discovery.
