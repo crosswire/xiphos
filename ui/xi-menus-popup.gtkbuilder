@@ -899,6 +899,24 @@
       </object>
     </child>
     <child>
+      <object class="GtkImageMenuItem" id="populate_verse_list">
+        <property name="label" translatable="yes">Populate verse list</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="tooltip_text" translatable="yes">Provide a dialog in which to paste a line of verse references, to fill the verse list.</property>
+        <property name="use_action_appearance">False</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="on_populate_verse_list_activate" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkSeparatorMenuItem" id="separator99">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+      </object>
+    </child>
+    <child>
       <object class="GtkImageMenuItem" id="send_list_via_biblesync">
         <property name="label" translatable="yes">Send list via BibleSync</property>
         <property name="visible">True</property>
