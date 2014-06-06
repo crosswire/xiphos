@@ -866,8 +866,7 @@
 			<listitem>
 				<para>
 					<guibutton>Ctrl-Alt-Shift-N</guibutton> causes BibleSync to navigate your current main window point
-					transiently as a one-shot event.  If BibleSync is not already enabled at the time, BibleSync is momentarily
-					enabled in Personal mode, navigation is sent, and the previous mode is restored.
+					transiently as a one-shot event.  BibleSync must be in transmit-ready, that is, in Personal or Speaker mode.
 				</para>
 			</listitem>
 		</itemizedlist>
