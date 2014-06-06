@@ -84,8 +84,31 @@
 		<para>
                 Verse number display can be offset in several ways provided by the checkboxes.
 		</para>
+                </sect3>
+	</sect2>
+	
+<!-- General Settings -->
+	<sect2 id="biblesync">
+		<title>BibleSync Settings</title>
+		<sect3 id="tab-pane2">
+			<title>Controls for BibleSync</title>
+		<figure>
+			<title>Controls for BibleSync</title>
+	        	<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+		fileref="figures/preferences_general-biblesync.png" format="PNG" />
+	    </imageobject>
+	    <textobject> 
+	      <phrase>BibleSync Settings</phrase> 
+	    </textobject> 
+	  </mediaobject> 
+	
+                        </screenshot>
+
+                </figure>
 		<para>
-		BibleSync is a new shared navigation protocol using LAN multicast.  It is useful for a single person when running Bible programs on
+		BibleSync is a shared navigation protocol using LAN multicast.  It is useful for a single person when running Bible programs on
 		multiple machines or devices, all of which you wish to navigate through the Bible together, or for a group working closely together,
 		such as translators.  Also, it has a "lecture" mode, where a speaker's Bible program induces the audience's programs to follow along.
 		The difference in the modes regards who transmits and who receives navigation.  In Personal mode, BibleSync navigation is both
@@ -97,25 +120,25 @@
 		follow.
 		</para>
 		<para>
+		If you use a firewall, you must punch a hole in it for UDP port 22272.
+		</para>
+		<para>
 		If you run more than one BibleSync-compatible program on your computer and do not wish your activity among them to be shared on the
 		local net, you can use Personal mode combined with the Private checkbox.  This will tell <application>Xiphos</application> not to
 		broadcast outside your system.
 		</para>
 		<para>
-		If you use a firewall, you must punch a hole in it for UDP port 22272.
-		</para>
-		<para>
 		You can send a verse list from the sidebar search or Advanced Search window via BibleSync; see the context (right-click) menu.  A
-		particularly good use case for this is when using a simpler Bible program, such as on a mobile device, with another, such as
+		particularly good use case for this is when using a simpler Bible program, such as on a mobile device, with another such as
 		<application>Xiphos</application> that has significant search capability: Do searches in <application>Xiphos</application> and send
 		the resulting verse list to the mobile device.  Be aware that size limitations on the protocol are small, and though a search may
-		generate hundreds of results in the verse list, at most a few dozen will pass in the protocol to the receivers.  Multi-references
-		always induce indirect verse list navigation.
+		generate hundreds of results in the verse list, at most a few dozen will pass in the protocol to the receivers.  For
+		<application>Xiphos</application>, receipt of multi-references always induces indirect verse list navigation.
 		</para>
 		<para>
 		<application>Xiphos</application> is the first Bible program with a BibleSync implementation; as such, its utility may be limited for
 		now.  But a number of other programs' authors and support organizations have indicated their intention to support BibleSync as well,
-		including Laridian, theWord, BibleAnalyzer, and Accordance.
+		including Laridian, theWord, BibleAnalyzer, and Accordance, as well as other Sword Project applications.
 		</para>
                 </sect3>
 	</sect2>
