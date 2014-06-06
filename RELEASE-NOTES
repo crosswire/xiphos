@@ -3,6 +3,44 @@ ____________________
 XIPHOS RELEASE NOTES
 ____________________
 
+Release 3.2.1
+06 Jun 2014
+
+This release has drastic forward movement in BibleSync plus a number of
+bug fixes.
+
+- BibleSync is no longer integral to Xiphos alone; it has been separated
+  into its own library, to make it available for other Bible programs.
+  There is some activity toward integrating it into others already.
+
+- BibleSync has gained a number of features, both in the library itself
+  and in how Xiphos uses it.  It now uses its own Preferences page, due to
+  additional features and complexity.  Notably, BibleSync operates using
+  speaker beacons, limiting the trouble that can be caused by either
+  inadvertent or malicious navigation by others.
+
+- BibleSync in Xiphos 3.2.1 will not interoperate with 3.2.0.  The
+  addition of speaker beacons means that 3.2.0 will not recognize or
+  generate them, and 3.2.1 will not recognize a speaker without them.
+  (As applied to BibleSync 1.0.0 -vs- 1.0.1 differences.)
+
+- Fixed a very old error regarding inconsistent internal use of the
+  scripture cross-reference option.
+
+- Consequent to that xref bug fix, exported content correctly no longer
+  contains either footnotes or xrefs.
+
+- Persistent difficulties with module archive have been resolved.
+
+- Generic warning dialogs, used all over the place, have been replaced
+  with a non-modal method that is not troublesome in the face of timing
+  constraints.
+
+- Compatibility issues with Solaris and BSD are resolved.
+
+- Added populating the verse list directly from a dialog (context menu).
+________________________________________________________________
+
 Release 3.2.0
 05 May 2014
 
