@@ -943,6 +943,29 @@ on_save_list_as_a_series_of_bookmarks_activate (GtkMenuItem * menuitem,
 
 
 G_MODULE_EXPORT void
+on_populate_verse_list_activate(GtkMenuItem * menuitem,
+				gpointer user_data)
+{
+    GS_DIALOG *info = gui_new_dialog();
+
+    info->stock_icon = GTK_STOCK_DIALOG_WARNING;
+    info->label_top = g_strdup(_("Paste verse references"));
+    info->text1 = g_strdup("");
+    info->label1 = _("List:");
+    info->ok = TRUE;
+
+    (void)gui_gs_dialog(info);
+
+    main_display_verse_list_in_sidebar
+	(settings.currentverse, settings.MainWindowModule, info->text1);
+
+    g_free(info->label_top);
+    g_free(info->text1);
+    g_free(info);
+}
+
+
+G_MODULE_EXPORT void
 on_send_list_via_biblesync_activate(GtkMenuItem * menuitem,
 				    gpointer user_data)
 {
