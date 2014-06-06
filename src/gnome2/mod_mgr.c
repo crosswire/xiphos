@@ -803,6 +803,7 @@ remove_install_modules(GList * modules,
 			gchar *dir;
 			gchar *zipfile;
 			char *datapath, *conf_file;
+			int dlen;
 
 			GS_print(("archive %s in %s\n", buf,
 				  (destination
@@ -821,9 +822,19 @@ remove_install_modules(GList * modules,
 
 			zipfile = g_strdup_printf("%s/%s.zip", dir, buf);
 			datapath = main_get_mod_config_entry(buf, "DataPath");
+
+			// for modules whose DataPath ends in .../xyz/abc
+			// where abc is the file prefix (abc.dat, abc.idx, &c)
+			// we have to detect this and eliminate the end.
 			if (g_access(datapath, F_OK) == -1)
 			    *(strrchr(datapath, '/')) = '\0';
 
+			// lastly, if the end char is '/', remove it or
+			// it becomes a problem when analyzing path length.
+			dlen = strlen(datapath);
+			if (datapath[dlen-1] == '/')
+			    datapath[dlen-1] = '\0';
+			
 			conf_file = main_get_mod_config_file
 					    (buf, (destination
 						   ? destination
