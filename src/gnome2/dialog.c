@@ -656,18 +656,13 @@ void gui_generic_warning(char *message)
 {
 #if 1
 	GtkWidget *dialog;
-	gchar *dialog_text;
-
-	dialog_text = g_strdup_printf
-	    ("<b><big>Xiphos</big></b>\n\n%s", message);	/* ξίφος */
 
 	dialog = gtk_message_dialog_new_with_markup
 	    (NULL,	/* no need for a parent window */
 	     GTK_DIALOG_DESTROY_WITH_PARENT,
 	     GTK_MESSAGE_INFO,
 	     GTK_BUTTONS_OK,
-	     dialog_text);
-	g_free(dialog_text);
+	     "<b><big>Xiphos</big></b>\n\n%s", message);
 
 	g_signal_connect_swapped (dialog, "response",
 				  G_CALLBACK (gtk_widget_destroy),
