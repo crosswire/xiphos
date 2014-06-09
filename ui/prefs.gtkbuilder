@@ -1042,6 +1042,144 @@
                       </packing>
                     </child>
                     <child>
+                      <object class="GtkHBox" id="box-BSP-listen">
+                        <property name="visible">True</property>
+                        <property name="homogeneous">True</property>
+                        <child>
+                          <object class="GtkLabel" id="label-biblesync-listen">
+                            <property name="visible">True</property>
+                            <property name="label" translatable="yes">Listen</property>
+                            <property name="xalign">0</property>
+                            <property name="tooltip_text" translatable="yes">Xiphos will listen to Speakers according to choice here.</property>
+                          </object>
+                          <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkRadioButton" id="radiobutton_BSP_listen_some">
+                            <property name="label" translatable="yes">Selective</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="has_tooltip">True</property>
+                            <property name="tooltip-text" translatable="yes">Choose the Speakers to be followed.</property>
+                            <property name="use_underline">True</property>
+                            <property name="active">True</property>
+                            <property name="draw_indicator">True</property>
+                            <accessibility>
+                              
+                            </accessibility>
+                            <child internal-child="accessible">
+                              <object class="AtkObject" id="a11y-radiobutton_BSP_listen_some1">
+                                <property name="AtkObject::accessible-name" translatable="yes">BSP listen some radio button</property>
+                              </object>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkRadioButton" id="radiobutton_BSP_listen_all">
+                            <property name="label" translatable="yes">All</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="has_tooltip">True</property>
+                            <property name="tooltip-text" translatable="yes">All Speakers will be followed.</property>
+                            <property name="use_underline">True</property>
+                            <property name="active">True</property>
+                            <property name="draw_indicator">True</property>
+                            <property name="group">radiobutton_BSP_listen_some</property>
+                            <accessibility>
+                              
+                            </accessibility>
+                            <child internal-child="accessible">
+                              <object class="AtkObject" id="a11y-radiobutton_BSP_listen_all1">
+                                <property name="AtkObject::accessible-name" translatable="yes">BSP listen all radio button</property>
+                              </object>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
+                            <property name="position">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkRadioButton" id="radiobutton_BSP_listen_none">
+                            <property name="label" translatable="yes">None</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="has_tooltip">True</property>
+                            <property name="tooltip-text" translatable="yes">No Speakers will be followed.</property>
+                            <property name="use_underline">True</property>
+                            <property name="active">True</property>
+                            <property name="draw_indicator">True</property>
+                            <property name="group">radiobutton_BSP_listen_some</property>
+                            <accessibility>
+                              
+                            </accessibility>
+                            <child internal-child="accessible">
+                              <object class="AtkObject" id="a11y-radiobutton_BSP_listen_none1">
+                                <property name="AtkObject::accessible-name" translatable="yes">BSP listen none radio button</property>
+                              </object>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
+                            <property name="position">3</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="labell1">
+                            <property name="visible">True</property>
+                            <property name="xalign">0</property>
+                            <property name="label" translatable="yes"> </property>
+                            <property name="use_markup">True</property>
+                          </object>
+                          <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
+                            <property name="position">4</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="position">5</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkHBox" id="box-BSP-speaker-set">
+                        <property name="visible">True</property>
+                        <property name="homogeneous">True</property>
+                        <child>
+                          <object class="GtkScrolledWindow" id="speakerwindow">
+                            <property name="width_request">300</property>
+                            <property name="height_request">150</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="hscrollbar_policy">automatic</property>
+                            <property name="vscrollbar_policy">automatic</property>
+                            <property name="shadow_type">in</property>
+                          </object>
+                          <packing>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="position">6</property>
+                      </packing>
+                    </child>
+                    <child>
                       <object class="GtkHBox" id="box-BSP-toggles">
                         <property name="visible">True</property>
                         <property name="homogeneous">True</property>
@@ -1162,144 +1300,6 @@
                             <property name="expand">True</property>
                             <property name="fill">True</property>
                             <property name="position">4</property>
-                          </packing>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="position">5</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkHBox" id="box-BSP-listen">
-                        <property name="visible">True</property>
-                        <property name="homogeneous">True</property>
-                        <child>
-                          <object class="GtkLabel" id="label-biblesync-listen">
-                            <property name="visible">True</property>
-                            <property name="label" translatable="yes">Listen</property>
-                            <property name="xalign">0</property>
-                            <property name="tooltip_text" translatable="yes">Xiphos will listen to Speakers according to choice here.</property>
-                          </object>
-                          <packing>
-                            <property name="expand">True</property>
-                            <property name="fill">True</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkRadioButton" id="radiobutton_BSP_listen_some">
-                            <property name="label" translatable="yes">Selective</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="has_tooltip">True</property>
-                            <property name="tooltip-text" translatable="yes">Choose the Speakers to be followed.</property>
-                            <property name="use_underline">True</property>
-                            <property name="active">True</property>
-                            <property name="draw_indicator">True</property>
-                            <accessibility>
-                              
-                            </accessibility>
-                            <child internal-child="accessible">
-                              <object class="AtkObject" id="a11y-radiobutton_BSP_listen_some1">
-                                <property name="AtkObject::accessible-name" translatable="yes">BSP listen some radio button</property>
-                              </object>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="expand">True</property>
-                            <property name="fill">True</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkRadioButton" id="radiobutton_BSP_listen_all">
-                            <property name="label" translatable="yes">All</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="has_tooltip">True</property>
-                            <property name="tooltip-text" translatable="yes">All Speakers will be followed.</property>
-                            <property name="use_underline">True</property>
-                            <property name="active">True</property>
-                            <property name="draw_indicator">True</property>
-                            <property name="group">radiobutton_BSP_listen_some</property>
-                            <accessibility>
-                              
-                            </accessibility>
-                            <child internal-child="accessible">
-                              <object class="AtkObject" id="a11y-radiobutton_BSP_listen_all1">
-                                <property name="AtkObject::accessible-name" translatable="yes">BSP listen all radio button</property>
-                              </object>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="expand">True</property>
-                            <property name="fill">True</property>
-                            <property name="position">2</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkRadioButton" id="radiobutton_BSP_listen_none">
-                            <property name="label" translatable="yes">None</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="has_tooltip">True</property>
-                            <property name="tooltip-text" translatable="yes">No Speakers will be followed.</property>
-                            <property name="use_underline">True</property>
-                            <property name="active">True</property>
-                            <property name="draw_indicator">True</property>
-                            <property name="group">radiobutton_BSP_listen_some</property>
-                            <accessibility>
-                              
-                            </accessibility>
-                            <child internal-child="accessible">
-                              <object class="AtkObject" id="a11y-radiobutton_BSP_listen_none1">
-                                <property name="AtkObject::accessible-name" translatable="yes">BSP listen none radio button</property>
-                              </object>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="expand">True</property>
-                            <property name="fill">True</property>
-                            <property name="position">3</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="labell1">
-                            <property name="visible">True</property>
-                            <property name="xalign">0</property>
-                            <property name="label" translatable="yes"> </property>
-                            <property name="use_markup">True</property>
-                          </object>
-                          <packing>
-                            <property name="expand">True</property>
-                            <property name="fill">True</property>
-                            <property name="position">4</property>
-                          </packing>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="position">6</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkHBox" id="box-BSP-speaker-set">
-                        <property name="visible">True</property>
-                        <property name="homogeneous">True</property>
-                        <child>
-                          <object class="GtkScrolledWindow" id="speakerwindow">
-                            <property name="width_request">300</property>
-                            <property name="height_request">150</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="hscrollbar_policy">automatic</property>
-                            <property name="vscrollbar_policy">automatic</property>
-                            <property name="shadow_type">in</property>
-                          </object>
-                          <packing>
-                            <property name="position">0</property>
                           </packing>
                         </child>
                       </object>
