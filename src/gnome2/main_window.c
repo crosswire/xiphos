@@ -677,6 +677,7 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 		    {
 			biblesync_prep_and_xmit(settings.MainWindowModule,
 						settings.currentverse);
+			gui_set_statusbar(_("BibleSync: Current navigation sent."));
 		    }
 		    else
 		    {
