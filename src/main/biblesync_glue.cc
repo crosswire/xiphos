@@ -198,6 +198,9 @@ biblesync_navigate(char cmd,
 
 	speakers[speaker_uuid].ref = bible + " " + ref;
 	speaker_display_update = true;
+
+	gui_set_statusbar((BSP + speakers[speaker_uuid].user + ": "
+			   + speakers[speaker_uuid].ref).c_str());
 	break;
 
     // new speaker discovery.
