@@ -463,8 +463,10 @@ int BibleSync::ReceiveInternal()
 		    // i.e. we're hearing an echo of ourselves.  ignore.
 		    if (i == sizeof(uuid_t))
 		    {
+#if 0
 			(*nav_func)('E', EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
 				    BSP + _("Ignoring echo."), (string)dump);
+#endif
 			continue;
 		    }
 		    
