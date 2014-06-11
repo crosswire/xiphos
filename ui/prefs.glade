@@ -517,7 +517,6 @@
                         <child>
                           <widget class="GtkComboBox" id="basecombobox1">
                             <property name="visible">True</property>
-                            <property name="xalign">0</property>
                             <property name="items" translatable="yes">-2
 -1
 +0
@@ -559,7 +558,6 @@
                         <child>
                           <widget class="GtkComboBox" id="combobox1">
                             <property name="visible">True</property>
-                            <property name="xalign">0</property>
                             <property name="items" translatable="yes">-2
 -1
 +0
@@ -635,26 +633,66 @@
                   <widget class="GtkVBox" id="vbox4">
                     <property name="visible">True</property>
                     <property name="border_width">6</property>
-                    <child>
-                      <widget class="GtkLabel" id="label17">
-                        <property name="visible">True</property>
-                        <property name="xalign">0</property>
-                        <property name="label" translatable="yes">&lt;b&gt;BibleSync&lt;/b&gt;</property>
-                        <property name="use_markup">True</property>
-                      </widget>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">False</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-
-
 
                     <child>
-                      <widget class="GtkHBox" id="box-BSP-logo">
+                      <widget class="GtkHBox" id="box-BSP-header">
                         <property name="visible">True</property>
                         <property name="homogeneous">True</property>
+
+                        <child>
+                          <widget class="GtkLabel" id="label17">
+                            <property name="visible">True</property>
+                            <property name="xalign">0</property>
+                            <property name="yalign">0</property>
+                            <property name="label" translatable="yes">&lt;b&gt;BibleSync&lt;/b&gt;</property>
+                            <property name="use_markup">True</property>
+                          </widget>
+                          <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkLabel" id="labelbsp2">
+                            <property name="visible">True</property>
+                            <property name="xalign">0</property>
+                            <property name="label" translatable="yes"> </property>
+                            <property name="use_markup">True</property>
+                          </widget>
+                          <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkLabel" id="labelbsp3">
+                            <property name="visible">True</property>
+                            <property name="xalign">0</property>
+                            <property name="label" translatable="yes"> </property>
+                            <property name="use_markup">True</property>
+                          </widget>
+                          <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
+                            <property name="position">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkLabel" id="labelbsp4">
+                            <property name="visible">True</property>
+                            <property name="xalign">0</property>
+                            <property name="label" translatable="yes"> </property>
+                            <property name="use_markup">True</property>
+                          </widget>
+                          <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
+                            <property name="position">3</property>
+                          </packing>
+                        </child>
+
                         <child>
                           <widget class="GtkImage" id="image-biblesync">
                             <property name="visible">True</property>
@@ -663,15 +701,16 @@
                             <property name="tooltip_text" translatable="yes">Xiphos is the first Bible study program to provide an implementation of BibleSync, a synchronization protocol for Bible programs. If you work with multiple Bible programs, or if you work in a team, or if you have classroom activities using shared study, BibleSync can be a useful tool for you. BibleSync operates in 1 of 3 modes: Personal, to synchronize multiple Bible applications of your own, or in a working team; Speaker, to drive a lecture audience's Bible programs to follow along; Audience, to receive the speaker's navigation.</property>
                           </widget>
                           <packing>
-                            <property name="position">0</property>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
+                            <property name="position">4</property>
                           </packing>
                         </child>
                       </widget>
                       <packing>
-                        <property name="position">1</property>
+                        <property name="position">0</property>
                       </packing>
                     </child>
-
 
                     <child>
                       <widget class="GtkHBox" id="box-BSP-mode">
@@ -779,7 +818,7 @@
                         </child>
                       </widget>
                       <packing>
-                        <property name="position">2</property>
+                        <property name="position">1</property>
                       </packing>
                     </child>
 
@@ -867,7 +906,7 @@
                         </child>
                       </widget>
                       <packing>
-                        <property name="position">3</property>
+                        <property name="position">2</property>
                       </packing>
                     </child>
 
@@ -960,7 +999,7 @@
                         </child>
                       </widget>
                       <packing>
-                        <property name="position">4</property>
+                        <property name="position">3</property>
                       </packing>
                     </child>
 
@@ -1062,7 +1101,7 @@
                         </child>
                       </widget>
                       <packing>
-                        <property name="position">5</property>
+                        <property name="position">4</property>
                       </packing>
                     </child>
 
@@ -1088,7 +1127,7 @@
                         </child>
                       </widget>
                       <packing>
-                        <property name="position">6</property>
+                        <property name="position">5</property>
                       </packing>
                     </child>
 
@@ -1198,7 +1237,7 @@
                         </child>
                       </widget>
                       <packing>
-                        <property name="position">7</property>
+                        <property name="position">6</property>
                       </packing>
                     </child>
 
