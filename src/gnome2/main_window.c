@@ -543,20 +543,43 @@ new_base_font_size(gboolean up)
 }
 
 
+/* temporary shorthand for too-common use */
+#define	sM	settings.MainWindowModule
+#define	sC	settings.CommWindowModule
+#define	sD	settings.DictWindowModule
+#define	sB	settings.book_mod
+#define	sV	settings.currentverse
+
+static
+void kbd_toggle_option(gboolean cond, gchar *option)
+{
+	gchar *msg;
+
+	if (cond) {
+		int opt = !main_get_one_option(sM, option);	// negate.
+		main_save_module_options(sM, option, opt);
+		gchar *url = g_strdup_printf("sword://%s/%s", sM, sV);
+		main_url_handler(url, TRUE);
+		g_free(url);
+		msg = g_strdup_printf("%s %s", option, (opt ? "on" : "off"));
+		gui_set_statusbar(msg);
+		g_free(msg);
+	}
+	else
+	{
+		msg = g_strdup_printf(_("Module has no support for %s."),
+				      option);
+		gui_generic_warning(msg);
+		g_free(msg);
+	}
+}
+
 static
 gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 				  gpointer user_data)
 {
 	/* these are the mods we actually use for global keys, we always only check for these set */
 	guint state = event->state & (GDK_SHIFT_MASK  | GDK_CONTROL_MASK | GDK_MOD1_MASK | GDK_MOD4_MASK );
-
-	/* simple references to repetitiously-used items. */
-	/* *NOT MALLOC'd -- not to be freed* */
-	char *M = settings.MainWindowModule;
-	char *C = settings.CommWindowModule;
-	char *D = settings.DictWindowModule;
-	char *B = settings.book_mod;
-	char *V = settings.currentverse;
 
 	switch (event->keyval) {
 	case XK_Shift_L:	/* shift keys - we need this for locking strongs (and */
@@ -567,7 +590,7 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 	case XK_a:
 	case XK_A:
 		if (state == GDK_MOD1_MASK) {	 // Alt-A  annotation
-			gui_mark_verse_dialog(M, V);
+			gui_mark_verse_dialog(sM, sV);
 		}
 		else if (state == (GDK_CONTROL_MASK|GDK_MOD1_MASK|GDK_SHIFT_MASK))
 			on_biblesync_kbd(3);	// BSP audience
@@ -576,8 +599,8 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 	case XK_b:
 	case XK_B:
 		if (state == GDK_MOD1_MASK) {	// Alt-B  bookmark
-			gchar *label = g_strdup_printf("%s, %s", V, M);
-			gui_bookmark_dialog(label, M, V);
+			gchar *label = g_strdup_printf("%s, %s", sV, sM);
+			gui_bookmark_dialog(label, sM, sV);
 			g_free(label);
 		}
 		break;
@@ -601,20 +624,20 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 		if (state == GDK_CONTROL_MASK) { // Ctrl-F  find text
 			if (settings.showtexts) {
 				gui_find_dlg(widgets.html_text,
-					     M, FALSE, NULL);
+					     sM, FALSE, NULL);
 			} else if (settings.showcomms) {
 				if (settings.comm_showing) {
 					gui_find_dlg(widgets.html_comm,
-						     C, FALSE, NULL);
+						     sC, FALSE, NULL);
 				} else {
 					gui_find_dlg(widgets.html_book,
-						     B, FALSE, NULL);
+						     sB, FALSE, NULL);
 				}
 			} else if (settings.showdicts) {
 				gui_find_dlg(widgets.html_dict,
-					     D, FALSE, NULL);
+					     sD, FALSE, NULL);
 			} else
-			    gui_generic_warning("Xiphos: No windows.");
+			    gui_generic_warning(_("Xiphos: No windows."));
 		}
 		break;
 
@@ -646,17 +669,11 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 	case XK_M:
 		if (state == GDK_MOD1_MASK)	// Alt-M morph
 		{
-			if (main_check_for_global_option((gchar*)M, "GBFMorph") ||
-			    main_check_for_global_option((gchar*)M, "ThMLMorph") ||
-			    main_check_for_global_option((gchar*)M, "OSISMorph")) {
-				int opt = main_get_one_option(M, "Morphological Tags");
-				main_save_module_options(M, "Morphological Tags", !opt);
-				gchar *url = g_strdup_printf("sword://%s/%s", M, V);
-				main_url_handler(url, TRUE);
-				g_free(url);
-			}
-			else
-				gui_generic_warning(_("Module has no morphology support."));
+			kbd_toggle_option
+			    ((main_check_for_global_option(sM, "GBFMorph") ||
+			      main_check_for_global_option(sM, "ThMLMorph") ||
+			      main_check_for_global_option(sM, "OSISMorph")),
+			     "Morphological Tags");
 		}
 		break;
 
@@ -675,8 +692,7 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 		{				// BSP transient navigate
 		    if (biblesync_active_xmit_allowed())
 		    {
-			biblesync_prep_and_xmit(settings.MainWindowModule,
-						settings.currentverse);
+			biblesync_prep_and_xmit(sM, sV);
 			gui_set_statusbar(_("BibleSync: Current navigation sent."));
 		    }
 		    else
@@ -719,16 +735,10 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 	case XK_R:
 		if (state == GDK_MOD1_MASK)		// Alt-R red words
 		{
-			if ((main_check_for_global_option((gchar*)M, "GBFRedLetterWords")) ||
-			    (main_check_for_global_option((gchar*)M, "OSISRedLetterWords"))) {
-				int opt = main_get_one_option(M, "Words of Christ in Red");
-				main_save_module_options(M, "Words of Christ in Red", !opt);
-				gchar *url = g_strdup_printf("sword://%s/%s", M, V);
-				main_url_handler(url, TRUE);
-				g_free(url);
-			}
-			else
-				gui_generic_warning(_("Module has no Red Words support."));
+			kbd_toggle_option
+			    (((main_check_for_global_option(sM, "GBFRedLetterWords")) ||
+			      (main_check_for_global_option(sM, "OSISRedLetterWords"))),
+			     "Words of Christ in Red");
 		}
 		break;
 
@@ -736,17 +746,11 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 	case XK_S:
 		if (state == GDK_MOD1_MASK)		// Alt-S strong's
 		{
-			if ((main_check_for_global_option((gchar*)M, "GBFStrongs")) ||
-			    (main_check_for_global_option((gchar*)M, "ThMLStrongs")) ||
-			    (main_check_for_global_option((gchar*)M, "OSISStrongs"))) {
-				int opt = main_get_one_option(M, "Strong's Numbers");
-				main_save_module_options(M, "Strong's Numbers", !opt);
-				gchar *url = g_strdup_printf("sword://%s/%s", M, V);
-				main_url_handler(url, TRUE);
-				g_free(url);
-			}
-			else
-				gui_generic_warning(_("Module has no Strong's support."));
+			kbd_toggle_option
+			    (((main_check_for_global_option(sM, "GBFStrongs")) ||
+			      (main_check_for_global_option(sM, "ThMLStrongs")) ||
+			      (main_check_for_global_option(sM, "OSISStrongs"))),
+			     "Strong's Numbers");
 		}
 		else if (state == (GDK_CONTROL_MASK|GDK_MOD1_MASK|GDK_SHIFT_MASK))
 			on_biblesync_kbd(2);	// BSP speaker
@@ -812,7 +816,8 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 		break;
 	case XK_F10: // Shift-F10 bible module right click
 		if (state == GDK_SHIFT_MASK)
-			gui_menu_popup(NULL, settings.MainWindowModule, NULL); /* FIXME: needs the html widget as first pram */
+			gui_menu_popup(NULL, sM, NULL);
+			/* FIXME: needs the html widget as first pram */
 		break;
 	}
 	GS_message(("on_vbox1_key_press_event\nkeycode: %d, keysym: %0x, state: %d",
