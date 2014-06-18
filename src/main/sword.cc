@@ -714,9 +714,14 @@ void main_init_backend(void)
 	//
 	// BibleSync backend startup.  identify the user by name.
 	//
-	string user = (string)g_get_real_name()
-	    + " (" + g_get_user_name() + ")";
-	biblesync = new BibleSync("Xiphos", PACKAGE_VERSION, user);
+	biblesync = new BibleSync("Xiphos", PACKAGE_VERSION, 
+#ifdef WIN32
+		// in win32 glib, get_real_name and get_user_name are the same.
+		(string)g_get_real_name()
+#else
+		(string)g_get_real_name() + " (" + g_get_user_name() + ")"
+#endif
+	    );
 }
 
 
