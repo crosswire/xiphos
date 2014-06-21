@@ -278,6 +278,7 @@ private:
     typedef struct _BibleSyncSpeaker {
 	bool      listen;			// nav for this guy?
 	uint8_t   countdown;			// lifetime aging.
+	string    addr;				// for spoof check.
     } BibleSyncSpeaker;
 
     // key string is origin uuid.
