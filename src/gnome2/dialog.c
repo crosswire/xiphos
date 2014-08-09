@@ -194,8 +194,13 @@ static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 
 	if (info->stock_icon) {
 		image5 =
-		    gtk_image_new_from_stock(info->stock_icon,
-					     GTK_ICON_SIZE_DIALOG);
+#ifdef HAVE_GTK_310
+			gtk_image_new_from_icon_name
+#else		    
+			gtk_image_new_from_stock
+#endif	
+					(info->stock_icon,
+					     GTK_ICON_SIZE_DIALOG);	
 		gtk_widget_show(image5);
 		gtk_box_pack_start(GTK_BOX(hbox3), image5, FALSE, TRUE,
 				   0);
@@ -239,7 +244,25 @@ static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 	gtk_widget_show(dialog_action_area2);
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area2),
 				  GTK_BUTTONBOX_END);
-
+#ifdef HAVE_GTK_310
+	if (info->ok)
+		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
+				      "_Ok", GTK_RESPONSE_OK);
+	if (info->yes)
+		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
+				      "_Yes", GTK_RESPONSE_YES);
+	if (info->save)
+		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
+                                             "_Save",
+                                             GTK_RESPONSE_YES);
+	if (info->no)
+		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
+				      "_No", GTK_RESPONSE_NO);
+	if (info->cancel)
+		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
+				      "_Cancel",
+				      GTK_RESPONSE_CANCEL);
+#else	
 	if (info->ok)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
 				      GTK_STOCK_OK, GTK_RESPONSE_OK);
@@ -257,6 +280,7 @@ static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
 				      GTK_STOCK_CANCEL,
 				      GTK_RESPONSE_CANCEL);
+#endif	
 	if (info->no_save)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
                                              _("Close without Saving"),
@@ -323,9 +347,16 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 	gtk_container_set_border_width(GTK_CONTAINER(hbox4), 6);
 
 	if (info->stock_icon) {
+#ifdef HAVE_GTK_310
+		image6 = 
+		     gtk_image_new_from_icon_name (info->stock_icon,
+                                            GTK_ICON_SIZE_DIALOG);
+
+#else
 		image6 =
 		    gtk_image_new_from_stock(info->stock_icon,
 					     GTK_ICON_SIZE_DIALOG);
+#endif
 		gtk_widget_show(image6);
 		gtk_box_pack_start(GTK_BOX(hbox4), image6, FALSE, TRUE,
 				   0);
@@ -581,14 +612,27 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 	gtk_widget_show(dialog_action_area3);
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area3),
 				  GTK_BUTTONBOX_END);
-
+#ifdef HAVE_GTK_310
+	if (info->no)
+		gtk_dialog_add_button(GTK_DIALOG(dialog_request),
+				      "_No", GTK_RESPONSE_NO);
+	if (info->yes)
+		gtk_dialog_add_button(GTK_DIALOG(dialog_request),
+				      "_Yes", GTK_RESPONSE_YES);
+	if (info->cancel)
+		gtk_dialog_add_button(GTK_DIALOG(dialog_request),
+				      "_Cancel",
+				      GTK_RESPONSE_CANCEL);
+	if (info->ok)
+		gtk_dialog_add_button(GTK_DIALOG(dialog_request),
+				      "_OK", GTK_RESPONSE_OK);
+#else	
 	if (info->no)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_request),
 				      GTK_STOCK_NO, GTK_RESPONSE_NO);
 	if (info->yes)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_request),
 				      GTK_STOCK_YES, GTK_RESPONSE_YES);
-
 	if (info->cancel)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_request),
 				      GTK_STOCK_CANCEL,
@@ -596,7 +640,7 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 	if (info->ok)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_request),
 				      GTK_STOCK_OK, GTK_RESPONSE_OK);
-
+#endif
 	g_signal_connect((gpointer) dialog_request, "response",
 			 G_CALLBACK(on_dialog_response), info);
 
@@ -780,10 +824,15 @@ gint gui_close_confirmation_dialog(GS_DIALOG * info)
 		gtk_dialog_add_button (GTK_DIALOG (dialog),
 				       _("Close _without Saving"),
 				       GTK_RESPONSE_NO);
-
+#ifdef HAVE_GTK_310	
+		gtk_dialog_add_buttons (GTK_DIALOG (dialog),
+					"_Cancel", GTK_RESPONSE_CANCEL,
+					"document-save", GTK_RESPONSE_YES, NULL);
+#else	
 		gtk_dialog_add_buttons (GTK_DIALOG (dialog),
 					GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 					GTK_STOCK_SAVE, GTK_RESPONSE_YES, NULL);
+#endif
 		retval = 4;
 		is_running = TRUE;
 		gtk_dialog_run((GtkDialog *) dialog);
@@ -816,7 +865,11 @@ gint gui_yes_no_dialog(char *question, char *icon)
 	gint result;
 
 	yes_no = gui_new_dialog();
+#ifdef HAVE_GTK_310	
+	yes_no->stock_icon = (icon ? icon : "dialog-question");
+#else	
 	yes_no->stock_icon = (icon ? icon : GTK_STOCK_DIALOG_QUESTION);
+#endif	
 	yes_no->label_top = question;
 	yes_no->yes = TRUE;
 	yes_no->no = TRUE;

@@ -426,7 +426,13 @@ void main_delete_range(void)
 			      _("Are you sure you want to delete this range?"),
 			      name_string);
 
-	if (gui_yes_no_dialog(str, (char *)GTK_STOCK_DIALOG_WARNING)) {
+	if (gui_yes_no_dialog(str, (char *) 
+#ifdef HAVE_GTK_310 
+	          "dialog-warning"          
+#else
+	          GTK_STOCK_DIALOG_WARNING
+#endif	
+	            )) {
 		gtk_list_store_remove(list_store, &selected);
 		xml_remove_node("ranges", "range", name_string);
 		--search1.list_rows;
@@ -685,7 +691,13 @@ void main_delete_module(GtkTreeView *treeview)
 			      _("Remove Module?"),
 			      _("Are you sure you want to remove the selected module?"));
 
-	if (gui_yes_no_dialog(str, (char *)GTK_STOCK_DIALOG_WARNING)) {
+	if (gui_yes_no_dialog(str, (char*) 
+#ifdef HAVE_GTK_310 
+	          "dialog-warning"          
+#else
+	          GTK_STOCK_DIALOG_WARNING
+#endif	
+	            )) {
 		gtk_list_store_remove(list_store, &selected);
 
 		mods = get_current_list(treeview);

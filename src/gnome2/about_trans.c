@@ -166,8 +166,13 @@ gui_create_about_trans(void)
 			   TRUE, TRUE, 0);
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(hbuttonbox),
 				  GTK_BUTTONBOX_END);
-
-	button = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
+	button = 
+#ifdef HAVE_GTK_310
+		gtk_button_new_from_icon_name ("gtk-close",
+                               GTK_ICON_SIZE_BUTTON);
+#else                        
+		gtk_button_new_from_stock (GTK_STOCK_CLOSE);
+#endif					      
 	gtk_widget_show(button);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox), button);
 #ifdef HAVE_GTK_218

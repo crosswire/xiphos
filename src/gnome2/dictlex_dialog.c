@@ -366,7 +366,14 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 	gtk_button_set_relief(GTK_BUTTON(btnSyncDL), GTK_RELIEF_NONE);
 
 	tmp_toolbar_icon =
-	    gtk_image_new_from_stock("gtk-refresh", GTK_ICON_SIZE_BUTTON);
+#ifdef HAVE_GTK_310
+	    gtk_image_new_from_icon_name ("gtk-refresh",
+                    		    GTK_ICON_SIZE_BUTTON);
+#else                        
+		
+	    gtk_image_new_from_stock("gtk-refresh",
+				     GTK_ICON_SIZE_BUTTON);
+#endif	    
 	gtk_widget_show(tmp_toolbar_icon);
 	gtk_container_add(GTK_CONTAINER(btnSyncDL), tmp_toolbar_icon);
 

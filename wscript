@@ -226,11 +226,11 @@ def configure(conf):
 
     # Auto detecting gtk version, if none were specified.
     if opt.gtkver == 'auto':
-        if conf.check_cfg(modversion='libgtkhtml-4.0', okmsg='ok',
+        if conf.check_cfg(modversion="gtk+-3.0", okmsg='ok',
                           msg='Auto detecting gtk 3'):
             opt.gtkver = '3'
         else:
-            conf.check_cfg(modversion='libgtkhtml-3.14', okmsg='ok',
+            conf.check_cfg(modversion="gtk+-2.0", okmsg='ok',
                            msg='Auto detecting gtk 2', mandatory=True)
             opt.gtkver = '2'
 
@@ -347,7 +347,16 @@ def configure(conf):
                        uselib_store="GTK_32") 
         conf.check_cfg(package="gtk+-3.0",
                        atleast_version = "3.4",
-                       uselib_store="GTK_34") 
+                       uselib_store="GTK_34")  
+        conf.check_cfg(package="gtk+-3.0",
+                       atleast_version = "3.8",
+                       uselib_store="GTK_38")  
+        conf.check_cfg(package="gtk+-3.0",
+                       atleast_version = "3.10",
+                       uselib_store="GTK_310")  
+       #  conf.check_cfg(package="gtk+-3.0",
+       #                 atleast_version = "3.12",
+       #                 uselib_store="GTK_312") 
         conf.define('USE_GTK_3', 1)
         conf.define('USE_GTKBUILDER', 1)
         if opt.webkit_editor:

@@ -126,7 +126,12 @@ void gui_verselist_to_bookmarks(GList * verses, gint save_as_single)
 
 	gtk_tree_model_get_iter_first(GTK_TREE_MODEL(model), &iter);
 	info = gui_new_dialog();
+#ifdef HAVE_GTK_310
+	info->stock_icon = "document-open";
+#else   	
 	info->stock_icon = GTK_STOCK_OPEN;
+#endif	 
+	
 	info->title = _("Bookmark");
 	info->label_top = _("Enter Folder Name");
 	info->text1 = g_strdup(settings.searchText);
@@ -551,9 +556,16 @@ static void create_pixbufs(void)
 
 #ifdef USE_GTK_3
 	bm_pixbufs->pixbuf_helpdoc = 
-		gtk_widget_render_icon_pixbuf(widgets.app,
+#ifdef HAVE_GTK_310
+	    GDK_PIXBUF(gtk_image_new_from_icon_name ("gtk-dnd",
+                    		    GTK_ICON_SIZE_BUTTON));
+#else                        
+		
+	    gtk_widget_render_icon_pixbuf(widgets.app,
                                               GTK_STOCK_DND,
                                               GTK_ICON_SIZE_MENU );
+#endif	 
+		
 #else	
 		bm_pixbufs->pixbuf_helpdoc
 		    = gtk_widget_render_icon(widgets.app,

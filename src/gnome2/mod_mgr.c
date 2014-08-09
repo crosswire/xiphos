@@ -367,7 +367,39 @@ static void
 create_pixbufs(void)
 {
 
-#ifdef USE_GTK_3
+#ifdef USE_GTK_3    
+#ifdef HAVE_GTK_310
+	GtkIconTheme *icon_theme =                       
+			gtk_icon_theme_get_default ();
+	
+	INSTALLED = gtk_icon_theme_load_icon (icon_theme,
+                          "_Apply",
+                          GTK_ICON_SIZE_MENU,
+                          GTK_ICON_LOOKUP_FORCE_SIZE,
+                          NULL);
+	
+	FASTICON  = pixbuf_finder("indexed-16.png", 0, NULL);
+
+	NO_INDEX = gtk_icon_theme_load_icon (icon_theme,
+                          "_Cancel",
+                          GTK_ICON_SIZE_MENU,
+                          GTK_ICON_LOOKUP_FORCE_SIZE,
+                          NULL);
+	
+	LOCKED    = pixbuf_finder("epiphany-secure.png", 0, NULL);
+	
+	REFRESH   =  gtk_icon_theme_load_icon (icon_theme,
+                          "view-refresh",
+                          GTK_ICON_SIZE_MENU,
+                          GTK_ICON_LOOKUP_FORCE_SIZE,
+                          NULL);
+	
+	BLANK     = gtk_icon_theme_load_icon (icon_theme,
+                          "gnome-stock-blank", // FIXME:
+                          GTK_ICON_SIZE_MENU,
+                          GTK_ICON_LOOKUP_FORCE_SIZE,
+                          NULL);
+#else
 	INSTALLED = gtk_widget_render_icon_pixbuf(dialog_modmgr,
 					   GTK_STOCK_APPLY,
 					   GTK_ICON_SIZE_MENU);
@@ -382,6 +414,7 @@ create_pixbufs(void)
 	BLANK     = gtk_widget_render_icon_pixbuf(dialog_modmgr,
 					   "gnome-stock-blank",
 					   GTK_ICON_SIZE_MENU);
+#endif	
 #else
 	INSTALLED = gtk_widget_render_icon(dialog_modmgr,
 					   GTK_STOCK_APPLY,
@@ -520,10 +553,17 @@ add_columns(GtkTreeView * treeview,
 	/* -- installed -- */
 	column = gtk_tree_view_column_new();
 	image = (remove
+#ifdef HAVE_GTK_310
+	         ? gtk_image_new_from_icon_name("gnome-stock-blank",  // FIXME:
+					    GTK_ICON_SIZE_MENU)
+		 : gtk_image_new_from_icon_name("_Apply",
+					    GTK_ICON_SIZE_MENU));
+#else
 		 ? gtk_image_new_from_stock("gnome-stock-blank",
 					    GTK_ICON_SIZE_MENU)
 		 : gtk_image_new_from_stock(GTK_STOCK_APPLY,
 					    GTK_ICON_SIZE_MENU));
+#endif	
 	gtk_widget_show(image);
 	gtk_widget_set_tooltip_text(image,
 				    (remove
@@ -542,11 +582,19 @@ add_columns(GtkTreeView * treeview,
 	g_signal_connect(renderer, "toggled",
 			 G_CALLBACK(fixed_toggled), treeview);
 
-	column = gtk_tree_view_column_new();
-	image = gtk_image_new_from_stock((remove
+	column = gtk_tree_view_column_new(); 
+	image = 
+#ifdef HAVE_GTK_310
+		 gtk_image_new_from_icon_name ((remove
+					  ? "_Yes" 
+					  : "list-add"),
+					 GTK_ICON_SIZE_MENU);
+#else
+		 gtk_image_new_from_stock((remove
 					  ? "gtk-yes" //GTK_STOCK_REMOVE
 					  : GTK_STOCK_ADD),
 					 GTK_ICON_SIZE_MENU);
+#endif	
 	gtk_widget_show(image);
 	gtk_widget_set_tooltip_text(image,
 				    (remove
@@ -632,8 +680,14 @@ add_columns(GtkTreeView * treeview,
 
 	/* -- refresh/update -- */
 	column = gtk_tree_view_column_new();
-	image = gtk_image_new_from_stock(GTK_STOCK_REFRESH,
-					 GTK_ICON_SIZE_MENU);
+	image =   
+#ifdef HAVE_GTK_310
+		gtk_image_new_from_icon_name 
+				("view-refresh", GTK_ICON_SIZE_MENU);
+#else
+		gtk_image_new_from_stock
+				(GTK_STOCK_REFRESH, GTK_ICON_SIZE_MENU);
+#endif	
 	gtk_widget_show(image);
 	gtk_widget_set_tooltip_text(image, _("The refresh icon means the Installed module is older than the newer Available module: You should update the module"));
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
@@ -2315,9 +2369,15 @@ create_fileselection_local_source(void)
 		gtk_file_chooser_dialog_new ("Open File",
 				      NULL,
 				      GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
+#ifdef HAVE_GTK_310
+		                       "_Cancel", GTK_RESPONSE_CANCEL,
+		                       "_OK", GTK_RESPONSE_ACCEPT,
+#else                        
 				      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-				      GTK_STOCK_OK, GTK_RESPONSE_ACCEPT,
+		                      GTK_STOCK_OK, GTK_RESPONSE_ACCEPT, 
+#endif					      
 				      NULL);
+	
 	if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT) {
 		filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
 		GS_message(("%s",filename));
@@ -2682,7 +2742,14 @@ on_button_remove_local_clicked(GtkButton * button,
 			      _("Remove the selected source"),
 			      caption, type, source, directory);
 
-	if (gui_yes_no_dialog(str, GTK_STOCK_DIALOG_WARNING)) {
+	if (gui_yes_no_dialog(str, 
+#ifdef HAVE_GTK_310 
+	            "dialog-warning"          
+#else
+	            GTK_STOCK_DIALOG_WARNING
+#endif	
+	            )) {
+		
 		gtk_list_store_remove(GTK_LIST_STORE(model), &selected);
 		save_sources();
 	}
@@ -2741,7 +2808,12 @@ on_button_add_remote_clicked(GtkButton * button,
 			"<span weight=\"bold\">%s</span>",
 			_("Enter a remote source"));
 	dialog = gui_new_dialog();
-	dialog->stock_icon = GTK_STOCK_DIALOG_INFO;
+	dialog->stock_icon = 
+#ifdef HAVE_GTK_310
+		"dialog-information";
+#else
+		GTK_STOCK_DIALOG_INFO;
+#endif	
 	dialog->label_top = str->str;
 	dialog->label1 = _("Caption:");
 	dialog->label2 = _("Type:");
@@ -2921,7 +2993,12 @@ on_button_remove_remote_clicked(GtkButton * button,
 	//name_string = caption;
 
 	yes_no_dialog = gui_new_dialog();
-	yes_no_dialog->stock_icon = GTK_STOCK_DIALOG_WARNING;
+	yes_no_dialog->stock_icon =   
+#ifdef HAVE_GTK_310
+		"dialog-warning";
+#else
+		GTK_STOCK_DIALOG_WARNING;
+#endif	
 	yes_no_dialog->title = _("Delete a remote source");
 	g_string_printf(str,
 			"<span weight=\"bold\">%s</span>\n\n%s|%s|%s|%s",

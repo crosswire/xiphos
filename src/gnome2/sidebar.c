@@ -947,8 +947,13 @@ on_populate_verse_list_activate(GtkMenuItem * menuitem,
 				gpointer user_data)
 {
     GS_DIALOG *info = gui_new_dialog();
-
-    info->stock_icon = GTK_STOCK_DIALOG_WARNING;
+	
+#ifdef HAVE_GTK_310
+	info->stock_icon = g_strdup("dialog-warning");
+#else
+	info->stock_icon = g_strdup(GTK_STOCK_DIALOG_WARNING);
+#endif
+	
     info->label_top = g_strdup(_("Paste verse references"));
     info->text1 = g_strdup("");
     info->label1 = _("List:");
