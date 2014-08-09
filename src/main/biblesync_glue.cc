@@ -566,7 +566,13 @@ void biblesync_update_speaker()
     g_signal_connect(renderer, "toggled", G_CALLBACK(listen_toggled), speaker_list);
 
     column = gtk_tree_view_column_new();
-    image = gtk_image_new_from_stock(GTK_STOCK_APPLY, GTK_ICON_SIZE_MENU);
+    image = 
+#ifdef HAVE_GTK_310
+        gtk_image_new_from_icon_name("gtk-apply", GTK_ICON_SIZE_MENU); 
+#else
+        gtk_image_new_from_stock(GTK_STOCK_APPLY, GTK_ICON_SIZE_MENU);
+#endif	
+    
     gtk_widget_show(image);
     gtk_widget_set_tooltip_text(image,
 				_("Check the box to listen to this Speaker"));
@@ -592,8 +598,13 @@ void biblesync_update_speaker()
     /* -- column for direct/indirect -- */
     renderer = gtk_cell_renderer_text_new();
     column = gtk_tree_view_column_new_with_attributes(_("D/I"), renderer,
-						      "text", COLUMN_DIRECT, NULL);
-    image = gtk_image_new_from_stock("gtk-yes", GTK_ICON_SIZE_MENU);	// XXX
+    					      "text", COLUMN_DIRECT, NULL);
+    image = 
+#ifdef HAVE_GTK_310
+        gtk_image_new_from_icon_name("gtk-yes", GTK_ICON_SIZE_MENU); 
+#else
+        gtk_image_new_from_stock("gtk-yes", GTK_ICON_SIZE_MENU);	// XXX
+#endif	
     gtk_widget_show(image);
     gtk_widget_set_tooltip_text(image,
 				_("Last navigation was Direct or Indirect"));

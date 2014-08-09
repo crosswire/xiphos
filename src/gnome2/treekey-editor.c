@@ -137,7 +137,11 @@ on_add_sibling_activate (GtkMenuItem * menuitem, gpointer user_data)
 	info = _get_info (tree);
 
 	d = gui_new_dialog ();
+#ifdef HAVE_GTK_310
+	d->stock_icon = "dialog-question";
+#else	
 	d->stock_icon = GTK_STOCK_DIALOG_QUESTION;
+#endif
 	d->title = _("Prayer List/Journal Item");
 	d->label_top = _("New name");
 	d->label1 = _("Name: ");
@@ -196,7 +200,11 @@ on_add_child_activate (GtkMenuItem * menuitem, gpointer user_data)
 	info = _get_info (tree);
 
 	d = gui_new_dialog ();
+#ifdef HAVE_GTK_310
+	d->stock_icon = "dialog-question";
+#else	
 	d->stock_icon = GTK_STOCK_DIALOG_QUESTION;
+#endif
 	d->title = _("Prayer List/Journal Item");
 	d->label_top = _("New name");
 	d->label1 = _("Name: ");
@@ -251,13 +259,18 @@ on_remove_activate (GtkMenuItem * menuitem, gpointer user_data)
 	EDITOR * editor = (EDITOR*) user_data;
 	GtkWidget *tree = GTK_WIDGET (editor->treeview);
 	gchar *str;
+	gchar *icon_name;
 
 	info = _get_info (tree);
 	str = g_strdup_printf("<span weight=\"bold\">%s</span>\n\n%s/%s",
 			      _("Remove the selected item"),
 			      info->book, info->local_name);
-
-	if (gui_yes_no_dialog(str, GTK_STOCK_DIALOG_WARNING)) {
+#ifdef HAVE_GTK_310
+	icon_name = g_strdup("dialog-warning");
+#else
+	icon_name = g_strdup(GTK_STOCK_DIALOG_WARNING);
+#endif
+	if (gui_yes_no_dialog(str, icon_name)) {
 		gtk_tree_store_remove(GTK_TREE_STORE(info->model), &info->iter);
 		main_treekey_remove (info->book, info->local_name, info->offset);
 	}
@@ -267,6 +280,7 @@ on_remove_activate (GtkMenuItem * menuitem, gpointer user_data)
 	g_free(info->offset);
 	g_free(info);
 	g_free(str);
+	g_free(icon_name);
 }
 
 
@@ -282,7 +296,11 @@ on_edit_activate2 (GtkMenuItem * menuitem, gpointer user_data)
 	info = _get_info (tree);
 
 	d = gui_new_dialog ();
+#ifdef HAVE_GTK_310
+	d->stock_icon = "dialog-question";
+#else	
 	d->stock_icon = GTK_STOCK_DIALOG_QUESTION;
+#endif
 	d->title = _("Prayer List/Journal Item");
 	d->label_top = _("New name");
 	d->label1 = _("Name: ");

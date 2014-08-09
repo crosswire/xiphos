@@ -355,10 +355,21 @@ void main_create_pixbufs(void)
 	}
 
 #ifdef USE_GTK_3
+	
+#ifdef HAVE_GTK_310  		
+	GtkIconTheme *icon_theme = gtk_icon_theme_get_default ();	
+	pixbufs->pixbuf_helpdoc = 
+		gtk_icon_theme_load_icon (icon_theme,
+                          "gtk-dnd",
+                          GTK_ICON_SIZE_MENU,
+                          GTK_ICON_LOOKUP_FORCE_SIZE,
+                          NULL);
+#else		
 	pixbufs->pixbuf_helpdoc = 
 		gtk_widget_render_icon_pixbuf(widgets.app,
                                               GTK_STOCK_DND,
                                               GTK_ICON_SIZE_MENU );
+#endif	
 #else
 	gtk_widget_render_icon(widgets.app,
 			       GTK_STOCK_DND,

@@ -948,7 +948,12 @@ void _create_context_menu (WebKitDOMDocument * dom_document, guint32 time, EDITO
 	}
 	
 	/* cut */
-	item =  gtk_image_menu_item_new_from_stock (GTK_STOCK_CUT,NULL);
+	item =  
+#ifdef HAVE_GTK_310 
+	gtk_menu_item_new_with_label ("Cut");	
+#else		
+	 gtk_image_menu_item_new_from_stock (GTK_STOCK_CUT,NULL);
+#endif	
 	gtk_widget_show (item);
 	g_signal_connect (G_OBJECT (item), "activate",
 			  		 G_CALLBACK (action_cut_activate_cb),
@@ -957,7 +962,12 @@ void _create_context_menu (WebKitDOMDocument * dom_document, guint32 time, EDITO
     gtk_menu_shell_append ((GtkMenuShell* )menu, (GtkWidget*) item);
 	
 	/* copy */
-	item =  gtk_image_menu_item_new_from_stock (GTK_STOCK_COPY,NULL);
+	item =  
+#ifdef HAVE_GTK_310 
+	 gtk_menu_item_new_with_label ("Copy"); 	
+#else		
+	 gtk_image_menu_item_new_from_stock (GTK_STOCK_COPY,NULL);
+#endif	
 	gtk_widget_show (item);
 	gtk_widget_set_sensitive (item,have_selection);
 	g_signal_connect (G_OBJECT (item), "activate",
@@ -966,7 +976,12 @@ void _create_context_menu (WebKitDOMDocument * dom_document, guint32 time, EDITO
     gtk_menu_shell_append ((GtkMenuShell* )menu, (GtkWidget*) item);
 	
 	/* paste */
-	item =  gtk_image_menu_item_new_from_stock (GTK_STOCK_PASTE,NULL);
+	item = 
+#ifdef HAVE_GTK_310 
+	gtk_menu_item_new_with_label ("Paste");	
+#else		
+	gtk_image_menu_item_new_from_stock (GTK_STOCK_PASTE,NULL);  
+#endif	
 		gtk_widget_show (item);
 	g_signal_connect (G_OBJECT (item), "activate",
 			  		 G_CALLBACK (action_paste_activate_cb),
@@ -979,7 +994,13 @@ void _create_context_menu (WebKitDOMDocument * dom_document, guint32 time, EDITO
     gtk_menu_shell_append ((GtkMenuShell* )menu, (GtkWidget*) item);
 
 	/* select all */
-	item =  gtk_image_menu_item_new_from_stock (GTK_STOCK_SELECT_ALL,NULL);
+	item =
+#ifdef HAVE_GTK_310  
+		gtk_menu_item_new_with_label ("Select All");
+#else		
+		gtk_image_menu_item_new_from_stock (GTK_STOCK_SELECT_ALL,NULL);         
+
+#endif	
 	gtk_widget_show (item);
 	/*g_signal_connect (G_OBJECT (item), "activate",
 			  		 G_CALLBACK (action_paste_activate_cb),

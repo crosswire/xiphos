@@ -303,15 +303,37 @@ void on_button_begin_search(GtkButton * button, gpointer user_data)
 {
 	if (search_active) {
 		terminate_search = TRUE;
+#ifdef HAVE_GTK_310
+		gtk_button_set_image ((GtkButton *)remember_search,
+                     gtk_image_new_from_icon_name ("edit-find",
+                              GTK_ICON_SIZE_BUTTON));
+#else
 		gtk_button_set_label((GtkButton *)remember_search, "gtk-find");
 		gtk_button_set_use_stock((GtkButton *)remember_search, TRUE);
+
+#endif				
 		sync_windows();
 	} else {
-		gtk_button_set_label((GtkButton *)remember_search, "gtk-stop");
+#ifdef HAVE_GTK_310
+		gtk_button_set_image ((GtkButton *)remember_search,
+                     gtk_image_new_from_icon_name ("process-stop",
+                              GTK_ICON_SIZE_BUTTON));
+#else
+		gtk_button_set_label((GtkButton *)remember_search, "gtk-stop");	
 		gtk_button_set_use_stock((GtkButton *)remember_search, TRUE);
+#endif	
+		
+		// do the search
 		main_do_dialog_search();
+		
+#ifdef HAVE_GTK_310		
+		gtk_button_set_image ((GtkButton *)remember_search,
+                     gtk_image_new_from_icon_name ("edit-find",
+                              GTK_ICON_SIZE_BUTTON));
+#else
 		gtk_button_set_label((GtkButton *)remember_search, "gtk-find");
 		gtk_button_set_use_stock((GtkButton *)remember_search, TRUE);
+#endif
 	}
 }
 
@@ -500,7 +522,11 @@ void clear_modules(GtkButton * button, gpointer user_data)
 			      _("Clear List?"),
 			      _("Are you sure you want to clear the module list?"));
 
+#ifdef HAVE_GTK_310
+	if (gui_yes_no_dialog(str, "dialog-warning")) {
+#else
 	if (gui_yes_no_dialog(str, GTK_STOCK_DIALOG_WARNING)) {
+#endif
 		model = gtk_tree_view_get_model(GTK_TREE_VIEW(search1.listview_modules));
 		list_store = GTK_LIST_STORE(model);
 		gtk_list_store_clear(list_store);
@@ -702,11 +728,19 @@ void delete_list(GtkButton * button, gpointer user_data)
 			      _("Are you sure you want to delete:"),
 			      name_string);
 
+#ifdef HAVE_GTK_310
+	if (!gui_yes_no_dialog(str, "dialog-warning")) {
+		g_free(name_string);
+		g_free(str);
+		return;
+	}
+#else
 	if (!gui_yes_no_dialog(str, GTK_STOCK_DIALOG_WARNING)) {
 		g_free(name_string);
 		g_free(str);
 		return;
 	}
+#endif	
 
 	gtk_list_store_remove(list_store, &selected);
 	xml_remove_node("modlists", "modlist", name_string);
