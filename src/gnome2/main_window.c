@@ -931,7 +931,14 @@ void create_mainwindow(void)
 	widgets.button_new_tab = gtk_button_new();
 	//don't show button here in case !settings.browsing
 
-	tab_button_icon = gtk_image_new_from_stock(GTK_STOCK_ADD, GTK_ICON_SIZE_SMALL_TOOLBAR);
+	tab_button_icon =  
+#ifdef HAVE_GTK_310
+		gtk_image_new_from_icon_name ("list-add",
+                              GTK_ICON_SIZE_SMALL_TOOLBAR);
+#else
+		gtk_image_new_from_stock(GTK_STOCK_ADD, 
+		              GTK_ICON_SIZE_SMALL_TOOLBAR);
+#endif	
 
 	gtk_widget_show(tab_button_icon);
 	gtk_container_add(GTK_CONTAINER(widgets.button_new_tab), tab_button_icon);

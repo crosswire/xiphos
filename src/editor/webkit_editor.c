@@ -150,12 +150,18 @@ void action_insert_image_activate_cb (GtkWidget *widget, EDITOR * e)
 	gchar * filename = NULL;
 
 
-	GtkWidget * dialog = gtk_file_chooser_dialog_new ("Select an image file", 
-                                                         NULL,
-                                                         GTK_FILE_CHOOSER_ACTION_OPEN, 
-                                                         GTK_STOCK_OK, GTK_RESPONSE_OK,
-		                                         		 GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, 
-                                                         NULL);  
+	GtkWidget * dialog = gtk_file_chooser_dialog_new ("Select an image file",
+				      NULL,
+				      GTK_FILE_CHOOSER_ACTION_OPEN,
+#ifdef HAVE_GTK_310
+		                      "_Cancel", GTK_RESPONSE_CANCEL,
+		                      "_OK", GTK_RESPONSE_ACCEPT,
+#else                        
+				      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+		                      GTK_STOCK_OK, GTK_RESPONSE_ACCEPT, 
+#endif					       
+                                      NULL);  
+	
 		// gtk_file_chooser_set_filter  ((GtkFileChooser *)dialog, GtkFileFilter *filter);
 		if (gtk_dialog_run (GTK_DIALOG(dialog)) == GTK_RESPONSE_OK) {
             filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));  
@@ -309,7 +315,14 @@ void action_delete_item_activate_cb (GtkWidget *widget, EDITOR * e)
 	    ("<span weight=\"bold\" size=\"larger\">%s %s?</span>",
 	    _("Are you sure you want to delete the note for") , e->key);
 
-	if (gui_yes_no_dialog(buf, GTK_STOCK_DIALOG_WARNING)) {
+	if (gui_yes_no_dialog(buf, 
+#ifdef HAVE_GTK_310 
+	            "dialog-warning"          
+#else
+	            GTK_STOCK_DIALOG_WARNING
+#endif	
+                    )) {
+		
 		main_delete_note(e->module, e->key);
 						
 		/* open with new empty document */	
@@ -584,8 +597,14 @@ open_dialog (EDITOR * e)
 	dialog = gtk_file_chooser_dialog_new (
 		_("Open"), GTK_WINDOW (e->window),
 		GTK_FILE_CHOOSER_ACTION_OPEN,
-		GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-		GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+#ifdef HAVE_GTK_310                
+                "_Cancel", GTK_RESPONSE_CANCEL,
+                "_Open", GTK_RESPONSE_ACCEPT,
+#else                        
+	         
+                GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+                GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+#endif		
 		NULL);
 	
 	gtk_file_chooser_set_current_folder (
@@ -1071,11 +1090,16 @@ _save_file (EDITOR * e)
 	if (!e->filename || ( 0 == g_strcmp0 ("Untitled document",e->filename)) ||
 						g_strrstr (e->filename, ".spt")) {	
 		GtkWidget * dialog = gtk_file_chooser_dialog_new ("Save as", //const gchar *title,
-                                         NULL, //GtkWindow *parent,
-                                         GTK_FILE_CHOOSER_ACTION_SAVE, //GtkFileChooserAction action,
-                                         GTK_STOCK_OK, GTK_RESPONSE_OK,
-                                         GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, //const gchar *first_button_text,
-                                         NULL);  
+                                      NULL, //GtkWindow *parent,
+                                      GTK_FILE_CHOOSER_ACTION_SAVE, //GtkFileChooserAction action,
+#ifdef HAVE_GTK_310                
+		                      "_OK", GTK_RESPONSE_OK,
+		                      "_Cancel", GTK_RESPONSE_CANCEL,
+#else                        
+				      GTK_STOCK_OK, GTK_RESPONSE_OK, 
+		                      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+#endif					
+                                      NULL);  
 		gtk_file_chooser_set_do_overwrite_confirmation (GTK_FILE_CHOOSER (dialog), TRUE);
 		
 		gtk_file_chooser_set_current_folder ( GTK_FILE_CHOOSER (dialog), settings.studypaddir); 
@@ -1330,7 +1354,12 @@ gint ask_about_saving(EDITOR * e)
 	case BOOK_EDITOR:
 	case NOTE_EDITOR:
 		info = gui_new_dialog();
-		info->stock_icon = GTK_STOCK_DIALOG_WARNING;
+		info->stock_icon =   
+#ifdef HAVE_GTK_310
+		"dialog-warning";
+#else
+		GTK_STOCK_DIALOG_WARNING;
+#endif	
 
 		buf = g_strdup_printf("%s: %s",e->module, e->key);
 		buf1 = _("Save the changes to document");
@@ -1366,7 +1395,12 @@ gint ask_about_saving(EDITOR * e)
 
 	case STUDYPAD_EDITOR:
 		info = gui_new_dialog();
-		info->stock_icon = GTK_STOCK_DIALOG_WARNING;
+		info->stock_icon =  
+#ifdef HAVE_GTK_310
+		"dialog-warning";
+#else
+		GTK_STOCK_DIALOG_WARNING;
+#endif	
 		if (settings.studypadfilename)
 			buf = settings.studypadfilename;
 		else

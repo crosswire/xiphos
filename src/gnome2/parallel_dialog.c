@@ -444,8 +444,13 @@ GtkWidget *create_parallel_dialog(void)
 			   TRUE, TRUE, 0);
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(hbuttonbox4),
 				  GTK_BUTTONBOX_END);
-
-	btnDockInt = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
+	btnDockInt =    
+#ifdef HAVE_GTK_310
+		gtk_button_new_from_icon_name ("window-close",
+                               GTK_ICON_SIZE_BUTTON);
+#else	
+		gtk_button_new_from_stock (GTK_STOCK_CLOSE);
+#endif	
 	gtk_widget_show(btnDockInt);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox4), btnDockInt);
 	gtk_widget_set_can_default (btnDockInt, 1);

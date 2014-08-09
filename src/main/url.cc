@@ -97,7 +97,12 @@ static void alert_url_not_found(const gchar * url)
 	GString *dialog_text = g_string_new(NULL);
 
 	dialog = gui_new_dialog();
-	dialog->stock_icon = (gchar*) GTK_STOCK_DIALOG_INFO;
+	dialog->stock_icon =
+#ifdef HAVE_GTK_310   
+		(gchar*)"dialog-information";
+#else
+		(gchar*) GTK_STOCK_DIALOG_INFO;
+#endif	
 	g_string_printf(dialog_text,
 				"<span weight=\"bold\">%s</span>\n\n%s",
 				_("URL not found:"),

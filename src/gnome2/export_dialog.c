@@ -156,8 +156,13 @@ void _get_export_filename(void)
 	fdialog = gtk_file_chooser_dialog_new ("Save Export File",
 				      NULL,
 				      GTK_FILE_CHOOSER_ACTION_SAVE,
+#ifdef HAVE_GTK_310
+		                       "_Cancel", GTK_RESPONSE_CANCEL,
+		                       "_Save", GTK_RESPONSE_ACCEPT,
+#else                        
 				      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-				      GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT,
+		                      GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT, 
+#endif					      
 				      NULL);	
 #else
 	gxml = glade_xml_new(glade_file, "filechooserdialog1", NULL);

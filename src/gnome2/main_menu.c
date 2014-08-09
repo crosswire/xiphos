@@ -591,9 +591,15 @@ on_save_session_activate(GtkMenuItem * menuitem, gpointer user_data)
 	dialog = gtk_file_chooser_dialog_new ("Save Session",
 				      NULL,
 				      GTK_FILE_CHOOSER_ACTION_SAVE,
+#ifdef HAVE_GTK_310
+		                       "_Cancel", GTK_RESPONSE_CANCEL,
+		                       "_Save", GTK_RESPONSE_ACCEPT,
+#else                        
 				      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-				      GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT,
+		                      GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT, 
+#endif		                                      
 				      NULL);
+	
 	gtk_file_chooser_set_current_folder((GtkFileChooser*)dialog, tabs_dir);
 	if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT)
   	{
@@ -696,10 +702,16 @@ on_open_session_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 	dialog = gtk_file_chooser_dialog_new ("Open Session",
 				      NULL,
-				      GTK_FILE_CHOOSER_ACTION_OPEN,
+				      GTK_FILE_CHOOSER_ACTION_OPEN,	                              
+#ifdef HAVE_GTK_310
+		                       "_Cancel", GTK_RESPONSE_CANCEL,
+		                       "_Open", GTK_RESPONSE_ACCEPT,
+#else                        
 				      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-				      GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+		                      GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT, 
+#endif					
 				      NULL);
+	
 	gtk_file_chooser_set_current_folder((GtkFileChooser*)dialog, tabs_dir);
 	if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT)
   	{

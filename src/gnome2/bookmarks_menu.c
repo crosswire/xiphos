@@ -212,8 +212,13 @@ G_MODULE_EXPORT void bibletime_bookmarks_activate(GtkMenuItem * menuitem,
 	dialog = gtk_file_chooser_dialog_new(_("Specify bookmarks file"),
 					     GTK_WINDOW(widgets.app),
 					     GTK_FILE_CHOOSER_ACTION_OPEN,
-					     GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-					     GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+#ifdef HAVE_GTK_310
+		                       "_Cancel", GTK_RESPONSE_CANCEL,
+		                       "_OK", GTK_RESPONSE_ACCEPT,
+#else                        
+				      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+		                      GTK_STOCK_OK, GTK_RESPONSE_ACCEPT, 
+#endif					      
 					     NULL);
 	fname = g_strdup_printf("%s/%s", settings.homedir, ".bibletime/bookmarks.xml");
 	gtk_file_chooser_set_filename(GTK_FILE_CHOOSER(dialog), fname);
@@ -507,7 +512,12 @@ G_MODULE_EXPORT void on_delete_item_activate(GtkMenuItem * menuitem, gpointer us
 				      name_string);
 	}
 
-	if (gui_yes_no_dialog(str, GTK_STOCK_DIALOG_WARNING)) {
+	if (gui_yes_no_dialog(str, 
+#ifdef HAVE_GTK_310
+	                      "dialog-warning")) {
+#else   	
+	                      GTK_STOCK_DIALOG_WARNING)) {
+#endif	 
 		gtk_tree_store_remove(GTK_TREE_STORE(model), &selected);
 		bookmarks_changed = TRUE;
 		gui_save_bookmarks(NULL, NULL);

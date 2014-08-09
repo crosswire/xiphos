@@ -196,8 +196,15 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 	gtk_box_pack_start(GTK_BOX(dialog_vbox23), hbox, TRUE, TRUE, 0);
 	gtk_container_set_border_width(GTK_CONTAINER(hbox), 6);
 
-	image = gtk_image_new_from_stock(GTK_STOCK_DIALOG_INFO,
-					     GTK_ICON_SIZE_DIALOG);
+	image = 
+#ifdef HAVE_GTK_310
+	    gtk_image_new_from_icon_name ("dialog-information",
+                    		    GTK_ICON_SIZE_DIALOG);
+#else                        
+		
+	    gtk_image_new_from_stock(GTK_STOCK_DIALOG_INFO,
+				     GTK_ICON_SIZE_DIALOG);
+#endif
 	gtk_widget_show(image);
 	gtk_box_pack_start(GTK_BOX(hbox), image, FALSE, TRUE,
 			   0);
@@ -227,7 +234,13 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(hbuttonbox2),
 				  GTK_BUTTONBOX_END);
 
-	button_close = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
+	button_close = 
+#ifdef HAVE_GTK_310
+		gtk_button_new_from_icon_name ("gtk-close",
+                               GTK_ICON_SIZE_BUTTON);
+#else   
+		gtk_button_new_from_stock(GTK_STOCK_CLOSE);
+#endif		
 
 	gtk_widget_show(button_close);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox2), button_close);

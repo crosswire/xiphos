@@ -862,8 +862,11 @@ gchar *on_biblesync_obtain_passphrase()
 {
 	gchar *retval;
 	GS_DIALOG *info = gui_new_dialog();
-
-	info->stock_icon = GTK_STOCK_DIALOG_WARNING;
+#ifdef HAVE_GTK_310
+	info->stock_icon = g_strdup("dialog-warning");
+#else
+	info->stock_icon = g_strdup(GTK_STOCK_DIALOG_WARNING);
+#endif
 	info->label_top = g_strdup(_("BibleSync session passphrase"));
 	info->text1 = g_strdup(biblesync_get_passphrase());
 	info->label1 = _("Phrase:");
@@ -2782,7 +2785,13 @@ void ps_button_clear(GtkButton * button, gpointer user_data)
 			      _("Clear List?"),
 			      _("Are you sure you want to clear the module list?"));
 
+
+#ifdef HAVE_GTK_310
+	if (gui_yes_no_dialog(str, "dialog-warning")) {
+#else
 	if (gui_yes_no_dialog(str, GTK_STOCK_DIALOG_WARNING)) {
+#endif
+
 		model = gtk_tree_view_get_model(GTK_TREE_VIEW(parallel_select.listview));
 		list_store = GTK_LIST_STORE(model);
 		gtk_list_store_clear(list_store);
@@ -2828,7 +2837,11 @@ void ps_button_cut(GtkButton * button, gpointer user_data)
 			      _("Remove Module?"),
 			      _("Are you sure you want to remove the selected module?"));
 
-	if (gui_yes_no_dialog(str, (char *)GTK_STOCK_DIALOG_WARNING)) {
+#ifdef HAVE_GTK_310
+	if (gui_yes_no_dialog(str, "dialog-warning")) {
+#else
+	if (gui_yes_no_dialog(str, GTK_STOCK_DIALOG_WARNING)) {
+#endif
 		gtk_list_store_remove(list_store, &selected);
 		mods = get_current_list(GTK_TREE_VIEW(parallel_select.listview));
 		mod_list = get_modlist_string(mods);

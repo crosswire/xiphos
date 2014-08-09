@@ -84,8 +84,13 @@ create_menu1(void)
 	accel_group = gtk_accel_group_new ();
 
 	menu = gtk_menu_new ();
-	item =gtk_image_menu_item_new_from_stock  ("gtk-copy",
+	item =
+#ifdef HAVE_GTK_310
+		gtk_menu_item_new_with_mnemonic ("_Copy");
+#else                        
+		gtk_image_menu_item_new_from_stock  ("gtk-copy",
                                                         accel_group);
+#endif					      
 	gtk_widget_show(item);
 	g_signal_connect(G_OBJECT(item), "clicked",
 			   G_CALLBACK  (on_copy_activate),
@@ -206,7 +211,13 @@ gui_create_about_modules(void)
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(hbuttonbox7),
 				  GTK_BUTTONBOX_END);
 
-	button = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
+	button = 
+#ifdef HAVE_GTK_310
+		gtk_button_new_from_icon_name ("gtk-close",
+                               GTK_ICON_SIZE_BUTTON);
+#else                        
+		gtk_button_new_from_stock (GTK_STOCK_CLOSE);
+#endif		
 	gtk_widget_show(button);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox7), button);
 #ifdef HAVE_GTK_218

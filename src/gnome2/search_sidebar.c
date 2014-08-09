@@ -64,15 +64,37 @@ static void on_search_button_clicked(GtkButton * button, gpointer user_data)
 {
 	if (search_active) {
 		terminate_search = TRUE;
+#ifdef HAVE_GTK_310
+		gtk_button_set_image ((GtkButton *)remember_search,
+                     gtk_image_new_from_icon_name ("edit-find",
+                              GTK_ICON_SIZE_BUTTON));
+#else
 		gtk_button_set_label((GtkButton *)remember_search, "gtk-find");
 		gtk_button_set_use_stock((GtkButton *)remember_search, TRUE);
+
+#endif		
 		sync_windows();
 	} else {
-		gtk_button_set_label((GtkButton *)remember_search, "gtk-stop");
+#ifdef HAVE_GTK_310
+		gtk_button_set_image ((GtkButton *)remember_search,
+                     gtk_image_new_from_icon_name ("process-stop",
+                              GTK_ICON_SIZE_BUTTON));
+#else
+		gtk_button_set_label((GtkButton *)remember_search, "gtk-stop");	
 		gtk_button_set_use_stock((GtkButton *)remember_search, TRUE);
+#endif	
+		
+		// do the search
 		main_do_sidebar_search(user_data);
+		
+#ifdef HAVE_GTK_310		
+		gtk_button_set_image ((GtkButton *)remember_search,
+                     gtk_image_new_from_icon_name ("edit-find",
+                              GTK_ICON_SIZE_BUTTON));
+#else
 		gtk_button_set_label((GtkButton *)remember_search, "gtk-find");
 		gtk_button_set_use_stock((GtkButton *)remember_search, TRUE);
+#endif
 	}
 }
 
@@ -177,8 +199,12 @@ void gui_create_search_sidebar(void)
 	gtk_box_pack_start(GTK_BOX(vbox5), ss.entrySearch, TRUE, TRUE, 0);
 	gtk_widget_set_size_request(ss.entrySearch, 130, -1);;
 
-	/* find button */
-	remember_search = gtk_button_new_from_stock(GTK_STOCK_FIND);
+	/* find button */	
+#ifdef HAVE_GTK_310	
+	remember_search = gtk_button_new_from_icon_name ("edit-find", GTK_ICON_SIZE_BUTTON);
+#else
+	remember_search = gtk_button_new_from_stock(GTK_STOCK_FIND);	
+#endif
 	gtk_widget_show(remember_search);
 	gtk_box_pack_start(GTK_BOX(vbox5), remember_search, TRUE, FALSE, 0);
 	gtk_widget_set_tooltip_text(remember_search,
