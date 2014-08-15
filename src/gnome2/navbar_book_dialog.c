@@ -312,7 +312,7 @@ GtkWidget *gui_navbar_book_dialog_new(DIALOG_DATA * d)
 	image1 = gtk_image_new_from_icon_name ("go-previous",
                       			  GTK_ICON_SIZE_BUTTON);	
 #else	
-	image2 = gtk_image_new_from_stock(GTK_STOCK_GO_BACK,
+	image1 = gtk_image_new_from_stock(GTK_STOCK_GO_BACK,
 	                                  GTK_ICON_SIZE_BUTTON);
 #endif	
 	gtk_widget_show(image1);
