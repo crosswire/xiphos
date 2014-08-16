@@ -647,8 +647,8 @@ int xml_create_settings_file(char *path)
 
 
 	section_node = xmlNewChild(root_node, NULL, (const xmlChar *)"layout", NULL);
-	xmlNewTextChild(section_node, NULL, (const xmlChar *)"height", (const xmlChar *)"480");
-	xmlNewTextChild(section_node, NULL,(const xmlChar *) "width", (const xmlChar *)"640");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"height", (const xmlChar *)"600");
+	xmlNewTextChild(section_node, NULL,(const xmlChar *) "width", (const xmlChar *)"800");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"app_x", (const xmlChar *)"40");
 	xmlNewTextChild(section_node, NULL,(const xmlChar *) "app_y", (const xmlChar *)"40");
 
@@ -676,11 +676,11 @@ int xml_create_settings_file(char *path)
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"prefs_x", (const xmlChar *)"40");
 	xmlNewTextChild(section_node, NULL,(const xmlChar *) "prefs_y", (const xmlChar *)"40");
 
-	xmlNewTextChild(section_node, NULL, (const xmlChar *)"textpane", (const xmlChar *)"240");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *)"shortcutbar", (const xmlChar *)"158");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"textpane", (const xmlChar *)"368");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"shortcutbar", (const xmlChar *)"200");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"uperpane", (const xmlChar *)"210");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"vltoppaneheight", (const xmlChar *)"210");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *)"sidebar_notebook_height", (const xmlChar *)"250");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"sidebar_notebook_height", (const xmlChar *)"350");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"bibleheight", (const xmlChar *)"250");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"commentaryheight", (const xmlChar *)"240");
 
