@@ -392,8 +392,13 @@ open_dialog (EDITOR * e)
 	dialog = gtk_file_chooser_dialog_new (
 		_("Open"), GTK_WINDOW (e->window),
 		GTK_FILE_CHOOSER_ACTION_OPEN,
+#ifdef HAVE_GTK_310                
+                "_Cancel", GTK_RESPONSE_CANCEL,
+                "_Open", GTK_RESPONSE_ACCEPT,
+#else                        
 		GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 		GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+#endif
 		NULL);
 
 	/*gtk_file_chooser_set_do_overwrite_confirmation (
@@ -434,8 +439,13 @@ save_dialog (GtkhtmlEditor *editor, EDITOR * e)
 	dialog = gtk_file_chooser_dialog_new (
 		_("Save As"), GTK_WINDOW (editor),
 		GTK_FILE_CHOOSER_ACTION_SAVE,
+#ifdef HAVE_GTK_310                
+                "_Cancel", GTK_RESPONSE_CANCEL,
+                "_Open", GTK_RESPONSE_ACCEPT,
+#else                        
 		GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 		GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT,
+#endif
 		NULL);
 
 	gtk_file_chooser_set_do_overwrite_confirmation (
@@ -507,7 +517,11 @@ view_source_dialog (GtkhtmlEditor *editor,
 	dialog = gtk_dialog_new_with_buttons (
 		title, GTK_WINDOW (editor),
 		GTK_DIALOG_DESTROY_WITH_PARENT,
+#ifdef HAVE_GTK_310
+		"_Close", GTK_RESPONSE_CLOSE,
+#else
 		GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
+#endif
 		NULL);
 
 	scrolled_window = gtk_scrolled_window_new (NULL, NULL);
@@ -643,7 +657,13 @@ action_delete_cb (GtkAction *action,
 	    ("<span weight=\"bold\" size=\"larger\">%s %s?</span>",
 	    _("Are you sure you want to delete the note for") , e->key);
 
-	if (gui_yes_no_dialog(buf, GTK_STOCK_DIALOG_WARNING)) {
+	if (gui_yes_no_dialog(buf,
+#ifdef HAVE_GTK_310 
+			      "dialog-warning"          
+#else
+			      GTK_STOCK_DIALOG_WARNING
+#endif	
+		    )) {
 		main_delete_note(e->module, e->key);
 		gtkhtml_editor_set_text_html (GTKHTML_EDITOR(e->window),
 					      "",
@@ -707,42 +727,66 @@ action_view_plain_source (GtkAction *action,
 static GtkActionEntry file_entries[] = {
 
 	{ "print",
+#ifdef HAVE_GTK_310                
+	  "_Print...",
+#else
 	  GTK_STOCK_PRINT,
+#endif
 	  N_("_Print..."),
 	  NULL,
 	  NULL,
 	  G_CALLBACK (action_print_cb) },
 
 	{ "print-preview",
+#ifdef HAVE_GTK_310                
+	  "Print Pre_view...",
+#else
 	  GTK_STOCK_PRINT_PREVIEW,
+#endif
 	  N_("Print Pre_view"),
 	  NULL,
 	  NULL,
 	  G_CALLBACK (action_print_preview_cb) },
 
 	{ "quit",
+#ifdef HAVE_GTK_310                
+	  "_Quit...",
+#else
 	  GTK_STOCK_QUIT,
+#endif
 	  N_("_Quit"),
 	  NULL,
 	  NULL,
 	  G_CALLBACK (action_quit_cb) },
 
 	{ "open",
+#ifdef HAVE_GTK_310                
+	  "_Open",
+#else
 	  GTK_STOCK_OPEN,
+#endif
 	  N_("_Open"),
 	  NULL,
 	  NULL,
 	  G_CALLBACK (action_open_cb) },
 
 	{ "save",
+#ifdef HAVE_GTK_310                
+	  "_Save",
+#else
 	  GTK_STOCK_SAVE,
+#endif
 	  N_("_Save"),
 	  NULL,
 	  NULL,
 	  G_CALLBACK (action_save_cb) },
 
 	{ "save-as",
+#ifdef HAVE_GTK_310                
+	  "Save _As...",
+#else
 	  GTK_STOCK_SAVE_AS,
+#endif
 	  N_("Save _As..."),
 	  NULL,
 	  NULL,
@@ -1284,7 +1328,12 @@ gint ask_about_saving(EDITOR * e)
 
 	case STUDYPAD_EDITOR:
 		info = gui_new_dialog();
-		info->stock_icon = GTK_STOCK_DIALOG_WARNING;
+		info->stock_icon =
+#ifdef HAVE_GTK_310
+		    "dialog-warning";
+#else
+		    GTK_STOCK_DIALOG_WARNING;
+#endif
 		if (settings.studypadfilename)
 			buf = settings.studypadfilename;
 		else

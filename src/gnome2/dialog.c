@@ -704,7 +704,12 @@ void gui_generic_warning_modal(char *message)
 	gchar *dialog_text;
 
 	dialog = gui_new_dialog();
-	dialog->stock_icon = GTK_STOCK_DIALOG_INFO;
+	dialog->stock_icon =
+#ifdef HAVE_GTK_310
+		"dialog-information";
+#else
+		GTK_STOCK_DIALOG_INFO;
+#endif
 
 	dialog_text = g_strdup_printf("<span weight=\"bold\">%s</span>",
 				      _("Xiphos:"));
