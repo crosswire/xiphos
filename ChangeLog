@@ -1,6 +1,7 @@
 2014-06-24  karl <charcoal@users.sf.net>
 
 	* (re-)add gui_generic_warning_modal() for wait-for-input warnings.
+	* some additional GTK3 de-lint.
 
 2014-08-15  terry  <tbiggs@users.sf.net>
 
