@@ -3,6 +3,30 @@ ____________________
 XIPHOS RELEASE NOTES
 ____________________
 
+Release 3.2.2
+24 Aug 2014
+
+This is a cosmetic/clean-up release.  No new capability is present.
+
+- Building against GTK3 (i.e. waf configure --gtk=3) should once again
+  be reasonable.  Generally, GTK3 will require --enable-webkit-editor,
+  because the older editor seems not fully de-lintable for GTK3.
+
+- Internal use of generic warnings has been updated to re-introduce
+  "modal" warnings, i.e. user acknowledgement before Xiphos proceeds.
+  This is necessary for e.g. startup catastrophes, where the warning
+  dialog must appear and remain for user ACK before the program exits.
+
+- Added statusbar acknowledgement of alt-[SRM] display modifiers, as well
+  as BibleSync keyboard navigation.
+
+- The Preferences page for BibleSync has been de-cluttered somewhat.
+
+- The unnecessary doubling of win32 login name is gone in BibleSync.
+
+- A build complaint from very new compilers has been fixed.
+________________________________________________________________
+
 Release 3.2.1
 06 Jun 2014
 

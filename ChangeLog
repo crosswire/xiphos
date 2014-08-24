@@ -1,4 +1,8 @@
-2014-06-24  karl <charcoal@users.sf.net>
+2014-08-24  karl <charcoal@users.sf.net>
+
+	* 3.2.2 release.
+
+2014-08-24  karl <charcoal@users.sf.net>
 
 	* (re-)add gui_generic_warning_modal() for wait-for-input warnings.
 	* some additional GTK3 de-lint.
