@@ -186,7 +186,7 @@ XI_g_strdup_printf(const char *filename,
 			     _("BUG! Xiphos is about to crash due to a \"STRDUP\" error."),
 			     _("Please report this error to the Xiphos team with:"),
 			     filename, linenumber, format);
-			gui_generic_warning(msg);
+			gui_generic_warning_modal(msg);
 			g_free(msg);
 			abort();
 		}
@@ -221,7 +221,7 @@ XI_g_string_printf(const char *filename,
 			     _("BUG! Xiphos is about to crash due to a \"STRING\" error."),
 			     _("Please report this error to the Xiphos team with:"),
 			     filename, linenumber, format);
-			gui_generic_warning(msg);
+			gui_generic_warning_modal(msg);
 			g_free(msg);
 			abort();
 		}

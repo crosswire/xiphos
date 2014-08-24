@@ -104,7 +104,7 @@ int settings_init(int argc, char **argv, int new_configs, int new_bookmarks)
 	/* Get home dir */
 	if ((settings.homedir = (char*) g_getenv(HOMEVAR)) == NULL) {
 		gui_init(argc, argv);
-		gui_generic_warning(_("$HOME is not set!"));
+		gui_generic_warning_modal(_("$HOME is not set!"));
 		/* if not found in env exit */
 		exit(0);
 	}
@@ -119,7 +119,7 @@ int settings_init(int argc, char **argv, int new_configs, int new_bookmarks)
 			gui_init(argc, argv);
 			sprintf(msg, _("Xiphos can not create  .xiphos:\n%s\n\nXiphos cannot continue."),
 				strerror(errno));
-			gui_generic_warning(msg);
+			gui_generic_warning_modal(msg);
 			/* if we can not create gSwordDir exit */
 			exit(1);
 		}
@@ -130,7 +130,7 @@ int settings_init(int argc, char **argv, int new_configs, int new_bookmarks)
 	if (g_access(sword_dir, F_OK) == -1) {
 		if ((Mkdir(sword_dir, S_IRWXU)) != 0) {
 			gui_init(argc, argv);
-			gui_generic_warning(_("can not create " DOTSWORD));
+			gui_generic_warning_modal(_("can not create " DOTSWORD));
 		}
 	}
 	g_free(sword_dir);
@@ -139,7 +139,7 @@ int settings_init(int argc, char **argv, int new_configs, int new_bookmarks)
 	if (g_access(sword_dir, F_OK) == -1) {
 		if ((Mkdir(sword_dir, S_IRWXU)) != 0) {
 			gui_init(argc, argv);
-			gui_generic_warning(_("can not create " DOTSWORD "/mods.d"));
+			gui_generic_warning_modal(_("can not create " DOTSWORD "/mods.d"));
 		}
 	}
 	g_free(sword_dir);
@@ -148,7 +148,7 @@ int settings_init(int argc, char **argv, int new_configs, int new_bookmarks)
 	if (g_access(sword_dir, F_OK) == -1) {
 		if ((Mkdir(sword_dir, S_IRWXU)) != 0) {
 			gui_init(argc, argv);
-			gui_generic_warning(_("can not create " DOTSWORD "/modules"));
+			gui_generic_warning_modal(_("can not create " DOTSWORD "/modules"));
 		}
 	}
 	g_free(sword_dir);
@@ -178,10 +178,15 @@ int settings_init(int argc, char **argv, int new_configs, int new_bookmarks)
 			buf_says_empty = (buf.st_size == 0);
 			rename(backup_name, settings.fnconfigure);
 			gui_init(argc, argv);
-			gui_generic_warning(_("Empty settings file -- backup recovery attempted.\n"
-					      "Some information may have been lost."));
+			gui_generic_warning_modal
+			    (_("Empty settings file -- backup recovery attempted.\n"
+			       "Some information may have been lost."));
 		}
-		else gui_generic_warning(_("Empty settings file -- no backup?!? Information lost!"));
+		else
+		{
+		    gui_generic_warning_modal
+			(_("Empty settings file -- no backup?!? Information lost!"));
+		}
 		g_free(backup_name);
 	}
 
@@ -208,14 +213,14 @@ int settings_init(int argc, char **argv, int new_configs, int new_bookmarks)
 		gui_open_mod_mgr_initial_run();
 		main_init_lists();
 		if (settings.havebible == 0) {
-			gui_generic_warning
+			gui_generic_warning_modal
 			    (_("There are no Bibles installed.\n"
 			       "Evidently, you declined to install any.\n\n"
 			       "Without any Bible modules to display,\n"
 			       "Xiphos cannot proceed,\nand will now exit."));
 			exit(1);
 		}
-		gui_generic_warning(_("Bible module installation complete."));
+		gui_generic_warning_modal(_("Bible module installation complete."));
 	}
 
 	/* check for template.pad file for studypad */
