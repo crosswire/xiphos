@@ -1397,9 +1397,9 @@ gint ask_about_saving(EDITOR * e)
 		info = gui_new_dialog();
 		info->stock_icon =  
 #ifdef HAVE_GTK_310
-		"dialog-warning";
+		    "dialog-warning";
 #else
-		GTK_STOCK_DIALOG_WARNING;
+		    GTK_STOCK_DIALOG_WARNING;
 #endif	
 		if (settings.studypadfilename)
 			buf = settings.studypadfilename;
