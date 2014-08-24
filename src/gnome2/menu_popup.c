@@ -1238,14 +1238,14 @@ G_MODULE_EXPORT void on_rename_perscomm_activate (GtkMenuItem * menuitem, gpoint
 
 	for (s = info->text1; *s; ++s) {
 		if (!isalnum(*s) && (*s != '_')) {
-			gui_generic_warning
+			gui_generic_warning_modal
 			    (_("Module names must contain [A-Za-z0-9_] only."));
 			goto out1;
 		}
 	}
 
 	if (main_is_module(info->text1)) {
-		gui_generic_warning
+		gui_generic_warning_modal
 		    (_("Xiphos already knows a module by that name."));
 		goto out1;
 	}
@@ -1265,7 +1265,7 @@ G_MODULE_EXPORT void on_rename_perscomm_activate (GtkMenuItem * menuitem, gpoint
 	    main_get_mod_config_entry(settings.CommWindowModule, "DataPath");
 	datapath_new = g_strdup(datapath_old);
 	if ((s = strstr(datapath_new, "rawfiles/")) == NULL) {
-	    gui_generic_warning("Malformed datapath in old configuration!");
+	    gui_generic_warning_modal("Malformed datapath in old configuration!");
 	    goto out2;
 	}
 
@@ -1277,7 +1277,7 @@ G_MODULE_EXPORT void on_rename_perscomm_activate (GtkMenuItem * menuitem, gpoint
 	// move old data directory to new.
 	if ((g_chdir(sworddir) != 0) ||
 	    (rename(datapath_old, datapath_new) != 0)) {
-		gui_generic_warning("Failed to rename directory.");
+		gui_generic_warning_modal("Failed to rename directory.");
 		goto out2;
 	}
 
@@ -1289,7 +1289,7 @@ G_MODULE_EXPORT void on_rename_perscomm_activate (GtkMenuItem * menuitem, gpoint
 		g_string_printf(workstr,
 				_("Failed to create new configuration:\n%s"),
 				strerror(errno));
-		gui_generic_warning(workstr->str);
+		gui_generic_warning_modal(workstr->str);
 		goto out2;
 	} else {
 		gchar output[258];
@@ -1298,7 +1298,7 @@ G_MODULE_EXPORT void on_rename_perscomm_activate (GtkMenuItem * menuitem, gpoint
 			g_string_append(workstr,
 					_("Configuration build error:\n\n"));
 			g_string_append(workstr, output);
-			gui_generic_warning(workstr->str);
+			gui_generic_warning_modal(workstr->str);
 			goto out2;	// necessary?  advisable?
 		}
 		pclose(result);
@@ -1310,7 +1310,7 @@ G_MODULE_EXPORT void on_rename_perscomm_activate (GtkMenuItem * menuitem, gpoint
 		g_string_printf(workstr,
 				"Unlink of old configuration failed:\n%s",
 				strerror(errno));
-		gui_generic_warning(workstr->str);
+		gui_generic_warning_modal(workstr->str);
 		goto out2;
 	}
 	main_update_module_lists();

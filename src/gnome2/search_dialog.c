@@ -706,7 +706,7 @@ void delete_list(GtkButton * button, gpointer user_data)
 #if 0
 	// #if 0'd until list_rows is properly managed.
 	if (search1.list_rows < 2) {
-		gui_generic_warning(_("The last module list may not be deleted"));
+		gui_generic_warning_modal(_("The last module list may not be deleted"));
 		return;
 	}
 #endif

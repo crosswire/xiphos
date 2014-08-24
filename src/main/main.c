@@ -128,7 +128,8 @@ int main(int argc, char *argv[])
 
 	/* get this error check out of the way before risking leaking win32 resources */
 	if (argc > 2) {
-		gui_generic_warning(_("Xiphos does not understand more than one argument."));
+		gui_generic_warning_modal
+		    (_("Xiphos does not understand more than one argument."));
 		exit(1);
 	}
 

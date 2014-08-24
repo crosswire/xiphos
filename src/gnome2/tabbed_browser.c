@@ -357,7 +357,7 @@ void gui_save_tabs(const gchar *filename)
 		tabs_dir = g_strdup_printf("%s/tabs/",settings.gSwordDir);
 		if (g_access(tabs_dir, F_OK) == -1) {
 			if ((g_mkdir(tabs_dir, S_IRWXU)) == -1) {
-				gui_generic_warning(_("Can't create tabs dir."));
+				gui_generic_warning_modal(_("Can't create tabs dir."));
 				return;
 			}
 		}
@@ -369,7 +369,7 @@ void gui_save_tabs(const gchar *filename)
 	xml_doc = xmlNewDoc((const xmlChar *) "1.0");
 
 	if (xml_doc == NULL) {
-		gui_generic_warning("Tabs document not created successfully.");
+		gui_generic_warning_modal("Tabs document not created successfully.");
 		return;
 	}
 
@@ -454,7 +454,7 @@ void _save_off_tab (const gchar * filename)
 
 	if (g_access(tabs_dir, F_OK) == -1) {
 		if ((g_mkdir(tabs_dir, S_IRWXU)) == -1) {
-			gui_generic_warning("Can't create tabs dir.");
+			gui_generic_warning_modal("Can't create tabs dir.");
 			return;
 		}
 	}
@@ -464,7 +464,7 @@ void _save_off_tab (const gchar * filename)
 	xml_doc = xmlNewDoc((const xmlChar *) "1.0");
 
 	if (xml_doc == NULL) {
-		gui_generic_warning("Tabs document not created successfully.");
+		gui_generic_warning_modal("Tabs document not created successfully.");
 		return;
 	}
 
@@ -566,18 +566,19 @@ void gui_load_tabs(const gchar *filename)
 		xml_doc = xmlParseFile(file);
 		g_free(file);
 		if (xml_doc == NULL) {
-			gui_generic_warning("Tabs document not parsed successfully.");
+			gui_generic_warning_modal("Tabs document not parsed successfully.");
 			error = TRUE;
 		}
 		else {
 			tmp_node = xmlDocGetRootElement(xml_doc);
 			if (tmp_node == NULL) {
-				gui_generic_warning("Tabs document is empty.");
+				gui_generic_warning_modal("Tabs document is empty.");
 				xmlFreeDoc(xml_doc);
 				error = TRUE;
 			}
 			else if (xmlStrcmp(tmp_node->name, (const xmlChar *)"Xiphos_Tabs")) {
-				gui_generic_warning("Tabs document has wrong type, root node != Xiphos_Tabs");
+				gui_generic_warning_modal
+				    ("Tabs document has wrong type, root node != Xiphos_Tabs");
 				xmlFreeDoc(xml_doc);
 				error = TRUE;
 			}
