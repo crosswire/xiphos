@@ -1996,7 +1996,7 @@ AnalyzeForImageSize(const char *origtext,
 	char buf[32];		// for preparing new width+height spec.
 	gint image_x, image_y, window_x = -999, window_y = -999;
 	int image_retval;
-	gboolean no_warning_yet = TRUE;
+	gboolean warned_once = FALSE;
 
 	if (!resized_init) {
 		resized = g_string_new("");
@@ -2082,12 +2082,12 @@ AnalyzeForImageSize(const char *origtext,
 		trail = path;
 
 		if (image_retval != 0) {
-			if (no_warning_yet) {
+			if (!warned_once) {
 				gui_generic_warning(
 				    _("An image file's size could not be determined.\n"
 				      "Xiphos cannot resize images to fit window."));
 				// settings.imageresize = 0;
-				no_warning_yet = FALSE;
+				warned_once = TRUE;
 			}
 			continue;
 		}

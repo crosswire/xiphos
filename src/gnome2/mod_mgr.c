@@ -2466,14 +2466,16 @@ on_dialog_destroy(GObject * object, gpointer user_data)
 			main_display_bible((char *)tmp->data, settings.currentverse);
 		else {
 			/* Zero Bibles is just not workable in Xiphos. */
-			gui_generic_warning(_("You have uninstalled your last Bible.\n"
-					      "Xiphos requires at least one."));
+			gui_generic_warning_modal
+			    (_("You have uninstalled your last Bible.\n"
+			       "Xiphos requires at least one."));
 			main_shutdown_list();
 			gui_open_mod_mgr_initial_run();
 			main_init_lists();
 			if (settings.havebible == 0) {
-				gui_generic_warning(_("There are still no Bibles installed.\n"
-						      "Xiphos cannot continue without one."));
+				gui_generic_warning_modal
+				    (_("There are still no Bibles installed.\n"
+				       "Xiphos cannot continue without one."));
 				exit(1);
 			}
 		}
@@ -2847,7 +2849,7 @@ on_button_add_remote_clicked(GtkButton * button,
 		mms = (MOD_MGR_SOURCE *) tmp->data;
 		if (!strcmp(mms->caption, dialog->text1)) {
 			/* this can happen at most once */
-			gui_generic_warning(_("A source by that name already exists."));
+			gui_generic_warning_modal(_("A source by that name already exists."));
 			name_conflict = TRUE;
 		}
 		g_free((gchar*)mms->type);

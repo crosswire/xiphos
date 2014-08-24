@@ -1,3 +1,23 @@
+2014-06-24  karl <charcoal@users.sf.net>
+
+	* (re-)add gui_generic_warning_modal() for wait-for-input warnings.
+
+2014-08-15  terry  <tbiggs@users.sf.net>
+
+	* adjusted initial size settings, don't cut off sidebar.
+
+2014-08-09  terry  <tbiggs@users.sf.net>
+
+	* gtk3 de-lint.
+
+2014-06-09  karl <charcoal@users.sf.net>
+
+	* fix f20 linty whine about printf-style args.
+	* de-clutter biblesync prefs page.
+	* statusbar feedback on BSP nav.
+	* statusbar feedback for alt-[SRM].
+	* remove doubled win32 name for BSP sender.
+
 2014-06-06  karl <charcoal@users.sf.net>
 
 	* 3.2.1 release.

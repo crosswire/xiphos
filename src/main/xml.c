@@ -1334,7 +1334,7 @@ void xml_save_settings_doc(char *name)
 					    _("Attempting to revert to previous save."));
 		unlink(name);
 		rename(backup_name, name);
-		gui_generic_warning(msg);
+		gui_generic_warning_modal(msg);
 		g_free(msg);
 	}
 }

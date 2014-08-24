@@ -682,37 +682,24 @@ GS_DIALOG *gui_new_dialog(void)
 
 /******************************************************************************
  * Name
- *   gui_generic_warning
+ *   gui_generic_warning_modal
  *
  * Synopsis
  *   #include "gui/dialog.h"
  *
- *   GS_DIALOG *gui_generic_warning(char *message)
+ *   GS_DIALOG *gui_generic_warning_modal(char *message)
  *
  * Description
  *   Issues a generic warning dialog box, to keep user informed.
+ *   This version is "old style," waits for user to hit OK.
+ *   For tragic conditions, e.g. startup problems before exit.
  *
  * Return value
  *   void
  */
 
-void gui_generic_warning(char *message)
+void gui_generic_warning_modal(char *message)
 {
-#if 1
-	GtkWidget *dialog;
-
-	dialog = gtk_message_dialog_new_with_markup
-	    (NULL,	/* no need for a parent window */
-	     GTK_DIALOG_DESTROY_WITH_PARENT,
-	     GTK_MESSAGE_INFO,
-	     GTK_BUTTONS_OK,
-	     "<b><big>Xiphos</big></b>\n\n%s", message);
-
-	g_signal_connect_swapped (dialog, "response",
-				  G_CALLBACK (gtk_widget_destroy),
-				  dialog);
-	gtk_widget_show(dialog);
-#else
 	GS_DIALOG *dialog;
 	gchar *dialog_text;
 
@@ -728,7 +715,41 @@ void gui_generic_warning(char *message)
 	gui_alert_dialog(dialog);
 	g_free(dialog);
 	g_free(dialog_text);
-#endif
+}
+
+
+/******************************************************************************
+ * Name
+ *   gui_generic_warning
+ *
+ * Synopsis
+ *   #include "gui/dialog.h"
+ *
+ *   GS_DIALOG *gui_generic_warning(char *message)
+ *
+ * Description
+ *   Issues a generic warning dialog box, to keep user informed.
+ *   Non-modal, for transient things not needing user interaction.
+ *
+ * Return value
+ *   void
+ */
+
+void gui_generic_warning(char *message)
+{
+	GtkWidget *dialog;
+
+	dialog = gtk_message_dialog_new_with_markup
+	    (NULL,	/* no need for a parent window */
+	     GTK_DIALOG_DESTROY_WITH_PARENT,
+	     GTK_MESSAGE_INFO,
+	     GTK_BUTTONS_OK,
+	     "<b><big>Xiphos</big></b>\n\n%s", message);
+
+	g_signal_connect_swapped (dialog, "response",
+				  G_CALLBACK (gtk_widget_destroy),
+				  dialog);
+	gtk_widget_show(dialog);
 }
 
 
