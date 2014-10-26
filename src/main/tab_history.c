@@ -186,6 +186,45 @@ void main_add_tab_history_item(gpointer data)
 
 /******************************************************************************
  * Name
+ *   main_fake_tab_history_item
+ *
+ * Synopsis
+ *   #include "main/tab_history.h"
+ *
+ *   void main_fake_tab_history_item(char *reference)
+ *
+ * Description
+ *    fake an unreal history item into the history menu
+ *
+ * Return value
+ *   void
+ */
+void main_fake_tab_history_item(char *reference)
+{
+    PASSAGE_TAB_INFO *tab = cur_passage_tab;
+    int i;
+
+    /* if we have hit max length, dispose of oldest */
+    if (tab->history_items == TABHISTORYLENGTH) {
+	for (i = 0; i < (TABHISTORYLENGTH - 1); ++i) {
+	    tab->history_list[i] = tab->history_list[i + 1];
+	}
+	--tab->history_items;
+    }
+
+    /* add item to history menu */
+    strcpy(tab->history_list[tab->history_items].verseref, reference);
+    if (tab->text_mod)
+	strcpy(tab->history_list[tab->history_items].textmod, tab->text_mod);
+    if (tab->commentary_mod)
+	strcpy(tab->history_list[tab->history_items].commod, tab->commentary_mod);
+
+    ++tab->history_items;
+    /* do not update what's current in history list. */
+}
+
+/******************************************************************************
+ * Name
  *  on_clear_activate
  *
  * Synopsis

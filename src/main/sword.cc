@@ -293,6 +293,28 @@ char *main_getText(char *key)
 
 /******************************************************************************
  * Name
+ *  main_getShortText
+ *
+ * Synopsis
+ *   #include "main/sword.h"
+ *   void main_getShortText(gchar * key)
+ *
+ * Description
+ *   get short-name key
+ *
+ * Return value
+ *   char *
+ */
+
+char *main_getShortText(char *key)
+{
+	VerseKey vkey(key);
+	return strdup((char *)vkey.getShortText());
+}
+
+
+/******************************************************************************
+ * Name
  *   main_update_nav_controls
  *
  * Synopsis

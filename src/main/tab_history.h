@@ -26,10 +26,12 @@
 extern "C" {
 #endif
 
+#define	TABHISTORYLENGTH	50
+
 struct _tab_history {
-        gchar verseref[40];
-        gchar textmod[40];
-        gchar commod[40];
+        gchar verseref[TABHISTORYLENGTH];
+        gchar textmod[TABHISTORYLENGTH];
+        gchar commod[TABHISTORYLENGTH];
 };
 typedef struct _tab_history TAB_HISTORY;
 
@@ -40,6 +42,7 @@ void on_clear_activate(GtkMenuItem * menuitem, gpointer user_data);
 GtkWidget *main_versekey_drop_down_new(gpointer data);
 void main_clear_tab_history(void);
 void main_add_tab_history_item(gpointer data);
+void main_fake_tab_history_item(char *reference);
 void main_navigate_tab_history(gint direction);
 void main_change_verse_tab_history(gint historynum);
 

@@ -1006,6 +1006,21 @@ on_send_list_via_biblesync_activate(GtkMenuItem * menuitem,
 
 
 G_MODULE_EXPORT void
+on_preload_history_from_verse_list_activate(GtkMenuItem * menuitem,
+					    gpointer user_data)
+{
+    GList *verse;
+    RESULTS *item;
+
+    for (verse = list_of_verses; verse; verse = g_list_next(verse))
+    {
+	item = (RESULTS *)verse->data;
+	main_fake_tab_history_item((char *)main_getShortText(item->key));
+    }
+}
+
+
+G_MODULE_EXPORT void
 on_export_verselist_activate (GtkMenuItem * menuitem,
                                         gpointer user_data)
 {

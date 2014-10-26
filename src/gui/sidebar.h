@@ -80,6 +80,7 @@ void  gui_sync_module_treeview(gint direction);
 void on_save_list_as_a_single_bookmark_activate (GtkMenuItem * menuitem, gpointer user_data);
 void on_save_list_as_a_series_of_bookmarks_activate (GtkMenuItem * menuitem, gpointer user_data);
 void on_populate_verse_list_activate (GtkMenuItem * menuitem, gpointer user_data);
+void on_preload_history_from_verse_list_activate (GtkMenuItem * menuitem, gpointer user_data);
 void on_send_list_via_biblesync_activate (GtkMenuItem * menuitem, gpointer user_data);
 GtkWidget *create_results_menu(void);
 void on_open_in_dialog_activate(GtkMenuItem * menuitem,

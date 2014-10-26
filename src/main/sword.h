@@ -79,6 +79,7 @@ void main_shutdown_backend(void);
 void main_set_module_unlocked(const char * mod_name, char * key);
 void main_save_module_key(const char * mod_name, char * key);
 char *main_getText(char *key);
+char *main_getShortText(char *key);
 gchar *main_update_nav_controls(const gchar * key);
 char *main_get_active_pane_key(void);
 char *main_get_active_pane_module(void);
