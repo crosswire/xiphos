@@ -29,8 +29,6 @@ extern "C" {
 #include <gtk/gtk.h>
 #include "main/tab_history.h"
 
-#define	TABHISTORYLENGTH	40
-
 struct _passage_tab_info {
 	GtkWidget *page_widget;
 	GtkLabel *tab_label;
