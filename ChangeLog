@@ -1,6 +1,7 @@
 2014-10-26  karl <charcoal@users.sf.net>
 
 	* biblesync 1.1.0 interface: speakerkey is now a 1st-class param.
+	* add history pre-load from verse list.
 
 2014-08-24  karl <charcoal@users.sf.net>
 
