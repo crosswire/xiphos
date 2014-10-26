@@ -21,7 +21,7 @@ using namespace std;
 
 #include <biblesync.hh>
 
-// sync is a proper superset of announce,
+// sync is a proper superset of announce & beacon,
 // both inbound as well as outbound.
 // in these 2 arrays of strings, sync-specific
 // fields are placed after announce fields.
@@ -125,7 +125,8 @@ BibleSync_mode BibleSync::setMode(BibleSync_mode m,
     if (result != "")
     {
 	if (nav_func != NULL)
-	    (*nav_func)('E', EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
+	    (*nav_func)('E', EMPTY,
+			EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
 			BSP + _("network setup errors."), result);
 	Shutdown();
     }
@@ -366,21 +367,26 @@ int BibleSync::ReceiveInternal()
 
 	// validate message: fixed values.
 	if (bsp.magic != BSP_MAGIC)
-	    (*nav_func)('E', EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
+	    (*nav_func)('E', EMPTY,
+			EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
 			BSP + _("bad magic"), dump);
 	else if (bsp.version != BSP_PROTOCOL)
-	    (*nav_func)('E', EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
+	    (*nav_func)('E', EMPTY,
+			EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
 			BSP + _("bad protocol version"), dump);
 	else if ((bsp.msg_type != BSP_ANNOUNCE) &&
 		 (bsp.msg_type != BSP_SYNC) &&
 		 (bsp.msg_type != BSP_BEACON))
-	    (*nav_func)('E', EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
+	    (*nav_func)('E', EMPTY,
+			EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
 			BSP + _("bad msg type"), dump);
 	else if (bsp.num_packets != 1)
-	    (*nav_func)('E', EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
+	    (*nav_func)('E', EMPTY,
+			EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
 			BSP + _("bad packet count"), dump);
 	else if (bsp.index_packet != 0)
-	    (*nav_func)('E', EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
+	    (*nav_func)('E', EMPTY,
+			EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
 			BSP + _("bad packet index"), dump);
 
 	// basic header sanity tests passed.  now parse body content.
@@ -423,7 +429,8 @@ int BibleSync::ReceiveInternal()
 
 	    if (!ok_so_far)
 	    {
-		(*nav_func)('E', EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
+		(*nav_func)('E', EMPTY,
+			    EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
 			    BSP + _("bad body format"), dump);
 	    }
 	    else
@@ -441,7 +448,8 @@ int BibleSync::ReceiveInternal()
 			string info = BSP + _("missing required header ")
 			    + inbound_required[i]
 			    + ".";
-			(*nav_func)('E', EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
+			(*nav_func)('E', EMPTY,
+				    EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
 				    info, dump);
 			// don't break -- find all missing.
 		    }
@@ -462,8 +470,12 @@ int BibleSync::ReceiveInternal()
 			if (object->second.addr != source_addr)	// spoof?
 			{
 			    // spock: "forbid...forbid!"
-			    (*nav_func)('E', EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
-					BSP + _("UUID spoofed: wrong ipaddr."),
+			    (*nav_func)('E', pkt_uuid,
+					EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
+					BSP + _("Spoof stopped: ") + pkt_uuid
+						+ " from " + source_addr
+						+ " instead of "
+						+ object->second.addr,
 					dump);
 			    continue;
 			}
@@ -489,7 +501,8 @@ int BibleSync::ReceiveInternal()
 		    if (i == sizeof(uuid_t))
 		    {
 #if 0
-			(*nav_func)('E', EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
+			(*nav_func)('E', pkt_uuid,
+				    EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
 				    BSP + _("Ignoring echo."), dump);
 #endif
 			continue;
@@ -580,8 +593,6 @@ int BibleSync::ReceiveInternal()
 			    + " " + version;
 			domain = content.find(BSP_APP_DEVICE)->second;
 
-			alt = pkt_uuid;
-
 			info = (string)"beacon: "
 			    + content.find(BSP_APP_USER)->second
 			    + " @ " + source_addr;
@@ -639,7 +650,7 @@ int BibleSync::ReceiveInternal()
 		    if (cmd != 'x')
 		    {
 			receiving = true;			// re-xmit lock.
-			(*nav_func)(cmd,
+			(*nav_func)(cmd, pkt_uuid,
 				    bible, ref, alt, group, domain,
 				    info, dump);
 			receiving = false;			// re-xmit unlock.
@@ -688,7 +699,8 @@ int BibleSync::InitSelectRead(char *dump,
     FD_SET(server_fd, &read_set);
     if (select(server_fd+1, &read_set, NULL, NULL, &tv) < 0)
     {
-	(*nav_func)('E', EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
+	(*nav_func)('E', EMPTY,
+		    EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
 		    BSP + _("select < 0"), dump);
 	return -1;
     }
@@ -698,7 +710,8 @@ int BibleSync::InitSelectRead(char *dump,
 			       0, (sockaddr *)source,
 			       &source_length)) < 0))
     {
-	(*nav_func)('E', EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
+	(*nav_func)('E', EMPTY,
+		    EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
 		    BSP + _("recvfrom < 0"), dump);
 	return -1;
     }
@@ -787,7 +800,8 @@ BibleSync_xmit_status BibleSync::Transmit(char message_type,
     else
     {
 	retval = BSP_XMIT_FAILED;
-	(*nav_func)('E', EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
+	(*nav_func)('E', EMPTY,
+		    EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
 		    BSP + _("Transmit failed.\n"),
 		    _("Unable to multicast; BibleSync is now disabled. "
 		      "If your network connection changed while this program "
@@ -816,7 +830,7 @@ bool BibleSync::setPrivate(bool privacy)
 
 //
 // user decision to listen or not to a certain speaker.
-// speakerkey is the UUID as given during (*nav_func)('S', ...).
+// speakerkey is the UUID given during (*nav_func)('S', ...).
 //
 void BibleSync::listenToSpeaker(bool listen, string speakerkey)
 {
@@ -842,7 +856,8 @@ void BibleSync::ageSpeakers()
 	BibleSyncSpeakerMapIterator victim = object++;	// loop increment
 	if (--(victim->second.countdown) == 0)
 	{
-	    (*nav_func)('D', EMPTY, EMPTY, victim->first, EMPTY, EMPTY,
+	    (*nav_func)('D', victim->first,
+			EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
 			EMPTY, EMPTY);
 	    speakers.erase(victim);
 	}
@@ -862,7 +877,8 @@ void BibleSync::clearSpeakers()
 	     object != speakers.end();
 	     ++object)
 	{
-	    (*nav_func)('D', EMPTY, EMPTY, object->first, EMPTY, EMPTY,
+	    (*nav_func)('D', object->first,
+			EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
 			EMPTY, EMPTY);
 	}
     }
