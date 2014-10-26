@@ -221,6 +221,7 @@ void main_fake_tab_history_item(char *reference)
 
     ++tab->history_items;
     /* do not update what's current in history list. */
+    main_update_tab_history_menu(tab);
 }
 
 /******************************************************************************
