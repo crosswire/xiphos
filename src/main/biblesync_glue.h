@@ -54,8 +54,9 @@ int biblesync_compare_speaker(const void *Lvoid, const void *Rvoid);
 
 #endif // __cplusplus
 
-void biblesync_navigate(char cmd,
+void biblesync_navigate(char cmd, char *speaker,
 			char *bible, char *verse, char *alt,
+			char *group, char *domain,
 			char *info, char *dump);
 void biblesync_update_speaker();
 int biblesync_mode_select(int m, char *p);

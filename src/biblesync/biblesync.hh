@@ -58,14 +58,18 @@
 //	   goes to DISABLE.  if Receive() is called while disabled, it will
 //	   return FALSE to indicate its polled use should stop, otherwise TRUE.
 //	=> interface for your_void_nav_func:
-//		(char cmd,
+//		(char cmd, string speakerkey,
 //		 string bible, string ref, string alt,
 //		 string group, string domain,
 //		 string info,  string dump)
-//		there are 6 your_void_nav_func() use cases, identified in cmd:
-//		1. 'E' (error) for network errors & malformed packets.
-//		   only info + dump are useful.
-//		2. 'M' (mismatch) against passphrase or mode or listen status.
+//		there are 6 your_void_nav_func() use cases, identified in cmd.
+//		non-error cases provide valid speakerkey (UUID), else it is "".
+//		1. 'A' (announce)
+//		   presence message in alt.  dump available.
+//		2. 'N' (navigation)
+//		   bible, ref, alt, group, domain as arrived.
+//		   info + dump available.
+//		3. 'M' (mismatch) against passphrase or mode or listen status.
 //		   info == "announce" or "sync" or "beacon" (+ user @ [ipaddr])
 //			   sync:     bible, ref, alt, group, domain as arrived.
 //			   announce: presence message in alt.
@@ -73,16 +77,12 @@
 //			      overload: bible   ref       group    domain
 //					user    [ipaddr]  app+ver  device
 //		   dump available.
-//		3. 'A' (announce)
-//		   presence message in alt.  dump available.
-//		4. 'N' (navigation)
-//		   bible, ref, alt, group, domain as arrived.
-//		   info + dump available.
-//		5. 'S' (new speaker)
-//		   param overload as above.  alt == sender UUID.
-//		   alt is the SPEAKER-KEY.  see listenToSpeaker().
-//		6. 'D' (dead speaker)
-//		   opposite of new speaker.  only param is alt == UUID.
+//		4. 'S' (new speaker)
+//		   param overload as above. alt unused. see listenToSpeaker().
+//		5. 'D' (dead speaker)
+//		   opposite of new speaker. only param is speakerkey.
+//		6. 'E' (error) for network errors & malformed packets.
+//		   only info + dump are useful.
 //
 // - get current mode.
 //	BibleSync_mode getMode().
@@ -107,16 +107,16 @@
 // - set self as private
 //	bool setPrivate(boolean);
 //	  sets outgoing TTL to zero so no one hears you off-machine.
+//	  applicable only to BSP_PERSONAL mode.
 //
 // - allow another speaker to drive us
 //	void listenToSpeaker(bool listen, string speakerkey)
 //		say yes/no to listening.
-//		speakerkey was given during nav_func 'S'.
 //
 // Receive() USAGE NOTE:
 // the application must call BibleSync::Receive(YourBibleSyncObjPtr)
 // frequently.  For example:
-//    g_timeout_add(2000,	// 2sec in msec.
+//    g_timeout_add(1000,	// 1sec in msec.
 //		    (GSourceFunc)BibleSync::Receive,
 //		    biblesyncobj);	// of type (BibleSync *).
 // g_timeout_add is a glib function for polled function calls.
@@ -130,12 +130,12 @@
 //
 // Note on speaker beacons:
 // Protocol operates using periodic (10sec) beacons of speaker availability.
-// By default, audience accepts listening to the first available speaker,
+// By default, PERSONAL & AUDIENCE accepts listening to 1st announced speaker,
 // thereafter ignores any more, but includes them in the list of available
 // speakers and notifies the app of their availability (see above, 'S'/'D').
-// Override this behavior choice however wished, using listenToSpeaker() in
+// Override this behavior choice however desired, using listenToSpeaker() in
 // reaction to 'S' events or on user request.
-// Speakers who stop xmitting beacons timeout, are declared dead, and
+// Speakers who stop xmitting beacons will timeout, be declared dead, and
 // removed after 30sec beacon silence, with app notification ('D').
 // Observe that pure Speaker clears the speaker list and by default ignores
 // all newly-identified claimants to speaker status.  Again, this is default
@@ -188,8 +188,8 @@ typedef enum _BibleSync_xmit_status {
     N_BSP_XMIT
 } BibleSync_xmit_status;
 
-// args: cmd, bible, verse, alt, group, domain, info, dump.
-typedef void (*BibleSync_navigate)(char,
+// args: cmd, speakerkey, bible, verse, alt, group, domain, info, dump.
+typedef void (*BibleSync_navigate)(char,   string,
 				   string, string, string,
 				   string, string,
 				   string, string);

@@ -59,7 +59,7 @@ BSP_SpeakerMap speakers;
  *
  * Synopsis
  *   #include "backend/biblesync.hh"
- *   void biblesync_navigate(cmd, bible, ref, alt, info, dump)
+ *   void biblesync_navigate(cmd, speaker, bible, ref, alt, group, domain, info, dump)
  *
  * Description
  *   navigates per incoming BibleSync request, or handles
@@ -70,17 +70,17 @@ BSP_SpeakerMap speakers;
  *   void
  */
 void
-biblesync_navigate(char cmd,
+biblesync_navigate(char cmd, string speaker_uuid,
 		   string bible, string ref, string alt,
 		   string group, string domain,
 		   string info,  string dump)
 {
     bool speaker_display_update = false;
     bool is_module;
-    string message, speaker_uuid;
+    string message;
 
     // parameter overload usage.
-    string &presence = alt, &uuid = alt;
+    string &presence = alt;
     string &user = bible, &ipaddr = ref, &app = group, &device = domain;
 
     // lockout: prevent re-xmit of what we're processing.
@@ -140,8 +140,6 @@ biblesync_navigate(char cmd,
 
 	// Xiphos does nothing with "alt", the alternate reference.
 
-	speaker_uuid = ((string)strstr((char*)dump.c_str(),
-				       BSP_APP_INSTANCE_UUID)).substr(14, 36);
 	is_module = backend->is_module(bible.c_str());
 
 	// direct navigation, or via verse list?
@@ -205,26 +203,27 @@ biblesync_navigate(char cmd,
 
     // new speaker discovery.
     case 'S':
-	GS_message(("new speaker: u [%s], ip [%s], a [%s], d [%s]",
-		    user.c_str(), ipaddr.c_str(), app.c_str(), device.c_str()));
+	GS_message(("new speaker: key [%s], u [%s], ip [%s], a [%s], d [%s]",
+		    speaker_uuid.c_str(), user.c_str(),
+		    ipaddr.c_str(), app.c_str(), device.c_str()));
 
 	unsigned int old_speakers_size, new_speakers_size;
 
 	old_speakers_size = speakers.size();
 
-	speakers[uuid].uuid = uuid;
-	speakers[uuid].user = user;
-	speakers[uuid].direct = "";
-	speakers[uuid].ref = "";
-	speakers[uuid].ipaddr = ipaddr;
-	speakers[uuid].app = app;
-	speakers[uuid].device = device;
+	speakers[speaker_uuid].uuid = speaker_uuid;
+	speakers[speaker_uuid].user = user;
+	speakers[speaker_uuid].direct = "";
+	speakers[speaker_uuid].ref = "";
+	speakers[speaker_uuid].ipaddr = ipaddr;
+	speakers[speaker_uuid].app = app;
+	speakers[speaker_uuid].device = device;
 
 	new_speakers_size = speakers.size();
 
 	if (biblesync->getMode() == BSP_MODE_SPEAKER)
 	{
-	    speakers[uuid].listen = false;
+	    speakers[speaker_uuid].listen = false;
 	}
 	else
 	{	    
@@ -234,13 +233,13 @@ biblesync_navigate(char cmd,
 		// listen to the 1st, initially ignore later ones.
 		if ((old_speakers_size == 0) && (new_speakers_size == 1))
 		{
-		    speakers[uuid].listen = true;
+		    speakers[speaker_uuid].listen = true;
 		    gui_generic_warning
 			(_((BSP + "Listening to " + user + ".").c_str()));
 		}
 		else
 		{
-		    speakers[uuid].listen = false;
+		    speakers[speaker_uuid].listen = false;
 		    if ((old_speakers_size == 1) && (new_speakers_size == 2))
 		    {
 			gui_generic_warning
@@ -252,7 +251,7 @@ biblesync_navigate(char cmd,
 
 	    case 1:
 		// listen to all.  announce only the first.
-		speakers[uuid].listen = true;
+		speakers[speaker_uuid].listen = true;
 		if ((old_speakers_size == 0) && (new_speakers_size == 1))
 		{
 		    gui_generic_warning
@@ -262,19 +261,19 @@ biblesync_navigate(char cmd,
 
 	    case 2:
 		// listen to none.  announce none.
-		speakers[uuid].listen = false;
+		speakers[speaker_uuid].listen = false;
 		break;
 	    }
 	}
 
-	biblesync->listenToSpeaker(speakers[uuid].listen, uuid);
+	biblesync->listenToSpeaker(speakers[speaker_uuid].listen, speaker_uuid);
 	speaker_display_update = true;
 	break;
 
     // dead speaker -- timed out from lack of beacons.
     case 'D':
-	GS_message(("dead speaker: key [%s]", uuid.c_str()));
-	speakers.erase(uuid);
+	GS_message(("dead speaker: key [%s]", speaker_uuid.c_str()));
+	speakers.erase(speaker_uuid);
 	speaker_display_update = true;
 	break;
 
