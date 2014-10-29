@@ -58,6 +58,8 @@
 
 #include "gui/debug_glib_null.h"
 
+#include <glib/gstdio.h>
+
 // for one-time content rendering.
 extern ModuleCache::CacheMap ModuleMap;
 
@@ -84,9 +86,9 @@ int footnote, xref;
 A { text-decoration:none } \
 *[dir=rtl] { text-align: right; } \
 body {background-color:%s;color:%s;} \
-a:link{color:%s} %s%s%s -->\
-</style></head><body>"
-// 6 interpolable strings: bg/txt/link colors, block, renderHeader, local css.
+a:link{color:%s} %s%s -->\
+</style>%s</head><body>"
+// 6 interpolable strings: bg/txt/link colors, block, renderHeader, external css.
 
 // CSS style blocks to control blocked strongs+morph output
 // BOTH is when the user wants to see both types of markup.
@@ -306,44 +308,33 @@ static const char *stylefile = "style.css";	// default name.
 
 const gchar *get_module_local_css(SWModule& module)
 {
-    static char buffer[10240];		// static -> safe to return it.
+    static string css;		// static -> safe to return it
 
     // assume nothing will be available.
-    buffer[0] = '\0';
+    css = "";
 
     // construct path to module's css.
-    char *datapath = main_get_mod_config_entry(module.getName(), "DataPath");
+    char *datapath = main_get_mod_config_entry(module.getName(), "AbsoluteDataPath");
     char *prefcss = main_get_mod_config_entry(module.getName(), "PreferredCSSXHTML");
 
-    string conf_file
-	= (string)settings.homedir	// /home/JoeSchmo
-	+ "/" DOTSWORD "/"		// ".sword" or "Sword"
-	+ datapath			// "./modules/texts/rawtext/SomeName"
+    string css_file
+	= (string)datapath
 	+ "/"
 	+ (prefcss ? prefcss : stylefile);	// author's filename.
 
-    FILE *stream = fopen(conf_file.c_str(), "r");
-
-    if (stream == NULL)			// not under ~JoeSchmo. system dir?
+    if (g_access(css_file.c_str(), F_OK) == 0)
     {
-	conf_file = (string)settings.path_to_mods
-	    + "/"
-	    + datapath
-	    + "/"
-	    + (prefcss ? prefcss : stylefile);
-	stream = fopen(conf_file.c_str(), "r");		// 2nd try.
-    }
-
-    if (stream != NULL)
-    {
-	size_t size = 0;
-	size = fread(buffer, 1, 10238, stream);
-	fclose(stream);
-	if (size > 0)
-	    buffer[size] = '\0';	// NUL-terminate.
+	css = (string)"<link rel=\"stylesheet\" type=\"text/css\" href=\""
+#ifdef WIN32
+	    + "http://127.0.0.1:7878/"	// see main.c (sob)
+#else
+	    + "file:"
+#endif
+	    + css_file
+	    + "\" />";
     }
     
-    return buffer;
+    return css.c_str();
 }
 
 //
