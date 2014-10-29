@@ -42,13 +42,10 @@ struct _settings {
 		*lex_greek,		/* module for greek lexicon - strongs or thayers */
 		*lex_hebrew,		/* module for hebrew lexicon - strongs or BDB */
 	        *currentverse,		/* where we are right now */
-		comm_key[80],		/*  */
 	        *cvparallel,		/* current verse for detached parallel */
-		*percomverse,		/* current verse for personal comments */
 	        *dictkey,		/* dictionary key to use at program startup */
 	        *studypadfilename,	/* name of file in studypad when we closed */
 		*studypaddir,		/* directory for studypad files */
-		groupName[50],		/* shortcut bar group name (viewer, verse list) */
 		searchText[256],	/* search string used by sidebar search */
 		findText[256],		/* string used by find dialog */
 		*spell_language,
@@ -91,7 +88,6 @@ struct _settings {
 		advsearch_width,
 		prefs_height,
 		prefs_width,
-		searchbargroup,		  /* number of search group in shortcut bar */
 		searchType,
 		whichwindow,		  /* which of the main form html windows is active */
 		intCurVerse,		  /* detached parallel current verse */
@@ -129,21 +125,17 @@ struct _settings {
 	        display_advsearch,		/* advanced search */
 	        display_prefs,			/* preferences */
 
-	        autosavepersonalcomments,	/* auto save personal notes */
 	        formatpercom,			/* use html to format personal notes */
 	        showshortcutbar,		/* display shortcut bar if true */
-	        showsidebar,			/* display sidebar bar if true */
 
 		showsplash,			/* show splash on program start if true */
 		showdevotional,			/* show devotional on program start if true */
-		text_tool,			/* show toolbar in text window if true  */
                 showtexts,			/* show bible texts if true  */
                 showpreview,			/* show preview pane if true  */
                 showcomms,			/* show commentaries if true  */
                 showdicts,			/* show dictionaries/lexicons if true */
                 showparatab,			/* show parallel view in a tab if true */
                 show_previewer_in_sidebar,	/* show previewer in sidebar if true */
-		showbookeditor,
 		xrefs_in_verse_list,		/* as opposed to old use of previewer */
 		displaySearchResults,		/* are we displaying search results in chap display */
 		useDefaultDict,
@@ -197,23 +189,14 @@ struct _settings {
 	/* bookmarks directory */
 	char *swbmDir;
 
-	/* store dir name for shortcutbar files */
-	char *shortcutbarDir;
-
 	/* store filename for configure file - options */
 	char *fnconfigure;
-
-	/* module name for current dialog */
-	char *module_dialog;
 
 	/* apply changes to what? the text navigation bar */
 	int apply_change;
 
 	/* load xml bookmarks */
 	int load_xml_bookmarks;
-
-	/* is Bibletime on the system */
-	int have_bibletime;
 
 	/* cell height of dictionary treeview */
 	int cell_height;
@@ -236,9 +219,6 @@ struct _settings {
 
 	/* auto image resize in com/book/dict */
 	int imageresize;
-
-	/* signal id dictionary combo changed */
-	long signal_id;
 
 	/* mod mgr local or remote  */
 	int mod_mgr_source; /* 0 = local, 1 = remote */
