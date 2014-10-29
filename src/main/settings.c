@@ -330,14 +330,6 @@ int init_bookmarks(int new_bookmarks)
 		settings.load_xml_bookmarks = TRUE;
 	}
 
-	/* check for Bibletime bookmarks */
-	settings.have_bibletime = FALSE;
-	file_buf = g_strdup_printf("%s/%s", settings.homedir,
-				   ".bibletime/bookmarks.xml");
-	if (g_access(file_buf, F_OK) == 0) {
-		settings.have_bibletime = TRUE;
-	}
-
 	/* clean up */
 	if (file_buf)
 		g_free(file_buf);
