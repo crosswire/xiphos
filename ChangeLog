@@ -1,6 +1,8 @@
 2014-10-28  karl <charcoal@users.sf.net>
 
 	* clean up defunct bits in settings.h.
+	* module-specific CSS support, using conf directive
+	  "PreferredCSSXHTML=style.css", naming a file in DataPath dir.
 
 2014-10-26  karl <charcoal@users.sf.net>
 

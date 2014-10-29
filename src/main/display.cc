@@ -84,8 +84,9 @@ int footnote, xref;
 A { text-decoration:none } \
 *[dir=rtl] { text-align: right; } \
 body {background-color:%s;color:%s;} \
-a:link{color:%s} %s%s -->\
+a:link{color:%s} %s%s%s -->\
 </style></head><body>"
+// 6 interpolable strings: bg/txt/link colors, block, renderHeader, local css.
 
 // CSS style blocks to control blocked strongs+morph output
 // BOTH is when the user wants to see both types of markup.
@@ -296,6 +297,43 @@ ClearFontFaces(gchar *text)
 			return;
 		}
 	}
+}
+
+//
+// retrieve the content of the module's personal css
+//
+const gchar *get_module_local_css(SWModule& module)
+{
+    static char buffer[10240];		// static -> safe to return it.
+
+    // assume nothing will be available.
+    buffer[0] = '\0';
+
+    // construct path to module's css.
+    char *datapath = main_get_mod_config_entry(module.getName(), "DataPath");
+    char *prefcss = main_get_mod_config_entry(module.getName(), "PreferredCSSXHTML");
+
+    string conf_file
+	= (string)settings.homedir	// /home/JoeSchmo
+	+ "/"
+	+ DOTSWORD			// ".sword" or "Sword"
+	+ "/"
+	+ datapath			// "./texts/rawtext/SomeName"
+	+ "/"
+	+ (prefcss ? prefcss : "");	// author's filename.
+
+    FILE *stream = fopen(conf_file.c_str(), "r");
+
+    if (stream != NULL)
+    {
+	size_t size = 0;
+	size = fread(buffer, 1, 10238, stream);
+	fclose(stream);
+	if (size > 0)
+	    buffer[size] = '\0';	// NUL-terminate.
+    }
+    
+    return buffer;
 }
 
 //
@@ -904,6 +942,7 @@ GTKEntryDisp::display(SWModule &imodule)
 				     ? DOUBLE_SPACE
 				     : ""))),
 			      imodule.getRenderHeader(),
+			      get_module_local_css(imodule),
 			      ((mf->old_font) ? mf->old_font : ""),
 			      mf->old_font_size_value,
 			      imodule.getDescription(),
@@ -1256,6 +1295,7 @@ GTKChapDisp::display(SWModule &imodule)
 				   ? DOUBLE_SPACE
 				   : ""))),
 			    imodule.getRenderHeader(),
+			    get_module_local_css(imodule),
 			    ((mf->old_font) ? mf->old_font : ""),
 			    mf->old_font_size_value);
 	swbuf.append(buf);
@@ -1518,6 +1558,7 @@ DialogEntryDisp::display(SWModule &imodule)
 			      settings.link_color,
 			      (ops->doublespace ? DOUBLE_SPACE : ""),
 			      imodule.getRenderHeader(),
+			      get_module_local_css(imodule),
 			      ((mf->old_font) ? mf->old_font : ""),
 			      mf->old_font_size_value,
 			      settings.bible_verse_num_color,
@@ -1652,6 +1693,7 @@ DialogChapDisp::display(SWModule &imodule)
 				     ? DOUBLE_SPACE
 				     : ""))),
 			      imodule.getRenderHeader(),
+			      get_module_local_css(imodule),
 			      ((mf->old_font) ? mf->old_font : ""),
 			      mf->old_font_size_value);
 	swbuf.append(buf);
@@ -1841,6 +1883,7 @@ GTKPrintEntryDisp::display(SWModule &imodule)
 			      settings.link_color,
 			      (ops->doublespace ? DOUBLE_SPACE : ""),
 			      imodule.getRenderHeader(),
+			      get_module_local_css(imodule),
 			      ((mf->old_font) ? mf->old_font : ""),
 			      mf->old_font_size_value,
 			      settings.bible_verse_num_color,
@@ -1890,6 +1933,7 @@ GTKPrintChapDisp::display(SWModule &imodule)
 			      settings.link_color,
 			      (ops->doublespace ? DOUBLE_SPACE : ""),
 			      imodule.getRenderHeader(),
+			      get_module_local_css(imodule),
 			      ((mf->old_font) ? mf->old_font : ""),
 			      mf->old_font_size_value);
 	swbuf.append(buf);
