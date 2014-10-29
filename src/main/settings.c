@@ -298,8 +298,6 @@ int init_bookmarks(int new_bookmarks)
 {
 	//GNode *bookmark_tree = NULL;
 	char *file_buf = NULL;
-	char *removed = NULL;
-	//int load_old = FALSE;
 
 	settings.load_xml_bookmarks = FALSE;
 
@@ -329,12 +327,6 @@ int init_bookmarks(int new_bookmarks)
 		xml_new_bookmark_file();
 		settings.load_xml_bookmarks = TRUE;
 	}
-
-	/* clean up */
-	if (file_buf)
-		g_free(file_buf);
-	if (removed)
-		g_free(removed);
 
 	return 1;
 }
