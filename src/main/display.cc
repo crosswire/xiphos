@@ -302,6 +302,8 @@ ClearFontFaces(gchar *text)
 //
 // retrieve the content of the module's personal css
 //
+static const char *stylefile = "style.css";	// default name.
+
 const gchar *get_module_local_css(SWModule& module)
 {
     static char buffer[10240];		// static -> safe to return it.
@@ -315,14 +317,22 @@ const gchar *get_module_local_css(SWModule& module)
 
     string conf_file
 	= (string)settings.homedir	// /home/JoeSchmo
+	+ "/" DOTSWORD "/"		// ".sword" or "Sword"
+	+ datapath			// "./modules/texts/rawtext/SomeName"
 	+ "/"
-	+ DOTSWORD			// ".sword" or "Sword"
-	+ "/"
-	+ datapath			// "./texts/rawtext/SomeName"
-	+ "/"
-	+ (prefcss ? prefcss : "");	// author's filename.
+	+ (prefcss ? prefcss : stylefile);	// author's filename.
 
     FILE *stream = fopen(conf_file.c_str(), "r");
+
+    if (stream == NULL)			// not under ~JoeSchmo. system dir?
+    {
+	conf_file = (string)settings.path_to_mods
+	    + "/"
+	    + datapath
+	    + "/"
+	    + (prefcss ? prefcss : stylefile);
+	stream = fopen(conf_file.c_str(), "r");		// 2nd try.
+    }
 
     if (stream != NULL)
     {
