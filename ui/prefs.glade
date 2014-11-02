@@ -719,7 +719,8 @@
                         <child>
                           <widget class="GtkLabel" id="label-biblesync-mode">
                             <property name="visible">True</property>
-                            <property name="label" translatable="yes">Mode</property>
+                            <property name="label" translatable="yes">&lt;i&gt;Mode:&lt;/i&gt;</property>
+                            <property name="use_markup">True</property>
                             <property name="xalign">0</property>
                             <property name="tooltip_text" translatable="yes">Select the mode in which BibleSync should operate.</property>
                           </widget>
@@ -918,7 +919,8 @@
                         <child>
                           <widget class="GtkLabel" id="label-biblesync-nav">
                             <property name="visible">True</property>
-                            <property name="label" translatable="yes">Navigate</property>
+                            <property name="label" translatable="yes">&lt;i&gt;Navigate:&lt;/i&gt;</property>
+                            <property name="use_markup">True</property>
                             <property name="xalign">0</property>
                             <property name="tooltip_text" translatable="yes">Choose how to accept incoming navigation synchronization.</property>
                           </widget>
@@ -1011,7 +1013,8 @@
                         <child>
                           <widget class="GtkLabel" id="label-biblesync-listen">
                             <property name="visible">True</property>
-                            <property name="label" translatable="yes">Listen</property>
+                            <property name="label" translatable="yes">&lt;i&gt;Listen:&lt;/i&gt;</property>
+                            <property name="use_markup">True</property>
                             <property name="xalign">0</property>
                             <property name="tooltip_text" translatable="yes">Xiphos will listen to Speakers according to choice here.</property>
                           </widget>
