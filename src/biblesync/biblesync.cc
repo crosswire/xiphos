@@ -199,9 +199,8 @@ string BibleSync::Setup()
 				   sizeof(interface_addr)) < 0)
 		    {
 			ok_so_far = false;
-			retval += (string)" IP_MULTICAST_IF ["
-			    + inet_ntoa(interface_addr)
-			    + "]";
+			retval += (string)" IP_MULTICAST_IF "
+			    + inet_ntoa(interface_addr);
 		    }
 		}
 		// client is now ready for sendto(2) calls.
@@ -460,7 +459,7 @@ int BibleSync::ReceiveInternal()
 		    // find listening status for this guy.
 		    string pkt_uuid = content.find(BSP_APP_INSTANCE_UUID)->second;
 		    BibleSyncSpeakerMapIterator object = speakers.find(pkt_uuid);
-		    string source_addr = (string)"[" + inet_ntoa(source.sin_addr) + "]";
+		    string source_addr = inet_ntoa(source.sin_addr);
 		    bool listening;
 
 		    // spoof & listen check:
@@ -614,6 +613,11 @@ int BibleSync::ReceiveInternal()
 
 			    new_speakers_size = speakers.size();
 
+			    // record address for first-time-seen beacon,
+			    // for anti-spoof checks in the future.
+			    if (cmd == 'S')
+				speakers[pkt_uuid].addr = source_addr;
+
 			    if (mode == BSP_MODE_SPEAKER)
 			    {
 				// speaker listens to no one.
@@ -621,18 +625,10 @@ int BibleSync::ReceiveInternal()
 			    }
 			    else
 			    {
-				// new speaker?
-				// record address for first-time-seen beacon,
-				// for anti-spoof checks in the future.
 				// listen to 1st speaker, ignore everyone else.
 				// the app can make other choices.
-
-				if (old_speakers_size != new_speakers_size)
+				if (cmd == 'S')
 				{
-				    // it's a new speaker.  save address.
-				    speakers[pkt_uuid].addr = source_addr;
-
-				    // iff he's the 1st speaker, listen to him.
 				    speakers[pkt_uuid].listen =
 					((old_speakers_size == 0) &&
 					 (new_speakers_size == 1));
