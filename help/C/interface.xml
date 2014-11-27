@@ -303,18 +303,17 @@
 		<sect3 id="xiphos-bible-open-separate">
 			<title>Opening A Separate Bible Translation</title>
 			<para>
-			In order to view a Bible translation separate from the <application>Xiphos</application> interface:
+			In order to view a Bible translation separate from the <application>Xiphos</application> main window interface, under the
+			<guibutton>Modules</guibutton> option in the <interface>Sidebar</interface>, choose <menuchoice><guimenuitem>Biblical
+			Texts</guimenuitem><guimenuitem>language choice</guimenuitem></menuchoice>.  Then right-click on a translation and choose
+			<guimenuitem>Open in dialog</guimenuitem>. The module will open in a separate, detached window of its own.
 			</para>
-			<itemizedlist>
-				<listitem>
-					<para>
-					Under the <guibutton>Modules</guibutton> option in the <interface>Sidebar</interface>,choose <menuchoice>
-					<guimenuitem>Biblical Texts</guimenuitem><guimenuitem>language choice</guimenuitem></menuchoice>.
-					Then right-click on a translation and choose the <guimenuitem>Open in dialog</guimenuitem>
-					option.
-					</para>
-				</listitem>
-			</itemizedlist>
+			<para>
+			Detached Bible and commentary windows have a synchronization button in the upper-left position beside the navigation bar.  When this
+			button is depressed, the main window Bible and commentary will synchronize with detached Bible and commentary windows.  The
+			synchronization goes both ways: Any detached window will synchronize navigation with all other detached Bibles and commentaries plus the
+			main window, and the main window will drive all detached Bibles and commentaries whose synchronization button is depressed.
+			</para>
 		</sect3>
 		
 		<sect3 id="xiphos-bible-about">
