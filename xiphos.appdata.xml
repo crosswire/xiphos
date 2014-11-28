@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2014 Xiphos Development Team <gnomesword-developers@lists.sourceforge.net> -->
+<component type="desktop">
+ <id>xiphos.desktop</id>
+ <metadata_license>CC0-1.0</metadata_license>
+ <project_license>GPL-2.0+</project_license>
+ <name>Xiphos</name>
+ <summary>Bible Study Guide</summary>
+ <description>
+  <p>
+   Xiphos is a program for high-grade Bible study using the modules and
+   underlying engine support of The Sword Project.
+  </p>
+  <ul>
+    <li>Fully integrated, tabbed interface with Bible+commentary+dictionary</li>
+    <li>User content support: hierarchical bookmarks, personal verse annotations, journals, prayer lists</li>
+    <li>Sword modules provide the widest language coverage of any Bible software anywhere: 400+ Bibles in 150+ languages, with major support for original languages (a dozen each in Hebrew and Greek) plus major support in e.g. English, Russian, German, Portuguese, and French</li>
+    <li>Interface translated into 26 languages</li>
+    <li>Power search capability; footnotes and xrefs; detached windows; text-to-speech support</li>
+    <li>Strong's and morphology support, including pseudo-interlinear display</li>
+    <li>BibleSync shared multicast navigation in personal or speaker/audience modes</li>
+    <li>Supports Linux and Windows including active support in IRC and mailing lists</li>
+  </ul>
+  <p>
+  Formerly known as GnomeSword.
+  </p>
+ </description>
+ <screenshots>
+  <screenshot type="default">
+   <image>https://a.fsdn.com/con/app/proj/gnomesword/screenshots/281659.jpg</image>
+   <caption>Main window</caption>
+  </screenshot>
+  <screenshot>
+   <image>https://a.fsdn.com/con/app/proj/gnomesword/screenshots/281653.jpg</image>
+   <caption>Advanced Search window</caption>
+  </screenshot>
+  <screenshot>
+   <image>https://a.fsdn.com/con/app/proj/gnomesword/screenshots/281661.jpg</image>
+   <caption>Module manager, for obtaining/updating/indexing content modules</caption>
+  </screenshot>
+  <screenshot>
+   <image>https://a.fsdn.com/con/app/proj/gnomesword/screenshots/281655.jpg</image>
+   <caption>Detached parallel display window</caption>
+  </screenshot>
+  <screenshot>
+   <image>https://a.fsdn.com/con/app/proj/gnomesword/screenshots/281663.jpg</image>
+   <caption>Main viewing options</caption>
+  </screenshot>
+  <screenshot>
+   <image>https://a.fsdn.com/con/app/proj/gnomesword/screenshots/281657.jpg</image>
+   <caption>Module-specific display choices</caption>
+  </screenshot>
+ </screenshots>
+ <url type="homepage">https://sourceforge.net/projects/gnomesword/</url>
+ <updatecontact>gnomesword-developers@lists.sourceforge.net</updatecontact>
+ <project_group>GNOME</project_group>
+</component>
