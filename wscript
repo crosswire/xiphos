@@ -293,6 +293,9 @@ def configure(conf):
     #define('PACKAGE_PIXMAPS_DIR', conf.escpath(sub('${DATAROOTDIR}/pixmaps/${PACKAGE}', env)))
     define('PACKAGE_PIXMAPS_DIR', conf.escpath(sub('${DATAROOTDIR}/${PACKAGE}', env)))
     define('PACKAGE_SOURCE_DIR', conf.escpath(os.path.abspath(srcdir))) # folder where was wscript executed
+    if not env["IS_WIN32"]:
+        # for installing xiphos.appdata.xml
+        define('PACKAGE_APPDATA_DIR', conf.escpath(sub('${INSTALL_PREFIX}/share/appdata', env)))
 
     common_libs = string.join(
     '''
@@ -493,6 +496,9 @@ def build(bld):
     bld.install_files('${PACKAGE_PIXMAPS_DIR}',bld.path.ant_glob('pixmaps/*.ico'))
     bld.install_files('${PACKAGE_PIXMAPS_DIR}',bld.path.ant_glob('pixmaps/*.xpm'))    
     bld.install_files('${DATAROOTDIR}/icons/hicolor/scalable/apps','pixmaps/xiphos.svg')
+    if not env["IS_WIN32"]:
+        bld.install_files('${PACKAGE_APPDATA_DIR}','xiphos.appdata.xml')
+
     # handle .desktop creation and installation
     if not env["IS_WIN32"]:
         bld.new_task_gen(
