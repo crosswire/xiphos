@@ -1,3 +1,8 @@
+2014-11-28  karl <charcoal@users.sf.net>
+
+	* add xiphos.appdata.xml for the sake of advertising.
+	* feat.req#110+111: manual updates.
+
 2014-10-30  karl <charcoal@users.sf.net>
 
 	* update CSS to find AbsoluteDataPath and include CSS by reference.
