@@ -183,7 +183,7 @@ struct _settings {
 	/* store $home directory */
 	char *homedir;
 
-	/* store .xiphos-2.0 directory */
+	/* store .xiphos directory */
 	char *gSwordDir;
 
 	/* bookmarks directory */
