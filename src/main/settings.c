@@ -304,7 +304,7 @@ int init_bookmarks(int new_bookmarks)
 	/* set bookmarks dir to settings.gSwordDir + /bookmarks */
 	settings.swbmDir = g_strdup_printf("%s/%s", settings.gSwordDir, "bookmarks");
 
-	/* if .xiphos-2.0/bookmarks does not exist create it */
+	/* if .xiphos/bookmarks does not exist create it */
 	if (g_access(settings.swbmDir, F_OK) == -1) {
 		if ((Mkdir(settings.swbmDir, S_IRWXU)) == -1) {
 			g_warning("can't create bookmarks dir");
