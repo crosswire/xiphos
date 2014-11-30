@@ -304,27 +304,25 @@ ClearFontFaces(gchar *text)
 //
 // retrieve the content of the module's personal css
 //
-static const char *stylefile = "style.css";	// default name.
+static const char *stylefile =
+    "style.css";			// default name, per module.
+static const char *default_stylefile =
+    "default-style.css";		// default name, overall.
 
-const gchar *get_module_local_css(SWModule& module)
+const gchar *get_css_references(SWModule& module)
 {
     static string css;		// static -> safe to return it
 
     // assume nothing will be available.
     css = "";
+    
+    // non-specific CSS for all module displays.
+    char *css_file = g_build_filename(g_getenv(HOMEVAR), ".xiphos",
+				      default_stylefile, NULL);
 
-    // construct path to module's css.
-    char *datapath = main_get_mod_config_entry(module.getName(), "AbsoluteDataPath");
-    char *prefcss = main_get_mod_config_entry(module.getName(), "PreferredCSSXHTML");
-
-    string css_file
-	= (string)datapath
-	+ "/"
-	+ (prefcss ? prefcss : stylefile);	// author's filename.
-
-    if (g_access(css_file.c_str(), F_OK) == 0)
+    if (g_file_test(css_file, G_FILE_TEST_EXISTS))
     {
-	css = (string)"<link rel=\"stylesheet\" type=\"text/css\" href=\""
+	css += (string)"<link rel=\"stylesheet\" type=\"text/css\" href=\""
 #ifdef WIN32
 	    + "http://127.0.0.1:7878/"	// see main.c (sob)
 #else
@@ -333,6 +331,27 @@ const gchar *get_module_local_css(SWModule& module)
 	    + css_file
 	    + "\" />";
     }
+    g_free(css_file);
+
+    // construct path to module's CSS.
+    char *datapath = main_get_mod_config_entry(module.getName(), "AbsoluteDataPath");
+    char *prefcss  = main_get_mod_config_entry(module.getName(), "PreferredCSSXHTML");
+
+    // module-specific CSS.
+    css_file = g_build_filename(datapath, (prefcss ? prefcss : stylefile), NULL);
+
+    if (g_file_test(css_file, G_FILE_TEST_EXISTS))
+    {
+	css += (string)"<link rel=\"stylesheet\" type=\"text/css\" href=\""
+#ifdef WIN32
+	    + "http://127.0.0.1:7878/"	// see main.c (sob)
+#else
+	    + "file:"
+#endif
+	    + css_file
+	    + "\" />";
+    }
+    g_free(css_file);	// get rid of old one first.
     
     return css.c_str();
 }
@@ -943,7 +962,7 @@ GTKEntryDisp::display(SWModule &imodule)
 				     ? DOUBLE_SPACE
 				     : ""))),
 			      imodule.getRenderHeader(),
-			      get_module_local_css(imodule),
+			      get_css_references(imodule),
 			      ((mf->old_font) ? mf->old_font : ""),
 			      mf->old_font_size_value,
 			      imodule.getDescription(),
@@ -1296,7 +1315,7 @@ GTKChapDisp::display(SWModule &imodule)
 				   ? DOUBLE_SPACE
 				   : ""))),
 			    imodule.getRenderHeader(),
-			    get_module_local_css(imodule),
+			    get_css_references(imodule),
 			    ((mf->old_font) ? mf->old_font : ""),
 			    mf->old_font_size_value);
 	swbuf.append(buf);
@@ -1559,7 +1578,7 @@ DialogEntryDisp::display(SWModule &imodule)
 			      settings.link_color,
 			      (ops->doublespace ? DOUBLE_SPACE : ""),
 			      imodule.getRenderHeader(),
-			      get_module_local_css(imodule),
+			      get_css_references(imodule),
 			      ((mf->old_font) ? mf->old_font : ""),
 			      mf->old_font_size_value,
 			      settings.bible_verse_num_color,
@@ -1694,7 +1713,7 @@ DialogChapDisp::display(SWModule &imodule)
 				     ? DOUBLE_SPACE
 				     : ""))),
 			      imodule.getRenderHeader(),
-			      get_module_local_css(imodule),
+			      get_css_references(imodule),
 			      ((mf->old_font) ? mf->old_font : ""),
 			      mf->old_font_size_value);
 	swbuf.append(buf);
@@ -1884,7 +1903,7 @@ GTKPrintEntryDisp::display(SWModule &imodule)
 			      settings.link_color,
 			      (ops->doublespace ? DOUBLE_SPACE : ""),
 			      imodule.getRenderHeader(),
-			      get_module_local_css(imodule),
+			      get_css_references(imodule),
 			      ((mf->old_font) ? mf->old_font : ""),
 			      mf->old_font_size_value,
 			      settings.bible_verse_num_color,
@@ -1934,7 +1953,7 @@ GTKPrintChapDisp::display(SWModule &imodule)
 			      settings.link_color,
 			      (ops->doublespace ? DOUBLE_SPACE : ""),
 			      imodule.getRenderHeader(),
-			      get_module_local_css(imodule),
+			      get_css_references(imodule),
 			      ((mf->old_font) ? mf->old_font : ""),
 			      mf->old_font_size_value);
 	swbuf.append(buf);
