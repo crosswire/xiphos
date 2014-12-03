@@ -792,10 +792,11 @@ remove_install_modules(GList * modules,
 {
 	GList *tmp;
 	gchar *buf;
-	const gchar *new_dest;
+	const gchar *new_dest = NULL;
 	gint failed = 1;
 	GString *mods;
-	gchar *dialog_text;
+	gchar *dialog_text = NULL;
+	gchar *preserved_cipherkey = NULL;
 
 	if (!modules)
 		return;
@@ -846,7 +847,7 @@ remove_install_modules(GList * modules,
 		buf = (gchar *) tmp->data;
 		current_mod = buf;
 		g_string_printf(mods, "%s: %s",
-				gettext (verbs[activity][PHRASE_DOING]), buf);
+				gettext(verbs[activity][PHRASE_DOING]), buf);
 		gtk_progress_bar_set_text(GTK_PROGRESS_BAR
 					  (progressbar_refresh),
 					  mods->str);
@@ -918,6 +919,16 @@ remove_install_modules(GList * modules,
 				  (destination
 				   ? destination
 				   : settings.path_to_mods)));
+
+			/* hang onto the old key, if available. */
+			preserved_cipherkey =
+			    main_get_mod_config_entry(buf, "CipherKey");
+			if (preserved_cipherkey && (*preserved_cipherkey == '\0')) {
+				/* present but empty -> nothingness */
+				g_free(preserved_cipherkey);
+				preserved_cipherkey = NULL;
+			}
+
 			failed = mod_mgr_uninstall(destination, buf);
 			if (failed == -1) {
 				//mod_mgr_shut_down();
@@ -946,6 +957,12 @@ remove_install_modules(GList * modules,
 			failed = ((local)
 				  ? mod_mgr_local_install_module(destination, source, buf)
 				  : mod_mgr_remote_install(destination, source, buf));
+
+			/* try to re-use a saved key. */
+			if ((failed != -1) && preserved_cipherkey) {
+				main_save_module_key(buf, preserved_cipherkey);
+				GS_print(("re-use key %s\n", preserved_cipherkey));
+			}
 		}
 
 		if (activity == FASTMOD) {
@@ -965,6 +982,11 @@ remove_install_modules(GList * modules,
 			GS_print(("deleting index %s\n", buf));
 			failed = ((main_module_mgr_delete_index_mod(buf))
 				  ? 0 : 1);
+		}
+
+		if (preserved_cipherkey) {
+			g_free(preserved_cipherkey);
+			preserved_cipherkey = NULL;
 		}
 
 		g_free(tmp->data);

@@ -1,3 +1,7 @@
+2014-12-03  karl <charcoal@users.sf.net>
+
+	* preserve the old CipherKey string when updating a module.
+
 2014-11-29  karl <charcoal@users.sf.net>
 
 	* feat.req#93: add default CSS for all displays.
