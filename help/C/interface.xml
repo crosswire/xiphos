@@ -491,6 +491,15 @@
 			</itemizedlist>
 		</sect3>
 		
+		<sect3 id="xiphos-default-css">
+			<title>Display Control with CSS</title>
+			<para>
+			If you are familiar with CSS (cascading style sheets), you may wish to create the file "default-style.css" in your .xiphos
+			directory to contain whatever CSS controls you wish.  Beware, it is very easy to shoot oneself in the foot with CSS, and this
+			will affect all modules' display.  The facility exists to provide the capability that advanced users may wish.
+			</para>
+		</sect3>
+		
 		<sect3 id="xiphos-user-annotation">
 			<title>User Annotation</title>
 			<para>
