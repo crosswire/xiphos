@@ -1152,8 +1152,6 @@ void main_display_dictionary(const char * mod_name,
 void main_display_bible(const char * mod_name,
 			const char * key)
 {
-	gchar *file = NULL;
-	gchar *style = NULL;
 	gchar *val_key = NULL;
 
 	/* keeps us out of a crash causing loop */
@@ -1233,15 +1231,6 @@ void main_display_bible(const char * mod_name,
 	}
 
 	settings.whichwindow = MAIN_TEXT_WINDOW;
-
-	file = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
-	style = get_conf_file_item(file, mod_name, "style");
-	if ((style) && !strcmp(style,"verse"))
-		settings.versestyle = TRUE;
-	else
-		settings.versestyle = FALSE;
-	g_free(style);
-	g_free(file);
 
 	main_check_unlock(mod_name, TRUE);
 
@@ -1383,12 +1372,33 @@ const char *main_get_module_language(const char *module_name)
 
 /******************************************************************************
  * Name
+ *  main_check_for_option
+ *
+ * Synopsis
+ *   #include ".h"
+ *
+ *  	gint main_check_for_option(const gchar * mod_name, const gchar * key, const gchar * option)
+ *
+ * Description
+ *    get any option for a module
+ *
+ * Return value
+ *   gint
+ */
+
+gint main_check_for_option(const gchar * mod_name, const gchar * key, const gchar * option)
+{
+	return backend->has_option(mod_name, key, option);
+}
+
+/******************************************************************************
+ * Name
  *  main_check_for_global_option
  *
  * Synopsis
  *   #include ".h"
  *
- *  	gint main_check_for_global_option(gchar * mod_name, gchar * option)
+ *  	gint main_check_for_global_option(const gchar * mod_name, const gchar * option)
  *
  * Description
  *    get global options for a module
@@ -1397,7 +1407,7 @@ const char *main_get_module_language(const char *module_name)
  *   gint
  */
 
-gint main_check_for_global_option(gchar * mod_name, gchar * option)
+gint main_check_for_global_option(const gchar * mod_name, const gchar * option)
 {
 	return backend->has_global_option(mod_name, option);
 }

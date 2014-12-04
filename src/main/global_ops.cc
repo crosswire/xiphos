@@ -37,6 +37,7 @@
 #include "main/module_dialogs.h"
 #include "main/settings.h"
 #include "main/parallel_view.h"
+#include "main/sword.h"
 
 #include "backend/sword_main.hh"
 
@@ -235,9 +236,13 @@ GLOBAL_OPS *main_new_globals(const gchar * mod_name)
 	    (module_options[mod_name]["XrefNoteNumbers"] != "Off");
 
 	ops->verse_per_line = 
-	    (*(module_options[mod_name]["style"].c_str()) == 'v')
-	    ? 1	
-	    : 0;//  otherwise, paragraph style.
+	    ((*(module_options[mod_name]["style"].c_str()) == 'v')
+	     ? 1
+	     : ((*(module_options[mod_name]["style"].c_str()) == 'p')
+		? 0
+		: (main_check_for_option(mod_name, "Feature", "NoParagraphs")
+		   ? 1	
+		   : 0)));	// default to paragraph style.
 	
 	ops->image_content =
 	    (*(module_options[mod_name]["Image Content"].c_str()) == '\0')

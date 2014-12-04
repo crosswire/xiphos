@@ -1232,7 +1232,7 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 				 : "&nbsp; <a name=\"%d\"> </a>"),
 				0,
 				(char*)key->getText(),
-				((settings.versestyle)
+				(settings.versestyle
 				 ? settings.verse_num_font_size + settings.base_font_size
 				 : settings.base_font_size - 2),
 				settings.bible_verse_num_color,
@@ -1282,6 +1282,8 @@ GTKChapDisp::display(SWModule &imodule)
 	if (strongs_and_morph)
 		set_morph_order(imodule);
 	set_render_numbers(imodule, ops);
+
+	settings.versestyle = ops->verse_per_line;
 
 	// when strongs/morph are on, the anchor boundary must be smaller.
 	// or if main window is too small to keep curverse in-pane,
@@ -1684,17 +1686,7 @@ DialogChapDisp::display(SWModule &imodule)
 	    (curChapter != marked_cache_chapter))
 		marked_cache_fill(ModuleName, (gchar *)key->getShortText());
 
-	gint versestyle;
-	gchar *file = NULL, *style = NULL;
-
-	file = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
-	style = get_conf_file_item(file, ModuleName, "style");
-	if ((style) && !strcmp(style, "verse"))
-		versestyle = TRUE;
-	else
-		versestyle = FALSE;
-	g_free(style);
-	g_free(file);
+	gint versestyle = ops->verse_per_line;
 
 	main_set_global_options(ops);
 
