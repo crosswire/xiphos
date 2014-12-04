@@ -257,7 +257,7 @@ GList *BackEnd::get_module_options(void)
 	return options;
 }
 
-int BackEnd::has_global_option(char * module_name, char * option)
+int BackEnd::has_option(const char * module_name, const char * key, const char * option)
 {
 	SWModule *mod;
 	ModMap::iterator it;
@@ -265,9 +265,14 @@ int BackEnd::has_global_option(char * module_name, char * option)
 	it = main_mgr->Modules.find(module_name);
 	if (it != main_mgr->Modules.end()) {
 		mod = (*it).second;
-		return mod->getConfig().has("GlobalOptionFilter", option);
+		return mod->getConfig().has(key, option);
 	} else
 		return 0;
+}
+
+int BackEnd::has_global_option(const char * module_name, const char * option)
+{
+	return has_option(module_name, "GlobalOptionFilter", option);
 }
 
 char *BackEnd::get_config_entry(char * module_name, char * entry)
