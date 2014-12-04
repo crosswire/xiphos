@@ -71,7 +71,8 @@ public:
 	const char *get_sword_version(void);
 
 	GList *get_module_options(void);
-	int has_global_option(char *mod_name, char *option);
+	int has_option(const char *mod_name, const char *key, const char *option);
+	int has_global_option(const char *mod_name, const char *option);
 	void set_cipher_key(char * mod_name, char * key);
 	char *get_config_entry(char * module_name, char * entry);
 	int is_Bible_key(const char * list, char * current_key);
