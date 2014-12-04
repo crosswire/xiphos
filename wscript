@@ -394,7 +394,7 @@ def configure(conf):
     env.append_value('ALL_LIBS', 'SWORD')
 
     conf.check_cfg(package='biblesync',
-                   args='"biblesync >= 1.0.0" --cflags --libs',
+                   args='"biblesync >= 1.1.2" --cflags --libs',
                    uselib_store='BIBLESYNC',
                    errmsg='no: using local (possibly out of date) version.',
                    mandatory=False)
