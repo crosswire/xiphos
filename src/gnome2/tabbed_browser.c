@@ -793,7 +793,7 @@ static GtkWidget* tab_widget_new(PASSAGE_TAB_INFO *tbinf, const gchar *label_tex
 
 	g_return_val_if_fail(label_text != NULL, NULL);
 #ifdef HAVE_GTK_310
-	tmp_toolbar_icon = gtk_image_new_from_icon_name ("gtk-close",
+	tmp_toolbar_icon = gtk_image_new_from_icon_name ("window-close",
                               GTK_ICON_SIZE_MENU);
 #else
 	tmp_toolbar_icon = gtk_image_new_from_stock(GTK_STOCK_CLOSE, 
