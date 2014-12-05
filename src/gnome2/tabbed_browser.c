@@ -66,6 +66,7 @@ void set_current_tab (PASSAGE_TAB_INFO *pt);
 
 gboolean stop_refresh = FALSE;
 gboolean change_tabs_no_redisplay = FALSE;
+gboolean closing_tab = FALSE;
 
 GList *passage_list;
 
@@ -206,7 +207,7 @@ void set_current_tab (PASSAGE_TAB_INFO *pt)
 	if (stop_refresh)
 		return;
 
-	if (ot != NULL && ot->button_close != NULL) {
+	if (!closing_tab && ot != NULL && ot->button_close != NULL) {
 		gtk_widget_set_sensitive(ot->button_close, FALSE);
 	}
 	cur_passage_tab = pt;
@@ -754,9 +755,11 @@ void gui_load_tabs(const gchar *filename)
 static void on_notebook_main_close_page(GtkButton * button, gpointer user_data)
 {
 	PASSAGE_TAB_INFO *pt = (PASSAGE_TAB_INFO*)user_data;
+	closing_tab = TRUE;
 	gui_close_passage_tab(gtk_notebook_page_num
 				(GTK_NOTEBOOK(widgets.notebook_main),
 				pt->page_widget));
+	closing_tab = FALSE;
 }
 
 
