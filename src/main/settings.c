@@ -110,14 +110,16 @@ int settings_init(int argc, char **argv, int new_configs, int new_bookmarks)
 	}
 
 	/* set gSwordDir to $home + .xiphos */
-	settings.gSwordDir = g_strdup_printf("%s/%s", settings.homedir, XI_DIR);
+	settings.gSwordDir = g_build_filename(settings.homedir, XI_DIR, NULL);
 
 	/* if gSwordDir does not exist, create it. */
 	if (g_access(settings.gSwordDir, F_OK) == -1) {
 		if ((Mkdir(settings.gSwordDir, S_IRWXU)) != 0) {
 			char msg[300];
 			gui_init(argc, argv);
-			sprintf(msg, _("Xiphos can not create  .xiphos:\n%s\n\nXiphos cannot continue."),
+			sprintf(msg, _("Xiphos can not create directory "
+				       XI_DIR
+				       ":\n%s\n\nXiphos cannot continue."),
 				strerror(errno));
 			gui_generic_warning_modal(msg);
 			/* if we can not create gSwordDir exit */

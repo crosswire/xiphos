@@ -317,7 +317,7 @@ const gchar *get_css_references(SWModule& module)
     css = "";
     
     // non-specific CSS for all module displays.
-    char *css_file = g_build_filename(g_getenv(HOMEVAR), ".xiphos",
+    char *css_file = g_build_filename(settings.gSwordDir,
 				      default_stylefile, NULL);
 
     if (g_file_test(css_file, G_FILE_TEST_EXISTS))
