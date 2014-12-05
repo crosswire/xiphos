@@ -22,7 +22,6 @@
   <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
   <property name="focus_on_map">True</property>
   <property name="urgency_hint">False</property>
-  <property name="has_separator">True</property>
   <signal name="response" handler="on_dialog_response" last_modification_time="Sat, 09 Jul 2005 18:07:32 GMT"/>
 
   <child internal-child="vbox">
