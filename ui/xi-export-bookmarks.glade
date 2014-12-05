@@ -8,7 +8,6 @@
     <property name="default_width">640</property>
     <property name="default_height">640</property>
     <property name="type_hint">normal</property>
-    <property name="has_separator">False</property>
     <signal name="response" handler="dialog_export_bookmarks_response_cb"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox1">
