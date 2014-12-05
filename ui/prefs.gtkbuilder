@@ -72,7 +72,6 @@
     <property name="default_height">300</property>
     <property name="icon">xiphos-x-16.png</property>
     <property name="type_hint">dialog</property>
-    <property name="has_separator">True</property>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox1">
         <property name="visible">True</property>
@@ -2377,7 +2376,6 @@
     <property name="default_height">300</property>
     <property name="icon">xiphos-x-16.png</property>
     <property name="type_hint">dialog</property>
-    <property name="has_separator">True</property>
     <child internal-child="vbox">
       <object class="GtkVBox" id="mod_sel_vbox2">
         <property name="visible">True</property>
