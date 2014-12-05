@@ -355,7 +355,7 @@ gchar * gui_general_user_file (const char *fname, gboolean critical)
 	}
 
 	/* try the default */
-	file = g_build_filename(g_getenv(HOMEVAR), ".xiphos", fname, NULL);
+	file = g_build_filename(settings.gSwordDir, fname, NULL);
 
 	/* success? */
 	if (g_file_test (file, G_FILE_TEST_EXISTS))
