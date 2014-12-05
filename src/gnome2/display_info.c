@@ -236,7 +236,7 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 
 	button_close = 
 #ifdef HAVE_GTK_310
-		gtk_button_new_from_icon_name ("gtk-close",
+		gtk_button_new_from_icon_name ("window-close",
                                GTK_ICON_SIZE_BUTTON);
 #else   
 		gtk_button_new_from_stock(GTK_STOCK_CLOSE);
