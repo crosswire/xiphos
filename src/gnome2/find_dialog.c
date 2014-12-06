@@ -266,7 +266,7 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 
 	image =
 #ifdef HAVE_GTK_310
-	    gtk_image_new_from_icon_name ("gtk-find",
+	    gtk_image_new_from_icon_name ("edit-find",
                                GTK_ICON_SIZE_BUTTON);
 #else                 
 	    gtk_image_new_from_stock(GTK_STOCK_FIND, GTK_ICON_SIZE_BUTTON);
