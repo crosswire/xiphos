@@ -1,14 +1,40 @@
-Installation Instructions
-*************************
+Installation instructions
+==========================
 
-Copyright (C) 2010, Dmitrijs Ledkovs.
+On Linux install Xiphos through you package manager, for example on Fedora:
 
-This file is free documentation; the copyright holders give unlimited permission
-to copy, distribute and modify it.
+    $ sudo yum install xiphos
 
-Briefly, the shell command `./waf configure build install' should configure,
-build, and install this package.
+Or on Debian, Ubuntu, or Linux Mint:
 
-To see all available configuration options see `./waf configure --help'
+    $ sudo apt-get update
+    $ sudo apt-get install xiphos
 
-Usuall environment variables are supported, e.g. CFLAGS.
+If you use Windows download the .exe file from
+http://sourceforge.net/projects/gnomesword/files/Xiphos/3.2.2/xiphos-3.2.2-win32.exe/download
+
+Compile Xiphos from source
+==========================
+
+To compile Xiphos from source you will need to get a checkout of Xiphos from
+Sourceforge. To do so, do:
+
+    $ svn checkout svn://svn.code.sf.net/p/gnomesword/code/trunk xiphos
+
+Now to compile the GTK3 version of Xiphos you need to make sure you have these
+packages installed:
+
+    $ sudo yum install intltool gtk3-devel dbus-glib-devel gtkhtml3-devel webkitgtk3-devel libxml2-devel libgsf-devel gconfmm26-devel sword-devel libuuid-devel gnome-doc-utils rarian rarian-compat
+
+Next we need to configure everything:
+
+    $ ./waf configure --prefix=/usr --debug-level=optimized --enable-webkit-editor
+
+Now we build:
+
+    $ ./waf build
+
+Then install:
+
+    $ sudo ./waf install
+
