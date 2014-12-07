@@ -354,13 +354,11 @@ msgstr "版权所有 2000-2010 Xiphos 开发项目组"
 
 #: ../src/gnome2/about_xiphos.c:125
 msgid ""
-"(formerly known as GnomeSword)\n"
 "\n"
 "Powered by The SWORD Project.\n"
 "We would like to thank Troy Griffitts and all the other folks who have given "
 "us The SWORD Project."
 msgstr ""
-"(与 GnomeSword 齐名)\n"
 "\n"
 "Powered by The SWORD Project.\n"
 "我们感谢 Troy Griffitts 和所有在 The SWORD Project 奉献的朋友。"
