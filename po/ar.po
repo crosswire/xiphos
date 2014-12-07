@@ -358,13 +358,12 @@ msgstr "حقوق الطبع والنشر 2000-2009 فريق التطوير Xipho
 
 #: ../src/gnome2/about_xiphos.c:125
 msgid ""
-"(formerly known as GnomeSword)\n"
 "\n"
 "Powered by The SWORD Project.\n"
 "We would like to thank Troy Griffitts and all the other folks who have given "
 "us The SWORD Project."
 msgstr ""
-"(المعروف سابقا باسم GnomeSword) بدعم من مشروع السيف. ونود أن نشكر تروي "
+"\n بدعم من مشروع السيف. ونود أن نشكر تروي "
 "Griffitts وجميع الناس الآخرين الذين قدموا لنا مشروع السيف."
 
 #. info->stock_icon = GTK_STOCK_OPEN;
