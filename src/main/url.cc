@@ -956,7 +956,7 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 		}
 
 		else if (!strcmp(action, "showMorph")) {
-			show_morph(m_url.getParameterValue("module"),
+			show_morph(settings.MainWindowModule,
 				   stype, svalue, clicked);
 		}
 
