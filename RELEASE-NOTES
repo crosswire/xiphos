@@ -6,9 +6,10 @@ ____________________
 Intermediate Test Release 3.9.1
 07 Dec 2014
 
-- Added alternate versification support (av11n): Xiphos understands
-  book/chapter/verse schemes other than KJV.  See especially module KJVA
-  and look for Apocrypha books between Malachi and Matthew.
+- Bug #508 + feat.req #133: Added alternate versification support (av11n):
+  Xiphos understands book/chapter/verse schemes other than KJV.  See
+  especially module KJVA and look for Apocrypha books between Malachi and
+  Matthew.
 
 - Added module-specific CSS support.  This uses configuration directive
   "PreferredCSSXHTML=style.css", naming a file in the DataPath
@@ -20,8 +21,6 @@ Intermediate Test Release 3.9.1
 
 - Added history direct pre-load from verse list contents (right-click),
   plus verse list load from history content.
-
-- Conversely, added verse list pre-load from history menu.
 
 - Added Feature=NoParagraphs config support, default for verse-per-line.
 
