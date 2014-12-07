@@ -3,6 +3,43 @@ ____________________
 XIPHOS RELEASE NOTES
 ____________________
 
+Intermediate Test Release 3.9.1
+07 Dec 2014
+
+- Added alternate versification support (av11n): Xiphos understands
+  book/chapter/verse schemes other than KJV.  See especially module KJVA
+  and look for Apocrypha books between Malachi and Matthew.
+
+- Added module-specific CSS support.  This uses configuration directive
+  "PreferredCSSXHTML=style.css", naming a file in the DataPath
+  directory.  If present, the file's content is included when rendering
+  the pane.
+
+- Added default CSS support.  Use ~/.xiphos/default-style.css but be
+  aware that this has effects on all displayed modules.
+
+- Added history direct pre-load from verse list contents (right-click),
+  plus verse list load from history content.
+
+- Conversely, added verse list pre-load from history menu.
+
+- Added Feature=NoParagraphs config support, default for verse-per-line.
+
+- Added preservation of CipherKey value for re-use when updating a module.
+
+- Added xiphos.appdata.xml (/usr/share/appdata) for...well, advertising.
+
+- Updated manual text for a couple feature requests.
+
+- Fixed bug#513, stop crash on repeated tab deletion.
+
+- Cleaned up internal settings structures.
+
+- Made several accommodations to very recent GTK3.  Stable interface, ha.
+
+- Updated BibleSync interface in accordance with 1.1's updated params.
+________________________________________________________________
+
 Release 3.2.2
 24 Aug 2014
 
