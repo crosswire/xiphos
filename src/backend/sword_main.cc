@@ -246,6 +246,17 @@ const char *BackEnd::get_sword_version(void)
 	return retval;
 }
 
+// in the new-to-us av11n world, we need to add a module name
+// parameter to many backend requests for VerseKey context.
+// this replaces excess use of "main_mgr->Modules.find(name)".
+SWModule *BackEnd::get_SWModule(const char *module_name)
+{
+	ModMap::iterator it = main_mgr->Modules.find(module_name);
+	return ((it != main_mgr->Modules.end())
+		? it->second
+		: NULL);
+}
+
 GList *BackEnd::get_module_options(void)
 {
 	GList *options = NULL;
@@ -259,12 +270,9 @@ GList *BackEnd::get_module_options(void)
 
 int BackEnd::has_option(const char * module_name, const char * key, const char * option)
 {
-	SWModule *mod;
-	ModMap::iterator it;
+	SWModule *mod = get_SWModule(module_name);
 
-	it = main_mgr->Modules.find(module_name);
-	if (it != main_mgr->Modules.end()) {
-		mod = (*it).second;
+	if (mod) {
 		return mod->getConfig().has(key, option);
 	} else
 		return 0;
@@ -277,42 +285,38 @@ int BackEnd::has_global_option(const char * module_name, const char * option)
 
 char *BackEnd::get_config_entry(char * module_name, char * entry)
 {
-	if ((this == NULL) || (main_mgr == NULL))
-		return NULL;
-	SWModule *mod;
-	ModMap::iterator it;
+//	if ((this == NULL) || (main_mgr == NULL))
+//		return NULL;
 
-	it = main_mgr->Modules.find(module_name);
-	if (it != main_mgr->Modules.end()) {
-		mod = (*it).second;
+	SWModule *mod = get_SWModule(module_name);
+
+	if (mod) {
 		return g_strdup((char *) mod->getConfigEntry(entry));
 	} else
 		return NULL;
 }
 
-void BackEnd::set_cipher_key(char * mod_name, char * key)
+void BackEnd::set_cipher_key(char * module_name, char * key)
 {
-	main_mgr->setCipherKey(mod_name, key);
+	main_mgr->setCipherKey(module_name, key);
 }
 
-int BackEnd::is_Bible_key(const char * list, char * current_key)
+int BackEnd::is_Bible_key(const char *module_name, const char * list, const char * current_key)
 {
-	VerseKey key;
+	SWModule *mod = get_SWModule(module_name);
+	VerseKey *key = (VerseKey *)(SWKey *)(*mod);
 
-	key.setText(current_key);
-	ListKey vs = key.parseVerseList(list, key);
+	key->setText(current_key);
+	ListKey vs = key->parseVerseList(list, *key);
 	return vs.getCount();
 }
 
 
 char *BackEnd::get_render_text(const char *module_name, const char *key)
 {
-	SWModule *mod;
-	ModMap::iterator it;
+	SWModule *mod = get_SWModule(module_name);
 
-	it = main_mgr->Modules.find(module_name);
-	if (it != main_mgr->Modules.end()) {
-		mod = (*it).second;
+	if (mod) {
 		mod->setKey(key);
 		return strdup(mod->renderText().c_str());
 	}
@@ -321,12 +325,9 @@ char *BackEnd::get_render_text(const char *module_name, const char *key)
 
 char *BackEnd::get_raw_text(const char *module_name, const char *key)
 {
-	SWModule *mod;
-	ModMap::iterator it;
+	SWModule *mod = get_SWModule(module_name);
 
-	it = main_mgr->Modules.find(module_name);
-	if (it != main_mgr->Modules.end()) {
-		mod = (*it).second;
+	if (mod) {
 		mod->setKey(key);
 		return strdup((char *) mod->getRawEntry());
 	}
@@ -335,12 +336,9 @@ char *BackEnd::get_raw_text(const char *module_name, const char *key)
 
 char *BackEnd::render_this_text(const char * module_name, const char * text)
 {
-	SWModule *mod;
-	ModMap::iterator it;
+	SWModule *mod = get_SWModule(module_name);
 
-	it = main_mgr->Modules.find(module_name);
-	if (it != main_mgr->Modules.end()) {
-		mod = (*it).second;
+	if (mod) {
 		return strdup(mod->renderText(text).c_str());
 	}
 	return NULL;
@@ -348,87 +346,97 @@ char *BackEnd::render_this_text(const char * module_name, const char * text)
 
 char *BackEnd::get_strip_text_from_string(const char * module_name, const char *string)
 {
-	SWModule *mod;
-	ModMap::iterator it;
+	SWModule *mod = get_SWModule(module_name);
 
-	it = main_mgr->Modules.find(module_name);
-	if (it != main_mgr->Modules.end()) {
-		mod = (*it).second;
+	if (mod) {
 		return strdup((char *) mod->stripText(string));
 	}
 	return NULL;
 }
 char *BackEnd::get_strip_text(const char *module_name, const char *key)
 {
-	SWModule *mod;
-	ModMap::iterator it;
+	SWModule *mod = get_SWModule(module_name);
 
-	it = main_mgr->Modules.find(module_name);
-	if (it != main_mgr->Modules.end()) {
-		mod = (*it).second;
+	if (mod) {
 		mod->setKey(key);
-        return strdup((char *) mod->stripText());
+		return strdup((char *) mod->stripText());
 	}
 	return NULL;
 }
 
 
-char *BackEnd::get_valid_key(const char *key)
+char *BackEnd::get_valid_key(const char *module_name, const char *key)
 {
-	VerseKey vkey;
+	SWModule *mod = get_SWModule(module_name);
+	VerseKey *vkey = (VerseKey *)(SWKey *)(*mod);
 	char *mykey;
-	vkey.setAutoNormalize(1);
-	vkey = key;
-	if ((sword_locale) && (!strcmp(sword_locale,"en")))
-		mykey = (char*)vkey.getShortText();
+
+	vkey->setAutoNormalize(1);
+	vkey->setText(key);
+
+	// what's with this flagrant anglocentrism?
+	if (sword_locale && !strcmp(sword_locale, "en"))
+		mykey = strdup((char*)vkey->getShortText());
 	else
-		mykey = (char*)vkey.getText();
-	return strdup(mykey);
+		mykey = strdup((char*)vkey->getText());
+	return mykey;
 }
 
-char *BackEnd::key_get_book(const char *key)
+char *BackEnd::key_get_book(const char *module_name, const char *key)
 {
-	VerseKey vkey;
-	vkey.setAutoNormalize(1);
-	vkey = key;
+	SWModule *mod = get_SWModule(module_name);
+	VerseKey *vkey = (VerseKey *)(SWKey *)(*mod);
 
-	return strdup((char*)vkey.getBookName());
-}
-
-
-int BackEnd::key_get_chapter(const char *key)
-{
-	VerseKey vkey;
-	vkey.setAutoNormalize(1);
-	vkey = key;
-	return vkey.getChapter();
-}
-
-int BackEnd::key_get_verse(const char *key)
-{
-	VerseKey vkey;
-	vkey.setAutoNormalize(1);
-	vkey = key;
-	return vkey.getVerse();
-}
-
-unsigned int BackEnd::key_chapter_count(const char *key)
-{
-	VerseKey vkey;
-	vkey.setAutoNormalize(1);
-	vkey = key;
-
-	return (vkey.getChapterMax());
+	vkey->setAutoNormalize(1);
+	vkey->setText(key);
+	char *s = strdup((char*)vkey->getBookName());
+	return s;
 }
 
 
-unsigned int BackEnd::key_verse_count(const char *key)
+int BackEnd::key_get_chapter(const char *module_name, const char *key)
 {
-	VerseKey vkey;
-	vkey.setAutoNormalize(1);
-	vkey = key;
+	SWModule *mod = get_SWModule(module_name);
+	VerseKey *vkey = (VerseKey *)(SWKey *)(*mod);
 
-	return (vkey.getVerseMax());
+	vkey->setAutoNormalize(1);
+	vkey->setText(key);
+	int c = vkey->getChapter(); 
+	return c;
+}
+
+int BackEnd::key_get_verse(const char *module_name, const char *key)
+{
+	SWModule *mod = get_SWModule(module_name);
+	VerseKey *vkey = (VerseKey *)(SWKey *)(*mod);
+
+	vkey->setAutoNormalize(1);
+	vkey->setText(key);
+	int v = vkey->getVerse();
+	return v;
+}
+
+unsigned int BackEnd::key_chapter_count(const char *module_name, const char *key)
+{
+	SWModule *mod = get_SWModule(module_name);
+	VerseKey *vkey = (VerseKey *)(SWKey *)(*mod);
+
+	vkey->setAutoNormalize(1);
+	vkey->setText(key);
+	int max = vkey->getChapterMax();
+	return max;
+}
+
+
+unsigned int BackEnd::key_verse_count(const char *module_name, const char *key)
+{
+	SWModule *mod = get_SWModule(module_name);
+	VerseKey *vkey = (VerseKey *)(SWKey *)(*mod);
+
+	vkey->setAutoNormalize(1);
+	vkey->setText(key);
+	int max = vkey->getVerseMax();
+	return max;
 }
 
 
@@ -468,10 +476,10 @@ void BackEnd::delete_entry(void)
 
 const char *BackEnd::module_get_language(const char *module_name)
 {
-	ModMap::iterator it;
-	it = main_mgr->Modules.find(module_name);
-	if (it != main_mgr->Modules.end())
-		return main_get_language_map((*it).second->getLanguage());
+	SWModule *mod = get_SWModule(module_name);
+
+	if (mod)
+		return main_get_language_map(mod->getLanguage());
 	return "unknown";
 }
 
@@ -500,44 +508,42 @@ char **BackEnd::get_module_language_list(void)
 }
 
 
-int BackEnd::is_module(const char *mod_name)
+int BackEnd::is_module(const char *module_name)
 {
-	if (mod_name == NULL)
-		return 0;
-	ModMap::iterator it = main_mgr->Modules.find(mod_name);
-	if (it != main_mgr->Modules.end()) {
-		return 1;
-	}
-	return 0;
+//	if (module_name == NULL)
+//		return 0;
+
+	SWModule *mod = get_SWModule(module_name);
+	return ((mod != NULL) ? 1 : 0);
 }
 
 
 int BackEnd::module_type(const char *mod_name)
 {
-	ModMap::iterator it;
-	if ((!mod_name) || (strlen(mod_name) < 2))
-		return -1;
+//	if ((!mod_name) || (strlen(mod_name) < 2))
+//		return -1;
 
-	it = main_mgr->Modules.find(mod_name);
-	if (it != main_mgr->Modules.end()) {
+	SWModule *mod = get_SWModule(mod_name);
 
-		if (!strcmp((*it).second->getType(), TEXT_MODS)) {
+	if (mod) {
+
+		if (!strcmp(mod->getType(), TEXT_MODS)) {
 			return TEXT_TYPE;
 		}
 
-		if (!strcmp((*it).second->getType(), COMM_MODS)) {
-			if (!strcmp((char *) (*it).second->getConfigEntry("ModDrv"), "RawFiles"))
+		if (!strcmp(mod->getType(), COMM_MODS)) {
+			if (!strcmp((char *) mod->getConfigEntry("ModDrv"), "RawFiles"))
 				return PERCOM_TYPE;
 			return COMMENTARY_TYPE;
 		}
 
-		if (!strcmp((*it).second->getType(), DICT_MODS)) {
+		if (!strcmp(mod->getType(), DICT_MODS)) {
 			return DICTIONARY_TYPE;
 		}
 
-		if (!strcmp((*it).second->getType(), BOOK_MODS)) {
-			if ((*it).second->getConfigEntry("GSType") &&
-				!strcmp((char *) (*it).second->getConfigEntry("GSType"), "PrayerList"))
+		if (!strcmp(mod->getType(), BOOK_MODS)) {
+			if (mod->getConfigEntry("GSType") &&
+				!strcmp((char *) mod->getConfigEntry("GSType"), "PrayerList"))
 				return PRAYERLIST_TYPE;
 			return BOOK_TYPE;
 		}
@@ -547,14 +553,13 @@ int BackEnd::module_type(const char *mod_name)
 
 const char *BackEnd::module_description(const char *mod_name)
 {
-	ModMap::iterator it;
-
 	if ((!mod_name) || (strlen(mod_name) < 2))
 		return NULL;
 
-	it = main_mgr->Modules.find(mod_name);
-	if (it != main_mgr->Modules.end()) {
-		return (*it).second->getDescription();
+	SWModule *mod = get_SWModule(mod_name);
+
+	if (mod) {
+		return mod->getDescription();
 	}
 	return NULL;
 }
@@ -576,45 +581,50 @@ char *BackEnd::module_name_from_description(char *description)
 }
 
 
-int BackEnd::get_key_testament(const char * key)
+int BackEnd::get_key_testament(const char *module_name, const char *key)
 {
-	sword::VerseKey ikey( key );
-	return ikey.getTestament();
+	SWModule *mod = get_SWModule(module_name);
+	VerseKey *ikey = (VerseKey *)(SWKey *)(*mod);
+
+	ikey->setText(key);
+	return ikey->getTestament();
 }
 
-int BackEnd::module_has_testament(const char * module_name,  int testament)
+int BackEnd::module_has_testament(const char *module_name, int testament)
 {
-	ModMap::iterator it;
+	SWModule *module = get_SWModule(module_name);
+
 	int ot = 0;
 	int nt = 0;
 
-	it = main_mgr->Modules.find(module_name);
-	if (it != main_mgr->Modules.end()) {
-		SWModule *module = (*it).second;
+	if (module) {
 		module->setSkipConsecutiveLinks(true);
 
 		*module = sword::TOP; //position to first entry
-		sword::VerseKey key( module->getKeyText() );
-		if (key.getTestament() == 1) { // OT && NT
+		VerseKey *key = (VerseKey *)(SWKey *)(*module);
+		key->setText(module->getKeyText());
+		if (key->getTestament() == 1) { // OT && NT
 			ot = 1;
-		} else if (key.getTestament() == 2) { //no OT
+		} else if (key->getTestament() == 2) { //no OT
 			ot = 0;
 		}
 
 		*module = sword::BOTTOM;
-		key = module->getKeyText();
-		if (key.getTestament() == 1) { // only OT, no NT
+		key->setText(module->getKeyText());
+		if (key->getTestament() == 1) { // only OT, no NT
 			nt = 0;
-		} else if (key.getTestament() == 2) { //has NT
+		} else if (key->getTestament() == 2) { //has NT
 			nt = 1;
 		}
+
 		module->setSkipConsecutiveLinks(false);
 	}
+
 	switch (testament) {
 		case 1:
-			return ot>0;
+			return ot > 0;
 		case 2:
-			return nt>0;
+			return nt > 0;
 		default:
 			return false;
 	}
@@ -623,31 +633,34 @@ int BackEnd::module_has_testament(const char * module_name,  int testament)
 
 int BackEnd::module_get_testaments(const char * module_name)
 {
-	ModMap::iterator it;
+	SWModule *module = get_SWModule(module_name);
+
 	int ot = 0;
 	int nt = 0;
 
-	it = main_mgr->Modules.find(module_name);
-	if (it != main_mgr->Modules.end()) {
-		SWModule *module = (*it).second;
+	if (module) {
 		module->setSkipConsecutiveLinks(true);
+
 		*module = sword::TOP; //position to first entry
-		sword::VerseKey key(module->getKeyText());
-		if (key.getTestament() == 1) { // OT && NT
+		VerseKey *key = (VerseKey *)(SWKey *)(*module);
+		key->setText(module->getKeyText());
+		if (key->getTestament() == 1) { // OT && NT
 				ot = 1;
-		} else if (key.getTestament() == 2) { //no OT
+		} else if (key->getTestament() == 2) { //no OT
 				ot = 0;
 		}
 
 		*module = sword::BOTTOM;
-		key = module->getKeyText();
-		if (key.getTestament() == 1) { // only OT, no NT
+		key->setText(module->getKeyText());
+		if (key->getTestament() == 1) { // only OT, no NT
 				nt = 0;
-		} else if (key.getTestament() == 2) { //has NT
+		} else if (key->getTestament() == 2) { //has NT
 				nt = 1;
 		}
+
 		module->setSkipConsecutiveLinks(false);
 	}
+
 	if (ot && nt)
 		return 2;
 	else if (!ot && nt)
@@ -763,13 +776,10 @@ void BackEnd::set_treekey(unsigned long offset)
 
 unsigned long BackEnd::get_treekey_offset_from_key(const char * module_name, const char * key)
 {
-        SWModule *mod;
-	ModMap::iterator it;
+	SWModule *mod = get_SWModule(module_name);
 	unsigned long retval = 0;
 
-	it = main_mgr->Modules.find(module_name);
-	if (it != main_mgr->Modules.end()) {
-		mod = (*it).second;
+	if (mod) {
 		TreeKeyIdx *tree_key_idx = (TreeKeyIdx *) mod->createKey();
 		tree_key_idx->setText(key);
 		mod->setKey(tree_key_idx);
@@ -871,17 +881,19 @@ char *BackEnd::navigate_module(int direction)
 	return strdup((char *) display_mod->getKeyText());
 }
 
-GList *BackEnd::parse_verse_list(const char * list, char * current_key)
+GList *BackEnd::parse_verse_list(const char *module_name, const char * list, char * current_key)
 {
+	SWModule *mod = get_SWModule(module_name);
+	VerseKey *key = (VerseKey *)(SWKey *)(*mod);
 	GList *retlist = NULL;
-	VerseKey key;
 	ListKey vs;
 
 	if (!list)
 		return retlist;
 	GS_message(("current_key=%s",current_key));
-	key.setText(current_key);
-	vs = key.parseVerseList(list, key, TRUE);
+	key->setText(current_key);
+	vs = key->parseVerseList(list, *key, TRUE);
+
 	if (!vs.getCount())
 		return retlist;
 	while (!vs.popError()) {
@@ -891,14 +903,16 @@ GList *BackEnd::parse_verse_list(const char * list, char * current_key)
 	return retlist;
 }
 
-GList *BackEnd::parse_range_list(const char * list)
+GList *BackEnd::parse_range_list(const char * module_name, const char * list)
 {
 	GList *retlist = NULL;
 	const char *buf = NULL;
-	VerseKey key;
+	SWModule *mod = get_SWModule(module_name);
+	VerseKey *key = (VerseKey *)(SWKey *)(*mod);
+	key->setText(mod->getKeyText());
 
 	verses.clear();
-	verses = key.parseVerseList(list, key, true);
+	verses = key->parseVerseList(list, *key, true);
 
 	buf = verses.getRangeText();
 	retlist = g_list_append(retlist, g_strdup(buf));
@@ -943,10 +957,14 @@ int BackEnd::clear_search_list(void)
 	return search_scope_list.getCount ();
 }
 
-int BackEnd::set_range(char * list)
+int BackEnd::set_range(const char *module_name, const char * list)
 {
-	search_range = VerseKey().parseVerseList(list, "", true);
-	return search_range.getCount ();
+	SWModule *mod = get_SWModule(module_name);
+	VerseKey *key = (VerseKey *)(SWKey *)(*mod);
+
+	key->setText(mod->getKeyText());
+	search_range = key->parseVerseList(list, "", true);
+	return search_range.getCount();
 }
 
 void BackEnd::set_scope2range(void)
@@ -1127,12 +1145,13 @@ const char *BackEnd::get_osisref_from_key(const char *module, const char *key)
 	if (it == main_mgr->Modules.end()) {
 		it = main_mgr->Modules.begin();
 		if (it == main_mgr->Modules.end())
-			return "";
+			return strdup("");
 	}
 
-	VerseKey *vk = (VerseKey *)(*it).second->getKey();
-	*vk = key;
-	return vk->getOSISRef();
+	SWModule *mod = it->second;
+	VerseKey *vkey = (VerseKey *)(SWKey *)(*mod);
+	vkey->setText(key);
+	return strdup(vkey->getOSISRef());
 }
 
 /* end of file */

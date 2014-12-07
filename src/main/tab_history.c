@@ -349,7 +349,8 @@ void main_change_verse_tab_history(gint historynum)
 	GS_print(("commod = %s\n",tab->history_list[historynum].commod));
 	GS_print(("textmod = %s\n",tab->history_list[historynum].textmod));
 
-	key = main_update_nav_controls(tab->history_list[historynum].verseref);
+	key = main_update_nav_controls(tab->history_list[historynum].textmod,
+				       tab->history_list[historynum].verseref);
 	main_display_commentary(tab->history_list[historynum].commod, key);
 	main_display_bible(tab->history_list[historynum].textmod, key);
 	main_keep_bibletext_dialog_in_sync(key);

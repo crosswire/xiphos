@@ -24,6 +24,7 @@
 #endif
 #include <gtk/gtk.h>
 #include <swmgr.h>
+#include <swmodule.h>
 #include <versekey.h>
 
 
@@ -54,12 +55,14 @@ void main_navbar_set(NAVBAR navbar, const char * key)
 	int book;
 	GtkTreeIter iter;
 	gint i,x;
-	VerseKey vkey;
 
 	if (!navbar.module_name)
 		return;
 
-	navbar.key = backend->get_valid_key(key);
+	SWModule *mod = backend->get_SWModule(navbar.module_name);
+	VerseKey *vkey = (VerseKey *)(SWKey *)(*mod);
+
+	navbar.key = backend->get_valid_key(navbar.module_name, key);
 	if (!navbar.is_dialog) {
 
 
@@ -71,24 +74,25 @@ void main_navbar_set(NAVBAR navbar, const char * key)
 
 	do_display = FALSE;
 
-	vkey.setAutoNormalize(1);
-	vkey = key;
+	vkey->setAutoNormalize(1);
+	vkey->setText(key);
 
+	// we need the book index to highlight "active" in the pulldown.
 	if ((backend->module_has_testament(navbar.module_name, 1))
-	    && (vkey.getTestament() == 2))
-	        book = 39 + vkey.getBook();
+	    && (vkey->getTestament() == 2))
+	        book = vkey->BMAX[0] + vkey->getBook();
 	else
-	        book = vkey.getBook();
+	        book = vkey->getBook();
 
 	gtk_combo_box_set_active((GtkComboBox *)navbar.comboboxentry_book,
                                              book-1);
 
 	gtk_list_store_clear(GTK_LIST_STORE(chapter_store));
-	//char xtestament = vkey.Testament() ;
-	//char xbook = vkey.Book();
-	int xchapter = vkey.getChapter();
-	int xverse = vkey.getVerse();
-	x = (vkey.getChapterMax());
+	//char xtestament = vkey->Testament() ;
+	//char xbook = vkey->Book();
+	int xchapter = vkey->getChapter();
+	int xverse = vkey->getVerse();
+	x = (vkey->getChapterMax());
 	for(i=1; i <= x; i++) {
 		char *num = main_format_number(i);
 		gtk_list_store_append (GTK_LIST_STORE(chapter_store), &iter);
@@ -103,11 +107,11 @@ void main_navbar_set(NAVBAR navbar, const char * key)
                                              xchapter-1);
 
 	gtk_list_store_clear(GTK_LIST_STORE(verse_store));
-	//xtestament = vkey.Testament() ;
-	//xbook = vkey.Book();
-	xchapter = vkey.getChapter();
-	xverse = vkey.getVerse();
-	x = (vkey.getVerseMax());
+	//xtestament = vkey->Testament() ;
+	//xbook = vkey->Book();
+	xchapter = vkey->getChapter();
+	xverse = vkey->getVerse();
+	x = (vkey->getVerseMax());
 	for(i=1; i <= x; i++) {
 		char *num = main_format_number(i);
 		gtk_list_store_append (GTK_LIST_STORE(verse_store), &iter);
@@ -129,8 +133,8 @@ void main_navbar_set(NAVBAR navbar, const char * key)
 
 void main_navbar_fill_book_combo(NAVBAR navbar)
 {
-	VerseKey key;
-	VerseKey key_abrev;
+	SWModule *mod = backend->get_SWModule(navbar.module_name);
+	VerseKey *key = (VerseKey *)(SWKey *)(*mod);
 	char *book = NULL;
 	GtkTreeIter iter;
 	int i = 0;
@@ -146,10 +150,10 @@ void main_navbar_fill_book_combo(NAVBAR navbar)
 			GTK_COMBO_BOX(navbar.comboboxentry_book));
 	gtk_list_store_clear(GTK_LIST_STORE(book_model));
 	if (backend->module_has_testament(navbar.module_name, 1)) {
-		while (i < key.BMAX[0]) {
-			key.setTestament(1);
-			key.setBook(i+1);
-			book = strdup((const char *) key.getBookName());
+		while (i < key->BMAX[0]) {
+			key->setTestament(1);
+			key->setBook(i+1);
+			book = strdup((const char *) key->getBookName());
 			char *mykey = g_strdup_printf("%s 1:1",book);
 			if (!main_get_raw_text(navbar.module_name, mykey)){
 				GS_message(("book-out: %s",book));
@@ -159,21 +163,21 @@ void main_navbar_fill_book_combo(NAVBAR navbar)
 			}
 			GS_message(("book: %s",book));
 			gtk_list_store_append (GTK_LIST_STORE(book_model), &iter);
-			gtk_list_store_set(	GTK_LIST_STORE(book_model),
-						&iter,
-						0,
-						book,
-						-1);
+			gtk_list_store_set(GTK_LIST_STORE(book_model),
+					   &iter,
+					   0,
+					   book,
+					   -1);
 			++i;
 			g_free(book);
 		}
 	}
 	i = 0;
 	if (backend->module_has_testament(navbar.module_name, 2)) {
-		while (i < key.BMAX[1]) {
-			key.setTestament(2);
-			key.setBook(i+1);
-			book = strdup((const char *) key.getBookName());
+		while (i < key->BMAX[1]) {
+			key->setTestament(2);
+			key->setBook(i+1);
+			book = strdup((const char *) key->getBookName());
 			char *mykey = g_strdup_printf("%s 1:1",book);
 			if (!main_get_raw_text(navbar.module_name, mykey)){
 				GS_message(("book-in: %s",book));
@@ -183,15 +187,15 @@ void main_navbar_fill_book_combo(NAVBAR navbar)
 			}
 			GS_message(("book: %s",book));
 			gtk_list_store_append (GTK_LIST_STORE(book_model), &iter);
-			gtk_list_store_set(	GTK_LIST_STORE(book_model),
-						&iter,
-						0,
-						book,
-						-1);
+			gtk_list_store_set(GTK_LIST_STORE(book_model),
+					   &iter,
+					   0,
+					   book,
+					   -1);
 			++i;
 			g_free(book);
 		}
 	}
-	main_navbar_set(navbar,navbar.key);
+	main_navbar_set(navbar, navbar.key);
 	do_display = TRUE;
 }

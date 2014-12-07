@@ -64,8 +64,8 @@ enum {
 	PLAIN
 };
 
-int main_get_max_verses (void);
-int main_get_current_verse (void);
+int main_get_max_verses(const char *name);
+int main_get_current_verse(const char *name);
 void main_export_content(EXPORT_DATA data, gint format);
 
 #ifdef __cplusplus

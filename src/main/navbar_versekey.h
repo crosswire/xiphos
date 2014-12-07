@@ -90,7 +90,7 @@ struct _navbar_versekey {
 extern NAVBAR_VERSEKEY navbar_versekey;
 extern NAVBAR_VERSEKEY navbar_parallel;
 
-const char *main_get_valid_key(char * key);
+const char *main_get_valid_key(const char *module_name, const char * key);
 GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar,
 						gint nb_type,
 						gpointer dialog,

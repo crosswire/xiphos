@@ -42,7 +42,7 @@ class BackEnd {
 	ListKey search_range;
 	ListKey	search_scope_list; //--search list for searching verses found on last search
 	ListKey verses;
-	VerseKey search_scope_bounds; //----- sets lower and upper search bounds
+	//VerseKey search_scope_bounds; //----- sets lower and upper search bounds
 	SWKey *current_scope;
 	SWModule *search_mod;
 	//SWFilter *thml2osis;
@@ -70,23 +70,24 @@ public:
 	void init_lists(MOD_LISTS * mods);
 	const char *get_sword_version(void);
 
+	SWModule *get_SWModule(const char *module_name);
 	GList *get_module_options(void);
 	int has_option(const char *mod_name, const char *key, const char *option);
 	int has_global_option(const char *mod_name, const char *option);
-	void set_cipher_key(char * mod_name, char * key);
+	void set_cipher_key(char * module_name, char * key);
 	char *get_config_entry(char * module_name, char * entry);
-	int is_Bible_key(const char * list, char * current_key);
+	int is_Bible_key(const char *module_name, const char * list, const char * current_key);
 	char *get_render_text(const char *module_name, const char *key);
 	char *get_raw_text(const char *module_name, const char *key);
 	char *render_this_text(const char * module_name, const char * text);
 	char *get_strip_text(const char *module_name, const char *key);
 	char *get_strip_text_from_string(const char * module_name, const char *string);
-	char *get_valid_key(const char *key);
-	char *key_get_book(const char *key);
-	int key_get_chapter(const char *key);
-	int key_get_verse(const char *key);
-	unsigned int key_chapter_count(const char *key);
-	unsigned int key_verse_count(const char *key);
+	char *get_valid_key(const char *module_name, const char *key);
+	char *key_get_book(const char *module_name, const char *key);
+	int key_get_chapter(const char *module_name, const char *key);
+	int key_get_verse(const char *module_name, const char *key);
+	unsigned int key_chapter_count(const char *module_name, const char *key);
+	unsigned int key_verse_count(const char *module_name, const char *key);
 
 
 	char *get_module_key(void);
@@ -95,7 +96,7 @@ public:
 	void delete_entry(void);
 	int set_module_key(const char *module_name, const char *key);
 	int set_key(const char *key);
-	int get_key_testament(const char * key);
+	int get_key_testament(const char *module_name, const char *key);
 	int is_module(const char *mod_name);
 	int set_module(const char *module_name);
 	char *navigate_module(int direction);
@@ -124,13 +125,13 @@ public:
 	unsigned long  treekey_set_key(char * key) ;
 	int treekey_prev_sibling(unsigned long offset);
 	int treekey_next_sibling(unsigned long offset);
-	GList *parse_verse_list(const char * list, char * current_key);
-	GList *parse_range_list(const char * list);
+	GList *parse_verse_list(const char * module_name, const char * list, char * current_key);
+	GList *parse_range_list(const char * module_name, const char * list);
 	void set_listkey_position(char pos);
 	const char *get_next_listkey(void);
 	int clear_scope(void);
 	int clear_search_list(void);
-	int set_range(char * list);
+	int set_range(const char *module_name, const char * list);
 	void set_scope2range(void);
 	int set_scope2last_search(void);
 	int check_for_optimal_search(char * module_name);

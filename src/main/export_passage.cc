@@ -78,8 +78,9 @@ static void clipboardreq_get (GtkClipboard *clipboard,
         {
                 gtk_selection_data_set(selection_data, gdk_atom_intern("text/html", FALSE),
 				       16, (const guchar*)text, strlen(text));
-
-        } else {
+        }
+	else
+	{
                 gtk_selection_data_set_text(selection_data, text, strlen(text));
         }
 
@@ -89,16 +90,24 @@ static void clipboardreq_get (GtkClipboard *clipboard,
 }
 
 
-int main_get_max_verses (void)
+int main_get_max_verses(const char *name)
 {
-	VerseKey key = settings.currentverse;
-	return (key.getVerseMax());
+	SWModule *mod = backend->get_SWModule(name);
+	VerseKey *key = (VerseKey *)mod->createKey();
+	key->setText(settings.currentverse);
+	int max = key->getVerseMax();
+	delete key;
+	return max;
 }
 
-int main_get_current_verse (void)
+int main_get_current_verse(const char *name)
 {
-	VerseKey key = settings.currentverse;
-	return key.getVerse();
+	SWModule *mod = backend->get_SWModule(name);
+	VerseKey *key = (VerseKey *)mod->createKey();
+	key->setText(settings.currentverse);
+	int v = key->getVerse();
+	delete key;
+	return v;
 }
 
 /**
@@ -238,7 +247,7 @@ static void _export_chapter(EXPORT_DATA data, int type)
 	int curBook = key->getBook();
 	int myverse = 1;
 
-	book = backend->key_get_book(settings.currentverse);
+	book = backend->key_get_book(settings.MainWindowModule, settings.currentverse);
 	if (type == HTML)
 		g_string_append_printf(str,
 				       data.chapterheader_chapter,
@@ -295,7 +304,7 @@ static void _export_verse(EXPORT_DATA data, int type)
 	mod->setKey(settings.currentverse);
 	VerseKey *key = (VerseKey *)(SWKey *)(*mod);
 
-	book = backend->key_get_book(settings.currentverse);
+	book = backend->key_get_book(settings.MainWindowModule, settings.currentverse);
 	if (type == HTML)
 		if (data.reference_last) 
 			g_string_append_printf(str,
@@ -366,7 +375,7 @@ static void _export_verse_range (EXPORT_DATA data, int type)
 		return;
 	}
 
-	book = backend->key_get_book(settings.currentverse);
+	book = backend->key_get_book(settings.MainWindowModule, settings.currentverse);
 
 	if (type == HTML)
 		g_string_append_printf(str, "%s", HTML_START);

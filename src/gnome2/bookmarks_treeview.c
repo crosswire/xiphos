@@ -104,7 +104,7 @@ void gui_verselist_to_bookmarks(GList * verses, gint save_as_single)
 		g_string_printf(name, _("Search result: %s"), settings.searchText);
 		while (verses) {
 			list_item = (RESULTS *) verses->data;
-			if (main_is_Bible_key(list_item->key)) {
+			if (main_is_Bible_key(list_item->module, list_item->key)) {
 				if (first_entry) {
 					module_name = g_strdup(list_item->module);
 					first_entry = FALSE;
