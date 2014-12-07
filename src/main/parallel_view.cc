@@ -25,6 +25,10 @@
 
 #include <gtk/gtk.h>
 
+#include <swmodule.h>
+#include <swkey.h>
+#include <versekey.h>
+
 #include "backend/sword_main.hh"
 #include "main/gtk_compat.h"
 
@@ -774,12 +778,14 @@ static void interpolate_parallel_display(SWBuf& text, gchar *key, gint parallel_
 
 	// need #verses to process in this chapter.
 	SWModule *mod = backend->get_SWModule(module_name);
-	VerseKey *vkey = (VerseKey *)(SWKey *)(mod);
+//	VerseKey *vkey = (VerseKey *)(SWKey *)(mod);
+	VerseKey *vkey = (VerseKey *)mod->createKey();
 	int xverses;
 
 	vkey->setAutoNormalize(1);
 	vkey->setText(key);
 	xverses = (vkey->getVerseMax());
+	delete vkey;
 
 	// frankly, we're faking it here.
 	// we have potentially variable v11n among the parallel modules.
