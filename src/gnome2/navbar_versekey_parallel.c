@@ -290,15 +290,28 @@ static void on_entry_activate(GtkEntry * entry, gpointer user_data)
 	const gchar *buf = gtk_entry_get_text(entry);
 	if (buf == NULL)
 		return;
+
 	/* handle potential subsection anchor */
 	if ((settings.special_anchor = strchr(buf, '#')) ||	/* thml */
 	    (settings.special_anchor = strchr(buf, '!')))	/* osisref */
 		*settings.special_anchor = '\0';
-	settings.cvparallel = (gchar*)main_get_valid_key((gchar*)buf);
+
+	/* gross.  we need a valid key.
+	 * but we have multiple modules whose v11n may not even be the same.
+	 * fall back 10 yards and punt: arbitrarily take the 1st one.
+	 * if there aren't any, use main window bible.
+	 */
+	settings.cvparallel = (gchar*)main_get_valid_key(
+	    (settings.parallel_list
+	     ? settings.parallel_list[0]
+	     : settings.MainWindowModule),
+	    (gchar*)buf);
+
 	if (settings.special_anchor)
 		*settings.special_anchor = '#';			/* put it back. */
 	if (settings.cvparallel == NULL)
 		return;
+
 	main_navbar_versekey_set(navbar_parallel, settings.cvparallel);
 	main_update_parallel_page_detached();
 	if (sync_on) {

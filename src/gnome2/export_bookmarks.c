@@ -73,7 +73,7 @@ gboolean dialog_vbox1_key_press_event_cb (GtkWidget   * widget,
 
 static gchar *get_module(const gchar * key)
 {
-	if (main_is_Bible_key((gchar*)key))
+	if (main_is_Bible_key(settings.MainWindowModule, (gchar*)key))
 		return g_strdup(settings.MainWindowModule);
 	return NULL;
 

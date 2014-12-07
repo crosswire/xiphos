@@ -111,7 +111,7 @@ void main_book_heading(char * mod_name)
 	SWMgr *mgr = backend->get_mgr();
 
 	backend->display_mod = mgr->Modules[mod_name];
-	vkey = (VerseKey*)(SWKey*)(*backend->display_mod);
+	vkey = (VerseKey *)(SWKey *)(*backend->display_mod);
 	vkey->setIntros(1);
 	vkey->setAutoNormalize(0);
 	vkey->setChapter(0);
@@ -143,7 +143,7 @@ void main_chapter_heading(char * mod_name)
 
 	backend->display_mod = mgr->Modules[mod_name];
 	backend->display_mod->setKey(settings.currentverse);
-	vkey = (VerseKey*)(SWKey*)(*backend->display_mod);
+	vkey = (VerseKey *)(SWKey *)(*backend->display_mod);
 	vkey->setIntros(1);
 	vkey->setAutoNormalize(0);
 	vkey->setVerse(0);
@@ -329,9 +329,9 @@ char *main_getShortText(char *key)
  *   gchar *
  */
 
-gchar *main_update_nav_controls(const gchar * key)
+gchar *main_update_nav_controls(const char *module_name, const gchar *key)
 {
-	char *val_key = backend->get_valid_key(key);
+	char *val_key = backend->get_valid_key(module_name, key);
 
 	/*
 	 *  remember verse
@@ -1235,14 +1235,14 @@ void main_display_bible(const char * mod_name,
 	main_check_unlock(mod_name, TRUE);
 
 	if (backend->module_has_testament(mod_name,
-				backend->get_key_testament(key))) {
+				backend->get_key_testament(mod_name, key))) {
 			backend->set_module_key(mod_name, key);
 			backend->display_mod->display();
 	} else {
-		if (backend->get_key_testament(key) == 1)
-			val_key = main_update_nav_controls("Matthew 1:1");
+		if (backend->get_key_testament(mod_name, key) == 1)
+			val_key = main_update_nav_controls(mod_name, "Matthew 1:1");
 		else
-			val_key = main_update_nav_controls("Genesis 1:1");
+			val_key = main_update_nav_controls(mod_name, "Genesis 1:1");
 
 		backend->set_module_key(mod_name, val_key);
 		backend->display_mod->display();
@@ -1903,9 +1903,9 @@ void main_flush_widgets_content(void)
  * Return value
  *   gboolean
  */
-gboolean main_is_Bible_key(gchar *key)
+gboolean main_is_Bible_key(const gchar *name, const gchar *key)
 {
-	return (gboolean)(backend->is_Bible_key(key, settings.currentverse) != 0);
+    return (gboolean)(backend->is_Bible_key(name, key, settings.currentverse) != 0);
 }
 
 /******************************************************************************

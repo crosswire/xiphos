@@ -298,7 +298,10 @@ static gint show_separate_image(const gchar * filename, gboolean clicked)
  * Synopsis
  *   #include "main/url.hh"
  *
- *   gint show_morph(const gchar * type, const gchar * value, gboolean clicked)
+ *   gint show_morph(const gchar *module_name,
+ *		     const gchar *type,
+ *		     const gchar *value,
+ *		     gboolean clicked)
  *
  * Description
  *
@@ -307,8 +310,10 @@ static gint show_separate_image(const gchar * filename, gboolean clicked)
  *   gint
  */
 
- static gint show_morph(const gchar * stype, const gchar * svalue,
-				gboolean clicked)
+static gint show_morph(const char *module_name,
+		       const gchar *stype, 
+		       const gchar *svalue,
+		       gboolean clicked)
 {
 	const gchar *modbuf = NULL;
 	gchar *mybuf = NULL;
@@ -317,7 +322,8 @@ static gint show_separate_image(const gchar * filename, gboolean clicked)
 	     strstr(stype,"x-Robinson") ||
 	     strstr(stype,"robinson") ||
 	     strstr(stype,"Robinson")) {
-		if (backend->get_key_testament(settings.currentverse) == 2) {
+		if (backend->get_key_testament(module_name,
+					       settings.currentverse) == 2) {
 			if (backend->is_module("Robinson"))
 				modbuf = "Robinson";
 		} else {
@@ -456,7 +462,7 @@ static gint show_note(const gchar * module, const gchar * passage,
 		SWMgr *mgr = backend->get_mgr();
 		backend->display_mod = mgr->Modules[module];
 		backend->display_mod->setKey(passage);
-		vkey = (VerseKey*)(SWKey*)(*backend->display_mod);
+		vkey = (VerseKey *)(SWKey *)(*backend->display_mod);
 		vkey->setAutoNormalize(0);
 		vkey->setChapter(vkey->getChapter() + 1);
 		vkey->setVerse(0);
@@ -501,7 +507,8 @@ static gint show_note(const gchar * module, const gchar * passage,
 							   tmpbuf);
 			g_free(tmpbuf);
 		} else {
-			vlist = chaser = backend->parse_verse_list(tmpbuf, settings.currentverse);
+			vlist = chaser = backend->parse_verse_list
+						(module, tmpbuf, settings.currentverse);
 			while (chaser != NULL) {
 				buf = g_strdup_printf(
 				    "<a href=\"sword://%s/%s\">"
@@ -600,7 +607,7 @@ static int show_module_and_key(const char * module, const char * key,
 	gint mod_type;
 
 	if (module && (strlen((char*)module) < 3) &&
-	    backend->is_Bible_key(key, settings.currentverse)) {
+	    backend->is_Bible_key((char*)module, key, settings.currentverse)) {
 		module = settings.MainWindowModule;
 	}
 	if (!clicked) {
@@ -795,7 +802,7 @@ gint sword_uri(const gchar * url, gboolean clicked)
 		mod_type = backend->module_type(work_buf[MODULE]);
 		switch (mod_type) {
 			case TEXT_TYPE:
-				key = main_update_nav_controls(tmpkey);
+				key = main_update_nav_controls(work_buf[MODULE], tmpkey);
 				main_display_bible(work_buf[MODULE], key);
 				if (settings.comm_showing)
 					main_display_commentary(NULL, key);
@@ -815,7 +822,7 @@ gint sword_uri(const gchar * url, gboolean clicked)
 					settings.special_anchor = save;
 				}
 				settings.comm_showing = TRUE;
-				key = main_update_nav_controls(tmpkey);
+				key = main_update_nav_controls(work_buf[MODULE], tmpkey);
 				main_display_commentary(work_buf[MODULE],key);
 				main_display_bible(NULL, key);
 				main_keep_bibletext_dialog_in_sync((gchar*)key);
@@ -841,7 +848,7 @@ gint sword_uri(const gchar * url, gboolean clicked)
 		}
 	} else { /* module name not found or not given */
 		if (verse_count) {
-			key = main_update_nav_controls(tmpkey);
+			key = main_update_nav_controls(settings.MainWindowModule, tmpkey);
 			/* display in current Bible and Commentary */
 			main_display_commentary(NULL, key);
 			main_display_bible(NULL, key);
@@ -949,7 +956,8 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 		}
 
 		else if (!strcmp(action, "showMorph")) {
-			show_morph(stype, svalue, clicked);
+			show_morph(m_url.getParameterValue("module"),
+				   stype, svalue, clicked);
 		}
 
 		else if (!strcmp(action, "showNote")) {

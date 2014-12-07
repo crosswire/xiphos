@@ -961,7 +961,7 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
 
 	navbar_versekey.module_name = g_string_assign(navbar_versekey.module_name,pt->text_mod);
 	navbar_versekey.key = g_string_assign(navbar_versekey.key,pt->text_commentary_key);
-	main_update_nav_controls(pt->text_commentary_key);
+	main_update_nav_controls(navbar_versekey.module_name->str, pt->text_commentary_key);
 
 	//sets the dictionary mod and key
 	main_display_dictionary(pt->dictlex_mod, pt->dictlex_key);

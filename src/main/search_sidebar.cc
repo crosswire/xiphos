@@ -229,7 +229,7 @@ void main_do_sidebar_search(gpointer user_data)
 				      gtk_combo_box_get_active_text(GTK_COMBO_BOX
 								    (ss.entryUpper)));
 #endif
-		backendSearch->set_range(str);
+		backendSearch->set_range(settings.MainWindowModule, str);
 		backendSearch->set_scope2range();
 		g_free(str);
 	}
@@ -330,19 +330,15 @@ void main_delete_sidebar_search_backend(void)
 
 void main_search_sidebar_fill_bounds_combos(void)
 {
-	VerseKey key;
 	char *book = NULL;
-	char *module_name;
 	int i = 0;
-	//int testaments;
 
 	if (!backendSearch)
 		main_init_sidebar_search_backend();
 
-	//module_name = settings.sb_search_mod;
-	module_name = g_strdup(settings.MainWindowModule);
-
-	//testaments = backendSearch->module_get_testaments(module_name);
+	char *module_name = settings.MainWindowModule;
+	SWModule *mod = backendSearch->get_SWModule(module_name);
+	VerseKey *key = (VerseKey *)(SWKey *)(*mod);
 
 	GtkTreeModel* upper_model = gtk_combo_box_get_model(
 			GTK_COMBO_BOX(ss.entryUpper));
@@ -352,10 +348,10 @@ void main_search_sidebar_fill_bounds_combos(void)
 	gtk_list_store_clear(GTK_LIST_STORE(lower_model));
 
 	if (backendSearch->module_has_testament(module_name, 1)) {
-		while (i < key.BMAX[0]) {
-			key.setTestament(1);
-			key.setBook(i+1);
-			book = strdup((const char *) key.getBookName());  
+		while (i < key->BMAX[0]) {
+			key->setTestament(1);
+			key->setBook(i+1);
+			book = strdup((const char *) key->getBookName());  
 #ifdef USE_GTK_3
 			gtk_combo_box_text_append_text((GtkComboBoxText*)ss.entryUpper, book);
 			gtk_combo_box_text_append_text((GtkComboBoxText*)ss.entryLower, book);
@@ -370,10 +366,10 @@ void main_search_sidebar_fill_bounds_combos(void)
 
 	i = 0;
 	if (backendSearch->module_has_testament(module_name, 2)) {
-		while (i < key.BMAX[1]) {
-			key.setTestament(2);
-			key.setBook(i+1);
-			book = strdup((const char *) key.getBookName());
+		while (i < key->BMAX[1]) {
+			key->setTestament(2);
+			key->setBook(i+1);
+			book = strdup((const char *) key->getBookName());
 #ifdef USE_GTK_3
 			gtk_combo_box_text_append_text((GtkComboBoxText*)ss.entryUpper, book);
 			gtk_combo_box_text_append_text((GtkComboBoxText*)ss.entryLower, book);

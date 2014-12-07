@@ -119,13 +119,12 @@ extern gboolean do_display;
 
 void main_dialogs_book_heading(DIALOG_DATA * d)
 {
-	VerseKey *vkey;
 	BackEnd* be = (BackEnd*)d->backend;
 	SWMgr *mgr = be->get_mgr();
 
 	be->display_mod = mgr->Modules[d->mod_name];
 	GS_message(("%s", be->display_mod->renderText().c_str()));
-	vkey = (VerseKey*)(SWKey*)(*be->display_mod);
+	VerseKey *vkey = (VerseKey *)(SWKey *)(*be->display_mod);
 	vkey->setIntros(1);
 	vkey->setAutoNormalize(0);
 	vkey->setVerse(0);
@@ -152,13 +151,12 @@ void main_dialogs_book_heading(DIALOG_DATA * d)
 
 void main_dialogs_chapter_heading(DIALOG_DATA * d)
 {
-	VerseKey *vkey;
 	BackEnd* be = (BackEnd*)d->backend;
 	SWMgr *mgr = be->get_mgr();
 
 	be->display_mod = mgr->Modules[d->mod_name];
 	backend->display_mod->setKey(d->key);
-	vkey = (VerseKey*)(SWKey*)(*be->display_mod);
+	VerseKey *vkey = (VerseKey *)(SWKey *)(*be->display_mod);
 	vkey->setIntros(1);
 	vkey->setAutoNormalize(0);
 	vkey->setVerse(0);
@@ -986,7 +984,7 @@ static gint show_note(DIALOG_DATA * d,const gchar * module, const gchar * passag
 			list_of_verses = NULL;
 		}
 
-		tmp = be->parse_verse_list(tmpbuf, d->key);
+		tmp = be->parse_verse_list(d->mod_name, tmpbuf, d->key);
 		while (tmp != NULL) {
 			buf = g_strdup_printf(
 				"<a href=\"sword://%s/%s\">"
@@ -1204,7 +1202,7 @@ static gint sword_uri(DIALOG_DATA * t, const gchar * url, gboolean clicked)
 
 	if (t->key)
 		g_free(t->key);
-	t->key = be->get_valid_key(key);
+	t->key = be->get_valid_key(t->mod_name, key);
 
 	if (t->mod_name)
 		g_free(t->mod_name);
