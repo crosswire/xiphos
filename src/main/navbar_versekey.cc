@@ -692,8 +692,10 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar,
 						gpointer editor)
 {
 	SWModule *mod = backend->get_SWModule(navbar.module_name->str);
-	VerseKey *key = (VerseKey *)(SWKey *)(*mod);
-	VerseKey *key_current = (VerseKey *)(SWKey *)(*mod);
+//	VerseKey *key = (VerseKey *)(SWKey *)(*mod);
+//	VerseKey *key_current = (VerseKey *)(SWKey *)(*mod);
+	VerseKey *key = (VerseKey *)mod->createKey();
+	VerseKey *key_current = (VerseKey *)mod->createKey();
 
 	key->setAutoNormalize(1);
 	key_current->setAutoNormalize(1);
@@ -791,6 +793,10 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar,
 			g_free(rawtext);
 		}
 	}
+
+	delete key;		// because they were createKey'd above.
+	delete key_current;
+
 	if (select_item)
 		gtk_menu_shell_select_item(menu_shell, select_item);
 	if (current_book)
