@@ -182,7 +182,7 @@ void main_display_verse_list_in_sidebar(gchar * key,
 		verse_list += 4;
 	
 	if ((*verse_list != '/') &&
-	    ((tmp = backend->parse_verse_list(verse_list, key)) != NULL)) {
+	    ((tmp = backend->parse_verse_list(module_name, verse_list, key)) != NULL)) {
 		// normal verse list.
 		while (tmp != NULL) {
 			gtk_list_store_append(list_store, &iter);
@@ -413,9 +413,9 @@ static void add_verses_to_chapter(GtkTreeModel * model,
 	}
 	gtk_tree_store_set(GTK_TREE_STORE(model), &iter,
 			   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened, -1);
-	book = backend->key_get_book(work_buf[3]);
-	chapter = backend->key_get_chapter(work_buf[3]);
-	verses = backend->key_verse_count(work_buf[3]);
+	book    = backend->key_get_book(settings.MainWindowModule, work_buf[3]);
+	chapter = backend->key_get_chapter(settings.MainWindowModule, work_buf[3]);
+	verses  = backend->key_verse_count(settings.MainWindowModule, work_buf[3]);
 
 	for (i = 1; i < (verses + 1); i++) {
 		gchar *num = main_format_number(i);
@@ -475,8 +475,8 @@ static void add_chapters_to_book(GtkTreeModel * model, GtkTreeIter iter,
 	}
 	gtk_tree_store_set(GTK_TREE_STORE(model), &iter,
 			   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened, -1);
-	book = backend->key_get_book(work_buf[3]);
-	chapters = backend->key_chapter_count(work_buf[3]);
+	book = backend->key_get_book(settings.MainWindowModule, work_buf[3]);
+	chapters = backend->key_chapter_count(settings.MainWindowModule, work_buf[3]);
 
 	for (i = 1; i < (chapters + 1); i++) {
 		gchar *num = main_format_number(i);
@@ -522,7 +522,8 @@ static void add_chapters_to_book(GtkTreeModel * model, GtkTreeIter iter,
 static void add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
 			       const gchar * mod_name)
 {
-	VerseKey key;
+	SWModule *mod = backend->get_SWModule(mod_name);
+	VerseKey *vkey = (VerseKey *)(SWKey *)(*mod);
 	gint j = 0;
 	GtkTreeIter child_iter;
 	gchar *buf = NULL;
@@ -530,10 +531,10 @@ static void add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
 	gtk_tree_store_set(GTK_TREE_STORE(model), &iter,
 			   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened, -1);
 	if (backend->module_has_testament(mod_name, 1)) {
-		while (j < key.BMAX[0]) {
-			key.Testament(1);
-			key.Book(j+1);
-			buf = strdup((gchar *) key.getBookName());
+		while (j < vkey->BMAX[0]) {
+			vkey->Testament(1);
+			vkey->Book(j+1);
+			buf = strdup((gchar *) vkey->getBookName());
 			gchar *key = g_strdup_printf("book://%s/%s 1:1",
 						     mod_name, buf);
 			gtk_tree_store_append(GTK_TREE_STORE(model),
@@ -552,10 +553,10 @@ static void add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
 	}
 	j = 0;
 	if (backend->module_has_testament(mod_name, 2)) {
-		while (j < key.BMAX[1]) {
-			key.Testament(2);
-			key.Book(j+1);
-			buf = strdup((gchar *) key.getBookName());
+		while (j < vkey->BMAX[1]) {
+			vkey->Testament(2);
+			vkey->Book(j+1);
+			buf = strdup((gchar *) vkey->getBookName());
 			gchar *key = g_strdup_printf("book://%s/%s 1:1",
 						     mod_name, buf);
 			gtk_tree_store_append(GTK_TREE_STORE(model),

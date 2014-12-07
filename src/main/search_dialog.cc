@@ -105,7 +105,7 @@ gboolean main_export_current_adv_search (GString * str, gboolean html, gboolean 
 
 		while (verses) {
 			list_item = (RESULTS *) verses->data;
-			if (main_is_Bible_key(list_item->key)) {
+			if (main_is_Bible_key(list_item->module, list_item->key)) {
 				ret = TRUE;
 				if (first_entry) {
 					if (html)
@@ -177,7 +177,7 @@ void main_save_current_adv_search_as_bookmarks (void)
 
 		while (verses) {
 			list_item = (RESULTS *) verses->data;
-			if (main_is_Bible_key(list_item->key)) {
+			if (main_is_Bible_key(list_item->module, list_item->key)) {
 				if (first_entry) {
 					module_name = g_strdup(list_item->module);
 					first_entry = FALSE;
@@ -249,8 +249,7 @@ void main_range_text_changed(GtkEditable * editable)
 
 	gtk_list_store_clear(store_list_ranges);
 	entry = gtk_entry_get_text(GTK_ENTRY(editable));
-	//count = start_parse_range_list(entry);
-	tmp = backend->parse_range_list(entry);
+	tmp = backend->parse_range_list(settings.MainWindowModule, entry);
 	while (tmp) {
 		buf = (gchar*)tmp->data;
 		if (!buf)
@@ -1232,8 +1231,11 @@ static void set_up_dialog_search(GList *modlist)
 		// if any non-bible, non-commentary modules are in use,
 		// we must not respect this "custom range" selector.
 		gboolean range_ok = TRUE;
+		gchar *name_for_range = NULL;
 
 		while (modlist) {
+			if (name_for_range == NULL)
+				name_for_range = (char*)modlist->data;
 			int mod_type = backend->module_type((char*)modlist->data);
 			if ((mod_type != TEXT_TYPE) &&
 			    (mod_type != COMMENTARY_TYPE)) {
@@ -1251,7 +1253,7 @@ static void set_up_dialog_search(GList *modlist)
 			    (gchar *) xml_get_list_from_label("ranges", "range",
 							      label);
 			if (range) {
-				backendSearch->set_range(range);
+				backendSearch->set_range(name_for_range, range);
 				backendSearch->set_scope2range();
 			}
 		}

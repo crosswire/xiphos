@@ -424,7 +424,7 @@ static void on_entry_activate(GtkEntry * entry, EDITOR * editor)
 	if ((settings.special_anchor = strchr(buf, '#')) ||	/* thml */
 	    (settings.special_anchor = strchr(buf, '!')))	/* osisref */
 		*settings.special_anchor = '\0';
-	const gchar *gkey = main_get_valid_key((gchar*)buf);
+	const gchar *gkey = main_get_valid_key(settings.MainWindowModule, (gchar*)buf);
 	if (settings.special_anchor)
 		*settings.special_anchor = '#';			/* put it back. */
 	if (gkey == NULL)
@@ -433,7 +433,8 @@ static void on_entry_activate(GtkEntry * entry, EDITOR * editor)
 							     ? settings.special_anchor
 							     : ""));
 
-	editor->navbar.module_name = g_string_assign(editor->navbar.module_name,settings.MainWindowModule);
+	editor->navbar.module_name = g_string_assign(editor->navbar.module_name,
+						     settings.MainWindowModule);
 	main_navbar_versekey_set(editor->navbar, gkey);
 
 	editor_load_note(editor, NULL, gkey);

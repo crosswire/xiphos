@@ -400,7 +400,7 @@ static void on_entry_activate(GtkEntry * entry, gpointer user_data)
 		return;
 	}
 
-	gkey = main_get_valid_key((gchar*)buf);
+	gkey = main_get_valid_key(settings.MainWindowModule, (gchar*)buf);
 	if (settings.special_anchor)
 		*settings.special_anchor = '#';			/* put it back. */
 	if (gkey == NULL)
@@ -410,7 +410,8 @@ static void on_entry_activate(GtkEntry * entry, gpointer user_data)
 							     ? settings.special_anchor
 							     : ""));
 
-	navbar_versekey.module_name = g_string_assign(navbar_versekey.module_name,settings.MainWindowModule);
+	navbar_versekey.module_name = g_string_assign(navbar_versekey.module_name,
+						      settings.MainWindowModule);
 	main_navbar_versekey_set(navbar_versekey, gkey);
 	main_url_handler(url, TRUE);
 	if (url)

@@ -531,18 +531,18 @@ void gui_export_dialog(void)
 	g_signal_connect(dialog, "response",
 			 G_CALLBACK(on_dialog_export_passage_response), NULL);
 
-	max = main_get_max_verses ();
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (d.sb_start_verse),
-				   1, max);
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (d.sb_end_verse),
-				   1, max);
-	curVerse = main_get_current_verse();
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON (d.sb_start_verse),
-				   curVerse);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON (d.sb_end_verse),
-				   curVerse);
-	gtk_widget_set_sensitive (d.sb_start_verse, FALSE);
-	gtk_widget_set_sensitive (d.sb_end_verse, FALSE);
+	max = main_get_max_verses(settings.MainWindowModule);
+	gtk_spin_button_set_range(GTK_SPIN_BUTTON (d.sb_start_verse),
+				  1, max);
+	gtk_spin_button_set_range(GTK_SPIN_BUTTON (d.sb_end_verse),
+				  1, max);
+	curVerse = main_get_current_verse(settings.MainWindowModule);
+	gtk_spin_button_set_value(GTK_SPIN_BUTTON (d.sb_start_verse),
+				  curVerse);
+	gtk_spin_button_set_value(GTK_SPIN_BUTTON (d.sb_end_verse),
+				  curVerse);
+	gtk_widget_set_sensitive(d.sb_start_verse, FALSE);
+	gtk_widget_set_sensitive(d.sb_end_verse, FALSE);
 
 	/* experiment: hide single verse option; subsumed into multi-verse. */
 	gtk_widget_hide(d.rb_verse);

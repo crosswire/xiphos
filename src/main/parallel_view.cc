@@ -178,9 +178,9 @@ gchar *main_parallel_change_verse(void)
 
 	sprintf(buf, "%s %d:%d", bookname, chapter, verse);
 
-	newbook = backend_p->key_get_book(buf);
-	chapter = backend_p->key_get_chapter(buf);
-	verse = backend_p->key_get_verse(buf);
+	newbook = backend_p->key_get_book(settings.parallel_list[0], buf);
+	chapter = backend_p->key_get_chapter(settings.parallel_list[0], buf);
+	verse   = backend_p->key_get_verse(settings.parallel_list[0], buf);
 
 	if (strcmp(bookname, newbook))
 		gtk_entry_set_text(GTK_ENTRY(entrycbIntBook), newbook);
@@ -733,6 +733,13 @@ void main_update_parallel_page(void)
 
 static void interpolate_parallel_display(SWBuf& text, gchar *key, gint parallel_count, gint fraction)
 {
+	// identify the module whose v11n will drive us.
+	// should be 1st parallel module.
+	// it would be really weird if that's missing, but be ready anyhow.
+	char *module_name = (settings.parallel_list
+			     ? settings.parallel_list[0]
+			     : settings.MainWindowModule);
+
 	gchar  	*utf8str,
 		*textColor,
 		*tmpkey,
@@ -766,23 +773,31 @@ static void interpolate_parallel_display(SWBuf& text, gchar *key, gint parallel_
 	}
 
 	// need #verses to process in this chapter.
-	VerseKey vkey;
+	SWModule *mod = backend->get_SWModule(module_name);
+	VerseKey *vkey = (VerseKey *)(SWKey *)(mod);
 	int xverses;
 
-	vkey.setAutoNormalize(1);
-	vkey = key;
-	xverses = (vkey.getVerseMax());
+	vkey->setAutoNormalize(1);
+	vkey->setText(key);
+	xverses = (vkey->getVerseMax());
 
-	tmpkey = backend_p->get_valid_key(key);
-	cur_verse = backend_p->key_get_verse(tmpkey);
-	cur_chapter = backend_p->key_get_chapter(tmpkey);
-	cur_book = backend_p->key_get_book(tmpkey);
+	// frankly, we're faking it here.
+	// we have potentially variable v11n among the parallel modules.
+
+	// but we must validate a key in some vaguely consistent manner.
+	// arbitrarily, we have picked the 1st.
+	// it's consistent, but very possibly wrong for all but the 1st.
+	tmpkey = backend_p->get_valid_key(module_name, key);
+
+	cur_book    = backend_p->key_get_book(module_name, tmpkey);
+	cur_chapter = backend_p->key_get_chapter(module_name, tmpkey);
+	cur_verse   = backend_p->key_get_verse(module_name, tmpkey);
 	settings.intCurVerse = cur_verse;
 
 	for (verse = 1; verse <= xverses; ++verse) {
 		snprintf(tmpbuf, 255, "%s %d:%d", cur_book, cur_chapter, verse);
 		free(tmpkey);
-		tmpkey = backend_p->get_valid_key(tmpbuf);
+		tmpkey = backend_p->get_valid_key(settings.parallel_list[0], tmpbuf);
 
 		text += "<tr valign=\"top\">";
 

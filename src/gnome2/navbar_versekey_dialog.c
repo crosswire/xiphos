@@ -437,7 +437,7 @@ static void on_entry_activate(GtkEntry * entry, DIALOG_DATA *dialog)
 	if ((settings.special_anchor = strchr(buf, '#')) ||	/* thml */
 	    (settings.special_anchor = strchr(buf, '!')))	/* osisref */
 		*settings.special_anchor = '\0';
-	const gchar *gkey = main_get_valid_key((gchar*)buf);
+	const gchar *gkey = main_get_valid_key(dialog->mod_name, (gchar*)buf);
 	if (settings.special_anchor)
 		*settings.special_anchor = '#';			/* put it back. */
 	if (gkey == NULL)
