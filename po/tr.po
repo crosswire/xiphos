@@ -359,13 +359,12 @@ msgstr "Telif hakkı 2000-2009 Xiphos Geliştirme Ekibi"
 
 #: ../src/gnome2/about_xiphos.c:125
 msgid ""
-"(formerly known as GnomeSword)\n"
 "\n"
 "Powered by The SWORD Project.\n"
 "We would like to thank Troy Griffitts and all the other folks who have given "
 "us The SWORD Project."
 msgstr ""
-"(Eski Gnomesword&#39;a olarak da bilinir) Projesi SWORD Powered by. Biz "
+"\nProjesi SWORD Powered by. Biz "
 "istiyorsunuz Projesi SWORD gibi teşekkür sahip verilmiş bize Troy millet "
 "diğer Griffitts ve tüm."
 

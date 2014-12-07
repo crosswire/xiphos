@@ -384,13 +384,11 @@ msgstr "Copyright © 2000-2013 L'équipe de développement Xiphos"
 
 #: ../src/gnome2/about_xiphos.c:125
 msgid ""
-"(formerly known as GnomeSword)\n"
 "\n"
 "Powered by The SWORD Project.\n"
 "We would like to thank Troy Griffitts and all the other folks who have given "
 "us The SWORD Project."
 msgstr ""
-"(Anciennement Gnomesword)\n"
 "\n"
 "Xiphos est basé sur le Projet SWORD.    \n"
 "Tous nos remerciements vont à Troy Griffitts et toutes\n"

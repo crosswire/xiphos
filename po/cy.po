@@ -352,13 +352,11 @@ msgstr "Hawlfraint 2000-2009 Tîm Datblygu Xiphos"
 
 #: ../src/gnome2/about_xiphos.c:125
 msgid ""
-"(formerly known as GnomeSword)\n"
 "\n"
 "Powered by The SWORD Project.\n"
 "We would like to thank Troy Griffitts and all the other folks who have given "
 "us The SWORD Project."
 msgstr ""
-"(adnabuwyd o'r blaen fel GnomeSword)\n"
 "\n"
 "Gyrrir gan Brosiect SWORD.\n"
 "Carem ddiolch i Troy Griffits a phawb arall sydd wedi rhoi prosiect SWORD i "
