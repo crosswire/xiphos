@@ -601,7 +601,9 @@ int BackEnd::module_has_testament(const char *module_name, int testament)
 		module->setSkipConsecutiveLinks(true);
 
 		*module = sword::TOP; //position to first entry
-		VerseKey *key = (VerseKey *)(SWKey *)(*module);
+//		VerseKey *key = (VerseKey *)(SWKey *)(*module);
+		VerseKey *key = (VerseKey *)module->createKey();
+
 		key->setText(module->getKeyText());
 		if (key->getTestament() == 1) { // OT && NT
 			ot = 1;
@@ -617,6 +619,7 @@ int BackEnd::module_has_testament(const char *module_name, int testament)
 			nt = 1;
 		}
 
+		delete key;	// because it was createKey'd above.
 		module->setSkipConsecutiveLinks(false);
 	}
 
