@@ -758,6 +758,12 @@ static gboolean button_release_event(GtkWidget * widget,
 		gtk_widget_set_sensitive(menu.delete, TRUE);
 		is_selected = TRUE;
 	}
+
+	if (!module || !strcmp(module, "")) {
+		g_free(module);
+		module = g_strdup(settings.MainWindowModule);
+	}
+
 	switch (event->button) {
 	case 1:
 		button_one = TRUE;
