@@ -757,6 +757,18 @@ static void interpolate_parallel_display(SWBuf& text, gchar *key, gint parallel_
 
 	if (!gtk_widget_get_realized(GTK_WIDGET(widgets.notebook_bible_parallel))) return;
 
+	// need #verses to process in this chapter.
+	SWModule *mod = backend->get_SWModule(module_name);
+	if (!mod) return;
+
+	VerseKey *vkey = (VerseKey *)mod->createKey();
+	int xverses;
+
+	vkey->setAutoNormalize(1);
+	vkey->setText(key);
+	xverses = (vkey->getVerseMax());
+	delete vkey;
+
 	is_module     = g_new(gboolean, parallel_count);
 	is_rtol       = g_new(gboolean, parallel_count);
 	is_bible_text = g_new(gboolean, parallel_count);
@@ -775,16 +787,6 @@ static void interpolate_parallel_display(SWBuf& text, gchar *key, gint parallel_
 			     == TEXT_TYPE);
 		}
 	}
-
-	// need #verses to process in this chapter.
-	SWModule *mod = backend->get_SWModule(module_name);
-	VerseKey *vkey = (VerseKey *)mod->createKey();
-	int xverses;
-
-	vkey->setAutoNormalize(1);
-	vkey->setText(key);
-	xverses = (vkey->getVerseMax());
-	delete vkey;
 
 	// frankly, we're faking it here.
 	// we have potentially variable v11n among the parallel modules.
