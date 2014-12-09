@@ -494,8 +494,8 @@
 		<sect3 id="xiphos-default-css">
 			<title>Display Control with CSS</title>
 			<para>
-			If you are familiar with CSS (cascading style sheets), you may wish to create the file "default-style.css" in your .xiphos
-			directory to contain whatever CSS controls you wish.  Beware, it is very easy to shoot oneself in the foot with CSS, and this
+			Users familiar with CSS (cascading style sheets) may wish to create the file "default-style.css" in the .xiphos
+			directory to contain whatever CSS controls are desired.  Beware, it is very easy to shoot oneself in the foot with CSS, and this
 			will affect all modules' display.  The facility exists to provide the capability that advanced users may wish.
 			</para>
 		</sect3>
@@ -878,7 +878,7 @@
 			<listitem>
 				<para>
 					<guibutton>Ctrl-Alt-Shift-N</guibutton> causes BibleSync to navigate your current main window point
-					transiently as a one-shot event.  BibleSync must be in transmit-ready, that is, in Personal or Speaker mode.
+					transiently as a one-shot event.  BibleSync must be transmit-ready, that is, in Personal or Speaker mode.
 				</para>
 			</listitem>
 		</itemizedlist>
