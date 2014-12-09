@@ -1979,7 +1979,7 @@ GTKPrintChapDisp::display(SWModule &imodule)
 			? "&nbsp; <a name=\"%d\" href=\"sword:///%s\">"
 			  "<font size=\"%+d\" color=\"%s\">%s%s%s%s%s%s%s</font></a>&nbsp;"
 			: "&nbsp; <a name=\"%d\"> </a>",
-				      key->getVerse(),
+			key->getVerse(),
 			(char*)key->getText(),
 			settings.verse_num_font_size + settings.base_font_size,
 			settings.bible_verse_num_color,
