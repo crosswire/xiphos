@@ -60,6 +60,8 @@ void main_navbar_set(NAVBAR navbar, const char * key)
 		return;
 
 	SWModule *mod = backend->get_SWModule(navbar.module_name);
+	if (!mod) return;
+
 	VerseKey *vkey = (VerseKey *)mod->createKey();
 
 	navbar.key = backend->get_valid_key(navbar.module_name, key);
@@ -135,7 +137,12 @@ void main_navbar_set(NAVBAR navbar, const char * key)
 
 void main_navbar_fill_book_combo(NAVBAR navbar)
 {
+	if (!navbar.module_name)
+		return;
+
 	SWModule *mod = backend->get_SWModule(navbar.module_name);
+	if (!mod) return;
+
 	VerseKey *key = (VerseKey *)mod->createKey();
 	char *book = NULL;
 	GtkTreeIter iter;

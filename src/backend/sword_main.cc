@@ -314,6 +314,8 @@ void BackEnd::set_cipher_key(char * module_name, char * key)
 int BackEnd::is_Bible_key(const char *module_name, const char * list, const char * current_key)
 {
 	SWModule *mod = get_SWModule(module_name);
+	if (!mod) return 0;
+
 	VerseKey *key = (VerseKey *)(SWKey *)(*mod);
 
 	key->setText(current_key);
@@ -378,6 +380,8 @@ char *BackEnd::get_strip_text(const char *module_name, const char *key)
 char *BackEnd::get_valid_key(const char *module_name, const char *key)
 {
 	SWModule *mod = get_SWModule(module_name);
+	if (!mod) return strdup("Gen.1.1");
+
 	VerseKey *vkey = (VerseKey *)(SWKey *)(*mod);
 	char *mykey;
 
@@ -395,6 +399,8 @@ char *BackEnd::get_valid_key(const char *module_name, const char *key)
 char *BackEnd::key_get_book(const char *module_name, const char *key)
 {
 	SWModule *mod = get_SWModule(module_name);
+	if (!mod) return strdup("Genesis");
+
 	VerseKey *vkey = (VerseKey *)(SWKey *)(*mod);
 
 	vkey->setAutoNormalize(1);
@@ -407,6 +413,8 @@ char *BackEnd::key_get_book(const char *module_name, const char *key)
 int BackEnd::key_get_chapter(const char *module_name, const char *key)
 {
 	SWModule *mod = get_SWModule(module_name);
+	if (!mod) return 1;
+
 	VerseKey *vkey = (VerseKey *)(SWKey *)(*mod);
 
 	vkey->setAutoNormalize(1);
@@ -418,6 +426,8 @@ int BackEnd::key_get_chapter(const char *module_name, const char *key)
 int BackEnd::key_get_verse(const char *module_name, const char *key)
 {
 	SWModule *mod = get_SWModule(module_name);
+	if (!mod) return 1;
+
 	VerseKey *vkey = (VerseKey *)(SWKey *)(*mod);
 
 	vkey->setAutoNormalize(1);
@@ -429,6 +439,8 @@ int BackEnd::key_get_verse(const char *module_name, const char *key)
 unsigned int BackEnd::key_chapter_count(const char *module_name, const char *key)
 {
 	SWModule *mod = get_SWModule(module_name);
+	if (!mod) return 1;
+
 	VerseKey *vkey = (VerseKey *)(SWKey *)(*mod);
 
 	vkey->setAutoNormalize(1);
@@ -441,6 +453,8 @@ unsigned int BackEnd::key_chapter_count(const char *module_name, const char *key
 unsigned int BackEnd::key_verse_count(const char *module_name, const char *key)
 {
 	SWModule *mod = get_SWModule(module_name);
+	if (!mod) return 1;
+
 	VerseKey *vkey = (VerseKey *)(SWKey *)(*mod);
 
 	vkey->setAutoNormalize(1);
@@ -594,6 +608,8 @@ char *BackEnd::module_name_from_description(char *description)
 int BackEnd::get_key_testament(const char *module_name, const char *key)
 {
 	SWModule *mod = get_SWModule(module_name);
+	if (!mod) return 1;
+
 	VerseKey *ikey = (VerseKey *)(SWKey *)(*mod);
 
 	ikey->setText(key);
@@ -899,6 +915,8 @@ char *BackEnd::navigate_module(int direction)
 GList *BackEnd::parse_verse_list(const char *module_name, const char * list, char * current_key)
 {
 	SWModule *mod = get_SWModule(module_name);
+	if (!mod) return NULL;
+
 	VerseKey *key = (VerseKey *)(SWKey *)(*mod);
 	GList *retlist = NULL;
 	ListKey vs;
@@ -920,10 +938,13 @@ GList *BackEnd::parse_verse_list(const char *module_name, const char * list, cha
 
 GList *BackEnd::parse_range_list(const char * module_name, const char * list)
 {
+	SWModule *mod = get_SWModule(module_name);
+	if (!mod) return NULL;
+
+	VerseKey *key = (VerseKey *)(SWKey *)(*mod);
 	GList *retlist = NULL;
 	const char *buf = NULL;
-	SWModule *mod = get_SWModule(module_name);
-	VerseKey *key = (VerseKey *)(SWKey *)(*mod);
+
 	key->setText(mod->getKeyText());
 
 	verses.clear();
@@ -975,6 +996,8 @@ int BackEnd::clear_search_list(void)
 int BackEnd::set_range(const char *module_name, const char * list)
 {
 	SWModule *mod = get_SWModule(module_name);
+	if (!mod) return 0;
+
 	VerseKey *key = (VerseKey *)(SWKey *)(*mod);
 
 	key->setText(mod->getKeyText());

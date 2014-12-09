@@ -523,6 +523,8 @@ static void add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
 			       const gchar * mod_name)
 {
 	SWModule *mod = backend->get_SWModule(mod_name);
+	if (!mod) return;
+
 	VerseKey *vkey = (VerseKey *)mod->createKey();
 	gint j = 0;
 	GtkTreeIter child_iter;

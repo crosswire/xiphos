@@ -338,6 +338,8 @@ void main_search_sidebar_fill_bounds_combos(void)
 
 	char *module_name = settings.MainWindowModule;
 	SWModule *mod = backendSearch->get_SWModule(module_name);
+	if (!mod) return;
+
 	VerseKey *key = (VerseKey *)mod->createKey();
 
 	GtkTreeModel* upper_model = gtk_combo_box_get_model(
