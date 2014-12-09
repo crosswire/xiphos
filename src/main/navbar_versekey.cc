@@ -100,6 +100,8 @@ void main_navbar_versekey_spin_book(NAVBAR_VERSEKEY navbar, int direction)
 		return;
 
 	SWModule *mod = backend->get_SWModule(navbar.module_name->str);
+	if (!mod) return;
+
 	VerseKey *vkey = (VerseKey *)mod->createKey();
 	tmpkey = backend->get_valid_key(navbar.module_name->str, navbar.key->str);
 
@@ -142,6 +144,8 @@ void main_navbar_versekey_spin_chapter(NAVBAR_VERSEKEY navbar, int direction)
 		return;
 
 	SWModule *mod = backend->get_SWModule(navbar.module_name->str);
+	if (!mod) return;
+
 	VerseKey *vkey = (VerseKey *)mod->createKey();
 	tmpkey = backend->get_valid_key(navbar.module_name->str, navbar.key->str);
 
@@ -185,6 +189,8 @@ void main_navbar_versekey_spin_verse(NAVBAR_VERSEKEY navbar, int direction)
 		return;
 
 	SWModule *mod = backend->get_SWModule(navbar.module_name->str);
+	if (!mod) return;
+
 	VerseKey *vkey = (VerseKey *)mod->createKey();
 	tmpkey = backend->get_valid_key(navbar.module_name->str, navbar.key->str);
 
@@ -224,7 +230,6 @@ static
 void on_nt_book_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 {
 	SWModule *mod;
-	VerseKey *vkey;
 	GtkWidget *entry = NULL;
 	int book = GPOINTER_TO_INT(user_data);
 	gchar *name, *key;
@@ -259,17 +264,18 @@ void on_nt_book_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 
 	if (entry) {
 		mod = backend->get_SWModule(name);
-		vkey = (VerseKey *)mod->createKey();
-		vkey->setAutoNormalize(1);
-		vkey->setText(key);
+		if (mod) {
+			VerseKey *vkey = (VerseKey *)mod->createKey();
+			vkey->setAutoNormalize(1);
+			vkey->setText(key);
+			vkey->setTestament(2);
+			vkey->setBook(book+1);
 
-		vkey->setTestament(2);
-		vkey->setBook(book+1);
+			gtk_entry_set_text(GTK_ENTRY(entry),vkey->getText());
+			gtk_widget_activate(entry);
 
-		gtk_entry_set_text(GTK_ENTRY(entry),vkey->getText());
-		gtk_widget_activate(entry);
-
-		delete vkey;
+			delete vkey;
+		}
 	}
 }
 
@@ -295,7 +301,6 @@ static
 void on_ot_book_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 {
 	SWModule *mod;
-	VerseKey *vkey;
 	GtkWidget *entry = NULL;
 	int book = GPOINTER_TO_INT(user_data);
 	gchar *name, *key;
@@ -330,17 +335,18 @@ void on_ot_book_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 
 	if (entry) {
 		mod = backend->get_SWModule(name);
-		vkey = (VerseKey *)mod->createKey();
-		vkey->setAutoNormalize(1);
-		vkey->setText(key);
+		if (mod) {
+			VerseKey *vkey = (VerseKey *)mod->createKey();
+			vkey->setAutoNormalize(1);
+			vkey->setText(key);
+			vkey->setTestament(1);
+			vkey->setBook(book+1);
 
-		vkey->setTestament(1);
-		vkey->setBook(book+1);
+			gtk_entry_set_text(GTK_ENTRY(entry),vkey->getText());
+			gtk_widget_activate(entry);
 
-		gtk_entry_set_text(GTK_ENTRY(entry),vkey->getText());
-		gtk_widget_activate(entry);
-
-		delete vkey;
+			delete vkey;
+		}
 	}
 }
 
@@ -366,7 +372,6 @@ static
 void on_chapter_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 {
 	SWModule *mod;
-	VerseKey *vkey;
 	GtkWidget *entry = NULL;
 	int chapter = GPOINTER_TO_INT(user_data);
 	gchar *name, *key;
@@ -400,16 +405,17 @@ void on_chapter_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 	}
 	if (entry) {
 		mod = backend->get_SWModule(name);
-		vkey = (VerseKey *)mod->createKey();
-		vkey->setAutoNormalize(1);
-		vkey->setText(key);
+		if (mod) {
+			VerseKey *vkey = (VerseKey *)mod->createKey();
+			vkey->setAutoNormalize(1);
+			vkey->setText(key);
+			vkey->setChapter(chapter);
 
-		vkey->setChapter(chapter);
+			gtk_entry_set_text(GTK_ENTRY(entry),vkey->getText());
+			gtk_widget_activate(entry);
 
-		gtk_entry_set_text(GTK_ENTRY(entry),vkey->getText());
-		gtk_widget_activate(entry);
-
-		delete vkey;
+			delete vkey;
+		}
 	}
 }
 
@@ -435,7 +441,6 @@ static
 void on_verse_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 {
 	SWModule *mod;
-	VerseKey *vkey;
 	GtkWidget *entry = NULL;
 	int verse = GPOINTER_TO_INT(user_data);
 	gchar *name, *key;
@@ -469,16 +474,17 @@ void on_verse_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 	}
 	if (entry) {
 		mod = backend->get_SWModule(name);
-		vkey = (VerseKey *)mod->createKey();
-		vkey->setAutoNormalize(1);
-		vkey->setText(key);
+		if (mod) {
+			VerseKey *vkey = (VerseKey *)mod->createKey();
+			vkey->setAutoNormalize(1);
+			vkey->setText(key);
+			vkey->setVerse(verse);
 
-		vkey->setVerse(verse);
+			gtk_entry_set_text(GTK_ENTRY(entry),vkey->getText());
+			gtk_widget_activate(entry);
 
-		gtk_entry_set_text(GTK_ENTRY(entry),vkey->getText());
-		gtk_widget_activate(entry);
-
-		delete vkey;
+			delete vkey;
+		}
 	}
 }
 
@@ -509,8 +515,9 @@ void main_navbar_versekey_set(NAVBAR_VERSEKEY navbar, const char * key)
 		return;
 
 	SWModule *mod = backend->get_SWModule(navbar.module_name->str);
-	VerseKey *vkey = (VerseKey *)mod->createKey();
+	if (!mod) return;
 
+	VerseKey *vkey = (VerseKey *)mod->createKey();
 	vkey->setAutoNormalize(1);
 	vkey->setText(key);
 
@@ -558,9 +565,6 @@ GtkWidget *main_versekey_drop_down_verse_menu(NAVBAR_VERSEKEY navbar,
 					      gpointer dialog,
 					      gpointer editor)
 {
-	SWModule *mod = backend->get_SWModule(navbar.module_name->str);
-	VerseKey *vkey = (VerseKey *)mod->createKey();
-
 	char *num;
 	gint i, x;
 	GtkWidget *menu;
@@ -574,6 +578,10 @@ GtkWidget *main_versekey_drop_down_verse_menu(NAVBAR_VERSEKEY navbar,
 	menu = gtk_menu_new();
 	menu_shell = GTK_MENU_SHELL(menu);
 
+	SWModule *mod = backend->get_SWModule(navbar.module_name->str);
+	if (!mod) return menu;
+
+	VerseKey *vkey = (VerseKey *)mod->createKey();
 	vkey->setAutoNormalize(1);
 	vkey->setText(navbar.key->str);
 	int xverse = vkey->getVerse();
@@ -631,9 +639,6 @@ GtkWidget *main_versekey_drop_down_chapter_menu(NAVBAR_VERSEKEY navbar,
 						gpointer dialog,
 						gpointer editor)
 {
-	SWModule *mod = backend->get_SWModule(navbar.module_name->str);
-	VerseKey *vkey = (VerseKey *)mod->createKey();
-
 	char *num;
 	gint i, x;
 	GtkWidget *menu;
@@ -647,6 +652,10 @@ GtkWidget *main_versekey_drop_down_chapter_menu(NAVBAR_VERSEKEY navbar,
 	menu = gtk_menu_new();
 	menu_shell = GTK_MENU_SHELL(menu);
 
+	SWModule *mod = backend->get_SWModule(navbar.module_name->str);
+	if (!mod) return menu;
+
+	VerseKey *vkey = (VerseKey *)mod->createKey();
 	vkey->setAutoNormalize(1);
 	vkey->setText(navbar.key->str);
 	int xchapter = vkey->getChapter();
@@ -704,29 +713,30 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar,
 						gpointer dialog,
 						gpointer editor)
 {
-	SWModule *mod = backend->get_SWModule(navbar.module_name->str);
-	VerseKey *key = (VerseKey *)mod->createKey();
-	VerseKey *key_current = (VerseKey *)mod->createKey();
-
-	key->setAutoNormalize(1);
-	key_current->setAutoNormalize(1);
-
 	GtkWidget *menu;
+	GtkMenuShell *menu_shell;
 	GtkWidget *item;
 	GtkWidget *select_item = NULL;
 	char *book = NULL;
 	char *current_book = NULL;
 	int i = 0;
-	GtkMenuShell *menu_shell;
 
 	c_dialog = (DIALOG_DATA *) dialog;
 	c_editor = (EDITOR *) editor;
 	c_type = nb_type;
 
-	key_current->setText(navbar.key->str);
-	current_book = strdup((const char *) key_current->getBookName());
 	menu = gtk_menu_new();
 	menu_shell = GTK_MENU_SHELL(menu);
+
+	SWModule *mod = backend->get_SWModule(navbar.module_name->str);
+	if (!mod) return menu;
+
+	VerseKey *key = (VerseKey *)mod->createKey();
+	VerseKey *key_current = (VerseKey *)mod->createKey();
+	key->setAutoNormalize(1);
+	key_current->setAutoNormalize(1);
+	key_current->setText(navbar.key->str);
+	current_book = strdup((const char *) key_current->getBookName());
 
 	if (backend->module_has_testament(navbar.module_name->str, 1)) {
 		while (i < key->BMAX[0]) {

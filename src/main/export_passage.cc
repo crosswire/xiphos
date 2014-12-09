@@ -93,6 +93,8 @@ static void clipboardreq_get (GtkClipboard *clipboard,
 int main_get_max_verses(const char *name)
 {
 	SWModule *mod = backend->get_SWModule(name);
+	if (!mod) return 1;
+
 	VerseKey *key = (VerseKey *)mod->createKey();
 	key->setText(settings.currentverse);
 	int max = key->getVerseMax();
@@ -103,6 +105,8 @@ int main_get_max_verses(const char *name)
 int main_get_current_verse(const char *name)
 {
 	SWModule *mod = backend->get_SWModule(name);
+	if (!mod) return 1;
+
 	VerseKey *key = (VerseKey *)mod->createKey();
 	key->setText(settings.currentverse);
 	int v = key->getVerse();
