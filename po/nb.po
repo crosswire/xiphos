@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos 2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-03 17:06-0400\n"
+"POT-Creation-Date: 2014-06-17 07:30-0400\n"
 "PO-Revision-Date: 2010-09-30 00:22+0100\n"
 "Last-Translator: Peter von Kaehne <refdoc@crosswire.org>\n"
 "Language-Team: <i18n-nb@lister.ping.uio.no>\n"
@@ -21,89 +21,92 @@ msgstr ""
 "X-Language: nb_NO\n"
 "X-Source-Language: C\n"
 
-#: ../src/backend/biblesync.cc:124
+#: ../src/biblesync/biblesync.cc:129
 msgid "network setup errors."
 msgstr ""
 
-#: ../src/backend/biblesync.cc:156
+#: ../src/biblesync/biblesync.cc:175
 msgid " client socket"
 msgstr ""
 
-#: ../src/backend/biblesync.cc:195
+#: ../src/biblesync/biblesync.cc:225
 msgid " server socket"
 msgstr ""
 
-#: ../src/backend/biblesync.cc:353
+#: ../src/biblesync/biblesync.cc:370
 msgid "bad magic"
 msgstr ""
 
-#: ../src/backend/biblesync.cc:356
+#: ../src/biblesync/biblesync.cc:373
 msgid "bad protocol version"
 msgstr ""
 
-#: ../src/backend/biblesync.cc:360
+#: ../src/biblesync/biblesync.cc:378
 msgid "bad msg type"
 msgstr ""
 
-#: ../src/backend/biblesync.cc:363
+#: ../src/biblesync/biblesync.cc:381
 msgid "bad packet count"
 msgstr ""
 
-#: ../src/backend/biblesync.cc:366
+#: ../src/biblesync/biblesync.cc:384
 msgid "bad packet index"
 msgstr ""
 
-#: ../src/backend/biblesync.cc:409
+#: ../src/biblesync/biblesync.cc:427
 msgid "bad body format"
 msgstr ""
 
-#: ../src/backend/biblesync.cc:423
+#: ../src/biblesync/biblesync.cc:441
 msgid "missing required header "
 msgstr ""
 
-#: ../src/backend/biblesync.cc:447
+#: ../src/biblesync/biblesync.cc:466
+msgid "UUID spoofed: wrong ipaddr."
+msgstr ""
+
+#: ../src/biblesync/biblesync.cc:493
 msgid "Ignoring echo."
 msgstr ""
 
-#: ../src/backend/biblesync.cc:488
-msgid ""
-"\n"
-"present at ["
+#: ../src/biblesync/biblesync.cc:522
+msgid "Domain not 'BIBLE-VERSE': "
 msgstr ""
 
-#: ../src/backend/biblesync.cc:490
-msgid ""
-"]\n"
-"using "
+#: ../src/biblesync/biblesync.cc:530
+msgid "Invalid group: "
 msgstr ""
 
-#: ../src/backend/biblesync.cc:541
+#: ../src/biblesync/biblesync.cc:560
+msgid " present at "
+msgstr ""
+
+#: ../src/biblesync/biblesync.cc:562
+msgid " using "
+msgstr ""
+
+#: ../src/biblesync/biblesync.cc:685
 #, fuzzy
 msgid "[no dump ready]"
 msgstr "[ingen moduler]"
 
-#: ../src/backend/biblesync.cc:548
+#: ../src/biblesync/biblesync.cc:692
 msgid "select < 0"
 msgstr ""
 
-#: ../src/backend/biblesync.cc:558
+#: ../src/biblesync/biblesync.cc:702
 msgid "recvfrom < 0"
 msgstr ""
 
-#: ../src/backend/biblesync.cc:644
-msgid "TRANSMIT:"
-msgstr ""
-
-#: ../src/backend/biblesync.cc:660
+#: ../src/biblesync/biblesync.cc:791
 #, fuzzy
 msgid "Transmit failed.\n"
 msgstr "%s·feilet"
 
-#: ../src/backend/biblesync.cc:661
+#: ../src/biblesync/biblesync.cc:792
 msgid ""
-"Unable to multicast; BibleSync is now disabled.\n"
-"If your network connection changed while this program\n"
-"was active, it may be sufficient to re-enable."
+"Unable to multicast; BibleSync is now disabled. If your network connection "
+"changed while this program was active, it may be sufficient to re-enable."
 msgstr ""
 
 #: ../src/backend/sword_main.cc:740
@@ -460,8 +463,8 @@ msgid ""
 "separate tabs is not supported."
 msgstr ""
 
-#: ../src/gnome2/bookmarks_treeview.c:849 ../src/gnome2/sidebar.c:1469
-#: ../src/gnome2/sidebar.c:1502
+#: ../src/gnome2/bookmarks_treeview.c:849 ../src/gnome2/sidebar.c:1493
+#: ../src/gnome2/sidebar.c:1526
 msgid "Bookmarks"
 msgstr "Bokmerker"
 
@@ -482,16 +485,16 @@ msgstr "Skriv inn kodenøkkel: "
 msgid "Close without Saving"
 msgstr "Lukk uten å lagre"
 
-#: ../src/gnome2/dialog.c:664
+#: ../src/gnome2/dialog.c:679
 msgid "Xiphos:"
 msgstr "Xiphos:"
 
-#: ../src/gnome2/dialog.c:765
+#: ../src/gnome2/dialog.c:781
 msgid "Close _without Saving"
 msgstr "Lukk _uten å lagre"
 
 #: ../src/gnome2/export_bookmarks.c:197 ../src/gnome2/export_bookmarks.c:256
-#: ../src/gnome2/sidebar.c:1481 ../src/gnome2/sidebar.c:1518
+#: ../src/gnome2/sidebar.c:1505 ../src/gnome2/sidebar.c:1542
 #, c-format
 msgid "Verse List"
 msgstr "Liste over vers"
@@ -563,43 +566,48 @@ msgstr "Vær så snill å rapportere denne feilen til Xiphos-teamet med:"
 msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
 msgstr "FEIL: Xiphos krasjer nå, på grunn av en \"STRING\"-feil."
 
-#: ../src/gnome2/main_window.c:648
-msgid "Module has no morphology support."
-msgstr ""
-
-#: ../src/gnome2/main_window.c:697
-msgid "Module has no Red Words support."
-msgstr ""
-
-#: ../src/gnome2/main_window.c:714
-#, fuzzy
-msgid "Module has no Strong's support."
+#: ../src/gnome2/main_window.c:570
+#, fuzzy, c-format
+msgid "Module has no support for %s."
 msgstr "I moduler som har referanser til kildetekst"
 
-#: ../src/gnome2/main_window.c:839
+#: ../src/gnome2/main_window.c:640
+#, fuzzy
+msgid "Xiphos: No windows."
+msgstr "Xiphos:"
+
+#: ../src/gnome2/main_window.c:696
+msgid "BibleSync: Current navigation sent."
+msgstr ""
+
+#: ../src/gnome2/main_window.c:700
+msgid "BibleSync: Not speaking."
+msgstr ""
+
+#: ../src/gnome2/main_window.c:884
 msgid "Xiphos - Bible Study Software"
 msgstr "Xiphos - Program for bibelstudier"
 
-#: ../src/gnome2/main_window.c:895
+#: ../src/gnome2/main_window.c:940
 msgid "Open a new tab"
 msgstr "Åpne ny arkfane"
 
-#: ../src/gnome2/main_window.c:975 ../src/gnome2/sidebar.c:627
-#: ../src/gnome2/sidebar.c:633 ../src/main/sidebar.cc:659
+#: ../src/gnome2/main_window.c:1020 ../src/gnome2/sidebar.c:628
+#: ../src/gnome2/sidebar.c:634 ../src/main/sidebar.cc:659
 #: ../src/main/sidebar.cc:1004 ../src/main/sidebar.cc:1005
 #: ../src/main/sidebar.cc:1006
 msgid "Standard View"
 msgstr "Standardvisning"
 
-#: ../src/gnome2/main_window.c:1036
+#: ../src/gnome2/main_window.c:1081
 msgid "Commentary View"
 msgstr "Kommentarvisning"
 
-#: ../src/gnome2/main_window.c:1052
+#: ../src/gnome2/main_window.c:1097
 msgid "Book View"
 msgstr "Bokvisning"
 
-#: ../src/gnome2/main_window.c:1079
+#: ../src/gnome2/main_window.c:1124
 msgid "Welcome to Xiphos"
 msgstr "Velkommen til Xiphos"
 
@@ -798,7 +806,7 @@ msgstr "Forbereder sletting"
 msgid "Removing"
 msgstr "Sletter"
 
-#: ../src/gnome2/mod_mgr.c:192 ../ui/xi-menus.glade.h:146
+#: ../src/gnome2/mod_mgr.c:192 ../ui/xi-menus.glade.h:148
 #: ../ui/xi-menus-popup.gtkbuilder.h:26
 msgid "Remove"
 msgstr "Slett"
@@ -932,7 +940,7 @@ msgstr "Størrelse"
 msgid "Description"
 msgstr "Beskrivelse"
 
-#: ../src/gnome2/mod_mgr.c:815
+#: ../src/gnome2/mod_mgr.c:816
 #, c-format
 msgid ""
 "`mkdir %s' failed:\n"
@@ -941,33 +949,33 @@ msgstr ""
 "Kunne ikke opprette mappa %s:\n"
 "%s."
 
-#: ../src/gnome2/mod_mgr.c:837
+#: ../src/gnome2/mod_mgr.c:848
 msgid " archived in: \n"
 msgstr " arkivert i: \n"
 
-#: ../src/gnome2/mod_mgr.c:892
+#: ../src/gnome2/mod_mgr.c:903
 msgid "Journals and prayer lists cannot be indexed."
 msgstr "Kunne ikke indeksere Journal og Bønneliste."
 
-#: ../src/gnome2/mod_mgr.c:913
+#: ../src/gnome2/mod_mgr.c:924
 #, c-format
 msgid "%s failed"
 msgstr "%s·feilet"
 
-#: ../src/gnome2/mod_mgr.c:916 ../src/gnome2/mod_mgr.c:1670
+#: ../src/gnome2/mod_mgr.c:927 ../src/gnome2/mod_mgr.c:1681
 msgid "Finished"
 msgstr "Ferdig"
 
-#: ../src/gnome2/mod_mgr.c:1084 ../src/gnome2/mod_mgr.c:1086
-#: ../src/gnome2/mod_mgr.c:1188 ../src/gnome2/mod_mgr.c:1223
-#: ../src/gnome2/mod_mgr.c:1225 ../src/gnome2/utilities.c:472
+#: ../src/gnome2/mod_mgr.c:1095 ../src/gnome2/mod_mgr.c:1097
+#: ../src/gnome2/mod_mgr.c:1199 ../src/gnome2/mod_mgr.c:1234
+#: ../src/gnome2/mod_mgr.c:1236 ../src/gnome2/utilities.c:472
 #: ../src/gnome2/utilities.c:538 ../src/gnome2/utilities.c:540
 #: ../src/gnome2/utilities.c:1105 ../src/main/sidebar.cc:838
 #: ../src/main/sidebar.cc:910 ../src/main/sidebar.cc:912
 msgid "Unknown"
 msgstr "Ukjent"
 
-#: ../src/gnome2/mod_mgr.c:1388
+#: ../src/gnome2/mod_mgr.c:1399
 #, c-format
 msgid ""
 "Repository:\n"
@@ -976,7 +984,7 @@ msgstr ""
 "Oppbevaringssted:\n"
 "%s"
 
-#: ../src/gnome2/mod_mgr.c:1400
+#: ../src/gnome2/mod_mgr.c:1411
 msgid ""
 "Categorized by\n"
 "Module Type"
@@ -984,55 +992,54 @@ msgstr ""
 "Kategorisert ved\n"
 "Modul Type"
 
-#: ../src/gnome2/mod_mgr.c:1405 ../src/gnome2/utilities.c:606
+#: ../src/gnome2/mod_mgr.c:1416 ../src/gnome2/utilities.c:606
 #: ../src/main/sidebar.cc:988 ../src/main/sidebar.cc:990
 msgid "Biblical Texts"
 msgstr "Bibeltekster"
 
-#: ../src/gnome2/mod_mgr.c:1409 ../src/gnome2/utilities.c:613
+#: ../src/gnome2/mod_mgr.c:1420 ../src/gnome2/utilities.c:613
 #: ../src/main/sidebar.cc:671 ../src/main/sidebar.cc:1013
-#: ../src/main/sidebar.cc:1015 ../ui/prefs.glade.h:41
-#: ../ui/prefs.gtkbuilder.h:41
+#: ../src/main/sidebar.cc:1015
 msgid "Commentaries"
 msgstr "Kommentarer"
 
-#: ../src/gnome2/mod_mgr.c:1413 ../src/gnome2/utilities.c:621
+#: ../src/gnome2/mod_mgr.c:1424 ../src/gnome2/utilities.c:621
 #: ../src/main/sidebar.cc:1022 ../src/main/sidebar.cc:1024
 msgid "Dictionaries"
 msgstr "Ordbøker"
 
-#: ../src/gnome2/mod_mgr.c:1417 ../src/gnome2/utilities.c:628
+#: ../src/gnome2/mod_mgr.c:1428 ../src/gnome2/utilities.c:628
 #: ../src/main/sidebar.cc:1031 ../src/main/sidebar.cc:1033
 msgid "Glossaries"
 msgstr "Ordlister"
 
-#: ../src/gnome2/mod_mgr.c:1421 ../src/gnome2/utilities.c:635
+#: ../src/gnome2/mod_mgr.c:1432 ../src/gnome2/utilities.c:635
 #: ../src/main/sidebar.cc:1040 ../src/main/sidebar.cc:1042
 msgid "Daily Devotionals"
 msgstr "Dagens Andakt"
 
-#: ../src/gnome2/mod_mgr.c:1425 ../src/gnome2/utilities.c:642
+#: ../src/gnome2/mod_mgr.c:1436 ../src/gnome2/utilities.c:642
 #: ../src/main/sidebar.cc:681 ../src/main/sidebar.cc:1049
 #: ../src/main/sidebar.cc:1051
 msgid "General Books"
 msgstr "Andre bøker"
 
-#: ../src/gnome2/mod_mgr.c:1429 ../src/gnome2/utilities.c:649
+#: ../src/gnome2/mod_mgr.c:1440 ../src/gnome2/utilities.c:649
 #: ../src/main/sidebar.cc:1058 ../src/main/sidebar.cc:1060
 msgid "Maps"
 msgstr "Kart"
 
-#: ../src/gnome2/mod_mgr.c:1433 ../src/gnome2/utilities.c:656
+#: ../src/gnome2/mod_mgr.c:1444 ../src/gnome2/utilities.c:656
 #: ../src/main/sidebar.cc:1067 ../src/main/sidebar.cc:1069
 msgid "Images"
 msgstr "Bilder"
 
-#: ../src/gnome2/mod_mgr.c:1437 ../src/gnome2/utilities.c:663
+#: ../src/gnome2/mod_mgr.c:1448 ../src/gnome2/utilities.c:663
 #: ../src/main/sidebar.cc:1076 ../src/main/sidebar.cc:1078
 msgid "Cult/Unorthodox"
 msgstr "Kult / Uortodokse"
 
-#: ../src/gnome2/mod_mgr.c:1445
+#: ../src/gnome2/mod_mgr.c:1456
 msgid ""
 "Categorized by\n"
 "Availability"
@@ -1040,95 +1047,95 @@ msgstr ""
 "Kategorisert ved\n"
 "Tilgjengelighet"
 
-#: ../src/gnome2/mod_mgr.c:1450
+#: ../src/gnome2/mod_mgr.c:1461
 msgid "Updates"
 msgstr "Oppdateringer"
 
-#: ../src/gnome2/mod_mgr.c:1454
+#: ../src/gnome2/mod_mgr.c:1465
 msgid "Uninstalled"
 msgstr "Avinstallert"
 
-#: ../src/gnome2/mod_mgr.c:1458 ../src/gnome2/sidebar.c:643
+#: ../src/gnome2/mod_mgr.c:1469 ../src/gnome2/sidebar.c:644
 #: ../src/gnome2/utilities.c:671 ../src/main/prayerlists.cc:229
 #: ../src/main/sidebar.cc:1086 ../src/main/sidebar.cc:1088
 msgid "Prayer List/Journal"
 msgstr "Bønneliste/Journal"
 
-#: ../src/gnome2/mod_mgr.c:1654
+#: ../src/gnome2/mod_mgr.c:1665
 msgid "Refreshing from remote source"
 msgstr "Henter oppdatering fra ekstern kilde"
 
-#: ../src/gnome2/mod_mgr.c:1664
+#: ../src/gnome2/mod_mgr.c:1675
 msgid "Remote source not found"
 msgstr "Fant ikke den eksterne kilden"
 
-#: ../src/gnome2/mod_mgr.c:1734
+#: ../src/gnome2/mod_mgr.c:1745
 msgid "Configure"
 msgstr "Oppsett"
 
-#: ../src/gnome2/mod_mgr.c:1765
+#: ../src/gnome2/mod_mgr.c:1776
 msgid "Type"
 msgstr "Type"
 
-#: ../src/gnome2/mod_mgr.c:1772
+#: ../src/gnome2/mod_mgr.c:1783
 msgid "Caption"
 msgstr "Bildetekst"
 
-#: ../src/gnome2/mod_mgr.c:1780
+#: ../src/gnome2/mod_mgr.c:1791
 msgid "Source"
 msgstr "Kilde"
 
-#: ../src/gnome2/mod_mgr.c:1788
+#: ../src/gnome2/mod_mgr.c:1799
 msgid "Directory"
 msgstr "Mappe"
 
-#: ../src/gnome2/mod_mgr.c:1796
+#: ../src/gnome2/mod_mgr.c:1807
 msgid "User"
 msgstr "Bruker"
 
-#: ../src/gnome2/mod_mgr.c:1804
+#: ../src/gnome2/mod_mgr.c:1815
 msgid "Password"
 msgstr "Passord"
 
-#: ../src/gnome2/mod_mgr.c:1812
+#: ../src/gnome2/mod_mgr.c:1823
 msgid "UID"
 msgstr "UID"
 
-#: ../src/gnome2/mod_mgr.c:1829
+#: ../src/gnome2/mod_mgr.c:1840
 msgid "Module Sources"
 msgstr "Modulkilder"
 
-#: ../src/gnome2/mod_mgr.c:1832
+#: ../src/gnome2/mod_mgr.c:1843
 msgid "Add/Remove"
 msgstr "Legg til/Fjern"
 
-#: ../src/gnome2/mod_mgr.c:1834
+#: ../src/gnome2/mod_mgr.c:1845
 msgid "Choose"
 msgstr "Velg"
 
-#: ../src/gnome2/mod_mgr.c:1838 ../src/gnome2/preferences_dialog.c:1978
-#: ../src/gnome2/sidebar.c:1487 ../src/gnome2/sidebar.c:1526
+#: ../src/gnome2/mod_mgr.c:1849 ../src/gnome2/preferences_dialog.c:2063
+#: ../src/gnome2/sidebar.c:1511 ../src/gnome2/sidebar.c:1550
 msgid "Modules"
 msgstr "Moduler"
 
-#: ../src/gnome2/mod_mgr.c:1840
+#: ../src/gnome2/mod_mgr.c:1851
 msgid "Install/Update"
 msgstr "Installer/Oppdater"
 
-#: ../src/gnome2/mod_mgr.c:1842
+#: ../src/gnome2/mod_mgr.c:1853
 msgid "Maintenance"
 msgstr "Vedlikehold"
 
-#: ../src/gnome2/mod_mgr.c:2078
+#: ../src/gnome2/mod_mgr.c:2089
 msgid "Please Refresh"
 msgstr "Vennligst oppdater"
 
-#: ../src/gnome2/mod_mgr.c:2079
+#: ../src/gnome2/mod_mgr.c:2090
 msgid "Your module list is not up to date!"
 msgstr "Lista over moduler er ikke oppdatert!"
 
 #. Zero Bibles is just not workable in Xiphos.
-#: ../src/gnome2/mod_mgr.c:2398
+#: ../src/gnome2/mod_mgr.c:2409
 msgid ""
 "You have uninstalled your last Bible.\n"
 "Xiphos requires at least one."
@@ -1136,7 +1143,7 @@ msgstr ""
 "Du har avinstallert alle biblene.\n"
 "Xiphos trenger minst én for å fungere som tenkt."
 
-#: ../src/gnome2/mod_mgr.c:2404
+#: ../src/gnome2/mod_mgr.c:2415
 msgid ""
 "There are still no Bibles installed.\n"
 "Xiphos cannot continue without one."
@@ -1144,56 +1151,56 @@ msgstr ""
 "Du har fortsatt ingen bibler installert.\n"
 "Du trenger minst én for å bruke Xiphos."
 
-#: ../src/gnome2/mod_mgr.c:2497
+#: ../src/gnome2/mod_mgr.c:2508
 msgid "Standard remote sources have been loaded."
 msgstr "Lastet inn standard eksterne kilder."
 
-#: ../src/gnome2/mod_mgr.c:2503
+#: ../src/gnome2/mod_mgr.c:2514
 msgid "Could not load standard sources from CrossWire."
 msgstr "Kunne ikke laste ned standardkildene fra CrossWire."
 
-#: ../src/gnome2/mod_mgr.c:2671 ../src/gnome2/mod_mgr.c:2917
+#: ../src/gnome2/mod_mgr.c:2682 ../src/gnome2/mod_mgr.c:2928
 msgid "Remove the selected source"
 msgstr "Fjern den valgte kilden"
 
-#: ../src/gnome2/mod_mgr.c:2731
+#: ../src/gnome2/mod_mgr.c:2742
 msgid "Enter a remote source"
 msgstr "Skriv inn en ekstern kilde"
 
-#: ../src/gnome2/mod_mgr.c:2735
+#: ../src/gnome2/mod_mgr.c:2746
 msgid "Caption:"
 msgstr "Bildetekst:"
 
-#: ../src/gnome2/mod_mgr.c:2736
+#: ../src/gnome2/mod_mgr.c:2747
 msgid "Type:"
 msgstr "Type:"
 
-#: ../src/gnome2/mod_mgr.c:2737
+#: ../src/gnome2/mod_mgr.c:2748
 msgid "Host:"
 msgstr "Vert:"
 
-#: ../src/gnome2/mod_mgr.c:2738
+#: ../src/gnome2/mod_mgr.c:2749
 msgid "Directory:"
 msgstr "Mappe:"
 
-#: ../src/gnome2/mod_mgr.c:2739
+#: ../src/gnome2/mod_mgr.c:2750
 msgid "User (optional):"
 msgstr "Bruker (valgfritt):"
 
-#: ../src/gnome2/mod_mgr.c:2740
+#: ../src/gnome2/mod_mgr.c:2751
 msgid "Password (optional):"
 msgstr "Passord (valgfritt):"
 
 #. this can happen at most once
-#: ../src/gnome2/mod_mgr.c:2767
+#: ../src/gnome2/mod_mgr.c:2778
 msgid "A source by that name already exists."
 msgstr "En kilde med dette navnet finnes allerede."
 
-#: ../src/gnome2/mod_mgr.c:2914
+#: ../src/gnome2/mod_mgr.c:2925
 msgid "Delete a remote source"
 msgstr "Slett en ekstern kilde"
 
-#: ../src/gnome2/mod_mgr.c:3419
+#: ../src/gnome2/mod_mgr.c:3430
 msgid "[no module]"
 msgstr "[ingen moduler]"
 
@@ -1220,7 +1227,7 @@ msgstr "Gå innover til den første subseksjonen"
 msgid "Synchronize this window's scrolling with the main window"
 msgstr "Synkronisér vinduets rulling med hovedvinduet"
 
-#: ../src/gnome2/parallel_dialog.c:356 ../src/gnome2/preferences_dialog.c:1985
+#: ../src/gnome2/parallel_dialog.c:356 ../src/gnome2/preferences_dialog.c:2070
 msgid "Parallel"
 msgstr "Parallell"
 
@@ -1233,114 +1240,154 @@ msgstr "Koble til / fra"
 msgid "Module Options"
 msgstr "Valg for moduler"
 
-#: ../src/gnome2/parallel_view.c:215 ../src/gnome2/sidebar.c:626
-#: ../src/gnome2/sidebar.c:632 ../src/gnome2/tabbed_browser.c:251
+#: ../src/gnome2/parallel_view.c:215 ../src/gnome2/sidebar.c:627
+#: ../src/gnome2/sidebar.c:633 ../src/gnome2/tabbed_browser.c:251
 #: ../src/main/sidebar.cc:640 ../src/main/sidebar.cc:996
 #: ../src/main/sidebar.cc:997 ../src/main/sidebar.cc:998
 msgid "Parallel View"
 msgstr "Parallellvisning"
 
-#: ../src/gnome2/preferences_dialog.c:897
+#: ../src/gnome2/preferences_dialog.c:867
 msgid "BibleSync session passphrase"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:899
+#: ../src/gnome2/preferences_dialog.c:869
 msgid "Phrase:"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1508
-#: ../src/gnome2/preferences_dialog.c:1545
-#: ../src/gnome2/preferences_dialog.c:1581
-#: ../src/gnome2/preferences_dialog.c:1615
-#: ../src/gnome2/preferences_dialog.c:1649
-#: ../src/gnome2/preferences_dialog.c:1683
-#: ../src/gnome2/preferences_dialog.c:1717
-#: ../src/gnome2/preferences_dialog.c:1752
-#: ../src/gnome2/preferences_dialog.c:1788
-#: ../src/gnome2/preferences_dialog.c:1839
-#: ../src/gnome2/preferences_dialog.c:2325
+#. mode selection failed? probably dead interface
+#: ../src/gnome2/preferences_dialog.c:947
+msgid ""
+"Mode selection failed.\n"
+"Set \"Debug\" and try again to see why."
+msgstr ""
+
+#: ../src/gnome2/preferences_dialog.c:1008
+#, fuzzy
+msgid "Mode selection failed.\n"
+msgstr "Les utvalget høyt"
+
+#: ../src/gnome2/preferences_dialog.c:1014
+#, c-format
+msgid "BibleSync: %s (passphrase \"%s\")."
+msgstr ""
+
+#: ../src/gnome2/preferences_dialog.c:1016
+msgid "Disabled"
+msgstr ""
+
+#: ../src/gnome2/preferences_dialog.c:1018 ../src/main/xml.c:93
+msgid "Personal"
+msgstr "Personlig"
+
+#: ../src/gnome2/preferences_dialog.c:1020
+msgid "Speaker"
+msgstr ""
+
+#: ../src/gnome2/preferences_dialog.c:1021
+msgid "Audience"
+msgstr ""
+
+#: ../src/gnome2/preferences_dialog.c:1592
+#: ../src/gnome2/preferences_dialog.c:1629
+#: ../src/gnome2/preferences_dialog.c:1665
+#: ../src/gnome2/preferences_dialog.c:1699
+#: ../src/gnome2/preferences_dialog.c:1733
+#: ../src/gnome2/preferences_dialog.c:1767
+#: ../src/gnome2/preferences_dialog.c:1801
+#: ../src/gnome2/preferences_dialog.c:1836
+#: ../src/gnome2/preferences_dialog.c:1872
+#: ../src/gnome2/preferences_dialog.c:1923
+#: ../src/gnome2/preferences_dialog.c:2400
 msgid "-- Select --"
 msgstr "-- Velg --"
 
 # Original text should probably say restart/ing Xiphos/, or someone might restart their _computer_...
-#: ../src/gnome2/preferences_dialog.c:1802
+#: ../src/gnome2/preferences_dialog.c:1886
 msgid "Locale will take effect after restart."
 msgstr "Lokaliseringen blir tatt i bruk etter at du starter Xiphos på nytt."
 
-#: ../src/gnome2/preferences_dialog.c:1874 ../ui/prefs.glade.h:1
+#: ../src/gnome2/preferences_dialog.c:1958 ../ui/prefs.glade.h:1
 #: ../ui/prefs.gtkbuilder.h:9
 msgid "Preferences"
 msgstr "Innstillinger"
 
-#: ../src/gnome2/preferences_dialog.c:1957
+#: ../src/gnome2/preferences_dialog.c:2043
 msgid "General"
 msgstr "Generelt"
 
-#: ../src/gnome2/preferences_dialog.c:1964
+#: ../src/gnome2/preferences_dialog.c:2046
 msgid "Options"
 msgstr "Muligheter"
 
-#: ../src/gnome2/preferences_dialog.c:1968
+#: ../src/gnome2/preferences_dialog.c:2049 ../ui/prefs.glade.h:85
+#: ../ui/prefs.gtkbuilder.h:85
+#, fuzzy
+msgid "BibleSync"
+msgstr "Bibel"
+
+#: ../src/gnome2/preferences_dialog.c:2053
 msgid "Fonts"
 msgstr "Skrift"
 
-#: ../src/gnome2/preferences_dialog.c:1971
+#: ../src/gnome2/preferences_dialog.c:2056
 msgid "Color"
 msgstr "Farge"
 
-#: ../src/gnome2/preferences_dialog.c:1974
+#: ../src/gnome2/preferences_dialog.c:2059
 msgid "Sizes and Faces"
 msgstr "Størrelser og Fonter"
 
-#: ../src/gnome2/preferences_dialog.c:1988
+#: ../src/gnome2/preferences_dialog.c:2073 ../ui/prefs.glade.h:71
+#: ../ui/prefs.gtkbuilder.h:71
 msgid "Special"
 msgstr "Spesial"
 
-#: ../src/gnome2/preferences_dialog.c:2707 ../src/gnome2/search_dialog.c:499
+#: ../src/gnome2/preferences_dialog.c:2782 ../src/gnome2/search_dialog.c:500
 msgid "Clear List?"
 msgstr "Tøm lista?"
 
-#: ../src/gnome2/preferences_dialog.c:2708 ../src/gnome2/search_dialog.c:500
+#: ../src/gnome2/preferences_dialog.c:2783 ../src/gnome2/search_dialog.c:501
 msgid "Are you sure you want to clear the module list?"
 msgstr "Er du sikker på at du vil slette lista med moduler?"
 
-#: ../src/gnome2/preferences_dialog.c:2753 ../src/main/search_dialog.cc:685
+#: ../src/gnome2/preferences_dialog.c:2828 ../src/main/search_dialog.cc:685
 msgid "Remove Module?"
 msgstr "Slett modul?"
 
-#: ../src/gnome2/preferences_dialog.c:2754 ../src/main/search_dialog.cc:686
+#: ../src/gnome2/preferences_dialog.c:2829 ../src/main/search_dialog.cc:686
 msgid "Are you sure you want to remove the selected module?"
 msgstr "Er du sikker på at du vil slette denne modulen?"
 
-#: ../src/gnome2/search_dialog.c:61 ../src/main/search_dialog.cc:52
+#: ../src/gnome2/search_dialog.c:62 ../src/main/search_dialog.cc:52
 #: ../src/main/search_sidebar.cc:51
 msgid "Searching the "
 msgstr "Søker gjennom "
 
-#: ../src/gnome2/search_dialog.c:62 ../src/main/search_dialog.cc:53
+#: ../src/gnome2/search_dialog.c:63 ../src/main/search_dialog.cc:53
 #: ../src/main/search_sidebar.cc:52
 msgid " Module"
 msgstr " Modul"
 
-#: ../src/gnome2/search_dialog.c:63 ../src/main/search_dialog.cc:54
+#: ../src/gnome2/search_dialog.c:64 ../src/main/search_dialog.cc:54
 #: ../src/main/search_sidebar.cc:53
 msgid "found in "
 msgstr "funnet i "
 
-#: ../src/gnome2/search_dialog.c:458
+#: ../src/gnome2/search_dialog.c:459
 #, c-format
 msgid "New List %s"
 msgstr "Ny liste: %s"
 
-#: ../src/gnome2/search_dialog.c:682
+#: ../src/gnome2/search_dialog.c:683
 msgid "The last module list may not be deleted"
 msgstr "Den siste modul listen kan ikke slettes"
 
-#: ../src/gnome2/search_dialog.c:700
+#: ../src/gnome2/search_dialog.c:701
 msgid "Delete list?"
 msgstr "Slett lista?"
 
-#: ../src/gnome2/search_dialog.c:701
+#: ../src/gnome2/search_dialog.c:702
 msgid "Are you sure you want to delete:"
 msgstr "Er du sikker på at du vil slette:"
 
@@ -1360,7 +1407,7 @@ msgstr "Er du sikker på at du vil slette:"
 #. * Return value
 #. *   void
 #.
-#: ../src/gnome2/search_dialog.c:824
+#: ../src/gnome2/search_dialog.c:825
 msgid ""
 "<b>Syntax overview for optimized \"lucene\" searches</b>\n"
 "Search for verses that contain...\n"
@@ -1431,7 +1478,7 @@ msgstr ""
 #. * Return value
 #. *   void
 #.
-#: ../src/gnome2/search_dialog.c:887
+#: ../src/gnome2/search_dialog.c:888
 msgid ""
 "<b>Attribute-based searches</b>\n"
 "Searches for content contained in markup outside the main text. Attributes "
@@ -1464,11 +1511,11 @@ msgstr ""
 "\"Substanvtiv (Noun), Akusativ Entall (Singular) Feminin\" -- se Robinson-"
 "modulen for mer informasjon."
 
-#: ../src/gnome2/search_dialog.c:1189
+#: ../src/gnome2/search_dialog.c:1190
 msgid "Module is neither Bible nor commentary"
 msgstr ""
 
-#: ../src/gnome2/search_dialog.c:1212 ../src/gnome2/sidebar.c:974
+#: ../src/gnome2/search_dialog.c:1213 ../src/gnome2/sidebar.c:998
 msgid "BibleSync is not active for transmit."
 msgstr ""
 
@@ -1497,8 +1544,8 @@ msgstr "Søkemodul"
 msgid "Bible"
 msgstr "Bibel"
 
-#: ../src/gnome2/search_sidebar.c:233 ../ui/prefs.glade.h:124
-#: ../ui/prefs.gtkbuilder.h:124
+#: ../src/gnome2/search_sidebar.c:233 ../ui/prefs.glade.h:132
+#: ../ui/prefs.gtkbuilder.h:132
 msgid "Commentary"
 msgstr "Kommentar"
 
@@ -1558,16 +1605,25 @@ msgstr "Nedre"
 msgid "Upper"
 msgstr "Øvre"
 
-#: ../src/gnome2/sidebar.c:849
+#: ../src/gnome2/sidebar.c:850
 #, fuzzy
 msgid "Open module in editor?"
 msgstr "Åpne i editor"
 
-#: ../src/gnome2/sidebar.c:849
+#: ../src/gnome2/sidebar.c:850
 msgid "If no, it will open for display only."
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:1475 ../src/gnome2/sidebar.c:1510
+#: ../src/gnome2/sidebar.c:952
+#, fuzzy
+msgid "Paste verse references"
+msgstr "Sett bruker innstillinger"
+
+#: ../src/gnome2/sidebar.c:954
+msgid "List:"
+msgstr ""
+
+#: ../src/gnome2/sidebar.c:1499 ../src/gnome2/sidebar.c:1534
 msgid "Search"
 msgstr "Søk"
 
@@ -1693,7 +1749,6 @@ msgid "Displaying Xiphos"
 msgstr "Viser Gbomesword"
 
 #: ../src/main/module_dialogs.cc:189 ../src/main/previewer.cc:97
-#: ../ui/prefs.glade.h:39 ../ui/prefs.gtkbuilder.h:39
 msgid "Previewer"
 msgstr "Program for forhåndsvisning"
 
@@ -1719,7 +1774,7 @@ msgstr "Referanser til kildetekst"
 msgid "Morphology"
 msgstr "Morfologi"
 
-#: ../src/main/module_dialogs.cc:1013 ../src/main/url.cc:523
+#: ../src/main/module_dialogs.cc:1013 ../src/main/url.cc:521
 msgid "Back to "
 msgstr "Tilbake til "
 
@@ -1755,7 +1810,8 @@ msgstr "Hebraisk betoning"
 msgid "Greek Accents"
 msgstr "Greske apostrofer"
 
-#: ../src/main/parallel_view.cc:443
+#: ../src/main/parallel_view.cc:443 ../ui/xi-menus.glade.h:72
+#: ../ui/xi-menus-popup.gtkbuilder.h:50
 msgid "Cross-references"
 msgstr "Kryssreferanser"
 
@@ -2147,7 +2203,7 @@ msgstr "vers"
 msgid "chapter"
 msgstr "kapittel"
 
-#: ../src/main/sword.cc:558
+#: ../src/main/sword.cc:554
 msgid ""
 "Xiphos's file for language\n"
 "abbreviations is missing."
@@ -2155,7 +2211,7 @@ msgstr ""
 "Xiphos's fil for språk\n"
 "forkortelser mangler."
 
-#: ../src/main/sword.cc:565
+#: ../src/main/sword.cc:561
 msgid ""
 "Xiphos's language abbreviation\n"
 "file cannot be opened."
@@ -2163,7 +2219,7 @@ msgstr ""
 "Xiphos's språk forkortelse\n"
 "filen kan ikke åpnes."
 
-#: ../src/main/sword.cc:578
+#: ../src/main/sword.cc:574
 msgid ""
 "Xiphos cannot allocate space\n"
 "for language abbreviations."
@@ -2172,7 +2228,7 @@ msgstr ""
 "for språk forkortelser."
 
 # NOTE linebreak in the middle of a sentence, in original
-#: ../src/main/sword.cc:585
+#: ../src/main/sword.cc:581
 msgid ""
 "Xiphos cannot read the\n"
 "language abbreviation file."
@@ -2181,7 +2237,7 @@ msgstr ""
 "filen med språkforkortelser."
 
 #. either we were given a null sys_locale, or it didn't match anything.
-#: ../src/main/sword.cc:667
+#: ../src/main/sword.cc:663
 #, c-format
 msgid ""
 "No matching locale found for `%s'.\n"
@@ -2190,11 +2246,11 @@ msgstr ""
 "Fant ikke noe passende lokale for '%s'.\n"
 "%s"
 
-#: ../src/main/sword.cc:669
+#: ../src/main/sword.cc:665
 msgid "Book names and menus may not be translated."
 msgstr "Det kan være at boknavn og menyer ikke er oversatt."
 
-#: ../src/main/sword.cc:1018 ../src/main/sword.cc:1183
+#: ../src/main/sword.cc:1014 ../src/main/sword.cc:1179
 #, c-format
 msgid ""
 "Module %s has companion modules:\n"
@@ -2202,7 +2258,7 @@ msgid ""
 "Would you like to open these as well?%s"
 msgstr ""
 
-#: ../src/main/sword.cc:1022 ../src/main/sword.cc:1187
+#: ../src/main/sword.cc:1018 ../src/main/sword.cc:1183
 msgid ""
 "\n"
 "\n"
@@ -2210,12 +2266,12 @@ msgid ""
 "and others in separate windows."
 msgstr ""
 
-#: ../src/main/sword.cc:1346
+#: ../src/main/sword.cc:1309
 msgid "Daily devotional was requested, but there are none installed."
 msgstr ""
 "Dagens tekst er slått på, men ingen modul for dagens tekst er installert."
 
-#: ../src/main/sword.cc:1576
+#: ../src/main/sword.cc:1539
 msgid ""
 "<b>Locked Module.</b>\n"
 "\n"
@@ -2265,10 +2321,6 @@ msgstr "Vis %s i hovedvinduet"
 #, c-format
 msgid "Document not created successfully. \n"
 msgstr "Dokumentet kunne ikke opprettes. \n"
-
-#: ../src/main/xml.c:93 ../ui/prefs.glade.h:96 ../ui/prefs.gtkbuilder.h:96
-msgid "Personal"
-msgstr "Personlig"
 
 #: ../src/main/xml.c:94
 msgid "What must I do to be saved?"
@@ -2459,7 +2511,7 @@ msgstr "Lag ny mappe"
 
 #: ../ui/bookmarks.glade.h:4 ../ui/bookmarks.gtkbuilder.h:4
 #: ../ui/markverse.glade.h:8 ../ui/markverse.gtkbuilder.h:8
-#: ../ui/xi-menus.glade.h:108 ../ui/xi-menus-popup.gtkbuilder.h:5
+#: ../ui/xi-menus.glade.h:110 ../ui/xi-menus-popup.gtkbuilder.h:5
 msgid "New Folder"
 msgstr "Ny mappe"
 
@@ -2649,7 +2701,7 @@ msgid "Export complete book"
 msgstr "Eksporter komplett bok"
 
 #: ../ui/export-dialog.glade.h:11 ../ui/export-dialog.gtkbuilder.h:10
-#: ../ui/prefs.glade.h:128 ../ui/prefs.gtkbuilder.h:128
+#: ../ui/prefs.glade.h:136 ../ui/prefs.gtkbuilder.h:136
 msgid "Book"
 msgstr "Bok"
 
@@ -2763,8 +2815,8 @@ msgstr "Åpne _Studieblokken"
 msgid "Open about dialog"
 msgstr "Åpne i et dialogvindu"
 
-#: ../ui/gtk2_webedit.ui.h:4 ../ui/gtk_webedit.ui.h:4 ../ui/prefs.glade.h:76
-#: ../ui/prefs.gtkbuilder.h:76
+#: ../ui/gtk2_webedit.ui.h:4 ../ui/gtk_webedit.ui.h:4 ../ui/prefs.glade.h:116
+#: ../ui/prefs.gtkbuilder.h:116
 msgid "Bold"
 msgstr "Halvfet"
 
@@ -2813,7 +2865,7 @@ msgid "Remove selection"
 msgstr "Fjern merket objekt"
 
 #: ../ui/gtk2_webedit.ui.h:16 ../ui/gtk_webedit.ui.h:16
-#: ../ui/xi-menus.glade.h:114 ../ui/xi-menus-popup.gtkbuilder.h:11
+#: ../ui/xi-menus.glade.h:116 ../ui/xi-menus-popup.gtkbuilder.h:11
 msgid "Delete Item"
 msgstr "Slett element"
 
@@ -3470,58 +3522,63 @@ msgid "Background"
 msgstr "Bakgrunn"
 
 #: ../ui/prefs.glade.h:5 ../ui/prefs.gtkbuilder.h:13
+#, fuzzy
+msgid " "
+msgstr ": "
+
+#: ../ui/prefs.glade.h:6 ../ui/prefs.gtkbuilder.h:14
 msgid "Foreground"
 msgstr "Forgrunn"
 
-#: ../ui/prefs.glade.h:6 ../ui/prefs.gtkbuilder.h:14
+#: ../ui/prefs.glade.h:7 ../ui/prefs.gtkbuilder.h:15
 msgid "Current Verse"
 msgstr "Nåværende Vers"
 
-#: ../ui/prefs.glade.h:7 ../ui/prefs.gtkbuilder.h:15
+#: ../ui/prefs.glade.h:8 ../ui/prefs.gtkbuilder.h:16
 msgid "Verse Number"
 msgstr "Versnummer"
 
-#: ../ui/prefs.glade.h:8 ../ui/prefs.gtkbuilder.h:16
+#: ../ui/prefs.glade.h:9 ../ui/prefs.gtkbuilder.h:17
 msgid "Links"
 msgstr "Lenker"
 
-#: ../ui/prefs.glade.h:9 ../ui/prefs.gtkbuilder.h:17
+#: ../ui/prefs.glade.h:10 ../ui/prefs.gtkbuilder.h:18
 msgid "Highlight Foreground"
 msgstr "Uthev forgrunn"
 
-#: ../ui/prefs.glade.h:10 ../ui/prefs.gtkbuilder.h:18
+#: ../ui/prefs.glade.h:11 ../ui/prefs.gtkbuilder.h:19
 msgid "Highlight Background"
 msgstr "Uthev bakgrunn"
 
-#: ../ui/prefs.glade.h:11 ../ui/prefs.gtkbuilder.h:19
+#: ../ui/prefs.glade.h:12 ../ui/prefs.gtkbuilder.h:20
 msgid "Invert color pairs"
 msgstr "Omvendte farger"
 
-#: ../ui/prefs.glade.h:12 ../ui/prefs.gtkbuilder.h:20
+#: ../ui/prefs.glade.h:13 ../ui/prefs.gtkbuilder.h:21
 msgid "Normal Text"
 msgstr "Normal tekst"
 
-#: ../ui/prefs.glade.h:13 ../ui/prefs.gtkbuilder.h:21
+#: ../ui/prefs.glade.h:14 ../ui/prefs.gtkbuilder.h:22
 msgid "Highlight"
 msgstr "Utheving"
 
-#: ../ui/prefs.glade.h:14 ../ui/prefs.gtkbuilder.h:22
+#: ../ui/prefs.glade.h:15 ../ui/prefs.gtkbuilder.h:23
 msgid "Font Colors"
 msgstr "Skriftfarge"
 
-#: ../ui/prefs.glade.h:15 ../ui/prefs.gtkbuilder.h:23
+#: ../ui/prefs.glade.h:16 ../ui/prefs.gtkbuilder.h:24
 msgid "<b>Font Sizes</b>"
 msgstr "<b>Skrift Størrelser</b>"
 
-#: ../ui/prefs.glade.h:16 ../ui/prefs.gtkbuilder.h:24
+#: ../ui/prefs.glade.h:17 ../ui/prefs.gtkbuilder.h:25
 msgid "All displayed font sizes are relative to this choice"
 msgstr "Alle viste fontstørrelser er relative til dette valget"
 
-#: ../ui/prefs.glade.h:17 ../ui/prefs.gtkbuilder.h:25
+#: ../ui/prefs.glade.h:18 ../ui/prefs.gtkbuilder.h:26
 msgid "Base font size"
 msgstr "Fontstørrelse: grunnoppsett"
 
-#: ../ui/prefs.glade.h:18
+#: ../ui/prefs.glade.h:19
 msgid ""
 "-2\n"
 "-1\n"
@@ -3541,117 +3598,300 @@ msgstr ""
 "+4\n"
 "+5"
 
-#: ../ui/prefs.glade.h:26 ../ui/prefs.gtkbuilder.h:26
+#: ../ui/prefs.glade.h:27 ../ui/prefs.gtkbuilder.h:27
 msgid "Commonly -1, to make verse numbers less obtrusive"
 msgstr "Vanligvis -1, for å dempe versnummerne"
 
-#: ../ui/prefs.glade.h:27 ../ui/prefs.gtkbuilder.h:27
+#: ../ui/prefs.glade.h:28 ../ui/prefs.gtkbuilder.h:28
 msgid "Verse number size"
 msgstr "Vers nummer størrelse"
 
-#: ../ui/prefs.glade.h:28 ../ui/prefs.gtkbuilder.h:28
+#: ../ui/prefs.glade.h:29 ../ui/prefs.gtkbuilder.h:29
 msgid ""
 "Name and size choice for any module in a given language; still overridden by "
 "a specific choice on a particular module"
 msgstr ""
 "Navn og størrelse for alle moduler i et gitt språk; kan overstyres per modul"
 
-#: ../ui/prefs.glade.h:29 ../ui/prefs.gtkbuilder.h:29
+#: ../ui/prefs.glade.h:30 ../ui/prefs.gtkbuilder.h:30
 msgid "Font preferences, per language"
 msgstr "Fontinstillinger, per språk"
 
-#: ../ui/prefs.glade.h:30 ../ui/prefs.gtkbuilder.h:30
+#: ../ui/prefs.glade.h:31 ../ui/prefs.gtkbuilder.h:31
 msgid "Language Font Combo"
 msgstr "Kombinasjonsboksen Språk/Skrifttype"
 
-#: ../ui/prefs.glade.h:31 ../ui/prefs.gtkbuilder.h:31
+#: ../ui/prefs.glade.h:32 ../ui/prefs.gtkbuilder.h:32
 msgid "Font Misc"
 msgstr "Instillinger for skrift"
 
-#: ../ui/prefs.glade.h:32 ../ui/prefs.gtkbuilder.h:32
-msgid "<b>Tabs</b>"
-msgstr "<b>Arkfaner</b>"
-
 #: ../ui/prefs.glade.h:33 ../ui/prefs.gtkbuilder.h:33
-msgid "Use tabbed browsing"
-msgstr "Bruk faneblader"
+#, fuzzy
+msgid "<b>BibleSync</b>"
+msgstr "<b>Skop</b>"
 
 #: ../ui/prefs.glade.h:34 ../ui/prefs.gtkbuilder.h:34
 msgid ""
-"Single selection of Bible+commentary+book+dictionary, or many sets of such "
-"selections in a tabbed interface"
+"Xiphos is the first Bible study program to provide an implementation of "
+"BibleSync, a synchronization protocol for Bible programs. If you work with "
+"multiple Bible programs, or if you work in a team, or if you have classroom "
+"activities using shared study, BibleSync can be a useful tool for you. "
+"BibleSync operates in 1 of 3 modes: Personal, to synchronize multiple Bible "
+"applications of your own, or in a working team; Speaker, to drive a lecture "
+"audience's Bible programs to follow along; Audience, to receive the "
+"speaker's navigation."
 msgstr ""
-"Enkeltvalg av Bibel+kommentar+bok+ordbok, eller mange sett av slike valg, i "
-"fliker"
 
 #: ../ui/prefs.glade.h:35 ../ui/prefs.gtkbuilder.h:35
-msgid "Use tabbed browsing Checkbox"
-msgstr "Bruk faneblad browsing Avkryssningsboks"
+msgid "Mode"
+msgstr ""
 
 #: ../ui/prefs.glade.h:36 ../ui/prefs.gtkbuilder.h:36
-msgid "<b>Show</b>"
-msgstr "<b>Vis</b>"
+msgid "Select the mode in which BibleSync should operate."
+msgstr ""
 
 #: ../ui/prefs.glade.h:37 ../ui/prefs.gtkbuilder.h:37
-msgid "Bible Texts"
-msgstr "Bibeltekster"
+msgid "_Off"
+msgstr ""
 
 #: ../ui/prefs.glade.h:38 ../ui/prefs.gtkbuilder.h:38
-msgid "Bible Texts Checkbox"
-msgstr "Bibeltekst Avkrysningsboks"
+msgid "Disable BibleSync."
+msgstr ""
+
+#: ../ui/prefs.glade.h:39 ../ui/prefs.gtkbuilder.h:39
+#, fuzzy
+msgid "BSP off radio button"
+msgstr "Bok Radio Knapp"
 
 #: ../ui/prefs.glade.h:40 ../ui/prefs.gtkbuilder.h:40
-msgid "Previewer Checkbox"
-msgstr "Forhåndsvisning Avkryssningsboks"
+msgid "_Speaker"
+msgstr ""
+
+#: ../ui/prefs.glade.h:41 ../ui/prefs.gtkbuilder.h:41
+msgid "Enable BibleSync as the speaker."
+msgstr ""
 
 #: ../ui/prefs.glade.h:42 ../ui/prefs.gtkbuilder.h:42
-msgid "Commentaries Checkbox"
-msgstr "Kommentarer Avkryssningsboks"
+#, fuzzy
+msgid "BSP speaker radio button"
+msgstr "Nøyaktig frase radioknapp"
 
 #: ../ui/prefs.glade.h:43 ../ui/prefs.gtkbuilder.h:43
-msgid "Dictionary/Lexicon"
-msgstr "Ordbok/leksikon"
+msgid "_Audience"
+msgstr ""
 
 #: ../ui/prefs.glade.h:44 ../ui/prefs.gtkbuilder.h:44
-msgid "Dictionary/Lexicon Checkbox"
-msgstr "Ordbok/Leksikon Avkryssningsboks"
+msgid "Enable BibleSync as a member of the audience."
+msgstr ""
 
 #: ../ui/prefs.glade.h:45 ../ui/prefs.gtkbuilder.h:45
-msgid "Parallel View in a tab"
-msgstr "Parallellvisning i en arkfane"
+#, fuzzy
+msgid "BSP audience radio button"
+msgstr "Enkel Tekst Radio Knapp"
 
 #: ../ui/prefs.glade.h:46 ../ui/prefs.gtkbuilder.h:46
-msgid "Tabs and Panes"
-msgstr "Arkfaner og paneler"
+#, fuzzy
+msgid "_Personal"
+msgstr "Personlig"
 
 #: ../ui/prefs.glade.h:47 ../ui/prefs.gtkbuilder.h:47
+msgid "Enable BibleSync for personal or team use."
+msgstr ""
+
+#: ../ui/prefs.glade.h:48 ../ui/prefs.gtkbuilder.h:48
+#, fuzzy
+msgid "BSP personal radio button"
+msgstr "Regulært uttrykk.radioknapp"
+
+#: ../ui/prefs.glade.h:49 ../ui/prefs.gtkbuilder.h:49
+msgid "Private"
+msgstr ""
+
+#: ../ui/prefs.glade.h:50 ../ui/prefs.gtkbuilder.h:50
+msgid ""
+"When in Personal mode, only programs running on this machine will hear your "
+"navigation."
+msgstr ""
+
+#: ../ui/prefs.glade.h:51 ../ui/prefs.gtkbuilder.h:51
+#, fuzzy
+msgid "BSP privacy button"
+msgstr "Vers Radio Knapp"
+
+#: ../ui/prefs.glade.h:52 ../ui/prefs.gtkbuilder.h:52
+#, fuzzy
+msgid "Navigate"
+msgstr "Frelse"
+
+#: ../ui/prefs.glade.h:53 ../ui/prefs.gtkbuilder.h:53
+msgid "Choose how to accept incoming navigation synchronization."
+msgstr ""
+
+#: ../ui/prefs.glade.h:54 ../ui/prefs.gtkbuilder.h:54
+#, fuzzy
+msgid "_Direct"
+msgstr "Mappe"
+
+#: ../ui/prefs.glade.h:55 ../ui/prefs.gtkbuilder.h:55
+msgid "BibleSync navigation will send Xiphos directly to the verse indicated."
+msgstr ""
+
+#: ../ui/prefs.glade.h:56 ../ui/prefs.gtkbuilder.h:56
+#, fuzzy
+msgid "BSP nav direct radio button"
+msgstr "Enkel modul radioknapp"
+
+#: ../ui/prefs.glade.h:57 ../ui/prefs.gtkbuilder.h:57
+#, fuzzy
+msgid "_Verse list"
+msgstr "Liste over vers"
+
+#: ../ui/prefs.glade.h:58 ../ui/prefs.gtkbuilder.h:58
+msgid "BibleSync navigation will use Xiphos' sidebar verse list."
+msgstr ""
+
+#: ../ui/prefs.glade.h:59 ../ui/prefs.gtkbuilder.h:59
+#, fuzzy
+msgid "BSP nav verse list radio button"
+msgstr "Modul-liste radioknapp"
+
+#: ../ui/prefs.glade.h:60 ../ui/prefs.gtkbuilder.h:60
+msgid "Listen"
+msgstr ""
+
+#: ../ui/prefs.glade.h:61 ../ui/prefs.gtkbuilder.h:61
+msgid "Xiphos will listen to Speakers according to choice here."
+msgstr ""
+
+#: ../ui/prefs.glade.h:62 ../ui/prefs.gtkbuilder.h:62
+msgid "Selective"
+msgstr ""
+
+#: ../ui/prefs.glade.h:63 ../ui/prefs.gtkbuilder.h:63
+msgid "Choose the Speakers to be followed."
+msgstr ""
+
+#: ../ui/prefs.glade.h:64 ../ui/prefs.gtkbuilder.h:64
+#, fuzzy
+msgid "BSP listen some radio button"
+msgstr "Enkel Tekst Radio Knapp"
+
+#: ../ui/prefs.glade.h:65 ../ui/prefs.gtkbuilder.h:65
+msgid "All"
+msgstr ""
+
+#: ../ui/prefs.glade.h:66 ../ui/prefs.gtkbuilder.h:66
+msgid "All Speakers will be followed."
+msgstr ""
+
+#: ../ui/prefs.glade.h:67 ../ui/prefs.gtkbuilder.h:67
+#, fuzzy
+msgid "BSP listen all radio button"
+msgstr "Regulært uttrykk.radioknapp"
+
+#: ../ui/prefs.glade.h:68 ../ui/prefs.gtkbuilder.h:68
+msgid "None"
+msgstr ""
+
+#: ../ui/prefs.glade.h:69 ../ui/prefs.gtkbuilder.h:69
+msgid "No Speakers will be followed."
+msgstr ""
+
+#: ../ui/prefs.glade.h:70 ../ui/prefs.gtkbuilder.h:70
+#, fuzzy
+msgid "BSP listen none radio button"
+msgstr "Enkel Tekst Radio Knapp"
+
+#: ../ui/prefs.glade.h:72 ../ui/prefs.gtkbuilder.h:72
+msgid ""
+"Additional traces can be presented during BibleSync operation by enabling "
+"presence, mismatch, and debug. Beware enabling these, they can be very "
+"chatty. Also, decide whether to allow group parameter as Xiphos' tab number."
+msgstr ""
+
+#: ../ui/prefs.glade.h:73 ../ui/prefs.gtkbuilder.h:73
+#, fuzzy
+msgid "Presence"
+msgstr "Innstillinger"
+
+#: ../ui/prefs.glade.h:74 ../ui/prefs.gtkbuilder.h:74
+msgid "Presence announcements will be shown in dialogs."
+msgstr ""
+
+#: ../ui/prefs.glade.h:75 ../ui/prefs.gtkbuilder.h:75
+#, fuzzy
+msgid "BSP presence button"
+msgstr "Vers Radio Knapp"
+
+#: ../ui/prefs.glade.h:76 ../ui/prefs.gtkbuilder.h:76
+#, fuzzy
+msgid "Mismatch"
+msgstr "søkeresultater"
+
+#: ../ui/prefs.glade.h:77 ../ui/prefs.gtkbuilder.h:77
+msgid "Mismatches from your session will be shown in dialogs."
+msgstr ""
+
+#: ../ui/prefs.glade.h:78 ../ui/prefs.gtkbuilder.h:78
+msgid "BSP mismatch button"
+msgstr ""
+
+#: ../ui/prefs.glade.h:79 ../ui/prefs.gtkbuilder.h:79
+msgid "Debug"
+msgstr ""
+
+#: ../ui/prefs.glade.h:80 ../ui/prefs.gtkbuilder.h:80
+msgid "Packet tracing."
+msgstr ""
+
+#: ../ui/prefs.glade.h:81 ../ui/prefs.gtkbuilder.h:81
+msgid "BSP event debug button"
+msgstr ""
+
+#: ../ui/prefs.glade.h:82 ../ui/prefs.gtkbuilder.h:82
+msgid "_Group as tab"
+msgstr ""
+
+#: ../ui/prefs.glade.h:83 ../ui/prefs.gtkbuilder.h:83
+msgid ""
+"Interpret the protocol's group number parameter as Xiphos' tab number. "
+"Disabling this may be necessary if some Speakers' use of group number is not "
+"appropriate as a tab number."
+msgstr ""
+
+#: ../ui/prefs.glade.h:84 ../ui/prefs.gtkbuilder.h:84
+#, fuzzy
+msgid "BSP event group-as-tab button"
+msgstr "Enkel modul radioknapp"
+
+#: ../ui/prefs.glade.h:86 ../ui/prefs.gtkbuilder.h:86
 msgid "<b>General</b>"
 msgstr "<b>Generelt</b>"
 
-#: ../ui/prefs.glade.h:48 ../ui/prefs.gtkbuilder.h:48
+#: ../ui/prefs.glade.h:87 ../ui/prefs.gtkbuilder.h:87
 msgid ""
 "Select a particular language for interface display, other than your usual "
 "setting"
 msgstr ""
 "Velg et bestemt språk for grenseflaten, avvikende fra systemets innstilling"
 
-#: ../ui/prefs.glade.h:49 ../ui/prefs.gtkbuilder.h:49
+#: ../ui/prefs.glade.h:88 ../ui/prefs.gtkbuilder.h:88
 msgid "Special Locale (requires restart)"
 msgstr "Egendefinert lokale (krever omstart av programmet)"
 
-#: ../ui/prefs.glade.h:50 ../ui/prefs.gtkbuilder.h:50
+#: ../ui/prefs.glade.h:89 ../ui/prefs.gtkbuilder.h:89
 msgid "Special Locale Combo"
 msgstr "Kombinasjonsboks for Lokale"
 
-#: ../ui/prefs.glade.h:51 ../ui/prefs.gtkbuilder.h:51
+#: ../ui/prefs.glade.h:90 ../ui/prefs.gtkbuilder.h:90
 msgid "Show splash screen at start up"
 msgstr "Vis oppstartbilde"
 
-#: ../ui/prefs.glade.h:52 ../ui/prefs.gtkbuilder.h:52
+#: ../ui/prefs.glade.h:91 ../ui/prefs.gtkbuilder.h:91
 msgid "Show Daily Devotion at start up"
 msgstr "Vis dagens tekst ved oppstart"
 
-#: ../ui/prefs.glade.h:53 ../ui/prefs.gtkbuilder.h:53
+#: ../ui/prefs.glade.h:92 ../ui/prefs.gtkbuilder.h:92
 msgid ""
 "If you have set a preferred daily devotion module, its entry for today will "
 "be shown at startup."
@@ -3659,11 +3899,11 @@ msgstr ""
 "Hvis du har satt opp en modul med dagens tekst, vil dagens artikkel vises "
 "når du starter programmet."
 
-#: ../ui/prefs.glade.h:54 ../ui/prefs.gtkbuilder.h:54
+#: ../ui/prefs.glade.h:93 ../ui/prefs.gtkbuilder.h:93
 msgid "Use default Dictionary"
 msgstr "Bruk standard ordbok"
 
-#: ../ui/prefs.glade.h:55 ../ui/prefs.gtkbuilder.h:55
+#: ../ui/prefs.glade.h:94 ../ui/prefs.gtkbuilder.h:94
 msgid ""
 "Make double-click of a word always use default dictionary instead of "
 "dictionary currently displayed"
@@ -3671,402 +3911,260 @@ msgstr ""
 "Når jeg dobbelklikker et ord, søk det opp i standardordboken i steden for "
 "den ordboken som vises for øyeblikket"
 
-#: ../ui/prefs.glade.h:56 ../ui/prefs.gtkbuilder.h:56
+#: ../ui/prefs.glade.h:95 ../ui/prefs.gtkbuilder.h:95
 msgid "Use default Dictionary Checkbox"
 msgstr "Bruk standard Ordbok Avkryssningboks"
 
-#: ../ui/prefs.glade.h:57 ../ui/prefs.gtkbuilder.h:57
+#: ../ui/prefs.glade.h:96 ../ui/prefs.gtkbuilder.h:96
 msgid "Scroll to Previous/Next Chapter"
 msgstr "Gå til forrige/neste kapittel"
 
-#: ../ui/prefs.glade.h:58 ../ui/prefs.gtkbuilder.h:58
+#: ../ui/prefs.glade.h:97 ../ui/prefs.gtkbuilder.h:97
 msgid "Use Bible Text scroll bar to scroll to previous or next chapter"
 msgstr "Bruk rullefeltet for bibeltekst til å gå til forrige/neste kapittel"
 
-#: ../ui/prefs.glade.h:59 ../ui/prefs.gtkbuilder.h:59
+#: ../ui/prefs.glade.h:98 ../ui/prefs.gtkbuilder.h:98
 msgid "Scroll to Previous/Next Chapter Checkbox"
 msgstr "Scroll til Tidligere/Neste Kapittel Avkryssningsboks"
 
-#: ../ui/prefs.glade.h:60 ../ui/prefs.gtkbuilder.h:60
+#: ../ui/prefs.glade.h:99 ../ui/prefs.gtkbuilder.h:99
 msgid "Resize images"
 msgstr "Endre størrelse på bilde"
 
-#: ../ui/prefs.glade.h:61 ../ui/prefs.gtkbuilder.h:61
+#: ../ui/prefs.glade.h:100 ../ui/prefs.gtkbuilder.h:100
 msgid "Automatically resize image content to fit the pane"
 msgstr "Endre størrelse på bilder automatisk, så de passer i feltet"
 
-#: ../ui/prefs.glade.h:62 ../ui/prefs.gtkbuilder.h:62
+#: ../ui/prefs.glade.h:101 ../ui/prefs.gtkbuilder.h:101
 msgid "Resize images checkbox"
 msgstr "Endre størrelse på bilde Avkryssningsboks"
 
-#: ../ui/prefs.glade.h:63 ../ui/prefs.gtkbuilder.h:63
+#: ../ui/prefs.glade.h:102 ../ui/prefs.gtkbuilder.h:102
 msgid "Highlight current verse"
 msgstr "Uthev valgt vers"
 
-#: ../ui/prefs.glade.h:64 ../ui/prefs.gtkbuilder.h:64
+#: ../ui/prefs.glade.h:103 ../ui/prefs.gtkbuilder.h:103
 msgid "Apply high-contrast highlight to current verse - see color pickers"
 msgstr "Uthev det valgte verset med høy kontrast - se fargevelgerne"
 
-#: ../ui/prefs.glade.h:65 ../ui/prefs.gtkbuilder.h:65
+#: ../ui/prefs.glade.h:104 ../ui/prefs.gtkbuilder.h:104
 msgid "Highlight current verse check box"
 msgstr "Avkryssningboksen Uthev nåværende vers"
 
-#: ../ui/prefs.glade.h:66 ../ui/prefs.gtkbuilder.h:66
+#: ../ui/prefs.glade.h:105 ../ui/prefs.gtkbuilder.h:105
 msgid "Highlight user annotations"
 msgstr "Uthev brukernotater"
 
-#: ../ui/prefs.glade.h:67 ../ui/prefs.gtkbuilder.h:67
+#: ../ui/prefs.glade.h:106 ../ui/prefs.gtkbuilder.h:106
 msgid "Use inverted highlight on user-annotated verses"
 msgstr "Uthev bruker-kommenterte vers med inverterte farger"
 
-#: ../ui/prefs.glade.h:68 ../ui/prefs.gtkbuilder.h:68
+#: ../ui/prefs.glade.h:107 ../ui/prefs.gtkbuilder.h:107
 msgid "Highlight user annotations check box"
 msgstr "Avkryssningboksen Uthev brukerkommentarer"
 
-#: ../ui/prefs.glade.h:69 ../ui/prefs.gtkbuilder.h:69
+#: ../ui/prefs.glade.h:108 ../ui/prefs.gtkbuilder.h:108
 msgid "Cross-references in verse list"
 msgstr "Kryssreferanser i verslisten"
 
-#: ../ui/prefs.glade.h:70 ../ui/prefs.gtkbuilder.h:70
+#: ../ui/prefs.glade.h:109 ../ui/prefs.gtkbuilder.h:109
 msgid "Use the verse list for Bible cross-references instead of the previewer"
 msgstr "Bruk verslisten, ikke forhåndsvisningen, for kryssreferanser i Bibelen"
 
-#: ../ui/prefs.glade.h:71 ../ui/prefs.gtkbuilder.h:71
+#: ../ui/prefs.glade.h:110 ../ui/prefs.gtkbuilder.h:110
 msgid "Xrefs in verse list check box"
 msgstr "Avkryssningboksen Kryssreferanser i versliste"
 
-#: ../ui/prefs.glade.h:72 ../ui/prefs.gtkbuilder.h:72
+#: ../ui/prefs.glade.h:111 ../ui/prefs.gtkbuilder.h:111
 msgid "Enable Prayer Lists"
 msgstr "Gjør aktiv Bønne Liste"
 
-#: ../ui/prefs.glade.h:73 ../ui/prefs.gtkbuilder.h:73
+#: ../ui/prefs.glade.h:112 ../ui/prefs.gtkbuilder.h:112
 msgid "Make journals/prayer lists available"
 msgstr "Gjør Journaler/Bønnelister tilgjengelig"
 
-#: ../ui/prefs.glade.h:74 ../ui/prefs.gtkbuilder.h:74
+#: ../ui/prefs.glade.h:113 ../ui/prefs.gtkbuilder.h:113
 msgid "Enable Prayer Lists Checkbox"
 msgstr "Aktivere Bønneliste Sjekkboks"
 
-#: ../ui/prefs.glade.h:75 ../ui/prefs.gtkbuilder.h:75
-msgid "Verse number:"
+#: ../ui/prefs.glade.h:114 ../ui/prefs.gtkbuilder.h:114
+#, fuzzy
+msgid "Verse number"
 msgstr "Versnummer:"
 
-#: ../ui/prefs.glade.h:77 ../ui/prefs.gtkbuilder.h:77
+#: ../ui/prefs.glade.h:115 ../ui/prefs.gtkbuilder.h:115
+msgid "Offset the verse number in several ways"
+msgstr ""
+
+#: ../ui/prefs.glade.h:117 ../ui/prefs.gtkbuilder.h:117
 msgid "Show verse number in bold text"
 msgstr "Vis versnummer i halvfete typer"
 
-#: ../ui/prefs.glade.h:78 ../ui/prefs.gtkbuilder.h:78
+#: ../ui/prefs.glade.h:118 ../ui/prefs.gtkbuilder.h:118
 msgid "Verse number bold checkbox"
 msgstr "Avkrysningsboksen Versnummer i halvfet"
 
-#: ../ui/prefs.glade.h:79 ../ui/prefs.gtkbuilder.h:79
+#: ../ui/prefs.glade.h:119 ../ui/prefs.gtkbuilder.h:119
 msgid "Brackets"
 msgstr "Klammer"
 
-#: ../ui/prefs.glade.h:80 ../ui/prefs.gtkbuilder.h:80
+#: ../ui/prefs.glade.h:120 ../ui/prefs.gtkbuilder.h:120
 msgid "Show verse number with [surrounding brackets]"
 msgstr "Vis versnummer i [klammer]"
 
-#: ../ui/prefs.glade.h:81 ../ui/prefs.gtkbuilder.h:81
+#: ../ui/prefs.glade.h:121 ../ui/prefs.gtkbuilder.h:121
 msgid "Verse number bracket checkbox"
 msgstr "Avkrysningsboksen Versnummer i klammer"
 
-#: ../ui/prefs.glade.h:82 ../ui/prefs.gtkbuilder.h:82
+#: ../ui/prefs.glade.h:122 ../ui/prefs.gtkbuilder.h:122
 msgid "Superscript"
 msgstr "Hevet skrift"
 
-#: ../ui/prefs.glade.h:83 ../ui/prefs.gtkbuilder.h:83
+#: ../ui/prefs.glade.h:123 ../ui/prefs.gtkbuilder.h:123
 msgid "Show verse number as a superscript"
 msgstr "Vis versnumre i hevet skrift"
 
-#: ../ui/prefs.glade.h:84 ../ui/prefs.gtkbuilder.h:84
+#: ../ui/prefs.glade.h:124 ../ui/prefs.gtkbuilder.h:124
 msgid "Verse number superscript checkbox"
 msgstr "Avkrysningsboksen Versnummer i hevet skrift"
 
-#: ../ui/prefs.glade.h:85 ../ui/prefs.gtkbuilder.h:85
-msgid ""
-"Xiphos is the first Bible study program to provide an implementation of "
-"BibleSync, a new synchronization protocol for Bible programs. If you work "
-"with multiple Bible programs, or if you work in a team, or you have "
-"classroom activities using shared study, BibleSync is a useful tool for you."
-msgstr ""
-
-#: ../ui/prefs.glade.h:86 ../ui/prefs.gtkbuilder.h:86
-msgid ""
-"BibleSync Protocol is a method for synchronization of BSP-compatible Bible "
-"programs. It operates in 1 of 3 modes: Personal, to synchronize multiple "
-"Bible applications of your own, or in a working team; Speaker, to drive a "
-"lecture audience's Bible programs to follow along; Audience, to receive the "
-"speaker's navigation. Select its mode here."
-msgstr ""
-
-#: ../ui/prefs.glade.h:87 ../ui/prefs.gtkbuilder.h:87
-msgid "Off"
-msgstr ""
-
-#: ../ui/prefs.glade.h:88 ../ui/prefs.gtkbuilder.h:88
-msgid "Disable BibleSync."
-msgstr ""
-
-#: ../ui/prefs.glade.h:89 ../ui/prefs.gtkbuilder.h:89
-#, fuzzy
-msgid "BSP off radio button"
-msgstr "Bok Radio Knapp"
-
-#: ../ui/prefs.glade.h:90 ../ui/prefs.gtkbuilder.h:90
-msgid "Speaker"
-msgstr ""
-
-#: ../ui/prefs.glade.h:91 ../ui/prefs.gtkbuilder.h:91
-msgid "Enable BibleSync as the speaker."
-msgstr ""
-
-#: ../ui/prefs.glade.h:92 ../ui/prefs.gtkbuilder.h:92
-#, fuzzy
-msgid "BSP speaker radio button"
-msgstr "Nøyaktig frase radioknapp"
-
-#: ../ui/prefs.glade.h:93 ../ui/prefs.gtkbuilder.h:93
-msgid "Audience"
-msgstr ""
-
-#: ../ui/prefs.glade.h:94 ../ui/prefs.gtkbuilder.h:94
-msgid "Enable BibleSync as a member of the audience."
-msgstr ""
-
-#: ../ui/prefs.glade.h:95 ../ui/prefs.gtkbuilder.h:95
-#, fuzzy
-msgid "BSP audience radio button"
-msgstr "Enkel Tekst Radio Knapp"
-
-#: ../ui/prefs.glade.h:97 ../ui/prefs.gtkbuilder.h:97
-msgid "Enable BibleSync for personal or team use."
-msgstr ""
-
-#: ../ui/prefs.glade.h:98 ../ui/prefs.gtkbuilder.h:98
-#, fuzzy
-msgid "BSP personal radio button"
-msgstr "Regulært uttrykk.radioknapp"
-
-#: ../ui/prefs.glade.h:99 ../ui/prefs.gtkbuilder.h:99
-#, fuzzy
-msgid "Direct"
-msgstr "Mappe"
-
-#: ../ui/prefs.glade.h:100 ../ui/prefs.gtkbuilder.h:100
-msgid "BibleSync navigation will send Xiphos directly to the verse indicated."
-msgstr ""
-
-#: ../ui/prefs.glade.h:101 ../ui/prefs.gtkbuilder.h:101
-#, fuzzy
-msgid "BSP nav direct radio button"
-msgstr "Enkel modul radioknapp"
-
-#: ../ui/prefs.glade.h:102 ../ui/prefs.gtkbuilder.h:102
-#, fuzzy
-msgid "Verse list"
-msgstr "Liste over vers"
-
-#: ../ui/prefs.glade.h:103 ../ui/prefs.gtkbuilder.h:103
-msgid "BibleSync navigation will use Xiphos' verse list."
-msgstr ""
-
-#: ../ui/prefs.glade.h:104 ../ui/prefs.gtkbuilder.h:104
-#, fuzzy
-msgid "BSP nav verse list radio button"
-msgstr "Modul-liste radioknapp"
-
-#: ../ui/prefs.glade.h:105 ../ui/prefs.gtkbuilder.h:105
-#, fuzzy
-msgid "Presence"
-msgstr "Innstillinger"
-
-#: ../ui/prefs.glade.h:106 ../ui/prefs.gtkbuilder.h:106
-msgid "\"Presence\" announcements will be shown in dialogs."
-msgstr ""
-
-#: ../ui/prefs.glade.h:107 ../ui/prefs.gtkbuilder.h:107
-#, fuzzy
-msgid "BSP presence button"
-msgstr "Vers Radio Knapp"
-
-#: ../ui/prefs.glade.h:108 ../ui/prefs.gtkbuilder.h:108
-#, fuzzy
-msgid "Mismatch"
-msgstr "søkeresultater"
-
-#: ../ui/prefs.glade.h:109 ../ui/prefs.gtkbuilder.h:109
-msgid "Mismatches from your session will be shown in dialogs."
-msgstr ""
-
-#: ../ui/prefs.glade.h:110 ../ui/prefs.gtkbuilder.h:110
-msgid "BSP mismatch button"
-msgstr ""
-
-#: ../ui/prefs.glade.h:111 ../ui/prefs.gtkbuilder.h:111
-msgid "Debug"
-msgstr ""
-
-#: ../ui/prefs.glade.h:112 ../ui/prefs.gtkbuilder.h:112
-msgid "Packet tracing."
-msgstr ""
-
-#: ../ui/prefs.glade.h:113 ../ui/prefs.gtkbuilder.h:113
-msgid "BSP event debug button"
-msgstr ""
-
-#: ../ui/prefs.glade.h:114 ../ui/prefs.gtkbuilder.h:114
-msgid "Private"
-msgstr ""
-
-#: ../ui/prefs.glade.h:115 ../ui/prefs.gtkbuilder.h:115
-msgid ""
-"When in Personal mode, only programs running on this machine will hear your "
-"navigation."
-msgstr ""
-
-#: ../ui/prefs.glade.h:116 ../ui/prefs.gtkbuilder.h:116
-#, fuzzy
-msgid "BSP privacy button"
-msgstr "Vers Radio Knapp"
-
-#: ../ui/prefs.glade.h:117 ../ui/prefs.gtkbuilder.h:117
+#: ../ui/prefs.glade.h:125 ../ui/prefs.gtkbuilder.h:125
 #, fuzzy
 msgid "StudyPad default directory"
 msgstr "Studieblokk standard oppslag combo"
 
-#: ../ui/prefs.glade.h:118 ../ui/prefs.gtkbuilder.h:118
+#: ../ui/prefs.glade.h:126 ../ui/prefs.gtkbuilder.h:126
 msgid "Select A Directory"
 msgstr "Velg en mappe"
 
-#: ../ui/prefs.glade.h:119 ../ui/prefs.gtkbuilder.h:119
+#: ../ui/prefs.glade.h:127 ../ui/prefs.gtkbuilder.h:127
 msgid "StudyPad default directory combo"
 msgstr "Studieblokk standard oppslag combo"
 
-#: ../ui/prefs.glade.h:120 ../ui/prefs.gtkbuilder.h:120
+#: ../ui/prefs.glade.h:128 ../ui/prefs.gtkbuilder.h:128
 msgid "General Misc"
 msgstr "Ymse forskjellig"
 
-#: ../ui/prefs.glade.h:121 ../ui/prefs.gtkbuilder.h:121
+#: ../ui/prefs.glade.h:129 ../ui/prefs.gtkbuilder.h:129
 msgid "<b>Main Window Modules</b>"
 msgstr "<b>Hovedmoduler for vinduer</b>"
 
-#: ../ui/prefs.glade.h:122 ../ui/prefs.gtkbuilder.h:122
+#: ../ui/prefs.glade.h:130 ../ui/prefs.gtkbuilder.h:130
 msgid "Biblical Text"
 msgstr "Bibelutdrag"
 
-#: ../ui/prefs.glade.h:123 ../ui/prefs.gtkbuilder.h:123
+#: ../ui/prefs.glade.h:131 ../ui/prefs.gtkbuilder.h:131
 msgid "Change Biblical Text Combo"
 msgstr "Endre Bibelske Tekster Combo"
 
-#: ../ui/prefs.glade.h:125 ../ui/prefs.gtkbuilder.h:125
+#: ../ui/prefs.glade.h:133 ../ui/prefs.gtkbuilder.h:133
 msgid "Change Commentary Combo"
 msgstr "Endre Kommentar Combo"
 
-#: ../ui/prefs.glade.h:126 ../ui/prefs.gtkbuilder.h:126
+#: ../ui/prefs.glade.h:134 ../ui/prefs.gtkbuilder.h:134
 msgid "Dictionary"
 msgstr "Ordbok"
 
-#: ../ui/prefs.glade.h:127 ../ui/prefs.gtkbuilder.h:127
+#: ../ui/prefs.glade.h:135 ../ui/prefs.gtkbuilder.h:135
 msgid "Change Dictionary Combo"
 msgstr "Endre Ordbok Combo"
 
-#: ../ui/prefs.glade.h:129 ../ui/prefs.gtkbuilder.h:129
+#: ../ui/prefs.glade.h:137 ../ui/prefs.gtkbuilder.h:137
 msgid "Change Book Combo"
 msgstr "Endre Bok Combo"
 
-#: ../ui/prefs.glade.h:130 ../ui/prefs.gtkbuilder.h:130
+#: ../ui/prefs.glade.h:138 ../ui/prefs.gtkbuilder.h:138
 #: ../ui/search-dialog.glade.h:22 ../ui/search-dialog.gtkbuilder.h:23
 msgid "<b>Modules</b>"
 msgstr "<b>Moduler</b>"
 
-#: ../ui/prefs.glade.h:131 ../ui/prefs.gtkbuilder.h:131
+#: ../ui/prefs.glade.h:139 ../ui/prefs.gtkbuilder.h:139
 #: ../ui/search-dialog.glade.h:86 ../ui/search-dialog.gtkbuilder.h:86
 msgid "Clear all modules from the list"
 msgstr "Fjern alle moduler fra lista"
 
-#: ../ui/prefs.glade.h:132 ../ui/prefs.gtkbuilder.h:132
+#: ../ui/prefs.glade.h:140 ../ui/prefs.gtkbuilder.h:140
 #: ../ui/search-dialog.glade.h:87 ../ui/search-dialog.gtkbuilder.h:87
 msgid "Clear Modules from List Button"
 msgstr "Fjern Moduler fra Lista Knapp"
 
-#: ../ui/prefs.glade.h:133 ../ui/prefs.gtkbuilder.h:133
+#: ../ui/prefs.glade.h:141 ../ui/prefs.gtkbuilder.h:141
 #: ../ui/search-dialog.glade.h:88 ../ui/search-dialog.gtkbuilder.h:88
 msgid "Remove the selected module from the list"
 msgstr "Fjern valgt modul fra lista"
 
-#: ../ui/prefs.glade.h:134 ../ui/prefs.gtkbuilder.h:134
+#: ../ui/prefs.glade.h:142 ../ui/prefs.gtkbuilder.h:142
 #: ../ui/search-dialog.glade.h:89 ../ui/search-dialog.gtkbuilder.h:89
 msgid "Delete Selected Module From List Button"
 msgstr "Fjern Valgt Modul Fra Liste Knapp"
 
-#: ../ui/prefs.glade.h:135 ../ui/prefs.gtkbuilder.h:135
+#: ../ui/prefs.glade.h:143 ../ui/prefs.gtkbuilder.h:143
 msgid "Open a dialog to select modules"
 msgstr "Åpner et dialogvindu hvor du kan velge moduler"
 
-#: ../ui/prefs.glade.h:136 ../ui/prefs.gtkbuilder.h:136
+#: ../ui/prefs.glade.h:144 ../ui/prefs.gtkbuilder.h:144
 #: ../ui/search-dialog.glade.h:91 ../ui/search-dialog.gtkbuilder.h:91
 msgid "Add Modules"
 msgstr "Legg inn moduler"
 
-#: ../ui/prefs.glade.h:137 ../ui/prefs.gtkbuilder.h:137
+#: ../ui/prefs.glade.h:145 ../ui/prefs.gtkbuilder.h:145
 #: ../ui/search-dialog.glade.h:92 ../ui/search-dialog.gtkbuilder.h:92
 msgid "Open Selection Dialog Button"
 msgstr "Åpne Utvalg Dialog Knapp"
 
-#: ../ui/prefs.glade.h:138 ../ui/prefs.gtkbuilder.h:138
+#: ../ui/prefs.glade.h:146 ../ui/prefs.gtkbuilder.h:146
 msgid "Modules Parallel"
 msgstr "Parallell-moduler"
 
-#: ../ui/prefs.glade.h:139 ../ui/prefs.gtkbuilder.h:139
+#: ../ui/prefs.glade.h:147 ../ui/prefs.gtkbuilder.h:147
 msgid "<b>Special Purpose Modules</b>"
 msgstr "<b>Spesial Moduler</b>"
 
-#: ../ui/prefs.glade.h:140 ../ui/prefs.gtkbuilder.h:140
+#: ../ui/prefs.glade.h:148 ../ui/prefs.gtkbuilder.h:148
 msgid "Daily Devotional"
 msgstr "Dagens tekst"
 
-#: ../ui/prefs.glade.h:141 ../ui/prefs.gtkbuilder.h:141
+#: ../ui/prefs.glade.h:149 ../ui/prefs.gtkbuilder.h:149
 msgid "Daily Devotional Combo"
 msgstr "Dagens Andakt Combo"
 
-#: ../ui/prefs.glade.h:142 ../ui/prefs.gtkbuilder.h:142
+#: ../ui/prefs.glade.h:150 ../ui/prefs.gtkbuilder.h:150
 msgid "Hebrew Lexicon"
 msgstr "Hebraisk Leksikon"
 
-#: ../ui/prefs.glade.h:143 ../ui/prefs.gtkbuilder.h:143
+#: ../ui/prefs.glade.h:151 ../ui/prefs.gtkbuilder.h:151
 msgid "Hebrew Lexicon Combo"
 msgstr "Hebraisk Leksikon Combo"
 
-#: ../ui/prefs.glade.h:144 ../ui/prefs.gtkbuilder.h:144
+#: ../ui/prefs.glade.h:152 ../ui/prefs.gtkbuilder.h:152
 msgid "Greek Lexicon"
 msgstr "Gresk Leksikon"
 
-#: ../ui/prefs.glade.h:145 ../ui/prefs.gtkbuilder.h:145
+#: ../ui/prefs.glade.h:153 ../ui/prefs.gtkbuilder.h:153
 msgid "Greek Lexicon Combo"
 msgstr "Gresk Leksikon Combo"
 
-#: ../ui/prefs.glade.h:146 ../ui/prefs.gtkbuilder.h:146
+#: ../ui/prefs.glade.h:154 ../ui/prefs.gtkbuilder.h:154
 msgid "Default Dictionary"
 msgstr "Standard ordbok"
 
-#: ../ui/prefs.glade.h:147 ../ui/prefs.gtkbuilder.h:147
+#: ../ui/prefs.glade.h:155 ../ui/prefs.gtkbuilder.h:155
 msgid "Change Default Dictionary Combo"
 msgstr "Endre Forhåndsvalg Ordbok Combo"
 
-#: ../ui/prefs.glade.h:148 ../ui/prefs.gtkbuilder.h:148
+#: ../ui/prefs.glade.h:156 ../ui/prefs.gtkbuilder.h:156
 msgid "Personal Notes"
 msgstr "Personlige notater"
 
-#: ../ui/prefs.glade.h:149 ../ui/prefs.gtkbuilder.h:149
+#: ../ui/prefs.glade.h:157 ../ui/prefs.gtkbuilder.h:157
 msgid "Change Personal Notes Combo"
 msgstr "Endre Personlige Notater Combo"
 
-#: ../ui/prefs.glade.h:150 ../ui/prefs.gtkbuilder.h:150
+#: ../ui/prefs.glade.h:158 ../ui/prefs.gtkbuilder.h:158
 msgid "Modules Misc"
 msgstr "Diverse moduler"
 
-#: ../ui/prefs.glade.h:151 ../ui/prefs.gtkbuilder.h:151
+#: ../ui/prefs.glade.h:159 ../ui/prefs.gtkbuilder.h:159
 #: ../ui/search-dialog.glade.h:115 ../ui/search-dialog.gtkbuilder.h:115
 msgid "Module Selection"
 msgstr "Modulvalg"
@@ -4762,10 +4860,6 @@ msgstr "Åpne i editor"
 msgid "Verse Per Line"
 msgstr "_Vers Pr Linje"
 
-#: ../ui/xi-menus.glade.h:72 ../ui/xi-menus-popup.gtkbuilder.h:50
-msgid "Scripture Cross-references"
-msgstr "Kryssreferanse i Skriften"
-
 #: ../ui/xi-menus.glade.h:73 ../ui/xi-menus-popup.gtkbuilder.h:51
 msgid "Footnote/Cross-ref Markers"
 msgstr ""
@@ -4848,103 +4942,114 @@ msgstr "Lagre listen som en gruppe bokmerker"
 
 #: ../ui/xi-menus.glade.h:100 ../ui/xi-menus-popup.gtkbuilder.h:89
 msgid ""
+"Provide a dialog in which to paste a line of verse references, to fill the "
+"verse list."
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:101 ../ui/xi-menus-popup.gtkbuilder.h:88
+#, fuzzy
+msgid "Populate verse list"
+msgstr "Liste over vers"
+
+#: ../ui/xi-menus.glade.h:102 ../ui/xi-menus-popup.gtkbuilder.h:91
+msgid ""
 "Send this verse list via BibleSync to others, if you are in Personal or "
 "Speaker mode."
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:101 ../ui/xi-menus-popup.gtkbuilder.h:88
+#: ../ui/xi-menus.glade.h:103 ../ui/xi-menus-popup.gtkbuilder.h:90
 msgid "Send list via BibleSync"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:102 ../ui/xi-menus-popup.gtkbuilder.h:90
+#: ../ui/xi-menus.glade.h:104 ../ui/xi-menus-popup.gtkbuilder.h:92
 msgid "Export List"
 msgstr "Eksportliste"
 
-#: ../ui/xi-menus.glade.h:103 ../ui/xi-menus-popup.gtkbuilder.h:2
+#: ../ui/xi-menus.glade.h:105 ../ui/xi-menus-popup.gtkbuilder.h:2
 msgid "Open this bookmark in a new tab"
 msgstr "Åpne bokmerket i ny arkfane"
 
-#: ../ui/xi-menus.glade.h:104 ../ui/xi-menus-popup.gtkbuilder.h:1
+#: ../ui/xi-menus.glade.h:106 ../ui/xi-menus-popup.gtkbuilder.h:1
 msgid "Open in new tab"
 msgstr "Åpne i ny flik"
 
-#: ../ui/xi-menus.glade.h:105 ../ui/xi-menus-popup.gtkbuilder.h:4
+#: ../ui/xi-menus.glade.h:107 ../ui/xi-menus-popup.gtkbuilder.h:4
 msgid "Open this bookmark in a dialog"
 msgstr "Åpne bokmerket i et dialogvindu"
 
-#: ../ui/xi-menus.glade.h:106 ../ui/xi-menus-popup.gtkbuilder.h:3
+#: ../ui/xi-menus.glade.h:108 ../ui/xi-menus-popup.gtkbuilder.h:3
 msgid "Open in a dialog"
 msgstr "Åpne i et dialogvindu"
 
-#: ../ui/xi-menus.glade.h:107 ../ui/xi-menus-popup.gtkbuilder.h:6
+#: ../ui/xi-menus.glade.h:109 ../ui/xi-menus-popup.gtkbuilder.h:6
 msgid "Add new folder to selected folder"
 msgstr "Legg ny mappe i den valgte mappa"
 
-#: ../ui/xi-menus.glade.h:109 ../ui/xi-menus-popup.gtkbuilder.h:8
+#: ../ui/xi-menus.glade.h:111 ../ui/xi-menus-popup.gtkbuilder.h:8
 msgid "Insert new bookmark here"
 msgstr "Sett inn nytt bokmerke her"
 
-#: ../ui/xi-menus.glade.h:110 ../ui/xi-menus-popup.gtkbuilder.h:7
+#: ../ui/xi-menus.glade.h:112 ../ui/xi-menus-popup.gtkbuilder.h:7
 msgid "Insert Bookmark"
 msgstr "Sett inn bokmerke"
 
-#: ../ui/xi-menus.glade.h:111 ../ui/xi-menus-popup.gtkbuilder.h:10
+#: ../ui/xi-menus.glade.h:113 ../ui/xi-menus-popup.gtkbuilder.h:10
 msgid "Edit bookmark item"
 msgstr "Rediger bokmerke"
 
-#: ../ui/xi-menus.glade.h:112 ../ui/xi-menus-popup.gtkbuilder.h:9
+#: ../ui/xi-menus.glade.h:114 ../ui/xi-menus-popup.gtkbuilder.h:9
 msgid "_Edit Item"
 msgstr "_Rediger element"
 
-#: ../ui/xi-menus.glade.h:113 ../ui/xi-menus-popup.gtkbuilder.h:12
+#: ../ui/xi-menus.glade.h:115 ../ui/xi-menus-popup.gtkbuilder.h:12
 msgid "Delete item"
 msgstr "Slett element"
 
-#: ../ui/xi-menus.glade.h:115 ../ui/xi-menus-popup.gtkbuilder.h:14
+#: ../ui/xi-menus.glade.h:117 ../ui/xi-menus-popup.gtkbuilder.h:14
 msgid "Expand all Bookmarks groups"
 msgstr "Utvid alle grupper av bokmerker"
 
-#: ../ui/xi-menus.glade.h:116 ../ui/xi-menus-popup.gtkbuilder.h:13
+#: ../ui/xi-menus.glade.h:118 ../ui/xi-menus-popup.gtkbuilder.h:13
 msgid "Expand All"
 msgstr "Utvid alt"
 
-#: ../ui/xi-menus.glade.h:117 ../ui/xi-menus-popup.gtkbuilder.h:16
+#: ../ui/xi-menus.glade.h:119 ../ui/xi-menus-popup.gtkbuilder.h:16
 msgid "Collapse all Bookmarks groups"
 msgstr "Fold sammen alle grupper av bokmerker"
 
-#: ../ui/xi-menus.glade.h:118 ../ui/xi-menus-popup.gtkbuilder.h:15
+#: ../ui/xi-menus.glade.h:120 ../ui/xi-menus-popup.gtkbuilder.h:15
 msgid "Collapse All"
 msgstr "Fold sammen alt"
 
-#: ../ui/xi-menus.glade.h:119 ../ui/xi-menus-popup.gtkbuilder.h:17
+#: ../ui/xi-menus.glade.h:121 ../ui/xi-menus-popup.gtkbuilder.h:17
 msgid "Allow items to be moved from one folder to another"
 msgstr "Tillat at elementer flyttes fra en mappe til en annen"
 
-#: ../ui/xi-menus.glade.h:120 ../ui/xi-menus-popup.gtkbuilder.h:18
+#: ../ui/xi-menus.glade.h:122 ../ui/xi-menus-popup.gtkbuilder.h:18
 msgid "Allow Reordering"
 msgstr "Tillat sortering"
 
-#: ../ui/xi-menus.glade.h:121 ../ui/xi-menus-popup.gtkbuilder.h:20
+#: ../ui/xi-menus.glade.h:123 ../ui/xi-menus-popup.gtkbuilder.h:20
 msgid "Load other bookmarks file (default: from BibleTime)"
 msgstr "Last inn bokmerker fra Bibletime"
 
-#: ../ui/xi-menus.glade.h:122 ../ui/xi-menus-popup.gtkbuilder.h:19
+#: ../ui/xi-menus.glade.h:124 ../ui/xi-menus-popup.gtkbuilder.h:19
 msgid "Import Bookmarks"
 msgstr "Sett inn bokmerke"
 
-#: ../ui/xi-menus.glade.h:123 ../ui/xi-menus-popup.gtkbuilder.h:22
+#: ../ui/xi-menus.glade.h:125 ../ui/xi-menus-popup.gtkbuilder.h:22
 msgid "Remove folder and save it"
 msgstr "Fjern mappe og lagre den"
 
-#: ../ui/xi-menus.glade.h:124 ../ui/xi-menus-popup.gtkbuilder.h:21
+#: ../ui/xi-menus.glade.h:126 ../ui/xi-menus-popup.gtkbuilder.h:21
 msgid "Export Folder"
 msgstr "Eksporter mappe"
 
-#: ../ui/xi-menus.glade.h:125 ../ui/xi-menus-popup.gtkbuilder.h:30
+#: ../ui/xi-menus.glade.h:127 ../ui/xi-menus-popup.gtkbuilder.h:30
 msgid "Open selected module in a new tab"
 msgstr "Åpne valgt modul i ny fane"
 
-#: ../ui/xi-menus.glade.h:126 ../ui/xi-menus-popup.gtkbuilder.h:32
+#: ../ui/xi-menus.glade.h:128 ../ui/xi-menus-popup.gtkbuilder.h:32
 msgid ""
 "Open selected module in a\n"
 "\tseparate ['dialog'] window"
@@ -4952,81 +5057,81 @@ msgstr ""
 "Åpne den valgte modulen i ett\n"
 "\tuavhengig ['dialog']vindu"
 
-#: ../ui/xi-menus.glade.h:128 ../ui/xi-menus-popup.gtkbuilder.h:31
+#: ../ui/xi-menus.glade.h:130 ../ui/xi-menus-popup.gtkbuilder.h:31
 msgid "Open in a separate window"
 msgstr "Åpne i ett separat vindu"
 
-#: ../ui/xi-menus.glade.h:129 ../ui/xi-menus-popup.gtkbuilder.h:73
+#: ../ui/xi-menus.glade.h:131 ../ui/xi-menus-popup.gtkbuilder.h:73
 msgid "Create a new simple prayer list"
 msgstr "Lag en ny lenkel bønne liste"
 
-#: ../ui/xi-menus.glade.h:130 ../ui/xi-menus-popup.gtkbuilder.h:72
+#: ../ui/xi-menus.glade.h:132 ../ui/xi-menus-popup.gtkbuilder.h:72
 msgid "Simple"
 msgstr "Enkel"
 
-#: ../ui/xi-menus.glade.h:131 ../ui/xi-menus-popup.gtkbuilder.h:75
+#: ../ui/xi-menus.glade.h:133 ../ui/xi-menus-popup.gtkbuilder.h:75
 msgid "Create a new subject prayer list"
 msgstr "Opprett en ny tematisk bønneliste"
 
-#: ../ui/xi-menus.glade.h:132 ../ui/xi-menus-popup.gtkbuilder.h:74
+#: ../ui/xi-menus.glade.h:134 ../ui/xi-menus-popup.gtkbuilder.h:74
 msgid "Subject"
 msgstr "Subjekt"
 
-#: ../ui/xi-menus.glade.h:133 ../ui/xi-menus-popup.gtkbuilder.h:77
+#: ../ui/xi-menus.glade.h:135 ../ui/xi-menus-popup.gtkbuilder.h:77
 msgid "Create a new monthly journal"
 msgstr "Opprett en månedlig journal"
 
-#: ../ui/xi-menus.glade.h:134 ../ui/xi-menus-popup.gtkbuilder.h:76
+#: ../ui/xi-menus.glade.h:136 ../ui/xi-menus-popup.gtkbuilder.h:76
 msgid "Monthly"
 msgstr "Månedlig"
 
-#: ../ui/xi-menus.glade.h:135 ../ui/xi-menus-popup.gtkbuilder.h:79
+#: ../ui/xi-menus.glade.h:137 ../ui/xi-menus-popup.gtkbuilder.h:79
 msgid "Create a new daily journal"
 msgstr "Opprett en daglig journal"
 
-#: ../ui/xi-menus.glade.h:136 ../ui/xi-menus-popup.gtkbuilder.h:78
+#: ../ui/xi-menus.glade.h:138 ../ui/xi-menus-popup.gtkbuilder.h:78
 msgid "Daily"
 msgstr "Daglig"
 
-#: ../ui/xi-menus.glade.h:137 ../ui/xi-menus-popup.gtkbuilder.h:81
+#: ../ui/xi-menus.glade.h:139 ../ui/xi-menus-popup.gtkbuilder.h:81
 msgid "Create a new outlined topic"
 msgstr "Opprett en disposisjon"
 
 # (supposing outline view)
-#: ../ui/xi-menus.glade.h:138 ../ui/xi-menus-popup.gtkbuilder.h:80
+#: ../ui/xi-menus.glade.h:140 ../ui/xi-menus-popup.gtkbuilder.h:80
 msgid "Outlined"
 msgstr "Disposisjonsvisning"
 
-#: ../ui/xi-menus.glade.h:139 ../ui/xi-menus-popup.gtkbuilder.h:83
+#: ../ui/xi-menus.glade.h:141 ../ui/xi-menus-popup.gtkbuilder.h:83
 msgid "Open module in editor or plain display window"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:140 ../ui/xi-menus-popup.gtkbuilder.h:82
+#: ../ui/xi-menus.glade.h:142 ../ui/xi-menus-popup.gtkbuilder.h:82
 #, fuzzy
 msgid "Open in separate window"
 msgstr "Åpne i ett separat vindu"
 
-#: ../ui/xi-menus.glade.h:141 ../ui/xi-menus-popup.gtkbuilder.h:23
+#: ../ui/xi-menus.glade.h:143 ../ui/xi-menus-popup.gtkbuilder.h:23
 msgid "Add a sub-item"
 msgstr "Legg til et under-element"
 
-#: ../ui/xi-menus.glade.h:142
+#: ../ui/xi-menus.glade.h:144
 msgid "Add Sub-Item"
 msgstr "Legg til under-element"
 
-#: ../ui/xi-menus.glade.h:143 ../ui/xi-menus-popup.gtkbuilder.h:25
+#: ../ui/xi-menus.glade.h:145 ../ui/xi-menus-popup.gtkbuilder.h:25
 msgid "Add an item"
 msgstr "Legg til sak"
 
-#: ../ui/xi-menus.glade.h:144 ../ui/xi-menus-popup.gtkbuilder.h:24
+#: ../ui/xi-menus.glade.h:146 ../ui/xi-menus-popup.gtkbuilder.h:24
 msgid "Add Item"
 msgstr "Legg til element"
 
-#: ../ui/xi-menus.glade.h:145 ../ui/xi-menus-popup.gtkbuilder.h:27
+#: ../ui/xi-menus.glade.h:147 ../ui/xi-menus-popup.gtkbuilder.h:27
 msgid "Remove this item"
 msgstr "Fjern denne saken"
 
-#: ../ui/xi-menus.glade.h:147 ../ui/xi-menus-popup.gtkbuilder.h:29
+#: ../ui/xi-menus.glade.h:149 ../ui/xi-menus-popup.gtkbuilder.h:29
 msgid "Edit this item"
 msgstr "Rediger denne saken"
 
@@ -5038,9 +5143,51 @@ msgstr "Xiphos Bibel Guide"
 msgid "Study the Bible"
 msgstr "Studér Bibelen"
 
-#, fuzzy
-#~ msgid "Navigation"
-#~ msgstr "Frelse"
+#~ msgid "<b>Tabs</b>"
+#~ msgstr "<b>Arkfaner</b>"
+
+#~ msgid "Use tabbed browsing"
+#~ msgstr "Bruk faneblader"
+
+#~ msgid ""
+#~ "Single selection of Bible+commentary+book+dictionary, or many sets of "
+#~ "such selections in a tabbed interface"
+#~ msgstr ""
+#~ "Enkeltvalg av Bibel+kommentar+bok+ordbok, eller mange sett av slike valg, "
+#~ "i fliker"
+
+#~ msgid "Use tabbed browsing Checkbox"
+#~ msgstr "Bruk faneblad browsing Avkryssningsboks"
+
+#~ msgid "<b>Show</b>"
+#~ msgstr "<b>Vis</b>"
+
+#~ msgid "Bible Texts"
+#~ msgstr "Bibeltekster"
+
+#~ msgid "Bible Texts Checkbox"
+#~ msgstr "Bibeltekst Avkrysningsboks"
+
+#~ msgid "Previewer Checkbox"
+#~ msgstr "Forhåndsvisning Avkryssningsboks"
+
+#~ msgid "Commentaries Checkbox"
+#~ msgstr "Kommentarer Avkryssningsboks"
+
+#~ msgid "Dictionary/Lexicon"
+#~ msgstr "Ordbok/leksikon"
+
+#~ msgid "Dictionary/Lexicon Checkbox"
+#~ msgstr "Ordbok/Leksikon Avkryssningsboks"
+
+#~ msgid "Parallel View in a tab"
+#~ msgstr "Parallellvisning i en arkfane"
+
+#~ msgid "Tabs and Panes"
+#~ msgstr "Arkfaner og paneler"
+
+#~ msgid "Scripture Cross-references"
+#~ msgstr "Kryssreferanse i Skriften"
 
 #~ msgid "<b>StudyPad default directory</b>"
 #~ msgstr "<b>Standardmappe for studieblokk</b>"
@@ -5405,9 +5552,6 @@ msgstr "Studér Bibelen"
 
 #~ msgid "Advanced search using the search dialog"
 #~ msgstr "Avansert søk i eget søkevindu"
-
-#~ msgid "Set user preferences"
-#~ msgstr "Sett bruker innstillinger"
 
 #~ msgid "C_lear"
 #~ msgstr "_Slett"

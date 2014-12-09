@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 3.1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-03 17:06-0400\n"
+"POT-Creation-Date: 2014-06-17 07:30-0400\n"
 "PO-Revision-Date: 2010-09-30 00:47+0100\n"
 "Last-Translator: Peter von Kaehne <refdoc@crosswire.org>\n"
 "Language-Team: Turkish <support@crosswire.org>\n"
@@ -16,88 +16,91 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/backend/biblesync.cc:124
+#: ../src/biblesync/biblesync.cc:129
 msgid "network setup errors."
 msgstr ""
 
-#: ../src/backend/biblesync.cc:156
+#: ../src/biblesync/biblesync.cc:175
 msgid " client socket"
 msgstr ""
 
-#: ../src/backend/biblesync.cc:195
+#: ../src/biblesync/biblesync.cc:225
 msgid " server socket"
 msgstr ""
 
-#: ../src/backend/biblesync.cc:353
+#: ../src/biblesync/biblesync.cc:370
 msgid "bad magic"
 msgstr ""
 
-#: ../src/backend/biblesync.cc:356
+#: ../src/biblesync/biblesync.cc:373
 msgid "bad protocol version"
 msgstr ""
 
-#: ../src/backend/biblesync.cc:360
+#: ../src/biblesync/biblesync.cc:378
 msgid "bad msg type"
 msgstr ""
 
-#: ../src/backend/biblesync.cc:363
+#: ../src/biblesync/biblesync.cc:381
 msgid "bad packet count"
 msgstr ""
 
-#: ../src/backend/biblesync.cc:366
+#: ../src/biblesync/biblesync.cc:384
 msgid "bad packet index"
 msgstr ""
 
-#: ../src/backend/biblesync.cc:409
+#: ../src/biblesync/biblesync.cc:427
 msgid "bad body format"
 msgstr ""
 
-#: ../src/backend/biblesync.cc:423
+#: ../src/biblesync/biblesync.cc:441
 msgid "missing required header "
 msgstr ""
 
-#: ../src/backend/biblesync.cc:447
+#: ../src/biblesync/biblesync.cc:466
+msgid "UUID spoofed: wrong ipaddr."
+msgstr ""
+
+#: ../src/biblesync/biblesync.cc:493
 msgid "Ignoring echo."
 msgstr ""
 
-#: ../src/backend/biblesync.cc:488
-msgid ""
-"\n"
-"present at ["
+#: ../src/biblesync/biblesync.cc:522
+msgid "Domain not 'BIBLE-VERSE': "
 msgstr ""
 
-#: ../src/backend/biblesync.cc:490
-msgid ""
-"]\n"
-"using "
+#: ../src/biblesync/biblesync.cc:530
+msgid "Invalid group: "
 msgstr ""
 
-#: ../src/backend/biblesync.cc:541
+#: ../src/biblesync/biblesync.cc:560
+msgid " present at "
+msgstr ""
+
+#: ../src/biblesync/biblesync.cc:562
+msgid " using "
+msgstr ""
+
+#: ../src/biblesync/biblesync.cc:685
 #, fuzzy
 msgid "[no dump ready]"
 msgstr "Tüm modül"
 
-#: ../src/backend/biblesync.cc:548
+#: ../src/biblesync/biblesync.cc:692
 msgid "select < 0"
 msgstr ""
 
-#: ../src/backend/biblesync.cc:558
+#: ../src/biblesync/biblesync.cc:702
 msgid "recvfrom < 0"
 msgstr ""
 
-#: ../src/backend/biblesync.cc:644
-msgid "TRANSMIT:"
-msgstr ""
-
-#: ../src/backend/biblesync.cc:660
+#: ../src/biblesync/biblesync.cc:791
 msgid "Transmit failed.\n"
 msgstr ""
 
-#: ../src/backend/biblesync.cc:661
+#: ../src/biblesync/biblesync.cc:792
 msgid ""
-"Unable to multicast; BibleSync is now disabled.\n"
-"If your network connection changed while this program\n"
-"was active, it may be sufficient to re-enable."
+"Unable to multicast; BibleSync is now disabled. If your network connection "
+"changed while this program was active, it may be sufficient to re-enable."
 msgstr ""
 
 #: ../src/backend/sword_main.cc:740
@@ -364,9 +367,9 @@ msgid ""
 "We would like to thank Troy Griffitts and all the other folks who have given "
 "us The SWORD Project."
 msgstr ""
-"\nProjesi SWORD Powered by. Biz "
-"istiyorsunuz Projesi SWORD gibi teşekkür sahip verilmiş bize Troy millet "
-"diğer Griffitts ve tüm."
+"\n"
+"Projesi SWORD Powered by. Biz istiyorsunuz Projesi SWORD gibi teşekkür sahip "
+"verilmiş bize Troy millet diğer Griffitts ve tüm."
 
 #. info->stock_icon = GTK_STOCK_OPEN;
 #: ../src/gnome2/bookmark_dialog.c:175 ../src/gnome2/bookmarks_menu.c:369
@@ -447,8 +450,8 @@ msgid ""
 "separate tabs is not supported."
 msgstr ""
 
-#: ../src/gnome2/bookmarks_treeview.c:849 ../src/gnome2/sidebar.c:1469
-#: ../src/gnome2/sidebar.c:1502
+#: ../src/gnome2/bookmarks_treeview.c:849 ../src/gnome2/sidebar.c:1493
+#: ../src/gnome2/sidebar.c:1526
 msgid "Bookmarks"
 msgstr "Imleri"
 
@@ -469,16 +472,16 @@ msgstr "Enter tuşu:"
 msgid "Close without Saving"
 msgstr "Yakın Tasarruf olmadan"
 
-#: ../src/gnome2/dialog.c:664
+#: ../src/gnome2/dialog.c:679
 msgid "Xiphos:"
 msgstr "Xiphos:"
 
-#: ../src/gnome2/dialog.c:765
+#: ../src/gnome2/dialog.c:781
 msgid "Close _without Saving"
 msgstr "Yakın Tasarruf _without"
 
 #: ../src/gnome2/export_bookmarks.c:197 ../src/gnome2/export_bookmarks.c:256
-#: ../src/gnome2/sidebar.c:1481 ../src/gnome2/sidebar.c:1518
+#: ../src/gnome2/sidebar.c:1505 ../src/gnome2/sidebar.c:1542
 #, c-format
 msgid "Verse List"
 msgstr "Ayet Listesi"
@@ -550,43 +553,48 @@ msgstr "ile Xiphos ekibine Lütfen bu hatayı bildirin:"
 msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
 msgstr "HATA! Xiphos hakkında \"STRING\" hatası nedeniyle kaza etmektir."
 
-#: ../src/gnome2/main_window.c:648
-msgid "Module has no morphology support."
-msgstr ""
-
-#: ../src/gnome2/main_window.c:697
-msgid "Module has no Red Words support."
-msgstr ""
-
-#: ../src/gnome2/main_window.c:714
-#, fuzzy
-msgid "Module has no Strong's support."
+#: ../src/gnome2/main_window.c:570
+#, fuzzy, c-format
+msgid "Module has no support for %s."
 msgstr "modüllerde o Güçlü Numaraları var"
 
-#: ../src/gnome2/main_window.c:839
+#: ../src/gnome2/main_window.c:640
+#, fuzzy
+msgid "Xiphos: No windows."
+msgstr "Xiphos:"
+
+#: ../src/gnome2/main_window.c:696
+msgid "BibleSync: Current navigation sent."
+msgstr ""
+
+#: ../src/gnome2/main_window.c:700
+msgid "BibleSync: Not speaking."
+msgstr ""
+
+#: ../src/gnome2/main_window.c:884
 msgid "Xiphos - Bible Study Software"
 msgstr "Xiphos - İncil Çalışması Yazılım"
 
-#: ../src/gnome2/main_window.c:895
+#: ../src/gnome2/main_window.c:940
 msgid "Open a new tab"
 msgstr "yeni bir sekme açma"
 
-#: ../src/gnome2/main_window.c:975 ../src/gnome2/sidebar.c:627
-#: ../src/gnome2/sidebar.c:633 ../src/main/sidebar.cc:659
+#: ../src/gnome2/main_window.c:1020 ../src/gnome2/sidebar.c:628
+#: ../src/gnome2/sidebar.c:634 ../src/main/sidebar.cc:659
 #: ../src/main/sidebar.cc:1004 ../src/main/sidebar.cc:1005
 #: ../src/main/sidebar.cc:1006
 msgid "Standard View"
 msgstr "Standart Profil"
 
-#: ../src/gnome2/main_window.c:1036
+#: ../src/gnome2/main_window.c:1081
 msgid "Commentary View"
 msgstr "Yorum Profili"
 
-#: ../src/gnome2/main_window.c:1052
+#: ../src/gnome2/main_window.c:1097
 msgid "Book View"
 msgstr "Kitap Profili"
 
-#: ../src/gnome2/main_window.c:1079
+#: ../src/gnome2/main_window.c:1124
 msgid "Welcome to Xiphos"
 msgstr "Hoşgeldin Xiphos için"
 
@@ -744,7 +752,7 @@ msgstr "kaldırmak için hazırlanıyor"
 msgid "Removing"
 msgstr "Çıkarmadan"
 
-#: ../src/gnome2/mod_mgr.c:192 ../ui/xi-menus.glade.h:146
+#: ../src/gnome2/mod_mgr.c:192 ../ui/xi-menus.glade.h:148
 #: ../ui/xi-menus-popup.gtkbuilder.h:26
 msgid "Remove"
 msgstr "Kaldırmak"
@@ -878,7 +886,7 @@ msgstr "Boyut"
 msgid "Description"
 msgstr "Açıklama"
 
-#: ../src/gnome2/mod_mgr.c:815
+#: ../src/gnome2/mod_mgr.c:816
 #, c-format
 msgid ""
 "`mkdir %s' failed:\n"
@@ -887,250 +895,249 @@ msgstr ""
 "`mkdir %s' başarısız oldu:\n"
 "%s."
 
-#: ../src/gnome2/mod_mgr.c:837
+#: ../src/gnome2/mod_mgr.c:848
 msgid " archived in: \n"
 msgstr "arşivlenir:\n"
 
-#: ../src/gnome2/mod_mgr.c:892
+#: ../src/gnome2/mod_mgr.c:903
 msgid "Journals and prayer lists cannot be indexed."
 msgstr "Dergi ve dua listeleri endeksli olamaz."
 
-#: ../src/gnome2/mod_mgr.c:913
+#: ../src/gnome2/mod_mgr.c:924
 #, c-format
 msgid "%s failed"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:916 ../src/gnome2/mod_mgr.c:1670
+#: ../src/gnome2/mod_mgr.c:927 ../src/gnome2/mod_mgr.c:1681
 msgid "Finished"
 msgstr "Bitmiş"
 
-#: ../src/gnome2/mod_mgr.c:1084 ../src/gnome2/mod_mgr.c:1086
-#: ../src/gnome2/mod_mgr.c:1188 ../src/gnome2/mod_mgr.c:1223
-#: ../src/gnome2/mod_mgr.c:1225 ../src/gnome2/utilities.c:472
+#: ../src/gnome2/mod_mgr.c:1095 ../src/gnome2/mod_mgr.c:1097
+#: ../src/gnome2/mod_mgr.c:1199 ../src/gnome2/mod_mgr.c:1234
+#: ../src/gnome2/mod_mgr.c:1236 ../src/gnome2/utilities.c:472
 #: ../src/gnome2/utilities.c:538 ../src/gnome2/utilities.c:540
 #: ../src/gnome2/utilities.c:1105 ../src/main/sidebar.cc:838
 #: ../src/main/sidebar.cc:910 ../src/main/sidebar.cc:912
 msgid "Unknown"
 msgstr "Bilinmeyen"
 
-#: ../src/gnome2/mod_mgr.c:1388
+#: ../src/gnome2/mod_mgr.c:1399
 #, c-format
 msgid ""
 "Repository:\n"
 "%s"
 msgstr "Depo:%s"
 
-#: ../src/gnome2/mod_mgr.c:1400
+#: ../src/gnome2/mod_mgr.c:1411
 msgid ""
 "Categorized by\n"
 "Module Type"
 msgstr "Türü Modülü Categorized tarafından"
 
-#: ../src/gnome2/mod_mgr.c:1405 ../src/gnome2/utilities.c:606
+#: ../src/gnome2/mod_mgr.c:1416 ../src/gnome2/utilities.c:606
 #: ../src/main/sidebar.cc:988 ../src/main/sidebar.cc:990
 msgid "Biblical Texts"
 msgstr "İncille Metinler"
 
-#: ../src/gnome2/mod_mgr.c:1409 ../src/gnome2/utilities.c:613
+#: ../src/gnome2/mod_mgr.c:1420 ../src/gnome2/utilities.c:613
 #: ../src/main/sidebar.cc:671 ../src/main/sidebar.cc:1013
-#: ../src/main/sidebar.cc:1015 ../ui/prefs.glade.h:41
-#: ../ui/prefs.gtkbuilder.h:41
+#: ../src/main/sidebar.cc:1015
 msgid "Commentaries"
 msgstr "Yorumlar"
 
-#: ../src/gnome2/mod_mgr.c:1413 ../src/gnome2/utilities.c:621
+#: ../src/gnome2/mod_mgr.c:1424 ../src/gnome2/utilities.c:621
 #: ../src/main/sidebar.cc:1022 ../src/main/sidebar.cc:1024
 msgid "Dictionaries"
 msgstr "Sözlükler"
 
-#: ../src/gnome2/mod_mgr.c:1417 ../src/gnome2/utilities.c:628
+#: ../src/gnome2/mod_mgr.c:1428 ../src/gnome2/utilities.c:628
 #: ../src/main/sidebar.cc:1031 ../src/main/sidebar.cc:1033
 msgid "Glossaries"
 msgstr "Sözlükler"
 
-#: ../src/gnome2/mod_mgr.c:1421 ../src/gnome2/utilities.c:635
+#: ../src/gnome2/mod_mgr.c:1432 ../src/gnome2/utilities.c:635
 #: ../src/main/sidebar.cc:1040 ../src/main/sidebar.cc:1042
 msgid "Daily Devotionals"
 msgstr "Günlük devotionals"
 
-#: ../src/gnome2/mod_mgr.c:1425 ../src/gnome2/utilities.c:642
+#: ../src/gnome2/mod_mgr.c:1436 ../src/gnome2/utilities.c:642
 #: ../src/main/sidebar.cc:681 ../src/main/sidebar.cc:1049
 #: ../src/main/sidebar.cc:1051
 msgid "General Books"
 msgstr "Genel Kitaplar"
 
-#: ../src/gnome2/mod_mgr.c:1429 ../src/gnome2/utilities.c:649
+#: ../src/gnome2/mod_mgr.c:1440 ../src/gnome2/utilities.c:649
 #: ../src/main/sidebar.cc:1058 ../src/main/sidebar.cc:1060
 msgid "Maps"
 msgstr "Haritaları"
 
-#: ../src/gnome2/mod_mgr.c:1433 ../src/gnome2/utilities.c:656
+#: ../src/gnome2/mod_mgr.c:1444 ../src/gnome2/utilities.c:656
 #: ../src/main/sidebar.cc:1067 ../src/main/sidebar.cc:1069
 msgid "Images"
 msgstr "Görüntüler"
 
-#: ../src/gnome2/mod_mgr.c:1437 ../src/gnome2/utilities.c:663
+#: ../src/gnome2/mod_mgr.c:1448 ../src/gnome2/utilities.c:663
 #: ../src/main/sidebar.cc:1076 ../src/main/sidebar.cc:1078
 msgid "Cult/Unorthodox"
 msgstr "Kült / Ortodoks Olmayan"
 
-#: ../src/gnome2/mod_mgr.c:1445
+#: ../src/gnome2/mod_mgr.c:1456
 msgid ""
 "Categorized by\n"
 "Availability"
 msgstr "Durumu ile Categorized"
 
-#: ../src/gnome2/mod_mgr.c:1450
+#: ../src/gnome2/mod_mgr.c:1461
 msgid "Updates"
 msgstr "Güncellemeleri"
 
-#: ../src/gnome2/mod_mgr.c:1454
+#: ../src/gnome2/mod_mgr.c:1465
 msgid "Uninstalled"
 msgstr "Kaldırıldı"
 
-#: ../src/gnome2/mod_mgr.c:1458 ../src/gnome2/sidebar.c:643
+#: ../src/gnome2/mod_mgr.c:1469 ../src/gnome2/sidebar.c:644
 #: ../src/gnome2/utilities.c:671 ../src/main/prayerlists.cc:229
 #: ../src/main/sidebar.cc:1086 ../src/main/sidebar.cc:1088
 msgid "Prayer List/Journal"
 msgstr "Dua Listesi / Dergi"
 
-#: ../src/gnome2/mod_mgr.c:1654
+#: ../src/gnome2/mod_mgr.c:1665
 msgid "Refreshing from remote source"
 msgstr "Uzak bir kaynaktan Yenileniyor"
 
-#: ../src/gnome2/mod_mgr.c:1664
+#: ../src/gnome2/mod_mgr.c:1675
 msgid "Remote source not found"
 msgstr "Uzaktan kaynak bulunamadı"
 
-#: ../src/gnome2/mod_mgr.c:1734
+#: ../src/gnome2/mod_mgr.c:1745
 msgid "Configure"
 msgstr "Yapılandırmak"
 
-#: ../src/gnome2/mod_mgr.c:1765
+#: ../src/gnome2/mod_mgr.c:1776
 msgid "Type"
 msgstr "Türü"
 
-#: ../src/gnome2/mod_mgr.c:1772
+#: ../src/gnome2/mod_mgr.c:1783
 msgid "Caption"
 msgstr "Başlık"
 
-#: ../src/gnome2/mod_mgr.c:1780
+#: ../src/gnome2/mod_mgr.c:1791
 msgid "Source"
 msgstr "Kaynak"
 
-#: ../src/gnome2/mod_mgr.c:1788
+#: ../src/gnome2/mod_mgr.c:1799
 msgid "Directory"
 msgstr "Dizin"
 
-#: ../src/gnome2/mod_mgr.c:1796
+#: ../src/gnome2/mod_mgr.c:1807
 msgid "User"
 msgstr "Kullanıcı"
 
-#: ../src/gnome2/mod_mgr.c:1804
+#: ../src/gnome2/mod_mgr.c:1815
 msgid "Password"
 msgstr "Şifre"
 
-#: ../src/gnome2/mod_mgr.c:1812
+#: ../src/gnome2/mod_mgr.c:1823
 msgid "UID"
 msgstr "UID"
 
-#: ../src/gnome2/mod_mgr.c:1829
+#: ../src/gnome2/mod_mgr.c:1840
 msgid "Module Sources"
 msgstr "Modül Kaynakları"
 
-#: ../src/gnome2/mod_mgr.c:1832
+#: ../src/gnome2/mod_mgr.c:1843
 msgid "Add/Remove"
 msgstr "Ekle / Kaldır"
 
-#: ../src/gnome2/mod_mgr.c:1834
+#: ../src/gnome2/mod_mgr.c:1845
 msgid "Choose"
 msgstr "Seçmek"
 
-#: ../src/gnome2/mod_mgr.c:1838 ../src/gnome2/preferences_dialog.c:1978
-#: ../src/gnome2/sidebar.c:1487 ../src/gnome2/sidebar.c:1526
+#: ../src/gnome2/mod_mgr.c:1849 ../src/gnome2/preferences_dialog.c:2063
+#: ../src/gnome2/sidebar.c:1511 ../src/gnome2/sidebar.c:1550
 msgid "Modules"
 msgstr "Modülleri"
 
-#: ../src/gnome2/mod_mgr.c:1840
+#: ../src/gnome2/mod_mgr.c:1851
 msgid "Install/Update"
 msgstr "Install / Güncelleme"
 
-#: ../src/gnome2/mod_mgr.c:1842
+#: ../src/gnome2/mod_mgr.c:1853
 msgid "Maintenance"
 msgstr "Bakım"
 
-#: ../src/gnome2/mod_mgr.c:2078
+#: ../src/gnome2/mod_mgr.c:2089
 msgid "Please Refresh"
 msgstr "Lütfen yenileyin"
 
-#: ../src/gnome2/mod_mgr.c:2079
+#: ../src/gnome2/mod_mgr.c:2090
 msgid "Your module list is not up to date!"
 msgstr "Sizin modül listesi güncel değil!"
 
 #. Zero Bibles is just not workable in Xiphos.
-#: ../src/gnome2/mod_mgr.c:2398
+#: ../src/gnome2/mod_mgr.c:2409
 msgid ""
 "You have uninstalled your last Bible.\n"
 "Xiphos requires at least one."
 msgstr "Eğer en az bir şekilde kaldırdınız son İncil de Xiphos. Gerektirir."
 
-#: ../src/gnome2/mod_mgr.c:2404
+#: ../src/gnome2/mod_mgr.c:2415
 msgid ""
 "There are still no Bibles installed.\n"
 "Xiphos cannot continue without one."
 msgstr ""
 "olmadan tek devam edebilirsiniz değil Xiphos vardır. yüklü İncil yok hala."
 
-#: ../src/gnome2/mod_mgr.c:2497
+#: ../src/gnome2/mod_mgr.c:2508
 msgid "Standard remote sources have been loaded."
 msgstr "Standart uzaktan kaynaklardan yüklenen edilmiştir."
 
-#: ../src/gnome2/mod_mgr.c:2503
+#: ../src/gnome2/mod_mgr.c:2514
 msgid "Could not load standard sources from CrossWire."
 msgstr "CrossWire arası standart kaynakları yüklenemedi."
 
-#: ../src/gnome2/mod_mgr.c:2671 ../src/gnome2/mod_mgr.c:2917
+#: ../src/gnome2/mod_mgr.c:2682 ../src/gnome2/mod_mgr.c:2928
 msgid "Remove the selected source"
 msgstr "Seçilen kaynak Kaldır"
 
-#: ../src/gnome2/mod_mgr.c:2731
+#: ../src/gnome2/mod_mgr.c:2742
 msgid "Enter a remote source"
 msgstr "Uzak bir kaynak girin"
 
-#: ../src/gnome2/mod_mgr.c:2735
+#: ../src/gnome2/mod_mgr.c:2746
 msgid "Caption:"
 msgstr "Başlık:"
 
-#: ../src/gnome2/mod_mgr.c:2736
+#: ../src/gnome2/mod_mgr.c:2747
 msgid "Type:"
 msgstr "Türü:"
 
-#: ../src/gnome2/mod_mgr.c:2737
+#: ../src/gnome2/mod_mgr.c:2748
 msgid "Host:"
 msgstr "Host:"
 
-#: ../src/gnome2/mod_mgr.c:2738
+#: ../src/gnome2/mod_mgr.c:2749
 msgid "Directory:"
 msgstr "Dizin:"
 
-#: ../src/gnome2/mod_mgr.c:2739
+#: ../src/gnome2/mod_mgr.c:2750
 msgid "User (optional):"
 msgstr "Kullanıcı (isteğe bağlı):"
 
-#: ../src/gnome2/mod_mgr.c:2740
+#: ../src/gnome2/mod_mgr.c:2751
 msgid "Password (optional):"
 msgstr "Parola (isteğe bağlı):"
 
 #. this can happen at most once
-#: ../src/gnome2/mod_mgr.c:2767
+#: ../src/gnome2/mod_mgr.c:2778
 msgid "A source by that name already exists."
 msgstr "bu isimle bir kaynak zaten var."
 
-#: ../src/gnome2/mod_mgr.c:2914
+#: ../src/gnome2/mod_mgr.c:2925
 msgid "Delete a remote source"
 msgstr "Silmek uzak bir kaynak"
 
-#: ../src/gnome2/mod_mgr.c:3419
+#: ../src/gnome2/mod_mgr.c:3430
 #, fuzzy
 msgid "[no module]"
 msgstr "Tüm modül"
@@ -1157,7 +1164,7 @@ msgstr "Birinci fıkrada için, dahilde git"
 msgid "Synchronize this window's scrolling with the main window"
 msgstr "ana penceresi ile senkronize bu pencerenin kaydırma"
 
-#: ../src/gnome2/parallel_dialog.c:356 ../src/gnome2/preferences_dialog.c:1985
+#: ../src/gnome2/parallel_dialog.c:356 ../src/gnome2/preferences_dialog.c:2070
 msgid "Parallel"
 msgstr "Paralel"
 
@@ -1170,113 +1177,153 @@ msgstr "Ayırmak / takın"
 msgid "Module Options"
 msgstr "Modül Seçenekleri"
 
-#: ../src/gnome2/parallel_view.c:215 ../src/gnome2/sidebar.c:626
-#: ../src/gnome2/sidebar.c:632 ../src/gnome2/tabbed_browser.c:251
+#: ../src/gnome2/parallel_view.c:215 ../src/gnome2/sidebar.c:627
+#: ../src/gnome2/sidebar.c:633 ../src/gnome2/tabbed_browser.c:251
 #: ../src/main/sidebar.cc:640 ../src/main/sidebar.cc:996
 #: ../src/main/sidebar.cc:997 ../src/main/sidebar.cc:998
 msgid "Parallel View"
 msgstr "Paralel Profili"
 
-#: ../src/gnome2/preferences_dialog.c:897
+#: ../src/gnome2/preferences_dialog.c:867
 msgid "BibleSync session passphrase"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:899
+#: ../src/gnome2/preferences_dialog.c:869
 msgid "Phrase:"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1508
-#: ../src/gnome2/preferences_dialog.c:1545
-#: ../src/gnome2/preferences_dialog.c:1581
-#: ../src/gnome2/preferences_dialog.c:1615
-#: ../src/gnome2/preferences_dialog.c:1649
-#: ../src/gnome2/preferences_dialog.c:1683
-#: ../src/gnome2/preferences_dialog.c:1717
-#: ../src/gnome2/preferences_dialog.c:1752
-#: ../src/gnome2/preferences_dialog.c:1788
-#: ../src/gnome2/preferences_dialog.c:1839
-#: ../src/gnome2/preferences_dialog.c:2325
+#. mode selection failed? probably dead interface
+#: ../src/gnome2/preferences_dialog.c:947
+msgid ""
+"Mode selection failed.\n"
+"Set \"Debug\" and try again to see why."
+msgstr ""
+
+#: ../src/gnome2/preferences_dialog.c:1008
+#, fuzzy
+msgid "Mode selection failed.\n"
+msgstr "Yüksek sesle okuyun Seçimi"
+
+#: ../src/gnome2/preferences_dialog.c:1014
+#, c-format
+msgid "BibleSync: %s (passphrase \"%s\")."
+msgstr ""
+
+#: ../src/gnome2/preferences_dialog.c:1016
+msgid "Disabled"
+msgstr ""
+
+#: ../src/gnome2/preferences_dialog.c:1018 ../src/main/xml.c:93
+msgid "Personal"
+msgstr "Kişisel"
+
+#: ../src/gnome2/preferences_dialog.c:1020
+msgid "Speaker"
+msgstr ""
+
+#: ../src/gnome2/preferences_dialog.c:1021
+msgid "Audience"
+msgstr ""
+
+#: ../src/gnome2/preferences_dialog.c:1592
+#: ../src/gnome2/preferences_dialog.c:1629
+#: ../src/gnome2/preferences_dialog.c:1665
+#: ../src/gnome2/preferences_dialog.c:1699
+#: ../src/gnome2/preferences_dialog.c:1733
+#: ../src/gnome2/preferences_dialog.c:1767
+#: ../src/gnome2/preferences_dialog.c:1801
+#: ../src/gnome2/preferences_dialog.c:1836
+#: ../src/gnome2/preferences_dialog.c:1872
+#: ../src/gnome2/preferences_dialog.c:1923
+#: ../src/gnome2/preferences_dialog.c:2400
 msgid "-- Select --"
 msgstr "- Seçiniz -"
 
-#: ../src/gnome2/preferences_dialog.c:1802
+#: ../src/gnome2/preferences_dialog.c:1886
 msgid "Locale will take effect after restart."
 msgstr "Yerel yeniden başlattıktan sonra yürürlüğe girecek."
 
-#: ../src/gnome2/preferences_dialog.c:1874 ../ui/prefs.glade.h:1
+#: ../src/gnome2/preferences_dialog.c:1958 ../ui/prefs.glade.h:1
 #: ../ui/prefs.gtkbuilder.h:9
 msgid "Preferences"
 msgstr "Tercihleri"
 
-#: ../src/gnome2/preferences_dialog.c:1957
+#: ../src/gnome2/preferences_dialog.c:2043
 msgid "General"
 msgstr "Genel"
 
-#: ../src/gnome2/preferences_dialog.c:1964
+#: ../src/gnome2/preferences_dialog.c:2046
 msgid "Options"
 msgstr "Seçenekleri"
 
-#: ../src/gnome2/preferences_dialog.c:1968
+#: ../src/gnome2/preferences_dialog.c:2049 ../ui/prefs.glade.h:85
+#: ../ui/prefs.gtkbuilder.h:85
+#, fuzzy
+msgid "BibleSync"
+msgstr "İncil"
+
+#: ../src/gnome2/preferences_dialog.c:2053
 msgid "Fonts"
 msgstr "Yazı"
 
-#: ../src/gnome2/preferences_dialog.c:1971
+#: ../src/gnome2/preferences_dialog.c:2056
 msgid "Color"
 msgstr "Renk"
 
-#: ../src/gnome2/preferences_dialog.c:1974
+#: ../src/gnome2/preferences_dialog.c:2059
 msgid "Sizes and Faces"
 msgstr "Boyutları ve Yüzler"
 
-#: ../src/gnome2/preferences_dialog.c:1988
+#: ../src/gnome2/preferences_dialog.c:2073 ../ui/prefs.glade.h:71
+#: ../ui/prefs.gtkbuilder.h:71
 msgid "Special"
 msgstr "Özel"
 
-#: ../src/gnome2/preferences_dialog.c:2707 ../src/gnome2/search_dialog.c:499
+#: ../src/gnome2/preferences_dialog.c:2782 ../src/gnome2/search_dialog.c:500
 msgid "Clear List?"
 msgstr "Net Listesi?"
 
-#: ../src/gnome2/preferences_dialog.c:2708 ../src/gnome2/search_dialog.c:500
+#: ../src/gnome2/preferences_dialog.c:2783 ../src/gnome2/search_dialog.c:501
 msgid "Are you sure you want to clear the module list?"
 msgstr "Eğer modül listesini silmek istediğinizden emin misiniz?"
 
-#: ../src/gnome2/preferences_dialog.c:2753 ../src/main/search_dialog.cc:685
+#: ../src/gnome2/preferences_dialog.c:2828 ../src/main/search_dialog.cc:685
 msgid "Remove Module?"
 msgstr "Modül kaldırılsın mı?"
 
-#: ../src/gnome2/preferences_dialog.c:2754 ../src/main/search_dialog.cc:686
+#: ../src/gnome2/preferences_dialog.c:2829 ../src/main/search_dialog.cc:686
 msgid "Are you sure you want to remove the selected module?"
 msgstr "Seçili modülü kaldırmak istediğinizden emin misiniz?"
 
-#: ../src/gnome2/search_dialog.c:61 ../src/main/search_dialog.cc:52
+#: ../src/gnome2/search_dialog.c:62 ../src/main/search_dialog.cc:52
 #: ../src/main/search_sidebar.cc:51
 msgid "Searching the "
 msgstr "Arama"
 
-#: ../src/gnome2/search_dialog.c:62 ../src/main/search_dialog.cc:53
+#: ../src/gnome2/search_dialog.c:63 ../src/main/search_dialog.cc:53
 #: ../src/main/search_sidebar.cc:52
 msgid " Module"
 msgstr "Modül"
 
-#: ../src/gnome2/search_dialog.c:63 ../src/main/search_dialog.cc:54
+#: ../src/gnome2/search_dialog.c:64 ../src/main/search_dialog.cc:54
 #: ../src/main/search_sidebar.cc:53
 msgid "found in "
 msgstr "bulundu"
 
-#: ../src/gnome2/search_dialog.c:458
+#: ../src/gnome2/search_dialog.c:459
 #, c-format
 msgid "New List %s"
 msgstr "Yeni Liste%s"
 
-#: ../src/gnome2/search_dialog.c:682
+#: ../src/gnome2/search_dialog.c:683
 msgid "The last module list may not be deleted"
 msgstr "Son modül listesi silinemez"
 
-#: ../src/gnome2/search_dialog.c:700
+#: ../src/gnome2/search_dialog.c:701
 msgid "Delete list?"
 msgstr "Listeyi sil?"
 
-#: ../src/gnome2/search_dialog.c:701
+#: ../src/gnome2/search_dialog.c:702
 msgid "Are you sure you want to delete:"
 msgstr "Eğer silmek istediğinizden emin misiniz:"
 
@@ -1296,7 +1343,7 @@ msgstr "Eğer silmek istediğinizden emin misiniz:"
 #. * Return value
 #. *   void
 #.
-#: ../src/gnome2/search_dialog.c:824
+#: ../src/gnome2/search_dialog.c:825
 msgid ""
 "<b>Syntax overview for optimized \"lucene\" searches</b>\n"
 "Search for verses that contain...\n"
@@ -1351,7 +1398,7 @@ msgstr ""
 #. * Return value
 #. *   void
 #.
-#: ../src/gnome2/search_dialog.c:887
+#: ../src/gnome2/search_dialog.c:888
 msgid ""
 "<b>Attribute-based searches</b>\n"
 "Searches for content contained in markup outside the main text. Attributes "
@@ -1379,11 +1426,11 @@ msgstr ""
 "H * Morfolojik etiketleri tanımlanır kelimenin tam anlamıyla, \"isim hali "
 "dişil tekil\" için N-ASF gibi - Ayrıntılar için Robinson modülü bakın."
 
-#: ../src/gnome2/search_dialog.c:1189
+#: ../src/gnome2/search_dialog.c:1190
 msgid "Module is neither Bible nor commentary"
 msgstr ""
 
-#: ../src/gnome2/search_dialog.c:1212 ../src/gnome2/sidebar.c:974
+#: ../src/gnome2/search_dialog.c:1213 ../src/gnome2/sidebar.c:998
 msgid "BibleSync is not active for transmit."
 msgstr ""
 
@@ -1412,8 +1459,8 @@ msgstr "Arama Modülü"
 msgid "Bible"
 msgstr "İncil"
 
-#: ../src/gnome2/search_sidebar.c:233 ../ui/prefs.glade.h:124
-#: ../ui/prefs.gtkbuilder.h:124
+#: ../src/gnome2/search_sidebar.c:233 ../ui/prefs.glade.h:132
+#: ../ui/prefs.gtkbuilder.h:132
 msgid "Commentary"
 msgstr "Yorum"
 
@@ -1473,16 +1520,25 @@ msgstr "Alt"
 msgid "Upper"
 msgstr "Üst"
 
-#: ../src/gnome2/sidebar.c:849
+#: ../src/gnome2/sidebar.c:850
 #, fuzzy
 msgid "Open module in editor?"
 msgstr "editörü açın"
 
-#: ../src/gnome2/sidebar.c:849
+#: ../src/gnome2/sidebar.c:850
 msgid "If no, it will open for display only."
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:1475 ../src/gnome2/sidebar.c:1510
+#: ../src/gnome2/sidebar.c:952
+#, fuzzy
+msgid "Paste verse references"
+msgstr "Tercihleri"
+
+#: ../src/gnome2/sidebar.c:954
+msgid "List:"
+msgstr ""
+
+#: ../src/gnome2/sidebar.c:1499 ../src/gnome2/sidebar.c:1534
 msgid "Search"
 msgstr "Arama"
 
@@ -1607,7 +1663,6 @@ msgid "Displaying Xiphos"
 msgstr "Gösteren Xiphos"
 
 #: ../src/main/module_dialogs.cc:189 ../src/main/previewer.cc:97
-#: ../ui/prefs.glade.h:39 ../ui/prefs.gtkbuilder.h:39
 msgid "Previewer"
 msgstr "Önizleyicide"
 
@@ -1633,7 +1688,7 @@ msgstr "Strongs"
 msgid "Morphology"
 msgstr "Morfoloji"
 
-#: ../src/main/module_dialogs.cc:1013 ../src/main/url.cc:523
+#: ../src/main/module_dialogs.cc:1013 ../src/main/url.cc:521
 msgid "Back to "
 msgstr "Geri"
 
@@ -1669,7 +1724,8 @@ msgstr "İbranice Cantillation"
 msgid "Greek Accents"
 msgstr "Yunan Vurgular"
 
-#: ../src/main/parallel_view.cc:443
+#: ../src/main/parallel_view.cc:443 ../ui/xi-menus.glade.h:72
+#: ../ui/xi-menus-popup.gtkbuilder.h:50
 msgid "Cross-references"
 msgstr "Çapraz referans"
 
@@ -2051,43 +2107,43 @@ msgstr "ayet"
 msgid "chapter"
 msgstr "bölüm"
 
-#: ../src/main/sword.cc:558
+#: ../src/main/sword.cc:554
 msgid ""
 "Xiphos's file for language\n"
 "abbreviations is missing."
 msgstr "için dil kısaltmalar dosya Xiphos&#39;s eksik."
 
-#: ../src/main/sword.cc:565
+#: ../src/main/sword.cc:561
 msgid ""
 "Xiphos's language abbreviation\n"
 "file cannot be opened."
 msgstr "Xiphos dil kısaltması dosya açılamaz."
 
-#: ../src/main/sword.cc:578
+#: ../src/main/sword.cc:574
 msgid ""
 "Xiphos cannot allocate space\n"
 "for language abbreviations."
 msgstr "Xiphos kısaltmalar dil için yer ayırabilirsiniz değil."
 
-#: ../src/main/sword.cc:585
+#: ../src/main/sword.cc:581
 msgid ""
 "Xiphos cannot read the\n"
 "language abbreviation file."
 msgstr "Xiphos dosya kısaltma dili okuyamaz."
 
 #. either we were given a null sys_locale, or it didn't match anything.
-#: ../src/main/sword.cc:667
+#: ../src/main/sword.cc:663
 #, c-format
 msgid ""
 "No matching locale found for `%s'.\n"
 "%s"
 msgstr "Eşleşen yerelin bulundu için '%s.'%s"
 
-#: ../src/main/sword.cc:669
+#: ../src/main/sword.cc:665
 msgid "Book names and menus may not be translated."
 msgstr "Kitap isimleri ve menüler tercüme olmayabilir."
 
-#: ../src/main/sword.cc:1018 ../src/main/sword.cc:1183
+#: ../src/main/sword.cc:1014 ../src/main/sword.cc:1179
 #, c-format
 msgid ""
 "Module %s has companion modules:\n"
@@ -2095,7 +2151,7 @@ msgid ""
 "Would you like to open these as well?%s"
 msgstr ""
 
-#: ../src/main/sword.cc:1022 ../src/main/sword.cc:1187
+#: ../src/main/sword.cc:1018 ../src/main/sword.cc:1183
 msgid ""
 "\n"
 "\n"
@@ -2103,11 +2159,11 @@ msgid ""
 "and others in separate windows."
 msgstr ""
 
-#: ../src/main/sword.cc:1346
+#: ../src/main/sword.cc:1309
 msgid "Daily devotional was requested, but there are none installed."
 msgstr "Günlük adanmışlık, ama istendi hiçbiri kurulu vardır."
 
-#: ../src/main/sword.cc:1576
+#: ../src/main/sword.cc:1539
 msgid ""
 "<b>Locked Module.</b>\n"
 "\n"
@@ -2153,10 +2209,6 @@ msgstr "%s ana penceresinde"
 #, c-format
 msgid "Document not created successfully. \n"
 msgstr "Belge değil başarıyla oluşturuldu.\n"
-
-#: ../src/main/xml.c:93 ../ui/prefs.glade.h:96 ../ui/prefs.gtkbuilder.h:96
-msgid "Personal"
-msgstr "Kişisel"
 
 #: ../src/main/xml.c:94
 msgid "What must I do to be saved?"
@@ -2345,7 +2397,7 @@ msgstr "Yeni klasör oluştur"
 
 #: ../ui/bookmarks.glade.h:4 ../ui/bookmarks.gtkbuilder.h:4
 #: ../ui/markverse.glade.h:8 ../ui/markverse.gtkbuilder.h:8
-#: ../ui/xi-menus.glade.h:108 ../ui/xi-menus-popup.gtkbuilder.h:5
+#: ../ui/xi-menus.glade.h:110 ../ui/xi-menus-popup.gtkbuilder.h:5
 msgid "New Folder"
 msgstr "Yeni Klasör"
 
@@ -2535,7 +2587,7 @@ msgid "Export complete book"
 msgstr "Ihracat tam kitap"
 
 #: ../ui/export-dialog.glade.h:11 ../ui/export-dialog.gtkbuilder.h:10
-#: ../ui/prefs.glade.h:128 ../ui/prefs.gtkbuilder.h:128
+#: ../ui/prefs.glade.h:136 ../ui/prefs.gtkbuilder.h:136
 msgid "Book"
 msgstr "Kitap"
 
@@ -2650,8 +2702,8 @@ msgstr "Açık Study_pad"
 msgid "Open about dialog"
 msgstr "Bir iletişim aç"
 
-#: ../ui/gtk2_webedit.ui.h:4 ../ui/gtk_webedit.ui.h:4 ../ui/prefs.glade.h:76
-#: ../ui/prefs.gtkbuilder.h:76
+#: ../ui/gtk2_webedit.ui.h:4 ../ui/gtk_webedit.ui.h:4 ../ui/prefs.glade.h:116
+#: ../ui/prefs.gtkbuilder.h:116
 msgid "Bold"
 msgstr ""
 
@@ -2700,7 +2752,7 @@ msgid "Remove selection"
 msgstr "Seçili öğeyi kaldır"
 
 #: ../ui/gtk2_webedit.ui.h:16 ../ui/gtk_webedit.ui.h:16
-#: ../ui/xi-menus.glade.h:114 ../ui/xi-menus-popup.gtkbuilder.h:11
+#: ../ui/xi-menus.glade.h:116 ../ui/xi-menus-popup.gtkbuilder.h:11
 msgid "Delete Item"
 msgstr "Silmek Öğe"
 
@@ -3354,58 +3406,63 @@ msgid "Background"
 msgstr "Arka plan"
 
 #: ../ui/prefs.glade.h:5 ../ui/prefs.gtkbuilder.h:13
+#, fuzzy
+msgid " "
+msgstr ":"
+
+#: ../ui/prefs.glade.h:6 ../ui/prefs.gtkbuilder.h:14
 msgid "Foreground"
 msgstr "Ön plan"
 
-#: ../ui/prefs.glade.h:6 ../ui/prefs.gtkbuilder.h:14
+#: ../ui/prefs.glade.h:7 ../ui/prefs.gtkbuilder.h:15
 msgid "Current Verse"
 msgstr "Geçerli Ayet"
 
-#: ../ui/prefs.glade.h:7 ../ui/prefs.gtkbuilder.h:15
+#: ../ui/prefs.glade.h:8 ../ui/prefs.gtkbuilder.h:16
 msgid "Verse Number"
 msgstr "Ayet sayısı"
 
-#: ../ui/prefs.glade.h:8 ../ui/prefs.gtkbuilder.h:16
+#: ../ui/prefs.glade.h:9 ../ui/prefs.gtkbuilder.h:17
 msgid "Links"
 msgstr "Linkler"
 
-#: ../ui/prefs.glade.h:9 ../ui/prefs.gtkbuilder.h:17
+#: ../ui/prefs.glade.h:10 ../ui/prefs.gtkbuilder.h:18
 msgid "Highlight Foreground"
 msgstr "Vurgulamak Önalan"
 
-#: ../ui/prefs.glade.h:10 ../ui/prefs.gtkbuilder.h:18
+#: ../ui/prefs.glade.h:11 ../ui/prefs.gtkbuilder.h:19
 msgid "Highlight Background"
 msgstr "Vurgulamak Arkaplan"
 
-#: ../ui/prefs.glade.h:11 ../ui/prefs.gtkbuilder.h:19
+#: ../ui/prefs.glade.h:12 ../ui/prefs.gtkbuilder.h:20
 msgid "Invert color pairs"
 msgstr "Invert renk çiftleri"
 
-#: ../ui/prefs.glade.h:12 ../ui/prefs.gtkbuilder.h:20
+#: ../ui/prefs.glade.h:13 ../ui/prefs.gtkbuilder.h:21
 msgid "Normal Text"
 msgstr "Normal Metin"
 
-#: ../ui/prefs.glade.h:13 ../ui/prefs.gtkbuilder.h:21
+#: ../ui/prefs.glade.h:14 ../ui/prefs.gtkbuilder.h:22
 msgid "Highlight"
 msgstr "Vurgulamak"
 
-#: ../ui/prefs.glade.h:14 ../ui/prefs.gtkbuilder.h:22
+#: ../ui/prefs.glade.h:15 ../ui/prefs.gtkbuilder.h:23
 msgid "Font Colors"
 msgstr "Font Renkler"
 
-#: ../ui/prefs.glade.h:15 ../ui/prefs.gtkbuilder.h:23
+#: ../ui/prefs.glade.h:16 ../ui/prefs.gtkbuilder.h:24
 msgid "<b>Font Sizes</b>"
 msgstr "<b>Font Ölçüler</b>"
 
-#: ../ui/prefs.glade.h:16 ../ui/prefs.gtkbuilder.h:24
+#: ../ui/prefs.glade.h:17 ../ui/prefs.gtkbuilder.h:25
 msgid "All displayed font sizes are relative to this choice"
 msgstr "Görüntülenen tüm font boyutları bu seçimi göredir"
 
-#: ../ui/prefs.glade.h:17 ../ui/prefs.gtkbuilder.h:25
+#: ../ui/prefs.glade.h:18 ../ui/prefs.gtkbuilder.h:26
 msgid "Base font size"
 msgstr "Baz font boyutu"
 
-#: ../ui/prefs.glade.h:18
+#: ../ui/prefs.glade.h:19
 msgid ""
 "-2\n"
 "-1\n"
@@ -3417,15 +3474,15 @@ msgid ""
 "+5"
 msgstr "-2 -1 +0 +1 +2 +3 +4 +5"
 
-#: ../ui/prefs.glade.h:26 ../ui/prefs.gtkbuilder.h:26
+#: ../ui/prefs.glade.h:27 ../ui/prefs.gtkbuilder.h:27
 msgid "Commonly -1, to make verse numbers less obtrusive"
 msgstr "Genellikle -1, ayet numaraları daha az rahatsız edici yapmak"
 
-#: ../ui/prefs.glade.h:27 ../ui/prefs.gtkbuilder.h:27
+#: ../ui/prefs.glade.h:28 ../ui/prefs.gtkbuilder.h:28
 msgid "Verse number size"
 msgstr "Ayet sayısı boyutu"
 
-#: ../ui/prefs.glade.h:28 ../ui/prefs.gtkbuilder.h:28
+#: ../ui/prefs.glade.h:29 ../ui/prefs.gtkbuilder.h:29
 msgid ""
 "Name and size choice for any module in a given language; still overridden by "
 "a specific choice on a particular module"
@@ -3433,79 +3490,262 @@ msgstr ""
 "hala belirli bir seçim tarafından geçersiz belli bir modül üzerinde; belirli "
 "bir dildeki herhangi bir modül için İsim ve boyut seçenekleri"
 
-#: ../ui/prefs.glade.h:29 ../ui/prefs.gtkbuilder.h:29
+#: ../ui/prefs.glade.h:30 ../ui/prefs.gtkbuilder.h:30
 msgid "Font preferences, per language"
 msgstr "Font tercihleri, dil başına"
 
-#: ../ui/prefs.glade.h:30 ../ui/prefs.gtkbuilder.h:30
+#: ../ui/prefs.glade.h:31 ../ui/prefs.gtkbuilder.h:31
 msgid "Language Font Combo"
 msgstr "Dil Yazı Combo"
 
-#: ../ui/prefs.glade.h:31 ../ui/prefs.gtkbuilder.h:31
+#: ../ui/prefs.glade.h:32 ../ui/prefs.gtkbuilder.h:32
 msgid "Font Misc"
 msgstr "Font Misc"
 
-#: ../ui/prefs.glade.h:32 ../ui/prefs.gtkbuilder.h:32
-msgid "<b>Tabs</b>"
-msgstr "<b>Sekmeler</b>"
-
 #: ../ui/prefs.glade.h:33 ../ui/prefs.gtkbuilder.h:33
-msgid "Use tabbed browsing"
-msgstr "sekmeli tarama kullanın"
+#, fuzzy
+msgid "<b>BibleSync</b>"
+msgstr "<b>Kapsam</b>"
 
 #: ../ui/prefs.glade.h:34 ../ui/prefs.gtkbuilder.h:34
 msgid ""
-"Single selection of Bible+commentary+book+dictionary, or many sets of such "
-"selections in a tabbed interface"
+"Xiphos is the first Bible study program to provide an implementation of "
+"BibleSync, a synchronization protocol for Bible programs. If you work with "
+"multiple Bible programs, or if you work in a team, or if you have classroom "
+"activities using shared study, BibleSync can be a useful tool for you. "
+"BibleSync operates in 1 of 3 modes: Personal, to synchronize multiple Bible "
+"applications of your own, or in a working team; Speaker, to drive a lecture "
+"audience's Bible programs to follow along; Audience, to receive the "
+"speaker's navigation."
 msgstr ""
-"İncil Tek seçim + yorum + kitap + bir sekmeli arayüzü böyle seçimleri birçok "
-"setleri veya sözlük"
 
 #: ../ui/prefs.glade.h:35 ../ui/prefs.gtkbuilder.h:35
-msgid "Use tabbed browsing Checkbox"
-msgstr "Kullanım sekmeli tarama Checkbox"
+msgid "Mode"
+msgstr ""
 
 #: ../ui/prefs.glade.h:36 ../ui/prefs.gtkbuilder.h:36
-msgid "<b>Show</b>"
-msgstr "<b>Göstermek</b>"
+msgid "Select the mode in which BibleSync should operate."
+msgstr ""
 
 #: ../ui/prefs.glade.h:37 ../ui/prefs.gtkbuilder.h:37
-msgid "Bible Texts"
-msgstr "İncil Metinler"
+msgid "_Off"
+msgstr ""
 
 #: ../ui/prefs.glade.h:38 ../ui/prefs.gtkbuilder.h:38
-msgid "Bible Texts Checkbox"
-msgstr "İncil metinleri Checkbox"
+msgid "Disable BibleSync."
+msgstr ""
+
+#: ../ui/prefs.glade.h:39 ../ui/prefs.gtkbuilder.h:39
+#, fuzzy
+msgid "BSP off radio button"
+msgstr "Kitap Radyo Düğmesi"
 
 #: ../ui/prefs.glade.h:40 ../ui/prefs.gtkbuilder.h:40
-msgid "Previewer Checkbox"
-msgstr "Önizleyicide Checkbox"
+msgid "_Speaker"
+msgstr ""
+
+#: ../ui/prefs.glade.h:41 ../ui/prefs.gtkbuilder.h:41
+msgid "Enable BibleSync as the speaker."
+msgstr ""
 
 #: ../ui/prefs.glade.h:42 ../ui/prefs.gtkbuilder.h:42
-msgid "Commentaries Checkbox"
-msgstr "Yorumlar Checkbox"
+#, fuzzy
+msgid "BSP speaker radio button"
+msgstr "Tam sözcük Radiobuton"
 
 #: ../ui/prefs.glade.h:43 ../ui/prefs.gtkbuilder.h:43
-msgid "Dictionary/Lexicon"
-msgstr "Sözlük / Lexicon"
+msgid "_Audience"
+msgstr ""
 
 #: ../ui/prefs.glade.h:44 ../ui/prefs.gtkbuilder.h:44
-msgid "Dictionary/Lexicon Checkbox"
-msgstr "Sözlük / Lexicon Checkbox"
+msgid "Enable BibleSync as a member of the audience."
+msgstr ""
 
 #: ../ui/prefs.glade.h:45 ../ui/prefs.gtkbuilder.h:45
-msgid "Parallel View in a tab"
-msgstr "Bir sekmeyi paralel Profili"
+#, fuzzy
+msgid "BSP audience radio button"
+msgstr "Düz Metin Radyo Düğmesi"
 
 #: ../ui/prefs.glade.h:46 ../ui/prefs.gtkbuilder.h:46
-msgid "Tabs and Panes"
-msgstr "Sekmeleri ve Bölmeleri"
+#, fuzzy
+msgid "_Personal"
+msgstr "Kişisel"
 
 #: ../ui/prefs.glade.h:47 ../ui/prefs.gtkbuilder.h:47
+msgid "Enable BibleSync for personal or team use."
+msgstr ""
+
+#: ../ui/prefs.glade.h:48 ../ui/prefs.gtkbuilder.h:48
+#, fuzzy
+msgid "BSP personal radio button"
+msgstr "Düzenli ifade Radiobuton"
+
+#: ../ui/prefs.glade.h:49 ../ui/prefs.gtkbuilder.h:49
+msgid "Private"
+msgstr ""
+
+#: ../ui/prefs.glade.h:50 ../ui/prefs.gtkbuilder.h:50
+msgid ""
+"When in Personal mode, only programs running on this machine will hear your "
+"navigation."
+msgstr ""
+
+#: ../ui/prefs.glade.h:51 ../ui/prefs.gtkbuilder.h:51
+#, fuzzy
+msgid "BSP privacy button"
+msgstr "Ayet Radyo Düğmesi"
+
+#: ../ui/prefs.glade.h:52 ../ui/prefs.gtkbuilder.h:52
+#, fuzzy
+msgid "Navigate"
+msgstr "Kurtuluş"
+
+#: ../ui/prefs.glade.h:53 ../ui/prefs.gtkbuilder.h:53
+msgid "Choose how to accept incoming navigation synchronization."
+msgstr ""
+
+#: ../ui/prefs.glade.h:54 ../ui/prefs.gtkbuilder.h:54
+#, fuzzy
+msgid "_Direct"
+msgstr "Dizin"
+
+#: ../ui/prefs.glade.h:55 ../ui/prefs.gtkbuilder.h:55
+msgid "BibleSync navigation will send Xiphos directly to the verse indicated."
+msgstr ""
+
+#: ../ui/prefs.glade.h:56 ../ui/prefs.gtkbuilder.h:56
+#, fuzzy
+msgid "BSP nav direct radio button"
+msgstr "Tek modül Radiobuton"
+
+#: ../ui/prefs.glade.h:57 ../ui/prefs.gtkbuilder.h:57
+#, fuzzy
+msgid "_Verse list"
+msgstr "Ayet Listesi"
+
+#: ../ui/prefs.glade.h:58 ../ui/prefs.gtkbuilder.h:58
+msgid "BibleSync navigation will use Xiphos' sidebar verse list."
+msgstr ""
+
+#: ../ui/prefs.glade.h:59 ../ui/prefs.gtkbuilder.h:59
+#, fuzzy
+msgid "BSP nav verse list radio button"
+msgstr "Modül listesi Radiobuton"
+
+#: ../ui/prefs.glade.h:60 ../ui/prefs.gtkbuilder.h:60
+msgid "Listen"
+msgstr ""
+
+#: ../ui/prefs.glade.h:61 ../ui/prefs.gtkbuilder.h:61
+msgid "Xiphos will listen to Speakers according to choice here."
+msgstr ""
+
+#: ../ui/prefs.glade.h:62 ../ui/prefs.gtkbuilder.h:62
+msgid "Selective"
+msgstr ""
+
+#: ../ui/prefs.glade.h:63 ../ui/prefs.gtkbuilder.h:63
+msgid "Choose the Speakers to be followed."
+msgstr ""
+
+#: ../ui/prefs.glade.h:64 ../ui/prefs.gtkbuilder.h:64
+#, fuzzy
+msgid "BSP listen some radio button"
+msgstr "Düz Metin Radyo Düğmesi"
+
+#: ../ui/prefs.glade.h:65 ../ui/prefs.gtkbuilder.h:65
+msgid "All"
+msgstr ""
+
+#: ../ui/prefs.glade.h:66 ../ui/prefs.gtkbuilder.h:66
+msgid "All Speakers will be followed."
+msgstr ""
+
+#: ../ui/prefs.glade.h:67 ../ui/prefs.gtkbuilder.h:67
+#, fuzzy
+msgid "BSP listen all radio button"
+msgstr "Düzenli ifade Radiobuton"
+
+#: ../ui/prefs.glade.h:68 ../ui/prefs.gtkbuilder.h:68
+msgid "None"
+msgstr ""
+
+#: ../ui/prefs.glade.h:69 ../ui/prefs.gtkbuilder.h:69
+msgid "No Speakers will be followed."
+msgstr ""
+
+#: ../ui/prefs.glade.h:70 ../ui/prefs.gtkbuilder.h:70
+#, fuzzy
+msgid "BSP listen none radio button"
+msgstr "Düz Metin Radyo Düğmesi"
+
+#: ../ui/prefs.glade.h:72 ../ui/prefs.gtkbuilder.h:72
+msgid ""
+"Additional traces can be presented during BibleSync operation by enabling "
+"presence, mismatch, and debug. Beware enabling these, they can be very "
+"chatty. Also, decide whether to allow group parameter as Xiphos' tab number."
+msgstr ""
+
+#: ../ui/prefs.glade.h:73 ../ui/prefs.gtkbuilder.h:73
+#, fuzzy
+msgid "Presence"
+msgstr "Tercihleri"
+
+#: ../ui/prefs.glade.h:74 ../ui/prefs.gtkbuilder.h:74
+msgid "Presence announcements will be shown in dialogs."
+msgstr ""
+
+#: ../ui/prefs.glade.h:75 ../ui/prefs.gtkbuilder.h:75
+#, fuzzy
+msgid "BSP presence button"
+msgstr "Ayet Radyo Düğmesi"
+
+#: ../ui/prefs.glade.h:76 ../ui/prefs.gtkbuilder.h:76
+#, fuzzy
+msgid "Mismatch"
+msgstr "maçlar"
+
+#: ../ui/prefs.glade.h:77 ../ui/prefs.gtkbuilder.h:77
+msgid "Mismatches from your session will be shown in dialogs."
+msgstr ""
+
+#: ../ui/prefs.glade.h:78 ../ui/prefs.gtkbuilder.h:78
+msgid "BSP mismatch button"
+msgstr ""
+
+#: ../ui/prefs.glade.h:79 ../ui/prefs.gtkbuilder.h:79
+msgid "Debug"
+msgstr ""
+
+#: ../ui/prefs.glade.h:80 ../ui/prefs.gtkbuilder.h:80
+msgid "Packet tracing."
+msgstr ""
+
+#: ../ui/prefs.glade.h:81 ../ui/prefs.gtkbuilder.h:81
+msgid "BSP event debug button"
+msgstr ""
+
+#: ../ui/prefs.glade.h:82 ../ui/prefs.gtkbuilder.h:82
+msgid "_Group as tab"
+msgstr ""
+
+#: ../ui/prefs.glade.h:83 ../ui/prefs.gtkbuilder.h:83
+msgid ""
+"Interpret the protocol's group number parameter as Xiphos' tab number. "
+"Disabling this may be necessary if some Speakers' use of group number is not "
+"appropriate as a tab number."
+msgstr ""
+
+#: ../ui/prefs.glade.h:84 ../ui/prefs.gtkbuilder.h:84
+#, fuzzy
+msgid "BSP event group-as-tab button"
+msgstr "Tek modül Radiobuton"
+
+#: ../ui/prefs.glade.h:86 ../ui/prefs.gtkbuilder.h:86
 msgid "<b>General</b>"
 msgstr "<b>Genel</b>"
 
-#: ../ui/prefs.glade.h:48 ../ui/prefs.gtkbuilder.h:48
+#: ../ui/prefs.glade.h:87 ../ui/prefs.gtkbuilder.h:87
 msgid ""
 "Select a particular language for interface display, other than your usual "
 "setting"
@@ -3513,23 +3753,23 @@ msgstr ""
 "Her zamanki ayarından daha arayüzünü görüntülemek için belirli bir dil, "
 "diğer Seç"
 
-#: ../ui/prefs.glade.h:49 ../ui/prefs.gtkbuilder.h:49
+#: ../ui/prefs.glade.h:88 ../ui/prefs.gtkbuilder.h:88
 msgid "Special Locale (requires restart)"
 msgstr "Özel Locale (yeniden başlatma gerektirir)"
 
-#: ../ui/prefs.glade.h:50 ../ui/prefs.gtkbuilder.h:50
+#: ../ui/prefs.glade.h:89 ../ui/prefs.gtkbuilder.h:89
 msgid "Special Locale Combo"
 msgstr "Yerel Combo Özel"
 
-#: ../ui/prefs.glade.h:51 ../ui/prefs.gtkbuilder.h:51
+#: ../ui/prefs.glade.h:90 ../ui/prefs.gtkbuilder.h:90
 msgid "Show splash screen at start up"
 msgstr "Gösterisi ekranını başlatmak"
 
-#: ../ui/prefs.glade.h:52 ../ui/prefs.gtkbuilder.h:52
+#: ../ui/prefs.glade.h:91 ../ui/prefs.gtkbuilder.h:91
 msgid "Show Daily Devotion at start up"
 msgstr "Gösterisi Günlük Devotion başlatmak"
 
-#: ../ui/prefs.glade.h:53 ../ui/prefs.gtkbuilder.h:53
+#: ../ui/prefs.glade.h:92 ../ui/prefs.gtkbuilder.h:92
 msgid ""
 "If you have set a preferred daily devotion module, its entry for today will "
 "be shown at startup."
@@ -3537,11 +3777,11 @@ msgstr ""
 "Bir tercih edilen günlük bağlılık modülü set varsa, bugün için kendi giriş "
 "açılışta gösterilecek."
 
-#: ../ui/prefs.glade.h:54 ../ui/prefs.gtkbuilder.h:54
+#: ../ui/prefs.glade.h:93 ../ui/prefs.gtkbuilder.h:93
 msgid "Use default Dictionary"
 msgstr "Varsayılan Sözlük"
 
-#: ../ui/prefs.glade.h:55 ../ui/prefs.gtkbuilder.h:55
+#: ../ui/prefs.glade.h:94 ../ui/prefs.gtkbuilder.h:94
 msgid ""
 "Make double-click of a word always use default dictionary instead of "
 "dictionary currently displayed"
@@ -3549,412 +3789,269 @@ msgstr ""
 "kullanmak her zaman bir sözcüğün çift tıklatın olun varsayılan anda "
 "görüntülenen Sözlük yerine Sözlük"
 
-#: ../ui/prefs.glade.h:56 ../ui/prefs.gtkbuilder.h:56
+#: ../ui/prefs.glade.h:95 ../ui/prefs.gtkbuilder.h:95
 msgid "Use default Dictionary Checkbox"
 msgstr "Varsayılan Sözlük Checkbox"
 
-#: ../ui/prefs.glade.h:57 ../ui/prefs.gtkbuilder.h:57
+#: ../ui/prefs.glade.h:96 ../ui/prefs.gtkbuilder.h:96
 msgid "Scroll to Previous/Next Chapter"
 msgstr "Ilerleyin Önceki / Sonraki Bölüm için"
 
-#: ../ui/prefs.glade.h:58 ../ui/prefs.gtkbuilder.h:58
+#: ../ui/prefs.glade.h:97 ../ui/prefs.gtkbuilder.h:97
 msgid "Use Bible Text scroll bar to scroll to previous or next chapter"
 msgstr ""
 "Kullanım İncil Metin önceki veya sonraki bölüme gitmek için kaydırma çubuğunu"
 
-#: ../ui/prefs.glade.h:59 ../ui/prefs.gtkbuilder.h:59
+#: ../ui/prefs.glade.h:98 ../ui/prefs.gtkbuilder.h:98
 msgid "Scroll to Previous/Next Chapter Checkbox"
 msgstr "Ilerleyin Önceki / Sonraki Bölüm Onay için"
 
-#: ../ui/prefs.glade.h:60 ../ui/prefs.gtkbuilder.h:60
+#: ../ui/prefs.glade.h:99 ../ui/prefs.gtkbuilder.h:99
 msgid "Resize images"
 msgstr "Boyutlandırmak görüntüler"
 
-#: ../ui/prefs.glade.h:61 ../ui/prefs.gtkbuilder.h:61
+#: ../ui/prefs.glade.h:100 ../ui/prefs.gtkbuilder.h:100
 msgid "Automatically resize image content to fit the pane"
 msgstr ""
 "Otomatik bölmesine sığacak şekilde görüntü içeriğini yeniden boyutlandırmak"
 
-#: ../ui/prefs.glade.h:62 ../ui/prefs.gtkbuilder.h:62
+#: ../ui/prefs.glade.h:101 ../ui/prefs.gtkbuilder.h:101
 msgid "Resize images checkbox"
 msgstr "Boyutlandırmak görüntüler onay"
 
-#: ../ui/prefs.glade.h:63 ../ui/prefs.gtkbuilder.h:63
+#: ../ui/prefs.glade.h:102 ../ui/prefs.gtkbuilder.h:102
 msgid "Highlight current verse"
 msgstr "Vurgulamak akım ayet"
 
-#: ../ui/prefs.glade.h:64 ../ui/prefs.gtkbuilder.h:64
+#: ../ui/prefs.glade.h:103 ../ui/prefs.gtkbuilder.h:103
 msgid "Apply high-contrast highlight to current verse - see color pickers"
 msgstr ""
 "Güncel ayet uygulama yüksek kontrastlı vurgulamak - renk toplayıcılar görmek"
 
-#: ../ui/prefs.glade.h:65 ../ui/prefs.gtkbuilder.h:65
+#: ../ui/prefs.glade.h:104 ../ui/prefs.gtkbuilder.h:104
 msgid "Highlight current verse check box"
 msgstr "Vurgulamak geçerli ayet onay kutusunu"
 
-#: ../ui/prefs.glade.h:66 ../ui/prefs.gtkbuilder.h:66
+#: ../ui/prefs.glade.h:105 ../ui/prefs.gtkbuilder.h:105
 msgid "Highlight user annotations"
 msgstr "Vurgulamak kullanıcı açıklamalar"
 
-#: ../ui/prefs.glade.h:67 ../ui/prefs.gtkbuilder.h:67
+#: ../ui/prefs.glade.h:106 ../ui/prefs.gtkbuilder.h:106
 msgid "Use inverted highlight on user-annotated verses"
 msgstr "kullanıcı açıklamalı ayetlere ters vurgulamak kullanın"
 
-#: ../ui/prefs.glade.h:68 ../ui/prefs.gtkbuilder.h:68
+#: ../ui/prefs.glade.h:107 ../ui/prefs.gtkbuilder.h:107
 msgid "Highlight user annotations check box"
 msgstr "Vurgulamak kullanıcı açıklamalar onay kutusunu"
 
-#: ../ui/prefs.glade.h:69 ../ui/prefs.gtkbuilder.h:69
+#: ../ui/prefs.glade.h:108 ../ui/prefs.gtkbuilder.h:108
 msgid "Cross-references in verse list"
 msgstr "ayet listesinde çapraz referanslar"
 
-#: ../ui/prefs.glade.h:70 ../ui/prefs.gtkbuilder.h:70
+#: ../ui/prefs.glade.h:109 ../ui/prefs.gtkbuilder.h:109
 msgid "Use the verse list for Bible cross-references instead of the previewer"
 msgstr "İncil çapraz referansları için ayet liste yerine önizleyicide kullanın"
 
-#: ../ui/prefs.glade.h:71 ../ui/prefs.gtkbuilder.h:71
+#: ../ui/prefs.glade.h:110 ../ui/prefs.gtkbuilder.h:110
 msgid "Xrefs in verse list check box"
 msgstr "ayet liste onay kutusunu Xrefs"
 
-#: ../ui/prefs.glade.h:72 ../ui/prefs.gtkbuilder.h:72
+#: ../ui/prefs.glade.h:111 ../ui/prefs.gtkbuilder.h:111
 msgid "Enable Prayer Lists"
 msgstr "Etkinleştirmek Namaz Listeler"
 
-#: ../ui/prefs.glade.h:73 ../ui/prefs.gtkbuilder.h:73
+#: ../ui/prefs.glade.h:112 ../ui/prefs.gtkbuilder.h:112
 msgid "Make journals/prayer lists available"
 msgstr "mevcut dergilerin / dua listeleri olun"
 
-#: ../ui/prefs.glade.h:74 ../ui/prefs.gtkbuilder.h:74
+#: ../ui/prefs.glade.h:113 ../ui/prefs.gtkbuilder.h:113
 msgid "Enable Prayer Lists Checkbox"
 msgstr "Etkinleştirmek Namaz Listeler Checkbox"
 
-#: ../ui/prefs.glade.h:75 ../ui/prefs.gtkbuilder.h:75
+#: ../ui/prefs.glade.h:114 ../ui/prefs.gtkbuilder.h:114
 #, fuzzy
-msgid "Verse number:"
+msgid "Verse number"
 msgstr "Ayet sayısı"
 
-#: ../ui/prefs.glade.h:77 ../ui/prefs.gtkbuilder.h:77
+#: ../ui/prefs.glade.h:115 ../ui/prefs.gtkbuilder.h:115
+msgid "Offset the verse number in several ways"
+msgstr ""
+
+#: ../ui/prefs.glade.h:117 ../ui/prefs.gtkbuilder.h:117
 #, fuzzy
 msgid "Show verse number in bold text"
 msgstr "metin görüntüleme ayet numaraları"
 
-#: ../ui/prefs.glade.h:78 ../ui/prefs.gtkbuilder.h:78
+#: ../ui/prefs.glade.h:118 ../ui/prefs.gtkbuilder.h:118
 #, fuzzy
 msgid "Verse number bold checkbox"
 msgstr "Ayet sayısı boyutu"
 
-#: ../ui/prefs.glade.h:79 ../ui/prefs.gtkbuilder.h:79
+#: ../ui/prefs.glade.h:119 ../ui/prefs.gtkbuilder.h:119
 msgid "Brackets"
 msgstr ""
 
-#: ../ui/prefs.glade.h:80 ../ui/prefs.gtkbuilder.h:80
+#: ../ui/prefs.glade.h:120 ../ui/prefs.gtkbuilder.h:120
 msgid "Show verse number with [surrounding brackets]"
 msgstr ""
 
-#: ../ui/prefs.glade.h:81 ../ui/prefs.gtkbuilder.h:81
+#: ../ui/prefs.glade.h:121 ../ui/prefs.gtkbuilder.h:121
 #, fuzzy
 msgid "Verse number bracket checkbox"
 msgstr "Boyutlandırmak görüntüler onay"
 
-#: ../ui/prefs.glade.h:82 ../ui/prefs.gtkbuilder.h:82
+#: ../ui/prefs.glade.h:122 ../ui/prefs.gtkbuilder.h:122
 #, fuzzy
 msgid "Superscript"
 msgstr "Açıklama"
 
-#: ../ui/prefs.glade.h:83 ../ui/prefs.gtkbuilder.h:83
+#: ../ui/prefs.glade.h:123 ../ui/prefs.gtkbuilder.h:123
 #, fuzzy
 msgid "Show verse number as a superscript"
 msgstr "Göstermek Ayet _Numbers"
 
-#: ../ui/prefs.glade.h:84 ../ui/prefs.gtkbuilder.h:84
+#: ../ui/prefs.glade.h:124 ../ui/prefs.gtkbuilder.h:124
 #, fuzzy
 msgid "Verse number superscript checkbox"
 msgstr "Ayet sayısı boyutu"
 
-#: ../ui/prefs.glade.h:85 ../ui/prefs.gtkbuilder.h:85
-msgid ""
-"Xiphos is the first Bible study program to provide an implementation of "
-"BibleSync, a new synchronization protocol for Bible programs. If you work "
-"with multiple Bible programs, or if you work in a team, or you have "
-"classroom activities using shared study, BibleSync is a useful tool for you."
-msgstr ""
-
-#: ../ui/prefs.glade.h:86 ../ui/prefs.gtkbuilder.h:86
-msgid ""
-"BibleSync Protocol is a method for synchronization of BSP-compatible Bible "
-"programs. It operates in 1 of 3 modes: Personal, to synchronize multiple "
-"Bible applications of your own, or in a working team; Speaker, to drive a "
-"lecture audience's Bible programs to follow along; Audience, to receive the "
-"speaker's navigation. Select its mode here."
-msgstr ""
-
-#: ../ui/prefs.glade.h:87 ../ui/prefs.gtkbuilder.h:87
-msgid "Off"
-msgstr ""
-
-#: ../ui/prefs.glade.h:88 ../ui/prefs.gtkbuilder.h:88
-msgid "Disable BibleSync."
-msgstr ""
-
-#: ../ui/prefs.glade.h:89 ../ui/prefs.gtkbuilder.h:89
-#, fuzzy
-msgid "BSP off radio button"
-msgstr "Kitap Radyo Düğmesi"
-
-#: ../ui/prefs.glade.h:90 ../ui/prefs.gtkbuilder.h:90
-msgid "Speaker"
-msgstr ""
-
-#: ../ui/prefs.glade.h:91 ../ui/prefs.gtkbuilder.h:91
-msgid "Enable BibleSync as the speaker."
-msgstr ""
-
-#: ../ui/prefs.glade.h:92 ../ui/prefs.gtkbuilder.h:92
-#, fuzzy
-msgid "BSP speaker radio button"
-msgstr "Tam sözcük Radiobuton"
-
-#: ../ui/prefs.glade.h:93 ../ui/prefs.gtkbuilder.h:93
-msgid "Audience"
-msgstr ""
-
-#: ../ui/prefs.glade.h:94 ../ui/prefs.gtkbuilder.h:94
-msgid "Enable BibleSync as a member of the audience."
-msgstr ""
-
-#: ../ui/prefs.glade.h:95 ../ui/prefs.gtkbuilder.h:95
-#, fuzzy
-msgid "BSP audience radio button"
-msgstr "Düz Metin Radyo Düğmesi"
-
-#: ../ui/prefs.glade.h:97 ../ui/prefs.gtkbuilder.h:97
-msgid "Enable BibleSync for personal or team use."
-msgstr ""
-
-#: ../ui/prefs.glade.h:98 ../ui/prefs.gtkbuilder.h:98
-#, fuzzy
-msgid "BSP personal radio button"
-msgstr "Düzenli ifade Radiobuton"
-
-#: ../ui/prefs.glade.h:99 ../ui/prefs.gtkbuilder.h:99
-#, fuzzy
-msgid "Direct"
-msgstr "Dizin"
-
-#: ../ui/prefs.glade.h:100 ../ui/prefs.gtkbuilder.h:100
-msgid "BibleSync navigation will send Xiphos directly to the verse indicated."
-msgstr ""
-
-#: ../ui/prefs.glade.h:101 ../ui/prefs.gtkbuilder.h:101
-#, fuzzy
-msgid "BSP nav direct radio button"
-msgstr "Tek modül Radiobuton"
-
-#: ../ui/prefs.glade.h:102 ../ui/prefs.gtkbuilder.h:102
-#, fuzzy
-msgid "Verse list"
-msgstr "Ayet Listesi"
-
-#: ../ui/prefs.glade.h:103 ../ui/prefs.gtkbuilder.h:103
-msgid "BibleSync navigation will use Xiphos' verse list."
-msgstr ""
-
-#: ../ui/prefs.glade.h:104 ../ui/prefs.gtkbuilder.h:104
-#, fuzzy
-msgid "BSP nav verse list radio button"
-msgstr "Modül listesi Radiobuton"
-
-#: ../ui/prefs.glade.h:105 ../ui/prefs.gtkbuilder.h:105
-#, fuzzy
-msgid "Presence"
-msgstr "Tercihleri"
-
-#: ../ui/prefs.glade.h:106 ../ui/prefs.gtkbuilder.h:106
-msgid "\"Presence\" announcements will be shown in dialogs."
-msgstr ""
-
-#: ../ui/prefs.glade.h:107 ../ui/prefs.gtkbuilder.h:107
-#, fuzzy
-msgid "BSP presence button"
-msgstr "Ayet Radyo Düğmesi"
-
-#: ../ui/prefs.glade.h:108 ../ui/prefs.gtkbuilder.h:108
-#, fuzzy
-msgid "Mismatch"
-msgstr "maçlar"
-
-#: ../ui/prefs.glade.h:109 ../ui/prefs.gtkbuilder.h:109
-msgid "Mismatches from your session will be shown in dialogs."
-msgstr ""
-
-#: ../ui/prefs.glade.h:110 ../ui/prefs.gtkbuilder.h:110
-msgid "BSP mismatch button"
-msgstr ""
-
-#: ../ui/prefs.glade.h:111 ../ui/prefs.gtkbuilder.h:111
-msgid "Debug"
-msgstr ""
-
-#: ../ui/prefs.glade.h:112 ../ui/prefs.gtkbuilder.h:112
-msgid "Packet tracing."
-msgstr ""
-
-#: ../ui/prefs.glade.h:113 ../ui/prefs.gtkbuilder.h:113
-msgid "BSP event debug button"
-msgstr ""
-
-#: ../ui/prefs.glade.h:114 ../ui/prefs.gtkbuilder.h:114
-msgid "Private"
-msgstr ""
-
-#: ../ui/prefs.glade.h:115 ../ui/prefs.gtkbuilder.h:115
-msgid ""
-"When in Personal mode, only programs running on this machine will hear your "
-"navigation."
-msgstr ""
-
-#: ../ui/prefs.glade.h:116 ../ui/prefs.gtkbuilder.h:116
-#, fuzzy
-msgid "BSP privacy button"
-msgstr "Ayet Radyo Düğmesi"
-
-#: ../ui/prefs.glade.h:117 ../ui/prefs.gtkbuilder.h:117
+#: ../ui/prefs.glade.h:125 ../ui/prefs.gtkbuilder.h:125
 #, fuzzy
 msgid "StudyPad default directory"
 msgstr "StudyPad varsayılan dizin combo"
 
-#: ../ui/prefs.glade.h:118 ../ui/prefs.gtkbuilder.h:118
+#: ../ui/prefs.glade.h:126 ../ui/prefs.gtkbuilder.h:126
 msgid "Select A Directory"
 msgstr "Bir Dizin Seçin"
 
-#: ../ui/prefs.glade.h:119 ../ui/prefs.gtkbuilder.h:119
+#: ../ui/prefs.glade.h:127 ../ui/prefs.gtkbuilder.h:127
 msgid "StudyPad default directory combo"
 msgstr "StudyPad varsayılan dizin combo"
 
-#: ../ui/prefs.glade.h:120 ../ui/prefs.gtkbuilder.h:120
+#: ../ui/prefs.glade.h:128 ../ui/prefs.gtkbuilder.h:128
 msgid "General Misc"
 msgstr "Genel Çeşitli"
 
-#: ../ui/prefs.glade.h:121 ../ui/prefs.gtkbuilder.h:121
+#: ../ui/prefs.glade.h:129 ../ui/prefs.gtkbuilder.h:129
 msgid "<b>Main Window Modules</b>"
 msgstr "<b>Ana Pencere Modülleri</b>"
 
-#: ../ui/prefs.glade.h:122 ../ui/prefs.gtkbuilder.h:122
+#: ../ui/prefs.glade.h:130 ../ui/prefs.gtkbuilder.h:130
 msgid "Biblical Text"
 msgstr "İncille Metin"
 
-#: ../ui/prefs.glade.h:123 ../ui/prefs.gtkbuilder.h:123
+#: ../ui/prefs.glade.h:131 ../ui/prefs.gtkbuilder.h:131
 msgid "Change Biblical Text Combo"
 msgstr "Combo İncil Metin Değişikliği"
 
-#: ../ui/prefs.glade.h:125 ../ui/prefs.gtkbuilder.h:125
+#: ../ui/prefs.glade.h:133 ../ui/prefs.gtkbuilder.h:133
 msgid "Change Commentary Combo"
 msgstr "Combo Yorum değiştir"
 
-#: ../ui/prefs.glade.h:126 ../ui/prefs.gtkbuilder.h:126
+#: ../ui/prefs.glade.h:134 ../ui/prefs.gtkbuilder.h:134
 msgid "Dictionary"
 msgstr "Sözlük"
 
-#: ../ui/prefs.glade.h:127 ../ui/prefs.gtkbuilder.h:127
+#: ../ui/prefs.glade.h:135 ../ui/prefs.gtkbuilder.h:135
 msgid "Change Dictionary Combo"
 msgstr "Değiştirmek Combo Sözlük"
 
-#: ../ui/prefs.glade.h:129 ../ui/prefs.gtkbuilder.h:129
+#: ../ui/prefs.glade.h:137 ../ui/prefs.gtkbuilder.h:137
 msgid "Change Book Combo"
 msgstr "Combo Kitap Değişim"
 
-#: ../ui/prefs.glade.h:130 ../ui/prefs.gtkbuilder.h:130
+#: ../ui/prefs.glade.h:138 ../ui/prefs.gtkbuilder.h:138
 #: ../ui/search-dialog.glade.h:22 ../ui/search-dialog.gtkbuilder.h:23
 msgid "<b>Modules</b>"
 msgstr "<b>Modülleri</b>"
 
-#: ../ui/prefs.glade.h:131 ../ui/prefs.gtkbuilder.h:131
+#: ../ui/prefs.glade.h:139 ../ui/prefs.gtkbuilder.h:139
 #: ../ui/search-dialog.glade.h:86 ../ui/search-dialog.gtkbuilder.h:86
 msgid "Clear all modules from the list"
 msgstr "Net listeden tüm modülleri"
 
-#: ../ui/prefs.glade.h:132 ../ui/prefs.gtkbuilder.h:132
+#: ../ui/prefs.glade.h:140 ../ui/prefs.gtkbuilder.h:140
 #: ../ui/search-dialog.glade.h:87 ../ui/search-dialog.gtkbuilder.h:87
 msgid "Clear Modules from List Button"
 msgstr "Liste Button sil Modülleri"
 
-#: ../ui/prefs.glade.h:133 ../ui/prefs.gtkbuilder.h:133
+#: ../ui/prefs.glade.h:141 ../ui/prefs.gtkbuilder.h:141
 #: ../ui/search-dialog.glade.h:88 ../ui/search-dialog.gtkbuilder.h:88
 msgid "Remove the selected module from the list"
 msgstr "Listeden seçilen modülünü çıkarın"
 
-#: ../ui/prefs.glade.h:134 ../ui/prefs.gtkbuilder.h:134
+#: ../ui/prefs.glade.h:142 ../ui/prefs.gtkbuilder.h:142
 #: ../ui/search-dialog.glade.h:89 ../ui/search-dialog.gtkbuilder.h:89
 msgid "Delete Selected Module From List Button"
 msgstr "Liste Button From Delete Selected Modülü"
 
-#: ../ui/prefs.glade.h:135 ../ui/prefs.gtkbuilder.h:135
+#: ../ui/prefs.glade.h:143 ../ui/prefs.gtkbuilder.h:143
 msgid "Open a dialog to select modules"
 msgstr "modülleri seçmek için bir iletişim aç"
 
-#: ../ui/prefs.glade.h:136 ../ui/prefs.gtkbuilder.h:136
+#: ../ui/prefs.glade.h:144 ../ui/prefs.gtkbuilder.h:144
 #: ../ui/search-dialog.glade.h:91 ../ui/search-dialog.gtkbuilder.h:91
 msgid "Add Modules"
 msgstr "Eklemek Modülleri"
 
-#: ../ui/prefs.glade.h:137 ../ui/prefs.gtkbuilder.h:137
+#: ../ui/prefs.glade.h:145 ../ui/prefs.gtkbuilder.h:145
 #: ../ui/search-dialog.glade.h:92 ../ui/search-dialog.gtkbuilder.h:92
 msgid "Open Selection Dialog Button"
 msgstr "Açık Seçim Dialog Button"
 
-#: ../ui/prefs.glade.h:138 ../ui/prefs.gtkbuilder.h:138
+#: ../ui/prefs.glade.h:146 ../ui/prefs.gtkbuilder.h:146
 msgid "Modules Parallel"
 msgstr "Modülleri Paralel"
 
-#: ../ui/prefs.glade.h:139 ../ui/prefs.gtkbuilder.h:139
+#: ../ui/prefs.glade.h:147 ../ui/prefs.gtkbuilder.h:147
 msgid "<b>Special Purpose Modules</b>"
 msgstr "<b>Özel Amaçlı Modüller</b>"
 
-#: ../ui/prefs.glade.h:140 ../ui/prefs.gtkbuilder.h:140
+#: ../ui/prefs.glade.h:148 ../ui/prefs.gtkbuilder.h:148
 msgid "Daily Devotional"
 msgstr "Günlük adanmışlık"
 
-#: ../ui/prefs.glade.h:141 ../ui/prefs.gtkbuilder.h:141
+#: ../ui/prefs.glade.h:149 ../ui/prefs.gtkbuilder.h:149
 msgid "Daily Devotional Combo"
 msgstr "Günlük Combo adanmışlık"
 
-#: ../ui/prefs.glade.h:142 ../ui/prefs.gtkbuilder.h:142
+#: ../ui/prefs.glade.h:150 ../ui/prefs.gtkbuilder.h:150
 msgid "Hebrew Lexicon"
 msgstr "İbranice Lexicon"
 
-#: ../ui/prefs.glade.h:143 ../ui/prefs.gtkbuilder.h:143
+#: ../ui/prefs.glade.h:151 ../ui/prefs.gtkbuilder.h:151
 msgid "Hebrew Lexicon Combo"
 msgstr "İbranice Lexicon Combo"
 
-#: ../ui/prefs.glade.h:144 ../ui/prefs.gtkbuilder.h:144
+#: ../ui/prefs.glade.h:152 ../ui/prefs.gtkbuilder.h:152
 msgid "Greek Lexicon"
 msgstr "Yunan Lexicon"
 
-#: ../ui/prefs.glade.h:145 ../ui/prefs.gtkbuilder.h:145
+#: ../ui/prefs.glade.h:153 ../ui/prefs.gtkbuilder.h:153
 msgid "Greek Lexicon Combo"
 msgstr "Lexicon Combo Yunan"
 
-#: ../ui/prefs.glade.h:146 ../ui/prefs.gtkbuilder.h:146
+#: ../ui/prefs.glade.h:154 ../ui/prefs.gtkbuilder.h:154
 msgid "Default Dictionary"
 msgstr "Varsayılan Sözlük"
 
-#: ../ui/prefs.glade.h:147 ../ui/prefs.gtkbuilder.h:147
+#: ../ui/prefs.glade.h:155 ../ui/prefs.gtkbuilder.h:155
 msgid "Change Default Dictionary Combo"
 msgstr "Değiştirmek Varsayılan Combo Sözlük"
 
-#: ../ui/prefs.glade.h:148 ../ui/prefs.gtkbuilder.h:148
+#: ../ui/prefs.glade.h:156 ../ui/prefs.gtkbuilder.h:156
 msgid "Personal Notes"
 msgstr "Kişisel Notlar"
 
-#: ../ui/prefs.glade.h:149 ../ui/prefs.gtkbuilder.h:149
+#: ../ui/prefs.glade.h:157 ../ui/prefs.gtkbuilder.h:157
 msgid "Change Personal Notes Combo"
 msgstr "Kişisel Notlar Combo değiştir"
 
-#: ../ui/prefs.glade.h:150 ../ui/prefs.gtkbuilder.h:150
+#: ../ui/prefs.glade.h:158 ../ui/prefs.gtkbuilder.h:158
 msgid "Modules Misc"
 msgstr "Modülleri Misc"
 
-#: ../ui/prefs.glade.h:151 ../ui/prefs.gtkbuilder.h:151
+#: ../ui/prefs.glade.h:159 ../ui/prefs.gtkbuilder.h:159
 #: ../ui/search-dialog.glade.h:115 ../ui/search-dialog.gtkbuilder.h:115
 msgid "Module Selection"
 msgstr "Modül Seçimi"
@@ -4651,10 +4748,6 @@ msgstr "editörü açın"
 msgid "Verse Per Line"
 msgstr "Ayet Başına Hattı"
 
-#: ../ui/xi-menus.glade.h:72 ../ui/xi-menus-popup.gtkbuilder.h:50
-msgid "Scripture Cross-references"
-msgstr "Din Çapraz referanslar"
-
 #: ../ui/xi-menus.glade.h:73 ../ui/xi-menus-popup.gtkbuilder.h:51
 msgid "Footnote/Cross-ref Markers"
 msgstr ""
@@ -4737,182 +4830,193 @@ msgstr "imlerinin bir dizi olarak listesini kaydedin"
 
 #: ../ui/xi-menus.glade.h:100 ../ui/xi-menus-popup.gtkbuilder.h:89
 msgid ""
+"Provide a dialog in which to paste a line of verse references, to fill the "
+"verse list."
+msgstr ""
+
+#: ../ui/xi-menus.glade.h:101 ../ui/xi-menus-popup.gtkbuilder.h:88
+#, fuzzy
+msgid "Populate verse list"
+msgstr "Ayet Listesi"
+
+#: ../ui/xi-menus.glade.h:102 ../ui/xi-menus-popup.gtkbuilder.h:91
+msgid ""
 "Send this verse list via BibleSync to others, if you are in Personal or "
 "Speaker mode."
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:101 ../ui/xi-menus-popup.gtkbuilder.h:88
+#: ../ui/xi-menus.glade.h:103 ../ui/xi-menus-popup.gtkbuilder.h:90
 msgid "Send list via BibleSync"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:102 ../ui/xi-menus-popup.gtkbuilder.h:90
+#: ../ui/xi-menus.glade.h:104 ../ui/xi-menus-popup.gtkbuilder.h:92
 msgid "Export List"
 msgstr "İhracat Listesi"
 
-#: ../ui/xi-menus.glade.h:103 ../ui/xi-menus-popup.gtkbuilder.h:2
+#: ../ui/xi-menus.glade.h:105 ../ui/xi-menus-popup.gtkbuilder.h:2
 msgid "Open this bookmark in a new tab"
 msgstr "yeni bir sekmede bu imi aç"
 
-#: ../ui/xi-menus.glade.h:104 ../ui/xi-menus-popup.gtkbuilder.h:1
+#: ../ui/xi-menus.glade.h:106 ../ui/xi-menus-popup.gtkbuilder.h:1
 msgid "Open in new tab"
 msgstr "yeni sekmede açma"
 
-#: ../ui/xi-menus.glade.h:105 ../ui/xi-menus-popup.gtkbuilder.h:4
+#: ../ui/xi-menus.glade.h:107 ../ui/xi-menus-popup.gtkbuilder.h:4
 msgid "Open this bookmark in a dialog"
 msgstr "bir iletişim içinde bu imi aç"
 
-#: ../ui/xi-menus.glade.h:106 ../ui/xi-menus-popup.gtkbuilder.h:3
+#: ../ui/xi-menus.glade.h:108 ../ui/xi-menus-popup.gtkbuilder.h:3
 msgid "Open in a dialog"
 msgstr "Bir iletişim aç"
 
-#: ../ui/xi-menus.glade.h:107 ../ui/xi-menus-popup.gtkbuilder.h:6
+#: ../ui/xi-menus.glade.h:109 ../ui/xi-menus-popup.gtkbuilder.h:6
 msgid "Add new folder to selected folder"
 msgstr "seçilen klasöre yeni bir klasör ekle"
 
-#: ../ui/xi-menus.glade.h:109 ../ui/xi-menus-popup.gtkbuilder.h:8
+#: ../ui/xi-menus.glade.h:111 ../ui/xi-menus-popup.gtkbuilder.h:8
 msgid "Insert new bookmark here"
 msgstr "Buraya ekle yeni yer imi"
 
-#: ../ui/xi-menus.glade.h:110 ../ui/xi-menus-popup.gtkbuilder.h:7
+#: ../ui/xi-menus.glade.h:112 ../ui/xi-menus-popup.gtkbuilder.h:7
 msgid "Insert Bookmark"
 msgstr "Favori Ekle"
 
-#: ../ui/xi-menus.glade.h:111 ../ui/xi-menus-popup.gtkbuilder.h:10
+#: ../ui/xi-menus.glade.h:113 ../ui/xi-menus-popup.gtkbuilder.h:10
 msgid "Edit bookmark item"
 msgstr "madde imini düzenle"
 
-#: ../ui/xi-menus.glade.h:112 ../ui/xi-menus-popup.gtkbuilder.h:9
+#: ../ui/xi-menus.glade.h:114 ../ui/xi-menus-popup.gtkbuilder.h:9
 msgid "_Edit Item"
 msgstr "_Edit Öğe"
 
-#: ../ui/xi-menus.glade.h:113 ../ui/xi-menus-popup.gtkbuilder.h:12
+#: ../ui/xi-menus.glade.h:115 ../ui/xi-menus-popup.gtkbuilder.h:12
 msgid "Delete item"
 msgstr "Silmek öğe"
 
-#: ../ui/xi-menus.glade.h:115 ../ui/xi-menus-popup.gtkbuilder.h:14
+#: ../ui/xi-menus.glade.h:117 ../ui/xi-menus-popup.gtkbuilder.h:14
 msgid "Expand all Bookmarks groups"
 msgstr "Genişletmek tüm imleri gruplar"
 
-#: ../ui/xi-menus.glade.h:116 ../ui/xi-menus-popup.gtkbuilder.h:13
+#: ../ui/xi-menus.glade.h:118 ../ui/xi-menus-popup.gtkbuilder.h:13
 msgid "Expand All"
 msgstr "Tümünü Genişlet"
 
-#: ../ui/xi-menus.glade.h:117 ../ui/xi-menus-popup.gtkbuilder.h:16
+#: ../ui/xi-menus.glade.h:119 ../ui/xi-menus-popup.gtkbuilder.h:16
 msgid "Collapse all Bookmarks groups"
 msgstr "Tümünü daralt imleri gruplar"
 
-#: ../ui/xi-menus.glade.h:118 ../ui/xi-menus-popup.gtkbuilder.h:15
+#: ../ui/xi-menus.glade.h:120 ../ui/xi-menus-popup.gtkbuilder.h:15
 msgid "Collapse All"
 msgstr "Çöküşü Tüm"
 
-#: ../ui/xi-menus.glade.h:119 ../ui/xi-menus-popup.gtkbuilder.h:17
+#: ../ui/xi-menus.glade.h:121 ../ui/xi-menus-popup.gtkbuilder.h:17
 msgid "Allow items to be moved from one folder to another"
 msgstr "Izin öğeleri başka bir klasörden diğerine taşınacak"
 
-#: ../ui/xi-menus.glade.h:120 ../ui/xi-menus-popup.gtkbuilder.h:18
+#: ../ui/xi-menus.glade.h:122 ../ui/xi-menus-popup.gtkbuilder.h:18
 msgid "Allow Reordering"
 msgstr "Reordering izin ver"
 
-#: ../ui/xi-menus.glade.h:121 ../ui/xi-menus-popup.gtkbuilder.h:20
+#: ../ui/xi-menus.glade.h:123 ../ui/xi-menus-popup.gtkbuilder.h:20
 msgid "Load other bookmarks file (default: from BibleTime)"
 msgstr "Yük diğer imleri dosyası (varsayılan: BibleTime itibaren)"
 
-#: ../ui/xi-menus.glade.h:122 ../ui/xi-menus-popup.gtkbuilder.h:19
+#: ../ui/xi-menus.glade.h:124 ../ui/xi-menus-popup.gtkbuilder.h:19
 msgid "Import Bookmarks"
 msgstr "Ithalat imleri"
 
-#: ../ui/xi-menus.glade.h:123 ../ui/xi-menus-popup.gtkbuilder.h:22
+#: ../ui/xi-menus.glade.h:125 ../ui/xi-menus-popup.gtkbuilder.h:22
 msgid "Remove folder and save it"
 msgstr "klasöre çıkartın ve kaydedin"
 
-#: ../ui/xi-menus.glade.h:124 ../ui/xi-menus-popup.gtkbuilder.h:21
+#: ../ui/xi-menus.glade.h:126 ../ui/xi-menus-popup.gtkbuilder.h:21
 msgid "Export Folder"
 msgstr "Ihracat Klasör"
 
-#: ../ui/xi-menus.glade.h:125 ../ui/xi-menus-popup.gtkbuilder.h:30
+#: ../ui/xi-menus.glade.h:127 ../ui/xi-menus-popup.gtkbuilder.h:30
 msgid "Open selected module in a new tab"
 msgstr "Açık yeni bir sekmede modül seçili"
 
-#: ../ui/xi-menus.glade.h:126 ../ui/xi-menus-popup.gtkbuilder.h:32
+#: ../ui/xi-menus.glade.h:128 ../ui/xi-menus-popup.gtkbuilder.h:32
 msgid ""
 "Open selected module in a\n"
 "\tseparate ['dialog'] window"
 msgstr "Açık pencere] &#39;Seçilen modülü ayrı bir [&#39; iletişim"
 
-#: ../ui/xi-menus.glade.h:128 ../ui/xi-menus-popup.gtkbuilder.h:31
+#: ../ui/xi-menus.glade.h:130 ../ui/xi-menus-popup.gtkbuilder.h:31
 msgid "Open in a separate window"
 msgstr "ayrı bir pencerede aç"
 
-#: ../ui/xi-menus.glade.h:129 ../ui/xi-menus-popup.gtkbuilder.h:73
+#: ../ui/xi-menus.glade.h:131 ../ui/xi-menus-popup.gtkbuilder.h:73
 msgid "Create a new simple prayer list"
 msgstr "Yeni bir basit dua listesi oluşturun"
 
-#: ../ui/xi-menus.glade.h:130 ../ui/xi-menus-popup.gtkbuilder.h:72
+#: ../ui/xi-menus.glade.h:132 ../ui/xi-menus-popup.gtkbuilder.h:72
 msgid "Simple"
 msgstr "Basit"
 
-#: ../ui/xi-menus.glade.h:131 ../ui/xi-menus-popup.gtkbuilder.h:75
+#: ../ui/xi-menus.glade.h:133 ../ui/xi-menus-popup.gtkbuilder.h:75
 msgid "Create a new subject prayer list"
 msgstr "yeni bir konu dua listesi oluşturun"
 
-#: ../ui/xi-menus.glade.h:132 ../ui/xi-menus-popup.gtkbuilder.h:74
+#: ../ui/xi-menus.glade.h:134 ../ui/xi-menus-popup.gtkbuilder.h:74
 msgid "Subject"
 msgstr "Konu"
 
-#: ../ui/xi-menus.glade.h:133 ../ui/xi-menus-popup.gtkbuilder.h:77
+#: ../ui/xi-menus.glade.h:135 ../ui/xi-menus-popup.gtkbuilder.h:77
 msgid "Create a new monthly journal"
 msgstr "yeni bir aylık dergi oluşturma"
 
-#: ../ui/xi-menus.glade.h:134 ../ui/xi-menus-popup.gtkbuilder.h:76
+#: ../ui/xi-menus.glade.h:136 ../ui/xi-menus-popup.gtkbuilder.h:76
 msgid "Monthly"
 msgstr "Aylık"
 
-#: ../ui/xi-menus.glade.h:135 ../ui/xi-menus-popup.gtkbuilder.h:79
+#: ../ui/xi-menus.glade.h:137 ../ui/xi-menus-popup.gtkbuilder.h:79
 msgid "Create a new daily journal"
 msgstr "Yeni bir günlük dergi oluşturma"
 
-#: ../ui/xi-menus.glade.h:136 ../ui/xi-menus-popup.gtkbuilder.h:78
+#: ../ui/xi-menus.glade.h:138 ../ui/xi-menus-popup.gtkbuilder.h:78
 msgid "Daily"
 msgstr "Günlük"
 
-#: ../ui/xi-menus.glade.h:137 ../ui/xi-menus-popup.gtkbuilder.h:81
+#: ../ui/xi-menus.glade.h:139 ../ui/xi-menus-popup.gtkbuilder.h:81
 msgid "Create a new outlined topic"
 msgstr "Yeni bir özetlenen konu oluşturun"
 
-#: ../ui/xi-menus.glade.h:138 ../ui/xi-menus-popup.gtkbuilder.h:80
+#: ../ui/xi-menus.glade.h:140 ../ui/xi-menus-popup.gtkbuilder.h:80
 msgid "Outlined"
 msgstr "Özetlenen"
 
-#: ../ui/xi-menus.glade.h:139 ../ui/xi-menus-popup.gtkbuilder.h:83
+#: ../ui/xi-menus.glade.h:141 ../ui/xi-menus-popup.gtkbuilder.h:83
 msgid "Open module in editor or plain display window"
 msgstr ""
 
-#: ../ui/xi-menus.glade.h:140 ../ui/xi-menus-popup.gtkbuilder.h:82
+#: ../ui/xi-menus.glade.h:142 ../ui/xi-menus-popup.gtkbuilder.h:82
 #, fuzzy
 msgid "Open in separate window"
 msgstr "ayrı bir pencerede aç"
 
-#: ../ui/xi-menus.glade.h:141 ../ui/xi-menus-popup.gtkbuilder.h:23
+#: ../ui/xi-menus.glade.h:143 ../ui/xi-menus-popup.gtkbuilder.h:23
 msgid "Add a sub-item"
 msgstr "Eklemek bir alt kalemi"
 
-#: ../ui/xi-menus.glade.h:142
+#: ../ui/xi-menus.glade.h:144
 msgid "Add Sub-Item"
 msgstr "Alt Öğe Ekle"
 
-#: ../ui/xi-menus.glade.h:143 ../ui/xi-menus-popup.gtkbuilder.h:25
+#: ../ui/xi-menus.glade.h:145 ../ui/xi-menus-popup.gtkbuilder.h:25
 msgid "Add an item"
 msgstr "öğe ekleme"
 
-#: ../ui/xi-menus.glade.h:144 ../ui/xi-menus-popup.gtkbuilder.h:24
+#: ../ui/xi-menus.glade.h:146 ../ui/xi-menus-popup.gtkbuilder.h:24
 msgid "Add Item"
 msgstr "Öğe ekle"
 
-#: ../ui/xi-menus.glade.h:145 ../ui/xi-menus-popup.gtkbuilder.h:27
+#: ../ui/xi-menus.glade.h:147 ../ui/xi-menus-popup.gtkbuilder.h:27
 msgid "Remove this item"
 msgstr "Bu öğeyi kaldır"
 
-#: ../ui/xi-menus.glade.h:147 ../ui/xi-menus-popup.gtkbuilder.h:29
+#: ../ui/xi-menus.glade.h:149 ../ui/xi-menus-popup.gtkbuilder.h:29
 msgid "Edit this item"
 msgstr "Bu öğeyi Düzenle"
 
@@ -4924,9 +5028,51 @@ msgstr "Xiphos İncil Kılavuzu"
 msgid "Study the Bible"
 msgstr "Çalışma İncil"
 
-#, fuzzy
-#~ msgid "Navigation"
-#~ msgstr "Kurtuluş"
+#~ msgid "<b>Tabs</b>"
+#~ msgstr "<b>Sekmeler</b>"
+
+#~ msgid "Use tabbed browsing"
+#~ msgstr "sekmeli tarama kullanın"
+
+#~ msgid ""
+#~ "Single selection of Bible+commentary+book+dictionary, or many sets of "
+#~ "such selections in a tabbed interface"
+#~ msgstr ""
+#~ "İncil Tek seçim + yorum + kitap + bir sekmeli arayüzü böyle seçimleri "
+#~ "birçok setleri veya sözlük"
+
+#~ msgid "Use tabbed browsing Checkbox"
+#~ msgstr "Kullanım sekmeli tarama Checkbox"
+
+#~ msgid "<b>Show</b>"
+#~ msgstr "<b>Göstermek</b>"
+
+#~ msgid "Bible Texts"
+#~ msgstr "İncil Metinler"
+
+#~ msgid "Bible Texts Checkbox"
+#~ msgstr "İncil metinleri Checkbox"
+
+#~ msgid "Previewer Checkbox"
+#~ msgstr "Önizleyicide Checkbox"
+
+#~ msgid "Commentaries Checkbox"
+#~ msgstr "Yorumlar Checkbox"
+
+#~ msgid "Dictionary/Lexicon"
+#~ msgstr "Sözlük / Lexicon"
+
+#~ msgid "Dictionary/Lexicon Checkbox"
+#~ msgstr "Sözlük / Lexicon Checkbox"
+
+#~ msgid "Parallel View in a tab"
+#~ msgstr "Bir sekmeyi paralel Profili"
+
+#~ msgid "Tabs and Panes"
+#~ msgstr "Sekmeleri ve Bölmeleri"
+
+#~ msgid "Scripture Cross-references"
+#~ msgstr "Din Çapraz referanslar"
 
 #~ msgid "<b>StudyPad default directory</b>"
 #~ msgstr "<b>StudyPad varsayılan dizin</b>"
