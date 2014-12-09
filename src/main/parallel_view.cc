@@ -778,7 +778,6 @@ static void interpolate_parallel_display(SWBuf& text, gchar *key, gint parallel_
 
 	// need #verses to process in this chapter.
 	SWModule *mod = backend->get_SWModule(module_name);
-//	VerseKey *vkey = (VerseKey *)(SWKey *)(mod);
 	VerseKey *vkey = (VerseKey *)mod->createKey();
 	int xverses;
 

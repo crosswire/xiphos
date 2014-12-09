@@ -37,16 +37,12 @@ using namespace sword;
 
 class BackEnd {
 	SWMgr *main_mgr;
-	//TreeKeyIdx *tree_key;
 	ListKey results;
 	ListKey search_range;
 	ListKey	search_scope_list; //--search list for searching verses found on last search
 	ListKey verses;
-	//VerseKey search_scope_bounds; //----- sets lower and upper search bounds
 	SWKey *current_scope;
 	SWModule *search_mod;
-	//SWFilter *thml2osis;
-	//SWFilter *osis2html;
 
 public:
 	TreeKeyIdx *tree_key;

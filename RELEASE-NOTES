@@ -3,8 +3,8 @@ ____________________
 XIPHOS RELEASE NOTES
 ____________________
 
-Intermediate Test Release 3.9.3
-07 Dec 2014
+Intermediate Test Release 3.9.4
+08 Dec 2014
 
 - Bug #508 + feat.req #133: Added alternate versification support (av11n):
   Xiphos understands book/chapter/verse schemes other than KJV.  See

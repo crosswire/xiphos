@@ -523,7 +523,7 @@ static void add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
 			       const gchar * mod_name)
 {
 	SWModule *mod = backend->get_SWModule(mod_name);
-	VerseKey *vkey = (VerseKey *)(SWKey *)(*mod);
+	VerseKey *vkey = (VerseKey *)mod->createKey();
 	gint j = 0;
 	GtkTreeIter child_iter;
 	gchar *buf = NULL;
@@ -573,6 +573,7 @@ static void add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
 			++j;
 		}
 	}
+	delete vkey;
 }
 #endif /* ALLOW_BIBLE_NAVIGATION_FROM_SIDEBAR_TREE */
 
