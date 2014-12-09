@@ -60,7 +60,7 @@ void main_navbar_set(NAVBAR navbar, const char * key)
 		return;
 
 	SWModule *mod = backend->get_SWModule(navbar.module_name);
-	VerseKey *vkey = (VerseKey *)(SWKey *)(*mod);
+	VerseKey *vkey = (VerseKey *)mod->createKey();
 
 	navbar.key = backend->get_valid_key(navbar.module_name, key);
 	if (!navbar.is_dialog) {
@@ -128,13 +128,15 @@ void main_navbar_set(NAVBAR navbar, const char * key)
 				navbar.key);
 	do_display = TRUE;
 	g_free(gkey);
+
+	delete vkey;
 }
 
 
 void main_navbar_fill_book_combo(NAVBAR navbar)
 {
 	SWModule *mod = backend->get_SWModule(navbar.module_name);
-	VerseKey *key = (VerseKey *)(SWKey *)(*mod);
+	VerseKey *key = (VerseKey *)mod->createKey();
 	char *book = NULL;
 	GtkTreeIter iter;
 	int i = 0;
@@ -198,4 +200,6 @@ void main_navbar_fill_book_combo(NAVBAR navbar)
 	}
 	main_navbar_set(navbar, navbar.key);
 	do_display = TRUE;
+
+	delete key;
 }

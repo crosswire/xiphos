@@ -338,7 +338,7 @@ void main_search_sidebar_fill_bounds_combos(void)
 
 	char *module_name = settings.MainWindowModule;
 	SWModule *mod = backendSearch->get_SWModule(module_name);
-	VerseKey *key = (VerseKey *)(SWKey *)(*mod);
+	VerseKey *key = (VerseKey *)mod->createKey();
 
 	GtkTreeModel* upper_model = gtk_combo_box_get_model(
 			GTK_COMBO_BOX(ss.entryUpper));
@@ -383,6 +383,7 @@ void main_search_sidebar_fill_bounds_combos(void)
 	}
 	gtk_combo_box_set_active(GTK_COMBO_BOX(ss.entryLower),0);
 	gtk_combo_box_set_active(GTK_COMBO_BOX(ss.entryUpper),65);
+	delete key;
 }
 
 

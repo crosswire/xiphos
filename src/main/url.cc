@@ -456,13 +456,12 @@ static gint show_note(const gchar * module, const gchar * passage,
 	// we must stop autonormalization for a moment.
 	//
 	int stop_autonorm = ((strstr(passage, ":0")) != NULL);
-	VerseKey *vkey = NULL;
 
 	if (stop_autonorm) {
 		SWMgr *mgr = backend->get_mgr();
 		backend->display_mod = mgr->Modules[module];
 		backend->display_mod->setKey(passage);
-		vkey = (VerseKey *)(SWKey *)(*backend->display_mod);
+		VerseKey *vkey = (VerseKey *)(SWKey *)(*backend->display_mod);
 		vkey->setAutoNormalize(0);
 		vkey->setChapter(vkey->getChapter() + 1);
 		vkey->setVerse(0);

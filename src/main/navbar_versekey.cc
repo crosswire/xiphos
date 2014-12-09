@@ -100,7 +100,7 @@ void main_navbar_versekey_spin_book(NAVBAR_VERSEKEY navbar, int direction)
 		return;
 
 	SWModule *mod = backend->get_SWModule(navbar.module_name->str);
-	VerseKey *vkey = (VerseKey *)(SWKey *)(*mod);
+	VerseKey *vkey = (VerseKey *)mod->createKey();
 	tmpkey = backend->get_valid_key(navbar.module_name->str, navbar.key->str);
 
 	vkey->setAutoNormalize(1);
@@ -113,6 +113,7 @@ void main_navbar_versekey_spin_book(NAVBAR_VERSEKEY navbar, int direction)
 	gtk_entry_set_text(GTK_ENTRY(navbar.lookup_entry), tmpkey);
 	gtk_widget_activate(navbar.lookup_entry);
 	g_free(tmpkey);
+	delete vkey;
 }
 
 
@@ -141,7 +142,7 @@ void main_navbar_versekey_spin_chapter(NAVBAR_VERSEKEY navbar, int direction)
 		return;
 
 	SWModule *mod = backend->get_SWModule(navbar.module_name->str);
-	VerseKey *vkey = (VerseKey *)(SWKey *)(*mod);
+	VerseKey *vkey = (VerseKey *)mod->createKey();
 	tmpkey = backend->get_valid_key(navbar.module_name->str, navbar.key->str);
 
 	vkey->setAutoNormalize(1);
@@ -154,6 +155,7 @@ void main_navbar_versekey_spin_chapter(NAVBAR_VERSEKEY navbar, int direction)
 	gtk_entry_set_text(GTK_ENTRY(navbar.lookup_entry), tmpkey);
 	gtk_widget_activate(navbar.lookup_entry);
 	g_free(tmpkey);
+	delete vkey;
 }
 
 
@@ -183,7 +185,7 @@ void main_navbar_versekey_spin_verse(NAVBAR_VERSEKEY navbar, int direction)
 		return;
 
 	SWModule *mod = backend->get_SWModule(navbar.module_name->str);
-	VerseKey *vkey = (VerseKey *)(SWKey *)(*mod);
+	VerseKey *vkey = (VerseKey *)mod->createKey();
 	tmpkey = backend->get_valid_key(navbar.module_name->str, navbar.key->str);
 
 	vkey->setAutoNormalize(1);
@@ -197,6 +199,7 @@ void main_navbar_versekey_spin_verse(NAVBAR_VERSEKEY navbar, int direction)
 	gtk_entry_set_text(GTK_ENTRY(navbar.lookup_entry), tmpkey);
 	gtk_widget_activate(navbar.lookup_entry);
 	g_free(tmpkey);
+	delete vkey;
 }
 
 
@@ -224,48 +227,49 @@ void on_nt_book_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 	VerseKey *vkey;
 	GtkWidget *entry = NULL;
 	int book = GPOINTER_TO_INT(user_data);
+	gchar *name, *key;
 
 	switch (c_type) {
 		case NB_MAIN:
-			mod = backend->get_SWModule(navbar_versekey.module_name->str);
-			vkey = (VerseKey *)(SWKey *)(*mod);
-			vkey->setAutoNormalize(1);
-			vkey->setText(navbar_versekey.key->str);
+			name = navbar_versekey.module_name->str;
+			key = navbar_versekey.key->str;
 			entry = navbar_versekey.lookup_entry;
 			break;
 
 		case NB_PARALLEL:
-			mod = backend->get_SWModule(navbar_parallel.module_name->str);
-			vkey = (VerseKey *)(SWKey *)(*mod);
-			vkey->setAutoNormalize(1);
-			vkey->setText(navbar_parallel.key->str);
+			name = navbar_parallel.module_name->str;
+			key = navbar_parallel.key->str;
 			entry = navbar_parallel.lookup_entry;
 			break;
 
 		case NB_DIALOG:
 			if (!c_dialog) return;
-			mod = backend->get_SWModule(c_dialog->navbar.module_name->str);
-			vkey = (VerseKey *)(SWKey *)(*mod);
-			vkey->setAutoNormalize(1);
-			vkey->setText(c_dialog->navbar.key->str);
+			name = c_dialog->navbar.module_name->str;
+			key = c_dialog->navbar.key->str;
 			entry = c_dialog->navbar.lookup_entry;
 			break;
 
 		case NB_EDITOR:
 			if (!c_editor) return;
-			mod = backend->get_SWModule(c_editor->navbar.module_name->str);
-			vkey = (VerseKey *)(SWKey *)(*mod);
-			vkey->setAutoNormalize(1);
-			vkey->setText(c_editor->navbar.key->str);
+			name = c_editor->navbar.module_name->str;
+			key = c_editor->navbar.key->str;
 			entry = c_editor->navbar.lookup_entry;
 			break;
 	}
 
 	if (entry) {
+		mod = backend->get_SWModule(name);
+		vkey = (VerseKey *)mod->createKey();
+		vkey->setAutoNormalize(1);
+		vkey->setText(key);
+
 		vkey->setTestament(2);
 		vkey->setBook(book+1);
+
 		gtk_entry_set_text(GTK_ENTRY(entry),vkey->getText());
 		gtk_widget_activate(entry);
+
+		delete vkey;
 	}
 }
 
@@ -294,48 +298,49 @@ void on_ot_book_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 	VerseKey *vkey;
 	GtkWidget *entry = NULL;
 	int book = GPOINTER_TO_INT(user_data);
+	gchar *name, *key;
 
 	switch (c_type) {
 		case NB_MAIN:
-			mod = backend->get_SWModule(navbar_versekey.module_name->str);
-			vkey = (VerseKey *)(SWKey *)(*mod);
-			vkey->setAutoNormalize(1);
-			vkey->setText(navbar_versekey.key->str);
+			name = navbar_versekey.module_name->str;
+			key = navbar_versekey.key->str;
 			entry = navbar_versekey.lookup_entry;
 			break;
 
 		case NB_PARALLEL:
-			mod = backend->get_SWModule(navbar_parallel.module_name->str);
-			vkey = (VerseKey *)(SWKey *)(*mod);
-			vkey->setAutoNormalize(1);
-			vkey->setText(navbar_parallel.key->str);
+			name = navbar_parallel.module_name->str;
+			key = navbar_parallel.key->str;
 			entry = navbar_parallel.lookup_entry;
 			break;
 
 		case NB_DIALOG:
 			if (!c_dialog) return;
-			mod = backend->get_SWModule(c_dialog->navbar.module_name->str);
-			vkey = (VerseKey *)(SWKey *)(*mod);
-			vkey->setAutoNormalize(1);
-			vkey->setText(c_dialog->navbar.key->str);
+			name = c_dialog->navbar.module_name->str;
+			key = c_dialog->navbar.key->str;
 			entry = c_dialog->navbar.lookup_entry;
 			break;
 
 		case NB_EDITOR:
 			if (!c_editor) return;
-			mod = backend->get_SWModule(c_editor->navbar.module_name->str);
-			vkey = (VerseKey *)(SWKey *)(*mod);
-			vkey->setAutoNormalize(1);
-			vkey->setText(c_editor->navbar.key->str);
+			name = c_editor->navbar.module_name->str;
+			key = c_editor->navbar.key->str;
 			entry = c_editor->navbar.lookup_entry;
 			break;
 	}
 
 	if (entry) {
-		vkey->setTestament(0);	// was 0, erroneously. fixed?
+		mod = backend->get_SWModule(name);
+		vkey = (VerseKey *)mod->createKey();
+		vkey->setAutoNormalize(1);
+		vkey->setText(key);
+
+		vkey->setTestament(1);
 		vkey->setBook(book+1);
+
 		gtk_entry_set_text(GTK_ENTRY(entry),vkey->getText());
 		gtk_widget_activate(entry);
+
+		delete vkey;
 	}
 }
 
@@ -364,46 +369,47 @@ void on_chapter_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 	VerseKey *vkey;
 	GtkWidget *entry = NULL;
 	int chapter = GPOINTER_TO_INT(user_data);
+	gchar *name, *key;
 
 	switch (c_type) {
 		case NB_MAIN:
-			mod = backend->get_SWModule(navbar_versekey.module_name->str);
-			vkey = (VerseKey *)(SWKey *)(*mod);
-			vkey->setAutoNormalize(1);
-			vkey->setText(navbar_versekey.key->str);
+			name = navbar_versekey.module_name->str;
+			key = navbar_versekey.key->str;
 			entry = navbar_versekey.lookup_entry;
 			break;
 
 		case NB_PARALLEL:
-			mod = backend->get_SWModule(navbar_parallel.module_name->str);
-			vkey = (VerseKey *)(SWKey *)(*mod);
-			vkey->setAutoNormalize(1);
-			vkey->setText(navbar_parallel.key->str);
+			name = navbar_parallel.module_name->str;
+			key = navbar_parallel.key->str;
 			entry = navbar_parallel.lookup_entry;
 			break;
 
 		case NB_DIALOG:
 			if (!c_dialog) return;
-			mod = backend->get_SWModule(c_dialog->navbar.module_name->str);
-			vkey = (VerseKey *)(SWKey *)(*mod);
-			vkey->setAutoNormalize(1);
-			vkey->setText(c_dialog->navbar.key->str);
+			name = c_dialog->navbar.module_name->str;
+			key = c_dialog->navbar.key->str;
 			entry = c_dialog->navbar.lookup_entry;
 			break;
 
 		case NB_EDITOR:
 			if (!c_editor) return;
-			mod = backend->get_SWModule(c_editor->navbar.module_name->str);
-			vkey = (VerseKey *)(SWKey *)(*mod);
-			vkey->setAutoNormalize(1);
-			vkey->setText(c_editor->navbar.key->str);
+			name = c_editor->navbar.module_name->str;
+			key = c_editor->navbar.key->str;
 			entry = c_editor->navbar.lookup_entry;
 			break;
 	}
 	if (entry) {
+		mod = backend->get_SWModule(name);
+		vkey = (VerseKey *)mod->createKey();
+		vkey->setAutoNormalize(1);
+		vkey->setText(key);
+
 		vkey->setChapter(chapter);
+
 		gtk_entry_set_text(GTK_ENTRY(entry),vkey->getText());
 		gtk_widget_activate(entry);
+
+		delete vkey;
 	}
 }
 
@@ -432,46 +438,47 @@ void on_verse_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 	VerseKey *vkey;
 	GtkWidget *entry = NULL;
 	int verse = GPOINTER_TO_INT(user_data);
+	gchar *name, *key;
 
 	switch (c_type) {
 		case NB_MAIN:
-			mod = backend->get_SWModule(navbar_versekey.module_name->str);
-			vkey = (VerseKey *)(SWKey *)(*mod);
-			vkey->setAutoNormalize(1);
-			vkey->setText(navbar_versekey.key->str);
+			name = navbar_versekey.module_name->str;
+			key = navbar_versekey.key->str;
 			entry = navbar_versekey.lookup_entry;
 			break;
 
 		case NB_PARALLEL:
-			mod = backend->get_SWModule(navbar_parallel.module_name->str);
-			vkey = (VerseKey *)(SWKey *)(*mod);
-			vkey->setAutoNormalize(1);
-			vkey->setText(navbar_parallel.key->str);
+			name = navbar_parallel.module_name->str;
+			key = navbar_parallel.key->str;
 			entry = navbar_parallel.lookup_entry;
 			break;
 
 		case NB_DIALOG:
 			if (!c_dialog) return;
-			mod = backend->get_SWModule(c_dialog->navbar.module_name->str);
-			vkey = (VerseKey *)(SWKey *)(*mod);
-			vkey->setAutoNormalize(1);
-			vkey->setText(c_dialog->navbar.key->str);
+			name = c_dialog->navbar.module_name->str;
+			key = c_dialog->navbar.key->str;
 			entry = c_dialog->navbar.lookup_entry;
 			break;
 
 		case NB_EDITOR:
 			if (!c_editor) return;
-			mod = backend->get_SWModule(c_editor->navbar.module_name->str);
-			vkey = (VerseKey *)(SWKey *)(*mod);
-			vkey->setAutoNormalize(1);
-			vkey->setText(c_editor->navbar.key->str);
+			name = c_editor->navbar.module_name->str;
+			key = c_editor->navbar.key->str;
 			entry = c_editor->navbar.lookup_entry;
 			break;
 	}
 	if (entry) {
+		mod = backend->get_SWModule(name);
+		vkey = (VerseKey *)mod->createKey();
+		vkey->setAutoNormalize(1);
+		vkey->setText(key);
+
 		vkey->setVerse(verse);
+
 		gtk_entry_set_text(GTK_ENTRY(entry),vkey->getText());
 		gtk_widget_activate(entry);
+
+		delete vkey;
 	}
 }
 
@@ -486,7 +493,7 @@ void on_verse_menu_select(GtkMenuItem * menuitem, gpointer user_data)
  *   void main_navbar_versekey_set(NAVBAR_VERSEKEY navbar, const char * key)
  *
  * Description
- *   seperate key info John 3:16 to book=john chapter=3 verse=16 and write
+ *   separate key info John 3:16 to book=john chapter=3 verse=16 and write
  *   to navbar labels - also set lookup entry text
  *
  * Return value
@@ -502,7 +509,7 @@ void main_navbar_versekey_set(NAVBAR_VERSEKEY navbar, const char * key)
 		return;
 
 	SWModule *mod = backend->get_SWModule(navbar.module_name->str);
-	VerseKey *vkey = (VerseKey *)(SWKey *)(*mod);
+	VerseKey *vkey = (VerseKey *)mod->createKey();
 
 	vkey->setAutoNormalize(1);
 	vkey->setText(key);
@@ -525,6 +532,8 @@ void main_navbar_versekey_set(NAVBAR_VERSEKEY navbar, const char * key)
 
 	navbar.key = g_string_assign(navbar.key, (char*)vkey->getText());
 	gtk_entry_set_text(GTK_ENTRY(navbar.lookup_entry), navbar.key->str);
+
+	delete vkey;
 }
 
 
@@ -550,7 +559,7 @@ GtkWidget *main_versekey_drop_down_verse_menu(NAVBAR_VERSEKEY navbar,
 					      gpointer editor)
 {
 	SWModule *mod = backend->get_SWModule(navbar.module_name->str);
-	VerseKey *vkey = (VerseKey *)(SWKey *)(*mod);
+	VerseKey *vkey = (VerseKey *)mod->createKey();
 
 	char *num;
 	gint i, x;
@@ -570,6 +579,8 @@ GtkWidget *main_versekey_drop_down_verse_menu(NAVBAR_VERSEKEY navbar,
 	int xverse = vkey->getVerse();
 
 	x = vkey->getVerseMax();
+	delete vkey;
+
 	for (i = 1; i <= x; i++) {
 		num = main_format_number(i);
 		if (i == xverse) {
@@ -621,7 +632,7 @@ GtkWidget *main_versekey_drop_down_chapter_menu(NAVBAR_VERSEKEY navbar,
 						gpointer editor)
 {
 	SWModule *mod = backend->get_SWModule(navbar.module_name->str);
-	VerseKey *vkey = (VerseKey *)(SWKey *)(*mod);
+	VerseKey *vkey = (VerseKey *)mod->createKey();
 
 	char *num;
 	gint i, x;
@@ -641,6 +652,8 @@ GtkWidget *main_versekey_drop_down_chapter_menu(NAVBAR_VERSEKEY navbar,
 	int xchapter = vkey->getChapter();
 
 	x = vkey->getChapterMax();
+	delete vkey;
+
 	for (i = 1; i <= x; i++) {
 		num = main_format_number(i);
 		if (i == xchapter) {
@@ -692,8 +705,6 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar,
 						gpointer editor)
 {
 	SWModule *mod = backend->get_SWModule(navbar.module_name->str);
-//	VerseKey *key = (VerseKey *)(SWKey *)(*mod);
-//	VerseKey *key_current = (VerseKey *)(SWKey *)(*mod);
 	VerseKey *key = (VerseKey *)mod->createKey();
 	VerseKey *key_current = (VerseKey *)mod->createKey();
 
@@ -794,7 +805,7 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar,
 		}
 	}
 
-	delete key;		// because they were createKey'd above.
+	delete key;
 	delete key_current;
 
 	if (select_item)

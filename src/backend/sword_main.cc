@@ -56,7 +56,17 @@ using namespace std;
 
 BackEnd *backend = NULL;
 
-
+// rule of thumb for VerseKey usage: you can use
+//    VerseKey k = (VerseKey *)(SWKey *)(*mod);
+// if you intend to do nothing more than setText() once plus
+// some gets (getTestament, getBook, getChapter, getVerse),
+// with no need to garbage collect when you're done.
+//
+// otherwise, if you're going to do more than a single setSomething,
+// you must go the somewhat harder route of
+//    VerseKey k = (VerseKey *)mod->createKey();
+// and do whatever you like, but remember when you're done to
+//    delete k;
 
 #ifdef DEBUG
 static const char *f_message = "backend/sword_main.cc line #%d \"%s\" = %s";
@@ -601,7 +611,6 @@ int BackEnd::module_has_testament(const char *module_name, int testament)
 		module->setSkipConsecutiveLinks(true);
 
 		*module = sword::TOP; //position to first entry
-//		VerseKey *key = (VerseKey *)(SWKey *)(*module);
 		VerseKey *key = (VerseKey *)module->createKey();
 
 		key->setText(module->getKeyText());
@@ -619,7 +628,7 @@ int BackEnd::module_has_testament(const char *module_name, int testament)
 			nt = 1;
 		}
 
-		delete key;	// because it was createKey'd above.
+		delete key;
 		module->setSkipConsecutiveLinks(false);
 	}
 
@@ -645,8 +654,9 @@ int BackEnd::module_get_testaments(const char * module_name)
 		module->setSkipConsecutiveLinks(true);
 
 		*module = sword::TOP; //position to first entry
-		VerseKey *key = (VerseKey *)(SWKey *)(*module);
+		VerseKey *key = (VerseKey *)module->createKey();
 		key->setText(module->getKeyText());
+
 		if (key->getTestament() == 1) { // OT && NT
 				ot = 1;
 		} else if (key->getTestament() == 2) { //no OT
@@ -655,12 +665,14 @@ int BackEnd::module_get_testaments(const char * module_name)
 
 		*module = sword::BOTTOM;
 		key->setText(module->getKeyText());
+
 		if (key->getTestament() == 1) { // only OT, no NT
 				nt = 0;
 		} else if (key->getTestament() == 2) { //has NT
 				nt = 1;
 		}
 
+		delete key;
 		module->setSkipConsecutiveLinks(false);
 	}
 
