@@ -5,14 +5,14 @@
     <property name="label" translatable="yes">About Studypad</property>
     <property name="short_label" translatable="yes">About</property>
     <property name="tooltip" translatable="yes">Open about dialog</property>
-    <property name="stock_id">gtk-about</property>
+    <property name="stock_id">help-about</property>
     <signal name="activate" handler="action_about_activate_cb" swapped="no"/>
   </object>
   <object class="GtkAction" id="action_bold">
     <property name="label" translatable="yes">Bold</property>
     <property name="short_label" translatable="yes">Bold</property>
     <property name="tooltip" translatable="yes">Make selection bold</property>
-    <property name="stock_id">gtk-bold</property>
+    <property name="stock_id">format-text-bold</property>
     <signal name="activate" handler="action_bold_activate_cb" swapped="no"/>
   </object>
   <object class="GtkAction" id="action_copy">
@@ -269,7 +269,7 @@
             </child>
             <child>
               <object class="GtkButton" id="button_cancel">
-                <property name="label">gtk-cancel</property>
+                <property name="label">_Cancel</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -621,7 +621,7 @@
                     <property name="can_focus">False</property>
                     <child>
                       <object class="GtkImageMenuItem" id="imagemenuitem10">
-                        <property name="label">gtk-about</property>
+                        <property name="label">help-about</property>
                         <property name="related_action">action_about</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
@@ -1020,7 +1020,7 @@
                     <property name="can_focus">False</property>
                     <property name="label" translatable="yes">toolbutton10</property>
                     <property name="use_underline">True</property>
-                    <property name="stock_id">gtk-bold</property>
+                    <property name="stock_id">format-text-bold</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
