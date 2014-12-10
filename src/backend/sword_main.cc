@@ -385,7 +385,9 @@ char *BackEnd::get_valid_key(const char *module_name, const char *key)
 	VerseKey *vkey = (VerseKey *)(SWKey *)(*mod);
 	char *mykey;
 
-	vkey->setAutoNormalize(1);
+	int t = module_type(module_name);
+	if ((t == TEXT_TYPE) || (t == COMMENTARY_TYPE))
+		vkey->setAutoNormalize(1);
 	vkey->setText(key);
 
 	// what's with this flagrant anglocentrism?
