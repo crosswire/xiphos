@@ -462,7 +462,9 @@ static gint show_note(const gchar * module, const gchar * passage,
 		backend->display_mod = mgr->Modules[module];
 		backend->display_mod->setKey(passage);
 		VerseKey *vkey = (VerseKey *)(SWKey *)(*backend->display_mod);
-		vkey->setAutoNormalize(0);
+		int t = backend->module_type(module);
+		if ((t == TEXT_TYPE) || (t == COMMENTARY_TYPE))
+			vkey->setAutoNormalize(0);
 		vkey->setChapter(vkey->getChapter() + 1);
 		vkey->setVerse(0);
 	} else

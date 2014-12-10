@@ -76,7 +76,9 @@ void main_navbar_set(NAVBAR navbar, const char * key)
 
 	do_display = FALSE;
 
-	vkey->setAutoNormalize(1);
+	int t = backend->module_type(navbar.module_name);
+	if ((t == TEXT_TYPE) || (t == COMMENTARY_TYPE))
+		vkey->setAutoNormalize(1);
 	vkey->setText(key);
 
 	// we need the book index to highlight "active" in the pulldown.
