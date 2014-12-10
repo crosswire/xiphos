@@ -552,13 +552,12 @@ add_columns(GtkTreeView * treeview,
 
 	/* -- installed -- */
 	column = gtk_tree_view_column_new();
-	image = (remove
+	image = 
 #ifdef HAVE_GTK_310
-	         ? gtk_image_new_from_icon_name("gnome-stock-blank",  // FIXME:
-					    GTK_ICON_SIZE_MENU)
-		 : gtk_image_new_from_icon_name("_Apply",
-					    GTK_ICON_SIZE_MENU));
+		 gtk_image_new_from_icon_name("gtk-apply",
+					    GTK_ICON_SIZE_MENU);
 #else
+            (remove
 		 ? gtk_image_new_from_stock("gnome-stock-blank",
 					    GTK_ICON_SIZE_MENU)
 		 : gtk_image_new_from_stock(GTK_STOCK_APPLY,
@@ -585,9 +584,7 @@ add_columns(GtkTreeView * treeview,
 	column = gtk_tree_view_column_new(); 
 	image = 
 #ifdef HAVE_GTK_310
-		 gtk_image_new_from_icon_name ((remove
-					  ? "_Yes" 
-					  : "list-add"),
+		 gtk_image_new_from_icon_name ("list-add",
 					 GTK_ICON_SIZE_MENU);
 #else
 		 gtk_image_new_from_stock((remove

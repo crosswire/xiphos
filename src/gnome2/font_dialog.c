@@ -424,8 +424,7 @@ static GtkWidget *create_dialog_mod_font()
 
 	button_cancel = 
 #ifdef HAVE_GTK_310
-		gtk_button_new_from_icon_name ("gtk-cancel",
-                               GTK_ICON_SIZE_BUTTON);
+		gtk_button_new_with_label ("Cancel");
 #else   
 		gtk_button_new_from_stock(GTK_STOCK_CANCEL);
 #endif					      
@@ -434,8 +433,7 @@ static GtkWidget *create_dialog_mod_font()
 	gtk_widget_set_can_default (button_cancel, 1);
 	button_ok = 
 #ifdef HAVE_GTK_310
-	gtk_button_new_from_icon_name ("gtk-ok",
-                               GTK_ICON_SIZE_BUTTON);
+	gtk_button_new_with_label ("OK");
 #else   
 	gtk_button_new_from_stock(GTK_STOCK_OK);
 #endif					      
