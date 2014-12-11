@@ -30,7 +30,6 @@
 #include <time.h>
 
 #include "main/gtk_compat.h"
-#include "editor/slib-editor.h"
 
 #include "gui/xiphos.h"
 #include "gui/bookmarks_treeview.h"
