@@ -1,6 +1,6 @@
 /*
  * Xiphos Bible Study Tool
- * slib-editor.h - the html editor using gtkhtml-editor (slib)
+ * slib-editor.h - the html editor
  *
  * Copyright (C) 2005-2014 Xiphos Developer Team
  *
@@ -18,9 +18,6 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-
-#ifndef _SLIB_EDITOR_H
-#define _SLIB_EDITOR_H
 
 #ifdef __cplusplus
 extern "C"
@@ -85,4 +82,3 @@ GtkWidget * editor_new (const gchar * title, EDITOR *e);
 
 
 #endif /* !USE_WEBKIT_EDITOR */
-#endif /* _SLIB_EDITOR_H */

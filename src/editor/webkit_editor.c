@@ -37,13 +37,10 @@
 #include <stdlib.h>
 #include <glib/gi18n.h>
 #include <gio/gio.h>
-//#include <editor/gtkhtml-editor.h>
-//#include <gtkhtml/gtkhtml-stream.h>
 
 #include "editor/webkit_editor.h"
 #include "editor/editor.h"
 #include "editor/link_dialog.h"
-//#include "editor/html.h"
 
 #include "main/settings.h"
 #include "main/sword.h"
@@ -626,141 +623,6 @@ open_dialog (EDITOR * e)
 	return response;
 }
 
-/*
-static gint
-save_dialog (EDITOR * e)
-{
-	GtkWidget *dialog;
-	const gchar *filename;
-	gint response;
-
-	dialog = gtk_file_chooser_dialog_new (
-		_("Save As"), GTK_WINDOW (e->window),
-		GTK_FILE_CHOOSER_ACTION_SAVE,
-		GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-		GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT,
-		NULL);
-
-	gtk_file_chooser_set_do_overwrite_confirmation (
-		GTK_FILE_CHOOSER (dialog), TRUE);
-
-	filename = editor_get_filename (e);
-
-	if (filename != NULL)
-		gtk_file_chooser_set_filename (
-			GTK_FILE_CHOOSER (dialog), filename);
-	else {
-		gtk_file_chooser_set_current_folder (
-			GTK_FILE_CHOOSER (dialog), settings.studypaddir); 
-		gtk_file_chooser_set_current_name (
-			GTK_FILE_CHOOSER (dialog), _("Untitled document"));
-	}
-
-	response = gtk_dialog_run (GTK_DIALOG (dialog));
-
-	if (response == GTK_RESPONSE_ACCEPT) {
-		gchar *new_filename;
-
-		new_filename = gtk_file_chooser_get_filename (
-			GTK_FILE_CHOOSER (dialog));
-		editor_set_filename (e, new_filename);
-
-		if (e->filename)
-			g_free(e->filename);
-		e->filename = g_strdup(new_filename);
-
-		xml_set_value("Xiphos", "studypad", "lastfile",
-			      e->filename);
-		settings.studypadfilename =
-		    xml_get_value("studypad", "lastfile");
-
-		change_window_title(e->window, e->filename);
-
-		g_free (new_filename);
-	}
-
-	gtk_widget_destroy (dialog);
-
-	return response;
-}
-*/
-
-/* Helper for view_source_dialog() */
-/*
-static gboolean
-view_source_dialog_receiver (HTMLEngine *engine,
-                             const gchar *data,
-                             guint length,
-                             GString *string)
-{
-	g_string_append_len (string, data, length);
-
-	return TRUE;
-}
-
-static void
-view_source_dialog (GtkhtmlEditor *editor,
-                    const gchar *title,
-                    const gchar *content_type,
-                    gboolean show_output)
-{
-	GtkWidget *dialog;
-	GtkWidget *content;
-	GtkWidget *scrolled_window;
-	GString *string;
-
-	dialog = gtk_dialog_new_with_buttons (
-		title, GTK_WINDOW (editor),
-		GTK_DIALOG_DESTROY_WITH_PARENT,
-		GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
-		NULL);
-
-	scrolled_window = gtk_scrolled_window_new (NULL, NULL);
-	gtk_scrolled_window_set_policy (
-		GTK_SCROLLED_WINDOW (scrolled_window),
-		GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-	gtk_scrolled_window_set_shadow_type (
-		GTK_SCROLLED_WINDOW (scrolled_window), GTK_SHADOW_IN);
-	gtk_box_pack_start (
-		GTK_BOX (gtk_dialog_get_content_area(GTK_DIALOG (dialog))),
-		scrolled_window, TRUE, TRUE, 0);
-
-	gtk_container_set_border_width (GTK_CONTAINER (dialog), 6);
-	gtk_container_set_border_width (GTK_CONTAINER (scrolled_window), 6);
-	gtk_window_set_default_size (GTK_WINDOW (dialog), 400, 300);
-
-	string = g_string_sized_new (4096);
-
-	gtk_html_export (
-		gtkhtml_editor_get_html (editor),
-		content_type, (GtkHTMLSaveReceiverFn)
-		view_source_dialog_receiver, string);
-
-	if (show_output) {
-		GtkHTMLStream *stream;
-
-		content = gtk_html_new ();
-		stream = gtk_html_begin (GTK_HTML (content));
-		gtk_html_stream_write (stream, string->str, string->len);
-		gtk_html_stream_close (stream, GTK_HTML_STREAM_OK);
-	} else {
-		GtkTextBuffer *buffer;
-
-		content = gtk_text_view_new ();
-		buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (content));
-		gtk_text_buffer_set_text (buffer, string->str, string->len);
-		gtk_text_view_set_editable (GTK_TEXT_VIEW (content), FALSE);
-	}
-
-	g_string_free (string, TRUE);
-
-	gtk_container_add (GTK_CONTAINER (scrolled_window), content);
-	gtk_widget_show_all (scrolled_window);
-
-	gtk_dialog_run (GTK_DIALOG (dialog));
-	gtk_widget_destroy (dialog);
-}
-*/
 void
 action_print_cb (GtkAction *action,
                  EDITOR *e)
