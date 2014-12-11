@@ -513,30 +513,43 @@ void main_navbar_versekey_set(NAVBAR_VERSEKEY navbar, const char * key)
 	SWModule *mod = backend->get_SWModule(navbar.module_name->str);
 	if (!mod) return;
 
-	VerseKey *vkey = (VerseKey *)mod->createKey();
-	vkey->setAutoNormalize(1);
-	vkey->setText(key);
+	// previously, we set and noramlized the key, but we also
+	// kept a record of whether that key made sense.
+	if (navbar.valid_key) {
+		VerseKey *vkey = (VerseKey *)mod->createKey();
+		vkey->setAutoNormalize(1);
+		vkey->setText(key);
 
-	tmpbuf = g_strdup_printf("<b>%s</b>", vkey->getBookName());
-	gtk_label_set_label(GTK_LABEL(navbar.label_book_menu), tmpbuf);
-	g_free(tmpbuf);
+		tmpbuf = g_strdup_printf("<b>%s</b>", vkey->getBookName());
+		gtk_label_set_label(GTK_LABEL(navbar.label_book_menu), tmpbuf);
+		g_free(tmpbuf);
 
-	num = main_format_number(vkey->getChapter());
-	tmpbuf = g_strdup_printf("<b>%s</b>", num);
-	g_free(num);
-	gtk_label_set_label(GTK_LABEL(navbar.label_chapter_menu), tmpbuf);
-	g_free(tmpbuf);
+		num = main_format_number(vkey->getChapter());
+		tmpbuf = g_strdup_printf("<b>%s</b>", num);
+		g_free(num);
+		gtk_label_set_label(GTK_LABEL(navbar.label_chapter_menu), tmpbuf);
+		g_free(tmpbuf);
 
-	num = main_format_number(vkey->getVerse());
-	tmpbuf = g_strdup_printf("<b>%s</b>", num);
-	g_free(num);
-	gtk_label_set_label(GTK_LABEL(navbar.label_verse_menu), tmpbuf);
-	g_free(tmpbuf);
+		num = main_format_number(vkey->getVerse());
+		tmpbuf = g_strdup_printf("<b>%s</b>", num);
+		g_free(num);
+		gtk_label_set_label(GTK_LABEL(navbar.label_verse_menu), tmpbuf);
+		g_free(tmpbuf);
 
-	navbar.key = g_string_assign(navbar.key, (char*)vkey->getText());
-	gtk_entry_set_text(GTK_ENTRY(navbar.lookup_entry), navbar.key->str);
+		navbar.key = g_string_assign(navbar.key, (char*)vkey->getText());
+		gtk_entry_set_text(GTK_ENTRY(navbar.lookup_entry), navbar.key->str);
 
-	delete vkey;
+		delete vkey;
+	}
+	else
+	{
+		tmpbuf = g_strdup(" ");
+		gtk_label_set_label(GTK_LABEL(navbar.label_book_menu), tmpbuf);
+		gtk_label_set_label(GTK_LABEL(navbar.label_chapter_menu), tmpbuf);
+		gtk_label_set_label(GTK_LABEL(navbar.label_verse_menu), tmpbuf);
+		gtk_entry_set_text(GTK_ENTRY(navbar.lookup_entry), tmpbuf);
+		g_free(tmpbuf);
+	}
 }
 
 

@@ -1168,8 +1168,10 @@ editor_load_note(EDITOR * e, const gchar * module_name,
 	}
 	e->is_changed = FALSE;
 	change_window_title(e->window, title);
-    if (e->type == NOTE_EDITOR)
+	if (e->type == NOTE_EDITOR) {
+		e->navbar.valid_key = TRUE;
 		main_navbar_versekey_set(e->navbar, e->key);
+	}
 
 	if (text)
 		g_free(text);
