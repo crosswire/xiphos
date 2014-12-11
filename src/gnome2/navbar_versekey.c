@@ -398,6 +398,11 @@ static void on_entry_activate(GtkEntry * entry, gpointer user_data)
 	}
 
 	gkey = main_get_valid_key(settings.MainWindowModule, (gchar*)buf);
+
+	// we got a valid key. but was it really a valid key within v11n?
+	// for future use in determining whether to show normal navbar content.
+	navbar_versekey.valid_key = main_is_Bible_key(settings.MainWindowModule, gkey);
+
 	if (settings.special_anchor)
 		*settings.special_anchor = '#';			/* put it back. */
 	if (gkey == NULL)

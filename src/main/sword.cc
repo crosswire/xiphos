@@ -335,6 +335,10 @@ gchar *main_update_nav_controls(const char *module_name, const gchar *key)
 {
 	char *val_key = backend->get_valid_key(module_name, key);
 
+	// we got a valid key. but was it really a valid key within v11n?
+	// for future use in determining whether to show normal navbar content.
+	navbar_versekey.valid_key = main_is_Bible_key(module_name, key);
+
 	/*
 	 *  remember verse
 	 */
