@@ -2874,7 +2874,7 @@ void ps_button_add(GtkButton * button, gpointer user_data)
 #else
 	GladeXML *gxml;
 #endif
-	gchar *glade_file = gui_general_user_file("prefs" UI_SUFFIX, FALSE);
+	gchar *glade_file = gui_general_user_file("selector-prefs" UI_SUFFIX, FALSE);
 	g_return_if_fail(glade_file != NULL);
 
 #ifdef USE_GTKBUILDER
