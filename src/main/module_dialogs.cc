@@ -100,6 +100,7 @@ static GList *list_dialogs;
 extern gboolean gsI_isrunning;	/* information dialog */
 extern gboolean do_display;
 
+extern gboolean valid_scripture_key;
 
 /******************************************************************************
  * Name
@@ -657,7 +658,7 @@ void main_dialogs_dictionary_entry_changed(DIALOG_DATA * d)
 //	settings.dictkey = xml_get_value("keys", "dictionary");
 
 	be->set_module_key(mod_name, key);
-    be->display_mod->display();
+	be->display_mod->display();
 
 	model = gtk_tree_view_get_model(GTK_TREE_VIEW(d->listview));
 	list_store = GTK_LIST_STORE(model);
@@ -1208,8 +1209,12 @@ static gint sword_uri(DIALOG_DATA * t, const gchar * url, gboolean clicked)
 		g_free(t->mod_name);
 	t->mod_name = g_strdup(module);
 
+	int mtype = be->module_type(t->mod_name);
+	if ((mtype == TEXT_TYPE) || (mtype == COMMENTARY_TYPE))
+		valid_scripture_key = main_is_Bible_key(t->mod_name, key);
 	be->set_module_key(t->mod_name, t->key);
 	be->display_mod->display();
+	valid_scripture_key = TRUE;	// leave nice for future use.
 	if (t->navbar.module_name)
 		main_navbar_versekey_set(t->navbar, t->key);
 
@@ -1598,10 +1603,13 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 		t->is_locked = 0;
 		t->cipher_old = NULL;
 	}
+
 	if ((type != BOOK_TYPE) &&
 	    (type != PRAYERLIST_TYPE) &&
 	    (type != DICTIONARY_TYPE)) {
+		valid_scripture_key = main_is_Bible_key(t->mod_name, t->key);
 		be->display_mod->display();
+		valid_scripture_key = TRUE;	// leave nice for future use.
 		bible_apply_change = TRUE;
 	}
 	if (type == TEXT_TYPE)

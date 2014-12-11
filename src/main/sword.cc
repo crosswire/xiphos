@@ -89,6 +89,8 @@ using namespace sword;
 char *sword_locale = NULL;
 gboolean companion_activity = FALSE;
 
+extern gboolean valid_scripture_key;
+
 /******************************************************************************
  * Name
  *   main_book_heading
@@ -1061,8 +1063,12 @@ void main_display_commentary(const char * mod_name,
 
 	main_check_unlock(mod_name, TRUE);
 
+	valid_scripture_key = main_is_Bible_key(mod_name, key);
+
 	backend->set_module_key(mod_name, key);
 	backend->display_mod->display();
+
+	valid_scripture_key = TRUE;	// leave nice for future use.
 
 	//if (settings.browsing)
 		gui_update_tab_struct(NULL,
@@ -1234,10 +1240,12 @@ void main_display_bible(const char * mod_name,
 
 	main_check_unlock(mod_name, TRUE);
 
+	valid_scripture_key = main_is_Bible_key(mod_name, key);
+
 	if (backend->module_has_testament(mod_name,
 				backend->get_key_testament(mod_name, key))) {
-			backend->set_module_key(mod_name, key);
-			backend->display_mod->display();
+		backend->set_module_key(mod_name, key);
+		backend->display_mod->display();
 	} else {
 		if (backend->get_key_testament(mod_name, key) == 1)
 			val_key = main_update_nav_controls(mod_name, "Matthew 1:1");
@@ -1248,6 +1256,8 @@ void main_display_bible(const char * mod_name,
 		backend->display_mod->display();
 		g_free(val_key);
 	}
+
+	valid_scripture_key = TRUE;	// leave nice for future use.
 
 	GS_message(("mod_name = %s",mod_name));
 	//if (settings.browsing) {
