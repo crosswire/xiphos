@@ -196,7 +196,6 @@ void frontend_display(const char *tabs)
 
  	gtk_window_move(GTK_WINDOW(widgets.app),settings.app_x,settings.app_y);
 
-	/* gecko  needs the widgets to be visible before writing */
 	sync_windows();
 
 	// setup passage notebook
