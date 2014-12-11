@@ -28,13 +28,10 @@
   #include <glade/glade-xml.h>
 #endif
 
-#include "editor/slib-editor.h"
-
 #include "gui/navbar_versekey.h"
 #include "gui/bibletext_dialog.h"
 #include "gui/tabbed_browser.h"
 #include "gui/utilities.h"
-
 
 #include "main/module_dialogs.h"
 #include "main/navbar_versekey.h"

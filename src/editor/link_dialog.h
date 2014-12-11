@@ -30,14 +30,8 @@ extern "C"
 #include <config.h>
 #include <glib.h>
 
-
-#ifdef USE_WEBKIT_EDITOR	
 #include "editor/webkit_editor.h"
 #include "editor/editor.h"
-#else
-#include "editor/slib-editor.h"
-#endif
-
 
 void editor_link_dialog (EDITOR *e);
 void entry_verse_changed_cb(GObject *object, EDITOR *e);
