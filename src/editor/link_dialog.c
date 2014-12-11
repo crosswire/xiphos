@@ -28,14 +28,8 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-
-
-#ifdef USE_WEBKIT_EDITOR
 #include "editor/webkit_editor.h"
 #include "editor/editor.h"
-#else
-#include "editor/slib-editor.h"
-#endif
 
 #include "editor/link_dialog.h"
 

@@ -21,8 +21,6 @@
 
 #include <config.h>
 
-#ifdef USE_WEBKIT_EDITOR
-
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -1485,5 +1483,3 @@ void editor_maybe_save_all(void)
 		tmp = tmp2;
 	}
 }
-
-#endif /* USE_WEBKIT_EDITOR */
