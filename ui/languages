@@ -2448,7 +2448,8 @@ gad	Gaddang
 gae	Guarequena
 gaf	Gende
 gag	Gagauz
-gag-Cyrl	Gagauz
+#gag-Cyrl	Gagauz
+gag-Cyrl	Гагаузы
 gag-Latn	Gagauz
 gah	Alekano
 gai	Borei
