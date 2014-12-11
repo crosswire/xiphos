@@ -28,7 +28,7 @@ packages installed:
 
 Next we need to configure everything:
 
-    $ ./waf configure --prefix=/usr --debug-level=optimized --enable-webkit-editor
+    $ ./waf configure --prefix=/usr --debug-level=optimized
 
 Now we build:
 

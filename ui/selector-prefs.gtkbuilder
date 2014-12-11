@@ -52,7 +52,7 @@
             </child>
             <child>
               <object class="GtkButton" id="mod_sel_button_add">
-                <property name="label">list-add</property>
+                <property name="label">gtk-add</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
