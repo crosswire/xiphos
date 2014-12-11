@@ -2054,7 +2054,7 @@
                             <property name="tooltip-text" translatable="yes">Open a dialog to select modules</property>
                             <property name="label" translatable="yes">Add Modules</property>
                             <property name="use_underline">True</property>
-                            <property name="stock_id">list-add</property>
+                            <property name="stock_id">gtk-add</property>
                             <accessibility>
                               
                             </accessibility>
