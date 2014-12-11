@@ -13,8 +13,7 @@ env = bld.env
 sub = Utils.subst_vars
 
 objects = 'backend editor main xiphos_html'
-if bld.env['ENABLE_WEBKIT']:
-    objects += ' %s' % 'webkit'
+objects += ' %s' % 'webkit'
 
 
 # on WIN32 compile Xiphos icon into executable
