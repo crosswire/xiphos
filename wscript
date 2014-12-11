@@ -230,8 +230,7 @@ def configure(conf):
                            msg='Auto detecting gtk 2', mandatory=True)
             opt.gtkver = '2'
 
-    # TODO are these still needed?
-    env['ENABLE_WEBKIT'] = True
+	# FIXME: Find out why we still need this!
     dfn('WEBKIT', 1) 
     
     #gtk
