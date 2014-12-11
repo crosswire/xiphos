@@ -1210,8 +1210,10 @@ static gint sword_uri(DIALOG_DATA * t, const gchar * url, gboolean clicked)
 	t->mod_name = g_strdup(module);
 
 	int mtype = be->module_type(t->mod_name);
-	if ((mtype == TEXT_TYPE) || (mtype == COMMENTARY_TYPE))
-		valid_scripture_key = main_is_Bible_key(t->mod_name, key);
+	if ((mtype == TEXT_TYPE) || (mtype == COMMENTARY_TYPE)) {
+		t->navbar.valid_key = valid_scripture_key =
+			main_is_Bible_key(t->mod_name, key);
+	}
 	be->set_module_key(t->mod_name, t->key);
 	be->display_mod->display();
 	valid_scripture_key = TRUE;	// leave nice for future use.

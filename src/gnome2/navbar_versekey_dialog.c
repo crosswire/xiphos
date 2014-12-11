@@ -438,6 +438,11 @@ static void on_entry_activate(GtkEntry * entry, DIALOG_DATA *dialog)
 	    (settings.special_anchor = strchr(buf, '!')))	/* osisref */
 		*settings.special_anchor = '\0';
 	const gchar *gkey = main_get_valid_key(dialog->mod_name, (gchar*)buf);
+
+	// we got a valid key. but was it really a valid key within v11n?
+	// for future use in determining whether to show normal navbar content.
+	dialog->navbar.valid_key = main_is_Bible_key(dialog->mod_name, gkey);
+
 	if (settings.special_anchor)
 		*settings.special_anchor = '#';			/* put it back. */
 	if (gkey == NULL)

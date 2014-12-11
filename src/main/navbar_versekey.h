@@ -86,6 +86,8 @@ struct _navbar_versekey {
 	gboolean dialog;
 	//gint testaments;
 	gint type;
+
+	gboolean valid_key;
 };
 extern NAVBAR_VERSEKEY navbar_versekey;
 extern NAVBAR_VERSEKEY navbar_parallel;
