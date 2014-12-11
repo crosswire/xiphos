@@ -320,8 +320,6 @@ def configure(conf):
                        uselib_store="GTK_224")
         common_libs += ' libglade-2.0'
         common_libs += ' webkit-1.0'
-        conf.define('USE_WEBKIT_EDITOR', 1)
-        env['ENABLE_WEBKIT_EDITOR'] = True
         common_libs += ' "gtk+-2.0 >= 2.24" '
 
     else:
@@ -345,8 +343,6 @@ def configure(conf):
        #                 uselib_store="GTK_312") 
         conf.define('USE_GTK_3', 1)
         conf.define('USE_GTKBUILDER', 1)
-        conf.define('USE_WEBKIT_EDITOR', 1)
-        env['ENABLE_WEBKIT_EDITOR'] = True
     
     conf.check_cfg(atleast_pkgconfig_version='0.9.0')
     conf.check_cfg(msg="Checking for GNOME related libs",
