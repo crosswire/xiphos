@@ -80,6 +80,13 @@ int marked_cache_chapter = -1;
 
 int footnote, xref;
 
+// flag for having discovered (in)valid bible keys.
+// used for e.g. navigating from a bible w/apocrypha
+// to a tab with a non-apocrypha bible.
+gboolean valid_scripture_key;
+const gchar *no_content =
+    N_("<br/><br/><center><i>This module has no content at this point.</i></center>");
+
 #define	HTML_START	\
 "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"> \
 <style type=\"text/css\"><!-- \
@@ -976,6 +983,18 @@ GTKEntryDisp::display(SWModule &imodule)
 			      ((is_rtol && !ops->transliteration)
 			       ? "rtl"
 			       : "ltr"));
+
+	if (!valid_scripture_key) {
+		swbuf.append(no_content);
+		swbuf.append("</div></font></body></html>");
+		HtmlOutput((char *)swbuf.c_str(), gtkText, mf, NULL);
+		free_font(mf);
+		mf = NULL;
+		g_free(ops);
+		ops = NULL;
+		return 0;
+	}
+
 	//
 	// the rest of this routine is irrelevant if we are
 	// instead heading off to show a whole chapter
@@ -1329,6 +1348,18 @@ GTKChapDisp::display(SWModule &imodule)
 			       : "ltr"));
 
 	main_set_global_options(ops);
+
+	if (!valid_scripture_key) {
+		swbuf.append(no_content);
+		swbuf.append("</div></font></body></html>");
+		HtmlOutput((char *)swbuf.c_str(), gtkText, mf, NULL);
+		free_font(mf);
+		mf = NULL;
+		g_free(ops);
+		ops = NULL;
+		return 0;
+	}
+
 	getVerseBefore(imodule);
 
 	for (key->setVerse(1);
@@ -1590,6 +1621,17 @@ DialogEntryDisp::display(SWModule &imodule)
 	swbuf.append(buf);
 	g_free(buf);
 
+	if (!valid_scripture_key) {
+		swbuf.append(no_content);
+		swbuf.append("</div></font></body></html>");
+		HtmlOutput((char *)swbuf.c_str(), gtkText, mf, NULL);
+		free_font(mf);
+		mf = NULL;
+		g_free(ops);
+		ops = NULL;
+		return 0;
+	}
+
 	//
 	// the rest of this routine is irrelevant if we are
 	// instead heading off to show a whole chapter
@@ -1715,6 +1757,17 @@ DialogChapDisp::display(SWModule &imodule)
 			      ((is_rtol && !ops->transliteration)
 			       ? "rtl"
 			       : "ltr"));
+
+	if (!valid_scripture_key) {
+		swbuf.append(no_content);
+		swbuf.append("</div></font></body></html>");
+		HtmlOutput((char *)swbuf.c_str(), gtkText, mf, NULL);
+		free_font(mf);
+		mf = NULL;
+		g_free(ops);
+		ops = NULL;
+		return 0;
+	}
 
 	for (key->setVerse(1);
 	     (key->getBook() == curBook) && (key->getChapter() == curChapter) && !imodule.popError();
