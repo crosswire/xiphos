@@ -30,8 +30,6 @@
 #include <libxml/tree.h>
 #include <libxml/parser.h>
 
-#include "editor/slib-editor.h"
-
 #include "gui/xiphos.h"
 #include "gui/tabbed_browser.h"
 #include "gui/bibletext.h"

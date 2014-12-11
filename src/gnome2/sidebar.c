@@ -27,14 +27,7 @@
   #include <glade/glade-xml.h>
 #endif
 
-
-#ifdef USE_WEBKIT_EDITOR	
 #include "editor/webkit_editor.h"
-#else
-#include "editor/slib-editor.h"
-#endif
-
-
 
 #include "gui/sidebar.h"
 #include "gui/bookmarks_treeview.h"
