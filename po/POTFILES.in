@@ -111,6 +111,8 @@ ui/prefs.glade
 [type: gettext/glade]ui/prefs.gtkbuilder
 ui/search-dialog.glade
 [type: gettext/glade]ui/search-dialog.gtkbuilder
+ui/selector-prefs.glade
+[type: gettext/glade]ui/selector-prefs.gtkbuilder
 ui/xi-export-bookmarks.glade
 ui/xi-menus.glade
 [type: gettext/glade]ui/xi-menus.gtkbuilder
