@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: Xiphos 3.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-10 09:52+0100\n"
-"PO-Revision-Date: 2014-12-11 17:15+0100\n"
+"PO-Revision-Date: 2014-12-12 16:25+0100\n"
 "Last-Translator: Eicke Godehardt <sf@godehardt.org>\n"
 "Language-Team: Xiphos Translation Team <farsi@lists.sharif.edu>\n"
 "Language: de_DE\n"
@@ -24,20 +24,19 @@ msgstr ""
 
 #: ../src/biblesync/biblesync.cc:130
 msgid "network setup errors."
-msgstr ""
+msgstr "Fehler in den Netzwerkeinstellungen."
 
 #: ../src/biblesync/biblesync.cc:176
 msgid " client socket"
-msgstr ""
+msgstr " Klient Socket"
 
 #: ../src/biblesync/biblesync.cc:225
 msgid " server socket"
-msgstr ""
+msgstr " Server Socket"
 
 #: ../src/biblesync/biblesync.cc:371
-#, fuzzy
 msgid "bad magic"
-msgstr "unpassender"
+msgstr ""
 
 #: ../src/biblesync/biblesync.cc:375
 msgid "bad protocol version"
@@ -61,23 +60,23 @@ msgstr "unpassendes Nachrichtenformat"
 
 #: ../src/biblesync/biblesync.cc:447
 msgid "missing required header "
-msgstr ""
+msgstr "verpflichtende Kopfinformationen fehlen"
 
 #: ../src/biblesync/biblesync.cc:474
 msgid "Spoof stopped: "
-msgstr ""
+msgstr "Manipulation gestoppt: "
 
 #: ../src/biblesync/biblesync.cc:505
 msgid "Ignoring echo."
-msgstr ""
+msgstr "Ignoriere Echo."
 
 #: ../src/biblesync/biblesync.cc:534
 msgid "Domain not 'BIBLE-VERSE': "
-msgstr ""
+msgstr "Domäne ist nicht 'BIBLE-VERSE': "
 
 #: ../src/biblesync/biblesync.cc:542
 msgid "Invalid group: "
-msgstr ""
+msgstr "Ungültige Gruppe:"
 
 #: ../src/biblesync/biblesync.cc:572
 msgid " present at "
@@ -88,9 +87,8 @@ msgid " using "
 msgstr ""
 
 #: ../src/biblesync/biblesync.cc:692
-#, fuzzy
 msgid "[no dump ready]"
-msgstr "[kein Modul]"
+msgstr "[kein dump bereit]"
 
 #: ../src/biblesync/biblesync.cc:700
 msgid "select < 0"
@@ -109,6 +107,9 @@ msgid ""
 "Unable to multicast; BibleSync is now disabled. If your network connection "
 "changed while this program was active, it may be sufficient to re-enable."
 msgstr ""
+"Gruppenruf (Multicast) funktioniert nicht; BibleSync wird jetzt deaktiviert. "
+"Wenn ihre Netzwerkverbindung sich verändert hat, während dieses Programm "
+"aktiv war, könnte es reichen, dies einfach wieder zu aktivieren."
 
 #: ../src/backend/sword_main.cc:789
 msgid ""
@@ -581,7 +582,7 @@ msgstr "BibleSync: Aktuelle Navigation gesendet."
 
 #: ../src/gnome2/main_window.c:700
 msgid "BibleSync: Not speaking."
-msgstr ""
+msgstr "BibleSync: Spricht nicht."
 
 #: ../src/gnome2/main_window.c:884
 msgid "Xiphos - Bible Study Software"
@@ -1248,11 +1249,11 @@ msgstr "Parallelansicht"
 
 #: ../src/gnome2/preferences_dialog.c:870
 msgid "BibleSync session passphrase"
-msgstr ""
+msgstr "BibleSync Sitzungspasswort"
 
 #: ../src/gnome2/preferences_dialog.c:872
 msgid "Phrase:"
-msgstr ""
+msgstr "Phrase:"
 
 #. mode selection failed? probably dead interface
 #: ../src/gnome2/preferences_dialog.c:950
@@ -1268,7 +1269,7 @@ msgstr "Modusauswahl fehlgeschlagen.\n"
 #: ../src/gnome2/preferences_dialog.c:1017
 #, c-format
 msgid "BibleSync: %s (passphrase \"%s\")."
-msgstr ""
+msgstr "BibleSync: %s (Passwort \"%s\")."
 
 #: ../src/gnome2/preferences_dialog.c:1019
 msgid "Disabled"
@@ -1280,11 +1281,11 @@ msgstr "Persönlich"
 
 #: ../src/gnome2/preferences_dialog.c:1023
 msgid "Speaker"
-msgstr ""
+msgstr "Sprecher"
 
 #: ../src/gnome2/preferences_dialog.c:1024
 msgid "Audience"
-msgstr ""
+msgstr "Zuhörer"
 
 #: ../src/gnome2/preferences_dialog.c:1595
 #: ../src/gnome2/preferences_dialog.c:1632
@@ -1336,7 +1337,7 @@ msgstr "Größen und Ansichten"
 
 #: ../src/gnome2/preferences_dialog.c:2076
 msgid "Special"
-msgstr "Spezial"
+msgstr "Speziell"
 
 #: ../src/gnome2/preferences_dialog.c:2785 ../src/gnome2/search_dialog.c:522
 msgid "Clear List?"
@@ -2177,6 +2178,8 @@ msgid ""
 "Module error: Unusable xref encoding.\n"
 "Please report this, with module & verse"
 msgstr ""
+"Modulfehler: xref nicht verwendbar.\n"
+"Bitte melden sie dies zusammen mit Modul & Vers"
 
 #: ../src/main/sidebar.cc:422
 msgid "verse"
@@ -2763,24 +2766,21 @@ msgstr "Versnummer Knopf"
 
 #: ../ui/export-dialog.glade.h:28 ../ui/export-dialog.gtkbuilder.h:29
 msgid "Indicates whether reference is placed first or last."
-msgstr ""
+msgstr "Anzeigen ob der Verweis als erstes oder letztes platziert wird."
 
 #: ../ui/export-dialog.glade.h:29 ../ui/export-dialog.gtkbuilder.h:28
-#, fuzzy
 msgid "Reference last"
-msgstr "Referenz Eingabe"
+msgstr "Referenz zuletzt"
 
 #: ../ui/export-dialog.glade.h:30 ../ui/export-dialog.gtkbuilder.h:30
-#, fuzzy
 msgid "Reference last button"
-msgstr "Referenz Eingabe"
+msgstr "Referenz zuletzt-Knopf"
 
 #: ../ui/export-dialog.glade.h:31 ../ui/export-dialog.gtkbuilder.h:32
 msgid "Indicates whether or not version name is included in reference."
-msgstr ""
+msgstr "Anzeigen ob der Versionsname im Verweis enthalten ist oder nicht."
 
 #: ../ui/export-dialog.glade.h:32
-#, fuzzy
 msgid "Include Version"
 msgstr "Version einbeziehen"
 
@@ -2793,25 +2793,20 @@ msgid "Save Export As"
 msgstr "Speichere Export unter"
 
 #: ../ui/export-dialog.gtkbuilder.h:26
-#, fuzzy
 msgid "Indicates whether verse numbers should appear inline in the text."
-msgstr ""
-"Zeigt an, ob bei mehr als einem Vers, die Versnummern im Fließtext "
-"erscheinen sollen."
+msgstr "Zeigt an, ob die Versnummern im Fließtext erscheinen sollen."
 
 #: ../ui/export-dialog.gtkbuilder.h:31
-#, fuzzy
 msgid "Include version"
-msgstr "Sword Version"
+msgstr "Version einbeziehen"
 
 #: ../ui/gtk2_webedit.ui.h:1 ../ui/gtk_webedit.ui.h:1
 msgid "About Studypad"
 msgstr "Über das Notizbuch"
 
 #: ../ui/gtk2_webedit.ui.h:3 ../ui/gtk_webedit.ui.h:3
-#, fuzzy
 msgid "Open about dialog"
-msgstr "In Dialogfenster öffnen"
+msgstr "Öffne Informationsdialog"
 
 #: ../ui/gtk2_webedit.ui.h:4 ../ui/gtk_webedit.ui.h:4 ../ui/prefs.glade.h:116
 #: ../ui/prefs.gtkbuilder.h:116
@@ -2819,18 +2814,16 @@ msgid "Bold"
 msgstr "Fett"
 
 #: ../ui/gtk2_webedit.ui.h:5 ../ui/gtk_webedit.ui.h:5
-#, fuzzy
 msgid "Make selection bold"
-msgstr "Macht die Schrift fett"
+msgstr "Auswahl fett setzen"
 
 #: ../ui/gtk2_webedit.ui.h:6 ../ui/gtk_webedit.ui.h:6
 msgid "Copy"
 msgstr "Kopieren"
 
 #: ../ui/gtk2_webedit.ui.h:7 ../ui/gtk_webedit.ui.h:7
-#, fuzzy
 msgid "Copy selection to clipboard"
-msgstr "Auswahl ins ... kopieren"
+msgstr "Auswahl in die Zwischenablage kopieren"
 
 #: ../ui/gtk2_webedit.ui.h:8 ../ui/gtk_webedit.ui.h:8
 msgid "Cut"
@@ -2866,14 +2859,12 @@ msgid "Delete Item"
 msgstr "Eintrag löschen"
 
 #: ../ui/gtk2_webedit.ui.h:17 ../ui/gtk_webedit.ui.h:17
-#, fuzzy
 msgid "Delete current item"
-msgstr "Lösche aktuelle Notiz"
+msgstr "Lösche aktuelles Element"
 
 #: ../ui/gtk2_webedit.ui.h:19 ../ui/gtk_webedit.ui.h:19
-#, fuzzy
 msgid "Search current document"
-msgstr "Ganzes Module durchsuchen"
+msgstr "Aktuelles Dokument durchsuchen"
 
 #: ../ui/gtk2_webedit.ui.h:20 ../ui/gtk_webedit.ui.h:20
 msgid "Font"
@@ -2985,25 +2976,23 @@ msgstr "Kursiv"
 
 #: ../ui/gtk2_webedit.ui.h:47 ../ui/gtk_webedit.ui.h:47
 msgid "Change selection to italic font"
-msgstr ""
+msgstr "Auswahl kursiv setzen"
 
 #: ../ui/gtk2_webedit.ui.h:48 ../ui/gtk_webedit.ui.h:48
 msgid "Center"
 msgstr "Zentrieren"
 
 #: ../ui/gtk2_webedit.ui.h:49 ../ui/gtk_webedit.ui.h:49
-#, fuzzy
 msgid "Center justify paragraph"
-msgstr "Zentrieren mit Absätzen"
+msgstr "Zentrierter Absatz"
 
 #: ../ui/gtk2_webedit.ui.h:50 ../ui/gtk_webedit.ui.h:50
-#, fuzzy
 msgid "Full"
-msgstr "Voll"
+msgstr "Vollständig"
 
 #: ../ui/gtk2_webedit.ui.h:51 ../ui/gtk_webedit.ui.h:51
 msgid "full justify"
-msgstr ""
+msgstr "Blocksatz"
 
 #: ../ui/gtk2_webedit.ui.h:52 ../ui/gtk_webedit.ui.h:52
 msgid "Left"
@@ -3011,7 +3000,7 @@ msgstr "Links"
 
 #: ../ui/gtk2_webedit.ui.h:53 ../ui/gtk_webedit.ui.h:53
 msgid "Left justify paragraph"
-msgstr "Linksbündiger Absätzen"
+msgstr "Linksbündiger Absatz"
 
 #: ../ui/gtk2_webedit.ui.h:54 ../ui/gtk_webedit.ui.h:54
 msgid "Right"
@@ -3019,7 +3008,7 @@ msgstr "Rechts"
 
 #: ../ui/gtk2_webedit.ui.h:55 ../ui/gtk_webedit.ui.h:55
 msgid "Right justify paragraph"
-msgstr "Rechtsbündiger Absätzen"
+msgstr "Rechtsbündiger Absatz"
 
 #: ../ui/gtk2_webedit.ui.h:57 ../ui/gtk_webedit.ui.h:57
 msgid "Create new file"
@@ -3034,9 +3023,8 @@ msgid "Paste"
 msgstr "Einfügen"
 
 #: ../ui/gtk2_webedit.ui.h:61 ../ui/gtk_webedit.ui.h:61
-#, fuzzy
 msgid "Paste clipboard at cursor."
-msgstr "Lesezeichen bei Cursor einfügen"
+msgstr "Zwischenablage bei Cursor einfügen"
 
 #: ../ui/gtk2_webedit.ui.h:62 ../ui/gtk_webedit.ui.h:62
 msgid "Print Document"
@@ -3067,17 +3055,16 @@ msgid "Quit"
 msgstr "Beenden"
 
 #: ../ui/gtk2_webedit.ui.h:69 ../ui/gtk_webedit.ui.h:69
-#, fuzzy
 msgid "Shut down editor"
 msgstr "Editor beenden"
 
 #: ../ui/gtk2_webedit.ui.h:70 ../ui/gtk_webedit.ui.h:70
 msgid "Redo"
-msgstr ""
+msgstr "Wiederherstellen"
 
 #: ../ui/gtk2_webedit.ui.h:71 ../ui/gtk_webedit.ui.h:71
 msgid "Redo last undo"
-msgstr ""
+msgstr "Den rückgängig gemachten Vorgang wiederherstellen"
 
 #: ../ui/gtk2_webedit.ui.h:72 ../ui/gtk_webedit.ui.h:72
 msgid "Find and replace"
@@ -3092,7 +3079,6 @@ msgid "Search and replace"
 msgstr "Suchen und Ersetzen"
 
 #: ../ui/gtk2_webedit.ui.h:76 ../ui/gtk_webedit.ui.h:76
-#, fuzzy
 msgid "Save changes to file"
 msgstr "Änderungen im Dokument speichern"
 
@@ -3126,16 +3112,15 @@ msgstr "Rückgängig"
 
 #: ../ui/gtk2_webedit.ui.h:84 ../ui/gtk_webedit.ui.h:84
 msgid "Undo last change"
-msgstr ""
+msgstr "Letzte Änderung rückgängig machen"
 
 #: ../ui/gtk2_webedit.ui.h:85 ../ui/gtk_webedit.ui.h:85
 msgid "Editor"
 msgstr "Editor"
 
 #: ../ui/gtk2_webedit.ui.h:87 ../ui/gtk_webedit.ui.h:87
-#, fuzzy
 msgid "Recent files"
-msgstr "Speichert die aktuelle Datei unter"
+msgstr "Zuletzt benutzte Dokumente"
 
 #: ../ui/gtk2_webedit.ui.h:88 ../ui/gtk_webedit.ui.h:88
 #: ../ui/xi-menus.glade.h:9 ../ui/xi-menus.gtkbuilder.h:6
@@ -3237,11 +3222,11 @@ msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:113 ../ui/gtk_webedit.ui.h:113
 msgid "Set font color of selected text."
-msgstr ""
+msgstr "Schriftfarbe für Auswahl setzen."
 
 #: ../ui/gtk2_webedit.ui.h:114 ../ui/gtk_webedit.ui.h:114
 msgid "Highlight selected text by setting background color."
-msgstr ""
+msgstr "Auswahl durch setzen einer Hintergrundfarbe hervorheben."
 
 #: ../ui/gtk2_webedit.ui.h:115 ../ui/gtk_webedit.ui.h:115
 msgid "toolbutton9"
@@ -3282,7 +3267,7 @@ msgid ""
 "at crosswire.org, with your current remote sources."
 msgstr ""
 "Lade und synchronisiere die Standardmenge an bekannten Repositorien, wie sie "
-"auf crosswire.org gepflegt werden, mit Ihren aktuellen entfernten Quellen."
+"auf crosswire.org gepflegt werden, mit ihren aktuellen entfernten Quellen."
 
 #: ../ui/module-manager.glade.h:6 ../ui/module-manager.gtkbuilder.h:6
 msgid ""
@@ -3367,7 +3352,7 @@ msgstr ""
 
 #: ../ui/module-manager.glade.h:24 ../ui/module-manager.gtkbuilder.h:24
 msgid "Remove one of your local folders as an install source."
-msgstr "Entfernt eines Ihrer lokalen Verzeichnisse als Installationsquelle."
+msgstr "Entfernt eines ihrer lokalen Verzeichnisse als Installationsquelle."
 
 #: ../ui/module-manager.glade.h:25 ../ui/module-manager.gtkbuilder.h:25
 msgid "Current Remote Sources"
@@ -3532,7 +3517,7 @@ msgstr "Schriftfarben"
 
 #: ../ui/prefs.glade.h:16 ../ui/prefs.gtkbuilder.h:24
 msgid "<b>Font Sizes</b>"
-msgstr "<b>Schriftsatzgröße</b>"
+msgstr "<b>Schriftgrößen</b>"
 
 #: ../ui/prefs.glade.h:17 ../ui/prefs.gtkbuilder.h:25
 msgid "All displayed font sizes are relative to this choice"
@@ -3580,7 +3565,7 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:30 ../ui/prefs.gtkbuilder.h:30
 msgid "Font preferences, per language"
-msgstr "Font Einstellungen, pro Sprache"
+msgstr "Schrift-Einstellungen, pro Sprache"
 
 #: ../ui/prefs.glade.h:31 ../ui/prefs.gtkbuilder.h:31
 msgid "Language Font Combo"
@@ -3605,6 +3590,13 @@ msgid ""
 "audience's Bible programs to follow along; Audience, to receive the "
 "speaker's navigation."
 msgstr ""
+"Xiphos ist das erste Bibelstudierprogramm, das eine Umsetzung für BibleSync "
+"anbietet, ein Synchronisierungsprotokoll für Bibelprogramme. Wenn sie mit "
+"mehreren Bibelprogrammen oder im Team arbeiten, oder sie im Klassenzimmer "
+"gemeinsam studieren, kann BibleSync ein nützliches Werkzeug sein. BibleSync "
+"arbeit in 1 von 3 Modi: Persönlich, um mehrere eigene Bibelanwendungen zu "
+"synchronisieren; als Sprecher, um in einer Vorlesung die Bibelprogramme der "
+"Zuhörer zu steuern; als Zuhörer, um der Navigation des Sprechers zu folgen."
 
 #: ../ui/prefs.glade.h:35 ../ui/prefs.gtkbuilder.h:35
 msgid "<i>Mode:</i>"
@@ -3612,46 +3604,43 @@ msgstr "<i>Modus:</i>"
 
 #: ../ui/prefs.glade.h:36 ../ui/prefs.gtkbuilder.h:36
 msgid "Select the mode in which BibleSync should operate."
-msgstr ""
+msgstr "Modus auswählen, in dem BibleSync arbeiten soll."
 
 #: ../ui/prefs.glade.h:37 ../ui/prefs.gtkbuilder.h:37
 msgid "_Off"
-msgstr ""
+msgstr "_Aus"
 
 #: ../ui/prefs.glade.h:38 ../ui/prefs.gtkbuilder.h:38
 msgid "Disable BibleSync."
 msgstr "BibleSync deaktivieren."
 
 #: ../ui/prefs.glade.h:39 ../ui/prefs.gtkbuilder.h:39
-#, fuzzy
 msgid "BSP off radio button"
-msgstr "Buch Optionsfeld"
+msgstr "BSP Aus-Schaltknopf"
 
 #: ../ui/prefs.glade.h:40 ../ui/prefs.gtkbuilder.h:40
 msgid "_Speaker"
-msgstr ""
+msgstr "_Sprecher"
 
 #: ../ui/prefs.glade.h:41 ../ui/prefs.gtkbuilder.h:41
 msgid "Enable BibleSync as the speaker."
-msgstr ""
+msgstr "BibleSync als Sprecher aktivieren."
 
 #: ../ui/prefs.glade.h:42 ../ui/prefs.gtkbuilder.h:42
-#, fuzzy
 msgid "BSP speaker radio button"
-msgstr "Genaue Phrase Optionsfeld"
+msgstr "BSP Sprecher-Schaltknopf"
 
 #: ../ui/prefs.glade.h:43 ../ui/prefs.gtkbuilder.h:43
 msgid "_Audience"
-msgstr ""
+msgstr "_Publikum"
 
 #: ../ui/prefs.glade.h:44 ../ui/prefs.gtkbuilder.h:44
 msgid "Enable BibleSync as a member of the audience."
-msgstr ""
+msgstr "BibleSync als ein Zuhörer aktivieren."
 
 #: ../ui/prefs.glade.h:45 ../ui/prefs.gtkbuilder.h:45
-#, fuzzy
 msgid "BSP audience radio button"
-msgstr "Einfacher Text Optionsfeld"
+msgstr "BSP Zuhörer-Schaltknopf"
 
 #: ../ui/prefs.glade.h:46 ../ui/prefs.gtkbuilder.h:46
 msgid "_Personal"
@@ -3660,11 +3649,11 @@ msgstr "_Persönlich"
 #: ../ui/prefs.glade.h:47 ../ui/prefs.gtkbuilder.h:47
 msgid "Enable BibleSync for personal or team use."
 msgstr ""
+"BibleSync für persönliches Arbeiten oder die Arbeit im Team aktivieren."
 
 #: ../ui/prefs.glade.h:48 ../ui/prefs.gtkbuilder.h:48
-#, fuzzy
 msgid "BSP personal radio button"
-msgstr "Regulärer Ausdruck Optionsfeld"
+msgstr "BSP persönlich-Schaltknopf"
 
 #: ../ui/prefs.glade.h:49 ../ui/prefs.gtkbuilder.h:49
 msgid "Private"
@@ -3675,11 +3664,12 @@ msgid ""
 "When in Personal mode, only programs running on this machine will hear your "
 "navigation."
 msgstr ""
+"Im persönlichen Modus können nur Programme auf dieser Maschine die "
+"Navigation mitbekommen."
 
 #: ../ui/prefs.glade.h:51 ../ui/prefs.gtkbuilder.h:51
-#, fuzzy
 msgid "BSP privacy button"
-msgstr "Vers Optionsfeld"
+msgstr "BSP Privatsphäre-Knopf"
 
 #: ../ui/prefs.glade.h:52 ../ui/prefs.gtkbuilder.h:52
 msgid "<i>Navigate:</i>"
@@ -3688,6 +3678,7 @@ msgstr "<i>Navigieren:</i>"
 #: ../ui/prefs.glade.h:53 ../ui/prefs.gtkbuilder.h:53
 msgid "Choose how to accept incoming navigation synchronization."
 msgstr ""
+"Auswahl wie eingehende Navigationssynchronisierungen akzeptiert werden."
 
 #: ../ui/prefs.glade.h:54 ../ui/prefs.gtkbuilder.h:54
 msgid "_Direct"
@@ -3696,11 +3687,12 @@ msgstr "_Direkt"
 #: ../ui/prefs.glade.h:55 ../ui/prefs.gtkbuilder.h:55
 msgid "BibleSync navigation will send Xiphos directly to the verse indicated."
 msgstr ""
+"BibleSync Navigationen werden Xiphos direkt zu dem entsprechenden Vers "
+"bringen."
 
 #: ../ui/prefs.glade.h:56 ../ui/prefs.gtkbuilder.h:56
-#, fuzzy
 msgid "BSP nav direct radio button"
-msgstr "Einzelnes Modul-Radioknopf"
+msgstr "BSP direkte Navigation-Schaltknopf"
 
 #: ../ui/prefs.glade.h:57 ../ui/prefs.gtkbuilder.h:57
 msgid "_Verse list"
@@ -3708,21 +3700,19 @@ msgstr "_Versliste"
 
 #: ../ui/prefs.glade.h:58 ../ui/prefs.gtkbuilder.h:58
 msgid "BibleSync navigation will use Xiphos' sidebar verse list."
-msgstr ""
+msgstr "BibleSync Navigationen nutzen Xiphos' Versliste in Seitenleiste."
 
 #: ../ui/prefs.glade.h:59 ../ui/prefs.gtkbuilder.h:59
-#, fuzzy
 msgid "BSP nav verse list radio button"
-msgstr "Modulliste Optionsfeld"
+msgstr "BSP Navigation Versliste-Schaltknopf"
 
 #: ../ui/prefs.glade.h:60 ../ui/prefs.gtkbuilder.h:60
-#, fuzzy
 msgid "<i>Listen:</i>"
-msgstr "<b>Name der Liste</b>"
+msgstr "<i>Folgen:</i>"
 
 #: ../ui/prefs.glade.h:61 ../ui/prefs.gtkbuilder.h:61
 msgid "Xiphos will listen to Speakers according to choice here."
-msgstr ""
+msgstr "Xiphos hört auf die Sprecher entsprechend dieser Wahl."
 
 #: ../ui/prefs.glade.h:62 ../ui/prefs.gtkbuilder.h:62
 msgid "Selective"
@@ -3730,42 +3720,39 @@ msgstr "Selektiv"
 
 #: ../ui/prefs.glade.h:63 ../ui/prefs.gtkbuilder.h:63
 msgid "Choose the Speakers to be followed."
-msgstr ""
+msgstr "Sprecher gezielt auswählen, denen gefolgt werden soll."
 
 #: ../ui/prefs.glade.h:64 ../ui/prefs.gtkbuilder.h:64
-#, fuzzy
 msgid "BSP listen some radio button"
-msgstr "Einfacher Text Optionsfeld"
+msgstr "BSP selektives Folgen-Schaltknopf"
 
 #: ../ui/prefs.glade.h:65 ../ui/prefs.gtkbuilder.h:65
 msgid "All"
-msgstr ""
+msgstr "Allen"
 
 #: ../ui/prefs.glade.h:66 ../ui/prefs.gtkbuilder.h:66
 msgid "All Speakers will be followed."
-msgstr ""
+msgstr "Allen Sprechern wird gefolgt."
 
 #: ../ui/prefs.glade.h:67 ../ui/prefs.gtkbuilder.h:67
-#, fuzzy
 msgid "BSP listen all radio button"
-msgstr "Regulärer Ausdruck Optionsfeld"
+msgstr "BSP allen Folgen-Schaltknopf"
 
 #: ../ui/prefs.glade.h:68 ../ui/prefs.gtkbuilder.h:68
 msgid "None"
-msgstr ""
+msgstr "Keinem"
 
 #: ../ui/prefs.glade.h:69 ../ui/prefs.gtkbuilder.h:69
 msgid "No Speakers will be followed."
-msgstr ""
+msgstr "Keinem Sprecher wird gefolgt."
 
 #: ../ui/prefs.glade.h:70 ../ui/prefs.gtkbuilder.h:70
-#, fuzzy
 msgid "BSP listen none radio button"
-msgstr "Einfacher Text Optionsfeld"
+msgstr "BSP keinem Folgen-Schaltknopf"
 
 #: ../ui/prefs.glade.h:71 ../ui/prefs.gtkbuilder.h:71
 msgid "<i>Special:</i>"
-msgstr "<i>Spezial:</i>"
+msgstr "<i>Speziell:</i>"
 
 #: ../ui/prefs.glade.h:72 ../ui/prefs.gtkbuilder.h:72
 msgid ""
@@ -3775,31 +3762,29 @@ msgid ""
 msgstr ""
 
 #: ../ui/prefs.glade.h:73 ../ui/prefs.gtkbuilder.h:73
-#, fuzzy
 msgid "Presence"
-msgstr "Einstellungen"
+msgstr "Anwesenheit"
 
 #: ../ui/prefs.glade.h:74 ../ui/prefs.gtkbuilder.h:74
 msgid "Presence announcements will be shown in dialogs."
-msgstr ""
+msgstr "Anwesenheitsankndigungen werden in Nachrichtendialogen gezeigt."
 
 #: ../ui/prefs.glade.h:75 ../ui/prefs.gtkbuilder.h:75
-#, fuzzy
 msgid "BSP presence button"
-msgstr "Vers Optionsfeld"
+msgstr "BSP Anwesenheit-Knopf"
 
 #: ../ui/prefs.glade.h:76 ../ui/prefs.gtkbuilder.h:76
-#, fuzzy
 msgid "Mismatch"
-msgstr "Treffer"
+msgstr "Nichtzutreffend"
 
 #: ../ui/prefs.glade.h:77 ../ui/prefs.gtkbuilder.h:77
 msgid "Mismatches from your session will be shown in dialogs."
 msgstr ""
+"Nichtzutreffendes für ihre Sitzung wird in Nachrichtendialogen gezeigt."
 
 #: ../ui/prefs.glade.h:78 ../ui/prefs.gtkbuilder.h:78
 msgid "BSP mismatch button"
-msgstr ""
+msgstr "BSP Nichtzutreffend-Knopf"
 
 #: ../ui/prefs.glade.h:79 ../ui/prefs.gtkbuilder.h:79
 msgid "Debug"
@@ -3811,11 +3796,11 @@ msgstr "Paketverfolgung"
 
 #: ../ui/prefs.glade.h:81 ../ui/prefs.gtkbuilder.h:81
 msgid "BSP event debug button"
-msgstr ""
+msgstr "BSP Fehlersuch-Knopf"
 
 #: ../ui/prefs.glade.h:82 ../ui/prefs.gtkbuilder.h:82
 msgid "_Group as tab"
-msgstr ""
+msgstr "_Gruppieren als Reiter"
 
 #: ../ui/prefs.glade.h:83 ../ui/prefs.gtkbuilder.h:83
 msgid ""
@@ -3825,9 +3810,8 @@ msgid ""
 msgstr ""
 
 #: ../ui/prefs.glade.h:84 ../ui/prefs.gtkbuilder.h:84
-#, fuzzy
 msgid "BSP event group-as-tab button"
-msgstr "Einzelnes Modul-Radioknopf"
+msgstr "BSP Ereignis gruppieren als Reiter-Knopf"
 
 #: ../ui/prefs.glade.h:86 ../ui/prefs.gtkbuilder.h:86
 msgid "<b>General</b>"
@@ -3838,7 +3822,7 @@ msgid ""
 "Select a particular language for interface display, other than your usual "
 "setting"
 msgstr ""
-"Wähle eine bestimmte Sprache für die Darstellung, anders als Ihre normale "
+"Wähle eine bestimmte Sprache für die Darstellung, anders alshre normale "
 "Einstellung"
 
 #: ../ui/prefs.glade.h:88 ../ui/prefs.gtkbuilder.h:88
@@ -3998,9 +3982,8 @@ msgid "Verse number superscript checkbox"
 msgstr "Hochgestellte Versnummern Kontrollkästchen"
 
 #: ../ui/prefs.glade.h:125 ../ui/prefs.gtkbuilder.h:125
-#, fuzzy
 msgid "StudyPad default directory"
-msgstr "Vorgabeverzeichnis für das Notizbuch Kombinationsfeld"
+msgstr "Vorgabeverzeichnis für das Notizbuch"
 
 #: ../ui/prefs.glade.h:126 ../ui/prefs.gtkbuilder.h:126
 msgid "Select A Directory"
@@ -4573,9 +4556,8 @@ msgid "Attribute Search"
 msgstr "Attribut-Suche"
 
 #: ../ui/search-dialog.gtkbuilder.h:6
-#, fuzzy
 msgid "<b>search module</b>"
-msgstr "<b>Suchtyp</b>"
+msgstr "<b>Modul durchsuchen</b>"
 
 #: ../ui/xi-export-bookmarks.glade.h:1
 msgid "Export Bookmark Folder"
@@ -4925,18 +4907,16 @@ msgid ""
 msgstr ""
 
 #: ../ui/xi-menus.glade.h:101 ../ui/xi-menus-popup.gtkbuilder.h:88
-#, fuzzy
 msgid "Populate verse list"
-msgstr "Versliste"
+msgstr "Versliste füllen"
 
 #: ../ui/xi-menus.glade.h:102 ../ui/xi-menus-popup.gtkbuilder.h:91
 msgid "Push the entire verse list contents directly into the history list."
 msgstr ""
 
 #: ../ui/xi-menus.glade.h:103 ../ui/xi-menus-popup.gtkbuilder.h:90
-#, fuzzy
 msgid "Preload history from verse list"
-msgstr "Verlauf leeren"
+msgstr "Verlauf aus der Versliste laden"
 
 #: ../ui/xi-menus.glade.h:104 ../ui/xi-menus-popup.gtkbuilder.h:93
 msgid ""
@@ -4946,7 +4926,7 @@ msgstr ""
 
 #: ../ui/xi-menus.glade.h:105 ../ui/xi-menus-popup.gtkbuilder.h:92
 msgid "Send list via BibleSync"
-msgstr ""
+msgstr "Sende Liste über BibleSync"
 
 #: ../ui/xi-menus.glade.h:106 ../ui/xi-menus-popup.gtkbuilder.h:94
 msgid "Export List"
