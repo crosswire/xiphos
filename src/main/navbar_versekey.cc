@@ -513,7 +513,7 @@ void main_navbar_versekey_set(NAVBAR_VERSEKEY navbar, const char * key)
 	SWModule *mod = backend->get_SWModule(navbar.module_name->str);
 	if (!mod) return;
 
-	// previously, we set and noramlized the key, but we also
+	// previously, we set and normalized the key, but we also
 	// kept a record of whether that key made sense.
 	if (navbar.valid_key) {
 		VerseKey *vkey = (VerseKey *)mod->createKey();
@@ -600,23 +600,16 @@ GtkWidget *main_versekey_drop_down_verse_menu(NAVBAR_VERSEKEY navbar,
 
 	for (i = 1; i <= x; i++) {
 		num = main_format_number(i);
-		if (i == xverse) {
-			select_item = gtk_menu_item_new_with_label(num);
-			gtk_widget_show(select_item);
-			gtk_menu_shell_append(menu_shell, select_item);
-			g_signal_connect(G_OBJECT(select_item), "activate",
-				   G_CALLBACK
-				   (on_verse_menu_select),
-				   GINT_TO_POINTER(i));
-		} else {
-			item = gtk_menu_item_new_with_label(num);
-			gtk_widget_show(item);
-			gtk_menu_shell_append(menu_shell, item);
-			g_signal_connect(G_OBJECT(item), "activate",
-				   G_CALLBACK
-				   (on_verse_menu_select),
-				   GINT_TO_POINTER(i));
-		}
+		item = gtk_menu_item_new_with_label(num);
+		gtk_widget_show(item);
+		gtk_menu_shell_append(menu_shell, item);
+		g_signal_connect(G_OBJECT(item), "activate",
+				 G_CALLBACK
+				 (on_verse_menu_select),
+				 GINT_TO_POINTER(i));
+
+		if (i == xverse)
+			select_item = item;
 		g_free(num);
 	}
 
@@ -674,23 +667,16 @@ GtkWidget *main_versekey_drop_down_chapter_menu(NAVBAR_VERSEKEY navbar,
 
 	for (i = 1; i <= x; i++) {
 		num = main_format_number(i);
-		if (i == xchapter) {
-			select_item = gtk_menu_item_new_with_label(num);
-			gtk_widget_show(select_item);
-			gtk_menu_shell_append(menu_shell, select_item);
-			g_signal_connect(G_OBJECT(select_item), "activate",
-				   G_CALLBACK
-				   (on_chapter_menu_select),
-				   GINT_TO_POINTER(i));
-		} else {
-			item = gtk_menu_item_new_with_label(num);
-			gtk_widget_show(item);
-			gtk_menu_shell_append(menu_shell, item);
-			g_signal_connect(G_OBJECT(item), "activate",
-				   G_CALLBACK
-				   (on_chapter_menu_select),
-				   GINT_TO_POINTER(i));
-		}
+		item = gtk_menu_item_new_with_label(num);
+		gtk_widget_show(item);
+		gtk_menu_shell_append(menu_shell, item);
+		g_signal_connect(G_OBJECT(item), "activate",
+				 G_CALLBACK
+				 (on_chapter_menu_select),
+				 GINT_TO_POINTER(i));
+
+		if (i == xchapter)
+			select_item = item;
 		g_free(num);
 	}
 
@@ -752,36 +738,32 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar,
 			key->setTestament(1);
 			key->setBook(i+1);
 			book = strdup((const char *) key->getBookName());
+#if 0
 			char *mykey = g_strdup_printf("%s 1:1",book);
 			char *rawtext = main_get_raw_text(navbar.module_name->str, mykey);
-			if (!rawtext || (rawtext && (strlen(rawtext) < 2))){
-				g_free(book);
-				g_free(mykey);
-				g_free(rawtext);
-				++i;
-				continue;
-			}
-			if (!strcmp(book, current_book)) {
-				select_item = gtk_menu_item_new_with_label(book);
-				gtk_widget_show(select_item);
-				gtk_menu_shell_append(menu_shell, select_item);
-				g_signal_connect(G_OBJECT(select_item), "activate",
-					   G_CALLBACK
-					   (on_ot_book_menu_select),
-					   GINT_TO_POINTER(i));
-			} else {
+
+			if (rawtext && (strlen(rawtext) >= 2)) {
+#endif
 				item = gtk_menu_item_new_with_label(book);
 				gtk_widget_show(item);
 				gtk_menu_shell_append(menu_shell, item);
 				g_signal_connect(G_OBJECT(item), "activate",
-					   G_CALLBACK
-					   (on_ot_book_menu_select),
-					   GINT_TO_POINTER(i));
+						 G_CALLBACK
+						 (on_ot_book_menu_select),
+						 GINT_TO_POINTER(i));
+
+				if (!strcmp(book, current_book))
+				    select_item = item;
+#if 0
 			}
+#endif
+
 			++i;
 			g_free(book);
+#if 0
 			g_free(mykey);
 			g_free(rawtext);
+#endif
 		}
 	}
 
@@ -791,36 +773,32 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar,
 			key->setTestament(2);
 			key->setBook(i+1);
 			book = strdup((const char *) key->getBookName());
+#if 0
 			char *mykey = g_strdup_printf("%s 1:1",book);
 			char *rawtext = main_get_raw_text(navbar.module_name->str, mykey);
-			if (!rawtext || (rawtext && (strlen(rawtext) < 2))){
-				g_free(book);
-				g_free(mykey);
-				g_free(rawtext);
-				++i;
-				continue;
-			}
-			if (!strcmp(book, current_book)) {
-				select_item = gtk_menu_item_new_with_label(book);
-				gtk_widget_show(select_item);
-				gtk_menu_shell_append(menu_shell, select_item);
-				g_signal_connect(G_OBJECT(select_item), "activate",
-					   G_CALLBACK
-					   (on_nt_book_menu_select),
-					   GINT_TO_POINTER(i));
-			} else {
+
+			if (rawtext && (strlen(rawtext) >= 2)){
+#endif
 				item = gtk_menu_item_new_with_label(book);
 				gtk_widget_show(item);
 				gtk_menu_shell_append(menu_shell, item);
 				g_signal_connect(G_OBJECT(item), "activate",
-					   G_CALLBACK
-					   (on_nt_book_menu_select),
-					   GINT_TO_POINTER(i));
+						 G_CALLBACK
+						 (on_nt_book_menu_select),
+						 GINT_TO_POINTER(i));
+
+				if (!strcmp(book, current_book))
+				    select_item = item;
+#if 0
 			}
+#endif
+
 			++i;
 			g_free(book);
+#if 0
 			g_free(mykey);
 			g_free(rawtext);
+#endif
 		}
 	}
 

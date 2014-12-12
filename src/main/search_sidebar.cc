@@ -383,8 +383,9 @@ void main_search_sidebar_fill_bounds_combos(void)
 			g_free(book);
 		}
 	}
-	gtk_combo_box_set_active(GTK_COMBO_BOX(ss.entryLower),0);
-	gtk_combo_box_set_active(GTK_COMBO_BOX(ss.entryUpper),65);
+	gtk_combo_box_set_active(GTK_COMBO_BOX(ss.entryLower), 0);
+	gtk_combo_box_set_active(GTK_COMBO_BOX(ss.entryUpper),
+				 key->BMAX[0] + key->BMAX[1]);
 	delete key;
 }
 
