@@ -385,7 +385,7 @@ void main_search_sidebar_fill_bounds_combos(void)
 	}
 	gtk_combo_box_set_active(GTK_COMBO_BOX(ss.entryLower), 0);
 	gtk_combo_box_set_active(GTK_COMBO_BOX(ss.entryUpper),
-				 key->BMAX[0] + key->BMAX[1]);
+				 key->BMAX[0] + key->BMAX[1] - 1);
 	delete key;
 }
 
