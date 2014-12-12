@@ -738,32 +738,18 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar,
 			key->setTestament(1);
 			key->setBook(i+1);
 			book = strdup((const char *) key->getBookName());
-#if 0
-			char *mykey = g_strdup_printf("%s 1:1",book);
-			char *rawtext = main_get_raw_text(navbar.module_name->str, mykey);
+			item = gtk_menu_item_new_with_label(book);
+			gtk_widget_show(item);
+			gtk_menu_shell_append(menu_shell, item);
+			g_signal_connect(G_OBJECT(item), "activate",
+					 G_CALLBACK
+					 (on_ot_book_menu_select),
+					 GINT_TO_POINTER(i));
 
-			if (rawtext && (strlen(rawtext) >= 2)) {
-#endif
-				item = gtk_menu_item_new_with_label(book);
-				gtk_widget_show(item);
-				gtk_menu_shell_append(menu_shell, item);
-				g_signal_connect(G_OBJECT(item), "activate",
-						 G_CALLBACK
-						 (on_ot_book_menu_select),
-						 GINT_TO_POINTER(i));
-
-				if (!strcmp(book, current_book))
-				    select_item = item;
-#if 0
-			}
-#endif
-
+			if (!strcmp(book, current_book))
+			    select_item = item;
 			++i;
 			g_free(book);
-#if 0
-			g_free(mykey);
-			g_free(rawtext);
-#endif
 		}
 	}
 
@@ -773,32 +759,18 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar,
 			key->setTestament(2);
 			key->setBook(i+1);
 			book = strdup((const char *) key->getBookName());
-#if 0
-			char *mykey = g_strdup_printf("%s 1:1",book);
-			char *rawtext = main_get_raw_text(navbar.module_name->str, mykey);
+			item = gtk_menu_item_new_with_label(book);
+			gtk_widget_show(item);
+			gtk_menu_shell_append(menu_shell, item);
+			g_signal_connect(G_OBJECT(item), "activate",
+					 G_CALLBACK
+					 (on_nt_book_menu_select),
+					 GINT_TO_POINTER(i));
 
-			if (rawtext && (strlen(rawtext) >= 2)){
-#endif
-				item = gtk_menu_item_new_with_label(book);
-				gtk_widget_show(item);
-				gtk_menu_shell_append(menu_shell, item);
-				g_signal_connect(G_OBJECT(item), "activate",
-						 G_CALLBACK
-						 (on_nt_book_menu_select),
-						 GINT_TO_POINTER(i));
-
-				if (!strcmp(book, current_book))
-				    select_item = item;
-#if 0
-			}
-#endif
-
+			if (!strcmp(book, current_book))
+			    select_item = item;
 			++i;
 			g_free(book);
-#if 0
-			g_free(mykey);
-			g_free(rawtext);
-#endif
 		}
 	}
 
