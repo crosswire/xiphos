@@ -8,17 +8,10 @@ src/backend/sword_main.cc
 ## Editor Source files
 src/editor/editor.c
 src/editor/link_dialog.c
-src/editor/slib-editor.c
 src/editor/webkit_editor.c
 ## Examples source files
 src/examples/ipc_client.c
 src/examples/xiphos-nav.c
-## Gecko Source files
-src/gecko/Yelper.cpp
-src/gecko/gecko-html.cpp
-src/gecko/gecko-print.c
-src/gecko/gecko-services.cpp
-src/gecko/gecko-utils.cpp
 ## Gnome Source files
 src/gnome2/about_modules.c
 src/gnome2/about_sword.c
@@ -70,6 +63,7 @@ src/gnome2/treekey-editor.c
 src/gnome2/utilities.c
 src/gnome2/xiphos.c
 ## shared source files
+src/main/biblesync_glue.cc
 src/main/configs.cc
 src/main/display.cc
 src/main/export_passage.cc
