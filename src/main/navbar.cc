@@ -166,29 +166,16 @@ void main_navbar_fill_book_combo(NAVBAR navbar)
 			key->setTestament(1);
 			key->setBook(i+1);
 			book = strdup((const char *) key->getBookName());
-#if 0
-			char *mykey = g_strdup_printf("%s 1:1",book);
-			char *rawtext = main_get_raw_text(navbar.module_name, mykey);
-
-			if (rawtext) {
-#endif
-				GS_message(("book: %s",book));
-				gtk_list_store_append (GTK_LIST_STORE(book_model), &iter);
-				gtk_list_store_set(GTK_LIST_STORE(book_model),
-						   &iter,
-						   0,
-						   book,
-						   -1);
-#if 0
-			}
-#endif
+			GS_message(("book: %s",book));
+			gtk_list_store_append (GTK_LIST_STORE(book_model), &iter);
+			gtk_list_store_set(GTK_LIST_STORE(book_model),
+					   &iter,
+					   0,
+					   book,
+					   -1);
 
 			++i;
 			g_free(book);
-#if 0
-			g_free(mykey);
-			g_free(rawtext);
-#endif
 		}
 	}
 
@@ -198,29 +185,15 @@ void main_navbar_fill_book_combo(NAVBAR navbar)
 			key->setTestament(2);
 			key->setBook(i+1);
 			book = strdup((const char *) key->getBookName());
-#if 0
-			char *mykey = g_strdup_printf("%s 1:1",book);
-			char *rawtext = main_get_raw_text(navbar.module_name, mykey);
-
-			if (rawtext) {
-#endif
-				GS_message(("book: %s",book));
-				gtk_list_store_append (GTK_LIST_STORE(book_model), &iter);
-				gtk_list_store_set(GTK_LIST_STORE(book_model),
-						   &iter,
-						   0,
-						   book,
-						   -1);
-#if 0
-			}
-#endif
-
+			GS_message(("book: %s",book));
+			gtk_list_store_append (GTK_LIST_STORE(book_model), &iter);
+			gtk_list_store_set(GTK_LIST_STORE(book_model),
+					   &iter,
+					   0,
+					   book,
+					   -1);
 			++i;
 			g_free(book);
-#if 0
-			g_free(mykey);
-			g_free(rawtext);
-#endif
 		}
 	}
 	main_navbar_set(navbar, navbar.key);
