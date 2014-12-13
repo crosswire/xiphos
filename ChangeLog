@@ -1,3 +1,15 @@
+2014-12-12  karl <charcoal@users.sf.net>
+
+	* fixed gtk3 prefs->parallel->module selector geometry & filling.
+	* fixed gtk3.14 failure to display prefs (gtk3 blows chunks).
+	* added Free{Sans,Serif} fonts to the win32 installer.
+	* gtkhtml: its very last vestiges are truly gone, gone, gone.
+	* av11n: navbar blanked for unavailable content.
+	* av11n: unavailable content in module pane results in
+	  "This module has no content at this point."
+	* av11n: re-worked navbar filling, now takes all books offered by
+	  sword, no conditional on whether 1:1 content exists.
+
 2014-12-06  karl <charcoal@users.sf.net>
 
 	* feat.req#133 + bug#508: alternate versification.

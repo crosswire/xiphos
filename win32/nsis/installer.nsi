@@ -44,7 +44,7 @@
     !define APP_NAME "Xiphos"
     !define INSTALLER_NAME "xiphos"
     !define APP_BINARY_NAME "xiphos.exe"
-    !define APP_VERS "3.9.8"
+    !define APP_VERS "3.9.9"
     !define APP_EDITION "win32"
     !define APP_URL "http://xiphos.org"
 
@@ -261,24 +261,24 @@ Section $(CORE_SEC_TITLE) SecCore
         "GNU Unifont (TrueType)"
 
     ; FreeSans font
-    ;!insertmacro InstallTTFFont "${PATH_FONT}\FreeSans.ttf" \
-        ;"Free Sans (TrueType)"
-    ;!insertmacro InstallTTFFont "${PATH_FONT}\FreeSansBold.ttf" \
-        ;"Free Sans Bold (TrueType)"
-    ;!insertmacro InstallTTFFont "${PATH_FONT}\FreeSansOblique.ttf" \
-        ;"Free Sans Oblique (TrueType)"
-    ;!insertmacro InstallTTFFont "${PATH_FONT}\FreeSansBoldOblique.ttf" \
-        ;"Free Sans Bold Oblique (TrueType)"
+    !insertmacro InstallTTFFont "${PATH_FONT}\FreeSans.ttf" \
+        "Free Sans (TrueType)"
+    !insertmacro InstallTTFFont "${PATH_FONT}\FreeSansBold.ttf" \
+        "Free Sans Bold (TrueType)"
+    !insertmacro InstallTTFFont "${PATH_FONT}\FreeSansOblique.ttf" \
+        "Free Sans Oblique (TrueType)"
+    !insertmacro InstallTTFFont "${PATH_FONT}\FreeSansBoldOblique.ttf" \
+        "Free Sans Bold Oblique (TrueType)"
 
     ; FreeSerif font
-    ;!insertmacro InstallTTFFont "${PATH_FONT}\FreeSerif.ttf" \
-        ;"Free Serif (TrueType)"
-    ;!insertmacro InstallTTFFont "${PATH_FONT}\FreeSerifBold.ttf" \
-        ;"Free Serif Bold (TrueType)"
-    ;!insertmacro InstallTTFFont "${PATH_FONT}\FreeSerifItalic.ttf" \
-        ;"Free Serif Italic (TrueType)"
-    ;!insertmacro InstallTTFFont "${PATH_FONT}\FreeSerifBoldItalic.ttf" \
-        ;"Free Serif Bold Italic (TrueType)"
+    !insertmacro InstallTTFFont "${PATH_FONT}\FreeSerif.ttf" \
+        "Free Serif (TrueType)"
+    !insertmacro InstallTTFFont "${PATH_FONT}\FreeSerifBold.ttf" \
+        "Free Serif Bold (TrueType)"
+    !insertmacro InstallTTFFont "${PATH_FONT}\FreeSerifItalic.ttf" \
+        "Free Serif Italic (TrueType)"
+    !insertmacro InstallTTFFont "${PATH_FONT}\FreeSerifBoldItalic.ttf" \
+        "Free Serif Bold Italic (TrueType)"
 
     ; Notify Windows applications about new fonts
     SendMessage ${HWND_BROADCAST} ${WM_FONTCHANGE} 0 0 /TIMEOUT=5000
