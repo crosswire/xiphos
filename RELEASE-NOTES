@@ -6,10 +6,15 @@ ____________________
 Intermediate Test Release 3.9.8
 11 Dec 2014
 
-- Bug #508 + feat.req #133: Added alternate versification support (av11n):
-  Xiphos understands book/chapter/verse schemes other than KJV.  See
-  especially module KJVA and look for Apocrypha books between Malachi and
-  Matthew.
+- Bug#508 + feat.req#133: Added alternate versification support (av11n):
+  Xiphos understands book/chapter/verse (BCV) schemes other than KJV.
+  See especially module KJVA's deuterocanon between Malachi and Matthew.
+  Related:
+  - The navbar is blanked and the pane states "This module has no
+    content at this point" if a tab is selected with no content at the
+    current verse indication, e.g. when reading in one tab with an
+    Apocrypha Bible and then selecting a different non-Apocrypha tab,
+    particularly when using Linked Tabs (see View menu).
 
 - Added module-specific CSS support.  This uses configuration directive
   "PreferredCSSXHTML=style.css", naming a file in the DataPath
@@ -19,22 +24,29 @@ Intermediate Test Release 3.9.8
 - Added default CSS support.  Use ~/.xiphos/default-style.css but be
   aware that this has effects on all displayed modules.
 
-- Added history direct pre-load from verse list contents (right-click),
-  plus verse list load from history content.
+- Added direct load of history from verse list contents (right-click),
+  plus direct verse list load from history content (history menu).
 
-- Added Feature=NoParagraphs config support, default for verse-per-line.
+- Added Feature=NoParagraphs support, default for verse-per-line.
 
 - Added preservation of CipherKey value for re-use when updating a module.
 
 - Added xiphos.appdata.xml (/usr/share/appdata) for...well, advertising.
 
+- Updated navbar behavior: All books potentially available within the
+  module's versification are included.  Formerly, books lacking content
+  at 1:1 were excluded.
+
 - Updated manual text for a couple feature requests.
 
 - Fixed bug#513, stop crash on repeated tab deletion.
 
-- Cleaned up internal settings structures.
+- Fixed incompatibility with GTK3.14's unstable interface, preventing
+  Preferences window from opening.  Also, related stock icon name changes.
 
-- Made several accommodations to very recent GTK3.  Stable interface, ha.
+- Removed all remaining gtkhtml3-isms.  All.  Forever.
+
+- Cleaned up internal settings structures.
 
 - Updated BibleSync interface in accordance with 1.1's updated params.
 ________________________________________________________________
