@@ -295,8 +295,8 @@ int BackEnd::has_global_option(const char * module_name, const char * option)
 
 char *BackEnd::get_config_entry(char * module_name, char * entry)
 {
-//	if ((this == NULL) || (main_mgr == NULL))
-//		return NULL;
+	if ((this == NULL) || (main_mgr == NULL))
+		return NULL;
 
 	SWModule *mod = get_SWModule(module_name);
 

@@ -83,7 +83,7 @@ int footnote, xref;
 // flag for having discovered (in)valid bible keys.
 // used for e.g. navigating from a bible w/apocrypha
 // to a tab with a non-apocrypha bible.
-gboolean valid_scripture_key;
+gboolean valid_scripture_key = TRUE;
 const gchar *no_content =
     N_("<br/><br/><center><i>This module has no content at this point.</i></center>");
 
