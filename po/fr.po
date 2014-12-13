@@ -1,6 +1,7 @@
 # French translation for Xiphos
-# Copyright (C) 2002, 2010 Free Software Foundation, Inc.
+# Copyright (C) 2002, 2014 Free Software Foundation, Inc.
 # Contributions are welcome.
+#
 # Translation Notes (Any comment welcome)
 # ---------------------------------------
 # SWORD Project           -> Projet SWORD
@@ -13,15 +14,17 @@
 # Biblical Text           -> Textes bibliques
 # Lemma                   -> Lemme
 # Daily Devotion          -> Calendrier biblique
+# Speaker                 -> Conférencier
+# Audience                -> Audience
 #
+# Dominique Corbex <domcox@users.sourceforge.net>, 2002, 2014.
 #
-# Dominique Corbex <domcox@users.sourceforge.net>, 2002, 2010.
 msgid ""
 msgstr ""
-"Project-Id-Version: Xiphos 3.1.4\n"
+"Project-Id-Version: Xiphos 3.4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-06-17 07:30-0400\n"
-"PO-Revision-Date: 2014-12-13 19:46+0100\n"
+"PO-Revision-Date: 2014-12-13 22:41+0100\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: emacs + po-mode <gnomefr@traduc.org>\n"
 "Language: \n"
@@ -32,80 +35,79 @@ msgstr ""
 
 #: ../src/biblesync/biblesync.cc:129
 msgid "network setup errors."
-msgstr ""
+msgstr "erreurs de configuration du réseau."
 
 #: ../src/biblesync/biblesync.cc:175
 msgid " client socket"
-msgstr ""
+msgstr "socket client"
 
 #: ../src/biblesync/biblesync.cc:225
 msgid " server socket"
-msgstr ""
+msgstr "socket serveur"
 
 #: ../src/biblesync/biblesync.cc:370
 msgid "bad magic"
-msgstr ""
+msgstr "mauvaise clé"
 
 #: ../src/biblesync/biblesync.cc:373
 msgid "bad protocol version"
-msgstr ""
+msgstr "mauvaise version du protocole"
 
 #: ../src/biblesync/biblesync.cc:378
 msgid "bad msg type"
-msgstr ""
+msgstr "mauvais type de message"
 
 #: ../src/biblesync/biblesync.cc:381
 msgid "bad packet count"
-msgstr ""
+msgstr "mauvais nombre de paquets"
 
 #: ../src/biblesync/biblesync.cc:384
 msgid "bad packet index"
-msgstr ""
+msgstr "mauvais indice de paquets"
 
 #: ../src/biblesync/biblesync.cc:427
 msgid "bad body format"
-msgstr ""
+msgstr "mauvais format du corps"
 
 #: ../src/biblesync/biblesync.cc:441
 msgid "missing required header "
-msgstr ""
+msgstr "entête requis manquant"
 
 #: ../src/biblesync/biblesync.cc:466
 msgid "UUID spoofed: wrong ipaddr."
-msgstr ""
+msgstr "UUID usurpé: mauvaise addresse IP."
 
 #: ../src/biblesync/biblesync.cc:493
 msgid "Ignoring echo."
-msgstr ""
+msgstr "Écho ignoré."
 
 #: ../src/biblesync/biblesync.cc:522
 msgid "Domain not 'BIBLE-VERSE': "
-msgstr ""
+msgstr "Le domaine n'est pas 'BIBLE-VERSE' : "
 
 #: ../src/biblesync/biblesync.cc:530
 msgid "Invalid group: "
-msgstr ""
+msgstr "Groupe invalide : "
 
 #: ../src/biblesync/biblesync.cc:560
 msgid " present at "
-msgstr ""
+msgstr " présent à "
 
 #: ../src/biblesync/biblesync.cc:562
 msgid " using "
-msgstr ""
+msgstr " utilisant "
 
 #: ../src/biblesync/biblesync.cc:685
-#, fuzzy
 msgid "[no dump ready]"
-msgstr "Pas de module"
+msgstr "[Pas de vidage prêt]"
 
 #: ../src/biblesync/biblesync.cc:692
 msgid "select < 0"
-msgstr ""
+msgstr "select < 0"
 
 #: ../src/biblesync/biblesync.cc:702
 msgid "recvfrom < 0"
-msgstr ""
+msgstr "recvfrom < 0"
 
 #: ../src/biblesync/biblesync.cc:791
 msgid "Transmit failed.\n"
@@ -115,7 +117,7 @@ msgstr "Échec de la transmission.\n"
 msgid ""
 "Unable to multicast; BibleSync is now disabled. If your network connection "
 "changed while this program was active, it may be sufficient to re-enable."
-msgstr ""
+msgstr "Multidiffusion impossible. BibleSync est à présent déactivé. Si votre connection réseau a changé pendant que ce programme était actif, il peut être suffisant de la réactiver."
 
 #: ../src/backend/sword_main.cc:740
 msgid ""
@@ -123,9 +125,9 @@ msgid ""
 "Please report this. sword_main.cc:set_treekey\n"
 "What were you doing when this occurred?"
 msgstr ""
-"Erreur Xiphos: \"can't happen\", display_mod: null\n"
-"Merci de signaler: sword_main.cc:set_treekey\n"
-"et quelle opération faisiez-vous lorsque c'est arrivé."
+"Erreur Xiphos : \"can't happen\", display_mod: null\n"
+"Merci de le signaler. sword_main.cc:set_treekey\n"
+"Que faisiez-vous lorsque c'est arrivé?"
 
 #: ../src/backend/sword_main.cc:1091
 msgid "Configuration not found"
@@ -472,7 +474,7 @@ msgstr "Résultat de la requête : %s"
 msgid ""
 "Opening a multi-reference bookmark in\n"
 "separate tabs is not supported."
-msgstr ""
+msgstr "vrir"
 
 #: ../src/gnome2/bookmarks_treeview.c:849 ../src/gnome2/sidebar.c:1493
 #: ../src/gnome2/sidebar.c:1526
@@ -584,17 +586,16 @@ msgid "Module has no support for %s."
 msgstr "Le module n'a pas de support pour %s"
 
 #: ../src/gnome2/main_window.c:640
-#, fuzzy
 msgid "Xiphos: No windows."
-msgstr "Lien Xiphos"
+msgstr "Xiphos : Pas de fenêtres."
 
 #: ../src/gnome2/main_window.c:696
 msgid "BibleSync: Current navigation sent."
-msgstr ""
+msgstr "BibleSync : La navigation courante a été envoyée."
 
 #: ../src/gnome2/main_window.c:700
 msgid "BibleSync: Not speaking."
-msgstr ""
+msgstr "BibleSync : Ne transmet pas."
 
 #: ../src/gnome2/main_window.c:884
 msgid "Xiphos - Bible Study Software"
@@ -1268,11 +1269,11 @@ msgstr "Vue parallèle"
 
 #: ../src/gnome2/preferences_dialog.c:867
 msgid "BibleSync session passphrase"
-msgstr ""
+msgstr "BibleSync mot de passe de session"
 
 #: ../src/gnome2/preferences_dialog.c:869
 msgid "Phrase:"
-msgstr ""
+msgstr "Phrase :"
 
 #. mode selection failed? probably dead interface
 #: ../src/gnome2/preferences_dialog.c:947
@@ -1280,16 +1281,17 @@ msgid ""
 "Mode selection failed.\n"
 "Set \"Debug\" and try again to see why."
 msgstr ""
+"La sélection de mode a échoué.\n"
+"Activer le débogage et réessayer pour voir pourquoi."
 
 #: ../src/gnome2/preferences_dialog.c:1008
-#, fuzzy
 msgid "Mode selection failed.\n"
-msgstr "Met en gras le texte sélectionné"
+msgstr "La sélection du mode a échoué.\n"
 
 #: ../src/gnome2/preferences_dialog.c:1014
 #, c-format
 msgid "BibleSync: %s (passphrase \"%s\")."
-msgstr ""
+msgstr "BibleSync : %s (mot de passe \"%s\")."
 
 #: ../src/gnome2/preferences_dialog.c:1016
 msgid "Disabled"
@@ -1301,11 +1303,11 @@ msgstr "Notes personnelles"
 
 #: ../src/gnome2/preferences_dialog.c:1020
 msgid "Speaker"
-msgstr ""
+msgstr "Conférencier"
 
 #: ../src/gnome2/preferences_dialog.c:1021
 msgid "Audience"
-msgstr ""
+msgstr "Audience"
 
 #: ../src/gnome2/preferences_dialog.c:1592
 #: ../src/gnome2/preferences_dialog.c:1629
@@ -1538,11 +1540,11 @@ msgstr ""
 
 #: ../src/gnome2/search_dialog.c:1190
 msgid "Module is neither Bible nor commentary"
-msgstr ""
+msgstr "Le module n'est ni une Bible ni un commentaire"
 
 #: ../src/gnome2/search_dialog.c:1213 ../src/gnome2/sidebar.c:998
 msgid "BibleSync is not active for transmit."
-msgstr ""
+msgstr "BibleSync n'est pas actif pour émission."
 
 #: ../src/gnome2/search_sidebar.c:185
 msgid ""
@@ -1644,7 +1646,7 @@ msgstr "Copier les références de verset"
 
 #: ../src/gnome2/sidebar.c:954
 msgid "List:"
-msgstr ""
+msgstr "Liste :"
 
 #: ../src/gnome2/sidebar.c:1499 ../src/gnome2/sidebar.c:1534
 msgid "Search"
@@ -2217,6 +2219,8 @@ msgid ""
 "Module error: Unusable xref encoding.\n"
 "Please report this, with module & verse"
 msgstr ""
+"Erreur de module : Unusable xref encoding.\n"
+"Merci de le signaler, avec le nom du module et le verset."
 
 #: ../src/main/sidebar.cc:411
 msgid "verse"
@@ -2279,6 +2283,9 @@ msgid ""
 "%s.\n"
 "Would you like to open these as well?%s"
 msgstr ""
+"Le module %s a les modules compagnons :\n"
+"%s.\n"
+"Voulez-vous les ouvrir également?"
 
 #: ../src/main/sword.cc:1018 ../src/main/sword.cc:1183
 msgid ""
@@ -2287,13 +2294,14 @@ msgid ""
 "The first will open in the main window\n"
 "and others in separate windows."
 msgstr ""
+"\n"
+"\n"
+"Le premier va s'ouvrir dans la fenêtre principale\n"
+"et les autres dans des fenêtres séparées."
 
 #: ../src/main/sword.cc:1309
 msgid "Daily devotional was requested, but there are none installed."
-msgstr ""
-"Impossible d'afficher le calendrier\n"
-"biblique, aucun module de ce type \n"
-"n'est installé."
+msgstr "Un calendrier biblique a été demandé, mais aucun module de ce type n'est installé."
 
 #: ../src/main/sword.cc:1539
 msgid ""
@@ -3167,31 +3175,31 @@ msgstr "_Aide"
 
 #: ../ui/gtk2_webedit.ui.h:91 ../ui/gtk_webedit.ui.h:91
 msgid "toolbutton1"
-msgstr ""
+msgstr "toolbutton1"
 
 #: ../ui/gtk2_webedit.ui.h:92 ../ui/gtk_webedit.ui.h:92
 msgid "toolbutton10"
-msgstr ""
+msgstr "toolbutton10"
 
 #: ../ui/gtk2_webedit.ui.h:93 ../ui/gtk_webedit.ui.h:93
 msgid "toolbutton3"
-msgstr ""
+msgstr "toolbutton3"
 
 #: ../ui/gtk2_webedit.ui.h:94 ../ui/gtk_webedit.ui.h:94
 msgid "toolbutton2"
-msgstr ""
+msgstr "toolbutton2"
 
 #: ../ui/gtk2_webedit.ui.h:95 ../ui/gtk_webedit.ui.h:95
 msgid "toolbutton4"
-msgstr ""
+msgstr "toolbutton4"
 
 #: ../ui/gtk2_webedit.ui.h:96 ../ui/gtk_webedit.ui.h:96
 msgid "toolbutton6"
-msgstr ""
+msgstr "toolbutton6"
 
 #: ../ui/gtk2_webedit.ui.h:97 ../ui/gtk_webedit.ui.h:97
 msgid "toolbutton7"
-msgstr ""
+msgstr "toolbutton7"
 
 #: ../ui/gtk2_webedit.ui.h:98 ../ui/gtk_webedit.ui.h:98
 msgid "Normal"
@@ -3247,11 +3255,11 @@ msgstr "Liste alphabétique"
 
 #: ../ui/gtk2_webedit.ui.h:111 ../ui/gtk_webedit.ui.h:111
 msgid "toolbutton11"
-msgstr ""
+msgstr "toolbutton11"
 
 #: ../ui/gtk2_webedit.ui.h:112 ../ui/gtk_webedit.ui.h:112
 msgid "toolbutton12"
-msgstr ""
+msgstr "toolbutton12"
 
 #: ../ui/gtk2_webedit.ui.h:113 ../ui/gtk_webedit.ui.h:113
 msgid "Set font color of selected text."
@@ -3263,7 +3271,7 @@ msgstr "Met en surbrillance le texte sélectionné"
 
 #: ../ui/gtk2_webedit.ui.h:115 ../ui/gtk_webedit.ui.h:115
 msgid "toolbutton9"
-msgstr ""
+msgstr "toolbutton9"
 
 #: ../ui/markverse.glade.h:1 ../ui/markverse.gtkbuilder.h:1
 msgid "Mark/Unmark Verse"
@@ -3625,6 +3633,14 @@ msgid ""
 "audience's Bible programs to follow along; Audience, to receive the "
 "speaker's navigation."
 msgstr ""
+"Xiphos est le premier programme d'étude biblique à fournir une implémentation de \n"
+"BibleSync, un protocole de synchronisation pour programmes Bibliques. Si vous\n"
+"utilisez plusieurs programmes Bibliques, ou travaillez en équipe, ou si vous avez\n"
+"en classe des études mutualisées, BibleSync peut être un outil utile pour vous.\n"
+"BibleSync opère dans un de ces trois modes : Personnel, pour synchroniser plusieurs\n"
+"programmes Bibliques, les vôtres ou au sein d'une équipe de travail ; Conférencier,\n"
+"pour piloter les programmes bibliques du public d'une conférence ; Audience, pour\n"
+"recevoir la navigation du conférencier."
 
 #: ../ui/prefs.glade.h:35 ../ui/prefs.gtkbuilder.h:35
 msgid "Mode"
@@ -3643,63 +3659,58 @@ msgid "Disable BibleSync."
 msgstr ""
 
 #: ../ui/prefs.glade.h:39 ../ui/prefs.gtkbuilder.h:39
-#, fuzzy
 msgid "BSP off radio button"
-msgstr "Bouton radio Livre"
+msgstr "Bouton radio BSP désactivé"
 
 #: ../ui/prefs.glade.h:40 ../ui/prefs.gtkbuilder.h:40
 msgid "_Speaker"
-msgstr ""
+msgstr "_Conférencier"
 
 #: ../ui/prefs.glade.h:41 ../ui/prefs.gtkbuilder.h:41
 msgid "Enable BibleSync as the speaker."
-msgstr ""
+msgstr "Active BibleSync en tant que conférencier."
 
 #: ../ui/prefs.glade.h:42 ../ui/prefs.gtkbuilder.h:42
-#, fuzzy
 msgid "BSP speaker radio button"
-msgstr "Bouton radio Phrase exacte"
+msgstr "Bouton radio conférencier BSP"
 
 #: ../ui/prefs.glade.h:43 ../ui/prefs.gtkbuilder.h:43
 msgid "_Audience"
-msgstr "P_artenaire public"
+msgstr "_Audience"
 
 #: ../ui/prefs.glade.h:44 ../ui/prefs.gtkbuilder.h:44
 msgid "Enable BibleSync as a member of the audience."
-msgstr ""
+msgstr "Active BibleSync comme membre de l'audience."
 
 #: ../ui/prefs.glade.h:45 ../ui/prefs.gtkbuilder.h:45
-#, fuzzy
 msgid "BSP audience radio button"
-msgstr "Bouton radio Texte simple"
+msgstr "Bouton radio audience BSP"
 
 #: ../ui/prefs.glade.h:46 ../ui/prefs.gtkbuilder.h:46
 msgid "_Personal"
-msgstr "Notes _personnelles"
+msgstr "_Personnel"
 
 #: ../ui/prefs.glade.h:47 ../ui/prefs.gtkbuilder.h:47
 msgid "Enable BibleSync for personal or team use."
-msgstr ""
+msgstr "Active BibleSync pour une utilisation personnelle ou en équipe."
 
 #: ../ui/prefs.glade.h:48 ../ui/prefs.gtkbuilder.h:48
-#, fuzzy
 msgid "BSP personal radio button"
-msgstr "Bouton radio Expression rationnelle"
+msgstr "Bouton radio BSP personnel"
 
 #: ../ui/prefs.glade.h:49 ../ui/prefs.gtkbuilder.h:49
 msgid "Private"
-msgstr ""
+msgstr "Privé"
 
 #: ../ui/prefs.glade.h:50 ../ui/prefs.gtkbuilder.h:50
 msgid ""
 "When in Personal mode, only programs running on this machine will hear your "
 "navigation."
-msgstr ""
+msgstr "En mode Personnel, seuls les programmes tournant sur cette machine recevront votre navigation."
 
 #: ../ui/prefs.glade.h:51 ../ui/prefs.gtkbuilder.h:51
-#, fuzzy
 msgid "BSP privacy button"
-msgstr "Bouton de version"
+msgstr "Bouton BSP privé"
 
 #: ../ui/prefs.glade.h:52 ../ui/prefs.gtkbuilder.h:52
 msgid "Navigate"
@@ -3719,9 +3730,8 @@ msgid "BibleSync navigation will send Xiphos directly to the verse indicated."
 msgstr ""
 
 #: ../ui/prefs.glade.h:56 ../ui/prefs.gtkbuilder.h:56
-#, fuzzy
 msgid "BSP nav direct radio button"
-msgstr "Bouton radio Module unique"
+msgstr "Bouton radio BSP navigation directe"
 
 #: ../ui/prefs.glade.h:57 ../ui/prefs.gtkbuilder.h:57
 msgid "_Verse list"
@@ -3732,56 +3742,53 @@ msgid "BibleSync navigation will use Xiphos' sidebar verse list."
 msgstr ""
 
 #: ../ui/prefs.glade.h:59 ../ui/prefs.gtkbuilder.h:59
-#, fuzzy
 msgid "BSP nav verse list radio button"
-msgstr "Radio bouton Liste de modules"
+msgstr "Bouton radio BSP navigation liste de versets"
 
 #: ../ui/prefs.glade.h:60 ../ui/prefs.gtkbuilder.h:60
 msgid "Listen"
-msgstr ""
+msgstr "Écouter"
 
 #: ../ui/prefs.glade.h:61 ../ui/prefs.gtkbuilder.h:61
 msgid "Xiphos will listen to Speakers according to choice here."
-msgstr ""
+msgstr "Xiphos va écouter les Conférenciers en fonction du choix présent."
 
 #: ../ui/prefs.glade.h:62 ../ui/prefs.gtkbuilder.h:62
 msgid "Selective"
-msgstr ""
+msgstr "Sélectif"
 
 #: ../ui/prefs.glade.h:63 ../ui/prefs.gtkbuilder.h:63
 msgid "Choose the Speakers to be followed."
-msgstr ""
+msgstr "Choisir les Conférenciers à suivre."
 
 #: ../ui/prefs.glade.h:64 ../ui/prefs.gtkbuilder.h:64
-#, fuzzy
 msgid "BSP listen some radio button"
-msgstr "Bouton radio Texte simple"
+msgstr "Bouton radio BSP écouter certains"
 
 #: ../ui/prefs.glade.h:65 ../ui/prefs.gtkbuilder.h:65
 msgid "All"
-msgstr ""
+msgstr "Tous"
 
 #: ../ui/prefs.glade.h:66 ../ui/prefs.gtkbuilder.h:66
+#, fuzzy
 msgid "All Speakers will be followed."
-msgstr ""
+msgstr "Tous les Conférenciers seront reçus."
 
 #: ../ui/prefs.glade.h:67 ../ui/prefs.gtkbuilder.h:67
-#, fuzzy
 msgid "BSP listen all radio button"
-msgstr "Bouton radio Expression rationnelle"
+msgstr "Bouton radio BSP ecouter tous"
 
 #: ../ui/prefs.glade.h:68 ../ui/prefs.gtkbuilder.h:68
 msgid "None"
-msgstr ""
+msgstr "Aucun"
 
 #: ../ui/prefs.glade.h:69 ../ui/prefs.gtkbuilder.h:69
 msgid "No Speakers will be followed."
-msgstr ""
+msgstr "Aucun conférencier ne sera reçu."
 
 #: ../ui/prefs.glade.h:70 ../ui/prefs.gtkbuilder.h:70
-#, fuzzy
 msgid "BSP listen none radio button"
-msgstr "Bouton radio Texte simple"
+msgstr "Bouton radio BSP ecouter aucun"
 
 #: ../ui/prefs.glade.h:72 ../ui/prefs.gtkbuilder.h:72
 msgid ""
@@ -3799,9 +3806,8 @@ msgid "Presence announcements will be shown in dialogs."
 msgstr ""
 
 #: ../ui/prefs.glade.h:75 ../ui/prefs.gtkbuilder.h:75
-#, fuzzy
 msgid "BSP presence button"
-msgstr "Bouton de version"
+msgstr "Bouton présence BSP"
 
 #: ../ui/prefs.glade.h:76 ../ui/prefs.gtkbuilder.h:76
 msgid "Mismatch"
@@ -3817,19 +3823,19 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:79 ../ui/prefs.gtkbuilder.h:79
 msgid "Debug"
-msgstr ""
+msgstr "Débogage"
 
 #: ../ui/prefs.glade.h:80 ../ui/prefs.gtkbuilder.h:80
 msgid "Packet tracing."
-msgstr ""
+msgstr "Traçage de paquets."
 
 #: ../ui/prefs.glade.h:81 ../ui/prefs.gtkbuilder.h:81
 msgid "BSP event debug button"
-msgstr ""
+msgstr "Bouton de débogage des évènements BSP"
 
 #: ../ui/prefs.glade.h:82 ../ui/prefs.gtkbuilder.h:82
 msgid "_Group as tab"
-msgstr ""
+msgstr "_Grouper en onglets"
 
 #: ../ui/prefs.glade.h:83 ../ui/prefs.gtkbuilder.h:83
 msgid ""
@@ -3839,9 +3845,8 @@ msgid ""
 msgstr ""
 
 #: ../ui/prefs.glade.h:84 ../ui/prefs.gtkbuilder.h:84
-#, fuzzy
 msgid "BSP event group-as-tab button"
-msgstr "Bouton radio Module unique"
+msgstr "Bouton grouper en onglets les évènements BSP"
 
 #: ../ui/prefs.glade.h:86 ../ui/prefs.gtkbuilder.h:86
 msgid "<b>General</b>"
@@ -3857,7 +3862,7 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:88 ../ui/prefs.gtkbuilder.h:88
 msgid "Special Locale (requires restart)"
-msgstr "Langue spéciale (Nécessite un redémarrage)"
+msgstr "Langue spécifique (Nécessite un redémarrage)"
 
 #: ../ui/prefs.glade.h:89 ../ui/prefs.gtkbuilder.h:89
 msgid "Special Locale Combo"
@@ -3875,22 +3880,18 @@ msgstr "Afficher le calendrier biblique au démarrage"
 msgid ""
 "If you have set a preferred daily devotion module, its entry for today will "
 "be shown at startup."
-msgstr ""
-"Si un module de calendrier biblique est défini, son entrée d'aujourd'hui est "
-"affichée au démarrage"
+msgstr "Si un module de calendrier biblique a été spécifié, l'entrée d'aujourd'hui sera affichée au démarrage"
 
 # src/gs_preferences_dlg.c
 #: ../ui/prefs.glade.h:93 ../ui/prefs.gtkbuilder.h:93
 msgid "Use default Dictionary"
-msgstr "Définitions du dictionnaire par défaut"
+msgstr "Utiliser le dictionnaire par défaut"
 
 #: ../ui/prefs.glade.h:94 ../ui/prefs.gtkbuilder.h:94
 msgid ""
 "Make double-click of a word always use default dictionary instead of "
 "dictionary currently displayed"
-msgstr ""
-"Un double-clic sur un mot utilise toujours le dictionnaire par défaut au "
-"lieu du dictionnaire actuellement affiché"
+msgstr "Un double-clic sur un mot utilise toujours le dictionnaire par défaut à la place du dictionnaire actuellement affiché"
 
 # src/gs_preferences_dlg.c
 #: ../ui/prefs.glade.h:95 ../ui/prefs.gtkbuilder.h:95
@@ -3913,7 +3914,7 @@ msgstr "Case à cocher Défilement des chapitres en continu"
 
 #: ../ui/prefs.glade.h:99 ../ui/prefs.gtkbuilder.h:99
 msgid "Resize images"
-msgstr "Images redimensionnées"
+msgstr "Redimensionner les images"
 
 #: ../ui/prefs.glade.h:100 ../ui/prefs.gtkbuilder.h:100
 msgid "Automatically resize image content to fit the pane"
@@ -3926,7 +3927,7 @@ msgstr "Case à cocher Images redimensionnées"
 
 #: ../ui/prefs.glade.h:102 ../ui/prefs.gtkbuilder.h:102
 msgid "Highlight current verse"
-msgstr "Verset en cours surligné"
+msgstr "Surligner le verset en cours"
 
 #: ../ui/prefs.glade.h:103 ../ui/prefs.gtkbuilder.h:103
 msgid "Apply high-contrast highlight to current verse - see color pickers"
@@ -3940,7 +3941,7 @@ msgstr "Case à cocher Verset en cours surligné"
 
 #: ../ui/prefs.glade.h:105 ../ui/prefs.gtkbuilder.h:105
 msgid "Highlight user annotations"
-msgstr "Annotations personnelles surlignées"
+msgstr "Surligner les annotations personnelles"
 
 #: ../ui/prefs.glade.h:106 ../ui/prefs.gtkbuilder.h:106
 msgid "Use inverted highlight on user-annotated verses"
@@ -3953,13 +3954,11 @@ msgstr "Case à cocher Annotations personnelles surlignées"
 
 #: ../ui/prefs.glade.h:108 ../ui/prefs.gtkbuilder.h:108
 msgid "Cross-references in verse list"
-msgstr "Références croisées dans Versets"
+msgstr "Références croisées dans la liste de versets"
 
 #: ../ui/prefs.glade.h:109 ../ui/prefs.gtkbuilder.h:109
 msgid "Use the verse list for Bible cross-references instead of the previewer"
-msgstr ""
-"Utiliser la liste de versets pour les références-croisées de la Bible au "
-"lieu du volet Aperçu"
+msgstr "Utilise la liste de versets pour les références-croisées de la Bible au lieu du volet Aperçu"
 
 #: ../ui/prefs.glade.h:110 ../ui/prefs.gtkbuilder.h:110
 msgid "Xrefs in verse list check box"
@@ -4025,7 +4024,7 @@ msgstr "Répertoire par défaut du bloc-notes"
 # src/gs_preferences_dlg.c
 #: ../ui/prefs.glade.h:126 ../ui/prefs.gtkbuilder.h:126
 msgid "Select A Directory"
-msgstr "Choix du répertoire"
+msgstr "Sélectionner un répertoire"
 
 # src/gs_preferences_dlg.c
 #: ../ui/prefs.glade.h:127 ../ui/prefs.gtkbuilder.h:127
@@ -4962,7 +4961,7 @@ msgstr "Remplir la liste de versets"
 msgid ""
 "Send this verse list via BibleSync to others, if you are in Personal or "
 "Speaker mode."
-msgstr ""
+msgstr "Envoie cette liste de versets via BibleSync à d'autres, si vous êtes en mode Personnel ou Conférencier."
 
 #: ../ui/xi-menus.glade.h:103 ../ui/xi-menus-popup.gtkbuilder.h:90
 msgid "Send list via BibleSync"
