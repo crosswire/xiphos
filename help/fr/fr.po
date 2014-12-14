@@ -1,14 +1,14 @@
 # French translation of Xiphos
-# Copyright (C) 2003, 2010 Free Software Foundation, Inc.
-# Dominique Corbex <domcox@users.sourceforge.net>, 2003, 2010
+# Copyright (C) 2003, 2014 Free Software Foundation, Inc.
+# Dominique Corbex <domcox@users.sourceforge.net>, 2003, 2014
 #
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Xiphos 3.1.4\n"
+"Project-Id-Version: Xiphos 3.4.0\n"
 "Report-Msgid-Bugs-To: Dominique Corbex <domcox@users.sourceforge.net>>\n"
-"POT-Creation-Date: 2011-07-17 14:54+0200\n"
-"PO-Revision-Date: 2011-07-17 14:54+0200\n"
+"POT-Creation-Date: 2014-12-14 21:02+0100\n"
+"PO-Revision-Date: 2014-12-14 21:24+0100\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>>\n"
 "Language-Team: emacs + po-mode; French <gnomefr@traduc.org>\n"
 "Language: \n"
@@ -62,7 +62,7 @@ msgstr "interface_sidepane.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/xiphos.xml:173(None)
+#: ../C/xiphos.xml:177(None)
 msgid ""
 "@@image: 'figures/interface_shortcut.png'; "
 "md5=f5a4af12cd1204c4be2a7f99caf1ca63"
@@ -70,7 +70,7 @@ msgstr "interface_shortcut.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/xiphos.xml:196(None)
+#: ../C/xiphos.xml:200(None)
 msgid ""
 "@@image: 'figures/interface_biblepane.png'; "
 "md5=831b18b306e9dc42f18d3eafe0b41bd2"
@@ -78,7 +78,7 @@ msgstr "interface_biblepane.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/xiphos.xml:262(None)
+#: ../C/xiphos.xml:266(None)
 msgid ""
 "@@image: 'figures/interface_parallel.png'; "
 "md5=33d218a70d36b38d6957a0d30e83d552"
@@ -86,7 +86,7 @@ msgstr "interface_parallel.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/xiphos.xml:286(None)
+#: ../C/xiphos.xml:290(None)
 msgid ""
 "@@image: 'figures/interface_parallel-separate.png'; "
 "md5=b2c31dcdbd918b0ad972f6b030500ac6"
@@ -94,7 +94,7 @@ msgstr "interface_parallel-separate.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/xiphos.xml:405(None)
+#: ../C/xiphos.xml:408(None)
 msgid ""
 "@@image: 'figures/interface_biblepane-options.png'; "
 "md5=fa15074c128f9646e1a540eab3a881b1"
@@ -102,7 +102,7 @@ msgstr "interface_biblepane-options.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/xiphos.xml:431(None)
+#: ../C/xiphos.xml:434(None)
 msgid ""
 "@@image: 'figures/interface_menubar-view.png'; "
 "md5=f813f0a888e8ee9373e7e81ac14b26c0"
@@ -110,14 +110,14 @@ msgstr "interface_menubar-view.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/xiphos.xml:556(None)
+#: ../C/xiphos.xml:568(None)
 msgid ""
 "@@image: 'figures/interface_viewer.png'; md5=09cef9f090800bdab9d3fc3675c80039"
 msgstr "interface_viewer.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/xiphos.xml:607(None)
+#: ../C/xiphos.xml:619(None)
 msgid ""
 "@@image: 'figures/interface_commentarypane.png'; "
 "md5=ecc5a233e4d12e0900f3aea5f2cb3fb7"
@@ -125,7 +125,7 @@ msgstr "interface_commentarypane.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/xiphos.xml:680(None)
+#: ../C/xiphos.xml:692(None)
 msgid ""
 "@@image: 'figures/interface_dictionary.png'; "
 "md5=09b3108582dc12c711b2903835511130"
@@ -133,57 +133,64 @@ msgstr "interface_dictionary.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/xiphos.xml:875(None)
-msgid ""
-"@@image: 'figures/gtkhtml3-vs-mozembed.png'; "
-"md5=deec924e49812ac32cfd027e53d2b193"
-msgstr "gtkhtml3-vs-mozembed.png"
-
-#. When image changes, this message will be marked fuzzy or untranslated for you.
-#. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:12(None) ../C/preferences.xml:12(None)
+#, fuzzy
 msgid ""
-"@@image: 'figures/preferences.png'; md5=c7bb9a6b05ef6c32feda1f4ffc5932a5"
+"@@image: 'figures/preferences.png'; md5=c0327215cc24ff1c3c012eafb960036c"
 msgstr "preferences.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:38(None)
-msgid ""
-"@@image: 'figures/preferences_fonts-color.png'; "
-"md5=d021d65ccc8ec6ff8a6ad48fd5f7d25e"
-msgstr "preferences_fonts-color.png"
-
-#. When image changes, this message will be marked fuzzy or untranslated for you.
-#. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/xiphos.xml:67(None)
-msgid ""
-"@@image: 'figures/preferences_fonts-misc.png'; "
-"md5=cef48d9df63f63732f936f279768fb29"
-msgstr "preferences_fonts-misc.png"
-
-#. When image changes, this message will be marked fuzzy or untranslated for you.
-#. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/xiphos.xml:133(None)
+#, fuzzy
 msgid ""
 "@@image: 'figures/preferences_general-misc.png'; "
-"md5=6b9b484d4d8fab875a3e5281be9e708e"
+"md5=dc15a126161c1a523f77013ee887ab3f"
 msgstr "preferences_general-misc.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/xiphos.xml:190(None)
+#: ../C/xiphos.xml:100(None)
+#, fuzzy
+msgid ""
+"@@image: 'figures/preferences_general-biblesync.png'; "
+"md5=085cfd1f4fa059faebb0fe90ed10556d"
+msgstr "preferences_general-misc.png"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: ../C/xiphos.xml:156(None)
+#, fuzzy
+msgid ""
+"@@image: 'figures/preferences_fonts-color.png'; "
+"md5=a42df6a82b1bcb9b87d1531a602dd94a"
+msgstr "preferences_fonts-color.png"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: ../C/xiphos.xml:185(None)
+#, fuzzy
+msgid ""
+"@@image: 'figures/preferences_fonts-misc.png'; "
+"md5=a4a6d557931ba88db2cf7d7df6827a52"
+msgstr "preferences_fonts-misc.png"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: ../C/xiphos.xml:249(None)
+#, fuzzy
 msgid ""
 "@@image: 'figures/preferences_modules-parallel.png'; "
-"md5=f7b139975d7a2669a4731d35dea09d21"
+"md5=60287f9ccebbdf3644c3624158a571a3"
 msgstr "preferences_modules-parallel.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/xiphos.xml:210(None)
+#: ../C/xiphos.xml:269(None)
+#, fuzzy
 msgid ""
 "@@image: 'figures/preferences_modules-misc.png'; "
-"md5=908a857bc617d7ebcdc3093c7570ae37"
+"md5=49b51e0a3a5121e52471379d3da58e7e"
 msgstr "preferences_modules-misc.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
@@ -440,18 +447,18 @@ msgstr "Traduction française"
 
 #. to V3.0, and so on.
 #: ../C/xiphos.xml:161(releaseinfo)
-msgid "This manual describes version 3.1.4 of Xiphos."
+msgid "This manual describes version 4.0.0 of Xiphos."
 msgstr ""
 "Ce manuel documente la version &manrevision; de <application>&appname;</"
 "application>"
 
 #: ../C/xiphos.xml:165(revnumber)
-msgid "Xiphos Manual V3.1.4"
+msgid "Xiphos Manual V4.0.0"
 msgstr "Manuel de Xiphos &manrevision;"
 
 #: ../C/xiphos.xml:166(date)
-msgid "October 2010"
-msgstr "Octobre 2010"
+msgid "December 2014"
+msgstr "Décembre 2014"
 
 #: ../C/xiphos.xml:175(keyword)
 msgid "gnome"
@@ -752,8 +759,8 @@ msgstr ""
 "Le volet des<interface> Textes bibliques</interface> affiche le texte "
 "biblique sélectionné."
 
-#: ../C/xiphos.xml:144(term) ../C/xiphos.xml:551(title)
-#: ../C/xiphos.xml:565(phrase)
+#: ../C/xiphos.xml:144(term) ../C/xiphos.xml:563(title)
+#: ../C/xiphos.xml:577(phrase)
 msgid "Previewer"
 msgstr "Aperçu"
 
@@ -768,7 +775,7 @@ msgstr ""
 "Strong, les notes de bas de page et les étiquettes morphologiques. Il est "
 "situé en-dessous du volet des textes bibliques."
 
-#: ../C/xiphos.xml:153(term) ../C/xiphos.xml:616(phrase)
+#: ../C/xiphos.xml:153(term) ../C/xiphos.xml:628(phrase)
 msgid "Commentary Pane"
 msgstr "Commentaire"
 
@@ -962,11 +969,15 @@ msgid "The Sidebar"
 msgstr "La barre d'outils"
 
 #: ../C/xiphos.xml:163(para)
+#, fuzzy
 msgid ""
 "On the left hand side of <application>Xiphos</application> there is the "
 "Sidebar. Here the user can switch between the different Sword modules, view "
-"bookmarks, do simple searches and view verse lists. To switch between all "
-"Sidebar functions, buttons have been placed at the top of the Sidebar."
+"bookmarks, do simple searches and view verse lists. In the Modules listing, "
+"a module may be chosen for viewing in the current tab of the main window by "
+"clicking it. Using the context (right-click) menu, other options are to open "
+"a new tab using the module, open a separate (i.e. detached) window, or to "
+"view the \"About\" information for the module."
 msgstr ""
 "Le <interface>volet latéral</interface> est situé sur la partie gauche de la "
 "fenêtre principale de <application>&appname;</application>. Le "
@@ -975,27 +986,33 @@ msgstr ""
 "d'afficher les listes de versets. Les boutons du <interface>volet latéral</"
 "interface> permettent d'activer ces différentes fonctions."
 
-#: ../C/xiphos.xml:169(title)
+#: ../C/xiphos.xml:169(para)
+msgid ""
+"To switch between all Sidebar functions, buttons have been placed at the top "
+"of the Sidebar."
+msgstr ""
+
+#: ../C/xiphos.xml:173(title)
 msgid "Sidebar Shortcuts"
 msgstr "Raccourcis du volet latéral"
 
-#: ../C/xiphos.xml:182(phrase)
+#: ../C/xiphos.xml:186(phrase)
 msgid "Sidebar shortcuts"
 msgstr "Raccourcis du volet latéral"
 
-#: ../C/xiphos.xml:190(title)
+#: ../C/xiphos.xml:194(title)
 msgid "The Bible Text Pane"
 msgstr "Le volet des textes bibliques"
 
-#: ../C/xiphos.xml:192(title)
+#: ../C/xiphos.xml:196(title)
 msgid "The Bible Textpane"
 msgstr "Le volet des textes bibliques"
 
-#: ../C/xiphos.xml:205(phrase)
+#: ../C/xiphos.xml:209(phrase)
 msgid "The Bible textpane"
 msgstr "Le volet des textes bibliques"
 
-#: ../C/xiphos.xml:211(para)
+#: ../C/xiphos.xml:215(para)
 msgid ""
 "Positioned to the right of the Shortcut bar is the Bible text pane. All "
 "translations are displayed here. When starting <application>Xiphos</"
@@ -1010,18 +1027,18 @@ msgstr ""
 "l'onglet\n"
 "le plus à gauche est affichée."
 
-#: ../C/xiphos.xml:217(title)
+#: ../C/xiphos.xml:221(title)
 msgid "Opening A Specific Bible Translation"
 msgstr "Ouvrir une version différente de la Bible"
 
-#: ../C/xiphos.xml:218(para)
+#: ../C/xiphos.xml:222(para)
 msgid ""
 "In order to change the current Bible translation to another of your choice:"
 msgstr ""
 "Pour remplacer la version de la Bible en cours d'utilisation par une autre "
 "version :"
 
-#: ../C/xiphos.xml:223(para)
+#: ../C/xiphos.xml:227(para)
 msgid ""
 "right-click in the <interface>Bible Text Pane</interface>. In the popup menu "
 "choose <menuchoice><guimenuitem>File</guimenuitem><guimenuitem>Open Module</"
@@ -1033,7 +1050,7 @@ msgstr ""
 "choisir <menuchoice><guimenuitem>Fichier</guimenuitem><guimenuitem>Ouvrir le "
 "module</guimenuitem></menuchoice> et sélectionner la version désirée."
 
-#: ../C/xiphos.xml:230(para)
+#: ../C/xiphos.xml:234(para)
 msgid ""
 "under the <guibutton>Modules</guibutton> option in the <interface>Sidebar</"
 "interface>, choose <menuchoice><guimenuitem>Biblical Texts</"
@@ -1046,11 +1063,11 @@ msgstr ""
 "de votre choix </guimenuitem></menuchoice> et sélectionner la version "
 "désirée."
 
-#: ../C/xiphos.xml:240(title)
+#: ../C/xiphos.xml:244(title)
 msgid "Using the Parallel View Mode"
 msgstr "Utilisation du mode Vue parallèle"
 
-#: ../C/xiphos.xml:241(para)
+#: ../C/xiphos.xml:245(para)
 msgid ""
 "A nice function in <application>Xiphos</application> is the ability to view "
 "your specified bible text in several parallel translations of your choice. "
@@ -1065,7 +1082,7 @@ msgstr ""
 "<interface>textes bibliques</interface>, à côté de l'onglet <guimenuitem>Vue "
 "simple</guimenuitem>."
 
-#: ../C/xiphos.xml:247(para)
+#: ../C/xiphos.xml:251(para)
 msgid ""
 "You must choose which modules to display in parallel with the "
 "<guibutton>Preferences</guibutton> dialog found under the <guimenuitem>Edit</"
@@ -1083,7 +1100,7 @@ msgstr ""
 "sélection pour effacer la liste, supprimer un module de la liste, et ajouter "
 "des modules à la liste."
 
-#: ../C/xiphos.xml:253(para)
+#: ../C/xiphos.xml:257(para)
 msgid ""
 "The <guimenuitem>Parallel View</guimenuitem> shows just one verse at a time. "
 "You can change the verse by selecting another verse, chapter, or book at the "
@@ -1099,11 +1116,11 @@ msgstr ""
 "(ex. Westminster Leningrad Codex, Byzantine Majority Text) n'afficheront pas "
 "les livres, chapitres, versets qu'ils ne contiennent pas."
 
-#: ../C/xiphos.xml:259(title) ../C/xiphos.xml:271(phrase)
+#: ../C/xiphos.xml:263(title) ../C/xiphos.xml:275(phrase)
 msgid "Bible textpane - parallel view"
 msgstr "Volet des textes bibliques, vue parallèle"
 
-#: ../C/xiphos.xml:277(para)
+#: ../C/xiphos.xml:281(para)
 msgid ""
 "Additionally, a separate Parallel View window can be selected from the right "
 "click menu with <guimenuitem>Detach/Attach</guimenuitem>. Your Bible pane "
@@ -1119,29 +1136,24 @@ msgstr ""
 "vue simple et une nouvelle fenêtre <interface>Vue parallèle</interface> \n"
 "s'ouvre affichant le chapitre entier dans les mêmes versions."
 
-#: ../C/xiphos.xml:283(title) ../C/xiphos.xml:295(phrase)
+#: ../C/xiphos.xml:287(title) ../C/xiphos.xml:299(phrase)
 msgid "Parallel View - separate window"
 msgstr "Vue parallèle - Fenêtre distincte"
 
-#: ../C/xiphos.xml:304(title)
+#: ../C/xiphos.xml:308(title)
 msgid "Opening A Separate Bible Translation"
 msgstr "Ouvrir le texte·biblique dans une fenêtre distincte"
 
-#: ../C/xiphos.xml:305(para)
+#: ../C/xiphos.xml:309(para)
+#, fuzzy
 msgid ""
 "In order to view a Bible translation separate from the <application>Xiphos</"
-"application> interface:"
-msgstr ""
-"Pour ouvrir le texte biblique dans une fenêtre distincte de la fenêtre "
-"principale de <application>&appname;</application> :"
-
-#: ../C/xiphos.xml:310(para)
-msgid ""
-"Under the <guibutton>Modules</guibutton> option in the <interface>Sidebar</"
-"interface>,choose <menuchoice><guimenuitem>Biblical Texts</"
-"guimenuitem><guimenuitem>language choice</guimenuitem></menuchoice>. Then "
-"right-click on a translation and choose the <guimenuitem>Open in dialog</"
-"guimenuitem> option."
+"application> main window interface, under the <guibutton>Modules</guibutton> "
+"option in the <interface>Sidebar</interface>, choose "
+"<menuchoice><guimenuitem>Biblical Texts</guimenuitem><guimenuitem>language "
+"choice</guimenuitem></menuchoice>. Then right-click on a translation and "
+"choose <guimenuitem>Open in dialog</guimenuitem>. The module will open in a "
+"separate, detached window of its own."
 msgstr ""
 "Dans l'option  <guimenuitem>Modules</guimenuitem> du <interface>volet "
 "latéral</interface>, choisir <menuchoice><guimenuitem>Textes bibliques</"
@@ -1150,16 +1162,28 @@ msgstr ""
 "qui s'affiche, choisir l'option <guimenuitem>Ouvrir dans une fenêtre</"
 "guimenuitem>."
 
-#: ../C/xiphos.xml:321(title)
+#: ../C/xiphos.xml:315(para)
+msgid ""
+"Detached Bible and commentary windows have a synchronization button in the "
+"upper-left position beside the navigation bar. When this button is "
+"depressed, the main window Bible and commentary will synchronize with "
+"detached Bible and commentary windows. The synchronization goes both ways: "
+"Any detached window will synchronize navigation with all other detached "
+"Bibles and commentaries plus the main window, and the main window will drive "
+"all detached Bibles and commentaries whose synchronization button is "
+"depressed."
+msgstr ""
+
+#: ../C/xiphos.xml:324(title)
 msgid "Finding Out About The Current Translation"
 msgstr "Rechercher les informations à propos de la version courante."
 
-#: ../C/xiphos.xml:322(para)
+#: ../C/xiphos.xml:325(para)
 msgid "To find out about the Bible translation currently being displayed:"
 msgstr ""
 "Pour obtenir des informations à propos de la version de la Bible en cours :"
 
-#: ../C/xiphos.xml:327(para)
+#: ../C/xiphos.xml:330(para)
 msgid ""
 "right-click in the <interface>Bible Text pane</interface>. In the popup menu "
 "choose <guimenuitem>About </guimenuitem> module name."
@@ -1168,7 +1192,7 @@ msgstr ""
 "<interface>textes bibliques</interface>. Dans le menu contextuel qui "
 "s'affiche, sélectionner <guimenuitem>À propos</guimenuitem>."
 
-#: ../C/xiphos.xml:333(para)
+#: ../C/xiphos.xml:336(para)
 msgid ""
 "Under the <guibutton>Modules</guibutton> option in the <interface>Sidebar</"
 "interface>,choose <menuchoice><guimenuitem>Biblical Texts</"
@@ -1182,47 +1206,47 @@ msgstr ""
 "Faire un clic droit sur la version souhaitée, puis dans le menu contextuel "
 "qui s'affiche, choisir l'option <guimenuitem>À propos</guimenuitem>."
 
-#: ../C/xiphos.xml:344(title) ../C/xiphos.xml:402(title)
-#: ../C/xiphos.xml:414(phrase)
+#: ../C/xiphos.xml:347(title) ../C/xiphos.xml:405(title)
+#: ../C/xiphos.xml:417(phrase)
 msgid "Module Options"
 msgstr "Options des modules"
 
-#: ../C/xiphos.xml:345(para)
+#: ../C/xiphos.xml:348(para)
 msgid ""
 "Most Bible translations have additional options which the user can select."
 msgstr ""
 "De nombreux modules de textes bibliques proposent des options additionnelles "
 "à activer suivant les besoins de  l'utilisateur :"
 
-#: ../C/xiphos.xml:350(para)
+#: ../C/xiphos.xml:353(para)
 msgid "Words Of Christ In Red"
 msgstr "Paroles de Christ en rouge"
 
-#: ../C/xiphos.xml:355(para)
+#: ../C/xiphos.xml:358(para)
 msgid "Strong's Numbers"
 msgstr "Nombres de Strong"
 
-#: ../C/xiphos.xml:360(para)
+#: ../C/xiphos.xml:363(para)
 msgid "Morphological Tags"
 msgstr "Étiquettes morphologiques"
 
-#: ../C/xiphos.xml:365(para)
+#: ../C/xiphos.xml:368(para)
 msgid "Footnotes"
 msgstr "Notes de bas de page"
 
-#: ../C/xiphos.xml:370(para)
+#: ../C/xiphos.xml:373(para)
 msgid "Scripture Cross-Reference"
 msgstr "Références croisées de l'Écriture"
 
-#: ../C/xiphos.xml:375(para)
+#: ../C/xiphos.xml:378(para)
 msgid "Headings"
 msgstr "Entêtes"
 
-#: ../C/xiphos.xml:380(para)
+#: ../C/xiphos.xml:383(para)
 msgid "Image Content"
 msgstr "Afficher les images"
 
-#: ../C/xiphos.xml:386(para)
+#: ../C/xiphos.xml:389(para)
 msgid ""
 "Translations in other languages such as Greek or Hebrew have specific "
 "options which deal only with the specific language."
@@ -1230,11 +1254,11 @@ msgstr ""
 "Les versions en d'autres langues tel le grec ou l'hébreu offrent des options "
 "particulières qui ne s'appliquent qu'à ces langues."
 
-#: ../C/xiphos.xml:390(para)
+#: ../C/xiphos.xml:393(para)
 msgid "In order to access these options:"
 msgstr "pour accéder à ces options :"
 
-#: ../C/xiphos.xml:395(para)
+#: ../C/xiphos.xml:398(para)
 msgid ""
 "right-click in the <interface>Bible Text pane</interface>. In the popup menu "
 "(example shown), choose <guibutton>Module Options</guibutton> and select the "
@@ -1245,12 +1269,12 @@ msgstr ""
 "s'affiche, choisir <guimenuitem>Options du module</guimenuitem>, puis "
 "l'option désirée."
 
-#: ../C/xiphos.xml:423(title) ../C/xiphos.xml:428(title)
-#: ../C/xiphos.xml:440(phrase)
+#: ../C/xiphos.xml:426(title) ../C/xiphos.xml:431(title)
+#: ../C/xiphos.xml:443(phrase)
 msgid "View Options"
 msgstr "Options d'affichage"
 
-#: ../C/xiphos.xml:424(para)
+#: ../C/xiphos.xml:427(para)
 msgid ""
 "There are several additional modes that can be selected from the menubar's "
 "<guimenuitem>View</guimenuitem> pulldown."
@@ -1258,7 +1282,7 @@ msgstr ""
 "Plusieurs modes supplémentaires peuvent être sélectionnés à l'aide du menu "
 "<guimenuitem>Afficher</guimenuitem> de la barre de menu."
 
-#: ../C/xiphos.xml:447(para)
+#: ../C/xiphos.xml:450(para)
 msgid ""
 "The first 4 checkboxes control whether each named subwindow is displayed. "
 "The viewable state of the subwindows is remembered on a per-tab basis. This "
@@ -1273,11 +1297,11 @@ msgstr ""
 "l'affichage des volets <interface>Textes bibliques</interface>, "
 "<interface>Commentaires</interface> et <interface>Aperçu</interface>."
 
-#: ../C/xiphos.xml:452(para)
+#: ../C/xiphos.xml:455(para)
 msgid "The remaining checkboxes control these other display features:"
 msgstr "Les options restantes commandent les autres options d'affichage."
 
-#: ../C/xiphos.xml:457(para)
+#: ../C/xiphos.xml:460(para)
 msgid ""
 "Link Tabs - When more than one tab is open, each one's verse is navigated "
 "separately in the disabled case. If tab linking is enabled, then all tabs "
@@ -1288,7 +1312,7 @@ msgstr ""
 "Quand cette option est activée, tous les onglets sont liés ensemble, et "
 "affichent le même verset."
 
-#: ../C/xiphos.xml:464(para)
+#: ../C/xiphos.xml:467(para)
 msgid ""
 "Read Aloud - If you enable this, then <application>Xiphos</application> will "
 "funnel all selected verses through the <application>festival</application> "
@@ -1303,7 +1327,7 @@ msgstr ""
 "distributions Linux. (NDT: En général, les résultats sont meilleurs en "
 "anglais )."
 
-#: ../C/xiphos.xml:469(para)
+#: ../C/xiphos.xml:472(para)
 msgid ""
 "Also, mouse-selected text may be read aloud from Bibles, commentaries, and "
 "general books, using the right-click menu, regardless of whether Read Aloud "
@@ -1315,7 +1339,7 @@ msgstr ""
 "sélectionné</guimenuitem> dans le menu contextuel obtenu à l'aide du clic "
 "droit de la souris."
 
-#: ../C/xiphos.xml:476(para)
+#: ../C/xiphos.xml:479(para)
 msgid ""
 "Show Verse Numbers - Normally enabled, this toggle can be disabled to "
 "prevent display of verse numbers within the text."
@@ -1324,7 +1348,7 @@ msgstr ""
 "activée, cette option peut être désactivée pour ne pas afficher les numéros "
 "de versets dans le texte. "
 
-#: ../C/xiphos.xml:482(para)
+#: ../C/xiphos.xml:485(para)
 msgid ""
 "Highlight Current Verse - Initially disabled, this toggle replaces mere "
 "alternate colorization of the current verse with a substitute high-contrast "
@@ -1335,11 +1359,24 @@ msgstr ""
 "une coloration au contraste plus élevée. Les couleurs sont modifiables dans "
 "la fenêtre de préférences."
 
-#: ../C/xiphos.xml:492(title)
+#: ../C/xiphos.xml:495(title)
+msgid "Display Control with CSS"
+msgstr "Contrôle de l'affichage avec les CSS"
+
+#: ../C/xiphos.xml:496(para)
+msgid ""
+"Users familiar with CSS (cascading style sheets) may wish to create the file "
+"\"default-style.css\" in the .xiphos directory to contain whatever CSS "
+"controls are desired. Beware, it is very easy to shoot oneself in the foot "
+"with CSS, and this will affect all modules' display. The facility exists to "
+"provide the capability that advanced users may wish."
+msgstr ""
+
+#: ../C/xiphos.xml:504(title)
 msgid "User Annotation"
 msgstr "Annotation personnelle"
 
-#: ../C/xiphos.xml:493(para)
+#: ../C/xiphos.xml:505(para)
 msgid ""
 "Many users wish to make personal annotations on individual verses, without "
 "the need to put a full \"personal commentary\" module to use. "
@@ -1365,7 +1402,7 @@ msgstr ""
 "utilisateurs qui soulignent des versets dans leurs Bibles papier avec un "
 "surligneur jaune, et inscrivent des notes personnelles dans la marge."
 
-#: ../C/xiphos.xml:502(para)
+#: ../C/xiphos.xml:514(para)
 msgid ""
 "Selecting an already-annotated verse will (in the usual case) bring up the "
 "existing content for re-editing. An already-annotated verse can be unmarked; "
@@ -1375,7 +1412,7 @@ msgstr ""
 "le contenu existant prêt pour être re-édité. L'annotation d'un verset peut "
 "être retirée; le verset cesse alors d'être affiché en surbrillance."
 
-#: ../C/xiphos.xml:506(para)
+#: ../C/xiphos.xml:518(para)
 msgid ""
 "If the user deletes the module name from the reference at the top of the "
 "dialog, then the annotation will apply to any Bible module at the selected "
@@ -1389,11 +1426,11 @@ msgstr ""
 "sélection du verset annoté ne fait pas afficher le contenu existant, car le "
 "contenu est lié à la référence du module original."
 
-#: ../C/xiphos.xml:514(title)
+#: ../C/xiphos.xml:526(title)
 msgid "Geography Support"
 msgstr "Support de la géographie"
 
-#: ../C/xiphos.xml:515(para)
+#: ../C/xiphos.xml:527(para)
 msgid ""
 "A connection to browsing BibleMap.org is available by mouse-selecting a "
 "place name in any text. Use the right-click context menu to select "
@@ -1410,11 +1447,11 @@ msgstr ""
 "alors lancé pour montrer la géographie du nom sélectionné via BibleMap qui "
 "affiche le détail biblique superposé sur une interface Google Maps."
 
-#: ../C/xiphos.xml:526(title)
+#: ../C/xiphos.xml:538(title)
 msgid "Specific Word Meanings"
 msgstr "Définition d'un mot particulier"
 
-#: ../C/xiphos.xml:527(para)
+#: ../C/xiphos.xml:539(para)
 msgid ""
 "In order to check the meaning of a specific word, double-click on the word "
 "you wish to lookup. The word should then highlight itself and the "
@@ -1426,15 +1463,15 @@ msgstr ""
 "définition, si le mot est répertorié, s'affiche ensuite dans le volet "
 "<interface>dictionnaire</interface>."
 
-#: ../C/xiphos.xml:534(title)
+#: ../C/xiphos.xml:546(title)
 msgid "Finding A Specific Word"
 msgstr "Rechercher un mot spécifique"
 
-#: ../C/xiphos.xml:535(para)
+#: ../C/xiphos.xml:547(para)
 msgid "To find a specific word within a passage:"
 msgstr "Pour rechercher un mot spécifique dans un passage :"
 
-#: ../C/xiphos.xml:540(para)
+#: ../C/xiphos.xml:552(para)
 msgid ""
 "right-click in the <interface>Bible Text Pane</interface>. In the popup "
 "menu, choose <menuchoice><guisubmenu>Edit</guisubmenu><guimenuitem>Find</"
@@ -1450,11 +1487,11 @@ msgstr ""
 "texte à rechercher, puis ensuite valider à l'aide de <guibutton>Rechercher</"
 "guibutton> et <guibutton>Rechercher suivant</guibutton>."
 
-#: ../C/xiphos.xml:553(title)
+#: ../C/xiphos.xml:565(title)
 msgid "PreViewer"
 msgstr "Aperçu"
 
-#: ../C/xiphos.xml:571(para)
+#: ../C/xiphos.xml:583(para)
 msgid ""
 "The Previewer is where the user sees Strong's numbers, morphological tags, "
 "footnotes, and cross-references that the <interface>Bible Text Pane</"
@@ -1464,7 +1501,7 @@ msgstr ""
 "étiquettes morphologiques et les références croisées présentées dans le "
 "volet des <interface>textes bibliques</interface>."
 
-#: ../C/xiphos.xml:575(para)
+#: ../C/xiphos.xml:587(para)
 msgid ""
 "Footnote content is displayed in the Previewer when you hover over the "
 "indicator <guibutton>*n</guibutton> in the Bible text; it remains visible "
@@ -1486,7 +1523,7 @@ msgstr ""
 "<guibutton>Majuscule</guibutton>) fige l'affichage de la note de bas de page "
 "et permet de se déplacer ensuite dans le volet <interface>Aperçu</interface>."
 
-#: ../C/xiphos.xml:582(para)
+#: ../C/xiphos.xml:594(para)
 msgid ""
 "Cross-reference indicators <guibutton>*x</guibutton> work much the same way. "
 "Clicking the indicator will send the set of references to the "
@@ -1505,7 +1542,7 @@ msgstr ""
 "références croisées soit envoyée directement dans le volet "
 "<interface>Aperçu</interface>."
 
-#: ../C/xiphos.xml:589(para)
+#: ../C/xiphos.xml:601(para)
 msgid ""
 "Any verses shown in reverse-highlight have personal annotation associated "
 "with them, and such verses will include <guibutton>*u</guibutton> at the "
@@ -1517,7 +1554,7 @@ msgstr ""
 "début. Survoler cette marque permet d'afficher l'annotation dans le volet "
 "Aperçu, de la même façon que les notes de bas de page."
 
-#: ../C/xiphos.xml:594(para)
+#: ../C/xiphos.xml:606(para)
 msgid ""
 "If a devotional has been set via the Preferences dialog, then the day's "
 "devotional reference will also appear in the previewer, either on program "
@@ -1529,11 +1566,11 @@ msgstr ""
 "démarrage du programme ou soit lorsque l'utilisateur le demande via le menu "
 "<guimenuitem>Affichage</guimenuitem>."
 
-#: ../C/xiphos.xml:601(title) ../C/xiphos.xml:603(title)
+#: ../C/xiphos.xml:613(title) ../C/xiphos.xml:615(title)
 msgid "The Commentary Pane"
 msgstr "Le volet des commentaires"
 
-#: ../C/xiphos.xml:622(para)
+#: ../C/xiphos.xml:634(para)
 msgid ""
 "The <interface>Commentary pane</interface> is where the commentary modules "
 "are displayed. This provides easy reading, reference, and access to "
@@ -1551,7 +1588,7 @@ msgstr ""
 "suffit de changer de verset à l'aide de la <interface>Barre d'outils</"
 "interface>."
 
-#: ../C/xiphos.xml:629(para)
+#: ../C/xiphos.xml:641(para)
 msgid ""
 "If there are images that are part of a commentary, general book, or "
 "dictionary/lexicon, they may be clicked to invoke a viewer on that single "
@@ -1565,7 +1602,7 @@ msgstr ""
 "intéressante si l'option de réduction des images a été activée avec pour "
 "résultat des images très rétrécies."
 
-#: ../C/xiphos.xml:635(para)
+#: ../C/xiphos.xml:647(para)
 msgid ""
 "By changing to passage settings on the <interface>Toolbar</interface>, the "
 "contents in the <interface>Bible Text pane</interface> and the "
@@ -1576,15 +1613,15 @@ msgstr ""
 "bibliques</interface> et du  volet d'affichage des<interface> commentaires</"
 "interface> changent simultanément."
 
-#: ../C/xiphos.xml:642(title)
+#: ../C/xiphos.xml:654(title)
 msgid "Finding Out About The Commentary Module"
 msgstr "Rechercher les informations à propos du module de commentaires"
 
-#: ../C/xiphos.xml:643(para)
+#: ../C/xiphos.xml:655(para)
 msgid "To find out about the commentary currently being displayed:"
 msgstr "À propos du commentaire actuellement affiché :"
 
-#: ../C/xiphos.xml:648(para)
+#: ../C/xiphos.xml:660(para)
 msgid ""
 "right-click in the <interface>Commentary Pane</interface>. In the popup menu "
 "choose <guimenuitem>About </guimenuitem> module name."
@@ -1593,11 +1630,11 @@ msgstr ""
 "d'affichage des <interface>commentaires</interface>. Dans le menu contextuel "
 "qui se présente, sélectionner <guimenuitem>À propos de</guimenuitem>."
 
-#: ../C/xiphos.xml:657(title)
+#: ../C/xiphos.xml:669(title)
 msgid "Commentary Headings."
 msgstr "Entêtes des commentaires"
 
-#: ../C/xiphos.xml:658(para)
+#: ../C/xiphos.xml:670(para)
 msgid ""
 "Many commentaries have additional headings which enable introductory "
 "information about the book and chapter currently being displayed in the "
@@ -1608,7 +1645,7 @@ msgstr ""
 "volet des<interface> textes bibliques</interface>. Pour obtenir l'affichage "
 "de l'entête&#160;:"
 
-#: ../C/xiphos.xml:664(para)
+#: ../C/xiphos.xml:676(para)
 msgid ""
 "right-click in the <interface>Commentary Pane</interface>. In the popup menu "
 "choose <guimenuitem>Display Book Heading</guimenuitem> or "
@@ -1619,15 +1656,15 @@ msgstr ""
 "qui se présente, choisir <guimenuitem>Afficher l'entête du livre</"
 "guimenuitem> ou <guimenuitem>Afficher l'entête du chapitre</guimenuitem>."
 
-#: ../C/xiphos.xml:674(title)
+#: ../C/xiphos.xml:686(title)
 msgid "Dictionary Pane"
 msgstr "Volet dictionnaire"
 
-#: ../C/xiphos.xml:676(title) ../C/xiphos.xml:689(phrase)
+#: ../C/xiphos.xml:688(title) ../C/xiphos.xml:701(phrase)
 msgid "The Dictionary Pane"
 msgstr "Le volet du dictionnaire"
 
-#: ../C/xiphos.xml:696(para)
+#: ../C/xiphos.xml:708(para)
 msgid ""
 "The Dictionary Pane's content is driven by its up/down selectors, typing in "
 "its navbar text, or double-clicks in the Bible, Commentary, or Book Panes."
@@ -1637,11 +1674,11 @@ msgstr ""
 "sur des mots dans les volets <interface>Textes bibliques</interface>, "
 "<interface>Commentaires</interface>, <interface>Livre</interface>."
 
-#: ../C/xiphos.xml:702(title)
+#: ../C/xiphos.xml:714(title)
 msgid "Keyboard Shortcuts"
 msgstr "Raccourcis clavier"
 
-#: ../C/xiphos.xml:703(para)
+#: ../C/xiphos.xml:715(para)
 msgid ""
 "Several keyboard shortcuts exist in <application>Xiphos</application>, "
 "listed below in rough functional groupings."
@@ -1649,11 +1686,11 @@ msgstr ""
 "<application>Xiphos</application> présente un certain nombre de raccourcis "
 "clavier, listés ci-dessous par groupes fonctionnels&nbsp;:"
 
-#: ../C/xiphos.xml:706(para)
+#: ../C/xiphos.xml:718(para)
 msgid "Window selection/opening and navbar selection:"
 msgstr "Sélection/ouverture des fenêtres et barre de navigation"
 
-#: ../C/xiphos.xml:711(para)
+#: ../C/xiphos.xml:723(para)
 msgid ""
 "<guibutton>Ctrl-L</guibutton> focuses and selects the main verse navbar "
 "text. You can then immediately type in new verse selection text. Be aware "
@@ -1668,7 +1705,7 @@ msgstr ""
 "G&#160;»  correspond à Genèse par exemple, et n'importe quel nom de livre "
 "saisi seul implique chapitre 1, verset 1."
 
-#: ../C/xiphos.xml:719(para)
+#: ../C/xiphos.xml:731(para)
 msgid ""
 "<guibutton>Alt-C</guibutton> brings the Commentary View forward when "
 "previously obscured by the Book View."
@@ -1677,7 +1714,7 @@ msgstr ""
 "<interface>Commentaire</interface> si celui-ci est masqué par le volet "
 "<interface>Livre</interface>."
 
-#: ../C/xiphos.xml:724(para)
+#: ../C/xiphos.xml:736(para)
 msgid ""
 "<guibutton>Alt-G</guibutton> is the opposite of Alt-C, focusing on the "
 "general book."
@@ -1685,21 +1722,25 @@ msgstr ""
 "<guibutton>Alt-G</guibutton> ramène au premier-plan le volet "
 "<interface>Livre</interface>."
 
-#: ../C/xiphos.xml:729(para)
+#: ../C/xiphos.xml:741(para)
 msgid "<guibutton>Alt-D</guibutton> focuses on the dictionary navbar text."
 msgstr ""
 "<guibutton>Alt-D</guibutton> place le focus sur la barre de navigation du "
 "volet <interface>Dictionnaire</interface>."
 
-#: ../C/xiphos.xml:734(para)
-msgid "<guibutton>Ctrl-t</guibutton> opens a new tab."
-msgstr "<guibutton>Ctrl-t</guibutton> ouvre un nouvel onglet."
+#: ../C/xiphos.xml:746(para)
+msgid "<guibutton>Ctrl-T</guibutton> opens a new tab."
+msgstr "<guibutton>Ctrl-T</guibutton> ouvre un nouvel onglet."
 
-#: ../C/xiphos.xml:739(para)
+#: ../C/xiphos.xml:751(para)
+msgid "<guibutton>Ctrl-[1-9]</guibutton> makes the Nth tab current."
+msgstr "<guibutton>Ctrl-[1-9]</guibutton> ouvre le n<superscript>ième.</superscript> onglet"
+
+#: ../C/xiphos.xml:756(para)
 msgid "Verse navigation and Bible features:"
 msgstr "Changement de verset et propriétés du texte biblique&nbsp;:"
 
-#: ../C/xiphos.xml:744(para)
+#: ../C/xiphos.xml:761(para)
 msgid ""
 "<guibutton>Ctrl-p/Ctrl-n</guibutton>: Verse previous/next. Also <guibutton>k/"
 "j</guibutton>."
@@ -1707,15 +1748,15 @@ msgstr ""
 "<guibutton>Ctrl-p/Ctrl-n</guibutton> : Verset précédent/suivant. "
 "<guibutton>k/j</guibutton> est équivalent."
 
-#: ../C/xiphos.xml:747(para)
+#: ../C/xiphos.xml:764(para)
 msgid "<guibutton>p/n</guibutton>: Chapter previous/next."
 msgstr "<guibutton>p/n</guibutton> : Chapitre précédent/suivant."
 
-#: ../C/xiphos.xml:750(para)
+#: ../C/xiphos.xml:767(para)
 msgid "<guibutton>P/N</guibutton>: Book previous/next."
 msgstr "<guibutton>P/N</guibutton>:·Livre biblique suivant/précédent."
 
-#: ../C/xiphos.xml:753(para)
+#: ../C/xiphos.xml:770(para)
 msgid ""
 "<guibutton>Shift-F10</guibutton> brings up the context menu for the Bible "
 "pane."
@@ -1723,15 +1764,27 @@ msgstr ""
 "<guibutton>Maj-F10</guibutton> appelle le menu contextuel du volet des "
 "<interface>textes bibliques</interface>."
 
-#: ../C/xiphos.xml:756(para)
+#: ../C/xiphos.xml:773(para)
+msgid "<guibutton>Alt-S</guibutton>: Toggle Strong's display."
+msgstr "<guibutton>Alt-S</guibutton> bascule l'affichage des nombres de Strong."
+
+#: ../C/xiphos.xml:776(para)
+msgid "<guibutton>Alt-M</guibutton>: Toggle morphology display."
+msgstr "<guibutton>Alt-M</guibutton> bascule l'affichage des étiquettes morphologiques."
+
+#: ../C/xiphos.xml:779(para)
+msgid "<guibutton>Alt-R</guibutton>: Toggle \"red words of Christ\" display."
+msgstr "<guibutton>Alt-R</guibutton> bascule l'affichage des « Paroles de Christ en rouge »."
+
+#: ../C/xiphos.xml:782(para)
 msgid "Opening special windows:"
 msgstr "Ouverture de fenêtres spéciales&nbsp;:"
 
-#: ../C/xiphos.xml:761(para)
+#: ../C/xiphos.xml:787(para)
 msgid "<guibutton>F1</guibutton> opens this manual."
 msgstr "<guibutton>F1</guibutton> ouvre ce manuel."
 
-#: ../C/xiphos.xml:766(para)
+#: ../C/xiphos.xml:792(para)
 msgid ""
 "<guibutton>F2</guibutton>: opens the <guibutton>Preferences</guibutton> "
 "dialog."
@@ -1739,27 +1792,37 @@ msgstr ""
 "<guibutton>F2</guibutton>: ouvre la fenêtre des <guibutton>Préférences</"
 "guibutton>·"
 
-#: ../C/xiphos.xml:771(para)
+#: ../C/xiphos.xml:797(para)
 msgid ""
 "<guibutton>F3</guibutton>: opens <guibutton>Advanced Search</guibutton>."
 msgstr ""
 "<guibutton>F3</guibutton> : ouvre la <guibutton>Recherche avancée</guibutton>"
 
-#: ../C/xiphos.xml:776(para)
+#: ../C/xiphos.xml:802(para)
+msgid ""
+"<guibutton>Ctrl-F3</guibutton>: brings forward the simple sidebar search."
+msgstr "<guibutton>Ctrl-F3</guibutton> met en avant la recherche rapide dans le volet latéral."
+
+#: ../C/xiphos.xml:807(para)
 msgid ""
 "<guibutton>F4</guibutton>: opens the <guibutton>Module Manager</guibutton>."
 msgstr ""
 "<guibutton>F4</guibutton> : ouvre le <guibutton>Gestionnaire de modules</"
 "guibutton>."
 
-#: ../C/xiphos.xml:781(para)
+#: ../C/xiphos.xml:812(para)
+msgid ""
+"<guibutton>Alt-A</guibutton> opens an annotation dialog on the current verse."
+msgstr "<guibutton>Alt-A</guibutton> ouvre la fenêtre d'annotation du verset en cours."
+
+#: ../C/xiphos.xml:817(para)
 msgid ""
 "<guibutton>Alt-B</guibutton> opens a bookmark dialog on the current verse."
 msgstr ""
 "<guibutton>Alt-B</guibutton> ouvre la fenêtre <interface>Ajouter un signet</"
 "interface> sur le verset en cours"
 
-#: ../C/xiphos.xml:786(para)
+#: ../C/xiphos.xml:822(para)
 msgid ""
 "<guibutton>Ctrl-F</guibutton> opens the \"Find\" dialog. The subwindow to "
 "which it applies depends on which of them are visible: The Bible is first "
@@ -1775,13 +1838,13 @@ msgstr ""
 "volet livre et la recherche initiée par <guibutton>Ctrl-F</guibutton> ne "
 "sera effectuée que dans ce volet livre."
 
-#: ../C/xiphos.xml:793(para)
+#: ../C/xiphos.xml:829(para)
 msgid ""
 "<guibutton>Alt-P</guibutton> detaches/re-attaches the parallel view dialog."
 msgstr ""
 "<guibutton>Alt-P</guibutton> détache / rattache la fenêtre de vue parallèle."
 
-#: ../C/xiphos.xml:798(para)
+#: ../C/xiphos.xml:834(para)
 msgid ""
 "<guibutton>Alt-Z</guibutton> opens editor on the personal commentary named "
 "Personal."
@@ -1791,11 +1854,11 @@ msgstr ""
 "guimenuitem><guimenuitem>commentaires</guimenuitem><guimenuitem>English</"
 "guimenuitem><guimenuitem>Personal</guimenuitem></menuchoice>)."
 
-#: ../C/xiphos.xml:803(para)
+#: ../C/xiphos.xml:839(para)
 msgid "Font size control:"
 msgstr "Règlage des tailles de police&nbsp;:"
 
-#: ../C/xiphos.xml:808(para)
+#: ../C/xiphos.xml:844(para)
 msgid ""
 "<guibutton>Ctrl-Plus/Ctrl-Minus</guibutton> increases/decreases the base "
 "font size."
@@ -1803,113 +1866,39 @@ msgstr ""
 "<guibutton>Ctrl-Plus/Ctrl-Minus</guibutton> augmente / diminue la taille de "
 "police"
 
-#: ../C/xiphos.xml:816(title)
-msgid "Version Differences in <application>Xiphos</application>' Display"
-msgstr "Différences d'affichage dans <application>&appname;</application> :"
+#: ../C/xiphos.xml:849(para)
+msgid "<guibutton>Ctrl-0</guibutton> (zero) sets the base font size to zero."
+msgstr "<guibutton>Ctrl-0</guibutton> (zéro) initialise la taille de police de base à zéro."
 
-#: ../C/xiphos.xml:817(para)
+#: ../C/xiphos.xml:854(para)
+msgid "BibleSync:"
+msgstr "BibleSync :"
+
+#: ../C/xiphos.xml:859(para)
 msgid ""
-"The <application>Xiphos</application> interface has evolved over time, and "
-"there are two display libraries with which <application>Xiphos</application> "
-"can be built. The older, less featureful version is called \"gtkhtml3\", and "
-"the newer, more capable version is called \"MozEmbed\". Both of these "
-"display libraries render text in a browser-like fashion, using HTML "
-"constructs to control display."
-msgstr ""
-"L'application <application>&appname;</application> a évolué au niveau des "
-"possibilités d'affichage. <application>&appname;</application> peut être "
-"compilé avec l'une des 2 bibliothèques suivantes au choix. La plus ancienne, "
-"moins complète se nomme «&#160;gtkhtml3&#160;», et la nouvelle offrant plus "
-"de possibilités est «&#160;MozEmbed&#160;»."
+"<guibutton>Ctrl-Alt-Shift-P</guibutton> puts BibleSync into Personal mode."
+msgstr "<guibutton>Ctrl-Alt-Shift-P</guibutton> met BibleSync en mode Personnel."
 
-#: ../C/xiphos.xml:824(para)
+#: ../C/xiphos.xml:864(para)
 msgid ""
-"Several desirable capabilities are unsupportable in gtkhtml3, and although "
-"recent <application>Xiphos</application> is written to take advantage of "
-"MozEmbed features, it is possible that the version running on your computer "
-"needed to be built with gtkhtml3 instead, either because the version of "
-"MozEmbed available for your system is not recent enough to support the needs "
-"of <application>Xiphos</application>, or it simply doesn't exist for your "
-"system. (Mozembed is not supported under Windows at this time.) The "
-"following differences will be apparent, depending on whether gtkhtml3 or "
-"MozEmbed is the underlying display engine:"
-msgstr ""
-"Un certain nombre de fonctionalités de <application>&appname;</application> "
-"ne sont pas supportées par «&#160;gtkhtml3&#160;». Bien que "
-"<application>&appname;</application> soit écrit pour tirer parti des "
-"possibilités de «&#160;MozEmbed&#160;», il est possible que la version "
-"installée sur votre système ait été construite avec «&#160;gtkhtml3&#160;», "
-"soit parceque la version de MozEmbed n'est pas suffisamment récente soit "
-"tout simplement parce qu'elle n'existe pas. (Note: «&#160;MozEmbed&#160;» "
-"n'est passupporté par Window pour le moment). Les différences suivantes se "
-"feront observer selon l'utilisation de «&#160;gtkhtml3&#160;» ou «&#160;"
-"MozEmbed&#160;» comme moteur d'affichage :"
+"<guibutton>Ctrl-Alt-Shift-S</guibutton> puts BibleSync into Speaker mode."
+msgstr "<guibutton>Ctrl-Alt-Shift-S</guibutton> met BibleSync en mode Conférencier."
 
-#: ../C/xiphos.xml:835(para)
+#: ../C/xiphos.xml:869(para)
 msgid ""
-"Morphology and Strong's references, enabled via the right-click menu in some "
-"modules, are displayed inline with gtkhtml3; with MozEmbed, a blocked "
-"display is used, where these references are aligned beneath the word to "
-"which they refer, for a much more readable, less cluttered display."
-msgstr ""
-"Les étiquettes morphologiques ainsi que les références de Strong, activées "
-"via un menu contextuel dans certains modules, sont affichées dans le corps "
-"du texte avec  «&#160;gtkhtml3&#160;». Avec «&#160;MozEmbed&#160;», ces "
-"références sont alignées au-dessous du mot auxquelles elles se rapportent de "
-"façon à procurer un affichage plus aéré et plus lisible."
+"<guibutton>Ctrl-Alt-Shift-A</guibutton> puts BibleSync into Audience mode."
+msgstr "<guibutton>Ctrl-Alt-Shift-A</guibutton> met BibleSync en mode Audience."
 
-#: ../C/xiphos.xml:842(para)
+#: ../C/xiphos.xml:874(para)
+msgid "<guibutton>Ctrl-Alt-Shift-O</guibutton> turns off BibleSync."
+msgstr "<guibutton>Ctrl-Alt-Shift-O</guibutton> désactive BibleSync."
+
+#: ../C/xiphos.xml:879(para)
 msgid ""
-"Footnote and cross-reference markers (<guibutton>*n</guibutton>, "
-"<guibutton>*x</guibutton>) are displayed as proper superscripts in MozEmbed, "
-"but not in gtkhtml3."
+"<guibutton>Ctrl-Alt-Shift-N</guibutton> causes BibleSync to navigate your "
+"current main window point transiently as a one-shot event. BibleSync must be "
+"transmit-ready, that is, in Personal or Speaker mode."
 msgstr ""
-"Les notes de pied de page et les références croisées (<guibutton>*n</"
-"guibutton>,·<guibutton>*x</guibutton>) s'affichent en mode exposant avec "
-"«&#160;MozEmbed&#160;»."
-
-#: ../C/xiphos.xml:848(para)
-msgid ""
-"Links in gtkhtml3 are necessarily both colored and underlined; in MozEmbed, "
-"no underlines are needed."
-msgstr ""
-"Les liens avec «&#160;gtkhtml3&#160;» sont à la fois colorés et soulignés. "
-"Ils ne sont pas soulignés avec «&#160;MozEmbed&#160;»."
-
-#: ../C/xiphos.xml:853(para)
-msgid ""
-"Under MozEmbed, double-space display is available using the context menu, "
-"but not under gtkhtml3."
-msgstr ""
-"Avec « MozEmbed », l'affichage en double espacement du texte est activable à "
-"l'aide du menu <guimenuitem>Affichage</guimenuitem>, cette option est "
-"indisponible avec « gtkhtml »."
-
-#: ../C/xiphos.xml:858(para)
-msgid ""
-"It is not possible for gtkhtml3 to interpret multiple font face directives "
-"in a single window, so the gtkhtml3 detached parallel view window cannot "
-"provide per-module font selections. Also, modules' internal font requests "
-"are ignored in any gtkhtml3 window."
-msgstr ""
-"Gtkhtml3 ne sait pas interpréter les directives de polices multiples dans "
-"une même fenêtre, c'est pourquoi la fenêtre détachée «&#160;Vue "
-"parallèle&#160;» ne permet pas une sélection de police par module."
-
-#: ../C/xiphos.xml:866(para)
-msgid ""
-"Using the \"About Xiphos\" selection under the <guimenuitem>Help</"
-"guimenuitem> menu, you will see the display library with which "
-"<application>Xiphos</application> was built."
-msgstr ""
-"En utilisant le menu <menuchoice><guimenuitem>Aide</"
-"guimenuitem><guimenuitem>À propos de Xiphos</guimenuitem></menuchoice>, il "
-"est possible de connaître la bibliothèque avec laquelle "
-"<application>&appname;</application> a été construit."
-
-#: ../C/xiphos.xml:871(title) ../C/xiphos.xml:878(phrase)
-msgid "Comparison, gtkhtml3 -vs- mozembed"
-msgstr "Comparaison d'affichage entre gtkhtml3 et mozembed"
 
 #: ../C/xiphos.xml:225(title)
 msgid "Preferences"
@@ -1928,98 +1917,18 @@ msgid "The Preferences Dialog"
 msgstr "La fenêtre des préférences"
 
 #: ../C/xiphos.xml:30(title)
-msgid "Fonts And Colors"
-msgstr "Polices et couleurs"
-
-#: ../C/xiphos.xml:32(title)
-msgid "Setting Font Colors"
-msgstr "Configurer la couleur des polices"
-
-#: ../C/xiphos.xml:34(title) ../C/xiphos.xml:47(phrase)
-msgid "Font Colour Settings"
-msgstr "Configuration de la couleur des polices"
-
-#: ../C/xiphos.xml:53(para)
-msgid ""
-"The <guibutton>Invert color pairs</guibutton> buttons are provided to make "
-"it easy, for example, to move the main window into \"night mode,\" with "
-"white text on black background."
-msgstr ""
-"Le bouton <guibutton>Inverser les paires de couleurs</guibutton> permet, par "
-"exemple,\n"
-"de mettre la fenêtre principale en «&nbsp;mode nuit&nbsp;», avec un texte en "
-"blanc sur\n"
-"un fond noir."
-
-#: ../C/xiphos.xml:61(title) ../C/xiphos.xml:63(title)
-#: ../C/xiphos.xml:76(phrase)
-msgid "Miscellaneous Font Settings"
-msgstr "Configuration diverses des polices"
-
-#: ../C/xiphos.xml:83(para)
-msgid ""
-"In individual modules' display, the right-click menu's <guimenuitem>Module "
-"Options</guimenuitem> selector provides font name and size selection."
-msgstr ""
-"Faire un clic droit à l'aide du bouton de la souris dans un des modules "
-"affichés. Dans le menu contextuel qui s'affiche, choisir ensuite "
-"<menuchoice><guimenuitem>Options du module</guimenuitem><guimenuitem>Changer "
-"de police</guimenuitem></menuchoice> pour changer la police ou la taille des "
-"caractères."
-
-#: ../C/xiphos.xml:88(para)
-msgid ""
-"The base font size is the size initially chosen for all modules displayed by "
-"<application>Xiphos</application>. The verse number and individual modules' "
-"font size choices are relative to the base font size."
-msgstr ""
-"La taille de police standard est la taille par défaut de tous les modules "
-"affichés par <application>&appname;</application>. Note: la taille des n° de "
-"verset ainsi que la taille de la police sélectionnée individuellement par "
-"module sont relatives à cette taille standard."
-
-#: ../C/xiphos.xml:93(para)
-msgid "The font name and size used for display is chosen from this order:"
-msgstr ""
-"Le nom et la taille de police utilisés pour l'affichage sont choisis dans "
-"cet ordre&nbsp;:"
-
-#: ../C/xiphos.xml:98(para)
-msgid ""
-"The selection made via the context menu for the specific module, under "
-"<guimenuitem>Module Options</guimenuitem>."
-msgstr ""
-"La sélection faite via le menu contextuel d'un module spécifique, à l'aide "
-"de \n"
-"<guimenuitem>Options du module</guimenuitem>."
-
-#: ../C/xiphos.xml:104(para)
-msgid "The per-language selection made under Preferences, here."
-msgstr "Les préférences de police, par langue, ici dans les préférences."
-
-#: ../C/xiphos.xml:109(para)
-msgid "The module's own default selection, in its configuration file."
-msgstr ""
-"La configuration par défaut du module, définie dans son fichier de "
-"configuration."
-
-#: ../C/xiphos.xml:114(para)
-msgid "The application default."
-msgstr "La configuration par défaut de l'application."
-
-#: ../C/xiphos.xml:125(title)
 msgid "General Settings"
 msgstr "Préférences générales"
 
-#: ../C/xiphos.xml:127(title) ../C/xiphos.xml:129(title)
+#: ../C/xiphos.xml:32(title) ../C/xiphos.xml:34(title)
 msgid "Locale, General Preferences and StudyPad directory"
 msgstr "Langue, préférences générales et répertoire du bloc-notes."
 
-#: ../C/xiphos.xml:142(phrase)
+#: ../C/xiphos.xml:47(phrase)
 msgid "General Preferences and StudyPad directory"
 msgstr "Préférences générales et répertoire du bloc-notes."
 
-#: ../C/xiphos.xml:149(para)
+#: ../C/xiphos.xml:54(para)
 msgid ""
 "If you wish <application>Xiphos</application> to display its interface in a "
 "language other than the default, you may select one here. A restart will be "
@@ -2031,7 +1940,7 @@ msgstr ""
 "sorte que \n"
 "la traduction puisse être initialisée."
 
-#: ../C/xiphos.xml:153(para)
+#: ../C/xiphos.xml:58(para)
 msgid ""
 "If you enable <guilabel>Default Dictionary</guilabel>, then that named "
 "dictionary (see <guimenuitem>Special</guimenuitem> below) module will always "
@@ -2045,7 +1954,7 @@ msgstr ""
 "<application>&appname;\n"
 "</application>."
 
-#: ../C/xiphos.xml:157(para)
+#: ../C/xiphos.xml:62(para)
 msgid ""
 "Certain dictionary-style modules are <guilabel>Daily Devotionals</guilabel> "
 "whose keys are numerically in the form \"Month.Day\". If you have such a "
@@ -2060,7 +1969,7 @@ msgstr ""
 "<application>&appname;</application> peut présenter le texte du jour lors du "
 "démarrage."
 
-#: ../C/xiphos.xml:162(para)
+#: ../C/xiphos.xml:67(para)
 msgid ""
 "If you enable <guilabel>Resize images</guilabel>, <application>Xiphos</"
 "application> will automatically resize image content in commentaries, "
@@ -2072,29 +1981,31 @@ msgstr ""
 "commentaires, dictionnaires, livres de façon à ce qu'elles s'adaptent à la "
 "taille de la fenêtre où elles sont affichées."
 
-#: ../C/xiphos.xml:166(para)
+#: ../C/xiphos.xml:71(para)
+#, fuzzy
 msgid ""
 "<guilabel>Highlight current verse</guilabel>, if enabled, will cause "
 "<application>Xiphos</application> to substitute mere current verse "
 "colorization with a high-contrast alternate color scheme on the current "
 "verse. The colors used may be chosen from the color selector pane (see "
-"above)."
+"below)."
 msgstr ""
 "L'option <guilabel>Verset en cours contrasté</guilabel>, une fois activée, "
 "permet de remplacer la couleur  du verset en cours par une coloration au "
 "contraste plus élevée. Les couleurs sont modifiables dans le volet "
 "<guilabel>Couleurs</guilabel> (voir au-dessus)."
 
-#: ../C/xiphos.xml:171(para)
+#: ../C/xiphos.xml:76(para)
+#, fuzzy
 msgid ""
-"<guilabel>Highlight user annotations</guilabel> uses inverted the highlight "
+"<guilabel>Highlight user annotations</guilabel> uses inverted highlight "
 "color choices when marking user-annotated verses."
 msgstr ""
 "<guilabel>Annotations personnelles surlignées</guilabel> utilise les choix \n"
 "de couleurs du surlignement pour indiquer les versets annotés par "
 "l'utilisateur."
 
-#: ../C/xiphos.xml:175(para)
+#: ../C/xiphos.xml:80(para)
 msgid ""
 "By default, <guilabel>Cross-references</guilabel> go into the Previewer. "
 "Selecting this checkbox puts them into the verse list instead."
@@ -2105,19 +2016,170 @@ msgstr ""
 "la liste\n"
 "de versets."
 
-#: ../C/xiphos.xml:184(title)
+#: ../C/xiphos.xml:84(para)
+msgid ""
+"Verse number display can be offset in several ways provided by the "
+"checkboxes."
+msgstr ""
+
+#: ../C/xiphos.xml:92(title) ../C/xiphos.xml:103(phrase)
+msgid "BibleSync Settings"
+msgstr "Configuration de BibleSync"
+
+#: ../C/xiphos.xml:94(title) ../C/xiphos.xml:96(title)
+msgid "Controls for BibleSync"
+msgstr ""
+
+#: ../C/xiphos.xml:110(para)
+msgid ""
+"BibleSync is a shared navigation protocol using LAN multicast. It is useful "
+"for a single person when running Bible programs on multiple machines or "
+"devices, all of which you wish to navigate through the Bible together, or "
+"for a group working closely together, such as translators. Also, it has a "
+"\"lecture\" mode, where a speaker's Bible program induces the audience's "
+"programs to follow along. The difference in the modes regards who transmits "
+"and who receives navigation. In Personal mode, BibleSync navigation is both "
+"transmitted and received; as Speaker, it transmits only; as Audience, it "
+"receives only."
+msgstr ""
+
+#: ../C/xiphos.xml:117(para)
+msgid ""
+"To enable BibleSync, select a mode from the radio buttons. Also, choose "
+"whether to accept navigation directly, so that Xiphos moves immediately to a "
+"specified verse, or whether incoming navigation is instead sent to the verse "
+"list, where you can decide whether to follow."
+msgstr ""
+
+#: ../C/xiphos.xml:122(para)
+msgid "If you use a firewall, you must punch a hole in it for UDP port 22272."
+msgstr ""
+
+#: ../C/xiphos.xml:125(para)
+msgid ""
+"If you run more than one BibleSync-compatible program on your computer and "
+"do not wish your activity among them to be shared on the local net, you can "
+"use Personal mode combined with the Private checkbox. This will tell "
+"<application>Xiphos</application> not to broadcast outside your system."
+msgstr ""
+
+#: ../C/xiphos.xml:130(para)
+msgid ""
+"You can send a verse list from the sidebar search or Advanced Search window "
+"via BibleSync; see the context (right-click) menu. A particularly good use "
+"case for this is when using a simpler Bible program, such as on a mobile "
+"device, with another such as <application>Xiphos</application> that has "
+"significant search capability: Do searches in <application>Xiphos</"
+"application> and send the resulting verse list to the mobile device. Be "
+"aware that size limitations on the protocol are small, and though a search "
+"may generate hundreds of results in the verse list, at most a few dozen will "
+"pass in the protocol to the receivers. For <application>Xiphos</"
+"application>, receipt of multi-references always induces indirect verse list "
+"navigation."
+msgstr ""
+
+#: ../C/xiphos.xml:138(para)
+msgid ""
+"<application>Xiphos</application> is the first Bible program with a "
+"BibleSync implementation; as such, its utility may be limited for now. But a "
+"number of other programs' authors and support organizations have indicated "
+"their intention to support BibleSync as well, including Laridian, theWord, "
+"BibleAnalyzer, and Accordance, as well as other Sword Project applications."
+msgstr ""
+
+#: ../C/xiphos.xml:148(title)
+msgid "Fonts And Colors"
+msgstr "Polices et couleurs"
+
+#: ../C/xiphos.xml:150(title)
+msgid "Setting Font Colors"
+msgstr "Configurer la couleur des polices"
+
+#: ../C/xiphos.xml:152(title) ../C/xiphos.xml:165(phrase)
+msgid "Font Colour Settings"
+msgstr "Configuration de la couleur des polices"
+
+#: ../C/xiphos.xml:171(para)
+msgid ""
+"The <guibutton>Invert color pairs</guibutton> buttons are provided to make "
+"it easy, for example, to move the main window into \"night mode,\" with "
+"white text on black background."
+msgstr ""
+"Le bouton <guibutton>Inverser les paires de couleurs</guibutton> permet, par "
+"exemple,\n"
+"de mettre la fenêtre principale en «&nbsp;mode nuit&nbsp;», avec un texte en "
+"blanc sur\n"
+"un fond noir."
+
+#: ../C/xiphos.xml:179(title) ../C/xiphos.xml:181(title)
+#: ../C/xiphos.xml:194(phrase)
+msgid "Miscellaneous Font Settings"
+msgstr "Configuration diverses des polices"
+
+#: ../C/xiphos.xml:201(para)
+msgid ""
+"In individual modules' display, the right-click menu's <guimenuitem>Module "
+"Options</guimenuitem> selector provides font name and size selection."
+msgstr ""
+"Faire un clic droit à l'aide du bouton de la souris dans un des modules "
+"affichés. Dans le menu contextuel qui s'affiche, choisir ensuite "
+"<menuchoice><guimenuitem>Options du module</guimenuitem><guimenuitem>Changer "
+"de police</guimenuitem></menuchoice> pour changer la police ou la taille des "
+"caractères."
+
+#: ../C/xiphos.xml:206(para)
+msgid ""
+"The base font size is the size initially chosen for all modules displayed by "
+"<application>Xiphos</application>. The verse number and individual modules' "
+"font size choices are relative to the base font size."
+msgstr ""
+"La taille de police standard est la taille par défaut de tous les modules "
+"affichés par <application>&appname;</application>. Note: la taille des n° de "
+"verset ainsi que la taille de la police sélectionnée individuellement par "
+"module sont relatives à cette taille standard."
+
+#: ../C/xiphos.xml:211(para)
+msgid "The font name and size used for display is chosen from this order:"
+msgstr ""
+"Le nom et la taille de police utilisés pour l'affichage sont choisis dans "
+"cet ordre&nbsp;:"
+
+#: ../C/xiphos.xml:216(para)
+msgid ""
+"The selection made via the context menu for the specific module, under "
+"<guimenuitem>Module Options</guimenuitem>."
+msgstr ""
+"La sélection faite via le menu contextuel d'un module spécifique, à l'aide "
+"de \n"
+"<guimenuitem>Options du module</guimenuitem>."
+
+#: ../C/xiphos.xml:222(para)
+msgid "The per-language selection made under Preferences, here."
+msgstr "Les préférences de police, par langue, ici dans les préférences."
+
+#: ../C/xiphos.xml:227(para)
+msgid "The module's own default selection, in its configuration file."
+msgstr ""
+"La configuration par défaut du module, définie dans son fichier de "
+"configuration."
+
+#: ../C/xiphos.xml:232(para)
+msgid "The application default."
+msgstr "La configuration par défaut de l'application."
+
+#: ../C/xiphos.xml:243(title)
 msgid "Module Settings"
 msgstr "Configuration des modules"
 
-#: ../C/xiphos.xml:186(title) ../C/xiphos.xml:199(phrase)
+#: ../C/xiphos.xml:245(title) ../C/xiphos.xml:258(phrase)
 msgid "Parallel Preferences"
 msgstr "Préférences des vues parallèles"
 
-#: ../C/xiphos.xml:206(title)
+#: ../C/xiphos.xml:265(title)
 msgid "Various preferences Modules"
 msgstr "Préférences diverses des modules"
 
-#: ../C/xiphos.xml:219(phrase)
+#: ../C/xiphos.xml:278(phrase)
 msgid "Various Preferences Modules"
 msgstr "Préférences diverses des modules"
 
@@ -4206,6 +4268,119 @@ msgstr "Barre de menu"
 #: ../C/interface.xml:0(None)
 msgid "translator-credits"
 msgstr "Accréditions aux traducteurs"
+
+#~ msgid ""
+#~ "@@image: 'figures/gtkhtml3-vs-mozembed.png'; "
+#~ "md5=deec924e49812ac32cfd027e53d2b193"
+#~ msgstr "gtkhtml3-vs-mozembed.png"
+
+#~ msgid ""
+#~ "In order to view a Bible translation separate from the "
+#~ "<application>Xiphos</application> interface:"
+#~ msgstr ""
+#~ "Pour ouvrir le texte biblique dans une fenêtre distincte de la fenêtre "
+#~ "principale de <application>&appname;</application> :"
+
+#~ msgid "Version Differences in <application>Xiphos</application>' Display"
+#~ msgstr "Différences d'affichage dans <application>&appname;</application> :"
+
+#~ msgid ""
+#~ "The <application>Xiphos</application> interface has evolved over time, "
+#~ "and there are two display libraries with which <application>Xiphos</"
+#~ "application> can be built. The older, less featureful version is called "
+#~ "\"gtkhtml3\", and the newer, more capable version is called \"MozEmbed\". "
+#~ "Both of these display libraries render text in a browser-like fashion, "
+#~ "using HTML constructs to control display."
+#~ msgstr ""
+#~ "L'application <application>&appname;</application> a évolué au niveau des "
+#~ "possibilités d'affichage. <application>&appname;</application> peut être "
+#~ "compilé avec l'une des 2 bibliothèques suivantes au choix. La plus "
+#~ "ancienne, moins complète se nomme «&#160;gtkhtml3&#160;», et la nouvelle "
+#~ "offrant plus de possibilités est «&#160;MozEmbed&#160;»."
+
+#~ msgid ""
+#~ "Several desirable capabilities are unsupportable in gtkhtml3, and "
+#~ "although recent <application>Xiphos</application> is written to take "
+#~ "advantage of MozEmbed features, it is possible that the version running "
+#~ "on your computer needed to be built with gtkhtml3 instead, either because "
+#~ "the version of MozEmbed available for your system is not recent enough to "
+#~ "support the needs of <application>Xiphos</application>, or it simply "
+#~ "doesn't exist for your system. (Mozembed is not supported under Windows "
+#~ "at this time.) The following differences will be apparent, depending on "
+#~ "whether gtkhtml3 or MozEmbed is the underlying display engine:"
+#~ msgstr ""
+#~ "Un certain nombre de fonctionalités de <application>&appname;</"
+#~ "application> ne sont pas supportées par «&#160;gtkhtml3&#160;». Bien que "
+#~ "<application>&appname;</application> soit écrit pour tirer parti des "
+#~ "possibilités de «&#160;MozEmbed&#160;», il est possible que la version "
+#~ "installée sur votre système ait été construite avec «&#160;"
+#~ "gtkhtml3&#160;», soit parceque la version de MozEmbed n'est pas "
+#~ "suffisamment récente soit tout simplement parce qu'elle n'existe pas. "
+#~ "(Note: «&#160;MozEmbed&#160;» n'est passupporté par Window pour le "
+#~ "moment). Les différences suivantes se feront observer selon l'utilisation "
+#~ "de «&#160;gtkhtml3&#160;» ou «&#160;MozEmbed&#160;» comme moteur "
+#~ "d'affichage :"
+
+#~ msgid ""
+#~ "Morphology and Strong's references, enabled via the right-click menu in "
+#~ "some modules, are displayed inline with gtkhtml3; with MozEmbed, a "
+#~ "blocked display is used, where these references are aligned beneath the "
+#~ "word to which they refer, for a much more readable, less cluttered "
+#~ "display."
+#~ msgstr ""
+#~ "Les étiquettes morphologiques ainsi que les références de Strong, "
+#~ "activées via un menu contextuel dans certains modules, sont affichées "
+#~ "dans le corps du texte avec  «&#160;gtkhtml3&#160;». Avec «&#160;"
+#~ "MozEmbed&#160;», ces références sont alignées au-dessous du mot "
+#~ "auxquelles elles se rapportent de façon à procurer un affichage plus aéré "
+#~ "et plus lisible."
+
+#~ msgid ""
+#~ "Footnote and cross-reference markers (<guibutton>*n</guibutton>, "
+#~ "<guibutton>*x</guibutton>) are displayed as proper superscripts in "
+#~ "MozEmbed, but not in gtkhtml3."
+#~ msgstr ""
+#~ "Les notes de pied de page et les références croisées (<guibutton>*n</"
+#~ "guibutton>,·<guibutton>*x</guibutton>) s'affichent en mode exposant avec "
+#~ "«&#160;MozEmbed&#160;»."
+
+#~ msgid ""
+#~ "Links in gtkhtml3 are necessarily both colored and underlined; in "
+#~ "MozEmbed, no underlines are needed."
+#~ msgstr ""
+#~ "Les liens avec «&#160;gtkhtml3&#160;» sont à la fois colorés et "
+#~ "soulignés. Ils ne sont pas soulignés avec «&#160;MozEmbed&#160;»."
+
+#~ msgid ""
+#~ "Under MozEmbed, double-space display is available using the context menu, "
+#~ "but not under gtkhtml3."
+#~ msgstr ""
+#~ "Avec « MozEmbed », l'affichage en double espacement du texte est "
+#~ "activable à l'aide du menu <guimenuitem>Affichage</guimenuitem>, cette "
+#~ "option est indisponible avec « gtkhtml »."
+
+#~ msgid ""
+#~ "It is not possible for gtkhtml3 to interpret multiple font face "
+#~ "directives in a single window, so the gtkhtml3 detached parallel view "
+#~ "window cannot provide per-module font selections. Also, modules' internal "
+#~ "font requests are ignored in any gtkhtml3 window."
+#~ msgstr ""
+#~ "Gtkhtml3 ne sait pas interpréter les directives de polices multiples dans "
+#~ "une même fenêtre, c'est pourquoi la fenêtre détachée «&#160;Vue "
+#~ "parallèle&#160;» ne permet pas une sélection de police par module."
+
+#~ msgid ""
+#~ "Using the \"About Xiphos\" selection under the <guimenuitem>Help</"
+#~ "guimenuitem> menu, you will see the display library with which "
+#~ "<application>Xiphos</application> was built."
+#~ msgstr ""
+#~ "En utilisant le menu <menuchoice><guimenuitem>Aide</"
+#~ "guimenuitem><guimenuitem>À propos de Xiphos</guimenuitem></menuchoice>, "
+#~ "il est possible de connaître la bibliothèque avec laquelle "
+#~ "<application>&appname;</application> a été construit."
+
+#~ msgid "Comparison, gtkhtml3 -vs- mozembed"
+#~ msgstr "Comparaison d'affichage entre gtkhtml3 et mozembed"
 
 #~ msgid ""
 #~ "@@image: 'figures/interface.png'; md5=b0167fed338a11d27d137c07f33a75e8"
