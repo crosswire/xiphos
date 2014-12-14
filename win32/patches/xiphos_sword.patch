@@ -181,10 +181,9 @@ index 0000000..69975c5
 +  )
 +endmacro(libfind_library)
 +
-diff --git a/src/mgr/curlftpt.cpp b/src/mgr/curlftpt.cpp
-index 165c054..90c8931 100644
---- a/src/mgr/curlftpt.cpp
-+++ b/src/mgr/curlftpt.cpp
+diff -ru a/src/mgr/curlftpt.cpp b/src/mgr/curlftpt.cpp
+--- a/src/mgr/curlftpt.cpp	2013-09-14 17:51:47.000000000 -0400
++++ b/src/mgr/curlftpt.cpp	2014-12-13 17:08:18.372722164 -0500
 @@ -29,6 +29,8 @@
  
  #include <swlog.h>
@@ -194,7 +193,7 @@ index 165c054..90c8931 100644
  
  SWORD_NAMESPACE_START
  
-@@ -58,7 +60,7 @@ namespace {
+@@ -58,7 +60,7 @@
  		struct FtpFile *out=(struct FtpFile *)stream;
  		if (out && !out->stream && !out->destBuf) {
  			/* open file for writing */
@@ -203,18 +202,30 @@ index 165c054..90c8931 100644
  			if (!out->stream)
  				return -1; /* failure, can't open file to write */
  		}
-@@ -141,7 +143,6 @@ char CURLFTPTransport::getURL(const char *destPath, const char *sourceURL, SWBuf
- 	
- 	if (session) {
+diff -ru a/src/mgr/curlhttpt.cpp b/src/mgr/curlhttpt.cpp
+--- a/src/mgr/curlhttpt.cpp	2013-09-14 17:51:47.000000000 -0400
++++ b/src/mgr/curlhttpt.cpp	2014-12-13 18:38:40.272169260 -0500
+@@ -34,6 +34,8 @@
  
--		struct MyProgressData pd;
- 		pd.sr = statusReporter;
- 		pd.term = &term;
+ using std::vector;
  
-diff --git a/src/mgr/filemgr.cpp b/src/mgr/filemgr.cpp
-index fc4afd9..a33d06e 100644
---- a/src/mgr/filemgr.cpp
-+++ b/src/mgr/filemgr.cpp
++#include <glib.h>
++#include <glib/gstdio.h>
+ 
+ SWORD_NAMESPACE_START
+ 
+@@ -50,7 +52,7 @@
+ 		struct FtpFile *out=(struct FtpFile *)stream;
+ 		if (out && !out->stream && !out->destBuf) {
+ 			/* open file for writing */
+-			out->stream=fopen(out->filename, "wb");
++			out->stream=g_fopen(out->filename, "wb");
+ 			if (!out->stream)
+ 				return -1; /* failure, can't open file to write */
+ 		}
+diff -ru a/src/mgr/filemgr.cpp b/src/mgr/filemgr.cpp
+--- a/src/mgr/filemgr.cpp	2013-06-29 02:40:28.000000000 -0400
++++ b/src/mgr/filemgr.cpp	2014-12-13 17:04:37.527125131 -0500
 @@ -23,6 +23,8 @@
  
  #include <filemgr.h>
@@ -224,31 +235,32 @@ index fc4afd9..a33d06e 100644
  
  #include <dirent.h>
  #include <fcntl.h>
-@@ -38,6 +40,8 @@
- #include <unistd.h>
- #endif
- 
-+#include <glib.h>
-+#include <glib/gstdio.h>
- 
- #ifndef O_BINARY
- #define O_BINARY 0
-@@ -124,7 +128,7 @@ FileDesc::FileDesc(FileMgr *parent, const char *path, int mode, int perms, bool
+@@ -124,7 +126,7 @@
  
  FileDesc::~FileDesc() {
  	if (fd > 0)
 -		close(fd);
-+	  ::close(fd);
++		::close(fd);
  		
  	if (path)
  		delete [] path;
-@@ -226,14 +230,14 @@ int FileMgr::sysOpen(FileDesc *file) {
+@@ -226,14 +228,23 @@
  				file->next = files;
  				files = file;
  			}
 -			if ((!access(file->path, 04)) || ((file->mode & O_CREAT) == O_CREAT)) {	// check for at least file exists / read access before we try to open
+-				char tries = (((file->mode & O_RDWR) == O_RDWR) && (file->tryDowngrade)) ? 2 : 1;  // try read/write if possible
 +			if ((!g_access(file->path, 04)) || ((file->mode & O_CREAT) == O_CREAT)) {	// check for at least file exists / read access before we try to open
- 				char tries = (((file->mode & O_RDWR) == O_RDWR) && (file->tryDowngrade)) ? 2 : 1;  // try read/write if possible
++//				char tries = (((file->mode & O_RDWR) == O_RDWR) && (file->tryDowngrade)) ? 2 : 1;  // try read/write if possible
++
++				// xiphos glib damage compat hack.
++				// recent g_open interferes, preventing open(RDWR) when
++				// an instance of that file is already open RDWR.
++				// this may damage something in sword - not sure - but this
++				// hack makes genbooks work again.  genbooks is all that
++				// fails to work without this hack.
++				char tries = 2;
++
  				for (int i = 0; i < tries; i++) {
  					if (i > 0) {
  						file->mode = (file->mode & ~O_RDWR);	// remove write access
@@ -259,7 +271,7 @@ index fc4afd9..a33d06e 100644
  
  					if (file->fd >= 0)
  						break;
-@@ -276,7 +280,7 @@ signed char FileMgr::trunc(FileDesc *file) {
+@@ -276,7 +287,7 @@
  		if (i == 9999)
  			return -2;
  
@@ -268,7 +280,7 @@ index fc4afd9..a33d06e 100644
  		if (fd < 0)
  			return -3;
  	
-@@ -290,7 +294,7 @@ signed char FileMgr::trunc(FileDesc *file) {
+@@ -290,7 +301,7 @@
  		if (size < 1) {
  			// zero out the file
  			::close(file->fd);
@@ -277,7 +289,7 @@ index fc4afd9..a33d06e 100644
  			::close(file->fd);
  			file->fd = -77;	// force file open by filemgr
  			// copy tmp file back (dumb, but must preserve file permissions)
-@@ -328,7 +332,7 @@ signed char FileMgr::existsFile(const char *ipath, const char *ifileName)
+@@ -328,7 +339,7 @@
  		ch = path + strlen(path);
  		sprintf(ch, "/%s", ifileName);
  	}
@@ -286,7 +298,7 @@ index fc4afd9..a33d06e 100644
  	delete [] path;
  	return retVal;
  }
-@@ -350,7 +354,7 @@ signed char FileMgr::existsDir(const char *ipath, const char *idirName)
+@@ -350,7 +361,7 @@
  		ch = path + strlen(path);
  		sprintf(ch, "/%s", idirName);
  	}
@@ -295,7 +307,7 @@ index fc4afd9..a33d06e 100644
  	delete [] path;
  	return retVal;
  }
-@@ -369,17 +373,13 @@ int FileMgr::createParent(const char *pName) {
+@@ -369,17 +380,13 @@
  	}
  	buf[end] = 0;
  	if (strlen(buf)>0) {
@@ -316,7 +328,7 @@ index fc4afd9..a33d06e 100644
  					);
  			}
  		}
-@@ -391,7 +391,7 @@ int FileMgr::createParent(const char *pName) {
+@@ -391,7 +398,7 @@
  	
  
  int FileMgr::openFileReadOnly(const char *fName) {
@@ -325,7 +337,7 @@ index fc4afd9..a33d06e 100644
  	return fd;
  }
  
-@@ -399,10 +399,10 @@ int FileMgr::openFileReadOnly(const char *fName) {
+@@ -399,10 +406,10 @@
  int FileMgr::createPathAndFile(const char *fName) {
  	int fd;
  	
@@ -338,7 +350,7 @@ index fc4afd9..a33d06e 100644
  	}
  	return fd;
  }
-@@ -412,7 +412,7 @@ int FileMgr::copyFile(const char *sourceFile, const char *targetFile) {
+@@ -412,7 +419,7 @@
  	int sfd, dfd, len;
  	char buf[4096];
  
@@ -347,7 +359,7 @@ index fc4afd9..a33d06e 100644
  		return -1;
  	if ((dfd = createPathAndFile(targetFile)) < 1)
  		return -1;
-@@ -430,7 +430,7 @@ int FileMgr::copyFile(const char *sourceFile, const char *targetFile) {
+@@ -430,7 +437,7 @@
  
  
  int FileMgr::removeFile(const char *fName) {
@@ -356,7 +368,7 @@ index fc4afd9..a33d06e 100644
  }
  
  char FileMgr::getLine(FileDesc *fDesc, SWBuf &line) {
-@@ -507,14 +507,14 @@ char FileMgr::isDirectory(const char *path) {
+@@ -507,14 +514,14 @@
  
  
  int FileMgr::copyDir(const char *srcDir, const char *destDir) {
@@ -379,7 +391,7 @@ index fc4afd9..a33d06e 100644
  				if (!isDirectory(srcPath.c_str())) {
  					copyFile(srcPath.c_str(), destPath.c_str());
  				}
-@@ -523,20 +523,20 @@ int FileMgr::copyDir(const char *srcDir, const char *destDir) {
+@@ -523,20 +530,20 @@
  				}
  			}
  		}
@@ -407,27 +419,19 @@ index fc4afd9..a33d06e 100644
  				if (!isDirectory(targetPath.c_str())) {
  					FileMgr::removeFile(targetPath.c_str());
  				}
-@@ -545,14 +545,8 @@ int FileMgr::removeDir(const char *targetDir) {
+@@ -545,7 +552,7 @@
  				}
  			}
  		}
 -		closedir(dir);
 +		g_dir_close(dir);
  		FileMgr::removeFile(targetDir);
--/*
--		int status = FileMgr::removeFile(targetDir);
--          int stuff = errno;
--          char *err = strerror(errno);
--          int x = stuff;
--*/
- 	}
- 	return 0;
- }
-diff --git a/src/mgr/installmgr.cpp b/src/mgr/installmgr.cpp
-index 20020ea..18122fb 100644
---- a/src/mgr/installmgr.cpp
-+++ b/src/mgr/installmgr.cpp
-@@ -31,6 +31,8 @@ extern "C" {
+ /*
+ 		int status = FileMgr::removeFile(targetDir);
+diff -ru a/src/mgr/installmgr.cpp b/src/mgr/installmgr.cpp
+--- a/src/mgr/installmgr.cpp	2013-09-14 17:51:47.000000000 -0400
++++ b/src/mgr/installmgr.cpp	2014-12-13 16:59:41.056667381 -0500
+@@ -31,6 +31,8 @@
  #include <utilstr.h>
  
  #include <fcntl.h>
@@ -436,7 +440,7 @@ index 20020ea..18122fb 100644
  
  #include <swmgr.h>
  #include <swmodule.h>
-@@ -270,20 +272,19 @@ int InstallMgr::removeModule(SWMgr *manager, const char *moduleName) {
+@@ -270,20 +272,19 @@
  		}
  		else {	//remove all files in DataPath directory
  
@@ -463,7 +467,7 @@ index 20020ea..18122fb 100644
  						SWConfig *config = new SWConfig(modFile.c_str());
  						if (config->Sections.find(modName) != config->Sections.end()) {
  							delete config;
-@@ -291,8 +292,8 @@ int InstallMgr::removeModule(SWMgr *manager, const char *moduleName) {
+@@ -291,8 +292,8 @@
  						}
  						else	delete config;
  					}
@@ -474,7 +478,7 @@ index 20020ea..18122fb 100644
  			}
  		}
  		return 0;
-@@ -401,8 +402,8 @@ int InstallMgr::installModule(SWMgr *destMgr, const char *fromLocation, const ch
+@@ -401,8 +402,8 @@
  	SWBuf buffer;
  	bool aborted = false;
  	bool cipher = false;
@@ -485,7 +489,7 @@ index 20020ea..18122fb 100644
  	SWBuf modFile;
  
  	SWLog::getSystemLog()->logDebug("***** InstallMgr::installModule\n");
-@@ -514,18 +515,18 @@ int InstallMgr::installModule(SWMgr *destMgr, const char *fromLocation, const ch
+@@ -514,18 +515,18 @@
  		}
  		if (!aborted) {
  			SWBuf confDir = sourceDir + "mods.d/";
@@ -510,7 +514,7 @@ index 20020ea..18122fb 100644
  							FileMgr::copyFile(modFile.c_str(), targetFile.c_str());
  							if (cipher) {
  								if (getCipherCode(modName, config)) {
-@@ -542,7 +543,7 @@ int InstallMgr::installModule(SWMgr *destMgr, const char *fromLocation, const ch
+@@ -542,7 +543,7 @@
  						delete config;
  					}
  				}
@@ -519,10 +523,9 @@ index 20020ea..18122fb 100644
  			}
  		}
  		return (aborted) ? -1 : 0;
-diff --git a/src/mgr/swmgr.cpp b/src/mgr/swmgr.cpp
-index a497b7c..dcc5466 100644
---- a/src/mgr/swmgr.cpp
-+++ b/src/mgr/swmgr.cpp
+diff -ru a/src/mgr/swmgr.cpp b/src/mgr/swmgr.cpp
+--- a/src/mgr/swmgr.cpp	2014-04-16 23:50:37.000000000 -0400
++++ b/src/mgr/swmgr.cpp	2014-12-13 16:59:41.056667381 -0500
 @@ -23,6 +23,8 @@
  #include <stdio.h>
  #include <stdlib.h>
@@ -532,7 +535,7 @@ index a497b7c..dcc5466 100644
  
  #include <sys/stat.h>
  #ifndef _MSC_VER
-@@ -297,10 +299,10 @@ void SWMgr::init() {
+@@ -297,10 +299,10 @@
  SWBuf SWMgr::getHomeDir() {
  
  	// figure out 'home' directory for app data
@@ -545,7 +548,7 @@ index a497b7c..dcc5466 100644
  	}
  	if (homeDir.length()) {
  		if ((homeDir[homeDir.length()-1] != '\\') && (homeDir[homeDir.length()-1] != '/')) {
-@@ -483,7 +485,7 @@ void SWMgr::findConfig(char *configType, char **prefixPath, char **configPath, s
+@@ -483,7 +485,7 @@
  			// check environment variable SWORD_PATH
  			SWLog::getSystemLog()->logDebug("Checking $SWORD_PATH...");
  
@@ -554,7 +557,7 @@ index a497b7c..dcc5466 100644
  			if (envsworddir.length()) {
  				
  				SWLog::getSystemLog()->logDebug("found (%s).", envsworddir.c_str());
-@@ -614,14 +616,15 @@ void SWMgr::findConfig(char *configType, char **prefixPath, char **configPath, s
+@@ -614,14 +616,15 @@
  
  	SWLog::getSystemLog()->logDebug("Checking $ALLUSERSPROFILE/Application Data/sword/...");
  
@@ -572,7 +575,7 @@ index a497b7c..dcc5466 100644
  		SWLog::getSystemLog()->logDebug("Checking %s for mods.d...", path.c_str());
  		if (FileMgr::existsDir(path.c_str(), "mods.d")) {
  			SWLog::getSystemLog()->logDebug("found.");
-@@ -663,7 +666,7 @@ void SWMgr::findConfig(char *configType, char **prefixPath, char **configPath, s
+@@ -663,7 +666,7 @@
  
  	if (homeDir.length()) {
  		path = homeDir;
@@ -581,7 +584,7 @@ index a497b7c..dcc5466 100644
  		SWLog::getSystemLog()->logDebug("  Checking for %smods.conf...", path.c_str());
  		if (FileMgr::existsFile(path.c_str(), "mods.conf")) {
  			SWLog::getSystemLog()->logDebug("found.");
-@@ -700,29 +703,29 @@ void SWMgr::findConfig(char *configType, char **prefixPath, char **configPath, s
+@@ -700,29 +703,29 @@
  
  void SWMgr::loadConfigDir(const char *ipath)
  {
@@ -619,7 +622,7 @@ index a497b7c..dcc5466 100644
  		
  		if (!config) {	// if no .conf file exist yet, create a default
  			newmodfile = ipath;
-@@ -842,7 +845,7 @@ signed char SWMgr::Load() {
+@@ -842,7 +845,7 @@
  			SWBuf homeDir = getHomeDir();
  			if (homeDir.length() && configType != 2) { // 2 = user only
  				SWBuf path = homeDir;
@@ -628,7 +631,7 @@ index a497b7c..dcc5466 100644
  				augmentModules(path.c_str(), mgrModeMultiMod);
  				path = homeDir;
  				path += "sword/";
-@@ -1331,21 +1334,21 @@ void SWMgr::deleteModule(const char *modName) {
+@@ -1331,21 +1334,21 @@
  
  void SWMgr::InstallScan(const char *dirname)
  {
@@ -657,7 +660,7 @@ index a497b7c..dcc5466 100644
  
  					// mods.d
  					if (configType) {
-@@ -1354,7 +1357,7 @@ void SWMgr::InstallScan(const char *dirname)
+@@ -1354,7 +1357,7 @@
  						targetName = configPath;
  						if ((configPath[strlen(configPath)-1] != '\\') && (configPath[strlen(configPath)-1] != '/'))
  							targetName += "/";
@@ -666,7 +669,7 @@ index a497b7c..dcc5466 100644
  						conffd = FileMgr::getSystemFileMgr()->open(targetName.c_str(), FileMgr::WRONLY|FileMgr::CREAT, FileMgr::IREAD|FileMgr::IWRITE);
  					}
  
-@@ -1376,7 +1379,7 @@ void SWMgr::InstallScan(const char *dirname)
+@@ -1376,7 +1379,7 @@
  			}
  			if (conffd)
  				FileMgr::getSystemFileMgr()->close(conffd);
@@ -675,10 +678,9 @@ index a497b7c..dcc5466 100644
  		}
  	}
  }
-diff --git a/src/utilfuns/zlib/untgz.c b/src/utilfuns/zlib/untgz.c
-index a7b7164..9da6131 100644
---- a/src/utilfuns/zlib/untgz.c
-+++ b/src/utilfuns/zlib/untgz.c
+diff -ru a/src/utilfuns/zlib/untgz.c b/src/utilfuns/zlib/untgz.c
+--- a/src/utilfuns/zlib/untgz.c	2013-07-13 09:52:53.000000000 -0400
++++ b/src/utilfuns/zlib/untgz.c	2014-12-13 16:59:41.057667380 -0500
 @@ -5,6 +5,9 @@
   * adaptation to Unix by Jean-loup Gailly <jloup@gzip.org>
   */
@@ -689,7 +691,7 @@ index a7b7164..9da6131 100644
  #include <stdio.h>
  #include <stdlib.h>
  #include <string.h>
-@@ -210,7 +213,7 @@ int makedir (char *newdir)
+@@ -210,7 +213,7 @@
    if (buffer[len-1] == '/') {
      buffer[len-1] = '\0';
    }
@@ -698,7 +700,7 @@ index a7b7164..9da6131 100644
      {
        free(buffer);
        return 1;
-@@ -225,7 +228,7 @@ int makedir (char *newdir)
+@@ -225,7 +228,7 @@
  	p++;
        hold = *p;
        *p = 0;
@@ -707,7 +709,7 @@ index a7b7164..9da6131 100644
  	{
  	  fprintf(stderr,"%s: couldn't create directory %s\n",prog,buffer);
  	  free(buffer);
-@@ -300,15 +303,15 @@ int untar (gzFile in, const char *dest) {
+@@ -300,15 +303,15 @@
  			case AREGTYPE:
  				remaining = getoct(buffer.header.size,12);
  				if (remaining) {
@@ -726,7 +728,7 @@ index a7b7164..9da6131 100644
  						}
  					}
  /*
-@@ -353,7 +356,11 @@ int untar (gzFile in, const char *dest) {
+@@ -353,7 +356,11 @@
  
  					localt = *localtime(&tartime);
  
