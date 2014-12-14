@@ -24,7 +24,7 @@ msgstr ""
 "Project-Id-Version: Xiphos 3.4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-06-17 07:30-0400\n"
-"PO-Revision-Date: 2014-12-13 22:41+0100\n"
+"PO-Revision-Date: 2014-12-14 20:51+0100\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: emacs + po-mode <gnomefr@traduc.org>\n"
 "Language: \n"
@@ -2285,7 +2285,7 @@ msgid ""
 msgstr ""
 "Le module %s a les modules compagnons :\n"
 "%s.\n"
-"Voulez-vous les ouvrir également?"
+"Voulez-vous les ouvrir également?%s"
 
 #: ../src/main/sword.cc:1018 ../src/main/sword.cc:1183
 msgid ""
@@ -3644,19 +3644,19 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:35 ../ui/prefs.gtkbuilder.h:35
 msgid "Mode"
-msgstr ""
+msgstr "Mode"
 
 #: ../ui/prefs.glade.h:36 ../ui/prefs.gtkbuilder.h:36
 msgid "Select the mode in which BibleSync should operate."
-msgstr ""
+msgstr "Sélectionne le mode dans lequel BibleSync doit opérer."
 
 #: ../ui/prefs.glade.h:37 ../ui/prefs.gtkbuilder.h:37
 msgid "_Off"
-msgstr ""
+msgstr "_Inactif"
 
 #: ../ui/prefs.glade.h:38 ../ui/prefs.gtkbuilder.h:38
 msgid "Disable BibleSync."
-msgstr ""
+msgstr "Désactive BibleSync"
 
 #: ../ui/prefs.glade.h:39 ../ui/prefs.gtkbuilder.h:39
 msgid "BSP off radio button"
@@ -3727,7 +3727,7 @@ msgstr "_Direct"
 
 #: ../ui/prefs.glade.h:55 ../ui/prefs.gtkbuilder.h:55
 msgid "BibleSync navigation will send Xiphos directly to the verse indicated."
-msgstr ""
+msgstr "La navigation BibleSync enverra Xiphos directement au verset indiqué."
 
 #: ../ui/prefs.glade.h:56 ../ui/prefs.gtkbuilder.h:56
 msgid "BSP nav direct radio button"
@@ -3739,7 +3739,7 @@ msgstr "Liste de _versets"
 
 #: ../ui/prefs.glade.h:58 ../ui/prefs.gtkbuilder.h:58
 msgid "BibleSync navigation will use Xiphos' sidebar verse list."
-msgstr ""
+msgstr "La navigation BibleSync utilisera la liste de versets de la barre latérale de Xiphos. "
 
 #: ../ui/prefs.glade.h:59 ../ui/prefs.gtkbuilder.h:59
 msgid "BSP nav verse list radio button"
@@ -3770,7 +3770,6 @@ msgid "All"
 msgstr "Tous"
 
 #: ../ui/prefs.glade.h:66 ../ui/prefs.gtkbuilder.h:66
-#, fuzzy
 msgid "All Speakers will be followed."
 msgstr "Tous les Conférenciers seront reçus."
 
@@ -3796,6 +3795,10 @@ msgid ""
 "presence, mismatch, and debug. Beware enabling these, they can be very "
 "chatty. Also, decide whether to allow group parameter as Xiphos' tab number."
 msgstr ""
+"Des traces supplémentaires peuvent être afichées pendant le fonctionnement de \n"
+"BibleSync en autorisant présence, incohérences, et débogage. Attention ceux-ci\n"
+"peuvent être très bavards. Voir aussi s'il faut autoriser le paramètre de groupe \n"
+"comme numéro d'onglet de Xiphos."
 
 #: ../ui/prefs.glade.h:73 ../ui/prefs.gtkbuilder.h:73
 msgid "Presence"
@@ -3803,7 +3806,7 @@ msgstr "Présence"
 
 #: ../ui/prefs.glade.h:74 ../ui/prefs.gtkbuilder.h:74
 msgid "Presence announcements will be shown in dialogs."
-msgstr ""
+msgstr "Les indications de présence seront affichées."
 
 #: ../ui/prefs.glade.h:75 ../ui/prefs.gtkbuilder.h:75
 msgid "BSP presence button"
@@ -3811,15 +3814,15 @@ msgstr "Bouton présence BSP"
 
 #: ../ui/prefs.glade.h:76 ../ui/prefs.gtkbuilder.h:76
 msgid "Mismatch"
-msgstr "Défaut d'appariement"
+msgstr "Incohérences"
 
 #: ../ui/prefs.glade.h:77 ../ui/prefs.gtkbuilder.h:77
 msgid "Mismatches from your session will be shown in dialogs."
-msgstr ""
+msgstr "Les incohérences survenant pendant une session seront affichées."
 
 #: ../ui/prefs.glade.h:78 ../ui/prefs.gtkbuilder.h:78
 msgid "BSP mismatch button"
-msgstr ""
+msgstr "Bouton incohérences BSP"
 
 #: ../ui/prefs.glade.h:79 ../ui/prefs.gtkbuilder.h:79
 msgid "Debug"
@@ -3843,6 +3846,10 @@ msgid ""
 "Disabling this may be necessary if some Speakers' use of group number is not "
 "appropriate as a tab number."
 msgstr ""
+"Interpréte le paramètre du numéro du groupe du protocole comme numéro d'onglet de \n"
+"Xiphos.\"\n"
+"La désactivation peut être nécessaire si l'utilisation du numéro de groupe par \n"
+"certains conférenciers n'est pas approprié comme numéro d'onglet.\""
 
 #: ../ui/prefs.glade.h:84 ../ui/prefs.gtkbuilder.h:84
 msgid "BSP event group-as-tab button"
@@ -3982,7 +3989,7 @@ msgstr "Numéro de verset"
 
 #: ../ui/prefs.glade.h:115 ../ui/prefs.gtkbuilder.h:115
 msgid "Offset the verse number in several ways"
-msgstr ""
+msgstr "Décale le numéro du verset de plusieurs façons"
 
 #: ../ui/prefs.glade.h:117 ../ui/prefs.gtkbuilder.h:117
 msgid "Show verse number in bold text"
@@ -4940,8 +4947,7 @@ msgstr "Enregistre la liste sous un seul signet"
 
 #: ../ui/xi-menus.glade.h:98 ../ui/xi-menus-popup.gtkbuilder.h:87
 msgid "Save these results as a series of bookmarks in their own folder"
-msgstr ""
-"Enregistre ces résultats sous une série de signets dans leur propre dossier"
+msgstr "Enregistre ces résultats sous une série de signets dans leur propre dossier"
 
 #: ../ui/xi-menus.glade.h:99 ../ui/xi-menus-popup.gtkbuilder.h:86
 msgid "Save list as a series of bookmarks"
@@ -4951,7 +4957,7 @@ msgstr "Enregistre la liste dans une série de signets"
 msgid ""
 "Provide a dialog in which to paste a line of verse references, to fill the "
 "verse list."
-msgstr ""
+msgstr "Ouvre une boîte de dialogue dans laquelle coller une ligne de références de versets, permet de remplir la liste de versets."
 
 #: ../ui/xi-menus.glade.h:101 ../ui/xi-menus-popup.gtkbuilder.h:88
 msgid "Populate verse list"
