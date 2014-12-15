@@ -2505,7 +2505,7 @@ on_dialog_destroy(GObject * object, gpointer user_data)
 	}
 	if (!main_is_module(settings.DictWindowModule)) {
 		if ((tmp = get_list(DICT_LIST)))
-			main_display_commentary((char *)tmp->data, settings.dictkey);
+			main_display_dictionary((char *)tmp->data, settings.dictkey);
 	}
 	if (!main_is_module(settings.book_mod)) {
 		if ((tmp = get_list(GBS_LIST)))
