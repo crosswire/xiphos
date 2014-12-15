@@ -27,6 +27,8 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <libxml/parser.h>
+#include <glib.h>
+#include <glib/gstdio.h>
 
 #include "main/lists.h"
 #include "main/settings.h"
@@ -530,9 +532,7 @@ int xml_create_copy_export_file(char *path)
 	xmlNewTextChild(section_node, NULL, (const xmlChar *) "plain_first", (const xmlChar *) _("(%s %d:%d-%d%s)\n"));
 
 
-	xmlSaveFormatFile (path, 
-			   xml_doc, 
-			   1);
+	xmlSaveFormatFile (path, xml_doc, 1);
 	xmlFreeDoc(xml_doc);
 	return 1;
 }
@@ -1319,8 +1319,8 @@ void xml_save_settings_doc(char *name)
 	char *backup_name = g_strdup_printf("%s.SAVE", name);
 
 	/* preserve a good backup if possible. */
-	unlink(backup_name);
-	rename(name, backup_name);
+	g_unlink(backup_name);
+	g_rename(name, backup_name);
 	g_free(backup_name);
 
 	/* save the new one. */
@@ -1332,8 +1332,8 @@ void xml_save_settings_doc(char *name)
 		char *msg = g_strdup_printf(_("Save of settings failed! stat %d, size %d\n%s"),
 					    retval, (int)buf.st_size,
 					    _("Attempting to revert to previous save."));
-		unlink(name);
-		rename(backup_name, name);
+		g_unlink(name);
+		g_rename(backup_name, name);
 		gui_generic_warning_modal(msg);
 		g_free(msg);
 	}

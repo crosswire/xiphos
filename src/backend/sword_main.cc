@@ -316,7 +316,8 @@ int BackEnd::is_Bible_key(const char *module_name, const char * list, const char
 	SWModule *mod = get_SWModule(module_name);
 	if (!mod) return 0;
 
-	VerseKey *key = (VerseKey *)(SWKey *)(*mod);
+	VerseKey *key = dynamic_cast<VerseKey *>(mod->getKey());
+	if (!key) return 0;
 
 	key->setText(current_key);
 	ListKey vs = key->parseVerseList(list, *key);

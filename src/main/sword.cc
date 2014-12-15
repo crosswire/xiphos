@@ -1019,6 +1019,11 @@ void main_display_commentary(const char * mod_name,
 
 	if (!mod_name || !backend->is_module(mod_name))
 		return;
+
+	int modtype = backend->module_type(mod_name);
+	if ((modtype != COMMENTARY_TYPE) && (modtype != PERCOM_TYPE))
+		return;		// what are we doing here?
+	
 	if (!settings.CommWindowModule)
 		settings.CommWindowModule = g_strdup((gchar*)mod_name);
 
@@ -1182,6 +1187,10 @@ void main_display_bible(const char * mod_name,
 	if (!backend->is_module(mod_name))
 		return;
 
+	int modtype = backend->module_type(mod_name);
+	if (modtype != TEXT_TYPE)
+		return;		// what are we doing here?
+	
 	if (!settings.MainWindowModule)
 		settings.MainWindowModule = g_strdup((gchar*)mod_name);
 
