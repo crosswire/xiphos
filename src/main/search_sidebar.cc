@@ -308,10 +308,10 @@ void main_sidebar_perscomm_dump(void)
 	backendSearch->clear_search_list();
 	fill_search_results_list(backendSearch->do_module_search
 		/* personal commentary */	(settings.CommWindowModule,
-		/* find one character */	".",
+		/* find two-plus characters */	"..+",
 		/* regexp */			0,
 		/* case is irrelevant */	0,
-						 /* happening in sidebar */	FALSE));
+		/* happening in sidebar */	FALSE));
 }
 
 void main_init_sidebar_search_backend(void)

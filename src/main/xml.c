@@ -1314,6 +1314,8 @@ int xml_parse_settings_file(char *file_name)
 
 void xml_save_settings_doc(char *name)
 {
+#ifndef WIN32
+	/* win32 doesn't do the backup right because files are open */
 	int retval;
 	struct stat buf;
 	char *backup_name = g_strdup_printf("%s.SAVE", name);
@@ -1322,10 +1324,12 @@ void xml_save_settings_doc(char *name)
 	g_unlink(backup_name);
 	g_rename(name, backup_name);
 	g_free(backup_name);
+#endif
 
 	/* save the new one. */
 	xmlSaveFormatFile(name, xml_settings_doc, 1);
 
+#ifndef WIN32
 	/* did it save properly? */
 	if (((retval = stat(name, &buf)) < 0) ||
 	    ((retval == 0) && (buf.st_size == 0))) {
@@ -1337,6 +1341,7 @@ void xml_save_settings_doc(char *name)
 		gui_generic_warning_modal(msg);
 		g_free(msg);
 	}
+#endif
 }
 
 
