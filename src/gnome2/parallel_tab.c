@@ -156,7 +156,7 @@ static void sync_with_main(const gchar * key)
 		buf = (gchar*)main_url_encode(key);
 	else
 		buf = (gchar*)main_url_encode(xml_get_value("keys", "verse"));
-	GS_message(("%s",buf));
+	XI_message(("%s",buf));
 	if (buf && (strlen(buf) > 3)) {
 		url =
 		    g_strdup_printf("passagestudy.jsp?action=showParallel&"

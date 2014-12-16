@@ -153,7 +153,7 @@ void main_display_verse_list_in_sidebar(gchar * key,
 
 	is_search_result = FALSE;
 
-	GS_warning(("verse_list = %s",verse_list));
+	XI_warning(("verse_list = %s",verse_list));
 	list_of_verses = g_list_first(list_of_verses);
 	if (list_of_verses) {
 		GList *chaser = list_of_verses;
@@ -256,14 +256,14 @@ static void add_children_to_tree(GtkTreeModel * model, GtkTreeIter iter,
 			   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
 			   -1);
 
-	GS_message(("offset: %ld",backend->get_treekey_offset()));
-	GS_message(("%s",backend->display_mod->getName()));
+	XI_message(("offset: %ld",backend->get_treekey_offset()));
+	XI_message(("%s",backend->display_mod->getName()));
 	if (backend->treekey_first_child(offset)) {
-		GS_message(("treekey_first_child1 %s",mod_name));
+		XI_message(("treekey_first_child1 %s",mod_name));
 
 		offset = backend->get_treekey_offset();
 
-		GS_message(("offset: %ld",offset));
+		XI_message(("offset: %ld",offset));
 
 		sprintf(buf, "%lu", offset);
 		tmpbuf = backend->treekey_get_local_name(offset);
@@ -769,7 +769,7 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 
 	case BOOK_TYPE:
 	case PRAYERLIST_TYPE:
-		GS_message(("key %s", (key ? key : "-null-")));
+		XI_message(("key %s", (key ? key : "-null-")));
 		settings.comm_showing = FALSE;
 		gtk_notebook_set_current_page(GTK_NOTEBOOK
 					      (widgets.
@@ -790,7 +790,7 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 
 #ifdef USE_TREEVIEW_PATH
 		gchar *path_str = gtk_tree_path_to_string (path);
-		GS_message (("path: %s", path_str));
+		XI_message (("path: %s", path_str));
 		gui_save_treeview_path_string (path_str, mod);
 		g_free (path_str);
 #endif /* USE_TREEVIEW_PATH */
@@ -1173,7 +1173,7 @@ void main_load_module_tree(GtkWidget * tree)
 			}
 		}
 		else {
-			GS_warning(("mod `%s' unknown type `%s'",
+			XI_warning(("mod `%s' unknown type `%s'",
 				    info->name, info->type));
 		}
 

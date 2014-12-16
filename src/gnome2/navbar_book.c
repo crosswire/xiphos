@@ -130,7 +130,7 @@ static gboolean lookup_entry_press_callback(GtkWidget * widget,
 		break;
 	}
 	*/
-	GS_message(("lookup_entry_press_callback\nkeycode: %d",event->hardware_keycode));
+	XI_message(("lookup_entry_press_callback\nkeycode: %d",event->hardware_keycode));
 	return FALSE;
 
 

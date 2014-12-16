@@ -148,7 +148,7 @@ void _get_export_filename(void)
 #ifndef USE_GTKBUILDER
 	glade_file = gui_general_user_file("export-dialog" UI_SUFFIX, FALSE);
 	g_return_if_fail(glade_file != NULL);
-	GS_message(("%s",glade_file));
+	XI_message(("%s",glade_file));
 #endif
 
 	/* build the widget */
@@ -314,7 +314,7 @@ gint _check_for_distribution_license(gchar * mod_name)
 						mod_name,
 				 		"DistributionLicense");
 	g_free(conf_file);
-	GS_message(("DistributionLicense: %s",distributionlicense));
+	XI_message(("DistributionLicense: %s",distributionlicense));
 
 	if (!distributionlicense || (distributionlicense &&
 				          g_strstr_len(distributionlicense,
@@ -480,7 +480,7 @@ void gui_export_dialog(void)
 
 	gchar *glade_file = gui_general_user_file("export-dialog" UI_SUFFIX, FALSE);
 	g_return_if_fail(glade_file != NULL);
-	GS_message(("%s",glade_file));
+	XI_message(("%s",glade_file));
 
 	dist_license = _check_for_distribution_license(settings.MainWindowModule);
 

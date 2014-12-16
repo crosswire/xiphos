@@ -132,7 +132,7 @@ static void dialog_set_focus(GtkWindow *window,
 			     DIALOG_DATA *dlg)
 {
 //	cur_dlg = dlg;
-//	GS_warning(("current module = %s",cur_dlg->mod_name));
+//	XI_warning(("current module = %s",cur_dlg->mod_name));
 }
 
 /******************************************************************************

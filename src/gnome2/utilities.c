@@ -215,7 +215,7 @@ void gui_set_statusbar (const gchar * message)
 		gtk_statusbar_push (GTK_STATUSBAR(widgets.appbar),
                                     context_id,
                                     message);
-	GS_message (("context_id: %d\nmessage: %s",context_id,message));
+	XI_message (("context_id: %d\nmessage: %s",context_id,message));
 
 }
 
@@ -313,7 +313,7 @@ void gui_glade_signal_connect_func (const gchar *cb_name, GObject *obj,
 	}
 	else
 	{
-		GS_warning(("callback function not found: %s", cb_name));
+		XI_warning(("callback function not found: %s", cb_name));
 	}
 }
 
@@ -371,7 +371,7 @@ gchar * gui_general_user_file (const char *fname, gboolean critical)
 	i = 0;
 	alternative[i++] = g_strdup (fname);
 #ifdef DEBUG
-	GS_message(("MAINTAINER_MODE"));
+	XI_message(("MAINTAINER_MODE"));
 	/* generally only developers have any use for these */
 	alternative[i++] = g_build_filename("..", fname, NULL);
 	alternative[i++] = g_build_filename("ui", fname, NULL);
@@ -410,7 +410,7 @@ gchar * gui_general_user_file (const char *fname, gboolean critical)
 		if (!g_path_is_absolute (file))
 		{
 			gchar * cwd, *file1;
-			GS_message(("Using %s (usually OK)", file));
+			XI_message(("Using %s (usually OK)", file));
 
 			/* Make it absolute */
 			cwd = g_get_current_dir();
@@ -427,7 +427,7 @@ gchar * gui_general_user_file (const char *fname, gboolean critical)
 	/* if nothing then theres an error */
 	else if (critical)
 	{
-		GS_error(("%s not found", fname));
+		XI_error(("%s not found", fname));
 	}
 
 	/* return result */
@@ -738,7 +738,7 @@ void gui_load_module_tree(GtkWidget * tree, gboolean limited)
 				}
 			}
 			else {
-				GS_warning(("mod `%s' unknown type `%s'",
+				XI_warning(("mod `%s' unknown type `%s'",
 					    info->name, info->type));
 			}
 		}
@@ -1004,7 +1004,7 @@ ncr_to_utf8(gchar * text)
 			newtext = g_string_append(newtext, utf8);
 		} else {
 			g_string_append_printf(newtext, "&#%d;", unicode);
-			GS_message(("ncr2utf8: invalid unicode &#%d;\n", unicode));
+			XI_message(("ncr2utf8: invalid unicode &#%d;\n", unicode));
 		}
 	}
 
@@ -1458,7 +1458,7 @@ gboolean xiphos_open_default (const gchar *file)
 	gunichar2 *w_file;
 	gint rt;
 	w_file = g_utf8_to_utf16(file, -1, NULL, NULL, NULL);
-	GS_message(("opening file %ls", w_file));
+	XI_message(("opening file %ls", w_file));
 	rt = (gint)ShellExecuteW(NULL, L"open", w_file, NULL, NULL, SW_SHOWDEFAULT);
 	return rt > 32;
 
@@ -1466,7 +1466,7 @@ gboolean xiphos_open_default (const gchar *file)
 	GError *error = NULL;
 	gtk_show_uri (NULL, file, gtk_get_current_event_time(), &error);
 	if (error != NULL) {
-		GS_warning(("%s", error->message));
+		XI_warning(("%s", error->message));
 		g_error_free (error);
 		return FALSE;
 	}
@@ -1707,7 +1707,7 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 			// use of ". ..." is to induce proper pauses.
 		else
 			g_string_printf(text, "%s", suppliedtext);
-		GS_message(("ReadAloud: dirty: %s\n", text->str));
+		XI_message(("ReadAloud: dirty: %s\n", text->str));
 
 		// clean: no <span> surrounding strongs/morph.
 		// i wish there was a regexp form of strstr().
@@ -1719,7 +1719,7 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 				while (s <= t)
 					*(s++) = ' ';
 			} else {
-				GS_message(("ReadAloud: Unmatched <span strong></span> in %s\n", s));
+				XI_message(("ReadAloud: Unmatched <span strong></span> in %s\n", s));
 				goto out;
 			}
 		}
@@ -1731,7 +1731,7 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 				while (s <= t)
 					*(s++) = ' ';
 			} else {
-				GS_message(("ReadAloud: Unmatched <span morph></span> in %s\n", s));
+				XI_message(("ReadAloud: Unmatched <span morph></span> in %s\n", s));
 				goto out;
 			}
 		}
@@ -1746,7 +1746,7 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 				while (s <= t)
 					*(s++) = ' ';
 			} else {
-				GS_message(("ReadAloud: Unmatched <> in %s\n", s));
+				XI_message(("ReadAloud: Unmatched <> in %s\n", s));
 				goto out;
 			}
 		}
@@ -1758,7 +1758,7 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 				while (s <= t)
 					*(s++) = ' ';
 			} else {
-				GS_message(("ReadAloud: Unmatched &lt;&gt; in %s\n", s));
+				XI_message(("ReadAloud: Unmatched &lt;&gt; in %s\n", s));
 				goto out;
 			}
 		}
@@ -1786,7 +1786,7 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 				while (s <= t)
 					*(s++) = ' ';
 			} else {
-				GS_message(("ReadAloud: Incomplete &xxx; in %s\n", s));
+				XI_message(("ReadAloud: Incomplete &xxx; in %s\n", s));
 				goto out;
 			}
 		}
@@ -1839,7 +1839,7 @@ ReadAloud(unsigned int verse, const char *suppliedtext)
 			}
 		}
 
-		GS_message(("ReadAloud: clean: %s\n", text->str));
+		XI_message(("ReadAloud: clean: %s\n", text->str));
 		// scribble clean text to the socket.
 		if (FestivalSpeak(text->str, strlen(text->str), tts_socket) == FALSE)
 		{

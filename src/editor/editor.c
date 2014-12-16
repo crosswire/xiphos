@@ -83,7 +83,7 @@ gint editor_insert_new_outline_level (gint level, EDITOR * e)
 	gchar * class = NULL;
 	gchar * level_str = NULL;
 
-	GS_message(("\n%s\n","editor_insert_new_outline_level"));
+	XI_message(("\n%s\n","editor_insert_new_outline_level"));
 	
 	doc = webkit_web_view_get_dom_document ((WebKitWebView*) e->html_widget);
 	
@@ -93,26 +93,26 @@ gint editor_insert_new_outline_level (gint level, EDITOR * e)
 	window = webkit_dom_document_get_default_view(doc);
 	selection = webkit_dom_dom_window_get_selection(window);
 	if(selection == NULL) {
-		GS_message(("\n%s\n","failed to get selection"));
+		XI_message(("\n%s\n","failed to get selection"));
 		return 0;
 	}
 	
 	element_anchor = (WebKitDOMElement*)webkit_dom_dom_selection_get_anchor_node(selection);
 	if(element_anchor == NULL) {
-		GS_message(("\n%s\n","failed to get anchor"));
+		XI_message(("\n%s\n","failed to get anchor"));
 		return 0;
 	}
 	
 	name = webkit_dom_element_get_tag_name(element_anchor);
 	if (!g_strcmp0 ("LI",name) || !g_strcmp0 ("li",name)) {
-		GS_message(("current element: %s",name));
+		XI_message(("current element: %s",name));
 		element = webkit_dom_node_get_parent_element((WebKitDOMNode*)element_anchor);
 	} else return 1;
 	
 	parent_ol_element = webkit_dom_node_get_parent_element((WebKitDOMNode*)element);
 	name = webkit_dom_element_get_tag_name(parent_ol_element);
 	class = webkit_dom_element_get_attribute(parent_ol_element, "class");
-	GS_message(("\nparent_ol_element: %s\nclass: %s\n",name,class));
+	XI_message(("\nparent_ol_element: %s\nclass: %s\n",name,class));
 	
 	if (class) {
 		if (!g_strcmp0 ("L1",class))
@@ -310,7 +310,7 @@ void editor_execute_script(gchar * script, EDITOR * e)
 {
 	if (script) {
 		webkit_web_view_execute_script (WEBKIT_WEB_VIEW (e->html_widget), script);
-		GS_message(("script: %s",script));
+		XI_message(("script: %s",script));
 		g_free (script);
 	}
 }
@@ -337,7 +337,7 @@ void editor_insert_html(const gchar * html, EDITOR * e)
 	gchar * str = NULL;
 	
 	str = g_strdup_printf("document.execCommand('insertHTML', null, \'%s\');", html);  
-	GS_message(("script: %s",str));
+	XI_message(("script: %s",str));
 	editor_execute_script(str, e);
 }
 
@@ -394,7 +394,7 @@ void editor_insert_link_ok (void)
 	gchar *str = NULL;
 	//gint type = -1;
 	if(sword_link) {
-		//GS_message(("%s","sword_link"));
+		//XI_message(("%s","sword_link"));
 		mod_str = gtk_entry_get_text (GTK_ENTRY (entry_module));
 		verse_str = gtk_entry_get_text (GTK_ENTRY (entry_verse));
 		text_str = gtk_entry_get_text (GTK_ENTRY (entry_text));
@@ -496,7 +496,7 @@ gboolean editor_insert_link(void)
 static
 void user_changed_contents_cb (WebKitWebView * web_view, EDITOR * e)
 {	
-	GS_message(("%s","user_changed_contents_cb"));
+	XI_message(("%s","user_changed_contents_cb"));
 	e->is_changed = TRUE;
 }
 
@@ -532,7 +532,7 @@ WebKitNavigationResponse on_navigation_requested (WebKitWebView * web_view,
 	}
 	
 	uri = webkit_network_request_get_uri  (request);
-	GS_message(("on_navigation_requested uri: %s",uri));
+	XI_message(("on_navigation_requested uri: %s",uri));
 	if (g_strstr_len (uri, 6, "file:"))
 		return FALSE;
 	 else
@@ -565,7 +565,7 @@ void link_handler (GtkWidget *widget,
 			      gchar     *uri,
 			      EDITOR * e)
 {
-	GS_message(("link_handler"));
+	XI_message(("link_handler"));
 }
 
 
@@ -658,7 +658,7 @@ gint _has_element(gchar * name, gchar * class, EDITOR * e)
 	if(!g_strcmp0 ("OL",name)){
 	   buttons_state.style = 10;
 		if (class) {
-			GS_message(("\nclass: %s\n",class));
+			XI_message(("\nclass: %s\n",class));
 			if (!g_strcmp0 ("L1",class)) {
 				e->toolitems.outline_level = 1;
 	   			buttons_state.style = 10;
@@ -833,7 +833,7 @@ gint _fill_spell_menu(GtkWidget * menu, gchar * word, EDITOR * e)
 	GtkWidget * item;
 	char** word_list = NULL;
 	
-	GS_message(("\nword: %s\n",word));
+	XI_message(("\nword: %s\n",word));
 	checker	= (WebKitSpellChecker *)webkit_get_text_checker ();
 
 	webkit_spell_checker_check_spelling_of_string (checker,
@@ -1090,7 +1090,7 @@ gboolean button_handler (GtkWidget *widget,
 	i = _has_element(name, class, e);
 	while (i) {
 		if(name) {
-			GS_message(("\nelement name:  %s\nclass:     %s\ncolor: %s\n",name,class,color));
+			XI_message(("\nelement name:  %s\nclass:     %s\ncolor: %s\n",name,class,color));
 			element = webkit_dom_node_get_parent_element((WebKitDOMNode*)element);
 			if(element) {
 				class = webkit_dom_element_get_attribute(element, "class");

@@ -217,7 +217,7 @@ void xml_add_bookmark_to_parent(xmlNodePtr parent,
 
 void xml_write_bookmark_doc(const xmlChar * xml_filename)
 {
-	GS_print(("\nsaving = %s\n", xml_filename));
+	XI_print(("\nsaving = %s\n", xml_filename));
 	xmlSaveFormatFile((const char *) xml_filename, bookmark_doc,1);
 }
 
@@ -963,7 +963,7 @@ char *xml_get_list_from_label(const char *section, const char *item, const char 
 			if (!xmlStrcmp
 			    (cur->name, (const xmlChar *) item)) {
 				prop_label = xmlGetProp(cur, (const xmlChar *) "label");
-				GS_message(("\nprop_label: %s\nlabel: %s",prop_label,label));
+				XI_message(("\nprop_label: %s\nlabel: %s",prop_label,label));
 				if (!xmlStrcmp
 				    (prop_label,
 				     (const xmlChar *) label)) {

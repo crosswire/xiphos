@@ -293,7 +293,7 @@ static gboolean _save_verselist_2_html(BK_EXPORT *data)
 
 	/* not sure how well this will work with windows */
 	if (!g_file_set_contents (filename, str->str, str->len, NULL))
-		GS_warning(("Unable to save %s", filename));
+		XI_warning(("Unable to save %s", filename));
 
 	g_string_free(str,1);
 	return 1;
@@ -521,7 +521,7 @@ static void _save_iter(GtkTreeIter * iter, BK_EXPORT *data)
 
 	/* not sure how well this will work with windows */
 	if (!g_file_set_contents (filename, str->str, str->len, NULL))
-		GS_warning(("Unable to save %s", filename));
+		XI_warning(("Unable to save %s", filename));
 
 	g_string_free(str,1);
 }

@@ -135,15 +135,15 @@ void main_init_language_map(void);
  * waf configure -chatty to generate tracing.
  */
 #ifdef CHATTY
-# define GS_message(x)	g_message x
-# define GS_warning(x)	g_warning x
-# define GS_print(x)	g_print x
-# define GS_error(x)	g_error x
+# define XI_message(x)	g_message x
+# define XI_warning(x)	g_warning x
+# define XI_print(x)	g_print x
+# define XI_error(x)	g_error x
 #else
-# define GS_message(x)
-# define GS_warning(x)
-# define GS_print(x)
-# define GS_error(x)
+# define XI_message(x)
+# define XI_warning(x)
+# define XI_print(x)
+# define XI_error(x)
 #endif
 
 #ifdef WIN32

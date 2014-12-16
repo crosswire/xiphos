@@ -124,7 +124,7 @@ void main_dialogs_book_heading(DIALOG_DATA * d)
 	SWMgr *mgr = be->get_mgr();
 
 	be->display_mod = mgr->Modules[d->mod_name];
-	GS_message(("%s", be->display_mod->renderText().c_str()));
+	XI_message(("%s", be->display_mod->renderText().c_str()));
 	VerseKey *vkey = (VerseKey *)(SWKey *)(*be->display_mod);
 	vkey->setIntros(1);
 	vkey->setAutoNormalize(0);
@@ -872,7 +872,7 @@ void main_keep_bibletext_dialog_in_sync(gchar * key)
 void main_dialogs_shutdown(void)
 {
 	GList *tmp = list_dialogs;
-	GS_warning(("items = %d",g_list_length(tmp)));
+	XI_warning(("items = %d",g_list_length(tmp)));
 	while (tmp != NULL) {
 		DIALOG_DATA *t = (DIALOG_DATA*) tmp->data;
 		bible_freed = TRUE;
@@ -1303,12 +1303,12 @@ static gint show_strongs_morph(DIALOG_DATA * d,const gchar * type, const gchar *
 						gboolean clicked)
 {
 	if (clicked) {
-		GS_print(("module = %s\n",module));
+		XI_print(("module = %s\n",module));
 		gui_display_about_module_dialog((gchar*)module);
 	} else {
 		/* some mod descriptions contain fun(ny) characters */
 		GString *desc_clean = hex_decode(description);
-		GS_print(("description = %s\n", desc_clean->str));
+		XI_print(("description = %s\n", desc_clean->str));
 		gui_set_statusbar (desc_clean->str);
 		g_string_free(desc_clean, TRUE);
 	}
@@ -1357,7 +1357,7 @@ static gint new_url_handler(DIALOG_DATA * t, const gchar * url, gboolean clicked
 	gchar* morph = NULL;
 	URL* m_url;
 
-	GS_message(("new_url_handler url = %s",url));
+	XI_message(("new_url_handler url = %s",url));
 	m_url = new URL((const char*)url);
 	action = g_strdup(m_url->getParameterValue("action"));
 	type = g_strdup((gchar*)m_url->getParameterValue("type"));
@@ -1365,9 +1365,9 @@ static gint new_url_handler(DIALOG_DATA * t, const gchar * url, gboolean clicked
 	morph = g_strdup((gchar*)m_url->getParameterValue("morph"));
 	strongs = g_strdup((gchar*)m_url->getParameterValue("lemma"));
 
-	GS_message(("action = %s",action));
-	GS_message(("type = %s",type));
-	GS_message(("value = %s",value));
+	XI_message(("action = %s",action));
+	XI_message(("type = %s",type));
+	XI_message(("value = %s",value));
 
 	if (strlen(strongs) >= 1 && strlen(morph) >= 1 ) {
 		show_strongs_morph(t, type,strongs,morph,clicked);
@@ -1434,7 +1434,7 @@ gint main_dialogs_url_handler(DIALOG_DATA * t, const gchar * url, gboolean click
 	if (handling_url) return retval;
 	handling_url = TRUE;
 
-	GS_message(("main_dialogs_url_handler url = %s",url));
+	XI_message(("main_dialogs_url_handler url = %s",url));
 
 	if (strstr(url, "sword://") ||
 	    strstr(url, "bible://")) {
@@ -1443,7 +1443,7 @@ gint main_dialogs_url_handler(DIALOG_DATA * t, const gchar * url, gboolean click
 			*(settings.special_anchor++) = '\0';
 
 		GString *url_clean = hex_decode(url);
-		GS_message(("url_clean = %s", url_clean->str));
+		XI_message(("url_clean = %s", url_clean->str));
 
 		retval = sword_uri(t, url_clean->str, clicked);
 		g_string_free(url_clean, TRUE);
@@ -1594,7 +1594,7 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 			     TRUE, t);
 		be->set_treekey(t->offset);
 		main_setup_navbar_book_dialog(t);
-		GS_message(("offset = %ld",t->offset));
+		XI_message(("offset = %ld",t->offset));
 	} else
 		be->set_key(t->key);
 

@@ -549,7 +549,7 @@ void gui_load_tabs(const gchar *filename)
 		} else {
 			tabs_dir = g_strdup_printf("%s/tabs/",settings.gSwordDir);
 			if (g_access(tabs_dir, F_OK) == -1) {
-				GS_message(("Creating new tabs directory\n"));
+				XI_message(("Creating new tabs directory\n"));
 				gui_save_tabs(filename);
 			}
 			file = g_strdup_printf("%s%s",tabs_dir,filename);
@@ -898,7 +898,7 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
 	if (stop_refresh)
 		return;
 
-	GS_message(("on_notebook_main_switch_page"));
+	XI_message(("on_notebook_main_switch_page"));
 	page_change = TRUE;
 	/* get data structure for new passage */
 	/*

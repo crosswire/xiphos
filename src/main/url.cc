@@ -184,7 +184,7 @@ static gint show_separate_image(const gchar * filename, gboolean clicked)
 			return 0;
 		}
 
-		GS_print(("file = %s\n", filename));
+		XI_print(("file = %s\n", filename));
 		g_string_printf(cmd, "%s \"%s\" < /dev/null > /dev/null 2>&1 &",
 				display_progs[i], filename);
 
@@ -234,12 +234,12 @@ static gint show_separate_image(const gchar * filename, gboolean clicked)
 						gboolean clicked)
 {
 	if (clicked) {
-		GS_print(("module = %s\n",module));
+		XI_print(("module = %s\n",module));
 		gui_display_about_module_dialog((gchar*)module);
 	} else {
 		/* some mod descriptions contain fun(ny) characters */
 		GString *desc_clean = hex_decode(description);
-		GS_print(("description = %s\n", desc_clean->str));
+		XI_print(("description = %s\n", desc_clean->str));
 		gui_set_statusbar (desc_clean->str);
 		g_string_free(desc_clean, TRUE);
 	}
@@ -326,12 +326,12 @@ static gint show_morph(const char *module_name,
 				modbuf = "Packard";
 		}
 	}
-	//GS_message(("modbuf = %s", modbuf));
+	//XI_message(("modbuf = %s", modbuf));
 	if (clicked) {
 		main_display_dictionary(modbuf, (gchar*)svalue);
 	} else {
 		mybuf = main_get_rendered_text(modbuf, (gchar*)svalue);
-		//GS_message(("mybuf = %s", mybuf));
+		//XI_message(("mybuf = %s", mybuf));
 		if (mybuf) {
 			main_information_viewer(modbuf,
 					mybuf,
@@ -778,7 +778,7 @@ gint sword_uri(const gchar * url, gboolean clicked)
 	    (settings.special_anchor = strchr(tmpkey, '!')))
 		*(settings.special_anchor++) = '\0';
 
-	GS_message(("work_buf: %s, %s",
+	XI_message(("work_buf: %s, %s",
 		    work_buf[MODULE],
 		    (work_buf[KEY] ? work_buf[KEY] : "-null-")));
 
@@ -891,12 +891,12 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 	gchar* strongs = NULL;
 	int retval = 0;		// assume failure.
 
-	GS_message(("main_url_handler => %s", url));
+	XI_message(("main_url_handler => %s", url));
 
 	if (strstr(url, "sword://") ||
 	    strstr(url, "bible://")) {
 		GString *url_clean = hex_decode(url);
-		GS_message(("url_clean = %s", url_clean->str));
+		XI_message(("url_clean = %s", url_clean->str));
 
 		retval = sword_uri(url_clean->str, clicked);
 		g_string_free(url_clean, TRUE);
@@ -941,11 +941,11 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 		//if (svalue = strstr(, " & "))
 		//	*(svalue+1) = '-';
 
-		GS_message(("action = %s", action));
-		GS_message(("type = %s", stype));
-		GS_message(("value = %s", svalue));
-		GS_message(("strongs = %s", strongs));
-		GS_message(("morph = %s", morph));
+		XI_message(("action = %s", action));
+		XI_message(("type = %s", stype));
+		XI_message(("value = %s", svalue));
+		XI_message(("strongs = %s", strongs));
+		XI_message(("morph = %s", morph));
 
 		if (!strcmp(action, "showStrongs")) {
 			show_strongs(stype, svalue, clicked);

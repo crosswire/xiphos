@@ -91,7 +91,7 @@ appendChild (TreeKeyIdx * treeKey, const gchar * name)
 	treeKey->appendChild();
 	treeKey->setLocalName(name);
 	treeKey->save();
-	GS_message(("name: %s\nlocalName: %s", name,
+	XI_message(("name: %s\nlocalName: %s", name,
 		    treeKey->getLocalName ()));
 }
 

@@ -14,6 +14,7 @@
 	* fixed mod.mgr button bobble on expand/collapse of module tree
 	  using a timer to reject too-soon calls (esp 1st-time user).
 	* add --chatty configure flag to enable GS_* trace printfs.
+	* changed all GS_* print macros to XI_*.
 
 2014-12-06  karl <charcoal@users.sf.net>
 

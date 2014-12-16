@@ -60,9 +60,9 @@ static GtkWidget *html_widget;
 void gui_display_mod_and_key(const gchar * mod_name, const gchar * key)
 {
 	gchar *text = NULL;
-	GS_message(("mod_name: %s  key: %s",mod_name,key));
+	XI_message(("mod_name: %s  key: %s",mod_name,key));
 	text = main_get_rendered_text(mod_name, key);
-	GS_message(("%s",text));
+	XI_message(("%s",text));
 	if (text) {
 		main_entry_display(html_widget,
 				   (gchar*)mod_name,

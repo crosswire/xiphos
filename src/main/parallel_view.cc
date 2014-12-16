@@ -97,7 +97,7 @@ static void set_global_option(char * option, gboolean choice)
 	SWMgr *mgr = backend_p->get_mgr();
 	char *buf= g_strdup (option);
 
-//	GS_message (("option://%s\n\n",option));
+//	XI_message (("option://%s\n\n",option));
 
 	mgr->setGlobalOption(buf, on_off);
 
@@ -136,7 +136,7 @@ static void set_global_textual_reading (const char * option, int choice)
 		gui_generic_warning((char*)"Xiphos: invalid internal variant");
 		break;
 	}*/
-	GS_message (("set_global_textual_reading\noption://%s",option));
+	XI_message (("set_global_textual_reading\noption://%s",option));
 
 	mgr->setGlobalOption("Textual Variants", option);
 
@@ -338,7 +338,7 @@ void main_set_parallel_options_at_start(void)
 	while (tmp) {
 		char *option = g_strdup((char*)tmp->data);
 		g_strdelimit (option,"' ", '_');
-		//GS_message(("\n\n%s\n%s\n", (char*)tmp->data, option));
+		//XI_message(("\n\n%s\n%s\n", (char*)tmp->data, option));
 		value = xml_get_value("parallel", option);
 		int choice = (value ? atoi(value) : 0);
 		if (!strcmp((char*)tmp->data,"Textual Variants")) {
@@ -639,7 +639,7 @@ void main_update_parallel_page(void)
 			// we will segfault when looking for content for the
 			// nonexistent module.  avoid this.
 			if (!main_is_module(mod_name)) {
-				GS_warning(("unknown parallel module %s\n", mod_name));
+				XI_warning(("unknown parallel module %s\n", mod_name));
 				continue;
 			}
 
