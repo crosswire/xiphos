@@ -411,7 +411,7 @@ GtkWidget *main_book_drop_down_new(void)
 void main_setup_navbar_book(gchar * book_name, unsigned long offset)
 {
 	gchar *tmpbuf = NULL;
-	GS_message(("offset: %ld",offset));
+	XI_message(("offset: %ld",offset));
 	backend->set_module(book_name);
 	backend->set_treekey(offset);
 

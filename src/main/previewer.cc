@@ -270,7 +270,7 @@ void mark_search_words(GString * str)
 	    (settings.searchText[0] == '\0')) {
 		return;
 	}
-	GS_message(("%s", settings.searchText));
+	XI_message(("%s", settings.searchText));
 
 	/* open and close tags */
 	sprintf(openstr,

@@ -857,7 +857,7 @@ remove_install_modules(GList * modules,
 			char *datapath, *conf_file;
 			int dlen;
 
-			GS_print(("archive %s in %s\n", buf,
+			XI_print(("archive %s in %s\n", buf,
 				  (destination
 				   ? destination
 				   : settings.path_to_mods)));
@@ -912,7 +912,7 @@ remove_install_modules(GList * modules,
 		    (!first_time_user &&	// don't trip on "no modules".
 		     (activity == INSTALL) &&
 		     main_is_module(buf))) {	// delete before re-install
-			GS_print(("remove %s from %s\n", buf,
+			XI_print(("remove %s from %s\n", buf,
 				  (destination
 				   ? destination
 				   : settings.path_to_mods)));
@@ -934,9 +934,9 @@ remove_install_modules(GList * modules,
 				} else {
 					new_dest = gtk_label_get_text
 					    (GTK_LABEL(label_home));
-					GS_warning(("%s",new_dest));
+					XI_warning(("%s",new_dest));
 				}
-				GS_print(("removing %s from %s\n",
+				XI_print(("removing %s from %s\n",
 					  buf,
 					  (new_dest
 					   ? new_dest
@@ -950,7 +950,7 @@ remove_install_modules(GList * modules,
 		}
 
 		if (activity == INSTALL) {
-			GS_print(("install %s, source=%s\n", buf, source));
+			XI_print(("install %s, source=%s\n", buf, source));
 			failed = ((local)
 				  ? mod_mgr_local_install_module(destination, source, buf)
 				  : mod_mgr_remote_install(destination, source, buf));
@@ -958,12 +958,12 @@ remove_install_modules(GList * modules,
 			/* try to re-use a saved key. */
 			if ((failed != -1) && preserved_cipherkey) {
 				main_save_module_key(buf, preserved_cipherkey);
-				GS_print(("re-use key %s\n", preserved_cipherkey));
+				XI_print(("re-use key %s\n", preserved_cipherkey));
 			}
 		}
 
 		if (activity == FASTMOD) {
-			GS_print(("index %s\n", buf));
+			XI_print(("index %s\n", buf));
 #if 0
 			// why did we ever preclude indexing these?
 			if (main_get_mod_config_entry(buf, "GSType"))
@@ -976,7 +976,7 @@ remove_install_modules(GList * modules,
 		}
 
 		if (activity == DELFAST) {
-			GS_print(("deleting index %s\n", buf));
+			XI_print(("deleting index %s\n", buf));
 			failed = ((main_module_mgr_delete_index_mod(buf))
 				  ? 0 : 1);
 		}
@@ -1365,7 +1365,7 @@ on_modules_list_button_release(GtkWidget * widget,
 		el = g_timer_elapsed(t, NULL);
 	g_timer_start(t);
 	if ((el != -1.0) && (el < 0.1)) {
-		GS_message(("button bobble reject"));
+		XI_message(("button bobble reject"));
 		return FALSE;
 	}
 	/* end of anti-bobble control. */
@@ -1663,7 +1663,7 @@ load_module_tree(GtkTreeView * treeview,
 			}
 		}
 		else {
-			GS_warning(("mod `%s' unknown type `%s'",
+			XI_warning(("mod `%s' unknown type `%s'",
 				    info->name, info->type));
 		}
 
@@ -2221,7 +2221,7 @@ on_notebook1_switch_page(GtkNotebook * notebook,
 #ifdef CHATTY
 	g_timer_stop(total);
 	d = g_timer_elapsed(total, NULL);
-	GS_message(("total time is %f", d));
+	XI_message(("total time is %f", d));
 #endif
 }
 
@@ -2423,7 +2423,7 @@ create_fileselection_local_source(void)
 	
 	if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT) {
 		filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
-		GS_message(("%s",filename));
+		XI_message(("%s",filename));
 		gtk_list_store_append(GTK_LIST_STORE(model), &iter);
 		gtk_list_store_set(GTK_LIST_STORE(model), &iter,
 				   COLUMN_TYPE, "DIR",
@@ -2469,7 +2469,7 @@ on_dialog_destroy(GObject * object, gpointer user_data)
 	if (working) return;
 	working = TRUE;
 
-	GS_message(("on_destroy"));
+	XI_message(("on_destroy"));
 	if (remote_source) {
 	        g_free(remote_source);
 		remote_source = NULL;
@@ -3281,7 +3281,7 @@ setup_ui_labels()
 
 	gtk_label_set_text(GTK_LABEL(label_system), settings.path_to_mods);
 	if (g_access(settings.path_to_mods, W_OK) == -1) {
-		GS_print(("%s is write protected\n",
+		XI_print(("%s is write protected\n",
 			  (settings.path_to_mods
 			   ? settings.path_to_mods
 			   : "<null>")));
@@ -3313,7 +3313,7 @@ on_comboboxentry_remote_changed(GtkComboBox *combobox, gpointer user_data)
 	gint index = gtk_combo_box_get_active (GTK_COMBO_BOX(combo_entry2));
 	settings.mod_mgr_remote_source_index = index;
 	gchar *index_str = g_strdup_printf("%d",index);
-	GS_message(("index = %d index_str = %s",index,index_str));
+	XI_message(("index = %d index_str = %s",index,index_str));
 	xml_set_value("Xiphos", "modmgr", "mod_mgr_remote_source_index", index_str);
 	xml_save_settings_doc(settings.fnconfigure);
 	g_free(index_str);
@@ -3328,7 +3328,7 @@ create_module_manager_dialog(gboolean first_run)
 {
 	gchar *glade_file = gui_general_user_file ("module-manager" UI_SUFFIX, FALSE);
 	g_return_val_if_fail((glade_file != NULL), NULL);
-	GS_message(("%s",glade_file));
+	XI_message(("%s",glade_file));
 
 #ifdef USE_GTKBUILDER
 	gchar *ids[] = {"dialog", NULL};

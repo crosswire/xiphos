@@ -403,7 +403,7 @@ gui_create_editor_tree (EDITOR * editor)
 	gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (treeview), FALSE);
 
 	main_add_mod_tree_columns (GTK_TREE_VIEW (treeview));
-	GS_message(("\ngui_create_editor_tree Mod Name:%s\n",editor->module));
+	XI_message(("\ngui_create_editor_tree Mod Name:%s\n",editor->module));
 	main_load_book_tree_in_editor (GTK_TREE_VIEW (treeview), editor->module);
 	menu = create_edit_tree_menu (editor);
 

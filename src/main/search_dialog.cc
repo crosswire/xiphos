@@ -293,7 +293,7 @@ static void set_search_global_option(const gchar * option, gboolean choice)
 		on_off = "Off";
 	}
 	mgr->setGlobalOption(option, on_off);
-	GS_print(("option = %s is %s\n",option,on_off));
+	XI_print(("option = %s is %s\n",option,on_off));
 }
 
 
@@ -330,7 +330,7 @@ void main_save_modlist(void)
 		gtk_tree_model_get(model, &iter,
 				   0, &text1, 1, &text2, -1);
 		xml_set_list_item("modlists", "modlist", text1, text2);
-		GS_warning(("%s",text2));
+		XI_warning(("%s",text2));
 		g_free(text1);
 		g_free(text2);
 	} while (gtk_tree_model_iter_next(model, &iter));
@@ -375,7 +375,7 @@ void main_save_range(void)
 				   0, &text1, 1, &text2, -1);
 
 		xml_set_list_item("ranges", "range", text1, text2);
-		GS_warning(("%s",text2));
+		XI_warning(("%s",text2));
 		g_free(text1);
 		g_free(text2);
 	} while (gtk_tree_model_iter_next(model, &iter));
@@ -884,7 +884,7 @@ void main_selection_finds_list_changed(GtkTreeSelection *
 	gtk_tree_model_get(model, &selected, 0, &text, -1);
 	path = gtk_tree_model_get_path(model,&selected);
 	path_str = gtk_tree_path_to_string(path);
-	GS_message(("\npath: %s\ntext: %s",path_str,text));
+	XI_message(("\npath: %s\ntext: %s",path_str,text));
 	tmp = g_list_nth(list_of_finds,atoi(path_str));
 	tmp = (GList*)tmp->data;
 	add_module_finds(tmp);
@@ -928,7 +928,7 @@ void main_finds_verselist_selection_changed(GtkTreeSelection * selection,
  	if (!gtk_tree_selection_get_selected (selection, &model, &selected))
 		return;
 	gtk_tree_model_get(model, &selected, 0, &text, -1);
-	GS_message(("\ntext: %s", text));
+	XI_message(("\ntext: %s", text));
 	//textlen = strlen(text);
 	module = text;
 
@@ -969,7 +969,7 @@ void main_finds_verselist_selection_changed(GtkTreeSelection * selection,
 	XIPHOS_HTML_CLOSE(search1.preview_html);
 	g_string_free(html_text, TRUE);
 
-	GS_message(("main_finds_verselist_selection_changed: %s %s", module, key));
+	XI_message(("main_finds_verselist_selection_changed: %s %s", module, key));
 
 	if (text)
 		g_free(text);
@@ -1280,7 +1280,7 @@ void _clear_find_lists(void)
 		tmp = (GList*) list_of_finds->data;
 		while (tmp) {
 			tmp_buf = (char*) tmp->data;
-			GS_message(("%s",tmp_buf));
+			XI_message(("%s",tmp_buf));
 			if (tmp_buf) g_free(tmp_buf);
 			tmp = g_list_next(tmp);
 		}
@@ -1304,7 +1304,7 @@ void _clear_bookmarking_lists(void)
 		tmp = (GList*) list_for_bookmarking->data;
 		while (tmp) {
 			results = (RESULTS*) tmp->data;
-			GS_message(("%s://%s",results->module,results->key));
+			XI_message(("%s://%s",results->module,results->key));
 			if (results->module) g_free(results->module);
 			if (results->key) g_free(results->key);
 			if (results) g_free (results);
@@ -1375,7 +1375,7 @@ void main_do_dialog_search(void)
 		   : (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(search1.rb_optimized))
 		      ? -4
 		      : -3 /* fallthrough to attribute */ ))));
-	GS_message(("search_type = %d", search_type));
+	XI_message(("search_type = %d", search_type));
 
 	search_params =
 	    gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(search1.cb_case_sensitive)) ? 0 : REG_ICASE;
@@ -1399,7 +1399,7 @@ void main_do_dialog_search(void)
 					"Footnote//body/%s",
 					search_string);
 		}
-		GS_message(("%s",attribute_search_string));
+		XI_message(("%s",attribute_search_string));
 	}
 
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(search1.rb_custom_list))) {
@@ -1465,7 +1465,7 @@ void main_do_dialog_search(void)
 				gui_generic_warning(msg);
 			}
 		}
-		GS_message(("search_type = %d",search_type));
+		XI_message(("search_type = %d",search_type));
 
 		finds = backendSearch->do_module_search(module,
 							(attribute_search_string

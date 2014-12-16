@@ -58,7 +58,7 @@ static gboolean button_release_handler (GtkWidget *widget,
 {
 	 GtkClipboard * clipboard;
          if(event->type ==  GDK_BUTTON_RELEASE && db_click) {
-		GS_message((" button 1 = %s" , "double click!\n"));
+		XI_message((" button 1 = %s" , "double click!\n"));
 
 		if(webkit_web_view_has_selection(WEBKIT_WEB_VIEW (widget))) {
 			webkit_web_view_copy_clipboard (WEBKIT_WEB_VIEW (widget));
@@ -117,7 +117,7 @@ static void link_handler (GtkWidget *widget,
 {
 	WkHtmlPriv *priv;
 	priv = WK_HTML_GET_PRIVATE(WK_HTML(widget));
-	GS_message(("html_link_message: uri = %s", (uri ? uri : "-none-")));
+	XI_message(("html_link_message: uri = %s", (uri ? uri : "-none-")));
 
 	if (shift_key_pressed)
 		return;
@@ -433,7 +433,7 @@ void ClipboardTextReceivedFunc (GtkClipboard *clipboard,
                                                          gpointer data)
 {
 
-	GS_message(("clipboard text = %s",text));
+	XI_message(("clipboard text = %s",text));
 }
 */
 

@@ -739,7 +739,7 @@ void backend_init_module_mgr(const char *dir,
 #ifdef CHATTY
 	g_timer_stop(t);
 	d = g_timer_elapsed(t, NULL);
-	GS_message(("create SWMgr time is %f", d));
+	XI_message(("create SWMgr time is %f", d));
 #endif
 
 	const gchar *envhomedir = g_getenv(HOMEVAR);

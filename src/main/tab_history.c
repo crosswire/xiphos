@@ -346,8 +346,8 @@ void main_change_verse_tab_history(gint historynum)
 	tab->current_history_item = historynum;
 	settings.addhistoryitem = tab->first_back_click;
 
-	GS_print(("commod = %s\n",tab->history_list[historynum].commod));
-	GS_print(("textmod = %s\n",tab->history_list[historynum].textmod));
+	XI_print(("commod = %s\n",tab->history_list[historynum].commod));
+	XI_print(("textmod = %s\n",tab->history_list[historynum].textmod));
 
 	key = main_update_nav_controls(tab->history_list[historynum].textmod,
 				       tab->history_list[historynum].verseref);

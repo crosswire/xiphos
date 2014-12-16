@@ -69,7 +69,7 @@ static void dialog_destroy(GObject * object, gpointer data)
 {
 	g_free(dialog);
 	dialog = NULL;
-	GS_print(("\nall done\n"));
+	XI_print(("\nall done\n"));
 }
 
 

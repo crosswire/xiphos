@@ -818,7 +818,7 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 			/* FIXME: needs the html widget as first pram */
 		break;
 	}
-	GS_message(("on_vbox1_key_press_event\nkeycode: %d, keysym: %0x, state: %d",
+	XI_message(("on_vbox1_key_press_event\nkeycode: %d, keysym: %0x, state: %d",
 		    event->hardware_keycode, event->keyval, state));
 	return FALSE;
 }
@@ -873,8 +873,8 @@ void create_mainwindow(void)
 	*/
 	settings.shadow_type = GTK_SHADOW_IN;
 
-	GS_print(("%s xiphos-%s\n", "Starting", VERSION));
-	GS_print(("%s\n\n", "Building Xiphos interface"));
+	XI_print(("%s xiphos-%s\n", "Starting", VERSION));
+	XI_print(("%s\n\n", "Building Xiphos interface"));
 
 	widgets.studypad_dialog = NULL;
 

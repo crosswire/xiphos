@@ -197,7 +197,7 @@ int settings_init(int argc, char **argv, int new_configs, int new_bookmarks)
 	    (g_access(settings.fnconfigure, F_OK) == -1) ||
 	    new_configs) {
 		/* must be first run */
-		GS_print((buf_says_empty
+		XI_print((buf_says_empty
 			  ? "\nSETTINGS FILE EXISTS BUT IS EMPTY - RECREATING.\n"
 			  : "\nFirst Run: need to create settings!\n"));
 		settings.first_run = TRUE;
@@ -264,7 +264,7 @@ int settings_init(int argc, char **argv, int new_configs, int new_bookmarks)
 		}
 		if (test != NULL) {
 			g_setenv("LC_ALL", test, TRUE);
-			GS_message(("set locale to %s", settings.special_locale));
+			XI_message(("set locale to %s", settings.special_locale));
 		}
 	}
 

@@ -186,7 +186,7 @@ void main_save_note(const gchar * module_name,
 		(void) strcpy(rework+1, rework+3);
 	}
 
-	GS_message(("note module %s\nnote key %s\nnote text%s",
+	XI_message(("note module %s\nnote key %s\nnote text%s",
 		    module_name,
 		    key_str,
 		    note_str));
@@ -215,7 +215,7 @@ void main_delete_note(const gchar * module_name,
 		      const gchar * key_str)
 {
 	backend->set_module_key(module_name, key_str);
-	GS_message(("note module %s\nnote key %s\n",
+	XI_message(("note module %s\nnote key %s\n",
 		    module_name,
 		    key_str));
 	backend->delete_entry();
@@ -582,7 +582,7 @@ void main_init_language_map() {
 		    (_("Xiphos's file for language\nabbreviations is missing."));
 		return;
 	}
-	GS_message(("%s",language_file));
+	XI_message(("%s",language_file));
 
 	if ((language = fopen(language_file, "r")) == NULL) {
 		gui_generic_warning
@@ -614,7 +614,7 @@ void main_init_language_map() {
 
 	for (s = mapspace; s < end; ++s) {
 		if ((newline = strchr(s, '\n')) == NULL) {
-			GS_message(("incomplete last line in languages"));
+			XI_message(("incomplete last line in languages"));
 			break;
 		}
 		*newline = '\0';
@@ -626,7 +626,7 @@ void main_init_language_map() {
 
 		abbrev = s;
 		if ((name = strchr(s, '\t')) == NULL) {
-			GS_message(("tab-less line in languages"));
+			XI_message(("tab-less line in languages"));
 			break;
 		}
 		*(name++) = '\0';	// NUL-terminate abbrev, mark name.
@@ -729,13 +729,13 @@ void main_init_backend(void)
 //#ifndef DEBUG
 	g_chdir(settings.path_to_mods);
 //#else
-//	GS_warning(("no chdir(SWORD_PATH) => modmgr 'archive' may not work"));
+//	XI_warning(("no chdir(SWORD_PATH) => modmgr 'archive' may not work"));
 //#endif
-	GS_print(("%s sword-%s\n", "Starting", backend->get_sword_version()));
-	GS_print(("%s\n", "Initiating SWORD"));
-	GS_print(("%s: %s\n","path to sword", settings.path_to_mods));
-	GS_print(("%s %s\n", "SWORD locale is", lang));
-	GS_print(("%s\n", "Checking for SWORD Modules"));
+	XI_print(("%s sword-%s\n", "Starting", backend->get_sword_version()));
+	XI_print(("%s\n", "Initiating SWORD"));
+	XI_print(("%s: %s\n","path to sword", settings.path_to_mods));
+	XI_print(("%s %s\n", "SWORD locale is", lang));
+	XI_print(("%s\n", "Checking for SWORD Modules"));
 	settings.spell_language = strdup(lang);
 	main_init_lists();
 
@@ -778,7 +778,7 @@ void main_shutdown_backend(void)
 	        delete backend;
 	backend = NULL;
 
-	GS_print(("%s\n", "SWORD is shutdown"));
+	XI_print(("%s\n", "SWORD is shutdown"));
 }
 
 /******************************************************************************
@@ -870,7 +870,7 @@ GtkWidget *main_dictionary_drop_down_new(char * mod_name, char * old_key)
 	}
 	key = g_strdup((gchar*)gtk_entry_get_text(GTK_ENTRY(widgets.entry_dict)));
 
-	GS_message(("\nold_key: %s\nkey: %s",old_key,key));
+	XI_message(("\nold_key: %s\nkey: %s",old_key,key));
 	backend->set_module_key(mod_name, key);
 	g_free(key);
 	key = backend->get_module_key();
@@ -957,7 +957,7 @@ void main_display_book(const char * mod_name,
 	if (key == NULL)
 		key = "0";
 
-	GS_message(("main_display_book\nmod_name: %s\nkey: %s", mod_name, key));
+	XI_message(("main_display_book\nmod_name: %s\nkey: %s", mod_name, key));
 
 	if (!backend->is_module(mod_name))
 		return;
@@ -1104,7 +1104,7 @@ void main_display_dictionary(const char * mod_name,
 	if (!settings.havedict || !mod_name)
 		return;
 
-	GS_message(("main_display_dictionary\nmod_name: %s\nkey: %s", mod_name, key));
+	XI_message(("main_display_dictionary\nmod_name: %s\nkey: %s", mod_name, key));
 
 	if (!backend->is_module(mod_name))
 		return;
@@ -1272,7 +1272,7 @@ void main_display_bible(const char * mod_name,
 
 	valid_scripture_key = TRUE;	// leave nice for future use.
 
-	GS_message(("mod_name = %s",mod_name));
+	XI_message(("mod_name = %s",mod_name));
 	//if (settings.browsing) {
 		gui_update_tab_struct(mod_name,
 				      NULL,

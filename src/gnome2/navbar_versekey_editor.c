@@ -468,7 +468,7 @@ gboolean on_button_verse_menu_verse_scroll_event(GtkWidget * widget,
                                             GdkEvent * event,
                                             EDITOR * editor)
 {
-	GS_message(("%s","on_button_verse_menu_verse_scroll_event"));
+	XI_message(("%s","on_button_verse_menu_verse_scroll_event"));
 	main_navbar_versekey_spin_verse(editor->navbar,
 				event->scroll.direction);
 	return FALSE;
@@ -905,7 +905,7 @@ GtkWidget *gui_navbar_versekey_editor_new(EDITOR * editor)
 	
 	gchar *glade_file = gui_general_user_file("navbar_versekey" UI_SUFFIX, FALSE);
 	g_return_val_if_fail((glade_file != NULL), NULL);
-	GS_message(("%s",glade_file));
+	XI_message(("%s",glade_file));
 
 	/* build the widget */
 #ifdef USE_GTKBUILDER

@@ -90,7 +90,7 @@
 
 void frontend_init(void)
 {
-	GS_print(("%s\n", "Initiating Xiphos"));
+	XI_print(("%s\n", "Initiating Xiphos"));
 	settings.comm_showing = TRUE;
 	settings.displaySearchResults = FALSE;
 
@@ -158,7 +158,7 @@ void frontend_display(const char *tabs)
 	gint screen_width  = gdk_screen_get_width(screen);
 	gint screen_height = gdk_screen_get_height(screen);
 
-	GS_print(("%s\n", "Displaying Xiphos"));
+	XI_print(("%s\n", "Displaying Xiphos"));
 	gui_show_main_window();
 
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
@@ -245,7 +245,7 @@ void frontend_display(const char *tabs)
 		main_init_previewer();
 	gtk_widget_grab_focus (sidebar.module_list);
 
-	GS_print(("%s\n\n", "done"));
+	XI_print(("%s\n\n", "done"));
 }
 
 
@@ -315,5 +315,5 @@ void shutdown_frontend(void)
 	g_string_free(navbar_versekey.module_name,TRUE);
 	g_string_free(navbar_versekey.key,TRUE);
 
-	GS_print(("\n%s\n", "Xiphos is shutdown"));
+	XI_print(("\n%s\n", "Xiphos is shutdown"));
 }

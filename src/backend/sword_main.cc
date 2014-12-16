@@ -86,7 +86,7 @@ BackEnd::BackEnd()
 #ifdef CHATTY
 	g_timer_stop(t);
 	d = g_timer_elapsed(t, NULL);
-	GS_message(("create main_mgr time is %f", d));
+	XI_message(("create main_mgr time is %f", d));
 #endif
 
 	display_mod = NULL;
@@ -488,7 +488,7 @@ void BackEnd::save_note_entry(const char * module, const char * key, const char 
 		display_mod->setKey(key);
 		display_mod->getKeyText(); /* snap to entry */
 		display_mod->setEntry((const char *) entry);
-		GS_message (("\nsave_note_entry\nmod: %s\nkey: %s\nentry: %s",
+		XI_message (("\nsave_note_entry\nmod: %s\nkey: %s\nentry: %s",
 			     display_mod->getName(), display_mod->getKeyText(),
 			     display_mod->renderText().c_str()));
 	}
@@ -751,7 +751,7 @@ int BackEnd::set_key(const char *key)
 	if (!key)
 		return 0;
 	if (display_mod) {
-		GS_message((f_message,758,"key",key));
+		XI_message((f_message,758,"key",key));
 		display_mod->setKey(key);
 		return 1;
 	}
@@ -926,7 +926,7 @@ GList *BackEnd::parse_verse_list(const char *module_name, const char * list, cha
 
 	if (!list)
 		return retlist;
-	GS_message(("current_key=%s",current_key));
+	XI_message(("current_key=%s",current_key));
 	key->setText(current_key);
 	vs = key->parseVerseList(list, *key, TRUE);
 
