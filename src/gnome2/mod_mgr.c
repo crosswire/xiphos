@@ -1347,6 +1347,29 @@ on_modules_list_button_release(GtkWidget * widget,
 	GtkTreeIter selected;
 	GtkTreePath *path;
 
+	/*
+	 * anti-bobble control.
+	 * this is kinda silly.  theater of the absurd.
+	 * especially in the 1st-time user's mod.mgr, hitting the row text
+	 * often calls this routine twice.  why?  we don't know.
+	 * effect is rapid open+close, which is visually nothing at all.
+	 * this timer use is to avoid reacting to the 2nd call when it
+	 * happens too soon.
+	 */
+	static GTimer *t = NULL;
+	static gdouble el = -1.0;	/* sentinel */
+
+	if (!t)
+		t = g_timer_new();
+	else
+		el = g_timer_elapsed(t, NULL);
+	g_timer_start(t);
+	if ((el != -1.0) && (el < 0.1)) {
+		GS_message(("button bobble reject"));
+		return FALSE;
+	}
+	/* end of anti-bobble control. */
+
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW(data));
 
 	if (!gtk_tree_selection_get_selected (selection, &model, &selected))
@@ -1458,27 +1481,28 @@ load_module_tree(GtkTreeView * treeview,
 	if (!g_list_length(tmp))
 		return;
 
-	if (install && !first_time_user) {
-		/* note the repository that is active */
-		if ((local == FALSE) && (remote_source == NULL))
+	/* note the repository that is active */
+	if ((local == FALSE) && (remote_source == NULL)) {
 #ifdef USE_GTK_3
-			remote_source = g_strdup(gtk_combo_box_text_get_active_text(
-						     GTK_COMBO_BOX_TEXT(combo_entry2)));
+		remote_source = g_strdup(gtk_combo_box_text_get_active_text(
+					     GTK_COMBO_BOX_TEXT(combo_entry2)));
 #else 
-			remote_source = g_strdup(gtk_combo_box_get_active_text(
-						     GTK_COMBO_BOX(combo_entry2)));   
+		remote_source = g_strdup(gtk_combo_box_get_active_text(
+					     GTK_COMBO_BOX(combo_entry2)));   
 #endif
-		repository_identifier =
-		    g_strdup_printf(_("Repository:\n%s"),
-				    (local ? source : remote_source));
-		gtk_tree_store_append(store, &repository_name, NULL);
-		gtk_tree_store_set(store, &repository_name, 0,
-				   repository_identifier, -1);
-		g_free(repository_identifier);
+	}
+	repository_identifier =
+	    g_strdup_printf(_("Repository:\n%s"),
+			    (local ? source : remote_source));
+	gtk_tree_store_append(store, &repository_name, NULL);
+	gtk_tree_store_set(store, &repository_name, 0,
+			   repository_identifier, -1);
+	g_free(repository_identifier);
 
-		gtk_tree_store_append(store, &separator, NULL);
-		gtk_tree_store_set(store, &separator, 0, "------------------------", -1);
+	gtk_tree_store_append(store, &separator, NULL);
+	gtk_tree_store_set(store, &separator, 0, "------------------------", -1);
 
+	if (install && !first_time_user) {
 		gtk_tree_store_append(store, &category_type, NULL);
 		gtk_tree_store_set(store, &category_type, 0,
 				   _("Categorized by\nModule Type"), -1);
