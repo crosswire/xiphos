@@ -720,7 +720,7 @@ void backend_init_module_mgr(const char *dir,
 	//                then "as sent" ([a] total list or [b] per-area list)
 	//		  else "false for local install" (always per-area)
 
-#ifdef DEBUG
+#ifdef CHATTY
 	GTimer *t;
 	double d;
 	t = g_timer_new();
@@ -736,7 +736,7 @@ void backend_init_module_mgr(const char *dir,
 		list_mgr = new SWMgr(dir, true, 0, false, false);
 	}
 
-#ifdef DEBUG
+#ifdef CHATTY
 	g_timer_stop(t);
 	d = g_timer_elapsed(t, NULL);
 	GS_message(("create SWMgr time is %f", d));

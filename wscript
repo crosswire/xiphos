@@ -17,7 +17,7 @@ import waffles.gnome as gnome
 bzrrevno = '$CurRevno$'
 bzrrevid = '$CurRevid$'
 
-VERSION='3.9.11'
+VERSION='3.9.13'
 
 APPNAME='xiphos'
 PACKAGE='xiphos'
@@ -68,6 +68,10 @@ def set_options(opt):
     miscgroup.add_option('--enable-delint', action='store_true', default=False,
             dest='delint',
             help='Use -Wall -Werror [default: disabled]')
+
+    miscgroup.add_option('--chatty', action='store_true', default=False,
+            dest='chatty',
+            help='Enable lots of tracing [default: disabled]')
 
     miscgroup.add_option('--disable-dbus',
                    action = 'store_true',
@@ -397,6 +401,10 @@ def configure(conf):
     # could be missing in win32
     conf.check_cc(msg='Checking for function strcasestr', define_name="HAVE_STRCASESTR",
             fragment='int main() {strcasestr("hello","he");}\n')
+
+    # enable the GS_message-style tracing printfs.
+    if opt.chatty:
+        dfn('CHATTY', 1)
 
     # appropriate cflags
     env.append_value('CXXFLAGS', env['CXXFLAGS_%s' % opt.debug_level.upper()])

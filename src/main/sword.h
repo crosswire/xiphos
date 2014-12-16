@@ -132,10 +132,9 @@ void main_init_language_map(void);
 #endif
 
 /*
- * Eliminate wrapping debug & warning generators in #ifdef DEBUG.
- * Do it once, here, and then just remember to use GS_*.
+ * waf configure -chatty to generate tracing.
  */
-#ifdef DEBUG
+#ifdef CHATTY
 # define GS_message(x)	g_message x
 # define GS_warning(x)	g_warning x
 # define GS_print(x)	g_print x
