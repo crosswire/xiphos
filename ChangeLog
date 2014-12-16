@@ -9,6 +9,10 @@
 	  "This module has no content at this point."
 	* av11n: re-worked navbar filling, now takes all books offered by
 	  sword, no conditional on whether 1:1 content exists.
+	* fixed "dump personal commentary" replacing "." with "..+".
+	* avoided NTFS glitch by not making settings backup file.
+	* fixed mod.mgr button bobble on expand/collapse of module tree
+	  using a timer to reject too-soon calls (esp 1st-time user).
 
 2014-12-06  karl <charcoal@users.sf.net>
 
