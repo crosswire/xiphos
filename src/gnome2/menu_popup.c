@@ -210,7 +210,7 @@ void _global_option_main_pane(GtkMenuItem * menuitem, const gchar * option)
 {
 	gchar *key = _get_key(menu_mod_name);
 	gchar *mod = (gchar*) (is_dialog ? dialog->mod_name : menu_mod_name);
-	GS_message(("module option = %s",option));
+	XI_message(("module option = %s",option));
     	if (key) {
 		gchar *url = g_strdup_printf ("sword://%s/%s",
 					     mod,
@@ -256,7 +256,7 @@ static void on_edit_percomm_activate (GtkMenuItem * menuitem, gpointer user_data
     	else
     		key = _get_key(menu_mod_name);
     	if (key ) {
-		GS_message(("\n\npercomm key: %s\n\n",key));
+		XI_message(("\n\npercomm key: %s\n\n",key));
 		editor_create_new((gchar *)user_data, (gchar *) key, NOTE_EDITOR);
 		g_free (key);
 	 }
@@ -281,7 +281,7 @@ static void on_edit_percomm_activate (GtkMenuItem * menuitem, gpointer user_data
 
 static void on_edit_prayerlist_activate (GtkMenuItem * menuitem, gpointer user_data)
 {
-    	GS_message(("settings.book_key: %s",(char*)(is_dialog ?
+    	XI_message(("settings.book_key: %s",(char*)(is_dialog ?
 						  dialog->key :
 						  settings.book_key)));
 	editor_create_new((gchar *)user_data,
@@ -1705,7 +1705,7 @@ GtkWidget * _create_popup_menu (XiphosHtml *html, const gchar * mod_name, DIALOG
 	GladeXML *gxml;
 #endif
     	const gchar *mname = (is_dialog ? d->mod_name : mod_name);
-	GS_message(("_create_popup_menu mod_name:%s",mod_name));
+	XI_message(("_create_popup_menu mod_name:%s",mod_name));
 	if (!mname || !*mname)
 		return NULL;
 

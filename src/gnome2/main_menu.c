@@ -105,7 +105,7 @@ on_help_contents_activate(GtkMenuItem * menuitem, gpointer user_data)
 #else
 	gtk_show_uri (NULL, "ghelp:xiphos", gtk_get_current_event_time(), &error);
 	if (error != NULL) {
-		GS_warning(("%s", error->message));
+		XI_warning(("%s", error->message));
 		g_error_free(error);
 	}
 

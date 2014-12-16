@@ -88,7 +88,7 @@ void button_ok_clicked_cb(GObject *object, EDITOR *e)
 			(encoded_verse ? encoded_verse : ""),
 			(text_str      ? text_str      : ""));
 
-	GS_message (("link: %s", str->str));
+	XI_message (("link: %s", str->str));
 
 	editor_insert_html(str->str, e);
 	g_string_free (str, TRUE);
@@ -119,7 +119,7 @@ void button_test_clicked_cb(GObject *object, gpointer user_data)
 			"passagestudy.jsp?action=showRef&type=scripRef&module=%s&value=%s",
 			(encoded_mod   ? encoded_mod   : ""),
 			(encoded_verse ? encoded_verse : ""));
-	GS_message (("link: %s", str->str));
+	XI_message (("link: %s", str->str));
 	main_url_handler(str->str, TRUE);
 	g_string_free (str, TRUE);
 	g_free((gchar*)encoded_mod);

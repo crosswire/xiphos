@@ -166,7 +166,7 @@ void main_navbar_fill_book_combo(NAVBAR navbar)
 			key->setTestament(1);
 			key->setBook(i+1);
 			book = strdup((const char *) key->getBookName());
-			GS_message(("book: %s",book));
+			XI_message(("book: %s",book));
 			gtk_list_store_append (GTK_LIST_STORE(book_model), &iter);
 			gtk_list_store_set(GTK_LIST_STORE(book_model),
 					   &iter,
@@ -185,7 +185,7 @@ void main_navbar_fill_book_combo(NAVBAR navbar)
 			key->setTestament(2);
 			key->setBook(i+1);
 			book = strdup((const char *) key->getBookName());
-			GS_message(("book: %s",book));
+			XI_message(("book: %s",book));
 			gtk_list_store_append (GTK_LIST_STORE(book_model), &iter);
 			gtk_list_store_set(GTK_LIST_STORE(book_model),
 					   &iter,

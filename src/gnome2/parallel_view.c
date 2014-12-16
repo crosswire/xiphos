@@ -139,7 +139,7 @@ void gui_popup_menu_parallel(void)
 					 G_CALLBACK(on_undockInt_activate),
 					 &settings);
 		} else {
-			GS_warning(("undockInt is NULL?"));
+			XI_warning(("undockInt is NULL?"));
 		}
 	}
 

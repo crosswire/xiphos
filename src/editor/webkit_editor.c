@@ -283,9 +283,9 @@ void action_cut_activate_cb (GtkWidget *widget, EDITOR * e)
 void action_copy_activate_cb (GtkWidget *widget, EDITOR * e)
 {
 		if(editor_copy(e))
-				GS_message(("%s", "copy sucess"));
+				XI_message(("%s", "copy sucess"));
 		else
-				GS_message(("%s", "copy failed"));
+				XI_message(("%s", "copy failed"));
 }
 
 void action_paste_activate_cb (GtkWidget *widget, EDITOR * e)
@@ -343,7 +343,7 @@ void set_button_state(BUTTONS_STATE state, EDITOR * e)
 	gtk_toggle_tool_button_set_active (e->toolitems.strike,state.strike);
 	gtk_combo_box_set_active ((GtkComboBox *)e->toolitems.cb, state.style);
 	if (state.color) {
-		GS_message(("state.color: %s",state.color));
+		XI_message(("state.color: %s",state.color));
 #ifdef HAVE_GTK_34
 		if(gdk_rgba_parse (&rgba, state.color))
 			gtk_color_chooser_set_rgba ((GtkColorChooser*) e->toolitems.color, &rgba);
@@ -409,10 +409,10 @@ gchar *get_font_size_from_name(GString * fontname)
 	gint len, i = 0, j = 0;
 
 	len = fontname->len;
-	GS_message(("\nlength: %d\n",len));
+	XI_message(("\nlength: %d\n",len));
 	for (i = 0; (i < 79 && i < len); i++) {
 		if (isdigit(fontname->str[i])) {
-			GS_message(("\n\nfontname->str[i]: %c",fontname->str[i]));
+			XI_message(("\n\nfontname->str[i]: %c",fontname->str[i]));
 			buf[j] = fontname->str[i];
 			buf[j + 1] = '\0';
 			j++;
@@ -537,7 +537,7 @@ void recent_item_cb (GtkRecentChooser *chooser, EDITOR * e)
 {
 	gchar * file_uri = gtk_recent_chooser_get_current_uri (chooser);
 
-	GS_message(("file_uri: %s", file_uri));
+	XI_message(("file_uri: %s", file_uri));
 	if (e->filename)
 		g_free(e->filename);
 	e->filename = g_strdup(file_uri);
@@ -660,7 +660,7 @@ action_save_activate_cb (GtkWidget * widget, EDITOR *e)
 		_save_book (e);
 		break;
 	default:
-		GS_message (("\naction_save_cb oops!\n"));
+		XI_message (("\naction_save_cb oops!\n"));
 		break;
 	}
 }
@@ -802,7 +802,7 @@ void combo_box_changed_cb (GtkComboBox *widget, EDITOR * e)
 				break;
 		}
 		if (script) {
-				GS_message(("%s",script));
+				XI_message(("%s",script));
 				editor_execute_script (script, e);
 		}
 }
@@ -945,7 +945,7 @@ _save_file (EDITOR * e)
 
 
 	editor_get_document_content (data, e);
-	GS_message(("%s",data->str));
+	XI_message(("%s",data->str));
  
 	if (!e->filename || ( 0 == g_strcmp0 ("Untitled document",e->filename)) ||
 						g_strrstr (e->filename, ".spt")) {	
@@ -1017,7 +1017,7 @@ _load_file (EDITOR * e, const gchar * filename)
 		g_free(e->filename);
 	e->filename = g_strdup(filename);
 
-	GS_message(("_load_file filename: %s",filename));
+	XI_message(("_load_file filename: %s",filename));
 
 	xml_set_value("Xiphos", "studypad", "lastfile",
 		      e->filename);
@@ -1060,7 +1060,7 @@ void editor_load_book(EDITOR * e)
 
 
 	title = g_strdup_printf("%s", e->module);
-	GS_message (("book: %s\noffset :%s", e->module, e->key));
+	XI_message (("book: %s\noffset :%s", e->module, e->key));
 
 	if (atol(e->key) != 0)
 		text = main_get_book_raw_text (e->module, e->key);
@@ -1467,7 +1467,7 @@ gint editor_create_new(const gchar * filename, const gchar * key, gint editor_ty
 		}
 		tmp = g_list_next(tmp);
 	}
-    	GS_message (("filename %s, key %s", (filename ? filename : "-null-"), (key ? key : "-null-")));
+    	XI_message (("filename %s, key %s", (filename ? filename : "-null-"), (key ? key : "-null-")));
 	return _create_new(filename, key, editor_type);
 }
 

@@ -162,7 +162,7 @@ void gui_verselist_to_bookmarks(GList * verses, gint save_as_single)
 			tmpbuf = list_item->key;
 			g_string_printf(str, "%s, %s", tmpbuf,
 					 module_name);
-			GS_message(("bookmark: %s",str->str));
+			XI_message(("bookmark: %s",str->str));
 			gtk_tree_store_append(GTK_TREE_STORE(model),
 					      &iter, &parent);
 			gtk_tree_store_set(GTK_TREE_STORE(model), &iter,

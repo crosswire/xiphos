@@ -153,7 +153,7 @@ static void _copy_to_clipboard (EXPORT_DATA data, char* text,int len)
 
 static void _save(EXPORT_DATA data, char* text,int len)
 {
-	GS_message(("%s",data.filename));
+	XI_message(("%s",data.filename));
 	g_file_set_contents(data.filename, text, len, NULL);
 	if (data.filename)
 		g_free(data.filename);

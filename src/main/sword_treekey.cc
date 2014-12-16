@@ -110,7 +110,7 @@ static void load_treeview (GtkTreeStore * model, GtkTreeIter * parent,
 	tmpbuf = (char *) treeKey.getLocalName ();
 	if (atol(buf) == 0)
 		tmpbuf = mod_name;
-	//GS_message(("\nlocal_name: %d\noffset: %s",strlen(tmpbuf),buf));
+	//XI_message(("\nlocal_name: %d\noffset: %s",strlen(tmpbuf),buf));
 	if (treeKey.hasChildren ()) {
 		add_parent_to_treeview (model, parent);
 	} else {
@@ -153,7 +153,7 @@ void appendChild (TreeKeyIdx * treeKey, const gchar * name)
 	treeKey->appendChild ();
 	treeKey->setLocalName (name);
 	treeKey->save ();
-	GS_message (("name: %s\nlocalName: %s", name,
+	XI_message (("name: %s\nlocalName: %s", name,
 		     treeKey->getLocalName ()));
 }
 
@@ -196,7 +196,7 @@ unsigned long main_treekey_append_sibling (char *book, char *name, char * offset
 
 	TreeKeyIdx *treekey = (TreeKeyIdx *) mod->createKey ();
 	treekey->setOffset (atol(offset));
-	GS_message (("offset1: %ld",  treekey->getOffset()));
+	XI_message (("offset1: %ld",  treekey->getOffset()));
 	treekey->append ();
 	treekey->setLocalName (name);
 	treekey->save ();
@@ -205,7 +205,7 @@ unsigned long main_treekey_append_sibling (char *book, char *name, char * offset
 	mod->getKeyText();      //snap to entry
 	(*mod) << name;
 
-	GS_message (("offset2: %ld",  treekey->getOffset()));
+	XI_message (("offset2: %ld",  treekey->getOffset()));
 	return treekey->getOffset();
 }
 
@@ -229,7 +229,7 @@ unsigned long main_treekey_append_child (char *book, char *name, char * offset)
 	mod->setKey(treekey);
 	mod->getKeyText();      //snap to entry
 	(*mod) << name;
-	GS_message (("book: %s\nlocalName: %s\noffset :%s", book, name,
+	XI_message (("book: %s\nlocalName: %s\noffset :%s", book, name,
 		     offset));
 	return treekey->getOffset();
 }
@@ -249,7 +249,7 @@ void main_treekey_set_local_name (char *book, char *name, char * offset)
 	treekey->setLocalName (name);
 	treekey->save ();
 
-	GS_message (("book: %s\nlocalName: %s\noffset :%s", book, name,
+	XI_message (("book: %s\nlocalName: %s\noffset :%s", book, name,
 		     offset));
 
 }
@@ -291,7 +291,7 @@ void main_treekey_save_book_text (char *book, char * offset, char * text)
 	(*mod) << text;
 	if (settings.book_mod && book
 		   	&& !strcmp(settings.book_mod,book)){
-		GS_message(("main_treekey_save_book_text"));
+		XI_message(("main_treekey_save_book_text"));
 		main_display_book(book, offset);
 	}
 }
@@ -306,7 +306,7 @@ void main_load_book_tree_in_editor (GtkTreeView * treeview, char *book)
 	SWMgr *mgr = backend->get_mgr ();
 	SWModule *mod = mgr->Modules[book];
 
-	GS_message(("main_load_book_tree_in_editor book: %s", book ));
+	XI_message(("main_load_book_tree_in_editor book: %s", book ));
 
 	if (!mod)
 		return;

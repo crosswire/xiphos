@@ -203,7 +203,7 @@ biblesync_navigate(char cmd, string speaker_uuid,
 
     // new speaker discovery.
     case 'S':
-	GS_message(("new speaker: key [%s], u [%s], ip [%s], a [%s], d [%s]",
+	XI_message(("new speaker: key [%s], u [%s], ip [%s], a [%s], d [%s]",
 		    speaker_uuid.c_str(), user.c_str(),
 		    ipaddr.c_str(), app.c_str(), device.c_str()));
 
@@ -272,7 +272,7 @@ biblesync_navigate(char cmd, string speaker_uuid,
 
     // dead speaker -- timed out from lack of beacons.
     case 'D':
-	GS_message(("dead speaker: key [%s]", speaker_uuid.c_str()));
+	XI_message(("dead speaker: key [%s]", speaker_uuid.c_str()));
 	speakers.erase(speaker_uuid);
 	speaker_display_update = true;
 	break;

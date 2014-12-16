@@ -121,7 +121,7 @@ void gui_save_treeview_path_string (const gchar * path_str, const gchar * book_n
 {
 	gchar *file = g_strdup_printf("%s/book_path.conf", settings.gSwordDir);
 	save_conf_file_item(file, book_name, "PATH", path_str);
-	GS_message (("book %s, path %s, file %s\n", book_name, path_str, file));
+	XI_message (("book %s, path %s, file %s\n", book_name, path_str, file));
 	g_free(file);
 }
 
@@ -208,7 +208,7 @@ gboolean gui_expand_treeview_to_path (GtkTreeView * tree, const gchar * book_nam
 	if (!path_string) return 0;
 
 	work_buf = g_strsplit ( path_string, ":", -1);
-	GS_message (("\n\nbuf[0]: %s\nbuf[1]: %s\nbuf[2]: %s\n\n",
+	XI_message (("\n\nbuf[0]: %s\nbuf[1]: %s\nbuf[2]: %s\n\n",
 		     work_buf[0],
 		     work_buf[1],
 		     work_buf[2]));
@@ -230,7 +230,7 @@ gboolean gui_expand_treeview_to_path (GtkTreeView * tree, const gchar * book_nam
 			main_expand_treeview_to_path(model,iter);
 			gtk_tree_path_free(path);
 			while (work_buf[i]) {
-				GS_message (("\n\nwork_buf[%d]: %s\n\n",
+				XI_message (("\n\nwork_buf[%d]: %s\n\n",
 					     i,
 					     work_buf[i]));
 
@@ -242,7 +242,7 @@ gboolean gui_expand_treeview_to_path (GtkTreeView * tree, const gchar * book_nam
 								     &iter,
 								     (gchar *)tmp_path_string);
 
-				GS_message (("\n\nmod: %s\npath: %s\n\n",
+				XI_message (("\n\nmod: %s\npath: %s\n\n",
 					     mod,
 					     tmp_path_string));
 				path = gtk_tree_path_new_from_string (
@@ -1275,7 +1275,7 @@ static gboolean tree_key_press_cb(GtkWidget * widget,
 	if (!key)
 		return FALSE;
 
-	GS_warning(("%d", event->keyval));
+	XI_warning(("%d", event->keyval));
 	if (event) {
 
 		switch (event->keyval) {
@@ -1297,7 +1297,7 @@ static gboolean tree_key_press_cb(GtkWidget * widget,
 
 		case 0xffe1:	/* shift keys */
 		case 0xffe2:
-			GS_warning(("shift key pressed"));
+			XI_warning(("shift key pressed"));
 			shift_key_pressed =  TRUE;
 			sync_windows();
 			break;

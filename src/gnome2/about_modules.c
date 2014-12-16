@@ -70,7 +70,7 @@ static void
 on_copy_activate(GtkMenuItem * menuitem,
 		 gpointer data)
 {
-	GS_message(("on_copy_activate"));
+	XI_message(("on_copy_activate"));
 	XIPHOS_HTML_COPY_SELECTION(text_html);
 }
 

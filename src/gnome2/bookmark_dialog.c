@@ -72,7 +72,7 @@ void on_buffer_changed (GtkTextBuffer *textbuffer, gpointer user_data)
                                          &start,
                                          &end,
                                          FALSE);
-	GS_message (("note: %s", note));
+	XI_message (("note: %s", note));
 
 
 }
@@ -439,7 +439,7 @@ static GtkWidget *_create_bookmark_dialog(gchar * label,
 #endif
 	gchar *glade_file = gui_general_user_file ("bookmarks" UI_SUFFIX, TRUE);
 	g_return_val_if_fail(glade_file != NULL, NULL);
-	GS_message(("%s",glade_file));
+	XI_message(("%s",glade_file));
 
 	/* build the widget */
 #ifdef USE_GTKBUILDER
@@ -512,7 +512,7 @@ static GtkWidget *_create_mark_verse_dialog(gchar * module,
 
 	gchar *glade_file = gui_general_user_file("markverse" UI_SUFFIX, TRUE);
 	g_return_val_if_fail(glade_file != NULL, NULL);
-	GS_message(("%s",glade_file));
+	XI_message(("%s",glade_file));
 
 	g_snprintf(osisreference,  100, "%s %s", module,
 		   main_get_osisref_from_key((const char *)module,

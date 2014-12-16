@@ -179,7 +179,7 @@ void button_clean(GtkButton * button, gpointer user_data)
 	GtkListStore *list_store;
 	GString *html_text = g_string_new("");
 
-	GS_message(("button_clean"));
+	XI_message(("button_clean"));
 	model = gtk_tree_view_get_model(GTK_TREE_VIEW(search1.listview_results));
 	list_store = GTK_LIST_STORE(model);
 	gtk_list_store_clear(list_store);
@@ -1631,7 +1631,7 @@ void _create_mod_sel_dialog(void)
 
 	glade_file = gui_general_user_file("search-dialog.glade", FALSE);
 	g_return_if_fail(glade_file != NULL);
-	GS_message(("%s",glade_file));
+	XI_message(("%s",glade_file));
 
 
 	gxml2 = glade_xml_new(glade_file, "dialog2", NULL);
@@ -1785,7 +1785,7 @@ void _create_search_dialog(void)
 
 	glade_file = gui_general_user_file("search-dialog" UI_SUFFIX, FALSE);
 	g_return_if_fail(glade_file != NULL);
-	GS_message(("%s",glade_file));
+	XI_message(("%s",glade_file));
 
 	/* build the widget */
 #ifdef USE_GTKBUILDER

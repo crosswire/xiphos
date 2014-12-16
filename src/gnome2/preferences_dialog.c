@@ -250,15 +250,15 @@ string_is_color(gchar * color)
 	gint i;
 
 	if (!color) {
-		GS_warning(("string_is_color, pointer NULL\n"));
+		XI_warning(("string_is_color, pointer NULL\n"));
 		return 0;
 	}
 	if (strlen(color) != 7) {
-		GS_warning(("string_is_color, strlen(%s) != 7\n", color));
+		XI_warning(("string_is_color, strlen(%s) != 7\n", color));
 		return 0;
 	}
 	if (color[0] != '#') {
-		GS_warning(("string_is_color, 0 in %s is not #\n", color));
+		XI_warning(("string_is_color, 0 in %s is not #\n", color));
 		return 0;
 	}
 	for (i = 1; i < 7; i++) {
@@ -266,13 +266,13 @@ string_is_color(gchar * color)
 		    || (color[i] < 48)
 		    || ((color[i] > 57) && (color[i] < 65))
 		    || ((color[i] > 70) && (color[i] < 97))) {
-			GS_warning
+			XI_warning
 			    (("string_is_color, %d in %s is not from a color, it is %d\n",
 			     i, color, color[i]));
 			return 0;
 		}
 	}
-	GS_print(("string_is_color, %s is color\n", color));
+	XI_print(("string_is_color, %s is color\n", color));
 	return 1;
 
 }

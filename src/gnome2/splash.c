@@ -418,7 +418,7 @@ GtkWidget *e_splash_new(void)
 
 	splash_image_pixbuf = pixbuf_finder("splash.png", 0, &error);
 	if (!splash_image_pixbuf) {
-		GS_warning(("pixmap file error: %s\n",
+		XI_warning(("pixmap file error: %s\n",
 			    error->message));
 		g_error_free(error);
 		error = NULL;
@@ -554,7 +554,7 @@ void gui_splash_init()
 		{
 			icon_pixbuf = pixbuf_finder(icons->data, 0, &error);
 			if (!icon_pixbuf) {
-				GS_warning(("pixmap file error: %s\n",
+				XI_warning(("pixmap file error: %s\n",
 					    error->message));
 				error = NULL;
 				/* this is ugly but better than a crash */

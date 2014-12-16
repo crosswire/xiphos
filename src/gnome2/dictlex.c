@@ -93,7 +93,7 @@ void gui_get_clipboard_text_for_lookup (GtkClipboard *clipboard,
 	int len = 0;
 
 	if (text == NULL) return;
-	GS_message(("src/gnome2/dictlex.c: text =>%s<",text));
+	XI_message(("src/gnome2/dictlex.c: text =>%s<",text));
 
 	key = g_strdelimit((char*)text, "&.,\"<>;:?", ' ');
 	key = g_strstrip((char*)key);
@@ -210,7 +210,7 @@ void dict_key_entry_changed(GtkEntry * entry, gpointer data)
 	gchar *buf = NULL;
 
 	buf = (gchar*)gtk_entry_get_text(entry);
-	GS_message(("dict_key_entry_changed: %s",buf));
+	XI_message(("dict_key_entry_changed: %s",buf));
 	if (strlen(buf) < 2 )
 		return;
 

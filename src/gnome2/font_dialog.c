@@ -100,7 +100,7 @@ static void ok_clicked(GtkButton * button,  gpointer data)
 	gchar *new_font = NULL;
 	gchar *font_name = NULL;
 
-	GS_message(("ok_clicked: %s", (new_gdk_font ? new_gdk_font : "-none-")));
+	XI_message(("ok_clicked: %s", (new_gdk_font ? new_gdk_font : "-none-")));
 	if (file == NULL)
 		file = g_strdup_printf("%s/fonts.conf", settings.gSwordDir);
 
@@ -125,7 +125,7 @@ static void ok_clicked(GtkButton * button,  gpointer data)
 	save_conf_file_item(file, mf->mod_name, "Fontsize", mf->new_font_size);
 
 	//evidently new_gdk_font is never set on Windows
-	GS_message (("\nFont: %s\nFontsize: %s\n",
+	XI_message (("\nFont: %s\nFontsize: %s\n",
 		     (mf->new_font ? mf->new_font : "-none-"),
 		     (mf->new_font_size ? mf->new_font_size : "-none-")));
 
@@ -209,7 +209,7 @@ static void font_set(GtkFontButton * button,
 		     gchar * arg1,  gpointer data)
 {
 	new_gdk_font = gtk_font_button_get_font_name (button);
-	GS_message (("%s", new_gdk_font));
+	XI_message (("%s", new_gdk_font));
 	new_font_set = 1;
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
 				     (checkbutton_no_font), FALSE);

@@ -277,7 +277,7 @@ ClearImages(gchar *text)
 			while (s <= t)
 				*(s++) = ' ';
 		} else {
-			GS_message(("ClearImages: no img end: %s\n", s));
+			XI_message(("ClearImages: no img end: %s\n", s));
 			return;
 		}
 	}
@@ -302,7 +302,7 @@ ClearFontFaces(gchar *text)
 			while (s <= t)
 				*(s++) = ' ';
 		} else {
-			GS_message(("ClearFontFaces: no font end: %s\n", s));
+			XI_message(("ClearFontFaces: no font end: %s\n", s));
 			return;
 		}
 	}
@@ -526,7 +526,7 @@ block_render_secondary(const char *text,
 				end[2] = *(s+1);
 			again:
 				if ((t = strstr((char *)s, end)) == NULL) {
-					GS_warning(("No %s in %s\n", end, s));
+					XI_warning(("No %s in %s\n", end, s));
 					break;
                                 }
 
@@ -569,7 +569,7 @@ block_render_secondary(const char *text,
 			} else if (!strncmp(s+1, "small>", 6)) {
 				// strongs and morph are bounded by "<small>".
 				if ((t = strstr((char *)s, "</small>")) == NULL) {
-					GS_warning(("No </small> in %s\n", s));
+					XI_warning(("No </small> in %s\n", s));
 					break;
 				}
 				t += 8;
@@ -1926,7 +1926,7 @@ GTKPrintEntryDisp::display(SWModule &imodule)
 	GLOBAL_OPS * ops = main_new_globals(imodule.getName());
 
 	imodule.getRawEntry();	// snap to entry
-	GS_message(("%s",(const char *)imodule.getRawEntry()));
+	XI_message(("%s",(const char *)imodule.getRawEntry()));
 	main_set_global_options(ops);
 	mod_type = backend->module_type(imodule.getName());
 
