@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Xiphos 3.4.0\n"
 "Report-Msgid-Bugs-To: Dominique Corbex <domcox@users.sourceforge.net>>\n"
 "POT-Creation-Date: 2014-12-14 21:02+0100\n"
-"PO-Revision-Date: 2014-12-14 21:24+0100\n"
+"PO-Revision-Date: 2014-12-15 20:14+0100\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>>\n"
 "Language-Team: emacs + po-mode; French <gnomefr@traduc.org>\n"
 "Language: \n"
@@ -969,7 +969,6 @@ msgid "The Sidebar"
 msgstr "La barre d'outils"
 
 #: ../C/xiphos.xml:163(para)
-#, fuzzy
 msgid ""
 "On the left hand side of <application>Xiphos</application> there is the "
 "Sidebar. Here the user can switch between the different Sword modules, view "
@@ -978,19 +977,13 @@ msgid ""
 "clicking it. Using the context (right-click) menu, other options are to open "
 "a new tab using the module, open a separate (i.e. detached) window, or to "
 "view the \"About\" information for the module."
-msgstr ""
-"Le <interface>volet latéral</interface> est situé sur la partie gauche de la "
-"fenêtre principale de <application>&appname;</application>. Le "
-"<interface>volet latéral</interface> permet de choisir les modules Sword, de "
-"gérer et utiliser les signets,d' effectuer des recherches basiques ou "
-"d'afficher les listes de versets. Les boutons du <interface>volet latéral</"
-"interface> permettent d'activer ces différentes fonctions."
+msgstr "Le <interface>volet latéral</interface> est situé sur la partie gauche de la fenêtre principale de <application>&appname;</application>. Le <interface>volet latéral</interface> permet de faire son choix dans les modules Sword, de gérer et utiliser les signets, d'effectuer des recherches basiques ou d'afficher les listes de versets. La sélection d'un module dans la liste des modules affiche son contenu dans la fenêtre principale. Le menu contextuel (click droit) offre d'autres possibilités, ouvrir le module dans un nouvel onglet, l'ouvrir dans une fenêtre distincte, ou consulter l'information «_À propos » du module."
 
 #: ../C/xiphos.xml:169(para)
 msgid ""
 "To switch between all Sidebar functions, buttons have been placed at the top "
 "of the Sidebar."
-msgstr ""
+msgstr "Pour basculer entre toutes les fonctions du volet latéral, les boutons ont été placés au sommet du volet latéral."
 
 #: ../C/xiphos.xml:173(title)
 msgid "Sidebar Shortcuts"
@@ -1145,7 +1138,6 @@ msgid "Opening A Separate Bible Translation"
 msgstr "Ouvrir le texte·biblique dans une fenêtre distincte"
 
 #: ../C/xiphos.xml:309(para)
-#, fuzzy
 msgid ""
 "In order to view a Bible translation separate from the <application>Xiphos</"
 "application> main window interface, under the <guibutton>Modules</guibutton> "
@@ -1154,13 +1146,7 @@ msgid ""
 "choice</guimenuitem></menuchoice>. Then right-click on a translation and "
 "choose <guimenuitem>Open in dialog</guimenuitem>. The module will open in a "
 "separate, detached window of its own."
-msgstr ""
-"Dans l'option  <guimenuitem>Modules</guimenuitem> du <interface>volet "
-"latéral</interface>, choisir <menuchoice><guimenuitem>Textes bibliques</"
-"guimenuitem><guimenuitem>langue de votre choix</guimenuitem></menuchoice>. "
-"Faire un clic droit sur la version souhaitée, puis dans le menu contextuel "
-"qui s'affiche, choisir l'option <guimenuitem>Ouvrir dans une fenêtre</"
-"guimenuitem>."
+msgstr "Pour ouvrir un texte biblique dans une fenêtre distincte de la fenêtre principale de   <application>&appname,</application>, dans l'option  <guimenuitem>Modules</guimenuitem> du <interface>volet latéral</interface>, choisir <menuchoice><guimenuitem>Textes bibliques</guimenuitem><guimenuitem>langue de votre choix</guimenuitem></menuchoice>. Faire un clic droit sur la version souhaitée, puis dans le menu contextuel qui s'affiche, choisir l'option <guimenuitem>Ouvrir dans une fenêtre</guimenuitem>. Le module s'ouvrira dans une fenêtre distincte."
 
 #: ../C/xiphos.xml:315(para)
 msgid ""
@@ -1172,7 +1158,7 @@ msgid ""
 "Bibles and commentaries plus the main window, and the main window will drive "
 "all detached Bibles and commentaries whose synchronization button is "
 "depressed."
-msgstr ""
+msgstr "Les fenêtres distinctes comprenant un texte biblique ou un commentaire ont un bouton de synchronisation dans le coin supérieur gauche à côté de la barre de navigation. Lorsque ce bouton est activé, le texte biblique et le commentaire de la fenêtre principale sont synchronisés avec le contenu de la fenêtre distincte. La synchronisation se fait dans les deux sens: Toute fenêtre indépendante permettra de synchroniser la navigation avec toutes les autres fenêtres individuelles plus la fenêtre principale, et la fenêtre principale synchronisera tous les textes bibliques et commentaires des fenêtres distinctes dont le bouton de synchronisation est activé."
 
 #: ../C/xiphos.xml:324(title)
 msgid "Finding Out About The Current Translation"
@@ -1180,8 +1166,7 @@ msgstr "Rechercher les informations à propos de la version courante."
 
 #: ../C/xiphos.xml:325(para)
 msgid "To find out about the Bible translation currently being displayed:"
-msgstr ""
-"Pour obtenir des informations à propos de la version de la Bible en cours :"
+msgstr "Pour obtenir des informations à propos de la version de la Bible en cours :"
 
 #: ../C/xiphos.xml:330(para)
 msgid ""
@@ -1370,7 +1355,7 @@ msgid ""
 "controls are desired. Beware, it is very easy to shoot oneself in the foot "
 "with CSS, and this will affect all modules' display. The facility exists to "
 "provide the capability that advanced users may wish."
-msgstr ""
+msgstr "Les utilisateurs familiers des feuilles de style en cascade (CSS) peuvent créer le fichier \"default-style.css\" dans le répertoire .xiphos et inclure dans ce fichier tout contrôle CSS souhaité. Attention, il est très facile de se tirer une balle dans le pied avec les CSS, et une erreur aura une incidence sur l'affichage de tous les modules. Cette disposition existe pour fournir aux utilisateurs avancés les moyens qu'ils souhaitent.\""
 
 #: ../C/xiphos.xml:504(title)
 msgid "User Annotation"
@@ -1882,7 +1867,7 @@ msgstr "<guibutton>Ctrl-Alt-Shift-P</guibutton> met BibleSync en mode Personnel.
 #: ../C/xiphos.xml:864(para)
 msgid ""
 "<guibutton>Ctrl-Alt-Shift-S</guibutton> puts BibleSync into Speaker mode."
-msgstr "<guibutton>Ctrl-Alt-Shift-S</guibutton> met BibleSync en mode Conférencier."
+msgstr "<guibutton>Ctrl-Alt-Shift-S</guibutton> met BibleSync en mode Orateur."
 
 #: ../C/xiphos.xml:869(para)
 msgid ""
@@ -1898,7 +1883,7 @@ msgid ""
 "<guibutton>Ctrl-Alt-Shift-N</guibutton> causes BibleSync to navigate your "
 "current main window point transiently as a one-shot event. BibleSync must be "
 "transmit-ready, that is, in Personal or Speaker mode."
-msgstr ""
+msgstr "<guibutton>Ctrl-Alt-Shift-N</guibutton> force une seule fois la navigation par BibleSync d'après la référence en cours dans la fenêtre principale. BibleSync doit être prêt à transmettre, en mode Personnel ou Orateur."
 
 #: ../C/xiphos.xml:225(title)
 msgid "Preferences"
@@ -1982,28 +1967,21 @@ msgstr ""
 "taille de la fenêtre où elles sont affichées."
 
 #: ../C/xiphos.xml:71(para)
-#, fuzzy
 msgid ""
 "<guilabel>Highlight current verse</guilabel>, if enabled, will cause "
 "<application>Xiphos</application> to substitute mere current verse "
 "colorization with a high-contrast alternate color scheme on the current "
 "verse. The colors used may be chosen from the color selector pane (see "
 "below)."
-msgstr ""
-"L'option <guilabel>Verset en cours contrasté</guilabel>, une fois activée, "
-"permet de remplacer la couleur  du verset en cours par une coloration au "
-"contraste plus élevée. Les couleurs sont modifiables dans le volet "
-"<guilabel>Couleurs</guilabel> (voir au-dessus)."
+msgstr "L'option <guilabel>Verset en cours surligné</guilabel>, une fois activée, permet de remplacer la colorisation du verset en cours par un schéma de couleurs au contraste plus élevé. Les couleurs peuvent être personalisées dans le panneau de sélection de couleurs (voir ci-dessous)."
 
 #: ../C/xiphos.xml:76(para)
-#, fuzzy
 msgid ""
 "<guilabel>Highlight user annotations</guilabel> uses inverted highlight "
 "color choices when marking user-annotated verses."
 msgstr ""
 "<guilabel>Annotations personnelles surlignées</guilabel> utilise les choix \n"
-"de couleurs du surlignement pour indiquer les versets annotés par "
-"l'utilisateur."
+"de couleurs du surlignement pour marquer les versets annotés par l'utilisateur."
 
 #: ../C/xiphos.xml:80(para)
 msgid ""
@@ -2020,7 +1998,7 @@ msgstr ""
 msgid ""
 "Verse number display can be offset in several ways provided by the "
 "checkboxes."
-msgstr ""
+msgstr "L'affichage du numéro de verset peut être décalé de plusieurs façons suivant les cases à cocher."
 
 #: ../C/xiphos.xml:92(title) ../C/xiphos.xml:103(phrase)
 msgid "BibleSync Settings"
@@ -2028,7 +2006,7 @@ msgstr "Configuration de BibleSync"
 
 #: ../C/xiphos.xml:94(title) ../C/xiphos.xml:96(title)
 msgid "Controls for BibleSync"
-msgstr ""
+msgstr "Commandes de BibleSync"
 
 #: ../C/xiphos.xml:110(para)
 msgid ""
@@ -2041,7 +2019,7 @@ msgid ""
 "and who receives navigation. In Personal mode, BibleSync navigation is both "
 "transmitted and received; as Speaker, it transmits only; as Audience, it "
 "receives only."
-msgstr ""
+msgstr "BibleSync est un protocole réseau de navigation associée de versets. Il permet à une personne seule exécutant des programmes bibliques sur plusieurs machines ou à un groupe de personnes travaillant en étroite collaboration, tels que des traducteurs, de naviguer simultanément dans la Bible. Il possède en outre un mode « Orateur », où le programme d'un intervenant induit les programmes de l'audience à suivre l'enchaînement des versets. La différence entre les modes de BibleSync dépend de qui transmet et qui reçoit la navigation. En mode Personnel, la navigation BibleSync est à la fois transmises et reçue, en mode Orateur seulement transmise, et en mode Audience, reçue uniquement."
 
 #: ../C/xiphos.xml:117(para)
 msgid ""
@@ -2049,11 +2027,11 @@ msgid ""
 "whether to accept navigation directly, so that Xiphos moves immediately to a "
 "specified verse, or whether incoming navigation is instead sent to the verse "
 "list, where you can decide whether to follow."
-msgstr ""
+msgstr "Pour activer BibleSync, sélectionner un mode parmi les boutons radio. Choisir aussi l'opportunité d'accepter ou non la navigation entrante directement, de sorte que Xiphos se déplace immédiatement à un verset spécifié, ou si la navigation entrante est envoyée à la liste de versets, de façon à pouvoir décider ensuite de la suivre ou pas."
 
 #: ../C/xiphos.xml:122(para)
 msgid "If you use a firewall, you must punch a hole in it for UDP port 22272."
-msgstr ""
+msgstr "Si vous utilisez un pare-feu, vous devrez ouvrir le port UDP 22272."
 
 #: ../C/xiphos.xml:125(para)
 msgid ""
@@ -2061,7 +2039,7 @@ msgid ""
 "do not wish your activity among them to be shared on the local net, you can "
 "use Personal mode combined with the Private checkbox. This will tell "
 "<application>Xiphos</application> not to broadcast outside your system."
-msgstr ""
+msgstr "Si vous exécutez plus d'un programme compatible BibleSync sur votre ordinateur et que vous ne voulez pas voir l'activité entre eux partagée sur le réseau local, vous pouvez utiliser le mode « Personnel » combinée à l'option « Privé ». Ceci va forcer \"<application>&appname;</ application> a ne pas diffuser de messages en dehors de votre système."
 
 #: ../C/xiphos.xml:130(para)
 msgid ""
@@ -2076,7 +2054,7 @@ msgid ""
 "pass in the protocol to the receivers. For <application>Xiphos</"
 "application>, receipt of multi-references always induces indirect verse list "
 "navigation."
-msgstr ""
+msgstr "Vous pouvez envoyer une liste de versets depuis la fenêtre de recherche du Volet Latérale ou depuis la fenêtre de Recherche avancée via BibleSync; voir le menu contextuel (clic droit). Un cas d'usage est la combinaison de l'utilisation d'un programme biblique simple, par exemple une application sur un mobile, avec un autre programme tel que <application>&appname;</ application> offrant des capacités de recherche étendues : les recherches se font dans <application>&appname;</application> et la liste de versets résultante est envoyée à l'appareil mobile. Attention, les limites de taille du protocole sont assez réduites, et si une recherche génére des centaines de résultats dans la liste de versets, tout au plus quelques dizaines seront transmises par le protocole aux récepteurs. Dans <application>&appname;</application>, la réception de références multiples induit toujours une navigation indirecte par la liste de versets."
 
 #: ../C/xiphos.xml:138(para)
 msgid ""
@@ -2085,7 +2063,7 @@ msgid ""
 "number of other programs' authors and support organizations have indicated "
 "their intention to support BibleSync as well, including Laridian, theWord, "
 "BibleAnalyzer, and Accordance, as well as other Sword Project applications."
-msgstr ""
+msgstr "<application>&appname;</application> est le premier programme biblique mettant en œuvre le protocole BibleSync; en tant que telle, son utilité est peut être limitée pour l'instant. Mais un nombre d'auteurs d'autres programmes et des organisations de soutien ont indiqué leur intention de supporter BibleSync, y compris Laridian, theWord, BibleAnalyzer et Accordance, aussi bien que d'autres applications du Projet Sword."
 
 #: ../C/xiphos.xml:148(title)
 msgid "Fonts And Colors"

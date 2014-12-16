@@ -14,7 +14,7 @@
 # Biblical Text           -> Textes bibliques
 # Lemma                   -> Lemme
 # Daily Devotion          -> Calendrier biblique
-# Speaker                 -> Conférencier
+# Speaker                 -> Orateur
 # Audience                -> Audience
 #
 # Dominique Corbex <domcox@users.sourceforge.net>, 2002, 2014.
@@ -1303,7 +1303,7 @@ msgstr "Notes personnelles"
 
 #: ../src/gnome2/preferences_dialog.c:1020
 msgid "Speaker"
-msgstr "Conférencier"
+msgstr "Orateur"
 
 #: ../src/gnome2/preferences_dialog.c:1021
 msgid "Audience"
@@ -3638,9 +3638,9 @@ msgstr ""
 "utilisez plusieurs programmes Bibliques, ou travaillez en équipe, ou si vous avez\n"
 "en classe des études mutualisées, BibleSync peut être un outil utile pour vous.\n"
 "BibleSync opère dans un de ces trois modes : Personnel, pour synchroniser plusieurs\n"
-"programmes Bibliques, les vôtres ou au sein d'une équipe de travail ; Conférencier,\n"
+"programmes Bibliques, les vôtres ou au sein d'une équipe de travail ; Orateur,\n"
 "pour piloter les programmes bibliques du public d'une conférence ; Audience, pour\n"
-"recevoir la navigation du conférencier."
+"recevoir la navigation de l'orateur."
 
 #: ../ui/prefs.glade.h:35 ../ui/prefs.gtkbuilder.h:35
 msgid "Mode"
@@ -3664,15 +3664,15 @@ msgstr "Bouton radio BSP désactivé"
 
 #: ../ui/prefs.glade.h:40 ../ui/prefs.gtkbuilder.h:40
 msgid "_Speaker"
-msgstr "_Conférencier"
+msgstr "_Orateur"
 
 #: ../ui/prefs.glade.h:41 ../ui/prefs.gtkbuilder.h:41
 msgid "Enable BibleSync as the speaker."
-msgstr "Active BibleSync en tant que conférencier."
+msgstr "Active BibleSync en tant que Orateur."
 
 #: ../ui/prefs.glade.h:42 ../ui/prefs.gtkbuilder.h:42
 msgid "BSP speaker radio button"
-msgstr "Bouton radio conférencier BSP"
+msgstr "Bouton radio Orateur BSP"
 
 #: ../ui/prefs.glade.h:43 ../ui/prefs.gtkbuilder.h:43
 msgid "_Audience"
@@ -3751,7 +3751,7 @@ msgstr "Écouter"
 
 #: ../ui/prefs.glade.h:61 ../ui/prefs.gtkbuilder.h:61
 msgid "Xiphos will listen to Speakers according to choice here."
-msgstr "Xiphos va écouter les Conférenciers en fonction du choix présent."
+msgstr "Xiphos va écouter les Orateurs en fonction du choix présent."
 
 #: ../ui/prefs.glade.h:62 ../ui/prefs.gtkbuilder.h:62
 msgid "Selective"
@@ -3759,11 +3759,11 @@ msgstr "Sélectif"
 
 #: ../ui/prefs.glade.h:63 ../ui/prefs.gtkbuilder.h:63
 msgid "Choose the Speakers to be followed."
-msgstr "Choisir les Conférenciers à suivre."
+msgstr "Choisir les Orateurs à suivre."
 
 #: ../ui/prefs.glade.h:64 ../ui/prefs.gtkbuilder.h:64
 msgid "BSP listen some radio button"
-msgstr "Bouton radio BSP écouter certains"
+msgstr "Bouton radio BSP écouter certains orateurs"
 
 #: ../ui/prefs.glade.h:65 ../ui/prefs.gtkbuilder.h:65
 msgid "All"
@@ -3771,7 +3771,7 @@ msgstr "Tous"
 
 #: ../ui/prefs.glade.h:66 ../ui/prefs.gtkbuilder.h:66
 msgid "All Speakers will be followed."
-msgstr "Tous les Conférenciers seront reçus."
+msgstr "Tous les orateurs seront reçus."
 
 #: ../ui/prefs.glade.h:67 ../ui/prefs.gtkbuilder.h:67
 msgid "BSP listen all radio button"
@@ -3783,7 +3783,7 @@ msgstr "Aucun"
 
 #: ../ui/prefs.glade.h:69 ../ui/prefs.gtkbuilder.h:69
 msgid "No Speakers will be followed."
-msgstr "Aucun conférencier ne sera reçu."
+msgstr "Aucun orateur ne sera reçu."
 
 #: ../ui/prefs.glade.h:70 ../ui/prefs.gtkbuilder.h:70
 msgid "BSP listen none radio button"
@@ -3846,10 +3846,10 @@ msgid ""
 "Disabling this may be necessary if some Speakers' use of group number is not "
 "appropriate as a tab number."
 msgstr ""
-"Interpréte le paramètre du numéro du groupe du protocole comme numéro d'onglet de \n"
+"Interpréte le paramètre du numéro du groupe du protocole comme le numéro d'onglet de \n"
 "Xiphos.\"\n"
-"La désactivation peut être nécessaire si l'utilisation du numéro de groupe par \n"
-"certains conférenciers n'est pas approprié comme numéro d'onglet.\""
+"Il sera peut être nécessaire de désactiver cette option si le numéro de groupe utilisé par \n"
+"certains orateurs n'est pas approprié comme numéro d'onglet.\""
 
 #: ../ui/prefs.glade.h:84 ../ui/prefs.gtkbuilder.h:84
 msgid "BSP event group-as-tab button"
@@ -4967,7 +4967,7 @@ msgstr "Remplir la liste de versets"
 msgid ""
 "Send this verse list via BibleSync to others, if you are in Personal or "
 "Speaker mode."
-msgstr "Envoie cette liste de versets via BibleSync à d'autres, si vous êtes en mode Personnel ou Conférencier."
+msgstr "Envoie cette liste de versets via BibleSync à d'autres, si vous êtes en mode Personnel ou Orateur."
 
 #: ../ui/xi-menus.glade.h:103 ../ui/xi-menus-popup.gtkbuilder.h:90
 msgid "Send list via BibleSync"
