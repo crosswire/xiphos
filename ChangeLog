@@ -1,4 +1,4 @@
-2014-12-12  karl <charcoal@users.sf.net>
+2014-12-16  karl <charcoal@users.sf.net>
 
 	* fixed gtk3 prefs->parallel->module selector geometry & filling.
 	* fixed gtk3.14 failure to display prefs (gtk3 blows chunks).
@@ -13,6 +13,7 @@
 	* avoided NTFS glitch by not making settings backup file.
 	* fixed mod.mgr button bobble on expand/collapse of module tree
 	  using a timer to reject too-soon calls (esp 1st-time user).
+	* add --chatty configure flag to enable GS_* trace printfs.
 
 2014-12-06  karl <charcoal@users.sf.net>
 
