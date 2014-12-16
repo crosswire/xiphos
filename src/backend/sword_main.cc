@@ -64,17 +64,17 @@ BackEnd *backend = NULL;
 //
 // otherwise, if you're going to do more than a single setSomething,
 // you must go the somewhat harder route of
-//    VerseKey k = (VerseKey *)mod->createKey();
+//    VerseKey *k = (VerseKey *)mod->createKey();
 // and do whatever you like, but remember when you're done to
 //    delete k;
 
-#ifdef DEBUG
+#ifdef CHATTY
 static const char *f_message = "backend/sword_main.cc line #%d \"%s\" = %s";
 #endif
 
 BackEnd::BackEnd()
 {
-#ifdef DEBUG
+#ifdef CHATTY
 	GTimer *t;
 	double d;
 	t = g_timer_new();
@@ -83,7 +83,7 @@ BackEnd::BackEnd()
 	main_mgr = new SWMgr(new MarkupFilterMgr(FMT_XHTML));
 	//main_mgr->augmentModules("/home/terry/Dropbox/sword/");
 
-#ifdef DEBUG
+#ifdef CHATTY
 	g_timer_stop(t);
 	d = g_timer_elapsed(t, NULL);
 	GS_message(("create main_mgr time is %f", d));

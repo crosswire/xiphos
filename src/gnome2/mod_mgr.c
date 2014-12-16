@@ -2151,7 +2151,7 @@ on_notebook1_switch_page(GtkNotebook * notebook,
 	gint x, y;
 #endif
 
-#ifdef DEBUG
+#ifdef CHATTY
 	GTimer *total;
 	double d;
 	total = g_timer_new();
@@ -2218,7 +2218,7 @@ on_notebook1_switch_page(GtkNotebook * notebook,
 	gdk_window_set_cursor(window, NULL);
 #endif
 
-#ifdef DEBUG
+#ifdef CHATTY
 	g_timer_stop(total);
 	d = g_timer_elapsed(total, NULL);
 	GS_message(("total time is %f", d));
