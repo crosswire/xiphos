@@ -58,11 +58,14 @@ extern GtkWidget *sbIntChapter;
 extern GtkWidget *sbIntVerse;
 extern GtkWidget *entryIntLookup;
 
+SWBuf unknown_parallel = N_("Unknown parallel module: ");
+
 /******************************************************************************
  * static
  */
 
 BackEnd *backend_p;
+extern gchar *no_content;
 
 static const gchar *tf2of(int true_false)
 {
@@ -619,7 +622,6 @@ void main_update_parallel_page(void)
 	gboolean is_rtol = FALSE;
 	GString *data;
 	MOD_FONT *mf;
-	SWBuf text;
 
 	settings.cvparallel = settings.currentverse;
 
@@ -639,7 +641,8 @@ void main_update_parallel_page(void)
 			// we will segfault when looking for content for the
 			// nonexistent module.  avoid this.
 			if (!main_is_module(mod_name)) {
-				XI_warning(("unknown parallel module %s\n", mod_name));
+				gui_generic_warning((unknown_parallel +
+						     (SWBuf)mod_name).c_str());
 				continue;
 			}
 
@@ -684,15 +687,23 @@ void main_update_parallel_page(void)
 			if (is_rtol)
 				g_string_append(data, "<br/><div align=right>");
 
-			backend_p->set_module_key(settings.parallel_list[modidx], settings.cvparallel);
-			text = "";
-			get_heading(text, backend_p, modidx);
-			g_string_append(data, text.c_str());
+			// does this verse exist for this module?
+			if (!backend_p->is_Bible_key(settings.parallel_list[modidx],
+						     settings.cvparallel, settings.cvparallel)) {
+				g_string_append(data, no_content);
+			}
+			else
+			{
+				SWBuf text("");
+				backend_p->set_module_key(settings.parallel_list[modidx], settings.cvparallel);
+				get_heading(text, backend_p, modidx);
+				g_string_append(data, text.c_str());
 
-			utf8str = backend_p->get_render_text(mod_name, settings.currentverse);
-			if (utf8str) {
-				g_string_append(data, utf8str);
-				g_free(utf8str);
+				utf8str = backend_p->get_render_text(mod_name, settings.currentverse);
+				if (utf8str) {
+				    g_string_append(data, utf8str);
+				    g_free(utf8str);
+				}
 			}
 
 			if (is_rtol)
@@ -785,6 +796,11 @@ static void interpolate_parallel_display(SWBuf& text, gchar *key, gint parallel_
 			is_bible_text[modidx] =
 			    (main_get_mod_type(settings.parallel_list[modidx])
 			     == TEXT_TYPE);
+		}
+		else
+		{
+			gui_generic_warning((unknown_parallel +
+					     (SWBuf)settings.parallel_list[modidx]).c_str());
 		}
 	}
 
