@@ -3525,6 +3525,8 @@ void gui_open_mod_mgr_initial_run(void)
 	set_window_icon(GTK_WINDOW(dlg));
 	gtk_main();
 	first_time_user = FALSE;
+	settings.display_modmgr = 0;
+	xml_set_value("Xiphos", "layout", "modmgropen", "0");
 }
 
 /******************************************************************************

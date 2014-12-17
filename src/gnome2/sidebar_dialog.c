@@ -68,7 +68,11 @@ void gui_attach_detach_sidebar(void)
 		settings.docked = FALSE;
 		biblepanesize = settings.gs_width / 2;
 		widgets.dock_sb = create_sidebar_dialog();
+#ifdef HAVE_GTK_310
+		gtk_container_add(GTK_CONTAINER(vbox_dock), widgets.shortcutbar);
+#else
 		gtk_widget_reparent(widgets.shortcutbar, vbox_dock);
+#endif
 		settings.showshortcutbar = TRUE;
 		gtk_paned_set_position(GTK_PANED(widgets.epaned), 0);
 		/*gtk_paned_set_position(GTK_PANED(widgets.hpaned),
@@ -90,8 +94,11 @@ void gui_attach_detach_sidebar(void)
 				       settings.sidebar_width);
 		gtk_paned_set_position(GTK_PANED(widgets.hpaned),
 				       biblepanesize);
-		gtk_widget_reparent(widgets.shortcutbar,
-				    widgets.epaned);
+#ifdef HAVE_GTK_310
+		gtk_container_add(GTK_CONTAINER(widgets.epaned), widgets.shortcutbar);
+#else
+		gtk_widget_reparent(widgets.shortcutbar, widgets.epaned);
+#endif
 		
 		/* ugly fix until someone can make mozembed work with 'gtk_widget_reparent()' */
 		gtk_widget_destroy(sidebar.html_viewer_widget);

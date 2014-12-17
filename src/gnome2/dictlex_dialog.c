@@ -403,8 +403,9 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 	dlg->listview =
 	    gtk_tree_view_new_with_model(GTK_TREE_MODEL(model));
 	gtk_widget_show(dlg->listview);
-	gtk_tree_view_set_rules_hint(GTK_TREE_VIEW(dlg->listview),
-				     TRUE);
+#ifndef HAVE_GTK_310
+	gtk_tree_view_set_rules_hint(GTK_TREE_VIEW(dlg->listview), TRUE);
+#endif
 	gtk_container_add(GTK_CONTAINER(scrolledwindow), dlg->listview);
 	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(dlg->listview),
 					  FALSE);

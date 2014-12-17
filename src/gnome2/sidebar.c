@@ -1352,7 +1352,9 @@ static void create_search_results_page(GtkWidget * notebook)
 	sidebar.results_list = gtk_tree_view_new_with_model(GTK_TREE_MODEL(model_verselist));
 	gtk_widget_show(sidebar.results_list);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow3), sidebar.results_list);
+#ifndef HAVE_GTK_310
 	gtk_tree_view_set_rules_hint(GTK_TREE_VIEW(sidebar.results_list), TRUE);
+#endif
 
 	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(sidebar.results_list), FALSE);
 	add_columns(GTK_TREE_VIEW(sidebar.results_list));
