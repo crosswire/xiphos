@@ -3,8 +3,8 @@ ____________________
 XIPHOS RELEASE NOTES
 ____________________
 
-Intermediate Test Release 3.9.14
-16 Dec 2014
+Intermediate Test Release 3.9.15
+17 Dec 2014
 
 - Bug#508 + feat.req#133: Added alternate versification support (av11n):
   Xiphos understands book/chapter/verse (BCV) schemes other than KJV.
@@ -45,9 +45,13 @@ Intermediate Test Release 3.9.14
 
 - Fixed 1st-time mod.mgr to include Crosswire repo name.
 
+- Fixed main window internal geometry save on quit.
+
 - Fixed mod.mgr "button bobble" preventing expand/collapse of mod.tree.
 
 - Fixed bug#513, stop crash on repeated tab deletion.
+
+- Fixed crash caused by having a (lexdict|genbook) without (dict|book) key.
 
 - Fixed incompatibility with GTK3.14's unstable interface, preventing
   Preferences window from opening.  Also, related stock icon name changes.

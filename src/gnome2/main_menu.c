@@ -504,6 +504,9 @@ on_side_preview_activate(GtkCheckMenuItem * menuitem, gpointer user_data)
 G_MODULE_EXPORT void
 on_quit_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
+	/* discover main window internal geometry before we go. */
+	final_pane_sizes();
+
 #if defined(WIN32) && defined(HAVE_DBUS)
 	/* we started dbus-daemon ourselves, so we must kill it, too. */
 	extern GPid dbus_pid;
