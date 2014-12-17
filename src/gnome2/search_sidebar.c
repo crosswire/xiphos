@@ -410,7 +410,9 @@ void gui_create_search_sidebar(void)
 	label1 = gtk_label_new(_("Lower"));
 	gtk_widget_show(label1);
 	gtk_grid_attach(GTK_GRID(table1), label1, 0, 0, 1, 1);
+#ifndef HAVE_GTK_310
 	gtk_misc_set_alignment(GTK_MISC(label1), 1.0, 0.5);
+#endif
 	
 	ss.entryLower = gtk_combo_box_text_new_with_entry();	
 	gtk_widget_show(ss.entryLower);
@@ -420,7 +422,9 @@ void gui_create_search_sidebar(void)
 	label2 = gtk_label_new(_("Upper"));
 	gtk_widget_show(label2);
 	gtk_grid_attach(GTK_GRID(table1), label2, 0, 1, 1, 1);
+#ifndef HAVE_GTK_310
 	gtk_misc_set_alignment(GTK_MISC(label2), 1.0, 0.5);
+#endif
    
                   
 	ss.entryUpper = gtk_combo_box_text_new_with_entry();	
