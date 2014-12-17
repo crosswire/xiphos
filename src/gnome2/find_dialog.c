@@ -167,7 +167,9 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 	GtkWidget *hbox66;
 	GtkWidget *dialog_action_area29;
 	GtkWidget *hbuttonbox8;
+#ifndef HAVE_GTK_310
 	GtkWidget *alignment;
+#endif
 	GtkWidget *hbox5;
 	GtkWidget *image;
 	GtkWidget *label12;
@@ -256,13 +258,17 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 	gtk_container_add(GTK_CONTAINER(hbuttonbox8), dialog->next);
 	//GTK_WIDGET_SET_FLAGS(dialog->next, GTK_CAN_DEFAULT);
 
+#ifndef HAVE_GTK_310
 	alignment = gtk_alignment_new(0.5, 0.5, 0, 0);
 	gtk_widget_show(alignment);
 	gtk_container_add(GTK_CONTAINER(dialog->next), alignment);
 
+#endif
 	UI_HBOX(hbox5, FALSE, 2);
 	gtk_widget_show(hbox5);
+#ifndef HAVE_GTK_310
 	gtk_container_add(GTK_CONTAINER(alignment), hbox5);
+#endif
 
 	image =
 #ifdef HAVE_GTK_310
