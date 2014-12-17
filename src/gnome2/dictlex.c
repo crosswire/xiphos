@@ -380,10 +380,15 @@ GtkWidget *gui_create_dictionary_pane(void)
 
 
   	dict_drop_down = gtk_toggle_button_new ();
- 	 gtk_widget_show (dict_drop_down);
+	gtk_widget_show (dict_drop_down);
 	gtk_box_pack_start(GTK_BOX(hbox2), dict_drop_down, FALSE, TRUE, 0);
 
-  	arrow1 = gtk_arrow_new (GTK_ARROW_DOWN, GTK_SHADOW_OUT);
+#ifdef HAVE_GTK_310
+	arrow1 = gtk_image_new_from_icon_name("go-down",
+					      GTK_ICON_SIZE_BUTTON);
+#else
+	arrow1 = gtk_arrow_new(GTK_ARROW_DOWN, GTK_SHADOW_OUT);
+#endif
   	gtk_widget_show (arrow1);
   	gtk_container_add (GTK_CONTAINER (dict_drop_down), arrow1);
 
@@ -394,8 +399,8 @@ GtkWidget *gui_create_dictionary_pane(void)
 
 	image1 = 
 #ifdef HAVE_GTK_310
-	    gtk_image_new_from_icon_name ("go-up",
-                    		    GTK_ICON_SIZE_BUTTON);
+	    gtk_image_new_from_icon_name("go-up",
+					 GTK_ICON_SIZE_BUTTON);
 #else                        
 		
 	    gtk_image_new_from_stock(GTK_STOCK_GO_UP,
@@ -412,7 +417,7 @@ GtkWidget *gui_create_dictionary_pane(void)
 	image2 = 
 #ifdef HAVE_GTK_310
 	    gtk_image_new_from_icon_name ("go-down",
-                    		    GTK_ICON_SIZE_BUTTON);
+					  GTK_ICON_SIZE_BUTTON);
 #else                        
 		
 	    gtk_image_new_from_stock(GTK_STOCK_GO_DOWN,

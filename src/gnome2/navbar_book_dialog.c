@@ -292,7 +292,12 @@ GtkWidget *gui_navbar_book_dialog_new(DIALOG_DATA * d)
 			   FALSE, 0);
 	//gtk_button_set_relief (GTK_BUTTON (d->navbar_book.button_list), GTK_RELIEF_NONE);
 
+#ifdef HAVE_GTK_310
+	arrow1 = gtk_image_new_from_icon_name("go-down",
+					      GTK_ICON_SIZE_BUTTON);
+#else
 	arrow1 = gtk_arrow_new(GTK_ARROW_DOWN, GTK_SHADOW_OUT);
+#endif
 	gtk_widget_show(arrow1);
 	gtk_container_add(GTK_CONTAINER(d->navbar_book.button_list), arrow1);
 
