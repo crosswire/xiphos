@@ -643,14 +643,14 @@ redisplay_to_realign()
 				     settings.currentverse);
 	main_url_handler(url, TRUE);
 	g_free(url);
-	if (settings.DictWindowModule) {
+	if (settings.DictWindowModule && settings.dictkey) {
 		url = g_strdup_printf("sword://%s/%s",
 				      settings.DictWindowModule,
 				      settings.dictkey);
 		main_url_handler(url, TRUE);
 		g_free(url);
 	}
-	if (settings.book_mod) {
+	if (settings.book_mod && settings.book_key) {
 		url = g_strdup_printf("sword://%s/%s",
 				      settings.book_mod,
 				      settings.book_key);
