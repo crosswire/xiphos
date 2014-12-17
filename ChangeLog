@@ -15,6 +15,7 @@
 	  using a timer to reject too-soon calls (esp 1st-time user).
 	* add --chatty configure flag to enable GS_* trace printfs.
 	* changed all GS_* print macros to XI_*.
+	* countless accommodations to gtk3.14 peculiarities.
 
 2014-12-06  karl <charcoal@users.sf.net>
 
