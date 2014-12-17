@@ -110,7 +110,7 @@ int main(int argc, char *argv[])
 	/* see comments on function immediately preceding. */
 	SoupServer *server;
 #endif
-#ifdef DEBUG
+#ifdef CHATTY
 	GTimer *total;
 	double d;
 #endif
@@ -122,7 +122,7 @@ int main(int argc, char *argv[])
 	               // automatically and this function does nothing.
 #endif
 	
-#ifdef DEBUG
+#ifdef CHATTY
 	total = g_timer_new();
 #endif
 
@@ -276,7 +276,7 @@ int main(int argc, char *argv[])
 		main_url_handler(argv[1], TRUE);
 	}
 
-#ifdef DEBUG
+#ifdef CHATTY
 	g_timer_stop(total);
 	d = g_timer_elapsed(total, NULL);
 	printf("total time is %f\n", d);
