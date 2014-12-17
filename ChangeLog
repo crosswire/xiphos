@@ -16,6 +16,7 @@
 	* add --chatty configure flag to enable GS_* trace printfs.
 	* changed all GS_* print macros to XI_*.
 	* countless accommodations to gtk3.14 peculiarities.
+	* fixed crash caused by null ptr in redisplay_to_realign().
 
 2014-12-06  karl <charcoal@users.sf.net>
 
