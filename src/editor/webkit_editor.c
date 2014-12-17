@@ -1376,7 +1376,11 @@ gint _create_new(const gchar * filename, const gchar * key, gint editor_type)
 		//gtk_tree_view_collapse_all((GtkTreeView *)editor->treeview);
 		// then we should expand on the item to which we've opened for edit.		
 
-		gtk_widget_reparent (editor->box,box);
+#ifdef HAVE_GTK_310
+		gtk_container_add(GTK_CONTAINER(box), editor->box);
+#else
+		gtk_widget_reparent(editor->box, box);
+#endif
 
 		gtk_container_add (GTK_CONTAINER (editor->window), hpaned1);
 
