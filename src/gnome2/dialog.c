@@ -719,7 +719,7 @@ GS_DIALOG *gui_new_dialog(void)
  *   void
  */
 
-void gui_generic_warning_modal(char *message)
+void gui_generic_warning_modal(const char *message)
 {
 	GS_DIALOG *dialog;
 	gchar *dialog_text;
@@ -735,7 +735,7 @@ void gui_generic_warning_modal(char *message)
 	dialog_text = g_strdup_printf("<span weight=\"bold\">%s</span>",
 				      _("Xiphos:"));
 	dialog->label_top = dialog_text;
-	dialog->label2 = message;
+	dialog->label2 = (char *)message;
 	dialog->ok = TRUE;
 
 	gui_alert_dialog(dialog);
@@ -761,7 +761,7 @@ void gui_generic_warning_modal(char *message)
  *   void
  */
 
-void gui_generic_warning(char *message)
+void gui_generic_warning(const char *message)
 {
 	GtkWidget *dialog;
 

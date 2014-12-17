@@ -69,8 +69,8 @@ struct _gs_dialog {
 };
 
 GS_DIALOG *gui_new_dialog(void);
-void gui_generic_warning(char *);
-void gui_generic_warning_modal(char *);
+void gui_generic_warning(const char *);
+void gui_generic_warning_modal(const char *);
 gint gui_gs_dialog(GS_DIALOG * info);
 gint gui_alert_dialog(GS_DIALOG * info);
 gint gui_yes_no_dialog(char *, char *);
