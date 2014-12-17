@@ -204,8 +204,10 @@ static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 		gtk_widget_show(image5);
 		gtk_box_pack_start(GTK_BOX(hbox3), image5, FALSE, TRUE,
 				   0);
+#ifndef HAVE_GTK_310
 		gtk_misc_set_alignment(GTK_MISC(image5), 0.5, 0);
 		gtk_misc_set_padding(GTK_MISC(image5), 12, 0);
+#endif
 	}
 
 
@@ -219,7 +221,9 @@ static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 	gtk_label_set_use_markup(GTK_LABEL(label7), TRUE);
 	gtk_label_set_justify(GTK_LABEL(label7), GTK_JUSTIFY_LEFT);
 	gtk_label_set_line_wrap(GTK_LABEL(label7), TRUE);
+#ifndef HAVE_GTK_310
 	gtk_misc_set_alignment(GTK_MISC(label7), 0, 0.5);
+#endif
 
 	if (info->label2) {
 		gtk_window_set_default_size (GTK_WINDOW (dialog_alert), 380, 200);
@@ -237,7 +241,9 @@ static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 		gtk_widget_show(label10);
 		gtk_container_add (GTK_CONTAINER (viewport), label10);
 		gtk_label_set_justify(GTK_LABEL(label10), GTK_JUSTIFY_LEFT);
+#ifndef HAVE_GTK_310
 		gtk_misc_set_alignment(GTK_MISC(label10), 0, 0.5);
+#endif
 	}
 
 	dialog_action_area2 = gtk_dialog_get_action_area(GTK_DIALOG(dialog_alert));
@@ -253,8 +259,7 @@ static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 				      "_Yes", GTK_RESPONSE_YES);
 	if (info->save)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
-                                             "_Save",
-                                             GTK_RESPONSE_YES);
+				      "_Save", GTK_RESPONSE_YES);
 	if (info->no)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
 				      "_No", GTK_RESPONSE_NO);
@@ -360,8 +365,10 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 		gtk_widget_show(image6);
 		gtk_box_pack_start(GTK_BOX(hbox4), image6, FALSE, TRUE,
 				   0);
+#ifndef HAVE_GTK_310
 		gtk_misc_set_alignment(GTK_MISC(image6), 0.5, 0);
 		gtk_misc_set_padding(GTK_MISC(image6), 12, 0);
+#endif
 	}
 	UI_VBOX(vbox3, FALSE, 4);
 	gtk_widget_show(vbox3);
@@ -373,14 +380,18 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 	gtk_label_set_use_markup(GTK_LABEL(label8), TRUE);
 	gtk_label_set_justify(GTK_LABEL(label8), GTK_JUSTIFY_LEFT);
 	gtk_label_set_line_wrap(GTK_LABEL(label8), TRUE);
+#ifndef HAVE_GTK_310
 	gtk_misc_set_alignment(GTK_MISC(label8), 0.5, 0);
+#endif
 
 	if (info->label1) {
 		label9 = gtk_label_new(info->label1);
 		gtk_widget_show(label9);
 		gtk_label_set_justify(GTK_LABEL(label9),
 				      GTK_JUSTIFY_LEFT);
+#ifndef HAVE_GTK_310
 		gtk_misc_set_alignment(GTK_MISC(label9), 0, 0.5);
+#endif
 
 		entry1 = gtk_entry_new();
 		gtk_widget_show(entry1);
@@ -396,7 +407,9 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 		gtk_widget_show(label10);
 		gtk_label_set_justify(GTK_LABEL(label10),
 				      GTK_JUSTIFY_LEFT);
+#ifndef HAVE_GTK_310
 		gtk_misc_set_alignment(GTK_MISC(label10), 0, 0.5);
+#endif
 
 		entry2 = gtk_entry_new();
 		gtk_widget_show(entry2);
@@ -412,7 +425,9 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 		gtk_widget_show(label11);
 		gtk_label_set_justify(GTK_LABEL(label11),
 				      GTK_JUSTIFY_LEFT);
+#ifndef HAVE_GTK_310
 		gtk_misc_set_alignment(GTK_MISC(label11), 0, 0.5);
+#endif
 
 		entry3 = gtk_entry_new();
 		gtk_widget_show(entry3);
@@ -428,7 +443,9 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 		gtk_widget_show(label12);
 		gtk_label_set_justify(GTK_LABEL(label12),
 				      GTK_JUSTIFY_LEFT);
+#ifndef HAVE_GTK_310
 		gtk_misc_set_alignment(GTK_MISC(label12), 0, 0.5);
+#endif
 
 		entry4 = gtk_entry_new();
 		gtk_widget_show(entry4);
@@ -445,7 +462,9 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 		gtk_widget_show(label13);
 		gtk_label_set_justify(GTK_LABEL(label13),
 				      GTK_JUSTIFY_LEFT);
+#ifndef HAVE_GTK_310
 		gtk_misc_set_alignment(GTK_MISC(label13), 0, 0.5);
+#endif
 
 		entry5 = gtk_entry_new();
 		gtk_widget_show(entry5);
@@ -462,7 +481,9 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 		gtk_widget_show(label14);
 		gtk_label_set_justify(GTK_LABEL(label14),
 				      GTK_JUSTIFY_LEFT);
+#ifndef HAVE_GTK_310
 		gtk_misc_set_alignment(GTK_MISC(label14), 0, 0.5);
+#endif
 
 		entry6 = gtk_entry_new();
 		gtk_widget_show(entry6);

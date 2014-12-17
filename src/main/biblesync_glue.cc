@@ -549,7 +549,9 @@ void biblesync_update_speaker()
 	gtk_tree_view_new_with_model(GTK_TREE_MODEL(model_speakers));
     gtk_widget_show(speaker_list);
     gtk_container_add(GTK_CONTAINER(speaker_window), speaker_list);
+#ifndef HAVE_GTK_310
     gtk_tree_view_set_rules_hint(GTK_TREE_VIEW(speaker_list), TRUE);
+#endif
     gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(speaker_list), TRUE);
 
     //
