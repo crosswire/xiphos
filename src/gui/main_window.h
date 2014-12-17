@@ -55,17 +55,7 @@ struct  _tab_page {
 
 	NAVBAR_VERSEKEY nav_bar;
 };
-/*
-typedef struct _main_window MAIN_WINDOW;
-struct  _main_window {
-	GtkWidget *main_window;
-	GtkWidget *status_bar;
 
-	GtkWidget *nb_sidebar;
-
-	TAB_PAGE current_page;
-};
-*/
 #include "main/settings.h"
 
 void gui_show_hide_texts(int choice);
@@ -76,6 +66,7 @@ void gui_set_bible_comm_layout(void);
 void gui_change_window_title(char * module_name);
 void create_mainwindow(void);
 void gui_show_main_window(void);
+void final_pane_sizes(void);
 
 #ifdef __cplusplus
 }

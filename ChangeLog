@@ -17,6 +17,8 @@
 	* changed all GS_* print macros to XI_*.
 	* countless accommodations to gtk3.14 peculiarities.
 	* fixed crash caused by null ptr in redisplay_to_realign().
+	* unavailable content in 1-verse parallel: "no content" message.
+	* save main window internal geometry on quit.
 
 2014-12-06  karl <charcoal@users.sf.net>
 

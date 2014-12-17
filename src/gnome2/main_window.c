@@ -363,7 +363,7 @@ static gboolean  delete_event (GtkWidget *widget,
  *    get and store pane sizes
  *
  * Return value
- *   void
+ *   gboolean
  */
 
 static gboolean epaned_button_release_event(GtkWidget * widget,
@@ -405,6 +405,32 @@ static gboolean epaned_button_release_event(GtkWidget * widget,
 	return TRUE;
 }
 
+
+/******************************************************************************
+ * Name
+ *   final_pane_sizes
+ *
+ * Synopsis
+ *   #include "gui/main_window.h"
+ *
+ *   void final_pane_sizes()
+ *
+ * Description
+ *   on quit, make a last query for pane sizes.
+ *   this is needed because e.g. "maximize window" in the title bar does
+ *   not call on_epaned_button_release_event for each newly-modified pane.
+ *
+ * Return value
+ *   void
+ */
+
+void final_pane_sizes()
+{
+    epaned_button_release_event(GTK_WIDGET(widgets.epaned), NULL, (gchar *) "epaned");
+    epaned_button_release_event(GTK_WIDGET(widgets.vpaned), NULL, (gchar *) "vpaned");
+    epaned_button_release_event(GTK_WIDGET(widgets.vpaned2),NULL, (gchar *) "vpaned2");
+    epaned_button_release_event(GTK_WIDGET(widgets.hpaned), NULL, (gchar *) "hpaned1");
+}
 
 /******************************************************************************
  * Name
