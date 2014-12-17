@@ -208,7 +208,9 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 	gtk_widget_show(image);
 	gtk_box_pack_start(GTK_BOX(hbox), image, FALSE, TRUE,
 			   0);
+#ifndef HAVE_GTK_310
 	gtk_misc_set_alignment(GTK_MISC(image), 0.5, 0);
+#endif
 	html_widget = GTK_WIDGET(XIPHOS_HTML_NEW(NULL,FALSE,30));//gtk_html_new();
 	gtk_widget_show(html_widget);
 	gtk_box_pack_start(GTK_BOX(hbox), html_widget, TRUE, TRUE, 0);
