@@ -1481,28 +1481,28 @@ load_module_tree(GtkTreeView * treeview,
 	if (!g_list_length(tmp))
 		return;
 
-	/* note the repository that is active */
-	if ((local == FALSE) && (remote_source == NULL)) {
+	if (install) {
+		/* note the repository that is active */
+		if ((local == FALSE) && (remote_source == NULL)) {
 #ifdef USE_GTK_3
-		remote_source = g_strdup(gtk_combo_box_text_get_active_text(
-					     GTK_COMBO_BOX_TEXT(combo_entry2)));
+			remote_source = g_strdup(gtk_combo_box_text_get_active_text(
+						     GTK_COMBO_BOX_TEXT(combo_entry2)));
 #else 
-		remote_source = g_strdup(gtk_combo_box_get_active_text(
-					     GTK_COMBO_BOX(combo_entry2)));   
+			remote_source = g_strdup(gtk_combo_box_get_active_text(
+						     GTK_COMBO_BOX(combo_entry2)));   
 #endif
-	}
-	repository_identifier =
-	    g_strdup_printf(_("Repository:\n%s"),
-			    (local ? source : remote_source));
-	gtk_tree_store_append(store, &repository_name, NULL);
-	gtk_tree_store_set(store, &repository_name, 0,
-			   repository_identifier, -1);
-	g_free(repository_identifier);
+		}
+		repository_identifier =
+		    g_strdup_printf(_("Repository:\n%s"),
+				    (local ? source : remote_source));
+		gtk_tree_store_append(store, &repository_name, NULL);
+		gtk_tree_store_set(store, &repository_name, 0,
+				   repository_identifier, -1);
+		g_free(repository_identifier);
 
-	gtk_tree_store_append(store, &separator, NULL);
-	gtk_tree_store_set(store, &separator, 0, "------------------------", -1);
+		gtk_tree_store_append(store, &separator, NULL);
+		gtk_tree_store_set(store, &separator, 0, "------------------------", -1);
 
-	if (install && !first_time_user) {
 		gtk_tree_store_append(store, &category_type, NULL);
 		gtk_tree_store_set(store, &category_type, 0,
 				   _("Categorized by\nModule Type"), -1);
