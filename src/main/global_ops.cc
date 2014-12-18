@@ -204,14 +204,8 @@ GLOBAL_OPS *main_new_globals(const gchar * mod_name)
 	    gui_of2tf(module_options[mod_name]["Strong's Numbers"].c_str());
 	ops->morphs =
 	    gui_of2tf(module_options[mod_name]["Morphological Tags"].c_str());
-	ops->greekaccents =
-	    gui_of2tf(module_options[mod_name]["Greek Accents"].c_str());
 	ops->lemmas =
 	    gui_of2tf(module_options[mod_name]["Lemmas"].c_str());
-	ops->hebrewpoints =
-	    gui_of2tf(module_options[mod_name]["Hebrew Vowel Points"].c_str());
-	ops->hebrewcant =
-	    gui_of2tf(module_options[mod_name]["Hebrew Cantillation"].c_str());
 	ops->transliteration =
 	    gui_of2tf(module_options[mod_name]["Transliteration"].c_str());
 	ops->xlit =
@@ -243,6 +237,17 @@ GLOBAL_OPS *main_new_globals(const gchar * mod_name)
 	ops->xrefnotenumbers =
 	    (module_options[mod_name]["XrefNoteNumbers"] != "Off");
 
+	// more special case default on: heb/grk support.
+	ops->greekaccents =
+	    (module_options[mod_name]["Greek Accents"] != "Off");
+	ops->hebrewpoints =
+	    (module_options[mod_name]["Hebrew Vowel Points"] != "Off");
+	ops->hebrewcant =
+	    (module_options[mod_name]["Hebrew Cantillation"] != "Off");
+
+	// we prefer and assume paragraph layout.
+	// we take user preference, and alter our default for
+	// those modules showing proper configuration for it.
 	ops->verse_per_line = 
 	    ((*(module_options[mod_name]["style"].c_str()) == 'v')
 	     ? 1
@@ -251,7 +256,8 @@ GLOBAL_OPS *main_new_globals(const gchar * mod_name)
 		: (main_check_for_option(mod_name, "Feature", "NoParagraphs")
 		   ? 1	
 		   : 0)));	// default to paragraph style.
-	
+
+	// options not from configuration: xiphos-specific capability.
 	ops->image_content =
 	    (*(module_options[mod_name]["Image Content"].c_str()) == '\0')
 	    ? -1	// "unknown"; otherwise, it's like the others.
