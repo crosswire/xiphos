@@ -3,8 +3,8 @@ ____________________
 XIPHOS RELEASE NOTES
 ____________________
 
-Intermediate Test Release 3.9.15
-17 Dec 2014
+Intermediate Test Release 3.9.16
+18 Dec 2014
 
 - Bug#508 + feat.req#133: Added alternate versification support (av11n):
   Xiphos understands book/chapter/verse (BCV) schemes other than KJV.
@@ -29,13 +29,16 @@ Intermediate Test Release 3.9.15
 
 - Added Feature=NoParagraphs support, default for verse-per-line.
 
-- Added OSISXlit and OSISEnum support (in some Hebrew modules).
+- Added OSISXlit and OSISEnum global filter configuration support.
 
 - Added preservation of CipherKey value for re-use when updating a module.
 
 - Added xiphos.appdata.xml (/usr/share/appdata) for...well, advertising.
 
 - Added --chatty configure flag to distinguish tracing from debug build.
+
+- Changed options for Hebrew vowel points, Hebrew cantillation, and Greek
+  accents to default on.
 
 - Updated navbar behavior: All books potentially available within the
   module's versification are included.  Formerly, books lacking content
