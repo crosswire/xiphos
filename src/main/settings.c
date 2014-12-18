@@ -858,10 +858,10 @@ void load_settings_structure(void)
 		settings.parallel_greekaccents = 1;
 	}
 
-	if ((buf = xml_get_value("parallel", "Transliterated Forms")))
+	if ((buf = xml_get_value("parallel", "Transliterated_Forms")))
 		settings.parallel_xlit = atoi(buf);
 	else {
-		xml_add_new_item_to_section("parallel", "Transliterated Forms", "0");
+		xml_add_new_item_to_section("parallel", "Transliterated_Forms", "0");
 		settings.parallel_xlit = 0;
 	}
 
