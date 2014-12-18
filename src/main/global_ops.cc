@@ -153,10 +153,14 @@ void main_set_global_options(GLOBAL_OPS * ops)
 	_set_global_option("Cross-references", ops->scripturerefs);
 	_set_global_option("Hebrew Vowel Points", ops->hebrewpoints);
 	_set_global_option("Hebrew Cantillation", ops->hebrewcant);
+
 	// always turn on headings in the engine (and later cache them).
 	// whether we display them or not is another matter (display.cc).
 	_set_global_option("Headings", 1);
+
 	_set_global_option("Words of Christ in Red", ops->words_in_red);
+	_set_global_option("Transliterated Forms", ops->xlit);
+	_set_global_option("Enumerations", ops->enumerated);
 
 	_set_global_textual("Transliteration", (ops->transliteration
 						? "Latin" : "Off"));
@@ -210,6 +214,10 @@ GLOBAL_OPS *main_new_globals(const gchar * mod_name)
 	    gui_of2tf(module_options[mod_name]["Hebrew Cantillation"].c_str());
 	ops->transliteration =
 	    gui_of2tf(module_options[mod_name]["Transliteration"].c_str());
+	ops->xlit =
+	    gui_of2tf(module_options[mod_name]["Transliterated Forms"].c_str());
+	ops->enumerated =
+	    gui_of2tf(module_options[mod_name]["Enumerations"].c_str());
 
 	ops->variants_all =
 	    gui_of2tf(module_options[mod_name]["All Readings"].c_str());
