@@ -384,8 +384,11 @@ GtkWidget *gui_create_dictionary_pane(void)
 	gtk_box_pack_start(GTK_BOX(hbox2), dict_drop_down, FALSE, TRUE, 0);
 
 #ifdef HAVE_GTK_310
-	arrow1 = gtk_image_new_from_icon_name("go-down",
-					      GTK_ICON_SIZE_BUTTON);
+	{
+		gchar *arrow_path = image_locator("arrow_down_box.png");
+		arrow1 = gtk_image_new_from_file(arrow_path);
+		g_free(arrow_path);
+	}
 #else
 	arrow1 = gtk_arrow_new(GTK_ARROW_DOWN, GTK_SHADOW_OUT);
 #endif
