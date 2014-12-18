@@ -49,6 +49,8 @@ struct  _global_ops {
 	gboolean doublespace;
 	gboolean verse_per_line;
 	gboolean xrefnotenumbers;
+	gboolean xlit;
+	gboolean enumerated;
 	gint image_content;
 	gint respect_font_faces;
 };

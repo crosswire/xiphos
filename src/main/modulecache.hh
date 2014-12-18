@@ -68,6 +68,8 @@ namespace ModuleCache {
 	static const int CommentaryChapter  = (1<<16);
 	static const int Doublespace        = (1<<17);
 	static const int XrefNoteNumbers    = (1<<18);
+	static const int Xlit               = (1<<19);
+	static const int Enumerated         = (1<<20);
 
 	class CacheVerse {
 	public:

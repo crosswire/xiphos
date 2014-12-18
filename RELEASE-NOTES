@@ -29,6 +29,8 @@ Intermediate Test Release 3.9.15
 
 - Added Feature=NoParagraphs support, default for verse-per-line.
 
+- Added OSISXlit and OSISEnum support (in some Hebrew modules).
+
 - Added preservation of CipherKey value for re-use when updating a module.
 
 - Added xiphos.appdata.xml (/usr/share/appdata) for...well, advertising.

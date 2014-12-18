@@ -307,6 +307,16 @@ void main_set_parallel_module_global_options(GtkCheckMenuItem * menuitem,
 		set_global_textual_reading (option, choice);
 	}
 
+	if (!strcmp(option,"Transliterated Forms")) {
+		settings.parallel_xlit = choice;
+		set_global_option(option, choice);
+	}
+
+	if (!strcmp(option,"Enumerations")) {
+		settings.parallel_enumerated = choice;
+		set_global_option(option, choice);
+	}
+
 
 	/* display change */
 	if (settings.dockedInt) {
@@ -545,6 +555,26 @@ void main_load_g_ops_parallel(GtkWidget *menu)
 	g_signal_connect(G_OBJECT(item), "activate",
 	    G_CALLBACK(main_set_parallel_module_global_options),
 			   (char*) "All Readings");
+
+
+	item = gtk_check_menu_item_new_with_label(_("Transliterated Forms"));
+	gtk_widget_show(item);
+	gtk_container_add(GTK_CONTAINER(menu), item);
+
+	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), settings.parallel_xlit);
+	g_signal_connect(G_OBJECT(item), "activate",
+	    G_CALLBACK(main_set_parallel_module_global_options),
+			  (char*) "Transliterated Forms");
+
+
+	item = gtk_check_menu_item_new_with_label(_("Enumerations"));
+	gtk_widget_show(item);
+	gtk_container_add(GTK_CONTAINER(menu), item);
+
+	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), settings.parallel_enumerated);
+	g_signal_connect(G_OBJECT(item), "activate",
+	    G_CALLBACK(main_set_parallel_module_global_options),
+			  (char*) "Enumerations");
 }
 
 

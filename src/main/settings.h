@@ -112,6 +112,8 @@ struct _settings {
 		parallel_cantillationmarks,	/* check menu state parallel mods */
 	        parallel_footnotes,		/* check menu state parallel mods */
 		parallel_greekaccents,		/* check menu state parallel mods */
+		parallel_xlit,			/* check menu state parallel mods */
+		parallel_enumerated,		/* check menu state parallel mods */
 	        versestyle,			/* verse if true, paragraph if not */
 	        linkedtabs,			/* tabs linked together, move in concert */
 	        showversenum,			/* display verse numbers in text (default on) */
