@@ -20,6 +20,7 @@
 	* unavailable content in 1-verse parallel: "no content" message.
 	* save main window internal geometry on quit.
 	* added support for OSISXlit and OSISEnum.
+	* change default to on: grk accents, heb vowel points & cantillation.
 
 2014-12-06  karl <charcoal@users.sf.net>
 
