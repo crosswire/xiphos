@@ -352,8 +352,11 @@ GtkWidget *gui_navbar_book_new(void)
 	//gtk_button_set_relief (GTK_BUTTON (navbar_book.button_list), GTK_RELIEF_NONE);
 
 #ifdef HAVE_GTK_310
-	arrow1 = gtk_image_new_from_icon_name("go-down",
-					      GTK_ICON_SIZE_BUTTON);
+	{
+		gchar *arrow_path = image_locator("arrow_down_box.png");
+		arrow1 = gtk_image_new_from_file(arrow_path);
+		g_free(arrow_path);
+	}
 #else
   	arrow1 = gtk_arrow_new(GTK_ARROW_DOWN, GTK_SHADOW_OUT);
 #endif
