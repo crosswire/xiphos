@@ -24,7 +24,7 @@ Sourceforge. To do so, do:
 Now to compile the GTK3 version of Xiphos you need to make sure you have these
 packages installed:
 
-    $ sudo yum install intltool gtk3-devel dbus-glib-devel gtkhtml3-devel webkitgtk3-devel libxml2-devel libgsf-devel gconfmm26-devel sword-devel libuuid-devel gnome-doc-utils rarian rarian-compat
+    $ sudo yum install gcc-c++ intltool gtk3-devel dbus-glib-devel gtkhtml3-devel webkitgtk3-devel libxml2-devel libgsf-devel gconfmm26-devel sword-devel libuuid-devel gnome-doc-utils rarian rarian-compat
 
 Next we need to configure everything:
 
