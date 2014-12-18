@@ -1085,6 +1085,26 @@
 	  </child>
 
 	  <child>
+	    <widget class="GtkCheckMenuItem" id="xlit">
+	      <property name="visible">False</property>
+	      <property name="label" translatable="yes">Transliterated Forms</property>
+	      <property name="use_underline">True</property>
+	      <property name="active">False</property>
+	      <signal name="activate" handler="on_xlit_activate" last_modification_time="Thu, 26 Feb 2009 19:23:37 GMT"/>
+	    </widget>
+	  </child>
+
+	  <child>
+	    <widget class="GtkCheckMenuItem" id="enumerated">
+	      <property name="visible">False</property>
+	      <property name="label" translatable="yes">Enumerations</property>
+	      <property name="use_underline">True</property>
+	      <property name="active">False</property>
+	      <signal name="activate" handler="on_enumerated_activate" last_modification_time="Thu, 26 Feb 2009 19:23:37 GMT"/>
+	    </widget>
+	  </child>
+
+	  <child>
 	    <widget class="GtkCheckMenuItem" id="image_content">
 	      <property name="visible">False</property>
 	      <property name="label" translatable="yes">Image Content</property>

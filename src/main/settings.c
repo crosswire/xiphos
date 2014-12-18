@@ -858,6 +858,20 @@ void load_settings_structure(void)
 		settings.parallel_greekaccents = 1;
 	}
 
+	if ((buf = xml_get_value("parallel", "Transliterated Forms")))
+		settings.parallel_xlit = atoi(buf);
+	else {
+		xml_add_new_item_to_section("parallel", "Transliterated Forms", "0");
+		settings.parallel_xlit = 0;
+	}
+
+	if ((buf = xml_get_value("parallel", "Enumerations")))
+		settings.parallel_enumerated = atoi(buf);
+	else {
+		xml_add_new_item_to_section("parallel", "Enumerations", "0");
+		settings.parallel_enumerated = 0;
+	}
+
 	/*  Misc stuff  */
 
 	settings.showtexts = atoi((buf = xml_get_value("misc", "showtexts")) ? buf : "1");

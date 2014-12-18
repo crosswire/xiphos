@@ -900,6 +900,50 @@ G_MODULE_EXPORT void on_xrefnotenumbers_activate (GtkCheckMenuItem * menuitem, g
  *
  */
 
+G_MODULE_EXPORT void on_xlit_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
+{
+	_global_option_main_pane((GtkMenuItem*)menuitem, "Transliterated Forms"); /* string not seen by user */
+}
+
+
+/******************************************************************************
+ * Name
+ *
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *
+ *
+ * Description
+ *
+ *
+ * Return value
+ *
+ */
+
+G_MODULE_EXPORT void on_enumerated_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
+{
+	_global_option_main_pane((GtkMenuItem*)menuitem, "Enumerations"); /* string not seen by user */
+}
+
+
+/******************************************************************************
+ * Name
+ *
+ *
+ * Synopsis
+ *   #include "gui/menu_popup.h"
+ *
+ *
+ *
+ * Description
+ *
+ *
+ * Return value
+ *
+ */
+
 G_MODULE_EXPORT void on_primary_reading_activate (GtkCheckMenuItem * menuitem, gpointer user_data)
 {
 	gchar *key = NULL;
@@ -1547,6 +1591,20 @@ G_MODULE_EXPORT void _add_and_check_global_opts(GladeXML *gxml,
 
 		item = UI_GET_ITEM(gxml, "all_readings");
 		gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (item), ops->variants_all);
+	}
+
+    	item = UI_GET_ITEM(gxml, "xlit");
+
+	if (main_check_for_global_option((gchar*) mod_name, "OSISXlit")) {
+		gtk_widget_show(item);
+		gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), ops->xlit);
+	}
+
+    	item = UI_GET_ITEM(gxml, "enumerated");
+
+	if (main_check_for_global_option((gchar*) mod_name, "OSISEnum")) {
+		gtk_widget_show(item);
+		gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(item), ops->enumerated);
 	}
 
 	item = UI_GET_ITEM(gxml, "image_content");
