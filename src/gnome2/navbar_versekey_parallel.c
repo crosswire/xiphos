@@ -312,6 +312,7 @@ static void on_entry_activate(GtkEntry * entry, gpointer user_data)
 	if (settings.cvparallel == NULL)
 		return;
 
+	navbar_parallel.valid_key = TRUE;
 	main_navbar_versekey_set(navbar_parallel, settings.cvparallel);
 	main_update_parallel_page_detached();
 	if (sync_on) {
@@ -840,6 +841,7 @@ GtkWidget *gui_navbar_versekey_parallel_new(void)
 	navbar_parallel.dialog = TRUE;
 	navbar_parallel.module_name = g_string_new(settings.MainWindowModule);
 	navbar_parallel.key =  g_string_new(settings.currentverse);
+	navbar_parallel.valid_key = TRUE;
 
 	navbar_parallel.navbar = UI_GET_ITEM(gxml, "navbar");
 	navbar_parallel.button_history_back = UI_GET_ITEM(gxml, "button_history_back");
