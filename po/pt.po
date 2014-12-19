@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-19 15:44+0000\n"
-"PO-Revision-Date: 2014-12-19 15:53+0100\n"
+"POT-Creation-Date: 2014-12-19 20:54+0000\n"
+"PO-Revision-Date: 2014-12-19 21:12+0100\n"
 "Last-Translator: Ari Constancio <ari.constancio@gmail.com>\n"
 "Language-Team: Xiphos Project\n"
 "Language: \n"
@@ -32,7 +32,7 @@ msgstr "socket de servidor"
 
 #: ../src/biblesync/biblesync.cc:371
 msgid "bad magic"
-msgstr "má 'magic'"
+msgstr "má chave"
 
 #: ../src/biblesync/biblesync.cc:375
 msgid "bad protocol version"
@@ -44,7 +44,7 @@ msgstr "mau tipo de mensagem"
 
 #: ../src/biblesync/biblesync.cc:385
 msgid "bad packet count"
-msgstr "má contagem de pacotes"
+msgstr "mau número de pacotes"
 
 #: ../src/biblesync/biblesync.cc:389
 msgid "bad packet index"
@@ -68,7 +68,7 @@ msgstr "Ignorando echo."
 
 #: ../src/biblesync/biblesync.cc:534
 msgid "Domain not 'BIBLE-VERSE': "
-msgstr "Domínio não 'BIBLE-VERSE':"
+msgstr "Domínio não é 'BIBLE-VERSE':"
 
 #: ../src/biblesync/biblesync.cc:542
 msgid "Invalid group: "
@@ -309,6 +309,8 @@ msgid ""
 "Opening a multi-reference bookmark in\n"
 "separate tabs is not supported."
 msgstr ""
+"Abrir uma marca multi-referência em\n"
+"abas separadas não é suportado."
 
 #: ../src/gnome2/bookmarks_treeview.c:867
 #: ../src/gnome2/sidebar.c:1508
@@ -433,7 +435,7 @@ msgstr "Xiphos: Sem janelas."
 
 #: ../src/gnome2/main_window.c:720
 msgid "BibleSync: Current navigation sent."
-msgstr ""
+msgstr "BibleSync: Navegação corrente enviada."
 
 #: ../src/gnome2/main_window.c:724
 msgid "BibleSync: Not speaking."
@@ -1120,6 +1122,8 @@ msgid ""
 "Mode selection failed.\n"
 "Set \"Debug\" and try again to see why."
 msgstr ""
+"Seleção de modo falhou.\n"
+"Defina \"Depurar\" e tente de novo para ver porquê."
 
 #: ../src/gnome2/preferences_dialog.c:1011
 msgid "Mode selection failed.\n"
@@ -1474,9 +1478,8 @@ msgid "If no, it will open for display only."
 msgstr "Se não, abrirá apenas para visualização."
 
 #: ../src/gnome2/sidebar.c:950
-#, fuzzy
 msgid "Paste verse references"
-msgstr "Definir preferências do utilizador"
+msgstr "Colar referência de versíclo"
 
 #: ../src/gnome2/sidebar.c:952
 msgid "List:"
@@ -1595,9 +1598,8 @@ msgstr ""
 "\n"
 
 #: ../src/main/biblesync_glue.cc:191
-#, fuzzy
 msgid "Unknown module "
-msgstr "[sem módulo]"
+msgstr "Módulo desconhecido"
 
 #: ../src/main/biblesync_glue.cc:192
 msgid ""
@@ -1614,14 +1616,12 @@ msgid "Other indications are:"
 msgstr "Outras indicações são:"
 
 #: ../src/main/biblesync_glue.cc:579
-#, fuzzy
 msgid "Check the box to listen to this Speaker"
-msgstr "Clique na caixa para trabalhar neste módulo"
+msgstr "Clique na opção para ouvir este orador"
 
 #: ../src/main/biblesync_glue.cc:592
-#, fuzzy
 msgid "Available Speakers"
-msgstr "Disponível"
+msgstr "Oradores Disponíveis"
 
 #: ../src/main/biblesync_glue.cc:601
 msgid "D/I"
@@ -1632,9 +1632,8 @@ msgid "Last navigation was Direct or Indirect"
 msgstr ""
 
 #: ../src/main/biblesync_glue.cc:620
-#, fuzzy
 msgid "Last Navigation"
-msgstr "Salvação"
+msgstr "Última Navegação"
 
 #: ../src/main/biblesync_glue.cc:639
 msgid "UUID"
@@ -2261,6 +2260,10 @@ msgid ""
 "The first will open in the main window\n"
 "and others in separate windows."
 msgstr ""
+"\n"
+"\n"
+"O primeiro abrirá na janela principal\n"
+"e outros em janelas separadas."
 
 #: ../src/main/sword.cc:1348
 msgid "Daily devotional was requested, but there are none installed."
@@ -2375,12 +2378,12 @@ msgstr "tipo errado, root node != %s\n"
 #: ../src/main/xml.c:497
 #, c-format
 msgid "%s<center>%s<br>Chapter %d</center><br>"
-msgstr ""
+msgstr "%s<center>%s<br>Capítulo %d</center><br>"
 
 #: ../src/main/xml.c:498
 #, c-format
 msgid "<br><center>Chapter %d</center><br>"
-msgstr ""
+msgstr "<br><center>Capítulo %d</center><br>"
 
 #: ../src/main/xml.c:499
 #, c-format
@@ -2411,7 +2414,7 @@ msgstr ""
 #: ../src/main/xml.c:506
 #, c-format
 msgid "%s%s: %s Chapter %d<br><br>"
-msgstr ""
+msgstr "%s%s: %s Capítulo %d<br><br>"
 
 #: ../src/main/xml.c:507
 #, c-format
@@ -2615,7 +2618,7 @@ msgstr "Ligar diretamente"
 
 #: ../ui/editor_link_dialog.xml.h:6
 msgid "Link via verse list"
-msgstr ""
+msgstr "Ligar via lista de versículos"
 
 #: ../ui/editor_link_dialog.xml.h:7
 msgid "Test Link"
@@ -2848,7 +2851,7 @@ msgstr "Botão de Rádio HTML"
 
 #: ../ui/export-dialog.glade.h:25
 msgid "Indicates whether verse numbers should appear inline in the text for more than 1 verse."
-msgstr ""
+msgstr "Indica se números de versículo devem aparecer dentro do texto para mais do que um versículo."
 
 #: ../ui/export-dialog.glade.h:26
 #: ../ui/export-dialog.gtkbuilder.h:25
@@ -2863,7 +2866,7 @@ msgstr "Botão de Número de Versículo"
 #: ../ui/export-dialog.glade.h:28
 #: ../ui/export-dialog.gtkbuilder.h:29
 msgid "Indicates whether reference is placed first or last."
-msgstr ""
+msgstr "Indica se a referência é colocada no início ou no fim."
 
 #: ../ui/export-dialog.glade.h:29
 #: ../ui/export-dialog.gtkbuilder.h:28
@@ -2880,7 +2883,7 @@ msgstr "Entrada de Referência"
 #: ../ui/export-dialog.glade.h:31
 #: ../ui/export-dialog.gtkbuilder.h:32
 msgid "Indicates whether or not version name is included in reference."
-msgstr ""
+msgstr "Indica se o nome de versão é incluído na referência."
 
 #: ../ui/export-dialog.glade.h:32
 #, fuzzy
@@ -2898,7 +2901,7 @@ msgstr "Guardar Exportado como"
 
 #: ../ui/export-dialog.gtkbuilder.h:26
 msgid "Indicates whether verse numbers should appear inline in the text."
-msgstr ""
+msgstr "Indica se números de versículo devem aparecer dentro do texto."
 
 #: ../ui/export-dialog.gtkbuilder.h:31
 #, fuzzy
@@ -3047,7 +3050,7 @@ msgstr "Imagem"
 #: ../ui/gtk2_webedit.ui.h:30
 #: ../ui/gtk_webedit.ui.h:30
 msgid "Insert image at cursor"
-msgstr ""
+msgstr "Inserir imagem no cursor"
 
 #: ../ui/gtk2_webedit.ui.h:31
 #: ../ui/gtk_webedit.ui.h:31
@@ -3093,7 +3096,7 @@ msgstr "Regra"
 #: ../ui/gtk2_webedit.ui.h:39
 #: ../ui/gtk_webedit.ui.h:39
 msgid "Insert horizontal rule"
-msgstr ""
+msgstr "Inserir linha horizontal"
 
 #: ../ui/gtk2_webedit.ui.h:40
 #: ../ui/gtk_webedit.ui.h:40
@@ -3143,7 +3146,7 @@ msgstr "Centrar"
 #: ../ui/gtk2_webedit.ui.h:49
 #: ../ui/gtk_webedit.ui.h:49
 msgid "Center justify paragraph"
-msgstr ""
+msgstr "Justificar parágrafo ao centro"
 
 #: ../ui/gtk2_webedit.ui.h:50
 #: ../ui/gtk_webedit.ui.h:50
@@ -3925,7 +3928,7 @@ msgstr "_Pessoal"
 #: ../ui/prefs.glade.h:47
 #: ../ui/prefs.gtkbuilder.h:47
 msgid "Enable BibleSync for personal or team use."
-msgstr ""
+msgstr "Ativar BibleSync para uso pessoal ou de equipa."
 
 #: ../ui/prefs.glade.h:48
 #: ../ui/prefs.gtkbuilder.h:48
@@ -4004,7 +4007,7 @@ msgstr ""
 #: ../ui/prefs.glade.h:62
 #: ../ui/prefs.gtkbuilder.h:62
 msgid "Selective"
-msgstr ""
+msgstr "Seletivo"
 
 #: ../ui/prefs.glade.h:63
 #: ../ui/prefs.gtkbuilder.h:63
@@ -4020,7 +4023,7 @@ msgstr "Botão de Rádio para Texto Simples"
 #: ../ui/prefs.glade.h:65
 #: ../ui/prefs.gtkbuilder.h:65
 msgid "All"
-msgstr ""
+msgstr "Todos"
 
 #: ../ui/prefs.glade.h:66
 #: ../ui/prefs.gtkbuilder.h:66
@@ -4036,7 +4039,7 @@ msgstr "Rádio Expressão Regular"
 #: ../ui/prefs.glade.h:68
 #: ../ui/prefs.gtkbuilder.h:68
 msgid "None"
-msgstr ""
+msgstr "Nenhum"
 
 #: ../ui/prefs.glade.h:69
 #: ../ui/prefs.gtkbuilder.h:69
@@ -4093,7 +4096,7 @@ msgstr ""
 #: ../ui/prefs.glade.h:79
 #: ../ui/prefs.gtkbuilder.h:79
 msgid "Debug"
-msgstr ""
+msgstr "Depurar"
 
 #: ../ui/prefs.glade.h:80
 #: ../ui/prefs.gtkbuilder.h:80
@@ -4278,14 +4281,13 @@ msgstr "Mostrar número de versículo a negrito"
 
 #: ../ui/prefs.glade.h:118
 #: ../ui/prefs.gtkbuilder.h:118
-#, fuzzy
 msgid "Verse number bold checkbox"
-msgstr "Tamanho do número de versículo"
+msgstr "Opção de negrito no número de versículo"
 
 #: ../ui/prefs.glade.h:119
 #: ../ui/prefs.gtkbuilder.h:119
 msgid "Brackets"
-msgstr ""
+msgstr "Parêntesis"
 
 #: ../ui/prefs.glade.h:120
 #: ../ui/prefs.gtkbuilder.h:120
@@ -4294,9 +4296,8 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:121
 #: ../ui/prefs.gtkbuilder.h:121
-#, fuzzy
 msgid "Verse number bracket checkbox"
-msgstr "Visto para usar versículo por linha"
+msgstr "Opção de parêntesis de número de versículo"
 
 #: ../ui/prefs.glade.h:122
 #: ../ui/prefs.gtkbuilder.h:122
@@ -5437,7 +5438,7 @@ msgstr ""
 #: ../ui/xi-menus.glade.h:107
 #: ../ui/xi-menus-popup.gtkbuilder.h:94
 msgid "Send list via BibleSync"
-msgstr ""
+msgstr "Enviar lista por BibleSync"
 
 #: ../ui/xi-menus.glade.h:108
 #: ../ui/xi-menus-popup.gtkbuilder.h:96
