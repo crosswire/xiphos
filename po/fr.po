@@ -24,7 +24,7 @@ msgstr ""
 "Project-Id-Version: Xiphos 3.4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-06-17 07:30-0400\n"
-"PO-Revision-Date: 2014-12-14 20:51+0100\n"
+"PO-Revision-Date: 2014-12-19 21:51+0100\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: emacs + po-mode <gnomefr@traduc.org>\n"
 "Language: \n"
@@ -3961,11 +3961,11 @@ msgstr "Case à cocher Annotations personnelles surlignées"
 
 #: ../ui/prefs.glade.h:108 ../ui/prefs.gtkbuilder.h:108
 msgid "Cross-references in verse list"
-msgstr "Références croisées dans la liste de versets"
+msgstr "Afficher les références croisées dans la liste de versets"
 
 #: ../ui/prefs.glade.h:109 ../ui/prefs.gtkbuilder.h:109
 msgid "Use the verse list for Bible cross-references instead of the previewer"
-msgstr "Utilise la liste de versets pour les références-croisées de la Bible au lieu du volet Aperçu"
+msgstr "Utilise la liste de versets pour afficher les références-croisées au lieu du volet Aperçu"
 
 #: ../ui/prefs.glade.h:110 ../ui/prefs.gtkbuilder.h:110
 msgid "Xrefs in verse list check box"
@@ -3977,7 +3977,7 @@ msgstr "Activer les listes de prières"
 
 #: ../ui/prefs.glade.h:112 ../ui/prefs.gtkbuilder.h:112
 msgid "Make journals/prayer lists available"
-msgstr "Rendre les listes de prières / Journaux disponibles"
+msgstr "Autorise les listes de prières et les journaux"
 
 #: ../ui/prefs.glade.h:113 ../ui/prefs.gtkbuilder.h:113
 msgid "Enable Prayer Lists Checkbox"
@@ -3985,11 +3985,11 @@ msgstr "Case à cocher Activer les listes de prières"
 
 #: ../ui/prefs.glade.h:114 ../ui/prefs.gtkbuilder.h:114
 msgid "Verse number"
-msgstr "Numéro de verset"
+msgstr "Affichage du numéro de verset"
 
 #: ../ui/prefs.glade.h:115 ../ui/prefs.gtkbuilder.h:115
 msgid "Offset the verse number in several ways"
-msgstr "Décale le numéro du verset de plusieurs façons"
+msgstr "Décore le numéro du verset de plusieurs façons"
 
 #: ../ui/prefs.glade.h:117 ../ui/prefs.gtkbuilder.h:117
 msgid "Show verse number in bold text"
@@ -4017,7 +4017,7 @@ msgstr "Exposant"
 
 #: ../ui/prefs.glade.h:123 ../ui/prefs.gtkbuilder.h:123
 msgid "Show verse number as a superscript"
-msgstr "Affiche les numéros de verset en forme exposant"
+msgstr "Affiche les numéros de verset en exposant"
 
 #: ../ui/prefs.glade.h:124 ../ui/prefs.gtkbuilder.h:124
 msgid "Verse number superscript checkbox"
