@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xiphos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-19 00:14+0000\n"
-"PO-Revision-Date: 2014-12-19 00:48+0100\n"
+"POT-Creation-Date: 2014-12-19 15:44+0000\n"
+"PO-Revision-Date: 2014-12-19 15:53+0100\n"
 "Last-Translator: Ari Constancio <ari.constancio@gmail.com>\n"
 "Language-Team: Xiphos Project\n"
 "Language: \n"
@@ -83,9 +83,8 @@ msgid " using "
 msgstr "usando"
 
 #: ../src/biblesync/biblesync.cc:692
-#, fuzzy
 msgid "[no dump ready]"
-msgstr "Módulo Inteiro"
+msgstr "[sem descarga pronta]"
 
 #: ../src/biblesync/biblesync.cc:700
 msgid "select < 0"
@@ -96,9 +95,8 @@ msgid "recvfrom < 0"
 msgstr "recvfrom < 0"
 
 #: ../src/biblesync/biblesync.cc:801
-#, fuzzy
 msgid "Transmit failed.\n"
-msgstr "%s falhou"
+msgstr "Transmissão falhou.\n"
 
 #: ../src/biblesync/biblesync.cc:802
 msgid "Unable to multicast; BibleSync is now disabled. If your network connection changed while this program was active, it may be sufficient to re-enable."
@@ -425,9 +423,9 @@ msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
 msgstr "ERRO! Xiphos está a estourar devido a um erro \"STRING\".<"
 
 #: ../src/gnome2/main_window.c:594
-#, fuzzy, c-format
+#, c-format
 msgid "Module has no support for %s."
-msgstr "Em módulos com números de Strong"
+msgstr "Módulo sem suporte para %s."
 
 #: ../src/gnome2/main_window.c:664
 msgid "Xiphos: No windows."
@@ -439,7 +437,7 @@ msgstr ""
 
 #: ../src/gnome2/main_window.c:724
 msgid "BibleSync: Not speaking."
-msgstr ""
+msgstr "BibleSync: Não falando."
 
 #: ../src/gnome2/main_window.c:908
 msgid "Xiphos - Bible Study Software"
@@ -537,9 +535,8 @@ msgstr ""
 "\n"
 
 #: ../src/gnome2/menu_popup.c:1939
-#, fuzzy
 msgid "No module in this pane."
-msgstr "módulo está bloqueado."
+msgstr "Sem módulo nesta vista"
 
 #. *****************************************************************************
 #. * defines
@@ -1079,7 +1076,7 @@ msgstr "Ir para dentro, para a primeira subsecção"
 
 #: ../src/gnome2/navbar_versekey_dialog.c:893
 #: ../src/gnome2/navbar_versekey_editor.c:929
-#: ../src/gnome2/navbar_versekey_parallel.c:853
+#: ../src/gnome2/navbar_versekey_parallel.c:855
 msgid "Synchronize this window's scrolling with the main window"
 msgstr "Sincronizar esta janela com a janela principal"
 
@@ -1111,11 +1108,11 @@ msgstr "Vista Paralela"
 
 #: ../src/gnome2/preferences_dialog.c:870
 msgid "BibleSync session passphrase"
-msgstr ""
+msgstr "Palavra-frase de sessão BibleSync"
 
 #: ../src/gnome2/preferences_dialog.c:872
 msgid "Phrase:"
-msgstr ""
+msgstr "Frase:"
 
 #. mode selection failed? probably dead interface
 #: ../src/gnome2/preferences_dialog.c:950
@@ -1125,9 +1122,8 @@ msgid ""
 msgstr ""
 
 #: ../src/gnome2/preferences_dialog.c:1011
-#, fuzzy
 msgid "Mode selection failed.\n"
-msgstr "Ler Selecção em voz alta"
+msgstr "Seleção de mod falhou.\n"
 
 #: ../src/gnome2/preferences_dialog.c:1017
 #, c-format
@@ -1136,7 +1132,7 @@ msgstr ""
 
 #: ../src/gnome2/preferences_dialog.c:1019
 msgid "Disabled"
-msgstr ""
+msgstr "Desativado"
 
 #: ../src/gnome2/preferences_dialog.c:1021
 #: ../src/main/xml.c:95
@@ -1145,11 +1141,11 @@ msgstr "Pessoal"
 
 #: ../src/gnome2/preferences_dialog.c:1023
 msgid "Speaker"
-msgstr ""
+msgstr "Orador"
 
 #: ../src/gnome2/preferences_dialog.c:1024
 msgid "Audience"
-msgstr ""
+msgstr "Audiência"
 
 #: ../src/gnome2/preferences_dialog.c:1595
 #: ../src/gnome2/preferences_dialog.c:1632
@@ -1369,12 +1365,12 @@ msgstr ""
 
 #: ../src/gnome2/search_dialog.c:1224
 msgid "Module is neither Bible nor commentary"
-msgstr ""
+msgstr "Módulo não é Bíblia nem comentário"
 
 #: ../src/gnome2/search_dialog.c:1247
 #: ../src/gnome2/sidebar.c:996
 msgid "BibleSync is not active for transmit."
-msgstr ""
+msgstr "BibleSync não está ativo para transmissão."
 
 #: ../src/gnome2/search_sidebar.c:211
 msgid ""
@@ -1386,14 +1382,12 @@ msgstr ""
 
 #. button to open advanced search
 #: ../src/gnome2/search_sidebar.c:220
-#, fuzzy
 msgid "_Open Advanced Search"
-msgstr "Pesquisa _Avançada"
+msgstr "_AbrirPesquisa Avançada"
 
 #: ../src/gnome2/search_sidebar.c:224
-#, fuzzy
 msgid "Open the separate Advanced Search dialog."
-msgstr "Abrir o diálogo de pesquisa avançada, para correr queries complexas"
+msgstr "Abrir o diálogo de pesquisa avançada"
 
 #: ../src/gnome2/search_sidebar.c:236
 msgid "Search Module"
@@ -1472,13 +1466,12 @@ msgid "Upper"
 msgstr "Superior"
 
 #: ../src/gnome2/sidebar.c:843
-#, fuzzy
 msgid "Open module in editor?"
-msgstr "Abrir no editor"
+msgstr "Abrir módulo no editor?"
 
 #: ../src/gnome2/sidebar.c:843
 msgid "If no, it will open for display only."
-msgstr ""
+msgstr "Se não, abrirá apenas para visualização."
 
 #: ../src/gnome2/sidebar.c:950
 #, fuzzy
@@ -1487,7 +1480,7 @@ msgstr "Definir preferências do utilizador"
 
 #: ../src/gnome2/sidebar.c:952
 msgid "List:"
-msgstr ""
+msgstr "Lista:"
 
 #: ../src/gnome2/sidebar.c:1514
 #: ../src/gnome2/sidebar.c:1549
@@ -1584,6 +1577,8 @@ msgid ""
 "Mismatched packet\n"
 "\n"
 msgstr ""
+"Pacote incompatível\n"
+"\n"
 
 #: ../src/main/biblesync_glue.cc:126
 msgid ""
@@ -1596,6 +1591,8 @@ msgid ""
 "Navigation packet:\n"
 "\n"
 msgstr ""
+"Pacote de navegação:\n"
+"\n"
 
 #: ../src/main/biblesync_glue.cc:191
 #, fuzzy
@@ -1614,7 +1611,7 @@ msgstr ""
 
 #: ../src/main/biblesync_glue.cc:284
 msgid "Other indications are:"
-msgstr ""
+msgstr "Outras indicações são:"
 
 #: ../src/main/biblesync_glue.cc:579
 #, fuzzy
@@ -1628,7 +1625,7 @@ msgstr "Disponível"
 
 #: ../src/main/biblesync_glue.cc:601
 msgid "D/I"
-msgstr ""
+msgstr "D/I"
 
 #: ../src/main/biblesync_glue.cc:611
 msgid "Last navigation was Direct or Indirect"
@@ -1641,18 +1638,19 @@ msgstr "Salvação"
 
 #: ../src/main/biblesync_glue.cc:639
 msgid "UUID"
-msgstr ""
+msgstr "UUID"
 
 #: ../src/main/biblesync_glue.cc:661
 msgid "IP address: "
 msgstr "Endereço IP:"
 
 #: ../src/main/biblesync_glue.cc:662
-#, fuzzy
 msgid ""
 "\n"
 "Application: "
-msgstr "Sobre esta aplicação"
+msgstr ""
+"\n"
+"Aplicação: "
 
 #: ../src/main/biblesync_glue.cc:663
 msgid ""
@@ -1757,7 +1755,7 @@ msgstr "Voltar a "
 
 #: ../src/main/parallel_view.cc:61
 msgid "Unknown parallel module: "
-msgstr ""
+msgstr "Módulo paralelo desconhecido:"
 
 #: ../src/main/parallel_view.cc:400
 #: ../ui/xi-menus.glade.h:68
@@ -1858,15 +1856,14 @@ msgstr "Todas as Leituras"
 #: ../src/main/parallel_view.cc:560
 #: ../ui/xi-menus.glade.h:83
 #: ../ui/xi-menus-popup.gtkbuilder.h:60
-#, fuzzy
 msgid "Transliterated Forms"
-msgstr "Transliteração"
+msgstr "Formas Transliteradas"
 
 #: ../src/main/parallel_view.cc:570
 #: ../ui/xi-menus.glade.h:84
 #: ../ui/xi-menus-popup.gtkbuilder.h:61
 msgid "Enumerations"
-msgstr ""
+msgstr "Enumerações"
 
 #: ../src/main/parallel_view.cc:745
 msgid "view context"
@@ -2145,11 +2142,9 @@ msgid "$HOME is not set!"
 msgstr "$HOME não está definido!"
 
 #: ../src/main/settings.c:120
-#, fuzzy, c-format
+#, c-format
 msgid "Xiphos can not create directory "
-msgstr ""
-"Xiphos não pode criar o caminho do módulo:\n"
-"%s"
+msgstr "Xiphos não pode criar o diretório"
 
 #: ../src/main/settings.c:135
 #: ../src/main/settings.c:144
@@ -2294,9 +2289,8 @@ msgid "Clear History"
 msgstr "Limpar Histórico"
 
 #: ../src/main/tab_history.c:304
-#, fuzzy
 msgid "History ➛ Verse List"
-msgstr "Lista de Versículos"
+msgstr "Histórico ➛ Lista de Versículos"
 
 #: ../src/main/url.cc:103
 msgid "URL not found:"
@@ -2389,22 +2383,30 @@ msgid "<br><center>Chapter %d</center><br>"
 msgstr ""
 
 #: ../src/main/xml.c:499
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "\n"
 "Chapter %d\n"
 "\n"
-msgstr "Capítulo"
+msgstr ""
+"%s\n"
+"\n"
+"Capítulo %d\n"
+"\n"
 
 #: ../src/main/xml.c:500
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "\n"
 "Chapter %d\n"
 "\n"
-msgstr "Capítulo"
+msgstr ""
+"\n"
+"\n"
+"Capítulo %d\n"
+"\n"
 
 #: ../src/main/xml.c:506
 #, c-format
@@ -2417,16 +2419,18 @@ msgid ""
 "%s: %s Chapter %d\n"
 "\n"
 msgstr ""
+"%s: %s Capítulo %d\n"
+"\n"
 
 #: ../src/main/xml.c:512
 #, c-format
 msgid "&nbsp;&nbsp;[%d]"
-msgstr ""
+msgstr "&nbsp;&nbsp;[%d]"
 
 #: ../src/main/xml.c:513
 #, c-format
 msgid " [%d]"
-msgstr ""
+msgstr " [%d]"
 
 #: ../src/main/xml.c:519
 #, c-format
@@ -2467,7 +2471,7 @@ msgstr "(%s %d:%d-%d%s)<br>"
 #: ../src/main/xml.c:532
 #, c-format
 msgid "(%s %d:%d-%d%s)\n"
-msgstr ""
+msgstr "(%s %d:%d-%d%s)\n"
 
 #: ../src/main/xml.c:579
 msgid "Old Testament"
@@ -2602,13 +2606,12 @@ msgid "Verse"
 msgstr "Versículo"
 
 #: ../ui/editor_link_dialog.xml.h:4
-#, fuzzy
 msgid "Link Text"
-msgstr "Texto Simples"
+msgstr "Texto da Ligação"
 
 #: ../ui/editor_link_dialog.xml.h:5
 msgid "Link directly"
-msgstr ""
+msgstr "Ligar diretamente"
 
 #: ../ui/editor_link_dialog.xml.h:6
 msgid "Link via verse list"
@@ -2909,22 +2912,20 @@ msgstr "Sobre Studypad"
 
 #: ../ui/gtk2_webedit.ui.h:3
 #: ../ui/gtk_webedit.ui.h:3
-#, fuzzy
 msgid "Open about dialog"
-msgstr "Abrir num diálogo"
+msgstr "Abrir diálogo 'Sobre'"
 
 #: ../ui/gtk2_webedit.ui.h:4
 #: ../ui/gtk_webedit.ui.h:4
 #: ../ui/prefs.glade.h:116
 #: ../ui/prefs.gtkbuilder.h:116
 msgid "Bold"
-msgstr ""
+msgstr "Negrito"
 
 #: ../ui/gtk2_webedit.ui.h:5
 #: ../ui/gtk_webedit.ui.h:5
-#, fuzzy
 msgid "Make selection bold"
-msgstr "Ler Selecção em voz alta"
+msgstr "Tornar seleção a negrito"
 
 #: ../ui/gtk2_webedit.ui.h:6
 #: ../ui/gtk_webedit.ui.h:6
@@ -2934,39 +2935,37 @@ msgstr "Cópia"
 #: ../ui/gtk2_webedit.ui.h:7
 #: ../ui/gtk_webedit.ui.h:7
 msgid "Copy selection to clipboard"
-msgstr ""
+msgstr "Copiar seleção para memória"
 
 #: ../ui/gtk2_webedit.ui.h:8
 #: ../ui/gtk_webedit.ui.h:8
 msgid "Cut"
-msgstr ""
+msgstr "Cortar"
 
 #: ../ui/gtk2_webedit.ui.h:9
 #: ../ui/gtk_webedit.ui.h:9
-#, fuzzy
 msgid "Cut selection"
-msgstr "Selecção de Módulo"
+msgstr "Cortar selecção"
 
 #: ../ui/gtk2_webedit.ui.h:10
 #: ../ui/gtk_webedit.ui.h:10
 msgid "Decrease indent"
-msgstr ""
+msgstr "Diminuir indentação"
 
 #: ../ui/gtk2_webedit.ui.h:11
 #: ../ui/gtk_webedit.ui.h:11
 msgid "Decrease"
-msgstr ""
+msgstr "Diminuir"
 
 #: ../ui/gtk2_webedit.ui.h:12
 #: ../ui/gtk_webedit.ui.h:12
 msgid "Decrease paragraph indent"
-msgstr ""
+msgstr "Diminuir indentação de parágrafo"
 
 #: ../ui/gtk2_webedit.ui.h:13
 #: ../ui/gtk_webedit.ui.h:13
-#, fuzzy
 msgid "Delete selection"
-msgstr "Apagar extensão seleccionada"
+msgstr "Apagar seleção"
 
 #: ../ui/gtk2_webedit.ui.h:14
 #: ../ui/gtk_webedit.ui.h:14
@@ -2975,9 +2974,8 @@ msgstr "Apagar"
 
 #: ../ui/gtk2_webedit.ui.h:15
 #: ../ui/gtk_webedit.ui.h:15
-#, fuzzy
 msgid "Remove selection"
-msgstr "Remover o item seleccionado"
+msgstr "Remover seleção"
 
 #: ../ui/gtk2_webedit.ui.h:16
 #: ../ui/gtk_webedit.ui.h:16
@@ -3009,17 +3007,17 @@ msgstr "Mudar fonte"
 #: ../ui/gtk2_webedit.ui.h:22
 #: ../ui/gtk_webedit.ui.h:22
 msgid "Increase indent"
-msgstr ""
+msgstr "Aumentar indentação"
 
 #: ../ui/gtk2_webedit.ui.h:23
 #: ../ui/gtk_webedit.ui.h:23
 msgid "Increase"
-msgstr ""
+msgstr "Aumentar"
 
 #: ../ui/gtk2_webedit.ui.h:24
 #: ../ui/gtk_webedit.ui.h:24
 msgid "Increase paragraph indent"
-msgstr ""
+msgstr "Aumentar indentação de parágrafo"
 
 #: ../ui/gtk2_webedit.ui.h:25
 #: ../ui/gtk_webedit.ui.h:25
@@ -3029,7 +3027,7 @@ msgstr "Inserir emoticon"
 #: ../ui/gtk2_webedit.ui.h:26
 #: ../ui/gtk_webedit.ui.h:26
 msgid "Emoticon"
-msgstr ""
+msgstr "Emoticon"
 
 #: ../ui/gtk2_webedit.ui.h:27
 #: ../ui/gtk_webedit.ui.h:27
@@ -3074,26 +3072,23 @@ msgstr "Inserir Ligação"
 
 #: ../ui/gtk2_webedit.ui.h:35
 #: ../ui/gtk_webedit.ui.h:35
-#, fuzzy
 msgid "Outline"
-msgstr "Alinhado"
+msgstr "Alinhamento"
 
 #: ../ui/gtk2_webedit.ui.h:36
 #: ../ui/gtk_webedit.ui.h:36
-#, fuzzy
 msgid "Insert outline"
-msgstr "Inserir Ligação"
+msgstr "Inserir alinhamento"
 
 #: ../ui/gtk2_webedit.ui.h:37
 #: ../ui/gtk_webedit.ui.h:37
-#, fuzzy
 msgid "Insert rule"
-msgstr "Inserir Ligação"
+msgstr "Inserir regra"
 
 #: ../ui/gtk2_webedit.ui.h:38
 #: ../ui/gtk_webedit.ui.h:38
 msgid "Rule"
-msgstr ""
+msgstr "Regra"
 
 #: ../ui/gtk2_webedit.ui.h:39
 #: ../ui/gtk_webedit.ui.h:39
@@ -3112,9 +3107,8 @@ msgstr "Xiphos"
 
 #: ../ui/gtk2_webedit.ui.h:42
 #: ../ui/gtk_webedit.ui.h:42
-#, fuzzy
 msgid "Insert a link to a sword module"
-msgstr "Instalar estes módulos?"
+msgstr "Inserir ligação a módulo Sword"
 
 #: ../ui/gtk2_webedit.ui.h:43
 #: ../ui/gtk_webedit.ui.h:43
@@ -3124,12 +3118,12 @@ msgstr "Inserir tabela"
 #: ../ui/gtk2_webedit.ui.h:44
 #: ../ui/gtk_webedit.ui.h:44
 msgid "Table"
-msgstr ""
+msgstr "Tabela"
 
 #: ../ui/gtk2_webedit.ui.h:45
 #: ../ui/gtk_webedit.ui.h:45
 msgid "Insert a table"
-msgstr ""
+msgstr "Inserir tabela"
 
 #: ../ui/gtk2_webedit.ui.h:46
 #: ../ui/gtk_webedit.ui.h:46
@@ -3139,12 +3133,12 @@ msgstr "Itálico"
 #: ../ui/gtk2_webedit.ui.h:47
 #: ../ui/gtk_webedit.ui.h:47
 msgid "Change selection to italic font"
-msgstr ""
+msgstr "Mudar seleção para itálico"
 
 #: ../ui/gtk2_webedit.ui.h:48
 #: ../ui/gtk_webedit.ui.h:48
 msgid "Center"
-msgstr ""
+msgstr "Centrar"
 
 #: ../ui/gtk2_webedit.ui.h:49
 #: ../ui/gtk_webedit.ui.h:49
@@ -3164,22 +3158,22 @@ msgstr ""
 #: ../ui/gtk2_webedit.ui.h:52
 #: ../ui/gtk_webedit.ui.h:52
 msgid "Left"
-msgstr ""
+msgstr "Esquerda"
 
 #: ../ui/gtk2_webedit.ui.h:53
 #: ../ui/gtk_webedit.ui.h:53
 msgid "Left justify paragraph"
-msgstr ""
+msgstr "Justificar parágrafo à esquerda"
 
 #: ../ui/gtk2_webedit.ui.h:54
 #: ../ui/gtk_webedit.ui.h:54
 msgid "Right"
-msgstr ""
+msgstr "Direita"
 
 #: ../ui/gtk2_webedit.ui.h:55
 #: ../ui/gtk_webedit.ui.h:55
 msgid "Right justify paragraph"
-msgstr ""
+msgstr "Justificar parágrafo à direita"
 
 #: ../ui/gtk2_webedit.ui.h:56
 #: ../ui/gtk_webedit.ui.h:56
@@ -3188,9 +3182,8 @@ msgstr "Novo"
 
 #: ../ui/gtk2_webedit.ui.h:57
 #: ../ui/gtk_webedit.ui.h:57
-#, fuzzy
 msgid "Create new file"
-msgstr "Criar Nova Pasta"
+msgstr "Criar novo ficheiro"
 
 #: ../ui/gtk2_webedit.ui.h:59
 #: ../ui/gtk_webedit.ui.h:59
@@ -3200,18 +3193,17 @@ msgstr "Abrir ficheiro"
 #: ../ui/gtk2_webedit.ui.h:60
 #: ../ui/gtk_webedit.ui.h:60
 msgid "Paste"
-msgstr ""
+msgstr "Colar"
 
 #: ../ui/gtk2_webedit.ui.h:61
 #: ../ui/gtk_webedit.ui.h:61
 msgid "Paste clipboard at cursor."
-msgstr ""
+msgstr "Colar texto em memória no cursor"
 
 #: ../ui/gtk2_webedit.ui.h:62
 #: ../ui/gtk_webedit.ui.h:62
-#, fuzzy
 msgid "Print Document"
-msgstr "Imprimir este documento"
+msgstr "Imprimir Documento"
 
 #: ../ui/gtk2_webedit.ui.h:63
 #: ../ui/gtk_webedit.ui.h:63
@@ -3220,7 +3212,6 @@ msgstr "Imprimir"
 
 #: ../ui/gtk2_webedit.ui.h:64
 #: ../ui/gtk_webedit.ui.h:64
-#, fuzzy
 msgid "Print the current document"
 msgstr "Imprimir este documento"
 
@@ -3252,22 +3243,22 @@ msgstr "Fechar editor"
 #: ../ui/gtk2_webedit.ui.h:70
 #: ../ui/gtk_webedit.ui.h:70
 msgid "Redo"
-msgstr ""
+msgstr "Refazer"
 
 #: ../ui/gtk2_webedit.ui.h:71
 #: ../ui/gtk_webedit.ui.h:71
 msgid "Redo last undo"
-msgstr ""
+msgstr "Refazer última operação desfeita"
 
 #: ../ui/gtk2_webedit.ui.h:72
 #: ../ui/gtk_webedit.ui.h:72
 msgid "Find and replace"
-msgstr ""
+msgstr "Localizar e substituir"
 
 #: ../ui/gtk2_webedit.ui.h:73
 #: ../ui/gtk_webedit.ui.h:73
 msgid "Replace"
-msgstr ""
+msgstr "Substituir"
 
 #: ../ui/gtk2_webedit.ui.h:74
 #: ../ui/gtk_webedit.ui.h:74
@@ -3302,23 +3293,22 @@ msgstr ""
 #: ../ui/gtk2_webedit.ui.h:81
 #: ../ui/gtk_webedit.ui.h:81
 msgid "Underline"
-msgstr ""
+msgstr "Sublinhar"
 
 #: ../ui/gtk2_webedit.ui.h:82
 #: ../ui/gtk_webedit.ui.h:82
-#, fuzzy
 msgid "Underline selection"
-msgstr "Selecção de Módulo"
+msgstr "Sublinhar selecção"
 
 #: ../ui/gtk2_webedit.ui.h:83
 #: ../ui/gtk_webedit.ui.h:83
 msgid "Undo"
-msgstr ""
+msgstr "Desfazer"
 
 #: ../ui/gtk2_webedit.ui.h:84
 #: ../ui/gtk_webedit.ui.h:84
 msgid "Undo last change"
-msgstr ""
+msgstr "Desfazer última alteração"
 
 #: ../ui/gtk2_webedit.ui.h:85
 #: ../ui/gtk_webedit.ui.h:85
@@ -3394,42 +3384,42 @@ msgstr "Normal"
 #: ../ui/gtk2_webedit.ui.h:99
 #: ../ui/gtk_webedit.ui.h:99
 msgid "Header 1"
-msgstr ""
+msgstr "Cabeçalho 1"
 
 #: ../ui/gtk2_webedit.ui.h:100
 #: ../ui/gtk_webedit.ui.h:100
 msgid "Header 2"
-msgstr ""
+msgstr "Cabeçalho 2"
 
 #: ../ui/gtk2_webedit.ui.h:101
 #: ../ui/gtk_webedit.ui.h:101
 msgid "Header 3"
-msgstr ""
+msgstr "Cabeçalho 3"
 
 #: ../ui/gtk2_webedit.ui.h:102
 #: ../ui/gtk_webedit.ui.h:102
 msgid "Header 4"
-msgstr ""
+msgstr "Cabeçalho 4"
 
 #: ../ui/gtk2_webedit.ui.h:103
 #: ../ui/gtk_webedit.ui.h:103
 msgid "Header 5"
-msgstr ""
+msgstr "Cabeçalho 5"
 
 #: ../ui/gtk2_webedit.ui.h:104
 #: ../ui/gtk_webedit.ui.h:104
 msgid "Header 6"
-msgstr ""
+msgstr "Cabeçalho 6"
 
 #: ../ui/gtk2_webedit.ui.h:105
 #: ../ui/gtk_webedit.ui.h:105
 msgid "Address"
-msgstr ""
+msgstr "Endereço"
 
 #: ../ui/gtk2_webedit.ui.h:106
 #: ../ui/gtk_webedit.ui.h:106
 msgid "Preformatted"
-msgstr ""
+msgstr "Pré-formatado"
 
 #: ../ui/gtk2_webedit.ui.h:107
 #: ../ui/gtk_webedit.ui.h:107
@@ -3882,12 +3872,12 @@ msgstr ""
 #: ../ui/prefs.glade.h:37
 #: ../ui/prefs.gtkbuilder.h:37
 msgid "_Off"
-msgstr ""
+msgstr "_Desligado"
 
 #: ../ui/prefs.glade.h:38
 #: ../ui/prefs.gtkbuilder.h:38
 msgid "Disable BibleSync."
-msgstr ""
+msgstr "Desativar BibleSync."
 
 #: ../ui/prefs.glade.h:39
 #: ../ui/prefs.gtkbuilder.h:39
@@ -3898,12 +3888,12 @@ msgstr "Botão de Rádio de Livro"
 #: ../ui/prefs.glade.h:40
 #: ../ui/prefs.gtkbuilder.h:40
 msgid "_Speaker"
-msgstr ""
+msgstr "_Orador"
 
 #: ../ui/prefs.glade.h:41
 #: ../ui/prefs.gtkbuilder.h:41
 msgid "Enable BibleSync as the speaker."
-msgstr ""
+msgstr "Ativar BibleSync como orador."
 
 #: ../ui/prefs.glade.h:42
 #: ../ui/prefs.gtkbuilder.h:42
@@ -3914,7 +3904,7 @@ msgstr "Rádio Frase exacta"
 #: ../ui/prefs.glade.h:43
 #: ../ui/prefs.gtkbuilder.h:43
 msgid "_Audience"
-msgstr ""
+msgstr "_Audiência"
 
 #: ../ui/prefs.glade.h:44
 #: ../ui/prefs.gtkbuilder.h:44
@@ -3946,7 +3936,7 @@ msgstr "Rádio Expressão Regular"
 #: ../ui/prefs.glade.h:49
 #: ../ui/prefs.gtkbuilder.h:49
 msgid "Private"
-msgstr ""
+msgstr "Privado"
 
 #: ../ui/prefs.glade.h:50
 #: ../ui/prefs.gtkbuilder.h:50
@@ -3961,9 +3951,8 @@ msgstr "Botão de Rádio de Versículo"
 
 #: ../ui/prefs.glade.h:52
 #: ../ui/prefs.gtkbuilder.h:52
-#, fuzzy
 msgid "<i>Navigate:</i>"
-msgstr "Salvação"
+msgstr "<i>Navegar:</i>"
 
 #: ../ui/prefs.glade.h:53
 #: ../ui/prefs.gtkbuilder.h:53
@@ -3972,9 +3961,8 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:54
 #: ../ui/prefs.gtkbuilder.h:54
-#, fuzzy
 msgid "_Direct"
-msgstr "Directório"
+msgstr "_Direto"
 
 #: ../ui/prefs.glade.h:55
 #: ../ui/prefs.gtkbuilder.h:55
@@ -4089,9 +4077,8 @@ msgstr "Botão de Rádio de Versículo"
 
 #: ../ui/prefs.glade.h:76
 #: ../ui/prefs.gtkbuilder.h:76
-#, fuzzy
 msgid "Mismatch"
-msgstr "combina com"
+msgstr "Imcompatibilidade"
 
 #: ../ui/prefs.glade.h:77
 #: ../ui/prefs.gtkbuilder.h:77
@@ -4276,7 +4263,6 @@ msgstr "Visto para Activar Listas de Oração"
 
 #: ../ui/prefs.glade.h:114
 #: ../ui/prefs.gtkbuilder.h:114
-#, fuzzy
 msgid "Verse number"
 msgstr "Número de Versículo"
 
@@ -4287,9 +4273,8 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:117
 #: ../ui/prefs.gtkbuilder.h:117
-#, fuzzy
 msgid "Show verse number in bold text"
-msgstr "Mostrar números de versículo no texto"
+msgstr "Mostrar número de versículo a negrito"
 
 #: ../ui/prefs.glade.h:118
 #: ../ui/prefs.gtkbuilder.h:118
@@ -4325,15 +4310,13 @@ msgstr "Mostrar número de versículo como sobrescrito"
 
 #: ../ui/prefs.glade.h:124
 #: ../ui/prefs.gtkbuilder.h:124
-#, fuzzy
 msgid "Verse number superscript checkbox"
-msgstr "Tamanho do número de versículo"
+msgstr "Opção de sobrescrito do número de versículo"
 
 #: ../ui/prefs.glade.h:125
 #: ../ui/prefs.gtkbuilder.h:125
-#, fuzzy
 msgid "StudyPad default directory"
-msgstr "Combo de Directório StudyPad por omissão"
+msgstr "Directório StudyPad por omissão"
 
 #: ../ui/prefs.glade.h:126
 #: ../ui/prefs.gtkbuilder.h:126
@@ -5443,9 +5426,8 @@ msgstr ""
 
 #: ../ui/xi-menus.glade.h:105
 #: ../ui/xi-menus-popup.gtkbuilder.h:92
-#, fuzzy
 msgid "Preload history from verse list"
-msgstr "Limpar lista de histórico"
+msgstr "Carregar histórico da lista de versículos"
 
 #: ../ui/xi-menus.glade.h:106
 #: ../ui/xi-menus-popup.gtkbuilder.h:95
