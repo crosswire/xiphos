@@ -176,7 +176,7 @@ void gui_create_search_sidebar(void)
 
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow_search),
-				       GTK_POLICY_NEVER,
+				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
 
 	viewport_search = gtk_viewport_new(NULL, NULL);
