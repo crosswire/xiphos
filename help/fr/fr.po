@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Xiphos 3.4.0\n"
 "Report-Msgid-Bugs-To: Dominique Corbex <domcox@users.sourceforge.net>>\n"
 "POT-Creation-Date: 2014-12-14 21:02+0100\n"
-"PO-Revision-Date: 2014-12-15 20:14+0100\n"
+"PO-Revision-Date: 2014-12-19 21:46+0100\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>>\n"
 "Language-Team: emacs + po-mode; French <gnomefr@traduc.org>\n"
 "Language: \n"
@@ -134,7 +134,6 @@ msgstr "interface_dictionary.png"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:12(None) ../C/preferences.xml:12(None)
-#, fuzzy
 msgid ""
 "@@image: 'figures/preferences.png'; md5=c0327215cc24ff1c3c012eafb960036c"
 msgstr "preferences.png"
@@ -142,7 +141,6 @@ msgstr "preferences.png"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:38(None)
-#, fuzzy
 msgid ""
 "@@image: 'figures/preferences_general-misc.png'; "
 "md5=dc15a126161c1a523f77013ee887ab3f"
@@ -151,7 +149,6 @@ msgstr "preferences_general-misc.png"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:100(None)
-#, fuzzy
 msgid ""
 "@@image: 'figures/preferences_general-biblesync.png'; "
 "md5=085cfd1f4fa059faebb0fe90ed10556d"
@@ -160,7 +157,6 @@ msgstr "preferences_general-misc.png"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:156(None)
-#, fuzzy
 msgid ""
 "@@image: 'figures/preferences_fonts-color.png'; "
 "md5=a42df6a82b1bcb9b87d1531a602dd94a"
@@ -169,7 +165,6 @@ msgstr "preferences_fonts-color.png"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:185(None)
-#, fuzzy
 msgid ""
 "@@image: 'figures/preferences_fonts-misc.png'; "
 "md5=a4a6d557931ba88db2cf7d7df6827a52"
@@ -178,7 +173,6 @@ msgstr "preferences_fonts-misc.png"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:249(None)
-#, fuzzy
 msgid ""
 "@@image: 'figures/preferences_modules-parallel.png'; "
 "md5=60287f9ccebbdf3644c3624158a571a3"
@@ -187,7 +181,6 @@ msgstr "preferences_modules-parallel.png"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/xiphos.xml:269(None)
-#, fuzzy
 msgid ""
 "@@image: 'figures/preferences_modules-misc.png'; "
 "md5=49b51e0a3a5121e52471379d3da58e7e"
@@ -1998,7 +1991,7 @@ msgstr ""
 msgid ""
 "Verse number display can be offset in several ways provided by the "
 "checkboxes."
-msgstr "L'affichage du numéro de verset peut être décalé de plusieurs façons suivant les cases à cocher."
+msgstr "L'affichage du numéro de verset peut être agrémenté de différentes façons."
 
 #: ../C/xiphos.xml:92(title) ../C/xiphos.xml:103(phrase)
 msgid "BibleSync Settings"
